@@ -2,7 +2,7 @@
 	prefix="verifier"
 	categorie="outil"
 	version="1.0.4"
-	etat="test"
+	etat="stable"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="images/verifier-128.png"
 	documentation="http://www.spip-contrib.net/Verifier,1505"
