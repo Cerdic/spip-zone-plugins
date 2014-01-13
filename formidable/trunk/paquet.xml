@@ -2,7 +2,7 @@
 	prefix="formidable"
 	categorie="communication"
 	version="1.8.4"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
 	schema="0.5.2"
