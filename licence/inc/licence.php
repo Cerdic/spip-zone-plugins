@@ -3,9 +3,9 @@
  * Plugin Licence
  * (c) 2007-2013 fanouch
  * Distribue sous licence GPL
- * 
+ *
  * La $GLOBALS des licences utilisables
- * 
+ *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -102,6 +102,13 @@ $GLOBALS['licence_licences'] = array (
 				"link"		=> _T('licence:lien_cc0'),
 				"description" => _T('licence:description_cc0'),
 				"abbr" 		=> "cc0"),
+			"0" 	=> array(
+				"name" 		=> _T('licence:titre_autre'),
+				"id"		=> "0",
+				"icon"		=> "",
+				"link"		=> "",
+				"description" => _T('licence:description_autre'),
+				"abbr" 		=> "???"),
 );
 
 ?>

@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'Licence Art Libre',
+	'description_autre' => 'Autre licence',
 	'description_cc0' => 'Creative Commons - Contenu libre de tout droit',
 	'description_cc_by' => 'Creative Commons - Attribution',
 	'description_cc_by_nc' => 'Creative Commons - Attribution - Pas d’Utilisation Commerciale ',
@@ -52,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_art_libre' => 'LAL',
+	'titre_autre' => 'autre',
 	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
