@@ -99,7 +99,7 @@ function exec_malettre(){
 						if ($option=="load") {         // on charge la derniere lettre
 						
 						    // recup contenu HTML
-                $texte = $path_archive_full."/.malettre.html";
+                $texte = $path_archive_full."/_malettre.html";
                 $fr=fopen($texte,"r");
                 while(!feof($fr)){
                       $sourceHTML  = '';
@@ -109,7 +109,7 @@ function exec_malettre(){
                 fclose($fr);
                 
                 // recup contenu TXT
-                $texte = $path_archive_full."/.malettre_txt.html";
+                $texte = $path_archive_full."/_malettre_txt.html";
                 $fr=fopen($texte,"r");
                 while(!feof($fr)){
                       $sourceTXT  = '';
@@ -169,12 +169,13 @@ function exec_malettre(){
     						$sourceHTML .= malettre_get_contents("malettre",$id_article_edito,$selection,$selection_eve,$lang);                 
     						$sourceTXT  .= malettre_get_contents("malettre_txt",$id_article_edito,$selection,$selection_eve,$lang); 
       							
-      					// ecriture fichier       											
-    						if ($handle = fopen($path_archive_full."/.malettre.html", w)) { 						    
+      					// ecriture fichier 
+      					// <iframe height="400" style="overflow:scroll;width:98%;margin-bottom:15px;" src="[(#CHEMIN{#EVAL{_DIR_IMG}|concat{lettre/_malettre.html}})]?nocache=#DATE"></iframe> 
+    						if ($handle = fopen($path_archive_full."/_malettre.html", w)) { 						    
       							fwrite($handle, $sourceHTML);					
       							fclose($handle); 
                     
-                    if ($handle = fopen($path_archive_full."/.malettre_txt.html", w)) { 			
+                    if ($handle = fopen($path_archive_full."/_malettre_txt.html", w)) { 			
         							fwrite($handle, $sourceTXT);					
         							fclose($handle);
       						  } else {
@@ -222,7 +223,7 @@ function exec_malettre(){
               
 							$str .= "<h4>"._T('malettre:apercu')."</h4>\n";
 							$str .= "Sujet: <input type='text' size='55' name='lettre_title' value=\"".$lettre_title."\" /><br />\n";
-              $str .= "<iframe width=\"750\" height=\"500\" src=\"$path_archive_full/.malettre.html?nocache=".time()."\"></iframe>\n";
+              $str .= "<iframe width=\"750\" height=\"500\" src=\"$path_archive_full/_malettre.html?nocache=".time()."\"></iframe>\n";
 							$str .= "<h4>"._T('malettre:version_html')."</h4>\n";
 							$str .= "<textarea cols='70' rows='20'>$sourceHTML</textarea>";
 							$str .= "<h4>"._T('malettre:version_txt')."</h4>\n";
@@ -257,7 +258,7 @@ function exec_malettre(){
             $url_lettre_archive_txt = "$path_url_archive/$path_archive/lettre_".date("Ymd")."_".$lettre_hash."_"._request('lang_select').".txt";
             
             // recup contenu HTML
-            $texte = $path_archive_full."/.malettre.html";
+            $texte = $path_archive_full."/_malettre.html";
             $fr=fopen($texte,"r");
             while(!feof($fr)){
                   $recup = '';
@@ -269,7 +270,7 @@ function exec_malettre(){
             $recup = str_replace("{TITRE_MALETTRE}",$sujet,$recup);
             
             // recup contenu TXT
-            $texte = $path_archive_full."/.malettre_txt.html";
+            $texte = $path_archive_full."/_malettre_txt.html";
             $fr=fopen($texte,"r");
             while(!feof($fr)){
                   $recup_txt = '';
