@@ -1,0 +1,39 @@
+[(#SET{actif, #ARRAY})]
+<BOUCLE_actif(PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
+[(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
+</BOUCLE_actif>
+[(#VAL{lister_config}|barre_onglets{lister_plugins})]
+<div class="nettoyeur"> </div>
+		<h1 class="grostitre"><:lister_config:titre_lister_plugins:></h1>
+		<p><:lister_config:description_lister_plugins:></p>
+<B_config>
+
+<div class="liste-plugins">
+	<div class="liste plugins" id="liste_plugins">
+#SET{version,#SPIP_VERSION|explode{' '}|table_valeur{0}}
+	<hr />
+	<pre>&lt;paquet
+	prefix="site_spip_config_plugins_[(#NOM_SITE_SPIP|replace{' ','_'}|strtolower|trim)]"
+	categorie="outil"
+	version="0.11.0"
+	etat="test"
+	compatibilite="[#GET{version};[(#GET{version}|explode{'.'}|table_valeur{0}).][(#GET{version}|explode{'.'}|table_valeur{1}).*]]"
+	logo="[(#LOGO_SITE_SPIP|extraire_attribut{src})]"
+	documentation="#URL_SITE_SPIP"
+	&gt;
+	
+	&lt;nom&gt;#NOM_SITE_SPIP&lt;/nom&gt;
+	&lt;!--  #DESCRIPTIF_SITE_SPIP --&gt;
+
+<BOUCLE_config(PAQUETS plugins) {tout} {par paquets.prefixe} {prefixe IN #GET{actif}} {fusion paquets.prefixe}>
+	&lt;!-- 	#NOM - #ETAT - #VERSION --&gt;
+	&lt;necessite nom="[(#PREFIXE|strtolower)]" compatibilite="[#VERSION;]" /&gt;
+	&lt;!-- 	[(#NOM) ]  [(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{30}})]  	--&gt;
+
+</BOUCLE_config>
+&lt;/paquet&gt;		
+	</pre><hr />
+	<p><:lister_config:description_utiliser_plugins:></p>
+	</div>
+</div>
+</B_config>

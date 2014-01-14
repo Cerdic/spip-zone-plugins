@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_config"
 	categorie="outil"
-	version="0.11.0"
+	version="0.11.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/lister_config-32.png"
@@ -16,6 +16,9 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<menu nom="lister_config" titre="lister_config:titre_lister_config" parent="menu_configuration" icone="images/lister_config-16.png" />
-	<menu nom="lister_exec" titre="lister_config:titre_lister_exec" parent="menu_configuration" icone="images/lister_config-16.png" />
+
+	<onglet nom="lister_config" titre="lister_config:titre_lister_config" parent="lister_config" action="lister_config" />
+	<onglet nom="lister_exec" titre="lister_config:titre_lister_exec" parent="lister_config" action="lister_exec" />
+	<onglet nom="lister_plugins" titre="lister_config:titre_lister_plugins" parent="lister_config" action="lister_plugins" />
 
 </paquet>

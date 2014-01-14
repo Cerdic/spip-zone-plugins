@@ -1,3 +1,5 @@
+[(#VAL{lister_config}|barre_onglets{lister_config})]
+<div class="nettoyeur"> </div>
 [(#SET{actif, #ARRAY})]
 <BOUCLE_actif(PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
 [(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
