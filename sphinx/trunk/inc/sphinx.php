@@ -47,7 +47,10 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 
 	# bizarre le ? plante ; est-ce du a "extended wildcards"?
  	$recherche = str_replace('?', ' ', $recherche);
- 
+
+ 	# reconvertir les entites html
+ 	$recherche = importer_charset($recherche);
+
 	// appel par une page mot :
 	//   (ou limiter aux mots-cles)
 	// ou par l'url &mots=italie ; &mots[]=italie&mots[]=economie
