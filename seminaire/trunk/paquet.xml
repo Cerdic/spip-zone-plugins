@@ -1,7 +1,7 @@
 <paquet
 	prefix="seminaire"
 	categorie="date"
-	version="2.2.0"
+	version="2.3.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/seminaire-64.png"
@@ -19,6 +19,7 @@
 	<necessite nom="mots" />
 	<necessite nom="saisies" compatibilite="[1.38.4;]" />
 	<utilise nom="revisions" />
+	<utilise nom="Zcore" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/seminaire.php" />
 	<pipeline nom="insert_head_css" action="insert_head_css" inclure="seminaire_pipelines.php" />
@@ -26,6 +27,7 @@
 	<pipeline nom="formulaire_charger" action="formulaire_charger" inclure="seminaire_pipelines.php" />
 	<pipeline nom="formulaire_verifier" action="formulaire_verifier" inclure="seminaire_pipelines.php" />
 	<pipeline nom="formulaire_traiter" action="formulaire_traiter" inclure="seminaire_pipelines.php" />
+	<pipeline nom="recuperer_fond" action="recuperer_fond" inclure="seminaire_pipelines.php" />
 
 	<menu nom="configurer_seminaire" titre="seminaire:titre_page_configurer_seminaire" parent="menu_squelette" icone="images/seminaire-16.png" />
 </paquet>
