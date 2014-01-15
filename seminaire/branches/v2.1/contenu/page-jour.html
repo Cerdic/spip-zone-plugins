@@ -16,7 +16,6 @@
 <B_ev>
 	[<h1>[(#ENV{date}|affdate): ](#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements}{doublons})</h1>]
 
-
 <h2 class="agenda">[(#DESCRIPTIF|attribut_html)]</h2>
 	<ul class="liste-items evenements">
 	<BOUCLE_ev(EVENEMENTS){date_debut<=#ENV{date}|replace{00:00:00, 23:59:59}}{date_fin>=#ENV{date}}{par date_debut}{titre_mot=#_mot_evenements:TITRE}>

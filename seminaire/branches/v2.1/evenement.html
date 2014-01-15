@@ -1,5 +1,3 @@
 [(#PLUGIN{kitcnrs}|oui)
-<INCLURE{fond=entete}{type_page=evenement_seul}{lang}>
-<INCLURE{fond=contenu/page-evenement}{env}>
-<INCLURE{fond=pied}>]
+<INCLURE{fond=css/charte-#CONFIG{kitcnrs/charte,1}/structure, type_page=evenement, env}>]
 [(#PLUGIN{Z}|oui) <INCLURE{fond=structure}{env}{type=page}{composition=evenement} />]
