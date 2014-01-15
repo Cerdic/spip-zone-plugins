@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_licence' => 'Display the licence name?',
 
 	// S
-	'sans_licence' => 'No license',
+	'sans_licence' => 'No license', # MODIF
 
 	// T
 	'titre_art_libre' => 'FAL',

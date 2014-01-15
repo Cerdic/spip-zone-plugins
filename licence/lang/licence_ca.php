@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 
 	// S
-	'sans_licence' => 'Sense llicència',
+	'sans_licence' => 'Sense llicència', # MODIF
 
 	// T
 	'titre_art_libre' => 'LAL',
