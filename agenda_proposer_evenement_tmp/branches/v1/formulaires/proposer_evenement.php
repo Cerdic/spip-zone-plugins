@@ -23,6 +23,8 @@ function propevent_rubrique(){
  * @return mixed
  */
 function formulaires_proposer_evenement_charger_dist(){
+	//+ SPIP3
+	include_spip('inc/config');
 	// verifier que le plugin est configure
 	if (!function_exists('lire_config')
 	  OR !lire_config('propevent/rubrique')
@@ -82,9 +84,11 @@ function verifier_telephone_fr($valeur, $options=array()){
  * @return array
  */
 function formulaires_proposer_evenement_verifier_dist(){
+	//+SPIP3
+	include_spip('inc/config');
 	$erreurs = array();
 
-	$oblis = array('nom','email','titre','descriptif','texte','date_debut','date_fin');
+	$oblis = array('nom','email','titre','descriptif','date_debut','date_fin');
 	if (lire_config('propevent/proposer_thematique')=='oui')
 		$oblis[] = 'id_categorie';
 
@@ -106,8 +110,9 @@ function formulaires_proposer_evenement_verifier_dist(){
 	}
 	if ($tel = _request('telephone') AND $err = verifier_telephone_fr($tel))
 		$erreurs['telephone'] = $err;
-
-	include_spip('inc/agenda_gestion');
+	
+	//en SPIP3 ce fichier disparait
+	#include_spip('inc/agenda_gestion');
 
 	if (_request('date_debut'))
 		$date_debut = agenda_verifier_corriger_date_saisie('debut',$horaire,$erreurs);
@@ -148,6 +153,8 @@ function formulaires_proposer_evenement_verifier_dist(){
 
 function formulaires_proposer_evenement_traiter_dist(){
 	include_spip('base/abstract_sql');
+	//+SPIP3
+	include_spip('inc/config');
 	$res = array();
 	$set_article = array(
 		'titre' => _request('titre'),
@@ -203,9 +210,11 @@ function formulaires_proposer_evenement_traiter_dist(){
 			$set['date_debut'] = date('Y-m-d H:i:s',$date_debut);
 			$set['date_fin'] = date('Y-m-d H:i:s',$date_fin);
 			$set['descriptif'] = _request('descriptif');
+			$set['lieu']= _request('lieu');
 
 			$set['mots'] = _request('mots');
 			action_evenement_set($id_evenement,$set);
+			evenement_mots($id_evenement,$set['mots']);
 
 			// succes
 			if ($set_article['statut']=='publie')
@@ -283,18 +292,73 @@ function propevent_email_confirmation($email,$id_article,$id_evenement,$id_auteu
 		'date_fin' => $event['date_fin'],
 		'horaire' => $event['horaire'],
 		'lieu' => $event['lieu'],
-		'mots' => array_map('reset',sql_allfetsel("id_mot", "spip_mots_evenements", "id_evenement=".intval($id_evenement))),
+		'mots' => array_map('reset',sql_allfetsel("id_mot", "spip_mots_liens", "objet='evenement' AND id_objet=".intval($id_evenement))),
 		'theme' => lire_config('propevent/proposer_thematique')?sql_getfetsel("titre", "spip_rubriques", "id_rubrique=".intval($article['id_rubrique'])):'',
 	);
 
-	$contexte['url_moderation'] = url_absolue(generer_url_entite($id_article, 'article', '', '', false));
-	// envoyer a celui qui a propose
 	$corps = recuperer_fond("notifications/evenement_propose",$contexte);
-	notifications_envoyer_mails($email,$corps);
+	// envoyer a celui qui a propose
+	#notifications_envoyer_mails($email,$corps);
+
+	$contexte['url_moderation'] = url_absolue(generer_url_entite($id_article, 'article', '', '', false));
+	$corps = recuperer_fond("notifications/evenement_propose",$contexte);
+
 	// envoyer aux modos !
-	$corps_modo = recuperer_fond("notifications/evenement_propose_modo",$contexte);
-	$email_modo = lire_config('propevent/email_moderateur');
-	notifications_envoyer_mails($email_modo,$corps_modo);
+	notifications_envoyer_mails($email,$corps);
 	
 }
+
+/* Les fonctions qui manquent pour tourner en SPIP3 */
+
+//+SPIP3 Cette fonction disparait avec agenda3
+function agenda_verifier_corriger_date_saisie($suffixe,$horaire,&$erreurs){
+	include_spip('inc/date_gestion');
+	return verifier_corriger_date_saisie($suffixe,$horaire,$erreurs);
+}
+
+
+//+SPIP3 Cette fonction disparait avec SPIP3 on la recolle ici
+// http://doc.spip.org/@ajouter_auteur_et_rediriger
+function ajouter_auteur_et_rediriger($type, $id, $id_auteur, $redirect)
+{
+	$jointure = table_jointure('auteur', $type);
+	if (preg_match(',^[a-z]*$,',$type)){
+		$res = sql_fetsel("id_objet", "spip_{$jointure}", "id_auteur=" . sql_quote($id_auteur) . " AND objet='".$type."' AND id_objet=" . $id);
+		if (!$res) {
+			sql_insertq("spip_{$jointure}", 
+				    array('id_auteur' => $id_auteur,
+				    	  'objet'=>$type,
+					  "id_objet" => $id));
+		}
+		// Notifications, gestion des revisions, reindexation...
+		pipeline('post_edition',
+			array(
+				'args' => array(
+					'operation' => 'ajouter_auteur',
+					'table' => table_objet_sql($type),
+					'id_objet' => $id
+				),
+				'data' => null
+			)
+		);
+	}
+
+	if ($redirect) redirige_par_entete($redirect);
+}
+
+//méthode sauvage
+function evenement_mots($id_evenement,$liste_mots){
+	spip_log("evenement_mots pour $id_evenement avec".implode(',',$liste_mots),'propevent');
+
+	if (count($liste_mots)) {
+		$ins = array();
+		foreach($liste_mots as $k=>$id_mot)
+			$ins[] = array('objet'=>'evenement','id_objet'=>$id_evenement,'id_mot'=>$id_mot);
+		sql_insertq_multi("spip_mots_liens",$ins);
+	}
+	
+	return $id_evenement;
+}
+
+
 ?>

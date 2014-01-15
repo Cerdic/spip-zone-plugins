@@ -25,8 +25,6 @@ L\'intitul&eacute; de la saisie dans le formulaire reprendra le titre du groupe 
 'email_confirm_texte_2' => 'Votre proposition a &eacute;t&eacute; enregistr&eacute;e et va &ecirc;tre relue par un mod&eacute;rateur avant publication.',
 'email_confirm_texte_2b' => 'Votre proposition a &eacute;t&eacute; publi&eacute;e, mais pourra &ecirc;tre modifi&eacute;e apr&egrave;s relecture par un mod&eacute;rateur.',
 'email_confirm_rappel_saisie' => 'Les informations que vous avez envoy&eacute;es sont rappel&eacute;es ci-dessous.',
-'email_modo_confirm_texte_1' => '&Eacute;v&eacute;nement propos&eacute; sur le site @url_site@.',
-'email_modo_confirm_rappel_saisie' => 'Informations envoy&eacute;es rappel&eacute;es ci-dessous.',
 'email_voir_en_ligne' => 'Relisez la proposition sur le site ',
 
 'erreur_telephone' => 'Ce num&eacute;ro de t&eacute;l&eacute;phone n\'est pas correct',

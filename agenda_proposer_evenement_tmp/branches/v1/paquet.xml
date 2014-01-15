@@ -1,0 +1,20 @@
+<paquet
+	prefix="propevent"
+	categorie="date"
+	version="0.2.0"
+	etat="test"
+	compatibilite="[3.0.13;3.0.*]"
+	logo="propevent.png"
+	documentation="http://contrib.spip.net"
+>
+	<nom>Proposer Evenement</nom>
+	<!-- permet d'installer un formulaire pour Proposer un Evenement -->
+	
+	<auteur lien="http://www.yterium.net">C&eacute;dric MORIN</auteur>
+	<auteur lien="http://elastick.net">Anne-lise Martenot</auteur>
+
+	<licence>GNU/GPL3</licence>
+	
+	<utilise nom="notification" compatibilite="[0.5.0;]" />
+	
+</paquet>

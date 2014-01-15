@@ -108,7 +108,32 @@
 	  <!--extra-->
 	  <p class='boutons'><input type='submit' class='submit' value='<:propevent:bouton_proposer:>' /></p>
 	</div></form>
-	[(#INCLURE{fond=formulaires/inc-proposer_evenement-pickers})]
-	]
+	 #INCLURE{fond=formulaires/dateur/inc-dateur}
+	 #INCLURE{fond=formulaires/inc-proposer_evenement-pickers}
+	 ]
 </div>
+<script type="text/javascript">
+	var repetitions_done = false;
+	jQuery(document).bind('datePickerLoaded',function(){
+		if (!repetitions_done){
+			repetitions_done = true;
+			jQuery.getScript('#CHEMIN{javascript/jquery-ui.multidatespicker.js}',function(){
+				var multidate_picker_options = {altField: '#repetitions'};
+				/**
+				 * Multidatepicker n'aime pas un array vide apparemment
+				 */
+				if(jQuery('#repetitions').html() != ""){
+					multidate_picker_options.addDates = jQuery('#repetitions').html().split(',');
+				}
+				jQuery('#repetitions_picker')
+					.multiDatesPicker(jQuery.extend(
+								date_picker_options(),
+								multidate_picker_options
+					))
+					.addClass('.pickable'); // une seule fois;
+				jQuery('#repetitions').attr("readonly","readonly");
+			});
+		}
+	});
+</script>
 #FILTRE{compacte_head}
