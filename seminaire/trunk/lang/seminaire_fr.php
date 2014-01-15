@@ -30,6 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements_seul'			 =>		'Détails d\'un évènement',	
 	'exemple'					 =>		'Par exemple : CMI - Salle R164',
 
+	// I
+	'info_seances_nb'			=>		'@nb@ séances',
+	'info_seances_une'			=>		'1 séance',
+	'info_seminaire'			=>		'Séminaire : ',
+	
 	// L
 	'label_groupe_mot_categorie' =>		'Mots sur les articles de séminaires',
 	'label_groupe_mot_type'		 =>		'Mots sur les évènements de séminaires',
