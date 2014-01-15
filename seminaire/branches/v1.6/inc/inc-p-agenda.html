@@ -1,0 +1,12 @@
+[(#REM) Contenu de page agenda
+--
+  Paramètres:
+  - type_page=agenda
+  - env : toutes les variables d'environnement
+--
+  Utilisé par: squelette principal agenda.html, via structure.html de la charte active (kitcnrs)
+]
+
+<div id="seminaire"> [(#REM) afficher les evenements de cet article]
+  <INCLURE{fond=agenda/contenu/agenda_evenements_doubleliste}{env}{self}>
+</div>

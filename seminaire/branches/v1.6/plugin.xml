@@ -1,0 +1,57 @@
+<plugin>
+	<nom>	
+		<multi>
+		[fr]S&#233;minaire LATP
+		[en]LATP seminar
+		</multi>
+	</nom>
+	<auteur>Amaury Adon</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.5.8</version>
+	<version_base>0.1</version_base>
+	<lien>http://www.spip-contrib.net/Seminaire-LATP</lien> 
+	<etat>stable</etat>
+	<slogan>
+		<multi>
+		[fr]G&#233;rer les &#233;v&#233;nements d'un laboratoire de recherche 
+		[en]Manage research center events
+		</multi>
+	</slogan>
+	<description>
+		<multi>
+		[fr]
+Chaque &#233;v&#233;nement est associ&#233; &#224; des mots-cl&#233;s qui permettent, d'une part, de fixer son type, s&#233;minaire, colloque, groupe de travail... et d'autre part, de d&#233;finir le laboratoire ou l'organisme responsable.
+La gestion des &#233;v&#233;nements est assur&#233;e par le plugin Agenda 2.
+		[en]
+Each event is characterzed by keywords which define its type, seminar, workgroup..., and the responsible organisation. Events management is provided by Agenda 2 plugin.
+		</multi>
+	</description>
+
+	<icon>images/logo_seminaire.png</icon>
+
+	<prefix>seminaire</prefix>
+
+	<necessite id="agenda" version="[2.0;]" />
+	<necessite id="cextras" version="[1.0.1;]" />
+
+	<!--utilise id="kitcnrs" version="[4.0.8;]" src="http://www.harmoweb.cnrs.fr/spip.php?article79"/-->
+
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
+
+
+	<options>seminaire_options.php</options>
+
+	<install>base/seminaire_install.php</install>
+	
+	<pipeline>
+        <nom>declarer_champs_extras</nom>
+        <inclure>base/seminaire.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+    	<nom>insert_head</nom>
+   		<inclure>seminaire_pipelines.php</inclure>
+	</pipeline>
+
+	<categorie>date</categorie>
+</plugin>

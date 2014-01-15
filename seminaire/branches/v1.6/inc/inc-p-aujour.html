@@ -1,0 +1,49 @@
+[(#REM) Contenu de page aujour
+--
+  Paramètres:
+  - type_page=aujour
+  - env : toutes les variables d'environnement, dont date, date_debut
+--
+  Utilisé par: squelette principal aujour.html, via structure.html de la charte active (kitcnrs)
+]
+
+<h2><:seminaire:aujour:></h2>
+<B_evenements>
+	[<h2>(#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements})</h2>]
+<!--a mettre dans un inclure un de ces jours pour centraliser le code (a l'heure actuelle, duplication dans cette page, dans article et dans agenda)-->
+<div class='plier_deplier'><a href='#' onclick='jQuery("li.item.court").removeClass("court");return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='set_vevent();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
+
+<div id="seminaire">
+<BOUCLE_evenements(EVENEMENTS) {!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}|agenda_jourdecal{1,'Y-m-d H:i:00'}}{par date_debut}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}><!-- {agenda date_debut, mois, (#ENV{date}|annee), (#ENV{date}|mois)} -->
+  				<ul class='liste_items evenements'>
+					<li class='item[(#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
+						<BOUCLE_categorie(MOTS){id_article}>
+							<div class='categorie'>#TITRE</div>
+						</BOUCLE_categorie>
+						[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
+						<p class='actions'>
+							<span class='lien_article'>[<a href='[(#URL_ARTICLE)]'><:seminaire:plus:></a>]</span>
+						</p>
+					</li>
+				</ul>
+</BOUCLE_evenements>
+<h1><:agenda:info_aucun_evenement:></h1>
+<//B_evenements>
+
+<script type='text/javascript'>
+function set_vevent(){
+jQuery('ul.evenements li.item')
+.find('h3.resume')
+.parents('li.item').not('.on')
+.addClass('court')
+.end()
+.find('h3.resume').not('.clicable')
+.click(function(){
+var p=jQuery(this).parent().parent();
+p.toggleClass('court');
+})
+.addClass('clicable')
+;}
+jQuery('document').ready(function(){set_vevent();onAjaxLoad(set_vevent);});
+</script>
+</div>

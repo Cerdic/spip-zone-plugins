@@ -1,0 +1,8 @@
+<div align="center">
+	[(#SESSION{id_auteur}|?{' '})
+		<div class='espace'></div>
+		<span class="bouton"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span>]
+	[(#SESSION{id_auteur}|?{'',' '})<div class='espace'></div>
+		<span class="bouton"><a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a></span>]
+	[(#AUTORISER{ecrire})<p><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></p>]
+</div>

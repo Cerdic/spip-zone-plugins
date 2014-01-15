@@ -1,0 +1,46 @@
+[(#REM) Contenu de page test_seminaire
+--
+  Paramètres:
+  - type_page=test_seminaire
+  - env : toutes les variables d'environnement, dont date, date_debut
+--
+  Utilisé par: squelette principal test_seminaire.html, via structure.html de la charte active (kitcnrs)
+]
+
+[(#REM) A décommenter quand l'agenda marchera
+[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=noisettes/agenda_#ENV{type,semaine}}{type} {delais=900}{annee}{mois}{jour}{echelle}{partie_cal}{theme}>]
+
+<div id="navigation-seminaire"><!-- mettre ce div dans le div suivant -->
+<INCLURE{fond=agenda/navigation/agenda_evenements}{env}>
+</div>
+]
+<div id="seminaire"> [(#REM) afficher les evenements de cet article]
+<INCLURE{fond=agenda/contenu/agenda_evenements_doubleliste}{env}{self}>
+</div>
+
+
+<h2>test sur les mots types</h2>
+
+<BOUCLE_mot_evenements(MOTS){type=Type}>
+#TITRE
+</BOUCLE_mot_evenements>
+
+<h2>test sur le groupe catégorie</h2>
+
+<BOUCLE_mot_articles(MOTS){type=Catégorie}>
+#TITRE
+</BOUCLE_mot_articles>
+
+<h2>test sur la modèle</h2>
+<BOUCLE_agenda_evenement(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article}{id_rubrique?}{titre_mot=#_mot_evenements:TITRE}{id_evenement_source?}{pagination}>
+
+				<ul class='liste_items evenements'>
+					<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
+						[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
+<INCLURE{fond=formulaires/participation_evenement}>
+						<p class='actions'>
+							<span class='lien_article'>[<a href='[(#URL_ARTICLE)]'>Article</a>]</span>
+						</p>
+					</li>
+				</ul>
+</BOUCLE_agenda_evenement>

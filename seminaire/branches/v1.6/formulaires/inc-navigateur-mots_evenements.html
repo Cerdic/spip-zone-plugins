@@ -1,0 +1,13 @@
+[(#REM) MOTS CLES : chaque groupe de mot cle attribuable a un evenement agenda
+	donne un select 
+]<BOUCLE_ungroupe(GROUPES_MOTS){titre=Type}{tables_liees==evenements}>
+	<div class='mots_chemin'>
+	<:seminaire:attention_type:>
+	</div>
+	<B_mots>
+	<ul><BOUCLE_mots(MOTS){type=Type}{par num titre,titre}>
+	<li class='mot'>
+	<a href='#' onclick="mot_sel_add(#ID_MOT,'[(#TITRE|supprimer_tags|texte_script)]','#ENV{name}');return false;">[(#TITRE|supprimer_tags)]</a></li></BOUCLE_mots></ul>
+	</B_mots>	
+</BOUCLE_ungroupe>
+	
