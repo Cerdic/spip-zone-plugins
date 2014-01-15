@@ -15,6 +15,7 @@ include_spip('base/abstract_sql');
 // ... à tester pour la version SPIP3 et être attentif à la perf. si le cache de ce squelette est nul.
 function quickvote_resultat($id_quickvote) {
      include_spip('base/abstract_sql');
+     include_spip('inc/texte'); // pour typo
 
      $str_resultat = _T("quickvote:resultat_titre");
      $nb_vote = 0;
@@ -41,8 +42,8 @@ function quickvote_resultat($id_quickvote) {
                           $resultat_pt = floor(($val/$nb_vote)*100);
                         else
                           $resultat_pt = 0;                    
-                   $reponse_intitule = $k;                   
-                   $str_resultat .= "<tr><td>$reponse_intitule</td><td>$resultat_pt %</li></td></tr>";
+                   $reponse_intitule = typo($k);                   
+                   $str_resultat .= "<tr><td>$reponse_intitule</td><td>$resultat_pt %</td></tr>";
      }
      $str_resultat .= "</table>"; 
      

@@ -72,6 +72,16 @@ function quickvote_declarer_tables_interfaces($interface){
 	
 	// Traitement automatique des champs des quickvotes 
 	//$interface['table_des_traitements']['TITRE'][]= _TRAITEMENT_TYPO; // ?
+ $interface['table_des_traitements']['REPONSE1'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE2'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE3'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE4'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE5'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE6'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE7'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE8'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE9'][]= 'propre(%s)';
+ $interface['table_des_traitements']['REPONSE10'][]= 'propre(%s)';
 
 	return $interface;
 }
