@@ -1,0 +1,114 @@
+[(#REM)
+
+  Squelette proposer_evenement
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+			<li class="fieldset vous"><fieldset><legend><:propevent:label_qui_etes_vous:></legend>
+				<ul>
+					<li class="editer_nom obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+						<label for="nom"><:propevent:label_votre_nom:> <:info_obligatoire_02:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
+						]<input type='text' class='text' name='nom' id='nom' value="#ENV{nom}" />
+					</li>
+					<li class="editer_prenom[ (#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
+						<label for="prenom"><:propevent:label_votre_prenom:> </label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{prenom})</span>
+						]<input type='text' class='text' name='prenom' id='prenom' value="#ENV{prenom}" />
+					</li>
+					<li class="editer_email obligatoire[ (#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+						<label for="email"><:propevent:label_votre_email:> <:info_obligatoire_02:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
+						]<input type='text' class='text' name='email' id='email' value="#ENV{email}" />
+					</li>
+					<li class="editer_telephone[ (#ENV**{erreurs}|table_valeur{telephone}|oui)erreur]">
+						<label for="telephone"><:propevent:label_votre_telephone:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{telephone})</span>
+						]<input type='text' class='text' name='telephone' id='telephone' value="#ENV{telephone}" />
+					</li>
+				</ul>
+			</fieldset></li>
+			<li class="fieldset vous"><fieldset><legend><:propevent:label_evenement_propose:></legend>
+				<ul>
+					<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+						<label for="titre"><:agenda:evenement_titre:> <:info_obligatoire_02:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+						]<input type='text' class='text' name='titre' id='titre' value="#ENV{titre}" />
+					</li>
+					[(#CONFIG{propevent/proposer_thematique}|=={oui}|oui)
+					<li class="editer_id_categorie obligatoire[ (#ENV**{erreurs}|table_valeur{id_categorie}|oui)erreur]">
+						<label for="id_categorie"><:propevent:label_id_categorie:> <:info_obligatoire_02:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_categorie})</span>]
+						[(#INCLURE{fond=formulaires/inc-select-categories}{id_rubrique}{id_categorie})]
+					</li>
+					]
+					<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+						<label for="descriptif"><:propevent:label_proposer_descriptif:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+						]<textarea name='descriptif' rows='5' id='descriptif'>[(#ENV{descriptif})]</textarea>
+					</li>
+					<li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+						<label for="texte"><:propevent:label_proposer_texte:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+						]<textarea name='texte' rows='15' id='texte' class="no_barre">[(#ENV{texte})]</textarea>
+					</li>
+					<li class='editer_date fieldset'><fieldset><legend><:agenda:evenement_date:> <:info_obligatoire_02:></legend>
+						<ul>
+							<li class="editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
+								<label for="horaire"><:agenda:evenement_horaire:></label>[
+								<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
+								]<input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
+									onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
+							</li>
+							<li class="editer_date_debut[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur]">
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</span>]
+								<label for="date_debut"><:agenda:evenement_date_de:></label><input type='text' class='text date' name='date_debut' id='date_debut' value="[(#ENV{date_debut})]" />
+								<span class='afficher_horaire'>
+								<label for='heure_debut' class='heure'><:agenda:evenement_date_a_immediat:></label>
+								<input type='text' class='text heure' name='heure_debut' id='heure_debut' value="[(#ENV{heure_debut})]"
+								/></span>
+							</li>
+							<li class="editer_date_fin[ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
+								[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
+								]<label for="date_fin" class='date_fin'><:agenda:evenement_date_a:></label><input type='text' class='text date' name='date_fin' id='date_fin' value="[(#ENV{date_fin})]" />
+								<span class='afficher_horaire'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
+								<input type='text' class='text heure' name='heure_fin' id='heure_fin' value="[(#ENV{heure_fin})]"
+								/></span>
+							</li>
+						</ul>
+					</fieldset></li>
+					<li class="editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
+						<label for="lieu"><:agenda:evenement_lieu:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>
+						]<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
+					</li>
+					[(#INCLURE{fond=formulaires/propevent-mots}{mots})]
+					<li class="editer_nobot" style="display:none;">
+						<label for="antibot">Ne remplissez pas ce champ si vous &ecirc;tes humain</label>
+						<input type="text" name="antibot" value="" id="antibot" />
+					</li>
+					<li class="editer_bot" style="display:none;">
+						<label for="bot">Modifiez ce champ si vous &ecirc;tes un robot</label>
+						<input type="text" name="bot" value="Je suis un humain" id="bot" />
+					</li>
+				</ul>
+			</fieldset></li>
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='<:propevent:bouton_proposer:>' /></p>
+	</div></form>
+	[(#INCLURE{fond=formulaires/inc-proposer_evenement-pickers})]
+	]
+</div>
+#FILTRE{compacte_head}

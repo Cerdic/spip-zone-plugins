@@ -1,0 +1,5 @@
+<BOUCLE_mots(MOTS){id_groupe} {par titre}>
+	<div class="choix"><input type="checkbox" class="checkbox" name="mots[]" id="mot#ID_MOT" value="#ID_MOT" [(#ID_MOT|in_any{#ENV**{mots}, ''}|?{'checked="checked"',''})] />
+	[<label for="mot#ID_MOT">(#TITRE|supprimer_numero)</label>]
+	</div>
+</BOUCLE_mots>

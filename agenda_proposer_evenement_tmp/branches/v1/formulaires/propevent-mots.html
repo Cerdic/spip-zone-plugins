@@ -1,0 +1,14 @@
+[(#REM)
+
+  Squelette formulaires/propevent-mots
+  (c) 2010 Cedric Morin
+  Distribue sous licence GPL
+
+]
+<BOUCLE_groupes(GROUPES_MOTS){id_groupe IN #CONFIG{propevent/groupes}}{par num titre}>
+	<li class="editer_groupe editer_groupe_#ID_GROUPE">
+		<label[(#UNSEUL|=={oui}|oui)for="groupe_#ID_GROUPE"]>[(#TITRE|supprimer_numero)]</label>
+		[(#UNSEUL|=={oui}|oui)[(#INCLURE{fond=formulaires/inc-select-mots}{id_groupe}{id=groupe_#ID_GROUPE}{mots})] ]
+		[(#UNSEUL|=={oui}|non)[(#INCLURE{fond=formulaires/inc-check-mots}{id_groupe}{id=groupe_#ID_GROUPE}{mots})] ]
+	</li>
+</BOUCLE_groupes>

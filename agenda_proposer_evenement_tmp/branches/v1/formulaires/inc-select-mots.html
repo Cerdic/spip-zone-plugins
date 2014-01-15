@@ -1,0 +1,8 @@
+<B_mots>
+	<select name="mots[]" [id="(#ENV{id})"]>
+			<option value="">&nbsp;</option>
+		<BOUCLE_mots(MOTS){id_groupe} {par titre}>
+			<option value="#ID_MOT" [(#ID_MOT|in_any{#ENV**{mots},''}|oui)selected="selected"]>[(#TITRE|supprimer_numero)]</option>
+		</BOUCLE_mots>
+	</select>
+</B_mots>
