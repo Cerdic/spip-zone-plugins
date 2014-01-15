@@ -6,11 +6,6 @@
 
 <div class="contenu-principal">]
 
-[(#REM) conteneur pour le kitcnrs]
-
-[(#PLUGIN{kitcnrs}|oui)<div class="texte">] 
-
-<div id="texte">
 	<div class='cartouche'>
 		<h1 class='h1 #EDIT{titre}'>#TITRE</h1>
 	</div>
@@ -20,7 +15,7 @@
 	<p>Pour en savoir plus sur cet événement, consultez l'article 
 		<a href="#URL_ARTICLE{#ID_ARTICLE}">#INFO_TITRE{article, #ID_ARTICLE}</a>
 	</p>
-</div>
 
 [<div class='notes surlignable'><h2 class='h2 pas_surlignable'><:info_notes:></h2>(#NOTES)</div>]
+[(#PLUGIN{Z}|oui)</div>]
 </BOUCLE_contenu>
