@@ -46,6 +46,7 @@ echo "-d : désactiver un ou des plugins séparés par une \",\" : saisie,yaml, 
 echo "-t : svn checkout du plugin, on donne le nom du plugin (celui de la zone) et son repertoire : trunk, branches, ou rien"
 echo "-f : svn checkout des plugins contenus dans le fichier telecharger.csv : colonne1=nom_plugin,colonne2=repertoire"
 echo "-c : vider le cache : local et tmp/cache"
+echo "-C : vider le cache : local et tmp"
 echo ""
 echo "Il est possible de faire un lien symbolique de cet exécutable soit :"
 echo "  - vers le répertoire plugins."
@@ -58,10 +59,15 @@ echo "Il est possible aussi de créer un alias dans son .bashrc ou .zshrc ..."
 function F_vider_cache(){
     rm -rf $repertoire_racine/tmp/cache/*
     rm -rf $repertoire_racine/local/*
+    echo "les repertoires tmp/cache et local sont vides"
+}
+function F_vider_tout_cache(){
+    rm -rf $repertoire_racine/tmp/*
+    rm -rf $repertoire_racine/local/*
     echo "les repertoires tmp et local sont vides"
 }
 
-while getopts vhlca:d:t:f option
+while getopts vhlcCa:d:t:f option
 do
     case $option in
         v)   
@@ -85,6 +91,9 @@ do
             ;;
         c)
             F_vider_cache
+            ;;
+        C)
+            F_vider_tout_cache
             ;;
         t)
             OLDIFS="$IFS"
