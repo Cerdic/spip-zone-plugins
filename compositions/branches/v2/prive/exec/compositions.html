@@ -10,7 +10,7 @@
 	[<div class='descriptif'>(#VALEUR|table_valeur{description})</div>]
 
         <B_heritages>
-        <div class='descriptif'><:compositions:heritages:> <BOUCLE_heritages(POUR){tableau #ENV{compositions}|table_valeur{#ENV{composition}}|table_valeur{branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>.</div>
+        <div class='descriptif'><:compositions:heritages:> <ul class="spip"><BOUCLE_heritages(POUR){tableau #VALEUR|table_valeur{branche}}><li>#CLE (#VALEUR)</li></BOUCLE_heritages></ul></div>
         </B_heritages>
 
 		<B_util>
