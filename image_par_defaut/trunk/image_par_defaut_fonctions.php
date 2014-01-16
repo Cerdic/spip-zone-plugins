@@ -55,11 +55,17 @@ function image_par_defaut($x, $y, $description='', $couleur_fond='#cccccc', $cou
     include_spip('inc/filtres');
 
     if ($description) {
-        $texte =  $description . ' // ';
+        $texte =  $description . "\r\n";
     }
-    $texte .= "$x x $y";
+    $texte .= $x . "&#215;" . $y;
 
-    $image = filtrer('image_typo', $texte, "couleur=" . ltrim($couleur_texte, '#'));
+    $image = filtrer('image_typo', $texte,
+        "couleur=" . ltrim($couleur_texte, '#'),
+        "taille=" . max(min(round($y/4), round($x/8), 40), 10),
+        "police=dustismo_bold.ttf",
+        "align=center",
+        "largeur=" . round($x * .9)
+    );
     $image = filtrer('image_aplatir', $image, 'png', ltrim($couleur_fond, '#'));
     $image = filtrer('image_recadre', $image, $x, $y, 'center', $couleur_fond);
     $image = filtrer('image_graver', $image);
