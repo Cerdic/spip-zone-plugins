@@ -8,11 +8,19 @@
 [(#ENV{objets}|match{','}|non)
 #SET{tables, #LISTE{#ENV{objets}}}
 ]
+<div class="formulaire_spip">
 <form action='#SELF' method='get'>
 	[(#SELF|parametre_url{objets,''}|form_hidden)]
-	<label>Vos objets :</label>
-	<input type='text' name='objets' value='#ENV{objets}' />
-	<input type='submit' value='ok' />
+	<ul>
+		<li class="editer editer_objets">
+			<label><:doc_tech:label_vos_objets:></label>
+			<input type='text' name='objets' value='#ENV{objets}' />
+		</li>
+	</ul>
+	<p class="boutons">
+		<input class="submit" type='submit' value='ok' />
+	</p>
 </form>
-
+</div>
+<div class="nettoyeur"></div> 
 [(#MODELE{doc_tech,tables=#GET{tables}})]

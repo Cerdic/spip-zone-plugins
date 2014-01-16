@@ -13,17 +13,17 @@
 	[(#SELF|parametre_url{objets,''}|parametre_url{regroupe,''}|form_hidden)]
 	<ul>
 		<li class="editer editer_objets">
-			<label for="objets">Vos objets :</label>
+			<label for="objets"><:doc_tech:label_vos_objets:></label>
 			<input class="text" type='text' name='objets' value='#ENV{objets}' />
 			<div class="nettoyeur"> </div>
 		</li>
 		<li class="editer editer_label_perso">
-			<label for="label_perso">Des préfixes de chaînes de langue personnalisés :</label>
+			<label for="label_perso"><:doc_tech:label_perso:></label>
 			<textarea name='label_perso' rows="5" cols="40">#ENV{label_perso}</textarea>
 			<div class="nettoyeur"> </div>
 		</li>
 		<li class="editer editer_regroupe">
-			<label for="regroupe">Regrouper les champs ?</label>
+			<label for="regroupe"><:doc_tech:label_regrouper_champs:></label>
 			<select name="regroupe">
 				<option value="" [(#ENV{regroupe}|=={'oui'}|non)selected="selected"]>Non</option>
 				<option value="oui" [(#ENV{regroupe}|=={'oui'}|oui)selected="selected"]>Oui</option>
@@ -32,7 +32,7 @@
 		</li>
 	</ul>
 	<p class="boutons">
-		<input class="submit" type='submit' value='Générer' />
+		<input class="submit" type='submit' value='<:doc_tech:value_submit_generer:>' />
 	</p>
 </form>
 <div class="nettoyeur"> </div>

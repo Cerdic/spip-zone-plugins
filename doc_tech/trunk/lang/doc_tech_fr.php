@@ -7,8 +7,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aide_a_la_saisie' => 'Aide à la saisie :',
+
 	// C
 	'chaines_a_placer_dans' => 'Chaînes de langue à placer dans',
+
 	// D
 	'definition_mysql' => 'Définition MySQL',
 	'doc_tech_titre' => 'Documentation technique',
@@ -20,12 +22,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_label' => 'Label',
+	'label_perso' => 'Des préfixes de chaînes de langue personnalisés :',
+	'label_regrouper_champs' => 'Regrouper les champs ?',
+	'label_vos_objets' => 'Vos objets :',
 
 	// N
 	'nom_du_champ' => 'Nom du champ',
 
+	// P
 	'pas_de_tables_nom'=> 'Il n\'y a pas de tables correspondantes',
 
+	// S 
+	'sommaire' => 'Sommaire', 
+	
+	// V
+	'value_submit_generer' => 'Générer',
 );
 
 ?>
