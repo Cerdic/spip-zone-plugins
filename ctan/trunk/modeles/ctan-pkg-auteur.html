@@ -17,7 +17,7 @@
 			<BOUCLE_pkg(DATA){source simplexml, http://www.ctan.org/xml/pkg/#VALEUR{attributes/key}}{si #GET{inactif}|non|ou{#ENV{inactif}|oui}}>
 	
 				
-				<a href="http://www.ctan.org/tex-archive#VALEUR{children/ctan/0/attributes/path}" class="spip_out">[(#VALEUR{children/name/0/text})]</a>[ ((#VALEUR{children/version/0/attributes/number}))][, <em>(#VALEUR{children/caption/0/text})</em>]
+				<a href="http://www.ctan.org/tex-archive#VALEUR{children/ctan/0/attributes/path}" class="spip_out">[(#VALEUR{children/name/0/text})]</a>[ ((#VALEUR{children/version/0/attributes/number}))][, <em>(#VALEUR{children/caption/0/text})</em>] [(#GET{inactif}|oui)(<:ctan:inactif:>)]
 				
 			
 			</BOUCLE_pkg>
