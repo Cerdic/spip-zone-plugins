@@ -8,11 +8,38 @@
 [(#ENV{objets}|match{','}|non)
 #SET{tables, #LISTE{#ENV{objets}}}
 ]
-<form action='#SELF' method='get' class="formulaire_spip">
-	[(#SELF|parametre_url{objets,''}|form_hidden)]
-	<label>Vos objets :</label>
-	<input type='text' name='objets' value='#ENV{objets}' />
-	<input type='submit' value='ok' />
+<div class="formulaire_spip">
+<form action='#SELF' method='get'>
+	[(#SELF|parametre_url{objets,''}|parametre_url{regroupe,''}|form_hidden)]
+	<ul>
+		<li class="editer editer_objets">
+			<label for="objets">Vos objets :</label>
+			<input class="text" type='text' name='objets' value='#ENV{objets}' />
+			<div class="nettoyeur"> </div>
+		</li>
+		<li class="editer editer_label_perso">
+			<label for="label_perso">Des préfixes de chaînes de langue personnalisés :</label>
+			<textarea name='label_perso' rows="5" cols="40">#ENV{label_perso}</textarea>
+			<div class="nettoyeur"> </div>
+		</li>
+		<li class="editer editer_regroupe">
+			<label for="regroupe">Regrouper les champs ?</label>
+			<select name="regroupe">
+				<option value="" [(#ENV{regroupe}|=={'oui'}|non)selected="selected"]>Non</option>
+				<option value="oui" [(#ENV{regroupe}|=={'oui'}|oui)selected="selected"]>Oui</option>
+			</select>
+			<div class="nettoyeur"> </div>
+		</li>
+	</ul>
+	<p class="boutons">
+		<input class="submit" type='submit' value='Générer' />
+	</p>
 </form>
-
-[(#MODELE{doc_tech_lang,tables=#GET{tables}})]
+<div class="nettoyeur"> </div>
+[(#ENV{regroupe}|=={'oui'}|oui)
+	[(#MODELE{doc_tech_lang_regroupe,tables=#GET{tables},label_perso=#ENV{label_perso},env})]
+]
+[(#ENV{regroupe}|=={'oui'}|non)
+	[(#MODELE{doc_tech_lang,tables=#GET{tables},label_perso=#ENV{label_perso},env})]
+]
+</div>
