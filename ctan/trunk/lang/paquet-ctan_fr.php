@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
-	'correction_liens_internes_description' => 'Modèles pour récuperer des données sur le CTAN au sujet',
+	'ctan_description' => 'Modèles pour récuperer des données sur le CTAN au sujet',
 	'ctan_slogan' => 'Le monde SPIP rencontre encore plus le monde TeX!',
 );
 ?>
