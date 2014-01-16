@@ -45,7 +45,7 @@ function formidable_declarer_tables_objets_sql($tables) {
 	$tables['spip_formulaires'] = array(
 		'type'=>'formulaire',
 		'titre' => "titre, '' AS lang",
-		'date' => '',
+		'date' => 'date_crea',
 		'principale' => 'oui',
 		
 		'field' => array(
@@ -58,6 +58,7 @@ function formidable_declarer_tables_objets_sql($tables) {
 			"traitements" => "text NOT NULL default ''",
 			"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
 			"statut" => "varchar(10) NOT NULL default ''",
+			"date_crea" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"maj" => "timestamp",
 			"apres" => "varchar(12) NOT NULL default ''",
 			"url_redirect" => "varchar(255)"
