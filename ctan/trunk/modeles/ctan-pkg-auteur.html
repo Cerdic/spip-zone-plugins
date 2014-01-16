@@ -1,0 +1,17 @@
+#SET{url_auteur,http://www.ctan.org/xml/author/#ENV{class}?ref=true}
+
+<B_pkg_auteur>
+<ul class="spip">
+<BOUCLE_pkg_auteur(DATA){source simplexml, #GET{url_auteur}} {datapath root/children/package}{par attributes/key}>
+		<B_pkg>
+			<li>
+			<BOUCLE_pkg(DATA){source simplexml, http://www.ctan.org/xml/pkg/#VALEUR{attributes/key}}>
+	
+				
+				<a href="http://www.ctan.org/tex-archive#VALEUR{children/ctan/0/attributes/path}" class="spip_out">[(#VALEUR{children/name/0/text})]</a>[ ((#VALEUR{children/version/0/attributes/number}))][, <em>(#VALEUR{children/caption/0/text})</em>]
+			</BOUCLE_pkg>
+			</li>
+		</B_pkg>
+</BOUCLE_pkg_auteur>
+</ul>
+</B_pkg_auteur>
