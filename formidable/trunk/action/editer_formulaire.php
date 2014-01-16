@@ -48,7 +48,7 @@ function insert_formulaire() {
 			'data' => $champs
 		)
 	);
-	$id_formulaire = sql_insertq("spip_formulaires", array('date_crea' => date('Y-m-d H:i:s')));
+	$id_formulaire = sql_insertq("spip_formulaires", array('date_creation' => date('Y-m-d H:i:s')));
 
 	return $id_formulaire;
 }
@@ -68,7 +68,7 @@ function formulaire_set($id_formulaire, $set=null) {
 	$champs = saisies_lister_champs($GLOBALS['formulaires']['editer_formulaire']);
 	foreach ($champs as $champ)
 		$c[$champ] = _request($champ,$set);
-    
+
 	include_spip('inc/modifier');
 	revision_formulaire($id_formulaire, $c);
 
