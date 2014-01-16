@@ -1,0 +1,15 @@
+<paquet
+	prefix="ctan"
+	categorie="divers"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="ctan.png"
+>
+
+	<nom>Données CTAN</nom>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<licence>GNU/GPL 3</licence>
+	<necessite nom="itersimplexml" />
+	
+</paquet>
