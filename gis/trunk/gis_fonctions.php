@@ -402,7 +402,7 @@ function gis_icon_properties($img=''){
 		list($h,$w) = taille_image($icon);
 		$props .= "\n\"icon_size\": ". json_encode(array($w,$h)).",";
 		$props .= "\n\"icon_anchor\": ". json_encode(array($w/2,$h)).",";
-		$props .= "\n\"popup_anchor\": ". json_encode(array(1,$h/1.2));
+		$props .= "\n\"popup_anchor\": ". json_encode(array(1,-$h/1.2));
 	}
 	
 	if ($shadow = find_in_path('images/marker_defaut_shadow.png'))
