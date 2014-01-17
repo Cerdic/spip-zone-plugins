@@ -4,8 +4,7 @@
 	"id":"1",
 	"properties": {
 		"title":[(#ENV{titre}|?{#ENV{titre},''}|json_encode)],
-		"description":[(#ENV{description}|?{#ENV{description}|wrap{<p>},''}|json_encode)]
-		#SET{icone, #CHEMIN_IMAGE{#ENV*{icone,0}}|sinon{#CHEMIN{#ENV*{icone,0}}}}[
-		(#GET{icone}|gis_icon_properties)]
+		"description":[(#ENV{description}|?{#ENV{description}|wrap{<p>},''}|json_encode)][
+		(#CHEMIN_IMAGE{#ENV*{icone,0}}|sinon{#CHEMIN{#ENV*{icone,0}}}|gis_icon_properties)]
 	}
 }
