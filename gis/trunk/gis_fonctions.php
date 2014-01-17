@@ -392,7 +392,7 @@ function gis_icon_properties($img=''){
 		if (largeur($img) >= 44)
 			$icon = extraire_attribut(filtrer('image_graver',filtrer('image_recadre',filtrer('image_passe_partout',$img,32,32),32,32,'center','transparent')),'src');
 		else
-			$icon = extraire_attribut($img,'src');
+			$icon = extraire_attribut($img,'src') ? extraire_attribut($img,'src') : $img;
 	}
 	else
 		$icon = find_in_path('images/marker_defaut.png');
