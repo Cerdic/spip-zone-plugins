@@ -38,7 +38,7 @@
 	[(#GET{disabled}|oui) #SET{disabled,#ARRAY|push{#GET{disabled}}} ]
 ]
 [(#ENV{tout_selectionner}|oui)
-	<div class="[(#ENV{choix,choix})] none-nojs">
+	<div class="[(#ENV{choix,choix})][ (#ENV{choix,choix})_tout_selectionner ]none-nojs">
 		<input type="checkbox" name="#ENV{nom}_tout" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_tout" value="on" onChange="if (jQuery(this).attr('checked')=='checked') jQuery(this).parent('div').parent().find('input').attr('checked','checked'); else jQuery(this).parent('div').parent().find('input').removeAttr('checked');"/>
 		<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_tout"><:saisies:tout_selectionner:></label>
 	</div>
