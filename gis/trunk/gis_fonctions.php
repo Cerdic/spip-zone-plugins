@@ -376,4 +376,39 @@ function gis_kml_to_urls($kml){
 	}
 	return $kml;
 }
+
+/**
+ * Retourne les propriétés JSON de l'icône d'un point
+ * 
+ * @param string $img
+ *     Balise HTML `<img ... />` ou chemin de l'image (qui peut être une URL distante).
+ * @return string
+ *     Les propriétés de l'icône
+**/
+function gis_icon_properties($img=''){
+	$props = $icon = '';
+	
+	if ($img) {
+		if (largeur($img) >= 44)
+			$icon = extraire_attribut(filtrer('image_graver',filtrer('image_recadre',filtrer('image_passe_partout',$img,32,32),32,32,'center','transparent')),'src');
+		else
+			$icon = extraire_attribut($img,'src');
+	}
+	else
+		$icon = find_in_path('images/marker_defaut.png');
+	
+	if ($icon) {
+		$props .= ",\n\"icon\": ". json_encode(url_absolue($icon)).",";
+		list($h,$w) = taille_image($icon);
+		$props .= "\n\"icon_size\": ". json_encode(array($w,$h)).",";
+		$props .= "\n\"icon_anchor\": ". json_encode(array($w/2,$h)).",";
+		$props .= "\n\"popup_anchor\": ". json_encode(array(1,$h/1.2));
+	}
+	
+	if ($shadow = find_in_path('images/marker_defaut_shadow.png'))
+		$props .= ",\n\"shadow\": ". json_encode(url_absolue($shadow));
+	
+	return $props;
+}
+
 ?>
