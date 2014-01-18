@@ -73,10 +73,10 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
 
     // on cherche
     // Si on est dans une vesion numérique de foundation, on retourne la syntaxe
-    if (in_array($config['variante'], $colnum)) 
+    if (in_array($config['variante'], $colnum))
         return $type.'-'.$nombre_colonnes;
     // Sinon, on démarrer le moteur de conversion de nombre, et on renvoie la bonne class
-    elseif (in_array($config['variante'], $colettr)) 
+    elseif (in_array($config['variante'], $colettr))
         return toWords($nombre_colonnes);
 }
 
