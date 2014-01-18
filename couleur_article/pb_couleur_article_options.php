@@ -6,7 +6,7 @@ $p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FI
 define('_DIR_PLUGIN_PB_COULEUR_ARTICLE',(_DIR_PLUGINS.end($p)));
 
 if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
-define('_DIR_FARBTASTIC_1_3_LIB', _DIR_LIB . 'farbtastic_1_3_1/'); 
+define('_DIR_FARBTASTIC_LIB', _DIR_LIB . 'farbtastic-1/'); 
  
 
 

@@ -72,8 +72,8 @@ function pb_couleur_article_gauche($vars){
 
 function pb_couleur_article_header($flux){
 	if ($_GET["exec"]=="articles") {
-		$flux .= "<link rel='stylesheet' type='text/css' href='"._DIR_FARBTASTIC_1_3_LIB."farbtastic.css' />\n";     
-		$flux .= "<script src='"._DIR_FARBTASTIC_1_3_LIB."farbtastic.js' type=\"text/javascript\"></script>\n";
+		$flux .= "<link rel='stylesheet' type='text/css' href='"._DIR_FARBTASTIC_LIB."farbtastic.css' />\n";     
+		$flux .= "<script src='"._DIR_FARBTASTIC_LIB."farbtastic.js' type=\"text/javascript\"></script>\n";
 		
 		
 		$flux .= "<script type=\"text/javascript\">

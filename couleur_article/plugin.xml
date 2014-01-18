@@ -43,8 +43,6 @@ _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtas
 
 	<necessite id="SPIP" version="[1.9.0;]" />
 	
-	<necessite id="lib:farbtastic_1_3_1" src="http://files.spip.org/spip-zone/farbtastic_1_3_1.zip" />
+	<necessite id="lib:farbtastic-1" src="https://github.com/mattfarina/farbtastic/archive/farbtastic-1.zip" />
 	
 </plugin>
-
-
