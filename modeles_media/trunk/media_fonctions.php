@@ -161,7 +161,9 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		$src = substr($src,0,$pos);
 	}
 	
-	$src = "$url_site_spip/".$src;
+	$src = url_absolue($src);
+	
+	spip_log("src=$src","modeles_media");
 
 	list($width, $height) = getimagesize($src);
 	// hauteur du redimensionnement
