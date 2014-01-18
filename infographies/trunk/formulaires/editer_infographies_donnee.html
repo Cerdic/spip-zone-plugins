@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_infographies_data,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_infographies_data' value='#ENV{id_infographies_data}' />
+		<ul>
+			<li class="editer editer_axe_x[ (#ENV**{erreurs}|table_valeur{axe_x}|oui)erreur]">
+				<label for="axe_x">[(#INFO_AXE_X{infographies_data,#ID_INFOGRAPHIES_DATA}|sinon{<:infographies_data:info_axe_x:>})]</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{axe_x})</span>
+				]<input type='text' class='text' name='axe_x' id='axe_x'[ lang='(#LANGUE)'] value="[(#ENV**{axe_x,''})]" />
+			</li>
+			<li class="editer editer_axe_y[ (#ENV**{erreurs}|table_valeur{axe_y}|oui)erreur]">
+				<label for="axe_y">[(#INFO_AXE_Y{infographies_data,#ID_INFOGRAPHIES_DATA}|sinon{<:infographies_data:info_axe_y:>})]</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{axe_y})</span>
+				]<input type='text' class='text' name='axe_y' id='axe_y'[ lang='(#LANGUE)'] value="[(#ENV**{axe_y,''})]" />
+			</li>
+			<li class="editer editer_commentaire[ (#ENV**{erreurs}|table_valeur{commentaire}|oui)erreur]">
+				<label for="commentaire"><:infographies_donnee:info_commentaire:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{commentaire})</span>
+				]<textarea name='commentaire' id='commentaire'[ lang='(#LANGUE)'] rows='4' cols='40'>[(#ENV**{commentaire})]</textarea>
+			</li>
+		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
+</div>

@@ -1,0 +1,32 @@
+<paquet
+	prefix="infographies"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="dev"
+	logo="prive/themes/spip/images/infographie-64.png"
+	compatibilite="[3.0.0;3.0.*]"
+	schema="0.1.0"
+>
+
+	<nom>Infographies</nom>
+	<!-- Un objet permettant de réaliser des infographies pour SPIP -->
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2013-2014</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/infographies.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/infographies.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/infographies.php" />
+	<pipeline nom="affiche_milieu" inclure="infographies_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="infographies_pipelines.php" />
+	<pipeline nom="header_prive" inclure="infographies_pipelines.php" />
+	<pipeline nom="autoriser" inclure="infographies_autoriser.php" />
+	
+	<menu nom="infographies" titre="infographie:titre_infographies" parent="menu_edition" icone="images/infographie-16.png" />
+	<menu nom="infographie_edit" titre="infographie:icone_creer_infographie" parent="outils_rapides" icone="images/infographie-16.png" action="infographie_edit" parametres="new=oui" />
+	<menu nom="infographies_datas" titre="infographies_data:titre_infographies_datas" parent="menu_edition" icone="images/infographies_data-16.png" />
+	<menu nom="infographies_data_edit" titre="infographies_data:icone_creer_infographies_data" parent="outils_rapides" icone="images/infographies_data-16.png" action="infographies_data_edit" parametres="new=oui" />
+</paquet>

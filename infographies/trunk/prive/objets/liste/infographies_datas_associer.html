@@ -1,0 +1,55 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
+}})
+]
+#SET{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+#SET{debut,#ENV{debutinfographies_dataa,#EVAL{_request("debutinfographies_dataa");}}}
+<input type="hidden" name="debutinfographies_dataa" value="#GET{debut}" />
+<B_liste_infographies_data>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutinfographies_dataa,#EVAL{_request("debutinfographies_dataa");}}}
+#SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
+#ANCRE_PAGINATION
+[<h3><:info_resultat_recherche:> &laquo;(#ENV{recherche})&raquo;</h3>]
+<div class="liste-objets liste-objets-associer infographies_datas">
+<table class='spip liste'>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{infographies_data:info_1_infographies_data,infographies_data:info_nb_infographies_datas}})</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:info_titre:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_infographies_data(INFOGRAPHIES_DATAS){!id_infographies_data IN #GET{exclus}}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} infographies_dataa}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class='statut'></td>
+			<td class='titre[ (#TITRE|non)vide]'>[(#LOGO_INFOGRAPHIES_DATA|image_reduire{20,20})]<a href="[(#ID_INFOGRAPHIES_DATA|generer_url_entite{infographies_data})]"[ title="(#BIO*|couper{200}|attribut_html)"]>[(#RANG). ][(#TITRE|sinon{<:texte_vide:>})]</a></td>
+			<td class='action'><button class="button" name="ajouter_lien[infographies_data-#ID_INFOGRAPHIES_DATA-#OBJET-#ID_OBJET]" value="+"><:infographies_data:lien_ajouter_infographies_data:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_infographies_data>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_infographies_data>
+[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer infographies_datas caption-wrap">
+<span class="caption"><strong>[(#VAL{infographies_data:info_recherche_infographies_data_zero}|_T{#ARRAY{cherche_infographies_data,#ENV{recherche}}})]</strong>
+<span class="recherche">
+	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
+	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
+	<input type="submit" class="tout_voir" name="tout_voir" value="<:info_tout_afficher:>" />
+</span>
+</span>
+</div>
+]<//B_liste_infographies_data>

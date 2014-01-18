@@ -1,0 +1,68 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_infographies_data,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_infographies_data' value='#ENV{id_infographies_data}' />
+		<ul>
+			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:info_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]"
+				placeholder="<:infographies_data:info_nouveau_infographies_data|attribut_html:>" />
+			</li>
+			<li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="text_area"><:info_texte:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+				][(#ENV**{_texte_trop_long,''})]
+					<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
+			</li>
+			<li class="editer editer_css_class[ (#ENV**{erreurs}|table_valeur{css_class}|oui)erreur]">
+				<label for="css_class"><:infographies_data:info_css_class:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{css_class})</span>
+				]<input type='text' class='text' name='css_class' id='css_class'[ lang='(#LANGUE)'] value="[(#ENV**{css_class,''})]" />
+			</li>
+			<li class="editer editer_axe_x[ (#ENV**{erreurs}|table_valeur{axe_x}|oui)erreur]">
+				<label for="axe_x"><:infographies_data:info_axe_x:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{axe_x})</span>
+				]<input type='text' class='text' name='axe_x' id='axe_x'[ lang='(#LANGUE)'] value="[(#ENV**{axe_x,''})]" />
+			</li>
+			<li class="editer editer_axe_y[ (#ENV**{erreurs}|table_valeur{axe_y}|oui)erreur]">
+				<label for="axe_y"><:infographies_data:info_axe_y:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{axe_y})</span>
+				]<input type='text' class='text' name='axe_y' id='axe_y'[ lang='(#LANGUE)'] value="[(#ENV**{axe_y,''})]" />
+			</li>
+			<li class="editer editer_unite[ (#ENV**{erreurs}|table_valeur{unite}|oui)erreur]">
+				<label for="unite"><:infographies_data:info_unite:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{unite})</span>
+				]<input type='text' class='text' name='unite' id='unite'[ lang='(#LANGUE)'] value="[(#ENV**{unite,''})]" />
+			</li>
+			<li class="editer editer_credits[ (#ENV**{erreurs}|table_valeur{credits}|oui)erreur]">
+				<label for="credits"><:medias:label_credits:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits})</span>
+				]<textarea name='credits' id='credits'[ lang='(#LANGUE)'] rows='4' cols='40'>[(#ENV**{credits})]</textarea>
+			</li>
+			<li class="editer editer_type[ (#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
+				<label for="type"><:infographies_data:info_type:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{type})</span>
+				]<select name='type' id='type'>
+					<option value="interne"><:infographies_data:info_type_internes:></option>
+					<option value="externe"[ (#ENV{type,interne}|=={externe}|oui)selected="selected"]><:infographies_data:info_type_externes:></option>
+				</select>
+			</li>
+			<li class="editer editer_url_externe[ (#ENV**{erreurs}|table_valeur{url_externe}|oui)erreur]">
+				<label for="url_externe"><:infographies_data:info_url:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_externe})</span>
+				]<p class="explication"><:infographies_data:explication_url:></p>
+				<input type='text' class='text' name='url_externe' id='url_externe'[ lang='(#LANGUE)'] value="[(#ENV**{url_externe,''})]" />
+			</li>
+		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
+</div>

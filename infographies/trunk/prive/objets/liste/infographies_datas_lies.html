@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	num titre,1,
+	titre,1,
+	id_infographies_data,1,
+	points,-1
+}})
+]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<input type="hidden" name="debutinfographies_datal" value='#ENV{debutinfographies_datal,#EVAL{_request("debutinfographies_datal");}}' />
+<B_liste_infographies_data>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies infographies_datas">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{infographies_data:info_1_infographies_data,infographies_data:info_nb_infographies_datas}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_infographies_data(INFOGRAPHIES_DATAS){id_infographies_data IN #GET{selection}}{where?}{tri #ENV{par,type},#GET{defaut_tri}}{par multi titre}{pagination #ENV{nb,10} infographies_datal}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_INFOGRAPHIES_DATAS|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='picto'></td>
+			<td class='titre principale'>[(#LOGO_INFOGRAPHIES_DATA|image_reduire{20,20})]<a href="[(#ID_INFOGRAPHIES_DATA|generer_url_entite{infographies_data})]" title="<:info_numero_abbreviation|attribut_html:> #ID_INFOGRAPHIES_DATA">[(#RANG). ]#TITRE</a></td>
+			<td class='action'><button class="button link delete" name="supprimer_lien[infographies_data-#ID_INFOGRAPHIES_DATA-#OBJET-#ID_OBJET]" value="X"><:infographies_data:info_retirer_infographies_data:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+		</tr>
+	</BOUCLE_liste_infographies_data>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}infographies_data-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:infographies_data:info_retirer_infographies_data:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_infographies_data>
+<div class="liste-objets liste-objets-lies infographies_datas caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:infographies_data:info_aucun_infographies_data:>}) ]</strong>
+</div>
+<//B_liste_infographies_data>

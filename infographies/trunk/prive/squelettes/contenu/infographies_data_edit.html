@@ -1,0 +1,29 @@
+[(#ID_INFOGRAPHIES_DATA|oui)
+	[(#AUTORISER{modifier,infographies_data,#ID_INFOGRAPHIES_DATA}|sinon_interdire_acces)]
+][(#ID_INFOGRAPHIES_DATA|non)
+	[(#AUTORISER{creer,infographies_data}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_INFOGRAPHIES_DATA}|?{#ENV{lier_trad,#ID_INFOGRAPHIES_DATA}|generer_url_entite{infographies_data},#URL_ECRIRE{infographies_data|objet_info{table_objet}}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_INFOGRAPHIES_DATA|oui)
+	[(#GET{redirect}|icone_verticale{[(#VAL{infographies_data}|objet_info{texte_retour}|_T)],#VAL{infographies_data}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#VAL{infographies_data}|objet_info{#ID_INFOGRAPHIES_DATA|?{texte_modifier,texte_creer}}|_T)]
+		<h1>(#ENV{titre,#INFO_TITRE{infographies_data,#ID_INFOGRAPHIES_DATA}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_INFOGRAPHIES_DATA|generer_url_entite{infographies_data}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_INFOGRAPHIES_DATA{#ENV{id_infographies_data,oui},#GET{redirect},#ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>

@@ -1,0 +1,87 @@
+<div id="infographies_donnees">
+<B_jeu_de_donnees>
+[(#INCLURE{fond=prive/squelettes/inclure/ajouter-infographies_donnees, env, ajax})]
+<div class="nettoyeur"></div>
+<h2><:infographies_data:titre_donnees_liees:></h2>
+<BOUCLE_jeu_de_donnees(INFOGRAPHIES_DATAS){id_infographies_data}{tout}>
+<B_infographies_donnees>
+<script type="text/javascript">
+	
+function donnee_editbox_init(){
+	jQuery('a.editbox:not(.nobox)')
+	.attr("onclick","").addClass('nobox').click(function(){
+		var donnee_case = jQuery(this).parents('div#infographies_donnees').eq(0);
+		jQuery(donnee_case).animateLoading();
+		jQuery.modalboxload(parametre_url(parametre_url(jQuery(this).attr('href'),'popin','oui'),'var_zajax','contenu'),{
+			onClose: function (dialog) {jQuery(donnee_case).ajaxReload();}
+		});
+		return false;
+	});
+}
+var donnee_editbox_initialized;
+if (!donnee_editbox_initialized){
+	if (window.jQuery){
+		donnee_editbox_initialized = true;
+		(function($){if(typeof onAjaxLoad == "function") onAjaxLoad(donnee_editbox_init);
+			$(donnee_editbox_init);
+		 })(jQuery);
+	}
+}
+</script>
+<div class="liste-objets infographies_donnees">
+	<table class="spip liste">
+		<thead>
+			<th></th>
+			<th>
+				[(#_jeu_de_donnees:AXE_X|sinon{<:infographies_data:info_axe_x:>})]
+			</th>
+			<th>
+				[(#_jeu_de_donnees:AXE_Y|sinon{<:infographies_data:info_axe_y:>})]
+			</th>
+			<th>
+				<:infographies_donnee:info_commentaire:>
+			</th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</thead>
+		<tbody>
+<BOUCLE_infographies_donnees(INFOGRAPHIES_DONNEES){id_infographies_data}{par rang}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td>
+				#RANG
+			</td>
+			<td class="#EDIT{axe_x}">
+				#AXE_X
+			</td>
+			<td class="#EDIT{axe_y}">
+				#AXE_Y
+			</td>
+			<td class="#EDIT{commentaire}">
+				[(#COMMENTAIRE)]
+			</td>
+			<td>
+				[<a href="[(#LOGO_INFOGRAPHIES_DONNEE|extraire_attribut{src})]">(#LOGO_INFOGRAPHIES_DONNEE|image_reduire{20,20})</a>]
+			</td>
+			<td>
+				[(#BOUTON_ACTION{<:infographies_data:bouton_supprimer:>,[(#URL_ACTION_AUTEUR{dissocier_donnee,#ID_INFOGRAPHIES_DATA-#ID_INFOGRAPHIES_DONNEE,#SELF|ancre_url{infographies_donnees}})],ajax,<:infographies_data:bouton_supprimer_donnee_confirmation:>,'',[(#ID_INFOGRAPHIES_DATA)(function(){jQuery("#infographies_donnees").animateRemove();return true;})()]})]
+			</td>
+			<td>
+				<a href="#URL_ECRIRE{infographies_donnee_edit,id_infographies_donnee=#ID_INFOGRAPHIES_DONNEE}" target="_blank" class="editbox">
+					<:infographies_data:bouton_editer:>
+				</a>
+			</td>
+		</tr>
+</BOUCLE_infographies_donnees>
+		</tbody>
+	</table>
+</div>
+[(#BOUTON_ACTION{<:infographies_data:lien_tout_supprimer:>,#URL_ACTION_AUTEUR{dissocier_donnee,#ID_INFOGRAPHIES_DATA-D/document,#SELF|ancre_url{infographies_donnees}},'ajax tout_supprimer',<:ecrire:lien_tout_supprimer:> ?})]
+</B_infographies_donnees>
+[(#URL_EXTERNE|non)
+#BOITE_OUVRIR{'',notice}
+<p><:infographies_data:erreur_aucune_donnee:></p>
+#BOITE_FERMER]
+<//B_infographies_donnees>
+</BOUCLE_jeu_de_donnees>
+</div>

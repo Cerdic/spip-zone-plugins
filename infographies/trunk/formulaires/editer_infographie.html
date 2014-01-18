@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_infographie,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_infographie' value='#ENV{id_infographie}' />
+		<ul>
+			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:info_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,''})]"
+				placeholder="<:infographie:info_nouvelle_infographie|attribut_html:>" />
+			</li>
+			<li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="text_area"><:info_texte:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
+				][(#ENV**{_texte_trop_long,''})]
+					<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'>[(#ENV**{texte})]</textarea>
+			</li>
+			<li class="editer editer_credits[ (#ENV**{erreurs}|table_valeur{credits}|oui)erreur]">
+				<label for="credits"><:medias:label_credits:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits})</span>
+				]<textarea name='credits' id='credits'[ lang='(#LANGUE)'] rows='4' cols='40'>[(#ENV**{credits})]</textarea>
+			</li>
+		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
+</div>

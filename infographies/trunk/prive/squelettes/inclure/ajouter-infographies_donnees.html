@@ -1,0 +1,12 @@
+[(#ENV{ajouter}|=={oui}|oui)
+<div class='nettoyeur'></div>
+<a href='[(#SELF|parametre_url{ajouter,non})]' class='ajax bouton_fermer'>[(#CHEMIN_IMAGE{fermer-16.png}|balise_img)]</a>
+<div class="ajax">
+	#FORMULAIRE_JOINDRE_INFOGRAPHIES_DONNEES{#ENV{id_infographies_data}}
+</div>
+<div class='nettoyeur'></div>
+]
+[(#ENV{ajouter}|=={oui}|non)
+[(#SELF|parametre_url{ajouter,oui}|icone{
+	<:infographies_data:bouton_ajouter_donnees:>,document-24.png,#LANG_RIGHT,new,ajax})]
+]

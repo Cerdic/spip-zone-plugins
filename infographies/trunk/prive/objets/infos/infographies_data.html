@@ -1,0 +1,20 @@
+<BOUCLE_jeu(INFOGRAPHIES_DATAS){id_infographies_data=#ENV{id}}>
+<div class='infos'>
+#SET{objet,#VAL{infographies_donnee:titre_infographies_donnee}|_T}
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{objet}}:><p>#ID_INFOGRAPHIES_DATA</p></div>
+<B_donnees>
+<div class='nb_elements'>
+<BOUCLE_donnees(INFOGRAPHIES_DONNEES){id_infographies_data}> </BOUCLE_donnees>
+	<div>
+		[(#TOTAL_BOUCLE|singulier_ou_pluriel{infographies_donnee:info_1_infographies_donnee,infographies_donnee:info_nb_infographies_donnees})]
+	</div>
+<!--nb_elements-->
+</div>
+</B_donnees>
+[(#AUTORISER{supprimer,infographies_data,#ID_INFOGRAPHIES_DATA}|oui)
+	[(#URL_ACTION_AUTEUR{supprimer_infographies_data,#ID_INFOGRAPHIES_DATA,#URL_ECRIRE{infographies_datas}}|icone_horizontale{<:infographies_data:icone_supprimer_supprimer_infographies_data:>,infographies_data,del})]
+]
+<//B_donnees>
+</div>
+</div>
+</BOUCLE_jeu>

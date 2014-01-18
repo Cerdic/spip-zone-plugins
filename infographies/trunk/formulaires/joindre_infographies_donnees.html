@@ -1,0 +1,21 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_infographies_data,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_infographie' value='#ENV{id_infographie}' />
+		<ul>
+			<li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{fichier}|oui)erreur]"> 
+				<label for="fichier"><:infographies_data:info_fichier:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>]
+				<input type="file" id="fichier" name="fichier" value="[(#ENV{fichier})]" />
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
+</div>

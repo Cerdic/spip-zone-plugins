@@ -1,0 +1,31 @@
+[(#ID_INFOGRAPHIES_DONNEE|sinon_interdire_acces)]
+[(#AUTORISER{modifier,infographies_donnee,#ID_INFOGRAPHIES_DONNEE}|sinon_interdire_acces)]
+<div class="cadre-formulaire-editer[(#ENV{popin,''}|oui)popin]">
+<div class="entete-formulaire">
+	[(#ENV{popin,''}|non)
+	[(#ENV{redirect}|sinon{#URL_ECRIRE{infographies_donnees}}|icone_verticale{<:icone_retour:>,infographies_donnee,'',left})]
+	]
+	<h1><:infographies_donnee:icone_modifier_infographies_donnee:></h1>
+</div>
+<div class="formedit">
+	<div class="ajax"><b class="reloaded"></b>
+	#FORMULAIRE_EDITER_INFOGRAPHIES_DONNEE{#ID_INFOGRAPHIES_DONNEE,#ENV{parent,''},#ENV{redirect,''},#ENV{lier_trad}}
+	</div>
+</div>
+<div class="ajax">
+	#FORMULAIRE_EDITER_LOGO{infographies_donnee,#ID_INFOGRAPHIES_DONNEE,'',#ENV**}
+</div>
+
+</div>
+<script type="text/javascript">
+function reload_chemin(){
+	if (!jQuery('.formedit').find('.ajax>.reloaded:first').length){
+		jQuery('.formedit').find('.ajax').eq(0).prepend('<b class="reloaded"></b>');
+	}
+}
+jQuery(function(){
+	if (jQuery('body.infographies_donnee_edit').length)
+		onAjaxLoad(reload_chemin);
+});
+</script>
+#PIPELINE{afficher_contenu_objet,#ARRAY{args,#ARRAY{type,infographies_donnee,id_objet,#ID_INFOGRAPHIES_DONNEE},data,''}}

@@ -1,0 +1,34 @@
+#SET{picto,#VAL{infographies_data}|objet_icone{16}}
+<B_jeux>
+#ANCRE_PAGINATION
+<div class="liste-objets infographies_datas">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{infographies_data:info_1_infographies_data,infographies_data:info_nb_infographies_datas}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre principale' scope='col'><:info_titre:></th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_jeux(INFOGRAPHIES_DATAS){id_infographies_data?}{recherche?}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>#GET{picto}</td>
+			<td class='titre principale'><a
+							href="[(#ID_INFOGRAPHIES_DATA|generer_url_entite{infographies_data})]"
+							title="<:info_numero_abbreviation|attribut_html:> #ID_INFOGRAPHIES_DATA">[(#RANG). ][(#TITRE|sinon{<:info_sans_titre:>})]</a>
+			</td>
+			<td class='id'>[(#AUTORISER{modifier,infographies_data,#ID_INFOGRAPHIES_DATA}|?{
+				[<a href="[(#ID_INFOGRAPHIES_DATA|generer_url_ecrire_entite_edit{infographies_data})]">(#ID_INFOGRAPHIES_DATA)</a>],
+				[(#ID_INFOGRAPHIES_DATA)]
+			})]</td>
+		</tr>
+	</BOUCLE_jeux>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_jeux>[
+<div class="liste-objets infographies_datas caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_jeux>
