@@ -25,7 +25,7 @@ function notifications_reservation_client_dist($quoi,$id_reservation, $options) 
     $envoyer_mail($email,$subject,$o);
     
 
-
+    // Si présent -  l'api de notifications_archive 
     if ($archiver = charger_fonction('archiver_notification','inc',true)) {
             $envoi='reussi';
             if(!$envoyer_mail)$envoi='echec';
@@ -38,8 +38,7 @@ function notifications_reservation_client_dist($quoi,$id_reservation, $options) 
                 'id_objet'=>$id_reservation,
                 'objet'=>'reservation',
                 'envoi'=>$envoi,
-                 'type'=>$quoi);
-            
+                 'type'=>$quoi);           
             
         $archiver ($o);
     }    
