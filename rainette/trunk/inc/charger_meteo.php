@@ -63,15 +63,19 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 			$convertir = ($mode == 'previsions') ? "${service}_flux2previsions" : "${service}_flux2conditions";
 		$tableau = $convertir($flux, $lieu);
 
-		// Ajouter les crédits affichés en regard de chaque modèle
+		// Ajouter les crédits affichés en regard de chaque modèle et stocker le système d'unité utilisé
 		$crediter = "${service}_service2credits";
+		$uniter = "${service}_service2unite";
 		if ($mode == 'previsions') {
 			// Pour les prévisions les informations communes sont stockées dans un index supplémentaire en fin de tableau
 			$index = count($tableau)-1;
 			$tableau[$index]['credits'] = $crediter();
+			$tableau[$index]['unite'] = $uniter();
 		}
-		else
+		else {
 			$tableau['credits'] = $crediter();
+			$tableau['unite'] = $uniter();
+		}
 
 	    // Pipeline de fin de chargement des données météo. Peut-être utilisé :
 		// -- pour effectuer des traitements annexes à partir des données météo (archivage, par exemple)

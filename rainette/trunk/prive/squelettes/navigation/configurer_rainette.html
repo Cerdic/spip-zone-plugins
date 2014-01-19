@@ -5,12 +5,12 @@
 
 [(#REM) <!-- Navigation dans les pages de configuration --> ]
 <ul class="liste-items sous_navigation">
-		<BOUCLE_navigation_cfg(DATA){liste weather,owm,wwo,wunderground,yahoo}{par cle}>
-		[<li class="item">
+<BOUCLE_navigation_cfg(DATA){liste weather,owm,wwo,wunderground,yahoo}{par cle}>
+	[<li class="item">
 	(#URL_ECRIRE{#ENV{exec}}|parametre_url{service, #VALEUR}
 		|lien_ou_expose{
 			[(#VAL{rainette:titre_service_}|concat{#VALEUR}|_T)],
 			[(#ENV{service, weather}|=={#VALEUR})]})
-</li>]
-		</BOUCLE_navigation_cfg>
+	</li>]
+</BOUCLE_navigation_cfg>
 </ul>

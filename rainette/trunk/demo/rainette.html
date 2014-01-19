@@ -25,45 +25,59 @@
 		div#footer{clear:both;width:100%}
 		/* Personnalisation pour la demo */
 		div#header h1{color:#798F74}
-		div#content{padding-left:20px;padding-bottom:40px;}
-		div#footer{padding:20px;}
-		h2{text-align:center;border-bottom:1px solid #000;}
+		div#content{padding-left:2em;padding-bottom:4em;}
+		div#extra{background:#fff;}
+		div#footer{padding:2em;}
+		.h2{text-align:center;border-bottom:2px solid #798F74;color:#798F74}
 		table{border:1px solid #000000;border-collapse:collapse;}
 		caption {background:#333;color:#eee;}
 		th {font-weight: bold;border-bottom:1px solid #000}
 		thead th {background: #DDD;}
-		th,td,caption {padding: 0.75em;}
+		th,td,caption {padding: 0.75em;border-right:1px solid #000;}
 		tbody tr:nth-child(even) th,
 		tbody tr:nth-child(even) td,
 		tbody tr.even th,
 		tbody tr.even td {background: #EEE;}
+		tbody tr td.erreur {background: #FBE3E4;}
+		tbody tr td.nonapi {background: #FFF6BF;}
 		.clearfix:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 		.clearfix{display:inline-table;}
 		div.clearfix{margin-bottom:30px;}
 		div.notice{padding:1em;color: #514721;border:2px solid #FFD324;background-color:#FFF6BF;}
+		.menu{background-color:#fefefe;margin-bottom:2em;padding:0;}
+		.menu .h2{border:0;color:#000;}
+		.menu .menu-items{margin-bottom: 0;}
+		.menu-items {border-bottom:0 none;border-top: 1px solid #EEEEEE;list-style: none outside none;margin: 0 0 1.5em;padding: 0;}
+		.menu-items .item {border-bottom: 1px solid #EEEEEE;clear: both;list-style: square outside none;margin-left: 0;overflow: hidden;padding: 0.75em 0;}
+		.menu-items .item:hover {background-color: #EEEEEE;}
+		.menu-items .item a {text-decoration:none;padding:0 0 0 1em;}
+		.menu-items .item a:hover {text-decoration:underline;}
+		.menu-items .item .on {padding:0 0 0 1em;}
 	</style>
 	#INSERT_HEAD
 </head>
+
+#SET{service, #ENV{service, weather}}
+#SET{mode, #ENV{mode, conditions}}
+#SET{jeu, #ARRAY{
+			'weather', 'FRXX0076',
+			'owm', 'Paris,Fr',
+			'wwo', 'Paris,France',
+			'wunderground', 'Paris,France',
+			'yahoo', '615702'}}
+#SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
+
 <body>
 	<div id="container">
 	<div id="header">
 		<h1>
 			<img height="48" width="48" title="Plugin Rainette" alt="Plugin Rainette" src="#CHEMIN{rainette-64.png}"/>
-			PLUGIN RAINETTE[ ((#PLUGIN{RAINETTE, version}))] - [Service (#ENV{service, weather})]
+			PLUGIN RAINETTE[ ((#PLUGIN{RAINETTE, version}))]
 		</h1>
 	</div>
 	<div id="wrapper">
 		<div id="content">
-			#SET{jeu, #ARRAY{
-						'weather', 'FRXX0076',
-						'owm', 'Paris,Fr',
-						'wwo', 'Paris,France',
-						'wunderground', 'Paris,France',
-						'yahoo', '615702'}}
-			#SET{service, #ENV{service, weather}}
-			#SET{lieu, #ENV{ville, #GET{jeu/#GET{service}}}}
-
-			<h2>UTILISATIONS DES INFORMATIONS METEO</h2>
+			<h2 class="h2">1.1 - UTILISATIONS DES INFORMATIONS METEO</h2>
 			<a name="infos" href="#"></a>
 			<div class="clearfix">
 				<div class="clearfix">
@@ -76,13 +90,13 @@
 						<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{#GET{lieu}, VILLE}</strong></li>
 						<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, longitude, #GET{service}})</strong>]</li>
 						<li>Latitude, appel avec filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, latitude, #GET{service}}|rainette_afficher_unite{angle})</strong>]</li>
-						<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#ENV{ville, FRXX0076, '', #GET{service}}})</strong>]</li>
+						<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, '', #GET{service}})</strong>]</li>
 						<li>Appel sans argument, on renvoie une chaine vide:&nbsp;[<strong>(#RAINETTE_INFOS)</strong>]</li>
 					</ul>
 				</div>
 			</div>
 
-			<h2>UTILISATIONS DES CONDITIONS METEO</h2>
+			<h2 class="h2">1.2 - UTILISATIONS DES CONDITIONS METEO</h2>
 			<a name="conditions" href="#"></a>
 			<div class="clearfix">
 				<h3>Utilisation du mod&eacute;le <strong>rainette_conditions</strong></h3>
@@ -90,11 +104,11 @@
 			</div>
 
 
-			<h2>UTILISATIONS DES PREVISIONS METEO</h2>
+			<h2 class="h2">1.3 - UTILISATIONS DES PREVISIONS METEO</h2>
 			<a name="previsions" href="#"></a>
 			<div class="clearfix">
 				<div class="clearfix">
-					<h3>&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</h3>
+					<h3>Utilisation du mod&eacute;le <strong>rainette_previsions</strong>, pour les jours &agrave; venir (jour=3, type=x_jours, sous-modele=previsions_24h)</h3>
 					[(#MODELE{rainette_previsions,code=#GET{lieu},type=x_jours,jour=5,sous_modele=previsions_24h, service=#GET{service}})]
 				</div>
 				<div class="clearfix">
@@ -108,13 +122,21 @@
 				</div>
 			</div>
 
-			<h2>COMPARAISON DES DONNEES DE CHAQUE SERVICE</h2>
+			<h2 class="h2">2.0 - COMPARAISON DES DONNEES DE CHAQUE SERVICE</h2>
 			<a name="comparaison" href="#"></a>
+			<p>
+				L&eacute;gende du tableau :
+				<ul>
+					<li><strong><del>API</del></strong>&nbsp;: indique que la donnée ne fait pas partie des informations fournies par le service</li>
+					<li><strong>Indisponible</strong>&nbsp;: indique que la donnée est fournie par le service mais indisponible pour le moment</li>
+				</ul>
+			</p>
 			<div class="clearfix">
-				#SET{donnees, #VAL{conditions}|rainette_debug_comparer{#GET{jeu}}}
+				#SET{donnees, #GET{mode}|rainette_dbg_comparer_services{#GET{jeu}}}
 				#INCLURE{fond=demo/inc-comparer_services,
 					jeu=#GET{jeu},
-					donnees=#GET{donnees}}
+					donnees=#GET{donnees},
+					mode=#GET{mode}}
 			</div>
 		</div>
 	</div>
@@ -124,7 +146,35 @@
 	</div>
 
 	<div id="extra">
-	<p><strong>3) More stuff here.</strong> very text make long column make filler fill make column column silly filler text silly column fill silly fill column text filler make text silly filler make filler very silly make text very very text make long filler very make column make silly column fill silly column long make silly filler column filler silly long long column fill silly column very </p>
+		<div class="menu" id="services">
+			<h2 class="h2">M&eacute;t&eacute;o d'un service</h2>
+			<p>Choisissez un service pour afficher les mod&egrave;les informations, conditions et pr&eacute;visions (1.1, 1.2, 1.3)</p>
+			<ul class="menu-items">
+			<BOUCLE_services(DATA) {source table, #GET{jeu}}>
+				[<li class="item">
+				(#SELF|parametre_url{service, #CLE}
+					|lien_ou_expose{
+						[(#VAL{rainette:titre_service_}|concat{#CLE}|_T)],
+						[(#GET{service}|=={#CLE})]})
+				</li>]
+			</BOUCLE_services>
+			</ul>
+		</div>
+
+		<div class="menu" id="modes">
+			<h2 class="h2">Comparaison des services</h2>
+			<p>Choisissez un mode pour comparer les données fournies par chaque service (2.0)</p>
+			<ul class="menu-items">
+			<BOUCLE_modes(DATA) {source table, #LISTE{infos, conditions, previsions}}>
+				[<li class="item">
+				(#SELF|parametre_url{mode, #VALEUR}
+					|lien_ou_expose{
+						[(#VALEUR|ucfirst)],
+						[(#GET{mode}|=={#VALEUR})]})
+				</li>]
+			</BOUCLE_modes>
+			</ul>
+		</div>
 	</div>
 
 	<div id="footer">

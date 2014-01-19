@@ -30,6 +30,21 @@ function yahoo_service2url($lieu, $mode) {
 }
 
 
+/**
+ * Renvoie le système d'unité utilisé pour acquérir les données du service
+ *
+ * @return string
+ */
+function yahoo_service2unite() {
+	include_spip('inc/config');
+
+	// Identification du système d'unité
+	$unite = lire_config('rainette/yahoo/unite', 'm');
+
+	return $unite;
+}
+
+
 function yahoo_service2reload_time($mode) {
 
 	static $reload = array('conditions' => 3600, 'previsions' => 7200);
@@ -166,8 +181,6 @@ function yahoo_flux2conditions($flux, $lieu) {
 		// --- icone et resume sont les données utilisées par les modèles v2
 		$tableau['icone'] = $tableau['code_meteo'];
 		$tableau['resume'] = $tableau['code_meteo'];
-		// --- code_icone pour la compatibilité ascendante des modèles créés par les utilisateurs
-		$tableau['code_icone'] = $tableau['code_meteo'];
 		// --- La période jour/nuit n'est pas supportée par ce service car il n'y a pas de jeux d'icônes
 		//     fonction de la période. Mais il est possible de la déterminer suivant l'heure de l'observation
 		//     pour souci de cohérence avec les autres services mais elle ne sera pas utilisée pour l'instant

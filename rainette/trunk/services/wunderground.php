@@ -98,6 +98,21 @@ function wunderground_service2url($lieu, $mode) {
 
 
 /**
+ * Renvoie le système d'unité utilisé pour acquérir les données du service
+ *
+ * @return string
+ */
+function wunderground_service2unite() {
+	include_spip('inc/config');
+
+	// Identification du système d'unité
+	$unite = lire_config('rainette/wunderground/unite', 'm');
+
+	return $unite;
+}
+
+
+/**
  * @param $mode
  * @return mixed
  */

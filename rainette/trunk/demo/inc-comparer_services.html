@@ -20,12 +20,12 @@
 	<tbody>
 <BOUCLE_comparer(DATA) {source table, #ENV{donnees}}>
 	<tr>
-		<td>#CLE</td>
+		<td><strong>#CLE</strong></td>
 		<BOUCLE_valeur(DATA) {source table, #ENV{jeu}}>
-			<td>
-				[(#_comparer:VALEUR|table_valeur{#CLE})]
-				[<br />
-				(#_comparer:VALEUR|table_valeur{#CLE}|gettype)]
+			<td[ class="(#_comparer:VALEUR|table_valeur{#CLE/erreur})"]>
+				[(#_comparer:CLE|rainette_dbg_afficher_donnee{
+					#_comparer:VALEUR|table_valeur{#CLE/valeur},
+					#_comparer:VALEUR|table_valeur{#CLE/type}})]
 			</td>
 		</BOUCLE_valeur>
 	</tr>

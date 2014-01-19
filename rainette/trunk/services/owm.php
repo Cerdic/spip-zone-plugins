@@ -89,6 +89,21 @@ function owm_service2url($lieu, $mode) {
 
 
 /**
+ * Renvoie le système d'unité utilisé pour acquérir les données du service
+ *
+ * @return string
+ */
+function owm_service2unite() {
+	include_spip('inc/config');
+
+	// Identification du système d'unité
+	$unite = lire_config('rainette/owm/unite', 'm');
+
+	return $unite;
+}
+
+
+/**
  * @param $mode
  * @return int
  */
@@ -273,6 +288,7 @@ function xml2previsions_owm($flux, $unite) {
 		$maintenant = time();
 
 		if ($previsions) {
+			include_spip('inc/convertir');
 			foreach ($previsions as $_index => $_prevision) {
 				if (isset($_prevision['children'])) {
 					// Index du jour et date du jour
@@ -295,7 +311,6 @@ function xml2previsions_owm($flux, $unite) {
 					$tableau[$_index][0]['direction_vent'] = (isset($_prevision['winddirection'][0]['attributes'])) ? $_prevision['winddirection'][0]['attributes']['code'] : '';
 
 					$tableau[$_index][0]['risque_precipitation'] = NULL;
-					include_spip('inc/convertir');
 					// -- OWM utilise la balise precipitation pour le la pluie ou la neige. Il faut donc tester le type pour ne sélectionner
 					//    que la pluie.
 					$tableau[$_index][0]['precipitation'] =
@@ -326,6 +341,7 @@ function xml2conditions_owm($flux) {
 	$tableau = array();
 
 	if (isset($flux['children'])) {
+		include_spip('inc/convertir');
 		$conditions = $flux['children'];
 
 		// Date d'observation
@@ -447,6 +463,7 @@ function json2conditions_owm($flux) {
 	$tableau = array();
 
 	if ($flux) {
+		include_spip('inc/convertir');
 		$conditions = $flux;
 
 		// Date d'observation
