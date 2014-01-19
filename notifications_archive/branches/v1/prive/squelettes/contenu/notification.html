@@ -1,0 +1,30 @@
+[(#AUTORISER{voir,notification,#ID_NOTIFICATION}|sinon_interdire_acces)]
+<BOUCLE_notification(NOTIFICATIONS){id_notification}{si #ENV{exec}|=={notification}}>
+[(#BOITE_OUVRIR{[
+
+
+	<h1>[(#RANG). ](#SUJET|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{notification-24.png}|balise_img{notification,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{notification,#ID_NOTIFICATION}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/notification,id=#ID_NOTIFICATION,id_notification=#ID_NOTIFICATION,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,notification,id,#ID_NOTIFICATION},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_notification>
