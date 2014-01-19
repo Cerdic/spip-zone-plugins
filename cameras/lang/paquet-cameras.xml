@@ -1,6 +1,6 @@
-<traduction module="paquet-cameras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/cameras/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-cameras?lang_cible=en" total="3" traduits="1" relire="0" modifs="0" nouveaux="2" pourcent="33.33">
+<traduction module="paquet-cameras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/cameras/lang/" reference="en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-cameras?lang_cible=en" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-cameras?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-cameras?lang_cible=fr" total="1" traduits="1" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>

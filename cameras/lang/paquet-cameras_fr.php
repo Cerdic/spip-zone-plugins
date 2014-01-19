@@ -1,14 +1,14 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/cameras/lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/paquet-cameras?lang_cible=fr
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cameras_description' => 'Ce plugin permet de géolocaliser des caméras de vidéosurveillances.',
-	'cameras_nom' => 'Caméras',
-	'cameras_slogan' => 'Plugin de géomarquage des caméras'
+	'cameras_nom' => 'Caméras'
 );
 
 ?>
