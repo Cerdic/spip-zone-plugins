@@ -2,7 +2,7 @@
 /**
  * Crayons 
  * plugin for spip 
- * (c) Fil, toggg 2006-2013
+ * (c) Fil, toggg 2006-2014
  * licence GPL
  *
  * @package SPIP\Crayons\Fonctions
@@ -32,7 +32,8 @@ function Crayons_insert_head($head) {
 	}
 
 	// verifie que l'edition de l'espace prive est autorisee
-	if ($config_espace_prive['espaceprive'] == 'on') {
+	if (isset($config_espace_prive['espaceprive'])
+	AND $config_espace_prive['espaceprive'] == 'on') {
 		// determine les pages (exec) crayonnables
 		if (($config_espace_prive['exec_autorise'] == '*') ||
 			in_array(_request('exec'),explode(',',$config_espace_prive['exec_autorise']))) {
