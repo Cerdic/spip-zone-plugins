@@ -16,6 +16,7 @@
 
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+    <pipeline nom="autoriser" inclure="fusion_spip_autoriser.php" />
     <pipeline nom="declarer_tables_principales" inclure="base/fusion_spip_tables.php" />
 
     <menu nom="fusion_spip" titre="fusion_spip:titre_fusion_spip" parent="menu_administration" icone="images/fusion_spip-16.png" />
