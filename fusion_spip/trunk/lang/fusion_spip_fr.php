@@ -7,8 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'base' => 'Site source',
-	'base_desc' => '<p>La base de données du site source doit être <a href="'.generer_url_ecrire('admin_tech').'">déclarée comme base externe</a>.</p>
-		<p>La base du site source doit être dans la même version que celle du site hôte ($spip_version_base)</p>',
+	'base_desc' => 'La base de données du site source doit être <a href="'.generer_url_ecrire('admin_tech').'">déclarée comme base externe</a>.<br/>
+	La base du site source doit être dans la même version que celle du site hôte',
 	'bouton_importer' => 'Démarrer la fusion',
 	'bouton_supprimer' => 'Supprimer la fusion',
 
@@ -22,25 +22,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// H
 
 	// E
-	'explications' => '
-		<p><strong>Plugin expérimental, en cours de développement !</strong></p>
-		<p>La fusion de bases de données peut consommer beaucoup de ressources CPU et être longue si la base source est volumineuse, à déconseiller sur un hébergement mutualisé. </p>',
-	'explications_suppression' => 'Fonctionnalité à terminer',
 	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version de base de données :
-		<br/>- hôte est en v @vhote@
-		<br/>- source est en v @vsource@',
+		<br/>- hôte est en version @vhote@
+		<br/>- source est en version @vsource@',
 	'erreur_versions_impossible' => 'Impossible de vérifier la version de la base de données importée (table spip_meta)',
 
 	// I
 	'img_dir' => 'Chemin physique des documents',
-	'img_dir_desc' => 'Pour copier les documents du site source dans le site hôte, indiquez leur chemin physique, par exemple :<pre>/var/www/site_spip/IMG</pre>Si le champ est vide, aucun document ne sera importé, vous devrez les copier manuellemnent.',
+	'img_dir_desc' => 'Pour copier les documents du site source dans le site hôte, indiquez leur chemin physique (chemin absolu sur le disque dur). Si le champ est vide, aucun document ne sera importé, vous devrez les copier manuellemnent.',
 
 	// M
 	'maj_base' => 'Mise à jour de la base de données',
 	'manque_champs_source' => 'Les champs "@diff@" manquent dans la table "@table@" de la base source',
 	'manque_table_source' => 'La table "@table@" est absente dans la base source',
-	'message_import_ok' => 'Import terminé',
-	'message_import_nok' => 'Erreur lors de l\'import',
+	'message_import_ok' => 'Fusion terminée',
+	'message_import_nok' => 'Erreur lors de la fusion',
 	'message_img_dir_nok' => 'Merci de préciser le chemin',
 	'message_suppression_ok' => 'Objets supprimés',
 

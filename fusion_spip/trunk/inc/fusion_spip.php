@@ -3,6 +3,8 @@
 /**
  * Définition des tables principales à importer
  *
+ * @param string $connect nom du connecteur
+ * @param boolean $skip_non_existing ignorer les tables manquantes
  * @return array liste des tables
  */
 function fusion_spip_lister_tables_principales($connect, $skip_non_existing = false) {
@@ -34,6 +36,8 @@ function fusion_spip_lister_tables_principales($connect, $skip_non_existing = fa
 /**
  * Définition des tables auxiliaires à importer
  *
+ * @param string $connect nom du connecteur
+ * @param boolean $skip_non_existing ignorer les tables manquantes
  * @param boolean $stats importer les tables visites
  * @param boolean $referers importer les tables referers
  * @param boolean $versions importer les versions
@@ -99,7 +103,9 @@ function fusion_spip_lister_cles_primaires($tables) {
  *
  * Ne compare que la présence des tables et des champs, pas le type de champs
  *
- * @param integer $base identifiant de la connection
+ * @param string $connect nom du connecteur
+ * @param array $principales liste des tables principales
+ * @param array $auxiliaires liste des tables auxiliaires
  * @return array liste des erreurs
  */
 function fusion_spip_comparer_shemas($connect, $principales, $auxiliaires) {
@@ -124,7 +130,7 @@ function fusion_spip_comparer_shemas($connect, $principales, $auxiliaires) {
  * Importer une table principale
  *
  * @param string $nom_table nom de la table
- * @param string $shema shema de la table
+ * @param array $shema shema de la table
  * @param int $secteur id du secteur dans lequel importer
  * @param string $connect nom du connecteur
  */
@@ -371,8 +377,6 @@ function fusion_spip_mettre_a_jour_liaisons($table, $objet, $cle_primaire, $obje
  * @param string $table
  * @param string $objet
  * @param string $cle_primaire
- * @param string $objet_liaison
- * @param string $cle_liaison
  * @param string $connect
  */
 function fusion_spip_mettre_a_jour_liaisons_par_objet($table, $objet, $cle_primaire, $connect) {
@@ -734,6 +738,5 @@ function fusion_spip_determiner_champs_texte($tables) {
 }
 
 function fusion_spip_log($message, $fichier){
-	//@todo: trouver un moyen de faire une sortie au fur et à mesure (avec ob_flush(); flush(); x2)
 	spip_log($message, 'fusion_spip_'.$fichier);
 }

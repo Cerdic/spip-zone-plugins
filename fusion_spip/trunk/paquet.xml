@@ -2,20 +2,22 @@
 	prefix="fusion_spip"
 	categorie="maintenance"
 	version="0.1.1"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/base-add-24.png"
+	logo="prive/themes/spip/images/fusion_spip-32.png"
 	schema="1.0.0"
 >	
 
-	<nom>Fusion de sites Spip</nom>
+	<nom>Fusion de sites SPIP</nom>
+    <!-- Importer et fusionner tout le contenu d'un autre site -->
 	
-	<auteur mail="mailto:nicolas.dorigny@gmail.com">nicod_</auteur>
+	<auteur>nicod_</auteur>
+    <auteur lien="http://dataetic.fr">Dataetic</auteur>
 
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
     <pipeline nom="declarer_tables_principales" inclure="base/fusion_spip_tables.php" />
 
-    <menu nom="fusion_spip" titre="fusion_spip:titre_fusion_spip" parent="menu_administration" icone="images/base-add-16.png" />
+    <menu nom="fusion_spip" titre="fusion_spip:titre_fusion_spip" parent="menu_administration" icone="images/fusion_spip-16.png" />
 
 </paquet>
