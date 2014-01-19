@@ -43,12 +43,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 
 	// R
-	'referers' => 'Traiter les tables de referers (liens entrants)',
+	'referers' => 'Ne pas traiter les referers (liens entrants)',
 
 	// S
 	'secteur' => 'Secteur',
 	'secteur_desc' => 'Pour importer le site source dans un secteur, sinon il sera importé à la racine',
-	'stats' => 'Traiter les tables de statistiques',
+	'stats' => 'Ne pas traiter les statistiques',
 
 	// T
 	'titre_fusion_spip' => 'Fusion de sites Spip',

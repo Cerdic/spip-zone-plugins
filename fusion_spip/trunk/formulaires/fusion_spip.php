@@ -45,8 +45,8 @@ function formulaires_fusion_spip_verifier_dist() {
 		$erreurs['base'] = _T('info_obligatoire');
 	}
 	else {
-		$traite_stats = (_request('stats') == 'on' ? true : false);
-		$traite_referers = (_request('referers') == 'on' ? true : false);
+		$traite_stats = (_request('stats') != 'on' ? true : false);
+		$traite_referers = (_request('referers') != 'on' ? true : false);
 
 		$bases = bases_referencees(_FILE_CONNECT_TMP);
 		$connect = $bases[$base];
@@ -89,8 +89,8 @@ function formulaires_fusion_spip_traiter_dist() {
 	$base = _request('base');
 	$img_dir = _request('img_dir');
 	$secteur = _request('secteur');
-	$traite_stats = (_request('stats') == 'on' ? true : false);
-	$traite_referers = (_request('referers') == 'on' ? true : false);
+	$traite_stats = (_request('stats') != 'on' ? true : false);
+	$traite_referers = (_request('referers') != 'on' ? true : false);
 
 	$bases = bases_referencees(_FILE_CONNECT_TMP);
 	$connect = $bases[$base];
