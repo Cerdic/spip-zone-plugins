@@ -40,7 +40,7 @@ function genie_twitter_dist($last) {
 		include_spip('inc/twitter');
 		while($row = sql_fetch($res)){
 			$status = twitter_annonce('instituerarticle',array('id_article'=>$row['id_article']));
-			envoyer_tweet($status,array('objet'=>'article','id_objet'=>$row['id_article']));
+			twitter_envoyer_tweet($status,array('objet'=>'article','id_objet'=>$row['id_article']));
 		}
 		// raz des annonces deja faites
 		include_spip('inc/meta');
