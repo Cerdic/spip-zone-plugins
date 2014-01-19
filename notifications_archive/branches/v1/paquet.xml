@@ -1,0 +1,30 @@
+<paquet
+	prefix="notifications_archive"
+	categorie="communication"
+	version="1.1.0"
+	etat="dev"
+	compatibilite="[3.0.13;3.0.*]"
+	logo="prive/themes/spip/images/notifications_archive-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+
+	<nom>Archive notifications</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="notifications_archive_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/notifications_archive.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/notifications_archive.php" /> 
+	
+	<pipeline nom="taches_generales_cron" inclure="notifications_archive_pipelines.php" /> 	
+
+	<menu nom="notifications" titre="notification:titre_notifications" parent="menu_activite" icone="images/notification-16.png" action="notifications" /> 
+</paquet>
