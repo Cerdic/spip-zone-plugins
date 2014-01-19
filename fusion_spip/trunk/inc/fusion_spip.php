@@ -40,11 +40,10 @@ function fusion_spip_lister_tables_principales($connect, $skip_non_existing = fa
  * @param boolean $skip_non_existing ignorer les tables manquantes
  * @param boolean $stats importer les tables visites
  * @param boolean $referers importer les tables referers
- * @param boolean $versions importer les versions
  *
  * @return array liste des tables
  */
-function fusion_spip_lister_tables_auxiliaires($connect, $skip_non_existing = false, $stats = false, $referers = false, $versions = false) {
+function fusion_spip_lister_tables_auxiliaires($connect, $skip_non_existing = false, $stats = false, $referers = false) {
 
 	// @todo : lire les descriptions des tables sources plutot que locales ?
 	// comment dissocier principales/auxiliares/jointures de la base source ?
@@ -63,10 +62,6 @@ function fusion_spip_lister_tables_auxiliaires($connect, $skip_non_existing = fa
 	if (!$referers) {
 		unset($tables['spip_referers']);
 		unset($tables['spip_referers_articles']);
-	}
-	if (!$versions) {
-		unset($tables['spip_versions']);
-		unset($tables['spip_versions_fragments']);
 	}
 
 	// zapper les tables de l'hote qui ne sont pas dans la base importée

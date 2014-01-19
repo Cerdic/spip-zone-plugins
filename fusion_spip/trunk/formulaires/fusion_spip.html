@@ -59,12 +59,6 @@
 				<input type="checkbox" name="referers" id="referers" [(#ENV{referers}|=={on}|oui) checked="checked" ] />
 				<label for="referers"><:fusion_spip:referers:></label>
 			</li>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{versions}}
-			<li class="editer_versions [ (#GET{erreurs}|oui)erreur]">
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<input type="checkbox" name="versions" id="versions" [(#ENV{versions}|=={on}|oui) checked="checked" ] />
-				<label for="referers"><:fusion_spip:versions:></label>
-			</li>
 		</ul>
 
 		<p class='boutons'>

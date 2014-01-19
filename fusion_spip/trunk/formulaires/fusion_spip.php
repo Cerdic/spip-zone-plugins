@@ -47,13 +47,12 @@ function formulaires_fusion_spip_verifier_dist() {
 	else {
 		$traite_stats = (_request('stats') == 'on' ? true : false);
 		$traite_referers = (_request('referers') == 'on' ? true : false);
-		$traite_versions = (_request('versions') == 'on' ? true : false);
 
 		$bases = bases_referencees(_FILE_CONNECT_TMP);
 		$connect = $bases[$base];
 
 		$principales = fusion_spip_lister_tables_principales($connect, false);
-		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers, $traite_versions);
+		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, false, $traite_stats, $traite_referers);
 
 		// vérifier la version de la base source
 		if(!sql_showtable('spip_meta', false, $connect)){
@@ -84,15 +83,14 @@ function formulaires_fusion_spip_verifier_dist() {
 function formulaires_fusion_spip_traiter_dist() {
 	$erreurs = array();
 
-	// @todo: afficher une alerte sur formulaire_charger si max_execution_time ne peut pas être modifié
-	ini_set('max_execution_time', 0);
+	// préventif
+	@ini_set('max_execution_time', 0);
 
 	$base = _request('base');
 	$img_dir = _request('img_dir');
 	$secteur = _request('secteur');
 	$traite_stats = (_request('stats') == 'on' ? true : false);
 	$traite_referers = (_request('referers') == 'on' ? true : false);
-	$traite_versions = (_request('versions') == 'on' ? true : false);
 
 	$bases = bases_referencees(_FILE_CONNECT_TMP);
 	$connect = $bases[$base];
@@ -122,7 +120,7 @@ function formulaires_fusion_spip_traiter_dist() {
 		fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
 
 		$principales = fusion_spip_lister_tables_principales($connect, true);
-		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, true, $traite_stats, $traite_referers, $traite_versions);
+		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, true, $traite_stats, $traite_referers);
 		$cles_primaires = fusion_spip_lister_cles_primaires($principales);
 
 		// insérer les objets principaux
