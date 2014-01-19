@@ -100,39 +100,37 @@ function rainette_dbg_afficher_cache($lieu, $mode='previsions', $service='weathe
 function rainette_dbg_comparer_services($mode='conditions', $jeu=array()) {
 	$debug = array();
 
-	if (_RAINETTE_DEBUG) {
-		if (!$mode)
-			$mode = 'conditions';
+	if (!$mode)
+		$mode = 'conditions';
 
-		$donnees = constant('_RAINETTE_DONNEES_' . strtoupper($mode));
-		$donnees = explode(':', $donnees);
+	$donnees = constant('_RAINETTE_DONNEES_' . strtoupper($mode));
+	$donnees = explode(':', $donnees);
 
-		if ($donnees) {
-			if (!$jeu)
-				$jeu = array(
-					'weather' => 'FRXX0076',
-					'owm' => 'Paris,Fr',
-					'wwo' => 'Paris,France',
-					'wunderground' => 'Paris,France',
-					'yahoo' => '615702');
+	if ($donnees) {
+		if (!$jeu)
+			$jeu = array(
+				'weather' => 'FRXX0076',
+				'owm' => 'Paris,Fr',
+				'wwo' => 'Paris,France',
+				'wunderground' => 'Paris,France',
+				'yahoo' => '615702');
 
-			// Recuperation du tableau des conditions courantes
-			foreach($jeu as $_service => $_lieu) {
-				$charger = charger_fonction('charger_meteo', 'inc');
-				$nom_fichier = $charger($_lieu, $mode, $_service);
-				if ($nom_fichier) {
-					lire_fichier($nom_fichier,$tableau);
-					$tableau = unserialize($tableau);
-					if ($tableau) {
-						foreach($tableau as $_donnee => $_valeur) {
-							$debug[$_donnee][$_service]['valeur'] = $tableau[$_donnee];
-							$type = gettype($tableau[$_donnee]);
-							$debug[$_donnee][$_service]['type'] = $type;
-							if ($_donnee != 'erreur')
-								$debug[$_donnee][$_service]['erreur'] = ($type === 'NULL') ? 'nonapi' : ($tableau[$_donnee] === '' ? 'erreur' : '');
-							else
-								$debug[$_donnee][$_service]['erreur'] = $tableau[$_donnee] ? 'erreur' : '';
-						}
+		// Recuperation du tableau des conditions courantes
+		foreach($jeu as $_service => $_lieu) {
+			$charger = charger_fonction('charger_meteo', 'inc');
+			$nom_fichier = $charger($_lieu, $mode, $_service);
+			if ($nom_fichier) {
+				lire_fichier($nom_fichier,$tableau);
+				$tableau = unserialize($tableau);
+				if ($tableau) {
+					foreach($tableau as $_donnee => $_valeur) {
+						$debug[$_donnee][$_service]['valeur'] = $_valeur;
+						$type = gettype($tableau[$_donnee]);
+						$debug[$_donnee][$_service]['type'] = $type;
+						if ($_donnee != 'erreur')
+							$debug[$_donnee][$_service]['erreur'] = ($type === 'NULL') ? 'nonapi' : ($_valeur === '' ? 'erreur' : '');
+						else
+							$debug[$_donnee][$_service]['erreur'] = $_valeur ? 'erreur' : '';
 					}
 				}
 			}
