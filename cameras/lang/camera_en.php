@@ -1,8 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.net/tradlang_module/camera?lang_cible=en
-// ** ne pas modifier le fichier **
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/cameras/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -52,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_non' => 'No',
 	'label_non_renseigne' => 'No data entered',
 	'label_non_renseignee' => 'No data entered',
-	'label_nord' => 'from north', # RELIRE
+	'label_nord' => 'from north',
 	'label_op_choisir_type' => 'Public or private ?',
 	'label_op_name' => 'Operator name',
 	'label_op_type' => 'Operator type',
@@ -60,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_op_type_public' => 'Public',
 	'label_orientable' => 'Orientable',
 	'label_oui' => 'Yes',
-	'label_sol' => 'from the ground', # RELIRE
+	'label_sol' => 'from the ground',
 	'label_surveillance' => 'Surveillance',
 	'label_surveillance_choisir_type' => 'Which surveillance type ?',
 	'label_surveillance_type_banque' => 'Bank',
