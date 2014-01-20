@@ -1,0 +1,45 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{nouveau}'>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+        <li class="editer">
+			<div class="choix">
+            	<label for="ua_code">Code de suivi (eg : UA-xxxxx)</label>
+				<input type="text" name="ua_code" class="text" id="ua_code" size="60" value="#ENV*{ua_code}" />
+			</div>
+		</li>
+		<li class="editer">
+			<div class="choix">
+				<input type="checkbox" name="subdomain" class="checkbox" id="subdomain_on" value="oui" [(#ENV{subdomain}|=={oui}) checked="checked"]	/>
+				<label for='subdomain_on'>Sous domaines ?</label>
+			</div>
+		</li>		
+		<li class="editer">
+			<div class="choix">
+				<input type="checkbox" name="many_domains" class="checkbox" id="many_domains_on" value="oui" [(#ENV{many_domains}|=={oui}) checked="checked"]	/>
+				<label for='many_domains_on'>Plusieurs domaines de premier niveau ?</label>
+			</div>
+		</li>		
+		<li class="editer">
+			<div class="choix">
+				<input type="checkbox" name="display" class="checkbox" id="display_on" value="oui" [(#ENV{display}|=={oui}) checked="checked"]	/>
+				<label for='display_on'>Assistance pour les annonceurs du Réseau Display ?</label>
+			</div>
+		</li>	
+        <li class="editer">
+			<div class="choix">
+				<input type="checkbox" name="campaign" class="checkbox" id="campaign_on" value="oui" [(#ENV{campaign}|=={oui}) checked="checked"]	/>
+				<label for='campaign_on'>Balises de campagnes personnalisées ?</label>
+			</div>
+		</li>	
+	</ul>
+	<p class="boutons">
+		<input type="submit" name="enregistrer" class="over" value="Enregistrer" />
+		<input type="submit" name="reinit" class="submit" value="Réinitialiser" />
+		<input type="submit" name="enregistrer" class="submit" value="Enregistrer" />
+	</p>
+</div></form>
+</div>
