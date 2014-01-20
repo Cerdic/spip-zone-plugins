@@ -146,7 +146,7 @@ function skeleditor_affichage_final($texte){
 			foreach($css as $src){
 				// si c'est un skel, le trouver
 				if (is_array($src))
-					$src = find_in_path($src."."._EXTENSION_SQUELETTES);
+					$src = find_in_path($src[0]."."._EXTENSION_SQUELETTES);
 				if ($src)
 					$lienplus[] = "<a href='$url".urlencode($src)."'"
 			.">".basename($src)."<\/a>";
