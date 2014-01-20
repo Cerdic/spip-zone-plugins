@@ -44,7 +44,7 @@ function skeleditor_afficher_dir_skel($path_base,$current_file) {
 			$icon = "image";
 
 		include_spip('inc/filtres_images_mini');
-		$cadenas = ($readonly) ? "&nbsp;".inserer_attribut(image_reduire(chemin_image('cadenas-16.png'),12),title,attribut_html(_T('texte_inc_meta_2'))) : "";
+		$cadenas = ($readonly) ? "&nbsp;".inserer_attribut(image_reduire(chemin_image('cadenas-16.png'),12),'title',attribut_html(_T('texte_inc_meta_2'))) : "";
 
 		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($f=$path_base.$file))."' class='$class'
 			onclick=\"jQuery('#contenu > :first').ajaxReload({history:true,args:{f:'$f'}});return false;\">"

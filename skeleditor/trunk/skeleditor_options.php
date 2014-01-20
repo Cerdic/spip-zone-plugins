@@ -44,7 +44,7 @@ function skeleditor_insert_head_css($flux){
 			$flux .= $css; 
 		}
 	}
-return $flux;
+	return $flux;
 }
  
 /**
