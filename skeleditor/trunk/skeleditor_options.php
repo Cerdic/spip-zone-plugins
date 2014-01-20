@@ -137,7 +137,7 @@ function skeleditor_affichage_final($texte){
 				jQuery(this).html(\"<a class='sepopin' href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'<'+'/a>');
 			});"
 			//."jQuery('a.sepopin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,'var_zajax','contenu'));return false;});"
-			."});</script><style>.spip-admin-boutons {display:block;float:left;margin-right:10px;} .spip-admin-boutons a{display:block;opacity:0.7;} .spip-admin-boutons:hover,.spip-admin-boutons a:hover {opacity:1.0;}</style>
+			."});</script><style>.spip-admin-boutons {display:block;float:left;margin-right:10px; max-height:300px; overflow:auto;} .spip-admin-boutons a{display:block;opacity:0.7;} .spip-admin-boutons:hover,.spip-admin-boutons a:hover {opacity:1.0;}</style>
 			</body>";
 			$texte = preg_replace(",</body>,",$inserer,$texte);
 			
