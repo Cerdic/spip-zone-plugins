@@ -130,9 +130,9 @@ function skeleditor_affichage_final($texte){
 	  AND include_spip("inc/autoriser")
 	  AND autoriser("skeleditor")
 	){
-		if ((defined('_VAR_INCLURE') AND _VAR_INCLURE) OR $GLOBALS['var_inclure']){
+		if ((defined('_VAR_INCLURE') AND _VAR_INCLURE) OR (isset($GLOBALS['var_inclure']) and $GLOBALS['var_inclure']) ){
 			$retour = self();
-			$url = generer_url_ecrire('skeleditor','retour='.$retour.'&f=');			
+			$url = generer_url_ecrire('skeleditor','retour='.$retour.'&f=');
 			$inserer = "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
 				jQuery(this).html(\"<a class='sepopin' href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'<'+'/a>');
 			});"
