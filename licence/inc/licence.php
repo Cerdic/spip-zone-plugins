@@ -10,9 +10,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-if (!defined('MES_LICENCES')) define('MES_LICENCES', array());
-
-$GLOBALS['licence_licences'] = array_merge(array (
+$GLOBALS['licence_licences'] = array (
 		"1" => array(
 				"name"		=> _T('licence:titre_copyright'), // nom de la licence
 				"id"		=> "1", // numero d'identifiacation de la licence
@@ -104,6 +102,6 @@ $GLOBALS['licence_licences'] = array_merge(array (
 				"link"		=> "",
 				"description" => _T('licence:description_autre'),
 				"abbr"		=> "???"),
-), MES_LICENCES);
+);
 
 ?>
