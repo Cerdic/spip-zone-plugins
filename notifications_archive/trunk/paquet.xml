@@ -2,7 +2,7 @@
 	prefix="notifications_archive"
 	categorie="communication"
 	version="1.1.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.13;3.0.*]"
 	logo="prive/themes/spip/images/notifications_archive-64.png"
 	documentation=""
