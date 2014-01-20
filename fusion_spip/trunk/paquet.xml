@@ -1,11 +1,12 @@
 <paquet
 	prefix="fusion_spip"
 	categorie="maintenance"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/fusion_spip-32.png"
 	schema="1.0.0"
+    documentation="http://contrib.spip.net/Fusion-de-SPIP"
 >	
 
 	<nom>Fusion de sites SPIP</nom>
