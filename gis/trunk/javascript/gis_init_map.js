@@ -249,6 +249,15 @@ gis_init_map = function(mapcfg) {
 			map.addLayer(map.gpx[i]);
 		}
 	}
+	if (mapcfg['geojson'] && mapcfg['geojson'].length){
+		for(var i in mapcfg['geojson']){
+			jQuery.getJSON(mapcfg['geojson'][i], function(data){
+				if (data){
+					map.parseGeoJson(data);
+				}
+			});
+		}
+	}
 
 	if (mapcfg['localize_visitor']) {
 		var maxZoom = mapcfg['localize_visitor_zoom'];

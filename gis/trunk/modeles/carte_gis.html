@@ -121,7 +121,8 @@ map_cfg["[(#GET{id})]"] = {
 "localize_visitor_zoom":[(#ENV{localize_visitor_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})],
 "centrer_fichier":[(#ENV{centrer_fichier,oui}|=={oui}|?{true,false})],
 "kml":[(#ENV{kml,''}|?{[(#ENV{kml}|is_array|?{#ENV{kml},#LISTE{#ENV{kml}}}|gis_kml_to_urls|json_encode)],false})],
-"gpx":[(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})]
+"gpx":[(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})],
+"geojson":[(#ENV{geojson,''}|?{[(#ENV{geojson}|is_array|?{#ENV{geojson},#LISTE{#ENV{geojson}}}|gis_kml_to_urls|json_encode)],false})]
 };
 
 // Charger le javascript de GIS et initialiser la carte (des que DOM ready)
