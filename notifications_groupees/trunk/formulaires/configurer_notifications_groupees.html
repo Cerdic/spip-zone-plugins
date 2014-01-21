@@ -1,0 +1,62 @@
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+			    	<legend><:notifications_groupees:evenements:></legend>
+						<li class="editer editer_notifications_groupees_evenements">
+							<div class="choix">
+								<input type="checkbox" name="notifications_groupees_evenements[]" value="forum"[(#ENV**{notifications_groupees_evenements,'0'}|table_valeur{0}|=={'forum'}|oui) checked="checked"] id="notifications_groupees_forum" class="checkbox" />
+								<label for="notifications_groupees_forum"><:notifications_groupees:forum_public:></label>
+							</div>
+							<p class="explication"><:notifications_groupees:forum_public_note:></p>
+						</li>
+					</fieldset>
+					<fieldset>
+			    	<legend><:notifications_groupees:destinataires:></legend>
+						<li class="editer editer_notifs_groupees_qui">
+							<label><:notifications_groupees:qui:></label>
+				    		<div class="choix" id="tous">
+				    				<input type="radio" name="notifications_groupees_qui" class="radio" value="1" id="qui_tous"[(#ENV**{notifications_groupees_qui,'1'}|=={1}|oui)checked="checked"]/>
+									<label for="tous"><:notifications_groupees:qui_tous:></label>
+				    		</div>
+				    		<div class="choix" id="aucun">
+				    				<input type="radio" name="notifications_groupees_qui" class="radio" value="0" id="qui_aucun"[(#ENV**{notifications_groupees_qui,'1'}|=={0}|oui)checked="checked"]/>
+									<label for="aucun"><:notifications_groupees:qui_aucun:></label>
+				    		</div>
+				    		<p class="explication"><:notifications_groupees:qui_suivi:></p>
+				    	</li>
+				    </fieldset>
+				    <fieldset>
+				    <legend><:notifications_groupees:delai:></legend>
+						<li class="editer editer_notifications_groupees_periode">
+							<div class="choix" id="notifications_groupees_periode">
+								[<span class='erreur_message'>(#ENV*{message_erreur})</span>]
+								<label for="periode"><:notifications_groupees:delai_toutes_les:></label>
+								<input type="text" size="2" name="notifications_groupees_periode" value="[(#ENV**{notifications_groupees_periode})]" />
+								[ (#ENV**{notifications_groupees_periode}|?{#ENV**{notifications_groupees_periode}|singulier_ou_pluriel{date_une_heure,date_heures},<:date_une_heure:>})]
+								[(#CONFIG{notifications_groupees_derniere}|oui)
+								#SET{quand,#CONFIG{notifications_groupees_derniere}|affdate_heure}
+								<p class="explication"><:notifications_groupees:derniers{quand=#GET{quand}}:></p>
+								]
+							</div>
+				    	</li>
+				    </fieldset>
+				    <fieldset>
+				    <legend><:notifications_groupees:initialisation:></legend>
+				    	<li class="editer editer_notifications_groupees_initialisation">
+				    		<div class="choix">
+							<input type='checkbox' class="checkbox" name='initialiser' value="1" id='notifications_groupees_initialisation' value='' />
+							<label><:notifications_groupees:initialisation_bouton:></label>
+							</div>
+						</li>
+		    		</fieldset>
+		    	</li>
+			</ul>
+			<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+			</p>
+	</div></form>
+</div>

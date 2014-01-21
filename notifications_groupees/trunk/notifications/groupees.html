@@ -1,0 +1,27 @@
+[(#REM)
+
+Mail HTML simplifie mis en forme complete par le filtre |facteur_email_wrap_to_html
+
+
+]
+<BOUCLE_compte_forum(FORUMS){id_forum IN #ENV{id_forum}}{statut IN publie,prop,spam} /><//B_compte_forum>
+
+<title>[[(#NOM_SITE_SPIP|textebrut)]] [<:notifications:notifications:>][[#_compte_forum:TOTAL_BOUCLE (#_compte_forum:TOTAL_BOUCLE|singulier_ou_pluriel{organiseur:message,organiseur:messages})]]</title>
+
+<body>
+	<BOUCLE_modos(FORUMS){id_forum IN #ENV{id_forum}}{statut IN prop,spam} /><div><a href="#URL_ECRIRE{controler_forum,statut=prop}"><:forum:icone_suivi_forums:></a></div><//B_modos>
+	
+	<BOUCLE_forum(FORUMS){id_forum IN #ENV{id_forum}}{statut IN prop,spam,publie}{par statut}{!par date_heure}>
+	<div>
+		#COMPTEUR_BOUCLE[ - (#STATUT|=={'publie'}|?{<a href="[(#URL_FORUM|url_absolue)]">#TITRE</a> - #STATUT,#TITRE - <strong>#STATUT</strong> - #ID_FORUM})]
+		[(#TEXTE|safehtml)]
+	</div>
+	</BOUCLE_forum>
+		[
+		<br />
+		(#CONFIG{notifications/suivi}|oui)
+		[<p><a href="(#ENV{email}|ng_url_suivi)"><:notifications:suivi_texte_acces_page:></a></p>]
+		]
+</body>
+
+#FILTRE{facteur_email_wrap_to_html}
