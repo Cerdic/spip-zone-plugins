@@ -381,8 +381,10 @@ function vignette_revision($id, $data, $type, $ref) {
 function colonne_table($type, $col) {
 	list($distant,$table) = distant_table($type);
 	$nom_table = '';
-	if (!(($tabref = &crayons_get_table($table, $nom_table)) && ($brut = $tabref['field'][$col]))) {
-		return false;
+	if (!(($tabref = &crayons_get_table($table, $nom_table))
+		&& isset($tabref['field'][$col])
+		&& ($brut = $tabref['field'][$col]))) {
+			return false;
 	}
 	$ana = explode(' ', $brut);
 	$sta = 0;
@@ -439,16 +441,48 @@ function colonne_table($type, $col) {
 	}
 	return $ret;
 }
-//	var_dump(colonne_table('forum', 'id_syndic')); die();
+
+
+/**
+ * Obtient le nom de la table ainsi que sa ou ses clés primaires
+ *
+ * @param string $type
+ *     Table sur laquelle s'applique le crayon.
+ *     Ce type peut contenir le nom d'un connecteur distant tel que `{connect}__{table}`
+ *
+ * @return array|bool
+ *     - false si on ne trouve pas de table ou de table ayant de clé primaire
+ *     - liste :
+ *     - - nom de la table sql
+ *     - - tableau des noms de clés primaires
+**/
+function crayons_get_table_name_and_primary($type) {
+	static $types = array();
+	if (isset($types[$type])) {
+		return $types[$type];
+	}
+
+	$nom_table = '';
+	if ($tabref = &crayons_get_table($type, $nom_table)
+	  and ($tabid = explode(',', $tabref['key']['PRIMARY KEY'])))
+	{
+		return $types[$type] = array($nom_table, $tabid);
+	}
+	spip_log('crayons: table ' . $type . ' inconnue');
+	return $types[$type] = false;
+}
+
 
 function table_where($type, $id, $where_en_tableau = false) {
-	list($distant,$table) = distant_table($type);
-	$nom_table = '';
-	if (!(($tabref = &crayons_get_table($type, $nom_table))
-			&& ($tabid = explode(',', $tabref['key']['PRIMARY KEY'])))) {
-		spip_log('crayons: table ' . $table . ' inconnue');
+
+
+	if (!$infos = crayons_get_table_name_and_primary($type)) {
 		return array(false, false);
 	}
+
+	list($nom_table, $tabid) = $infos;
+
+
 	if (is_scalar($id))
 		$id = explode('-', $id);
 	// sortie tableau pour sql_updateq
@@ -459,6 +493,7 @@ function table_where($type, $id, $where_en_tableau = false) {
 		}
 	// sinon sortie texte pour sql_query
 	} else {
+
 		$where = $and = '';
 		foreach ($id as $idcol => $idval) {
 			$where .= $and . '`' . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '`=' . _q($idval);
@@ -470,11 +505,12 @@ function table_where($type, $id, $where_en_tableau = false) {
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
 function valeur_colonne_table_dist($type, $col, $id) {
-	list($distant,$table) = distant_table($type);
-	list($nom_table, $where) = table_where($type, $id);
 
-	if (!$nom_table)
+	// Table introuvable ou sans clé primaire
+	if (!$infos = crayons_get_table_name_and_primary($type)) {
 		return false;
+	}
+	$table = reset($infos);
 
 	$r = array();
 
@@ -487,12 +523,17 @@ function valeur_colonne_table_dist($type, $col, $id) {
 	}
 
 	// valeurs SQL
-	if (count($col)
-	AND $s = spip_query(
-			'SELECT `' . implode($col, '`, `') .
-			'` FROM ' . $nom_table . ' WHERE ' . $where, $distant)
-	AND $t = sql_fetch($s))
-		$r = array_merge($r, $t);
+	if (count($col)) {
+		list($distant, $table)   = distant_table($type);
+		list($nom_table, $where) = table_where($type, $id);
+
+		if ($s = spip_query(
+				'SELECT `' . implode($col, '`, `') .
+				'` FROM ' . $nom_table . ' WHERE ' . $where, $distant)
+			AND $t = sql_fetch($s)){
+				$r = array_merge($r, $t);
+		}
+	}
 
 	return $r;
 }

@@ -37,7 +37,13 @@ function post_crayons() {
 					 * le changement de charset n'est plus necessaire
 					 * depuis jquery 1.5 (feature non documentee de jquery!)
 					 */
-					$content[$field] = is_array($_POST['content_'.$crayon.'_'.$field])?implode(',',$_POST['content_'.$crayon.'_'.$field]):$_POST['content_'.$crayon.'_'.$field];
+					if (isset($_POST['content_'.$crayon.'_'.$field])) {
+						$content[$field] = is_array($_POST['content_'.$crayon.'_'.$field])
+							?implode(',',$_POST['content_'.$crayon.'_'.$field])
+							:$_POST['content_'.$crayon.'_'.$field];
+					} else {
+						$content[$field] = null;
+					}
 				}
 			}
 		}

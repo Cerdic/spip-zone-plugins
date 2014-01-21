@@ -178,7 +178,8 @@ class Crayon {
 	// $options : options directes du crayon (developpement)
 	function Crayon($name, $texts = array(), $options = array(), $c=null) {
 		$this->name = $name;
-		list($this->type, $this->modele, $this->id) = explode('-', $this->name, 3);
+
+		list($this->type, $this->modele, $this->id) = array_pad(explode('-', $this->name, 3), 3, '');
 		list($this->distant,$this->table) = distant_table($this->type);
 		if (is_scalar($texts) || is_null($texts)) {
 			$texts = array($this->modele => $texts);
@@ -316,6 +317,7 @@ class Crayon {
 					. entites_html($val)
 					. '" />'."\n";
 			}
+
 			if (is_array($spec) && isset($spec[$champ]['attrs'])) {
 				foreach ($spec[$champ]['attrs'] as $attr=>$val) {
 					$input = inserer_attribut($input, $attr, $val);
