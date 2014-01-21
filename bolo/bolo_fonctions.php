@@ -8,10 +8,9 @@
 
 // La balise BOLO
 function balise_BOLO($p) {
-    $type = "'latin'";
-    $p->code = "((\$x = charger_fonction($type, 'bolo', true)) ? \$x() : '')"; // si fonction bolo_latin
+	$type = "'latin'";
+	$p->code = "((\$x = charger_fonction($type, 'bolo', true)) ? \$x() : '')"; // si fonction bolo_latin
 	$p->interdire_scripts = false;
 	return $p;
 }
 
-?>
