@@ -46,13 +46,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'forum_prives_auteur' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications des forums postés sous leurs articles ou leurs messages dans le site privé.',
-	'forum_prives_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des forums privés (ou plusieurs, séparés par des virgules).',
+	'forum_prives_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des forums privés (ou plusieurs, séparées par des virgules).',
 	'forum_prives_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (privés).',
 	'forums_prives' => 'Forums privés',
 	'forums_public' => 'Forums publics',
 	'forums_public_a_noter' => 'À noter : dans le cas des forums modérés à priori, seuls les auteurs ayant le droit de valider les forums sont notifiés lors de l\'envoi du forum ; les autres destinataires sont notifiés lors de la validation du message par le modérateur.',
 	'forums_public_auteurs' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications des forums postés sous leurs articles dans le site public.',
-	'forums_public_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des forums publics (ou plusieurs, séparés par des virgules).',
+	'forums_public_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des forums publics (ou plusieurs, séparées par des virgules).',
 	'forums_public_thread' => '<strong>Fil de discussion</strong> : les participants au même fil de discussion reçoivent les notifications des forums (publics).',
 
 	// I
@@ -77,7 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'signature_petition' => 'Signatures de pétition',
-	'signature_petition_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des pétitions (ou plusieurs, séparés par des virgules).',
+	'signature_petition_moderateur' => 'Indiquez ci-dessous l\'adresse email du modérateur des pétitions (ou plusieurs, séparées par des virgules).',
 	'suivis_perso' => 'Suivi personnalisé',
 	'suivis_perso_activer_option' => 'Si vous activez cette option, chaque visiteur qui se connecte sur cet URL de suivi sera enregistré dans la table <code>spip_auteurs</code>, avec le statut <code>6visiteur</code>. Il pourra alors voir l\'ensemble des messages qu\'il a signés sur le forum, régler ses options de notification, etc.',
 	'suivis_perso_non' => 'Pas de suivi',
