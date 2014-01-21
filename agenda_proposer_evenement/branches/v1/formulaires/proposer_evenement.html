@@ -109,7 +109,18 @@
 	  <p class='boutons'><input type='submit' class='submit' value='<:propevent:bouton_proposer:>' /></p>
 	</div></form>
 	 #INCLURE{fond=formulaires/dateur/inc-dateur}
-	 #INCLURE{fond=formulaires/inc-proposer_evenement-pickers}
+	 <style type="text/css">
+		#INCLURE{css/jquery-ui.css}
+		.ui-widget-header .ui-icon {
+			background-image: url("#CHEMIN{css/images/ui-icons_222222_256x240.png}");
+		}
+		.ui-widget-header{
+			background:#ccc url("#CHEMIN{css/images/ui-bg_highlight-soft_75_cccccc_1x100.png}") 50% 50% repeat-x;
+		}
+		thead th{
+			color:inherit;background:#e0e0c2;
+		}
+	</style>
 	 ]
 </div>
 <script type="text/javascript">
