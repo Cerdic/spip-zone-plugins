@@ -218,9 +218,9 @@ function balise_EDIT($p) {
 		$primary = $meta[1];
 		$p->code = "classe_boucle_crayon('"
 			. $type
+			."','"
+			.$label
 			."',"
-			.sinon($label,"''")
-			.","
 			. "str_replace('/', '__', '$primary')" # chaque / doit être remplacé pour CSS.
 			.").' '";
 		$p->interdire_scripts = false;
