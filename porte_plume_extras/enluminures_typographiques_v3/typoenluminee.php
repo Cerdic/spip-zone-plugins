@@ -96,8 +96,8 @@ function typoenluminee_pre_propre($texte) {
 		/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*(.*)[}][}][}]($|[^}])/SUms";
 		/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*(.*)[}][}][}]($|[^}])/SUms";
 		/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{](.*)[}][}][}]($|[^}])/SUms";
-		/* 11 */ 	$chercher_raccourcis[]="/\{(�|§)\{/S"; # § Pour gerer l'unicode aussi !
-		/* 12 */ 	$chercher_raccourcis[]="/\}(�|§)\}/S"; # ne pas sauvergarder ce fichier en utf8 !
+		/* 11 */ 	$chercher_raccourcis[]="/\{(�|§)\{/S"; # § Pour gerer l'unicode aussi !
+		/* 12 */ 	$chercher_raccourcis[]="/\}(�|§)\}/S"; # ne pas sauvergarder ce fichier en utf8 !
 
 		/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5\$2$fin_intertitre_5\n\n\$3";
 		/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4\$2$fin_intertitre_4\n\n\$3";
@@ -113,7 +113,8 @@ function typoenluminee_pre_propre($texte) {
 	// ou n est un nombre en intertitres avec des etoiles type {{{* (avec n etoiles)
 	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
 	// Ne faire la recherche que s'il y a au moins un titre ancienne mode a convertir
-	if (strpos($texte, '{2{')!==false
+	if (strpos($texte, '{1{')!==false
+		OR strpos($texte, '{2{')!==false
 		OR strpos($texte, '{3{')!==false
 		OR strpos($texte, '{4{')!==false
 		OR strpos($texte, '{5{')!==false) {
