@@ -229,7 +229,7 @@ function balise_EDIT($p) {
 
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
 	// #EDIT hors boucle? ne rien faire
-	if (!$type = ($p->boucles[$i_boucle]->type_requete)) {
+	if (!isset($p->boucles[$i_boucle]) OR !$type = ($p->boucles[$i_boucle]->type_requete)) {
 		$p->code = "''";
 		$p->interdire_scripts = false;
 		return $p;
