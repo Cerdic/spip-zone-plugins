@@ -80,10 +80,10 @@ function notifications_forumposte_dist($quoi, $id_forum, $options) {
 	// notifications groupees pour les forums moderes a posteriori :
 	// les notifications des messages de statut 'publie'
 	// sont envoyees sans delai aux moderateurs
-	$notif_groupees = isset($GLOBALS['meta']['notifications_groupees_qui']) AND $GLOBALS['meta']['notifications_groupees_qui'];
+	$ng_forum = in_array('forum',lire_config('notifications_groupees_evenements'));
 	$table = table_objet_sql($t['objet']);
 	$id = id_table_objet($table);
-	if (!$notif_groupees OR ($notif_groupees AND (sql_getfetsel("accepter_forum",$table,$id."=".intval($t['id_objet'])) == 'pos') AND $t['statut'] == 'publie')) {
+	if (!$ng_forum OR ($ng_forum AND (sql_getfetsel("accepter_forum",$table,$id."=".intval($t['id_objet'])) == 'pos') AND $t['statut'] == 'publie')) {
 		$email_notification_forum = charger_fonction('email_notification_forum','inc');
 		foreach ($destinataires as $email) {
 			// ajouter les liens de moderation par statut
