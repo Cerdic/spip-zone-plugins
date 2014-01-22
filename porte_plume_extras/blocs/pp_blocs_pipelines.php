@@ -41,7 +41,7 @@ function pp_blocs_porte_plume_barre_pre_charger($barres){
 			// erreur
 			array(
 				"id"          => 'bloc_error',
-				"name"        => _T('pp_blocs:outil_inserer_bloc_success'),
+				"name"        => _T('pp_blocs:outil_inserer_bloc_error'),
 				"className"   => "outil_bloc_error", 
 				"openWith"    => "<div class='error'>\n",
 				"closeWith"   => "\n</div>",
