@@ -18,12 +18,17 @@
 </liminaire>
 
 <corps>
+[(#LOGO_ARTICLE)]
 [(#REM) on demande que le chapo soit en gras…]
 [(#SET{chapo,[(#CHAPO*|?{#VAL{"{{"}|concat{#CHAPO*}|concat{"}}
 
 "}})]})]
 
 [(#GET{chapo}|concat{#TEXTE*}|propre|cairn_traiter{reset})]
+
+<BOUCLE_portfolio(DOCUMENTS){vu=non}{mode=document}{extension IN gif,jpg,png}>
+#MODELE{doc,id_document=#ID_DOCUMENT}
+</BOUCLE_portfolio>
 
 [<partieann>
 <grnotes>

@@ -19,6 +19,7 @@
 		OK,
 		[<b>(#GET{file}|ecrire_fichier{
 			#INCLURE{fond=cairn/article,id_article,numero=#_meta:TITRE}
+			|cairn_figure{cairn/#GET{numero}}
 		}|?{<span style='color:green'>sauvé</span>,<span style='color:red'>erreur</span>})</b>]
 	})]
 </li>

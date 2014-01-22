@@ -14,6 +14,64 @@ function filtre_cdata($t) {
 define('_CHEVRONA', '* [oo *');
 define('_CHEVRONB', '* oo] *');
 
+// transformer les images ou logos spip en "figure" cairn
+function cairn_figure($html, $numero, $titre=null, $desc=null) {
+	static $cpt = array();
+
+	$c = ++ $cpt[$numero];
+	foreach (extraire_balises($html, 'figure') as $fig) {
+		$legende = extraire_balise($fig, 'figcaption');
+		$titre = extraire_balise($legende, 'h3');
+		if ($titre) $legende = str_replace($titre,'', $legende);
+
+		$titre = supprimer_tags($titre);
+		$legende = supprimer_tags($legende);
+		$figure = cairn_figure(extraire_balise($fig,'img'), $numero, $titre,$legende);
+		$html = str_replace($fig, $figure, $html);
+	}
+
+	foreach (extraire_balises($html, 'img') as $img) {
+
+		$src = extraire_attribut($img, 'src');
+
+		if ($src AND $l = copie_locale(url_absolue($src))) {
+			$file = "images/".basename($l);
+			@mkdir("$numero/images");
+			rename($l, "$numero/$file");
+
+			$ext = preg_replace(',^.*\.,', '', $file);
+			if ($ext == 'jpg') $ext = 'jpeg';
+		}
+
+		if ($titre)
+			$titre = "<titre>".filtre_cdata(trim($titre))."</titre>";
+		if ($desc)
+			$desc = "<alinea>".filtre_cdata(trim($desc))."</alinea>";
+		if ($titre OR $desc) {
+			$legende = "    <legende lang='fr'>
+        $titre
+        $desc
+        </legende>
+      ";
+		} else {
+			$legende = '';
+		}
+
+		$figure = "<figure id='fi$c'>
+$legende
+      <objetmedia>
+            <image id='im$c' typeimage='figure' typemime='image:$ext' xlink:type='simple' xlink:href='$file' xlink:actuate='onRequest' />
+      </objetmedia>
+</figure>
+";
+
+		$html = str_replace($img, $figure, $html);
+
+	}
+
+	return $html;
+}
+
 function cairn_prenom_nom($blaze) {
 	return preg_replace(",(.*)[*_](.*),Se",'\'<prenom>\'.filtre_cdata(\'$2\').\'</prenom> <nomfamille>\'.filtre_cdata(\'$1\').\'</nomfamille>\'',$blaze);
 }
@@ -105,6 +163,18 @@ function cairn_decoupe_para_cdata($texte, $reset=false) {
 			$lien = str_replace(array('<','>'), array(_CHEVRONA, _CHEVRONB), $lien);
 			$texte = str_replace($l, $lien, $texte);
 		}
+	}
+
+	// images (seront traitees a la fin)
+	foreach (extraire_balises($texte, 'figure') as $l) {
+		$l2 = str_replace(array('<','>'), array(_CHEVRONA, _CHEVRONB), $l);
+		$texte = str_replace($l, $l2, $texte);
+	}
+
+	// images simples
+	foreach (extraire_balises($texte, 'img') as $l) {
+		$l2 = str_replace(array('<','>'), array(_CHEVRONA, _CHEVRONB), $l);
+		$texte = str_replace($l, $l2, $texte);
 	}
 
 	$paragraphes = preg_split('/<p\b[^>]*>/i', $texte);
