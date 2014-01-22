@@ -68,7 +68,7 @@ a mis a jour la valeur avec la page reelle\]
 			<td class='#GET{titre}'>\[(\#LOGO_#MTYPE|image_reduire{20,20})\]<a href="\[(\##MID_OBJET|generer_url_entite{#TYPE})\]">\##GET{mtitre}</a></td>
 			<td class='role'>\[(\#INCLURE{fond=formulaires/inc-editer_liens_roles,env,id=\##MID_OBJET,cle=#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET})\]</td>
 			<td class='action'>
-				<button class="button link add" name="ajouter_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET\\]" value="+">\<:#TYPE:ajouter_lien_#TYPE:> \[(\#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})\]</button>
+				<button type="submit" class="button link add" name="ajouter_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET\\]" value="+">\<:#TYPE:ajouter_lien_#TYPE:> \[(\#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})\]</button>
 			</td>
 		</tr>
 	\</BOUCLE_liste_#LOBJET>

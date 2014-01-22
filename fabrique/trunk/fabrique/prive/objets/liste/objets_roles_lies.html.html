@@ -68,7 +68,7 @@ a mis a jour la valeur avec la page reelle\]
 			</td>(#OBJET|option_presente{roles})]
 			<td class='action'>
 				\[(\#ENV{editable}|oui)
-					<button class="button link delete" name="supprimer_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET-*\\]" value="X">\<:#TYPE:retirer_lien_#TYPE:> \[(\#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})\]</button>
+					<button type="submit" class="button link delete" name="supprimer_lien\\[#TYPE-\##MID_OBJET-\#OBJET-\#ID_OBJET-*\\]" value="X">\<:#TYPE:retirer_lien_#TYPE:> \[(\#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})\]</button>
 				\]
 			</td>
 		</tr>
@@ -76,7 +76,7 @@ a mis a jour la valeur avec la page reelle\]
 	</tbody>
 </table>
 \[<p class='pagination'>(\#PAGINATION{prive})</p>\]
-\[(\#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\\[#TYPE-*-\#OBJET-\#ID_OBJET-*\\]" value="X">\<:#TYPE:retirer_tous_liens_#LOBJET:> \[(\#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})\]</button></div>\]
+\[(\#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\\[#TYPE-*-\#OBJET-\#ID_OBJET-*\\]" value="X">\<:#TYPE:retirer_tous_liens_#LOBJET:> \[(\#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})\]</button></div>\]
 </div>
 \</B_liste_#LOBJET>
 <div class="liste-objets liste-objets-lies #MOBJET caption-wrap">
