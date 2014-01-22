@@ -64,10 +64,30 @@ function cairn_decoupe_h3($texte, $reset) {
 
 }
 
+function callback_poesie($r) {
+	# <verbatim typeverb="poeme"><bloc><ligne>………
+	$p = $r[1];
+	$p = preg_replace(',<div>(.*)</div>,UimsS',
+		_CHEVRONA.'ligne'._CHEVRONB
+		.'\1'.
+		_CHEVRONA.'/ligne'._CHEVRONB, $p);
+
+	return _CHEVRONA.'verbatim typeverb="poeme"'._CHEVRONB
+		._CHEVRONA.'bloc'._CHEVRONB
+		.$p
+		._CHEVRONA.'/bloc'._CHEVRONB
+		._CHEVRONA.'/verbatim'._CHEVRONB;
+}
+
 function cairn_decoupe_para_cdata($texte, $reset=false) {
 	static $cpt;
 
 	if ($reset) $cpt=0;
+
+	// la poesie
+	$texte = preg_replace_callback(
+	',<blockquote class="spip_poesie">(.*)</blockquote>,UimsS',
+	'callback_poesie', $texte);
 
 	// UL et OL doivent être dans des para
 	$texte = preg_replace(',<(ol|ul)\b,iS', '<p>$0', $texte);
@@ -142,6 +162,7 @@ function filtrer_texte_cairn($t) {
 	$t = str_replace('&#8217;', '’', $t);
 
 	$t = trim(supprimer_tags($t));
+
 
 	return $t;
 
