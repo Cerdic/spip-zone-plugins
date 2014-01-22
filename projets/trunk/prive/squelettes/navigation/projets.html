@@ -11,7 +11,7 @@
 				|parametre_url{statut,''}
 				|lien_ou_expose{Tous,#ENV{statut}|non})]
 		</li>
-	<BOUCLE_statuts(PROJETS){fusion statut}{par statut}>
+	<BOUCLE_statuts(PROJETS){fusion statut}{par statut}{tout}>
 		[(#SET{statuts,#GET{statuts}|push{#STATUT}})]
 	</BOUCLE_statuts>
 
@@ -26,3 +26,7 @@
 	</ul>
 </div>
 </B_statuts>
+
+#BOITE_OUVRIR{'',info}
+<:projets:projets_aide{lien=#PLUGIN{projets,documentation}}|propre:>
+#BOITE_FERMER
