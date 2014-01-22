@@ -14,7 +14,7 @@ function pp_loremipsum_porte_plume_barre_pre_charger($barres){
 	// lorem ipsum
 	$barre->ajouterApres('sepLorem', array(
 		"id"          => 'lorem_ipsum',
-		"name"        => _T('barre_outils:barre_lorem_ipsum'),
+		"name"        => _T('pp_loremipsum:outil_texte_lorem_ipsum_1'),
 		"className"   => "outil_lorem_ipsum", 
 		"replaceWith" => "\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit." 
 						. "Aenean ut orci vel massa suscipit pulvinar. Nulla sollicitudin. "
@@ -31,7 +31,7 @@ function pp_loremipsum_porte_plume_barre_pre_charger($barres){
 			// lorem ipsum 3 paragraphes
 			array(
 				"id"          => 'lorem_ipsum_big',
-				"name"        => _T('barre_outils:barre_lorem_ipsum_3'),
+				"name"        => _T('pp_loremipsum:outil_texte_lorem_ipsum_3_paragraphes'),
 				"className"   => "outil_lorem_ipsum_big", 
 				"replaceWith" => "\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. "
 								. "Curabitur lacus mi, varius sit amet, suscipit in, hendrerit "
