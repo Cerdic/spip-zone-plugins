@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//T
 	'texte_date_depublication' => 'Date de dépublication en ligne :',
-	'texte_date_depublication_nonaffichee' =>'Ne pas afficher la date de dépublication',
+	'texte_date_depublication_nonaffichee' =>'Ne pas utiliser la date de dépublication',
 	'titre_page_configurer_depublies'=>'Configurer les dépublications',	
 	
 	);

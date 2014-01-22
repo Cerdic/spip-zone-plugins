@@ -88,66 +88,62 @@ function depublie_formulaire_verifier($flux){
 
 
 function depublie_formulaire_traiter($flux){
-	
+
 	/********************************/	
 	# Traitement du formulaire dater #
 	/********************************/
 	
-		//si formulaire dater, se greffer pour enregistrer les données des champs supplémentaires
-		if ($flux['args']['form'] == 'dater') {
-			
-			//récupère les arguments objet/id_objet
-			$objet=$flux['args']['args'][0];
-			$id_objet=$flux['args']['args'][1];
+	//si formulaire dater, se greffer pour enregistrer les données des champs supplémentaires
+	if ($flux['args']['form'] == 'dater' && _request('changer')){
 
-			if (_request('changer')){
-				//on teste si il y a déjà une entrée dans spip_depublies
-				$row = sql_fetsel('date_depublie', "spip_depublies", "id_objet=".intval($id_objet)." AND objet='$objet'");
-				$possedeDateDepublie = false;
-				if (isset($row['date_depublie'])) $possedeDateDepublie = true;
-					
-					
-				$set['statut']= lire_config('depublie/statut_depublie');
-		
-				if (!_request('date_depublie_jour') OR _request('sans_depublie'))
-					$set['date_depublie'] = sql_format_date(0,0,0,0,0,0);
-				else {
-					if (!$d = dater_recuperer_date_saisie(_request('date_depublie_jour')))
-						$d = array(date('Y'),date('m'),date('d'));
-					if (!$h = dater_recuperer_heure_saisie(_request('date_depublie_heure')))
-						$h = array(0,0);
-					$set['date_depublie'] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
-				}
+		//récupère les arguments objet/id_objet
+		$objet=$flux['args']['args'][0];
+		$id_objet=$flux['args']['args'][1];
 
-				$set['objet']=$objet;
-				$set['id_objet']=$id_objet;
-				
+		//on teste si il y a déjà une entrée dans spip_depublies
+		$possedeDateDepublie = sql_getfetsel('date_depublie', "spip_depublies", 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
+
+		$set = array();
+		$set['statut']= lire_config('depublie/statut_depublie');
+		$set['objet']=$objet;
+		$set['id_objet']=$id_objet;
+
+		if($objet && intval($id_objet)) {
+			if (_request('date_depublie_jour') && !_request('sans_depublie') ){
+				$d = dater_recuperer_date_saisie(_request('date_depublie_jour'));
+				if (!$h = dater_recuperer_heure_saisie(_request('date_depublie_heure')))
+					$h = array(0,0);
+				$set['date_depublie'] = sql_format_date($d[0], $d[1], $d[2], $h[0], $h[1]);
+
 				//update ou insert
-				if($possedeDateDepublie == true) 
-					sql_updateq('spip_depublies', $set, "id_objet=".intval($id_objet)." AND objet='$objet'");
-				if($possedeDateDepublie == false) 
+				if ($possedeDateDepublie){
+					sql_updateq('spip_depublies', $set, 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
+				} else {
 					sql_insertq('spip_depublies',$set);
-
+				}
+			} else if ($possedeDateDepublie){
+				sql_delete('spip_depublies', 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
 			}
-				
 		}
+
+	}
 				
 	/***********************************/	
 	#   Gérer la date de dépublication  #
 	# au changement de statut en publié #
 	/***********************************/
-	
+
 	$duree= lire_config('depublie/publication_duree');
-	
+
 		//si on a demandé la durée automatique de publication se greffer sur le traitement du formulaire de changement de statut d'un article
 		if($duree>0 AND $flux['args']['form'] == 'instituer_objet' AND $flux['args']['args'][0] == 'article') {
-			
+
 			$id_objet=$flux['args']['args'][1];
 			$objet='article';
 			$id_rubrique_choisie= lire_config('offres/rubrique_offres');
-			
+
 			$row = sql_fetsel("id_rubrique, statut", "spip_articles", "id_article=$id_objet AND id_rubrique=$id_rubrique_choisie");
-						
+
 			//seulement si la rubrique est celle choisie et l'article est publié
 			if(isset($row['id_rubrique']) && $row['statut']=='publie'){
 				
