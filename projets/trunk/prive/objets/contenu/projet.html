@@ -3,7 +3,7 @@
 <BOUCLE_si_parent(CONDITION){si #ID_PARENT|intval}>
 <div class="champ contenu_id_parent[ (#ID_PARENT*|strlen|?{'',vide})]">
 	<div class="label visible"><:projet:label_id_parent:> : </div>
-	<div dir='#LANG_DIR' class='#EDIT{id_parent} id_parent'>
+	<div dir='#LANG_DIR' class='#_projet:EDIT{id_parent} id_parent'>
 		<BOUCLE_parent(PROJETS){id_projet=#ID_PARENT}{statut==.*}>
 			<a href='[(#ID_PROJET|generer_url_entite{projet})]'>#NOM</a>
 		</BOUCLE_parent>
@@ -24,7 +24,7 @@
 <BOUCLE_si_cadre(CONDITION){si #ID_PROJETS_CADRE|intval}>
 <div class="champ contenu_id_projets_cadre[ (#ID_PROJETS_CADRE*|strlen|?{'',vide})]">
 	<div class="label visible"><:projet:label_id_projets_cadre:> : </div>
-	<div dir='#LANG_DIR' class='#EDIT{id_projets_cadre} id_projets_cadre'>
+	<div dir='#LANG_DIR' class='#_projet:EDIT{id_projets_cadre} id_projets_cadre'>
 		<BOUCLE_cadre(PROJETS_CADRES){id_projets_cadre}>#TITRE</BOUCLE_cadre>
 	</div>
 </div>
