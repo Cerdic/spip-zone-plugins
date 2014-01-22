@@ -1,0 +1,70 @@
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
+
+<!--#hierarchie-->
+<ul id="chemin">
+	<li>
+		<span class="bloc">
+			<a href="#URL_ECRIRE{formulaires_tous}" class="racine"><:formidable:formulaires_tous:></a>
+		</span>
+	</li>
+	<li>
+		<span class="bloc">
+			<em> &gt; </em>
+			<a class="on" href="[(#URL_ECRIRE{formulaires_voir}|parametre_url{id_formulaire,#ID_FORMULAIRE})]">#TITRE</a>
+		</span>
+	</li>
+</ul>
+<!--/#hierarchie-->
+
+<div class="fiche_objet">
+	<a href="[(#URL_ECRIRE{formulaires_voir}|parametre_url{id_formulaire,#ID_FORMULAIRE})]" class="icone36" style="float:left;">
+		<img width="24" height="24" src="#CHEMIN{images/formulaire-24.png}" />
+		<span><:retour:></span>
+	</a>
+	
+	<:formidable:voir_reponses:>
+	<h1>
+		#TITRE
+	</h1>
+	<div class="nettoyeur"></div>
+</div>
+
+<INCLURE{fond=prive/liste/formulaires_reponses}{id_formulaire}{statut=prop}{titre=<:formidable:reponses_liste_prop:>}{ajax}>
+
+<INCLURE{fond=prive/liste/formulaires_reponses}{id_formulaire}{statut=publie}{titre=<:formidable:reponses_liste_publie:>}{ajax}>
+
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:formidable:voir_numero:>
+		<p>#ID_FORMULAIRE</p>
+	</div>
+	<div class="hover">
+		<a href="#SELF" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-reponses-24.png})" style="vertical-align:middle;" alt="" />]
+			<span style="vertical-align:middle;"><:formidable:reponses_liste:></span>
+		</a>
+	</div>
+	<div>
+		<a href="[(#URL_ECRIRE{formulaires_analyse}|parametre_url{id_formulaire,#ID_FORMULAIRE})]" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-analyse-24.png})" style="vertical-align:middle;" alt="" />]
+			<span style="vertical-align:middle;"><:formidable:reponses_analyse:></span>
+		</a>
+	</div>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+<div class="cadre cadre-e cadre_padding">
+	<strong><:titre_cadre_raccourcis:></strong>
+	<div>
+		<a href="#URL_ACTION_AUTEUR{exporter_formulaires_reponses,#ID_FORMULAIRE}" class="cellule-h">
+			[<img src="(#CHEMIN{images/formulaire-reponses-exporter-24.png})" style="vertical-align:middle;" />]
+			<span style="vertical-align:middle;"><:formidable:reponses_exporter:></span>
+		</a>
+	</div>
+</div>
+<!--/#extra-->
+</BOUCLE_autoriser>
+</BOUCLE_formulaire>
