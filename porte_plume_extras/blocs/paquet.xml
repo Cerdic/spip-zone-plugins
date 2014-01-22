@@ -1,0 +1,22 @@
+<paquet
+	prefix="pp_blocs"
+	categorie="edition"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/porte_plume_blocs-64.png"
+	documentation=""
+>
+	<nom>Blocs d'alertes pour Porte Plume</nom>
+	<auteur>Matthieu Marcillaud</auteur>
+	<licence>GNU/GPL</licence>
+
+	<credit lien="http://www.fitzsimon.com.au">Creative Freedom Ltd  (icones)</credit>
+	<credit lien="http://www.creativefreedom.co.uk/">Andy Fitzsimon (icones)</credit>
+
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="pp_blocs_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="pp_blocs_pipelines.php" />
+
+	<necessite nom="porte_plume" compatibilite="[1.10.1;]" />
+	<necessite nom="saisies" compatibilite="[1.2;]" />
+</paquet>
