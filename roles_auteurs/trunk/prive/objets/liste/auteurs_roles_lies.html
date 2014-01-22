@@ -53,7 +53,7 @@ a mis a jour la valeur avec la page reelle]
 			</td>
 			<td class='action'>
 				[(#ENV{editable}|oui)
-					<button name="supprimer_lien\[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET-*\]" class="button link delete" value="X">Retirer l'auteur [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button>
+					<button type="submit" name="supprimer_lien\[auteur-#ID_AUTEUR-#OBJET-#ID_OBJET-*\]" class="button link delete" value="X">Retirer l'auteur [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button>
 				]
 			</td>
 		</tr>
@@ -61,7 +61,7 @@ a mis a jour la valeur avec la page reelle]
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien\[auteur-*-#OBJET-#ID_OBJET-*\]" value="X"><:lien_retirer_tous_auteurs:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien\[auteur-*-#OBJET-#ID_OBJET-*\]" value="X"><:lien_retirer_tous_auteurs:> [(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})]</button></div>]
 </div>
 </B_liste_aut>
 <div class="liste-objets liste-objets-lies auteurs caption-wrap">
