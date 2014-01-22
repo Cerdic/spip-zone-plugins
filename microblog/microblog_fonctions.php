@@ -16,6 +16,7 @@ function generer_url_microblog($id, $entite='article', $args='', $ancre='', $pub
 
 	if (!$public
 	 OR $entite!=='article'
+	 OR !isset($config['short_url'])
 	 OR !$config['short_url'])
 		return url_absolue(generer_url_entite($id, $entite, $args, $ancre, $public, $type));
 	else

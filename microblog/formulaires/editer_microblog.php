@@ -34,6 +34,7 @@ function formulaires_editer_microblog_charger_dist($objet,$id_objet,$hide_form=f
 function formulaires_editer_microblog_verifier_dist($objet,$id_objet){
 	include_spip('inc/charsets');
 	$erreurs = array();
+	$microblog = _request('microblog');
 	if (spip_strlen($microblog)>140){
 		$erreurs['microblog'] = _T('microblog:longueur_maxi_status');
 	}

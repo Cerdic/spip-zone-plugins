@@ -170,12 +170,14 @@ function microblog_affiche_milieu($flux){
 		    )
 			OR // SPIP 2.x
 				($exec=='articles'
+				AND isset($flux['args']['id_article'])
 				AND $id_article = $flux['args']['id_article']
 				AND $cfg = @unserialize($GLOBALS['meta']['microblog'])
 				)
 			)
 		AND
-			($cfg['evt_publierarticles'] OR $cfg['evt_proposerarticles'])
+			((isset($cfg['evt_publierarticles']) and $cfg['evt_publierarticles'])
+			OR (isset($cfg['evt_proposerarticles']) and $cfg['evt_proposerarticles']))
 		AND $cfg['invite']
 		){
 		$deplie = false;
