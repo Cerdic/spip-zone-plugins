@@ -15,7 +15,7 @@ function genie_depublier_dist($time) {
 	$today = date('Y-m-d');
 	
 	if(
-		$depublications = sql_allfetsel('*','spip_depublies','DATE_FORMAT(date_depublie, "%Y-%m-%d") <= '.sql_quote($today))
+		$depublications = sql_allfetsel('*','spip_depublies','DATE_FORMAT(date_depublie, "%Y-%m-%d") <= '.sql_quote($today).' AND DATE_FORMAT(date_depublie, "%Y-%m-%d") >0')
 		and is_array($depublications)
 	){
 	
@@ -36,8 +36,8 @@ function genie_depublier_dist($time) {
 				
 				//si les conditions sont remplies, on change le statut dans cette table
 				sql_updateq("spip_$table", array("statut" => $statut_depublication), "$_id_objet=$id_objet");
-				//sans oublier de passer la date de dépublication à 0
-				sql_updateq('spip_depublies', array('date_depublie' => '0000-00-00 00:00:00'), "id_objet=".intval($id_objet)." AND objet='$objet'");
+				//et on supprime l'entrée
+				sql_delete('spip_depublies', 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
 			}
 		}
 	}
