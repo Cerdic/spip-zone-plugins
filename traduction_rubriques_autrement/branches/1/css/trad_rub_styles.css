@@ -29,11 +29,19 @@
 	background:#ffffff;
 	height :auto;
 }
-.barre_onglet a,.barre_onglet strong  {padding:5px}
+.onglets_traduction.barre_onglet {width: auto}
+.onglets_traduction.barre_onglet li {display: inline-table; float: none; vertical-align: middle; margin:0}
+
+.onglets_traduction.barre_onglet a,
+.onglets_traduction.barre_onglet strong  {padding:5px}
+.onglets_traduction.barre_onglet li.bouton_options {border: none;}
+.onglets_traduction.barre_onglet .bouton_options a {padding: 0px}
 
 .barre_onglet .non_traduit a{background:#eeeeee;font-style:italic;}
 
-.bouton_options{float:right;}
+
+.bouton_options{/* float:right; */}
+.bouton_options img {margin-top: 5px}
 
 .nettoyeur{clear:both;}
 
@@ -44,7 +52,7 @@
 
 .lang{ margin-right:5px;}
 
-.changer{float:left;margin-bottom:5px}
+.changer{/* float:left; */margin-bottom:5px}
 
 .liste-elements table.spip tr.trads{background:#dfdfdf}
 
@@ -61,11 +69,12 @@ div.ref:hover span {
 	width:250px;
 } 
 
-.ajouter_trads, .changer .icone_delier_traduction {float:left;}
+.ajouter_trads, .changer .icone_delier_traduction {/* float:left; */}
 
 .icone_delier_traduction {
     color: #333333;
     margin: 2.0775em 0;
     padding: 0 10px;
-    position: relative;
-    width:100px}
+    text-align: center;
+    /* position: relative */;
+    /* width:100px */}
