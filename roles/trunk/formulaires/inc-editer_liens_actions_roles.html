@@ -9,7 +9,7 @@
 	<li class='dropdown-header'>Enlever un rôle</li>
 <BOUCLE_roles_presents(DATA){source table,#ENV{roles/roles/choix}}{valeur IN #GET{presents}}>
 	<li>
-		<button name="supprimer_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
+		<button type="submit" name="supprimer_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
 		[(#CHEMIN_IMAGE{supprimer-8.png}|balise_img{'X'})] [(#VALEUR|role{#ENV{table_source}})]
 		</button>
 	</li>
@@ -21,7 +21,7 @@
 	<li class='dropdown-header'>Ajouter un rôle</li>
 <BOUCLE_roles_absents(DATA){source table,#ENV{roles/roles/choix}}{valeur !IN #GET{presents}}>
 	<li>
-		<button name="ajouter_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
+		<button type="submit" name="ajouter_lien\[#ENV{cle}-#VALEUR\]" class="link btn btn-mini delete">
 		[(#CHEMIN_IMAGE{inserer-8.png}|balise_img{'+'})] [(#VALEUR|role{#ENV{table_source}})]
 		</button>
 	</li>
