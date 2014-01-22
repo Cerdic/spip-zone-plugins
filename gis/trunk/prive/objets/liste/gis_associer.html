@@ -34,7 +34,7 @@ a mis a jour la valeur avec la page reelle]
 			<td class='picto'>[(#CHEMIN_IMAGE{gis-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
 				title="<:gis:texte_voir_gis:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
-			<td class='action'><button class="button" name="ajouter_lien[gis-#ID_GIS-#OBJET-#ID_OBJET]" value="+"><:gis:lien_ajouter_gis:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+			<td class='action'><button type="submit" class="button" name="ajouter_lien[gis-#ID_GIS-#OBJET-#ID_OBJET]" value="+"><:gis:lien_ajouter_gis:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
 		</tr>
 	</BOUCLE_liste_gis>
 	</tbody>

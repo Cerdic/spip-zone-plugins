@@ -34,7 +34,7 @@
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
-[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}gis-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:gis:info_supprimer_liens:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}gis-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:gis:info_supprimer_liens:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
 [(#INCLURE{fond=modeles/carte_gis_preview,id_objet,objet})]
 </div>
 </B_liste_gis>
