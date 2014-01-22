@@ -1,0 +1,24 @@
+<plugin>
+	<nom>FaviconZ</nom>
+	<slogan>Un favicon sous Zpip</slogan>
+	<auteur>Christian Marget</auteur>
+	<icon>img/faviconz-128.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>1.0</version>
+	<etat>test</etat>
+	<description>
+Ce plugin remédie à un d&eacute;faut de Zpip qui emp&ecirc;che la prise en compte du «favicon», cette ic&ocirc;ne qui s'affiche dans l'onglet ou la barre de titre du navigateur lorsque l'on visite un site.
+
+En effet, avec la distribution standard de SPIP, il suffit de placer dans le r&eacute;pertoire <code>squelette</code> du site un fichier ic&ocirc;ne nomm&eacute; <code>favicon.ico</code> pour qu'il soit pris en compte lors de la génération des pages publiques. Malheureusement, cette ic&ocirc;ne n'est pas prise en compte par le jeu de squelettes Zpip. FaviconZ corrige ce défaut et affiche le favicon comme le ferait la version standard.
+	</description>
+	<prefix>faviconz</prefix>
+	<lien>http://www.spip-contrib.net/FaviconZ</lien>
+	<fonctions>faviconz_pipelines.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>faviconz_pipelines.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="Z" version="[1.0.;2.0]" />
+</plugin>
