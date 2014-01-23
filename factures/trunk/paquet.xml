@@ -8,17 +8,16 @@
 	documentation=""
 	schema="1.0.0" 
 >
-	<!--
-		Paquet généré le 2013-04-05 11:50:18
-	-->
 
 	<nom>Factures &amp; devis</nom>
 
 	<auteur lien='http://www.cym.fr'>Cyril Marion - Ateliers CYM</auteur>
 
 	<licence>GNU/GPL</licence>
+
 	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
     <necessite nom="contacts" compatibilite="[2.10.2;]" />
+    <necessite nom="coordonnees" compatibilite="[2.1.14;]" />
 
 	<pipeline nom="autoriser" inclure="factures_autorisations.php" /> 
 
