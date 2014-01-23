@@ -65,7 +65,7 @@ function factures_declarer_tables_objets_sql($tables) {
 		'key' => array(
 			"PRIMARY KEY"        => "id_facture",
 		),
-		'titre' => "libelle_facture AS titre, '' AS lang",
+		'titre' => "num_facture AS titre, '' AS lang",
 		 #'date' => "",
 		'champs_editables'  => array('num_facture', 'id_organisation_emettrice', 'id_organisation', 'date_facture', 'libelle_facture', 'montant', 'quantite', 'unite', 'conditions', 'reglement', 'nota_bene', 'delais_validite', 'fin_validite', 'num_devis'),
 		'champs_versionnes' => array(),

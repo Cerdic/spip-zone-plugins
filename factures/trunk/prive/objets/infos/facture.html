@@ -3,5 +3,15 @@
 [(#SET{texte_objet,<:facture:titre_facture:>})]
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_FACTURE</p></div>
 
+
+[(#REM)
+	Bouton voir en ligne
+]
+[(#VAL{redirect}
+	|generer_url_action{type=facture&id=#ID_FACTURE}
+	|parametre_url{var_mode,calcul}
+	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+
+
 </div>
 </BOUCLE_facture>
