@@ -5,44 +5,45 @@
   Distribue sous licence GPL
 
 ]
-
 [(#REM) Fil d'Ariane pour les squelettes Z ]
 [(#PLUGIN{Z}|oui) <p id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a> &gt; <strong class="on"><:seminaire:titre_agenda:></strong></p>]
-	
-	<div id="seminaire">[(#REM) ce div est là pour hériter des styles du calendrier sans polluer le css de kitcnrs dont on récupère tout de même les css]
-		<INCLURE{fond=contenu/calendrier,env} />
+  
+<div id="seminaire">[(#REM) ce div est là pour hériter des styles du calendrier sans polluer le css de kitcnrs dont on récupère tout de même les css]
+  <INCLURE{fond=contenu/calendrier,env} />
 
-		<h2>Les événements de [(#DATE_DEBUT|affdate_mois_annee)]</h2>
+  <h2>Les événements de [(#DATE_DEBUT|affdate_mois_annee)]</h2>
 
-		<div class='plier_deplier'><a href='#' onclick='jQuery(".renseignements").show();return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='jQuery(".renseignements").hide();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
+  <div class='plier_deplier'><a href='#' onclick='jQuery(".renseignements").show();return false;' class='noajax'><:seminaire:lien_tout_deplier:></a> | <a href='#' onclick='jQuery(".renseignements").hide();return false;' class='noajax'><:seminaire:lien_tout_replier:></a></div>
 
-		<BOUCLE_mot_evenement(MOTS){type=Type}>
-			<BOUCLE_mot_articles(MOTS){type=Catégorie}>
-				<BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>
-					<B_ev>
-					<h3 class="agenda">[(#_mot_evenement:DESCRIPTIF|attribut_html|unique)]</h3>
-					<ul>
-					<li><h4>#_mot_articles:TITRE</h4></li>
-					<ul>
-					<BOUCLE_ev(EVENEMENTS){!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}|agenda_moisdecal{1,'Y-m-d H:i:00'}}{par date_debut}{id_article}{id_evenement_source?}{titre_mot=#_mot_evenement:TITRE}>
-							<li>#MODELE{evenement_vevent}
-							<p class='renseignements'>
-							<span class='lien_article'><a href='#URL_ARTICLE'>Article</a></span>
-							</p>
-							</li>
-					</BOUCLE_ev>
-					</ul>
-					</ul>
-					</B_ev>
-					</BOUCLE_article_evenement>
-			</BOUCLE_mot_articles>
-		</BOUCLE_mot_evenement>
+  <BOUCLE_mot_evenement(MOTS){type=Type}>
+    <BOUCLE_mot_articles(MOTS){type=Catégorie}>
+      <BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>
+        <B_ev>
+          <div class="type[ mot(#_mot_evenement:ID_MOT)]">
+            [<h3 class="agenda">(#_mot_evenement:TITRE|entites_html|unique)</h3>]
+            [<div class="descriptif">(#_mot_evenement:DESCRIPTIF|entites_html|unique)</div>]
+            <ul>
+              <li><h4>#_mot_articles:TITRE</h4></li>
+              <ul>
+        <BOUCLE_ev(EVENEMENTS){!evenement_passe #ENV{date_debut,#ENV{date}}}{!evenement_a_venir #ENV{date_debut,#ENV{date}}|agenda_moisdecal{1,'Y-m-d H:i:00'}}{par date_debut}{id_article}{id_evenement_source?}{titre_mot=#_mot_evenement:TITRE}>
+                <li>#MODELE{evenement_vevent}
+                <p class='renseignements'>
+                <span class='lien_article'><a href='#URL_ARTICLE'>Article</a></span>
+                </p>
+                </li>
+        </BOUCLE_ev>
+              </ul>
+            </ul>
+          </div>
+        </B_ev>
+        </BOUCLE_article_evenement>
+    </BOUCLE_mot_articles>
+  </BOUCLE_mot_evenement>
 
-
-		<span class="bouton">
-		<a href="#URL_ECRIRE{evenement_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
-		</span>
-	</div>
+  <span class="bouton">
+    <a href="#URL_ECRIRE{evenement_edit,new=oui&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
+  </span>
+</div>
 
 <script type="text/javascript" src="#CHEMIN{javascript/toggle.js}"></script>
 <INCLURE{fond=javascript/rechargement,env} />
