@@ -43,6 +43,7 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null, $t
 		'twitter' => 'oAuth',
 	);
 
+
 	// Choix de l'API
 	if (!isset($api)) {
 		if (!isset($service))
@@ -126,11 +127,13 @@ function twitter_connect($tokens=null){
 		if(is_array($tokens)){
 			$cfg = array_merge($cfg,$tokens);
 		}
+
 		if(
 			isset($cfg['twitter_consumer_key'])
 				&& isset($cfg['twitter_consumer_secret'])
 				&& isset($cfg['twitter_token'])
 				&& isset($cfg['twitter_token_secret'])){
+
 			// Cas de twitter et oAuth
 			include_spip('inc/twitteroauth');
 			$consumer_key = $cfg['twitter_consumer_key'];

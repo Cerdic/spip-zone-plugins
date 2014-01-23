@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_twitter_consumer_secret' => 'Cl&eacute; secr&#232;te (consumer secret) de l\'API Twitter',
 	'label_microblog'=> 'Modifier le message',
 	'label_username' => 'Nom d\'utilisateur',
+	'label_association_indispensable' => 'Indispensable au fonctionnement !',
 	'lien_documentation' => 'Cf. documentation',
 	'longueur_maxi_status' => 'Le message doit comporter au maximum 140 caract&egrave;res',
 
