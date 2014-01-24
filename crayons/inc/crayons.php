@@ -604,7 +604,14 @@ function _U($texte, $params=array()) {
 	return unicode2charset(html2unicode(_T($texte, $params)));
 }
 
-// wdgcfg = widget config :-)
+/**
+ * Obtenir la configuration des crayons
+ *
+ * @note wdgcfg = widget config :-)
+ * 
+ * @return array
+ *     Couples : attribut => valeur
+**/
 function wdgcfg() {
 	$php = function_exists('crayons_config') ? crayons_config() : array();
 	include_spip('inc/meta');

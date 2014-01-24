@@ -10,19 +10,35 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/**
- * Débuguer les crayons
- * mettre a true dans mes_options pour avoir les crayons non compresses
- */
-if(!defined('_DEBUG_CRAYONS'))
+if(!defined('_DEBUG_CRAYONS')) {
+	/**
+	 * Débuguer les crayons
+	 * 
+	 * Mettre a true dans mes_options pour avoir les crayons non compresses
+	 */
 	define('_DEBUG_CRAYONS', false);
+}
 
-// Dire rapidement si ca vaut le coup de chercher des droits
+/**
+ * Dire rapidement si ca vaut le coup de chercher des droits
+ *
+ * @return bool
+**/
 function analyse_droits_rapide_dist() {
 	return isset($GLOBALS['auteur_session']['statut']);
 }
 
-// Le pipeline header_prive (pour y tester les crayons)
+/**
+ * Ajouter la gestion des crayons dans l'espace privé
+ *
+ * @pipeline header_prive
+ * @uses Crayons_preparer_page()
+ * 
+ * @param string $head
+ *     Contenu du header
+ * @return string
+ *     Contenu du header
+**/
 function Crayons_insert_head($head) {
 	// verifie la presence d'une meta crayons, si c'est vide
 	// on ne cherche meme pas a traiter l'espace prive
@@ -47,7 +63,20 @@ function Crayons_insert_head($head) {
 	return $head;
 }
 
-// Le pipeline affichage_final, execute a chaque hit sur toute la page
+/**
+ * Ajouter la gestion des crayons dans l'espace public
+ *
+ * @pipeline affichage_final
+ * @uses analyse_droits_rapide_dist()
+ * @uses Crayons_preparer_page()
+ * @note
+ *     Le pipeline affichage_final est executé à chaque hit sur toute la page
+ * 
+ * @param string $page
+ *     Contenu de la page à envoyer au navigateur
+ * @return string
+ *     Contenu de la page à envoyer au navigateur
+**/
 function &Crayons_affichage_final(&$page) {
 
 	// ne pas se fatiguer si le visiteur n'a aucun droit
@@ -62,6 +91,7 @@ function &Crayons_affichage_final(&$page) {
 	include_spip('inc/crayons');
 	if (!preg_match_all(_PREG_CRAYON, $page, $regs, PREG_SET_ORDER))
 		return $page;
+
 	$wdgcfg = wdgcfg();
 
 	// calculer les droits sur ces crayons
@@ -78,6 +108,7 @@ function &Crayons_affichage_final(&$page) {
 			$droits_accordes ++;
 		}
 	}
+
 	// et les signaler dans la page
 	if ($droits_accordes == count($regs)) // tous les droits
 		$page = Crayons_preparer_page($page, '*', $wdgcfg);
@@ -87,6 +118,24 @@ function &Crayons_affichage_final(&$page) {
 	return $page;
 }
 
+/**
+ * Ajoute les scripts css et js nécessaires aux crayons dans le code HTML
+ *
+ * @uses crayons_var2js()
+ * 
+ * @param string $page
+ *     Code HTML de la page complète ou du header seulement
+ * @param string $droits
+ *     - Liste de css définissant les champs crayonnables
+ *       (séparés par virgule) dont l'édition est autorisée
+ *     - "*" si tous sont autorisés
+ * @param array $wdgcfg
+ *     Description de la configuration des crayons (attribut => valeur)
+ * @param string $mode
+ *     - page : toute la page est présente dans `$page`
+ *     - head : seul le header est présent dans `$page`
+ * @return 
+**/
 function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode='page') {
 	/**
 	 * Si pas forcer_lang, on charge le contrôleur dans la langue que l'utilisateur a dans le privé
@@ -193,12 +242,14 @@ EOH;
  * Balise indiquant un champ SQL crayonnable
  *
  * @note
- *   Si cette fonction est absente, balise_EDIT_dist() déclarée par SPIP
+ *   Si cette fonction est absente, `balise_EDIT_dist()` déclarée par SPIP
  *   ne retourne rien
  * 
  * @example
- *   <div class="#EDIT{texte}">#TEXTE</div>
- *   <div class="#EDIT{ps}">#PS</div>
+ *     ```
+ *     <div class="#EDIT{texte}">#TEXTE</div>
+ *     <div class="#EDIT{ps}">#PS</div>
+ *     ```
  *
  * @param Champ $p
  *   Pile au niveau de la balise
@@ -270,8 +321,10 @@ function balise_EDIT($p) {
  * Balise indiquant une configuration crayonnable
  *
  * @example
- *   <div class="#EDIT_CONFIG{descriptif_site}">#DESCRIPTIF_SITE_SPIP</div>
- *   <div class="#EDIT_CONFIG{demo/truc}">#CONFIG{demo/truc}</div>
+ *     ```
+ *     <div class="#EDIT_CONFIG{descriptif_site}">#DESCRIPTIF_SITE_SPIP</div>
+ *     <div class="#EDIT_CONFIG{demo/truc}">#CONFIG{demo/truc}</div>
+ *     ```
  *
  * @param Champ $p
  *   Pile au niveau de la balise
@@ -317,11 +370,14 @@ function creer_le_crayon($class) {
 }
 
 /**
- * Balise #CRAYON affichant un formulaire de crayon
- * SI ?edit=1;
+ * Balise `#CRAYON` affichant un formulaire de crayon
+ *
+ * SI `?edit=1;`
  *
  * @example
- *   #CRAYON{ps}
+ *    ```
+ *    #CRAYON{ps}
+ *    ```
  *
  * @param Champ $p
  *   Pile au niveau de la balise
@@ -336,9 +392,11 @@ function balise_CRAYON($p) {
 
 
 /**
- * Donne la classe CSS crayon en fonction
+ * Donne la classe CSS crayon
+ *
+ * En fonction :
  * - du type de la boucle
- *   (attention aux exceptions pour #EDIT dans les boucles HIERARCHIE et SITES)
+ *   (attention aux exceptions pour `#EDIT` dans les boucles HIERARCHIE et SITES)
  * - du champ demande (vide, + ou se terminant par + : (+)classe type--id)
  * - de l'id courant
  * 

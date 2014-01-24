@@ -12,11 +12,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Transform a variable into its javascript equivalent (recursive)
- * http://doc.spip.org/@var2js
  * 
  * @access private
  * @param mixed the variable
- * @return string js script | boolean false if error
+ * @return string|boolean
+ *     - string : js script
+ *     - false if error
  */
 function crayons_var2js($var) {
 	$asso = false;
