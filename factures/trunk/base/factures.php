@@ -26,6 +26,10 @@ function factures_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['factures'] = 'factures';
 	$interfaces['table_des_tables']['factures_lignes'] = 'factures_lignes';
 
+	$interfaces['table_des_traitements']['LIBELLE_FACTURE']['spip_factures'] = _TRAITEMENT_TYPO;
+	$interfaces['table_des_traitements']['DESIGNATION']['spip_factures_lignes'] = _TRAITEMENT_TYPO;
+	$interfaces['table_des_traitements']['COMMENTAIRE']['spip_factures_lignes'] = _TRAITEMENT_RACCOURCIS;
+
 	return $interfaces;
 }
 
