@@ -3,7 +3,7 @@
 		["geometry": (#GEOMETRY|wkt_to_json),]
 		"id":"#ID_GIS",
 		"properties": {
-			"title":[(#TITRE*|supprimer_numero|json_encode)],
-			"description":[(#DESCRIPTIF|json_encode)][
+			"title":[(#VAL{<a href='[(#ID_GIS|generer_url_entite{gis,'','',0})]'>[(#TITRE*|extraire_multi|supprimer_numero|sinon{----})]</a>}|json_encode)],
+			"description":[(#DESCRIPTIF|json_encode)][(#SET{logo_doc,''})][
 			(#LOGO_GIS|gis_icon_properties)]
 		}}</BOUCLE_gis>

@@ -1,9 +1,9 @@
-		<BOUCLE_art(ARTICLES){gis}{id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}>
+		<BOUCLE_art(ARTICLES){gis}{id_article ?}{branche ?}{id_mot ?}{id_groupe ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}>
 		{"type": "Feature",
 		["geometry": (#GEOMETRY|wkt_to_json),]
 		"id":"#ID_GIS",
 		"properties": {
-			"title":[(#TITRE_GIS*|sinon{#TITRE*}|supprimer_numero|json_encode)],
+			"title":[(#TITRE_GIS*|sinon{#TITRE*}|extraire_multi|supprimer_numero|json_encode)],
 			"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][
 			(#LOGO_GIS|gis_icon_properties)]
 		}}</BOUCLE_art>
