@@ -158,6 +158,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_handlers_polyline_tooltip_cont' => 'Cliquez pour continuer à tracer la ligne',
 	'toolbar_handlers_polyline_tooltip_end' => 'Cliquez sur le dernier point pour terminer la ligne',
 	'toolbar_handlers_polyline_tooltip_start' => 'Cliquez pour commencer à tracer la ligne',
+	'toolbar_undo_title' => 'Effacer le dernier point tracé',
+	'toolbar_undo_text' => 'Effacer le dernier point',
 
 	// Z
 	'zoom' => 'Zoom'
