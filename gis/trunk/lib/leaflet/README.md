@@ -22,8 +22,6 @@ Sources utilisées dans la lib :
 	* leaflet.markercluster.css
 		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.css
 		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.Default.css
-	* leaflet.markercluster.ie.css
-		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/MarkerCluster.Default.ie.css
 	* leaflet.markercluster-src.js
 		* https://github.com/Leaflet/Leaflet.markercluster/blob/master/dist/leaflet.markercluster-src.js
 	* leaflet-plugins.css

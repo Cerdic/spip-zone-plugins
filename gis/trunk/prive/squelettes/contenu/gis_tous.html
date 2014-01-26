@@ -1,15 +1,19 @@
-<h1 class="grostitre"><:gis:editer_gis_titre:></h1>
+<div class="onglets_simple clearfix">
+	<ul>
+		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,carte}|lien_ou_expose{Carte,#ENV{afficher,carte}|=={carte},ajax})</li>]
+		[<li>(#URL_ECRIRE{gis_tous}|parametre_url{afficher,liste}|lien_ou_expose{Liste,#ENV{afficher,carte}|=={liste},ajax})</li>]
+	</ul>
+	[(#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax})]
+</div>
 
-[(#REM)<p><:gis:editer_gis_explication:></p>]
+[(#ENV{afficher,carte}|=={carte}|oui)
+	[(#INCLURE{fond=modeles/carte_gis,
+		id_carte_gis=_all,
+		objets=tous_avec_liens_espace_prive,
+		recherche}
+	)]
+]
 
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<BOUCLE_gis(GIS){recherche ?}{pagination 1}>
-<h3>[(#GRAND_TOTAL|singulier_ou_pluriel{gis:info_1_gis,gis:info_nb_gis})]</h3>
-</BOUCLE_gis>
-<h3><:gis:info_aucun_gis:></h3>
-<//B_gis>
-
-
-[(#INCLURE{fond=modeles/carte_gis,id_carte_gis=_all,recherche,objets=tous_avec_liens_espace_prive})]
+[(#ENV{afficher,carte}|=={liste}|oui)
+	[(#INCLURE{fond=prive/objets/liste/gis,env})]
+]

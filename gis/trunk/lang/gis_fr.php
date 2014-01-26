@@ -51,7 +51,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_gis_editer' => 'Modifier ce point',
-	'editer_gis_explication' => 'Cette page liste l’ensemble des points géolocalisés du site.',
 	'editer_gis_nouveau' => 'Créer un nouveau point',
 	'editer_gis_titre' => 'Les points géolocalisés',
 	'erreur_geocoder' => 'Aucun résultat pour votre recherche :',
