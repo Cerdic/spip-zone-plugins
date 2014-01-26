@@ -4,6 +4,8 @@
 
 [L.Icon.Default.imagePath = "(#CHEMIN{lib/leaflet/dist/images}|url_absolue)";]
 
+[var geocoder_forwardUrl = '(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=search}|html_entity_decode)';]
+[var geocoder_reverseUrl = '(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=reverse}|html_entity_decode)';]
 [(#INCLURE{javascript/gis_geocoder.js})]
 
 [(#INCLURE{javascript/gis_utils.js})]
