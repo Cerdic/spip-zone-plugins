@@ -264,7 +264,8 @@ function owm_flux2infos($flux, $lieu) {
  * @return array
  */
 function owm_service2credits() {
-	$credits = array('titre' => '', 'logo' => '');
+	$credits['titre'] = NULL;
+	$credits['logo'] = NULL;
 	$credits['lien'] = 'http://openweathermap.org/';
 
 	return $credits;

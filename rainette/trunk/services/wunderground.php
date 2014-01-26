@@ -280,9 +280,9 @@ function wunderground_flux2infos($flux, $lieu) {
 
 function wunderground_service2credits() {
 
-	$credits = array('titre' => '');
-	$credits['lien'] = 'http://www.wunderground.com/';
+	$credits['titre'] = NULL;
 	$credits['logo'] = 'wunderground-126.png';
+	$credits['lien'] = 'http://www.wunderground.com/';
 
 	return $credits;
 }

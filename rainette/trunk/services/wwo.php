@@ -263,9 +263,9 @@ function wwo_flux2infos($flux, $lieu) {
  */
 function wwo_service2credits() {
 
-	$credits = array('logo' => '');
-	$credits['lien'] = 'http://www.worldweatheronline.com/';
 	$credits['titre'] = 'Free local weather content provider';
+	$credits['logo'] = NULL;
+	$credits['lien'] = 'http://www.worldweatheronline.com/';
 
 	return $credits;
 }

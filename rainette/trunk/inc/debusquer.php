@@ -4,64 +4,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_RAINETTE_DEBUG'))
 	define ('_RAINETTE_DEBUG', false);
-if (!defined('_RAINETTE_DONNEES_PREVISIONS'))
-	define('_RAINETTE_DONNEES_PREVISIONS', '');
-if (!defined('_RAINETTE_DONNEES_CONDITIONS'))
-	define('_RAINETTE_DONNEES_CONDITIONS', 'derniere_maj:station:vitesse_vent:angle_vent:direction_vent:temperature_reelle:temperature_ressentie:
-	humidite:point_rosee:pression:tendance_pression:visibilite:code_meteo:icon_meteo:desc_meteo:periode:icone:resume');
-if (!defined('_RAINETTE_DONNEES_INFOS'))
-	define('_RAINETTE_DONNEES_INFOS', 'ville:region:longitude:latitude:population');
 
-$GLOBALS['cfg_conditions'] = array(
-	'derniere_maj'			=> array(
-								'type'		=> '',
-								'type_php'	=> 'string',
-								'groupe'	=> 'observation'),
-	'station'				=> array(
-								'type'		=> '',
-								'type_php'	=> 'string',
-								'groupe'	=> 'observation'),
-	'temperature_reelle'	=> array(
-								'type'		=> 'temperature',
-								'type_php'	=> 'float',
-								'groupe'	=> 'temperature'),
-	'temperature_ressentie'	=> array(
-								'type'		=> 'temperature',
-								'type_php'	=> 'float',
-								'groupe'	=> 'temperature'),
-	'vitesse_vent'			=> array(
-								'type'		=> 'vitesse',
-								'type_php'	=> 'float',
-								'groupe'	=> 'anemometrie'),
-	'angle_vent'			=> array(
-								'type'		=> 'angle',
-								'type_php'	=> 'int',
-								'groupe'	=> 'anemometrie'),
-	'direction_vent'		=> array(
-								'type'		=> '',
-								'type_php'	=> 'string',
-								'groupe'	=> 'anemometrie'),
-	'humidite'				=> array(
-								'type'		=> 'pourcentage',
-								'type_php'	=> 'int',
-								'groupe'	=> 'atmosphere'),
-	'point_rosee'			=> array(
-								'type'		=> 'temperature',
-								'type_php'	=> 'int',
-								'groupe'	=> 'atmosphere'),
-	'pression'				=> array(
-								'type'		=> 'pression',
-								'type_php'	=> 'float',
-								'groupe'	=> 'atmosphere'),
-	'tendance_pression'		=> array(
-								'type'		=> '',
-								'type_php'	=> 'string',
-								'groupe'	=> 'atmosphere'),
-	'visibilite'			=> array(
-								'type'		=> 'distance',
-								'type_php'	=> 'float',
-								'groupe'	=> 'atmosphere'),
-);
+if (!defined('_RAINETTE_DONNEES_PREVISIONS'))
+	define('_RAINETTE_DONNEES_PREVISIONS', 'index:date:lever_soleil:coucher_soleil:vitesse_vent:angle_vent:direction_vent:temperature_max:temperature_min:
+		risque_precipitation:precipitation:humidite:pression:code_meteo:icon_meteo:desc_meteo:periode:icone:resume');
+if (!defined('_RAINETTE_DONNEES_CONDITIONS'))
+	define('_RAINETTE_DONNEES_CONDITIONS',
+		'Donn&#233;es d\'observation:derniere_maj/station
+		|Temp&#233;ratures:temperature_reelle/temperature_ressentie
+		|Donn&#233;es an&#233;mom&#233;triques:vitesse_vent/angle_vent/direction_vent
+		|Donn&#233;es atmosph&#233;riques:humidite/point_rosee/pression/tendance_pression/visibilite
+		|&#201;tats m&#233;t&#233orologiques natifs:code_meteo/icon_meteo/desc_meteo
+		|&#201;tats m&#233;t&#233orologiques calcul&#233;s:icone/resume/periode');
+if (!defined('_RAINETTE_DONNEES_INFOS'))
+	define('_RAINETTE_DONNEES_INFOS',
+		'Lieu:ville/region
+		|Coordonn&#233;es:longitude/latitude
+		|D&#233;mographie:population');
+if (!defined('_RAINETTE_DONNEES_TYPE_UNITE'))
+	define('_RAINETTE_DONNEES_TYPE_UNITE',
+		'population:population
+		|temperature:temperature_reelle,temperature_ressentie,point_rosee,temperature_max,temperature_min
+		|vitesse:vitesse_vent
+		|angle:angle_vent
+		|pourcentage:risque_precipitation,humidite
+		|pression:pression
+		|distance:visibilite
+		|precipitation:precipitation');
 
 
 function rainette_dbg_afficher_cache($lieu, $mode='previsions', $service='weather') {
@@ -142,9 +111,20 @@ function rainette_dbg_comparer_services($mode='conditions', $jeu=array()) {
 
 
 function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php) {
+	static $types_unite = array();
 	$texte = '';
 
-	$type_donnee = $GLOBALS['cfg_conditions'][$donnee]['type'];
+	if (!$types_unite) {
+		$config_types = explode('|', _RAINETTE_DONNEES_TYPE_UNITE);
+		foreach ($config_types as $_config_type) {
+			list($type, $donnees) = explode(':', trim($_config_type));
+			foreach (explode(',', $donnees) as $_donnee) {
+					$types_unite[$_donnee] = $type;
+			}
+		}
+	}
+	$type_donnee = isset($types_unite[$donnee]) ? $types_unite[$donnee] : '';
+
 	if ($type_php === 'NULL') {
 		$texte = '<del>API</del>';
 		$type_php = '';
@@ -156,8 +136,13 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php) {
 			$texte = $valeur ? $valeur : 'Ok';
 		}
 	}
+	elseif ($type_php === 'array') {
+		foreach ($valeur as $_cle => $_valeur) {
+			$texte .= ($texte ? '<br />' : '') . "<strong>${_cle}</strong> : " . ((gettype($_valeur) === NULL) ? '<del>API</del>' : $_valeur);
+		}
+	}
 	else {
-		$texte = $type_donnee ? rainette_afficher_unite($valeur, $type_donnee) : $valeur;
+			$texte = $type_donnee ? rainette_afficher_unite($valeur, $type_donnee) : $valeur;
 	}
 	$texte .= "<br /><em>${type_php}</em>";
 

@@ -236,7 +236,8 @@ function weather_flux2infos($flux, $lieu){
 
 function weather_service2credits() {
 
-	$credits = array('titre' => '', 'logo' => '');
+	$credits['titre'] = NULL;
+	$credits['logo'] = NULL;
 	$credits['lien'] = 'http://www.weather.com/';
 
 	return $credits;
