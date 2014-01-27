@@ -86,12 +86,10 @@ function depublie_formulaire_verifier($flux){
 	return $flux;		
 }
 
-
+/*	
+Traitement du formulaire dater
+*/
 function depublie_formulaire_traiter($flux){
-
-	/********************************/	
-	# Traitement du formulaire dater #
-	/********************************/
 	
 	//si formulaire dater, se greffer pour enregistrer les données des champs supplémentaires
 	if ($flux['args']['form'] == 'dater' && _request('changer')){
@@ -127,25 +125,41 @@ function depublie_formulaire_traiter($flux){
 		}
 
 	}
-				
-	/***********************************/	
-	#   Gérer la date de dépublication  #
-	# au changement de statut en publié #
-	/***********************************/
+	
+	return $flux;
+}
 
+/* Gérer la date de dépublication au changement de statut en publié */
+	
+function depublie_post_edition($flux){
+	
+	//si on a demandé la durée automatique de publication se greffer sur le traitement post_edition de changement de statut d'un article
 	$duree= lire_config('depublie/publication_duree');
-
-		//si on a demandé la durée automatique de publication se greffer sur le traitement du formulaire de changement de statut d'un article
-		if($duree>0 AND $flux['args']['form'] == 'instituer_objet' AND $flux['args']['args'][0] == 'article') {
-
-			$id_objet=$flux['args']['args'][1];
+	
+	if ( 	$duree>0 
+		and ($action = $flux['args']['action']) == 'instituer' // action instituer
+		and ($table = $flux['args']['table']) == table_objet_sql('article') // on institue un article
+		and ($statut_ancien = $flux['args']['statut_ancien']) != ($statut = $flux['data']['statut']) // le statut a été modifié
+		and $id_objet = $flux['args']['id_objet'] // on a bien un identifiant
+	) {
+	
 			$objet='article';
-			$id_rubrique_choisie= lire_config('offres/rubrique_offres');
-
-			$row = sql_fetsel("id_rubrique, statut", "spip_articles", "id_article=$id_objet AND id_rubrique=$id_rubrique_choisie");
-
-			//seulement si la rubrique est celle choisie et l'article est publié
-			if(isset($row['id_rubrique']) && $row['statut']=='publie'){
+			$id_secteur=$flux['data']['id_secteur'];
+			$id_rubrique=$flux['data']['id_rubrique'];
+			$id_secteur_choisi= array();
+			$id_rubrique_choisie=array();
+			$id_secteur_choisi= explode(',',lire_config('depublie/secteur_depubli'));
+			$id_rubrique_choisie= explode(',',lire_config('depublie/rubrique_depublie'));
+	
+			
+				//seulement si secteur ou rubrique sont dans la config et que l'article est publié
+				if(
+					$statut='publie'
+					AND (
+						in_array($id_secteur,$id_secteur_choisi)
+						OR in_array($id_rubrique,$id_rubrique_choisie)
+					)
+				){
 				
 				//on récupère la configuation de la durée de publication
 				$periode= lire_config('depublie/publication_periode');
@@ -162,7 +176,7 @@ function depublie_formulaire_traiter($flux){
 					$set['date_depublie'] = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$duree,date('j'),date('Y')));
 				}
 								
-				//ne rien faire si il y a déjà une date de dépublication
+				//détecter si il y a déjà une date de dépublication
 				$row = sql_fetsel('date_depublie', "spip_depublies", "id_objet=".intval($id_objet)." AND objet='$objet'");
 					$possedeDateDepublie = false;
 					if (isset($row['date_depublie'])) $possedeDateDepublie = true;
