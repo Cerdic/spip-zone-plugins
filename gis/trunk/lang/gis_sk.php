@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_gis_editer' => 'Upraviť tento bod',
-	'editer_gis_explication' => 'Táto stránka uvádza všetky geolokalizované body na webe.',
 	'editer_gis_nouveau' => 'Vytvoriť nový bod',
 	'editer_gis_titre' => 'Geolokalizované body',
 	'erreur_geocoder' => 'Žiaden výsledok k vášmu vyhľadávaniu:',

@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_gis_editer' => 'Edit this point',
-	'editer_gis_explication' => 'This page lists the whole location-based points of the website.',
 	'editer_gis_nouveau' => 'Create a new point',
 	'editer_gis_titre' => 'The location-based points',
 	'erreur_geocoder' => 'No results for your search:',

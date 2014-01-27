@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_gis_editer' => 'Изменить точку',
-	'editer_gis_explication' => 'Список всех точек, используемых на вашем сайте.',
 	'editer_gis_nouveau' => 'Создать точку',
 	'editer_gis_titre' => 'Точки на карте',
 	'erreur_recherche_pas_resultats' => 'Нет точек, соответствующих поисковому запросу.',

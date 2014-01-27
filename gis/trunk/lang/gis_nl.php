@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_gis_editer' => 'Pas dit punt aan',
-	'editer_gis_explication' => 'Deze pagina toont alle locatiepunten van de website.',
 	'editer_gis_nouveau' => 'Maak een nieuw punt',
 	'editer_gis_titre' => 'Locatiepunten',
 	'erreur_geocoder' => 'Geen resultaat voor zoekopdracht:',
