@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Patch pour les failles XSS des SPIP &#60; 2.1.25</nom>
+	<auteur>D&#233;veloppeurs de SPIP Core</auteur>
+	<version>1.0</version>
+	<categorie>performance</categorie>
+	<etat>stable</etat>
+	<lien>http://www.spip.net/fr_article5665.html</lien>
+	<description>
+Ce plugin permet &#224; ceux qui ne peuvent pas mettre &#224; jour leur SPIP 2.1.x vers la version 2.1.25 de patcher leur SPIP pour &#233;viter les failles que cette version corrige.
+
+Voir aussi :
+- http://core.spip.org/projects/spip/repository/revisions/21034
+- http://core.spip.org/projects/spip/repository/revisions/21018
+- http://core.spip.org/projects/spip/repository/revisions/20972
+	</description>
+	<prefix>patch2125</prefix>
+	<necessite id="spip" version="[2.1.0;2.1.99)" />
+	<licence>GPL</licence>
+</plugin>
