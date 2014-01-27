@@ -8,17 +8,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	//C
 	'cfg_titre_parametrages'=>'Paramétrages des dépublications',
-	'configurer_rubrique_depublie'=>'Choisir la (ou les) rubrique(s) pour y afficher le formulaire',
+	'configurer_rubrique_depublie' =>'Afficher le formulaire de dépublication requiert un identifiant de rubrique ou de secteur, plusieurs sont possibles avec des virgules',
+	'configurer_statut_depublie'=>'Choisissez le statut à donner à la dépublication',
 	'configurer_duree_publication' => 'Noter une durée de publication si le statut passe à publier, ne rien mettre sinon',
 	
+
 	//L
 	'label_jour'=>'Jours',
 	'label_mois'=>'Mois',
 	'label_publication_duree'=>'Durée',
 	'label_publication_periode'=>'Période',
-	'label_rubrique_depublie'=>'Identifiant(s) séparé(s) par des virgules',
-	'label_statut_depublie' => 'Statut à donner à la dépublication',
-	
+	'label_rubrique_depublie'=>'Identifiants de rubrique(s)',
+	'label_secteur_depublie'=>'Identifiants de secteur(s)',
+	'label_statut_depublie' => 'Statut',
+
+		
 	//T
 	'texte_date_depublication' => 'Date de dépublication en ligne :',
 	'texte_date_depublication_nonaffichee' =>'Ne pas utiliser la date de dépublication',

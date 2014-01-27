@@ -10,9 +10,17 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<input type="hidden" name="_meta_casier" value="depublie" />
+		
 			<legend><:depublie:configurer_rubrique_depublie:></legend>
-
 			<ul>
+			<!-- id_secteur des depublications-->
+				#SET{name,secteur_depublie}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{'depublie:label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				
 			<!-- id_rubrique des depublications-->
 				#SET{name,rubrique_depublie}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -20,6 +28,9 @@
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
+			</ul>
+			<legend><:depublie:configurer_statut_depublie:></legend>
+			<ul>
 			<!-- statut des depublications-->
 				#SET{name,statut_depublie}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
