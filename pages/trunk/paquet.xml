@@ -14,7 +14,7 @@
 
 	<auteur>RastaPopoulos</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
-	<licence>GPL</licence>
+	<licence>GPL v3</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pages_tables.php" />
 	<pipeline nom="affiche_milieu" action="affiche_milieu_ajouter_page" inclure="pages_pipelines.php" />
