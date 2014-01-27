@@ -1,7 +1,7 @@
 <paquet
 	prefix="depublie"
 	categorie="divers"
-	version="1.0.4"
+	version="1.0.5"
 	etat="dev"
 	compatibilite="[3.0.13;3.0.*]"
 	logo="depublie.png"
@@ -15,6 +15,9 @@
 	<credit>Nouveaux Territoires</credit>
 
 	<licence>GNU/GPL</licence>
+    
+    <traduire module="depublie" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-depublie" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/depublie.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/depublie.php" />
