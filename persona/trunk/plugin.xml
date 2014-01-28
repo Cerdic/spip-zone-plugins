@@ -15,7 +15,7 @@
 	<!-- https://www.persona.org/i/icon.png -->
 
 	<categorie>auteur</categorie>
-	<lien>http://www.spip-contrib.net/4005</lien>
+	<lien>http://contrib.spip.net/4005</lien>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>

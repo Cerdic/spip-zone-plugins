@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/persona-32.png"
-	documentation="http://www.spip-contrib.net/4005"
+	documentation="http://contrib.spip.net/4005"
 >	
 
 	<nom>Persona</nom>
