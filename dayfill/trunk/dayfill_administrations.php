@@ -22,12 +22,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return void
 **/
 function dayfill_upgrade($nom_meta_base_version, $version_cible) {
-	$maj = array();
+    $maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_projets_activites')));
+    $maj['create'] = array(array('maj_tables', array('spip_projets_activites')));
 
-	include_spip('base/upgrade');
-	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+    include_spip('inc/config');
+    ecrire_config('chosen/active', 'oui');
+
+    include_spip('base/upgrade');
+    maj_plugin($nom_meta_base_version, $version_cible, $maj);
+
 }
 
 
