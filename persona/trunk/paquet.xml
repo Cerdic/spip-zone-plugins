@@ -3,7 +3,7 @@
 	categorie="auteur"
 	version="1.0.1"
 	etat="dev"
-	compatibilite="[3.0.0;3.0.99]"
+	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/persona-32.png"
 	documentation="http://www.spip-contrib.net/4005"
 >	
