@@ -31,8 +31,17 @@ jQuery.getScript("'.$js.'",function(){'.$init.'});/*]]>*/</script>';
 }
 
 
-function nivoslider_img_display_first_only($img, $compteur){
-	if ($compteur==1) return $img;
+/**
+ * Mise en forme de la balise img : src direct ou gif transparent selon le cas
+ * evite de charger toutes les images directement
+ * @param string $img
+ * @param int $compteur
+ * @param bool|string $controlNavThumbs
+ * @return string
+ */
+function nivoslider_img_display_first_only($img, $compteur, $controlNavThumbs){
+	// charger l'image directement si c'est la premiere ou si on a active la navigation par vignette
+	if ($compteur==1 OR $controlNavThumbs===true OR $controlNavThumbs==="true") return $img;
 
 	$src = extraire_attribut($img,"src");
 	$img = inserer_attribut($img,"data-src",$src);

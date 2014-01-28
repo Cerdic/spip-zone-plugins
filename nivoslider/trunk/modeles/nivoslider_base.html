@@ -9,7 +9,8 @@
 	Affichage du slider
 		width:			hauteur
 		height:			largeur
-		effect:
+		effect: random, sliceDownRight, sliceDownLeft, sliceUpRight, sliceUpLeft, sliceUpDown,
+            sliceUpDownLeft, fold, fade, boxRandom, boxRain, boxRainReverse, boxRainGrow, boxRainGrowReverse
 		slices:
 		animSpeed:
 		pauseTime:
@@ -27,6 +28,7 @@
     manualAdvance:
 ]
 
+[(#SET{resize,[(#ENV{resize,oui})]})]
 [(#SET{width,[(#ENV{width, #CONFIG{nivoslider/width, 500} })]} )]
 [(#SET{height,[(#ENV{height, #CONFIG{nivoslider/height, 240} })]} )]
 [(#SET{effect,[(#ENV{effect, #CONFIG{nivoslider/effect, random} })]} )]
@@ -47,7 +49,8 @@
 [(#SET{uniqid,#ENV|md5|substr{0,8}})]
 
 <B_doc>
-<div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})]' style="[width:(#GET{width})px;][height:(#GET{height})px]">
+<div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})]'
+	[(#GET{resize}|=={oui}|oui)style="[max-width:(#GET{width})px;][max-height:(#GET{height})px]"]>
 	<div id="slider_#GET{uniqid}"
 	     class="nivoSlider"
 		   data-slider="{
@@ -97,15 +100,22 @@
 			})]
 		][
 		<a href="(#GET{lien})" [class="(#GET{fancyornot})"]>
-		][(#FICHIER
-				|image_passe_partout{#GET{width},#GET{height}}
-				|image_recadre{#GET{width},#GET{height}}
+		][(#SET{img,[(#GET{resize}|=={oui}|?{
+				[(#FICHIER
+						|image_passe_partout{#GET{width},#GET{height}}
+						|image_recadre{#GET{width},#GET{height}})]
+				,
+				[(#FICHIER|balise_img)]
+				})]
+				})][(#SET{img,[(#GET{img}
 				|inserer_attribut{title,#TITRE}
-				|inserer_attribut{data-thumb,#FICHIER|image_reduire{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|extraire_attribut{src}}
-		    |nivoslider_img_display_first_only{#COMPTEUR_BOUCLE}
-		    |inserer_attribut{class,'no_image_filtrer no-adapt-img'}
-		)]
-		[</a>(#GET{lien}|oui)
+		    |nivoslider_img_display_first_only{#COMPTEUR_BOUCLE,#GET{controlNavThumbs}}
+		    |inserer_attribut{class,'no_image_filtrer no-adapt-img'})]
+		})][(#GET{controlNavThumbs}|=={'true'}|?{
+			[(#GET{img}|inserer_attribut{data-thumb,#FICHIER|image_passe_partout{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|image_recadre{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight},center,ffffff}|extraire_attribut{src}})]
+		,
+			[(#GET{img})]
+		})][</a>(#GET{lien}|oui)
 	]</BOUCLE_doc>
 	</div>
 </div>
