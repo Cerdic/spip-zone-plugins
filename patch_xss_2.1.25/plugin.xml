@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Patch pour les failles XSS des SPIP &#60; 2.1.25</nom>
 	<auteur>D&#233;veloppeurs de SPIP Core</auteur>
-	<version>1.0</version>
+	<version>1.1</version>
 	<categorie>performance</categorie>
 	<etat>stable</etat>
 	<lien>http://www.spip.net/fr_article5665.html</lien>
@@ -14,6 +14,6 @@ Voir aussi :
 - http://core.spip.org/projects/spip/repository/revisions/20972
 	</description>
 	<prefix>patch2125</prefix>
-	<necessite id="spip" version="[2.1.0;2.1.25[" />
+	<necessite id="spip" version="[2.1.0;2.1.24]" />
 	<licence>GPL</licence>
 </plugin>
