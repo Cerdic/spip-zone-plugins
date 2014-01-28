@@ -1,0 +1,37 @@
+<?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+    'accbarre' => 'barres empilées',
+    'barre' => 'diagramme en bâtons',
+    'baton' => 'diagramme en bâtons',
+    'camembert' => 'diagramme circulaire',
+    'camembert3d' => 'camember 3D',
+    'carre' => 'carré',
+    'cercle' => 'cercle vide',
+    'couleurs' => 'couleurs du tracé (<a href="http://fr.wikipedia.org/wiki/Noms_de_couleur_X11">nom en anglais</a> ou <a href="http://fr.wikipedia.org/wiki/Liste_de_couleurs">code hexadécimal</a>)',
+    'courbe' => 'courbe ou histogramme',
+    'croix_t' => 'croix (forme +)',
+    'croix_x' => 'croix (forme x)',
+    'disque' => 'cercle plein',
+    'donnees' => 'valeurs des données séparées par « ; », par exemple <samp>21;35;2;25</samp>',
+    'donnees1' => 'premier jeu de données',
+    'donnees2' => 'second jeu de données',
+    'donnees3' => 'troisième jeu de données',
+    'etoile' => 'étoiles',
+    'hauteur' => 'hauteur du graphique (px)',
+    'largeur' => 'largeur du graphique (px)',
+    'legendes1' => 'légendes des données séparées par « ; », par exemple <samp>Mars;Avril;Mai;Juin</samp>',
+    'legendes2' => 'légendes des différentes séries de données séparées par « ; », par exemple <samp>Donald;Tic;Tac</samp>',
+    'legendes3' => 'libellés des axes « horizontal;vertical », par exemple <samp>Jours;Nombre de noisettes</samp>',
+    'losange' => 'losange',
+    'marqueur' => 'marqueur',
+    'option' => 'options spécifiques séparées par « ; »',
+    'point' => 'points dans un repère',
+    'radar' => 'diagramme polygonal',
+    'titre' => 'titre du graphique',
+    'triangle_bas' => 'triangle avec pointe en bas',
+    'triangle_haut' => 'triangle avec pointe en haut',
+    'type' => 'modèle de graphe',
+);
+?>

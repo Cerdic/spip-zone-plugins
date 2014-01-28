@@ -1,0 +1,37 @@
+<?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+
+$GLOBALS[$GLOBALS['idx_lang']] = array(
+    'accbarre' => 'stacked bars',
+    'barre' => 'standard bars',
+    'baton' => 'scatter',
+    'camembert' => '2d pie',
+    'camembert3d' => '3d pie',
+    'carre' => 'carré',
+    'cercle' => 'empty circle',
+    'couleurs' => 'plot colors (<a href="http://en.wikipedia.org/wiki/List_of_colors_(compact)">name</a> or <a href="http://en.wikipedia.org/wiki/Web_colors">#hex value</a>)',
+    'courbe' => 'lines',
+    'croix_t' => 'cross (+ form)',
+    'croix_x' => 'cross (x form)',
+    'disque' => 'filled circle',
+    'donnees' => 'data number values semicolon-separed, e.g. <samp>21;35;2;25</samp>',
+    'donnees1' => 'first data set',
+    'donnees2' => 'second data set',
+    'donnees3' => 'third data set',
+    'etoile' => 'stars',
+    'hauteur' => 'graph height (px)',
+    'largeur' => 'graph weidht (px)',
+    'legendes1' => 'data legends semicolon-separed, e.g. <samp>Mars;Avril;Mai;Juin</samp>',
+    'legendes2' => 'data sets naming semicolon-separed, e.g. <samp>Donald;Tic;Tac</samp>',
+    'legendes3' => 'axes labels “horizontal;vertical”, e.g. <samp>Days;Number of nuts</samp>',
+    'losange' => 'losange',
+    'marqueur' => 'mark',
+    'option' => 'other specific options, semicolon-separed',
+    'point' => 'spared dots',
+    'radar' => 'cob web',
+    'titre' => 'graph title',
+    'triangle_bas' => 'down triangle',
+    'triangle_haut' => 'upper triangle',
+    'type' => 'graphe type',
+);
+?>

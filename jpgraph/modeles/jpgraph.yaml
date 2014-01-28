@@ -1,0 +1,181 @@
+nom: 'jpgraph'
+logo: 'img/jpgraph.png'
+icone_barre: 'img/jpgraph.png'
+parametres:
+  -
+     saisie: 'hidden'
+     options:
+       nom: 'modele'
+       defaut: 'jpgraph'
+  -
+     saisie: 'selection'
+     options:
+       nom: 'type_graphe'
+       label: '<:jpgraph:type:>'
+       defaut: 'courbe'
+       cacher_option_intro: 'oui'
+       datas:
+         courbe: '<:jpgraph:courbe:>'
+         point: '<:jpgraph:point:>'
+         barre: '<:jpgraph:barre:>'
+         camembert: '<:jpgraph:camembert:>'
+         camembert3d: '<:jpgraph:camembert3d:>'
+         accbarre: '<:jpgraph:accbarre:>'
+         radar: '<:jpgraph:radar:>'
+  -
+     saisie: 'input'
+     options:
+       nom: 'titre'
+       label: '<:jpgraph:titre:>'
+  -
+     saisie: 'fieldset'
+     options:
+       nom: 'donnees1'
+       label: '<:jpgraph:donnees1:>'
+     saisies:
+       -
+          saisie: 'textarea'
+          options:
+            nom: 'donnee'
+            label: '<:jpgraph:donnees:>'
+            obligatoire: 'oui'
+            height: 2
+       -
+          saisie: 'textarea'
+          options:
+            nom: 'legende'
+            label: '<:jpgraph:legendes1:>'
+            obligatoire: 'oui'
+            height: 2
+       -
+          saisie: 'input'
+          options:
+            nom: 'couleur'
+            label: '<:jpgraph:couleurs:>'
+            class: 'palette'
+       -
+          saisie: 'selection'
+          options:
+            nom: 'marqueur'
+            label: '<:jpgraph:marqueur:>'
+            datas:
+              carre: '<:jpgraph:carre:>'
+              triangle: '<:jpgraph:triangle_haut:>'
+              triangle_bas: '<:jpgraph:triangle_bas:>'
+              losange: '<:jpgraph:losange:>'
+              cercle: '<:jpgraph:cercle:>'
+              disque: '<:jpgraph:disque:>'
+              croix: '<:jpgraph:croix_t:>'
+              croix_x: '<:jpgraph:croix_x:>'
+              etoile: '<:jpgraph:etoile:>'
+            afficher_si: '@type_graphe@ == "courbe" || @type_graphe@ == "point" || @type_graphe@ == "radar" '
+  -
+     saisie: 'fieldset'
+     options:
+       nom: 'donnees2'
+       label: '<:jpgraph:donnees2:>'
+     saisies:
+       -
+          saisie: 'textarea'
+          options:
+            nom: 'donneedeux'
+            label: '<:jpgraph:donnees:>'
+            height: 2
+       -
+          saisie: 'textarea'
+          options:
+            nom: 'legendedeux'
+            label: '<:jpgraph:legendes2:>'
+            height: 2
+       -
+          saisie: 'input'
+          options:
+            nom: 'couleurdeux'
+            label: '<:jpgraph:couleurs:>'
+            class: 'palette'
+            afficher_si: '@type_graphe@ != "camembert" && @type_graphe@ != "camembert3d" '
+       -
+          saisie: 'selection'
+          options:
+            nom: 'marqueurdeux'
+            label: '<:jpgraph:marqueur:>'
+            datas:
+              carre: '<:jpgraph:carre:>'
+              triangle: '<:jpgraph:triangle_haut:>'
+              triangle_bas: '<:jpgraph:triangle_bas:>'
+              losange: '<:jpgraph:losange:>'
+              cercle: '<:jpgraph:cercle:>'
+              disque: '<:jpgraph:disque:>'
+              croix: '<:jpgraph:croix_t:>'
+              croix_x: '<:jpgraph:croix_x:>'
+              etoile: '<:jpgraph:etoile:>'
+            afficher_si: '@type_graphe@ == "courbe" || @type_graphe@ == "point" || @type_graphe@ == "radar" '
+  -
+     saisie: 'fieldset'
+     options:
+       nom: 'donnees3'
+       label: '<:jpgraph:donnees3:>'
+       afficher_si: '@type_graphe@ != "camembert" && @type_graphe@ != "point" @type_graphe@ != "camembert3d" '
+     saisies:
+       -
+          saisie: 'textarea'
+          options:
+            nom: 'donneetrois'
+            label: '<:jpgraph:donnees:>'
+            height: 2
+       -
+          saisie: 'input'
+          options:
+            nom: 'couleurtrois'
+            label: '<:jpgraph:couleurs:>'
+            class: 'palette'
+            afficher_si: '@type_graphe@ != "camembert" && @type_graphe@ != "camembert3d" '
+       -
+          saisie: 'selection'
+          options:
+            nom: 'marqueurtrois'
+            label: '<:jpgraph:marqueur:>'
+            datas:
+              carre: '<:jpgraph:carre:>'
+              triangle: '<:jpgraph:triangle_haut:>'
+              triangle_bas: '<:jpgraph:triangle_bas:>'
+              losange: '<:jpgraph:losange:>'
+              cercle: '<:jpgraph:cercle:>'
+              disque: '<:jpgraph:disque:>'
+              croix: '<:jpgraph:croix_t:>'
+              croix_x: '<:jpgraph:croix_x:>'
+              etoile: '<:jpgraph:etoile:>'
+            afficher_si: '@type_graphe@ == "courbe" || @type_graphe@ == "point" || @type_graphe@ == "radar" '
+  -
+    saisie: 'input'
+    options:
+      nom: 'legendetrois'
+      label: '<:jpgraph:legendes3:>'
+  -
+     saisie: 'input'
+     options:
+       nom: 'largeur'
+       label: '<:jpgraph:largeur:>'
+       defaut: 400
+     verifier:
+       type: 'entier'
+       options:
+         min: 10
+         max: 1600
+  -
+     saisie: 'input'
+     options:
+       nom: 'hauteur'
+       label: '<:jpgraph:hauteur:>'
+       defaut: 300
+     verifier:
+       type: 'entier'
+       options:
+         min: 10
+         max: 1600
+  -
+     saisie: 'input'
+     options:
+       nom: 'option'
+       label: '<:jpgraph:option:>'
+       afficher_si: '@type_graphe@ == "camembert" || @type_graphe@ == "camembert3d" || @type_graphe@ == "baton" || @type_graphe@ == "radar" '
