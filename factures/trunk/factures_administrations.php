@@ -2,7 +2,7 @@
 /**
  * Fichier gérant l'installation et désinstallation du plugin Factures &amp; devis
  *
- * @plugin     Factures &amp; devis
+ * @plugin     Factures & devis
  * @copyright  2013
  * @author     Cyril Marion - Ateliers CYM
  * @licence    GNU/GPL
@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Fonction d'installation et de mise à jour du plugin Factures &amp; devis.
+ * Fonction d'installation et de mise à jour du plugin Factures & devis.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -32,7 +32,7 @@ function factures_upgrade($nom_meta_base_version, $version_cible) {
 
 
 /**
- * Fonction de désinstallation du plugin Factures &amp; devis.
+ * Fonction de désinstallation du plugin Factures & devis.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP

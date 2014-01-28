@@ -91,6 +91,7 @@ function factures_declarer_tables_objets_sql($tables) {
 			"unite"              => "varchar(50) DEFAULT NULL",
 			"designation"        => "text",
 			"prix_unitaire_ht"   => "decimal(18,2) DEFAULT NULL",
+            "taux_tva"           => "decimal(8,2) DEFAULT NULL",
 			"commentaire"        => "mediumtext",
 			"maj"                => "TIMESTAMP"
 		),
