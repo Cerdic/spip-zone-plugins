@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     //L
     
     'label_activer'=>'Activer l\'archivage pour la notification @notification@',
-    'label_duree'=>'Nombre de jours après lesquels ces notifications seront éliminées.',
+    'label_duree'=>' Nombre de jours après lesquels ces notifications seront éliminées.',
 				
 	// N
 	'notifications_archive_titre' => 'Archive notifications',
