@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_zone' => 'Espace de développement régi par une charte, ZONE.SPIP.org donne accès au versioning de toutes les contributions complémentaires à SPIP (plugins, squelettes, thèmes, modèles, outils,...).',
 
 	// N
-	'nom_boussole_spip' => 'Galaxie SPIP',
+	'nom_boussole_spip' => 'Boussole SPIP',
 	'nom_groupe_spip_actualite' => 'Actualité',
 	'nom_groupe_spip_aide' => 'Entraide',
 	'nom_groupe_spip_decouverte' => 'Découverte',
