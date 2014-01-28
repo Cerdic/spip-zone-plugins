@@ -20,11 +20,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $data = array (
-  'fabrique' => 
+  'fabrique' =>
   array (
     'version' => 5,
   ),
-  'paquet' => 
+  'paquet' =>
   array (
     'nom' => 'Factures & devis',
     'slogan' => 'Facturer et faire des devis avec SPIP',
@@ -42,29 +42,29 @@ $data = array (
     'schema' => '1.0.0',
     'formulaire_config' => 'on',
     'formulaire_config_titre' => 'Configurer Factures & Devis',
-    'fichiers' => 
+    'fichiers' =>
     array (
       0 => 'autorisations',
       1 => 'pipelines',
     ),
-    'inserer' => 
+    'inserer' =>
     array (
       'paquet' => '',
-      'administrations' => 
+      'administrations' =>
       array (
         'maj' => '',
         'desinstallation' => '',
         'fin' => '',
       ),
-      'base' => 
+      'base' =>
       array (
-        'tables' => 
+        'tables' =>
         array (
           'fin' => '',
         ),
       ),
     ),
-    'scripts' => 
+    'scripts' =>
     array (
       'pre_copie' => '',
       'post_creation' => 'include_once($destination_ancien_plugin . \'factures_post_creation.php\');
@@ -72,9 +72,9 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
     ),
     'exemples' => '',
   ),
-  'objets' => 
+  'objets' =>
   array (
-    0 => 
+    0 =>
     array (
       'nom' => 'Factures',
       'nom_singulier' => 'Facture',
@@ -84,206 +84,206 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
       'cle_primaire' => 'id_facture',
       'cle_primaire_sql' => 'bigint(21) NOT NULL',
       'table_type' => 'facture',
-      'champs' => 
+      'champs' =>
       array (
-        0 => 
+        0 =>
         array (
           'nom' => 'Numéro de la facture',
           'champ' => 'num_facture',
           'sql' => 'varchar(50) NOT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '10',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Corrigez l\'identifiant de la facture ou corriges celui proposé par défaut',
           'saisie_options' => '',
         ),
-        1 => 
+        1 =>
         array (
           'nom' => 'Organisation émettrice',
           'champ' => 'id_organisation_emettrice',
           'sql' => 'int(11) NOT NULL DEFAULT 0',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Sélectionnez l\'organisation émettrice de la facture ou du devis',
           'saisie_options' => '',
         ),
-        2 => 
+        2 =>
         array (
           'nom' => 'Id organisation',
           'champ' => 'id_organisation',
           'sql' => 'int(11) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'organisations',
+          'saisies' => 'organisations',
           'explication' => 'Saisissez l\'organisation destinataire du devis ou de la facture',
           'saisie_options' => '',
         ),
-        3 => 
+        3 =>
         array (
           'nom' => 'Date facture',
           'champ' => 'date_facture',
           'sql' => 'datetime DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'date',
+          'saisies' => 'date',
           'explication' => 'Saisissez la date de facture ou corrigez celle proposée par défaut',
           'saisie_options' => '',
         ),
-        4 => 
+        4 =>
         array (
           'nom' => 'Libelle facture',
           'champ' => 'libelle_facture',
           'sql' => 'mediumtext',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '10',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Saisissez un libellé explicite pour la facture ou le devis',
           'saisie_options' => '',
         ),
-        5 => 
+        5 =>
         array (
           'nom' => 'Montant global de la facture (calculé)',
           'champ' => 'montant',
           'sql' => 'decimal(18,2) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez le montant total de la facture ou corrigez celui calculé par SPIP à partir des lignes de factures',
           'saisie_options' => 'type=number,attributs=\'step=0.01\'',
         ),
-        6 => 
+        6 =>
         array (
           'nom' => 'Quantité globale',
           'champ' => 'quantite',
           'sql' => 'decimal(18,2) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez une quantité globale relative à cette facture ou ce devis (en général un nombre d\'heures ou de jours)',
           'saisie_options' => 'type=number',
         ),
-        7 => 
+        7 =>
         array (
           'nom' => 'Unité vendue',
           'champ' => 'unite',
           'sql' => 'varchar(25) NOT NULL DEFAULT \'\'',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez une unité relative à cette facture ou ce devis (en général des heures ou des jours)',
           'saisie_options' => '',
         ),
-        8 => 
+        8 =>
         array (
           'nom' => 'Conditions commerciales',
           'champ' => 'conditions',
           'sql' => 'text NOT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez les conditions de règlement proposées pour cette facture ou ce devis',
           'saisie_options' => '',
         ),
-        9 => 
+        9 =>
         array (
           'nom' => 'Mode de règlement',
           'champ' => 'reglement',
           'sql' => 'varchar(50) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez un mode de règlement pour cette facture ou ce devis',
           'saisie_options' => '',
         ),
-        10 => 
+        10 =>
         array (
           'nom' => 'Nota bene',
           'champ' => 'nota_bene',
           'sql' => 'mediumtext',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'textarea',
+          'saisies' => 'textarea',
           'explication' => 'Indiquez un nota-bene qui apparaitra à la fin de la facture ou du devis (équivalent des "mentions manuscrites")',
           'saisie_options' => '',
         ),
-        11 => 
+        11 =>
         array (
           'nom' => 'Delais validite',
           'champ' => 'delais_validite',
           'sql' => 'int(11) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez un nombre de jours de validité pour le devis ou la facture',
           'saisie_options' => '',
         ),
-        12 => 
+        12 =>
         array (
           'nom' => 'Fin validite',
           'champ' => 'fin_validite',
           'sql' => 'datetime DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'date',
+          'saisies' => 'date',
           'explication' => 'Indiquez une date de fin de validité pour cette facture ou ce devis',
           'saisie_options' => '',
         ),
-        13 => 
+        13 =>
         array (
           'nom' => 'Numéro du devis lié',
           'champ' => 'num_devis',
           'sql' => 'varchar(50) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez une référence à un devis précédent (le cas échéant)',
           'saisie_options' => '',
         ),
@@ -291,7 +291,7 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
       'champ_titre' => 'libelle_facture',
       'champ_date' => '',
       'statut' => '',
-      'chaines' => 
+      'chaines' =>
       array (
         'titre_objets' => 'Factures',
         'titre_objet' => 'Facture',
@@ -312,20 +312,20 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
         'texte_changer_statut_objet' => 'Cette facture est :',
       ),
       'table_liens' => '',
-      'vue_liens' => 
+      'vue_liens' =>
       array (
         0 => 'spip_organisations',
       ),
       'roles' => '',
       'auteurs_liens' => '',
       'vue_auteurs_liens' => '',
-      'echafaudages' => 
+      'echafaudages' =>
       array (
         0 => 'prive/squelettes/contenu/objets.html',
         1 => 'prive/objets/infos/objet.html',
         2 => 'prive/squelettes/contenu/objet.html',
       ),
-      'autorisations' => 
+      'autorisations' =>
       array (
         'objet_creer' => '',
         'objet_voir' => '',
@@ -333,17 +333,17 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
         'objet_supprimer' => '',
         'associerobjet' => '',
       ),
-      'boutons' => 
+      'boutons' =>
       array (
         0 => 'menu_edition',
         1 => 'outils_rapides',
       ),
-      'saisies' => 
+      'saisies' =>
       array (
         0 => 'objets',
       ),
     ),
-    1 => 
+    1 =>
     array (
       'nom' => 'Lignes de facture',
       'nom_singulier' => 'Ligne de facture',
@@ -353,103 +353,103 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
       'cle_primaire' => 'id_factures_ligne',
       'cle_primaire_sql' => 'bigint(21) NOT NULL',
       'table_type' => 'factures_ligne',
-      'champs' => 
+      'champs' =>
       array (
-        0 => 
+        0 =>
         array (
           'nom' => 'Id facture',
           'champ' => 'id_facture',
           'sql' => 'int(11) NOT NULL DEFAULT \'0\'',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'factures',
+          'saisies' => 'factures',
           'explication' => '',
           'saisie_options' => '',
         ),
-        1 => 
+        1 =>
         array (
           'nom' => 'Position',
           'champ' => 'position',
           'sql' => 'int(2) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Saisir la position de la ligne dans la facture ou le devis',
           'saisie_options' => '',
         ),
-        2 => 
+        2 =>
         array (
           'nom' => 'Quantité',
           'champ' => 'quantite',
           'sql' => 'float DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Veuillez indiquer la quandité vendue ou proposée',
           'saisie_options' => '',
         ),
-        3 => 
+        3 =>
         array (
           'nom' => 'Unité',
           'champ' => 'unite',
           'sql' => 'varchar(50) DEFAULT NULL',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Veuillez indiquer l\'unité vendue ou proposée',
           'saisie_options' => '',
         ),
-        4 => 
+        4 =>
         array (
           'nom' => 'Désignation',
           'champ' => 'designation',
           'sql' => 'text',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
             1 => 'obligatoire',
           ),
           'recherche' => '',
-          'saisie' => 'textarea',
+          'saisies' => 'textarea',
           'explication' => 'Écrivez une description de l\'élément vendu ou proposé',
           'saisie_options' => '',
         ),
-        5 => 
+        5 =>
         array (
           'nom' => 'Prix unitaire hors taxes',
           'champ' => 'prix_unitaire_ht',
           'sql' => 'decimal(18,2) DEFAULT NULL',
           'recherche' => '',
-          'saisie' => 'input',
+          'saisies' => 'input',
           'explication' => 'Indiquez le prix unitaire hors taxes de l\'élément vendu ou proposé',
           'saisie_options' => 'type=number,attributs=\'step=0.01\'',
         ),
-        6 => 
+        6 =>
         array (
           'nom' => 'Commentaire',
           'champ' => 'commentaire',
           'sql' => 'mediumtext',
-          'caracteristiques' => 
+          'caracteristiques' =>
           array (
             0 => 'editable',
           ),
           'recherche' => '',
-          'saisie' => 'textarea',
+          'saisies' => 'textarea',
           'explication' => 'Saisissez un commentaire le cas échéant',
           'saisie_options' => '',
         ),
@@ -457,7 +457,7 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
       'champ_titre' => 'designation',
       'champ_date' => '',
       'statut' => '',
-      'chaines' => 
+      'chaines' =>
       array (
         'titre_objets' => 'Lignes de facture',
         'titre_objet' => 'Ligne de facture',
@@ -478,20 +478,20 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
         'texte_changer_statut_objet' => 'Cette ligne de facture est :',
       ),
       'table_liens' => '',
-      'vue_liens' => 
+      'vue_liens' =>
       array (
         0 => 'spip_factures',
       ),
       'roles' => '',
       'auteurs_liens' => '',
       'vue_auteurs_liens' => '',
-      'echafaudages' => 
+      'echafaudages' =>
       array (
         0 => 'prive/squelettes/contenu/objets.html',
         1 => 'prive/objets/infos/objet.html',
         2 => 'prive/squelettes/contenu/objet.html',
       ),
-      'autorisations' => 
+      'autorisations' =>
       array (
         'objet_creer' => '',
         'objet_voir' => '',
@@ -499,47 +499,47 @@ factures_post_creation($data, $destination_plugin, $destination_ancien_plugin);'
         'objet_supprimer' => '',
         'associerobjet' => '',
       ),
-      'boutons' => 
+      'boutons' =>
       array (
         0 => 'outils_rapides',
       ),
-      'saisies' => 
+      'saisies' =>
       array (
         0 => 'objets',
       ),
     ),
   ),
-  'images' => 
+  'images' =>
   array (
-    'paquet' => 
+    'paquet' =>
     array (
-      'logo' => 
+      'logo' =>
       array (
-        0 => 
+        0 =>
         array (
           'extension' => '',
           'contenu' => '',
         ),
       ),
     ),
-    'objets' => 
+    'objets' =>
     array (
-      0 => 
+      0 =>
       array (
-        'logo' => 
+        'logo' =>
         array (
-          0 => 
+          0 =>
           array (
             'extension' => 'png',
             'contenu' => 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABAxJREFUeNq8V1tME0EUvdsWLG21UnzwLg9FLMHgI6JAqIKJ/mj8IvFbEhM14iPxFY3gBz5iNHyoUfk1wJ9KTIgKEdFqUARFI9qIIoqBSEILGPva9c7SXWfp7rYW9CSTmbmzO3PuuXNndhmO40DAjaamaqwqscyDKMEwjAbxg2PZup0VFZfCPi8QuN7YWJWcmHimtLBQHxMTw0RLoPvNGzAaDNDd2+v1BwJHK8OQ0AgNJFK5buXKOTE6HQOEVJSlf2AA0tPSYEVeXqxOqz2Lqh6KlIDVYDBoiB4zKQRevx9SUlIgz2YjJGpvNDYeioTArBQCHxIgJSkxEZbn5sbqdLpaDPEROQI6ocGyrOhBS2srX6ehF3q9HpwfP4ovzDWZIN9mA0dnJ9/fUl4umdBkNIJrYgLi4uL4/iIkwXJcbF9f3+lrDQ2wa8eOc7IEaA82l5VJJs2yWkOYC8/QWUSQmZ4OTqcTMrOyAEPK2xYuXjxF4t27vdhVIQAzRyaSxVSEz/394B4fF+0ZSMzj9carh4CbDQoAVswCUqajq6eHVSZAheDBw4dgW7YMBoeGYBy9SE9N5dUZ/Po1ZNL5ZjNY0btXvb18vyA/Hz5hKv7yeGB5Tg70oH3Thg3iGooEOEqBcrudr8kuppGTna3otfAOQYLFIrEL85I11BUIttva22HtmjW8Vx70hECr0cASJPAeNxi/MTMy4Nv37+I4DXIQEfvwyAjfLwuSU1WA3gMbS0v5uqiwMOSF5KSkP7FG6dVgy82VZAqrpgCRR2DY3tHB15b4eDBiXtOxT0lOBpfbDROY6zSyMe1GR0dhzOWS2Mg5siAhIcIQBAmUlpRIUwvljgSEnBxEBcKGAP4tVENA74HHT57M6sIlxcUREMDFaYmKiookDzocjhBbpGNsJCHgpp2E5EW5yZSgNvbX5wDBuvXrJQ8+e/o0xKY09vruJfj04jbfDgQCcOuedurU9PlMdbuvurFZX3Xlw0HVu0DuXlC7K+gxsvie44fB6/HCr8mf8HNiEibdk6RmsD/X8eg++e48qHgdz5RAxuptcLn2vKiAVjulgM/n4xjWRw6Q+rC34UwIfO66E6UC9IRyi6ikGj1mVVLAiwpw/0GBgX+twNuWOvjS1SzaiZfDwZ1OYExIVVDAiwr45RWYvglfPn8eQkCwDXXegn0nj8l5yPfRQ6iqqY5egQL8FlBD7I/toodyMCflyI6HU8DpGhsrMJvNmnBn++DLZqUYBxV4gAqc+msF6lvb2i7Y7Xa9xWJRJZG2amsYBZZKxom6Ab+f49iAhwHWRyvA0HHfX1NDmO3Ekqf61TvSZDpQfYKJYg8I4+N4FM8LIUADySh/+w/fvBj8jVfCB/INqzIu3gW/BRgAh/RYXDg93aEAAAAASUVORK5CYII=',
           ),
         ),
       ),
-      1 => 
+      1 =>
       array (
-        'logo' => 
+        'logo' =>
         array (
-          0 => 
+          0 =>
           array (
             'extension' => 'png',
             'contenu' => 'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABAxJREFUeNq8V1tME0EUvdsWLG21UnzwLg9FLMHgI6JAqIKJ/mj8IvFbEhM14iPxFY3gBz5iNHyoUfk1wJ9KTIgKEdFqUARFI9qIIoqBSEILGPva9c7SXWfp7rYW9CSTmbmzO3PuuXNndhmO40DAjaamaqwqscyDKMEwjAbxg2PZup0VFZfCPi8QuN7YWJWcmHimtLBQHxMTw0RLoPvNGzAaDNDd2+v1BwJHK8OQ0AgNJFK5buXKOTE6HQOEVJSlf2AA0tPSYEVeXqxOqz2Lqh6KlIDVYDBoiB4zKQRevx9SUlIgz2YjJGpvNDYeioTArBQCHxIgJSkxEZbn5sbqdLpaDPEROQI6ocGyrOhBS2srX6ehF3q9HpwfP4ovzDWZIN9mA0dnJ9/fUl4umdBkNIJrYgLi4uL4/iIkwXJcbF9f3+lrDQ2wa8eOc7IEaA82l5VJJs2yWkOYC8/QWUSQmZ4OTqcTMrOyAEPK2xYuXjxF4t27vdhVIQAzRyaSxVSEz/394B4fF+0ZSMzj9carh4CbDQoAVswCUqajq6eHVSZAheDBw4dgW7YMBoeGYBy9SE9N5dUZ/Po1ZNL5ZjNY0btXvb18vyA/Hz5hKv7yeGB5Tg70oH3Thg3iGooEOEqBcrudr8kuppGTna3otfAOQYLFIrEL85I11BUIttva22HtmjW8Vx70hECr0cASJPAeNxi/MTMy4Nv37+I4DXIQEfvwyAjfLwuSU1WA3gMbS0v5uqiwMOSF5KSkP7FG6dVgy82VZAqrpgCRR2DY3tHB15b4eDBiXtOxT0lOBpfbDROY6zSyMe1GR0dhzOWS2Mg5siAhIcIQBAmUlpRIUwvljgSEnBxEBcKGAP4tVENA74HHT57M6sIlxcUREMDFaYmKiookDzocjhBbpGNsJCHgpp2E5EW5yZSgNvbX5wDBuvXrJQ8+e/o0xKY09vruJfj04jbfDgQCcOuedurU9PlMdbuvurFZX3Xlw0HVu0DuXlC7K+gxsvie44fB6/HCr8mf8HNiEibdk6RmsD/X8eg++e48qHgdz5RAxuptcLn2vKiAVjulgM/n4xjWRw6Q+rC34UwIfO66E6UC9IRyi6ikGj1mVVLAiwpw/0GBgX+twNuWOvjS1SzaiZfDwZ1OYExIVVDAiwr45RWYvglfPn8eQkCwDXXegn0nj8l5yPfRQ6iqqY5egQL8FlBD7I/toodyMCflyI6HU8DpGhsrMJvNmnBn++DLZqUYBxV4gAqc+msF6lvb2i7Y7Xa9xWJRJZG2amsYBZZKxom6Ab+f49iAhwHWRyvA0HHfX1NDmO3Ekqf61TvSZDpQfYKJYg8I4+N4FM8LIUADySh/+w/fvBj8jVfCB/INqzIu3gW/BRgAh/RYXDg93aEAAAAASUVORK5CYII=',
