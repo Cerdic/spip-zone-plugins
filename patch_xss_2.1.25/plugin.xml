@@ -14,6 +14,6 @@ Voir aussi :
 - http://core.spip.org/projects/spip/repository/revisions/20972
 	</description>
 	<prefix>patch2125</prefix>
-	<necessite id="spip" version="[2.1.0;2.1.99)" />
+	<necessite id="spip" version="[2.1.0;2.1.25[" />
 	<licence>GPL</licence>
 </plugin>

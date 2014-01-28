@@ -13,6 +13,6 @@ Voir aussi :
 - http://core.spip.org/projects/spip/repository/revisions/21014
 	</description>
 	<prefix>patch2024</prefix>
-	<necessite id="spip" version="[2.0.0;2.0.99)" />
+	<necessite id="spip" version="[2.0.0;2.0.24[" />
 	<licence>GPL</licence>
 </plugin>
