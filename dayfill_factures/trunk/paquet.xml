@@ -4,7 +4,7 @@
 	version="1.0.2"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
-	logo=""
+	logo="prive/themes/spip/images/dayfill_factures-32.png"
 	documentation=""
 	schema="1.0.0"
 >
