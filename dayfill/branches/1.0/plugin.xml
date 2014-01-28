@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[en]DayFill - Activities tracer[fr]D&eacute;file - Gestionnaire d'activit&eacute;s</multi></nom>
+	<nom><multi>[en]DayFill - Activities tracer[fr]Dayfill - Gestionnaire d'activit&eacute;s</multi></nom>
 	<icon>images/dayfill-64.png</icon>
 	<version>1.0.3</version>
 	<auteur>&#169; 2010 Cyril Marion [Ateliers CYM->http://www.cym.fr]</auteur>

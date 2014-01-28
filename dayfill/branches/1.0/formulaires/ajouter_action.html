@@ -24,7 +24,7 @@
 	<input type="hidden" name="id_projet" value="[(#EVAL{_request('id_projet')})]" />
 
 	<table class="tableau_actions" summary="<:spipmine:tableau_ajouter_actions:>">
-	
+
 	<tr>
 		<td class="date_action"><input type="text" name="date_projet" value="[(#DATE|affdate{'d/m/Y'})]"/></td>
 		<td class="heure_debut"><input type="text" name="heure_debut" value="#ENV{heure_debut}"/></td>
@@ -39,12 +39,12 @@
 		</td>
 		<td class="action"><textarea class="action" name="action_projet" rows="1" cols="30">#ENV{action_projet}</textarea></td>
 		<td class="initiales">
-		
+
 			#SET{user,#SESSION{login}}
 			<BOUCLE_p(USERS){login=#GET{user}}>
 				#SET{id,#ID_USER}
 			</BOUCLE_p>
-			
+
 			<select name="id_user" class="initiales" onchange="check_input(this.value)" >
 				<option value="">---</option>
 				<BOUCLE_auteur(USERS){statut = 'actif'}{par id_user}>
@@ -55,7 +55,7 @@
 		<td class="heures_passees"><input class="heures_passees" type="text" name="nb_heures_passees" value="#ENV{nb_heures_passees}" onfocus="calcule_temps('formulaire_ajouter_ligne_action')" /></td>
 		<td class="heures_facturees"><input class="heures_facturees" type="text" value="#ENV{nb_heures_facturees}" name="nb_heures_facturees" /></td>
 		<td class="facture">
-			
+
 			[(#REM) Ici on devra afficher seulement la liste des factures sur lesquelles il reste des heures ]
 			<BOUCLE_j(PROJETS){id_projet=#EVAL{_request('id_projet')}}>
 			<BOUCLE_c(CLIENTS){id_client}>
@@ -66,18 +66,18 @@
 				<option value="#ID_FACTURE">#NUM_FACTURE</option>
 				</BOUCLE_f>
 			</select>
-			</B_f>			
+			</B_f>
 			<span class="alerte">Attention, aucune facture imputable !</span>
 			<//B_f>
 			</BOUCLE_c>
 			</BOUCLE_j>
-			
+
 		</td>
 		<td><input type="image" src="#CHEMIN{images/gif/bouton_ok.gif}" name="submit" alt="Go" onclick="document.form.submit();" /></td>
 	</tr>
-	
+
 	</table>
-	
+
 	<p class="nota">* Les heures de d&eacute;but et de fin doivent &ecirc;tre saisies sous la forme hh:mm</p>
 
 </form>
