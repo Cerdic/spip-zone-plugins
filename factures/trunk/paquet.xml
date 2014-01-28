@@ -1,12 +1,12 @@
 <paquet
 	prefix="factures"
 	categorie="divers"
-	version="1.0.15"
+	version="1.0.16"
 	etat="experimental"
 	compatibilite="[3.0.7;3.0.*]"
 	logo=""
 	documentation=""
-	schema="1.0.0" 
+	schema="1.1.0"
 >
 
 	<nom>Factures &amp; devis</nom>

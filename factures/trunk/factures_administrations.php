@@ -26,7 +26,12 @@ function factures_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj['create'] = array(array('maj_tables', array('spip_factures', 'spip_factures_lignes')));
 
-	include_spip('base/upgrade');
+    // Ajouter le champ taux de TVA sur les lignes de facture
+    $maj['1.1.0'] = array(
+        array('sql_alter', "TABLE spip_lignes_factures ADD taux_tva DECIMAL(8,2) DEFAULT NULL AFTER prix_unitaire_ht"),
+    );
+
+    include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
