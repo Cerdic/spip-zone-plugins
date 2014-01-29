@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_zone' => 'Espacio de desarrollo regido por un reglamento, ZONE.SPIP.org da acceso al versionado de todas las contribuciones complementarias a SPIP(plugins, esqueletos, temas, modelos, herramientas...).',
 
 	// N
-	'nom_boussole_spip' => 'Galaxia SPIP',
+	'nom_boussole_spip' => 'Galaxia SPIP', # MODIF
 	'nom_groupe_spip_actualite' => 'Actualidad',
 	'nom_groupe_spip_aide' => 'Ayuda',
 	'nom_groupe_spip_decouverte' => 'Descubrimiento',

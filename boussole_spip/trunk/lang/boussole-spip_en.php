@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_zone' => 'Development area ruled by a chart, ZONE.SPIP.org give access to all contributions versioning (plugins, skeletons, themes, models, tools,...).',
 
 	// N
-	'nom_boussole_spip' => 'SPIP Galaxy',
+	'nom_boussole_spip' => 'SPIP Galaxy', # MODIF
 	'nom_groupe_spip_actualite' => 'News',
 	'nom_groupe_spip_aide' => 'Support',
 	'nom_groupe_spip_decouverte' => 'Discovery',

@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_zone' => 'Vývojová zóna, ktorá sa riadi chartou ZONE.SPIP.org, poskytuje prístup k verziám všetkých doplnkov k SPIPu (zásuvné moduly, šablóny, farebné motívy, modely, nástroje, a i.).',
 
 	// N
-	'nom_boussole_spip' => 'Galaxia SPIPu',
+	'nom_boussole_spip' => 'Galaxia SPIPu', # MODIF
 	'nom_groupe_spip_actualite' => 'Novinky',
 	'nom_groupe_spip_aide' => 'Vzájomná pomoc',
 	'nom_groupe_spip_decouverte' => 'Objavte SPIP',

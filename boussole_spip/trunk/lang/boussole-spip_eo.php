@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_herbier' => 'La SPIP herbaro ne estas ligaro kiel aliaj. Ne. Estas memoralbumo de retejoj efektivigitaj per SPIP, kaptitaj je certa momento de ilia ekzisto ĉe la Reto. Ĝi rakontas pri la reta historio, tiu de SPIP ekde 2001. Tiu herbaro arigas la retejojn kiujn ni emis afiŝi, ĉar interesaj laŭ ia enhavo agrable valorigita, ia homa aventuro, ia lerte uzita funksiigilo, aŭ nur vide allogaj. Estas retejoj pri kiuj oni memoras, ĉe kiuj oni revenas, kiu estis referencoj signante ilian epokon iel aŭ tiel.',
 
 	// N
-	'nom_boussole_spip' => 'SPIP-Galakcio',
+	'nom_boussole_spip' => 'SPIP-Galakcio', # MODIF
 	'nom_groupe_spip_actualite' => 'Aktualaĵo',
 	'nom_groupe_spip_aide' => 'Reciproka helpo',
 	'nom_groupe_spip_decouverte' => 'Ekmalkovro',
