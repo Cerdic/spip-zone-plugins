@@ -1,0 +1,195 @@
+#SET{branche,0}
+[(#ENV{branche}|oui)
+#SET{branche,#ENV{branche}|table_valeur{0}|explode{'|'}|table_valeur{1}}
+]
+
+<h1 class="grostitre"><:testurl:tester_url:></h1>
+
+<div class="tiroir filtre">
+	[(#ENV{branche}|oui)<:testurl:test_liens_limitation:>#GET{branche}<a href="#" class="poignet petite_poignet"><:testurl:limiter_verification_autre:></a>]
+	[(#ENV{branche}|non)<a href="#" class="poignet"><:testurl:limiter_verification:></a>]
+	<div class="formulaire_spip formulaire_testurl rangement" id="form_testurl">
+
+		<form method="GET" action="[(#URL_ECRIRE{test_url}|parametre_url{objet,''}|parametre_url{branche,''})]" class="">
+		#ACTION_FORMULAIRE{#URL_ECRIRE{test_url}}
+		<ul>
+		[(#SAISIE{selecteur_rubrique,branche,label=})]
+		</ul>
+		<p class="boutons"><input type="submit" class="submit" value="<:testurl:limiter:>" /></p>
+
+		</form>
+	</div>
+</div>
+
+#SET{tab_url_article,#TESTURL_LISTE_URL{article,#GET{branche}}}
+#SET{tab_url_rubrique,#TESTURL_LISTE_URL{rubrique,#GET{branche}}}
+#SET{tab_url_site,#TESTURL_LISTE_URL{site,#GET{branche}}}
+
+
+<div class="nb_liens"><span>[(#GET{tab_url_article}|testurl_nbliens|plus{#GET{tab_url_rubrique}|testurl_nbliens|plus{#GET{tab_url_site}|testurl_nbliens}})]</span> <:testurl:liens_trouves:></div>
+
+
+#BOITE_OUVRIR
+<h3><:testurl:liens_articles:></h3>
+
+<BOUCLE_test_article(CONDITION){si #ENV{test}|=={article}}>
+	<:testurl:tester_des_urls:>
+	<ul class="liste_objet">
+		<BOUCLE_parcours_test(POUR){tableau #GET{tab_url_article}}>
+			<li><a href="[(#URL_PAGE{article,id_article=#CLE})]">[(#VALEUR|table_valeur{titre})]</a>
+			<ul class="liste_url">
+			[(#SET{liens,#VALEUR|table_valeur{liens}})]
+			<BOUCLE_parcours_liens_test(POUR){tableau #VALEUR|table_valeur{liens}}>
+				[(#SET{url,#VALEUR|testurl_transforme_en_url})]
+				[(#SET{error_url,#VALEUR|check_url})]
+				[(#GET{error_url}|oui)
+				<li><a href="[(#GET{url})]">#VALEUR</a> <:testurl:pose_probleme:> : #GET{error_url}</li>]
+				[(#GET{error_url}|non)
+				<li><a href="[(#GET{url})]">#VALEUR</a> : OK</li>]
+			</BOUCLE_parcours_liens_test>
+			</ul></li>
+		</BOUCLE_parcours_test>
+	</ul>
+</BOUCLE_test_article>
+	<B_parcours>
+	<div><:testurl:nombre_liens_trouves:> [(#GET{tab_url_article}|testurl_nbliens)] <:testurl:dans:> [(#GET{tab_url_article}|count)] <:info_article_2:></div>
+	<div class="tiroir">
+	<a href="#liste_article_url" class="poignet"><:testurl:voir_la_liste:> <:info_article_2:> <:testurl:contenant_des_urls:></a>
+	<ul class="liste_objet rangement" id="liste_article_url">
+		<BOUCLE_parcours(POUR){tableau #GET{tab_url_article}}>
+			<li><a href="[(#URL_PAGE{article,id_article=#CLE})]">[(#VALEUR|table_valeur{titre})]</a>
+			<ul class="liste_url">
+			[(#SET{liens,#VALEUR|table_valeur{liens}})]
+			<BOUCLE_parcours_liens(POUR){tableau #VALEUR|table_valeur{liens}}>
+				<li><a href="[(#VALEUR|testurl_transforme_en_url)]">#VALEUR</a></li>
+			</BOUCLE_parcours_liens>
+			</ul></li>
+		</BOUCLE_parcours>
+	</ul>
+	</div>
+
+	[(#SET{param,''})]
+	[(#ENV{branche}|oui) #SET{param,&branche%5B%5D=#ENV{branche}|implode{'|'}} ]
+	<a href="#URL_ECRIRE{test_url,test=article#GET{param}}" class="bouton vert"><:testurl:tester_les_url_des:> <:info_article_2:></a>
+
+	</B_parcours>
+	<:testurl:aucun_lien:>
+	<//B_parcours>
+<//B_test_article>
+#BOITE_FERMER
+
+
+    
+
+    
+#BOITE_OUVRIR
+<h3><:testurl:liens_rubriques:></h3>
+   
+<BOUCLE_test_rubrique(CONDITION){si #ENV{test}|=={rubrique}}>
+	<:testurl:tester_des_urls:>
+	<ul class="liste_objet">
+		<BOUCLE_parcours_test_rub(POUR){tableau #GET{tab_url_rubrique}}>
+			<li><a href="[(#URL_PAGE{rubrique,id_rubrique=#CLE})]">[(#VALEUR|table_valeur{titre})]</a>
+			<ul class="liste_url">
+			[(#SET{liens,#VALEUR|table_valeur{liens}})]
+			<BOUCLE_parcours_liens_test_rub(POUR){tableau #VALEUR|table_valeur{liens}}>
+				[(#SET{url,#VALEUR|testurl_transforme_en_url})]
+				[(#SET{error_url,#VALEUR|check_url})]
+				[(#GET{error_url}|oui)
+				<li><a href="[(#GET{url})]">#VALEUR</a> <:testurl:pose_probleme:> : #GET{error_url}</li>]
+				[(#GET{error_url}|non)
+				<li><a href="[(#GET{url})]">#VALEUR</a> : OK</li>]
+			</BOUCLE_parcours_liens_test_rub>
+			</ul></li>
+		</BOUCLE_parcours_test_rub>
+	</ul>
+</BOUCLE_test_rubrique>
+	<B_parcours_rub>
+	<div><:testurl:nombre_liens_trouves:> [(#GET{tab_url_rubrique}|testurl_nbliens)] <:testurl:dans:> [(#GET{tab_url_rubrique}|count)] <:info_rubriques_02:></div>
+	<div class="tiroir">
+	<a href="#liste_article_url" class="poignet"><:testurl:voir_la_liste:> <:info_rubriques_02:> <:testurl:contenant_des_urls:></a>
+	<ul class="liste_objet rangement">
+		<BOUCLE_parcours_rub(POUR){tableau #GET{tab_url_rubrique}}>
+			<li><a href="[(#URL_PAGE{rubrique,id_rubrique=#CLE})]">[(#VALEUR|table_valeur{titre})]</a>
+			<ul class="liste_url">
+			[(#SET{liens,#VALEUR|table_valeur{liens}})]
+			<BOUCLE_parcours_liens_rub(POUR){tableau #VALEUR|table_valeur{liens}}>
+				<li><a href="[(#VALEUR|testurl_transforme_en_url)]">#VALEUR</a></li>
+			</BOUCLE_parcours_liens_rub>
+			</ul></li>
+		</BOUCLE_parcours_rub>
+	</ul>
+	</div>
+	
+		<ul class="action">
+		[(#SET{param,''})]
+		[(#ENV{branche}|oui) #SET{param,&branche%5B%5D=#ENV{branche}|implode{'|'}} ]
+		<li><a href="#URL_ECRIRE{test_url,test=rubrique#GET{param}}" class="bouton vert"><:testurl:tester_les_url_des:> <:info_rubriques_02:></a></li>
+	</ul>
+	
+	</B_parcours_rub>
+	<:testurl:aucun_lien:>
+	<//B_parcours_rub>
+<//B_test_rubrique>
+
+
+ #BOITE_FERMER   
+
+
+#BOITE_OUVRIR
+<h3><:testurl:les_sites:></h3>
+
+
+   
+<BOUCLE_test_site(CONDITION){si #ENV{test}|=={site}}>
+	<:testurl:tester_des_urls:>
+	<ul class="liste_objet">
+		<BOUCLE_parcours_test_site(POUR){tableau #GET{tab_url_site}}>
+			<li><a href="[(#URL_PAGE{site,id_site=#CLE})]">[(#VALEUR|table_valeur{titre})]</a>
+			<ul class="liste_url rangement">
+			[(#SET{liens,#VALEUR|table_valeur{liens}})]
+			<BOUCLE_parcours_liens_test_site(POUR){tableau #VALEUR|table_valeur{liens}}>
+				[(#SET{url,#VALEUR|testurl_transforme_en_url})]
+				[(#SET{error_url,#VALEUR|check_url})]
+				[(#GET{error_url}|oui)
+				<li><a href="[(#GET{url})]">#VALEUR</a> <:testurl:pose_probleme:> : #GET{error_url}</li>]
+				[(#GET{error_url}|non)
+				<li><a href="[(#GET{url})]">#VALEUR</a> : OK</li>]
+			</BOUCLE_parcours_liens_test_site>
+			</ul></li>
+		</BOUCLE_parcours_test_site>
+	</ul>
+</BOUCLE_test_site>
+	<B_parcours_site>
+		<div><:testurl:nombre_liens_trouves:> : [(#GET{tab_url_site}|testurl_nbliens)] <:testurl:dans:> [(#GET{tab_url_site}|count)] <:info_article_2:></div>
+	<div class="tiroir">
+	<a href="#liste_article_url" class="poignet"><:testurl:voir_la_liste:> <:info_sites:> <:testurl:contenant_des_urls:></a>
+	<ul class="liste_objet rangement">
+	<ul class="liste_objet rangement">
+		<BOUCLE_parcours_site(POUR){tableau #GET{tab_url_site}}>
+			<li><a href="[(#URL_PAGE{site,id_site=#CLE})]">[(#VALEUR|table_valeur{titre})]</a>
+			<ul class="liste_url">
+			[(#SET{liens,#VALEUR|table_valeur{liens}})]
+			<BOUCLE_parcours_liens_site(POUR){tableau #VALEUR|table_valeur{liens}}>
+				<li><a href="[(#VALEUR|testurl_transforme_en_url)]">#VALEUR</a></li>
+			</BOUCLE_parcours_liens_site>
+			</ul></li>
+		</BOUCLE_parcours_site>
+	</ul>
+	</div>
+	
+	<ul class="action">
+	[(#SET{param,''})]
+	[(#ENV{branche}|oui) #SET{param,&branche%5B%5D=#ENV{branche}|implode{'|'}} ]
+	<li><a href="#URL_ECRIRE{test_url,test=site#GET{param}}"  class="bouton vert"><:testurl:tester_les_url_des:> <:info_sites:></a></li>
+	</ul>
+	</B_parcours_site>
+	<:testurl:aucun_site_trouve:>
+	<//B_parcours_site>
+	
+<//B_test_site>
+#BOITE_FERMER
+    
+	
+
+

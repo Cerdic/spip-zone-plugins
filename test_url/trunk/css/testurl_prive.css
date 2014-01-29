@@ -1,0 +1,64 @@
+ul.action{}
+
+ul.liste_objet{margin:1em 0 2em 0;}
+ul.liste_objet > li{ padding:0.25em;font-weight:bold;}
+ul.liste_url{margin-left:2em;list-style:square;}
+ul.liste_url >li {font-weight:normal;}
+
+
+
+
+
+#contenu .bouton {
+	color:#FFF; font-weight:bold;
+	padding:4px 8px; text-align:center; display: inline-block; margin:0 15px 15px 0; 
+	border-radius:7px; 
+	box-shadow: 0 0 1px rgba( 0, 0, 0, 0.2), 0 -1px 0 rgba( 255, 255, 255, 0.1); 
+			
+	}	
+	
+/* -- Bouton vert -- */	
+.bouton.vert {
+	background: #91BD09;
+	background: -webkit-linear-gradient( #91BD09, #4E9939); 
+	background: -moz-linear-gradient( #91BD09, #4E9939); 
+	background: -ms-linear-gradient( #91BD09, #4E9939); 
+	background: -o-linear-gradient( #91BD09, #4E9939); 
+	background: linear-gradient( #91BD09, #4E9939);
+	}
+.bouton.vert:hover{
+	background: #A3C416;
+	background: -webkit-linear-gradient( #A3C416, #55A53C);
+	background: -moz-linear-gradient( #A3C416, #55A53C);
+	background: -ms-linear-gradient( #A3C416, #55A53C);
+	background: -o-linear-gradient( #A3C416, #55A53C);
+	background: linear-gradient( #A3C416, #55A53C);
+	}	
+.bouton.vert:active{box-shadow: 1px 1px 10px #285419 inset, 0 1px 0 rgba( 255, 255, 255, 0.4);}
+
+
+/* ************************** Couleurs des polices *************************** */
+
+.bouton.vert {color:#F1F1F1; }
+.bouton.vert:hover,  .bouton.vert:active {color:#FFF;text-decoration:none;}
+
+.formulaire_testurl{border:none 0px;margin:1em 0;border-radius:1em;background:#FFF;}
+.formulaire_testurl form ul{background:transparent;}
+.formulaire_testurl form ul li label{width:auto;}
+.formulaire_testurl form ul li .item_picked{float:left;}
+.formulaire_testurl{border:none 0px;margin:1em 0;}
+.formulaire_testurl .boutons {background:transparent;border:none 0px;}
+
+
+.tiroir { margin:0.25em 0 1em 0;}
+.tiroir .poignet { display:block;border-radius:0.5em;padding:0.25em;font-weight:bold;background:transparent url(../images/triangle.png) no-repeat 0 5px; padding-left:20px;}
+.tiroir .poignet.on {background-image: url(../images/triangle-bas.png)}
+.tiroir .petite_poignet { display:inline-block;font-size:0.8em;padding:0.25em;font-weight:bold;background-image: none;}
+.tiroir .petite_poignet.on { background-image: none;}
+
+
+.filtre { background-color:#FFF;border-radius:1em; }
+
+
+.nb_liens { font-size:1.2em; }
+.nb_liens span{ font-weight:bold; }

@@ -1,0 +1,17 @@
+<paquet
+	prefix="testurl"
+	categorie="maintenance"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[2.0.10;["
+	logo="prive/themes/spip/images/test-ok_24.png"
+	documentation="http://contrib.spip.net/Test-URL"
+>
+	<nom>Test urls</nom>
+	<auteur lien="http://www.pierre-kuhn.org">Pierre KUHN</auteur>
+	<auteur lien="http://www.declic3000.com">Guillaume Wauquier</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<necessite nom="saisies" compatibilite="[1.0;[" />
+	<menu nom="testurl" titre="testurl:tester_url" parent="menu_administration" icone="images/test-ok_16.png" action="test_url" />
+</paquet>

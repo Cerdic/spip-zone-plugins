@@ -1,0 +1,13 @@
+#SET{paramcss,#REM|parametres_css_prive}
+#PIPELINE{header_prive,#INCLURE{fond=prive/squelettes/inclure/head,titre,minipres,paramcss=#GET{paramcss}}}
+
+[<link rel="stylesheet" type="text/css" href="(#CHEMIN{css/testurl_prive.css})" media="all" />]
+<script type="text/javascript">
+
+    $(document).ready(function(){
+		$('.tiroir > .rangement').hide()
+		$('.tiroir a.poignet').click(function(){$(this).addClass('on');$(this).parent('.tiroir').children('.rangement').slideDown()})
+
+    });
+
+</script>
