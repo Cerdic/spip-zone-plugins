@@ -1,0 +1,42 @@
+﻿<BOUCLE_types_doc(TYPES_DOCUMENTS){extension}>
+<div class="champ contenu_extension[ (#EXTENSION*|strlen|?{'',vide})]">
+	<div class='label visible'><:types_documents:label_extension:></div>
+	<div dir='#LANG_DIR' class='#EDIT{extension} extension'>#EXTENSION</div>
+</div>
+
+<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class='label visible'><:types_documents:label_descriptif:></div>
+	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
+</div>
+
+<div class="champ contenu_mime_type[ (#MIME_TYPE*|strlen|?{'',vide})]">
+	<div class='label visible'><:types_documents:label_mime_type:></div>
+	<div dir='#LANG_DIR' class='#EDIT{mime_type} mime_type'>#MIME_TYPE</div>
+</div>
+
+<div class="champ contenu_inclus[ (#INCLUS*|strlen|?{'',vide})]">
+	<div class='label visible'><:types_documents:label_inclus:></div>
+	<div dir='#LANG_DIR' class='#EDIT{inclus} inclus'>#INCLUS</div>
+</div>
+
+<div class="champ contenu_upload[ (#UPLOAD*|strlen|?{'',vide})]">
+	<div class='label visible'><:types_documents:label_upload:></div>
+	<div dir='#LANG_DIR' class='#EDIT{upload} upload'>#UPLOAD</div>
+</div>
+
+<div class="champ contenu_media[ (#MEDIA*|strlen|?{'',vide})]">
+	<div class='label visible'><:types_documents:label_media:></div>
+	<div dir='#LANG_DIR' class='#EDIT{media} media'>#MEDIA</div>
+</div>
+
+<div class="champ contenu_interdit[ (#INTERDIT*|strlen|?{'',vide})]">
+	<div class='label visible'><:types_documents:label_interdit:></div>
+	<div dir='#LANG_DIR' class='#EDIT{interdit} interdit'>#INTERDIT</div>
+</div>
+
+</BOUCLE_types_doc>
+<style type="text/css">
+.types_document .no_onglets #contenu #wysiwyg .label.visible {
+	display: block;
+}
+</style>

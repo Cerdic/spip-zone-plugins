@@ -1,0 +1,32 @@
+﻿[(#AUTORISER{voir,types_document}|sinon_interdire_acces)]
+<BOUCLE_type_doc(TYPES_DOCUMENTS){extension}>
+<!--#hierarchie-->
+<ul id="chemin">
+	<li><a href="#URL_ECRIRE{'accueil'}"><:accueil_site:></a><span class="sep"> > </span></li>
+	<li><a href="#URL_ECRIRE{'types_documents'}"><:types_documents:tous_types_documents:></a><span class="sep"> > </span></li>
+	<li><strong>#TITRE</strong></li>
+</ul>
+<!--/#hierarchie-->
+
+<div class="fiche_objet">
+[(#SET{extension,#EXTENSION|strtolower})]
+[(#SET{icone,[(#CHEMIN{prive/vignettes/#GET{extension}.png}|?{#CHEMIN{prive/vignettes/#GET{extension}.png},#CHEMIN{prive/vignettes/defaut.png}})]})]
+[(#AUTORISER{modifier,types_document})
+<div class="bandeau_actions">
+<a href="[(#URL_ECRIRE{types_document_editer}|parametre_url{'extension',#EXTENSION})]" class="icone36" style="float: right; "><img width="24" height="24" style="background: url([(#GET{icone}|image_reduire{24,24}|extraire_attribut{src})]) no-repeat center center;" alt="<:types_documents:modifier_ce_type_document|attribut_html:>" src="../prive/images/edit.gif"><span><:types_documents:modifier_ce_type_document:></span></a>
+</div>
+]
+<h1>#TITRE</h1>
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/contenu/types_document,extension=#EXTENSION} />
+</div>
+<div class="nettoyeur"></div>
+
+</div>
+</BOUCLE_type_doc>
+</B_type_doc>
+<p>Tutut!<br/>
+<a href="#URL_ECRIRE{types_documents}"><:retour:></a>
+</p>
+<//B_type_doc>

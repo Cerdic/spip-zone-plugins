@@ -1,0 +1,49 @@
+<plugin>
+	<nom>
+	<multi>[fr]Types de documents</multi>
+	</nom>
+	<icon>img_pack/portfolio-64.png</icon>
+	<auteur>Teddy Payet</auteur>
+	<version>1.0.0</version>
+	<version_base>0.1.0</version_base>
+	<etat>test</etat>
+	<description><multi>
+	[fr]Pouvoir gérer les extensions des documents depuis le back office de SPIP. On peut maintenant interdire certaines extensions en document. 
+	</multi></description>
+	<lien></lien> <!-- URI de documentation -->
+	<install>base/types_documents.php</install>
+	<fonctions>types_documents_fonctions.php</fonctions>
+	<prefix>types_documents</prefix>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/types_documents.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/types_documents.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/types_documents.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>types_documents_autoriser.php</inclure>
+	</pipeline>
+	<bouton id='types_documents' parent='naviguer'>
+		<titre>types_documents:types_documents</titre>
+		<icone>img_pack/portfolio-24.png</icone>
+		<url>types_documents</url>
+	</bouton>
+	<bouton id='types_documents21' parent='bando_edition'>
+		<titre>types_documents:types_documents</titre>
+		<icone>images/portfolio-16.png</icone>
+		<url>types_documents</url>
+	</bouton>
+	<chemin dir="" />
+	<chemin dir="squelettes" />
+	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="medias" version="[1.6.7;]" />
+	<categorie>multimedia</categorie>
+</plugin>

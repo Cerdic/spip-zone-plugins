@@ -1,0 +1,60 @@
+﻿[(#AUTORISER{voir,types_document}|sinon_interdire_acces)]
+<!--#hierarchie-->
+<ul id="chemin">
+	<li><a href="#URL_ECRIRE{'accueil'}"><:accueil_site:></a><span class="sep"> > </span></li>
+	<li><strong><:types_documents:tous_types_documents:></strong></li>
+</ul>
+<!--/#hierarchie-->
+
+<!--#extra-->
+<div class="cadre-info">
+	<div class="texte"><:types_documents:explication_types_documents:></div>
+</div>
+<!--/#extra-->
+
+<div class="cartouche">
+	<h1><:types_documents:titre_page_types_documents:></h1>
+	
+</div>
+
+<B_types>
+#ANCRE_PAGINATION
+<div class="cadre cadre-liste">
+<h2>#GRAND_TOTAL extensions</h2>
+[<div class="pagination">(#PAGINATION{prive})</div>]
+<table class="table" width="100%" cellpadding="2" cellspacing="0" border="0">
+<thead>
+<tr>
+	<th class="extension principale"><:types_documents:label_extension_court:></th>
+	<th class="titre secondaire"><:types_documents:label_titre:></th>
+	<th class="inclus secondaire"><:types_documents:label_inclus:></th>
+	<th class="media secondaire"><:types_documents:label_media:></th>
+	<th class="interdit secondaire"><:types_documents:label_interdit:></th>
+</tr>
+</thead>
+<tbody>
+<BOUCLE_types(TYPES_DOCUMENTS) {par extension}{pagination 20}{tout}>
+<tr id="ext_#EXTENSION" class="[(#COMPTEUR_BOUCLE|alterner{'tr_liste',''})][ interdit_(#INTERDIT)]">
+	<td class="extension principale verdana12"><a href="[(#URL_ECRIRE{types_document}|parametre_url{extension,#EXTENSION})]">#EXTENSION</a></td>
+	<td class="titre secondaire arial1"><a href="[(#URL_ECRIRE{types_document}|parametre_url{extension,#EXTENSION})]">#TITRE</a></td>
+	<td class="inclus secondaire arial1">#INCLUS</td>
+	<td class="media secondaire arial1">#MEDIA</td>
+	<td class="interdit secondaire arial1">#INTERDIT</td>
+</tr>
+</BOUCLE_types>
+</tbody>
+</table>
+[<div class="pagination">(#PAGINATION{prive})</div>]
+</div>
+</B_types>
+
+<div class="nettoyeur"></div>
+[(#AUTORISER{creer,types_document})
+	<a href="[(#URL_ECRIRE{types_document_ajouter})]" class="icone36 types_document-24" style="float: right; "><img width="24" height="24" style="background: url([(#CHEMIN{prive/vignettes/defaut.png}|image_reduire{24,24}|extraire_attribut{src})]) no-repeat center center;" alt="<:types_documents:ajouter_une_extension|attribut_html:>" src="../prive/images/creer.gif"><span><:types_documents:ajouter_une_extension:></span></a>
+]
+
+<style type="text/css">
+table.table .interdit_oui {
+	color: red;
+}
+</style>

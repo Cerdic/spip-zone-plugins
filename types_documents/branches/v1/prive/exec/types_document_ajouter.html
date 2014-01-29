@@ -1,0 +1,24 @@
+﻿[(#AUTORISER{creer,types_document}|sinon_interdire_acces)]
+
+<!--#hierarchie-->
+<ul id="chemin">
+	<li><a href="#URL_ECRIRE{'accueil'}"><:accueil_site:></a><span class="sep"> > </span></li>
+	<li><a href="#URL_ECRIRE{'types_documents'}"><:types_documents:tous_types_documents:></a><span class="sep"> > </span></li>
+	<li><strong><:types_documents:action_ajouter:></strong></li>
+</ul>
+<!--/#hierarchie-->
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<a href="[(#URL_ECRIRE{'types_documents'})]" class="icone36" style="float: left;"><img width="24" height="24" alt="<:retour|attribut_html:>" src="[(#CHEMIN{prive/vignettes/defaut.png}|image_reduire{24,24}|extraire_attribut{src})]"><span><:retour:></span></a>
+		<h1><:sans_titre:></h1>
+	</div>
+
+#FORMULAIRE_AJOUTER_TYPES_DOCUMENT
+</div>
+
+<!--#navigation-->
+<div class='cadre-info'>
+<:types_documents:aide_redaction_types_document:>
+</div>
+<!--/#navigation-->

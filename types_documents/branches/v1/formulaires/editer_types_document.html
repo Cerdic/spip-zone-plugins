@@ -1,0 +1,82 @@
+﻿<div class='formulaire_spip formulaire_editer_types_document' id='formulaire_editer_types_document-#ENV{id,new}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})	
+	<form action="#ENV{action}" method="post">
+	<div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		<ul>
+		
+			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="champ_titre"><:types_documents:label_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='champ_titre' value="#ENV{titre}" />
+			</li>
+
+			<li class="editer_extension obligatoire[ (#ENV**{erreurs}|table_valeur{extension}|oui)erreur]">
+				<label for="champ_extension"><:types_documents:label_extension:></label>
+				<p class="explication"><:types_documents:explication_extension:></p>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{extension})</span>
+				]<input type='text' class='text' name='extension' id='champ_extension' size="10" value="#ENV{extension}" />
+			</li>
+
+			<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="champ_descriptif"><:types_documents:label_descriptif:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
+				]<textarea name='descriptif' rows='5' id='champ_descriptif' class="inserer_barre_edition">[(#ENV{descriptif})]</textarea>
+			</li>
+
+			<li class="editer_mime_type obligatoire[ (#ENV**{erreurs}|table_valeur{mime_type}|oui)erreur]">
+				<label for="champ_mime_type"><:types_documents:label_mime_type:></label>
+				<p class="explication"><:types_documents:explication_mime_type:></p>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mime_type})</span>
+				]<input type='text' class='text' name='mime_type' id='champ_mime_type' size="100" value="#ENV{mime_type}" />
+			</li>
+
+			<li class="editer_inclus obligatoire[ (#ENV**{erreurs}|table_valeur{inclus}|oui)erreur]">
+				<label for="champ_inclus"><:types_documents:label_inclus:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{inclus})</span>
+				]<select class="select" name='inclus' id='champ_inclus'>
+					<option value="non"[(#ENV{inclus}|=={'non'}|oui) selected="selected"]>non</option>
+					<option value="image"[(#ENV{inclus}|=={'image'}|oui) selected="selected"]>image</option>
+					<option value="embed"[(#ENV{inclus}|=={'embed'}|oui) selected="selected"]>embed</option>
+				</select>
+			</li>
+
+			<li class="editer_upload obligatoire[ (#ENV**{erreurs}|table_valeur{upload}|oui)erreur]">
+				<label for="champ_upload"><:types_documents:label_upload:></label>
+				<p class="explication"><:types_documents:explication_upload:></p>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{upload})</span>
+				]<select class="select" name='upload' id='champ_upload'>
+					<option value="non"[(#ENV{upload}|=={'non'}|oui) selected="selected"]>non</option>
+					<option value="oui"[(#ENV{upload}|=={'oui'}|oui) selected="selected"]>oui</option>
+				</select>
+			</li>
+
+			<li class="editer_media [ (#ENV**{erreurs}|table_valeur{media}|oui)erreur]">
+				<label for="champ_media"><:types_documents:label_media:></label>
+				<p class="explication"><:types_documents:explication_media:></p>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{media})</span>
+				]<input type='text' class='text' name='media' id='champ_media' size="10" value="#ENV{media}" />
+			</li>
+
+			<li class="editer_interdit obligatoire[ (#ENV**{erreurs}|table_valeur{interdit}|oui)erreur]">
+				<label for="champ_interdit"><:types_documents:label_interdit:></label>
+				<p class="explication"><:types_documents:explication_interdit:></p>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{interdit})</span>
+				]<select class="select" name='interdit' id='champ_interdit'>
+					<option value="non"[(#ENV{interdit}|=={'non'}|oui) selected="selected"]>non</option>
+					<option value="oui"[(#ENV{interdit}|=={'oui'}|oui) selected="selected"]>oui</option>
+				</select>
+			</li>
+
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='[(#ENV{extension}|?{<:bouton_enregistrer:>,<:bouton_ajouter:>})]' /></p>
+
+		</div>
+	</form>
+	]
+</div>
