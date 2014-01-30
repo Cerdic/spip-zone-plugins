@@ -49,8 +49,7 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
 			$sp[1] = $sp[0];
 	   }
-	   
-	   zippeur_copier_fichier($p, $dossier.'/'.$sp[1]);
+	   zippeur_copier_fichier($p, $dossier.'/'.$sp[1],false);
 	}
 	return zippeur(array($chemin),$date,$cmd,$dossier,$chemin);
 }
