@@ -25,7 +25,7 @@ function zippeur_creer_fichier($squel,$chemin,$options=array()){
 
 function zippeur_copier_fichier($orig,$dest,$find_in_path=True){
 	zippeur_creer_arbo($dest);
-	$chemin = zippeur_chemin_dossier_local() ;
+	$chemin = zippeur_chemin_dossier_local();
 	if ($find_in_path)
 	   copy(find_in_path($orig),$chemin.$dest);
 	else
