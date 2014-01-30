@@ -23,6 +23,10 @@ function image_responsive_insert_head($flux) {
 
 function _image_responsive($img, $taille=120, $lazy=0) {
 
+	$tailles = explode("/", $taille);
+	if (count($tailles) > 1) $taille_defaut = $tailles[1];
+	else $taille_defaut = $taille;
+
 //	$img = $img[0];
 	$type_urls = lire_meta("type_urls");
 	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
@@ -43,16 +47,21 @@ function _image_responsive($img, $taille=120, $lazy=0) {
 		$classe = "image_responsive";
 		
 		if ($htactif) {
-			$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille.$1", $src);
+			$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut.$1", $src);
 		}
 		else {
-			$src = "index.php?action=image_responsive&amp;img=$src&amp;taille=$taille";
+			$src = "index.php?action=image_responsive&amp;img=$src&amp;taille=$taille_defaut";
 		}
 		
-		if ($taille == 0) $src = "rien.gif";
+		if (taille_defaut == 0) $src = "rien.gif";
 		if ($lazy == 1) $classe .= " lazy";
 		$img = inserer_attribut($img, "data-l", $l);
 		$img = inserer_attribut($img, "data-h", $h);
+		
+		if (count($tailles) > 1) {
+			rsort($tailles);
+			$img = inserer_attribut($img, "data-tailles", addslashes(json_encode($tailles)));
+		}
 
 
 		$img = inserer_attribut($img, "src", $src);
@@ -62,7 +71,7 @@ function _image_responsive($img, $taille=120, $lazy=0) {
 }
 
 function image_responsive($texte, $taille=120, $lazy=0) {
-	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],'.$taille.','.$lazy.');'), $texte);
+	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"'.$taille.'",'.$lazy.');'), $texte);
 
 }
 

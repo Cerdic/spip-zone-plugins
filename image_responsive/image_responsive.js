@@ -4,14 +4,26 @@ function charger_url_image_responsive(this_img) {
 		var l = this_img.attr("data-l");
 		var h = this_img.attr("data-h");
 		var w= parseInt(this_img.width());
-
 		
+		var tailles = this_img.attr("data-tailles");
+					
+		
+		if (tailles) {
+			var w_max = 0;
+			var t = $.parseJSON(tailles.replace(/\\"/g, '"'));
+			
+			$.each(t, function (index, value) {
+				if (w < value && w > 0) w_max = value;
+			});
+			if (w_max > 0) w = w_max;
+		}
+
 		// Si l'image est trop petite, c'est pas la peine de demander trop grand…
 		if (w > l) {
 			w = l;
 			dpr = false;
 		}
-		
+
 		
 		if (w == 0) {
 		
@@ -98,4 +110,4 @@ $(document).on("ajaxComplete", function() {
 $(window).on("resize load",function() {
 	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
 });
-$(window).on("scroll", function() {charger_image_lazy();});
+$(window).on("scroll touchmove", charger_image_lazy);
