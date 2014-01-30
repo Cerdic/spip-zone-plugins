@@ -37,6 +37,8 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
        array('maj_tables', array('spip_reservations_details'))
        );    
 	$maj['1.2.0'] = array( array('maj_tables', array('spip_reservations_details'))); 
+	$maj['1.3.0'] = array( array('maj_tables', array('spip_reservations_details'))); 
+		
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
