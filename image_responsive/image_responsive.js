@@ -11,19 +11,29 @@ function charger_url_image_responsive(this_img) {
 		if (tailles) {
 			var w_max = 0;
 			var t = $.parseJSON(tailles.replace(/\\"/g, '"'));
+			var changer_w = 1;
 			
 			$.each(t, function (index, value) {
-				if (w < value && w > 0) w_max = value;
+				value = parseInt(value);
+				console.log(value + " " + w + " " + changer_w);
+				if (changer_w == 1) w_max = value;
+				if (value > w) changer_w = 0;
 			});
+			console.log ("Wmax: "+w_max);
 			if (w_max > 0) w = w_max;
 		}
+			console.log ("W: "+w);
+
+			console.log ("L: "+l);
+
 
 		// Si l'image est trop petite, c'est pas la peine de demander trop grand…
-		if (w > l) {
+		if (parseInt(w) > parseInt(l)) {
 			w = l;
 			dpr = false;
 		}
 
+			console.log ("Wapres: "+w);
 		
 		if (w == 0) {
 		

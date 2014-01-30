@@ -59,7 +59,7 @@ function _image_responsive($img, $taille=120, $lazy=0) {
 		$img = inserer_attribut($img, "data-h", $h);
 		
 		if (count($tailles) > 1) {
-			rsort($tailles);
+			sort($tailles);
 			$img = inserer_attribut($img, "data-tailles", addslashes(json_encode($tailles)));
 		}
 
