@@ -45,7 +45,11 @@ function zippeur_dynamique($dossier,$date, $cmd,$dynamiques=array(),$statiques=a
 	}
 	// Et ceux où la notion de chemin ne s'applique pas
 	foreach ($sanspath as $sp){
-	   defined('_DIR_SITE') ? $p = _DIR_SITE.$sp[0] : $p = _DIR_RACINE.$sp[0];
+	   defined('_DIR_SITE') ? $base = _DIR_SITE: $base = _DIR_RACINE;
+	   if (stripos($sp[0],$base) === false){//vérifier que la personne n'a pas passer le chemin complet avant de modifier $sp[0]
+			$sp[0] = $base.$sp[0];
+		}
+	   $p = $sp[0];
 	   if ($sp[1]==''){			// si le 2 argument est vide, alors pas de souci, on prend le chemin tel quel
 			$sp[1] = $sp[0];
 	   }
