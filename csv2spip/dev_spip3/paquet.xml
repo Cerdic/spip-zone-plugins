@@ -1,10 +1,11 @@
 <paquet
 	prefix="csv2spip"
 	categorie="outil"
-	version="5.0.2"
+	version="5.0.4"
 	etat="dev"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/csv2spip-128.png"
+	schema="1.0.0"
 	documentation=""
 >
 

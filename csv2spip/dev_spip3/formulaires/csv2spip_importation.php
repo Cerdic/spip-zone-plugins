@@ -281,7 +281,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
         }
 
         // si remplacer les données zones et rubriques administrées: supprimer les liens existant
-        if ($type_maj == 'remplacer') {
+        if ($type_maj == 'remplacer' AND test_plugin_actif("accesrestreint")) {
             // suppression des liens des rubriques administrées
             objet_dissocier(array("auteur"=>array_values($tableau_maj_auteurs_id)), array("rubrique"=>"*"));    
             // suppression des zones des auteurs
@@ -422,11 +422,10 @@ function csv2spip_ajout_utilisateur($login,$Tauteur_csv,$Tnom_champs_bdd,$Tcorre
         objet_associer(array("auteur"=>$id_auteur),array("rubrique"=>$Trubadmin));
         
     //liaison des zones
-    if(count($Tzones) AND test_plugin_actif("accesrestreint"))
+    if(count($Tzones) AND test_plugin_actif("accesrestreint") AND test_plugin_actif("accesrestreint"))
         zone_lier($Tzones, 'auteur', $id_auteur, 'add');
 
 }
-     
 
 
 /*

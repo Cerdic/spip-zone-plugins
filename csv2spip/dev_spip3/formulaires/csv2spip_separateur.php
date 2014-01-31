@@ -3,7 +3,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_csv2spip_separateur_charger_dist(){
     $valeurs = array(
-        "separateur"  => lire_config("csv2spip_separateur","§"),
+        "separateur"  => lire_config("csv2spip_separateur"),
     );
 return $valeurs;
 }
