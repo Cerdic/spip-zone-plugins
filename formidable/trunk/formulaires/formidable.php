@@ -43,15 +43,17 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 
     // On cherche si le formulaire existe
     if ($formulaire = sql_fetsel('*', 'spip_formulaires', $where)) {
-        // on ajoute un point d'entrée avec les infos de ce formulaire
+        // On ajoute un point d'entrée avec les infos de ce formulaire
         // pour d'eventuels plugins qui en ont l'utilité
-        $contexte += array('_formidable' => $formulaire);
+        $contexte['_formidable'] = $formulaire;
+        
         // Est-ce que la personne a le droit de répondre ?
         if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire'=>$formulaire))){
             $saisies = unserialize($formulaire['saisies']);
             $traitements = unserialize($formulaire['traitements']);
-            // On déclare les champs
-            $contexte += array_fill_keys(saisies_lister_champs($saisies), '');
+            
+            // On déclare les champs avec les valeurs par défaut
+            $contexte = array_merge(saisies_lister_valeurs_defaut($saisies), $contexte);
             $contexte['mechantrobot'] = '';
             // On ajoute le formulaire complet
             $contexte['_saisies'] = $saisies;
@@ -72,7 +74,7 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
                     }
                 }
 
-                // On regarde si maintenant on a un tableau
+                // Si on a un tableau, alors on écrase avec les valeurs données depuis l'appel
                 if ($valeurs and is_array($valeurs)){
                     $contexte = array_merge($contexte, $valeurs);
                 }
