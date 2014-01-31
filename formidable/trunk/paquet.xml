@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
-	schema="0.5.4"
+	schema="0.5.5"
 	documentation="http://www.spip-contrib.net/Formidable-le-generateur-de"
 >
 
