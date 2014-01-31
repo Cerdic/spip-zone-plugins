@@ -1,7 +1,7 @@
 <paquet
 	prefix="timepicker"
 	categorie="outil"
-	version="1.0.0"
+	version="1.4.3"
 	etat="dev"
 	compatibilite="[3.0.1;3.0.*]"
 	logo="img/horloge_picker3.png"
