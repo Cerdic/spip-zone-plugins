@@ -15,16 +15,16 @@ function charger_url_image_responsive(this_img) {
 			
 			$.each(t, function (index, value) {
 				value = parseInt(value);
-				console.log(value + " " + w + " " + changer_w);
+				//console.log(value + " " + w + " " + changer_w);
 				if (changer_w == 1) w_max = value;
 				if (value > w) changer_w = 0;
 			});
-			console.log ("Wmax: "+w_max);
+			// console.log ("Wmax: "+w_max);
 			if (w_max > 0) w = w_max;
 		}
-			console.log ("W: "+w);
+			// console.log ("W: "+w);
 
-			console.log ("L: "+l);
+			// console.log ("L: "+l);
 
 
 		// Si l'image est trop petite, c'est pas la peine de demander trop grand…
@@ -33,7 +33,7 @@ function charger_url_image_responsive(this_img) {
 			dpr = false;
 		}
 
-			console.log ("Wapres: "+w);
+			//console.log ("Wapres: "+w);
 		
 		if (w == 0) {
 		
