@@ -176,11 +176,15 @@ function action_image_responsive() {
 	$img = _request("img");
 	$taille = _request("taille");
 	$dpr = _request("dpr");
-	
 	$xsendfile = _request("xsendfile");
 
-
-	if (file_exists($img)) {
+	if (!preg_match(',\.(gif|jpe?g|png)$,i', $img)
+	OR !preg_match(',^\d+$,', $taille)
+	OR !preg_match(',^[\d\.]*$,', $dpr)
+	OR !file_exists($img)) {
+		header('HTTP/1.1 500 Internal Server Error');
+		die( "Erreur" );
+	} else {
 		$terminaison = substr($img, strlen($img)-3, 3);
 		$base = sous_repertoire(_DIR_VAR, "cache-responsive");
 		$base = sous_repertoire($base, "cache-".$taille);
@@ -232,10 +236,7 @@ function action_image_responsive() {
 			header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($dest)).' GMT', true, 200);
 			readfile($dest);
 		}
-	
-				
-	} else {
-		return "Erreur";
+
 	}
 	
 }
