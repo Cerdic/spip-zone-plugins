@@ -83,12 +83,8 @@ function orr_joursemaine($date, $jourvoulu, $format){
  * et si nécessaire pour cohérence avec celles d'une résa en cours
  */
 function orr_compare_date($date_debut, $date_fin, $idressource, $idresa=0){
-	echo "date_debut : $date_debut <br>";
-		echo "date_fin : $date_fin <br>";
-
 	include_spip('base/abstract_sql');
 	if ($idresa > 0){
-		echo "resa oui";
 		if ($result = sql_select(
 				array(
 				"reservation.orr_date_debut",
