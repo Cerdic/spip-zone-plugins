@@ -178,7 +178,15 @@ function formulaires_csv2spip_importation_traiter_dist(){
     unlink($destination);
 
     // tableau CSV total
-    $tableau_csv_total = array_merge($tableau_csv_visiteurs, $tableau_csv_redacs, $tableau_csv_admins);
+    $tableau_csv_total = $tableau_csv_visiteurs + $tableau_csv_redacs + $tableau_csv_admins;
+//    echo "<pre>";
+//    print_r($tableau_csv_visiteurs);
+//    echo "admi";
+//    print_r($tableau_csv_admins);
+//    echo "red";
+//    print_r($tableau_csv_redacs);
+//    print_r($tableau_csv_total);die;
+
 //spip_log("tableau csv total","csvspip");
 //spip_log($tableau_csv_total,"csvspip");
 
@@ -217,7 +225,7 @@ function formulaires_csv2spip_importation_traiter_dist(){
     }
 
     // tableau BDD total
-    $tableau_bdd_total = array_merge($poubelle_bdd, $visiteur_bdd, $redacteur_bdd, $admin_restreint_bdd);
+    $tableau_bdd_total = $poubelle_bdd + $visiteur_bdd +  $redacteur_bdd + $admin_restreint_bdd;
 
     // traitement rubriques admin
     // construction du tableau de correspondance nom_rubrique avec leur id
