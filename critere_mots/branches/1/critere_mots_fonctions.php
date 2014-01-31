@@ -139,7 +139,7 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
         if ($in)
 	 $wh = sql_in("$_table.$_id_table", $in);
         else
-         $wh = 'id_article=1 AND id_article=2';
+         $wh = $_table.'.'.$_id_table.'=1 AND '.$_table.'.'.$_id_table.'=2';
 	return $wh;
 }
 
