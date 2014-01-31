@@ -33,5 +33,5 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 #minibando > li > span { height: 6px; width: 100%; display: block; background: url(images/arrow.png) no-repeat top center; position: absolute; left: -99999px; }
 #minibando ul { background-color: #bdbdbd; position: absolute; display: block; left: -99999px; right: 99999px;
 	border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; }
-#minibando li.afficher ul, #minibando li:hover ul { display: table; left: -174px;; }
+#minibando li.afficher ul, #minibando li:hover ul { display: table; left: -174px;}
 #minibando li.afficher span, #minibando li:hover span { display: block; position: relative; left: 0; right: 2px; }
