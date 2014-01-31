@@ -15,7 +15,6 @@
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
-	<necessite nom="timepicker" compatibilite="[1.0.0;]" />
 	<necessite nom="palette" compatibilite="[3.0.0;]" />
 
 	<pipeline nom="autoriser" inclure="orr_autorisations.php" />
@@ -30,4 +29,6 @@
 	<pipeline nom="jqueryui_plugins" inclure="orr_pipelines.php" />
 
 	<menu nom="orr_ressources" titre="orr:titre_orr_ressources" parent="menu_edition" icone="images/orr_calendrier-16.png" action="orr_ressources" />
+
+	<lib nom="timepicker_1.4.3" lien="http://github.com/trentrichardson/jQuery-Timepicker-Addon/archive/v1.4.3.zip" />
 </paquet>
