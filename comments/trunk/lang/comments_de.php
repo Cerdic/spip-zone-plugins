@@ -11,6 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_forum_longueur' => 'Länge der Nachricht',
 	'cfg_forum_longueur_maxi' => 'Maximale Länge',
 	'cfg_forum_longueur_mini' => 'Minimale Länge',
+	'cfg_label_presentation_fil_liste' => 'Flache Kommentarliste',
+	'cfg_label_presentation_fil_thread' => 'Kommentare als Diskussionsstränge anzeigen (Threads)',
+	'cfg_label_presentation_fil_thread1' => 'Kommentare als gemeinsamen Diskussionsstrang anzeigen.',
 	'comment' => 'Kommentar',
 	'comments' => 'Kommentare',
 	'comments_h' => 'Ihr Kommentar',
@@ -25,7 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_email' => 'E-Mail (Wird nicht veröffentlicht)',
 	'label_nom' => 'Name',
+	'label_notification' => 'Halten sie mich per Mail auf dem Laufenden über neue Kommentare in dieser Diskussion.',
 	'label_url' => 'Ihre Webseite',
+	'lien_suivre_commentaires' => 'Kommentare verfolgen:',
 
 	// M
 	'moderation_info' => 'Achtung, Ihre Nachricht wird erst nach vorheriger Prüfung freigegeben.',
@@ -34,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'permalink_to' => 'Permalink zum Kommentar.',
 
 	// R
-	'reponse_comment_modere' => 'Ihr Kommentar wurde gespeichert und wird nach vorheriger Prüfung freigegeben.',
+	'reponse_comment_modere' => 'Ihr Kommentar wurde gespeichert und wird nach Überprüfung freigegeben.',
 	'reponse_comment_ok' => 'Vielen Dank für Ihren Kommentar!',
 
 	// S
