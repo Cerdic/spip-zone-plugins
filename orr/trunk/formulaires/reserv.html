@@ -7,7 +7,6 @@
 		<ul>
             [(#SAISIE{input,nom_reservation,obligatoire}
                 {label=<:orr:nom_de_la_reservation:>})]
-            
 			
             [(#SAISIE{input,date_debut,obligatoire}
                 {label=<:orr:date_de_debut:>}
@@ -44,7 +43,8 @@
 <script type="text/javascript">
     jQuery(function(){
 		jQuery('#champ_date_debut').datetimepicker({
-			timeFormat: 'hh:mm:ss',
+			timeFormat: 'HH:mm:ss',
+			showSecond: 0,
 			stepHour: 1,
 			stepMinute: 15,
 			minuteGrid:15,
@@ -64,7 +64,7 @@
 				}
 				jQuery('#champ_date_fin').datetimepicker('option', 'minDate', date_debut);
 				
-				// reafficher les options en desactivant celle non dispo sur le creneau horaire selectionné
+				// reafficher les ressources en desactivant celle non dispo sur le creneau horaire selectionné
 				var selected = sep = '';
 				jQuery("#select_multiple option").each(function(){
 					if (jQuery(this).attr("selected") == "selected" ){
@@ -80,7 +80,8 @@
 				}
 		});
         jQuery('#champ_date_fin').datetimepicker({
-			timeFormat: 'hh:mm:ss',
+			timeFormat: 'HH:mm:ss',
+			showSecond: 0,
 			stepHour: 1,
 			stepMinute: 15,
 			minuteGrid:15,
