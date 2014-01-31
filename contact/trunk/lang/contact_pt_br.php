@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_texteinfolettre' => 'Texto boletim',
 
 	// M
-	'modele_nom_formulaire' => 'un formulaire de contact' # MODIF
+	'modele_nom_formulaire' => 'um formulário de contato' # MODIF
 );
 
 ?>

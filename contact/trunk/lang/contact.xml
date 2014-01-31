@@ -32,6 +32,7 @@
 		<traducteur nom="mjhvc" lien="http://trad.spip.net/auteur/mjhvc" />
 	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/contact?lang_cible=pt_br" total="89" traduits="47" relire="0" modifs="1" nouveaux="41" pourcent="52.81">
+		<traducteur nom="quijaua" lien="http://trad.spip.net/auteur/quijaua" />
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/contact?lang_cible=sk" total="89" traduits="89" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
