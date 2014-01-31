@@ -35,7 +35,7 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
         $evenements[$row['id_evenement']]=$row;
         $articles[]=$row['id_article'];
     }
-    $valeurs = array('evenements'=>$evenements,'articles'=>$evenements);
+    $valeurs = array('evenements'=>$evenements,'articles'=>$evenements,'lang'=>_request('lang'));
 
     
     if(intval($GLOBALS['visiteur_session'])){
@@ -81,7 +81,7 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
     
    
     $valeurs['_hidden'].='<input type="hidden" name="statut" value="'.$valeurs['statut'].'"/>'; 
-   
+    $valeurs['_hidden'].='<input type="hidden" name="lang" value="'.$valeurs['lang'].'"/>';    
 
 
 	return $valeurs;
@@ -165,7 +165,7 @@ function formulaires_reservation_traiter_dist($id='',$id_article=''){
     // La référence
     $fonction_reference = charger_fonction('reservation_reference', 'inc/');
     if(isset($GLOBALS['visiteur_session']['id_auteur']))$id_auteur=$GLOBALS['visiteur_session']['id_auteur'];  
-   $set=array('statut'=>$statut);
+   $set=array('statut'=>$statut,'lang'=>_request('lang'));
     
     //les champs extras auteur
     include_spip('cextras_pipelines');
@@ -201,6 +201,7 @@ function formulaires_reservation_traiter_dist($id='',$id_article=''){
    }
     $set['reference']=$fonction_reference();      
     $set['id_auteur']=$id_auteur;
+	
     $id_reservation=$action('new','reservation',$set);
     $message='<p>'._T('reservation:reservation_enregistre').'</p>';
     $message.='<h3>'._T('reservation:details_reservation').'</h3>';

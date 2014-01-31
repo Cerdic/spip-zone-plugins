@@ -56,7 +56,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			"donnees_auteur"     => "text NOT NULL DEFAULT ''",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL",
-			"lang"             	 => "varchar(10)  DEFAULT '0' NOT NULL",			 
+			"lang"             	 => "varchar(10)  DEFAULT '' NOT NULL",			 
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
