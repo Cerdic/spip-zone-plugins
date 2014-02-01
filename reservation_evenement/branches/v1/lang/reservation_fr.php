@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Email :',
 	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
 	'label_id_auteur' => 'Id auteur :',
+	'label_lang' => 'Langue :',	
 	'label_maj' => 'maj :',
 	'label_mot_passe' => 'Mot de passe :',
 	'label_mot_passe2' => 'Répétez le mot de passe :',

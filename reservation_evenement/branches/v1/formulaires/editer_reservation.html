@@ -1,3 +1,10 @@
+#SET{langues,#ARRAY}
+
+<BOUCLE_langues(DATA){source tableau,#CONFIG{langues_utilisees}|explode{','}}>
+    #SET{langues,#GET{langues}|array_merge{#ARRAY{#VALEUR,#VALEUR|traduire_nom_langue}}}
+</BOUCLE_langues>
+
+
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_reservation,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -22,6 +29,13 @@
 
 			[(#SAISIE{input, reference,
 				label=<:reservation:label_reference:>})]
+
+			[(#SAISIE{selection, lang,
+				label=<:reservation:label_lang:>,
+				datas=#GET{langues},
+				defaut=#LANGUE,
+				cacher_option_intro=true,
+				})]				
 
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

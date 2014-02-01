@@ -60,6 +60,7 @@ function formulaires_editer_reservation_identifier_dist($id_reservation='new', $
  */
 function formulaires_editer_reservation_charger_dist($id_reservation='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('reservation',$id_reservation,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	if(isset($valeurs['langue']))$valeurs['lang']=$valeurs['langue'];
 	return $valeurs;
 }
 
@@ -86,8 +87,14 @@ function formulaires_editer_reservation_charger_dist($id_reservation='new', $ret
  *     Tableau des erreurs
  */
 function formulaires_editer_reservation_verifier_dist($id_reservation='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	
+	$obligatoire=array('id_auteur');
+	
+	if(!_request('id_auteur') AND (_request('nom') OR _request('email')))$obligatoire=array('nom','email');
+	
+	
     
-    $erreurs=formulaires_editer_objet_verifier('reservation',$id_reservation, array('id_auteur'));
+    $erreurs=formulaires_editer_objet_verifier('reservation',$id_reservation,$obligatoire);
     
     
      // verifier et changer en datetime sql la date envoyee

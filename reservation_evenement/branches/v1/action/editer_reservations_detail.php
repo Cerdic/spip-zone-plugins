@@ -133,9 +133,11 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
     include_spip('inc/rubriques');
     include_spip('inc/modifier');
 
+	
     $row = sql_fetsel('*','spip_reservations_details','id_reservations_detail='.intval($id_reservations_detail));
     $id_reservation=$row['id_reservation'];
     $id_evenement=$row['id_evenement'];
+
 	$envoi_differe_actif=_request('envoi_differe_actif');	
 	
     if(!$places=$c[places]){
@@ -168,7 +170,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
         array(
             'args' => array(
                 'table' => 'spip_reservations_details',
-                'id_reservation' => $id,
+                'id_reservation_detail' => $id,
                 'action'=>'instituer',
                 'statut_ancien' => $statut_ancien,
                 'date_ancienne' => $date_ancienne,
@@ -191,7 +193,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
         array(
             'args' => array(
                 'table' => 'spip_reservations_details',
-                'id_reservation' => $id_reservations_detail,
+                'id_reservation_detail' => $id_reservations_detail,
                 'action'=>'instituer',
                 'statut_ancien' => $statut_ancien,
                 'date_ancienne' => $date_ancienne,
@@ -203,7 +205,13 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
     // Notifications si en mode différe et ne pas déclenché par le changement de statut de la réservation
     
  	if($envoi_differe_actif!='non'){
-		include_spip('inc/config');	
+    	include_spip('inc/config');	
+		
+		//Déterminer la langue pour les notifications	
+		if(!$lang=sql_getfetsel('lang','spip_reservations','id_reservation='.$id_reservation)) $lang=lire_config('langue_site');				
+
+ 		lang_select($lang);	
+		
 		$config = lire_config('reservation_evenement');
 		$envoi_differe_config=isset($config['envoi_differe'])?$config['envoi_differe']:array(); 
 		
