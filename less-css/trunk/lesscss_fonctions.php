@@ -22,6 +22,8 @@ function lesscss_compile($style, $contexte = array()){
 
 	if (!class_exists("SPIPlessc")){
 		class SPIPlessc extends lessc {
+			private $allParsedFiles = array();
+
 			protected function addParsedFile($file) {
 				$this->allParsedFiles[$file] = filemtime($file);
 			}
