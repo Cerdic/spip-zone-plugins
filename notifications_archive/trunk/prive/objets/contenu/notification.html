@@ -5,32 +5,32 @@
 #SET{o_objet,#GET{o}|table_valeur{type}}
 #SET{o_id_objet,#GET{o}|table_valeur{id_table_objet}}  
 [<div class="champ contenu_sujet[ (#SUJET*|strlen|?{'',vide})]">
-	<label><:notification:label_sujet:> : </label>
+	<label><:notifications_archive:label_sujet:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{sujet} sujet'>(#SUJET)</span>
 </div>]
 
 [<div class="champ contenu_texte[ (#TEXTE**|strlen|?{'',vide})]">
-	<label><:notification:label_texte:> : </label>
+	<label><:notifications_archive:label_texte:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
 </div>]
 
 [<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
-	<label><:notification:label_type:> : </label>
+	<label><:notifications_archive:label_type:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{type} type'>(#TYPE)</span>
 </div>]
 
 [<div class="champ contenu_envoi[ (#TYPE*|strlen|?{'',vide})]">
-	<label><:notification:label_envoi:></label>
+	<label><:notifications_archive:label_envoi:></label>
 	<span dir='#LANG_DIR' class='#EDIT{envoi} type'>(#ENVOI)</span>
 </div>]
 
 [<div class="champ contenu_recipients[ (#RECIPIENTS*|strlen|?{'',vide})]">
-	<label><:notification:label_recipients:> : </label>
+	<label><:notifications_archive:label_recipients:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{recipients} recipients'>(#RECIPIENTS)</span>
 </div>]
 
 [<div class="champ contenu_id_objet[ (#ID_OBJET*|strlen|?{'',vide})]">
-	<label><:notification:label_lie_a:></label>
+	<label><:notifications_archive:label_lie_a:></label>
 	<span dir='#LANG_DIR' class='#EDIT{id_objet} id_objet'><a href="[(#URL_ECRIRE{#GET{o_objet},[(#GET{o_id_objet}|concat{=#ID_OBJET})]})]">(#INFO_TITRE{#OBJET,#ID_OBJET})</a></span>
 </div>]
 

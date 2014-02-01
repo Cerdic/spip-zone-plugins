@@ -4,7 +4,7 @@
     ,'simple personnel infos'})]  
 <BOUCLE_notification(NOTIFICATIONS){id_notification}{statut?}>
     <div class='infos'>
-        [(#SET{texte_objet,<:notification:titre_notification:>})]
+        [(#SET{texte_objet,<:notifications_archive:titre_notification:>})]
         <div class='numero'>
             <:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_NOTIFICATION</p>
         </div>

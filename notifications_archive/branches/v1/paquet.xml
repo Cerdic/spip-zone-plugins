@@ -1,7 +1,7 @@
 <paquet
 	prefix="notifications_archive"
 	categorie="communication"
-	version="1.1.2"
+	version="1.1.3"
 	etat="test"
 	compatibilite="[3.0.13;3.0.*]"
 	logo="prive/themes/spip/images/notifications_archive-64.png"
@@ -26,5 +26,5 @@
 	
 	<pipeline nom="taches_generales_cron" inclure="notifications_archive_pipelines.php" /> 	
 
-	<menu nom="notifications" titre="notification:titre_notifications" parent="menu_activite" icone="images/notification-16.png" action="notifications" /> 
+	<menu nom="notifications" titre="notifications_archive:titre_notifications" parent="menu_activite" icone="images/notification-16.png" action="notifications" /> 
 </paquet>

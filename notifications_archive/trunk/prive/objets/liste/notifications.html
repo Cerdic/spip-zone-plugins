@@ -9,14 +9,14 @@
 #ANCRE_PAGINATION
 <div class="liste-objets notifications">
 <table class='spip liste'>
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{notification:info_1_notification,notification:info_nb_notifications}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{notifications_archive:info_1_notification,notifications_archive:info_nb_notifications}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='sujet' scope='col'>[(#TRI{sujet,<:notification:label_sujet:>,ajax})]</th>
-			<th class='type' scope='col'>[(#TRI{type,<:notification:label_type:>,ajax})]</th>
-			<th class='recipients' scope='col'>[(#TRI{recipients,<:notification:label_recipients:>,ajax})]</th>	
-			<th class='envoi' scope='col'>[(#TRI{envoi,<:notification:label_envoi:>,ajax})]</th>									
+			<th class='sujet' scope='col'>[(#TRI{sujet,<:notifications_archive:label_sujet:>,ajax})]</th>
+			<th class='type' scope='col'>[(#TRI{type,<:notifications_archive:label_type:>,ajax})]</th>
+			<th class='recipients' scope='col'>[(#TRI{recipients,<:notifications_archive:label_recipients:>,ajax})]</th>	
+			<th class='envoi' scope='col'>[(#TRI{envoi,<:notifications_archive:label_envoi:>,ajax})]</th>									
 			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
 			<th class='id' scope='col'>[(#TRI{id_notification,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
