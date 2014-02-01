@@ -80,7 +80,7 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 		else {
 			if (_IMG_GD_MAX_PIXELS && $srcWidth*$srcHeight>_IMG_GD_MAX_PIXELS){
 				spip_log("vignette gd1/gd2 impossible : ".$srcWidth*$srcHeight."pixels");
-				return("<img src='$image'>");				
+				return $image;
 			}
 			$destFormat = $format_sortie;
 			if (!$destFormat) {
@@ -211,7 +211,13 @@ function action_image_responsive() {
 			//cette méthode permet d'accélérer par rapport à SPIP
 			// parce qu'on connait le nom du fichier à l'avance
 			// et on fait donc les tests sans déclencher la cavalerie
-			$img_new = image_reduire_net ($img, $taille, 0, $dpr);
+			
+			if (preg_match("/([0-9]+)v$/", $taille, $regs)) {
+				$taille = $regs[1];
+				$img_new = image_reduire_net ($img, 0, $taille, $dpr);
+			} else {
+				$img_new = image_reduire_net ($img, $taille, 0, $dpr);
+			}
 			$img_new = extraire_attribut($img_new, "src");
 			
 			copy($img_new, $dest);

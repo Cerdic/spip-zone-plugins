@@ -3,7 +3,14 @@ function charger_url_image_responsive(this_img) {
 		var src = this_img.attr("data-src");
 		var l = this_img.attr("data-l");
 		var h = this_img.attr("data-h");
-		var w= parseInt(this_img.width());
+
+		if (this_img.hasClass("image_responsive_v")) {
+			var vertical = true;
+			var dim= parseInt(this_img.height());
+		} else {
+			var vertical = false;
+			var dim= parseInt(this_img.width());
+		}
 		
 		var tailles = this_img.attr("data-tailles");
 					
@@ -15,27 +22,30 @@ function charger_url_image_responsive(this_img) {
 			
 			$.each(t, function (index, value) {
 				value = parseInt(value);
-				//console.log(value + " " + w + " " + changer_w);
+				//console.log(value + " " + d + " " + changer_w);
 				if (changer_w == 1) w_max = value;
-				if (value > w) changer_w = 0;
+				if (value > dim) changer_w = 0;
 			});
 			// console.log ("Wmax: "+w_max);
-			if (w_max > 0) w = w_max;
+			if (w_max > 0) dim = w_max;
 		}
-			// console.log ("W: "+w);
+			// console.log ("W: "+dim);
 
 			// console.log ("L: "+l);
 
 
 		// Si l'image est trop petite, c'est pas la peine de demander trop grand…
-		if (parseInt(w) > parseInt(l)) {
-			w = l;
+		if (vertical && parseInt(dim) > parseInt(h)) {
+			dim = h;
+			dpr = false;
+		} else if (parseInt(dim) > parseInt(l)) {
+			dim = l;
 			dpr = false;
 		}
 
-			//console.log ("Wapres: "+w);
+			//console.log ("Wapres: "+dim);
 		
-		if (w == 0) {
+		if (dim == 0) {
 		
 		} else {
 		
@@ -48,14 +58,16 @@ function charger_url_image_responsive(this_img) {
 			if (htactif) {
 				racine = src.substr(0, src.length-4);
 				terminaison = src.substr(src.length-3, 3);
-				var url_img = racine+"-resp"+w;
+				var url_img = racine+"-resp"+dim;
+				if (vertical) url_img = url_img + "v";
 				if (dPR) url_img = url_img + "-"+dPR;
 				url_img = url_img + "."+terminaison;
 			} else {
-				var url_img = "index.php?action=image_responsive&img="+src+"&taille="+w;
+				var url_img = "index.php?action=image_responsive&img="+src+"&taille="+dim;
+				if (vertical) url_img = url_img + "v";
 				if (dPR) url_img = url_img + "&dpr="+dPR;
 			}
-			this_img.attr("src", url_img).height("").removeAttr("data-top");
+			this_img.attr("src", url_img).height("").width("").removeAttr("data-top");
 		}
 
 }
@@ -82,16 +94,28 @@ function charger_image_lazy(top) {
 }
 
 function charger_image_responsive () {
+
 	// Premier passage: mettre les images inconnues au bon format
 	$("img[src$='rien.gif']").each(function() {
 		var this_img = $(this);
+		
 		var l = this_img.attr("data-l");
 		var h = this_img.attr("data-h");
-		var w= parseInt(this_img.width());
-		
-		if (w > 0) {
-			var hauteur = Math.round(h*w/l);
-			this_img.height(hauteur);
+	
+	
+		if (this_img.hasClass("image_responsive_v")) {
+			var hauteur = parseInt(this_img.height());
+			if (h > 0) {
+				var largeur = Math.round(hauteur*l/h);
+				this_img.width(largeur);
+			}
+		} else {
+			var w = parseInt(this_img.width());
+			
+			if (w > 0) {
+				var hauteur = Math.round(h*w/l);
+				this_img.height(hauteur);
+			}
 		}
 	});
 	
