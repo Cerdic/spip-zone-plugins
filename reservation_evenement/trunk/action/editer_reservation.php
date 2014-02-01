@@ -46,9 +46,10 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
     include_spip('inc/config');	
     $config = lire_config('reservation_evenement');
 	
-    $row = sql_fetsel('statut,date,id_auteur,email','spip_reservations','id_reservation='.intval($id_reservation));
+    $row = sql_fetsel('statut,date,id_auteur,email,lang','spip_reservations','id_reservation='.intval($id_reservation));
     $statut_ancien = $statut = $row['statut'];
     $date_ancienne = $date = $row['date'];
+	
     
     $d = isset($c['date']) ? $c['date'] : null;
     $s = isset($c['statut']) ? $c['statut'] : $statut;
@@ -182,6 +183,9 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
          (in_array($statut,$config['quand'])) &&
          ($notifications = charger_fonction('notifications', 'inc', true))
         ) {
+       //Déterminer la langue pour les notifications	
+       $lang=isset($row['lang'])?$row['lang']:lire_config('langue_site');
+	   lang_select($lang);	
         // Determiner l'expediteur
         $options = array('statut'=>$statut);
         if( $config['expediteur'] != "facteur" )

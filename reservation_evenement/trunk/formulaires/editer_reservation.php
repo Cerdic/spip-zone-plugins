@@ -60,6 +60,7 @@ function formulaires_editer_reservation_identifier_dist($id_reservation='new', $
  */
 function formulaires_editer_reservation_charger_dist($id_reservation='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('reservation',$id_reservation,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	if(isset($valeurs['langue']))$valeurs['lang']=$valeurs['langue'];
 	return $valeurs;
 }
 
