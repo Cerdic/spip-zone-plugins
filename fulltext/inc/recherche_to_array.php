@@ -99,8 +99,10 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 		// On va additionner toutes les cles FULLTEXT
 		// de la table
 		$score = array();
+		$full_text_where = array();
 		foreach ($keys as $name => $key) {
 			$val = "MATCH($key) AGAINST ($p)";
+			$val_where = $val;
 			// Une chaine exacte rapporte plein de points
 			if ($pe)
 				$val .= "+ 2 * MATCH($key) AGAINST ($pe)";
@@ -125,8 +127,11 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 				$val = "($val) * $mult";
 
 			// si symboles booleens les prendre en compte
-			if ($boolean = preg_match(', [+-><~]|\* |".*?",', " $r "))
+			if ($boolean = preg_match(', [+-><~]|\* |".*?",', " $r ")) {
 				$val = "MATCH($key) AGAINST ($p IN BOOLEAN MODE) * $mult";
+				$val_where = "MATCH($key) AGAINST ($p IN BOOLEAN MODE)";
+			}
+			$full_text_where[] = $val_where;
 			$score[] = $val;
 		}
 
@@ -174,7 +179,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 
 		// si on define(_FULLTEXT_WHERE_$table,'date>"2000")
 		// cette contrainte est ajoutee ici:)
-		$requete['WHERE'] = array();
+		$requete['WHERE'] = $full_text_where;
 		if (defined('_FULLTEXT_WHERE_'.$table))
 			$requete['WHERE'][] = constant('_FULLTEXT_WHERE_'.$table);
 		else
