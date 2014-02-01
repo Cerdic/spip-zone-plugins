@@ -138,7 +138,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
     $id_reservation=$row['id_reservation'];
     $id_evenement=$row['id_evenement'];
 
-	$envoi_differe_actif=_request('envoi_differe_actif');	
+	$envoi_separe_actif=_request('envoi_separe_actif');	
 	
     if(!$places=$c[places]){
         $places=sql_getfetsel('places','spip_evenements','id_evenement='.$id_evenement);
@@ -204,7 +204,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 	
     // Notifications si en mode différe et ne pas déclenché par le changement de statut de la réservation
     
- 	if($envoi_differe_actif!='non'){
+ 	if($envoi_separe_actif!='non'){
     	include_spip('inc/config');	
 		
 		//Déterminer la langue pour les notifications	
@@ -213,9 +213,9 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
  		lang_select($lang);	
 		
 		$config = lire_config('reservation_evenement');
-		$envoi_differe_config=isset($config['envoi_differe'])?$config['envoi_differe']:array(); 
+		$envoi_separe_config=isset($config['envoi_separe'])?$config['envoi_separe']:array(); 
 		
-		if(in_array($s, $envoi_differe_config)){
+		if(in_array($s, $envoi_separe_config)){
 			
 			 if ((!$statut_ancien OR $s != $statut_ancien ) &&
 	         ($config['activer']) &&

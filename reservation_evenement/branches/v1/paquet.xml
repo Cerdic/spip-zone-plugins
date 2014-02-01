@@ -1,12 +1,12 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.8.1"
+	version="1.8.2"
 	etat="test"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
 	documentation=""
-	schema="1.3.1" 
+	schema="1.3.3" 
 >
 
 	<nom>Réservation Événements</nom>

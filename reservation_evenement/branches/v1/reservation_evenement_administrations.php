@@ -30,6 +30,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
+	
+	if($version_cible='1.3.3'){
+		include_spip('inc/config');
+		$config=lire_config('reservation_evenement');
+		if(isset($config['envoi_differe'])){
+			$config['envoi_separe']=$config['envoi_differe'];
+			unset($config['envoi_differe']);
+		}
+	}
 
 	$maj['create'] = array(array('maj_tables', array('spip_reservations', 'spip_reservations_details')));
 	$maj['1.1.0'] = array(
@@ -37,7 +46,8 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
        array('maj_tables', array('spip_reservations_details'))
        );    
 	$maj['1.2.0'] = array( array('maj_tables', array('spip_reservations_details'))); 
-	$maj['1.3.1'] = array( array('maj_tables', array('spip_reservations'))); 
+	$maj['1.3.1'] = array( array('maj_tables', array('spip_reservations')));
+	$maj['1.3.3'] = array( array('ecrire_config', 'reservation_evenement', $config)  );	 
 		
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

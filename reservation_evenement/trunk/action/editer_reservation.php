@@ -170,7 +170,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
         $set['id_evenement']=$id_evenement;
 	    
         //eviter l'envoi d'une notification pour chaque détail   
-        set_request('envoi_differe_actif','non');			
+        set_request('envoi_separe_actif','non');			
 
         $detail=$action($id_reservations_detail,'reservations_detail',$set);
 		

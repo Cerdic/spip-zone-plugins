@@ -15,7 +15,6 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 	include_spip('inc/plugin');
 	$config = lire_config('reservation_evenement',array());
 	$quand=isset($config['quand'])?$config['quand']:array();
-     
      //Le statuts du plugin, sauf en cours
      foreach($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut=>$label){
          if($statut!='encours')$statuts[$statut]=_T($label);
@@ -102,12 +101,12 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 				array(
 					'saisie' => 'selection_multiple',
 					'options' => array(
-						'nom' => 'envoi_differe',
-						'label' => _T('reservation:notifications_envoi_differe'),
-						'explication' => _T('reservation:notifications_envoi_differe_explication'),
+						'nom' => 'envoi_separe',
+						'label' => _T('reservation:notifications_envoi_separe'),
+						'explication' => _T('reservation:notifications_envoi_separe_explication'),
 						'cacher_option_intro' => 'on',
 						'datas' => $statuts_selectionnees,
-						'defaut' => $config['envoi_differe']
+						'defaut' => $config['envoi_separe']
 					)
 				),					
 				array(
