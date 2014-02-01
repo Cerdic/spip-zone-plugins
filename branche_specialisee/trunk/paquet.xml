@@ -1,0 +1,22 @@
+<paquet
+	prefix="bspe"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	schema="1"
+	logo="logo_bspe-64.png"
+>
+
+	<nom>Branche Spécialisée</nom>
+	<!-- Spécialiser les objets d'une branche -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<auteur>denisb</auteur>
+
+	<copyright>2014</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="pre_boucle" inclure="bspe_pipelines.php" />
+</paquet>
