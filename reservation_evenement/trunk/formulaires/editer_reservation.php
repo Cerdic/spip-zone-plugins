@@ -87,8 +87,14 @@ function formulaires_editer_reservation_charger_dist($id_reservation='new', $ret
  *     Tableau des erreurs
  */
 function formulaires_editer_reservation_verifier_dist($id_reservation='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	
+	$obligatoire=array('id_auteur');
+	
+	if(!_request('id_auteur') AND (_request('nom') OR _request('email')))$obligatoire=array('nom','email');
+	
+	
     
-    $erreurs=formulaires_editer_objet_verifier('reservation',$id_reservation, array('id_auteur'));
+    $erreurs=formulaires_editer_objet_verifier('reservation',$id_reservation,$obligatoire);
     
     
      // verifier et changer en datetime sql la date envoyee
