@@ -138,23 +138,23 @@ function action_adapt_img_dist(){
  * Rendre les images d'un texte adaptatives, en permettant de preciser la largeur maxi a afficher en 1x
  * [(#TEXTE|adaptive_images{1024})]
  * ou passer la liste des breakpoints (le dernier est la largeur maxi 1x)
- * [(#TEXTE|adaptive_images{160,320,480,640,1024})]
+ * [(#TEXTE|adaptive_images{160/320/480/640/1024})]
  * @param string $texte
  * @param null|int $max_width_1x
  * @return mixed
  */
 function adaptive_images($texte,$max_width_1x=null){
-	$bkpt = func_get_args();
-	array_shift($bkpt);
-	// plusieurs valeurs : ce sont les breakpoints, max_width_1x est la derniere valeur
-	if (count($bkpt)>1){
+	$bkpt = null;
+	// plusieurs valeurs separees par un / : ce sont les breakpoints, max_width_1x est la derniere valeur
+	if (strpos($max_width_1x,"/")!==false){
+		$bkpt = explode("/",$max_width_1x);
+		$bkpt = array_map("intval",$bkpt);
 		$max_width_1x = end($bkpt);
+		if (!$max_width_1x){
+			$max_width_1x = null;
+			$bkpt = null;
+		}
 	}
-	// une seule valeur, c'est le max_width_1x
-	else {
-		$bkpt = null;
-	}
-
 	$AdaptiveImages = SPIPAdaptiveImages::getInstance();
 	return $AdaptiveImages->adaptHTMLPart($texte, $max_width_1x, $bkpt);
 }
@@ -166,13 +166,7 @@ function adaptive_images($texte,$max_width_1x=null){
  * @return mixed
  */
 function adaptative_images($texte,$max_width_1x=null){
-	$args = func_get_args();
-	if (count($args)<=2){
-		return adaptive_images($texte,$max_width_1x);
-	}
-	else {
-		return call_user_func_array("adaptive_images",$args);
-	}
+	return adaptive_images($texte,$max_width_1x);
 }
 
 /** Pipelines  ********************************************************************************************************/
