@@ -113,19 +113,21 @@ function relecture_formulaire_charger($flux){
 		if ($form == 'dater') {
 			// Identifier le label comme la date de fin des commentaires
 			$flux['data']['_label_date'] = _T('relecture:label_date_fin_commentaire');
-			// Le formulaire n'est editable que si l'autprisation modifier est accordee.
+			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
 			$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
 		}
 		else if ($form == 'editer_liens') {
 			// Changer le titre du formulaire pour désigner clairement les relecteurs
 			$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
-			// Le formulaire n'est editable que si l'autprisation modifier est accordee.
+			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
 			$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
 		}
 		else if ($form == 'instituer_objet') {
-			// A ce stade, le formulaire instituer_objet est deja teste avec l'autorisation modifier.
+			// A ce stade, le formulaire instituer_objet est deja testé avec l'autorisation modifier.
 			// On rajoute le fait qu'il n'y ait plus de commentaires a traiter
 			// TODO : verifier qu'on le fait ici et pas dans l'autorisation instituer sur le verifier ?
+			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
+			$flux['data']['editable'] = autoriser('instituer', 'relecture', $id_objet);
 		}
 	}
 	else if ($objet == 'article') {

@@ -86,31 +86,39 @@ function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$autoriser = false;
 
 	// Conditions :
+	// - l'auteur connecte possède l'autorisation de modifier l'article
 	// - la relecture n'est pas fermee
-	// - l'auteur connecte est un des auteurs de l'article
-	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article (besoin de maintenance)
-
 	if ($id_relecture = intval($id)) {
+		$auteur_autorise = autoriser('modifier', 'article', $id_article, $qui);
+
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_relecture");
 		$infos = sql_fetsel('id_article, statut', $from, $where);
 
 		$relecture_ouverte = ($infos['statut'] == 'ouverte');
 
-		$id_article = $infos['id_article'];
-		$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
-
-		$from = 'spip_articles';
-		$where = array("id_article=$id_article");
-		$id_rubrique = sql_getfetsel('id_rubrique', $from, $where);
-
 		$autoriser =
-			($relecture_ouverte
-			AND
-			((in_array($qui['id_auteur'], $les_auteurs)
-				OR (($qui['statut'] == '0minirezo')
-					AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint']))))));
+			($auteur_autorise
+			AND $relecture_ouverte);
 	}
+
+	return $autoriser;
+}
+
+
+/**
+ * Autorisation de modifier le statut d'un commentaire
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_relecture_instituer_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
 
 	return $autoriser;
 }
