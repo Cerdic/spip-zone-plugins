@@ -7,52 +7,46 @@ include_spip('inc/editer');
 include_spip('base/abstract_sql');
 
 
-// générer les résultats du vote sous forme d'une chaine HTML
-//
-// alternative:
-// au lieu de passer par PHP, on pourrait passer par un squelette (qui permettrait de faciliter la personnalisation)
-// l'appel de la fonction se limiterait à un recuperer_fond()
-// ... à tester pour la version SPIP3 et être attentif à la perf. si le cache de ce squelette est nul.
+// générer les résultats du vote sous forme d'un tableau HTML
+// alternative: // modele/quickvote
 function quickvote_resultat($id_quickvote) {
      include_spip('base/abstract_sql');
      include_spip('inc/texte'); // pour typo
 
-     $str_resultat = _T("quickvote:resultat_titre");
      $nb_vote = 0;
      $vote = array();
 
      // boucle sur les reponses disponibles du formulaires = non vide
-     if ($res = sql_select('*', 'spip_quickvotes', "id_quickvote =".intval($id_quickvote))) {
-         while ($row = sql_fetch($res)) {
-              for ($i=1;$i<11;$i++) {
-                  if (trim($row["reponse$i"]))  {
-                        // cherchons le nb de votes  pour chaque reponse
-                        $res2 = sql_select('reponse', 'spip_quickvotes_votes', "id_quickvote = ".intval($id_quickvote). " AND reponse='reponse$i'");
-                        $vote[$row["reponse$i"]] = sql_count($res2);
-                        $nb_vote += sql_count($res2);
-                  }
-              }
-         }
+     if ($res = sql_select("b.reponse AS pos, COUNT(b.reponse) AS nbr, CASE b.reponse WHEN 'reponse1' THEN a.reponse1 WHEN 'reponse2' THEN a.reponse2 WHEN 'reponse3' THEN a.reponse3 WHEN 'reponse4' THEN a.reponse4 WHEN 'reponse5' THEN a.reponse5 WHEN 'reponse6' THEN a.reponse6 WHEN 'reponse7' THEN a.reponse7 WHEN 'reponse8' THEN a.reponse8 WHEN 'reponse9' THEN a.reponse9 WHEN 'reponse10' THEN a.reponse10 END AS rep", 'spip_quickvotes a INNER JOIN spip_quickvotes_votes b ON a.id_quickvote = b.id_quickvote', "id_quickvote =".intval($id_quickvote), 'reponse', 'nbr') ) {
+          // cherchons le nb de votes  pour chaque reponse
+          while ($row = sql_fetch($res)) {
+              $vote[$row['pos']] = array($row['rep'], $row['nbr']);
+              $nb_vote += $row['nbr'];
+          }
      }
-
-     // bilan - calcul des pourcentages
-     $str_resultat .= "<table>";
-     foreach ($vote as $k=>$val) {
-                   if ($nb_vote)
-                         $resultat_pt = round(($val/$nb_vote)*100);
-                    else
-                         $resultat_pt = 0;
-                    $reponse_intitule = typo($k);
-                    $str_resultat .= "<tr><td>$reponse_intitule</td><td>$resultat_pt %</td></tr>";
-     }
-     $str_resultat .= "</table>";
 
      if ($nb_vote==0)
-          $str_resultat .= "<div class='nb_vote'>"._T("quickvote:resultat_0_vote")."</div>";
-     else if ($nb_vote==1)
-          $str_resultat .= "<div class='nb_vote'>"._T("quickvote:resultat_nb_vote")."</div>";
-     else
-          $str_resultat .= "<div class='nb_vote'>"._T("quickvote:resultat_nb_votes",array("nb"=>$nb_vote))."</div>";
+          $str_resultat = "<div class='nb_vote'>"._T("quickvote:resultat_0_vote")."</div>";
+     else {
+          $str_resultat = '<table class="spip">';
+          $str_resultat .= '<caption>'. _T("quickvote:resultat_titre") .'</caption>';
+          // bilan - calcul des pourcentages
+          $i = 0;
+          foreach ($vote as $k=>$val) {
+               $str_resultat .= '<tr id="'.$k.'" class="row_'. ($i%2?'odd':'even') .'">';
+               $i++;
+               $str_resultat .= '<td>'.$val[0].'</td>';
+               $str_resultat .= '<td>'.$val[1].'&times; : '. round(($val[1]/$nb_vote)*100) .'%</td>';
+               $str_resultat .= '</tr>';
+          }
+          $str_resultat .= '<tr id="reponse0" class="row_first"><td colspan="2" class="nb_vote">';
+          if ($nb_vote==1)
+               $str_resultat .= _T('quickvote:resultat_nb_vote');
+          else
+               $str_resultat _T('quickvote:resultat_nb_votes', array('nb'=>$nb_vote));
+          $str_resultat .= '</td></tr>';
+          $str_resultat .= '</table>';
+     }
 
      return $str_resultat;
 }

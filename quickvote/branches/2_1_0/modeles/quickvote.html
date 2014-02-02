@@ -1,16 +1,17 @@
-[(#REM)<!-- Affichage des resultats du vote passe en parametre (id) -->]
+[(#REM)<!-- Affichage des resultats du vote passe en parametre (id) -->]#CACHE{0}
 <B_votestotal>
 [(#SET{votes_total, #TOTAL_BOUCLE})]
 <BOUCLE_votestotal(QUICKVOTES_VOTES){id_quickvote=#ENV{id}}> </BOUCLE_votestotal>
 </B_votestotal>
+<BOUCLE_votechoice(QUICKVOTES){id_quickvote=#ENV{id}}>
 <B_votesresult>
 [(#SET{choice_counter,0})]
 <table class="spip" width="100%">
 	<caption><:quickvote:resultat_titre:></caption>
-<BOUCLE_votesresult(QUICKVOTES_VOTES){id_quickvote=#ENV{id}}{fusion reponse}>
+<BOUCLE_votesresult(QUICKVOTES_VOTES){id_quickvote}{fusion reponse}>
 	<tr id="#REPONSE" class="[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
-				[(#SET{choice_counter, [(#GET{choice_counter}|plus{1})]})]
-		<td><BOUCLE_votechoice(QUICKVOTES){id_quickvote}>
+		[(#SET{choice_counter, [(#GET{choice_counter}|plus{1})]})]
+		<td>
 				[(#GET{choice_counter}|=={1}|oui)#REPONSE1]
 				[(#GET{choice_counter}|=={2}|oui)#REPONSE2]
 				[(#GET{choice_counter}|=={3}|et{#REPONSE3}|oui)#REPONSE3]
@@ -21,7 +22,7 @@
 				[(#GET{choice_counter}|=={8}|et{#REPONSE8}|oui)#REPONSE8]
 				[(#GET{choice_counter}|=={9}|et{#REPONSE9}|oui)#REPONSE9]
 				[(#GET{choice_counter}|=={10}|et{#REPONSE10}|oui)#REPONSE10]
-		</BOUCLE_votechoice></td>
+		</td>
 		<td><B_votepart>[(#SET{parts_count, #TOTAL_BOUCLE})]<BOUCLE_votepart(QUICKVOTES_VOTES){id_quickvote}{reponse}> </BOUCLE_votepart>[#GET{parts_count}&times; : (#GET{parts_count}|mult{100}|div{#GET{votes_total}}|round{0})%]</B_votepart></td>
 	</tr>
 </BOUCLE_votesresult>
@@ -34,3 +35,4 @@
 	<:quickvote:resultat_0_vote:>
 </div>
 <//B_votesresult>
+</BOUCLE_votechoice>
