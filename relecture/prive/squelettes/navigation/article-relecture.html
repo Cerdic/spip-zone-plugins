@@ -1,13 +1,3 @@
-[(#REM) <!-- Raccourci d'ouverture d'une relecture --> ]
-[(#AUTORISER{ouvrirrelecture, article, #ENV{id_article}})
-	#BOITE_OUVRIR{'',raccourcis}
-	[(#URL_ECRIRE{relecture_edit}
-		|parametre_url{new, oui}
-		|parametre_url{id_article, #ENV{id_article}}
-		|icone_horizontale{<:relecture:bouton_ouvrir_relecture:>,relecture-add-24.png})]
-	#BOITE_FERMER
-]
-
 [(#REM) <!-- Information sur la relecture ouverte --> ]
 <BOUCLE_relecture_ouverte(RELECTURES){id_article}{statut=ouverte}>
 [(#AUTORISER{voirrelectures, article, #ID_ARTICLE})
