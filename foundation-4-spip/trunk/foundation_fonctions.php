@@ -66,7 +66,7 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
     $config = lire_config('foundation');
 
     // Version qui utilise un système large-X ou small-X. J'appel ce groupe les colnum.
-    $colnum = array(5,4);
+    $colnum = array(4,5);
 
     // Les versions qui utilise des lettres => les colletr
     $colettr = array(2,3);
