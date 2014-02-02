@@ -29,9 +29,9 @@ class SPIPAdaptiveImages extends AdaptiveImages {
 		return $url;
 	}
 
-	protected function filepath2URL($filepath){
-		$filepath = parent::filepath2URL($filepath);
-		if (defined('_ADAPTIVE_IMAGES_DOMAIN')){
+	protected function filepath2URL($filepath, $relative=false){
+		$filepath = parent::filepath2URL($filepath, $relative);
+		if (!$relative AND defined('_ADAPTIVE_IMAGES_DOMAIN')){
 			$filepath = rtrim(_ADAPTIVE_IMAGES_DOMAIN,"/")."/".$filepath;
 		}
 		return $filepath;
