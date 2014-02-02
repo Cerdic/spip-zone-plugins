@@ -1,7 +1,7 @@
-div.choix {
+.csv2spip div.choix {
     margin-left:150px;
 }
-.formulaire_spip li label, .formulaire_spip li.gauche label{
+.csv2spip .formulaire_spip li label, .formulaire_spip li.gauche label{
 width : 280px;
 }
 input#champ_rubrique_defaut{
