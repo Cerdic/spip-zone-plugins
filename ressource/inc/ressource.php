@@ -141,10 +141,25 @@ function ressource_meta($res) {
 		$meta['href'] = $h;
 	}
 
+	##### tests pour le plugin OPUS :
+	##### <image.jpg> correspond à opus/[article]/image.jpg
+	else if ($r
+	AND isset($GLOBALS['contexte'])
+	AND isset($GLOBALS['contexte']['id_article'])
+	AND $q = sql_fetsel('url_site', 'spip_articles', 'id_article='.sql_quote($GLOBALS['contexte']['id_article']))
+	AND $opus = $q['url_site']
+	AND $h = _DIR_RACINE.$opus.'/'.$r[0]
+	AND file_exists($h)) {
+		$meta['local'] = $h;
+		$meta['href'] = $h;
+		$meta['logodocument'] = $h;
+	}
+	####
+
 	// si on l'a, renseigner ce qu'on peut dire du fichier
 	if (isset($meta['local'])
 	AND @file_exists($meta['local'])) {
-		$meta['extension'] = preg_replace(',^.*\.,', '', $meta['local']);
+		$meta['extension'] = strtolower(preg_replace(',^.*\.,', '', $meta['local']));
 		$meta['taille'] = @filesize($meta['local']);
 		if ($r = getimagesize($meta['local'])) {
 			// donnees brutes du fichier
@@ -274,12 +289,15 @@ function ressource_image($attrs, $meta) {
 	else {
 		if (!$attrs['size']) {
 			if ($attrs['image']) # ???? c'est quoi ? le mode ?
-				$attrs['size'] = 'd'; # ??? default
+				$attrs['size'] = 'b'; # ??? default
 			else
-				$attrs['size'] = 'd'; # 
+				$attrs['size'] = 'b'; # 
 		}
+
+$attrs['size'] = 2048;
+
 		if (in_array($meta['extension'], array('gif', 'png', 'jpg'))) {
-			$a = image_stdsize($attrs['src'], $attrs['size']);
+			$a = image_stdsize($meta, $attrs);
 			$resize = true;
 		}
 	}
@@ -290,7 +308,7 @@ function ressource_image($attrs, $meta) {
 		$f = charger_fonction('vignette','inc');
 		$img = $f($meta['extension'], false);
 		if ($resize)
-			$a = image_reduire($img, $attrs['largeur'], $attrs['hauteur']);
+			$a = image_reduire($img, $attrs['largeur'] ? $attrs['largeur'] : -1, $attrs['hauteur'] ? $attrs['hauteur'] : -1);
 		else
 			$a = '<img src="'.$img.'" />';
 
@@ -304,8 +322,8 @@ function ressource_image($attrs, $meta) {
 				'' /*url*/, $w, $h, null /* align */);
 		}
 	}
-	$image['logodocument'] = $a;
 
+	if ($a) $image['logodocument'] = $a;
 
 	// experimental : DEST
 	// TODO: parametre à mieux nommer ?
@@ -323,8 +341,15 @@ function ressource_image($attrs, $meta) {
 
 
 # s t m d z b o
-function image_stdsize($img, $s) {
+function image_stdsize($meta, $attrs) {
 	include_spip('inc/filtres_images');
+
+	$s = $attrs['size'];
+
+	if (isset($meta['local']))
+		$img = $meta['local'];
+	else
+		$img = $attrs['src'];
 
 	# intercepter les URLs flickr pour choper les jolies reductions
 	if (preg_match(',^(http://farm.*.staticflickr.com/(\d+/[0-9a-z_]+?))(_[zbo])?\.jpg$,', $img, $r)) {
