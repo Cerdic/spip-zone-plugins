@@ -22,11 +22,11 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 	$autoriser = false;
 
 	// Conditions :
-	// - l'auteur connecte est un des auteurs de l'article
-	// - l'article est dans l'état "en cours de rédaction"
+	// - l'auteur connecte possède l'autorisation de modifier l'article
+	// - l'article est dans l'état "proposé à l'évaluation"
 	// - l'article n'a pas deja une relecture d'ouverte
 	if ($id_article = intval($id)) {
-		$les_auteurs = lister_objets_lies('auteur', 'article', $id, 'auteurs_liens');
+		$auteur_autorise = autoriser('modifier', 'article', $id_article, $qui);
 
 		$from = 'spip_articles';
 		$where = array("id_article=$id_article");
@@ -37,8 +37,8 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 		$nb_relecture_ouverte = intval(sql_countsel($from, $where));
 
 		$autoriser =
-			(in_array($qui['id_auteur'], $les_auteurs)
-			AND ($statut=='prepa')
+			($auteur_autorise
+			AND ($statut=='prop')
 			AND ($nb_relecture_ouverte==0));
 	}
 
