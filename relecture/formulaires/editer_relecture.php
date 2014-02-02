@@ -14,6 +14,8 @@ function formulaires_editer_relecture_charger_dist($id_relecture='oui', $redirec
 		// On supprime l'index 'id_article' du tableau des valeurs afin que id_article soit transmis dans
 		// la fonction traiter() (car id_article est un champ de l'objet relecture)
 		unset($valeurs['id_article']);
+		// Néanmoins, on a besoin d'afficher le titre de l'article associé à la relecture, donc on le passe au formulaire
+		$valeurs['titre_article'] = sql_getfetsel('titre', 'spip_articles', array("id_article=$id_article"));
 	}
 
 	return $valeurs;

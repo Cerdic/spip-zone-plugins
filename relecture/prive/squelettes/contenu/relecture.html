@@ -22,7 +22,7 @@
 			[(#URL_ECRIRE{relecture_edit,id_relecture=#ID_RELECTURE}|icone_verticale{#ID_RELECTURE|afficher_qui_edite{relecture},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
-	<h1>(#INFO_TITRE{relecture, #ID_RELECTURE}|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{relecture-24.png}|balise_img{relecture, cadre-icone})]</h1>
+	<h1>(#INFO_TITRE{relecture, #ID_RELECTURE}|sinon{<:relecture:titre_relecture:>})[(#CHEMIN_IMAGE{relecture-24.png}|balise_img{relecture, cadre-icone})]</h1>
 	[<p class="soustitre">
 		<:relecture:label_article_relu:> : <a[ href="(#URL_ECRIRE{article, id_article=#ID_ARTICLE})"]>(#INFO_TITRE{article, #ID_ARTICLE})</a>
 	</p>]],

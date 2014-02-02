@@ -236,10 +236,8 @@ function relecture_pre_edition($flux) {
 			$revision = sql_getfetsel('max(id_version) AS revision', $from, $where);
 
 			// -- Ouverture
-			if ($flux['args']['statut_ancien'] == 'prepa') {
-				// - mise a jour du "vrai" statut de la relecture
-				$flux['data']['statut'] = 'ouverte';
-
+			if (($flux['args']['statut_ancien'] == 'ouverte')
+			AND (!isset($flux['data']['statut']))) {
 				// - mise a jour de la date d'ouverture
 				$flux['data']['date_ouverture'] = date('Y-m-d H:i:s');
 

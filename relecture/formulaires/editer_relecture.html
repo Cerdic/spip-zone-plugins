@@ -8,7 +8,10 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer editer_description[ (#ENV**{erreurs}|table_valeur{description}|oui) erreur]">
+			<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{description}|oui) erreur]">
+				<label><:relecture:label_article_relu:>[<span> : (#ENV{titre_article})</span>]</label>
+		    </li>
+			<li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{description}|oui) erreur]">
 				<label for="description"><:relecture:label_description:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{description})</span>]
 				<textarea class="inserer_barre_edition" name="description" id="description"[ lang="(#LANG)"] rows="12" cols="40">[(#ENV**{description})]</textarea>

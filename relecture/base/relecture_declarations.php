@@ -63,7 +63,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 		// Textes standard
 		'texte_retour' 			=> 'icone_retour',
 		'texte_modifier' 		=> 'relecture:bouton_modifier_relecture',
-		'texte_creer' 			=> '',
+		'texte_creer' 			=> 'relecture:bouton_ouvrir_relecture',
 		'texte_creer_associer' 	=> '',
 		'texte_signale_edition' => '',
 		'texte_objet' 			=> 'relecture:titre_relecture',
