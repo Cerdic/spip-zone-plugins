@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2013 - Distribue sous licence GNU/GPL
+ * © 2010-2014 - Distribue sous licence GNU/GPL
  *
  * Utilisation des pipelines par Diogene
  *
@@ -211,7 +211,7 @@ function diogene_editer_contenu_objet($flux){
 					$args['contexte']['workflow_simplifie']=$args['options_complements']['workflow_simplifie'];
 				}
 				
-				$contexte = array(id_table_objet($type)=>$args['contexte'][id_table_objet($type)]);
+				$contexte = array(id_table_objet($type)=>$args['contexte'][id_table_objet($type)],'statut'=>$args['contexte']['statut']);
 				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html'))
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$contexte));
 				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html'))
