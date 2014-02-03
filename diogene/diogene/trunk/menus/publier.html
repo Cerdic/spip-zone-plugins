@@ -1,48 +1,41 @@
 [(#SET{titre,[(#ENV*{titre,<:diogene:titre_lien_publier:>}|typo)]})]
 [(#ENV{appel_formulaire}|oui)
 	<div class="titre">#GET{titre}</div>
-	<div class="infos"><:diogene:info_menu_diogene:></div>
-]
+	<div class="infos"><:diogene:info_menu_diogene:></div>]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
-	#SET{contenu,''}
-	#SET{contenu_prop,''}
-	#SET{secteurs,#ARRAY}
-	<BOUCLE_diogenes(DIOGENES){menu=on}{fusion type}{par num titre,id_diogene,objet, titre}>
-	#SET{secteurs,#GET{secteurs}|push{#ID_SECTEUR}}
-	<BOUCLE_auth_diogenes(CONDITION){si (#AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui)}>
+	[(#SET{contenu,''})]
+	[(#SET{contenu_prop,''})]
+	[(#SET{secteurs,#ARRAY})]
+	[(#SET{attente_prop,0})]
+	[(#SET{url_publier,#URL_PAGE{#ENV{page,publier}}})]
+	<BOUCLE_diogenes(DIOGENES){menu = on}{fusion type}{par num titre,id_diogene,objet, titre}>[(#ID_SECTEUR|in_array{#GET{secteurs}}|non)
+	[(#SET{secteurs,[(#GET{secteurs}|push{#ID_SECTEUR})]})]
+	]<BOUCLE_auth_diogenes(CONDITION){si (#AUTORISER{utiliser,diogene,#ID_DIOGENE}|oui)}>
 	[(#ID_SECTEUR|=={0}|ou{#INFO_TITRE{rubrique,#ID_SECTEUR}|strlen|oui}|oui)
 	[(#SET{contenu,[(#GET{contenu}|concat{
-		<li class="menu-entree item[(#ENV{env}|table_valeur{type_objet}|=={#_diogenes:TYPE}|oui)on]">
-			<a href="[(#URL_PAGE{#ENV{page,publier}}|parametre_url{type_objet,#TYPE})]">#TITRE</a>
-		</li>})]})]]
+<li class="menu-entree item[(#ENV{env}|table_valeur{type_objet}|=={#_diogenes:TYPE}|oui)on]"><a href="[(#GET{url_publier}|parametre_url{type_objet,#TYPE})]">#TITRE</a></li>
+})]})]]
 	</BOUCLE_auth_diogenes>
 	</BOUCLE_diogenes>
 	<BOUCLE_admin(CONDITION){si #SESSION{statut}|=={0minirezo}}>
-		#SET{attente_prop,0}
-		<BOUCLE_articles_attente(ARTICLES){id_secteur IN #GET{secteurs}}{id_auteur != #SESSION{id_auteur}}{statut=prop}>
-		</BOUCLE_articles_attente>
+		<BOUCLE_articles_attente(ARTICLES){id_secteur IN #GET{secteurs}}{id_auteur != #SESSION{id_auteur}}{statut=prop}> </BOUCLE_articles_attente>
 		[(#SET{attente_prop,[(#GET{attente_prop}|plus{#TOTAL_BOUCLE})]})]
 		</B_articles_attente>
-		<BOUCLE_sites_attente(SITES){id_secteur IN #GET{secteurs}}{id_auteur != #SESSION{id_auteur}}{statut=prop}>
-		</BOUCLE_sites_attente>
+		<BOUCLE_sites_attente(SITES){id_secteur IN #GET{secteurs}}{id_auteur != #SESSION{id_auteur}}{statut=prop}> </BOUCLE_sites_attente>
 		[(#SET{attente_prop,[(#GET{attente_prop}|plus{#TOTAL_BOUCLE})]})]
 		</B_sites_attente>
 		[(#GET{attente_prop}|>{0}|oui)
 		[(#SET{contenu_prop,<li class="menu-entree">
-			<a href="[(#URL_PAGE{publier}|ancre_url{diogene_proposes})]">[(#VAL{diogene:titre_publier_proposes}|_T{#ARRAY{nb,#GET{attente_prop}}})]</a>	
+			<a href="[(#GET{url_publier}|ancre_url{diogene_proposes})]">[(#VAL{diogene:titre_publier_proposes}|_T{#ARRAY{nb,#GET{attente_prop}}})]</a>	
 		</li>})]]
-	</BOUCLE_admin>
-	[(#GET{contenu}|strlen|>{1}|oui)
+	</BOUCLE_admin>[(#GET{contenu}|strlen|>{1}|oui)
 		<li class="menu-entree item dropdown[ (#ENV{css})][(#ENV{env}|table_valeur{type}|=={page}|et{#ENV{env}|table_valeur{composition}|=={publier}}) on]">
-			<a href="[(#URL_PAGE{#ENV{page,publier}})]" data-toggle="dropdown">
-			#GET{titre}
-			</a>
+			<a href="[(#GET{url_publier})]" data-toggle="dropdown">#GET{titre}</a>
 			<ul class="menu-liste dropdown-menu">
-				#GET{contenu}
-				#GET{contenu_prop}
-			</ul>
-		</li>
-	]
+				[(#GET{contenu}|trim)][
+				(#GET{contenu_prop}|trim)
+			]</ul>
+		</li>]
 	</B_diogenes>
-	<//B_diogenes>
 </BOUCLE_appel>
+#FILTRE{trim}
