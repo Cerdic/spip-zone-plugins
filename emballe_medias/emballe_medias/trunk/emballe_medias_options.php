@@ -6,7 +6,7 @@
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * b_b (http://http://www.weblog.eliaz.fr)
  *
- * © 2008/2012 - Distribue sous licence GNU/GPL
+ * © 2008/2014 - Distribue sous licence GNU/GPL
  *
  * Fichiers d'options spécifique au plugin (chargé à chaque hit)
  * 
