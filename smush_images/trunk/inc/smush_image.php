@@ -65,7 +65,6 @@ function image_smush($im) {
 
 	$im = $image["fichier"];
 	$dest = $image["fichier_dest"];
-
 	$creer = $image["creer"];
 
 	// Methode precise
@@ -84,7 +83,7 @@ function image_smush($im) {
 
 		else if ($format == 'PNG') {
 			$nq = substr($source,0,-4).'-nq8.png';
-			exec('pngnq '.$im.' && optipng -o5 '.$nq.' -out '.$dest,$out);
+			exec('pngnq -f '.$im.' && optipng -o5 '.$nq.' -out '.$dest,$out);
 			if(file_exists($nq))
 				spip_unlink($nq);
 			return $dest;
