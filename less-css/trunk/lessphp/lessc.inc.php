@@ -55,6 +55,8 @@ class lessc {
 
 	protected $numberPrecision = null;
 
+	protected $allParsedFiles = array();
+
 	// set to the parser that generated the current line when compiling
 	// so we know how to create error messages
 	protected $sourceParser = null;
@@ -1681,7 +1683,6 @@ class lessc {
 		$this->importDir = (array)$this->importDir;
 		$this->importDir[] = $pi['dirname'].'/';
 
-		$this->allParsedFiles = array();
 		$this->addParsedFile($fname);
 
 		$out = $this->compile(file_get_contents($fname), $fname);
