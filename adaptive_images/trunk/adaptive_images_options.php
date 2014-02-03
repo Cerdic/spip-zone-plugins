@@ -93,6 +93,10 @@ if ($settings){
 	*/
 	if (isset($settings['on_demand_production']) AND $settings['on_demand_production'])
 		$AdaptiveImages->onDemandImages = true;
+
+	if (isset($settings['lazy_load']) AND $settings['lazy_load'])
+		$AdaptiveImages->lazyload = true;
+
 }
 
 
@@ -244,6 +248,22 @@ function adaptive_images_affichage_final($texte){
 		$AdaptiveImages = SPIPAdaptiveImages::getInstance();
 		$texte = $AdaptiveImages->adaptHTMLPage($texte);
 		#var_dump(spip_timer());
+	}
+	return $texte;
+}
+
+/**
+ * Inserer jquery.lazyload.js si besoin
+ * @param $texte
+ * @return string
+ */
+function adaptive_images_insert_head($texte){
+	$AdaptiveImages = SPIPAdaptiveImages::getInstance();
+	if ($AdaptiveImages->lazyload){
+		if ($js = find_in_path("javascript/jquery.lazyload.js"))
+			$texte .= "<script type='text/javascript' src='$js'></script>\n";
+		if ($js = find_in_path("javascript/adaptive.lazyload.js"))
+			$texte .= "<script type='text/javascript' src='$js'></script>\n";
 	}
 	return $texte;
 }

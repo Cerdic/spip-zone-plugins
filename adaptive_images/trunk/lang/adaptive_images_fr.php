@@ -24,6 +24,7 @@ L\'image doit faire au moins @width_hr@px de large.</small>',
 	'label_min_filesize' => 'Poids min. pour adapter (ko)',
 	'label_default_bkpts' => '<i lang="en">Breakpoints</i> pour les variantes d\'image',
 	'label_on_demand_production_1' => 'Produire les variantes d\'images uniquement quand elles sont nécessaires',
+	'label_lazy_load_1' => 'Ne charger les images adaptatives que lorsqu\'elles sont visibles',
 	'explication_on_demand_production' => 'En activant ce réglage, chaque variante d\'une image sera fabriquée la première fois qu\'un visiteur en a besoin.
 Evite de générer toutes les images d\'un coup ce qui peut produire des erreurs sur les pages avec beaucoup d\'images.',
 	'legend_compression_jpg' => 'Compression JPG',
