@@ -28,7 +28,7 @@
 	<div id="navigation_liste" class="diogene_#ID_DIOGENE">
 		<B_selected>
 		<ul class="liste-items liste medias">
-		<BOUCLE_selected(ARTICLES){id_article=#ENV{id_media}}{id_secteur}{statut IN #ENV{statut,prepa}}{statut !IN 'poubelle','refuse'}{doublons selected}>
+		<BOUCLE_selected(ARTICLES){id_article=#ENV{id_media}}{id_secteur}{statut = #ENV{statut,prepa}}{statut !IN 'poubelle','refuse'}{doublons selected}>
 		<li class="item[ (#ID_ARTICLE|=={#ENV{id_media}}|oui)on]">
 			<INCLURE{fond=inclure/resume/choix_media_lot,id_article,statut} />
 		</li>
@@ -62,9 +62,11 @@
 			#SET{statut_nouveau,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}|table_valeur{'prop'}|_T}
 			<p><:emballe_medias:message_info_media_proposer{statut=#GET{statut_nouveau}}:></p>]
 	[(#BOITE_FERMER)]]
-	<div id="em_upload_fichier">
-		<BOUCLE_document_up(DOCUMENTS){id_article}{0,1}{tout}>
-		<INCLURE{fond=inc-media_uploaded,id_objet=#ID_ARTICLE,objet=article,env}>
+	<div id="em_upload_fichier"[ class="diogene_(#GET{id_diogene})"]>
+		<BOUCLE_document_up(DOCUMENTS){id_article}{0,1}{par id_document}{inverse}{tout}>
+		<div class="ajax">
+			[(#FORMULAIRE_EM_SUPPRIMER_MEDIA{#ID_DOCUMENT,#_article:EM_TYPE,article,#_article:ID_ARTICLE,#ENV{redirect}})]
+		</div>
 		</BOUCLE_document_up>
 	</div>
 	<div id="formulaire_diogene">
@@ -75,7 +77,6 @@
 	</B_document_up>
 		[(#BOITE_OUVRIR{'',error})]
 			<p><:emballe_medias:erreur_media_sans_document:></p>
-			<p>Ok Ok je sais il manque un formulaire d'upload ici mais c'est pas si facile</p>
 		[(#BOITE_FERMER)]
 		<div class="ajax">
 		[(#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE})]
