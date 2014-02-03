@@ -238,7 +238,6 @@ if(!function_exists('puce_statut_rubrique')){
 	}
 }
 
-
 /**
  * Generer un lien d'aide (icone + lien)
  *

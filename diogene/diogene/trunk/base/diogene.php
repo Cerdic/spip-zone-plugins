@@ -42,6 +42,8 @@ function diogene_declarer_tables_auxiliaires($tables_auxiliaires){
 }
 
 function diogene_declarer_tables_objets_sql($tables){
+	$tables['spip_articles']['champs_editables'][] = 'lang';
+	$tables['spip_articles']['champs_editables'][] = 'langue_choisie';
 	$tables['spip_diogenes'] = array(
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'diogene:diogenes',
