@@ -208,17 +208,17 @@ function diogene_editer_contenu_objet($flux){
 					$type='article';
 
 				if ($args['options_complements']['workflow_simplifie']=='on') {
-					spip_log('Gestion simplifiée du workflow de publication', "diogene"._LOG_DEBUG);
 					$args['contexte']['workflow_simplifie']=$args['options_complements']['workflow_simplifie'];
 				}
-
+				
+				$contexte = array(id_table_objet($type)=>$args['contexte'][id_table_objet($type)]);
 				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html'))
-					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$args['contexte']));
+					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$diogene['objet'],$contexte));
 				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$type.'.html'))
-					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$type,$args['contexte']));
+					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_'.$type,$contexte));
 				else if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_objet.html') AND $type != 'rubrique'){
 					$args['contexte']['type'] = $type;
-					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_objet',$args['contexte']));
+					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_objet',$contexte));
 				}
 				$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims',"\\1<ul>".$saisie."</ul>\\2",$flux['data'],1);
 			}
@@ -508,12 +508,12 @@ function diogene_pre_edition($flux){
 			$options_complements = is_array(unserialize($flux['data']['options_complements'])) ? unserialize($flux['data']['options_complements']) : array();
 
 		foreach(array('champs_ajoutes','champs_caches') as $array){
-				if($val_array = _request($array)){
-					if(is_array($val_array))
-						$flux['data'][$array] = serialize($val_array);
-					else
-						$flux['data'][$array] = $val_array;
-				}
+			if($val_array = _request($array)){
+				if(is_array($val_array))
+					$flux['data'][$array] = serialize($val_array);
+				else
+					$flux['data'][$array] = $val_array;
+			}
 		}
 		foreach($champs as $champ){
 			if(_request($champ)){
@@ -602,8 +602,8 @@ function diogene_diogene_avant_formulaire($flux){
 	$flux['data'] .= '<script type="text/javascript" src="'.find_in_path('prive/javascript/presentation.js').'"></script>';
 	if(is_array(unserialize($flux['args']['champs_ajoutes'])) &&
 		(in_array('date',unserialize($flux['args']['champs_ajoutes'])) || in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])))){
-	   	$flux['data'] .= recuperer_fond('formulaires/dateur/inc-dateur', $flux['args']);
-    }
+		$flux['data'] .= recuperer_fond('formulaires/dateur/inc-dateur', $flux['args']);
+	}
 	return $flux;
 }
 
@@ -627,11 +627,11 @@ function diogene_diogene_ajouter_saisies($flux){
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date'])));
 			if($flux['args']['contexte']['date_redac'])
 				list($flux['args']['contexte']['date_redac_orig'],$flux['args']['contexte']['heure_redac_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
-		}elseif(in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])) && ($GLOBALS['meta']['articles_redac'] != 'non')){
+		}else if(in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])) && ($GLOBALS['meta']['articles_redac'] != 'non')){
 			if($flux['args']['contexte']['date_redac'])
 				list($flux['args']['contexte']['date_redac_orig'],$flux['args']['contexte']['heure_redac_orig']) = explode(' ',date('d/m/Y H:i',strtotime($flux['args']['contexte']['date_redac'])));
 			$dates_ajoutees = 'date_redac_orig';
-		}elseif(in_array('date',unserialize($flux['args']['champs_ajoutes']))){
+		}else if(in_array('date',unserialize($flux['args']['champs_ajoutes']))){
 			if(!$flux['args']['contexte']['date'])
 				list($flux['args']['contexte']['date_orig'],$flux['args']['contexte']['heure_orig']) = explode(' ',date('d/m/Y H:i',time()));
 			else
@@ -651,7 +651,7 @@ function diogene_diogene_ajouter_saisies($flux){
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_forums',$flux['args']['contexte']);
 		}
 	}
-    return $flux;
+	return $flux;
 }
 
 /**
@@ -667,7 +667,7 @@ function diogene_diogene_ajouter_saisies($flux){
  * 		Le contexte modifié
  */
 function diogene_diogene_verifier($flux){
-	$erreurs = &$flux['args']['erreurs'];
+	$erreurs = $flux['args']['erreurs'];
 	if(_request('date_orig') || _request('date_redac_orig')){
 		/**
 		 * Ce fichier se trouve dans plugins-dist/organiseur/inc/date_gestion.php
@@ -729,21 +729,23 @@ function diogene_diogene_traiter($flux){
  * 		La description des boutons complétée
  */
 function diogene_ajouter_menus($boutons_admin) {
-	$diogenes = sql_select('*','spip_diogenes','objet != "emballe_media"');
 	if(!function_exists('quete_logo'))
 		include_spip('public/quete');
 	
-	while($diogene = sql_fetch($diogenes)){
+	$diogenes = sql_allfetsel('*','spip_diogenes','objet != "emballe_media"');
+	
+	foreach($diogenes as $diogene){
 		if (autoriser('utiliser', 'diogene',$diogene['id_diogene'])) {
+			$url = false;
 			if($diogene['objet'] == 'rubrique'){
 				$url = generer_url_ecrire('rubrique_edit','new=oui&id_parent='.$diogene['id_secteur']);
 				$icon = find_in_theme('images/rubrique-add-16.png');
 			}
-			if($diogene['objet'] == 'article'){
+			else if($diogene['objet'] == 'article'){
 				$url = generer_url_ecrire('article_edit','new=oui&id_rubrique='.$diogene['id_secteur']);
 				$icon = find_in_theme('images/article-add-16.png');
 			}
-			if($diogene['objet'] == 'site'){
+			else if($diogene['objet'] == 'site'){
 				$url = generer_url_ecrire('site_edit','new=oui&id_rubrique='.$diogene['id_secteur']);
 				$icon = find_in_theme('images/site-add-16.png');
 			}
@@ -754,8 +756,10 @@ function diogene_ajouter_menus($boutons_admin) {
 				$icon = extraire_attribut(image_reduire($logo[0],'16','16'),'src');
 			}
 			
-			$boutons_admin['menu_edition']->sousmenu[$diogene['type']] =
-			new Bouton($icon, extraire_multi($diogene['titre']),$url);
+			if($url){
+				$boutons_admin['menu_edition']->sousmenu[$diogene['type']] =
+				new Bouton($icon, extraire_multi($diogene['titre']),$url);
+			}
 		}
 	}
 	return $boutons_admin;
