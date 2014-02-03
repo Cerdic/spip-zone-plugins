@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_caps_1' => 'Styler les mots en lettres capitales',
 	'explication_caps' => 'Encadrer les mots écrits en lettres capitales dans une balise <code>&lt;span class="caps"></code>. Par exemple, <code>ONU</code> devient <code>&lt;span class="caps">ONU&lt;/span></code>. De ce fait, les mots en lettres capitales peuvent être stylés en css',
 
+	'label_fines_1' => 'Espaces fines',
+	'explication_fines' => 'Traiter les espaces fines au voisinage des ponctuations doubles et des guillemets.',
+
 	'legend_corrections' => 'Corrections automatiques',
 	'label_corrections_1' => 'Activer les corrections automatiques',
 	'explication_corrections' => 'Corriger automatiquement le texte selon les règles ci-dessous.',

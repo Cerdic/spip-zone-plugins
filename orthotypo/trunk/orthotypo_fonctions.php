@@ -39,6 +39,8 @@ function orthotypo_post_typo($texte){
 		$texte = orthotypo_exposants_post_typo($texte);
 	if (!isset($config['caps']) OR $config['caps'])
 		$texte = orthotypo_caps_post_typo($texte);
+	if (!isset($config['fines']) OR $config['fines'])
+		$texte = orthotypo_espaces_fines_post_typo($texte);
 
 	return $texte;
 }
@@ -58,7 +60,6 @@ function orthotypo_pre_propre($texte) {
 
 	return $texte;
 }
-
 
 /**
  * evite les transformations typo dans les balises $balises
@@ -245,6 +246,32 @@ function orthotypo_guillemets_post_typo($texte){
 	return $texte;
 }
 
+function orthotypo_espaces_fines_post_typo($t='') {
+	$nbsp = "\xc2\xa0";
+	$fine = '<small class="fine">'.$nbsp.'</small>';
+
+	$t = str_replace(array(
+		'&nbsp;&#187;',
+		'&#171;&nbsp;',
+		'&nbsp;?',
+		'&nbsp;;',
+		'&nbsp;!',
+		'&nbsp;%',
+		'&nbsp;',
+	),
+	array(
+		"$fine\xc2\xbb",
+		"\xc2\xab$fine",
+		"$fine?",
+		"$fine;",
+		"$fine!",
+		"$fine%",
+		$nbsp,
+	),
+	$t);
+
+	return $t;
+}
 
 /* *********************************************************************************************************************
  * Exposants

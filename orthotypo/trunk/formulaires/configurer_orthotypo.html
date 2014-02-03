@@ -62,6 +62,21 @@
 				</div>
 				<p class="explication"><:orthotypo:explication_caps:></p>
 			</li>
+
+			#SET{name,fines}#SET{obli,''}#SET{defaut,'1'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				#SET{val,0}
+				<input type="hidden" name="#GET{name}" value="#GET{val}" />
+				#SET{val,1}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+				</div>
+				<p class="explication"><:orthotypo:explication_fines:></p>
+			</li>
+
 			<li class="fieldset">
 				<fieldset>
 					<legend><:orthotypo:legend_corrections:></legend>
