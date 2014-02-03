@@ -2,22 +2,25 @@
 /** @file
  * XML extensions. See QPXML.
  */
+namespace QueryPath\Extension;
+
+use \QueryPath;
 /**
  * Provide QueryPath with additional XML tools.
  *
  * @author M Butcher <matt@aleph-null.tv>
  * @author Xander Guzman <theshadow@shadowpedia.info>
- * @license http://opensource.org/licenses/lgpl-2.1.php LGPL or MIT-like license.
- * @see QueryPathExtension
- * @see QueryPathExtensionRegistry::extend()
+ * @license MIT
+ * @see QueryPath::Extension
+ * @see QueryPath::ExtensionRegistry::extend()
  * @see QPXML
  * @ingroup querypath_extensions
  */
-class QPXML implements QueryPathExtension {
+class QPXML implements \QueryPath\Extension {
 
   protected $qp;
 
-  public function __construct(QueryPath $qp) {
+  public function __construct(\QueryPath\Query $qp) {
     $this->qp = $qp;
   }
 
@@ -25,7 +28,7 @@ class QPXML implements QueryPathExtension {
     $doc = $this->qp->branch()->top()->get(0)->ownerDocument;
 
     if (!$doc->schemaValidate($file)) {
-      throw new QueryPathException('Document did not validate against the schema.');
+      throw new \QueryPath\Exception('Document did not validate against the schema.');
     }
   }
 
@@ -83,7 +86,7 @@ class QPXML implements QueryPathExtension {
    * If no comments are found, NULL will be returned.
    *
    * @param string $text
-   *  The text of the comment. If set, a new comment will be created in every item 
+   *  The text of the comment. If set, a new comment will be created in every item
    *  wrapped by the current {@link QueryPath}.
    * @return mixed
    *  If $text is set, this will return a {@link QueryPath}. If no text is set, this
@@ -171,7 +174,7 @@ class QPXML implements QueryPathExtension {
           $nsUri = $element->ownerDocument->lookupNamespaceURI($ns);
 
           if ($nsUri === null) {
-            throw new QueryPathException("Undefined namespace for: " . $text);
+            throw new \QueryPath\Exception("Undefined namespace for: " . $text);
           }
       }
 
@@ -184,7 +187,7 @@ class QPXML implements QueryPathExtension {
       } else {
         $node = $element->ownerDocument->createElement($text);
       }
-        return qp($node);
+        return QueryPath::with($node);
       }
     }
     return;
@@ -200,10 +203,9 @@ class QPXML implements QueryPathExtension {
     if (isset ($text)) {
       foreach ($this->qp->get() as $element) {
         $node = $this->qp->createElement($text);
-        qp($element)->append($node);
+        QueryPath::with($element)->append($node);
       }
     }
     return $this->qp;
   }
 }
-QueryPathExtensionRegistry::extend('QPXML');
