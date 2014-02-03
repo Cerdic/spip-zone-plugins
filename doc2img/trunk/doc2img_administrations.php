@@ -62,16 +62,16 @@ function doc2img_upgrade($nom_meta_base_version, $version_cible){
  */
 function doc2img_creer_config(){
 	include_spip('inc/config');
-    if(!is_array(lire_config('doc2img'))){
-        $cfg = array(
-            "format_document" => "pdf,bmp,tiff",
-        	"resolution" => "150",
-            "format_cible" => "png",
-            "proportion" => "on"
-        );
+	if(!is_array(lire_config('doc2img'))){
+		$cfg = array(
+			"format_document" => "pdf,bmp,tiff",
+			"resolution" => "150",
+			"format_cible" => "png",
+			"proportion" => "on"
+		);
 		ecrire_meta('doc2img',serialize($cfg));
-    }
-    
+	}
+
 	if (class_exists('Imagick')) {
 		if(!is_array($formats = lire_config('doc2img_imagick_extensions'))){
 			$imagick = new Imagick();
@@ -90,15 +90,14 @@ function doc2img_creer_config(){
 function doc2img_update_to_docs(){
 	include_spip('inc/documents');
 	include_spip('action/editer_document');
-	$doc2imgs = sql_select('*','spip_doc2img');
+	$doc2imgs = sql_allfetsel('*','spip_doc2img');
 	$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-	while($doc2img = sql_fetch($doc2imgs)){
+	foreach($doc2imgs as $doc2img){
 		/**
 		 * On déplace le document doc2img dans la table des documents
 		 */
-		$id_document = $doc2img['id_document'];
 		$files = array(array('tmp_name'=>get_spip_doc($doc2img['fichier']),'name'=>basename(get_spip_doc($doc2img['fichier']))));
-		$x = $ajouter_documents('new', $files,'document', $id_document, 'doc2img');
+		$x = $ajouter_documents('new', $files,'document', $doc2img['id_document'], 'doc2img');
 		if(intval(reset($x))){
 			/**
 			 * Si on a un document doc2img:
@@ -107,7 +106,7 @@ function doc2img_update_to_docs(){
 			 * - on supprime le fichier physique
 			 */
 			document_modifier(reset($x),array("page" => $doc2img['page']));
-			sql_delete('spip_doc2img','id_document='.intval($id_document).' AND fichier='.sql_quote($doc2img['fichier']));
+			sql_delete('spip_doc2img','id_document='.intval($doc2img['id_document']).' AND fichier='.sql_quote($doc2img['fichier']));
 			spip_unlink(get_spip_doc($doc2img['fichier']));
 		}
 		if (time() >= _TIME_OUT){
