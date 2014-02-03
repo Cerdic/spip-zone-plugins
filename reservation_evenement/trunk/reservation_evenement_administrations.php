@@ -34,9 +34,9 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 	if($version_cible='1.3.3'){
 		include_spip('inc/config');
 		$config=lire_config('reservation_evenement');
-		if(isset($config['envoi_differe'])){
-			$config['envoi_separe']=$config['envoi_differe'];
-			unset($config['envoi_differe']);
+		if(isset($config['envoi_separe'])){
+			$config['envoi_separe']=$config['envoi_separe'];
+			unset($config['envoi_separe']);
 		}
 	}
 

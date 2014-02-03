@@ -1,9 +1,9 @@
 #HTTP_HEADER{Content-Type:text/html}
 #INCLURE{fond=emails/inc-haut}
 #SET{config,#CONFIG{reservation_evenement}}
-[(#SET{envoi_differe,#GET{config}|table_valeur{envoi_differe}})]
-[(#GET{envoi_differe}|is_array|oui)
-    [(#STATUT|in_array{#GET{envoi_differe}}|oui)#SET{statut,#STATUT}]
+[(#SET{envoi_separe,#GET{config}|table_valeur{envoi_separe}})]
+[(#GET{envoi_separe}|is_array|oui)
+    [(#STATUT|in_array{#GET{envoi_separe}}|oui)#SET{statut,#STATUT}]
 ]
 
 <BOUCLE_art(RESERVATIONS){id_reservation}{tout}>

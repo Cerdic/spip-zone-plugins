@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'Diese Email Adresse wird bereits benützt, melden Sie sich an oder benutzen Sie eine andere Adresse',
 	'explication_envoi_separe' => 'Eine Status Veränderung eines Ameldungs Items zu
     <div><strong>"@statuts@"</strong></div> lösst das Senden eines Benachrichtigungsmail aus!',
-	'explication_envoi_separe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!', # MODIF
+	'explication_envoi_separe_detail' => 'Die Statusveränderung zu <div><strong>"@statuts@"</strong></div> lösst das Senden einer Benachrichtigungsmail aus!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Melden Sie sich an</a> wenn sie bereits auf dieser Site registriert sind.',
 
 	// I
@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Email:',
 	'label_enregistrer' => 'Ich möchte mich auf der Site registrieren:',
 	'label_id_auteur' => 'Id auteur',
+	'label_lang' => 'Sprache:',
 	'label_maj' => 'Aktualisierung:',
 	'label_mot_passe' => 'Passwort:',
 	'label_mot_passe2' => 'Wiederholen Sie das Passwort:',
@@ -62,8 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_cfg_titre' => 'Benachrichtigungen',
 	'notifications_client_explication' => 'Dem Kunden Benachrichtungen schicken?',
 	'notifications_client_label' => 'Kunde',
-	'notifications_envoi_separe' => 'Das einzeln Verschicken für den folgenden Status aktivieren :',
-	'notifications_envoi_separe_explication' => 'Erlaubt es  Benachrichtigungen für jedes einzelne Anmeldung Item zu verschicken',
+	'notifications_envoi_separe' => 'Das einzeln Verschicken für den folgenden Status aktivieren:',
+	'notifications_envoi_separe_explication' => 'Erlaubt es  Benachrichtigungen für jedes einzelne Anmeldung Item zu verschicken.',
 	'notifications_expediteur_administrateur_label' => 'Einen Adminsitrator auswählen:',
 	'notifications_expediteur_choix_administrateur' => 'ein Administrator',
 	'notifications_expediteur_choix_email' => 'eine Email',

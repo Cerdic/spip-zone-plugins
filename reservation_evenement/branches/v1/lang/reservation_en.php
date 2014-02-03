@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
 	'explication_envoi_separe' => 'The modification of the status of a booking item towards
     <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.',
-	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!', # MODIF
+	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Please log in</a> if you are already registered on this site',
 
 	// I
@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_email' => 'Email:',
 	'label_enregistrer' => 'I want to register on this site:',
 	'label_id_auteur' => 'Id auteur:',
+	'label_lang' => 'Language:',
 	'label_maj' => 'Update:',
 	'label_mot_passe' => 'Password:',
 	'label_mot_passe2' => 'Repeat the password:',
@@ -63,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_client_explication' => 'Send the alerts to the customer?',
 	'notifications_client_label' => 'Client',
 	'notifications_envoi_separe' => 'Activate the separate sending of confirmation mails for the status:',
-	'notifications_envoi_separe_explication' => 'Allows to to trigger the sending of confirmation mail for each Booking item separately',
+	'notifications_envoi_separe_explication' => 'Allows to to trigger the sending of confirmation mail for each Booking item separately.',
 	'notifications_expediteur_administrateur_label' => 'Select an administrator:',
 	'notifications_expediteur_choix_administrateur' => 'un administrateur',
 	'notifications_expediteur_choix_email' => 'an e-mail',
@@ -115,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => 'in the dustbin',
 	'texte_statut_refuse' => 'refused',
 	'texte_voir' => 'view',
-	'titre_envoi_separe' => 'Seperate modus activated',
+	'titre_envoi_separe' => '"Seperate Sending" modus activated',
 	'titre_reservation' => 'Booking',
 	'titre_reservations' => 'Bookings',
 

@@ -5,14 +5,14 @@
 <BOUCLE_reservation(RESERVATIONS_DETAILS){id_reservations_detail}{statut?}>
 <div class='infos'>
 [(#SET{texte_objet,<:reservations_detail:titre_reservations_detail:>})]
-<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESERVATION</p></div>
-[(#FORMULAIRE_INSTITUER_OBJET{reservations_detail,#ID_RESERVATION})]
-#SET{envoi_differe,#CONFIG{reservation_evenement/envoi_differe,#ARRAY}}
-#SET{envoi_differe_count,#GET{envoi_differe}|count}
-[(#GET{envoi_differe_count}|>{0}|oui)
-    #SET{statuts,#GET{envoi_differe}|nom_statuts|implode{','}|trim}
-   [(#BOITE_OUVRIR{<:reservation:titre_envoi_differe:>,'notice'})]
-    <:reservation:explication_envoi_differe_detail{statuts=#GET{statuts}}:>
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_RESERVATIONS_DETAIL</p></div>
+[(#FORMULAIRE_INSTITUER_OBJET{reservations_detail,#ID_RESERVATIONS_DETAIL})]
+#SET{envoi_separe,#CONFIG{reservation_evenement/envoi_separe,#ARRAY}}
+#SET{envoi_separe_count,#GET{envoi_separe}|count}
+[(#GET{envoi_separe_count}|>{0}|oui)
+    #SET{statuts,#GET{envoi_separe}|nom_statuts|implode{','}|trim}
+   [(#BOITE_OUVRIR{<:reservation:titre_envoi_separe:>,'notice'})]
+    <:reservation:explication_envoi_separe_detail{statuts=#GET{statuts}}:>
    #BOITE_FERMER   
 ]
 </div>
