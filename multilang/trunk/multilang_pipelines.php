@@ -84,6 +84,27 @@ function multilang_inserer_head($config=array()){
 }
 
 /**
+ * Insertion dans le pipeline formulaire_traiter (SPIP)
+ * On purge le cache js à chaque changement de la config de langue
+ * 
+ * @param $flux array
+ * 		Le contexte du pipeline
+ * @return $flux array
+ * 		Le contexte du pipeline modifié
+ */
+function multilang_formulaire_traiter($flux){
+	if($flux['args']['form'] == 'configurer_multilinguisme'){
+		include_spip('inc/invalideur');
+		$rep_js = _DIR_VAR.'cache-js/';
+		$rep_css = _DIR_VAR.'cache-css/';
+		purger_repertoire($rep_js);
+		purger_repertoire($rep_css);
+		suivre_invalideur('1');
+	}
+	return $flux;
+}
+
+/**
  * Insertion dans le pipeline affichage_final (SPIP)
  * 
  * Sur la page crayons.js, on insère également notre javascript pour être utilisable
@@ -112,7 +133,9 @@ function multilang_affichage_final($flux){
 			}
 
 			foreach($config as $conf => $val){
-				if($val == 'on') { // Articles
+				if($conf == 'gis') // Les points gis sont traités bizarrement dans les crayons qui enlèvent purement et simplement leur 's'
+					$conf = 'gi';
+				if($val == 'on') {
 					$root[] = 'input[type=hidden][name*=name_][value|='.$conf.']:not(input[value|='.$conf.'-logo]):not(input[value|='.$conf.'-vignette]):not(input[value|='.$conf.'-fichier])';
 					unset($config[$conf]);
 				}
