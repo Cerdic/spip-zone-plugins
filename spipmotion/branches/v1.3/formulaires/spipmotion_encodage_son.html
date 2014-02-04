@@ -1,0 +1,68 @@
+#SET{meta,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
+#SET{meta_compil_config,#GET{meta}|unserialize|table_valeur{configuration}}
+<div id="encodage_#VALEUR" class="spipmotion_profil">
+	<h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
+	<ul>
+		[(#SAISIE{selection,frequence_audio_#ENV{valeur},
+			label=<:spipmotion:frequence_audio:>,
+			defaut=22050,
+			cacher_option_intro=oui,
+			datas=#ARRAY{
+				11025,11025 Hz,
+				22050,22050 Hz,
+				44100,44100 Hz,
+				48000,48000 Hz
+			}})]
+
+		#SET{acodecs_possibles,#ARRAY}
+		[(#ENV{valeur}|in_array{#LISTE{ogg,oga}}|oui)
+			[(#VAL{'--enable-libvorbis'}|in_array{#GET{meta_compil_config}}|oui)
+			#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libvorbis}}
+			#SET{vorbis,oui}]]
+
+		#SET{acodec_defaut,#GET{acodecs_possibles}|table_valeur{0}}
+		[(#GET{acodecs_possibles}|count|>{0}|oui)
+			[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
+				label=<:spipmotion:label_codec_son:>,
+				cacher_option_intro=oui,
+				defaut=#GET{acodec_defaut},
+				datas=#GET{acodecs}})]
+		]
+
+		[(#REM)explication=<:spipmotion:explication_vorbis_qualite:>,]
+		[(#GET{vorbis}|oui)
+			[(#SAISIE{selection,qualite_audio_#ENV{valeur},
+			label=<:spipmotion:label_vorbis_qualite:>,
+			defaut=4,
+			cacher_option_intro=oui,
+			datas=#ARRAY{
+				-1,-1,
+				0,0,
+				1,1,
+				2,2,
+				3,3,
+				4,4,
+				5,5,
+				6,6,
+				7,7,
+				8,8,
+				9,9,
+				10,10
+			}})]
+		]
+		[(#GET{vorbis}|non)
+			[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
+				label=<:spipmotion:bitrate_audio:>,
+				defaut=64,
+				cacher_option_intro=oui,
+				datas=#ARRAY{
+					32,32 kbps,
+					64,64 kbps,
+					96,96 kbps,
+					128,128 kbps,
+					192,192 kbps,
+					256,256 kbps
+				}})]
+		]
+	</ul>
+</div>

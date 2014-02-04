@@ -1,0 +1,152 @@
+[(#REM)
+	On crée deux arrays pour compter les encodages par jour
+	=> troisième boucle
+]
+#SET{class,row_odd}
+<BOUCLE_au_moins_un(FACD_CONVERSIONS){0,1}>
+<B_profils>
+#BOITE_OUVRIR
+<div class="liste-elements conversions">
+<table class="spip liste facd" id="graph_stats_table">
+	<caption>
+		<strong class="caption">
+			<:spipmotion:titre_page_file_stats:>
+		</strong>
+	</caption>
+	<thead>
+		<tr class="row_first">
+			<th><abbr title="<:spipmotion:thead_template_encodage_utilise:>"><:spipmotion:thead_template_encodage:></abbr></th>
+			<th><abbr title="<:spipmotion:thead_stat_duree_long:>"><:spipmotion:thead_stat_duree:></abbr></th>
+			<th><abbr title="<:spipmotion:thead_stat_octet_long:>"><:spipmotion:thead_stat_octet:></abbr></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_profils(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}}>
+		#SET{stat_#VALEUR,0}
+		<BOUCLE_last10(FACD_CONVERSIONS documents){extension = #VALEUR}{statut = oui}{0,#ENV{nb,20}}{!par id_facd_conversion}>
+		
+		[(#SET{duree_conversion,[(#INFOS|table_valeur{fin_conversion}|moins{#INFOS|table_valeur{debut_conversion}})]})]
+		#SET{encodage_duree_seconde,#DUREE|div{#GET{duree_conversion}}}
+		#SET{encodage_octet_seconde,#TAILLE|div{#GET{duree_conversion}}}
+		
+		#SET{stat_duree_#EXTENSION,#GET{stat_duree_#EXTENSION}|plus{#GET{encodage_duree_seconde}}}
+		#SET{stat_octet_#EXTENSION,#GET{stat_octet_#EXTENSION}|plus{#GET{encodage_octet_seconde}}}
+		</BOUCLE_last10>
+		<tr class="[(#GET{class})]">
+			[(#GET{class}|=={row_even}|?{[(#SET{class,row_odd})],[(#SET{class,row_even})]})]
+			<td class="format">
+				#VALEUR
+			</td>
+			<td class="stat_duree">
+				[(#GET{stat_duree_#VALEUR}|div{#TOTAL_BOUCLE}|round{2})]
+			</td>
+			<td class="stat_taille">
+				<abbr title="[(#GET{stat_octet_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE}|div{1024}|div{1024}|round{2})]">
+				[(#GET{stat_octet_#VALEUR}|mult{60}|div{#TOTAL_BOUCLE}|taille_en_octets)]
+				</abbr>
+			</td>
+		</tr>
+		</B_last10>
+	</BOUCLE_profils>
+	</tbody>
+</table>
+</div>
+<h4><:spipmotion:thead_stat_duree_long:></h4>
+<div id="graph_stats_conversions_duree" class="facd_graphs"></div>
+<h4><:spipmotion:thead_stat_octet_long:></h4>
+<div id="graph_stats_conversions_taille" class="facd_graphs"></div>
+<script type="text/javascript"><!--
+	jQuery(document).ready(function(){
+		var stats_duree = [];
+		var stats_taille = [];
+		var formats_labels = [];
+		var formats_ticks = [];
+
+		i=0;
+		$('#graph_stats_table tr').not('.row_first').each(function(){
+			var format = facd_plot_trim($(this).find('.format').text());
+			formats_ticks.push([i,format]);
+			formats_labels.push(format);
+			var duree = facd_plot_trim($(this).find('.stat_duree').text());
+			stats_duree.push([i,duree]);
+			var taille = facd_plot_trim($(this).find('.stat_taille abbr').attr('title'));
+			stats_taille.push([i,taille]);
+			i++;
+		});
+		var data_duree = [{ data: stats_duree }];
+		var options_duree = {
+			bars : {show:true},
+			yaxis : {},
+			xaxis : {ticks:formats_ticks},
+			grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+		};
+		if($("#graph_stats_conversions_duree").height() == 0){
+			$("#graph_stats_conversions_duree").height(300)
+		}
+		$.plot($("#graph_stats_conversions_duree"), data_duree, options_duree);
+
+		var previousPoint = null;
+		$("#graph_stats_conversions_duree").bind("plothover", function (event, pos, item) {
+			if (item) {
+				if (previousPoint != item.dataIndex) {
+					previousPoint = item.dataIndex;
+					$("#facd_tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					var index = item.dataIndex;
+					content = formats_labels[index];
+					content += '<br />'+item.datapoint[1];
+					facd_plot_showtooltip(
+						item.pageX,
+						item.pageY,
+						content,'facd_tooltip');
+				}
+			}
+			else {
+				$("#facd_tooltip").remove();
+				previousPoint = null;
+			}
+		});
+		
+		var data_taille = [{ data: stats_taille }];
+		var options_taille = {
+			bars : {show:true},
+			yaxis : {},
+			xaxis : {ticks:formats_ticks},
+			grid : { hoverable: true, clickable: true, autoHighlight : true,borderColor : '#ccc' }
+		};
+		if($("#graph_stats_conversions_taille").height() == 0){
+			$("#graph_stats_conversions_taille").height(300)
+		}
+		$.plot($("#graph_stats_conversions_taille"), data_taille, options_taille);
+		
+		var previousPoint_taille = null;
+		$("#graph_stats_conversions_taille").bind("plothover", function (event, pos, item) {
+			if (item) {
+				if (previousPoint_taille != item.dataIndex) {
+					previousPoint_taille = item.dataIndex;
+					$("#facd_tooltip").remove();
+					var x = item.datapoint[0].toFixed(2),
+						y = item.datapoint[1].toFixed(2);
+
+					var index = item.dataIndex;
+					content = formats_labels[index];
+					content += '<br />'+item.datapoint[1]+'Mb';
+					facd_plot_showtooltip(
+						item.pageX,
+						item.pageY,
+						content,'facd_tooltip');
+				}
+			}
+			else {
+				$("#facd_tooltip").remove();
+				previousPoint_taille = null;
+			}
+		});
+	});
+//--></script>
+#BOITE_FERMER
+</B_profils>
+</BOUCLE_au_moins_un>
+#FILTRE{trim}

@@ -1,0 +1,23 @@
+[(#REM)
+
+	Plugin SPIPmotion
+	Squelette de notification d'encodage
+	(c) 2010
+ 	Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_attente(FACD_CONVERSIONS){id_facd_conversion}{tout}><BOUCLE_document(DOCUMENTS){id_document}{tout}>
+[[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - [(#VAL{spipmotion:message_encodage_sujet_[(#_attente:STATUT)]}|_T|nettoyer_titre_email|filtrer_entites|trim)] : ##_attente:ID_FACD_CONVERSION
+#SET{id_document,#ID_DOCUMENT} #SET{extension,#_attente:EXTENSION}
+[(#_attente:STATUT|=={oui}|oui)
+<:spipmotion:message_encodage_unique_oui{id_document=#GET{id_document},extension=#GET{extension}}:>][(#_attente:STATUT|=={erreur}|oui)
+<:spipmotion:message_encodage_unique_erreur{id_document=#GET{id_document},extension=#GET{extension}}:>]
+
+[(#STATUT|=={erreur}|oui)
+-----------------
+<:spipmotion:message_encodage_erreur_log:>
+-----------------
+
+[(#ENV{fichier_log}|spip_file_get_contents)]
+]</BOUCLE_document></BOUCLE_attente>
+#FILTRE{supprimer_tags|trim}

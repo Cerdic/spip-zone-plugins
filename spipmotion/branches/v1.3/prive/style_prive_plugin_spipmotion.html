@@ -1,0 +1,65 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.infos_video_haut{
+	text-align:#GET{left};
+	background-color:#GET{claire};
+	padding:5px;
+	margin:0 0 5px 0;
+}
+.infos_video_haut img.logo{
+	vertical-align:middle;
+	margin: 0 5px;
+}
+.infos_video_bas{
+	display:none;
+	padding: 5px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+	margin:5px 0;
+	overflow:hidden;
+	background-color:#fff;
+}
+.infos_son_bas table{
+	width:100%;
+	border:0px;
+}
+.infos_son_bas table tr td.son_left{
+	width:40%;
+	text-align:#GET{right};
+	padding-#GET{right}: 5px;
+}
+
+.liste-objets table.liste tr td.spipmotion_enabled,
+.liste-objets table.liste tr td.spipmotion_disabled{
+	color:#fff;
+	text-align:center;
+}
+
+.liste-objets table.liste tr td.spipmotion_enabled{
+	background-color:#53AD20;
+}
+
+.liste-objets table.liste tr td.spipmotion_disabled{
+	background-color:#d40000;
+}
+
+.liste-objets.spipmotion .caption{
+	background-image:url(#CHEMIN{images/spipmotion-24.png});
+	padding-left: 30px;
+}
+
+.formulaire_spip .ui-widget{
+	font-family: inherit;
+    font-size: inherit;
+}
+.formulaire_spip .ui-tabs-nav li{
+	clear:none;
+}

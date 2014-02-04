@@ -1,0 +1,24 @@
+[(#REM)
+
+	SPIPmotion
+	Gestion de l'encodage et des métadonnées de vidéos directement dans spip
+
+	Auteurs :
+	Quentin Drouet (kent1)
+	2008-2010 - Distribué sous licence GNU/GPL
+
+	Squelette de notification lorsque des binaires nécessaires sont absents
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]#CACHE{0}
+[[(#NOM_SITE_SPIP|filtrer_entites|nettoyer_titre_email|trim)]] - <:spipmotion:info_erreurs:> : [(#ENV{nb}|singulier_ou_pluriel{<:spipmotion:message_titre_binaire_manquant|nettoyer_titre_email:>,<:spipmotion:message_titre_binaires_manquant|nettoyer_titre_email:>})]
+[(#ENV{exec}|oui)[(#ENV{nb}|>{1}|non)
+<:spipmotion:message_texte_binaire_manquant:>][(#ENV{nb}|>{1}|oui)
+<:spipmotion:message_texte_binaires_manquant:>]]
+<BOUCLE_binaires(POUR){tableau #ENV*{erreurs}}>
+- #VALEUR
+</BOUCLE_binaires>[(#CONFIG{spipmotion_exec_casse}|=={oui}|oui)
+<:spipmotion:message_texte_binaires_informer_exec:>
+][(#CONFIG{spipmotion_safe_mode}|=={oui}|oui)
+<:spipmotion:message_texte_binaires_informer_safe_mode{execdir=#CONFIG{spipmotion_safe_mode_exec_dir}}:>]
+<:spipmotion:message_texte_binaires_informer:>
+#FILTRE{supprimer_tags|trim}

@@ -1,0 +1,154 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#CONFIG{spipmotion_casse}|=={oui}|oui)#SET{erreur_chemin,true}]
+
+<BOUCLE_script_perms(CONDITION){si #CONFIG{spipmotion_spipmotionsh_casse}|!={oui}|oui}>
+<form method="post" action="#ENV{action}">
+<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="fieldset">
+			<fieldset>
+				<legend><:spipmotion:options_config:></legend>
+				<ul>
+					[(#SAISIE{case,encodage_auto,
+						label=<:spipmotion:label_encodage_auto:>,
+						label_case=<:spipmotion:choix_encodage_auto:>})]
+					[(#SAISIE{case,debug_mode,
+						label=<:spipmotion:label_debug_mode:>,
+						label_case=<:spipmotion:choix_debug_mode:>})]
+					<li class="editer editer_chemin[(#ENV{erreur}|table_valeur{chemin}|ou{#GET{erreur_chemin}}|oui)erreur]">
+						<label for="champ_chemin"><:spipmotion:chemin_executable:></label>
+						<input type="text" name="chemin" value="#ENV{chemin}" id="champ_chemin" class="text" />
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li class="fieldset">
+			<fieldset>
+				<legend><:spipmotion:gestion_format_entree:></legend>
+				<p><strong><:spipmotion:label_extensions_prises_en_charge:></strong></p>
+				<div class="explication"><:spipmotion:explications_extensions_prises_en_charge:></div>
+				<ul>
+					<li>
+						<B_sons1>
+						<label for="fichiers_audios"><:spipmotion:extensions_audio:></label>
+						<select name="fichiers_audios[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+							<BOUCLE_sons1(TYPES_DOCUMENTS){media_defaut = audio}{par extension}{extension !IN #GET{extensions}}>
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+							</BOUCLE_sons1>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+						</B_sons1>
+					</li>
+					<li>
+						<B_videos1>
+						<label for="fichiers_videos"><:spipmotion:extensions_video:></label>
+						<select name="fichiers_videos[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+							<BOUCLE_videos1(TYPES_DOCUMENTS){media_defaut = video}{extension != m4u}{extension !IN #GET{extensions}}{par extension}>
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_videos}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+							</BOUCLE_videos1>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+						</B_videos1>
+					</li>
+				</ul>
+				<BOUCLE_si_fichier(CONDITION){si #CONFIG{spipmotion/fichiers_audios,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_videos,#ARRAY}}|count|>{0}|oui}>
+				<p><strong><:spipmotion:label_extensions_prises_en_charge_encodage:></strong></p>
+				<div class="explication"><:spipmotion:explications_extensions_prises_en_charge_encodage:></div>
+				<ul>
+					<li>
+						<B_sons_encodage>
+						<label for="fichiers_audios_encodage"><:spipmotion:extensions_audio:></label>
+						<select name="fichiers_audios_encodage[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+							<BOUCLE_sons_encodage(TYPES_DOCUMENTS){extension IN #CONFIG{spipmotion/fichiers_audios}}{par extension}>
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#CONFIG{spipmotion/fichiers_audios_encodage}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+							</BOUCLE_sons_encodage>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+						</B_sons_encodage>
+					</li>
+					<li>
+						<B_videos1_encodage>
+						<label for="fichiers_videos_encodage"><:spipmotion:extensions_video:></label>
+						<select name="fichiers_videos_encodage[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
+							<BOUCLE_videos1_encodage(TYPES_DOCUMENTS){extension IN #CONFIG{spipmotion/fichiers_videos}}{par extension}>
+								<option value="#EXTENSION"[(#EXTENSION|in_any{#CONFIG{spipmotion/fichiers_videos_encodage}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+							</BOUCLE_videos1_encodage>
+						</select>
+						<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+						</B_videos1_encodage>
+					</li>
+				</ul>
+				</BOUCLE_si_fichier>
+			</fieldset>
+		</li>
+		[(#CONFIG{spipmotion/fichiers_audios_encodage,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY}}|count|>{0}|oui)
+			<INCLURE{fond=formulaires/spipmotion_sortie,env}>
+		]
+		<B_profils_son_top>
+		<li class="fieldset">
+			<fieldset>
+				<legend><:spipmotion:profils_encodage_son:></legend>
+				<div class="spipmotion_formats">
+					<ul>
+						<BOUCLE_profils_son_top(DATA){source table, #CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}>
+						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
+						</BOUCLE_profils_son_top>
+					</ul>
+					<BOUCLE_profils_son(DATA){source table, #CONFIG{spipmotion/fichiers_audios_sortie,#ARRAY}}>
+					<div id="spipmotion_#VALEUR">
+						<INCLURE{fond=formulaires/spipmotion_encodage_son,valeur=#VALEUR,env}>
+					</div>
+					</BOUCLE_profils_son>
+				</div>
+			</fieldset>
+		</li>
+		</B_profils_son_top>
+		<B_profils_video_top>
+		<li class="fieldset">
+			<fieldset>
+				<legend><:spipmotion:profils_encodage_video:></legend>
+				<div class="spipmotion_formats">
+					<ul>
+						<BOUCLE_profils_video_top(DATA){source table, #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}}>
+						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
+						</BOUCLE_profils_video_top>
+					</ul>
+					<BOUCLE_profils_video(DATA){source table, #CONFIG{spipmotion/fichiers_videos_sortie,#ARRAY}}>
+					<div id="spipmotion_#VALEUR">
+						<INCLURE{fond=formulaires/spipmotion_encodage_video,valeur=#VALEUR,env}>
+					</div>
+					</BOUCLE_profils_video>
+				</div>
+			</fieldset>
+		</li>
+		</B_profils_video_top>
+	</ul>
+	<p class="boutons">
+		<input type="submit" value="<:bouton_valider:>" class="submit" />
+	</p>
+</div>
+</form>
+<script type="text/javascript"><!--
+$(function() {
+	$('a.select_all').click(function(){
+		$(this).parent().prev('select').find('option').attr('selected', true);
+		return false;
+	});
+	$('a.unselect_all').click(function(){
+		$(this).parent().prev('select').find('option').attr('selected', false);
+		return false;
+	});
+	$('.spipmotion_formats').tabs();
+});
+// --></script>
+</BOUCLE_script_perms>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_chemin_ffmpeg:></p>
+<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_binaire:></p>
+	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_verifier_droits:></p>
+[(#BOUTON_ACTION{<:spipmotion:label_verifier_logiciels:>,#URL_ACTION_AUTEUR{spipmotion_verifier_binaires,1,#SELF}})]
+<//B_script_perms>
+</div>

@@ -1,0 +1,108 @@
+<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id,#ENV{id_document}}}{tout}>
+<div class="infos_techniques #ENV{class}"[ style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};](#ENV{align,center}|=={center}|?{'',' '})']>
+	[<h4>(#ENV{titre})</h4>]
+	[<p>
+		<strong>
+			<:spipmotion:info_nom_fichier:>
+		</strong>
+		<a href="#FICHIER" title="[(#TITRE|supprimer_numero|attribut_html|sinon{[(#FICHIER|basename)]})]">
+			(#FICHIER|basename)
+		</a>
+	</p>]
+	[<p>
+		<strong><:spipmotion:info_poid_fichier:></strong> (#TAILLE|taille_en_octets)
+	</p>]
+	[<p>
+		<strong><:spipmotion:info_mime:></strong> (#MIME_TYPE)
+	</p>]
+	[(#DUREE|>{0}|oui)<p>
+		<strong>
+			<:spipmotion:info_duree:>
+		</strong>
+		[(#DUREE|spipmotion_duree)] ([(#DUREE|floor)] sec.)
+	</p>]
+	[(#LARGEUR|>{0}|et{#HAUTEUR|>{0}}|oui)<p>
+		<strong>
+			<:spipmotion:info_format:>
+		</strong>
+		#LARGEUR/#HAUTEUR px
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_framecount:>
+		</strong>
+		(#FRAMECOUNT)
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_videocodec:>
+		</strong>
+		(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_framerate:>
+		</strong>
+		(#FRAMERATE) img/sec
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_pixelformat:>
+		</strong>
+		(#PIXELFORMAT)
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_aspect_ratio:>
+		</strong>
+		(#ASPECT_RATIO)
+	</p>]
+	[(#ROTATION|!={0}|oui)[<p>
+		<strong>
+			<:spipmotion:info_rotation:>
+		</strong>
+		(#ROTATION)&#176;
+	</p>]]
+	[<p>
+		<strong>
+			<:spipmotion:info_videobitrate:>
+		</strong>
+		(#VIDEOBITRATE|>{0}|oui)[(#VIDEOBITRATE|div{1000}|round) kb/s.]
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_audiocodec:>
+		</strong>
+		(#AUDIOCODEC|intval|?{[(#AUDIOCODEC|flv_audio_codec_type_to_type)],#AUDIOCODEC})
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_audiobitrate:>
+		</strong>
+		(#AUDIOBITRATE|>{0}|oui)[(#AUDIOBITRATE|div{1000}|round) kb/s.]
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_audiosamplerate:>
+		</strong>
+		(#AUDIOSAMPLERATE) hz.
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_audiochannels:>
+		</strong>
+		(#AUDIOCHANNELS)
+	</p>]
+	[(#HASVIDEO|=={oui}|oui)[<p>
+		<strong>
+			<:spipmotion:info_bitrate:>
+		</strong>
+		(#BITRATE|>{0}|oui)[(#BITRATE|div{1000}|round) kb/s.]
+	</p>]]
+	[(#METADATAS|strlen|oui)
+	<p>
+		<a href="[(#URL_PAGE{spipmotion_metas}|parametre_url{id_document,#ID_DOCUMENT})]" class="popin"><:spipmotion:lien_voir_metadatas:></a>
+	</p>
+	]
+</div>
+</BOUCLE_doc>

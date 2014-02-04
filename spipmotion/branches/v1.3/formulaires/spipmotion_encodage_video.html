@@ -1,0 +1,242 @@
+#SET{meta,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
+#SET{meta_compil_config,#GET{meta}|unserialize|table_valeur{configuration}}
+<div id="encodage_#VALEUR" class="spipmotion_profil">
+	<h4><:spipmotion:profil_encodage{format=#ENV{valeur}}:></h4>
+	<ul>
+		[(#SAISIE{input,width_#ENV{valeur},
+			label=<:spipmotion:width_video:>,
+			defaut=640,
+			size=4})]
+
+		[(#SAISIE{input,height_#ENV{valeur},
+			label=<:spipmotion:height_video:>,
+			defaut=480,
+			size=4})]
+
+		[(#SAISIE{input,bitrate_#ENV{valeur},
+			label=<:spipmotion:bitrate:>,
+			defaut=600,
+			size=4})]
+
+		[(#SAISIE{input,fps_#ENV{valeur},
+			label=<:spipmotion:framerate:>,
+			explication=<:spipmotion:explication_framerate:>,
+			defaut=25,
+			size=4})]
+
+		#SET{acodecs_possibles,#ARRAY}
+		#SET{vcodecs_possibles,#ARRAY}
+		#SET{vorbis,''}
+		#SET{formats_possibles,#ARRAY}
+		#SET{presets_qualite,#ARRAY}
+		<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#LISTE{ogg,ogv,webm}}|oui}>
+			[(#ENV{valeur}|=={webm}|non)
+				[(#CONFIG{spipmotion_ffmpeg2theora/version}|>{0}|oui)
+					[(#SAISIE{selection,encodeur_#ENV{valeur},
+						label=<:spipmotion:label_encodeur:>,
+						explication=<:spipmotion:explication_encodeur:>,
+						defaut=ffmpeg2theora,
+						cacher_option_intro=oui,
+						datas=#ARRAY{
+							ffmpeg2theora,ffmpeg2theora,
+							ffmpeg,ffmpeg}})]
+					[(#SAISIE{selection,qualite_video_ffmpeg2theora_#ENV{valeur},
+						label=<:spipmotion:label_qualite_video_ffmpeg2theora:>,
+						explication=<:spipmotion:explication_qualite_video_ffmpeg2theora:>,
+						defaut=7,
+						cacher_option_intro=oui,
+						datas=#ARRAY{
+							0,0,
+							1,1,
+							2,2,
+							3,3,
+							4,4,
+							5,5,
+							6,6,
+							7,7,
+							8,8,
+							9,9,
+							10,10}})]
+				]
+				[(#VAL{'--enable-libtheora'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libtheora}}]
+				[(#VAL{'--enable-libdirac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libdirac}}]
+			]
+			[(#VAL{'--enable-libvorbis'}|in_array{#GET{meta_compil_config}}|oui)
+			#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libvorbis}}
+			[(#SET{vorbis,oui})]]
+			#SET{2_passes,oui}
+		<script>
+			var cache_#ENV{valeur} = function(){
+				var encodeur = $('select[name=encodeur_#ENV{valeur}]').val();
+				if (encodeur == 'ffmpeg2theora') {
+					$('.editer_vcodec_#ENV{valeur},.editer_acodec_#ENV{valeur}').each(function(){
+						if ($(this).is(':visible')) {
+							$(this).fadeOut();
+						}
+					});
+					if ($('select[name=encodeur_#ENV{valeur}]').prev('p.explication').is(':visible')) {
+						$('select[name=encodeur_#ENV{valeur}]').prev('p.explication').fadeOut();
+					}
+				}
+				else{
+					$('.editer_vcodec_#ENV{valeur},.editer_acodec_#ENV{valeur}').each(function(){
+						if ($(this).is(':hidden')) {
+							$(this).fadeIn();
+						}
+					});
+					if ($('select[name=encodeur_#ENV{valeur}]').parent().find('p.explication').is(':hidden')) {
+						$('select[name=encodeur_#ENV{valeur}]').prev('p.explication').fadeIn();
+					}
+				} 
+			}
+			$('select[name=encodeur_#ENV{valeur}]').change(function(){
+				cache_#ENV{valeur}();
+			});
+			cache_#ENV{valeur}();
+			onAjaxLoad(cache_#ENV{valeur});
+		</script>
+		</BOUCLE_ogg>
+		<BOUCLE_flv(CONDITION){si #ENV{valeur}|=={flv}|oui}>
+			[(#REM)
+				Voir http://en.wikipedia.org/wiki/Flv#Codec_support
+				On ne met pas adpcm car il n'est pas compatible avec le H264
+				et ca évite trop de tests
+			]
+			[(#VAL{'--enable-libmp3lame'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libmp3lame}}]
+			[(#VAL{'--enable-libfaac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfaac}}]
+			[(#VAL{'--enable-libspeex'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libspeex}}]
+
+			#SET{vcodecs_possibles,#LISTE{flv}}
+			[(#VAL{'--enable-libx264'}|in_array{#GET{meta_compil_config}}|oui)
+				[(#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libx264}})]
+				[(#SET{presets_qualite,#LISTE{medium,placebo,ultrafast,superfast,faster,fast,slow,slower,veryslow}})]]
+			#SET{2_passes,oui}
+		</BOUCLE_flv>
+		<BOUCLE_mp4(CONDITION){si #ENV{valeur}|in_array{#LISTE{mov,mp4,m4v}}|oui}>
+			[(#VAL{'--enable-libmp3lame'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libmp3lame}}]
+			[(#VAL{'--enable-libfaac'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libfaac}}]
+			[(#VAL{'--enable-libx264'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libx264}}
+				#SET{presets_qualite,#LISTE{medium,placebo,ultrafast,superfast,faster,fast,slow,slower,veryslow}}]
+			#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{mpeg4}}
+			#SET{formats_possibles,#LISTE{ipod,psp,mp4,m4v}}
+			#SET{2_passes,oui}
+		</BOUCLE_mp4>
+		<//B_flv>
+		<//B_ogg>
+
+		[(#REM)
+			On récupère l'intersection des codecs disponibles avec les codecs possibles
+		]
+		#SET{acodecs,#GET{acodecs_possibles,#ARRAY}}
+		#SET{vcodecs,#GET{vcodecs_possibles,#ARRAY}}
+		#SET{acodec_defaut,#GET{acodec}|table_valeur{0}}
+		#SET{vcodec_defaut,#GET{vcodec}|table_valeur{0}}
+		<BOUCLE_plusieurs_codecs(CONDITION){si #GET{vcodecs}|count|>{0}|oui}>
+			[(#GET{formats_possibles}|count|>{0}|oui)
+				[(#SAISIE{selection_valeur,format_#ENV{valeur},
+					label=<:spipmotion:label_format_final:>,
+					datas=#GET{formats_possibles}})]
+			]
+			[(#SAISIE{selection_valeur,vcodec_#ENV{valeur},
+				label=<:spipmotion:label_codec_video:>,
+				cacher_option_intro=oui,
+				defaut=#GET{vcodec_defaut},
+				datas=#GET{vcodecs}})]
+			<BOUCLE_pressets(CONDITION){si #GET{presets_qualite}|count|>{0}|oui}>
+				[(#SAISIE{selection_valeur,vpreset_#ENV{valeur},
+					label=<:spipmotion:label_presets_qualite:>,
+					explication=<:spipmotion:explication_presets_qualite:>,
+					cacher_option_intro=oui,
+					datas=#GET{presets_qualite}})]
+				<script>
+					var cache_#ENV{valeur} = function(){
+						var encodeur_#ENV{valeur} = $('select[name=vcodec_#ENV{valeur}]').val();
+						if (encodeur_#ENV{valeur} == 'libx264') {
+							if ($('.editer_vpreset_#ENV{valeur}').is(':hidden')) {
+								$('.editer_vpreset_#ENV{valeur}').fadeIn();
+							}
+						}
+						else{
+							if ($('.editer_vpreset_#ENV{valeur}').is(':visible')) {
+								$('.editer_vpreset_#ENV{valeur}').fadeOut();
+							}
+						} 
+					}
+					$('select[name=vcodec_#ENV{valeur}]').change(function(){
+						cache_#ENV{valeur}();
+					});
+					cache_#ENV{valeur}();
+					onAjaxLoad(cache_#ENV{valeur});
+				</script>
+			</BOUCLE_pressets>
+		</BOUCLE_plusieurs_codecs>
+
+		[(#GET{2_passes}|=={oui}|oui)
+			[(#SAISIE{selection,passes_#ENV{valeur},
+				label=<:spipmotion:label_passes_encodage:>,
+				cacher_option_intro=oui,
+				datas=#ARRAY{1,<:spipmotion:label_passes_1_encodage:>,2,<:spipmotion:label_passes_2_encodage:>}})]
+		]
+
+		[(#GET{acodecs}|count|>{0}|oui)
+			[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
+				label=<:spipmotion:label_codec_son:>,
+				cacher_option_intro=oui,
+				defaut=#GET{acodec_defaut},
+				datas=#GET{acodecs}})]
+
+			[(#SAISIE{selection,frequence_audio_#ENV{valeur},
+				label=<:spipmotion:frequence_audio:>,
+				defaut=22050,
+				cacher_option_intro=oui,
+				datas=#ARRAY{
+					11025,11025 Hz,
+					22050,22050 Hz,
+					44100,44100 Hz,
+					48000,48000 Hz}})]
+
+			[(#REM)explication=<:spipmotion:explication_vorbis_qualite:>,]
+			[(#GET{vorbis}|=={oui}|oui)
+				[(#SAISIE{selection,qualite_audio_#ENV{valeur},
+				label=<:spipmotion:label_vorbis_qualite:>,
+				defaut=4,
+				cacher_option_intro=oui,
+				datas=#ARRAY{
+					-1,-1,
+					0,0,
+					1,1,
+					2,2,
+					3,3,
+					4,4,
+					5,5,
+					6,6,
+					7,7,
+					8,8,
+					9,9,
+					10,10
+				}})]
+			]
+			[(#GET{vorbis}|=={oui}|non)
+				[(#SAISIE{selection,bitrate_audio_#ENV{valeur},
+					label=<:spipmotion:bitrate_audio:>,
+					defaut=64,
+					cacher_option_intro=oui,
+					datas=#ARRAY{
+						32,32 kbps,
+						64,64 kbps,
+						96,96 kbps,
+						128,128 kbps,
+						192,192 kbps,
+						256,256 kbps}})]
+			]
+		]
+	</ul>
+</div>

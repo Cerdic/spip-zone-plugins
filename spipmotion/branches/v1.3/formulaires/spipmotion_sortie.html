@@ -1,0 +1,42 @@
+#CACHE{0}
+<li class="fieldset">
+	<fieldset>
+		<legend><:spipmotion:gestion_format_sortie:></legend>
+		<div class="explication"><:spipmotion:explications_extensions_sortie:></div>
+		<ul>
+			<li>
+				#SET{audio_extensions_sortie,#LISTE{mp3,ogg}}
+				<label for="fichiers_audios_sortie"><:spipmotion:extensions_audio:></label>
+				<select name="fichiers_audios_sortie[]" multiple="multiple" size="2">
+					<BOUCLE_sons_sortie(TYPES_DOCUMENTS){extension IN #GET{audio_extensions_sortie}}{par extension}>
+						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios_sortie}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+						#SET{extensions_sortie,#GET{extensions_sortie}|push{#EXTENSION}}
+					</BOUCLE_sons_sortie>
+				</select>
+				<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+			</li>
+			<li>
+				#SET{videos_sortie,#LISTE{flv,ogv,mp4,m4v}}
+				#SET{size,4}
+				[(#REM)
+					On teste si ffmpeg est compilé avec libvpx
+				]
+				#SET{spipmotion_compiler,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
+				#SET{spipmotion_compiler,#GET{spipmotion_compiler}|unserialize|table_valeur{configuration}}
+				[(#GET{spipmotion_compiler}|is_array|oui)
+				[(#VAL{--enable-libvpx}|in_array{#GET{spipmotion_compiler}}|oui)
+					#SET{videos_sortie,#GET{videos_sortie}|push{webm}}
+					#SET{size,5}
+				]]
+				<label for="fichiers_videos_sortie"><:spipmotion:extensions_video:></label>
+				<select name="fichiers_videos_sortie[]" multiple="multiple" size="#GET{size}">
+					<BOUCLE_videos1_sortie(TYPES_DOCUMENTS){extension IN #GET{videos_sortie}}{par extension}>
+						#SET{extensions_sortie,#GET{extensions_sortie}|push{#EXTENSION}}
+						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_videos_sortie}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
+					</BOUCLE_videos1_sortie>
+				</select>
+				<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
+			</li>
+		</ul>
+	</fieldset>
+</li>
