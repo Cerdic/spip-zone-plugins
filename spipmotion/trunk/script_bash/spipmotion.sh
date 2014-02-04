@@ -6,7 +6,6 @@
 #
 # Dependances :
 #   * ffmpeg avec le support de libmp3lame
-#	* ffmpeg2theora
 #
 # Credits préalables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
 #
@@ -15,11 +14,9 @@
 #    http://technique.arscenic.org/compilation-de-logiciel/article/compilation-et-installation-de
 # -* Compilation de FFMpeg lui-même : 
 #    http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg
-# -* Compilation de FFMpeg2theora :
-#    http://technique.arscenic.org/compilation-de-logiciel/article/ffmpeg2theora
 #
 
-VERSION="0.3.4"
+VERSION="0.4.0"
 
 ################ LOCALISATION #####################
 messageaide="
@@ -94,7 +91,6 @@ while test -n "${1}"; do
 		shift;;
 		--bitrate) 
 			bitrate_ffmpeg="-vb ${2}.k"
-			bitrate_ffmpeg2theora="-V ${2}"
 		shift;;
 		--acodec) acodec="-acodec ${2}"
 		shift;;
@@ -104,25 +100,20 @@ while test -n "${1}"; do
 		shift;;
 		--audiobitrate) 
 			audiobitrate_quality_ffmpeg="-ab ${2}.k"
-			audiobitrate_quality_ffmpeg2theora="--audiobitrate ${2}"
 		shift;;
 		--audioquality) 
 			audiobitrate_quality_ffmpeg="-aq ${2}"
-			audiobitrate_quality_ffmpeg2theora="--audioquality ${2}"
 		shift;;
 		--videoquality) videoquality="${2}"
 		shift;;
 		--audiofreq) 
 			audiofreq_ffmpeg="-ar ${2}"
-			audiofreq_ffmpeg2theora="-H ${2}"
 		shift;;
 		--fps) 
 			fps_ffmpeg="-r ${2}"
-			fps_ffmpeg2theora="-F ${2}"
 		shift;;
 		--ac) 
 			ac_ffmpeg="-ac ${2}"
-			ac_ffmpeg2theora="-c ${2}"
 		shift;;
 		--p) chemin="${2}"
 		shift;;
@@ -142,13 +133,9 @@ done
 
 case "$chemin" in
 	"") 
-	if [ "$encodeur" == "ffmpeg2theora" ]; then
-		chemin=$(which ffmpeg2theora)
-  	else
-  		chemin=$(which ffmpeg)
-	fi
+		chemin=$(which ffmpeg)
 esac
-        
+
 spipmotion_encodage_ffmpeg (){
 
 	########## TRAITEMENT DES ARGUMENTS ###############
@@ -231,17 +218,6 @@ spipmotion_encodage_ffmpeg (){
 	exit $?
 }
 
-spipmotion_encodage_ffmpeg2theora ()
-{
-	echo "SPIPmotion v$VERSION
-	
-	On encode une video via ffmpeg2theora
-	"
-	echo "$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log" >> $log
-	$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --nosubtitles --optimize --nice 9 -o $sortie 2> $log >> $log
-	exit $?	
-}
-
 ffmpeg_infos ()
 {
 	[ -z "$info" ] && return 1
@@ -256,8 +232,6 @@ ffmpeg_infos ()
 
 if [ ! -z "$info" ];then
 	ffmpeg_infos
-elif [ "$encodeur" == "ffmpeg2theora" ];then
-	spipmotion_encodage_ffmpeg2theora
 else
 	spipmotion_encodage_ffmpeg
 fi

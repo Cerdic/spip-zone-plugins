@@ -31,33 +31,6 @@
 		#SET{presets_qualite,#ARRAY}
 		<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#LISTE{ogg,ogv,webm}}|oui}>
 			[(#ENV{valeur}|=={webm}|non)
-				[(#CONFIG{spipmotion_ffmpeg2theora/version}|>{0}|oui)
-					[(#SAISIE{selection,encodeur_#ENV{valeur},
-						label=<:spipmotion:label_encodeur:>,
-						explication=<:spipmotion:explication_encodeur:>,
-						defaut=ffmpeg2theora,
-						cacher_option_intro=oui,
-						datas=#ARRAY{
-							ffmpeg2theora,ffmpeg2theora,
-							ffmpeg,ffmpeg}})]
-					[(#SAISIE{selection,qualite_video_ffmpeg2theora_#ENV{valeur},
-						label=<:spipmotion:label_qualite_video_ffmpeg2theora:>,
-						explication=<:spipmotion:explication_qualite_video_ffmpeg2theora:>,
-						defaut=7,
-						cacher_option_intro=oui,
-						datas=#ARRAY{
-							0,0,
-							1,1,
-							2,2,
-							3,3,
-							4,4,
-							5,5,
-							6,6,
-							7,7,
-							8,8,
-							9,9,
-							10,10}})]
-				]
 				[(#VAL{'--enable-libtheora'}|in_array{#GET{meta_compil_config}}|oui)
 				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libtheora}}]
 				[(#VAL{'--enable-libdirac'}|in_array{#GET{meta_compil_config}}|oui)
@@ -70,26 +43,14 @@
 		<script>
 			var cache_#ENV{valeur} = function(){
 				var encodeur = $('select[name=encodeur_#ENV{valeur}]').val();
-				if (encodeur == 'ffmpeg2theora') {
-					$('.editer_vcodec_#ENV{valeur},.editer_acodec_#ENV{valeur}').each(function(){
-						if ($(this).is(':visible')) {
-							$(this).fadeOut();
-						}
-					});
-					if ($('select[name=encodeur_#ENV{valeur}]').prev('p.explication').is(':visible')) {
-						$('select[name=encodeur_#ENV{valeur}]').prev('p.explication').fadeOut();
+				$('.editer_vcodec_#ENV{valeur},.editer_acodec_#ENV{valeur}').each(function(){
+					if ($(this).is(':hidden')) {
+						$(this).fadeIn();
 					}
+				});
+				if ($('select[name=encodeur_#ENV{valeur}]').parent().find('p.explication').is(':hidden')) {
+					$('select[name=encodeur_#ENV{valeur}]').prev('p.explication').fadeIn();
 				}
-				else{
-					$('.editer_vcodec_#ENV{valeur},.editer_acodec_#ENV{valeur}').each(function(){
-						if ($(this).is(':hidden')) {
-							$(this).fadeIn();
-						}
-					});
-					if ($('select[name=encodeur_#ENV{valeur}]').parent().find('p.explication').is(':hidden')) {
-						$('select[name=encodeur_#ENV{valeur}]').prev('p.explication').fadeIn();
-					}
-				} 
 			}
 			$('select[name=encodeur_#ENV{valeur}]').change(function(){
 				cache_#ENV{valeur}();

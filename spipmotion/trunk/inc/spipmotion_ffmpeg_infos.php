@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2014 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -35,11 +35,11 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		 */
 		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
 		$verifier_binaires();
-		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
+		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui')
 			$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
-		}else{
+		else
 			$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
-		}
+
 		/**
 		 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
 		 */
@@ -188,10 +188,9 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			}
 			if(empty($data['spipmotion_avfilters']))
 				$data['spipmotion_compiler']['avfilter-support'] = false;
+
 			ksort($data['spipmotion_avfilters']);
-
 			ecrire_meta('spipmotion_avfilters',serialize($data['spipmotion_avfilters']),'','spipmotion_metas');
-
 			ecrire_meta('spipmotion_compiler',serialize($data['spipmotion_compiler']),'','spipmotion_metas');
 			
 			/**
@@ -210,11 +209,11 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			/**
 			 * On regarde si spipmotion_vignettes.sh est utilisable
 			 */
-			if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
+			if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui')
 				$spipmotion_sh_vignettes = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion_vignette.sh'; 
-			}else{
+			else
 				$spipmotion_sh_vignettes = find_in_path('script_bash/spipmotion_vignette.sh');
-			}
+
 			$spipmotion_sh_vignettes_infos = exec($spipmotion_sh_vignettes.' --help',$retour_spipmotion_sh_vignettes,$int_spipmotion_sh_vignettes);
 			if(!empty($retour_spipmotion_sh_vignettes)){
 				$info = $retour_spipmotion_sh_vignettes[2];
@@ -229,39 +228,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 					$data['spipmotion_spipmotion_sh_vignettes']['chemin'] = $spipmotion_sh_vignettes;
 				ecrire_meta('spipmotion_spipmotion_sh_vignettes',serialize($data['spipmotion_spipmotion_sh_vignettes']),'','spipmotion_metas');
 			}
-			/**
-			 * On regarde si ffmpeg2theora est installé
-			 * http://v2v.cc/~j/ffmpeg2theora/
-			 * Si oui on ajoute sa version dans les metas aussi
-			 */
-			$ffmpeg2theora = exec('ffmpeg2theora',$retour_theora,$int);
-			if(!empty($retour_theora)){
-				$info = $retour_theora[0];
-				preg_match('/ffmpeg2theora ([0-9a-z].*) - ([A-Z].*)/s',$info,$infos);
-				$data['spipmotion_ffmpeg2theora']['ffmpeg2theora'] = true;
-				$data['spipmotion_ffmpeg2theora']['version'] = $infos[1];
-				$data['spipmotion_ffmpeg2theora']['libtheora_version'] = $infos[2];
-				ecrire_meta('spipmotion_ffmpeg2theora',serialize($data['spipmotion_ffmpeg2theora']),'','spipmotion_metas');
-			}else{
-				effacer_meta('spipmotion_ffmpeg2theora','spipmotion_metas');
-			}
-			
-			/**
-			 * On regarde si flvtool2 est installé
-			 * http://www.inlet-media.de/flvtool2/
-			 * Si oui on ajoute sa version dans les metas aussi
-			 */
-			$flvtool2 = exec('flvtool2',$retour_flvtool2,$int_flvtool2);
-			if(!empty($retour_flvtool2)){
-				$info = $retour_flvtool2[0];
-				preg_match('/FLVTool2 ([0-9a-z].*)/s',$info,$infos);
-				$data['spipmotion_flvtool2']['flvtool2'] = true;
-				$data['spipmotion_flvtool2']['version'] = $infos[1];
-				ecrire_meta('spipmotion_flvtool2',serialize($data['spipmotion_flvtool2']),'','spipmotion_metas');
-			}else{
-				effacer_meta('spipmotion_flvtool2','spipmotion_metas');
-			}
-			
+
 			/**
 			 * On regarde si flvtool++ est installé
 			 * http://mirror.facebook.net/facebook/flvtool++/
@@ -274,9 +241,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_flvtoolplus']['flvtoolplus'] = true;
 				$data['spipmotion_flvtoolplus']['version'] = $infos[1];
 				ecrire_meta('spipmotion_flvtoolplus',serialize($data['spipmotion_flvtoolplus']),'','spipmotion_metas');
-			}else{
+			}else
 				effacer_meta('spipmotion_flvtoolplus','spipmotion_metas');
-			}
 			
 			/**
 			 * On regarde si ffprobe est installé
@@ -287,9 +253,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_ffprobe']['ffprobe'] = true;
 				$data['spipmotion_ffprobe']['version'] = "present";
 				ecrire_meta('spipmotion_ffprobe',serialize($data['spipmotion_ffprobe']),'','spipmotion_metas');
-			}else{
+			}else
 				effacer_meta('spipmotion_ffprobe','spipmotion_metas');
-			}
 
 			/**
 			 * On regarde si mediainfo est installé
@@ -303,9 +268,9 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_mediainfo']['mediainfo'] = true;
 				$data['spipmotion_mediainfo']['version'] = $infos[1];
 				ecrire_meta('spipmotion_mediainfo',serialize($data['spipmotion_mediainfo']),'','spipmotion_metas');
-			}else{
+			}else
 				effacer_meta('spipmotion_mediainfo','spipmotion_metas');
-			}
+
 			$inc_meta = charger_fonction('meta', 'inc');
 			$inc_meta('spipmotion_metas');
 		}
@@ -319,8 +284,6 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		$data['spipmotion_bitstream_filters'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_bitstream_filters']);
 		$data['spipmotion_protocols'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_protocols']);
 		$data['spipmotion_avfilters'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_avfilters']);
-		$data['spipmotion_ffmpeg2theora'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffmpeg2theora']);
-		$data['spipmotion_flvtool2'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
 		$data['spipmotion_flvtoolplus'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
 		$data['spipmotion_mediainfo'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_mediainfo']);
 		$data['spipmotion_ffprobe'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffprobe']);

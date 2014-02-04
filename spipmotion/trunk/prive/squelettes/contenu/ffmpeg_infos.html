@@ -58,30 +58,6 @@
 	#BOITE_FERMER
 	</B_version>
 
-	<BOUCLE_siffmpeg2theora(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_ffmpeg2theora}|table_valeur{ffmpeg2theora}|oui}>
-	[(#BOITE_OUVRIR{<:spipmotion:ffmpeg2theora_install:>,'simple'})]
-	<ul class="liste-items">
-	<BOUCLE_ffmpeg2theora(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_ffmpeg2theora}}>
-		[(#CLE|=={ffmpeg2theora}|non)
-			<li class="item">[(#VAL{spipmotion:info_ffmpeg2theora_#CLE}|_T)] [(#VALEUR)]</li>
-		]
-	</BOUCLE_ffmpeg2theora>
-	</ul>
-	#BOITE_FERMER
-	</BOUCLE_siffmpeg2theora>
-	
-	<BOUCLE_siflvtool2(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_flvtool2}|table_valeur{flvtool2}|oui}>
-	[(#BOITE_OUVRIR{<:spipmotion:flvtool2_install:>,'simple'})]
-	<ul class="liste-items">
-	<BOUCLE_flvtool2(POUR){tableau #GET{ffmpeg_infos}|table_valeur{spipmotion_flvtool2}}>
-		[(#CLE|=={flvtool2}|non)
-			<li class="item">[(#VAL{spipmotion:info_flvtool2_#CLE}|_T)] [(#VALEUR)]</li>
-		]
-	</BOUCLE_flvtool2>
-	</ul>
-	#BOITE_FERMER
-	</BOUCLE_siflvtool2>
-	
 	<BOUCLE_siflvtoolplus(CONDITION){si #GET{ffmpeg_infos}|table_valeur{spipmotion_flvtoolplus}|table_valeur{flvtoolplus}|oui}>
 	[(#BOITE_OUVRIR{<:spipmotion:flvtoolplus_install:>,'simple'})]
 	<ul class="liste-items">

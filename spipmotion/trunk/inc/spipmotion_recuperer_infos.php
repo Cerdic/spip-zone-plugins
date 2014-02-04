@@ -55,22 +55,15 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	if($extension == 'flv'){
 		/**
 		 * Inscrire les metadatas dans la video finale
-		 * On utilise soit :
-		 * -* flvtool++
-		 * -* flvtool2
+		 * On utilise flvtool++
 		 */
-		if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']))
+		if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus'])){
 			$flvtoolplus = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
-		else if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']))
-			$flvtool2 = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
-
-		if($flvtoolplus['flvtoolplus'])
-			$metadatas_flv = "flvtool++ $fichier ".$fichier."_tmp";
-		else if($flvtool2['flvtool2'])
-			$metadatas_flv = "flvtool2 -xUP $fichier";
-
-		if($metadatas_flv)
-			exec(escapeshellcmd($metadatas_flv),$retour,$retour_int);
+			if(isset($flvtoolplus['flvtoolplus'])){
+				$metadatas_flv = "flvtool++ $fichier ".$fichier."_tmp";
+				exec(escapeshellcmd($metadatas_flv),$retour,$retour_int);
+			}
+		}
 	}
 	if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse'])
 		exec(escapeshellcmd("qt-faststart $fichier ".$fichier."_tmp"),$retour,$retour_int);
