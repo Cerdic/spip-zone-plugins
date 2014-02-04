@@ -1,0 +1,198 @@
+﻿[<div class="champ contenu_logiciel">
+	<div class="label visible"><:projets_sites_client:label_logiciel:> : </div>
+	<div dir='#LANG_DIR' class='logiciel'>SPIP (#SPIP_VERSION)</div>
+</div>]
+
+[<div class="champ contenu_php_version">
+	<div class="label visible"><:projets_sites_client:label_php_version:> : </div>
+	<div dir='#LANG_DIR' class='php_version'>(#EVAL{phpversion()})</div>
+</div>]
+
+[<div class="champ contenu_php_memory">
+	<div class="label visible"><:projets_sites_client:label_php_memory:> : </div>
+	<div dir='#LANG_DIR' class='php_memory'>(#EVAL{ini_get('memory_limit')})</div>
+</div>]
+
+[<div class="champ contenu_date_creation">
+	<div class="label visible"><:projets_sites_client:label_date_creation:> : </div>
+	<div dir='#LANG_DIR' class='date_creation'>(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})</div>
+</div>]
+
+[<div class="champ contenu_fo_url">
+	<div class="label visible"><:projets_sites_client:label_fo_url:> : </div>
+	<div dir='#LANG_DIR' class='fo_url'>(#URL_SITE_SPIP)</div>
+</div>]
+
+<!-- Information webmestre -->
+<div class="fieldset fieldset_webmestre">
+	<h3 class="titrem"><:projets_sites_client:label_webmestre:></h3>
+</div>
+
+<B_webmestre>
+<div class="liste-objets">
+	<table class="spip liste">
+		<thead>
+			<tr>
+				<th class="login secondaire"><:projets_sites_client:label_webmestre_login:></th>
+				<th class="email secondaire"><:projets_sites_client:label_webmestre_email:></th>
+				<th class="nom principal"><:projets_sites_client:label_webmestre_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+		<BOUCLE_webmestre(AUTEURS){webmestre=oui}{par id_auteur}{tout}>
+		<tr>
+			<td class="login secondaire">#LOGIN</td>
+			<td class="email secondaire">#EMAIL</td>
+			<td class="nom principal"><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">#NOM</a></td>
+		</tr>
+		</BOUCLE_webmestre>
+		</tbody>
+	</table>
+</div>
+</B_webmestre>
+
+<!-- Information applicative -->
+<div class="fieldset fieldset_applicatif">
+	<h3 class="titrem"><:projets_sites_client:label_applicatif:></h3>
+</div>
+
+<div class="champ contenu_applicatif_path">
+	<div class="label visible"><:projets_sites_client:label_applicatif_path:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_path'>#EVAL{$_SERVER['SCRIPT_FILENAME']}</div>
+</div>
+
+<div class="champ contenu_applicatif_port">
+	<div class="label visible"><:projets_sites_client:label_applicatif_port:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_port'>#EVAL{$_SERVER['SERVER_PORT']}</div>
+</div>
+
+<div class="champ contenu_applicatif_logiciel">
+	<div class="label visible"><:projets_sites_client:label_applicatif_logiciel:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_logiciel'>#EVAL{$_SERVER['SERVER_SOFTWARE']}</div>
+</div>
+
+<div class="champ contenu_applicatif_nom">
+	<div class="label visible"><:projets_sites_client:label_applicatif_nom:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_nom'>#EVAL{$_SERVER['SERVER_NAME']}</div>
+</div>
+
+<!-- Information sgbd -->
+<div class="fieldset fieldset_sgbd">
+	<h3 class="titrem"><:projets_sites_client:label_sgbd:></h3>
+</div>
+
+<div class="champ contenu_sgbd_type">
+	<div class="label visible"><:projets_sites_client:label_sgbd_type:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_type'>#EVAL{$GLOBALS['db_ok']['type']}</div>
+</div>
+
+<div class="champ contenu_sgbd_version">
+	<div class="label visible"><:projets_sites_client:label_sgbd_version:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_version'>#EVAL{sql_version()}</div>
+</div>
+
+<div class="champ contenu_sgbd_nom">
+	<div class="label visible"><:projets_sites_client:label_sgbd_nom:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_nom'>#EVAL{$GLOBALS['db_ok']['db']}</div>
+</div>
+
+<B_serveur>
+<div class="champ contenu_sgbd_serveur">
+	<div class="label visible"><:projets_sites_client:label_sgbd_serveur:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_serveur'><BOUCLE_serveur(DATA) {source sql, SHOW VARIABLES LIKE 'hostname'}>[(#VALEUR{Value})]</BOUCLE_serveur></div>
+</div></B_serveur>
+
+<div class="champ contenu_sgbd_prefixe">
+	<div class="label visible"><:projets_sites_client:label_sgbd_prefixe:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_prefixe'>#EVAL{$GLOBALS['db_ok']['prefixe']}</div>
+</div>
+
+<!-- Information plugins -->
+<div class="fieldset fieldset_plugins">
+	<h3 class="titrem"><:projets_sites_client:label_plugins:></h3>
+</div>
+
+<B_dist>
+<div class="liste-objets plugins_dist">
+	<table class="spip liste">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_dist:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_dist(PAQUETS) {constante="_DIR_PLUGINS_DIST"}{par prefixe}{tout}{doublons}>
+		<tr>
+			<td class="prefixe secondaire">#PREFIXE</td>
+			<td class="version secondaire">#VERSION</td>
+			<td class="nom principal"><BOUCLE_nom_dist(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_dist> </td>
+		</tr>
+</BOUCLE_dist>
+		</tbody>
+	</table>
+</div>
+</B_dist>
+
+<B_actif>
+<div class="liste-objets plugins_actif">
+	<table class="spip liste">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_actif:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_actif(PAQUETS) {actif=oui}{doublons}{par prefixe}{tout}>
+		<tr>
+			<td class="prefixe secondaire">#PREFIXE</td>
+			<td class="version secondaire">#VERSION</td>
+			<td class="nom principal"><BOUCLE_nom_actif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_actif> </td>
+		</tr>
+</BOUCLE_actif>
+		</tbody>
+	</table>
+</div>
+</B_actif>
+
+<B_inactif>
+<div class="liste-objets plugins_inactif">
+	<table class="spip liste">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_inactif:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_inactif(PAQUETS) {actif=non}{constante="_DIR_PLUGINS"}{doublons}{par prefixe}{tout}>
+		<tr>
+			<td class="prefixe secondaire">#PREFIXE</td>
+			<td class="version secondaire">#VERSION</td>
+			<td class="nom principal"><BOUCLE_nom_inactif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_inactif> </td>
+		</tr>
+</BOUCLE_inactif>
+		</tbody>
+	</table>
+</div>
+</B_inactif>
+
+<style type="text/css">
+body.info_config #contenu .fiche_objet .champ { margin-bottom: 1em; }
+body.info_config #contenu .fiche_objet .champ .label.visible { display: block;}
+body.info_config #contenu .fiche_objet .fieldset .titrem {
+	background-color: #EEEEEE;
+	color: black;
+	display: block;
+	font-weight: normal;
+	padding: 7px 5px 7px 10px;
+	border-top: 1px solid #cccccc;
+}
+</style>

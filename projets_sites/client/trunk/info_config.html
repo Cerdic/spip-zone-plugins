@@ -1,0 +1,76 @@
+﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
+<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<config>
+<BOUCLE_cle(CONDITION){si #ENV{cle}|=={#CONFIG{'sites_client/cle'}}} {si #CONFIG{'sites_client/actif'}|=={'oui'}}> </BOUCLE_cle>
+<logiciel>
+	<nom>SPIP</nom>
+	<version>#SPIP_VERSION</version>
+</logiciel>
+<php>
+	<version>#EVAL{phpversion()}</version>
+	<memory>#EVAL{ini_get('memory_limit')}</memory>
+</php>
+<date_creation>[(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})]</date_creation>
+<fo>
+	<url>#URL_SITE_SPIP</url>
+</fo>
+<B_webmestre>
+<webmestres>
+<BOUCLE_webmestre(AUTEURS){webmestre=oui}{tout}>
+<webmestre>
+	<login>#LOGIN</login>
+	<email>#EMAIL</email>
+	<nom>#NOM</nom>
+</webmestre>
+</BOUCLE_webmestre>
+</webmestres>
+</B_webmestre>
+<applicatif>
+	<path>#EVAL{$_SERVER['SCRIPT_FILENAME']}</path>
+	<port>#EVAL{$_SERVER['SERVER_PORT']}</port>
+	<logiciel>#EVAL{$_SERVER['SERVER_SOFTWARE']}</logiciel>
+	<nom>#EVAL{$_SERVER['SERVER_NAME']}</nom>
+</applicatif>
+<sgbd>
+	<type>#EVAL{$GLOBALS['db_ok']['type']}</type>
+	<version>#EVAL{sql_version()}</version>
+	<nom>#EVAL{$GLOBALS['db_ok']['db']}</nom>
+	<BOUCLE_serveur(DATA) {source sql, SHOW VARIABLES LIKE 'hostname'}><serveur>[(#VALEUR{Value})]</serveur></BOUCLE_serveur>
+	<prefix>#EVAL{$GLOBALS['db_ok']['prefixe']}</prefix>
+</sgbd>
+<plugins>
+<B_dist>
+<dist compteur="#TOTAL_BOUCLE">
+<BOUCLE_dist(PAQUETS) {constante="_DIR_PLUGINS_DIST"}{par prefixe}{tout}{doublons}>
+<plugin>
+	<prefixe>#PREFIXE</prefixe>
+	<version>#VERSION</version>
+	<nom><BOUCLE_nom_dist(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_dist> </nom>
+</plugin></BOUCLE_dist>
+</dist>
+</B_dist>
+<B_actif>
+<actif compteur="#TOTAL_BOUCLE">
+<BOUCLE_actif(PAQUETS) {actif=oui}{doublons}{par prefixe}{tout}>
+<plugin>
+	<prefixe>#PREFIXE</prefixe>
+	<version>#VERSION</version>
+	<nom><BOUCLE_nom_actif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_actif> </nom>
+</plugin></BOUCLE_actif>
+</actif>
+</B_actif>
+<B_inactif>
+<inactif compteur="#TOTAL_BOUCLE">
+<BOUCLE_inactif(PAQUETS) {actif=non}{tout}>
+<plugin>
+	<prefixe>#PREFIXE</prefixe>
+	<version>#VERSION</version>
+	<nom><BOUCLE_nom_inactif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_inactif> </nom>
+</plugin></BOUCLE_inactif>
+</inactif></B_inactif>
+</plugins>
+</B_cle>
+<error>Accès interdit</error>
+<//B_cle>
+</config>
+#FILTRE{trim}

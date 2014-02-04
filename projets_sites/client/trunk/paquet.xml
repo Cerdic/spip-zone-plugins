@@ -1,0 +1,18 @@
+<paquet
+	prefix="projets_sites_client"
+	categorie="outil"
+	version="0.3.0"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo=""
+	documentation=""
+>
+
+	<nom>Sites pour projets - Client</nom>
+
+	<auteur lien='http://www.teddypayet.com/'>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="autoriser" inclure="projets_sites_client_autorisations.php" /> 
+
+</paquet>
