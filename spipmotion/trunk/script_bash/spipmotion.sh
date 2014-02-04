@@ -165,17 +165,17 @@ spipmotion_encodage_ffmpeg (){
 	case "$vcodec" in
 		"libx264")
 		case "$params_sup" in
-	  		"") params_sup="-vpre default" ;;
-	  	esac
-	  	shift;;
+			"") params_sup="-vpre default" ;;
+		esac
+		shift;;
 		"")
 		case "$sortie" in
-	  		*".flv") vcodec="-vcodec flv" ;;
-	  		*".ogg"|*".ogv") vcodec="-vcodec libtheora" ;;
-	  	esac
-	  	shift;;
+			*".flv") vcodec="-vcodec flv" ;;
+			*".ogg"|*".ogv") vcodec="-vcodec libtheora" ;;
+		esac
+		shift;;
 	esac
-	
+
 	########### SI LA SORTIE EXISTE DÉJÀ #############
 	if [ -e "$sortie" ] && [ ${FORCE} != "true" ]
 		then
@@ -184,16 +184,16 @@ spipmotion_encodage_ffmpeg (){
 		echo "$textedejala";
 		LISTE=("[y] $oui" "[n] $non")  # liste de choix disponibles
 		select CHOIX in "${LISTE[@]}" ; do
-		    case $REPLY in
-		        1|y)
-		        rm $sortie
-		        break
-		        ;;
-		        2|n)
-		        mv $sortie $sortie-backup
-		        break
-		        ;;
-		    esac
+			case $REPLY in
+				1|y)
+				rm $sortie
+				break
+				;;
+				2|n)
+				mv $sortie $sortie-backup
+				break
+				;;
+			esac
 		done
 	fi
 	
@@ -206,14 +206,14 @@ spipmotion_encodage_ffmpeg (){
 	On encode un son
 	"
 		echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log" >> $log
-	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log ;;
-	  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
-	  	echo "SPIPmotion v$VERSION
+		nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log ;;
+		*".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
+		echo "SPIPmotion v$VERSION
 	
 	On encode une video
 	"
-	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2>> $log >> $log" >> $log
-	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2>> $log >> $log
+		echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2>> $log >> $log" >> $log
+		nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2>> $log >> $log
 	esac
 	exit $?
 }

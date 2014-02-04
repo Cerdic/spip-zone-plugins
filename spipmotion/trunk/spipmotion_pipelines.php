@@ -252,10 +252,10 @@ function spipmotion_formulaire_traiter($flux){
 		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
 		$erreurs = $verifier_binaires($valeurs);
 
+		/**
+		 * On récupère les informations du nouveau ffmpeg
+		 */
 		if(!in_array('ffmpeg',$erreurs)){
-			/**
-			 * On récupère les informations du nouveau ffmpeg
-			 */
 			$ffmpeg_infos = charger_fonction('spipmotion_ffmpeg_infos','inc');
 			$ffmpeg_infos(true);
 		}

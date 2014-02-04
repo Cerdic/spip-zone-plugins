@@ -80,6 +80,10 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.2.10'] = array(
 		array('spipmotion_install_recuperer_infos',array()),
 	);
+	$maj['1.3.0'] = array(
+		# TODO : modifier les templates d'encodage utilisant ffmpeg2theora que l'on ne gère plus
+		array('spipmotion_install_recuperer_infos',array()),
+	);
 	/**
 	 * TODO : générer un htaccess dans le répertoire script_bash/
 	 * TODO : insérer une préconfiguration par défaut
