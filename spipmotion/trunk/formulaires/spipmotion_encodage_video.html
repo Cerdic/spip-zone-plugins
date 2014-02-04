@@ -36,21 +36,23 @@
 				[(#VAL{'--enable-libdirac'}|in_array{#GET{meta_compil_config}}|oui)
 				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libdirac}}]
 			]
+			[(#ENV{valeur}|=={webm}|oui)
+				[(#VAL{'--enable-libvpx'}|in_array{#GET{meta_compil_config}}|oui)
+				#SET{vcodecs_possibles,#GET{vcodecs_possibles}|push{libvpx}}]
+			]
 			[(#VAL{'--enable-libvorbis'}|in_array{#GET{meta_compil_config}}|oui)
-			#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libvorbis}}
-			[(#SET{vorbis,oui})]]
+				#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libvorbis}}
+				[(#SET{vorbis,oui})]]
 			#SET{2_passes,oui}
 		<script>
 			var cache_#ENV{valeur} = function(){
 				var encodeur = $('select[name=encodeur_#ENV{valeur}]').val();
 				$('.editer_vcodec_#ENV{valeur},.editer_acodec_#ENV{valeur}').each(function(){
-					if ($(this).is(':hidden')) {
+					if ($(this).is(':hidden'))
 						$(this).fadeIn();
-					}
 				});
-				if ($('select[name=encodeur_#ENV{valeur}]').parent().find('p.explication').is(':hidden')) {
+				if ($('select[name=encodeur_#ENV{valeur}]').parent().find('p.explication').is(':hidden'))
 					$('select[name=encodeur_#ENV{valeur}]').prev('p.explication').fadeIn();
-				}
 			}
 			$('select[name=encodeur_#ENV{valeur}]').change(function(){
 				cache_#ENV{valeur}();
@@ -106,11 +108,15 @@
 					label=<:spipmotion:label_format_final:>,
 					datas=#GET{formats_possibles}})]
 			]
-			[(#SAISIE{selection_valeur,vcodec_#ENV{valeur},
-				label=<:spipmotion:label_codec_video:>,
-				cacher_option_intro=oui,
-				defaut=#GET{vcodec_defaut},
-				datas=#GET{vcodecs}})]
+			[(#GET{vcodecs}|count|=={1}|non)
+				[(#SAISIE{selection_valeur,vcodec_#ENV{valeur},
+					label=<:spipmotion:label_codec_video:>,
+					cacher_option_intro=oui,
+					defaut=#GET{vcodec_defaut},
+					datas=#GET{vcodecs}})]]
+			[(#GET{vcodecs}|count|=={1}|oui)
+				[(#SAISIE{hidden,vcodec_#ENV{valeur},
+					valeur_forcee=[(#GET{vcodecs}|table_valeur{0})]})]]
 			<BOUCLE_pressets(CONDITION){si #GET{presets_qualite}|count|>{0}|oui}>
 				[(#SAISIE{selection_valeur,vpreset_#ENV{valeur},
 					label=<:spipmotion:label_presets_qualite:>,
@@ -148,11 +154,17 @@
 		]
 
 		[(#GET{acodecs}|count|>{0}|oui)
-			[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
-				label=<:spipmotion:label_codec_son:>,
-				cacher_option_intro=oui,
-				defaut=#GET{acodec_defaut},
-				datas=#GET{acodecs}})]
+			[(#GET{acodecs}|count|=={1}|non)
+				[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
+					label=<:spipmotion:label_codec_son:>,
+					cacher_option_intro=oui,
+					defaut=#GET{acodec_defaut},
+					datas=#GET{acodecs}})]]
+			
+			[(#GET{acodecs}|count|=={1}|oui)
+				[(#SET{codec,[(#GET{acodecs}|table_valeur{0})]})]
+				[(#SAISIE{hidden,acodec_#ENV{valeur},
+					valeur_forcee=#GET{codec}})]]
 
 			[(#SAISIE{selection,frequence_audio_#ENV{valeur},
 				label=<:spipmotion:frequence_audio:>,

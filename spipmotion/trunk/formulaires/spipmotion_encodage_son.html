@@ -19,14 +19,21 @@
 			[(#VAL{'--enable-libvorbis'}|in_array{#GET{meta_compil_config}}|oui)
 			#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libvorbis}}
 			#SET{vorbis,oui}]]
-
+		[(#ENV{valeur}|in_array{#LISTE{mp3}}|oui)
+			[(#VAL{'--enable-libmp3lame'}|in_array{#GET{meta_compil_config}}|oui)
+			#SET{acodecs_possibles,#GET{acodecs_possibles}|push{libmp3lame}}]
+		]
 		#SET{acodec_defaut,#GET{acodecs_possibles}|table_valeur{0}}
 		[(#GET{acodecs_possibles}|count|>{0}|oui)
-			[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
-				label=<:spipmotion:label_codec_son:>,
-				cacher_option_intro=oui,
-				defaut=#GET{acodec_defaut},
-				datas=#GET{acodecs}})]
+			[(#GET{acodecs_possibles}|count|=={1}|oui)
+				[(#SAISIE{hidden,acodec_#ENV{valeur},
+					valeur_forcee=[(#GET{acodecs_possible}|table_valeur{0})]})]]
+			[(#GET{acodecs_possibles}|count|=={1}|non)
+				[(#SAISIE{selection_valeur,acodec_#ENV{valeur},
+					label=<:spipmotion:label_codec_son:>,
+					cacher_option_intro=oui,
+					defaut=#GET{acodec_defaut},
+					datas=#GET{acodecs_possibles}})]]
 		]
 
 		[(#REM)explication=<:spipmotion:explication_vorbis_qualite:>,]

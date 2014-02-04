@@ -134,6 +134,11 @@
 </form>
 <script type="text/javascript"><!--
 $(function() {
+	$('a.select_all').each(function(){
+		if($(this).parent().prev().is('.chosen-container'))
+			$(this).parent().detach();
+	});
+	
 	$('a.select_all').click(function(){
 		$(this).parent().prev('select').find('option').attr('selected', true);
 		return false;
@@ -142,6 +147,7 @@ $(function() {
 		$(this).parent().prev('select').find('option').attr('selected', false);
 		return false;
 	});
+		
 	$('.spipmotion_formats').tabs();
 });
 // --></script>
