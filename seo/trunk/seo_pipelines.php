@@ -32,7 +32,6 @@ function autoriser_seo_bouton_dist($faire, $type, $id, $qui, $opt){
  */
 function seo_recuperer_fond($flux){
 	if (strncmp($flux['args']['fond'],"head/",5)==0
-		AND false
 		AND strpos($flux['data']['texte'],"<!--seo_insere-->")===false
 		AND strpos($flux['data']['texte'],"<title")!==false
 		AND include_spip('inc/config')
@@ -64,9 +63,13 @@ function seo_affichage_final($flux){
 		AND strpos($flux,"<!--seo_insere-->")===false
 		AND include_spip('inc/config')
 		AND lire_config('seo/insert_head/activate', 'no')=="yes"
-		AND preg_match('/<head>(.*)<\/head>/Uims', $flux, $head)){
-		$head_new = recuperer_fond("inclure/seo-head",array("head"=>$head[1],"contexte"=>$GLOBALS['contexte']));
-		$flux = str_replace($head[1],$head_new,$flux);
+		AND ($ps = stripos($flux,"<head>"))!==false
+		AND ($pe = stripos($flux,"</head>"))!==false
+		AND $pe>$ps
+		AND $head = substr($flux,$ps+6,$pe-$ps-6)
+		){
+		$head_new = recuperer_fond("inclure/seo-head",array("head"=>$head,"contexte"=>$GLOBALS['contexte']));
+		$flux = str_replace($head,$head_new,$flux);
 	}
 	#var_dump(spip_timer());
 	return $flux;
