@@ -123,6 +123,7 @@
 						<li class="editer editer_rubriques[ (#ENV**{erreurs}|table_valeur{rubriques}|oui)erreur]">
 							<label for='rubriques_a_inclure'><:rssconfig:label_rubriques_a_inclure:></label>
 							<p class="explication"><:rssconfig:explication_rubriques_a_inclure_selecteur:></p>
+							<input type="hidden" name="rubriques_a_inclure[]" value=""> [(#REM) Entrée vide pour que SPIP détecte le champs ] 
 							<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV*{rubriques_a_inclure}}{name=rubriques_a_inclure}>
 						</li>
 					</ul>

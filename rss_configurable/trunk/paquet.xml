@@ -1,8 +1,8 @@
 <paquet
 	prefix="rssconfig"
 	categorie="communication"
-	version="2.0.0"
-	etat="test"
+	version="2.0.1"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/rssconfig-32.png"
 	documentation="http://www.spip-contrib.net/?article3793"
