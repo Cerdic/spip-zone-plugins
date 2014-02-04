@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2013 - Distribué sous licence GNU/GPL
+ * 2008-2014 - Distribué sous licence GNU/GPL
  * 
  * Récupération des metadonnées d'un fichier via mediainfo : http://mediainfo.sourceforge.net/fr
  */
@@ -26,9 +26,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function inc_spipmotion_mediainfo_dist($chemin){
 	$infos = array('hasaudio'=>'non','hasvideo' => 'non');
 	if(file_exists($chemin)){
-		include_spip('inc/filtres');
-		include_spip('inc/charset');
-
 		/**
 		 * On enregistre les metadonnées dans un fichier xml 
 		 * qui sera traité par la suite
@@ -38,8 +35,10 @@ function inc_spipmotion_mediainfo_dist($chemin){
 		ob_end_clean();
 
 		if(file_exists($chemin.'.xml')){
-			$lire_fichier = lire_fichier($chemin.'.xml',$metadatas);
+			include_spip('inc/filtres');
+			include_spip('inc/charset');
 			include_spip('inc/xml');
+			$lire_fichier = lire_fichier($chemin.'.xml',$metadatas);
 			$arbre = spip_xml_parse($metadatas);
 			spip_xml_match_nodes(",^track type,",$arbre, $tracks);
 			foreach($tracks as $track => $info){
@@ -104,7 +103,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 								$ext = 'jpg';
 						}
 						$tmp_file = 'spipmotion-'.str_replace('.','_',str_replace(':','_',str_replace(' ','_',$infos['titre']))).'.'.$ext;
-			            $dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo').$tmp_file;
+						$dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion_logo').$tmp_file;
 						if ($ok = ecrire_fichier($dest, base64_decode($info[0]['Cover_Data'][0]))){
 							include_spip('inc/joindre_document');
 							$ajouter_documents = charger_fonction('ajouter_documents', 'action');
@@ -114,7 +113,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 							$ajoute = $ajouter_documents('new',$cover_ajout,'',0,'vignette');
 
 							if (is_numeric($id_vignette = reset($ajoute)))
-							  	$infos['id_vignette'] = $id_vignette;
+								$infos['id_vignette'] = $id_vignette;
 							spip_unlink($dest);
 						}
 					}
