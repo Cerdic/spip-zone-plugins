@@ -1,23 +1,19 @@
-jQuery(function(){
-	if (jQuery('html.lazy').length){
-
-		function adaptive_image_show(){
-			console.log('show');
-			console.log(this);
-			jQuery(this).removeClass('lazy');
-			this.loaded = true;
-		}
-
+$(function() { (function($){
+	if ($('html.lazy').length){
 		// TODO : optimizations
 		var options = {
-			threshold       : 0,
+			threshold       : 2*$(window).height(),
 			failure_limit   : 0,
-			appear:adaptive_image_show
+			appear: function () {
+				console.log('show');
+				console.log(this);
+				$(this).removeClass('lazy');
+				this.loaded = true;
+			}
 		};
-
 		// move .lazy flag to .adapt-img-wrapper and launch lazyload
-		jQuery('.adapt-img-wrapper').addClass('lazy').lazyload(options);
-		jQuery('html').removeClass('lazy');
+		$('.adapt-img-wrapper').addClass('lazy').lazyload(options);
+		$('html').removeClass('lazy');
 	}
 
-});
+})(jQuery); });
