@@ -39,6 +39,9 @@
 		[(#AUTORISER{assigner,ticket, #ID_TICKET}|oui)
 			#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET,#SELF}
 		]
+		[(#CONFIG{tickets/general/lier_mots,off}|=={on}|oui)
+			#FORMULAIRE_MOTS_TICKET{#ID_TICKET,#SELF}
+		]
 	</div>
 
 	[(#REM) - Texte du ticket et url d'exemple]

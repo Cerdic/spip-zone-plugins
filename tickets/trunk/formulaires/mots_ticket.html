@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_mots_ticket ajax">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<B_groupes_mots>
+			<li class="editer editer_mots">
+				<label for="mots"><:tickets:champ_mots:></label>
+				<select id="mots" name="mots[]" multiple onchange="jQuery('#validation_bouton_mots').slideDown();">
+					<BOUCLE_groupes_mots(GROUPES_MOTS){par num titre}>
+					<optgroup label="#TITRE">
+					<BOUCLE_mots(MOTS){id_groupe}{par num titre}>
+						<option value="#ID_MOT"[(#ID_MOT|in_array{#ENV{mots,#ARRAY}}|ou{#ID_MOT|=={#ENV{id_mot}}}|oui) selected="selected"]>#TITRE</option>
+					</BOUCLE_mots>
+					</optgroup>
+					</BOUCLE_groupes_mots>
+				</select>
+			</li>
+			</B_groupes_mots>
+		</ul>
+		<p class='boutons' id="validation_bouton_mots" style="display: none;">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>
