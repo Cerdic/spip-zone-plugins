@@ -42,18 +42,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_page_boussole' => 'Page of a compass detailled information.',
 
 	// I
+	'info_activite_serveur' => 'The server function of this plugin is not activated by default. You should activate is by selecting the appropriate option below and assigning a name.',
 	'info_ajouter_boussole' => 'By adding compasses to your database, you can use available models to display them in your public pages.<br />If the compass already exists, this form allows to update it while keeping the same display configuration.',
 	'info_ajouter_serveur' => 'This form allows you to register a compasses server. "spip" server is always available on customer websites.',
+	'info_alias_boussole_manuelle' => 'Specify the alias for the compass as specified in its XML file.',
 	'info_boite_boussoles_gerer_client' => '<strong>Only webmasters have access to this page.</strong><p>It provides database fonctions to add, update or delete compasses to display. By clicking on compass name, you can go to compass configuraton page to define display parameters</p><p>You can also register compasses servers available on this website.</p>',
-	'info_boite_boussoles_gerer_serveur' => '<strong>Only webmasters have access to this page.</strong><p>It provides manual update of hosted compasses file caches. additionally, compass file cache can be downloaded by clicking on its name.</p>', # MODIF
+	'info_boite_boussoles_gerer_serveur' => '<strong>Only webmasters have access to this page.</strong><p>It provides manual update of hosted compasses file caches. additionally, compass file cache can be downloaded by clicking on its name.</p><p>A form allows for manual declaration of compasses hosted on the site.</p>',
 	'info_boussole_manuelle' => 'Manual compass',
 	'info_cache_boussole' => 'File cache of compass "@boussole@"',
 	'info_cache_boussoles' => 'File cache of hosted compasses list',
 	'info_configurer_boussole' => 'This form allows you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.',
+	'info_declarer_boussole_manuelle' => 'The form allows you to manually declare a compass hosted on this site. Once declared the compass becomes accessible for the client sites using this server.',
 	'info_fichier_boussole' => 'Enter the url of your compass description file.',
+	'info_importer_boussole' => 'This option allows you to import the collection of compass sites installed on your site. If some of the selected compass sites are already referenced, their parameters will be synchronised.',
 	'info_liste_aucun_cache' => 'No file cache has been generated yet for hosted compasses. Click "Update file caches" button to run the generation.',
+	'info_liste_aucun_hebergement' => 'No compasses are being hosted yet. Use the form below to declare a compass manually or activate a compass plugin on that site.',
 	'info_liste_aucun_serveur' => 'No server has been configured to the customer site.',
 	'info_liste_aucune_boussole' => 'No compass have been loaded from your database. Please, use the following form to add one.',
+	'info_nom_serveur' => 'Specify the name that you want to assign to your compass server. The name «spip» is reserved and cannot be used.',
 	'info_rubrique_parent' => 'You should define a parent section for compass sites to be created.',
 	'info_site_boussole' => 'This website belongs to the compass:',
 	'info_site_boussoles' => 'This website belongs to the compasses:',
@@ -109,15 +115,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_version' => 'Version',
 
 	// M
+	'message_nok_0_site_importe' => 'No sites have been imported from the compass @boussole@.',
+	'message_nok_alias_boussole_manquant' => 'The alias of the compass has not been delivered to server « @serveur@ ».',
 	'message_nok_aucune_boussole_hebergee' => 'No compass is hosted yet on the server "@serveur@".',
 	'message_nok_boussole_inconnue' => 'Compass named "@alias@ is unknown"',
 	'message_nok_boussole_non_hebergee' => 'Compass named "@alias@" is not hosted on server "@serveur@".',
 	'message_nok_cache_boussole_indisponible' => 'File cache of compass named "@alias@" is not available on server "@serveur@".',
 	'message_nok_cache_liste_indisponible' => 'File cache of hosted compasses is not available on server "@serveur@".',
+	'message_nok_declaration_boussole_xml' => 'The manual compass « @boussole@ » cannot be declared because its XML file cannot be found.',
 	'message_nok_ecriture_bdd' => 'Error when writing in database (table @table@)',
+	'message_nok_nom_serveur_spip' => 'Server name « spip » is prohibited. Use another name.',
 	'message_nok_reponse_invalide' => 'Answer of server "@serveur@" is malformed or source URL does not correspond to an active server.',
+	'message_ok_1_site_importe' => 'A single site has been imported from the compass @boussole@.',
 	'message_ok_boussole_actualisee' => 'The compass "@fichier@" has been updated.',
 	'message_ok_boussole_ajoutee' => 'The compass "@fichier@" has been added.',
+	'message_ok_boussole_manuelle_ajoutee' => 'The manual compass « @boussole@ » has been declared on the server and caches have been updated.',
+	'message_ok_n_sites_importes' => '@nb@ sites have been imported from the compass @boussole@.',
 	'message_ok_serveur_ajoute' => 'The "@serveur@" server has been added (@url@).',
 	'modele_boussole_liste_avec_logo' => 'List of links with names, logos and descritpion',
 	'modele_boussole_liste_par_groupe' => 'List of text links per group',
@@ -141,11 +154,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_logo_boussole' => 'COMPASS LOGO',
 	'titre_form_ajouter_boussole' => 'Add or update a compass',
 	'titre_form_ajouter_serveur' => 'Register a compasses server',
+	'titre_form_boussole_manuelle' => 'Manually declare a compass',
+	'titre_form_configurer_serveur' => 'Configure the server function',
 	'titre_formulaire_configurer' => 'Compass display configuration',
 	'titre_liste_boussoles' => 'List of compasses available for display',
 	'titre_liste_caches' => 'List of file caches for hosted compasses',
 	'titre_liste_serveurs' => 'List of servers accessible from the site',
-	'titre_page_boussole' => 'Compass management'
+	'titre_page_boussole' => 'Compass management',
+	'titre_page_configurer' => 'Configuration of the Compass plugin',
+	'titre_page_importer_boussole' => 'Import of a compass'
 );
 
 ?>
