@@ -35,7 +35,7 @@ function gamadesimple_insert_head($flux) {
         $display = $config['display'];
         $campaign = $config['campaign'];
          
-		$gacode = "<!-- Google Analytics Tracking with SPIP 3 Devictio Plugin http://www.devictio.fr -->\n";
+		$gacode = "<!-- Google Analytics Tracking -->\n";
 		if(strlen($ua_code)>=9){
 			$gacode .= "<script type=\"text/javascript\">\n";
 			$gacode .= "var _gaq = _gaq || [];\n";
