@@ -1,7 +1,7 @@
 <h1 class="grostitre"><:formidable:bouton_formulaires:></h1>
 <p><:formidable:formulaires_introduction:></p>
 
-<INCLURE{fond=prive/objets/liste/formulaires, titre=<:formulaire:titre_formulaires:>, ajax} />
+<INCLURE{fond=prive/objets/liste/formulaires, ajax} />
 
 [(#AUTORISER{editer, formulaire}|oui)
 [(#URL_ECRIRE{formulaire_edit}

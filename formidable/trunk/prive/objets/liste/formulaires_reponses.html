@@ -4,11 +4,10 @@
 	id_formulaires_reponse,1
 }})
 ]<B_reponses>
-[(#BOITE_OUVRIR{'','simple'})]
 #ANCRE_PAGINATION
 <div class="liste-objets formulaires_reponses">
 <table class="liste spip">
-[<caption><strong class="caption">(#ENV*{titre})</strong></caption>]
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{formidable:info_1_reponse,formidable:info_nb_reponses}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
 			<th class="statut" scope='col'>[(#TRI{statut,<span>#</span>,ajax})]</th>
@@ -42,7 +41,6 @@
 </table>
 [<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
-#BOITE_FERMER
 </B_reponses>[
 <div class="liste-objets formulaires_reponses"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_reponses>
