@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'Free Art License',
+	'description_autre' => 'Other license',
 	'description_cc0' => 'Creative Common - Public Domain Dedication',
 	'description_cc_by' => 'Creative Commons - Attribution',
 	'description_cc_by_nc' => 'Creative Commons - Attribution Non-Commercial',
@@ -42,18 +43,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_whfpl' => 'http://sam.zoy.org/wtfpl/',
 
 	// N
-	'noisette_cacher_defaut' => 'Hide when the licence is not specified?',
+	'noisette_cacher_defaut' => 'Hide when the license is not specified?',
 	'noisette_hauteur_logo' => 'Maximum height of the logo (in pixels):',
 	'noisette_largeur_logo' => 'Maximum width of the logo (in pixels):',
-	'noisette_lien' => 'Display the link to the licence description?',
-	'noisette_logo' => 'Display the licence logo?',
-	'noisette_nom_licence' => 'Display the licence name?',
+	'noisette_lien' => 'Display the link to the license description?',
+	'noisette_logo' => 'Display the license logo?',
+	'noisette_nom_licence' => 'Display the license name?',
 
 	// S
-	'sans_licence' => 'No license', # MODIF
+	'sans_licence' => 'No specific license (default rights)',
 
 	// T
 	'titre_art_libre' => 'FAL',
+	'titre_autre' => 'other',
 	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',

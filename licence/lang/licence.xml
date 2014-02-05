@@ -4,9 +4,10 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/licence?lang_cible=de" total="49" traduits="26" relire="0" modifs="11" nouveaux="12" pourcent="53.06">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/licence?lang_cible=en" total="49" traduits="46" relire="0" modifs="1" nouveaux="2" pourcent="93.88">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/licence?lang_cible=en" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
