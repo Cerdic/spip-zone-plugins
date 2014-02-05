@@ -1,7 +1,7 @@
 [(#ENV{erreurs}|table_valeur{positionner}|oui)
 	<a name="ajax_ancre" href="[(#ENV{erreurs}|table_valeur{positionner})]"></a>
 ]
-<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}">
+<div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ (#ENV{formulaire_modifie}|oui) modifie]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<p id="message_attention" class="message_reinitialiser reponse_formulaire reponse_formulaire_ok[ (#ENV{formulaire_modifie}|non) invisible]">#ENV*{_message_attention}</p>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -108,59 +108,55 @@
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.core.js}", function(){
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.widget.js}", function(){
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.mouse.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.sortable.js}", function(){
-					if ($.fn.sortable) {
-						jQuery( "#deplacable, #deplacable ul" ).sortable({
-							revert: true,
-							containment: '#deplacable',
-							connectWith: "#deplacable, #deplacable ul",
-							placeholder: "ui-state-highlight",
-							handle: '>.actions .deplacer_saisie',
-							start: function(event, ui) {
-								jQuery('.ui-state-highlight')
-									.css('height', ui.item.css('height'))
-									.css('height', '+=20px');
-							},
-							update: function(event, ui) {
-								id = ui.item.data('id');
-								ou = ui.item.next().data('id');
-								// avant le suivant
-								if (!ou) {
-									// sinon dans le parent
-									ou = ui.item.closest('.fieldset').data('id');
-									if (ou) {
-										ou = '[(#VAL{91}|chr)]' + ou + '[(#VAL{93}|chr)]';
+					$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.sortable.js}", function(){
+						if ($.fn.sortable) {
+							jQuery( "#deplacable, #deplacable ul" ).sortable({
+								revert: true,
+								containment: '#deplacable',
+								connectWith: "#deplacable, #deplacable ul",
+								placeholder: "ui-state-highlight",
+								handle: '>.actions .deplacer_saisie',
+								start: function(event, ui) {
+									jQuery('.ui-state-highlight')
+										.css('height', ui.item.css('height'))
+										.css('height', '+=20px');
+								},
+								update: function(event, ui) {
+									id = ui.item.data('id');
+									ou = ui.item.next().data('id');
+									// avant le suivant
+									if (!ou) {
+										// sinon dans le parent
+										ou = ui.item.closest('.fieldset').data('id');
+										if (ou) {
+											ou = '[(#VAL{91}|chr)]' + ou + '[(#VAL{93}|chr)]';
+										}
 									}
+									url = "#URL_ECRIRE";
+									$.get(url, {
+										session: '#ENV{_identifiant_session}',
+										action: 'deplacer_saisie',
+										saisie: id,
+										ou: ou
+									}, function() {
+										//jQuery('input.vide').submit();
+										jQuery('.formulaire_#ENV{form}').addClass('modifie');
+									});
 								}
-								url = "#URL_ECRIRE";
-								$.get(url, {
-									session: '#ENV{_identifiant_session}',
-									action: 'deplacer_saisie',
-									saisie: id,
-									ou: ou
-								}, function() {
-									//jQuery('input.vide').submit();
-									jQuery('#reinitialiser').removeClass('invisible');
-									jQuery('#message_attention').removeClass('invisible');
-								});
-							}
-						});
-					}
-				});});});});
-				
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.core.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.widget.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.mouse.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.draggable.js}", function(){
-					if ($.fn.draggable) {
-						/*
-						jQuery( "#attrapable" ).draggable({
-							connectToSortable: "#deplacable, #deplacable ul",
-							helper: "clone"
-						});
-						*/
-					}
-				});});});});
+							});
+						}
+					});
+					$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.draggable.js}", function(){
+						if ($.fn.draggable) {
+							/*
+							jQuery( "#attrapable" ).draggable({
+								connectToSortable: "#deplacable, #deplacable ul",
+								helper: "clone"
+							});
+							*/
+						}
+					});
+				});});});
 			]
 		});
 		
