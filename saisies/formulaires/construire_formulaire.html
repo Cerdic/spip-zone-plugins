@@ -3,7 +3,7 @@
 ]
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	<p id="message_attention" class="reponse_formulaire reponse_formulaire_ok[ (#ENV{formulaire_modifie}|non) invisible]">#ENV*{_message_attention}</p>
+	<p id="message_attention" class="message_reinitialiser reponse_formulaire reponse_formulaire_ok[ (#ENV{formulaire_modifie}|non) invisible]">#ENV*{_message_attention}</p>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
@@ -153,10 +153,12 @@
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.mouse.js}", function(){
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.draggable.js}", function(){
 					if ($.fn.draggable) {
+						/*
 						jQuery( "#attrapable" ).draggable({
 							connectToSortable: "#deplacable, #deplacable ul",
 							helper: "clone"
 						});
+						*/
 					}
 				});});});});
 			]
