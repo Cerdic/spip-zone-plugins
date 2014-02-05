@@ -1,0 +1,64 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				[(#SAISIE{
+					input,
+					default_replace,
+					label=<:updateheaders:label_defaultreplace:>,
+					explication=<:updateheaders:explanation_defaultreplace:>
+				})]
+				
+				[(#SAISIE{
+					case,
+					hide_powered,
+					label=<:updateheaders:label_hidepowered:>
+				})]
+				
+				[(#SAISIE{
+					case,
+					hide_composed,
+					label=<:updateheaders:label_hidecomposed:>
+				})]
+				
+				[(#SAISIE{
+					input, 
+					expires_quantity,
+					label=<:updateheaders:label_expires:>,
+					explication=<:updateheaders:explanation_expires:>,
+					verifier=#ARRAY{
+						type,	entier
+					}
+				})]
+				
+				[(#SAISIE{
+					selection,
+					expires_unity,
+					datas=#ARRAY{
+						seconds, <:updateheaders:label_seconds:>,
+						minutes, <:updateheaders:label_minutes:>,
+						hours, <:updateheaders:label_hours:>,
+						days, <:updateheaders:label_days:>,
+						months, <:updateheaders:label_months:>,
+						years, <:updateheaders:label_years:>
+					},
+					defaut=seconds
+				})]
+				
+				[(#SAISIE{
+					textarea,
+					advanced,
+					label=<:updateheaders:label_advanced:>,
+					explication=<:updateheaders:explanation_advanced:>
+				})]
+			</ul>
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span>
+				<input type="submit" class="submit" value='<:bouton_enregistrer:>' />
+			</p>
+		</div>
+	</form>
+</div>

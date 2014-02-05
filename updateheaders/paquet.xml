@@ -1,0 +1,34 @@
+<paquet
+	prefix="updateheaders"
+	categorie="performance"
+	version="0.2.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/layout_header.png"
+	documentation="http://contrib.spip.net/update-headers"
+>
+	<nom>Update Headers</nom>
+	
+	<auteur lien="http://marc.brillault.fr">Marc Brillault</auteur>
+	
+	<credit lien="http://www.fatcow.com/free-icons">FatCow (Logo)</credit>
+	<credit>Gonzalo Moreno (Espagnol)</credit>
+	
+	<licence lien="http://creativecommons.org/licenses/by-sa/4.0/deed.fr">CC by-sa 4.0</licence>
+
+	<menu
+		nom="updateheaders"
+		titre="updateheaders:menu_title"
+		parent="menu_configuration"
+		icone="images/updateheaders-16.png"
+		action="configurer_updateheaders" />
+
+	<pipeline
+		nom="affichage_entetes_final"
+		inclure="updateheaders_pipelines.php" />
+	<pipeline
+		nom="header_prive"
+		inclure="updateheaders_pipelines.php" />
+	
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+</paquet>
