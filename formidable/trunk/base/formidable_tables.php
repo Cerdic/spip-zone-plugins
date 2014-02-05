@@ -29,6 +29,10 @@ function formidable_declarer_tables_interfaces($interfaces) {
 	$interfaces['tables_jointures']['spip_articles'][] = 'formulaires_liens';
 	$interfaces['tables_jointures']['spip_rubriques'][] = 'formulaires_liens';
 
+	$interfaces['table_des_traitements']['MESSAGE_RETOUR']['formulaires']= _TRAITEMENT_RACCOURCIS;
+	$interfaces['table_des_traitements']['URL_REDIRECT']['formulaires']= 'vider_url(%s)';
+
+
 	return $interfaces;
 }
 

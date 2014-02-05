@@ -20,10 +20,10 @@ onAjaxLoad(debloquer_prive);
 		<h1>(#ENV{titre,#INFO_TITRE{#GET{objet},#GET{id_objet}}|sinon{#ENV{nouveau}|=={oui}|?{<:formidable:editer_nouveau:>,#VAL{id_menu}|_request}}})</h1>
 	]
 </div>
-		#SET{configurer,formulaire}
-		<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#GET{id_objet}}>
-			#SET{configurer,#ENV{configurer}|in_array{#ARRAY{0,formulaire,1,champs,2,traitements,3,auteurs}}|?{#ENV{configurer},champs}}
-		</BOUCLE_formulaire>
+	#SET{configurer,formulaire}
+	<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#GET{id_objet}}>
+		#SET{configurer,#ENV{configurer}|in_array{#LISTE{formulaire,champs,traitements,auteurs}}|?{#ENV{configurer},champs}}
+	</BOUCLE_formulaire>
 	
 	[(#GET{configurer}|=={formulaire}|oui)
 		#FORMULAIRE_EDITER_FORMULAIRE{#GET{id_objet}, #VAL{nouveau}|_request|sinon{''}}
