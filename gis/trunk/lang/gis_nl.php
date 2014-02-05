@@ -160,6 +160,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_handlers_polyline_tooltip_cont' => 'Klik om de lijn verder te tekenen',
 	'toolbar_handlers_polyline_tooltip_end' => 'Klik het laatste punt voor het einde van de lijn',
 	'toolbar_handlers_polyline_tooltip_start' => 'Klik om een lijn te gaan tekenen',
+	'toolbar_undo_text' => 'Wis het laatste punt',
+	'toolbar_undo_title' => 'Wis het laatst uitgestippelde punt',
 
 	// Z
 	'zoom' => 'Zoom'
