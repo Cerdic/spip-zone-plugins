@@ -10,7 +10,7 @@
 			<li class="editer editer_mots">
 				<label for="mots"><:tickets:champ_mots:></label>
 				<select id="mots" name="mots[]" multiple onchange="jQuery('#validation_bouton_mots').slideDown();">
-					<BOUCLE_groupes_mots(GROUPES_MOTS){par num titre}>
+					<BOUCLE_groupes_mots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
 					<optgroup label="#TITRE">
 					<BOUCLE_mots(MOTS){id_groupe}{par num titre}>
 						<option value="#ID_MOT"[(#ID_MOT|in_array{#ENV{mots,#ARRAY}}|ou{#ID_MOT|=={#ENV{id_mot}}}|oui) selected="selected"]>#TITRE</option>
