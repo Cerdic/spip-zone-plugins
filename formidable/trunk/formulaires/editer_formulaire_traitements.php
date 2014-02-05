@@ -47,7 +47,7 @@ function formulaires_editer_formulaire_traitements_charger($id_formulaire){
 			);
 		}
 		$contexte['_configurer_traitements'] = $configurer_traitements;
-		
+
 		// Si on demande un avertissement et qu'il y a déjà des traitements de configurés
 		if (_request('avertissement') == 'oui')
 			$contexte['message_ok'] = $traitements ? _T('formidable:traitements_avertissement_modification') : _T('formidable:traitements_avertissement_creation');

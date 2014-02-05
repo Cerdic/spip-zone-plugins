@@ -18,24 +18,39 @@
 		<p class="boutons"><span class="image_loading"></span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div></form>
 	<script type="text/javascript">
-		$(function(){
+		jQuery(function(){
 			// On commence par cacher toutes les options
-			$('.options_traiter').hide().find('h3').hide();
-			
-			// Ensuite on parcourt les traitements choisis
-			$('.editer_traitements_choisis input')
+			jQuery('.options_traiter,.suite').hide()
 				.each(function(){
-					// Si c'est coché on affiche le fieldset d'options
-					if ($(this).is(':checked')){
-						$('.options_traiter.'+$(this).val()).show();
-						$(this).parents('.editer_traitements_choisis').toggleClass('hover');
-					}
+					var me = this;
+					var check = jQuery(me).prev().find('input.checkbox');
+					check.bind('change',function(){
+						if (check.is(':checked')){
+							jQuery(me).show('fast');
+							check.closest('.editer').addClass('hover');
+						}
+						else {
+							jQuery(me).hide('fast');
+							check.closest('.editer').removeClass('hover');
+						}
+					})
+					// force update
+					.trigger('change');
 				})
-				.click(function(){
-					$('.options_traiter.'+$(this).val()).slideToggle('fast');
-					$(this).parents('.editer_traitements_choisis').toggleClass('hover');
-				});
+				.find('h3').hide();
 		});
 	</script>
+	<style>
+		.options_traiter {margin-left: 50px;border-bottom: 1px solid #ddd;}
+		.suite {margin-left: 50px;}
+		input.checkbox+label {font-weight: normal;}
+		input.checkbox+label strong {font-weight: normal;}
+		input.checkbox:checked+label {font-weight: bold;}
+		input.checkbox:checked+label strong {font-weight: bold;}
+		input.radio+label {font-weight: normal;}
+		input.radio+label strong {font-weight: normal;}
+		input.radio:checked+label {font-weight: bold;}
+		input.radio:checked+label strong {font-weight: bold;}
+	</style>
 	]
 </div>

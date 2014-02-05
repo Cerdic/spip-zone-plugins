@@ -3,53 +3,54 @@ titre: '<:formidable:traiter_enregistrement_titre:>'
 description: '<:formidable:traiter_enregistrement_description:>'
 options:
   -
-    saisie: 'oui_non'
+    saisie: 'case'
     options:
       nom: 'multiple'
-      label: '<:formidable:traiter_enregistrement_option_multiple_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
+      label_case: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
       defaut: 'on'
+      li_class: 'pleine_largeur'
   -
-    saisie: 'oui_non'
+    saisie: 'case'
     options:
       nom: 'modifiable'
-      label: '<:formidable:traiter_enregistrement_option_modifiable_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_modifiable_explication:>'
+      label_case: '<:formidable:traiter_enregistrement_option_modifiable_explication:>'
       defaut: ''
+      li_class: 'pleine_largeur'
   -
     saisie: 'radio'
     options:
       nom: 'identification'
-      label: '<:formidable:traiter_enregistrement_option_identification_label:>'
       explication: '<:formidable:traiter_enregistrement_option_identification_explication:>'
       datas:
         cookie: '<:formidable:identification_par_cookie:>'
         id_auteur: '<:formidable:identification_par_id_auteur:>'
       defaut: 'cookie'
+      li_class: 'suite pleine_largeur'
   -
-    saisie: 'oui_non'
+    saisie: 'case'
     options:
       nom: 'anonymiser'
-      label: '<:formidable:traiter_enregistrement_option_anonymiser_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_anonymiser_explication:>'
+      label_case: '<:formidable:traiter_enregistrement_option_anonymiser_explication:>'
       defaut: ''
+      li_class: 'pleine_largeur'
   -
     saisie: 'selection'
     options:
       option_intro: '<:formidable:traiter_enregistrement_option_choix_select_label:>'
       nom: 'anonymiser_variable'
-      label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_label:>'
-      explication: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
+      label: '<:formidable:traiter_enregistrement_option_anonymiser_variable_explication:>'
       datas:
         remote_user: "Variable serveur : REMOTE_USER"
         php_auth_user: "Variable serveur : PHP_AUTH_USER"
       defaut: ''
+      li_class: 'suite pleine_largeur'
   -
-    saisie: 'oui_non'
+    saisie: 'case'
     options:
       nom: 'ip'
-      label: '<:formidable:traiter_enregistrement_option_ip_label:>'
+      label_case: '<:formidable:traiter_enregistrement_option_ip_label:>'
       defaut: 'on'
+      li_class: 'pleine_largeur'
   -
     saisie: 'radio'
     options:

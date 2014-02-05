@@ -36,7 +36,7 @@ options:
     saisie: 'case'
     options:
       nom: 'activer_vrai_envoyeur'
-      label: '<:formidable:traiter_email_option_vrai_envoyeur_label:>'
+      label_case: '<:formidable:traiter_email_option_vrai_envoyeur_label:>'
       explication: '<:formidable:traiter_email_option_vrai_envoyeur_explication:>'
   -
     saisie: 'input'
