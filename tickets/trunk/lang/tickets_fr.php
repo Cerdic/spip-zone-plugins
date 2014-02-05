@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descr_general' => 'Cette page de configuration permet de choisir les valeurs des champs optionnels, la modération des commentaires ainsi que divers autres paramètres.',
 	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu’ils sont affichés dans l’espace public.',
 	'cfg_explication_composants' => 'Séparez les composants par le caractère " :".',
+	'cfg_explication_desactiver_public' => 'Seulement afficher les tickets dans l\'espace privé',
 	'cfg_explication_formats_documents_ticket' => 'Séparez les formats par une virgule',
 	'cfg_explication_jalons' => 'Séparez les jalons par le caractère " :".',
 	'cfg_explication_projets' => 'Séparez les projets par le caractère " :".',
