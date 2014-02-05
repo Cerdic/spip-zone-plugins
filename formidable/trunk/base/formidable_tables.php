@@ -124,14 +124,14 @@ function formidable_declarer_tables_objets_sql($tables) {
 		),
 		'texte_changer_statut' => 'formulaires_reponse:changer_statut',
 		'statut_titres' => array(
-			'prop'=>'info_article_propose',
-			'publie'=>'info_article_publie',
-			'poubelle'=>'info_article_supprime'
+			'prop'=>'formidable:info_reponse_proposee',
+			'publie'=>'formidable:info_reponse_publiee',
+			'refuse'=>'formidable:info_reponse_supprimee'
 		),
 		'statut_textes_instituer' => array(
-			'prop' => 'texte_statut_propose_evaluation',
-			'publie' => 'texte_statut_publie',
-			'refuse' => 'texte_statut_poubelle',
+			'prop' => 'formidable:texte_statut_propose_evaluation',
+			'publie' => 'formidable:texte_statut_publie',
+			'refuse' => 'formidable:texte_statut_poubelle',
 		),
 	);
 	return $tables;

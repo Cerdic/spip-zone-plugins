@@ -92,6 +92,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_reponse' => '1 réponse',
 	'info_aucune_reponse' => 'Aucune réponse',
 	'info_nb_reponses' => '@nb@ réponses',
+	'info_reponse_proposee' => 'À modérer',
+	'info_reponse_publiee' => 'Validée',
+	'info_reponse_supprimee' => 'Supprimée',
+	'info_reponse_proposees' => 'À modérer',
+	'info_reponse_publiees' => 'Validées',
+	'info_reponse_supprimees' => 'Supprimées',
+	'info_reponse_toutes' => 'Toutes',
 
 
 	// M
@@ -127,6 +134,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Sans réponse',
 
 	// T
+	'texte_statut_propose_evaluation' => 'proposée',
+	'texte_statut_publie' => 'validée',
+	'texte_statut_poubelle' => 'supprimée',
+
 	'titre_cadre_raccourcis' => 'Raccourcis',
 	'traitements_actives' => 'Traitements activés',
 	'traitements_aide_memoire' => 'Aide mémoire :',

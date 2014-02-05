@@ -7,11 +7,8 @@
 	<h1>#TITRE</h1>
 #BOITE_FERMER
 
-[<h2><:formidable:reponses_liste_prop:></h2>
-(#INCLURE{fond=prive/objets/liste/formulaires_reponses}{id_formulaire}{statut=prop}{ajax})]
-
-[<h2><:formidable:reponses_liste_publie:></h2>
-(#INCLURE{fond=prive/objets/liste/formulaires_reponses}{id_formulaire}{statut=publie}{ajax})]
+<h2><:formidable:reponses_liste:></h2>
+<INCLURE{fond=prive/squelettes/inclure/formulaires_reponses-filtres,env,ajax} />
 
 </BOUCLE_autoriser>
 </BOUCLE_formulaire>
