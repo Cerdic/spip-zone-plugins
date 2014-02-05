@@ -70,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme, c’est à dire que l’identité de l’utilisateur n’est pas enregistrée.',
 	'formulaires_aucun' => 'Il n’y a pour l’instant aucun formulaire.',
+	'formulaires_aucun_champ' => 'Il n’y a pour l’instant aucun champ de saisie pour ce formulaire.',
 	'formulaires_dupliquer' => 'Dupliquer le formulaire',
 	'formulaires_dupliquer_copie' => '(copie)',
 	'formulaires_introduction' => 'Créez et configurez ici les formulaires de votre site.',
