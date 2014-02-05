@@ -1,9 +1,22 @@
 ﻿<?php
+/*
+ * Plugin Sites pour projets - Clients
+ * (c) 2014 Teddy Payet
+ * Distribue sous licence GPL
+ *
+ */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/config');
+include_spip('inc/meta');
 
 function formulaires_configurer_projets_sites_client_charger_dist() {
-	include_spip('inc/config');
-	$valeurs = lire_config('sites_client');
-	
+	$valeurs = array();
+
+	if (lire_config('sites_client')) {
+		$valeurs = lire_config('sites_client');
+	}
 	return $valeurs;
 }
 
@@ -17,9 +30,8 @@ function formulaires_configurer_projets_sites_client_verifier_dist() {
 
 function formulaires_configurer_projets_sites_client_traiter_dist() {
 	$res = array();
-	include_spip('inc/meta');
 
-	$res['cle'] 		= _request('cle');
+	$res['cle'] 	= _request('cle');
 	$res['actif'] 	= _request('actif');
 
 	if (ecrire_meta('sites_client', @serialize($res),'non')) {

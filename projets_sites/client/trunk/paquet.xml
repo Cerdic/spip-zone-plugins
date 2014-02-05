@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_sites_client"
 	categorie="outil"
-	version="0.3.1"
+	version="0.3.2"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo=""
