@@ -47,6 +47,7 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'titre' => "titre, '' AS lang",
 		'date' => 'date_creation',
 		'principale' => 'oui',
+		'texte_modifier' => 'formidable:editer_modifier_formulaire',
 		
 		'field' => array(
 			"id_formulaire" => "bigint(21) NOT NULL",

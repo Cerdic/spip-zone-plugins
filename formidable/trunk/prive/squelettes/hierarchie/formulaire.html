@@ -1,5 +1,3 @@
 <!-- hierarchie -->
-<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
 <a href="#URL_ECRIRE{formulaires}"><:formulaire:titre_formulaires:></a> &gt;
-<strong class="on">#TITRE</strong>
-</BOUCLE_formulaire>
+<strong class="on">[(#INFO_TITRE{formulaire,#ID_FORMULAIRE}|sinon{<:formidable:editer_nouveau:>})]</strong>
