@@ -228,23 +228,23 @@ function diogene_mots_diogene_traiter($flux){
 				}
 			}
 
-				$result = sql_select('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.$flux['args']['type'].'" AND id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
-				while ($row = sql_fetch($result)) {
-					$mots_multiples[] = $row['id_mot'];
-				}
-				foreach($requete_id_groupe as $cle => $mot){
-					/**
-					 * Si le mot est déja dans les mots, on le supprime juste
-					 * de l'array des mots originaux
-					 */
+			$result = sql_select('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.$flux['args']['type'].'" AND id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
+			while ($row = sql_fetch($result)) {
+				$mots_multiples[] = $row['id_mot'];
+			}
+			foreach($requete_id_groupe as $cle => $mot){
+				/**
+				 * Si le mot est déja dans les mots, on le supprime juste
+				 * de l'array des mots originaux
+				 */
 
-					if(in_array($mot, $mots_multiples)){
-						$mots_multiples = array_diff($mots_multiples,array($mot));
-					}
-					else{
-						sql_insertq('spip_mots_liens', array('id_mot' =>$mot,  'id_objet' => $id_objet,'objet'=> $flux['args']['type']));
-					}
+				if(in_array($mot, $mots_multiples)){
+					$mots_multiples = array_diff($mots_multiples,array($mot));
 				}
+				else{
+					sql_insertq('spip_mots_liens', array('id_mot' =>$mot,  'id_objet' => $id_objet,'objet'=> $flux['args']['type']));
+				}
+			}
 			/**
 			 * S'il reste quelque chose dans les mots d'origine, on les délie de l'objet
 			 */
