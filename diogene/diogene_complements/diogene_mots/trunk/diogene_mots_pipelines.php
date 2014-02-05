@@ -228,10 +228,6 @@ function diogene_mots_diogene_traiter($flux){
 				}
 			}
 
-			/**
-			 * Si le select est multiple
-			 */
-			if(count($requete_id_groupe) > 1){
 				$result = sql_select('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.$flux['args']['type'].'" AND id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
 				while ($row = sql_fetch($result)) {
 					$mots_multiples[] = $row['id_mot'];
@@ -241,34 +237,17 @@ function diogene_mots_diogene_traiter($flux){
 					 * Si le mot est déja dans les mots, on le supprime juste
 					 * de l'array des mots originaux
 					 */
+
 					if(in_array($mot, $mots_multiples)){
-						unset($mots_multiples[$cle]);
+						$mots_multiples = array_diff($mots_multiples,array($mot));
 					}
 					else{
 						sql_insertq('spip_mots_liens', array('id_mot' =>$mot,  'id_objet' => $id_objet,'objet'=> $flux['args']['type']));
 					}
 				}
-			}
-			/**
-			 * Si le select est simple
-			 */
-			else{
-				$id_mot = array_pop($requete_id_groupe);
-				if(!is_array($mots_uniques = sql_fetsel('mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON (mot.id_mot=liens.id_mot)','liens.objet="'.$flux['args']['type'].'" AND liens.id_objet='.intval($id_objet).' AND mot.id_groupe='.intval($id_groupe))))
-					$mots_uniques = array();
-				if(in_array($id_mot, $mots_uniques)){
-					unset($mots_uniques);
-				}
-				else{
-					sql_insertq('spip_mots_liens', array('id_mot' => $id_mot,  'id_objet' => $id_objet,'objet'=>$flux['args']['type']));
-				}
-			}
 			/**
 			 * S'il reste quelque chose dans les mots d'origine, on les délie de l'objet
 			 */
-			if(count($mots_uniques)>0){
-				sql_delete('spip_mots_liens','objet="'.$flux['args']['type'].'" AND id_objet='.intval($id_objet).' AND id_mot IN ('.implode(',',$mots_uniques).')');
-			}
 			if(count($mots_multiples)>0){
 				sql_delete('spip_mots_liens','objet="'.$flux['args']['type'].'" AND id_objet='.intval($id_objet).' AND id_mot IN ('.implode(',',$mots_multiples).')');
 			}
