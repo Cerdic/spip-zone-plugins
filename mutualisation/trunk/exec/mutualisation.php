@@ -212,11 +212,11 @@ function exec_mutualisation_dist() {
 		// On garde l'ancien principe d'un sous-répertoire pour ne pas casser la compat.
 
 		// Utiliser la classe si elle existe (PHP 5.3+)			
-		if (class_exists('FilesystemIterator')) {
 			$dir = _DIR_PLUGINS;
+		if (class_exists('FilesystemIterator') AND is_dir(_DIR_PLUGINS)) {
 			$dir_it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
 			$it = new RecursiveIteratorIterator($dir_it, RecursiveIteratorIterator::SELF_FIRST);
-	
+
 			foreach($it as $path => $fo) {
 	
 			  if ( !$fo->isDir() ) {
