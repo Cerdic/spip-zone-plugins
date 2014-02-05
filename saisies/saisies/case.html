@@ -15,6 +15,7 @@
 		explication=<:plugin:explication_afficher_liste:>})]
 ]#SET{valeur,#ENV{valeur_forcee,#ENV{valeur}}|is_null|?{#ENV{defaut},#ENV{valeur_forcee,#ENV{valeur}}}}
 <div class="choix">
+	[(#ENV{disable}|non)<input type="hidden" name="#ENV{nom}" value="#ENV{valeur_non,''}" />]
 	<input type="checkbox" name="#ENV{nom}" class="checkbox" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ (#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)checked="checked"] value="#ENV{valeur_oui,on}" [ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ (#ENV*{attributs})]/>
 	[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]">[(#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)<strong>](#ENV*{label_case})[(#GET{valeur}|=={#ENV{valeur_oui,on}}|oui)</strong>]</label>]
 </div>
