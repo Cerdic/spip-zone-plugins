@@ -9,11 +9,11 @@
 ,simple fiche_objet})]
 
 
-<!--affiche_milieu-->
+	<!--affiche_milieu-->
 
-<div id="wysiwyg">
-<INCLURE{fond=prive/objets/contenu/formulaire,id=#ID_FORMULAIRE,id_formulaire=#ID_FORMULAIRE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
-</div>
+	<div id="wysiwyg">
+	<INCLURE{fond=prive/objets/contenu/formulaire,id=#ID_FORMULAIRE,id_formulaire=#ID_FORMULAIRE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+	</div>
 
 	#SET{traitements_disponibles, #VAL|traitements_lister_disponibles}
 	[(#BOITE_OUVRIR{#CHEMIN_IMAGE{formulaire-config-traitements-24.png}
