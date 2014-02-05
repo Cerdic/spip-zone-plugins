@@ -3,7 +3,7 @@
 ]
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}[ (#ENV{formulaire_modifie}|oui) modifie]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	<p id="message_attention" class="message_reinitialiser reponse_formulaire reponse_formulaire_ok[ (#ENV{formulaire_modifie}|non) invisible]">#ENV*{_message_attention}</p>
+	<p id="message_attention" class="message_reinitialiser reponse_formulaire reponse_formulaire_ok">#ENV*{_message_attention}</p>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
@@ -15,7 +15,7 @@
 
 		<ul id="deplacable">
 			
-			<li id="reinitialiser" class="actions_formulaire[ (#ENV{formulaire_modifie}|non) invisible]">
+			<li id="reinitialiser" class="actions_formulaire">
 				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')">
 					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
 					<:saisies:construire_reinitialiser:>
@@ -49,6 +49,10 @@
 		<span class='image_loading'></span>
 	</div></form>
 
+	<style>
+		.message_reinitialiser,#reinitialiser {display: none}
+		.modifie .message_reinitialiser,.modifie #reinitialiser {display: block}
+	</style>
 	<script type="text/javascript">
 		jQuery(function(){
 			jQuery('.formulaire_construire_formulaire li.configurable')
@@ -140,7 +144,7 @@
 										ou: ou
 									}, function() {
 										//jQuery('input.vide').submit();
-										jQuery('.formulaire_#ENV{form}').addClass('modifie');
+										jQuery('.formulaire_#ENV{form}').addClass('modifie').trigger('modifsaisies');
 									});
 								}
 							});
