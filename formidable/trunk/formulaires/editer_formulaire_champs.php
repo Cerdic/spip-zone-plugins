@@ -17,6 +17,7 @@ function formulaires_editer_formulaire_champs_charger($id_formulaire){
 		if (!is_array($saisies)) $saisies = array();
 		$contexte['_saisies'] = $saisies;
 		$contexte['id'] = $id_formulaire;
+		$contexte['saisie_id'] = "formidable_$id_formulaire";
 	}
 	
 	return $contexte;
@@ -57,55 +58,63 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 	include_spip('inc/saisies');
 	$retours = array();
 	$id_formulaire = intval($id_formulaire);
-	
-	// On récupère le formulaire dans la session
-	$saisies_nouvelles = session_get("constructeur_formulaire_formidable_$id_formulaire");
-	
-	// On récupère les anciennes saisies
-	$saisies_anciennes = unserialize(sql_getfetsel(
-		'saisies',
-		'spip_formulaires',
-		'id_formulaire = '.$id_formulaire
-	));
-	
-	// On envoie les nouvelles dans la table dans la table
-	$ok = sql_updateq(
-		'spip_formulaires',
-		array(
-			'saisies' => serialize($saisies_nouvelles)
-		),
-		'id_formulaire = '.$id_formulaire
-	);
-	
-	// Si c'est bon on appelle d'éventuelles fonctions d'update des traitements puis on renvoie vers la config des traitements
-	if ($ok){
-		// On va chercher les traitements
-		$traitements = unserialize(sql_getfetsel(
-			'traitements',
+
+	if (_request('revert')){
+		session_set("constructeur_formulaire_formidable_$id_formulaire");
+		$retours = array('editable'=>true);
+	}
+
+	if (_request('enregistrer')){
+		// On récupère le formulaire dans la session
+		$saisies_nouvelles = session_get("constructeur_formulaire_formidable_$id_formulaire");
+
+		// On récupère les anciennes saisies
+		$saisies_anciennes = unserialize(sql_getfetsel(
+			'saisies',
 			'spip_formulaires',
 			'id_formulaire = '.$id_formulaire
 		));
-		
-		// Pour chaque traitements on regarde s'i y a une fonction d'update
-		if (is_array($traitements))
-			foreach ($traitements as $type_traitement => $traitement){
-				if ($update = charger_fonction('update', "traiter/$type_traitement", true)){
-					$update($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles);
-				}
-			}
-		
-		// On redirige vers la config suivante
-		$retours['redirect'] = parametre_url(
-			parametre_url(
-				parametre_url(
-					generer_url_ecrire('formulaire_edit')
-					, 'id_formulaire', $id_formulaire
-				)
-				, 'configurer', 'traitements'
-			)
-			, 'avertissement', 'oui'
+
+		// On envoie les nouvelles dans la table dans la table
+		$ok = sql_updateq(
+			'spip_formulaires',
+			array(
+				'saisies' => serialize($saisies_nouvelles)
+			),
+			'id_formulaire = '.$id_formulaire
 		);
+
+		// Si c'est bon on appelle d'éventuelles fonctions d'update des traitements puis on renvoie vers la config des traitements
+		if ($ok){
+			// On va chercher les traitements
+			$traitements = unserialize(sql_getfetsel(
+				'traitements',
+				'spip_formulaires',
+				'id_formulaire = '.$id_formulaire
+			));
+
+			// Pour chaque traitements on regarde s'i y a une fonction d'update
+			if (is_array($traitements))
+				foreach ($traitements as $type_traitement => $traitement){
+					if ($update = charger_fonction('update', "traiter/$type_traitement", true)){
+						$update($id_formulaire, $traitement, $saisies_anciennes, $saisies_nouvelles);
+					}
+				}
+
+			// On redirige vers la config suivante
+			$retours['redirect'] = parametre_url(
+				parametre_url(
+					parametre_url(
+						generer_url_ecrire('formulaire_edit')
+						, 'id_formulaire', $id_formulaire
+					)
+					, 'configurer', 'traitements'
+				)
+				, 'avertissement', 'oui'
+			);
+		}
 	}
+
 	
 	return $retours;
 }

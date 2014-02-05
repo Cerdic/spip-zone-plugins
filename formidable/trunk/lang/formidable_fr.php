@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_formulaires' => 'Formulaires',
+	'bouton_revert_formulaire' => 'Revenir à la dernière version enregistrée',
 
 	// C
 	'cfg_analyse_classe_explication' => 'Vous pouvez indiquer des classes CSS qui seront ajoutées
