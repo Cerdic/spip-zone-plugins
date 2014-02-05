@@ -103,12 +103,6 @@ function formulaires_mots_ticket_traiter($id_ticket='',$retour='', $config_fonc=
 	if($retour)
 		$message['redirect'] = $retour;
 	
-	if ($notifications = charger_fonction('notifications', 'inc')) {
-		$notifications('motsticket', $id_ticket,
-			array('mots' => $mots)
-		);
-	}
-	
 	return $message;
 }
 ?>
