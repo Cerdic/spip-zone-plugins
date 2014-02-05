@@ -8,49 +8,39 @@ include_spip('action/editer_liens');
 include_spip('inc/config');
 
 function formulaires_editer_formulaire_charger($id_formulaire, $nouveau){
-	$contexte = array();
-	$editer_formulaire = $GLOBALS['formulaires']['editer_formulaire'];
-	$champs = saisies_lister_champs($editer_formulaire);
-	$id_formulaire = intval($id_formulaire);
-	
-	$contexte['_contenu'] = $editer_formulaire;
-	
+	$id_formulaire = intval($nouveau?0:$id_formulaire);
+	include_spip('inc/editer');
+
 	// Est-ce qu'on a le droit ?
-	if (autoriser('editer', 'formulaire', $id_formulaire)){
-		// Est-ce que le formulaire existe ?
-		if ($id_formulaire > 0 and $formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)){
-			// Alors on pré-remplit avec les valeurs
-			foreach($champs as $champ)
-				$contexte[$champ] = $formulaire[$champ];
-			$contexte['_action'] = array('editer_formulaire', $id_formulaire);
-		}
-		// Sinon si c'est une création
-		elseif ($nouveau == 'oui'){
-			// On déclare juste les champs
-			foreach ($champs as $champ)
-				$contexte[$champ] = '';
-			$contexte['_action'] = array('editer_formulaire', $nouveau);
-		}
-		// Sinon c'est n'importe quoi
-		else{
-			$contexte['editable'] = false;
-			$contexte['message_erreur'] = 'Erreur dans les parametres.';
-		}
-	}
-	else{
+	if (!autoriser('editer', 'formulaire', $id_formulaire)){
+		$contexte = array();
 		$contexte['editable'] = false;
 		$contexte['message_erreur'] = _T('formidable:erreur_autorisation');
 	}
+	else
+		$contexte = formulaires_editer_objet_charger('formulaire', $id_formulaire,0,0,'','');
+	unset($contexte['id_formulaire']);
 	
 	return $contexte;
 }
 
 function formulaires_editer_formulaire_verifier($id_formulaire, $nouveau){
-	$configurer_formulaire = $GLOBALS['formulaires']['editer_formulaire'];
-	$erreurs = saisies_verifier($configurer_formulaire);
-	// On vérifie l'unicité de l'identifiant
-	if (!$erreurs['identifiant'] and sql_getfetsel('id_formulaire', 'spip_formulaires', 'identifiant = '.sql_quote(_request('identifiant').' and id_formulaire != '.$id_formulaire)))
-		$erreurs['identifiant'] = _T('formidable:erreur_identifiant');
+	$id_formulaire = intval($nouveau?0:$id_formulaire);
+	$erreurs = array();
+
+	include_spip('inc/editer');
+	$erreurs = formulaires_editer_objet_verifier('formulaire',$id_formulaire,array('titre','identifiant'));
+
+	if (!isset($erreurs['identifiant'])){
+		$identifiant = _request('identifiant');
+		// format de l'identifiant
+		if (!preg_match("/^[\w]+$/",$identifiant))
+			$erreurs['identifiant'] = _T('formidable:erreur_identifiant_format');
+		// unicite de l'identifiant
+		elseif (sql_getfetsel('id_formulaire', 'spip_formulaires', 'identifiant = '.sql_quote($identifiant).' AND id_formulaire != '.intval($id_formulaire)))
+			$erreurs['identifiant'] = _T('formidable:erreur_identifiant');
+	}
+
 	return $erreurs;
 }
 

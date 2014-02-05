@@ -16,11 +16,11 @@ function action_editer_formulaire_dist($arg=null) {
 
 	// si id_formulaire n'est pas un nombre, c'est une creation
 	if (!$id_formulaire = intval($arg)) {
-		$id_formulaire = insert_formulaire();
+		$id_formulaire = formulaire_inserer();
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_formulaire > 0) $err = formulaire_set($id_formulaire);
+	if ($id_formulaire > 0) $err = formulaire_modifier($id_formulaire);
 
 	if (_request('redirect')) {
 		$redirect = parametre_url(urldecode(_request('redirect')),
@@ -38,7 +38,8 @@ function action_editer_formulaire_dist($arg=null) {
  *
  * @return int id_formulaire
  */
-function insert_formulaire() {
+function formulaire_inserer() {
+	$champs = array();
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
 		array(
@@ -57,42 +58,39 @@ function insert_formulaire() {
  * Appelle la fonction de modification d'un formulaire
  *
  * @param int $id_formulaire
- * @param unknown_type $set
- * @return $err
+ * @param array|null $set
+ * @return string
  */
-function formulaire_set($id_formulaire, $set=null) {
-	include_spip('inc/saisies');
+function formulaire_modifier($id_formulaire, $set=null) {
+	include_spip('inc/modifier');
+	include_spip('inc/filtres');
 	$err = '';
 
-	$c = array();
-	$champs = saisies_lister_champs($GLOBALS['formulaires']['editer_formulaire']);
-	foreach ($champs as $champ)
-		$c[$champ] = _request($champ,$set);
+	$c = collecter_requests(
+		// white list
+		objet_info('formulaire','champs_editables'),
+		// black list
+		array('statut'),
+		// donnees eventuellement fournies
+		$set
+	);
 
-	include_spip('inc/modifier');
-	revision_formulaire($id_formulaire, $c);
+
+	$invalideur = "id='id_formulaire/$id_formulaire'";
+	if ($err = objet_modifier_champs('formulaire', $id_formulaire,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+		),
+		$c))
+		return $err;
+
 
 	return $err;
 }
 
-/**
- * Enregistre une révision de formulaire
- *
- * @param int $id_formulaire
- * @param array $c
- * @return
- */
-function revision_formulaire($id_formulaire, $c=false) {
-	$invalideur = "id='id_formulaire/$id_formulaire'";
 
-	modifier_contenu('formulaire', $id_formulaire,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur
-		),
-		$c);
 
-	return ''; // pas d'erreur
-}
-
-?>
+function revision_formulaire($id_formulaire, $c=false) { return formulaire_modifier($id_formulaire, $c);}
+function insert_formulaire() {	return formulaire_inserer();}
+function formulaire_set($id_formulaire, $set=null) {	return formulaire_modifier($id_formulaire, $set);}

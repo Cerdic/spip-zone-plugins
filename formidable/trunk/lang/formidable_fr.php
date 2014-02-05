@@ -61,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_base' => 'Une erreur technique est survenue durant l’enregistrement.',
 	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier votre envoi.',
 	'erreur_identifiant' => 'Cet identifiant est déjà utilisé.',
+	'erreur_identifiant_format' => 'L\'identifiant ne peut contenir que des chiffres, lettres et le caractère "_"',
 	'erreur_importer_forms' => 'Erreur durant l’importation du formulaire Forms&Tables',
 	'erreur_importer_wcs' => 'Erreur durant l’importation du formulaire W.C.S',
 	'erreur_importer_yaml' => 'Erreur durant l’importation du fichier YAML',

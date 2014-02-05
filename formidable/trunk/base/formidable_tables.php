@@ -49,6 +49,8 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'principale' => 'oui',
 		'texte_modifier' => 'formidable:editer_modifier_formulaire',
 		
+		'champs_editables' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','url_redirect'),
+		'champs_versionnes' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','url_redirect'),
 		'field' => array(
 			"id_formulaire" => "bigint(21) NOT NULL",
 			"identifiant" => "varchar(200)",
@@ -58,11 +60,11 @@ function formidable_declarer_tables_objets_sql($tables) {
 			"saisies" => "longtext NOT NULL default ''",
 			"traitements" => "text NOT NULL default ''",
 			"public" => "enum('non', 'oui') DEFAULT 'non' NOT NULL",
+			"apres" => "varchar(12) NOT NULL default ''",
+			"url_redirect" => "varchar(255)",
 			"statut" => "varchar(10) NOT NULL default ''",
 			"date_creation" => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"maj" => "timestamp",
-			"apres" => "varchar(12) NOT NULL default ''",
-			"url_redirect" => "varchar(255)"
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_formulaire"
