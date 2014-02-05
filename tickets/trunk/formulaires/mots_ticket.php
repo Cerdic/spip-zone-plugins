@@ -18,16 +18,26 @@ include_spip('inc/editer');
  * Fonction de chargement des valeurs
  */
 function formulaires_mots_ticket_charger($id_ticket='', $retour='', $config_fonc='ticket_mots_config', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 
-	$mots = array();
-	foreach (sql_allfetsel('id_mot', 'spip_mots_liens', "objet='ticket' AND id_objet=".$id_ticket) as $res) {
-		if ($res['id_mot']) {
-			$mots[] = $res['id_mot'];
+	if(is_numeric($id_ticket)){
+		if (!autoriser('liermots', 'ticket', $id_ticket))
+			$editable = false;
+		else{
+			$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
+			$editable = true;
+
+			$mots = array();
+			foreach (sql_allfetsel('id_mot', 'spip_mots_liens', "objet='ticket' AND id_objet=".$id_ticket) as $res) {
+				if ($res['id_mot']) {
+					$mots[] = $res['id_mot'];
+				}
+			}
+			$valeurs['mots'] = $mots;
 		}
-	}
-	$valeurs['mots'] = $mots;
+	}else
+		$editable = false;
 
+	$valeurs['editable'] = $editable;
 	return $valeurs;
 }
 
