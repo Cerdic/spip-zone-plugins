@@ -86,6 +86,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importer_formulaire' => 'Importer un formulaire',
 	'importer_formulaire_fichier_label' => 'Fichier à importer',
 	'importer_formulaire_format_label' => 'Format du fichier',
+	'info_1_formulaire' => '1 formulaire',
+	'info_aucun_formulaire' => 'Aucun formulaire',
+	'info_nb_formulaires' => '@nb@ formulaires',
+	'info_1_reponse' => '1 réponse',
+	'info_aucune_reponse' => 'Aucune réponse',
+	'info_nb_reponses' => '@nb@ réponses',
+
 
 	// M
 	'modele_label_formulaire_formidable' => 'Quel formulaire ?',

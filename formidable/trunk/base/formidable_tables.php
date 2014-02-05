@@ -52,7 +52,10 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'date' => 'date_creation',
 		'principale' => 'oui',
 		'texte_modifier' => 'formidable:editer_modifier_formulaire',
-		
+		'info_aucun_objet'=> 'formidable:info_aucun_formulaire',
+		'info_1_objet' => 'formidable:info_1_formulaire',
+		'info_nb_objets' => 'formidable:info_nb_formulaires',
+
 		'champs_editables' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','url_redirect'),
 		'champs_versionnes' => array('titre', 'identifiant', 'descriptif','message_retour', 'saisies', 'traitements', 'public','apres','url_redirect'),
 		'field' => array(
@@ -86,6 +89,9 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'titre' => "'' AS titre, '' AS lang",
 		'date' => 'date',
 		'principale' => 'oui',
+		'info_aucun_objet'=> 'formidable:info_aucune_reponse',
+		'info_1_objet' => 'formidable:info_1_reponse',
+		'info_nb_objets' => 'formidable:info_nb_reponses',
 
 		'field' => array(
 			"id_formulaires_reponse" => "bigint(21) NOT NULL",
