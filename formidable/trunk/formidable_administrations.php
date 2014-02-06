@@ -31,6 +31,7 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 			'spip_formulaires_reponses_champs',
 			'spip_formulaires_liens')),
 		array('formidable_importer_forms'),
+		array('formidable_importer_forms_donnees'),
 	);
 
 	// Ajout du choix de ce qu'on affiche à la fin des traitements
@@ -67,6 +68,16 @@ function formidable_vider_tables($nom_meta_base_version){
 	sql_drop_table('spip_formulaires_reponses');
 	sql_drop_table('spip_formulaires_reponses_champs');
 	sql_drop_table('spip_formulaires_liens');
+
+	// on efface les champs d'import de f&t si il y a lieu
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($trouver_table('spip_forms')){
+		sql_alter("TABLE spip_forms DROP id_formulaire");
+	}
+	if ($trouver_table('spip_forms_donnees')){
+		sql_alter("TABLE spip_forms_donnees DROP id_formulaires_reponse");
+	}
+
 
 	// On efface la version entregistrée
 	effacer_meta($nom_meta_base_version);
@@ -114,4 +125,57 @@ function formidable_importer_forms(){
 	include_spip("inc/drapeau_edition");
 	debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
 }
-?>
+
+function formidable_importer_forms_donnees(){
+	$trouver_table = charger_fonction("trouver_table","base");
+	if ($trouver_table('spip_forms')){
+		sql_alter("TABLE spip_forms_donnees ADD id_formulaires_reponse bigint(21) NOT NULL DEFAULT 0");
+
+		// 2 champs de plus pour ne pas perdre des donnees
+		sql_alter("TABLE spip_formulaires_reponses ADD url varchar(255) NOT NULL default ''");
+		sql_alter("TABLE spip_formulaires_reponses ADD confirmation varchar(10) NOT NULL default ''");
+
+		// table de correspondance id_form=>id_formulaire
+		$rows = sql_allfetsel("id_form,id_formulaire","spip_forms","id_formulaire>0");
+		$trans = array();
+		foreach($rows as $row)
+			$trans[$row['id_form']] = $row['id_formulaire'];
+
+		$rows = sql_allfetsel("*","spip_forms_donnees",sql_in('id_form',array_keys($trans))." AND id_formulaires_reponse=0",'','id_donnee','0,100');
+		do {
+
+			foreach($rows as $row){
+
+				#var_dump($row);
+				$reponse = array(
+					"id_formulaire" => $trans[$row['id_form']],
+					"date" => $row["date"],
+					"ip" => $row["ip"],
+					"id_auteur" => $row["id_auteur"],
+					"cookie" => $row["cookie"],
+					"statut" => $row["statut"],
+					"url" => $row["url"],
+					"confirmation" => $row["confirmation"],
+				);
+
+				#var_dump($reponse);
+				$id_formulaires_reponse = sql_insertq("spip_formulaires_reponses",$reponse);
+				#var_dump($id_formulaires_reponse);
+				if ($id_formulaires_reponse){
+					$donnees = sql_allfetsel("$id_formulaires_reponse as id_formulaires_reponse,champ as nom,valeur","spip_forms_donnees_champs","id_donnee=".intval($row['id_donnee']));
+					sql_insertq_multi("spip_formulaires_reponses_champs",$donnees);
+					// et on marque la donnee pour ne pas la rejouer
+					sql_update("spip_forms_donnees",array("id_formulaires_reponse"=>$id_formulaires_reponse),"id_donnee=".intval($row['id_donnee']));
+				}
+				if (time()>_TIME_OUT)
+					return;
+			}
+
+			if (time()>_TIME_OUT)
+				return;
+
+		} while ($rows = sql_allfetsel("*","spip_forms_donnees",sql_in('id_form',array_keys($trans))." AND id_formulaires_reponse=0",'','id_donnee','0,100'));
+
+	}
+
+}

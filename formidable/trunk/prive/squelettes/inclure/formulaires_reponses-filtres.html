@@ -6,4 +6,4 @@
 		<li>[(#SELF|parametre_url{statut,'refuse'}|lien_ou_expose{<:formidable:info_reponse_supprimees:>,#ENV{statut}|=={refuse},ajax})]</li>
 	</ul>
 </div>
-<INCLURE{fond=prive/objets/liste/formulaires_reponses, env, ajax, sinon=<:formidable:info_aucune_reponse:>} />
+<INCLURE{fond=prive/objets/liste/formulaires_reponses, env, ajax, nb=#ENV{nb,30}, sinon=<:formidable:info_aucune_reponse:>} />
