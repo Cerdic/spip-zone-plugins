@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un_radio' => 'Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire (sous forme de liste à puce).',
 	'option_type_explication' => 'En mode "masqué", le contenu du champ ne sera pas visible.',
 	'option_type_label' => 'Type du champ',
-	'option_type_password' => 'Masqué',
+	'option_type_password' => 'Texte masqué lors de la saisie (ex : mot de passe)',
 	'option_type_text' => 'Normal',
 
 	// S

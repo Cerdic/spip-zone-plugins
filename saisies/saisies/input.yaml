@@ -30,14 +30,12 @@ options:
           explication: '<:saisies:option_explication_explication:>'
           size: 50
       -
-        saisie: 'radio'
+        saisie: 'case'
         options:
           nom: 'type'
-          label: '<:saisies:option_type_label:>'
-          explication: '<:saisies:option_type_explication:>'
-          datas:
-            text: '<:saisies:option_type_text:>'
-            password: '<:saisies:option_type_password:>'
+          label_case: '<:saisies:option_type_password:>'
+          valeur_oui: 'password'
+          valeur_non: 'text'
           defaut: 'text'
   -
     saisie: 'fieldset'
@@ -56,22 +54,22 @@ options:
           options:
             min: 1
       -
-        saisie: 'oui_non'
+        saisie: 'case'
         options:
           nom: 'disable'
-          label: '<:saisies:option_disable_label:>'
+          label_case: '<:saisies:option_disable_label:>'
           explication: '<:saisies:option_disable_explication:>'
       -
-        saisie: 'oui_non'
+        saisie: 'case'
         options:
           nom: 'disable_avec_post'
-          label: '<:saisies:option_disable_avec_post_label:>'
+          label_case: '<:saisies:option_disable_avec_post_label:>'
           explication: '<:saisies:option_disable_avec_post_explication:>'
       -
-        saisie: 'oui_non'
+        saisie: 'case'
         options:
           nom: 'readonly'
-          label: '<:saisies:option_readonly_label:>'
+          label_case: '<:saisies:option_readonly_label:>'
           explication: '<:saisies:option_readonly_explication:>'
   -
     saisie: 'fieldset'
@@ -140,10 +138,10 @@ options:
       label: '<:saisies:option_groupe_validation:>'
     saisies:
       -
-        saisie: 'oui_non'
+        saisie: 'case'
         options:
           nom: 'obligatoire'
-          label: '<:saisies:option_obligatoire_label:>'
+          label_case: '<:saisies:option_obligatoire_label:>'
       -
         saisie: 'input'
         options:
