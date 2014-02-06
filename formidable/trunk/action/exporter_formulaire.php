@@ -3,7 +3,7 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_exporter_formulaire_dist(){
+function action_exporter_formulaire_dist($arg=null){
 	include_spip('inc/formidable');
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
