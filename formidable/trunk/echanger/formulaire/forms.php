@@ -86,6 +86,8 @@ function forms_importe_en_base($formulaire){
 	// On insère un nouveau formulaire
 	$id_formulaire = formulaire_inserer();
 
+	$formulaire['saisies'] = forms_regroupe_saisies_fieldset($formulaire['saisies']);
+
 	if (is_array($formulaire['saisies']))
 		$formulaire['saisies'] = serialize($formulaire['saisies']);
 	if (is_array($formulaire['traitements']))
@@ -178,6 +180,31 @@ function forms_configure_traitement_formulaire($form,&$formulaire){
 
 
 /**
+ * On a genere un fieldset pour chaque separateur de f&t
+ * il faut le peupler avec les saisies qui le suivent
+ *
+ * @param array $saisies
+ * @return array
+ */
+function forms_regroupe_saisies_fieldset($saisies){
+	$s = array();
+	$ins = &$s;
+
+	foreach($saisies as $k=>$saisie){
+		if ($saisie['saisie']=='fieldset'){
+			if (!isset($saisies[$k]['saisies']))
+				$saisies[$k]['saisies'] = array();
+			$ins = &$saisies[$k]['saisies'];
+			$s[] = &$saisies[$k];
+		}
+		else
+			$ins[] = &$saisies[$k];
+	}
+
+	return $s;
+}
+
+/**
  * Transforme un champ f&t en Saisie
  * @param array $champ
  *   string champ
@@ -262,11 +289,15 @@ function forms_champ_vers_saisie($champ){
 			unset($champ['titre']);
 			unset($champ['aide']);
 			break;
+		case 'separateur':
+			$saisie['saisie'] = 'fieldset';
+			$saisie['saisies'] = array();
+			unset($saisie['options']['size']);
+			break;
 		case 'fichier':
 			// TODO saisie file
-		case 'separateur':
-			// TODO fieldset ?
 			$saisie = null;
+			break;
 	}
 
 	// On continue seulement si on a toujours une saisie
