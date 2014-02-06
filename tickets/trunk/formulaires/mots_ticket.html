@@ -1,3 +1,8 @@
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $("#validation_bouton_mots").hide();
+  });
+</script>
 <B_groupes_mots>
 <div class="formulaire_spip formulaire_editer formulaire_editer_mots_ticket ajax">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -20,7 +25,7 @@
 				</select>
 			</li>
 		</ul>
-		<p class='boutons' id="validation_bouton_mots" style="display: none;">
+		<p class='boutons' id="validation_bouton_mots">
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
 		</p>
 	</div></form>
