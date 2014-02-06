@@ -70,7 +70,8 @@ function notifications_notifications_destinataires($flux){
 		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
 		$id_rubrique = $t['id_rubrique'];
 		if ($GLOBALS['notifications']['limiter_rubriques']){
-			$limiter_rubriques = $GLOBALS['notifications']['limiter_rubriques'];
+			$limites = $GLOBALS['notifications']['limiter_rubriques'];
+			$limiter_rubriques = explode(",",$limites);
 		} else {
 			$limiter_rubriques = array($id_rubrique);
 		}
@@ -112,7 +113,8 @@ function notifications_notifications_destinataires($flux){
 		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
 		$id_rubrique = $t['id_rubrique'];
 		if ($GLOBALS['notifications']['limiter_rubriques']){
-			$limiter_rubriques = $GLOBALS['notifications']['limiter_rubriques'];
+			$limites = $GLOBALS['notifications']['limiter_rubriques'];
+			$limiter_rubriques = explode(",",$limites);
 		} else {
 			$limiter_rubriques = array($id_rubrique);
 		}

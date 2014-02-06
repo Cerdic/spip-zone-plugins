@@ -23,9 +23,9 @@
 							</div>
 						</li>
 						<li class='editer editer_limiter_rubriques fieldset'>
-						<fieldset><legend><:notifications:limiter_rubriques_label:></legend>
-						[(#INCLURE{fond=formulaires/inc-select_limiter_rubriques}{limiter_rubriques=#ENV{limiter_rubriques}})]
-						</fieldset>
+							<label for="limiter_rubriques"><:notifications:limiter_rubriques_label:></label>
+							<p class="explication"><:notifications:limiter_rubriques_explication:></p>
+							<input type="text" name="limiter_rubriques" value="[(#ENV{limiter_rubriques}|entites_html)]" id="limiter_rubriques" class="text" />
 						</li>
 					</ul>
 				</fieldset>
