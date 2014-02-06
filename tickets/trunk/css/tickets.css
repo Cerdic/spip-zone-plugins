@@ -11,6 +11,9 @@ table.tickets { margin:0 0 .5em 0;}
 .ticket dt {float: left; clear: left; width: 80px; text-align: right;} 
 .ticket dd {margin: 0 0 0 90px; padding: 0 .2em .2em 0;}
 
+.ticket a.editer_en_ligne {background-image:url("img/roue-16x32.png");background-position:0px -16px;display:block;float:right;height:16px;width:16px;text-indent:-9999px;}
+.ticket a.editer_en_ligne:hover, .ticket a.editer_en_ligne.on {background-position:0px 0px;}
+
 .ticket_commentaires {clear:both;}
 
 .formulaire_editer_ticket input.text {width:98%;}

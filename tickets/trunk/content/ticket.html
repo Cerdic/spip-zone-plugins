@@ -16,7 +16,7 @@
 	</div>
 
 	[(#REM) Statut, severite, assignement]
-	<div class="infos">
+	<div class="infos ajax">
 		<dl>
 			[<dt><:tickets:champ_statut:></dt><dd>[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
 			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
@@ -40,7 +40,7 @@
 			#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET,#SELF}
 		]
 		[(#CONFIG{tickets/general/lier_mots,off}|=={on}|oui)
-			#FORMULAIRE_MOTS_TICKET{#ID_TICKET,#SELF}
+			#INCLURE{fond=inclure/mots_ticket,id_ticket=#ID_TICKET,env,ajax}
 		]
 	</div>
 

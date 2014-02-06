@@ -13,7 +13,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class="editer editer_mots">
-				<label for="mots"><:tickets:champ_mots:></label>
+				<label for="mots"><:tickets:label_mots:></label>
 				<select id="mots" name="mots[]" multiple onchange="jQuery('#validation_bouton_mots').slideDown();">
 					<BOUCLE_groupes_mots(GROUPES_MOTS){si #ENV{editable}}{tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
 					<optgroup label="#TITRE">

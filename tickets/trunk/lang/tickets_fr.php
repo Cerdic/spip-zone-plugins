@@ -97,7 +97,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_maj' => 'MAJ :',
 	'champ_maj_long' => 'Date de mise à jour',
 	'champ_maj_th' => 'MAJ',
-	'champ_mots' => 'Mots-clés :',
 	'champ_navigateur' => 'Navigateur :',
 	'champ_nouveau_commentaire' => 'Nouveau commentaire',
 	'champ_projet' => 'Projet :',
@@ -177,8 +176,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tickets_redac' => 'en cours de rédaction',
 
 	// L
+	'label_mots' => 'Lier des mots-clés au ticket',
 	'label_paginer_par' => 'Paginer par :',
 	'label_vue_liste_tickets' => 'Changer la vue de la liste :',
+	'lien_editer_mots_ticket' => 'Modifier',
+	'lien_editer_mots_ticket_title' => 'Modifier les mots-clés liés au ticket',
 	'lien_filtrer' => 'Filtrer les tickets',
 	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>',
 	'lien_reponse_ticket' => 'Réponse au ticket',
@@ -192,6 +194,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_automatique' => 'Ceci est un message automatique : n’y repondez pas.',
 	'message_page_publique_indisponible' => 'Cette page est indisponible. vérifiez que ZPIP est activé et que votre configuration du plugin Tickets autorise l’accès public.',
 	'message_zpip_inactif' => 'Cette option est désactivée car elle nécessite le plugin ZPIP.',
+	'mots_aucun' => 'Aucun mot-clé',
 
 	// N
 	'no_assignation' => 'Personne',
@@ -253,6 +256,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Tickets, suivi de bugs',
 	'titre_identification' => 'Identification',
 	'titre_liste' => 'Liste des tickets',
+	'titre_mots' => 'Mots-clés',
 	'tous_tickets_en_redaction' => 'Tous les tickets en rédaction',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',
 	'tous_vos_tickets' => 'Tous vos tickets',
