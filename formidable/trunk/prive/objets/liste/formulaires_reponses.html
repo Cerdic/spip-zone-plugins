@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{id_auteur?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire?}{id_formulaires_reponse?}{id_auteur?}{statut?}{recherche?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#ID_FORMULAIRES_REPONSE|puce_changement_statut{#STATUT, #ID_FORMULAIRE, formulaires_reponse})]</td>
 			<td class="date">[(#DATE|affdate_jourcourt|concat{#DATE|affdate{", H:i"}})]

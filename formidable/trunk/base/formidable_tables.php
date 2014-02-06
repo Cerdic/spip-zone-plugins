@@ -123,6 +123,10 @@ function formidable_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut' => 'formulaires_reponse:changer_statut',
+		'rechercher_champs' => array('ip'=>1),
+		'rechercher_jointures' => array(
+			'formulaires_reponses_champ' => array('valeur' => 4),
+		),
 		'statut_titres' => array(
 			'prop'=>'formidable:info_reponse_proposee',
 			'publie'=>'formidable:info_reponse_publiee',
