@@ -62,35 +62,43 @@ function notifications_notifications_destinataires($flux){
 
 	// proposition d'article prevenir les admins restreints
 	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_admins_restreints']
-		AND $options['statut']=='prop' AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
+	//	AND $options['statut']=='prop' AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
 	){
 
 		$id_article = $flux['args']['id'];
 		include_spip('base/abstract_sql');
 		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
 		$id_rubrique = $t['id_rubrique'];
-
-		while ($id_rubrique){
-			$hierarchie[] = $id_rubrique;
-			$res = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
-			if (!$res){ // rubrique inexistante
-				$id_rubrique = 0;
-				break;
-			}
-			$id_parent = $res['id_parent'];
-			$id_rubrique = $id_parent;
+		if ($GLOBALS['notifications']['limiter_rubriques']){
+			$limiter_rubriques = $GLOBALS['notifications']['limiter_rubriques'];
+		} else {
+			$limiter_rubriques = array($id_rubrique);
 		}
-		spip_log("Prop article > admin restreint de " . join(',', $hierarchie), 'notifications');
 
-		//les admins de la rub et de ses parents 
-		$result_email = sql_select(
-			"auteurs.email,auteurs.id_auteur,lien.id_objet as id_rubrique",
-			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur ",
-			"lien.objet='rubrique' AND ".sql_in('lien.id_objet',sql_quote($hierarchie))." AND auteurs.statut='0minirezo'");
+		if (in_array($id_rubrique,$limiter_rubriques))
+		{
+			while ($id_rubrique){
+				$hierarchie[] = $id_rubrique;
+				$res = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
+				if (!$res){ // rubrique inexistante
+					$id_rubrique = 0;
+					break;
+				}
+				$id_parent = $res['id_parent'];
+				$id_rubrique = $id_parent;
+			}
+			spip_log("Prop article > admin restreint de " . join(',', $hierarchie), 'notifications');
 
-		while ($qui = sql_fetch($result_email)){
-			spip_log($options['statut'] . " article > admin restreint " . $qui['id_auteur'] . " de la rubrique" . $qui['id_rubrique'] . " prevenu", 'notifications');
-			$flux['data'][] = $qui['email'];
+			//les admins de la rub et de ses parents 
+			$result_email = sql_select(
+				"auteurs.email,auteurs.id_auteur,lien.id_objet as id_rubrique",
+				"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur ",
+				"lien.objet='rubrique' AND ".sql_in('lien.id_objet',sql_quote($hierarchie))." AND auteurs.statut='0minirezo'");
+
+			while ($qui = sql_fetch($result_email)){
+				spip_log($options['statut'] . " article > admin restreint " . $qui['id_auteur'] . " de la rubrique" . $qui['id_rubrique'] . " prevenu", 'notifications');
+				$flux['data'][] = $qui['email'];
+			}
 		}
 
 	}
@@ -100,19 +108,30 @@ function notifications_notifications_destinataires($flux){
 		AND $GLOBALS['notifications']['prevenir_auteurs_articles']
 	){
 		$id_article = $flux['args']['id'];
-
-
 		include_spip('base/abstract_sql');
+		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
+		$id_rubrique = $t['id_rubrique'];
+		if ($GLOBALS['notifications']['limiter_rubriques']){
+			$limiter_rubriques = $GLOBALS['notifications']['limiter_rubriques'];
+		} else {
+			$limiter_rubriques = array($id_rubrique);
+		}
 
-		// Qui va-t-on prevenir en plus ?
-		$result_email = sql_select(
-			"auteurs.email",
-			"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur",
-			"lien.id_objet=".intval($id_article)." AND lien.objet='article'");
+		if (in_array($id_rubrique,$limiter_rubriques))
+		{
 
-		while ($qui = sql_fetch($result_email)){
-			$flux['data'][] = $qui['email'];
-			spip_log($options['statut'] . " article > auteur " . $qui['id_auteur'] . " prevenu", 'notifications');
+			include_spip('base/abstract_sql');
+
+			// Qui va-t-on prevenir en plus ?
+			$result_email = sql_select(
+				"auteurs.email",
+				"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur",
+				"lien.id_objet=".intval($id_article)." AND lien.objet='article'");
+
+			while ($qui = sql_fetch($result_email)){
+				$flux['data'][] = $qui['email'];
+				spip_log($options['statut'] . " article > auteur " . $qui['id_auteur'] . " prevenu", 'notifications');
+			}
 		}
 
 	}

@@ -22,6 +22,11 @@
 								<label for="prevenir_admins_restreints"><:notifications:article_prive_admins_restreints:></label>
 							</div>
 						</li>
+						<li class='editer editer_limiter_rubriques fieldset'>
+						<fieldset><legend><:notifications:limiter_rubriques_label:></legend>
+						[(#INCLURE{fond=formulaires/inc-select_limiter_rubriques}{limiter_rubriques=#ENV{limiter_rubriques}})]
+						</fieldset>
+						</li>
 					</ul>
 				</fieldset>
 			</li>
