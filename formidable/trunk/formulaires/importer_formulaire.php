@@ -36,10 +36,16 @@ function formulaires_importer_formulaire_traiter(){
 		$fichier = $_FILES['fichier']['tmp_name'];
 	
 		$importer = charger_fonction('importer', "echanger/formulaire/$type_import", true);
-		$erreur_ou_id = $importer($fichier);
-		
+
+		try {
+			$erreur_ou_id = $importer($fichier);
+		}
+		catch (Exception $e){
+			$erreur_ou_id = $e->getMessage();
+		}
+
 		if (!is_numeric($erreur_ou_id)){
-			$retours['message_erreur'] = $erreur;
+			$retours['message_erreur'] = $erreur_ou_id;
 			$retours['editable'] = true;
 		}
 		else{
