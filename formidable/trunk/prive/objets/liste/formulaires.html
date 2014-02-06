@@ -20,10 +20,10 @@
 	<tbody>
 	<BOUCLE_formulaires(FORMULAIRES){id_formulaire?}{statut?}{tri #ENV{order,titre},#GET{defaut_tri}}{recherche?}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)]">
-			<td class="statut">[(#STATUT|puce_statut{formulaire})]</td>
+			<td class="statut">[(#STATUT|puce_statut{formulaire,#ID_FORMULAIRE})]</td>
 			<td class="titre"><a href="[(#ID_FORMULAIRE|generer_url_entite{formulaire})]">#TITRE</a></td>
 			<td class="identifiant">#IDENTIFIANT</td>
-			<td class="reponses"><BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire} />[<a href="#URL_ECRIRE{formulaires_reponses,id_formulaire=#ID_FORMULAIRE}">(#TOTAL_BOUCLE|singulier_ou_pluriel{formidable:info_1_reponse,formidable:info_nb_reponses})</a>]<//B_reponses></td>
+			<td class="reponses"><BOUCLE_reponses(FORMULAIRES_REPONSES){id_formulaire}{tout} />[<a href="#URL_ECRIRE{formulaires_reponses,id_formulaire=#ID_FORMULAIRE}">(#TOTAL_BOUCLE|singulier_ou_pluriel{formidable:info_1_reponse,formidable:info_nb_reponses})</a>]<//B_reponses></td>
 			<td class="id_formulaire id">[(#AUTORISER{modifier,formulaire,#ID_FORMULAIRE}|?{
 							<a href="[(#URL_ECRIRE{formulaire_edit,id_formulaire=#ID_FORMULAIRE})]">#ID_FORMULAIRE</a>,
 							#ID_FORMULAIRE

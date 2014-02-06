@@ -39,7 +39,10 @@ function action_editer_formulaire_dist($arg=null) {
  * @return int id_formulaire
  */
 function formulaire_inserer() {
-	$champs = array();
+	$champs = array(
+		'statut' => 'prop',
+		'date_creation' => date('Y-m-d H:i:s'),
+	);
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
 		array(
@@ -49,7 +52,17 @@ function formulaire_inserer() {
 			'data' => $champs
 		)
 	);
-	$id_formulaire = sql_insertq("spip_formulaires", array('date_creation' => date('Y-m-d H:i:s')));
+	$id_formulaire = sql_insertq("spip_formulaires", $champs);
+
+	pipeline('post_insertion',
+		array(
+			'args' => array(
+				'table' => 'spip_formulaires',
+				'id_objet' => $id_formulaire
+			),
+			'data' => $champs
+		)
+	);
 
 	return $id_formulaire;
 }
@@ -85,6 +98,10 @@ function formulaire_modifier($id_formulaire, $set=null) {
 		$c))
 		return $err;
 
+	// Modification de statut, changement de rubrique ?
+	$c = collecter_requests(array('statut'),array(),$set);
+	include_spip("action/editer_objet");
+	$err = objet_instituer('formulaire',$id_formulaire, $c);
 
 	return $err;
 }

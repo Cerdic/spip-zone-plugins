@@ -47,6 +47,11 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 	// Renommer la date de création (pas d'abbréviations dans les noms)
 	$maj['0.5.5'] = array(array('sql_alter','TABLE spip_formulaires CHANGE date_crea date_creation datetime NOT NULL DEFAULT "0000-00-00 00:00:00"'));
 
+	// statut publie sur les formulaires sans statut
+	$maj['0.5.6'] = array(
+		array('sql_updateq','spip_formulaires',array('statut'=>'publie'),"statut=".sql_quote('')),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -111,6 +116,11 @@ function formidable_importer_forms(){
 
 			// les traitements
 			forms_configure_traitement_formulaire($form,$formulaire);
+
+			// si ce formulaire a des reponses on le met en publie
+			if (sql_countsel("spip_forms_donnees","id_form=".intval($form['id_form'])))
+				$formulaire['statut'] = 'publie';
+
 			$id_formulaire = forms_importe_en_base($formulaire);
 			spip_log("Import spip_forms #".$form['id_form']." en spip_formulaires #$id_formulaire","maj"._LOG_INFO_IMPORTANTE);
 

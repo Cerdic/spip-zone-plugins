@@ -2,10 +2,10 @@
 	prefix="formidable"
 	categorie="communication"
 	version="2.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
-	schema="0.5.5"
+	schema="0.5.6"
 	documentation="http://www.spip-contrib.net/Formidable-le-generateur-de"
 >
 

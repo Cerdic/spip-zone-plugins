@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_page_configurer_formidable' => 'Configurer Formidable',
 	'cfg_titre_parametrages_analyse' => 'Paramétrages de l’analyse des réponses',
 	'champs' => 'Champs',
+	'changer_statut' => 'Ce formulaire est :',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',

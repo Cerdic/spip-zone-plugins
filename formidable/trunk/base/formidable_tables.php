@@ -79,9 +79,29 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'join'=> array(
 			'id_formulaire' => 'id_formulaire'
 		),
+		'statut'=> array(
+			array(
+				'champ' => 'statut',
+				'publie' => 'publie',
+				'previsu' => 'publie,prop',
+				'exception' => array('statut', 'tout'),
+			)
+		),
+		'texte_changer_statut' => 'formidable:changer_statut',
 		'rechercher_champs' => array(
 		  'titre' => 5, 'descriptif' => 3
 		),
+		'statut_titres' => array(
+			'prop'=>'info_article_propose',
+			'publie'=>'info_article_publie',
+			'poubelle'=>'info_article_supprime'
+		),
+		'statut_textes_instituer' => array(
+			'prop' => 'texte_statut_propose_evaluation',
+			'publie' => 'texte_statut_publie',
+			'poubelle' => 'texte_statut_poubelle',
+		),
+
 	);
 
 	$tables['spip_formulaires_reponses'] = array(
