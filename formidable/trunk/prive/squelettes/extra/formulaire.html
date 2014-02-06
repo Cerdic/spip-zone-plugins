@@ -4,10 +4,6 @@
 	[(#AUTORISER{editer, formulaire}|oui)
 	[(#URL_ACTION_AUTEUR{dupliquer_formulaire, #ID_FORMULAIRE}|icone_horizontale{<:formidable:formulaires_dupliquer:>,formulaire-dupliquer-24})]
 	]
-	[(#AUTORISER{editer, formulaire, #ID_FORMULAIRE}|oui)
-	[(#URL_ACTION_AUTEUR{supprimer_formulaire, #ID_FORMULAIRE}|inserer_attribut{'onclick','return confirm("<:formidable:formulaires_supprimer_confirmation:>");'}
-	|icone_horizontale{<:formidable:formulaires_supprimer:>,formulaire-supprimer-24})]
-	]
 #BOITE_FERMER
 
 [(#BOITE_OUVRIR{<:formidable:voir_exporter:>,'raccourcis'})]
