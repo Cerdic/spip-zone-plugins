@@ -1,4 +1,9 @@
 [(#ENV{editable}|oui)
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $("#validation_bouton_assigner").hide();
+  });
+</script>
 <div class="formulaire_spip formulaire_editer formulaire_editer_assigner_ticket ajax">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -15,7 +20,7 @@
 				</select>
 			</li>
 		</ul>
-		<p class='boutons' id="validation_bouton_assigner" style="display: none;">
+		<p class='boutons' id="validation_bouton_assigner">
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
 		</p>
 	</div></form>
