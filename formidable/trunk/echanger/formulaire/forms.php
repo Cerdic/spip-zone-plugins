@@ -221,11 +221,17 @@ function forms_champ_vers_saisie($champ){
 			break;
 		case 'num':
 		case 'monnaie':
-			$saisie['verifier'] = array(
-				'type' => 'entier'
-			);
-			if ($taille = $champ['taille'])
-				$saisie['verifier']['options'] = array('max' => (pow(10, $taille)-1));
+			if (!isset($champ['taille']) OR !intval($taille = $champ['taille'])){
+				$saisie['verifier'] = array(
+					'type' => 'entier'
+				);
+			}
+			else {
+				$saisie['verifier'] = array(
+					'type' => 'decimal'
+				);
+				$saisie['verifier']['options'] = array('nb_decimales' => $taille);
+			}
 			break;
 		case 'email':
 			$saisie['verifier'] = array(
@@ -248,6 +254,13 @@ function forms_champ_vers_saisie($champ){
 		case 'multiple':
 			$saisie['saisie'] = 'checkbox';
 			unset($saisie['options']['size']);
+			break;
+		case 'textestatique':
+			$saisie['saisie'] = 'explication';
+			unset($saisie['options']['size']);
+			$saisie['options']['texte'] = $champ['titre'];
+			unset($champ['titre']);
+			unset($champ['aide']);
 			break;
 		case 'fichier':
 			// TODO saisie file
@@ -274,17 +287,18 @@ function forms_champ_vers_saisie($champ){
 	$saisie['options']['nom'] = $champ['champ'];
 
 	// Le label
-	$saisie['options']['label'] = $champ['titre'];
+	if (isset($champ['titre']) AND $champ['titre'])
+		$saisie['options']['label'] = $champ['titre'];
 
 	// Obligatoire
-	if ($champ['obligatoire'] == 'oui')
+	if (isset($champ['obligatoire']) AND $champ['obligatoire'] == 'oui')
 		$saisie['options']['obligatoire'] = 'on';
 
 	// Explication éventuelle
-	if ($explication = $champ['aide'])
+	if (isset($champ['aide']) AND $explication = $champ['aide'])
 		$saisie['options']['explication'] = $explication;
 
-	if ($champ['saisie']=='non'){
+	if (isset($champ['saisie']) AND $champ['saisie']=='non'){
 		$saisie['options']['disable'] = 'on';
 		// masquer en JS, fallback
 		$saisie['options']['afficher_si'] = 'false';
