@@ -116,9 +116,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable aus dem anonymisierter Form.',
 	'traiter_enregistrement_option_choix_select_label' => 'Wählen eine Variable von denen zur Verfügung.',
 	'traiter_enregistrement_option_moderation_label' => 'Moderation',
-	'traiter_enregistrement_option_modifiable_explication' => 'Sollen die Besucher ihre Antworten nachträglich &aauml;ndern können?',
+	'traiter_enregistrement_option_modifiable_explication' => 'Sollen die Besucher ihre Antworten nachträglich &aauml;ndern können?', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Antworten editierbar',
-	'traiter_enregistrement_option_multiple_explication' => 'Darf die gleiche Person das Formular mehrmals ausfüllen und absenden?',
+	'traiter_enregistrement_option_multiple_explication' => 'Darf die gleiche Person das Formular mehrmals ausfüllen und absenden?', # MODIF
 	'traiter_enregistrement_option_multiple_label' => 'Mehrfache Antworten',
 	'traiter_enregistrement_titre' => 'Ergebnisse speichern',
 

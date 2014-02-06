@@ -136,9 +136,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_identification_explication' => 'Se le risposte sono modificabili, quale procedura si dovrà utilizzare in priorità per individuare la risposta da modificare?',
 	'traiter_enregistrement_option_identification_label' => 'Identificazione',
 	'traiter_enregistrement_option_moderation_label' => 'Moderazione',
-	'traiter_enregistrement_option_modifiable_explication' => 'Gli utenti possono modificare le loro risposte dopo aver inviato il modulo?',
+	'traiter_enregistrement_option_modifiable_explication' => 'Gli utenti possono modificare le loro risposte dopo aver inviato il modulo?', # MODIF
 	'traiter_enregistrement_option_modifiable_label' => 'Risposte modificabili',
-	'traiter_enregistrement_option_multiple_explication' => 'Un utente può risposndere più al modulo?',
+	'traiter_enregistrement_option_multiple_explication' => 'Un utente può risposndere più al modulo?', # MODIF
 	'traiter_enregistrement_option_multiple_label' => 'Risposte multiple',
 	'traiter_enregistrement_titre' => 'Registra i risultati',
 

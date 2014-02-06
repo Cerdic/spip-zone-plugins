@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_base' => 'Une erreur technique est survenue durant l’enregistrement.',
 	'erreur_generique' => 'Il y a des erreurs dans les champs ci-dessous, veuillez vérifier votre envoi.',
 	'erreur_identifiant' => 'Cet identifiant est déjà utilisé.',
-	'erreur_identifiant_format' => 'L\'identifiant ne peut contenir que des chiffres, lettres et le caractère "_"',
+	'erreur_identifiant_format' => 'L’identifiant ne peut contenir que des chiffres, lettres et le caractère "_"',
 	'erreur_importer_forms' => 'Erreur durant l’importation du formulaire Forms&Tables',
 	'erreur_importer_wcs' => 'Erreur durant l’importation du formulaire W.C.S',
 	'erreur_importer_yaml' => 'Erreur durant l’importation du fichier YAML',
@@ -87,19 +87,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importer_formulaire_fichier_label' => 'Fichier à importer',
 	'importer_formulaire_format_label' => 'Format du fichier',
 	'info_1_formulaire' => '1 formulaire',
-	'info_aucun_formulaire' => 'Aucun formulaire',
-	'info_nb_formulaires' => '@nb@ formulaires',
 	'info_1_reponse' => '1 réponse',
+	'info_aucun_formulaire' => 'Aucun formulaire',
 	'info_aucune_reponse' => 'Aucune réponse',
+	'info_nb_formulaires' => '@nb@ formulaires',
 	'info_nb_reponses' => '@nb@ réponses',
 	'info_reponse_proposee' => 'À modérer',
-	'info_reponse_publiee' => 'Validée',
-	'info_reponse_supprimee' => 'Supprimée',
 	'info_reponse_proposees' => 'À modérer',
+	'info_reponse_publiee' => 'Validée',
 	'info_reponse_publiees' => 'Validées',
+	'info_reponse_supprimee' => 'Supprimée',
 	'info_reponse_supprimees' => 'Supprimées',
 	'info_reponse_toutes' => 'Toutes',
-
 
 	// M
 	'modele_label_formulaire_formidable' => 'Quel formulaire ?',
@@ -134,10 +133,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Sans réponse',
 
 	// T
+	'texte_statut_poubelle' => 'supprimée',
 	'texte_statut_propose_evaluation' => 'proposée',
 	'texte_statut_publie' => 'validée',
-	'texte_statut_poubelle' => 'supprimée',
-
 	'titre_cadre_raccourcis' => 'Raccourcis',
 	'traitements_actives' => 'Traitements activés',
 	'traitements_aide_memoire' => 'Aide mémoire :',
@@ -186,9 +184,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_identification_label' => 'Identification',
 	'traiter_enregistrement_option_ip_label' => 'Enregistrer les IPs (masquées après un délai de garde)',
 	'traiter_enregistrement_option_moderation_label' => 'Modération',
-	'traiter_enregistrement_option_modifiable_explication' => 'Modifiable : Les visiteurs peuvent modifier leurs réponses après coup.',
+	'traiter_enregistrement_option_modifiable_explication' => 'Modifiable : Les visiteurs peuvent modifier leurs réponses après coup.',
 	'traiter_enregistrement_option_modifiable_label' => 'Réponses modifiables',
-	'traiter_enregistrement_option_multiple_explication' => 'Multiple : Une même personne peut répondre plusieurs fois.',
+	'traiter_enregistrement_option_multiple_explication' => 'Multiple : Une même personne peut répondre plusieurs fois.',
 	'traiter_enregistrement_option_multiple_label' => 'Réponses multiples',
 	'traiter_enregistrement_titre' => 'Enregistrer les résultats',
 
