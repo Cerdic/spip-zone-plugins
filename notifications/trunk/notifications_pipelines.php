@@ -62,7 +62,7 @@ function notifications_notifications_destinataires($flux){
 
 	// proposition d'article prevenir les admins restreints
 	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_admins_restreints']
-	//	AND $options['statut']=='prop' AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
+		AND $options['statut']=='prop' AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
 	){
 
 		$id_article = $flux['args']['id'];
