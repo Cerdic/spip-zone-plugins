@@ -295,7 +295,7 @@ function forms_champ_vers_saisie($champ){
 			unset($saisie['options']['size']);
 			break;
 		case 'fichier':
-			// TODO saisie file
+			// TODO saisie file NIY
 			$saisie = null;
 			break;
 	}
