@@ -80,7 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Cf. documentation</a>',
-	'limiter_rubriques_label' => 'Limiter les notifications à ces rubriques :',
+	'limiter_rubriques_label' => 'Limiter à ces rubriques :',
+	'limiter_rubriques_explication' => 'Renseignez ici les identifiants de chaque rubrique où vous voulez déclencher les notifications, séparé par une virgule. ex: "11,26"',
 
 	// M
 	'message_a_valider' => 'Message à valider : ',
@@ -115,8 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'suivis_public_votre_page' => 'Ceci est votre page personnalisée de suivi du site',
 
 	// T
-	'titre_moderation' => 'Modération',
-	'tout_cocher_label' => '<strong>Tout cocher/décocher</strong> : si tout est décoché, les notifications se déclencheront par défaut dans toutes les rubriques.'
+	'titre_moderation' => 'Modération'
 );
 
 ?>
