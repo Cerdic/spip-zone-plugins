@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ouvrir_relecture' => 'Ouvrir un cycle de relecture',
 	'bouton_participer_relecture' => 'Participer à la relecture',
 	'bouton_saisir_commentaire' => 'Saisir le texte de votre commentaire',
-	'bouton_voir_relecture' => 'Voir',
+	'bouton_voir_relecture' => 'Accéder à la relecture en cours',
 	'bouton_voir_relectures' => 'Afficher l\'historique des relectures',
 
 // E
@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_table_commentaires' => 'Liste des commentaires',
 
 // T
+	'texte_article_relecture' => 'en relecture',
 	'texte_commentaire_accepte' => 'Accepté',
 	'texte_commentaire_ouvert' => 'Ouvert',
 	'texte_commentaire_refuse' => 'Non retenu',

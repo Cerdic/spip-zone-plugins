@@ -1,0 +1,54 @@
+[(#REM) <!-- Surcharge du bloc d'information d'un article.
+
+	- Si une relecture est ouverte sur l'article on remplace le formulaire instituer par le statut en relecture
+	  en utilisant le même look et la même couleur que l'état "proposé à la publication"
+	- Ajout des boutons de relecture en fonction du contexte : accéder à une relecture ouverte, créer une relecture,
+	  ou voir les relectures fermées
+ -->]
+<BOUCLE_art(ARTICLES){id_article=#ENV{id}}{statut?}{!lang_select}>
+	<div class='infos'>
+	<div class='numero'><:info_numero_article:><p>#ID_ARTICLE</p></div>
+
+	<BOUCLE_relecture_ouverte(RELECTURES){id_article}{statut=ouverte}>
+		[(#REM) <!-- Pseudo formulaire pour afficher le statut en relecture -->]
+		<div class="instituer_objet">
+			<div class="formulaire_spip formulaire_editer formulaire_instituer formulaire_instituer_objet formulaire_instituer_objet-article formulaire_instituer_objet-article-#ID_ARTICLE">
+				<ul>
+					<li class="editer editer_statut statut_relecture obligatoire">
+						<label for="formulaire_instituer_objet-article-#ID_ARTICLE-statut">
+							<:ecrire:texte_article_statut:>
+						</label>
+						<span class="show">
+							<span class="statut">[(#CHEMIN_IMAGE{puce-relire-8.png}|balise_img{statut,''})] <:relecture:texte_article_relecture:></span>
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</BOUCLE_relecture_ouverte>
+		[(#REM) <!-- Formulaire instituer objet -->]
+		[(#FORMULAIRE_INSTITUER_OBJET{article,#ID_ARTICLE})]
+	<//B_relecture_ouverte>
+
+	[(#REM) <!-- Boutons concernant les relecture -->]
+	<INCLURE{fond=prive/squelettes/infos/article-relecture,
+		id_article=#ID_ARTICLE,
+		env} />
+
+	[(#REM)	<!-- Bouton voir en ligne -->]
+	<BOUCLE_publie(ARTICLES){id_article}>
+		[(#VAL{redirect}
+			|generer_url_action{type=article&id=#ID_ARTICLE}
+			|parametre_url{var_mode,calcul}
+			|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+	</BOUCLE_publie>
+		[(#AUTORISER{previsualiser,article,#ID_ARTICLE,'',#ARRAY{statut,#STATUT}})
+			[(#VAL{redirect}
+				|generer_url_action{type=article&id=#ID_ARTICLE}
+				|parametre_url{var_mode,preview}
+				|icone_horizontale{<:previsualiser:>,preview})]
+		]
+	<//B_publie>
+
+	</div>
+</BOUCLE_art>

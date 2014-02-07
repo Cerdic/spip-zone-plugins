@@ -68,6 +68,8 @@ function relecture_affiche_gauche($flux) {
 
 /**
  * Affichage dans la boite d'informations de l'article en cours d'affichage :
+ * - du statut modifié de par la relecture en cours
+ * - du lien menant à la relecture en cours
  * - du lien menant a l'historique des relectures cloturees
  *
  * @param array $flux
@@ -81,8 +83,8 @@ function relecture_boite_infos($flux){
 			$table = table_objet($type);
 			$id_table_objet = id_table_objet($type);
 
-			$flux['data'] .= recuperer_fond('prive/squelettes/infos/article-relecture',
-								array($id_table_objet => $id));
+//			$flux['data'] .= recuperer_fond('prive/squelettes/infos/article-relecture',
+//								array($id_table_objet => $id));
 		}
 	}
 

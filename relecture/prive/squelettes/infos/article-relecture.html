@@ -6,6 +6,16 @@
 		|icone_horizontale{<:relecture:bouton_ouvrir_relecture:>,relecture-new-24.png})]
 ]
 
+[(#REM) <!-- Information sur la relecture ouverte --> ]
+<BOUCLE_relecture_ouverte(RELECTURES){id_article}{statut=ouverte}>
+[(#AUTORISER{voir, relecture, #ID_RELECTURE})
+	[(#URL_ECRIRE{relecture}
+		|parametre_url{id_relecture, #ID_RELECTURE}
+		|icone_horizontale{<:relecture:bouton_voir_relecture:>,relecture-24.png})]
+		</li>
+]
+</BOUCLE_relecture_ouverte>
+
 [(#REM) <!-- Bouton d'affichage de la page des relectures de l'article en cours --> ]
 <BOUCLE_relectures_fermees(RELECTURES){id_article}{statut=fermee}{0,1}{!par date_cloture}>
 [(#AUTORISER{voirrelectures, article, #ID_ARTICLE})
