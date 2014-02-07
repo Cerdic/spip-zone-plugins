@@ -80,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">View documentation</a>',
+	'limiter_rubriques_explication' => 'Specify the identifiers of each section where you want to activate the notifications, separated with a comma. example: "11,26"',
+	'limiter_rubriques_label' => 'Limit to these sections:',
 
 	// M
 	'message_a_valider' => 'Message to confirm:',
