@@ -1,22 +1,22 @@
 <traduction module="formidable" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=de" total="165" traduits="97" relire="0" modifs="4" nouveaux="64" pourcent="58.79">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=de" total="166" traduits="97" relire="0" modifs="4" nouveaux="65" pourcent="58.43">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="165" traduits="135" relire="0" modifs="3" nouveaux="27" pourcent="81.82">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="166" traduits="135" relire="0" modifs="3" nouveaux="28" pourcent="81.33">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="twelf" lien="http://trad.spip.net/auteur/twelf" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=es" total="165" traduits="132" relire="0" modifs="3" nouveaux="30" pourcent="80.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=es" total="166" traduits="132" relire="0" modifs="3" nouveaux="31" pourcent="79.52">
 		<traducteur nom="tin" lien="http://trad.spip.net/auteur/tin" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=fr" total="165" traduits="165" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=fr" total="166" traduits="166" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=it" total="165" traduits="114" relire="0" modifs="3" nouveaux="48" pourcent="69.09">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=it" total="166" traduits="114" relire="0" modifs="3" nouveaux="49" pourcent="68.67">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=sk" total="165" traduits="135" relire="0" modifs="3" nouveaux="27" pourcent="81.82">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=sk" total="166" traduits="135" relire="0" modifs="3" nouveaux="28" pourcent="81.33">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
