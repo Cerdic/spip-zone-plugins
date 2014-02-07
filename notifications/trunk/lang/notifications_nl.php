@@ -80,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Zie documentatie</a>',
+	'limiter_rubriques_explication' => 'Vermeld hier de identificatie van iedere rubriek waarvoor de notificaties moeten worden geactiveerd, gescheiden door een komma. bv: "11,26"',
+	'limiter_rubriques_label' => 'Uitsluitend deze rubrieken:',
 
 	// M
 	'message_a_valider' => 'Te valideren bericht: ',
