@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_config formulaire_config_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_autoriser_tous_relecteurs">
+			<label><:relecture:label_autoriser_tous_relecteurs:></label>
+				<div class="choix">
+					 <input type="radio" name="autoriser_tous_relecteurs" id="autoriser_tous_relecteurs_oui" value="oui"[(#ENV{autoriser_tous_relecteurs, non}|=={oui}|oui)checked="checked"] />
+					 <label for="autoriser_tous_relecteurs_oui"><:item_oui:></label>
+				</div>
+				<div class="choix">
+					 <input type="radio" name="autoriser_tous_relecteurs" id="autoriser_tous_relecteurs_non" value="non"[(#ENV{autoriser_tous_relecteurs, non}|=={oui}|non)checked="checked"] />
+					 <label for="autoriser_tous_relecteurs_non"><:item_non:></label>
+				</div>
+			</li>
+		</ul>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

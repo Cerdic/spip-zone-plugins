@@ -16,6 +16,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 			"id_relecture"		=> "bigint(21) NOT NULL",
 			"date_ouverture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"date_fin_commentaire" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"restreinte"		=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
 			"description"		=> "text DEFAULT '' NOT NULL",
 			"id_article"		=> "bigint(21) NOT NULL",
 			"revision_ouverture"=> "bigint(21)",

@@ -74,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_revision_ouverture_abrege' => 'Rév :',
 	'label_revision_ouverture' => 'Révision',
 	'label_statut' => 'Statut',
+	'label_autoriser_tous_relecteurs' => 'Autoriser la création de relecture ouverte à tous les rédacteurs',
 
 // R
 	'resume_table_relectures' => 'Liste des relectures',
@@ -106,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_participations_relectures' => 'Relectures auxquelles vous participez',
 	'titre_liste_relecteurs' => 'Relecteurs',
 	'titre_menu_commentaires' => 'Commentaires déjà émis',
+	'titre_page_configurer' => 'Configuration du plugin Relecture',
 	'titre_relecture_fermee' => 'Relecture fermée',
 	'titre_relecture_ouverte' => 'Relecture ouverte',
 	'titre_relecture' => 'Relecture',
