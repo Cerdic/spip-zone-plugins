@@ -30,7 +30,7 @@
 		[(#FORMULAIRE_INSTITUER_OBJET{article,#ID_ARTICLE})]
 	<//B_relecture_ouverte>
 
-	[(#REM)	<!-- Bouton voir en ligne -->]
+	[(#REM)	<!-- Bouton voir en ligne ou prévisualiser -->]
 	<BOUCLE_publie(ARTICLES){id_article}>
 		[(#VAL{redirect}
 			|generer_url_action{type=article&id=#ID_ARTICLE}

@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_commentaire_ferme' => '1 commentaire fermé',
 	'info_1_commentaire' => '1 commentaire déposé',
 	'info_1_relecture' => '1 relecture',
+	'info_article_relecture' => 'La révision @revision@ de l\'article est en cours de relecture depuis le @debut@. Les commentaires sont à déposer avant le @fin@.',
 	'info_aucun_commentaire_ferme' => 'Aucun commentaire fermé',
 	'info_aucun_commentaire' => 'Aucun commentaire déposé',
 	'info_aucun_relecture' => 'aucune relecture',

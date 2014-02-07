@@ -252,30 +252,4 @@ function autoriser_commentaire_instituer_dist($faire, $type, $id, $qui, $opt) {
 	return $autoriser;
 }
 
-
-
-/**
- * Autorisation de modifier le statut d'un commentaire
- *
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return
- */
-function autoriser_article_instituer_dist($faire, $type, $id, $qui, $opt) {
-
-	$autoriser = false;
-
-	$from = 'spip_relectures';
-	$where = array("id_article=$id", "statut=" . sql_quote('ouverte'));
-	$nb_relecture_ouverte = intval(sql_countsel($from, $where));
-
-	if ($nb_relecture_ouverte==0)
-//		$autoriser = autoriser('instituer', $type, $id, $qui, $opt);
-
-	return $autoriser;
-}
-
 ?>
