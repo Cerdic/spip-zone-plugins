@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un' => 'Der Besucher kann nur <strong>einen einzigen</strong> Empfänger auswählen.', # MODIF
 	'option_type_explication' => 'Im "versteckten" Modus wird der Inhalt dieses Felds nicht angezeigt.',
 	'option_type_label' => 'Feldtyp',
-	'option_type_password' => 'Versteckt',
+	'option_type_password' => 'Versteckt', # MODIF
 	'option_type_text' => 'Normal',
 
 	// S

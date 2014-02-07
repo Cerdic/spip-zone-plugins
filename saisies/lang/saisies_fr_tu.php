@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un' => 'Permettre à l’utilisateur de choisir <strong>un seul</strong> destinataire.', # MODIF
 	'option_type_explication' => 'En mode "masqué", le contenu du champ ne sera pas visible.',
 	'option_type_label' => 'Type du champ',
-	'option_type_password' => 'Masqué',
+	'option_type_password' => 'Masqué', # MODIF
 	'option_type_text' => 'Normal',
 
 	// S

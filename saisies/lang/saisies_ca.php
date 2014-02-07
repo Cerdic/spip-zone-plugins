@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un' => 'Permetre a l’usuari escollir <strong>un únic</strong> destinatari.', # MODIF
 	'option_type_explication' => 'En mode "amagat", el contingut del camp no serà visible.',
 	'option_type_label' => 'Tipus del camp',
-	'option_type_password' => 'Amagat',
+	'option_type_password' => 'Amagat', # MODIF
 	'option_type_text' => 'Normal',
 
 	// S

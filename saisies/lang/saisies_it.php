@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un' => 'Consenti all’utente di scegliere <strong>un solo</strong> destinatario.', # MODIF
 	'option_type_explication' => 'In modalità "mascherata", il contenuto del campo non sarà visibile.',
 	'option_type_label' => 'Tipo del campo',
-	'option_type_password' => 'Mascherato',
+	'option_type_password' => 'Mascherato', # MODIF
 	'option_type_text' => 'Normale',
 
 	// S

@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un_radio' => 'Umožniť používateľovi vybrať si <strong>jediného</strong> príjemcu (vo forme zoznamu s odrážkami).',
 	'option_type_explication' => 'V režime hesla sa obsah napísaný do poľa nahradí hviezdičkami.',
 	'option_type_label' => 'Typ poľa',
-	'option_type_password' => 'Maskované',
+	'option_type_password' => 'Maskované', # MODIF
 	'option_type_text' => 'Normálny',
 
 	// S

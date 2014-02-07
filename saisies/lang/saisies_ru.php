@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un' => 'Сделать возможным выбор только одного получателя.', # MODIF
 	'option_type_explication' => 'Если выбран "ввод пароля", то символы в поле будут превращаться в звездочки',
 	'option_type_label' => 'Тип поля',
-	'option_type_password' => 'Ввод пароля',
+	'option_type_password' => 'Ввод пароля', # MODIF
 	'option_type_text' => 'Обычный',
 
 	// S

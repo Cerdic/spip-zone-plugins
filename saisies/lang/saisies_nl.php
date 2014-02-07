@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un_radio' => 'Sta de gebruiker toe <strong>een enkele</strong> geadresseerde te kiezen (door middel van een lijst).',
 	'option_type_explication' => 'In "discrete" modus wordt de inhoud door sterretjes vervangen.',
 	'option_type_label' => 'Veldtype',
-	'option_type_password' => 'Verborgen',
+	'option_type_password' => 'Verborgen', # MODIF
 	'option_type_text' => 'Normaal',
 
 	// S

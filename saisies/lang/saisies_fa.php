@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un' => 'اجازه به كاربر براي گزينش <strong> فقط يك </strong> دريافت‌كننده ', # MODIF
 	'option_type_explication' => 'در حالت «پوشيده»، محتواي ميدان قابل رؤيت نخواهد بود. ',
 	'option_type_label' => 'نوع ميدان',
-	'option_type_password' => 'پوشيده',
+	'option_type_password' => 'پوشيده', # MODIF
 	'option_type_text' => 'عادي',
 
 	// S
