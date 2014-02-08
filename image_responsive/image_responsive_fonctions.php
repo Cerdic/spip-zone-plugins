@@ -73,6 +73,12 @@ function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 
 		$img = inserer_attribut($img, "src", $src);
 		$img = inserer_attribut($img, "class", $classe);
+		
+		if ($vertical == 0) {
+			$r = ($h/$l)*100;
+			$img = "<span style='padding-bottom:$r%' class='conteneur_image_responsive_h'>$img</span>";
+		
+		}
 	}
 	return $img;
 }

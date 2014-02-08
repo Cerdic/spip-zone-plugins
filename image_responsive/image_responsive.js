@@ -94,30 +94,6 @@ function charger_image_lazy(top) {
 }
 
 function charger_image_responsive () {
-
-	// Premier passage: mettre les images inconnues au bon format
-	$("img[src$='rien.gif']").each(function() {
-		var this_img = $(this);
-		
-		var l = this_img.attr("data-l");
-		var h = this_img.attr("data-h");
-	
-	
-		if (this_img.hasClass("image_responsive_v")) {
-			var hauteur = parseInt(this_img.height());
-			if (h > 0) {
-				var largeur = Math.round(hauteur*l/h);
-				this_img.width(largeur);
-			}
-		} else {
-			var w = parseInt(this_img.width());
-			
-			if (w > 0) {
-				var hauteur = Math.round(h*w/l);
-				this_img.height(hauteur);
-			}
-		}
-	});
 	
 	// Calculer le "top" des images lazy
 	$(".lazy").each(function() {
