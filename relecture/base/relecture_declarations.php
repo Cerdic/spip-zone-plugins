@@ -56,7 +56,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 		'url_voir'				=> 'relecture',
 		'url_edit'				=> 'relecture_edit',
 		'editable'				=> 'oui',
-		'champs_editables'		=> array('description'),
+		'champs_editables'		=> array('description','restreinte'),
 		'rechercher_champs'		=> array(),
 		'rechercher_jointures'	=> array(),
 		'icone_objet'			=> 'relecture',

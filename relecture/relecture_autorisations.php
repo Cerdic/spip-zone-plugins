@@ -22,11 +22,11 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 	$autoriser = false;
 
 	// Conditions :
-	// - l'auteur connecte possède l'autorisation de modifier l'article
+	// - l'auteur connecté possède l'autorisation de modifier l'article
 	// - l'article est dans l'état "proposé à l'évaluation"
-	// - l'article n'a pas deja une relecture d'ouverte
+	// - l'article n'a pas déjà une relecture d'ouverte
 	if ($id_article = intval($id)) {
-		$auteur_autorise = autoriser('modifier', 'article', $id_article, $qui);
+		$auteur_autorise = autoriser('modifier', 'article', $id_article, $qui, $opt);
 
 		$from = 'spip_articles';
 		$where = array("id_article=$id_article");
@@ -62,9 +62,10 @@ function autoriser_article_voirrelectures_dist($faire, $type, $id, $qui, $opt) {
 	$autoriser = false;
 
 	// Conditions :
-	// - pour l'instant tout le monde peut afficher les fiches de relecture clôturées
+	// - l'auteur connecté possède l'autorisation de voir l'article
+	//   (pour éviter de voir une relecture d'un article interdit).
 	if ($id_article = intval($id)) {
-		$autoriser = true;
+		$autoriser = autoriser('voir', 'article', $id_article, $qui, $opt);
 	}
 
 	return $autoriser;
@@ -87,19 +88,60 @@ function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	// Conditions :
 	// - l'auteur connecte possède l'autorisation de modifier l'article
-	// - la relecture n'est pas fermee
+	// - la relecture est ouverte
 	if ($id_relecture = intval($id)) {
-		$auteur_autorise = autoriser('modifier', 'article', $id_article, $qui);
-
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_relecture");
 		$infos = sql_fetsel('id_article, statut', $from, $where);
 
 		$relecture_ouverte = ($infos['statut'] == 'ouverte');
 
+		$auteur_autorise = autoriser('modifier', 'article', $infos['id_article'], $qui, $opt);
+
 		$autoriser =
 			($auteur_autorise
 			AND $relecture_ouverte);
+	}
+
+	return $autoriser;
+}
+
+
+/**
+ * Autorisation d'accéder à la pge des informations sur la relecture en cours
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_relecture_voir_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
+
+	// Conditions :
+	// soit,
+	// - la relecture est ouverte
+	// - l'auteur connecté possède l'autorisation de modifier ou de commenter la relecture
+	// ou soit,
+	// - la relecture est clôturée
+	// - et l'auteur connecté possède l'autorisation de voir les relectures de l'article
+	if ($id_relecture = intval($id)) {
+		$from = 'spip_relectures';
+		$where = array("id_relecture=$id_relecture");
+		$infos = sql_fetsel('id_article, statut', $from, $where);
+
+		$relecture_ouverte = ($infos['statut'] == 'ouverte');
+		if ($relecture_ouverte) {
+			$autoriser =
+				autoriser('modifier', 'relecture', $id_relecture, $qui, $opt)
+				OR autoriser('commenter', 'relecture', $id_relecture, $qui, $opt);
+		}
+		else {
+			$autoriser = autoriser('voirrelectures', 'article', $infos['id_article'], $qui, $opt);
+		}
 	}
 
 	return $autoriser;
@@ -139,21 +181,38 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 	$autoriser = false;
 
 	// Conditions :
-	// - l'auteur connecte est un des auteurs ou des relecteurs de l'article
-	// - la periode de relecture ne doit pas etre echue
-
+	// soit,
+	// - la relecture est restreinte (il existe une liste des relecteurs)
+	// - l'auteur connecté possède l'autorisation de modifier l'article ou est un relecteur de l'article
+	// - la période de relecture n'est pas échue
+	// ou soit,
+	// - la relecture est ouverte à tous les rédacteurs
+	// - l'auteur connecté possède l'autorisation de modifier l'article ou est un rédacteur du site
+	// - la période de relecture n'est pas échue
 	if ($id_relecture = intval($id)) {
+		include_spip('inc/config');
+		$relecture_restreinte = (lire_config('relecture/autoriser_tous_relecteurs') == 'oui');
+
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_relecture");
 		$infos = sql_fetsel('id_article, date_fin_commentaire', $from, $where);
 
-		$les_relecteurs = lister_objets_lies('auteur', 'relecture', $id, 'auteurs_liens');
-		$les_auteurs = lister_objets_lies('auteur', 'article', $infos['id_article'], 'auteurs_liens');
+		$periode_non_echue = strtotime($infos['date_fin_commentaire'])>time();
+		$autorise_modifier_article = autoriser('modifier', 'article', $infos['id_article'], $qui, $opt);
 
-		$autoriser =
-			(strtotime($infos['date_fin_commentaire'])>time()
-			AND (in_array($qui['id_auteur'], $les_auteurs)
-				OR in_array($qui['id_auteur'], $les_relecteurs)));
+		if ($relecture_restreinte) {
+			$les_relecteurs = lister_objets_lies('auteur', 'relecture', $id, 'auteurs_liens');
+			$autoriser =
+				($periode_non_echue
+				AND ($autorise_modifier_article
+					OR in_array($qui['id_auteur'], $les_relecteurs)));
+		}
+		else {
+			$autoriser =
+				($periode_non_echue
+				AND ($autorise_modifier_article
+					OR ($qui['statut'] == '1comite')));
+		}
 	}
 
 	return $autoriser;

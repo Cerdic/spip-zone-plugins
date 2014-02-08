@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ouverture_relecture' => 'Ouvert le @date@ sur la révision @revision@ de l\'article',
 	'info_periode_commentaire_fermee' => 'L\'ajout de commentaire n\'est plus possible depuis le @date@',
 	'info_periode_commentaire_ouverte' => 'Commentaires autorisés jusqu\'au @date@',
+	'info_relecture_non_restreinte' => 'Cette relecture est ouverte à tous les rédacteurs',
 
 // L
 	'label_action' => ' ',
@@ -96,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_ouverture' => 'Ouverture',
 	'titre_boite_relecture_article' => 'Relecture en cours',
 	'titre_boite_statistiques_commentaires' => 'STATISTIQUES SUR CET ELEMENT :',
-	'titre_boite_textes_article' => 'TEXTES DE L\'ARTICLE EN RÉVISION @revision@',
+	'titre_boite_textes_article' => 'Textes de l\'article à commenter',
 	'titre_commentaire' => 'Commentaire',
 	'titre_commentaire_accepte' => 'Commentaire accepté',
 	'titre_commentaire_ouvert' => 'Commentaire ouvert',

@@ -1,8 +1,4 @@
-[(#ID_RELECTURE|oui)
-	[(#AUTORISER{commenter, relecture, #ID_RELECTURE})
-		[(#URL_ECRIRE{relecture_comment,id_relecture=#ID_RELECTURE}|icone_verticale{<:relecture:bouton_participer_relecture:>, commentaire, '', right})]
-	]
-	<div class="nettoyeur"></div>
+<BOUCLE_textes_relus(RELECTURES) {id_relecture}>
 
 	[(#REM)	<!-- La liste des commentaires attaches a la relecture --> ]
 	[(#INCLURE{fond=prive/objets/liste/commentaires,
@@ -12,4 +8,4 @@
 		id_relecture,
 		ajax,
 		env})]
-]
+</BOUCLE_textes_relus>
