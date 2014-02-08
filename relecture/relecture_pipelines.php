@@ -57,8 +57,8 @@ function relecture_affiche_gauche($flux) {
 			$table = table_objet($type);
 			$id_table_objet = id_table_objet($type);
 
-			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/article-relecture',
-								array($id_table_objet => $id));
+//			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/article-relecture',
+//								array($id_table_objet => $id));
 		}
 	}
 
