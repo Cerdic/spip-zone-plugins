@@ -91,7 +91,7 @@
 				size=4,
 				maxlength=4,
 				label=<:emballe_medias:label_cfg_file_size_limit:>,
-				explication=[(#VAL{emballe_medias:explication_file_size_limit}|_T{[(#ARRAY{taille_max,[(#EVAL{@ini_get('upload_max_filesize')})]})]})],
+				explication=[(#VAL{emballe_medias:explication_file_size_limit}|_T{[(#ARRAY{taille_max,[(#EVAL{@ini_get('upload_max_filesize')}|min{#EVAL{@ini_get('post_max_size')}})]})]})],
 				defaut=100})]
 			[(#SET{explication_readonly,<span class="champ_readonly"><:emballe_medias:explication_config_readonly:></span>})]
 			#SET{file_upload_limit_readonly,#VAL{_EM_FILE_UPLOAD_LIMIT}|defined|?{'oui',''}}
@@ -113,11 +113,14 @@
 				valeur_forcee=[(#GET{file_queue_limit_readonly}|?{#EVAL{_EM_FILE_QUEUE_LIMIT},''})],
 				defaut=1})]
 
-			[(#SAISIE{textarea,texte_upload,
-				rows=15,
-				cols=50,
-				label=<:emballe_medias:label_texte_upload:>,
-				class=multilang})]
+			[(#PLUGIN{em_doc2img}|et{#PLUGIN{fulltext}|oui})
+				[(#SAISIE{oui_non,remplir_texte_article,
+					defaut=on,
+					label=<:emballe_medias:label_remplir_texte_article:>,
+					explication=<:emballe_medias:explication_remplir_texte_article:>,
+					valeur_forcee=[(#ENV{remplir_texte_article}|in_array{#LISTE{on,off}}|?{'',on})],
+					valeur_non=off})]
+			]
 
 			[(#PLUGIN{em_doc2img}|et{#PLUGIN{fulltext}|oui})
 				[(#SAISIE{oui_non,remplir_texte_article,
