@@ -1,13 +1,14 @@
 [(#REM) <!-- hierarchie specifique pour la relecture :
+	- racine du site et hiérarchie des rubriques
 	- Lien parent vers la page de l'article associe
-	- Titre de la relecture compose ou sans titre sinon
+	- Titre de la relecture compose ou relecture sinon
 --> ]
 
 <BOUCLE_relecture(RELECTURES) {id_relecture}>
 	<INCLURE{fond=prive/squelettes/inclure/relecture-fil_ariane,
 		id_article,
-		id_relecture} />
+		id_relecture, env} />
 </BOUCLE_relecture>
 	<INCLURE{fond=prive/squelettes/inclure/relecture-fil_ariane,
-		id_article=#ENV{id_article}} />
+		env} />
 <//B_relecture>
