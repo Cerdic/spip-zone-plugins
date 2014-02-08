@@ -1,0 +1,21 @@
+<paquet
+	prefix="sm"
+	categorie="multimedia"
+	version="1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/soundmanager2-32.png"
+>
+
+	<nom>Sound Manager</nom>
+ 	<licence lien="http://www.schillmania.com/projects/soundmanager2/license.txt">BSD</licence>
+	
+	<!-- Gestion des medias dans SPIP -->
+
+	<auteur>Scott Schiller (schillmania.com) http://www.schillmania.com/projects/soundmanager2/</auteur>
+	<credit>BoOz</credit>
+	<pipeline nom="insert_head" inclure="sm_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="sm_pipelines.php" />
+	<pipeline nom="pre_lien" inclure="sm_pipelines.php" />
+
+</paquet>
