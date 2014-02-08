@@ -23,6 +23,13 @@ function action_anaclic_config_dist()
 			ecrire_meta('anaclic_delai',$val);
  			ecrire_metas();
  		}
+ 		// Modifier les urls
+ 		if (isset($_POST['securise']))
+ 		{	$val = _request('url');
+ 			if (!$val) effacer_meta('anaclic_secure');
+ 			else ecrire_meta('anaclic_secure',1);
+ 			ecrire_metas();
+ 		}
 	}
 }
 

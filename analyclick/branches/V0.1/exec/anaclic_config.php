@@ -32,14 +32,14 @@ function exec_anaclic_config_dist()
 	}
 	
 	$delai = (isset($GLOBALS['meta']['anaclic_delai']) ? $GLOBALS['meta']['anaclic_delai'] : 3600 );
+	$secure = (isset($GLOBALS['meta']['anaclic_secure']) ? 'CHECKED' : '' );
 	
 	echo debut_droite('', true);
 
 	echo debut_cadre_trait_couleur ("statistiques-24.gif", true, "", _T('anaclic:configurer'));
-	echo debut_cadre_relief("",true)
-		._T('anaclic:configurer_info')
-		.fin_cadre_relief(true);
+	echo '<p>'._T('anaclic:configurer_info').'</p>';
 
+	/* Delais entre 2 telechargementq */
 	$form = "<label for='delai'>"._T('anaclic:delais')." : </label><input class='fondl' type='text' name='delai' id='delai' size='20' value='$delai'>"
 		."<input class='fondo' type='submit' name='modifier' style='margin-left:1em;' value='"._T('bouton_valider')."'>";
 	// Formulaire
@@ -51,7 +51,23 @@ function exec_anaclic_config_dist()
 	);
 
 	echo fin_cadre_relief(true);
-	
+
+	/* Url securisees */
+	echo debut_cadre_trait_couleur ("base-24.gif", true, "", _T('anaclic:url'));
+	echo '<p>'._T('anaclic:url_info').'</p>';
+
+	$form = "<input class='fondl' type='checkbox' id='url' name='url' style='vertical-align:bottom; margin-left:4em;' $secure><label for='url'> "._T('anaclic:url_check')."</label>"
+		."<input class='fondo' type='submit' name='securise' style='margin-left:1em;' value='"._T('bouton_valider')."'>";
+	// Formulaire
+	echo generer_action_auteur('anaclic_config',
+		'geoportail_config',
+		'./?exec=anaclic_config',
+		$form,
+		" method='post' name='formulaire_url'"
+	);
+
+	echo fin_cadre_relief(true);
+		
 	echo fin_gauche(), fin_page();	
 }
 

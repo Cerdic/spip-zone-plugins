@@ -17,8 +17,10 @@ function action_telecharger()
 {	// Id du document
 	$id = intval(_request('arg'));
 	
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id = $securiser_action();
+	if (isset($GLOBALS['meta']['anaclic_secure']))
+	{	$securiser_action = charger_fonction('securiser_action', 'inc');
+		$id = $securiser_action();
+	}
 
 	if (!autoriser('document', 'voir', $id)) 
 	{	http_status(404);
