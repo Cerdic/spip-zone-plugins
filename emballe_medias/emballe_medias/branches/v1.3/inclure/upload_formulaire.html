@@ -225,7 +225,7 @@
 			"id_document":"#ENV{id_document}",
 			"action_document": "#ENV{action_document}"
 		},
-		file_size_limit : "[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]MB",
+		file_size_limit : "[(#EM_LIMITE_UPLOAD|sinon{2})MB]",
 		file_types : "[(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]}|emballe_medias_liste_extensions)]",
 		file_upload_limit : "#ENV{file_upload_limite}",
 		file_queue_limit : "#ENV{file_queue_limite}",
@@ -343,7 +343,7 @@
 						}
 					});
 				},
-				maxFileSize : [(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100}|mult{1024}|mult{1024})],
+				maxFileSize : [(#EM_LIMITE_UPLOAD|sinon{2}|mult{1024}|mult{1024})],
 				autoUpload : [(#ENV{file_upload_limite}|=={1}|?{true,false})],
 				maxNumberOfFiles : #ENV{file_upload_limite,1},
 				acceptFileTypes : /(\.|\/)([(#GET{types}|array_merge{[(#GET{types}|join{','}|strtoupper|explode{','})]}|emballe_medias_liste_extensions{'|',''})])$/i,
@@ -471,7 +471,7 @@
 			<p class="explications">
 				<:emballe_medias:types_fichiers_autorises{types=#GET{types_liste}}:>
 			</p>
-			[(#SET{taille,[(#ENV{config_fichiers}|table_valeur{file_size_limit}|sinon{100})]})]
+			[(#SET{taille,[(#EM_LIMITE_UPLOAD|sinon{2})]})]
 			<p class="explications">
 				<:emballe_medias:file_size_limit{taille=#GET{taille}}:>
 			</p>

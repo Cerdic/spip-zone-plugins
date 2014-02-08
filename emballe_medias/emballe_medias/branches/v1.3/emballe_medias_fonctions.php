@@ -11,8 +11,31 @@
  * Fonctions utilisables dans les squelettes
  **/
 
- if (!defined("_ECRIRE_INC_VERSION")) return;
- 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+/**
+ * Balise #EM_LIMITE_UPLOAD affichant la taille maximale en MB d'un fichier que l'on peut mettre en ligne
+ */
+function balise_EM_LIMITE_UPLOAD_dist($p){
+	$p->code = "em_limite_upload()";
+	return $p;
+}
+
+/**
+ * Fonction PHP affichant la taille maximale en MB d'un fichier que l'on peut mettre en ligne
+ * Utilisée notamment par la balise #EM_LIMITE_UPLOAD
+ */
+function em_limite_upload(){
+	include_spip('inc/config');
+	$max_upload_php = min(intval(@ini_get('upload_max_filesize')),intval(@ini_get('post_max_size')));
+	$config_max_fichier = intval(lire_config('emballe_medias/fichiers/file_size_limit'));
+	if($config_max_fichier > 0)
+		$max_upload = min($max_upload_php,$config_max_fichier);
+	else
+		$max_upload = $max_upload_php;
+	return $max_upload;
+}
+
 /**
  * Affiche sur le formulaire d'upload une liste d'extension de la sorte :
  * *.ext, *.ext...
