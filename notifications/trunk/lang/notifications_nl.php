@@ -49,14 +49,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'form_forum_confirmer_email' => 'Klik op de knop hieronder om het e-mailadres te bevestigen: ',
 	'forum_prives_auteur' => '<strong>Auteurs</strong>: Auteurs ontvangen notificaties uit een forum dat onder hun artikel is geplaatst of van hun berichten in de privé-omgeving.',
-	'forum_prives_moderateur' => 'Geef hieronder het e-mailadres van de moderator van de forums in het privé-gedeelte (of meerdere, gescheiden door een komma).',
+	'forum_prives_moderateur' => 'Geef hieronder het e-mailadres van de moderator van de forums in het privé-gedeelte (of meerdere, gescheiden door een komma).', # MODIF
 	'forum_prives_thread' => '<strong>Draad van de discussie</strong>: deelnemers aan dezelfde discussie in het privé-forum ontvangen notificaties.',
 	'forums_prives' => 'Privé forums',
 	'forums_public' => 'Publieke forums',
 	'forums_public_a_noter' => 'Let op: bij een gemodeeerd forum ontvangen alleen de auteurs die mogen goedkeuren een noticifatie bij een nieuw bericht; anderen ontvangen pas een bericht na goedkeuring.',
 	'forums_public_article' => '<strong>Reactie op een artikel</strong>: personen die via de publieke site op een artikel reageren, ontvangen een notificatie (zinvol bij een "plat" forum).',
 	'forums_public_auteurs' => '<strong>Auteurs</strong>: auteurs ontvangen notificaties van publieke forumberichten onder hun artikel.',
-	'forums_public_moderateur' => 'Geef hieronder het e-mailadres van de moderator van de publieke forums (of meerdere, gescheiden door een komma).',
+	'forums_public_moderateur' => 'Geef hieronder het e-mailadres van de moderator van de publieke forums (of meerdere, gescheiden door een komma).', # MODIF
 	'forums_public_thread' => '<strong>Draad van een discussie</strong>: deelnemers aan dezelfde publieke discussie ontvangen notificaties.',
 
 	// I
@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'signature_petition' => 'Petitie-handtekeningen',
-	'signature_petition_moderateur' => 'Geef hier het e-mailadres van de moderator voor petities (of meerdere, gescheiden door een komma).',
+	'signature_petition_moderateur' => 'Geef hier het e-mailadres van de moderator voor petities (of meerdere, gescheiden door een komma).', # MODIF
 	'suivi_texte_acces_page' => 'Pas mijn abonnementen op discussies aan',
 	'suivis_perso' => 'Aangepaste opvolging',
 	'suivis_perso_activer_option' => 'Wanneer je deze optie inschakelt, wordt iedere bezoeker die via deze URL binnenkomt, geregistreerd in tabel <code>spip_auteurs</code>, met status <code>6visiteur</code>. Zo kan hij alle berichten bekijken die hij in het forum plaatste, zijn notificatie-opties instellen, enz.',
