@@ -110,7 +110,7 @@
 ;(function($){
 	$(function(){
 		// accordion sur les blocs de texte
-		$('.accordion').accordion({heightStyle: 'content', header: 'h5', collapsible: true, active: false});
+		$('.accordion').accordion({autoHeight: false, collapsible: true, active: false});
 		// tooltips pour les commentaires
 		$('.tooltip.relecture').qtip({
 			content: {
