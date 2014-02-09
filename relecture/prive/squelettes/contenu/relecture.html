@@ -82,6 +82,25 @@
 		<div class="nettoyeur"></div>
 	]
 
+	[(#REM) <!-- Textes de l'article à relire et à commenter --> ]
+	<div id="textes_relecture">
+		<h2><:relecture:titre_boite_textes_article:></h2>
+		<div class="accordion" id="article">
+			[(#ARTICLE_DESCR*|strlen|oui)
+				<h5><a href="#"><:relecture:label_article_descr:></a></h5>
+				<div>#ARTICLE_DESCR</div>]
+			[(#ARTICLE_CHAPO*|strlen|oui)
+				<h5><a href="#"><:relecture:label_article_chapo:></a></h5>
+				<div>#ARTICLE_CHAPO</div>]
+			[(#ARTICLE_TEXTE*|strlen|oui)
+				<h5><a href="#"><:relecture:label_article_texte:></a></h5>
+				<div>[(#ARTICLE_TEXTE|relecture_inserer_reperes{texte,#ID_RELECTURE}|propre)]</div>]
+			[(#ARTICLE_PS*|strlen|oui)
+				<h5><a href="#"><:relecture:label_article_ps:></a></h5>
+				<div>#ARTICLE_PS</div>]
+		</div>
+	</div>
+
 	[(#AUTORISER{commenter, relecture, #ID_RELECTURE})
 	<div class="nettoyeur"></div>
 		[(#URL_ECRIRE{relecture_comment,id_relecture=#ID_RELECTURE}|icone_verticale{<:relecture:bouton_participer_relecture:>, commentaire, '', right})]
