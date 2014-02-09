@@ -140,8 +140,8 @@ function autoriser_relecture_voir_dist($faire, $type, $id, $qui, $opt) {
 		$relecture_ouverte = ($infos['statut'] == 'ouverte');
 		if ($relecture_ouverte) {
 			$autoriser =
-				autoriser('modifier', 'relecture', $id_relecture, $qui, $opt)
-				OR autoriser('commenter', 'relecture', $id_relecture, $qui, $opt);
+				(autoriser('modifier', 'relecture', $id_relecture, $qui, $opt)
+				OR autoriser('commenter', 'relecture', $id_relecture, $qui, $opt));
 		}
 		else {
 			$autoriser = autoriser('voirrelectures', 'article', $infos['id_article'], $qui, $opt);
