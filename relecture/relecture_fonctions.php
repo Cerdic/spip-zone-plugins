@@ -149,16 +149,18 @@ function relecture_inserer_reperes($texte, $element='', $id_relecture=0) {
 		"c.$element AS $element",
 		'a.nom AS nom');
 	$where = array('c.element=' . sql_quote($element), "c.id_relecture=$id_relecture", 'c.id_emetteur=a.id_auteur');
-	$comments = sql_allfetsel($select, $from, $where);
+	$order_by = array('c.date_ouverture');
+	$comments = sql_allfetsel($select, $from, $where, '', $orderby);
 	
 	$offset = 0;
-	
+	$no_comment = 0;
 	foreach ($comments as $_comment) {
+		$no_comment += 1;
 		$repere = unserialize($_comment['repere']);
 		$insert = '<span class="tooltip relecture ui-icon ui-icon-comment" data-comment-id="' . $_comment['id_commentaire']
 				. '" data-comment-date="' . $_comment['date_ouverture']
 				. '" data-comment-auteur="' .$_comment['nom'] . '">'
-				. $_comment[$element] .'</span>';
+				. "[$no_comment] : " . $_comment[$element] .'</span>';
 		$texte = substr_replace($texte, $insert, $repere[1] + $offset, 0);
 		$offset += strlen($insert);
 	}
