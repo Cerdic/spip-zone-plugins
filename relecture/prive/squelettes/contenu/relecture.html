@@ -135,7 +135,8 @@
 			content: {
 				button: true,
 				title: function(event, api) {
-					return $(this).attr('data-comment-date');
+					var title = $(this).attr('data-comment-auteur') + ' ' + $(this).attr('data-comment-date');
+					return title;
 				},
 				text: function(event, api) {
 					return $(this).text();
