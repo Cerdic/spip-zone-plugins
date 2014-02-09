@@ -22,9 +22,10 @@ a,a:visited {
 	color:black;
 }
 
-a:hover {
+a:link:hover, a:visited:hover {
 	color:white;
 	background:#006aeb;
+	text-decoration: none;
 }
 
 h1 {
