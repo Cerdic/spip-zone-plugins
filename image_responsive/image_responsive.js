@@ -76,19 +76,24 @@ function calculer_top_image_responsive(this_img) {
 	this_img.attr("data-top", this_img.offset().top);
 }
 
-function charger_image_lazy(top) {
-	if (!top) var top = $(window).scrollTop();
-	var height = $(window).height();
+function charger_image_lazy(sTop) {
+	if (typeof(sTop) == 'undefined') var sTop = $(window).scrollTop();
+	var hauteur = $(window).height();
 	
-	var limite_haut = top - height;
+	var limite_haut = sTop - hauteur;
 	if (limite_haut < 0) limite_haut = 0;
 	
-	var limite_bas = top + 1.5*height;
+	var limite_bas = sTop + 1.5*hauteur;
 
+	
+
+		console.log(sTop);
 
 	$(".lazy[data-top]").each(function() {
 		this_img = $(this);
 		var h = this_img.attr("data-top");
+		
+		
 		if (h <= limite_bas && h >= limite_haut) charger_url_image_responsive(this_img);
 	});	
 }
@@ -120,4 +125,6 @@ $(document).on("ajaxComplete", function() {
 $(window).on("resize load",function() {
 	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
 });
-$(window).on("scroll touchmove", charger_image_lazy);
+$(window).on("scroll touchmove", function() {
+	charger_image_lazy();
+	});
