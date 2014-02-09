@@ -105,12 +105,37 @@
 	[(#ENV**{exec}|=={relecture_edit}|?{#INCLURE{fond=prive/squelettes/contenu/relecture_edit, redirect='', env, retourajax=oui}, #REM|sinon_interdire_acces})]
 <//B_relecture>
 
-[(#REM) <!-- Initialisation de l'accordion des textes de l'article --> ]
-<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
-//<![CDATA[
-	jQuery(document).ready(function() {
-		$(".accordion").accordion({heightStyle: "content", header: "h5", collapsible: true, active: false});
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){
+	$(function(){
+		// accordion sur les blocs de texte
+		$('.accordion').accordion({heightStyle: 'content', header: 'h5', collapsible: true, active: false});
+		// tooltips pour les commentaires
+		$('.tooltip.relecture').qtip({
+			content: {
+				button: true,
+				title: function(event, api) {
+					return $(this).attr('data-comment-date');
+				},
+				text: function(event, api) {
+					return $(this).text();
+				}
+			},
+			position: {
+				my: 'center left',
+				at: 'center right'
+			},
+			style: {
+				widget: true,
+				def: false
+			},
+			show: {
+				event: 'click'
+			},
+			hide: false
+		});
 	});
-//]]>
+})(jQuery);
+/*]]>*/
 </script>
-

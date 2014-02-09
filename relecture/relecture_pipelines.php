@@ -19,6 +19,27 @@ function relecture_jqueryui_plugins($scripts) {
 	return $scripts;
 }
 
+/**
+ * Insertion du script jquery qtip
+ *
+ * @param $flux
+ * @return mixed
+ */
+function relecture_header_prive($flux){
+	$flux .="\n".'<script type="text/javascript" src="'. find_in_path('lib/jquery.qtip/jquery.qtip.js') .'"></script>';
+	return $flux;
+}
+
+/**
+ * Insertion de la css du script jquery qtip
+ *
+ * @param $flux
+ * @return mixed
+ */
+function relecture_header_prive_css($flux){
+	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path('lib/jquery.qtip/jquery.qtip.css') .'" />';
+	return $flux;
+}
 
 /* ----------------------- AFFICHAGES ----------------------- */
 

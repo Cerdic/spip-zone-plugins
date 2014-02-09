@@ -130,4 +130,29 @@ function relecture_extraire_selection($texte, $idebut, $ifin) {
     return $selection;
 }
 
+/**
+ * Insérer les marqueurs HTML des tooltips des commentaires dans le texte de la relecture
+ *
+ * @param string $texte
+ * @param string $element
+ * @param int $id_relecture
+ * @return string
+ */
+function relecture_inserer_reperes($texte, $element = '', $id_relecture = 0) {
+
+	// récupérer les commentaires de la relectue pour cet élément
+	$comments = sql_allfetsel('*', 'spip_commentaires', array("element=" . sql_quote($element), "id_relecture=$id_relecture"));
+	
+	$offset = 0;
+	
+	foreach ($comments as $comment) {
+		$repere = unserialize($comment['repere']);
+		$insert = '<span class="tooltip relecture ui-icon ui-icon-comment" data-comment-id="'. $comment['id_commentaire'].'" data-comment-date="'. $comment['date_ouverture'].'">'.$comment['texte'].'</span>';
+		$texte = substr_replace($texte, $insert, $repere[1] + $offset, 0);
+		$offset += strlen($insert);
+	}
+	
+	return $texte;
+}
+
 ?>

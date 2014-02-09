@@ -11,7 +11,7 @@
 			<div>#ARTICLE_CHAPO</div>]
 		[(#ARTICLE_TEXTE*|strlen|oui)
 			<h5><a href="#"><:relecture:label_article_texte:></a></h5>
-			<div>#ARTICLE_TEXTE</div>]
+			<div>[(#ARTICLE_TEXTE|relecture_inserer_reperes{texte,#ID_RELECTURE}|propre)]</div>]
 		[(#ARTICLE_PS*|strlen|oui)
 			<h5><a href="#"><:relecture:label_article_ps:></a></h5>
 			<div>#ARTICLE_PS</div>]

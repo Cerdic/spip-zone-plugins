@@ -1,7 +1,7 @@
 <paquet
 	prefix="relecture"
 	categorie="edition"
-	version="0.1.8"
+	version="0.1.9"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="relecture-64.png"
@@ -28,6 +28,8 @@
 	<pipeline nom="pre_edition" inclure="relecture_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="relecture_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="relecture_pipelines.php" />
+	<pipeline nom="header_prive" inclure="relecture_pipelines.php" />
+	<pipeline nom="header_prive_css" inclure="relecture_pipelines.php" />
 
 	<necessite nom="revisions" compatibilite="[1.6.5;[" />
 </paquet>
