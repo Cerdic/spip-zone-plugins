@@ -2,7 +2,7 @@
 	<nom>Google Analytics</nom>
 	<slogan>Utiliser le service Google Analytics</slogan>
 	<auteur>Phil</auteur>
-	<version>0.4.4</version>
+	<version>0.4.5</version>
 	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
 	<description>
@@ -11,7 +11,7 @@
  			[en]Adds the Google Analytics script in public space by inserting google analytics code in the configuration.
 		</multi>
 	</description>
-	<icon>images/ga.png</icon>
+	<icon>images/ga-32.png</icon>
 	<lien>http://www.spip-contrib.net/?article2495</lien>
 	
 	<prefix>googleanalytics</prefix>
