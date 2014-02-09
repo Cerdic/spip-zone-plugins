@@ -138,16 +138,27 @@ function relecture_extraire_selection($texte, $idebut, $ifin) {
  * @param int $id_relecture
  * @return string
  */
-function relecture_inserer_reperes($texte, $element = '', $id_relecture = 0) {
+function relecture_inserer_reperes($texte, $element='', $id_relecture=0) {
 
-	// récupérer les commentaires de la relectue pour cet élément
-	$comments = sql_allfetsel('*', 'spip_commentaires', array("element=" . sql_quote($element), "id_relecture=$id_relecture"));
+	// récupérer les commentaires de la relecture pour cet élément
+	$from = array('spip_commentaires AS c', 'spip_auteurs AS a');
+	$select = array(
+		'c.id_commentaire AS id_commentaire',
+		'c.repere AS repere',
+		'c.date_ouverture AS date_ouverture',
+		"c.$element AS $element",
+		'a.nom AS nom');
+	$where = array('c.element=' . sql_quote($element), "c.id_relecture=$id_relecture", 'c.id_emetteur=a.id_auteur');
+	$comments = sql_allfetsel($select, $from, $where);
 	
 	$offset = 0;
 	
-	foreach ($comments as $comment) {
-		$repere = unserialize($comment['repere']);
-		$insert = '<span class="tooltip relecture ui-icon ui-icon-comment" data-comment-id="'. $comment['id_commentaire'].'" data-comment-date="'. $comment['date_ouverture'].'">'.$comment['texte'].'</span>';
+	foreach ($comments as $_comment) {
+		$repere = unserialize($_comment['repere']);
+		$insert = '<span class="tooltip relecture ui-icon ui-icon-comment" data-comment-id="' . $_comment['id_commentaire']
+				. '" data-comment-date="' . $_comment['date_ouverture']
+				. '" data-comment-auteur="' .$_comment['nom'] . '">'
+				. $_comment[$element] .'</span>';
 		$texte = substr_replace($texte, $insert, $repere[1] + $offset, 0);
 		$offset += strlen($insert);
 	}
