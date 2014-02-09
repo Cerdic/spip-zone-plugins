@@ -7,8 +7,10 @@
 function relecture_autoriser() {}
 
 
+/* ----------------------- AUTORISATIONS DE L'OBJET ARTICLE ----------------------- */
+
 /**
- * Autorisation d'ouverture d'une relecture
+ * Autorisation d'ouverture d'une relecture sur un article
  *
  * @param object $faire
  * @param object $type
@@ -47,8 +49,8 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 
 
 /**
- * Autorisation de consultation des relectures cloturees d'un article ou les informations
- * sur la relecture en cours
+ * Autorisation de consultation des relectures cloturees d'un article ou des informations
+ * sur une relecture ouverte
  *
  * @param object $faire
  * @param object $type
@@ -72,8 +74,10 @@ function autoriser_article_voirrelectures_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
+/* ----------------------- AUTORISATIONS DE L'OBJET RELECTURE ----------------------- */
+
 /**
- * Autorisation de modification d'une relecture
+ * Autorisation de modification des informations concernant une relecture
  *
  * @param object $faire
  * @param object $type
@@ -108,7 +112,7 @@ function autoriser_relecture_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation d'accéder à la pge des informations sur la relecture en cours
+ * Autorisation d'accéder à la page des informations sur une relecture ouverte ou cloturée
  *
  * @param object $faire
  * @param object $type
@@ -149,25 +153,7 @@ function autoriser_relecture_voir_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation de modifier le statut d'un commentaire
- *
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return
- */
-function autoriser_relecture_instituer_dist($faire, $type, $id, $qui, $opt) {
-
-	$autoriser = false;
-
-	return $autoriser;
-}
-
-
-/**
- * Autorisation de deposer des commentaires sur la relecture
+ * Autorisation de déposer des commentaires dans une relecture ouverte
  *
  * @param object $faire
  * @param object $type
@@ -190,13 +176,11 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 	// - l'auteur connecté possède l'autorisation de modifier l'article ou est un rédacteur du site
 	// - la période de relecture n'est pas échue
 	if ($id_relecture = intval($id)) {
-		include_spip('inc/config');
-		$relecture_restreinte = (lire_config('relecture/autoriser_tous_relecteurs') == 'oui');
-
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_relecture");
-		$infos = sql_fetsel('id_article, date_fin_commentaire', $from, $where);
+		$infos = sql_fetsel('id_article, date_fin_commentaire, restreinte', $from, $where);
 
+		$relecture_restreinte = ($infos['restreinte'] == 'oui');
 		$periode_non_echue = strtotime($infos['date_fin_commentaire'])>time();
 		$autorise_modifier_article = autoriser('modifier', 'article', $infos['id_article'], $qui, $opt);
 
@@ -214,6 +198,24 @@ function autoriser_relecture_commenter_dist($faire, $type, $id, $qui, $opt) {
 					OR ($qui['statut'] == '1comite')));
 		}
 	}
+
+	return $autoriser;
+}
+
+
+/**
+ * Autorisation de modifier le statut d'une relecture ouverte
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_relecture_instituer_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
 
 	return $autoriser;
 }
