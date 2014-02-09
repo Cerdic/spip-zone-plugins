@@ -27,21 +27,28 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 	// - l'auteur connecté possède l'autorisation de modifier l'article
 	// - l'article est dans l'état "proposé à l'évaluation"
 	// - l'article n'a pas déjà une relecture d'ouverte
+	// - l'article possède au moins un élément textuel non vide
 	if ($id_article = intval($id)) {
 		$auteur_autorise = autoriser('modifier', 'article', $id_article, $qui, $opt);
 
 		$from = 'spip_articles';
 		$where = array("id_article=$id_article");
-		$statut = sql_getfetsel('statut', $from, $where);
+		$infos = sql_fetsel('statut,chapo,descriptif,texte,ps', $from, $where);
 
 		$from = 'spip_relectures';
 		$where = array("id_article=$id_article", "statut=" . sql_quote('ouverte'));
 		$nb_relecture_ouverte = intval(sql_countsel($from, $where));
 
+		$taille_elements = strlen($infos['chapo'])
+						 + strlen($infos['descriptif'])
+						 + strlen($infos['texte'])
+						 + strlen($infos['ps']);
+
 		$autoriser =
 			($auteur_autorise
-			AND ($statut=='prop')
-			AND ($nb_relecture_ouverte==0));
+			AND ($infos['statut']=='prop')
+			AND ($nb_relecture_ouverte==0)
+			AND ($taille_elements > 0));
 	}
 
 	return $autoriser;
