@@ -1,6 +1,7 @@
 <traduction module="spipmotion" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spipmotion/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=en" total="186" traduits="180" relire="0" modifs="0" nouveaux="6" pourcent="96.77">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=en" total="186" traduits="186" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/spipmotion?lang_cible=es" total="186" traduits="180" relire="0" modifs="0" nouveaux="6" pourcent="96.77">
