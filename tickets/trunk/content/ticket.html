@@ -13,6 +13,11 @@
 		<div class="actions rss">
 			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]" class="i_rss"><:tickets:suivre_tickets_rss_unique:></a>
 		</div>
+		<p class="info-publi">
+			[(#SET{date,<abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>})]
+			[(#VAL{tickets:date_creation}|_T{#ARRAY{date,#GET{date}}})]
+			<BOUCLE_auteur(AUTEURS){id_auteur}{tout}><span class="auteur"><:par_auteur:> <a href="#URL_AUTEUR" class="spip_in">#NOM</a></span></BOUCLE_auteur>
+		</p>
 	</div>
 
 	[(#REM) Statut, severite, assignement]
@@ -22,8 +27,6 @@
 			#INCLURE{fond=inclure/assigne_ticket,id_ticket=#ID_TICKET,env,ajax}
 			[<dt><:tickets:champ_severite:></dt><dd class="#EDIT{severite}">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
 			[<dt><:tickets:champ_type:></dt><dd class="#EDIT{tracker}">(#TRACKER|tickets_texte_tracker)</dd>]
-			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
-			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur}{tout}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
 			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
 			[<dt><:tickets:champ_composant:></dt><dd class="#EDIT{composant}">(#COMPOSANT)</dd>]
 			[<dt><:tickets:champ_version:></dt><dd class="#EDIT{version}">(#VERSION)</dd>]

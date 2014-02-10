@@ -133,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_ticket' => 'Créer un ticket',
 
 	// D
+	'date_creation' => 'Créé le @date@',
 	'date_creation_auteur' => 'Ticket créé le <strong>@date@</strong> par <strong>@nom@</strong>',
 
 	// E
