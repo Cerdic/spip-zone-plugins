@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'afficher_tickets' => 'Afficher les tickets',
 	'assignation_attribuee_a' => 'Le ticket a été assigné à @nom@.',
+	'assignation_attribuee_a_personne' => 'Le ticket n\'a été assigné à personne.',
 	'assignation_mail_titre' => 'Changement d’assignation du ticket',
 	'assignation_modifiee' => 'Assignation mise à jour',
 	'assignation_non_modifiee' => 'Assignation non mise à jour',
@@ -179,6 +180,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mots' => 'Lier des mots-clés au ticket',
 	'label_paginer_par' => 'Paginer par :',
 	'label_vue_liste_tickets' => 'Changer la vue de la liste :',
+	'lien_editer_assigne_ticket' => 'Modifier',
+	'lien_editer_assigne_ticket_title' => 'Modifier la personne responsable du ticket',
 	'lien_editer_mots_ticket' => 'Modifier',
 	'lien_editer_mots_ticket_title' => 'Modifier les mots-clés liés au ticket',
 	'lien_editer_statut_ticket' => 'Modifier',

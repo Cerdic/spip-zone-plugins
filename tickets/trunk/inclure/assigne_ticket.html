@@ -1,0 +1,26 @@
+[(#REM)
+	Squelette d'affichage/édition de l'assignation d'un ticket
+
+	Environnement à passer obligatoirement :
+	-* id_ticket : l'id du ticket
+	
+	Optionnel (usage interne) :
+	-* editer_assigne_ticket=oui : pour éditer l'assignation du ticket
+
+]#CACHE{0}
+#SET{editer,#ENV{editer_assigne_ticket,non}|=={oui}|et{#AUTORISER{assigner, ticket, #ID_TICKET}}|?{oui,''}}
+<a class="ajax editer_en_ligne[(#GET{editer}|=={oui}|oui) on]" href="[(#SELF|parametre_url{editer_assigne_ticket,#GET{editer}|=={oui}|?{'',oui}})]" title="<:tickets:lien_editer_assigne_ticket_title:>"><:tickets:lien_editer_assigne_ticket:></a>
+
+<BOUCLE_edition(CONDITION){si #GET{editer}|=={oui}}>
+	#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET,#SELF|parametre_url{editer_assigne_ticket,''}|parametre_url{var_mode,recalcul}}
+</BOUCLE_edition>
+	<BOUCLE_ticket(TICKETS){id_ticket}{tout}>
+		<dt><:tickets:assigne_a:></dt><dd>
+		<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
+			<a href="#URL_AUTEUR" class="spip_in">#NOM</a>
+		</BOUCLE_assigne>
+			<:tickets:assignation_attribuee_a_personne:>
+		<//B_assigne>
+		</dd>
+	</BOUCLE_ticket>
+<//B_edition>
