@@ -100,6 +100,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'Supprimée',
 	'info_reponse_supprimees' => 'Supprimées',
 	'info_reponse_toutes' => 'Toutes',
+	'info_formulaire_utilise_par' => 'Formulaire utilisé par :',
+	'info_utilise_1_formulaire' => 'Formulaire utilisé :',
+	'info_utilise_nb_formulaires' => 'Formulaires utilisés :',
 
 	// M
 	'modele_label_formulaire_formidable' => 'Quel formulaire ?',

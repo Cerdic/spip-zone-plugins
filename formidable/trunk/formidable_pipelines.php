@@ -10,6 +10,100 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
+
+define('_RACCOURCI_MODELE_FORMIDABLE',
+	 '(<(formulaire\|formidable|formidable|form)' # <modele
+	.'([0-9]*)\s*' # id
+	.'([|](?:<[^<>]*>|[^>])*)?' # |arguments (y compris des tags <...>)
+	.'>)' # fin du modele >
+	.'\s*(<\/a>)?' # eventuel </a>
+       );
+
+/**
+ * Trouver les liens <form
+ * @param $texte
+ * @return array
+ */
+function formidable_trouve_liens($texte){
+	$formulaires = array();
+	if (preg_match_all(','._RACCOURCI_MODELE_FORMIDABLE.',ims', $texte, $regs, PREG_SET_ORDER)){
+		foreach ($regs as $r) {
+			$id_formulaire = 0;
+			if ($r[2]=="formidable")
+				$id_formulaire = $r[3];
+			elseif ($r[2]=="form")
+				$id_formulaire = sql_getfetsel("id_formulaire","spip_formulaires","identifiant=".sql_quote("form".$r[3]));
+			elseif ($r[2]=="formulaire|formidable"){
+				$args = ltrim($r[4],"|");
+				$args = explode("=",$args);
+				$args = $args[1];
+				$args = explode("|",$args);
+				$args = trim(reset($args));
+				if (is_numeric($args))
+					$id_formulaire = intval($args);
+				else
+					$id_formulaire = sql_getfetsel("id_formulaire","spip_formulaires","identifiant=".sql_quote($args));
+			}
+			if ($id_formulaire = intval($id_formulaire))
+				$formulaires[$id_formulaire] = $id_formulaire;
+		}
+	}
+	return $formulaires;
+}
+
+/**
+ * Associer/dissocier les formulaires a un objet qui les utilise (ou ne les utilise plus)
+ * @param $flux
+ * @return mixed
+ */
+function formidable_post_edition($flux){
+	if ($table = $flux['args']['table']
+	  AND $id_objet = intval($flux['args']['id_objet'])
+		AND $primary = id_table_objet($table)
+	  AND $row = sql_fetsel("*",$table,"$primary=".intval($id_objet))){
+
+		$objet = objet_type($table);
+		$contenu = implode(' ',$row);
+		$formulaires = formidable_trouve_liens($contenu);
+		include_spip("inc/editer_liens");
+		$deja = objet_trouver_liens(array("formulaire"=>"*"),array($objet=>$id_objet));
+		$del = array();
+		if (count($deja)){
+			foreach($deja as $l){
+				if (isset($formulaires[$l['id_formulaire']]))
+					unset($formulaires[$l['id_formulaire']]);
+				else
+					$del[] = $l['id_formulaire'];
+			}
+		}
+		if (count($formulaires)){
+			objet_associer(array("formulaire"=>$formulaires),array($objet=>$id_objet));
+		}
+		if (count($del)){
+			objet_dissocier(array("formulaire"=>$del),array($objet=>$id_objet));
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Afficher les formulaires utilises par un objet
+ * @param $flux
+ * @return mixed
+ */
+function formidable_affiche_droite($flux){
+	if ($e = trouver_objet_exec($flux['args']['exec'])
+		AND isset($e['type'])
+		AND $objet = $e['type']
+		AND isset($flux['args'][$e['id_table_objet']])
+	  AND $id = $flux['args'][$e['id_table_objet']]
+	  AND sql_countsel("spip_formulaires_liens","objet=".sql_quote($objet)." AND id_objet=".intval($id))){
+
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/formulaires_lies',array('objet'=>$objet,'id_objet'=>$id));
+	}
+	return $flux;
+}
+
 /**
  * Optimiser la base de donnée en enlevant les liens de formulaires supprimés
  * 

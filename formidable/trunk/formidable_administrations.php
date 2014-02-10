@@ -32,6 +32,7 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 			'spip_formulaires_liens')),
 		array('formidable_importer_forms'),
 		array('formidable_importer_forms_donnees'),
+		array('formidable_associer_forms'),
 	);
 
 	// Ajout du choix de ce qu'on affiche à la fin des traitements
@@ -86,6 +87,34 @@ function formidable_vider_tables($nom_meta_base_version){
 
 	// On efface la version entregistrée
 	effacer_meta($nom_meta_base_version);
+}
+
+/**
+ * Associer les <formXX> issus de f&t aux articles concernes
+ */
+function formidable_associer_forms(){
+	include_spip("inc/rechercher");
+	include_spip("inc/editer_liens");
+	$forms = sql_allfetsel("*","spip_formulaires","identifiant REGEXP ".sql_quote('^form[0-9]+$'));
+	foreach($forms as $form){
+		if (!sql_countsel("spip_formulaires_liens","id_formulaire=".intval($form['id_formulaire']))){
+			$articles = array();
+			$id = $form['identifiant'];
+			#var_dump($id);
+			$res = recherche_en_base("/<{$id}[>|]/","article");
+			#var_dump($res);
+			if (count($res) AND isset($res['article'])){
+				foreach($res['article'] as $id_article=>$details){
+					$articles[] = $id_article;
+				}
+			}
+			#var_dump($form['id_formulaire']);
+			#var_dump($articles);
+			objet_associer(array('formulaire'=>array($form['id_formulaire'])),array('article'=>$articles));
+		}
+		if (time()>_TIME_OUT)
+			return;
+	}
 }
 
 /**
