@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un_radio' => 'Allow the user to select <strong>one single</strong> addressee (in checklist format).',
 	'option_type_explication' => 'In "disguised" mode, the field contents as typed will be replaced with asterisks.',
 	'option_type_label' => 'Field type',
-	'option_type_password' => 'Disguised', # MODIF
+	'option_type_password' => 'Text, hidden during input (eg. password)',
 	'option_type_text' => 'Normal',
 
 	// S
