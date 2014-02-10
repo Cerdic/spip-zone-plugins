@@ -4,11 +4,8 @@
 	[(#AUTORISER{editer, formulaire}|oui)
 	[(#URL_ACTION_AUTEUR{dupliquer_formulaire, #ID_FORMULAIRE}|icone_horizontale{<:formidable:formulaires_dupliquer:>,formulaire-dupliquer-24})]
 	]
-#BOITE_FERMER
-
-[(#BOITE_OUVRIR{<:formidable:voir_exporter:>,'raccourcis'})]
 	<BOUCLE_exports(POUR){tableau #VAL|echanges_formulaire_lister_disponibles|table_valeur{exporter}}>
-	[(#URL_ACTION_AUTEUR{exporter_formulaire,#ID_FORMULAIRE-#CLE}|icone_horizontale{#CLE,formulaire-exporter-24})]
+	[(#URL_ACTION_AUTEUR{exporter_formulaire,#ID_FORMULAIRE-#CLE}|icone_horizontale{[<:formidable:voir_exporter:> ((#CLE))],formulaire-exporter-24})]
 	</BOUCLE_exports>
 #BOITE_FERMER
 <!--/#extra-->
