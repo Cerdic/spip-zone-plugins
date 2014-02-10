@@ -18,7 +18,7 @@
 	[(#REM) Statut, severite, assignement]
 	<div class="infos ajax">
 		<dl>
-			[<dt><:tickets:champ_statut:></dt><dd>[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
+			#INCLURE{fond=inclure/statut_ticket,id_ticket=#ID_TICKET,env,ajax}
 			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
 			<dt><:tickets:assigne_a:></dt><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
 			</BOUCLE_assigne>
@@ -32,10 +32,7 @@
 			[<dt><:tickets:champ_jalon:></dt><dd class="#EDIT{jalon}">(#JALON)</dd>]
 			[<dt><:tickets:champ_navigateur:></dt><dd class="#EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
 		</dl>
-		[(#REM) Bloc de choix du statut et de l'assignation]
-		[(#GET{autoriser_modifier}|=={oui}|oui)
-			#FORMULAIRE_STATUT_TICKET{#ID_TICKET,#SELF}
-		]
+		[(#REM) Bloc de choix de l'assignation]
 		[(#AUTORISER{assigner,ticket, #ID_TICKET}|oui)
 			#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET,#SELF}
 		]

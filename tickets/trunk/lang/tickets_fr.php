@@ -181,6 +181,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_vue_liste_tickets' => 'Changer la vue de la liste :',
 	'lien_editer_mots_ticket' => 'Modifier',
 	'lien_editer_mots_ticket_title' => 'Modifier les mots-clés liés au ticket',
+	'lien_editer_statut_ticket' => 'Modifier',
+	'lien_editer_statut_ticket_title' => 'Modifier le statut du ticket',
 	'lien_filtrer' => 'Filtrer les tickets',
 	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>',
 	'lien_reponse_ticket' => 'Réponse au ticket',
