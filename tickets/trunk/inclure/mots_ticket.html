@@ -8,10 +8,11 @@
 	-* editer_mots_ticket=on : pour éditer les liens avec les mots-clés
 
 ]#CACHE{0}
-<a class="ajax editer_en_ligne[(#ENV{editer_mots_ticket,off}|=={on}|oui) on]" href="[(#SELF|parametre_url{editer_mots_ticket,#ENV{editer_mots_ticket,off}|=={on}|?{'',on}})]" title="<:tickets:lien_editer_mots_ticket_title:>"><:tickets:lien_editer_mots_ticket:></a>
+#SET{editer,#ENV{editer_mots_ticket,off}|=={on}|et{#AUTORISER{liermots,ticket, #ID_TICKET}}|?{on,''}}
+<a class="ajax editer_en_ligne[(#GET{editer}|=={on}|oui) on]" href="[(#SELF|parametre_url{editer_mots_ticket,#GET{editer}|=={on}|?{'',on}})]" title="<:tickets:lien_editer_mots_ticket_title:>"><:tickets:lien_editer_mots_ticket:></a>
 <h3><:tickets:titre_mots:></h3>
 
-<BOUCLE_edition(CONDITION){si #ENV{editer_mots_ticket,off}|=={on}}>
+<BOUCLE_edition(CONDITION){si #GET{editer}|=={on}}>
 	#FORMULAIRE_MOTS_TICKET{#ID_TICKET,#SELF|parametre_url{editer_mots_ticket,''}|parametre_url{var_mode,recalcul}}
 </BOUCLE_edition>
 	<div class="mots_ticket[_(#ID_TICKET)] mots_liste">
