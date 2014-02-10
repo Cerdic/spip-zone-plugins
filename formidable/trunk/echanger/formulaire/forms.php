@@ -84,7 +84,36 @@ function echanger_formulaire_forms_importer_dist($fichier){
 function forms_importe_en_base($formulaire){
 	include_spip('action/editer_formulaire');
 	// On insère un nouveau formulaire
-	$id_formulaire = formulaire_inserer();
+	// cas utilise par l'installation/import f&t
+	if (isset($formulaire['id_formulaire']) AND !sql_countsel("spip_formulaires","id_formulaire=".intval($formulaire['id_formulaire']))){
+		$champs = array(
+			'id_formulaire' => $formulaire['id_formulaire'],
+			'statut' => 'prop',
+			'date_creation' => date('Y-m-d H:i:s'),
+		);
+		// Envoyer aux plugins
+		$champs = pipeline('pre_insertion',
+			array(
+				'args' => array(
+					'table' => 'spip_formulaires',
+				),
+				'data' => $champs
+			)
+		);
+		$id_formulaire = sql_insertq("spip_formulaires", $champs);
+
+		pipeline('post_insertion',
+			array(
+				'args' => array(
+					'table' => 'spip_formulaires',
+					'id_objet' => $id_formulaire
+				),
+				'data' => $champs
+			)
+		);
+	}
+	else
+		$id_formulaire = formulaire_inserer();
 
 	$formulaire['saisies'] = forms_regroupe_saisies_fieldset($formulaire['saisies']);
 

@@ -136,6 +136,8 @@ function formidable_importer_forms(){
 			// identifiant formXX puisqu'on est en installation, pas de risque de conflits
 			// et facilite la migration de modele
 			$formulaire['identifiant'] = "form".$form['id_form'];
+			// on peut faire ca aussi puisqu'on est a l'installation
+			$formulaire['id_formulaire'] = $form['id_form'];
 
 			$fields = sql_allfetsel("*","spip_forms_champs","id_form=".intval($form['id_form']),"","rang");
 			foreach($fields as $field){
