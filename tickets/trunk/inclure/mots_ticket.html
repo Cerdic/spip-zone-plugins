@@ -8,12 +8,12 @@
 	-* editer_mots_ticket=oui : pour éditer les liens avec les mots-clés
 
 ]#CACHE{0}
-#SET{editer,#ENV{editer_mots_ticket,non}|=={oui}|et{#AUTORISER{liermots,ticket, #ID_TICKET}}|?{oui,''}}
-<a class="ajax editer_en_ligne[(#GET{editer}|=={oui}|oui) on]" href="[(#SELF|parametre_url{editer_mots_ticket,#GET{editer}|=={oui}|?{'',oui}})]" title="<:tickets:lien_editer_mots_ticket_title:>"><:tickets:lien_editer_mots_ticket:></a>
+#SET{editer,#ENV{editer_mots_ticket,non}|=={oui}|et{#AUTORISER{liermots,ticket, #ID_TICKET}}|?{oui,non}}
+<a class="ajax editer_en_ligne[(#GET{editer}|=={oui}|oui) on]" href="[(#SELF|parametre_url{editer_mots_ticket,#GET{editer}|=={oui}|?{non,oui}})]" title="<:tickets:lien_editer_mots_ticket_title:>"><:tickets:lien_editer_mots_ticket:></a>
 <h3><:tickets:titre_mots:></h3>
 
 <BOUCLE_edition(CONDITION){si #GET{editer}|=={oui}}>
-	#FORMULAIRE_MOTS_TICKET{#ID_TICKET,#SELF|parametre_url{editer_mots_ticket,''}|parametre_url{var_mode,recalcul}}
+	#FORMULAIRE_MOTS_TICKET{#ID_TICKET,#SELF|parametre_url{editer_mots_ticket,non}|parametre_url{var_mode,recalcul}}
 </BOUCLE_edition>
 	<div class="mots_ticket[_(#ID_TICKET)] mots_liste">
 		#SET{total_mots,0}
