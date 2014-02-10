@@ -9,12 +9,19 @@
 
 ]#CACHE{0}
 #SET{editer,#ENV{editer_statut_ticket,non}|=={oui}|et{#AUTORISER{modifier, ticket, #ID_TICKET}}|?{oui,non}}
-<a class="ajax editer_en_ligne[(#GET{editer}|=={oui}|oui) on]" href="[(#SELF|parametre_url{editer_statut_ticket,#GET{editer}|=={oui}|?{non,oui}})]" title="<:tickets:lien_editer_statut_ticket_title:>"><:tickets:lien_editer_statut_ticket:></a>
 
-<BOUCLE_edition(CONDITION){si #GET{editer}|=={oui}}>
-	#FORMULAIRE_STATUT_TICKET{#ID_TICKET,#SELF|parametre_url{editer_statut_ticket,non}|parametre_url{var_mode,recalcul}}
-</BOUCLE_edition>
-	<BOUCLE_ticket(TICKETS){id_ticket}{tout}>
-		[<dt><:tickets:champ_statut:></dt><dd>[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
-	</BOUCLE_ticket>
-<//B_edition>
+<div class="ticket-info ticket-info-statut">
+	<div class="ticket-info-titre">
+		<a class="ajax editer_en_ligne[(#GET{editer}|=={oui}|oui) on]" href="[(#SELF|parametre_url{editer_statut_ticket,#GET{editer}|=={oui}|?{non,oui}})]" title="<:tickets:lien_editer_statut_ticket_title:>"><:tickets:lien_editer_statut_ticket:></a>
+		<h3><:tickets:titre_statut:></h3>
+	</div>
+	<div class="ticket-info-corps">
+		<BOUCLE_edition(CONDITION){si #GET{editer}|=={oui}}>
+			#FORMULAIRE_STATUT_TICKET{#ID_TICKET,#SELF|parametre_url{editer_statut_ticket,non}|parametre_url{var_mode,recalcul}}
+		</BOUCLE_edition>
+			<BOUCLE_ticket(TICKETS){id_ticket}{tout}>
+				[[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)]
+			</BOUCLE_ticket>
+		<//B_edition>
+	</div>
+</div>
