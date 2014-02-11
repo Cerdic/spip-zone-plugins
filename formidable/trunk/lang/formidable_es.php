@@ -8,7 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'admin_reponses_auteur' => 'Autorizar a l@s autores de los formularios a modificar las respuestas',
+	'admin_reponses_auteur_explication' => 'Solo l@s administradores pueden normalmente modificar las respuestas a un formulario (a la papelera, publicada, propuesta para evaluación). Esta opción permite a un·a autor·a de formulario modificar el estatus (con el riesgo de distorsionar eventuales estadísticas).',
 	'analyse_avec_reponse' => 'Respuestas no vacías',
+	'analyse_exclure_champs_explication' => 'Ingresar el nombre de los campos a excluir del análisis, separados por unos <code>|</code>. No poner los <code>@</code>.',
+	'analyse_exclure_champs_label' => 'Campos a excluir',
 	'analyse_exporter' => 'Exportar análisis',
 	'analyse_longueur_moyenne' => 'Longitud media de las palabras',
 	'analyse_nb_reponses_total' => '@nb@ personas han respondido a este formulario. ',
@@ -19,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_formulaires' => 'Formularios',
+	'bouton_revert_formulaire' => 'Volver a la última versión grabada',
 
 	// C
 	'cfg_analyse_classe_explication' => 'Puede especificar clases CSS que se añadirán en el envase de cada gráfico, tales como: <code>gray</code>,<code>blue</code>,
@@ -27,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_page_configurer_formidable' => 'Configurar Formidable',
 	'cfg_titre_parametrages_analyse' => 'Configuración en el análisis de respuestas',
 	'champs' => 'Campos',
+	'changer_statut' => 'Este formulario es:',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -43,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_descriptif_explication' => 'Una explicación del formulario para la zona privada.',
 	'editer_identifiant' => 'Nombre de usuario',
 	'editer_identifiant_explication' => 'Da un único identificador textual que permita llamar al formulario de manera más sencilla',
+	'editer_menu_auteurs' => 'Configurar l@s autor@s',
 	'editer_menu_champs' => 'Configurar los campos',
 	'editer_menu_formulaire' => 'Configurar el formulario',
 	'editer_menu_traitements' => 'Configurar los tratamientos',
@@ -57,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_base' => 'Se ha producido un error técnico mientras se salvavan los datos.',
 	'erreur_generique' => 'Hay errores en los campos a continuación. Por favor, comprueba. ',
 	'erreur_identifiant' => 'El nombre de usuario ya está siendo utilizado.',
+	'erreur_identifiant_format' => 'El identificador solo puede contener cifras, letras y el carácter "_"',
 	'erreur_importer_forms' => 'Error durante la importación de Forms&Tables',
 	'erreur_importer_wcs' => 'Error durante la importación del formulario W.C.S',
 	'erreur_importer_yaml' => 'Error durante la importación del archivo YAML',
@@ -65,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'formulaire_anonyme_explication' => 'Este formulario es anónimo; significa que que la identidad del usuario no será guardada. ',
 	'formulaires_aucun' => 'Todavía no existe ningún formulario.',
+	'formulaires_aucun_champ' => 'Todavía este formulario no contiene ningún campo.',
 	'formulaires_dupliquer' => 'Duplicar el formulario',
 	'formulaires_dupliquer_copie' => '(copia)',
 	'formulaires_introduction' => 'Crea y configura los formularios de tu sitio aquí.',
@@ -79,6 +88,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importer_formulaire' => 'Importar un formulario',
 	'importer_formulaire_fichier_label' => 'Archivo a importar',
 	'importer_formulaire_format_label' => 'Formato de archivo',
+	'info_1_formulaire' => '1 formulario',
+	'info_1_reponse' => '1 respuesta',
+	'info_aucun_formulaire' => 'Ningún formulario',
+	'info_aucune_reponse' => 'Ninguna respuesta',
+	'info_nb_formulaires' => '@nb@ formularios',
+	'info_nb_reponses' => '@nb@ respuestas',
+	'info_reponse_proposee' => 'A moderar',
+	'info_reponse_proposees' => 'A moderar',
+	'info_reponse_publiee' => 'Validada',
+	'info_reponse_publiees' => 'Validadas',
+	'info_reponse_supprimee' => 'Borrada',
+	'info_reponse_supprimees' => 'Borradas',
+	'info_reponse_toutes' => 'Todas',
 
 	// M
 	'modele_label_formulaire_formidable' => '¿Cuál formulario?',
@@ -113,6 +135,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Sin respuesta',
 
 	// T
+	'texte_statut_poubelle' => 'borrada',
+	'texte_statut_propose_evaluation' => 'propuesta',
+	'texte_statut_publie' => 'validada',
 	'titre_cadre_raccourcis' => 'Accesos directos',
 	'traitements_actives' => 'Tratamientos activados',
 	'traitements_aide_memoire' => 'Ayuda memoria: ',
@@ -125,6 +150,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Tu mensaje ha sido enviado por correo electrónico.',
 	'traiter_email_option_activer_accuse_label' => 'Acuse de recibo',
 	'traiter_email_option_activer_accuse_label_case' => 'También enviar un correo electrónico al remitente con un mensaje de confirmación.',
+	'traiter_email_option_destinataires_champ_form_explication' => 'Si uno de sus campos es una dirección de correo electrónico y si desea mandar el formulario a esta dirección, seleccione el campo.',
+	'traiter_email_option_destinataires_champ_form_label' => 'Destinatario presente en uno de los campos de los formularios',
 	'traiter_email_option_destinataires_explication' => 'Elige el campo que corresponde a los destinatarios del mensaje.',
 	'traiter_email_option_destinataires_label' => 'Destinatarios',
 	'traiter_email_option_destinataires_plus_explication' => 'Una lista de direcciones separadas por coma',
@@ -147,17 +174,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'Se ha producido un error técnico mientras se escribía en la base de datos',
 	'traiter_enregistrement_erreur_deja_repondu' => 'Usted ya ha respondido a este formulario.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'La respuesta a editar no puso ser encontrada. ',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Volver los resultados del formulario anónimos (no mantener ningún tipo de datos de los usuarios que han respondido).', # MODIF
+	'traiter_enregistrement_message_ok' => 'Gracias. Sus respuestas fueron grabadas.',
+	'traiter_enregistrement_option_anonymiser_explication' => 'Resultados anónimos (no mantener ningún tipo de datos de los usuarios que han respondido).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonimizar el formulario',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => '¿Qué variable de sistema utilizará para calcular un valor único para cada autor sin revelar su identidad ?',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable del formulario que anonimiza',
+	'traiter_enregistrement_option_auteur' => 'Utilizar l@s autor@s para los formularios',
+	'traiter_enregistrement_option_auteur_explication' => 'Atribuir un@ o vari@s autor@s a un formulario. Si esta opción esta activada, solo l@s autor@s de un formulario podrán acceder a sus datos.',
 	'traiter_enregistrement_option_choix_select_label' => 'Seleccione una variable de las disponibles',
 	'traiter_enregistrement_option_identification_explication' => '¿Si las respuestas se pueden modificar, cuál es el método para usar en primer lugar para conocer la respuesta a modificar?',
 	'traiter_enregistrement_option_identification_label' => 'Identificación',
+	'traiter_enregistrement_option_ip_label' => 'Grabar las IPs (ocultadas después de un tiempo de guardia)',
 	'traiter_enregistrement_option_moderation_label' => 'Moderación',
-	'traiter_enregistrement_option_modifiable_explication' => '¿Los visitantes pueden cambiar sus respuestas con posterioridad?', # MODIF
+	'traiter_enregistrement_option_modifiable_explication' => 'Modificable: Los visitantes pueden cambiar sus respuestas con posterioridad.',
 	'traiter_enregistrement_option_modifiable_label' => 'Respuestas modificables',
-	'traiter_enregistrement_option_multiple_explication' => '¿Una misma persona puede responder varias veces el formulario?', # MODIF
+	'traiter_enregistrement_option_multiple_explication' => 'Multiple: Una misma persona puede responder varias veces el formulario.',
 	'traiter_enregistrement_option_multiple_label' => 'Respuestas múltiples',
 	'traiter_enregistrement_titre' => 'Registra los resultados',
 
