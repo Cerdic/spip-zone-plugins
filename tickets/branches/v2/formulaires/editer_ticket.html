@@ -1,0 +1,80 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_ticket formulaire_editer_ticket-#ENV{id_ticket,nouveau} ajax">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_ticket' value='#ID_TICKET' />
+		<ul>
+			[(#SAISIE{input, titre,
+				label=<:tickets:champ_titre_ticket:>,
+				obligatoire=oui})]
+			[(#AUTORISER{epingler,ticket,#ENV{id_ticket}}|oui)
+			[(#SAISIE{oui_non,sticked,
+				label=<:tickets:champ_sticked:>,
+				explication=<:tickets:explication_champ_sticked:>})]]
+
+			[(#AUTORISER{assigner,ticket,#ENV{id_ticket}}|oui)
+			[(#SET{assignables,[(#ENV{id_assigne,0}|tickets_select_assignation{'array'})]})]
+			[(#SAISIE{selection, id_assigne,
+				label=<:tickets:champ_assigner:>,
+				defaut=[(#ENV{id_ticket}|is_numeric|?{'',#SESSION{id_auteur}})],
+				datas=#GET{assignables}})]]
+				
+			[(#SAISIE{selection, tracker,
+				label=<:tickets:champ_type:>,
+				cacher_option_intro=oui,
+				datas=[(#ENV{id_ticket}|tickets_liste_tracker)]})]
+
+			[(#SAISIE{selection, severite,
+				label=<:tickets:champ_severite:>,
+				cacher_option_intro=oui,
+				datas=[(#ENV{id_ticket}|tickets_liste_severite)]})]
+
+			#SET{saisies, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
+			<BOUCLE_saisies(DATA){source table, #GET{saisies}}>
+			[(#VALEUR|tickets_champ_optionnel_actif|oui)
+				[(#SAISIE{selection, #CLE,
+					label=[(#VAL{tickets:champ_}|concat{#CLE}|_T)],
+					cacher_option_intro=oui,
+					datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VAL{extraire_multi}|array_map{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]})]]
+			</BOUCLE_saisies>
+
+			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|oui)
+				[(#SAISIE{selection, navigateur,
+					label=<:tickets:champ_navigateur:>,
+					option_intro='-',
+					datas=[(#REM|tickets_liste_navigateur)]})]]
+
+			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|?{#SET{explication,<:tickets:explication_description_ticket_ss_nav:>},#SET{explication,<:tickets:explication_description_ticket:>}})]
+			[(#SAISIE{textarea, texte,
+				label=<:tickets:champ_description:>,
+				explication=#GET{explication},
+				obligatoire=oui,
+				class=inserer_barre_edition,
+				rows=20})]
+			[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|et{#ENV{public}}|et{#PLUGIN{medias}}|oui)
+				[(#SAISIE{input, ajouter_document,
+					type=file,
+					label=<:tickets:champ_fichier:>,
+					explication=<:tickets:explication_fichier:>})]]
+
+			[(#SAISIE{input, exemple,
+				label=<:tickets:champ_url_exemple:>,
+				explication=<:tickets:explication_url_exemple:>})]
+
+			[(#ENV{id_ticket}|intval|oui)
+			[(#SAISIE{selection, statut,
+				label=<:tickets:champ_statut:>,
+				cacher_option_intro=oui,
+				datas=[(#ENV{id_ticket}|tickets_liste_statut)]})]]
+		</ul>
+		<!--extra-->
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	</BOUCLE_editable>
+</div>

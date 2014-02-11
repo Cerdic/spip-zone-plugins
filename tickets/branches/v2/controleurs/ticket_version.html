@@ -1,0 +1,17 @@
+[(#REM)
+
+	Controleur pour le crayon 'ticket_version'
+	
+]
+#CACHE{0}
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
+[(#SET{valeurs,[(#VAL{versions}|tickets_champ_optionnel_actif|array_combine{[(#VAL{versions}|tickets_champ_optionnel_actif)]})]})]
+<B_versions>
+<select class="crayon-active" name="#ENV{name_version}"
+	style="width:#ENV{largeur}px;#ENV{style}" >
+	<BOUCLE_versions(DATA){source table, #GET{valeurs}}>>
+		<option value="#VALEUR"[(#VERSION**|=={#VALEUR}|?{selected})]>[(#VALEUR|typo)]</option>
+	</BOUCLE_versions>
+</select>
+</B_versions>
+</BOUCLE_t>

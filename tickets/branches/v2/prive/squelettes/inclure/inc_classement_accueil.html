@@ -1,0 +1,9 @@
+[(#REM) Affiche les listes:
+	- Tickets assignes a l'auteur connecte
+]
+#CACHE{0}
+<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=<:tickets:vos_tickets_assignes:>}
+	{id_assigne=#SESSION{id_auteur}}
+	{statut=ouvert}
+	{bloc=_bloc1}
+	{lien=tickets}>

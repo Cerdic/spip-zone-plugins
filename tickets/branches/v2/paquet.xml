@@ -1,0 +1,44 @@
+<paquet
+	prefix="tickets"
+	categorie="divers"
+	version="2.9.1"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="imgs/logo-bugs.png"
+	schema="1.6.0"
+	documentation="http://contrib.spip.net/?article3959"
+>
+
+	<nom>Tickets</nom>
+	<!-- Système de suivi de bugs -->
+
+	<auteur>ARNO*</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="tickets_liste_tracker" action="" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/tickets_install.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/tickets_install.php" />
+	<pipeline nom="affiche_gauche" inclure="tickets_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/tickets_autoriser.php" />
+	<pipeline nom="notifications" inclure="tickets_notifications.php" />
+	<pipeline nom="accueil_informations" inclure="tickets_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="tickets_pipelines.php" />
+	<pipeline nom="forum_objets_depuis_env" inclure="tickets_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="tickets_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="tickets_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="tickets_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="tickets_pipelines.php" />
+	<pipeline nom="notifications_destinataires" inclure="tickets_pipelines.php" />
+	<pipeline nom="revisions_chercher_label" inclure="tickets_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.3;[" />
+	<utilise nom="Zpip" compatibilite="[2.0.3;[" />
+	<utilise nom="Z" compatibilite="[1.7.21;[" />
+
+	<menu nom="tickets" titre="tickets:titre" parent="menu_publication" icone="images/ticket-16.png" />
+	<menu nom="ticket_edit" parametres="new=oui" titre="tickets:creer_ticket" parent="outils_rapides" icone="images/ticket-16-new.png" />
+	<menu nom="configurer_tickets" titre="tickets:cfg_bouton_tickets" parent="menu_configuration" icone="images/ticket-16.png" />
+</paquet>

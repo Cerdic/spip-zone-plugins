@@ -1,0 +1,151 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:tickets:cfg_form_tickets_general:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_champs_optionnels:></h3>
+				<ul>
+					#SET{readonly,''}
+					[(#VAL{_TICKETS_LISTE_VERSIONS}|defined|?{#SET{versions_readonly,readonly},#SET{versions_readonly,''}})]
+					[(#GET{versions_readonly}|?{#SET{explications_versions,<:tickets:cfg_explication_readonly:>},#SET{explications_versions,<:tickets:cfg_explication_versions:>}})]
+					[(#SAISIE{textarea, versions,
+						label=<:tickets:cfg_lbl_versions:>,
+						rows=5,
+						readonly=#GET{versions_readonly},
+						class=#GET{versions_readonly},
+						explication=#GET{explications_versions},
+						valeur_forcee=[(#GET{versions_readonly}|?{#EVAL{'_TICKETS_LISTE_VERSIONS'},''})]})]
+					[(#VAL{_TICKETS_LISTE_JALONS}|defined|?{#SET{jalons_readonly,readonly},#SET{jalons_readonly,''}})]
+					[(#GET{jalons_readonly}|?{#SET{explications_jalons,<:tickets:cfg_explication_readonly:>},#SET{explications_jalons,<:tickets:cfg_explication_jalons:>}})]
+					[(#SAISIE{textarea, jalons,
+						label=<:tickets:cfg_lbl_jalons:>,
+						rows=5,
+						readonly=#GET{jalons_readonly},
+						class=#GET{jalons_readonly},
+						explication=#GET{explications_jalons},
+						valeur_forcee=[(#GET{jalons_readonly}|?{#EVAL{'_TICKETS_LISTE_JALONS'},''})]})]
+					[(#VAL{_TICKETS_LISTE_COMPOSANTS}|defined|?{#SET{composants_readonly,readonly},#SET{composants_readonly,''}})]
+					[(#GET{composants_readonly}|?{#SET{explications_composants,<:tickets:cfg_explication_readonly:>},#SET{explications_composants,<:tickets:cfg_explication_composants:>}})]
+					[(#SAISIE{textarea, composants,
+						label=<:tickets:cfg_lbl_composants:>,
+						rows=5,
+						readonly=#GET{composants_readonly},
+						class=#GET{composants_readonly},
+						explication=#GET{explications_composants},
+						valeur_forcee=[(#GET{composants_readonly}|?{#EVAL{'_TICKETS_LISTE_COMPOSANTS'},''})]})]
+					[(#VAL{_TICKETS_LISTE_PROJETS}|defined|?{#SET{projets_readonly,readonly},#SET{projets_readonly,''}})]
+					[(#GET{projets_readonly}|?{#SET{explications_projets,<:tickets:cfg_explication_readonly:>},#SET{explications_projets,<:tickets:cfg_explication_projets:>}})]
+					[(#SAISIE{textarea, projets,
+						label=<:tickets:cfg_lbl_projets:>,
+						rows=5,
+						readonly=#GET{projets_readonly},
+						class=#GET{projets_readonly},
+						explication=#GET{explications_projets},
+						valeur_forcee=[(#GET{projets_readonly}|?{#EVAL{'_TICKETS_LISTE_PROJETS'},''})]})]
+					[(#SAISIE{case, selecteur_navigateur,
+						label=<:tickets:cfg_lbl_selecteur_navigateur:>,
+						label_case=<:tickets:cfg_lbl_case_selecteur_navigateur:>})]
+					[(#PLUGIN{medias}|oui)
+						[(#SAISIE{case, joindre_fichiers,
+							label=<:tickets:cfg_lbl_joindre_fichiers:>,
+							label_case=<:tickets:cfg_lbl_case_joindre_fichiers:>})]
+						[(#SAISIE{input, formats_documents_ticket,
+							label=<:tickets:cfg_lbl_formats_documents_ticket:>,
+							explication=<:tickets:cfg_explication_formats_documents_ticket:>})]
+					]
+				</ul>
+				</fieldset>
+			</li>
+			
+			<li class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
+				<ul>
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|oui)
+					[(#SAISIE{oui_non, desactiver_public,
+						label=<:tickets:cfg_lbl_desactiver_public:>,
+						defaut=''})]
+					]
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
+					<li>
+						<label><:tickets:cfg_lbl_desactiver_public:></label>
+						<p class="explication"><:tickets:message_zpip_inactif:></p>
+					</li>
+				]
+				[(#SAISIE{oui_non, cacher_moteurs,
+					explication=<:tickets:cfg_explication_cacher_moteurs:>,
+					label=<:tickets:cfg_lbl_cacher_moteurs:>,
+					defaut=on})]
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|oui)
+					[(#SAISIE{case, notification_publique,
+						label=<:tickets:cfg_lbl_notification_publique:>,
+						label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
+				]
+				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
+					<li>
+						<label><:tickets:cfg_lbl_notification_publique:></label>
+						<p class="explication"><:tickets:message_zpip_inactif:></p>
+					</li>
+				]
+				[(#SAISIE{radio, forums_publics,
+					label=<:tickets:cfg_lbl_forums_publics:>,
+					defaut=posteriori,
+					datas=[(#ARRAY{
+						non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
+						posteriori,<:forum:bouton_radio_publication_immediate:>,
+						priori,<:forum:bouton_radio_moderation_priori:>,
+						abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
+					})]})]
+				[(#EVAL{defined("_TICKETS_AUTORISATION_NOTIFIER")}|non)
+					[(#SAISIE{radio,notif_destinataires,
+						label=<:tickets:cfg_lbl_notif_destinataires:>,
+						defaut=assigne,
+						explication=<:tickets:explication_notif_destinataire:>,
+						datas=[(#ARRAY{
+							assigne,<:tickets:cfg_notif_assigne:>,
+							webmestre,<:tickets:cfg_notif_webmestre:>,
+							0minirezo,<:tickets:cfg_notif_admin:>,
+							1comite,<:tickets:cfg_notif_auteur:>,
+							liste,<:tickets:cfg_notif_liste:>,
+						})]}
+					)]
+
+					[(#SAISIE{auteurs,notif_auteurs,
+						label=<:tickets:cfg_notif_liste_auteurs:>,
+						multiple=oui,
+						option_statut=oui})]
+				]
+		<script type="text/javascript">
+		//<![CDATA[
+			jQuery(document).ready(function() {
+				// on cache la liste des auteurs
+				//jQuery("li.editer_notif_auteurs").not('.visible').hide();
+				function verifier_affichage_notif_auteurs(){
+					if(jQuery('input[name=notif_destinataires]:checked').val()=='liste'){
+						jQuery("li.editer_notif_auteurs").not('.visible').show();
+						}
+					else{
+						jQuery("li.editer_notif_auteurs").not('.visible').hide();
+					}
+				};
+				verifier_affichage_notif_auteurs();
+				jQuery("input[name=notif_destinataires]").change(function(){verifier_affichage_notif_auteurs()});
+			});
+		//]]>
+		</script>
+				</ul>
+				</fieldset>
+			</li>
+		</ul>
+		<input type="hidden" name="_meta_casier" value="tickets/general" />
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>
+</div>

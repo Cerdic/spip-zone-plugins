@@ -1,0 +1,92 @@
+[(#REM) Squelette du contenu de la page (exec=ticket)
+	- servant a l'affichage du ticket
+	- permettant l'acces a son edition
+	- donnant acces a la modification du statut et de l'assignation
+	- permettant la depose de messages
+]
+<BOUCLE_afficher_contenu(TICKETS){id_ticket=#ENV{id_ticket}}{statut?}{si #ENV{exec}|=={ticket}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,ticket,#ID_TICKET})
+		[(#ID_TICKET|afficher_qui_edite{ticket}|non)
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right ajax preload})]
+		]
+		[(#ID_TICKET|afficher_qui_edite{ticket}|oui)
+			[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{ticket},warning-24,'',right ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{ticket-24.png}|balise_img{article,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+<div>
+		<div style="float: #LANG_RIGHT; padding-#LANG_RIGHT: 20px;">
+			[<div class="champ">
+				<:tickets:champ_statut:> <strong>(#STATUT|tickets_texte_statut)</strong>
+			</div>]
+			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
+				<div style="color: red;"><:tickets:assigne_a:> <strong>#NOM</strong></div>
+			</BOUCLE_assigne>
+		</div>
+		<div>
+			[<div class="champ">
+				<:tickets:champ_severite:> <strong>(#SEVERITE|tickets_texte_severite)</strong>
+			</div>]
+			[<:tickets:champ_type:> <strong>(#TRACKER|tickets_texte_tracker)</strong>]
+		</div>
+
+		[(#REM) - Date de creation et auteur du ticket]
+		<div class="champ">
+			<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>
+			[(#SET{date,[(#_afficher_contenu:DATE|affdate_court)]})]
+			<:tickets:date_creation_auteur{date=#GET{date},nom=#NOM}:>
+			</BOUCLE_auteur>
+		</div>
+		<br />
+		[(#REM) - Champs optionnels]
+		[(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
+		<div>
+			[<div><:tickets:champ_projet:> <strong>(#PROJET)</strong></div>]
+			[<div><:tickets:champ_composant:> <strong>(#COMPOSANT)</strong></div>]
+			[<div><:tickets:champ_version:> <strong>(#VERSION)</strong></div>]
+			[<div><:tickets:champ_jalon:> <strong>(#JALON)</strong></div>]
+		</div>]
+		[<div class="champ">
+			<:tickets:champ_navigateur:> (#NAVIGATEUR|tickets_texte_navigateur)
+		</div>]
+</div>
+<!--affiche_milieu-->
+#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET}
+<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+<div class='label'><:info_texte:></div>
+<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
+</div>
+[<div class="champ contenu_notes">
+<div class='label'><:info_notes:></div>
+<div dir='#LANG_DIR' class='#EDIT{notes} notes'>(#NOTES)</div>
+</div>]
+[<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,ticket,#ID_TICKET})
+	[(#ID_TICKET|afficher_qui_edite{ticket}|non)
+		[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{<:tickets:icone_modifier_ticket:>,ticket,edit,right ajax preload})]
+	]
+	[(#ID_TICKET|afficher_qui_edite{ticket}|oui)
+		[(#URL_ECRIRE{ticket_edit,id_ticket=#ID_TICKET}|icone_verticale{#ID_TICKET|afficher_qui_edite{ticket},warning-24,'',right ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,ticket,id,#ID_TICKET},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+<INCLURE{fond=prive/squelettes/inclure/discuter_forum, env, objet=ticket, id_objet=#ID_TICKET, statut=prive, ajax} />
+
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation');/*\]\]>*/</script>
+]
+</BOUCLE_afficher_contenu>
+[(#ENV**{exec}|=={ticket_edit}|?{#INCLURE{fond=prive/squelettes/contenu/ticket_edit,env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_afficher_contenu>

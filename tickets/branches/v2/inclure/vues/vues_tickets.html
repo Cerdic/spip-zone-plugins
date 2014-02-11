@@ -1,0 +1,15 @@
+#SET{nb_versions,0}
+<BOUCLE_versions_presentes(TICKETS){fusion version}> </BOUCLE_versions_presentes>
+[(#TOTAL_BOUCLE|>{1}|oui)
+<div class="tickets_vues">
+	<p><:tickets:label_vue_liste_tickets:></p>
+	<div class="actions">
+		[(#ENV{vue}|=={roadmap}|?{<a href="[(#URL_PAGE{tickets})]" class="ajax"><:tickets:lien_vue_tous:></a>,<strong><:tickets:lien_vue_tous:></strong>})]
+		[(#ENV{vue}|=={roadmap}|?{<strong><:tickets:lien_vue_roadmap:></strong>,<a href="[(#SELF|parametre_url{vue,roadmap})]" class="ajax"><:tickets:lien_vue_roadmap:></a>})]
+	</div>
+</div>][(#SET{nb_versions,#TOTAL_BOUCLE})]
+</B_versions_presentes>
+[(#GET{nb_versions}|>{1}|oui)
+[(#ENV{vue}|=={roadmap}|?{[(#INCLURE{fond=inclure/vues/roadmap,env,ajax})],[(#INCLURE{fond=inclure/vues/tickets_liste,env,ajax})]})]]
+[(#GET{nb_versions}|>{1}|non)
+[(#INCLURE{fond=inclure/vues/tickets_liste,env,ajax})]]

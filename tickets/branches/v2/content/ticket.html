@@ -1,0 +1,187 @@
+<BOUCLE_ticket_contenu(TICKETS){si #PLUGIN{ZPIP}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}}|oui}{id_ticket}{tout}>
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
+<BOUCLE_si_ouvert(TICKETS){id_ticket}>
+[(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
+[(#SET{autoriser_commenter,oui})]]
+[(#SET{autoriser_modifier,non})]
+</BOUCLE_si_ouvert>
+<div class="ticket content-principal">
+	<div class="cartouche">
+		[(#AUTORISER{modifier, ticket, #ID_TICKET}|oui)#SET{autoriser_modifier,oui}
+		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>]
+		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> - #TITRE</h1>
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]" class="i_rss"><:tickets:suivre_tickets_rss_unique:></a>
+		</div>
+	</div>
+
+	[(#REM) Statut, severite, assignement]
+	<div class="infos">
+		<dl>
+			[<dt><:tickets:champ_statut:></dt><dd>[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
+			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
+			<dt><:tickets:assigne_a:></dt><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
+			</BOUCLE_assigne>
+			[<dt><:tickets:champ_severite:></dt><dd class="#EDIT{severite}">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
+			[<dt><:tickets:champ_type:></dt><dd class="#EDIT{tracker}">(#TRACKER|tickets_texte_tracker)</dd>]
+			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
+			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur}{tout}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
+			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
+			[<dt><:tickets:champ_composant:></dt><dd class="#EDIT{composant}">(#COMPOSANT)</dd>]
+			[<dt><:tickets:champ_version:></dt><dd class="#EDIT{version}">(#VERSION)</dd>]
+			[<dt><:tickets:champ_jalon:></dt><dd class="#EDIT{jalon}">(#JALON)</dd>]
+			[<dt><:tickets:champ_navigateur:></dt><dd class="#EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
+		</dl>
+		[(#REM) Bloc de choix du statut et de l'assignation]
+		[(#GET{autoriser_modifier}|=={oui}|oui)
+			#FORMULAIRE_STATUT_TICKET{#ID_TICKET,#SELF}
+		]
+		[(#AUTORISER{assigner,ticket, #ID_TICKET}|oui)
+			#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET,#SELF}
+		]
+	</div>
+
+	[(#REM) - Texte du ticket et url d'exemple]
+	[<div class="#EDIT{texte} texte">(#TEXTE|propre)</div>]
+	[<div class='exemple'><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+	
+	[(#REM) - Extensions, Extras 2 entre autre]
+	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]
+	
+	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET,env,ajax=documents}>
+	[(#AUTORISER{joindredocument,ticket,#ID_TICKET}|oui)
+	<br class="nettoyeur" />
+	<INCLURE{fond=prive/squelettes/inclure/ajouter-documents,objet=ticket,id_objet=#ENV{id_ticket},env,ajax} />]
+</div>
+
+<a href="#forum" name="forum" id="forum"></a>
+[(#PARAMETRES_FORUM|?{''})]
+#SET{config_thread,#CONFIG{comments/comments_fil,list}}
+<div class="ticket_commentaires comments comments-#GET{config_thread}" id="comments">
+	<BOUCLE_decompte(FORUMS){id_ticket} {plat}> </BOUCLE_decompte>
+	[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
+	[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:commentaire,tickets:commentaires})]</h2>]
+	</B_decompte>
+	<h2 class="h2"><:tickets:commentaire_aucun:></h2>
+	<//B_decompte>
+
+	[(#REM) Bloc 2: liste des commentaires sur le ticket]
+	<B_messages>
+	<ul class="forum comments-items">
+	<BOUCLE_messages(FORUMS?) {id_ticket}{0,1}>
+		<BOUCLE_comments-list(FORUMS) {si #PLUGIN{comments}|et{#GET{config_thread}|=={list}}|oui}{statut IN publie} {id_ticket} {plat} {par date}>
+		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE}/>
+		</li>
+		</BOUCLE_comments-list>
+		</B_comments-list>
+		<BOUCLE_comments-thread(FORUMS) {si #PLUGIN{comments}|et{#GET{config_thread}|=={thread}|ou{#GET{config_thread}|=={thread1}}}|oui}{statut IN publie} {id_ticket} {par date}>
+		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
+			[(#GET{autoriser_commenter}|=={oui}|oui)
+			[<p class="repondre"><a
+				href="(#PARAMETRES_FORUM|url_reponse_forum)"
+				onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
+				rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
+			<B_comments-fils>
+			<ul class="comments-ul comments-fils">
+				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
+				<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+					<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
+					[(#GET{autoriser_commenter}|=={oui}|oui)
+					[<p class="repondre"><a
+						href="(#PARAMETRES_FORUM|url_reponse_forum)"
+						onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
+						rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
+					<BOUCLE_comments-fils-etc(boucle_comments-fils)></BOUCLE_comments-fils-etc>
+				</li>
+				</BOUCLE_comments-fils>
+			</ul>
+			</B_comments-fils>
+		</li>
+		</BOUCLE_comments-thread>
+		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+		(#INCLURE{javascript/thread-move.js}|compacte{js})
+		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
+		</B_comments-thread>
+		<BOUCLE_comments-list-1(FORUMS){si #PLUGIN{comments}|et{#GET{config_thread}|=={thread-1}}|oui}{id_ticket} {!par date_thread}{pagination 10}>
+		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}>
+			<B_comments-fils-1>
+			<ul class="comments-ul">
+				<BOUCLE_comments-fils-1(FORUMS){id_thread}{id_forum!=#_comments-list:ID_FORUM}{par date}>
+				<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
+					<INCLURE{fond=inclure/comment,id_forum,thread=oui}>
+					[(#GET{autoriser_commenter}|=={oui}|oui)
+					[<p class="repondre"><a
+						href="(#PARAMETRES_FORUM|url_reponse_forum)"
+						onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
+						rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
+				</li>
+				</BOUCLE_comments-fils-1>
+			</ul>
+			</B_comments-fils-1>
+			[(#GET{autoriser_commenter}|=={oui}|oui)
+			[<p class="repondre"><a
+					href="(#PARAMETRES_FORUM|url_reponse_forum)"
+					onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
+					rel="noindex nofollow"><:forum:repondre_message:></a></p>]]
+		</li>
+		</BOUCLE_comments-list-1>
+		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+		(#INCLURE{javascript/thread-move.js}|compacte{js})
+		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
+		</B_comments-list-1>
+		<BOUCLE_messages_ticket(FORUMS){id_ticket}{par date}>
+		<li class="forum-fil comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
+			<div class="comment comment-message forum-message">
+				<div class="forum-chapo">
+					[(#LOGO_AUTEUR|image_reduire{64,64})]
+					<a href="#forum#ID_FORUM" title="#ID_FORUM" class="ancre permalink comment-number">#</a>
+					<strong class="#EDIT{titre} comment-titre"><a href="#forum#ID_FORUM" name="forum#ID_FORUM" id="forum#ID_FORUM">#TITRE</a></strong>
+					[(#DATE|oui)<abbr class="date"[ title="(#DATE|date_iso)"]>
+						[(#SET{date,[(#DATE|affdate_jourcourt)]})]
+						[(#SET{heure,[(#DATE|heures)][:(#DATE|minutes)]})]
+						<:zpip:date_forum{date=#GET{date},heure=#GET{heure}}:></abbr>]
+					[<span class="comment-author vcard"><span class="sep">,</span> <:par_auteur:> <strong class="fn n #EDIT{qui}">(#NOM)</strong></span>]
+				</div>
+				<div class="comment-content">
+					[<div class="#EDIT{texte} comment-texte forum-texte">(#TEXTE|lignes_longues)</div>]
+					[<div class="comment-notes">(#NOTES|safehtml|lignes_longues)</div>]
+					[<p class="#EDIT{hyperlien} comment-external-link"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+					<BOUCLE_doc(DOCUMENTS){id_forum}>
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{[(#EMBED_DOCUMENT|image_reduire{300})],[(#LOGO_DOCUMENT|#URL_DOCUMENT)]})]
+					</BOUCLE_doc>
+					[<p class="comment-reply"><a href="(#PARAMETRES_FORUM|url_reponse_forum)" rel="noindex nofollow"><:forum:repondre_message:></a></p>]
+				</div>
+			</div>
+		</li>
+	</BOUCLE_messages_ticket>
+	<//B_comments-list-1>
+	<//B_comments-thread>
+	<//B_comments-list>
+	</BOUCLE_messages>	
+	</ul>
+	</B_messages>
+
+	<BOUCLE_si_ouvert_commentaires(TICKETS){id_ticket}>
+	[(#REM) Bloc 3: formulaire d'ajout d'un commentaire sur le ticket]
+	[(#GET{autoriser_commenter}|=={oui}|oui)
+		#FORMULAIRE_FORUM{#SELF}
+	]
+	[(#GET{autoriser_commenter}|=={oui}|non)
+		[(#SESSION{id_auteur}|non)
+			[(#BOITE_OUVRIR{'',notice})]
+			<p><:tickets:tickets_sur_inscription:></p>
+			<p>#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+				<:tickets:lien_identification{url=#GET{url}}:>
+			</p>
+			[(#BOITE_FERMER)]]
+		[(#SESSION{id_auteur}|oui)
+			[(#BOITE_OUVRIR{'',notice})]
+			<p><:tickets:tickets_sur_inscription:></p>
+			<p><:tickets:tickets_sur_inscription_droits:></p>
+			[(#BOITE_FERMER)]]]
+	</BOUCLE_si_ouvert_commentaires>
+</div>
+</BOUCLE_ticket_contenu>

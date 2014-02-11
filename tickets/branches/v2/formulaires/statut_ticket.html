@@ -1,0 +1,24 @@
+<B_statuts>
+<div class="formulaire_spip formulaire_editer formulaire_editer_statut_ticket ajax">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_statut editer">
+				<label for="statut"><:tickets:champ_statut:></label>
+				<select name="statut" id="statut" class="text" onchange="jQuery('#validation_bouton_statut').slideDown();">
+					<BOUCLE_statuts(DATA){source tableau,#ENV{id_ticket}|tickets_liste_statut}>
+					<option value="#CLE"[(#ENV{statut}|=={#CLE}|oui)selected='selected']>[(#VALEUR)]</option>
+					</BOUCLE_statuts>
+				</select>
+			</li>
+		</ul>
+		<p class='boutons' id="validation_bouton_statut" style="display:none;">
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+</div>
+</B_statuts>

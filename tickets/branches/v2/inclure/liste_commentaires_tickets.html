@@ -1,0 +1,66 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	id_objet,1
+}})
+][(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
+[(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
+<B_comment_detaillee>
+[<[(#ENV{niveau_titre,h2}) ]class="#ENV{niveau_titre,h2}">(#ENV{titre})[ ((#GRAND_TOTAL))]</[(#ENV{niveau_titre,h2})]>]
+<div class="ticket"[ id="(#ANCRE_PAGINATION|extraire_attribut{id})"]>
+[(#ENV{recherche}|oui)
+<p><:tickets:champ_recherche:> #ENV{recherche}</p>]
+[<p class="pagination">(#PAGINATION)</p>]
+[(#COMPTEUR_BOUCLE|>{10}|oui)
+<p class="changer_pagination">
+	<span class='label'><:tickets:label_paginer_par:></span>
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">10</a>})]
+	<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">50</a>})]
+	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">100</a>})]]
+	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton">200</a>})]]
+</p>]
+<table class="spip">
+	<thead>
+		<tr>
+			<th></th>
+			<th[(#ENV{tri_detaillee}|=={id_objet}|oui)class="tri"]>
+				[(#ENV{tri_detaillee}|=={id_objet}|non)[(#TRI{id_objet,#,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri_detaillee}|=={id_objet}|oui)
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{<,#,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{>,#,ajax}|inserer_attribut{rel,nofollow})]]]</th>
+			<th><:tickets:champ_texte:></th>
+			<th[(#ENV{tri_detaillee}|=={date}|oui)class="tri"]>
+				[(#ENV{tri_detaillee}|!={date}|et{#ENV{tri_detaillee}|oui}|oui)[(#TRI{date,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
+				[(#ENV{tri_detaillee}|=={date}|ou{#ENV{tri_detaillee}|non}|oui)
+					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{<,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
+					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{>,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_comment_detaillee(FORUMS){recherche?}{objet=ticket}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})]">
+			<td>[(#CHEMIN{[prive/images/(#INFO_STATUT{ticket, #ID_OBJET}|tickets_icone_statut)]}|balise_img|inserer_attribut{alt,[(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)]})]</td>
+			<td><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">##ID_OBJET</a></td>
+			<td><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">#TITRE</a><br />[(#TEXTE|couper{160})]</td>
+			<td>[(#DATE|affdate)]</td>
+		</tr>
+	</BOUCLE_comment_detaillee>
+	</tbody>
+</table>
+[(#COMPTEUR_BOUCLE|>{10}|oui)
+<p class="changer_pagination">
+	<span class='label'><:tickets:label_paginer_par:></span>
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{<strong class='on'>10</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">10</a>})]
+	<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{<strong class='on'>50</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">50</a>})]
+	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{<strong class='on'>100</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">100</a>})]]
+	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{<strong class='on'>200</strong>,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''}|ancre_url{pagination[(#GET{hash_pagination})]})]" class="ajax bouton" rel="nofollow">200</a>})]]
+</p>]
+[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_comment_detaillee>

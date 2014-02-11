@@ -1,0 +1,123 @@
+[(#PLUGIN{Z}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}|oui})
+	[(#SET{affichage_autorise, on})]
+]
+<BOUCLE_si_afficher_public(CONDITION){si #GET{affichage_autorise, off}|=={on}|oui}>
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:tickets:tickets:></strong></div>
+
+<div class="ticket contenu-principal">
+	<div class="cartouche">
+		[(#AUTORISER{ecrire, ticket}|oui)
+			<a class="i_new" href="[(#URL_PAGE{editer_ticket})]"><:tickets:creer_ticket:></a>
+		]
+		<h1 class="titre"><:tickets:tickets:></h1>
+	</div>
+
+	#FORMULAIRE_TRIER_TICKETS
+	
+	[(#ENV{id_auteur}|oui)
+		[(#SET{nom,[(#INFO_NOM{auteur,[(#ENV{id_auteur})]})]})]
+	]
+	
+	[(#ENV{id_auteur}
+		|ou{#ENV{auteurs}}
+		|ou{#ENV{id_assigne}}
+		|ou{#ENV{assignes}}
+		|ou{#ENV{statut}}
+		|ou{#ENV{statuts}}
+		|ou{#ENV{date_debut}}
+		|ou{#ENV{date_fin}}
+		|ou{#ENV{tracker}}
+		|ou{#ENV{trackers}}
+		|ou{#ENV{recherche}}
+		|ou{#ENV{jalon}}
+		|ou{#ENV{composant}}
+		|ou{#ENV{version}}
+		|ou{#ENV{navigateur}}
+		|oui)
+		[(#SET{tickets_tries,oui})]	
+	]
+	
+	[(#GET{tickets_tries}|!={oui}|oui)
+		[<div class="ajax">
+			(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{ouvert,resolu,ferme},sticked=on,
+				recherche,jalon,composant,version,navigateur,projet,id_auteur,
+				titre=<:tickets:tickets_sticked:>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{sticked,on})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>[(#SET{affiche,oui})]]
+	
+		[(#SESSION{id_auteur}|oui)
+			[<div class="ajax">
+				(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{ouvert},id_assigne=#SESSION{id_auteur},
+					recherche,jalon,composant,version,navigateur,projet,id_auteur,
+					titre=<:tickets:vos_tickets_assignes:>}|trim)
+				<div class="actions rss">
+					<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_assigne,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+				</div>
+			</div>[(#SET{affiche,oui})]]
+		]
+		[(#SESSION{id_auteur}|oui)
+			[<div class="ajax">
+			(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",tri=statut,statuts=#LISTE{ouvert},id_assigne_non=#SESSION{id_auteur},id_auteur=#SESSION{id_auteur},
+				recherche,jalon,composant,version,navigateur,projet,
+				titre=<:tickets:vos_tickets_en_cours:>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+			</div>[(#SET{affiche,oui})]]
+		]
+
+		[(#GET{affiche}|=={oui}|?{
+			[(#SET{titre,<:tickets:autres_tickets_ouverts:>})],
+			[(#SET{titre,<:tickets:tous_tickets_ouverts:>})]})]
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{ouvert},id_auteur_non=#SESSION{id_auteur},id_assigne_non=#SESSION{id_auteur},
+			titre=#GET{titre}}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_auteur_non,#SESSION{id_auteur}}|parametre_url{id_assigne_non,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>]
+		
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#LISTE{resolu,ferme},
+			titre=<:tickets:tickets_traites:>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#LISTE{resolu,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>]
+
+		[(#SESSION{id_auteur}|oui)
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",id_auteur=#SESSION{id_auteur},
+			titre=<:tickets:tous_vos_tickets:>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#LISTE{resolu,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>]
+		]
+		
+		[<div class="ajax">
+			(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,tracker="",
+				recherche,jalon,composant,version,navigateur,projet,
+				titre=<:tickets:tickets_derniers_commentaires:>}|trim)
+			</div>
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets_comments}|parametre_url{lang,#ENV{lang}})]"><:tickets:suivre_tickets_comments_rss:></a>
+		</div>]
+	]
+
+	[(#GET{tickets_tries}|=={oui}|oui)
+		[(#SET{statut,[(#ENV{statut}|is_array|?{#ENV{statut},#LISTE{ouvert,resolu,ferme}})]})]
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,afficher_filtres=oui,url_defiltrer=oui,tri=statut,statut=#GET{statut},titre=<:tickets:tickets_tries:>}|sinon{<h3><:tickets:tickets_tries:> (0)</h3><p><:tickets:message_aucun_ticket_recherche:></p>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statuts,#ENV{statuts}}|parametre_url{auteurs,#ENV{auteurs}}|parametre_url{assignes,#ENV{assignes}}|parametre_url{trackers,#ENV{trackers}}|parametre_url{composant,#ENV{composant}}|parametre_url{projet,#ENV{projet}}|parametre_url{severite,#ENV{severite}}|parametre_url{version,#ENV{version}}|parametre_url{jalon,#ENV{jalon}}|parametre_url{navigateur,#ENV{navigateur}}|parametre_url{date_debut,#ENV{date_debut}}|parametre_url{date_fin,#ENV{date_fin}})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>]
+	]
+</div>
+</BOUCLE_si_afficher_public>
+	<p class="notice"><:tickets:message_page_publique_indisponible:></p>
+<//B_si_afficher_public>
+#FILTRE{trim}

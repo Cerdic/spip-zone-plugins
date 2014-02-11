@@ -1,0 +1,18 @@
+[(#REM)
+
+	Controleur pour le crayon 'ticket_navigateur'
+	
+]
+#CACHE{0}
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
+[(#SET{valeurs,[(#REM|tickets_liste_navigateur)]})]
+<B_versions>
+<select class="crayon-active" name="#ENV{name_navigateur}"
+	style="width:#ENV{largeur}px;#ENV{style}">
+	<option value="">-</option>
+	<BOUCLE_versions(DATA){source table, #GET{valeurs}}>>
+		<option value="#CLE"[(#NAVIGATEUR|=={#CLE}|?{selected})]>[(#VALEUR)]</option>
+	</BOUCLE_versions>
+</select>
+</B_versions>
+</BOUCLE_t>

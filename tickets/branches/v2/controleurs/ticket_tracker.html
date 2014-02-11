@@ -1,0 +1,17 @@
+[(#REM)
+
+	Controleur pour le crayon 'ticket_severite'
+	
+]
+#CACHE{0}
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
+[(#SET{valeurs,[(#ID_TICKET|tickets_liste_tracker)]})]
+<B_tracker>
+<select class="crayon-active" name="#ENV{name_tracker}"
+	style="width:#ENV{largeur}px;#ENV{style}" >
+	<BOUCLE_tracker(DATA){source table, #GET{valeurs}}>>
+		<option value="#CLE"[(#TRACKER|=={#CLE}|oui)selected="selected"]>[(#VALEUR)]</option>
+	</BOUCLE_tracker>
+</select>
+</B_tracker>
+</BOUCLE_t>

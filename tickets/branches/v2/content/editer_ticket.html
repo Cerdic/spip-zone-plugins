@@ -1,0 +1,36 @@
+<BOUCLE_si_afficher_public(CONDITION){si #PLUGIN{ZPIP}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}}|oui}>
+[(#SET{texte,[(#ENV{id_ticket}|intval|?{<:tickets:icone_modifier_ticket:>, <:tickets:nouveau_ticket:>})]})]
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a><span class="sep"> &gt; </span><strong class="on">#GET{texte}</strong></div>
+
+<div class="ticket contenu-principal">
+	<div class="cartouche">
+		[(#ENV{id_ticket}|oui)
+			<a class="i_edit" href="[(#URL_PAGE{ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_retour_ticket:></a>]
+		<h1 class="titre">#GET{texte}</h1>
+	</div>
+	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}})
+		#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#ENV{id_ticket}|?{#URL_TICKET{#ENV{id_ticket}},#URL_PAGE{ticket}}}
+	]
+	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}}|non)
+		[(#SESSION{id_auteur}|non)
+			<p><:tickets:tickets_sur_inscription:>
+				[(#CONFIG{accepter_inscriptions}|=={oui}|oui) <a href="#URL_PAGE{inscription}"><:tickets:sinscrire:></a> ]
+			</p>
+	
+			<h2 class='titre'><:tickets:titre_identification:></h2>
+			[(#FORMULAIRE_LOGIN{#SELF})]
+		]
+		[(#SESSION{id_auteur}|oui)
+			<p>
+				<:tickets:tickets_sur_inscription:>
+			</p>
+			<p>
+				<:tickets:tickets_sur_inscription_droits:>
+			</p>
+		]
+	]
+</div>
+</BOUCLE_si_afficher_public>
+	<p class="notice"><:tickets:message_page_publique_indisponible:></p>
+<//B_si_afficher_public>
+#FILTRE{trim}

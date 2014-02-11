@@ -1,0 +1,17 @@
+[(#REM)
+
+	Controleur pour le crayon 'ticket_projet'
+	
+]
+#CACHE{0}
+<BOUCLE_t(TICKETS){id_ticket}{statut==.*}>
+[(#SET{valeurs,[(#VAL{projets}|tickets_champ_optionnel_actif|array_combine{[(#VAL{projets}|tickets_champ_optionnel_actif)]})]})]
+<B_projets>
+<select class="crayon-active" name="#ENV{name_projet}"
+	style="width:#ENV{largeur}px;#ENV{style}" >
+	<BOUCLE_projets(DATA){source table, #GET{valeurs}}>>
+		<option value="#VALEUR"[(#PROJET|=={#VALEUR}|?{selected})]>[(#VALEUR)]</option>
+	</BOUCLE_projets>
+</select>
+</B_projets>
+</BOUCLE_t>

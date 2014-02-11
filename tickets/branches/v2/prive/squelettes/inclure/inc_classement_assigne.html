@@ -1,0 +1,15 @@
+[(#REM) Affiche les listes:
+	- Tickets ouverts classes par assignation
+]
+<BOUCLE_assigne(TICKETS){statut = ouvert}{!par id_assigne}{fusion id_assigne}>
+	[(#SET{no_bloc, [_bloc(#ID_ASSIGNE)]})]
+	<BOUCLE_auteur(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
+		[(#SET{assigne_a, [<:tickets:assignes_a:> (#NOM)]})]
+		<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee}{ajax}{env}{titre=#GET{assigne_a}}{id_assigne=#ID_ASSIGNE}{statut=ouvert}{bloc=#GET{no_bloc}}>
+	</BOUCLE_auteur>
+		[(#SET{assigne_a, <:tickets:non_assignes:>})]
+		[(#ID_ASSIGNE|=={0}|oui)
+			<INCLURE{fond=prive/squelettes/inclure/inc_liste_detaillee_non_assigne}{ajax}{env}{titre=#GET{assigne_a}}{statut=ouvert}{bloc=#GET{no_bloc}}>
+		]
+	<//B_auteur>
+</BOUCLE_assigne>
