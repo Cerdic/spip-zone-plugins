@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'Licencia Arte Libre',
+	'description_autre' => 'Otra licencia',
 	'description_cc0' => 'Creative Commons - Contenido libre de todo derecho',
 	'description_cc_by' => 'Creative Commons - Reconocimiento',
 	'description_cc_by_nc' => 'Creative Commons - Reconocimiento-NoComercial',
@@ -50,10 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_licence' => '¿Mostrar el nombre de la licencia?',
 
 	// S
-	'sans_licence' => 'Sin licencia', # MODIF
+	'sans_licence' => 'Ninguna licencia específica (derechos por omisión)',
 
 	// T
 	'titre_art_libre' => 'LAL',
+	'titre_autre' => 'otra',
 	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
