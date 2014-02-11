@@ -132,7 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un_radio' => 'Permitir al usuario elegir <strong>sólo una</strong> persona destinataria (en forma de lista de viñetas).',
 	'option_type_explication' => 'En modo "escondido", el contenido del campo no será visible.',
 	'option_type_label' => 'Tipo del campo',
-	'option_type_password' => 'Escondido', # MODIF
+	'option_type_password' => 'Texto escondido mientras tecleando (por ej. contraseña)',
 	'option_type_text' => 'Normal',
 
 	// S
