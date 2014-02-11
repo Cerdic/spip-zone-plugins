@@ -3,8 +3,9 @@
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=es" total="84" traduits="70" relire="0" modifs="0" nouveaux="14" pourcent="83.33">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=es" total="84" traduits="84" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/plugonet?lang_cible=fr" total="84" traduits="84" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>

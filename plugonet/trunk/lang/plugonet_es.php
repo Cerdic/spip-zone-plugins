@@ -48,6 +48,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'index_aide_paqxmlproc' => 'Etiqueta <code>procure</code>',
 	'index_aide_paqxmlspip' => 'Etiqueta <code>spip</code>',
 	'index_aide_paqxmltrad' => 'Etiqueta <code>traduire</code>',
+	'info_choisir_paquetxml_valider' => 'Elija los archivos paquet.xml que desea validar. También puede hacer clic sobre el nombre de un paquet.xml para lanzar automáticamente su validación formal.',
+	'info_choisir_pluginxml_generer' => 'Elija los archivos que desea convertir entre los presentes en la carpeta <code>plugins/</code> de este sitio. También puede hacer clic sobre el nombre de un plugin.xml para lanzar directamente la generación forzada de su paquet.xml en la carpeta temporal del sitio.',
+	'info_choisir_pluginxml_verifier' => 'Elija los archivos plugin.xml que desea verificar. También puede hacer clic sobre el nombre de un plugin.xml para lanzar directamente su verificación.',
+	'info_forcer_paquetxml' => 'Por omisión, el archivo paquet.xml solo esta escrito si su contenido esta validado según la nueva DTD. Sin embargo, puede forzar su escritura sin importar el resultado de la validación.',
+	'info_generer' => 'Esta opción le permite generar el nuevo archivo paquet.xml de descripción de un plugin a partir de un archivo plugin.xml existente.<br />A parte del archivo paquet.xml, los archivos de idioma de los items eslogan y descripción del plugin, además de un archivo de comandos Unix, son creados en carpetas propias a cada plugin.',
+	'info_paquet_existant' => 'paquet.xml existente',
+	'info_simuler_paquetxml' => 'Por omisión, los archivos de resultado son creados en la carpeta de instalación de cada plugin. Sin embargo, puede elegir de crearlos en una carpeta temporal del sitio.',
+	'info_valider' => 'Esta opción le permite validar formalmente el archivo paquet.xml de descripción de un plugin según su DTD. Este formulario propone la lista de archivos paquet.xml presentes en todas las carpetas de este sitio.',
+	'info_verifier' => 'Esta opción le permite verificar el archivo plugin.xml de descripción de un plugin de manera a anticipar problemas en la generación del archivo paquet.xml. Este formulario propone la lista de archivos plugin.xml presentes en todas las carpetas de este sitio.',
 
 	// L
 	'label_choisir_xml' => '@dtd@.xml disponibles',
@@ -68,6 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_validation_paquetxml_pluriel' => '@nb@ paquet.xml no conformes a la DTD',
 	'message_nok_validation_pluginxml' => '@nb@ plugin.xml no conforme a la DTD',
 	'message_nok_validation_pluginxml_pluriel' => '@nb@ plugin.xml non conformes a la DTD',
+	'message_notice_validation_pluginxml' => 'dentro de los cuales @nb@ vienen de un plugin.xml incorrecto',
+	'message_notice_validation_pluginxml_pluriel' => 'dentro de los cuales @nb@ vienen de plugin.xml incorrectos',
 	'message_ok_generation_paquetxml' => '@nb@ paquet.xml correctamente generado',
 	'message_ok_generation_paquetxml_pluriel' => '@nb@ paquet.xml correctamente generados',
 	'message_ok_validation_paquetxml' => '@nb@ paquet.xml correcto',
@@ -84,6 +95,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_generation_paquetxml' => '@nb@ plugin.xml tratado (@duree@s): @details@.<br />Consulte por favor los resultados detallados a continuación.',
 	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml tratados (@duree@s): @details@.<br />Consulte por favor los resultados detallados a continuación.',
 	'resume_validation_paquetxml' => '@nb@ paquet.xml validado (@duree@s): @details@.<br />Consulte por favor los resultados detallados a continuación.',
+	'resume_validation_paquetxml_pluriel' => '@nb@ paquet.xml validados (@duree@s): @details@.<br />A continuación puede consultar el detalle de los resultados.',
+	'resume_verification_pluginxml' => '@nb@ plugin.xml verificado (@duree@s): @details@.<br />A continuación puede consultar el detalle de los resultados.',
+	'resume_verification_pluginxml_pluriel' => '@nb@ plugin.xml verificados (@duree@s): @details@.<br />A continuación puede consultar el detalle de los resultados.',
 
 	// T
 	'titre_boite_aide_paquetxml' => 'Ayuda acerca de paquet.xml',
