@@ -6,6 +6,9 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=en" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=es" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=fa" total="49" traduits="40" relire="0" modifs="3" nouveaux="6" pourcent="81.63">
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/csvimport?lang_cible=fr" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
