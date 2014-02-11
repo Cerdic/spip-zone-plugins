@@ -49,5 +49,7 @@
 	gérés par le lecteur multimedia
 	
 ]
-[(#INCLURE{fond=prive/modeles/doc,env})]
+[(#SPIP_VERSION|>={3.0}|oui) [(#INCLURE{fond=plugins-dist/medias/modeles/doc,env})] ]
+[(#SPIP_VERSION|<{3.0}|oui) [(#INCLURE{fond=prive/modeles/doc,env})] ]
 <//B_doc>
+

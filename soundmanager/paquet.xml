@@ -18,5 +18,5 @@
 	<pipeline nom="insert_head" inclure="sm_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="sm_pipelines.php" />
 	<pipeline nom="pre_lien" inclure="sm_pipelines.php" />
-
+	<utilise nom="medias" />
 </paquet>
