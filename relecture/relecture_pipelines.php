@@ -213,6 +213,11 @@ function relecture_pre_insertion($flux) {
 		if ($id_relecture = intval(_request('id_relecture'))) {
 			include_spip('inc/session');
 
+			// - détermination du numéro de commentaire local à la relecture
+			$from = 'spip_commentaires';
+			$where = array("id_relecture=$id_relecture");
+			$flux['data']['numero'] = intval(sql_countsel($from, $where)) + 1;
+
 			// - ajout des informations de base sur le commentaire
 			$flux['data']['id_relecture'] = $id_relecture;
 			$flux['data']['element'] = _request('element');

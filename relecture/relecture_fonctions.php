@@ -109,6 +109,21 @@ function generer_titre_relecture($id_objet, $champs) {
 
 
 /**
+ * Construire le titre d'un commentaire a partir d'un appel a la balise #INFO_TITRE
+ *
+ * @param int $id
+ * @param array $champs
+ * @return string
+ */
+function generer_titre_commentaire($id_objet, $champs) {
+
+	$numero = sql_getfetsel('numero', 'spip_commentaires', "id_commentaire=$id_objet");
+	$titre = _T('relecture:titre_commentaire') . " [$numero]";
+    return $titre;
+}
+
+
+/**
  * Extraire du texte fourni la partie correspondante determinee par les offsets de debut et fin
  * Si ceux sont nuls ou egaux la fonction renvoie une portion de texte autour du point d'insertion.
  *
@@ -144,6 +159,7 @@ function relecture_inserer_reperes($texte, $element='', $id_relecture=0) {
 	$from = array('spip_commentaires AS c', 'spip_auteurs AS a');
 	$select = array(
 		'c.id_commentaire AS id_commentaire',
+		'c.numero AS numero',
 		'c.repere AS repere',
 		'c.date_ouverture AS date_ouverture',
 		"c.$element AS $element",
@@ -153,14 +169,12 @@ function relecture_inserer_reperes($texte, $element='', $id_relecture=0) {
 	$comments = sql_allfetsel($select, $from, $where, '', $orderby);
 	
 	$offset = 0;
-	$no_comment = 0;
 	foreach ($comments as $_comment) {
-		$no_comment += 1;
 		$repere = unserialize($_comment['repere']);
 		$insert = '<span class="tooltip relecture ui-icon ui-icon-comment" data-comment-id="' . $_comment['id_commentaire']
 				. '" data-comment-date="' . affdate($_comment['date_ouverture'], 'd/m/y h:i')
 				. '" data-comment-auteur="' .$_comment['nom'] . '">'
-				. "[$no_comment] : " . $_comment[$element] .'</span>';
+				. '[' . $_comment['numero'] . '] : ' . $_comment[$element] .'</span>';
 		$texte = substr_replace($texte, $insert, $repere[1] + $offset, 0);
 		$offset += strlen($insert);
 	}

@@ -15,7 +15,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	date_modif, -1,
 	element, 1,
-	id_commentaire, 1,
+	numero, 1,
 	points, -1
 }})]
 <B_liste_commentaires>
@@ -38,7 +38,7 @@
 				<th class="date-statut"><:relecture:label_date_statut:></th>
 				<th><:relecture:label_action:></th>
 			]
-				<th class="id" scope="col">[(#TRI{id_commentaire, <:info_numero_abbreviation:>, ajax})]</th>
+				<th class="id" scope="col">[(#TRI{numero, <:info_numero_abbreviation:>, ajax})]</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -84,7 +84,7 @@
 				]
 				</td>
 			]
-				<td class="id">#ID_COMMENTAIRE</td>
+				<td class="id">\[#NUMERO\]</td>
 			</tr>
 	</BOUCLE_liste_commentaires>
 		</tbody>

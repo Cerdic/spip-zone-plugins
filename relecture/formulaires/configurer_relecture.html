@@ -5,7 +5,7 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			<li class="editer editer_autoriser_tous_relecteurs">
+			<li class="editer long_label editer_autoriser_tous_relecteurs">
 			<label><:relecture:label_autoriser_tous_relecteurs:></label>
 				<div class="choix">
 					 <input type="radio" name="autoriser_tous_relecteurs" id="autoriser_tous_relecteurs_oui" value="oui"[(#ENV{autoriser_tous_relecteurs, non}|=={oui}|oui)checked="checked"] />

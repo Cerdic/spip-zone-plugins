@@ -84,6 +84,7 @@ function relecture_declarer_tables_objets_sql($tables) {
 			"id_relecture"		=> "bigint(21) NOT NULL",
 			"id_emetteur"		=> "bigint(21) NOT NULL",
 			"id_organisateur"	=> "bigint(21)",
+			"numero"			=> "integer NOT NULL",
 			"element"			=> "varchar(10) DEFAULT '' NOT NULL",
 			"repere"			=> "varchar(255) DEFAULT '' NOT NULL",
 			"texte"				=> "text DEFAULT '' NOT NULL",
