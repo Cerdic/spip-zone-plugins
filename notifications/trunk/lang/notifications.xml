@@ -4,8 +4,9 @@
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/notifications?lang_cible=es" total="82" traduits="77" relire="0" modifs="3" nouveaux="2" pourcent="93.90">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/notifications?lang_cible=es" total="82" traduits="82" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/notifications?lang_cible=fa" total="82" traduits="55" relire="0" modifs="4" nouveaux="23" pourcent="67.07">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
