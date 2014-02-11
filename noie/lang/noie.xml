@@ -14,7 +14,8 @@
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/noie?lang_cible=es" total="5" traduits="4" relire="0" modifs="1" nouveaux="0" pourcent="80.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/noie?lang_cible=es" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="eu" url="http://trad.spip.net/tradlang_module/noie?lang_cible=eu" total="5" traduits="4" relire="0" modifs="1" nouveaux="0" pourcent="80.00">
 		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
