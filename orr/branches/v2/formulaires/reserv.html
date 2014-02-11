@@ -28,7 +28,7 @@
                 [<span class='erreur_message'>(#GET{erreurs})</span>]
 				<select id="select_multiple" size="4" multiple="multiple" class="champ_liste_ressources" name="liste_ressources[]"
 					size="[(#GET{tableau_ressource}|count|<{10}|?{[(#GET{tableau_ressource}|count)],10})]">
-					<INCLURE{fond=inc/formulaire_selection_ressources, env, id_reservation=#ENV{id_reservation}} />
+					<INCLURE{fond=formulaire_selection_ressources, env, id_reservation=#ENV{id_reservation}} />
 				</select>				
 
             </li>
@@ -72,7 +72,7 @@
 						sep = ",";
 					}
 				});
-				jQuery("#select_multiple").load("[(#URL_PAGE{inc/formulaire_selection_ressources})]",
+				jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
 					{ "date_debut_ajax": date_debut,
 					"date_fin_ajax": date_fin,
 					"selected":selected
@@ -109,7 +109,7 @@
 						sep = ",";
 					}
 				});
-				jQuery("#select_multiple").load("[(#URL_PAGE{inc/formulaire_selection_ressources})]",
+				jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
 					{ "date_debut_ajax": date_debut,
 					"date_fin_ajax": date_fin,
 					"selected":selected
