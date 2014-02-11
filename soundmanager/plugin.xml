@@ -1,8 +1,8 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Sound Manager
-			[en]Sound Manager
+			[fr]Soundmanager
+			[en]Soundmanager
 		</multi>
 	</nom>
 	<auteur>BoOz</auteur>

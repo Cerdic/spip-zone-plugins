@@ -4,10 +4,11 @@
 	version="1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="images/soundmanager2-32.png"
+	logo="skins/soundmanager.png"
+	demonstration="http://www.monde-diplomatique.fr/carnet/2013-07-02-La-bas-si-j-y-suis"	
 >
 
-	<nom>Sound Manager</nom>
+	<nom>Soundmanager</nom>
  	<licence lien="http://www.schillmania.com/projects/soundmanager2/license.txt">BSD</licence>
 	
 	<!-- Gestion des medias dans SPIP -->
