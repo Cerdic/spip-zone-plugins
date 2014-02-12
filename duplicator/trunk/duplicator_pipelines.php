@@ -7,11 +7,10 @@
  *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function duplicator_boite_infos($flux){
-
 	$type = $flux['args']['type'];
-
 	if(autoriser("webmestre")){
 		if ( (lire_config('duplicator/config/duplic_rubrique')=="oui") ){
 			if ( ($id = intval($flux['args']['id'])) && ($type=='rubrique') ) {
