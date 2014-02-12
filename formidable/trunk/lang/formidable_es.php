@@ -92,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_reponse' => '1 respuesta',
 	'info_aucun_formulaire' => 'Ningún formulario',
 	'info_aucune_reponse' => 'Ninguna respuesta',
+	'info_formulaire_utilise_par' => 'Formulario utilizado por:',
 	'info_nb_formulaires' => '@nb@ formularios',
 	'info_nb_reponses' => '@nb@ respuestas',
 	'info_reponse_proposee' => 'A moderar',
@@ -101,6 +102,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponse_supprimee' => 'Borrada',
 	'info_reponse_supprimees' => 'Borradas',
 	'info_reponse_toutes' => 'Todas',
+	'info_utilise_1_formulaire' => 'Formulario utilizado:',
+	'info_utilise_nb_formulaires' => 'Formularios utilizados:',
 
 	// M
 	'modele_label_formulaire_formidable' => '¿Cuál formulario?',
