@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/csv2spip-128.png"
 	schema="1.0.0"
-	documentation=""
+	documentation="http://contrib.spip.net/article4446"
 >
 
 	<nom>csv2spip</nom>
@@ -15,13 +15,8 @@
 	<auteur>tofulm</auteur>
 	<licence>GNU/GPL</licence>
 
-    <necessite nom="saisies" compatibilite="[1.24.0;]" />
-
-    <pipeline nom="header_prive" inclure="csv2spip_pipelines.php" />
-
-
+  <necessite nom="saisies" compatibilite="[1.24.0;]" />
+  <pipeline nom="header_prive" inclure="csv2spip_pipelines.php" />
 	<menu nom="csv2spip" titre="csv2spip:csv2spip_titre" parent="menu_administration"  icone="images/csv2spip-16.png" />
-
-
 
 </paquet>
