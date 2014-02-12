@@ -1,12 +1,6 @@
 <?php
 
-/***************************************************************************\
- * Plugin Vider Rubrique pour Spip 3.0
- * Licence GPL (c) 2012 - Apsulis
- * Suppression de tout le contenu d'une rubrique
- *
-\***************************************************************************/
-
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function trim_value(&$value){$value = trim($value);}
 
@@ -201,6 +195,7 @@ function lire_les_mots_clefs($id,$type){
 	
 	return $mots_clefs;
 }
+
 function remettre_les_mots_clefs($mots,$id,$type){
 	foreach($mots as $champ => $valeur){
 		$n = sql_insertq(
