@@ -1,11 +1,4 @@
 <?php
-/***************************************************************************\
- * Plugin Duplicator pour Spip 2.0
- * Licence GPL (c) 2010 - Apsulis
- * Duplication de rubriques et d'articles
- *
-\***************************************************************************/
-
 // Ceci est un fichier langue de SPIP  --  This is a SPIP language file
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
