@@ -39,7 +39,7 @@ if (defined('_SPIP19300')) {
 	}
 }
 
-function remplace_points_de_suite($texte, $id, $racc) {
+function remplace_points_de_suite($texte, $id, $racc, $connect=NULL) {
 	// des points de suite bien propres
 	defined('_INTRODUCTION_SUITE') || define('_INTRODUCTION_SUITE', '&nbsp;(...)');
 	defined('_INTRODUCTION_LIEN') || define('_INTRODUCTION_LIEN', 0);
@@ -51,8 +51,11 @@ function remplace_points_de_suite($texte, $id, $racc) {
 	$intro_suite = cs_propre(_INTRODUCTION_SUITE);
 	// si les points de suite sont cliquables
 	if ($id && _INTRODUCTION_LIEN) {
-		$url = (defined('_SPIP19300') && test_espace_prive())
-			?generer_url_entite_absolue($id, $racc, '', '', true):"$racc$id";
+		if(defined('_SPIP19300')) {
+			$url = test_espace_prive()
+				?generer_url_entite_absolue($id, $racc, '', '', !$connect?true:$connect)
+				:generer_url_entite($id, $racc, '', '', $connect); //"$racc$id";
+		} else $url= $racc.$id;
 		$intro_suite = strncmp($intro_suite, '<br />', 6)===0
 			?'<br />'.cs_lien($url, substr($intro_suite, 6))
 			:'&nbsp;'.cs_lien($url, $intro_suite);
@@ -86,7 +89,7 @@ function cs_introduction($texte, $descriptif, $lgr, $id, $racc, $connect) {
 		$texte = cs_propre(supprimer_tags($couper(cs_introduire($texte), $lgr, _INTRODUCTION_CODE)));
 	}
 	// si les points de suite ont ete ajoutes
-	return remplace_points_de_suite($texte, $id, $racc);
+	return remplace_points_de_suite($texte, $id, $racc, $connect);
 } // introduction()
 
 if (!function_exists('balise_INTRODUCTION')) {
