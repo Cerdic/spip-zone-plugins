@@ -30,10 +30,7 @@
         [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
         <!--extra-->
 
-        <p class='boutons'>
-            <span class='image_loading'></span>
-            <input type='submit' class='submit' value='<:bouton_valider:>' />
-        </p>
+	      <INCLURE{fond=formulaires/inc-formidable-boutons} />
     </div></form>
     ]
 		[(#ENV{_saisies}|et{#ENV{_saisies}|count}|non)
