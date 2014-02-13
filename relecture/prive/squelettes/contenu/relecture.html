@@ -26,7 +26,7 @@
 			<span><strong><:relecture:label_revision_ouverture:></strong> : </span>
 			[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
 									|parametre_url{id_objet, #ID_ARTICLE}
-									|parametre_url{id_version, #REVISION_OUVERTURE})]})]
+									|parametre_url{id_diff, #REVISION_OUVERTURE})]})]
 			<span dir="#LANG_DIR"><a[ href="(#GET{url_revision})"]>[(#REVISION_OUVERTURE)]</a></span>
 		</div>
 	#BOITE_FERMER
@@ -48,7 +48,8 @@
 				<span><strong><:relecture:label_revision_cloture:></strong> : </span>
 				[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
 										|parametre_url{id_objet, #ID_ARTICLE}
-										|parametre_url{id_version, #REVISION_CLOTURE})]})]
+										|parametre_url{id_version, #REVISION_CLOTURE}
+										|parametre_url{id_diff, #REVISION_OUVERTURE})]})]
 				<span dir="#LANG_DIR"><a[ href="(#GET{url_revision})"]>[(#REVISION_CLOTURE)]</a></span>
 			</div>
 		#BOITE_FERMER
