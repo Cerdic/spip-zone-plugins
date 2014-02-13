@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_calendrier' => 'عرض الروزنامة',
-	'annee_precedente' => 'السنة السابقة', # MODIF
+	'annee_precedente' => 'السنة السابقة',
 	'annee_suivante' => 'السنة التالية',
 	'annuler_recherche' => 'إلغاء البحث',
 
