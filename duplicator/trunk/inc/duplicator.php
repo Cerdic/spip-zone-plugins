@@ -93,15 +93,12 @@ function dupliquer_article($id_article,$rubrique){
 function dupliquer_rubrique($id_rubrique,$cible=null,$titre=' (copie)',$articles = true){
 	include_spip('action/editer_rubrique');
 	include_spip('inc/config');
-		
-	// On lit la rubrique qui va etre dupliquée
-	$infos = sql_fetsel('*', 'spip_rubriques', "id_rubrique=".intval($id_rubrique));
-
+	
 	// On choisi les champs que l'on veut conserver
 	$champs_dupliques = explode(",", lire_config('duplicator/config/rub_champs'));
 	array_walk($champs_dupliques, 'trim_value');
 	
-	if ($champs_dupliques[0]=="") $champs_dupliques = array('id_parent','titre','descriptif','texte','lang','langue_choisie');
+	if ($champs_dupliques[0]=="") $champs_dupliques = array('titre','descriptif','texte','lang','langue_choisie');
 	
 	// Si le plugin composition est présent
 	if (test_plugin_actif('compositions')) {
@@ -110,13 +107,17 @@ function dupliquer_rubrique($id_rubrique,$cible=null,$titre=' (copie)',$articles
 		$champs_dupliques[] = 'composition_branche_lock';
 	}
 	
-	foreach ($champs_dupliques as $key => $value) {
-		$infos_de_la_rubrique[$value] = $infos[$value];
-	}
-	// Si une cible est spécifiée, on ecrase le champ id_parent
-	if($cible) $infos_de_la_rubrique['id_parent'] = $cible;
-	$infos_de_la_rubrique['titre'] .= $titre;
+	if(isset($champs_dupliques['id_parent']))
+		unset($champs_dupliques['id_parent']);
+	
+	// On lit la rubrique qui va etre dupliquée
+	$infos_de_la_rubrique = sql_fetsel($champs_dupliques, 'spip_rubriques', "id_rubrique=".intval($id_rubrique));
 
+	// Si une cible est spécifiée, on ecrase le champ id_parent
+	if(!$cible) $cible = 0;
+
+	$infos_de_la_rubrique['titre'] .= $titre;
+	
 	// On cherche ses mots clefs
 	$mots_clefs_de_la_rubrique = lire_les_mots_clefs($id_rubrique,'rubrique');
 	
@@ -126,10 +127,8 @@ function dupliquer_rubrique($id_rubrique,$cible=null,$titre=' (copie)',$articles
 	//////////////
 	// ON DUPLIQUE
 	//////////////
-	$id_nouvelle_rubrique = insert_rubrique($infos_de_la_rubrique['id_parent']);
-	revisions_rubriques($id_nouvelle_rubrique,$infos_de_la_rubrique);
-	// On la publie (pour activer l'aperçu)
-	$maj_statut_rubrique = sql_updateq("spip_rubriques", array('statut' => 'publie'), "id_rubrique=".$id_nouvelle_rubrique);
+	$id_nouvelle_rubrique = rubrique_inserer($cible);
+	rubrique_modifier($id_nouvelle_rubrique,$infos_de_la_rubrique);
 
 	/////////////////////////////////////
 	// Duplication des url dans spip_url
