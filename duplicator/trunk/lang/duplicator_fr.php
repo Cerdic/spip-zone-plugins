@@ -22,14 +22,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_dupliquer' => 'Dupliquer la rubrique',
 
 // L
-	'label_art_champs' => 'Liste des champs à dupliquer pour chaque article :',
-	'label_rub_champs' => 'Liste des champs à dupliquer pour chaque rubrique :',
+	'label_art_champs' => 'Liste des champs à dupliquer pour chaque article :',
+	'label_rub_champs' => 'Liste des champs à dupliquer pour chaque rubrique :',
 
 
 // M
 	'message_annuler' => 'Annuler',
-	'message_avertissement_article' => 'Êtes-vous sûr de vouloir dupliquer cet article ?',
-	'message_avertissement_rubrique' => 'Êtes-vous sûr de vouloir dupliquer tout le contenu de cette rubrique ?',
+	'message_avertissement_article' => 'Êtes-vous sûr de vouloir dupliquer cet article ?',
+	'message_avertissement_rubrique' => 'Êtes-vous sûr de vouloir dupliquer tout le contenu de cette rubrique ?',
 	'message_confirmer' => 'Confirmer',	
 	
 	'operation_executee' => "L'opération a bien été exécutée.",
