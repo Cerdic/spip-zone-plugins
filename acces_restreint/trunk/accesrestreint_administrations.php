@@ -16,6 +16,10 @@ include_spip('inc/meta');
  */
 function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 
+	// le prefixe est passe des majuscules aux minuscules :
+	if (isset($GLOBALS['meta']['AccesRestreint_base_version']) AND !isset($GLOBALS['meta'][$nom_meta_base_version]))
+		$GLOBALS['meta'][$nom_meta_base_version] = $GLOBALS['meta']['AccesRestreint_base_version'];
+
 	$maj = array();
 	$maj['create'] = array(
 		array('maj_tables',array('spip_zones','spip_zones_liens')),
