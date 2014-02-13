@@ -15,11 +15,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  */
 function accesrestreint_affiche_milieu($flux){
-	if ($e = trouver_objet_exec($flux['args']['exec'])
+	if (
+		($e = trouver_objet_exec($flux['args']['exec'])
 	  AND $e['type'] == 'auteur'
-	  AND $e['edition'] == false) {
-		
-		$id_auteur = $flux['args']['id_auteur'];
+	  AND $e['edition'] == false
+	  AND $id_auteur = $flux['args']['id_auteur'])
+	OR (
+		$flux['args']['exec'] == "infos_perso"
+		AND $id_auteur = $GLOBALS['visiteur_session']['id_auteur']
+		)){
 
 		$ins = recuperer_fond('prive/squelettes/inclure/acces_auteur',array('id_auteur'=>$id_auteur));
 		if (($p = strpos($flux['data'],"<!--affiche_milieu-->")) !== false)
