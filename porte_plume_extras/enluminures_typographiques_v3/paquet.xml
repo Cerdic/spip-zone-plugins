@@ -20,6 +20,7 @@
 
 	<pipeline nom="pre_propre" inclure="typoenluminee.php" />
 	<pipeline nom="post_propre" inclure="typoenluminee.php" />
+	<pipeline nom="pre_liens" inclure="typoenluminee.php" />
 	<pipeline nom="pre_typo" inclure="typoenluminee.php" />
 	<pipeline nom="post_typo" inclure="typoenluminee.php" />
 	<pipeline nom="nettoyer_raccourcis_typo" inclure="typoenluminee.php" />

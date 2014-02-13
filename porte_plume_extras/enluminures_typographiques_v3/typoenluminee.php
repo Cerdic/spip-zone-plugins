@@ -159,6 +159,15 @@ function typoenluminee_post_propre($texte) {
 	return $texte;
 }
 
+function typoenluminee_pre_liens($texte) {
+	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
+		return $texte;
+
+	$texte = str_replace('<-->','&harr;',$texte);
+	$texte = str_replace('-->','&rarr;',$texte);
+
+	return $texte;
+}
 
 function typoenluminee_pre_typo($texte) {
 	if(!$texte) return $texte;
@@ -198,8 +207,6 @@ function typoenluminee_pre_typo($texte) {
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 	}
 
-	$texte = str_replace('<-->','&harr;',$texte);
-	$texte = str_replace('-->','&rarr;',$texte);
 	$texte = str_replace('<--','&larr;',$texte);
 	$texte = str_replace('<==>','&hArr;',$texte);
 	$texte = str_replace('==>','&rArr;',$texte);
@@ -209,7 +216,6 @@ function typoenluminee_pre_typo($texte) {
 	$texte = str_ireplace('(tm)','&trade;',$texte);
 	$texte = str_replace('...','&hellip;',$texte);
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
-	
 	/*
 		Cas particulier pour le gras
 		Il ne faut pas traiter la mise en gras ici si le texte contient un tableau

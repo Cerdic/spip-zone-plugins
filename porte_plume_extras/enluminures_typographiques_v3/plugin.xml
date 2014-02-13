@@ -34,6 +34,10 @@
 		<inclure>typoenluminee.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>pre_liens</nom>
+		<inclure>typoenluminee.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>pre_typo</nom>
 		<inclure>typoenluminee.php</inclure>
 	</pipeline>
