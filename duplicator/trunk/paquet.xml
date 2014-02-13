@@ -19,6 +19,7 @@
 
 	<pipeline nom="boite_infos" inclure="duplicator_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="duplicator_pipelines.php" />
+	<pipeline nom="duplicator" inclure="" />
 
 	<!-- <menu nom="configurer_duplicator" titre="duplicator:configuration_duplicator" parent="menu_configuration" icone="theme/img/duplicator.png" /> -->
 </paquet>
