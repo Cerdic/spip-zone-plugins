@@ -1,5 +1,5 @@
 <traduction module="tickets" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="244" traduits="129" relire="0" modifs="1" nouveaux="114" pourcent="52.87">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="244" traduits="181" relire="0" modifs="0" nouveaux="63" pourcent="74.18">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=de" total="244" traduits="77" relire="0" modifs="21" nouveaux="146" pourcent="31.56">
