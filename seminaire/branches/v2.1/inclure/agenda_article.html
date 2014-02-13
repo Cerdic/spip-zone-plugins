@@ -37,16 +37,16 @@
 
 </BOUCLE_mots>
 
-<div class='espace'></div>
+<div id="seminaire-article-boutons">
 
-<span class="bouton">[(#REM)bouton de création d'événement]
-<a href="#URL_ECRIRE{evenement_edit,id_evenement=new&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
-</span>
+  <span class="bouton">[(#REM)bouton de création d'événement]
+    <a href="#URL_ECRIRE{evenement_edit,id_evenement=new&id_article=#ID_ARTICLE}" class='noajax creer'><:seminaire:creer_evenement:></a>
+  </span>
 
-<a class="google" href="http://www.google.com/calendar/render?cid=#URL_SITE_SPIP/%3Fpage%3Dseminaire_ical%26id_article%3D#ID_ARTICLE" target="_blank"><img src="http://www.google.com/calendar/images/ext/gc_button1_fr.gif" border=0></a>
-<a class="ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>"><img src="#CHEMIN{images/calendrier.png}"/><span class="texte">iCal</span></a>[(#REM)bouton d'abonnement au calendrier]
-<div class='espace'></div>
+  <a class="google" href="http://www.google.com/calendar/render?cid=#URL_SITE_SPIP/%3Fpage%3Dseminaire_ical%26id_article%3D#ID_ARTICLE" target="_blank"><img src="http://www.google.com/calendar/images/ext/gc_button1_fr.gif" border=0></a>
+  <a class="ical" href="[(#URL_PAGE{seminaire_ical}|parametre_url{id_article, #ID_ARTICLE}|url_absolue|replace{'http://','webcal://'})]" title="<:seminaire:abonnement:>"><img src="#CHEMIN{images/calendrier.png}"/><span class="texte">iCal</span></a>[(#REM)bouton d'abonnement au calendrier]
 
+</div>
 <script type="text/javascript" src="#CHEMIN{javascript/toggle.js}"></script>
 
 </BOUCLE_seminaire>
