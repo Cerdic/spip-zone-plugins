@@ -90,10 +90,14 @@ function image_responsive($texte, $taille=120, $lazy=0, $vertical=0) {
 
 function image_proportions($img, $largeur=16, $hauteur=9, $align="center") {
 	
-	if (!$img || $hauteur == 0 || $largeur == 0) return;
+	
+	if (!$img OR $hauteur == 0 OR $largeur == 0) return;
 	
 	$l_img = largeur ($img);
 	$h_img = hauteur($img);
+	
+	if ($l_img == 0 OR $h_img == 0) return $img;
+	
 	$r_img = $h_img / $l_img;	
 	$r = $hauteur / $largeur;	
 	
