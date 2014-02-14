@@ -31,7 +31,7 @@
 
 ]
 
-<BOUCLE_resultats(FORMULAIRES_REPONSES){id_formulaire}{tous} />
+<BOUCLE_resultats(FORMULAIRES_REPONSES){id_formulaire} {statut!=poubelle} />
 [(#TOTAL_BOUCLE|oui)
 	[(#AUTORISER{voir,formulaires_reponse,#ID_FORMULAIRE}|oui)
 	<div class='navigation_resultats'>
