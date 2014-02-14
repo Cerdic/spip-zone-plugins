@@ -14,42 +14,43 @@
 		<div class="actions rss">
 			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:suivre_tickets_rss_unique:></a>
 		</div>
+		<p class="info-publi">
+			[(#SET{date,<abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>})]
+			[(#VAL{tickets:date_creation}|_T{#ARRAY{date,#GET{date}}})]
+			<BOUCLE_auteur(AUTEURS){id_auteur}{tout}><span class="auteur"><:par_auteur:> <a href="#URL_AUTEUR" class="spip_in">#NOM</a></span></BOUCLE_auteur>
+		</p>
 	</div>
 
 	[(#REM) Statut, severite, assignement]
 	<div class="infos">
 		<dl>
-			[<dt class="statut"><:tickets:champ_statut:></dt><dd class="statut">[(#STATUT|tickets_icone_statut{true}) ](#STATUT|tickets_texte_statut)</dd>]
-			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
-			<dt class="assigne"><:tickets:assigne_a:></dt><dd class="assigne"><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd>
-			</BOUCLE_assigne>
-			[<dt class="severite"><:tickets:champ_severite:></dt><dd class="severite">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
-			[<dt class="type"><:tickets:champ_type:></dt><dd class="type">(#TRACKER|tickets_texte_tracker)</dd>]
-			[<dt class="date"><:tickets:champ_date:></dt><dd class="date">(#DATE|affdate)</dd>]
-			<B_auteur><dt class="createur"><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd class="createur"><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
+			[<dt class="statut"><:tickets:champ_statut:></dt><dd class="statut[(#AUTORISER{instituer,ticket,#ID_TICKET}|oui) #EDIT{statut}]">(#INCLURE{fond=vues/ticket_statut,id_ticket=#ID_TICKET,env,ajax})</dd>]
+			[<dt class="assigne"><:tickets:champ_assigne:></dt><dd class="assigne[(#AUTORISER{assigner,ticket,#ID_TICKET}|oui) #EDIT{id_assigne}]">(#INCLURE{fond=vues/ticket_id_assigne,id_ticket=#ID_TICKET,env,ajax})</dd>]
+			[<dt class="severite"><:tickets:champ_severite:></dt><dd class="severite #EDIT{severite}">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
+			[<dt class="type"><:tickets:champ_type:></dt><dd class="type #EDIT{tracker}">(#TRACKER|tickets_texte_tracker)</dd>]
 			[<dt class="projet"><:tickets:champ_projet:></dt><dd class="projet #EDIT{projet}">(#PROJET)</dd>]
 			[<dt class="composant"><:tickets:champ_composant:></dt><dd class="composant #EDIT{composant}">(#COMPOSANT)</dd>]
 			[<dt class="version"><:tickets:champ_version:></dt><dd class="version #EDIT{version}">(#VERSION)</dd>]
 			[<dt class="jalon"><:tickets:champ_jalon:></dt><dd class="jalon #EDIT{jalon}">(#JALON)</dd>]
 			[<dt class="navigateur"><:tickets:champ_navigateur:></dt><dd class="navigateur #EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
+			[(#CONFIG{tickets/general/lier_mots,off}|=={on}|oui)<dt class="mots"><:tickets:champ_mots:></dt><dd class="mots #EDIT{mots_ticket}">#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,env,ajax}</dd>]
 		</dl>
-		[(#REM) Bloc de choix du statut et de l'assignation]
-		[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
-			#FORMULAIRE_STATUT_TICKET{#ID_TICKET,#SELF}
-		]
-		[(#AUTORISER{assigner,ticket, #ID_TICKET}|oui)
-			#FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET,#SELF}
-		]
 	</div>
 
 	[(#REM) - Texte du ticket et url d'exemple]
 	[<div class="#EDIT{texte} texte">(#TEXTE|propre)</div>]
 	[<div class='exemple'><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+	
 	[(#REM) - Extensions, Extras 2 entre autre]
 	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]
-	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET}>
+	
+	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET,env,ajax=documents}>
+	[(#AUTORISER{joindredocument,ticket,#ID_TICKET}|oui)
+	<br class="nettoyeur" />
+	<INCLURE{fond=prive/squelettes/inclure/ajouter-documents,objet=ticket,id_objet=#ENV{id_ticket},env,ajax} />]
 </div>
 
+<a href="#forum" name="forum" id="forum"></a>
 [(#PARAMETRES_FORUM|?{''})]
 #SET{config_thread,#CONFIG{comments/comments_fil,list}}
 <div class="ticket_commentaires comments comments-#GET{config_thread}">
@@ -57,7 +58,7 @@
 	[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
 	[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:commentaire,tickets:commentaires})]</h2>]
 	</B_decompte>
-	<h2><:tickets:commentaire_aucun:></h2>
+	<h2 class="h2"><:tickets:commentaire_aucun:></h2>
 	<//B_decompte>
 
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]
