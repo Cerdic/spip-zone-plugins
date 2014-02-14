@@ -83,4 +83,18 @@ function mots_objet_revision($id, $colonnes, $type_objet, $champ = '') {
 	return true;
 }
 
+function ticket_id_assigne_revision($id, $colval = array(), $type = ''){
+	$a = crayons_update($id, $colval, $type);
+
+	if ($notifications = charger_fonction('notifications', 'inc')) {
+		foreach ($colval as $col => $val) {
+			if ($col=="id_assigne") {
+				$notifications('assignerticket', $id, array('id_auteur' => $val));
+			}
+		}
+	}
+	
+	return $a;
+}
+
 ?>
