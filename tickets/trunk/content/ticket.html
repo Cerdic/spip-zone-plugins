@@ -32,10 +32,9 @@
 			[<dt><:tickets:champ_version:></dt><dd class="#EDIT{version}">(#VERSION)</dd>]
 			[<dt><:tickets:champ_jalon:></dt><dd class="#EDIT{jalon}">(#JALON)</dd>]
 			[<dt><:tickets:champ_navigateur:></dt><dd class="#EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
+			[(#CONFIG{tickets/general/lier_mots,off}|=={on}|oui)<dt><:tickets:champ_mots:></dt><dd class="#EDIT{mots_ticket}">#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,env,ajax}</dd>]
 		</dl>
-		[(#CONFIG{tickets/general/lier_mots,off}|=={on}|oui)
-			#INCLURE{fond=inclure/mots_ticket,id_ticket=#ID_TICKET,env,ajax}
-		]
+		
 	</div>
 
 	[(#REM) - Texte du ticket et url d'exemple]

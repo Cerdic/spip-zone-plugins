@@ -1,0 +1,16 @@
+#CACHE{0}
+
+#SET{id_ticket,#ENV{id_ticket}}
+
+#SET{total_mots,0}
+<ul class="mots">
+<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
+	<BOUCLE_mots(mots){id_objet=#GET{id_ticket}}{objet=ticket}{id_groupe}>
+	<li class="mot"><a href="#URL_MOT" rel="tag">
+		<abbr title="#TYPE:#TITRE [- (#DESCRIPTIF|supprimer_tags)]">#TITRE</abbr>
+	</a></li>
+	</BOUCLE_mots>
+	#SET{total_mots,#GET{total_mots}|plus{#_mots:TOTAL_BOUCLE}}
+</BOUCLE_groupesmots>
+</ul>[(#GET{total_mots}|=={0}|oui)
+<span><:tickets:mots_aucun:></span>]
