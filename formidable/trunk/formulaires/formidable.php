@@ -14,12 +14,24 @@ include_spip('inc/saisies');
 include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 
+function formidable_id_formulaire($id){
+	if (intval($id)>0)
+		$where = 'id_formulaire = ' . intval($id);
+	elseif (is_string($id))
+		$where = 'identifiant = ' . sql_quote($id);
+	else
+		return 0;
+
+	$id_formulaire = intval(sql_getfetsel('id_formulaire','spip_formulaires',$where));
+	return $id_formulaire;
+}
+
 /**
  * Chargement du formulaire CVT de Formidable.
  *
  * Genere le formulaire dont l'identifiant (numerique ou texte est indique)
  *
- * @param int|string $id_formulaire
+ * @param int|string $id
  *     Identifiant numerique ou textuel du formulaire formidable
  * @param array $valeurs
  *     Valeurs par défauts passées au contexte du formulaire
@@ -30,15 +42,11 @@ include_spip('inc/autoriser');
  * @return array
  *     Contexte envoyé au squelette HTML du formulaire.
  **/
-function formulaires_formidable_charger($id_formulaire, $valeurs = array(), $id_formulaires_reponse = false){
+function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires_reponse = false){
 	$contexte = array();
 
 	// On peut donner soit un id soit un identifiant
-	if (intval($id_formulaire)>0)
-		$where = 'id_formulaire = ' . intval($id_formulaire);
-	elseif (is_string($id_formulaire))
-		$where = 'identifiant = ' . sql_quote($id_formulaire);
-	else
+	if (!$id_formulaire = formidable_id_formulaire($id))
 		return;
 
 	// On cherche si le formulaire existe
@@ -150,7 +158,7 @@ function formulaires_formidable_charger($id_formulaire, $valeurs = array(), $id_
  * Pour chaque champ posté, effectue les vérifications demandées par
  * les saisies et retourne éventuellement les erreurs de saisie.
  *
- * @param int|string $id_formulaire
+ * @param int|string $id
  *     Identifiant numerique ou textuel du formulaire formidable
  * @param array $valeurs
  *     Valeurs par défauts passées au contexte du formulaire
@@ -161,8 +169,12 @@ function formulaires_formidable_charger($id_formulaire, $valeurs = array(), $id_
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_formidable_verifier($id_formulaire, $valeurs = array(), $id_formulaires_reponse = false){
+function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaires_reponse = false){
 	$erreurs = array();
+
+	// On peut donner soit un id soit un identifiant
+	if (!$id_formulaire = formidable_id_formulaire($id))
+		return;
 
 	// Sale bête !
 	if (_request('mechantrobot')!=''){
@@ -170,8 +182,7 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs = array(), $id
 		return $erreurs;
 	}
 
-	$id_formulaire = intval(_request('id_formulaire'));
-	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire);
+	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire));
 	$saisies = unserialize($formulaire['saisies']);
 
 	$erreurs = saisies_verifier($saisies);
@@ -195,7 +206,7 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs = array(), $id
  * - faire afficher les saisies
  * - rediriger sur une autre page...
  *
- * @param int|string $id_formulaire
+ * @param int|string $id
  *     Identifiant numerique ou textuel du formulaire formidable
  * @param array $valeurs
  *     Valeurs par défauts passées au contexte du formulaire
@@ -206,15 +217,20 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs = array(), $id
  * @return array
  *     Tableau des erreurs
  **/
-function formulaires_formidable_traiter($id_formulaire, $valeurs = array(), $id_formulaires_reponse = false){
+function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires_reponse = false){
 	$retours = array();
-	$id_formulaire = intval(_request('id_formulaire'));
+
+	// On peut donner soit un id soit un identifiant
+	if (!$id_formulaire = formidable_id_formulaire($id))
+		return;
+
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
 
 	// selon le choix, le formulaire se remet en route à la fin ou non
 	$retours['editable'] = ($formulaire['apres']=='formulaire');
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];
+	$retours['id_formulaire'] = $id_formulaire;
 
 	// Si on a une redirection valide
 	if (($formulaire['apres']=="redirige") AND ($formulaire['url_redirect']!="")){

@@ -101,6 +101,7 @@ function traiter_enregistrement_dist($args, $retours){
             );
         }
         $retours['message_ok'] .= "\n"._T('formidable:traiter_enregistrement_message_ok');
+	      $retours['id_formulaires_reponse'] = $id_formulaires_reponse;
     }
     return $retours;
 }
