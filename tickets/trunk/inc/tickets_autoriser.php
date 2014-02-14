@@ -48,9 +48,6 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 		case 'epingler':
 			$define = (defined('_TICKETS_AUTORISATION_EPINGLER')) ? _TICKETS_AUTORISATION_EPINGLER : ($utiliser_defaut ? '0minirezo':'');
 			break;
-		case 'liermots':
-			$define = (defined('_TICKETS_AUTORISATION_LIERMOTS')) ? _TICKETS_AUTORISATION_LIERMOTS : ($utiliser_defaut ? '0minirezo':'');
-			break;
 		default:
 			$define = $utiliser_defaut ? '0minirezo' : '';
 			break;
@@ -576,64 +573,6 @@ function autoriser_tickets_menu_dist($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_ticketedit_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('ecrire','ticket');
-}
-
-/**
- * Autorisation pour lier des mots-clés aux tickets
- * 
- * - Les webmestres
- * @param string $faire : l'action à faire
- * @param string $type : le type d'objet sur lequel porte l'action
- * @param int $id : l'identifiant numérique de l'objet
- * @param array $qui : les éléments de session de l'utilisateur en cours
- * @param array $opt : les options
- * @return boolean true/false : true si autorisé, false sinon
- */
-function autoriser_ticket_liermots_dist($faire, $type, $id, $qui, $opt){
-	if(($qui['webmestre'] == 'oui') && $qui['statut'] == '0minirezo')
-		return true;
-	
-	$autorise = false;
-	$utiliser_defaut = true;
-
-	if(!function_exists('lire_config'))
-		include_spip('inc/config');
-	
-	if((lire_config('tickets/autorisations/liermots_modifieur') == 'on') && autoriser('modifier', $type, $id, $qui, $opt))
-		return true;
-
-	$type = lire_config('tickets/autorisations/liermots_type');
-	if($type){
-		switch($type) {
-			case 'webmestre':
-				// Webmestres uniquement
-				$autorise = ($qui['webmestre'] == 'oui');
-				break;
-			case 'par_statut':
-				// Traitement spécifique pour la valeur 'tous'
-				if(in_array('tous',lire_config('tickets/autorisations/liermots_statuts',array())))
-					return true;
-				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/liermots_statuts',array('0minirezo')));
-				break;
-			case 'par_auteur':
-				// Autorisation par id d'auteurs
-				$autorise = in_array($qui['id_auteur'], lire_config('tickets/autorisations/liermots_auteurs',array()));
-				break;
-		}
-		if($autorise == true){
-			return $autorise;
-		}
-		$utiliser_defaut = false;
-	}
-
-	$liste = definir_autorisations_tickets('liermots',$utiliser_defaut);
-	if ($liste['statut'])
-		$autorise = in_array($qui['statut'], $liste['statut']);
-	else if ($liste['auteur'])
-		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
-
-	return $autorise;
 }
 
 ?>

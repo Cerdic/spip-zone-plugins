@@ -64,7 +64,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
 	'cfg_lgd_autorisation_ecrire' => 'Écrire les tickets',
 	'cfg_lgd_autorisation_epingler' => 'Épingler les tickets',
-	'cfg_lgd_autorisation_liermots' => 'Lier des mots-clés aux tickets',
 	'cfg_lgd_autorisation_modifier' => 'Modifier les tickets',
 	'cfg_lgd_champs_optionnels' => 'Champs optionnels',
 	'cfg_lgd_champs_options_autres' => 'Autres options',

@@ -55,6 +55,10 @@ function mots_ticket_revision($id, $colonnes, $type_objet) {
 function mots_objet_revision($id, $colonnes, $type_objet, $champ = '') {
 	if (!$champ) return false;
 
+	/* On vérifie qu'on a le droit d'associer des mots l'objet
+	 * il serait mieux de le vérifier pour chaque groupe de mots (voir
+	 * les options de la fonction autoriser_associermots_dist)
+	 */
 	if (!autoriser('associermots',$type_objet,$id)) return false;
 
 	list(, $type_liaison) = explode('_', $champ);
