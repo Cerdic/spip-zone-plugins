@@ -69,8 +69,7 @@ function formulaires_editer_polyhierarchie_verifier($objet, $id_objet, $retour='
 }
 
 function formulaires_editer_polyhierarchie_traiter($objet, $id_objet, $retour=''){
-
-	$message = array('editable'=>true, 'message_ok'=>'');
+	$retours = array('editable'=>true, 'message_ok'=>'');
 	
 	$serveur = '';
 	$id_table_objet = id_table_objet($objet);
@@ -95,11 +94,10 @@ function formulaires_editer_polyhierarchie_traiter($objet, $id_objet, $retour=''
 	suivre_invalideur("id='$id_table_objet/$id_table_objet'");
 	
 	if ($retour) {
-		include_spip('inc/headers');
-		$message .= redirige_formulaire($retour);
+		$retours['redirect'] = $retour;
 	}
 
-	return $message;
+	return $retours;
 }
 
 ?>
