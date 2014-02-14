@@ -78,7 +78,7 @@ function formulaires_assigner_ticket_traiter($id_ticket='',$retour='', $config_f
 	
 	if ($notifications = charger_fonction('notifications', 'inc')) {
 		$notifications('assignerticket', $id_ticket,
-			array('id_auteur' => id_assigne)
+			array('id_auteur' => $id_assigne)
 		);
 	}
 	
