@@ -21,10 +21,10 @@
 	</div>
 
 	[(#REM) Statut, severite, assignement]
-	<div class="infos ajax">
+	<div class="infos">
 		<dl>
-			#INCLURE{fond=inclure/statut_ticket,id_ticket=#ID_TICKET,env,ajax}
-			#INCLURE{fond=inclure/assigne_ticket,id_ticket=#ID_TICKET,env,ajax}
+			[<dt><:tickets:champ_statut:></dt><dd[(#AUTORISER{instituer,ticket,#ID_TICKET}|oui) class="#EDIT{statut}"]>(#INCLURE{fond=vues/ticket_statut,id_ticket=#ID_TICKET,env,ajax})</dd>]
+			[<dt><:tickets:champ_assigne:></dt><dd[(#AUTORISER{assigner,ticket,#ID_TICKET}|oui) class="#EDIT{id_assigne}"]>(#INCLURE{fond=vues/ticket_id_assigne,id_ticket=#ID_TICKET,env,ajax})</dd>]
 			[<dt><:tickets:champ_severite:></dt><dd class="#EDIT{severite}">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
 			[<dt><:tickets:champ_type:></dt><dd class="#EDIT{tracker}">(#TRACKER|tickets_texte_tracker)</dd>]
 			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
@@ -34,7 +34,6 @@
 			[<dt><:tickets:champ_navigateur:></dt><dd class="#EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
 			[(#CONFIG{tickets/general/lier_mots,off}|=={on}|oui)<dt><:tickets:champ_mots:></dt><dd class="#EDIT{mots_ticket}">#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,env,ajax}</dd>]
 		</dl>
-		
 	</div>
 
 	[(#REM) - Texte du ticket et url d'exemple]

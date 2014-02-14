@@ -1,0 +1,13 @@
+[(#REM)
+
+	Vue pour le crayon 'ticket_id_assigne'
+	
+]
+#CACHE{0}
+<BOUCLE_ticket(TICKETS){id_ticket}{tout}>
+	<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
+		<a href="#URL_AUTEUR" class="spip_in">#NOM</a>
+	</BOUCLE_assigne>
+		<:tickets:assignation_attribuee_a_personne:>
+	<//B_assigne>
+</BOUCLE_ticket>
