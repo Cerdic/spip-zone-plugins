@@ -5,7 +5,7 @@
   Distribue sous licence GPL
 
 ]
-<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id_objet}'>
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id_objet}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
@@ -15,7 +15,13 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_parent' value='#ENV{id_parent}' />
 	  <input type='hidden' name='_polyhier' value='#ENV{objet}' />
-	  [<ul>(#INCLURE{fond=formulaires/inc-selecteur-parents}{env})</ul>]
+	  <ul>
+	  	<li class='editer editer_parents[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
+			<label><:polyhier:label_parents:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{parents})</span>
+			]<INCLURE{fond=formulaires/selecteur/generique}{whitelist=#LISTE{rubriques}}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>
+		</li>
+	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
