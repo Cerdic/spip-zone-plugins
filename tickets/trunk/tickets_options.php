@@ -55,6 +55,8 @@ function mots_ticket_revision($id, $colonnes, $type_objet) {
 function mots_objet_revision($id, $colonnes, $type_objet, $champ = '') {
 	if (!$champ) return false;
 
+	if (!autoriser('modifier',$type_objet,$id)) return false;
+
 	list(, $type_liaison) = explode('_', $champ);
 
 	// actuellement en bdd
