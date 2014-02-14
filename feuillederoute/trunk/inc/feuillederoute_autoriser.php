@@ -52,10 +52,7 @@ function definir_autorisations_feuillederoute($action,$utiliser_defaut=true){
 }
 
 /**
- * Autorisation de modification des feuillederoute
- * Défini qui peut modifier les feuillederoute :
- * - Les personnes assignées
- * - Les personnes correspondant à la configuration
+ * Autorisation de modification de la feuillederoute
  * 
  * @param string $faire : l'action à faire
  * @param string $type : le type d'objet sur lequel porte l'action
@@ -68,42 +65,39 @@ function autoriser_feuillederoute_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
 
-	if(is_numeric($id)){
-	
-		if(!function_exists('lire_config'))
-			include_spip('inc/config');
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 
-		$type = lire_config('feuillederoute/autorisations/modifier_type', 'par_statut');
-		if($type){
-			switch($type) {
-				case 'webmestre':
-					// Webmestres uniquement
-					$autorise = ($qui['webmestre'] == 'oui');
-					break;
-				case 'par_statut':
-					// Autorisation par statut
-					$autorise = in_array($qui['statut'], lire_config('feuillederoute/autorisations/modifier_statuts',array('0minirezo')));
-					break;
-				case 'par_auteur':
-					// Autorisation par id d'auteurs
-					$autorise = in_array($qui['id_auteur'], lire_config('feuillederoute/autorisations/modifier_auteurs',array()));
-					break;
-			}
-			if($autorise == true){
-				return $autorise;
-			}
-			$utiliser_defaut = false;
+	$type = lire_config('feuillederoute/autorisations/modifier_type', 'par_statut');
+	if($type){
+		switch($type) {
+			case 'webmestre':
+				// Webmestres uniquement
+				$autorise = ($qui['webmestre'] == 'oui');
+				break;
+			case 'par_statut':
+				// Autorisation par statut
+				$autorise = in_array($qui['statut'], lire_config('feuillederoute/autorisations/modifier_statuts',array('0minirezo')));
+				break;
+			case 'par_auteur':
+				// Autorisation par id d'auteurs
+				$autorise = in_array($qui['id_auteur'], lire_config('feuillederoute/autorisations/modifier_auteurs',array()));
+				break;
 		}
-	
-		// Si $utiliser_defaut = true, on utilisera les valeurs par défaut
-		// Sinon on ajoute la possibilité de régler par define
-		$liste = definir_autorisations_feuillederoute('modifier',$utiliser_defaut);
-		if ($liste['statut'])
-			$autorise = in_array($qui['statut'], $liste['statut']);
-		else if ($liste['auteur'])
-			$autorise = in_array($qui['id_auteur'], $liste['auteur']);
-		
+		if($autorise == true){
+			return $autorise;
+		}
+		$utiliser_defaut = false;
 	}
+
+	// Si $utiliser_defaut = true, on utilisera les valeurs par défaut
+	// Sinon on ajoute la possibilité de régler par define
+	$liste = definir_autorisations_feuillederoute('modifier',$utiliser_defaut);
+	if ($liste['statut'])
+		$autorise = in_array($qui['statut'], $liste['statut']);
+	else if ($liste['auteur'])
+		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
+	
 	return $autorise;
 }
 

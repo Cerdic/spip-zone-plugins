@@ -7,6 +7,7 @@ function feuillederoute_formulaire_admin($flux) {
 	return $flux;
 }
 
+// inclure le bouton d'admin pour afficher/masquer la feuille de route dans l'espace d'administration
 function feuillederoute_body_prive($flux){
 	$flux .= recuperer_fond('prive/bouton/feuillederoute');
 	return $flux;

@@ -1,43 +1,11 @@
 [(#REM) eviter les incoherences de parametrage, par exemple les redacteurs peuvent ecrire mais pas lire : si on peut ecrire, alors on oblige a pouvoir lire meme si c'est contraire a la config ]
 
 [(#AUTORISER{lire,feuillederoute}|oui)
-[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)<li id="minibando_bouton_feuillederoute">]]
-<a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non) style="text-indent:0;font-size:10px;text-align:center;line-height:24px;"]]>[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)FdR][(#REM|test_espace_prive|oui)#CONFIG{feuillederoute/titre}]][(#PLUGIN{minibando}|non)#CONFIG{feuillederoute/titre}]</a>
-<script type="text/javascript">
-$(document).ready(function(){
-	// preparer le chargement ajax
-	$('body').append('<div class="charger_feuillederoute"></div>');
-	// charger + afficher/masquer la feuille de route
-	$('#btn_feuillederoute').click(function(){
-		var url_feuillederoute = $(this).attr('href');
-		$('.charger_feuillederoute').load(url_feuillederoute,function(){
-			$(this).toggle(200);
-		});
-		return false;
-	});
-});
-</script>
-[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)<span></span><ul><li><p><:feuillederoute:feuillederoute:></p></li></ul></li>]]
+<INCLURE{fond=inc/bouton_feuillederoute} />
 ]
 [(#AUTORISER{lire,feuillederoute}|non)
 [(#AUTORISER{modifier,feuillederoute}|oui)
-[(#PLUGIN{minibando}|oui)<li id="minibando_bouton_feuillederoute">]
-<a[ href="(#URL_PAGE{feuillederoute})"] class="spip-admin-boutons" id="btn_feuillederoute"[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non) style="text-indent:0;font-size:10px;text-align:center;line-height:24px;"]]>[(#PLUGIN{minibando}|oui) [(#REM|test_espace_prive|non)FdR][(#REM|test_espace_prive|oui)#CONFIG{feuillederoute/titre}]][(#PLUGIN{minibando}|non)#CONFIG{feuillederoute/titre}]</a>
-<script type="text/javascript">
-$(document).ready(function(){
-	// preparer le chargement ajax
-	$('body').append('<div class="charger_feuillederoute"></div>');
-	// charger + afficher/masquer la feuille de route
-	$('#btn_feuillederoute').click(function(){
-		var url_feuillederoute = $(this).attr('href');
-		$('.charger_feuillederoute').load(url_feuillederoute,function(){
-			$(this).toggle(200);
-		});
-		return false;
-	});
-});
-</script>
-[(#PLUGIN{minibando}|oui)[(#REM|test_espace_prive|non)<span></span><ul><li><p>#CONFIG{feuillederoute/titre}</p></li></ul></li>]]
+<INCLURE{fond=inc/bouton_feuillederoute} />
 ]
 ]
 [(#REM|test_espace_prive|oui)

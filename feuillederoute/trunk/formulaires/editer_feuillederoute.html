@@ -14,10 +14,10 @@
 		<a href="#" class="poignee_feuillederoute" id="feuillederoute_ancre_editer"><:feuillederoute:modifier_le_texte:></a>
 	]
 
+	[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+	[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+	
 	<div class="formulaire_spip formulaire_feuillederoute[(#GET{existe}|=={oui}|oui) tiroir_feuillederoute]">
-
-		[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
-		[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
 
 		<form action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}

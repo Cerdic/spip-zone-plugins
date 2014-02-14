@@ -7,16 +7,23 @@
 	<li class="fieldset">
 		<fieldset>
 			<h3 class="legend">#VALEUR</h3>
-			<ul>
-			[(#REM) <!-- Choix de la methode d'autorisation --> ]
-				[(#SAISIE{radio, [(#GET{prefixe})]type,
-					label=<:feuillederoute:cfg_lbl_type_autorisation:>,
-					explication=<:feuillederoute:cfg_inf_type_autorisation:>,
-					datas=#ARRAY{
-						webmestre,<:feuillederoute:cfg_lbl_autorisation_webmestre:>,
-						par_statut,<:feuillederoute:cfg_lbl_autorisation_statuts:>,
-						par_auteur,<:feuillederoute:cfg_lbl_autorisation_auteurs:>},
-					defaut=par_statut})]
+			<ul id="[(#GET{prefixe})]bloc_par_type">
+				<li class="editer editer_#GET{prefixe}">
+					<label><:feuillederoute:cfg_lbl_type_autorisation:></label>
+					<p class="explication"><:feuillederoute:cfg_inf_type_autorisation:></p>
+					<div class="choix choix_webmestre">
+						<input type='radio' class='radio' name='#GET{prefixe}type' id='#GET{prefixe}_1'[(#ENV{#GET{prefixe}type}|=={webmestre}|oui)checked="checked" ]value="webmestre" />
+						<label for="#GET{prefixe}_1"><:feuillederoute:autoriser_uniquement_les_webmestres:></label>
+					</div>
+					<div class="choix choix_par_statut">
+						<input type='radio' class='radio' name='#GET{prefixe}type' id='#GET{prefixe}_2'[(#ENV{#GET{prefixe}type}|=={par_statut}|oui)checked="checked" ]value="par_statut" />
+						<label for="#GET{prefixe}_2"><:feuillederoute:autoriser_par_statut_d_auteur:></label>
+					</div>
+					<div class="choix choix_par_auteur">
+						<input type='radio' class='radio' name='#GET{prefixe}type' id='#GET{prefixe}_3'[(#ENV{#GET{prefixe}type}|=={par_auteur}|oui)checked="checked" ]value="par_auteur" />
+						<label for="#GET{prefixe}_3"><:feuillederoute:autoriser_par_auteur:></label>
+					</div>
+				</li>
 			</ul>
 			[(#REM) <!-- Methode par statut d'auteurs (choix multiple) --> ]
 			<ul id="[(#GET{prefixe})]bloc_par_statut" class="[(#GET{prefixe})]bloc[(#ENV{[(#GET{prefixe})type]}|non) visible]">
@@ -27,18 +34,26 @@
 						#SET{defaut,#ARRAY{0,0minirezo,1,1comite}}]
 				]
 
-				[(#SAISIE{statuts_auteurs,[(#GET{prefixe})]statuts,
-					label=<:feuillederoute:cfg_lbl_statuts_auteurs:>,
-					defaut=#GET{defaut},
-					multiple=oui})]
+				<li class="editer editer_[(#GET{prefixe})]statuts">
+					<label for="champ_modifier_statuts"><:feuillederoute:statuts_possibles:></label>
+					<select size="3" multiple="multiple" id="champ_[(#GET{prefixe})]statuts" name="[(#GET{prefixe})]statuts[]">
+						<option[(#VAL{0minirezo}|in_any{#ENV{#GET{prefixe}statuts}}|oui) selected="selected"] value="0minirezo">Administrateurs</option>
+						<option[(#VAL{1comite}|in_any{#ENV{#GET{prefixe}statuts}}|oui) selected="selected"] value="1comite">Rédacteurs</option>
+						<option[(#VAL{6forum}|in_any{#ENV{#GET{prefixe}statuts}}|oui) selected="selected"] value="6forum">Visiteurs</option>
+					</select>
+				</li>
 			</ul>
-			[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
+			<B_auteurs>[(#REM) <!-- Methode par id d'auteurs (choix multiple) --> ]
 			<ul id="[(#GET{prefixe})]bloc_par_auteur" class="[(#GET{prefixe})]bloc">
-				[(#SAISIE{auteurs,[(#GET{prefixe})]auteurs,
-					label=<:feuillederoute:cfg_lbl_liste_auteurs:>,
-					multiple=oui,
-					option_statut=oui})]
-			</ul>
+				<li class="editer editer_[(#GET{prefixe})]auteurs">
+					<label><:feuillederoute:cfg_lbl_liste_auteurs:></label>
+					<select size="10" multiple="multiple" id="champ_[(#GET{prefixe})]auteurs" name="[(#GET{prefixe})]auteurs[]">
+						<BOUCLE_auteurs(AUTEURS){par nom}{tout}>
+						<option[(#VAL{#ID_AUTEUR}|in_any{#ENV{#GET{prefixe}auteurs}}|oui) selected="selected"] value="#ID_AUTEUR">#NOM</option>
+						</BOUCLE_auteurs>
+					</select>
+				</li>
+			</ul></B_auteurs>
 		</fieldset>
 		<script type="text/javascript">
 		//<![CDATA[
