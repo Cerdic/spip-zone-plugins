@@ -50,7 +50,19 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
                         'label' => _T('reservation:label_statut_defaut'),
                         'defaut'=> $config['statut_defaut']
                     )
-                ),                              
+                ), 
+                array(
+                    'saisie' => 'selection_multiple',
+                    'options' => array(
+                        'nom' => 'statuts_complet',
+                        'datas' => $statuts,
+                        'defaut'=> 'valide',
+                        'cacher_option_intro' => 'on',
+                        'label' => _T('reservation:label_statuts_complet'),
+                        'explication' => _T('reservation:statuts_complet_explication'),                       
+                        'defaut'=> $config['statuts_complet']
+                    )
+                ),                                             
             )            
 		),
 		array(
@@ -97,18 +109,7 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 						'defaut' => $config['quand']
 					)
 					
-				),
-				array(
-					'saisie' => 'selection_multiple',
-					'options' => array(
-						'nom' => 'envoi_separe',
-						'label' => _T('reservation:notifications_envoi_separe'),
-						'explication' => _T('reservation:notifications_envoi_separe_explication'),
-						'cacher_option_intro' => 'on',
-						'datas' => $statuts_selectionnees,
-						'defaut' => $config['envoi_separe']
-					)
-				),					
+				),				
 				array(
 					'saisie' => 'selection',
 					'options' => array(
@@ -212,7 +213,18 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 						'explication' => _T('reservation:notifications_client_explication'),
 						'defaut' => $config['client'],
 					)
-				)											
+				),
+				array(
+					'saisie' => 'selection_multiple',
+					'options' => array(
+						'nom' => 'envoi_separe',
+						'label' => _T('reservation:notifications_envoi_separe'),
+						'explication' => _T('reservation:notifications_envoi_separe_explication'),
+						'cacher_option_intro' => 'on',
+						'datas' => $statuts_selectionnees,
+						'defaut' => $config['envoi_separe']
+					)
+				)															
 			)
 		)
 	);
