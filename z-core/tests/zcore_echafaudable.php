@@ -28,7 +28,8 @@
 
 	function test_zcore_echafaudable(){
 		$args = func_get_args();
-		$res = call_user_func_array('zcore_echafaudable', $args);
+		$f = (function_exists("zcore_echafaudable")?"zcore_echafaudable":"z_echafaudable");
+		$res = call_user_func_array($f, $args);
 		return is_array($res)?count($res):false;
 	}
 
