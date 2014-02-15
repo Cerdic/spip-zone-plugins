@@ -154,20 +154,16 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
     
 	//Si on change vers un statut compris dans les statuts complet, on vérifie si l'événement n'est pas complet
     if ($s != $statut and in_array($s,$statuts)) {
-    	spip_log($statuts,'teste');
     	// Si il y a une limitation dce places prévu on sélectionne les détails de réservation de l'évenement qui ont le statut_complet
         if($places AND $places>0){
-        	spip_log($places,'teste');
             $sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut IN ("'.implode('","',$statuts).'")');
             
             $reservations=array();
             while($data=sql_fetch($sql)){
                 $reservations[]=$data['quantite'];
             }
-			spip_log($reservations,'teste');
             if(array_sum($reservations)>=$places)$champs['statut']='attente';
-				
-            
+				           
         }
 
     }

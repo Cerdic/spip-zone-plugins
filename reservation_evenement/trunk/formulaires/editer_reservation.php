@@ -61,6 +61,10 @@ function formulaires_editer_reservation_identifier_dist($id_reservation='new', $
 function formulaires_editer_reservation_charger_dist($id_reservation='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('reservation',$id_reservation,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	if(isset($valeurs['langue']))$valeurs['lang']=$valeurs['langue'];
+	if(isset($valeurs['reference']) AND !$valeurs['reference']){
+		$fonction_reference = charger_fonction('reservation_reference', 'inc/');
+		$valeurs['reference']=$fonction_reference();  	
+	}
 	return $valeurs;
 }
 
@@ -87,15 +91,29 @@ function formulaires_editer_reservation_charger_dist($id_reservation='new', $ret
  *     Tableau des erreurs
  */
 function formulaires_editer_reservation_verifier_dist($id_reservation='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$email=_request('email');
+	$obligatoire=array('reference');
 	
-	$obligatoire=array('id_auteur');
-	
-	if(!_request('id_auteur') AND (_request('nom') OR _request('email')))$obligatoire=array('nom','email');
+	if(!_request('id_auteur') AND (_request('nom') OR $email)) $obligatoire=array_merge($obligatoire,array('nom','email'));
+	else $obligatoire=array_merge($obligatoire,array('id_auteur'));	
+		
+		
+
 	
 	
     
     $erreurs=formulaires_editer_objet_verifier('reservation',$id_reservation,$obligatoire);
-    
+         if ($email){
+            include_spip('inc/filtres');
+            // un redacteur qui modifie son email n'a pas le droit de le vider si il y en avait un
+            if (!email_valide($email)){
+                $id_auteur_session=isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:'';
+                $erreurs['email'] = (($id_auteur==$id_auteur_session)?_T('form_email_non_valide'):_T('form_prop_indiquer_email'));
+                }
+            elseif(!$id_auteur){
+                if($email_utilise=sql_getfetsel('email','spip_auteurs','email='.sql_quote($email))) $erreurs['email']=_T('reservation:erreur_email_utilise');
+                }
+            }	   
     
      // verifier et changer en datetime sql la date envoyee
      $verifier = charger_fonction('verifier', 'inc');

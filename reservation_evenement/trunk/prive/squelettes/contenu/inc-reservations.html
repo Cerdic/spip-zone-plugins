@@ -13,8 +13,7 @@
 <div class="nettoyeur"></div>
 <INCLURE{fond=prive/objets/liste/#GET{liste}, par=#ENV{par,reference},id_evenement=#GET{id_evenement},id_evenement_source=0,id_article=#GET{id_article}, env, ajax, sinon=#GET{sinon},ajax}>
 
-[(#REM) désactivé pour le moment
+
 [(#AUTORISER{creer,reservation})
 	[(#URL_ECRIRE{reservation_edit,new=oui}|icone_verticale{<:reservation:icone_creer_reservation:>,reservation,new,right})]
-]
 ]
