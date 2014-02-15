@@ -174,14 +174,16 @@ function formidable_declarer_tables_principales($tables_principales){
 
 	// Table formulaires_reponses_champs 
 	$formulaires_reponses_champs = array(
+		"id_formulaires_reponses_champ" => "bigint(21) NOT NULL",
 		"id_formulaires_reponse" => "bigint(21) NOT NULL default 0",
 		"nom" => "varchar(255) NOT NULL default ''",
 		"valeur" => "text NOT NULL DEFAULT ''",
 		"maj" => "timestamp"
 	);
 	$formulaires_reponses_champs_cles = array(
-		"PRIMARY KEY" => "id_formulaires_reponse, nom",
-		"KEY id_formulaires_reponse" => "id_formulaires_reponse"
+		"PRIMARY KEY" => "id_formulaires_reponses_champ",
+		"KEY id_formulaires_reponse" => "id_formulaires_reponse",
+		"KEY nom" => "nom",
 	);
 	$tables_principales['spip_formulaires_reponses_champs'] = array(
 		'field' => &$formulaires_reponses_champs,

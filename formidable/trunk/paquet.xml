@@ -1,11 +1,11 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="2.3.0"
+	version="2.4.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
-	schema="0.5.6"
+	schema="0.6.0"
 	documentation="http://www.spip-contrib.net/Formidable-le-generateur-de"
 >
 

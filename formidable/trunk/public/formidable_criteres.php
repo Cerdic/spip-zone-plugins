@@ -34,7 +34,7 @@ function critere_tri_selon_reponse_dist($idb, &$boucles, $crit) {
 		$k = count($boucle->join)+1;
 		$boucle->join[$k]= array($t,'id_formulaires_reponse');
 		$boucle->from["L$k"]= 'spip_formulaires_reponses_champs';
-		$op = array("'='", "'L$k.nom'", "_q(".$_quoi.")");
+		$op = array("'='", "'L$k.nom'", "sql_quote(".$_quoi.")");
 		$boucle->where[]= array("'?'","!in_array($_quoi,array('date','id_formulaires_reponse'))",$op,"''");
 		$boucle->order[]= "(in_array($_quoi,array('date','id_formulaires_reponse'))?'$t.'.$_quoi:(strncmp($_quoi,'date_',5)==0?'STR_TO_DATE(L$k.valeur,\'%d/%m/%Y\')':'L$k.valeur'))".($not?".' DESC'":"");
 	}
@@ -55,7 +55,7 @@ function critere_recherche_reponse_dist($idb, &$boucles, $crit) {
 		$k = count($boucle->join)+1;
 		$boucle->join[$k]= array($t,'id_formulaires_reponse');
 		$boucle->from["L$k"]= 'spip_formulaires_reponses_champs';
-		$op = array("'LIKE'","'L$k.valeur'","_q(strpos($_quoi,'%')===false?'%'.".$_quoi.".'%':$_quoi)");
+		$op = array("'LIKE'","'L$k.valeur'","sql_quote(strpos($_quoi,'%')===false?'%'.".$_quoi.".'%':$_quoi)");
 		$boucle->where[]= array("'?'",$_quoi,$op,"''");
 	}
 }

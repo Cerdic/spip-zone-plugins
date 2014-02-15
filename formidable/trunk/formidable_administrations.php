@@ -53,9 +53,45 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_updateq','spip_formulaires',array('statut'=>'publie'),"statut=".sql_quote('')),
 	);
 
+	$maj['0.6.0'] = array(
+		array('sql_alter','TABLE spip_formulaires_reponses_champs RENAME TO spip_formulaires_reponses_champs_bad'),
+		array('maj_tables',array('spip_formulaires_reponses_champs')),
+		array('formidable_transferer_reponses_champs'),
+		array('sql_drop_table','spip_formulaires_reponses_champs_bad'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
+
+function formidable_transferer_reponses_champs(){
+
+	$rows = sql_allfetsel("DISTINCT id_formulaires_reponse","spip_formulaires_reponses_champs_bad",'','id_formulaires_reponse','','0,100');
+	do {
+
+		foreach($rows as $row){
+
+			// pour chaque reponse on recupere tous les champs
+			$reponse = sql_allfetsel("*","spip_formulaires_reponses_champs_bad","id_formulaires_reponse=".intval($row['id_formulaires_reponse']));
+			// on les reinsere un par un dans la nouvelle table propre
+			foreach($reponse as $champ){
+				sql_insertq("spip_formulaires_reponses_champs",$champ);
+			}
+			// et on les vire de la mauvaise
+			sql_delete("spip_formulaires_reponses_champs_bad","id_formulaires_reponse=".intval($row['id_formulaires_reponse']));
+
+			if (time()>_TIME_OUT)
+				return;
+		}
+
+		if (time()>_TIME_OUT)
+			return;
+
+	}
+	while ($rows = sql_allfetsel("DISTINCT id_formulaires_reponse","spip_formulaires_reponses_champs_bad",'','id_formulaires_reponse','','0,100'));
+
+}
+
 
 /**
  * Désinstallation/suppression des tables de formidable
@@ -193,6 +229,7 @@ function formidable_importer_forms_donnees(){
 
 				#var_dump($row);
 				$reponse = array(
+					"id_formulaires_reponse"=>$row['id_donnee'], // conserver le meme id par facilite (on est sur une creation de base)
 					"id_formulaire" => $trans[$row['id_form']],
 					"date" => $row["date"],
 					"ip" => $row["ip"],
