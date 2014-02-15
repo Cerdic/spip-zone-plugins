@@ -132,7 +132,6 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
     include_spip('inc/autoriser');
     include_spip('inc/rubriques');
     include_spip('inc/modifier');
-
 	
     $row = sql_fetsel('*','spip_reservations_details','id_reservations_detail='.intval($id_reservations_detail));
     $id_reservation=$row['id_reservation'];
@@ -149,17 +148,22 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 
     $champs['statut']= $s ;
     
-    // compter les réservations
-    if ($s != $statut and $s=='accepte') {
-        if(intval($places) AND $places>0){
-            $sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut ='.sql_quote('accepte'));
+    // Vérifier si les statut peuvent ètre modifiés
+ 	$statuts_complets=charger_fonction('complet','inc/statuts');
+	$statuts=$statuts_complets();   
+    
+	//Si on change vers un statut compris dans les statuts complet, on vérifie si l'événement n'est pas complet
+    if ($s != $statut and in_array($s,$statuts)) {
+    	// Si il y a une limitation dce places prévu on sélectionne les détails de réservation de l'évenement qui ont le statut_complet
+        if($places AND $places>0){
+            $sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut IN ("'.implode('","',$statuts).'")');
             
             $reservations=array();
             while($data=sql_fetch($sql)){
                 $reservations[]=$data['quantite'];
             }
             if(array_sum($reservations)>=$places)$champs['statut']='attente';
-            
+				           
         }
 
     }
@@ -204,14 +208,12 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 	
     // Notifications si en mode différe et ne pas déclenché par le changement de statut de la réservation
     
- 	if($envoi_separe_actif!='non'){
-    	include_spip('inc/config');	
-		
+ 	if($envoi_separe_actif!='non'){		
 		//Déterminer la langue pour les notifications	
 		if(!$lang=sql_getfetsel('lang','spip_reservations','id_reservation='.$id_reservation)) $lang=lire_config('langue_site');				
 
  		lang_select($lang);	
-		
+		include_spip('inc/config');	
 		$config = lire_config('reservation_evenement');
 		$envoi_separe_config=isset($config['envoi_separe'])?$config['envoi_separe']:array(); 
 		

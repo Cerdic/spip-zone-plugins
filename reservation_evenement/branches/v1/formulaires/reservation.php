@@ -158,7 +158,11 @@ function formulaires_reservation_traiter_dist($id='',$id_article=''){
     include_spip('inc/session');    
     include_spip('inc/config');
     $config=lire_config('reservation_evenement');
-    $statut = $config['statut_defaut']?$config['statut_defaut']:'attente'; 
+    $statut = $config['statut_defaut']?$config['statut_defaut']:'rien';
+	if($statut=='rien'){
+		$statut_defaut=charger_fonction('defaut','inc/statut');
+		$statut=$statut_defaut($statut);
+	} 
 
     //Créer la réservation
     $action=charger_fonction('editer_objet','action');

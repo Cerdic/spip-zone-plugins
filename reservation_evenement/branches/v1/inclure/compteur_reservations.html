@@ -11,7 +11,7 @@
     #SET{#CLE,#ARRAY}
 </BOUCLE_status>
 
-<BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?}>
+<BOUCLE_reservations(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut}}>
     [(#ENV{multiple}|non)
      #SET{reservations,#GET{reservations}|push{#QUANTITE}}   
     ]
