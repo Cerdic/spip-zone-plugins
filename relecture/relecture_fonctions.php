@@ -79,7 +79,7 @@ function relecture_lister_elements($id) {
 	$elements = array();
 
 	if ($id_relecture = intval($id)) {
-		$select = array('article_chapo AS chapo', 'article_descr AS descr', 'article_texte AS texte', 'article_ps AS ps');
+		$select = array('article_descr AS descr', 'article_chapo AS chapo', 'article_texte AS texte', 'article_ps AS ps');
 		$from = 'spip_relectures';
 		$where = array("id_relecture=$id_relecture");
 		$champs = sql_fetsel($select, $from, $where);

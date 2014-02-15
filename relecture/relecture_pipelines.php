@@ -149,7 +149,7 @@ function relecture_formulaire_charger($flux){
 			// A ce stade, le formulaire instituer_objet est deja testé avec l'autorisation modifier.
 			// On rajoute le fait qu'il n'y ait plus de commentaires a traiter
 			// TODO : verifier qu'on le fait ici et pas dans l'autorisation instituer sur le verifier ?
-			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
+			// Le formulaire n'est editable que si l'autorisation instituer est accordee.
 			$flux['data']['editable'] = autoriser('instituer', 'relecture', $id_objet);
 		}
 	}

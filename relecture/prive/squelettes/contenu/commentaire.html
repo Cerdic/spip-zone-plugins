@@ -1,0 +1,67 @@
+[(#AUTORISER{voir, commentaire, #ID_COMMENTAIRE}|sinon_interdire_acces)]
+<BOUCLE_commentaire(COMMENTAIRES){id_commentaire}{statut==.*}{si #ENV{exec}|=={commentaire}}>
+[(#REM) <!-- Ouverture de la fiche objet : titre commentaire --> ]
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier, commentaire, #ID_COMMENTAIRE})
+		[(#ID_COMMENTAIRE|afficher_qui_edite{commentaire}|non)
+			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}|icone_verticale{<:relecture:bouton_modifier_commentaire:>, commentaire, edit, right ajax preload})]
+		]
+		[(#ID_COMMENTAIRE|afficher_qui_edite{commentaire}|oui)
+			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}|icone_verticale{#ID_COMMENTAIRE|afficher_qui_edite{commentaire},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+	<h1>(#INFO_TITRE{commentaire, #ID_COMMENTAIRE}|sinon{<:relecture:titre_commentaire:>})[(#CHEMIN_IMAGE{commentaire-24.png}|balise_img{commentaire, cadre-icone})]</h1>],
+	simple fiche_objet})
+]
+
+	[(#REM) <!-- Date d'ouverture et de dernière modification du commentaire --> ]
+	[(#BOITE_OUVRIR{<h5 id="ouverture"><:relecture:titre_boite_ouverture|strtoupper:></h5>, raccourcis})]
+		<div class="unit size2of3">
+			<span><strong><:relecture:label_date_ouverture_commentaire:></strong> : </span>
+			<span dir="#LANG_DIR">[(#DATE_OUVERTURE|affdate)]</span>
+		</div>
+		<div class="unit size1of3 lastUnit">
+			<span><strong><:relecture:label_date_modif_commentaire:></strong> : </span>
+			<span dir="#LANG_DIR">[(#DATE_MODIF|affdate)]</span>
+		</div>
+	#BOITE_FERMER
+
+	[(#REM) <!-- Description de la relecture --> ]
+	<div id="wysiwyg">
+		<INCLURE{fond=prive/objets/contenu/commentaire, id=#ID_COMMENTAIRE, id_relecture=#ID_RELECTURE, ajax=wysiwyg, wysiwyg=1}>
+	</div>
+
+	[(#REM) <!-- Bouton d'édition de la relecture --> ]
+	[(#AUTORISER{modifier, commentaire, #ID_COMMENTAIRE})
+
+		[(#ID_COMMENTAIRE|afficher_qui_edite{commentaire}|non)
+			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}|icone_verticale{<:relecture:bouton_modifier_commentaire:>,commentaire,edit,right ajax preload})]
+		]
+		[(#ID_COMMENTAIRE|afficher_qui_edite{commentaire}|oui)
+			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}|icone_verticale{#ID_COMMENTAIRE|afficher_qui_edite{commentaire},warning-24,'',right edition_deja ajax preload})]
+		]
+		<div class="nettoyeur"></div>
+	]
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args, #ARRAY{type, commentaire, id, #ID_COMMENTAIRE}, data, '<div class="nettoyeur"></div>'}}
+#BOITE_FERMER
+
+[(#REM) <!-- Pipeline pour insérer des blocs enfants à l'objet --> ]
+#SET{enfants,''}
+[(#VAL{commentaire-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants, [(#INCLURE{fond=prive/objets/contenu/commentaire-enfants, id_commentaire, env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet, commentaire, id_objet, #ID_COMMENTAIRE}, data, #GET{enfants}})]})]
+
+
+[(#REM) <!-- L'objet commentaire, si il est encore ouvert, possède toujours un forum actif --> ]
+<INCLURE{fond=prive/squelettes/inclure/discuter_forum, env, objet=commentaire, id_objet=#ID_COMMENTAIRE, statut=prive, ajax} />
+
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_commentaire>
+
+	[(#ENV**{exec}|=={commentaire_edit}|?{#INCLURE{fond=prive/squelettes/contenu/commentaire_edit, redirect='', env, retourajax=oui}, #REM|sinon_interdire_acces})]
+<//B_commentaire>

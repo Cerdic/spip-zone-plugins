@@ -1,0 +1,18 @@
+[(#REM) <!-- hierarchie specifique pour la relecture :
+	- racine du site et hiérarchie des rubriques
+	- Lien parent vers la page de l'article associe
+	- Titre de la relecture compose ou relecture sinon
+--> ]
+
+<BOUCLE_commentaire(COMMENTAIRES) {id_commentaire}>
+	<BOUCLE_article(RELECTURES){id_relecture}>
+		<INCLURE{fond=prive/squelettes/inclure/fil_ariane,
+			id_article=#ID_ARTICLE,
+			id_relecture,
+			id_commentaire,
+			env} />
+	</BOUCLE_article>
+</BOUCLE_commentaire>
+	<INCLURE{fond=prive/squelettes/inclure/fil_ariane,
+		env} />
+<//B_commentaire>

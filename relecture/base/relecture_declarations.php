@@ -125,13 +125,13 @@ function relecture_declarer_tables_objets_sql($tables) {
 
 		// Edition, affichage et recherche
 		'page'					=> '',
-		'url_voir' 				=> 'commentaire_edit',
+		'url_voir' 				=> 'commentaire',
 		'url_edit' 				=> 'commentaire_edit',
 		'editable'				=> 'oui',
 		'champs_editables'		=> array('texte', 'reponse'),
 		'rechercher_champs'		=> array(),
 		'rechercher_jointures'	=> array(),
-		'icone_objet'			=> '',
+		'icone_objet'			=> 'commentaire',
 
 		// Textes standard
 		'texte_retour' 			=> 'icone_retour',

@@ -224,6 +224,40 @@ function autoriser_relecture_instituer_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
 
+	// Conditions :
+	// soit,
+	// - des commentaires ont été déposés
+	//   et plus aucun commentaire n'est encore ouvert (la période peut-être échue ou pas)
+	// - la relecture est ouverte
+	// - l'auteur connecté possède l'autorisation de modifier la relecture
+	// ou soit,
+	// - aucun commentaire n'a encore été déposé
+	//   et la période de dépose des commentaires est échue
+	// - la relecture est ouverte
+	// - l'auteur connecté possède l'autorisation de modifier la relecture
+	if ($id_relecture = intval($id)) {
+		$from = 'spip_relectures';
+		$where = array("id_relecture=$id_relecture");
+		$infos = sql_fetsel('statut, date_fin_commentaire', $from, $where);
+		$relecture_ouverte = ($infos['statut'] == 'ouverte');
+		$periode_echue = strtotime($infos['date_fin_commentaire'])<=time();
+
+		$from = 'spip_commentaires';
+		$where = array("id_relecture=$id_relecture");
+		$nb_commentaires = intval(sql_countsel($from, $where));
+		$where[] = "statut=" . sql_quote('ouvert');
+		$nb_commentaires_ouverts = intval(sql_countsel($from, $where));
+
+		$autorise_modifier_relecture = autoriser('modifier', 'relecture', $id_relecture, $qui, $opt);
+
+		$autoriser =
+			($relecture_ouverte
+			AND $autorise_modifier_relecture
+			AND ((($nb_commentaires==0)	AND $periode_echue)
+				OR (($nb_commentaires>0) AND ($nb_commentaires_ouverts==0))
+				));
+	}
+
 	return $autoriser;
 }
 
