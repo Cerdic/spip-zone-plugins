@@ -120,8 +120,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_statut' => 'Cette réponse est :',
 	'reponse_supprimer' => 'Supprimer cette réponse',
 	'reponse_supprimer_confirmation' => 'Êtes-vous sûr de vouloir supprimer cette réponse ?',
-	'reponses_supprimer' => 'Supprimer toutes les réponses à ce formulaire',
-	'reponses_supprimer_confirmation' => 'Êtes-vous sûr de vouloir supprimer toutes les réponses à ce formulaire ?',
 	'reponse_une' => '1 réponse',
 	'reponses_analyse' => 'Analyse des réponses',
 	'reponses_anonyme' => 'Anonyme',
@@ -132,6 +130,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste_prop' => 'Réponses en attente de validation',
 	'reponses_liste_publie' => 'Toutes les réponses validées',
 	'reponses_nb' => '@nb@ réponses',
+	'reponses_supprimer' => 'Supprimer toutes les réponses à ce formulaire',
+	'reponses_supprimer_confirmation' => 'Êtes-vous sûr de vouloir supprimer toutes les réponses à ce formulaire ?',
 	'reponses_voir_detail' => 'Voir la réponse',
 	'retour_aucun_traitement' => 'Votre réponse a bien été envoyée, mais aucun traitement n’a été défini pour ce formulaire. Il ne fait donc rien. :)',
 
