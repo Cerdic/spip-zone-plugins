@@ -113,6 +113,9 @@ function relecture_boite_infos($flux){
 }
 
 
+
+/* ----------------------- FORMULAIRES ----------------------- */
+
 /**
  * Surcharge de la fonction charger des formulaires concernes, a savoir :
  * - relecture / dater : dans la page relecture permet de choisir la date de fin des commentaires
@@ -146,9 +149,6 @@ function relecture_formulaire_charger($flux){
 			$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
 		}
 		else if ($form == 'instituer_objet') {
-			// A ce stade, le formulaire instituer_objet est deja testé avec l'autorisation modifier.
-			// On rajoute le fait qu'il n'y ait plus de commentaires a traiter
-			// TODO : verifier qu'on le fait ici et pas dans l'autorisation instituer sur le verifier ?
 			// Le formulaire n'est editable que si l'autorisation instituer est accordee.
 			$flux['data']['editable'] = autoriser('instituer', 'relecture', $id_objet);
 		}
@@ -311,6 +311,20 @@ function relecture_pre_edition($flux) {
 	}
 
 	return $flux;
+}
+
+/**
+ * Ajout de l'objet commentaire à la liste des objets dont on veut pouvoir obtenir l'identifiant
+ * directement dans l'environnement
+ *
+ * TODO : est-ce vraiment utile ?
+ *
+ * @param array $objets
+ * @return array $objets
+ */
+function relecture_forum_objets_depuis_env($objets){
+	$objets['commentaire'] = id_table_objet('commentaire');
+	return $objets;
 }
 
 ?>
