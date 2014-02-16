@@ -59,10 +59,72 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 		array('formidable_transferer_reponses_champs'),
 		array('sql_drop_table','spip_formulaires_reponses_champs_bad'),
 	);
+	$maj['0.6.1'] = array(
+		array('formidable_unifier_reponses_champs'),
+	);
+	$maj['0.6.3'] = array(
+		array('sql_alter','TABLE spip_formulaires_reponses_champs ADD UNIQUE reponse (id_formulaires_reponse,nom)'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
+
+
+function formidable_unifier_reponses_champs(){
+
+	$rows = sql_allfetsel("DISTINCT id_formulaires_reponses_champ,id_formulaires_reponse,nom,count(id_formulaires_reponse) AS N","spip_formulaires_reponses_champs",'nom LIKE '.sql_quote('multiple%').' OR nom LIKE '.sql_quote('mot%'),'concat( id_formulaires_reponse, nom )','id_formulaires_reponse','0,100','N>1');
+	do {
+
+
+		foreach($rows as $row){
+
+			#var_dump($row);
+
+			// pour chaque reponse on recupere tous les champs
+			$reponse = sql_allfetsel("*","spip_formulaires_reponses_champs","id_formulaires_reponse=".intval($row['id_formulaires_reponse']));
+			spip_log("id_formulaires_reponse ".$row['id_formulaires_reponse'],"formidable_unifier_reponses_champs"._LOG_INFO_IMPORTANTE);
+			// on les reinsere un par un dans la nouvelle table propre
+			$data = array();
+			foreach($reponse as $champ){
+				$data[$champ['nom']][] = $champ;
+			}
+
+			foreach($data as $nom=>$champs){
+				if (count($champs)>1){
+					#var_dump($champs);
+					$keep = $champs[0]['id_formulaires_reponses_champ'];
+					$delete = array();
+					$valeurs = array();
+					foreach($champs as $champ){
+						$valeurs[] = $champ['valeur'];
+						if ($champ['id_formulaires_reponses_champ']!==$keep)
+							$delete[] = $champ['id_formulaires_reponses_champ'];
+					}
+					$valeurs = serialize($valeurs);
+					#var_dump($valeurs);
+					#var_dump($keep);
+					#var_dump($delete);
+					sql_updateq('spip_formulaires_reponses_champs',array('valeur'=>$valeurs),'id_formulaires_reponses_champ='.intval($keep));
+					sql_delete('spip_formulaires_reponses_champs',sql_in('id_formulaires_reponses_champ',$delete));
+					//die();
+				}
+			}
+			#var_dump($data);
+			//die('nothing?');
+
+			if (time()>_TIME_OUT)
+				return;
+		}
+
+		if (time()>_TIME_OUT)
+			return;
+
+	}
+	while ($rows = sql_allfetsel("DISTINCT id_formulaires_reponses_champ,id_formulaires_reponse,nom,count( id_formulaires_reponse ) AS N","spip_formulaires_reponses_champs",'nom LIKE '.sql_quote('multiple%').' OR nom LIKE '.sql_quote('mot%'),'concat( id_formulaires_reponse, nom )','id_formulaires_reponse','0,100','N>1'));
+	//die('fini?');
+}
+
 
 function formidable_transferer_reponses_champs(){
 
@@ -245,7 +307,23 @@ function formidable_importer_forms_donnees(){
 				#var_dump($id_formulaires_reponse);
 				if ($id_formulaires_reponse){
 					$donnees = sql_allfetsel("$id_formulaires_reponse as id_formulaires_reponse,champ as nom,valeur","spip_forms_donnees_champs","id_donnee=".intval($row['id_donnee']));
-					sql_insertq_multi("spip_formulaires_reponses_champs",$donnees);
+					$data = array();
+					foreach($donnees AS $donnee){
+						$data[$donnee['nom']][] = $donnee;
+					}
+					$ins = array();
+					foreach($data as $nom=>$valeurs){
+						if (count($valeurs)==1)
+							$ins[] = reset($valeurs);
+						else {
+							$v = array();
+							foreach($valeurs as $valeur)
+								$v[] = $valeur['valeur'];
+							$valeurs[0]['valeur'] = serialize($v);
+							$ins[] = $valeurs[0];
+						}
+					}
+					sql_insertq_multi("spip_formulaires_reponses_champs",$ins);
 					// et on marque la donnee pour ne pas la rejouer
 					sql_update("spip_forms_donnees",array("id_formulaires_reponse"=>$id_formulaires_reponse),"id_donnee=".intval($row['id_donnee']));
 				}

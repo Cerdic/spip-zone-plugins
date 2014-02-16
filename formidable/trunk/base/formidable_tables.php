@@ -184,6 +184,7 @@ function formidable_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY" => "id_formulaires_reponses_champ",
 		"KEY id_formulaires_reponse" => "id_formulaires_reponse",
 		"KEY nom" => "nom",
+		"UNIQUE reponse" => "id_formulaires_reponse,nom",
 	);
 	$tables_principales['spip_formulaires_reponses_champs'] = array(
 		'field' => &$formulaires_reponses_champs,
