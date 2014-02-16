@@ -4,17 +4,16 @@
 	Matthieu Marcillaud [magraine.net->http://magraine.net]
 	</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.4.2</version>
+	<version>1.0.0</version>
 	<description>
-	Fourni la bibliotheque [Simple Test->http://simpletest.org/] 1.0.1 
+	Fourni la bibliotheque [Simple Test->http://simpletest.org/] 1.1.1 
 	pour effectuer des tests unitaires,
 	ainsi qu'une API pour faciliter les tests avec SPIP.
 	</description>
 	<documentation>[->http://www.spip-contrib.net/Les-tests-unitaires]</documentation>
-	
+
 	<etat>test</etat>
 	<prefix>simpletest</prefix>
-  	
-	<options>simpletest_options.php</options>
-	<necessite id="SPIP" version="[2.0;]" />
+
+	<necessite id="SPIP" version="[3.0.0;]" />
 </plugin>
