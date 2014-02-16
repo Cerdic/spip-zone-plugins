@@ -6,9 +6,8 @@
 	<licence>GNU/GLP</licence>
 	<version>1.0.0</version>
 	<description>
-	Fourni la bibliotheque [Simple Test->http://simpletest.org/] 1.1.1 
-	pour effectuer des tests unitaires,
-	ainsi qu'une API pour faciliter les tests avec SPIP.
+	Fourni la bibliotheque [Simple Test->http://simpletest.org/] 1.1alpha3
+	pour effectuer des tests unitaires, ainsi qu'une API pour faciliter les tests avec SPIP.
 	</description>
 	<documentation>[->http://www.spip-contrib.net/Les-tests-unitaires]</documentation>
 
