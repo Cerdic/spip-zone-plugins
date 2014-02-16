@@ -103,9 +103,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_enregistre' => 'Votre Inscription a bien été enregistré. Vous recevrez un email de confirmation. Si aucun mail ne vous est parvenu, verifiez dans votre dossier spam.',
 	'reservation_numero' => 'Réservation :',
 	'reservation_reference_numero' => 'Référence n° ',
-	
-	//S
-	'statuts_complet_explication'=>'Les statuts du détails de résérvation pris en compte pour déterminer si l\'événement est complet.',
+
+	// S
+	'statuts_complet_explication' => 'Les statuts du détails de résérvation pris en compte pour déterminer si l’événement est complet.',
 
 	// T
 	'texte_ajouter_reservation' => 'Ajouter une réservation',
