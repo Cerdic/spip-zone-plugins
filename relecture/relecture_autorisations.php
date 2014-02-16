@@ -281,7 +281,6 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// Conditions :
 	// - Seul l'auteur ayant depose le commmentaire peut le modifier
 	// - le commentaire est encore ouvert
-
 	if ($id_commentaire = intval($id)) {
 		$from = 'spip_commentaires';
 		$where = array("id_commentaire=$id_commentaire");
@@ -314,7 +313,6 @@ function autoriser_commentaire_moderer_dist($faire, $type, $id, $qui, $opt) {
 	// - l'auteur connecte est un des auteurs de l'article
 	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article (besoin de maintenance)
 	// - le commentaire est encore ouvert
-
 	if ($id_commentaire = intval($id)) {
 		$from = array('spip_commentaires AS c', 'spip_relectures AS r');
 		$where = array("id_commentaire=$id_commentaire", 'c.id_relecture=r.id_relecture');
@@ -349,9 +347,24 @@ function autoriser_commentaire_moderer_dist($faire, $type, $id, $qui, $opt) {
  * @param object $opt
  * @return
  */
-function autoriser_commentaire_forumparticiper_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_commentaire_participerforum_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
+
+	// Conditions :
+	// - Seul l'auteur ayant depose le commmentaire peut le modifier
+	// - le commentaire est encore ouvert
+	if ($id_commentaire = intval($id)) {
+		$from = 'spip_commentaires';
+		$where = array("id_commentaire=$id_commentaire");
+		$infos = sql_fetsel('id_emetteur, statut', $from, $where);
+
+		$commentaire_ouvert = ($infos['statut'] == 'ouvert');
+
+		$autoriser =
+			($commentaire_ouvert);
+	}
+
 
 	return $autoriser;
 }

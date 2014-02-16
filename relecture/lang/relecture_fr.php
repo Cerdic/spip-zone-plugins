@@ -91,6 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_commentaire_ouvert' => 'Ouvert',
 	'texte_commentaire_refuse' => 'Non retenu',
 	'texte_commentaire_poubelle' => 'Supprimé',
+	'texte_instituer_commentaire' => 'Ce commentaire est :',
 	'texte_instituer_relecture' => 'Cette relecture est :',
 	'texte_relecture_fermee' => 'Fermée',
 	'texte_relecture_ouverte' => 'Ouverte',
