@@ -1,0 +1,62 @@
+body {
+	font-family: Lucida,Verdana,sans-serif;
+	background-color: #eeeeee;
+	font-size:small;
+}
+
+h1 {
+	background-color:#0066BB;
+	color:white;
+	font-size:large;
+	padding:15px;
+}
+h1 a {
+	color:white;
+}
+
+dt {
+	background-color: #aaa;
+	color: white;
+	padding: 4px;
+	font-size:medium;
+}
+
+dd, dd a {
+	background-color: white;
+	color: #333;
+	text-decoration: none;
+}
+
+dd.ok, dd.ok a {
+	color: green;
+}
+dd.na, dd.na a {
+	color: yellow;
+}
+dd.erreur, dd.erreur a {
+	color: red;
+}
+
+dl.ok dt {
+	background-color: green;
+}
+dl.erreur dt {
+	background-color: orange;
+}
+
+div.result {
+	background-color: white;
+	color: black;
+	font-size: small;
+	border: dotted 1px;
+	padding: 2px;
+}
+
+#count {
+	padding: 3px;
+	border: dotted 1px;
+	background-color: white;
+	float:right;
+	text-align:right;
+	position: absolute; top:4px; right:4px;
+}
