@@ -77,9 +77,6 @@ function relecture_affiche_gauche($flux) {
 		if ($id = intval($flux['args']['id_article'])) {
 			$table = table_objet($type);
 			$id_table_objet = id_table_objet($type);
-
-//			$flux['data'] .= recuperer_fond('prive/squelettes/navigation/article-relecture',
-//								array($id_table_objet => $id));
 		}
 	}
 
@@ -103,9 +100,6 @@ function relecture_boite_infos($flux){
 		if ($id = intval($flux['args']['id'])) {
 			$table = table_objet($type);
 			$id_table_objet = id_table_objet($type);
-
-//			$flux['data'] .= recuperer_fond('prive/squelettes/infos/article-relecture',
-//								array($id_table_objet => $id));
 		}
 	}
 

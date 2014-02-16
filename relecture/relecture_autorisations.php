@@ -262,8 +262,10 @@ function autoriser_relecture_instituer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 
+/* ----------------------- AUTORISATIONS DE L'OBJET COMMENTAIRE ----------------------- */
+
 /**
- * Autorisation de modifier le texte d'un commentaire
+ * Autorisation de modifier le texte ou la réponse d'un commentaire
  *
  * @param object $faire
  * @param object $type
@@ -349,7 +351,7 @@ function autoriser_commentaire_moderer_dist($faire, $type, $id, $qui, $opt) {
  */
 function autoriser_commentaire_instituer_dist($faire, $type, $id, $qui, $opt) {
 
-	$autoriser = true;
+	$autoriser = false;
 
 	return $autoriser;
 }

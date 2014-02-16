@@ -35,19 +35,21 @@
 				]
 				<th class="date" scope="col">[(#TRI{date_fin_commentaire, <:relecture:label_date_fin_commentaire_abrege:>, ajax})]</th>
 			]
-			[(#ENV{affichage}|=={menu_navigation}|oui)
-				<th class="numero" scope="col">[(#TRI{revision_ouverture, <:relecture:label_revision_ouverture_abrege:>, ajax})]</th>
-			]
 			</tr>
 		</thead>
 		<tbody>
 	<BOUCLE_liste_relectures(RELECTURES) {id_article?}{statut?}{where?}{recherche?}{tri #ENV{par, id_relecture}, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
-				<td class='statut'>[(#STATUT|puce_statut{relecture, #STATUT, 0, relecture, #EVAL{false}, #EVAL{false}})]</td>
-				<td class='titre principale'>
+				<td class="statut">[(#STATUT|puce_statut{relecture, #STATUT, 0, relecture, #EVAL{false}, #EVAL{false}})]</td>
+				<td class="titre principale">
+				[(#AUTORISER{voir, relecture, #ID_RELECTURE}|oui)
 					[<a href="[(#ID_RELECTURE|generer_url_entite{relecture})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RELECTURE">
 						(#INFO_TITRE{relecture, #ID_RELECTURE})
 					</a>]
+				]
+				[(#AUTORISER{voir, relecture, #ID_RELECTURE}|non)
+					#INFO_TITRE{relecture, #ID_RELECTURE}
+				]
 				</td>
 			[(#ENV{affichage}|=={menu_navigation}|non)
 				<td class="titre">
@@ -58,14 +60,6 @@
 					<td class="numero">[(#GET{compteurs}|table_valeur{ouvert})]</td>
 				]
 				<td class="date">[(#DATE_FIN_COMMENTAIRE|affdate_court)]</td>
-			]
-			[(#ENV{affichage}|=={menu_navigation}|oui)
-				<td class='numero'>
-					[(#SET{url_revision, [(#URL_ECRIRE{revision, objet=article}
-											|parametre_url{id_objet, #ID_ARTICLE}
-											|parametre_url{id_version, #REVISION_OUVERTURE})]})]
-					<a[ href="(#GET{url_revision})"]>[(#REVISION_OUVERTURE)]</a>
-				</td>
 			]
 			</tr>
 	</BOUCLE_liste_relectures>
