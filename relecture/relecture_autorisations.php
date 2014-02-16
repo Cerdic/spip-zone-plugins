@@ -349,6 +349,23 @@ function autoriser_commentaire_moderer_dist($faire, $type, $id, $qui, $opt) {
  * @param object $opt
  * @return
  */
+function autoriser_commentaire_forumparticiper_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
+
+	return $autoriser;
+}
+
+/**
+ * Autorisation de modifier le statut d'un commentaire
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
 function autoriser_commentaire_instituer_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
