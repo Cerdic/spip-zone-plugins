@@ -11,13 +11,6 @@
 #SET{mots,#GET{mots}|push{#ID_MOT}}
 </BOUCLE_mots_actifs>
 <ul>
-	<li>
-		<label for="#GET{name}">#TITRE</label>
-		<select name='#GET{name}\[\]' class='crayon-active chosen' multiple='multiple' id="#GET{name}" style="width:[(#ENV{largeur}|moins{40})]px">
-			<BOUCLE_mots(MOTS){id_groupe}{par num titre, titre}>
-			<option value="#ID_MOT" [(#ID_MOT|in_array{#GET{mots}}|oui) selected="selected"]>#TITRE</option>
-			</BOUCLE_mots>
-		</select>
-	</li>
+	[(#SAISIE{mots_groupe, #GET{name}, id_groupe=#ID_GROUPE, class=crayons-active, valeur=#GET{mots}, label=#TITRE})]
 </ul>
 </BOUCLE_groupe>
