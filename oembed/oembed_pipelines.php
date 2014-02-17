@@ -191,7 +191,7 @@ function oembed_pre_propre($texte) {
 	// (mais jamais les liens inline dans le texte car ca casse trop l'ancien contenu)
 	if (stripos($texte,"<a")!==false
 		AND lire_config('oembed/embed_auto','oui')!='non') {
-		preg_match_all(",(^|(\r?\n\r?\n))(<a\b[^>]*>[^\r\n]*</a>)((\r?\n\r?\n)|$),Uims",$texte,$matches,PREG_SET_ORDER);
+		preg_match_all(",(^|(?:\r?\n\r?\n)) *(<a\b[^>]*>[^\r\n]*</a>) *((?:\r?\n\r?\n)|$),Uims",$texte,$matches,PREG_SET_ORDER);
 		if (count($matches)){
 
 			$replace = array();
