@@ -65,7 +65,7 @@ function formidable_post_edition($flux){
 		$objet = objet_type($table);
 		$contenu = implode(' ',$row);
 		$formulaires = formidable_trouve_liens($contenu);
-		include_spip("inc/editer_liens");
+		include_spip("action/editer_liens");
 		$deja = objet_trouver_liens(array("formulaire"=>"*"),array($objet=>$id_objet));
 		$del = array();
 		if (count($deja)){
