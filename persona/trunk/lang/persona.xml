@@ -1,0 +1,7 @@
+<traduction module="persona" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/persona/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/persona?lang_cible=en" total="7" traduits="1" relire="6" modifs="0" nouveaux="0" pourcent="14.29">
+		<traducteur nom="raphael" lien="http://trad.spip.net/auteur/raphael-7042" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/persona?lang_cible=fr" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+</traduction>
