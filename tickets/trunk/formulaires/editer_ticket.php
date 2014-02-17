@@ -67,9 +67,17 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 						$valeurs[$champ] = _request($champ);
 				}
 			}
+
+			if (lire_config('tickets/general/lier_mots','off')=='on') {
+				$valeurs['groupesmots'] = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
+				foreach ($valeurs['groupesmots'] as $id_groupe) {
+					$valeurs['groupemots_'.$id_groupe] = valeur_champ_groupemots_ticket('tickets', $id_ticket.'-'.$id_groupe, 'groupemots_ticket');
+				}
+			}
 		}
 	}
 	$valeurs['public'] = test_espace_prive() ? '' : 'on';
+
 	return $valeurs;
 }
 
@@ -184,6 +192,11 @@ function tickets_edit_config(){
 function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 	
+	/* Enregistrement des mots-clés */
+	foreach (explode(',',_request('groupesmots')) as $id_groupe) {
+		groupemots_ticket_revision($res['id_ticket'].'-'.$id_groupe, array('groupemots_ticket'=> implode(',',_request('groupemots_'.$id_groupe))), 'groupes_mot');
+	}
+
 	if (isset($res['message_erreur']))
 		$message['message_erreur'] = $res['message_erreur'];
 	else {

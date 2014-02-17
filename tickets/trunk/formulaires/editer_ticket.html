@@ -7,6 +7,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_ticket' value='#ID_TICKET' />
+		<input type='hidden' name='groupesmots' value="[(#ENV{groupesmots}|implode{','})]" />
 		<ul>
 			[(#SAISIE{input, titre,
 				label=<:tickets:champ_titre_ticket:>,
@@ -70,6 +71,10 @@
 				label=<:tickets:champ_statut:>,
 				cacher_option_intro=oui,
 				datas=[(#ENV{id_ticket}|tickets_liste_statut)]})]]
+			
+			<BOUCLE_groupesmots(GROUPES_MOTS){id_groupe IN #ENV{groupesmots}}{par num titre}>
+				[(#SAISIE{mots_groupe, groupemots_#ID_GROUPE, id_groupe=#ID_GROUPE, label=#TITRE})]
+			</BOUCLE_groupesmots>
 		</ul>
 		<!--extra-->
 		<p class='boutons'>
