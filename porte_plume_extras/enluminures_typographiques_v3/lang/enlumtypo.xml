@@ -1,0 +1,12 @@
+<traduction module="enlumtypo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/porte_plume_extras/enluminures_typographiques_v3/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/enlumtypo?lang_cible=ar" total="27" traduits="26" relire="0" modifs="0" nouveaux="1" pourcent="96.30">
+	</langue>
+	<langue code="en" url="http://trad.spip.net/tradlang_module/enlumtypo?lang_cible=en" total="27" traduits="26" relire="0" modifs="0" nouveaux="1" pourcent="96.30">
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/enlumtypo?lang_cible=es" total="27" traduits="14" relire="0" modifs="0" nouveaux="13" pourcent="51.85">
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/enlumtypo?lang_cible=fr" total="27" traduits="27" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+	<langue code="it" url="http://trad.spip.net/tradlang_module/enlumtypo?lang_cible=it" total="27" traduits="14" relire="0" modifs="0" nouveaux="13" pourcent="51.85">
+	</langue>
+</traduction>
