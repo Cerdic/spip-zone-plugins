@@ -1,0 +1,23 @@
+#CACHE{0}
+
+#SET{ids,#ENV{id_groupes_mot}|explode{-}}
+#SET{id_groupe,#GET{ids/1}}
+#SET{id_ticket,#GET{ids/0}}
+#SET{name,#ENV{name_#ENV{crayon_modele}}}
+
+<BOUCLE_groupe(GROUPES_MOTS){id_groupe=#GET{id_groupe}}>
+#SET{mots,#ARRAY}
+<BOUCLE_mots_actifs(MOTS){id_groupe}{id_objet=#GET{id_ticket}}{objet=ticket}>
+#SET{mots,#GET{mots}|push{#ID_MOT}}
+</BOUCLE_mots_actifs>
+<ul>
+	<li>
+		<label for="#GET{name}">#TITRE</label>
+		<select name='#GET{name}\[\]' class='crayon-active chosen' multiple='multiple' id="#GET{name}" style="width:[(#ENV{largeur}|moins{40})]px">
+			<BOUCLE_mots(MOTS){id_groupe}{par num titre, titre}>
+			<option value="#ID_MOT" [(#ID_MOT|in_array{#GET{mots}}|oui) selected="selected"]>#TITRE</option>
+			</BOUCLE_mots>
+		</select>
+	</li>
+</ul>
+</BOUCLE_groupe>

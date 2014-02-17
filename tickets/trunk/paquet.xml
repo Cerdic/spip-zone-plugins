@@ -39,6 +39,8 @@
 	<necessite nom="saisies" compatibilite="[1.3;[" />
 	<utilise nom="Zpip" compatibilite="[2.0.3;[" />
 	<utilise nom="Z" compatibilite="[1.7.21;[" />
+	<utilise nom="crayons" compatibilite="[1.17.0;]" />
+	<utilise nom="chosen" compatibilite="[1.0.5;]" />
 
 	<menu nom="tickets" titre="tickets:titre" parent="menu_publication" icone="images/ticket-16.png" />
 	<menu nom="ticket_edit" parametres="new=oui" titre="tickets:creer_ticket" parent="outils_rapides" icone="images/ticket-16-new.png" />

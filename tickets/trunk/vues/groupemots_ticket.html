@@ -1,0 +1,17 @@
+#CACHE{0}
+
+#SET{ids,#ENV{id_groupes_mot}|explode{-}}
+#SET{id_groupe,#GET{ids/1}}
+#SET{id_ticket,#GET{ids/0}}
+
+<B_mots>
+<ul class="mots">
+<BOUCLE_mots(mots){id_objet=#GET{id_ticket}}{objet=ticket}{id_groupe=#GET{id_groupe}}>
+	<li class="mot"><a href="#URL_MOT" rel="tag">
+		<abbr title="#TYPE:#TITRE [- (#DESCRIPTIF|supprimer_tags)]">#TITRE</abbr>
+	</a></li>
+</BOUCLE_mots>
+</ul>
+</B_mots>
+<span><:tickets:mots_aucun:></span>
+<//B_mots>
