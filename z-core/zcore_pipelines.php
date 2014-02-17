@@ -58,49 +58,86 @@ function zcore_styliser($flux){
 	return $flux;
 }
 
+/**
+ * Routage automatique de la 404 si le bloc de contenu est vide
+ * Seul le bloc principal est pris en compte (le premier de la liste)
+ * mais il est possible de personaliser le ou les blocs a prendre en compte pour detecter une 404 :
+ * $GLOBALS['z_blocs_404'] = array('content','aside');
+ * On ne declenchera alors une 404 que si content/xxx et aside/xxx sont vide tous les deux
+ * (attention a ce que la page 404 ait bien un de ces blocs non vide pour eviter une boucle infinie)
+ *
+ * @param array $flux
+ * @return array
+ */
 function zcore_recuperer_fond($flux){
-	static $is_404 = false;
-	static $z_contenu;
+	static $empty_count=0,$is_404 = false;
+	static $z_blocs_404,$z_blocs_404_nlength,$z_blocs_404_ncount;
 
 	if ($is_404){
 		if ($flux['args']['fond']==="structure"){
-		$is_404 = false; // pas de risque de reentrance
-		$code = "404 Not Found";
-		$contexte_inclus = array(
-			'erreur' => "",
-			'code' => $code,
-			'lang' => $GLOBALS['spip_lang']
-		);
+			$is_404 = false; // pas de risque de reentrance
+			$code = "404 Not Found";
+			$contexte_inclus = array(
+				'erreur' => "",
+				'code' => $code,
+				'lang' => $GLOBALS['spip_lang']
+			);
 
-		$flux['data'] = evaluer_fond('404', $contexte_inclus);
-		$flux['data']['status'] = intval($code); // pas remonte vers la page mais un jour peut etre...
-		// du coup on envoie le status a la main
-		include_spip("inc/headers");
-		http_status(intval($code));
+			$flux['data'] = evaluer_fond('404', $contexte_inclus);
+			$flux['data']['status'] = intval($code); // pas remonte vers la page mais un jour peut etre...
+			// du coup on envoie le status a la main
+			include_spip("inc/headers");
+			http_status(intval($code));
 		}
 	}
 	elseif (!test_espace_prive()){
-		$z_nlength = 0;
-		if (!isset($z_contenu)) {
-			if (!function_exists("z_blocs"))
-				$styliser_par_z = charger_fonction('styliser_par_z','public');
-			$z_blocs = z_blocs(test_espace_prive());
-			$z_contenu = reset($z_blocs); // contenu par defaut
-			$z_nlength = strlen($z_contenu);
+		if (!isset($z_blocs_404)) {
+			if (isset($GLOBALS['z_blocs_404'])){
+				$z_blocs_404 = $GLOBALS['z_blocs_404'];
+				if (is_array($z_blocs_404) AND count($z_blocs_404)==1) {
+					$z_blocs_404 = reset($z_blocs_404);
+				}
+			}
+			else {
+				if (!function_exists("z_blocs"))
+					$styliser_par_z = charger_fonction('styliser_par_z','public');
+				$z_blocs = z_blocs(test_espace_prive());
+				$z_blocs_404 = reset($z_blocs); // contenu par defaut
+			}
+			if (is_array($z_blocs_404)) {
+				$z_blocs_404_ncount = count($z_blocs_404);
+				$z_blocs_404_nlength = array_map('strlen',$z_blocs_404);
+			}
+			else {
+				$z_blocs_404_ncount = 1;
+				$z_blocs_404_nlength = strlen($z_blocs_404);
+			}
 		}
 		$fond = $flux['args']['fond'];
-		if ($z_contenu
-			// eliminer rapidement la plupart des fond
-			AND strncmp($fond,"$z_contenu/",$z_nlength+1)==0
-			// verifier plus en detail que c'est bien le bon fond
-			AND $dir = explode('/',$fond)
-			AND count($dir)==2 // pas un sous repertoire
-			AND $dir = reset($dir)
-			AND $dir == $z_contenu // c'est le bloc de contenu principal
+		// verifier rapidement que c'est un des fonds de reference pour la 404 :
+		// le fond commende par nomdudossier/
+		// le fond n'a pas de / suppelementaires (on est au bon niveau)
+		$quick_match = false;
+		if (strpos($fond,"/")!==false AND $z_blocs_404_ncount){
+			if ($z_blocs_404_ncount==1)
+				$quick_match = (
+					strncmp($fond,"$z_blocs_404/",$z_blocs_404_nlength+1)===0
+					AND strpos($fond,"/",$z_blocs_404_nlength+1)===false);
+			else {
+				foreach($z_blocs_404 as $k=>$zb)
+					if (strncmp($fond,"$zb/",$z_blocs_404_nlength[$k]+1)===0
+						AND strpos($fond,"/",$z_blocs_404_nlength[$k]+1)===false){
+						$quick_match = true;
+						break;
+					}
+			}
+		}
+		if ($quick_match
 			AND !strlen(trim($flux['data']['texte']))
 			){
-
-			$is_404 = true;
+			$empty_count++;
+			if ($empty_count>=$z_blocs_404_ncount)
+				$is_404 = true;
 		}
 	}
 	return $flux;
