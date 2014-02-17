@@ -45,4 +45,3 @@ function foundation_vider_tables($nom_meta_base_version) {
     effacer_meta('foundation_base_version');
     effacer_meta('foundation');
 }
-?>
