@@ -50,8 +50,7 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 		return;
 
 	// On cherche si le formulaire existe
-	$where = 'id_formulaire = ' . intval($id_formulaire);
-	if ($formulaire = sql_fetsel('*', 'spip_formulaires', $where)){
+	if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))){
 		// On ajoute un point d'entrée avec les infos de ce formulaire
 		// pour d'eventuels plugins qui en ont l'utilité
 		$contexte['_formidable'] = $formulaire;
