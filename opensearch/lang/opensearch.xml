@@ -1,4 +1,7 @@
 <traduction module="opensearch" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/opensearch/lang/" reference="fr">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/opensearch?lang_cible=ar" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/opensearch?lang_cible=en" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
