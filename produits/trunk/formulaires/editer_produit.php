@@ -4,7 +4,7 @@
  *
  * @plugin     produits
  * @copyright  2014
- * @author     Les Développements Durables, http://www.ldd.fr
+ * @author     http://www.ldd.fr
  * @licence    GNU/GPL
  * @package    SPIP\Produits\Formulaires
  */
