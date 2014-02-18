@@ -76,6 +76,9 @@ function action_purger_dist($arg=null)
 			break;
 	}
 
+	// le faire savoir aux plugins
+	pipeline('trig_purger',$arg);
+
 	/* compat SPIP 1.9 */
 	if (isset($redirect)) {
 		include_spip('inc/headers');
