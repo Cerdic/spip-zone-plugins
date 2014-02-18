@@ -49,6 +49,10 @@
 					option_intro='-',
 					datas=[(#REM|tickets_liste_navigateur)]})]]
 
+			<BOUCLE_groupesmots(GROUPES_MOTS){id_groupe IN #ENV{groupesmots}}{par num titre}>
+				[(#SAISIE{mots_groupe, groupemots_#ID_GROUPE, id_groupe=#ID_GROUPE, label=#TITRE})]
+			</BOUCLE_groupesmots>
+
 			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|?{#SET{explication,<:tickets:explication_description_ticket_ss_nav:>},#SET{explication,<:tickets:explication_description_ticket:>}})]
 			[(#SAISIE{textarea, texte,
 				label=<:tickets:champ_description:>,
@@ -71,10 +75,6 @@
 				label=<:tickets:champ_statut:>,
 				cacher_option_intro=oui,
 				datas=[(#ENV{id_ticket}|tickets_liste_statut)]})]]
-			
-			<BOUCLE_groupesmots(GROUPES_MOTS){id_groupe IN #ENV{groupesmots}}{par num titre}>
-				[(#SAISIE{mots_groupe, groupemots_#ID_GROUPE, id_groupe=#ID_GROUPE, label=#TITRE})]
-			</BOUCLE_groupesmots>
 		</ul>
 		<!--extra-->
 		<p class='boutons'>
