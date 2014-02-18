@@ -1,5 +1,8 @@
-[(#AUTORISER{voir,produits}|oui)
-	<h1><:produits:tous_les_produits:></h1>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
 
-	<INCLURE{fond=prive/objets/liste/produits,env} />
+<INCLURE{fond=prive/objets/liste/produits, par=titre, env, ajax, sinon=<:produit:info_aucun_produit:>}>
+
+[(#AUTORISER{creer,produit})
+	[(#URL_ECRIRE{produit_edit,new=oui}|icone_verticale{<:produit:icone_creer_produit:>,produit,new,right})]
 ]

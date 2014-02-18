@@ -1,47 +1,31 @@
-<BOUCLE_autoriser(CONDITION){si #ENV{id_produit}|et{#AUTORISER{modifier,produit,#ENV{id_produit}}}|ou{#ENV{id_produit}|non|et{#AUTORISER{creerproduitdans,rubrique,#ENV{id_rubrique}}}}}>
-#SET{id_rubrique,#ENV{id_rubrique}|sinon{#INFO_ID_RUBRIQUE{produit,#ENV{id_produit}}}}
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,produit,#ID_PRODUIT}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	#SET{id_rubrique,#ENV{id_rubrique,#ENV{id_parent}}|trouver_rubrique_creer_objet{produits}}
+	[(#GET{id_rubrique}|non|ou{[(#AUTORISER{creerproduitdans,rubrique,#GET{id_rubrique}})]}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ID_OBJET}|?{#ENV{lier_trad,#ID_OBJET}|generer_url_entite{produit},#GET{id_rubrique}|?{#GET{id_rubrique}|generer_url_entite{rubrique},#URL_ECRIRE{rubriques}}}}}
 
-<!--#hierarchie-->
-<div id="chemin">
-	<span class="bloc">
-		<a href="#URL_ECRIRE" class="racine"><:info_racine_site:></a>
-	</span>
-	<BOUCLE_produit_chemin(HIERARCHIE){id_rubrique=#GET{id_rubrique}}>
-	<span class="bloc">
-		<em> &gt; </em>
-		<a class="on" href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">#TITRE</a>
-	</span>
-	</BOUCLE_produit_chemin>
-	<span class="bloc">
-		<em> &gt; </em>
-		<a href="[(#GET{id_rubrique}|generer_url_entite{rubrique})]">#INFO_TITRE{rubrique,#GET{id_rubrique}}</a>
-	</span>
-</div>
-<!--/#hierarchie-->
-
-#SET{redirect,#ENV{redirect}|sinon{#ENV{lier_trad,#ENV{id_produit}}|?{#ENV{lier_trad,#ENV{id_produit}}|generer_url_entite{produit},#ENV{id_rubrique}|generer_url_entite{rubrique}}}}
-
-<div class="cadre-formulaire-editer">
-	<div class="entete-formulaire">
-		[(#GET{redirect}|icone{<:icone_retour:>,#CHEMIN{prive/themes/spip/images/produits-24.png}})]
-		<:produits:produit_modifier:>
-		<h1>
-			[(#ENV{id_produit}|oui)#INFO_TITRE{produit,#ENV{id_produit}}]
-			[(#ENV{id_produit}|non)<:produits:produit_nouveau:>]
-		</h1>
-	</div>
-	
-	#SET{redirect,#ENV{redirect,#ENV{id_produit}|generer_url_entite{produit}}}
-	<div class="">
-		#FORMULAIRE_EDITER_PRODUIT{#ENV{id_produit,oui},#ENV{id_rubrique},#GET{redirect}}
-	</div>
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_PRODUIT|oui)
+	[(#GET{redirect}|icone_verticale{Retour,produit,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_PRODUIT|?{<:produit:icone_modifier_produit:>,<:produit:icone_creer_produit:>})]
+		<h1>(#ENV{titre,#INFO_TITRE{produit,#ID_PRODUIT}|sinon{<:info_sans_titre:>}})</h1>
+	]
 </div>
 
-<!--#navigation-->
-
-<!--/#navigation-->
-
-<!--#extra-->
-
-<!--/#extra-->
-</BOUCLE_autoriser>
+#SET{redirect,#ENV{redirect,#ID_PRODUIT|generer_url_entite{produit}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_PRODUIT{#ENV{id_produit,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>
