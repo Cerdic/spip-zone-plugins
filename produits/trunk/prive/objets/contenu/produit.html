@@ -1,16 +1,38 @@
-<BOUCLE_afficher_contenu(PRODUITS){id_produit=#ENV{id}}{statut?}>
-<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
-	<div class='label'><:produits:produit_champ_titre_label:></div>
-	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
-</div>
-<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-	<div class='label'><:produits:produit_champ_descriptif_label:></div>
-	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
-</div>
-<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
-	<div class='label'><:info_texte:></div>
-	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
-</div>
-[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{
-	args,[(#ARRAY{type,produit,id_objet,#ID_PRODUIT,contexte,[(#ENV**|unserialize)]})],data,''})]})]
-</BOUCLE_afficher_contenu>
+<BOUCLE_produit(PRODUITS){id_produit}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:produit:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_reference[ (#REFERENCE*|strlen|?{'',vide})]">
+	<label><:produit:label_reference:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{reference} reference'>(#REFERENCE)</span>
+</div>]
+
+[<div class="champ contenu_prix_ht[ (#PRIX_HT*|strlen|?{'',vide})]">
+	<label><:produit:label_prix_ht:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{prix_ht} prix_ht'>(#PRIX_HT)</span>
+</div>]
+
+[<div class="champ contenu_taxe[ (#TAXE*|strlen|?{'',vide})]">
+	<label><:produit:label_taxe:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{taxe} taxe'>(#TAXE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:produit:label_descriptif:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<label><:produit:label_texte:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{texte} texte'>(#TEXTE)</span>
+</div>]
+
+[<div class="champ contenu_date_com[ (#DATE_COM*|strlen|?{'',vide})]">
+	<label><:produit:label_date_com:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_com} date_com'>(#DATE_COM)</span>
+</div>]
+
+</BOUCLE_produit>

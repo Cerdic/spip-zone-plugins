@@ -1,0 +1,33 @@
+<paquet
+	prefix="produits"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.13;3.0.*]"
+	logo="prive/themes/spip/images/produits-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2014-02-17 18:10:07
+	-->
+
+	<nom>produits</nom>
+
+	<auteur>Arterrien</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+
+
+	<pipeline nom="autoriser" inclure="produits_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/produits.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/produits.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/produits.php" /> 
+	<pipeline nom="affiche_milieu" inclure="produits_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="produits_pipelines.php" /> 
+
+	<menu nom="produits" titre="produit:titre_produits" parent="menu_edition" icone="images/produit-16.png" action="produits" /> 
+	<menu nom="produit_creer" titre="produit:icone_creer_produit" parent="outils_rapides" icone="images/produit-new-16.png" action="produit_edit" parametres="new=oui" /> 
+</paquet>
