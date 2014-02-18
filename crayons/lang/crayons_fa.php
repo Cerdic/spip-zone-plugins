@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_barre_typo' => 'فعال‌سازي ميل حروف‌نگاري در پلاگين «مدادها»؟',
-	'label_activer_crayons_prive' => 'فعال سازي «مدادها» راي قسمت خصوصي.',
+	'label_activer_crayons_prive' => 'فعال سازي «مدادها» براي قسمت خصوصي.',
 	'label_barre_typo' => 'ميل حروف نگاري ',
 	'label_clickhide' => 'يك كليك بيرون محوطه مدادها را مبي بندد',
 	'label_effets' => 'گزينش افكت‌ها',
