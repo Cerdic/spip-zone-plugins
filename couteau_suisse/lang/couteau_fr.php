@@ -91,7 +91,7 @@ Découvrez dans ce plugin vos outils favoris : {Supprime le numéro}, {Format d
 
 N’hésitez pas à consulter les articles de documentation du plugin publiés sur : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
-Compatibilité : SPIP v1.92x, v2.x.x et v3.0',
+Compatibilité : SPIP v1.92x, v2.x.x et v3.0.x',
 	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques',
 	'pp_blocs_bloc' => 'Insérer un bloc replié',
 	'pp_blocs_visible' => 'Insérer un bloc déplié',

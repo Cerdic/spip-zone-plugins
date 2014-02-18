@@ -459,7 +459,7 @@ Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cl
 	'jcorner:description' => '« Jolis Coins » est un outil permettant de modifier facilement l\'aspect des coins de vos {{cadres colorés}} en partie publique de votre site. Tout est possible, ou presque !
 _ Voyez le résultat sur cette page : [->http://www.malsup.com/jquery/corner/].
 
-Listez ci-dessous les objets de votre squelette à arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le le signe « = » pour spécifier la commande jQuery à utiliser et un double slash (« // ») pour les commentaires. En absence du signe égal, des coins ronds seront appliqués (équivalent à : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
+Listez ci-dessous les objets de votre squelette à arrondir en utilisant la syntaxe CSS (.class, #id, etc. ). Utilisez le signe « = » pour spécifier la commande jQuery à utiliser et un double slash (« // ») pour les commentaires. En absence du signe égal, des coins ronds seront appliqués (équivalent à : <code>.ma_classe = .corner()</code>).[[%jcorner_classes%]]
 
 Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : «{Round Corners}». Si le fichier distant est correctement installé et si vous cochez la case suivante, le Couteau Suisse peut l\'activer automatiquement. [[%jcorner_plugin%]]',
 	'jcorner:nom' => 'Jolis Coins',

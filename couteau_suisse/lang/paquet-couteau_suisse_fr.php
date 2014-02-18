@@ -16,7 +16,7 @@ Découvrez dans ce plugin vos outils favoris : {Supprime le numéro}, {Format de
 
 N\'hésitez pas à consulter les articles de documentation du plugin publiés sur : [contrib.spip.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
-Compatibilité : SPIP v1.92x, v2.x.x et v3.0',
+Compatibilité : SPIP v1.92x, v2.x.x et v3.0.x',
 	'couteau_suisse_slogan' => 'Plein de petites fonctionnalités nouvelles et utiles à votre site !'
 );
 
