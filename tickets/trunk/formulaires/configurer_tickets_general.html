@@ -59,9 +59,19 @@
 							label=<:tickets:cfg_lbl_formats_documents_ticket:>,
 							explication=<:tickets:cfg_explication_formats_documents_ticket:>})]
 					]
+					#SET{tab_groupes, #ARRAY}
+					<BOUCLE_groupes(GROUPES_MOTS){tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
+						#SET{tab_groupes, #GET{tab_groupes}|push{#TITRE}}
+					</BOUCLE_groupes>
+						#SET{groupes, #GET{tab_groupes}|implode{', '}}
+					</B_groupes>
+						#SET{groupes, #VAL{tickets:cfg_lbl_lier_mots_aucun}|_T}
+					<//B_groupes>
+					#SET{explication, #VAL{tickets:cfg_lbl_lier_mots_explication}|_T{#ARRAY{groupes,#GET{groupes}}}}
 					[(#SAISIE{case, lier_mots,
 						label=<:tickets:cfg_lbl_lier_mots:>,
-						label_case=<:tickets:cfg_lbl_case_lier_mots:>})]
+						label_case=<:tickets:cfg_lbl_case_lier_mots:>,
+						explication=#GET{explication}})]
 				</ul>
 				</fieldset>
 			</li>
