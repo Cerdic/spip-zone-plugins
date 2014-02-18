@@ -7,11 +7,13 @@
     logo=""
     >
     <nom>Exergue pour SPIP</nom>
-    <!-- Ajouter le raccourcis &lt;exergue&gt; ... &lt;/exergue&gt; -->
+    <!-- Ajouter l'ancre éventuelle &lt;exergue /&gt; et le raccourcis &lt;exergue&gt; ... &lt;/exergue&gt;; -->
      
     <auteur>BoOz</auteur>     
     <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
     <copyright>2013-2019</copyright>
           
     <pipeline nom="pre_propre" inclure="exergue_pipelines.php" />
+    <pipeline nom="post_propre" inclure="exergue_pipelines.php" />
+
 </paquet>

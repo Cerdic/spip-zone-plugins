@@ -17,6 +17,14 @@ function exergue_pre_propre($letexte) {
 	
 }
 
+function exergue_post_propre($letexte) {
+	/* nettoyer les ancres <p><exergue /></p> */
+	$letexte = preg_replace(",<p><exergue /></p>,","<exergue />",$letexte);
+
+	return $letexte;
+}
+
+
 function exergue_insert_head($flux) {
 
 			$flux .= <<<EOF
