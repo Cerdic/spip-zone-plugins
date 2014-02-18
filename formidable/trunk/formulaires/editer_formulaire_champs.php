@@ -28,7 +28,8 @@ function formulaires_editer_formulaire_champs_verifier($id_formulaire){
 	$erreurs = array();
 	
 	// Si c'est pas une confirmation ni une annulation
-	if (!_request('confirmation') and !($annulation = _request('annulation'))){
+	if (!_request('enregistrer_confirmation')
+		AND !($annulation = _request('annulation'))){
 		// On récupère le formulaire dans la session
 		$saisies_nouvelles = session_get("constructeur_formulaire_formidable_$id_formulaire");
 	
@@ -64,7 +65,7 @@ function formulaires_editer_formulaire_champs_traiter($id_formulaire){
 		$retours = array('editable'=>true);
 	}
 
-	if (_request('enregistrer')){
+	if (_request('enregistrer') OR _request('enregistrer_confirmation')){
 		// On récupère le formulaire dans la session
 		$saisies_nouvelles = session_get("constructeur_formulaire_formidable_$id_formulaire");
 

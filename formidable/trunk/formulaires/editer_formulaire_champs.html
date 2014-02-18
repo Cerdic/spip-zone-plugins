@@ -20,13 +20,14 @@
 			<span class='image_loading'></span>
 
 			[(#ENV*{message_erreur}|oui)
-			<input type='cancel' class='submit' name="annulation" value='<:bouton_annuler|attribut_html:>' />
+			<input type='submit' class='submit' name="annulation" value='<:bouton_annuler|attribut_html:>' />
+			<input type='submit' class='submit' name="enregistrer_confirmation" value='<:bouton_enregistrer|attribut_html:>' />
 			]
 			[(#ENV*{message_erreur}|non)
 			<input type='submit' class='submit revert' name="revert" value='<:formidable:bouton_revert_formulaire|attribut_html:>'
 			       onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')" />
-			]
 			<input type='submit' class='submit' name="enregistrer" value='<:bouton_enregistrer|attribut_html:>' />
+			]
 
 		</p>
 	</div></form>
