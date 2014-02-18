@@ -14,7 +14,7 @@
 
 	<nom>produits</nom>
 
-	<auteur>Arterrien</auteur>
+	<auteur>Les Développements Durables, http://www.ldd.fr</auteur>
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 

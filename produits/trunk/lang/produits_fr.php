@@ -6,6 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'cfg_exemple' => 'Exemple',
+	'cfg_exemple_explication' => 'Explication de cet exemple',
+	'cfg_titre_parametrages' => 'Paramétrages',
 	'configurer_editer_ttc_explication' => 'Les prix des produits sont éditables en TTC et non plus en HT',
 	'configurer_editer_ttc_label' => 'Editer les produits en TTC',
 	'configurer_precision_ttc_explication' => 'Indiquer la précision d’arrondi après la virgule pour les prix TTC (par défaut 2)',
@@ -26,28 +29,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'limiter_ident_secteur_label' => 'Choix',
 
 	// P
-	'produit_bouton_ajouter' => 'Ajouter un produit',
-	'produit_champ_descriptif_label' => 'Court descriptif',
-	'produit_champ_prix_ht_label' => 'Prix HT',
-	'produit_champ_prix_ttc_label' => 'Prix TTC',
-	'produit_champ_reference_label' => 'Référence',
-	'produit_champ_rubrique_label' => 'Rubrique',
-	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
-	'produit_champ_taxe_label' => 'Taxe',
-	'produit_champ_texte_label' => 'Texte',
-	'produit_champ_titre_label' => 'Titre',
-	'produit_editer' => 'Éditer le produit',
-	'produit_modifier' => 'Modifier le produit :',
-	'produit_nouveau' => 'Nouveau produit',
-	'produit_numero' => 'Produit n°',
-	'produit_reference' => 'Référence "@reference@"',
-	'produit_statut' => 'Modifier le statut :',
-	'produits_titre' => 'Produits',
+	'produits_titre' => 'produits',
 
 	// S
 	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@',
 
 	// T
+	'titre_page_configurer_produits' => 'produits',
 	'tous_les_produits' => 'Tous les produits'
 );
 
