@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Exergue pour SPIP</nom>
+	<auteur>BoOz</auteur>
+	<icon></icon>
+	<licence>GNU/GPL</licence>
+	<version>0.1</version>
+	<etat>test</etat>
+	<description>Ajouter le raccourcis &lt;exergue&gt; ... &lt;/exergue&gt;</description>
+	<prefix>exergue</prefix>
+	<categorie>outil</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>exergue_pipelines.php</inclure>
+	</pipeline>
+</plugin>
