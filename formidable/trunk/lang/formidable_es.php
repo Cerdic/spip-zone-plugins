@@ -131,6 +131,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste_prop' => 'Respuestas pendientes de validación',
 	'reponses_liste_publie' => 'Todas las respuestas validadas',
 	'reponses_nb' => '@nb@ respuestas',
+	'reponses_supprimer' => 'Borrar todas las respuestas a este formulario',
+	'reponses_supprimer_confirmation' => '¿Confirma la supresión de todas las respuestas a este formulario?',
 	'reponses_voir_detail' => 'Ver la respuesta',
 	'retour_aucun_traitement' => 'Su respuesta ha sido enviada, pero ningún tratamiento ha sido definido para este formulario. ¡No se hizo nada con sus datos!',
 
