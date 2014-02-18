@@ -23,4 +23,6 @@
 		<inclure>exergue_pipelines.php</inclure>
 	</pipeline>
 
+	<fonctions>exergue_fonctions.php</fonctions>
+
 </plugin>
