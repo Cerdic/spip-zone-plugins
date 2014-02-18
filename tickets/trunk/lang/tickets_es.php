@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_notif_liste_auteurs' => 'Lista de autores recibiendo las notificaciones',
 	'cfg_notif_webmestre' => 'Todos los webmasters',
 	'cfg_titre_tickets' => 'Tickets - Configuración del plugin',
+	'champ_assigne' => 'Asignado a:',
 	'champ_assigner' => 'Asignar a:',
 	'champ_composant' => 'Componente:',
 	'champ_composant_th' => 'Componente',
