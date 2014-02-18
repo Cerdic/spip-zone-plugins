@@ -1,0 +1,29 @@
+<div class="cadre cadre-meme-rubriques">
+   <img src="#CHEMIN{prive/themes/spip/images/produits-24.png}" alt="" class="cadre-icone" width="24" height="24" />
+   <div id="b0c06e144" class="titrem deplie depliant" onmouseover="jQuery(this).depliant('#tdb1c5fc4');">
+   	<a href="#" onclick="return jQuery(this).depliant_clicancre('#tdb1c5fc4');" class="titremancre"></a>
+      <:info_meme_rubrique:>
+   </div>
+   <div>
+   	<div id="tdb1c5fc4" class="bloc_depliable blocdeplie">
+         <table width="100%" border="0" cellpadding="2" cellspacing="0">
+            <tbody>
+            <BOUCLE_liste_produits(PRODUITS){id_rubrique?}{par num titre}{pagination 10}>
+               <tr class="tr_liste">
+                  <td class='statut'>[(#ID_PRODUIT|puce_changement_statut{#STATUT,#ID_RUBRIQUE,produit,true})]</td>
+                  <td class='titre principale'>
+                     <a href="[(#ID_PRODUIT|generer_url_entite{produit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRODUIT">#TITRE</a>
+                  </td>
+                  <td class='id'>[(#AUTORISER{modifier,produit,#ID_PRODUIT}|?{
+                     <a href="[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT})]">N°&nbsp;#ID_PRODUIT</a>,
+                     #ID_PRODUIT
+                  })]</td>
+               </tr>
+            </BOUCLE_liste_produits>
+            </tbody>
+         </table>
+         <div class="nettoyeur"></div>
+   	</div>
+   	<div class="nettoyeur"></div>
+   </div>
+</div>

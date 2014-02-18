@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	titre,1,
+	prix_ht,1,
+	id_produit,1
+}})
+]<B_liste_produits>
+#ANCRE_PAGINATION
+<div class="liste liste-elements liste-objets produits">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{produits:info_1_produit,produits:info_nb_produits}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:produits:produit_champ_titre_label:>,ajax})]</th>
+			<th class='prix_ht'>[(#TRI{prix_ht,<:produits:produit_champ_prix_ht_label:>,ajax})]</th>
+			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_produit,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_produits(PRODUITS){id_produit?}{id_secteur?}{id_rubrique?}{where?}{recherche?}{statut?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_PRODUIT|puce_changement_statut{#STATUT,#ID_RUBRIQUE,produit,true})]</td>
+			<td class='titre principale'>
+				<a href="[(#ID_PRODUIT|generer_url_entite{produit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRODUIT">#TITRE</a>
+			</td>
+			<td class='prix_ht'>#PRIX_HT</td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,produit,#ID_PRODUIT}|?{
+				<a href="[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT})]">#ID_PRODUIT</a>,
+				#ID_PRODUIT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_produits>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_produits>[
+<div class="liste-objets produits"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_produits>
