@@ -17,5 +17,57 @@ function exergue_pre_propre($letexte) {
 	
 }
 
+function exergue_insert_head($flux) {
+
+			$flux .= <<<EOF
+<script type="text/javascript">
+<!--
+(function($){
+	$(document).ready(function(){
+
+		$('.spip_exergue').each(function(){
+			var content = $(this).html();
+			/* soit il y a une ancre, soit on fout l'exergue avnt le paragraphe */
+			
+			if('lol' == 'wesh'){
+			
+			}else{
+				$(this).parent().before('<div class="exergue">« '+ capitaliseFirstLetter(content) +' »</div>');
+			}
+	
+	
+		});
+
+	});
+})(jQuery);
+
+function capitaliseFirstLetter(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+-->
+</script>
+EOF;
+
+
+	$flux .= <<<EOF
+<style type="text/css">
+<!--
+.exergue{
+float:left;
+width:200px;
+font-weight:bold;
+margin:20px 20px 20px 0
+}
+-->
+</style>
+EOF;
+
+
+
+		return $flux;
+}
+
 
 ?>
