@@ -5,7 +5,7 @@
 	<licence>GNU/GPL</licence>
 	<version>0.1</version>
 	<etat>test</etat>
-	<description>Ajouter l'ancre éventuelle &lt;exergue /&gt; et le raccourcis &lt;exergue&gt; ... &lt;/exergue&gt;</description>
+	<description>Ajouter l'ancre éventuelle &lt;br class='exergue_ancre' /&gt; et le raccourcis &lt;exergue&gt; ... &lt;/exergue&gt;</description>
 	<prefix>exergue</prefix>
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />

@@ -34,15 +34,16 @@ function exergue_insert_head($flux) {
 	$(document).ready(function(){
 		/* a t'on des ancres de exergues <exergue /> ? */
 		var exergue_tab = new Array();	
-		$('exergue').each(function(i){
+		$('br.exergue_ancre').each(function(i){
 			exergue_tab[i] = $(this);
 		});
 		
 		$('.spip_exergue').each(function(i){
 			var content = $(this).html();
-			/* soit il y a une ancre et on fout l'exergue suivant là, soit on fout l'exergue avant le paragraphe parent*/
+			/* Soit il y a une ancre <br class='exergue_ancre' /> et on fout l'exergue suivant là, soit on fout l'exergue avant le paragraphe parent */
 			if(exergue_tab[i]){
 				exergue_tab[i].before('<div class="exergue">« '+ guillemets_check(capitaliseFirstLetter(content)) +' »</div>');
+				exergue_tab[i].remove();
 			}else{
 				$(this).parent().before('<div class="exergue">« '+ guillemets_check(capitaliseFirstLetter(content)) +' »</div>');
 			}
