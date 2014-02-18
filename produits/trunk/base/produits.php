@@ -24,6 +24,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function produits_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['produits'] = 'produits';
+	
+	// Champs date sur les tables
+	$interface['table_date']['produits'] = 'date';
+	
+	// Déclaration du titre
+	$interface['table_titre']['produits'] = 'titre, "" as lang';
 
 	return $interfaces;
 }
@@ -49,14 +55,14 @@ function produits_declarer_tables_objets_sql($tables) {
 			"id_secteur"         => "bigint(21) NOT NULL DEFAULT 0", 
 			"titre"              => "text NOT NULL",
 			"reference"          => "tinytext NOT NULL DEFAULT ''",
-			"prix_ht"            => "float not null",
-			"taxe"               => "decimal(4,3) default null",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
 			"texte"              => "longtext NOT NULL",
-			"date_com"           => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
+			"prix_ht"            => "float not null",
+			"taxe"               => "decimal(4,3) default null",
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
+			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
+			"date_com"           => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"langue_choisie"     => "VARCHAR(3) DEFAULT 'non'", 
 			"id_trad"            => "bigint(21) NOT NULL DEFAULT 0", 
 			"maj"                => "TIMESTAMP"
@@ -71,10 +77,9 @@ function produits_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre', 'reference', 'prix_ht', 'taxe', 'descriptif'),
-		'champs_versionnes' => array('titre', 'descriptif'),
-		'rechercher_champs' => array("titre" => 10, "descriptif" => 5),
-		'tables_jointures'  => array('spip_produits_liens'),
+		'champs_editables'  => array('titre', 'reference', 'prix_ht', 'taxe', 'descriptif','texte'),
+		'champs_versionnes' => array('titre', 'descriptif','texte'),
+		'rechercher_champs' => array("titre" => 5, "descriptif" => 4, "texte" => 4),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
@@ -94,34 +99,6 @@ function produits_declarer_tables_objets_sql($tables) {
 		'texte_changer_statut' => 'produit:texte_changer_statut_produit', 
 		
 
-	);
-
-	return $tables;
-}
-
-
-/**
- * Déclaration des tables secondaires (liaisons)
- *
- * @pipeline declarer_tables_auxiliaires
- * @param array $tables
- *     Description des tables
- * @return array
- *     Description complétée des tables
- */
-function produits_declarer_tables_auxiliaires($tables) {
-
-	$tables['spip_produits_liens'] = array(
-		'field' => array(
-			"id_produit"         => "bigint(21) DEFAULT '0' NOT NULL",
-			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
-			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
-			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
-		),
-		'key' => array(
-			"PRIMARY KEY"        => "id_produit,id_objet,objet",
-			"KEY id_produit"     => "id_produit"
-		)
 	);
 
 	return $tables;
