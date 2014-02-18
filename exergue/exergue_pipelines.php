@@ -32,7 +32,7 @@ function exergue_insert_head($flux) {
 			if('lol' == 'wesh'){
 			
 			}else{
-				$(this).parent().before('<div class="exergue">« '+ capitaliseFirstLetter(content) +' »</div>');
+				$(this).parent().before('<div class="exergue">« '+ guillemets_check(capitaliseFirstLetter(content)) +' »</div>');
 			}
 	
 	
@@ -44,6 +44,11 @@ function exergue_insert_head($flux) {
 function capitaliseFirstLetter(string)
 {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function guillemets_check(string)
+{
+    return string.replace('«','"').replace('»','"');
 }
 
 -->
