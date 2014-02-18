@@ -8,7 +8,6 @@
 [(#ENV{cacher_option_intro}|non)
 <option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_mots(MOTS){par id_groupe, num titre, titre}{id_groupe ?}>
-	[<optgroup label="(#TYPE|unique|attribut_html)" />]
 	<option value="#ID_MOT" [(#ID_MOT|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"]>[(#TITRE|supprimer_numero)]</option>
 </BOUCLE_mots>
 </select></li>
