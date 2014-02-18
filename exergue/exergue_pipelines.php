@@ -24,18 +24,20 @@ function exergue_insert_head($flux) {
 <!--
 (function($){
 	$(document).ready(function(){
-
-		$('.spip_exergue').each(function(){
+		/* a t'on des ancres de exergues <exergue /> ? */
+		var exergue_tab = new Array();	
+		$('exergue').each(function(i){
+			exergue_tab[i] = $(this);
+		});
+		
+		$('.spip_exergue').each(function(i){
 			var content = $(this).html();
-			/* soit il y a une ancre, soit on fout l'exergue avnt le paragraphe */
-			
-			if('lol' == 'wesh'){
-			
+			/* soit il y a une ancre et on fout l'exergue suivant là, soit on fout l'exergue avant le paragraphe parent*/
+			if(exergue_tab[i]){
+				exergue_tab[i].before('<div class="exergue">« '+ guillemets_check(capitaliseFirstLetter(content)) +' »</div>');
 			}else{
 				$(this).parent().before('<div class="exergue">« '+ guillemets_check(capitaliseFirstLetter(content)) +' »</div>');
 			}
-	
-	
 		});
 
 	});
