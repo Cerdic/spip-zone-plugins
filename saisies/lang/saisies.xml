@@ -19,8 +19,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr" total="159" traduits="159" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu" total="159" traduits="107" relire="0" modifs="3" nouveaux="49" pourcent="67.30">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=fr_tu" total="159" traduits="159" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="159" traduits="139" relire="0" modifs="3" nouveaux="17" pourcent="87.42">
 	</langue>
