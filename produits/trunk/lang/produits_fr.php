@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'secteurs_autorises' => 'Choisir une rubrique dans un des secteurs autorisés : @secteurs@',
 
 	// T
+	'titre_page_configurer_produits' => 'Produits',
 	'tous_les_produits' => 'Tous les produits',
 
 );
