@@ -19,8 +19,8 @@ function exergue_pre_propre($letexte) {
 }
 
 function exergue_post_propre($letexte) {
-	/* nettoyer les ancres <p><exergue /></p> */
-	$letexte = preg_replace(",<p><exergue /></p>,","<exergue />",$letexte);
+	/* nettoyer les ancres  <p><a name="exergue"></a></p> */
+	$letexte = str_replace('<p><a name="exergue"></a></p>','<a name="exergue"></a>',$letexte);
 
 	return $letexte;
 }
@@ -43,10 +43,10 @@ function exergue_insert_head($flux) {
 			var content = $(this).html();
 			/* Soit il y a une ancre [exergue<-] dans le texte et on place l'exergue suivant à cet endroit, soit il n'y en a pas et on place l'exergue avant le paragraphe parent */
 			if(exergue_tab[i]){
-				exergue_tab[i].before('<div class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</div>');
+				exergue_tab[i].before('<span class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</span>');
 				exergue_tab[i].remove();
 			}else{
-				$(this).parent().before('<div class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</div>');
+				$(this).parent().before('<span class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</span>');
 			}
 		});
 
@@ -75,7 +75,8 @@ EOF;
 float:left;
 width:200px;
 font-weight:bold;
-margin:20px 20px 20px 0
+margin:20px 20px 20px 0;
+display:block;
 }
 -->
 </style>
