@@ -20,8 +20,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fr" total="37" traduits="37" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fr_tu" total="37" traduits="21" relire="0" modifs="0" nouveaux="16" pourcent="56.76">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/comments?lang_cible=fr_tu" total="37" traduits="37" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
+		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/comments?lang_cible=it" total="37" traduits="21" relire="0" modifs="0" nouveaux="16" pourcent="56.76">
 	</langue>

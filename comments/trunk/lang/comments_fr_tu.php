@@ -8,9 +8,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'cfg_explication_nom_obligatoire' => 'La saisie d’un nom ou pseudo est obligatoire pour déposer un commentaire. Tu peux choisir de rendre également obligatoire la saisie d’un courriel.',
+	'cfg_forum_champs_obligatoires' => 'Champs obligatoires',
+	'cfg_forum_format_fil' => 'Liste ou thread ?',
 	'cfg_forum_longueur' => 'Longueur des messages',
 	'cfg_forum_longueur_maxi' => 'Longueur maximale',
 	'cfg_forum_longueur_mini' => 'Longueur minimale',
+	'cfg_forum_permalien' => 'Permalien',
+	'cfg_label_apparence_permalien' => 'Apparence du lien permanent vers le commentaire',
+	'cfg_label_apparence_permalien_aucun' => 'Aucun',
+	'cfg_label_apparence_permalien_compteur' => 'Compteur (1.)',
+	'cfg_label_apparence_permalien_diese' => 'Dièse (#)',
+	'cfg_label_apparence_permalien_picto' => 'Picto',
+	'cfg_label_email_obligatoire' => 'Rendre obligatoire la saisie d’un couriel',
+	'cfg_label_presentation_fil' => 'Présentation du fil de discussion',
+	'cfg_label_presentation_fil_liste' => 'Liste de commentaires (à plat)',
+	'cfg_label_presentation_fil_thread' => 'Enfilade de commentaires (en thread)',
+	'cfg_label_presentation_fil_thread1' => 'Enfilade de commentaires à un niveau',
 	'comment' => 'commentaire',
 	'comments' => 'commentaires',
 	'comments_h' => 'Tes commentaires',
@@ -25,7 +39,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_email' => 'Courriel (non publié)',
 	'label_nom' => 'Nom',
+	'label_notification' => 'Préviens-moi de tous les nouveaux commentaires de cette discussion par email',
 	'label_url' => 'Ton site web',
+	'lien_suivre_commentaires' => 'Suivre les commentaires :',
 
 	// M
 	'moderation_info' => 'Attention, ton message n’apparaîtra qu’après avoir été relu et approuvé.',
