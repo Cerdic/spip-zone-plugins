@@ -184,6 +184,9 @@ function forms_configure_traitement_formulaire($form,&$formulaire){
 		$formulaire['traitements']['email']['champ_courriel_destinataire_form'] = $form['champconfirm'];
 	}
 
+	// $form['email'] est possiblement serialize
+	if (is_string($form['email']) AND $a=unserialize($form['email']))
+		$form['email'] = $a;
 	if (is_array($form['email'])){
 
 		if ($email_defaut = $form['email']['defaut']){
