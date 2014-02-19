@@ -7,7 +7,7 @@
 	<version_base>0.5.2</version_base>
 	<etat>stable</etat>
 	<description>Cr&#233;ation de formulaires avec une interface graphique et configuration des traitements associ&#233;s (envoyer par courriel, enregistrer les r&#233;ponses, etc).</description>
-	<lien>http://www.spip-contrib.net/Formidable-le-generateur-de</lien>
+	<lien>http://contrib.spip.net/Formidable-le-generateur-de-formulaires</lien>
 	<icon>images/formidable-64.png</icon>
 	
 	<prefix>formidable</prefix>
@@ -64,4 +64,3 @@
 	<necessite id="facteur" version="[1.5.3;]" />
 	<categorie>communication</categorie>
 </plugin>
-
