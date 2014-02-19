@@ -11,6 +11,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=fr" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=fr_tu" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
+	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=it" total="14" traduits="13" relire="0" modifs="0" nouveaux="1" pourcent="92.86">
 	</langue>
 	<langue code="nl" url="http://trad.spip.net/tradlang_module/gravatar?lang_cible=nl" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
