@@ -1,0 +1,32 @@
+[(#REM) 
+  page signature email
+  
+  parametres:
+  - id_auteur
+  
+  si vous embarquez des images ou liens 
+  penser à utiliser les filtres url_absolues ou filtre_embarque_src
+
+]#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+
+<table border="0" style="width:640px;background:#fff;">
+      <tr>
+        <td colspan="2" style="border-top:6px solid #ff6600;font-size:0;padding-bottom:5px;">&nbsp;</td>
+      </tr>
+      <tr>
+          <td valign="top" style="padding:4px 0;font-family:arial,serif;font-size:15px;color:#000;line-height:130%;width:280px;font-weight:bold;">    
+              <BOUCLE_aut_principal(AUTEURS){id_auteur}{tout}>
+              <div style="text-transform:uppercase;color:#ff6600;font-size:16px;">#NOM</div>
+              [(#BIO*)<br>]
+              [Tel: (#PGP*)]
+              </BOUCLE_aut_principal> 
+          </td>
+          <td valign="top" style="padding:5px 0;font-family:arial,serif;font-size:14px;color:#000;line-height:130%;"> 
+           <div style="float:right">
+              <strong>[(#CHEMIN{prive/themes/spip/images/signature-logo-test.png}|balise_img|filtre_embarque_src)]#NOM_SITE_SPIP</strong><br> 
+              #SLOGAN_SITE_SPIP
+              <a href="#URL_SITE_SPIP" style="text-decoration:none;color:#000000;">#URL_SITE_SPIP</a>                     
+           </div>
+          </td>       
+      </tr>
+</table>

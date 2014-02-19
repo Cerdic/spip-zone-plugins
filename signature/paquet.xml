@@ -1,0 +1,17 @@
+<paquet
+	prefix="signature"
+	categorie="auteur"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.14;3.0.*]"
+	logo="prive/themes/spip/images/signature-32.png"
+	documentation="http://contrib.spip.net/4501"
+> 
+	<nom>Signature</nom>
+	<auteur lien='http://www.erational.org'>erational</auteur>
+  <credit lien='http://www.fatcow.com/'>FatCow Web Hosting (icône)</credit>
+  <licence>GNU/GPL</licence>
+
+  <pipeline nom="affiche_gauche" inclure="signature_pipelines.php" />
+  <pipeline nom="autoriser" inclure="signature_autoriser.php" />  
+</paquet>
