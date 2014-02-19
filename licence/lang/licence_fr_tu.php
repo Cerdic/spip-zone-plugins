@@ -14,28 +14,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'Licence',
 
 	// D
-	'description_art_libre' => 'licence Art libre', # MODIF
-	'description_cc_by' => 'Creative Commons - Paternité', # MODIF
-	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d’Utilisation Commerciale', # MODIF
-	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d’Utilisation Commerciale Pas de Modification', # MODIF
-	'description_cc_by_nc_sa' => 'Creative Commons - Paternité Pas d’Utilisation Commerciale Partage des Conditions Initiales à l’Identique', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Paternité pas de modification', # MODIF
-	'description_cc_by_sa' => 'Creative Commons - Paternité Partage des Conditions Initiales à l’Identique', # MODIF
+	'description_art_libre' => 'Licence Art Libre',
+	'description_autre' => 'Autre licence',
+	'description_cc0' => 'Creative Commons - Contenu libre de tout droit',
+	'description_cc_by' => 'Creative Commons - Attribution',
+	'description_cc_by_nc' => 'Creative Commons - Attribution - Pas d’Utilisation Commerciale ',
+	'description_cc_by_nc_nd' => 'Creative Commons - Attribution - Pas d’Utilisation Commerciale - Pas de Modification',
+	'description_cc_by_nc_sa' => 'Creative Commons - Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions',
+	'description_cc_by_nd' => 'Creative Commons - Attribution - Pas de Modification ',
+	'description_cc_by_sa' => 'Creative Commons - Attribution - Partage dans les Mêmes Conditions',
 	'description_copyright' => '© copyright auteur de l’article',
-	'description_gpl' => 'licence GPL', # MODIF
+	'description_gfdl' => 'Licence de documentation libre GNU',
+	'description_gpl' => 'Licence GNU/GPL',
+	'description_wtfpl' => 'Licence Publique Rien À Branler',
 
 	// L
 	'label_select_licence' => 'Choisis une licence',
-	'lien_art_libre' => 'http://artlibre.org/', # MODIF
+	'lien_art_libre' => 'http://artlibre.org/licence/lal',
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/deed.fr',
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.fr',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.fr',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.fr',
 	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.fr',
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.fr',
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.fr',
+	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
 
 	// N
+	'noisette_cacher_defaut' => 'Cacher lorsque la licence n’est pas spécifiée ?',
 	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels) :',
 	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels) :',
 	'noisette_lien' => 'Afficher le lien vers la description de la licence ?',
@@ -43,10 +51,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_licence' => 'Afficher le nom de la licence ?',
 
 	// S
-	'sans_licence' => 'Sans licence', # MODIF
+	'sans_licence' => 'Pas de licence spécifique (droits par défaut)',
 
 	// T
 	'titre_art_libre' => 'LAL',
+	'titre_autre' => 'autre',
+	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
 	'titre_cc_by_nc_nd' => 'CC by-nc-nd',
@@ -54,7 +64,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_nd' => 'CC by-nd',
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
-	'titre_gpl' => 'Gnu GPL' # MODIF
+	'titre_gfdl' => 'GNU FDL',
+	'titre_gpl' => 'GNU GPL',
+	'titre_wtfpl' => 'LPRAB'
 );
 
 ?>
