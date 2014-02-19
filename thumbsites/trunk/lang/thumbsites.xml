@@ -17,7 +17,8 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=fr" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=fr_tu" total="23" traduits="9" relire="0" modifs="1" nouveaux="13" pourcent="39.13">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=fr_tu" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 	</langue>
 	<langue code="gl" url="http://trad.spip.net/tradlang_module/thumbsites?lang_cible=gl" total="23" traduits="1" relire="0" modifs="0" nouveaux="22" pourcent="4.35">
 	</langue>
