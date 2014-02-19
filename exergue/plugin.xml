@@ -5,7 +5,7 @@
 	<licence>GNU/GPL</licence>
 	<version>0.1</version>
 	<etat>test</etat>
-	<description>Ajouter l'ancre éventuelle &lt;br class='exergue_ancre' /&gt; et le raccourcis &lt;exergue&gt; ... &lt;/exergue&gt;</description>
+	<description>Gérer des exergues avec l'ancre éventuelle [exergue&lt;-] et le raccourci &lt;exergue&gt; ... &lt;/exergue&gt; dans un texte</description>
 	<prefix>exergue</prefix>
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
@@ -24,5 +24,6 @@
 	</pipeline>
 
 	<fonctions>exergue_fonctions.php</fonctions>
+
 
 </plugin>

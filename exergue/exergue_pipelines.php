@@ -1,7 +1,8 @@
 <?php
 
 function exergue_pre_propre($letexte) {
-	
+
+	// trouver des balises exergue
 	if (preg_match_all(",<(exergue)>(.*)<\/(exergue)>,Uims",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {							
@@ -32,20 +33,20 @@ function exergue_insert_head($flux) {
 <!--
 (function($){
 	$(document).ready(function(){
-		/* a t'on des ancres de exergues <exergue /> ? */
+		/* a t'on des ancres de exergues [exergue<-] dans le texte ? */
 		var exergue_tab = new Array();	
-		$('br.exergue_ancre').each(function(i){
+		$('a[name=exergue]').each(function(i){
 			exergue_tab[i] = $(this);
 		});
 		
 		$('.spip_exergue').each(function(i){
 			var content = $(this).html();
-			/* Soit il y a une ancre <br class='exergue_ancre' /> et on fout l'exergue suivant là, soit on fout l'exergue avant le paragraphe parent */
+			/* Soit il y a une ancre [exergue<-] dans le texte et on place l'exergue suivant à cet endroit, soit il n'y en a pas et on place l'exergue avant le paragraphe parent */
 			if(exergue_tab[i]){
-				exergue_tab[i].before('<div class="exergue">« '+ guillemets_check(capitaliseFirstLetter(content)) +' »</div>');
+				exergue_tab[i].before('<div class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</div>');
 				exergue_tab[i].remove();
 			}else{
-				$(this).parent().before('<div class="exergue">« '+ guillemets_check(capitaliseFirstLetter(content)) +' »</div>');
+				$(this).parent().before('<div class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</div>');
 			}
 		});
 
@@ -59,7 +60,7 @@ function capitaliseFirstLetter(string)
 
 function guillemets_check(string)
 {
-    return string.replace('«','"').replace('»','"');
+    return string.replace('«','&ldquo;').replace('»','&rdquo;');
 }
 
 -->
