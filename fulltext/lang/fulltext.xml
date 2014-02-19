@@ -30,7 +30,8 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr_tu" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr_tu" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 	</langue>
 	<langue code="id" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=id" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
