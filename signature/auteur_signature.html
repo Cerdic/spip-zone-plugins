@@ -4,8 +4,11 @@
   parametres:
   - id_auteur
   
+  le HTML est volontairement archaique pour supporter les logiciels de messagerie
+  http://www.campaignmonitor.com/resources/will-it-work/
+  
   si vous embarquez des images ou liens 
-  penser à utiliser les filtres url_absolues ou filtre_embarque_src
+  penser à utiliser les filtres url_absolues ou embarque_src
 
 ]#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
 
@@ -23,7 +26,7 @@
           </td>
           <td valign="top" style="padding:5px 0;font-family:arial,serif;font-size:14px;color:#000;line-height:130%;"> 
            <div style="float:right">
-              <strong>[(#CHEMIN{prive/themes/spip/images/signature-logo-test.png}|balise_img|filtre_embarque_src)]#NOM_SITE_SPIP</strong><br> 
+              <strong>[(#CHEMIN{prive/themes/spip/images/signature-logo-test.png}|balise_img|embarque_src)]#NOM_SITE_SPIP</strong><br> 
               #SLOGAN_SITE_SPIP
               <a href="#URL_SITE_SPIP" style="text-decoration:none;color:#000000;">#URL_SITE_SPIP</a>                     
            </div>
