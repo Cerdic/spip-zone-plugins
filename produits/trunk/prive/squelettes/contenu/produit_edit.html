@@ -21,11 +21,10 @@
 #SET{redirect,#ENV{redirect,#ID_PRODUIT|generer_url_entite{produit}}}
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
-	<div class="ajax">
+	<div class="">
 ]
 		[(#FORMULAIRE_EDITER_PRODUIT{#ENV{id_produit,oui}, #GET{id_rubrique}, #GET{redirect}, #ENV{associer_objet}, #ENV{lier_trad}})]
 [(#ENV{retourajax,''}|oui)
 	</div>
-	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
 ]
 </div>

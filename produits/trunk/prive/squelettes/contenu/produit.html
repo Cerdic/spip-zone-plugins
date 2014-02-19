@@ -3,7 +3,7 @@
 [(#BOITE_OUVRIR{[
 	[(#AUTORISER{modifier,produit,#ID_PRODUIT})
 		[(#ID_PRODUIT|afficher_qui_edite{produit}|non)
-			[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{<:produit:icone_modifier_produit:>,produit,edit,right ajax preload})]
+			[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{<:produit:icone_modifier_produit:>,produit,edit,right preload})]
 		]
 		[(#ID_PRODUIT|afficher_qui_edite{produit}|oui)
 			[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{#ID_PRODUIT|afficher_qui_edite{produit},warning-24,'',right edition_deja ajax preload})]
@@ -11,6 +11,8 @@
 	]
 
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{produit-24.png}|balise_img{produit,cadre-icone})]</h1>
+	<h2 class="prix_ht"><:prix:prix_ht{prix=#PRIX_HT}:></h2>
+	[(#REFERENCE)<h4 class="reference"><:produits:produit_reference{reference=#REFERENCE}:></h4>]
 
 ],simple fiche_objet})]
 
@@ -28,7 +30,7 @@
 
 [(#AUTORISER{modifier,produit,#ID_PRODUIT})
 	[(#ID_PRODUIT|afficher_qui_edite{produit}|non)
-		[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{<:produit:icone_modifier_produit:>,produit,edit,right ajax preload})]
+		[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{<:produit:icone_modifier_produit:>,produit,edit,right preload})]
 	]
 	[(#ID_PRODUIT|afficher_qui_edite{produit}|oui)
 		[(#URL_ECRIRE{produit_edit,id_produit=#ID_PRODUIT}|icone_verticale{#ID_PRODUIT|afficher_qui_edite{produit},warning-24,'',right edition_deja ajax preload})]

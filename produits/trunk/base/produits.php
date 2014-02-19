@@ -57,7 +57,7 @@ function produits_declarer_tables_objets_sql($tables) {
 			"reference"          => "tinytext NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
 			"texte"              => "longtext NOT NULL",
-			"prix_ht"            => "float not null",
+			"prix_ht"            => "float not null default 0",
 			"taxe"               => "decimal(4,3) default null",
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"lang"               => "VARCHAR(10) NOT NULL DEFAULT ''",
@@ -96,7 +96,7 @@ function produits_declarer_tables_objets_sql($tables) {
 				'exception' => array('statut','tout')
 			)
 		),
-		'texte_changer_statut' => 'produit:texte_changer_statut_produit', 
+		'texte_changer_statut' => 'produits:produit_statut', 
 		
 
 	);

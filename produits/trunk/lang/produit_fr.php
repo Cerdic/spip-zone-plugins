@@ -25,6 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taxe' => 'Taxe',
 	'label_texte' => 'Texte',
 	'label_titre' => 'Titre',
+	
+	// P
+	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
+
 
 	// R
 	'retirer_lien_produit' => 'Retirer ce produit',
