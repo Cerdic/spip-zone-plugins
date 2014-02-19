@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'afficher_tickets' => 'Show bug reports',
 	'assignation_attribuee_a' => 'The bug report has been assigned to @nom@.',
+	'assignation_attribuee_a_personne' => 'This bug has been assigned to nobody.',
 	'assignation_mail_titre' => 'Change of bug report assignment',
 	'assignation_modifiee' => 'Assignment Update',
 	'assignation_non_modifiee' => 'Assignment not updated',
@@ -76,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_notif_liste_auteurs' => 'List of authors receiving notifications',
 	'cfg_notif_webmestre' => 'All webmasters',
 	'cfg_titre_tickets' => 'Bug reports - Setup of the plugin',
+	'champ_assigne' => 'Assigned to:',
 	'champ_assigner' => 'Assign to:',
 	'champ_composant' => 'Component:',
 	'champ_composant_th' => 'Component',
@@ -133,6 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_ticket' => 'Create a bug report',
 
 	// D
+	'date_creation' => 'Created on @date@',
 	'date_creation_auteur' => 'Bug report created on <strong>@date@</strong> by <strong>@nom@</strong>',
 
 	// E
