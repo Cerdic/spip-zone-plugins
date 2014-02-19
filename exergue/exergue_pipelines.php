@@ -35,18 +35,25 @@ function exergue_insert_head($flux) {
 	$(document).ready(function(){
 		/* a t'on des ancres de exergues [exergue<-] dans le texte ? */
 		var exergue_tab = new Array();	
-		$('a[name=exergue]').each(function(i){
-			exergue_tab[i] = $(this);
+		var nb_ancres = 0 ;
+
+		$('a[name=exergue], .spip_exergue').each(function(i){
+			/* si c'est une ancre on sait que le prochain exergue a cette ancre */
+			if(!$(this).hasClass('spip_exergue')){
+				var index_exergue = i - nb_ancres;
+				exergue_tab['exergue' + index_exergue] = $(this);
+				nb_ancres ++ ;
+			}
 		});
 		
 		$('.spip_exergue').each(function(i){
 			var content = $(this).html();
-			/* Soit il y a une ancre [exergue<-] dans le texte et on place l'exergue suivant à cet endroit, soit il n'y en a pas et on place l'exergue avant le paragraphe parent */
-			if(exergue_tab[i]){
-				exergue_tab[i].before('<span class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</span>');
-				exergue_tab[i].remove();
+			/* Soit il y a une ancre [exergue<-] dans le texte et on place l'exergue suivant à cet endroit, soit il n'y en a pas et on place l'exergue avant la balise */
+			if(exergue_tab['exergue' + i]){
+				exergue_tab['exergue' + i].before('<span class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</span>');
+				exergue_tab['exergue' + i].remove();
 			}else{
-				$(this).parent().before('<span class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</span>');
+				$(this).before('<span class="exergue">«&nbsp;'+ guillemets_check(capitaliseFirstLetter(content)) +'&nbsp;»</span>');
 			}
 		});
 
