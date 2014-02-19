@@ -1,9 +1,9 @@
 <paquet
     prefix="exergue"
     categorie="outil"
-    version="0.1"
+    version="0.1.0"
     etat="test"
-    compatibilite="[3.0.0-alpha2;3.0.*]"
+    compatibilite="[2.1.0;3.0.*]"
     logo=""
     >
     <nom>Exergue pour SPIP</nom>
