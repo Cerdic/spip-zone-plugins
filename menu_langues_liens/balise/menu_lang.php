@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 function balise_MENU_LANG ($p) {
 	$i_boucle = $p->nom_boucle ? $p->nom_boucle : ($p->id_boucle ? $p->id_boucle :'');
 	if($i_boucle){
-    	$_id_objet = $p->boucles[$i_boucle]->primary;
+		$_id_objet = $p->boucles[$i_boucle]->primary;
 	}
 	
 	return calculer_balise_dynamique(
