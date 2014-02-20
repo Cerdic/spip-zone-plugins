@@ -13,26 +13,28 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 	$id_table_objet = id_table_objet($flux['args']['type']);
 	$id_objet = $flux['args']['contexte'][$id_table_objet];
 	if (is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('mots',unserialize($flux['args']['champs_ajoutes']))) {
-
-		if (!is_array(unserialize($flux['args']['options_complements']['mots_obligatoires']))) {
+		if (!is_array(unserialize($flux['args']['options_complements']['mots_obligatoires'])))
 			$mots_obligatoires = array();
-		} else {
+		else
 			$mots_obligatoires = unserialize($flux['args']['options_complements']['mots_obligatoires']);
-		}
-		if(!is_array(unserialize($flux['args']['options_complements']['mots_facultatifs']))) {
+
+		if(!is_array(unserialize($flux['args']['options_complements']['mots_facultatifs'])))
 			$mots_facultatifs = array();
-		} else {
+		else
 			$mots_facultatifs = unserialize($flux['args']['options_complements']['mots_facultatifs']);
-		}
+
 		$valeurs_mots['id_groupes'] = $groupes_possibles = array_merge($mots_obligatoires,$mots_facultatifs);
 		
-		if (intval($id_objet)) {				
-			//On récupère les mots qui sont peut être associés
+		if (intval($id_objet)){
+			/**
+			 * On récupère les mots qui sont postés ou peut être déjà associés
+			 */
 			foreach($groupes_possibles as $id_groupe){
 				if(in_array($id_groupe,$mots_obligatoires)){
 					$valeurs_mots['groupe_obligatoire_'.$id_groupe] = 'oui';
 				}
 				if (_request('groupe_'.$id_groupe)) {
+					spip_log(_request('groupe_'.$id_groupe),'test.'._LOG_ERREUR);
 					// Pour récupérer la selection courante en cas d'erreur dans vérifier() ou traiter()
 					$valeurs_mots['groupe_'.$id_groupe] = _request('groupe_'.$id_groupe);
 				} else if (sql_getfetsel('unseul','spip_groupes_mots','id_groupe='.intval($id_groupe))== 'oui') {
@@ -48,18 +50,33 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 					$valeurs_mots['nouveaux_groupe_'.$id_groupe] = _request('nouveaux_groupe_'.$id_groupe);
 				}
 			}
+		}else{
+			/**
+			 * On regarde juste dans l'environnement ce qui a déjà été posté
+			 */
+			foreach($groupes_possibles as $id_groupe){
+				if(in_array($id_groupe,$mots_obligatoires)){
+					$valeurs_mots['groupe_obligatoire_'.$id_groupe] = 'oui';
+				}
+				if (_request('groupe_'.$id_groupe)) {
+					// Pour récupérer la selection courante en cas d'erreur dans vérifier() ou traiter()
+					$valeurs_mots['groupe_'.$id_groupe] = _request('groupe_'.$id_groupe);
+				}
+			}
 		}
 		
-		if (is_array($valeurs_mots)) {
+		if (is_array($valeurs_mots))
 			$flux['args']['contexte'] = array_merge($flux['args']['contexte'],$valeurs_mots);
-		}
 
 		if ($flux['args']['options_complements']['montrer_titre_et_descriptif'] == 'on')
 			$flux['args']['contexte'] = array_merge($flux['args']['contexte'],array('montrer_titre_et_descriptif' => $flux['args']['options_complements']['montrer_titre_et_descriptif']));
 
-		/* Paramètre pour permettre de créer des nouveaux mots dans les groupes choisis */
-		/* TODO : seulement si l'auteur a le droit d'ajouter de nouveaux mots (peut être différent pour chaque groupe de mots ?) */
-		/* TODO : parametre par groupe au lieu d'un parametre general */
+		/** 
+		 * Paramètre pour permettre de créer des nouveaux mots dans les groupes choisis 
+		 * TODO : seulement si l'auteur a le droit d'ajouter de nouveaux mots (peut être différent pour chaque groupe de mots ?)
+		 * TODO : parametre par groupe au lieu d'un parametre general 
+		 */
+		 
 		if ($flux['args']['options_complements']['mots_creer_dans_public'] == 'on')
 			$flux['args']['contexte'] = array_merge($flux['args']['contexte'],array('mots_creer_dans_public' => $flux['args']['options_complements']['mots_creer_dans_public']));
 		
@@ -78,19 +95,18 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 function diogene_mots_diogene_verifier($flux){
 	$id_diogene = _request('id_diogene');
 	if(intval($id_diogene)){
-		$diogene = sql_fetsel("*","spip_diogenes","id_diogene=".intval($id_diogene));
-		$options_complements = unserialize($diogene['options_complements']);
+		$options_complements = unserialize(sql_getfetsel("options_complements","spip_diogenes","id_diogene=".intval($id_diogene)));
 		$erreurs = $flux['args']['erreurs'];
 		// On teste si les groupes obligatoires sont ok
 		if (isset($options_complements['mots_obligatoires']) && is_array(unserialize($options_complements['mots_obligatoires']))){
 			foreach(unserialize($options_complements['mots_obligatoires']) as $groupe_obligatoire=>$id_groupe){
 				$mots_groupe = _request('groupe_'.$id_groupe);
-				if(empty($mots_groupe) OR is_null($mots_groupe) OR !is_numeric($mots_groupe)){
+				if(empty($mots_groupe) OR is_null($mots_groupe) OR (!is_numeric($mots_groupe) && !is_array($mots_groupe))){
 					$flux['data']['groupe_'.$id_groupe] = _T('info_obligatoire');
 				}
 			}
 		}
-
+		
 		// On vérifie les mots créés par chosen
 		if (test_plugin_actif('chosen')) {
 			$mots_obligatoires = is_array(unserialize($options_complements['mots_obligatoires']))
@@ -186,8 +202,7 @@ function diogene_mots_diogene_traiter($flux){
 	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['mots']) AND ($id_diogene = _request('id_diogene'))) {
 		$id_objet = $flux['args']['id_objet'];
 
-		$diogene = sql_fetsel("*","spip_diogenes","id_diogene=".intval($id_diogene));
-		$options_complements = unserialize($diogene['options_complements']);
+		$options_complements = unserialize(sql_getfetsel("options_complements","spip_diogenes","id_diogene=".intval($id_diogene)));
 
 		$mots_obligatoires = is_array(unserialize($options_complements['mots_obligatoires']))
 			? unserialize($options_complements['mots_obligatoires'])
