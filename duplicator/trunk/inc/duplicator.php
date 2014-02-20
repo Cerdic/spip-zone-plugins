@@ -12,8 +12,6 @@ function trim_value(&$value){$value = trim($value);}
  */
 function dupliquer_article($id_article,$rubrique){
 	include_spip('action/editer_article');
-	include_spip('inc/modifier_article');
-	include_spip('inc/modifier');
 	include_spip('inc/config');
 		
 	// On lit l'article qui va etre dupliqué
