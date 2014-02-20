@@ -19,17 +19,20 @@ function action_duplicator_dist($args=null) {
 	
 	include_spip('inc/duplicator');
 	
-	list($objet,$id_objet) = explode(':',$args);
+	list($objet,$id_objet,$articles) = explode(':',$args);
 	
 	if ( ($objet=="rubrique") && ($id=intval($id_objet)) ){
 		// On duplique la rubrique
 		spip_log("Duplication de la rubrique : $id.",'duplicator');
-		$nouvelle_rubrique = dupliquer_rubrique($id);
+		$dup_articles = true;
+		if($articles)
+			$dup_articles = false;
+		$nouvelle_rubrique = dupliquer_rubrique($id,null,' (cible)',$dup_articles);
 		spip_log("Nouvelle rubrique créée : id_rubrique $nouvelle_rubrique.",'duplicator');
 		include_spip('inc/headers');
 		if ($redirect = _request('redirect'))
 			redirige_par_entete(str_replace('&amp;','&',$redirect));
-		redirige_par_entete(generer_url_ecrire("rubriques","id_rubrique=".$nouvelle_rubrique, "&"));
+		redirige_par_entete(generer_url_ecrire("rubrique","id_rubrique=".$nouvelle_rubrique, "&"));
 	}
 
 	if ( ($objet=="article") && ($id=intval($id_objet)) ){
