@@ -44,7 +44,8 @@ function dupliquer_article($id_article,$rubrique){
 	revision_article($id_article, $infos_de_l_article);
 	
 	// On lui rend son statut
-	$maj_statut_article = sql_updateq("spip_articles", array('statut' => $infos[0]['statut']), "id_article=".$id_article);
+	$c = array('statut' => $infos['statut']);
+	article_instituer($id_article, $c);
 
 	// On lui remet ses mots clefs
 	remettre_les_mots_clefs($mots_clefs_de_l_article,$id_article,'article');
