@@ -26,7 +26,7 @@ function action_duplicator_dist($args=null) {
 		spip_log("Duplication de la rubrique : $id.",'duplicator');
 		$nouvelle_rubrique = dupliquer_rubrique($id);
 		spip_log("Nouvelle rubrique créée : id_rubrique $nouvelle_rubrique.",'duplicator');
-		include_spip('inc/header');
+		include_spip('inc/headers');
 		if ($redirect = _request('redirect'))
 			redirige_par_entete(str_replace('&amp;','&',$redirect));
 		redirige_par_entete(generer_url_ecrire("rubriques","id_rubrique=".$nouvelle_rubrique, "&"));
