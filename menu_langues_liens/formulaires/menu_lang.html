@@ -37,6 +37,8 @@
 [(#SET{langues_a_afficher,[(#CONFIG{langues_utilisees}|explode{","}|array_diff{#CONFIG{menu_lang_liens/langues_invisibles, #ARRAY}})]})]
 #SET{liste,#CONFIG{menu_lang_liens/formatliste,bloc}}
 #SET{format,#CONFIG{menu_lang_liens/format,abrege}}
+#SET{separateur,#CONFIG{menu_lang_liens/separateur,''}}
+[(#GET{liste}|=={liste}|?{#SET{separateur,#CONFIG{menu_lang_liens/separateur,''}},''})]
 <BOUCLE_PlusieursLanguesUtilisees(POUR){tableau #GET{langues_a_afficher}}{1,1}>
 <[(#GET{liste}|=={liste}|?{ul,div})] id="menu_lang">[(#REM)
 
@@ -53,12 +55,12 @@
 		
 		url_absolue pour éviter des problèmes en urls arbo
 	]
-	[[<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#VALEUR}|parametre_url{redirect,#GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}|url_absolue})]" rel="alternate" lang="#VALEUR"[(#GET{format}|=={'abrege'}|oui) title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]"] class="langue_#VALEUR">(#GET{nom_langue}|ucfirst)</a>](#VALEUR|=={#ENV{lang}}|non)][
+	[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#VALEUR}|parametre_url{redirect,#GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}|url_absolue})]" rel="alternate" lang="#VALEUR"[(#GET{format}|=={'abrege'}|oui) title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]"] class="langue_#VALEUR">(#GET{nom_langue}|ucfirst)</a>](#VALEUR|=={#ENV{lang}}|non)][
 	(#REM)
 	
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 
-	][[<strong class="langue_#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>](#VALEUR|=={#ENV{lang}}|oui)][
+	][[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)]<strong class="langue_#VALEUR" title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]">(#GET{nom_langue}|ucfirst)</strong>](#VALEUR|=={#ENV{lang}}|oui)][
 	(#GET{liste}|=={liste}|oui)</li>
 ]</BOUCLE_ListeLangues>
 </[(#GET{liste}|=={liste}|?{ul,div})]>

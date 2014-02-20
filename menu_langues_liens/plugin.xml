@@ -14,8 +14,8 @@
 	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] - Jean-Baptiste Pressac - Quentin Drouet - Cedric Morin</auteur>
 	<licence>&#169; 2009-2014 GNU/GPL</licence>
 	<lien>http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens</lien>
-	<version>1.1.10</version>
-	<etat>test</etat>
+	<version>1.2.0</version>
+	<etat>stable</etat>
 	<description>
 		<multi>
 [fr]Remplace le menu d&#233;roulant de langues par un menu cliquable. Ce menu n'est affich&#233; que s'il y a au moins 2 langues vraiment utilis&#233;es dans le site.

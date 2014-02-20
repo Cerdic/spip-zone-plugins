@@ -10,14 +10,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_langues_invisibles' => 'Permet d’enlever certaines langues du menu',
+	'explication_separateur' => 'Texte utilisé pour séparer les langues dans le menu',
 
 	// L
 	'label_format' => 'Format d’affichage des langues',
 	'label_format_abrege' => 'Abrégé (par exemple, Fr)',
 	'label_format_complet' => 'Complet (par exemple, Français)',
 	'label_format_liste' => 'Format de la liste des langues',
-	'label_format_liste_bloc' => 'Un bloc séparé par des espaces',
+	'label_format_liste_bloc' => 'Un bloc séparé par des espaces (ou séparateur configuré)',
 	'label_format_liste_liste' => 'Une liste à puces',
+	'label_separateur' => 'Séparateur des langues',
 	'label_langues_invisibles' => 'Langues invisibles du menu'
 );
 
