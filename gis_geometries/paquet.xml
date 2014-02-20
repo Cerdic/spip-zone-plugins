@@ -10,7 +10,7 @@
 >	
 
 	<nom>GIS Geometries</nom>
-	<!-- Prise en charge formes géométriques dans GIS -->
+	<!-- Prise en charge de formes géométriques dans GIS -->
 
 	<auteur>b_b</auteur>
 	<credit lien="https://github.com/phayes/geoPHP">geoPHP</credit>

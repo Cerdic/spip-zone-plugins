@@ -14,6 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // G
 	'gisgeom_description' => 'Ce plugin ajoute la prise en charge des formes géométriques à GIS. Il utilise les fonctions spatiales de MySQL disponibles à partir de la version 4.1.',
-	'gisgeom_slogan' => 'Prise en charge formes géométriques dans GIS',
+	'gisgeom_slogan' => 'Prise en charge de formes géométriques dans GIS',
 );
 ?>
