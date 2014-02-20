@@ -152,10 +152,17 @@ function zone_lier($zones,$type,$ids,$operation = 'add'){
 		// si c'est un ajout, ne rien effacer
 		if ($operation=='set'){
 			objet_dissocier(array('zone'=>$zones),array($type=>array("NOT",$ids)));
+			// bugfix temporaire : objet_associer ne gere pas id=0
+			if (!in_array(0,$ids) AND $type=="rubrique")
+				sql_delete("spip_zones_liens","id_zone=".intval($zones)." AND id_objet=0 AND objet=".sql_quote($type));
 		}
 		foreach ($ids as $id) {
 			if (autoriser('affecterzones',$type,$id,null,array('id_zone'=>$zones))) {
-				objet_associer(array('zone'=>$zones),array($type=>$id));
+				// bugfix temporaire : objet_associer ne gere pas id=0
+				if ($id==0 AND $type=="rubrique")
+					sql_insertq("spip_zones_liens",array('id_zone'=>$zones,"id_objet"=>$id,"objet"=>$type));
+				else
+					objet_associer(array('zone'=>$zones),array($type=>$id));
 			}
 		}
 	}
