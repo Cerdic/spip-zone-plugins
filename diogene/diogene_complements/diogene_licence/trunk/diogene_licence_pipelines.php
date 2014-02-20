@@ -12,9 +12,9 @@ function diogene_licence_diogene_ajouter_saisies($flux){
 	if(is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('licence',unserialize($flux['args']['champs_ajoutes']))){
 		include_spip('inc/licence');
 		$flux['args']['contexte']['licences'] = $GLOBALS['licence_licences'];
-    	$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_licence',$flux['args']['contexte']);
+		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_licence',$flux['args']['contexte']);
 	}
-    return $flux;
+	return $flux;
 }
 
 /**
