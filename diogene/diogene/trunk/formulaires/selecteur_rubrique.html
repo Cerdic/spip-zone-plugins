@@ -36,7 +36,7 @@
 	[(#ENV{type}|=={site}|non)<label><:diogene:texte_choix_rubrique:></label>
 	<em class="attention"><:diogene:message_id_parent_unique{rubrique=#GET{rubrique}}:></em>]
 	<BOUCLE_polyhier(CONDITION){si #ENV{selecteur_type}|=={polyhier}|oui}>
-	<input type="hidden" name="parents[(#VAL{91}|chr)][(#VAL{93}|chr)]]" value="rubrique|#ID_RUBRIQUE" />
+	<input type="hidden" name="parents[(#VAL{91}|chr)][(#VAL{93}|chr)]" value="rubrique|#ID_RUBRIQUE" />
 	</BOUCLE_polyhier>
 	<input type="hidden" name="id_parent" value="#ID_RUBRIQUE" />
 	<//B_polyhier>

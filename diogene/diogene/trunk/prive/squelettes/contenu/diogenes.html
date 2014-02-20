@@ -14,7 +14,7 @@
 </ul>
 </B_diogene_principaux>
 
-<BOUCLE_objets(POUR){tableau #PIPELINE{diogene_champs_objets}}>
+<BOUCLE_objets(DATA){source table,#PIPELINE{diogene_objets}}>
 #SET{max,''}
 <BOUCLE_diogenes_cle(DIOGENES){objet=#CLE}> </BOUCLE_diogenes_cle>
 #SET{max,#VALEUR|table_valeur{diogene_max}|sinon{0}}
