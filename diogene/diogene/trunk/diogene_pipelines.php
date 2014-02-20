@@ -159,15 +159,15 @@ function diogene_editer_contenu_objet($flux){
 			 * On remplace le selecteur de rubrique par le notre dans le public
 			 * On fait attention au fait qu'il y ait ou pas polyhiérarchie
 			 */
-			if (!test_espace_prive() && preg_match(",<li [^>]*class=[\"']editer editer_parent,Uims",$flux['data'],$regs) && (!preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs2) OR ($args['options_complements']['polyhier_desactiver'] == 'on'))){
+			if (preg_match(",<li [^>]*class=[\"']editer editer_parent,Uims",$flux['data'],$regs) && (!preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs2) OR ($args['options_complements']['polyhier_desactiver'] == 'on'))){
 				$contexte_selecteur = array(
 					'id_rubrique_limite'=>$id_secteur,
 					'type' => $type,
 					'id_parent'=>$args['contexte']['id_parent'],
 					'rubrique_principale' => $rubrique_principale);
-				if($type == 'rubrique'){
+				if($type == 'rubrique')
 					$contexte_selecteur['id_rubrique'] = $args['contexte']['id_rubrique'];
-				}
+
 				if(count($regs2) > 0){
 					$class = "editer editer_parents";
 					$contexte_selecteur['selecteur_type'] = "polyhier";
@@ -185,9 +185,16 @@ function diogene_editer_contenu_objet($flux){
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"'](editer|fieldset).*),Uims",$saisie_rubrique."\\2",$flux['data'],1);
 				else
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"'](editer|fieldset).*),Uims","\\2",$flux['data'],1);
-				if(($class == 'editer editer_parents') && ($args['options_complements']['polyhier_desactiver'] == 'on'))
-					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parent.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
-			}else if(!test_espace_prive() && ($type != 'page') && preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs)){
+				if(($class == 'editer editer_parents') && ($args['options_complements']['polyhier_desactiver'] == 'on')){
+					$sous_rub_count = sql_countsel('id_rubrique','spip_rubriques','id_secteur='.intval($args['id_secteur']));
+					if($sous_rub_count == 0){
+						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parent.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
+						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
+					}
+					else
+						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
+				}
+			}else if(($type != 'page') && preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs)){
 				$contexte = $args['contexte'];
 				$contexte['id_rubrique'] = $diogene['id_secteur'];
 				$contexte['limite_branche'] = $diogene['id_secteur'];

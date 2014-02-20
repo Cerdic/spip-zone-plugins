@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * © 2010-2014 - Distribue sous licence GNU/GPL
  *
  * Autorisations spécifiques à Diogene
  *
