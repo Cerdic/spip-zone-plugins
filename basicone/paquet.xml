@@ -3,7 +3,7 @@
 	categorie="theme"
 	version="0.1.3"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/basicone.png"
 	documentation="http://www.spip-contrib.net/basicone-icones-du-theme-prive"
 >	
