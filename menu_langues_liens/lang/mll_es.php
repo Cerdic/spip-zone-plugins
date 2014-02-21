@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_abrege' => 'Abreviado (por ejemplo, Es)',
 	'label_format_complet' => 'Completo (por ejemplo, Español)',
 	'label_format_liste' => 'Formato de la lista de idiomas',
-	'label_format_liste_bloc' => 'Bloque separado por espacios',
+	'label_format_liste_bloc' => 'Bloque separado por espacios', # MODIF
 	'label_format_liste_liste' => 'Lista por viñetas',
 	'label_langues_invisibles' => 'Idiomas invisibles del menú'
 );

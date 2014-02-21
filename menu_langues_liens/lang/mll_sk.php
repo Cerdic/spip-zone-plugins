@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_abrege' => 'Skrátený (napríklad Sk)',
 	'label_format_complet' => 'Úplný (napríklad Slovenčina)',
 	'label_format_liste' => 'Formát zoznamu jazykov',
-	'label_format_liste_bloc' => 'Blok oddelený medzerami',
+	'label_format_liste_bloc' => 'Blok oddelený medzerami', # MODIF
 	'label_format_liste_liste' => 'Zoznam s odrážkami',
 	'label_langues_invisibles' => 'Jazyky, ktoré nebudú zobrazené v menu'
 );

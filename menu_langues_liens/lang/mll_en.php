@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_format_abrege' => 'Shortened (for instance, Fr)',
 	'label_format_complet' => 'Complete (for instance, Français)',
 	'label_format_liste' => 'Languages list display format',
-	'label_format_liste_bloc' => 'A block divided by spaces',
+	'label_format_liste_bloc' => 'A block divided by spaces', # MODIF
 	'label_format_liste_liste' => 'A bulleted list',
 	'label_langues_invisibles' => 'Invisible languages in the​​ menu'
 );
