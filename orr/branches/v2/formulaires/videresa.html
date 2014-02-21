@@ -2,13 +2,11 @@
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-    [(#AUTORISER{supprimer,orr_reservation,#ENV{id_ressource}})
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
             #ACTION_FORMULAIRE{#ENV{action}}
              <input type='hidden' name='idresa' value='#ENV{idresa}' />
              <input type='hidden' name='id_ressource' value='#ENV{id_ressource}' />
-            <p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_valider:>" />
+            <p class="boutons"> <input type="submit" id="envoyeri" class="submit" value="<:bouton_valider:>" />
             </p>
     </div></form>
-    ]
 </div>
