@@ -55,6 +55,8 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 	//   (ou limiter aux mots-cles)
 	// ou par l'url &mots=italie ; &mots[]=italie&mots[]=economie
 	// sprintf('%u') necessaire car le crc32 en 32 bits n'est pas le meme qu'en 64
+	// critere {mots}
+	$cmot = array();
 	if (is_string($env['mots'])) {
 		$env['mots'] = array($env['mots']);
 	}
@@ -64,10 +66,12 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 			$cmot[] = sprintf('%u',crc32(trim(mb_strtolower($mot, 'UTF-8'))));
 		}
 	}
-	else if (isset($env['id_mot'])
+
+	// critere {id_mot}
+	if (isset($env['id_mot'])
 	AND $mot = sql_fetsel('titre', 'spip_mots', 'id_mot='.intval($env['id_mot']))) {
 		$mot = $mot['titre'];
-		$cmot = array(sprintf('%u',crc32(trim(mb_strtolower($mot, 'UTF-8')))));
+		$cmot[] = sprintf('%u',crc32(trim(mb_strtolower($mot, 'UTF-8'))));
 	}
 
 	# demande d'un id_auteur
@@ -77,7 +81,7 @@ function inc_sphinx_to_array_dist($u, $selection=null) {
 
 	# validite de la requete ?
 	if (!strlen($recherche)
-	AND !isset($cmot)
+	AND !count($cmot)
 	AND !$id_auteur
 	)
 		return false;
