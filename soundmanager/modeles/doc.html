@@ -15,7 +15,7 @@
 <BOUCLE_doc(DOCUMENTS) {id_document} {extension IN mp3} {tout}>
 <BOUCLE_article(ARTICLES){id_document}>#SET{titre_art,#TITRE}</BOUCLE_article>
 [(#EXTENSION|=={mp3}|oui)
-<div class="haudio audio">
+<div class="haudio audio[ (#ENV{align}|oui)audio_#ENV{align}]">
 	<div class="lecture">
 		<button class="play">play</button>
 	</div>
