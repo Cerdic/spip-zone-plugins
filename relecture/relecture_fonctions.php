@@ -155,30 +155,34 @@ function relecture_extraire_selection($texte, $idebut, $ifin) {
  */
 function relecture_inserer_reperes($texte, $element='', $id_relecture=0) {
 
-	// récupérer les commentaires de la relecture pour cet élément
+	// Récupérer les commentaires de la relecture pour cet élément
 	$from = array('spip_commentaires AS c', 'spip_auteurs AS a');
 	$select = array(
 		'c.id_commentaire AS id_commentaire',
 		'c.numero AS numero',
-		'c.repere AS repere',
+		'c.repere_debut AS debut',
+		'c.repere_fin AS fin',
 		'c.date_ouverture AS date_ouverture',
-		"c.$element AS $element",
+		'c.texte AS texte',
 		'a.nom AS nom');
 	$where = array('c.element=' . sql_quote($element), "c.id_relecture=$id_relecture", 'c.id_emetteur=a.id_auteur');
-	$order_by = array('c.date_ouverture');
-	$comments = sql_allfetsel($select, $from, $where, '', $orderby);
+	$order_by = array('c.repere_fin');
+	$commentaires = sql_allfetsel($select, $from, $where, '', $order_by);
 	
 	$offset = 0;
-	foreach ($comments as $_comment) {
-		$repere = unserialize($_comment['repere']);
-		$insert = '<span class="tooltip relecture ui-icon ui-icon-comment" data-comment-id="' . $_comment['id_commentaire']
-				. '" data-comment-date="' . affdate($_comment['date_ouverture'], 'd/m/y h:i')
-				. '" data-comment-auteur="' .$_comment['nom'] . '">'
-				. '[' . $_comment['numero'] . '] : ' . $_comment[$element] .'</span>';
-		$texte = substr_replace($texte, $insert, $repere[1] + $offset, 0);
-		$offset += strlen($insert);
+	foreach ($commentaires as $_commentaire) {
+		$tooltip = '<span class="tooltip relecture ui-icon ui-icon-comment'
+				. '" data-comment-id="' . $_commentaire['id_commentaire']
+				. '" data-comment-numero="' . $_commentaire['numero']
+				. '" data-comment-url="' . generer_url_entite($_commentaire['id_commentaire'], 'commentaire')
+				. '" data-comment-date="' . affdate($_commentaire['date_ouverture'], 'd/m/y h:i')
+				. '" data-comment-auteur="' . $_commentaire['nom'] . '">'
+				. $_commentaire['texte']
+				. '</span>';
+		$texte = substr_replace($texte, $tooltip, $_commentaire['fin'] + $offset, 0);
+		$offset += strlen($tooltip);
 	}
-	
+
 	return $texte;
 }
 

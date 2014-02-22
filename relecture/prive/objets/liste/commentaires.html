@@ -72,8 +72,8 @@
 				#SET{url_edit, #URL_ECRIRE{commentaire_edit, id_commentaire=#ID_COMMENTAIRE}
 								|parametre_url{id_relecture, #ID_RELECTURE}
 								|parametre_url{element, #ELEMENT}
-								|parametre_url{index_debut, #REPERE|table_valeur{0}}
-								|parametre_url{index_fin, #REPERE|table_valeur{1}}}
+								|parametre_url{index_debut, #REPERE_DEBUT}
+								|parametre_url{index_fin, #REPERE_FIN}}
 				[(#AUTORISER{moderer, commentaire, #ID_COMMENTAIRE})
 					[(#BOUTON_ACTION{<:relecture:bouton_moderer:>, #GET{url_edit}, '', '', ''})]
 				]

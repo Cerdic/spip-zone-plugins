@@ -86,7 +86,8 @@ function relecture_declarer_tables_objets_sql($tables) {
 			"id_organisateur"	=> "bigint(21)",
 			"numero"			=> "integer NOT NULL",
 			"element"			=> "varchar(10) DEFAULT '' NOT NULL",
-			"repere"			=> "varchar(255) DEFAULT '' NOT NULL",
+			"repere_debut"		=> "integer NOT NULL",
+			"repere_fin"		=> "integer NOT NULL",
 			"texte"				=> "text DEFAULT '' NOT NULL",
 			"reponse"			=> "text DEFAULT '' NOT NULL",
 			"date_ouverture"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
@@ -165,10 +166,10 @@ function relecture_declarer_tables_interfaces($interface) {
 	// Les traitements
 	// - table spip_relectures
 	$interface['table_des_traitements']['DESCRIPTION']['relectures'] = _TRAITEMENT_RACCOURCIS;
-	$interface['table_des_traitements']['ARTICLE_DESCR']['relectures'] = _TRAITEMENT_RACCOURCIS;
-	$interface['table_des_traitements']['ARTICLE_CHAPO']['relectures'] = _TRAITEMENT_RACCOURCIS;
-	$interface['table_des_traitements']['ARTICLE_TEXTE']['relectures'] = _TRAITEMENT_RACCOURCIS;
-	$interface['table_des_traitements']['ARTICLE_PS']['relectures'] = _TRAITEMENT_RACCOURCIS;
+//	$interface['table_des_traitements']['ARTICLE_DESCR']['relectures'] = _TRAITEMENT_RACCOURCIS;
+//	$interface['table_des_traitements']['ARTICLE_CHAPO']['relectures'] = _TRAITEMENT_RACCOURCIS;
+//	$interface['table_des_traitements']['ARTICLE_TEXTE']['relectures'] = _TRAITEMENT_RACCOURCIS;
+//	$interface['table_des_traitements']['ARTICLE_PS']['relectures'] = _TRAITEMENT_RACCOURCIS;
 	// - table spip_commentaires
 	$interface['table_des_traitements']['TEXTE']['commentaires'] = _TRAITEMENT_RACCOURCIS;
 	$interface['table_des_traitements']['REPONSE']['commentaires'] = _TRAITEMENT_RACCOURCIS;

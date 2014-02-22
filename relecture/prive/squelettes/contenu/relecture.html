@@ -90,16 +90,16 @@
 		<div class="accordion" id="article">
 			[(#ARTICLE_DESCR*|strlen|oui)
 				<h5><a href="#"><:relecture:label_article_descr:></a></h5>
-				<div>#ARTICLE_DESCR</div>]
+				<div>[(#ARTICLE_DESCR|relecture_inserer_reperes{descr,#ID_RELECTURE}|propre)]</div>]
 			[(#ARTICLE_CHAPO*|strlen|oui)
 				<h5><a href="#"><:relecture:label_article_chapo:></a></h5>
-				<div>#ARTICLE_CHAPO</div>]
+				<div>[(#ARTICLE_CHAPO|relecture_inserer_reperes{chapo,#ID_RELECTURE}|propre)]</div>]
 			[(#ARTICLE_TEXTE*|strlen|oui)
 				<h5><a href="#"><:relecture:label_article_texte:></a></h5>
 				<div>[(#ARTICLE_TEXTE|relecture_inserer_reperes{texte,#ID_RELECTURE}|propre)]</div>]
 			[(#ARTICLE_PS*|strlen|oui)
 				<h5><a href="#"><:relecture:label_article_ps:></a></h5>
-				<div>#ARTICLE_PS</div>]
+				<div>[(#ARTICLE_PS|relecture_inserer_reperes{ps,#ID_RELECTURE}|propre)]</div>]
 		</div>
 	</div>
 
@@ -141,7 +141,9 @@
 					return title;
 				},
 				text: function(event, api) {
-					return $(this).text();
+					var texte = '[<a href="' + $(this).attr('data-comment-url')
+							  + '"><strong>' + $(this).attr('data-comment-numero') + '</strong></a>] : ' + $(this).text();
+					return texte;
 				}
 			},
 			position: {
