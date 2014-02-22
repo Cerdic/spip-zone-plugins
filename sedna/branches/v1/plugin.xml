@@ -8,7 +8,7 @@
 	</slogan>
 	<auteur>Fil</auteur>
 	<licence>&#169; 2005-2012 - GNU/GPL</licence>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<etat>stable</etat>
 	<description>
 Sedna est un agr&#233;gateur de flux RSS (et ATOM etc) bas&#233; sur les sites syndiqu&#233;s de SPIP. Il s&#8217;inspire vaguement de &#171; Safari RSS &#187; pour la pr&#233;sentation.
