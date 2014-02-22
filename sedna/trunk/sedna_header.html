@@ -17,6 +17,7 @@
 <link href="[(#CHEMIN{css/sedna.css}|direction_css)]" rel="stylesheet" type="text/css" />
 #SET{color_css,#EVAL{$_COOKIE['sedna_color']?$_COOKIE['sedna_color']:'blue'}}
 <link href="[(#CHEMIN{css/sedna-[(#GET{color_css})].css}|direction_css)]" rel="stylesheet" type="text/css" />
+[<link href="(#CHEMIN{css/perso.css})" rel="stylesheet" type="text/css" />]
 #INSERT_HEAD
 [<script type="text/javascript" src="(#VAL{sedna.js}|produire_fond_statique)"></script>]
 </head>
