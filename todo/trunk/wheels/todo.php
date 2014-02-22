@@ -20,6 +20,10 @@ function tw_todo($t) {
 	// Liste des statuts supportés
 	global $todo_statuts;
 
+	// Numéro d'appel de la fonction tw_todo dans le hit.
+	// -- sert à calculer une ancre unique pour chaque todolist sans nécessiter d'id ou de titre.
+	static $no_bloc = 0;
+
 	// Initialisation du html calculé
 	$html = $t;
 
@@ -158,6 +162,7 @@ function tw_todo($t) {
 						'projet' => (isset($projets[$_cle]) ? $projets[$_cle] : ''),
 						'taches' => $_taches,
 						'types_info' => ($priorite_utilisee[$_cle] ? array_merge($types_info[$_cle], array('priorite')) : $types_info[$_cle]),
+						'ancre' => "todo_${no_bloc}_${_cle}",
 						'fermee' => $todo_fermee[$_cle]
 					),
 					array(
@@ -166,6 +171,7 @@ function tw_todo($t) {
 				);
 			}
 		}
+		$no_bloc++;
 	}
 
 	return $html;
