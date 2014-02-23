@@ -9,36 +9,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
 	'liens_internes:nom' =>  'Correction des liens internes',
-	'liens_internes:description' => 'A chaque modification d\'un contenu du site, cet outil corrige automatiquement en format abrégé SPIP les liens internes insérés par copier-coller de l\'URL.
+	'liens_internes:description' => 'A chaque modification d’un contenu du site, cet outil corrige automatiquement en format abrégé SPIP les liens internes insérés par copier-coller de l’URL.
 _ Exemple : <code>[texte->@_DOMAINE@spip.php?article1]</code> inséré deviendra ici : <code>[texte->1]</code>.
 
 Domaine en cours : {{@_DOMAINE@}}.
 _ En cas de multidomaines, notez ci-dessous la liste des domaines supplémentaires à traiter, séparés par une virgule.[[%multidomaines%]]
 
-Note : chaque correction est logguée (warning). Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».',
+Note : chaque correction est logguée (warning). Configurez les options de journalisation grâce à l’outil «[.->spip_log]».',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tous les liens du site s’ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d’ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=&quot;_blank&quot;} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d’ajouter l’une de ces classes aux liens du squelette du site (fichiers html) afin d’étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l\'encyclopédie libre wikipedia.org. À vous de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
-	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à vous de voir s\'il faut conserver cet ajout.
+@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À vous de choisir l’adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
+	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l’afficher (notamment IE6, IE7 et SAF3), à vous de voir s’il faut conserver cet ajout.
 _ Lien de test : [->test@test.com] (rechargez la page entièrement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
-	'SPIP_tailles:description' => '@puce@ Afin d\'alléger la mémoire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier dépasse la taille indiquée, le formulaire enverra bien les données mais elles seront détruites et SPIP n\'en tiendra pas compte, ni dans le répertoire IMG/, ni en base de données. Un message d\'avertissement sera alors envoyé à l\'utilisateur.
+	'SPIP_tailles:description' => '@puce@ Afin d’alléger la mémoire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier dépasse la taille indiquée, le formulaire enverra bien les données mais elles seront détruites et SPIP n’en tiendra pas compte, ni dans le répertoire IMG/, ni en base de données. Un message d’avertissement sera alors envoyé à l’utilisateur.
 
 Une valeur nulle ou non renseignée correspond à une valeur illimitée.
 [[Hauteur : %img_Hmax% pixels]][[->Largeur : %img_Wmax% pixels]][[->Poids du fichier : %img_Smax% Ko]]
 [[Hauteur : %logo_Hmax% pixels]][[->Largeur : %logo_Wmax% pixels]][[->Poids du fichier : %logo_Smax% Ko]]
 [[Poids du fichier : %doc_Smax% Ko]]
 
-@puce@ Définissez ici l\'espace maximal réservé aux fichiers distants que SPIP pourrait télécharger (de serveur à serveur) et stocker sur votre site. La valeur par défaut est ici de 16 Mo.[[%copie_Smax% Mo]]
+@puce@ Définissez ici l’espace maximal réservé aux fichiers distants que SPIP pourrait télécharger (de serveur à serveur) et stocker sur votre site. La valeur par défaut est ici de 16 Mo.[[%copie_Smax% Mo]]
 
-@puce@ Afin d\'éviter un dépassement de mémoire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacités du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de désactiver ce test en définissant manuellement le nombre maximal de pixels supportés pour les calculs.
+@puce@ Afin d’éviter un dépassement de mémoire PHP dans le traitement des grandes images par la librairie GD2, SPIP teste les capacités du serveur et peut donc refuser de traiter les trop grandes images. Il est possible de désactiver ce test en définissant manuellement le nombre maximal de pixels supportés pour les calculs.
 
 La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de mémoire. Une valeur nulle ou non renseignée entraînera le test du serveur.
 [[%img_GDmax% pixels au maximum]]
 
-@puce@ La librairie GD2 permet d\'ajuster la qualité de compression des images JPG. Un pourcentage élevé correspond à une qualité élevée.
+@puce@ La librairie GD2 permet d’ajuster la qualité de compression des images JPG. Un pourcentage élevé correspond à une qualité élevée.
 [[%img_GDqual% %]]',
 	'SPIP_tailles:nom' => 'Limites mémoire',
 
@@ -47,18 +47,18 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide' => 'Action rapide, uniquement si vous savez ce que vous faites !',
 	'action_rapide_non' => 'Action rapide, disponible une fois cet outil activé :',
 	'admins_seuls' => 'Les administrateurs seulement',
-	'aff_tout:description' => 'Il parfois utile d\'afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n\'affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
+	'aff_tout:description' => 'Il parfois utile d’afficher toutes les rubriques ou tous les auteurs de votre site sans tenir compte de leur statut (pendant la période de développement par exemple). Par défaut, SPIP n’affiche en public que les auteurs et les rubriques ayant au moins un élément publié.
 
-Bien qu\'il soit possible de contourner ce comportement à l\'aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d\'ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
+Bien qu’il soit possible de contourner ce comportement à l’aide du critère [<html>{tout}</html>->http://www.spip.net/fr_article4250.html], cet outil automatise le processus et vous évite d’ajouter ce critère à toutes les boucles RUBRIQUES et/ou AUTEURS de vos squelettes.',
 	'aff_tout:nom' => 'Affiche tout',
-	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d\'alerte pour diffuser le message d\'urgence défini ci-dessous.
+	'alerte_urgence:description' => 'Affiche en tête de toutes les pages publiques un bandeau d’alerte pour diffuser le message d’urgence défini ci-dessous.
 _ Les balises <code><multi/></code> sont recommandées en cas de site multilingue.[[%alerte_message%]]',
-	'alerte_urgence:nom' => 'Message d\'alerte',
+	'alerte_urgence:nom' => 'Message d’alerte',
 	'attente' => 'Attente...',
-	'auteur_forum:description' => 'Incite tous les auteurs de messages publics à fournir (d\'au moins d\'une lettre !) un nom et/ou un courriel afin d\'éviter les contributions totalement anonymes. Notez que cet outil procède à une vérification JavaScript sur le poste du visiteur.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
+	'auteur_forum:description' => 'Incite tous les auteurs de messages publics à fournir (d’au moins d’une lettre !) un nom et/ou un courriel afin d’éviter les contributions totalement anonymes. Notez que cet outil procède à une vérification JavaScript sur le poste du visiteur.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
 {Attention : Choisir la troisième option annule les 2 premières. Il est important de vérifier que les formulaires de votre squelette sont bien compatibles avec cet outil.}',
 	'auteur_forum:nom' => 'Pas de forums anonymes',
-	'auteur_forum_deux' => 'Ou, au moins l\'un des deux champs précédents',
+	'auteur_forum_deux' => 'Ou, au moins l’un des deux champs précédents',
 	'auteur_forum_email' => 'Le champ «@_CS_FORUM_EMAIL@»',
 	'auteur_forum_nom' => 'Le champ «@_CS_FORUM_NOM@»',
 	'auteurs:description' => 'Cet outil configure l\'apparence de [la page des auteurs->./?exec=auteurs], en partie privée.
@@ -399,7 +399,11 @@ Techniquement, cet outil a pour effet :
 Les blocs multi s\'affichent alors toujours dans la langue demandée par le visiteur.',
 	'forcer_langue:nom' => 'Force la langue',
 	'format_spip' => 'Les articles au format SPIP',
-	'forum_lgrmaxi:description' => 'Par défaut les messages de forum ne sont pas limités en taille. Si cet outil est activé, un message d\'erreur s\'affichera lorsque quelqu\'un voudra poster un message  d\'une taille supérieure à la valeur spécifiée, et le message sera refusé. Une valeur vide ou égale à 0 signifie néanmoins qu\'aucune limite ne s\'applique.[[%forum_lgrmaxi%]]',
+	'forum_lgrmaxi:description' => 'Par défaut, SPIP ne limite pas la taille maximale des messages de forum, mais oblige une taille minimale de 10 caractères. Cet outil vous permet de modifier ces valeurs (la valeur minimale est modifiable dès SPIP 3.0).
+
+Lorsqu\'un message de taille incompatible est posté, il est refusé et un message d\'erreur est affiché.[[De %forum_lgrmini% à %forum_lgrmaxi%@_CS_ASTER@ caractères.]]<q3>@_CS_ASTER@ Une valeur vide ou égale à 0 signifie que la taille des messages ne sera pas limitée.</q3>',
+//	'forum_lgrmaxi_actu' => 'Valeurs actuelles : de @mini@ à @maxi@.',
+	'forum_lgrmaxi_comment' => "Attention : le plugin [Comments->?exec=configurer_comments] actuellement actif peut interagir sur ces valeurs.",
 	'forum_lgrmaxi:nom' => 'Taille des forums',
 
 	// G
@@ -508,7 +512,6 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : «{Round Cor
 	'label:enveloppe_mails' => 'Petite enveloppe devant les mails :',
 	'label:expo_bofbof' => 'Mise en exposants pour : <html>St(e)(s), Bx, Bd(s) et Fb(s)</html>',
 	'label:filtre_gravite' => 'Gravité maximale acceptée :',
-	'label:forum_lgrmaxi' => 'Valeur (en caractères) :',
 	'label:glossaire_groupes' => 'Groupe(s) utilisé(s) :',
 	'label:glossaire_js' => 'Technique utilisée :',
 	'label:glossaire_limite' => 'Nombre maximal de liens créés :',
@@ -868,15 +871,15 @@ Exemple d\'utilisation : le titre d\'un livre cité dans le titre d\'un article,
 	'tous' => 'Tous',
 	'toutes_couleurs' => 'Les 36 couleurs des styles css :@_CS_EXEMPLE_COULEURS@',
 	'toutmulti:aide' => 'Blocs multilingues : <b><:ma_chaine:></b>',
-	'toutmulti:description' => 'À l\'instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d\'utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l\'aide du raccourci <code><:</code><code>ma_chaine:></code>.
+	'toutmulti:description' => 'À l’instar de ce vous pouvez déjà faire dans vos squelettes, cet outil vous permet d’utiliser librement les chaînes de langues (de SPIP ou de vos squelettes) dans tous les contenus de votre site (articles, titres, messages, etc.) à l’aide du raccourci <code><:</code><code>ma_chaine:></code>.
 
 Consultez [ici ->http://www.spip.net/fr_article2128.html] la documentation de SPIP à ce sujet.
 
-Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:</code><code>ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>\'ma_chaine\'=>"Bonjour, je suis @nom@ et j\'ai @age@ ans"</code>.
+Cet outil accepte également les arguments introduits par SPIP 2.0. Par exemple, le raccourci <code><:</code><code>ma_chaine{nom=Charles Martin, age=37}:></code> permet de passer deux paramètres à la chaîne suivante : <code>"ma_chaine"=>"Bonjour, je suis @</code><code>nom@ et j\'ai @</code><code>age@ ans"</code>.
 
-La fonction SPIP utilisée en PHP est <code>_T(\'chaine\')</code> sans argument, et  <code>_T(\'chaine\', array(\'arg1\'=>\'un texte\', \'arg2\'=>\'un autre texte\'))</code> avec arguments.
+La fonction SPIP utilisée en PHP est <code>_T("chaine")</code> sans argument, et  <code>_T("chaine", array("arg1"=>"un texte", "arg2"=>"un autre texte"))</code> avec arguments.
 
- N\'oubliez donc pas de vérifier que la clef <code>\'chaine\'</code> est bien définie dans les fichiers de langues.',
+ N’oubliez donc pas de vérifier que la clef <code>"chaine"</code> est bien définie dans les fichiers de langues.',
 	'toutmulti:nom' => 'Blocs multilingues',
 	'trad_help' => '{{Le Couteau Suisse est bénévolement traduit en plusieurs langues et sa langue mère est le français.}}
 
@@ -1007,7 +1010,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
 	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (séparés par « : ») :',
 	'urls_minuscules' => 'Lettres minuscules',
-	'urls_nouvelle' => 'Éditer l\'URL « propres » principale :',
+	'urls_nouvelle' => 'Éditer l’URL « propres » principale :',
 	'urls_num_objet' => 'Numéro :',
 	'urls_purger' => 'Tout vider',
 	'urls_purger_tables' => 'Vider les tables sélectionnées',
@@ -1017,8 +1020,8 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_type_objet' => 'Objet :',
 	'urls_url_calculee' => 'URL publique « @type@ » :',
 	'urls_url_objet' => 'URL(s) « propres » enregistrée(s) :',
-	'urls_valeur_vide' => 'Note : Une valeur vide entraine la suppression des URL(s) « propres » enregistrée(s) puis un nouveau calcul de l\'URL principale sans verrouillage.',
-	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.',
+	'urls_valeur_vide' => 'Note : Une valeur vide entraîne la suppression des URL(s) « propres » enregistrée(s) puis un nouveau calcul de l’URL principale sans verrouillage.',
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d’un clic sur « @voir@ » ou d’un changement du titre de l’objet.',
 
 	// V
 	'validez_page' => 'Pour accéder aux modifications :',
@@ -1034,8 +1037,8 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'version_update_chargeur_title' => 'Télécharge la dernière version du plugin grâce au plugin «Téléchargeur»',
 	'version_update_title' => 'Télécharge la dernière version du plugin et lance sa mise à jour automatique',
 	'verstexte:description' => '2 filtres pour vos squelettes, permettant de produire des pages plus légères.
-_ version_texte : extrait le contenu texte d\'une page html à l\'exclusion de quelques balises élémentaires.
-_ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte brut.',
+_ version_texte : extrait le contenu texte d\'une page html à l’exclusion de quelques balises élémentaires.
+_ version_plein_texte : extrait le contenu texte d’une page html pour rendre du texte brut.',
 	'verstexte:nom' => 'Version texte',
 	'visiteurs_connectes:description' => 'Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connectés sur le site public.
 
@@ -1055,9 +1058,9 @@ En tant que webmestre vous-même, vous avez ici les droits de modifier cette lis
 	'webmestres:nom' => 'Liste des webmestres',
 
 	// X
-	'xml:description' => 'Active le validateur XML pour l\'espace public tel qu\'il est décrit dans la [documentation de SPIP->http://www.spip.net/fr_article3541.html]. Cet outil n\'est visible que des administrateurs du site : un bouton intitulé « Analyse XML » est ajouté aux autres boutons d\'administration.
+	'xml:description' => 'Active le validateur XML pour l’espace public tel qu’il est décrit dans la [documentation de SPIP->http://www.spip.net/fr_article3541.html]. Cet outil n\'est visible que des administrateurs du site : un bouton intitulé « Analyse XML » est ajouté aux autres boutons d’administration.
 
-@puce@ Utile notamment pour valider la syntaxe de vos pages finales, et résoudre les problèmes d\'accessibilité du Web aux déficients visuels.',
+@puce@ Utile notamment pour valider la syntaxe de vos pages finales, et résoudre les problèmes d’accessibilité du Web aux déficients visuels.',
 	'xml:nom' => 'Validateur XML'
 );
 

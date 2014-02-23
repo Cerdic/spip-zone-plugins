@@ -223,17 +223,31 @@ add_outil( array(
 
 // ici on a besoin d'une case input. La variable est : forum_lgrmaxi
 // a la toute premiere activation de l'outil, la valeur sera : 0 (aucune limite)
-add_variable( array(
+add_variables( array(
 	'nom' => 'forum_lgrmaxi',
 	'format' => _format_NOMBRE,
 	'defaut' => 0,
 	'code:%s' => "define('_FORUM_LONGUEUR_MAXI', %s);",
+), array(
+	'nom' => 'forum_lgrmini',
+	'format' => _format_NOMBRE,
+	'label' => '@_CS_CHOIX@',
+	'defaut' => 10,
+	'code:%s!=10 && defined("_SPIP30000")' => "define('_FORUM_LONGUEUR_MINI', %s);",
 ));
 add_outil( array(
 	'id' => 'forum_lgrmaxi',
-	'code:spip_options' => "%%forum_lgrmaxi%%",
+	'code:spip_options' => "%%forum_lgrmaxi%%%%forum_lgrmini%%",
 	'categorie' => 'securite',
 	'version-min' => '1.9200',
+	'pipelinecode:pre_description_outil' => 'if($id=="forum_lgrmaxi") {
+		if(!defined("_SPIP30000")) $texte=str_replace("\'forum_lgrmini\'","\'forum_lgrmini\' disabled=\'disabled\' value=\'10\'", $texte);
+		if(defined("_DIR_PLUGIN_COMMENTS")) $texte.="\n\n<spanred>".couteauprive_T("forum_lgrmaxi_comment")."</span>";
+//		include_spip("comments_options");
+//		$mini=(defined("_FORUM_LONGUEUR_MINI") && defined("_SPIP30000"))?_FORUM_LONGUEUR_MINI:10;
+//		$maxi=defined("_FORUM_LONGUEUR_MAXI")?_FORUM_LONGUEUR_MAXI:0;
+//		$texte.="\n\n".couteauprive_T("forum_lgrmaxi_actu", array("mini"=>$mini, "maxi"=>$maxi?$maxi:"&infin;"));
+}',
 ));
 
 
