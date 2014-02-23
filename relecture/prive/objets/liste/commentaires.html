@@ -85,7 +85,12 @@
 				</td>
 			]
 				<td class="id">
+				[(#AUTORISER{voir, commentaire, #ID_COMMENTAIRE}|oui)
 					<a[ href="(#ID_COMMENTAIRE|generer_url_entite{commentaire})"]>\[#NUMERO\]</a>
+				]
+				[(#AUTORISER{voir, commentaire, #ID_COMMENTAIRE}|non)
+					\[#NUMERO\]
+				]
 				</td>
 			</tr>
 	</BOUCLE_liste_commentaires>

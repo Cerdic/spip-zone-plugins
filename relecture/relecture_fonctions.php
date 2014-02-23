@@ -165,7 +165,11 @@ function relecture_inserer_reperes($texte, $element='', $id_relecture=0) {
 		'c.date_ouverture AS date_ouverture',
 		'c.texte AS texte',
 		'a.nom AS nom');
-	$where = array('c.element=' . sql_quote($element), "c.id_relecture=$id_relecture", 'c.id_emetteur=a.id_auteur');
+	$where = array(
+				'c.statut!=' . sql_quote('poubelle'),
+				'c.element=' . sql_quote($element),
+				"c.id_relecture=$id_relecture",
+				'c.id_emetteur=a.id_auteur');
 	$order_by = array('c.repere_fin');
 	$commentaires = sql_allfetsel($select, $from, $where, '', $order_by);
 	

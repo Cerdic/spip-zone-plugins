@@ -265,6 +265,42 @@ function autoriser_relecture_instituer_dist($faire, $type, $id, $qui, $opt) {
 /* ----------------------- AUTORISATIONS DE L'OBJET COMMENTAIRE ----------------------- */
 
 /**
+ * Autorisation de voir le texte, la réponse et les message du forum d'un commentaire
+ *
+ * @param object $faire
+ * @param object $type
+ * @param object $id
+ * @param object $qui
+ * @param object $opt
+ * @return
+ */
+function autoriser_commentaire_voir_dist($faire, $type, $id, $qui, $opt) {
+
+	$autoriser = false;
+
+	// Conditions :
+	// soit,
+	// - le commentaire est supprimé,
+	// - et seul son auteur peut encore y accéder
+	// soit,
+	// - le commentaire est dans un autre statut
+	// et l'auteur connecté possède l'autorisation de voir la relecture
+	if ($id_commentaire = intval($id)) {
+		$from = 'spip_commentaires';
+		$where = array("id_commentaire=$id_commentaire");
+		$infos = sql_fetsel('id_relecture, id_emetteur, statut', $from, $where);
+
+		$autoriser =
+			((($infos['statut'] == 'poubelle')
+				AND ($qui['id_auteur'] == $infos['id_emetteur']))
+			OR (($infos['statut'] != 'poubelle')
+				AND (autoriser('voir', 'relecture', intval($infos['id_relecture']),$qui, $opt))));
+	}
+
+	return $autoriser;
+}
+
+/**
  * Autorisation de modifier le texte ou la réponse d'un commentaire
  *
  * @param object $faire
@@ -382,6 +418,7 @@ function autoriser_commentaire_participerforum_dist($faire, $type, $id, $qui, $o
 function autoriser_commentaire_instituer_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
+	$autoriser = true;
 
 	return $autoriser;
 }
