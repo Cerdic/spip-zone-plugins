@@ -110,26 +110,28 @@ var spipGeoportail = jQuery.geoportail =
 			return Geoportal.Layer.Grid.prototype.moveTo.apply(this, arguments);
 		}
 		// Cas de l'ortho => detection des zones HR/LR
-		ortho = viewer.getMap().getLayersByName("ORTHOIMAGERY.ORTHOPHOTOS").pop();
-		ortho.onLoadError = function()
-		{	this.isLoadError = true;
-			if (this.map.zoom > 18) return OpenLayers.Util.getImagesLocation()+'blank.gif';
-			else return Geoportal.Util.getImagesLocation()+'nodata.jpg';
+		var ortho = viewer.getMap().getLayersByName("ORTHOIMAGERY.ORTHOPHOTOS").pop();
+		if (ortho && $.inArray(ortho,layers2zoom))
+		{	ortho.onLoadError = function()
+			{	this.isLoadError = true;
+				if (this.map.zoom > 18) return OpenLayers.Util.getImagesLocation()+'blank.gif';
+				else return Geoportal.Util.getImagesLocation()+'nodata.jpg';
+			}
+			ortho.events.register("moveend", ortho, function(e)
+				{	// Switch to normal mode (HR)
+					if (e.zoomChanged && this.map.zoom < 19)
+					{      this.maxZoomLevel = 19;
+					}
+				});
+			ortho.events.register("loadend", ortho, function(e)
+				{	// Switch to resample mode (LR)
+					if (this.isLoadError && this.map.zoom > 18 && this.maxZoomLevel != 18)
+					{	this.maxZoomLevel = 18;
+						this.redraw();
+					}
+					this.isLoadError = false;
+				});
 		}
-		ortho.events.register("moveend", ortho, function(e)
-			{	// Switch to normal mode (HR)
-				if (e.zoomChanged && this.map.zoom < 19)
-				{      this.maxZoomLevel = 19;
-				}
-			});
-		ortho.events.register("loadend", ortho, function(e)
-			{	// Switch to resample mode (LR)
-				if (this.isLoadError && this.map.zoom > 18 && this.maxZoomLevel != 18)
-				{	this.maxZoomLevel = 18;
-					this.redraw();
-				}
-				this.isLoadError = false;
-			});
 	},
 	
 	// Fonction d'initialisation des cartes
