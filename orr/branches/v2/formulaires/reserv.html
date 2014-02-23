@@ -53,9 +53,9 @@
 			sliderAccessArgs: { touchonly: false },
 			onClose: function(dateText, inst) {
 				if (jQuery('#champ_date_fin').val() != '') {
-					var date_debut = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm", dateText));
+					var date_debut = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", dateText));
 					var date_fin = jQuery('#champ_date_fin').val();
-					date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm", date_fin));
+					date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", date_fin));
 					if (date_debut > date_fin)
 						jQuery('#champ_date_fin').val(dateText);
 				}
@@ -91,8 +91,8 @@
 			onClose: function(dateText, inst) {
 				if (jQuery('#champ_date_debut').val() != '') {
 					var date_debut =jQuery('#champ_date_debut').val();
-					date_debut =  new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm", date_debut));
-					var date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm", dateText));
+					date_debut =  new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", date_debut));
+					var date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", dateText));
 					if (date_debut > date_fin)
 						jQuery('#champ_date_debut').val(dateText);
 				}
