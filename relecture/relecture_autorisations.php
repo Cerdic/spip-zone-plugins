@@ -290,18 +290,21 @@ function autoriser_commentaire_voir_dist($faire, $type, $id, $qui, $opt) {
 		$where = array("id_commentaire=$id_commentaire");
 		$infos = sql_fetsel('id_relecture, id_emetteur, statut', $from, $where);
 
+		$commentaire_supprime = ($infos['statut'] == 'poubelle');
+
+		$autorise_voir_relecture = autoriser('voir', 'relecture', intval($infos['id_relecture']),$qui, $opt);
+
 		$autoriser =
-			((($infos['statut'] == 'poubelle')
-				AND ($qui['id_auteur'] == $infos['id_emetteur']))
-			OR (($infos['statut'] != 'poubelle')
-				AND (autoriser('voir', 'relecture', intval($infos['id_relecture']),$qui, $opt))));
+			(($commentaire_supprime AND ($qui['id_auteur'] == $infos['id_emetteur']))
+			OR (!$commentaire_supprime AND $autorise_voir_relecture));
 	}
 
 	return $autoriser;
 }
 
 /**
- * Autorisation de modifier le texte ou la réponse d'un commentaire
+ * Autorisation de modifier le texte ou la réponse d'un commentaire.
+ * L'élément à modifier (texte ou réponse) est passé dans l'argument $opt['champ']
  *
  * @param object $faire
  * @param object $type
@@ -315,16 +318,34 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$autoriser = false;
 
 	// Conditions :
-	// - Seul l'auteur ayant depose le commmentaire peut le modifier
-	// - le commentaire est encore ouvert
+	// soit,
+	// - la modification concerne le "texte" du commentaire
+	// - le commentaire est ouvert
+	// - l'auteur concerné est bien l'auteur du commmentaire
+	// - aucun message de forum n'a encore été déposé sur le commentaire
+	// soit,
+	// - la modification concerne la "réponse" du commentaire
+	// - le commentaire est ouvert
+	// - l'auteur possède l'autorisation de modifier la relecture
 	if ($id_commentaire = intval($id)) {
 		$from = 'spip_commentaires';
 		$where = array("id_commentaire=$id_commentaire");
-		$infos = sql_fetsel('id_emetteur, statut', $from, $where);
+		$infos = sql_fetsel('id_emetteur, statut, id_relecture', $from, $where);
+
+		$commentaire_ouvert = ($infos['statut'] == 'ouvert');
+
+		$nb_messages_forum = sql_countsel('spip_forums', array("id_commentaire=$id_commentaire"));
+
+		$autorise_modifier_relecture = autoriser('modifier', 'relecture', intval($infos['id_relecture']),$qui, array());
 
 		$autoriser =
-			(($qui['id_auteur'] == $infos['id_emetteur'])
-			AND ($infos['statut'] == 'ouvert'));
+			((($opt['champ'] == 'texte')
+				AND $commentaire_ouvert
+				AND ($nb_messages_forum == 0)
+				AND ($qui['id_auteur'] == $infos['id_emetteur']))
+			OR (($opt['champ'] == 'reponse')
+				AND $commentaire_ouvert
+				AND $autorise_modifier_relecture));
 	}
 
 	return $autoriser;
@@ -393,12 +414,14 @@ function autoriser_commentaire_participerforum_dist($faire, $type, $id, $qui, $o
 	if ($id_commentaire = intval($id)) {
 		$from = 'spip_commentaires';
 		$where = array("id_commentaire=$id_commentaire");
-		$infos = sql_fetsel('id_emetteur, statut', $from, $where);
+		$infos = sql_fetsel('statut', $from, $where);
 
 		$commentaire_ouvert = ($infos['statut'] == 'ouvert');
 
+		$autorise_voir_commentaire = autoriser('voir', 'commentaire', $id_commentaire, $qui, $opt);
+
 		$autoriser =
-			($commentaire_ouvert);
+			($commentaire_ouvert AND $autorise_voir_commentaire);
 	}
 
 

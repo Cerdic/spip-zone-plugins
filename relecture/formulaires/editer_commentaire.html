@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			#SET{ecrire_texte, ''}
-			[(#ENV{id_commentaire, oui}|=={oui}|ou{#AUTORISER{modifier, commentaire, #ENV{id_commentaire}}}|oui)
+			[(#ENV{id_commentaire, oui}|=={oui}|ou{#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', ARRAY{champ,texte}}}|oui)
 				#SET{ecrire_texte, oui}
 			]
 			#SET{emetteur, #INFO_NOM{auteur, #ENV{id_emetteur}}}
@@ -22,7 +22,7 @@
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte})</span>]
 				<textarea name="texte" id="texte"[(#GET{ecrire_texte}|non) readonly="readonly" class="no_barre"][ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{texte})]</textarea>
 		    </li>
-			[(#AUTORISER{moderer, commentaire, #ENV{id_commentaire}})
+			[(#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', #ARRAY{champ, reponse}})
 			<li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{statut}|oui) erreur]">
 				<label for="statut"><:relecture:label_commentaire_statut:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut})</span>]

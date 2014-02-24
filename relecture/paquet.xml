@@ -1,13 +1,12 @@
 <paquet
 	prefix="relecture"
 	categorie="edition"
-	version="0.1.15"
+	version="0.1.16"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="relecture-64.png"
 	schema="1"
 	documentation="http://blog.smellup.net/spip.php?article53"
-	developpement="http://blog.smellup.net/spip.php?article53"
 >
 
 	<nom>Relecture</nom>
