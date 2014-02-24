@@ -3,11 +3,11 @@
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
     <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
-		[(#ACTION_FORMULAIRE{#ENV{action}})]
-		<ul>
+        [(#ACTION_FORMULAIRE{#ENV{action}})]
+        <ul>
             [(#SAISIE{input,nom_reservation,obligatoire}
                 {label=<:orr:nom_de_la_reservation:>})]
-			
+            
             [(#SAISIE{input,date_debut,obligatoire}
                 {label=<:orr:date_de_debut:>}
                 {class=datepicker})]
@@ -16,106 +16,106 @@
                 {label=<:orr:date_de_fin:>}
                 {class=datepicker})]
                 
-			#SET{tableau_ressource, #ARRAY}
+            #SET{tableau_ressource, #ARRAY}
             <BOUCLE_selection_ressources(ORR_RESSOURCES){par orr_ressource_nom}>
                 [(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
                 #SET{tableau_ressource,#GET{tableau_ressource}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}} ]
             </BOUCLE_selection_ressources>
-			#SET{erreurs,#ENV**{erreurs}|table_valeur{liste_ressources}}
-			<li class="editer erreur editer_liste_ressources saisie_selection_multiple">
-				<label for="champ_liste_ressources"><:orr:liste_ressources:></label>
-				<span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
+            #SET{erreurs,#ENV**{erreurs}|table_valeur{liste_ressources}}
+            <li class="editer erreur editer_liste_ressources saisie_selection_multiple">
+                <label for="champ_liste_ressources"><:orr:liste_ressources:></label>
+                <span id="ctrl_clic">(<:orr:ctrl_clic:>)</span>
                 [<span class='erreur_message'>(#GET{erreurs})</span>]
-				<select id="select_multiple" size="4" multiple="multiple" class="champ_liste_ressources" name="liste_ressources[]"
-					size="[(#GET{tableau_ressource}|count|<{10}|?{[(#GET{tableau_ressource}|count)],10})]">
-					<INCLURE{fond=formulaire_selection_ressources, env, id_reservation=#ENV{id_reservation}} />
-				</select>				
+                <select id="select_multiple" size="4" multiple="multiple" class="champ_liste_ressources" name="liste_ressources[]"
+                    size="[(#GET{tableau_ressource}|count|<{10}|?{[(#GET{tableau_ressource}|count)],10})]">
+                    <INCLURE{fond=formulaire_selection_ressources, env, id_reservation=#ENV{id_reservation}} />
+                </select>               
 
             </li>
 
-			[(#CONFIG*{champs_extras_spip_orr_reservations}|oui) 
-				<INCLURE{fond=inc/formulaire_reservation_champs_extra}{env} />]
-		</ul>
-		<p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" /></p>
+            [(#CONFIG*{champs_extras_spip_orr_reservations}|oui) 
+                <INCLURE{fond=inc/formulaire_reservation_champs_extra}{env} />]
+        </ul>
+        <p class="boutons"> <input type="submit" id="envoyer" class="submit" value="<:bouton_enregistrer:>" /></p>
     </div></form>
 </div>
 
 <script type="text/javascript">
     jQuery(function(){
-		jQuery('#champ_date_debut').datetimepicker({
-			timeFormat: 'HH:mm:ss',
-			showSecond: 0,
-			stepHour: 1,
-			stepMinute: 15,
-			minuteGrid:15,
-			hourGrid:4,
-			addSliderAccess: true,
-			sliderAccessArgs: { touchonly: false },
-			onClose: function(dateText, inst) {
-				if (jQuery('#champ_date_fin').val() != '') {
-					var date_debut = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", dateText));
-					var date_fin = jQuery('#champ_date_fin').val();
-					date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", date_fin));
-					if (date_debut > date_fin)
-						jQuery('#champ_date_fin').val(dateText);
-				}
-				else {
-					jQuery('#champ_date_fin').val(dateText);
-				}
-				jQuery('#champ_date_fin').datetimepicker('option', 'minDate', date_debut);
-				
-				// reafficher les ressources en desactivant celle non dispo sur le creneau horaire selectionné
-				var selected = sep = '';
-				jQuery("#select_multiple option").each(function(){
-					if (jQuery(this).attr("selected") == "selected" ){
-						selected += sep + jQuery(this).val();
-						sep = ",";
-					}
-				});
-				jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
-					{ "date_debut_ajax": date_debut,
-					"date_fin_ajax": date_fin,
-					"selected":selected
-					[(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});				
-				}
-		});
-        jQuery('#champ_date_fin').datetimepicker({
-			timeFormat: 'HH:mm:ss',
-			showSecond: 0,
-			stepHour: 1,
-			stepMinute: 15,
-			minuteGrid:15,
-			hourGrid:4,
-			addSliderAccess: true,
-			sliderAccessArgs: { touchonly: false },
-			onClose: function(dateText, inst) {
-				if (jQuery('#champ_date_debut').val() != '') {
-					var date_debut =jQuery('#champ_date_debut').val();
-					date_debut =  new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", date_debut));
-					var date_fin = new Date(jQuery.datepicker.parseDateTime("dd/mm/yy", "HH:mm:ss", dateText));
-					if (date_debut > date_fin)
-						jQuery('#champ_date_debut').val(dateText);
-				}
-				else {
-					jQuery('#champ_date_debut').val(dateText);
-				}
-				jQuery('#champ_date_debut').datetimepicker('option', 'maxDate', date_fin);
-				
-				// reafficher les options en desactivant celle non dispo sur le creneau horaire selectionné
-				var selected = sep = '';
-				jQuery("#select_multiple option").each(function(){
-					if (jQuery(this).attr("selected") == "selected" ){
-						selected += sep + jQuery(this).val();
-						sep = ",";
-					}
-				});
-				jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
-					{ "date_debut_ajax": date_debut,
-					"date_fin_ajax": date_fin,
-					"selected":selected
-					[(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});				
-				}
-			
+        var champ_date_debut = $('#champ_date_debut');
+        var champ_date_fin = $('#champ_date_fin');
+        champ_date_debut.datetimepicker({ 
+            timeFormat: 'HH:mm:ss',
+            showSecond: 0,
+            stepHour: 1,
+            stepMinute: 15,
+            minuteGrid:15,
+            hourGrid:4,
+            addSliderAccess: true,
+            sliderAccessArgs: { touchonly: false },
+            onClose: function(dateText, inst) {
+                if (champ_date_fin.val() != '') {
+                    var date_debut = champ_date_debut.datetimepicker('getDate');
+                    var date_fin = champ_date_fin.datetimepicker('getDate');
+                    if (date_debut > date_fin)
+                        champ_date_fin.datetimepicker('setDate', date_debut);
+                }
+                else {
+                    champ_date_fin.val(dateText);
+                }
+                // reafficher les ressources en desactivant celle non dispo sur le creneau horaire selectionné
+                var selected = sep = '';
+                jQuery("#select_multiple option").each(function(){
+                    if (jQuery(this).attr("selected") == "selected" ){
+                        selected += sep + jQuery(this).val();
+                        sep = ",";
+                    }
+                });
+                jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
+                        { "date_debut_ajax": date_debut,
+                        "date_fin_ajax": date_fin,
+                        "selected":selected [(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});             
+                },
+            onSelect: function (selectedDateTime){
+                champ_date_fin.datetimepicker('option', 'minDate', champ_date_debut.datetimepicker('getDate') );
+            }
+        });
+
+        champ_date_fin.datetimepicker({ 
+            timeFormat: 'HH:mm:ss',
+            showSecond: 0,
+            stepHour: 1,
+            stepMinute: 15,
+            minuteGrid:15,
+            hourGrid:4,
+            addSliderAccess: true,
+            sliderAccessArgs: { touchonly: false },
+            onClose: function(dateText, inst) {
+                if (champ_date_debut.val() != '') {
+                    var date_debut = champ_date_debut.datetimepicker('getDate');
+                    var date_fin = champ_date_fin.datetimepicker('getDate');
+                    if (date_debut > date_fin)
+                        champ_date_debut.datetimepicker('setDate', date_fin);
+                }
+                else {
+                    champ_date_debut.val(dateText);
+                }
+                // reafficher les ressources en desactivant celle non dispo sur le creneau horaire selectionné
+                var selected = sep = '';
+                jQuery("#select_multiple option").each(function(){
+                    if (jQuery(this).attr("selected") == "selected" ){
+                        selected += sep + jQuery(this).val();
+                        sep = ",";
+                    }
+                });
+                jQuery("#select_multiple").load("[(#URL_PAGE{formulaire_selection_ressources})]",
+                    { "date_debut_ajax": date_debut,
+                    "date_fin_ajax": date_fin,
+                    "selected":selected [(#ENV{id_reservation}|oui) ,"id_reservation": #ENV{id_reservation}]});             
+            },
+            onSelect: function (selectedDateTime){
+                champ_date_debut.datetimepicker('option', 'maxDate', champ_date_fin.datetimepicker('getDate') );
+            }
         });
     });
 </script>
