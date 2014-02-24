@@ -1,0 +1,7 @@
+[(#SESSION{en_ligne}|oui)
+
+	#FORMULAIRE_SHARE{#ENV{titre}, #ENV{nom_site}, #ENV{url_site}, #ENV{texte},1,#DATE,#SESSION{id_auteur},#ENV{PS}}
+]
+[(#SESSION{en_ligne}|non)
+	#LOGIN_PUBLIC
+]

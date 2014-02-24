@@ -1,0 +1,24 @@
+<paquet
+	prefix="curator"
+	categorie="edition"
+	version="0.0.2"
+	etat="dev"
+	compatibilite="[3.0.0;3.*.*]"
+	logo="prive/themes/spip/images/curator-64.png"
+	documentation="http://ydikoi.net"
+>
+	<!--
+		Paquet genere le 2014-02-21 18:07:16
+	-->
+
+	<nom>curator</nom>
+
+
+	<auteur lien='http://ydikoi.net'>ydikoi</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="curator_autorisations.php" /> 
+
+
+</paquet>

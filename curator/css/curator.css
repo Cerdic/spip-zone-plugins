@@ -1,0 +1,21 @@
+/* @override 
+	http://h2v.me/essai/css/curator.css */
+
+body{
+	margin-right: auto;
+	margin-left: auto;
+	width: 320px;
+	background-color: silver;
+}
+label{
+	display: block;
+	font: bold 0.77em "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin-top: 5px;
+}
+
+input#titre,input#nom_site, input#url_site, textarea{
+	-moz-box-shadow: 0 0 #26272e;
+	box-shadow: 0 0 #26272e;
+	width: 90%;
+	border: thin solid gray;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+
+[(#REM)
+	Head standard de toutes les pages ; les elements specifiques
+	(title, description) figurent dans les fichiers du dossier head/
+]
+[(#REM) Preciser le charset ]
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+[(#REM) Feuille de style par defaut pour les formulaires de SPIP ]
+[<link rel="stylesheet" href="(#CHEMIN{form.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
+
+[(#REM) Feuille de style personnalisee pour surcharger les precedentes
+	A noter par defaut cette css n'existe pas
+]
+[<link rel="stylesheet" href="(#CHEMIN{perso.css}|direction_css)" type="text/css" media="projection, screen, tv" />]
+
+[<link rel="stylesheet" href="(#CHEMIN{css/curator.css})" type="text/css" media="projection, screen, tv" />]
+
+
+
+<body>
+
+<div class="formulaire_spip formulaire_editer formulaire_editer_article formulaire_editer_article-#ENV{id_article,nouveau}">
+<form action='#ENV{action}' method='post'>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <input type='hidden' id='statut' name='statut' value='publie' />
+        <input type='hidden' id='date' name='date' value='#DATE' />
+        <input type='hidden' id='auteur' name='auteur' value='#SESSION{id_auteur}' />
+        
+		<label for="titre"><:info_titre:><em class="aide">#AIDER{titre}</em></label>
+		<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,''})]" size="35" />
+		<br />
+		
+		<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
+		[(#VAL|chercher_rubrique{#ENV{id_article},#ENV{id_parent},'article',#ENV{id_secteur},#ENV**{config}|table_valeur{restreint},0,form_simple})]
+		<br />
+
+		<label for="nom_site"><:info_site:></label>
+		<input type='text' class='text' name='nom_site' id='nom_site'[ lang='(#LANGUE)'] value="[(#ENV**{nom_site})]" size="35"  />
+		<br />
+		
+		<label for="url_site"><:info_url:></label>
+		<input type='text' class='text' name='url_site' id='url_site' value="[(#ENV**{url_site})]" size="35"  />
+		<br />
+		
+		<label for="text_area"><:info_texte:><em class="aide">#AIDER{text_area}</em></label>
+		<textarea name='texte' id='text_area'[ lang='(#LANGUE)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
+		<br />
+		
+		<label for="text_area"><:info_post_scriptum:><em class="aide">#AIDER{text_area}</em></label>
+		<textarea name='ps' id='text_area'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{texte})]</textarea>
+		<br />
+		
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+</form>
+</div>
+
+</body>
+</html>

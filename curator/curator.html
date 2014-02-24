@@ -1,0 +1,21 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+
+[(#REM)
+	Head standard de toutes les pages ; les elements specifiques
+	(title, description) figurent dans les fichiers du dossier head/
+]
+[(#REM) Preciser le charset ]
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+
+
+<body>
+
+
+Glissez le lien suivant : <a href="javascript:(function()%7Bvar%20url%20=%20location.href;var%20title%20=%20document.title%20%7C%7C%20url;window.open('#URL_SITE_SPIP/spip.php?page=share&titre='%20+%20encodeURIComponent(title)+'&nom_site='%20+%20encodeURIComponent(title)+'&url_site='%20+%20encodeURIComponent(url)+'&source=bookmarklet','_blank','menubar=no,height=500,width=600,toolbar=no,scrollbars=no,status=no,dialog=1');%7D)();">#NOM_SITE_SPIP.share2</a> dans votre barre de favori, et hop !
+
+</body>
+</html>
