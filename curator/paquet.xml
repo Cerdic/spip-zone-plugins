@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.*.*]"
 	logo="prive/themes/spip/images/curator-64.png"
-	documentation="http://ydikoi.net"
+	documentation="http://contrib.spip.net/article4503"
 >
 	<!--
 		Paquet genere le 2014-02-21 18:07:16
