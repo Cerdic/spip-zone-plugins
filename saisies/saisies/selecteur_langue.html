@@ -6,7 +6,7 @@
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
   Exemple d'appel :
-	[(# SAISIE{selecteur_langue,lang,
+	[(#SAISIE{selecteur_langue,lang,
 		label=<:plugin:info_langue:>})] 
 ]
 [(#SET{valeur,[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,''}}})]})]

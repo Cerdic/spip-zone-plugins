@@ -10,7 +10,7 @@
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
   Exemple d'appel :
-	[(# SAISIE{pays, pays,
+	[(#SAISIE{pays, pays,
 		label=<:plugin:info_pays:>})] 
 ]
 <select name="#ENV{nom}" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
