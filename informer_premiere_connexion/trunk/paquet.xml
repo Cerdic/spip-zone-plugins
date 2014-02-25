@@ -2,9 +2,9 @@
 	prefix="informerpremiereconnexion"
 	categorie="auteur"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo=""
+	logo="informerpremiereconnexion.png"
 >
 	<nom>Informer à la première connexion</nom>
 	<!-- Afficher un message explicatif lors de la première connexion d'un utilisateur -->
