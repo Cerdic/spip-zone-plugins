@@ -1,0 +1,22 @@
+<div id="informer_premiere_connexion">
+	<p>Bonjour #SESSION{nom},</p>
+	[(#CONFIG{informerpremiereconnexion/texte}|sinon{<:informerpremiereconnexion:texte_defaut:>}|propre)]
+</div>
+<script type="text/javascript">
+<!--
+;(function($){
+	$(function(){
+		$('#informer_premiere_connexion').append(
+			$('<a class="close button" href="#"><:bouton_fermer:></a>')
+				.click(function(){
+					$('#informer_premiere_connexion').hide({
+						'duration':'slow',
+						'done':function(){ $(this).remove(); },
+					});
+					return false;
+				})
+		);
+	});
+})(jQuery);
+-->
+</script>
