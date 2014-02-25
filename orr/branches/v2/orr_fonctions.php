@@ -170,4 +170,16 @@ function orr_nom_champs_extra($nom_table){
 	return $Tchamps;
 }
 
+
+/*
+ * tranformation d'une date j/m/y h:m:s en date sql
+ */
+function orr_date_sql($date_entree){
+    list($date,$heures)           = explode(' ' , $date_entree);
+    list($jour,$mois,$annee)      = explode('/' , $date);
+//    list($heure,$minute,$seconde) = explode(':' , $heures);
+    $date_sortie = $annee.'-'.$mois.'-'.$jour.' '.$heures;
+    return $date_sortie;
+}
+
 ?>
