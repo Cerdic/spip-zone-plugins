@@ -10,6 +10,7 @@
 	<!-- Afficher un message explicatif lors de la première connexion d'un utilisateur -->
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://www.avec-limousin.fr/">AVEC Limousin</auteur>
 	<copyright>2014</copyright>
 	<licence>GPL v3</licence>
 	
