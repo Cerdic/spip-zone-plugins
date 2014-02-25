@@ -132,7 +132,8 @@
 				<label for="nobot_forum"><:antispam_champ_vide:></label>
 				<input type="text" class="text" name="nobot" id="nobot_forum" value="#ENV{nobot}" size="10"/>
 			</p>
-			<p class="boutons"><input type="submit" class="submit" value="<:comments:submit1:>"/></p>
+			<p class="boutons"><input type="submit" class="submit" name="previsualiser_message" value="<:comments:submit1:>"/>[ 
+			(#ENV{forcer_previsu}|=={non}|et{#ENV*{erreurs}|table_valeur{previsu}|non}|oui)<input type="submit" class="submit" name="envoyer_message" value="<:forum:forum_envoyer:>" />]</p>
 			]
 		</div>
 	</form>
