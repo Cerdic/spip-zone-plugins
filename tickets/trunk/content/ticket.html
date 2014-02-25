@@ -72,7 +72,7 @@
 		</li>
 		</BOUCLE_comments-list>
 		</B_comments-list>
-		<BOUCLE_comments-thread(FORUMS) {si #PLUGIN{comments}|et{#GET{config_thread}|=={thread}|ou{#GET{config_thread}|=={thread}}}|oui}{statut IN publie} {id_ticket} {par date}>
+		<BOUCLE_comments-thread(FORUMS) {si #PLUGIN{comments}|et{#GET{config_thread}|=={thread}|ou{#GET{config_thread}|=={thread1}}}|oui}{statut IN publie} {id_ticket} {par date}>
 		<li class="comment-li comment-item[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
 			<INCLURE{fond=inclure/comment,id_forum,compteur=#COMPTEUR_BOUCLE,thread=oui}/>
 			[(#GET{autoriser_commenter}|=={oui}|oui)
