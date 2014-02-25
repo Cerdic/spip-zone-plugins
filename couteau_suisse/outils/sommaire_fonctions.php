@@ -3,17 +3,27 @@
 @define('_sommaire_NB_TITRES_MINI', 2);
 @define('_sommaire_SANS_FOND', '[!fond]');
 
-// aide le Couteau Suisse a calculer la balise #INTRODUCTION
+// aide le Couteau Suisse à calculer la balise #INTRODUCTION
 $GLOBALS['cs_introduire'][] = 'sommaire_nettoyer_raccourcis';
+
+// renvoie l'url utilisée par le sommaire
+function sommaire_self() {
+	static $self = NULL; 
+	return isset($self) ? $self : 
+		$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
+}
+
+// filtre de remplacement de l'url par défaut (si par exemple #CS_SOMMAIRE est placé dans une boucle d'articles)
+function sommaire_url($texte, $url) {
+	return str_replace(sommaire_self(), $url, $texte);
+}
 
 // renvoie le sommaire d'une page d'article
 // $page=false reinitialise le compteur interne des ancres
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	static $index = 0;
 	if($page===false) $index = 0;
-	static $self = NULL; 
-	if(!isset($self)) 
-		$self = str_replace('&', '&amp;', nettoyer_uri());//self();//$GLOBALS['REQUEST_URI'];
+	$self = sommaire_self();
 	if($page===false) return;
 	// trouver quel <hx> est utilise
 	include_spip('outils/sommaire');
