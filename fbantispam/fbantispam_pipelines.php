@@ -36,7 +36,7 @@ function fbantispam_recuperer_fond($flux) {
 		{
 			$cp = fbantispam_get_captcha();
 			$cps = "$cp[0]$cp[1]$cp[2]$cp[3]";
-			$captcha = recuperer_fond("inclure/captcha", array('captcha' => $cps, 'c0' => "$cp[0]", 'c1' => "$cp[1]", 'c2' => "$cp[2]", 'c3' => "$cp[3]"));
+			$captcha = recuperer_fond("inclure/captcha", array('captcha' => $cps, 'c1' => $cp[0]*2, 'c0' => $cp[1]*2, 'c2' => $cp[2]*2, 'c3' => $cp[3]*2));
 			$texte = substr_replace($texte, $captcha, $pos, 0);
 		}
 	}
@@ -73,10 +73,10 @@ function fbantispam_formulaire_verifier($flux) {
 	{
 		
 		$captcha = _request('captcha');
-		$cp0 = _request('c0');
-		$cp1 = _request('c1');
-		$cp2 = _request('c2');
-		$cp3 = _request('c3');
+		$cp0 = _request('c1')/2;
+		$cp1 = _request('c0')/2;
+		$cp2 = _request('c2')/2;
+		$cp3 = _request('c3')/2;
 		$cps = "$cp0"."$cp1"."$cp2"."$cp3";
 		if ($captcha == '')
 		{
