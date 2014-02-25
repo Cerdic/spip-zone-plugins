@@ -22,9 +22,7 @@ function sommaire_url($texte, $url) {
 // $page=false reinitialise le compteur interne des ancres
 function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	static $index = 0;
-	if($page===false) $index = 0;
-	$self = sommaire_self();
-	if($page===false) return;
+	if($page===false) { $index = 0; return; }
 	// trouver quel <hx> est utilise
 	include_spip('outils/sommaire');
 	$root = $niveau = $match = sommaire_niveau_intertitres();
@@ -37,6 +35,7 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 	$nbh3 += count($regs[0]);
 	$pos = 0; $sommaire = '';
 	// calcul de la page
+	$self = sommaire_self();
 	$fct_lien_retour = function_exists('sommaire_lien_retour')?'sommaire_lien_retour':'sommaire_lien_retour_dist';
 	$fct_id_ancre = defined('_sommaire_JOLIES_ANCRES')?'sommaire_id_ancre_ex'
 		:(function_exists('sommaire_id_ancre')?'sommaire_id_ancre':'sommaire_id_ancre_dist');
