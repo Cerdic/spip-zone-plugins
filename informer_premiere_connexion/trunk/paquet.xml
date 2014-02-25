@@ -5,6 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="informerpremiereconnexion.png"
+	documentation="http://contrib.spip.net/Informer-a-la-premiere-connexion"
 >
 	<nom>Informer à la première connexion</nom>
 	<!-- Afficher un message explicatif lors de la première connexion d'un utilisateur -->
