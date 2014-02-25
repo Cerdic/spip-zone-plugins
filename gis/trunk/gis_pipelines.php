@@ -140,6 +140,9 @@ function gis_post_edition($flux){
 							if(in_array('administrative_area_level_1',$component['type'])){
 								$region = $component['address_component'][0]['long_name'][0];
 							}
+							if(in_array('administrative_area_level_2',$component['type'])){
+								$departement = $component['address_component'][0]['long_name'][0];
+							}
 							if(in_array('locality',$component['type'])){
 								$ville = $component['address_component'][0]['long_name'][0];
 							}
@@ -188,6 +191,9 @@ function gis_post_edition($flux){
 									if(in_array('administrative_area_level_1',$component['type'])){
 										$region = $component['long_name'][0];
 									}
+									if(in_array('administrative_area_level_2',$component['type'])){
+										$departement = $component['long_name'][0];
+									}
 									if(in_array('locality',$component['type'])){
 										$ville = $component['long_name'][0];
 									}
@@ -207,6 +213,7 @@ function gis_post_edition($flux){
 					'code_postal' => $code_postal,
 					'ville' => $ville,
 					'region' => $region,
+					'departement' => $departement,
 					'pays' => $pays,
 					'code_pays' => $code_pays
 				);

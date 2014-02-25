@@ -188,6 +188,7 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 		$boucle->select[]= 'gis.pays AS pays_gis';
 		$boucle->select[]= 'gis.code_pays AS code_pays_gis';
 		$boucle->select[]= 'gis.region AS region_gis';
+		$boucle->select[]= 'gis.departement AS departement_gis';
 		$boucle->select[]= 'gis.ville AS ville_gis';
 		$boucle->select[]= 'gis.code_postal AS code_postal_gis';
 		// jointure sur spip_gis_liens/spip_gis
@@ -202,7 +203,7 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 		// alors cela signifie que la personne veut faire une opération de groupement sur les points donc là on n'ajoute pas id_gis
 		$tous_les_points = true;
 		foreach ($boucle->group as $champ){
-			if (in_array($champ, array('ville', 'code_postal', 'pays', 'code_pays', 'region'))) {
+			if (in_array($champ, array('ville', 'code_postal', 'pays', 'code_pays', 'region','departement'))) {
 				$tous_les_points = false;
 			}
 		}
@@ -303,6 +304,16 @@ function balise_region_gis_dist($p) {
 }
 
 /**
+ * Balise #DEPARTEMENT_GIS : retourne la région du point
+ * Necessite le critere {gis} sur la boucle
+ *
+ * @param unknown_type $p
+ */
+function balise_departement_gis_dist($p) {
+	return rindex_pile($p, 'departement_gis', 'gis');
+}
+
+/**
  * Balise #CODE_POSTAL_GIS : retourne le code postal du point
  * Necessite le critere {gis} sur la boucle
  *
@@ -346,7 +357,7 @@ function gis_modele_url_json_env($env){
 				$contexte[$primary] = $env[$primary];
 		}
 		// puis cas particuliers et ceux ajoutés par le pipeline
-		$keys = pipeline('gis_modele_parametres_autorises', array("id_objet","id_secteur","id_parent","media","recherche","mots","pays","code_pays","region","ville","code_postal","adresse"));
+		$keys = pipeline('gis_modele_parametres_autorises', array("id_objet","id_secteur","id_parent","media","recherche","mots","pays","code_pays","region","departement","ville","code_postal","adresse"));
 		foreach ($keys as $key){
 			if (isset($env[$key]))
 				$contexte[$key] = $env[$key];

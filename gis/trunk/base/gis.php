@@ -23,9 +23,11 @@ function gis_declarer_tables_interfaces($interface){
 	$interface['table_des_traitements']['VILLE_GIS'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['PAYS_GIS'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['REGION_GIS'][] = 'typo(extraire_multi(%s))';
+	$interface['table_des_traitements']['DEPARTEMENT_GIS'][] = 'typo(extraire_multi(%s))'; //alm
 	$interface['table_des_traitements']['VILLE'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['PAYS'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['REGION'][] = 'typo(extraire_multi(%s))';
+	$interface['table_des_traitements']['DEPARTEMENT'][] = 'typo(extraire_multi(%s))'; //alm
 
 	return $interface;
 }
@@ -51,6 +53,7 @@ function gis_declarer_tables_objets_sql($tables){
 			"pays" => "text NOT NULL DEFAULT ''",
 			"code_pays" => "varchar(255) NOT NULL DEFAULT ''",
 			"region" => "text NOT NULL DEFAULT ''",
+			"departement" => "text NOT NULL DEFAULT ''",
 			"ville" => "text NOT NULL DEFAULT ''",
 			"code_postal" => "varchar(255) NOT NULL DEFAULT ''"
 		),
@@ -61,6 +64,7 @@ function gis_declarer_tables_objets_sql($tables){
 			'KEY pays' => 'pays(500)',
 			'KEY code_pays' => 'code_pays',
 			'KEY region' => 'region(500)',
+			'KEY departement' => 'departement(500)',
 			'KEY ville' => 'ville(500)',
 			'KEY code_postal' => 'code_postal',
 		),
@@ -75,7 +79,7 @@ function gis_declarer_tables_objets_sql($tables){
 		'url_voir' => 'gis',
 		'url_edit' => 'gis_edit',
 		'editable' => 'oui',
-		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'pays', 'code_pays'),
+		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays'),
 		/*'champs_editables' => array(), */
 		'icone_objet' => 'gis',
 		'rechercher_champs' => array(
@@ -83,6 +87,7 @@ function gis_declarer_tables_objets_sql($tables){
 			'descriptif' => 5,
 			'pays' => 3,
 			'region' => 3,
+			'departement' => 3,
 			'ville' => 3,
 			'code_postal' => 3,
 		),

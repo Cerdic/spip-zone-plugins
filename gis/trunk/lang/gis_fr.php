@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_rechercher_address' => 'Rechercher une adresse',
 	'label_rechercher_point' => 'Rechercher un point',
 	'label_region' => 'Région',
+	'label_departement' => 'Département',
 	'label_ville' => 'Ville',
 	'lat' => 'Latitude',
 	'libelle_logo_gis' => 'LOGO DU POINT',

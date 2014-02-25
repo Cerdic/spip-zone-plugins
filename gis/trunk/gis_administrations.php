@@ -58,6 +58,11 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_gis ADD INDEX (code_postal)'),
 	);
 	
+	// Ajout du département dans les champs de coordonnées
+	$maj['2.0.5'] = array(
+		array('maj_tables',array('spip_gis')),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

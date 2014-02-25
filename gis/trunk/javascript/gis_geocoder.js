@@ -91,6 +91,12 @@ L.Geocoder = L.Class.extend({
 			if (place.address.state) {
 				return_location.region = place.address.state;
 			}
+			//un jour peut-être…
+			/*
+			if (place.address.county) {
+				return_location.departement = place.address.county;
+			}
+			*/
 			if (place.address.city) {
 				return_location.locality = place.address.city;
 			}else if(place.address.county){
