@@ -1,0 +1,145 @@
+
+<h1><:migrateur:migrateur_titre:></h1>
+
+[(#SET{liste,[(#VAL**|migrateur_etapes)]})]
+
+[(#REM)
+	Si aucune étape de migration n'a encore été faite,
+	Alors on affiche les informations de connexion
+	pour vérifier visuellement les données (hors password).
+]
+[(#VAL|migrateur_derniere_etape|non)
+	<div class='notice'>
+		<p><:migrateur:conf_verification_visuelle:></p>
+		<table class='spip'>
+			<thead>
+				<tr>
+					<th></th>
+					<th><:migrateur:conf_source:></th>
+					<th><:migrateur:conf_destination:></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th><:migrateur:conf_chemin:></th>
+					<td>#EVAL{MIGRATEUR_SOURCE_DIR}</td>
+					<td>#EVAL{MIGRATEUR_DESTINATION_DIR}</td>
+				</tr>
+				<tr>
+					<th><:migrateur:conf_sql_user:></th>
+					<td>#EVAL{MIGRATEUR_SOURCE_SQL_USER}</td>
+					<td>#EVAL{MIGRATEUR_DESTINATION_SQL_USER}</td>
+				</tr>
+				<tr>
+					<th><:migrateur:conf_sql_bdd:></th>
+					<td>#EVAL{MIGRATEUR_SOURCE_SQL_BDD}</td>
+					<td>#EVAL{MIGRATEUR_DESTINATION_SQL_BDD}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+]
+
+
+#SET{next,''}
+#SET{contenu,''}
+#SET{suivant,''}
+<BOUCLE_migration(POUR){tableau #GET{liste}}>
+	[(#VAL|migrateur_derniere_etape|=={#COMPTEUR_BOUCLE}|oui)
+		[(#SET{next,[(#COMPTEUR_BOUCLE|plus{1})]})]
+		[(#SET{contenu,<div id='etape_effectuee'><strong>#COMPTEUR_BOUCLE</strong> #VALEUR</div>})]
+	]
+	[(#GET{next}|et{#GET{next}|=={#COMPTEUR_BOUCLE}}|oui)
+		[(#SET{suivant,
+				<div class='migration_next right'>
+					<a href='[(#URL_ACTION_AUTEUR{migrateur,#CLE}
+						|parametre_url{redirect,[(#SELF
+							|parametre_url{nb,#GET{next}})]})]'>
+						[(#CHEMIN_IMAGE{migration_suivante.png}
+							|image_reduire{60}
+							|inserer_attribut{alt,#VALEUR}
+							|inserer_attribut{title,#VALEUR})]
+					</a>
+				</div>
+		})]
+	]
+</BOUCLE_migration>
+
+[(#GET{contenu}|oui)
+	#BOITE_OUVRIR{Étape effectuée, simple}
+		#GET{suivant}
+		#GET{contenu}
+	#BOITE_FERMER
+]
+
+<div id='etapes_migration'>
+	<h3>Étapes de migration</h3>
+<div class='liste'>
+<ul class='liste-items'>
+<BOUCLE_migration_liste(POUR){tableau #GET{liste}}>
+	<li class='item[ (#VAL|migrateur_derniere_etape|=={#COMPTEUR_BOUCLE}|oui)on]'>
+	<a href='[(#URL_ACTION_AUTEUR{migrateur,#CLE}
+		|parametre_url{redirect,[(#SELF
+			|parametre_url{nb,#COMPTEUR_BOUCLE})]})]'><strong>#COMPTEUR_BOUCLE</strong> #VALEUR</a>.</li>
+</BOUCLE_migration_liste>
+</ul>
+</div>
+</div>
+
+
+[(#EVAL{_DIR_TMP . '/migrateur/etape.log'}|file_exists|oui)
+[[(#VAL{Logs de la dernière étape exécutée}|boite_ouvrir{simple,'',logs})]
+<pre>
+(#EVAL{_DIR_TMP . '/migrateur/etape.log'}|file_get_contents)
+</pre>
+#BOITE_FERMER
+]]
+
+<style type='text/css'>
+.migration_next.right {float:right; margin-top:-35px;}
+#etapes_migration a strong { font-size:1.2em; margin-right:1em; margin-left:.2em; }
+#etape_effectuee strong { font-size:1.2em; margin-right:1em; }
+
+#logs {margin-top:2em; overflow:visible;}
+
+
+.logo_navigation.loading img {
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+    -webkit-animation-name:rotation;
+    -webkit-animation-duration:2s;
+    -moz-animation-iteration-count:infinite;
+    -moz-animation-timing-function:linear;
+    -moz-animation-name:rotation;
+    -moz-animation-duration:2s;
+    animation-iteration-count:infinite;
+    animation-timing-function:linear;
+    animation-name:rotation;
+    animation-duration:2s;
+}
+@-webkit-keyframes rotation { 
+from { -webkit-transform:rotateY(0deg) } 
+to { -webkit-transform:rotateY(360deg) } 
+}
+@-moz-keyframes rotation { 
+from { -moz-transform:rotate(0deg) } 
+to { -moz-transform:rotate(360deg) } 
+}
+@keyframes rotation { 
+from { transform:rotate(0deg) } 
+to { transform:rotate(360deg) } 
+}
+</style>
+
+
+<script type='text/javascript'>
+;(function($){
+$(document).ready(function() {
+	$('#contenu a, #navigation a').click(function() {
+		$('#navigation .logo_navigation')
+			.attr('aria-busy','true')
+			.addClass('loading').css('opacity', 0.5);
+	});
+});
+})(jQuery);
+</script>
