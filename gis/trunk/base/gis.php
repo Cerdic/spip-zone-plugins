@@ -23,11 +23,11 @@ function gis_declarer_tables_interfaces($interface){
 	$interface['table_des_traitements']['VILLE_GIS'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['PAYS_GIS'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['REGION_GIS'][] = 'typo(extraire_multi(%s))';
-	$interface['table_des_traitements']['DEPARTEMENT_GIS'][] = 'typo(extraire_multi(%s))'; //alm
+	$interface['table_des_traitements']['DEPARTEMENT_GIS'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['VILLE'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['PAYS'][] = 'typo(extraire_multi(%s))';
 	$interface['table_des_traitements']['REGION'][] = 'typo(extraire_multi(%s))';
-	$interface['table_des_traitements']['DEPARTEMENT'][] = 'typo(extraire_multi(%s))'; //alm
+	$interface['table_des_traitements']['DEPARTEMENT'][] = 'typo(extraire_multi(%s))';
 
 	return $interface;
 }
