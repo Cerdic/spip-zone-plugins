@@ -304,7 +304,7 @@ function balise_region_gis_dist($p) {
 }
 
 /**
- * Balise #DEPARTEMENT_GIS : retourne la région du point
+ * Balise #DEPARTEMENT_GIS : censé retourner le département du point
  * Necessite le critere {gis} sur la boucle
  *
  * @param unknown_type $p
