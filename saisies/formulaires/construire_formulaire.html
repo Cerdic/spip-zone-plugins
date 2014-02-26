@@ -33,7 +33,7 @@
 			<B_saisies_disponibles>
 			<li class="editer haut saisies_disponibles" id="attrapable">
 				<label><:saisies:construire_ajouter_champ:></label>
-				<BOUCLE_saisies_disponibles(POUR){tableau #ENV{_saisies_disponibles}}>
+				<BOUCLE_saisies_disponibles(POUR){tableau #ENV{_saisies_disponibles}}{par cle}>
 				<button type="submit" name="ajouter_saisie" value="#CLE" class="submit ajouter_saisie"[ title="(#VALEUR|table_valeur{description})"] [style="background-image:url((#VALEUR|table_valeur{icone}|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}))"]>
 					<span>[(#VALEUR|table_valeur{titre})]</span>
 				</button>
