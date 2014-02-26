@@ -247,27 +247,68 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		$retours['redirect'] = $url_redirect;
 	}
 
+	// les traitements deja faits se notent ici
+	// pour etre sur de ne pas etre appeles 2 fois
+	// ainsi si un traitement A a besoin d'un traitement B,
+	// et que B n'est pas fait quand il est appele, il peut rendre la main sans rien faire au premier coup
+	// et sera rappele au second tour
+	$retours['traitements'] = array();
+	$erreur_texte = "";
+
 	// Si on a des traitements
 	if (is_array($traitements) and !empty($traitements)){
-		foreach ($traitements as $type_traitement => $options){
-			if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true)){
-				$retours = $appliquer_traitement(
-					array(
-						'formulaire' => $formulaire,
-						'options' => $options
-					),
-					$retours
-				);
+		$maxiter = 5;
+		do {
+			foreach ($traitements as $type_traitement => $options){
+				// si traitement deja appele, ne pas le relancer
+				if (!isset($retours['traitements'][$type_traitement])){
+				  if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true)){
+						$retours = $appliquer_traitement(
+							array(
+								'formulaire' => $formulaire,
+								'options' => $options
+							),
+							$retours
+						);
+					}
+					else {
+						// traitement introuvable, ne pas retenter
+						$retours['traitements'][$type_traitement] = true;
+					}
+				}
 			}
+		}
+		while (count($retours['traitements'])<count($traitements) AND $maxiter--);
+
+		// si on ne peut pas traiter correctement, alerter le webmestre
+		if (count($retours['traitements'])<count($traitements)){
+			$erreur_texte = "Impossible de traiter correctement le formulaire $id\n"
+				. "Traitements attendus :".array_keys($type_traitement)."\n"
+				. "Traitements realises :".array_keys($retours['traitements'])."\n";
 		}
 
 		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
 		if ($formulaire['message_retour']){
 			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
 		}
-	} else {
+	}
+	else {
 		$retours['message_ok'] = _T('formidable:retour_aucun_traitement');
 	}
+
+	// si aucun traitement, alerter le webmestre pour ne pas perdre les donnees
+	if (!$erreur_texte AND !count($retours['traitements'])){
+		$erreur_texte = "Aucun traitement pour le formulaire $id\n";
+	}
+
+	if ($erreur_texte){
+		$erreur_sujet = "[ERREUR] Traitement Formulaire $id";
+		// dumper la saisie pour ne pas la perdre
+		$erreur_texte .= "\n".var_export($_REQUEST,true);
+		$envoyer_mail = charger_fonction("envoyer_mail","inc");
+		$envoyer_mail($GLOBALS['meta']['email_webmaster'],$erreur_sujet,$erreur_texte);
+	}
+	unset($retours['traitements']);
 
 	return $retours;
 }
@@ -304,5 +345,3 @@ function formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_rep
 
 	return $contexte;
 }
-
-?>

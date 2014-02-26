@@ -103,6 +103,9 @@ function traiter_enregistrement_dist($args, $retours){
         $retours['message_ok'] .= "\n"._T('formidable:traiter_enregistrement_message_ok');
 	      $retours['id_formulaires_reponse'] = $id_formulaires_reponse;
     }
+
+    // noter qu'on a deja fait le boulot, pour ne pas risquer double appel
+    $retours['traitements']['enregistrement'] = true;
     return $retours;
 }
 

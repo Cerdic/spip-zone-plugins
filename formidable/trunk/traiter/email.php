@@ -192,6 +192,8 @@ function traiter_email_dist($args, $retours){
 		}
 	}
 	
+	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
+	$retours['traitements']['email'] = true;
 	return $retours;
 }
 
