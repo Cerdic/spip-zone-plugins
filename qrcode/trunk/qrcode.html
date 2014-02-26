@@ -1,0 +1,17 @@
+#HTTP_HEADER{Content-type: image/png}
+#CACHE{0}<?php
+
+	$errorCorrectionLevel = 'L' ;
+	if (isset($_REQUEST['level']) && in_array($_REQUEST['level'], array('L','M','Q','H')))
+		$errorCorrectionLevel = $_REQUEST['level'];
+	$matrixPointSize = 4;
+	if (isset($_REQUEST['size']))
+        	$matrixPointSize = min(max((int)$_REQUEST['size'], 1), 10);
+	$data = 'http://www.spip.net' ;
+	if (isset($_GET['data']))
+		$data = $_GET['data'] ;
+
+	$filename = qrcode_getpng($data, $matrixPointSize, $errorCorrectionLevel) ;
+	readfile($filename) ;
+
+?>
