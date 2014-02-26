@@ -5,7 +5,7 @@ var gis_init_map;
 gis_init_map = function(mapcfg) {
 	var map_container = mapcfg["mapid"];
 
-	// Crï¿½ation de la carte Leafleat
+	// Création de la carte Leafleat
 	var map = new L.Map(map_container,{
 		scrollWheelZoom: mapcfg["scrollWheelZoom"],
 		zoomControl: mapcfg["zoomControl"],
@@ -16,7 +16,7 @@ gis_init_map = function(mapcfg) {
 	// affecter sur l'objet du DOM
 	jQuery("#"+map_container).get(0).map=map;
 
-	// Appeler l'ï¿½ventuelle fonction de callback et trigger "load"
+	// Appeler l'éventuelle fonction de callback et trigger "load"
 	map.on('load',function(e){
 		if (mapcfg["callback"] && typeof(mapcfg["callback"]) === "function") {
 			var callback = mapcfg["callback"];
@@ -25,7 +25,7 @@ gis_init_map = function(mapcfg) {
 		jQuery("#"+map_container).trigger('load',e.target);
 	});
 
-	// Dï¿½terminer la position initiale de la carte
+	// Déterminer la position initiale de la carte
 	if (!mapcfg['utiliser_bb']){
 		map.setView(new L.LatLng(mapcfg['lat'], mapcfg['lon']), mapcfg['zoom']);
 	}
@@ -45,7 +45,7 @@ gis_init_map = function(mapcfg) {
 		return layer;
 	}
 
-	// Fond de carte par dï¿½faut (layer)
+	// Fond de carte par défaut (layer)
 	var default_layer = get_layer(mapcfg['default_layer']);
 	map.addLayer(default_layer);
 
@@ -60,16 +60,16 @@ gis_init_map = function(mapcfg) {
 			}
 		}
 		map.addControl(layers_control);
-		// ajouter l'objet du controle de layers ï¿½ la carte pour permettre d'y accï¿½der depuis le callback
+		// ajouter l'objet du controle de layers à la carte pour permettre d'y accéder depuis le callback
 		map.layersControl = layers_control;
-		// classe noajax sur le layer_control pour ï¿½viter l'ajout de hidden par SPIP
+		// classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
 		jQuery(layers_control._form).addClass('noajax');
 	}
 
 
 	map.attributionControl.setPrefix('');
 
-	// Ajout des contrï¿½les de la carte
+	// Ajout des contrôles de la carte
 	if (!mapcfg['no_control']){
 		if (mapcfg['scale'])
 			map.addControl(new L.Control.Scale());
@@ -83,7 +83,7 @@ gis_init_map = function(mapcfg) {
 
 	// API setGeoJsonFeatureIcon : Pour Ajouter l'icone d'un point (feature = item d'un GeoJson)
 	map.setGeoJsonFeatureIcon = function (feature, layer) {
-		// Dï¿½clarer l'icone du points, si dï¿½fini
+		// Déclarer l'icone du points, si défini
 		if (feature.properties && feature.properties.icon){
 			icon_options = {
 				'iconUrl': feature.properties.icon,
@@ -102,7 +102,7 @@ gis_init_map = function(mapcfg) {
 
 	// API setGeoJsonFeaturePopup : Pour Ajouter le texte de popup d'un point (feature = item d'un GeoJson)
 	map.setGeoJsonFeaturePopup = function (feature, layer) {
-		// Dï¿½clarer le contenu de la popup s'il y en a
+		// Déclarer le contenu de la popup s'il y en a
 		if (feature.properties && (feature.properties.title || feature.properties.description)){
 			var popupContent = '';
 			var popupOptions = '';
@@ -117,23 +117,23 @@ gis_init_map = function(mapcfg) {
 	}
 
 	/*
-		Il y a pour le moment 2 faï¿½ons d'analyser le GeoJson calculï¿½
+		Il y a pour le moment 2 façons d'analyser le GeoJson calculé
 		en fonction de si on veut faire du clustering (regrouper les points proches)
-		ou non. Il y a certainement moyen de regrouper en un seul ï¿½lï¿½ment
-		la plupart du code, en se passant du js L.geoJson mï¿½me hors clustering.
-		ï¿½ rï¿½flï¿½chir.
+		ou non. Il y a certainement moyen de regrouper en un seul élément
+		la plupart du code, en se passant du js L.geoJson même hors clustering.
+		À réfléchir.
 	*/
 	// API parseGeoJson
 	if (!mapcfg['cluster']){
-		// Analyse des points et dï¿½claration (sans regroupement des points en cluster)
+		// Analyse des points et déclaration (sans regroupement des points en cluster)
 		map.parseGeoJson = function(data) {
 			if (data.features.length > 0) {
 				var geojson = new L.geoJson('', {
 					style: mapcfg['path_styles'],
 					onEachFeature: function (feature, layer) {
-						// Dï¿½clarer l'icone du point
+						// Déclarer l'icone du point
 						map.setGeoJsonFeatureIcon(feature, layer);
-						// Dï¿½clarer le contenu de la popup s'il y en a
+						// Déclarer le contenu de la popup s'il y en a
 						map.setGeoJsonFeaturePopup(feature, layer);
 					}
 				}).addTo(map);
@@ -149,7 +149,7 @@ gis_init_map = function(mapcfg) {
 		}
 	}
 	else {
-		// Analyse des points et dï¿½claration (en regroupant les points en cluster)
+		// Analyse des points et déclaration (en regroupant les points en cluster)
 		map.parseGeoJson = function(data) {
 			var options = {
 				showCoverageOnHover:false
@@ -163,15 +163,15 @@ gis_init_map = function(mapcfg) {
 
 			map.markers = new L.MarkerClusterGroup(options);
 
-			/* Pour chaque points prï¿½sents, on crï¿½e un marqueur */
+			/* Pour chaque points présents, on crée un marqueur */
 			jQuery.each(data.features, function(i, feature) {
 				if (feature.geometry.coordinates[0]) {
 					var latlng = new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
 					var marker = new L.Marker(latlng);
 
-					// Dï¿½clarer l'icone du point
+					// Déclarer l'icone du point
 					map.setGeoJsonFeatureIcon(feature, marker);
-					// Dï¿½clarer le contenu de la popup s'il y en a
+					// Déclarer le contenu de la popup s'il y en a
 					map.setGeoJsonFeaturePopup(feature, marker);
 
 					marker.id = feature.id;
@@ -200,7 +200,7 @@ gis_init_map = function(mapcfg) {
 	if (mapcfg['affiche_points']
 		&& typeof(mapcfg['json_points'])!=="undefined"
 		&& mapcfg['json_points']['url'].length){
-		// Rï¿½cupï¿½ration des points ï¿½ mettre sur la carte, via json externe
+		// Récupération des points à mettre sur la carte, via json externe
 		var args = {};
 		jQuery.extend(true, args, mapcfg['json_points']['env']);
 		if (typeof mapcfg['json_points']['objets']!=="undefined"){
@@ -221,7 +221,7 @@ gis_init_map = function(mapcfg) {
 		jQuery.getJSON(mapcfg['json_points']['url'],args,
 			function(data) {
 				if (data){
-					// Charger le json (data) et dï¿½clarer les points
+					// Charger le json (data) et déclarer les points
 					map.parseGeoJson(data);
 					jQuery("#"+map_container).trigger('ready',map);
 				}
