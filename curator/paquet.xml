@@ -1,7 +1,7 @@
 <paquet
 	prefix="curator"
 	categorie="edition"
-	version="0.0.2"
+	version="0.0.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.*.*]"
 	logo="prive/themes/spip/images/curator-64.png"
