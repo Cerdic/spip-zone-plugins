@@ -142,22 +142,29 @@ function formulaires_envoi_malettre_traiter_dist(){
             // recup destinataire
             $destinataire = array();
             $destinataire_nom = array();
-            $desti = _request('desti');
-            foreach ($desti as $desti_item) {     // on lit la config pour retrouver l'email
-                $id_desti = intval(substr($desti_item,1)); 
-                $desti_email = lire_config("malettre/adresse_email$id_desti"); 
-                $desti_nom = lire_config("malettre/adresse_nom$id_desti"); 
-                if ($desti_email !="") {
-                      $destinataire[$id_desti] = $desti_email; 
-                      $destinataire_nom[$id_desti] = $desti_nom; 
-                }           
+            if ($desti = _request('desti')) {
+                foreach ($desti as $desti_item) {     // on lit la config pour retrouver l'email
+                    $id_desti = intval(substr($desti_item,1)); 
+                    $desti_email = lire_config("malettre/adresse_email$id_desti"); 
+                    $desti_nom = lire_config("malettre/adresse_nom$id_desti"); 
+                    if ($desti_email !="") {
+                          $destinataire[$id_desti] = $desti_email; 
+                          $destinataire_nom[$id_desti] = $desti_nom; 
+                    }           
+                }
             }
             
-            $desti_more = _request('desti_more'); 
-            if ($desti_more!="") { 
+            if ($desti_more = _request('desti_more')) {
+                 $desti_more_array = explode(",",_request('desti_more')); 
+                 if (is_array($desti_more_array)) {
+                      $destinataire = array_merge($destinataire, $desti_more_array);  
+                      $destinataire_nom = array_merge($destinataire_nom, $desti_more_array);               
+                 } else { 
                       $destinataire[] = $desti_more;
                       $destinataire_nom[] = $desti_more;
+                 }            
             }
+            
              /*    FIXME:   a finaliser : if (!defined('_DIR_PLUGIN_MESABONNES ...
             if (_request('mes_abonnes')=='oui') {
                 if ($resultats = sql_select('email', 'spip_mesabonnes')) {

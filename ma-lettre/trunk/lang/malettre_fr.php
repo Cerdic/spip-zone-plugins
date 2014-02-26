@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'archives' => 'Archives',
   'archives_gerer' => 'G&eacute;rer les archives',
   'archives_placer' => 'Lettre plac&eacute;e en archive',
-  'autre' => 'Autre :',
+  'autre' => 'Autres :',
   'apercu' => 'Apercu de la lettre',	
   'adresse'=> 'Adresse @num@',#NEW
 
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'erreur_lecture' => 'Erreur: impossible de lire le dossier',
   'expediteur' => 'Exp&eacute;diteur',
   'email'=>'Email',#NEW
-  'email_seulement' => "email seulement",
+  'email_seulement' => "emails séparés par des virgules",
   'envoi' => 'Envoi',
   'effacer' => 'Effacer',
   'effacer_confirm' => 'Etes vous sur de vouloir effacer cette lettre ?',
