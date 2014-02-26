@@ -48,7 +48,7 @@
 						id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_destinataire#ID_AUTEUR"
 						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
 					/>
-					<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_destinataire#ID_AUTEUR">[(#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)<strong>]#NOM[(#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)</strong>]</label>
+					<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_destinataire#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)class="on"]>#NOM</label>
 				</div>
 			]
 			[(#GET{type_choix}|=={un}|oui)
