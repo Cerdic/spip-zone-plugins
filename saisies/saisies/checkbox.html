@@ -46,7 +46,7 @@
 
 <BOUCLE_checkbox(POUR){tableau #GET{datas}}>
 <div class="#ENV{choix,choix}[ (#ENV{choix,choix})_#CLE]">[(#SET{id,champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]_[(#COMPTEUR_BOUCLE|concat{'-',#CLE}|md5)]})]
-	[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)class="on"]	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"][ (#ENV*{attributs})] />
+	<input type="checkbox" name="#ENV{nom}[]" class="checkbox" id="#GET{id}"[ (#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)checked="checked"] value="#CLE"[(#CLE|in_array{#GET{disabled}}|oui) disabled="disabled"][ (#ENV*{attributs})] />
 	<label for="#GET{id}"[(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui)class="on"]>#VALEUR</label>
 </div>
 </BOUCLE_checkbox>
