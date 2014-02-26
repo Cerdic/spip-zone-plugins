@@ -1,0 +1,19 @@
+<paquet
+  prefix="compass"
+  categorie="outil"
+  version="1.0.0"
+  etat="dev"
+  compatibilite="[3.0.15;3.0.*]"
+  logo="prive/themes/spip/images/compass-64.png"
+  documentation=""
+>
+  <nom>Compass</nom>
+
+  <auteur>bystrano</auteur>
+
+  <licence>GNU/GPL</licence>
+
+  <lib nom="scssphp-compass" lien="https://github.com/leafo/scssphp-compass/archive/master.zip" />
+  <necessite nom="scssphp" compatibilite="[1.0.6;*]" />
+
+</paquet>
