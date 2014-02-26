@@ -52,6 +52,7 @@ var geocoder;]
 		champ_adresse = $('#champ_#ENV{champ_adresse,adresse}'),
 		champ_code_postal = $('##ENV{champ_code_postal,code_postal}'),
 		champ_ville = $('#champ_#ENV{champ_ville,ville}'),
+		champ_departement = $('#champ_#ENV{champ_departement,departement}'),
 		champ_region = $('#champ_#ENV{champ_region,region}'),
 		champ_pays = $('#champ_#ENV{champ_pays,pays}'),
 		champ_code_pays = $('#champ_#ENV{champ_code_pays,code_pays}'),
@@ -96,6 +97,7 @@ var geocoder;]
 			$('#champ_#ENV{champ_adresse,adresse}').val(query.street);
 			$('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode);
 			$('#champ_#ENV{champ_ville,ville}').val(query.locality);
+			$('#champ_#ENV{champ_departement,departement}').val(query.departement);
 			$('#champ_#ENV{champ_region,region}').val(query.region);
 			$('#champ_#ENV{champ_pays,pays}').val(query.country);
 			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);
