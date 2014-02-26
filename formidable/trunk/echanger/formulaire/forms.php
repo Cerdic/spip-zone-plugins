@@ -314,6 +314,11 @@ function forms_champ_vers_saisie($champ){
 			$saisie['saisie'] = 'checkbox';
 			unset($saisie['options']['size']);
 			break;
+		case 'mot':
+			$saisie['saisie'] = 'mot';
+			$saisie['options']['id_groupe'] = $champ['extra_info'];
+			unset($saisie['options']['size']);
+			break;
 		case 'textestatique':
 			$saisie['saisie'] = 'explication';
 			unset($saisie['options']['size']);
