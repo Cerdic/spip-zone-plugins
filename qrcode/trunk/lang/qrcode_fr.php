@@ -1,12 +1,25 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+ 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
+
 	// A
 	'aide' => 'Utilisez votre mobile pour scanner ce code barre et y télécharger le document',
 	
+	// B
+	'bouton_effacer' => 'Effacer',
+
+	// C
+	'cfg_exemple' => 'Exemple',
+	'cfg_exemple_explication' => 'Explication de cet exemple',
+	'cfg_titre_parametrages' => 'Paramétrages',
+
 	// D
 	'descriptif' => 'Les QRcodes sont des codes barres lisibles par divers appareils et en particulier par les téléphones portables. Ils
-peuvent contenir diverses informations par exemple : des URL permettant de télécharger des fichiers sans avoir
+peuvent contenir diverses informations dont des URL permettant de télécharger des fichiers sans avoir
 à saisir manuellement l\'adresse de téléchargement.',
 
 	// E
@@ -29,6 +42,13 @@ peuvent contenir diverses informations par exemple : des URL permettant de tél�
 
 	// O
 	'option_non_configure' => 'Non configur&eacute;',
+
+
+	// Q
+	'qrcode_titre' => 'QrCode',
+
+	// T
+	'titre_page_configurer_qrcode' => 'Configuration du QrCode',
 );
 
 ?>

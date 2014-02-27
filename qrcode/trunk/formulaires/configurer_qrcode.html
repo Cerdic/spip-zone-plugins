@@ -1,14 +1,14 @@
-<!-- autoriser=webmestre -->
-<!-- nom=qrcode -->
-<div class="formulaire_spip formulaire_editer formulaire_#FORM">
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
-<form method="post" action="#ENV{action}">
-<div>
-#ACTION_FORMULAIRE{#ENV{action}}
+	<h3 class="titrem"><:qrcode:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
 	<ul>
-		<li class="editer_taille">
+<li class="editer_taille">
 			<label for="taille"><:qrcode:label_taille:></label>
 			<p class="explication"><:qrcode:explication_taille_aide:></p>
 			<select name="taille" id="taille">
@@ -58,8 +58,13 @@
 			<input type="text" name="style" id="style" class="text" value="#ENV{style}"/>
 		</li>
 	</ul>
-	<p class="boutons">
-		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
-		<input type="submit" name="_cfg_delete" value="<:cfg:bouton_effacer:>" />
-	</p>
-</div></form>
+
+
+
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<input type="hidden" name="_meta_casier" value="qrcode" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
