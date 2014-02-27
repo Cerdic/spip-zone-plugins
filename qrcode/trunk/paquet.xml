@@ -8,20 +8,18 @@
 	documentation="http://www.spip-contrib.net/Qrcode"
 	schema="1.0.0" 
 >
-	<!--
-		Paquet genere le 2014-02-26 15:03:32
-	-->
 
 	<nom>QrCode</nom>
 
 	<auteur>Frédéric Bonnaud</auteur>
-	<auteur lien='http://www.spip-contrib.net/Amaury-Adon'>Amaury Adon</auteur>
 
 	<licence>GNU/GPL</licence>
 
 
 	<pipeline nom="autoriser" inclure="qrcode_autorisations.php" /> 
 
-	<menu nom="configurer_qrcode" titre="qrcode:titre_page_configurer_qrcode" parent="menu_squelette" icone="prive/themes/spip/images/qrcode-16.png" />
+	<lib nom="phpqrcode" lien="http://freefr.dl.sourceforge.net/project/phpqrcode/releases/phpqrcode-2010100721_1.1.4.zip" />
+
+	<menu nom="configurer_qrcode" titre="qrcode:titre_page_configurer_qrcode" parent="menu_configuration" icone="prive/themes/spip/images/qrcode-16.png" />
 
 </paquet>
