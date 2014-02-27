@@ -24,6 +24,15 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 		$titre = extraire_balise($legende, 'h3');
 		if ($titre) $legende = str_replace($titre,'', $legende);
 
+		// fichiers PDF
+		$src = extraire_attribut(extraire_balise($fig, 'a'), 'href');
+		if (preg_match(',\.pdf$,', $src)
+		AND $l = copie_locale(url_absolue($src))) {
+			$file = "images/".basename($l);
+			@mkdir("$numero/images");
+			rename($l, "$numero/$file");
+		}
+
 		$titre = supprimer_tags($titre);
 		$legende = supprimer_tags($legende);
 		$figure = cairn_figure(extraire_balise($fig,'img'), $numero, $titre,$legende);
