@@ -1,0 +1,3 @@
+#SET{size, (#ENV{taille}|sinon{#CONFIG{'qrcode/taille'}}|sinon{1})}
+#SET{ecc, (#CONFIG{'qrcode/ecc'}|sinon{'L'})}
+[(#ENV{texte}|qrcode{#GET{size},#CONFIG{'qrcode/ecc'}})]
