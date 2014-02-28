@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/csv2auteurs-128.png"
 	schema="1.0.0"
-	documentation=""
+	documentation="http://contrib.spip.net/Plugin-csv2auteurs"
 >
 
 	<nom>csv2auteurs</nom>
