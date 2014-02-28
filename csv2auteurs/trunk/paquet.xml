@@ -1,0 +1,27 @@
+<paquet
+	prefix="csv2auteurs"
+	categorie="outil"
+	version="5.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/csv2auteurs-128.png"
+	schema="1.0.0"
+	documentation=""
+>
+
+	<nom>csv2auteurs</nom>
+
+	<auteur>cy_altern</auteur>
+	<auteur>tofulm</auteur>
+	<licence>GNU/GPL</licence>
+
+    <necessite nom="saisies" compatibilite="[1.24.0;]" />
+
+    <pipeline nom="header_prive" inclure="csv2auteurs_pipelines.php" />
+
+
+	<menu nom="csv2auteurs" titre="csv2auteurs:csv2auteurs_titre" parent="menu_administration"  icone="images/csv2auteurs-16.png" />
+
+
+
+</paquet>

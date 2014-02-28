@@ -1,0 +1,153 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+[(#ENV{editable}|oui)
+    <form name="formulaire_#FORM" action="#ENV{action}" method="post" enctype="multipart/form-data"><div>
+    #ACTION_FORMULAIRE{#ENV{action}}
+        <ul>
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2auteurs:parametres_fichier_csv:></h3>
+
+                #SET{erreurs,#ENV**{erreurs}|table_valeur{fichier_csv}}
+                <li class="editer_fichier_csv obligatoire[ (#ENV**{erreurs}|table_valeur{fichier_csv}|oui)erreur]">  
+                <label for="champ_fichier_csv"><:csv2auteurs:fichier_uploader:></label>
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier_csv})</span>]
+                <input type="file" id="champ_fichier_csv" name="fichier_csv" value="[(#ENV{fichier_csv})]" />
+                </li>
+           </fieldset>
+            </li>
+
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2auteurs:mise_a_jour_utilisateur:></h3>
+                [(#SAISIE{oui_non,maj_utilisateur}
+                {label=<:csv2auteurs:mettre_a_jour_utilisateurs_existants:>})]
+
+                 [(#SAISIE{radio,type_maj}
+                    {label=<:csv2auteurs:type_maj_label:>}
+                    {datas=#ARRAY{
+						ajouter,<:csv2auteurs:type_maj_ajouter:>,
+						remplacer,<:csv2auteurs:type_maj_remplacer:>
+						}
+					})]
+            </fieldset>
+            </li>
+            
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2auteurs:suppression_absents:></h3>
+                [(#SAISIE{radio,abs_poubelle}
+                {label=<:csv2auteurs:abs_poubelle:>}
+				{datas=#ARRAY{
+					supprimer,<:csv2auteurs:supprimer_auteur:>,
+					passage_poubelle,<:csv2auteurs:passage_poubelle:>}
+                })]				
+
+                [(#SAISIE{oui_non,abs_redac}
+                {label=<:csv2auteurs:abs_redac:>})]
+
+                [(#SAISIE{oui_non,abs_admin}
+                {label=<:csv2auteurs:abs_admin:>})]
+
+                [(#SAISIE{oui_non,abs_visiteur}
+                {label=<:csv2auteurs:abs_visiteur:>})]
+
+                    [(#SAISIE{radio,traitement_article_efface}
+                    {label=<:csv2auteurs:suppression_article_efface:>}
+                    {datas=#ARRAY{
+						rien_faire,<:csv2auteurs:rien_faire:>,
+						supprimer_articles,<:csv2auteurs:supprimer_articles:>,
+						transferer_articles,<:csv2auteurs:transferer_articles:>}
+					})]
+
+                        [(#SAISIE{input,nom_rubrique_archive}
+                        {label=<:csv2auteurs:nom_rubrique_archive:>})]
+						
+						[(#SAISIE{selecteur_rubrique,rubrique_parent_archive}
+						{label=<:csv2auteurs:rubrique_parent_archive:>})]
+            </fieldset>
+            </li>
+
+            <li class="fieldset">
+            <fieldset>
+                <h3 class="legend"><:csv2auteurs:creation_rubrique:></h3>
+                [(#SAISIE{selecteur_rubrique,rubrique_parent}
+                {label=<:csv2auteurs:rubrique_parent:>})]
+            </fieldset>
+            </li>
+        </ul>
+    <p class="boutons"><input type="submit" class="submit" value="<:csv2auteurs:envoyer:>" /></p>
+    </div></form>
+]
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function(){
+            jQuery("li.editer_traitement_article_efface").css("display","none");
+            jQuery("li.editer_nom_rubrique_archive").css("display","none");
+            jQuery("li.editer_rubrique_parent_archive").css("display","none").css("background-color","#E1F4F2").css("padding-left","50px");
+            var redac     = false;
+            var  admin    = false;
+            var  visiteur = false;
+            
+            jQuery("#champ_abs_redac_oui").click(function(event){
+                redac = true;
+                jQuery("li.editer_traitement_article_efface").css("display","block");
+                });
+            jQuery("#champ_abs_admin_oui").click(function(event){
+                admin = true;
+                jQuery("li.editer_traitement_article_efface").css("display","block");
+                });
+
+            jQuery("#champ_abs_visiteur_oui").click(function(event){
+                visiteur = true;
+                jQuery("li.editer_traitement_article_efface").css("display","block");
+                });
+
+            jQuery("#champ_abs_redac_non").click(function(event){
+                    if  (admin == false){
+                        jQuery("li.editer_traitement_article_efface").css("display","none");
+                        jQuery("#champ_traitement_article_efface_1").attr("checked",true);
+                        jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                        jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                    }
+                redac = false;
+                });
+            jQuery("#champ_abs_admin_non").click(function(event){
+                    if (redac == false){
+                        jQuery("li.editer_traitement_article_efface").css("display","none");
+                        jQuery("#champ_traitement_article_efface_1").attr("checked",true);
+                        jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                        jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                    }
+                admin= false;
+                });
+
+            jQuery("#champ_abs_visiteur_non").click(function(event){
+                    if (redac == false){
+                        jQuery("li.editer_traitement_article_efface").css("display","none");
+                        jQuery("#champ_traitement_article_efface_1").attr("checked",true);
+                        jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                        jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                    }
+                visiteur = false;
+                });
+
+            jQuery("#champ_traitement_article_efface_3").click(function(event){
+                    jQuery("li.editer_nom_rubrique_archive").css("display","block");
+                    jQuery("li.editer_rubrique_parent_archive").css("display","block");
+                    jQuery("li.editer_rubrique_parent_archive .bind-ajax").trigger("click");
+                    });
+            jQuery("#champ_traitement_article_efface_2").click(function(event){
+                    jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                    jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                    });
+            jQuery("#champ_traitement_article_efface_1").click(function(event){
+                    jQuery("li.editer_nom_rubrique_archive").css("display","none");
+                    jQuery("li.editer_rubrique_parent_archive").css("display","none");
+                    });
+        });
+</script>

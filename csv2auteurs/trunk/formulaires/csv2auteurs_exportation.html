@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+[(#ENV{editable}|oui)
+    <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
+    #ACTION_FORMULAIRE{#ENV{action}}
+            
+    [(#SAISIE{checkbox,choix_statut}
+    {label=<:csv2auteurs:choix_statut:>}
+    {datas=#ARRAY{
+        0minirezo,<:csv2auteurs:administrateurs:>,
+        1comite,<:csv2auteurs:redacteurs:>,
+        6forum,<:csv2auteurs:visiteurs:>}}
+    )]
+
+    [(#SAISIE{checkbox,nom_champs}
+    {label=<:csv2auteurs:nom_champs:>}
+    {datas=#ENV{nom_champs}}
+    )]
+
+
+    <p class="boutons"><input type="submit" class="submit" value="<:csv2auteurs:envoyer:>" /></p>
+    </div></form>
+]
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    jQuery(document).ready(function(){
+            var deactivator = function(event){ event.preventDefault(); };
+            jQuery("#champ_nom_champs_2").attr('checked',true).click(deactivator);
+            jQuery("#champ_nom_champs_4").attr('checked',true).click(deactivator);
+            jQuery("#champ_nom_champs_7").attr('checked',true).click(deactivator);
+            jQuery("#champ_nom_champs_10").attr('checked',true).click(deactivator);
+            jQuery("#champ_nom_champs_8").attr('disabled',true).click(deactivator);
+            jQuery("#champ_nom_champs_16").attr('disabled',true).click(deactivator);
+            jQuery("#champ_nom_champs_17").attr('disabled',true).click(deactivator);
+
+    });
+</script>
