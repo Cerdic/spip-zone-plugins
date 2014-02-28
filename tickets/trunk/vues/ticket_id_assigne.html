@@ -6,7 +6,7 @@
 #CACHE{0}
 <BOUCLE_ticket(TICKETS){id_ticket}{tout}>
 	<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
-		<a href="#URL_AUTEUR" class="spip_in">#NOM</a>
+		<a href="#URL_AUTEUR" class="spip_in">[(#LOGO_AUTEUR|image_reduire{32})] #NOM</a>
 	</BOUCLE_assigne>
 		<:tickets:assignation_attribuee_a_personne:>
 	<//B_assigne>

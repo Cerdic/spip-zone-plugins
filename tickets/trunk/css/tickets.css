@@ -10,6 +10,7 @@ table.tickets { margin:0 0 .5em 0;}
 .ticket dl { margin:0 0 .5em 0;} 
 .ticket dt {float: left; clear: left; width: 80px; text-align: right;} 
 .ticket dd {margin: 0 0 0 90px; padding: 0 .2em .2em 0;}
+.ticket dd .spip_logos {height: 1em;width: 1em;float: none;margin: 0 0 0.5em 0;vertical-align:middle}
 
 .page_ticket .comments-list .comment-meta .item,
 .page_ticket .comments-list .forum-chapo .comment-titre {display: none;}
