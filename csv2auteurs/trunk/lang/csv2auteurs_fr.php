@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'obligatoire' => 'Ce champs est obligatoire !',
 
     'parametres_fichier_csv' => 'Paramètres du fichier CSV',
-    'presentation_formulaire' => 'CSV2SPIP : gestion des utilisateurs de SPIP à partir de fichiers CSV',
+    'presentation_formulaire' => 'CSV2AUTEURS : gestion des utilisateurs de SPIP à partir de fichiers CSV',
     'point_virgule'=>'Point-virgule ";"',
     'passage_poubelle' => 'passer à la poubelle',
 
