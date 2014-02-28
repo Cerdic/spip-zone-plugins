@@ -21,7 +21,7 @@ onAjaxLoad(debloquer_prive);
 	]
 </div>
 	#SET{configurer,formulaire}
-	<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#GET{id_objet}}>
+	<BOUCLE_formulaire(FORMULAIRES){id_formulaire=#GET{id_objet}}{tout}>
 		#SET{configurer,#ENV{configurer}|in_array{#LISTE{formulaire,champs,traitements,auteurs}}|?{#ENV{configurer},champs}}
 	</BOUCLE_formulaire>
 	
