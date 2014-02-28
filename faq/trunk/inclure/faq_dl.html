@@ -1,7 +1,7 @@
 <B_faq>
 [<h3 class="spip">
 	[<a class="ancre" href="##ENV{ancre}" name="(#ENV{ancre})" id="#ENV{ancre}"></a>]
-	(#ENV{titre})
+	(#ENV**{titre})
 </h3>]
 <dl class="faq[ (#CONFIG{faq/charger_js}|et{#CONFIG{faq/iconifier_js}}|oui)js]">
 <BOUCLE_faq(DATA){source table, #ENV{faq}}{par cle}>

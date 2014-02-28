@@ -6,6 +6,12 @@
 if (!defined('_FAQ_REGEXP_INFOS_COMPLEMENTAIRES'))
 	define('_FAQ_REGEXP_INFOS_COMPLEMENTAIRES', '%([\w-]+:|#)([\w.-]+)(?:\s|$)%Uu');
 
+// Regexp permettant de supprimer les inclusions typographiques d'espace avant le caractère "?" :
+// - &nbsp; selon la règle typographique par défaut de SPIP
+// - <small class="fine">\xc2\xa0</small> selon la règle typographique du plugin orthotypo
+if (!defined('_FAQ_REGEXP_ESPACE_INTERROGATION'))
+	define('_FAQ_REGEXP_ESPACE_INTERROGATION', '#^(&nbsp;|<small[^?]+)(\?.+)#is');
+
 
 /**
  * Analyse du contenu d'un bloc FAQ inclu entre les marqueurs de début (<faq>) et de fin (</faq>)
@@ -79,9 +85,10 @@ function tw_faq($t) {
 				// - et sinon la réponse comme un descriptif libre de la question précédente.
 				// Le caractère de question '?' est traité par SPIP et précédés
 				// d'un '&nbsp;' parfois à cause de la typographie et il faut donc au préalable le supprimer.
-				if (strpos($texte, '&nbsp;') === 0) {
-					$texte = substr($texte, 6, strlen($texte)-6);
-				}
+				// Si on utilise aussi le plugin OrthoTypo, cette espace fine est remplacée par une espace inclus
+				// dans une balise <small> qu'il faut aussi traiter.
+				// Espace par défaut de SPIP
+				$texte = preg_replace(_FAQ_REGEXP_ESPACE_INTERROGATION, '\\2', $texte);
 				$premier = substr($texte, 0, 1);
 
 				if (($premier != '?')
