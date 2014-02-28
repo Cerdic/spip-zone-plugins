@@ -42,9 +42,6 @@ function definir_autorisations_tickets($action,$utiliser_defaut=true){
 		case 'commenter':
 			$define = (defined('_TICKETS_AUTORISATION_COMMENTER')) ? _TICKETS_AUTORISATION_COMMENTER : ($utiliser_defaut ? '1comite':'');
 			break;
-		case 'modifier_forum':
-			$define = (defined('_TICKETS_AUTORISATION_MODIFIER_FORUM')) ? _TICKETS_AUTORISATION_MODIFIER_FORUM : '';
-			break;
 		case 'modifier':
 			$define = (defined('_TICKETS_AUTORISATION_MODIFIER')) ? _TICKETS_AUTORISATION_MODIFIER : ($utiliser_defaut ? '0minirezo':'');
 			break;
@@ -474,78 +471,6 @@ function autoriser_ticket_commenter_dist($faire, $type, $id, $qui, $opt){
 	}
 
 	$liste = definir_autorisations_tickets('commenter',$utiliser_defaut);
-	if ($liste['statut'])
-		$autorise = in_array($qui['statut'], $liste['statut']);
-	else if ($liste['auteur'])
-		$autorise = in_array($qui['id_auteur'], $liste['auteur']);
-
-	return $autorise;
-}
-
-/**
- * Autorisation de modifier les forums
- * 
- * @param string $faire : l'action à faire
- * @param string $type : le type d'objet sur lequel porte l'action
- * @param int $id : l'identifiant numérique de l'objet
- * @param array $qui : les éléments de session de l'utilisateur en cours
- * @param array $opt : les options
- * @return boolean true/false : true si autorisé, false sinon
- */
-function autoriser_forum_modifier($faire, $type, $id, $qui, $opt){
-	if(sql_getfetsel('id_forum','spip_forum',array('id_forum='.intval($id),"objet='ticket'")))
-		return autoriser_forum_modifier_dans_ticket_dist($faire, $type, $id, $qui, $opt);
-	else
-		return autoriser_forum_modifier_dist($faire, $type, $id, $qui, $opt);
-}
-
-/**
- * Autorisation de modifier les forums (commentaires) des tickets
- * 
- * @param string $faire : l'action à faire
- * @param string $type : le type d'objet sur lequel porte l'action
- * @param int $id : l'identifiant numérique de l'objet
- * @param array $qui : les éléments de session de l'utilisateur en cours
- * @param array $opt : les options
- * @return boolean true/false : true si autorisé, false sinon
- */
-function autoriser_forum_modifier_dans_ticket_dist($faire, $type, $id, $qui, $opt){
-	$autorise = false;
-	$utiliser_defaut = true;
-
-	if(!function_exists('lire_config'))
-		include_spip('inc/config');
-
-	if((lire_config('tickets/autorisations/modifier_forum_auteur') == 'on') && sql_getfetsel('id_auteur','spip_forum',array('id_forum='.intval($id),'id_auteur='.intval($qui['id_auteur']))))
-		return true;
-	
-	$type = lire_config('tickets/autorisations/modifier_forum_type', 'par_statut');
-	if($type){
-		switch($type) {
-			case 'webmestre':
-				// Webmestres uniquement
-				$autorise = ($qui['webmestre'] == 'oui');
-				break;
-			case 'par_statut':
-				// Traitement spécifique pour la valeur 'tous'
-				if(in_array('tous',lire_config('tickets/autorisations/modifier_forum_statuts',array()))){
-					return true;
-				}
-				// Autorisation par statut
-				$autorise = in_array($qui['statut'], lire_config('tickets/autorisations/modifier_forum_statuts',array()));
-				break;
-			case 'par_auteur':
-				// Autorisation par id d'auteurs
-				$autorise = in_array($qui['id_auteur'], lire_config('tickets/autorisations/modifier_forum_auteurs',array()));
-				break;
-		}
-		if($autorise == true){
-			return $autorise;
-		}
-		$utiliser_defaut = false;
-	}
-
-	$liste = definir_autorisations_tickets('modifier_forum',$utiliser_defaut);
 	if ($liste['statut'])
 		$autorise = in_array($qui['statut'], $liste['statut']);
 	else if ($liste['auteur'])
