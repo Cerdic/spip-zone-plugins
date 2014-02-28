@@ -1,9 +1,7 @@
 <BOUCLE_ticket_contenu(TICKETS){id_ticket}{tout}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
-<BOUCLE_si_ouvert(TICKETS){id_ticket}>
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
-</BOUCLE_si_ouvert>
 <div class="ticket contenu-principal">
 
 	<div class="cartouche">
@@ -163,7 +161,6 @@
 	</ul>
 	</B_messages>
 
-	<BOUCLE_si_ouvert_commentaires(TICKETS){id_ticket}>
 	[(#REM) Bloc 3: formulaire d'ajout d'un commentaire sur le ticket]
 	[(#GET{autoriser_commenter}|=={oui}|oui)
 		#FORMULAIRE_FORUM{#SELF}
@@ -186,6 +183,5 @@
 			</p>
 		]
 	]
-	</BOUCLE_si_ouvert_commentaires>
 </div>
 </BOUCLE_ticket_contenu>

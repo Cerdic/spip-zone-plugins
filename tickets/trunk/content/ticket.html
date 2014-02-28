@@ -1,10 +1,8 @@
 <BOUCLE_ticket_contenu(TICKETS){si #PLUGIN{ZPIP}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}}|oui}{id_ticket}{tout}>
 <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
-<BOUCLE_si_ouvert(TICKETS){id_ticket}>
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
 [(#SET{autoriser_modifier,non})]
-</BOUCLE_si_ouvert>
 <div class="ticket content-principal">
 	<div class="cartouche">
 		[(#AUTORISER{modifier, ticket, #ID_TICKET}|oui)#SET{autoriser_modifier,oui}
@@ -160,7 +158,6 @@
 	</ul>
 	</B_messages>
 
-	<BOUCLE_si_ouvert_commentaires(TICKETS){id_ticket}>
 	[(#REM) Bloc 3: formulaire d'ajout d'un commentaire sur le ticket]
 	[(#GET{autoriser_commenter}|=={oui}|oui)
 		#FORMULAIRE_FORUM{#SELF}
@@ -178,6 +175,5 @@
 			<p><:tickets:tickets_sur_inscription:></p>
 			<p><:tickets:tickets_sur_inscription_droits:></p>
 			[(#BOITE_FERMER)]]]
-	</BOUCLE_si_ouvert_commentaires>
 </div>
 </BOUCLE_ticket_contenu>
