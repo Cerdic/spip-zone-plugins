@@ -11,6 +11,9 @@ table.tickets { margin:0 0 .5em 0;}
 .ticket dt {float: left; clear: left; width: 80px; text-align: right;} 
 .ticket dd {margin: 0 0 0 90px; padding: 0 .2em .2em 0;}
 
+.page_ticket .comments-list .comment-meta .item,
+.page_ticket .comments-list .forum-chapo .comment-titre {display: none;}
+
 /* Crayon sur les mots */
 .crayon-html .editer.saisie_mots_groupe label {display:none;}
 .crayon-html .editer.saisie_mots_groupe {padding-left:10px;}

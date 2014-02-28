@@ -11,7 +11,6 @@ Références :
 
 Quelques idées d'évolution du plugin Tickets
 
-[ ] imposer un format de forums en "liste", et interdire les forums en "thread". Si on doit avoir plusieurs branches dans les commentaires, c'est surement qu'il faut plusieurs tickets. On efface "En réponse à", du coup, puisque ça sera toujours en réponse au ticket. MAJ - plutôt cacher "En réponse à" si on est dans le cas "liste".
 [ ] mutualiser le code entre contenu/ et content/
 [ ] remplacer les champs "version", "jalon", "composant", "projet", "sévérité", "navigateur", "tracker" par des mots-clés
 [ ] permettre à l'auteur d'un commentaire de le supprimer
