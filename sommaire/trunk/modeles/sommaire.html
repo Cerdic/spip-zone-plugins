@@ -1,8 +1,12 @@
+#SET{liste, '*'}
+[(#CONFIG{sommaire_automatique_numerote}|=={on}|oui)
+	#SET{liste, '#'}
+]
 <B_somm>
 <div class="well nav-sommaire nav-sommaire-[(#ENV{sommaire}|count)]">
 	<h2><:sommaire:titre_cadre_sommaire:></h2>
 	<BOUCLE_somm(POUR){tableau #ENV{sommaire}}>
--[(#VAL{*}|str_pad{#VALEUR{niveau},'*'})] [#VALEUR{id}<-][#VALEUR{titre}->#VALEUR{href}]</BOUCLE_somm>
+-[(#GET{liste}|str_pad{#VALEUR{niveau},#GET{liste}})] [#VALEUR{id}<-][#VALEUR{titre}->#VALEUR{href}]</BOUCLE_somm>
 </div>
 </B_somm>
 #FILTRE{propre}
