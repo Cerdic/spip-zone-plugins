@@ -1,13 +1,12 @@
 <paquet
   prefix="compass"
   categorie="outil"
-  version="1.0.0"
+  version="1.0.1"
   etat="dev"
   compatibilite="[3.0.15;3.0.*]"
-  logo="prive/themes/spip/images/compass-64.png"
-  documentation=""
+  logo="compass_logo-64.png"
 >
-  <nom>Compass</nom>
+  <nom>SCSS Compass</nom>
 
   <auteur>bystrano</auteur>
 
