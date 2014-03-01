@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Deaktivovať používanie verejných diskusných fór.',
 	'cfg_bouton_tickets' => 'Lístky',
-	'cfg_descr_autorisations' => 'Táto stránka s nastaveniami vám umožňuje nastaviť povolenia na zápis, upravovanie, priradenie lístkov a na písanie komentárov k lístkom.',
+	'cfg_descr_autorisations' => 'Táto stránka s nastaveniami vám umožňuje nastaviť povolenia na zápis, upravovanie, priradenie lístkov a na písanie komentárov k lístkom.', # MODIF
 	'cfg_descr_general' => 'Táto stránka s nastaveniami vám umožňuje zvoliť si hodnoty voliteľných polí, spôsob kontroly komentárov, ako aj rôzne iné parametre.',
 	'cfg_explication_cacher_moteurs' => 'Kešovať lístky vyhľadávačov s požiadavkou, aby neidexovali text lístkov, keď nie sú zobrazené na verejne prístupnej stránke',
 	'cfg_explication_composants' => 'Súčasti oddeľte znakom ":".',

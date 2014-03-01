@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Disable the use of public forums.',
 	'cfg_bouton_tickets' => 'Bug reports',
-	'cfg_descr_autorisations' => 'This setup page allows you to set permissions for writing, editing, assigning and commenting bug reports.',
+	'cfg_descr_autorisations' => 'This setup page allows you to set permissions for writing, editing, assigning and commenting bug reports.', # MODIF
 	'cfg_descr_general' => 'This setup page lets you choose the values ​​of optional fields, comment moderation as well as various other parameters.',
 	'cfg_explication_cacher_moteurs' => 'Hide bug reports from search engines asking them not to index their content when they are displayed in the public space.',
 	'cfg_explication_composants' => 'Separate the components with the character ":".',
