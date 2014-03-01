@@ -1,11 +1,11 @@
 <paquet
 	prefix="curator"
 	categorie="edition"
-	version="0.0.3"
+	version="0.0.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.*.*]"
 	logo="prive/themes/spip/images/curator-64.png"
-	documentation="http://contrib.spip.net/article4503"
+	documentation="http://ydikoi.net/706"
 >
 	<!--
 		Paquet genere le 2014-02-21 18:07:16
