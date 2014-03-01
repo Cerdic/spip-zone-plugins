@@ -1,39 +1,52 @@
 [(#AUTORISER{voir, commentaire, #ID_COMMENTAIRE}|sinon_interdire_acces)]
 <BOUCLE_commentaire(COMMENTAIRES){id_commentaire}{statut==.*}{si #ENV{exec}|=={commentaire}}>
-[(#REM) <!-- Ouverture de la fiche objet : titre commentaire --> ]
+	<BOUCLE_relecture(RELECTURES) {id_relecture}>#SET{id_article, #ID_ARTICLE}</BOUCLE_relecture>
+	[(#SET{lien_relecture, [<a href="#ID_RELECTURE|generer_url_ecrire{relecture}">(#INFO_TITRE{relecture, #ID_RELECTURE})</a>]})]
+[(#REM) <!-- Ouverture de la fiche objet : titre commentaire et relecture/article associé --> ]
 [(#BOITE_OUVRIR{[
+	[(#REM) <!-- Bouton d'édition du commentaire --> ]
 	[(#AUTORISER{modifier, commentaire, #ID_COMMENTAIRE})
 		[(#ID_COMMENTAIRE|afficher_qui_edite{commentaire}|non)
-			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}|icone_verticale{<:relecture:bouton_modifier_commentaire:>, commentaire, edit, right ajax preload})]
+			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}
+				|parametre_url{element, #ELEMENT}
+				|parametre_url{index_debut, #REPERE_DEBUT}
+				|parametre_url{index_fin, #REPERE_FIN}
+				|icone_verticale{<:relecture:bouton_modifier_commentaire:>, commentaire, edit, right ajax preload})]
 		]
 		[(#ID_COMMENTAIRE|afficher_qui_edite{commentaire}|oui)
-			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}|icone_verticale{#ID_COMMENTAIRE|afficher_qui_edite{commentaire},warning-24,'',right edition_deja ajax preload})]
+			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}
+				|parametre_url{element, #ELEMENT}
+				|parametre_url{index_debut, #REPERE_DEBUT}
+				|parametre_url{index_fin, #REPERE_FIN}
+				|icone_verticale{#ID_COMMENTAIRE|afficher_qui_edite{commentaire},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
-	<h1>(#INFO_TITRE{commentaire, #ID_COMMENTAIRE}|sinon{<:relecture:titre_commentaire:>})[(#CHEMIN_IMAGE{commentaire-24.png}|balise_img{commentaire, cadre-icone})]</h1>],
+	<h1>(#INFO_TITRE{commentaire, #ID_COMMENTAIRE}|sinon{<:relecture:titre_commentaire:>})[(#CHEMIN_IMAGE{commentaire-24.png}|balise_img{commentaire, cadre-icone})]</h1>
+	[<p class="soustitre">
+		<:relecture:label_article_commente{relecture=#GET{lien_relecture}}:> : <a[ href="(#URL_ECRIRE{article, id_article=#GET{id_article}})"]>(#INFO_TITRE{article, #GET{id_article}})</a>
+	</p>]],
 	simple fiche_objet})
 ]
 
-	[(#REM) <!-- Date d'ouverture et de dernière modification du commentaire --> ]
+	[(#REM) <!-- Date d'ouverture, de dernière modification du commentaire et leurs auteurs --> ]
 	[(#BOITE_OUVRIR{<h5 id="ouverture"><:relecture:titre_boite_ouverture|strtoupper:></h5>, raccourcis})]
 		<div class="unit size2of3">
 			<span><strong><:relecture:label_date_ouverture_commentaire:></strong> : </span>
 			<span dir="#LANG_DIR">[(#DATE_OUVERTURE|affdate)]</span>
 		</div>
 		<div class="unit size1of3 lastUnit">
-			<span><strong><:relecture:label_date_modif_commentaire:></strong> : </span>
-			<span dir="#LANG_DIR">[(#DATE_MODIF|affdate)]</span>
+			<span><strong><:relecture:label_auteur_commentaire_abrege:></strong> : </span>
+			<span dir="#LANG_DIR">[(#INFO_NOM{auteur, #ID_EMETTEUR})]</span>
 		</div>
 	#BOITE_FERMER
 
-	[(#REM) <!-- Description de la relecture --> ]
+	[(#REM) <!-- Description du commentaire --> ]
 	<div id="wysiwyg">
 		<INCLURE{fond=prive/objets/contenu/commentaire, id=#ID_COMMENTAIRE, id_relecture=#ID_RELECTURE, ajax=wysiwyg, wysiwyg=1}>
 	</div>
 
-	[(#REM) <!-- Bouton d'édition de la relecture --> ]
+	[(#REM) <!-- Bouton d'édition du commentaire --> ]
 	[(#AUTORISER{modifier, commentaire, #ID_COMMENTAIRE})
-
 		[(#ID_COMMENTAIRE|afficher_qui_edite{commentaire}|non)
 			[(#URL_ECRIRE{commentaire_edit,id_commentaire=#ID_COMMENTAIRE}|icone_verticale{<:relecture:bouton_modifier_commentaire:>,commentaire,edit,right ajax preload})]
 		]

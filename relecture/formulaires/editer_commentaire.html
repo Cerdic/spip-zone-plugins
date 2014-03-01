@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			#SET{ecrire_texte, ''}
-			[(#ENV{id_commentaire, oui}|=={oui}|ou{#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', ARRAY{champ,texte}}}|oui)
+			[(#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', #ARRAY{champ,texte}}|oui)
 				#SET{ecrire_texte, oui}
 			]
 			#SET{emetteur, #INFO_NOM{auteur, #ENV{id_emetteur}}}

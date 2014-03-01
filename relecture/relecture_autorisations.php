@@ -319,14 +319,14 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	// Conditions :
 	// soit,
-	// - la modification concerne le "texte" du commentaire
+	// - l'auteur concerné est l'auteur du commmentaire (-> il peut donc modifier le texte)
+	// - la modification concerne le "texte" du commentaire ou n'est pas précisée
 	// - le commentaire est ouvert
-	// - l'auteur concerné est bien l'auteur du commmentaire
 	// - aucun message de forum n'a encore été déposé sur le commentaire
 	// soit,
-	// - la modification concerne la "réponse" du commentaire
+	// - l'auteur possède l'autorisation de modifier la relecture (-> il peut donc modifier la réponse)
+	// - la modification concerne la "réponse" du commentaire ou n'est pas précisé
 	// - le commentaire est ouvert
-	// - l'auteur possède l'autorisation de modifier la relecture
 	if ($id_commentaire = intval($id)) {
 		$from = 'spip_commentaires';
 		$where = array("id_commentaire=$id_commentaire");
@@ -339,13 +339,13 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 		$autorise_modifier_relecture = autoriser('modifier', 'relecture', intval($infos['id_relecture']),$qui, array());
 
 		$autoriser =
-			((($opt['champ'] == 'texte')
+			((($qui['id_auteur'] == $infos['id_emetteur'])
 				AND $commentaire_ouvert
 				AND ($nb_messages_forum == 0)
-				AND ($qui['id_auteur'] == $infos['id_emetteur']))
-			OR (($opt['champ'] == 'reponse')
+				AND (($opt['champ'] == 'texte') OR !$opt))
+			OR ($autorise_modifier_relecture
 				AND $commentaire_ouvert
-				AND $autorise_modifier_relecture));
+				AND (($opt['champ'] == 'reponse') OR !$opt)));
 	}
 
 	return $autoriser;

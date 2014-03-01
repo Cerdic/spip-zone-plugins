@@ -33,7 +33,7 @@ function barre_outils_relecture(){
 				if (!f) { f = '0'; }
 
 				// Creer l'url de la page d'edition du commentaire
-				p = get_parametre_url();console.log(p);
+				p = get_parametre_url();
 				if (!p['element']) {
 					p['element'] = 'texte';
 				}

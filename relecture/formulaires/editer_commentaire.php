@@ -16,7 +16,7 @@ function formulaires_editer_commentaire_charger_dist($id_commentaire='oui', $red
 		unset($valeurs['id_relecture']);
 		unset($valeurs['element']);
 	}
-	// Modification ou mederation d'un commentaire
+	// Modification d'un commentaire
 	else if ($id = intval($id_commentaire)) {
 		// - si le commentaire est ouvert l'auteur de l'article peut le moderer.
 		//   On lui renvoie le texte du commentaire et de la reponse
