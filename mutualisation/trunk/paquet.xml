@@ -1,7 +1,7 @@
 <paquet
 	prefix="Mutualisation"
 	categorie="maintenance"
-	version="1.2.1"
+	version="1.2.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="mutualiser.png"
@@ -14,7 +14,7 @@
 	<auteur>Fil</auteur>
 	<auteur mail="teddy.spip@gmail.com">Teddy (portage pour SPIP 3)</auteur>
 
-	<copyright>2007-2013</copyright>
+	<copyright>2007-2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3 (2013)</licence>

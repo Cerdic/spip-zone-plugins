@@ -259,7 +259,7 @@ function mutualisation_traiter_exec($site) {
 // transformer les sites/truc/IMG/rtf/chose.rtf en /IMG/...
 function mutualisation_url_img_courtes($flux) {
 	if (strpos($flux, _DIR_IMG)
-	OR strpos($flux, _DIR_VAR)) {
+		OR strpos($flux, _DIR_VAR)) {
 		require_once dirname(__FILE__).'/mutualiser_gerer_img.php';
 		return mutualisation_traiter_url_img_courtes($flux);
 	}
@@ -267,32 +267,39 @@ function mutualisation_url_img_courtes($flux) {
 		return $flux;
 }
 
-// Cette fonction cree un prefixe acceptable par MySQL a partir du nom
-// du site ; a utiliser comme prefixe des tables, comme suffixe du nom
-// de la base de donnees ou comme prefixe des cookies... unicite quasi garantie
-// Max 12 caracteres a-z0-9, qui ressemblent au domaine et ne commencent
-// pas par un chiffre
-// http://doc.spip.org/@prefixe_mutualisation
+/**
+ * Cette fonction cree un nom d'ut acceptable par MySQL a partir du nom
+ * du site ; a utiliser comme prefixe des tables, comme suffixe du nom
+ * de la base de donnees, comme suffixe du nom d'utilisateur MySQL créé
+ * ou comme prefixe des cookies... unicite quasi garantie
+ * Max 12 caracteres a-z0-9, qui ressemblent au domaine et ne commencent
+ * pas par un chiffre
+ * 
+ * Pour rappel :
+ * - Les noms d'utilisateurs MySQL peuvent avoir jusqu'à 16 caractères 
+ * (cf. http://dev.mysql.com/doc/refman/5.0/fr/user-names.html)
+ * - Les noms de bases de données MySQL peuvent avoir jusqu'à 64 caractères
+ * (cf. http://dev.mysql.com/doc/refman/5.0/fr/legal-names.html)
+ */
 function prefixe_mutualisation($site) {
 	static $prefix = array();
-
+	$max = 12;
+	if(defined('_INSTALL_PREFIX_DB') && strlen(_INSTALL_PREFIX_DB) > 0){
+		$max = 15-strlen(_INSTALL_PREFIX_DB);
+	}
 	if (!isset($prefix[$site])) {
 		$p = preg_replace(',^www\.|[^a-z0-9],', '', strtolower($site));
-		// si c'est plus long que 12 on coupe et on pose un md5 d'unicite
+		// si c'est plus long que $max on coupe et on pose un md5 d'unicite
 		// meme chose si ca contenait un caractere autre que [a-z0-9],
 		// afin d'eviter de se faire chiper c.a.domaine.tld par ca.domaine.tld
-		if (strlen($p) > 12
-		OR $p != $site)
-			$p = substr($p, 0, 8) . substr(md5($site),-4);
+		if (strlen($p) > $max OR $p != $site)
+			$p = substr($p, 0, ($max-4)) . substr(md5($site),-4);
 		// si ca commence par un chiffre on ajoute a
 		if (ord($p) < 58)
 			$p = 'a'.$p;
 		$prefix[$site] = $p;
 	}
 	return $prefix[$site];
-
 }
-
-
 
 ?>

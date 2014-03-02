@@ -33,18 +33,24 @@
 		redirige_par_entete($protocole . '://' . $site . $req);
 	}
 
-	// Compatibilite avec le ":" de $dossier_squelettes
-	// Si l'url indique explicitement un port (grace a ":")
-	// tout eliminer s'il s'agit du port 80
-	// et remplacer ":" par _ pour les autres ports
-
+	/*
+	 * Compatibilite avec le ":" de $dossier_squelettes
+	 * Si l'url indique explicitement un port (grace a ":")
+	 * tout eliminer s'il s'agit du port 80
+	 * et remplacer ":" par _ pour les autres ports
+	 */
 	if (strpos($site, ':')) {
 		if (preg_match('/:80$/', $site)) $site = substr($site,-3);
 		else $site = str_replace(':', '_', $site);
 	}
 
+	/**
+	 * Si _INSTALL_DB_PREFIX est défini, prefixe_mutualisation() utilisera sa longueur pour
+	 * générer son résultat (maximum de 15 caractères pour la création d'utilisateur MySQL)
+	 */
+	define ('_INSTALL_PREFIX_DB','mu_');
 	define ('_INSTALL_SITE_PREF', prefixe_mutualisation($site));
-	define ('_INSTALL_NAME_DB', 'mu_'. _INSTALL_SITE_PREF); // 'mu_' ou autre chose mais PAS PLUS DE 3 CARACTERES !!!
+	define ('_INSTALL_NAME_DB', _INSTALL_DB_PREFIX. _INSTALL_SITE_PREF);
 
 	define ('_INSTALL_SERVER_DB', 'mysql'); 
 	define ('_INSTALL_HOST_DB', 'localhost'); 
@@ -54,7 +60,7 @@
 	/* mettre en commentaire la ligne suivante si vous utilisez l'option table_prefixe plus bas dans la config */ 
 	define ('_INSTALL_TABLE_PREFIX', 'spip');
 
-	/* 
+	/*
 	 * Si le nom du serveur est different du nom dns, 
 	 * ca peut parfois poser probleme
 	 * il faut alors le definir ici
