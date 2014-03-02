@@ -49,14 +49,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'form_forum_confirmer_email' => 'Ak chcete potvrdiť svoju e-mailovú adresu, kliknite na toto tlačidlo: ',
 	'forum_prives_auteur' => '<strong>Autori:</strong> autori dostávajú oznamy odoslané z diskusných fór pod ich článkami alebo správami v súkromnej zóne.',
-	'forum_prives_moderateur' => 'Zadajte e-mailovú adresu moderátora súkromných diskusných fór (alebo viac adries, oddeľte ich čiarkami).', # MODIF
+	'forum_prives_moderateur' => 'Zadajte e-mailovú adresu moderátora súkromných diskusných fór (alebo viac adries, oddeľte ich čiarkami).',
 	'forum_prives_thread' => '<strong>Téma:</strong> diskutujúci v rovnakom vlánke dostávajú oznami z (verejných) diskusných fór.',
 	'forums_prives' => 'Súkromné diskusné fóra',
 	'forums_public' => 'Verejné diskusné fóra',
 	'forums_public_a_noter' => 'Poznámka: v prípade, že sa príspevky do diskusných fór kontrolujú pred ich zverejnením, o odoslaní príspevkov sú informovaní iba autori, ktorí majú právo schvaľovať príspevky; ostatní sú informovaní, až keď príspevky schvália títo moderátori.',
 	'forums_public_article' => '<strong>Reakcia na článok:</strong> ľudia, ktorí verejne reagovali na článok, dostanú oznamy z–(verejných) diskusných  fór článku (je to užitočné pre jednoduché diskusné fóra).',
 	'forums_public_auteurs' => '<strong>Autori:</strong> autori dostávajú oznamy odoslané z diskusných fór pod ich článkami na verejne prístupnej stránke.',
-	'forums_public_moderateur' => 'Zadajte e-mailovú adresu moderátora verejných diskusných fór (alebo viac adries, oddeľte ich čiarkami).', # MODIF
+	'forums_public_moderateur' => 'Zadajte e-mailovú adresu moderátora verejných diskusných fór (alebo viac adries, oddeľte ich čiarkami).',
 	'forums_public_thread' => '<strong>Téma:</strong> diskutujúci v rovnakom vlákne dostávajú oznamy z (verejných) diskusných fór.',
 
 	// I
@@ -80,6 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">Porov. s dokumentáciou</a>',
+	'limiter_rubriques_explication' => 'Sem zadajte identifikačné číslo každej rubriky, pre ktorú chcete spúšťať oznamy, oddeľte ich čiarkami. Napr. "11,26"',
+	'limiter_rubriques_label' => 'Obmedziť na tieto rubriky:',
 
 	// M
 	'message_a_valider' => 'Príspevok na potvrdenie: ',
@@ -98,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'signature_petition' => 'Podpisy pod petíciu',
-	'signature_petition_moderateur' => 'Zadajte e-mailovú adresu moderátora petícií (alebo viac adries, oddeľte ich čiarkami).', # MODIF
+	'signature_petition_moderateur' => 'Zadajte e-mailovú adresu moderátora petícií (alebo viac adries, oddeľte ich čiarkami).',
 	'suivi_texte_acces_page' => 'Upraviť odoberanie príspevkov z diskusií',
 	'suivis_perso' => 'Prispôsobené sledovanie',
 	'suivis_perso_activer_option' => 'Ak aktivujete túto možnosť, každý návštevník, ktorý sa prihlási na túto sledovaciu adresu, bude zapísaný do tabuľky <code>spip_auteurs</code> so stavom <code>6visiteur.</code> Potom si bude môcť prezrieť všetky príspevky, pod ktoré sa podpísal na diskusnom fóre, upraviť si nastavenia oznamov, atď.',
