@@ -14,7 +14,6 @@ include_spip('inc/editer');
 
 function formulaires_reservation_charger_dist($id='',$id_article=''){
 
-	
 	// si pas d'evenement ou d'inscription, on echoue silencieusement
 	
 	$where=array('date_fin>NOW() AND inscription=1 AND statut="publie"');
