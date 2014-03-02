@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_heure_pas_label' => 'Interval v minútach v menu pomocníka k zápisu do poľa',
 	'option_horaire_label' => 'Diár',
 	'option_horaire_label_case' => 'Povoliť zápis do diára',
+	'option_id_groupe_label' => 'Skupina slov',
 	'option_info_obligatoire_explication' => 'Môžete zmeniť predvolenú povinnosť vyplniť polia: <i>[Povinné]</i>.',
 	'option_info_obligatoire_label' => 'Označenie povinnosti',
 	'option_inserer_barre_choix_edition' => 'celý editovací panel s nástrojmi',
@@ -132,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_type_choix_un_radio' => 'Umožniť používateľovi vybrať si <strong>jediného</strong> príjemcu (vo forme zoznamu s odrážkami).',
 	'option_type_explication' => 'V režime hesla sa obsah napísaný do poľa nahradí hviezdičkami.',
 	'option_type_label' => 'Typ poľa',
-	'option_type_password' => 'Maskované', # MODIF
+	'option_type_password' => 'Skrývaný text pri písaní (napr. heslo)',
 	'option_type_text' => 'Normálny',
 
 	// S
@@ -156,6 +157,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'saisie_hidden_titre' => 'Skryté pole',
 	'saisie_input_explication' => 'Jednoduchý riadok s textom, ktorý môže byť viditeľný alebo skrytý (heslo).',
 	'saisie_input_titre' => 'Textové pole',
+	'saisie_mot_explication' => 'Jedno alebo viac kľúčových slov zo skupiny slov',
+	'saisie_mot_titre' => 'Kľúčové slovo',
 	'saisie_oui_non_explication' => 'Odpoveď buď Áno alebo Nie',
 	'saisie_oui_non_titre' => 'Áno alebo Nie',
 	'saisie_radio_defaut_choix1' => 'Jeden',
