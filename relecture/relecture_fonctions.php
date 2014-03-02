@@ -124,8 +124,8 @@ function generer_titre_commentaire($id_objet, $champs) {
 
 
 /**
- * Extraire du texte fourni la partie correspondante determinee par les offsets de debut et fin
- * Si ceux sont nuls ou egaux la fonction renvoie une portion de texte autour du point d'insertion.
+ * Extraire du texte fourni la partie correspondante determinee par les repères de debut et fin.
+ * Si ceux-ci sont nuls ou egaux la fonction renvoie une portion de texte autour du point d'insertion.
  *
  * @param string $texte
  * @param int $idebut

@@ -214,8 +214,8 @@ function relecture_pre_insertion($flux) {
 			// - ajout des informations de base sur le commentaire
 			$flux['data']['id_relecture'] = $id_relecture;
 			$flux['data']['element'] = _request('element');
-			$flux['data']['repere_debut'] = intval(_request('index_debut'));
-			$flux['data']['repere_fin'] = intval(_request('index_fin'));
+			$flux['data']['repere_debut'] = intval(_request('repere_debut'));
+			$flux['data']['repere_fin'] = intval(_request('repere_fin'));
 
 			// - l'auteur du commentaire (auteur connecte)
 			$flux['data']['id_emetteur'] = session_get('id_auteur');

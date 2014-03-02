@@ -1,25 +1,23 @@
 [(#ID_COMMENTAIRE|oui)
 	[(#AUTORISER{modifier, commentaire, #ID_COMMENTAIRE}|sinon_interdire_acces)]
+	#SET{redirect, #ENV{redirect}
+					|sinon{#URL_ECRIRE{commentaire}
+					|parametre_url{id_commentaire, #ID_COMMENTAIRE}}}
 ][(#ID_COMMENTAIRE|non)
 	[(#AUTORISER{commenter, relecture, #ENV{id_relecture}}|sinon_interdire_acces)]
+	#SET{redirect, #ENV{redirect}
+					|sinon{#URL_ECRIRE{relecture_comment}
+					|parametre_url{id_relecture, #ENV{id_relecture}}
+					|parametre_url{element, #ENV{element, texte}}}}
 ]
-#SET{redirect, #ENV{redirect}
-				|sinon{#URL_ECRIRE{commentaire}
-				|parametre_url{id_commentaire, #ID_COMMENTAIRE}}}
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
 		[(#GET{redirect}|icone_verticale{<:icone_retour:>, commentaire, '', left})]
 		[(#VAL{commentaire}|objet_info{#ID_COMMENTAIRE|?{texte_modifier, texte_creer}}|_T)]
 		<h1>
-			[(#INFO_TITRE{commentaire, #ID_COMMENTAIRE})]
-			[ - (#VAL{relecture:label_article_}|concat{#ENV{element}}|_T)]
+			[(#INFO_TITRE{commentaire, #ID_COMMENTAIRE}|sinon{<:relecture:titre_commentaire:>})]
 		</h1>
-		<blockquote>
-			[&#10078; (#ENV{id_relecture}
-				|generer_info_entite{relecture, [article_(#ENV{element, texte})], *}
-				|relecture_extraire_selection{#ENV{index_debut}, #ENV{index_fin}}) &#10077;]
-		</blockquote>
 	</div>
 
 [(#ENV{retourajax,''}|oui)

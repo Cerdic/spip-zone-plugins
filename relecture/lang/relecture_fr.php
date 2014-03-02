@@ -27,6 +27,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_ajout_commentaire' => 'Pour ajouter des commentaires à cet élément cliquez sur le bouton de la barre d\'outils. Au préalable, si vous souhaitez associer ce commentaire à un emplacement ou à une portion du texte veillez à positionner correctement votre curseur dans le texte.',
 
 // I
+	'info_selection' => 'l\'extrait &#10078;@texte@&#10077;',
+	'info_article_texte' => 'le texte de l\'article',
+	'info_article_chapo' => 'le chapeau de l\'article',
+	'info_article_descr' => 'le descriptif de l\'article',
+	'info_article_ps' => 'le post-scriptum de l\'article',
 	'info_1_commentaire_ferme' => '1 commentaire fermé',
 	'info_1_commentaire' => '1 commentaire déposé',
 	'info_1_relecture' => '1 relecture',
@@ -47,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 	'label_action' => ' ',
+	'label_article_article' => 'Aucun',
 	'label_article_chapo' => 'Chapeau',
 	'label_article_descr' => 'Descriptif',
 	'label_article_ps' => 'Post-Scriptum',
@@ -62,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_commentaire_statut' => 'Statut du commentaire',
 	'label_commentaire_texte' => 'Texte du commentaire',
 	'label_commentaire_reponse' => 'Réponse au commentaire',
+	'label_commentaire_apropos' => 'Concerne :',
 	'label_date_cloture_commentaire' => 'Fermé le',
 	'label_date_cloture_relecture' => 'Clôturée le',
 	'label_date_modif' => 'Date',

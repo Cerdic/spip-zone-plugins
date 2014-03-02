@@ -4,12 +4,18 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire
-		parametre : url d'action ]
+		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
+			<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{description}|oui) erreur]">
+				<label><:relecture:label_commentaire_apropos:></label>
+				<ul class="commentaire_apropos">
+					<li>[(#ENV{_info_element})]</li>
+					<li>[(#ENV{_info_selection})]</li>
+				</ul>
+		    </li>
 			#SET{ecrire_texte, ''}
-			[(#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', #ARRAY{champ,texte}}|oui)
+			[(#ENV{id_commentaire, oui}|=={oui}|ou{#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', #ARRAY{champ,texte}}}|oui)
 				#SET{ecrire_texte, oui}
 			]
 			#SET{emetteur, #INFO_NOM{auteur, #ENV{id_emetteur}}}

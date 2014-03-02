@@ -342,10 +342,10 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 			((($qui['id_auteur'] == $infos['id_emetteur'])
 				AND $commentaire_ouvert
 				AND ($nb_messages_forum == 0)
-				AND (($opt['champ'] == 'texte') OR !$opt))
+				AND (!$opt OR ($opt['champ'] == 'texte')))
 			OR ($autorise_modifier_relecture
 				AND $commentaire_ouvert
-				AND (($opt['champ'] == 'reponse') OR !$opt)));
+				AND (!$opt OR ($opt['champ'] == 'texte'))));
 	}
 
 	return $autoriser;

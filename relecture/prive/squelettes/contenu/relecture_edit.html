@@ -21,7 +21,11 @@
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
 ]
-		[(#FORMULAIRE_{editer_relecture, #ID_RELECTURE|sinon{oui}, #GET{redirect}})]
+
+[(#FORMULAIRE_{editer_relecture,
+	#ID_RELECTURE|sinon{oui},
+	#GET{redirect}})]
+
 [(#ENV{retourajax,''}|oui)
 	</div>
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>

@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{description}|oui) erreur]">
-				<label><:relecture:label_article_relu:>[<span> : (#ENV{titre_article})</span>]</label>
+				<label><:relecture:label_article_relu:>[<span> : <a[ href="(#ENV{_lien_article})"]>(#ENV{_titre_article})</a></span>]</label>
 		    </li>
 
 			[(#CONFIG{relecture/autoriser_tous_relecteurs}|=={oui}|oui)
