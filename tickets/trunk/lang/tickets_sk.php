@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'afficher_tickets' => 'Zobraziť lístky',
 	'assignation_attribuee_a' => 'Lístok bol priradený k @nom@.',
+	'assignation_attribuee_a_personne' => 'Lístok nebol priradený žiadnemu človeku.',
 	'assignation_mail_titre' => 'Zmena priradenia lístka',
 	'assignation_modifiee' => 'Priradenie bolo aktualizované',
 	'assignation_non_modifiee' => 'Priradenie nebolo aktualizované',
@@ -22,10 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Deaktivovať používanie verejných diskusných fór.',
 	'cfg_bouton_tickets' => 'Lístky',
-	'cfg_descr_autorisations' => 'Táto stránka s nastaveniami vám umožňuje nastaviť povolenia na zápis, upravovanie, priradenie lístkov a na písanie komentárov k lístkom.', # MODIF
+	'cfg_descr_autorisations' => 'Táto stránka s nastaveniami vám umožňuje nastaviť povolenia na zápis, upravovanie, priradenie lístkov a na písanie komentárov k lístkom. Inštalácia zásuvného modulu <a href="@url@">Autorita</a> ponúka prístup k ďalším nastaveniam, ako napríklad umožnenie autorovi komentára upraviť komentár po jeho publikovaní.',
 	'cfg_descr_general' => 'Táto stránka s nastaveniami vám umožňuje zvoliť si hodnoty voliteľných polí, spôsob kontroly komentárov, ako aj rôzne iné parametre.',
 	'cfg_explication_cacher_moteurs' => 'Kešovať lístky vyhľadávačov s požiadavkou, aby neidexovali text lístkov, keď nie sú zobrazené na verejne prístupnej stránke',
 	'cfg_explication_composants' => 'Súčasti oddeľte znakom ":".',
+	'cfg_explication_desactiver_public' => 'Lístky pridávať iba v súkromnej zóne',
 	'cfg_explication_formats_documents_ticket' => 'Formáty oddeľte čiarkou',
 	'cfg_explication_jalons' => 'Míľniky oddeľte znamkom ":".',
 	'cfg_explication_projets' => 'Projekty oddeľte znakom ":".',
@@ -41,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autoriser_modifier_case' => 'Poveriť tých, ktorí majú možnosť upraviť lístok (vrátane autora a tých, ktorým bol lístok priradený)',
 	'cfg_lbl_cacher_moteurs' => 'Schovať vyhľadávače',
 	'cfg_lbl_case_joindre_fichiers' => 'Povoliť pripájanie súborov k lístkom',
+	'cfg_lbl_case_lier_mots' => 'Povoliť priraďovanie kľúčových slov k lístkom',
 	'cfg_lbl_case_notification_publique' => 'Oznamovať cez verejne prístupnú stránku namiesto súkromnej zóny',
 	'cfg_lbl_case_selecteur_navigateur' => 'Ponúkať oddeľovač prehliadača vo formulári na úpravu lístka',
 	'cfg_lbl_composants' => 'Súčasti',
@@ -49,6 +52,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_forums_publics' => 'Komentáre na lístky',
 	'cfg_lbl_jalons' => 'Míľniky',
 	'cfg_lbl_joindre_fichiers' => 'Pripojiť jeden súbor alebo viac',
+	'cfg_lbl_lier_mots' => 'Priradenie kľúčových slov',
+	'cfg_lbl_lier_mots_aucun' => 'žiadna skupina',
+	'cfg_lbl_lier_mots_explication' => 'Ak chcete aktivovať alebo deaktivovať priradenie kľúčových slov k lístkom, prejdite na stránku s nasta­veniami každej skupiny slov. Momen­tálne sú k lístkom prirade­né tieto skupiny: <strong>@groupes@</strong>',
 	'cfg_lbl_liste_auteurs' => 'Autori stránky',
 	'cfg_lbl_notif_destinataires' => 'Adresáti oznamu o vytvorení',
 	'cfg_lbl_notification_publique' => 'Verejný oznam',
@@ -73,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_notif_liste_auteurs' => 'Zoznam autorov, ktorí dostávajú oznamy',
 	'cfg_notif_webmestre' => 'Všetci webmasteri',
 	'cfg_titre_tickets' => 'Lístky – nastavenia zásuvného modulu',
+	'champ_assigne' => 'Priradená osoba:',
 	'champ_assigner' => 'Priradiť komu:',
 	'champ_composant' => 'Súčasť:',
 	'champ_composant_th' => 'Obsahuje',
@@ -130,6 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_ticket' => 'Vytvoriť lístok',
 
 	// D
+	'date_creation' => 'Vytvorené @date@',
 	'date_creation_auteur' => 'Lístok vytvoril(a) <strong>@nom@</strong> <strong>@date@</strong>',
 
 	// E
@@ -174,6 +182,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tickets_redac' => 'upravuje sa',
 
 	// L
+	'label_mots' => 'Priradiť k lístku kľúčové slová',
 	'label_paginer_par' => 'Stránkovať od:',
 	'label_vue_liste_tickets' => 'Zmeniť vzhľad zoznamu:',
 	'lien_filtrer' => 'Rozriediť lístky',
@@ -189,6 +198,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_automatique' => 'Toto je automatická správa. Neodpovedajte na ňu.',
 	'message_page_publique_indisponible' => 'Táto stránka je nedostupná. Skontrolujte, či je ZPIP aktivovaný a vaše nastavenia zásuvného modulu Lístky povoľujú prístup verejnosti.',
 	'message_zpip_inactif' => 'Táto funkcia je deaktivovaná, lebo si vyžaduje zásuvný modul ZPIP.',
+	'mots_aucun' => 'Žiadne kľúčové slovo',
 
 	// N
 	'no_assignation' => 'Hocikto',
