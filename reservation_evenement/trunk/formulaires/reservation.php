@@ -35,7 +35,9 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
         $evenements[$row['id_evenement']]=$row;
         $articles[]=$row['id_article'];
     }
-    $valeurs = array('evenements'=>$evenements,'articles'=>$evenements,'lang'=>_request('lang'));
+	
+
+	$valeurs = array('evenements'=>$evenements,'articles'=>$evenements,'lang'=>$GLOBALS['spip_lang']);
 
     
     if(intval($GLOBALS['visiteur_session'])){
@@ -178,7 +180,7 @@ function formulaires_reservation_traiter_dist($id='',$id_article=''){
         //Charger les définitions pour la création des formulaires
         $champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
        foreach( $champs_extras_auteurs as $value){
-             $valeurs_extras[$value['options']['nom']]=_request($value['options']['nom']); 
+             $valeurs_extras[$value['options']['label']]=_request($value['options']['nom']); 
             }
         }
 
