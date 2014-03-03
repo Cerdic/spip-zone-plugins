@@ -36,7 +36,7 @@
 		</div>
 		<div class="unit size1of3 lastUnit">
 			<span><strong><:relecture:label_auteur_commentaire_abrege:></strong> : </span>
-			<span dir="#LANG_DIR">[(#INFO_NOM{auteur, #ID_EMETTEUR})]</span>
+			<span dir="#LANG_DIR">[<a[ href="(#ID_EMETTEUR|generer_url_entite{auteur})"]>(#INFO_NOM{auteur, #ID_EMETTEUR})</a>]</span>
 		</div>
 	#BOITE_FERMER
 
