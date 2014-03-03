@@ -24,7 +24,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		Un tableau des informations récupérées
  */
 function inc_spipmotion_mediainfo_dist($chemin){
-	$infos = array('hasaudio'=>'non','hasvideo' => 'non');
+	$infos = array('hasaudio' => 'non','hasvideo' => 'non');
 	if(file_exists($chemin)){
 		/**
 		 * On enregistre les metadonnées dans un fichier xml 
@@ -85,7 +85,6 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					 */
 					if($info[0]['Cover_Data'][0]){
 						$mime = array_shift(explode(' ',$info[0]['Cover_MIME'][0]));
-						spip_log($mime,'tickets');
 						switch ($mime) {
 							case 'image/jpg':
 								$ext = 'jpg';
@@ -164,6 +163,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 							}
 						}
 					}
+					continue;
 				}
 				/**
 				 * Les infos techniques vidéo
@@ -208,18 +208,20 @@ function inc_spipmotion_mediainfo_dist($chemin){
 					$infos['framecount'] = $info[0]['Frame_count'][0];
 					$infos['rotation'] = intval($info[0]['Rotation'][0]);
 					$infos['hasvideo'] = 'oui';
+					continue;
 				}
 				/**
 				 * Les infos techniques audio
 				 */
 				if(($infos['hasaudio'] == 'non') && (substr($track,0,18) == 'track type="Audio"')){
 					$infos['audiobitrate'] = $info[0]['Bit_rate'][0];
-					$infos['audiochannels'] = $info[0]['Channel_s_'][0];
-					$infos['audiochannels'] = $info[0]['Channel_s_'][0];
+					if(isset($info[0]['Channel_count'][0]) && isset($info[0]['Channel_count'][0]) > 0)
+						$infos['audiochannels'] = $info[0]['Channel_count'][0];
+					else if(isset($info[0]['Channel_s_'][0]) && $info[0]['Channel_s_'][0] > 0)
+						$infos['audiochannels'] = $info[0]['Channel_s_'][0];
 					$infos['audiosamplerate'] = $info[0]['Sampling_rate'][0];
 					$infos['audiocodec'] = $info[0]['Codec'][0];
 					$infos['audiobitratemode'] = strtolower($info[0]['Bit_rate_mode'][0]);
-					spip_log($infos,'test');
 					if($infos['audiocodec'] == 'AAC LC')
 						$infos['audiocodecid'] = 'mp4a.40.2';
 					else if($infos['audiocodec'] == 'MPA1L3')
@@ -230,6 +232,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
 					if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode'])
 						$infos['hasaudio'] = 'oui';
+					continue;
 				}
 			}
 			/**
