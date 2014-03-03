@@ -99,7 +99,7 @@ function action_exporter_analyse_reponses_dist($arg=null) {
         }
 
 		if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)){
-			echo $exporter_csv('analyses-formulaire-'.$formulaire['identifiant'], $reponses_completes);
+			$exporter_csv('analyses-formulaire-'.$formulaire['identifiant'], $reponses_completes);
 			exit();
 		}
 	}
