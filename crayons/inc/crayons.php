@@ -378,6 +378,14 @@ function vignette_revision($id, $data, $type, $ref) {
 	return true;
 }
 
+function wrap_objet_modifier($id, $data, $type, $ref) {
+	if (include_spip('action/editer_objet')
+	    AND function_exists('objet_modifier')) {
+		return objet_modifier($type,$id,$data);
+	}
+	return false;
+}
+
 function colonne_table($type, $col) {
 	list($distant,$table) = distant_table($type);
 	$nom_table = '';

@@ -238,9 +238,16 @@ function crayons_store_set_modifs($modifs, $return) {
 				break;
 		}
 		if (!$fun or !function_exists($fun)) {
+			if (table_objet_sql($type)
+			    AND include_spip('action/editer_objet')
+			    AND function_exists('objet_modifier')
+			    AND function_exists('wrap_objet_modifier')) {
+				$fun = 'wrap_objet_modifier';
+			} else {
 				$fun = 'crayons_update';
 				// $return['$erreur'] = "$type: " . _U('crayons:non_implemente');
 				// break;
+			}
 		}
 
 		if (!isset($updates[$type][$fun])) {
@@ -359,11 +366,7 @@ function crayons_update($id, $colval = array(), $type = ''){
 		return false;
 	list($distant,$table) = distant_table($type);
 
-	if (include_spip('action/editer_objet')
-		AND function_exists($modifier = "objet_modifier")) {
-		$a = $modifier($type,$id,$colval);
-	}
-	else if ($distant) {
+	if ($distant) {
 		list($nom_table, $where) = table_where($type, $id);
 		if (!$nom_table)
 			return false;
