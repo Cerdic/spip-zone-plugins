@@ -5,6 +5,7 @@
 [(#ENV{date_debut_ajax}|oui) #SET{date_debut_sql,#VAL{"Y-m-d H:i:s"}|date{#ENV{date_debut_ajax}|strtotime}}]
 [(#ENV{date_fin_ajax}|oui) #SET{date_fin_sql,#VAL{"Y-m-d H:i:s"}|date{#ENV{date_fin_ajax}|strtotime}}]
 
+
 <BOUCLE_recup(spip_orr_reservations_liens){objet=orr_ressource}{id_orr_reservation=#ENV{id_reservation}}>#SET{recup_ressource, #ID_OBJET}</BOUCLE_recup>
 
 <BOUCLE_ressources(ORR_RESSOURCES){par orr_ressource_nom}>
@@ -16,7 +17,7 @@
 		}|?{
 			disabled="disabled" style="color: red;"
 			,
-			[(#ID_ORR_RESSOURCE|in_array{#GET{T_selected}}|oui) selected="selected"]
+			[(#ID_ORR_RESSOURCE|=={#GET{recup_ressource}}|oui) selected="selected"]
 		})]
 	>#ORR_RESSOURCE_NOM</option>]
 </BOUCLE_ressources>
