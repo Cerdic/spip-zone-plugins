@@ -8,6 +8,11 @@
 {	font-size:12px;
 }
 
+/** Hack pour les layers image sous Firefox... */
+.layerImageHack div
+{	display:block!important;
+}
+
 /** Affichage des palettes */
 .gpControlFloating
 {	font-size:12px;

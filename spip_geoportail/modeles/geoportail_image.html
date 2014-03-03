@@ -35,12 +35,12 @@ function (map,id)
 	var options = 
 	{	minZoomLevel:[(#ENV{minz,0})], 
 		maxZoomLevel:[(#ENV{maxz,18})], 
-		maxResolution:100, 
+		maxResolution:1000, 
 		opacity: [(#ENV{opacity,0.65})], 
 		isBaseLayer:false, 
 		visibility:[(#ENV{visibility,true})], 
 		maxExtent: new OpenLayers.Bounds(pt1.x, pt1.y, pt2.x, pt2.y),
-		originators: jQuery.geoportail.originators,
+		//originators: jQuery.geoportail.originators,
 		view:{ zoomToExtent:true } 
 	};
 
@@ -52,6 +52,8 @@ function (map,id)
                 options
             );
 	map.getMap().addLayer(graphic);
+	// Hack pour Firefox (forcer l'image a s'afficher dans le css)
+	$(graphic.div).addClass("layerImageHack");
 	
 	[(#ALIGN|=={center}|?{' '})
 		// Centrer
