@@ -55,7 +55,8 @@
 		{	dialog += "<table width=100% border=0 ><tr valign=top>"
 					+ "<td width=1%><img class=jqDialogImg src='"+param.icon+"' style='float:left' /></td><td>";
 		}
-		if (param.dialog) dialog += "<div class=jqDialogInner>"+param.dialog+"</div>"
+		// if (param.dialog) dialog += "<div class=jqDialogInner>"+param.dialog+"</div>";
+		dialog += "<div class=jqDialogInner></div>";
 		if (param.icon) dialog += "</tr></table>"
 		dialog += "<div class=button style='text-align:right; '>";
 		if (param.ok) dialog += "<input class='jqDialogButton jqDialogButtonOk' onclick='javascript:jQuery.jqDialog.action(\"ok\")' type=button value='"+param.ok.replace("\'","&acute;")+"' />";
@@ -64,6 +65,10 @@
 		dialog += "</div></div></div>";
 		
 		var d = $(dialog).hide().appendTo("body");
+		if (param.dialog) 
+		{	if (typeof(param.dialog)=="string") $(".jqDialogInner", d).html(param.dialog);
+			else $(".jqDialogInner", d).append($(param.dialog));			
+		}
 
 		// Fenetre proportionnelle
 		var dw=param.width;
