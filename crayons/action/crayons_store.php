@@ -359,7 +359,11 @@ function crayons_update($id, $colval = array(), $type = ''){
 		return false;
 	list($distant,$table) = distant_table($type);
 
-	if ($distant) {
+	if (include_spip('action/editer_objet')
+		AND function_exists($modifier = "objet_modifier")) {
+		$a = $modifier($type,$id,$colval);
+	}
+	else if ($distant) {
 		list($nom_table, $where) = table_where($type, $id);
 		if (!$nom_table)
 			return false;
