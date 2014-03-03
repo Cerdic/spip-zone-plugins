@@ -35,7 +35,7 @@
 		<br />
 		
 		<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
-			<SELECT NAME="id_rubrique">
+			<SELECT NAME="id_parent">
 			        <BOUCLE_listederoulante(RUBRIQUES) {id_parent} {par titre}>
 			        <OPTION VALUE="#ID_RUBRIQUE">#TITRE</OPTION>
 			        	<BOUCLE_recursive(BOUCLE_listederoulante)>
