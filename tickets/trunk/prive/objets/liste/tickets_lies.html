@@ -1,0 +1,43 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	titre,1,
+	num titre,1,
+	id_ticket,1
+}})
+]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<input type="hidden" name="debutticketl" value='#ENV{debutticketl,#EVAL{_request("debutticketl");}}' />
+<B_liste_ticket>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies tickets">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{tickets:info_ticket_1,tickets:info_ticket_nb}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:tickest:texte_ticket_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_ticket(TICKETS){id_ticket IN #GET{selection}}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_TICKET|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='statut'>[<img src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"[ alt="(#STATUT|tickets_texte_statut)"] />]</td>
+			<td class='titre'><a href="[(#ID_TICKET|generer_url_entite{ticket})]">[(#TITRE|supprimer_numero)]</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_auteur}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='action'><button type="submit" class="button link delete" name="supprimer_lien[ticket-#ID_TICKET-#OBJET-#ID_OBJET]" value="X"><:tickets:info_retirer_ticket:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+		</tr>
+	</BOUCLE_liste_ticket>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}ticket-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:tickets:info_retirer_tickets:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_ticket>
+<div class="liste-objets liste-objets-lies tickets caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:tickets:info_ticket_aucun:>}) ]</strong>
+</div>
+<//B_liste_ticket>

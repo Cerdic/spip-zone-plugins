@@ -133,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commentaires' => 'commentaires',
 	'commenter_ticket' => 'Commenter ce ticket',
 	'creer_ticket' => 'Créer un ticket',
+	'creer_et_associer_un_ticket' => 'Créer et associer un ticket',
 
 	// D
 	'date_creation' => 'Créé le @date@',
@@ -170,6 +171,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_document_ajoute' => 'Ajouté :',
 	'info_liste_tickets' => 'Tickets',
 	'info_numero_ticket' => 'TICKET NUMÉRO :',
+	'info_retirer_ticket' => 'Retirer ce ticket',
+	'info_retirer_tickets' => 'Retirer tous les tickets',
 	'info_sans' => 'Non défini',
 	'info_sans_version' => 'Sans version',
 	'info_ticket_1' => '1 ticket',
@@ -183,6 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mots' => 'Lier des mots-clés au ticket',
 	'label_paginer_par' => 'Paginer par :',
 	'label_vue_liste_tickets' => 'Changer la vue de la liste :',
+	'lien_ajouter_ticket' => 'Ajouter ce ticket',
 	'lien_filtrer' => 'Filtrer les tickets',
 	'lien_identification' => '<a href="@url@" class="spip_in">Identifiez vous.</a>',
 	'lien_reponse_ticket' => 'Réponse au ticket',
@@ -256,6 +260,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_traites' => 'Tous les tickets traités',
 	'tickets_tries' => 'Tickets correspondant à vos critères',
 	'titre' => 'Tickets, suivi de bugs',
+	'titre_ajouter_un_ticket' => 'Ajouter un ticket',
 	'titre_identification' => 'Identification',
 	'titre_liste' => 'Liste des tickets',
 	'tous_tickets_en_redaction' => 'Tous les tickets en rédaction',

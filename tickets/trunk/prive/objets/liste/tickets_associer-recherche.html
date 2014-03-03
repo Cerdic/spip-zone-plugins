@@ -1,0 +1,41 @@
+<input type="text" class="text" name="recherche" value="[(#ENV*{recherche})]" />
+<input type="submit" class="submit" name="rechercheb" value="<:info_rechercher:>" />
+<input type="hidden" name="debutticketa" value='#ENV{debutticketa,#VAL{debutticketaticketa}|_request}' />
+#SET{recherche,#ENV*{recherche}}
+[(#GET{recherche}|non|et{#ENV*{rechercheb}})
+	#SET{recherche,'/./'}
+	<input type="hidden" name="rechercheb" value='x' />
+]
+<B_liste_ticket>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer tickets">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{tickets:info_ticket_1,tickets:info_ticket_nb}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:tickest:texte_ticket_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur' scope='col'><:auteur:></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_ticket(TICKETS){doublons 2}{recherche #GET{recherche}}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10} ticketa}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[<img src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"[ alt="(#STATUT|tickets_texte_statut)"] />]</td>
+			<td class='titre'><a href="[(#ID_TICKET|generer_url_entite{ticket})]">[(#TITRE|supprimer_numero)]</a></td>
+			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_auteur}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
+			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='action'><button class="button link" name="ajouter_lien[ticket-#ID_TICKET-#OBJET-#ID_OBJET]" value="+"><:tickets:lien_ajouter_ticket:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_ticket>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_ticket>[(#ENV*{recherche}|oui)
+<div class="liste-objets liste-objets-associer tickets caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:tickets:info_ticket_aucun:>}) ]</strong>
+</div>]
+<//B_liste_ticket>

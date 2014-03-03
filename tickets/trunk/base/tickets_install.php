@@ -28,6 +28,8 @@ function tickets_declarer_tables_objets_sql($tables){
 		'texte_retour' => 'tickets:icone_retour_ticket',
 		'texte_objet' => 'tickets:ticket',
 		'texte_objets' => 'tickets:tickets',
+		'texte_ajouter' => 'tickets:titre_ajouter_un_ticket',
+		'texte_creer_associer' => 'tickets:creer_et_associer_un_ticket',
 		'texte_modifier' => 'tickets:icone_modifier_ticket',
 		'texte_creer' => 'tickets:nouveau_ticket',
 		'icone_objet' => 'ticket',

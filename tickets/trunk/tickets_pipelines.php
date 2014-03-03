@@ -104,6 +104,27 @@ function tickets_affiche_milieu($flux){
 		$flux['data'] .= '<br class="nettoyeur" />';
 		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/inc_classement_accueil', array());
 	}
+
+	// si on est sur une page ou il faut inserer les tickets...
+	if ($en_cours = trouver_objet_exec($flux['args']['exec'])
+		AND $en_cours['edition']!==true // page visu
+		AND $type = $en_cours['type']
+		AND $id_table_objet = $en_cours['id_table_objet']
+		AND ($id = intval($flux['args'][$id_table_objet]))){
+		$texte = recuperer_fond(
+				'prive/objets/editer/liens',
+				array(
+					'table_source'=>'tickets',
+					'objet'=>$type,
+					'id_objet'=>$id,
+				)
+		);
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+
 	return $flux;
 }
 
