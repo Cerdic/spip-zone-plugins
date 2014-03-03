@@ -7,7 +7,6 @@
 
 
 <BOUCLE_recup(spip_orr_reservations_liens){objet=orr_ressource}{id_orr_reservation=#ENV{id_reservation}}>#SET{recup_ressource, #ID_OBJET}</BOUCLE_recup>
-env ID_RESS = #GET{recup_ressource}
 
 <BOUCLE_ressources(ORR_RESSOURCES){par orr_ressource_nom}>
 	[(#AUTORISER{creer,orr_reservation,#ID_ORR_RESSOURCE}|oui)
