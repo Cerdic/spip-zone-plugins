@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'suppression_absents' => 'Suppression des absents:',
     'suppression_article_efface' => 'Traitement des articles des auteurs effacés :',
     'supprimer_articles' =>'Supprimer les articles des auteurs effacés',
-    'supprimer_auteur' => 'suppression complète',
+    'supprimer_auteur' => 'suppression complète (y compris ceux à la poubelle)',
     'separateur' => 'Choix du caractère de séparation de champs',
     
 

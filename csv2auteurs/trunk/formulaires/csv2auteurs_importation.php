@@ -198,11 +198,12 @@ function formulaires_csv2auteurs_importation_traiter_dist(){
     // $admin_restreint_bdd
     // la cle de chaque tableau est le login
     $poubelle_bdd=$visiteur_bdd=$redacteur_bdd=$admin_restreint_bdd=array();
-    $poubelle_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="5poubelle"','(login!="")'));    
+/*    $poubelle_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="5poubelle"','(login!="")'));
     foreach ($poubelle_bdd_req as $key) {
         $poubelle_bdd[$key['login']]=$key;
     }    
-    $visiteur_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="6forum"','(login!="")'));    
+*/
+    $visiteur_bdd_req        = sql_allfetsel('*', 'spip_auteurs',array('statut="6forum"','(login!="")'));
     foreach ($visiteur_bdd_req as $key) {
         $visiteur_bdd[$key['login']]=$key;
     }
@@ -327,10 +328,30 @@ var_dump($tableau_maj_auteurs_id);
         }
     }    
     
-    if ($abs_poubelle == 'supprimer') {     
-        $Tid_poubelle = csv2auteurs_diff_absents($poubelle_bdd);
-        csv2auteurs_supprimer_auteurs($Tid_poubelle, '5poubelle', $traitement_article_efface,$id_rubrique_parent_archive);
-    }
+    // si l'option auteurs sans articles = suppression complète 
+    // alors on supprime aussi tous les auteurs à la poubelle (sans articles)
+    if ($abs_poubelle == 'supprimer') {
+		// récupérer les auteurs à la poubelle avec articles
+		$not_in = sql_allfetsel('auteurs.id_auteur', 
+			array('spip_auteurs_liens AS liens','spip_auteurs AS auteurs'), 
+			array('liens.id_auteur = auteurs.id_auteur', 'liens.objet="article"', 'auteurs.statut="5poubelle"'),
+			array('liens.id_auteur'));		
+		$Tnot_in = 	array();
+		foreach ($not_in as $index => $Tid_auteur) 
+			$Tnot_in[] = $Tid_auteur['id_auteur'];
+		$not_in = sql_in('id_auteur', $Tnot_in, 'NOT');
+		// récupérer les auteurs à la poubelle sans articles
+		$Tabs_poubelle = sql_allfetsel('id_auteur', 'spip_auteurs',array('statut="5poubelle"', $not_in));
+		$Ta_suppr = array();
+		foreach ($Tabs_poubelle as $index => $Tid_auteur) 
+			$Ta_suppr[] = $Tid_auteur['id_auteur'];
+		// effacer définitevement ces auteurs
+		$in = sql_in('id_auteur', $Ta_suppr);
+		sql_delete('spip_auteurs', $in);
+	}		
+//        $Tid_poubelle = csv2auteurs_diff_absents($poubelle_bdd);
+//        csv2auteurs_supprimer_auteurs($Tid_poubelle, '5poubelle', $traitement_article_efface,$id_rubrique_parent_archive);
+
     if ($abs_visiteurs) {
         $Tid_visiteurs = csv2auteurs_diff_absents($visiteur_bdd, $tableau_csv_visiteurs);
         csv2auteurs_supprimer_auteurs($Tid_visiteurs, '6forum', $traitement_article_efface,$id_rubrique_parent_archive);
@@ -438,7 +459,7 @@ function csv2auteurs_ajout_utilisateur($login,$Tauteur_csv,$Tnom_champs_bdd,$Tco
  * $param $id_rubrique_archive
  * 
  */
-function csv2auteurs_supprimer_auteurs($Tid, $statut,$traitement="supprimer",$id_rubrique_archive=1) {
+function csv2auteurs_supprimer_auteurs($Tid, $statut,$traitement="supprimer_articles",$id_rubrique_archive=1) {
     // passage à la poubelle
     $objet = 'auteur';
     $set = array('statut'=>'5poubelle');
