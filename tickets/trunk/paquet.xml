@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs/logo-bugs.png"
-	schema="1.6.0"
+	schema="1.7.0"
 	documentation="http://contrib.spip.net/?article3959"
 >
 
@@ -21,6 +21,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="tickets_liste_tracker" action="" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/tickets_install.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tickets_install.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tickets_install.php" />
 	<pipeline nom="affiche_gauche" inclure="tickets_pipelines.php" />

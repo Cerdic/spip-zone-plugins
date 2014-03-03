@@ -58,6 +58,9 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.6.0'] = array(
 		array('ticket_install_config_notifications')
 	);
+	$maj['1.7.0'] = array(
+		array('maj_tables',array('spip_tickets_liens'))
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -65,6 +68,7 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 
 function tickets_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_tickets");
+	sql_drop_table("spip_tickets_liens");
 	effacer_meta($nom_meta_base_version);
 }
 

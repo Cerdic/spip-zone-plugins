@@ -98,4 +98,19 @@ function tickets_declarer_tables_objets_sql($tables){
 	return $tables;
 }
 
+function tickets_declarer_tables_auxiliaires($tables) {
+	$tables['spip_tickets_liens'] = array(
+		'field' => array(
+			"id_ticket"	=> "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"	=> "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"	=> "VARCHAR (25) DEFAULT '' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"	=> "id_ticket,id_objet,objet",
+			"KEY id_ticket"	=> "id_ticket"
+		)
+	);
+	return $tables;
+}
+
 ?>
