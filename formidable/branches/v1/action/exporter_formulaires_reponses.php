@@ -76,7 +76,7 @@ function action_exporter_formulaires_reponses_dist($arg=null) {
 		}
 		
 		if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)){
-			echo $exporter_csv('reponses-formulaire-'.$formulaire['identifiant'], $reponses_completes);
+			$exporter_csv('reponses-formulaire-'.$formulaire['identifiant'], $reponses_completes);
 			exit();
 		}
 	}
