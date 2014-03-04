@@ -65,6 +65,18 @@
 </div>]
 [<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 
+<B_objetslies>
+<div class="liste">
+	<h3><:tickets:titre_objets_lies_ticket:></h3>
+<BOUCLE_objetslies(spip_tickets_liens){id_ticket}{fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_ticket]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_ticket}})]
+	<INCLURE{fond=prive/objets/liste/objets_lies_ticket,objet,id_ticket,ajax,env} />
+</BOUCLE_objetslies>
+</div>
+</B_objetslies>
+
 <div class="nettoyeur"></div>
 
 [(#AUTORISER{modifier,ticket,#ID_TICKET})

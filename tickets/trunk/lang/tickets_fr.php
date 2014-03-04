@@ -264,6 +264,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ajouter_un_ticket' => 'Ajouter un ticket',
 	'titre_identification' => 'Identification',
 	'titre_liste' => 'Liste des tickets',
+	'titre_objets_lies_ticket' => 'Liés à ce ticket :',
 	'tous_tickets_en_redaction' => 'Tous les tickets en rédaction',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',
 	'tous_vos_tickets' => 'Tous vos tickets',
