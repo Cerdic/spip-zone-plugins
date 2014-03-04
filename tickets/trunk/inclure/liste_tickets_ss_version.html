@@ -195,47 +195,37 @@
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={severite}|oui)
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_importance_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_importance_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-			</th>
-			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+			</th>[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|non)[(#TRI{projet,<:tickets:champ_projet_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={projet}|oui)
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_projet_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_projet_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-				</th>
-			]
-			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				</th>][(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|non)[(#TRI{composant,<:tickets:champ_composant_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={composant}|oui)
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_composant_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_composant_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-				</th>
-			]
-			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				</th>][(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|non)[(#TRI{version,<:tickets:champ_version_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={version}|oui)
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_version_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_version_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-				</th>
-			]
-			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				</th>][(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 				<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|non)[(#TRI{jalon,<:tickets:champ_jalon_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_jalon_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-				</th>
-			]
-			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+				</th>][(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|!={date}|et{#ENV{tri#ENV{tri_nom,_detaillee}}|oui}|oui)[(#TRI{date,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|ou{#ENV{tri#ENV{tri_nom,_detaillee}}|non}|oui)
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|oui)[(#TRI{<,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{>,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-			</th>]
-			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+			</th>][(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]><abbr title="<:tickets:champ_maj_long:>">
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|non)[(#TRI{maj,<:tickets:champ_maj_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={maj}|oui)
@@ -249,28 +239,20 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] #STATUT">
 			<td><a href="[(#SELF|parametre_url{statut,#STATUT})]">[(#STATUT|tickets_icone_statut{true})]</a></td>
 			<td><a href="[(#URL_TICKET)]">##ID_TICKET</a></td>
+			<td><a href="[(#URL_TICKET)]">#TITRE</a><br />
+				[(#ENV{cacher_texte}|!={oui}|oui)[(#TEXTE|couper{#ENV{couper}})]]</td>
+			[(#REM) Si le tracker est explicite, on ne l'affiche pas 
+			][(#ENV{tracker}|non)<td>[<a href="[(#SELF|parametre_url{tracker,#TRACKER**})]">(#TRACKER|tickets_texte_tracker)</a>]</td>]
 			<td>
-				<a href="[(#URL_TICKET)]">#TITRE</a><br />
-				[(#ENV{cacher_texte}|!={oui}|oui)[(#TEXTE|couper{#ENV{couper}})]]
-			</td>
-			[(#REM) Si le tracker est explicite, on ne l'affiche pas ]
-			[(#ENV{tracker}|non)<td>[<a href="[(#SELF|parametre_url{tracker,#TRACKER**})]">(#TRACKER|tickets_texte_tracker)</a>]</td>]
-			<td>
-				[<a href="[(#SELF|parametre_url{severite,#SEVERITE**})]">(#SEVERITE|tickets_icone_severite{true})
-				[&nbsp;(#SEVERITE|tickets_texte_severite)]</a>]
-			</td>
-			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<td class="#EDIT{projet}"><a href="[(#SELF|parametre_url{projet,#PROJET**})]">[(#PROJET|sinon{-})]</a></td>
-			]
+				[<a href="[(#SELF|parametre_url{severite,#SEVERITE**})]">(#SEVERITE|tickets_icone_severite{true})[&nbsp;(#SEVERITE|tickets_texte_severite)]</a>]
+			</td>[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+			<td class="#EDIT{projet}"><a href="[(#SELF|parametre_url{projet,#PROJET**})]">[(#PROJET|sinon{-})]</a></td>]
 			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<td class="#EDIT{composant}"><a href="[(#SELF|parametre_url{composant,#COMPOSANT**})]">[(#COMPOSANT|sinon{-})]</a></td>
-			]
-			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<td class="#EDIT{version}"><a href="[(#SELF|parametre_url{version,#VERSION**})]">[(#VERSION|sinon{-})]</a></td>
-			]
-			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
-				<td class="#EDIT{jalon}"><a href="[(#SELF|parametre_url{jalon,#JALON**})]">[(#JALON|sinon{-})]</a></td>
-			]
+			<td class="#EDIT{composant}"><a href="[(#SELF|parametre_url{composant,#COMPOSANT**})]">[(#COMPOSANT|sinon{-})]</a></td>
+			][(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+			<td class="#EDIT{version}"><a href="[(#SELF|parametre_url{version,#VERSION**})]">[(#VERSION|sinon{-})]</a></td>
+			][(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+			<td class="#EDIT{jalon}"><a href="[(#SELF|parametre_url{jalon,#JALON**})]">[(#JALON|sinon{-})]</a></td>]
 			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<td>[(#DATE|affdate)]</td>]
 			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
