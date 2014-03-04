@@ -22,12 +22,14 @@ include_spip('inc/filtres'); # Pour extraire_muti dans editer_ticket.html
  * 		Identifiant numérique du ticket ou new si nouveau
  * @param string $retour[optional]
  * 		URL de retour
+ * @param string $associer_objet[optional]
+ * 		Objet à lier au ticket (ex: "article|12")
  * @param string $config_fonc[optional]
  * 		Fonction de configuration du formulaire
  * @param array $row[optional]
  * @return string
  */
-function formulaires_editer_ticket_identifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_ticket_identifier($id_ticket='new', $retour='', $associer_objet='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	return serialize(array(intval($id_ticket)));
 }
 
@@ -38,15 +40,16 @@ function formulaires_editer_ticket_identifier($id_ticket='new', $retour='', $con
  * 		Identifiant numérique du ticket ou new si nouveau
  * @param string $retour[optional]
  * 		URL de retour
+ * @param string $associer_objet[optional]
+ * 		Objet à lier au ticket (ex: "article|12")
  * @param string $config_fonc[optional]
  * 		Fonction de configuration du formulaire
  * @param array $row[optional]
  * @return array $valeurs
  * 		Un tableau des valeurs chargées au formulaire
  */
-function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associer_objet='', $config_fonc='tickets_edit_config', $row=array(), $hidden='', $v1, $v2, $v3, $v4, $associer_objet=''){
 	// mettre une valeur new pour formulaires_editer_objet_charger()
-	
 	if (!intval($id_ticket)) $id_ticket='oui'; // oui pour le traitement de l'action (new, c'est pas suffisant)
 
 	if (!autoriser('ecrire', 'ticket', $id_ticket))
@@ -89,13 +92,15 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
  * 		Identifiant numérique du ticket ou new si nouveau
  * @param string $retour[optional]
  * 		URL de retour
+ * @param string $associer_objet[optional]
+ * 		Objet à lier au ticket (ex: "article|12")
  * @param string $config_fonc[optional]
  * 		Fonction de configuration du formulaire
  * @param array $row[optional]
  * @return array $erreurs
  * 		Un tableau des erreurs de validation
  */
-function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $associer_objet='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('ticket',$id_ticket,array('titre','texte'));
 	
@@ -189,7 +194,7 @@ function tickets_edit_config(){
  * @return array $message
  * 		Un tableau des éléments de retour du formulaire CVT
  */
-function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $associer_objet='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 	
 	/* Enregistrement des mots-clés */
@@ -213,7 +218,24 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_
 			else // sinon on utilise la redirection donnee.
 				$message['redirect'] = parametre_url($retour, 'id_ticket', $res['id_ticket']);
 		}
+		if ($associer_objet){
+			if (intval($associer_objet)){
+				// compat avec l'appel de la forme ajouter_id_article
+				$objet = 'article';
+				$id_objet = intval($associer_objet);
+			}
+			else {
+				list($objet,$id_objet) = explode('|',$associer_objet);
+			}
+			if ($objet AND $id_objet AND autoriser('modifier',$objet,$id_objet)){
+				include_spip('action/editer_liens');
+				objet_associer(array('ticket'=>$res['id_ticket']), array($objet=>$id_objet));
+				if (isset($res['redirect']))
+					$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $res['id_ticket'], '&');
+			}
+		}
 	}
+
 	return $message;
 }
 

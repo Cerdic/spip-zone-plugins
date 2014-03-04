@@ -1,7 +1,7 @@
 [(#ID_TICKET|intval|oui)
 	[(#AUTORISER{modifier,ticket,#ID_TICKET}|sinon_interdire_acces)]
 ][(#ID_TICKET|intval|non)
-	[(#AUTORISER{creer,ticket}|sinon_interdire_acces)]
+	[(#AUTORISER{creer,ticket,#ID_TICKET,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]
 ]
 #SET{retour,#ENV{redirect}|sinon{#ID_TICKET|intval|?{#URL_ECRIRE{ticket,id_ticket=#ID_TICKET},#URL_ECRIRE{tickets}}}}
 
@@ -19,7 +19,7 @@
 		#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 		<div class="ajax">
 	]
-	#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#GET{redirect}}
+	#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#GET{redirect},#ENV{associer_objet}}
 	[(#ENV{retourajax,''}|oui)
 		</div>
 		<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#extra');/*\]\]>*/</script>
