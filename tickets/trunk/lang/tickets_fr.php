@@ -132,8 +132,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commentaire_aucun' => 'Aucun commentaire',
 	'commentaires' => 'commentaires',
 	'commenter_ticket' => 'Commenter ce ticket',
-	'creer_ticket' => 'Créer un ticket',
 	'creer_et_associer_un_ticket' => 'Créer et associer un ticket',
+	'creer_ticket' => 'Créer un ticket',
 
 	// D
 	'date_creation' => 'Créé le @date@',
