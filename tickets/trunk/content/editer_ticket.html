@@ -8,8 +8,8 @@
 			<a class="i_edit" href="[(#URL_PAGE{ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_retour_ticket:></a>]
 		<h1 class="titre">#GET{texte}</h1>
 	</div>
-	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}})
-		#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#ENV{id_ticket}|?{#URL_TICKET{#ENV{id_ticket}},#URL_PAGE{ticket}}}
+	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui},'','',#ARRAY{associer_objet,#ENV{associer_objet}}})
+		#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#ENV{id_ticket}|?{#URL_TICKET{#ENV{id_ticket}},#URL_PAGE{ticket}},#ENV{associer_objet}}
 	]
 	[(#AUTORISER{ecrire,ticket,#ENV{id_ticket,oui}}|non)
 		[(#SESSION{id_auteur}|non)
