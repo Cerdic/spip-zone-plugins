@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// 2
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
+
 	'liens_internes:nom' =>  'Correction des liens internes',
 	'liens_internes:description' => 'A chaque modification d’un contenu du site, cet outil corrige automatiquement en format abrégé SPIP les liens internes insérés par copier-coller de l’URL.
 _ Exemple : <code>[texte->@_DOMAINE@spip.php?article1]</code> inséré deviendra ici : <code>[texte->1]</code>.

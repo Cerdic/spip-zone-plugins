@@ -52,8 +52,9 @@ function remplace_points_de_suite($texte, $id, $racc, $connect=NULL) {
 	// si les points de suite sont cliquables
 	if ($id && _INTRODUCTION_LIEN) {
 		if(defined('_SPIP19300')) {
+			if(!$connect) $connect = true;
 			$url = test_espace_prive()
-				?generer_url_entite_absolue($id, $racc, '', '', !$connect?true:$connect)
+				?generer_url_entite_absolue($id, $racc, '', '', $connect)
 				:generer_url_entite($id, $racc, '', '', $connect); //"$racc$id";
 		} else $url= $racc.$id;
 		$intro_suite = strncmp($intro_suite, '<br />', 6)===0
@@ -67,7 +68,7 @@ function remplace_points_de_suite($texte, $id, $racc, $connect=NULL) {
 // lgr>0 : aucun paramètre, donc longueur par défaut
 // lgr<0 : paramètre spécifié #INTRODUCTION{longueur}
 // lgr=0 : pas possible
-// TODO : $connect est pour SPIP>=2.0
+// $connect (bases distantes) est pour SPIP>=2.0
 function cs_introduction($texte, $descriptif, $lgr, $id, $racc, $connect) {
 	defined('_INTRODUCTION_LGR') || define('_INTRODUCTION_LGR', 100);
 	defined('_INTRODUCTION_DESCRIPTIF_ENTIER') || define('_INTRODUCTION_DESCRIPTIF_ENTIER', 0);
