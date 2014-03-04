@@ -48,7 +48,7 @@ function formulaires_editer_ticket_identifier($id_ticket='new', $retour='', $ass
  * @return array $valeurs
  * 		Un tableau des valeurs chargées au formulaire
  */
-function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associer_objet='', $config_fonc='tickets_edit_config', $row=array(), $hidden='', $v1, $v2, $v3, $v4, $associer_objet=''){
+function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associer_objet='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 	// mettre une valeur new pour formulaires_editer_objet_charger()
 	if (!intval($id_ticket)) $id_ticket='oui'; // oui pour le traitement de l'action (new, c'est pas suffisant)
 
