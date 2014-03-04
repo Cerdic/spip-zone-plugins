@@ -1,0 +1,14 @@
+#SET{picto,#ENV{objet}|objet_icone{16}}
+<B_objets>
+<ul class="objets-lies [(#ENV{objet}|objet_info{table_objet})]">
+	<BOUCLE_objets(spip_tickets_liens){id_ticket?}{objet?}{id_objet?}{!par id_objet}>
+	<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]"
+	       title="[(#ENV{objet}|objet_info{texte_objet}|_T)] <:info_numero_abbreviation|attribut_html:> #ID_OBJET">
+		[(#GET{picto}|inserer_attribut{class, spip_logos})]
+		[(#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{<:info_sans_titre:>})]</a>
+	</li>
+	</BOUCLE_objets>
+</ul>
+</B_objets>[
+<span class="objets-lies [(#ENV{objet}|objet_info{table_objet})]">(#ENV*{sinon,''})</span>
+]<//B_objets>

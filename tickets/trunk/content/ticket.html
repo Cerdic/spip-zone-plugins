@@ -40,22 +40,18 @@
 	[<div class="#EDIT{texte} texte">(#TEXTE|propre)</div>]
 	[<div class='exemple'><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 	
+	<B_objetslies>
+		<h3><:tickets:titre_objets_lies_ticket:></h3>
+		<ul>
+		<BOUCLE_objetslies(spip_tickets_liens){id_ticket}{fusion objet}{par objet}>
+		<li><INCLURE{fond=inclure/objets_lies_ticket,objet,id_ticket,ajax,env} /></li>
+		</BOUCLE_objetslies>
+		</ul>
+	</B_objetslies>
+
 	[(#REM) - Extensions, Extras 2 entre autre]
 	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 
-	
-<B_objetslies>
-<div class="liste">
-	<h3><:tickets:titre_objets_lies_ticket:></h3>
-<BOUCLE_objetslies(spip_tickets_liens){id_ticket=#ID_TICKET}{fusion objet}{par objet}>
-	#SET{table,#OBJET|table_objet}
-	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_ticket]})]
-	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_ticket}})]
-	<INCLURE{fond=prive/objets/liste/objets_lies_ticket,objet,id_ticket,ajax,env} />
-</BOUCLE_objetslies>
-</div>
-</B_objetslies>
-	
 	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET,env,ajax=documents}>
 	[(#AUTORISER{joindredocument,ticket,#ID_TICKET}|oui)
 	<br class="nettoyeur" />
