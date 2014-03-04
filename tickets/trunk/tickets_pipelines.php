@@ -106,9 +106,12 @@ function tickets_affiche_milieu($flux){
 	}
 
 	// si on est sur une page ou il faut inserer les tickets...
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
 	if ($en_cours = trouver_objet_exec($flux['args']['exec'])
 		AND $en_cours['edition']!==true // page visu
 		AND $type = $en_cours['type']
+		AND ($tables_liees=lire_config('tickets/general/tables_liees') AND in_array(table_objet($type),$tables_liees))
 		AND $id_table_objet = $en_cours['id_table_objet']
 		AND ($id = intval($flux['args'][$id_table_objet]))){
 		$texte = recuperer_fond(
