@@ -575,4 +575,26 @@ function autoriser_ticketedit_menu_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('ecrire','ticket');
 }
 
+/**
+ * Autorisation d'associer des tickets à un objet
+ *
+ * A priori, on n'interdit pas d'associer des tickets à d'autres tickets
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
+function autoriser_associertickets_dist($faire,$type,$id,$qui,$opt){
+	$table = table_objet($type);
+
+	if(!function_exists('lire_config'))
+		include_spip('inc/config');
+	if($tables_liees=lire_config('tickets/general/tables_liees') AND in_array($table,$tables_liees))
+		return autoriser('modifier',$type,$id,$qui);
+
+	return false;
+}
 ?>

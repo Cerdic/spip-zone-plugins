@@ -72,6 +72,11 @@
 						label=<:tickets:cfg_lbl_lier_mots:>,
 						label_case=<:tickets:cfg_lbl_case_lier_mots:>,
 						explication=#GET{explication}})]
+						
+					<li class="editer editer_tickets_associer">
+						<label><:tickets:info_tickets_cles_association:></label>
+						<INCLURE{fond=formulaires/inc-choisir-tables-liees,selected=#ENV*{tables_liees},name=tables_liees} />
+					</li>
 				</ul>
 				</fieldset>
 			</li>

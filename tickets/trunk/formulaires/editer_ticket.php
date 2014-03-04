@@ -227,11 +227,13 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $associe
 			else {
 				list($objet,$id_objet) = explode('|',$associer_objet);
 			}
-			if ($objet AND $id_objet AND autoriser('modifier',$objet,$id_objet)){
+			if ($objet AND $id_objet AND autoriser('associertickets',$objet,$id_objet)){
 				include_spip('action/editer_liens');
 				objet_associer(array('ticket'=>$res['id_ticket']), array($objet=>$id_objet));
 				if (isset($res['redirect']))
 					$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $res['id_ticket'], '&');
+			} else {
+				spip_log("associer le ticket ".$res['id_ticket']." avec $associer_objet refusé",'test.'._LOG_ERREUR);
 			}
 		}
 	}
