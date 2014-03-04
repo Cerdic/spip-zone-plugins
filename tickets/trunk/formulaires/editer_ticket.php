@@ -52,7 +52,7 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associ
 	// mettre une valeur new pour formulaires_editer_objet_charger()
 	if (!intval($id_ticket)) $id_ticket='oui'; // oui pour le traitement de l'action (new, c'est pas suffisant)
 
-	if (!autoriser('ecrire', 'ticket', $id_ticket))
+	if (!autoriser('ecrire', 'ticket', $id_ticket, '', array('associer_objet'=>$associer_objet)))
 		$valeurs['editable'] = false;
 	else{
 		if(is_numeric($id_ticket) && !autoriser('modifier','ticket',$id_ticket))

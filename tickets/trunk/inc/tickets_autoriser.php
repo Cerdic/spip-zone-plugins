@@ -98,6 +98,20 @@ function definir_notifications_tickets(){
  * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
+	if ($associer_objet=$opt['associer_objet']) {
+		if (intval($associer_objet)){
+			// compat avec l'appel de la forme ajouter_id_article
+			$objet = 'article';
+			$id_objet = intval($associer_objet);
+		}
+		else {
+			list($objet,$id_objet) = explode('|',$associer_objet);
+		}
+		if (!autoriser('associertickets', $objet, $id_objet, $qui)) {
+			return false;
+		}
+	}
+
 	if(($qui['webmestre'] == 'oui') && $qui['statut'] == '0minirezo')
 		return true;
 	
