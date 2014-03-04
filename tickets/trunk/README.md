@@ -18,5 +18,4 @@ Quelques idées d'évolution du plugin Tickets
 [ ] supprimer la redondance : le statut ou l'assignation du ticket peuvent déjà être modifiés par les crayons, ou dans le formulaire d'édition du ticket - on peut les retirer du formulaire de forum.
 [ ] lier les plugins tickets et agenda pour permettre de créer facilement des dates limites, pour les tickets, et les exporter dans un agenda (CalDAV ?), et même éventuellement déclencher des notifications
 [ ] afficher, au lieu du fil de commentaires, un fil d'activité, mélangeant commentaires et révisions (champs et mots-clés associés ou supprimés) - en passant, on pourrait mettre le texte du ticket dans le flux, come premier commentaire.
-[ ] permettre de lier un ticket à un autre objet SPIP. Par exemple, lier à un article, et dans la page de l'article, afficher la liste de tickets associés.
 [ ] crayon d'assignation du ticket : afficher la trombinette si gravatar est activé dans le contrôleur -> Non, en tout cas, pas tant que le contrôleur sera un <select> (pas d'images dans les select)
