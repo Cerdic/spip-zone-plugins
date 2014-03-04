@@ -34,7 +34,7 @@ function exec_activites() {
 /// AFFICHAGES_LATERAUX : STATS : places et participations pour la periode en cours
 	echo association_tablinfos_stats('participations_par_personne_par_activite', 'activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), $critere_periode);
 /// AFFICHAGES_LATERAUX : TOTAUX : montants des participations pour la periode
-	echo association_tablinfos_montants('activites', sql_getfetsel('SUM(prix_unitaire) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
+	echo association_tablinfos_montants('activites', sql_getfetsel('SUM(prix_unitaire*quantite) AS somme_recettes', 'spip_asso_activites AS a INNER JOIN spip_evenements AS e ON a.id_evenement=e.id_evenement', $critere_periode), 0);
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	if ( test_plugin_actif('SIMPLECAL') ) { // gestion des evenements avec Simple Calendrier
 		echo association_navigation_raccourcis(array(
