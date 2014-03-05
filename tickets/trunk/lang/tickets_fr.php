@@ -177,9 +177,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sans_version' => 'Sans version',
 	'info_ticket_1' => '1 ticket',
 	'info_ticket_aucun' => 'Aucun ticket',
-	'info_tickets_cles_association' => 'Les tickets peuvent être associés :',
 	'info_ticket_nb' => '@nb@ tickets',
 	'info_tickets' => 'Tickets',
+	'info_tickets_cles_association' => 'Les tickets peuvent être associés :',
 	'info_tickets_ouvert' => 'ouverts et discutés',
 	'info_tickets_redac' => 'en cours de rédaction',
 
