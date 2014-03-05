@@ -40,9 +40,9 @@ table.asso_infos,
 table.asso_stats,
 table.asso_tablo
 {
-	width: 100%; /* HTML: TABLE width=100% */
-	border: 1px solid #aaa; /* HTML: TABLE border=1 bordercolor=#aaaaaa */
-	border-collapse: collapse; /* HTML: TABLE cellspacing=0 */
+	width: 100%; /* HTML:TABLE width=100% */
+	border: 1px solid #aaa; /* HTML:TABLE border=1 bordercolor=#aaaaaa */
+	border-collapse: collapse; /* HTML:TABLE cellspacing=0 */
 	font-family: Arial, Sans, sans-serif;
 	font-size: 8pt;
 	margin-bottom: .4em; /* ajout pour ne pas trop coller ce qui suit */
@@ -51,24 +51,24 @@ table.asso_tablo thead tr,
 table.asso_tablo tr.head,
 table.asso_tablo tr.row_first
 {
-	background-color: #dbe1c5; /* HTML: TR bgcolor=#dbe1c5 */
+	background-color: #dbe1c5; /* HTML:TR bgcolor=#dbe1c5 */
 }
 table.asso_tablo tbody tr,
 table.asso_tablo tr.row_odd,
 table.asso_tablo tr.row_even
 {
-	background-color: #eee; /* HTML: TR bgcolor=#eeeeee */
+	background-color: #eee; /* HTML:TR bgcolor=#eeeeee */
 }
 table.asso_tablo tfoot tr
 table.asso_tablo tr.foot,
 table.asso_tablo tr.row_last
 {
-	background-color: #eee; /* HTML: TR bgcolor=#eeeeee */
+	background-color: #eee; /* HTML:TR bgcolor=#eeeeee */
 }
 table.asso_tablo th, table.asso_tablo td
 { /* cas par defaut des cellules */
-	text-align: left; /* HTML: TD align=left */
-	padding: 2px; /* HTML: TABLE cellpadding=2 */
+	text-align: left; /* HTML:TD align=left */
+	padding: 2px; /* HTML:TABLE cellpadding=2 */
 /*	font-size: 11px; /* HTML: class=arial11 ? */
 }
 table.asso_tablo tbody td,
@@ -145,7 +145,7 @@ td.entier,
 td.integer, td.date,
 th.integer, th.date
 {
-	text-align: right; /* HTML: TD align=right */
+	text-align: right; /* HTML:TD align=right */
 }
 td.flottant, td.taux, td.pourcentage,
 td.float, td.decimal, td.rate, td.percent,
@@ -157,18 +157,18 @@ td.horaire,  td.horodatage,
 td.time, td.datetime,
 th.time, th.datetime
 {
-	text-align: "h"; /* HTML: TD align=char char="h" */
+	text-align: "h"; /* HTML:TD align=char char="h" */
 	/* On pourrait utiliser ":" mais je ne suis pas certain du resultat si on a des HH:MM:SS... */
 } /* @: http://stackoverflow.com/q/1363239 */
 table.asso_filtres td.formulaire,
 table.asso_filtres td form
 {
-	text-align: right; !important /* HTML: TD align=right */
+	text-align: right; !important /* HTML:TD align=right */
 }
 table.asso_filtres td.pagination,
 table.asso_filtres td .pagination
 {
-	text-align: left; !important /* HTML: TD align=right */
+	text-align: left; !important /* HTML:TD align=right */
 }
 
 td.taux:after, td.pourcentage:after, td.pourcent:after,
@@ -185,16 +185,22 @@ td.action
 /** Formulaires
  ******************************/
 
-input.text, input.password,
-input.url, input.email
+input.text,
+input.password,
+input.url,
+input.email
 { /* adapte de dans prive/minipress.css : pour cibler les input par type on leur rajourte des class="TYPE" car IE ne connait pas input[type="TYPE"] qu'on aurait pu utiliser. */
 	width: 50%; /* moitie de la ligne pour donner effet colonne sans utiliser de tableau (dans chaque LI/P/DIV il y a le input/select/textareau et le label) */
 	display: block; /* pour s'assurer de la rupture de lignes autour s'il y a un span.message_erreur et/ou em.explication ou autre */
 	/*behavior: url(win_width.htc); /* http://reference.sitepoint.com/css/behavior */
 }
+input.submit, input[type="submit"] {
+	font-weight: bold;
+	margin-top: 3px;
+}
 label
 {
-	font-weight: bold; /* HTML: B | STRONG */
+	font-weight: bold; /* HTML:B | HTML:STRONG */
 }
 .reponse_formulaire,
 .erreur_message
@@ -281,18 +287,3 @@ span.erreur {
 	font-size: 11px;
 }
 
-.fondo {
-	margin-top: 0px;
-	background: #3874b0;
-	border: 1px outset #edf3fe;
-	float: none;
-	color: #fff;
-	font-size: 11px;
-	font-weight: bold;
-}
-
-input[type="submit"] {
-	font-weight: bold;
-	margin-top: 3px;
-}
-.fondf { margin-top: 0px; background-color: #fff; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; }
