@@ -1,6 +1,8 @@
 /* Pages publiques des tickets */
 .ticket .cartouche{overflow:auto;}
-.ticket .cartouche a {float:right; margin-top:3px;}
+.ticket .cartouche a.i_edit,
+.ticket .cartouche a.i_new,
+.ticket .cartouche a.i_rss {float:right; margin-top:3px;}
 
 #contenu .ticket h3 {margin:2em 0 .3em;}
 .ticket .infos {float:right; max-width:200px; margin:2em 0 1em 1em; padding: 0.5em;  background:#fafafa; border:1px solid #eee;
