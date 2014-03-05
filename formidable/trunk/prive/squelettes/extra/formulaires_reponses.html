@@ -1,4 +1,4 @@
-<BOUCLE_formulaire(FORMULAIRES){id_formulaire}>
+<BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}>
 [(#SET{ouvre_boite,[(#AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRE}|ou{#AUTORISER{modifier, formulaires_reponse, #ID_FORMULAIRE}})]})]
 [(#GET{ouvre_boite}|oui)[(#BOITE_OUVRIR{<:formidable:titre_cadre_raccourcis:>,'info'})]]
 
