@@ -1,6 +1,6 @@
 <? 
-	function formulaires_share_charger_dist($titre,$nom_site,$url_site,$texte,$id_parent,$date,$auteur,$ps,$lang){
-		$valeurs = array('titre'=>$titre,'nom_site'=>$nom_site,'url_site'=>$url_site,'texte'=>$texte,'id_parent'=>'1',$date=>'',$auteur=>'',$ps=>'',$lang=>'');
+	function formulaires_share_charger_dist($titre,$nom_site,$url_site,$texte,$id_parent,$date,$auteur,$ps){
+		$valeurs = array('titre'=>$titre,'nom_site'=>$nom_site,'url_site'=>$url_site,'texte'=>$texte,'id_parent'=>'1',$date=>'',$auteur=>'',$ps=>'');
 		
 		return $valeurs;
 	}

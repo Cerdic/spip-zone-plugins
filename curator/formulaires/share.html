@@ -37,11 +37,12 @@
 		
 		<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{id_parent}</em></label>
 			<SELECT NAME="id_parent">
-			        <BOUCLE_listederoulante(RUBRIQUES) {id_parent} {par titre}>
-			        <OPTION VALUE="#ID_RUBRIQUE">#TITRE</OPTION>
-			        	<BOUCLE_recursive(BOUCLE_listederoulante)>
-			            </BOUCLE_recursive>
-			         </BOUCLE_listederoulante>
+				<BOUCLE_listederoulante(RUBRIQUES) {id_parent}{tout} {par titre}>
+				[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+				<OPTION VALUE="#ID_RUBRIQUE">#TITRE</OPTION>]
+					<BOUCLE_recursive(BOUCLE_listederoulante)>
+				    </BOUCLE_recursive>
+				 </BOUCLE_listederoulante>
 			</SELECT>
 		<br />
 
