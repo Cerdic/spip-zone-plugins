@@ -14,6 +14,7 @@ table.tickets { margin:0 0 .5em 0;}
 .ticket dd {margin: 0 0 0 90px; padding: 0 .2em .2em 0;}
 .ticket dd .spip_logos {height: 1em;width: 1em;float: none;margin: 0 0 0.5em 0;vertical-align:middle}
 
+.ticket .liste {float: left;}
 .ticket .objets-lies .spip_logos {height: 1em;width: 1em;float: none;margin: 0 0 0.5em 0;vertical-align:middle}
 
 .page_ticket .comments-list .comment-meta .item,

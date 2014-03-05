@@ -41,12 +41,14 @@
 	[<div class='exemple'><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 	
 	<B_objetslies>
+	<div class="liste">
 		<h3><:tickets:titre_objets_lies_ticket:></h3>
 		<ul>
 		<BOUCLE_objetslies(spip_tickets_liens){id_ticket}{fusion objet}{par objet}>
 		<li><INCLURE{fond=inclure/objets_lies_ticket,objet,id_ticket,ajax,env} /></li>
 		</BOUCLE_objetslies>
 		</ul>
+	</div>
 	</B_objetslies>
 
 	[(#REM) - Extensions, Extras 2 entre autre]
