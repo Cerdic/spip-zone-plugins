@@ -18,7 +18,7 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_tables',array('spip_tickets'))
+		array('maj_tables',array('spip_tickets','spip_tickets_liens'))
 	);
 	
 	$maj['0.2'] = array('maj_tables',array('spip_tickets'));
