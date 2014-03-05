@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'droits_limites' => 'derechos limitados para estas rubricas',
 
 	// E
-	'effacer_base_option' => '<small><br />La opción recomendada es  « persona », la opción standard de SPIP es « los administradores » (pero siempre con una verificación FTP).</small>',
+	'effacer_base_option' => '<small><br />La opción recomendada es  « nadie », la opción standard de SPIP es « los administradores » (pero siempre con una verificación FTP).</small>',
 	'effacer_base_qui' => 'Quién puede <strong>borrar</strong> la base de datos del sitio ?',
 	'espace_publieur' => 'Espacio de publicación abierta',
 	'espace_publieur_detail' => 'Seleccione de abajo un sector a tratar como un espacio de publicación abierta para los redactores y / o visitantes registrados (a condición de tener una interfaz, por ejemplo los lápices y un formulario para enviar un articulo) :',
@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_acces_espace_prive' => '<strong>Sin acceso al espacio privado :</strong> los redactores no tienen acceso al espacio privado.',
-	'personne' => 'Persona',
+	'personne' => 'Nadie',
 	'petitions_qui' => '<strong>Firmas:</strong> quien puede modificar las firmas de las peticiones :',
 	'publication' => 'Publicación',
 	'publication_qui' => 'Quién puede publicar en el sitio:',
