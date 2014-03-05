@@ -1,0 +1,16 @@
+<paquet
+	prefix="styleguide"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="styleguide.png"
+>
+	<nom>Styleguide</nom>
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<credit lien="http://tinytypo.tetue.net/">Tetue, pour le HTML de test typographique</credit>
+	<credit lien="http://linux.softpedia.com/developer/Oliver-Scholtz-93.html">Oliver Scholtz (and others) pour l'icône</credit>
+	<copyright>2014</copyright>
+	<licence>GPL v3</licence>
+</paquet>
