@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_adress' => 'Adres',
 	'label_code_pays' => 'Landcode',
 	'label_code_postal' => 'Postcode',
+	'label_departement' => 'Departement',
 	'label_import' => 'Importeer',
 	'label_inserer_modele_articles' => 'gekoppeld aan artikelen',
 	'label_inserer_modele_articles_sites' => 'gekoppeld aan artikelen + websites',
