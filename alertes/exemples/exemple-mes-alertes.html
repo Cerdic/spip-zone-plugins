@@ -1,0 +1,10 @@
+[(#REM)
+	Exemple de code à inclure dans une page de profil (par exemple), pour permettre la gestion globale de abonnements aux alertes.
+]
+
+<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}{tout}>
+<div id="mes_alertes">
+	<h2>Mes alertes</h2>
+	<div class="mes-abonnements">[(#FORMULAIRE_ALERTES_EMAIL{#ID_AUTEUR})]</div>
+</div>						
+</BOUCLE_auteur>

@@ -1,0 +1,12 @@
+[(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+#CACHE{0}
+[(#REM) 
+	Exemple basique de sujet de l'email d'une alerte envoyée. 
+	NB : Doit renvoyer du texte brut
+	
+	Vous pouvez accéder à l'auteur SPIP ciblé via #ENV{id_auteur}
+	Vous pouvez accéder à l'article SPIP ciblé via #ENV{id_article}
+	
+	Surcharger-le par le votre dans squelettes/alertes/sujet-email-alerte.html
+]
+<:alertes:news_on{nom_site_spip=#NOM_SITE_SPIP}:> <BOUCLE_art(ARTICLES){id_article}>[(#TITRE|textebrut)]</BOUCLE_art>

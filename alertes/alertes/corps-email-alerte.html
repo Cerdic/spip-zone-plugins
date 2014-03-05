@@ -1,0 +1,19 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CACHE{0}
+<B_article>
+[(#REM) 
+	Exemple basique de corps d'email d'une alerte envoyée.
+	
+	Vous pouvez accéder à l'auteur SPIP ciblé via #ENV{id_auteur}
+	Vous pouvez accéder à l'article SPIP ciblé via #ENV{id_article}
+	
+	Surcharger-le par le votre dans squelettes/alertes/corps-email-alerte.html
+]
+<BOUCLE_article(ARTICLES){id_article}{0,1}>
+	<h2 style="font-size:14px; margin:0 0 0.5em;color:#ff9000; line-height: 1.05em;">
+		<a href="[(#URL_ARTICLE|abs_url)]" style="color:#ff9000;">[(#TITRE|textebrut)]</a>
+	</h2>
+	[<h3 style="color:#616161; margin:0 0 0.5em;font-size:12px;"><a href="[(#URL_ARTICLE|abs_url)]" style="color:#616161;">(#SOUSTITRE|textebrut)</a></h3>]
+	[<div style="color:#616161; margin:0 0 0.5em;font-size:12px;">(#INTRODUCTION|couper{150})</div>]
+</BOUCLE_article>
+</B_article>

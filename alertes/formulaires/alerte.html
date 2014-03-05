@@ -1,0 +1,27 @@
+[(#REM)
+	Formulaire permettant de s'abonner à une alerte sur un objet
+]
+[(#REM) Formulaire que si les alertes sont actives et si l'objet est autorisé à l'abonnement]
+<BOUCLE_autorise(CONDITION){si #CONFIG{config_alertes/activer_alertes}|=={oui}|et{#ENV{objet_autoriser}|=={oui}}}>
+<div class="formulaire_alerte ajax">
+[(#ENV**{editable}|oui)
+	<form action="#ENV{action}" method="post" enctype="multipart/form-data">
+		#ACTION_FORMULAIRE{#SELF}
+		<div>
+			[(#ENV{_deja_alerte}|non)
+			<button type='submit' class="submit ajouter_alerte" name="ajouter" value="<:alertes:add_to|attribut_html:>" title="<:alertes:add_to|attribut_html:>">
+				<span><:alertes:add_to|attribut_html:></span>
+				<img height="32" width="32" src=" #CHEMIN{plugins/alertes/prive/themes/spip/images/alerte-add-32.png}" alt="<:alertes:add_to|attribut_html:>" />
+			</button>
+			][(#ENV{_deja_alerte}|oui)
+			<button type='submit' class="submit retirer_alerte" name="retirer" value="<:alertes:remove_from|attribut_html:>" title="<:alertes:remove_from|attribut_html:>">
+				<span><:alertes:remove_from|attribut_html:></span>
+				<img height="32" width="32" src=" #CHEMIN{plugins/alertes/prive/themes/spip/images/alerte-remove-32.png}" alt="<:alertes:remove_from|attribut_html:>" />
+			</button>
+			]
+		</div>
+	</form>
+]
+</div>
+</BOUCLE_autorise>
+<//B_autorise>

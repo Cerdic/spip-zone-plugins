@@ -1,0 +1,17 @@
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+#CACHE{0}
+[(#REM) 
+	Exemple basique d'entete d'email d'une alerte envoyée.
+	NB : cet exemple ouvre une div englobante qui sera fermée dans le footer.
+	
+	Vous pouvez accéder à l'auteur SPIP ciblé via #ENV{id_auteur}
+	Vous pouvez accéder à l'article SPIP ciblé via #ENV{id_article}
+	
+	Surcharger-le par le votre dans squelettes/alertes/header-email-alerte.html
+]
+<style type="text/css">
+		a:link, a:visited {text-decoration:none;}
+		a:hover {text-decoration:underline;}
+</style>
+<div style="background:#fff; font-family:Arial, Helvetica, sans-serif; font-size:12px;">
+<a href="#URL_SITE_SPIP">#LOGO_SITE_SPIP</a>

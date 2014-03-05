@@ -1,0 +1,22 @@
+[(#REM)
+	Exemple de code à inclure dans une page de rubrique (par exemple), pour permettre l'abonnements à celle-ci (si autorisé dans la configuration).
+	Avec en bonus, un petit affichage du nombre d'abonnés à celle-ci.
+]
+
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+	<h1>#TITRE</h1>
+	
+	<div class="abonnes">
+		<B_abonnes>
+		<BOUCLE_abonnes(ALERTES){id_objet=#ID_RUBRIQUE}{objet=rubrique}>
+		</BOUCLE_abonnes>
+		Il y a #TOTAL_BOUCLE [(#TOTAL_BOUCLE|singulier_ou_pluriel{abonné, abonnnés})] à cette rubrique.
+		</B_abonnes>
+		Personne n'est abonné à cette rubrique.
+		<//B_abonnes>
+	</div>
+	
+	[(#REM) On pourrait aussi utiliser juste #FORMULAIRE_ALERTE ]
+	<div class="alertes-abonnement">[(#FORMULAIRE_ALERTE)]</div>
+					
+</BOUCLE_rubrique>

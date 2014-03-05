@@ -1,0 +1,78 @@
+[(#REM) 
+	Formulaire d'enregistrement des abonnements.
+	Assez basique et en table (et oui). Nous vous recommandons de réaliser le votre à partir de cet exemple et de le surcharger dans squelettes/formulaires/
+]
+<div class="formulaire_spip formulaire_alertes_email">
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	<form action="#ENV{action}" method="post">
+		<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<B_alertes_mots>
+		<h3><:alertes:abo_keywords:><h3>
+
+		<table class="fields-cols">						
+
+		<BOUCLE_alertes_mots(MOTS){tout}{id_groupe IN #CONFIG{config_alertes/groupes}|to_array}>
+		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+		<td>
+			<input type="checkbox" class="checkbox" name="mots[]" id="mot-#ID_MOT" value="#ID_MOT"[ (#ENV{mots}|find{#ID_MOT}|oui)checked="checked"]/>
+			<label for="mot-#ID_MOT">#TITRE</label>
+		</td>
+		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+		</BOUCLE_alertes_mots>
+		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
+		</table>
+		</B_alertes_mots>
+		
+		<B_alertes_rubriques>
+		<h3><:alertes:abo_topics:></h3>
+		<table class="fields-cols">						
+
+		<BOUCLE_alertes_rubriques(RUBRIQUES){tout}{id_rubrique IN #CONFIG{config_alertes/rubriques}|to_array}>
+		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+		<td>
+			<input type="checkbox" class="checkbox" name="rubriques[]" id="rubrique-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{rubriques}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+			<label for="rubrique-#ID_RUBRIQUE">#TITRE</label>
+		</td>
+		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+		</BOUCLE_alertes_rubriques>
+		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
+		</table>
+		</B_alertes_rubriques>
+		
+		<B_alertes_secteurs>
+		<h3><:alertes:abo_sectors:></h3>
+		<table class="fields-cols">		
+		<BOUCLE_alertes_secteurs(RUBRIQUES){tout}{racine}{id_secteur IN #CONFIG{config_alertes/secteurs}|to_array}>
+		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+		<td>
+			<input type="checkbox" class="checkbox" name="secteurs[]" id="secteur-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{secteurs}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+			<label for="secteur-#ID_RUBRIQUE">#TITRE</label>
+		</td>
+		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+		</BOUCLE_alertes_secteurs>
+		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
+		</table>
+		</B_alertes_secteurs>
+		
+		<B_alertes_auteurs>
+		<h3><:alertes:abo_authors:></h3>
+		<table class="fields-cols">		
+		<BOUCLE_alertes_auteurs(AUTEURS){tout}{id_auteur IN #CONFIG{config_alertes/auteurs}|to_array}>
+		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
+		<td>
+			<input type="checkbox" class="checkbox" name="auteurs[]" id="auteur-#ID_AUTEUR" value="#ID_AUTEUR"[ (#ENV{auteurs}|find{#ID_AUTEUR}|oui)checked="checked"]/>
+			<label for="auteur-#ID_AUTEUR">[(#NOM|sinon{#LOGIN})]</label>
+		</td>
+		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
+		</BOUCLE_alertes_auteurs>
+		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
+		</table>
+		</B_alertes_auteurs>
+		
+		<p class="boutons"><input type="submit" name="submit" class="submit" value="<:pass_ok:>" /></p>
+		</div>
+	</form>
+</div>
