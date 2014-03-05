@@ -54,7 +54,7 @@
 <div class="#ENV{choix,choix} choix_alternatif[ (#ENV{choix,choix})_alternatif]">
     <input name="#ENV{nom}[(#VAL{91}|chr)]choix_alternatif[(#VAL{93}|chr)]" id="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]" />
     <label for="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]">
-        #ENV{choix_alternatif_label, <:saisies:option_choix_alternatif_label_defaut:>}
+         [(#ENV{choix_alternatif_label, <:saisies:option_choix_alternatif_label_defaut:>})]
     </label>
 </div>
 ]
