@@ -1,5 +1,5 @@
 <div class='ajax'>
-<BOUCLE_recus(MESSAGES spip_auteurs_liens){type=normal}{id_auteur=#SESSION{id_auteur}}{spip_auteurs_liens.vu!=poub}{pagination 1}{!par date_heure}>
+<BOUCLE_recus(MESSAGES spip_auteurs_liens){type=normal}{spip_auteurs_liens.id_auteur=#SESSION{id_auteur}}{spip_auteurs_liens.vu!=poub}{pagination 1}{!par date_heure}>
 <div class="formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
 <br class='bugajaxie' />
 [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
@@ -39,10 +39,10 @@ parametre : url d'action ]
 	$(function(){
 		$('select#selection').change(function(){
 			var val = $(this).attr('value');
-			if ((val=='none') || (val=='read') || (val=='unread')) $('ul.messages.recus div.message input[type=checkbox]').attr('checked','');
-			if (val=='read') $('ul.messages.recus div.message').not('.new').find('input[type=checkbox]').attr('checked','checked');
-			if (val=='unread') $('ul.messages.recus div.message.new input[type=checkbox]').attr('checked','checked');
-			if (val=='all') $('ul.messages.recus div.message input[type=checkbox]').attr('checked','checked');
+			if ((val=='none') || (val=='read') || (val=='unread')) $('ul.messages.recus div.message input[type=checkbox]').attr('checked',false);
+			if (val=='read') $('ul.messages.recus div.message').not('.new').find('input[type=checkbox]').attr('checked',true);
+			if (val=='unread') $('ul.messages.recus div.message.new input[type=checkbox]').attr('checked',true);
+			if (val=='all') $('ul.messages.recus div.message input[type=checkbox]').attr('checked',true);
 		});
 	});
 }(jQuery));

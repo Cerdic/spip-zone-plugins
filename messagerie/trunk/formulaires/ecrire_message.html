@@ -19,7 +19,7 @@ parametre : url d'action ]
 </label>[<span
  class='erreur_message'>(#GET{erreur})</span>]<div class='faux_input'>
 <span class='details'><span class='dest' style='display:none;'><img src='#CHEMIN{habillage/croix.gif}' alt='X' /></span>[(#INCLURE{fond=formulaires/ecrire_message_destinataires}{destinataires=#ENV*{destinataires}})]</span>
-<input type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text' size='20' /></div>
+<input type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text'/></div>
 <div class='spacer'></div>
 </li>
 ]
@@ -30,7 +30,7 @@ parametre : url d'action ]
 [(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
 </label>[<span
  class='erreur_message'>(#GET{erreur})</span>]<input 
- type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text' size='40' />
+ type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text'/>
 </li>
 
 #SET{name,texte_message}#SET{obli,obligatoire} #SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{valeur,#ENV*{#GET{name}}}
@@ -38,12 +38,12 @@ parametre : url d'action ]
 <label for='#GET{name}'>[(#ENV{form}|concat{':label_',#GET{name}}|_T)]
 [(#GET{obli}|?{' '})<em><:formulaires:info_obligatoire:></em>]
 </label>[<span
- class='erreur_message'>(#GET{erreur})</span>]<textarea name='#GET{name}' id='#GET{name}' cols='60' rows='8' class='inserer_barre_edition inserer_previsualisation'>#ENV*{#GET{name}}</textarea>
+ class='erreur_message'>(#GET{erreur})</span>]<textarea name='#GET{name}' id='#GET{name}' rows='8' class='inserer_barre_edition inserer_previsualisation'>#ENV*{#GET{name}}</textarea>
 </li>
 
 [(#REM) Piege a robots spammeurs ]
 <li class='antispam' style='display:none;'><label for="nobotnobot-#ID"><:antispam_champ_vide:></label>
-<input type="text" name="nobotnobot" id="nobotnobot-#ID" value="#ENV{nobotnobot}" size="10" />
+<input type="text" name="nobotnobot" id="nobotnobot-#ID" value="#ENV{nobotnobot}" />
 </li>
 </ul></fieldset>
 

@@ -81,7 +81,7 @@ function formulaires_ecrire_message_traiter_dist($redirect=""){
 	$exp = $GLOBALS['visiteur_session']['id_auteur'];
 	$dests = _request('destinataires');
 
-	list($auteurs_dests,$email_dests) = messagerie_destiner($dests);
+	list($auteurs_dests,$emails_dests) = messagerie_destiner($dests);
 
 	$id_message = 0;
 	$general = false;
@@ -90,7 +90,7 @@ function formulaires_ecrire_message_traiter_dist($redirect=""){
 	  AND autoriser('destiner_general','message',0))
 		$general = true;
 
-	if ($id_message = messagerie_messager($objet, $texte, $auteurs_dests,$general)){
+	if ($id_message = messagerie_messager($objet, $texte, $auteurs_dests,$emails_dests,$general)){
 
 		// et invalidons les pages en cache faisant reference au message
 		include_spip('inc/invalideur');

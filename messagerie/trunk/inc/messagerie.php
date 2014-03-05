@@ -43,10 +43,11 @@ function messagerie_verifier($obligatoires = array()){
  * @param string $objet
  * @param string $texte
  * @param array $auteurs_dest
+ * @param array $emails_dest
  * @param bool $general
  * @return int
  */
-function messagerie_messager($objet, $texte, $auteurs_dest=array(),$general = false){
+function messagerie_messager($objet, $texte, $auteurs_dest=array(),$emails_dest=array(),$general = false){
 	$out = false;
 	if (count($auteurs_dest) OR $general){
 		// envoyons le message
@@ -65,7 +66,7 @@ function messagerie_messager($objet, $texte, $auteurs_dest=array(),$general = fa
 			// diffuser le message en interne
 			messagerie_diffuser_message($id_message, $auteurs_dest);
 			// diffuser le message en externe
-			messagerie_mailer_message($id_message, $email_dests);
+			messagerie_mailer_message($id_message, $emails_dest);
 
 			include_spip('action/editer_objet');
 			objet_modifier('message',$id_message,array('statut'=>'publie'));
