@@ -43,7 +43,7 @@ function exec_inscrits_activite() {
 /// AFFICHAGES_LATERAUX : STATS sur les participations a cette activite (nombre de place et montant paye)
 	echo association_tablinfos_stats('inscriptions', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
 /// AFFICHAGES_LATERAUX : TOTAUX : montants des participations
-	echo association_tablinfos_montants('inscriptions', array('SUM(prix_unitaire) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
+	echo association_tablinfos_montants('inscriptions', array('SUM(prix_unitaire*quantite) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	$retour = '&retour=.%2F%3Fexec%3Dinscrits_activite%26amp%3Bid%3D'.$evenement['id_evenement']; // URL relative de cette page : parametre d'appel pour d'autres plus loin
 	$res[] = array('activite_titre_toutes_activites', 'grille-24.png', array('activites', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
