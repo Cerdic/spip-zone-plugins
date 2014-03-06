@@ -1,0 +1,9 @@
+[(#REM) La structure orbit pour foundation 3 ]
+[(#CONFIG{foundation/variante}|=={3}|oui)
+  <INCLURE{fond=modeles/orbits/orbit-3, env}>
+]
+
+[(#REM) Foundation 4 et 5 on la même structure orbit. ]
+[(#CONFIG{foundation/variante}|>{3}|oui)
+  <INCLURE{fond=modeles/orbits/orbit-4, env}>
+]
