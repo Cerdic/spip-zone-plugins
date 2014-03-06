@@ -21,7 +21,7 @@ function exec_inscrits_activite() {
 	$statut = association_passeparam_statut();
 	$suffixe_pdf = "inscriptions_$id_evenement".'_';
 	if ($statut) { // restriction de la selection
-		$critereSupplementaire = ' AND '. ($statut>0?"date_paiement<date_inscription ":"date_paiement>=date_inscription ");
+		$critereSupplementaire = ' AND '. ($statut>0?"prix_unitaire>0 ":"prix_unitaire<=0 ");
 		$suffixe_pdf .= ($statut>0?'avecpaie':'sanspaie');
 	} else {
 		$critereSupplementaire = '';
@@ -37,13 +37,13 @@ function exec_inscrits_activite() {
 	echo '<div class="vevent">'. association_tablinfos_intro('<span class="summary">'.$evenement['titre'].'</span>', 'evenement', $id_evenement, $infos, 'evenement') .'</div>';
 /// AFFICHAGES_LATERAUX : TOTAUX : nombres d'inscriptions par etat de paiement
 	echo association_tablinfos_effectifs('inscriptions', array(
-		'pair' => array( 'asso:activite_entete_validees', array('spip_asso_activites', "id_evenement=$id_evenement AND date_paiement<date_inscription "), ),
-		'valide' => array( 'asso:activite_entete_impayees', array('spip_asso_activites', "id_evenement=$id_evenement AND NOT date_paiement<date_inscription "), ),
+		'pair' => array( 'asso:activite_entete_validees', array('spip_asso_activites', "id_evenement=$id_evenement AND prix_unitaire>0 "), ),
+		'valide' => array( 'asso:activite_entete_impayees', array('spip_asso_activites', "id_evenement=$id_evenement AND NOT (prix_unitaire>0) "), ),
 	));
 /// AFFICHAGES_LATERAUX : STATS sur les participations a cette activite (nombre de place et montant paye)
-	echo association_tablinfos_stats('inscriptions', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
+	echo association_tablinfos_stats('participations', 'activites', array('entete_quantite'=>'quantite','entete_montant'=>'prix_unitaire',), "id_evenement=$id_evenement");
 /// AFFICHAGES_LATERAUX : TOTAUX : montants des participations
-	echo association_tablinfos_montants('inscriptions', array('SUM(prix_unitaire*quantite) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
+	echo association_tablinfos_montants('participations', array('SUM(prix_unitaire*quantite) AS encaisse', 'spip_asso_activites', "id_evenement=$id_evenement " ), NULL);
 /// AFFICHAGES_LATERAUX : RACCOURCIS
 	$retour = '&retour=.%2F%3Fexec%3Dinscrits_activite%26amp%3Bid%3D'.$evenement['id_evenement']; // URL relative de cette page : parametre d'appel pour d'autres plus loin
 	$res[] = array('activite_titre_toutes_activites', 'grille-24.png', array('activites', ($GLOBALS['association_metas']['exercices']?'exercice':'annee')."=$id_periode"), array('voir_activites', 'association') );
@@ -80,7 +80,7 @@ function exec_inscrits_activite() {
 	));
 /// AFFICHAGES_CENTRAUX : TABLEAU
 	echo association_bloc_listehtml2('asso_activites',
-		sql_select("*, CASE date_paiement WHEN '0000-00-00' THEN 0 ELSE 1 END AS statut_paiement ", 'spip_asso_activites', "id_evenement=$id_evenement $critereSupplementaire ", '', 'id_activite DESC'), // requete
+		sql_select("*, CASE WHEN prix_unitaire>0 THEN 1 ELSE 0 END AS statut_paiement ", 'spip_asso_activites', "id_evenement=$id_evenement $critereSupplementaire ", '', 'id_activite DESC'), // requete
 		array(
 			'id_activite' => array('asso:entete_id', 'entier'),
 			'date_inscription' => array('asso:entete_date', 'date', ''),
