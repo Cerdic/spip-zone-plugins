@@ -38,6 +38,7 @@ Plusieurs problèmes se posent :
 * tri des tables de tickets : comment choisir les colonnes à afficher si ce sont des groupes de mots-clés, et non plus des champs ? Tous les mots-clés ? Une sélection configurée dans la page de conf des tickets ? Aucun groupe ? Et pour chaque groupe affiché dans la table, comment gérer le tri par colonne dans ces cas ?
 * risques de tout casser pendant la migration
 * sortir de l'idée originale des tickets, faits pour du débuggage de logiciel, à la redmine.
+* pas besoin de supprimer les champs, il suffit de pouvoir les désactiver si on n'en a pas besoin.
 
 #### Arguments pour la migration
 
