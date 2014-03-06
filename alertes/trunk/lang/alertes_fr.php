@@ -13,30 +13,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alerts_activation' => 'Activer les alertes par email ?',
 	'alerts_configuration' => 'Configuration des alertes',
 	'alerts_configuration_message_ok' => 'La configuration a &eacute;t&eacute; sauvegard&eacute;e.',
-	//E
+	// E
 	'except_post_dated' => '(sauf les articles post-dat&eacute;s)',
-	//G
+	// G
 	'generic_error' => 'Une erreur est pr&eacute;sente dans votre saisie',
-	//I
+	// I
 	'intervalle_cron' => 'Intervalle de passage du pseudo-CRON SPIP (en minutes)',
 	'id_authors' =>' Identifiants des auteurs abonnables',
 	'id_keyword_groups' => 'Identifiants des groupes de mots-clés abonnables',
 	'id_sectors' => 'Identifiants des secteurs abonnables',
 	'id_topics' => 'Identifiants des rubriques abonnables',
-	//N
+	// N
 	'no' => 'Non',
 	'nb_mails' => 'Nombre d\'emails d\'alertes envoy&eacute;es en un lot (CRON uniquement)',
 	'news_on' => 'Nouveauté sur @nom_site_spip@ :',
-	//R
+	// R
 	'remove' => 'Retirer',
 	'remove_from' => 'Retirer de mes alertes',
 	'required_field' => 'Cette information est obligatoire !',
-	//S
+	// S
 	'sending_method' => 'Mode d\'envoi',
 	'send_directly' => 'Envoyer directement',
 	'send_by_cron' => 'Envoyer via le CRON',
 	'separated_by_comma' => '(s&eacute;par&eacute;s par une virgule)',
-	//Y
+	// T
+	'title_menu_configuration' => 'Configuration Alertes',
+	// Y
 	'yes' => 'Oui',
 	'your_alertes_message_ok' => 'Vos alertes emails ont &eacute;t&eacute; mises &agrave; jour.',
 	

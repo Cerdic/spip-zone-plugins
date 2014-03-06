@@ -1,7 +1,7 @@
 <paquet
 	prefix="alertes"
 	categorie="communication"
-	version="1.0.10"
+	version="1.0.11"
 	schema="1.0.1" 	
 	etat="test"
 	compatibilite="[3.0.0 ;3.0.*]"
@@ -9,8 +9,8 @@
 >
 	<nom>Alertes</nom>
 	<licence>GNU</licence>
-	<auteur>Gael Chareyre</auteur>	
-	<menu nom="configurer_alertes" titre="Configuration Alertes" parent="menu_configuration" icone="images/alertes-16.png" />
+	<auteur lien="http://contrib.spip.net/Gael-Chareyre">Gael Chareyre</auteur>	
+	<menu nom="configurer_alertes" titre="alertes:title_menu_configuration" parent="menu_configuration" icone="images/alertes-16.png" />
 	<pipeline nom="declarer_tables_principales" inclure="base/alertes.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/alertes.php" />
 	<pipeline nom="notifications_destinataires" inclure="alertes_pipelines.php" />	
