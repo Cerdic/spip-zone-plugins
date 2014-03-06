@@ -1194,45 +1194,4 @@ function image_merge($im, $masque, $h='left', $v='top'){
 
 	return _image_ecrire_tag($image,array('src'=>$dest));
 }
-
-/**
- * Remplacer l'alpha d'une image avec une autre couleur
- */
-function image_remplacer_alpha($im, $couleur, $qualite=85){
-	$image = _image_valeurs_trans($im, "remplacer_alpha-$couleur");
-	if (!$image) return("");
-	
-	$x_i = $image["largeur"];
-	$y_i = $image["hauteur"];
-
-	$im = $image["fichier"];
-	$dest = $image["fichier_dest"];
-	$creer = $image["creer"];
-
-	if ($creer) {
-		$im = $image["fonction_imagecreatefrom"]($im);
-		
-		@imagealphablending($im, true);
-		@imagesavealpha($im,true);
-		
-		$im_ = imagecreatetruecolor($x_i, $y_i);
-		
-		include_spip("inc/filtres_images");
-		$couleurs = couleur_hex_to_dec($couleur);
-		
-		$dr = $couleurs["red"];
-		$dv = $couleurs["green"];
-		$db = $couleurs["blue"];
-		$color = imagecolorallocatealpha($im_, $dr, $dv, $db, 0);
-		
-		imagefilledrectangle($im_, 0, 0, $x_i, $y_i, $color);
-		@imagealphablending($im_, true);
-		@imagesavealpha($im_,true);
-		
-		imagecopy($im_, $im, 0, 0, 0, 0, $x_i, $y_i);
-		_image_gd_output($im_,$image, $qualite);
-	}
-
-	return _image_ecrire_tag($image,array('src'=>$dest));
-}
 ?>

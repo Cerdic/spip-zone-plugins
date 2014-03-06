@@ -21,7 +21,6 @@ if(is_array($GLOBALS['spip_matrice'])){
 	$GLOBALS['spip_matrice']['image_negatif'] = 'filtres/images_complements.php';
 	$GLOBALS['spip_matrice']['image_monochrome'] = 'filtres/images_complements.php';
 	$GLOBALS['spip_matrice']['image_merge'] = 'filtres/images_complements.php';
-	$GLOBALS['spip_matrice']['image_remplacer_alpha'] = 'filtres/images_complements.php';
 
 	$GLOBALS['spip_matrice']['couleur_chroma'] = 'filtres/couleurs_complements.php';
 	$GLOBALS['spip_matrice']['couleur_saturer'] = 'filtres/couleurs_complements.php';
