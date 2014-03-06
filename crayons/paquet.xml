@@ -1,7 +1,7 @@
 <paquet
 	prefix="crayons"
 	categorie="edition"
-	version="1.17.0"
+	version="1.18.0"
 	etat="stable"
 	compatibilite="[1.9.0;3.*.*]"
 	logo="images/crayon-32.png"

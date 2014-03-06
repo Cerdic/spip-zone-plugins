@@ -543,6 +543,14 @@ $.fn.crayonsstart = function() {
 
 	// demarrer les crayons
 	if ((typeof crayons_init_dynamique == 'undefined') || (crayons_init_dynamique==false)) {
+
+		// compat jQuery 1.9
+		if (typeof $.fn.live == 'undefined') {
+			$.fn.live = function( types, data, fn ) {
+				$( this.context ).on( types, this.selector, data, fn );
+				return this;
+			};
+		}
 		$('.crayon:not(.crayon-init)')
 		.live('mouseover touchstart', function(e) {
 			$(this)
