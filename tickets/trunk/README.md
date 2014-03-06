@@ -20,17 +20,31 @@ Quelques idées d'évolution du plugin Tickets
 [ ] afficher, au lieu du fil de commentaires, un fil d'activité, mélangeant commentaires et révisions (champs et mots-clés associés ou supprimés) - en passant, on pourrait mettre le texte du ticket dans le flux, come premier commentaire.
 [ ] crayon d'assignation du ticket : afficher la trombinette si gravatar est activé dans le contrôleur -> Non, en tout cas, pas tant que le contrôleur sera un <select> (pas d'images dans les select)
 
-## En cours
+## En cours de discussion
 
 ### Migration de 7 champs en groupes de mots clés
 
 Actuellement la table spip_tickets contient sept champs qui servent à décrire sémantiquement les tickets. Pour trois d'entre eux, les choix possibles sont fixés en dur dans le code : severite (bloquant, important, normal, peu_important), tracker (probleme, tache, amélioration) et navigateur (android, firefox...) Les quatre autres sont désactivés par défaut, et ne proposent aucun choix par défaut, mais il est possible d'en ajouter via la page de configuration ou les variables globales : projet, composant, version, jalon.
 
-Maintenant que les mots-clés peuvent être associés aux tickets, on a tout intérêt, pour faciliter la personnalisation de ces champs et des choix proposés, à migrer ces 7 champs sous la forme de mots/groupes de mots.
+On pourrait migrer ces 7 champs sous la forme de mots/groupes de mots.
 
-Il sera ensuite possible aux responsables du site d'ajouter/modifier/supprimer des niveaux de sévérité du bug, par exemple, modifier la liste de navigateurs, voire également supprimer des critères (si tracker ou composant ne leur paraît pas utile, par exemple) ou en ajouter d'autres (thème du ticket, région géographique concernée, ou tout autre critère qui leur paraisse pertinent).
+À noter que la création des mots-clés n'aurait lieu que lors de la migration, et pour une installation fraiche, aucun groupe de mots ne serait créé.
 
-À noter que ça ne vaut que pour la migration à la nouvelle version du plugin. Pour une installation fraiche, aucun groupe de mots créé.
+#### Arguments contre la migration
+
+Plusieurs problèmes se posent :
+
+* gestion des langues (il faudra éditer tous les mots-clés si on ajoute une nouvelle langue, alors que dans le cas des champs, c'est géré par les fichiers de langue, puisque la liste des choix est fermée)
+* tri des tables de tickets : comment choisir les colonnes à afficher si ce sont des groupes de mots-clés, et non plus des champs ? Tous les mots-clés ? Une sélection configurée dans la page de conf des tickets ? Aucun groupe ? Et pour chaque groupe affiché dans la table, comment gérer le tri par colonne dans ces cas ?
+* risques de tout casser pendant la migration
+* sortir de l'idée originale des tickets, faits pour du débuggage de logiciel, à la redmine.
+
+#### Arguments pour la migration
+
+Les avantages à migrer les champs sous la forme de mots/groupes de mots sont :
+
+* faciliter la personnalisation des champs et des choix proposés pour chaque champ (objets éditoriaux, au lieu de valeur en configuration = pénible à changer, ou en dur dans le code). Il sera ensuite possible aux responsables du site d'ajouter/modifier/supprimer des niveaux de sévérité du bug, par exemple, modifier la liste de navigateurs, voire également supprimer des critères (si tracker ou composant ne leur paraît pas utile, par exemple) ou en ajouter d'autres (thème du ticket, région géographique concernée, ou tout autre critère qui leur paraisse pertinent).
+* github fait comme ça : chaque projet décide de la sémantique et la classification de ses tickets (encore plus à plat pour github : un seul groupe de mots)
 
 #### Partie base de données
 
