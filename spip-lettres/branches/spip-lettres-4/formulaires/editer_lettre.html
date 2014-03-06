@@ -14,9 +14,9 @@
 				]<input type='text' class='text' name='titre' id='titre' value="#ENV**{titre}"
 				[(#ENV{titre}|strlen|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>	
-		[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+			[<li class="editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 				<label for="id_parent"><:titre_cadre_interieur_rubrique:><em class="aide">#AIDER{artrub}</em></label>
-				(#ENV{id_parent}|choisir_thematique{non})
+				(#VAL|chercher_rubrique{#ENV{id_lettre},#ENV{id_parent},'lettre',#ENV{id_secteur},'',0,form_simple})
 	    </li>]
 	  	[(#CONFIG{spip_lettres_utiliser_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
 	    <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">

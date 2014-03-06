@@ -249,7 +249,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 				return $url;
 			}
 		}
-		
+
 		function callback_images($matches) {
 			global $image_index;
 			$image = $matches[2];
