@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//G
 	'generic_error' => 'Une erreur est pr&eacute;sente dans votre saisie',
 	//I
-	'intervalle_cron' => 'Intervalle de passe du pseudo-CRON SPIP (en minutes)',
+	'intervalle_cron' => 'Intervalle de passage du pseudo-CRON SPIP (en minutes)',
 	'id_authors' =>' Identifiants des auteurs abonnables',
 	'id_keyword_groups' => 'Identifiants des groupes de mots-clés abonnables',
 	'id_sectors' => 'Identifiants des secteurs abonnables',
@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sending_method' => 'Mode d\'envoi',
 	'send_directly' => 'Envoyer directement',
 	'send_by_cron' => 'Envoyer via le CRON',
-	'separated_by_comma' => 's&eacute;par&eacute;s par une virgule',
+	'separated_by_comma' => '(s&eacute;par&eacute;s par une virgule)',
 	//Y
 	'yes' => 'Oui',
 	'your_alertes_message_ok' => 'Vos alertes emails ont &eacute;t&eacute; mises &agrave; jour.',
