@@ -1,0 +1,38 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+		[(#SET{nb_points,[(#ENV{gis_json}|table_valeur{features}|count)]})]
+		<h3 class="legend"><:gis_importer:label_correspondance_champs:></h3>
+		<p class="explication">[(#GET{nb_points}|singulier_ou_pluriel{gis_importer:explication_importer_point,gis_importer:explication_importer_points})]</p>
+		#SET{champs_base, #VAL{gis}|objet_info{champs_editables}}
+		<ul>
+			<BOUCLE_champs(DATA){source table, #GET{champs_base}}{valeur !IN #LISTE{lat,lon}}>
+			<li class="editer editer_gis_#VALEUR[(#ENV{erreurs}|table_valeur{champ_#VALEUR}|oui)erreur]">
+				<label for="champ_#VALEUR">#VALEUR</label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{champ_#VALEUR})</span>]
+				<select name="champ_#VALEUR" id="champ_#VALEUR">
+					<option value=""> - </option>
+					<BOUCLE_valeurs_possibles(DATA){source table,#ENV{gis_json}|table_valeur{features}|table_valeur{1}|table_valeur{properties}}>
+					<option value="#CLE"
+						[(#ENV{champ_#_champs:VALEUR}|=={#_champs:VALEUR}|oui)selected="selected"]
+						[(#ENV{champ_#_champs:VALEUR}|non)
+						[(#CLE|=={#_champs:VALEUR}|oui)selected="selected"]
+						[(#CLE|=={label}|et{#_champs:VALEUR|=={titre}}|oui)selected="selected"]
+						[(#CLE|=={description}|et{#_champs:VALEUR|=={descriptif}}|oui)selected="selected"]
+						[(#CLE|=={address}|et{#_champs:VALEUR|=={adresse}}|oui)selected="selected"]]
+						>#CLE</option>
+					</BOUCLE_valeurs_possibles>
+				</select>
+			</li>
+			</BOUCLE_champs>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:gis_importer:bouton_suivant:>" />
+		</p>
+	</div></form>
+	</BOUCLE_editable>
+</div>

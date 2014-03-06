@@ -1,0 +1,33 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+		<ul>
+			<li class="editer editer_unicite[(#ENV{erreurs}|table_valeur{unicite}|oui)erreur]">
+				<p class="explication"><:gis_importer:explication_unicites:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{unicite})</span>]
+				<div class="choix[(#ENV{erreurs}|table_valeur{unicite_latlon}|oui)erreur]">
+					<input type="checkbox" name="unicite_latlon" id="unicite_latlon"[(#ENV{unicite_latlon}|=={on}|oui) checked="checked"] />
+					<label for="unicite_latlon"><:gis_importer:label_unicite_latlon:></label>[
+					<span class="erreur_message">(#ENV{erreurs}|table_valeur{unicite_latlon})</span>]
+				</div>
+				<div class="choix[(#ENV{erreurs}|table_valeur{unicite_titre}|oui)erreur]">
+					<input type="checkbox" name="unicite_titre" id="unicite_titre"[(#ENV{unicite_titre}|=={on}|oui) checked="checked"] />
+					<label for="unicite_titre"><:gis_importer:label_unicite_titre:></label>[
+					<span class="erreur_message">(#ENV{erreurs}|table_valeur{unicite_titre})</span>]
+				</div>
+				<div class="choix[(#ENV{erreurs}|table_valeur{unicite_descriptif}|oui)erreur]">
+					<input type="checkbox" name="unicite_descriptif" id="unicite_descriptif"[(#ENV{unicite_descriptif}|=={on}|oui) checked="checked"] />
+					<label for="unicite_descriptif"><:gis_importer:label_unicite_descriptif:></label>[
+					<span class="erreur_message">(#ENV{erreurs}|table_valeur{unicite_descriptif})</span>]
+				</div>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_valider:>" />
+		</p>
+	</div></form>]
+</div>

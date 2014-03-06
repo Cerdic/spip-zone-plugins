@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) les hidden qui declencheront le service du formulaire parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+		<ul>
+			<li class="editer editer_url_fichier_gis[(#ENV{erreurs}|table_valeur{url_fichier_gis}|oui)erreur]">
+				<label for="url_fichier_gis"><:gis_importer:label_url_fichier_gis:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{url_fichier_gis})</span>]
+				<input type="text" class="text" name="url_fichier_gis" id="url_fichier_gis" />
+			</li>
+			[(#REM)
+			<li class="editer editer_fichier_gis[(#ENV{erreurs}|table_valeur{fichier_gis}|oui)erreur]">
+				<label for="fichier_gis"><:gis_importer:label_fichier_gis:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_gis})</span>]
+				<input type="file" name="fichier_gis" id="fichier_gis" />
+			</li>]
+		</ul>
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:gis_importer:bouton_suivant:>" />
+		</p>
+	</div></form>]
+</div>

@@ -1,0 +1,20 @@
+<paquet
+	prefix="gis_importer"
+	categorie="divers"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+>
+
+	<nom>GIS importation</nom>
+	<!-- Importe des points Gis depuis un JSON -->
+
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+
+	<copyright>2014</copyright>
+	<licence>GPL v3</licence>
+
+	<necessite nom="gis" compatibilite="[4.18.0;]" />
+
+	<menu nom="gis_importer" titre="gis_importer:icone_gis_importer" parent="menu_edition" icone="images/gis-16.png" />
+</paquet>
