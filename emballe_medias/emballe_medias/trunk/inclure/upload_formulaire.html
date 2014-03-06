@@ -179,14 +179,14 @@
 			$('[#(#ENV{id_formulaire,fileupload}) ].divLoadingContent,[#(#ENV{id_formulaire,fileupload}) ].divLongLoading,[#(#ENV{id_formulaire,fileupload}) ].divAlternateContent,[#(#ENV{id_formulaire,fileupload}) ].swfupload').detach();
 			$('[#(#ENV{id_formulaire,fileupload})]').fileupload();
 			$('[#(#ENV{id_formulaire,fileupload})]').fileupload('option',{
-	            paramName: 'Filedata',
-	            done: function (e, data) {
-	            	var that = $(this).data('fileupload');
+				paramName: 'Filedata',
+				done: function (e, data) {
+					var that = $(this).data('fileupload');
 					isUploading = false;
 					if (data.context) {
 						var total = format_file_size(data.total);
 						data.context.find('.transfer').html(total+' / '+total);
-	                    data.context.find('.statut').html(locale.emballe_medias_langue.complete);
+						data.context.find('.statut').html(locale.emballe_medias_langue.complete);
 						data.context.find('.time_remaining,.ui-progressbar').fadeOut('slow',function(){
 							$(this).detach();
 						});
@@ -300,7 +300,8 @@
 			});
 
 			$('[#(#ENV{id_formulaire,fileupload}) ]#swfupload_messages,[#(#ENV{id_formulaire,fileupload}) ]#divSWFUploadUI').detach();
-			$('.btn').button();
+			[(#PLUGIN{bootstrap}|non)
+			$('.btn').button();]
 			$(window).unload(function(){
 				$('[#(#ENV{id_formulaire,fileupload})]').fileupload('destroy');
 			});

@@ -101,7 +101,8 @@
                      * On initialise la barre de progression à chaque élément ajouté
                      */
                     data.context.find('.ui-progressbar').progressbar().fadeIn();
-                    $('.btn').button();
+                    if(typeof($.fn.button) == 'function')
+                    	$('.btn').button();
                     that._transition(data.context).done(
                         function () {
                             if ((that._trigger('added', e, data) !== false) &&
@@ -247,7 +248,8 @@
                 } else {
                     that._trigger('failed', e, data);
                 }
-                $('.template_download .btn').button();
+                if(typeof($.fn.button) == 'function')
+                	$('.template_download .btn').button();
             },
             // Callback for upload progress events:
             progress: function (e, data) {
