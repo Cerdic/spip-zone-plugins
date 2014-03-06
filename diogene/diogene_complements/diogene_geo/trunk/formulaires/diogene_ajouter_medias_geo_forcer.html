@@ -1,0 +1,12 @@
+<B_gis>
+<li class="editer_id_gis[(#ENV**{erreurs}|table_valeur{id_gis}|oui)erreur]" id="diogene_geo">
+	<label><:gis:gis_singulier:></label>
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_gis})</span>]
+	<select name="id_gis" id="id_gis">
+		<option value=" ">-</option>
+	<BOUCLE_gis(GIS){par titre}>
+		<option value="#ID_GIS"[(#ENV{id_gis}|=={#ID_GIS}|oui)selected="selected"]>#TITRE</option>
+	</BOUCLE_gis>
+	</select>
+</li>
+</B_gis>

@@ -1,3 +1,8 @@
+[(#SAISIE{case, geo_forcer_existant,
+	label=<:diogene_geo:label_geo_forcer_existant:>,
+	valeur=[(#ENV**{options_complements}|unserialize|table_valeur{geo_forcer_existant})],
+	label_case=<:diogene_geo:label_geo_forcer_existant_defaut:>})]
+
 [(#SAISIE{case, geo_cacher,
 	label=<:diogene_geo:label_geo_cacher:>,
 	valeur=[(#ENV**{options_complements}|unserialize|table_valeur{geo_cacher})],
