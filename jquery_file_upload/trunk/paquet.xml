@@ -1,7 +1,7 @@
 <paquet
 	prefix="jfu"
 	categorie="outil"
-	version="5.16.4"
+	version="5.16.5"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/jquery_file_upload.png"

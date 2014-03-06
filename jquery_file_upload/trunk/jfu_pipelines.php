@@ -10,7 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @retune array $plugins Le tableau complété avec les scripts que l'on souhaite 
  */
 function jfu_jqueryui_plugins($plugins){
-	$plugins[] = "jquery.ui.button";
+	if(!defined('_DIR_PLUGIN_BOOTSTRAP'))
+		$plugins[] = "jquery.ui.button";
 	$plugins[] = "jquery.ui.progressbar";
 	return $plugins;
 }

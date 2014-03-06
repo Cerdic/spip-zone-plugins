@@ -138,15 +138,15 @@ function infos_upload(currentTime,iTime,percent,bytesLoaded,bytesTotal){
 
 function format_file_size(bytes){
 	if (typeof bytes !== 'number') {
-        return false;
-    }
-    if (bytes >= 1000000000) {
-        return (bytes / 1000000000).toFixed(2) + ' GB';
-    }
-    if (bytes >= 1000000) {
-        return (bytes / 1000000).toFixed(2) + ' MB';
-    }
-    return (bytes / 1000).toFixed(2) + ' KB';
+		return false;
+	}
+	if (bytes >= 1000000000) {
+		return (bytes / 1000000000).toFixed(2) + ' GB';
+	}
+	if (bytes >= 1000000) {
+		return (bytes / 1000000).toFixed(2) + ' MB';
+	}
+	return (bytes / 1000).toFixed(2) + ' KB';
 }
 
 //roundNumber found via google
