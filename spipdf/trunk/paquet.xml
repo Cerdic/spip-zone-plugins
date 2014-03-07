@@ -11,11 +11,11 @@
 
 	<nom>SpiPDF</nom>
 
-    <auteur lien="http://www.grafactory.net" mail="yvestanSANSPAM@gmail.com">Yves Tannier</auteur>
-    <licence lien="http://www.gnu.org/licenses/lgpl.html">LGPL</licence>
+	<auteur lien="http://www.grafactory.net" mail="yvestanSANSPAM@gmail.com">Yves Tannier</auteur>
+	<licence lien="http://www.gnu.org/licenses/lgpl.html">LGPL</licence>
 
-	<pipeline nom="pre_typo" include="spipdf.php" />
-	<pipeline nom="recuperer_fond" include="spipdf.php" />
-	<pipeline nom="affichage_final" include="spipdf.php" />
+	<pipeline nom="pre_typo" inclure="spipdf.php" />
+	<pipeline nom="recuperer_fond" inclure="spipdf.php" />
+	<pipeline nom="affichage_final" inclure="spipdf.php" />
 
 </paquet>
