@@ -32,18 +32,16 @@ function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
 			$ret .= "<input name='notation-$id' type='radio' class='$class rating-cancel' value='-1'$checked$disabled />\n";
 		}
 		for ($i=1; $i<=$max_note; $i++){
-                        $microdata_insert = ($GLOBALS['meta']['version_html_max'] == 'html5' && $i == $nb) ? " itemprop='ratingValue'" : "";
 			$checked = ($i==$nb) ? " checked='checked'" : "";
-			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i'$checked$disabled $microdata_insert/>\n";
+			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i'$checked$disabled />\n";
 		}
 	}
 	else 
 	// eviter de generer X boutons radio inactifs remplaces par le javascript au chargement
 	{
 		for ($i=1; $i<=$max_note; $i++){
-                        $microdata_insert = ($GLOBALS['meta']['version_html_max'] == 'html5' && $i == $nb) ? " itemprop='ratingValue'" : "";
 			$checked = ($i<=$nb) ? " star-rating-on" : "";
-			$ret .= "<div class='star-rating ratingstar_group_notation-$id star-rating-readonly$checked'$microdata_insert><a>$nb</a></div>";
+			$ret .= "<div class='star-rating ratingstar_group_notation-$id star-rating-readonly$checked'><a>$nb</a></div>";
 		}
 	}
 	return "<div class='notation_note$needjs' ".($microdatas ? 'itemprop="aggregateRating" itemscope itemtype="http://schema.org/aggregateRating"':'').">$ret</div>";
