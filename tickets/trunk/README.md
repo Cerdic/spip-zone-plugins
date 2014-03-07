@@ -20,17 +20,15 @@ Quelques idées d'évolution du plugin Tickets
 [ ] afficher, au lieu du fil de commentaires, un fil d'activité, mélangeant commentaires et révisions (champs et mots-clés associés ou supprimés) - en passant, on pourrait mettre le texte du ticket dans le flux, come premier commentaire.
 [ ] crayon d'assignation du ticket : afficher la trombinette si gravatar est activé dans le contrôleur -> Non, en tout cas, pas tant que le contrôleur sera un <select> (pas d'images dans les select)
 
-## En cours de discussion
+## En cours
 
-### Migration de 7 champs en groupes de mots clés
+### pour 3.2.0 - Migration de 7 champs en groupes de mots clés
 
 Actuellement la table spip_tickets contient sept champs qui servent à décrire sémantiquement les tickets. Pour trois d'entre eux, les choix possibles sont fixés en dur dans le code : severite (bloquant, important, normal, peu_important), tracker (probleme, tache, amélioration) et navigateur (android, firefox...) Les quatre autres sont désactivés par défaut, et ne proposent aucun choix par défaut, mais il est possible d'en ajouter via la page de configuration ou les variables globales : projet, composant, version, jalon.
 
 On pourrait migrer ces 7 champs sous la forme de mots/groupes de mots.
 
 À noter que la création des mots-clés n'aurait lieu que lors de la migration, et pour une installation fraiche, aucun groupe de mots ne serait créé.
-
-#### Arguments contre la migration
 
 Plusieurs problèmes se posent :
 
@@ -39,12 +37,12 @@ Plusieurs problèmes se posent :
 * risques de tout casser pendant la migration
 * pas besoin de supprimer les champs, il suffit de pouvoir les désactiver si on n'en a pas besoin.
 
-#### Arguments pour la migration
-
 Les avantages à migrer les champs sous la forme de mots/groupes de mots sont :
 
 * faciliter la personnalisation des champs et des choix proposés pour chaque champ (objets éditoriaux, au lieu de valeur en configuration = pénible à changer, ou en dur dans le code). Il sera ensuite possible aux responsables du site d'ajouter/modifier/supprimer des niveaux de sévérité du bug, par exemple, modifier la liste de navigateurs, voire également supprimer des critères (si tracker ou composant ne leur paraît pas utile, par exemple) ou en ajouter d'autres (thème du ticket, région géographique concernée, ou tout autre critère qui leur paraisse pertinent).
 * github fait comme ça : chaque projet décide de la sémantique et la classification de ses tickets (encore plus à plat pour github : un seul groupe de mots)
+
+On fera les modifications dans trunk, avec la version 3.2.0. Pour conserver le fonctionnement précédent, utiliser la branche branches/v2 (c'est toujours la version stable, avec ZIP).
 
 #### Partie base de données
 
@@ -88,7 +86,7 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 
 1. Virer les textarea dans la page de configuration des tickets.
 2. Virer la configuration "utiliser les mots-clés" - elle n'a pas de sens, puisque c'est géré dans la configuration de chaque groupe de mots (associer ou non avec les tickets). On laisse par contre une explication avec la liste des groupes de mots associables aux tickets, avec lien vers leur page privée, plus un lien globale de gestion des groupes de mots. Si aucun groupe de mots n'est associable aux tickets, un message spécifique pour expliquer qu'on peut lier des mots aux tickets.
-3. Dans les squelettes, tout considérer comme des mots-clés, et non plus comme des champ. Dans les formulaires, les crayons (vues et contrôleurs) et les tables qui listent les tickets. Ne pas oublier de prendre en compte la notion de groupe important (pour obliger à choisir une valeur) et d'unicité du choix, si cette option du groupe de mots est cochée.
+3. Dans les squelettes, tout considérer comme des mots-clés, et non plus comme des champ. Dans les formulaires, les crayons (vues et contrôleurs) et les tables qui listent les tickets. Ne pas oublier de prendre en compte la notion de groupe important (pour obliger à choisir une valeur ? Est-ce que ce choix oblige à remplir le champ, ou non ?) et d'unicité du choix, si cette option du groupe de mots est cochée.
 
 ## Versions
 
