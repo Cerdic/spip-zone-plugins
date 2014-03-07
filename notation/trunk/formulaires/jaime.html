@@ -3,13 +3,13 @@
 #SET{note_ponderee,#NOTE_PONDEREE}
 #SET{total,#NOMBRE_VOTES}
 </BOUCLE_note>
-<div class="formulaire_notation formulaire_#FORM ajax">
+<div class="formulaire_notation formulaire_#FORM ajax"[(#HTML5|oui) itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"]>
 	[(#NOTATION_ETOILE{[(#GET{note_ponderee})],[(#ENV*{_objet})][(#ENV*{_id_objet})]})]
-	[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
+	[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">[(#HTML5|oui)<span itemprop="ratingCount">](#GET{total})[(#HTML5|oui)</span>] [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV**{editable}|oui)
-	<form action="#SELF" method="post" id="#FORM[(#ENV*{_form_id})]">
+	<form action="#SELF" method="post" id="#FORM[(#ENV*{_form_id})]" enctype="multipart/form-data">
 		#ACTION_FORMULAIRE{#SELF}
 		<div>
 			[(#REM) ne pas envoyer une variable commencant par id_ 

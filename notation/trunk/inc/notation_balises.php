@@ -1,28 +1,24 @@
 <?php
 /**
- * Plugin Notation
- * par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
- *
- * Copyright (c) 2008
- * Logiciel libre distribue sous licence GNU/GPL.
- *
- */
+* Plugin Notation 
+* par JEM (jean-marc.viglino@ign.fr) / b_b / Matthieu Marcillaud
+* 
+* Copyright (c) 2008
+* Logiciel libre distribue sous licence GNU/GPL.
+*  
+**/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_NOTATION_AFFICHAGE_RAPIDE',1);
 
-function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
+function notation_en_etoile($nb, $id, $clicable=false){
 	include_spip('inc/notation');
 	$ret = '';
 	if ($nb>0 && $nb<=0.5) $nb=1;
-	$needjs = "";
-	$max_note = notation_get_nb_notes();
 	$nb = round($nb);
-	if($microdatas){
-		$ret .= '<meta itemprop="ratingCount" class="best" content="'.$max_note.'" />';
-		$ret .= '<meta itemprop="worstRating" class="worst" content="0" />';
-		$ret .= '<meta itemprop="ratingValue" content="'.$nb.'" />';
-	}
+
+	$needjs = "";
+
 	if ($clicable OR !_NOTATION_AFFICHAGE_RAPIDE){
 		$needjs = " notation_note_on_load";
 		$class = $clicable ? 'auto-submit-star' : 'star';
@@ -31,20 +27,23 @@ function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
 		AND lire_config('notation/change_note')){
 			$ret .= "<input name='notation-$id' type='radio' class='$class rating-cancel' value='-1'$checked$disabled />\n";
 		}
-		for ($i=1; $i<=$max_note; $i++){
+		for ($i=1; $i<=notation_get_nb_notes(); $i++){
+                        $microdata_insert = ($GLOBALS['meta']['version_html_max'] == 'html5' && $i == $nb) ? " itemprop='ratingValue'" : "";		
 			$checked = ($i==$nb) ? " checked='checked'" : "";
-			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i'$checked$disabled />\n";
+			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i'$checked$disabled $microdata_insert/>\n";
 		}
 	}
 	else 
 	// eviter de generer X boutons radio inactifs remplaces par le javascript au chargement
 	{
-		for ($i=1; $i<=$max_note; $i++){
+		for ($i=1; $i<=notation_get_nb_notes(); $i++){
+		
+                        $microdata_insert = ($GLOBALS['meta']['version_html_max'] == 'html5' && $i == $nb) ? " itemprop='ratingValue'" : "";
 			$checked = ($i<=$nb) ? " star-rating-on" : "";
-			$ret .= "<div class='star-rating ratingstar_group_notation-$id star-rating-readonly$checked'><a>$nb</a></div>";
+			$ret .= "<div class='star-rating star_group_notation-$id star-rating-readonly$checked'$microdata_insert><a title='$nb'>$nb</a></div>";
 		}
 	}
-	return "<div class='notation_note$needjs' ".($microdatas ? 'itemprop="aggregateRating" itemscope itemtype="http://schema.org/aggregateRating"':'').">$ret</div>";
+	return "<div class='notation_note$needjs'>$ret</div>";
 }
 
 
@@ -57,22 +56,14 @@ function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
  * 
  * Un identifiant est calcule automatiquement, mais peut etre force 
  * #NOTATION_ETOILE{#NOTE,article#ID_ARTICLE}
- * 
- * Si vous souhaitez que la balise retourne les microdatas Aggregaterating
- * (http://schema.org/aggregateRating), il faut mettre un troisième argument, par exemple :
- * #NOTATION_ETOILE{#NOTATION_MOYENNE,'',oui}
  */
 function balise_NOTATION_ETOILE($p){
 	$nb = interprete_argument_balise(1,$p);
 	if (!$id = interprete_argument_balise(2,$p)){
 		$id = notation_calculer_id($p);
 	}
-	$microdatas = false;
-	if($microdatas = interprete_argument_balise(3,$p)){
-		$p->code = "notation_en_etoile($nb,$id,false,true)";
-	}else{
-		$p->code = "notation_en_etoile($nb,$id)";
-	}
+
+	$p->code = "notation_en_etoile($nb,$id)";
 	$p->interdire_scripts = false;
 	return $p;
 }

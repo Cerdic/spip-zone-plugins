@@ -4,9 +4,9 @@
 #SET{note_ponderee,#NOTE_PONDEREE}
 #SET{total,#NOMBRE_VOTES}
 </BOUCLE_note>
-<div class="formulaire_notation ajax">
+<div class="formulaire_notation ajax"[(#HTML5|oui) itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"]>
 [(#ENV**{editable}|oui)
-	<form action="#SELF" method="post" id="notation[(#ENV*{_form_id})]" style="display:inline; padding:0; spacing:0; border:0">
+	<form action="#SELF" method="post" id="notation[(#ENV*{_form_id})]" enctype="multipart/form-data" style="display:inline; padding:0; spacing:0; border:0">
 		#ACTION_FORMULAIRE{#SELF}
 		<div style="display:inline">
 			[(#NOTATION_ETOILE_CLICK{[(#GET{note_ponderee})],[(#ENV*{_objet})][(#ENV*{_id_objet})]})]
@@ -17,14 +17,14 @@
 			<input type="hidden" name="notation_id_donnees" id="id_donnees[(#ENV*{_form_id})]" value="[(#ENV*{_id_objet})]" />
 			<input type="hidden" name="content" id="content[(#ENV*{_form_id})]" value="" />
 			<input type="submit" class="access" value="Voter"/>
-			[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
+			[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">[(#HTML5|oui)<span itemprop="ratingCount">](#GET{total})[(#HTML5|oui)</span>] [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 		</div>
 	</form>
 ]
 
 [(#ENV**{editable}|non)
 	[(#NOTATION_ETOILE{[(#GET{note_ponderee})],[(#ENV*{_objet})][(#ENV*{_id_objet})]})]
-	[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
+	[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">[(#HTML5|oui)<span itemprop="ratingCount">](#GET{total})[(#HTML5|oui)</span>] [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 ]
 
 </div>
