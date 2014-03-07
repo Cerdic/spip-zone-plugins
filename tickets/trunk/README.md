@@ -90,3 +90,60 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 1. Virer les textarea dans la page de configuration des tickets.
 2. Virer la configuration "utiliser les mots-clés" - elle n'a pas de sens, puisque c'est géré dans la configuration de chaque groupe de mots (associer ou non avec les tickets). On laisse par contre une explication avec la liste des groupes de mots associables aux tickets, avec lien vers leur page privée, plus un lien globale de gestion des groupes de mots. Si aucun groupe de mots n'est associable aux tickets, un message spécifique pour expliquer qu'on peut lier des mots aux tickets.
 3. Dans les squelettes, tout considérer comme des mots-clés, et non plus comme des champ. Dans les formulaires, les crayons (vues et contrôleurs) et les tables qui listent les tickets. Ne pas oublier de prendre en compte la notion de groupe important (pour obliger à choisir une valeur) et d'unicité du choix, si cette option du groupe de mots est cochée.
+
+## Versions
+
+### 3.1.0
+
+* liens tickets-objet:
+
+ * table spip_tickets_liens pour lier tout objet aux tickets (81161, 81210)
+ * pipeline affiche_milieu pour montrer et modifier la liste de tickets associés, sur la page privée d'un objet associable aux ticket (81162, 81172)
+ * affichage des objets liés sur la page privée (81173) et publique (81174, 81176, 81212) d'un ticket
+ * paramètre $associer_objet dans le formulaire EDITER_TICKET pour permettre de créer et associer un ticket, puis revenir à l'objet associé (81170)
+ * formulaire d'édition d'un ticket : on ne l'affiche pas si on cherche à l'associer à un objet et que ce n'est pas autorisé (81181, 81182)
+ * configuration : choisir les objets associables aux tickets - à noter : tous sont désactivés par défaut, et il n'est pas interdit d'autoriser l'association entre tickets (81171)
+ * autorisation : fonction d'autorisation associertickets
+ * squelette (noisette) pour créer et associer un ticket à insérer dans la page d'un autre objet (81183)
+
+* squelette public des tickets :
+
+ * critères objet/id_objet pour filtrer la liste des tickets selon leur association ou non à un objet (81177)
+ * réduction de la différence entre inclure/liste_tickets_ss_version.html et inclure/liste_tickets.html (81179)
+
+* divers :
+
+ * MAJ du fichier README pour prochaines évolutions (81233, 81239, 81240)
+ * squelette public d'un ticket : style (81211)
+
+### 3.0.0
+
+* mots-clés :
+
+ * configuration : permettre les mots-clés sur les tickets
+ * configuration : comme seulement pour les groupes de mots-clés configurés pour pouvoir être associés aux tickets, on affiche pour rappel la liste de ces groupes dans la page de configuration
+ * fonction d'autorisation "associermots" pour les tickets
+ * crayon pour associer/détacher les mots-clés, avec un select par groupe de mots-clés
+ * saisies pour les mots-clés dans le formulaire d'édition d'un ticket (80807)
+ * si le paramètre de conf "unseul" du groupe de mots est activé, alors on ne permet de sélectionner qu'un seul mot (select simple)
+
+* squelette public d'un ticket :
+
+ * auteur et date sortent de la liste des champs pour aller dans info-publi sous le titre (80622)
+ * statut et assignation du ticket passent de formulaire à seulement crayons dans la page publique du ticket (80610, 80695)
+ * affichage du logo de l'auteur assigné dans la vue de l'assignation (81123)
+ * notification envoyée quand l'assignation est changée par le crayon (80698)
+ * forum : pas de réponse directe à un message (thread) si les commentaires sont affichés en liste (81039)
+ * forum : on autorise à commenter un ticket fermé (81113)
+ * forum : ne pas afficher le titre du commentaire, parce q'il est toujours égal au titre du ticket (81120)
+ * réduction de la différence entre content/ et contenu/ (80696)
+
+* divers :
+
+ * configuration : message pour inciter à utiliser le plugin Autorité pour plus de contrôle sur les forums (autoriser l'auteur·e d'un commentaire à le modifier) (81105)
+ * configuration : remplacement de saisies oui_non par des saisies checkbox (80514)
+ * bug : détail javascript dans les formulaires de statut et assignation (80548)
+ * bug : coquille dans la fonction d'assignation (80697)
+ * bug : appel des bonnes fonctions d'autorisation (81034)
+ * indentation (81038, 81178)
+ * fichier README pour la liste d'évolutions (81116, 81119)
