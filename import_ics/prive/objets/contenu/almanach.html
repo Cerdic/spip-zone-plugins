@@ -13,14 +13,14 @@
 <div class="champ contenu_id_article[ (#ID_ARTICLE*|strlen|?{'',vide})]">
 <label><strong><:almanach:label_id_article:> :</strong> </label> 
 <span dir='#LANG_DIR' class='#EDIT{id_article} id_article'>
-	#INFO_TITRE{article,#ID_ARTICLE}&nbsp;(article n°#ID_ARTICLE)
+	<a href="#INFO_URL_ARTICLE{article,#ID_ARTICLE}">#INFO_TITRE{article,#ID_ARTICLE}&nbsp;(article n°#ID_ARTICLE)</a>
 </span>	
 </div>
 
 <div class="champ contenu_id_mot[ (#ID_MOT*|strlen|?{'',vide})]">
 <BOUCLE_mot_lie(MOTS){id_mot=#ID_MOT}>
 	<label><strong><:almanach:label_id_mot:></strong></label>
-	<span dir='#LANG_DIR' class='#EDIT{id_mot} id_mot'>  #TITRE (mot n°#ID_MOT)</span> 	
+	<span dir='#LANG_DIR' class='#EDIT{id_mot} id_mot'><a href="#URL_ECRIRE{mot,id_mot=#ID_MOT}">#TITRE (mot n°#ID_MOT)</a> </span> 	
 </BOUCLE_mot_lie>
 
 <p></p>
