@@ -52,14 +52,14 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 * Importation d'un événement dans la base
 **/
 function importation_evenement($objet_evenement,$id_almanach){
-	#on recupere les infos de l'evenement dans des variables
+	//on recupere les infos de l'evenement dans des variables
 	    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
 	    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
 	    $summary_array = $objet_evenement->getProperty("summary", 1, TRUE); #summary est un array on recupere la valeur dans l'insertion attention, summary c'est pour le titre !
 		$url = $objet_evenement->getProperty( "URL");#on récupère l'url de l'événement pour la mettre dans les notes histoire de pouvoir relier à l'événement original
 	    $descriptif_array = $objet_evenement->getProperty("DESCRIPTION", 1,TRUE);
 	    $organizer = $objet_evenement->getProperty("ORGANIZER");#organisateur de l'evenement
-	#données de localisation de l'évenement
+	//données de localisation de l'évenement
 	    $localisation = $objet_evenement->getProperty( "GEO" );#c'est un array array( "latitude"  => <latitude>, "longitude" => <longitude>))
 	    $latitude = $localisation['latitude'];
 	    $longitude = $localisation['longitude'];
@@ -85,11 +85,21 @@ function importation_evenement($objet_evenement,$id_almanach){
     			}
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_fin = $endDate.$endTime;
+    //On gère la date de création
+      		$created_array = $objet_evenement->getProperty("created", 1, TRUE);
+   			$created = $created_array["value"];
+    		$createdDate = "{$created["year"]}-{$created["month"]}-{$created["day"]}";
+    		$createdTime = '';#on initialise le temps de fin
+    		if (!in_array("DATE", $created_array["params"])) {
+       			$createdTime = " {$created["hour"]}:{$created["min"]}:{$created["sec"]}";
+    			}
+    		#on fait une variable qui contient le résultat des deux précédentes actions
+    		$date_creation = $createdDate.$createdTime;	
 	#on insere les infos des événements dans la base 
 	# ca ce sera pour quand j'arriverai à faire fonctionner le selecteur d'articles $id_article = preg_replace('(article\|)','',_request('id_article')); #le selecteur d'article fournit un tableau, on se débarasse du mot article dedans et on appellera ensuite la première valeur (il pourrait y avoir des saisies multiples même si ici on ne les autorise pas)
 	$id_mot = _request('id_mot');
 	$id_article = _request('id_article'); 
-	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0','uid'=>$uid_distante,'sequence'=>$sequence_distante,'notes'=>$url));
+	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>str_replace('SUMMARY:', '', $summary_array["value"]),'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','date_creation'=>$date_creation,'attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0','uid'=>$uid_distante,'sequence'=>$sequence_distante,'notes'=>$url));
 	
 	#on associe l'évéenement à l'almanach
 	#objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
@@ -109,13 +119,35 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
+
 	#on associe le mot à l'almanach
 	$id_mot = _request('id_mot');
 	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_almanach,'objet'=>'almanach'));
 	#configuration nécessaire à la récupération
-	$config = array("unique_id"=>"","url"=>_request("url"));
-	$cal = new vcalendar($config);
-	$cal->parse();
+	//on vérifie si c'est un agenda google, si c'est le cas, il faut un traitement particulier
+	$hote = parse_url(_request("url"));
+	if ($hote[host]=="www.google.com")
+		{# on passe par un fichier temp car notre librairie fonctionne comme ca
+		$u = file_get_contents(_request("url"));//on récupère le contenu du fichier distant
+			if (!$u) {
+  				echo "Impossible de lire le calendrier distant.";//au cas ou ça ne voudrait pas marcher
+			 	exit;
+			}
+		$tmp = _DIR_TMP . 'ics-'.md5($u);//on écrit le ficier tmp
+		ecrire_fichier($tmp, str_replace("\r\n", "\n", $u));
+
+		//initialisaiton de l'agenda avec le fichier tmp
+		$cal = new vcalendar();
+		$cal->setConfig( 'filename', $tmp );
+		$cal->parse();
+
+		supprimer_fichier($tmp);//suppression du fichier tmp
+	}
+	else{
+		$config = array("unique_id"=>"","url"=>_request("url"));
+		$cal = new vcalendar($config);
+		$cal->parse();
+	}
 	//ON fait un appel dans la base de spip pour vpouvoir vérifier si un événement y est déjà (ça ne se fait pas en une ligne...)
 	$liens = sql_allfetsel('id_evenement, uid, sequence', 'spip_evenements');
 	// on definit un tableau des uid présentes dans la base
@@ -125,7 +157,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	};
  while ($comp = $cal->getComponent())
  {
-#les variables qui vont servir à vérifier l'existence et l'unicité 
+//les variables qui vont servir à vérifier l'existence et l'unicité 
 	   	$sequence_distante = $comp->getProperty( "SEQUENCE" );#sequence d l'evenement http://kigkonsult.se/iCalcreator/docs/using.html#SEQUENCE
 	    $uid_distante = $comp->getProperty("UID");#uid de l'evenement
 		if (!is_int($sequence_distante)){$sequence_distante="0";}//au cas où le flux ics ne fournirait pas le champ sequence, on initialise la valeur à 0 comme lors d'un import
