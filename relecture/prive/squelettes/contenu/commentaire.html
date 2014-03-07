@@ -24,6 +24,7 @@
 	<h1>(#INFO_TITRE{commentaire, #ID_COMMENTAIRE}|sinon{<:relecture:titre_commentaire:>})[(#CHEMIN_IMAGE{commentaire-24.png}|balise_img{commentaire, cadre-icone})]</h1>
 	[<p class="soustitre">
 		<:relecture:label_article_commente{relecture=#GET{lien_relecture}}:> : <a[ href="(#URL_ECRIRE{article, id_article=#GET{id_article}})"]>(#INFO_TITRE{article, #GET{id_article}})</a>
+		<br />[<:relecture:label_commentaire_apropos:> (#VAL{relecture:info_article_}|concat{#ELEMENT}|_T)]
 	</p>]],
 	simple fiche_objet})
 ]

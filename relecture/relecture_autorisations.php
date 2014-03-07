@@ -135,7 +135,7 @@ function autoriser_relecture_voir_dist($faire, $type, $id, $qui, $opt) {
 	// Conditions :
 	// soit,
 	// - la relecture est ouverte
-	// - l'auteur connecté possède l'autorisation de modifier ou de commenter la relecture
+	// - l'auteur connecté possède l'autorisation de modifier ou de participer à la relecture
 	// ou soit,
 	// - la relecture est clôturée
 	// - et l'auteur connecté possède l'autorisation de voir les relectures de l'article
@@ -319,7 +319,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 	// Conditions :
 	// soit,
-	// - l'auteur concerné est l'auteur du commmentaire (-> il peut donc modifier le texte)
+	// - l'auteur concerné est l'auteur du commentaire (-> il peut donc modifier le texte)
 	// - la modification concerne le "texte" du commentaire ou n'est pas précisée
 	// - le commentaire est ouvert
 	// - aucun message de forum n'a encore été déposé sur le commentaire
