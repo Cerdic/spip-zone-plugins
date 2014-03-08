@@ -1,7 +1,7 @@
 <paquet
 	prefix="gravatar"
 	categorie="communication"
-	version="1.5.1"
+	version="1.5.2"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/gravatar-64.png"
