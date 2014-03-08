@@ -85,7 +85,7 @@ function seo_insere_remplace_metas($head,$contexte){
 
 	if (isset($config['meta_tags']['activate']) AND $config['meta_tags']['activate']=='yes'){
 		/* d'abord les meta tags */
-		$meta_tags = seo_generer_meta_tags(null,$contexte);
+		$meta_tags = seo_generer_meta_tags(null,$contexte,"insertion_auto");
 
 		foreach ($meta_tags as $key => $meta){
 			$preg = '';
@@ -293,21 +293,32 @@ function seo_calculer_meta_tags($contexte=null){
  * @param null|array $meta_tags
  * @return array
  */
-function seo_generer_meta_tags($meta_tags = null, $contexte = null){
+function seo_generer_meta_tags($meta_tags = null, $contexte = null, $insertion_auto = null){
 	$tags = "";
+	if($insertion_auto) $tags = array();
+
 	//Set meta list if not provided
 	if (!is_array($meta_tags))
 		$meta_tags = seo_calculer_meta_tags($contexte);
 
 	// Print the result on the page
 	foreach ($meta_tags as $name => $content){
-		if ($content!='')
-			if ($name=='title')
-				$tags .= '
+		if ($content!=''){
+			if ($name=='title'){
+				if($insertion_auto){ $tags[$name] = '<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>';
+				}else{
+					$tags .= '
 	<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>';
-			else
-				$tags .= '
+				}
+			}
+			else{
+				if($insertion_auto){ $tags[$name] = '<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />';
+				}else{
+					$tags .= '
 	<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />';
+				}
+			}
+		}
 	}
 	return $tags;
 }
