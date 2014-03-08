@@ -13,6 +13,7 @@ function popup_liens_retour($texte,$_popup='oui'){
 	if(!$popup) return $texte;
 	$regs = $match = array();
 	// pour chaque lien
+	include_spip('inc/lien');
 	if (preg_match_all(_RACCOURCI_LIEN, $texte, $regs, PREG_SET_ORDER)) {	
 		foreach ($regs as $reg) {
 			$done = false;

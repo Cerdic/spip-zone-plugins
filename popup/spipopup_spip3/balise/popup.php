@@ -48,6 +48,7 @@ function balise_POPUP_dyn($param='', $page=false, $width=false, $height=false, $
 	}
 
 	// Cas des objets SPIP
+	include_spip('inc/lien');
 	if (preg_match(_RACCOURCI_URL, $param, $match)) {
 
 		if(in_array($match[1], array(
