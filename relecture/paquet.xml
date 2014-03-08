@@ -1,7 +1,7 @@
 <paquet
 	prefix="relecture"
 	categorie="edition"
-	version="0.1.18"
+	version="0.1.19"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="relecture-64.png"
@@ -32,5 +32,5 @@
 	<pipeline nom="forum_objets_depuis_env" inclure="relecture_pipelines.php" />
 
 	<necessite nom="revisions" compatibilite="[1.6.5;[" />
-	<necessite nom="forum" compatibilite="[1.8.30;[" />
+	<necessite nom="forum" compatibilite="[1.8.32;[" />
 </paquet>

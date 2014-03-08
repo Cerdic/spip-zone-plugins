@@ -353,7 +353,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 
 /**
- * Autorisation moderer - repondre, changer le statut, supprimer - un commentaire
+ * Autorisation de déposer un message de forum (privé) sur un commentaire
  *
  * @param object $faire
  * @param object $type
@@ -362,66 +362,24 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param object $opt
  * @return
  */
-function autoriser_commentaire_moderer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_commentaire_participerforumprive_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
 
 	// Conditions :
-	// - l'auteur connecte est un des auteurs de l'article
-	// - ou un admin complet ou restreint à la rubrique d'appartenance de l'article (besoin de maintenance)
 	// - le commentaire est encore ouvert
-	if ($id_commentaire = intval($id)) {
-		$from = array('spip_commentaires AS c', 'spip_relectures AS r');
-		$where = array("id_commentaire=$id_commentaire", 'c.id_relecture=r.id_relecture');
-		$infos = sql_fetsel('c.statut, r.id_article', $from, $where);
-
-		$id_article = $infos['id_article'];
-		$les_auteurs = lister_objets_lies('auteur', 'article', $id_article, 'auteurs_liens');
-
-		$from = 'spip_articles';
-		$where = array("id_article=$id_article");
-		$id_rubrique = sql_getfetsel('id_rubrique', $from, $where);
-
-		$autoriser =
-			(($infos['statut'] == 'ouvert')
-			AND
-			((in_array($qui['id_auteur'], $les_auteurs)
-				OR (($qui['statut'] == '0minirezo')
-					AND (!$qui['restreint'] OR !$id_rubrique OR in_array($id_rubrique, $qui['restreint']))))));
-	}
-
-	return $autoriser;
-}
-
-
-/**
- * Autorisation de modifier le statut d'un commentaire
- *
- * @param object $faire
- * @param object $type
- * @param object $id
- * @param object $qui
- * @param object $opt
- * @return
- */
-function autoriser_commentaire_participerforum_dist($faire, $type, $id, $qui, $opt) {
-
-	$autoriser = false;
-
-	// Conditions :
-	// - Seul l'auteur ayant depose le commmentaire peut le modifier
-	// - le commentaire est encore ouvert
+	// - l'auteur connecté est autorisé à commenter la relecture
 	if ($id_commentaire = intval($id)) {
 		$from = 'spip_commentaires';
 		$where = array("id_commentaire=$id_commentaire");
-		$infos = sql_fetsel('statut', $from, $where);
+		$infos = sql_fetsel('statut, id_relecture', $from, $where);
 
 		$commentaire_ouvert = ($infos['statut'] == 'ouvert');
 
-		$autorise_voir_commentaire = autoriser('voir', 'commentaire', $id_commentaire, $qui, $opt);
+		$autorise_commenter = autoriser('commenter', 'relecture', intval($infos['id_relecture']), $qui, $opt);
 
 		$autoriser =
-			($commentaire_ouvert AND $autorise_voir_commentaire);
+			($commentaire_ouvert AND $autorise_commenter);
 	}
 
 

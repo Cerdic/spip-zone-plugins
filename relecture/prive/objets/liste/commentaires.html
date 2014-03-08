@@ -74,9 +74,6 @@
 								|parametre_url{element, #ELEMENT}
 								|parametre_url{repere_debut, #REPERE_DEBUT}
 								|parametre_url{repere_fin, #REPERE_FIN}}
-				[(#AUTORISER{moderer, commentaire, #ID_COMMENTAIRE})
-					[(#BOUTON_ACTION{<:relecture:bouton_moderer:>, #GET{url_edit}, '', '', ''})]
-				]
 				[(#AUTORISER{moderer, commentaire, #ID_COMMENTAIRE}|non)
 					[(#AUTORISER{modifier, commentaire, #ID_COMMENTAIRE})
 						[(#BOUTON_ACTION{<:relecture:bouton_modifier:>, #GET{url_edit}, '', '', ''})]
