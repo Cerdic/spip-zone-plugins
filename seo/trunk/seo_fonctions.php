@@ -294,7 +294,7 @@ function seo_calculer_meta_tags($contexte=null){
  * @return array
  */
 function seo_generer_meta_tags($meta_tags = null, $contexte = null){
-	$tags = array();
+	$tags = "";
 	//Set meta list if not provided
 	if (!is_array($meta_tags))
 		$meta_tags = seo_calculer_meta_tags($contexte);
@@ -303,9 +303,11 @@ function seo_generer_meta_tags($meta_tags = null, $contexte = null){
 	foreach ($meta_tags as $name => $content){
 		if ($content!='')
 			if ($name=='title')
-				$tags[$name] = '<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>';
+				$tags .= '
+	<title>' . trim(entites_html(supprimer_numero(textebrut(propre($content))))) . '</title>';
 			else
-				$tags[$name] = '<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />';
+				$tags .= '
+	<meta name="' . $name . '" content="' . trim(attribut_html(textebrut(propre($content)))) . '" />';
 	}
 	return $tags;
 }
