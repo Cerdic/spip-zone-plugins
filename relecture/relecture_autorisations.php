@@ -334,7 +334,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 		$commentaire_ouvert = ($infos['statut'] == 'ouvert');
 
-		$nb_messages_forum = sql_countsel('spip_forums', array("id_commentaire=$id_commentaire"));
+		$nb_messages_forum = sql_countsel('spip_forum', array('objet=' . sql_quote('commentaire'), "id_objet=$id_commentaire"));
 
 		$autorise_modifier_relecture = autoriser('modifier', 'relecture', intval($infos['id_relecture']),$qui, array());
 
@@ -345,7 +345,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 				AND (!$opt OR ($opt['champ'] == 'texte')))
 			OR ($autorise_modifier_relecture
 				AND $commentaire_ouvert
-				AND (!$opt OR ($opt['champ'] == 'texte'))));
+				AND (!$opt OR ($opt['champ'] == 'reponse'))));
 	}
 
 	return $autoriser;
