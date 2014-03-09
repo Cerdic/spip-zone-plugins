@@ -29,11 +29,10 @@
 				<th class="statut" scope="col">[(#TRI{statut, <span title="<:lien_trier_statut|attribut_html:>">#</span>, ajax})]</th>
 				<th class="titre principale" scope="col">[(#TRI{id_relecture, <:info_titre:>, ajax})]</th>
 			[(#ENV{affichage}|=={menu_navigation}|non)
-				<th class="titre" scope="col"><:relecture:label_article_relu:></th>
-				[(#ENV{affichage}|=={liste_organisation}|oui)
-					<th class="numero"><:relecture:label_nb_commentaires_a_traiter:></th>
-				]
 				<th class="date" scope="col">[(#TRI{date_fin_commentaire, <:relecture:label_date_fin_commentaire_abrege:>, ajax})]</th>
+				<th class="titre" scope="col"><:relecture:label_article_relu:></th>
+				<th class="numero"><:relecture:label_revisions:></th>
+				<th class="numero"><:relecture:label_nb_commentaires:></th>
 			]
 			</tr>
 		</thead>
@@ -52,14 +51,17 @@
 				]
 				</td>
 			[(#ENV{affichage}|=={menu_navigation}|non)
+				<td class="date">
+					[(#STATUT|=={ouverte}|oui)[(#DATE_FIN_COMMENTAIRE|affdate_court)]]
+				</td>
 				<td class="titre">
 					<a[ href="(#ID_ARTICLE|generer_url_entite{article})"]>[(#INFO_TITRE{article, #ID_ARTICLE})]</a>
 				</td>
-				[(#ENV{affichage}|=={liste_organisation}|oui)
-					#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires}
-					<td class="numero">[(#GET{compteurs}|table_valeur{ouvert})]</td>
-				]
-				<td class="date">[(#DATE_FIN_COMMENTAIRE|affdate_court)]</td>
+				<td class="numero">#REVISION_OUVERTURE / #REVISION_CLOTURE</td>
+				#SET{compteurs, #ID_RELECTURE|relecture_compter_commentaires}
+				<td class="numero">
+					[(#GET{compteurs}|table_valeur{ouvert})] / [(#GET{compteurs}|table_valeur{total})]
+				</td>
 			]
 			</tr>
 	</BOUCLE_liste_relectures>

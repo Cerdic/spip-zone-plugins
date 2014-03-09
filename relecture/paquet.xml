@@ -1,7 +1,7 @@
 <paquet
 	prefix="relecture"
 	categorie="edition"
-	version="0.1.20"
+	version="0.2.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="relecture-64.png"
@@ -20,12 +20,9 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/relecture_declarations.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/relecture_declarations.php" />
 	<pipeline nom="autoriser" inclure="relecture_autorisations.php" />
-	<pipeline nom="affiche_gauche" inclure="relecture_pipelines.php" />
-	<pipeline nom="boite_infos" inclure="relecture_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="relecture_pipelines.php" />
 	<pipeline nom="pre_insertion" inclure="relecture_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="relecture_pipelines.php" />
-	<pipeline nom="affiche_milieu" inclure="relecture_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="relecture_pipelines.php" />
 	<pipeline nom="header_prive" inclure="relecture_pipelines.php" />
 	<pipeline nom="header_prive_css" inclure="relecture_pipelines.php" />
@@ -33,4 +30,6 @@
 
 	<necessite nom="revisions" compatibilite="[1.6.5;[" />
 	<necessite nom="forum" compatibilite="[1.8.32;[" />
+
+	<menu nom="relectures" titre="relecture:bouton_relectures" parent="menu_activite" icone="images/relecture-16.png" />
 </paquet>

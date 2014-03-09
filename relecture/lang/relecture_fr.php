@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_saisir_commentaire' => 'Saisir le texte de votre commentaire',
 	'bouton_voir_relecture' => 'Accéder à la relecture en cours',
 	'bouton_voir_relectures' => 'Afficher l\'historique des relectures',
+	'bouton_relectures' => 'Relectures',
 
 // E
 	'erreur_saisie_commentaire_texte' => 'Saisissez un commentaire de plus de 3 caractères',
@@ -75,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_cloture_commentaire' => 'Fermé le',
 	'label_date_cloture_relecture' => 'Clôturée le',
 	'label_date_modif' => 'Date',
-	'label_date_fin_commentaire_abrege' => 'Fin :',
+	'label_date_fin_commentaire_abrege' => 'Fin prévue',
 	'label_date_fin_commentaire' => 'Date de fin des commentaires',
 	'label_date_modif_commentaire' => 'Modifié le',
 	'label_date_ouverture_commentaire' => 'Ouvert le',
@@ -84,7 +85,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_description' => 'Informations à destination des relecteurs',
 	'label_element' => 'Concerne',
 	'label_emetteur' => 'Emis par',
-	'label_nb_commentaires_a_traiter' => 'À traiter',
+	'label_nb_commentaires' => 'Commentaires',
+	'label_revisions' => 'Révisions',
 	'label_non_restreinte' => 'Non, autoriser tous les rédacteurs',
 	'label_relecture_restreinte' => 'Restreindre la relecture à une liste d\'auteurs',
 	'label_revision_cloture' => 'Révision',
@@ -92,6 +94,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_revision_ouverture' => 'Révision',
 	'label_statut' => 'Statut',
 	'label_autoriser_tous_relecteurs' => 'Autoriser la création de relecture ouverte à tous les rédacteurs',
+
+// O
+	'onglet_relectures_toutes' => 'Toutes les relectures',
+	'onglet_relectures_miennes' => 'Mes relectures',
 
 // R
 	'resume_table_relectures' => 'Liste des relectures',
@@ -126,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_relecteurs' => 'Relecteurs',
 	'titre_menu_commentaires' => 'Commentaires émis',
 	'titre_page_configurer' => 'Configuration du plugin Relecture',
+	'titre_page_relectures' => 'Les relectures',
 	'titre_relecture_fermee' => 'Relecture fermée',
 	'titre_relecture_ouverte' => 'Relecture ouverte',
 	'titre_relecture' => 'Relecture',

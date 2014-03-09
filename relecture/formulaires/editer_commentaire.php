@@ -56,7 +56,7 @@ function formulaires_editer_commentaire_charger_dist($id_commentaire='oui', $red
 			// Si l'auteur connecté a l'autorisation de modifier le texte alors il peut aussi passer
 			// le statut à supprimé
 			if (autoriser('modifier', 'commentaire', $id_commentaire, '', array('champ' => 'texte')))
-				$statuts[] = 'ouvert';
+				$statuts[] = 'poubelle';
 		}
 
 		// On construit le select des statuts
@@ -95,9 +95,9 @@ function formulaires_editer_commentaire_verifier_dist($id_commentaire, $redirect
 	$reponse = _request('reponse');
 	if ($statut == 'refuse') {
 		if (!$reponse)
-			$erreurs['texte'] = _T('relecture:erreur_commentaire_refuse_sans_reponse');
+			$erreurs['reponse'] = _T('relecture:erreur_commentaire_refuse_sans_reponse');
 		elseif (strlen($reponse) < 3)
-			$erreurs['texte'] = _T('relecture:erreur_saisie_commentaire_reponse');
+			$erreurs['reponse'] = _T('relecture:erreur_saisie_commentaire_reponse');
 	}
 
 	return $erreurs;

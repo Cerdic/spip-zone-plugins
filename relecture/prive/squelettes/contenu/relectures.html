@@ -1,0 +1,35 @@
+<h1 class="grostitre"><:relecture:titre_page_relectures:></h1>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#SELF
+				|parametre_url{id_auteur,''}
+				|lien_ou_expose{<:relecture:onglet_relectures_toutes:>,[(#ENV{id_auteur,''}|non)],ajax})]
+		</li>
+		<li>[(#SELF
+				|parametre_url{id_auteur,#SESSION{id_auteur}}
+				|lien_ou_expose{<:relecture:onglet_relectures_miennes:>,#ENV{id_auteur,''}|=={#SESSION{id_auteur}},ajax})]
+		</li>
+	</ul>
+</div>
+
+<BOUCLE_onglet(CONDITION){si #ENV{id_auteur,''}}>
+	#SET{liste, #ARRAY}
+	<BOUCLE_relecteurs(RELECTURES)>
+		[(#AUTORISER{voir, relecture, #ID_RELECTURE})
+			#SET{liste, #GET{liste}|push{#ID_RELECTURE}}
+		]
+	</BOUCLE_relecteurs>
+		[(#SET{inclusion, [(#GET{liste}|implode{','}|concat{)})] })]
+		[(#SET{inclusion, [(#VAL{'id_relecture IN ('}|concat{#GET{inclusion}} )] })]
+		<INCLURE{fond=prive/objets/liste/relectures,
+			par=date_ouverture,
+			pas=10,
+			where=#GET{inclusion},
+			env, ajax}>
+	</B_relecteurs>
+</BOUCLE_onglet>
+	<INCLURE{fond=prive/objets/liste/relectures,
+		par=date_ouverture,
+		pas=10,
+		env, ajax}>
+<//B_onglet>

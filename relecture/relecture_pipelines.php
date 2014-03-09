@@ -43,68 +43,6 @@ function relecture_header_prive_css($flux){
 
 /* ----------------------- AFFICHAGES ----------------------- */
 
-/**
- * Affichage en rappel dans la page d'accueil pour l'auteur connecte :
- * - des relectures auxquelles il participe en tant que relecteur
- * - des relectures qu'il administre en tant qu'auteur de l'article
- *
- * @param array $flux
- * @return array
- *
-**/
-function relecture_affiche_milieu($flux) {
-
-	if (($type = $flux['args']['type-page'])=='accueil') {
-		$flux['data'] .= recuperer_fond('prive/squelettes/contenu/accueil-relectures');
-	}
-
-	return $flux;
-}
-
-
-/**
- * Affichage du bloc relecture de l'article en cours d'affichage :
- * - bouton ouvrir une relecture
- * - ou informations sur la relecture en cours
- *
- * @param array $flux
- * @return array
- *
-**/
-function relecture_affiche_gauche($flux) {
-
-	if (($type = $flux['args']['exec'])=='article'){
-		if ($id = intval($flux['args']['id_article'])) {
-			$table = table_objet($type);
-			$id_table_objet = id_table_objet($type);
-		}
-	}
-
-	return $flux;
-}
-
-
-/**
- * Affichage dans la boite d'informations de l'article en cours d'affichage :
- * - du statut modifié de par la relecture en cours
- * - du lien menant à la relecture en cours
- * - du lien menant a l'historique des relectures cloturees
- *
- * @param array $flux
- * @return array
- *
-**/
-function relecture_boite_infos($flux){
-
-	if (($type = $flux['args']['type'])=='article') {
-		if ($id = intval($flux['args']['id'])) {
-			$table = table_objet($type);
-			$id_table_objet = id_table_objet($type);
-		}
-	}
-
-	return $flux;
-}
 
 
 /* ----------------------- FORMULAIRES ----------------------- */
@@ -306,6 +244,13 @@ function relecture_pre_edition($flux) {
 			AND (in_array($flux['data']['statut'], array('accepte', 'refuse', 'poubelle')))) {
 				// - mise a jour de la date de cloture
 				$flux['data']['date_cloture'] = date('Y-m-d H:i:s');
+			}
+
+			// -- Réouverture d'un commentaire mis à a poubelle
+			if (($flux['args']['statut_ancien'] == 'poubelle')
+			AND ($flux['data']['statut'] == 'ouvert')) {
+				// - mise a jour de la date de cloture
+				$flux['data']['date_cloture'] = null;
 			}
 		}
 	}
