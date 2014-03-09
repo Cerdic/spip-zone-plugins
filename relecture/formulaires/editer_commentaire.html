@@ -2,7 +2,7 @@
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -28,16 +28,12 @@
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{texte})</span>]
 				<textarea name="texte" id="texte"[(#GET{ecrire_texte}|non) readonly="readonly" class="no_barre"][ lang="(#LANG)"] rows="10" cols="40">[(#ENV**{texte})]</textarea>
 		    </li>
-			[(#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', #ARRAY{champ, reponse}})
-			<li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{statut}|oui) erreur]">
+			[<li class="editer editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{statut}|oui) erreur]">
 				<label for="statut"><:relecture:label_commentaire_statut:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{statut})</span>]
-				<select name="statut" id="statut">
-					<option value="accepte"><:relecture:texte_commentaire_accepte:></option>
-					<option value="refuse"><:relecture:texte_commentaire_refuse:></option>
-					<option value="poubelle"><:relecture:texte_commentaire_poubelle:></option>
-				</select>
-		    </li>
+				(#ENV**{_statuts})
+		    </li>]
+			[(#AUTORISER{modifier, commentaire, #ENV{id_commentaire}, '', #ARRAY{champ, reponse}})
 			<li class="editer editer_texte[ (#ENV**{erreurs}|table_valeur{reponse}|oui) erreur]">
 				<label for="reponse"><:relecture:label_commentaire_reponse:></label>
 				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{reponse})</span>]
@@ -49,5 +45,5 @@
 		<!--extra-->
 		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
-	]
+	</BOUCLE_editable>
 </div>

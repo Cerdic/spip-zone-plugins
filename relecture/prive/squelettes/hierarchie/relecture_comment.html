@@ -1,17 +1,1 @@
-[(#REM) <!-- hierarchie specifique pour les commentaires de relecture :
-	- Lien parent vers la page de l'article associe
-	- Lien parent vers la page de la relecture
-	- Un texte designant les commentaires
---> ]
-
-<BOUCLE_relecture(RELECTURES) {id_relecture}>
-	<a href="[(#URL_ECRIRE{article, id_article=#ID_ARTICLE})]">
-		#INFO_TITRE{article, #ID_ARTICLE}
-	</a>
-	&gt;
-	<a href="[(#URL_ECRIRE{relecture, id_relecture=#ID_RELECTURE})]">
-		#INFO_TITRE{relecture, #ID_RELECTURE}
-	</a>
-	&gt;
-	<strong class="on"> <:relecture:titre_commentaires:></strong>
-</BOUCLE_relecture>
+<INCLURE{fond=prive/squelettes/hierarchie/relecture, env} />

@@ -128,22 +128,21 @@ function relecture_formulaire_charger($flux){
 	$id_objet = intval($flux['data']['id_objet']) ? intval($flux['data']['id_objet']) : intval($flux['data']['_id_objet']);
 
 	if ($objet == 'relecture') {
-
 		if ($form == 'dater') {
 			// Identifier le label comme la date de fin des commentaires
 			$flux['data']['_label_date'] = _T('relecture:label_date_fin_commentaire');
 			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
-			$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
+			$flux['data']['editable'] = autoriser('modifier', $objet, $id_objet);
 		}
 		else if ($form == 'editer_liens') {
 			// Changer le titre du formulaire pour désigner clairement les relecteurs
 			$flux['data']['titre'] = _T('relecture:titre_liste_relecteurs');
 			// Le formulaire n'est editable que si l'autorisation modifier est accordee.
-			$flux['data']['editable'] = autoriser('modifier', 'relecture', $id_objet);
+			$flux['data']['editable'] = autoriser('modifier', $objet, $id_objet);
 		}
 		else if ($form == 'instituer_objet') {
 			// Le formulaire n'est editable que si l'autorisation instituer est accordee.
-			$flux['data']['editable'] = autoriser('instituer', 'relecture', $id_objet);
+			$flux['data']['editable'] = autoriser('instituer', $objet, $id_objet);
 		}
 	}
 	else if ($objet == 'article') {
@@ -153,6 +152,13 @@ function relecture_formulaire_charger($flux){
 			$from = 'spip_relectures';
 			$where = array("id_article=$id_objet", "statut=" . sql_quote('ouverte'));
 			$flux['data']['editable'] = (sql_countsel($from, $where) == 0);
+		}
+	}
+	else if ($objet == 'commentaire') {
+		if ($form == 'instituer_objet') {
+			// Etant donné la complexité du workflow, tout est géré dans le formulaire édition
+			// du commentaire. De fait, on désactive le formulaire instituer
+			$flux['data']['editable'] = autoriser('instituer', $objet, $id_objet);
 		}
 	}
 

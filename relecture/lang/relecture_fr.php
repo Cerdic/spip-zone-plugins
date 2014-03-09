@@ -24,6 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_voir_relectures' => 'Afficher l\'historique des relectures',
 
 // E
+	'erreur_saisie_commentaire_texte' => 'Saisissez un commentaire de plus de 3 caractères',
+	'erreur_saisie_commentaire_reponse' => 'Saisissez une réponse de plus de 3 caractères',
+	'erreur_commentaire_refuse_sans_reponse' => 'Saisissez toujours une réponse pour expliquer votre refus',
 	'explication_ajout_commentaire' => 'Pour ajouter des commentaires à cet élément cliquez sur le bouton de la barre d\'outils. Au préalable, si vous souhaitez associer ce commentaire à un emplacement ou à une portion du texte veillez à positionner correctement votre curseur dans le texte.',
 
 // I
@@ -121,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_liste_organisations_relectures' => 'Relectures que vous administrez',
 	'titre_liste_participations_relectures' => 'Relectures auxquelles vous participez',
 	'titre_liste_relecteurs' => 'Relecteurs',
-	'titre_menu_commentaires' => 'Commentaires déjà émis',
+	'titre_menu_commentaires' => 'Commentaires émis',
 	'titre_page_configurer' => 'Configuration du plugin Relecture',
 	'titre_relecture_fermee' => 'Relecture fermée',
 	'titre_relecture_ouverte' => 'Relecture ouverte',

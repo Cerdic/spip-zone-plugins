@@ -36,7 +36,6 @@
 				<th class="date" scope="col">[(#TRI{date_cloture, <:relecture:label_date_cloture_commentaire:>, ajax})]</th>
 			[(#ENV{affichage}|=={menu_navigation}|oui)
 				<th class="date-statut"><:relecture:label_date_statut:></th>
-				<th><:relecture:label_action:></th>
 			]
 				<th class="id" scope="col">[(#TRI{numero, <:info_numero_abbreviation:>, ajax})]</th>
 			</tr>
@@ -67,18 +66,6 @@
 				<td class="date-statut">
 					[(#STATUT|=={ouvert}|oui)[(#DATE_OUVERTURE|affdate_court)]]
 					[(#STATUT|=={ouvert}|non)[(#DATE_CLOTURE|affdate_court)]]
-				</td>
-				<td>
-				#SET{url_edit, #URL_ECRIRE{commentaire_edit, id_commentaire=#ID_COMMENTAIRE}
-								|parametre_url{id_relecture, #ID_RELECTURE}
-								|parametre_url{element, #ELEMENT}
-								|parametre_url{repere_debut, #REPERE_DEBUT}
-								|parametre_url{repere_fin, #REPERE_FIN}}
-				[(#AUTORISER{moderer, commentaire, #ID_COMMENTAIRE}|non)
-					[(#AUTORISER{modifier, commentaire, #ID_COMMENTAIRE})
-						[(#BOUTON_ACTION{<:relecture:bouton_modifier:>, #GET{url_edit}, '', '', ''})]
-					]
-				]
 				</td>
 			]
 				<td class="id">

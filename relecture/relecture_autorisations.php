@@ -321,7 +321,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 	// soit,
 	// - l'auteur concerné est l'auteur du commentaire (-> il peut donc modifier le texte)
 	// - la modification concerne le "texte" du commentaire ou n'est pas précisée
-	// - le commentaire est ouvert
+	// - le commentaire est ouvert ou supprimé
 	// - aucun message de forum n'a encore été déposé sur le commentaire
 	// soit,
 	// - l'auteur possède l'autorisation de modifier la relecture (-> il peut donc modifier la réponse)
@@ -333,6 +333,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 		$infos = sql_fetsel('id_emetteur, statut, id_relecture', $from, $where);
 
 		$commentaire_ouvert = ($infos['statut'] == 'ouvert');
+		$commentaire_supprime = ($infos['statut'] == 'poubelle');
 
 		$nb_messages_forum = sql_countsel('spip_forum', array('objet=' . sql_quote('commentaire'), "id_objet=$id_commentaire"));
 
@@ -340,7 +341,7 @@ function autoriser_commentaire_modifier_dist($faire, $type, $id, $qui, $opt) {
 
 		$autoriser =
 			((($qui['id_auteur'] == $infos['id_emetteur'])
-				AND $commentaire_ouvert
+				AND ($commentaire_ouvert OR $commentaire_supprime)
 				AND ($nb_messages_forum == 0)
 				AND (!$opt OR ($opt['champ'] == 'texte')))
 			OR ($autorise_modifier_relecture
@@ -368,7 +369,8 @@ function autoriser_commentaire_participerforumprive_dist($faire, $type, $id, $qu
 
 	// Conditions :
 	// - le commentaire est encore ouvert
-	// - l'auteur connecté est autorisé à commenter la relecture
+	// - l'auteur connecté est autorisé à modifier la relecture ce qui permet de répondre à des messages
+	//   au moment où on prend en compte des commentaires.
 	if ($id_commentaire = intval($id)) {
 		$from = 'spip_commentaires';
 		$where = array("id_commentaire=$id_commentaire");
@@ -376,7 +378,7 @@ function autoriser_commentaire_participerforumprive_dist($faire, $type, $id, $qu
 
 		$commentaire_ouvert = ($infos['statut'] == 'ouvert');
 
-		$autorise_commenter = autoriser('commenter', 'relecture', intval($infos['id_relecture']), $qui, $opt);
+		$autorise_commenter = autoriser('modifier', 'relecture', intval($infos['id_relecture']), $qui, $opt);
 
 		$autoriser =
 			($commentaire_ouvert AND $autorise_commenter);
@@ -385,6 +387,7 @@ function autoriser_commentaire_participerforumprive_dist($faire, $type, $id, $qu
 
 	return $autoriser;
 }
+
 
 /**
  * Autorisation de modifier le statut d'un commentaire
@@ -399,8 +402,11 @@ function autoriser_commentaire_participerforumprive_dist($faire, $type, $id, $qu
 function autoriser_commentaire_instituer_dist($faire, $type, $id, $qui, $opt) {
 
 	$autoriser = false;
-	$autoriser = true;
 
+	// Pour l'instant la complexité du workflow des statuts ne permet pas de l'implémenter avec le
+	// formulaire instituer actuel. De fait, on bloque le formulaire instituer (dans le pipeline charger)
+	// en renvoyant toujours false à cette autorisation.
+	// Tout le workflow ests géré dans la fonction charger du formulaire d'édition du commentaire.
 	return $autoriser;
 }
 
