@@ -18,40 +18,41 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string
  */
 function lesscss_compile($style, $contexte = array()){
-	require_once 'lessphp/lessc.inc.php';
+	static $import_dirs = null;
+	require_once 'less.php/Less.php';
 
-	if (!class_exists("SPIPlessc")){
-		class SPIPlessc extends lessc {
-			protected function addParsedFile($file) {
-				$this->allParsedFiles[$file] = filemtime($file);
-			}
+	if (is_null($import_dirs)){
+		$path = _chemin();
+		$import_dirs = array();
+		foreach($path as $p){
+			$import_dirs[$p] = url_absolue($p?$p:"./");
 		}
 	}
 
-	// le compilateur lessc compile le contenu
-	$less = new SPIPlessc();
-	// lui transmettre le path qu'il utilise pour les @import
-	$less->importDir = _chemin();
+	$parser = new Less_Parser();
+	$parser->setImportDirs($import_dirs);
 
 	try {
-		$out = $less->parse($style);
+		$parser->parse($style,$contexte['file']?url_absolue($contexte['file']):null);
+		$out = $parser->getCss();
 
-		if ($files = $less->allParsedFiles()
+		if ($files = Less_Parser::AllParsedFiles()
 		  AND count($files)){
-			$files = array_keys($files);
-			$l = strlen(_ROOT_RACINE);
+
+			$l = strlen(_DIR_RACINE);
 			foreach($files as $k=>$file){
-				if (strncmp($file,_ROOT_RACINE,$l)==0){
+				if (strncmp($file,_DIR_RACINE,$l)==0){
 					$files[$k] = substr($file,$l);
 				}
 			}
-			$out = "/*\n#@".implode("\n#@",$files)."\n*/\n" . $out;
+			$out = "/*\n#@".implode("\n#@",$files)."\n*"."/\n" . $out;
 		}
+
 		return $out;
 	}
 	// en cas d'erreur, on retourne du vide...
 	catch (exception $ex) {
-		spip_log('lessc fatal error:'.$ex->getMessage(),'less'._LOG_ERREUR);
+		spip_log('less.php fatal error:'.$ex->getMessage(),'less'._LOG_ERREUR);
 		erreur_squelette(
 			"LESS : Echec compilation"
 			. (isset($contexte['file'])?" fichier ".$contexte['file']:"")

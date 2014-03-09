@@ -2,13 +2,14 @@
 	<nom>LESS CSS</nom>
 	<slogan>Int&#233;gration de l'impl&#233;mentation php de LESS</slogan>
 	<auteur>Jean-Baptiste Bourgoin</auteur>
+	<auteur>Cedric Morin</auteur>
 	<licence>MIT</licence>
-	<version>0.7.11</version>
-	<etat>test</etat>
+	<version>1.0.0</version>
+	<etat>dev</etat>
 	<icon>img/lesscss-32.png</icon>
 	<description>
 LESS est une extension de CSS ajoutant les variables, les classes, les op&#233;rations, les imbrications au langage. Facilitant ainsi
-l'&#233;criture de feuilles de style complexes. [->http://leafo.net/lessphp/]
+l'&#233;criture de feuilles de style complexes. [->http://lessphp.gpeasy.com/]
 
 Ce plugin compile &#224; la vol&#233;e tous les fichiers .less.css ou .less du squelette qui contient #INSERT_HEAD. Vous pouvez aussi forcer la compilation d'un fichier ou d'une feuille de style calcul&#233;e &#224; l'aide du filtre less_css.
 	</description>
