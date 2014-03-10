@@ -26,6 +26,15 @@ function pages_affiche_milieu_ajouter_page($flux){
 		)
 		{
 			
+			//On force l'id parent à -1
+			//Par principe une page nouvelle ou existante est dans la rubrique parent -1
+			$cherche = "/(<input[^>]*name=('|\")id_parent[^>]*>)/is";
+			if (!preg_match($recherch,$flux_data)) {
+			    $cherche = "/(<input[^>]*name=('|\")id_rubrique[^>]*>)/is";
+			    $remplace = "$1<input type=\"hidden\" name=\"id_parent\" value=\"-1\" />\n";
+			    $flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
+			}
+			
 			// On cherche et remplace l'entete de la page : "modifier la page"
 			$cherche = "/(<div[^>]*class=('|\")entete-formulaire.*?<\/span>).*?(<h1>.*?<\/h1>.*?<\/div>)/is";
 			$surtitre = _T('pages:modifier_page');
@@ -186,8 +195,18 @@ function pages_editer_contenu_objet($flux){
     	$value = $args['contexte']['champ_page'] ? $args['contexte']['champ_page'] : $args['contexte']['page'];
     	$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$value.'" />';
     	$remplace .= '</li>';
-		$flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
-		$flux['data'] = preg_replace($cherche, '', $flux['data']);
+		if (preg_match($cherche,$flux['data'])) {
+		    $flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
+		    $flux['data'] = preg_replace($cherche, '', $flux['data']);
+		} else {
+		    $cherche = "/(<li[^>]*class=('|\")editer editer_soustitre.*?<\/li>)/is";
+		    if (preg_match($cherche,$flux['data'])) {
+    		    $flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
+    		} else {
+    		    $cherche = "/(<li[^>]*class=('|\")editer editer_titre.*?<\/li>)/is";
+    		    $flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
+    		}
+		}
 	}
 	return $flux;
 }
