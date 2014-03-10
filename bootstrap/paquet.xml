@@ -20,7 +20,7 @@
 	<pipeline nom="affichage_final" inclure="bootstrap_fonctions.php" />
 
 	<necessite nom="SPIP" compatibilite="[3.0.0;]" />
-	<necessite nom="lesscss" compatibilite="[0.7.2;]" />
+	<necessite nom="lesscss" compatibilite="[0.7.2;0.9.9]" />
 
 	<chemin path="bootstrap" type="public" />
 	<chemin path="bootstrap2spip" type="public" />
