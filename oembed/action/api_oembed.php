@@ -14,6 +14,8 @@ function action_api_oembed_dist(){
 		'maxheight' => _request('maxheight'),
 		'maxwidth' => _request('maxwidth'),
 		'format' => _request('format'),
+		// support du jsonp: http://json-p.org/
+		'callback_jsonp' => _request('callback_jsonp'),
 	);
 
 	$format = ($args['format']=='xml'?'xml':'json');
