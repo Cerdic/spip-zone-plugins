@@ -1,12 +1,12 @@
-<p class="petitclair pouremail"><:lettres:desabonnement:> : <a href="../../../zone/spip-lettres/spip-lettres-200/emails/%%URL_VALIDATION_DESABONNEMENTS%%" class="spip"><:lettres:se_desabonner:></a></p>
+<p class="petitclair pouremail"><:lettres:desabonnement:> : <a href="%%URL_VALIDATION_DESABONNEMENTS%%" class="spip"><:lettres:se_desabonner:></a></p>
 </td>
 <td width="20" style="background-color: #fff;">&nbsp;</td>
 </tr>
 <BOUCLE_lettre(LETTRES) {id_lettre}>[<tr>
-<td colspan="3" width="580" style="background-color: #fff;"><a href="#URL_SITE_SPIP" title="[(#DESCRIPTIF_SITE_SPIP|textebrut)]"><img src="../../../zone/spip-lettres/spip-lettres-200/emails/(#LOGO_LETTRE_SURVOL::extraire_attribut{src})" alt="[(#NOM_SITE_SPIP|textebrut)]" border="0" width="[(#LOGO_LETTRE_SURVOL||extraire_attribut{width})]" height="[(#LOGO_LETTRE_SURVOL||extraire_attribut{height})]" /></a></td>
+<td colspan="3" width="580" style="background-color: #fff;"><a href="#URL_SITE_SPIP" title="[(#DESCRIPTIF_SITE_SPIP|textebrut)]"><img src="(#LOGO_LETTRE_SURVOL||extraire_attribut{src})" alt="[(#NOM_SITE_SPIP|textebrut)]" border="0" width="[(#LOGO_LETTRE_SURVOL||extraire_attribut{width})]" height="[(#LOGO_LETTRE_SURVOL||extraire_attribut{height})]" /></a></td>
 </tr>
 ]</BOUCLE_lettre>[<tr>
-<td colspan="3" width="580" style="background-color: #fff;"><a href="#URL_SITE_SPIP" title="[(#DESCRIPTIF_SITE_SPIP|textebrut)]"><img src="../../../zone/spip-lettres/spip-lettres-200/emails/(#LOGO_NOTIFICATION_SURVOL::extraire_attribut{src})" alt="[(#NOM_SITE_SPIP|textebrut)]" border="0" width="[(#LOGO_NOTIFICATION_SURVOL||extraire_attribut{width})]" height="[(#LOGO_NOTIFICATION_SURVOL||extraire_attribut{height})]" /></a></td>
+<td colspan="3" width="580" style="background-color: #fff;"><a href="#URL_SITE_SPIP" title="[(#DESCRIPTIF_SITE_SPIP|textebrut)]"><img src="(#LOGO_NOTIFICATION_SURVOL||extraire_attribut{src})" alt="[(#NOM_SITE_SPIP|textebrut)]" border="0" width="[(#LOGO_NOTIFICATION_SURVOL||extraire_attribut{width})]" height="[(#LOGO_NOTIFICATION_SURVOL||extraire_attribut{height})]" /></a></td>
 </tr>
 ]<//B_lettre>
 <tr>
