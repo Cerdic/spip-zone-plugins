@@ -1,6 +1,8 @@
 #CACHE{0}
 <script type="text/javascript"> 
-var _paq = _paq || []; 
+var _paq = _paq || [];[(#CONFIG{piwik/conformite_cnil}|=={on}|oui)
+<INCLURE{fond=inc/js-cnil} />
+]
 (function(){ var u=(("https:" == document.location.protocol) ? "https://#CONFIG{piwik/urlpiwik}/" : "http://#CONFIG{piwik/urlpiwik}/"); 
 _paq.push(['setSiteId', #CONFIG{piwik/idpiwik}]); 
 _paq.push(['setTrackerUrl', u+'piwik.php']); 

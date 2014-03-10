@@ -30,6 +30,7 @@
 				obligatoire=oui,
 				size=50
 			})]
+
 			[(#CONFIG{piwik/token}|et{#CONFIG{piwik/user}}|oui)
 				[(#SET{defaut,[(#URL_SITE_SPIP)]})]
 				[(#SAISIE{sites_piwik,idpiwik,
@@ -92,6 +93,12 @@
 						label=<:piwik:label_restreindre_auteurs_prive:>,
 						multiple=oui})]
 				]
+
+				[(#SAISIE{oui_non, conformite_cnil,
+					label=<:piwik:label_conformite_cnil:>,
+					explication=<:piwik:explication_conformite_cnil:>
+				})]
+
 			]
 		</ul>
 		<p class="boutons">

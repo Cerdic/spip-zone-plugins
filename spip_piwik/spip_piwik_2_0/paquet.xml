@@ -1,7 +1,7 @@
 <paquet
 	prefix="piwik"
 	categorie="statistique"
-	version="0.6.0"
+	version="0.6.1"
 	etat="stable"
 	compatibilite="[2.0.8;3.0.*]"
 	logo="piwik.png"

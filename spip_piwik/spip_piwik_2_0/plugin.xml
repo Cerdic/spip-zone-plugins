@@ -2,7 +2,7 @@
 	<nom>Piwik</nom>
 	<slogan>Interfacer Spip et Piwik</slogan>
 	<auteur>jsb, kent1</auteur>
-	<version>0.6.0</version>
+	<version>0.6.1</version>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
 	<version_base>0.1</version_base>
