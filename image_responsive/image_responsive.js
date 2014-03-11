@@ -87,7 +87,7 @@ function charger_image_lazy(sTop) {
 
 	
 
-		console.log(sTop);
+		//console.log(sTop);
 
 	$(".lazy[data-top]").each(function() {
 		this_img = $(this);
