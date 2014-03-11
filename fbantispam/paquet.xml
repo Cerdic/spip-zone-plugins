@@ -1,7 +1,7 @@
 <paquet
 	prefix="fbantispam"
 	categorie="performance"
-	version="1.1.0"
+	version="1.1.1"
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/beos-stop-icone-8929-32.png"
@@ -13,7 +13,7 @@
 
 	<auteur lien="www.fbservices.fr">Fabio Bertagnin FBServices</auteur>
 
-	<copyright>2013</copyright>
+	<copyright>2013-2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

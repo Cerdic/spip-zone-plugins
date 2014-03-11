@@ -5,8 +5,8 @@
 	</slogan>
 	<auteur>Fabio Bertagnin - FBServices www.fbservices.fr</auteur>
 	<icon>images/beos-stop-icone-8929-32.png</icon>
-	<licence>(c) 2013 GPL</licence>
-	<version>1.1.0</version>
+	<licence>(c) 2013-2014 GPL</licence>
+	<version>1.1.1</version>
 	<etat>test</etat>
 	<description>
 	Le plugin modifie le formulaire du forum, en ajoutant un champ pour saisir un captcha.
