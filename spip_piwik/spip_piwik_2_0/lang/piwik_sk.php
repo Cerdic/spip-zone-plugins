@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_adresse_serveur' => 'Zadajte adresu stránky bez "http://" alebo "https://" a bez lomky na konci',
+	'explication_conformite_cnil' => 'Vloží <a href="http://www.cnil.fr/fileadmin/documents/approfondir/dossier/internet/Configuration_piwik.pdf"> JavaScriptovú funkciu,</a> ktorá umožňuje <a href="http://www.cnil.fr/vos-obligations/sites-web-cookies-et-autres-traceurs/outils-et-codes-sources/la-mesure-daudience/">nastaviť zhodu s kontrolnou cookie,</a> čo určuje CNIL.',
 	'explication_creer_site' => 'Odkaz vám umožňuje vytvoriť stránku na serveri s Piwikom, ktorá bude potom dostupná na zozname. Pred kliknutím skontrolujte, či ste správne zadali adresu a názov svojej stránky v SPIPe, lebo tieto údaje sa budú neskôr používať.',
 	'explication_exclure_ips' => 'Ak vymenujete niekoľko adries, ktoré majú byť vylúčené, oddeľte ich bodkočiarkami',
 	'explication_identifiant_site' => 'Zoznam dostupných stránok na serveri s Piwikom bol automaticky získaný pomocou odoslaných údajov. Zo zoznamu si vyberte tú, ktorú chcete použiť.',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_adresse_serveur' => 'Internetová adresa servera (https:// alebo http://)',
 	'label_comptabiliser_prive' => 'Pridať návštevy súkromnej zóny',
+	'label_conformite_cnil' => 'Dodržiavanie CNIL',
 	'label_creer_site' => 'Vytvoriť stránku na serveri s Piwikom',
 	'label_exclure_ips' => 'Vylúčiť určité IP adresy',
 	'label_identifiant_site' => 'Identifikátor vašej stránky na serveri s Piwikom',
