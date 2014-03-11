@@ -1,0 +1,74 @@
+[(#REM)
+
+	Un modèle pour générer une FAQ ou un lexique
+	à partir d'un fichier CSV.
+
+	Ce modèle necessite les itérateurs (en plugin pour SPIP 2, inclus dans SPIP 3)
+
+	Le modèle s'utilise de la façon suivante:
+
+	<faqXX|url=YYY|lexique=ZZZ|niveau=42>
+
+	où:
+		- "XX" est l'id de la FAQ
+		- "url" est l'URL du fichier CSV (TODO: permettre d'utiliser directement des id_document)
+		- "lexique" existe alors un sommaire de type A|B|E|X|Z est généré
+			et des titres sont placés entre les définitions à chaque
+			changement de lettre
+		- "niveau" si ce n'est pas spécifié les intertitres sont de niveau 3
+			(comme ceux de SPIP), sinon, ils prennent la valeur niveau.
+
+
+	Le fichier CSV doit être construit de la manière suivante (ordre des colonnes indifférent):
+
+	|{{ dt }}|{{ dd }}|{{ lettre }}|{{ ancre }}|
+	| un mot | une déf| U | |
+	| autre mot | autre déf | A | ancre alternative |
+
+
+	où:
+		- les colonnes dd et dt sont indispensables (si pas de dt: pas de définition du tout)
+		- lettre est facultatif, mais necessaire si on veut un sommaire
+		- ancre est facultatif, mais utile si on veut avoir des ancres bien précises
+			pour certains mots. Sinon les ancres sont générées automagiquement:
+				le dt est repris avec les espaces transformés en "_".
+				ex.: un Mot -> un_Mot
+	
+
+	Le plugin commence par une boucle étrange dont le seul but est de vérifier la présence
+	des itérateurs (cette astuce ne fonctione que s'il y a au moins aun admin !)
+
+
+]#SET{alea, #EVAL{rand()}}
+#SET{test,truc}
+[(#PLUGIN{Iterateurs}|oui)
+	[(#SET{test,0minirezo})]
+]<BOUCLE_CONDITIONNELLE(AUTEURS){statut=#GET{test}}{0,1}>
+	<B_Colonnes_Lexique>
+		<BOUCLE_Lettres(DATA){source csv, #ENV*{url}}{cle>1}{si #ENV{lexique}|oui}>[
+ <a href="[#(#VALEUR{lettre}|utf_8_to_unicode)]" class="spip">(#VALEUR{lettre}|trim|unique{lettre_pagin_#GET{alea}}|utf_8_to_unicode)</a>&nbsp;|
+		]</BOUCLE_Lettres>
+[(#ENV{lexique}|non)
+<dl class="faq">
+]
+	<BOUCLE_Colonnes_Lexique(DATA){source csv, #ENV*{url}}{cle>1}>
+[
+[(#ENV{lexique}|oui)
+	[[(#COMPTEUR_BOUCLE|>{1}|oui)
+</dl>]
+	<h[(#ENV{niveau,3}) ]id="[(#VALEUR{lettre}|trim|utf_8_to_unicode)]" class="spip">
+		(#VALEUR{lettre}|trim|unique{lettre_faq_#GET{alea}}|utf_8_to_unicode)
+	</h[(#ENV{niveau,3})]>
+<dl class="faq">]
+]
+	<dt id="[(#VALEUR{ancre}|trim|sinon{#VALEUR{dt}|replace{" ","_"}}|utf_8_to_unicode)]">
+		(#VALEUR{dt}|trim|utf_8_to_unicode)
+	</dt>
+	<dd>
+		[(#VALEUR{dd}|trim|utf_8_to_unicode|propre)]
+	</dd>]
+	</BOUCLE_Colonnes_Lexique>
+</dl>
+	</B_Colonnes_Lexique>
+</BOUCLE_CONDITIONNELLE>
+#FILTRE{trim}
