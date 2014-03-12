@@ -190,8 +190,10 @@ function oembed_pre_propre($texte) {
 	// si oembed/embed_auto==oui on oembed les liens qui sont tous seuls sur une ligne
 	// (mais jamais les liens inline dans le texte car ca casse trop l'ancien contenu)
 	if (stripos($texte,"<a")!==false
+	  AND stripos($texte,"auto")!==false
+	  AND stripos($texte,"spip_out")!==false
 		AND lire_config('oembed/embed_auto','oui')!='non') {
-		preg_match_all(",(^|(?:\r?\n\r?\n)) *(<a\b[^>]*>[^\r\n]*</a>) *((?:\r?\n\r?\n)|$),Uims",$texte,$matches,PREG_SET_ORDER);
+		preg_match_all(",(^|(?:\r?\n\r?\n)) *(<a\b[^>]*>[^\r\n]*</a>) *((?:\r?\n\r?\n)|$),Uims",trim($texte),$matches,PREG_SET_ORDER);
 		if (count($matches)){
 
 			$replace = array();
