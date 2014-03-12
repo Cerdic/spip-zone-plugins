@@ -32,7 +32,7 @@ function exec_ajout_don() {
 /// AFFICHAGES_CENTRAUX (corps)
 		debut_cadre_association('dons-24.gif', 'ajouter_un_don');
 /// AFFICHAGES_CENTRAUX : FORMULAIRE
-		echo recuperer_fond('prive/editer/editer_asso_dons', array (
+		echo recuperer_fond('prive/editer/editer_asso_don', array (
 			'id_don' => 0,
 			'id_auteur' => $id_auteur,
 		));
