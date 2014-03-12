@@ -18,7 +18,7 @@ function formulaires_editer_asso_don_charger_dist($id_don=0, $id_auteur=0) {
 	$contexte = formulaires_editer_objet_charger('asso_don', $id_don, '', '',  generer_url_ecrire('dons'), '');
 	if (!$id_don) { // si c'est un nouveau don...
 		$contexte['date_don'] = date('Y-m-d'); // ...on charge la date d'aujourd'hui
-		if (is_numeric($id_auteur)) { // si de plus on a le parametre id_auteur, c'est qu'on vient de la page d'ajout d'un membre :
+		if (intval($id_auteur)) { // si de plus on a le parametre id_auteur, c'est qu'on vient de la page d'ajout d'un membre :
 			$contexte['id_auteur'] = $id_auteur; // on preselectionnera cet auteur
 			$contexte['auteur_fixe'] = true; // et on ne pourra pas le changer (ni la date de donation)
 		}
