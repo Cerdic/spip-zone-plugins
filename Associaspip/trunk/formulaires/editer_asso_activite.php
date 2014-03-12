@@ -59,6 +59,9 @@ function formulaires_editer_asso_activite_verifier_dist($id_activite=0) {
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('asso:erreur_titre');
+	} else {
+		if (!$erreurs['date_paiement']) 
+			$erreurs['date_paiement'] = $erreurs['date_inscription'];
 	}
 	return $erreurs;
 }
