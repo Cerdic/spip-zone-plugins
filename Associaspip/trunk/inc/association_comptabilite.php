@@ -846,7 +846,7 @@ function filtre_selecteur_compta_destinations($destinations=array(), $defaut='')
 		. $addDestinationButton.'</li></ul>';
 	}
     return $script
-      . '<div id="divTxtDestination" class="formulaire_edition_destinations">'
+      . '<div id="divNextDestination" class="formulaire_edition_destinations">'
       . '<label>'. _T('compta:destinations') . '</label>'
       . $res
       . ((intval($GLOBALS['association_metas']['destinations'])>1)? '' :
