@@ -37,7 +37,8 @@ function oeproxy_twitter_dist($url,$options,$html=null){
 	// If something goes wrong (like, Twitter unreachable) then we'll simply print anything but JSON
 	// and let oEmbed handle the response.
 	// fetch http://api.twitter.com/1/statuses/show/$tweet.json
-	$apiurl = 'http://api.twitter.com/1/statuses/show/'.$tweetid.'.json';
+	//$apiurl = 'http://api.twitter.com/1/statuses/show/'.$tweetid.'.json';
+	$apiurl = 'https://api.twitter.com/1/statuses/oembed.json?id='.$tweetid;
 	if (!$result = recuperer_page_cache($apiurl)){
 		spip_log("could not fetch $apiurl",'oep_twitter');
 		return 404;
@@ -50,7 +51,14 @@ function oeproxy_twitter_dist($url,$options,$html=null){
 		return 404;
 	}
 
+
+	$data->html = trim(preg_replace(",<script\b[^>]*></script>,Uims","",$data->html));
+
+
 	#var_dump($data);
+
+	// obsolete, plus possible
+	/*
 	// Now extract a few variables from the $data object
 	#$created_at = date('d M Y g:i a', strtotime( $data->created_at ) );
 
@@ -78,7 +86,7 @@ function oeproxy_twitter_dist($url,$options,$html=null){
 		'profile_image' => $data->user->profile_image_url,
 		'name' => $data->user->name
 	);
-
+*/
 
 	$result = array(
 		// type (required)
@@ -95,7 +103,7 @@ function oeproxy_twitter_dist($url,$options,$html=null){
 
 		// html (required)
 		// The HTML required to display the resource. The HTML should have no padding or margins. Consumers may wish to load the HTML in an off-domain iframe to avoid XSS vulnerabilities. The markup should be valid XHTML 1.0 Basic.
-		'html' => trim(recuperer_fond('modeles/oeproxy/twitter',$contexte)),
+		'html' => $data->html,
 
 		// width (required)
 		// The width in pixels required to display the HTML.
@@ -107,12 +115,12 @@ function oeproxy_twitter_dist($url,$options,$html=null){
 
 		// author_name (optional)
 		// The name of the author/owner of the resource.
-		'author_name' => $data->user->name,
+		'author_name' => $data->author_name,
 
 		// author_url (optional)
 		// A URL for the author/owner of the resource.
 		// NIY
-		'author_url' => "http://twitter.com/".$data->user->screen_name,
+		'author_url' => $data->author_url,
 
 
 		// thumbnail_url (optional)

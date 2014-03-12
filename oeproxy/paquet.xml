@@ -1,7 +1,7 @@
 <paquet
 	prefix="oeproxy"
 	categorie="outil"
-	version="0.8.4"
+	version="0.8.5"
 	etat="experimental"
 	compatibilite="[3.0.0-beta;["
 	logo="oeproxy-32.png"
