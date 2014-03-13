@@ -4,7 +4,7 @@
 #SET{name,#ENV{name_#ENV{crayon_modele}}}
 
 #SET{mots,#ARRAY}
-<BOUCLE_groupes_actifs(GROUPES_MOTS){tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}>
+<BOUCLE_groupes_actifs(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}>
 <BOUCLE_mots_actifs(MOTS){id_groupe}{id_ticket=#GET{id_ticket}}>
 	#SET{mots,#GET{mots}|push{#ID_MOT}}
 </BOUCLE_mots_actifs>
@@ -15,7 +15,7 @@
 	<li class="editer editer_mots">
 		<label for="#GET{name}"><:tickets:label_mots:></label>
 		<select id="#GET{name}" class="crayons-active" name="#GET{name}\[\]" multiple>
-			<BOUCLE_groupes_mots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
+			<BOUCLE_groupes_mots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 			<optgroup label="#TITRE">
 			<BOUCLE_mots(MOTS){id_groupe}{par num titre}>
 				<option value="#ID_MOT"[(#ID_MOT|in_array{#GET{mots}}|oui) selected="selected"]>#TITRE</option>

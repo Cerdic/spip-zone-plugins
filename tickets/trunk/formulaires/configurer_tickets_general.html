@@ -60,7 +60,7 @@
 							explication=<:tickets:cfg_explication_formats_documents_ticket:>})]
 					]
 					#SET{tab_groupes, #ARRAY}
-					<BOUCLE_groupes(GROUPES_MOTS){tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
+					<BOUCLE_groupes(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 						#SET{tab_groupes, #GET{tab_groupes}|push{#TITRE}}
 					</BOUCLE_groupes>
 						#SET{groupes, #GET{tab_groupes}|implode{', '}}
