@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_adresse_serveur' => 'Voer het adres in zonder "http://" of "https://" en ook geen schuine streep aan het einde',
+	'explication_conformite_cnil' => 'Voegt een <a href="http://www.cnil.fr/fileadmin/documents/approfondir/dossier/internet/Configuration_piwik.pdf">JavaScript functie</a> in volgens de <a href="http://www.cnil.fr/vos-obligations/sites-web-cookies-et-autres-traceurs/outils-et-codes-sources/la-mesure-daudience/">Cookie conformiteit</a> van de Franse CNIL.',
 	'explication_creer_site' => 'Met onderstaande link kun je een site op de Piwik server aanmaken die vervolgens in de lijst beschikbaar komt. Controleer alvorens te klikken de juiste configuratie van het adres en de naam van je SPIP site. Dit zijn de gegevens die zullen worden gebruikt.',
 	'explication_exclure_ips' => 'Om meerdere adressen uit te sluiten gebruik je een puntkomma als scheidingsteken',
 	'explication_identifiant_site' => 'De lijst van beschikbare sites op de Piwik server werd aan de hand van de verstrekte gegevens automatisch opgehaald. Maak uit onderstaande lijst je keuze',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_adresse_serveur' => 'URL-adres van de server (https:// of http://)',
 	'label_comptabiliser_prive' => 'Bezoeken aan de privé-ruimte meetellen',
+	'label_conformite_cnil' => 'CNIL conformiteit',
 	'label_creer_site' => 'Maak een site op de Piwik server',
 	'label_exclure_ips' => 'Sluit bepaalde IP-adressen uit',
 	'label_identifiant_site' => 'De identificatie van je site op de Piwik server',
