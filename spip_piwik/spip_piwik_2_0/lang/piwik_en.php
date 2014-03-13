@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_adresse_serveur' => 'Enter the URL address without "http://" or "https://" and without the final slash',
+	'explication_conformite_cnil' => 'Inserts a <a href="http://www.cnil.fr/fileadmin/documents/approfondir/dossier/internet/Configuration_piwik.pdf">JavaScript function</a> that assures a <a href="http://www.cnil.fr/vos-obligations/sites-web-cookies-et-autres-traceurs/outils-et-codes-sources/la-mesure-daudience/">Cookie conformity</a> as instated by the French CNIL.',
 	'explication_creer_site' => 'The link below enables you to create a site on the Piwik server which will then be available from the list.Check that you have correctly entered the address and name of your SPIP site before clicking, as these are the details will be used later.',
 	'explication_exclure_ips' => 'To nominate several addresses to be excluded, separate them with semi-colons',
 	'explication_identifiant_site' => 'The list of sites available on the Piwik server has been automatically retrieved using the submitted details. Select the one you wish to use from the list below',
@@ -35,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_adresse_serveur' => 'URL address of the server (https:// or http://)',
 	'label_comptabiliser_prive' => 'Include visits to the private space',
+	'label_conformite_cnil' => 'CNIL conformity',
 	'label_creer_site' => 'Create a site on the Piwik server',
 	'label_exclure_ips' => 'Exclude certain IP addresses',
 	'label_identifiant_site' => 'The identifier of your site on the Piwik server',
