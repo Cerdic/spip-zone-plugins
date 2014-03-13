@@ -1,0 +1,86 @@
+<style type="text/css">
+.hover-title { color: black; border: 1px solid #888; padding: 3px; background-color: #DDD; position: absolute; bottom: 0; border-radius: 3px; width: auto; width: 200%; opacity: .9; }
+.fc-event {z-index: 1; }
+.fc-event-inner { background-color: #E0ECFF; }
+.fc-header-title { margin: auto 1em; }
+#fullcalendar_#ID_MOT-#ID_RUBRIQUE { position: relative; margin: 1em auto; padding: 1em; [(#LARGEUR|is_null|non)width: #LARGEURpx;] }
+</style>
+
+#SET{data,#ARRAY}
+<BOUCLE_articles(ARTICLES) {id_mot ?} {id_rubrique ?} {par date} {inverse} ><BOUCLE_événements(EVENEMENTS) {id_article} >[
+(#SET{événement,#ARRAY{title,'',hover,#TITRE,start,#DATE_DEBUT,end,#DATE_FIN,id,#ID_ARTICLE,url,#URL_ARTICLE}})][
+(#SET{data,#GET{data}|push{#GET{événement}}})
+]</BOUCLE_événements></BOUCLE_articles>
+
+[(#SET{json_data,#GET{data}|json_encode{2}})]
+[(#SET{scheme,#SELF|url_absolue|parse_url{0}})]
+
+<div id="fullcalendar_#ID_MOT-#ID_RUBRIQUE"></div>
+
+#SET{français,0}
+[(#LANG|is_null|oui)#SET{français,1}]
+[(#LANG|=={fr}|oui)#SET{français,1}]
+
+<script type="text/javascript">
+$(function() {
+	$.getScript('#GET{scheme}://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js', function() {
+		$('head').append('<link rel="stylesheet" type="text/css" href="#GET{scheme}://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css">');
+		$('head').append('<link rel="stylesheet" type="text/css" href="#GET{scheme}://cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.print.css">');
+		var data = #GET{json_data};
+		$('#fullcalendar_#ID_MOT-#ID_RUBRIQUE').fullCalendar({
+			header: {
+				left: '',
+				center: 'prev,title,next',
+				right: ''
+			},
+			[(#ENV{hauteur}|is_null|non)height: #HAUTEUR,]
+			<BOUCLE_condition_français(CONDITION) {si #GET{français}|=={1}} >
+			monthNames: ['Janvier','F\u00e9vrier','Mars','Avril','Mai','Juin','Juillet','Ao\u00fbt','Septembre','Octobre','Novembre','D\u00e9cembre'],
+			monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Juin','Juil','Aout','Sep','Oct','Nov','Dec'],
+			dayNames: ['Dimanche', 'Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+			dayNamesShort: ['Dim', 'Lun','Mar','Mer','Jeu','Ven','Sam'],
+			</BOUCLE_condition_français>
+			buttonText: {
+				prev: "<span class='fc-text-arrow'>&lsaquo;</span>",
+				next: "<span class='fc-text-arrow'>&rsaquo;</span>",
+				prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
+				nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
+				today: 'Aujourd’hui',
+				month: 'Mois',
+				week: 'Semaine',
+				day: 'Jour'
+			},
+			// time formats
+			titleFormat: {
+				month: 'MMMM yyyy',
+				week: "d MMM[ yyyy]{ '&#8212;'d[ MMM] yyyy}",
+				day: 'dddd, d MMM, yyyy'
+			},
+			columnFormat: {
+				month: 'ddd',
+				week: 'ddd d/M',
+				day: 'dddd d/M'
+			},
+			firstDay: 1,
+			events: data,
+			eventBorderColor: 'A5C9FF',
+			defaultView: '[(#VUE|=={semaine}|?{week,month})]',
+			// events: data,
+			eventMouseover: function(event, jsEvent, view) {
+				$('.fc-event-inner', this).append('<div id=\"'+event.id+'\" class=\"hover-title\" style=\"\">'+event.hover+'</div>');
+			},
+			eventMouseout: function(event, jsEvent, view) {
+				$('#'+event.id).remove();
+			},
+			eventClick: function(event) {
+				console.log(event);
+				if (false) {
+					var url = '/?page=location_donnees&who=direction_scientifique&id_location=' + mrbs_ids[event.id];
+					var win=window.open(url, '_blank');
+					win.focus();
+				}
+			}
+		})
+	});
+});
+</script>
