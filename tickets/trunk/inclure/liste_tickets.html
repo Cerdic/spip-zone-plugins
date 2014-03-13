@@ -4,38 +4,38 @@
 	
 	Les paramètres possibles sont :
 	
-	-* titre = string 				Le titre du bloc (sinon le bloc n'aura pas de titre)
-	-* niveau_titre = string (h2)   Le niveau des titres (h2|h3|h4...)
-	-* date_sens = -1|1				Le sens de tri de la date
-	-* id_auteur = int				Un id_auteur numérique
-	-* auteurs = array				Un array d'id_auteur
-	-* id_auteur_non = int/array	Un id numérique ou un array des id_auteur dont on ne souhaite pas afficher les tickets
-	-* id_assigne = int				Un id_auteur numérique à qui aurait été assigné les tickets
-	-* assignes = array				Un array d'id_assigne
-	-* id_assigne_non = int/array	Un id numérique ou un array des id_assigne que l'on ne souhaite pas voir
-	-* tracker = int				L'id du tracker (1|2|3|4), anciennement type
-	-* trackers = array				Un array de trackers
-	-* severite = int				L'id de severite
-	-* severites = array			Un array de severites
-	-* statut = string				Le statut
-	-* statuts = array				Un array de statuts
-	-* version = string				La version
-	-* jalon = string				Le jalon
-	-* composant = string			Le composant
-	-* projet = string				Le projet
-	-* sticked = oui|''				N'afficher que les tickets épinglés ou pas
-	-* objet = string				N'afficher que les tickets liés à ce type d'objet
-	-* id_objet = int				Si objet est aussi présent, n'afficher que les tickets liés à cet objet
-	-* order = string				Le paramètre de tri (défaut date mais peut être maj|titre|tracker|jalon|version|composant|projet|severite|id_ticket)
-	-* tri_nom= string (detaillee)	Le nom du critère de tri (ce qui sera utilisé dans l'url pour le tri)
-	-* pagination = int				Le nombre d'élément à afficher dans la pagination
-	-* recherche = string			Une chaine recherchée dans les tickets
-	-* afficher_filtres				Affiche les filtres passés en argument
-	-* date_debut = date (sql)		La date des premiers à afficher
-	-* date_fin = date (sql)		La date des derniers à afficher
-	-* class = string				Une classe spécifique appliquée au bloc parent
-	-* champs_caches = array		Les champs à ne pas afficher dans le tableau
-	-* couper = int (160)			La longueur de coupe du texte si affiché
+	-* titre = string                 Le titre du bloc (sinon le bloc n'aura pas de titre)
+	-* niveau_titre = string (h2)     Le niveau des titres (h2|h3|h4...)
+	-* date_sens = -1|1               Le sens de tri de la date
+	-* id_auteur = int                Un id_auteur numérique
+	-* auteurs = array                Un array d'id_auteur
+	-* id_auteur_non = int/array      Un id numérique ou un array des id_auteur dont on ne souhaite pas afficher les tickets
+	-* id_assigne = int               Un id_auteur numérique à qui aurait été assigné les tickets
+	-* assignes = array               Un array d'id_assigne
+	-* id_assigne_non = int/array     Un id numérique ou un array des id_assigne que l'on ne souhaite pas voir
+	-* tracker = int                  L'id du tracker (1|2|3|4), anciennement type
+	-* trackers = array               Un array de trackers
+	-* severite = int                 L'id de severite
+	-* severites = array              Un array de severites
+	-* statut = string                Le statut
+	-* statuts = array                Un array de statuts
+	-* version = string               La version
+	-* jalon = string                 Le jalon
+	-* composant = string             Le composant
+	-* projet = string                Le projet
+	-* sticked = oui|''               N'afficher que les tickets épinglés ou pas
+	-* objet = string                 N'afficher que les tickets liés à ce type d'objet
+	-* id_objet = int                 Si objet est aussi présent, n'afficher que les tickets liés à cet objet
+	-* order = string                 Le paramètre de tri (défaut date mais peut être maj|titre|tracker|jalon|version|composant|projet|severite|id_ticket)
+	-* tri_nom= string (detaillee)    Le nom du critère de tri (ce qui sera utilisé dans l'url pour le tri)
+	-* pagination = int               Le nombre d'élément à afficher dans la pagination
+	-* recherche = string             Une chaine recherchée dans les tickets
+	-* afficher_filtres               Affiche les filtres passés en argument
+	-* date_debut = date (sql)        La date des premiers à afficher
+	-* date_fin = date (sql)          La date des derniers à afficher
+	-* class = string                 Une classe spécifique appliquée au bloc parent
+	-* champs_caches = array          Les champs à ne pas afficher dans le tableau
+	-* couper = int (160)             La longueur de coupe du texte si affiché
 	-* cacher_texte = string (oui|'') Si oui n'affichera pas le texte des tickets
 ]
 [(#SET{defaut_tri,#ARRAY{
