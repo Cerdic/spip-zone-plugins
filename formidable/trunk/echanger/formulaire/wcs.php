@@ -148,27 +148,26 @@ function echanger_formulaire_wcs_importer_dist($fichier){
 			
 			include_spip('action/editer_formulaire');
 			// On insère un nouveau formulaire
-			$id_formulaire = insert_formulaire();
-			// Si ça a marché on modifie les champs de base
-			if ($id_formulaire > 0 and !($erreur = formulaire_set($id_formulaire, $formulaire))){
-				// Et ensuite les saisies et les traitements
-				$ok = sql_updateq(
-					'spip_formulaires',
-					array(
-						'saisies' => serialize($formulaire['saisies']),
-						'traitements' => serialize($formulaire['traitements'])
-					),
-					'id_formulaire = '.$id_formulaire
-				);
+			$id_formulaire = formulaire_inserer();
+			// Si ça a marché on transforme les tableaux et on modifie les champs
+			if ($id_formulaire > 0){
+				if (is_array($formulaire['saisies'])){
+					$formulaire['saisies'] = serialize($formulaire['saisies']);
+				}
+				if (is_array($formulaire['traitements'])){
+					$formulaire['traitements'] = serialize($formulaire['traitements']);
+				}
+				
+				$erreur = formulaire_modifier($id_formulaire, $formulaire);
 			}
 		}
 	}
 	
-	if ($id_formulaire and $ok){
+	if ($id_formulaire and !$erreur){
 		return $id_formulaire;
 	}
 	else{
-		return _T('formidable:erreur_importer_wcs');
+		return _T('formidable:erreur_importer_yaml').' : '.$erreur;
 	}
 }
 
