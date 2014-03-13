@@ -61,6 +61,11 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associ
 			$valeurs = formulaires_editer_objet_charger('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 			$valeurs['editable'] = true;
 		
+			$valeurs['groupesmots'] = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
+			foreach ($valeurs['groupesmots'] as $id_groupe) {
+				$valeurs['groupemots_'.$id_groupe] = valeur_champ_groupemots_ticket('tickets', $id_ticket.'-'.$id_groupe, 'groupemots_ticket');
+			}
+
 			// si nouveau ticket
 			if (!$id_ticket OR $id_ticket=='oui'){
 				$valeurs['id_assigne'] = $GLOBALS['visiteur_session']['id_auteur'];
@@ -69,11 +74,33 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associ
 					if(!$valeurs[$champ] && _request($champ))
 						$valeurs[$champ] = _request($champ);
 				}
-			}
-
-			$valeurs['groupesmots'] = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
-			foreach ($valeurs['groupesmots'] as $id_groupe) {
-				$valeurs['groupemots_'.$id_groupe] = valeur_champ_groupemots_ticket('tickets', $id_ticket.'-'.$id_groupe, 'groupemots_ticket');
+				// Si on passe id_mot ou mots dans l'URL, on l'utilise dans le formulaire (que ce soit un tableau ou un indice)
+				$mots = array();
+				if ($r_mots = _request('mots')) {
+					if (is_array($r_mots)) {
+						foreach($r_mots as $id_mot){
+							if (is_numeric($id_mot))
+								$mots = array_merge($mots, array($id_mot));
+						}
+					} else if (is_numeric($r_mots))
+						$mots = array($r_mots);
+				}
+				if ($r_id_mot = _request('id_mot')) {
+					if (is_array($r_id_mot)) {
+						foreach($r_id_mot as $id_mot){
+							if (is_numeric($id_mot))
+								$mots = array_merge($mots, array($id_mot));
+						}
+					} else if (is_numeric($r_id_mot))
+						$mots = array_merge($mots, array($r_id_mot));
+				}
+				if ($mots) {
+					foreach ($valeurs['groupesmots'] as $id_groupe) {
+						if (!$valeurs['groupemots_'.$id_groupe]) {
+							$valeurs['groupemots_'.$id_groupe] = array_map('array_shift', sql_allfetsel("id_mot", "spip_mots", "id_mot IN (".implode($mots,',').")"));
+						}
+					}
+				}
 			}
 		}
 	}
