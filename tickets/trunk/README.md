@@ -95,16 +95,28 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 * migration de sept champs (severite, tracker, navigateur, projet, composant, version, jalon) vers des groupes de mots-clés :
 
  * fonction de migration (81313, 81319) - voir le détail au dessus.
+ * numéro de schema pour la migration : 2.0.0 (81340)
  * les mots-clés créés pour le champ severite ont un logo, correspondant à la puce associée dans les squelettes (81326)
  * les groupes de mots-clés et les mots-clés d'un même groupe sont ordonnés, ce qui permet après migration de tout afficher dans le même ordre (81328, 81335)
  
 * squelettes :
 
  * afficher les logos des mots-clés dans la vue groupemots (81327, 81329)
+ * simplification du critère de recherche des groupes de mots associables aux tickets (81343)
+
+* fonctionnalités :
+
+ * prendre en compte id_mot ou mots dans l'URL de la page d'édition d'un ticket, seulement pour la création d'un nouveau ticket (81342)
+ * ajouter les mots-clés dans le formulaire de tri des tickets (81345, 81348)
 
 * configuration :
 
  * suppression de la configuration "tickets/general/lier_mots" qui n'est pas d'utilité, puisque c'est dans la configuration des groupes de mots qu'on spécifie s'ils peuvent ou non être associés à des tickets (81338)
+
+* bugs :
+
+ * dans le formulaire de forum, ne pas ajouter des saisies pour les champs optionnels des tickets car ils ne sont pas traités, seuls l'assignation et le statut le sont (81349)
+
 
 ### 3.1.0
 
