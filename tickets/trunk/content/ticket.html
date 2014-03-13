@@ -30,7 +30,7 @@
 			[<dt class="version"><:tickets:champ_version:></dt><dd class="version #EDIT{version}">(#VERSION)</dd>]
 			[<dt class="jalon"><:tickets:champ_jalon:></dt><dd class="jalon #EDIT{jalon}">(#JALON)</dd>]
 			[<dt class="navigateur"><:tickets:champ_navigateur:></dt><dd class="navigateur #EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
-			<BOUCLE_groupesmots(GROUPES_MOTS){si #CONFIG{tickets/general/lier_mots,off}|=={on}|oui}{tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
+			<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)'}|concat{tickets,'($|,)'}}{par num titre}>
 				<dt class="mots">#TITRE</dt><dd class="mots groupe#ID_GROUPE #EDIT{groupemots_ticket-#ID_TICKET}">#INCLURE{fond=vues/groupemots_ticket,id_groupes_mot=#ID_TICKET-#ID_GROUPE,env,ajax}</dd>
 			</BOUCLE_groupesmots>
 		</dl>

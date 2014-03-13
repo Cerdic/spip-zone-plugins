@@ -71,11 +71,9 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associ
 				}
 			}
 
-			if (lire_config('tickets/general/lier_mots','off')=='on') {
-				$valeurs['groupesmots'] = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
-				foreach ($valeurs['groupesmots'] as $id_groupe) {
-					$valeurs['groupemots_'.$id_groupe] = valeur_champ_groupemots_ticket('tickets', $id_ticket.'-'.$id_groupe, 'groupemots_ticket');
-				}
+			$valeurs['groupesmots'] = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
+			foreach ($valeurs['groupesmots'] as $id_groupe) {
+				$valeurs['groupemots_'.$id_groupe] = valeur_champ_groupemots_ticket('tickets', $id_ticket.'-'.$id_groupe, 'groupemots_ticket');
 			}
 		}
 	}

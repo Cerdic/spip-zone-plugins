@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs/logo-bugs.png"
-	schema="1.7.0"
+	schema="1.8.0"
 	documentation="http://contrib.spip.net/?article3959"
 >
 

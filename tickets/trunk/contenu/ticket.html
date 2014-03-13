@@ -31,7 +31,7 @@
 			[<dt class="version"><:tickets:champ_version:></dt><dd class="version #EDIT{version}">(#VERSION)</dd>]
 			[<dt class="jalon"><:tickets:champ_jalon:></dt><dd class="jalon #EDIT{jalon}">(#JALON)</dd>]
 			[<dt class="navigateur"><:tickets:champ_navigateur:></dt><dd class="navigateur #EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
-			[(#CONFIG{tickets/general/lier_mots,off}|=={on}|oui)<dt class="mots"><:tickets:champ_mots:></dt><dd class="mots #EDIT{mots_ticket}">#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,env,ajax}</dd>]
+			<dt class="mots"><:tickets:champ_mots:></dt><dd class="mots #EDIT{mots_ticket}">#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,env,ajax}</dd>
 		</dl>
 	</div>
 

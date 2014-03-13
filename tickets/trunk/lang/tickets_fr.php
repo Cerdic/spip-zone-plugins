@@ -41,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autoriser_modifier_case' => 'Autoriser ceux qui ont la possibilité de modifier le ticket (auteur et assigné notamment)',
 	'cfg_lbl_cacher_moteurs' => 'Cacher des moteurs de recherche',
 	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets',
-	'cfg_lbl_case_lier_mots' => 'Autoriser à lier des mots-clés aux tickets',
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l’espace public plutôt que dans l’espace privé',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d’un sélecteur de navigateur dans le formulaire d’édition de ticket',
 	'cfg_lbl_composants' => 'Composants',

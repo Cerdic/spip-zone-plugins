@@ -61,6 +61,9 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$maj['1.7.0'] = array(
 		array('maj_tables',array('spip_tickets_liens'))
 	);
+	$maj['1.8.0'] = array(
+		array('effacer_config','tickets/general/lier_mots')
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
