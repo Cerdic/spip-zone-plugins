@@ -233,15 +233,15 @@ input[name=logout]:hover {
 	background:#006aeb;
 }
 
-#logout {
-	color:#006aeb;
-	text-decoration:none;
+.logout {
+	margin-top: 0.5em;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 100;
 }
 
-#logout:hover {
-	color:white;
-	background:#006aeb;
-}
+#dbs {display: none}
 
 .js .column {
 	background:#f2eee1;
