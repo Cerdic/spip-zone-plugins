@@ -48,11 +48,11 @@ On fera les modifications dans trunk, avec la version 3.2.0. Pour conserver le f
 
 On décide de faire la migration automatiquement à la mise à jour du plugin, et non pas sur un déclenchement manuel et par champ, qui était une autre possibilité, afin d'éviter d'avoir à gérer la cohabitation entre les deux situations dans le code.
 
-On met à jour la version de la base (schema) à 1.8.0, et dans autorisations, on ajoute
+On met à jour la version de la base (schema) à 2.0.0, et dans autorisations, on ajoute
 
-    $maj['1.8.0'] = array(array('maj_tickets_180'));
+    $maj['2.0.0'] = array(array('maj_tickets_200'));
 
-Dans la fonction `maj_tickets_180()`, on répétera, pour chacun des 7 champs, les étapes suivantes.
+Dans la fonction `maj_tickets_200()`, on répétera, pour chacun des 7 champs, les étapes suivantes.
 
 1. Récupérer la liste des choix
 
@@ -98,9 +98,13 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
  * les mots-clés créés pour le champ severite ont un logo, correspondant à la puce associée dans les squelettes (81326)
  * les groupes de mots-clés et les mots-clés d'un même groupe sont ordonnés, ce qui permet après migration de tout afficher dans le même ordre (81328, 81335)
  
-* squelettes
+* squelettes :
 
  * afficher les logos des mots-clés dans la vue groupemots (81327, 81329)
+
+* configuration :
+
+ * suppression de la configuration "tickets/general/lier_mots" qui n'est pas d'utilité, puisque c'est dans la configuration des groupes de mots qu'on spécifie s'ils peuvent ou non être associés à des tickets (81338)
 
 ### 3.1.0
 

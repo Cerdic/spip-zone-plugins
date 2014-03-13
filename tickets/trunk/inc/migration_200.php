@@ -5,7 +5,7 @@
  * 
  * Le résultat de la migration est stocké dans une meta au cas où :
  * 
- * tickets/migration_180/champs/severite/id_groupe (int)
+ * tickets/migration_200/champs/severite/id_groupe (int)
  *                                      /erreur_groupe (str)
  *                                      /valeurs/1/id_mot (int)
  *                                                /erreur_mot (str)
@@ -14,6 +14,17 @@ function migrer_champs_vers_mots_cles() {
 	include_spip('inc/config');
 	include_spip('action/editer_groupe_mots');
 	include_spip('action/editer_mot');
+	
+	/* Au cas peu probable où la meta migration_180 existe
+	 * (normalement jamais créée), et pas la meta migration_200,
+	 * on la déplace */
+	if ($m180 = lire_config('tickets/migration_180')) {
+		if (!lire_config('tickets/migration_200')) {
+			ecrire_config('tickets/migration_200', $m180);
+		}
+		effacer_config('tickets/migration_180');
+	}
+	
 	$trouver_table = charger_fonction('trouver_table','base');
 	$desc = $trouver_table(table_objet_sql('ticket'));
 	if (!$desc OR !array_key_exists('field',$desc))
@@ -32,7 +43,7 @@ function migrer_champs_vers_mots_cles() {
 		);
 
 	// pour chaque champ
-	spip_log("**** migration 1.8.0 - début ****", "tickets");
+	spip_log("**** migration 2.0.0 - début ****", "tickets");
 	foreach ($a_migrer as $k=>$v) {
 		// est-ce que la colonne existe encore ?
 		if (!array_key_exists($k,$field))
@@ -46,8 +57,8 @@ function migrer_champs_vers_mots_cles() {
 		if (count($valeurs)) {
 			// si non vide, créer le groupe de mots
 			// on regarde dans la meta si on a déjà migré ce champ
-			$meta = 'tickets/migration_180/champs/'.$k.'/id_groupe';
-			$meta_err = 'tickets/migration_180/champs/'.$k.'/erreur_groupe';
+			$meta = 'tickets/migration_200/champs/'.$k.'/id_groupe';
+			$meta_err = 'tickets/migration_200/champs/'.$k.'/erreur_groupe';
 			if (!intval($id_groupe = lire_config($meta))) {
 				$v['champs_groupe'] = array_merge($v['champs_groupe'], array('tables_liees'=>'tickets','comite'=>'non','forum'=>'non','minirezo'=>'oui'));
 				$id_groupe = groupemots_inserer();
@@ -64,8 +75,8 @@ function migrer_champs_vers_mots_cles() {
 			$num_mot = 0;
 			foreach ($valeurs as $kv=>$vv) {
 				// on regarde si on a déjà migré ce mot
-				$meta = 'tickets/migration_180/champs/'.$k.'/valeurs/'.$kv.'/id_mot';
-				$meta_err = 'tickets/migration_180/champs/'.$k.'/valeurs/'.$kv.'/erreur_mot';
+				$meta = 'tickets/migration_200/champs/'.$k.'/valeurs/'.$kv.'/id_mot';
+				$meta_err = 'tickets/migration_200/champs/'.$k.'/valeurs/'.$kv.'/erreur_mot';
 				if (!intval($id_mot = lire_config($meta))) {
 					$id_mot = mot_inserer($id_groupe);
 					if ($id_mot>0 AND $err = mot_modifier($id_mot, array('titre'=> ++$num_mot.'. '.$vv))) {
@@ -98,40 +109,40 @@ function migrer_champs_vers_mots_cles() {
 		sql_alter("TABLE ".table_objet_sql('ticket')." DROP ".$k);
 		spip_log('   colonne "'.$k.'" supprimée','tickets');
 	}
-	spip_log("**** migration 1.8.0 - fin ****", "tickets");
+	spip_log("**** migration 2.0.0 - fin ****", "tickets");
 }
 
 function nettoyer_migration_champs_vers_mots_cles() {
 	include_spip('inc/autoriser');
 	include_spip('action/editer_mot');
 
-	$c = lire_config('tickets/migration_180/champs', array());
+	$c = lire_config('tickets/migration_200/champs', array());
 	$supprimer_groupe_mots = charger_fonction('supprimer_groupe_mots','action');
 
-	spip_log("**** nettoyage de la migration 1.8.0 - début ****", "tickets");
+	spip_log("**** nettoyage de la migration 2.0.0 - début ****", "tickets");
 	foreach ($c as $k=>$v) {
-		$meta = 'tickets/migration_180/champs/'.$k.'/valeurs';
+		$meta = 'tickets/migration_200/champs/'.$k.'/valeurs';
 		if (is_array($valeurs = lire_config($meta))) {
 			foreach ($valeurs as $kv=>$vv) {
-				$meta = 'tickets/migration_180/champs/'.$k.'/valeurs/'.$kv.'/id_mot';
+				$meta = 'tickets/migration_200/champs/'.$k.'/valeurs/'.$kv.'/id_mot';
 				if (intval($id_mot = lire_config($meta))) {
 					spip_log("   valeur '".$kv."' - suppression du mot id_mot=".$id_mot,"tickets");
 					supprimer_logo_mot($id_mot);
 					mot_supprimer($id_mot);
-					effacer_config('tickets/migration_180/champs/'.$kv.'/valeurs/'.$kv);
+					effacer_config('tickets/migration_200/champs/'.$kv.'/valeurs/'.$kv);
 				}
 			}
 		}
-		$meta = 'tickets/migration_180/champs/'.$k.'/id_groupe';
+		$meta = 'tickets/migration_200/champs/'.$k.'/id_groupe';
 		if (intval($id_groupe = lire_config($meta))) {
 			spip_log(" champ '".$k."' - suppression de groupe id_groupe=".$id_groupe,"tickets");
 			$supprimer_groupe_mots($id_groupe);
 		}
-		effacer_config('tickets/migration_180/champs/'.$k);
+		effacer_config('tickets/migration_200/champs/'.$k);
 	}
-	effacer_config('tickets/migration_180/champs');
-	effacer_config('tickets/migration_180');
-	spip_log("**** nettoyage de la migration 1.8.0 - fin ****", "tickets");
+	effacer_config('tickets/migration_200/champs');
+	effacer_config('tickets/migration_200');
+	spip_log("**** nettoyage de la migration 2.0.0 - fin ****", "tickets");
 }
 
 function tickets_liste_projet(){
