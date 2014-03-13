@@ -8,14 +8,6 @@
 		label=<:tickets:champ_assigner:>,
 		datas=#GET{assignables},
 		valeur_forcee=#ENV{id_assigne,#ID_ASSIGNE}})]]
-	#SET{saisies, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
-	<BOUCLE_saisies(DATA){source table, #GET{saisies}}>
-		[(#VALEUR|tickets_champ_optionnel_actif|oui)
-			[(#SAISIE{selection, #CLE,
-				label=[(#VAL{tickets:champ_}|concat{#CLE}|_T)],
-				cacher_option_intro=oui,
-				datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]]
-	</BOUCLE_saisies>
 	[(#SAISIE{selection, ticket_statut,
 		label=<:tickets:champ_statut:>,
 		cacher_option_intro=oui,
