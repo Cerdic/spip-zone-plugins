@@ -94,11 +94,13 @@ function formidable_declarer_tables_objets_sql($tables) {
 		'statut_titres' => array(
 			'prop'=>'info_article_propose',
 			'publie'=>'info_article_publie',
+			'refuse'=>'formidable:info_formulaire_refuse',
 			'poubelle'=>'info_article_supprime'
 		),
 		'statut_textes_instituer' => array(
 			'prop' => 'texte_statut_propose_evaluation',
 			'publie' => 'texte_statut_publie',
+			'refuse'=>'formidable:texte_statut_refuse',
 			'poubelle' => 'texte_statut_poubelle',
 		),
 

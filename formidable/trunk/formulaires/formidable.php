@@ -23,6 +23,12 @@ function formidable_id_formulaire($id){
 		return 0;
 
 	$id_formulaire = intval(sql_getfetsel('id_formulaire','spip_formulaires',$where));
+
+	if ($id_formulaire
+		AND !test_espace_prive()
+	  AND !objet_test_si_publie("formulaire",$id_formulaire))
+		return 0;
+
 	return $id_formulaire;
 }
 
