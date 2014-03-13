@@ -73,6 +73,12 @@ function migrer_champs_vers_mots_cles() {
 					}
 					ecrire_config($meta,intval($id_mot));
 					spip_log("   valeur '".$kv."' - création du mot id_mot = ".$id_mot, "tickets");
+					if ($k==='severite') {
+						if ($err = ajouter_logo_mot_severite($kv,$id_mot))
+							spip_log("     erreur lors de l'ajout du logo ".$err, "tickets");
+						else
+							spip_log("     logo ajouté", "tickets");
+					}
 				} else {
 					spip_log("   valeur '".$kv."' - mot id_mot = ".$id_mot." déjà créé", "tickets");
 				}
@@ -109,6 +115,7 @@ function nettoyer_migration_champs_vers_mots_cles() {
 				$meta = 'tickets/migration_180/champs/'.$k.'/valeurs/'.$kv.'/id_mot';
 				if (intval($id_mot = lire_config($meta))) {
 					spip_log("   valeur '".$kv."' - suppression du mot id_mot=".$id_mot,"tickets");
+					supprimer_logo_mot($id_mot);
 					mot_supprimer($id_mot);
 					effacer_config('tickets/migration_180/champs/'.$kv.'/valeurs/'.$kv);
 				}
@@ -152,4 +159,34 @@ function tickets_liste_champ($constante,$meta){
 	return $liste;
 }
 
+function ajouter_logo_mot_severite($niveau,$id_mot){
+	include_spip('inc/chercher_logo');
+	include_spip('action/iconifier');
+	$chercher_logo = charger_fonction('chercher_logo','inc');
+	$ajouter_image = charger_fonction('spip_image_ajouter','action');
+
+	$_id_mot = id_table_objet('mot');
+	$etat = 'on';
+	$type = type_du_logo($_id_mot);
+
+	$file = find_in_path(tickets_icone_severite($niveau),'prive/images/');
+	$source = array('erreur'=>'','tmp_name'=>$file);
+	$logo = $chercher_logo($id_mot, $_id_mot, $etat);
+	if ($logo)
+		spip_unlink($logo[0]);
+	$err = $ajouter_image($type.$etat.$id_mot," ",$source,true);
+	return $err;
+}
+function supprimer_logo_mot($id_mot){
+	include_spip('inc/chercher_logo');
+	$chercher_logo = charger_fonction('chercher_logo','inc');
+
+	$_id_mot = id_table_objet('mot');
+	$etat = 'on';
+	$type = type_du_logo($_id_mot);
+
+	$logo = $chercher_logo($id_mot, $_id_mot, $etat);
+	if ($logo)
+		spip_unlink($logo[0]);
+}
 ?>
