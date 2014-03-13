@@ -17,7 +17,7 @@ function action_gis_geocoder_rechercher_dist() {
 		return;
 
 	/* On supprime les arguments "exec", "action" et "mode" */
-	$arguments = implode("&", array_slice(explode("&", $_SERVER['QUERY_STRING']), 3));
+	$arguments = implode("&", array_slice(explode("&", $_SERVER['QUERY_STRING']), 2));
 
 	if($arguments) {
 		header('Content-Type: application/json; charset=UTF-8');
