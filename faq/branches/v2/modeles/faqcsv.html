@@ -7,7 +7,7 @@
 
 	Le modèle s'utilise de la façon suivante:
 
-	<faqcsvXX|url=YYY|lexique=ZZZ|niveau=42>
+	<faqcsvXX|url=YYY|lexique=ZZZ|niveau=42|ex=truc>
 
 	où:
 		- "XX" est l'id de la FAQ
@@ -17,13 +17,15 @@
 			changement de lettre
 		- "niveau" si ce n'est pas spécifié les intertitres sont de niveau 3
 			(comme ceux de SPIP), sinon, ils prennent la valeur niveau.
+		- "ex" désigne le nom de la colonne des exemples utilisés. si ex=truc
+			la colonne utilisée sera ex_truc
 
 
 	Le fichier CSV doit être construit de la manière suivante (ordre des colonnes indifférent):
 
-	|{{ dt }}|{{ dd }}|{{ lettre }}|{{ ancre }}|
-	| un mot | une déf| U | |
-	| autre mot | autre déf | A | ancre alternative |
+	|{{ dt }}|{{ dd }}|{{ lettre }}|{{ ancre }}|{{ ex_* }}|
+	| un mot | une déf | U | | SPIP est un joli mot |
+	| autre mot | autre déf | A | ancre alternative | |
 
 
 	où:
@@ -33,6 +35,9 @@
 			pour certains mots. Sinon les ancres sont générées automagiquement:
 				le dt est repris avec les espaces transformés en "_".
 				ex.: un Mot -> un_Mot
+		- ex_* est facultative. Il peut y en avir plusieurs ex_cas1, ex_cas2, etc.
+			Elle contient des exemples qui ne s'affichent que si le paramètre ex
+			est rempli par la valeur correspondante
 	
 
 	Le plugin commence par une boucle étrange dont le seul but est de vérifier la présence
@@ -45,27 +50,28 @@
 	[(#SET{test,0minirezo})]
 ]<BOUCLE_CONDITIONNELLE(AUTEURS){statut=#GET{test}}{0,1}>
 	<B_Colonnes_Lexique>
-		<BOUCLE_Lettres(DATA){source csv, #ENV*{url}}{cle>1}{si #ENV{lexique}|oui}>[
- <a href="[#(#VALEUR{lettre}|utf_8_to_unicode)]" class="spip">(#VALEUR{lettre}|trim|unique{lettre_pagin_#GET{alea}}|utf_8_to_unicode)</a>&nbsp;|
+		<BOUCLE_Lettres(DATA){source csv, #ENV*{url}}{cle>0}{si #ENV{lexique}|oui}>[
+ <a href="[#[id_(#ENV{id})_](#VALEUR{lettre}|trim|utf_8_to_unicode)]" class="spip">(#VALEUR{lettre}|trim|unique{lettre_pagin_#GET{alea}}|utf_8_to_unicode)</a>&nbsp;|
 		]</BOUCLE_Lettres>
 [(#ENV{lexique}|non)
 <dl class="faq">
 ]
-	<BOUCLE_Colonnes_Lexique(DATA){source csv, #ENV*{url}}{cle>1}>
+	<BOUCLE_Colonnes_Lexique(DATA){source csv, #ENV*{url}}{cle>0}>
 [
 [(#ENV{lexique}|oui)
 	[[(#COMPTEUR_BOUCLE|>{1}|oui)
 </dl>]
-	<h[(#ENV{niveau,3}) ]id="[(#VALEUR{lettre}|trim|utf_8_to_unicode)]" class="spip">
+	<h[(#ENV{niveau,3}) ]id="[[id_(#ENV{id})_](#VALEUR{lettre}|trim|utf_8_to_unicode)]" class="spip">
 		(#VALEUR{lettre}|trim|unique{lettre_faq_#GET{alea}}|utf_8_to_unicode)
 	</h[(#ENV{niveau,3})]>
 <dl class="faq">]
 ]
-	<dt id="[(#VALEUR{ancre}|trim|sinon{#VALEUR{dt}|replace{" ","_"}}|utf_8_to_unicode)]">
+	<dt id="[(#VALEUR{ancre}|trim|sinon{#VALEUR{dt}|trim|replace{" ","_"}}|utf_8_to_unicode)]">
 		(#VALEUR{dt}|trim|utf_8_to_unicode)
 	</dt>
 	<dd>
 		[(#VALEUR{dd}|trim|utf_8_to_unicode|propre)]
+		[<div class="exemple_faq">(#VALEUR{[ex_(#ENV{ex})]}|trim|utf_8_to_unicode|propre)</div>]
 	</dd>]
 	</BOUCLE_Colonnes_Lexique>
 </dl>
