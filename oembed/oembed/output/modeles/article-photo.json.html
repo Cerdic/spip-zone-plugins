@@ -1,4 +1,4 @@
-<BOUCLE_doc(DOCUMENTS){id_article}{extension IN png,jpg,gif}{0,1}>[(#ARRAY{
+<BOUCLE_doc(DOCUMENTS){id_article}{extension IN png,jpg,gif}{0,1}>[[(#ENV{callback_jsonp})\(](#ARRAY{
 version,1.0,
 type,photo,
 provider_name,[(#NOM_SITE_SPIP)],
@@ -8,4 +8,5 @@ author_name,[(#CREDITS)],
 width,[(#ENV{maxwidth,#LARGEUR})],
 height,[(#ENV{maxheight,#HAUTEUR})],
 url,[(#URL_DOCUMENT|image_reduire{#ENV{maxwidth,0},#ENV{maxheight,0}}|extraire_attribut{src}|sinon{#URL_DOCUMENT}|url_absolue)]
-}|json_encode_html)]</BOUCLE_doc>
+}|json_encode_html)[\)(#ENV{callback_jsonp}|oui)]]</BOUCLE_doc>
+#FILTRE{trim}

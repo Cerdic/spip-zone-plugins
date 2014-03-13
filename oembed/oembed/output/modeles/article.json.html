@@ -1,4 +1,4 @@
-<BOUCLE_art(ARTICLES){id_article}>[(#ARRAY{
+<BOUCLE_art(ARTICLES){id_article}>[[(#ENV{callback_jsonp})\(](#ARRAY{
 version,1.0,
 type,rich,
 provider_name,[(#NOM_SITE_SPIP)],
@@ -9,4 +9,5 @@ width,[(#ENV{maxwidth,#CONFIG{oembed/maxwidth,480}})],
 height,[(#ENV{maxheight,#CONFIG{oembed/maxheight,295}})],
 url,[(#URL_ARTICLE|url_absolue)],
 html,[<h4 class='title'><a href='[(#URL_ARTICLE|url_absolue)]'>(#TITRE)</a></h4>[<blockquote class='spip'>(#INTRODUCTION)</blockquote>]]
-}|json_encode_html)]</BOUCLE_art>
+}|json_encode_html)[\)(#ENV{callback_jsonp}|oui)]]</BOUCLE_art>
+#FILTRE{trim}
