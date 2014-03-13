@@ -22,13 +22,13 @@ function migrer_champs_vers_mots_cles() {
 		$field = $desc['field'];
 
 	$a_migrer = array(
-		'severite'=>array('champs_groupe'=>array('titre'=>_T('tickets:champ_severite_th'),'unseul'=>'oui','obligatoire'=>'oui')),
-		'tracker'=>array('champs_groupe'=>array('titre'=>_T('tickets:champ_type_th'),'unseul'=>'oui','obligatoire'=>'oui')),
-		'navigateur'=>array('champs_groupe'=>array('titre'=>_T('tickets:champ_navigateur'),'unseul'=>'non','obligatoire'=>'non')),
-		'projet'=>array('champs_groupe'=>array('titre'=>_T('tickets:champ_projet_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/projets'),
-		'composant'=>array('champs_groupe'=>array('titre'=>_T('tickets:champ_composant_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/composants'),
-		'version'=>array('champs_groupe'=>array('titre'=>_T('tickets:champ_version_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/versions'),
-		'jalon'=>array('champs_groupe'=>array('titre'=>_T('tickets:champ_jalon_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/jalons')
+		'severite'=>array('champs_groupe'=>array('titre'=>'10. '._T('tickets:champ_severite_th'),'unseul'=>'oui','obligatoire'=>'oui')),
+		'tracker'=>array('champs_groupe'=>array('titre'=>'20. '._T('tickets:champ_type_th'),'unseul'=>'oui','obligatoire'=>'oui')),
+		'projet'=>array('champs_groupe'=>array('titre'=>'30. '._T('tickets:champ_projet_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/projets'),
+		'composant'=>array('champs_groupe'=>array('titre'=>'40. '._T('tickets:champ_composant_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/composants'),
+		'version'=>array('champs_groupe'=>array('titre'=>'50. '._T('tickets:champ_version_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/versions'),
+		'jalon'=>array('champs_groupe'=>array('titre'=>'60. '._T('tickets:champ_jalon_th'),'unseul'=>'oui','obligatoire'=>'non'),'meta'=>'tickets/general/jalons'),
+		'navigateur'=>array('champs_groupe'=>array('titre'=>'70. '._T('tickets:champ_navigateur'),'unseul'=>'non','obligatoire'=>'non'))
 		);
 
 	// pour chaque champ
