@@ -23,6 +23,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Supprimer',
 
 	// C
+	'cal_par_jour' => 'jour',
+	'cal_par_mois' => 'mois',
+	'cal_par_semaine' => 'semaine',
 	'confirm_suppression_inscription' => 'Voulez-vous vraiment supprimer cette inscription ?',
 	'confirm_suppression_inscription_toutes' => 'Voulez-vous vraiment supprimer toutes les inscriptions ?',
 	'connexion_necessaire_pour_inscription' => 'Merci de vous connecter pour pouvoir vous inscrire à cet événement.',
