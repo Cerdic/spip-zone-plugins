@@ -7,7 +7,7 @@
 
 <BOUCLE_groupe(GROUPES_MOTS){id_groupe=#GET{id_groupe}}>
 #SET{mots,#ARRAY}
-<BOUCLE_mots_actifs(MOTS){id_groupe}{id_objet=#GET{id_ticket}}{objet=ticket}>
+<BOUCLE_mots_actifs(MOTS){id_groupe}{id_objet=#GET{id_ticket}}{objet=ticket}{par num titre}>
 #SET{mots,#GET{mots}|push{#ID_MOT}}
 </BOUCLE_mots_actifs>
 <ul>

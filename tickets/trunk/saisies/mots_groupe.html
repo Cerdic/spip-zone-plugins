@@ -7,7 +7,7 @@
 <li><select name="#ENV{nom}\[\]" [(#ENV{unseul,non}|=={oui}|non) multiple="multiple" ]class="#GET{type}[ (#ENV{class})]" size="#ENV{size,15}" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ value="(#ENV{valeur_forcee,#ENV{valeur}})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
 [(#ENV{cacher_option_intro}|non)
 <option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_mots(MOTS){par id_groupe, num titre, titre}{id_groupe ?}>
+<BOUCLE_mots(MOTS){par num type, num titre, titre}{id_groupe ?}>
 	<option value="#ID_MOT" [(#ID_MOT|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"]>[(#TITRE|supprimer_numero)]</option>
 </BOUCLE_mots>
 </select></li>

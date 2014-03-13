@@ -61,13 +61,14 @@ function migrer_champs_vers_mots_cles() {
 				spip_log(" champ '".$k."' - groupe id_groupe = ".$id_groupe." déjà créé", "tickets");
 			}
 			// créer un mot-clé pour chaque valeur
+			$num_mot = 0;
 			foreach ($valeurs as $kv=>$vv) {
 				// on regarde si on a déjà migré ce mot
 				$meta = 'tickets/migration_180/champs/'.$k.'/valeurs/'.$kv.'/id_mot';
 				$meta_err = 'tickets/migration_180/champs/'.$k.'/valeurs/'.$kv.'/erreur_mot';
 				if (!intval($id_mot = lire_config($meta))) {
 					$id_mot = mot_inserer($id_groupe);
-					if ($id_mot>0 AND $err = mot_modifier($id_mot, array('titre'=>$vv))) {
+					if ($id_mot>0 AND $err = mot_modifier($id_mot, array('titre'=> ++$num_mot.'. '.$vv))) {
 						ecrire_config($meta_err,'Erreur - '.$err);
 						continue;
 					}
