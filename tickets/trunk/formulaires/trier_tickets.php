@@ -90,9 +90,9 @@ function formulaires_trier_tickets_traiter_dist($lien_filtre = NULL,$lien_arg = 
 }
 
 function liste_champs_recherche_trier_tickets() {
-	$valeurs['groupesmots'] = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
+	$groupesmots = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
 	$recherches = array();
-	foreach ($valeurs['groupesmots'] as $id_groupe) {
+	foreach ($groupesmots as $id_groupe) {
 		$recherches[] = 'groupemots_'.$id_groupe;
 	}
 	$recherches = array_merge($recherches, array('recherche','auteurs','date_debut','date_fin','jalon','version','composant','projet','navigateur','assignes','statuts','severites','trackers'));
