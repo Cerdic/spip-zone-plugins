@@ -23,7 +23,8 @@ function formulaires_trier_tickets_charger_dist($lien_filtre = NULL,$lien_arg = 
 			'editable' => 'oui'
 		);
 		
-	foreach(array('recherche','auteurs','date_debut','date_fin','jalon','version','composant','projet','navigateur','assignes','statuts','severites','trackers') as $recherche){
+	$recherches = liste_champs_recherche_trier_tickets();
+	foreach($recherches as $recherche){
 		$valeurs[$recherche] = _request($recherche);
 		if(in_array($recherche,array('date_debut','date_fin')) && $valeurs[$recherche]){
 			if($valeurs[$recherche] == 0){
@@ -70,7 +71,8 @@ function formulaires_trier_tickets_traiter_dist($lien_filtre = NULL,$lien_arg = 
 	$action = ($lien ? $lien : generer_url_public('tickets'));
 	$horaire = false;
 	
-	foreach(array('recherche','auteurs','date_debut','date_fin','jalon','version','composant','projet','navigateur','assignes','severites','statuts','trackers') as $recherche){
+	$recherches = liste_champs_recherche_trier_tickets();
+	foreach($recherches as $recherche){
 		if(($recherche == 'date_debut') && _request('date_debut')){
 			$date_debut = date('Y-m-d H:i:s',verifier_corriger_date_saisie('debut',$horaire,$erreurs));
 			$action = parametre_url($action,$recherche,$date_debut);
@@ -85,5 +87,16 @@ function formulaires_trier_tickets_traiter_dist($lien_filtre = NULL,$lien_arg = 
 	}
 	include_spip('inc/headers');
 	redirige_formulaire($action);
+}
+
+function liste_champs_recherche_trier_tickets() {
+	$valeurs['groupesmots'] = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
+	$recherches = array();
+	foreach ($valeurs['groupesmots'] as $id_groupe) {
+		$recherches[] = 'groupemots_'.$id_groupe;
+	}
+	$recherches = array_merge($recherches, array('recherche','auteurs','date_debut','date_fin','jalon','version','composant','projet','navigateur','assignes','statuts','severites','trackers'));
+	
+	return $recherches;
 }
 ?>
