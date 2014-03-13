@@ -146,6 +146,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_refuse' => 'archivé',
 	'titre_cadre_raccourcis' => 'Raccourcis',
 	'titre_formulaires_archives' => 'Archives',
+	'titre_reponses' => 'Réponses',
 	'traitements_actives' => 'Traitements activés',
 	'traitements_aide_memoire' => 'Aide mémoire :',
 	'traitements_avertissement_creation' => 'Les modifications sur les champs du formulaire ont été enregistrées avec succès. Vous pouvez maintenant définir quels traitements seront effectués lors de l’utilisation du formulaire.',
