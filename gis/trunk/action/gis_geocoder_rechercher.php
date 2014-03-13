@@ -12,15 +12,17 @@ include_spip("inc/distant");
  * reste est transmis tel quel à Nomatim.
  */
 function action_gis_geocoder_rechercher_dist() {
+	inclure_spip("inc/modifier");
+
 	$mode = _request("mode");
 	if(!$mode || !in_array($mode, array("search", "reverse")))
 		return;
 
-	/* On supprime les arguments "exec", "action" et "mode" */
-	$arguments = implode("&", array_slice(explode("&", $_SERVER['QUERY_STRING']), 2));
+	/* On filtre les arguments à renvoyer à Nomatim (liste blanche) */	
+	$arguments = collecter_requests(array("json_callback", "format", "q", "limit", "addressdetails", "accept-language", "lat", "lon"));
 
-	if($arguments) {
+	if(!empty($arguments)) {
 		header('Content-Type: application/json; charset=UTF-8');
-		echo recuperer_page("http://nominatim.openstreetmap.org/{$mode}?" . $arguments);
+		echo recuperer_page("http://nominatim.openstreetmap.org/{$mode}?" . http_build_query($arguments));
 	}
 }
