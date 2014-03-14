@@ -1,77 +1,133 @@
 [(#REM) 
 	Formulaire d'enregistrement des abonnements.
-	Assez basique et en table (et oui). Nous vous recommandons de réaliser le votre à partir de cet exemple et de le surcharger dans squelettes/formulaires/
+	Nous vous recommandons de réaliser le votre à partir de cet exemple et de le surcharger dans squelettes/formulaires/
 ]
+
+[(#REM) Compatibilité Accès restreint : proposer les rubriques restreintes auxquelles l'auteur a accès]
+<BOUCLE_si_acces_restreint(CONDITION){si #PLUGIN{accesrestreint}}>
+<BOUCLE_zones(spip_zones_liens){id_objet=#SESSION{id_auteur}}{objet=auteur}>
+	#SET{rubriques_restreintes,#ARRAY}
+	<BOUCLE_rubriques_zones(spip_zones_liens){id_zone=#ID_ZONE}{objet=rubrique}>
+		#SET{rubriques_restreintes, #GET{rubriques_restreintes}|push{#ID_OBJET}}
+	</BOUCLE_rubriques_zones>
+</BOUCLE_zones>
+</BOUCLE_si_acces_restreint>
+
 <div class="formulaire_spip formulaire_alertes_email">
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	<form action="#ENV{action}" method="post">
 		<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
-		<B_alertes_mots>
-		<h3><:alertes:abo_keywords:><h3>
-
-		<table class="fields-cols">						
-
-		<BOUCLE_alertes_mots(MOTS){tout}{id_groupe IN #CONFIG{config_alertes/groupes}|to_array}>
-		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
-		<td>
-			<input type="checkbox" class="checkbox" name="mots[]" id="mot-#ID_MOT" value="#ID_MOT"[ (#ENV{mots}|find{#ID_MOT}|oui)checked="checked"]/>
-			<label for="mot-#ID_MOT">#TITRE</label>
-		</td>
-		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
-		</BOUCLE_alertes_mots>
-		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
-		</table>
-		</B_alertes_mots>
-		
-		<B_alertes_rubriques>
-		<h3><:alertes:abo_topics:></h3>
-		<table class="fields-cols">						
-
-		<BOUCLE_alertes_rubriques(RUBRIQUES){tout}{id_rubrique IN #CONFIG{config_alertes/rubriques}|to_array}>
-		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
-		<td>
-			<input type="checkbox" class="checkbox" name="rubriques[]" id="rubrique-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{rubriques}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
-			<label for="rubrique-#ID_RUBRIQUE">#TITRE</label>
-		</td>
-		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
-		</BOUCLE_alertes_rubriques>
-		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
-		</table>
-		</B_alertes_rubriques>
-		
+		<ul>
+		[(#REM) Abonnement aux secteurs]
 		<B_alertes_secteurs>
-		<h3><:alertes:abo_sectors:></h3>
-		<table class="fields-cols">		
-		<BOUCLE_alertes_secteurs(RUBRIQUES){tout}{racine}{id_secteur IN #CONFIG{config_alertes/secteurs}|to_array}>
-		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
-		<td>
-			<input type="checkbox" class="checkbox" name="secteurs[]" id="secteur-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{secteurs}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
-			<label for="secteur-#ID_RUBRIQUE">#TITRE</label>
-		</td>
-		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
-		</BOUCLE_alertes_secteurs>
-		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
-		</table>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:alertes:abo_sectors:></h3>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{secteurs}}
+					<li class="editer_secteurs[ (#GET{erreurs}|oui)erreur]">
+					<BOUCLE_alertes_secteurs(RUBRIQUES){tout}{racine}{id_secteur IN #CONFIG{config_alertes/secteurs}|to_array}>	
+					[(#REM) Accès restreint, on propose la rubrique que si elle est dans celles auquelles a accès l'auteur]					
+					<BOUCLE_si_acces_restreint_sec(CONDITION){si #PLUGIN{accesrestreint}}>
+							<BOUCLE_si_restreint2(CONDITION){si #GET{rubriques_restreintes}|find{#ID_RUBRIQUE}|oui}>	
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="secteurs[]" id="secteur-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{secteurs}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+								<label for="secteur-#ID_RUBRIQUE">#TITRE</label>
+							</div>									
+							</BOUCLE_si_restreint2>									
+					</BOUCLE_si_acces_restreint_sec>
+					[(#REM) Pas d'accès restreint, on propose la rubrique]
+					<div class="choix">
+						<input type="checkbox" class="checkbox" name="secteurs[]" id="secteur-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{secteurs}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+						<label for="secteur-#ID_RUBRIQUE">#TITRE</label>
+					</div>
+					<//B_si_acces_restreint_sec>
+					</BOUCLE_alertes_secteurs>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
 		</B_alertes_secteurs>
 		
+		[(#REM) Abonnements aux rubriques spécifiques]
+		<B_alertes_rubriques>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:alertes:abo_topics:></h3>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{rubriques}}
+					<li class="editer_rubriques[ (#GET{erreurs}|oui)erreur]">
+					<BOUCLE_alertes_rubriques(RUBRIQUES){tout}{id_rubrique IN #CONFIG{config_alertes/rubriques}|to_array}>
+						[(#REM) Accès restreint, on propose la rubrique que si elle est dans celles auquelles a accès l'auteur]
+						<BOUCLE_si_acces_restreint_rub(CONDITION){si #PLUGIN{accesrestreint}}>
+							<BOUCLE_si_restreint1(CONDITION){si #GET{rubriques_restreintes}|find{#ID_RUBRIQUE}|oui}>	
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="rubriques[]" id="rubrique-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{rubriques}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+								<label for="rubrique-#ID_RUBRIQUE">#TITRE</label>
+							</div>								
+							</BOUCLE_si_restreint1>						
+						</BOUCLE_si_acces_restreint_rub>
+						[(#REM) Pas d'accès restreint, on propose la rubrique]
+						<div class="choix">
+							<input type="checkbox" class="checkbox" name="rubriques[]" id="rubrique-#ID_RUBRIQUE" value="#ID_RUBRIQUE"[ (#ENV{rubriques}|find{#ID_RUBRIQUE}|oui)checked="checked"]/>
+							<label for="rubrique-#ID_RUBRIQUE">#TITRE</label>
+						</div>
+						<//B_si_acces_restreint_rub>
+					</BOUCLE_alertes_rubriques>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		</B_alertes_rubriques>
+		
+		[(#REM) Abonnements aux mots-clès, par groupes de mots autorisés]
+		<B_groupes_mots>
+			<li><h3 class="legend"><:alertes:abo_keywords:></h3></li>
+			<BOUCLE_groupes_mots(GROUPES_MOTS){tout}{id_groupe IN #CONFIG{config_alertes/groupes}|to_array}>
+			<B_mots>
+			<li class="fieldset">
+				<fieldset>
+					<h4 class="legend">#TITRE</h4>
+					<ul>
+						#SET{erreurs,#ENV**{erreurs}|table_valeur{mots}}
+						<li class="editer_mots[ (#GET{erreurs}|oui)erreur]">
+							<BOUCLE_mots(MOTS){tout}{id_groupe}>
+							<div class="choix">
+								<input type="checkbox" class="checkbox" name="mots[]" id="mot-#ID_MOT" value="#ID_MOT"[ (#ENV{mots}|find{#ID_MOT}|oui)checked="checked"]/>
+								<label for="mot-#ID_MOT">#TITRE</label>
+							</div>
+							</BOUCLE_mots>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			</B_mots>			
+			</BOUCLE_groupes_mots>
+		</B_groupes_mots>
+		
+		[(#REM) Abonnements aux auteurs]
 		<B_alertes_auteurs>
-		<h3><:alertes:abo_authors:></h3>
-		<table class="fields-cols">		
-		<BOUCLE_alertes_auteurs(AUTEURS){tout}{id_auteur IN #CONFIG{config_alertes/auteurs}|to_array}>
-		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
-		<td>
-			<input type="checkbox" class="checkbox" name="auteurs[]" id="auteur-#ID_AUTEUR" value="#ID_AUTEUR"[ (#ENV{auteurs}|find{#ID_AUTEUR}|oui)checked="checked"]/>
-			<label for="auteur-#ID_AUTEUR">[(#NOM|sinon{#LOGIN})]</label>
-		</td>
-		[(#COMPTEUR_BOUCLE|alterner{'','','','','</tr>'})]
-		</BOUCLE_alertes_auteurs>
-		[(#TOTAL_BOUCLE|modulo{5}|=={0}|?{'','</tr>'})]
-		</table>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:alertes:abo_authors:></h3>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{auteurs}}
+					<li class="editer_auteurs">
+						<BOUCLE_alertes_auteurs(AUTEURS){tout}{id_auteur IN #CONFIG{config_alertes/auteurs}|to_array}>
+						<div class="choix">
+							<input type="checkbox" class="checkbox" name="auteurs[]" id="auteur-#ID_AUTEUR" value="#ID_AUTEUR"[ (#ENV{auteurs}|find{#ID_AUTEUR}|oui)checked="checked"]/>
+							<label for="auteur-#ID_AUTEUR">[(#NOM|sinon{#LOGIN})]</label>
+						</div>
+						</BOUCLE_alertes_auteurs>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
 		</B_alertes_auteurs>
 		
+		</ul>
 		<p class="boutons"><input type="submit" name="submit" class="submit" value="<:pass_ok:>" /></p>
 		</div>
 	</form>

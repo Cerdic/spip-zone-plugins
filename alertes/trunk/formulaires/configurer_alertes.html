@@ -8,68 +8,76 @@
 	<form action="#ENV{action}" method="post">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{activer_alertes}}
-				<li class="editer_activer_alertes obligatoire[ (#GET{erreurs}|oui)erreur]">
-					<h3 class="label"><:alertes:alerts_activation:></h3>
-					<div class="choix">
-						<input type='radio' class="radio" name='activer_alertes' value='non' id='activer_alertes_non'[ (#ENV{activer_alertes}|!={oui}|oui)checked="checked"] />
-						<label for='activer_alertes_non'><:alertes:no:></label>
-					</div>
-					<div class="choix">
-						<input type='radio' class="radio" name='activer_alertes' value='oui' id='activer_alertes_oui'[ (#ENV{activer_alertes}|=={oui}|oui)checked="checked"] />
-						<label for='activer_alertes_oui'><:alertes:yes:></label>
-					</div>					
-				</li>
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{mode_envoi}}
-				<li class="editer_mode_envoi obligatoire[ (#GET{erreurs}|oui)erreur]">
-					<h3 class="label"><:alertes:sending_method:></h3>
-					<div class="choix">
-						<input type='radio' class="radio" name='mode_envoi' value='direct' id='mode_envoi_direct'[ (#ENV{mode_envoi}|!={cron}|oui)checked="checked"] />
-						<label for='mode_envoi_direct'><:alertes:send_directly:></label><span><:alertes:except_post_dated:></span>
-					</div>
-					<div class="choix">
-						<input type='radio' class="radio" name='mode_envoi' value='cron' id='mode_envoi_cron'[ (#ENV{mode_envoi}|=={cron}|oui)checked="checked"] />
-						<label for='mode_envoi_cron'><:alertes:send_by_cron:></label>
-					</div>					
-				</li>
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{intervalle_cron}}
-				<li class="editer_intervalle_cron obligatoire[ (#GET{erreurs}|oui)erreur]">
-					<label for="intervalle_cron"><:alertes:intervalle_cron:></label>
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<input type='text' name='intervalle_cron' id='intervalle_cron' value="#ENV{intervalle_cron}" />				
-				</li>	
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{nb_mails}}
-				<li class="editer_nb_mails obligatoire[ (#GET{erreurs}|oui)erreur]">
-					<label for="nb_mails"><:alertes:nb_mails:></label>
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<input type='text' name='nb_mails' id='nb_mails' value="#ENV{nb_mails}" />				
-				</li>					
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{groupes}}
-				<li class="editer_groupes[ (#GET{erreurs}|oui)erreur]">
-					<label for="groupes"><:alertes:id_keyword_groups:> <:alertes:separated_by_comma:></label>
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<input type='text' name='groupes' id='groupes' value="#ENV{groupes}" />
-				</li>
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{secteurs}}
-				<li class="editer_secteurs[ (#GET{erreurs}|oui)erreur]">
-					<label for="secteurs"><:alertes:id_sectors:> <:alertes:separated_by_comma:></label>
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<input type='text' name='secteurs' id='secteurs' value="#ENV{secteurs}" />
-				</li>
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{rubriques}}
-				<li class="editer_rubriques[ (#GET{erreurs}|oui)erreur]">
-					<label for="rubriques"><:alertes:id_topics:> <:alertes:separated_by_comma:></label>
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<input type='text' name='rubriques' id='rubriques' value="#ENV{rubriques}" />
-				</li>
-				#SET{erreurs,#ENV**{erreurs}|table_valeur{auteurs}}
-				<li class="editer_auteurs[ (#GET{erreurs}|oui)erreur]">
-					<label for="auteurs"><:alertes:id_authors:> <:alertes:separated_by_comma:></label>
-					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					<input type='text' name='auteurs' id='auteurs' value="#ENV{auteurs}" />
-				</li>
-			</ul>
+			<fieldset>
+				<legend><:alertes:global_configuration:></legend>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{activer_alertes}}
+					<li class="editer_activer_alertes obligatoire[ (#GET{erreurs}|oui)erreur]">
+						<h3 class="label"><:alertes:alerts_activation:></h3>
+						<div class="choix">
+							<input type='radio' class="radio" name='activer_alertes' value='non' id='activer_alertes_non'[ (#ENV{activer_alertes}|!={oui}|oui)checked="checked"] />
+							<label for='activer_alertes_non'><:alertes:no:></label>
+						</div>
+						<div class="choix">
+							<input type='radio' class="radio" name='activer_alertes' value='oui' id='activer_alertes_oui'[ (#ENV{activer_alertes}|=={oui}|oui)checked="checked"] />
+							<label for='activer_alertes_oui'><:alertes:yes:></label>
+						</div>					
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{mode_envoi}}
+					<li class="editer_mode_envoi obligatoire[ (#GET{erreurs}|oui)erreur]">
+						<h3 class="label"><:alertes:sending_method:></h3>
+						<div class="choix">
+							<input type='radio' class="radio" name='mode_envoi' value='direct' id='mode_envoi_direct'[ (#ENV{mode_envoi}|!={cron}|oui)checked="checked"] />
+							<label for='mode_envoi_direct'><:alertes:send_directly:></label><span><:alertes:except_post_dated:></span>
+						</div>
+						<div class="choix">
+							<input type='radio' class="radio" name='mode_envoi' value='cron' id='mode_envoi_cron'[ (#ENV{mode_envoi}|=={cron}|oui)checked="checked"] />
+							<label for='mode_envoi_cron'><:alertes:send_by_cron:></label>
+						</div>					
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{intervalle_cron}}
+					<li class="editer_intervalle_cron obligatoire[ (#GET{erreurs}|oui)erreur]">
+						<label for="intervalle_cron"><:alertes:intervalle_cron:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input type='text' name='intervalle_cron' id='intervalle_cron' value="#ENV{intervalle_cron}" />				
+					</li>	
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nb_mails}}
+					<li class="editer_nb_mails obligatoire[ (#GET{erreurs}|oui)erreur]">
+						<label for="nb_mails"><:alertes:nb_mails:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input type='text' name='nb_mails' id='nb_mails' value="#ENV{nb_mails}" />				
+					</li>
+				</ul>
+			</fieldset>
+			<fieldset>
+				<legend><:alertes:possible_subscription:></legend>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{secteurs}}
+					<li class="editer_secteurs[ (#GET{erreurs}|oui)erreur]">
+						<label for="secteurs"><:alertes:id_sectors:> <:alertes:separated_by_comma:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input type='text' name='secteurs' id='secteurs' value="#ENV{secteurs}" />
+					</li>		
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{rubriques}}
+					<li class="editer_rubriques[ (#GET{erreurs}|oui)erreur]">
+						<label for="rubriques"><:alertes:id_topics:> <:alertes:separated_by_comma:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input type='text' name='rubriques' id='rubriques' value="#ENV{rubriques}" />
+					</li>				
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{groupes}}
+					<li class="editer_groupes[ (#GET{erreurs}|oui)erreur]">
+						<label for="groupes"><:alertes:id_keyword_groups:> <:alertes:separated_by_comma:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input type='text' name='groupes' id='groupes' value="#ENV{groupes}" />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{auteurs}}
+					<li class="editer_auteurs[ (#GET{erreurs}|oui)erreur]">
+						<label for="auteurs"><:alertes:id_authors:> <:alertes:separated_by_comma:></label>
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input type='text' name='auteurs' id='auteurs' value="#ENV{auteurs}" />
+					</li>
+				</ul>
+			</fieldset>
 			<p class="boutons"><input type="submit" class="submit" value="<:pass_ok:>" /></p>
 		</div>
 	</form>

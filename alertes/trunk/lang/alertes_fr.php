@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'except_post_dated' => '(sauf les articles post-dat&eacute;s)',
 	// G
 	'generic_error' => 'Une erreur est pr&eacute;sente dans votre saisie',
+	'global_configuration' => 'Configuration des m&eacute;canismes d\'alertes',
 	// I
 	'intervalle_cron' => 'Intervalle de passage du pseudo-CRON SPIP (en minutes)',
 	'id_authors' =>' Identifiants des auteurs abonnables',
@@ -27,6 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'no' => 'Non',
 	'nb_mails' => 'Nombre d\'emails d\'alertes envoy&eacute;es en un lot (CRON uniquement)',
 	'news_on' => 'Nouveauté sur @nom_site_spip@ :',
+	//P
+	'possible_subscription' => 'Configuration des abonnements disponibles',
 	// R
 	'remove' => 'Retirer',
 	'remove_from' => 'Retirer de mes alertes',

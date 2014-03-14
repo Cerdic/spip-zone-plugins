@@ -2,7 +2,7 @@
  * Plugin Alertes
  * Distribué sous licence GPL
  *
- * CSS reprise du plugin Mes favoris (version 32px) de Olivier Sallou, Cedric Morin.
+ * CSS en partie reprise du plugin Mes favoris (version 32px) de Olivier Sallou, Cedric Morin.
  */
 .formulaire_alerte{float:right;}
 .formulaire_alerte form button {cursor: pointer;border:0;background-color:transparent;text-align:right;padding:2px 0;}
@@ -15,3 +15,5 @@
 .formulaire_alerte form button.retirer_alertes img {visibility: hidden;width:32px;height:32px}
 .formulaire_alerte form button.retirer_alertes span {visibility:hidden;}
 .formulaire_alerte form button.retirer_favori:hover span {visibility:visible;}
+
+.formulaire_alertes_email .choix {display:block;margin-right:8px;float:left;}

@@ -31,8 +31,15 @@ function alertes_notifications_destinataires($flux) {
 	$date_pour_envoi = $options['date'];
 	//Récuperation de la configuration
 	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	//Est-ce que Accès restreint est activé ?
+	$plugins = @unserialize($GLOBALS['meta']['plugin']);
+	if(is_array($plugins['ACCESRESTREINT'])){
+		$acces_restreint = true;
+	}else{
+		$acces_restreint = false;
+	}
 	//Publication d'article : à ajouter aux alertes des abonnés
-	if ($quoi=='instituerarticle' AND $options['statut'] == 'publie' AND is_array($a)){;
+	if ($quoi=='instituerarticle' AND $options['statut'] == 'publie' AND is_array($a)){
 		//Seulement si alertes actives
 		if($a['activer_alertes'] == 'oui'){
 			$emails = array();
@@ -49,8 +56,26 @@ function alertes_notifications_destinataires($flux) {
 						if($verif = sql_select('id_auteur, email', 'spip_auteurs', 'id_auteur= '.$abonne['id_auteur'])){
 							while($v = sql_fetch($verif)){
 								if( ($v['email'])&&($v['id_auteur']) ){
-									//Email, on stocke pour envoi
-									$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									if($acces_restreint == true){		
+										$article_accessible = false; // On bloque de base puis on vérifie
+										//Recuperation des zones de l'auteur
+										if($zones = sql_select("id_zone", "spip_zones_liens", "id_objet = ".$abonne['id_auteur']." AND objet='auteur'")){
+											while($z = sql_fetch($zones)){
+												//Pour chacunes des zones de l'auteur, on regarde si l'article est dans une des rubriques auxquelles il a accès
+												if($restrict = sql_select("*","spip_articles AS art, spip_zones_liens AS zo","id_zone = ".$z['id_zone']." AND zo.objet='rubrique' AND art.id_article = ".$id_article." AND art.id_rubrique = zo.id_objet")){
+													while($r = sql_fetch($restrict)){
+														$article_accessible = true; //Dès qu'on a une zone accessible, on passe à true
+													}
+												}
+											}
+										}
+									}else{
+										$article_accessible = true; // Sans accès restreint, c'est bon de base.
+									}
+									//Email, on stocke pour envoi, ssi l'article n'est pas restreint pour cet auteur
+									if($article_accessible == true){
+										$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									}
 								}
 								if( (!$v['email'])||($v['email'] == '') ){
 									//Pas d'email, on enlève des listes
@@ -81,8 +106,26 @@ function alertes_notifications_destinataires($flux) {
 						if($verif = sql_select('id_auteur, email', 'spip_auteurs', 'id_auteur= '.$abonne['id_auteur'])){
 							while($v = sql_fetch($verif)){
 								if( ($v['email'])&&($v['id_auteur']) ){
-									//Email, on stocke pour envoi
-									$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									if($acces_restreint == true){		
+										$article_accessible = false; // On bloque de base puis on vérifie
+										//Recuperation des zones de l'auteur
+										if($zones = sql_select("id_zone", "spip_zones_liens", "id_objet = ".$abonne['id_auteur']." AND objet='auteur'")){
+											while($z = sql_fetch($zones)){
+												//Pour chacunes des zones de l'auteur, on regarde si l'article est dans une des rubriques auxquelles il a accès
+												if($restrict = sql_select("*","spip_articles AS art, spip_zones_liens AS zo","id_zone = ".$z['id_zone']." AND zo.objet='rubrique' AND art.id_article = ".$id_article." AND art.id_rubrique = zo.id_objet")){
+													while($r = sql_fetch($restrict)){
+														$article_accessible = true; //Dès qu'on a une zone accessible, on passe à true
+													}
+												}
+											}
+										}
+									}else{
+										$article_accessible = true; // Sans accès restreint, c'est bon de base.
+									}
+									//Email, on stocke pour envoi, ssi l'article n'est pas restreint pour cet auteur
+									if($article_accessible == true){
+										$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									}
 								}
 								if( (!$v['email'])||($v['email'] == '') ){
 									//Pas d'email, on enlève des listes
@@ -113,8 +156,26 @@ function alertes_notifications_destinataires($flux) {
 						if($verif = sql_select('id_auteur, email', 'spip_auteurs', 'id_auteur= '.$abonne['id_auteur'])){
 							while($v = sql_fetch($verif)){
 								if( ($v['email'])&&($v['id_auteur']) ){
-									//Email, on stocke pour envoi
-									$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									if($acces_restreint == true){		
+										$article_accessible = false; // On bloque de base puis on vérifie
+										//Recuperation des zones de l'auteur
+										if($zones = sql_select("id_zone", "spip_zones_liens", "id_objet = ".$abonne['id_auteur']." AND objet='auteur'")){
+											while($z = sql_fetch($zones)){
+												//Pour chacunes des zones de l'auteur, on regarde si l'article est dans une des rubriques auxquelles il a accès
+												if($restrict = sql_select("*","spip_articles AS art, spip_zones_liens AS zo","id_zone = ".$z['id_zone']." AND zo.objet='rubrique' AND art.id_article = ".$id_article." AND art.id_rubrique = zo.id_objet")){
+													while($r = sql_fetch($restrict)){
+														$article_accessible = true; //Dès qu'on a une zone accessible, on passe à true
+													}
+												}
+											}
+										}
+									}else{
+										$article_accessible = true; // Sans accès restreint, c'est bon de base.
+									}
+									//Email, on stocke pour envoi, ssi l'article n'est pas restreint pour cet auteur
+									if($article_accessible == true){
+										$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									}
 								}
 								if( (!$v['email'])||($v['email'] == '') ){
 									//Pas d'email, on enlève des listes
@@ -145,8 +206,26 @@ function alertes_notifications_destinataires($flux) {
 						if($verif = sql_select('id_auteur, email', 'spip_auteurs', 'id_auteur= '.$abonne['id_auteur'])){
 							while($v = sql_fetch($verif)){
 								if( ($v['email'])&&($v['id_auteur']) ){
-									//Email, on stocke pour envoi
-									$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									if($acces_restreint == true){		
+										$article_accessible = false; // On bloque de base puis on vérifie
+										//Recuperation des zones de l'auteur
+										if($zones = sql_select("id_zone", "spip_zones_liens", "id_objet = ".$abonne['id_auteur']." AND objet='auteur'")){
+											while($z = sql_fetch($zones)){
+												//Pour chacunes des zones de l'auteur, on regarde si l'article est dans une des rubriques auxquelles il a accès
+												if($restrict = sql_select("*","spip_articles AS art, spip_zones_liens AS zo","id_zone = ".$z['id_zone']." AND zo.objet='rubrique' AND art.id_article = ".$id_article." AND art.id_rubrique = zo.id_objet")){
+													while($r = sql_fetch($restrict)){
+														$article_accessible = true; //Dès qu'on a une zone accessible, on passe à true
+													}
+												}
+											}
+										}
+									}else{
+										$article_accessible = true; // Sans accès restreint, c'est bon de base.
+									}
+									//Email, on stocke pour envoi, ssi l'article n'est pas restreint pour cet auteur
+									if($article_accessible == true){
+										$emails[$v['id_auteur']] = $v['email']; //A voir si ça évite les doublons
+									}
 								}
 								if( (!$v['email'])||($v['email'] == '') ){
 									//Pas d'email, on enlève des listes

@@ -9,4 +9,4 @@
 	
 	Surcharger-le par le votre dans squelettes/alertes/sujet-email-alerte.html
 ]
-<:alertes:news_on{nom_site_spip=#NOM_SITE_SPIP}:> <BOUCLE_art(ARTICLES){id_article}>[(#TITRE|textebrut)]</BOUCLE_art>
+<:alertes:news_on{nom_site_spip=#NOM_SITE_SPIP}:> <BOUCLE_si_acces_restreint(CONDITION){si #PLUGIN{accesrestreint}}><BOUCLE_art_r(ARTICLES){tout_voir}{id_article}>[(#TITRE|textebrut)]</BOUCLE_art_r></BOUCLE_si_acces_restreint><BOUCLE_art(ARTICLES){id_article}>[(#TITRE|textebrut)]</BOUCLE_art><//B_si_acces_restreint>

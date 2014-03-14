@@ -1,7 +1,6 @@
-Plugin Alertes : A faire au 05/03/2014
+Plugin Alertes : A faire au 13/03/2014
 
 - Rendre plus "sexy" les formulaires de configurations, de choix d'abonnements et les exemples d'email envoyé.
 - Voir s'il est possible de simplifier le code, notamment dans le pipeline de notification pour ne pas rendre le mécanisme de publication trop lourd.
 - Tester les cas extrèmes et la charge.
 - Voir s'il est possible d'appliquer le système à d'autres objets éditoriaux : les brèves par exemple.
-- Rédiger la documentation.
