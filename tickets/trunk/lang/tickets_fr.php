@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_tickets' => 'Afficher les tickets',
+	'ajout_deux_points' => '@texte@ : ',
 	'assignation_attribuee_a' => 'Le ticket a été assigné à @nom@.',
 	'assignation_attribuee_a_personne' => 'Le ticket n’a été assigné à personne.',
 	'assignation_mail_titre' => 'Changement d’assignation du ticket',

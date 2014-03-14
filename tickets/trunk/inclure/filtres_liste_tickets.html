@@ -70,6 +70,16 @@
 		</BOUCLE_assignes>
 		</p>
 	</B_assignes>
+	<BOUCLE_groupesmots_filtre(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+		<B_mots_groupe_filtre>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{groupemots_#ID_GROUPE,''})]})]
+		<p><:tickets:ajout_deux_points{texte=#TITRE}:>
+		<BOUCLE_mots_groupe_filtre(MOTS){id_groupe}{id_mot IN #ENV{groupemots_#ID_GROUPE}}{par num titre}{', '}>
+			[(#TITRE|supprimer_numero)]
+		</BOUCLE_mots_groupe_filtre>
+		</p>
+		</B_mots_groupe_filtre>
+	</BOUCLE_groupesmots_filtre>
 	[(#ENV{url_defiltrer}|=={oui}|oui)
 	<div class="actions">
 		<a href="#GET{url_defiltrer}"><:tickets:lien_supprimer_filtres:></a>

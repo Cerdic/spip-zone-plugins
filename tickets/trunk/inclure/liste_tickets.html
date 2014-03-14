@@ -23,6 +23,7 @@
 	-* jalon = string                 Le jalon
 	-* composant = string             Le composant
 	-* projet = string                Le projet
+	-* groupemots_xx = array          Les mots-clés (xx devant être id_groupe d'un groupe associable aux tickets)
 	-* sticked = oui|''               N'afficher que les tickets épinglés ou pas
 	-* objet = string                 N'afficher que les tickets liés à ce type d'objet
 	-* id_objet = int                 Si objet est aussi présent, n'afficher que les tickets liés à cet objet
@@ -38,6 +39,14 @@
 	-* couper = int (160)             La longueur de coupe du texte si affiché
 	-* cacher_texte = string (oui|'') Si oui n'affichera pas le texte des tickets
 ]
+[(#REM) Récupération de la liste des groupes et mots]
+#SET{mots_pargroupe,#ARRAY}
+<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+	[(#ENV{groupemots_#ID_GROUPE}|oui)
+		#SET{mots_pargroupe, #GET{mots_pargroupe}|array_merge{#ENV{groupemots_#ID_GROUPE}}}
+	]
+</BOUCLE_groupesmots>
+
 [(#SET{defaut_tri,#ARRAY{
 	statut,1,
 	date,#ENV{date_sens,-1},
@@ -160,7 +169,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS spip_tickets_liens){objet ?}{id_objet ?}{recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#LISTE{999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#LISTE{999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version?}{jalon?}{composant?}{projet?}{sticked?}{tri #ENV{order,date},#GET{defaut_tri},#ENV{tri_nom,detaillee}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_detaillee(TICKETS spip_tickets_liens){objet ?}{id_objet ?}{recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#LISTE{999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#LISTE{999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version?}{jalon?}{composant?}{projet?}{sticked?}{mots_pargroupe #GET{mots_pargroupe}}{tri #ENV{order,date},#GET{defaut_tri},#ENV{tri_nom,detaillee}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})] #STATUT">
 			<td><a href="[(#SELF|parametre_url{statut,#STATUT})]">[(#STATUT|tickets_icone_statut{true})]</a></td>
 			<td><a href="[(#URL_TICKET)]">##ID_TICKET</a></td>
