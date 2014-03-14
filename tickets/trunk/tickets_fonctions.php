@@ -313,4 +313,87 @@ function tickets_liste_navigateur($nav=false){
 	return $navs;
 }
 
+// Critere {mots_pargroupe} : "l'article est lie a au moins un mot de tous les groupes demandes"
+// {mots?} ne s'applique que si au moins un mot est demande
+/*
+ * ATTENTION, c'est un peu en cours de dev, il faudrait :
+ * - virer la référence aux tickets
+ * - revoir peut être la jonction avec spip_mots
+ * - ne pas écrire directement 'spip_mots'/'spip_mots_liens' si le préfixe est différent ?
+ * - prendre en compte le cas où id_mot[] est un tableau de strings (comme critere_mots) ?
+ */
+function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
+
+	$boucle = &$boucles[$idb];
+
+	if (isset($crit->param[0][0])) {
+		$mots = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
+	} else{
+		$mots = '@$Pile[0]["mots"]';
+	}
+
+	$t = $boucle->id_table . '.' . $boucle->primary;
+	if (!in_array($t, $boucles[$idb]->select))
+	  $boucle->select[]= $t; # pour postgres, neuneu ici
+
+	/* On calcule la liste des groupes
+	 * 
+	 * SELECT id_groupe
+	 * FROM spip_mots
+	 * WHERE id_mot IN (1,2,3)
+	 * GROUP BY id_groupe
+	 */
+	$groupes = "'('.sql_get_select('id_groupe','spip_mots',sql_in('id_mot',".$mots."),'id_groupe').') AS g'";
+
+	/* Maintenant le nombre de groupes
+	 * 
+	 * SELECT COUNT(id_groupe)
+	 * FROM ($groupes) AS nb
+	 */
+	$nb_groupes = "('.sql_get_select('COUNT(id_groupe)',".$groupes.").')";
+
+	/* Maintenant les doublets (id_objet,id_groupe)
+	 * 
+	 * attention : on écrit directement JOIN dans le code, peut être
+	 * qu'il faudrait faire plus gaffe à la compatibilité SQL ?
+	 * 
+	 * SELECT ml.id_objet,m.id_groupe
+	 * FROM spip_mots_liens AS ml
+	 * JOIN spip_mots AS m USING (id_mot)
+	 * WHERE ml.objet='ticket'
+	 *   AND ml.id_mot IN (1,2,3)
+	 * GROUP BY ml.id_objet,ml.objet,m.id_groupe
+	 */
+	$doublets = "'('.sql_get_select('id_objet,id_groupe','spip_mots_liens JOIN spip_mots USING (id_mot)','objet=\'ticket\' AND '.sql_in('id_mot',".$mots."),'id_objet,objet,id_groupe').') AS d'";
+
+	/* Enfin, la boucle complete
+	 * SELECT id_objet
+	 * FROM (
+	 *   SELECT id_objet,id_groupe
+	 *   FROM spip_mots_liens AS ml
+	 *   JOIN spip_mots AS m USING (id_mot)
+	 *   WHERE objet='ticket'
+	 *     AND id_mot IN (1,2,3)
+	 *   GROUP BY id_objet,objet,id_groupe
+	 * ) AS d
+	 * GROUP BY id_objet
+	 * HAVING SUM(1) >= (
+	 *   SELECT COUNT(*)
+	 *   FROM (
+	 *     SELECT id_groupe
+	 *     FROM spip_mots
+	 *     WHERE id_mot IN (1,2,3)
+	 *     GROUP BY id_groupe
+	 *   ) AS g
+	 * )
+	 */
+	$where = "sql_get_select('id_objet',".$doublets.",'','id_objet','','','SUM(1) >= ".$nb_groupes."')";
+
+	/* On ajoute ce critère à la boucle (TICKETS)
+	 * 
+	 */
+	$boucle->where[] = "sql_in('id_ticket', ".$where.")";
+
+}
+
 ?>
