@@ -1,0 +1,102 @@
+#CACHE{1800}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN"
+	"http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html xml:lang="#LANG" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
+	<title>PHPExcel - Demo</title>
+	<style type="text/css">
+		/* Layout Gala 24 */
+		html,body{margin:0;padding:0}
+		body{font: 76% arial,sans-serif}
+		p{margin:0 10px 10px}
+		a{display:block;color: #981793;padding:10px}
+		div#header h1{height:80px;line-height:80px;margin:0;
+		  padding-left:10px;background: #EEE;color: #79B30B}
+		div#content p{line-height:1.4}
+		div#navigation{background:#B9CAFF}
+		div#extra{background:#FF8539}
+		div#footer{background: #333;color: #FFF}
+		div#footer p{margin:0;padding:5px 10px}
+		div#wrapper{float:right;width:100%;margin-left:-200px}
+		div#content{margin-left:200px;}
+		div#navigation{float:left;width:200px}
+		div#extra{float:left;clear:left;width:200px}
+		div#footer{clear:both;width:100%}
+		/* Personnalisation pour la demo */
+		div#header h1{color:#798F74}
+		div#content{padding-left:2em;padding-bottom:4em;}
+		div#extra{background:#fff;}
+		div#footer{padding:2em;}
+		.h2{text-align:center;border-bottom:2px solid #798F74;color:#798F74}
+		table{border:1px solid #000000;border-collapse:collapse;}
+		caption {background:#333;color:#eee;}
+		th {font-weight: bold;border-bottom:1px solid #000}
+		thead th {background: #DDD;}
+		th,td,caption {padding: 0.75em;border-right:1px solid #000;}
+		tbody tr:nth-child(even) th,
+		tbody tr:nth-child(even) td,
+		tbody tr.even th,
+		tbody tr.even td {background: #EEE;}
+		tbody tr td.erreur {background: #FBE3E4;}
+		tbody tr td.nonapi {background: #FFF6BF;}
+		.clearfix:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+		.clearfix{display:inline-table;}
+		div.clearfix{margin-bottom:30px;}
+		div.notice{padding:1em;color: #514721;border:2px solid #FFD324;background-color:#FFF6BF;}
+		.menu{background-color:#fefefe;margin-bottom:2em;padding:0;}
+		.menu .h2{border:0;color:#000;}
+		.menu .menu-items{margin-bottom: 0;}
+		.menu-items {border-bottom:0 none;border-top: 1px solid #EEEEEE;list-style: none outside none;margin: 0 0 1.5em;padding: 0;}
+		.menu-items .item {border-bottom: 1px solid #EEEEEE;clear: both;list-style: square outside none;margin-left: 0;overflow: hidden;padding: 0.75em 0;}
+		.menu-items .item:hover {background-color: #EEEEEE;}
+		.menu-items .item a {text-decoration:none;padding:0 0 0 1em;}
+		.menu-items .item a:hover {text-decoration:underline;}
+		.menu-items .item .on {padding:0 0 0 1em;}
+	</style>
+	#INSERT_HEAD
+</head>
+
+<body>
+	<div id="container">
+	<div id="header">
+		<h1>
+			<img height="48" width="48" title="Plugin Rainette" alt="Plugin Rainette" src="#CHEMIN{rainette-64.png}"/>
+			PLUGIN PHPEXCEL[ ((#PLUGIN{PHPEXCEL, version}))]
+		</h1>
+	</div>
+	<div id="wrapper">
+		<div id="content">
+			<?php
+			 	sous_repertoire(_DIR_TMP, 'phpexcel');
+				include_spip('lib/examples/01simple'); ?>
+		</div>
+	</div>
+
+	<div id="navigation">
+	<p><strong>2) Navigation here.</strong> long long fill filler very fill column column silly filler very filler fill fill filler text fill very silly fill text filler silly silly filler fill very make fill column text column very very column fill fill very silly column silly silly fill fill long filler </p>
+	</div>
+
+	<div id="extra">
+		<div class="menu" id="services">
+			<h2 class="h2">Examples disponibles</h2>
+			<p>Choisissez un example ci-dessous.</p>
+			<ul class="menu-items">
+			<BOUCLE_examples(DATA) {source table, #GET{jeu}}>
+				[<li class="item">
+				(#SELF|parametre_url{service, #CLE}
+					|lien_ou_expose{
+						[(#VAL{rainette:titre_service_}|concat{#CLE}|_T)],
+						[(#GET{service}|=={#CLE})]})
+				</li>]
+			</BOUCLE_examples>
+			</ul>
+		</div>
+	</div>
+
+	<div id="footer">
+		<p>Pour appeler la page de demo: <strong>http://monsite/spip.php?page=demo/phpexcel</strong></p>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<paquet
+	prefix="phpexcel"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="phpexcel-64.png"
+	documentation="https://phpexcel.codeplex.com/documentation"
+>	
+
+	<nom>PHPExcel</nom>
+	<!-- Utiliser la librairie PHPExcel avec SPIP -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<credit lien="https://phpexcel.codeplex.com/team/view">PHPExcel Team</credit>
+
+	<licence lien="https://www.gnu.org/licenses/lgpl.html">LGPLv3</licence>
+</paquet>
