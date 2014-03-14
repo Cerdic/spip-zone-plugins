@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_reserv_charger_dist($idressource, $date_deb=false, $idresa=false, $jourj='', $vue=''){
+function formulaires_reserv_charger_dist($idressource, $date_deb=false, $idresa=false, $jourj='', $vue='', $id_auteur){
     include_spip('inc/config');
     // mise à jour: récup les infos de la résa selectionnée
     if ($idresa) {
@@ -41,7 +41,7 @@ function formulaires_reserv_charger_dist($idressource, $date_deb=false, $idresa=
     return $valeurs;
 }
 
-function formulaires_reserv_verifier_dist($idressource, $date_deb, $idresa, $jourj, $vue){
+function formulaires_reserv_verifier_dist($idressource, $date_deb, $idresa, $jourj, $vue, $id_auteur){
     include_spip('inc/autoriser');
     // on passe les dates du timepicker en format d-m-a h:m:s pour que strtotime() soit capable de les utiliser
     $date_debut = str_replace('/','-',_request('date_debut'));
@@ -117,7 +117,7 @@ function formulaires_reserv_verifier_dist($idressource, $date_deb, $idresa, $jou
 }
 
 
-function formulaires_reserv_traiter_dist($idressource, $date_deb, $idresa, $jourj, $vue){
+function formulaires_reserv_traiter_dist($idressource, $date_deb, $idresa, $jourj, $vue, $id_auteur){
     $liste_ressources = array();
 	$nom_reservation  = _request('nom_reservation');
 	$date_debut       = str_replace('/','-',_request('date_debut'));
@@ -167,7 +167,7 @@ function formulaires_reserv_traiter_dist($idressource, $date_deb, $idresa, $jour
 	    // utilisation de l'API editer_liens pour la gestion de la table de lien entre
 	    // une reservation et une ressource
 	    include_spip('action/editer_liens');
-	    objet_associer(array("orr_reservation"=>$id_objet), array("orr_ressource"=>$idressource));
+	    objet_associer(array("orr_reservation" => $id_objet), array("orr_ressource" => $idressource,"auteur" => $id_auteur));
     }
 	return $retour;
 }

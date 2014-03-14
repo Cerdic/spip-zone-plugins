@@ -1,5 +1,6 @@
+#SET{qui,#ARRAY{id_auteur,#SESSION{id_auteur},statut,#SESSION{statut}}}
 [(#ENV{id_reservation}|oui)
-	[(#AUTORISER{supprimer,orr_reservation,#ENV{id_ressource}})
+	[(#AUTORISER{supprimer, orr_reservation, #ENV{id_ressource}, #GET{qui}, #ENV{id_reservation}})
 	<div id="poubelle">
 		<a class="mediabox" href="[(#URL_PAGE{formulaire_poubelle}
 			|parametre_url{idresa,#ENV{id_reservation}}
@@ -13,5 +14,5 @@
 ]
 <h1 class="box_resa"><:orr:reserver:></h1>
 <div class="ajax">
-	#FORMULAIRE_RESERV{#ENV{id_ressource},#ENV{ma_date},#ENV{id_reservation},#ENV{jourj},#ENV{vue}}
+	#FORMULAIRE_RESERV{#ENV{id_ressource}, #ENV{ma_date}, #ENV{id_reservation}, #ENV{jourj}, #ENV{vue}, #SESSION{id_auteur}}
 </div>
