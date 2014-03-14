@@ -61,15 +61,18 @@
 	<div id="container">
 	<div id="header">
 		<h1>
-			<img height="48" width="48" title="Plugin Rainette" alt="Plugin Rainette" src="#CHEMIN{rainette-64.png}"/>
+			<img height="64" width="64" title="Plugin PHPExcel" alt="Plugin PHPExcel" src="#CHEMIN{phpexcel-64.png}"/>
 			PLUGIN PHPEXCEL[ ((#PLUGIN{PHPEXCEL, version}))]
 		</h1>
 	</div>
 	<div id="wrapper">
 		<div id="content">
-			<?php
-			 	sous_repertoire(_DIR_TMP, 'phpexcel');
-				include_spip('lib/examples/01simple'); ?>
+			<h2 class="h2">[EXEMPLE (#ENV{exemple, 01simple}|strtoupper)]</h2>
+			<div class="clearfix">
+				<?php sous_repertoire(_DIR_TMP, 'phpexcel');
+				include_spip("demo/exemples/[(#ENV{exemple, 01simple})]");
+				?>
+			</div>
 		</div>
 	</div>
 
@@ -79,17 +82,17 @@
 
 	<div id="extra">
 		<div class="menu" id="services">
-			<h2 class="h2">Examples disponibles</h2>
-			<p>Choisissez un example ci-dessous.</p>
+			<h2 class="h2">Exemples disponibles</h2>
+			<p>Choisissez un exemple ci-dessous.</p>
 			<ul class="menu-items">
-			<BOUCLE_examples(DATA) {source table, #GET{jeu}}>
+			<BOUCLE_exemples(DATA) {source table, #LISTE{01simple, 02types, 03formulas}}>
 				[<li class="item">
-				(#SELF|parametre_url{service, #CLE}
+				(#SELF|parametre_url{exemple, #VALEUR}
 					|lien_ou_expose{
-						[(#VAL{rainette:titre_service_}|concat{#CLE}|_T)],
-						[(#GET{service}|=={#CLE})]})
+						[(#VALEUR)],
+						[(#ENV{exemple, 01simple}|=={#VALEUR})]})
 				</li>]
-			</BOUCLE_examples>
+			</BOUCLE_exemples>
 			</ul>
 		</div>
 	</div>

@@ -25,17 +25,10 @@
  * @version    1.8.0, 2014-03-02
  */
 
-/** Error reporting */
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE); 
-ini_set('display_startup_errors', TRUE); 
-date_default_timezone_set('Europe/London');
-
 define('EOL',(PHP_SAPI == 'cli') ? PHP_EOL : '<br />');
 
 /** Include PHPExcel */
-require_once dirname(__FILE__) . '/../Classes/PHPExcel.php';
-
+include_spip('inc/phpexcel');
 
 // Create new PHPExcel object
 echo date('H:i:s') , " Create new PHPExcel object" , EOL;
@@ -149,12 +142,14 @@ $objPHPExcel->setActiveSheetIndex(0);
 echo date('H:i:s') , " Write to Excel2007 format" , EOL;
 $callStartTime = microtime(true);
 
+$excelfile = _DIR_TMP . 'phpexcel/' . pathinfo(__FILE__, PATHINFO_FILENAME) . '.xlsx';
+
 $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-$objWriter->save(str_replace('.php', '.xlsx', __FILE__));
+$objWriter->save($excelfile);
 $callEndTime = microtime(true);
 $callTime = $callEndTime - $callStartTime;
 
-echo date('H:i:s') , " File written to " , str_replace('.php', '.xlsx', pathinfo(__FILE__, PATHINFO_BASENAME)) , EOL;
+echo date('H:i:s') , " File written to " , $excelfile , EOL;
 echo 'Call time to write Workbook was ' , sprintf('%.4f',$callTime) , " seconds" , EOL;
 // Echo memory usage
 echo date('H:i:s') , ' Current memory usage: ' , (memory_get_usage(true) / 1024 / 1024) , " MB" , EOL;
@@ -163,7 +158,7 @@ echo date('H:i:s') , ' Current memory usage: ' , (memory_get_usage(true) / 1024 
 echo date('H:i:s') , " Reload workbook from saved file" , EOL;
 $callStartTime = microtime(true);
 
-$objPHPExcel = PHPExcel_IOFactory::load(str_replace('.php', '.xlsx', __FILE__));
+$objPHPExcel = PHPExcel_IOFactory::load($excelfile);
 
 $callEndTime = microtime(true);
 $callTime = $callEndTime - $callStartTime;
@@ -180,4 +175,4 @@ echo date('H:i:s') , " Peak memory usage: " , (memory_get_peak_usage(true) / 102
 
 // Echo done
 echo date('H:i:s') , " Done testing file" , EOL;
-echo 'File has been created in ' , getcwd() , EOL;
+echo 'File has been created in ' , dirname($excelfile) , EOL;
