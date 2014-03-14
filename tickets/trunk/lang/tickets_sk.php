@@ -43,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autoriser_modifier_case' => 'Poveriť tých, ktorí majú možnosť upraviť lístok (vrátane autora a tých, ktorým bol lístok priradený)',
 	'cfg_lbl_cacher_moteurs' => 'Schovať vyhľadávače',
 	'cfg_lbl_case_joindre_fichiers' => 'Povoliť pripájanie súborov k lístkom',
-	'cfg_lbl_case_lier_mots' => 'Povoliť priraďovanie kľúčových slov k lístkom',
 	'cfg_lbl_case_notification_publique' => 'Oznamovať cez verejne prístupnú stránku namiesto súkromnej zóny',
 	'cfg_lbl_case_selecteur_navigateur' => 'Ponúkať oddeľovač prehliadača vo formulári na úpravu lístka',
 	'cfg_lbl_composants' => 'Súčasti',

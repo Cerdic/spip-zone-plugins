@@ -43,7 +43,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autoriser_modifier_case' => 'Allow those who have the ability to change the ticket (including author and assigned)',
 	'cfg_lbl_cacher_moteurs' => 'Hide from search engines',
 	'cfg_lbl_case_joindre_fichiers' => 'Allow to attach one or more files to bug reports',
-	'cfg_lbl_case_lier_mots' => 'Authorise to link keywords to tickets',
 	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space',
 	'cfg_lbl_case_selecteur_navigateur' => 'Having a browser selector in the bug report form',
 	'cfg_lbl_composants' => 'Components',
