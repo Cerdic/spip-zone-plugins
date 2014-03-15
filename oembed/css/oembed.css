@@ -1,6 +1,7 @@
 /* Oembed twitter */
 .oe-quote-block {padding-right: 80px;position: relative;}
-.twitter.oe-quote-block {margin-bottom:0;}
+.oembed_twitter .oembed-source {display: none;}
+
 .storify .oe-quote-text {margin-bottom:0;}
 .oe-descriptif {font-style: italic;}
 .oe-quote-text {}

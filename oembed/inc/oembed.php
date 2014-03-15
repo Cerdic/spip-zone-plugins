@@ -53,18 +53,14 @@ function oembed_lister_providers(){
 		'http://meetup.com/*'            =>   'http://api.meetup.com/oembed',
 		'http://meetup.ps/*'             =>   'http://api.meetup.com/oembed',
 		'http://*.wordpress.com/*'       =>   'http://public-api.wordpress.com/oembed/1.0/',
-		'http://*.blogs.cnn.com/*'         =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://*.blogs.cnn.com/*'       =>   'http://public-api.wordpress.com/oembed/1.0/',
+		'http://twitter.com/*/status/*'  =>   'https://api.twitter.com/1/statuses/oembed.json',
 		'http://techcrunch.com/*'        =>   'http://public-api.wordpress.com/oembed/1.0/',
 		'http://wp.me/*'                 =>   'http://public-api.wordpress.com/oembed/1.0/',
 		'http://my.opera.com/*'           => 'http://my.opera.com/service/oembed',
 		'http://*.viddler.com/*'         =>   'http://lab.viddler.com/services/oembed/',
 		'http://www.collegehumor.com/video/*'=>'http://www.collegehumor.com/oembed.json',
 
-
-		#'https://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',
-		#'http://twitter.com/*/status/*' =>   '?action=oeproxy_twitter',
-		#'https://twitter.com/*/statuses/*' =>   '?action=oeproxy_twitter',
-		#'http://twitter.com/*/statuses/*' =>   '?action=oeproxy_twitter',
 
 		#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
 		#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'

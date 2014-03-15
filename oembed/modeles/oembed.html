@@ -1,7 +1,7 @@
 #CACHE{7*24*3600}
 [(#SET{data,#ENV**{url}|oembed_recuperer_data{#ENV{maxwidth,0},#ENV{maxheight,0}}})
 ][(#GET{data}|oui)
-<div class='spip_documents spip_documents_center ressource oembed[ oembed_(#GET{data}|table_valeur{type})]'>
+<div class='spip_documents spip_documents_center ressource oembed[ oembed_(#GET{data}|table_valeur{type})][ oembed_(#GET{data}|table_valeur{provider_name}|strtolower|replace{'\W','_'})]'>
 	[(#INCLURE{fond=modeles/oembed_[(#GET{data}|table_valeur{type,link})],data=#GET{data},url,align})]
 	[<div class="spip_doc_titre oembed-source">(#ENV*{lien}|echappe_retour)</div>]
 </div>
