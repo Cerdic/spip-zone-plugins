@@ -1,4 +1,5 @@
-﻿[<div class="champ contenu_logiciel">
+﻿[(#AUTORISER{voir,'projets_sites_client'}|sinon_interdire_acces)]
+[<div class="champ contenu_logiciel">
 	<div class="label visible"><:projets_sites_client:label_logiciel:> : </div>
 	<div dir='#LANG_DIR' class='logiciel'>SPIP (#SPIP_VERSION)</div>
 </div>]
@@ -18,6 +19,34 @@
 	<div dir='#LANG_DIR' class='date_creation'>(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})</div>
 </div>]
 
+[(#REM)
+	Le code ci-dessous est une méthode "barbare" mais efficace pour soustraire toutes les infos du fichier config/connect.php.
+	Le soucis c'est que ça peut ne pas être sécuritaire car on affiche le mot de passe de la bdd.
+	Je laisse le code dans la page même si ce n'est pas affiché. C'est pour historique. 
+
+	C'est au webmestre qu'appartiendra la décision de surcharger ce fichier pour afficher ces infos ou pas.
+
+	[(#SET{bdd,[(#CHEMIN{config/connect.php}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})]
+	<pre>
+	[(#GET{bdd}|print_r{1})]
+	</pre>
+	[(#SET{bdd_host,#GET{bdd}|table_valeur{0}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_host : (#GET{bdd_host})</p>]
+	[(#SET{bdd_port,#GET{bdd}|table_valeur{1}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_port : (#GET{bdd_port})</p>]
+	[(#SET{bdd_login,#GET{bdd}|table_valeur{2}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_login : (#GET{bdd_login})</p>]
+	[(#SET{bdd_pass,#GET{bdd}|table_valeur{3}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_pass : (#GET{bdd_pass})</p>]
+	[(#SET{bdd_nom,#GET{bdd}|table_valeur{4}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_nom : (#GET{bdd_nom})</p>]
+	[(#SET{bdd_type,#GET{bdd}|table_valeur{5}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_type : (#GET{bdd_type})</p>]
+	[(#SET{bdd_prefixe,#GET{bdd}|table_valeur{6}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_prefixe : (#GET{bdd_prefixe})</p>]
+	[(#SET{bdd_auth,#GET{bdd}|table_valeur{7}|explode{"'"}|table_valeur{1}})]
+	[<p>bdd_auth : (#GET{bdd_auth})</p>]
+]
 [<div class="champ contenu_fo_url">
 	<div class="label visible"><:projets_sites_client:label_fo_url:> : </div>
 	<div dir='#LANG_DIR' class='fo_url'>(#URL_SITE_SPIP)</div>
@@ -111,83 +140,14 @@
 <div class="fieldset fieldset_plugins">
 	<h3 class="titrem"><:projets_sites_client:label_plugins:></h3>
 </div>
-
-<B_dist>
-<div class="liste-objets plugins_dist">
-	<table class="spip liste">
-	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_dist:></strong></caption>
-		<thead>
-			<tr>
-				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
-				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
-				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
-			</tr>
-		</thead>
-		<tbody>
-<BOUCLE_dist(PAQUETS) {constante="_DIR_PLUGINS_DIST"}{par prefixe}{tout}{doublons}>
-		<tr>
-			<td class="prefixe secondaire">#PREFIXE</td>
-			<td class="version secondaire">#VERSION</td>
-			<td class="nom principal"><BOUCLE_nom_dist(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_dist> </td>
-		</tr>
-</BOUCLE_dist>
-		</tbody>
-	</table>
-</div>
-</B_dist>
-
-<B_actif>
-<div class="liste-objets plugins_actif">
-	<table class="spip liste">
-	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_actif:></strong></caption>
-		<thead>
-			<tr>
-				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
-				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
-				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
-			</tr>
-		</thead>
-		<tbody>
-<BOUCLE_actif(PAQUETS) {actif=oui}{doublons}{par prefixe}{tout}>
-		<tr>
-			<td class="prefixe secondaire">#PREFIXE</td>
-			<td class="version secondaire">#VERSION</td>
-			<td class="nom principal"><BOUCLE_nom_actif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_actif> </td>
-		</tr>
-</BOUCLE_actif>
-		</tbody>
-	</table>
-</div>
-</B_actif>
-
-<B_inactif>
-<div class="liste-objets plugins_inactif">
-	<table class="spip liste">
-	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_inactif:></strong></caption>
-		<thead>
-			<tr>
-				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
-				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
-				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
-			</tr>
-		</thead>
-		<tbody>
-<BOUCLE_inactif(PAQUETS) {actif=non}{constante="_DIR_PLUGINS"}{doublons}{par prefixe}{tout}>
-		<tr>
-			<td class="prefixe secondaire">#PREFIXE</td>
-			<td class="version secondaire">#VERSION</td>
-			<td class="nom principal"><BOUCLE_nom_inactif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_inactif> </td>
-		</tr>
-</BOUCLE_inactif>
-		</tbody>
-	</table>
-</div>
-</B_inactif>
+[(#REM) Le nom des fichiers un peu arbitraire, les fichiers plugin.xml sont toujours d'actualité en SPIP 3… ]
+[(#SPIP_VERSION|intval|=={2}|oui)#INCLURE{fond=prive/objets/liste/info_plugins,env}]
+[(#SPIP_VERSION|intval|=={3}|oui)#INCLURE{fond=prive/objets/liste/info_paquets,env}]
 
 <style type="text/css">
-body.info_config #contenu .fiche_objet .champ { margin-bottom: 1em; }
-body.info_config #contenu .fiche_objet .champ .label.visible { display: block;}
-body.info_config #contenu .fiche_objet .fieldset .titrem {
+body.info_config #contenu .fiche_objet #wysiwyg .champ { margin-bottom: 1em; }
+body.info_config #contenu .fiche_objet #wysiwyg .champ .label.visible { display: block;}
+body.info_config #contenu .fiche_objet #wysiwyg .fieldset .titrem {
 	background-color: #EEEEEE;
 	color: black;
 	display: block;

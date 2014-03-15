@@ -1,0 +1,40 @@
+<plugin>
+	<nom><multi>[fr]Sites pour projets - Client</multi></nom>
+	<icon>images/projets_sites_client-64.png</icon>
+	<auteur>Teddy Payet</auteur>
+	<version>0.4.1</version>
+	<etat>dev</etat>
+	<description><multi>
+	[fr]Ce plugin ne fait qu'afficher la configuration du site sur lequel il est actif.
+Il faut renseigner une clé dans la page de configuration pour que la page de config puisse être active.
+On affiche les informations équivalentes au plugin "Sites pour projets" avec qui il va de pair. Ce plugin est toutefois autonome.
+	</multi></description>
+	<lien></lien> <!-- URI de documentation -->
+	<fonctions>projets_sites_client_fonctions.php</fonctions>
+	<prefix>projets_sites_client</prefix>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>projets_sites_client_autorisations.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;3.0.*]" />
+	<necessite id="spip_bonux" version="[2.2.0;]" />
+	<necessite id="Iterateurs" version="[1.0.1;]" />
+	<necessite id="saisies" version="[1.34.2;[" />
+
+	<categorie>outil</categorie>
+
+	<bouton id='configurer_projets_sites_client' parent='configuration'>
+		<icone>prive/themes/spip/images/projets_sites_client-16.png</icone>
+		<titre>projets_sites_client:titre_configurer_projets_sites_client</titre>
+		<url>configurer_projets_sites_client</url>
+	</bouton>
+
+	<bouton id='info_config' parent='statistiques_visites'>
+		<icone>prive/themes/spip/images/projets_sites_client-16.png</icone>
+		<titre>projets_sites_client:titre_info_config</titre>
+		<url>info_config</url>
+	</bouton>
+
+</plugin>

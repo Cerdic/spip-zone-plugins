@@ -1,0 +1,17 @@
+<!-- [(#EVAL{include_spip('inc/plugin')})] [(#EVAL{include_spip('plugins/get_infos')})] -->
+[(#SET{plugins,#EVAL{liste_chemin_plugin_actifs(_DIR_EXTENSIONS)}})]
+<plugins>
+<B_dist>
+<dist compteur="#TOTAL_BOUCLE">
+<BOUCLE_dist (DATA) {source table, #GET{plugins}}>#SET{texte,plugins_get_infos_dist('#VALEUR','false',_DIR_EXTENSIONS)}[(#SET{plugin,#EVAL{#GET{texte}}})]
+<plugin prefixe="#CLE" version="[(#GET{plugin}|table_valeur{version})]" nom="[(#GET{plugin}|table_valeur{nom}|extraire_multi|attribut_html)]" /></BOUCLE_dist>
+</dist>
+</B_dist>
+[(#SET{plugins,#EVAL{liste_chemin_plugin_actifs()}})]
+<B_actif>
+<actif compteur="#TOTAL_BOUCLE">
+<BOUCLE_actif (DATA) {source table, #GET{plugins}}>#SET{texte,plugins_get_infos_dist('#VALEUR')}[(#SET{plugin,#EVAL{#GET{texte}}})]
+<plugin prefixe="#CLE" version="[(#GET{plugin}|table_valeur{version})]" nom="[(#GET{plugin}|table_valeur{nom}|extraire_multi|attribut_html)]" /></BOUCLE_actif>
+</actif>
+</B_actif>
+</plugins>

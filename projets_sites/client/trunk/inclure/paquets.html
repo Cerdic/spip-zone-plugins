@@ -1,0 +1,19 @@
+<plugins>
+<B_dist>
+<dist compteur="#TOTAL_BOUCLE">
+<BOUCLE_dist (PAQUETS) {constante="_DIR_PLUGINS_DIST"}{par prefixe}{tout}{doublons}>
+<plugin prefixe="#PREFIXE" version="#VERSION" nom="<BOUCLE_nom_dist(PLUGINS){prefixe}{tout}>[(#NOM|attribut_html)]</BOUCLE_nom_dist>" /></BOUCLE_dist>
+</dist>
+</B_dist>
+<B_actif>
+<actif compteur="#TOTAL_BOUCLE">
+<BOUCLE_actif (PAQUETS) {actif=oui}{doublons}{par prefixe}{tout}>
+<plugin prefixe="#PREFIXE" version="#VERSION" nom="<BOUCLE_nom_actif (PLUGINS){prefixe}{tout}>[(#NOM|attribut_html)]</BOUCLE_nom_actif>" /></BOUCLE_actif>
+</actif>
+</B_actif>
+<B_inactif>
+<inactif compteur="#TOTAL_BOUCLE">
+<BOUCLE_inactif (PAQUETS) {actif=non}{constante="_DIR_PLUGINS"}{tout}>
+<plugin prefixe="#PREFIXE" version="#VERSION" nom="<BOUCLE_nom_inactif (PLUGINS){prefixe}{tout}>[(#NOM|attribut_html)]</BOUCLE_nom_inactif>" /></BOUCLE_inactif>
+</inactif></B_inactif>
+</plugins>

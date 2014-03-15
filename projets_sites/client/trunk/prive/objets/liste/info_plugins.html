@@ -1,0 +1,54 @@
+[(#REM) squelettes pour SPIP 2.x listant les plugins ]
+<!--
+#EVAL{include_spip('inc/plugin')}
+#EVAL{include_spip('plugins/get_infos')}
+-->
+[(#SET{plugins,#EVAL{liste_chemin_plugin_actifs(_DIR_EXTENSIONS)}})]
+<B_dist>
+<div class="liste-objets plugins_dist">
+	<table class="spip liste cadre" width="100%" cellspacing="0" cellpadding="2" border="0">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_dist:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_dist(DATA) {source table, #GET{plugins}}>#SET{texte,plugins_get_infos_dist('#VALEUR','false',_DIR_EXTENSIONS)}[(#SET{plugin,#EVAL{#GET{texte}}})]
+		<tr[(#COMPTEUR_BOUCLE|modulo{2}|=={0}|oui) class="tr_liste"]>
+			<td class="prefixe secondaire">#CLE</td>
+			<td class="version secondaire">[(#GET{plugin}|table_valeur{version})]</td>
+			<td class="nom principal">[(#GET{plugin}|table_valeur{nom}|extraire_multi)]</td>
+		</tr>
+</BOUCLE_dist>
+		</tbody>
+	</table>
+</div>
+</B_dist>
+
+[(#SET{plugins,#EVAL{liste_chemin_plugin_actifs()}})]
+<B_actif>
+<div class="liste-objets plugins_actif">
+	<table class="spip liste cadre" width="100%" cellspacing="0" cellpadding="2" border="0">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_actif:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_actif(DATA) {source table, #GET{plugins}}>#SET{texte,plugins_get_infos_dist('#VALEUR')}[(#SET{plugin,#EVAL{#GET{texte}}})]
+		<tr[(#COMPTEUR_BOUCLE|modulo{2}|=={0}|oui) class="tr_liste"]>
+			<td class="prefixe secondaire">#CLE</td>
+			<td class="version secondaire">[(#GET{plugin}|table_valeur{version})]</td>
+			<td class="nom principal">[(#GET{plugin}|table_valeur{nom}|extraire_multi)]</td>
+		</tr>
+</BOUCLE_actif>
+		</tbody>
+	</table>
+</div>
+</B_actif>

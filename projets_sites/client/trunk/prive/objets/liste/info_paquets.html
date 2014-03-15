@@ -1,0 +1,72 @@
+[(#REM) squelettes pour SPIP 3 listant les plugins du site ]
+<B_dist>
+<div class="liste-objets plugins_dist">
+	<table class="spip liste">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_dist:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_dist (PAQUETS) {constante="_DIR_PLUGINS_DIST"}{par prefixe}{tout}{doublons}>
+		<tr>
+			<td class="prefixe secondaire">#PREFIXE</td>
+			<td class="version secondaire">#VERSION</td>
+			<td class="nom principal"><BOUCLE_nom_dist(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_dist> </td>
+		</tr>
+</BOUCLE_dist>
+		</tbody>
+	</table>
+</div>
+</B_dist>
+
+<B_actif>
+<div class="liste-objets plugins_actif">
+	<table class="spip liste">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_actif:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_actif (PAQUETS) {actif=oui}{doublons}{par prefixe}{tout}>
+		<tr>
+			<td class="prefixe secondaire">#PREFIXE</td>
+			<td class="version secondaire">#VERSION</td>
+			<td class="nom principal"><BOUCLE_nom_actif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_actif> </td>
+		</tr>
+</BOUCLE_actif>
+		</tbody>
+	</table>
+</div>
+</B_actif>
+
+<B_inactif>
+<div class="liste-objets plugins_inactif">
+	<table class="spip liste">
+	<caption><strong class="caption">#TOTAL_BOUCLE <:projets_sites_client:label_plugins_inactif:></strong></caption>
+		<thead>
+			<tr>
+				<th class="prefixe secondaire"><:projets_sites_client:label_plugins_prefixe:></th>
+				<th class="version secondaire"><:projets_sites_client:label_plugins_version:></th>
+				<th class="nom principal"><:projets_sites_client:label_plugins_nom:></th>
+			</tr>
+		</thead>
+		<tbody>
+<BOUCLE_inactif (PAQUETS) {actif=non}{constante="_DIR_PLUGINS"}{doublons}{par prefixe}{tout}>
+		<tr>
+			<td class="prefixe secondaire">#PREFIXE</td>
+			<td class="version secondaire">#VERSION</td>
+			<td class="nom principal"><BOUCLE_nom_inactif(PLUGINS){prefixe}{tout}>#NOM</BOUCLE_nom_inactif> </td>
+		</tr>
+</BOUCLE_inactif>
+		</tbody>
+	</table>
+</div>
+</B_inactif>
