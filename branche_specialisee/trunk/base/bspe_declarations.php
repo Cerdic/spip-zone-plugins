@@ -22,4 +22,12 @@ function bspe_declarer_tables_auxiliaires($tables) {
 	return $tables;
 }
 
+
+function bspe_declarer_tables_interfaces($interface) {
+	// Les tables
+	$interface['table_des_tables']['branches_specialisees'] = 'branches_specialisees';
+
+	return $interface;
+}
+
 ?>

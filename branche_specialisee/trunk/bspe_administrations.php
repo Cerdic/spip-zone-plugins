@@ -51,7 +51,7 @@ function bspe_upgrade($nom_meta_base_version, $version_cible){
  * @return void
  */
 function bspe_vider_tables($nom_meta_base_version) {
-	// on efface ensuite la table et la meta habituelle designant la version du plugin
+	// on efface la table
 	sql_drop_table('spip_branches_specialisees');
 
 	// on efface la meta de configuration du plugin

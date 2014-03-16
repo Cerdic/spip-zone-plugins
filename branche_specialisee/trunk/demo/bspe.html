@@ -1,0 +1,15 @@
+[(#REM) Cartouche avec le titre de la page et les informations generales ]
+<div id="debug">
+	<div class="titre"><h1>Page de debug</h1></div>
+	<div class="description">
+		<div class="texte">
+		<B_branche_spe>
+			<ul>
+		<BOUCLE_branche_spe(RUBRIQUES) {!specialise sauf, #ENV{tableau}}>
+				<li>ID RUBRIQUE = #ID_RUBRIQUE</li>
+		</BOUCLE_branche_spe>
+			</ul>
+		</B_branche_spe>
+		</div>
+	</div>
+</div>

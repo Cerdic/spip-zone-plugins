@@ -18,5 +18,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/bspe_declarations.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/bspe_declarations.php" />
 	<pipeline nom="pre_boucle" inclure="bspe_pipelines.php" />
 </paquet>
