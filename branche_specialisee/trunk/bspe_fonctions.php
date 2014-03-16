@@ -30,9 +30,9 @@
  * @param Critere $crit   Paramètres du critère dans cette boucle
  * @return void
  */
-function critere_specialise_dist($idb, &$boucles, $crit) {
+function critere_specialise_dist($idb, &$boucles, $critere) {
 
-	$not = $crit->not;
+	$not = $critere->not;
 	$boucle = &$boucles[$idb];
 	$arg = calculer_argument_precedent($idb, 'id_rubrique', $boucles);
 
@@ -52,11 +52,15 @@ function critere_specialise_dist($idb, &$boucles, $crit) {
 	}
 	else $cle = $boucle->id_table;
 
-	$c = "sql_in('$cle".".$champ', calcul_branche_in($arg)"
-	     .($not ? ", 'NOT'" : '').")";
-	$boucle->where[] = !$crit->cond ? $c :
+	$c = "sql_in('$cle".".$champ', calculer_specialise_in($arg)".")";
+	$boucle->where[] = !$critere->cond ? $c :
 		("($arg ? $c : ".($not ? "'0=1'" : "'1=1'").')');
 
+}
+
+function calculer_specialise_in($id, $sauf=false, $types=array()) {
+	$calculer = charger_fonction('calculer_specialise_in', 'inc');
+	return $calculer($id, $sauf, $types);
 }
 
 ?>
