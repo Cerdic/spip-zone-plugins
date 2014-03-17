@@ -4,7 +4,7 @@
  * 
  * @author Rastapopoulos
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link http://www.spip-contrib.net/Plugin-Pages Documentation
+ * @link http://contrib.spip.net/Pages-uniques Documentation
  * @package SPIP\Pages\Pipelines
  */
 
@@ -29,10 +29,10 @@ function pages_affiche_milieu_ajouter_page($flux){
 			//On force l'id parent à -1
 			//Par principe une page nouvelle ou existante est dans la rubrique parent -1
 			$cherche = "/(<input[^>]*name=('|\")id_parent[^>]*>)/is";
-			if (!preg_match($recherch,$flux_data)) {
-			    $cherche = "/(<input[^>]*name=('|\")id_rubrique[^>]*>)/is";
-			    $remplace = "$1<input type=\"hidden\" name=\"id_parent\" value=\"-1\" />\n";
-			    $flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
+			if (!preg_match($cherche,$flux['data'])) {
+				$cherche = "/(<input[^>]*name=('|\")id_rubrique[^>]*>)/is";
+				$remplace = "$1<input type=\"hidden\" name=\"id_parent\" value=\"-1\" />\n";
+				$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
 			}
 			
 			// On cherche et remplace l'entete de la page : "modifier la page"
