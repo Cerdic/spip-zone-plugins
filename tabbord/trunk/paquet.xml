@@ -1,0 +1,23 @@
+<paquet
+	prefix="tabbord"
+	categorie="maintenance"
+	version="3.0.0"
+	etat="dev"
+	compatibilite="[3.0.16;3.0.*]"
+	logo="prive/themes/spip/images/tabbord-64.png"
+	documentation=""
+>
+	<!--
+		Paquet genere le 2014-03-16 20:03:02
+	-->
+
+	<nom>Tableau de bord</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="tabbord_autorisations.php" /> 
+	<menu nom="tabbord_gen" parent="menu_administration" icone="images/tabbord-16.png" action="tabbord_gen" titre="tabbord:tabbord_titre" />
+
+</paquet>

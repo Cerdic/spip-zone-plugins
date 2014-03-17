@@ -1,0 +1,36 @@
+#SET{tables,#LISTE{$GLOBALS['tables_principales'],$GLOBALS['tables_auxiliaires']}}
+#SET{nom_tables,#ARRAY}
+<BOUCLE_noms (DATA) {source table, #GET{tables}}><BOUCLE_tables (DATA) {source table, #EVAL{#VALEUR}}>[(#SET{nom_tables,#GET{nom_tables}|push{#CLE}})]</BOUCLE_tables></BOUCLE_noms>
+[(#SET{nom_tables,#GET{nom_tables}|array_unique})]
+[(#SET{taille_total,0})]
+[(#SET{lignes_total,0})]
+<div class="liste-objets articles">
+	<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,''})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='table principale' scope='col'><:tabbord:table:></th>
+			<th class='enregistrements' scope='col'><:tabbord:enregistrements:></th>
+			<th class='taille' scope='col'><:tabbord:taille:></th>
+		</tr>
+	</thead>
+	<tbody>
+
+	<B_objets>
+	<BOUCLE_objets (DATA) {source sql, SHOW TABLE STATUS}>[(#SET{class,[(#VALEUR{Name}|in_array{#GET{nom_tables}}|?{'','notice'})]})] [(#SET{table_taille,[(#VALEUR{Data_length}|plus{#VALEUR{Index_length}})]})] [(#SET{taille_total,#GET{taille_total}|plus{#GET{table_taille}}})]
+		<tr class="#GET{class}">
+			<td>[(#VALEUR{Name})]</td>
+			<td>[(#VALEUR{Rows})]</td> [(#SET{lignes_total,#GET{lignes_total}|plus{#VALEUR{Rows}}})]
+			<td>[(#GET{table_taille}|taille_en_octets)]</td>[(#SET{class,''})]
+		</tr>
+	</BOUCLE_objets>
+	</B_objets>
+
+	<tr>
+		<td><strong><:tabbord:total:></strong></td>
+		<td><strong>[(#GET{lignes_total})]</strong></td>
+		<td><strong>[(#GET{taille_total}|taille_en_octets)]</strong></td>
+	</tr>
+	</tbody>
+	</table>
+</div>

@@ -1,0 +1,57 @@
+[(#SET{objets_publies,#LISTE{article,rubrique,breve,document,petition,signature}})]
+
+<div class="liste-objets articles">
+	<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,''})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='types_pages principale' scope='col'><:tabbord:types_pages:></th>
+			<th class='publiees' scope='col' colspan="2"><:tabbord:publiees:></th>
+			<th class='publiees_non' scope='col' colspan="2"><:tabbord:publiees_non:></th>
+			<th class='total secondaire' scope='col' colspan="2"><:tabbord:total:></th>
+		</tr>
+	</thead>
+	<tbody>
+
+	<B_objets>
+	<BOUCLE_objets (DATA) {source table, #GET{objets_publies}}>
+		<B_objet>
+		<tr>
+			<td class="types_pages"><a href="[(#URL_ECRIRE{tabbord_liste}|parametre_url{objet,#VALEUR})]">[(#VAL{'tabbord:'}|concat{#VALEUR,'s'}|_T)]</a></td>
+			<BOUCLE_objet (DATA) {source table, #EVAL{etats_objets_publies(#VALEUR)}}>
+			<td colspan="2">#VALEUR</td></BOUCLE_objet>
+		</tr>
+		</B_objet>
+	</BOUCLE_objets>
+	</B_objets>
+
+	<B_groupes_mots>
+	<tr>
+	<td class="types_pages"><:tabbord:groupes_mots:></td>
+	<BOUCLE_groupes_mots (DATA) {source table, #EVAL{etats_objets('groupe','groupes_mots')}}>
+		<td colspan="6">#VALEUR</td>
+	</BOUCLE_groupes_mots>
+	</tr>
+	</B_groupes_mots>
+
+	<B_mots>
+	<tr>
+	<td class="types_pages"><a href="[(#URL_ECRIRE{tabbord_mots})]"><:tabbord:mot_clefs:></a></td>
+	<BOUCLE_mots (DATA) {source table, #EVAL{etats_mots_clefs()}}>
+		<td colspan="2">#VALEUR</td>
+	</BOUCLE_mots>
+	</tr>
+	</B_mots>
+
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+	</tbody>
+	</table>
+</div>
