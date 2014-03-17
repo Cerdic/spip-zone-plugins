@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom><multi>
+		[fr]Tableau de Bord
+		[es]Panel de Control
+	</multi>
+	</nom>
+	<icon>img_pack/tabbord-24.png</icon>
+	<auteur>scoty@koakidi.com</auteur>
+	<version>2.6</version>
+	<etat>stable</etat>
+	<description><multi>
+[fr]
+		Fait l'Etat des lieux : Taille Base, Espace Disque, listes Rubriques, Articles, Br&#232;ves ... (pour spip 1.9.2).
+[es]
+		Muestra el estado del sitio: Tama&ntilde;o de la base, Espacio en disco, lista las Secciones, Art&iacute;culos, Breves ... (para spip 1.9.2).
+</multi>
+	</description>
+	<prefix>tabbord</prefix>
+	<lien>
+		[Documentation->http://www.koakidi.com/spip.php?article290]
+	</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>tabbord_pipe.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>tabbord_pipe.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;]" />
+</plugin>
