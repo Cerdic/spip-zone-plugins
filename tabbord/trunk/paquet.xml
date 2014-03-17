@@ -1,18 +1,16 @@
 <paquet
 	prefix="tabbord"
 	categorie="maintenance"
-	version="3.0.0"
+	version="3.0.1"
 	etat="dev"
 	compatibilite="[3.0.16;3.0.*]"
 	logo="prive/themes/spip/images/tabbord-64.png"
 	documentation=""
 >
-	<!--
-		Paquet genere le 2014-03-16 20:03:02
-	-->
 
 	<nom>Tableau de bord</nom>
 
+	<auteur>scoty@koakidi.com</auteur>
 	<auteur>Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
