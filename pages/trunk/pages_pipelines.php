@@ -1,11 +1,13 @@
 <?php
 /**
- * Plugin Pages
- * 
- * @author Rastapopoulos
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- * @link http://contrib.spip.net/Pages-uniques Documentation
- * @package SPIP\Pages\Pipelines
+ * Déclaration des pipelines utilisés par le plugin
+ *
+ * @plugin     Pages
+ * @copyright  2013
+ * @author     RastaPopoulos 
+ * @licence    GNU/GPL
+ * @package    SPIP\Pages\Pipelines
+ * @link       http://contrib.spip.net/Pages-uniques
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -21,7 +23,7 @@ function pages_affiche_milieu_ajouter_page($flux){
 			(
 				($id_article = $flux['args']['id_article']) > 0
 				and
-				(sql_getfetsel('page', 'spip_articles', 'id_article='.sql_quote($id_article)))
+				(sql_getfetsel('page', 'spip_articles', 'id_article='.intval($id_article)))
 			)
 		)
 		{
@@ -44,19 +46,15 @@ function pages_affiche_milieu_ajouter_page($flux){
 			// Si c'est une nouvelle page, on remplace le lien de retour dans l'entete
 			if (_request('new') == 'oui'){
 				$cherche = "/(<span[^>]*class=(?:'|\")icone[^'\"]*retour[^'\"]*(?:'|\")>"
-				         . "<a[^>]*href=(?:'|\"))[^'\"]*('|\")/is";
+							. "<a[^>]*href=(?:'|\"))[^'\"]*('|\")/is";
 				$retour = generer_url_ecrire("pages_tous");
 				$remplace = "$1$retour$2";
 				$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
-			
 			}
-		
 		}
-	
 	}
-	
-	return $flux;
 
+	return $flux;
 }
 
 
@@ -81,9 +79,9 @@ function pages_affiche_milieu_identifiant($flux){
 			_request('modele') == 'page'
 			or
 			(
-				$id_article > 0
+				intval($id_article) > 0
 				and
-				(sql_getfetsel('page', 'spip_articles', 'id_article='.sql_quote($id_article)))
+				(sql_getfetsel('page', 'spip_articles', 'id_article='.intval($id_article)))
 			)
 		) {
 			$texte .= recuperer_fond('prive/objets/editer/identifiant_page',
@@ -117,9 +115,8 @@ function pages_formulaire_charger($flux){
 		}
 		unset($flux['data']['page']);
 	}
-	
-	return $flux;
 
+	return $flux;
 }
 
 
@@ -189,23 +186,23 @@ function pages_editer_contenu_objet($flux){
 		$remplace .= '<input type="hidden" name="id_parent" value="-1" />';
 		$remplace .= '<input type="hidden" name="id_rubrique" value="-1" />';
 		$remplace .= '<input type="hidden" name="modele" value="page" />';
-    	$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
-    	if ($erreurs['champ_page'])
-    		$remplace .= '<span class="erreur_message">'.$erreurs['champ_page'].'</span>';
-    	$value = $args['contexte']['champ_page'] ? $args['contexte']['champ_page'] : $args['contexte']['page'];
-    	$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$value.'" />';
-    	$remplace .= '</li>';
+		$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
+		if ($erreurs['champ_page'])
+			$remplace .= '<span class="erreur_message">'.$erreurs['champ_page'].'</span>';
+		$value = $args['contexte']['champ_page'] ? $args['contexte']['champ_page'] : $args['contexte']['page'];
+		$remplace .= '<input type="text" class="text" name="champ_page" id="id_page" value="'.$value.'" />';
+		$remplace .= '</li>';
 		if (preg_match($cherche,$flux['data'])) {
-		    $flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
-		    $flux['data'] = preg_replace($cherche, '', $flux['data']);
+			$flux['data'] = preg_replace($cherche, $remplace, $flux['data'],1);
+			$flux['data'] = preg_replace($cherche, '', $flux['data']);
 		} else {
-		    $cherche = "/(<li[^>]*class=('|\")editer editer_soustitre.*?<\/li>)/is";
-		    if (preg_match($cherche,$flux['data'])) {
-    		    $flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
-    		} else {
-    		    $cherche = "/(<li[^>]*class=('|\")editer editer_titre.*?<\/li>)/is";
-    		    $flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
-    		}
+			$cherche = "/(<li[^>]*class=('|\")editer editer_soustitre.*?<\/li>)/is";
+			if (preg_match($cherche,$flux['data'])) {
+				$flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
+			} else {
+				$cherche = "/(<li[^>]*class=('|\")editer editer_titre.*?<\/li>)/is";
+				$flux['data'] = preg_replace($cherche,'$1'.$remplace, $flux['data']);
+			}
 		}
 	}
 	return $flux;
@@ -258,7 +255,7 @@ function pages_pre_edition_ajouter_page($flux){
 function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
 		include_spip('inc/presentation');
-		if (sql_getfetsel('page', 'spip_articles', 'id_article='. $flux['args']['id']) == '')
+		if (sql_getfetsel('page', 'spip_articles', 'id_article='. intval($flux['args']['id'])) == '')
 			$flux['data'] .= icone_horizontale(_T('pages:convertir_page'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page'), 'page', $fonction="", $dummy="", $javascript="");
 		else
 			$flux['data'] .= icone_horizontale(_T('pages:convertir_article'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article'), 'article', $fonction="", $dummy="", $javascript="");
@@ -283,14 +280,12 @@ function pages_affiche_hierarchie($flux){
 	$id_article = $flux['args']['id_objet'];
 	if (
 		$objet == 'article'
-		and sql_getfetsel('page', 'spip_articles', 'id_article='.sql_quote($id_article))
+		and sql_getfetsel('page', 'spip_articles', 'id_article='.intval($id_article))
 	){
 		$cherche = "<a href=\"". generer_url_ecrire('rubriques') . "\">" . _T('info_racine_site') . "</a>";
 		$remplace = "<a href=\"". generer_url_ecrire('pages_tous') . "\">" . _T('pages:pages_uniques') . "</a>";
 		$flux['data'] = str_replace($cherche,$remplace,$flux['data']);
 	}
-
-
 	return $flux;
 }
 

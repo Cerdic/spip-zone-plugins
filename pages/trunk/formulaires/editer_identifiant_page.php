@@ -7,6 +7,7 @@
  * @author     RastaPopoulos
  * @licence    GNU/GPL
  * @package    SPIP\Pages\Formulaires
+ * @link       http://contrib.spip.net/Pages-uniques
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

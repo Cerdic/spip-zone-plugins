@@ -1,11 +1,11 @@
 <paquet
 	prefix="pages"
 	categorie="divers"
-	version="1.0.5"
+	version="1.0.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/page-32.png"
-	documentation="http://www.spip-contrib.net/Plugin-Pages-uniques"
+	documentation="http://contrib.spip.net/Pages-uniques"
 	schema="1.0.1"
 >
 
