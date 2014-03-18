@@ -4,7 +4,7 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="162" traduits="142" relire="0" modifs="3" nouveaux="17" pourcent="87.65">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="162" traduits="159" relire="0" modifs="0" nouveaux="3" pourcent="98.15">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="162" traduits="162" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
@@ -25,7 +25,7 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=it" total="162" traduits="139" relire="0" modifs="3" nouveaux="20" pourcent="85.80">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="162" traduits="159" relire="0" modifs="0" nouveaux="3" pourcent="98.15">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=nl" total="162" traduits="161" relire="0" modifs="0" nouveaux="1" pourcent="99.38">
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
