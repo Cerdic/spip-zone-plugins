@@ -55,12 +55,14 @@
 				datas=#GET{tableau_type_evenement}	
 			})]
 
+		[(#PLUGIN{orr}|non)
 			[(#SAISIE{selection, id_orr_ressource, obligatoire=non,
 				afficher_si='@resa_auto@=="on"',
-				label=<:almanach:resa_auto:>,
+				label=<:almanach:reservation:>,
 				explication=<:almanach:choix_salle:>,
 				datas=#GET{tableau_ressources}	
 			})]
+		]
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
