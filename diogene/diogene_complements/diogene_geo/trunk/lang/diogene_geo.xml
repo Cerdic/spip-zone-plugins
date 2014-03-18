@@ -1,5 +1,6 @@
 <traduction module="diogene_geo" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_geo/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=en" total="19" traduits="17" relire="0" modifs="0" nouveaux="2" pourcent="89.47">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=en" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=es" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
