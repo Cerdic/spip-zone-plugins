@@ -3,8 +3,9 @@
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="78" traduits="77" relire="0" modifs="1" nouveaux="0" pourcent="98.72">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=en" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=es" total="78" traduits="78" relire="0" modifs="0" nouveaux="0" pourcent="100.00">

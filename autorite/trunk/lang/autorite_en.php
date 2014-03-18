@@ -42,15 +42,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<br />To resolve this problem, you should check if your <tt>mes_options.php</tt> (or another active plugin) has defined these functions',
 	'descriptif_1' => 'This setup page is reserved for the webmaster of the site:',
 	'descriptif_2' => '<hr />
-<p><small>If you want to edit this list, please edit the file <tt>config/mes_options.php</tt> (create it needed) and indicate the list of identifiers of webmasters, as follows:</small></p>
+<p><small>If you want to edit this list, please edit the file <tt>config/mes_options.php</tt> (create it when needed) and indicate the list of identifiers of webmasters as follows:</small></p>
 <pre>&lt;?php
   define(
     \'_ID_WEBMESTRES\',
     \'1:5:8\');
 ?&gt;</pre>
+<p><small>As of SPIP 2.1 it is also possible to grant webmaster rights to an administrator using the the author modification screen.</small></p>
 <p><small>Note: Webmasters defined in this way do not need to make the FTP authentication for sensitive operations (upgrading the database, for example).</small></p>
 
-<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. documentation</a>', # MODIF
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>See documentation</a>',
 	'details_option_auteur' => '<small><br />For now, the option "author" works only for registered authors (forums by subscription, for example). And if it is enabled, the site administrators also have the ability to edit the forums.
 	</small>',
 	'droits_des_auteurs' => 'Authors rights',
