@@ -1,7 +1,8 @@
 <traduction module="emballe_medias" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/emballe_medias/emballe_medias/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=en" total="220" traduits="214" relire="0" modifs="0" nouveaux="6" pourcent="97.27">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=en" total="220" traduits="219" relire="0" modifs="0" nouveaux="1" pourcent="99.55">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=es" total="220" traduits="220" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
