@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'afficher_tickets' => 'Show bug reports',
+	'ajout_deux_points' => '@texte@: ',
 	'assignation_attribuee_a' => 'The bug report has been assigned to @nom@.',
 	'assignation_attribuee_a_personne' => 'This bug has been assigned to nobody.',
 	'assignation_mail_titre' => 'Change of bug report assignment',
