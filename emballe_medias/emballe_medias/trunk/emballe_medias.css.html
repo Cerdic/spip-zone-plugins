@@ -255,6 +255,9 @@ noscript.alternative_js{
 	margin-left:0;
 	float: none;
 }
+#liste_medias_publication #navigation_liste ul{
+	clear:both;
+}
 #liste_medias_publication .item,
 .selection_documents .choix{
 	position:relative;
@@ -306,8 +309,9 @@ noscript.alternative_js{
 
 #formulaire_media_edition_lot .edition_par_lot,
 #edition_emballe_media{
-	width:50%;
+	width:49%;
 	float:right;
+	margin:1em 0;
 }
 
 .content #liste_medias_publication .formulaire_spip{
@@ -325,10 +329,28 @@ noscript.alternative_js{
 	overflow:auto;
 }
 
+form .edition_par_lot textarea {
+	-moz-box-sizing: border-box;
+	box-sizing:border-box;
+	width: 100%;
+}
+
+form .edition_par_lot .markItUp .markItUpContainer .markItUpHeader{
+	width:inherit;
+}
+#liste_medias_publication .selection_statut{
+	border:none;
+	margin-left:0;
+	list-style-type:none;
+}
 #liste_medias_publication li.item a{
 	display:block;
 }
 
+.formulaire_spip .selection_documents .editer_medias{
+	margin:1em 0;
+	padding:0;
+}
 .formulaire_spip .selection_documents .choix label{
 	display:block;
 	position:relative;
