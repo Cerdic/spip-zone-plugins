@@ -5,23 +5,21 @@
 </B_votestotal>
 <BOUCLE_votechoice(QUICKVOTES){id_quickvote=#ENV{id}}>
 <B_votesresult>
-[(#SET{choice_counter,0})]
-<table class="spip" width="100%">
+<table class="spip">
 	<caption><:quickvote:resultat_titre:></caption>
 <BOUCLE_votesresult(QUICKVOTES_VOTES){id_quickvote}{fusion reponse}>
 	<tr id="#REPONSE" class="[row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
-		[(#SET{choice_counter, [(#GET{choice_counter}|plus{1})]})]
 		<td>
-				[(#GET{choice_counter}|=={1}|oui)#REPONSE1]
-				[(#GET{choice_counter}|=={2}|oui)#REPONSE2]
-				[(#GET{choice_counter}|=={3}|et{#REPONSE3}|oui)#REPONSE3]
-				[(#GET{choice_counter}|=={4}|et{#REPONSE4}|oui)#REPONSE4]
-				[(#GET{choice_counter}|=={5}|et{#REPONSE5}|oui)#REPONSE5]
-				[(#GET{choice_counter}|=={6}|et{#REPONSE6}|oui)#REPONSE6]
-				[(#GET{choice_counter}|=={7}|et{#REPONSE7}|oui)#REPONSE7]
-				[(#GET{choice_counter}|=={8}|et{#REPONSE8}|oui)#REPONSE8]
-				[(#GET{choice_counter}|=={9}|et{#REPONSE9}|oui)#REPONSE9]
-				[(#GET{choice_counter}|=={10}|et{#REPONSE10}|oui)#REPONSE10]
+                [(#REPONSE|=={reponse1}|oui)#REPONSE1]  
+                [(#REPONSE|=={reponse2}|oui)#REPONSE2]
+                [(#REPONSE|=={reponse3}|oui)#REPONSE3]  
+                [(#REPONSE|=={reponse4}|oui)#REPONSE4]
+                [(#REPONSE|=={reponse5}|oui)#REPONSE5]  
+                [(#REPONSE|=={reponse6}|oui)#REPONSE6]
+                [(#REPONSE|=={reponse7}|oui)#REPONSE7]  
+                [(#REPONSE|=={reponse8}|oui)#REPONSE8]            
+                [(#REPONSE|=={reponse9}|oui)#REPONSE9] 
+                [(#REPONSE|=={reponse10}|oui)#REPONSE10]
 		</td>
 		<td><B_votepart>[(#SET{parts_count, #TOTAL_BOUCLE})]<BOUCLE_votepart(QUICKVOTES_VOTES){id_quickvote}{reponse}> </BOUCLE_votepart>[#GET{parts_count}&times; : (#GET{parts_count}|mult{100}|div{#GET{votes_total}}|round{0})%]</B_votepart></td>
 	</tr>

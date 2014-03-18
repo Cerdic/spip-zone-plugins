@@ -17,7 +17,16 @@ function quickvote_resultat($id_quickvote) {
      $vote = array();
 
      // boucle sur les reponses disponibles du formulaires = non vide
-     if ($res = sql_select("b.reponse AS pos, COUNT(b.reponse) AS nbr, CASE b.reponse WHEN 'reponse1' THEN a.reponse1 WHEN 'reponse2' THEN a.reponse2 WHEN 'reponse3' THEN a.reponse3 WHEN 'reponse4' THEN a.reponse4 WHEN 'reponse5' THEN a.reponse5 WHEN 'reponse6' THEN a.reponse6 WHEN 'reponse7' THEN a.reponse7 WHEN 'reponse8' THEN a.reponse8 WHEN 'reponse9' THEN a.reponse9 WHEN 'reponse10' THEN a.reponse10 END AS rep", 'spip_quickvotes a INNER JOIN spip_quickvotes_votes b ON a.id_quickvote = b.id_quickvote', "id_quickvote =".intval($id_quickvote), 'reponse', 'nbr') ) {
+     if ($res = sql_select("b.reponse AS pos, COUNT(b.reponse) AS nbr, CASE b.reponse WHEN 'reponse1' THEN a.reponse1 
+                                                                                      WHEN 'reponse2' THEN a.reponse2 
+                                                                                      WHEN 'reponse3' THEN a.reponse3 
+                                                                                      WHEN 'reponse4' THEN a.reponse4 
+                                                                                      WHEN 'reponse5' THEN a.reponse5 
+                                                                                      WHEN 'reponse6' THEN a.reponse6 
+                                                                                      WHEN 'reponse7' THEN a.reponse7 
+                                                                                      WHEN 'reponse8' THEN a.reponse8 
+                                                                                      WHEN 'reponse9' THEN a.reponse9 
+                                                                                      WHEN 'reponse10' THEN a.reponse10 END AS rep", 'spip_quickvotes a INNER JOIN spip_quickvotes_votes b ON a.id_quickvote = b.id_quickvote', "id_quickvote =".intval($id_quickvote), 'reponse', 'nbr') ) {
           // cherchons le nb de votes  pour chaque reponse
           while ($row = sql_fetch($res)) {
               $vote[$row['pos']] = array($row['rep'], $row['nbr']);
@@ -43,7 +52,7 @@ function quickvote_resultat($id_quickvote) {
           if ($nb_vote==1)
                $str_resultat .= _T('quickvote:resultat_nb_vote');
           else
-               $str_resultat _T('quickvote:resultat_nb_votes', array('nb'=>$nb_vote));
+               $str_resultat .= _T('quickvote:resultat_nb_votes', array('nb'=>$nb_vote));
           $str_resultat .= '</td></tr>';
           $str_resultat .= '</table>';
      }
