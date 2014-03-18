@@ -11,7 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'grappes_description' => 'Allows to group together elements of SPIP
         such as authors, sections, articles (when a dedicated interface exists)...
         in a same universe (just like a bunch of grapes)',
-	'grappes_nom' => 'Bunches of grapes'
+	'grappes_nom' => 'Bunches of grapes',
+	'grappes_slogan' => 'Regroup SPIP objets SPIP in the same universe'
 );
 
 ?>
