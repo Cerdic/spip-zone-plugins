@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_rubrique_statut' => 'A section is considered as visible (published) when it contains at least an other published element.',
 	'explication_statut_auteur' => 'This field defines the minimal author status in order to create an object corresponding to this template.',
 	'explication_statut_auteur_publier' => 'This field defines the minimal author status in order to definitively publish an object corresponding to this template.',
+	'explication_workflow_simplifie' => 'Only manage "Published" et "Suppressed" actions',
 
 	// F
 	'formulaire_modifier_diogene' => 'Edit the template (Diogene)',
@@ -74,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type' => 'ID',
 
 	// L
+	'label_cacher_heure' => 'Do not show the time for dates',
 	'label_cextras_enleves' => 'Extra fields to hide',
 	'label_champs_ajoutes' => 'Fields to add',
 	'label_champs_caches' => 'Fields to hide',
@@ -87,8 +89,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nombre_attente' => 'Maximum waiting',
 	'label_polyhier' => 'Polyhierarchy',
 	'label_polyhier_desactiver' => 'Deactivate polyhierarchy',
+	'label_rubrique_par_defaut' => 'Publish by default in section',
 	'label_statut_auteur' => 'Minimal status of the authors',
 	'label_statut_auteur_publier' => 'Minimal status of the authors who can definetely publish',
+	'label_workflow_simplifie' => 'Simplified management of publication workflow',
 	'legende_champs_diogene' => 'Fields of the form',
 	'legende_selecteur_statut' => 'Status',
 	'legende_statuts_diogene' => 'Statuses',
