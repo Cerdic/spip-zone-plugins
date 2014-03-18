@@ -90,6 +90,7 @@ function formulaires_trier_tickets_traiter_dist($lien_filtre = NULL,$lien_arg = 
 }
 
 function liste_champs_recherche_trier_tickets() {
+	include_spip('base/abstract_sql');
 	$groupesmots = array_map('array_shift', sql_allfetsel("id_groupe", "spip_groupes_mots", "FIND_IN_SET('tickets', tables_liees)"));
 	$recherches = array();
 	foreach ($groupesmots as $id_groupe) {
