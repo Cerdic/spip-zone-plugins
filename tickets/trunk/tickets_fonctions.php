@@ -318,7 +318,6 @@ function tickets_liste_navigateur($nav=false){
 // On ignore la présence de '?' dans le critère
 /*
  * ATTENTION, c'est un peu en cours de dev, il faudrait :
- * - virer la référence aux tickets
  * - revoir peut être la jonction avec spip_mots
  * - ne pas écrire directement 'spip_mots'/'spip_mots_liens' si le préfixe est différent ?
  * - prendre en compte le cas où id_mot[] est un tableau de strings (comme critere_mots) ?
@@ -342,7 +341,7 @@ function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) 
 	$boucle->hash .= '
 	// {MOTS}
 	$prepare_mots_pargroupe = charger_fonction(\'prepare_mots_pargroupe\', \'inc\');
-	$mots_where = $prepare_mots_pargroupe('.$mots.');
+	$mots_where = $prepare_mots_pargroupe('.$mots.', "'.$boucle->id_table.'");
 	';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
@@ -351,7 +350,7 @@ function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) 
 
 	$boucle->where[] = "\n\t\t".'$mots_where';
 }
-function inc_prepare_mots_pargroupe_dist($mots) {
+function inc_prepare_mots_pargroupe_dist($mots, $table='articles') {
 
 	// Si le tableau $mots est vide, on ignore le critère
 	if (!is_array($mots)
@@ -359,6 +358,11 @@ function inc_prepare_mots_pargroupe_dist($mots) {
 		return '';
 	}
 
+	// Quel est l'objet ?
+	$_table = table_objet($table);
+	$objet_delatable=objet_type($_table);
+	$_id_table = id_table_objet($table);
+	
 	/* On calcule la liste des groupes
 	 * 
 	 * SELECT id_groupe
@@ -387,7 +391,7 @@ function inc_prepare_mots_pargroupe_dist($mots) {
 	 *   AND ml.id_mot IN (1,2,3)
 	 * GROUP BY ml.id_objet,ml.objet,m.id_groupe
 	 */
-	$doublets = '('.sql_get_select('id_objet,id_groupe','spip_mots_liens JOIN spip_mots USING (id_mot)','objet=\'ticket\' AND '.sql_in('id_mot',$mots),'id_objet,objet,id_groupe').') AS d';
+	$doublets = '('.sql_get_select('id_objet,id_groupe','spip_mots_liens JOIN spip_mots USING (id_mot)','objet='.sql_quote($objet_delatable).' AND '.sql_in('id_mot',$mots),'id_objet,objet,id_groupe').') AS d';
 
 	/* Enfin, la boucle complete
 	 * SELECT id_objet
@@ -415,7 +419,7 @@ function inc_prepare_mots_pargroupe_dist($mots) {
 	/* On ajoute ce critère à la boucle (TICKETS)
 	 * 
 	 */
-	return sql_in('id_ticket', $where);
+	return sql_in($_table.'.'.$_id_table, $where);
 
 }
 ?>
