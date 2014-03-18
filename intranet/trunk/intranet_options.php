@@ -30,14 +30,14 @@ if (!test_espace_prive()){
 function intranet_styliser($flux){
 	if ( 
 		!test_espace_prive()
-		AND include_spip('inc/autoriser')
-		AND include_spip('inc/config')
 		AND strpos($flux['args']['fond'],'/')===false
+		AND !in_array(substr($flux['args']['fond'],-3),array('.js','.css'))
+		AND include_spip('inc/autoriser')
 		AND !autoriser('intranet')
+		AND include_spip('inc/config')
 		AND ($pages_ok = array_filter(pipeline('intranet_pages_ok',array_merge(array('robots.txt','spip_pass','favicon.ico','informer_auteur'),explode(',',lire_config('intranet/pages_intranet',' '))))))
 		AND !in_array($flux['args']['fond'],$pages_ok)
-		AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)
-		AND !in_array(substr($flux['args']['fond'],-3),array('.js','.css'))){
+		AND !in_array($flux['args']['contexte'][_SPIP_PAGE],$pages_ok)){
 			$fond = trouver_fond('inclure/intranet','',true);
 			$flux['data'] = $fond['fond'];
 	}
