@@ -28,7 +28,7 @@
     #SET{extras,#VAL|champs_extras_reservation}#SET{champs_extras,#ARRAY}
         <BOUCLE_extras(DATA){source tableau, #GET{extras}}>
         <div class="champ contenu_#VALEUR{options/nom}">
-            <label>[(#VALEUR{options/label}|extraire_multi)]</label>
+            <label>[(#VALEUR{options/label}|extraire_multi|_T)]</label>
             <span dir="#LANG_DIR" class="#CLE">[(#ID_AUTEUR|generer_info_entite{auteur,#VALEUR{options/nom}})]</span>
         </div>    
         </BOUCLE_extras>
@@ -46,7 +46,7 @@
      
     <BOUCLE_champs_extras(DATA){source tableau, #DONNEES_AUTEUR|unserialize}>
     <div class="champ contenu_#CLE">
-        <label>#CLE</label>
+        <label>[(#CLE|extraire_multi|_T)] :</label>
         <span dir="#LANG_DIR" class="#CLE">#VALEUR</span>
     </div>    
     </BOUCLE_champs_extras>
@@ -61,5 +61,4 @@
         <label><:reservation:label_lang:></label>
         <span dir='#LANG_DIR' class='#EDIT{lang} reference'>(#LANG|traduire_nom_langue)</span>
     </div>]
-
 </BOUCLE_reservation>

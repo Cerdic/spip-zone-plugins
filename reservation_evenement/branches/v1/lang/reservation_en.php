@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_reservation' => 'Booking:',
 	'label_statut' => 'Status',
 	'label_statut_defaut' => 'Default Status:',
+	'label_statuts_complet' => 'The "complete" status(es):',
 	'label_type_paiement' => 'Payment type:',
 
 	// M
@@ -104,6 +105,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_enregistre' => 'Your Registration has been saved. You will receive a confirmation email. If not, check your spam folder.',
 	'reservation_numero' => 'Booking:',
 	'reservation_reference_numero' => 'Reference Nr ',
+
+	// S
+	'statuts_complet_explication' => 'The status codes in the reservation details that are taken into consideration an event as complete.',
 
 	// T
 	'texte_ajouter_reservation' => 'Add a booking',
