@@ -30,7 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference_numero' => 'Reference No. ',
 	'commande_statut' => 'Status',
 	'commandes_titre' => 'Orders',
-	'configurer_titre' => 'Configure "Commandes" plugin', # MODIF
+	'configurer_notifications_commandes' => 'Set up notifications',
+	'configurer_titre' => 'Configure the "Commandes" plugin',
 	'confirmer_supprimer_commande' => 'Can you confirm the deletion of this order?',
 	'contact_label' => 'Contact:',
 	'contenu' => 'Content',
@@ -45,6 +46,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'etat' => 'Status',
+	'explications_notifications_statuts' => 'Notification in case of status change',
+	'explications_notifications_statuts_aucune' => 'No notification in case of status change',
 
 	// F
 	'facture_date' => 'Date: <span>@date@</span>',
@@ -53,11 +56,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_commande' => '1 order',
+	'info_1_commande_statut_attente' => '1 order awaiting validation',
+	'info_1_commande_statut_partiel' => '1 order partially paid',
+	'info_1_commande_statut_paye' => '1 paid order',
 	'info_aucun_commande' => 'No orders',
 	'info_commandes' => 'Orders',
 	'info_date_envoi_vide' => 'order not sent',
+	'info_date_non_definie' => 'not defined',
 	'info_date_paiement_vide' => 'order not paid for',
 	'info_nb_commandes' => '@nb@ orders',
+	'info_nb_commandes_statut_attente' => '@nb@ orders awaiting validation',
+	'info_nb_commandes_statut_partiel' => '@nb@ orders partially paid ',
+	'info_nb_commandes_statut_paye' => '@nb@ paid orders',
 	'info_numero_commande' => 'ORDER NUMBER:',
 	'info_toutes_commandes' => 'All orders',
 
@@ -135,6 +145,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'This order is :',
+	'titre_commandes_actives' => 'Active orders',
+	'titre_commandes_auteur' => 'Orders from the author',
 
 	// U
 	'une_commande_de' => 'An order of: ',
