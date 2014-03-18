@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Verwijderen',
 
 	// C
+	'cal_par_jour' => 'dag',
+	'cal_par_mois' => 'maand',
+	'cal_par_semaine' => 'week',
 	'confirm_suppression_inscription' => 'Wil je deze inschrijving werkelijk verwijderen?',
 	'confirm_suppression_inscription_toutes' => 'Wil je werkelijk alle inschrijvingen verwijderen?',
 	'connexion_necessaire_pour_inscription' => 'Je moet <a href=\'#LOGIN_PUBLIC\'>hier inloggen</a> om je te kunnen inschrijven.',
