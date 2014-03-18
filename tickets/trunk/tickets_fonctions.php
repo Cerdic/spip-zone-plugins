@@ -319,7 +319,6 @@ function tickets_liste_navigateur($nav=false){
 /*
  * ATTENTION, c'est un peu en cours de dev, il faudrait :
  * - revoir peut être la jonction avec spip_mots
- * - ne pas écrire directement 'spip_mots'/'spip_mots_liens' si le préfixe est différent ?
  * - prendre en compte le cas où id_mot[] est un tableau de strings (comme critere_mots) ?
  */
 function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
@@ -362,7 +361,10 @@ function inc_prepare_mots_pargroupe_dist($mots, $table='articles') {
 	$_table = table_objet($table);
 	$objet_delatable=objet_type($_table);
 	$_id_table = id_table_objet($table);
-	
+	// Tables spip_mots et spip_mots_liens
+	$table_spip_mots = table_objet_sql('mots');
+	$table_spip_mots_liens = table_objet_sql('mots_liens');
+
 	/* On calcule la liste des groupes
 	 * 
 	 * SELECT id_groupe
@@ -370,7 +372,7 @@ function inc_prepare_mots_pargroupe_dist($mots, $table='articles') {
 	 * WHERE id_mot IN (1,2,3)
 	 * GROUP BY id_groupe
 	 */
-	$groupes = '('.sql_get_select('id_groupe','spip_mots',sql_in('id_mot',$mots),'id_groupe').') AS g';
+	$groupes = '('.sql_get_select('id_groupe',$table_spip_mots,sql_in('id_mot',$mots),'id_groupe').') AS g';
 
 	/* Maintenant le nombre de groupes
 	 * 
@@ -391,7 +393,7 @@ function inc_prepare_mots_pargroupe_dist($mots, $table='articles') {
 	 *   AND ml.id_mot IN (1,2,3)
 	 * GROUP BY ml.id_objet,ml.objet,m.id_groupe
 	 */
-	$doublets = '('.sql_get_select('id_objet,id_groupe','spip_mots_liens JOIN spip_mots USING (id_mot)','objet='.sql_quote($objet_delatable).' AND '.sql_in('id_mot',$mots),'id_objet,objet,id_groupe').') AS d';
+	$doublets = '('.sql_get_select('id_objet,id_groupe',$table_spip_mots_liens.' JOIN '.$table_spip_mots.' USING (id_mot)','objet='.sql_quote($objet_delatable).' AND '.sql_in('id_mot',$mots),'id_objet,objet,id_groupe').') AS d';
 
 	/* Enfin, la boucle complete
 	 * SELECT id_objet
