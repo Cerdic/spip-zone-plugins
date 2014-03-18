@@ -313,8 +313,9 @@ function tickets_liste_navigateur($nav=false){
 	return $navs;
 }
 
-// Critere {mots_pargroupe} : "l'article est lie a au moins un mot de tous les groupes demandes"
-// {mots?} ne s'applique que si au moins un mot est demande
+// Critere {mots_pargroupe} : "l'article est lie a au moins un mot de chacun des groupes demandes"
+// Ne s'applique que si au moins un mot est demande (si le tableau est vide, on ignore le critère)
+// On ignore la présence de '?' dans le critère
 /*
  * ATTENTION, c'est un peu en cours de dev, il faudrait :
  * - virer la référence aux tickets
@@ -326,15 +327,37 @@ function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) 
 
 	$boucle = &$boucles[$idb];
 
-	if (isset($crit->param[0][0])) {
-		$mots = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
+	// On ne prend pas en compte '?' mais on s'assure de récupérer le paramètre suivant s'il existe
+	// le cas problématique : {mots_pargroupe ? #GET{tableau}}
+	$num_param=0;
+	if ($crit->cond && isset($crit->param[0][0]) && $crit->param[0][0]->type==='texte' && trim($crit->param[0][0]->texte)==='') {
+		$num_param=1;
+	}
+	if (isset($crit->param[0][$num_param])) {
+		$mots = calculer_liste(array($crit->param[0][$num_param]), array(), $boucles, $boucles[$idb]->id_parent);
 	} else{
 		$mots = '@$Pile[0]["mots"]';
 	}
 
+	$boucle->hash .= '
+	// {MOTS}
+	$prepare_mots_pargroupe = charger_fonction(\'prepare_mots_pargroupe\', \'inc\');
+	$mots_where = $prepare_mots_pargroupe('.$mots.');
+	';
+
 	$t = $boucle->id_table . '.' . $boucle->primary;
 	if (!in_array($t, $boucles[$idb]->select))
 	  $boucle->select[]= $t; # pour postgres, neuneu ici
+
+	$boucle->where[] = "\n\t\t".'$mots_where';
+}
+function inc_prepare_mots_pargroupe_dist($mots) {
+
+	// Si le tableau $mots est vide, on ignore le critère
+	if (!is_array($mots)
+	OR !$mots = array_filter($mots)) {
+		return '';
+	}
 
 	/* On calcule la liste des groupes
 	 * 
@@ -343,14 +366,14 @@ function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) 
 	 * WHERE id_mot IN (1,2,3)
 	 * GROUP BY id_groupe
 	 */
-	$groupes = "'('.sql_get_select('id_groupe','spip_mots',sql_in('id_mot',".$mots."),'id_groupe').') AS g'";
+	$groupes = '('.sql_get_select('id_groupe','spip_mots',sql_in('id_mot',$mots),'id_groupe').') AS g';
 
 	/* Maintenant le nombre de groupes
 	 * 
 	 * SELECT COUNT(id_groupe)
 	 * FROM ($groupes) AS nb
 	 */
-	$nb_groupes = "('.sql_get_select('COUNT(id_groupe)',".$groupes.").')";
+	$nb_groupes = '('.sql_get_select('COUNT(id_groupe)',$groupes).')';
 
 	/* Maintenant les doublets (id_objet,id_groupe)
 	 * 
@@ -364,7 +387,7 @@ function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) 
 	 *   AND ml.id_mot IN (1,2,3)
 	 * GROUP BY ml.id_objet,ml.objet,m.id_groupe
 	 */
-	$doublets = "'('.sql_get_select('id_objet,id_groupe','spip_mots_liens JOIN spip_mots USING (id_mot)','objet=\'ticket\' AND '.sql_in('id_mot',".$mots."),'id_objet,objet,id_groupe').') AS d'";
+	$doublets = '('.sql_get_select('id_objet,id_groupe','spip_mots_liens JOIN spip_mots USING (id_mot)','objet=\'ticket\' AND '.sql_in('id_mot',$mots),'id_objet,objet,id_groupe').') AS d';
 
 	/* Enfin, la boucle complete
 	 * SELECT id_objet
@@ -387,13 +410,12 @@ function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) 
 	 *   ) AS g
 	 * )
 	 */
-	$where = "sql_get_select('id_objet',".$doublets.",'','id_objet','','','SUM(1) >= ".$nb_groupes."')";
+	$where = sql_get_select('id_objet',$doublets,'','id_objet','','','SUM(1) >= '.$nb_groupes);
 
 	/* On ajoute ce critère à la boucle (TICKETS)
 	 * 
 	 */
-	$boucle->where[] = "sql_in('id_ticket', ".$where.")";
+	return sql_in('id_ticket', $where);
 
 }
-
 ?>
