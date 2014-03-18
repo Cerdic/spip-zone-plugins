@@ -7,60 +7,6 @@ include_spip('inc/editer');
 include_spip('base/abstract_sql');
 
 
-// générer les résultats du vote sous forme d'un tableau HTML
-// alternative: // modele/quickvote
-function quickvote_resultat($id_quickvote) {
-     include_spip('base/abstract_sql');
-     include_spip('inc/texte'); // pour typo
-
-     $nb_vote = 0;
-     $vote = array();
-
-     // boucle sur les reponses disponibles du formulaires = non vide
-     if ($res = sql_select("b.reponse AS pos, COUNT(b.reponse) AS nbr, CASE b.reponse WHEN 'reponse1' THEN a.reponse1 
-                                                                                      WHEN 'reponse2' THEN a.reponse2 
-                                                                                      WHEN 'reponse3' THEN a.reponse3 
-                                                                                      WHEN 'reponse4' THEN a.reponse4 
-                                                                                      WHEN 'reponse5' THEN a.reponse5 
-                                                                                      WHEN 'reponse6' THEN a.reponse6 
-                                                                                      WHEN 'reponse7' THEN a.reponse7 
-                                                                                      WHEN 'reponse8' THEN a.reponse8 
-                                                                                      WHEN 'reponse9' THEN a.reponse9 
-                                                                                      WHEN 'reponse10' THEN a.reponse10 END AS rep", 'spip_quickvotes a INNER JOIN spip_quickvotes_votes b ON a.id_quickvote = b.id_quickvote', "id_quickvote =".intval($id_quickvote), 'reponse', 'nbr') ) {
-          // cherchons le nb de votes  pour chaque reponse
-          while ($row = sql_fetch($res)) {
-              $vote[$row['pos']] = array($row['rep'], $row['nbr']);
-              $nb_vote += $row['nbr'];
-          }
-     }
-
-     if ($nb_vote==0)
-          $str_resultat = "<div class='nb_vote'>"._T("quickvote:resultat_0_vote")."</div>";
-     else {
-          $str_resultat = '<table class="spip">';
-          $str_resultat .= '<caption>'. _T("quickvote:resultat_titre") .'</caption>';
-          // bilan - calcul des pourcentages
-          $i = 0;
-          foreach ($vote as $k=>$val) {
-               $str_resultat .= '<tr id="'.$k.'" class="row_'. ($i%2?'odd':'even') .'">';
-               $i++;
-               $str_resultat .= '<td>'.$val[0].'</td>';
-               $str_resultat .= '<td>'.$val[1].'&times; : '. round(($val[1]/$nb_vote)*100) .'%</td>';
-               $str_resultat .= '</tr>';
-          }
-          $str_resultat .= '<tr id="reponse0" class="row_first"><td colspan="2" class="nb_vote">';
-          if ($nb_vote==1)
-               $str_resultat .= _T('quickvote:resultat_nb_vote');
-          else
-               $str_resultat .= _T('quickvote:resultat_nb_votes', array('nb'=>$nb_vote));
-          $str_resultat .= '</td></tr>';
-          $str_resultat .= '</table>';
-     }
-
-     return $str_resultat;
-}
-
-
 //
 //  CVT pour traiter le vote
 //
@@ -84,13 +30,11 @@ function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non',$masq
      // est ce que le sondage est cloturé ?
      if (($row = sql_fetsel("actif", "spip_quickvotes", "id_quickvote = $id_quickvote AND actif = 0")) || ($skip_vote=='oui')) {
           $valeurs['editable'] = false;
-//          $valeurs['message_ok'] = quickvote_resultat($id_quickvote);
           $valeurs['message_ok'] = recuperer_fond('modeles/quickvote', array('id'=>$id_quickvote) );
      }
      // deja vote
      else if ($row = sql_fetsel("ip", "spip_quickvotes_votes", "id_quickvote = $id_quickvote AND ip='$ip'")){
           $valeurs['editable'] = false;
-//          $valeurs['message_ok'] = quickvote_resultat($id_quickvote);
           $valeurs['message_ok'] = recuperer_fond('modeles/quickvote', array('id'=>$id_quickvote) );
      }
 
@@ -123,7 +67,11 @@ function formulaires_quickvote_traiter_dist($id_quickvote){
      suivre_invalideur("id='id_quickvote/$id_quickvote'");
 
      // SQL
-     $ip = $GLOBALS['ip'];
+     //$ip = $GLOBALS['ip'];
+     $ip = quickvote_get_ip_address();
+     if ($ip=="")
+               $ip = $GLOBALS['ip'];
+     
      // sécurité le formulaire peut etre chargé à plusieurs endroits à la fois: on n'enregistre que le 1er vote de cette IP, les autres votes sont ignorés
      if (!$row = sql_fetsel("ip", "spip_quickvotes_votes", "id_quickvote = $id_quickvote AND ip='$ip'"))  {
           $requete_sql = array();
@@ -135,11 +83,66 @@ function formulaires_quickvote_traiter_dist($id_quickvote){
 
      // Valeurs de retours
      return array(
-//          'message_ok' => quickvote_resultat($id_quickvote),
           'message_ok' => recuperer_fond('modeles/quickvote', array('id'=>$id_quickvote) ),
           'editable' => false
      );
 }
+
+// (experimental) essayer de recuperer la bonne IP notamment via les CDN, Proxy, ...
+// What is the most accurate way to retrieve a user's correct IP address in PHP?
+// http://stackoverflow.com/questions/1634782/what-is-the-most-accurate-way-to-retrieve-a-users-correct-ip-address-in-php?rq=1
+ 
+ /**
+  * Retrieves the best guess of the client's actual IP address.
+  * Takes into account numerous HTTP proxy headers due to variations
+  * in how different ISPs handle IP addresses in headers between hops.
+  */
+function quickvote_get_ip_address() {
+  // check for shared internet/ISP IP
+  if (!empty($_SERVER['HTTP_CLIENT_IP']) && quickvote_validate_ip($_SERVER['HTTP_CLIENT_IP']))
+   return $_SERVER['HTTP_CLIENT_IP'];
+
+  // check for IPs passing through proxies
+  if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+   // check if multiple ips exist in var
+    $iplist = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+    foreach ($iplist as $ip) {
+     if (quickvote_validate_ip($ip))
+      return $ip;
+    }    
+  }
+    
+  if (!empty($_SERVER['HTTP_X_FORWARDED']) && quickvote_validate_ip($_SERVER['HTTP_X_FORWARDED']))
+   return $_SERVER['HTTP_X_FORWARDED'];
+  if (!empty($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']) && quickvote_validate_ip($_SERVER['HTTP_X_CLUSTER_CLIENT_IP']))
+   return $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
+  if (!empty($_SERVER['HTTP_FORWARDED_FOR']) && quickvote_validate_ip($_SERVER['HTTP_FORWARDED_FOR']))
+   return $_SERVER['HTTP_FORWARDED_FOR'];
+  if (!empty($_SERVER['HTTP_FORWARDED']) && quickvote_validate_ip($_SERVER['HTTP_FORWARDED']))
+   return $_SERVER['HTTP_FORWARDED'];
+
+  // return unreliable ip since all else failed
+  return $_SERVER['REMOTE_ADDR'];
+}
+
+ /**
+  * Ensures an ip address is both a valid IP and does not fall within
+  * a private network range.
+  *
+  * @access public
+  * @param string $ip
+  */
+function quickvote_validate_ip($ip) {
+     if (filter_var($ip, FILTER_VALIDATE_IP, 
+                         FILTER_FLAG_IPV4 | 
+                         FILTER_FLAG_IPV6 |
+                         FILTER_FLAG_NO_PRIV_RANGE | 
+                         FILTER_FLAG_NO_RES_RANGE) === false)
+         return false;
+     
+     return true;
+}
+
 
 
 ?>

@@ -12,7 +12,7 @@
 
 [(#HASARD|oui)   [(#SET{reponse, #GET{reponse}|quickvote_shuffle})]  ]  
 
-<div class="formulaire_spip formulaire_quickvote quickvote-#ENV{id} ajax"> 
+<div class="formulaire_spip formulaire_quickvote [(quickvote-#ENV{id})] ajax"> 
         [(#ENV{masquer_question}|non)<div class="quickvote-question">#TITRE</div>]
         [<div class="quickvotebilan">(#ENV*{message_ok})</div>] 
         [<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>] 
