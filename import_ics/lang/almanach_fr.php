@@ -13,10 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//C
 	'confirmation_suppression_evenements' => 'Êtes vous certain(e) de vouloir supprimer les événements de l\'almanach \"@titre_almanach@\" ?',
 	'confirmation_mise_a_jour_evenements' => 'Voulez-vous réellement mettre à jour la liste des événements de l\'almanach \"@titre_almanach@\" ?\nCela peut prendre un certain temps.',
+	'choix_salle' => 'Tous les événements se verront attribuer cette salle dans le gestionnaire de ressources.',
 	// E
 	'explication_id_article' => 'Choisissez un article qui va recevoir les événements importés.',
 	'explication_titre' => 'Titre de l\'almanach',
 	'explication_url' => 'URL d\'origine du calendrier',
+	'explication_resa_auto' => 'On peut réserver automatiquement une salle pour tous les événements d\'un même almanach (modifiable individuellement ensuite).',
 
 	// I
 	'icone_creer_almanach' => 'Créer un almanach',
@@ -42,6 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'purger_almanach' => 'Si vous voulez supprimer cet almanach, vous devez tout d\'abord en supprimer le contenu.',
 	// R
 	'regenerer_almanach' => 'Vous pouvez aussi restaurer son contenu en tentant une nouvelle synchronisation.',
+	'resa_auto' => 'Réservation automatique',
+	'reservation' => 'Choix de la salle à réserver',
 	'retirer_lien_almanach' => 'Retirer cet almanach',
 	'retirer_tous_liens_almanachs' => 'Retirer tous les almanachs',
 	'retour_liste' => 'Retour à la liste',

@@ -6,9 +6,8 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-[(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie]
+[(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie. on fait la même chose pour les ressources]
 #SET{tableau_type_evenement, #ARRAY}
-
 
 [(#REM)Attention astuce inside pour que les clés numériques ne soient pas réindexées, on inverse l'ordre d'intégration dasn le tableau et ensuite on flip le tableau]
 <BOUCLE_groupe(GROUPES_MOTS){titre=Type}>
@@ -18,6 +17,12 @@
 </BOUCLE_groupe>
 [(#SET{tableau_type_evenement, #GET{tableau_type_evenement}|array_flip})]
 
+[(#REM)même chose avec les ressources mais on conditionne à la présence du plugin orr]
+#SET{tableau_ressources,#ARRAY}
+<BOUCLE_ressources(ORR_RESSOURCES){si #PLUGIN{orr}| }>
+#SET{tableau_ressources, #GET{tableau_ressources}|array_merge{#ARRAY{#ORR_RESSOURCE_NOM,#ID_ORR_RESSOURCE}}
+</BOUCLE_ressources>
+[(#SET{tableau_ressources, #GET{tableau_ressources}|array_flip})]
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
@@ -50,6 +55,12 @@
 				datas=#GET{tableau_type_evenement}	
 			})]
 
+			[(#SAISIE{selection, id_orr_ressource, obligatoire=non,
+				afficher_si='@resa_auto@=="on"',
+				label=<:almanach:resa_auto:>,
+				explication=<:almanach:choix_salle:>,
+				datas=#GET{tableau_ressources}	
+			})]
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
