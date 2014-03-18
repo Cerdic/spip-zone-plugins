@@ -38,7 +38,6 @@ function emballe_medias_em_types($array){
 	$array['VIDEO'] = lire_config('emballe_medias/fichiers/fichiers_videos',array('flv'));
 	$array['SON'] = lire_config('emballe_medias/fichiers/fichiers_audios',array('mp3'));
 	$array['TEXTE'] = lire_config('emballe_medias/fichiers/fichiers_textes',array('doc','docx','pdf','odt'));
-
 	return $array;
 }
 
@@ -110,6 +109,8 @@ function emballe_medias_formulaire_verifier($flux){
 			$diogene_orig = _request('id_diogene');
 			if(!$flux['data']['id_secteur'] && in_array($flux['args']['args'][1],array('article','emballe_media')) && ($diogene = sql_getfetsel('id_diogene','spip_diogenes',"objet IN ('article','emballe_media') AND id_secteur=".intval($id_secteur)." AND id_diogene != ".intval($diogene_orig))))
 				$flux['data']['id_secteur'] = _T('emballe_medias:erreur_conflit_secteur');
+			if(!$flux['data']['menu'] && _request('menu') != 'on')
+				$flux['data']['menu'] = _T('emballe_medias:erreur_config_menu');
 		}
 		else if ($form == 'configurer_emballe_medias_fichiers'){
 			/**
