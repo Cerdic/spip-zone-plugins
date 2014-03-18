@@ -1,0 +1,47 @@
+[(#REM)
+  <!-- Affichage des resultats du vote du question donnee -->
+
+  modele alternatif pour quickvote qui n'affiche pas les nuls
+  a recopier ds votre squelette en le renommant quickvote
+    
+  parametre:
+  - id:         id de la question
+
+
+]#CACHE{0}
+#SET{votes_total,0}
+<BOUCLE_votestotal(QUICKVOTES_VOTES){id_quickvote=#ENV{id}}> </BOUCLE_votestotal>[(#SET{votes_total, #TOTAL_BOUCLE})]</B_votestotal>
+
+<BOUCLE_votechoice(QUICKVOTES){id_quickvote=#ENV{id}}> 
+<B_votesresult>
+<div class="quickvote-resultat">
+ <table class="spip">
+	<caption><:quickvote:resultat_titre:></caption>
+<BOUCLE_votesresult(QUICKVOTES_VOTES){id_quickvote}{fusion reponse}>
+	<tr class="#REPONSE [row_(#COMPTEUR_BOUCLE|alterner{'odd','even'})]">
+		<td>
+                [(#REPONSE|=={reponse1}|oui)#REPONSE1]  
+                [(#REPONSE|=={reponse2}|oui)#REPONSE2]
+                [(#REPONSE|=={reponse3}|oui)#REPONSE3]  
+                [(#REPONSE|=={reponse4}|oui)#REPONSE4]
+                [(#REPONSE|=={reponse5}|oui)#REPONSE5]  
+                [(#REPONSE|=={reponse6}|oui)#REPONSE6]
+                [(#REPONSE|=={reponse7}|oui)#REPONSE7]  
+                [(#REPONSE|=={reponse8}|oui)#REPONSE8]            
+                [(#REPONSE|=={reponse9}|oui)#REPONSE9] 
+                [(#REPONSE|=={reponse10}|oui)#REPONSE10]
+		</td>
+		<td><B_votepart>[(#SET{parts_count, #TOTAL_BOUCLE})]<BOUCLE_votepart(QUICKVOTES_VOTES){id_quickvote}{reponse}> </BOUCLE_votepart>[#GET{parts_count}&times; : (#GET{parts_count}|mult{100}|div{#GET{votes_total}}|round{0})%]</B_votepart></td>
+	</tr>
+</BOUCLE_votesresult>
+	<tr class="reponse0 row_first">
+		<td colspan="2" class="nb_vote">[(#GET{votes_total}|singulier_ou_pluriel{quickvote:resultat_nb_vote, quickvote:resultat_nb_votes})]</td>
+	</tr>
+</table>
+</div>
+</B_votesresult>
+<div class="quickvote-resultat quickvote-resultat-novote">
+	<:quickvote:resultat_0_vote:>
+</div>  
+<//B_votesresult>
+</BOUCLE_votechoice>

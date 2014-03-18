@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Quick vote</nom>
 	<slogan>Mini-sondages avec jeu de questions fermé</slogan>
-	<auteur>[erational->http://www.erational.org]</auteur>
-	<version>0.2.0</version>
+	<auteur>[erational->http://www.erational.org],Art-Logic</auteur>  
+	<version>0.2.1</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
 	<description>Mini-sondages avec jeu de questions fermé</description>
