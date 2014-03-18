@@ -5,7 +5,7 @@
  *
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Critere {tout_voir} permet de deverouiller l'acces restreint sur une boucle
@@ -20,10 +20,18 @@ function critere_tout_voir_dist($idb, &$boucles, $crit) {
 	$boucle->modificateur['tout_voir'] = true;
 }
 }
+
+/*
+ * Filtrage des objets suivant leurs éventuelles restrictions
+ *
+ * @pipeline pre_boucle
+ */
 function accesrestreint_pre_boucle(&$boucle){
-	if (!isset($boucle->modificateur['tout_voir'])){
+	// On ne filtre que s'il n'y a pas le critère {tout_voir}
+	if (!isset($boucle->modificateur['tout_voir'])) {
 		$securise = false;
-		switch ($boucle->type_requete){
+		
+		switch ($boucle->type_requete) {
 			case 'hierarchie':
 			case 'articles':
 			case 'breves':
@@ -58,6 +66,7 @@ function accesrestreint_pre_boucle(&$boucle){
 				}
 				break;
 		}
+		
 		if ($securise){
 			$boucle->hash .= "if (!defined('_DIR_PLUGIN_ACCESRESTREINT')){
 			\$link_empty = generer_url_ecrire('admin_vider'); \$link_plugin = generer_url_ecrire('admin_plugin');
@@ -67,6 +76,7 @@ function accesrestreint_pre_boucle(&$boucle){
 			}";
 		}
 	}
+	
 	return $boucle;
 }
 
@@ -77,8 +87,11 @@ function accesrestreint_pre_boucle(&$boucle){
  * @param string $primary
  * @return string
  */
-function accesrestreint_rubriques_accessibles_where($primary,$not='NOT', $_publique=''){
-	if (!$_publique) $_publique = "!test_espace_prive()";
+function accesrestreint_rubriques_accessibles_where($primary, $not='NOT', $_publique=''){
+	if (!$_publique) {
+		$_publique = "!test_espace_prive()";
+	}
+	
 	return "sql_in('$primary', accesrestreint_liste_rubriques_exclues($_publique), '$not')";
 }
 
@@ -136,6 +149,7 @@ function accesrestreint_forums_accessibles_where($primary, $_publique=''){
 	         ."array('AND','zzzf.objet=\'breve\'',".accesrestreint_breves_accessibles_where('zzzf.id_objet',$_publique).")"
 	         .")";
 	$where = "array('OR',$where,sql_in('zzzf.objet',\"'rubrique','article','breve'\",'NOT',\$connect))";
+	
 	return "array('IN','$primary','('.sql_get_select('zzzf.id_forum','spip_forum as zzzf',array($where),'','','','',\$connect).')')";
 }
 
@@ -165,9 +179,10 @@ function accesrestreint_documents_accessibles_where($primary, $_publique=''){
 
 
 /*	Champs declares pour la recherche */
-function accesrestreint_rechercher_liste_des_champs($tables) {
+function accesrestreint_rechercher_liste_des_champs($tables){
 	$tables['zone']['titre'] = 8;
 	$tables['zone']['descriptif'] = 3;
+	
 	return $tables;
 }
-?>
+
