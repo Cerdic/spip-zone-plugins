@@ -5,9 +5,9 @@
 		<li class="editer boutons">
 			<label><:emballe_medias:label_selectionnez_types_medias:></label>
 			<div class="btn-group">
-				[(#SELF|parametre_url{statut,prepa}|lien_ou_expose{<:emballe_medias:info_statut_prepa:>,#ENV{statut,prepa}|=={prepa},"btn ajax"})]
-				[(#SELF|parametre_url{statut,prop}|lien_ou_expose{<:emballe_medias:info_statut_prop:>,#ENV{statut,prepa}|=={prop},"btn ajax"})]
-				[(#SELF|parametre_url{statut,publie}|lien_ou_expose{<:emballe_medias:info_statut_publies:>,#ENV{statut,prepa}|=={publie},"btn ajax"})]
+				[(#ENV{statut,prepa}|=={prepa}|?{<strong class="btn disabled"><:emballe_medias:info_statut_prepa:></strong>,[<a href="(#SELF|parametre_url{statut,prepa})" class="btn ajax"><:emballe_medias:info_statut_prepa:></a>]})]
+				[(#ENV{statut,prepa}|=={prop}|?{<strong class="btn disabled"><:emballe_medias:info_statut_prop:></strong>,[<a href="(#SELF|parametre_url{statut,prop})" class="btn ajax"><:emballe_medias:info_statut_prop:></a>]})]
+				[(#ENV{statut,prepa}|=={publie}|?{<strong class="btn disabled"><:emballe_medias:info_statut_publies:></strong>,[<a href="(#SELF|parametre_url{statut,publie})" class="btn ajax"><:emballe_medias:info_statut_publies:></a>]})]
 			</div>
 		</li>
 	</ul>

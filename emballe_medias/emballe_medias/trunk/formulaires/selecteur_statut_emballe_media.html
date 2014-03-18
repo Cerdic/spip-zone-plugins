@@ -8,15 +8,13 @@
 	Cette condition est vérifiée par la boucle has_document
 
 ]
-
 #SET{force,non}
-<BOUCLE_has_document(DOCUMENTS){objet=article}{id_objet=#ID_ARTICLE}{statut?}>
+<BOUCLE_has_document(DOCUMENTS){objet=article}{id_objet=#ID_ARTICLE}{tout}>
 #SET{has_document,oui}
 </BOUCLE_has_document>
 </B_has_document>
 #SET{has_document,non}
 <//B_has_document>
-
 [(#ENV{id_article}|non)#SET{force,oui}]
 #SET{statuts_texte,#VAL{article}|table_objet|objet_info{'statut_textes_instituer'}}
 <li class="fieldset diogene_selecteur_statut">
