@@ -17,11 +17,11 @@ The plugin automatically installs the folowing plugins
 - [Easy Sections Translations->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
 - [Easy Article Translations-> http://contrib.spip.net/Traductions-d-articles-autrement-3]
 
-Under Spip 2 or 2.1 it is recommended to install first the Plugin  [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins], before installing "Easy Multilingual Web-site" in order to allow the automatic activation of all the necessary Plugins.
+Under Spip 2 or 2.1 it is recommended to install the Plugin  [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins] first, before installing "Easy Multilingual Web-site" in order to allow the automatic activation of all the necessary Plugins.
 
 The plugin also modifies some skeletons (sommaire.html, rubrique.html and article.html) and some other “includes”.
 
-Once the necessary plugins are activated, simply determine the language of the site in "Configuration" -> "Multilingual" -> "Language options" and your site is multilingual, you can now start writing your content.', # MODIF
+Once the necessary plugins are activated, simply determine the language of the site in "Configuration" -> "Multilingual" -> "Language options" and your site is multilingual, you can now start writing your content.',
 	'multilingue_nom' => 'Easy Multilingual web-site',
 	'multilingue_slogan' => 'Create easily a multilingual site'
 );
