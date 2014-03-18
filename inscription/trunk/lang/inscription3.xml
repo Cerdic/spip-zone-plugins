@@ -1,5 +1,6 @@
 <traduction module="inscription3" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/inscription/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/inscription3?lang_cible=en" total="214" traduits="211" relire="0" modifs="3" nouveaux="0" pourcent="98.60">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/inscription3?lang_cible=en" total="214" traduits="214" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/inscription3?lang_cible=es" total="214" traduits="214" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
