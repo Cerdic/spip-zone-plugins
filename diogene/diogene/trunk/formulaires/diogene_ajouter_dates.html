@@ -1,32 +1,30 @@
 #CACHE{0}
-<li class="fieldset" id="diogene_dates">
-	<ul>
-		[(#ENV{dates_ajoutees}|=={date_full}|oui)
-		<li class="editer editer_date_orig[ (#ENV**{erreurs}|table_valeur{date_orig}|oui)erreur]">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_orig})</span>]
-			<label for="date_orig"><:diogene:champ_date_publication:></label>
-			<input type='text' class='text date' name='date_orig' id='date_orig' size='10' maxlength='10' value="[(#ENV{date_orig})]" />
-			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' value="[(#ENV{heure_orig})]" />]
-		</li>
-		<li class="editer editer_date_redac_orig[ (#ENV**{erreurs}|table_valeur{date_redac_orig}|oui)erreur]">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_redac_orig})</span>]
-			<label for="date_redac_orig" class='date_redac_orig'><:diogene:champ_date_publication_anterieure:></label>
-			<input type='text' class='text date' name='date_redac_orig' id='date_redac_orig' size='10' maxlength='10' value="[(#ENV{date_redac_orig})]" />
-			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_redac_orig' id='heure_redac_orig' size='5' maxlength='5' value="[(#ENV{heure_redac_orig})]" />]
-	    </li>]
-		[(#ENV{dates_ajoutees}|=={date_redac_orig}|oui)
-		<li class="editer editer_date_redac_orig[ (#ENV**{erreurs}|table_valeur{date_redac_orig}|oui)erreur]">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_redac_orig})</span>]
-			<label for="date_redac_orig" class='date_redac_orig'><:diogene:champ_date_publication_anterieure:></label>
-			<input type='text' class='text date' name='date_redac_orig' id='date_redac_orig' size='10' maxlength='10' value="[(#ENV{date_redac_orig})]" />
-			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_redac_orig' id='heure_redac_orig' size='5' maxlength='5' value="[(#ENV{heure_redac_orig})]" />]
-		</li>]
-		[(#ENV{dates_ajoutees}|=={date_orig}|oui)
-		<li class="editer editer_date_orig[ (#ENV**{erreurs}|table_valeur{date_orig}|oui)erreur]">
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_orig})</span>]
-			<label for="date_orig"><:diogene:champ_date_publication:></label>
-			<input type='text' class='text date' name='date_orig' id='date_orig' size='10' maxlength='10' value="[(#ENV{date_orig})]" />
-			[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' maxlength='5' value="[(#ENV{heure_orig})]" />]
-		</li>]
-	</ul>
+
+[(#ENV{dates_ajoutees}|=={date_full}|oui)
+<li class="editer diogene_dates editer_date_orig[ (#ENV**{erreurs}|table_valeur{date_orig}|oui)erreur]">
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_orig})</span>]
+	<label for="date_orig"><:diogene:champ_date_publication:></label>
+	<input type='text' class='text date' name='date_orig' id='date_orig' size='10' maxlength='10' value="[(#ENV{date_orig})]" />
+	[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' value="[(#ENV{heure_orig})]" />]
 </li>
+<li class="editer diogene_dates editer_date_redac_orig[ (#ENV**{erreurs}|table_valeur{date_redac_orig}|oui)erreur]">
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_redac_orig})</span>]
+	<label for="date_redac_orig" class='date_redac_orig'><:diogene:champ_date_publication_anterieure:></label>
+	<input type='text' class='text date' name='date_redac_orig' id='date_redac_orig' size='10' maxlength='10' value="[(#ENV{date_redac_orig})]" />
+	[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_redac_orig' id='heure_redac_orig' size='5' maxlength='5' value="[(#ENV{heure_redac_orig})]" />]
+</li>]
+[(#ENV{dates_ajoutees}|=={date_redac_orig}|oui)
+<li class="editer diogene_dates editer_date_redac_orig[ (#ENV**{erreurs}|table_valeur{date_redac_orig}|oui)erreur]">
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_redac_orig})</span>]
+	<label for="date_redac_orig" class='date_redac_orig'><:diogene:champ_date_publication_anterieure:></label>
+	<input type='text' class='text date' name='date_redac_orig' id='date_redac_orig' size='10' maxlength='10' value="[(#ENV{date_redac_orig})]" />
+	[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_redac_orig' id='heure_redac_orig' size='5' maxlength='5' value="[(#ENV{heure_redac_orig})]" />]
+</li>]
+[(#ENV{dates_ajoutees}|=={date_orig}|oui)
+<li class="editer diogene_dates editer_date_orig[ (#ENV**{erreurs}|table_valeur{date_orig}|oui)erreur]">
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_orig})</span>]
+	<label for="date_orig"><:diogene:champ_date_publication:></label>
+	<input type='text' class='text date' name='date_orig' id='date_orig' size='10' maxlength='10' value="[(#ENV{date_orig})]" />
+	[(#CACHER_HEURE|non)<input type='text' class='text heure' name='heure_orig' id='heure_orig' size='5' maxlength='5' value="[(#ENV{heure_orig})]" />]
+</li>]
+

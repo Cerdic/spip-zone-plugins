@@ -65,8 +65,8 @@
 		<h1 class="h1"><:diogene:erreur:></h1>
 	</div>
 	<div class="texte">
-		<div class="formulaire_spip">
-			<p class="reponse_formulaire_erreur"><:diogene:erreur_objet_publier:></p>
+		<div class="formulaire_spip error">
+			<p class="reponse_formulaire_erreur">[(#ENV{type_objet}|?{<:diogene:erreur_objet_publier_aucun:>,<:diogene:erreur_objet_publier:>})]</p>
 		</div>
 	</div>]
 	[(#GET{contenu}|ou{#GET{contenu_attente_vous}}|ou{#GET{contenu_attente}}|oui)

@@ -214,9 +214,8 @@ function diogene_editer_contenu_objet($flux){
 				if($type=='page')
 					$type='article';
 
-				if ($args['options_complements']['workflow_simplifie']=='on') {
-					$args['contexte']['workflow_simplifie']=$args['options_complements']['workflow_simplifie'];
-				}
+				if ($args['options_complements']['workflow_simplifie'] == 'on')
+					$args['contexte']['workflow_simplifie'] = 'on';
 				
 				$contexte = array(id_table_objet($type)=>$args['contexte'][id_table_objet($type)],'statut'=>$args['contexte']['statut']);
 				if(!test_espace_prive() && find_in_path('formulaires/selecteur_statut_'.$diogene['objet'].'.html'))

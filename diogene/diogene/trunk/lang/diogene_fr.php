@@ -36,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_objet_diogene_max' => 'Le nombre de masques maximum (@max@) pour ce type d’objet (@objet@) est déjà atteint.',
 	'erreur_objet_non_diogene' => 'Ce type d’objet n’est pas pris en compte (@objet@).',
 	'erreur_objet_publier' => 'Le type d’objet que vous souhaitez publier n’existe pas.',
+	'erreur_objet_publier_aucun' => 'Vous ne pouvez publier aucun objet depuis cette page',
 	'erreur_secteur_diogene_inexistant' => 'Attention, la rubrique concernant ce template de formulaire est inexistante.',
 	'erreur_valeur_float' => 'La valeur "@champ@" doit être un nombre',
 	'erreur_valeur_int' => 'La valeur "@champ@" doit être un nombre fixe.',
