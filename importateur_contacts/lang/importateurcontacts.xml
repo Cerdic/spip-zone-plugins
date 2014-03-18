@@ -1,7 +1,8 @@
 <traduction module="importateurcontacts" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/importateur_contacts/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/importateurcontacts?lang_cible=en" total="14" traduits="13" relire="0" modifs="0" nouveaux="1" pourcent="92.86">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/importateurcontacts?lang_cible=en" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/importateurcontacts?lang_cible=es" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">

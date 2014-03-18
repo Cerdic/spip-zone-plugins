@@ -17,6 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_simple' => 'A simple e-mail',
 	'erreur_aucun_fournisseur' => 'No service providing contacts has been found. Please, install at least one contact importation library.',
 	'erreur_aucun_fournisseur_configure' => 'No import contacts service has been activated.',
+	'explications_liste_email' => 'Enter a list of addresses, one per line.
+
+Multiple formats are accepted: "Name of the person &lt;email@domain.tld&gt;", "email@domaine.tld Name of the person", "email@domain.tld".
+',
 
 	// I
 	'importer_bouton_recuperer_contacts' => 'Recover my contacts',
