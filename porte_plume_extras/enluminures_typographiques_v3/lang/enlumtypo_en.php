@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_insertcss' => 'Insert CSS',
 	'cfg_puces' => 'Bullets',
 	'cfg_titraille' => 'Headings',
+	'configuration_typoenluminee' => 'Typographical Enlightments',
 
 	// T
 	'tableau_enregistrer' => 'Save',
