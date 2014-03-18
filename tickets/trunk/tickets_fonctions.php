@@ -313,13 +313,9 @@ function tickets_liste_navigateur($nav=false){
 	return $navs;
 }
 
-// Critere {mots_pargroupe} : "l'article est lie a au moins un mot de chacun des groupes demandes"
-// Ne s'applique que si au moins un mot est demande (si le tableau est vide, on ignore le critère)
-// On ignore la présence de '?' dans le critère
-/*
- * ATTENTION, c'est un peu en cours de dev, il faudrait :
- * - revoir peut être la jonction avec spip_mots
- * - prendre en compte le cas où id_mot[] est un tableau de strings (comme critere_mots) ?
+/* Critere {mots_pargroupe} : "l'article est lie a au moins un mot de chacun des groupes demandes"
+ * Ne s'applique que si au moins un mot est demande (si le tableau est vide, on ignore le critère)
+ * On ignore la présence de '?' dans le critère
  */
 function critere_mots_pargroupe_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 
