@@ -18,12 +18,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'affiche' => 'Affiché',
 	'affiche_mots' => 'afficher le sélecteur de mots clé',
 	'affiche_calendrier' => 'afficher le calendrier',
+    'auteur' => 'Auteur',
 	
 	// C
 	'couleur' => 'Couleur',
 	'ctrl_clic' => 'Ctrl + clic pour sélection multiple',
 	'creation_autorisation_interdite' => 'Vous n\'avez pas les droits pour créer des réservations pour cette ressource',
-
+    'creer' => 'Creer',
 	// D
 	'date_de_debut' => 'Date de début',
 	'date_debut' => 'Début', 
@@ -45,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// G 
 	'gerer_autorisations' => 'Gérer les autorisations',
+    'grappe' => 'Grappe',
 
     // I
     'info_aucun_orr_autorisation' => 'Aucune autorisation',
@@ -118,12 +120,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'suppression_autorisation_interdite' => 'Vous n\'avez pas les droits pour supprimer cette autorisation',
 	'suppression_autorisation_impossible_ressources_liees' => 'Cette autorisation est liée à des ressources: vous ne pouvez pas la supprimer',
-	'supprimer' => 'supprimer',
+	'supprimer' => 'Supprimer',
 	'supprimer_resa' => 'Voulez-vous supprimer la réservation',
 	'semaine' => 'Semaine',
 	'semaine_precedente' => 'Semaine précédente',
 	'semaine_suivante' => 'Semaine suivante',
 	'supprimer_parametre_incorrect' => 'un des parametres transmis est incorrect pour supprimer cette ressource',
+    'seulement_si_propriétaire' => 'Autoriser la modification et la suppression seulement de ses propres réservations',
+    'statut' => 'Statut',
+    'selectionner_droit_statut' => 'Sélectionnez les droits du statut sélectionné',
 
     // T
     'texte_ajouter_orr_autorisation' => 'Ajouter une autorisation',
@@ -148,10 +153,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_types_autorisations' => 'Les types d\'autorisations',
 	'type' => 'Type',
 	'titre_page_configurer' => 'Configurer ORR',
+    'type_utilisateur' => 'Quel type d\'utilisateur voulez vous ?',
 
     // V
     'valeur_autorisation' => 'Droits',
     'voir_autorisations' => 'Voir les autorisations',
+    'voir' => 'Voir',
+    
 );
 
 ?>

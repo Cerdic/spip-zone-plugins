@@ -3,40 +3,39 @@
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 
-	<form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
+    <form name="formulaire_#FORM" action="#ENV{action}" method="post"><div>
     #ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-		[(#PLUGIN{GRAPPES}|?{
-			[(#SAISIE{radio, orr_type}
-				{label=Quel type d'utilisateur voulez vous ?}
-				{datas=#ARRAY{
-					statut, Statut,
-					auteur, Auteur,
-					grappe, Grappe}
-				}
-			)]
-			[(#SAISIE{hidden, val_grappe})]
-			,
-			[(#SAISIE{radio, orr_type}
-				{label=Quel type d'utilisateur voulez vous ?}
-				{defaut=}
-				{datas=#ARRAY{
-					statut, Statut,
-					auteur, Auteur}
-				}
-			)]
+        <ul>
+        [(#PLUGIN{GRAPPES}|?{
+            [(#SAISIE{radio, orr_type}
+                {label=<:orr:type_utilisateur:>}
+                {datas=#ARRAY{
+                    statut, <:orr:statut:>,
+                    auteur, <:orr:auteur:>,
+                    grappe, <:orr:grappe:>}
+                }
+            )]
+            [(#SAISIE{hidden, val_grappe})]
+            ,
+            [(#SAISIE{radio, orr_type}
+                {label=<:orr:type_utilisateur:>}
+                {datas=#ARRAY{
+                    statut, <:orr:statut:>,
+                    auteur, <:orr:auteur:>}
+                }
+            )]
         })]
             <INCLURE{fond=inc/formulaire_selection-type}{ajax=orr_type}>
 
             [(#SAISIE{checkbox, orr_droit}
-                {label=Sélectionnez les droits du statut sélectionné}
+                {label = <:orr:selectionner_droit_statut:>}
                 {defaut=2}
                 {datas=#ARRAY{
-                    V, Voir,
-                    M, Modifier,
-                    C, Créer,
-                    S, Supprimer,
-                    *, uniquement } }
+                    V, <:orr:voir:>,
+                    M, <:orr:modifier:>,
+                    C, <:orr:creer:>,
+                    S, <:orr:supprimer:>,
+                    *, <:orr:seulement_si_propriétaire:>} }
             )]
             
             [(#SAISIE{hidden, val_statut})]
@@ -46,21 +45,28 @@
     </div></form>
 </div>
 <script type="text/javascript" charset="utf-8">
-	function aff_masque() {
-		var choixtype = jQuery("input[name='orr_type']:checked").val();
-		if (typeof(choixtype) != "undefined") {
-			var valtype = jQuery("input[name='val_" + choixtype + "']").val();
-			ajaxReload('orr_type', {
-				args:{
-					choix_type:choixtype,
-					val_type:valtype
-				},
-			});
-		}
-	}
-	
+    function aff_masque() {
+        var choixtype = jQuery("input[name='orr_type']:checked").val();
+        if (typeof(choixtype) != "undefined") {
+            var valtype = jQuery("input[name='val_" + choixtype + "']").val();
+            ajaxReload('orr_type', {
+                args:{
+                    choix_type:choixtype,
+                    val_type:valtype
+                },
+            });
+        }
+    }
+    
     jQuery(document).ready(function(){
-		aff_masque();
-		jQuery("input[name='orr_type']").change(function(event){ aff_masque(); });
-    });
+        jQuery(".choix_S").next('.choix').css("display","none");
+        aff_masque();
+        jQuery("input[name='orr_type']").change(function(event){ aff_masque(); });
+        jQuery("#champ_orr_type_1").click(function(event){
+                jQuery(".choix_S").next('.choix').css("display","block");
+            });
+        jQuery("#champ_orr_type_2, #champ_orr_type_3").click(function(event){
+                jQuery(".choix_S").next('.choix').css("display","none");
+            });
+        });
 </script>

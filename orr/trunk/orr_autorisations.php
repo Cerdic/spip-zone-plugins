@@ -14,7 +14,7 @@ function recherche_autorisation($idressource,$statut_connecte,$autorisation,$id_
 
     // Pour Modifier ou Supprimer une résa, on test si l'auteur connecté est 
     // le propriétaire de la résa
-    $test_auteur = false;
+    $Est_proprio = false;
     if ($id_resa) {
         $all = sql_allfetsel(
             "lien.id_objet" , "spip_orr_reservations_liens AS lien",
@@ -23,7 +23,7 @@ function recherche_autorisation($idressource,$statut_connecte,$autorisation,$id_
                 "lien.id_orr_reservation =". intval($id_resa))
         ); 
         if ($all[0]['id_objet'] == $id_auteur) {
-            $test_auteur = true;
+            $Est_proprio = true;
         }
     }
 
@@ -49,18 +49,18 @@ function recherche_autorisation($idressource,$statut_connecte,$autorisation,$id_
         // Si Modif ou suppression uniquement de ses résas
         // on prépare le test de droits 
         $valeur_statut = array("tous"=>"1","6forum"=>"2","1comite"=>"3","0minirezo"=>"4");
-        $r_test = true;
+        $Test_auto_SM = true;
         if (($autorisation == "S" OR $autorisation == "M"  ) AND 
             ((strpos($r['valeur'],"*") !== false) AND 
             ($valeur_statut[$r['statut']] >= $valeur_statut[$statut_connecte]) AND 
-            $id_resa AND !$test_auteur)) 
-                $r_test = false;
+            $id_resa AND !$Est_proprio)) 
+                $Test_auto_SM = false;
 
     //  Autorisation par statut
         if (($r['type'] == "statut") AND 
             ($valeur_statut[$r['statut']] <= $valeur_statut[$statut_connecte]) AND 
             (strpos($r['valeur'], $autorisation) !== false) AND
-            $r_test) 
+            $Test_auto_SM) 
                 $result = true;
 
     //   autorisation par grappe

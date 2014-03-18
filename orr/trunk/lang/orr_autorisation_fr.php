@@ -24,7 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     //R
     'retirer_lien_orr_autorisation' => 'Supprimer le lien de cette autorisation',
     'retirer_tous_liens_orr_autorisations' => 'Supprimer tous les liens des autorisations',
-
+    
+    //S
+    'seulement_si_propriétaire' => 'Seulement si propriétaire de la réservation',
     //T
     'texte_ajouter_orr_autorisation' => 'Ajouter une autorisation',
     'texte_creer_associer_orr_autorisation' => 'Créer et lier une autorisation',
