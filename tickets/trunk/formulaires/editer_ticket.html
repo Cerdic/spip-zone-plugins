@@ -24,36 +24,12 @@
 				defaut=[(#ENV{id_ticket}|is_numeric|?{'',#SESSION{id_auteur}})],
 				datas=#GET{assignables}})]]
 				
-			[(#SAISIE{selection, tracker,
-				label=<:tickets:champ_type:>,
-				cacher_option_intro=oui,
-				datas=[(#ENV{id_ticket}|tickets_liste_tracker)]})]
-
-			[(#SAISIE{selection, severite,
-				label=<:tickets:champ_severite:>,
-				cacher_option_intro=oui,
-				datas=[(#ENV{id_ticket}|tickets_liste_severite)]})]
-
-			#SET{saisies, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
-			<BOUCLE_saisies(DATA){source table, #GET{saisies}}>
-			[(#VALEUR|tickets_champ_optionnel_actif|oui)
-				[(#SAISIE{selection, #CLE,
-					label=[(#VAL{tickets:champ_}|concat{#CLE}|_T)],
-					cacher_option_intro=oui,
-					datas=[(#VALEUR|tickets_champ_optionnel_actif|array_combine{[(#VAL{extraire_multi}|array_map{[(#VALEUR|tickets_champ_optionnel_actif)]})]})]})]]
-			</BOUCLE_saisies>
-
-			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|oui)
-				[(#SAISIE{selection, navigateur,
-					label=<:tickets:champ_navigateur:>,
-					option_intro='-',
-					datas=[(#REM|tickets_liste_navigateur)]})]]
 
 			<BOUCLE_groupesmots(GROUPES_MOTS){id_groupe IN #ENV{groupesmots}}{par num titre}>
 				[(#SAISIE{mots_groupe, groupemots_#ID_GROUPE, id_groupe=#ID_GROUPE, label=#TITRE, unseul=#UNSEUL})]
 			</BOUCLE_groupesmots>
 
-			[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|?{#SET{explication,<:tickets:explication_description_ticket_ss_nav:>},#SET{explication,<:tickets:explication_description_ticket:>}})]
+			[(#SET{explication,<:tickets:explication_description_ticket:>})]
 			[(#SAISIE{textarea, texte,
 				label=<:tickets:champ_description:>,
 				explication=#GET{explication},

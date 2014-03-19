@@ -96,7 +96,7 @@ function liste_champs_recherche_trier_tickets() {
 	foreach ($groupesmots as $id_groupe) {
 		$recherches[] = 'groupemots_'.$id_groupe;
 	}
-	$recherches = array_merge($recherches, array('recherche','auteurs','date_debut','date_fin','jalon','version','composant','projet','navigateur','assignes','statuts','severites','trackers'));
+	$recherches = array_merge($recherches, array('recherche','auteurs','date_debut','date_fin','assignes','statuts'));
 	
 	return $recherches;
 }
