@@ -3,8 +3,14 @@
 
 <div class="ticket contenu-principal">
 	<div class="cartouche">
+		#SET{url,#URL_PAGE{editer_ticket}|parametre_url{composant,#ENV{composant}}|parametre_url{version,#ENV{version}}|parametre_url{severite,#ENV{severite}}}
+		<BOUCLE_groupesmots_url(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+			[(#ENV{groupemots_#ID_GROUPE}|oui)
+				#SET{url, #GET{url}|parametre_url{groupemots_#ID_GROUPE,#ENV{groupemots_#ID_GROUPE}}}
+			]
+		</BOUCLE_groupesmots_url>
 		[(#AUTORISER{ecrire, ticket}|oui)
-		<a class="i_new" href="[(#URL_PAGE{editer_ticket}|parametre_url{composant,#ENV{composant}}|parametre_url{version,#ENV{version}}|parametre_url{severite,#ENV{severite}})]"><:tickets:creer_ticket:></a>]
+		<a class="i_new" href="#GET{url}"><:tickets:creer_ticket:></a>]
 		<h1 class="titre"><:tickets:tickets:></h1>
 	</div>[(#SET{nb_versions,0})]
 	[(#INCLURE{fond=inclure/vues/vues_tickets,env,ajax})]
