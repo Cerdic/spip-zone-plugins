@@ -111,6 +111,15 @@ function autoriser_article_voir($faire, $type, $id, $qui, $options) {
 	}
 
 	include_spip('public/quete');
+	include_spip('inc/accesrestreint');
+	
+	$publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
+	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+	
+	// Si l'article fait partie des contenus restreints directement, c'est niet
+	if (in_array($id, accesrestreint_liste_objets_exclus('articles', $publique, $id_auteur))) {
+		return false;
+	}
 	
 	// Si on ne connait pas déjà la rubrique, on la cherche suivant l'article
 	if (!isset($options['id_rubrique']) or !$id_rubrique = $options['id_rubrique']) {
@@ -143,6 +152,15 @@ function autoriser_article_voir($faire, $type, $id, $qui, $options) {
 if(!function_exists('autoriser_breve_voir')) {
 function autoriser_breve_voir($faire, $type, $id, $qui, $options) {
 	include_spip('public/quete');
+	include_spip('inc/accesrestreint');
+	
+	$publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
+	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+	
+	// Si la brève fait partie des contenus restreints directement, c'est niet
+	if (in_array($id, accesrestreint_liste_objets_exclus('breves', $publique, $id_auteur))) {
+		return false;
+	}
 	
 	if (!$id_rubrique = $options['id_rubrique']){
 		$breve = quete_parent_lang('spip_breves', $id);
@@ -159,6 +177,15 @@ function autoriser_breve_voir($faire, $type, $id, $qui, $options) {
 if(!function_exists('autoriser_site_voir')) {
 function autoriser_site_voir($faire, $type, $id, $qui, $options) {
 	include_spip('public/quete');
+	include_spip('inc/accesrestreint');
+	
+	$publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
+	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+	
+	// Si le site fait partie des contenus restreints directement, c'est niet
+	if (in_array($id, accesrestreint_liste_objets_exclus('sites', $publique, $id_auteur))) {
+		return false;
+	}
 	
 	if (!$id_rubrique = $options['id_rubrique']){
 		$site = quete_parent_lang('spip_syndic', $id);
@@ -174,10 +201,16 @@ function autoriser_site_voir($faire, $type, $id, $qui, $options) {
  */
 if(!function_exists('autoriser_evenement_voir')) {
 function autoriser_evenement_voir($faire, $type, $id, $qui, $options) {
+	include_spip('inc/accesrestreint');
 	static $evenements_statut;
 	
 	$publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+	
+	// Si l'événement fait partie des contenus restreints directement, c'est niet
+	if (in_array($id, accesrestreint_liste_objets_exclus('evenements', $publique, $id_auteur))) {
+		return false;
+	}
 	
 	if (!isset($evenements_statut[$id_auteur][$publique][$id])){
 		$id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.intval($id));
@@ -194,11 +227,17 @@ function autoriser_evenement_voir($faire, $type, $id, $qui, $options) {
 if(!function_exists('autoriser_document_voir')) {
 function autoriser_document_voir($faire, $type, $id, $qui, $options) {
 	include_spip('public/accesrestreint');
+	include_spip('inc/accesrestreint');
 	static $documents_statut = array();
 	static $where = array();
 	
 	$publique = isset($options['publique']) ? $options['publique'] : !test_espace_prive();
 	$id_auteur = isset($qui['id_auteur']) ? $qui['id_auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+	
+	// Si le document fait partie des contenus restreints directement, c'est niet
+	if (in_array($id, accesrestreint_liste_objets_exclus('documents', $publique, $id_auteur))) {
+		return false;
+	}
 	
 	if (!isset($documents_statut[$id_auteur][$publique][$id])){
 		// il faut hacker la meta "creer_htaccess" le temps du calcul de l'autorisation car le core
