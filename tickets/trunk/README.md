@@ -103,20 +103,27 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 
  * afficher les logos des mots-clés dans la vue groupemots (81327, 81329)
  * simplification du critère de recherche des groupes de mots associables aux tickets (81343)
-
+ * afficher les colonnes de mots dans le tableau de liste de tickets selon la configuration demandée (81469)
+ * afficher le logo d'un mot s'il existe (81470)
+ 
 * fonctionnalités :
 
  * prendre en compte id_mot ou mots dans l'URL de la page d'édition d'un ticket, seulement pour la création d'un nouveau ticket (81342)
- * ajouter les mots-clés dans le formulaire de tri des tickets (81345, 81348)
+ * ajouter les mots-clés dans le formulaire de tri des tickets (81345, 81348, 81451)
+ * nouveau critère {mots_pargroupe} pour n'afficher que les tickets associés à au moins un mot de chacun des groupes passés en paramètre (81384, 81385, 81455, 81456, 81459, 81460)
 
 * configuration :
 
  * suppression de la configuration "tickets/general/lier_mots" qui n'est pas d'utilité, puisque c'est dans la configuration des groupes de mots qu'on spécifie s'ils peuvent ou non être associés à des tickets (81338)
+ * nouveau paramètre "tickets/general/colonnes_groupesmots" pour choisir comment afficher les mots-clés dans les tableaux de tickets (81468)
 
 * bugs :
 
  * dans le formulaire de forum, ne pas ajouter des saisies pour les champs optionnels des tickets car ils ne sont pas traités, seuls l'assignation et le statut le sont (81349)
 
+* divers :
+
+ * factorisation du code (81371)
 
 ### 3.1.0
 
