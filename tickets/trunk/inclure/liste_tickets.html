@@ -201,14 +201,13 @@
 			<td class="#EDIT{version}"><a href="[(#SELF|parametre_url{version,#VERSION**})]">[(#VERSION|sinon{-})]</a></td>
 			][(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 			<td class="#EDIT{jalon}"><a href="[(#SELF|parametre_url{jalon,#JALON**})]">[(#JALON|sinon{-})]</a></td>]
-			<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
-				<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
-			</BOUCLE_si_colonne_mots_unique>
-			<BOUCLE_colonnes_groupesmots_titre(DATA){source table, #GET{colonnes_groupes}}>
-				<td>#INCLURE{fond=vues/groupemots_ticket,id_groupes_mot=#ID_TICKET|concat{-,#VALEUR{id_groupe}},cacher_aucun_resultat=oui,env,ajax}</td>
-			</BOUCLE_colonnes_groupesmots_titre>
-			<//B_si_colonne_mots_unique>
-				
+		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+			<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
+		</BOUCLE_si_colonne_mots_unique>
+		<BOUCLE_colonnes_groupesmots_titre(DATA){source table, #GET{colonnes_groupes}}>
+			<td>#INCLURE{fond=vues/groupemots_ticket,id_groupes_mot=#ID_TICKET|concat{-,#VALEUR{id_groupe}},cacher_aucun_resultat=oui,env,ajax}</td>
+		</BOUCLE_colonnes_groupesmots_titre>
+		<//B_si_colonne_mots_unique>
 			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<td>[(#DATE|affdate)]</td>]
 			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
