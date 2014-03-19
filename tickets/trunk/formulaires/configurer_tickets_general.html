@@ -72,6 +72,17 @@
 						<label><:tickets:cfg_lbl_lier_mots:></label>
 						<p class="explication">#GET{explication}</p>
 					</li>
+					#SET{explication, #VAL{tickets:cfg_lbl_colonnes_groupesmots_explication}|_T{#ARRAY{groupes,#GET{groupes}}}}
+					[(#SAISIE{radio, colonnes_groupesmots,
+						label=<:tickets:cfg_lbl_colonnes_groupesmots:>,
+						explication=#GET{explication},
+						defaut=aucune,
+						datas=[(#ARRAY{
+							aucune,<:tickets:cfg_bouton_radio_aucune_colonne:>,
+							une_par_groupe,<:tickets:cfg_bouton_radio_une_colonne_par_groupe:>,
+							une_par_groupe_important,<:tickets:cfg_bouton_radio_une_colonne_par_groupe_important:>,
+							une_pour_tous,<:tickets:cfg_bouton_radio_une_colonne_pour_tous_les_groupes:>,
+					})]})]
 						
 					<li class="editer editer_tickets_associer">
 						<label><:tickets:info_tickets_cles_association:></label>

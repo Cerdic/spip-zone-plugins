@@ -21,6 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l’utilisation des forums publics.',
+	'cfg_bouton_radio_aucune_colonne' => 'Aucune colonne',
+	'cfg_bouton_radio_une_colonne_par_groupe' => 'Une colonne par groupe de mots',
+	'cfg_bouton_radio_une_colonne_par_groupe_important' => 'Une colonne par groupe de mots important',
+	'cfg_bouton_radio_une_colonne_pour_tous_les_groupes' => 'Une seule colonne contenant tous les groupes de mots',
 	'cfg_bouton_tickets' => 'Tickets',
 	'cfg_descr_autorisations' => 'Cette page de configuration permet de paramétrer les autorisations pour l’écriture, la modification, l’assignation et le commentaire des tickets. Installer le plugin <a href="@url@">Autorité</a> permet d’accéder à d’autres options de configuration, par exemple pour autoriser l’auteur d’un commentaire à le modifier une fois publié.',
 	'cfg_descr_general' => 'Cette page de configuration permet de choisir les valeurs des champs optionnels, la modération des commentaires ainsi que divers autres paramètres.',
@@ -44,6 +48,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets',
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l’espace public plutôt que dans l’espace privé',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d’un sélecteur de navigateur dans le formulaire d’édition de ticket',
+	'cfg_lbl_colonnes_groupesmots' => 'Afficher les mots-clés dans les tableaux',
+	'cfg_lbl_colonnes_groupesmots_explication' => 'Choisir comment afficher les groupes de mots associables aux tickets (<strong>@groupes@</strong>) dans les listes de tickets',
 	'cfg_lbl_composants' => 'Composants',
 	'cfg_lbl_desactiver_public' => 'Désactiver l’accès public',
 	'cfg_lbl_formats_documents_ticket' => 'Formats de documents acceptés',
