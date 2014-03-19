@@ -37,7 +37,7 @@
     
     [(#REM) On récupere les forums liés au ticket ]
     [(#SET{discussion,''})]
-    <BOUCLE_forum(FORUM){id_objet=#ID_TICKET}{objet='ticket'}{!par date}>
+    <BOUCLE_forum(FORUMS){id_objet=#ID_TICKET}{objet='ticket'}{!par date}>
     [(#SET{discussion,[(#GET{discussion}|concat{[(#TEXTE|PtoBR)],'
     ---
     '})]})]
