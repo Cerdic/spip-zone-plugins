@@ -35,6 +35,9 @@
 		|ou{#ENV{navigateur}}
 		|oui)
 		[(#SET{tickets_tries,oui})]	
+	<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}> </BOUCLE_groupesmots>
+		#SET{tickets_tries,oui}
+	</B_groupesmots>
 	]
 	
 	[(#GET{tickets_tries}|!={oui}|oui)
