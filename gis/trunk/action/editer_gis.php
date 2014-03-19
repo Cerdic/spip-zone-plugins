@@ -139,7 +139,7 @@ function gis_associer($id_gis,$objets, $qualif = null){
 }
 
 /**
- * Dossocier un point géolocalisé des objets listes sous forme
+ * Dissocier un point géolocalisé des objets listes sous forme
  * array($objet=>$id_objets,...)
  * $id_objets peut lui meme etre un scalaire ou un tableau pour une liste d'objets du meme type
  *
