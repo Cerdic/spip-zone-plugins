@@ -572,24 +572,29 @@ function action_xmlrpc_serveur_dist(){
 		 * -* login string
 		 * -* pass string
 		 * -* id_rubrique int : obligatoire
+		 * -* tout string "oui" : affiche toutes les rubriques même celles non publiées
 		 */
 		function spip_lire_rubrique($args){
 			if(!intval($args['id_rubrique']) > 0){
 				$erreur = _T('xmlrpc:erreur_identifiant',array('objet'=>'rubrique'));
 				return new IXR_Error(-32601, attribut_html($erreur));
 			}
-			
+			$tout = false;
+			if(isset($args['tout']) && $args['tout'] == 'oui')
+				$tout = true;
+
 			$from = 'spip_rubriques';
 			$where = 'id_rubrique='.intval($args['id_rubrique']);
 			
-			$statut = sql_getfetsel('statut',$from,$where);
+			if(!$tout)
+				$statut = sql_getfetsel('statut',$from,$where);
 			$args_rubrique = array_merge($args,array('id_objet'=>$args['id_rubrique'],'objet'=>'rubrique'));
 			
 			/**
 			 * Si on est identifié
 			 * Si on a un id_rubrique non publié dans la requète on regarde si on a le droit de créer un article dedans
 			 */
-			if(($statut != 'publie') && is_array($GLOBALS['visiteur_session']) && autoriser('creerarticledans','rubrique',$args['id_rubrique'],$GLOBALS['visiteur_session'])){
+			if(!$tout && ($statut != 'publie') && is_array($GLOBALS['visiteur_session']) && autoriser('creerarticledans','rubrique',$args['id_rubrique'],$GLOBALS['visiteur_session'])){
 				$res = $this->read($args_rubrique);
 				if(!$res)
 					return $this->error;
@@ -606,7 +611,7 @@ function action_xmlrpc_serveur_dist(){
 			 * Cas où l'on n'a pas de user/pass
 			 * On liste la rubrique uniquement si publié
 			 */
-			else if($statut == 'publie'){
+			else if($tout || $statut == 'publie'){
 				$res = $this->read($args_rubrique);
 				if(!$res)
 					return $this->error;
@@ -867,11 +872,11 @@ function action_xmlrpc_serveur_dist(){
 			$from = 'spip_documents as documents LEFT JOIN spip_documents_liens as lien ON documents.id_document=lien.id_document';
 			$where = is_array($args['where']) ? $args['where'] : array();
 			$order = is_array($args['tri']) ? $args['tri'] : array('!id_document');
-			
+
 			if(intval($args['id_objet']) && $args['objet']){
 				$where[] = 'lien.id_objet='.intval($args['id_objet']).' AND lien.objet='.sql_quote($args['objet']);
 			}
-			
+
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
 				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
@@ -879,9 +884,9 @@ function action_xmlrpc_serveur_dist(){
 				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = documents.id_document ) ';
 				$where[] = 'resultats.'.$rech_where;
 			}
-			
+
 			$documents_struct = array();
-	
+
 			if($documents = sql_select($what,$from,$where,array(),$order,$args['limite'])){
 				while($document = sql_fetch($documents)){
 					$struct=array();
@@ -930,7 +935,7 @@ function action_xmlrpc_serveur_dist(){
 			}
 
 			$mots_struct = array();
-	
+
 			if($mots = sql_select($what,$from,$where,array(),$order,$args['limite'])){
 				while($mot = sql_fetch($mots)){
 					$struct=array();
@@ -950,17 +955,21 @@ function action_xmlrpc_serveur_dist(){
 		 * Récupère la liste des rubriques
 		 * 
 		 * Arguments possibles :
-		 * -* id_parent
-		 * -* id_secteur
+		 * -* id_parent int
+		 * -* id_secteur int
+		 * -* tout string "oui" : affiche toutes les rubriques même celles non publiées
 		 * -* login string
 		 * -* pass string
 		 * -* where array : conditions à ajouter dans la clause where du select
-		 * -* recherche
+		 * -* recherche string
 		 * -* tri array (un array de champs pour trier)
 		 * -* limite int : le nombre de résultats à retourner
 		 */
 		function spip_liste_rubriques($args){
 			$objet = 'rubrique';
+			$tout = false;
+			if(isset($args['tout']) && $args['tout'] == 'oui')
+				$tout = true;
 
 			$where = is_array($args['where']) ? $args['where'] : array();
 			$where[] = 'rubriques.id_rubrique > 0';
@@ -974,7 +983,7 @@ function action_xmlrpc_serveur_dist(){
 			if(intval($args['id_secteur'])){
 				$where[] = 'rubriques.id_secteur='.intval($id_secteur);
 			}
-			
+
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
 				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
@@ -982,13 +991,13 @@ function action_xmlrpc_serveur_dist(){
 				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = rubriques.id_rubrique ) ';
 				$where[] = 'resultats.'.$rech_where;
 			}
-			
+
 			$categories_struct = array();
 
-			if($cats = sql_select($what,$from,$where,array(),$order,$args['limite'] ? $args['limite'] : 100)){
-				while($cat = sql_fetch($cats)){
+			if($cats = sql_allfetsel($what,$from,$where,array(),$order,$args['limite'] ? $args['limite'] : 100)){
+				foreach($cats as $cat){
 					$struct=array();
-					if($cat['statut'] == 'publie' || autoriser('creerarticledans','rubrique',$cat['id_rubrique'],$GLOBALS['visiteur_session'])){
+					if($tout || $cat['statut'] == 'publie' || autoriser('creerarticledans','rubrique',$cat['id_rubrique'],$GLOBALS['visiteur_session'])){
 						$args['id_rubrique'] = $cat['id_rubrique'];
 						/**
 						 * On utilise la fonction lire_mot pour éviter de dupliquer trop de code
