@@ -90,7 +90,7 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 
 ## Versions
 
-### 3.2.0
+### 3.3.0
 
 * migration de sept champs (severite, tracker, navigateur, projet, composant, version, jalon) vers des groupes de mots-clés :
 
@@ -99,11 +99,13 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
  * les mots-clés créés pour le champ severite ont un logo, correspondant à la puce associée dans les squelettes (81326)
  * les groupes de mots-clés et les mots-clés d'un même groupe sont ordonnés, ce qui permet après migration de tout afficher dans le même ordre (81328, 81335)
  
+### 3.2.0
+
 * squelettes :
 
  * afficher les logos des mots-clés dans la vue groupemots (81327, 81329)
  * simplification du critère de recherche des groupes de mots associables aux tickets (81343)
- * afficher les colonnes de mots dans le tableau de liste de tickets selon la configuration demandée (81469)
+ * afficher les colonnes de mots dans le tableau de liste de tickets selon la configuration demandée (81469, 81474)
  * afficher le logo d'un mot s'il existe (81470)
  
 * fonctionnalités :
