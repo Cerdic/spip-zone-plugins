@@ -103,17 +103,19 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 
 * squelettes :
 
- * afficher les logos des mots-clés dans la vue groupemots (81327, 81329)
  * simplification du critère de recherche des groupes de mots associables aux tickets (81343)
  * afficher les colonnes de mots dans le tableau de liste de tickets selon la configuration demandée (81469, 81474)
- * afficher le logo d'un mot s'il existe (81470)
+ * privé : afficher une liste de tickets associés pour chaque mot d'un groupe (81482)
+ * filtrer le flux RSS des tickets par les mots clés (81476, 81477)
+ * afficher le logo d'un mot s'il existe (81327, 81329, 81470)
+ * report de commits (81478, 81481, 81486)
  
 * fonctionnalités :
 
- * prendre en compte id_mot ou mots dans l'URL de la page d'édition d'un ticket, seulement pour la création d'un nouveau ticket (81342)
+ * prendre en compte groupemots_xx dans l'URL de la page d'édition d'un ticket, seulement pour la création d'un nouveau ticket (81342, 81479, 81480)
  * ajouter les mots-clés dans le formulaire de tri des tickets (81345, 81348, 81451)
  * nouveau critère {mots_pargroupe} pour n'afficher que les tickets associés à au moins un mot de chacun des groupes passés en paramètre (81384, 81385, 81455, 81456, 81459, 81460)
-
+ 
 * configuration :
 
  * suppression de la configuration "tickets/general/lier_mots" qui n'est pas d'utilité, puisque c'est dans la configuration des groupes de mots qu'on spécifie s'ils peuvent ou non être associés à des tickets (81338)
@@ -126,6 +128,8 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 * divers :
 
  * factorisation du code (81371)
+ * coquilles (81483, 81484)
+ * suppression de code obsolete (81485)
 
 ### 3.1.0
 
