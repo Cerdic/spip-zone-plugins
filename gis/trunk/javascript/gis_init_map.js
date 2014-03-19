@@ -139,10 +139,10 @@ gis_init_map = function(mapcfg) {
 				}).addTo(map);
 				geojson.addData(data);
 				if (mapcfg['autocenterandzoom']) {
-					if (data.features.length > 1)
-						map.fitBounds(geojson.getBounds());
-					else
+					if (data.features.length == 1 && data.features[0].geometry.type == 'Point')
 						map.setView(geojson.getBounds().getCenter(), mapcfg['zoom']);
+					else
+						map.fitBounds(geojson.getBounds());
 				}
 				if (mapcfg['open_id'].length)
 					gis_focus_marker(mapcfg['open_id'],map_container.substring(3));
