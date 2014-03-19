@@ -42,23 +42,24 @@ function accesrestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
 }
 
 /**
- * Liste des rubriques contenues dans une zone, directement.
+ * Liste des rubriques contenues dans une zone ou plusieurs zones, directement.
  * pour savoir quelles rubriques on peut decocher
  * si id_zone = '' : toutes les rub en acces restreint
  *
- * @param int|string $id_zone
+ * @param int|string|array $id_zone
+ *		Peut être un identifiant de zone OU un where sql OU un tableau de where
  * @return array
  */
-function accesrestreint_liste_contenu_zone_rub_direct($id_zone) {
+function accesrestreint_liste_contenu_zone_rub_direct($id_zone_ou_where) {
 	include_spip('base/abstract_sql');
 	$liste_rubriques=array();
 	
 	// Liste des rubriques directement liees a la zone
 	$where = array();
-	if (is_numeric($id_zone)) {
-		$where[] = "z.id_zone=".intval($id_zone);
+	if (is_numeric($id_zone_ou_where)) {
+		$where[] = "z.id_zone=".intval($id_zone_ou_where);
 	}
-	elseif ($id_zone) {
+	elseif ($id_zone_ou_where) {
 		$where = $id_zone;
 	}
 
