@@ -303,3 +303,157 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 	return $final_liste_rub_exclues;
 }
 
+/**
+ * Liste les identifiants d'un objet précis contenu dans une ou plusieurs zones
+ *
+ * @param string $objet
+ * 		Le type de l'objet dont on veut avoir les identifiants liés à des zones
+ * @param int|string|array $id_zone_ou_where
+ * 		Peut être un identifiant de zone OU un where sql OU un tableau de where
+ * @return array
+ */
+function accesrestreint_liste_contenu_zone_objets($objet, $id_zone_ou_where){
+	include_spip('base/abstract_sql');
+	
+	// Normalisation du nom
+	$objet = objet_type($objet);
+	$liste_objets = array();
+	
+	// Liste des objets directement liés à la zone
+	$where = array();
+	if (is_numeric($id_zone_ou_where)) {
+		$where[] = "z.id_zone=".intval($id_zone_ou_where);
+	}
+	elseif ($id_zone_ou_where) {
+		$where = $id_zone_ou_where;
+	}
+	
+	// On ajoute de quel objet on parle
+	if (is_array($where)) {
+		$where[] = "zo.objet='$objet'";
+	}
+	else {
+		$where = "($where) AND zo.objet='$objet'";
+	}
+
+	$liste_objets = sql_allfetsel('id_objet', 'spip_zones_liens AS zo INNER JOIN spip_zones AS z ON zo.id_zone=z.id_zone', $where);
+	$liste_objets = array_map('reset', $liste_objets);
+	$liste_objets = array_unique($liste_objets);
+	
+	return $liste_objets;
+}
+
+/**
+ * Lister les identifiants d'un objet précis qui sont restreints pour le visiteur en cours
+ * 
+ * @param string $objets
+ * 		Nom des objets dont on veut la liste : 'articles', 'rubriques', etc
+ * @param bool|string $publique=true
+ * 		Indique si on cherche dans l'espace public (true) ou privé (false) ou partout ('tout')
+ * @param int $id_auteur=NULL
+ * 		Identifiant de l'auteur, sinon le visiteur s'il est connecté
+ * @return array
+ * 		Retourne la liste des identifiants de l'objet choisi
+ */
+function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=NULL){
+	// Cache statique
+	static $liste_objets_exclus = array();
+	static $liste_objets_inclus = array();
+	// Normalisation du nom
+	$objets = table_objet($objets);
+	
+	// Si c'est pour les rubriques, on redirige pour l'instant directement vers l'ancienne fonction
+	if ($objets == 'rubriques') {
+		return accesrestreint_liste_rubriques_exclues($publique, $id_auteur, ($publique == 'tout' ? true : false));
+	}
+	
+	// Si pas d'auteur, on prend le visiteur en cours si connecté
+	if (is_null($id_auteur) AND isset($GLOBALS['visiteur_session']['id_auteur'])) {
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+	}
+	
+	// On ne cherche que si ce n'est pas déjà défini
+	if (
+		!isset($liste_objets_exclus[$objets][$id_auteur][$publique])
+		or !is_array($liste_objets_exclus[$objets][$id_auteur][$publique])
+	) {
+		include_spip('base/abstract_sql');
+		$where = array();
+		
+		// Ne sélectionner que les zones pertinentes
+		if ($publique != 'tout') {
+			if ($publique) {
+				$where[] = "publique='oui'";
+			}
+			else {
+				$where[] = "privee='oui'";
+			}
+		}
+
+		// Si le visiteur est autorisé sur certaines zones publiques,
+		// on sélectionne les objets correspondant aux autres zones,
+		// sinon on selectionne tous les objets de toutes les zones.
+		
+		// Si le visiteur en cours a des zones, on y a accès rapidement
+		if (
+			$GLOBALS['accesrestreint_zones_autorisees']
+			and $id_auteur == $GLOBALS['visiteur_session']['id_auteur']
+		) {
+			$where[] = sql_in('zo.id_zone', $GLOBALS['accesrestreint_zones_autorisees'], 'NOT');
+		}
+		// Sinon on calcule les zones d'un auteur, lorsqu'il y en a un
+		elseif ($id_auteur) {
+			$where[] = sql_in('zo.id_zone', accesrestreint_liste_zones_autorisees('', $id_auteur), 'NOT');
+		}
+
+		// On liste maintenant tous les objets d'un type qui sont dans les zones *non-autorisées*
+		$liste_objets_exclus[$objets][$id_auteur][$publique] = accesrestreint_liste_contenu_zone_objets($objets, $where);
+	}
+	
+	// On stocke la liste finale qui pourra être modifiée suivant l'option ci-dessous
+	$final_liste_objets_exclus = $liste_objets_exclus[$objets][$id_auteur][$publique];
+	
+	// Ouvrir la porte à toute personne ayant au moins une clé
+	if (defined("AR_TYPE_RESTRICTION") AND AR_TYPE_RESTRICTION == "faible") {
+		// Ne faire la recherche que si la variable statique n'est pas déjà définie
+		if (
+			!isset($liste_objets_inclus[$objets][$id_auteur][$publique])
+			or !is_array($liste_objets_inclus[$objets][$id_auteur][$publique])
+		) {
+			include_spip('base/abstract_sql');
+			$where = array();
+			
+			// Ne selectionner que les zones pertinentes
+			if ($publique != 'tout') {
+				if ($publique) {
+					$where[] = "publique='oui'";
+				}
+				else {
+					$where[] = "privee='oui'";
+				}
+			}
+
+			// Calcul des objets dans des zones autorisees
+			if (
+				$GLOBALS['accesrestreint_zones_autorisees']
+				and $id_auteur == $GLOBALS['visiteur_session']['id_auteur']
+			){
+				$where[] = sql_in('zo.id_zone', $GLOBALS['accesrestreint_zones_autorisees']);
+			}
+			elseif ($id_auteur) {
+				$where[] = sql_in('zo.id_zone', accesrestreint_liste_zones_autorisees('', $id_auteur));
+			}
+
+			// On liste maintenant tous les objets d'un type qui sont dans les zones *autorisées*
+			$liste_objets_inclus[$objets][$id_auteur][$publique] = accesrestreint_liste_contenu_zone_objets($objets, $where);
+		}
+
+		// Enfin on retire des éléments exclus, ceux qui finalement sont autorisés
+		$final_liste_objets_exclus = array_diff(
+			$final_liste_objets_exclus,
+			array_intersect($final_liste_objets_exclus, $liste_objets_inclus[$objets][$id_auteur][$publique])
+		);
+	}
+
+	return $final_liste_objets_exclus;
+}

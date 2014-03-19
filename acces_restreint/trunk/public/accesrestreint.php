@@ -80,6 +80,22 @@ function accesrestreint_pre_boucle(&$boucle){
 	return $boucle;
 }
 
+/**
+ * Renvoyer le code de la condition where pour filtrer avec la liste des objets accessibles d'un type précis
+ * 
+ * Attention, cette fonction ne gère pas les héritages, la hiérarchie, mais seulement les objets contenus directement dans des zones.
+ * 
+ * @param string $objets
+ * @param string $primary
+ * @return string
+ */
+function accesrestreint_objets_accessibles_where($objets, $primary, $not='NOT', $_publique=''){
+	if (!$_publique) {
+		$_publique = "!test_espace_prive()";
+	}
+	
+	return "sql_in('$primary', accesrestreint_liste_objets_exclus($objets, $_publique), '$not')";
+}
 
 /**
  * Renvoyer le code de la condition where pour la liste des rubriques accessibles
