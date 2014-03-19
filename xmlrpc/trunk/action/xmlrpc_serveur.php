@@ -584,7 +584,7 @@ function action_xmlrpc_serveur_dist(){
 				$tout = true;
 
 			$from = 'spip_rubriques';
-			$where = 'id_rubrique='.intval($args['id_rubrique']);
+			$where['id_rubrique'] = intval($args['id_rubrique']);
 			
 			if(!$tout)
 				$statut = sql_getfetsel('statut',$from,$where);
@@ -616,7 +616,7 @@ function action_xmlrpc_serveur_dist(){
 				if(!$res)
 					return $this->error;
 				$res['result'][0]['url'] = url_absolue(generer_url_entite($args['id_rubrique'],'rubrique'));
-				if(autoriser('modifier','rubrique',$args['id_rubrique'],$GLOBALS['visiteur_session']))
+				if(isset($GLOBALS['visiteur_session']) && autoriser('modifier','rubrique',$args['id_rubrique'],$GLOBALS['visiteur_session']))
 					$res['result'][0]['modifiable'] = 1;
 				else
 					$res['result'][0]['modifiable'] = 0;
@@ -991,6 +991,9 @@ function action_xmlrpc_serveur_dist(){
 				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = rubriques.id_rubrique ) ';
 				$where[] = 'resultats.'.$rech_where;
 			}
+
+			if(!$tout && !isset($GLOBALS['visiteur_session']))
+				$where['statut'] = 'publie';
 
 			$categories_struct = array();
 
