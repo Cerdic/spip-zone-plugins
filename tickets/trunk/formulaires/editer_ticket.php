@@ -74,31 +74,10 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $associ
 					if(!$valeurs[$champ] && _request($champ))
 						$valeurs[$champ] = _request($champ);
 				}
-				// Si on passe id_mot ou mots dans l'URL, on l'utilise dans le formulaire (que ce soit un tableau ou un indice)
-				$mots = array();
-				if ($r_mots = _request('mots')) {
-					if (is_array($r_mots)) {
-						foreach($r_mots as $id_mot){
-							if (is_numeric($id_mot))
-								$mots = array_merge($mots, array($id_mot));
-						}
-					} else if (is_numeric($r_mots))
-						$mots = array($r_mots);
-				}
-				if ($r_id_mot = _request('id_mot')) {
-					if (is_array($r_id_mot)) {
-						foreach($r_id_mot as $id_mot){
-							if (is_numeric($id_mot))
-								$mots = array_merge($mots, array($id_mot));
-						}
-					} else if (is_numeric($r_id_mot))
-						$mots = array_merge($mots, array($r_id_mot));
-				}
-				if ($mots) {
-					foreach ($valeurs['groupesmots'] as $id_groupe) {
-						if (!$valeurs['groupemots_'.$id_groupe]) {
-							$valeurs['groupemots_'.$id_groupe] = array_map('array_shift', sql_allfetsel("id_mot", "spip_mots", "id_mot IN (".implode($mots,',').")"));
-						}
+				// Si on passe groupemots_xx dans l'URL, on l'utilise dans le formulaire (que ce soit un tableau ou un indice)
+				foreach ($valeurs['groupesmots'] as $id_groupe) {
+					if (!$valeurs['groupemots_'.$id_groupe] AND _request('groupemots_'.$id_groupe)) {
+						$valeurs['groupemots_'.$id_groupe] = _request('groupemots_'.$id_groupe);
 					}
 				}
 			}
