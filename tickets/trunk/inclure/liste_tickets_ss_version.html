@@ -23,6 +23,7 @@
 	-* jalon = string                 Le jalon
 	-* composant = string             Le composant
 	-* projet = string                Le projet
+	-* groupemots_xx = array          Les mots-clés (xx devant être id_groupe d'un groupe associable aux tickets)
 	-* sticked = oui|''               N'afficher que les tickets épinglés ou pas
 	-* objet = string                 N'afficher que les tickets liés à ce type d'objet
 	-* id_objet = int                 Si objet est aussi présent, n'afficher que les tickets liés à cet objet
@@ -38,6 +39,20 @@
 	-* couper = int (160)             La longueur de coupe du texte si affiché
 	-* cacher_texte = string (oui|'') Si oui n'affichera pas le texte des tickets
 ]
+[(#REM) Récupération de la liste des groupes et mots]
+#SET{mots_pargroupe,#ARRAY}
+#SET{colonnes_groupes,#ARRAY}
+<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+	[(#ENV{groupemots_#ID_GROUPE}|oui)
+		#SET{mots_pargroupe, #GET{mots_pargroupe}|array_merge{#ENV{groupemots_#ID_GROUPE}}}
+	]
+	[(#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe}
+		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}
+		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe_important}|et{#OBLIGATOIRE|=={oui}|oui}})
+		#SET{colonnes_groupes, #GET{colonnes_groupes}|push{#ARRAY{id_groupe,#ID_GROUPE,titre,#TITRE}}
+	]
+</BOUCLE_groupesmots>
+
 [(#SET{defaut_tri,#ARRAY{
 	date,#ENV{date_sens,-1},
 	maj,#ENV{date_sens,-1},
@@ -143,7 +158,15 @@
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_jalon_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-				</th>][(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+				</th>]
+			<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+				<th><:tickets:champ_mots_th:></th>
+			</BOUCLE_si_colonne_mots_unique_th>
+				<BOUCLE_colonnes_groupesmots_titre_th(DATA){source table, #GET{colonnes_groupes}}>
+				<th>#VALEUR{titre}</th>
+				</BOUCLE_colonnes_groupesmots_titre_th>
+			<//B_si_colonne_mots_unique_th>
+			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|!={date}|et{#ENV{tri#ENV{tri_nom,_detaillee}}|oui}|oui)[(#TRI{date,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|ou{#ENV{tri#ENV{tri_nom,_detaillee}}|non}|oui)
@@ -159,7 +182,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS spip_tickets_liens){objet ?}{id_objet ?}{recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#LISTE{999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#LISTE{999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version=""}{jalon?}{composant?}{projet?}{sticked?}{tri #ENV{order,date},#GET{defaut_tri},#ENV{tri_nom,detaillee}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_detaillee(TICKETS spip_tickets_liens){objet ?}{id_objet ?}{recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#LISTE{999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#LISTE{999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version=""}{jalon?}{composant?}{projet?}{sticked?}{mots_pargroupe #GET{mots_pargroupe}}{tri #ENV{order,date},#GET{defaut_tri},#ENV{tri_nom,detaillee}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd odd,row_even even})] #STATUT">
 			<td><a href="[(#SELF|parametre_url{statut,#STATUT})]">[(#STATUT|tickets_icone_statut{true})]</a></td>
 			<td><a href="[(#URL_TICKET)]">##ID_TICKET</a></td>
@@ -177,6 +200,13 @@
 			<td class="#EDIT{version}"><a href="[(#SELF|parametre_url{version,#VERSION**})]">[(#VERSION|sinon{-})]</a></td>
 			][(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 			<td class="#EDIT{jalon}"><a href="[(#SELF|parametre_url{jalon,#JALON**})]">[(#JALON|sinon{-})]</a></td>]
+		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+			<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
+		</BOUCLE_si_colonne_mots_unique>
+		<BOUCLE_colonnes_groupesmots_titre(DATA){source table, #GET{colonnes_groupes}}>
+			<td>#INCLURE{fond=vues/groupemots_ticket,id_groupes_mot=#ID_TICKET|concat{-,#VALEUR{id_groupe}},cacher_aucun_resultat=oui,env,ajax}</td>
+		</BOUCLE_colonnes_groupesmots_titre>
+		<//B_si_colonne_mots_unique>
 			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<td>[(#DATE|affdate)]</td>]
 			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
