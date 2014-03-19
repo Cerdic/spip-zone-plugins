@@ -1,0 +1,19 @@
+<paquet
+	prefix="accesrestreintobjets"
+	categorie="auteur"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="accesrestreintobjets.png"
+	documentation=""
+>
+	<nom>Accès restreint sur tous les objets</nom>
+
+	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
+	<licence>GNU/GPL v3</licence>
+
+	<necessite nom="accesrestreint" compatibilite="[3.9.0;]" />
+	
+	<pipeline nom="affiche_milieu" inclure="accesrestreintobjets_pipelines.php" />
+	<pipeline nom="afficher_contenu_objet" inclure="accesrestreintobjets_pipelines.php" />
+</paquet>
