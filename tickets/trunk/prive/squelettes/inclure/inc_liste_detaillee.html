@@ -21,9 +21,7 @@
 <table width="100%" class="spip liste">
 	<thead>
 		<tr>
-			<th colspan="3" style="text-align:center;"><:tickets:champ_titre:></th>[(#ENV{tracker}|non)
-			<th><:tickets:champ_type_th:></th>]
-			<th><:tickets:champ_importance_th:></th>
+			<th colspan="3" style="text-align:center;"><:tickets:champ_titre:></th>
 		<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
 			<th><:tickets:champ_mots_th:></th>
 		</BOUCLE_si_colonne_mots_unique_th>
@@ -36,18 +34,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS){par severite}{par tracker}{!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}{tracker?}{version?}{jalon?}{composant?}{projet?}{mots_pargroupe #GET{mots_pargroupe}}>
+	<BOUCLE_detaillee(TICKETS){!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}{mots_pargroupe #GET{mots_pargroupe}}>
 		<tr>
 			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><b>##ID_TICKET</b></td>
 			<td><a href="[(#ID_TICKET|generer_url_entite{ticket})]">#TITRE</a></td>
-			[(#REM) Si le tracker est explicite, on ne l'affiche pas ]
-			[(#ENV{tracker}|non)
-			<td>[(#TRACKER|tickets_texte_tracker)]</td>]
-			<td>
-				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] />
-				[&nbsp;(#SEVERITE|tickets_texte_severite)]
-			</td>
 		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
 			<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
 		</BOUCLE_si_colonne_mots_unique>

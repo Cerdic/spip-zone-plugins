@@ -26,12 +26,6 @@
 				<div style="color: red;"><:tickets:assigne_a:> <strong>#NOM</strong></div>
 			</BOUCLE_assigne>
 		</div>
-		<div>
-			[<div class="champ">
-				<:tickets:champ_severite:> <strong>(#SEVERITE|tickets_texte_severite)</strong>
-			</div>]
-			[<:tickets:champ_type:> <strong>(#TRACKER|tickets_texte_tracker)</strong>]
-		</div>
 
 		[(#REM) - Date de creation et auteur du ticket]
 		<div class="champ">
@@ -41,17 +35,6 @@
 			</BOUCLE_auteur>
 		</div>
 		<br />
-		[(#REM) - Champs optionnels]
-		[(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
-		<div>
-			[<div><:tickets:champ_projet:> <strong>(#PROJET)</strong></div>]
-			[<div><:tickets:champ_composant:> <strong>(#COMPOSANT)</strong></div>]
-			[<div><:tickets:champ_version:> <strong>(#VERSION)</strong></div>]
-			[<div><:tickets:champ_jalon:> <strong>(#JALON)</strong></div>]
-		</div>]
-		[<div class="champ">
-			<:tickets:champ_navigateur:> (#NAVIGATEUR|tickets_texte_navigateur)
-		</div>]
 </div>
 <!--affiche_milieu-->
 #FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET}

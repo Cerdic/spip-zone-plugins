@@ -8,17 +8,7 @@
 [(#BOITE_OUVRIR)]
 	[(#SET{tris,#ARRAY{
 		asuivre,<:tickets:classement_asuivre:>,
-		type,<:tickets:classement_type:>,
 		assigne,<:tickets:classement_assigne:>}})]
-	[(#VAL{_TICKETS_LISTE_VERSIONS}|defined|ou{#CONFIG{tickets/general/versions}}|oui)
-		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{version,<:tickets:classement_version:>}}})]
-	][(#VAL{_TICKETS_LISTE_JALONS}|defined|ou{#CONFIG{tickets/general/jalons}}|oui)
-		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{jalon,<:tickets:classement_jalon:>}}})]
-	][(#VAL{_TICKETS_LISTE_COMPOSANTS}|defined|ou{#CONFIG{tickets/general/composants}}|oui)
-		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{composant,<:tickets:classement_composant:>}}})]
-	][(#VAL{_TICKETS_LISTE_PROJETS}|defined|ou{#CONFIG{tickets/general/projets}}|oui)
-		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{projet,<:tickets:classement_projet:>}}})]
-	]
 	<BOUCLE_groupesmots_url(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{groupemots_#ID_GROUPE,<:tickets:classement_groupe{groupe=#TITRE}:>}}})]
 		[(#ENV{classement,asuivre}|=={groupemots_#ID_GROUPE}|oui)
