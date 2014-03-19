@@ -94,7 +94,7 @@ function accesrestreint_objets_accessibles_where($objets, $primary, $not='NOT', 
 		$_publique = "!test_espace_prive()";
 	}
 	
-	return "sql_in('$primary', accesrestreint_liste_objets_exclus($objets, $_publique), '$not')";
+	return "sql_in('$primary', accesrestreint_liste_objets_exclus('$objets', $_publique), '$not')";
 }
 
 /**
