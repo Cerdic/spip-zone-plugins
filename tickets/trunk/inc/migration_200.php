@@ -66,6 +66,8 @@ function migrer_champs_vers_mots_cles() {
 					ecrire_config($meta_err,'Erreur - '.$err);
 					continue;
 				}
+				if ($k==='version')
+					ecrire_config('tickets/general/id_groupe_versions',intval($id_groupe));
 				ecrire_config($meta,intval($id_groupe));
 				spip_log(" champ '".$k."' - création du groupe id_groupe = ".$id_groupe, "tickets");
 			} else {
