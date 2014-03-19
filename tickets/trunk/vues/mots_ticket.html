@@ -7,7 +7,7 @@
 <BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 	<BOUCLE_mots(mots){id_objet=#GET{id_ticket}}{objet=ticket}{id_groupe}>
 	<li class="mot"><a href="#URL_MOT" rel="tag">
-		<abbr title="#TYPE:#TITRE [- (#DESCRIPTIF|supprimer_tags)]">#TITRE</abbr>
+		[(#LOGO_MOT|image_reduire{32}) ]<abbr title="#TYPE:#TITRE [- (#DESCRIPTIF|supprimer_tags)]">#TITRE</abbr>
 	</a></li>
 	</BOUCLE_mots>
 	#SET{total_mots,#GET{total_mots}|plus{#_mots:TOTAL_BOUCLE}}
