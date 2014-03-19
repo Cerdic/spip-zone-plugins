@@ -185,6 +185,26 @@ function tickets_classer_par_projet($bidon) {
 	return $page;
 }
 
+// Affichage de la page des tickets classes par mots du groupe de mots
+function tickets_classer_par_groupemot($bidon, $id_groupe) {
+	$page = NULL;
+	if ($id_groupe > 0)
+		//$liste = array_map('array_shift', sql_allfetsel("id_mot,titre", table_objet_sql('mots'), "id_groupe=" . sql_quote($id_groupe)));
+		$liste = sql_allfetsel("id_mot,titre", table_objet_sql('mots'), "id_groupe=" . sql_quote($id_groupe));
+	else
+		$liste = array();
+
+	$i = 0;
+	foreach($liste as $item) {
+		$i += 1;
+		$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
+			array_merge($_GET, array('titre' => $item['titre'], 'statut' => 'ouvert', 'groupemots_'.$id_groupe => array($item['id_mot']), 'bloc' => "_bloc$i")),
+			array('ajax'=>true));
+	}
+
+	return $page;
+}
+
 // creation des fonction de selection de texte
 // encore en truc a reprendre !
 foreach (array('severite', 'tracker', 'statut', 'navigateur') as $nom){

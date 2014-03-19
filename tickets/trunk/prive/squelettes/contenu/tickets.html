@@ -18,15 +18,28 @@
 		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{composant,<:tickets:classement_composant:>}}})]
 	][(#VAL{_TICKETS_LISTE_PROJETS}|defined|ou{#CONFIG{tickets/general/projets}}|oui)
 		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{projet,<:tickets:classement_projet:>}}})]
-	][(#SET{tris,#GET{tris}|array_merge{#ARRAY{termine,<:tickets:classement_termine:>}}})]
+	]
+	<BOUCLE_groupesmots_url(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{groupemots_#ID_GROUPE,<:tickets:classement_groupe{groupe=#TITRE}:>}}})]
+		[(#ENV{classement,asuivre}|=={groupemots_#ID_GROUPE}|oui)
+			#SET{classement, groupemots}
+			#SET{titre, #VAL{tickets:classement_groupe}|_T{#ARRAY{groupe,#TITRE}}}
+			#SET{id_groupe, #ID_GROUPE}
+		]
+	</BOUCLE_groupesmots_url>
+	[(#SET{tris,#GET{tris}|array_merge{#ARRAY{termine,<:tickets:classement_termine:>}}})]
 	<BOUCLE_tri(DATA){source tableau,#GET{tris}}{"<span class='sep'> | </span>"}>
 	<a href="[(#SELF|parametre_url{classement,#CLE})]"[(#ENV{classement}|=={#CLE}|oui) class="on"]>#VALEUR</a>
 	</BOUCLE_tri>
 [(#BOITE_FERMER)]
 
-<h1>[(#VAL{tickets:classement_#ENV{classement,asuivre}}|_T)]</h1>
+<h1>[(#GET{titre,#VAL{tickets:classement_#ENV{classement,asuivre}}|_T})]</h1>
 
+[(#GET{classement}|=={groupemots}|non)
 <INCLURE{fond=prive/squelettes/inclure/inc_classement_#ENV{classement,asuivre}}{env}>
+][(#GET{classement}|=={groupemots}|oui)
+<INCLURE{fond=prive/squelettes/inclure/inc_classement_groupemots,env,id_groupe=#GET{id_groupe,0}}>
+]
 
 <BOUCLE_un_ticket(TICKETS){id_auteur=#SESSION{id_auteur}}{tout}{0,1}>
 	<h2><:tickets:tous_vos_tickets:></h2>

@@ -130,6 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_assigne' => 'Tickets par assignation',
 	'classement_asuivre' => 'Les tickets à suivre',
 	'classement_composant' => 'Tickets par composant',
+	'classement_groupe' => 'Tickets par @groupe@',
 	'classement_jalon' => 'Tickets par jalon',
 	'classement_projet' => 'Tickets par projet',
 	'classement_termine' => 'Tickets terminés',
