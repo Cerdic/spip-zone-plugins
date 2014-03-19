@@ -22,7 +22,7 @@
 			[<div class="champ">
 				<:tickets:champ_statut:> <strong>(#STATUT|tickets_texte_statut)</strong>
 			</div>]
-			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
+			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tout}>
 				<div style="color: red;"><:tickets:assigne_a:> <strong>#NOM</strong></div>
 			</BOUCLE_assigne>
 		</div>
@@ -35,7 +35,7 @@
 
 		[(#REM) - Date de creation et auteur du ticket]
 		<div class="champ">
-			<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>
+			<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tout}>
 			[(#SET{date,[(#_afficher_contenu:DATE|affdate_court)]})]
 			<:tickets:date_creation_auteur{date=#GET{date},nom=#NOM}:>
 			</BOUCLE_auteur>
