@@ -107,15 +107,21 @@
 		</div>]
 	]
 
-	[(#GET{tickets_tries}|=={oui}|oui)
-		[(#SET{statut,[(#ENV{statut}|is_array|?{#ENV{statut},#LISTE{ouvert,resolu,ferme}})]})]
-		[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,afficher_filtres=oui,url_defiltrer=oui,tri=statut,statut=#GET{statut},titre=<:tickets:tickets_tries:>}|sinon{<h3><:tickets:tickets_tries:> (0)</h3><p><:tickets:message_aucun_ticket_recherche:></p>}|trim)
-			<div class="actions rss">
-				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statuts,#ENV{statuts}}|parametre_url{auteurs,#ENV{auteurs}}|parametre_url{assignes,#ENV{assignes}}|parametre_url{trackers,#ENV{trackers}}|parametre_url{composant,#ENV{composant}}|parametre_url{projet,#ENV{projet}}|parametre_url{severite,#ENV{severite}}|parametre_url{version,#ENV{version}}|parametre_url{jalon,#ENV{jalon}}|parametre_url{navigateur,#ENV{navigateur}}|parametre_url{date_debut,#ENV{date_debut}}|parametre_url{date_fin,#ENV{date_fin}})]"><:tickets:suivre_tickets_rss:></a>
-			</div>
-		</div>]
-	]
+<BOUCLE_tries(CONDITION){si #GET{tickets_tries}|=={oui}|oui}>
+	[(#SET{statut,[(#ENV{statut}|is_array|?{#ENV{statut},#LISTE{ouvert,resolu,ferme}})]})]
+	#SET{url,#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statuts,#ENV{statuts}}|parametre_url{auteurs,#ENV{auteurs}}|parametre_url{assignes,#ENV{assignes}}|parametre_url{trackers,#ENV{trackers}}|parametre_url{composant,#ENV{composant}}|parametre_url{projet,#ENV{projet}}|parametre_url{severite,#ENV{severite}}|parametre_url{version,#ENV{version}}|parametre_url{jalon,#ENV{jalon}}|parametre_url{navigateur,#ENV{navigateur}}|parametre_url{date_debut,#ENV{date_debut}}|parametre_url{date_fin,#ENV{date_fin}}}
+	<BOUCLE_groupesmots_url(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
+		[(#ENV{groupemots_#ID_GROUPE}|oui)
+			#SET{url, #GET{url}|parametre_url{groupemots_#ID_GROUPE,#ENV{groupemots_#ID_GROUPE}}}
+		]
+	</BOUCLE_groupesmots_url>
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,afficher_filtres=oui,url_defiltrer=oui,tri=statut,statut=#GET{statut},titre=<:tickets:tickets_tries:>}|sinon{<h3><:tickets:tickets_tries:> (0)</h3><p><:tickets:message_aucun_ticket_recherche:></p>}|trim)
+		<div class="actions rss">
+			<a href="#GET{url}"><:tickets:suivre_tickets_rss:></a>
+		</div>
+	</div>]
+</BOUCLE_tries>
 </div>
 </BOUCLE_si_afficher_public>
 	<p class="notice"><:tickets:message_page_publique_indisponible:></p>
