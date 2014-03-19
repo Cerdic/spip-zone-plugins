@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_maj' => 'MAJ :',
 	'champ_maj_long' => 'Date de mise à jour',
 	'champ_maj_th' => 'MAJ',
+	'champ_mots_th' => 'Mots-clés',
 	'champ_navigateur' => 'Navigateur :',
 	'champ_nouveau_commentaire' => 'Nouveau commentaire',
 	'champ_projet' => 'Projet :',

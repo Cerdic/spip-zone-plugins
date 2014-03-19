@@ -12,5 +12,5 @@
 	</BOUCLE_mots>
 	#SET{total_mots,#GET{total_mots}|plus{#_mots:TOTAL_BOUCLE}}
 </BOUCLE_groupesmots>
-</ul>[(#GET{total_mots}|=={0}|oui)
+</ul>[(#GET{total_mots}|=={0}|et{#ENV{cacher_aucun_resultat}|=={oui}|non})
 <span><:tickets:mots_aucun:></span>]

@@ -41,9 +41,15 @@
 ]
 [(#REM) Récupération de la liste des groupes et mots]
 #SET{mots_pargroupe,#ARRAY}
+#SET{colonnes_groupes,#ARRAY}
 <BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 	[(#ENV{groupemots_#ID_GROUPE}|oui)
 		#SET{mots_pargroupe, #GET{mots_pargroupe}|array_merge{#ENV{groupemots_#ID_GROUPE}}}
+	]
+	[(#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe}
+		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}
+		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe_important}|et{#OBLIGATOIRE|=={oui}|oui}})
+		#SET{colonnes_groupes, #GET{colonnes_groupes}|push{#ARRAY{id_groupe,#ID_GROUPE,titre,#TITRE}}
 	]
 </BOUCLE_groupesmots>
 
@@ -153,7 +159,15 @@
 					[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={jalon}|oui)
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_jalon_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 						[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_jalon_th:>,ajax}|inserer_attribut{rel,nofollow})]]]
-				</th>][(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
+				</th>]
+			<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+				<th><:tickets:champ_mots_th:></th>
+			</BOUCLE_si_colonne_mots_unique_th>
+				<BOUCLE_colonnes_groupesmots_titre_th(DATA){source table, #GET{colonnes_groupes}}>
+				<th>#VALEUR{titre}</th>
+				</BOUCLE_colonnes_groupesmots_titre_th>
+			<//B_si_colonne_mots_unique_th>
+			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<th[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|oui)class="tri[(#ENV{sens#ENV{tri_nom,_detaillee},1}|=={1}|?{' asc',' desc'})]"]>
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|!={date}|et{#ENV{tri#ENV{tri_nom,_detaillee}}|oui}|oui)[(#TRI{date,<:tickets:champ_date_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 				[(#ENV{tri#ENV{tri_nom,_detaillee}}|=={date}|ou{#ENV{tri#ENV{tri_nom,_detaillee}}|non}|oui)
@@ -187,6 +201,14 @@
 			<td class="#EDIT{version}"><a href="[(#SELF|parametre_url{version,#VERSION**})]">[(#VERSION|sinon{-})]</a></td>
 			][(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
 			<td class="#EDIT{jalon}"><a href="[(#SELF|parametre_url{jalon,#JALON**})]">[(#JALON|sinon{-})]</a></td>]
+			<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+				<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
+			</BOUCLE_si_colonne_mots_unique>
+			<BOUCLE_colonnes_groupesmots_titre(DATA){source table, #GET{colonnes_groupes}}>
+				<td>#INCLURE{fond=vues/groupemots_ticket,id_groupes_mot=#ID_TICKET|concat{-,#VALEUR{id_groupe}},cacher_aucun_resultat=oui,env,ajax}</td>
+			</BOUCLE_colonnes_groupesmots_titre>
+			<//B_si_colonne_mots_unique>
+				
 			[(#VAL{date}|in_array{#ENV{champs_caches,#ARRAY}}|non)
 			<td>[(#DATE|affdate)]</td>]
 			[(#VAL{maj}|in_array{#ENV{champs_caches,#ARRAY}}|non)
