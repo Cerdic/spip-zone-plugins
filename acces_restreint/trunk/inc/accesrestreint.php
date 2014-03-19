@@ -46,7 +46,7 @@ function accesrestreint_liste_zones_autorisees($zones='', $id_auteur=NULL) {
  * pour savoir quelles rubriques on peut decocher
  * si id_zone = '' : toutes les rub en acces restreint
  *
- * @param int|string|array $id_zone
+ * @param int|string|array $id_zone_ou_where
  *		Peut être un identifiant de zone OU un where sql OU un tableau de where
  * @return array
  */
@@ -81,13 +81,14 @@ function accesrestreint_liste_contenu_zone_rub_direct($id_zone_ou_where) {
  * liste des rubriques contenues dans une zone, directement ou par heritage.
  *
  * @use calcul_branche_in
- * @param int/string $id_zone
+ * @param int|string|array $id_zone_ou_where
+ *		Peut être un identifiant de zone OU un where sql OU un tableau de where
  * @return array
  */
-function accesrestreint_liste_contenu_zone_rub($id_zone) {
+function accesrestreint_liste_contenu_zone_rub($id_zone_ou_where) {
 	include_spip('inc/rubriques');
 	
-	$liste_rubriques = accesrestreint_liste_contenu_zone_rub_direct($id_zone);
+	$liste_rubriques = accesrestreint_liste_contenu_zone_rub_direct($id_zone_ou_where);
 	if (!count($liste_rubriques)) {
 		return $liste_rubriques;
 	}
@@ -109,13 +110,14 @@ function accesrestreint_liste_contenu_zone_rub($id_zone) {
 /**
  * liste des rubriques d'une zone et leurs rubriques parentes.
  *
- * @param int/string $id_zone
+ * @param int|string|array $id_zone_ou_where
+ *		Peut être un identifiant de zone OU un where sql OU un tableau de where
  * @return array
  */
-function accesrestreint_liste_parentee_zone_rub($id_zone) {
+function accesrestreint_liste_parentee_zone_rub($id_zone_ou_where) {
 	include_spip('inc/rubriques');
 	
-	$liste_rubriques = accesrestreint_liste_contenu_zone_rub_direct($id_zone);
+	$liste_rubriques = accesrestreint_liste_contenu_zone_rub_direct($id_zone_ou_where);
 	if (!count($liste_rubriques)) {
 		return $liste_rubriques;
 	}
