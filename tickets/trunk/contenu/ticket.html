@@ -19,18 +19,11 @@
 		</p>
 	</div>
 
-	[(#REM) Statut, severite, assignement]
+	[(#REM) Statut, assignement, mots]
 	<div class="infos">
 		<dl>
 			[<dt class="statut"><:tickets:champ_statut:></dt><dd class="statut[(#AUTORISER{instituer,ticket,#ID_TICKET}|oui) #EDIT{statut}]">(#INCLURE{fond=vues/ticket_statut,id_ticket=#ID_TICKET,env,ajax})</dd>]
 			[<dt class="assigne"><:tickets:champ_assigne:></dt><dd class="assigne[(#AUTORISER{assigner,ticket,#ID_TICKET}|oui) #EDIT{id_assigne}]">(#INCLURE{fond=vues/ticket_id_assigne,id_ticket=#ID_TICKET,env,ajax})</dd>]
-			[<dt class="severite"><:tickets:champ_severite:></dt><dd class="severite #EDIT{severite}">[(#SEVERITE|tickets_icone_severite{true}) ](#SEVERITE|tickets_texte_severite)</dd>]
-			[<dt class="type"><:tickets:champ_type:></dt><dd class="type #EDIT{tracker}">(#TRACKER|tickets_texte_tracker)</dd>]
-			[<dt class="projet"><:tickets:champ_projet:></dt><dd class="projet #EDIT{projet}">(#PROJET)</dd>]
-			[<dt class="composant"><:tickets:champ_composant:></dt><dd class="composant #EDIT{composant}">(#COMPOSANT)</dd>]
-			[<dt class="version"><:tickets:champ_version:></dt><dd class="version #EDIT{version}">(#VERSION)</dd>]
-			[<dt class="jalon"><:tickets:champ_jalon:></dt><dd class="jalon #EDIT{jalon}">(#JALON)</dd>]
-			[<dt class="navigateur"><:tickets:champ_navigateur:></dt><dd class="navigateur #EDIT{navigateur}">(#NAVIGATEUR|tickets_texte_navigateur)</dd>]
 			<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 				<dt class="mots">#TITRE</dt><dd class="mots groupe#ID_GROUPE #EDIT{groupemots_ticket-#ID_TICKET}">#INCLURE{fond=vues/groupemots_ticket,id_groupes_mot=#ID_TICKET-#ID_GROUPE,env,ajax}</dd>
 			</BOUCLE_groupesmots>
