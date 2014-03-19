@@ -961,13 +961,13 @@ function action_xmlrpc_serveur_dist(){
 		 */
 		function spip_liste_rubriques($args){
 			$objet = 'rubrique';
-			
+
 			$where = is_array($args['where']) ? $args['where'] : array();
 			$where[] = 'rubriques.id_rubrique > 0';
-			$what[] = 'rubriques.id_rubrique';
+			$what[] = 'rubriques.id_rubrique, rubriques.statut';
 			$from = 'spip_rubriques AS rubriques';
 			$order = is_array($args['tri']) ? $args['tri'] : array('!id_rubrique');
-			
+
 			if(intval($args['id_parent'])){
 				$where[] = 'rubriques.id_parent='.intval($args['id_parent']);
 			}
@@ -984,21 +984,11 @@ function action_xmlrpc_serveur_dist(){
 			}
 			
 			$categories_struct = array();
-			
-			if(is_array($GLOBALS['visiteur_session'])){
-				
-			}
-			/**
-			 * Cas où l'on n'a pas de user/pass
-			 * On liste les rubriques publiées
-			 */
-			else{
-				
-			}
-			if($cats = sql_select($what,$from,$where,array(),$order,$args['limite'])){
+
+			if($cats = sql_select($what,$from,$where,array(),$order,$args['limite'] ? $args['limite'] : 100)){
 				while($cat = sql_fetch($cats)){
 					$struct=array();
-					if(autoriser('creerarticledans','rubrique',$cat['id_rubrique'],$GLOBALS['visiteur_session'])){
+					if($cat['statut'] == 'publie' || autoriser('creerarticledans','rubrique',$cat['id_rubrique'],$GLOBALS['visiteur_session'])){
 						$args['id_rubrique'] = $cat['id_rubrique'];
 						/**
 						 * On utilise la fonction lire_mot pour éviter de dupliquer trop de code
@@ -1006,6 +996,7 @@ function action_xmlrpc_serveur_dist(){
 						$struct = $this->spip_lire_rubrique($args);
 						$categories_struct[] = $struct;
 					}
+					
 				}
 			}
 			return $categories_struct;
