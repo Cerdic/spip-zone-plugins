@@ -60,7 +60,7 @@ function accesrestreint_liste_contenu_zone_rub_direct($id_zone_ou_where) {
 		$where[] = "z.id_zone=".intval($id_zone_ou_where);
 	}
 	elseif ($id_zone_ou_where) {
-		$where = $id_zone;
+		$where = $id_zone_ou_where;
 	}
 
 	if (is_array($where)) {
