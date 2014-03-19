@@ -40,26 +40,26 @@ function action_xmlrpc_serveur_dist(){
 			$this->methodes = array(
 				/**
 				 * SPIP API
-				 */
-	            'spip.auth' => 'this:auth',
-	            'spip.logout' => 'this:logout',
-	            'spip.creer_objet' => 'this:spip_creer_objet',
-	            'spip.lire_objet' => 'this:spip_lire_objet',
-	            'spip.supprimer_objet' => 'this:spip_supprimer_objet',
-	            'spip.modifier_objet' => 'this:spip_modifier_objet',
-	            'spip.lire_article' => 'this:spip_lire_article',
-	            'spip.lire_auteur' => 'this:spip_lire_auteur',
-	            'spip.lire_document' => 'this:spip_lire_document',
-	            'spip.lire_forum' => 'this:spip_lire_forum',
-	            'spip.lire_rubrique' => 'this:spip_lire_rubrique',
-	            'spip.lire_mot' => 'this:spip_lire_mot',
-	            'spip.liste_articles' => 'this:spip_liste_articles',
-	            'spip.liste_auteurs' => 'this:spip_liste_auteurs',
-	            'spip.liste_documents' => 'this:spip_liste_documents',
-	            'spip.liste_mots' => 'this:spip_liste_mots',
-	            'spip.liste_rubriques' => 'this:spip_liste_rubriques',
-	            'spip.liste_forums' => 'this:spip_liste_forums'
-	        );
+				*/
+				'spip.auth' => 'this:auth',
+				'spip.logout' => 'this:logout',
+				'spip.creer_objet' => 'this:spip_creer_objet',
+				'spip.lire_objet' => 'this:spip_lire_objet',
+				'spip.supprimer_objet' => 'this:spip_supprimer_objet',
+				'spip.modifier_objet' => 'this:spip_modifier_objet',
+				'spip.lire_article' => 'this:spip_lire_article',
+				'spip.lire_auteur' => 'this:spip_lire_auteur',
+				'spip.lire_document' => 'this:spip_lire_document',
+				'spip.lire_forum' => 'this:spip_lire_forum',
+				'spip.lire_rubrique' => 'this:spip_lire_rubrique',
+				'spip.lire_mot' => 'this:spip_lire_mot',
+				'spip.liste_articles' => 'this:spip_liste_articles',
+				'spip.liste_auteurs' => 'this:spip_liste_auteurs',
+				'spip.liste_documents' => 'this:spip_liste_documents',
+				'spip.liste_mots' => 'this:spip_liste_mots',
+				'spip.liste_rubriques' => 'this:spip_liste_rubriques',
+				'spip.liste_forums' => 'this:spip_liste_forums'
+			);
 			$this->methodes = pipeline('xmlrpc_methodes',$this->methodes);
 		}
 		
@@ -241,7 +241,7 @@ function action_xmlrpc_serveur_dist(){
 				$struct = $this->create($args);
 				if(!$struct)
 					return $this->error ? $this->error : new IXR_Error(-32601, _T('xmlrpc:erreur_impossible_creer_objet',$args));
-            }
+			}
 			if(isset($struct['result']))
 				$struct = $struct['result']['row'];
 			return $struct;
@@ -289,7 +289,7 @@ function action_xmlrpc_serveur_dist(){
 				$struct = $this->update($args);
 				if(!$struct)
 					return $this->error ? $this->error : new IXR_Error(-32601, _T('xmlrpc:erreur_impossible_modifier_objet',$args));
-            }
+			}
 			if(isset($struct['result']))
 				$struct = $struct['result']['row'];
 			return $struct;
@@ -323,7 +323,7 @@ function action_xmlrpc_serveur_dist(){
 				$struct = $this->create($args);
 				if(!$struct)
 					return new IXR_Error(-32601, _T('xmlrpc:erreur_impossible_supprimer_objet',$args));
-            }
+			}
 			if(isset($struct['result']))
 				$struct = $struct['result'][0];
 			return $struct;
@@ -358,7 +358,7 @@ function action_xmlrpc_serveur_dist(){
 				$struct = $this->read($args);
 				if(!$struct)
 					return new IXR_Error(-32601, _T('xmlrpc:erreur_impossible_lire_objet',$args));
-            }
+			}
 			if(isset($struct['result']))
 				$struct = $struct['result'][0];
 			return $struct;
@@ -439,13 +439,13 @@ function action_xmlrpc_serveur_dist(){
 				$erreur = _T('xmlrpc:erreur_identifiant',array('objet'=>'auteur'));
 				return new IXR_Error(-32601, attribut_html($erreur));
 			}
-			
+
 			$from = 'spip_auteurs';
 			$where = 'id_auteur='.intval($args['id_auteur']);
 			
 			$statut = sql_getfetsel('statut',$from,$where);
 			$args_auteur = array_merge($args,array('id_objet'=>$args['id_auteur'],'objet'=>'auteur'));
-			
+
 			/**
 			 * Si on est identifié
 			 * Si on a un id_auteur dans la requète on liste les articles publiés de l'id_auteur en question
@@ -712,7 +712,7 @@ function action_xmlrpc_serveur_dist(){
 				$struct = $this->read($args);
 				if(!$struct)
 					return new IXR_Error(-32601, _T('xmlrpc:erreur_impossible_lire_objet',$args));
-            }
+			}
 			return $struct;
 		}
 		/**
