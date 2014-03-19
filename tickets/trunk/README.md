@@ -90,7 +90,7 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 
 ## Versions
 
-### 3.3.0
+### 4.0.0
 
 * migration de sept champs (severite, tracker, navigateur, projet, composant, version, jalon) vers des groupes de mots-clés :
 
