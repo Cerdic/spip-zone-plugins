@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'autres_tickets_ouverts' => 'Les autres tickets ouverts',
 
 	// C
-	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l’utilisation des forums publics.',
 	'cfg_bouton_radio_aucune_colonne' => 'Aucune colonne',
+	'cfg_bouton_radio_desactiver_forum_public' => 'Désactiver l’utilisation des forums publics.',
 	'cfg_bouton_radio_une_colonne_par_groupe' => 'Une colonne par groupe de mots',
 	'cfg_bouton_radio_une_colonne_par_groupe_important' => 'Une colonne par groupe de mots important',
 	'cfg_bouton_radio_une_colonne_pour_tous_les_groupes' => 'Une seule colonne contenant tous les groupes de mots',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_form_tickets_general' => 'Paramètres généraux',
 	'cfg_groupe_versions' => 'Groupe de mots de versions',
 	'cfg_groupe_versions_aucun' => 'Aucun',
-	'cfg_groupe_versions_explication' => 'Sélectionner, s\'il existe, le groupe de mots qui contient des versions pour la roadmap',
+	'cfg_groupe_versions_explication' => 'Sélectionner, s’il existe, le groupe de mots qui contient des versions pour la roadmap',
 	'cfg_inf_type_autorisation' => 'Si vous choisissez par statut ou par auteur, il vous sera demandé ci-dessous votre sélection de statuts ou d’auteurs.',
 	'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d’auteurs',
 	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d’auteurs',
