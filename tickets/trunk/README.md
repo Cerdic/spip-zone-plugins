@@ -26,37 +26,50 @@ Quelques idées d'évolution du plugin Tickets
 
 ## En cours
 
-### pour 3.2.0 - Migration de 7 champs en groupes de mots clés
+## Versions
 
-Actuellement la table spip_tickets contient sept champs qui servent à décrire sémantiquement les tickets. Pour trois d'entre eux, les choix possibles sont fixés en dur dans le code : severite (bloquant, important, normal, peu_important), tracker (probleme, tache, amélioration) et navigateur (android, firefox...) Les quatre autres sont désactivés par défaut, et ne proposent aucun choix par défaut, mais il est possible d'en ajouter via la page de configuration ou les variables globales : projet, composant, version, jalon.
+### 4.0.0
 
-On pourrait migrer ces 7 champs sous la forme de mots/groupes de mots.
+* migration de sept champs (severite, tracker, navigateur, projet, composant, version, jalon) vers des groupes de mots-clés :
 
-À noter que la création des mots-clés n'aurait lieu que lors de la migration, et pour une installation fraiche, aucun groupe de mots ne serait créé.
+ * migration des sept champs (81543)
+ * fonction de migration (81313, 81319, 81527, 81540, 81544) - voir le détail ci-dessous.
+ * numéro de schema pour la migration : 2.0.0 (81340)
+ * les mots-clés créés pour le champ severite ont un logo, correspondant à la puce associée dans les squelettes (81326)
+ * les groupes de mots-clés et les mots-clés d'un même groupe sont ordonnés, ce qui permet après migration de tout afficher dans le même ordre (81328, 81335)
+ * suppression des sept champs dans les squelettes publics et privés, formulaires, flux RSS, crayons, fonctions, chaînes de langues (81491, 81493, 81495, 81496, 81497, 81498, 81520, 81523, 81529)
+ * option de configuration pour spécifier qu'un groupe de mots contient des "versions" pour la roadmap (81499, 81501)
 
-Plusieurs problèmes se posent :
+* divers :
 
-* gestion des langues (il faudra éditer tous les mots-clés si on ajoute une nouvelle langue, alors que dans le cas des champs, c'est géré par les fichiers de langue, puisque la liste des choix est fermée)
-* tri des tables de tickets : comment choisir les colonnes à afficher si ce sont des groupes de mots-clés, et non plus des champs ? Tous les mots-clés ? Une sélection configurée dans la page de conf des tickets ? Aucun groupe ? Et pour chaque groupe affiché dans la table, comment gérer le tri par colonne dans ces cas ?
-* risques de tout casser pendant la migration
-* pas besoin de supprimer les champs, il suffit de pouvoir les désactiver si on n'en a pas besoin.
+ * changement de version (81490)
+ * légers changements dans le slogan et la description du plugin (81529)
+ * clarification de la page de configuration (81531) et ajout de liens vers les groupes de mots (81546)
+ * formulaire de tri des tickets : option de désélection d'un mot-clé (81539, 81547)
+ 
+#### Details de la migration
 
-Les avantages à migrer les champs sous la forme de mots/groupes de mots sont :
+Jusqu'à 4.0.0, la table spip_tickets contient sept champs qui servent à décrire sémantiquement les tickets. Pour trois d'entre eux, les choix possibles sont fixés en dur dans le code : severite (bloquant, important, normal, peu_important), tracker (probleme, tache, amélioration) et navigateur (android, firefox...) Les quatre autres sont désactivés par défaut, et ne proposent aucun choix par défaut, mais il est possible d'en ajouter via la page de configuration ou les variables globales : projet, composant, version, jalon.
+
+En 4.0.0, on migre ces sept champs vers des mots/groupes de mots liés aux tickets.
+
+À noter que la création des mots-clés n'a lieu que lors de la migration. Pour une installation fraiche 4.0.0, aucun groupe de mots n'est créé.
+
+*Attention, on perd quelques fonctionnalités* (voir 81491 et 81520) :
+
+1. listes de tickets filtrées par `tracker=""`
+2. tri selon un colonne (pas de tri sur les colonnes de mots)
+3. la liste `ss_version` - pas moyen avec le code actuel d'afficher la liste des tickets qui ne sont liés à aucun mot de tel groupe de mots.
+4. gestion des langues (il faut éditer tous les mots-clés si on ajoute une nouvelle langue, alors que dans le cas des champs, c'était géré par les fichiers de langue, puisque la liste des choix était fermée)
+
+En revanche, les avantages avec cette migration sont :
 
 * faciliter la personnalisation des champs et des choix proposés pour chaque champ (objets éditoriaux, au lieu de valeur en configuration = pénible à changer, ou en dur dans le code). Il sera ensuite possible aux responsables du site d'ajouter/modifier/supprimer des niveaux de sévérité du bug, par exemple, modifier la liste de navigateurs, voire également supprimer des critères (si tracker ou composant ne leur paraît pas utile, par exemple) ou en ajouter d'autres (thème du ticket, région géographique concernée, ou tout autre critère qui leur paraisse pertinent).
 * github fait comme ça : chaque projet décide de la sémantique et la classification de ses tickets (encore plus à plat pour github : un seul groupe de mots)
 
-On fera les modifications dans trunk, avec la version 3.2.0. Pour conserver le fonctionnement précédent, utiliser la branche branches/v2 (c'est toujours la version stable, avec ZIP).
+On a décidé de faire la migration automatiquement à la mise à jour du plugin, et non pas sur un déclenchement manuel et par champ, qui était une autre possibilité, afin d'éviter d'avoir à gérer la cohabitation entre les deux situations dans le code.
 
-#### Partie base de données
-
-On décide de faire la migration automatiquement à la mise à jour du plugin, et non pas sur un déclenchement manuel et par champ, qui était une autre possibilité, afin d'éviter d'avoir à gérer la cohabitation entre les deux situations dans le code.
-
-On met à jour la version de la base (schema) à 2.0.0, et dans autorisations, on ajoute
-
-    $maj['2.0.0'] = array(array('maj_tickets_200'));
-
-Dans la fonction `maj_tickets_200()`, on répétera, pour chacun des 7 champs, les étapes suivantes.
+On met à jour la version de la base (schema) à 2.0.0, et on appelle la fonction `migrer_champs_vers_mots_cles()` (dans `inc/migration_200.php`) :
 
 1. Récupérer la liste des choix
 
@@ -66,57 +79,24 @@ On récupère dans un tableau, vide par défaut. Dans les trois premiers cas, c'
 
 Pour le titre, le nom du champ. On ne vérifie pas s'il existe un autre groupe avec le même nom, puisqu'il n'y a pas de condition d'unicité sur le titre. On ne gère pas le multilinguisme (on le laisse aux adminsitrateurs/trices), on met juste le nom dans la langue du site.
 
-Mettre aussi dans le descriptif rapide une indication que le groupe a été créé par le plugin tickets ?
+Dans la configuration du groupe, on sélectionne
 
-Enfin, dans la configuration du groupe :
-
-* cocher (façon de parler) "associable avec tickets"
-* cocher "On ne peut sélectionner qu’un seul mot-clé à la fois dans ce groupe", sauf peut être pour "navigateurs".
-* cocher uniquement "Les mots de ce groupe peuvent être attribués par : les administrateurs du site" et pas les rédacteurs.
+* "associable avec tickets"
+* "champ important" pour `sévérité` et `tracker`
+* "On ne peut sélectionner qu’un seul mot-clé à la fois dans ce groupe", sauf pour `navigateur`.
+* "Les mots de ce groupe peuvent être attribués par : les administrateurs du site" et pas les rédacteurs.
 
 3. Créer les mots-clés
 
-Pour chaque élément du tableau, créer un mot-clé : titre et éventuellement descriptif rapide dans la langue du site.
+Pour chaque élément du tableau, on crée un mot-clé : titre dans la langue du site.
 
 4. Création des liens
 
-Associer chaque ticket au nouveau mot-clé qui correspond à la valeur du champ (si le champ est rempli).
+On associe chaque ticket au mot-clé qui correspond à la valeur du champ (si le champ est rempli).
 
 5. Ménage
 
-Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration des choix possible du champ dans spip_meta.
-
-#### Partie code
-
-1. Virer les textarea dans la page de configuration des tickets.
-2. Virer la configuration "utiliser les mots-clés" - elle n'a pas de sens, puisque c'est géré dans la configuration de chaque groupe de mots (associer ou non avec les tickets). On laisse par contre une explication avec la liste des groupes de mots associables aux tickets, avec lien vers leur page privée, plus un lien globale de gestion des groupes de mots. Si aucun groupe de mots n'est associable aux tickets, un message spécifique pour expliquer qu'on peut lier des mots aux tickets.
-3. Dans les squelettes, tout considérer comme des mots-clés, et non plus comme des champ. Dans les formulaires, les crayons (vues et contrôleurs) et les tables qui listent les tickets. Ne pas oublier de prendre en compte la notion de groupe important (pour obliger à choisir une valeur ? Est-ce que ce choix oblige à remplir le champ, ou non ?) et d'unicité du choix, si cette option du groupe de mots est cochée.
-
-## Versions
-
-### 4.0.0
-
-* migration de sept champs (severite, tracker, navigateur, projet, composant, version, jalon) vers des groupes de mots-clés :
-
- * fonction de migration (81313, 81319, 81527) - voir le détail au dessus.
- * numéro de schema pour la migration : 2.0.0 (81340)
- * les mots-clés créés pour le champ severite ont un logo, correspondant à la puce associée dans les squelettes (81326)
- * les groupes de mots-clés et les mots-clés d'un même groupe sont ordonnés, ce qui permet après migration de tout afficher dans le même ordre (81328, 81335)
- * suppression des 7 champs dans les squelettes publics et privés, formulaires, flux RSS, crayons, fonctions, chaînes de langues (81491, 81493, 81495, 81496, 81497, 81498, 81520, 81523, 81529)
- * option de configuration pour spécifier qu'un groupe de mots contient des "versions" pour la roadmap (81499, 81501)
-
-* divers :
-
- * changement de version (81490)
- * légers changements dans le slogan et la description du plugin (81529)
- * clarification de la page de configuration (81531)
- * formulaire de tri des tickets : option de désélection d'un mot-clé (81539)
- 
-*Attention, on perd quelques fonctionnalités* (voir 81491 et 81520) :
-
-1. listes de tickets filtrées par `tracker=""`
-2. tri selon un colonne (pas de tri sur les colonnes de mots)
-3. la liste `ss_version` - pas moyen avec le code actuel d'afficher la liste des tickets qui ne sont liés à aucun mot de tel groupe de mots.
+On supprime la colonne de la table `spip_tickets`, et l'éventuelle configuration des choix possible du champ dans `spip_meta`.
 
 ### 3.2.0
 
