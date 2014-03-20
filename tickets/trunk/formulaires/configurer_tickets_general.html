@@ -7,18 +7,26 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
+			[(#PLUGIN{medias}|oui)
 			<li class="fieldset">
 				<fieldset>
-				<h3 class="legend"><:tickets:cfg_lgd_champs_optionnels:></h3>
+				<h3 class="legend"><:tickets:cfg_lgd_fichiers:></h3>
 				<ul>
-					[(#PLUGIN{medias}|oui)
 						[(#SAISIE{case, joindre_fichiers,
 							label=<:tickets:cfg_lbl_joindre_fichiers:>,
 							label_case=<:tickets:cfg_lbl_case_joindre_fichiers:>})]
 						[(#SAISIE{input, formats_documents_ticket,
 							label=<:tickets:cfg_lbl_formats_documents_ticket:>,
 							explication=<:tickets:cfg_explication_formats_documents_ticket:>})]
-					]
+				</ul>
+				</fieldset>
+			</li>
+			]
+
+			<li class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_mots:></h3>
+				<ul>
 					#SET{tab_groupes, #ARRAY}
 					<BOUCLE_groupes(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 						#SET{tab_groupes, #GET{tab_groupes}|plus{#ARRAY{#ID_GROUPE,#TITRE}}}
@@ -49,6 +57,14 @@
 						defaut='',
 						option_intro=<:tickets:cfg_groupe_versions_aucun:>,
 						datas=#GET{tab_groupes}})]
+				</ul>
+				</fieldset>
+			</li>
+
+			<li class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_objets:></h3>
+				<ul>
 					<li class="editer editer_tickets_associer">
 						<label><:tickets:info_tickets_cles_association:></label>
 						<INCLURE{fond=formulaires/inc-choisir-tables-liees,selected=#ENV*{tables_liees},name=tables_liees} />
