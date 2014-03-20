@@ -19,6 +19,10 @@ Quelques idées d'évolution du plugin Tickets
 [ ] lier les plugins tickets et agenda pour permettre de créer facilement des dates limites, pour les tickets, et les exporter dans un agenda (CalDAV ?), et même éventuellement déclencher des notifications
 [ ] afficher, au lieu du fil de commentaires, un fil d'activité, mélangeant commentaires et révisions (champs et mots-clés associés ou supprimés) - en passant, on pourrait mettre le texte du ticket dans le flux, come premier commentaire.
 [ ] crayon d'assignation du ticket : afficher la trombinette si gravatar est activé dans le contrôleur -> Non, en tout cas, pas tant que le contrôleur sera un <select> (pas d'images dans les select)
+[ ] flux RSS : inclure les champs (statut, assignation) et les mots-clés associés
+[ ] critère pour afficher la liste des tickets qui ne sont liés à aucun mot de tel groupe de mots (en particulier pour rétablir la liste de tickets "sans version" dans le squelette de roadmap - voir 81520).
+[ ] les listes de tickets ne sont plus filtrées par `tracker=""` (voir 81491 et 81520) - rétablir ce fonctionnement ?
+[ ] les listes de tickets ne sont plus triées selon une colonne - les mots clés ne sont pas "triables" (voir 81520)
 
 ## En cours
 
@@ -94,11 +98,25 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
 
 * migration de sept champs (severite, tracker, navigateur, projet, composant, version, jalon) vers des groupes de mots-clés :
 
- * fonction de migration (81313, 81319) - voir le détail au dessus.
+ * fonction de migration (81313, 81319, 81527) - voir le détail au dessus.
  * numéro de schema pour la migration : 2.0.0 (81340)
  * les mots-clés créés pour le champ severite ont un logo, correspondant à la puce associée dans les squelettes (81326)
  * les groupes de mots-clés et les mots-clés d'un même groupe sont ordonnés, ce qui permet après migration de tout afficher dans le même ordre (81328, 81335)
+ * suppression des 7 champs dans les squelettes publics et privés, formulaires, flux RSS, crayons, fonctions, chaînes de langues (81491, 81493, 81495, 81496, 81497, 81498, 81520, 81523, 81529)
+ * option de configuration pour spécifier qu'un groupe de mots contient des "versions" pour la roadmap (81499, 81501)
+
+* divers :
+
+ * changement de version (81490)
+ * légers changements dans le slogan et la description du plugin (81529)
+ * clarification de la page de configuration (81531)
  
+*Attention, on perd quelques fonctionnalités* (voir 81491 et 81520) :
+
+1. listes de tickets filtrées par `tracker=""`
+2. tri selon un colonne (pas de tri sur les colonnes de mots)
+3. la liste `ss_version` - pas moyen avec le code actuel d'afficher la liste des tickets qui ne sont liés à aucun mot de tel groupe de mots.
+
 ### 3.2.0
 
 * squelettes :
