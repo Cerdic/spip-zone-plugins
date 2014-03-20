@@ -148,9 +148,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_redaction' => 'Quand vous avez terminé la rédaction de votre ticket, sélectionnez le statut « ouvert et discuté ».',
 	'explication_url_exemple' => 'Indiquez ici l’URL d’une page concernée par ce ticket.',
 
-	// G
-	'groupe_aucun_mot' => '-',
-
 	// I
 	'icone_modifier_ticket' => 'Modifier ce ticket',
 	'icone_retour_ticket' => 'Retour au ticket',

@@ -53,8 +53,8 @@
 		<BOUCLE_groupesmots(GROUPES_MOTS){tables_liees==#VAL{'(^|,)tickets($|,)'}}{par num titre}>
 		<li class="editer_#TITRE">
 			<label for="groupemots_#ID_GROUPE">#TITRE</label>
-			<select id="groupemots_#ID_GROUPE" name="groupemots_#ID_GROUPE[]" [(#UNSEUL|=={oui}|non) multiple="multiple" ]size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
-					[(#UNSEUL|=={oui}|oui) <option value=""><:tickets:groupe_aucun_mot:></option>]
+			<select id="groupemots_#ID_GROUPE" name="groupemots_#ID_GROUPE[]" [(#UNSEUL|=={oui}|?{class="chosen-allow_single_deselect",multiple="multiple"}) ]size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
+					[(#UNSEUL|=={oui}|oui) <option value=""></option>]
 				<BOUCLE_mots_groupe(MOTS mots_liens){id_groupe}{mots_liens.objet=ticket}{fusion mots_liens.id_mot}{par num titre}>
 					<option value="#ID_MOT"[(#ID_MOT|in_array{#ENV{groupemots_#ID_GROUPE,#ARRAY}}|oui)selected="selected"]>[(#TITRE|supprimer_numero)]</option>
 				</BOUCLE_mots_groupe>

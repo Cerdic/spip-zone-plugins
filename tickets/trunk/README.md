@@ -110,6 +110,7 @@ Supprimer la colonne de la table spip_tickets, et l'éventuelle configuration de
  * changement de version (81490)
  * légers changements dans le slogan et la description du plugin (81529)
  * clarification de la page de configuration (81531)
+ * formulaire de tri des tickets : option de désélection d'un mot-clé (81539)
  
 *Attention, on perd quelques fonctionnalités* (voir 81491 et 81520) :
 
