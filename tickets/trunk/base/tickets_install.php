@@ -14,9 +14,6 @@ function tickets_declarer_tables_interfaces($interface){
 	
 	$interface['tables_jointures']['spip_tickets'][] = 'forums';
 
-	$interface['table_des_traitements']['COMPOSANT'][] = _TRAITEMENT_TYPO;
-	$interface['table_des_traitements']['VERSION'][] = _TRAITEMENT_TYPO;
-	
 	return $interface;
 }
 
@@ -38,7 +35,7 @@ function tickets_declarer_tables_objets_sql($tables){
 		'info_nb_objets' => 'tickets:info_ticket_nb',
 		'titre' => "titre, '' AS lang",
 		'principale' => 'oui',
-		'champs_editables' => array('titre', 'texte', 'severite', 'tracker', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur','sticked'),
+		'champs_editables' => array('titre', 'texte', 'id_assigne', 'exemple','sticked'),
 		'field'=> array(
 			"id_ticket"	=> "bigint(21) NOT NULL",
 			"titre"	=> "text NOT NULL",
@@ -50,13 +47,6 @@ function tickets_declarer_tables_objets_sql($tables){
 			"ip"	=> "varchar(16) DEFAULT '' NOT NULL",
 			"id_assigne"	=> "bigint(21) NOT NULL",
 			"exemple"	=> "varchar(255) DEFAULT '' NOT NULL",
-			"severite"	=> "integer DEFAULT '0' NOT NULL",
-			"tracker"	=> "integer DEFAULT '0' NOT NULL",
-			"projet"	=> "varchar(60) DEFAULT '' NOT NULL",
-			"composant"	=> "varchar(40) DEFAULT '' NOT NULL",
-			"version"	=> "varchar(255) DEFAULT '' NOT NULL",
-			"jalon"	=> "varchar(30) DEFAULT '' NOT NULL",
-			"navigateur" => "varchar(60) DEFAULT '' NOT NULL",
 			"sticked" 	=> "varchar(3) DEFAULT '' NOT NULL",
 			"maj"	=> "TIMESTAMP"
 		),
@@ -70,11 +60,6 @@ function tickets_declarer_tables_objets_sql($tables){
 		'rechercher_champs' => array(
 			'titre' => 8,
 			'texte' => 8,
-			'severite' => 3,
-			'tracker' => 3,
-			'composant' => 3,
-			'projet' => 3,
-			'jalon' => 3
 		),
 		'rechercher_jointures' => array(
 			'auteur' => array('nom' => 10),
@@ -95,7 +80,7 @@ function tickets_declarer_tables_objets_sql($tables){
 			'poubelle' => _T('tickets:statut_poubelle')
 		),
 		'texte_changer_statut' => 'tickets:texte_ticket_statut',
-		'champs_versionnes' => array('titre','texte','composant','jalon','navigateur','projet','severite','sticked','tracker','version')
+		'champs_versionnes' => array('titre','texte','sticked')
 	);
 	return $tables;
 }

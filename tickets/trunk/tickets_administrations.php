@@ -8,6 +8,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
+include_spip('inc/migration_200');
 
 function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = "0.0";
@@ -63,6 +64,10 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 	);
 	$maj['1.8.0'] = array(
 		array('effacer_config','tickets/general/lier_mots')
+	);
+
+	$maj['2.0.0'] = array(
+		array('migrer_champs_vers_mots_cles')
 	);
 
 	include_spip('base/upgrade');
