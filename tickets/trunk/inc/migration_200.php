@@ -97,7 +97,7 @@ function migrer_champs_vers_mots_cles() {
 					spip_log("   valeur '".$kv."' - mot id_mot = ".$id_mot." déjà créé", "tickets");
 				}
 				// lier les tickets correspondant à ce mot-clé
-				$ids_tickets = array_map('array_shift',sql_allfetsel(id_table_objet('ticket'), table_objet_sql('ticket'), $k."='".$kv."'"));
+				$ids_tickets = array_map('array_shift',sql_allfetsel(id_table_objet('ticket'), table_objet_sql('ticket'), $k."=".sql_quote($kv)));
 				$nb_lies = mot_associer($id_mot, array('ticket'=>$ids_tickets));
 				spip_log('     '.$nb_lies.' tickets liés','tickets');
 			}
