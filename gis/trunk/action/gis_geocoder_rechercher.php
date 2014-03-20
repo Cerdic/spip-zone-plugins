@@ -12,7 +12,7 @@ include_spip("inc/distant");
  * reste est transmis tel quel à Nomatim.
  */
 function action_gis_geocoder_rechercher_dist() {
-	inclure_spip("inc/modifier");
+	include_spip("inc/modifier");
 
 	$mode = _request("mode");
 	if(!$mode || !in_array($mode, array("search", "reverse")))
