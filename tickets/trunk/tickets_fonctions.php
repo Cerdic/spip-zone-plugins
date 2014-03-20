@@ -9,32 +9,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Crée la liste des options du select des champs :
- * -* jalon
- * -* version
- * -* projet
- * -* composant
- * 
- * @param string $nom
- * 		Le nom du champ
- * @return array|false
- * 		Le tableau des valeurs possibles ou false si aucune
- */
-function tickets_champ_optionnel_actif($nom){
-	$constante = '_TICKETS_LISTE_' . strtoupper($nom);
-	if (!defined($constante) && !lire_config('tickets/general/'.$nom))
-		return false;
-	if(defined($constante))
-		$liste = constant($constante);
-	else
-		$liste = lire_config('tickets/general/'.$nom,'');
-
-	if ($liste == '') return false;
-
-	return array_map('trim',explode(':', $liste));
-}
-
-/**
  * 
  * Crée la liste des options du champ select d'assignation de ticket
  * Prend deux arguments optionnels :
@@ -96,95 +70,6 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 	return $options;
 }
 
-// Affichage de la page des tickets classes par version
-function tickets_classer_par_version($bidon) {
-	$page = NULL;
-	if (defined('_TICKETS_LISTE_VERSIONS') OR lire_config('tickets/general/versions')){
-		if (defined('_TICKETS_LISTE_VERSIONS'))
-			$liste = explode(":", _TICKETS_LISTE_VERSIONS);
-		else
-			$liste = explode(":", lire_config('tickets/general/versions'));
-		
-		$liste = array_map('trim',$liste);
-		
-		include_spip('inc/texte');
-		$i = 0;
-		foreach($liste as $_version) {
-			$i += 1;
-			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
-				array_merge($_GET, array('titre' => _T('tickets:champ_version').' '.((strlen($_version) > 0) ? extraire_multi($_version) : _T('tickets:info_sans_version')), 'statut' => 'ouvert', 'version' => $_version, 'bloc' => "_bloc$i")),
-				array('ajax'=>true));
-		}
-	}
-	return $page;
-}
-
-// Affichage de la page des tickets classes par jalon
-function tickets_classer_par_jalon($bidon) {
-	$page = NULL;
-	if (defined('_TICKETS_LISTE_JALONS') OR lire_config('tickets/general/jalons')) {
-		if (defined('_TICKETS_LISTE_JALONS'))
-			$liste = explode(":", _TICKETS_LISTE_JALONS);
-		else
-			$liste = explode(":", lire_config('tickets/general/jalons'));
-			
-		$liste = array_map('trim',$liste);
-		
-		$i = 0;
-		foreach($liste as $_jalon) {
-			$i += 1;
-			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
-				array_merge($_GET, array('titre' => _T('tickets:champ_jalon').' '.$_jalon, 'statut' => 'ouvert', 'jalon' => $_jalon, 'bloc' => "_bloc$i")),
-				array('ajax'=>true));
-		}
-	}
-	return $page;
-}
-
-// Affichage de la page des tickets classes par composant
-function tickets_classer_par_composant($bidon) {
-	$page = NULL;
-	if (defined('_TICKETS_LISTE_COMPOSANTS') OR lire_config('tickets/general/composants')) {
-		if (defined('_TICKETS_LISTE_COMPOSANTS'))
-			$liste = explode(":", _TICKETS_LISTE_COMPOSANTS);
-		else
-			$liste = explode(":", lire_config('tickets/general/composants'));
-			
-		$liste = array_map('trim',$liste);
-		
-		$i = 0;
-		foreach($liste as $_composant) {
-			$i += 1;
-			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
-				array_merge($_GET, array('titre' => _T('tickets:champ_composant').' '.((strlen($_composant) > 0) ? $_composant : _T('tickets:info_sans')), 'statut' => 'ouvert', 'composant' => $_composant, 'bloc' => "_bloc$i")),
-				array('ajax'=>true));
-		}
-	}
-	return $page;
-}
-
-// Affichage de la page des tickets classes par projet
-function tickets_classer_par_projet($bidon) {
-	$page = NULL;
-	if (defined('_TICKETS_LISTE_PROJETS') OR lire_config('tickets/general/projets')) {
-		if (defined('_TICKETS_LISTE_PROJETS'))
-			$liste = explode(":", _TICKETS_LISTE_PROJETS);
-		else
-			$liste = explode(":", lire_config('tickets/general/projets'));
-		
-		$liste = array_map('trim',$liste);
-		
-		$i = 0;
-		foreach($liste as $_projet) {
-			$i += 1;
-			$page .= recuperer_fond('prive/squelettes/inclure/inc_liste_detaillee',
-				array_merge($_GET, array('titre' => _T('tickets:champ_projet').' '.$_projet, 'statut' => 'ouvert', 'projet' => $_projet, 'bloc' => "_bloc$i")),
-				array('ajax'=>true));
-		}
-	}
-	return $page;
-}
-
 // Affichage de la page des tickets classes par mots du groupe de mots
 function tickets_classer_par_groupemot($bidon, $id_groupe) {
 	$page = NULL;
@@ -205,15 +90,12 @@ function tickets_classer_par_groupemot($bidon, $id_groupe) {
 	return $page;
 }
 
-// creation des fonction de selection de texte
-// encore en truc a reprendre !
-foreach (array('severite', 'tracker', 'statut', 'navigateur') as $nom){
-	eval("function tickets_texte_$nom(\$valeur) {
-		\$type = tickets_liste_$nom();
-		if (isset(\$type[\$valeur])) {
-			return \$type[\$valeur];
-		}
-	}");
+// fonction de selection de texte
+function tickets_texte_statut($valeur) {
+	$type = tickets_liste_statut();
+	if (isset($type[$valeur])) {
+		return $type[$valeur];
+	}
 }
 
 function tickets_icone_statut ($niveau,$full=false) {
@@ -280,16 +162,6 @@ function tickets_liste_tracker($id_ticket = null){
 		3 => _T("tickets:type_tache"),
 	);
 	$trackers = pipeline('tickets_liste_tracker',array('args'=>'nom_court','data'=>$trackers));
-	return $trackers;
-}
-
-function tickets_liste_tracker_nom_long($id_ticket = null){
-	$trackers = array(
-		1 => _T("tickets:type_probleme_long"),
-		3 => _T("tickets:type_tache_long"),
-		2 => _T("tickets:type_amelioration_long"),
-	);
-	$trackers = pipeline('tickets_liste_tracker',array('args'=>'nom_long','data'=>$trackers));
 	return $trackers;
 }
 

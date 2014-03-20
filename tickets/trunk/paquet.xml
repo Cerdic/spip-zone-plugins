@@ -20,7 +20,6 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="tickets_liste_tracker" action="" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/tickets_install.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tickets_install.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tickets_install.php" />
