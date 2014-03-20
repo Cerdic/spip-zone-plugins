@@ -1,0 +1,32 @@
+<!-- jQuery and jQuery UI (REQUIRED) -->
+<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+
+<!-- elFinder CSS (REQUIRED) -->
+[<link rel="stylesheet" type="text/css" media="screen" href="(#CHEMIN{lib/elfinder/css/elfinder.min.css})">]
+[<link rel="stylesheet" type="text/css" media="screen" href="(#CHEMIN{lib/elfinder/css/theme.css})">]
+
+<!-- elFinder JS (REQUIRED) -->
+[<script type="text/javascript" src="(#CHEMIN{lib/elfinder/js/elfinder.min.js})"></script>]
+
+<!-- elFinder translation (OPTIONAL) -->
+[<script type="text/javascript" src="(#CHEMIN{lib/elfinder/js/i18n/elfinder.fr.js})"></script>]
+
+<style>
+#navigation{display:none;}
+#page .largeur{width:100%;}
+#page #conteneur{width:100%;}
+#contenu{width:100%;}
+</style>
+		
+<div id="elfinder"></div>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		var elf = $('#elfinder').elfinder({
+			url : '[(#URL_ECRIRE*{'elfinder_connector',id_rubrique=#ENV{id_rubrique}})]',  // connector URL (REQUIRED)
+			lang: '#LANG'             // language (OPTIONAL)
+		}).elfinder('instance');
+	});
+</script>
+

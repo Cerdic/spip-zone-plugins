@@ -1,0 +1,55 @@
+<?php
+
+
+
+include_spip('lib/elfinder/php/elFinderConnector.class');
+include_spip('lib/elfinder/php/elFinder.class');
+include_spip('lib/elfinder/php/elFinderVolumeDriver.class');
+include_spip('inc/elFinderVolumeSPIP.class');
+
+
+/**
+ * Simple function to demonstrate how to control file access using "accessControl" callback.
+ * This method will disable accessing files/folders starting from  '.' (dot)
+ *
+ * @param  string  $attr  attribute name (read|write|locked|hidden)
+ * @param  string  $path  file path relative to volume root directory started with directory separator
+ * @return bool|null
+ **/
+$tab_rub=sql_allfetsel('id_rubrique,titre','spip_rubriques','id_parent=0');
+$tab_temp=array();
+foreach($tab_rub as $rub){
+
+	$tab_temp[]=array(
+			'driver'        => 'SPIP',   // driver for accessing file system (REQUIRED)
+			'path'			=> $rub['id_rubrique'],
+			'id'			=> 'spip_rub'.$rub['id_rubrique'],
+			'root'			=> 0,
+			'alias'			=> $rub['titre'],
+			'tmbPath' => _DIR_RACINE . _NOM_TEMPORAIRES_INACCESSIBLES,
+            'tmbURL' => dirname($_SERVER['PHP_SELF']) . '/../files/.dbtmb/',
+			);
+
+}
+
+
+
+$opts = array(
+	 'debug' => true,
+	'roots' => array(
+			array(
+			'driver'        => 'SPIP',   // driver for accessing file system (REQUIRED)
+			'path'			=> 0,
+			'id'			=> 'spip',
+			'alias'			=> 'racine',
+			'tmbPath' => _DIR_RACINE . _NOM_TEMPORAIRES_INACCESSIBLES,
+            'tmbURL' => dirname($_SERVER['PHP_SELF']) . '/../files/.dbtmb/',
+			)),
+
+);
+// run elFinder
+$connector = new elFinderConnector(new elFinder($opts));
+$connector->run();
+
+
+
