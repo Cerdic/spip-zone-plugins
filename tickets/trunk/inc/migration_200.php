@@ -147,6 +147,73 @@ function nettoyer_migration_champs_vers_mots_cles() {
 	spip_log("**** nettoyage de la migration 2.0.0 - fin ****", "tickets");
 }
 
+function tickets_icone_severite ($niveau,$full=false,$alt=false) {
+	$img = array(
+		1 => "puce-rouge-breve.gif",
+		2 => "puce-orange-breve.gif",
+		3 => "puce-verte-breve.gif",
+		4 => "puce-poubelle-breve.gif"
+		);
+	if($full){
+		$balise_img = charger_filtre('balise_img');
+		$img = $balise_img(find_in_path('prive/images/'.$img[$niveau]));
+		if($alt)
+			$img = inserer_attribut($img,'alt',tickets_texte_severite($niveau));
+		return $img;
+	}
+	else
+		return $img[$niveau];
+}
+
+function tickets_liste_tracker($id_ticket = null){
+	$trackers = array(
+		1 => _T("tickets:type_probleme"),
+		2 => _T("tickets:type_amelioration"),
+		3 => _T("tickets:type_tache"),
+	);
+	$trackers = pipeline('tickets_liste_tracker',array('args'=>'nom_court','data'=>$trackers));
+	return $trackers;
+}
+
+function tickets_liste_severite($id_ticket = null){
+	$severites = array(
+		1 => _T("tickets:severite_bloquant"),
+		2 => _T("tickets:severite_important"),
+		3 => _T("tickets:severite_normal"),
+		4 => _T("tickets:severite_peu_important"),
+	);
+	return $severites;
+}
+
+/**
+ * Liste des navigateurs possibles
+ */
+function tickets_liste_navigateur($nav=false){
+	$navs = array(
+		'tous' => _T('tickets:option_navigateur_tous'),
+		'android2' => 'Android 2.x',
+		'android4' => 'Android 4.x',
+		'firefox4' => 'Firefox <= 4',
+		'firefox10' => 'Firefox <= 10',
+		'firefox15' => 'Firefox <= 15',
+		'firefox20' => 'Firefox <= 20',
+		'chrome10' => 'Google <= 10',
+		'chrome15' => 'Google Chrome <= 15',
+		'chrome20' => 'Google Chrome <= 20',
+		'chrome25' => 'Google Chrome <= 25',
+		'chrome30' => 'Google Chrome > 25',
+		'ie8' => 'Internet Explorer 8',
+		'ie9' => 'Internet Explorer 9',
+		'ie10' => 'Internet Explorer 10',
+		'opera11' => 'Opera 11.x',
+		'opera12' => 'Opera 12.x',
+		'safari4' => 'Safari 4.x',
+		'safari5' => 'Safari 5.x',
+		'safariipad' => 'Safari Ipad',
+		'autre' => _T('tickets:option_navigateur_autre')
+	);
+	return $navs;
+}
 function tickets_liste_projet(){
 	return tickets_liste_champ('_TICKETS_LISTE_PROJETS','tickets/general/projets');
 }
