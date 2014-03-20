@@ -1,6 +1,6 @@
 @import "bootstrap/css/forms.less";
 
-legend {h3}
+legend {&:extend(h3);}
 
 /* Surcharge RTL */
 .rtl {
@@ -124,7 +124,7 @@ form select { width: 80%;}
   color: inherit;
   text-shadow:inherit;
   .border-radius(inherit);
-  fieldset;
+  &:extend(fieldset);
 }
 
 /* Selection des langues */

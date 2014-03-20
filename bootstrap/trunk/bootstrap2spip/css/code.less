@@ -1,7 +1,7 @@
 @import "bootstrap/css/code.less";
 
 code {color:inherit;background-color: @tableBackgroundAccent;white-space:inherit}
-.spip_code {code;color:inherit;background-color: @tableBackgroundAccent;white-space:inherit}
+.spip_code {&:extend(code);color:inherit;background-color: @tableBackgroundAccent;white-space:inherit}
 .spip_code >code {border: none;padding: 0;background: none;color:inherit}
 pre,code,kbd,samp,var,tt,.spip_code,.spip_cadre { #font > #family > .monospace; font-size: 1em; }
 

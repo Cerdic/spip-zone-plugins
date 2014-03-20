@@ -54,7 +54,12 @@ dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;pad
 .postmeta >:first-child >.sep:first-child {display: none}
 
 /* Notes */
-.notes {small; padding-top: @emVertMargin;margin-top: @emVertMargin;max-width: 5*(@gridColumnWidth+@gridGutterWidth);}
+.notes {
+  &:extend(small);
+  padding-top: @emVertMargin;
+  margin-top: @emVertMargin;
+  max-width: 5 * ( @gridColumnWidth + @gridGutterWidth );
+}
 .notes > h2 {border-bottom: 2px solid lighten(@grayLight, 20%);}
 .notes > div p {font-size: inherit;line-height: inherit;font-weight: 200;}
 .notes > div {padding-left: @gridColumnWidth+@gridGutterWidth; position: relative; }
