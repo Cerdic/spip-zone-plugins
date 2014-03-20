@@ -18,6 +18,9 @@ function action_api_oembed_dist(){
 		'callback_jsonp' => _request('callback_jsonp'),
 	);
 
+	// Un pipeline pour pouvoir manipuler les arguments (en ajouter des spécifiques par ex.)
+	$args = pipeline('oembed_liste_arguments',$args);
+
 	$format = ($args['format']=='xml'?'xml':'json');
 
 	$md5 = md5(serialize($args));
