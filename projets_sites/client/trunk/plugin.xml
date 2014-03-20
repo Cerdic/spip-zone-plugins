@@ -1,6 +1,6 @@
 <plugin>
 	<nom><multi>[fr]Sites pour projets - Client</multi></nom>
-	<icon>images/projets_sites_client-32.png</icon>
+	<icon>prive/themes/spip/images/projets_sites_client-32.png</icon>
 	<auteur>Teddy Payet</auteur>
 	<version>0.4.3</version>
 	<etat>dev</etat>
