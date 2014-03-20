@@ -1,5 +1,5 @@
 <BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
-	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
+	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|auteurs|id_auteur|assignes|id_assigne,''})]})]
 	[(#ENV{recherche}|oui)
 		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{recherche,''})]})]
 		<p><:tickets:champ_recherche:> #ENV{recherche}</p>
@@ -16,42 +16,6 @@
 	<BOUCLE_pour_statuts(DATA){source table, #ENV{statuts,#ARRAY}}{', '}>[(#VALEUR|tickets_texte_statut)]</BOUCLE_pour_statuts>
 	</p>
 	</B_pour_statuts>
-	<B_pour_severites>
-	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severites,''})]})]
-	<p><:tickets:champ_type:> 
-	<BOUCLE_pour_severites(DATA){source table, #ENV{severites}}{', '}>[(#VALEUR|tickets_texte_severite)]</BOUCLE_pour_severites>
-	</p>
-	</B_pour_severites>
-	[(#ENV{severite}|oui)
-		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severite,''})]})]
-		<p><:tickets:champ_severite:> [(#ENV{severite}|tickets_texte_severite)]</p>
-	]
-	<B_pour_trackers>
-	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{trackers,''})]})]
-	<p><:tickets:champ_type:> 
-	<BOUCLE_pour_trackers(DATA){source table, #ENV{trackers}}{', '}>[(#VALEUR|tickets_texte_tracker)]</BOUCLE_pour_trackers>
-	</p>
-	</B_pour_trackers>
-	[(#ENV{tracker}|oui)
-		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{tracker,''})]})]
-		<p><:tickets:champ_type:> [(#ENV{tracker}|tickets_texte_tracker)]</p>
-	]
-	[(#ENV{projet}|oui)
-		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{projet,''})]})]
-		<p><:tickets:champ_projet:> #ENV{projet}</p>
-	][(#ENV{composant}|oui)
-		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{composant,''})]})]
-		<p><:tickets:champ_composant:> #ENV{composant}</p>
-	][(#ENV{jalon}|oui)
-		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{jalon,''})]})]
-		<p><:tickets:champ_jalon:> #ENV{jalon}</p>
-	][(#ENV{version}|oui)
-		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{version,''})]})]
-		<p><:tickets:champ_version:> #ENV{version}</p>
-	][(#ENV{navigateur}|oui)
-		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{navigateur,''})]})]
-		<p><:tickets:champ_navigateur:> #ENV{navigateur}</p>
-	]
 	<B_auteurs>
 		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{auteurs,''})]})]
 		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_auteur,''})]})]

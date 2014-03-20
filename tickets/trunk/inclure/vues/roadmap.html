@@ -1,9 +1,9 @@
-<BOUCLE_versions(TICKETS){fusion version}{!par version}{version != ''}>
+<BOUCLE_versions(spip_mots){id_groupe=#CONFIG{tickets/general/id_groupe_versions}}{!par num titre}>
+<B_tickets_versions>
 [(#SET{ouvert,0})][(#SET{resolu,0})][(#SET{ferme,0})]
 <div class="ajax">
-	<B_tickets_versions>
-	[<h2 class="h2">(#VERSION|sinon{<:tickets:info_sans_version:>})[ ((#GRAND_TOTAL))]</h2>]
-	<BOUCLE_tickets_versions(TICKETS){version = #VERSION**}>
+	[<h2 class="h2">(#TITRE|sinon{<:tickets:info_sans_version:>})[ ((#GRAND_TOTAL))]</h2>]
+	<BOUCLE_tickets_versions(TICKETS){id_mot}>
 	[(#STATUT|=={ouvert}|oui)[(#SET{ouvert,#GET{ouvert}|plus{1}})]]
 	[(#STATUT|=={resolu}|oui)[(#SET{resolu,#GET{resolu}|plus{1}})]]
 	[(#STATUT|=={ferme}|oui)[(#SET{ferme,#GET{ferme}|plus{1}})]]
@@ -22,21 +22,9 @@
 		<p class="progress">[(#GET{percent_done}|round)%]</p>
 		<p class="progress_info">[(#GRAND_TOTAL|singulier_ou_pluriel{tickets:info_demande,tickets:info_demandes})][ - (#GET{resolu}|singulier_ou_pluriel{tickets:info_demande_resolue,tickets:info_demandes_resolues})][ - (#GET{ouvert}|singulier_ou_pluriel{tickets:info_demande_ouverte,tickets:info_demandes_ouvertes})][ - (#GET{ferme}|singulier_ou_pluriel{tickets:info_demande_fermee,tickets:info_demandes_fermees})]</p>
 	</div>
-	</B_tickets_versions>
-	[(#INCLURE{fond=inclure/liste_tickets,env,version=#VERSION**,ajax,tracker="",tri_nom=tickets_version_[(#VERSION|replace{'\.',''})],
+	[(#INCLURE{fond=inclure/liste_tickets,env,groupemots_#ID_GROUPE=#LISTE{#ID_MOT},ajax,
 		cacher_texte=oui,
-		champs_caches=#LISTE{version,maj,date},
-		tritickets_version_[(#VERSION|replace{'\.',''})]=statut}|trim)]
+		champs_caches=#LISTE{maj,date}}|trim)]
 </div>
+</B_tickets_versions>
 </BOUCLE_versions>
-<B_tickets_ssversions>
-<div class="ajax">
-	[<h2 class="h2">(#VERSION|sinon{<:tickets:info_sans_version:>})[ ((#GRAND_TOTAL))]</h2>]
-	<BOUCLE_tickets_ssversions(TICKETS){version = ''}> </BOUCLE_tickets_ssversions>
-	[(#INCLURE{fond=inclure/liste_tickets_ss_version,env,ajax,tracker="",tri_nom=tickets_ss_version,
-		cacher_texte=oui,
-		champs_caches=#LISTE{version,maj,date},
-		tritickets_ss_version=statut}|trim)]
-</div>
-</B_tickets_ssversions>
-</B_versions>
