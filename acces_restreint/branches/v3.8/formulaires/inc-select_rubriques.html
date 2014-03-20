@@ -1,0 +1,14 @@
+<B_rubriques>
+<ul class='hierarchie'>
+<li[(#VAL{0}|in_any{#ENV{rubriques}})class='checked']><div class='choix'><input type='checkbox' name='rubriques[]' value='0' id='rub0' [(#VAL{0}|in_any{#ENV{rubriques}})checked='checked']/><label for='rub0'><:info_racine_site:></label></div><ul>
+<BOUCLE_rubriques(RUBRIQUES){racine}{par num titre,titre}{tout}{tout_voir}>
+<li[(#ID_RUBRIQUE|in_any{#ENV{rubriques}})class='checked']><div class='choix'><input type='checkbox' name='rubriques[]' value='#ID_RUBRIQUE' id='rub#ID_RUBRIQUE' [(#ID_RUBRIQUE|in_any{#ENV{rubriques}})checked='checked']/><label for='rub#ID_RUBRIQUE'>#TITRE</label></div><B_enfants><ul>
+<BOUCLE_enfants(RUBRIQUES){id_parent}{par num titre,titre}{tout}{tout_voir}>
+<li[(#ID_RUBRIQUE|in_any{#ENV{rubriques}})class='checked']><div class='choix'><input type='checkbox' name='rubriques[]' value='#ID_RUBRIQUE' id='rub#ID_RUBRIQUE' [(#ID_RUBRIQUE|in_any{#ENV{rubriques}})checked='checked']/><label for='rub#ID_RUBRIQUE'>#TITRE</label></div><BOUCLE_rec(BOUCLE_enfants)/></li>
+</BOUCLE_enfants>
+</ul>
+</B_enfants>
+</li>
+</BOUCLE_rubriques>
+</ul></ul>
+</B_rubriques>

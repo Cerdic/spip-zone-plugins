@@ -1,0 +1,37 @@
+<paquet
+	prefix="accesrestreint"
+	categorie="auteur"
+	version="3.8.11"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/zone-32.png"
+	schema="0.4.2"
+	documentation="http://www.spip-contrib.net/Acces-Restreint-3-0"
+>	
+
+	<nom>Acces Restreint</nom>
+	<!-- Gestion de zones d'acces restreint -->
+
+	<auteur lien="http://www.yterium.net" mail="cedric.morin@yterium.com">Cedric Morin</auteur>
+
+	<copyright>2007-2008</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+
+	<traduire module="accesrestreint" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/accesrestreint.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/accesrestreint.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/accesrestreint.php" />
+	<pipeline nom="pre_boucle" inclure="public/accesrestreint.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="public/accesrestreint.php" />
+	<pipeline nom="accesrestreint_liste_zones_autorisees" action="liste_zones_autorisees" inclure="inc/accesrestreint.php" />
+	<pipeline nom="affiche_milieu" inclure="accesrestreint_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="accesrestreint_pipelines.php" />
+	<pipeline nom="page_indisponible" inclure="accesrestreint_pipelines.php" />
+	<pipeline nom="autoriser" inclure="inc/accesrestreint_autoriser.php" />
+
+	<menu nom="zones" titre="accesrestreint:icone_menu_config" parent="menu_publication" icone="images/zone-16.png" />
+
+	<utilise nom="medias" compatibilite="[;]" />
+</paquet>
