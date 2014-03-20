@@ -31,6 +31,7 @@ function lesscss_compile($style, $contexte = array()){
 
 	$parser = new Less_Parser();
 	$parser->setImportDirs($import_dirs);
+	$parser->relativeUrls = true;
 
 	try {
 		$parser->parse($style,$contexte['file']?url_absolue($contexte['file']):null);
