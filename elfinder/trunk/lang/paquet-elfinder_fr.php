@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // N
-	'elfinder_description' => 'Ce plugin permet de parcourir l\'arborescence de son SPIP sous forme d\'un gestionnaire de fichiers (les rubriques sont des dossiers,les autres objets sont les fichiers) grace à l\'utilisation du script elfinder. Les fonctionnalités basiques des gestionnaire de fichiers sont présentes (déplacer, copier, créer un dossier, charger des fichier). ',
+	'elfinder_description' => 'Ce plugin permet de parcourir l\'arborescence de son site SPIP grâce au gestionnaire de fichiers elFinder (les rubriques sont des dossiers,les autres objets sont les fichiers). Les fonctionnalités basiques des gestionnaires de fichiers sont présentes (déplacer, copier, créer un dossier, charger des fichier). ',
 	'elfinder_slogan' => 'Explorer votre site SPIP',
 );
 ?>
