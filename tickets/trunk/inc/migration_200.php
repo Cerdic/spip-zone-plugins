@@ -114,39 +114,6 @@ function migrer_champs_vers_mots_cles() {
 	spip_log("**** migration 2.0.0 - fin ****", "tickets");
 }
 
-function nettoyer_migration_champs_vers_mots_cles() {
-	include_spip('inc/autoriser');
-	include_spip('action/editer_mot');
-
-	$c = lire_config('tickets/migration_200/champs', array());
-	$supprimer_groupe_mots = charger_fonction('supprimer_groupe_mots','action');
-
-	spip_log("**** nettoyage de la migration 2.0.0 - début ****", "tickets");
-	foreach ($c as $k=>$v) {
-		$meta = 'tickets/migration_200/champs/'.$k.'/valeurs';
-		if (is_array($valeurs = lire_config($meta))) {
-			foreach ($valeurs as $kv=>$vv) {
-				$meta = 'tickets/migration_200/champs/'.$k.'/valeurs/'.$kv.'/id_mot';
-				if (intval($id_mot = lire_config($meta))) {
-					spip_log("   valeur '".$kv."' - suppression du mot id_mot=".$id_mot,"tickets");
-					supprimer_logo_mot($id_mot);
-					mot_supprimer($id_mot);
-					effacer_config('tickets/migration_200/champs/'.$kv.'/valeurs/'.$kv);
-				}
-			}
-		}
-		$meta = 'tickets/migration_200/champs/'.$k.'/id_groupe';
-		if (intval($id_groupe = lire_config($meta))) {
-			spip_log(" champ '".$k."' - suppression de groupe id_groupe=".$id_groupe,"tickets");
-			$supprimer_groupe_mots($id_groupe);
-		}
-		effacer_config('tickets/migration_200/champs/'.$k);
-	}
-	effacer_config('tickets/migration_200/champs');
-	effacer_config('tickets/migration_200');
-	spip_log("**** nettoyage de la migration 2.0.0 - fin ****", "tickets");
-}
-
 function tickets_icone_severite ($niveau,$full=false,$alt=false) {
 	$img = array(
 		1 => "puce-rouge-breve.gif",
