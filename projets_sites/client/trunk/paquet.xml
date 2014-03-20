@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_sites_client"
 	categorie="outil"
-	version="0.4.2"
+	version="0.4.3"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/projets_sites_client-64.png"
@@ -15,7 +15,7 @@
 	<licence>GNU/GPL</licence>
 	<pipeline nom="autoriser" inclure="projets_sites_client_autorisations.php" />
 
-	<necessite nom="saisies" compatibilite="[1.34.2;[" />
+	<necessite nom="saisies" compatibilite="[1.30.0;]" />
 
 	<menu nom="configurer_projets_sites_client" parent="menu_configuration" icone="images/projets_sites_client-16.png" action="configurer_projets_sites_client" titre="projets_sites_client:titre_configurer_projets_sites_client" />
 	<menu nom="info_config" parent="menu_administration" icone="images/projets_sites_client-16.png" action="info_config" titre="projets_sites_client:titre_info_config" />
