@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucun_media_correspondant' => 'Ningún media corresponde a los criterios',
 	'erreur_autorisation_article' => 'No dispone de los derechos necesarios para modificar el artículo solicitado.',
 	'erreur_beforeunload' => 'Está publicando en red un documento',
+	'erreur_config_menu' => 'Este tipo de template solo se puede usar en el espacio público. Debe activar su presencia en el menú del espacio público.',
 	'erreur_conflit_secteur' => 'No puede crear una plantilla para los artículos y para los media dentro de la misma sección',
 	'erreur_demander_validation_titre' => 'Ha solicitado modificar el título o algunos medias tienen ya un título personalizado. Marque por favor la siguiente casilla para imponer la modificación de los títulos.',
 	'erreur_diogene_multiple' => 'No puede tener más que una sola plantilla "envuelve média" en este sitio',
