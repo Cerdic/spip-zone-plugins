@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_objet_diogene_max' => 'El número máximo de plantillas (@max@) para este tipo de objeto (@objet@) ya se ha alcanzado.',
 	'erreur_objet_non_diogene' => 'Este tipo de objeto no se ha tenido en cuenta (@objet@).',
 	'erreur_objet_publier' => 'El tipo de objeto que desea publicar no existe.',
+	'erreur_objet_publier_aucun' => 'No puede publicar ningún objeto desde esta página',
 	'erreur_secteur_diogene_inexistant' => 'Atención, la sección que concierne a esta plantilla de formulario no existe.',
 	'erreur_valeur_float' => 'El valor "@champ@" debe ser un número',
 	'erreur_valeur_int' => 'El valor "@champ@" debe ser un número fijo. ',
