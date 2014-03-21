@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'tickets_description' => '{Tickets} es una herramienta de seguimiento de errores de software (bugs) directamente integrada en el espacio privado de SPIP. Es conocida por facilitar la fase de desarrollo del sitio (especialmente los esqueletos del sitio público).',
+	'tickets_description' => '{Tickets} es una herramienta de seguimiento de errores de software (bugs) directamente integrada en el espacio privado de SPIP. Es conocida por facilitar la fase de desarrollo del sitio (especialmente los esqueletos del sitio público).', # MODIF
 	'tickets_nom' => 'Tickets',
-	'tickets_slogan' => 'Sistema de seguimiento de errores de software (bugs)'
+	'tickets_slogan' => 'Sistema de seguimiento de errores de software (bugs)' # MODIF
 );
 
 ?>

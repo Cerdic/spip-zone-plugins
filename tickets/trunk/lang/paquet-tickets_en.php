@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
-	'tickets_description' => '{Bug reports} is a bug tracking tool integrated into SPIP. It is designed to facilitate the development phase of the site.',
+	'tickets_description' => '{Bug reports} is a bug tracking tool integrated into SPIP. It is designed to facilitate the development phase of the site.', # MODIF
 	'tickets_nom' => 'Bug reports',
-	'tickets_slogan' => 'Bug tracking system'
+	'tickets_slogan' => 'Bug tracking system' # MODIF
 );
 
 ?>
