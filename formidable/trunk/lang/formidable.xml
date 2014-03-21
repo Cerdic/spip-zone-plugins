@@ -8,7 +8,7 @@
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="twelf" lien="http://trad.spip.net/auteur/twelf" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=es" total="175" traduits="171" relire="0" modifs="0" nouveaux="4" pourcent="97.71">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=es" total="175" traduits="175" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 		<traducteur nom="tin" lien="http://trad.spip.net/auteur/tin" />
 	</langue>
