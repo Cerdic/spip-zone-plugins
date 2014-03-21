@@ -24,7 +24,7 @@ function nivoslider_affichage_final($texte){
 		$js = find_in_path('javascript/jquery.nivo.slider.pack.js');
 		lire_fichier(find_in_path('javascript/nivoslider.init.js'),$init);
 		$ins = '<script type="text/javascript">/*<![CDATA[*/
-jQuery.getScript("'.$js.'",function(){'.$init.'});/*]]>*/</script>';
+if (typeof jQuery.fn.nivoSlider=="undefined") jQuery.getScript("'.$js.'",function(){'.$init.'});/*]]>*/</script>';
 		$texte = substr_replace($texte,$ins,$p,0);
 	}
 	return $texte;
@@ -36,12 +36,13 @@ jQuery.getScript("'.$js.'",function(){'.$init.'});/*]]>*/</script>';
  * evite de charger toutes les images directement
  * @param string $img
  * @param int $compteur
- * @param bool|string $controlNavThumbs
+ * @param bool|string $nolazy
+ *   don't use lazy load if true
  * @return string
  */
-function nivoslider_img_display_first_only($img, $compteur, $controlNavThumbs){
+function nivoslider_img_display_first_only($img, $compteur, $nolazy){
 	// charger l'image directement si c'est la premiere ou si on a active la navigation par vignette
-	if ($compteur==1 OR $controlNavThumbs===true OR $controlNavThumbs==="true") return $img;
+	if ($compteur==1 OR ($nolazy!=false AND $nolazy!=="false")) return $img;
 
 	$src = extraire_attribut($img,"src");
 	$img = inserer_attribut($img,"data-src",$src);

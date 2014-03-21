@@ -47,7 +47,7 @@
 [(#SET{controlNavThumbsHeight,[(#ENV{controlNavThumbsHeight, #CONFIG{nivoslider/controlNavThumbsHeight,50} })]} )]
 
 [(#SET{uniqid,#ENV|md5|substr{0,8}})]
-
+#SET{nolazy,#ENV{nolazy,#GET{controlNavThumbs}|=={'true'}|oui}}
 <B_doc>
 <div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})]'
 	[(#GET{resize}|=={oui}|oui)style="[max-width:(#GET{width})px;][max-height:(#GET{height})px]"]>
@@ -109,7 +109,7 @@
 				})]
 				})][(#SET{img,[(#GET{img}
 				|inserer_attribut{title,#TITRE}
-		    |nivoslider_img_display_first_only{#COMPTEUR_BOUCLE,#GET{controlNavThumbs}}
+		    |nivoslider_img_display_first_only{#COMPTEUR_BOUCLE,#GET{nolazy}}
 		    |inserer_attribut{class,'no_image_filtrer no-adapt-img'})]
 		})][(#GET{controlNavThumbs}|=={'true'}|?{
 			[(#GET{img}|inserer_attribut{data-thumb,#FICHIER|image_passe_partout{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight}}|image_recadre{#GET{controlNavThumbsWidth},#GET{controlNavThumbsHeight},center,ffffff}|extraire_attribut{src}})]
