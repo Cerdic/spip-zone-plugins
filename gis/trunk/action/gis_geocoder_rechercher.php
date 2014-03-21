@@ -19,7 +19,7 @@ function action_gis_geocoder_rechercher_dist() {
 		return;
 
 	/* On filtre les arguments à renvoyer à Nomatim (liste blanche) */	
-	$arguments = collecter_requests(array("json_callback", "format", "q", "limit", "addressdetails", "accept-language", "lat", "lon"),array());
+	$arguments = collecter_requests(array("json_callback", "format", "q", "limit", "addressdetails", "accept-language", "lat", "lon"));
 
 	if(!empty($arguments)) {
 		header('Content-Type: application/json; charset=UTF-8');
