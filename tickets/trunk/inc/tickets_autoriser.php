@@ -98,7 +98,8 @@ function definir_notifications_tickets(){
  * @return boolean true/false : true si autorisé, false sinon
  */
 function autoriser_ticket_ecrire_dist($faire, $type, $id, $qui, $opt){
-	if ($associer_objet=$opt['associer_objet']) {
+	if (isset($opt['associer_objet'])
+	AND ($associer_objet=$opt['associer_objet'])) {
 		if (intval($associer_objet)){
 			// compat avec l'appel de la forme ajouter_id_article
 			$objet = 'article';
