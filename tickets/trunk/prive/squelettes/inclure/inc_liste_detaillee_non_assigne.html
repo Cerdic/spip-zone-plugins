@@ -7,9 +7,9 @@
 	[(#ENV{groupemots_#ID_GROUPE}|oui)
 		#SET{mots_pargroupe, #GET{mots_pargroupe}|array_merge{#ENV{groupemots_#ID_GROUPE}}}
 	]
-	[(#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe}
-		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}
-		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe_important}|et{#OBLIGATOIRE|=={oui}|oui}})
+	[(#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_par_groupe}
+		|ou{#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}
+		|ou{#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_par_groupe_important}|et{#OBLIGATOIRE|=={oui}|oui}})
 		#SET{colonnes_groupes, #GET{colonnes_groupes}|push{#ARRAY{id_groupe,#ID_GROUPE,titre,#TITRE}}
 	]
 </BOUCLE_groupesmots>
@@ -22,7 +22,7 @@
 	<thead>
 		<tr>
 			<th colspan="3" style="text-align:center;"><:tickets:champ_titre:></th>
-		<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+		<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}>
 			<th><:tickets:champ_mots_th:></th>
 		</BOUCLE_si_colonne_mots_unique_th>
 			<BOUCLE_colonnes_groupesmots_titre_th(DATA){source table, #GET{colonnes_groupes}}>
@@ -38,7 +38,7 @@
 			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><b>##ID_TICKET</b></td>
 			<td><a href="[(#ID_TICKET|generer_url_entite{ticket})]">#TITRE</a></td>
-		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}>
 			<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
 		</BOUCLE_si_colonne_mots_unique>
 		<BOUCLE_colonnes_groupesmots_titre(DATA){source table, #GET{colonnes_groupes}}>

@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 $GLOBALS['formulaires_no_spam'][] = 'editer_ticket';
 // Liste des pages de configuration dans l'ordre de presentation
-define('_TICKETS_PAGES_CONFIG', 'general:autorisations');
+define('_TICKETS_PAGES_CONFIG', 'general:autorisations:typologie');
 
 /**
  * Récupérer dans la base la liste des mots-clés liés au ticket

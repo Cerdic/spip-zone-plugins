@@ -118,7 +118,7 @@ On supprime la colonne de la table `spip_tickets`, et l'éventuelle configuratio
 * configuration :
 
  * suppression de la configuration "tickets/general/lier_mots" qui n'est pas d'utilité, puisque c'est dans la configuration des groupes de mots qu'on spécifie s'ils peuvent ou non être associés à des tickets (81338)
- * nouveau paramètre "tickets/general/colonnes_groupesmots" pour choisir comment afficher les mots-clés dans les tableaux de tickets (81468)
+ * nouveau paramètre "tickets/typologie/colonnes_groupesmots" pour choisir comment afficher les mots-clés dans les tableaux de tickets (81468)
 
 * bugs :
 

@@ -38,9 +38,9 @@
 	[(#ENV{groupemots_#ID_GROUPE}|oui)
 		#SET{mots_pargroupe, #GET{mots_pargroupe}|array_merge{#ENV{groupemots_#ID_GROUPE}}}
 	]
-	[(#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe}
-		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}
-		|ou{#CONFIG{tickets/general/colonnes_groupesmots}|=={une_par_groupe_important}|et{#OBLIGATOIRE|=={oui}|oui}})
+	[(#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_par_groupe}
+		|ou{#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}
+		|ou{#CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_par_groupe_important}|et{#OBLIGATOIRE|=={oui}|oui}})
 		#SET{colonnes_groupes, #GET{colonnes_groupes}|push{#ARRAY{id_groupe,#ID_GROUPE,titre,#TITRE}}
 	]
 </BOUCLE_groupesmots>
@@ -98,7 +98,7 @@
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={1}|ou{#ENV{sens#ENV{tri_nom,_detaillee}}|non}|oui)[(#TRI{<,<:tickets:champ_titre_th:>,ajax}|inserer_attribut{rel,nofollow})]]
 					[(#ENV{sens#ENV{tri_nom,_detaillee}}|=={-1}|oui)[(#TRI{>,<:tickets:champ_titre_th:>,ajax}|inserer_attribut{rel,nofollow}|inserer_attribut{rel,nofollow})]]]
 			</th>
-			<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+			<BOUCLE_si_colonne_mots_unique_th(CONDITION){si #CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}>
 				<th><:tickets:champ_mots_th:></th>
 			</BOUCLE_si_colonne_mots_unique_th>
 				<BOUCLE_colonnes_groupesmots_titre_th(DATA){source table, #GET{colonnes_groupes}}>
@@ -127,7 +127,7 @@
 			<td><a href="[(#URL_TICKET)]">##ID_TICKET</a></td>
 			<td><a href="[(#URL_TICKET)]">#TITRE</a><br />
 				[(#ENV{cacher_texte}|!={oui}|oui)[(#TEXTE|couper{#ENV{couper}})]]</td>
-		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/general/colonnes_groupesmots}|=={une_pour_tous}}>
+		<BOUCLE_si_colonne_mots_unique(CONDITION){si #CONFIG{tickets/typologie/colonnes_groupesmots}|=={une_pour_tous}}>
 			<td>#INCLURE{fond=vues/mots_ticket,id_ticket=#ID_TICKET,cacher_aucun_resultat=oui,env,ajax}</td>
 		</BOUCLE_si_colonne_mots_unique>
 		<BOUCLE_colonnes_groupesmots_titre(DATA){source table, #GET{colonnes_groupes}}>
