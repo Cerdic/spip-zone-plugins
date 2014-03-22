@@ -24,29 +24,22 @@
 	Le soucis c'est que ça peut ne pas être sécuritaire car on affiche le mot de passe de la bdd.
 	Je laisse le code dans la page même si ce n'est pas affiché. C'est pour historique. 
 
-	C'est au webmestre qu'appartiendra la décision de surcharger ce fichier pour afficher ces infos ou pas.
+	C'est au webmestre qu'appartiendra la décision de surcharger ce fichier pour afficher ce qu'il désire.
 
-	[(#SET{bdd,[(#CHEMIN{config/connect.php}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})]
-	<pre>
-	[(#GET{bdd}|print_r{1})]
-	</pre>
+]	[(#SET{bdd,[(#CHEMIN{config/connect.php}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})]
 	[(#SET{bdd_host,#GET{bdd}|table_valeur{0}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_host : (#GET{bdd_host})</p>]
 	[(#SET{bdd_port,#GET{bdd}|table_valeur{1}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_port : (#GET{bdd_port})</p>]
+[(#REM)
 	[(#SET{bdd_login,#GET{bdd}|table_valeur{2}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_login : (#GET{bdd_login})</p>]
 	[(#SET{bdd_pass,#GET{bdd}|table_valeur{3}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_pass : (#GET{bdd_pass})</p>]
-	[(#SET{bdd_nom,#GET{bdd}|table_valeur{4}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_nom : (#GET{bdd_nom})</p>]
-	[(#SET{bdd_type,#GET{bdd}|table_valeur{5}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_type : (#GET{bdd_type})</p>]
-	[(#SET{bdd_prefixe,#GET{bdd}|table_valeur{6}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_prefixe : (#GET{bdd_prefixe})</p>]
-	[(#SET{bdd_auth,#GET{bdd}|table_valeur{7}|explode{"'"}|table_valeur{1}})]
-	[<p>bdd_auth : (#GET{bdd_auth})</p>]
 ]
+	[(#SET{bdd_nom,#GET{bdd}|table_valeur{4}|explode{"'"}|table_valeur{1}})]
+	[(#SET{bdd_type,#GET{bdd}|table_valeur{5}|explode{"'"}|table_valeur{1}})]
+	[(#SET{bdd_prefixe,#GET{bdd}|table_valeur{6}|explode{"'"}|table_valeur{1}})]
+[(#REM)
+	[(#SET{bdd_auth,#GET{bdd}|table_valeur{7}|explode{"'"}|table_valeur{1}})]
+]
+
 [<div class="champ contenu_fo_url">
 	<div class="label visible"><:projets_sites_client:label_fo_url:> : </div>
 	<div dir='#LANG_DIR' class='fo_url'>(#URL_SITE_SPIP)</div>
@@ -86,23 +79,23 @@
 </div>
 
 <div class="champ contenu_applicatif_path">
-	<div class="label visible"><:projets_sites_client:label_applicatif_path:> : </div>[(#SET{texte,$_SERVER['SCRIPT_FILENAME']})]
-	<div dir='#LANG_DIR' class='applicatif_path'>#EVAL{#GET{texte}}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_path:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_path'>#EVAL{$_SERVER['SCRIPT_FILENAME']}</div>
 </div>
 
 <div class="champ contenu_applicatif_port">
-	<div class="label visible"><:projets_sites_client:label_applicatif_port:> : </div>[(#SET{texte,$_SERVER['SERVER_PORT']})]
-	<div dir='#LANG_DIR' class='applicatif_port'>#EVAL{#GET{texte}}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_port:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_port'>#EVAL{$_SERVER['SERVER_PORT']}</div>
 </div>
 
 <div class="champ contenu_applicatif_logiciel">
-	<div class="label visible"><:projets_sites_client:label_applicatif_logiciel:> : </div>[(#SET{texte,$_SERVER['SERVER_SOFTWARE']})]
-	<div dir='#LANG_DIR' class='applicatif_logiciel'>#EVAL{#GET{texte}}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_logiciel:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_logiciel'>#EVAL{$_SERVER['SERVER_SOFTWARE']}</div>
 </div>
 
 <div class="champ contenu_applicatif_nom">
-	<div class="label visible"><:projets_sites_client:label_applicatif_nom:> : </div>[(#SET{texte,$_SERVER['SERVER_NAME']})]
-	<div dir='#LANG_DIR' class='applicatif_nom'>#EVAL{#GET{texte}}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_nom:> : </div>
+	<div dir='#LANG_DIR' class='applicatif_nom'>#EVAL{$_SERVER['SERVER_NAME']}</div>
 </div>
 
 <!-- Information sgbd -->
@@ -111,8 +104,8 @@
 </div>
 
 <div class="champ contenu_sgbd_type">
-	<div class="label visible"><:projets_sites_client:label_sgbd_type:> : </div>[(#SET{texte,$GLOBALS['db_ok']['type']})]
-	<div dir='#LANG_DIR' class='sgbd_type'>#EVAL{#GET{texte}}</div>
+	<div class="label visible"><:projets_sites_client:label_sgbd_type:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_type'>#GET{bdd_type}</div>
 </div>
 
 <div class="champ contenu_sgbd_version">
@@ -121,8 +114,8 @@
 </div>
 
 <div class="champ contenu_sgbd_nom">
-	<div class="label visible"><:projets_sites_client:label_sgbd_nom:> : </div>[(#SET{texte,$GLOBALS['db_ok']['db']})]
-	<div dir='#LANG_DIR' class='sgbd_nom'>#EVAL{#GET{texte}}</div>
+	<div class="label visible"><:projets_sites_client:label_sgbd_nom:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_nom'>#GET{bdd_nom}</div>
 </div>
 
 <B_serveur>
@@ -132,8 +125,8 @@
 </div></B_serveur>
 
 <div class="champ contenu_sgbd_prefixe">
-	<div class="label visible"><:projets_sites_client:label_sgbd_prefixe:> : </div>[(#SET{texte,$GLOBALS['db_ok']['prefixe']})]
-	<div dir='#LANG_DIR' class='sgbd_prefixe'>#EVAL{#GET{texte}}</div>
+	<div class="label visible"><:projets_sites_client:label_sgbd_prefixe:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_prefixe'>#GET{bdd_prefixe}</div>
 </div>
 
 <!-- Information plugins -->
