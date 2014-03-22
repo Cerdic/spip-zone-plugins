@@ -1,0 +1,53 @@
+
+titre: '<:formidablepaiement:traiter_paiement_titre:>'
+description: '<:formidablepaiement:traiter_paiement_description:>'
+options:
+  -
+    saisie: 'explication'
+    options:
+      texte: '<:formidablepaiement:traiter_paiement_necessite_explication:>'
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_montant'
+      label: '<:formidablepaiement:traiter_paiement_option_champ_montant_label:>'
+      env: true
+  -
+    saisie: 'input'
+    options:
+      nom: 'montant_fixe'
+      label: '<:formidablepaiement:traiter_paiement_option_montant_fixe_label:>'
+      explication: '<:formidablepaiement:traiter_paiement_option_montant_fixe_explication:>'
+    verifier:
+      type: 'decimal'
+      options:
+        min: 0
+        nb_decimales: 2
+  -
+    saisie: 'radio'
+    options:
+      nom: 'taxes'
+      label: '<:formidablepaiement:traiter_paiement_option_taxes_label:>'
+      datas:
+        ttc: '<:formidablepaiement:traiter_paiement_option_taxes_ttc_label:>'
+        ht: '<:formidablepaiement:traiter_paiement_option_taxes_ht_label:>'
+        non: '<:formidablepaiement:traiter_paiement_option_taxes_non_label:>'
+      defaut: 'ttc'
+  -
+    saisie: 'input'
+    options:
+      nom: 'tva'
+      label: '<:formidablepaiement:traiter_paiement_option_tva_label:>'
+      defaut: '20.0'
+    verifier:
+      type: 'decimal'
+      options:
+        min: 0
+        max: 100
+        nb_decimales: 2
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'message'
+      label: '<:formidablepaiement:traiter_paiement_option_message_label:>'
+      rows: 4
