@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_sites_client"
 	categorie="outil"
-	version="0.4.4"
+	version="0.4.5"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/projets_sites_client-64.png"

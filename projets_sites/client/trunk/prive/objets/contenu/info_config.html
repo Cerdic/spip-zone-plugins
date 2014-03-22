@@ -86,23 +86,23 @@
 </div>
 
 <div class="champ contenu_applicatif_path">
-	<div class="label visible"><:projets_sites_client:label_applicatif_path:> : </div>
-	<div dir='#LANG_DIR' class='applicatif_path'>#EVAL{$_SERVER['SCRIPT_FILENAME']}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_path:> : </div>[(#SET{texte,$_SERVER['SCRIPT_FILENAME']})]
+	<div dir='#LANG_DIR' class='applicatif_path'>#EVAL{#GET{texte}}</div>
 </div>
 
 <div class="champ contenu_applicatif_port">
-	<div class="label visible"><:projets_sites_client:label_applicatif_port:> : </div>
-	<div dir='#LANG_DIR' class='applicatif_port'>#EVAL{$_SERVER['SERVER_PORT']}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_port:> : </div>[(#SET{texte,$_SERVER['SERVER_PORT']})]
+	<div dir='#LANG_DIR' class='applicatif_port'>#EVAL{#GET{texte}}</div>
 </div>
 
 <div class="champ contenu_applicatif_logiciel">
-	<div class="label visible"><:projets_sites_client:label_applicatif_logiciel:> : </div>
-	<div dir='#LANG_DIR' class='applicatif_logiciel'>#EVAL{$_SERVER['SERVER_SOFTWARE']}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_logiciel:> : </div>[(#SET{texte,$_SERVER['SERVER_SOFTWARE']})]
+	<div dir='#LANG_DIR' class='applicatif_logiciel'>#EVAL{#GET{texte}}</div>
 </div>
 
 <div class="champ contenu_applicatif_nom">
-	<div class="label visible"><:projets_sites_client:label_applicatif_nom:> : </div>
-	<div dir='#LANG_DIR' class='applicatif_nom'>#EVAL{$_SERVER['SERVER_NAME']}</div>
+	<div class="label visible"><:projets_sites_client:label_applicatif_nom:> : </div>[(#SET{texte,$_SERVER['SERVER_NAME']})]
+	<div dir='#LANG_DIR' class='applicatif_nom'>#EVAL{#GET{texte}}</div>
 </div>
 
 <!-- Information sgbd -->
@@ -111,8 +111,8 @@
 </div>
 
 <div class="champ contenu_sgbd_type">
-	<div class="label visible"><:projets_sites_client:label_sgbd_type:> : </div>
-	<div dir='#LANG_DIR' class='sgbd_type'>#EVAL{$GLOBALS['db_ok']['type']}</div>
+	<div class="label visible"><:projets_sites_client:label_sgbd_type:> : </div>[(#SET{texte,$GLOBALS['db_ok']['type']})]
+	<div dir='#LANG_DIR' class='sgbd_type'>#EVAL{#GET{texte}}</div>
 </div>
 
 <div class="champ contenu_sgbd_version">
@@ -121,8 +121,8 @@
 </div>
 
 <div class="champ contenu_sgbd_nom">
-	<div class="label visible"><:projets_sites_client:label_sgbd_nom:> : </div>
-	<div dir='#LANG_DIR' class='sgbd_nom'>#EVAL{$GLOBALS['db_ok']['db']}</div>
+	<div class="label visible"><:projets_sites_client:label_sgbd_nom:> : </div>[(#SET{texte,$GLOBALS['db_ok']['db']})]
+	<div dir='#LANG_DIR' class='sgbd_nom'>#EVAL{#GET{texte}}</div>
 </div>
 
 <B_serveur>
@@ -132,8 +132,8 @@
 </div></B_serveur>
 
 <div class="champ contenu_sgbd_prefixe">
-	<div class="label visible"><:projets_sites_client:label_sgbd_prefixe:> : </div>
-	<div dir='#LANG_DIR' class='sgbd_prefixe'>#EVAL{$GLOBALS['db_ok']['prefixe']}</div>
+	<div class="label visible"><:projets_sites_client:label_sgbd_prefixe:> : </div>[(#SET{texte,$GLOBALS['db_ok']['prefixe']})]
+	<div dir='#LANG_DIR' class='sgbd_prefixe'>#EVAL{#GET{texte}}</div>
 </div>
 
 <!-- Information plugins -->
