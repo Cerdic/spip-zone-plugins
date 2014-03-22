@@ -17,7 +17,7 @@
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/gis?lang_cible=ru" total="140" traduits="124" relire="0" modifs="0" nouveaux="16" pourcent="88.57">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/gis?lang_cible=sk" total="140" traduits="137" relire="0" modifs="0" nouveaux="3" pourcent="97.86">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/gis?lang_cible=sk" total="140" traduits="140" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

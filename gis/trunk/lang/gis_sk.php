@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_adress' => 'Adresa',
 	'label_code_pays' => 'Kód krajiny',
 	'label_code_postal' => 'PSČ',
+	'label_departement' => 'Kraj',
 	'label_import' => 'Nahrať',
 	'label_inserer_modele_articles' => 'prepojené s článkami',
 	'label_inserer_modele_articles_sites' => 'prepojené s článkami a stránkami',
@@ -160,6 +161,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'toolbar_handlers_polyline_tooltip_cont' => 'Ak chcete pokračovať v kreslení čiary, kliknite sem',
 	'toolbar_handlers_polyline_tooltip_end' => 'Kliknite na posledný bod, aby bola čiara ukončená',
 	'toolbar_handlers_polyline_tooltip_start' => 'Ak chcete začať kresliť čiaru, kliknite sem',
+	'toolbar_undo_text' => 'Vymazať posledný bod',
+	'toolbar_undo_title' => 'Vymazať posledný nakreslený bod',
 
 	// Z
 	'zoom' => 'Lupa'
