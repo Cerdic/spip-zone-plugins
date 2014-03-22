@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Odstrániť',
 
 	// C
+	'cal_par_jour' => 'deň',
+	'cal_par_mois' => 'mesiac',
+	'cal_par_semaine' => 'týždeň',
 	'confirm_suppression_inscription' => 'Chcete odstrániť tento údaj?',
 	'confirm_suppression_inscription_toutes' => 'Naozaj chcete vymazať všetky prihlásenia?',
 	'connexion_necessaire_pour_inscription' => 'Ďakujeme vám, že sa prihlásite predtým, ako sa zaregistrujete na túto udalosť.',
