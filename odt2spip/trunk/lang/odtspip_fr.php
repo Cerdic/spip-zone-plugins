@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // I
 	'images_mode_document' => 'Images attach&eacute;es en mode:',
 	'mode_image' => 'images',
-	'importer_fichier' => 'Cr&eacute;er un article &agrave; partir d\'un fichier OOo Writer',
+	'importer_fichier' => 'Cr&eacute;er un article &agrave; partir d\'un fichier ODT',
         
     // L
     'langue_publication' => 'Langue de l\'article', 
@@ -44,6 +44,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		
 	// O
 	'oui' => 'oui',
+	
+	// R
+	'remplacer_article' => 'Remplacer l\'article par le contenu d\'un fichier ODT',
 	
 	// T
 	'cet_article_version_odt' => 'Version .odt de cet article' 

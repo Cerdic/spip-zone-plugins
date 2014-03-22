@@ -41,9 +41,13 @@ function action_odt2spip_importe() {
 	$arg = _request('arg');
 	$args = explode(":", $arg);
 
-	// le 1er élément de _request('arg') est id_rubrique=XXX
+	// le 1er élément de _request('arg') est id_rubrique=XXX ou id_article=YYY
+	$id_article = $id_rubrique = false;
 	$Targs = explode("=", $args[0]);
-	$id_rubrique = intval($Targs[1]);
+	$objet = $Targs[0];
+	$id_objet = intval($Targs[1]);
+	$objet == 'id_rubrique' ? $id_rubrique = $id_objet : $id_article = $id_objet;
+
 	$hash = _request('hash');
 
 	$redirect = _request('redirect');
@@ -53,10 +57,13 @@ function action_odt2spip_importe() {
 
 	include_spip("inc/securiser_action");
 
-	if (!autoriser('creerarticledans', 'rubrique', $id_rubrique)) {
+	if (
+		($id_rubrique AND !autoriser('creerarticledans', 'rubrique', $id_rubrique))
+		OR
+		($id_article AND !autoriser('modifier', 'article', $id_article))
+	)
 		die(_T('avis_non_acces_page'));
-	}
-
+		
 	// ss-rep temporaire specifique de l'auteur en cours: tmp/odt2spip/id_auteur/
 	// => le créer s'il n'existe pas
 	$base_dezip = _DIR_TMP . "odt2spip/";	  // avec / final
@@ -99,9 +106,10 @@ function action_odt2spip_importe() {
 	$odt2spip_generer_sortie = charger_fonction('odt2spip_generer_sortie', 'inc');
 	$Tarticle = $odt2spip_generer_sortie($id_auteur, $rep_dezip);
 
-	// créer l'article
+	// si necessaire créer l'article
 	include_spip('action/editer_article');
-	$id_article = article_inserer($id_rubrique);
+	if (!$id_article)
+		$id_article = article_inserer($id_rubrique);
 	
 	// le remplir
 	article_modifier($id_article, $Tarticle);
