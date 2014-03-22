@@ -92,6 +92,7 @@ function couleur_teinter ($coul, $val=30) {
 	$g= $couleurs["green"];
 	$b= $couleurs["blue"];
 
+	include_spip("filtres/images_complements");
 	$hsv = image_rgb2hsv($r,$g,$b);
 	$h = $hsv["h"];
 	$s = $hsv["s"];
