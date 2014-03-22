@@ -1,8 +1,10 @@
 <?php
 function bible_insert_head($flux){
-
-	return $flux.'<link rel="stylesheet" href="'.timestamp(produire_fond_statique('bible.css')).'" type="text/css" media="all" />';
-
+	if (lire_config("bible/police_hbo")){
+		return $flux.'<link rel="stylesheet" href="'.timestamp(produire_fond_statique('bible.css')).'" type="text/css" media="all" />';
+	}
+	else {
+		return $flux;}
 
 }
 
