@@ -71,7 +71,7 @@ Tieto databázy obsahujú príkazy na <strong>vymazanie</strong> tabuliek vašej
 	'label_prefixe_sauvegardes' => 'Predpona',
 	'label_sauvegarde_reguliere' => 'Aktivovať pravidelné zálohovanie',
 	'label_structure' => 'Štruktúra tabuliek',
-	'label_toutes_tables' => 'Zálohovať všetky tabuľky', # MODIF
+	'label_toutes_tables' => 'Zálohovať všetky tabuľky SPIPu',
 	'legend_cfg_generale' => 'Všeobecné vlastnosti databáz',
 	'legend_cfg_notification' => 'Oznamy',
 	'legend_cfg_sauvegarde_reguliere' => 'Automatické spracúvanie',
