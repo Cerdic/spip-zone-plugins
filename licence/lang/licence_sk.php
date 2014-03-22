@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'description_art_libre' => 'Licencia Free Art',
+	'description_autre' => 'Iná licencia',
 	'description_cc0' => 'Creative Common – obsah oslobodený od všetkých práv',
 	'description_cc_by' => 'Licencia Creative Commons – Attribution',
 	'description_cc_by_nc' => 'Licencia Creative Commons - Attribution Non-Commercial',
@@ -50,10 +51,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_licence' => 'Zobraziť názov licencie?',
 
 	// S
-	'sans_licence' => 'Žiadna licencia', # MODIF
+	'sans_licence' => 'Žiadna konkrétna licencia (základné práva)',
 
 	// T
 	'titre_art_libre' => 'FAL',
+	'titre_autre' => 'iná',
 	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'Licencia CC by',
 	'titre_cc_by_nc' => 'Licencia CC by-nc',
