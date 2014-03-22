@@ -14,17 +14,16 @@ function formulaires_maj_zotspip_charger_dist(){
 function formulaires_maj_zotspip_traiter_dist(){
 	include_spip('inc/zotspip');
 	$forcer = (_request('sync_complete')) ? true : false;
-	if (_request('nettoyer')) {
-		zotspip_nettoyer(); // Eviter de nettoyer à chaque tour, la première fois suffit
-		zotspip_maj_collections($forcer); // De meme, pour les collections, un seul appel suffit 
-	}
 	
 	$cont = zotspip_maj_items($forcer);
 	
 	if ($cont==0)
 		return array('message_erreur' => _T('zotspip:erreur_connexion'));
-	if ($cont>0)
+	if ($cont>0) {
+		zotspip_nettoyer(); // Eviter de nettoyer à chaque tour, il suffit de le faire à la fin
+		zotspip_maj_collections($forcer); // Idem pour les collections
 		return array('message_ok' => _T('zotspip:synchronisation_effectuee'));
+	}
 }
 
 ?>
