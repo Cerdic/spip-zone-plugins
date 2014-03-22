@@ -14,7 +14,7 @@ function traitements_lister_disponibles(){
     if (is_null($traitements)){
         $traitements = array();
         $liste = find_all_in_path('traiter/', '.+[.]yaml$');
-
+				ksort($liste);
         if (count($liste)){
             foreach ($liste as $fichier=>$chemin){
                 $type_traitement = preg_replace(',[.]yaml$,i', '', $fichier);
