@@ -25,6 +25,56 @@
 
 			<li class="fieldset">
 				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_commentaires:></h3>
+				<ul>
+					[(#SAISIE{radio, forums_publics,
+						label=<:tickets:cfg_lbl_forums_publics:>,
+						defaut=posteriori,
+						datas=[(#ARRAY{
+							non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
+							posteriori,<:forum:bouton_radio_publication_immediate:>,
+							priori,<:forum:bouton_radio_moderation_priori:>,
+							abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
+						})]})]
+				</ul>
+				</fieldset>
+			</li>
+
+			<li class="fieldset">
+				<fieldset>
+				<h3 class="legend"><:tickets:cfg_lgd_notifications:></h3>
+				<ul>
+					[(#EVAL{defined("_TICKETS_AUTORISATION_NOTIFIER")}|non)
+						[(#SAISIE{radio,notif_destinataires,
+							label=<:tickets:cfg_lbl_notif_destinataires:>,
+							defaut=assigne,
+							explication=<:tickets:explication_notif_destinataire:>,
+							datas=[(#ARRAY{
+								assigne,<:tickets:cfg_notif_assigne:>,
+								webmestre,<:tickets:cfg_notif_webmestre:>,
+								0minirezo,<:tickets:cfg_notif_admin:>,
+								1comite,<:tickets:cfg_notif_auteur:>,
+								liste,<:tickets:cfg_notif_liste:>,
+							})]}
+						)]
+
+						[(#SAISIE{auteurs,notif_auteurs,
+							label=<:tickets:cfg_notif_liste_auteurs:>,
+							multiple=oui,
+							option_statut=oui})]
+					]				</ul>
+
+					[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
+						<li>
+							<label><:tickets:cfg_lbl_notification_publique:></label>
+							<p class="explication"><:tickets:message_zpip_inactif:></p>
+						</li>
+					]
+				</fieldset>
+			</li>
+
+			<li class="fieldset">
+				<fieldset>
 				<h3 class="legend"><:tickets:cfg_lgd_mots:></h3>
 				<ul>
 					#SET{tab_groupes, #ARRAY}
@@ -100,40 +150,7 @@
 						label=<:tickets:cfg_lbl_notification_publique:>,
 						label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
 				]
-				[(#PLUGIN{ZPIP}|ou{#PLUGIN{Z}}|non)
-					<li>
-						<label><:tickets:cfg_lbl_notification_publique:></label>
-						<p class="explication"><:tickets:message_zpip_inactif:></p>
-					</li>
-				]
-				[(#SAISIE{radio, forums_publics,
-					label=<:tickets:cfg_lbl_forums_publics:>,
-					defaut=posteriori,
-					datas=[(#ARRAY{
-						non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
-						posteriori,<:forum:bouton_radio_publication_immediate:>,
-						priori,<:forum:bouton_radio_moderation_priori:>,
-						abo,<:forum:bouton_radio_enregistrement_obligatoire:>,
-					})]})]
-				[(#EVAL{defined("_TICKETS_AUTORISATION_NOTIFIER")}|non)
-					[(#SAISIE{radio,notif_destinataires,
-						label=<:tickets:cfg_lbl_notif_destinataires:>,
-						defaut=assigne,
-						explication=<:tickets:explication_notif_destinataire:>,
-						datas=[(#ARRAY{
-							assigne,<:tickets:cfg_notif_assigne:>,
-							webmestre,<:tickets:cfg_notif_webmestre:>,
-							0minirezo,<:tickets:cfg_notif_admin:>,
-							1comite,<:tickets:cfg_notif_auteur:>,
-							liste,<:tickets:cfg_notif_liste:>,
-						})]}
-					)]
 
-					[(#SAISIE{auteurs,notif_auteurs,
-						label=<:tickets:cfg_notif_liste_auteurs:>,
-						multiple=oui,
-						option_statut=oui})]
-				]
 		<script type="text/javascript">
 		//<![CDATA[
 			jQuery(document).ready(function() {

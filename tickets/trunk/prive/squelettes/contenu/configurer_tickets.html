@@ -1,6 +1,9 @@
 [(#AUTORISER{configurer, ticket}|sinon_interdire_acces)]
 <h1 class="grostitre"><:tickets:cfg_titre_tickets:></h1>
 
+[(#REM) <!-- Information sur la page de configuration affichee --> ]
+[<p>(#VAL{tickets:cfg_descr_}|concat{#ENV{cfg, general}}|_T)</p>]
+
 [(#SET{configurer, [(#ENV{type-page})_[(#ENV{cfg, general})]]})]
 [<div class="ajax">
 	(#FORMULAIRE_{#GET{configurer}})
