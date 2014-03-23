@@ -144,7 +144,7 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 				'lastmodified' => $_SERVER['REQUEST_TIME']
 			);
 			$ok = $memo->set($chemin_cache, $tmp);
-			memoization_log((_IS_BOT?"Bot:":"")."Creation du cache sessionne $chemin_cache ". $memo->methode ." pour "
+			spip_log((_IS_BOT?"Bot:":"")."Creation du cache sessionne $chemin_cache ". $memo->methode ." pour "
 				. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 		}
 		$chemin_cache .= '_'.$page['invalideurs']['session'];
@@ -175,7 +175,7 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 		unset($page['gz']);
 	}
 
-	memoization_log((_IS_BOT?"Bot:":"")."Creation du cache $chemin_cache ". $memo->methode ." pour "
+	spip_log((_IS_BOT?"Bot:":"")."Creation du cache $chemin_cache ". $memo->methode ." pour "
 		. $page['entetes']['X-Spip-Cache']." secondes". ($ok?'':' (erreur!)'));
 
 	// Inserer ses invalideurs
