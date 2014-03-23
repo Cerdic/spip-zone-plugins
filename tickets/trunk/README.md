@@ -9,6 +9,11 @@ Références :
 
 ## TODO
 
+Bugs
+
+[ ] Administration de la base: l'installation et la migration semble fonctionner pour rapatrier les mots-clés et la suppression des colonnes. Par contre, il faut forcer la meta utilisation de la configuration avancée des mots-clés sinon on a une incohérence entre les groupes créés automatiquement et les autres groupes.
+[ ] Administration de la base: à la désinstallation il manque la suppression des liens entre les tickets et les mots-clés. On peut conserver les groupes et mots mais il faut supprimer les liens pour simplifier ensuite la suppression manuelle les mots et groupes si l'utilisateur le souhaite.
+
 Quelques idées d'évolution du plugin Tickets
 
 [ ] mutualiser le code entre contenu/ et content/
@@ -40,13 +45,24 @@ Quelques idées d'évolution du plugin Tickets
  * suppression des sept champs dans les squelettes publics et privés, formulaires, flux RSS, crayons, fonctions, chaînes de langues (81491, 81493, 81495, 81496, 81497, 81498, 81520, 81523, 81529)
  * option de configuration pour spécifier qu'un groupe de mots contient des "versions" pour la roadmap (81499, 81501)
 
+* squelettes :
+
+ * formulaire de tri des tickets : option de désélection d'un mot-clé (81539, 81547)
+ * dans les saisies, prendre en compte le champ "obligatoire" d'un groupe de mots et ajouter une option d'intro (81591, 81594, 81595)
+ * les fils d'ariane dans le répertoire `breadcrumb/` (81592)
+ * test sur l'existence d'une meta (81586)
+
+* espace privé :
+
+ * meilleure saisie (case au lieu de oui/non) (81593)
+ * clarification de la page de configuration (81531, 81576), création de la sous-meta "tickets/typologie" (81577) et ajout de liens vers les groupes de mots (81546)
+
 * divers :
 
  * changement de version (81490)
  * légers changements dans le slogan et la description du plugin (81529)
- * clarification de la page de configuration (81531) et ajout de liens vers les groupes de mots (81546)
- * formulaire de tri des tickets : option de désélection d'un mot-clé (81539, 81547)
- 
+ * déplacement du fichier d'autorisations (81591)
+
 #### Details de la migration
 
 Jusqu'à 4.0.0, la table spip_tickets contient sept champs qui servent à décrire sémantiquement les tickets. Pour trois d'entre eux, les choix possibles sont fixés en dur dans le code : severite (bloquant, important, normal, peu_important), tracker (probleme, tache, amélioration) et navigateur (android, firefox...) Les quatre autres sont désactivés par défaut, et ne proposent aucun choix par défaut, mais il est possible d'en ajouter via la page de configuration ou les variables globales : projet, composant, version, jalon.
