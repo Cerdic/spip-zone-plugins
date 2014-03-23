@@ -26,7 +26,7 @@ if (!defined('_RAINETTE_DONNEES_TYPE_UNITE'))
 		'population:population
 		|temperature:temperature_reelle,temperature_ressentie,point_rosee,temperature_max,temperature_min
 		|vitesse:vitesse_vent
-		|angle:angle_vent
+		|angle:angle_vent,longitude,latitude
 		|pourcentage:risque_precipitation,humidite
 		|pression:pression
 		|distance:visibilite
@@ -93,8 +93,8 @@ function rainette_dbg_comparer_services($mode='conditions', $jeu=array()) {
 				$tableau = unserialize($tableau);
 				if ($tableau) {
 					foreach($tableau as $_donnee => $_valeur) {
-						$debug[$_donnee][$_service]['valeur'] = $_valeur;
 						$type = gettype($tableau[$_donnee]);
+						$debug[$_donnee][$_service]['valeur'] = $_valeur;
 						$debug[$_donnee][$_service]['type'] = $type;
 						if ($_donnee != 'erreur')
 							$debug[$_donnee][$_service]['erreur'] = ($type === 'NULL') ? 'nonapi' : ($_valeur === '' ? 'erreur' : '');
