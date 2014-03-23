@@ -35,6 +35,16 @@
 			</BOUCLE_auteur>
 		</div>
 		<br />
+
+	[(#REM) - Champs complémentaires obligatoires]
+	<B_groupesmots>
+	<BOUCLE_groupesmots(GROUPES_MOTS){obligatoire=oui}{par num titre}>
+	#SET{tables_liees, #TABLES_LIEES|explode{','}}
+	[(#VAL{tickets}|in_array{#GET{tables_liees}}|oui)
+		[<div>#TITRE&nbsp;: <strong>(#ID_GROUPE|tickets_motslies_groupe{#ID_TICKET})</strong></div>]
+	]
+	</BOUCLE_groupesmots>
+	</B_groupesmots>
 </div>
 <!--affiche_milieu-->
 #FORMULAIRE_ASSIGNER_TICKET{#ID_TICKET}

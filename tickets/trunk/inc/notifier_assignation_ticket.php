@@ -46,7 +46,7 @@ function inc_notifier_assignation_ticket_dist($id_ticket,$options){
 		$message .= $url_ticket;
 	
 		// Determiner la liste des auteurs a notifier
-		include_spip('inc/tickets_autoriser');
+		include_spip('tickets_autorisations');
 	
 		$from = array('spip_auteurs AS t1');
 		$autorises = definir_autorisations_tickets('notifier');

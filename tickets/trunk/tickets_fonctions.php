@@ -25,7 +25,7 @@ function tickets_select_assignation($en_cours='0',$format='select'){
 	$options = NULL;
 	$liste_assignables=array();
 	
-	include_spip('inc/tickets_autoriser');
+	include_spip('tickets_autorisations');
 	$select = array('nom','id_auteur');
 	$from = array('spip_auteurs AS t1');
 	
@@ -242,5 +242,25 @@ function inc_prepare_mots_pargroupe_dist($mots, $table='articles') {
 	 */
 	return sql_in($_table.'.'.$_id_table, $where);
 
+}
+
+function tickets_motslies_groupe($id_groupe, $id_ticket) {
+
+	$texte = '';
+	$from = array('spip_mots_liens as l', 'spip_mots AS m');
+	$select = array('m.titre');
+	$where = array(
+				'l.objet=' . sql_quote('ticket'),
+				'l.id_objet=' . intval($id_ticket),
+				'm.id_groupe=' . intval($id_groupe),
+				'm.id_mot=l.id_mot'
+	);
+	$mots = sql_allfetsel($select, $from, $where);
+	$mots = array_map('reset', $mots);
+	$mots = array_map('supprimer_numero', $mots);
+
+	$texte = implode(', ', $mots);
+
+	return $texte;
 }
 ?>

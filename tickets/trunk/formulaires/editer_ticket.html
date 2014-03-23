@@ -25,8 +25,14 @@
 				datas=#GET{assignables}})]]
 				
 
-			<BOUCLE_groupesmots(GROUPES_MOTS){id_groupe IN #ENV{groupesmots}}{par num titre}>
-				[(#SAISIE{mots_groupe, groupemots_#ID_GROUPE, id_groupe=#ID_GROUPE, label=#TITRE, unseul=#UNSEUL})]
+			<BOUCLE_groupesmots(GROUPES_MOTS){id_groupe IN #ENV{groupesmots}}{!par obligatoire}{par num titre}>
+				[(#SAISIE{mots_groupe,
+					groupemots_#ID_GROUPE,
+					id_groupe=#ID_GROUPE,
+					label=#TITRE,
+					obligatoire=#OBLIGATOIRE,
+					option_intro='--',
+					unseul=#UNSEUL})]
 			</BOUCLE_groupesmots>
 
 			[(#SET{explication,<:tickets:explication_description_ticket:>})]

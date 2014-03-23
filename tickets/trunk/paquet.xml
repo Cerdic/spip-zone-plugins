@@ -1,7 +1,7 @@
 <paquet
 	prefix="tickets"
 	categorie="divers"
-	version="4.0.3"
+	version="4.0.4"
 	etat="dev"
 	compatibilite="[3.0.15-dev;3.0.*]"
 	logo="imgs/logo-bugs.png"
@@ -24,7 +24,7 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/tickets_install.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/tickets_install.php" />
 	<pipeline nom="affiche_gauche" inclure="tickets_pipelines.php" />
-	<pipeline nom="autoriser" inclure="inc/tickets_autoriser.php" />
+	<pipeline nom="autoriser" inclure="tickets_autorisations.php" />
 	<pipeline nom="notifications" inclure="tickets_notifications.php" />
 	<pipeline nom="accueil_informations" inclure="tickets_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="tickets_pipelines.php" />
