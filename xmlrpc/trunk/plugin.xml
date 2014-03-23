@@ -11,10 +11,10 @@
 	<icon>images/xmlrpc.png</icon>
 	<auteur>[kent1->http://www.kent1.info]</auteur>
 	<licence>
-		© 2011-2012 - GNU/GPL v3
+		© 2011-2014 - GNU/GPL v3
 	</licence>
 	<version>
-		0.3.1
+		0.4.0
 	</version>
 	<etat>
 		test

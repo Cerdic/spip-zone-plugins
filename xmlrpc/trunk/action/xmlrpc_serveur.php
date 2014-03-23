@@ -3,7 +3,7 @@
  * Plugin xmlrpc
  * 
  * Auteurs : kent1 (http://www.kent1.info)
- * © 2011-2012 - GNU/GPL v3
+ * © 2011-2014- GNU/GPL v3
  * 
  * Action serveur xml-rpc
  */
@@ -592,7 +592,7 @@ function action_xmlrpc_serveur_dist(){
 			
 			/**
 			 * Si on est identifié
-			 * Si on a un id_rubrique non publié dans la requète on regarde si on a le droit de créer un article dedans
+			 * Si on a un id_rubrique non publié dans la requète, que l'on n'a pas $tout, on regarde si on a le droit de créer un article dedans
 			 */
 			if(!$tout && ($statut != 'publie') && is_array($GLOBALS['visiteur_session']) && autoriser('creerarticledans','rubrique',$args['id_rubrique'],$GLOBALS['visiteur_session'])){
 				$res = $this->read($args_rubrique);
@@ -609,7 +609,7 @@ function action_xmlrpc_serveur_dist(){
 			}
 			/**
 			 * Cas où l'on n'a pas de user/pass
-			 * On liste la rubrique uniquement si publié
+			 * On liste la rubrique uniquement si publié ou que l'on a $tout
 			 */
 			else if($tout || $statut == 'publie'){
 				$res = $this->read($args_rubrique);
@@ -735,8 +735,9 @@ function action_xmlrpc_serveur_dist(){
 		 */
 		function spip_liste_articles($args){
 			$objet = 'article';
+			$table_objet = 'articles';
 			
-			$what[] = 'articles.id_article';
+			$what[] = $table_objet.'.id_article';
 			
 			if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')){
 				$from = 'spip_articles as articles LEFT JOIN spip_auteurs_liens AS auteurs ON articles.id_article=auteurs.id_objet AND auteurs.objet="article"';
@@ -747,10 +748,10 @@ function action_xmlrpc_serveur_dist(){
 			$order = is_array($args['tri']) ? $args['tri'] : array('!date');
 			
 			if(intval($args['id_rubrique'])){
-				$where[] = 'articles.id_rubrique='.intval($args['id_rubrique']);
+				$where[] = $table_objet.'.id_rubrique='.intval($args['id_rubrique']);
 			}
 			if(intval($args['id_secteur'])){
-				$where[] = 'articles.id_secteur='.intval($args['id_secteur']);
+				$where[] = $table_objet.'.id_secteur='.intval($args['id_secteur']);
 			}
 			if(intval($args['id_auteur'])){
 				$where[] = 'auteurs.id_auteur='.intval($args['id_auteur']);
@@ -758,12 +759,20 @@ function action_xmlrpc_serveur_dist(){
 			
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
-				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+				if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')){
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $table_objet,false,'', $where);
+					$where[] = $rech_where;
+				}
+				else{
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+					$where[] = 'resultats.'.$rech_where;
+				}
 				$what[] = $rech_select;
-				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = articles.id_article ) ';
-				$where[] = 'resultats.'.$rech_where;
+				$from .= ' INNER JOIN spip_resultats AS resultats ON resultats.id = articles.id_article AND resultats.table_objet = articles ';
 			}
 			
+			spip_log($what,'test.'._LOG_ERREUR);
+			spip_log($where,'test.'._LOG_ERREUR);
 			$articles_struct = array();
 			
 			/**
@@ -814,7 +823,8 @@ function action_xmlrpc_serveur_dist(){
 		 */
 		function spip_liste_auteurs($args){
 			$objet = 'auteur';
-			
+			$table_objet = 'auteurs';
+
 			$what[] = 'auteurs.id_auteur';
 			$from = 'spip_auteurs AS auteurs';
 			$where = is_array($args['where']) ? $args['where'] : array();
@@ -822,10 +832,17 @@ function action_xmlrpc_serveur_dist(){
 			
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
-				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+				if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')){
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $table_objet,false,'', $where);
+					$where[] = $rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON resultats.id = auteurs.id_auteur AND resultats.table_objet = auteurs ';
+				}
+				else{
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+					$where[] = 'resultats.'.$rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = auteurs.id_auteur ) ';
+				}
 				$what[] = $rech_select;
-				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = auteurs.id_auteur ) ';
-				$where[] = 'resultats.'.$rech_where;
 			}
 			$auteurs_struct = array();
 			
@@ -867,6 +884,7 @@ function action_xmlrpc_serveur_dist(){
 		 */
 		function spip_liste_documents($args){
 			$objet = 'document';
+			$table_objet = "documents";
 			
 			$what[] = 'documents.id_document';
 			$from = 'spip_documents as documents LEFT JOIN spip_documents_liens as lien ON documents.id_document=lien.id_document';
@@ -879,12 +897,18 @@ function action_xmlrpc_serveur_dist(){
 
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
-				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+				if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')){
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $table_objet,false,'', $where);
+					$where[] = $rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON resultats.id = documents.id_document AND resultats.table_objet = documents ';
+				}
+				else{
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+					$where[] = 'resultats.'.$rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = documents.id_document ) ';
+				}
 				$what[] = $rech_select;
-				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = documents.id_document ) ';
-				$where[] = 'resultats.'.$rech_where;
 			}
-
 			$documents_struct = array();
 
 			if($documents = sql_select($what,$from,$where,array(),$order,$args['limite'])){
@@ -916,7 +940,8 @@ function action_xmlrpc_serveur_dist(){
 		 */
 		function spip_liste_mots($args){
 			$objet = 'mot';
-			
+			$table_objet = 'mots';
+
 			$what[] = 'mots.id_mot';
 			$from = 'spip_mots as mots';
 			$where = is_array($args['where']) ? $args['where'] : array();
@@ -925,13 +950,20 @@ function action_xmlrpc_serveur_dist(){
 			if(intval($args['id_groupe'])){
 				$where[] = 'mots.id_groupe='.intval($args['id_groupe']);
 			}
-			
+
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
-				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+				if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')){
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $table_objet,false,'', $where);
+					$where[] = $rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON resultats.id = mots.id_mot AND resultats.table_objet = mots ';
+				}
+				else{
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+					$where[] = 'resultats.'.$rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = mots.id_mot ) ';
+				}
 				$what[] = $rech_select;
-				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = rubriques.id_rubrique ) ';
-				$where[] .= 'resultats.'.$rech_where;
 			}
 
 			$mots_struct = array();
@@ -967,6 +999,8 @@ function action_xmlrpc_serveur_dist(){
 		 */
 		function spip_liste_rubriques($args){
 			$objet = 'rubrique';
+			$table_objet = 'rubriques';
+
 			$tout = false;
 			if(isset($args['tout']) && $args['tout'] == 'oui')
 				$tout = true;
@@ -986,10 +1020,17 @@ function action_xmlrpc_serveur_dist(){
 
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
-				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
-				$what = $rech_select;
-				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = rubriques.id_rubrique ) ';
-				$where[] = 'resultats.'.$rech_where;
+				if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')){
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $table_objet,false,'', $where);
+					$where[] = $rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON resultats.id = rubriques.id_rubrique AND resultats.table_objet = rubriques ';
+				}
+				else{
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+					$where[] = 'resultats.'.$rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = rubriques.id_rubrique ) ';
+				}
+				$what[] = $rech_select;
 			}
 
 			if(!$tout && !isset($GLOBALS['visiteur_session']))
@@ -1033,15 +1074,22 @@ function action_xmlrpc_serveur_dist(){
 			$from = 'spip_forum as forums';
 			$where = is_array($args['where']) ? $args['where'] : array();
 			$order = is_array($args['tri']) ? $args['tri'] : array('!id_forum');
-			
+
 			if(is_string($args['recherche']) AND strlen($args['recherche']) > 3){
 				$prepare_recherche = charger_fonction('prepare_recherche', 'inc');
-				list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where,null,true);
+				if (version_compare($GLOBALS['spip_version_branche'], '2.3', '>=')){
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $table_objet,false,'', $where);
+					$where[] = $rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON resultats.id = forums.id_forum AND resultats.table_objet = forums ';
+				}
+				else{
+					list($rech_select, $rech_where) = $prepare_recherche($args['recherche'], $objet, $where);
+					$where[] = 'resultats.'.$rech_where;
+					$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = forums.id_forum ) ';
+				}
 				$what[] = $rech_select;
-				$from .= ' INNER JOIN spip_resultats AS resultats ON ( resultats.id = forums.id_forum ) ';
-				$where[] = $rech_where;
 			}
-			
+
 			if($args['id_auteur']){
 				$where[] = 'forums.id_auteur='.intval($args['id_auteur']);
 			}
