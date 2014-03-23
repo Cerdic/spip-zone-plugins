@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_bouton_radio_une_colonne_pour_tous_les_groupes' => 'Una sola columna conteniendo todos los grupos de palabras',
 	'cfg_bouton_tickets' => 'Tickets',
 	'cfg_descr_autorisations' => 'Esta página de configuración permite configurar las autorizaciones para escribir, modificar, asignar y comentar los tickets. Instalar el plugin <a href="@url@">Autoridad</a> permite acceder a otras opciones de configuración, por ejemplo para autorizar el autor de un comentario a modificarlo una vez publicado.',
-	'cfg_descr_general' => 'Esta página de configuración permite elegir los valores de los campos opcionales, moderar los comentarios así como otras configuraciones.',
+	'cfg_descr_general' => 'Esta página de configuración permite elegir los valores de los campos opcionales, moderar los comentarios así como otras configuraciones.', # MODIF
 	'cfg_explication_cacher_moteurs' => 'Esconde los tickets de los motores de búsqueda pidiéndoles que no indexen los contenidos cuando se muestren en el espacio público.',
 	'cfg_explication_desactiver_public' => 'Solo mostrar los tickets en el espacio privado',
 	'cfg_explication_formats_documents_ticket' => 'Separe los formatos por una coma',
@@ -242,10 +242,10 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'ticket' => 'Ticket',
 	'ticket_enregistre' => 'Ticket registrado',
 	'tickets' => 'Tickets',
-	'tickets_autorisations' => 'Autorizaciones',
+	'tickets_autorisations' => 'Autorizaciones', # MODIF
 	'tickets_derniers_commentaires' => 'Últimos comentarios',
 	'tickets_en_cours_auteur' => 'Tickets de @nom@ en proceso',
-	'tickets_general' => 'Configuraciones generales',
+	'tickets_general' => 'Configuraciones generales', # MODIF
 	'tickets_sticked' => 'Tickets anclados',
 	'tickets_sur_inscription' => 'Sólo las personas identificadas pueden escribir tickets o comentarios.',
 	'tickets_sur_inscription_droits' => 'Los derechos de los que dispone no son suficientes.',

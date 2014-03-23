@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_bouton_radio_desactiver_forum_public' => 'Disable the use of public forums.',
 	'cfg_bouton_tickets' => 'Bug reports',
 	'cfg_descr_autorisations' => 'This setup page allows you to set permissions for writing, editing, assigning and commenting bug reports. Installing the <a href="@url@">Autorité</a> plugin allows for access to other configuration options, like allowing the author of a comment to modify it once published.',
-	'cfg_descr_general' => 'This setup page lets you choose the values ​​of optional fields, comment moderation as well as various other parameters.',
+	'cfg_descr_general' => 'This setup page lets you choose the values ​​of optional fields, comment moderation as well as various other parameters.', # MODIF
 	'cfg_explication_cacher_moteurs' => 'Hide bug reports from search engines asking them not to index their content when they are displayed in the public space.',
 	'cfg_explication_desactiver_public' => 'Show the tickets in the private space only',
 	'cfg_explication_formats_documents_ticket' => 'Separate formats with a comma.',
@@ -231,10 +231,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ticket' => 'Bug report',
 	'ticket_enregistre' => 'The bug report has been saved.',
 	'tickets' => 'Bug reports',
-	'tickets_autorisations' => 'Authorizations',
+	'tickets_autorisations' => 'Authorizations', # MODIF
 	'tickets_derniers_commentaires' => 'Last comments',
 	'tickets_en_cours_auteur' => '@nom@ bug reports being processed',
-	'tickets_general' => 'General parameters',
+	'tickets_general' => 'General parameters', # MODIF
 	'tickets_sticked' => 'Sticked bug reports',
 	'tickets_sur_inscription' => 'Bug report or comment only available for registered users.
 	',
