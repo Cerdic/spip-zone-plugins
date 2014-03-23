@@ -9,12 +9,12 @@
 	#SET{multiple, oui}
 ]
 #SET{cacher_option_intro, #ENV{cacher_option_intro}}
-[(#GET{multiple}|non)
+[(#ENV{obligatoire,non}|=={oui}|oui)
 	#SET{cacher_option_intro, oui}
 ]
 
 <select name="#ENV{nom}\[\]" [(#GET{multiple}|oui) multiple="multiple" size="#ENV{size,15}" ][ class="(#ENV{class})"] id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ value="(#ENV{valeur_forcee,#ENV{valeur}})"][ disabled="(#ENV{disable})"][ (#ENV*{attributs})]>
-[(#GET{cacher_option_intro}|non)
+[(#GET{cacher_option_intro}|=={oui}|non)
 <option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_mots(MOTS){par num type, num titre, titre}{id_groupe ?}>
 	<option value="#ID_MOT" [(#ID_MOT|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"]>[(#TITRE|supprimer_numero)]</option>
