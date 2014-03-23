@@ -1,5 +1,5 @@
 <BOUCLE_ticket_contenu(TICKETS){id_ticket}{tout}>
-<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{tickets}"><:tickets:tickets:></a>[<span class="sep"> &gt; </span><strong class="on">(#TITRE|couper{80})</strong>]</div>
+#INCLURE{fond=breadcrumb/ticket,env,ajax}
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
 <div class="ticket contenu-principal">

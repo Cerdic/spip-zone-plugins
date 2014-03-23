@@ -2,7 +2,7 @@
 	[(#SET{affichage_autorise, on})]
 ]
 <BOUCLE_si_afficher_public(CONDITION){si #GET{affichage_autorise, off}|=={on}|oui}>
-<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:tickets:tickets:></strong></div>
+#INCLURE{fond=breadcrumb/tickets,env,ajax}
 
 <div class="ticket contenu-principal">
 	<div class="cartouche">
