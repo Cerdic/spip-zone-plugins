@@ -87,7 +87,7 @@
 				<div class="clearfix">
 					<h3>Utilisation de la balise <strong>RAINETTE_INFOS</strong></h3>
 					<ul>
-						<li>Ville observ&eacute;e:&nbsp;<strong>#RAINETTE_INFOS{#GET{lieu}, VILLE}</strong></li>
+						<li>Ville observ&eacute;e:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, ville, #GET{service}})</strong>]</li>
 						<li>Longitude, appel sans filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, longitude, #GET{service}})</strong>]</li>
 						<li>Latitude, appel avec filtre unit&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, latitude, #GET{service}}|rainette_afficher_unite{angle})</strong>]</li>
 						<li>Appel sans type d'info pr&eacute;cis&eacute;e, on renvoie le tableau s&eacute;rialis&eacute;:&nbsp;[<strong>(#RAINETTE_INFOS{#GET{lieu}, '', #GET{service}})</strong>]</li>
