@@ -1,7 +1,7 @@
 <paquet
 	prefix="mejs"
 	categorie="multimedia"
-	version="0.1.2"
+	version="0.1.3"
 	etat="dev"
 	compatibilite="[3.0.10;3.0.*]"
 	logo="prive/themes/spip/images/mejs-64.png"
@@ -17,4 +17,6 @@
   <pipeline nom="insert_head" inclure="mejs_pipelines.php" /> 
   <!-- <pipeline nom="affichage_final" inclure="mejs_pipelines.php" /> --> 
   <pipeline nom="header_prive" inclure="mejs_pipelines.php" />
+  
+  <utilise nom="medias" compatibilite="[1.0.0;[" />
 </paquet>
