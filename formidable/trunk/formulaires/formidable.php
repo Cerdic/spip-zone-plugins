@@ -289,8 +289,8 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		// si on ne peut pas traiter correctement, alerter le webmestre
 		if (count($retours['traitements'])<count($traitements)){
 			$erreur_texte = "Impossible de traiter correctement le formulaire $id\n"
-				. "Traitements attendus :".array_keys($type_traitement)."\n"
-				. "Traitements realises :".array_keys($retours['traitements'])."\n";
+				. "Traitements attendus :".implode(',',array_keys($traitements))."\n"
+				. "Traitements realises :".implode(',',array_keys($retours['traitements']))."\n";
 		}
 
 		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
