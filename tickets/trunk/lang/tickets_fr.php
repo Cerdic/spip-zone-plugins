@@ -207,7 +207,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_ticket' => 'Nouveau ticket',
 
 	// O
-	'option_intro' => '--',
+	'option_intro' => '—',
 	'option_navigateur_autre' => 'Autre',
 	'option_navigateur_tous' => 'Tous les navigateurs',
 

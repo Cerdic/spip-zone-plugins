@@ -1,11 +1,11 @@
 <traduction module="tickets" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/tickets/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="239" traduits="151" relire="0" modifs="2" nouveaux="86" pourcent="63.18">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=ar" total="240" traduits="151" relire="0" modifs="2" nouveaux="87" pourcent="62.92">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=de" total="239" traduits="72" relire="0" modifs="14" nouveaux="153" pourcent="30.13">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=de" total="240" traduits="72" relire="0" modifs="14" nouveaux="154" pourcent="30.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=en" total="239" traduits="214" relire="0" modifs="5" nouveaux="20" pourcent="89.54">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=en" total="240" traduits="214" relire="0" modifs="5" nouveaux="21" pourcent="89.17">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
@@ -13,13 +13,13 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Martin McCaffery" lien="http://trad.spip.net/auteur/martin-mccaffery" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=es" total="239" traduits="225" relire="0" modifs="5" nouveaux="9" pourcent="94.14">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=es" total="240" traduits="239" relire="0" modifs="0" nouveaux="1" pourcent="99.58">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=fr" total="239" traduits="239" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=fr" total="240" traduits="240" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=sk" total="239" traduits="228" relire="0" modifs="5" nouveaux="6" pourcent="95.40">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=sk" total="240" traduits="228" relire="0" modifs="5" nouveaux="7" pourcent="95.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
