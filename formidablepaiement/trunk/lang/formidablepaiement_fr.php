@@ -20,7 +20,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_paiement_option_taxes_label' => 'TVA',
 	'traiter_paiement_option_tva_label' => 'Taux de T.V.A. (%)',
 	'traiter_paiement_option_message_label' => 'Message après paiement réussi',
-	'traiter_paiement_necessite_explication' => 'Pour la prise en charge du paiement, il est nécessaire d\'enregistrer les résultats dans la base de données.'
+	'traiter_paiement_necessite_explication' => 'Pour la prise en charge du paiement, il est nécessaire d\'enregistrer les résultats dans la base de données.',
+
+	'titre_reglement' => 'Règlement',
+	'titre_reglement_montant' => 'pour un montant de <b>@montant@</b>',
 );
 
 ?>

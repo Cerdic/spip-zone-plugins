@@ -2,11 +2,11 @@
 	prefix="formidablepaiement"
 	categorie="communication"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/formidablepaiement-64.png"
 	documentation=""
-	schema="1.0.0" 
+	schema="1.0.0"
 >
 
 	<nom>Formulaires de paiement</nom>
@@ -14,6 +14,11 @@
 	<auteur lien='http://nursit.com'>Cédric Morin</auteur>
 
 	<licence>GNU/GPL</licence>
+
+	<pipeline nom="formulaire_fond" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="bank_traiter_reglement" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="formidablepaiement_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="formidablepaiement_pipelines.php" />
 
 	<necessite nom="bank" compatibilite="[2.6.1;2.*]" />
 	<necessite nom="formidable" compatibilite="[2.5.8;2.*]" />
