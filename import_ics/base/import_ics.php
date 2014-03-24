@@ -46,11 +46,12 @@ function import_ics_declarer_tables_objets_sql($tables) {
 			"titre"              => "text NOT NULL DEFAULT ''",
 			"url"                => "text NOT NULL DEFAULT ''",
 			"id_article"         => "bigint(21) NOT NULL DEFAULT 0",
-			"id_mot"        	 => "bigint(21) NOT NULL DEFAULT 0",
+			"id_mot"             => "bigint(21) NOT NULL DEFAULT 0",
+			"id_ressource"       => "bigint(21) NOT NULL DEFAULT 0",
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
-			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
+			"statut"             => "varchar(20) DEFAULT '0' NOT NULL", 
 			"maj"                => "TIMESTAMP",
-			"statut_maj"		 => "varchar(20) DEFAULT '0' NOT NULL"
+			"statut_maj"         => "varchar(20) DEFAULT '0' NOT NULL"
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_almanach",
@@ -58,8 +59,8 @@ function import_ics_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre', 'url', 'id_article', 'id_mot'),
-		'champs_versionnes' => array('titre', 'url', 'id_article', 'id_mot'),
+		'champs_editables'  => array('titre', 'url', 'id_article', 'id_mot', 'id_ressource'),
+		'champs_versionnes' => array('titre', 'url', 'id_article', 'id_mot', 'id_ressource'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_almanachs_liens'),
 		'statut_textes_instituer' => array(

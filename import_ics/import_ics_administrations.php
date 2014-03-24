@@ -25,12 +25,16 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
-		array('maj_tables', array('spip_almanachs', 'spip_almanachs_liens')),
+		array('maj_tables',array('spip_almanachs', 'spip_almanachs_liens')),
 		array('maj_tables',array('spip_evenements')),
 		array('sql_alter',"TABLE spip_evenements ADD uid text NOT NULL"),
 		array('sql_alter',"TABLE spip_evenements ADD sequence bigint(21) DEFAULT '0' NOT NULL"),
 	);
 
+	$maj['1.0.1'] = array(
+		array('sql_alter',"TABLE spip_almanachs ADD id_ressource bigint(21) NOT NULL DEFAULT '0'"),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
