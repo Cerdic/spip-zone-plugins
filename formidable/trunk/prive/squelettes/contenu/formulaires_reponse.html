@@ -19,6 +19,15 @@
 #INCLURE{fond=modeles/formulaires_reponse,id_formulaires_reponse}
 #BOITE_FERMER
 
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,formulaires_reponse,id,#ID_FORMULAIRES_REPONSE},data,'<div class="nettoyeur"></div>'}}
+
 #BOITE_FERMER
+
+#SET{enfants,''}
+[(#VAL{formulaires_reponse}|concat{-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/formulaires_reponse-enfants,id_objet,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,formulaires_reponse,id_objet,#ID_FORMULAIRES_REPONSE},data,#GET{enfants}})]})]
+
 </BOUCLE_autoriser>
 </BOUCLE_formulaires_reponse>

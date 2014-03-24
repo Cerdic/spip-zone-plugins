@@ -32,5 +32,14 @@
 
 	#FORMULAIRE_FORMIDABLE{#ID_FORMULAIRE}
 
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,formulaire,id,#ID_FORMULAIRE},data,'<div class="nettoyeur"></div>'}}
+
 #BOITE_FERMER
+
+#SET{enfants,''}
+[(#VAL{formulaire}|concat{-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/formulaire-enfants,id_objet,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,formulaire,id_objet,#ID_FORMULAIRE},data,#GET{enfants}})]})]
+
 </BOUCLE_formulaire>
