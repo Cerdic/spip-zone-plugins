@@ -12,9 +12,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+  
+  // L
+  'label_maxheight' => 'Hauteur maxi. par défaut (px)',
+	'label_maxwidth' => 'Largeur maxi. par défaut (px)',
 
 	// T
-	'titre_page_configurer_mejs' => 'Configuration du Lecteur MediaElement',
+	'titre_page_configurer_mejs' => 'Lecteur MediaElement',
+  'titre_configurer_mejs' => 'Configuration du Lecteur MediaElement'
 );
 
 ?>

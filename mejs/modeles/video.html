@@ -7,8 +7,12 @@
   - volume
   - autoplay  buggué sur chrome ... pas documenté officiellement
   
-]<BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}>  
-<video id="mejs-#ID_DOCUMENT" src="#FICHIER"[ width="(#LARGEUR)"][ height="(#HAUTEUR)"]
+][(#SET{largeur,500})]   [(#CONFIG{mejs/maxwidth}|oui)  [(#SET{largeur,#CONFIG{mejs/maxwidth}})]] 
+ [(#SET{hauteur,300})]   [(#CONFIG{mejs/maxheight}|oui) [(#SET{hauteur,#CONFIG{mejs/maxheight}})]] 
+<BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}>  
+[(#LARGEUR|oui) [(#SET{largeur,#LARGEUR})]] 
+[(#HAUTEUR|oui) [(#SET{hauteur,#HAUTEUR})]]
+<video id="mejs-#ID_DOCUMENT" src="#FICHIER"[ width="(#GET{largeur})"][ height="(#GET{hauteur})"]
       [(#MIME_TYPE|=={application/mp4}|oui) type="video/mp4"]   
        preload="none"  controls="controls"
       [(#LOGO_DOCUMENT|extraire_attribut{src}|couper{23,''}|=={plugins-dist/medias}|non) [poster="(#LOGO_DOCUMENT|extraire_attribut{src})"]]
