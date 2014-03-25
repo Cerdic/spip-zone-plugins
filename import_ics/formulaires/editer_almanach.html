@@ -1,3 +1,14 @@
+<script language="JavaScript">
+$( document ).ready(function() {
+  $('.editer_id_ressource').hide();
+});
+function toggle(className, obj) {
+    var $input = $(obj);
+    if ($input.prop('checked')) $(className).show();
+    else $(className).hide();
+}
+</script>
+
 <div class="ajax">
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_almanach,nouveau}'>
 	[(#REM) titre pour un formulaire en plusieurs étapes
@@ -55,14 +66,20 @@
 				datas=#GET{tableau_type_evenement}	
 			})]
 
-		[(#PLUGIN{orr}|non)
-			[(#SAISIE{selection, id_orr_ressource, obligatoire=non,
-				afficher_si='@resa_auto@=="on"',
-				label=<:almanach:reservation:>,
+			[(#PLUGIN{orr}|oui)
+			<li class="editer_resa_auto">
+				<div class="choix">
+					<input type='checkbox' onclick="toggle('.editer_id_ressource', this)" class="checkbox" name='resa_auto' value='oui' id='resa_auto_oui'[ (#ENV{resa_auto}oui{non}|oui)checked="checked"] />
+					<label for='resa_auto_oui'>Activer les réservations automatiques</label>
+				</div>
+			</li>
+
+			[(#SAISIE{selection, id_ressource, obligatoire=non,
+				label=<:almanach:resa_auto:>,
 				explication=<:almanach:choix_salle:>,
-				datas=#GET{tableau_ressources}	
+				datas=#GET{tableau_ressources}
 			})]
-		]
+			]
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
