@@ -101,7 +101,10 @@ function action_xmlrpc_serveur_dist(){
 		 */
 		function auth($args=array()){
 			$auth_methode = 'spip';
-			if(is_array($GLOBALS['visiteur_session']) && $GLOBALS['visiteur_session'] > 1){
+			if(is_array($GLOBALS['visiteur_session']) && intval($GLOBALS['visiteur_session']['id_auteur']) > 0){
+				$logo = quete_logo('id_auteur','on', $GLOBALS['visiteur_session']['id_auteur'], '', false);
+				if(is_array($logo))
+					$GLOBALS['visiteur_session']['logo'] = url_absolue($logo[0]);
 				return $GLOBALS['visiteur_session'];
 			}
 			$login = $args[0];
