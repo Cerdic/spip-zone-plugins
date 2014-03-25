@@ -16,15 +16,15 @@
       [(#MIME_TYPE|=={application/mp4}|oui) type="video/mp4"]   
        preload="none"  controls="controls"
       [(#LOGO_DOCUMENT|extraire_attribut{src}|couper{23,''}|=={plugins-dist/medias}|non) [poster="(#LOGO_DOCUMENT|extraire_attribut{src})"]]
-      [class="mejs-(#ENV{skin})"] 
+      class="mejs[ mejs-(#ENV{skin})]"
 ></video>	
-<script>
+[(#REM|test_espace_prive|non)<script>
 (function($) {   
   var player#ID_DOCUMENT = new MediaElementPlayer('#mejs-#ID_DOCUMENT',{       
       [(#ENV{volume}|oui)  [startVolume:(#ENV{volume}|floatval),]]   
   });  
   [(#ENV{autoplay}|oui) player#ID_DOCUMENT.play();]   
 })(jQuery); 
-</script>
+</script>]
 </BOUCLE_tous>
 #FILTRE{trim}

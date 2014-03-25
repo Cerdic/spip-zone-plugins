@@ -11,8 +11,8 @@
 	
 ]
 <BOUCLE_tous(DOCUMENTS types_documents){id_document=#ID}{tout}{extension IN mp3}>
-<audio id="mejs-#ID_DOCUMENT" src="#FICHIER" type="audio/mp3" controls="controls"  [class="mejs-(#ENV{skin})"] ></audio>	
-<script>
+<audio id="mejs-#ID_DOCUMENT" src="#FICHIER" type="audio/mp3" controls="controls"  class="mejs[ mejs-(#ENV{skin})]"></audio>	
+[(#REM|test_espace_prive|non)<script>
 (function($) {
   var player#ID_DOCUMENT = new MediaElementPlayer('#mejs-#ID_DOCUMENT',
   {
@@ -24,6 +24,6 @@
   );
   [(#ENV{autoplay}|oui) player#ID_DOCUMENT.play();]   
 })(jQuery);
-</script>
+</script>]
 </BOUCLE_tous>
 #FILTRE{trim}

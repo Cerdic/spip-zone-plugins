@@ -3,7 +3,7 @@
  * Utilisations de pipelines par MediaElementPlayer
  *
  * @plugin     MediaElementPlayer
- * @copyright  2013
+ * @copyright  2014
  * @author     John Dyer
  * @licence    MIT
  * @package    SPIP\Mejs\Pipelines
@@ -35,7 +35,7 @@ function mejs_insert_head_css($flux){
  */  
 function mejs_insert_head($flux){
 	  $js = find_in_path('mejs/mediaelement-and-player.min.js');     
-    $flux .= "<script src='$js'></script>\n";
+    $flux .= "<script type='text/javascript' src='$js'></script>\n";
     // $flux .= "<script>$('video,audio').mediaelementplayer();</script>\n";     // l'appel se fait à la volee
     return $flux;
 }
@@ -71,8 +71,9 @@ function mejs_affichage_final($flux){
  * @return string
  */
 function mejs_header_prive($flux){
-    $flux = mejs_insert_head_css($flux);
     $flux = mejs_insert_head($flux);
+    $flux .= "<script type='text/javascript'>jQuery(function(){ $('video,audio').mediaelementplayer();});</script>\n"; // dans le prive, on a appel le script via le head
+    $flux = mejs_insert_head_css($flux);
     return $flux;
 }
 
