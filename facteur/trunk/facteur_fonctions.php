@@ -328,6 +328,8 @@ function facteur_mail_html2text($html){
 	// Remplace tous les liens
 	preg_match_all("/\<a href=['\"](.*?)['\"][^>]*>(.*?)<\/a>/ims", $html,$matches,PREG_SET_ORDER);
 	$prelinks = $postlinks = array();
+	if (!function_exists('url_absolue'))
+		include_spip('inc/filtres');
 	foreach ($matches as $k => $match){
 		$link = "@@@link$k@@@";
 		$url = str_replace("&amp;","&",$match[1]);
@@ -339,7 +341,8 @@ function facteur_mail_html2text($html){
 			// texte + url
 			$prelinks[$match[0]] = $match[2] . " ($link)";
 		}
-		$postlinks[$link] = $url;
+		// passer l'url en absolu dans le texte sinon elle n'est pas clicable ni utilisable
+		$postlinks[$link] = url_absolue($url);
 	}
 	$html = str_replace(array_keys($prelinks), array_values($prelinks),$html);
 
