@@ -1,9 +1,9 @@
 <paquet 
 		prefix="elfinder"
 		categorie="maintenance"
-		version="0.2"
+		version="0.2.1"
 		etat="dev"
-		compatibilite="[3.0.0-beta2;["
+		compatibilite="[3.0.0;3.0.*]"
 		logo="images/elfinder_48.png"
 		documentation="http://www.spip-contrib.net/elFinder"
 >
@@ -15,4 +15,7 @@
 	<lib nom="elfinder" lien="https://github.com/downloads/Studio-42/elFinder/elfinder-2.0-rc1.tar.gz" />
 
 	<menu nom="elfinder" titre="elfinder:elfinder" parent="menu_administration" icone="images/elfinder-16.png" />
+
+    <pipeline nom="jqueryui_plugins" inclure="elfinder_pipelines.php" />
+
 </paquet>
