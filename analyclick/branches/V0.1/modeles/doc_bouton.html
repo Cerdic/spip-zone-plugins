@@ -13,14 +13,16 @@
 *	<docXX|bouton|compteur=1>
 *
 **/
-]
-<BOUCLE_doc(DOCUMENTS){id_document}>
+][(#SET{url,#URL_DOCUMENT})]
+[(#ENV{compteur}|!={''}|?{" ",""})
+[(#SET{url,#URL_DOC_COMPTEUR})]
+]<BOUCLE_doc(DOCUMENTS){id_document}>
 <table class="doc_bouton [doc_bouton_(#ENV{couleur})] [doc_bouton_(#ENV{align})]" cellpadding=0 cellspacing=0><tr><td class="left">
-<a class="spip" href="[(#ENV{compteur}|choixsivide{#URL_DOCUMENT,#URL_DOC_COMPTEUR})]">
+<a class="spip" href="#GET{url}">
 [(#LOGO_DOCUMENT{left}|image_reduire{0,32})] 
 </a>
 </td><td class="right">
-<a class="spip" href="[(#ENV{compteur}|choixsivide{#URL_DOCUMENT,#URL_DOC_COMPTEUR})]">
+<a class="spip" href="#GET{url}">
 #TITRE 
 <span class="info">
 ([(#DESCRIPTIF*),][ (#TAILLE|taille_en_octets)])
