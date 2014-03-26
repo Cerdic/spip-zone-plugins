@@ -9,7 +9,8 @@ gis_init_map = function(mapcfg) {
 	var map = new L.Map(map_container,{
 		scrollWheelZoom: mapcfg["scrollWheelZoom"],
 		zoomControl: mapcfg["zoomControl"],
-		maxZoom: mapcfg["maxZoom"]
+		maxZoom: mapcfg["maxZoom"],
+		minZoom: mapcfg["minZoom"]
 	});
 	// affecter sur la globale homonyme a mapid/map_container (compat ascendante)
 	eval(map_container+"=map;");

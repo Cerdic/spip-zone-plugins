@@ -10,6 +10,7 @@ Parametres possibles :
 - lon|lonxit|longitude = -4.7      longitude du centre de la carte
 - zoom = 5                         zoom de la carte
 - maxZoom = 13                     zoom maximum autorisé
+- minZoom = 13                     zoom minimum autorisé
 
 - sw_lat = lat - 10°               latitude du sud-ouest de la bounding box
 - sw_lon = lon - 10°               longitude du sud-ouest de la bounding box
@@ -83,7 +84,8 @@ map_cfg["[(#GET{id})]"] = {
 "mapid":"map[(#GET{id})]",
 "scrollWheelZoom": [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
 "zoomControl": [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})][,
-"maxZoom": (#ENV{maxZoom})],
+"maxZoom": (#ENV{maxZoom})][,
+"minZoom": (#ENV{minZoom})],
 "utiliser_bb":[(#GET{utiliser_bb}|?{true,false})],
 "lat":[(#GET{lat})][,
 "sw_lat":(#GET{sw_lat})][,
