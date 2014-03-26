@@ -152,8 +152,8 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'refuse' => 'texte_statut_poubelle',
 		),
 		'champs_versionnes' => array(
-            'titre', 'texte', 'termes',
-        ),
+			'titre', 'texte', 'termes',
+		),
 	);
 
 	return $tables;
