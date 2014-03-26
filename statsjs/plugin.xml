@@ -17,7 +17,8 @@ Quel int&#233;r&#234;t ?
 	<pipeline>
 		<nom>affichage_final</nom>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<utilise id="stats" version="[0.4;]" />
 	<categorie>statistique</categorie>
 	<lien>http://www.spip-contrib.net/3753</lien>
 	<chemin dir='' />
