@@ -88,6 +88,7 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'actif'   => 'puce-publier-8.png',
 			'inactif' => 'puce-proposer-8.png',
 		),
+		
 	);
 
 
@@ -150,6 +151,9 @@ function dictionnaires_declarer_tables_objets_sql($tables) {
 			'publie' => 'texte_statut_publie',
 			'refuse' => 'texte_statut_poubelle',
 		),
+		'champs_versionnes' => array(
+            'titre', 'texte', 'termes',
+        ),
 	);
 
 	return $tables;
