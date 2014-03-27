@@ -1,7 +1,8 @@
 #SET{erreurs,#ENV**{erreurs}|table_valeur{tables_saveauto}}
 #SET{obli,obligatoire}
-[(#ENV{tout_saveauto}|non) #SET{tables_a_exporter, #ENV{tables_saveauto}}]
-[(#ENV{tout_saveauto}|oui) #SET{tables_a_exporter, #ENV{_tables_export}}]
+#SET{_tables_non_spip,#REM|saveauto_lister_tables_ext}
+[(#CONFIG{saveauto/tout_saveauto}|non) #SET{tables_a_exporter, #CONFIG{saveauto/tables_saveauto}}]
+[(#CONFIG{saveauto/tout_saveauto}|oui) #SET{tables_a_exporter, #ENV{_tables_export}}]
 
 <B_tables>
 <li class="editer editer_tables_saveauto[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -9,11 +10,11 @@
 	<label><:install_tables_base:></label>
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
 	<div class="choix">
-		<input type="checkbox" name="tout_saveauto" id="tout_saveauto" value="oui"[(#ENV{tout_saveauto}|oui) checked="checked"]
+		<input type="checkbox" name="tout_saveauto" id="tout_saveauto" value="oui"[(#CONFIG{saveauto/tout_saveauto}|oui) checked="checked"]
 					 onchange="jQuery(this).prop('checked')?jQuery('#liste_tables_saveauto').hide('fast'):jQuery('#liste_tables_saveauto').show('fast');" />
 		<label for="tout_saveauto"><:saveauto:label_toutes_tables:></label>
 	</div>
-	<div id="liste_tables_saveauto"[(#ENV{tout_saveauto}|oui)style="display:none;"]>
+	<div id="liste_tables_saveauto"[(#CONFIG{saveauto/tout_saveauto}|oui)style="display:none;"]>
 		<ol class="spip">
 <BOUCLE_tables(DATA){source table, #ENV{_toutes_tables}}>
 			<li class="choix">
@@ -22,12 +23,13 @@
 			</li>
 </BOUCLE_tables>
 		</ol>
+
 <B_tables_ext>
 		<label><:saveauto:label_tables_non_spip:></label>
 		<ol class="spip">
-<BOUCLE_tables_ext(DATA){source table, #ENV{_tables_non_spip}}>
+<BOUCLE_tables_ext(DATA){source table, #GET{_tables_non_spip}}>
 			<li class="choix">
-				<input type="checkbox" value="#VALEUR" name="tables_saveauto[]" id="#VALEUR#CLE" checked="checked" />
+				<input type="checkbox" value="#VALEUR" name="tables_saveauto[]" id="#VALEUR#CLE"[ (#VALEUR|in_array{#GET{tables_a_exporter, #ARRAY}}|oui)checked="checked"] />
 				<label for="#VALEUR#CLE">#VALEUR</label>
 			</li>
 </BOUCLE_tables_ext>
