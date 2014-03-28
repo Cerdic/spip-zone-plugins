@@ -52,7 +52,8 @@ function albums_declarer_tables_objets_sql($tables){
 			'titre' => 8,
 			'descriptif' => 1
 		),
-		'tables_jointures'		=> array('spip_albums_liens'),
+		'tables_jointures'		=> array(
+		),
 		'modeles'			=> array('album'),
 		'titre' => "titre, '' AS lang",
 		'date' => "date",
@@ -72,6 +73,11 @@ function albums_declarer_tables_objets_sql($tables){
 		),
 		'texte_changer_statut'		=> 'album:texte_changer_statut',
 	);
+
+	// jointures sur les albums pour tous les objets
+	// passe apres id_auteur=>auteurs_liens et evite de le casser
+	$tables[]['tables_jointures'][]= 'albums_liens';
+	$tables[]['tables_jointures'][]= 'albums';
 
 	return $tables;
 }
