@@ -1,6 +1,7 @@
 /* @override 
 	http://h2v.me/essai/css/curator.css
-	http://lil.share2.fr/plugins/curator/css/curator.css */
+	http://lil.share2.fr/plugins/curator/css/curator.css
+	http://ydikoi.net/plugins/auto/curator/v0.1.0/css/curator.css */
 
 body{
 	margin-right: auto;
@@ -21,12 +22,12 @@ label{
 input#titre,input#nom_site, input#url_site, textarea{
 	-moz-box-shadow: 0 0 5px #c4c4c6;
 	box-shadow: 0 0 5px #c4c4c6;
-	width: 90%;
+	width: 100%;
 	border: thin solid gray;
 	margin-right: auto;
 	margin-left: auto;
 	position: relative;
-	display: block;
+	display: inline;
 	background-color: #f0f0f0;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
