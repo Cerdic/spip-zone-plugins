@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'Autoren', # MODIF
 
 	// B
+	'bouton_configurer_acces' => 'Einrichtung der .htaccess Zugangsbeschränkung',
 	'bouton_creer_la_zone' => 'Neuen Bereich erstellen',
 
 	// C
