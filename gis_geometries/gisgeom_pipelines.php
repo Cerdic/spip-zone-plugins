@@ -123,9 +123,20 @@ function gisgeom_pre_insertion($flux){
 			set_request('lon', $centroid->getX());
 		}
 	}
-	if (_request('geojson') AND $flux['args']['table'] == 'spip_gis') {
+	else if($flux['args']['table'] == 'spip_gis') {
+		if(_request('geojson'))
+			$json = _request('geojson');
+		/**
+		 * Cas où on utilise la fonction gis_inserer() depuis une application tierce
+		 * On doit fournir un 'geo' valide pour récupérer notre point
+		 * Ex: CRUD, xmlrpc...
+		 */
+		else{
+			$point = array('type' => 'Feature','geometry' => array('type'=> 'Point','coordinates' => array(_request('lat')?_request('lat'):0,_request('lon')?_request('lon'):0)));
+			$json = json_encode($point);
+		}
 		include_spip('gisgeom_fonctions');
-		$wkt = json_to_wkt(_request('geojson'));
+		$wkt = json_to_wkt($json);
 		// convertir le WKT en binaire avant l'insertion
 		$binary = sql_getfetsel("GeomFromText('$wkt')");
 		$flux['data']['geo'] = $binary;
@@ -168,7 +179,7 @@ function gisgeom_post_edition($flux){
  */
 function gisgeom_pre_boucle($boucle){
 	if ($boucle->type_requete == 'gis' OR in_array('gis',$boucle->jointures)) {
-        $boucle->select[]= 'AsText(gis.geo) AS geometry';
+		$boucle->select[]= 'AsText(gis.geo) AS geometry';
 	}
 	return $boucle;
 }
