@@ -116,7 +116,14 @@ function spip_lire_gis($args){
 	$logo = quete_logo('id_gis','on', $res['result'][0]['id_gis'], '', false);
 	if(is_array($logo))
 		$res['result'][0]['logo'] = url_absolue($logo[0]);
-	
+
+	if(defined('_DIR_PLUGIN_GISGEOM')){
+		if(isset($res['result'][0]['geo'])){
+			include_spip('gisgeom_fonctions');
+			$res['result'][0]['geo'] = wkt_to_json($wkt);
+		}
+	}
+
 	$gis_struct = $res['result'][0];
 	$gis_struct = array_map('texte_backend',$gis_struct);
 	return $gis_struct;
