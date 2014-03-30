@@ -17,8 +17,7 @@ include_spip('action/editer_gis');
  * @return array : un array avec (bool) success, (string) message et (array) result indiquant l'id créé 
  */
 function crud_gis_create_dist($dummy,$set=null){
-	$GLOBALS['visiteur_session'] = sql_fetsel('*','spip_auteurs','id_auteur=216');
-	if (autoriser('voir','gis') && $id = sql_insertq("spip_gis", array()))
+	if (autoriser('voir','gis') && $id = gis_inserer())
 		$err = gis_modifier($id,$set);
 	else
 		$err = _T('crud:erreur_creation',array('objet'=>'gis'));
