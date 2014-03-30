@@ -9,8 +9,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return mixed
  */
 function balise_geometry_dist($p) {
-    $p->code = '$Pile[$SP][\'geometry\']';
-    return $p;
+	$p->code = '$Pile[$SP][\'geometry\']';
+	return $p;
 }
 
 /**
