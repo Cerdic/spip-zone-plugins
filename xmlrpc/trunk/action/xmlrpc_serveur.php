@@ -172,7 +172,15 @@ function action_xmlrpc_serveur_dist(){
 				$this->error = new IXR_Error(-32601, texte_backend($res['message']));
 				return false;
 			}
-
+			$methode_lire = 'spip.lire_'.$args['objet'];
+			/**
+			 * Si on a une méthode de lecture spécifique à ce type d'objet, on l'utilise plutôt que 
+			 * d'afficher les infos par défaut
+			 */
+			if ($this->hasMethod($methode_lire)) {
+				$args[id_table_objet($args['objet'])] = $res['result']['row'][id_table_objet($args['objet'])];
+				$res['result']['row'] = $this->call($methode_lire, $args);
+			}
 			return $res;
 		}
 		
