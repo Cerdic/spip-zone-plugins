@@ -17,13 +17,12 @@ include_spip('action/editer_gis');
  * @return array : un array avec (bool) success, (string) message et (array) result indiquant l'id créé 
  */
 function crud_gis_create_dist($dummy,$set=null){
-	if ($id = insert_gis()){
-		list($e,$ok) = revisions_gis($id,$set);
-	}
-	else{
-		$e = _L('create error');
-	}
-	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
+	$GLOBALS['visiteur_session'] = sql_fetsel('*','spip_auteurs','id_auteur=216');
+	if (autoriser('voir','gis') && $id = sql_insertq("spip_gis", array()))
+		$err = gis_modifier($id,$set);
+	else
+		$err = _T('crud:erreur_creation',array('objet'=>'gis'));
+	return array('success'=>($err && strlen($err)>0)?false:true,'message'=>$err,'result'=>array('id'=>$id));
 }
 
 /**
@@ -37,13 +36,13 @@ function crud_gis_create_dist($dummy,$set=null){
 function crud_gis_update_dist($id,$set=null){
 	$id_gis = sql_getfetsel('id_gis','spip_gis','id_gis='.intval($id));
 	if(!$id_gis){
-		$e = _T('gis:erreur_gis_inconnu',array('id'=>$id));
+		$err = _T('gis:erreur_gis_inconnu',array('id'=>$id));
 	}else if(autoriser('modifier','gis',$id)){
-		list($e,$ok) = revisions_gis($id,$set);
+		$err = gis_modifier($id,$set);
 	}else{
-		$e = _L('update error');
+		$err = _L('update error');
 	}
-	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
+	return array('success'=>($err && strlen($err)>0)?false:true,'message'=>$err,'result'=>array('id'=>$id));
 }
 
 /**
@@ -56,9 +55,9 @@ function crud_gis_update_dist($id,$set=null){
  */
 function crud_gis_delete_dist($id){
 	if(autoriser('supprimer','gis',$id)){
-		list($e,$ok) = supprimer_gis($id);
+		$err = gis_supprimer($id);
 	}
-	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
+	return array('success'=>is_numeric($err)?true:false,'message'=>$err,'result'=>array('id'=>$id));
 }
 
 ?>
