@@ -1,24 +1,18 @@
 <BOUCLE_afficher_contenu(COMMANDES){id_commande=#ENV{id}}{tout}>
-[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+[<div class="champ contenu_date[ (#DATE|intval|>{0}|?{'',vide})]">
 	<label><:commandes:date_commande_label:></label>
 	<span dir='#LANG_DIR' class='date'>(#DATE|affdate)[ à (#DATE|affdate{'H:i'})]</span>
 </div>]
-[<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT*|strlen|?{'',vide})]">
+[<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT|intval|>{0}|?{'',vide})]">
 	<label><:commandes:date_paiement_label:></label>
 	<span dir='#LANG_DIR' class='#EDIT{date_paiement} date_paiement'>
-		(#DATE_PAIEMENT|intval|>{0}|?{
-			[(#DATE_PAIEMENT|affdate)][(#DATE_PAIEMENT|affdate{'H:i'}|intval|>{0}|oui)[ à (#DATE_PAIEMENT|affdate{'H:i'})]],
-			<em><:commandes:info_date_non_definie:></em>
-		})
+		(#DATE_PAIEMENT|affdate)[ à (#DATE_PAIEMENT|affdate{'H:i'})]
 	</span>
 </div>]
-[<div class="champ contenu_date_envoi[ (#DATE_ENVOI*|strlen|?{'',vide})]">
+[<div class="champ contenu_date_envoi[ (#DATE_ENVOI|intval|>{0}|?{'',vide})]">
 	<label><:commandes:date_envoi_label:></label>
 	<span dir='#LANG_DIR' class='#EDIT{date_envoi} date_envoi'>
-	(#DATE_ENVOI|intval|>{0}|?{
-		[(#DATE_ENVOI|affdate)][(#DATE_ENVOI|affdate{'H:i'}|intval|>{0}|oui)[ à (#DATE_ENVOI|affdate{'H:i'})]],
-		<em><:commandes:info_date_non_definie:></em>
-	})
+		(#DATE_ENVOI|affdate)[ à (#DATE_ENVOI|affdate{'H:i'})]
 	</span>
 </div>]
 [<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
