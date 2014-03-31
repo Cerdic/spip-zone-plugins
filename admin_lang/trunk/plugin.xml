@@ -1,0 +1,30 @@
+<plugin>
+	<nom>Admin Lang</nom>
+	<auteur>Aurelien levy, alm()elastick.net et [Daniel Viñar Ulriksen->dani@rezo.net]</auteur>
+	<licence>GNU/GPL - (c) 2006 - 2009</licence>
+	<version>0.2.1</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+			[fr]permet de g&#233;rer les traductions dans les fichiers de langues
+			[es]maneja en la inteface privada de SPIP la traduccion de archivos de idioma
+		</multi>
+	</description>
+	<lien></lien>
+	<options>admin_lang_options.php</options>
+ 	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<action>ajouterOnglets</action>
+        <inclure>admin_lang_boutons.php</inclure>
+	</pipeline>
+	<prefix>admin_lang</prefix>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines
+	<pipeline>
+		<nom>pre_typo</nom>
+		<action>pre_typo</action>
+		<inclure>toutmulti.php</inclure>
+	</pipeline> -->
+	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<categorie>maintenance</categorie>
+	<necessite id="SPIP" version="[2.0.0;]" />
+</plugin>
