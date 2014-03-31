@@ -1,16 +1,7 @@
 <BOUCLE_afficher_contenu(COMMANDES){id_commande=#ENV{id}}{tout}>
-[<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
-	<label><:commandes:modifier_commande_statut:></label>
-	<span dir='#LANG_DIR' class='statut'>[(#CHEMIN_IMAGE{icone-commande-#STATUT-16}|balise_img) ](#STATUT|commandes_lister_statuts)</span>
-</div>]
-[<div class="champ contenu_date_envoi[ (#DATE_ENVOI*|strlen|?{'',vide})]">
-	<label><:commandes:date_envoi_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{date_envoi} date_envoi'>
-	(#DATE_ENVOI|intval|>{0}|?{
-		[(#DATE_ENVOI|affdate)][(#DATE_ENVOI|affdate{'H:i'}|intval|>{0}|oui)[ à (#DATE_ENVOI|affdate{'H:i'})]],
-		<em><:commandes:info_date_non_definie:></em>
-	})
-	</span>
+[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
+	<label><:commandes:date_commande_label:></label>
+	<span dir='#LANG_DIR' class='date'>(#DATE|affdate)[ à (#DATE|affdate{'H:i'})]</span>
 </div>]
 [<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT*|strlen|?{'',vide})]">
 	<label><:commandes:date_paiement_label:></label>
@@ -21,9 +12,14 @@
 		})
 	</span>
 </div>]
-[<div class="champ contenu_date[ (#DATE*|strlen|?{'',vide})]">
-	<label><:commandes:date_commande_label:></label>
-	<span dir='#LANG_DIR' class='date'>(#DATE|affdate)[ à (#DATE|affdate{'H:i'})]</span>
+[<div class="champ contenu_date_envoi[ (#DATE_ENVOI*|strlen|?{'',vide})]">
+	<label><:commandes:date_envoi_label:></label>
+	<span dir='#LANG_DIR' class='#EDIT{date_envoi} date_envoi'>
+	(#DATE_ENVOI|intval|>{0}|?{
+		[(#DATE_ENVOI|affdate)][(#DATE_ENVOI|affdate{'H:i'}|intval|>{0}|oui)[ à (#DATE_ENVOI|affdate{'H:i'})]],
+		<em><:commandes:info_date_non_definie:></em>
+	})
+	</span>
 </div>]
 [<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
 	<label><:commandes:date_maj_label:></label>
