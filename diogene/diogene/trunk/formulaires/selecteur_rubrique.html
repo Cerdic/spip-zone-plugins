@@ -1,8 +1,8 @@
 #SET{prefix,#ENV{selecteur_type}|=={polyhier}|?{'rubrique|',''}}
 <B_rubriques>
 <BOUCLE_rubriques(RUBRIQUES){id_rubrique=#ENV{id_rubrique_limite,0}}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
-<li class="editer editer_id_parent">
 	<B_ss_rubriques>
+	<li class="editer editer_id_parent diogene_selecteur_rubrique">
 	<label for="id_parent"><:diogene:texte_choix_rubrique:></label>
 	<select name="[(#ENV{selecteur_type}|=={polyhier}|?{parents[(#VAL{91}|chr)][(#VAL{93}|chr)],id_parent})]" id="id_parent">
 		[(#ENV{rubrique_principale}|=={oui}|oui)<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>[(#TITRE|supprimer_numero)]</option>]
@@ -31,7 +31,9 @@
 			</BOUCLE_ssss_rubriques>
 		</BOUCLE_ss_rubriques>
 	</select>
+	</li>
 	</B_ss_rubriques>
+	<li class="editer editer_id_parent diogene_selecteur_rubrique_unique">
 	#SET{rubrique,#TITRE}
 	[(#ENV{type}|=={site}|non)<label><:diogene:texte_choix_rubrique:></label>
 	<em class="attention"><:diogene:message_id_parent_unique{rubrique=#GET{rubrique}}:></em>]
@@ -40,7 +42,7 @@
 	</BOUCLE_polyhier>
 	<input type="hidden" name="id_parent" value="#ID_RUBRIQUE" />
 	<//B_polyhier>
+	</li>
 	<//B_ss_rubriques>
-</li>
 </BOUCLE_rubriques>
 </B_rubriques>
