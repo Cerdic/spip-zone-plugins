@@ -20,12 +20,10 @@
 	<span dir='#LANG_DIR'>[(#MAJ|affdate)][ - (#MAJ|affdate{'H:i'})]</span>
 </div>
 
-[(#INCLURE{fond=inclure/commande-jolie, id_commande=#ID_COMMANDE})]
+[(#INCLURE{fond=inclure/commande, id_commande=#ID_COMMANDE})]
 
 
 <div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
-	<label><:commandes:contact_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{id_auteur} auteur'>#ID_AUTEUR</span>
 	[(#INCLURE{fond=inclure/facture-a, id_commande=#ID_COMMANDE})]
 </div>
 </BOUCLE_afficher_contenu>

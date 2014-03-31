@@ -5,6 +5,8 @@
 	#SET{details, #ARRAY}
 	<BOUCLE_commande_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
 	[(#SET_PUSH{details, [(#ARRAY{
+		objet,#OBJET,
+		id_objet,#ID_OBJET,
 		descriptif, [[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times;</strong> ](#DESCRIPTIF*|supprimer_numero)],
 		quantite, #QUANTITE,
 		prix, #PRIX*,
@@ -14,7 +16,7 @@
 </BOUCLE_commande>
 #SET{commande,#ENV{commande}}
 <//B_commande>[
-(#REM) Affichage du detail dans une table si fromat html demande
+(#REM) Affichage du detail dans une table si format html demande
 
 ]<BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>[
 (#REM) Version texte

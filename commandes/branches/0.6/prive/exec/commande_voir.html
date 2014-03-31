@@ -22,6 +22,9 @@
 	<h1><:commandes:reference_ref{ref=#REFERENCE}:></h1>
 
 	<div id='wysiwyg'>
+	<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+ 	 <h4><:commandes:une_commande_de:> <a href="#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}">#CIVILITE #PRENOM #NOM</a></h4>
+ 	 </BOUCLE_auteur>
 	<INCLURE{fond=prive/objets/contenu/commande,id=#ID_COMMANDE,ajax=wysiwyg}>
 	</div>
 	[(#REM) vérifie que le plugin mediathèque est actif]
