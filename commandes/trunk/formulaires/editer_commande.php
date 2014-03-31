@@ -11,6 +11,7 @@ function formulaires_editer_commande_saisies($id_commande='new', $id_auteur, $re
 			'options' => array(
 				'nom' => 'id_auteur',
 				'label' => _T('commandes:contact_label'),
+				'class' => 'chosen',
 				'defaut' => $id_auteur
 			)
 		),
