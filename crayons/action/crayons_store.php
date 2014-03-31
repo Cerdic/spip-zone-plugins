@@ -189,12 +189,24 @@ function crayons_store_set_modifs($modifs, $return) {
 	foreach ($modifs as $modif) {
 		list($type, $modele, $id, $content, $wid) = $modif;
 
-		// MODELE
 		$fun = '';
+		// si le crayon est un MODELE avec une fonction xxx_revision associee
+		// cas ou une fonction xxx_revision existe
 		if (function_exists($f = $type.'_'. $modele . "_revision")
 		OR function_exists($f = $modele . "_revision")
 		OR function_exists($f = $type . "_revision"))
 			$fun = $f;
+
+		// si on est en SPIP 3+ et qu'on edite un objet editorial bien declare
+		// passer par l'API objet_modifier
+		elseif (function_exists('lister_tables_objets_sql')
+		  AND $tables_objet = lister_tables_objets_sql()
+			AND isset($tables_objet[table_objet_sql($type)])) {
+			$fun = 'crayons_objet_modifier';
+		}
+
+		// sinon spip < 3 (ou pas un objet edito)
+		// on teste les objets connus et on route sur les fonctions correspondantes
 		else switch($type) {
 			case 'article':
 				$fun = 'crayons_update_article';
@@ -237,18 +249,12 @@ function crayons_store_set_modifs($modifs, $return) {
 				$fun = 'revision_'.$type;
 				break;
 		}
+
+		// si on a pas reussi on passe par crayons_update() qui fera un update sql brutal
 		if (!$fun or !function_exists($fun)) {
-			// si on est en SPIP 3+ et qu'on edite un objet editorial bien declare
-			// passer par l'API objet_modifier
-			if (function_exists('lister_tables_objets_sql')
-			  AND $tables_objet = lister_tables_objets_sql()
-				AND isset($tables_objet[table_objet_sql($type)])) {
-				$fun = 'crayons_objet_modifier';
-			} else {
-				$fun = 'crayons_update';
-				// $return['$erreur'] = "$type: " . _U('crayons:non_implemente');
-				// break;
-			}
+			$fun = 'crayons_update';
+			// $return['$erreur'] = "$type: " . _U('crayons:non_implemente');
+			// break;
 		}
 
 		if (!isset($updates[$type][$fun])) {
