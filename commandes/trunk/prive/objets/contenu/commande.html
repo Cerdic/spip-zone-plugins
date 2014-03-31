@@ -15,7 +15,7 @@
 		(#DATE_ENVOI|affdate)[ à (#DATE_ENVOI|affdate{'H:i'})]
 	</span>
 </div>]
-[<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
+[<div class="champ contenu_maj[ (#MAJ*|intval|>{0}|?{'',vide})]">
 	<label><:commandes:date_maj_label:></label>
 	<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
 </div>]
