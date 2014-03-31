@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'date_commande_label' => 'Date de création :',
 	'date_envoi_label' => 'Date d’envoi :',
-	'date_maj_label' => 'Date de mise à jour :',
+	'date_maj_label' => 'Dernière mise à jour :',
 	'date_paiement_label' => 'Date de paiement :',
 	'designation' => 'Désignation',
 	'details_commande' => 'Détails de commande :',
