@@ -238,11 +238,12 @@ function crayons_store_set_modifs($modifs, $return) {
 				break;
 		}
 		if (!$fun or !function_exists($fun)) {
-			if (table_objet_sql($type)
-			    AND include_spip('action/editer_objet')
-			    AND function_exists('objet_modifier')
-			    AND function_exists('wrap_objet_modifier')) {
-				$fun = 'wrap_objet_modifier';
+			// si on est en SPIP 3+ et qu'on edite un objet editorial bien declare
+			// passer par l'API objet_modifier
+			if (function_exists('lister_tables_objets_sql')
+			  AND $tables_objet = lister_tables_objets_sql()
+				AND isset($tables_objet[table_objet_sql($type)])) {
+				$fun = 'crayons_objet_modifier';
 			} else {
 				$fun = 'crayons_update';
 				// $return['$erreur'] = "$type: " . _U('crayons:non_implemente');
@@ -356,6 +357,24 @@ function vues_dist($type, $modele, $id, $content, $wid){
 			return typo($valeur);
 		}
 	}
+}
+
+
+/**
+ * Fonction de mise a jour par API editer_objet
+ * @param $id
+ * @param $data
+ * @param $type
+ * @param $ref
+ * @return bool|mixed|string
+ */
+function crayons_objet_modifier($id, $data, $type, $ref) {
+	if (include_spip('action/editer_objet')
+	    AND function_exists('objet_modifier')) {
+		return objet_modifier($type,$id,$data);
+	}
+	// fallback
+	return crayons_update($id, $data, $type);
 }
 
 //
