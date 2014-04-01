@@ -21,9 +21,6 @@
 	<necessite nom="saisies" compatibilite="[1.18.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.0;]" />
 
-
-	<!--<pipeline nom="affiche_gauche" inclure="commandes_pipelines.php" />-->
-	<pipeline nom="recuperer_fond" inclure="commandes_pipelines.php" />
 	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" /><!-- page d'accueil : liste des commandes en attente validation -->
 	<pipeline nom="affiche_auteurs_interventions" inclure="commandes_pipelines.php" /><!-- liste des commandes sur la fiche d'un auteur -->
 	<pipeline nom="insert_head_css" inclure="commandes_pipelines.php" />
@@ -32,8 +29,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
-	<pipeline nom="rechercher_liste_des_champs" inclure="base/commandes.php" />
-	<pipeline nom="rechercher_liste_des_jointures" inclure="base/commandes.php" /> 
 
 	<pipeline nom="autoriser" inclure="commandes_autorisations.php" />
 

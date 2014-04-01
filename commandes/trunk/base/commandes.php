@@ -27,10 +27,6 @@ function commandes_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['commandes'] = 'commandes';
 	$interface['table_des_tables']['commandes_details'] = 'commandes_details';
 	
-	$interface['table_date']['commandes'] = 'date';
-	
-	$interface['table_titre']['commandes'] = 'reference as titre, "" as lang';
-	
 	return $interface;
 }
 
@@ -48,26 +44,26 @@ function commandes_declarer_tables_principales($tables_principales){
 
 	// Table commandes_details
 	$commandes_details = array(
-		'id_commandes_detail' => 'bigint(21) not null',
-		'id_commande' => 'bigint(21) not null default 0',
-		'descriptif' => 'text not null default ""',
-		'quantite' => 'int not null default 0',
-		'prix_unitaire_ht' => 'float not null default 0',
-		'taxe' => 'decimal(4,3) not null default 0',
-		'statut' => 'varchar(25) not null default ""',
-		'objet' => 'varchar(25) not null default ""',
-		'id_objet' => 'bigint(21) not null default 0',
-		'maj' => 'timestamp'
+		'id_commandes_detail'       => 'bigint(21) not null',
+		'id_commande'               => 'bigint(21) not null default 0',
+		'descriptif'                => 'text not null default ""',
+		'quantite'                  => 'int not null default 0',
+		'prix_unitaire_ht'          => 'float not null default 0',
+		'taxe'                      => 'decimal(4,3) not null default 0',
+		'statut'                    => 'varchar(25) not null default ""',
+		'objet'                     => 'varchar(25) not null default ""',
+		'id_objet'                  => 'bigint(21) not null default 0',
+		'maj'                       => 'timestamp'
 	);
 	
 	$commandes_details_cles = array(
-		'PRIMARY KEY' => 'id_commandes_detail',
-		'KEY id_commande' => 'id_commande'
+		'PRIMARY KEY'               => 'id_commandes_detail',
+		'KEY id_commande'           => 'id_commande'
 	);
 	
 	$tables_principales['spip_commandes_details'] = array(
-		'field' => &$commandes_details,
-		'key' => &$commandes_details_cles,
+		'field'                     => &$commandes_details,
+		'key'                       => &$commandes_details_cles,
 		'join'=> array(
 			'id_commandes_detail' => 'id_commandes_detail',
 			'id_commande' => 'id_commande'
@@ -111,6 +107,10 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'champs_editables'         => array('id_auteur', 'date_paiement', 'date_envoi'),
 		'champs_versionnes'        => array('id_auteur', 'date_paiement', 'date_envoi'),
 		'rechercher_champs'        => array('reference' => 8, 'id_commande' => 8),
+		'rechercher_jointures'     => array(
+		                                    'auteur' => array('nom' => 1),
+		                                    'commandes_detail' => array('descriptif' => 4)
+		                                    ),
 		'tables_jointures'         => array(),
 		'statut_textes_instituer'  => array(
 			'encours'          => 'commandes:statut_encours',
@@ -146,19 +146,6 @@ function commandes_declarer_tables_objets_sql($tables) {
 
 	);
 
-	return $tables;
-}
-
-
-function commandes_rechercher_liste_des_champs($tables){
-	$tables['commande']['reference'] = 8;
-	return $tables;
-}
-
-
-function commandes_rechercher_liste_des_jointures($tables){
-	$tables['commande']['auteur']['nom'] = 1;
-	$tables['commande']['commandes_detail']['descriptif'] = 4;
 	return $tables;
 }
 
