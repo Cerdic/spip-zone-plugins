@@ -78,4 +78,40 @@ function autoriser_commande_supprimerdetail_dist($faire, $type, $id, $qui, $opts
 		OR ( $qui['statut'] == '0minirezo' AND !$qui['restreint'] );
 }
 
+
+/**
+ * Autorisation à modifier une commande
+ * - l'auteur de la commande
+ * - admin (mais pas restreint)
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de la commande
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/ 
+function autoriser_commande_modifier_dist($faire, $quoi, $id, $qui, $opts) {
+	return
+		$qui['id_auteur'] == sql_getfetsel('id_auteur', 'spip_commandes', 'id_commande = '.sql_quote($id)) OR 
+			( $qui['statut'] == '0minirezo'
+			 AND !$qui['restreint'] );
+}
+
+
+/**
+ * Autorisation à dater une commande
+ * Idem autorisation modifier
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de la commande
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/ 
+function autoriser_commande_dater_dist($faire, $quoi, $id, $qui, $opts) {
+	return autoriser_commande_modifier_dist($faire, $quoi, $id, $qui, $opts);
+}
+
 ?>
