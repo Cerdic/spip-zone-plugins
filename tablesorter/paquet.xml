@@ -1,23 +1,22 @@
 <paquet
-        prefix="tablesorter"
-        categorie="navigation"
-        version="1.3.1"
-        etat="stable"
-        compatibilite="[1.9.0;3.0.*]"
-        logo="images/tablesorter-32.png"
-        documentation="http://www.spip-contrib.net/Tablesorter-pour-SPIP"
->
+	prefix="tablesorter"
+	categorie="navigation"
+	version="1.3.1"
+	etat="stable"
+	compatibilite="[1.9.0;3.0.*]"
+	logo="images/tablesorter-32.png"
+	documentation="http://contrib.spip.net/Tablesorter-pour-SPIP">
 
-        <nom>Tablesorter</nom>
-        <!-- Avec tableSorter, le tri sera top ! -->
+	<nom>Tablesorter</nom>
+	<!-- Avec tableSorter, le tri sera top ! -->
 
-        <auteur lien="http://lovepeacenukes.com/">Chistian Bach</auteur>
-        <auteur>cym</auteur>
-        <auteur>b_b</auteur>
-        <auteur>Eric Lupinacci</auteur>
-        <auteur>BoOz</auteur>
+	<auteur lien="http://lovepeacenukes.com/">Chistian Bach</auteur>
+	<auteur>cym</auteur>
+	<auteur>b_b</auteur>
+	<auteur>Eric Lupinacci</auteur>
+	<auteur>BoOz</auteur>
 
-        <pipeline nom="insert_head_css" inclure="tablesorter_pipelines.php" />
-        <pipeline nom="insert_head" inclure="tablesorter_pipelines.php" />
-        <pipeline nom="header_prive" inclure="tablesorter_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="tablesorter_pipelines.php" />
+	<pipeline nom="insert_head" inclure="tablesorter_pipelines.php" />
+	<pipeline nom="header_prive" inclure="tablesorter_pipelines.php" />
 </paquet>
