@@ -7,7 +7,8 @@
  */
 
 define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w -]+\.[\w -]+).*>'.',UimsS');
-
+define('_RESSOURCE_VIGNETTE_LARGEUR_DEFAUT','small');
+define('_RESSOURCE_IMAGE_LARGEUR_DEFAUT', 'large');
 
 function traiter_ressources($r) {
 	if ($ressource = charger_fonction('ressource', 'inc', true))
@@ -289,12 +290,10 @@ function ressource_image($attrs, $meta) {
 	else {
 		if (!$attrs['size']) {
 			if ($attrs['image']) # ???? c'est quoi ? le mode ?
-				$attrs['size'] = 'b'; # ??? default
+				$attrs['size'] = _RESSOURCE_VIGNETTE_LARGEUR_DEFAUT;
 			else
-				$attrs['size'] = 'b'; # 
+				$attrs['size'] = _RESSOURCE_IMAGE_LARGEUR_DEFAUT;
 		}
-
-$attrs['size'] = 2048;
 
 		if (in_array($meta['extension'], array('gif', 'png', 'jpg'))) {
 			$a = image_stdsize($meta, $attrs);
@@ -345,7 +344,6 @@ function image_stdsize($meta, $attrs) {
 	include_spip('inc/filtres_images');
 
 	$s = $attrs['size'];
-
 	if (isset($meta['local']))
 		$img = $meta['local'];
 	else
@@ -362,7 +360,26 @@ function image_stdsize($meta, $attrs) {
 			return '<img src="'.$img.'" />';
 		}
 	}
-
+	elseif (preg_match(',^(http://farm.*.staticflickr.com/(\d+/[0-9a-z_]+?))(_[k])?\.jpg$,', $img, $r)) {
+		if (in_array($s, array('k') )){
+			$img = $r[1].'_'.$s.'.jpg';
+			return '<img src="'.$img.'" />';
+		}
+		if (in_array($s, array('d'))) {
+			$img = $r[1].'.jpg';
+			return '<img src="'.$img.'" />';
+		}
+	}
+	elseif (preg_match(',^(http://farm.*.staticflickr.com/(\d+/[0-9a-z_]+?))(_[h])?\.jpg$,', $img, $r)) {
+		if (in_array($s, array('h') )){
+			$img = $r[1].'_'.$s.'.jpg';
+			return '<img src="'.$img.'" />';
+		}
+		if (in_array($s, array('d'))) {
+			$img = $r[1].'.jpg';
+			return '<img src="'.$img.'" />';
+		}
+	}
 
 
 	if (!is_numeric($s)) {
@@ -390,6 +407,13 @@ function image_stdsize($meta, $attrs) {
 		case 'b':
 		case 'large':
 			$a = 1024;
+			break;
+		// xl = 'k' chez flickr (2048px)
+		case 'k':
+		case 'xl':
+		case 'extra':
+		case 'extralarge':
+			$a = 2048;
 			break;
 		case 'o':
 		case 'original':
