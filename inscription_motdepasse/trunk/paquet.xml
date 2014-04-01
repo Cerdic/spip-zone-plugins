@@ -1,0 +1,19 @@
+<paquet
+	prefix="inscriptionmotdepasse"
+	categorie="auteur"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="inscriptionmotdepasse.png"
+>
+	<nom>Mot de passe dès l'inscription</nom>
+	<!-- Ajoute un champ pour définir le mot de passe dès l'inscription -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<credit>Aha-Soft pour l'icône</credit>
+	<licence>GPL v3</licence>
+
+	<pipeline nom="formulaire_charger" inclure="inscriptionmotdepasse_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="inscriptionmotdepasse_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="inscriptionmotdepasse_pipelines.php" />
+</paquet>

@@ -1,0 +1,10 @@
+<li class="editer saisie_password obligatoire[ (#ENV*{erreurs/password}|oui)erreur]">
+	<label for="inscription_password"><:inscriptionmotdepasse:champ_password_label:> <span class="obligatoire"><:info_obligatoire_02:></span></label>
+	[<span class="erreur_message">(#ENV**{erreurs/password})</span>]
+	<input type="password" class="text" name="password" id="inscription_password" value="#ENV**{password}" autocapitalize="off" autocorrect="off" />
+</li>
+<li class="editer saisie_password_confirmation obligatoire[ (#ENV*{erreurs/password_confirmation}|oui)erreur]">
+	<label for="inscription_password_confirmation"><:inscriptionmotdepasse:champ_password_confirmation_label:> <span class="obligatoire"><:info_obligatoire_02:></span></label>
+	[<span class="erreur_message">(#ENV**{erreurs/password_confirmation})</span>]
+	<input type="password" class="text" name="password_confirmation" id="inscription_password_confirmation" value="#ENV**{password_confirmation}" autocapitalize="off" autocorrect="off" />
+</li>
