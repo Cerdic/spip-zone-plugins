@@ -32,49 +32,6 @@ function commandes_declarer_tables_interfaces($interface){
 
 
 /**
- * Déclaration des tables principales
- *
- * @pipeline declarer_tables_principales
- * @param array $tables_principales
- *     Description des tables
- * @return array
- *     Description complétée des tables
- */
-function commandes_declarer_tables_principales($tables_principales){
-
-	// Table commandes_details
-	$commandes_details = array(
-		'id_commandes_detail'       => 'bigint(21) not null',
-		'id_commande'               => 'bigint(21) not null default 0',
-		'descriptif'                => 'text not null default ""',
-		'quantite'                  => 'int not null default 0',
-		'prix_unitaire_ht'          => 'float not null default 0',
-		'taxe'                      => 'decimal(4,3) not null default 0',
-		'statut'                    => 'varchar(25) not null default ""',
-		'objet'                     => 'varchar(25) not null default ""',
-		'id_objet'                  => 'bigint(21) not null default 0',
-		'maj'                       => 'timestamp'
-	);
-	
-	$commandes_details_cles = array(
-		'PRIMARY KEY'               => 'id_commandes_detail',
-		'KEY id_commande'           => 'id_commande'
-	);
-	
-	$tables_principales['spip_commandes_details'] = array(
-		'field'                     => &$commandes_details,
-		'key'                       => &$commandes_details_cles,
-		'join'=> array(
-			'id_commandes_detail' => 'id_commandes_detail',
-			'id_commande' => 'id_commande'
-		)
-	);
-
-	return $tables_principales;
-}
-
-
-/**
  * Déclaration des objets éditoriaux
  *
  * @pipeline declarer_tables_objets_sql
@@ -85,64 +42,91 @@ function commandes_declarer_tables_principales($tables_principales){
  */
 function commandes_declarer_tables_objets_sql($tables) {
 
+	// Table principale SPIP_COMMANDES
 	$tables['spip_commandes'] = array(
 		'type' => 'commande',
 		'principale' => "oui",
 		'field'=> array(
-			'id_commande'       => 'bigint(21) not null',
-			'reference'         => 'varchar(255) not null default ""',
-			'id_auteur'         => 'bigint(21) not null default 0',
-			'statut'            => 'varchar(25) not null default "encours"', // pourra être "encours", "paye", "envoye", "retour", "retour_partiel"...
-			'date'              => 'datetime not null default "0000-00-00 00:00:00"',
-			'date_paiement'     => 'datetime not null default "0000-00-00 00:00:00"',
-			'date_envoi'        => 'datetime not null default "0000-00-00 00:00:00"',
-			'maj'               => 'timestamp'
+			'id_commande'        => 'bigint(21) not null',
+			'reference'          => 'varchar(255) not null default ""',
+			'id_auteur'          => 'bigint(21) not null default 0',
+			'statut'             => 'varchar(25) not null default "encours"', // pourra être "encours", "paye", "envoye", "retour", "retour_partiel"...
+			'date'               => 'datetime not null default "0000-00-00 00:00:00"',
+			'date_paiement'      => 'datetime not null default "0000-00-00 00:00:00"',
+			'date_envoi'         => 'datetime not null default "0000-00-00 00:00:00"',
+			'maj'                => 'timestamp'
 		),
 		'key' => array(
-			"PRIMARY KEY"      => "id_commande",
-			"KEY statut"       => "statut",
-			"KEY id_auteur"    => "id_auteur",              
+			"PRIMARY KEY"        => "id_commande",
+			"KEY statut"         => "statut",
+			"KEY id_auteur"      => "id_auteur",              
 		),
 		'date' => "date",
-		'champs_editables'         => array('id_auteur', 'date_paiement', 'date_envoi'),
-		'champs_versionnes'        => array('id_auteur', 'date_paiement', 'date_envoi'),
-		'rechercher_champs'        => array('reference' => 8, 'id_commande' => 8),
-		'rechercher_jointures'     => array(
+		'champs_editables'           => array('id_auteur', 'date_paiement', 'date_envoi'),
+		'champs_versionnes'          => array('id_auteur', 'date_paiement', 'date_envoi'),
+		'rechercher_champs'          => array('reference' => 8, 'id_commande' => 8),
+		'rechercher_jointures'       => array(
 		                                    'auteur' => array('nom' => 1),
 		                                    'commandes_detail' => array('descriptif' => 4)
 		                                    ),
-		'tables_jointures'         => array(),
-		'statut_textes_instituer'  => array(
-			'encours'          => 'commandes:statut_encours',
-			'attente'          => 'commandes:statut_attente',            
-			'partiel'          => 'commandes:statut_partiel',
-			'paye'             => 'commandes:statut_paye',            
-			'envoye'           => 'commandes:statut_envoye',
-			'retour'           => 'commandes:statut_retour',
-			'retour_partiel'   => 'commandes:statut_retour_partiel',
-			'erreur'           => 'commandes:statut_erreur',            
+		'tables_jointures'           => array(),
+		'statut_textes_instituer'    => array(
+			'encours'            => 'commandes:statut_encours',
+			'attente'            => 'commandes:statut_attente',            
+			'partiel'            => 'commandes:statut_partiel',
+			'paye'               => 'commandes:statut_paye',            
+			'envoye'             => 'commandes:statut_envoye',
+			'retour'             => 'commandes:statut_retour',
+			'retour_partiel'     => 'commandes:statut_retour_partiel',
+			'erreur'             => 'commandes:statut_erreur',            
 		),
 		'statut_images' => array(
-			'encours'          => 'puce-commande-encours.png',
-			'attente'          => 'puce-commande-attente.png',
-			'partiel'          => 'puce-commande-partiel.png',
-			'paye'             => 'puce-commande-paye.png',
-			'envoye'           => 'puce-commande-envoye.png',
-			'retour'           => 'puce-commande-retour.png',
-			'retour_partiel'   => 'puce-commande-retour_partiel.png',
-			'erreur'           => 'puce-commande-erreur.png',
+			'encours'            => 'puce-commande-encours.png',
+			'attente'            => 'puce-commande-attente.png',
+			'partiel'            => 'puce-commande-partiel.png',
+			'paye'               => 'puce-commande-paye.png',
+			'envoye'             => 'puce-commande-envoye.png',
+			'retour'             => 'puce-commande-retour.png',
+			'retour_partiel'     => 'puce-commande-retour_partiel.png',
+			'erreur'             => 'puce-commande-erreur.png',
 		),
 		'statut'=> array(
 			array(
-				'champ'     => 'statut',
-				'publie'    => 'paye,envoye',
-				'previsu'   => 'paye,envoye',
-				'post_date' => 'date', 
-				'exception' => array('statut','tout')
+				'champ'       => 'statut',
+				'publie'      => 'paye,envoye',
+				'previsu'     => 'paye,envoye',
+				'post_date'   => 'date', 
+				'exception'   => array('statut','tout')
 			)
 		),
 		'texte_changer_statut' => 'commandes:texte_changer_statut_commande',
 		'texte_objets' => 'commandes:commandes_titre'
+
+	);
+
+	// Table auxiliaire SPIP_COMMANDES_DETAILS
+	$tables['spip_commandes_details'] = array(
+		'principale' => "non",
+		'field'=> array(
+			'id_commandes_detail' => 'bigint(21) not null',
+			'id_commande'         => 'bigint(21) not null default 0',
+			'descriptif'          => 'text not null default ""',
+			'quantite'            => 'int not null default 0',
+			'prix_unitaire_ht'    => 'float not null default 0',
+			'taxe'                => 'decimal(4,3) not null default 0',
+			'statut'              => 'varchar(25) not null default ""',
+			'objet'               => 'varchar(25) not null default ""',
+			'id_objet'            => 'bigint(21) not null default 0',
+			'maj'                 => 'timestamp'
+		),
+		'key' => array(
+			'PRIMARY KEY'         => 'id_commandes_detail',
+			'KEY id_commande'     => 'id_commande'              
+		),
+		'join' => array(
+			'id_commandes_detail' => 'id_commandes_detail',
+			'id_commande'         => 'id_commande'
+		)
 
 	);
 

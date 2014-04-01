@@ -27,7 +27,6 @@
 	<pipeline nom="post_edition" inclure="commandes_pipelines.php" /><!-- changement de statut : envoi de notifications et maj dates paiement et envoi -->
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
-	<pipeline nom="declarer_tables_principales" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
 
 	<pipeline nom="autoriser" inclure="commandes_autorisations.php" />
