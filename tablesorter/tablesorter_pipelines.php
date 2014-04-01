@@ -1,5 +1,7 @@
 <?php
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function tablesorter_insert_head_css($flux){
 	static $done = false;
 	if (!$done) {
@@ -24,10 +26,10 @@ function tablesorter_insert_head($flux){
 					var options = {};
 					if($(this).find("th.ts_disabled").size() >= 1){
 						options.headers = {};
-					    $(this).find("th").each(function(index,value){
-					        if($(this).is(".ts_disabled"))
-					        	options.headers[index] = {sorter : false}; 
-					    });
+						$(this).find("th").each(function(index,value){
+							if($(this).is(".ts_disabled"))
+								options.headers[index] = {sorter : false}; 
+						});
 					}
 					$(this).tablesorter(options);
 				});
