@@ -1,0 +1,27 @@
+<paquet
+	prefix="diogene_agenda"
+	categorie="edition"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/diogene-128.png"
+>	
+
+	<nom>Diogene - Agenda</nom>
+
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2014</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_agenda_pipelines.php" />
+	<pipeline nom="diogene_traiter" inclure="diogene_agenda_pipelines.php" />
+	<pipeline nom="diogene_objets" inclure="diogene_agenda_pipelines.php" />
+	<pipeline nom="diogene_champs_texte" inclure="diogene_agenda_pipelines.php" />
+	<pipeline nom="diogene_champs_pre_edition" inclure="diogene_agenda_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="diogene_agenda_pipelines.php" />
+
+	<necessite nom="diogene" compatibilite="[1.0.0;[" />
+	<necessite nom="agenda" compatibilite="[3.12.0;[" />
+</paquet>
