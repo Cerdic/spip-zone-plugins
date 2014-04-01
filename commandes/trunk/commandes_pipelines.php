@@ -59,6 +59,36 @@ function commandes_affiche_gauche($flux) {
 
 
 /**
+ * formulaires dates sur la fiche d'une commande
+ *
+ * @param string $flux
+ * @return string
+ */
+function commandes_affiche_milieu($flux) {
+
+	if (
+		$exec = trouver_objet_exec($flux['args']['exec'])
+		and $exec['edition'] == false 
+		and $exec['type'] == 'commande'
+		and $id_table_objet = $exec['id_table_objet']
+		and (isset($flux['args'][$id_table_objet]) and $id_commande = intval($flux['args'][$id_table_objet]))
+	) {
+		$texte = recuperer_fond('prive/squelettes/contenu/commande_affiche_milieu',array('id_commande'=>$id_commande));
+	}
+
+	if ($texte) {
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
+
+
+
+/**
  * accueil : liste des commandes en attente de validation
  *
  * @param string $flux

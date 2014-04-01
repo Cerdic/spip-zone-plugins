@@ -1,34 +1,22 @@
 <BOUCLE_afficher_contenu(COMMANDES){id_commande=#ENV{id}}{tout}>
-[<div class="champ contenu_date[ (#DATE|intval|>{0}|?{'',vide})]">
-	<label><:commandes:date_commande_label:></label>
-	<span dir='#LANG_DIR' class='date'>(#DATE|affdate)[ à (#DATE|affdate{'H:i'})]</span>
-</div>]
-[<div class="champ contenu_date_paiement[ (#DATE_PAIEMENT|intval|>{0}|?{'',vide})]">
-	<label><:commandes:date_paiement_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{date_paiement} date_paiement'>
-		(#DATE_PAIEMENT|affdate)[ à (#DATE_PAIEMENT|affdate{'H:i'})]
-	</span>
-</div>]
-[<div class="champ contenu_date_envoi[ (#DATE_ENVOI|intval|>{0}|?{'',vide})]">
-	<label><:commandes:date_envoi_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{date_envoi} date_envoi'>
-		(#DATE_ENVOI|affdate)[ à (#DATE_ENVOI|affdate{'H:i'})]
-	</span>
-</div>]
 [<div class="champ contenu_maj[ (#MAJ*|intval|>{0}|?{'',vide})]">
-	<label><:commandes:date_maj_label:></label>
-	<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
+	<p>
+		<label><:commandes:date_maj_label:></label>
+		<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
+	</p>
 </div>]
 <div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
-	<label><:commandes:contact_label:></label>
-	<span dir='#LANG_DIR' class='#EDIT{id_auteur} auteur'>
-		[(#ID_AUTEUR|>{0}|oui)
-			<a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">[(#INFO_NOM{auteur,#ID_AUTEUR})] \(<:info_numero_abbreviation:>[(#ID_AUTEUR)]\)</a>
-		]
-		[(#ID_AUTEUR|>{0}|non)
-		<em><:info_aucun_auteur:></em>
-		]
-	</span>
+	<h4>
+		<label><:commandes:contact_label:></label>
+		<span dir='#LANG_DIR' class='auteur'>
+			[(#ID_AUTEUR|>{0}|oui)
+				<a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">[(#INFO_NOM{auteur,#ID_AUTEUR})]</a>
+			]
+			[(#ID_AUTEUR|>{0}|non)
+				<em><:info_aucun_auteur:></em>
+			]
+		</span>
+	</h4>
 </div>
 #INCLURE{fond=inclure/commande, id_commande=#ID_COMMANDE}
 #INCLURE{fond=inclure/facture-a, id_commande=#ID_COMMANDE}

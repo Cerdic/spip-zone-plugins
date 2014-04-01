@@ -18,8 +18,8 @@ function formulaires_editer_commande_saisies($id_commande='new', $id_auteur, $re
 		array(
 			'saisie' => 'date',
 			'options' => array(
-				'nom' => 'date_envoi',
-				'label' => _T('commandes:date_envoi_label'),
+				'nom' => 'date',
+				'label' => _T('commandes:date_commande_label'),
 			)
 		),
 		array(
@@ -27,6 +27,13 @@ function formulaires_editer_commande_saisies($id_commande='new', $id_auteur, $re
 			'options' => array(
 				'nom' => 'date_paiement',
 				'label' => _T('commandes:date_paiement_label'),
+			)
+		),
+		array(
+			'saisie' => 'date',
+			'options' => array(
+				'nom' => 'date_envoi',
+				'label' => _T('commandes:date_envoi_label'),
 			)
 		),
 	);

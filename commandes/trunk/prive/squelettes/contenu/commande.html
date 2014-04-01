@@ -11,11 +11,24 @@
 	<h1><:commandes:reference_ref{ref=#REFERENCE}:></h1>
 	,simple fiche_objet})]
 
+	<!--affiche_milieu-->
+
 	<div id='wysiwyg'>
 		<INCLURE{fond=prive/objets/contenu/commande, id=#ID_COMMANDE, ajax=wysiwyg, env}>
 	</div>
 
-	[(#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commande,id,#ID_COMMANDE},data}})<div class="nettoyeur"></div>]
+	<div class="nettoyeur"></div>
+
+	[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+		[(#ID_COMMANDE|afficher_qui_edite{commande}|non)
+		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{<:commandes:commande_editer:>,commande-24.png,edit,right ajax preload})]
+		]
+		[(#ID_COMMANDE|afficher_qui_edite{commande}|oui)
+		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{#ID_COMMANDE|afficher_qui_edite{commande},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	[(#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commande,id,#ID_COMMANDE},data,'<div class="nettoyeur"></div>'}})]
 
 #BOITE_FERMER
 
