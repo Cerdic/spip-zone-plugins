@@ -417,7 +417,7 @@ function image_stdsize($meta, $attrs) {
 			break;
 		case 'o':
 		case 'original':
-			$a = null;
+			$a = 10000000;
 			break;
 		case '-':
 		case '':
