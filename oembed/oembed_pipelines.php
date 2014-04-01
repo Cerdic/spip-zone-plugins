@@ -192,7 +192,8 @@ function oembed_pre_propre($texte) {
 	if (stripos($texte,"<a")!==false
 	  AND stripos($texte,"auto")!==false
 	  AND stripos($texte,"spip_out")!==false
-		AND lire_config('oembed/embed_auto','oui')!='non') {
+		AND lire_config('oembed/embed_auto','oui')!='non'
+	  AND strpos($texte,"\n")!==false) {
 		preg_match_all(",(^|(?:\r?\n\r?\n)) *(<a\b[^>]*>[^\r\n]*</a>) *((?:\r?\n\r?\n)|$),Uims",trim($texte),$matches,PREG_SET_ORDER);
 		if (count($matches)){
 
