@@ -99,8 +99,9 @@ function commandes_declarer_tables_objets_sql($tables) {
 				'exception'   => array('statut','tout')
 			)
 		),
-		'texte_changer_statut' => 'commandes:texte_changer_statut_commande',
-		'texte_objets' => 'commandes:commandes_titre'
+		'texte_changer_statut'        => 'commandes:texte_changer_statut_commande',
+		'texte_objets'                => 'commandes:titre_commandes',
+		'texte_objet'                 => 'commandes:titre_commande'
 
 	);
 

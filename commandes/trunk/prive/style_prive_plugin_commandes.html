@@ -13,6 +13,9 @@
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
+
 
 #navigation .infos .reference p {font-size:1.5em;}
 
@@ -50,7 +53,7 @@
 					margin-bottom: 0;
 					font-size: 1em; color: #666;
 					}
-.commandes.navigation .liste-items .on	{ background-color: [#(#VAL{c5e41d}|couleur_eclaircir|couleur_eclaircir)]; }
+.commandes.navigation .liste-items .on	{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 .commandes.navigation .annee		{ width: 4em; }
 
 
@@ -58,5 +61,5 @@
    FICHE COMMANDE 
    -------------- */
 .commandes .champ img 			{ vertical-align: middle; }
-.infos .formulaire_instituer_objet-commandes .statut_envoye .show { background-color: #9dba00; } /* utiliser #ENV{claire} ?*/
-.infos .formulaire_instituer_objet-commandes .statut_paye .show { background-color: [#(#VAL{9dba00}|couleur_eclaircir|couleur_eclaircir)]; }
+.infos .formulaire_instituer_objet-commande .statut_envoye .show { background-color: #GET{foncee}; }
+.infos .formulaire_instituer_objet-commande .statut_paye .show { background-color: [#(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)]; }
