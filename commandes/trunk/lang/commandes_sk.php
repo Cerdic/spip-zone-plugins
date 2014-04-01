@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'date_commande_label' => 'Dátum vytvorenia:',
 	'date_envoi_label' => 'Dátum odoslania:',
-	'date_maj_label' => 'Dátum aktualizácie:',
+	'date_maj_label' => 'Dátum aktualizácie:', # MODIF
 	'date_paiement_label' => 'Dátum platby:',
 	'designation' => 'Označenie',
 	'details_commande' => 'Podrobnosti objednávky:',
