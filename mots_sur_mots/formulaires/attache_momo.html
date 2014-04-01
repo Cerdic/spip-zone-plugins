@@ -37,7 +37,7 @@ alt=""  class='cadre-icone' width='24' height='24' />
 	[(#REM) Pour éviter les liens circulaires, on ne peut pas associer un mot à un de ses enfants]
 	[(#SET{mots_interdits,#MODELE{doublons_enfants_mot}{id_mot}|explode{','}})]
 		[(#REM) LIKE car tables_liees peut contenir plusieurs objets]
-		<BOUCLE_Groupes_Mots(GROUPES_MOTS){tables_liees LIKE mots%}{par titre}>
+		<BOUCLE_Groupes_Mots(GROUPES_MOTS){tables_liees LIKE %mots%}{par titre}>
 			<B_Mots_candidats_parents>
 			<div>
 				<select name="mots[]" id='mots_#ID_GROUPE' size='1' style='width: 180px;' onchange="findObj_forcer('valider_groupe_#ID_GROUPE').style.visibility='visible';">
