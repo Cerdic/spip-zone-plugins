@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Z-commerce pour Spip 2.0
+ * Plugin Z-commerce pour Spip 3.0
  * Licence GPL (c) 2011
  */
 
@@ -26,7 +26,8 @@ function action_instituer_commande($arg=null) {
 
 	include_spip('action/editer_commande');
 
-	instituer_commande($id_commande, array('statut' => $statut));
+	// Donner explicitement une date nulle, pour ne pas qu'elle soit mise à jour inopinément.
+	instituer_commande($id_commande, array('statut' => $statut, 'date' => null));
 }
 
 
