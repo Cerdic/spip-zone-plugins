@@ -15,7 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function commandes_autoriser($flux){ return $flux; }
+function commandes_autoriser(){}
+
 
 /**
  * Autorisation à passer une commande
@@ -38,8 +39,9 @@ function autoriser_commander_dist($faire, $quoi, $id, $qui, $ops){
 		return false;
 }
 
+
 /**
- * Autorisation à voir(?) une commande
+ * Autorisation à voir une commande
  * - l'auteur de la commande
  * - admin (mais pas restreint)
  *
@@ -50,12 +52,13 @@ function autoriser_commander_dist($faire, $quoi, $id, $qui, $ops){
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/ 
-function autoriser_commande_dist($faire, $quoi, $id, $qui, $opts) {
+function autoriser_commande_voir_dist($faire, $quoi, $id, $qui, $opts) {
 	return
 		$qui['id_auteur'] == sql_getfetsel('id_auteur', 'spip_commandes', 'id_commande = '.sql_quote($id)) OR 
 			( $qui['statut'] == '0minirezo'
 			 AND !$qui['restreint'] );
 }
+
 
 /**
  * Autorisation à supprimer un détail d'une commande
