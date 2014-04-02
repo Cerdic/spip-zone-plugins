@@ -6,17 +6,9 @@
 	La largeur de la legende est egale a la largeur de l'image
 	avec un minimum de 120px, et un maximum de 350px.
 
-	Dans le cas d'une simple image (mode=image), on affiche
+	Dans le cas d'une simple image -mode=image-, on affiche
 	le document lui-meme, sans lien de telechargement
 ]
-
-[<hr />
-<pre><tt>(#DEBUG|htmlspecialchars)
-#TYPE_DOCUMENT: [(#LARGEUR)&times;#HAUTEUR] ([(#TAILLE|taille_en_octets|sinon{taille inconnue})])
-</tt></pre>
-]
-
-[<blockquote class="spip">(#EXTRACT|PtoBR)</blockquote>]
 
 [(#SET{logo,#LOGODOCUMENT})]
 [(#SET{fichier,[(#GET{logo}||extraire_attribut{src})]})]
@@ -24,10 +16,23 @@
 [(#SET{height,[(#GET{logo}||extraire_attribut{height})]})]
 #SET{url,#ENV{lien,#HREF}}
 
-<dl class='[spip_document_(#ID_DOCUMENT) ]spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class}|concat{" mediabox"})"][ title='(#TITLE|texte_backend)'][ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[
+[(#SET{captionspip,[
+	<div class='#EDIT_TITRE spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE|sinon{[(#DESCRIPTIF*|oui)]})</strong></div>[
+	<div class='#EDIT_DESCRIPTIF spip_doc_descriptif quiet'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>
+	]
+]
+})]
+
+[(#SET{caption,[(#CAPTION
+	|sinon{#LEGEND}
+	|sinon{#LEGENDE}
+	|propre|PtoBR
+	|sinon{#GET{captionspip}}
+)]})]
+
+<figure class='[spip_document_(#ID_DOCUMENT) ]spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+[<a href="(#GET{NONfichier})"[ class="(#ENV{lien_class}|concat{" display_box"})"][ (#ENV{lien}|?{'',type="image/jpeg"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[
 alt='(#ENV{alt,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]}|texte_backend)']
-/>[(#GET{url}|?{</a>})]</dt>[
-<dt class='#EDIT_TITRE spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
-<dd class='#EDIT_DESCRIPTIF spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</dd>]
-</dl>
+style="max-width:100%;height:auto;"[ title='(#TITLE|texte_backend)'] />[(#GET{url}|?{</a>})][
+<figcaption>(#GET{caption})</figcaption>]
+</figure>
