@@ -32,7 +32,7 @@
 	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive, id_album, js=oui})]
 ]
 <BOUCLE_album(ALBUMS){id_album}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
-[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>
+[[<h2>(#ENV{titre}|!={non}|oui)#ENV{titre,#_album:TITRE}</h2>]
 (#INCLURE{fond=modeles/nivoslider_base,env,id_objet=#ID_ALBUM,objet=album,doublons,limite=#REM|test_espace_prive|?{1,#ENV{limite,1000}},manualAdvance=#ENV{manualAdvance,#ENV{manuel,non}|=={oui}|?{true,false}}})
 ]
 </BOUCLE_album>
