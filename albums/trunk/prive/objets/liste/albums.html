@@ -26,7 +26,7 @@
 		</thead>
 
 		<tbody>
-		<BOUCLE_albums(ALBUMS liens){contenu?}{id_album !IN #ENV{exclus}}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut ?== #ENV{statut}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<BOUCLE_albums(ALBUMS albums_liens){contenu?}{id_album !IN #ENV{exclus}}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut ?== #ENV{statut}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#STATUT|puce_statut{album,#ID_ALBUM})]</td>
 			<td class='titre principale'>[(#LOGO_ALBUM|image_reduire{20,26})]<a href="[(#ID_ALBUM|generer_url_entite{album})]"

@@ -79,7 +79,7 @@
 		]
 
 		<tbody>
-		<BOUCLE_albums(ALBUMS liens){contenu?}{orphelins?}{id_album !IN #ENV{exclus}}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut ?== #ENV{statut}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<BOUCLE_albums(ALBUMS albums_liens){contenu?}{orphelins?}{id_album !IN #ENV{exclus}}{auteurs_liens.id_auteur?}{id_mot?}{objet?}{statut ?== #ENV{statut}}{vu?}{recherche?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr>
 
 			[(#REM) LOGO ]
