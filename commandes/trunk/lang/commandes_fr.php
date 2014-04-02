@@ -66,8 +66,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_commandes_statut_attente' => '@nb@ commandes en attente de validation',
 	'info_nb_commandes_statut_partiel' => '@nb@ commandes partiellement payées',
 	'info_nb_commandes_statut_paye' => '@nb@ commandes payées',
-	'info_numero_commande' => 'COMMANDE NUMÉRO :',
 	'info_numero' => 'COMMANDE NUMÉRO :',
+	'info_numero_commande' => 'COMMANDE NUMÉRO :',
 	'info_toutes_commandes' => 'Toutes les commandes',
 
 	// L
@@ -144,9 +144,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Cette commande est :',
+	'titre_commande' => 'Commande',
 	'titre_commandes_actives' => 'Commandes actives',
 	'titre_commandes_auteur' => 'Commandes de l’auteur',
-	'titre_commande' => 'Commande',
 	'titre_logo_commande' => 'Logo',
 
 	// U
