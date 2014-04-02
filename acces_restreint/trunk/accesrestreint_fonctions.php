@@ -218,6 +218,19 @@ function accesrestreint_liste_rubriques_restreintes($_publique = null) {
 /**
  * Retourne la liste de toutes les rubriques sélectionnées dans des zones 
  *
+ * @example
+ *   accesrestreint_liste_rubriques_restreintes_et_enfants(false)
+ *   retourne les id des rubriques et leurs enfants restreints 
+ *   dans le privé
+ *   
+ *   accesrestreint_liste_rubriques_restreintes_et_enfants(true)
+ *   retourne les id des rubriques et leurs enfants restreints 
+ *   dans le public
+ *   
+ *   accesrestreint_liste_rubriques_restreintes_et_enfants('tout')
+ *   retourne les id des rubriques et leurs enfants restreints 
+ *   dans le privé et dans le public
+ *
  * @param null|bool|string $_publique
  *   Sélectionner les rubriques
  *   cachées dans le public (true),
