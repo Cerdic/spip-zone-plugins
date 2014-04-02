@@ -1,0 +1,19 @@
+<paquet
+	prefix="toutpartout"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="toutpartout.png"
+	documentation=""
+>
+	<nom>{tout} partout</nom>
+	<!-- Permet d'afficher toutes les rubriques ou auteurs, même lorsque ce n'est pas publié -->
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<auteur lien="http://rastapopoulos.artizanal.info">RastaPopoulos</auteur>
+	<credit url="http://www.weblog.eliaz.fr/article114.html">b_b pour l'inspiration de l'astuce</credit>
+	<licence>GPL v3</licence>
+
+	<pipeline nom="pre_boucle" inclure="toutpartout_pipeline.php" />
+</paquet>
