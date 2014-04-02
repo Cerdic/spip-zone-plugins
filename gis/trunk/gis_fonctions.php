@@ -382,7 +382,7 @@ function gis_kml_to_urls($kml){
 				$kml[$k] = url_absolue(generer_url_entite($v,"document"));
 			}
 			else
-				$kml[$k] = _DIR_RACINE.copie_locale($kml[$k]);
+				$kml[$k] = _DIR_RACINE.copie_locale($kml[$k],"modif");
 		}
 	}
 	return $kml;
