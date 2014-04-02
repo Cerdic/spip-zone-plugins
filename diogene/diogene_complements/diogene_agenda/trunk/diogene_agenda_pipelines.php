@@ -18,7 +18,33 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 
 		if(is_array(unserialize($flux['args']['options_complements']['agenda_caches'])))
 			$flux['args']['contexte']['agenda_caches'] = unserialize($flux['args']['options_complements']['agenda_caches']);
+		
+		$evenement['repetition'] = array();
+		if (intval($id_objet)){
+			$evenement = sql_fetsel('*','spip_evenements','id_article='.intval($id_objet));
+			unset($evenement['titre']);
+			unset($evenement['statut']);
+			unset($evenement['id_article']);
+			$repetitons = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($id_evenement),'','date_debut');
+			foreach($repetitons as $d)
+				$valeurs['repetitions'][] = date('d/m/Y',strtotime($d['date_debut']));
+		}else{
+			$t=time();
+			$evenement["date_debut"] = date('Y-m-d H:i:00',$t);
+			$evenement["date_fin"] = date('Y-m-d H:i:00',$t+3600);
+			$evenement['horaire'] = 'oui';
+			$evenement['repetitions'] = array();
+		}
+		$evenement['repetitions'] = implode(',',$valeurs['repetitions']);
 
+		// dispatcher date et heure
+		list($evenement["date_debut"],$evenement["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_debut"])));
+		list($evenement["date_fin"],$evenement["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_fin"])));
+	
+		// traiter specifiquement l'horaire qui est une checkbox
+		if (_request('date_debut') AND !_request('horaire'))
+			$evenement['horaire'] = 'oui';
+		$flux['args']['contexte'] = array_merge($flux['args']['contexte'],$evenement);
 		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_agenda',$flux['args']['contexte']);
 	}
 	return $flux;
@@ -32,6 +58,17 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
  * @return array $flux le contexte modifié passé aux suivants
  */
 function diogene_agenda_diogene_traiter($flux){
+	$pipeline = pipeline('diogene_objets');
+	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['agenda']) AND ($id_diogene = _request('id_diogene'))) {
+		$id_article = $flux['args']['id_objet'];
+		/**
+		 * On a un id_evenement => on met à jour
+		 */
+		if(_request('id_evenement')){
+			include_spip('formulaires/editer_evenement');
+			formulaires_editer_evenement_traiter_dist(_request('id_evenement'), $id_article,false, false, 'evenements_edit_config');
+		}
+	}
 	return $flux;
 }
 
