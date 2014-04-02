@@ -19,6 +19,25 @@ function traiter_ressources($r) {
 	return '<html>'.$html.'</html>';
 }
 
+/* pipeline pour typo */
+function ressource_post_typo($t) {
+	if (strpos($t, '<') !== false) {
+		$t = preg_replace_callback(_EXTRAIRE_RESSOURCES, 'traiter_ressources', $t);
+	}
+	return $t;
+}
+
+/* pipeline pour propre */
+function ressource_pre_liens($t) {
+	if (strpos($t, '<') !== false) {
+		$t = preg_replace_callback(_EXTRAIRE_RESSOURCES, 'traiter_ressources', $t);
+
+		// echapper les autoliens eventuellement inseres (en une seule fois)
+		if (strpos($t,"<html>")!==false)
+			$t = echappe_html($t);
+	}
+	return $t;
+}
 
 function inc_ressource_dist($r) {
 	// $r contient tout le texte définissant la ressource :
@@ -59,7 +78,7 @@ function inc_ressource_dist($r) {
 }
 
 function ressource_meta($res) {
-	$meta = array();
+	$meta = $res;
 
 	// on va beaucoup travailler avec l'attribut src
 	$src = $res['src'];
@@ -295,8 +314,9 @@ function ressource_image($attrs, $meta) {
 				$attrs['size'] = _RESSOURCE_IMAGE_LARGEUR_DEFAUT;
 		}
 
-		if (in_array($meta['extension'], array('gif', 'png', 'jpg'))) {
-			$a = image_stdsize($meta, $attrs);
+		if (in_array($meta['extension'], array('gif', 'png', 'jpg'))
+		AND strlen($b = image_stdsize($meta, $attrs))) {
+			$a = $b;
 			$resize = true;
 		}
 	}
@@ -381,6 +401,10 @@ function image_stdsize($meta, $attrs) {
 		}
 	}
 
+	// IMG/jpg/truc.jpg depuis l'espace prive
+	if (_DIR_RACINE
+	AND substr(_DIR_RACINE.$img, 0, strlen(_DIR_IMG)) == _DIR_IMG)
+		$img = _DIR_RACINE.$img;
 
 	if (!is_numeric($s)) {
 	switch($s) {
