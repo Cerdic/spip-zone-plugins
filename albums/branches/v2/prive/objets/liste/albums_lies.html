@@ -10,7 +10,7 @@
 
 <B_liste_album>
 #ANCRE_PAGINATION
-<BOUCLE_liste_album(ALBUMS liens){objet}{id_objet}{statut ?== #ENV{statut}}{!par date, vu, titre}{pagination #ENV{nb,10}}>
+<BOUCLE_liste_album(ALBUMS albums_liens){objet}{id_objet}{statut ?== #ENV{statut}}{!par date, vu, titre}{pagination #ENV{nb,10}}>
 <a name='album#ID_ALBUM'></a>
 #SET{contenu, #ID_ALBUM|album_contenu|?{oui,''}}
 #SET{alt, #VAL{album:titre_album}|_T|concat{' n°'}|concat{#ID_ALBUM}|attribut_html}

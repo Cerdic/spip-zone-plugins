@@ -10,7 +10,7 @@
 <B_liens>
 <h3>[(#TOTAL_BOUCLE|singulier_ou_pluriel{album:info_1_association,album:info_nb_associations})]</h3>
 <ul class='liste_items'>
-	<BOUCLE_liens(ALBUMS liens){id_album}>
+	<BOUCLE_liens(ALBUMS albums_liens){id_album}>
 	#SET{objet, #OBJET|objet_info{texte_objet}|_T}
 	#SET{title, #GET{objet}|concat{' ',#VAL{#VAL{info_numero_abbreviation}|_T},#ID_OBJET}|attribut_html}
 	<li class='item #OBJET'>

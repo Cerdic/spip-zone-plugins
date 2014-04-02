@@ -46,7 +46,7 @@
 <B_objets>
 <ul class='parents'>
 	[<li class='first'>(#GET{self}|parametre_url{objet,''}|lien_ou_expose{<:album:onglet_parents_tous:>,#ENV{objet,''}|=={''},ajax})</li>]
-	<BOUCLE_objets(ALBUMS liens){fusion objet}>
+	<BOUCLE_objets(ALBUMS albums_liens){fusion objet}>
 	[(#OBJET|objet_info{type}|oui)
 	[<li>(#GET{self}|parametre_url{objet,#OBJET}|lien_ou_expose{
 		#OBJET|objet_icone{16}|concat{#OBJET|objet_info{info_nb_objets}|_T|replace{'@nb@ ',''}},
