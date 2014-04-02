@@ -35,7 +35,7 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 			$evenement['horaire'] = 'oui';
 			$evenement['repetitions'] = array();
 		}
-		$evenement['repetitions'] = implode(',',$valeurs['repetitions']);
+		$evenement['repetitions'] = implode(',',$evenement['repetitions']);
 
 		// dispatcher date et heure
 		list($evenement["date_debut"],$evenement["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_debut"])));
@@ -46,6 +46,29 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 			$evenement['horaire'] = 'oui';
 		$flux['args']['contexte'] = array_merge($flux['args']['contexte'],$evenement);
 		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_agenda',$flux['args']['contexte']);
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline diogene_vérifier
+ * Fonction s'exécutant à la vérification du formulaire 
+ *
+ * @param array $flux Le contexte du pipeline
+ * @return array $flux le contexte modifié passé aux suivants
+ */
+function diogene_agenda_diogene_verifier($flux){
+	$id_diogene = _request('id_diogene');
+	if(intval($id_diogene)){
+		$champs_ajoutes = unserialize(sql_getfetsel("champs_ajoutes","spip_diogenes","id_diogene=".intval($id_diogene)));
+		$erreurs = $flux['args']['erreurs'];
+		// On teste si les groupes obligatoires sont ok
+		if (is_array($champs_ajoutes) && in_array('agenda',$champs_ajoutes)){
+			include_spip('formulaires/editer_evenement');
+			$erreurs = formulaires_editer_evenement_verifier_dist(_request('id_evenement'), $id_article,false, false, 'evenements_edit_config');
+			unset($erreurs['id_parent']);
+		}
+		$flux['data'] = array_merge($flux['data'], $erreurs);
 	}
 	return $flux;
 }

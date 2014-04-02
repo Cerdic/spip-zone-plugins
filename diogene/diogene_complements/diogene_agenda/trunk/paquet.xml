@@ -16,6 +16,7 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_agenda_pipelines.php" />
+	<pipeline nom="diogene_verifier" inclure="diogene_agenda_pipelines.php" />
 	<pipeline nom="diogene_traiter" inclure="diogene_agenda_pipelines.php" />
 	<pipeline nom="diogene_objets" inclure="diogene_agenda_pipelines.php" />
 	<pipeline nom="diogene_champs_texte" inclure="diogene_agenda_pipelines.php" />
