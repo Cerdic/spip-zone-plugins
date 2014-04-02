@@ -9,5 +9,5 @@ function toutpartout_pre_boucle($boucle){
 		$boucle->modificateur['criteres']['statut'] = true;
 	}
 	
-    return $boucle;
+	return $boucle;
 }
