@@ -78,7 +78,7 @@ class SimplePPTX {
                 $slideNote = $slideNotes[$slideKey];
 
                 // Register namespaces
-                $slideNote->registerXPathNamespace("p", ZSimplePPTX::SCHEMA_PRESENTATIONML);
+                $slideNote->registerXPathNamespace("p", SimplePPTX::SCHEMA_PRESENTATIONML);
                 $slideNote->registerXPathNamespace("a", SimplePPTX::SCHEMA_DRAWINGML);
 
                 // Fetch all text
