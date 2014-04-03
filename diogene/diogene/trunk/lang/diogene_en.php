@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_objet_diogene_max' => 'The maximal number of templates (@max@) for this typo of object (@objet@) has already been reached.',
 	'erreur_objet_non_diogene' => 'This object type is not taken into account (@objet@).',
 	'erreur_objet_publier' => 'The type of object you want to publish does not exist.',
+	'erreur_objet_publier_aucun' => 'You cannot publish any object from this page',
 	'erreur_secteur_diogene_inexistant' => 'Warning, the section of the form template doesn’t exist.',
 	'erreur_valeur_float' => 'The value for "@champ@" should be a number.',
 	'erreur_valeur_int' => 'The value for "@champ@" should be a fixed number.',
