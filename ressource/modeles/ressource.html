@@ -1,10 +1,6 @@
 [(#REM)
 
-	Modele pour <doc> en dl/dt/dd
-	cf. http://pompage.net/pompe/listesdefinitions/
-
-	La largeur de la legende est egale a la largeur de l'image
-	avec un minimum de 120px, et un maximum de 350px.
+	Modele pour <doc> en <figure>
 
 	Dans le cas d'une simple image -mode=image-, on affiche
 	le document lui-meme, sans lien de telechargement
@@ -30,9 +26,9 @@
 	|sinon{#GET{captionspip}}
 )]})]
 
-<figure class='[spip_document_(#ID_DOCUMENT) ]spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-[<a href="(#GET{NONfichier})"[ class="(#ENV{lien_class}|concat{" display_box"})"][ (#ENV{lien}|?{'',type="image/jpeg"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[
+<figure class='[spip_document_(#ID_DOCUMENT) ]spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'>
+[<span class="(#IMGCLASS)">][<a href="(#GET{NONfichier})"[ class="(#ENV{lien_class}|concat{" display_box"})"][ (#ENV{lien}|?{'',type="image/jpeg"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[
 alt='(#ENV{alt,#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)]}|texte_backend)']
-style="max-width:100%;height:auto;"[ title='(#TITLE|texte_backend)'] />[(#GET{url}|?{</a>})][
+style="max-width:100%;height:auto;"[ title='(#TITLE|texte_backend)'] />[(#GET{url}|?{</a>})][(#IMGCLASS|?{</span>})][
 <figcaption>(#GET{caption})</figcaption>]
 </figure>

@@ -130,6 +130,13 @@ function ressource_meta($res) {
 			$meta['extract'] = $u;
 		}
 
+		/* recuperer un album flickr */
+		if (preg_match(',^https?://(www\.)?flickr\.com/.*/sets/(\d+),', $src, $r)) {
+			if ($html = recuperer_fond('modeles/album_flickr', array( 'album' => $r[2]))) {
+				$meta['embed'] = $html;
+			}
+		}
+
 		$meta = pipeline('ressource_meta',
 			array(
 				'args' => $res,
@@ -286,6 +293,10 @@ function phraser_tag($rr) {
 }
 
 function embed_ressource($res) {
+	if (isset($res['embed'])) {
+		return $res['embed'];
+	}
+
 	// si la ressource est un document, renvoyer <doc1>
 	if (isset($res['id_document'])) {
 #		return recuperer_fond('modeles/doc', $res);
@@ -408,7 +419,7 @@ function image_stdsize($meta, $attrs) {
 
 	if (!is_numeric($s)) {
 	switch($s) {
-		case 's':
+		case 'sq':
 		case 'square':
 			# la c'est dur
 			$d = 75;
@@ -421,6 +432,7 @@ function image_stdsize($meta, $attrs) {
 			$a = 100;
 			break;
 		case 'm':
+		case 's':
 		case 'small':
 			$a = 240;
 			break;
