@@ -25,7 +25,7 @@ function styliser_par_article($flux) {
 	// uniquement si un squelette a ete trouve
 	if ($squelette = $flux['data']) {
 		$ext = $flux['args']['ext'];
-		if ($id_article = $flux['args']['id_article']) {
+		if ($id_article = $flux['args']['contexte']['id_article']) {
 			$f = "$squelette"."_".$id_article;
 			if (@file_exists("$f.$ext"))
 				$squelette = $f;

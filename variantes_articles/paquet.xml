@@ -1,7 +1,7 @@
 <paquet
 	prefix="variantesarticles"
 	categorie="navigation"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[2.1.13;3.0.*]"
 	logo=""
