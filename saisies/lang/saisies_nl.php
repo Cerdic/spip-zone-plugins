@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_heure_pas_label' => 'Interval in minuten in het hulpmenu',
 	'option_horaire_label' => 'Uurrooster',
 	'option_horaire_label_case' => 'Ook het uurrooster opnemen',
+	'option_id_groupe_label' => 'Trefwoordengroep',
 	'option_info_obligatoire_explication' => 'Je kan de standaard indicatie aanpassen van verplichting: <i>[Obligatoire]</i>.',
 	'option_info_obligatoire_label' => 'Indicatie verplichting',
 	'option_inserer_barre_choix_edition' => 'edit toolbar compleet',
