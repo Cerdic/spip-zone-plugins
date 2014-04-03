@@ -2,7 +2,7 @@
 	Tous les details du destinataire de la facture
 	Nom de l'orga, contact, adresse...
 ]
-<BOUCLE_commande(COMMANDES){id_commande}>
+<BOUCLE_commande(COMMANDES){id_commande}{tout}>
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 <div id="bloc-a">
 
@@ -11,37 +11,36 @@
 	</BOUCLE_contact>
 		<h4>#NOM</h4>
 	<//B_contact>
-	
+
 	[(#REM) On cherche en priorité des adresses pour la commande, et sinon pour l'auteur ]
 	<B_adresses_comande>
-	
+
 	<BOUCLE_adresses_comande(ADRESSES adresses_liens){id_commande}>
 		[(#TYPE|=={facturation}|oui)<h5><:commandes:adresse_facturation:></h5>]
 		[(#TYPE|=={livraison}|oui)<h5><:commandes:adresse_livraison:></h5>]
-		<p class='adresse'>	
+		<p class='adresse'>
 			[(#VOIE)<br />]
 			[(#CODE_POSTAL) ][ (#VILLE)]<br />
-			<BOUCLE_pays(PAYS){code=#PAYS}>#NOM</BOUCLE_pays>
+			<BOUCLE_pays(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays>
 		</p>
 	</BOUCLE_adresses_comande>
 		<BOUCLE_adresses_client(ADRESSES){id_auteur}>
-			<p class='adresse'>	
+			<p class='adresse'>
 				[(#VOIE)<br />]
 				[(#CODE_POSTAL) ][ (#VILLE)]<br />
-				<BOUCLE_pays_client(PAYS){code=#PAYS}>#NOM</BOUCLE_pays_client>
+				<BOUCLE_pays_client(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_client>
 			</p>
 		</BOUCLE_adresses_client>
 	<//B_adresses_comande>
 
-	
 	<B_telephones>
 	<p class='telephone'>
-	<BOUCLE_telephones(NUMEROS){id_auteur}{'<br />'}>
-	<strong>Tel</strong>	#NUMERO
+	<BOUCLE_telephones(NUMEROS numeros_liens){id_auteur}{'<br />'}>
+	<strong>Tel</strong> #NUMERO
 	</BOUCLE_telephones>
 	</p>
 	</B_telephones>
-	
+
 </div>
 </BOUCLE_auteur>
 </BOUCLE_commande>
