@@ -335,9 +335,9 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			
 			foreach ($tab_result as $row) {
 				 //debug($row);
-				 //print_r($row);
+				//print_r($row);
 				$id = $row['id'];
-				if ($row['parent_id']==0) {
+				if ($row['parent_id']) {
 					$row['phash'] = $this->encode($row['parent_id']);
 				} 
 				
@@ -357,7 +357,7 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 		
 		}
 
-		if($path!=0){
+		if($path>0){
 		$sql = 'SELECT concat(\'d\',f.id_document) as id, '.$path.' as parent_id, IF(f.titre = \'\', SUBSTRING(f.fichier,LENGTH(f.extension)+2), f.titre) as name, f.taille as size, UNIX_TIMESTAMP(f.maj) AS ts, td.mime_type as mime, 1 as `read`, 1 as `write`, 0 as `locked`, 0 as `hidden`, largeur as width, hauteur as height, 0 AS dirs
 				FROM spip_documents AS f , spip_documents_liens as fl  ,spip_types_documents AS td
 				WHERE f.extension=td.extension and f.id_document=fl.id_document and fl.objet=\'rubrique\' and fl.id_objet=\''.$path.'\' 
@@ -393,7 +393,7 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			while ($row = sql_fetch($res)) {
 				 //debug($row);
 				$id = $row['id'];
-				if ($row['parent_id']) {
+				if (!empty($row['parent_id'])) {
 					$row['phash'] = $this->encode($row['parent_id']);
 				} 
 				
@@ -477,7 +477,7 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 	 * @author Dmitry (dio) Levashov
 	 **/
 	protected function _basename($path) {
-		return ($stat = $this->stat($path)) ? $stat['name'] : false;
+		return $stat = $this->stat($path) ? $stat['name'] : false;
 	}
 
 	/**
@@ -597,6 +597,10 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			: in_array($parent, $this->getParents($path));
 	}
 	
+	
+	
+	
+	
 	/***************** file stat ********************/
 	/**
 	 * Return stat for given path.
@@ -642,7 +646,7 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 				$sql = 'SELECT r.id_rubrique as id, r.id_parent as parent_id, r.titre as name, 0 as taille, UNIX_TIMESTAMP(maj) AS ts, \'directory\' as mime, 1 as `read`, 1 as `write`, 0 as `locked`, 0 as `hidden`, 0 as largeur,0 as hauteur, 1 AS dirs
 				FROM spip_rubriques AS r 
 				WHERE r.id_rubrique='.$path;
-				if ($path==0)
+				if ($path===0)
 					$sql = 'SELECT 0 as id, \'-1\' as parent_id, \'racine du site\' as name, 0 as taille, UNIX_TIMESTAMP(maj) AS ts, \'directory\' as mime, 1 as `read`, 1 as `write`, 0 as `locked`, 0 as `hidden`, 0 as largeur,0 as hauteur, 1 AS dirs
 					FROM spip_rubriques AS r 
 					LIMIT 0,1';
@@ -654,7 +658,6 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			$stat = sql_fetch($res);
 			$sql="";
 		
-			//if (substr($path,0,1)=='d')print_r($stat);
 			if ( $this->root!==$path) {
 				$stat['phash'] = $this->encode($stat['parent_id']);
 			} 
@@ -666,7 +669,6 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			}
 			unset($stat['id']);
 			unset($stat['parent_id']);
-			//print_r($stat);
 			return $stat;
 		}
 		
@@ -749,6 +751,39 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 	}
 	
 	/********************  file/dir manipulations *************************/
+	
+	
+	public function mkdir($dst, $name) {
+
+		if ($this->commandDisabled('mkdir')) {
+			return $this->setError(elFinder::ERROR_PERM_DENIED);
+		}
+
+		if (!$this->nameAccepted($name)) {
+			return $this->setError(elFinder::ERROR_INVALID_NAME);
+		}
+		
+		if (($dir = $this->dir($dst)) == false) {
+			return $this->setError(elFinder::ERROR_TRGDIR_NOT_FOUND, '#'.$dst);
+		}
+		
+		if (!$dir['write']) {
+			return $this->setError(elFinder::ERROR_PERM_DENIED);
+		}
+
+		$path = $this->decode($dst);
+
+		$dst  = $this->_joinPath($path,$name);
+		if($dst!=-1)
+			$stat = $this->stat($dst);
+		if ($dst!=-1 || !empty($stat)) {
+			return $this->setError(elFinder::ERROR_EXISTS, $name);
+		}
+		$this->clearcache();
+		return ($path = $this->_mkdir($path, $name)) ? $this->stat($path) : false;
+	}
+	
+	
 	
 	/**
 	 * Create dir and return created dir path or false on failed
@@ -1179,7 +1214,8 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 
 		$stat['hash'] = $this->encode($path);
 
-		$root = $path === $this->root;
+		
+		$root = ($path === $this->root);
 		
 		if ($root) {
 			$stat['volumeid'] = $this->id;
@@ -1237,7 +1273,7 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			
 			if ($stat['mime'] == 'directory') {
 				// for dir - check for subdirs
-
+				
 				if ($this->options['checkSubfolders']) {
 					if (isset($stat['dirs'])) {
 						if ($stat['dirs']) {
