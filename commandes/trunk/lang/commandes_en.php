@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'date_commande_label' => 'Date of creation:',
 	'date_envoi_label' => 'Date of dispatch:',
-	'date_maj_label' => 'Date of update:', # MODIF
+	'date_maj_label' => 'Date of last update:',
 	'date_paiement_label' => 'Date of payment:',
 	'designation' => 'Designation',
 	'details_commande' => 'Details of the order:',
@@ -68,6 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_commandes_statut_attente' => '@nb@ orders awaiting validation',
 	'info_nb_commandes_statut_partiel' => '@nb@ orders partially paid ',
 	'info_nb_commandes_statut_paye' => '@nb@ paid orders',
+	'info_numero' => 'ORDER NUMBER:',
 	'info_numero_commande' => 'ORDER NUMBER:',
 	'info_toutes_commandes' => 'All orders',
 
@@ -145,8 +146,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'This order is :',
+	'titre_commande' => 'Order',
 	'titre_commandes_actives' => 'Active orders',
 	'titre_commandes_auteur' => 'Orders from the author',
+	'titre_logo_commande' => 'Logo',
 
 	// U
 	'une_commande_de' => 'An order of: ',
