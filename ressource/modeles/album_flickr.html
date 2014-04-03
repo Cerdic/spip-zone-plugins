@@ -17,9 +17,9 @@
 	{source json,#GET{api}}{datapath photoset/photo}>
 <li>
 
- <a href="#VALEUR{url_l}" type="image/jpeg"
+ <a[ href="(#VALEUR{url_l}|sinon{#VALEUR{url_m}})"] type="image/jpeg"
   rel="album#ALBUM"
-  title="[(#VALEUR{title}|entites_html|concat{[ &lt;br&gt;&lt;small&gt; (#VALEUR{description/_content}|print|entites_html)]})&lt;/small&gt;]"><img
+  title="[(#VALEUR{title}|entites_html|concat{[ &lt;br&gt;&lt;small&gt; (#VALEUR{description/_content}|print|entites_html)&lt;/small&gt;]})]"><img
   src="#VALEUR{url_q}"
   width="#VALEUR{width_q}" height="#VALEUR{height_q}"
  /></a>
