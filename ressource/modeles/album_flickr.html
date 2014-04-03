@@ -1,5 +1,5 @@
 #SET{apikey,8e9d40e9fe62ab49c1ed33f91c027d19}
-#SET{api,https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=#GET{apikey}&photoset_id=#ALBUM&extras=url_q%2C+url_sq%2C+url_m%2C+url_l%2C+description&format=json&nojsoncallback=1}
+#SET{api,https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=#GET{apikey}&photoset_id=#ALBUM&extras=url_s%2C+url_q%2C+url_sq%2C+url_m%2C+url_l%2C+description&format=json&nojsoncallback=1}
 
 <BOUCLE_meta(DATA)
 	{source json,#GET{api}}>
@@ -7,10 +7,24 @@
 </BOUCLE_meta>
 
 <B_album>
+<style>
+.album ul {
+  margin: 0;
+  list-style: none;
+}
+.album li {
+  float: left;
+  margin: 0;
+  margin: 0 10px 10px 0;
+}
+.album .thumb {
+  margin: 0;
+}
+</style>
 <figure class="album">
 
-
-[<figcaption>(#GET{album_photoset}|table_valeur{title})</figcaption>]
+[(#REM) title=" " pour ne pas avoir de titre ]
+[<figcaption>(#ENV{title}|sinon{#GET{album_photoset}|table_valeur{title}}|trim)</figcaption>]
 
 <ul>
 <BOUCLE_album(DATA)
@@ -18,11 +32,15 @@
 <li>
 
  <a[ href="(#VALEUR{url_l}|sinon{#VALEUR{url_m}})"] type="image/jpeg"
+  data-destw="#VALEUR{width_m}"
+  data-desth="#VALEUR{height_m}"
   rel="album#ALBUM"
   title="[(#VALEUR{title}|entites_html|concat{[ &lt;br&gt;&lt;small&gt; (#VALEUR{description/_content}|print|entites_html)&lt;/small&gt;]})]"><img
   src="#VALEUR{url_q}"
   width="#VALEUR{width_q}" height="#VALEUR{height_q}"
+  class="thumb"
  /></a>
+
 </li>
 
 </BOUCLE_album>
