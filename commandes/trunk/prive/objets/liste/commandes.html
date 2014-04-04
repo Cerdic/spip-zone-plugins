@@ -30,13 +30,13 @@
 		[(#ENV{titre_dehors}|non)[<caption><strong class="caption">(#ENV*{titre,#TOTAL_BOUCLE|singulier_ou_pluriel{commandes:info_1_commande,commandes:info_nb_commandes}})</strong></caption>]]
 		<thead>
 			<tr class='first_row'>
-				<th class='etat'><:commandes:etat:></th>
-				<th class='reference'><:commandes:reference:></th>
-				<th class='dates'><:commandes:label_commande_dates:></th>
-				<th class='descriptif'><:commandes:contenu:></th>
-				<th class='montant'><:commandes:montant:></th>
-				<th class='action'></th>
-				[(#ENV{simuler}|=={1}|oui)<th class='descriptif'><:commandes:simuler:></th>]
+				<th class='etat' scope='col'><:commandes:etat:></th>
+				<th class='reference' scope='col'><:commandes:reference:></th>
+				<th class='dates' scope='col'><:commandes:label_commande_dates:></th>
+				<th class='descriptif' scope='col'><:commandes:contenu:></th>
+				<th class='montant' scope='col'><:commandes:montant:></th>
+				<th class='action' scope='col'></th>
+				[(#ENV{simuler}|=={1}|oui)<th scope='col'><:commandes:simuler:></th>]
 			</tr>
 		</thead>
 		<tbody>
@@ -49,7 +49,7 @@
 				<td class='infos'>
 					<div class='id'>
 						<a href="#URL_ECRIRE{commande,id_commande=#ID_COMMANDE}">
-							[<:commandes:commande:>&nbsp;(#ID_COMMANDE)]
+							[<:commandes:commande_titre:>&nbsp;<:info_numero_abbreviation:>(#ID_COMMANDE)]
 						</a>
 					</div>
 					<div class='reference'>
