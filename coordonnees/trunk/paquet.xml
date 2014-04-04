@@ -1,7 +1,7 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.1.15"
+	version="2.1.16"
 	schema="1.8.2"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
@@ -30,5 +30,7 @@
 	<pipeline nom="affiche_auteurs_interventions"	inclure="coordonnees_pipelines.php" />
 	<!-- optimiser liens -->
 	<pipeline nom="optimiser_base_disparus"		inclure="coordonnees_pipelines.php" /> 
+
+	<menu nom="coordonnees" titre="coordonnees:titre_coordonnees" parent="menu_edition" icone="images/addressbook-16.png" action="coordonnees" />
 
 </paquet>
