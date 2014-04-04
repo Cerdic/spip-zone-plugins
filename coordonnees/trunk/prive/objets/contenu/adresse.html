@@ -1,36 +1,45 @@
-<BOUCLE_adresse(ADRESSES liens){id_adresse}{statut?}>
+<BOUCLE_adresse(ADRESSES){id_adresse}{statut?}{tout}>
 
-[<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
-	<span dir='#LANG_DIR' class='type'>[(#TYPE|logo_type_adr)](#VAL{coordonnees:type_adr_#TYPE}_T)</span>
-</div>]
+<BOUCLE_type(adresses_liens){id_adresse}>
+<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
+	<div class='label'><:coordonnees:label_type></div>
+	<span dir='#LANG_DIR' class='type'><strong><:coordonnees:adresse:> [(#VAL{coordonnees:type_adr_#TYPE}_T)]</strong></span>
+</div>
+</BOUCLE_type>
 
-[<div class="champ contenu_voie[ (#VOIE*|strlen|?{'',vide})]">
-	<span dir='#LANG_DIR' class='#EDIT{voie} voie'>(#VOIE)</span>
-</div>]
+<div class="champ contenu_voie[ (#VOIE*|strlen|?{'',vide})]">
+	<div class='label'><:coordonnees:label_voie></div>
+	<span dir='#LANG_DIR' class='#EDIT{voie} voie'>[(#VOIE)]</span>
+</div>
 
-[<div class="champ contenu_complement[ (#COMPLEMENT*|strlen|?{'',vide})]">
-	<span dir='#LANG_DIR' class='#EDIT{complement} complement'>(#COMPLEMENT)</span>
-</div>]
+<div class="champ contenu_complement[ (#COMPLEMENT*|strlen|?{'',vide})]">
+	<div class='label'><:coordonnees:label_complement></div>
+	<span dir='#LANG_DIR' class='#EDIT{complement} complement'>[(#COMPLEMENT)]</span>
+</div>
 
-[<div class="champ contenu_boite_postale[ (#BOITE_POSTALE*|strlen|?{'',vide})]">
-	<span dir='#LANG_DIR' class='#EDIT{boite_postale} boite_postale'>(#BOITE_POSTALE)</span>
-</div>]
+<div class="champ contenu_boite_postale[ (#BOITE_POSTALE*|strlen|?{'',vide})]">
+	<div class='label'><:coordonnees:label_boite_postale></div>
+	<span dir='#LANG_DIR' class='#EDIT{boite_postale} boite_postale'>[(#BOITE_POSTALE)]</span>
+</div>
 
-[<div class="champ contenu_region[ (#REGION*|strlen|?{'',vide})]">
-	<span dir='#LANG_DIR' class='#EDIT{region} region'>(#REGION)</span>
-</div>]
+<div class="champ contenu_region[ (#REGION*|strlen|?{'',vide})]">
+	<div class='label'><:coordonnees:label_region></div>
+	<span dir='#LANG_DIR' class='#EDIT{region} region'>[(#REGION)]</span>
+</div>
 
-[<div class="champ contenu_code_postal[ (#CODE_POSTAL*|strlen|?{'',vide})]">
-	<span dir='#LANG_DIR' class='#EDIT{code_postal} code_postal'>(#CODE_POSTAL)</span>
-</div>]
+<div class="champ contenu_code_postal[ (#CODE_POSTAL*|strlen|?{'',vide})]">
+	<div class='label'><:coordonnees:label_code_postal></div>
+	<span dir='#LANG_DIR' class='#EDIT{code_postal} code_postal'>[(#CODE_POSTAL)]</span>
+</div>
 
-[<div class="champ contenu_ville[ (#VILLE*|strlen|?{'',vide})]">
-	<span dir='#LANG_DIR' class='#EDIT{ville} ville'>(#VILLE)</span>
-</div>]
+<div class="champ contenu_ville[ (#VILLE*|strlen|?{'',vide})]">
+	<div class='label'><:coordonnees:label_ville></div>
+	<span dir='#LANG_DIR' class='#EDIT{ville} ville'>[(#VILLE)]</span>
+</div>
 
 <B_pays>
 <div class="champ contenu_pays">
-<BOUCLE_pays(PAYS ?){code=#PAYS}><span dir='#LANG_DIR' class='pays'>#NOM</span></BOUCLE_pays>
+<BOUCLE_pays(PAYS ?){code=#PAYS*}><span dir='#LANG_DIR' class='pays'>#NOM</span></BOUCLE_pays>
 </div>
 </B_pays>
 [<div class="champ contenu_pays"><span dir='#LANG_DIR' class='pays'>(#NOM)</span></div>]
