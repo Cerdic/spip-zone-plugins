@@ -1,0 +1,21 @@
+#SET{defaut,adresse}
+#SET{objet, #ENV{coordonnee}|?{
+	#ENV{coordonnee}|in_array{#LISTE{adresse,email,numero}}|?{#ENV{coordonnee},#GET{defaut}},
+	#GET{defaut}}}
+<h1 class="grostitre"><:coordonnees:titre_coordonnees:></h1>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li>[(#SELF|parametre_url{coordonnee,adresse}|lien_ou_expose{[(#CHEMIN_IMAGE{adresse-16}|balise_img) ]<:coordonnees:adresses:>,#GET{objet}|=={adresse},ajax})]</li>
+		<li>[(#SELF|parametre_url{coordonnee,numero}|lien_ou_expose{[(#CHEMIN_IMAGE{numero-16}|balise_img) ]<:coordonnees:numeros:>,#GET{objet}|=={numero},ajax})]</li>
+		<li>[(#SELF|parametre_url{coordonnee,email}|lien_ou_expose{[(#CHEMIN_IMAGE{email-16}|balise_img) ]<:coordonnees:emails:>,#GET{objet}|=={email},ajax})]</li>
+	</ul>
+</div>
+
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/#GET{objet}s, par=titre, nb=10, env, ajax, sinon=#VAL{#GET{objet}|objet_info{texte_aucun_objet}|_T}}>
+
+[(#AUTORISER{creer,#GET{objet}})
+	[(#URL_ECRIRE{#GET{objet}_edit,new=oui}|icone_verticale{#VAL{#GET{objet}|objet_info{texte_creer}|_T},#GET{objet},new,right})]
+]
