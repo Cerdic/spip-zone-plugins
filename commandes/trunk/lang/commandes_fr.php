@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference_numero' => 'Référence n° ', # MODIF
 	'commande_statut' => 'Statut',
 	'commandes_titre' => 'Commandes',
+	'commande_titre' => 'Commande',
 	'configurer_notifications_commandes' => 'Configurer les notifications',
 	'configurer_titre' => 'Configurer le plugin Commandes',
 	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
@@ -144,10 +145,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Cette commande est :',
-	'titre_commande' => 'Commande',
 	'titre_commandes_actives' => 'Commandes actives',
 	'titre_commandes_auteur' => 'Commandes de l’auteur',
-	'titre_logo_commande' => 'Logo',
+	'titre_logo_commande' => 'Logo de la commande',
+	'titre_contenu_commande' => 'Contenu de la commande',
+	'titre_adresses_contact' => 'Adresses du client',
+	'titre_adresses_commande' => 'Adresses de la commande',
+	'titre_adresses_associees' => 'Adresses associées',
+	'titre_informations_contact' => 'Client',
 
 	// U
 	'une_commande_de' => 'Une commande de : ',
