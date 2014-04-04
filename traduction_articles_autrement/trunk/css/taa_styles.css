@@ -14,11 +14,14 @@
 
 .changer div.onglet{background:#F2F2F2; font-style:italic;}
 
+.onglets_traduction.articles {height: auto}
+
 .onglets_traduction div.options a {
 	text-align:center;
 	padding:0;
 	margin:0;
 }
+.onglets_traduction div.options.delier {float:none;text-align: center}
 
 .onglets_traduction div.options a:hover span{
 	display:block;
@@ -27,14 +30,17 @@
 	background:#ffffff;
 	height :auto;
 }
-.barre_onglet a,.barre_onglet strong  {padding:5px}
-.barre_onglet .non_traduit a{background:#eeeeee;font-style:italic;}
+.onglets_traduction.barre_onglet a,
+.onglets_traduction.barre_onglet strong  {padding:5px}
+
+.onglets_traduction.barre_onglet .non_traduit a{background:#eeeeee;font-style:italic;}
 
 .pagination{text-align:left;}
 
-.onglets_traduction .danger{background: #ffffff;}
+.onglets_traduction .danger{background: #ffffff; display: inline-block; float: none; margin: 0 auto;}
 
-a.bouton_options{float:right;background: none;}
+a.bouton_options{background: none; display: inline-block}
+.onglets_traduction.barre_onglet a.bouton_options, .onglets_traduction.barre_onglet strong.bouton_options {vertical-align: middle}
 
 .nettoyeur{clear:both;}
 
@@ -45,7 +51,7 @@ a.bouton_options{float:right;background: none;}
 
 .lang{ margin-right:5px;}
 
-.changer{float:left;margin:0 0 5px 5px}
+.changer{float:none;margin:0 0 5px 5px}
 
 .liste-elements table.spip tr.trads{background:#dfdfdf}
 
