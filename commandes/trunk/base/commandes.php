@@ -61,7 +61,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 			"KEY statut"         => "statut",
 			"KEY id_auteur"      => "id_auteur",              
 		),
-		'date' => "date",
+		'date'                       => "date",
+		'titre'                      => "reference AS titre, '' AS lang",
 		'champs_editables'           => array('id_auteur', 'date_paiement', 'date_envoi'),
 		'champs_versionnes'          => array('id_auteur', 'date_paiement', 'date_envoi'),
 		'rechercher_champs'          => array('reference' => 8, 'id_commande' => 8),
@@ -100,8 +101,13 @@ function commandes_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut'        => 'commandes:texte_changer_statut_commande',
-		'texte_objets'                => 'commandes:titre_commandes',
-		'texte_objet'                 => 'commandes:titre_commande'
+		'texte_objets'                => 'commandes:commandes_titre',
+		'texte_objet'                 => 'commandes:commande_titre',
+		'texte_logo_objet'            => 'commandes:titre_logo_commande',
+		'texte_modifier'              => 'commandes:commande_modifier',
+		'info_aucun_objet'            => 'commandes:info_aucun_commande',
+		'info_1_objet'                => 'commandes:info_1_commande',
+		'info_nb_objets'              => 'commandes:info_nb_commandes',
 
 	);
 
