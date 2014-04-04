@@ -47,7 +47,6 @@ function balise_COOKIE_SET_dyn($nom_cookie, $valeur_cookie='', $duree=0, $path='
 	// pour la gestion automagique du prefixe par spip_setcookie, ajouter spip_ en préfixe
 	$nom_cookie = strpos($nom_cookie,'spip_') !== 0 ? 'spip_'.$nom_cookie : $nom_cookie;
 	// calcul de la date d'expiration
-echo '<br>duree: '.$duree;	
 	if (!intval($duree))
 		$expire = null;
 	else
