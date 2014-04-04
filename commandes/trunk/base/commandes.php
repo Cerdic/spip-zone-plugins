@@ -111,33 +111,50 @@ function commandes_declarer_tables_objets_sql($tables) {
 
 	);
 
-	// Table auxiliaire SPIP_COMMANDES_DETAILS
-	$tables['spip_commandes_details'] = array(
-		'principale' => "non",
-		'field'=> array(
-			'id_commandes_detail' => 'bigint(21) not null',
-			'id_commande'         => 'bigint(21) not null default 0',
-			'descriptif'          => 'text not null default ""',
-			'quantite'            => 'int not null default 0',
-			'prix_unitaire_ht'    => 'float not null default 0',
-			'taxe'                => 'decimal(4,3) not null default 0',
-			'statut'              => 'varchar(25) not null default ""',
-			'objet'               => 'varchar(25) not null default ""',
-			'id_objet'            => 'bigint(21) not null default 0',
-			'maj'                 => 'timestamp'
-		),
-		'key' => array(
-			'PRIMARY KEY'         => 'id_commandes_detail',
-			'KEY id_commande'     => 'id_commande'              
-		),
-		'join' => array(
-			'id_commandes_detail' => 'id_commandes_detail',
-			'id_commande'         => 'id_commande'
-		)
+	return $tables;
+}
 
+
+/**
+ * Déclaration des tables principales
+ *
+ * @pipeline declarer_tables_principales
+ * @param array $tables_principales
+ *     Description des tables
+ * @return array
+ *     Description complétée des tables
+ */
+function commandes_declarer_tables_principales($tables_principales){
+
+	// Table commandes_details
+	$commandes_principales = array(
+		'id_commandes_detail'       => 'bigint(21) not null',
+		'id_commande'               => 'bigint(21) not null default 0',
+		'descriptif'                => 'text not null default ""',
+		'quantite'                  => 'int not null default 0',
+		'prix_unitaire_ht'          => 'float not null default 0',
+		'taxe'                      => 'decimal(4,3) not null default 0',
+		'statut'                    => 'varchar(25) not null default ""',
+		'objet'                     => 'varchar(25) not null default ""',
+		'id_objet'                  => 'bigint(21) not null default 0',
+		'maj'                       => 'timestamp'
 	);
 
-	return $tables;
+	$commandes_details_cles = array(
+		'PRIMARY KEY'               => 'id_commandes_detail',
+		'KEY id_commande'           => 'id_commande'
+	);
+
+	$tables_principales['spip_commandes_details'] = array(
+		'field'                     => &$commandes_details,
+		'key'                       => &$commandes_details_cles,
+		'join'=> array(
+			'id_commandes_detail' => 'id_commandes_detail',
+			'id_commande' => 'id_commande'
+		)
+	);
+
+	return $tables_principales;
 }
 
 
