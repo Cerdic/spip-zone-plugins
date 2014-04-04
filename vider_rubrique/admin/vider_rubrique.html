@@ -1,5 +1,6 @@
 [(#SET{rubrique_source,#ENV{id_rubrique}})]
 [(#SET{effacement,[(#CONFIG{"vider_rubrique/config/effacement"}|sinon{"non"})]})]
+[(#SET{arbo_complete,[(#CONFIG{"vider_rubrique/config/arbo_complete"}|sinon{"non"})]})]
 [(#SET{docs,[(#CONFIG{vider_rubrique/config/docs}|sinon{"non"})]})]
 [(#SET{forums,[(#CONFIG{vider_rubrique/config/forums}|sinon{"non"})]})]
 
@@ -13,10 +14,17 @@
 		- Lister tous les articles
 		- Les dépublier (pour l'instant sans effacer les logos)
 	]
-	<BOUCLE_articles(ARTICLES){branche}{statut IN publie,prop,prepa}>
+	<BOUCLE_articles(ARTICLES){statut IN publie,prop,prepa}>
 		[(#SET_PUSH{lesArt,#ID_ARTICLE})]
 		[(#VAL{article}|vider_rubrique_objet_poubelle{#ID_ARTICLE,"poubelle"})]
 	</BOUCLE_articles>
+
+	<BOUCLE_articlesBranche(ARTICLES){branche}{statut IN publie,prop,prepa}>
+		[(#SET_PUSH{lesArtBranche,#ID_ARTICLE})]
+		[(#GET{arbo_complete}|=={oui}|oui)
+			[(#VAL{article}|vider_rubrique_objet_poubelle{#ID_ARTICLE,"poubelle"})]
+		]
+	</BOUCLE_articlesBranche>
 	
 [(#REM) TODO
 	Faudrait faire la bonne boucle :
@@ -32,12 +40,21 @@
 [(#REM) séparer le tout par des virgules ]
 	[(#SET{lesRub,[(#GET{lesRub}|implode{','})]})]
 	[(#SET{lesArt,[(#GET{lesArt}|implode{','})]})]
+	[(#SET{lesArtBranche,[(#GET{lesArtBranche}|implode{','})]})]
 	[(#SET{lesDoc,[(#GET{lesDoc}|implode{','})]})]
 
 [(#REM) Lancer les hostilités ]	
-	[(#GET{effacement}|=={oui}|oui) [(#REM|supprimer_objet{article,#GET{lesArt}})] ]
-	[(#REM|supprimer_objet{rubrique,#GET{lesRub}})]
-	[(#ENV{documents}|=={oui}|oui) [(#REM) pour l'instant inactif, faut faire la boucle |supprimer_objet{document,#GET{lesDoc}})] ]
+	[(#GET{effacement}|=={oui}|oui)
+		[(#REM|supprimer_objet{article,#GET{lesArt}})]
+		[(#GET{arbo_complete}|=={on}|oui)
+			[(#REM|supprimer_objet{article,#GET{lesArtBranche}})]
+			[(#GET{lesRub}|supprimer_rubrique)]
+		]
+	]
 
-[(#ENV{forums}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les forums liés aux articles ??? ] ]
+[(#REM) TODO ]
+	[(#ENV{documents}|=={oui}|oui) [(#REM) pour l'instant inactif, faut faire la boucle |supprimer_objet{document,#GET{lesDoc}})] ]
+	[(#ENV{forums}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les forums liés aux articles ??? ] ]
+	[(#ENV{a2a}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les a2a ??? ] ]
+
 </BOUCLE_principale>

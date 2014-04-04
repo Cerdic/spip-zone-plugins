@@ -1,7 +1,7 @@
 <paquet
 	prefix="vider_rubrique"
 	categorie="edition"
-	version="0.0.2"
+	version="0.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="theme/img/poubelle.png"
@@ -20,4 +20,6 @@
 
 	<pipeline nom="boite_infos" inclure="vider_rubrique_pipelines.php" />
 	<pipeline nom="jqueryui_plugins" inclure="vider_rubrique_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
 </paquet>

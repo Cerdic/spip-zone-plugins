@@ -31,6 +31,10 @@
 		</div>
 	</li>
 
+	[(#SAISIE{oui_non, arbo_complete,
+		label='Supprimer également les sous-rubriques',
+		explication='Si actif la rubrique sera vidée de ses articles et de toutes ses sous-rubriques et de leurs articles'})]
+
 	#SET{name,restreindre}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 	[(#SET{valeur,[(#ENV{#GET{name}}|sinon{non})]})]
 	<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur][ (#GET{activ_config})]">
