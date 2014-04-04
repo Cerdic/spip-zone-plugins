@@ -11,44 +11,44 @@
 
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 
-[(#REM) Si le plugin contacts et organisations est installé ]
+[(#REM) On peut avoir le plugin contacts et organisations d'installé
+        Du coup, on stock les infos dans des variables
+        pour éviter d'avoir à doubler le code ]
 <BOUCLE_contact(CONTACTS?){id_auteur}>
-<table class="client-commande">
-	<tbody>
-		<tr>
-			[<td class="logo"><a href="[(#URL_ECRIRE{contact,id_contact=#ID_CONTACT})]">(#LOGO_CONTACT|sinon{#LOGO_AUTEUR})</a></td>]
-			<td class="infos">
-				<a href="[(#URL_ECRIRE{contact,id_contact=#ID_CONTACT})]"><h3 class="nom">#NOM #PRENOM</h3></a>
-				<ul>
-					<li class="email"><a href="mailto:#EMAIL">#EMAIL</a></li>
-					<BOUCLE_telephones_contact(NUMEROS numeros_liens?){id_contact}>
-					<li class="numero">#NUMERO</li>
-					</BOUCLE_telephones_contact>
-				</ul>
-			</td>
-		</tr>
-	</tbody>
-</table>
+#SET{logo,#LOGO_CONTACT|sinon{#LOGO_AUTEUR}|sinon{#VAL{auteur}|objet_icone}}
+#SET{nom,#NOM|concat{' ',#PRENOM}} #SET{email,#EMAIL} #SET{url,#URL_ECRIRE{contact,id_contact=#ID_CONTACT}}
+#SET{id,#ID_CONTACT} #SET{numeros,#ARRAY}
+<BOUCLE_tel_contact(NUMEROS numeros_liens?){id_contact}>#SET{numeros,#GET{numeros}|push{#NUMERO}}</BOUCLE_tel_contact>
 </BOUCLE_contact>
+#SET{logo,#LOGO_AUTEUR|sinon{#VAL{auteur}|objet_icone}}
+#SET{nom,#NOM|concat{' ',#PRENOM}} #SET{email,#EMAIL} #SET{url,#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}}
+#SET{id,#ID_AUTEUR} #SET{numeros,#ARRAY}
+<BOUCLE_tel(NUMEROS numeros_liens?){id_auteur}>#SET{numeros,#GET{numeros}|push{#NUMERO}}</BOUCLE_tel>
+<//B_contact>
 
-[(#REM) sans plugin contacts & organisations ]
 <table class="client-commande">
 	<tbody>
 		<tr>
-			[<td class="logo"><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR})]">(#LOGO_AUTEUR|sinon{#VAL{auteur}|objet_icone})</a></td>]
+			[<td class="logo"><a href="[(#GET{url})]">(#GET{logo})</a></td>]
 			<td class="infos">
-				<a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR})]"><h3 class="nom">#NOM</h3></a>
-				<ul>
-					<li class="email"><a href="mailto:#EMAIL">#EMAIL</a></li>
-					<BOUCLE_telephones_client(NUMEROS numeros_liens?){id_auteur}>
-					<li class="numero">#NUMERO</li>
-					</BOUCLE_telephones_client>
-				</ul>
+				<div class="champ contenu_nom[ (#GET*{nom}|strlen|?{'',vide})]">
+					<a href="[(#GET{url})]"><h3 dir='#LANG_DIR' class='nom'>[(#GET{nom})]</h3></a>
+				</div>
+				<div class="champ contenu_email[ (#GET*{email}|strlen|?{'',vide})]">
+					<span class="label"><:email_2:></span>
+					<a href="mailto:[(#GET{email})]"><span dir='#LANG_DIR' class='email'>[(#GET{email})]</span></a>
+				</div>
+				<BOUCLE_numeros(DATA){source table, #GET{numeros}}>
+				<div class="champ contenu_numero">
+					<span class="label"><:coordonnees:numero:> \##COMPTEUR_BOUCLE :</span>
+					<span dir='#LANG_DIR' class='numero'>#VALEUR</span>
+				</div>
+				</BOUCLE_numeros>
+				[(#PIPELINE{afficher_contenu_objet,#ARRAY{args,#ARRAY{type,#PLUGIN{contacts}|?{contact,auteur},id_objet,#GET{id}},data,'<div class="nettoyeur"></div>'}})]
 			</td>
 		</tr>
 	</tbody>
 </table>
-<//B_contact>
 
 </BOUCLE_auteur>
 </B_auteur>

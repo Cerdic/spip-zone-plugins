@@ -9,9 +9,6 @@
 		</p>
 	</div>]
 
-	[(#REM) Informations sur le client ]
-	<INCLURE{fond=prive/squelettes/inclure/commande_client, id_commande}>
-
 	[(#REM) Contenu détaillé de la commande ]
 	<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>
 	<INCLURE{fond=inclure/commande, id_commande}>
@@ -21,6 +18,9 @@
 	[(#PLUGIN{coordonnees}|oui)
 	<INCLURE{fond=prive/squelettes/inclure/commande_adresses, id_commande}>
 	]
+
+	[(#REM) Informations sur le client ]
+	<INCLURE{fond=prive/squelettes/inclure/commande_client, id_commande}>
 
 </div>
 </BOUCLE_afficher_contenu>
