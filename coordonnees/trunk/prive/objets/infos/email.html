@@ -8,15 +8,18 @@
 	<div class='utilisation'>
 		<B_email_utilisee>
 		<:coordonnees:info_email_utilise_par:>
-		<dl>
 		<BOUCLE_email_utilisee(emails_liens){id_email}{fusion objet}{par objet}>
-			<dt>#OBJET</dt>
-			<BOUCLE_email_usitee(emails_liens){id_email}{objet}{par id_objet}>
-				<dd>[(#OBJET|objet_icone{24}) ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET#ID_OBJET">#INFO_TITRE{#OBJET,#ID_OBJET}</a></dd>
-			</BOUCLE_email_usitee>
+			<B_email_usitee>
+			<div class="liste">
+				<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{#OBJET|objet_info{info_1_objet},#OBJET|objet_info{info_nb_objets}})]</strong>
+				<ul>
+					<BOUCLE_email_usitee(emails_liens){id_email}{objet}{par id_objet}>
+					<li>[(#OBJET|objet_icone{16}) ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">#INFO_TITRE{#OBJET,#ID_OBJET}</a></li>
+					</BOUCLE_email_usitee>
+				</ul>
+			</div>
+			<B_email_usitee>
 		</BOUCLE_email_utilisee>
-		</dl>
-		</B_email_utilisee>
 	</div>
 </div>
 </BOUCLE_email_info>
