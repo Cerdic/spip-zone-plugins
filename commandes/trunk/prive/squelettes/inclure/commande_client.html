@@ -1,0 +1,58 @@
+[(#REM)
+	Informations sur le client d'une commande
+][(#REM)
+	Inclus dans prive/objet/contenu/commande.html
+	Parametres :
+		id_commande    identifiant de la commande
+]
+<BOUCLE_commande(COMMANDES){id_commande}{tout}{statut?}>
+
+<h2 class="titrem"><:commandes:titre_informations_client:></h2>
+
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+
+[(#REM) Si le plugin contacts et organisations est installé ]
+<BOUCLE_contact(CONTACTS?){id_auteur}>
+<table class="client-commande">
+	<tbody>
+		<tr>
+			[<td class="logo"><a href="[(#URL_ECRIRE{contact,id_contact=#ID_CONTACT})]">(#LOGO_CONTACT|sinon{#LOGO_AUTEUR})</a></td>]
+			<td class="infos">
+				<a href="[(#URL_ECRIRE{contact,id_contact=#ID_CONTACT})]"><h3 class="nom">#NOM #PRENOM</h3></a>
+				<ul>
+					<li class="email"><a href="mailto:#EMAIL">#EMAIL</a></li>
+					<BOUCLE_telephones_contact(NUMEROS numeros_liens?){id_contact}>
+					<li class="numero">#NUMERO</li>
+					</BOUCLE_telephones_contact>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</BOUCLE_contact>
+
+[(#REM) sans plugin contacts & organisations ]
+<table class="client-commande">
+	<tbody>
+		<tr>
+			[<td class="logo"><a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR})]">(#LOGO_AUTEUR|sinon{#VAL{auteur}|objet_icone})</a></td>]
+			<td class="infos">
+				<a href="[(#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR})]"><h3 class="nom">#NOM</h3></a>
+				<ul>
+					<li class="email"><a href="mailto:#EMAIL">#EMAIL</a></li>
+					<BOUCLE_telephones_client(NUMEROS numeros_liens?){id_auteur}>
+					<li class="numero">#NUMERO</li>
+					</BOUCLE_telephones_client>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<//B_contact>
+
+</BOUCLE_auteur>
+</B_auteur>
+<div class="notice">Aucun auteur n'est associé à la commande</div>
+<//B_auteur>
+
+</BOUCLE_commande>

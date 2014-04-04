@@ -1,23 +1,26 @@
 <BOUCLE_afficher_contenu(COMMANDES){id_commande=#ENV{id}}{tout}>
-[<div class="champ contenu_maj[ (#MAJ*|intval|>{0}|?{'',vide})]">
-	<p>
-		<label><:commandes:date_maj_label:></label>
-		<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
-	</p>
-</div>]
-<div class="champ contenu_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
-	<h4>
-		<label><:commandes:contact_label:></label>
-		<span dir='#LANG_DIR' class='auteur'>
-			[(#ID_AUTEUR|>{0}|oui)
-				<a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">[(#INFO_NOM{auteur,#ID_AUTEUR})]</a>
-			]
-			[(#ID_AUTEUR|>{0}|non)
-				<em><:info_aucun_auteur:></em>
-			]
-		</span>
-	</h4>
+<div class="commandes">
+
+	[(#REM) date de la dernière mise à jour ]
+	[<div class="champ contenu_maj[ (#MAJ*|intval|>{0}|?{'',vide})]">
+		<p>
+			<label><:commandes:date_maj_label:></label>
+			<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
+		</p>
+	</div>]
+
+	[(#REM) Informations sur le client ]
+	<INCLURE{fond=prive/squelettes/inclure/commande_client, id_commande}>
+
+	[(#REM) Contenu détaillé de la commande ]
+	<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>
+	<INCLURE{fond=inclure/commande, id_commande}>
+	[(#REM)<INCLURE{fond=prive/squelettes/inclure/commande_contenu, id_commande}>]
+
+	[(#REM) Adresses liées à la commande ou à défaut au contact ]
+	[(#PLUGIN{coordonnees}|oui)
+	<INCLURE{fond=prive/squelettes/inclure/commande_adresses, id_commande}>
+	]
+
 </div>
-#INCLURE{fond=inclure/commande, id_commande=#ID_COMMANDE}
-#INCLURE{fond=inclure/facture-a, id_commande=#ID_COMMANDE}
 </BOUCLE_afficher_contenu>
