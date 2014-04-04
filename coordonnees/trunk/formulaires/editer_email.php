@@ -35,7 +35,7 @@ function formulaires_editer_email_saisies_dist(){
 			'options' => array (
 				'nom' => 'email',
 				'label' => _T('coordonnees:label_email'),
-				'placeholder' => _T('coordonnees:placeholder_email'),
+				/*'placeholder' => _T('coordonnees:placeholder_email'),*/
 				'obligatoire' => 'oui'
 			),
 			'verifier' => array (
