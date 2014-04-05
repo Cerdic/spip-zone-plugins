@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// B
 	'bouton_confirmer' => 'Confirmer',
+	'bouton_confirmer_rub' => "Tout dupliquer (arborescence+articles)",
+	'bouton_confirmer_arbo' => "Dupliquer seulement l'arborescence (pas les articles)",
 
 	// C
 	'choix_type' => 'Sélectionner le ou les mode(s) de duplication',
@@ -32,8 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'message_annuler' => 'Annuler',
 	'message_avertissement_article' => 'Êtes-vous sûr de vouloir dupliquer cet article ?',
-	'message_avertissement_rubrique' => 'Êtes-vous sûr de vouloir dupliquer tout le contenu de cette rubrique ?',
-	'message_avertissement_rubrique_arbo' => 'Êtes-vous sûr de vouloir dupliquer seulement l\'arborescence de cette rubrique ?',
+	'message_avertissement_rubrique' => 'Êtes-vous sûr de vouloir dupliquer cette rubrique ?',
 	'message_confirmer' => 'Confirmer',	
 	
 	'operation_executee' => "L'opération a bien été exécutée.",
