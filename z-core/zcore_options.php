@@ -19,7 +19,7 @@ if ($z = _request('var_zajax')
 	$GLOBALS['flag_preserver'] = true;
 }
 else {
-	// supprimer cette variable dangeureuse
+	// supprimer cette variable dangereuse
 	set_request('var_zajax','');
 }
 
