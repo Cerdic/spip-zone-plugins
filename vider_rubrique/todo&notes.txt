@@ -1,0 +1,36 @@
+		[(#SET_PUSH{lesArt,#ID_ARTICLE})]
+		[(#SET_PUSH{lesBrev,#ID_BREVE})]
+			[(#SET_PUSH{lesArtBranche,#ID_ARTICLE})]
+			[(#SET_PUSH{lesBrevBranche,#ID_BREVE})]
+
+
+[(#REM) TODO à partir d'ici, tout est à faire.
+	Faudrait faire la bonne boucle :
+	- celle qui supprime TOUS les documents liés aux articles supprimés
+	- ET qui ne sont pas liés à d'autres articles de SPIP
+]
+[(#REM) SET{arbo_complete,[(#CONFIG{"vider_rubrique/config/arbo_complete"}|sinon{"non"})]})]
+[(#SET{docs,[(#CONFIG{vider_rubrique/config/docs}|sinon{"non"})]})]
+[(#SET{forums,[(#CONFIG{vider_rubrique/config/forums}|sinon{"non"})]})]
+
+	[(#REM) lister documents des articles ]
+	<BOUCLE_lesDoc(DOCUMENTS){id_article IN #GET{lesArt}}{si #REM}>
+		#SET_PUSH{lesDoc,#ID_DOCUMENT}
+	</BOUCLE_lesDoc>
+[(#REM) // FIN DU TODO ]
+	
+[(#REM) séparer le tout par des virgules
+	[(#SET{lesArt,[(#GET{lesArt}|implode{','})]})]
+	[(#SET{lesArtBranche,[(#GET{lesArtBranche}|implode{','})]})]
+	[(#SET{lesDoc,[(#GET{lesDoc}|implode{','})]})]
+]
+
+[(#REM) Lancer les hostilités ]	
+	[(#GET{effacement}|=={oui}|oui)
+		[(#REM) c'est pas fonctionnel ça |supprimer_objet{article,#GET{lesArt}})]
+	]
+
+[(#REM) TODO ]
+	[(#ENV{documents}|=={oui}|oui) [(#REM) pour l'instant inactif, faut faire la boucle |supprimer_objet{document,#GET{lesDoc}})] ]
+	[(#ENV{forums}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les forums liés aux articles ??? ] ]
+	[(#ENV{a2a}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les a2a ??? ] ]

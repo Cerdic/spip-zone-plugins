@@ -1,7 +1,7 @@
 <paquet
 	prefix="vider_rubrique"
 	categorie="edition"
-	version="0.1.0"
+	version="0.2.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="theme/img/poubelle.png"
@@ -13,7 +13,7 @@
 
 	<auteur lien="http://demo.apsulis.com">XDjuj</auteur>
 	<licence>GNU/GPL</licence>
-	<copyright>2012</copyright>
+	<copyright>2012-2014</copyright>
 	<credit lien="http://icomoon.io/app/">Icomoon (Logo, icones)</credit>
 
 	<traduire gestionnaire="salvatore" module="vider_rubrique" reference="fr" />

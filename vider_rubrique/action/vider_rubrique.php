@@ -20,15 +20,19 @@ include_spip('inc/charsets');	# pour le nom de fichier
  * @param null $id_rubrique
  * @return void
  */
-function action_vider_rubrique_dist($id_rubrique=null) {
-
-	if (is_null($id_rubrique)){
+function action_vider_rubrique_dist($arguments=null) {
+	if (is_null($arguments)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$id_rubrique = $securiser_action();
+		$arguments = $securiser_action();
 	}
 
+	$message = "Suppression des articles de la rubrique ";
+	$arguments = explode(':', $arguments);
+	$id_rubrique = $arguments[0];
+	if($arguments[1]){ $vider_arbo=$arguments[1]; $message = "Suppression de l'arborescence complète de la rubrique "; }
+	spip_log($message.$id_rubrique, "vider_rubrique");
 	if (intval($id_rubrique)){
-		$contexte = array('id_rubrique'=>$id_rubrique);
+		$contexte = array('id_rubrique'=>$id_rubrique,'vider_arbo'=>$vider_arbo);
 		$suppression = recuperer_fond("admin/vider_rubrique", $contexte);
 	}
 }

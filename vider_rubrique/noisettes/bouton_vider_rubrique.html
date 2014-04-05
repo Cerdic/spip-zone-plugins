@@ -1,17 +1,22 @@
-[(#REM) Ne pas afficher le bouton si l'autre est déjà actif (sinon c'est con) ]
+[(#REM) Ne pas afficher le bouton si celui de SPIP (car la rub est vide) est déjà actif (sinon c'est con) ]
 [(#AUTORISER{supprimer,rubrique,#ID_RUBRIQUE}|non)
 	<script>
 		jQuery(function() {
 			jQuery(document).on('click','.vider_rubrique a', function(e) {
-				lien = jQuery(this).attr('href');
+				lien_articles = jQuery(this).attr('href');
+				lien_arbo = jQuery(this).data('lien_arbo');
 				jQuery('<div></div>')
-					.html('<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>&Ecirc;tes-vous s&ucirc;r de vouloir supprimer tout le contenu de cette rubrique ?<br/><strong>Cette action est irr&eacute;versible.</strong></p>')
+					.html('<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><strong>Attention cette action est irr&eacute;versible.</strong><br/>&Ecirc;tes-vous s&ucirc;r de vouloir supprimer tout le contenu de cette rubrique ?</p>')
 					.dialog({
 						resizable: false,
 						modal: true,
 						buttons: {
-							"Confirmer": function() {
-								window.location.href = lien;
+							"Supprimer uniquement les articles": function() {
+								window.location.href = lien_articles;
+								jQuery(this).dialog( "close" );
+							},
+							"Supprimer toute l'arborescence": function() {
+								window.location.href = lien_arbo;
 								jQuery(this).dialog( "close" );
 							},
 							"Annuler": function() {
@@ -24,6 +29,9 @@
 		});
 	</script>
 	<span class="icone s24 horizontale danger vider_rubrique">
-		<a href="[(#URL_ACTION_AUTEUR{vider_rubrique,#ID_RUBRIQUE,#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}})]"><img src="#CHEMIN{theme/img/poubelle.png}" width='24' height='24' /><b><:vider_rubrique:action_vider:></b></a>
+		<a
+		 href="[(#URL_ACTION_AUTEUR{vider_rubrique,#ID_RUBRIQUE,#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}})]"
+		 data-lien_arbo="[(#URL_ACTION_AUTEUR{vider_rubrique,#ID_RUBRIQUE:vider_arbo,#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}})]">
+		<img src="#CHEMIN{theme/img/poubelle.png}" width='24' height='24' /><b><:vider_rubrique:action_vider:></b></a>
 	</span>
 ]

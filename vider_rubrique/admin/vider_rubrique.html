@@ -1,60 +1,35 @@
 [(#SET{rubrique_source,#ENV{id_rubrique}})]
-[(#SET{effacement,[(#CONFIG{"vider_rubrique/config/effacement"}|sinon{"non"})]})]
-[(#SET{arbo_complete,[(#CONFIG{"vider_rubrique/config/arbo_complete"}|sinon{"non"})]})]
-[(#SET{docs,[(#CONFIG{vider_rubrique/config/docs}|sinon{"non"})]})]
-[(#SET{forums,[(#CONFIG{vider_rubrique/config/forums}|sinon{"non"})]})]
+#SET{arbo_complete,non}
+	[(#ENV{vider_arbo}|=={vider_arbo}|oui) #SET{arbo_complete,oui} ]
 
 <BOUCLE_principale(RUBRIQUES){id_rubrique=#GET{rubrique_source}}{tout}>
 
-	[(#REM) Lister toutes les sous rub ]
-	<BOUCLE_sousRub(RUBRIQUES){branche}{tout}{!id_rubrique=#GET{rubrique_source}}{tout}>
-		[(#SET_PUSH{lesRub,#ID_RUBRIQUE})]
-	</BOUCLE_sousRub>
 	[(#REM)
-		- Lister tous les articles
+		- Lister tous les articles et brèves
 		- Les dépublier (pour l'instant sans effacer les logos)
 	]
-	<BOUCLE_articles(ARTICLES){statut IN publie,prop,prepa}>
-		[(#SET_PUSH{lesArt,#ID_ARTICLE})]
+	<BOUCLE_articles(ARTICLES){id_rubrique}{statut IN publie,prop,prepa}>
 		[(#VAL{article}|vider_rubrique_objet_poubelle{#ID_ARTICLE,"poubelle"})]
 	</BOUCLE_articles>
+	<BOUCLE_breves(BREVES){id_rubrique}{statut IN publie,prop,prepa}>
+		[(#VAL{breve}|vider_rubrique_objet_poubelle{#ID_BREVE,"poubelle"})]
+	</BOUCLE_breves>
 
-	<BOUCLE_articlesBranche(ARTICLES){branche}{statut IN publie,prop,prepa}>
-		[(#SET_PUSH{lesArtBranche,#ID_ARTICLE})]
-		[(#GET{arbo_complete}|=={oui}|oui)
+	<BOUCLE_si_arbo_complete(CONDITION){si #GET{arbo_complete}|=={oui}}>
+		<BOUCLE_articlesBranche(ARTICLES){branche}{statut IN publie,prop,prepa}>
 			[(#VAL{article}|vider_rubrique_objet_poubelle{#ID_ARTICLE,"poubelle"})]
-		]
-	</BOUCLE_articlesBranche>
-	
-[(#REM) TODO
-	Faudrait faire la bonne boucle :
-	- celle qui supprime TOUS les documents liés aux articles supprimés
-	- ET qui ne sont pas liés à d'autres articles de SPIP
-]
-	[(#REM) lister documents des articles ]
-	<BOUCLE_lesDoc(DOCUMENTS){id_article IN #GET{lesArt}}>
-		#SET_PUSH{lesDoc,#ID_DOCUMENT}
-	</BOUCLE_lesDoc>
-[(#REM) // FIN DU TODO ]
-	
-[(#REM) séparer le tout par des virgules ]
-	[(#SET{lesRub,[(#GET{lesRub}|implode{','})]})]
-	[(#SET{lesArt,[(#GET{lesArt}|implode{','})]})]
-	[(#SET{lesArtBranche,[(#GET{lesArtBranche}|implode{','})]})]
-	[(#SET{lesDoc,[(#GET{lesDoc}|implode{','})]})]
+		</BOUCLE_articlesBranche>
+		<BOUCLE_brevesBranche(BREVES){branche}{statut IN publie,prop,prepa}>
+			[(#VAL{breve}|vider_rubrique_objet_poubelle{#ID_BREVE,"poubelle"})]
+		</BOUCLE_brevesBranche>
 
-[(#REM) Lancer les hostilités ]	
-	[(#GET{effacement}|=={oui}|oui)
-		[(#REM|supprimer_objet{article,#GET{lesArt}})]
-		[(#GET{arbo_complete}|=={on}|oui)
-			[(#REM|supprimer_objet{article,#GET{lesArtBranche}})]
-			[(#GET{lesRub}|supprimer_rubrique)]
-		]
-	]
-
-[(#REM) TODO ]
-	[(#ENV{documents}|=={oui}|oui) [(#REM) pour l'instant inactif, faut faire la boucle |supprimer_objet{document,#GET{lesDoc}})] ]
-	[(#ENV{forums}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les forums liés aux articles ??? ] ]
-	[(#ENV{a2a}|=={oui}|oui) [(#REM) TODO Il faudrait traiter les a2a ??? ] ]
+		[(#REM) Lister toutes les sous rub ]
+		<BOUCLE_sousRub(RUBRIQUES){branche}{tout}{!id_rubrique=#GET{rubrique_source}}{tout}>
+			[(#SET_PUSH{lesRub,#ID_RUBRIQUE})]
+		</BOUCLE_sousRub>
+		[(#REM) Puis les supprimer ]
+		[(#SET{lesRub,[(#GET{lesRub}|implode{','})]})]
+		[(#GET{lesRub}|supprimer_rubrique)]
+	</BOUCLE_si_arbo_complete>
 
 </BOUCLE_principale>

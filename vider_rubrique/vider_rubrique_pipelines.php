@@ -14,18 +14,18 @@ function vider_rubrique_boite_infos($flux){
 	$roles = lire_config('vider_rubrique/config/auteurs_autorises');
 	$restreindre = lire_config('vider_rubrique/config/restreindre');
 	$restreindre_val = lire_config('vider_rubrique/config/restreindre_valeur');
+	$les_rubriques = explode(',',$restreindre_val);
 	$type = $flux['args']['type'];
 
 	/*
 		TODO : faire tous les tests
 		- si webmestre OU admin
-		- si c'est restreint à une liste de rubriques (ou une branche ?)
 		- etc.
 		Là c'est du mode un peu à l'arrache, mais ça fait ce qu'on demande
 	*/
 	if(autoriser("webmestre") && $actif=="oui"){
 		if (($id = intval($flux['args']['id'])) && ($type=='rubrique')) {
-			if($restreindre=="oui" && $id!=intval($restreindre_val)) return $flux;
+			if($restreindre=="oui" && !in_array($id,$les_rubriques)) return $flux;
 			 
 			$contexte = array('id_rubrique'=>$id);
 			$flux["data"] .= recuperer_fond("noisettes/bouton_vider_rubrique", $contexte);
