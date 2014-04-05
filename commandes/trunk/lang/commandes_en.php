@@ -146,10 +146,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'This order is :',
-	'titre_commande' => 'Order',
 	'titre_commandes_actives' => 'Active orders',
 	'titre_commandes_auteur' => 'Orders from the author',
-	'titre_logo_commande' => 'Logo',
+	'titre_logo_commande' => 'Logo', # MODIF
 
 	// U
 	'une_commande_de' => 'An order of: ',

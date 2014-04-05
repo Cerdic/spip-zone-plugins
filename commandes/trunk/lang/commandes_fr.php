@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference' => 'Référence',
 	'commande_reference_numero' => 'Référence n° ', # MODIF
 	'commande_statut' => 'Statut',
-	'commandes_titre' => 'Commandes',
 	'commande_titre' => 'Commande',
+	'commandes_titre' => 'Commandes',
 	'configurer_notifications_commandes' => 'Configurer les notifications',
 	'configurer_titre' => 'Configurer le plugin Commandes',
 	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
@@ -79,10 +79,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filtre_tous_clients' => 'Tous les clients',
 	'label_filtre_tous_statuts' => 'Tous les états',
 	'label_filtre_toutes_dates' => 'Toutes les dates',
+	'label_objet' => 'Objet',
 	'label_passee_le' => 'passée le',
 	'label_payee_le' => 'payée le',
 	'label_recherche' => 'Rechercher',
-	'label_objet' => 'Objet',
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
@@ -146,16 +146,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Cette commande est :',
+	'titre_adresse_client' => 'Adresse du client',
+	'titre_adresse_commande' => 'Adresse associée à la commande',
+	'titre_adresses_associees' => 'Adresses associées',
+	'titre_adresses_client' => 'Adresses du client',
+	'titre_adresses_commande' => 'Adresses associées à la commande',
 	'titre_commandes_actives' => 'Commandes actives',
 	'titre_commandes_auteur' => 'Commandes de l’auteur',
-	'titre_logo_commande' => 'Logo de la commande',
 	'titre_contenu_commande' => 'Contenu de la commande',
-	'titre_adresse_client' => 'Adresse du client',
-	'titre_adresses_client' => 'Adresses du client',
-	'titre_adresse_commande' => 'Adresse associée à la commande',
-	'titre_adresses_commande' => 'Adresses associées à la commande',
-	'titre_adresses_associees' => 'Adresses associées',
 	'titre_informations_client' => 'Client',
+	'titre_logo_commande' => 'Logo de la commande',
 
 	// U
 	'une_commande_de' => 'Une commande de : ',
