@@ -5,7 +5,7 @@
  * Suppression de tout le contenu d'une rubrique
  *
 \***************************************************************************/
-
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function vider_rubrique_objet_poubelle($objet,$id_objet,$statut){
 	spip_log("Suppression $objet : $id_objet.",'vider_rubrique');

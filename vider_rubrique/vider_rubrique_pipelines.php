@@ -7,6 +7,7 @@
  *
 \***************************************************************************/
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function vider_rubrique_boite_infos($flux){
 	include_spip('inc/config');
