@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference' => 'Reference',
 	'commande_reference_numero' => 'Reference No. ',
 	'commande_statut' => 'Status',
+	'commande_titre' => 'Order',
 	'commandes_titre' => 'Orders',
 	'configurer_notifications_commandes' => 'Set up notifications',
 	'configurer_titre' => 'Configure the "Commandes" plugin',
@@ -80,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filtre_tous_clients' => 'All clients',
 	'label_filtre_tous_statuts' => 'All states',
 	'label_filtre_toutes_dates' => 'All dates',
+	'label_objet' => 'Object',
 	'label_passee_le' => 'Ordered on',
 	'label_payee_le' => 'paid on the',
 	'label_recherche' => 'Search',
@@ -146,8 +148,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'This order is :',
+	'titre_adresse_commande' => 'Adress associated to the order', # RELIRE
+	'titre_adresses_associees' => 'Associated adresses ',
 	'titre_commandes_actives' => 'Active orders',
 	'titre_commandes_auteur' => 'Orders from the author',
+	'titre_contenu_commande' => 'Details of the order',
+	'titre_informations_client' => 'Client',
 	'titre_logo_commande' => 'Logo', # MODIF
 
 	// U
