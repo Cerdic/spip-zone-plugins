@@ -161,7 +161,12 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$args,$sql_titre,$sql_type
 		$src = substr($src,0,$pos);
 	}
 	
-	$src = url_absolue($src);
+	if(substr($src,0,strlen($url_site_spip))==$url_site_spip)
+		$src = substr($src,strlen($url_site_spip));
+	
+	if(!preg_match('`^https?://`i',$src,$matches)){
+		$src = realpath($src);
+	}
 	
 	spip_log("src=$src","modeles_media");
 
