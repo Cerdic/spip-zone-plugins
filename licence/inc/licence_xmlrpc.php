@@ -16,7 +16,7 @@ function licence_liste_licences($args) {
 	
 	foreach($licences as $licence => $values){
 		if (isset($values['icon'])){
-			$licences[$licence]['icon'] = url_absolue('img_pack/'.$values['icon']);
+			$licences[$licence]['icon'] = url_absolue(find_in_path('img_pack/'.$values['icon']));
 		}
 	}
 	
