@@ -1,0 +1,121 @@
+#INCLURE{fond=saisies/textarea,env}
+
+<style type="text/css">
+.editer_[(#ENV{nom}) ] .markItUpHeader{ display:none; }
+</style>
+#SET{uniqid, #ENV{nom}|uniqid}
+<script type="text/javascript" id="#GET{uniqid}">
+<!--
+;(function($){
+	$(function(){
+		// On trouve le script ici
+		var ici = $('##GET{uniqid}');
+		// On tente de déterminer si on édite un objet, sinon rien
+		var objet = ici.parents('.formulaire_spip')[0].className.match(/formulaire_editer_(\w+)/);
+		objet = (objet ? objet[1] : '');
+		// On cherche le nom du champ
+		var champ = '#ENV{nom}'.toUpperCase();
+		// On cherche le champ HTML et son contenu
+		var textarea = ici.parents('.editer').find('textarea');
+		// On met la valeur d'origine dans une data
+		textarea.data('oldValue', textarea.val());
+		//var texte = textarea.val();
+		
+		/*$.each(citations, function(i, v){
+			citation = $.trim(citations[i]).replace(/^</, '').replace(/.>$/, '');
+			params = $.map(citation.split('|'), String.trim);
+			params.splice(0,1);
+			params[0] = 'variante=' + params[0];
+			citations[i] = new Object;
+			$.each(params, function(j, param){
+				param = param.split('=');
+				citations[i][param[0].trim()] = param[1].trim();
+			});
+		});*/
+		
+		textarea
+			.hide()
+			.parents('.saisie_cite')
+				.append(cite_previsu_edit(textarea, champ, objet));
+	});
+	
+	function cite_previsu_edit(textarea, champ, objet){
+		var phtml;
+		var citations = textarea.val().match(/<cite[^>]*>/g);
+		
+		$.ajax( {
+			type: 'POST',
+			async: false,
+			url: 'index.php?action=porte_plume_previsu',
+			data: {
+				'champ' : champ,
+				'objet' : objet,
+				'data' : textarea.val()
+			},
+			success: function(data) {
+				var previsu = $(data);
+				phtml = previsu
+					.find('.cite')
+						.find('.cite_exports').remove().end()
+						.each(function(i, e){
+							var cite = $(this);
+							var parent = cite.parent();
+							
+							// Création du bouton de suppression
+							var supprimer = $("[<a title='<:lien_supprimer:>' href=''>(#CHEMIN_IMAGE{del-16.png}|balise_img|inserer_attribut{alt,<:lien_supprimer:>})</a>]")
+								.click(function(){
+									// On supprime le modèle dans le textarea
+									citations.splice(i,1);
+									textarea.val(citations.join("\n") + "\n");
+									return false;
+								});
+							// Ajout du bouton de suppression
+							$(this).append(supprimer);
+						})
+					.end()
+					.append(
+						$("<a href='' class='button btn submit'>[(#CHEMIN_IMAGE{add-16.png}|balise_img|inserer_attribut{alt,''})] [(#VAL{inserer_modeles:titre_inserer}|_T{#ARRAY{modele,<:cite:reference_bibliographie:>}})]</a>")
+							.click(function(){
+								// On affiche de nouveau le textarea et on met le focus
+								textarea
+									.show()
+									.focus();
+								// On place le focus au bon endroit
+								textarea[0].selectionStart = textarea.val().length;
+								// On lance le formulaire de création dans une box
+								jQuery.modalboxload(
+									'[(#URL_PAGE{inserer_modeles}|parametre_url{modalbox,oui,&}|parametre_url{formulaire_modele,cite,&}|url_absolue)]',
+									{minHeight: '90%'}
+								);
+								return false;
+							})
+					); 
+				
+				// À partir du moment où on a chargé la prévisu avec succès
+				// on estime qu'à chaque changement du textarea il faut recharger la prévisu
+				// Mais le SEUL moyen de détecter un changement c'est avec une intervalle
+				setInterval(
+					function(){
+						var oldValue = textarea.data('oldValue');
+						var newValue = textarea.val();
+						
+						if (newValue !== oldValue){
+							textarea.data('oldValue', newValue);
+							// On vire toute la prévisu
+							previsu.remove();
+							// On refait la prévisu
+							textarea
+								.hide()
+								.parents('.saisie_cite')
+									.append(cite_previsu_edit(textarea, champ, objet));
+						}
+					},
+					100
+				);
+			}
+		} );
+		return phtml;
+	}
+})(jQuery);
+-->
+</script>
