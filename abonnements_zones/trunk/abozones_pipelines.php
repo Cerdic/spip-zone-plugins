@@ -103,7 +103,9 @@ function abozones_post_edition_lien($flux){
 				autoriser_exception('retirerzones', 'auteur', $id_auteur, false);
 			}
 		}
-	}	
+	}
+	
+	return $flux;
 }
 
 ?>
