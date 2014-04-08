@@ -5,6 +5,7 @@
 	<li class="editer editer_id_parent diogene_selecteur_rubrique">
 	<label for="id_parent"><:diogene:texte_choix_rubrique:></label>
 	<select name="[(#ENV{selecteur_type}|=={polyhier}|?{parents[(#VAL{91}|chr)][(#VAL{93}|chr)],id_parent})]" id="id_parent">
+		[(#ENV{afficher_option_nulle}|=={oui}|oui)<option value=""> - </option>]
 		[(#ENV{rubrique_principale}|=={oui}|oui)<option value="#GET{prefixe}#ID_RUBRIQUE" [(#ID_RUBRIQUE|=={#ENV{id_parent}}|oui)selected="selected"]>[(#TITRE|supprimer_numero)]</option>]
 		<BOUCLE_ss_rubriques(RUBRIQUES){id_parent}{id_rubrique != #ENV{id_rubrique}}{par num titre,titre}{tout}>
 			#SET{sep,''}
