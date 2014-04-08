@@ -31,6 +31,7 @@ function formulaires_editer_almanach_identifier_dist($id_almanach='new', $retour
 function formulaires_editer_almanach_charger_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 	//$valeurs[_etapes]=2;//on rajoute  un couple clé/valeur pour le nombre d'étapes du formulaire (pas la peine tant que je n'arrive pas à avoir un résutat correct)
+	$valeurs['resa_auto']='non';
 	return $valeurs;
 
 }
@@ -98,11 +99,10 @@ function importation_evenement($objet_evenement,$id_almanach){
 	#on associe l'événement à son mot
 	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_evenement,'objet'=>'evenement'));
 	#on ajoute la resa si on le doit
-	// if (is_numeric(_request("id_orr_ressource"))) {
-	// 	$id_ressource=_request("id_orr_ressource");
-	// 	echo $id_ressource;
-	// 	ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin)
-	// }
+	if ((_request("id_ressource"))>0) {
+		$id_ressource=_request("id_ressource");
+		ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin);
+	}
 }
 
 
@@ -111,8 +111,9 @@ function importation_evenement($objet_evenement,$id_almanach){
 **/
 
 function ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin){
-	sql_insertq("spip_orr_reservations_liens",array('id_objet'=>$id_ressource,'objet'=>'orr_ressource','vu'=>'non'));
-
+	$id_orr_reservation = sql_insertq("spip_orr_reservations",array('orr_reservation_nom'=>$titre_evt,'orr_date_debut'=>$date_debut,'orr_date_fin'=>$date_fin));
+	sql_insertq("spip_orr_reservations_liens",array('id_orr_reservation'=>$id_orr_reservation,'id_objet'=>$id_ressource,'objet'=>'orr_ressource','vu'=>'non'));
+echo "ajout résa";
 
 }
 /**
@@ -127,7 +128,11 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	$id_almanach = $chargement['id_almanach'];
 	#on associe le mot à l'almanach
 	$id_mot = _request('id_mot');
+	if (_request('resa_auto')=='oui')
+	$resa_auto=1;
 	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_almanach,'objet'=>'almanach'));
+	sql_insertq("spip_almanachs",array('resa_auto'=>$resa_auto));
+	echo $resa_auto;
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>_request("url"));
 	$cal = new vcalendar($config);
