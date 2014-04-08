@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_delier_document' => 'Délier ce document de cet article',
 	'bouton_enlever' => 'Enlever',
+	'bouton_enlever_tout' => 'Tout enlever',
 	'bouton_parcourir' => 'Parcourir',
 	'bouton_recuperer_document' => 'Récupérer le ou les documents',
 	'bouton_supprimer' => 'Supprimer',
@@ -177,6 +178,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	--------------',
 	'media_valide_url' => 'En attendant, il est visible à cette adresse temporaire :',
 	'message_aucun_media_attente' => 'Vous n’avez aucun média en attente de publication.',
+	'message_confirm_depublier_plusieurs' => 'Êtes-vous sûr de vouloir les dépublier ?',
+	'message_confirm_poubelle_plusieurs' => 'Êtes-vous sûr de vouloir les supprimer ?',
 	'message_delier_document' => 'Ce document est déjà lié à un autre objet. Vous ne pouvez le supprimer. Vous pouver seulement le délier de l’objet en cours.',
 	'message_doc_trad_indisponible' => 'Aucun document n’est disponible dans l’article d’origine.',
 	'message_document_original' => 'Cet article est la version originale de :',
