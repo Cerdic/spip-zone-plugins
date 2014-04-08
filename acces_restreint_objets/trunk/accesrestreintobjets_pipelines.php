@@ -38,3 +38,14 @@ function accesrestreintobjets_afficher_contenu_objet($flux){
 	
 	return $flux;
 }
+
+// Invalider le cache quand on ajoute ou enlève quelque chose à une zone
+function accesrestreintobjets_post_edition_lien($flux){
+	// Si on a modifié un lien avec une zone (ajout ou retrait, peu importe) : on invalide le cache
+	if ($flux['args']['objet_source'] == 'zone'){
+		include_spip('inc/invalideur');
+		suivre_invalideur(1);
+	}
+	
+	return $flux;
+}
