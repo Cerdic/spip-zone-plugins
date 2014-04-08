@@ -1,0 +1,53 @@
+[(#REM)
+	Un cache plus court, pour la boucle syndic_articles
+]#CACHE{3600}
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}>
+
+	[(#REM) Contenu principal ]
+	<div class="hfeed" id="conteneur">
+	<div id="contenu">
+		
+		<div class="cartouche invisible">
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+		</div>
+
+		<h1>Liste des livres</h1>
+
+		<p>#FORMULAIRE_RECHERCHE</p><br /><br />
+
+		<BOUCLE_catalogue(CATALOGUES)>
+		<div class="menu">
+		<h2>#TITRE</h2>
+		<p>#DESCRIPTIF</p>
+		<B_livre>
+		<p>il contient #GRAND_TOTAL livre(s)</p>
+		[<p>(#PAGINATION)</p>]<br />
+		<ul>
+		<BOUCLE_livre(LIVRES){tout}{pagination 10}>
+			<li><a href="#URL_PAGE{livre,id_livre=#ID_LIVRE}">#TITRE</a> de #AUTEUR</li>
+		</BOUCLE_livre>
+		</ul>
+		</B_livre>
+		</div>
+		</BOUCLE_catalogue>
+
+	</div>
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+	
+</div><!--#page-->
+</body>
+</html>

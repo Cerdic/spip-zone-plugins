@@ -1,0 +1,48 @@
+<!-- descriptif=
+<a name="haut"></a>
+&nbsp;&nbsp;<b>Navigation</b>
+<br />
+- <a href="#mentions"><:bouq:mentions:></a>
+-->
+<!-- titre=Bouquinerie-->
+<!-- boite=Configuration du plugin Bouquinerie-->
+<!-- nom=bouq-->
+
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<a name="mentions"></a>
+<fieldset style="background:#F5EDED;"><legend><b><:bouq:titre_mentions:></b></legend>
+
+	#PUCE <label><b><:bouq:nom_bouquinerie:> : </b></label><br />
+	<input type="text" name="NomBouquinerie" size="57" value="#ENV{NomBouquinerie}" /><br /><br />
+
+	#PUCE <label><b><:bouq:adresse_bouquinerie:> : </b></label><br />
+	<textarea name="AdresseBouquinerie" cols="50" rows="5">#ENV{AdresseBouquinerie}</textarea><br /><br />
+
+	#PUCE <label><b><:bouq:adresse_siege_social:> : </b></label><br />
+	<textarea name="AdresseSiegeSocial" cols="50" rows="5">#ENV{AdresseSiegeSocial}</textarea><br /><br />
+
+	#PUCE <label><b><:bouq:condition_generale_vente:> : </b></label><br />
+	<textarea name="CGV" cols="50" rows="5" >#ENV{CGV}</textarea><br /><br />
+
+	#PUCE <label><b><:bouq:horaires_ouvertures:> : </b></label><br />
+	<textarea name="Horaires" cols="50" rows="5">#ENV{Horaires}</textarea><br /><br />
+
+	#PUCE <label><b><:bouq:gerant:> : </b></label><br />
+	<input type="text" name="NomGerant" size="57" value="#ENV{NomGerant}" /><br /><br />
+
+	#PUCE <label><b><:bouq:mail_gerant:> : </b></label><br />
+	<input type="text" name="MailGerant" size="57" value="#ENV{MailGerant}" /><br /><br />
+
+	#PUCE <label><b><:bouq:registre_commerce:> : </b></label><br />
+	<input type="text" name="NRC"  size="57" value="#ENV{NRC}" /><br /><br /><br />
+
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+
+</fieldset>
+<a href="#haut"><:bouq:revenir_haut:></a>
+
+
+
+</form>

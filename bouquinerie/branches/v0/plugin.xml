@@ -1,0 +1,35 @@
+<plugin>
+	<nom>Bouquinerie</nom>
+	<version>0.1.0</version>
+	<auteur>[Polez K&#233;vin->http://edd.lautre.net]</auteur>
+	<licence>GNU/GPL - (c) 2008</licence>
+	<etat>test</etat>
+	<description>
+Ce plugin permet la gestion d'une bouquinerie.
+_ Il permet en autre :
+-* La gestion de deux nouveaux objets : Livre et Catalogue.
+-* Deux nouvelles boucles : LIVRES et CATALOGUES pour les squelettes.
+-* La possibilit&#233; de lier des mots-cl&#233; &#224; l'objet livre.
+-* une nouvelle page dans l'interface priv&#233;e donnant acc&#233;s &#224; toutes les fonctions d'administrations.
+-* L'importation de fichiers provenant de sites sp&#233;cialis&#233;s dans la vente de livres.
+-* L'exportation de la base de donn&#233;e dans un fichier xml.
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-Bouquinerie</lien>
+	<icon>images/bibliotheque.png</icon>
+	<options>bouq_options.php</options>
+	<fonctions>bouq_fonctions.php</fonctions>
+	<prefix>bouq</prefix>
+	<install>bouq_pipelines.php</install>
+	<chemin dir='' />
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>bouq_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>bouq_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
+	<necessite id='cfg' version='[1.3.7;]' />
+	<categorie>divers</categorie>
+</plugin>
