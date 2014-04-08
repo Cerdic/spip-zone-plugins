@@ -86,6 +86,7 @@ var medias_init_select_all = function(){
  */
 var medias_selection_multiple_init_clicks = function(){
 	if(typeof($.fn.shiftcheckbox) == 'function'){
+		$('.editer_liste_medias div.choix').off('.shiftcheckbox');
 		$('.editer_liste_medias div.choix').shiftcheckbox({
 			checkboxSelector: ':checkbox',
 			onChange: function(checked) {
