@@ -10,26 +10,11 @@
 	margin:0;
 }
 
-.page_publier .container .menu-liste li.on, .page_publier .container ul.liste-item li.on{
-	background-color:#000;
-	color:#fff;
-	padding:5px 3px 5px 0;
+.page_publier a.lien_publier{
+	float:left;
+	margin:0;
+	margin-right:.5em;
 }
-
-.page_publier .container .menu-liste li > a, .page_publier .container ul.liste-item li > a,
-.page_publier .page #extra1 .menu-liste li.on, .page_publier .page #extra1 ul.liste-item li.on,
-.page_publier .page #aside .menu-liste li.on, .page_publier .page #aside ul.liste-item li.on{
-	text-decoration:none;
-	border:none;
-	display:block;
-	padding:5px 3px;
-}
-
-.page_publier .container .menu-liste li img, .page_publier .container ul.liste-item li img{
-	vertical-align:middle;
-	margin-right:4px;
-}
-
 .page_publier .diogene_geo .editer_carte{padding:0;}
 
 .page_publier .diogene_geo #geomap{width:100%;height:350px;}
