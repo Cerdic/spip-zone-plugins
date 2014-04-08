@@ -1,10 +1,12 @@
 #SET{objet,#ENV{objet,article}}
 [(#GET{objet}|=={emballe_media}|?{#SET{objet,article}})]
 [(#SET{extras_type,[(#GET{objet}|diogene_recuperer_cextras)]})]
+[(#GET{extras_type}|count|>{8}|?{#SET{size,8},#SET{size,#GET{extras_type}|count}})]
 [(#GET{extras_type}|count|>{0}|oui)
 	[(#SAISIE{selection_multiple,
 		cextras_enleves,
 		cacher_option_intro=oui,
 		label=<:diogene:label_cextras_enleves:>,
+		size=#GET{size},
 		datas=#GET**{extras_type}})] 
 ]
