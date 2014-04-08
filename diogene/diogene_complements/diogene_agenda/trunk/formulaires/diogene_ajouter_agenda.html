@@ -1,6 +1,6 @@
 <li class="agenda_fieldset agenda">
 	<fieldset>
-		<h3 class="legend"><:diogene_agenda:form_legend_agenda:></h3>
+		[<h3 class="legend">(#ENV{agenda_legende,<:diogene_agenda:form_legend_agenda:>})</h3>]
 		[<input type="hidden" name="id_evenement" value="(#ENV{id_evenement})" />]
 		<ul>
 			<li class='editer_date fieldset'>
@@ -55,17 +55,19 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{places})</span>
 				]<input type='text' class='text' name='places' id='places' value="[(#ENV{places})]" />
 				</div>]
-			</li>]
+			</li>][
+			(#VAL{lieu}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
 			<li class="editer editer_lieu[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
 				<label for="lieu"><:agenda:evenement_lieu:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>
 				]<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
-			</li>
+			</li>][
+			(#VAL{adresse}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
 			<li class="editer editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
 				<label for="adresse"><:agenda:evenement_adresse:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>
 				]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
-			</li>
+			</li>]
 		</ul>
 	</fieldset>
 	#INCLURE{fond=formulaires/dateur/inc-dateur}

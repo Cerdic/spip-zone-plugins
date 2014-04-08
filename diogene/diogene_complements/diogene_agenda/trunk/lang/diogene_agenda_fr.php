@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_agenda_caches' => 'Champs de l\'agenda à ne pas afficher',
+	'label_agenda_legende' => 'Légende de la partie "évènement" du formulaire',
 	'label_cfg_ajout_agenda' => 'Évènement',
 );
 

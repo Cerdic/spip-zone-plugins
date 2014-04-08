@@ -2,13 +2,14 @@
 	<fieldset>
 		<legend><:diogene_agenda:form_legend_agenda:></legend>
 		<ul>
+			[(#SAISIE{input,agenda_legende,label=<:diogene_agenda:label_agenda_legende:>})]
 			[(#SAISIE{selection_multiple,agenda_caches,
 				label=<:diogene_agenda:label_agenda_caches:>,
 				cacher_option_intro=oui,
 				multiple=oui,
 				valeur=[(#ENV**{options_complements}|unserialize|table_valeur{agenda_caches}|unserialize)],
 				defaut=#LISTE{0},
-				size=5,
+				size=6,
 				datas=#ARRAY{descriptif,<:agenda:evenement_descriptif:>,repetitions,<:agenda:evenement_repetitions:>,inscription,<:agenda:label_inscription:>,places,<:agenda:label_places:>,lieu,<:agenda:evenement_lieu:>,adresse,<:agenda:evenement_adresse:>}
 			})]
 		</ul>
