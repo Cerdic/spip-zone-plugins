@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2013 - Distribue sous licence GNU/GPL
+ * © 2010-2014 - Distribue sous licence GNU/GPL
  *
  * Fonctions spécifiques à Diogene
  * 
@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Pratique pour les liens vers associé à une auteur mais pas encore publiés
  * 
  * @param Champ $p
- * 		Pile au niveau de la balise
+ *     Pile au niveau de la balise
  * @return Champ
  *     Pile complétée du code compilé
  */
@@ -285,4 +285,20 @@ function diogene_puce_statut($id_objet,$type,$statut,$id_parent='0'){
 	return $puce_statut($id_objet, $statut, $id_parent, $type,false,null);
 }
 
+/**
+ * Pour PHP < 5.3.0
+ * 
+ * Une définition de la fonction lcfirst
+ * 
+ * @param string $texte
+ * 		Le texte que l'on souhaite modifier
+ * @return string $texte
+ * 		Le texte modifié
+ */
+if(!function_exists('lcfirst')){
+	function lcfirst($texte){
+		$texte{0} = strtolower($texte{0});
+		return $texte;
+	}
+}
 ?>
