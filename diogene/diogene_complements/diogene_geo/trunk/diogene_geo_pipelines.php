@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		Le contexte du pipeline modifié
  */
 function diogene_geo_diogene_ajouter_saisies($flux){
-	$objet = str_replace('editer_','',$flux['args']['contexte']['form']);
+	$objet = $flux['args']['type'];
 	$id_objet = $flux['args']['contexte']['id_'.$objet];
 	if(defined('_DIR_PLUGIN_GIS') && in_array($objet,array('article','rubrique')) && is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('geo',unserialize($flux['args']['champs_ajoutes']))){
 		/**
@@ -157,12 +157,15 @@ function diogene_geo_diogene_traiter($flux){
 		if(isset($options_complements['geo_forcer_existant']) && $options_complements['geo_forcer_existant'] == 'on'){
 			include_spip('action/editer_gis');
 			$id_gis = false;
+			$post_gis = _request('id_gis') ? _request('id_gis') : $_POST['id_gis'];
 			if(intval($id_objet))
 				$id_gis = sql_getfetsel("gis.id_gis","spip_gis AS gis LEFT JOIN spip_gis_liens AS lien USING(id_gis)","lien.id_objet=$id_objet AND lien.objet=".sql_quote($objet));
-			if(intval($id_gis) > 0 &&  $id_gis != _request('id_gis'))
+
+			if(intval($id_gis) > 0 &&  $id_gis != $post_gis)
 				gis_dissocier($id_gis,array($objet => $id_objet));
-			if(intval(_request('id_gis')) > 0 && $id_gis != _request('id_gis'))
-				gis_associer(_request('id_gis'), array($objet => $id_objet));
+
+			if(intval($post_gis) > 0 && $id_gis != $post_gis)
+				gis_associer($post_gis, array($objet => $id_objet));
 		}
 		else{
 			if(_request('gis_supprimer')){
@@ -172,7 +175,7 @@ function diogene_geo_diogene_traiter($flux){
 				$nb_gis = sql_countsel('spip_gis_liens','id_gis='.intval($id_gis));
 				if($nb_gis == 0)
 					supprimer_gis($id_gis);
-	
+
 				/**
 				 * On vide ensuite les request sur les données géo
 				 */
