@@ -1,0 +1,30 @@
+<B_liste_liaisons>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies">
+<table class="spip liste">
+[<caption><strong class="caption">(#ENV*{titre})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'><:info_titre:></th>
+			<th class='id' scope='col'><:info_numero_abbreviation:></th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_liaisons(zones_liens){id_zone}{objet IN #ENV{objets}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#OBJET|objet_icone{16})]</td>
+			<td class='titre principale'>[(#ID_OBJET|lien_objet{#OBJET})]</td>
+			<td class='id'>[(#AUTORISER{modifier,#OBJET,#ID_OBJET}|?{
+				<a href="[(#URL_ECRIRE{[(#OBJET|objet_info{url_edit})],[(#OBJET|id_table_objet)]=#ID_OBJET})]">#ID_OBJET</a>,
+				#ID_ARTICLE
+			})]</td>
+			<td class='action'>[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)] <:accesrestreint:info_retirer_zone:>, #URL_ACTION_AUTEUR{supprimer_lien,zone-#ID_ZONE-#OBJET-#ID_OBJET,#SELF}, 'link delete'})]</td>
+		</tr>
+	</BOUCLE_liste_liaisons>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_liaisons>

@@ -49,3 +49,22 @@ function accesrestreintobjets_post_edition_lien($flux){
 	
 	return $flux;
 }
+
+function accesrestreintobjets_recuperer_fond($flux){
+	if ($flux['args']['fond'] == 'prive/squelettes/contenu/zone_edit'){
+		include_spip('inc/config');
+		if ($objets = lire_config('accesrestreintobjets/objets') and is_array($objets)){
+			$objets = array_map('objet_type', $objets);
+			$flux['data']['texte'] .= recuperer_fond(
+				'prive/objets/liste/zone_liaisons',
+				array(
+					'id_zone' => $flux['args']['contexte']['id_zone'],
+					'objets' => $objets,
+				)
+			);
+		}
+	}
+	
+	return $flux;
+}
+

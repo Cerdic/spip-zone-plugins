@@ -1,9 +1,9 @@
 <paquet
 	prefix="accesrestreintobjets"
 	categorie="auteur"
-	version="0.2.0"
+	version="0.3.0"
 	etat="test"
-	compatibilite="[3.0.5;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="accesrestreintobjets.png"
 	documentation=""
 >
@@ -17,4 +17,5 @@
 	<pipeline nom="affiche_milieu" inclure="accesrestreintobjets_pipelines.php" />
 	<pipeline nom="afficher_contenu_objet" inclure="accesrestreintobjets_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="accesrestreintobjets_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="accesrestreintobjets_pipelines.php" />
 </paquet>
