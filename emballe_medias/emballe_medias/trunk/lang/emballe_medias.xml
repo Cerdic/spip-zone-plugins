@@ -1,14 +1,14 @@
 <traduction module="emballe_medias" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/emballe_medias/emballe_medias/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=en" total="221" traduits="219" relire="0" modifs="0" nouveaux="2" pourcent="99.10">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=en" total="224" traduits="219" relire="0" modifs="0" nouveaux="5" pourcent="97.77">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=es" total="221" traduits="221" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=es" total="224" traduits="221" relire="0" modifs="0" nouveaux="3" pourcent="98.66">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=fr" total="221" traduits="221" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/emballe_medias?lang_cible=fr" total="224" traduits="224" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
