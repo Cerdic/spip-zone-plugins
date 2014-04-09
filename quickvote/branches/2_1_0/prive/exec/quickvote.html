@@ -29,9 +29,10 @@
 
 
 [(#AUTORISER{supprimer, quickvote, #ID_QUICKVOTE}|oui)
-[<div class="actions">
-	(#URL_ACTION_AUTEUR{supprimer_quickvote,#ID_QUICKVOTE,#URL_ECRIRE{quickvotes}}|icone{<:quickvote:icone_supprimer_quickvote:>,#CHEMIN{prive/themes/spip/images/quickvote-del-24.png},center})
-</div>]
+    <div class="actions">
+      [(#URL_ACTION_AUTEUR{purger_quickvote,#ID_QUICKVOTE,#SELF}|icone{<:quickvote:icone_purger_quickvote:>,#CHEMIN{prive/themes/spip/images/quickvote-upd-24.png},left})]
+      [(#URL_ACTION_AUTEUR{supprimer_quickvote,#ID_QUICKVOTE,#URL_ECRIRE{quickvotes}}|icone{<:quickvote:icone_supprimer_quickvote:>,#CHEMIN{prive/themes/spip/images/quickvote-del-24.png},right})]
+    </div>
 ]
 
 <!--#navigation-->

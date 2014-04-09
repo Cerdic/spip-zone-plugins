@@ -106,11 +106,11 @@ function formulaires_editer_quickvote_saisies_dist($id_quickvote='new', $retour=
 			)
 		),    
     array(
-			'saisie' => 'selection',
+			'saisie' => 'selection',         
 			'options' => array(
 				'nom' => 'actif',
 				'label' => _T('quickvote:champ_actif_label'),
-				'explication' => _T('quickvote:champ_actif_explication'),         
+				'explication' => _T('quickvote:champ_actif_explication'),
 				'datas' => array(	
           '0' => _T('quickvote:champ_actif_non'),
           '1' => _T('quickvote:champ_actif_oui'),

@@ -20,7 +20,7 @@ function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non',$masq
      $valeurs = "";
      $id_quickvote = intval($id_quickvote);
      $valeurs['id'] = $id_quickvote;
-     $ip = $GLOBALS['ip'];
+     $ip = quickvote_get_ip_address();
 
      // masque question ?
      if ($masquer_question=='oui') {
@@ -39,6 +39,8 @@ function formulaires_quickvote_charger_dist($id_quickvote,$skip_vote='non',$masq
      }
 
      $valeurs['time_invalidateur'] = time().'-'.rand();// on passe une valeur pour invalider systematiquement le cache
+     // $valeurs['debug'] = "ip: $ip";
+
 
      return $valeurs;
 }
@@ -67,7 +69,6 @@ function formulaires_quickvote_traiter_dist($id_quickvote){
      suivre_invalideur("id='id_quickvote/$id_quickvote'");
 
      // SQL
-     //$ip = $GLOBALS['ip'];
      $ip = quickvote_get_ip_address();
      if ($ip=="")
                $ip = $GLOBALS['ip'];

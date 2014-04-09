@@ -48,7 +48,10 @@
   </BOUCLE_vote_result>
 	
   <tr class="row_first quickvote-nb-vote-total">
-		<td colspan="2" class="nb_vote">[(#GET{votes_total}|singulier_ou_pluriel{quickvote:resultat_nb_vote, quickvote:resultat_nb_votes})]</td>
+		<td colspan="2" class="nb_vote">
+        [(#GET{votes_total}|=={0}|oui) <:quickvote:resultat_0_vote:>]
+        [(#GET{votes_total}|singulier_ou_pluriel{quickvote:resultat_nb_vote, quickvote:resultat_nb_votes})]
+    </td>
 	</tr>
  </table>
 </div>

@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'icone_creer_quickvote' => 'Créer un nouveau mini-sondage',
     'icone_modifier_quickvote' => 'Modifier le mini-sondage',
     'icone_supprimer_quickvote' => 'Supprimer le mini-sondage',
+    'icone_purger_quickvote' => 'Supprimer les votes',
     'info_nouveau_quickvote' => 'Nouveau mini-sondage', 
     'info_numero_quickvote' => 'Mini-sondage numéro :',
     'info_1_vote'  => '1 vote',
