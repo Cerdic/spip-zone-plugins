@@ -35,6 +35,7 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                                 
     // on charge les valeurs de CFG
     if (lire_config('spip2spip/import_statut')=="publie") $import_statut = "publie";  else $import_statut = "prop";
+	if (lire_config('spip2spip/import_date_article')=="oui")  $import_date_article=true; else  $import_date_article=false; //Date de l'article
     if (lire_config('spip2spip/citer_source')) $citer_source=true; else  $citer_source=false;
     if (lire_config('spip2spip/email_alerte')) $email_alerte=true; else  $email_alerte=false;
     if (lire_config('spip2spip/email_suivi')!="")
@@ -131,18 +132,23 @@ function spip2spip_syndiquer($id_site, $mode='cron') {
                       
                       
                       // etape 2 -  traitement de l'article                             
-                      $_surtitre = $article['surtitre'];
+						$_surtitre = $article['surtitre'];
                   		$_titre = $article['titre'];
                   		$_soustitre = $article['soustitre'];
                   		$_descriptif = spip2spip_convert_extra($article['descriptif'],$documents_current_article,$version_flux);
                   		$_chapo = spip2spip_convert_extra($article['chapo'],$documents_current_article,$version_flux);
                   		$_texte = spip2spip_convert_extra($article['texte'],$documents_current_article,$version_flux);
                   		$_ps = spip2spip_convert_extra($article['ps'],$documents_current_article,$version_flux);
-                  		$_date =  date('Y-m-d H:i:s',time()); // $article['date'];  // date de la syndication ou date de l'article ?
+                  		//date de la syndication ou date de l'article ?
+						if($import_date_article == true){
+							$_date =  $article['date']; // Date de l'article
+						}else{
+							$_date =  date('Y-m-d H:i:s',time()); //Date de syndication
+						}
                   		$_lang = $article['lang'];
                   		$_logo = $article['logo'];
                   		$_id_rubrique = $target; 
-                      $_id_secteur = spip2spip_get_id_secteur($target);           		          		
+						$_id_secteur = spip2spip_get_id_secteur($target);           		          		
                   		$_statut = $import_statut;
                   		$_id_auteur = $article['auteur'];
                   		$_link = $article['link'];
@@ -332,7 +338,7 @@ function analyser_backend_spip2spip($rss){
   include_spip("inc_texte.php"); # pour couper()
 	include_spip("inc_filtres.php"); # pour filtrer_entites()
 		
-	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','trad','evenements', 'lang','logo','keyword','mots','licence','documents'); 
+	$xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','trad','date','evenements', 'lang','logo','keyword','mots','licence','documents'); 
 	
 	$syndic_regexp = array(
 				'item'           => ',<item[>[:space:]],i',
@@ -348,6 +354,7 @@ function analyser_backend_spip2spip($rss){
 				'auteur'         => ',<auteur[^>]*>(.*?)</auteur[^>]*>,ims',
 				'link'           => ',<link[^>]*>(.*?)</link[^>]*>,ims',
 				'trad'           => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
+				'date'           => ',<date[^>]*>(.*?)</date[^>]*>,ims',
 				'evenements'     => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
         'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
         'logo'           => ',<logo[^>]*>(.*?)</logo[^>]*>,ims',
@@ -458,12 +465,13 @@ function analyser_backend_spip2spip($rss){
 		$data = array();
     
 		// Date
+		/* Pas trop compris cette partie, mais cela gènait l'import de la date de l'article (si cette methode est choisie). Je commente donc et présuppose que la date du RSS est bonne.
 		$la_date = "";
 		if (preg_match(",<date>([^<]*)</date>,Uims",$item,$match))		$la_date = $match[1];
 		if ($la_date)  		$la_date = my_strtotime($la_date);
 		if ($la_date < time() - 365 * 24 * 3600	OR $la_date > time() + 48 * 3600)		$la_date = time();
 		$data['date'] = $la_date;
-		
+		*/
 		// version du flux
 		$data['version_flux'] = $version_flux;
 			

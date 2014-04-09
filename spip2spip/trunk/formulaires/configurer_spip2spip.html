@@ -20,9 +20,15 @@
         cacher_option_intro=true,
         datas=#ARRAY{            
       			prop,<:sites:info_statut_site_3:>,
-      			publie,<:sites:info_statut_site_2:>}})]     
-
-   
+      			publie,<:sites:info_statut_site_2:>}})]  
+				
+	<!-- import date -->
+   	[(#SAISIE{radio, import_date_article,
+			label=<:spip2spip:cfg_import_date_article:>,
+			datas=#ARRAY{
+				oui,<:spip2spip:cfg_import_date_article_oui:>,
+				non,<:spip2spip:cfg_import_date_article_non:>}})]
+				
      <!-- suivi syndic -->
     [(#SAISIE{checkbox, email_alerte,
     		label='',
@@ -34,7 +40,6 @@
     [(#SAISIE{checkbox, citer_source,
     		label='',
         datas=#ARRAY{on,<:spip2spip:cfg_citer_source:>}})]
-
 
     <li><h3><:spip2spip:cfg_import_motcle:></h3></li>
     
