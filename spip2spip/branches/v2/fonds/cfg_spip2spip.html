@@ -10,7 +10,13 @@
         <option value="publie"[(#ENV{import_statut}|=={publie}|?{' selected="selected"'})]><:ecrire:info_statut_site_2:></option>
       </select>
  </fieldset>
- 
+
+ <fieldset><legend>Quelle date pour les articles importés ?</legend>
+      <select name="import_date_article">
+        <option value="oui"[(#ENV{import_date_article}|=={oui}|?{' selected="selected"'})]>Date de publication de l'article original</option>
+        <option value="non"[(#ENV{import_date_article}|=={non}|?{' selected="selected"'})]>Date de la syndication</option>
+      </select>
+ </fieldset> 
 
  <fieldset><legend>Suivi de la syndication</legend>
   <p>       
