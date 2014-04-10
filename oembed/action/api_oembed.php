@@ -28,7 +28,8 @@ function action_api_oembed_dist(){
 
 	// si cache oembed dispo et pas de recalcul demande, l'utiliser (perf issue)
 	if (file_exists($oembed_cache)
-		AND _VAR_MODE!=='recalcul'){
+		AND _VAR_MODE!=='recalcul'
+		AND (!defined('_VAR_NOCACHE') OR !_VAR_NOCACHE)){
 		lire_fichier($oembed_cache,$res);
 	}
 	else {
