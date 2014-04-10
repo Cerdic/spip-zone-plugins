@@ -1,0 +1,33 @@
+[(#ID_DIOGENE|oui)
+	[(#AUTORISER{modifier,diogene,#ID_DIOGENE}|sinon_interdire_acces)]
+][(#ID_DIOGENE|non)
+	[(#AUTORISER{creer,diogene}|sinon_interdire_acces)]
+]
+#SET{redirect,#ENV{redirect}|sinon{#ID_DIOGENE|?{#ID_DIOGENE|generer_url_entite{diogene},#URL_ECRIRE{#VAL{diogene}|objet_info{table_objet}}}}}
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#ID_DIOGENE|oui)
+		[(#GET{redirect}|icone_verticale{[(#VAL{diogene}|objet_info{texte_retour}|_T)],#VAL{diogene}|objet_info{icone_objet},'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+		]
+		[(#VAL{diogene}|objet_info{#ID_DIOGENE|?{texte_modifier,texte_creer}}|_T)]
+		<h1>
+			<BOUCLE_diogene(DIOGENES){id_diogene}>
+			#TITRE
+			#SET{objet,#OBJET}
+			</BOUCLE_diogene>
+			#SET{objet,#ENV{objet,article}}
+			[(#ENV{nouveau}|=={oui}|?{<:diogene:formulaire_nouveau:>,#ENV{id_diogene}})]
+			<//B_diogene>
+		</h1>
+	</div>
+	#SET{redirect,#ENV{redirect,#ID_OBJET|generer_url_entite{#OBJET}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+	#FORMULAIRE_EDITER_DIOGENE{#ENV{id_diogene,new},#GET{objet},#GET{redirect}}
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</div>

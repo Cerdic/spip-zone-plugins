@@ -5,7 +5,7 @@
 <ul class="liste_items">
 	<BOUCLE_diogene_principaux(DIOGENES){par objet, titre}>
 	<li class="item">
-		<a href="[(#URL_ECRIRE{diogenes_edit,id_diogene=#ID_DIOGENE})]">##ID_DIOGENE - #TITRE [#OBJET]</a>
+		<a href="[(#URL_ECRIRE{diogene,id_diogene=#ID_DIOGENE})]">##ID_DIOGENE - #TITRE [#OBJET]</a>
 		[(#AUTORISER{diogene,supprimer,#ID_DIOGENE}|oui)
 			[(#BOUTON_ACTION{<:diogene:bouton_supprimer_diogene:>,[(#URL_ACTION_AUTEUR{supprimer_diogene,#ID_DIOGENE,[(#SELF|parametre_url{id_diogene,''})]})],delete,<:diogene:message_valider_suppression|attribut_html:>})]
 		]
@@ -19,9 +19,9 @@
 <BOUCLE_diogenes_cle(DIOGENES){objet=#CLE}> </BOUCLE_diogenes_cle>
 #SET{max,#VALEUR|table_valeur{diogene_max}|sinon{0}}
 [(#GET{max}|>{0}|<{#TOTAL_BOUCLE}|oui)
-	[(#URL_ECRIRE{diogenes_edit}|parametre_url{nouveau,oui}|parametre_url{objet,#CLE}|icone_verticale{<:diogene:icone_editer_diogene_nouveau{type=#CLE}:>,diogene-24.png,new,#LANG_RIGHT})]]
+	[(#URL_ECRIRE{diogene_edit}|parametre_url{nouveau,oui}|parametre_url{objet,#CLE}|icone_verticale{<:diogene:icone_editer_diogene_nouveau{type=#CLE}:>,diogene-24.png,new,#LANG_RIGHT})]]
 </B_diogenes_cle>
-	[(#URL_ECRIRE{diogenes_edit}|parametre_url{nouveau,oui}|parametre_url{objet,#CLE}|icone_verticale{<:diogene:icone_editer_diogene_nouveau{type=#CLE}:>,diogene-24.png,new,#LANG_RIGHT})]
+	[(#URL_ECRIRE{diogene_edit}|parametre_url{nouveau,oui}|parametre_url{objet,#CLE}|icone_verticale{<:diogene:icone_editer_diogene_nouveau{type=#CLE}:>,diogene-24.png,new,#LANG_RIGHT})]
 <//B_diogenes_cle>
 </BOUCLE_objets>
 
