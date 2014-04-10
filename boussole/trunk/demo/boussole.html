@@ -9,37 +9,38 @@
 </head>
 
 <body>
+	#SET{boussole, #ENV{alias, spip}}
 	<br /><br /><br />
 	<hr />
 	<strong>BOUSSOLES</strong>
 	<hr />
 	<:boussole:label_modele:> : boussole_liste_simple
 	<hr />
-	[(#MODELE{boussole_liste_simple, boussole=spip, titre_boussole=oui, div_class=boussole})]
+	[(#MODELE{boussole_liste_simple, boussole=#GET{boussole}, titre_boussole=oui, div_class=boussole})]
 	<hr />
 	<:boussole:label_modele:> : boussole_liste_par_groupe
 	<hr />
-	[(#MODELE{boussole_liste_par_groupe, boussole=spip, titre_boussole=oui, titre_groupe=oui})]
+	[(#MODELE{boussole_liste_par_groupe, boussole=#GET{boussole}, titre_boussole=oui, titre_groupe=oui})]
 	<hr />
 	<:boussole:label_modele:> : boussole_liste_avec_logo
 	<hr />
-	[(#MODELE{boussole_liste_avec_logo, boussole=spip, titre_boussole=oui, titre_site=oui, type_description=slogan_site, taille_logo=48})]
+	[(#MODELE{boussole_liste_avec_logo, boussole=#GET{boussole}, titre_boussole=oui, titre_site=oui, type_description=slogan_site, taille_logo=48})]
 	<hr />
 	<:boussole:label_modele:> : boussole_panorama
 	<hr />
-	[(#MODELE{boussole_panorama, boussole=spip, titre_boussole=oui, type_bulle=nom_slogan_site, taille_logo=48})]
+	[(#MODELE{boussole_panorama, boussole=#GET{boussole}, titre_boussole=oui, type_bulle=nom_slogan_site, taille_logo=48})]
 	<hr />
 	<:boussole:label_modele:> : boussole_panorama_sepia
 	<hr />
-	[(#MODELE{boussole_panorama_sepia, boussole=spip, titre_boussole=oui, type_bulle=nom_slogan_site, taille_logo=48, sepia=cccccc})]
+	[(#MODELE{boussole_panorama_sepia, boussole=#GET{boussole}, titre_boussole=oui, type_bulle=nom_slogan_site, taille_logo=48, sepia=cccccc})]
 	<hr />
 	<:boussole:label_modele:> : boussole_contenu_z
 	<hr />
-	[(#MODELE{boussole_contenu_z, boussole=spip, cartouche_boussole=oui, taille_logo=40, titre_groupe=oui, slogan_site=oui, descriptif_site=oui})]
+	[(#MODELE{boussole_contenu_z, boussole=#GET{boussole}, cartouche_boussole=oui, taille_logo=40, titre_groupe=oui, slogan_site=oui, descriptif_site=oui})]
 	<hr />
 	<:boussole:label_modele:> : boussole_tableau
 	<hr />
-	[(#MODELE{boussole_tableau, boussole=spip, cartouche_boussole=oui, titre_groupe=oui, taille_logo=32})]
+	[(#MODELE{boussole_tableau, boussole=#GET{boussole}, cartouche_boussole=oui, titre_groupe=oui, taille_logo=32})]
 	<hr />
 	<br />
 	<br />
@@ -47,11 +48,11 @@
 	<hr />
 	<:boussole:label_modele:> : boussole_liste_actualites
 	<hr />
-	[(#SET{ titre, [Actualit&eacute;s de (#VAL{spip}|boussole_traduire{nom_boussole})]})]
-	[(#MODELE{boussole_liste_actualite, boussole=spip, titre_actualite=#GET{titre}, titre_site=oui, max_sites=3, max_articles=5})]
+	[(#SET{ titre, [Actualit&eacute;s de (#GET{boussole}|boussole_traduire{nom_boussole})]})]
+	[(#MODELE{boussole_liste_actualite, boussole=#GET{boussole}, titre_actualite=#GET{titre}, titre_site=oui, max_sites=3, max_articles=5})]
 
 	<INCLURE{fond=modeles/boussole_topnav,
-		boussole=spip,
+		boussole=#GET{boussole},
 		titre_boussole=oui,
 		taille_logo_boussole=36,
 		taille_logo_site=16,
