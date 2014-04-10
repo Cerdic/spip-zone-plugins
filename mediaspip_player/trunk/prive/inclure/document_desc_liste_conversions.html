@@ -7,7 +7,7 @@
 	#ANCRE_PAGINATION
 	<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{mediaspip_player:info_une_conversion,mediaspip_player:info_nb_conversion})]</strong>
 	<BOUCLE_conversions(DOCUMENTS){mode=conversion}{objet=document}{id_objet=#ENV{id_document,#ENV{id}}}{par id_document} {statut==.*}{pagination #ENV{pagination,5} doc#ID_DOCUMENT}>
-		#MODELE{document_desc,id_document,objet=document,id_objet=#ENV{id_document}}
+		#MODELE{document_desc,id_document,objet=document,id_objet=#_document:ID_DOCUMENT}
 	</BOUCLE_conversions>
 	[<p class="pagination">(#PAGINATION{#ENV{type_pagination,prive}})</p>]
 </div>

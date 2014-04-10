@@ -11,8 +11,8 @@
 		la video se lira dès qu'elle le pourra si la valeur est autre que non ou false
 	-* autobuffer|preload string non|auto|metadata : La méthode de preload : auto chargera l'ensemble de la video, metadata s'arrêtera aux metadatas, non ne chargera rien
 	-* loop string "tout sauf non ou false" : La video se lira en boucle
-	-* largeur int|% : La largeur par défaut (défaut 320), si valeur en %, % doit être indiqué (ex: 100%), sinon seul l'entier pour les px
-	-* hauteur int : La hauteur par défaut (défaut 240)
+	-* largeur|width int|% : La largeur par défaut (défaut 320), si valeur en %, % doit être indiqué (ex: 100%), sinon seul l'entier pour les px
+	-* hauteur|height int : La hauteur par défaut (défaut 240)
 	-* moviesize string : 
 	-** adapt, adaptera la la vidéo à la plus grande largeur possible de l'élément parent
 	-** null, respectera les tailles passées en paramètres ou la taille de la video dans la bdd ou la taille par défaut (320x240)
@@ -38,38 +38,38 @@
 ]
 [(#HAUTEUR|>{0}|et{#LARGEUR|>{0}}|oui)[(#SET{ratio,[(#ROTATION|=={90}|?{[(#HAUTEUR|div{#LARGEUR})],[(#LARGEUR|div{#HAUTEUR})]})]})]]
 [
-(#SET{hauteur,#ENV{hauteur,#HAUTEUR}})][
-(#SET{largeur,#ENV{largeur,#LARGEUR}})][(#REM)
+(#SET{hauteur,#ENV{hauteur,#ENV{height,#HAUTEUR}}})][
+(#SET{largeur,#ENV{largeur,#ENV{width,#LARGEUR}}})][(#REM)
 	
 	Une largeur est passée en paramètre
 	Pas de hauteur en paramètre
 	Si on a largeur et hauteur en base, on calcule un ratio pour la hauteur
 	
-][(#ENV{largeur}
-	|et{#ENV{hauteur,''}|=={''}|oui}
-	|et{#ENV{largeur}|match{%}|non}
+][(#ENV{largeur,#ENV{width}}
+	|et{#ENV{hauteur,#ENV{height,''}}|=={''}|oui}
+	|et{#ENV{largeur,#ENV{width}}|match{%}|non}
 	|et{#HAUTEUR}
 	|et{#LARGEUR}
-	|et{[(#LARGEUR|>{#ENV{largeur,0}})]}|oui)
+	|et{[(#LARGEUR|>{#ENV{largeur,#ENV{width,0}}})]}|oui)
 	[(#GET{ratio}|non)
 	[(#SET{ratio,[(#LARGEUR|div{#HAUTEUR})]})]]
-	#SET{hauteur,#ENV{largeur}|div{#GET{ratio}}|floor}
+	#SET{hauteur,#ENV{largeur,#ENV{width}}|div{#GET{ratio}}|floor}
 ][(#REM)
 	
 	Une hauteur est passée en paramètre
 	Pas de largeur en paramètre
 	Si on a largeur et hauteur en base, on calcule un ratio pour la largeur
 	
-][(#ENV{hauteur}
-	|et{#ENV{largeur,''}|=={''}}
-	|et{#ENV{hauteur}|match{%}|non}
+][(#ENV{hauteur,#ENV{height}}
+	|et{#ENV{largeur,#ENV{width,''}}|=={''}}
+	|et{#ENV{hauteur,#ENV{height}}|match{%}|non}
 	|et{#HAUTEUR}
 	|et{#LARGEUR}
 	|et{#GET{ratio}|=={''}}
-	|et{[(#HAUTEUR|>{#ENV{hauteur}})]}|oui)
+	|et{[(#HAUTEUR|>{#ENV{hauteur,#ENV{height}}})]}|oui)
 	[(#GET{ratio}|non)
 	[(#SET{ratio,[(#LARGEUR|div{#HAUTEUR})]})]]
-	#SET{largeur,#ENV{hauteur}|mult{#GET{ratio}}|floor}
+	#SET{largeur,#ENV{hauteur,#ENV{height}}|mult{#GET{ratio}}|floor}
 ][(#REM)
 
 	On a une rotation dans la base, on retourne le bazar
@@ -114,7 +114,7 @@
 
 <BOUCLE_si_id(CONDITION){si #GET{id_document_voir}|oui}>[(#SET{variantes,#ARRAY})]
 <div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media video'[
-	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',[(#ENV{largeur}|match{%}|oui)width:#ENV{largeur}]})']
+	style='[(#ENV{align}|match{^(left|right)$}|oui)float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',[(#ENV{largeur,#ENV{width}}|match{%}|oui)width:#ENV{largeur,#ENV{width}}]})']
 	id='media_#GET{id_document_voir}'>
 	<video id="video_#GET{id_document_voir}"[
 		(#ENV{controls,true}|in_array{#LISTE{false,non,none}}|non)controls ][
@@ -160,8 +160,8 @@
 				(#GET{ratio}|oui)ratio : #GET{ratio},][
 				(#ENV{muted_bloque}|=={oui}|oui)muted_bloque : true,][
 				(#ENV{boutons_caches}|oui)boutons_caches : [(#ENV{boutons_caches}|explode{','}|json_encode)],][(#GET{largeur}|oui)[
-				width:'(#ENV{align}|match{^(left|right)$}|et{#ENV{largeur}|match{%}}|?{100%,[(#ENV{largeur}|replace{px,''})]})',]
-				][height:'(#ENV{hauteur})',
+				width:'(#ENV{align}|match{^(left|right)$}|et{#ENV{largeur,#ENV{width}}|match{%}}|?{100%,[(#ENV{largeur,#ENV{width}}|replace{px,''})]})',]
+				][height:'(#ENV{hauteur,#ENV{height}})',
 				]volume_slider_orientation:'#ENV{volume_slider_orientation,#CONFIG{mediaspip_player/slider_volume_orientation,horizontal}}'
 			});
 		}

@@ -1,7 +1,7 @@
 <paquet
 	prefix="mediaspip_player"
 	categorie="multimedia"
-	version="1.5.2"
+	version="1.5.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/html5_player_logo.png"
@@ -15,7 +15,7 @@
 
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
-	<copyright>2010-2013</copyright>
+	<copyright>2010-2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
