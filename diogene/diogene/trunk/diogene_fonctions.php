@@ -119,7 +119,7 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 	/**
 	 * Si on ne force pas, on envoit vers la page de l'objet
 	 */
-	if(!$forcer){
+	if($forcer === false){
 		if($infos_objet['statut'] == 'publie')
 			return generer_url_entite($id,$objet);
 	}
@@ -130,6 +130,7 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 	}
 	
 	$type_objet = sql_getfetsel('type','spip_diogenes','id_secteur='.intval($id_secteur).' AND '.sql_in("objet",$objets));
+
 	if($type_objet){
 		$page_publier = defined('_PAGE_PUBLIER') ? _PAGE_PUBLIER : 'publier';
 		$url = generer_url_public($page_publier,'type_objet='.$type_objet,'',true);

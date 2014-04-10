@@ -443,7 +443,7 @@ function diogene_formulaire_traiter($flux){
 			}
 			else{
 				$flux['data']['message_ok'] = _T('diogene:message_objet_mis_a_jour',array('titre'=>extraire_multi($titre)));
-				if($statut_objet == 'publie'){
+				if(objet_test_si_publie($objet,$id_objet)){
 					$url = generer_url_entite($id_objet,$objet);
 					$flux['data']['message_ok'] .= '<br />'._T('diogene:message_objet_mis_a_jour_lien',array('url'=>$url));
 				}
@@ -457,11 +457,16 @@ function diogene_formulaire_traiter($flux){
 				}
 			}
 		}else{
+			if(defined('_DIOGENE_REDIRIGE_PUBLICATION') && objet_test_si_publie($objet,$id_objet)){
+				$flux['data']['redirect'] = generer_url_entite($id_objet,$objet);
+			}else{
+				$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,$id_objet);
+			}
 			$flux['data']['message_ok'] = _T('diogene:message_objet_cree',array('titre'=>extraire_multi($titre)));
 			$flux['data']['editable'] = false;
-			$flux['data']['redirect'] = parametre_url(self(),$id_table_objet,$id_objet);
 		}
 	}
+	spip_log($flux,'test');
 	return $flux;
 }
 
@@ -555,10 +560,8 @@ function diogene_post_edition($flux){
 	 * C'est un hack ...
 	 */
 	if(isset($flux['data']['id_rubrique']) && ($flux['data']['statut'] == 'publie') && ($flux['args']['action'] == 'instituer')){
-		$id_rubrique = $flux['data']['id_rubrique'];
-		$modifs['statut'] = 'publie';
 		include_spip('inc/rubriques');
-		calculer_rubriques_if($id_rubrique, $modifs,'');
+		calculer_rubriques_if($flux['data']['id_rubrique'], array('statut'=>'publie'),'');
 	}
 	return $flux;
 }

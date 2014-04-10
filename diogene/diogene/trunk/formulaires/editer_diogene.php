@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2013 - Distribue sous licence GNU/GPL
+ * © 2010-2014 - Distribue sous licence GNU/GPL
  * 
  * Formulaire d'edition d'un template de formulaire "Diogene"
  */
@@ -18,7 +18,7 @@ include_spip('inc/editer');
 function formulaires_editer_diogene_charger_dist($id_diogene='new',$objet='article', $retour='',$config_fonc='', $row=array(), $hidden=''){
 	$pipeline = pipeline('diogene_objets');
 	$valeurs = array();
-	if(is_array($pipeline) AND !isset($pipeline[$objet])){
+	if(!is_numeric($id_diogene) && is_array($pipeline) AND !isset($pipeline[$objet])){
 		$valeurs['editable'] = false;
 		$valeurs['message_erreur'] = _T('diogene:erreur_objet_non_diogene',array('objet'=>$objet));
 		return $valeurs;

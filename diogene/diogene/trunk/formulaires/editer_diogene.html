@@ -7,8 +7,8 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-  		<input type='hidden' name='id_diogene' value='#ENV{id_diogene}' />
-  		<input type='hidden' name='objet' value='#ENV{objet}' />
+		<input type='hidden' name='id_diogene' value='#ENV{id_diogene}' />
+		<input type='hidden' name='objet' value='#ENV{objet}' />
 		<ul>
 			[(#SAISIE{input,titre,
 				label=<:info_titre:>,
