@@ -72,11 +72,11 @@ function latex_liste_item($t,$quoi='item'){
 						$ajout .= "\n\n";
 					elseif (!isset($pile_li[$niveau])) {
 						$ajout .= "\begin/debutitemize/fin";
-						$pile_li[$niveau] = "\n\end/debutitemize/fin\n";
+						$pile_li[$niveau] = "\n\\end/debutitemize/fin\n";
 					}
 					$niveau ++;
 					$ajout .= "\begin/debut$type/fin";
-					$pile_type[$niveau] = "\n\end/debut$type/fin\n";
+					$pile_type[$niveau] = "\n\\end/debut$type/fin\n";
 				}
 
 				$ajout .= "\n\item ";

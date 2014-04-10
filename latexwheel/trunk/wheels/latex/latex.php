@@ -61,7 +61,7 @@ function supprimer_verb($code){
 	foreach ($array as $i){
 		$texte = str_replace("\\".$i[0],caracteres_latex($i[1]),$texte);	
 		$texte = str_replace("\begin{english}","",$texte);
-		$texte = str_replace("\end{english}","",$texte);
+		$texte = str_replace("\\end{english}","",$texte);
 	}
 
 	return $texte;
