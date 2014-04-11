@@ -1,0 +1,9 @@
+[(#VAL{'medias_tabbord'}|barre_onglets{'medias_rep_orphelins'})]
+<div class="nettoyeur"></div>
+
+<h1><:medias_nettoyage:titre_page_medias_rep_orphelins:></h1>
+<div class="nettoyeur"></div>
+
+#SET{liste,#EVAL{'medias_lister_repertoires_orphelins_contenu()'}}
+<INCLURE{fond=prive/objets/liste/medias,liste=#GET{liste},titre=<:medias_nettoyage:titre_tableau_medias_orphelins:>,sinon=<:medias_nettoyage:aucun_document_orphelin:>,env,ajax} />
+<div class="nettoyeur"></div>

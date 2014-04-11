@@ -30,14 +30,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_titre_rep_orphelins' => 'Documents orphelins',
+	'onglet_titre_rep_img' => 'Répertoire IMG/',
 	'onglet_titre_tabbord' => 'Tableau de bord',
 
 	// T
-	'titre_page_documents_orphelins' => 'Documents orphelins',
-	'titre_page_documents_rep_img' => 'Liste des répertoires dans IMG/',
-	'titre_page_documents_tabbord' => 'Tableau de bord - Documents',
+	'titre_page_medias_rep_orphelins' => 'Documents orphelins',
+	'titre_page_medias_rep_img' => 'Liste des répertoires dans IMG/',
+	'titre_page_medias_tabbord' => 'Tableau de bord - Documents',
 	'titre_tableau_documents_orphelins' => 'Documents orphelins',
-	'titre_tableau_documents_repertoire_orphelins' => '',
+	'titre_tableau_documents_repertoire_orphelins' => 'Contenu dans IMG/orphelins',
 
 	// U
 	'un_repertoire' => ' répertoire',
