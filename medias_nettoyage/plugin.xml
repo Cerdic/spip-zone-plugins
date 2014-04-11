@@ -1,0 +1,33 @@
+<plugin>
+	<nom>Nettoyer la médiathèque</nom>
+	<description>Ce plugin permet de lister les documents présents physiquement dans le répertoire IMG mais qui ne sont plus référencés en BDD. Une tâche de fond déplace ces fichiers dans un répertoire IMG/orphelins.</description>
+	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
+	<prefix>medias_nettoyage</prefix>
+	<version>0.5.0</version>
+	<etat>test</etat>
+	<categorie>outil</categorie>
+
+	<auteur>Venfu</auteur>
+	<auteur>Teddy Payet</auteur>
+
+	<fonctions>medias_nettoyage_fonctions.php</fonctions>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>medias_nettoyage_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="Iterateurs" version="[1.0.1;]" />
+
+<onglet id='documents_tabbord' parent='documents_tabbord'>
+	<icone>prive/themes/spip/images/medias_tabbord-16.png</icone>
+	<titre>medias_nettoyage:onglet_titre_tabbord</titre>
+	<url>documents_tabbord</url>
+</onglet>
+<onglet id='documents_rep_orphelins' parent='documents_tabbord'>
+	<icone>prive/themes/spip/images/medias_rep_orphelins-16.png</icone>
+	<titre>medias_nettoyage:onglet_titre_rep_orphelins</titre>
+	<url>documents_rep_orphelins</url>
+</onglet>
+
+</plugin>
