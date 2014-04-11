@@ -1,0 +1,36 @@
+<div class="cartouche">
+<h1><:lesmotsdesarticles:lesmotsdesarticles_nom:></h1>
+</div>
+<div class="chapo"><:lesmotsdesarticles:lesmotsdesarticles_slogan:></div>
+
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+#BOITE_OUVRIR{#CHEMIN_IMAGE{rubrique-24.png}|balise_img{'',cadre-icone},'simple'}
+#SET{id_objet,#ID_RUBRIQUE}
+#SET{objet,rubrique}
+[(#GET{id_objet}|oui)
+		[(#GET{id_objet}|generer_url_entite{#GET{objet}}
+			|icone_verticale{[(#GET{objet}|objet_info{texte_retour}|_T)],#GET{objet}|objet_info{icone_objet},'',right retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+<h3> [(#TITRE*)]</h3>
+<br class="nettoyeur" />
+<B_articles>
+<ul class="liste articles lesmotsdesarticles">
+<BOUCLE_articles(ARTICLES){id_rubrique}{tout}>
+	<li[ class="(#COMPTEUR_BOUCLE|alterner{row,even})"] ><h4><img src="#CHEMIN_IMAGE{article-24.png}" alt="article de la rubrique n°#ID_RUBRIQUE" />#TITRE</h4>
+	<div class="ajax">
+		#FORMULAIRE_EDITER_LIENS{mots,article,#ID_ARTICLE}
+	</div>
+	</li>
+</BOUCLE_articles>
+</ul>
+</B_articles>
+
+#BOITE_FERMER
+</BOUCLE_rubrique>
+<style type="text/css">
+ul.liste.articles.lesmotsdesarticles { margin:0 -10px; }
+ul.liste.articles.lesmotsdesarticles > li { padding:1.5em 10px; border-top:1px solid #9DBA00; }
+ul.liste.articles.lesmotsdesarticles > li.row { background:#EEEEEE; }
+ul.liste.articles.lesmotsdesarticles h4 { margin-bottom:0.5em; }
+ul.liste.articles.lesmotsdesarticles .formulaire_spip { margin:0; }
+</style>

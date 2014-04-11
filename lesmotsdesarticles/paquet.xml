@@ -1,0 +1,19 @@
+<paquet
+	prefix="lesmotsdesarticles"
+	categorie="divers"
+	version="0.0.1"
+	etat="dev"
+	compatibilite="[3.0.10;3.0.*]"
+	logo="prive/themes/spip/images/lesmotsdesarticles-64.png"
+	documentation=""
+>
+	<nom>Les Mots-Clefs de Articles de la Rubrique</nom>
+	<!-- slogan : Gérer d'un coup d'un seul les mots-clefs des articles d'une rubrique -->
+	
+	<auteur>chankalan</auteur>
+	
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="affiche_enfants" inclure="lesmotsdesarticles_pipelines.php" />
+
+</paquet>
