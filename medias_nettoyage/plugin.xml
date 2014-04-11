@@ -3,14 +3,16 @@
 	<description>Ce plugin permet de lister les documents présents physiquement dans le répertoire IMG mais qui ne sont plus référencés en BDD. Une tâche de fond déplace ces fichiers dans un répertoire IMG/orphelins.</description>
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
-	<version>0.5.0</version>
+	<version>0.6.0</version>
 	<etat>test</etat>
 	<categorie>outil</categorie>
 
 	<auteur>Venfu</auteur>
 	<auteur>Teddy Payet</auteur>
 
+	<options>medias_nettoyage_options.php</options>
 	<fonctions>medias_nettoyage_fonctions.php</fonctions>
+
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>medias_nettoyage_pipelines.php</inclure>
