@@ -15,7 +15,6 @@
 	<necessite nom="accesrestreint" compatibilite="[3.9.0;]" />
 	
 	<pipeline nom="affiche_milieu" inclure="accesrestreintobjets_pipelines.php" />
-	<pipeline nom="afficher_contenu_objet" inclure="accesrestreintobjets_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="accesrestreintobjets_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="accesrestreintobjets_pipelines.php" />
 </paquet>
