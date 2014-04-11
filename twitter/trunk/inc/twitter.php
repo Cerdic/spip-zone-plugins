@@ -85,7 +85,7 @@ function tweet($status, $tokens = null){
  *   twitter_token_secret : token secret du compte a utiliser
  *
  *
- * @return bool|TwitterOAuth
+ * @return bool|TwitterOAuthSPIP
  */
 function twitter_connect($tokens=null){
 	static $connection = null;
@@ -96,8 +96,8 @@ function twitter_connect($tokens=null){
 		if($tokens = twitter_tokens($tokens)){
 			// Cas de twitter et oAuth
 			$t2 = md5(serialize($tokens));
-			include_spip('inc/twitteroauth');
-			$connection[$t] = $connection[$t2] = new TwitterOAuth(
+			include_spip('inc/twitteroauthspip');
+			$connection[$t] = $connection[$t2] = new TwitterOAuthSPIP(
 				$tokens['twitter_consumer_key'],
 				$tokens['twitter_consumer_secret'],
 				$tokens['twitter_token'],

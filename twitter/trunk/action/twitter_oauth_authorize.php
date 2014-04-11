@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_twitter_oauth_authorize_dist(){
 
-	include_spip('inc/twitteroauth');
+	include_spip('inc/twitteroauthspip');
 	include_spip('inc/session');
 
 	$redirect = session_get('twitter_redirect') ? session_get('twitter_redirect') : $GLOBALS['meta']['url_site_spip'];
@@ -41,7 +41,7 @@ function action_twitter_oauth_authorize_dist(){
 			$consumer_key = $cfg['twitter_consumer_key'];
 			$consumer_secret = $cfg['twitter_consumer_secret'];
 
-			$connection = new TwitterOAuth($consumer_key, $consumer_secret, $GLOBALS['visiteur_session']['oauth_token'], $GLOBALS['visiteur_session']['oauth_token_secret']);
+			$connection = new TwitterOAuthSPIP($consumer_key, $consumer_secret, $GLOBALS['visiteur_session']['oauth_token'], $GLOBALS['visiteur_session']['oauth_token_secret']);
 			$access_token = $connection->getAccessToken(_request('oauth_verifier'));
 			session_set('access_token',$access_token);
 
@@ -85,7 +85,7 @@ function twitter_oauth_authorize($callback, $redirect, $sign_in=true){
 	$redirect = parametre_url(parametre_url($redirect,'erreur_code',''),'erreur','','&');
 
 	include_spip('inc/filtres');
-	include_spip('inc/twitteroauth');
+	include_spip('inc/twitteroauthspip');
 	include_spip('inc/session');
 
 	/**
@@ -100,7 +100,7 @@ function twitter_oauth_authorize($callback, $redirect, $sign_in=true){
 	 * Ainsi que l'adresse de redirection pour la seconde action
 	 */
 	try {
-		$connection = new TwitterOAuth($cfg['twitter_consumer_key'], $cfg['twitter_consumer_secret']);
+		$connection = new TwitterOAuthSPIP($cfg['twitter_consumer_key'], $cfg['twitter_consumer_secret']);
 		$request_token = $connection->getRequestToken($oauth_callback);
 		$token = $request_token['oauth_token'];
 		session_set('oauth_token',$token);
