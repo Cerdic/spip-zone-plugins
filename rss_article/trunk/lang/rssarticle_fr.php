@@ -17,6 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'copie_logo' => 'Recopier le logo du site comme logo d\'article',
   'cron_interval' => 'Fréquence de la copie des flux RSS en articles',
   'cron_interval_timer' => 'Intervalle en seconde ',
+  
+  //R
+  'html2spip' => 'Passer le HTML en syntaxe SPIP',
 
   // S
   'statut_article_importe' => 'Statut des articles import&eacute;s',
