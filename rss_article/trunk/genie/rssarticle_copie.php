@@ -192,33 +192,32 @@ function extraire_enclosures($tags) {
 	return $s;
 }
 
+//
 //passe le html en SPIP
-//cf memo.php
+//repris de memo.php, merci
 function html2spip($lapage){
-	// itals SPIP
+	// itals
 	$lapage = preg_replace(",<(i|em)( [^>\r]*)?".">(.+)</\\1>,Uims", "{\\3}", $lapage);
 	
-	// gras SPIP (pas de {{ pour eviter tout conflit avec {)
+	// gras (pas de {{ pour eviter tout conflit avec {)
 	$lapage = preg_replace(",<(b|h[4-6])( [^>]*)?".">(.+)</\\1>,Uims", "@@b@@\\3@@/b@@", $lapage);
 	$lapage = preg_replace(",<strong( [^>]*)?".">(.+)</strong>,Uims", "@@b@@\\2@@/b@@", $lapage);
 	
 	// entites
 	include_spip('inc/charsets');
 	$lapage = html2unicode($lapage, true); //secure?
-	
-	//??todo traite les liens avec le DOMPHP -> on les isole pour les mettre en enclosure, ne pas oublier le domaine devant?
-	
-	// liens SPIP
+		
+	// liens
 	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=\"(.*?)\"[ \t\n\r][^<>]*\">(.*?)<\/a>,uims", "[\\2->\\1]", $lapage);
-	// intertitres SPIP
+	// intertitres
 	$lapage = preg_replace(",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims", "\r{{{ \\3 }}}\r", $lapage);
-	// tableaux SPIP
+	// tableaux
 	$lapage = preg_replace(",<tr( [^>]*)?".">,Uims", "<br />\r", $lapage);
 	$lapage = preg_replace(",<t[hd]( [^>]*)?".">,Uims", " | ", $lapage);
 
 	$lapage = textebrut($lapage);
 	
-	// Suite tableaux SPIP
+	// Suite tableaux
 	$lapage = preg_replace(",\n[| ]+\n,", "", $lapage);
 	$lapage = preg_replace(",\n[|].+?[|].+?[|].+,", "\\0|\r", $lapage);
 	
