@@ -36,7 +36,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
 
 	foreach ($extensions as $extension) {
 		if(!is_dir($repertoire_img . $extension)) {
-			mkdir($repertoire_img . $extension, _SPIP_CHMOD);
+			mkdir($repertoire_img . $extension, 0755);
 		}
 	}
 	return;
@@ -51,7 +51,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
  */
 function medias_creer_repertoires_orphelins () {
 	if (!is_dir(_MEDIAS_NETTOYAGE_REP_ORPHELINS)) {
-		mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,_SPIP_CHMOD);
+		mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,0755);
 	}
 	return;
 }
@@ -510,7 +510,7 @@ function medias_deplacer_documents_repertoire_orphelins () {
 				$i++;
 			}
 			if (!is_dir($repertoires)) {
-				mkdir($repertoires,_SPIP_CHMOD);
+				mkdir($repertoires,0755);
 				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le répertoire ' . $repertoires . ' a été créé.';
 			}
 			// Hop, on déplace notre fichier vers IMG/orphelins
