@@ -36,7 +36,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
 
 	foreach ($extensions as $extension) {
 		if(!is_dir($repertoire_img . $extension)) {
-			mkdir($repertoire_img . $extension, 0777);
+			mkdir($repertoire_img . $extension, _SPIP_CHMOD);
 		}
 	}
 	return;
@@ -51,7 +51,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
  */
 function medias_creer_repertoires_orphelins () {
 	if (!is_dir(_MEDIAS_NETTOYAGE_REP_ORPHELINS)) {
-		mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,0777);
+		mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,_SPIP_CHMOD);
 	}
 	return;
 }
@@ -84,12 +84,13 @@ function medias_lister_repertoires_img () {
  * @return void
  */
 function medias_deplacer_rep_obsoletes () {
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
+
 	$pattern_obsoletes		= array("cache-","icones");
 	$repertoire_img 		= _DIR_IMG;
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
 	$repertoires_obsoletes 	= array();
 	$message_log 			= array();
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement des répertoires obsolètes.',"documents_orphelins");
 
 	// On crée le répertoire IMG/orphelins
 	medias_creer_repertoires_orphelins();
@@ -115,10 +116,10 @@ function medias_deplacer_rep_obsoletes () {
 		}
 	} else {
 		// S'il n'y a pas de dossiers obsolètes, on met un message histoire de ne pas rester dans le brouillard.
-		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de dossiers obsolètes';
+		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de dossiers ou de fichiers obsolètes';
 	}
-	spip_log("\n" . join("\n",$message_log) . "\n","documents_orphelins");
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement des répertoires obsolètes.',"documents_orphelins");
+	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
 	return;
 }
 
@@ -472,6 +473,7 @@ function test_medias(){
  * On déplace tous les fichiers orphelins vers un répertoire orphelins dans IMG/
  * On ne les supprime pas!
  *
+ * @uses medias_creer_repertoires_orphelins()
  * @uses medias_creer_extensions_repertoires()
  * @uses medias_lister_documents_repertoire_orphelins()
  *
@@ -483,15 +485,14 @@ function medias_deplacer_documents_repertoire_orphelins () {
 	 * Ainsi, on sait déjà en regardant les logs
 	 * si le script est lancé ou pas.
 	 */
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement.','documents_orphelins');
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement.',"medias_orphelins");
 
 	$fichiers_orphelins 	= medias_lister_documents_repertoire_orphelins();
 	$fichiers_deplaces 		= array();
 	$message_log 			= array();
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
-	if (!is_dir($repertoire_orphelins)) {
-		mkdir($repertoire_orphelins,0777);
-	}
+	// On crée le répertoire IMG/orphelins s'il n'existe pas
+	medias_creer_repertoires_orphelins();
 	// On crée les répertoires d'extensions dans IMG/orphelins
 	medias_creer_extensions_repertoires($repertoire_orphelins);
 
@@ -509,7 +510,7 @@ function medias_deplacer_documents_repertoire_orphelins () {
 				$i++;
 			}
 			if (!is_dir($repertoires)) {
-				mkdir($repertoires,0777);
+				mkdir($repertoires,_SPIP_CHMOD);
 				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le répertoire ' . $repertoires . ' a été créé.';
 			}
 			// Hop, on déplace notre fichier vers IMG/orphelins
@@ -523,14 +524,13 @@ function medias_deplacer_documents_repertoire_orphelins () {
 		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il ne semble pas avoir de documents orphelins dans IMG/';
 	}
 
-	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","documents_orphelins");
+	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
 	/**
 	 * Et là, on marque bien la fin du script dans les logs.
 	 */
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement.','documents_orphelins');
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement.',"medias_orphelins");
 
 	return true;
 }
-
 
 ?>

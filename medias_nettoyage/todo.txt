@@ -1,0 +1,7 @@
+- réparer les liens entre docs et IMG où les fichiers ne sont pas rangés dans un répertoire d'extensions quand les documents ne sont pas distants (rappel : IMG/vignettes pour le mode=="vignette"). cf. http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
+- compatibilité SPIP 3.0
+- étendre à d'autres objets le listing des logos. En SPIP 3.0, ok, il y a l'API pour lister les objets. Mais quid en SPIP 2.1 ?
+
+Observations :
+- regarder si on ne pourrait pas utiliser ecrire_fichier(), lire_fichier(), sous_repertoire()… Est-ce vraiment utile ? Car ce plugin ne fait que déplacer, donc ne devrait pas prendre plus de place sur le disque normalement.
+- il faudrait mettre un verrou sur la fonction medias_deplacer_rep_obsoletes() pour qu'elle ne s'exécute que si un fichier/dossier obsolète existe. Sinon, pas la peine de le mettre en cron. Tant qu'on n'a pas trouvé une solution perrene, on lance un cron à 30 jours.
