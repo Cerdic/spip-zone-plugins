@@ -211,7 +211,7 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 		$infos['boussole'] = $tableau['attributes'];
 
 		// Construire l'objet extras de la boussole
-		$extra = array();
+		$extra = array('nom_objet' => '', 'slogan_objet' => '', 'descriptif_objet' => '');
 		$extra['aka_boussole'] = $infos['boussole']['alias'];
 		$extra['type_objet'] = 'boussole';
 		$extra['aka_objet'] = $infos['boussole']['alias'];
@@ -228,7 +228,7 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 		if (isset($tableau['children']['groupe'])) {
 			$rang_groupe = 0;
 			foreach ($tableau['children']['groupe'] as $_groupe) {
-				$extra = array();
+				$extra = array('nom_objet' => '', 'slogan_objet' => '', 'descriptif_objet' => '');
 				// Construire l'objet extras du groupe
 				$extra['aka_boussole'] = $infos['boussole']['alias'];
 				$extra['type_objet'] = 'groupe';
@@ -238,7 +238,6 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 					$extra['nom_objet'] = '<multi>' . $_groupe['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
 				if (isset($_groupe['children']['slogan']))
 					$extra['slogan_objet'] = '<multi>' . $_groupe['children']['slogan'][0]['children']['multi'][0]['text'] . '</multi>';
-				$extra['descriptif_objet'] = '';
 				$infos['extras'][] = $extra;
 
 				// On consigne l'alias et le rang du groupe
@@ -248,7 +247,6 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 				if (isset($_groupe['children']['site'])) {
 					foreach ($_groupe['children']['site'] as $_site){
 						if ($_site['attributes']['actif'] == 'oui') {
-							$extra = array();
 							$site = array();
 							// Alias de la boussole
 							$site['aka_boussole'] = $infos['boussole']['alias'];
@@ -264,6 +262,7 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 							$infos['sites'][] = $site;
 
 							// Construire l'objet extra du site
+							$extra = array('nom_objet' => '', 'slogan_objet' => '', 'descriptif_objet' => '');
 							$extra['aka_boussole'] = $infos['boussole']['alias'];
 							$extra['type_objet'] = 'site';
 							$extra['aka_objet'] = $_site['attributes']['alias'];
