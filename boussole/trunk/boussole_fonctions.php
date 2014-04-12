@@ -108,7 +108,7 @@ function calcul_boussole_infos($boussole) {
  *
  * 		- 'nom_boussole', 'slogan_boussole', 'descriptif_boussole' pour un objet boussole
  * 		- 'nom_groupe', 'slogan_groupe' pour un objet groupe
- * 		- 'nom_site', 'slogan_site', 'descriptif_site' pour un objet site
+ * 		- 'nom_site', 'slogan_site', 'descriptif_site', 'nom_slogan_site' pour un objet site
  * @param string $objet
  * 		Identifiant d'un objet groupe ou site. Vide pour la traduction d'un champ d'un objet
  * 		boussole
@@ -116,52 +116,45 @@ function calcul_boussole_infos($boussole) {
  * 		Champ traduit dans la langue du site
  */
 function boussole_traduire($boussole, $champ, $objet='') {
-	static	$champs_boussole = array('nom_boussole', 'slogan_boussole', 'descriptif_boussole');
-	static	$champs_groupe = array('nom_groupe', 'slogan_groupe');
-	static	$champs_site = array('nom_site', 'slogan_site', 'descriptif_site');
-
+	static	$champs_autorises = array(
+									'nom_boussole', 'slogan_boussole', 'descriptif_boussole',
+									'nom_groupe', 'slogan_groupe',
+									'nom_site', 'slogan_site', 'descriptif_site', 'nom_slogan_site');
 	$traduction = '';
 
 	if ($champ == '')
 		return $traduction;
 
-
 	// Détermination de la traduction à rechercher dans les extras de boussole
 	if ($boussole) {
-		if (in_array($champ, $champs_boussole)) {
-			$type_objet = 'boussole';
-			$aka_objet = $boussole;
-			$info = str_replace('boussole', 'objet', $champ);
-		}
-		elseif (in_array($champ, $champs_groupe)) {
-			$type_objet = 'groupe';
-			$aka_objet = $objet;
-			$info = str_replace('groupe', 'objet', $champ);
-		}
-		elseif (in_array($champ, $champs_site)) {
-			$type_objet = 'site';
-			$aka_objet = $objet;
-			$info = str_replace('site', 'objet', $champ);
-		}
-		elseif ($champ == 'nom_slogan_site') {
-			$type_objet = 'site';
-			$aka_objet = $objet;
-			$info = array('nom_objet', 'slogan_objet');
-		}
-		else
-			return $traduction;
-	}
+		if (in_array($champ, $champs_autorises)) {
+			if ($champ == 'nom_slogan_site') {
+				$type_objet = 'site';
+				$aka_objet = $objet;
+				$select = array('nom_objet', 'slogan_objet');
+			}
+			else {
+				list($type_champ, $type_objet) = explode('_', $champ);
+				if ($type_objet == 'boussole')
+					$aka_objet = $boussole;
+				else
+					$aka_objet = $objet;
+				$select = "${type_champ}_objet";
+			}
 
-	// Accès à la table boussoles_extras où sont stockées les traductions
-	$where = array(
-		'aka_boussole=' . sql_quote($boussole),
-		'type_objet=' . sql_quote($type_objet),
-		'aka_objet=' . sql_quote($aka_objet));
-	$traductions = sql_fetsel($info, 'spip_boussoles_extras', $where);
-	if (count($traductions) == 1)
-		$traduction = extraire_multi($traductions[$info]);
-	else if (count($traductions) == 2)
-		$traduction = extraire_multi($traductions['nom_objet']) . '-' . extraire_multi($traductions['slogan_objet']);
+			// Accès à la table boussoles_extras où sont stockées les traductions
+			$where = array(
+				'aka_boussole=' . sql_quote($boussole),
+				'type_objet=' . sql_quote($type_objet),
+				'aka_objet=' . sql_quote($aka_objet));
+			$traductions = sql_fetsel($select, 'spip_boussoles_extras', $where);
+
+			if (count($traductions) == 1)
+				$traduction = extraire_multi($traductions[$select]);
+			else if (count($traductions) == 2)
+				$traduction = extraire_multi($traductions['nom_objet']) . '-' . extraire_multi($traductions['slogan_objet']);
+		}
+	}
 
 	return $traduction;
 }
