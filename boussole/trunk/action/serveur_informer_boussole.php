@@ -44,6 +44,10 @@ function action_serveur_informer_boussole_dist(){
 	$nom_serveur = lire_config('boussole/serveur/nom');
 
 	if ($serveur_actif) {
+		// Initialisation du fichier xml et de l'erreur
+		$erreur = '';
+		$fichier_xml = '';
+
 		if ($alias_boussole) {
 			// Acquerir la liste des boussoles prêtes à être diffusées
 			include_spip('inc/config');
@@ -51,8 +55,6 @@ function action_serveur_informer_boussole_dist(){
 			$boussoles = pipeline('declarer_boussoles', $boussoles);
 
 			// Si erreur, on renvoie un id sous forme d'une balise erreur
-			$erreur = '';
-			$fichier_xml = '';
 			if ($boussoles) {
 				// Vérifier que la boussole demandée est bien disponible sur le serveur
 				if (array_key_exists($alias_boussole, $boussoles)) {

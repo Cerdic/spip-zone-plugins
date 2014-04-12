@@ -67,7 +67,7 @@ function boussole_ajouter($boussole, $serveur='spip') {
 	// du CRON d'actualisation avant que la migration de schéma ait été effectuée
 	$trouver = charger_fonction('trouver_table', 'base');
 	if (!$trouver('spip_boussoles_extras')) {
-		$message = '';
+		// Inutile de fournir un message qui ne sera pas affiché
 		return array(false, $message);
 	};
 
@@ -211,6 +211,7 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 		$infos['boussole'] = $tableau['attributes'];
 
 		// Construire l'objet extras de la boussole
+		$extra = array();
 		$extra['aka_boussole'] = $infos['boussole']['alias'];
 		$extra['type_objet'] = 'boussole';
 		$extra['aka_objet'] = $infos['boussole']['alias'];
@@ -227,6 +228,7 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 		if (isset($tableau['children']['groupe'])) {
 			$rang_groupe = 0;
 			foreach ($tableau['children']['groupe'] as $_groupe) {
+				$extra = array();
 				// Construire l'objet extras du groupe
 				$extra['aka_boussole'] = $infos['boussole']['alias'];
 				$extra['type_objet'] = 'groupe';
@@ -240,12 +242,14 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 				$infos['extras'][] = $extra;
 
 				// On consigne l'alias et le rang du groupe
-				$rang_groupe = ++$i;
+				++$rang_groupe;
 				// On consigne l'alias et l'url de chaque site du groupe en cours de traitement
 				$rang_site = 0;
 				if (isset($_groupe['children']['site'])) {
 					foreach ($_groupe['children']['site'] as $_site){
 						if ($_site['attributes']['actif'] == 'oui') {
+							$extra = array();
+							$site = array();
 							// Alias de la boussole
 							$site['aka_boussole'] = $infos['boussole']['alias'];
 							// Infos du groupe

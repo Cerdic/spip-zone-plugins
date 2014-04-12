@@ -45,14 +45,16 @@ function action_serveur_lister_boussoles_dist(){
 	$nom_serveur = lire_config('boussole/serveur/nom');
 
 	if ($serveur_actif) {
+		// Initialisation du fichier xml et de l'erreur
+		$erreur = '';
+		$fichier_liste = '';
+
 		// Acquerir la liste des boussoles prêtes à être diffusées
 		include_spip('inc/config');
 		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
 
 		// Si erreur, on renvoie un id sous forme d'une balise erreur
-		$erreur = '';
-		$fichier_liste = '';
 		if ($boussoles) {
 			// Vérifier que le cache existe
 			$fichier_liste = _DIR_VAR . "cache-boussoles/boussoles.xml";

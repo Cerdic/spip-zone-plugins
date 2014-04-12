@@ -19,12 +19,13 @@ function formulaires_declarer_boussole_manuelle_verifier_dist() {
 function formulaires_declarer_boussole_manuelle_traiter_dist() {
 	$retour = array();
 	$ok = false;
+	$message = '';
 
 	$alias_boussole = _request('alias');
 
 	// Vérification que la boussole est bien installée quelque part sur le site
 	// -- on cherche donc son fichier XML
-	if ($fichier_xml = find_in_path("boussole_traduite-${alias_boussole}.xml")) {
+	if (find_in_path("boussole_traduite-${alias_boussole}.xml")) {
 		// Déclaration de la boussole manuelle au serveur
 		// -- si elle existe déjà on écrase sa déclaration plutôt que de sortir une erreur
 		include_spip('inc/config');

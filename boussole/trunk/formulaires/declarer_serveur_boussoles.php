@@ -19,6 +19,8 @@ function formulaires_declarer_serveur_boussoles_verifier_dist() {
 function formulaires_declarer_serveur_boussoles_traiter_dist() {
 	$retour = array();
 	$ok = false;
+	$message = '';
+	$serveur = '';
 
 	$url_serveur = _request('url');
 	$action = rtrim($url_serveur, '/')

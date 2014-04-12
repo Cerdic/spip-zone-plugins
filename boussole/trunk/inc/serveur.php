@@ -223,6 +223,7 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 
 		// Ouverture de l'élément englobant boussole
 		// -- url absolue du logo à fournir dans la balise
+		$att_boussole =array();
 		$att_boussole['logo'] = url_absolue(find_in_path("images/boussole/boussole-${alias_boussole}.png"));
 		// -- insertion de la version du plugin comme version du xml
 		$informer = charger_fonction('informer_plugin', 'inc');
@@ -250,6 +251,7 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 				// Insertion des éléments site du groupe en cours
 				if (isset($_groupe['children']['site'])) {
 					foreach ($_groupe['children']['site'] as $_site) {
+						$att_site =array();
 						// -- url absolue du logo à fournir dans la balise
 						$alias_site = $_site['attributes']['alias'];
 						$att_site['logo'] = url_absolue(find_in_path("images/boussole/site-${alias_boussole}-${alias_site}.png"));
@@ -315,6 +317,7 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 
 		// Ouverture de l'élément englobant boussole
 		// -- url absolue du logo à fournir dans la balise
+		$att_boussole =array();
 		$att_boussole['logo'] = url_absolue(find_in_path("images/boussole/boussole-${alias_boussole}.png"));
 		// -- insertion de l'alias du serveur
 		include_spip('inc/config');
@@ -327,25 +330,25 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 		$cache .= inserer_balise('ouvrante', $tableau['name'], $att_boussole);
 		// Insertion des balises multi pour le nom, le slogan et le descriptif de la boussole
 		if (isset($tableau['children']['nom'])) {
-			$cache .= inserer_balise('ouvrante', 'nom', '', 1)
-					. inserer_balise('ouvrante', 'multi', '', 2)
+			$cache .= inserer_balise('ouvrante', 'nom', array(), 1)
+					. inserer_balise('ouvrante', 'multi', array(), 2)
 					. indenter(2) . $tableau['children']['nom'][0]['children']['multi'][0]['text'] . "\n"
-					. inserer_balise('fermante', 'multi', '', 2)
-					. inserer_balise('fermante', 'nom', '', 1);
+					. inserer_balise('fermante', 'multi', array(), 2)
+					. inserer_balise('fermante', 'nom', array(), 1);
 		}
 		if (isset($tableau['children']['slogan'])) {
-			$cache .= inserer_balise('ouvrante', 'slogan', '', 1)
-					. inserer_balise('ouvrante', 'multi', '', 2)
+			$cache .= inserer_balise('ouvrante', 'slogan', array(), 1)
+					. inserer_balise('ouvrante', 'multi', array(), 2)
 					. indenter(2) . $tableau['children']['slogan'][0]['children']['multi'][0]['text'] . "\n"
-					. inserer_balise('fermante', 'multi', '', 2)
-					. inserer_balise('fermante', 'slogan', '', 1);
+					. inserer_balise('fermante', 'multi', array(), 2)
+					. inserer_balise('fermante', 'slogan', array(), 1);
 		}
 		if (isset($tableau['children']['description'])) {
-			$cache .= inserer_balise('ouvrante', 'description', '', 1)
-					. inserer_balise('ouvrante', 'multi', '', 2)
+			$cache .= inserer_balise('ouvrante', 'description', array(), 1)
+					. inserer_balise('ouvrante', 'multi', array(), 2)
 					. indenter(2) . $tableau['children']['description'][0]['children']['multi'][0]['text'] . "\n"
-					. inserer_balise('fermante', 'multi', '', 2)
-					. inserer_balise('fermante', 'description', '', 1);
+					. inserer_balise('fermante', 'multi', array(), 2)
+					. inserer_balise('fermante', 'description', array(), 1);
 		}
 
 		if (isset($tableau['children']['groupe'])) {
@@ -354,23 +357,24 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 				$cache .= inserer_balise('ouvrante', $_groupe['name'], $_groupe['attributes'], 1);
 				// Insertion des balises multi pour le nom du groupe
 				if (isset($_groupe['children']['nom'])) {
-					$cache .= inserer_balise('ouvrante', 'nom', '', 2)
-							. inserer_balise('ouvrante', 'multi', '', 3)
+					$cache .= inserer_balise('ouvrante', 'nom', array(), 2)
+							. inserer_balise('ouvrante', 'multi', array(), 3)
 							. indenter(3) . $_groupe['children']['nom'][0]['children']['multi'][0]['text'] . "\n"
-							. inserer_balise('fermante', 'multi', '', 3)
-							. inserer_balise('fermante', 'nom', '', 2);
+							. inserer_balise('fermante', 'multi', array(), 3)
+							. inserer_balise('fermante', 'nom', array(), 2);
 				}
 				if (isset($_groupe['children']['slogan'])) {
-					$cache .= inserer_balise('ouvrante', 'slogan', '', 2)
-							. inserer_balise('ouvrante', 'multi', '', 3)
+					$cache .= inserer_balise('ouvrante', 'slogan', array(), 2)
+							. inserer_balise('ouvrante', 'multi', array(), 3)
 							. indenter(3) . $_groupe['children']['slogan'][0]['children']['multi'][0]['text'] . "\n"
-							. inserer_balise('fermante', 'multi', '', 3)
-							. inserer_balise('fermante', 'slogan', '', 2);
+							. inserer_balise('fermante', 'multi', array(), 3)
+							. inserer_balise('fermante', 'slogan', array(), 2);
 				}
 
 				// Insertion des éléments site du groupe en cours
 				if (isset($_groupe['children']['site'])) {
 					foreach ($_groupe['children']['site'] as $_site) {
+						$att_site =array();
 						// -- url absolue du logo à fournir dans la balise
 						$alias_site = $_site['attributes']['alias'];
 						$att_site['logo'] = url_absolue(find_in_path("images/boussole/site-${alias_boussole}-${alias_site}.png"));
@@ -378,30 +382,30 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 						$cache .= inserer_balise('ouvrante', $_site['name'], $att_site, 2);
 						// Insertion des balises multi pour le nom, le slogan et le descriptif du site
 						if (isset($_site['children']['nom'])) {
-							$cache .= inserer_balise('ouvrante', 'nom', '', 3)
-									. inserer_balise('ouvrante', 'multi', '', 4)
+							$cache .= inserer_balise('ouvrante', 'nom', array(), 3)
+									. inserer_balise('ouvrante', 'multi', array(), 4)
 									. indenter(4) . $_site['children']['nom'][0]['children']['multi'][0]['text'] . "\n"
-									. inserer_balise('fermante', 'multi', '', 4)
-									. inserer_balise('fermante', 'nom', '', 3);
+									. inserer_balise('fermante', 'multi', array(), 4)
+									. inserer_balise('fermante', 'nom', array(), 3);
 						}
 						if (isset($_site['children']['slogan'])) {
-							$cache .= inserer_balise('ouvrante', 'slogan', '', 3)
-									. inserer_balise('ouvrante', 'multi', '', 4)
+							$cache .= inserer_balise('ouvrante', 'slogan', array(), 3)
+									. inserer_balise('ouvrante', 'multi', array(), 4)
 									. indenter(4) . $_site['children']['slogan'][0]['children']['multi'][0]['text'] . "\n"
-									. inserer_balise('fermante', 'multi', '', 4)
-									. inserer_balise('fermante', 'slogan', '', 3);
+									. inserer_balise('fermante', 'multi', array(), 4)
+									. inserer_balise('fermante', 'slogan', array(), 3);
 						}
 						if (isset($_site['children']['description'])) {
-							$cache .= inserer_balise('ouvrante', 'description', '', 3)
-									. inserer_balise('ouvrante', 'multi', '', 4)
+							$cache .= inserer_balise('ouvrante', 'description', array(), 3)
+									. inserer_balise('ouvrante', 'multi', array(), 4)
 									. indenter(4) . $_site['children']['description'][0]['children']['multi'][0]['text'] . "\n"
-									. inserer_balise('fermante', 'multi', '', 4)
-									. inserer_balise('fermante', 'description', '', 3);
+									. inserer_balise('fermante', 'multi', array(), 4)
+									. inserer_balise('fermante', 'description', array(), 3);
 						}
-						$cache .= inserer_balise('fermante', $_site['name'], '', 2);
+						$cache .= inserer_balise('fermante', $_site['name'], array(), 2);
 					}
 				}
-				$cache .= inserer_balise('fermante', $_groupe['name'], '', 1);
+				$cache .= inserer_balise('fermante', $_groupe['name'], array(), 1);
 			}
 		}
 
@@ -442,6 +446,8 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
  * @return string
  */
 function inserer_balise($type='ouvrante', $balise, $attributs=array(), $indentation=0) {
+	$texte = '';
+
 	// Ouverture de la balise
 	$texte = indenter($indentation) . '<' . ($type == 'fermante' ? '/' : '') . $balise;
 	// Insertion des attributs
