@@ -499,7 +499,7 @@ function medias_deplacer_documents_repertoire_orphelins () {
 	// Si on n'a pas de fichiers orphelins, on ne lance pas la procédure.
 	if (count($fichiers_orphelins) > 0) {
 		foreach ($fichiers_orphelins as $fichier) {
-			$destination = preg_replace("/..\/IMG\//", $repertoire_orphelins, $fichier);
+			$destination = preg_replace("/" . preg_replace("/\//", "\/", _DIR_IMG) . "/", $repertoire_orphelins, $fichier);
 			$chemin = explode('/', $destination);
 			$repertoires = '';
 			$profondeur = count($chemin) - 1;
