@@ -140,6 +140,7 @@ function depublie_post_edition($flux){
 		and ($action = $flux['args']['action']) == 'instituer' // action instituer
 		and ($table = $flux['args']['table']) == table_objet_sql('article') // on institue un article
 		and ($statut_ancien = $flux['args']['statut_ancien']) != ($statut = $flux['data']['statut']) // le statut a été modifié
+		and $statut = $flux['data']['statut'] == 'publie' // uniquement en cas de publication
 		and $id_objet = $flux['args']['id_objet'] // on a bien un identifiant
 	) {
 	
