@@ -21,7 +21,8 @@ function genie_rssarticle_copie_dist($t){
   if (lire_config('rssarticle/import_statut')=="publie")       $import_statut="publie"; else  $import_statut="prop";     
   if (lire_config('rssarticle/mode')=="auto")       $mode_auto=true; else  $mode_auto=false;  
   if (lire_config('rssarticle/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
-  if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;        
+  if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false; 
+  if (lire_config('rssarticle/html2spip')=="on")   $html2spip=true; else  $html2spip=false; 
   $email_suivi = lire_config('rssarticle/email_suivi'); 
   
   // autres valeurs
@@ -46,12 +47,16 @@ function genie_rssarticle_copie_dist($t){
        $s = sql_select("*", "spip_syndic_articles", "statut='publie' AND id_syndic='$id_syndic'","","maj DESC","10");  // par flot de 10 articles / site pour limiter la charge
        while ($a = sql_fetch($s)) {
        		$titre =  $a['titre'];
+       		$url =  $a['url'];
           $id_syndic_article = $a['id_syndic_article']; 
                     
-          // article avec mm titre existe ? (test doublons)
-	        if (!$row = sql_fetsel("id_article","spip_articles","titre=".sql_quote($titre))) {        
+          // article avec mm titre existe ? (test doublons sur l'url plutot que sr le titre)
+	        if (!$row = sql_fetsel("id_article","spip_articles","url=".sql_quote($url))) {        
             
             $texte = $a['descriptif'];
+            //traitement pour syntaxe SPIP
+            if($html2spip)
+            $texte = html2spip($texte);
             $lang  = $a['lang'];
             $url   = $a['url'];
             $tags =  $a['tags'];
@@ -187,11 +192,40 @@ function extraire_enclosures($tags) {
 	return $s;
 }
 
-/*
-UPDATE `spip_syndic_articles` SET statut="publie";
-TRUNCATE TABLE `spip_articles`;
-DELETE FROM `spip_auteurs_liens` WHERE id_auteur > 1;
-DELETE FROM `spip_auteurs` WHERE id_auteur > 1; 
-*/
+//passe le html en SPIP
+//cf memo.php
+function html2spip($lapage){
+	// itals SPIP
+	$lapage = preg_replace(",<(i|em)( [^>\r]*)?".">(.+)</\\1>,Uims", "{\\3}", $lapage);
+	
+	// gras SPIP (pas de {{ pour eviter tout conflit avec {)
+	$lapage = preg_replace(",<(b|h[4-6])( [^>]*)?".">(.+)</\\1>,Uims", "@@b@@\\3@@/b@@", $lapage);
+	$lapage = preg_replace(",<strong( [^>]*)?".">(.+)</strong>,Uims", "@@b@@\\2@@/b@@", $lapage);
+	
+	// entites
+	include_spip('inc/charsets');
+	$lapage = html2unicode($lapage, true); //secure?
+	
+	//??todo traite les liens avec le DOMPHP -> on les isole pour les mettre en enclosure, ne pas oublier le domaine devant?
+	
+	// liens SPIP
+	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=\"(.*?)\"[ \t\n\r][^<>]*\">(.*?)<\/a>,uims", "[\\2->\\1]", $lapage);
+	// intertitres SPIP
+	$lapage = preg_replace(",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims", "\r{{{ \\3 }}}\r", $lapage);
+	// tableaux SPIP
+	$lapage = preg_replace(",<tr( [^>]*)?".">,Uims", "<br />\r", $lapage);
+	$lapage = preg_replace(",<t[hd]( [^>]*)?".">,Uims", " | ", $lapage);
+
+	$lapage = textebrut($lapage);
+	
+	// Suite tableaux SPIP
+	$lapage = preg_replace(",\n[| ]+\n,", "", $lapage);
+	$lapage = preg_replace(",\n[|].+?[|].+?[|].+,", "\\0|\r", $lapage);
+	
+	// retablir les gras
+	$lapage = preg_replace(",@@b@@(.*)@@/b@@,Uims","{{\\1}}",$lapage);
+	
+	return $lapage;
+}
 
 ?>
