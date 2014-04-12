@@ -4,7 +4,7 @@
 	<slogan>On range nos medias!</slogan>
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
-	<version>0.6.4</version>
+	<version>0.6.5</version>
 	<etat>test</etat>
 	<categorie>outil</categorie>
 
@@ -36,7 +36,7 @@
 <onglet id='medias_rep_img' parent='medias_tabbord'>
 	<icone>prive/themes/spip/images/medias_rep_img-16.png</icone>
 	<titre>medias_nettoyage:onglet_titre_rep_img</titre>
-	<url>medias_rep_orphelins</url>
+	<url>medias_rep_img</url>
 </onglet>
 
 </plugin>
