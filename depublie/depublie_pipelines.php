@@ -140,28 +140,23 @@ function depublie_post_edition($flux){
 		and ($action = $flux['args']['action']) == 'instituer' // action instituer
 		and ($table = $flux['args']['table']) == table_objet_sql('article') // on institue un article
 		and ($statut_ancien = $flux['args']['statut_ancien']) != ($statut = $flux['data']['statut']) // le statut a été modifié
-		and $statut = $flux['data']['statut'] == 'publie' // uniquement en cas de publication
+		and $statut == 'publie' // uniquement en cas de publication
 		and $id_objet = $flux['args']['id_objet'] // on a bien un identifiant
 	) {
 	
 			$objet='article';
-			$id_secteur=$flux['data']['id_secteur'];
-			$id_rubrique=$flux['data']['id_rubrique'];
-			$id_secteur_choisi= array();
-			$id_rubrique_choisie=array();
+			$infos_article = sql_fetsel('id_rubrique, id_secteur','spip_articles','id_article='._q($id_objet));
+			$id_secteur = $infos_article['id_secteur'];
+			$id_rubrique = $infos_article['id_rubrique'];
 			$id_secteur_choisi= explode(',',lire_config('depublie/secteur_depubli'));
 			$id_rubrique_choisie= explode(',',lire_config('depublie/rubrique_depublie'));
-	
-			
-				//seulement si secteur ou rubrique sont dans la config et que l'article est publié
-				if(
-					$statut='publie'
-					AND (
-						in_array($id_secteur,$id_secteur_choisi)
-						OR in_array($id_rubrique,$id_rubrique_choisie)
-					)
-				){
-				
+
+			//seulement si secteur ou rubrique sont dans la config
+			if(
+				in_array($id_secteur,$id_secteur_choisi)
+				OR in_array($id_rubrique,$id_rubrique_choisie)
+			){
+
 				//on récupère la configuation de la durée de publication
 				$periode= lire_config('depublie/publication_periode');
 				$duree= lire_config('depublie/publication_duree');
