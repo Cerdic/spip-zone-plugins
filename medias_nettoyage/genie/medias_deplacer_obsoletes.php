@@ -10,8 +10,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return bool
  */
 function genie_medias_deplacer_obsoletes_dist ($t) {
+	include_spip('medias_nettoyage_fonctions');
 
-	medias_deplacer_rep_obsoletes();
+	if (function_exists('medias_deplacer_rep_obsoletes')) {
+		medias_deplacer_rep_obsoletes();
+	}
+
 
 	return 1;
 }
