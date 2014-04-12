@@ -125,13 +125,13 @@ function boussole_cacher_liste($boussoles) {
 				AND ($tableau['name'] == 'boussole')) {
 					$cache .= inserer_balise('ouvrante', $tableau['name'], $tableau['attributes'], 1);
 					if (isset($tableau['children']['nom'])) {
-						$cache .= inserer_balise('ouvrante', 'nom', '', 2)
-								. inserer_balise('ouvrante', 'multi', '', 3)
+						$cache .= inserer_balise('ouvrante', 'nom', array(), 2)
+								. inserer_balise('ouvrante', 'multi', array(), 3)
 								. indenter(3) . $tableau['children']['nom'][0]['children']['multi'][0]['text'] . "\n"
-								. inserer_balise('fermante', 'multi', '', 3)
-								. inserer_balise('fermante', 'nom', '', 2);
+								. inserer_balise('fermante', 'multi', array(), 3)
+								. inserer_balise('fermante', 'nom', array(), 2);
 					}
-					$cache .= inserer_balise('fermante', $tableau['name'], '', 1);
+					$cache .= inserer_balise('fermante', $tableau['name'], array(), 1);
 				}
 			}
 		}
@@ -143,7 +143,7 @@ function boussole_cacher_liste($boussoles) {
 
 			$cache = inserer_balise('ouvrante', 'boussoles', array('serveur' => $nom_serveur, 'sha' => _BOUSSOLE_PATTERN_SHA))
 				   . $cache
-				   . inserer_balise('fermante', 'boussoles', '');
+				   . inserer_balise('fermante', 'boussoles', array());
 			$sha = sha1($cache);
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
@@ -259,10 +259,10 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 						$cache .= inserer_balise('ouvrante', $_site['name'], $att_site, 2);
 						// Insertion des balises multi pour le nom, le slogan et le descriptif du site
 						$cache .= inserer_traductions($alias_boussole, $_site['name'], $alias_site, 3);
-						$cache .= inserer_balise('fermante', $_site['name'], '', 2);
+						$cache .= inserer_balise('fermante', $_site['name'], array(), 2);
 					}
 				}
-				$cache .= inserer_balise('fermante', $_groupe['name'], '', 1);
+				$cache .= inserer_balise('fermante', $_groupe['name'], array(), 1);
 			}
 		}
 
@@ -446,7 +446,6 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
  * @return string
  */
 function inserer_balise($type='ouvrante', $balise, $attributs=array(), $indentation=0) {
-	$texte = '';
 
 	// Ouverture de la balise
 	$texte = indenter($indentation) . '<' . ($type == 'fermante' ? '/' : '') . $balise;
@@ -510,23 +509,23 @@ function inserer_traductions($alias, $type_objet, $objet, $indentation=0) {
 
 			// Finaliser la construction des balises multi
 			if ($nom)
-				$multis .= inserer_balise('ouvrante', 'nom', '', $indentation)
-						 . inserer_balise('ouvrante', 'multi', '', $indentation+1)
+				$multis .= inserer_balise('ouvrante', 'nom', array(), $indentation)
+						 . inserer_balise('ouvrante', 'multi', array(), $indentation+1)
 						 . $nom . "\n"
-						 . inserer_balise('fermante', 'multi', '', $indentation+1)
-						 . inserer_balise('fermante', 'nom', '', $indentation);
+						 . inserer_balise('fermante', 'multi', array(), $indentation+1)
+						 . inserer_balise('fermante', 'nom', array(), $indentation);
 			if ($slogan)
-				$multis .= inserer_balise('ouvrante', 'slogan', '', $indentation)
-						 . inserer_balise('ouvrante', 'multi', '', $indentation+1)
+				$multis .= inserer_balise('ouvrante', 'slogan', array(), $indentation)
+						 . inserer_balise('ouvrante', 'multi', array(), $indentation+1)
 						 . $slogan . "\n"
-						 . inserer_balise('fermante', 'multi', '', $indentation+1)
-						 . inserer_balise('fermante', 'slogan', '', $indentation);
+						 . inserer_balise('fermante', 'multi', array(), $indentation+1)
+						 . inserer_balise('fermante', 'slogan', array(), $indentation);
 			if ($description)
-				$multis .= inserer_balise('ouvrante', 'description', '', $indentation)
-						 . inserer_balise('ouvrante', 'multi', '', $indentation+1)
+				$multis .= inserer_balise('ouvrante', 'description', array(), $indentation)
+						 . inserer_balise('ouvrante', 'multi', array(), $indentation+1)
 						 . $description . "\n"
-						 . inserer_balise('fermante', 'multi', '', $indentation+1)
-						 . inserer_balise('fermante', 'description', '', $indentation);
+						 . inserer_balise('fermante', 'multi', array(), $indentation+1)
+						 . inserer_balise('fermante', 'description', array(), $indentation);
 		}
 	}
 

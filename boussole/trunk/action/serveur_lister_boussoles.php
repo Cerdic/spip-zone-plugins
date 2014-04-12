@@ -60,7 +60,7 @@ function action_serveur_lister_boussoles_dist(){
 			$fichier_liste = _DIR_VAR . "cache-boussoles/boussoles.xml";
 			if (!file_exists($fichier_liste)) {
 				$erreur = 'cache_liste_indisponible';
-				spip_log("Le fichier cache de la liste des boussoles n'est pas disponible (alias = $alias)", 'boussole' . _LOG_ERREUR);
+				spip_log("Le fichier cache de la liste des boussoles n'est pas disponible", 'boussole' . _LOG_ERREUR);
 			}
 			else {
 				spip_log("Liste des boussoles disponibles fournie", 'boussole' . _LOG_INFO);
