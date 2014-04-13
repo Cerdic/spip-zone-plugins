@@ -42,6 +42,8 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 					}
 					$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteur_uniques;
 				}
+				if(_request('diogene_gerer_auteurs_supprimer'))
+					$flux['args']['contexte']['diogene_gerer_auteurs_supprimer'] = _request('diogene_gerer_auteurs_supprimer');
 				$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 			}
 		}else{
@@ -70,11 +72,10 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 	$pipeline = pipeline('diogene_objets');
 	if(in_array($type,array_keys($pipeline)) && isset($pipeline[$type]['champs_sup']['auteurs'])){
 		include_spip('inc/autoriser');
-		if(!autoriser('associerauteurs',$type,$id_objet)){
+		if(!autoriser('associerauteurs',$type,$id_objet))
 			return $flux;
-		}
 
-		if(_request('diogene_gerer_id_auteurs') OR is_array(_request('diogene_gerer_auteurs_remove'))){
+		if(_request('diogene_gerer_id_auteurs') OR is_array(_request('diogene_gerer_auteurs_supprimer'))){
 			include_spip('inc/invalideur');
 			include_spip('action/editer_auteur');
 			if(_request('diogene_gerer_id_auteurs')){
@@ -84,11 +85,11 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 				$ajout = auteur_associer(_request('diogene_gerer_id_auteurs'),array($type=>$id_objet));
 				suivre_invalideur("id='id_auteur/"._request('diogene_gerer_id_auteurs')."'",true);
 			}
-			if(is_array(_request('diogene_gerer_auteurs_remove'))){
+			if(is_array(_request('diogene_gerer_auteurs_supprimer'))){
 				/**
 				 * Suppression des auteurs si demandée
 				 */
-				foreach(_request('diogene_gerer_auteurs_remove') as $id_auteur){
+				foreach(_request('diogene_gerer_auteurs_supprimer') as $id_auteur){
 					if(($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')){
 						/**
 						 * On ne peut pas s'enlever soit même des auteurs si l'on n'est pas admin
