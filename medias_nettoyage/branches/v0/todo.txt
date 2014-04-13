@@ -1,5 +1,4 @@
 - compatibilité SPIP 3.0
-- étendre à d'autres objets le listing des logos. En SPIP 3.0, ok, il y a l'API pour lister les objets. Mais quid en SPIP 2.1 ?
 
 Observations :
 - regarder si on ne pourrait pas utiliser ecrire_fichier(), lire_fichier(), sous_repertoire()… Est-ce vraiment utile ? Car ce plugin ne fait que déplacer, donc ne devrait pas prendre plus de place sur le disque normalement.
