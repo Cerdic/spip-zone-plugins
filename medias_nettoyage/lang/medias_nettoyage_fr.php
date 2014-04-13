@@ -8,7 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_document_orphelin' => 'Il n\'y a aucun document orphelin',
 
 	// D
-	'des_repertoires' => ' répertoires',
+	'des_documents' => '@nb@ documents',
+	'des_repertoires' => '@nb@ répertoires',
 
 	// I
 	'info_nom' => 'Nom',
@@ -34,13 +35,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_titre_tabbord' => 'Tableau de bord',
 
 	// T
-	'titre_page_medias_rep_orphelins' => 'Documents orphelins',
+	'titre_page_medias_rep_orphelins' => 'Documents dans le répertoire "orphelins"',
 	'titre_page_medias_rep_img' => 'Liste des répertoires dans IMG/',
 	'titre_page_medias_tabbord' => 'Tableau de bord - Documents',
 	'titre_tableau_documents_orphelins' => 'Documents orphelins',
 	'titre_tableau_documents_repertoire_orphelins' => 'Contenu dans IMG/orphelins',
 
 	// U
-	'un_repertoire' => ' répertoire',
+	'un_document' => '@nb@ document',
+	'un_repertoire' => '@nb@ répertoire',
 );
 ?>

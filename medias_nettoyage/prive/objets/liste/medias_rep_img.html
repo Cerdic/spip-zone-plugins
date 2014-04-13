@@ -2,7 +2,7 @@
 <div class="liste-objets medias repertoires">
 [<h3>(#ENV{titre})</h3>]
 	<table class="spip liste">
-	[<caption>(#GRAND_TOTAL|singulier_ou_pluriel{medias_nettoyage:un_repertoire,medias_nettoyage:des_repertoires})]</caption>
+	[<caption>(#GRAND_TOTAL|singulier_ou_pluriel{medias_nettoyage:un_repertoire,medias_nettoyage:des_repertoires})</caption>]
 		<thead>
 			<tr class="first_row">
 				<th class="nom"><:medias_nettoyage:info_nom:> </th>
@@ -20,11 +20,6 @@
 	</table>
 	[<div class="pagination">(#PAGINATION{#ENV{pagination,prive}})</div>]
 </div>
-<style type="text/css" media="screen">
-	.liste-objets.medias table {width: 100%; background-color: white; }
-	.liste-objets.medias table tr {}
-	.liste-objets.medias table tr td { padding: 3px 5px; border-bottom: 1px solid #cccccc; }
-</style>
 </B_repertoires>[
 <div class="liste-objets medias repertoires caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]

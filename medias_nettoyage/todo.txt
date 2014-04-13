@@ -1,4 +1,3 @@
-- réparer les liens entre docs et IMG où les fichiers ne sont pas rangés dans un répertoire d'extensions quand les documents ne sont pas distants (rappel : IMG/vignettes pour le mode=="vignette"). cf. http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
 - compatibilité SPIP 3.0
 - étendre à d'autres objets le listing des logos. En SPIP 3.0, ok, il y a l'API pour lister les objets. Mais quid en SPIP 2.1 ?
 

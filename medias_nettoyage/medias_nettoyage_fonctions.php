@@ -36,7 +36,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
 
 	foreach ($extensions as $extension) {
 		if(!is_dir($repertoire_img . $extension)) {
-			mkdir($repertoire_img . $extension, 0755);
+			@mkdir($repertoire_img . $extension, 0755);
 		}
 	}
 	return;
@@ -51,7 +51,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
  */
 function medias_creer_repertoires_orphelins () {
 	if (!is_dir(_MEDIAS_NETTOYAGE_REP_ORPHELINS)) {
-		mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,0755);
+		@mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,0755);
 	}
 	return;
 }
@@ -91,6 +91,7 @@ function medias_deplacer_rep_obsoletes () {
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
 	$repertoires_obsoletes 	= array();
 	$message_log 			= array();
+	$pattern_img 			= "/" . preg_replace("/\//", "\/", $repertoire_img) . "/";
 
 	// On crée le répertoire IMG/orphelins
 	medias_creer_repertoires_orphelins();
@@ -110,8 +111,8 @@ function medias_deplacer_rep_obsoletes () {
 
 	if (count($repertoires_obsoletes) > 0) {
 		foreach ($repertoires_obsoletes as $repertoire_source) {
-			$repertoire_destination = preg_replace("/..\/IMG\//", $repertoire_orphelins, $repertoire_source);
-			rename($repertoire_source, $repertoire_destination);
+			$repertoire_destination = preg_replace($pattern_img, $repertoire_orphelins, $repertoire_source);
+			@rename($repertoire_source, $repertoire_destination);
 			$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Déplacement de '. $repertoire_source . ' vers ' . $repertoire_destination;
 		}
 	} else {
@@ -203,9 +204,10 @@ function medias_lister_documents_bdd_orphelins(){
 function medias_lister_documents_bdd_orphelins_taille(){
 	$documents_orphelins 	= medias_lister_documents_bdd_orphelins();
 	$taille 				= 0;
+	$pattern_img 			= "/" . preg_replace("/\//", "\/", _DIR_IMG) . "/";
 
 	if (count($documents_orphelins) > 0) {
-		$documents_bdd = sql_allfetsel('fichier,taille','spip_documents', "fichier IN ('" . join("','",preg_replace("/..\/IMG\//", '', $documents_orphelins)) . "')");
+		$documents_bdd = sql_allfetsel('fichier,taille','spip_documents', "fichier IN ('" . join("','",preg_replace($pattern_img, '', $documents_orphelins)) . "')");
 		foreach ($documents_bdd as $document_bdd) {
 				if (!file_exists(get_spip_doc($document_bdd['fichier']))) {
 					$taille = $taille + (intval($document_bdd['taille'])/1000); // On type la taille issue la bdd en integer puis on divise par 1000 pour éviter la limite de l'integer php.
@@ -347,20 +349,32 @@ function medias_lister_documents_repertoire_complet_taille ($repertoire_img = _D
  * @return array
  */
 function medias_lister_logos_fichiers($mode = null){
+	include_spip('base/connect_sql');
+
+	global $formats_logos;
 	$repertoire_img 	= _DIR_IMG ;
 	$docs_fichiers_on 	= array();
 	$docs_fichiers_off 	= array();
 	$logos_objet 		= array('art','rub','breve','site','mot','aut');
 
-	// On va chercher dans IMG/*.*
+	// On va chercher toutes les tables connues de SPIP
+	foreach (sql_alltable() as $table) {
+		// On cherche son type d'objet et on l'ajoute aux logos
+		$logos_objet[] = objet_type($table);
+	}
+	// On enlève les doublons
+	$logos_objet = array_unique($logos_objet);
+	sort($logos_objet);
+
+	// On va chercher dans IMG/*(on|off)*.*
 	$fichiers = glob($repertoire_img . "{" . join(",",$logos_objet) ."}{on,off}*.*",GLOB_BRACE); // la regex de GLOB_BRACE est très basique...
 
 	foreach ($fichiers as $fichier) {
 		// ... Donc on fait une regex plus poussée avec un preg_match
-		if (preg_match("/(" . join("|",$logos_objet) .")on\d+.(jpg|gif|png|bmp)$/", $fichier)) {
+		if (preg_match("/(" . join("|",$logos_objet) .")on\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
 			$docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
 		}
-		if (preg_match("/(" . join("|",$logos_objet) .")off\d+.(jpg|gif|png|bmp)$/", $fichier)) {
+		if (preg_match("/(" . join("|",$logos_objet) .")off\d+.(" . join("|",$formats_logos) .")$/", $fichier)) {
 			$docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
 		}
 	}
@@ -491,6 +505,8 @@ function medias_deplacer_documents_repertoire_orphelins () {
 	$fichiers_deplaces 		= array();
 	$message_log 			= array();
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
+	$pattern_img 			= "/" . preg_replace("/\//", "\/", _DIR_IMG) . "/";
+
 	// On crée le répertoire IMG/orphelins s'il n'existe pas
 	medias_creer_repertoires_orphelins();
 	// On crée les répertoires d'extensions dans IMG/orphelins
@@ -499,7 +515,7 @@ function medias_deplacer_documents_repertoire_orphelins () {
 	// Si on n'a pas de fichiers orphelins, on ne lance pas la procédure.
 	if (count($fichiers_orphelins) > 0) {
 		foreach ($fichiers_orphelins as $fichier) {
-			$destination = preg_replace("/" . preg_replace("/\//", "\/", _DIR_IMG) . "/", $repertoire_orphelins, $fichier);
+			$destination = preg_replace($pattern_img, $repertoire_orphelins, $fichier);
 			$chemin = explode('/', $destination);
 			$repertoires = '';
 			$profondeur = count($chemin) - 1;
@@ -510,11 +526,11 @@ function medias_deplacer_documents_repertoire_orphelins () {
 				$i++;
 			}
 			if (!is_dir($repertoires)) {
-				mkdir($repertoires,0755);
+				@mkdir($repertoires,0755);
 				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le répertoire ' . $repertoires . ' a été créé.';
 			}
 			// Hop, on déplace notre fichier vers IMG/orphelins
-			rename($fichier, $destination);
+			@rename($fichier, $destination);
 			$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le fichier ' . $fichier . ' a été déplacé vers ' . $destination .'.';
 			// On construit un tableau dans le cas où qqn voudrait utiliser cette donnée.
 			// Pour le moment inutilisé.
@@ -529,6 +545,64 @@ function medias_deplacer_documents_repertoire_orphelins () {
 	 * Et là, on marque bien la fin du script dans les logs.
 	 */
 	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement.',"medias_orphelins");
+
+	return true;
+}
+
+/**
+ * Réparer les documents.
+ * Il arrive parfois que suite à un problème de droits, les documents ne soient plus rangés correctement dans IMG/ext/fichier.ext
+ * mais dans un faux sous répertoire IMG/ext_fichier.ext
+ * Le présent script va recopier les fichiers mal placés, et changer leur référence dans la table spip_documents ; 
+ * il donnera ensuite la liste des fichiers recopiés et des erreurs recontrées dans un fichier de log.
+ *
+ * Script repris de ce fichier : http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
+ *
+ * @uses medias_lister_logos_fichiers()
+ * 
+ * @return bool
+ */
+function medias_reparer_documents_fichiers () {
+	/**
+	 * On crée un log vraiment au début du script.
+	 * Ainsi, on sait déjà en regardant les logs
+	 * si le script est lancé ou pas.
+	 */
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de réparation des documents.',"medias_orphelins");
+
+	$repertoire_img 	= _DIR_IMG ;
+	$docs_fichiers 		= array();
+	$pattern_img 		= "/" . preg_replace("/\//", "\/", $repertoire_img) . "/";
+	$message_log 		= array();
+
+	// On va chercher dans IMG/*.*
+	$fichiers = glob($repertoire_img . "*.*");
+	foreach ($fichiers as $fichier) {
+		$docs_fichiers[] = $fichier;
+	}
+	$docs_fichiers = array_filter(array_diff($docs_fichiers, medias_lister_logos_fichiers())); // a voir si on n'a pas de logos ce que ça donne comme ça…
+	$docs_fichiers = preg_replace($pattern_img, '', $docs_fichiers);
+
+	if (count($docs_fichiers) > 0) {
+		$docs_bdd = sql_allfetsel('id_document,fichier', 'spip_documents', "fichier IN ('" . join("','", $docs_fichiers) . "')");
+		foreach ($docs_bdd as $document) {
+			$destination = preg_replace(',^([a-z0-3]+)_([^/]+\.(\1))$,i', '$1/$2', $document['fichier']);
+			if ($document['fichier'] != $destination AND rename($repertoire_img . $document['fichier'],$repertoire_img . $destination)) {
+				sql_updateq('spip_documents', array('fichier' => $destination), 'id_document=' . $document['id_document']);
+				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le fichier ' . $repertoire_img . $document['fichier'] . ' a été déplacé vers ' . $repertoire_img . $destination .'.';
+			} else {
+				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le fichier ' . $repertoire_img . $document['fichier'] . ' n\'a pu être déplacé.';
+			}
+		}
+	} else {
+		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de documents à réparer.';
+	}
+
+	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
+	/**
+	 * Et là, on marque bien la fin du script dans les logs.
+	 */
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de réparation des documents.',"medias_orphelins");
 
 	return true;
 }
