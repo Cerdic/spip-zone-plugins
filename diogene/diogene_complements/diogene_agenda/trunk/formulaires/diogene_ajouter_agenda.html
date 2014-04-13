@@ -1,9 +1,9 @@
-<li class="agenda_fieldset agenda">
+<li class="agenda_fieldset agenda fieldset">
 	<fieldset>
 		[<h3 class="legend">(#ENV{agenda_legende,<:diogene_agenda:form_legend_agenda:>})</h3>]
 		[<input type="hidden" name="id_evenement" value="(#ENV{id_evenement})" />]
 		<ul>
-			<li class='editer_date fieldset'>
+			<li class='editer editer_date fieldset'>
 				<ul>
 					<li class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
 						<label for="horaire"><:agenda:evenement_horaire:></label>[
@@ -25,7 +25,6 @@
 						/></span><input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
 					</li>
 				</ul>
-				</fieldset>
 			</li>
 			[(#VAL{repetitions}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
 			<li class="editer editer_repetitions[ (#ENV**{erreurs}|table_valeur{repetitions}|oui)erreur]">
