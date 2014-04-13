@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function formulaires_restaurer_plugin_charger_dist() {
-	
+
 	// securite a cause du fichier PHP importe
 	// il faudrait un export dans un autre format que PHP !!!
 	if (!autoriser('webmestre')) { return false; }
@@ -28,6 +28,8 @@ function formulaires_restaurer_plugin_charger_dist() {
 			foreach ($fichiers as $f) {
 				$sauvegardes[ (string)$f] = str_replace('../', '', (string)$f);
 			}
+
+			asort($sauvegardes);
 		}
 	}
 
@@ -54,7 +56,7 @@ function formulaires_restaurer_plugin_verifier_dist(){
 	} else {
 		// pas de fichier envoye
 		$erreurs['sauvegarde'] = _T('fabrique:erreur_envoi_fichier');
-		
+
 	}
 
 	if (count($erreurs)) {
@@ -77,7 +79,7 @@ function formulaires_restaurer_plugin_traiter_dist(){
 		deplacer_fichier_upload($s['tmp_name'], $dest);
 	}
 	$message = '';
-	
+
 	include_once($dest);
 	if ($data and count($data)) {
 		$data = fabrique_migration($data);
@@ -150,7 +152,7 @@ function fabrique_restaurer_image($nom_de_base, $l, $taille = 0) {
 
 
 /**
- * Outil de migration de données de sauvegardes 
+ * Outil de migration de données de sauvegardes
  *
 **/
 

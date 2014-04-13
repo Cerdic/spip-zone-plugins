@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     Environnement du formulaire
 **/
 function formulaires_restaurer_plugin_charger_dist() {
-	
+
 	// securite a cause du fichier PHP importe
 	// il faudrait un export dans un autre format que PHP !!!
 	if (!autoriser('webmestre')) { return false; }
@@ -40,6 +40,8 @@ function formulaires_restaurer_plugin_charger_dist() {
 			foreach ($fichiers as $f) {
 				$sauvegardes[ (string)$f] = str_replace('../', '', (string)$f);
 			}
+
+			asort($sauvegardes);
 		}
 	}
 
@@ -71,7 +73,7 @@ function formulaires_restaurer_plugin_verifier_dist(){
 	} else {
 		// pas de fichier envoye
 		$erreurs['sauvegarde'] = _T('fabrique:erreur_envoi_fichier');
-		
+
 	}
 
 	if (count($erreurs)) {
@@ -99,7 +101,7 @@ function formulaires_restaurer_plugin_traiter_dist(){
 		deplacer_fichier_upload($s['tmp_name'], $dest);
 	}
 	$message = '';
-	
+
 	include_once($dest);
 	if ($data and count($data)) {
 		$data = fabrique_migration($data);
@@ -146,7 +148,7 @@ function formulaires_restaurer_plugin_traiter_dist(){
  * Restaurer une description de plusieurs images
  *
  * @uses fabrique_restaurer_image()
- * 
+ *
  * @param string $nom_de_base
  *     Nom de base de l'image à restaurer
  * @param array $images
@@ -170,7 +172,7 @@ function fabrique_restaurer_images($nom_de_base, $images) {
 
 /**
  * Enregistrer dans local/ l'image reçue
- * 
+ *
  * @param string $nom_de_base
  *     Nom de base de l'image à enregistrer.
  * @param array $l
@@ -227,7 +229,7 @@ function fabrique_migration($data) {
  * Migration v2
  *
  * Passage de certains fichiers dans un tableau 'fichiers'
- * 
+ *
  * @param  array $data Données à migrer
  * @return array       Données migrées
  */
@@ -248,7 +250,7 @@ function fabrique_migration_v2($data) {
  * Migration v3
  *
  * Déplacer les logos dans une clé `images` spécifique
- * 
+ *
  * @param  array $data Données à migrer
  * @return array       Données migrées
  */
@@ -293,7 +295,7 @@ function fabrique_migration_v3($data) {
  * Migration v3
  *
  * Renommer le fabricant en fabrique
- * 
+ *
  * @param  array $data Données à migrer
  * @return array       Données migrées
  */
@@ -307,7 +309,7 @@ function fabrique_migration_v4($data) {
  * Migration v5
  *
  * Échafaudage n'a qu'un F !
- * 
+ *
  * @param  array $data Données à migrer
  * @return array       Données migrées
  */
