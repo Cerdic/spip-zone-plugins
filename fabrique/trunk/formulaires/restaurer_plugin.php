@@ -41,13 +41,29 @@ function formulaires_restaurer_plugin_charger_dist() {
 				$sauvegardes[ (string)$f] = str_replace('../', '', (string)$f);
 			}
 
-			asort($sauvegardes);
 		}
 	}
 
+	// séparer les .backup (vieilles sauvegardes) des sauvegardes
+	// dans les plugins générés (vraisemblablement la plus récente)
+	asort($sauvegardes);
+	$sauvegardes_plugins = array();
+	$sauvegardes_backup  = array();
+	foreach ($sauvegardes as $c => $v) {
+		if (false === strpos($v, '.backup/')) {
+			$sauvegardes_plugins[$c] = $v;
+		} else {
+			$sauvegardes_backup[$c] = $v;
+		}
+	}
+	unset($sauvegardes);
+
 	$contexte = array(
 		'sauvegarde' => '',
-		'liste_fichiers' => $sauvegardes,
+		'liste_fichiers' => array(
+			'Sauvegarde intégrée au plugin (la plus récente donc)' => $sauvegardes_plugins,
+			'Sauvegardes issues de créations antérieures' => $sauvegardes_backup,
+		),
 	);
 	return $contexte;
 }
