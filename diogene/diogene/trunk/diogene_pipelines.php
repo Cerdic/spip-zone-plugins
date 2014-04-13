@@ -158,8 +158,9 @@ function diogene_editer_contenu_objet($flux){
 			/**
 			 * On remplace le selecteur de rubrique par le notre dans le public
 			 * On fait attention au fait qu'il y ait ou pas polyhiérarchie
+			 * On laisse le séleceteur normal dans le prive pour pouvoir changer l'objet de place
 			 */
-			if (preg_match(",<li [^>]*class=[\"']editer editer_parent,Uims",$flux['data'],$regs) && (!preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs2) OR ($args['options_complements']['polyhier_desactiver'] == 'on'))){
+			if (!test_espace_prive() && preg_match(",<li [^>]*class=[\"']editer editer_parent,Uims",$flux['data'],$regs) && (!preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs2) OR ($args['options_complements']['polyhier_desactiver'] == 'on'))){
 				$contexte_selecteur = array(
 					'id_rubrique_limite'=>$id_secteur,
 					'type' => $type,
@@ -194,7 +195,7 @@ function diogene_editer_contenu_objet($flux){
 					else
 						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
 				}
-			}else if(($type != 'page') && preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs)){
+			}else if(!test_espace_prive() && ($type != 'page') && preg_match(",<li [^>]*class=[\"']editer editer_parents,Uims",$flux['data'],$regs)){
 				$contexte = $args['contexte'];
 				$contexte['id_rubrique'] = $diogene['id_secteur'];
 				$contexte['limite_branche'] = $diogene['id_secteur'];
