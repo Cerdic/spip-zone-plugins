@@ -193,15 +193,13 @@ function boussole_lister_caches() {
 			$cache['manuelle'] = false;
 
 			lire_fichier($_fichier, $contenu);
-			$convertir = charger_fonction('simplexml_to_array', 'inc');
-			$converti = $convertir(simplexml_load_string($contenu), false);
-			$tableau = $converti['root'];
+			$convertir = charger_fonction('xmldecode', 'inc');
+			$tableau = $convertir($contenu);
 			if ($cache['nom'] == 'boussoles.xml') {
 				// C'est le cache qui liste les boussoles hébergées
 				$cache['description'] = _T('boussole:info_cache_boussoles');
-				if  (isset($tableau['name'])
-				AND ($tableau['name'] == 'boussoles')) {
-					$cache['sha'] = $tableau['attributes']['sha'];
+				if (isset($tableau['boussoles'])) {
+					$cache['sha'] = $tableau['boussoles']['@attributes']['sha'];
 				}
 			}
 			else {
@@ -209,10 +207,9 @@ function boussole_lister_caches() {
 				$alias_boussole = str_replace('boussole-', '', basename($_fichier, '.xml'));
 				$cache['alias'] = $alias_boussole;
 				$cache['description'] = _T('boussole:info_cache_boussole', array('boussole' => $alias_boussole));
-				if  (isset($tableau['name'])
-				AND ($tableau['name'] == 'boussole')) {
-					$cache['sha'] = $tableau['attributes']['sha'];
-					$cache['nom'] .= " ({$tableau['attributes']['version']})";
+				if  (isset($tableau['boussole'])) {
+					$cache['sha'] = $tableau['boussole']['@attributes']['sha'];
+					$cache['nom'] .= " ({$tableau['boussole']['@attributes']['version']})";
 				}
 				if (isset($boussoles[$alias_boussole]['prefixe'])
 				AND ($boussoles[$alias_boussole]['prefixe'])) {
@@ -227,14 +224,15 @@ function boussole_lister_caches() {
 					$cache['manuelle'] = true;
 					$cache['plugin'] = _T('boussole:info_boussole_manuelle');
 
-					// Ajout de la version dans le fichier XML source de la boussole
+					// Ajout de la version contenue dans le fichier XML source de la boussole pour
+					// vérifier que le cache est bien à jour avec
 					$fichier_source = find_in_path("boussole_traduite-${alias_boussole}.xml");
-					lire_fichier($fichier_source, $contenu_source);
-					$tableau_source = $convertir(simplexml_load_string($contenu_source), false);
-					$tableau_source = $tableau_source['root'];
-					if  (isset($tableau_source['name'])
-					AND ($tableau_source['name'] == 'boussole')) {
-						$cache['plugin'] .= " ({$tableau_source['attributes']['version']})";
+					lire_fichier($fichier_source, $contenu);
+					$tableau_source = $convertir($contenu);
+					if  (isset($tableau_source['boussole'])) {
+						$cache['plugin'] .= isset($tableau_source['boussole']['@attributes']['version'])
+										  ? " ({$tableau_source['boussole']['@attributes']['version']})"
+										  : "";
 					}
 				}
 			}
