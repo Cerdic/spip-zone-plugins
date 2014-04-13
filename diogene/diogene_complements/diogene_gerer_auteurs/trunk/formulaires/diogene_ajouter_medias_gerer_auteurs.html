@@ -18,7 +18,7 @@
 				<BOUCLE_auteur_remove(POUR){tableau #ENV**{diogene_gerer_auteurs_remove}}>
 					<BOUCLE_si_autoriser(CONDITION){si #SESSION{id_auteur}|=={#CLE}|et{#AUTORISER{configurer}|non}|non}>
 					<div class="choix">
-						<input type="checkbox" name="diogene_gerer_auteurs_remove[]" class="checkbox" id='champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE' value='#_auteur_remove:CLE' />
+						<input type="checkbox" name="diogene_gerer_auteurs_remove[]" class="checkbox" id='champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE' value='#_auteur_remove:CLE'[(#_auteur_remove:CLE|in_array{#ENV{diogene_gerer_auteurs_remove,#ARRAY}|array_keys}|oui)checked="checked"] />
 						<label for="champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE">[(#_auteur_remove:VALEUR|typo)]</label>
 					</div>
 					</BOUCLE_si_autoriser>
