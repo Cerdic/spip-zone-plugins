@@ -13,7 +13,7 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		$objet = $flux['args']['type'];
 		$id_table_objet = id_table_objet($flux['args']['type']);
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
-		
+
 		$flux['args']['contexte']['agenda_caches'] = array();
 
 		if(is_array(unserialize($flux['args']['options_complements']['agenda_caches'])))
@@ -46,9 +46,11 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		if(isset($flux['args']['options_complements']['agenda_legende']) && strlen($flux['args']['options_complements']['agenda_legende']) > 0){
 			$evenement['agenda_legende'] = $flux['args']['options_complements']['agenda_legende'];
 		}
-		// dispatcher date et heure
-		list($evenement["date_debut"],$evenement["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_debut"])));
-		list($evenement["date_fin"],$evenement["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_fin"])));
+		// dispatcher date et heure s'ils existent
+		if($evenement["date_debut"])
+			list($evenement["date_debut"],$evenement["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_debut"])));
+		if($evenement["date_fin"])
+			list($evenement["date_fin"],$evenement["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_fin"])));
 		// traiter specifiquement l'horaire qui est une checkbox
 		if (_request('date_debut') AND !_request('horaire'))
 			$evenement['horaire'] = 'oui';
