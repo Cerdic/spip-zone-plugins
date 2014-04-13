@@ -1,0 +1,68 @@
+<div class="liste-objets medias">
+[<h3>(#ENV{titre})</h3>]
+	<table class="spip liste">
+		<thead>
+			<tr class="first_row">
+				<th class="nom"> </th>
+				<th class="nombre secondaire"><:medias_nettoyage:info_nombre:></th>
+				<th class="taille secondaire"><:medias_nettoyage:info_taille:></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="caption">
+				<th colspan="3"><:medias_nettoyage:info_titre_repertoire_img:></th>
+			</tr>
+			<tr class="row_odd">
+				<td class="nom"><:medias_nettoyage:info_nombre_documents_repertoire_complet:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_documents_repertoire_complet()}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_documents_repertoire_complet_taille()}|taille_en_octets)]</td>
+			</tr>
+			<tr class="row_even">
+				<td class="nom"><:medias_nettoyage:info_nombre_documents_repertoire:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_documents_repertoire()}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_documents_repertoire_taille()}|taille_en_octets)]</td>
+			</tr>
+			<tr class="row_odd">
+				<td class="nom"><:medias_nettoyage:info_nombre_documents_repertoire_orphelins:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_documents_repertoire_orphelins()}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_documents_repertoire_orphelins_taille()}|taille_en_octets)]</td>
+			</tr>
+			<tr class="caption">
+				<th colspan="3"><:medias_nettoyage:info_titre_bdd:></th>
+			</tr>
+			<tr class="row_even">
+				<td class="nom"><:medias_nettoyage:info_nombre_documents_bdd_complet:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_documents_bdd_complet_compteur()})]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_documents_bdd_complet_taille()}|taille_en_octets)]</td>
+			</tr>
+			<tr class="row_odd">
+				<td class="nom"><:medias_nettoyage:info_nombre_documents_bdd:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_documents_bdd()}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_documents_bdd_taille()}|taille_en_octets)]</td>
+			</tr>
+			<tr class="row_even">
+				<td class="nom"><:medias_nettoyage:info_nombre_documents_bdd_orphelins:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_documents_bdd_orphelins()}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_documents_bdd_orphelins_taille()}|taille_en_octets)]</td>
+			</tr>
+			<tr class="caption">
+				<th colspan="3"><:medias_nettoyage:info_titre_logos_img:></th>
+			</tr>
+			<tr class="row_odd">
+				<td class="nom"><:medias_nettoyage:info_nombre_logos_fichiers:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_logos_fichiers()}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_logos_fichiers_taille()}|taille_en_octets)]</td>
+			</tr>
+			<tr class="row_even">
+				<td class="nom"><:medias_nettoyage:info_nombre_logos_fichiers_on:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_logos_fichiers('on')}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_logos_fichiers_taille('on')}|taille_en_octets)]</td>
+			</tr>
+			<tr class="row_odd">
+				<td class="nom"><:medias_nettoyage:info_nombre_logos_fichiers_off:></td>
+				<td class="nombre secondaire">[(#EVAL{medias_lister_logos_fichiers('off')}|count)]</td>
+				<td class="taille secondaire">[(#EVAL{medias_lister_logos_fichiers_taille('off')}|taille_en_octets)]</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
