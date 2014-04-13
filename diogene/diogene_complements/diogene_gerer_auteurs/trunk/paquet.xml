@@ -11,7 +11,7 @@
 
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
 
-	<copyright>2010-2013</copyright>
+	<copyright>2010-2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -24,4 +24,5 @@
 	<necessite nom="diogene" compatibilite="[1.0.0;[" />
 	<necessite nom="SelecteurGenerique" compatibilite="[0.8.2;[" />
 	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<utilise nom="chosen" />
 </paquet>

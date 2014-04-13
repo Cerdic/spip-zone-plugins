@@ -10,10 +10,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return array $flux le contexte modifié passé aux suivants
  */
 function diogene_gerer_auteurs_diogene_avant_formulaire($flux){
-    if(isset($flux['args']['id']) && is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('auteurs',unserialize($flux['args']['champs_ajoutes'])) && ($flux['args']['type'] != 'page')){
-    	$flux['data'] .= recuperer_fond('prive/diogene_gerer_auteurs_avant_formulaire', $flux['args']);
-    }
-    return $flux;
+	if(isset($flux['args']['id']) && is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('auteurs',unserialize($flux['args']['champs_ajoutes'])) && ($flux['args']['type'] != 'page')){
+		$flux['data'] .= recuperer_fond('prive/diogene_gerer_auteurs_avant_formulaire', $flux['args']);
+	}
+	return $flux;
 }
 
 /**
@@ -27,24 +27,34 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 		$objet = $flux['args']['type'];
 		$id_table_objet = id_table_objet($flux['args']['type']);
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
+		$auteur_uniques = array();
 		if(is_numeric($id_objet)){
 			include_spip('inc/autoriser');
 			if(!autoriser('associerauteurs',$objet,$id_objet))
-	    		return $flux;
+				return $flux;
 			
 			$nb_auteurs = sql_countsel('spip_auteurs','statut < 7');
 			if($nb_auteurs > 1){
-				$auteurs = sql_select("auteur.nom, auteur.id_auteur,auteur.statut","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien USING(id_auteur)","auteur.id_auteur!=".intval($visiteur_session['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
-				while($auteur = sql_fetch($auteurs)){
-					$auteur_uniques[$auteur['id_auteur']] = $auteur['nom'];
-				}
-				if(is_array($auteur_uniques) AND (count($auteur_uniques) > 0))
+				$auteurs = sql_allfetsel("auteur.nom, auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien USING(id_auteur)","auteur.id_auteur!=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
+				if(count($auteurs) > 0){
+					foreach($auteurs as $auteur){
+						$auteur_uniques[$auteur['id_auteur']] = $auteur['nom'];
+					}
 					$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteur_uniques;
+				}
 				$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 			}
+		}else{
+			if($GLOBALS['visiteur_session']['statut']=='0minirezo'){
+				$auteur = sql_fetsel("nom, id_auteur,statut","spip_auteurs","id_auteur=".$GLOBALS['visiteur_session']['id_auteur']);
+				$auteur_uniques[$auteur['id_auteur']] = $auteur['nom'];
+			}
+			if(count($auteur_uniques) > 0)
+				$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteur_uniques;
+			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 		}
 	}
-    return $flux;
+	return $flux;
 }
 
 /**
@@ -55,14 +65,13 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
  * @return array $flux le contexte modifié passé aux suivants
  */
 function diogene_gerer_auteurs_diogene_traiter($flux){
-	global $visiteur_session;
 	$id_objet = $flux['args']['id_objet'];
 	$type = $flux['args']['type'];
 	$pipeline = pipeline('diogene_objets');
 	if(in_array($type,array_keys($pipeline)) && isset($pipeline[$type]['champs_sup']['auteurs'])){
 		include_spip('inc/autoriser');
-    	if(!autoriser('associerauteurs',$type,$id_objet)){
-    		return $flux;
+		if(!autoriser('associerauteurs',$type,$id_objet)){
+			return $flux;
 		}
 
 		if(_request('diogene_gerer_id_auteurs') OR is_array(_request('diogene_gerer_auteurs_remove'))){
@@ -80,7 +89,7 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 				 * Suppression des auteurs si demandée
 				 */
 				foreach(_request('diogene_gerer_auteurs_remove') as $id_auteur){
-					if(($id_auteur == $visiteur_session['id_auteur']) && ($visiteur_session['statut'] != '0minirezo')){
+					if(($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')){
 						/**
 						 * On ne peut pas s'enlever soit même des auteurs si l'on n'est pas admin
 						 */
