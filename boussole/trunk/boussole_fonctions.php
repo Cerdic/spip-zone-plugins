@@ -181,6 +181,10 @@ function boussole_lister_caches() {
 		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
 
+
+		// Chargement de la fonction de conversion xml en tableau
+		$convertir = charger_fonction('xml_decode', 'inc');
+
 		foreach ($fichiers_cache as $_fichier) {
 			$cache = array();
 			$cache['fichier'] = $_fichier;
@@ -193,7 +197,6 @@ function boussole_lister_caches() {
 			$cache['manuelle'] = false;
 
 			lire_fichier($_fichier, $contenu);
-			$convertir = charger_fonction('xmldecode', 'inc');
 			$tableau = $convertir($contenu);
 			if ($cache['nom'] == 'boussoles.xml') {
 				// C'est le cache qui liste les boussoles hébergées
@@ -215,9 +218,9 @@ function boussole_lister_caches() {
 				AND ($boussoles[$alias_boussole]['prefixe'])) {
 					// Boussole utilisant un plugin
 					$informer = charger_fonction('informer_plugin', 'inc');
-					$infos = $informer($boussoles[$alias_boussole]['prefixe']);
-					if ($infos)
-						$cache['plugin'] = "{$infos['nom']} ({$boussoles[$alias_boussole]['prefixe']}/{$infos['version']})";
+					$plugin = $informer($boussoles[$alias_boussole]['prefixe']);
+					if ($plugin)
+						$cache['plugin'] = "{$plugin['nom']} ({$boussoles[$alias_boussole]['prefixe']}/{$plugin['version']})";
 				}
 				else {
 					// Boussole n'utilisant pas un plugin, nommée boussole manuelle

@@ -198,17 +198,16 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 			. "/spip.php?action=serveur_informer_boussole&arg=${boussole}";
 	$page = recuperer_page($action);
 
-	$convertir = charger_fonction('simplexml_to_array', 'inc');
-	$tableau = $convertir(simplexml_load_string($page), false);
-	$tableau = $tableau['root'];
+	$convertir = charger_fonction('xml_decode', 'inc');
+	$tableau = $convertir($page);
 
-	if (isset($tableau['name'])
-	AND ($tableau['name'] == 'boussole')) {
+	if (isset($tableau['boussole'])) {
+		$tableau = $tableau['boussole'];
 		$infos['sites'] = array();
 		$infos['extras'] = array();
 
 		// Collecter les attributs pour la meta de la boussole
-		$infos['boussole'] = $tableau['attributes'];
+		$infos['boussole'] = $tableau['@attributes'];
 
 		// Construire l'objet extras de la boussole
 		$extra = array('nom_objet' => '', 'slogan_objet' => '', 'descriptif_objet' => '');
@@ -216,46 +215,55 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 		$extra['type_objet'] = 'boussole';
 		$extra['aka_objet'] = $infos['boussole']['alias'];
 		$extra['logo_objet'] = $infos['boussole']['logo'];
-		if (isset($tableau['children']['nom']))
-			$extra['nom_objet'] = '<multi>' . $tableau['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
-		if (isset($tableau['children']['slogan']))
-			$extra['slogan_objet'] = '<multi>' . $tableau['children']['slogan'][0]['children']['multi'][0]['text'] . '</multi>';
-		if (isset($tableau['children']['description']))
-			$extra['descriptif_objet'] = '<multi>' . $tableau['children']['description'][0]['children']['multi'][0]['text'] . '</multi>';
+		if (isset($tableau['nom']))
+			$extra['nom_objet'] = '<multi>' . trim($tableau['nom']['multi']) . '</multi>';
+		if (isset($tableau['slogan']))
+			$extra['slogan_objet'] = '<multi>' . trim($tableau['slogan']['multi']) . '</multi>';
+		if (isset($tableau['description']))
+			$extra['descriptif_objet'] = '<multi>' . trim($tableau['description']['multi']) . '</multi>';
 		$infos['extras'][] = $extra;
 
 		// Collecter les informations des groupes
-		if (isset($tableau['children']['groupe'])) {
+		if (isset($tableau['groupe'])) {
+			if (isset($tableau['groupe'][0]))
+				$groupes = $tableau['groupe'];
+			else
+				$groupes[0] = $tableau['groupe'];
 			$rang_groupe = 0;
-			foreach ($tableau['children']['groupe'] as $_groupe) {
+			foreach ($groupes as $_groupe) {
 				$extra = array('nom_objet' => '', 'slogan_objet' => '', 'descriptif_objet' => '');
 				// Construire l'objet extras du groupe
 				$extra['aka_boussole'] = $infos['boussole']['alias'];
 				$extra['type_objet'] = 'groupe';
-				$extra['aka_objet'] = $_groupe['attributes']['type'];
+				$extra['aka_objet'] = $_groupe['@attributes']['type'];
 				$extra['logo_objet'] = '';
-				if (isset($_groupe['children']['nom']))
-					$extra['nom_objet'] = '<multi>' . $_groupe['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
-				if (isset($_groupe['children']['slogan']))
-					$extra['slogan_objet'] = '<multi>' . $_groupe['children']['slogan'][0]['children']['multi'][0]['text'] . '</multi>';
+				if (isset($_groupe['nom']))
+					$extra['nom_objet'] = '<multi>' . trim($_groupe['nom']['multi']) . '</multi>';
+				if (isset($_groupe['slogan']))
+					$extra['slogan_objet'] = '<multi>' . trim($_groupe['slogan']['multi']) . '</multi>';
 				$infos['extras'][] = $extra;
 
 				// On consigne l'alias et le rang du groupe
 				++$rang_groupe;
 				// On consigne l'alias et l'url de chaque site du groupe en cours de traitement
 				$rang_site = 0;
-				if (isset($_groupe['children']['site'])) {
-					foreach ($_groupe['children']['site'] as $_site){
-						if ($_site['attributes']['actif'] == 'oui') {
+				if (isset($_groupe['site'])) {
+					$sites = array();
+					if (isset($_groupe['site'][0]))
+						$sites = $_groupe['site'];
+					else
+						$sites[0] = $_groupe['site'];
+					foreach ($sites as $_site){
+						if ($_site['@attributes']['actif'] == 'oui') {
 							$site = array();
 							// Alias de la boussole
 							$site['aka_boussole'] = $infos['boussole']['alias'];
 							// Infos du groupe
-							$site['aka_groupe'] = $_groupe['attributes']['type'];
+							$site['aka_groupe'] = $_groupe['@attributes']['type'];
 							$site['rang_groupe'] = $rang_groupe;
 							// Infos du site
-							$site['aka_site'] = $_site['attributes']['alias'];
-							$site['url_site'] = $_site['attributes']['src'];
+							$site['aka_site'] = $_site['@attributes']['alias'];
+							$site['url_site'] = $_site['@attributes']['src'];
 							$site['rang_site'] = ++$rang_site;
 							$site['affiche'] = 'oui';
 							$site['id_syndic'] = 0;
@@ -265,14 +273,14 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 							$extra = array('nom_objet' => '', 'slogan_objet' => '', 'descriptif_objet' => '');
 							$extra['aka_boussole'] = $infos['boussole']['alias'];
 							$extra['type_objet'] = 'site';
-							$extra['aka_objet'] = $_site['attributes']['alias'];
-							$extra['logo_objet'] = $_site['attributes']['logo'];
-							if (isset($_site['children']['nom']))
-								$extra['nom_objet'] = '<multi>' . $_site['children']['nom'][0]['children']['multi'][0]['text'] . '</multi>';
-							if (isset($_site['children']['slogan']))
-								$extra['slogan_objet'] = '<multi>' . $_site['children']['slogan'][0]['children']['multi'][0]['text'] . '</multi>';
-							if (isset($_site['children']['description']))
-								$extra['descriptif_objet'] = '<multi>' . $_site['children']['description'][0]['children']['multi'][0]['text'] . '</multi>';
+							$extra['aka_objet'] = $_site['@attributes']['alias'];
+							$extra['logo_objet'] = $_site['@attributes']['logo'];
+							if (isset($_site['nom']))
+								$extra['nom_objet'] = '<multi>' . trim($_site['nom']['multi']) . '</multi>';
+							if (isset($_site['slogan']))
+								$extra['slogan_objet'] = '<multi>' . trim($_site['slogan']['multi']) . '</multi>';
+							if (isset($_site['description']))
+								$extra['descriptif_objet'] = '<multi>' . trim($_site['description']['multi']) . '</multi>';
 							$infos['extras'][] = $extra;
 						}
 					}
@@ -280,9 +288,8 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 			}
 		}
 	}
-	else if (isset($tableau['name'])
-		 AND ($tableau['name'] == 'erreur')) {
-		$infos['erreur'] = $tableau['attributes']['id'];
+	else if (isset($tableau['erreur'])) {
+		$infos['erreur'] = $tableau['erreur']['@attributes']['id'];
 	}
 	else {
 		$infos['erreur'] = 'reponse_invalide';
