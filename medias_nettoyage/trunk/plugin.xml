@@ -4,7 +4,7 @@
 	<slogan>On range nos medias!</slogan>
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
-	<version>0.8.0</version>
+	<version>0.8.1</version>
 	<etat>dev</etat>
 	<categorie>outil</categorie>
 
