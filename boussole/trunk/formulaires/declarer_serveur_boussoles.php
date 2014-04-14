@@ -28,12 +28,12 @@ function formulaires_declarer_serveur_boussoles_traiter_dist() {
 	include_spip('inc/distant');
 	$page = recuperer_page($action);
 
-	$convertir = charger_fonction('xml_decode', 'inc');
+	$convertir = charger_fonction('decoder_xml', 'inc');
 	$tableau = $convertir($page);
 
 	// On vérifie que le serveur héberge bien au moins une boussole
-	if (isset($tableau['boussoles'])) {
-		$serveur = $tableau['boussoles']['@attributes']['serveur'];
+	if (isset($tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES])) {
+		$serveur = $tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES]['@attributes']['serveur'];
 
 		include_spip('inc/config');
 		$serveurs = lire_config('boussole/client/serveurs_disponibles');
@@ -42,9 +42,9 @@ function formulaires_declarer_serveur_boussoles_traiter_dist() {
 
 		$ok = true;
 	}
-	else if (isset($tableau['erreur'])) {
-		$serveur = $tableau['erreur']['@attributes']['serveur'];
-		$message = _T("boussole:message_nok_{$tableau['erreur']['@attributes']['id']}", array('serveur' => $serveur));
+	else if (isset($tableau[_BOUSSOLE_NOMTAG_ERREUR])) {
+		$serveur = $tableau[_BOUSSOLE_NOMTAG_ERREUR]['@attributes']['serveur'];
+		$message = _T("boussole:message_nok_{$tableau[_BOUSSOLE_NOMTAG_ERREUR]['@attributes']['id']}", array('serveur' => $serveur));
 	}
 	else {
 		$message = _T('boussole:message_nok_reponse_invalide', array('serveur' => $url_serveur));

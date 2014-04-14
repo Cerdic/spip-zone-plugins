@@ -198,11 +198,11 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 			. "/spip.php?action=serveur_informer_boussole&arg=${boussole}";
 	$page = recuperer_page($action);
 
-	$convertir = charger_fonction('xml_decode', 'inc');
+	$convertir = charger_fonction('decoder_xml', 'inc');
 	$tableau = $convertir($page);
 
-	if (isset($tableau['boussole'])) {
-		$tableau = $tableau['boussole'];
+	if (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
+		$tableau = $tableau[_BOUSSOLE_NOMTAG_BOUSSOLE];
 		$infos['sites'] = array();
 		$infos['extras'] = array();
 
@@ -224,11 +224,12 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 		$infos['extras'][] = $extra;
 
 		// Collecter les informations des groupes
-		if (isset($tableau['groupe'])) {
-			if (isset($tableau['groupe'][0]))
-				$groupes = $tableau['groupe'];
+		if (isset($tableau[_BOUSSOLE_NOMTAG_GROUPE])) {
+			$groupes = array();
+			if (isset($tableau[_BOUSSOLE_NOMTAG_GROUPE][0]))
+				$groupes = $tableau[_BOUSSOLE_NOMTAG_GROUPE];
 			else
-				$groupes[0] = $tableau['groupe'];
+				$groupes[0] = $tableau[_BOUSSOLE_NOMTAG_GROUPE];
 			$rang_groupe = 0;
 			foreach ($groupes as $_groupe) {
 				$extra = array('nom_objet' => '', 'slogan_objet' => '', 'descriptif_objet' => '');
@@ -247,12 +248,12 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 				++$rang_groupe;
 				// On consigne l'alias et l'url de chaque site du groupe en cours de traitement
 				$rang_site = 0;
-				if (isset($_groupe['site'])) {
+				if (isset($_groupe[_BOUSSOLE_NOMTAG_SITE])) {
 					$sites = array();
-					if (isset($_groupe['site'][0]))
-						$sites = $_groupe['site'];
+					if (isset($_groupe[_BOUSSOLE_NOMTAG_SITE][0]))
+						$sites = $_groupe[_BOUSSOLE_NOMTAG_SITE];
 					else
-						$sites[0] = $_groupe['site'];
+						$sites[0] = $_groupe[_BOUSSOLE_NOMTAG_SITE];
 					foreach ($sites as $_site){
 						if ($_site['@attributes']['actif'] == 'oui') {
 							$site = array();
@@ -288,8 +289,8 @@ function phraser_xml_boussole($boussole, $serveur='spip') {
 			}
 		}
 	}
-	else if (isset($tableau['erreur'])) {
-		$infos['erreur'] = $tableau['erreur']['@attributes']['id'];
+	else if (isset($tableau[_BOUSSOLE_NOMTAG_ERREUR])) {
+		$infos['erreur'] = $tableau[_BOUSSOLE_NOMTAG_ERREUR]['@attributes']['id'];
 	}
 	else {
 		$infos['erreur'] = 'reponse_invalide';

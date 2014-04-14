@@ -58,7 +58,7 @@ function charger_boussoles() {
 	$serveurs = lire_config('boussole/client/serveurs_disponibles');
 
 	// Chargement de la fonction de convzersion xml en tableau
-	$convertir = charger_fonction('xml_decode', 'inc');
+	$convertir = charger_fonction('decoder_xml', 'inc');
 
 	// On boucle sur tous les serveurs configurés pour le site client
 	// -- pour chacun on acquiert la liste des boussoles disponibles
@@ -72,27 +72,28 @@ function charger_boussoles() {
 
 		$tableau = $convertir($page);
 
-		if (isset($tableau['boussoles']['boussole'])) {
-			if (isset($tableau['boussoles']['boussole'][0]))
-				$boussole = $tableau['boussoles']['boussole'];
+		if (isset($tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES][_BOUSSOLE_NOMTAG_BOUSSOLE])) {
+			$boussoles = array();
+			if (isset($tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES][_BOUSSOLE_NOMTAG_BOUSSOLE][0]))
+				$boussoles = $tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES][_BOUSSOLE_NOMTAG_BOUSSOLE];
 			else
-				$boussole[0] = $tableau['boussoles']['boussole'];
+				$boussoles[0] = $tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES][_BOUSSOLE_NOMTAG_BOUSSOLE];
 
-			foreach ($boussole as $_boussole) {
-				$infos_boussole = array('serveur' => $_serveur);
-				$infos_boussole['alias'] = $_boussole['@attributes']['alias'];
+			foreach ($boussoles as $_boussole) {
+				$infos = array('serveur' => $_serveur);
+				$infos['alias'] = $_boussole['@attributes']['alias'];
 				if (isset($_boussole['nom']))
-					$infos_boussole['nom'] = '<multi>' . trim($_boussole['nom']['multi']) . '</multi>';
-				if ($infos_boussole['alias'] == 'spip')
-					$liste[0] = $infos_boussole;
+					$infos['nom'] = '<multi>' . trim($_boussole['nom']['multi']) . '</multi>';
+				if ($infos['alias'] == 'spip')
+					$liste[0] = $infos;
 				else {
-					$liste[$index] = $infos_boussole;
+					$liste[$index] = $infos;
 					$index += 1;
 				}
 			}
 		}
-		else if (isset($tableau['erreur'])) {
-			$message .= _T("boussole:message_nok_{$tableau['erreur']['@attributes']['id']}", array('serveur' => $_serveur)) . ' ';
+		else if (isset($tableau[_BOUSSOLE_NOMTAG_ERREUR])) {
+			$message .= _T("boussole:message_nok_{$tableau[_BOUSSOLE_NOMTAG_ERREUR]['@attributes']['id']}", array('serveur' => $_serveur)) . ' ';
 		}
 		else {
 			$message .= _T('boussole:message_nok_reponse_invalide', array('serveur' => $_serveur)) . ' ';

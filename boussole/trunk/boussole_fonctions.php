@@ -183,7 +183,7 @@ function boussole_lister_caches() {
 
 
 		// Chargement de la fonction de conversion xml en tableau
-		$convertir = charger_fonction('xml_decode', 'inc');
+		$convertir = charger_fonction('decoder_xml', 'inc');
 
 		foreach ($fichiers_cache as $_fichier) {
 			$cache = array();
@@ -201,8 +201,8 @@ function boussole_lister_caches() {
 			if ($cache['nom'] == 'boussoles.xml') {
 				// C'est le cache qui liste les boussoles hébergées
 				$cache['description'] = _T('boussole:info_cache_boussoles');
-				if (isset($tableau['boussoles'])) {
-					$cache['sha'] = $tableau['boussoles']['@attributes']['sha'];
+				if (isset($tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES])) {
+					$cache['sha'] = $tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES]['@attributes']['sha'];
 				}
 			}
 			else {
@@ -210,9 +210,9 @@ function boussole_lister_caches() {
 				$alias_boussole = str_replace('boussole-', '', basename($_fichier, '.xml'));
 				$cache['alias'] = $alias_boussole;
 				$cache['description'] = _T('boussole:info_cache_boussole', array('boussole' => $alias_boussole));
-				if  (isset($tableau['boussole'])) {
-					$cache['sha'] = $tableau['boussole']['@attributes']['sha'];
-					$cache['nom'] .= " ({$tableau['boussole']['@attributes']['version']})";
+				if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
+					$cache['sha'] = $tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes']['sha'];
+					$cache['nom'] .= " ({$tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes']['version']})";
 				}
 				if (isset($boussoles[$alias_boussole]['prefixe'])
 				AND ($boussoles[$alias_boussole]['prefixe'])) {
@@ -232,9 +232,9 @@ function boussole_lister_caches() {
 					$fichier_source = find_in_path("boussole_traduite-${alias_boussole}.xml");
 					lire_fichier($fichier_source, $contenu);
 					$tableau_source = $convertir($contenu);
-					if  (isset($tableau_source['boussole'])) {
-						$cache['plugin'] .= isset($tableau_source['boussole']['@attributes']['version'])
-										  ? " ({$tableau_source['boussole']['@attributes']['version']})"
+					if  (isset($tableau_source[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
+						$cache['plugin'] .= isset($tableau_source[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes']['version'])
+										  ? " ({$tableau_source[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes']['version']})"
 										  : "";
 					}
 				}

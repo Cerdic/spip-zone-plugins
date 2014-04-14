@@ -14,23 +14,6 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
 	 * dans le cache produit */
 	define('_BOUSSOLE_PATTERN_SHA', '%sha_contenu%');
 
-if (!defined('_BOUSSOLE_BALISE_LISTE_BOUSSOLES'))
-	/**
-	 * Nom de la balise XML définissant une liste de boussoles */
-	define('_BOUSSOLE_BALISE_LISTE_BOUSSOLES', 'boussoles');
-if (!defined('_BOUSSOLE_BALISE_BOUSSOLE'))
-	/**
-	 * Nom de la balise XML définissant une boussole */
-	define('_BOUSSOLE_BALISE_BOUSSOLE', 'boussole');
-if (!defined('_BOUSSOLE_BALISE_GROUPE'))
-	/**
-	 * Nom de la balise XML définissant un groupe */
-	define('_BOUSSOLE_BALISE_GROUPE', 'groupe');
-if (!defined('_BOUSSOLE_BALISE_SITE'))
-	/**
-	 * Nom de la balise XML définissant un site */
-	define('_BOUSSOLE_BALISE_SITE', 'site');
-
 
 /**
  * Génération du cache de chaque boussole hébergée par le serveur et du cache de la liste
@@ -128,7 +111,7 @@ function boussole_cacher_liste($boussoles) {
 	$retour = false;
 
 	if ($boussoles) {
-		$convertir = charger_fonction('xml_decode', 'inc');
+		$convertir = charger_fonction('decoder_xml', 'inc');
 		$cache = '';
 		foreach($boussoles as $_alias => $_infos) {
 			$fichier_xml = _DIR_VAR . "cache-boussoles/boussole-${_alias}.xml";
@@ -137,16 +120,16 @@ function boussole_cacher_liste($boussoles) {
 				lire_fichier($fichier_xml, $xml);
 				$tableau = $convertir($xml);
 
-				if  (isset($tableau['boussole'])) {
-					$cache .= inserer_balise('ouvrante', _BOUSSOLE_BALISE_BOUSSOLE, $tableau['boussole']['@attributes'], 1);
-					if (isset($tableau['boussole']['nom'])) {
+				if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
+					$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_BOUSSOLE, $tableau['boussole']['@attributes'], 1);
+					if (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['nom'])) {
 						$cache .= inserer_balise('ouvrante', 'nom', array(), 2)
 								. inserer_balise('ouvrante', 'multi', array(), 3)
-								. indenter(3) . trim($tableau['boussole']['nom']['multi']) . "\n"
+								. indenter(3) . trim($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['nom']['multi']) . "\n"
 								. inserer_balise('fermante', 'multi', array(), 3)
 								. inserer_balise('fermante', 'nom', array(), 2);
 					}
-					$cache .= inserer_balise('fermante', _BOUSSOLE_BALISE_BOUSSOLE, array(), 1);
+					$cache .= inserer_balise('fermante', _BOUSSOLE_NOMTAG_BOUSSOLE, array(), 1);
 				}
 			}
 		}
@@ -156,9 +139,9 @@ function boussole_cacher_liste($boussoles) {
 			include_spip('inc/config');
 			$nom_serveur = lire_config('boussole/serveur/nom');
 
-			$cache = inserer_balise('ouvrante', _BOUSSOLE_BALISE_LISTE_BOUSSOLES, array('serveur' => $nom_serveur, 'sha' => _BOUSSOLE_PATTERN_SHA))
+			$cache = inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_LISTE_BOUSSOLES, array('serveur' => $nom_serveur, 'sha' => _BOUSSOLE_PATTERN_SHA))
 				   . $cache
-				   . inserer_balise('fermante', _BOUSSOLE_BALISE_LISTE_BOUSSOLES, array());
+				   . inserer_balise('fermante', _BOUSSOLE_NOMTAG_LISTE_BOUSSOLES, array());
 			$sha = sha1($cache);
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
@@ -227,11 +210,11 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 
 	// Extraction du contenu du xml source
 	lire_fichier($fichier_xml, $xml);
-	$convertir = charger_fonction('xml_decode', 'inc');
+	$convertir = charger_fonction('decoder_xml', 'inc');
 	$tableau = $convertir($xml);
 
-	if  (isset($tableau['boussole'])) {
-		$tableau = $tableau['boussole'];
+	if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
+		$tableau = $tableau[_BOUSSOLE_NOMTAG_BOUSSOLE];
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_mini');
 
@@ -251,46 +234,47 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 		$att_boussole['sha'] = _BOUSSOLE_PATTERN_SHA;
 		// -- merge de tous les attributs
 		$att_boussole = array_merge($att_boussole, $tableau['@attributes']);
-		$cache .= inserer_balise('ouvrante', _BOUSSOLE_BALISE_BOUSSOLE, $att_boussole);
+		$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_BOUSSOLE, $att_boussole);
 		// Insertion des balises multi pour le nom, le slogan et le descriptif de la boussole
-		$cache .= inserer_traductions($alias_boussole, 'boussole', $alias_boussole, 1);
+		$cache .= inserer_traductions($alias_boussole, _BOUSSOLE_OBJET_BOUSSOLE, $alias_boussole, 1);
 
-		if (isset($tableau['groupe'])) {
-			if (isset($tableau['groupe'][0]))
-				$groupes = $tableau['groupe'];
+		if (isset($tableau[_BOUSSOLE_NOMTAG_GROUPE])) {
+			$groupes = array();
+			if (isset($tableau[_BOUSSOLE_NOMTAG_GROUPE][0]))
+				$groupes = $tableau[_BOUSSOLE_NOMTAG_GROUPE];
 			else
-				$groupes[0] = $tableau['groupe'];
+				$groupes[0] = $tableau[_BOUSSOLE_NOMTAG_GROUPE];
 			// Insertion des éléments groupe
 			foreach ($groupes as $_groupe) {
-				$cache .= inserer_balise('ouvrante', _BOUSSOLE_BALISE_GROUPE, $_groupe['@attributes'], 1);
+				$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_GROUPE, $_groupe['@attributes'], 1);
 				// Insertion des balises multi pour le nom du groupe
-				$cache .= inserer_traductions($alias_boussole, 'groupe', $_groupe['@attributes']['type'], 2);
+				$cache .= inserer_traductions($alias_boussole, _BOUSSOLE_OBJET_GROUPE, $_groupe['@attributes']['type'], 2);
 
 				// Insertion des éléments site du groupe en cours
-				if (isset($_groupe['site'])) {
+				if (isset($_groupe[_BOUSSOLE_NOMTAG_SITE])) {
 					$sites = array();
-					if (isset($_groupe['site'][0]))
-						$sites = $_groupe['site'];
+					if (isset($_groupe[_BOUSSOLE_NOMTAG_SITE][0]))
+						$sites = $_groupe[_BOUSSOLE_NOMTAG_SITE];
 					else
-						$sites[0] = $_groupe['site'];
+						$sites[0] = $_groupe[_BOUSSOLE_NOMTAG_SITE];
 					foreach ($sites as $_site) {
 						$att_site =array();
 						// -- url absolue du logo à fournir dans la balise
 						$alias_site = $_site['@attributes']['alias'];
 						$att_site['logo'] = url_absolue(find_in_path("images/boussole/site-${alias_boussole}-${alias_site}.png"));
 						$att_site = array_merge($att_site, $_site['@attributes']);
-						$cache .= inserer_balise('ouvrante', _BOUSSOLE_BALISE_SITE, $att_site, 2);
+						$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_SITE, $att_site, 2);
 						// Insertion des balises multi pour le nom, le slogan et le descriptif du site
-						$cache .= inserer_traductions($alias_boussole, 'site', $alias_site, 3);
-						$cache .= inserer_balise('fermante', _BOUSSOLE_BALISE_SITE, array(), 2);
+						$cache .= inserer_traductions($alias_boussole, _BOUSSOLE_OBJET_SITE, $alias_site, 3);
+						$cache .= inserer_balise('fermante', _BOUSSOLE_NOMTAG_SITE, array(), 2);
 					}
 				}
-				$cache .= inserer_balise('fermante', _BOUSSOLE_BALISE_GROUPE, array(), 1);
+				$cache .= inserer_balise('fermante', _BOUSSOLE_NOMTAG_GROUPE, array(), 1);
 			}
 		}
 
 		// Fermeture de l'élément englobant boussole
-		$cache .= inserer_balise('fermante', _BOUSSOLE_BALISE_BOUSSOLE);
+		$cache .= inserer_balise('fermante', _BOUSSOLE_NOMTAG_BOUSSOLE);
 
 		// Création du cache et du sha1 associé
 		if ($cache) {
@@ -329,11 +313,11 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 
 	// Extraction du contenu du xml source
 	lire_fichier($fichier_xml, $xml);
-	$convertir = charger_fonction('xml_decode', 'inc');
+	$convertir = charger_fonction('decoder_xml', 'inc');
 	$tableau = $convertir($xml);
 
-	if  (isset($tableau['boussole'])) {
-		$tableau = $tableau['boussole'];
+	if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
+		$tableau = $tableau[_BOUSSOLE_NOMTAG_BOUSSOLE];
 		include_spip('inc/filtres');
 		include_spip('inc/filtres_mini');
 
@@ -349,7 +333,7 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 		$att_boussole['sha'] = _BOUSSOLE_PATTERN_SHA;
 		// -- merge de tous les attributs
 		$att_boussole = array_merge($att_boussole, $tableau['@attributes']);
-		$cache .= inserer_balise('ouvrante', _BOUSSOLE_BALISE_BOUSSOLE, $att_boussole);
+		$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_BOUSSOLE, $att_boussole);
 		// Insertion des balises multi pour le nom, le slogan et le descriptif de la boussole
 		if (isset($tableau['nom'])) {
 			$cache .= inserer_balise('ouvrante', 'nom', array(), 1)
@@ -373,14 +357,15 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 					. inserer_balise('fermante', 'description', array(), 1);
 		}
 
-		if (isset($tableau['groupe'])) {
-			if (isset($tableau['groupe'][0]))
-				$groupes = $tableau['groupe'];
+		if (isset($tableau[_BOUSSOLE_NOMTAG_GROUPE])) {
+			$groupes = array();
+			if (isset($tableau[_BOUSSOLE_NOMTAG_GROUPE][0]))
+				$groupes = $tableau[_BOUSSOLE_NOMTAG_GROUPE];
 			else
-				$groupes[0] = $tableau['groupe'];
+				$groupes[0] = $tableau[_BOUSSOLE_NOMTAG_GROUPE];
 			// Insertion des éléments groupe
 			foreach ($groupes as $_groupe) {
-				$cache .= inserer_balise('ouvrante', _BOUSSOLE_BALISE_GROUPE, $_groupe['@attributes'], 1);
+				$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_GROUPE, $_groupe['@attributes'], 1);
 				// Insertion des balises multi pour le nom du groupe
 				if (isset($_groupe['nom'])) {
 					$cache .= inserer_balise('ouvrante', 'nom', array(), 2)
@@ -398,19 +383,19 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 				}
 
 				// Insertion des éléments site du groupe en cours
-				if (isset($_groupe['site'])) {
+				if (isset($_groupe[_BOUSSOLE_NOMTAG_SITE])) {
 					$sites = array();
-					if (isset($_groupe['site'][0]))
-						$sites = $_groupe['site'];
+					if (isset($_groupe[_BOUSSOLE_NOMTAG_SITE][0]))
+						$sites = $_groupe[_BOUSSOLE_NOMTAG_SITE];
 					else
-						$sites[0] = $_groupe['site'];
+						$sites[0] = $_groupe[_BOUSSOLE_NOMTAG_SITE];
 					foreach ($sites as $_site) {
 						$att_site =array();
 						// -- url absolue du logo à fournir dans la balise
 						$alias_site = $_site['@attributes']['alias'];
 						$att_site['logo'] = url_absolue(find_in_path("images/boussole/site-${alias_boussole}-${alias_site}.png"));
 						$att_site = array_merge($att_site, $_site['@attributes']);
-						$cache .= inserer_balise('ouvrante', _BOUSSOLE_BALISE_SITE, $att_site, 2);
+						$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_SITE, $att_site, 2);
 						// Insertion des balises multi pour le nom, le slogan et le descriptif du site
 						if (isset($_site['nom'])) {
 							$cache .= inserer_balise('ouvrante', 'nom', array(), 3)
@@ -433,15 +418,15 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 									. inserer_balise('fermante', 'multi', array(), 4)
 									. inserer_balise('fermante', 'description', array(), 3);
 						}
-						$cache .= inserer_balise('fermante', _BOUSSOLE_BALISE_SITE, array(), 2);
+						$cache .= inserer_balise('fermante', _BOUSSOLE_NOMTAG_SITE, array(), 2);
 					}
 				}
-				$cache .= inserer_balise('fermante', _BOUSSOLE_BALISE_GROUPE, array(), 1);
+				$cache .= inserer_balise('fermante', _BOUSSOLE_NOMTAG_GROUPE, array(), 1);
 			}
 		}
 
 		// Fermeture de l'élément englobant boussole
-		$cache .= inserer_balise('fermante', _BOUSSOLE_BALISE_BOUSSOLE);
+		$cache .= inserer_balise('fermante', _BOUSSOLE_NOMTAG_BOUSSOLE);
 
 		// Création du cache et du sha1 associé
 		if ($cache) {
@@ -470,16 +455,16 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
  * @package	SPIP\BOUSSOLE\Outils\XML
  *
  * @param string	$type
- * @param string	$balise
+ * @param string	$nom_balise
  * @param array		$attributs
  * @param int		$indentation
  *
  * @return string
  */
-function inserer_balise($type='ouvrante', $balise, $attributs=array(), $indentation=0) {
+function inserer_balise($type='ouvrante', $nom_balise, $attributs=array(), $indentation=0) {
 
 	// Ouverture de la balise
-	$texte = indenter($indentation) . '<' . ($type == 'fermante' ? '/' : '') . $balise;
+	$texte = indenter($indentation) . '<' . ($type == 'fermante' ? '/' : '') . $nom_balise;
 	// Insertion des attributs
 	if ($attributs) {
 		foreach ($attributs as $_nom => $_valeur) {

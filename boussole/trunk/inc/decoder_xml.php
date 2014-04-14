@@ -19,7 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @example
  *	```
  * $page = recuperer_page($action);
- * $convertir = charger_fonction('xml_decode', 'inc');
+ * $convertir = charger_fonction('decoder_xml', 'inc');
  * $tableau = $convertir($page);
  *	```
  *
@@ -28,7 +28,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 		de caractères représentant le texte XML lui-même.
  * @return array
  */
-function inc_xml_decode_dist($xml){
+function inc_decoder_xml_dist($xml){
 	// On englobe la chaine xml fournie par une balise bidon afin de renvoyer le nom de la balise
 	// de plus haut niveau du xml car simpleXML renvoie un objet sans cette balise.
 	$objet_xml = simplexml_load_string("<dummyroot>${xml}</dummyroot>");
