@@ -1,7 +1,7 @@
 <paquet 
 		prefix="elfinder"
 		categorie="maintenance"
-		version="0.2.2"
+		version="0.2.3"
 		etat="dev"
 		compatibilite="[3.0.0;3.0.*]"
 		logo="images/elfinder_48.png"
