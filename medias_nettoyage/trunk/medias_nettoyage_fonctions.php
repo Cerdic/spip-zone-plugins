@@ -61,13 +61,13 @@ function medias_creer_repertoires_orphelins () {
  *
  * @return array
  */
-function medias_lister_repertoires_img () {
+function medias_lister_repertoires ($repertoire_img = _DIR_IMG) {
 	$repertoires = array();
 
-	$rep_img = array_diff(scandir(_DIR_IMG), array('..','.','.svn')); // On ne liste pas le répertoire .svn
+	$rep_img = array_diff(scandir($repertoire_img), array('..','.','.svn')); // On ne liste pas le répertoire .svn
 	foreach ($rep_img as $repertoire) {
-		if (is_dir(_DIR_IMG . $repertoire)) {
-			$repertoires[] = _DIR_IMG . $repertoire;
+		if (is_dir($repertoire_img . $repertoire)) {
+			$repertoires[] = $repertoire_img . $repertoire;
 		}
 	}
 	return $repertoires;
@@ -174,8 +174,7 @@ function medias_lister_documents_bdd_orphelins_taille(){
  *
  * @return array
  */
-function medias_lister_documents_repertoire () {
-	$repertoire_img = _DIR_IMG ;
+function medias_lister_documents_repertoire ($repertoire_img = _DIR_IMG) {
 	$docs_fichiers = array();
 
 	foreach (medias_lister_extensions_documents() as $extension) {
@@ -297,7 +296,7 @@ function medias_lister_documents_repertoire_complet_taille ($repertoire_img = _D
  *
  * @return array
  */
-function medias_lister_logos_fichiers($mode = null){
+function medias_lister_logos_fichiers($mode = null, $repertoire_img = _DIR_IMG){
 
 	if (intval(spip_version()) == 2) {
 		include_spip('base/connect_sql');
@@ -306,7 +305,6 @@ function medias_lister_logos_fichiers($mode = null){
 	}
 
 	global $formats_logos;
-	$repertoire_img 	= _DIR_IMG ;
 	$docs_fichiers_on 	= array();
 	$docs_fichiers_off 	= array();
 	$logos_objet 		= array('art','rub','breve','site','mot','aut');
@@ -393,13 +391,30 @@ function medias_calculer_taille_fichiers ($fichiers = array()) {
 }
 
 /**
+ * Lister les répertoires à la racine de IMG/orphelins.
+ * Cette fonction vérifie l'existence du répertoire IMG/orphelins
+ * avant de lister les répertoires.
+ *
+ * @uses medias_lister_repertoires()
+ * 
+ * @return array
+ */
+function medias_lister_repertoires_orphelins () {
+	if (is_dir(_MEDIAS_NETTOYAGE_REP_ORPHELINS)) {
+		return medias_lister_repertoires(_MEDIAS_NETTOYAGE_REP_ORPHELINS);
+	} else {
+		return array();
+	}
+}
+
+/**
  * Lister le contenu du répertoire IMG/orphelins
  *
  * @uses medias_lister_documents_repertoire_complet()
  *
  * @return array
  */
-function medias_lister_repertoires_orphelins_contenu () {
+function medias_lister_repertoires_orphelins_fichiers () {
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
 	$docs_fichiers 			= array();
 
@@ -417,12 +432,12 @@ function medias_lister_repertoires_orphelins_contenu () {
  *
  * @return integer
  */
-function medias_lister_repertoires_orphelins_contenu_taille () {
+function medias_lister_repertoires_orphelins_fichiers_taille () {
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
 	$taille 				= 0;
 
 	if (is_dir($repertoire_orphelins)) {
-		return medias_calculer_taille_fichiers(medias_lister_documents_repertoire_complet_taille($repertoire_orphelins));
+		return medias_calculer_taille_fichiers(medias_lister_documents_repertoire_complet($repertoire_orphelins));
 	} else {
 		return intval($taille);
 	}

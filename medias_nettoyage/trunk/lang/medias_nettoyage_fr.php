@@ -25,9 +25,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nombre_logos_fichiers' => 'Logos des objets de SPIP',
 	'info_nombre_logos_fichiers_off' => 'Logos en mode "off"',
 	'info_nombre_logos_fichiers_on' => 'Logos en mode "on"',
+	'info_nombre_repertoires_racine' => 'Répertoires à la racine',
 	'info_titre_bdd' => 'En base de données',
 	'info_titre_logos_img' => 'Les logos dans IMG/',
 	'info_titre_repertoire_img' => 'Répertoire IMG/',
+	'info_titre_repertoire_orphelins' => 'Répertoire IMG/orphelins',
 
 	// O
 	'onglet_titre_rep_orphelins' => 'Documents orphelins',

@@ -10,7 +10,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<BOUCLE_repertoires (DATA) {source table, #EVAL{medias_lister_repertoires()}} {par valeur} {pagination #ENV{nb,10}}>
+		<BOUCLE_repertoires (DATA) {source table, #EVAL{medias_lister_repertoires(_MEDIAS_NETTOYAGE_REP_ORPHELINS)}} {par valeur} {pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 			<td class="nom">#VALEUR</td>
 			<td class="date secondaire">[(#VAL{d-m-Y}|date{#VALEUR|filemtime})]</td>
