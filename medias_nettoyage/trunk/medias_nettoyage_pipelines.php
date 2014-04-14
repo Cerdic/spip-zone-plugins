@@ -10,9 +10,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function medias_nettoyage_taches_generales_cron($taches) {
 
-	$taches['medias_deplacer_orphelins'] 	= 6 * 3600; // toutes les 6h
-	$taches['medias_deplacer_obsoletes'] 	= 30 * 24 * 3600; // tous les 30 jours
-	$taches['medias_reparer_documents'] 	= 30 * 24 * 3600; // tous les 30 jours
+	$taches['medias_deplacer_orphelins'] 	= 5 * 3600; // toutes les 5h
+	$taches['medias_deplacer_obsoletes'] 	= 5 * 3600; // toutes les 5h
+	$taches['medias_reparer_documents'] 	= 5 * 3600; // toutes les 5h
 
 	return $taches;
 }

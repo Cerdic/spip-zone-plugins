@@ -450,7 +450,7 @@ function medias_lister_repertoires_orphelins_fichiers_taille () {
  */
 function test_medias(){
 	$test = array();
-	$test = medias_deplacer_documents_repertoire_orphelins();
+	$test = medias_lister_logos_fichiers();
 	return $test;
 }
 

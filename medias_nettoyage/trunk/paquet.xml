@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias_nettoyage"
 	categorie="outil"
-	version="0.8.1"
+	version="0.8.3"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.99]"
 	logo="prive/themes/spip/images/medias_nettoyage-64.png"
@@ -12,6 +12,8 @@
 
 	<auteur>Venfu</auteur>
 	<auteur>Teddy Payet</auteur>
+
+	<necessite nom="saisies" compatibilite="[1.20.0;]" />
 
 	<pipeline nom="taches_generales_cron" inclure="medias_nettoyage_pipelines.php" />
 	<pipeline nom="autoriser" inclure="medias_nettoyage_autorisations.php" />
