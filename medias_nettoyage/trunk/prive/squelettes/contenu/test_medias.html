@@ -1,0 +1,12 @@
+<h1>Test de medias nettoyage</h1>
+
+#SET{fonction,#EVAL{test_medias()}}
+
+Compteur : [(#GET{fonction}|count)]<br/>
+[<pre>
+(#GET{fonction}|foreach)
+</pre>]
+
+
+#EVAL{_MEDIAS_NETTOYAGE_REP_ORPHELINS} <br>
+#EVAL{_MEDIAS_NETTOYAGE_PAQUET}<br>

@@ -5,7 +5,7 @@
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
 	<version>0.7.0</version>
-	<etat>test</etat>
+	<etat>dev</etat>
 	<categorie>outil</categorie>
 
 	<auteur>Venfu</auteur>
@@ -27,7 +27,7 @@
 		<inclure>medias_nettoyage_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="Iterateurs" version="[1.0.1;]" />
 
 	<bouton id="medias_tabbord" parent="naviguer">

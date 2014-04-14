@@ -36,7 +36,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
 
 	foreach ($extensions as $extension) {
 		if(!is_dir($repertoire_img . $extension)) {
-			@mkdir($repertoire_img . $extension, 0755);
+			@mkdir($repertoire_img . $extension, _SPIP_CHMOD);
 		}
 	}
 	return;
@@ -51,7 +51,7 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
  */
 function medias_creer_repertoires_orphelins () {
 	if (!is_dir(_MEDIAS_NETTOYAGE_REP_ORPHELINS)) {
-		@mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,0755);
+		@mkdir(_MEDIAS_NETTOYAGE_REP_ORPHELINS,_SPIP_CHMOD);
 	}
 	return;
 }
@@ -71,57 +71,6 @@ function medias_lister_repertoires_img () {
 		}
 	}
 	return $repertoires;
-}
-
-/**
- * Déplacer tous les répertoires de types 'cache-*' et 'icones*'
- * SPIP normalement, avec la page réparer la base, devrait répérer ce type
- * de dossier. Mais il peut arriver parfois qu'on récupère des sites qui
- * pour X raisons n'ont pas été nettoyé de ces coquilles.
- *
- * @uses medias_creer_repertoires_orphelins()
- *
- * @return void
- */
-function medias_deplacer_rep_obsoletes () {
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
-
-	$pattern_obsoletes		= array("cache-","icones");
-	$repertoire_img 		= _DIR_IMG;
-	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
-	$repertoires_obsoletes 	= array();
-	$message_log 			= array();
-	$pattern_img 			= "/" . preg_replace("/\//", "\/", $repertoire_img) . "/";
-
-	// On crée le répertoire IMG/orphelins
-	medias_creer_repertoires_orphelins();
-
-	// on cherche les fichiers de type cache-20x20-blabla.ext
-	$fichiers_obsoletes = find_all_in_path('IMG/','/cache-');
-
-	foreach ($pattern_obsoletes as $pattern) {
-		$repertoires = glob($repertoire_img . $pattern . "*");
-		$repertoires_obsoletes = array_merge($repertoires_obsoletes,$repertoires);
-	}
-	// on fusionne avec les fichiers obsolètes
-	$repertoires_obsoletes = array_merge($repertoires_obsoletes,$fichiers_obsoletes);
-
-	// on enlève les valeurs vides du tableau.
-	$repertoires_obsoletes = array_filter($repertoires_obsoletes);
-
-	if (count($repertoires_obsoletes) > 0) {
-		foreach ($repertoires_obsoletes as $repertoire_source) {
-			$repertoire_destination = preg_replace($pattern_img, $repertoire_orphelins, $repertoire_source);
-			@rename($repertoire_source, $repertoire_destination);
-			$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Déplacement de '. $repertoire_source . ' vers ' . $repertoire_destination;
-		}
-	} else {
-		// S'il n'y a pas de dossiers obsolètes, on met un message histoire de ne pas rester dans le brouillard.
-		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de dossiers ou de fichiers obsolètes';
-	}
-	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
-	return;
 }
 
 /**
@@ -156,8 +105,8 @@ function medias_lister_documents_bdd () {
  * @return integer
  */
 function medias_lister_documents_bdd_taille(){
-	$docs_bdd = sql_fetsel('SUM(taille)', 'spip_documents',"distant='non' AND fichier!=''");
-	return $docs_bdd['SUM(taille)'];
+	$docs_bdd = sql_fetsel('SUM(taille) AS taille_totale', 'spip_documents',"distant='non' AND fichier!=''");
+	return $docs_bdd['taille_totale'];
 }
 
 /**
@@ -175,8 +124,8 @@ function medias_lister_documents_bdd_complet_compteur () {
  * @return integer|string
  */
 function medias_lister_documents_bdd_complet_taille(){
-	$docs_bdd = sql_fetsel('SUM(taille)', 'spip_documents',"id_document > 0");
-	return $docs_bdd['SUM(taille)'];
+	$docs_bdd = sql_fetsel('SUM(taille) AS taille_totale', 'spip_documents',"id_document > 0");
+	return $docs_bdd['taille_totale'];
 }
 
 /**
@@ -189,9 +138,9 @@ function medias_lister_documents_bdd_complet_taille(){
  * @return array
  */
 function medias_lister_documents_bdd_orphelins(){
-	$tableau = array_unique(array_diff(medias_lister_documents_bdd(), medias_lister_documents_repertoire()));
-	sort($tableau);
-	return $tableau;
+	$docs_bdd = array_unique(array_diff(medias_lister_documents_bdd(), medias_lister_documents_repertoire()));
+	sort($docs_bdd);
+	return $docs_bdd;
 }
 
 /**
@@ -210,7 +159,7 @@ function medias_lister_documents_bdd_orphelins_taille(){
 		$documents_bdd = sql_allfetsel('fichier,taille','spip_documents', "fichier IN ('" . join("','",preg_replace($pattern_img, '', $documents_orphelins)) . "')");
 		foreach ($documents_bdd as $document_bdd) {
 				if (!file_exists(get_spip_doc($document_bdd['fichier']))) {
-					$taille = $taille + (intval($document_bdd['taille'])/1000); // On type la taille issue la bdd en integer puis on divise par 1000 pour éviter la limite de l'integer php.
+					$taille = $taille + ($document_bdd['taille']/1000); // On divise par 1000 pour éviter la limite de l'integer php.
 				}
 		}
 	}
@@ -241,10 +190,10 @@ function medias_lister_documents_repertoire () {
 	foreach ($fichiers as $fichier) {
 		$docs_fichiers[] = $fichier;
 	}
-	$tableau = array_unique(array_diff($docs_fichiers, medias_lister_logos_fichiers()));
-	sort($tableau);
+	$docs_fichiers = array_unique(array_diff($docs_fichiers, medias_lister_logos_fichiers()));
+	sort($docs_fichiers);
 
-	return $tableau;
+	return $docs_fichiers;
 }
 
 /**
@@ -269,9 +218,9 @@ function medias_lister_documents_repertoire_taille () {
  * @return array
  */
 function medias_lister_documents_repertoire_orphelins (){
-	$tableau = array_unique(array_diff(medias_lister_documents_repertoire(), medias_lister_documents_bdd()));
-	sort($tableau);
-	return $tableau;
+	$docs_fichiers = array_unique(array_diff(medias_lister_documents_repertoire(), medias_lister_documents_bdd()));
+	sort($docs_fichiers);
+	return $docs_fichiers;
 }
 
 /**
@@ -301,7 +250,7 @@ function medias_lister_documents_repertoire_complet ($repertoire_img = _DIR_IMG)
 	// On va chercher dans IMG/distant/*/*.*
 	$fichiers = glob($repertoire_img . "*/*/*.*");
 	foreach ($fichiers as $fichier) {
-		$docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+		$docs_fichiers[] = preg_replace("/\/\//", "/", $fichier); // On évite les doubles slashs '//' qui pourrait arriver comme un cheveu sur la soupe. 
 	}
 
 	// On va chercher dans IMG/*/*.*
@@ -349,7 +298,12 @@ function medias_lister_documents_repertoire_complet_taille ($repertoire_img = _D
  * @return array
  */
 function medias_lister_logos_fichiers($mode = null){
-	include_spip('base/connect_sql');
+
+	if (intval(spip_version()) == 2) {
+		include_spip('base/connect_sql');
+	} else if (intval(spip_version()) == 3) {
+		include_spip('base/objets');
+	}
 
 	global $formats_logos;
 	$repertoire_img 	= _DIR_IMG ;
@@ -360,6 +314,8 @@ function medias_lister_logos_fichiers($mode = null){
 	// On va chercher toutes les tables connues de SPIP
 	foreach (sql_alltable() as $table) {
 		// On cherche son type d'objet et on l'ajoute aux logos
+		// Il y a aussi dans ces objets la référence à 'article', 'rubrique' et 'auteur'
+		// On peut les laisser, ça ne mange pas de pain de prendre en compte les "tordus" ;-)
 		$logos_objet[] = objet_type($table);
 	}
 	// On enlève les doublons
@@ -484,6 +440,57 @@ function test_medias(){
 }
 
 /**
+ * Déplacer tous les répertoires de types 'cache-*' et 'icones*'
+ * SPIP normalement, avec la page "réparer la base", devrait répérer ce type
+ * de dossier. Mais il peut arriver parfois qu'on récupère des sites qui
+ * pour X raisons n'ont pas été nettoyé de ces coquilles.
+ *
+ * @uses medias_creer_repertoires_orphelins()
+ *
+ * @return void
+ */
+function medias_deplacer_rep_obsoletes () {
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
+
+	$pattern_obsoletes		= array("cache-","icones");
+	$repertoire_img 		= _DIR_IMG;
+	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
+	$repertoires_obsoletes 	= array();
+	$message_log 			= array();
+	$pattern_img 			= "/" . preg_replace("/\//", "\/", $repertoire_img) . "/";
+
+	// On crée le répertoire IMG/orphelins
+	medias_creer_repertoires_orphelins();
+
+	// on cherche les fichiers de type IMG/cache-20x20-blabla.ext
+	$fichiers_obsoletes = find_all_in_path('IMG/','/cache-');
+
+	foreach ($pattern_obsoletes as $pattern) {
+		$repertoires = glob($repertoire_img . $pattern . "*");
+		$repertoires_obsoletes = array_merge($repertoires_obsoletes,$repertoires);
+	}
+	// on fusionne avec les fichiers obsolètes
+	$repertoires_obsoletes = array_merge($repertoires_obsoletes,$fichiers_obsoletes);
+
+	// on enlève les valeurs vides du tableau.
+	$repertoires_obsoletes = array_filter($repertoires_obsoletes);
+
+	if (count($repertoires_obsoletes) > 0) {
+		foreach ($repertoires_obsoletes as $repertoire_source) {
+			$repertoire_destination = preg_replace($pattern_img, $repertoire_orphelins, $repertoire_source);
+			@rename($repertoire_source, $repertoire_destination);
+			$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Déplacement de '. $repertoire_source . ' vers ' . $repertoire_destination;
+		}
+	} else {
+		// S'il n'y a pas de dossiers obsolètes, on met un message histoire de ne pas rester dans le brouillard.
+		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de dossiers ou de fichiers obsolètes';
+	}
+	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
+	return;
+}
+
+/**
  * On déplace tous les fichiers orphelins vers un répertoire orphelins dans IMG/
  * On ne les supprime pas!
  *
@@ -526,7 +533,7 @@ function medias_deplacer_documents_repertoire_orphelins () {
 				$i++;
 			}
 			if (!is_dir($repertoires)) {
-				@mkdir($repertoires,0755);
+				@mkdir($repertoires,_SPIP_CHMOD);
 				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le répertoire ' . $repertoires . ' a été créé.';
 			}
 			// Hop, on déplace notre fichier vers IMG/orphelins
