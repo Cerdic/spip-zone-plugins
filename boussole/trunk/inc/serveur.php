@@ -27,9 +27,8 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
  */
 function boussole_actualiser_caches() {
 
-	// Suppression de tous les caches afin de ne pas conserver des boussoles qui ne sont plus disponibles
-	$dir_caches = _DIR_VAR . 'cache-boussoles';
-	if ($fichiers_cache = glob($dir_caches . "/*.*")) {
+	// Suppression de tous les caches (.xml et .sha) afin de ne pas conserver des boussoles qui ne sont plus disponibles
+	if ($fichiers_cache = glob(_BOUSSOLE_DIR_CACHE . "*.*")) {
 		foreach ($fichiers_cache as $_fichier) {
 			supprimer_fichier($_fichier);
 		}
@@ -114,14 +113,14 @@ function boussole_cacher_liste($boussoles) {
 		$convertir = charger_fonction('decoder_xml', 'inc');
 		$cache = '';
 		foreach($boussoles as $_alias => $_infos) {
-			$fichier_xml = _DIR_VAR . "cache-boussoles/boussole-${_alias}.xml";
+			$fichier_xml = _BOUSSOLE_DIR_CACHE . _BOUSSOLE_PREFIXE_CACHE . $_alias . '.xml';
 			if (file_exists($fichier_xml)) {
 				// Extraction des seules informations de la boussole pour créer le cache (pas de groupe ni site)
 				lire_fichier($fichier_xml, $xml);
 				$tableau = $convertir($xml);
 
 				if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
-					$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_BOUSSOLE, $tableau['boussole']['@attributes'], 1);
+					$cache .= inserer_balise('ouvrante', _BOUSSOLE_NOMTAG_BOUSSOLE, $tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes'], 1);
 					if (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['nom'])) {
 						$cache .= inserer_balise('ouvrante', 'nom', array(), 2)
 								. inserer_balise('ouvrante', 'multi', array(), 3)
@@ -145,8 +144,8 @@ function boussole_cacher_liste($boussoles) {
 			$sha = sha1($cache);
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
-			$dir = sous_repertoire(_DIR_VAR, 'cache-boussoles');
-			$fichier_cache = $dir . 'boussoles.xml';
+			$dir = sous_repertoire(_DIR_VAR, trim(_BOUSSOLE_NOMDIR_CACHE, '/'));
+			$fichier_cache = $dir . _BOUSSOLE_CACHE_LISTE;
 			ecrire_fichier($fichier_cache, $cache);
 
 			$fichier_sha = $fichier_cache . '.sha';
@@ -282,7 +281,7 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin) {
 			$sha = sha1($cache);
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
-			$dir = sous_repertoire(_DIR_VAR, 'cache-boussoles');
+			$dir = sous_repertoire(_DIR_VAR, trim(_BOUSSOLE_NOMDIR_CACHE, '/'));
 			$fichier_cache = $dir . basename($fichier_xml);
 			ecrire_fichier($fichier_cache, $cache);
 
@@ -434,7 +433,7 @@ function xmltraduit_to_cache($fichier_xml, $alias_boussole) {
 			$sha = sha1($cache);
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
-			$dir = sous_repertoire(_DIR_VAR, 'cache-boussoles');
+			$dir = sous_repertoire(_DIR_VAR, trim(_BOUSSOLE_NOMDIR_CACHE, '/'));
 			$fichier_cache = $dir . str_replace('_traduite', '', basename($fichier_xml));
 			ecrire_fichier($fichier_cache, $cache);
 

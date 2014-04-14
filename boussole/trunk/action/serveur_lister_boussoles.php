@@ -57,7 +57,7 @@ function action_serveur_lister_boussoles_dist(){
 		// Si erreur, on renvoie un id sous forme d'une balise erreur
 		if ($boussoles) {
 			// Vérifier que le cache existe
-			$fichier_liste = _DIR_VAR . "cache-boussoles/boussoles.xml";
+			$fichier_liste = _BOUSSOLE_DIR_CACHE . _BOUSSOLE_CACHE_LISTE;
 			if (!file_exists($fichier_liste)) {
 				$erreur = 'cache_liste_indisponible';
 				spip_log("Le fichier cache de la liste des boussoles n'est pas disponible", _BOUSSOLE_LOG . _LOG_ERREUR);

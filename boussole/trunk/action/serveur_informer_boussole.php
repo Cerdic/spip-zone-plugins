@@ -59,7 +59,7 @@ function action_serveur_informer_boussole_dist(){
 				// Vérifier que la boussole demandée est bien disponible sur le serveur
 				if (array_key_exists($alias_boussole, $boussoles)) {
 					// Si la boussole n'est pas encoe en cache on retourne une erreur
-					$fichier_xml = _DIR_VAR . "cache-boussoles/boussole-${alias_boussole}.xml";
+					$fichier_xml = _BOUSSOLE_DIR_CACHE . _BOUSSOLE_PREFIXE_CACHE . $alias_boussole . '.xml';
 					if (!file_exists($fichier_xml)) {
 						$erreur = 'cache_boussole_indisponible';
 						spip_log("Le fichier cache de la boussole n'est pas disponible (alias = $alias_boussole)", _BOUSSOLE_LOG . _LOG_ERREUR);

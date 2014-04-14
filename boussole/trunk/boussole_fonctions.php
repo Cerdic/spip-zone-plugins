@@ -175,8 +175,7 @@ function boussole_traduire($boussole, $champ, $objet='') {
 function boussole_lister_caches() {
 	$caches = array();
 
-	$dir_caches = _DIR_VAR . 'cache-boussoles';
-	if ($fichiers_cache = glob($dir_caches . "/boussole*.xml")) {
+	if ($fichiers_cache = glob(_BOUSSOLE_DIR_CACHE . "boussole*.xml")) {
 		include_spip('inc/config');
 		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
