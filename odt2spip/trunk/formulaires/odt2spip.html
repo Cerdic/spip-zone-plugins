@@ -19,8 +19,10 @@
 			<li>
 				<strong class="explications"><:odtspip:attacher_fichier_odt:></strong>
 				<label for='attacher_oui'><:odtspip:oui:>
-				<input type='radio' name='attacher_odt' value='1' id='attacher_oui' checked='checked' /></label>
-				<label for='attacher_non'><input type='radio' name='attacher_odt' value='0' id='attacher_non' />
+				<input type='radio' name='attacher_odt' value='1' id='attacher_oui'[ (#CONFIG{odt2spip/defaut_attacher}|=={oui}|oui)checked='checked'] />
+				</label>
+				<label for='attacher_non'>
+				<input type='radio' name='attacher_odt' value='0' id='attacher_non'[ (#CONFIG{odt2spip/defaut_attacher}|=={non}|oui)checked='checked'] />
 				<:odtspip:non:></label>
 			</li>
 			<li>

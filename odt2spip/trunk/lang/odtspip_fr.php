@@ -18,9 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   
 	// C
 	'choix_fichier' => 'Fichier ODT &agrave; utiliser : ',
+	'label_defaut_attacher' => 'Par défaut le champ "Attacher le fichier..." est coché',
+	'titre_page_configurer' => 'Configuration du plugin odt2spip',
 
     // D
-    'mode_document' => 'documents',
+    'defaut_attacher' => 'Choix par défaut pour l\'attachement du fichier ODT',
+    
 
     // E
 	'err_enregistrement_fichier_sortie' => 'Erreur lors de l\'enregistrement du fichier de snippet ',
@@ -38,6 +41,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
         
     // L
     'langue_publication' => 'Langue de l\'article', 
+    
+    // M
+    'mode_document' => 'documents',
 
 	// N
 	'non' => 'non',
