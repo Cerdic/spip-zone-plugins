@@ -49,3 +49,5 @@ function foundation_insert_head_css ($flux) {
 
     return $flux;
 }
+
+// TODO: Charger foundation dans l'espace priver pour pouvoir prévisualiser les modèles.
