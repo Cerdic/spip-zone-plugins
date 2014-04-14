@@ -89,7 +89,7 @@ function boussole_cacher_xml($alias, $prefixe_plugin='') {
 	*/
 	if ($fichier_xml = find_in_path("boussole_traduite-${alias}.xml")) {
 		if (!xmltraduit_to_cache($fichier_xml, $alias))
-			spip_log("Cache XML non créé (alias = $alias)", 'boussole' . _LOG_ERREUR);
+			spip_log("Cache XML non créé (alias = $alias)", _BOUSSOLE_LOG . _LOG_ERREUR);
 
 		else
 			$retour = true;
@@ -98,17 +98,17 @@ function boussole_cacher_xml($alias, $prefixe_plugin='') {
 		// Validation du fichier XML source (boussole.dtd)
 		include_spip('inc/client');
 		if (!boussole_valider_xml($fichier_xml, $erreur))
-			spip_log("XML source non conforme (alias = $alias) : " . var_export($erreur['detail'], true), 'boussole' . _LOG_ERREUR);
+			spip_log("XML source non conforme (alias = $alias) : " . var_export($erreur['detail'], true), _BOUSSOLE_LOG . _LOG_ERREUR);
 
 		// Création du cache à partir du fichier XML source
 		elseif (!xml_to_cache($fichier_xml, $alias, $prefixe_plugin))
-			spip_log("Cache XML non créé (alias = $alias)", 'boussole' . _LOG_ERREUR);
+			spip_log("Cache XML non créé (alias = $alias)", _BOUSSOLE_LOG . _LOG_ERREUR);
 
 		else
 			$retour = true;
 	}
 	else
-		spip_log("XML source introuvable (alias = $alias)", 'boussole' . _LOG_ERREUR);
+		spip_log("XML source introuvable (alias = $alias)", _BOUSSOLE_LOG . _LOG_ERREUR);
 
 	return $retour;
 }

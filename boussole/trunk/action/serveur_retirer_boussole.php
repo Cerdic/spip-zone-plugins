@@ -47,7 +47,7 @@ function action_serveur_retirer_boussole_dist(){
 			include_spip('inc/serveur');
 			boussole_actualiser_caches();
 
-			spip_log("ACTION RETRAIT BOUSSOLE MANUELLE : alias = ". $alias_boussole, 'boussole' . _LOG_INFO);
+			spip_log("ACTION RETRAIT BOUSSOLE MANUELLE : alias = ". $alias_boussole, _BOUSSOLE_LOG . _LOG_INFO);
 		}
 	}
 }

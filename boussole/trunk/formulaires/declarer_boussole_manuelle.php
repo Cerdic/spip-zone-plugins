@@ -46,11 +46,11 @@ function formulaires_declarer_boussole_manuelle_traiter_dist() {
 	// Determination des messages de retour
 	if (!$ok) {
 		$retour['message_erreur'] = $message;
-		spip_log("Erreur déclaration boussole manuelle $alias_boussole. $message", 'boussole' . _LOG_ERREUR);
+		spip_log("Erreur déclaration boussole manuelle $alias_boussole. $message", _BOUSSOLE_LOG . _LOG_ERREUR);
 	}
 	else {
 		$retour['message_ok'] = _T('boussole:message_ok_boussole_manuelle_ajoutee', array('boussole' => $alias_boussole));
-		spip_log("Déclaration boussole manuelle $alias_boussole ok", 'boussole' . _LOG_INFO);
+		spip_log("Déclaration boussole manuelle $alias_boussole ok", _BOUSSOLE_LOG . _LOG_INFO);
 	}
 	$retour['editable'] = true;
 

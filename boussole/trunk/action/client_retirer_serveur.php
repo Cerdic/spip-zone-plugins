@@ -40,7 +40,7 @@ function action_client_retirer_serveur_dist(){
 			unset($serveurs[$alias_serveur]);
 			ecrire_config('boussole/client/serveurs_disponibles', $serveurs);
 
-			spip_log("ACTION RETRAIT SERVEUR : alias = ". $alias_serveur, 'boussole' . _LOG_INFO);
+			spip_log("ACTION RETRAIT SERVEUR : alias = ". $alias_serveur, _BOUSSOLE_LOG . _LOG_INFO);
 		}
 	}
 }

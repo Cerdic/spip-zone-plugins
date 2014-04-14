@@ -62,25 +62,25 @@ function action_serveur_informer_boussole_dist(){
 					$fichier_xml = _DIR_VAR . "cache-boussoles/boussole-${alias_boussole}.xml";
 					if (!file_exists($fichier_xml)) {
 						$erreur = 'cache_boussole_indisponible';
-						spip_log("Le fichier cache de la boussole n'est pas disponible (alias = $alias_boussole)", 'boussole' . _LOG_ERREUR);
+						spip_log("Le fichier cache de la boussole n'est pas disponible (alias = $alias_boussole)", _BOUSSOLE_LOG . _LOG_ERREUR);
 					}
 					else {
-						spip_log("Information fournie sur la boussole d'alias = $alias_boussole", 'boussole' . _LOG_INFO);
+						spip_log("Information fournie sur la boussole d'alias = $alias_boussole", _BOUSSOLE_LOG . _LOG_INFO);
 					}
 				}
 				else {
 					$erreur = 'boussole_non_hebergee';
-					spip_log("Boussole non disponible sur ce serveur (alias = $alias_boussole)", 'boussole' . _LOG_ERREUR);
+					spip_log("Boussole non disponible sur ce serveur (alias = $alias_boussole)", _BOUSSOLE_LOG . _LOG_ERREUR);
 				}
 			}
 			else {
 				$erreur = 'aucune_boussole_hebergee';
-				spip_log("Aucune boussole disponible sur ce serveur", 'boussole' . _LOG_ERREUR);
+				spip_log("Aucune boussole disponible sur ce serveur", _BOUSSOLE_LOG . _LOG_ERREUR);
 			}
 		}
 		else {
 			$erreur = 'alias_boussole_manquant';
-			spip_log("Alias de la boussole non fournie au serveur $nom_serveur", 'boussole' . _LOG_ERREUR);
+			spip_log("Alias de la boussole non fournie au serveur $nom_serveur", _BOUSSOLE_LOG . _LOG_ERREUR);
 		}
 
 		// Envoi du fichier ou de l'erreur

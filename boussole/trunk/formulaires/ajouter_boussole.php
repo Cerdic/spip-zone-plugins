@@ -32,11 +32,11 @@ function formulaires_ajouter_boussole_traiter_dist(){
 	// Determination des messages de retour
 	if (!$ok) {
 		$retour['message_erreur'] = $message;
-		spip_log("Ajout manuel : erreur lors de l'insertion de la boussole $boussole", 'boussole' . _LOG_ERREUR);
+		spip_log("Ajout manuel : erreur lors de l'insertion de la boussole $boussole", _BOUSSOLE_LOG . _LOG_ERREUR);
 	}
 	else {
 		$retour['message_ok'] = $message;
-		spip_log("Ajout manuel ok de la boussole $boussole", 'boussole' . _LOG_INFO);
+		spip_log("Ajout manuel ok de la boussole $boussole", _BOUSSOLE_LOG . _LOG_INFO);
 	}
 	$retour['editable'] = true;
 

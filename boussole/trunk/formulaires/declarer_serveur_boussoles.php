@@ -53,11 +53,11 @@ function formulaires_declarer_serveur_boussoles_traiter_dist() {
 	// Determination des messages de retour
 	if (!$ok) {
 		$retour['message_erreur'] = $message;
-		spip_log("Erreur ajout serveur $serveur (url : $url_serveur). $message", 'boussole' . _LOG_ERREUR);
+		spip_log("Erreur ajout serveur $serveur (url : $url_serveur). $message", _BOUSSOLE_LOG . _LOG_ERREUR);
 	}
 	else {
 		$retour['message_ok'] = _T('boussole:message_ok_serveur_ajoute', array('serveur' => $serveur, 'url' => $url_serveur));
-		spip_log("Ajout serveur $serveur ok (url : $url_serveur)", 'boussole' . _LOG_INFO);
+		spip_log("Ajout serveur $serveur ok (url : $url_serveur)", _BOUSSOLE_LOG . _LOG_INFO);
 	}
 	$retour['editable'] = true;
 

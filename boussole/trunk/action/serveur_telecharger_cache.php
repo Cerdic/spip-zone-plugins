@@ -7,7 +7,7 @@ function action_serveur_telecharger_cache_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$fichier = $securiser_action();
 	if (!@is_readable($fichier)) {
-		spip_log("Téléchargement impossible du cache, $fichier pas accessible en lecture", 'boussole' . _LOG_ERREUR);
+		spip_log("Téléchargement impossible du cache, $fichier pas accessible en lecture", _BOUSSOLE_LOG . _LOG_ERREUR);
 		return;
 	}
 

@@ -68,11 +68,11 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 	include_spip('inc/client');
 	list($ok, $message) = boussole_ajouter('spip', 'spip');
 	if (!$ok)
-		spip_log("Administrations - Erreur lors de l'ajout de la boussole spip : " . $message, 'boussole' . _LOG_ERREUR);
+		spip_log("Administrations - Erreur lors de l'ajout de la boussole spip : " . $message, _BOUSSOLE_LOG . _LOG_ERREUR);
 	else
-		spip_log("Administrations - Ajout de la boussole spip ok", 'boussole' . _LOG_INFO);
+		spip_log("Administrations - Ajout de la boussole spip ok", _BOUSSOLE_LOG . _LOG_INFO);
 
-	spip_log('Installation/mise à jour des tables du plugin','boussole' . _LOG_INFO);
+	spip_log('Installation/mise à jour des tables du plugin',_BOUSSOLE_LOG . _LOG_INFO);
 }
 
 
@@ -109,7 +109,7 @@ function boussole_vider_tables($nom_meta_base_version) {
 	// on efface la meta du schéma du plugin
 	effacer_meta($nom_meta_base_version);
 
-	spip_log('Désinstallation des données du plugin','boussole' . _LOG_INFO);
+	spip_log('Désinstallation des données du plugin',_BOUSSOLE_LOG . _LOG_INFO);
 }
 
 
@@ -136,7 +136,7 @@ function maj02_boussole() {
 				supprimer_boussole($_aka_boussole);
 		}
 	}
-	spip_log('Maj 0.2 des données du plugin','boussole' . _LOG_INFO);
+	spip_log('Maj 0.2 des données du plugin',_BOUSSOLE_LOG . _LOG_INFO);
 }
 
 
@@ -191,7 +191,7 @@ function maj03_boussole($defaut_config) {
 	include_spip('inc/config');
 	ecrire_config('boussole', $config);
 
-	spip_log('Maj 0.3 des données du plugin : ' . serialize(lire_config('boussole')),'boussole' . _LOG_INFO);
+	spip_log('Maj 0.3 des données du plugin : ' . serialize(lire_config('boussole')),_BOUSSOLE_LOG . _LOG_INFO);
 }
 
 
@@ -221,7 +221,7 @@ function maj04_boussole($defaut_config) {
 	// Mise à jour en BDD de la confguration migrée
 	ecrire_config('boussole', $config);
 
-	spip_log('Maj 0.4 des données du plugin : ' . serialize(lire_config('boussole')),'boussole' . _LOG_INFO);
+	spip_log('Maj 0.4 des données du plugin : ' . serialize(lire_config('boussole')),_BOUSSOLE_LOG . _LOG_INFO);
 }
 
 ?>

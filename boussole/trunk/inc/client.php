@@ -28,9 +28,9 @@ function boussole_actualiser_boussoles() {
 		foreach($infos as $_infos) {
 			list($ok, $message) = boussole_ajouter($_infos['alias'], $_infos['serveur']);
 			if (!$ok)
-				spip_log("Actualisation en erreur (boussole = " . $_infos['alias'] . ") : " . $message, 'boussole' . _LOG_ERREUR);
+				spip_log("Actualisation en erreur (boussole = " . $_infos['alias'] . ") : " . $message, _BOUSSOLE_LOG . _LOG_ERREUR);
 			else
-				spip_log("Actualisation ok (boussole = " . $_infos['alias'] . ")", 'boussole' . _LOG_INFO);
+				spip_log("Actualisation ok (boussole = " . $_infos['alias'] . ")", _BOUSSOLE_LOG . _LOG_INFO);
 		}
 	}
 }

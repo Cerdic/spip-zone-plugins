@@ -37,7 +37,7 @@ function action_client_supprimer_boussole_dist(){
 	if ($alias) {
 		include_spip('inc/client');
 		boussole_supprimer($alias);
-		spip_log("ACTION SUPPRIMER BOUSSOLE : alias = ". $alias, 'boussole' . _LOG_INFO);
+		spip_log("ACTION SUPPRIMER BOUSSOLE : alias = ". $alias, _BOUSSOLE_LOG . _LOG_INFO);
 	}
 }
 
