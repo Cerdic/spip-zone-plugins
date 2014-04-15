@@ -55,8 +55,8 @@ function genie_rssarticle_copie_dist($t){
             
             $texte = $a['descriptif'];
             //traitement pour syntaxe SPIP
-            if($html2spip)
-            $texte = html2spip($texte);
+           // if($html2spip)
+           // $texte = html2spip($texte);
             $lang  = $a['lang'];
             $url   = $a['url'];
             $tags =  $a['tags'];
@@ -192,10 +192,26 @@ function extraire_enclosures($tags) {
 	return $s;
 }
 
+/**
+ * 
+ * Nettoyer l'utf-8 et ses accents 
+ *
+**/
+function clean_utf8($t) {
+	if (!preg_match('!\S!u', $t))
+		$t = preg_replace_callback(',&#x([0-9a-f]+);,i', 'utf8_do', utf8_encode(utf8_decode($t)));
+	return $t;
+}
+
 //
 //passe le html en SPIP
 //repris de memo.php, merci
+
 function html2spip($lapage){
+	$lapage=clean_utf8($lapage);
+	
+	// remettre les double quotes casé par texte_backend
+	$lapage = str_replace('&#034;','"',$lapage);
 	
 	// PRETRAITEMENTS
 	$lapage = str_replace("\n\r", "\r", $lapage); // echapper au greedyness de preg_replace
@@ -213,11 +229,12 @@ function html2spip($lapage){
 	$lapage = html2unicode($lapage, true); //secure?
 		
 	// liens
-	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>'\"]*)[^<>]*>(.*?)<\/a>,uims", "[\\2->\\1]", $lapage);
+	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>]*)[^<>]>(.*?)<\/a>,uims", "[\\2->\\1]", $lapage);
 
 	// images (cf ressource)
-	$lapage = preg_replace(",<img[ \t\n\r][^<>]*src=[^<>]*(http[^<>'\"]*)[^<>]*>,uims", "[img]$1[/img]", $lapage);
+	$lapage = preg_replace(",<img[ \t\n\r][^<>]*src=[^<>]*(http[^<>'\"]*)[^<>]*>,uims","[img]\\1[//img]", $lapage);
 
+		
 	// intertitres
 	$lapage = preg_replace(",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims", "\r{{{ \\3 }}}\r", $lapage);
 	// tableaux
@@ -240,7 +257,7 @@ function html2spip($lapage){
 	$lapage = preg_replace(",@@b@@(.*)@@/b@@,Uims","{{\\1}}",$lapage);
 	
 	//retablir les images pour les lire avec le plugin ressource
-	$lapage = preg_replace('#\[img\](.*)\[\/img\]#Umis', "<$1>", $lapage);
+	$lapage = preg_replace('#\[img\](.*)\[\//img\]#Umis', "<$1>", $lapage);
 	
 	return $lapage;
 }
