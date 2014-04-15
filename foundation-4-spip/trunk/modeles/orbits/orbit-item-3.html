@@ -1,0 +1,5 @@
+<BOUCLE_orbit_item(DOCUMENTS){id_document}>
+  [(#FICHIER
+    |image_passe_partout{#ENV{largeur}, #ENV{hauteur}}
+    |image_recadre{#ENV{largeur}, #ENV{hauteur}, center, #GET{couleur}})]
+</BOUCLE_orbit_item>
