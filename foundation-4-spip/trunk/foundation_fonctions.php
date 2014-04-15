@@ -113,3 +113,27 @@ function balise_COLONNES_dist($p) {
   $p->interdire_scripts = false;
   return $p;
 }
+
+/**
+ * Balise #ORBIT, un alias pour le modèle orbit.
+ */
+function balise_ORBIT_dist($p) {
+  // On récupère les paramètres de la balise.
+  $objet = interprete_argument_balise(1, $p);
+  $id_objet = interprete_argument_balise(2, $p);
+  $data_option = interprete_argument_balise(3, $p);
+  $class = interprete_argument_balise(4, $p);
+
+  // On appel le modèle orbit avec les paramètres de la balise.
+  // Inspirer la la balise #LESAUTEURS
+  $p->code = sprintf(CODE_RECUPERER_FOND, "'modeles/orbit'",
+           "array(
+                  'objet' => $objet,
+                  'id_objet' => $id_objet,
+                  'data-options' => $data_option,
+                  'class' => $class
+                  )",
+           '',
+           _q($connect));
+  return $p;
+}
