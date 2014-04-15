@@ -60,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'geoportail_objet'		=> 'Types d\'objets &agrave; g&eacute;or&eacute;f&eacute;rencer',
 'geoobjet_info'			=> 'S&eacute;lectionner les objets pour lesquels vous voulez g&eacute;rer un g&eacute;or&eacute;f&eacute;rencement. <br/><i>En v.2, SPIP peut r&eacute;cup&eacute;rer automatiquement la position des fichers g&eacute;otagg&eacute;, les GPX et les KML.</i>',
+'icone_mots_cles'		=> 'Mots-cl&eacute;s',
+'icone_breves'			=> 'Br&egrave;ves',
+'info_documents'		=> 'Documents',
 'info_documents_auto'	=> 'Extraire depuis le fichier',
 'geoportail_sysref'		=> 'Syst&egrave;me de saisie',
 'geoportail_sysinfo'	=> 'Vous pouvez choisir un syst&egrave;me de coordonn&eacute;es pour la saisie dans les formulaires.<br/>Dans ce cas, vous devrez entrer les deux coordon&eacute;es dans le syst&egrave;me choisi, elles seront transform&eacute;es &agrave; la vol&eacute;e en g&eacute;ographique avant d\'&ecirc;tre envoy&eacute;es au formulaire.<br/>Vous pourrez n&eacute;anmoins continuer &agrave; saisir en g&eacute;od&eacute;sique.',

@@ -143,7 +143,7 @@ function exec_geoportail_config_options()
 			."<br/><input type='checkbox' name='auteur' id='auteur' $gauteur><label for=auteur>"._T('spip:icone_auteurs')."</label>"
 			."<br/><input type='checkbox' name='document' id='document' $gdocument "
 			." onchange='javascript:jQuery(\"#docauto\").attr(\"disabled\",this.checked?\"\":\"disabled\")'><label for=document>"
-			._T('spip:info_documents')."</label>"
+			._T('geoportail:info_documents')."</label>"
 			;
 
 		if ($GLOBALS['spip_version_branche']>2) $form .= "<br/><input type='checkbox' name='docauto' id='docauto' $gdocauto style='margin-left:2em;'><label for=docauto>"._T('geoportail:info_documents_auto')."</label>";
@@ -151,8 +151,8 @@ function exec_geoportail_config_options()
 		if (defined('_DIR_PLUGIN_ALBUMS')) $form .= "<br/><input type='checkbox' name='album' id='album' $galbum><label for=album>"._T('album:titre_album')."</label>";
 
 		$form .= "<br/><input type='checkbox' name='rubrique' id='rubrique' $grubrique><label for=rubrique>"._T('spip:icone_rubriques')."</label>"
-			."</td><td valign=top><input type='checkbox' name='mot' id='mot' $gmot><label for=mot>"._T('spip:icone_mots_cles')."</label>"
-			."<br/><input type='checkbox' name='breve' id='breve' $gbreve><label for=breve>"._T('spip:icone_breves')."</label>"
+			."</td><td valign=top><input type='checkbox' name='mot' id='mot' $gmot><label for=mot>"._T('geoportail:icone_mots_cles')."</label>"
+			."<br/><input type='checkbox' name='breve' id='breve' $gbreve><label for=breve>"._T('geoportail:icone_breves')."</label>"
 			."<br/><input type='checkbox' name='syndic' id='syndic' $gsyndic><label for=syndic>"._T('spip:icone_sites_references')."</label>"
 			."<br/><br/>"
 			."<input type='submit' name='objet' class='fondo' style='margin-left:1em; float:right;' value='"._T('bouton_valider')."' />"
