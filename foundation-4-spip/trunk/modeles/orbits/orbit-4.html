@@ -6,6 +6,7 @@
   * class: classe du UL principal. Défaut: orbit.
   * objet: Type d'objet sur lequel s'applique le slideshow orbit.
   * id_objet: identifiant de l'objet.
+  * data-options: options javscript de foundation (cf leur doc sur orbit)
 
 ]
 
@@ -13,18 +14,24 @@
 
   [(#REM) S'il n'y a pas d'objet passer dans #ENV on tente d'afficher les documents d'un objet SPIP ]
   <BOUCLE_article_slider(DOCUMENTS)
-                                    {id_rubrique ?}
-                                    {id_article ?}
-                                    {id_breve ?}
-                                    {si #ENV{objet}|non}>
+                                  {id_article ?}
+                                  {id_breve ?}
+                                  {si #ENV{objet}|non}>
     <INCLURE{fond=modeles/orbits/orbit-item, id_document, env}>
   </BOUCLE_article_slider>
 
-    [(#REM) Si un objet spécifique est passé, on récupère les documents de l'objet ]
-    <BOUCLE_objet_slider(DOCUMENTS documents_liens) {objet} {id_objet}>
+    [(#REM) Dans une rubrique ]
+    <BOUCLE_rubrique_slider(RUBRIQUES)
+                                    {id_rubrique ?}
+                                    {si #ENV{objet}|non}>
       <INCLURE{fond=modeles/orbits/orbit-item, id_document, env}>
-    </BOUCLE_objet_slider>
+    </BOUCLE_rubrique_slider>
 
+      [(#REM) Si un objet spécifique est passé, on récupère les documents de l'objet ]
+      <BOUCLE_objet_slider(DOCUMENTS documents_liens) {objet} {id_objet}>
+        <INCLURE{fond=modeles/orbits/orbit-item, id_document, env}>
+      </BOUCLE_objet_slider>
+    <//B_rubrique_slider>
   <//B_article_slider>
 
 </ul>
