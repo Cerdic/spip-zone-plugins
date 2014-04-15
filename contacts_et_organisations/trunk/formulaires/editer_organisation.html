@@ -3,7 +3,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#ENV{editable}|oui)
+	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 		<form method='post' action='[(#ENV{action})]'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<input type='hidden' name='id_organisation' value='#ENV{id_organisation}' />
@@ -53,5 +53,5 @@
 			</p>
 			
 		</div></form>
-	]
+	</BOUCLE_editable>
 </div>
