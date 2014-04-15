@@ -3,32 +3,47 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('medias_nettoyage_fonctions');
+include_spip('inc/filtres');
 include_spip('inc/meta');
 
 function genie_medias_reparer_documents_dist ($t) {
-	include_spip('medias_nettoyage_fonctions');
 
-	if (!isset(lire_metas('medias_nettoyage'))) {
-		// Si le plugin n'a pas encore été configuré,
-		// on lance le script entre 00h00 et 06h00
+	// Si on est en SPIP 2, on regarde $GLOBALS
+	// En SPIP 3, on passe par la fonction lire_config
+	if (intval(spip_version())==2) {
+		$medias_nettoyage = ($GLOBALS['meta']['medias_nettoyage']) ? @unserialize($GLOBALS['meta']['medias_nettoyage']) : null;
+	} else if ( intval(spip_version()) == 3 ){
+		include_spip('inc/config');
+		$medias_nettoyage = lire_config('medias_nettoyage');
+	} else {
+		$medias_nettoyage = null;
+	}
+
+	// Si le plugin n'a pas encore été configuré,
+	// on lance le script entre 00h00 et 06h00
+	if (!isset($medias_nettoyage)) {
+		spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : On est dans la tranche horaire par défaut. On lance le script ' . __FUNCTION__ ,"medias_orphelins");
 		medias_lancer_script();
 
-	} else if (isset(lire_metas('medias_nettoyage/activation') 
-		AND lire_metas('medias_nettoyage/activation') == 'oui'
-		AND !isset(lire_metas('medias_nettoyage/horaires'))) {
+	} else if (isset($medias_nettoyage['activation']) 
+		AND $medias_nettoyage['activation'] == 'oui'
+		AND (!isset($medias_nettoyage['horaires']) OR $medias_nettoyage['horaires'] == '')) {
 		// Si on a activé la tranche horaire mais qu'on a pas choisi le créneau
 		// On lance le script entre 00h00 et 06h00
-		medias_lancer_script();
+			spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Le CRON par tranche horaire est actif mais non défini. On lance le script ' . __FUNCTION__ ,"medias_orphelins");
+			medias_lancer_script();
 
-	} else if (isset(lire_metas('medias_nettoyage/activation')) AND isset(lire_metas('medias_nettoyage/horaires'))) {
+	} else if (isset($medias_nettoyage['activation']) AND isset($medias_nettoyage['horaires'])) {
 		// Si on a activé la tranche horaire et qu'on a choisi le créneau
 		// On lance le script dans la tranche horaire choisie
-		$horaires = explode('-', lire_metas('medias_nettoyage/horaires'));
+		$horaires = ($medias_nettoyage['horaires']=='') ? array(0,600) : explode('-', $medias_nettoyage['horaires']);
+		spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Le CRON par tranche horaire est actif et défini. On lance le script ' . __FUNCTION__ . ' entre ' . $horaires[0] . ' et ' . $horaires[1],"medias_orphelins");
 		medias_lancer_script($horaires[0],$horaires[1]);
 
-	} else if (isset(lire_metas('medias_nettoyage/activation')) AND lire_metas('medias_nettoyage/activation') == 'non') {
+	} else if (isset($medias_nettoyage['activation']) AND $medias_nettoyage['activation'] == 'non') {
 		// Si on a sélectionné 'non' pour la tranche horaire,
 		// on lance le script toutes les 5heures comme prévu dans medias_nettoyage_pipelines.php
+		spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Le CRON par tranche horaire est désactivé. On lance le script ' . __FUNCTION__ . ' toutes les 5h.',"medias_orphelins");
 		if (function_exists('medias_reparer_documents_fichiers')) {
 			medias_reparer_documents_fichiers();
 		}

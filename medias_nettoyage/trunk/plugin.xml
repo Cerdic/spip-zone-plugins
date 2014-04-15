@@ -4,7 +4,7 @@
 	<slogan>On range nos medias!</slogan>
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
-	<version>0.8.3</version>
+	<version>0.8.4</version>
 	<etat>dev</etat>
 	<categorie>outil</categorie>
 
@@ -32,7 +32,7 @@
 	<necessite id="saisies" version="[1.20.0;]" />
 
 	<bouton id="medias_tabbord" parent="naviguer">
-		<icone>images/medias_tabbord-16.png</icone>
+		<icone>prive/themes/spip/images/medias_tabbord-24.png</icone>
 		<titre>medias_nettoyage:titre_page_medias_tabbord</titre>
 		<url>medias_tabbord</url>
 	</bouton>
