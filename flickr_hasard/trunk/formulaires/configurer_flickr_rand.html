@@ -17,6 +17,14 @@
         	<p class='explication'><:flickr_rand:explication_plage:></p>
         	<input type="text" name="plage" class="text" size="5" id='plage' value="[(#ENV{plage}|intval)]" />
         </li>
+        
+        #SET{erreurs,#ENV**{erreurs}|table_valeur{blacklist}}
+        <li class="editer editer_blacklist[ (#GET{erreurs}|oui)erreur]">
+        	<label><:flickr_rand:label_blacklist:></label>
+        	[<span class='erreur_message'>(#GET{erreurs})</span>]
+        	<p class='explication'><:flickr_rand:explication_blacklist:></p>
+        	<input type="text" name="blacklist" class="text" id='blacklist' value="[(#ENV{blacklist})]" />
+        </li>
 		</ul>
 
 

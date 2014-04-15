@@ -31,7 +31,7 @@ function fetch_data_flickr($params,$debug=false) {
 //  Main
 // 
 
-function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1,$id) {
+function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1,$id,$iteration=0) {
     $api_key =  _KEY_API_FLICKR_RAND;
     
     // etape -1: recuper config sur present
@@ -39,8 +39,11 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
         $plage = (int) lire_config('flickr_rand/plage'); 
         if ($plage>4000) $plage = 4000; 
         if ($plage<0)    $plage = 1;
+        
+        $blacklist =   explode(";",lire_config('flickr_rand/blacklist', ""));
     } else {
         $plage = 100;
+        $blacklist = array();
     }
     
     // etape 0: traiter des parametres et ajouter les valeurs par defaut (le php ne les prends pas via fonction a cause du modele)
@@ -120,7 +123,17 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
             $_photo_rand_title = @$rsp_obj['photo']['title']['_content'];
             $_photo_rand_owner = @$rsp_obj['photo']['owner']['username'];
             $_photo_rand_licence = @$rsp_obj['photo']['license'];  
-            $_photo_rand_url_page = @$rsp_obj['photo']['urls']['url'][0]['_content'];             
+            $_photo_rand_url_page = @$rsp_obj['photo']['urls']['url'][0]['_content'];   
+            
+            // si l'auteur est ds liste noire
+            // on refait une recherche
+            if (in_array($_photo_rand_owner, $blacklist) && strlen($_photo_rand_owner)>0) {
+                if ($iteration<10) {
+                     return flickr_rand($str,$tags,$license,$align,$size,$safesearch,$id,++$iteration);
+                } else {
+                    return "<!-- flickr_rand: no match -->";
+                }
+            }          
             
             // doc licence: http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html            
             switch ($_photo_rand_licence)  {
