@@ -132,7 +132,7 @@ function ressource_meta($res) {
 
 		/* recuperer un album flickr */
 		if (preg_match(',^https?://(www\.)?flickr\.com/.*/sets/(\d+),', $src, $r)) {
-			meta['album'] = $r[2];
+			$meta['album'] = $r[2];
 			if ($html = recuperer_fond('modeles/album_flickr', $meta)) {
 				$meta['embed'] = $html;
 			}
