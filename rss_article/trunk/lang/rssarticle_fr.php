@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cron_interval_timer' => 'Intervalle en seconde ',
   
   //R
-  'html2spip' => 'Passer le HTML en syntaxe SPIP',
+  'html2spip' => 'Passer le HTML en syntaxe SPIP. Utilisez le plugin "ressource" pour afficher ensuite les images.',
 
   // S
   'statut_article_importe' => 'Statut des articles import&eacute;s',

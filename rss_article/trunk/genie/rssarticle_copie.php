@@ -196,6 +196,11 @@ function extraire_enclosures($tags) {
 //passe le html en SPIP
 //repris de memo.php, merci
 function html2spip($lapage){
+	
+	// PRETRAITEMENTS
+	$lapage = str_replace("\n\r", "\r", $lapage); // echapper au greedyness de preg_replace
+	$lapage = str_replace("\n", "\r", $lapage);
+
 	// itals
 	$lapage = preg_replace(",<(i|em)( [^>\r]*)?".">(.+)</\\1>,Uims", "{\\3}", $lapage);
 	
@@ -208,13 +213,23 @@ function html2spip($lapage){
 	$lapage = html2unicode($lapage, true); //secure?
 		
 	// liens
-	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=\"(.*?)\"[ \t\n\r][^<>]*\">(.*?)<\/a>,uims", "[\\2->\\1]", $lapage);
+	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>'\"]*)[^<>]*>(.*?)<\/a>,uims", "[\\2->\\1]", $lapage);
+
+	// images (cf ressource)
+	$lapage = preg_replace(",<img[ \t\n\r][^<>]*src=[^<>]*(http[^<>'\"]*)[^<>]*>,uims", "[img]$1[/img]", $lapage);
+
 	// intertitres
 	$lapage = preg_replace(",<(h[1-3])( [^>]*)?".">(.+)</\\1>,Uims", "\r{{{ \\3 }}}\r", $lapage);
 	// tableaux
 	$lapage = preg_replace(",<tr( [^>]*)?".">,Uims", "<br />\r", $lapage);
 	$lapage = preg_replace(",<t[hd]( [^>]*)?".">,Uims", " | ", $lapage);
 
+	// POST TRAITEMENT
+	$lapage = str_replace("\r", "\n", $lapage);
+
+	// SUPPRIME LES TAGS
+	if (eregi("<title.*>(.*)</title>", $lapage, $regs))
+	$titre = textebrut($regs[1]);
 	$lapage = textebrut($lapage);
 	
 	// Suite tableaux
@@ -223,6 +238,9 @@ function html2spip($lapage){
 	
 	// retablir les gras
 	$lapage = preg_replace(",@@b@@(.*)@@/b@@,Uims","{{\\1}}",$lapage);
+	
+	//retablir les images pour les lire avec le plugin ressource
+	$lapage = preg_replace('#\[img\](.*)\[\/img\]#Umis', "<$1>", $lapage);
 	
 	return $lapage;
 }
