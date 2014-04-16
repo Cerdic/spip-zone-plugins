@@ -144,7 +144,7 @@ function inscription3_transfert_infos_auteurs(){
 
 	$desc_auteurs_elargis = sql_showtable('spip_auteurs_elargis', '', false);
 	if(isset($desc_auteurs_elargis['field'])){
-		$champs = array_intersect($desc_auteurs_elargis,$champs);
+		$champs = array_intersect(array_keys($desc_auteurs_elargis['field']),$champs);
 		$auteurs = sql_select($champs,'spip_auteurs_elargis');
 		while($auteur = sql_fetch($auteurs)){
 			$id_auteur = $auteur['id_auteur'];
