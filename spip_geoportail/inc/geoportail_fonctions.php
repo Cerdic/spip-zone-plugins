@@ -109,7 +109,7 @@ function geoportail_affiche_milieu($flux)
 					'zone'			=> _request('zone')
 				);
 	// Articles
-	if (($exec == 'article' ||$exec == 'articles') && $GLOBALS['meta']['geoportail_geoarticle']) 
+	if (($exec == 'article' || $exec == 'articles') && $GLOBALS['meta']['geoportail_geoarticle']) 
 	{	$id_article = $contexte['id_objet'] = $flux['args']['id_article'];
 		if ($GLOBALS['meta']['geoportail_geodocument']) $contexte['id_article'] = $flux['args']['id_article'];
 		$contexte['objet'] = 'article';
@@ -122,7 +122,7 @@ function geoportail_affiche_milieu($flux)
 		}
 	}
 	// Auteurs
-	else if (($exec=='infos_perso' || $exec=='auteur' || $exec == 'auteur_infos') && $GLOBALS['meta']['geoportail_geoauteur']) 
+	else if (($exec=='infos_perso' || $exec == 'auteur' || $exec == 'auteur_infos') && $GLOBALS['meta']['geoportail_geoauteur']) 
 	{	$contexte['id_objet'] = $flux['args']['id_auteur'];
 		$contexte['objet'] = 'auteur';
 		if ($exec=='infos_perso') $contexte['id_objet'] = $GLOBALS['auteur_session']['id_auteur'];
@@ -156,17 +156,17 @@ function geoportail_affiche_milieu($flux)
 		}
 	}
 	// Mots
-	else if ($exec == 'mots_edit' && $GLOBALS['meta']['geoportail_geomot']) 
+	else if (($exec == 'mots_edit' || $exec == 'mot') && $GLOBALS['meta']['geoportail_geomot']) 
 	{	$contexte['id_objet'] = $flux['args']['id_mot'];
 		$contexte['objet'] = 'mot';
 	}
 	// Breves
-	else if ($exec == 'breves_voir' && $GLOBALS['meta']['geoportail_geobreve']) 
+	else if (($exec == 'breves_voir' || $exec == 'breve') && $GLOBALS['meta']['geoportail_geobreve']) 
 	{	$contexte['id_objet'] = $flux['args']['id_breve'];
 		$contexte['objet'] = 'breve';
 	}
 	// Sites
-	else if ($exec == 'sites' && $GLOBALS['meta']['geoportail_geosyndic']) 
+	else if (($exec == 'sites' || $exec == 'site') && $GLOBALS['meta']['geoportail_geosyndic']) 
 	{	$contexte['id_objet'] = $flux['args']['id_syndic'];
 		$contexte['objet'] = 'syndic';
 	}
