@@ -14,12 +14,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return
  */
 function inscription3_upgrade($nom_meta_base_version,$version_cible){
+    include_spip('inc/config');
+
 	$exceptions_des_champs_auteurs_elargis = pipeline('i3_exceptions_des_champs_auteurs_elargis',array());
 	
 	/**
 	 *  A t on une meta d'installation déjà?
 	 */
 	$inscription3_meta = isset($GLOBALS['meta']['inscription3']) ? $GLOBALS['meta']['inscription3'] : false;
+	$inscription2_meta = lire_config('inscription2');
 
 	/**
 	 * Certaines montées de version ont oublié de corriger la meta de I2
@@ -31,8 +34,8 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 	/**
 	 * Inscription2 semble installé, on tranfère sa configuration vers inscription3
 	 */
-	if(isset($GLOBALS['meta']['inscription2']) && is_array(@unserialize($GLOBALS['meta']['inscription2']))){
-		ecrire_meta('inscription3', $GLOBALS['meta']['inscription2']);
+	if(isset($inscription2_meta) && is_array($inscription2_meta)){
+		ecrire_meta('inscription3', $inscription2_meta);
 		$inscription3_meta = $inscription2_meta;
 		inscription3_transfert_infos_auteurs();
 		effacer_meta('inscription2');
