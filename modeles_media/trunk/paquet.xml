@@ -1,7 +1,7 @@
 <paquet
 	prefix="media"
 	categorie="edition"
-	version="1.2.9"
+	version="1.2.10"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/media-24.png"
