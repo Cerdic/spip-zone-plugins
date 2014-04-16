@@ -37,7 +37,6 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 	if(isset($inscription2_meta) && is_array($inscription2_meta)){
 		ecrire_meta('inscription3', $inscription2_meta);
 		$inscription3_meta = $inscription2_meta;
-		inscription3_transfert_infos_auteurs();
 		effacer_meta('inscription2');
 	}
 	
@@ -67,6 +66,9 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 	}
 
 	cextras_api_upgrade(inscription3_declarer_champs_extras(), $maj['create']);
+
+    if ($inscription3_meta && !is_array(@unserialize($inscription3_meta)))
+	    $maj['create'][] = array('inscription3_transfert_infos_auteurs');
 
 	$maj['3.0.2'] = array(
 		array('i3_installer_pays',array()),
