@@ -55,8 +55,8 @@ function genie_rssarticle_copie_dist($t){
             
             $texte = $a['descriptif'];
             //traitement pour syntaxe SPIP
-           // if($html2spip)
-           // $texte = html2spip($texte);
+            if($html2spip)
+            $texte = html2spip($texte);
             $lang  = $a['lang'];
             $url   = $a['url'];
             $tags =  $a['tags'];
