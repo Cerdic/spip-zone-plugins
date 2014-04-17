@@ -1,0 +1,32 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_cog_region,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_cog_region' value='#ENV{id_cog_region}' />
+		<ul>
+
+			[(#SAISIE{input, chef_lieu, obligatoire=oui,
+				label=<:cog_region:label_chef_lieu:>})]
+
+			[(#SAISIE{input, type_charniere, obligatoire=oui,
+				label=<:cog_region:label_type_charniere:>})]
+
+			[(#SAISIE{input, nom_majuscule, obligatoire=oui,
+				label=<:cog_region:label_nom_majuscule:>})]
+
+			[(#SAISIE{input, nom, obligatoire=oui,
+				label=<:cog_region:label_nom:>})]
+
+			[(#SAISIE{input, code, obligatoire=oui,
+				label=<:cog_region:label_code:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

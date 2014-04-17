@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	libelle,1, 
+	id_cog_epci,1,
+	points,-1
+}})]<B_liste_cog_epcis>
+#ANCRE_PAGINATION
+<div class="liste-objets cog_epcis">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{cog_epci:info_1_cog_epci,cog_epci:info_nb_cog_epcis}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='libelle' scope='col'>[(#TRI{libelle,<:cog_epci:label_libelle:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_cog_epci,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_cog_epcis(COG_EPCIS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num libelle},#GET{defaut_tri}}{par libelle}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{cog_epci-16.png}|balise_img)]</td>
+			<td class='libelle principale'>[(#LOGO_COG_EPCI|image_reduire{20,26})]<a href="[(#ID_COG_EPCI|generer_url_entite{cog_epci})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COG_EPCI">[(#RANG). ]#LIBELLE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,cog_epci,#ID_COG_EPCI}|?{
+				<a href="[(#URL_ECRIRE{cog_epci_edit,id_cog_epci=#ID_COG_EPCI})]">#ID_COG_EPCI</a>,
+				#ID_COG_EPCI
+			})]</td>
+		</tr>
+	</BOUCLE_liste_cog_epcis>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_cog_epcis>[
+<div class="liste-objets cog_epcis caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_cog_epcis>

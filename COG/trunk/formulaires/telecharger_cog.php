@@ -98,7 +98,7 @@ if($infos_fichier['extension']=='zip')
 
 	if(isset($contenu[0]))	{
 		foreach ($contenu[0] as $fichier) {
-			rename(_DIR_TMP.$fichier['filename'],$nom_fichier_txt);
+			rename(_DIR_TMP.$fichier['filename'],$emplacement.$fichier['filename']);
 		}
 	}
 	unlink($nom_fichier);

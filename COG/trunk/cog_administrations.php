@@ -14,9 +14,9 @@ function cog_upgrade($nom_meta_base_version, $version_cible){
 									'spip_cog_regions',
 									'spip_cog_epcis',
 									'spip_cog_epcis_natures',
-									'spip_cog_zauers',
+									/*'spip_cog_zauers',
 									'spip_cog_zauers_espace',
-									'spip_cog_zauers_categories')),
+									'spip_cog_zauers_categories'*/)),
 		array('cog_peupler_base')
 	);
 	include_spip('base/upgrade');
@@ -33,9 +33,9 @@ function cog_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_cog_regions");
 	sql_drop_table("spip_cog_epcis");
 	sql_drop_table("spip_cog_epci_natures");
-	sql_drop_table("spip_cog_zauers");
+	/*sql_drop_table("spip_cog_zauers");
 	sql_drop_table("spip_cog_zauer_espace");
-	sql_drop_table("spip_cog_zauer_categories");
+	sql_drop_table("spip_cog_zauer_categories");*/
 
 	effacer_meta($nom_meta_base_version);
 }

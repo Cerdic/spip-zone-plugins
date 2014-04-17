@@ -19,6 +19,9 @@ foreach($tab_objet as &$objet)
 				$nom_fichier=$emplacement.$infos_fichier['filename'].'.txt';
 			if(!file_exists($nom_fichier))
 				$fichier_manquant=true;
+			$nom_fichier=$emplacement.$infos_fichier['filename'].'.xls';
+			if(file_exists($nom_fichier))
+				$fichier_manquant=false;
 		}
 		$objet['fichier_manquant']=$fichier_manquant;
 	}
@@ -53,8 +56,10 @@ function formulaires_importer_cog_verifier_dist(){
 			if($extension =='zip')
 				$extension = 'txt';
 			$fichier=$infos_fichier['filename'].'.'.$extension;
+			if(!file_exists($emplacement.$fichier))
+				$fichier=$infos_fichier['filename'].'.xls';
 			if (!file_exists($emplacement.$fichier)) {
-				$erreurs['fichier'] .= _T('cog:fichier_introuvable')." ".$emplacement.$fichier ;
+				$erreurs['fichier'] .= _T('cog:fichier_introuvable')." ".$emplacement.$infos_fichier['filename'].'.[txt|xls]';
 				$erreurs['message_erreur'] .= _T('cog:fichier_introuvable');
 			}
 			}
@@ -91,21 +96,11 @@ return $retour;
 
 
 
-function cog_import_epcis($objet,$options)
+function cog_import_cog_epci($objet,$options)
 {
 
 	$options['decalage']=0;
-	$tab_correspondance= array(
-	'code'		=>	0,
-	'libelle'	=>	1,
-	'nature'	=>	array('fichier'=>1,'col'=>0),
-	);
-	$tab_relation= array(
-	'code_insee'	=>	array('fichier'=>1,'col'=>3),
-	'objet'		=>	'cog_epci',
-	);
-
-	return cog_import($objet,$options,$tab_correspondance,$tab_relation);
+	return cog_import($objet,$options);
 
 }
 
@@ -117,8 +112,7 @@ function cog_import_epcis($objet,$options)
 
 
 
-function cog_applique_filtre($tab_value,$tab_filtres)
-{
+function cog_applique_filtre($tab_value,$tab_filtres){
 	foreach($tab_filtres as $col=>$filtre)
 	{
 		if(isset($tab_value[$col]))
@@ -133,13 +127,9 @@ return true;
 }
 
 
-function cog_renvoyer_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichier,$one=true)
+function cog_renvoyer_valeur($ligne,$correspondance)
 {
-	if(isset($correspondance['fichier']))
-	{
-		return  cog_ramener_valeur($ligne,$correspondance,$fichier,$contenu_fichier,$one);
-	}
-	elseif(isset($correspondance['col']))
+	if(isset($correspondance['col']))
 	{
 		return  $ligne[$correspondance['col']];
 	}
@@ -150,17 +140,23 @@ function cog_renvoyer_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichie
 }
 
 
-function cog_ramener_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichier,$one=true)
+function cog_ramener_valeur(&$ligne,&$correspondance,$objet,&$contenu_fichier,$one=true)
 {
 	include_spip('inc/config');
+	include_spip('cog_config');
 	$tab_result=array();
-	$num_fichier=$correspondance['fichier'];
-	$col_key1=$fichier['fichier'][$num_fichier][1];
-	$col_key2=$fichier['fichier'][$num_fichier][2];
-	if(!isset($contenu_fichier[$num_fichier]))
+	$objet_config=cog_config_tab_fichier($objet);
+	$cle_fichier=$correspondance['fichier'];
+	$col_key1=$correspondance['lien_col_'.objet_type($objet)];
+	$col_key2=$correspondance['lien_col_'.$cle_fichier];
+	//Charger le fichier en mémoire
+	if(!isset($contenu_fichier[$cle_fichier]))
 		{
 			$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
-			$nom_fichier=$emplacement.$fichier['fichier'][$num_fichier][0];
+			if(isset($objet_config['xls']))
+				$nom_fichier=$emplacement.$objet_config['xls'][$cle_fichier]['fichier_csv'];
+			else
+				$nom_fichier=$emplacement.$objet_config['fichier'][$cle_fichier]['fichier'];
 			$pointeur_fichier = fopen($nom_fichier,"r");
 			if($pointeur_fichier<>0)
 			{
@@ -171,37 +167,25 @@ function cog_ramener_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichier
 				{
 					$ligne_temp= fgets($pointeur_fichier, 4096);
 					$ligne_temp=explode("\t",$ligne_temp);
-					if($ligne_temp[$col_key2]==$anc_code){
-						$indice++;}
-					else {
-						$indice=0;
-						$anc_code=$ligne_temp[$col_key2];}
-					if(count($ligne_temp)>=2)
-						$contenu_fichier[$num_fichier][$col_key2][$ligne_temp[$col_key2]][$indice]=$ligne_temp;
+					if(isset($ligne_temp[$col_key2]) and !empty($ligne_temp[$col_key2]) )
+						$contenu_fichier[$cle_fichier][$col_key2][trim($ligne_temp[$col_key2])][]=$ligne_temp;
+					$indice++;
 				}
 			}
 		}
-		//print_r($contenu_fichier);
-		//exit();
-		//echo("<br />toto".$one);
-		//print_r($contenu_fichier[$num_fichier][$col_key2]);
-
-	if(isset($contenu_fichier[$num_fichier][$col_key2][$ligne[$col_key1]][0]))
+	if(isset($contenu_fichier[$cle_fichier][$col_key2][$ligne[$col_key1]][0]))
 		{
-			//echo("<br />".$one);
 			if($one)
 				{
-				return $contenu_fichier[$num_fichier][$col_key2][$ligne[$col_key1]][0][$correspondance['col']];
+				return $contenu_fichier[$cle_fichier][$col_key2][$ligne[$col_key1]][0][$correspondance['num_col']];
 				}
 			else
 				{
-					//echo("<br />eoeoe");
-
 					$tab_result=array();
-					foreach($contenu_fichier[$num_fichier][$col_key2][$ligne[$col_key1]] as $ligne_temp)
+					foreach($contenu_fichier[$cle_fichier][$col_key2][$ligne[$col_key1]] as $ligne_temp)
 						{
 							//echo("<br />".$ligne_temp[$correspondance['col']]);
-							$tab_result[]=$ligne_temp[$correspondance['col']];
+							$tab_result[]=$ligne_temp[$correspondance['num_col']];
 						}
 					return $tab_result;
 				}
@@ -215,8 +199,7 @@ function cog_ramener_valeur(&$ligne,&$correspondance,&$fichier,&$contenu_fichier
 
 
 
-function cog_import($objet,$options,$tab_correspondance=array(),$tab_relation=array())
-{
+function cog_import($objet,$options){
 include_spip('cog_config');
 include_spip('inc/config');
 $erreurs=array();
@@ -236,11 +219,10 @@ $erreurs=array();
 	if (isset($options['decalage']))
 		$option_decalage	= $options['decalage'];
 
-	//print_r($filtres);
+
 	$filtres=explode(';',$option_filtre);
-	//print_r($filtres);
-	foreach($filtres as $filtre)
-		{
+
+foreach($filtres as $filtre){
 		$tab_temp=explode('=',$filtre);
 		$tab_filtres[$tab_temp[0]]=$tab_temp[1];
 		}
@@ -248,43 +230,62 @@ $erreurs=array();
 	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 	$message=  'Importation du fichier '.$objet."<br />";
 //	$message.= 'Emplacement du fichier : '.$emplacement."<br />";
-	if(is_array($tab_objet[$objet]['fichier']))
-	{
-		$fichier_modele=$tab_objet[$objet]['fichier'][0];
-	}
-	else
-	{
-		$fichier_modele=$tab_objet[$objet]['fichier'];
-	}
+if(is_array($tab_objet[$objet]['fichier']))	{
+		$fichier_modele=$tab_objet[$objet]['fichier'][0];}
+else{
+		$fichier_modele=$tab_objet[$objet]['fichier'];}
 
 	$infos_fichier=pathinfo($fichier_modele);
 	$extension = $infos_fichier['extension'];
 	if($extension =='zip')
 		$extension = 'txt';
-	$fichier_modele=$emplacement.$infos_fichier['filename'].'.'.$extension;
-
-	$table='spip_cog_'.$objet;
-	$tab_description=description_table($table);
-	if($option_truncate==1)
-	{
+if(!file_exists($fichier_modele=$emplacement.$infos_fichier['filename'].'.'.$extension)) {
+	if(file_exists($emplacement.$infos_fichier['filename'].'.xls'))
+		{
+		foreach($tab_objet[$objet]['xls'] as $extraction)
+		if(!file_exists($emplacement.$extraction['fichier_csv'])){
+			conversion_fichier_excel($emplacement.$infos_fichier['filename'].'.xls',$emplacement.$extraction['fichier_csv'],$extraction['onglet'],$extraction['colonnes'],$extraction['ligne_depart'],$extraction['ligne_arrive']);
+			}
+			$fichier_modele=$emplacement.$tab_objet[$objet]['xls'][objet_type($objet)]['fichier_csv'];
+		}
+		
+}
+$table=table_objet_sql($objet);
+$tab_description=description_table($table);
+if($option_truncate==1) {
 	$message.=  'Purge de la table '.$table."<br />";
 	spip_mysql_query('truncate table '.$table);
 	sql_delete($table,array("1"=>"1"));
-	if(!empty($tab_relation))
-		{
-		sql_delete("spip_cog_communes_liens",'objet='.sql_quote($tab_relation['objet']));
+	if(isset($tab_objet[$objet]['relation'])){
+		sql_delete("spip_cog_communes_liens",'objet='.sql_quote($objet));
 		}
 	}
 
+$req_relation=array();
+if(isset($tab_objet[$objet]['relation'])){
+	$tab_commune=sql_allfetsel('concat(departement,code) as code,id_cog_commune','spip_cog_communes');
+	foreach($tab_commune as $com)
+		$tab_temp[$com['code']]=$com['id_cog_commune'];
+	$tab_commune=$tab_temp;
+}
+	
+
+$cle_unique=isset($tab_objet[$objet]['cle_unique'])?$tab_objet[$objet]['cle_unique']: array('code');
+$tab_objet_existant=sql_allfetsel(id_table_objet($table).','.implode(',',$cle_unique),$table);
+$tab_temp=array();
+foreach($tab_objet_existant as $ob){
+	$super_cle=array();
+	foreach($cle_unique as $cle)
+		$super_cle[]=$ob[$cle];
+	$tab_temp[implode("-+-",$super_cle)]=$ob[id_table_objet($table)];
+}
+$tab_objet_existant=$tab_temp;
 
 	$pointeur_fichier = fopen($fichier_modele,"r");
-	if($pointeur_fichier<>0)
-	{
+if($pointeur_fichier<>0){
 	$ligne= fgets($pointeur_fichier, 4096);
 	$nb_ligne=0;
-	//print_r($tab_correspondance);
-	while (!feof($pointeur_fichier))
-	{
+	while (!feof($pointeur_fichier)){
 		$ligne= fgets($pointeur_fichier, 4096);
 		$tab=explode("\t",$ligne);
 		if(count($tab)>1)
@@ -292,6 +293,7 @@ $erreurs=array();
 			$tab_value=array();
 			$i=0;
 			reset($tab_description['field']);
+			
 			while(list ($key, $val) = each ($tab_description['field']))
 				{
 					if($option_decalage>$i)
@@ -300,8 +302,9 @@ $erreurs=array();
 						continue;
 					}
 
-					if(!empty($tab_correspondance))
+					if(isset($tab_objet[$objet]['correspondance']))
 					{
+						$tab_correspondance=$tab_objet[$objet]['correspondance'];
 						if(isset($tab_correspondance[$key]))
 						{
 
@@ -313,35 +316,34 @@ $erreurs=array();
 							{
 								if(isset($tab_correspondance[$key]['col']))
 								{
-									$tab_value[$key]=cog_renvoyer_valeur($tab,$tab_correspondance[$key],$tab_objet[$objet],$contenu_fichier);
+										if(isset($correspondance[$key]['fichier']))
+											$tab_value[$key]=cog_ramener_valeur($tab,$tab_correspondance[$key],$objet,$contenu_fichier);
+										else
+											$tab_value[$key]=cog_renvoyer_valeur($tab,$tab_correspondance[$key]);
 								}
 								else
 								{
 									$tab_value[$key]="" ;
 									reset($tab_correspondance[$key]);
 									while(list ($indice1, $valeur1) = each ($tab_correspondance[$key]))
-										{
-											$tab_value[$key] .=sql_quote(cog_renvoyer_valeur($tab,$valeur1,$tab_objet[$objet],$contenu_fichier));
-										}
+										$tab_value[$key] .=sql_quote(cog_renvoyer_valeur($tab,$valeur1));
 								}
 							}
 						}
 					}
 						else
 						{
-							//print_r($tab);
 							$tab_value[$key] = $tab[$i-$option_decalage];
 						}
 						$i++;
 				}
 
 				$filtre_relation=false;
-				if(!empty($tab_relation))
+				if(isset($tab_objet[$objet]['relation']))
 				{
-					$tab_depcom=cog_renvoyer_valeur($tab,$tab_relation['code_insee'],$tab_objet[$objet],$contenu_fichier,false);
-					//print_r($tab_depcom);
-					//print_r("rara");
-					//exit();
+					foreach($tab_objet[$objet]['relation'] as $key => $relation)
+					{
+						$tab_depcom=cog_ramener_valeur($tab,$relation,$objet,$contenu_fichier,false);
 					for($ii=0;$ii<count($tab_depcom);$ii++)
 					{
 						$tab_depcom[$ii]=array('departement'=>substr($tab_depcom[$ii],0,2),'code'=>substr($tab_depcom[$ii],2));
@@ -350,49 +352,72 @@ $erreurs=array();
 							$filtre_relation=true;
 
 					}
-				//	print_r($tab_depcom);
+					}
 				}
-
+				
 				if(!cog_applique_filtre($tab_value,$tab_filtres) || $filtre_relation)
 					continue;
+				
 
-
-				if($option_replace && $existe_deja)
-					{
-						sql_delete($table, $primarys);
-						$id=sql_insertq($table, $tab_value);
+				$super_cle=array();
+				$super_cles=='';
+				foreach($cle_unique as $cle){
+					$super_cle[]=$tab_value[$cle];
+					$super_cles.=$tab_value[$cle];
 					}
-				elseif(!$existe_deja)
+				if (!empty($super_cles))
 					{
-						//print_r($tab_value);
-						$id=sql_insertq($table, $tab_value);
+					$existe_deja=false;
+					if(isset($tab_objet_existant[implode("-+-",$super_cle)])){
+						$existe_deja=true;
+						$id_objet=$tab_objet_existant[implode("-+-",$super_cle)];
+						$where=id_table_objet($table).'='.intval($id_objet);
 					}
 
-				if(!empty($tab_relation))
-				{
+					if($option_replace && $existe_deja)	{
+							sql_updateq($table, $tab_value, $where);
+						}
+					elseif(!$existe_deja){
+							$id_objet=sql_insertq($table, $tab_value);
+						}
 
-					foreach($tab_depcom as $depcom)
-					{
-						//exit();
+					// Ajout des éventuels liaison
+					if(isset($tab_objet[$objet]['relation'])){
+						/*foreach($tab_depcom as $key=>$depcom){
+							if($id_cog_commune=$tab_commune[$depcom['departement'].$depcom['code']])
+								sql_insertq("spip_cog_communes_liens",array('id_cog_commune'=>$id_cog_commune,'id_objet'=>$id,'objet'=> objet_type($objet)));
+							else 
+								$erreurs[]="Erreur grave Commune introuvable : ".$depcom['departement'].$depcom['code'];
+						}*/
+						$req=array();
+						foreach($tab_depcom as $key=>$depcom){
+							if(isset($tab_commune[$depcom['departement'].$depcom['code']]))
+								$req_relation []= '('.implode(',',array($tab_commune[$depcom['departement'].$depcom['code']],$id_objet,"'".objet_type($objet)."'")).')';
 
-							if($id_cog_commune=sql_getfetsel('id_cog_commune','spip_cog_communes','departement='.sql_quote($depcom['departement']).' and code= '.sql_quote($depcom['code'])))
-								{
-								//	print_r(sql_get_select('id_cog_commune','spip_cog_communes','departement='.sql_quote($depcom['departement']).' and code= '.sql_quote($depcom['code']))."<br />");
-
-								sql_insertq("spip_cog_communes_liens",array('id_cog_commune'=>$id_cog_commune,'id_objet'=>$id,'objet'=> $tab_relation['objet']));
 								}
-							else {
-								$erreurs[]="Erreur grave Commune introuvable : ".$com['ccocom'];
 								}
 
+					if(($nb_ligne%100)==0){
+							if(!empty($req_relation)){
+							$req_relation= "REPLACE INTO spip_cog_communes_liens  (id_cog_commune,id_objet,objet) VALUES ".implode(',',$req_relation);
+							if(!sql_query($req_relation))
+								$erreurs[]="Erreur dans la création des relation avec les communes.";
 					}
 
+							$req_relation=array();
 				}
 
 				$nb_ligne++;
 			}
 		}
 	}
+			if(!empty($req_relation)){
+			$req_relation= "REPLACE INTO spip_cog_communes_liens  (id_cog_commune,id_objet,objet) VALUES ".implode(',',$req_relation);
+			if(!sql_query($req_relation))
+				$erreurs[]="Erreur dans la création des relation avec les communes.";
+			}
+			
+		}
 	$message.=$nb_ligne.' enregistrements ajoutés.';
 	fclose($pointeur_fichier);
 	return array($message,$erreurs);
@@ -423,6 +448,71 @@ $fichier=copie_locale($source);
 	}
 	effacer_repertoire_temporaire(_tmp_dir);
 	return $x;
+}
+unset($filterSubset);
+
+
+
+
+function conversion_fichier_excel($fichier_xls_in,$fichier_xls_out,$sheetname,$cols,$ligne_depart,$ligne_arrive)
+{
+$inputFileType = 'Excel5';
+//	$inputFileType = 'Excel2007';
+//	$inputFileType = 'Excel2003XML';
+//	$inputFileType = 'OOCalc';
+//	$inputFileType = 'Gnumeric';
+$inputFileName = $fichier_xls_in;
+$chunkSize = 2000; 
+$filterSubset = new MyReadFilter($cols);
+$sheetData=array();
+$objReader = PHPExcel_IOFactory::createReader($inputFileType);
+$objReader->setReadDataOnly(true);
+$objReader->setLoadSheetsOnly($sheetname);
+$objReader->setReadFilter($filterSubset);
+for ($startRow = $ligne_depart; $startRow <= $ligne_arrive; $startRow += $chunkSize) {
+$filterSubset->setRows($startRow,$chunkSize); 
+$objPHPExcel = $objReader->load($inputFileName);
+$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,false,true,false);
+$objPHPExcel->disconnectWorksheets();
+unset($objPHPExcel);
+$chaine="";
+foreach($sheetData as &$data)
+	if(!empty($data[0]))
+		$chaine.=implode("\t",$data).PHP_EOL;
+file_put_contents($fichier_xls_out,$chaine,FILE_APPEND);
+unset($sheetData);
+unset($chaine);
+}
+unset($filterSubset);
+unset($objReader);
+return true;
+}
+
+
+include_spip('lib/PHPExcel/Classes/PHPExcel/IOFactory');
+class MyReadFilter implements PHPExcel_Reader_IReadFilter
+{
+	private $_startRow = 0;
+	private $_endRow = 0;
+	private $_columns = array();
+
+	public function __construct( $columns) {
+		$this->_columns		= $columns;
+	}
+
+    public function setRows($startRow, $chunkSize) { 
+        $this->_startRow = $startRow; 
+        $this->_endRow   = $startRow + $chunkSize; 
+    } 
+
+	public function readCell($column, $row, $worksheetName = '') {
+		if ($row >= $this->_startRow && $row <= $this->_endRow) {
+			if (in_array($column,$this->_columns)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 
