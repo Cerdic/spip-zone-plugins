@@ -23,7 +23,28 @@
 					<li>
 						<label for="responsive"><:videos:cfg_label_responsive:></label>
 						<p class='explication'><:videos:cfg_explication_responsive:></p>
-						<input type="checkbox"[ (#ENV{responsive}|=={oui}|oui|ou{#ENV{responsive}|non})checked="checked"] name="responsive" value="[(#ENV{responsive,#GET{responsive_defaut}})]" id="responsive" class="text" />
+                        <div class="choix">
+                            <input
+                                    type="radio"
+                                    name="responsive"
+                                    class="radio"
+                                    id="titre_responsive_on"
+                                    value="oui"
+                            [(#ENV{responsive,#GET{responsive_defaut}}|=={oui}|oui) checked="checked"]
+                            />
+                            <label for='titre_responsive_on'><:item_oui:></label>
+                        </div>
+                        <div class="choix">
+                            <input
+                                    type="radio"
+                                    name="responsive"
+                                    class="radio"
+                                    id="titre_responsive_off"
+                                    value="non"
+                            [(#ENV{responsive,#GET{responsive_defaut}}|=={non}|oui) checked="checked"]
+                            />
+                            <label for='titre_responsive_off'><:item_non:></label>
+                        </div>
 					</li>
 					<li>
 						<label for="largeur"><:videos:cfg_label_largeur:></label>
