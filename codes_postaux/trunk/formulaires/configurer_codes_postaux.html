@@ -1,0 +1,47 @@
+#CACHE{0}
+[(#REM) titre=Codes postaux]
+[(#REM) icone=images/codes_postaux-32.png]
+[(#REM) descriptif=
+<h4>Configuration du plugin Code postaux</h4>
+]
+[(#REM) autoriser=configurer ]
+#CACHE{0}
+
+
+
+
+<div class='formulaire_spip formulaire_configurer formulaire_configurer_forums_contenu' id='formulaire_configurer_forums_contenu'>
+
+
+
+
+<h3 class='titrem'><:codes_postaux:Configuration:></h3>
+
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#SELF"><div>
+		[(#ENV{_cfg_}|form_hidden)]
+#SET{wichrub,#CONFIG{codes_postaux/rubriques_cp,#ARRAY{0,-1}}}
+
+
+
+		<ul>
+			<li class='configurer_chemin_donnee'>
+				<label for="chemin_donnee"><:codes_postaux:label_chemin_cp:></label>
+				<div class='explication'><:codes_postaux:label_chemin_codes_postaux_details:></div>
+				<input type="text" name="chemin_donnee" value="[(#ENV{chemin_donnee})]" id="chemin_donnee" class="text" />
+			</li>
+
+		</ul>
+	</div>
+
+		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+
+	</form>
+
+
+</div>
+
+
+
+

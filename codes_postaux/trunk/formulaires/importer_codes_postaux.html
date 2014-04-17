@@ -14,17 +14,18 @@
 
 				<div class="choix">
 					<input type='checkbox' class="checkbox" name='option_truncate' value='on' id='option_truncate'[ (#ENV{option_truncate}|=={on}|oui)checked="checked"] />
-					<label for='option_truncate'><:cp:vider_la_table:></label>
+					<label for='option_truncate'><:codes_postaux:vider_la_table:></label>
 				</div>
 		[(#PLUGIN{cog}|oui)
 				<div class="choix">
 					<input type='checkbox' class="checkbox" name='option_relier_communes' value='on' id='option_relier_communes'[ (#ENV{option_relier_communes}|=={on}|oui)checked="checked"] />
-					<label for='option_relier_communes'><:cp:relier_avec_communes:></label>
+					<label for='option_relier_communes'><:codes_postaux:relier_avec_communes:></label>
 				</div>
 		]
 		</li>
 		<li>
-		<label for='option_filtre'><:cp:filtrer_les_donnees:></label>
+		<label for='option_filtre'><:codes_postaux:filtrer_les_donnees:></label>
+		<p class='explication'><:codes_postaux:description_option_filtre:></p>
 		<input type='text' name='option_filtre'  id='option_filtre' value="#ENV{option_filtre}" />
 		</li>
 
@@ -36,7 +37,7 @@
 
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
-	  <p class='boutons'><input type='submit' class='submit' value='<:cp:bouton_importer:>' /></p>
+	  <p class='boutons'><input type='submit' class='submit' value='<:codes_postaux:bouton_importer:>' /></p>
 	</div></form>
 
 

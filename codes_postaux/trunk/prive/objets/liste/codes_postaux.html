@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+	code,1 
+	titre,1,
+	id_code_postal,1,
+	points,-1
+}})]<B_liste_codes_postaux>
+#ANCRE_PAGINATION
+<div class="liste-objets codes_postaux">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{code_postal:info_1_code_postal,code_postal:info_nb_codes_postaux}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='code' scope='col'>[(#TRI{code,<:code_postal:label_code:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:code_postal:label_titre:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_code_postal,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_codes_postaux(CODES_POSTAUX){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,50}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{code_postal-16.png}|balise_img)]</td>
+			<td class='code'>[(#LOGO_CODE_POSTAL|image_reduire{20,26})]<a href="[(#ID_CODE_POSTAL|generer_url_entite{code_postal})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CODE_POSTAL">#CODE</a></td>
+			<td class='titre principale'><a href="[(#ID_CODE_POSTAL|generer_url_entite{code_postal})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CODE_POSTAL">[(#RANG). ]#TITRE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,code_postal,#ID_CODE_POSTAL}|?{
+				<a href="[(#URL_ECRIRE{code_postal_edit,id_code_postal=#ID_CODE_POSTAL})]">#ID_CODE_POSTAL</a>,
+				#ID_CODE_POSTAL
+			})]</td>
+		</tr>
+	</BOUCLE_liste_codes_postaux>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_codes_postaux>[
+<div class="liste-objets codes_postaux caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_codes_postaux>

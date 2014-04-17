@@ -1,7 +1,7 @@
 <?php
 
 
-function cp_tab_fichier_telecharger($fichiers)
+function codes_postaux_tab_fichier_telecharger($fichiers)
 {
 $tab_fichier=array();
 if(!is_array($fichiers)) {

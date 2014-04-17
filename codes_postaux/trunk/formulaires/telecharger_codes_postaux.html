@@ -7,9 +7,9 @@
 
 	<ul>
 	<li class="editer_fichier obligatoire[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
-		<label for="fichier"><:cp:fichiers_a_telecharger:></label>[
+		<label for="fichier"><:codes_postaux:fichiers_a_telecharger:></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
-		]<p class='explication'><:cp:choississez_le_fichier_a_telecharger:></p>
+		]<p class='explication'><:codes_postaux:choississez_le_fichier_a_telecharger:></p>
 		<select name='objet' [(#ENV{objet,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]>
 		<BOUCLE_fichier(POUR){tableau #ENV{tab_objet}}>
 		<option value="#CLE"[ (#ENV{objet}|=={#CLE}|oui) selected="selected"]>
@@ -19,7 +19,7 @@
 		</select>
 	</li>
 	</ul>
-	<p class='boutons'><input type='submit' class='submit' value='<:cp:bouton_telecharger:>' /></p>
+	<p class='boutons'><input type='submit' class='submit' value='<:codes_postaux:bouton_telecharger:>' /></p>
 	</div></form>
 </BOUCLE_editable>
 </div>

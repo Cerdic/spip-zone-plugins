@@ -1,44 +1,18 @@
 <?php
-/*
- * Plugin cp
- * (c) 2009 Guillaume Wauquier
- * Distribue sous licence GPL
- *
- */
 
-include_spip("cp_config");
-function balise_CP_TABLE($p)
+function codes_postaux_recherche_code($code)
 {
-$p->code = "cp_config_tab_table()";
-return $p;
+	include_spip('base/abstract_sql');
+	$where='';
+	$items=sql_allfetsel('distinct id_code_postal as id,trim(code) as label','spip_codes_postaux','code like '.sql_quote(strtoupper($code).'%'));
+	return $items;
 }
 
-////////////////////////////////////////
-// Pour l'espace privé en version 2.1
-///////////////////////////////////////
-function filtre_cp_bloc_des_raccourcis($bloc,$titre=""){
-global $spip_display;
-if($titre=='')
-$titre=_T('titre_cadre_raccourcis');
-include_spip('inc/presentation');
-	return "\n"
-	. creer_colonne_droite('',true)
-	. debut_cadre_enfonce('',true)
-	. (($spip_display != 4)
-	     ? ("\n<div style='font-size: x-small' class='verdana1'><b>"
-		.$titre
-		."</b>")
-	       : ( "<h3>".$titre."</h3><ul>"))
-	. $bloc
-	. (($spip_display != 4) ? "</div>" :  "</ul>")
-	. fin_cadre_enfonce(true);
+function codes_postaux_recherche_commune($code){
+	include_spip('inc/plugin');
+	if(in_array('COG',array_keys(liste_plugin_actifs())))
+		$items = sql_allfetsel('distinct id_code_postal as id,trim(cp.code) as label, concat(\'cog\',c.id_cog_commune) as id_cog_commune,trim(concat(MID(c.article,2,LENGTH(c.article_majuscule)-2),concat(\' \',c.nom))) as ville','spip_codes_postaux cp, spip_cog_communes_liens cl, spip_cog_communes c','cl.id_objet=cp.id_code_postal and cl.objet=\'code_postal\' and c.id_cog_commune=cl.id_cog_commune and ( c.nom_majuscule like '.sql_quote(strtoupper($code).'%').' or concat(MID(c.article_majuscule,2,LENGTH(c.article_majuscule)-2),concat(\' \',c.nom_majuscule)) like '.sql_quote(strtoupper($code).'%').' or cp.code like '.sql_quote(strtoupper($code).'%').')');
+	else
+		$items = sql_allfetsel('distinct id_code_postal as id,trim(code) as label,trim(titre) as ville','spip_codes_postaux cp','titre like '.sql_quote(strtoupper($code).'%').' or code like '.sql_quote(strtoupper($code).'%'));
+	return $items;
 }
-
-function filtre_cp_icone_horizontale($lien, $texte="", $fond = "",  $fonction = "",  $javascript='') {
-include_spip('inc/presentation');
-return icone_horizontale($texte, $lien, $fond, $fonction, false, $javascript);
-}
-
-
-
-?>

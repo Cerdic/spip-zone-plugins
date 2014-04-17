@@ -1,38 +1,64 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function cp_upgrade($nom_meta_base_version,$version_cible){
-	  $current_version = 0.0;
+/**
+ * Fichier gérant l'installation et désinstallation du plugin cp
+ *
+ * @plugin     codes_postaux
+ * @copyright  2014
+ * @author     guillaumeW
+ * @licence    GNU/GPL
+ * @package    SPIP\Codes_postaux\Installation
+ */
 
-	  if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
-	  || (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		  include_spip('base/cp');
-		  // cas d'une installation
-		  if ($current_version=="0.0"){
-						include_spip('base/create');
-						creer_base();
-						cp_peupler_base();
-						ecrire_meta($nom_meta_base_version, $current_version=$version_cible, 'non');
-		  }
-		ecrire_meta($nom_meta_base_version, $current_version=$version_cible, 'non');
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
-	  }
+
+/**
+ * Fonction d'installation et de mise à jour du plugin cp.
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+**/
+
+function codes_postaux_upgrade($nom_meta_base_version, $version_cible){
+	$maj = array();
+
+	$maj['create'] = array(
+		array('maj_tables', array('spip_codes_postaux')),
+		array('codes_postaux_peupler_base')
+	);
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
-function cp_peupler_base()
+
+
+
+function codes_postaux_peupler_base()
 {
 include_spip('inc/config');
-ecrire_config('cp/chemin_donnee','donnees/');
+ecrire_config('codes_postaux/chemin_donnee','donnees/');
 }
 
 /**
- * Desinstallation
+ * Fonction de désinstallation du plugin cp.
  *
  * @param string $nom_meta_base_version
- */
-function cp_vider_tables($nom_meta_base_version) {
-	include_spip('inc/meta');
-	include_spip('base/abstract_sql');
-	sql_drop_table("spip_code_postals");
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @return void
+**/
+function codes_postaux_vider_tables($nom_meta_base_version) {
+
+	sql_drop_table("spip_codes_postaux");
+
+	# Nettoyer les versionnages et forums
+	sql_delete("spip_versions",              sql_in("objet", array('code_postal')));
+	sql_delete("spip_versions_fragments",    sql_in("objet", array('code_postal')));
+	sql_delete("spip_forum",                 sql_in("objet", array('code_postal')));
+
+
 	effacer_meta($nom_meta_base_version);
 }
 

@@ -1,56 +1,29 @@
-<plugin>
+<paquet
+	prefix="codes_postaux"
+	categorie="divers"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;["
+	logo="prive/themes/spip/images/codes_postaux-32.png"
+	schema="1.0"
+	documentation="http://www.spip-contrib.net/codes_postaux"
+>	
+
 	<nom>Codes postaux</nom>
-	<icon>images/cp-32.png</icon>
-	<auteur><!-- Auteur du plugin -->
- 	Guillaume Wauquier &#169; 2012
-	</auteur>
-	<licence>GPL</licence>
-	<version>1.0</version>
-	<version_base>1.0</version_base>
-	<etat>stable</etat>
-	<description>
-	Ajouter &agrave; la base de donn&eacute;es les codes postaux récuperer sur le site geonames.
-	</description>
-	<prefix>cp</prefix>
-	<lien>http://www.spip-contrib.net/cp</lien>
-	<install>base/cp_upgrade.php</install>
-	<fonctions>cp_fonctions.php</fonctions>
-	<bouton id='cp' parent='naviguer'>
-		<titre>Codes postaux</titre>
-		<icone>images/cp-24.png</icone>
-		<url>cp</url>
-	</bouton>
-	<bouton id='cp21' parent='bando_edition'>
-		<titre>Codes postaux</titre>
-		<icone>images/cp-16.png</icone>
-		<url>cp</url>
-	</bouton>
-	<pipeline>
-		<nom>declarer_tables_principales</nom>
-		<inclure>base/cp.php</inclure>
-	</pipeline>
-	<pipeline>
-            <nom>declarer_tables_interfaces</nom>
-            <inclure>base/cp.php</inclure>
-	</pipeline>
- 	<pipeline>
-		<nom>rechercher_liste_des_champs</nom>
-		<inclure>cp_pipeline.php</inclure>
-	</pipeline>
-	 <pipeline>
-		<nom>declarer_tables_objets_surnoms</nom>
-		<inclure>cp_pipeline.php</inclure>
-	</pipeline>
-	<!-- <pipeline>
-		<nom>rechercher_liste_des_jointures</nom>
-		<inclure>cp_pipeline.php</inclure>
-	</pipeline>-->
-	<pipeline>
-	<nom>autoriser</nom>
-		<inclure>cp_autorisations.php</inclure>
-	</pipeline>
-	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='spip_bonux' version='[2.3.0;]' />
- 	<necessite id='SPIP' version='[2.0.0;]' />
-	<categorie>Géographie</categorie>
-</plugin>
+	<!-- Ajouter à la base de données les codes postaux récuperer sur le site geonames -->
+
+	<auteur lien="http://www.declic3000.com">GuillaumeW</auteur>
+	<copyright>2012</copyright>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/codes_postaux.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/codes_postaux.php" />
+	<pipeline nom="rechercher_liste_des_champs" inclure="codes_postaux_pipeline.php" />
+	<pipeline nom="jqueryui_plugins" inclure="codes_postaux_pipeline.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="codes_postaux_pipeline.php" />
+	<pipeline nom="autoriser" inclure="codes_postaux_autoriser.php" />
+
+	<necessite nom="spip_bonux" compatibilite="[2.3.0;[" />
+
+	<menu nom="codes_postaux" titre="codes_postaux:codes_postaux" parent="menu_edition" icone="images/codes_postaux-16.png" action="codes_postaux" />
+</paquet>

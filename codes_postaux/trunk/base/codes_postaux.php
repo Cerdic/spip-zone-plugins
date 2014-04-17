@@ -1,55 +1,64 @@
 <?php
 
 
+
+ function codes_postaux_declarer_tables_interfaces($interfaces){
+
+$interfaces['table_des_tables']['codes_postaux'] = 'codes_postaux';
+include_spip('inc/plugin');
+if(in_array('COG',array_keys(liste_plugin_actifs())))
+	$interfaces['tables_jointures']['code_postals'][]= 'cog_communes_liens';
+
+return  $interfaces;
+}
+
+
+
+
+	
 /**
- * Declaration des tables principales
+ * Déclaration des objets éditoriaux
  *
- * @param array $tables_principales
+ * @pipeline declarer_tables_objets_sql
+ * @param array $tables
+ *     Description des tables
  * @return array
+ *     Description complétée des tables
  */
-
-function cp_declarer_tables_principales($tables_principales){
-
-//////////   Communes   //////////
-
-	$table_cp = array(
-		"id_code_postal"=> "INT(10) UNSIGNED NOT NULL COMMENT 'Identifiant du code Postal'",
-		"code"          => "VARCHAR( 20 )  NOT NULL COMMENT 'Code'",
-		"titre"         => "VARCHAR( 100 ) NOT NULL COMMENT 'Titre'");
-
-	$table_cp_key = array(
-		"PRIMARY KEY" 	=> "id_code_postal",
-		"KEY code" 	=> "code"
-		);
-
-	$table_cp_join = array(
-		"id_code_postal"=>'id_code_postal'
+function codes_postaux_declarer_tables_objets_sql($tables){
+	
+	$tab_champs=array('code','titre');
+	$tables['spip_codes_postaux'] = array(
+		'type' => 'code_postal',
+		'principale' => "oui",
+		'page'=>'',
+		'table_objet_surnoms' => array('codespostaux', 'code_postal'), // table_objet('code_postal') => 'code_postaux' 
+		'field'=> array(
+			"id_code_postal"=> "bigint(21) NOT NULL COMMENT 'Identifiant du code Postal'",
+			"code"          => "varchar(20)  NOT NULL COMMENT 'Code'",
+			"titre"         => "varchar(100) NOT NULL COMMENT 'Titre'",
+			"maj"           => "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY" 	=> "id_code_postal",
+			"KEY code" 	=> "code"
+		),
+		'titre' => 'titre, \'\' AS lang',
+		 #'date' => "",
+		'champs_editables'  => $tab_champs,
+		'champs_versionnes' => $tab_champs,
+		'rechercher_champs' => array('titre' => 8, 'code' => 5),
+		'tables_jointures' => array(),
+		
 	);
 
 
-	$tables_principales['spip_code_postals'] = array(
-		'field' => $table_cp,
-		'key' => $table_cp_key,
-		'join' => $table_cp_join
-		);
-
-
-return $tables_principales;
+return $tables;
 
 }
 
 
 
-
- function cp_declarer_tables_interfaces($tables_interfaces){
-
-$tables_interfaces['table_des_tables']['code_postals'] = 'code_postals';
-include_spip('inc/plugin');
-if(in_array('cog',liste_plugin_actifs()))
-	$tables_interfaces['tables_jointures']['code_postals'][]= 'cog_communes_liens';
-
-return  $tables_interfaces;
-}
 
 
 
