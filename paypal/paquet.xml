@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[2.1.8;3.1.*]"
 	logo="prive/themes/spip/images/paypal-32.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4519"
 	schema="0.1" 
 >
 
