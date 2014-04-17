@@ -8,16 +8,16 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		
-		[(#SAISIE{radio,actif, obligatoire=oui
+		<ul>
+		[(#SAISIE{radio,actif, 
 			label=<:projets_sites_client:label_actif:>,
 			explication=<:projets_sites_client:explication_actif:>,
 			datas=#ARRAY{oui,<:projets_sites_client:oui:>,non,<:projets_sites_client:non:>}})]
 
-		[(#SAISIE{input,cle, obligatoire=oui
+		[(#SAISIE{input,cle, 
 			label=<:projets_sites_client:label_cle:>,
 			explication=<:projets_sites_client:explication_cle:>})]
-
+		</ul>
 		<input type="hidden" name="_meta_casier" value="projets_sites_client" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>

@@ -1,5 +1,4 @@
-﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
-<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
 <config>
 <BOUCLE_cle (CONDITION){si #ENV{cle}|=={#CONFIG{'sites_client/cle'}}} {si #CONFIG{'sites_client/actif'}|=={'oui'}}> </BOUCLE_cle>
 <logiciel nom="SPIP" version="[(#SPIP_VERSION|explode{' '}|table_valeur{0})]" revision="[(#SPIP_VERSION|explode{' '}|table_valeur{1})]" />

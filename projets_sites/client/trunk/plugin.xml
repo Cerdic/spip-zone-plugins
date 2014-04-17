@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Sites pour projets - Client</multi></nom>
 	<icon>prive/themes/spip/images/projets_sites_client-32.png</icon>
 	<auteur>Teddy Payet</auteur>
-	<version>0.4.6</version>
+	<version>0.4.7</version>
 	<etat>dev</etat>
 	<description><multi>
 	[fr]Ce plugin ne fait qu'afficher la configuration du site sur lequel il est actif.

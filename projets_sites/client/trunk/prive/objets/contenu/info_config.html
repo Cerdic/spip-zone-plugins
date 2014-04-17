@@ -1,24 +1,4 @@
 ﻿[(#AUTORISER{voir,_projets_sites_client}|sinon_interdire_acces)]
-[<div class="champ contenu_logiciel">
-	<div class="label visible"><:projets_sites_client:label_logiciel:> : </div>
-	<div dir='#LANG_DIR' class='logiciel'>SPIP (#SPIP_VERSION)</div>
-</div>]
-
-[<div class="champ contenu_php_version">
-	<div class="label visible"><:projets_sites_client:label_php_version:> : </div>
-	<div dir='#LANG_DIR' class='php_version'>(#EVAL{phpversion()})</div>
-</div>]
-
-[<div class="champ contenu_php_memory">
-	<div class="label visible"><:projets_sites_client:label_php_memory:> : </div>
-	<div dir='#LANG_DIR' class='php_memory'>(#EVAL{ini_get('memory_limit')})</div>
-</div>]
-
-[<div class="champ contenu_date_creation">
-	<div class="label visible"><:projets_sites_client:label_date_creation:> : </div>
-	<div dir='#LANG_DIR' class='date_creation'>(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})</div>
-</div>]
-
 [(#REM)
 	Le code ci-dessous est une méthode "barbare" mais efficace pour soustraire toutes les infos du fichier config/connect.php.
 	Le soucis c'est que ça peut ne pas être sécuritaire car on affiche le mot de passe de la bdd.
@@ -39,6 +19,26 @@
 [(#REM)
 	[(#SET{bdd_auth,#GET{bdd}|table_valeur{7}|explode{"'"}|table_valeur{1}})]
 ]
+
+[<div class="champ contenu_logiciel">
+	<div class="label visible"><:projets_sites_client:label_logiciel:> : </div>
+	<div dir='#LANG_DIR' class='logiciel'>SPIP (#SPIP_VERSION)</div>
+</div>]
+
+[<div class="champ contenu_php_version">
+	<div class="label visible"><:projets_sites_client:label_php_version:> : </div>
+	<div dir='#LANG_DIR' class='php_version'>(#EVAL{phpversion()})</div>
+</div>]
+
+[<div class="champ contenu_php_memory">
+	<div class="label visible"><:projets_sites_client:label_php_memory:> : </div>
+	<div dir='#LANG_DIR' class='php_memory'>(#EVAL{ini_get('memory_limit')})</div>
+</div>]
+
+[<div class="champ contenu_date_creation">
+	<div class="label visible"><:projets_sites_client:label_date_creation:> : </div>
+	<div dir='#LANG_DIR' class='date_creation'>(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})</div>
+</div>]
 
 [<div class="champ contenu_fo_url">
 	<div class="label visible"><:projets_sites_client:label_fo_url:> : </div>
@@ -103,6 +103,16 @@
 	<h3 class="titrem"><:projets_sites_client:label_sgbd:></h3>
 </div>
 
+<div class="champ contenu_sgbd_serveur">
+	<div class="label visible"><:projets_sites_client:label_sgbd_serveur:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_nom'>#GET{bdd_host}</div>
+</div>
+
+<div class="champ contenu_sgbd_port">
+	<div class="label visible"><:projets_sites_client:label_sgbd_port:> : </div>
+	<div dir='#LANG_DIR' class='sgbd_nom'>#GET{bdd_port}</div>
+</div>
+
 <div class="champ contenu_sgbd_type">
 	<div class="label visible"><:projets_sites_client:label_sgbd_type:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_type'>#GET{bdd_type}</div>
@@ -117,12 +127,6 @@
 	<div class="label visible"><:projets_sites_client:label_sgbd_nom:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_nom'>#GET{bdd_nom}</div>
 </div>
-
-<B_serveur>
-<div class="champ contenu_sgbd_serveur">
-	<div class="label visible"><:projets_sites_client:label_sgbd_serveur:> : </div>
-	<div dir='#LANG_DIR' class='sgbd_serveur'><BOUCLE_serveur(DATA) {source sql, SHOW VARIABLES LIKE 'hostname'}>[(#VALEUR{Value})]</BOUCLE_serveur></div>
-</div></B_serveur>
 
 <div class="champ contenu_sgbd_prefixe">
 	<div class="label visible"><:projets_sites_client:label_sgbd_prefixe:> : </div>
