@@ -71,7 +71,7 @@ h1.box_resa { background-color: #DDD; }
 #datepickers { font-size: 0.9em; } */
 
 /* mediabox pour le form de résa */
-#cboxTitle, #cboxCurrent, #cboxNext, #cboxPrevious, #cboxSlideshow { display: none !important; }
+.orr #cboxTitle, .orr #cboxCurrent, .orr #cboxNext, .orr #cboxPrevious, .orr #cboxSlideshow { display: none !important; }
 
 /* timepicker dans la mediabox de resa */
 .ui-timepicker-div dl dd { margin-top: 15px; }
