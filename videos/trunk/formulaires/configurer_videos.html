@@ -3,7 +3,6 @@
 [(#REM)
 /** Valeurs par défaut **/
 ]
-[(#SET{responsive_defaut,oui})]
 [(#SET{hauteur_defaut,315})]
 [(#SET{largeur_defaut,560})]
 [(#SET{titre_descriptif_defaut,non})]
@@ -16,6 +15,7 @@
 
 	<form method="post" action=#ENV{action}><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="responsive" value="" />
 		<ul>
 			<li class="fieldset">
 				<h3 class="legend"><:videos:cfg_titre_configurations_communes:></h3>
@@ -23,28 +23,8 @@
 					<li>
 						<label for="responsive"><:videos:cfg_label_responsive:></label>
 						<p class='explication'><:videos:cfg_explication_responsive:></p>
-                        <div class="choix">
-                            <input
-                                    type="radio"
-                                    name="responsive"
-                                    class="radio"
-                                    id="titre_responsive_on"
-                                    value="oui"
-                            [(#ENV{responsive,#GET{responsive_defaut}}|=={oui}|oui) checked="checked"]
-                            />
-                            <label for='titre_responsive_on'><:item_oui:></label>
-                        </div>
-                        <div class="choix">
-                            <input
-                                    type="radio"
-                                    name="responsive"
-                                    class="radio"
-                                    id="titre_responsive_off"
-                                    value="non"
-                            [(#ENV{responsive,#GET{responsive_defaut}}|=={non}|oui) checked="checked"]
-                            />
-                            <label for='titre_responsive_off'><:item_non:></label>
-                        </div>
+
+						<input type="checkbox"[ (#ENV{responsive}|=={oui}|oui)checked="checked"] name="responsive" value="oui" id="responsive" class="text" />
 					</li>
 					<li>
 						<label for="largeur"><:videos:cfg_label_largeur:></label>
@@ -112,8 +92,8 @@
 					</li>
 				</ul>
 			</li>]
-		
-		[(#REM)
+
+			[(#REM)
 			<li class="fieldset">
 				<h3 class="legend"><:videos:cfg_titre_configurations_youtube:></h3>
 				<ul>
@@ -123,7 +103,7 @@
 				</ul>
 			</li>]
 
-		[(#REM)
+			[(#REM)
 			<li class="fieldset">
 				<h3 class="legend"><:videos:cfg_titre_configurations_html5:></h3>
 				<ul>
