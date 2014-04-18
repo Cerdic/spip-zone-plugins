@@ -1,37 +1,31 @@
 <?php
 /**
- * Plugin Coordonnees
- * Licence GPL (c) 2010 Matthieu Marcillaud
-**/
+ * Action : supprimer un email
+ *
+ * @plugin     Coordonnees
+ * @copyright  2014
+ * @author     Marcimat / Ateliers CYM
+ * @licence    GNU/GPL
+ * @package    SPIP\Coordonnees\Action
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Dissocier une email d'un objet, puis eventuellement le supprimer
- *
- * arg 1 : id_email
- * arg 2 : objet
- * arg 3 : id_objet
- *
- * exemple : #URL_ACTION_AUTEUR{supprimer_email, #ID_EMAIL/#OBJET/#ID_OBJET, #SELF}
+ * Supprimer un email
+ * arg : id_email
+ * exemple : #URL_ACTION_AUTEUR{supprimer_email, #ID_EMAIL, #SELF}
  */
 
 function action_supprimer_email_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	list($id_email, $objet, $id_objet) = preg_split('/\W/', $arg);
+	$id_email = intval($arg);
 
-	if (intval($id_email) AND autoriser('supprimer', 'email', $id_email)) {
-		// on supprime les liens entre l'objet et l'email
-		include_spip('action/editer_liens');
-		objet_dissocier( array('email' => $id_email), array($objet => $id_objet) );
-		// si l'email n'a pas d'autre lien, c'est qu'elle n'est plus utilisee
-		// on la supprime sans etat d'ame
-		if ( count(objet_trouver_liens( array('email' => $id_email), '*' )) == 0 )
-			sql_delete('spip_emails', "id_email=" . sql_quote($id_email));
+	if ($id_email>0 AND autoriser('supprimer', 'email', $id_email)) {
+		sql_delete('spip_emails', "id_email=" . sql_quote($id_email));
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_email/$id_email'");
 	}
-
 }
 
 ?>
