@@ -1,7 +1,7 @@
 <?php
 /**
- * Ce fichier contient l'action `client_supprimer_boussole` utilisée par un site client pour
- * supprimer de façon sécurisée une boussole donnée.
+ * Ce fichier contient l'action `client_synchroniser_site` utilisée par un site client pour
+ * synchroniser les données d'un site référencé avec celles du même site appartenant à une boussole donnée.
  *
  * @package SPIP\BOUSSOLE\Serveur\Action
  */
@@ -16,8 +16,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * l'alias de la boussole.
  * Les données synchronisées sont :
  *
- * - le nom du site
- * - le descriptif du site
+ * - l'alias de la boussole
+ * - l'id du site référencé
  *
  * @return void
  */
