@@ -47,7 +47,7 @@ function action_serveur_lister_boussoles_dist(){
 	if ($serveur_actif) {
 		// Initialisation du fichier xml et de l'erreur
 		$erreur = '';
-		$fichier_liste = '';
+		$fichier_cache = '';
 
 		// Acquerir la liste des boussoles prêtes à être diffusées
 		include_spip('inc/config');
@@ -56,9 +56,10 @@ function action_serveur_lister_boussoles_dist(){
 
 		// Si erreur, on renvoie un id sous forme d'une balise erreur
 		if ($boussoles) {
-			// Vérifier que le cache existe
-			$fichier_liste = _BOUSSOLE_DIR_CACHE . _BOUSSOLE_CACHE_LISTE;
-			if (!file_exists($fichier_liste)) {
+			// Construire le nom du fichier cache de la liste des boussoles et vérifier qu'il existe
+			include_spip('inc/cache');
+			$fichier_cache = cache_liste_existe();
+			if (!$fichier_cache) {
 				$erreur = 'cache_liste_indisponible';
 				spip_log("Le fichier cache de la liste des boussoles n'est pas disponible", _BOUSSOLE_LOG . _LOG_ERREUR);
 			}
@@ -71,7 +72,7 @@ function action_serveur_lister_boussoles_dist(){
 			spip_log("Aucune boussole disponible sur ce serveur", _BOUSSOLE_LOG . _LOG_ERREUR);
 		}
 
-		$page = recuperer_fond('actionner', array('fichier' => $fichier_liste, 'erreur' => $erreur, 'serveur' => $nom_serveur));
+		$page = recuperer_fond('actionner', array('fichier' => $fichier_cache, 'erreur' => $erreur, 'serveur' => $nom_serveur));
 		echo $page;
 	}
 }

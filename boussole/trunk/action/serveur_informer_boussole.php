@@ -46,7 +46,7 @@ function action_serveur_informer_boussole_dist(){
 	if ($serveur_actif) {
 		// Initialisation du fichier xml et de l'erreur
 		$erreur = '';
-		$fichier_xml = '';
+		$fichier_cache = '';
 
 		if ($alias_boussole) {
 			// Acquerir la liste des boussoles prêtes à être diffusées
@@ -58,9 +58,11 @@ function action_serveur_informer_boussole_dist(){
 			if ($boussoles) {
 				// Vérifier que la boussole demandée est bien disponible sur le serveur
 				if (array_key_exists($alias_boussole, $boussoles)) {
+					// Construire le nom du fichier cache de la boussole et vérifier qu'il existe
 					// Si la boussole n'est pas encoe en cache on retourne une erreur
-					$fichier_xml = _BOUSSOLE_DIR_CACHE . _BOUSSOLE_PREFIXE_CACHE . $alias_boussole . '.xml';
-					if (!file_exists($fichier_xml)) {
+					include_spip('inc/cache');
+					$fichier_cache = cache_boussole_existe($alias_boussole);
+					if (!$fichier_cache) {
 						$erreur = 'cache_boussole_indisponible';
 						spip_log("Le fichier cache de la boussole n'est pas disponible (alias = $alias_boussole)", _BOUSSOLE_LOG . _LOG_ERREUR);
 					}
@@ -84,7 +86,7 @@ function action_serveur_informer_boussole_dist(){
 		}
 
 		// Envoi du fichier ou de l'erreur
-		$page = recuperer_fond('actionner', array('fichier' => $fichier_xml, 'erreur' => $erreur, 'serveur' => $nom_serveur));
+		$page = recuperer_fond('actionner', array('fichier' => $fichier_cache, 'erreur' => $erreur, 'serveur' => $nom_serveur));
 		echo $page;
 	}
 }

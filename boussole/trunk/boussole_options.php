@@ -14,22 +14,6 @@ if (!defined('_BOUSSOLE_LOG'))
 	/**
 	 * Nom du fichier de log des actions du plugin */
 	define('_BOUSSOLE_LOG', 'boussole');
-if (!defined('_BOUSSOLE_NOMDIR_CACHE'))
-	/**
-	 * Nom du dossier contenant les fichiers caches des boussoles */
-	define('_BOUSSOLE_NOMDIR_CACHE', 'cache-boussoles/');
-if (!defined('_BOUSSOLE_DIR_CACHE'))
-	/**
-	 * Chemin du dossier contenant les fichiers caches des boussoles */
-	define('_BOUSSOLE_DIR_CACHE', _DIR_VAR . _BOUSSOLE_NOMDIR_CACHE);
-if (!defined('_BOUSSOLE_CACHE_LISTE'))
-	/**
-	 * Fichier cache de la liste des boussoles */
-	define('_BOUSSOLE_CACHE_LISTE', 'boussoles.xml');
-if (!defined('_BOUSSOLE_PREFIXE_CACHE'))
-	/**
-	 * Fichier cache d'une boussole */
-	define('_BOUSSOLE_PREFIXE_CACHE', 'boussole-');
 
 
 /**

@@ -175,29 +175,30 @@ function boussole_traduire($boussole, $champ, $objet='') {
 function boussole_lister_caches() {
 	$caches = array();
 
-	if ($fichiers_cache = glob(_BOUSSOLE_DIR_CACHE . "boussole*.xml")) {
+	include_spip('inc/cache');
+	$fichiers_cache = trouver_caches();
+	if ($fichiers_cache) {
 		include_spip('inc/config');
 		$boussoles = lire_config('boussole/serveur/boussoles_disponibles');
 		$boussoles = pipeline('declarer_boussoles', $boussoles);
-
 
 		// Chargement de la fonction de conversion xml en tableau
 		$convertir = charger_fonction('decoder_xml', 'inc');
 
 		foreach ($fichiers_cache as $_fichier) {
 			$cache = array();
-			$cache['fichier'] = $_fichier;
-			$cache['nom'] = basename($_fichier);
-			$cache['maj'] = date('Y-m-d H:i:s', filemtime($_fichier));
+			$cache['fichier'] = $_fichier['fichier'];
+			$cache['nom'] = basename($_fichier['fichier']);
+			$cache['maj'] = date('Y-m-d H:i:s', filemtime($_fichier['fichier']));
 
 			$cache['sha'] = '';
 			$cache['plugin'] = '';
-			$cache['alias'] = '';
+			$cache['alias'] = $_fichier['alias'];
 			$cache['manuelle'] = false;
 
-			lire_fichier($_fichier, $contenu);
+			lire_fichier($_fichier['fichier'], $contenu);
 			$tableau = $convertir($contenu);
-			if ($cache['nom'] == 'boussoles.xml') {
+			if (!$cache['alias']) {
 				// C'est le cache qui liste les boussoles hébergées
 				$cache['description'] = _T('boussole:info_cache_boussoles');
 				if (isset($tableau[_BOUSSOLE_NOMTAG_LISTE_BOUSSOLES])) {
@@ -206,20 +207,19 @@ function boussole_lister_caches() {
 			}
 			else {
 				// C'est le cache d'une boussole hébergée
-				$alias_boussole = str_replace('boussole-', '', basename($_fichier, '.xml'));
-				$cache['alias'] = $alias_boussole;
-				$cache['description'] = _T('boussole:info_cache_boussole', array('boussole' => $alias_boussole));
+				$alias_boussole = $cache['alias'];
+				$cache['description'] = _T('boussole:info_cache_boussole', array('boussole' => $cache['alias']));
 				if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
 					$cache['sha'] = $tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes']['sha'];
 					$cache['nom'] .= " ({$tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes']['version']})";
 				}
-				if (isset($boussoles[$alias_boussole]['prefixe'])
-				AND ($boussoles[$alias_boussole]['prefixe'])) {
+				if (isset($boussoles[$cache['alias']]['prefixe'])
+				AND ($boussoles[$cache['alias']]['prefixe'])) {
 					// Boussole utilisant un plugin
 					$informer = charger_fonction('informer_plugin', 'inc');
-					$plugin = $informer($boussoles[$alias_boussole]['prefixe']);
+					$plugin = $informer($boussoles[$cache['alias']]['prefixe']);
 					if ($plugin)
-						$cache['plugin'] = "{$plugin['nom']} ({$boussoles[$alias_boussole]['prefixe']}/{$plugin['version']})";
+						$cache['plugin'] = "{$plugin['nom']} ({$boussoles[$cache['alias']]['prefixe']}/{$plugin['version']})";
 				}
 				else {
 					// Boussole n'utilisant pas un plugin, nommée boussole manuelle
@@ -228,7 +228,7 @@ function boussole_lister_caches() {
 
 					// Ajout de la version contenue dans le fichier XML source de la boussole pour
 					// vérifier que le cache est bien à jour avec
-					$fichier_source = find_in_path("boussole_traduite-${alias_boussole}.xml");
+					$fichier_source = find_in_path("boussole_traduite-{$cache['alias']}.xml");
 					lire_fichier($fichier_source, $contenu);
 					$tableau_source = $convertir($contenu);
 					if  (isset($tableau_source[_BOUSSOLE_NOMTAG_BOUSSOLE])) {

@@ -28,11 +28,8 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
 function boussole_actualiser_caches() {
 
 	// Suppression de tous les caches (.xml et .sha) afin de ne pas conserver des boussoles qui ne sont plus disponibles
-	if ($fichiers_cache = glob(_BOUSSOLE_DIR_CACHE . "*.*")) {
-		foreach ($fichiers_cache as $_fichier) {
-			supprimer_fichier($_fichier);
-		}
-	}
+	include_spip('inc/cache');
+	supprimer_caches();
 
 	// Acquisition de la liste des boussoles disponibles sur le serveur.
 	// (on sait déjà que le mode serveur est actif)
@@ -112,10 +109,13 @@ function boussole_cacher_liste($boussoles) {
 		$convertir = charger_fonction('decoder_xml', 'inc');
 		$cache = '';
 		foreach($boussoles as $_alias => $_infos) {
-			$fichier_xml = _BOUSSOLE_DIR_CACHE . _BOUSSOLE_PREFIXE_CACHE . $_alias . '.xml';
-			if (file_exists($fichier_xml)) {
+			// Construire le nom du fichier cache de la boussole et vérifier qu'il existe
+			include_spip('inc/cache');
+			$fichier_cache = cache_boussole_existe($_alias);
+			if ($fichier_cache) {
 				// Extraction des seules informations de la boussole pour créer le cache (pas de groupe ni site)
-				lire_fichier($fichier_xml, $xml);
+				$xml = '';
+				lire_fichier($fichier_cache, $xml);
 				$tableau = $convertir($xml);
 
 				if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
@@ -143,12 +143,9 @@ function boussole_cacher_liste($boussoles) {
 			$sha = sha1($cache);
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
-			$dir = sous_repertoire(_DIR_VAR, trim(_BOUSSOLE_NOMDIR_CACHE, '/'));
-			$fichier_cache = $dir . _BOUSSOLE_CACHE_LISTE;
-			ecrire_fichier($fichier_cache, $cache);
-
-			$fichier_sha = $fichier_cache . '.sha';
-			ecrire_fichier($fichier_sha, sha1_file($fichier_cache));
+			// Ecriture du cache et de son sha256
+			include_spip('inc/cache');
+			ecrire_cache_liste($cache);
 
 			$retour = true;
 		}
@@ -298,13 +295,9 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin='') {
 			$sha = sha1($cache);
 			$cache = str_replace(_BOUSSOLE_PATTERN_SHA, $sha, $cache);
 
-			$dir = sous_repertoire(_DIR_VAR, trim(_BOUSSOLE_NOMDIR_CACHE, '/'));
-			// On supprime la chaine '_traduite' si on est en présence d'une boussole manuelle
-			$fichier_cache = $dir . str_replace('_traduite', '', basename($fichier_xml));
-			ecrire_fichier($fichier_cache, $cache);
-
-			$fichier_sha = $fichier_cache . '.sha';
-			ecrire_fichier($fichier_sha, sha1_file($fichier_cache));
+			// Ecriture du cache et de son sha256
+			include_spip('inc/cache');
+			ecrire_cache_boussole($cache, $alias_boussole);
 
 			$retour = true;
 		}
