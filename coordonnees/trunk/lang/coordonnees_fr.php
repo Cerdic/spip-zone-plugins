@@ -17,6 +17,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_email_court' => 'Ajouter email',
 	'ajouter_telephone_court' => 'Ajouter numéro',
 
+	// B
+	'bouton_dissocier_adresse' => 'Retirer cette adresse',
+	'bouton_dissocier_email' => 'Retirer cet email',
+	'bouton_dissocier_numero' => 'Retirer ce numéro',
+
 	// C
 	'configuration_coordonnees' => 'Configuration des coordonnées',
 	'confirmer_suppression_adresse' => 'Voulez-vous vraiment supprimer cette adresse ?',

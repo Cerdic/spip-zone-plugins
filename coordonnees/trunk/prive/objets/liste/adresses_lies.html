@@ -35,10 +35,9 @@
 			</a>
 			[(#BOUTON_ACTION{
 				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'adresse:icone_supprimer_adresse'})],
-				#URL_ACTION_AUTEUR{supprimer_adresse,#ID_ADRESSE/#OBJET/#ID_OBJET,#SELF},
-				'button link ajax',
-				<:coordonnees:confirmer_suppression_adresse:>,
-				<:coordonnees:supprimer_adresse:>}
+				#URL_ACTION_AUTEUR{dissocier_coordonnee,adresse/#ID_ADRESSE/#OBJET/#ID_OBJET,#SELF},
+				'button link ajax','',
+				<:coordonnees:bouton_dissocier_adresse:>}
 			)]
 		</td>
 	</tr>
