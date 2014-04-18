@@ -32,10 +32,9 @@
 
 <B_pays>
 <div class="champ contenu_pays">
-<BOUCLE_pays(PAYS ?){code=#PAYS*}><span dir='#LANG_DIR' class='pays'>#NOM</span></BOUCLE_pays>
-</div>
-</B_pays>
-[<div class="champ contenu_pays"><span dir='#LANG_DIR' class='pays'>(#NOM)</span></div>]
-<//B_pays>
+	<BOUCLE_pays(PAYS ?){code=#PAYS*}>[<span dir='#LANG_DIR' class='pays'>(#NOM)</span>]</BOUCLE_pays>
+</div></B_pays>
+	[<span dir='#LANG_DIR' class='pays'>(#PAYS)</span>]
+</div><//B_pays>
 
 </BOUCLE_adresse>
