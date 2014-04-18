@@ -5,21 +5,16 @@
 		<p>#ID_NUMERO</p>
 	</div>
 
-	<div class='utilisation'>
-		<B_numero_utilisee>
-		<:coordonnees:info_numero_utilise_par:>
-		<BOUCLE_numero_utilisee(numeros_liens){id_numero}{fusion objet}{par objet}>
-			<B_numero_usitee>
-			<div class="liste">
-				<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{#OBJET|objet_info{info_1_objet},#OBJET|objet_info{info_nb_objets}})]</strong>
-				<ul>
-					<BOUCLE_numero_usitee(numeros_liens){id_numero}{objet}{par id_objet}>
-					<li>[(#OBJET|objet_icone{16}) ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">#INFO_TITRE{#OBJET,#ID_OBJET}</a></li>
-					</BOUCLE_numero_usitee>
-				</ul>
-			</div>
-			<B_numero_usitee>
-		</BOUCLE_numero_utilisee>
-	</div>
+	[(#REM) Bouton suppression
+	][(#AUTORISER{supprimer,numero,#ID_NUMERO}|oui)
+		[(#URL_ACTION_AUTEUR{supprimer_numero,#ID_NUMERO,#URL_ECRIRE{coordonnees}|parametre_url{coordonnee,numero}}|icone_horizontale{<:coordonnees:supprimer_numero:>,numero,del})]
+	]
+
+	[(#REM) Bouton voir en ligne
+	][(#VAL{redirect}
+		|generer_url_action{type=numero&id=#ID_NUMERO}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,numero})]
+
 </div>
 </BOUCLE_numero_info>

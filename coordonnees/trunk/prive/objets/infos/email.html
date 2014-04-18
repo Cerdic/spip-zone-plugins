@@ -5,21 +5,16 @@
 		<p>#ID_EMAIL</p>
 	</div>
 
-	<div class='utilisation'>
-		<B_email_utilisee>
-		<:coordonnees:info_email_utilise_par:>
-		<BOUCLE_email_utilisee(emails_liens){id_email}{fusion objet}{par objet}>
-			<B_email_usitee>
-			<div class="liste">
-				<strong>[(#GRAND_TOTAL|singulier_ou_pluriel{#OBJET|objet_info{info_1_objet},#OBJET|objet_info{info_nb_objets}})]</strong>
-				<ul>
-					<BOUCLE_email_usitee(emails_liens){id_email}{objet}{par id_objet}>
-					<li>[(#OBJET|objet_icone{16}) ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">#INFO_TITRE{#OBJET,#ID_OBJET}</a></li>
-					</BOUCLE_email_usitee>
-				</ul>
-			</div>
-			<B_email_usitee>
-		</BOUCLE_email_utilisee>
-	</div>
+	[(#REM) Bouton suppression
+	][(#AUTORISER{supprimer,email,#ID_EMAIL}|oui)
+		[(#URL_ACTION_AUTEUR{supprimer_email,#ID_EMAIL,#URL_ECRIRE{coordonnees}|parametre_url{coordonnee,email}}|icone_horizontale{<:coordonnees:supprimer_email:>,email,del})]
+	]
+
+	[(#REM) Bouton voir en ligne
+	][(#VAL{redirect}
+		|generer_url_action{type=email&id=#ID_EMAIL}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,email})]
+
 </div>
 </BOUCLE_email_info>
