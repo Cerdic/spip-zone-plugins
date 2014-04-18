@@ -1,7 +1,12 @@
 <?php
 /**
- * Plugin Coordonnees
- * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
+ * Pipelines du plugin Coordonnees
+ *
+ * @plugin     Coordonnees
+ * @copyright  2013
+ * @author     Marcimat / Ateliers CYM
+ * @licence    GNU/GPL
+ * @package    SPIP\Coordonnees\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -57,6 +62,33 @@ function coordonnees_affiche_auteurs_interventions($flux) {
 
 	return $flux;
 }
+
+
+/**
+ * Liaisons avec les objets
+ * sur la page de visualisation des coordonnées
+**/
+function coordonnees_affiche_gauche($flux) {
+	$texte = "";
+	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
+	$e = trouver_objet_exec($exec);
+	$type = $e['type'];
+	$id_coordonnee = $flux['args']["id_${type}"];
+
+	if (!$e['edition'] AND in_array($type,array('adresse','email','numero'))) {
+		$texte .= recuperer_fond("prive/squelettes/contenu/utilisations_${type}", array(
+			"id_${type}" => intval($id_coordonnee)
+			)
+		);
+	}
+
+	if ($texte) {
+		$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
+
 
 /**
  * Optimiser la base de donnees en supprimant les liens orphelins

@@ -1,0 +1,18 @@
+<BOUCLE_email(EMAILS){id_email}{tout}>
+<B_objets>
+[(#BOITE_OUVRIR{<:coordonnees:info_email_utilise_par:>,'simple utilisation'})]
+	<BOUCLE_objets(emails_liens){id_email}{fusion objet}{par objet}>
+	<B_liens>
+	<div class="liste">
+		<h4>[(#OBJET|objet_icone{16}) ][(#GRAND_TOTAL|singulier_ou_pluriel{#OBJET|objet_info{info_1_objet},#OBJET|objet_info{info_nb_objets}})]</h4>
+		<ul class="liste-items">
+			<BOUCLE_liens(emails_liens){id_email}{objet}{par id_objet}>
+			<li class='item'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">[(#INFO_TITRE{#OBJET,#ID_OBJET})][ <small>\(<:info_numero_abbreviation:>(#ID_OBJET)\)</small>]</a></li>
+			</BOUCLE_liens>
+		</ul>
+	</div>
+	<B_liens>
+</BOUCLE_objets>
+#BOITE_FERMER
+</B_objets>
+</BOUCLE_email>
