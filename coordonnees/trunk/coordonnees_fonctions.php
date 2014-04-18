@@ -1,8 +1,13 @@
 <?php
 /**
- * Plugin Coordonnees
- * Licence GPL (c) 2010 Matthieu Marcillaud
-**/
+ * Fonctions utiles au plugin Coordonnees
+ *
+ * @plugin     Coordonnees
+ * @copyright  2013
+ * @author     Marcimat / Ateliers CYM
+ * @licence    GNU/GPL
+ * @package    SPIP\Coordonnees\Fonctions
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

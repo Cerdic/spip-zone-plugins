@@ -1,19 +1,32 @@
 <?php
 /**
- * Plugin Coordonnees
- * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
+ * Gestion du formulaire de d'édition d'un numero
+ *
+ * @plugin     Coordonnees
+ * @copyright  2014
+ * @author     Marcimat / Ateliers CYM
+ * @licence    GNU/GPL
+ * @package    SPIP\Coordonnees\Formulaires
  */
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-
 /**
  * Definition des saisies du formulaire
+ *
+ * @param int|string $id_numero
+ *     Identifiant du numero. 'new' pour un nouveau numero.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le numero crée à cet objet,
+ *     tel que `article|3`
+ * @return array
+ *     Tableau des saisies
  */
-function formulaires_editer_numero_saisies_dist($id_adresse='new', $retour='', $associer_objet=''){
+function formulaires_editer_numero_saisies_dist($id_numero='new', $retour='', $associer_objet=''){
 	$saisies = array (
 		array (
 			'saisie' => 'input',
@@ -56,14 +69,54 @@ function formulaires_editer_numero_saisies_dist($id_adresse='new', $retour='', $
 }
 
 /**
- * Identifier le formulaire en faisant abstraction des parametres qui ne representent pas l'objet edite
+ * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
+ *
+ * @param int|string $id_numero
+ *     Identifiant de l'numero. 'new' pour un nouveau numero.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le numero créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'une numero source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du numero, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return string
+ *     Hash du formulaire
  */
 function formulaires_editer_numero_identifier_dist($id_numero='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	return serialize(array(intval($id_numero), $associer_objet));
 }
 
 /**
- * Declarer les champs postes et y integrer les valeurs par defaut
+ * Chargement du formulaire d'édition d'une numero
+ *
+ * Déclarer les champs postés et y intégrer les valeurs par défaut
+ *
+ * @uses formulaires_editer_objet_charger()
+ *
+ * @param int|string $id_numero
+ *     Identifiant de l'numero. 'new' pour un nouveau numero.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le numero créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'une numero source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du numero, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return string
+ *     Hash du formulaire
  */
 function formulaires_editer_numero_charger_dist($id_numero='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('numero',$id_numero,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
@@ -78,7 +131,29 @@ function formulaires_editer_numero_charger_dist($id_numero='new', $retour='', $a
 }
 
 /**
- * Verifier les champs postes et signaler d'eventuelles erreurs
+ * Vérifications du formulaire d'édition d'un numero
+ *
+ * Vérifier les champs postés et signaler d'éventuelles erreurs
+ *
+ * @uses formulaires_editer_objet_verifier()
+ *
+ * @param int|string $id_numero
+ *     Identifiant de l'numero. 'new' pour un nouveau numero.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le numero créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'une numero source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du numero, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return string
+ *     Hash du formulaire
  */
 function formulaires_editer_numero_verifier_dist($id_numero='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	// verification generique
@@ -88,7 +163,29 @@ function formulaires_editer_numero_verifier_dist($id_numero='new', $retour='', $
 }
 
 /**
- * Traiter les champs postes
+ * Traitement du formulaire d'édition d'un numero
+ *
+ * Traiter les champs postés
+ *
+ * @uses formulaires_editer_objet_traiter()
+ *
+ * @param int|string $id_numero
+ *     Identifiant de l'numero. 'new' pour un nouveau numero.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @param string $associer_objet
+ *     Éventuel `objet|x` indiquant de lier le numero créé à cet objet,
+ *     tel que `article|3`
+ * @param int $lier_trad
+ *     Identifiant éventuel d'une numero source d'une traduction
+ * @param string $config_fonc
+ *     Nom de la fonction ajoutant des configurations particulières au formulaire
+ * @param array $row
+ *     Valeurs de la ligne SQL du numero, si connu
+ * @param string $hidden
+ *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
+ * @return string
+ *     Hash du formulaire
  */
 function formulaires_editer_numero_traiter_dist($id_numero='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('numero',$id_numero,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
