@@ -1,12 +1,5 @@
 <BOUCLE_adresse(ADRESSES){id_adresse}{statut?}{tout}>
 
-<BOUCLE_type(adresses_liens){id_adresse}>
-<div class="champ contenu_type[ (#TYPE*|strlen|?{'',vide})]">
-	<div class='label'><:coordonnees:label_type></div>
-	<span dir='#LANG_DIR' class='type'><strong><:coordonnees:adresse:> [(#VAL{coordonnees:type_adr_#TYPE}_T)]</strong></span>
-</div>
-</BOUCLE_type>
-
 <div class="champ contenu_voie[ (#VOIE*|strlen|?{'',vide})]">
 	<div class='label'><:coordonnees:label_voie></div>
 	<span dir='#LANG_DIR' class='#EDIT{voie} voie'>[(#VOIE)]</span>
