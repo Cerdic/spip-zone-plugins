@@ -8,7 +8,8 @@
 		hauteur      hauteur maximale (defaut 50px)
 		alt          texte alternatif
 ]
-#SET{fichier, #ENV{objet}|concat{'on',#ENV{id_objet}}}
+#SET{objet,#ENV{objet}|in_array{#LISTE{article,rubrique,auteur}}|?{#ENV{objet}|substr{0,3},#ENV{objet}}}
+#SET{fichier, #GET{objet}|concat{'on',#ENV{id_objet}}}
 #SET{regex, #GET{fichier}|concat{'\.(jpg|gif|png)'}}
 #SET{chemin_logo,#VAL{IMG/}|find_all_in_path{#GET{regex}}|array_flip|array_keys|table_valeur{0}}
 #SET{alt, #ENV*{alt,#INFO_TITRE{#ENV{objet},#ENV{id_objet}}}|attribut_html}
