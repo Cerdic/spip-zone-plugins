@@ -13,7 +13,7 @@ include_spip('inc/editer');
 /**
  * Definition des saisies du formulaire
  */
-function formulaires_editer_email_saisies_dist(){
+function formulaires_editer_email_saisies_dist($id_adresse='new', $retour='', $associer_objet=''){
 	$saisies = array (
 		array (
 			'saisie' => 'input',
@@ -21,13 +21,6 @@ function formulaires_editer_email_saisies_dist(){
 				'nom' => 'titre',
 				'label' => _T('coordonnees:label_titre'),
 				'placeholder' => _T('coordonnees:placeholder_titre_email')
-			)
-		),
-		array (
-			'saisie' => 'type_mel',
-			'options' => array (
-				'nom' => 'type',
-				'label' => _T('coordonnees:label_type_email'),
 			)
 		),
 		array (
@@ -46,6 +39,21 @@ function formulaires_editer_email_saisies_dist(){
 			)
 		),
 	);
+
+	// si on associe l'email à un objet, rajouter la saisie 'type'
+	if($associer_objet) {
+		$saisie_type = array(
+			array (
+			'saisie' => 'type_mel',
+				'options' => array (
+					'nom' => 'type',
+					'label' => _T('coordonnees:label_type_email'),
+				)
+			)
+		);
+		$saisies = array_merge($saisie_type,$saisies);
+	}
+
 	return $saisies;
 }
 

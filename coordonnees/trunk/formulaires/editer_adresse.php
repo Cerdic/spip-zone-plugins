@@ -12,7 +12,7 @@ include_spip('inc/editer');
 /**
  * Definition des saisies du formulaire
  */
-function formulaires_editer_adresse_saisies_dist(){
+function formulaires_editer_adresse_saisies_dist($id_adresse='new', $retour='', $associer_objet=''){
 	$saisies = array (
 		array (
 			'saisie' => 'input',
@@ -20,13 +20,6 @@ function formulaires_editer_adresse_saisies_dist(){
 				'nom' => 'titre',
 				'label' => _T('coordonnees:label_titre'),
 				'placeholder' => _T('coordonnees:placeholder_titre_adresse')
-			)
-		),
-		array (
-			'saisie' => 'type_adr',
-			'options' => array (
-				'nom' => 'type',
-				'label' => _T('coordonnees:label_type_adresse'),
 			)
 		),
 		array (
@@ -89,6 +82,21 @@ function formulaires_editer_adresse_saisies_dist(){
 			)
 		),
 	);
+
+	// si on associe l'adresse à un objet, rajouter la saisie 'type'
+	if($associer_objet) {
+		$saisie_type = array(
+			array (
+			'saisie' => 'type_adr',
+			'options' => array (
+				'nom' => 'type',
+				'label' => _T('coordonnees:label_type_adresse'),
+				)
+			)
+		);
+		$saisies = array_merge($saisie_type,$saisies);
+	}
+
 	return $saisies;
 }
 
