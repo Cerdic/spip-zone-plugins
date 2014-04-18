@@ -1,5 +1,10 @@
 <BOUCLE_adresse(ADRESSES){id_adresse}{statut?}{tout}>
 
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label'><:info_titre:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+
 <div class="champ contenu_voie[ (#VOIE*|strlen|?{'',vide})]">
 	<div class='label'><:coordonnees:label_voie></div>
 	<span dir='#LANG_DIR' class='#EDIT{voie} voie'>[(#VOIE)]</span>
