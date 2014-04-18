@@ -20,7 +20,7 @@
 #SET{id,#ID_CONTACT} #SET{numeros,#ARRAY}
 <BOUCLE_tel_contact(NUMEROS numeros_liens?){id_contact}>#SET{numeros,#GET{numeros}|push{#NUMERO}}</BOUCLE_tel_contact>
 </BOUCLE_contact>
-#SET{logo,#LOGO_AUTEUR|sinon{#VAL{auteur}|objet_icone}}
+#SET{logo,#LOGO_AUTEUR|image_reduire{100}|sinon{#VAL{auteur}|objet_icone}}
 #SET{nom,#NOM|concat{' ',#PRENOM}} #SET{email,#EMAIL} #SET{url,#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}}
 #SET{id,#ID_AUTEUR} #SET{numeros,#ARRAY}
 <BOUCLE_tel(NUMEROS numeros_liens?){id_auteur}>#SET{numeros,#GET{numeros}|push{#NUMERO}}</BOUCLE_tel>
