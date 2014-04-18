@@ -29,6 +29,9 @@
 
 [(#REM) Affichage du detail dans une table ]
 <BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>
+
+<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>
+
 <div class="liste-objets">
 <table class="liste contenu-commande">
 	<thead>
