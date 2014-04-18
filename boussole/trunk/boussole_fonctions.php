@@ -207,7 +207,6 @@ function boussole_lister_caches() {
 			}
 			else {
 				// C'est le cache d'une boussole hébergée
-				$alias_boussole = $cache['alias'];
 				$cache['description'] = _T('boussole:info_cache_boussole', array('boussole' => $cache['alias']));
 				if  (isset($tableau[_BOUSSOLE_NOMTAG_BOUSSOLE])) {
 					$cache['sha'] = $tableau[_BOUSSOLE_NOMTAG_BOUSSOLE]['@attributes']['sha'];
