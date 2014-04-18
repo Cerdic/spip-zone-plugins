@@ -7,70 +7,70 @@
 	Inclus dans prive/objet/contenu/commande.html
 	Parametres :
 		id_commande    identifiant de la commande
+][(#REM)
+	affichage : jusqu'à 2 adresses on les affiche côte à côte, au-delà (improbable mais sait-on jamais) 1 par ligne
+	titre de l'adresse :
+	  Si le type est "facturation", "livraison", ou un autre type connu, on affiche les chaines de langues correspondantes,
+	  sinon on affiche une chaîne générique.
+	  Idem pour les icônes.
 ]
 <BOUCLE_commande(COMMANDES){id_commande}{tout}{statut?}>
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
 
-[(#REM) adresses liées à la commande ]
-<B_adresses_commande>
-[<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{<:commandes:titre_adresse_commande:>,<:commandes:titre_adresses_commande:>})</h2>]
-<BOUCLE_adresses_commande(ADRESSES adresses_liens?){id_commande}{!par type}>
-<table class="liste-objets adresse-commande">
-	[(#REM) header de l'adresse :
-		Si le type est "facturation", "livraison" ou un autre type connu, on affiche les chaines de langues correspondantes
-		sinon on affiche une chaîne générique
-	]
+
+[(#REM)
+	adresses liées à la commande
+
+]<B_adresses_commande>
+[<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{commandes:titre_adresse_commande,commandes:titre_adresses_commande})</h2>]
+<table><tbody>
+	<BOUCLE_adresses_commande(ADRESSES adresses_liens){id_commande}{!par type}>
 	#SET{chaine_generique, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
-	#SET{chaine_type, #VAL{#VAL{coordonnees:type_adr_}|concat{#TYPE}|_T}}
-	#SET{chaine, #TYPE|in_array{#LISTE{facturation,livraison}}|?{
+	#SET{chaine_type, #TYPE|in_array{#LISTE{facturation,livraison}}|?{
 		#VAL{#VAL{commandes:adresse_}|concat{#TYPE}|_T},
-		#GET*{chaine_type}|=={#VAL*{'type adr '}|concat{#TYPE}}|?{#GET{chaine_generique},#GET{chaine_type}}
-	}}
+		#VAL{coordonnees:type_adr_}|concat{#TYPE}|_T{'',#ARRAY{'force',''}}}}
+	#SET{chaine, #GET{chaine_type}|sinon{#GET{chaine_generique}}}
 	#SET{icone, #TYPE|in_array{#LISTE{facturation,livraison}}|?{
 		#CHEMIN_IMAGE{#VAL{icone-commande-}|concat{#TYPE|=={livraison}|?{envoye,paye},-16.png}},
 		#CHEMIN_IMAGE{#VAL{type_adr_}|concat{#TYPE,.png}}|sinon{#CHEMIN_IMAGE{adresse-16.png}}
 	}|balise_img}
-	<thead>
-		<tr class="first">
-			<th scope="col">
-				<a href="#URL_ECRIRE{adresse,id_adresse=#ID_ADRESSE}">[(#GET{icone}) ][(#GET{chaine})]</a>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr class="odd">
-			<td class="adresse">
-				[(#VOIE)<br>]
-				[(#CODE_POSTAL) ][ (#VILLE)]<br>
-				<BOUCLE_pays_commande(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_commande>#PAYS<//B_pays_commande>
-			</td>
-		</tr>
-	</tbody>
-</table>
-</BOUCLE_adresses_commande>
+	#SET{titre,#GET{icone}|concat{'&nbsp;',#GET{chaine}|wrap{<a>}|inserer_attribut{href,#URL_ECRIRE{adresse,id_adresse=#ID_ADRESSE}}}}
+	[(#TOTAL_BOUCLE|>{2}|ou{#TOTAL_BOUCLE|<={2}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
+	<td>
+		<div class="adresse-commande">
+			[<h4>(#GET{titre})</h4>]
+			<INCLURE{fond=prive/objets/contenu/adresse, id_adresse} />
+		</div>
+	</td>
+	[(#TOTAL_BOUCLE|>{2}|ou{#TOTAL_BOUCLE|<={2}|et{#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}}}|oui)</tr>]
+	</BOUCLE_adresses_commande>
+</tbody></table>
+</B_adresses_commande>
 
-[(#REM) sinon adresses liées au contact]
-<B_adresses_contact>
-[<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{<:commandes:titre_adresse_client:>,<:commandes:titre_adresses_client:>})</h2>]
-<BOUCLE_adresses_contact(ADRESSES adresses_liens?){id_auteur}>
-<table class="liste-objets adresse-commande">
-	<thead>
-		<tr class="first">
-			<th scope="col">[(#TITRE|sinon{#VAL{coordonnees:type_adr_}|concat{#TYPE}|_T})]</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr class="odd">
-			<td class="adresse">
-				[(#VOIE)<br>]
-				[(#CODE_POSTAL) ][ (#VILLE)]<br>
-				<BOUCLE_pays_contact(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_contact>#PAYS<//B_pays_contact>
-			</td>
-		</tr>
-	</tbody>
-</table>
-</BOUCLE_adresses_contact>
+
+[(#REM)
+	sinon adresses liées au contact
+
+]<B_adresses_contact>
+[<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{commandes:titre_adresse_client,commandes:titre_adresses_client})</h2>]
+<table><tbody>
+	<BOUCLE_adresses_contact(ADRESSES adresses_liens){id_auteur}>
+	#SET{chaine_generique, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
+	#SET{chaine_type, #VAL{coordonnees:type_adr_}|concat{#TYPE}|_T{'',#ARRAY{'force',''}}}
+	#SET{titre,#TITRE|sinon{#GET{chaine_type}}|sinon{#GET{chaine_generique}}|wrap{<a>}|inserer_attribut{href,#URL_ECRIRE{adresse,id_adresse=#ID_ADRESSE}}}
+	[(#TOTAL_BOUCLE|>{2}|ou{#TOTAL_BOUCLE|<={2}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
+	<td>
+		<div class="adresse-commande">
+			[<h4>(#GET{titre})</h4>]
+			<INCLURE{fond=prive/objets/contenu/adresse, id_adresse} />
+		</div>
+	</td>
+	[(#TOTAL_BOUCLE|>{2}|ou{#TOTAL_BOUCLE|<={2}|et{#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}}}|oui)</tr>]
+	</BOUCLE_adresses_contact>
+</tbody></table>
+</B_adresses_contact>
 <//B_adresses_commande>
+
 
 </BOUCLE_auteur>
 </BOUCLE_commande>
