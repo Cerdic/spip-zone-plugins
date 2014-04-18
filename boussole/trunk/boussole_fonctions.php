@@ -196,6 +196,7 @@ function boussole_lister_caches() {
 			$cache['alias'] = $_fichier['alias'];
 			$cache['manuelle'] = false;
 
+			$contenu = '';
 			lire_fichier($_fichier['fichier'], $contenu);
 			$tableau = $convertir($contenu);
 			if (!$cache['alias']) {

@@ -208,6 +208,7 @@ function xml_to_cache($fichier_xml, $alias_boussole, $prefixe_plugin='') {
 	$boussole_plugin = (!isset($prefixe_plugin) OR !$prefixe_plugin ? false : true);
 
 	// Extraction du contenu du xml source
+	$xml = '';
 	lire_fichier($fichier_xml, $xml);
 	$convertir = charger_fonction('decoder_xml', 'inc');
 	$tableau = $convertir($xml);
