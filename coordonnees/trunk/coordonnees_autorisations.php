@@ -37,13 +37,15 @@ function autoriser_adresse_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // supprimer
+// uniquement les orphelins
 function autoriser_adresse_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	include_spip('action/editer_liens');
+	return empty(objet_trouver_liens(array('adresse'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
 }
 
 // associer (lier / delier)
 function autoriser_associeradresses_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
 }
 
 
@@ -66,13 +68,15 @@ function autoriser_numero_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // supprimer
+// uniquement les orphelins
 function autoriser_numero_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	include_spip('action/editer_liens');
+	return empty(objet_trouver_liens(array('numero'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
 }
 
 // associer (lier / delier)
 function autoriser_associernumeros_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
 }
 
 
@@ -95,14 +99,16 @@ function autoriser_email_modifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 // supprimer
+// uniquement les orphelins
 function autoriser_email_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	include_spip('action/editer_liens');
+	return empty(objet_trouver_liens(array('emails'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
 }
 
 
 // associer (lier / delier)
 function autoriser_associeremails_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
 }
 
 
