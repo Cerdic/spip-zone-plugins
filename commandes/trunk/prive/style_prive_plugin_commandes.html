@@ -64,8 +64,16 @@
 .infos .formulaire_instituer_objet-commande .statut_envoye .show { background-color: #GET{foncee}; }
 .infos .formulaire_instituer_objet-commande .statut_paye .show { background-color: [#(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)]; }
 .fiche_objet .formulaire_dater_commande	{ margin-top: 1em; margin-bottom: 1em; }
+/* adresses */
+.adresse-commande			{  }
+/* contenu */
+.contenu-commande .detail td		{ padding-top: 1.25em; padding-bottom: 1.25em; }
+.contenu-commande tfoot td		{ background-color: #eee; font-style: normal; }
+.contenu-commande .montant		{ text-align: right; white-space: pre; }
+.contenu-commande .detail .description	{ font-weight: bold; }
+.contenu-commande .total_ttc		{ font-weight: bold; }
+.contenu-commande .total_ttc .descriptif{ text-align: right; }
+/* client */
 .client-commande td			{ vertical-align: top; }
 .client-commande .nom			{ margin: 0; }
 .client-commande .logo			{ width: 10px; }
-.commandes .total_ttc			{ font-weight: bold; }
-.commandes .total_ttc .descriptif	{ text-align: right; }
