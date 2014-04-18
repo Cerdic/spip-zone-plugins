@@ -14,6 +14,16 @@ if (!defined('_BOUSSOLE_PATTERN_SHA'))
 	 * dans le cache produit */
 	define('_BOUSSOLE_PATTERN_SHA', '%sha_contenu%');
 
+/**
+ * Types d'objet manipulés par le plugin
+ */
+if (!defined('_BOUSSOLE_OBJET_BOUSSOLE'))
+	define('_BOUSSOLE_OBJET_BOUSSOLE', 'boussole');
+if (!defined('_BOUSSOLE_OBJET_GROUPE'))
+	define('_BOUSSOLE_OBJET_GROUPE', 'groupe');
+if (!defined('_BOUSSOLE_OBJET_SITE'))
+	define('_BOUSSOLE_OBJET_SITE', 'site');
+
 
 /**
  * Génération du cache de chaque boussole hébergée par le serveur et du cache de la liste

@@ -40,15 +40,4 @@ if (!defined('_BOUSSOLE_NOMTAG_ERREUR'))
 	 * Nom de la balise XML définissant une erreur */
 	define('_BOUSSOLE_NOMTAG_ERREUR', 'erreur');
 
-
-/**
- * Types d'objet manipulés par le plugin
- */
-if (!defined('_BOUSSOLE_OBJET_BOUSSOLE'))
-	define('_BOUSSOLE_OBJET_BOUSSOLE', 'boussole');
-if (!defined('_BOUSSOLE_OBJET_GROUPE'))
-	define('_BOUSSOLE_OBJET_GROUPE', 'groupe');
-if (!defined('_BOUSSOLE_OBJET_SITE'))
-	define('_BOUSSOLE_OBJET_SITE', 'site');
-
 ?>
