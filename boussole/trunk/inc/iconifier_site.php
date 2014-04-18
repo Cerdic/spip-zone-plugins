@@ -39,7 +39,7 @@ function inc_iconifier_site_dist($id_site, $mode, $url_image) {
 }
 
 /**
- * @param $url_image
+ * @param string	$url_image
  * @return array
  */
 function creer_image_pour_iconifier($url_image) {

@@ -360,7 +360,7 @@ function inserer_balise($type='ouvrante', $nom_balise, $attributs=array(), $inde
  * @param string	$alias_objet
  * @param int	$indentation
  *
- * @return array
+ * @return string[]
  */
 function compiler_traductions_plugin($alias_boussole, $type_objet, $alias_objet, $indentation=0) {
 	$nom = '';
@@ -407,7 +407,7 @@ function compiler_traductions_plugin($alias_boussole, $type_objet, $alias_objet,
  * @param array		$objet
  * @param int	$indentation
  *
- * @return array
+ * @return string[]
  */
 function compiler_traductions_manuelle($objet, $indentation=0) {
 	$nom = '';
