@@ -219,7 +219,7 @@ function diogene_mots_diogene_traiter($flux){
 		 */
 		foreach($groupes_possibles as $id_groupe){
 			$mots_multiples = array();
-			$requete_id_groupe = _request('groupe_'.$id_groupe);
+			$requete_id_groupe = _request('groupe_'.$id_groupe) ? _request('groupe_'.$id_groupe) : array();
 			// On crée les mots nouveaux si nécessaire
 			if (test_plugin_actif('chosen')) {
 				$prefixe_chosen = "chosen_";
