@@ -63,6 +63,13 @@ function formulaires_importer_boussole_traiter_dist(){
 }
 
 
+/**
+ * @param $boussole
+ * @param $id_parent
+ * @param bool $langue_site
+ * @param bool $forcer_statut_publie
+ * @return int
+ */
 function importer_sites_boussole($boussole, $id_parent, $langue_site=true, $forcer_statut_publie=false) {
 	$nb_sites = 0;
 

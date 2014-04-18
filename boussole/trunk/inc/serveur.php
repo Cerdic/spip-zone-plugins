@@ -358,7 +358,7 @@ function inserer_balise($type='ouvrante', $nom_balise, $attributs=array(), $inde
  * @param string	$alias_boussole
  * @param string	$type_objet
  * @param string	$alias_objet
- * @param string	$indentation
+ * @param int	$indentation
  *
  * @return array
  */
@@ -405,7 +405,7 @@ function compiler_traductions_plugin($alias_boussole, $type_objet, $alias_objet,
  * @package	SPIP\BOUSSOLE\Outils\XML
  *
  * @param array		$objet
- * @param string	$indentation
+ * @param int	$indentation
  *
  * @return array
  */
@@ -437,7 +437,7 @@ function compiler_traductions_manuelle($objet, $indentation=0) {
  * @param string	$nom
  * @param string	$slogan
  * @param string	$description
- * @param string	$indentation
+ * @param int	$indentation
  *
  * @return string
  */

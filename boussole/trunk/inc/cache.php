@@ -37,6 +37,9 @@ if (!defined('_BOUSSOLE_CACHE'))
 /**
  * Ecriture des informations complètes d'une boussole dans un cache xml
  *
+ * @param string	$cache
+ * @param string	$alias_boussole
+ *
  * @return boolean
  */
 function ecrire_cache_boussole($cache, $alias_boussole){
@@ -59,7 +62,7 @@ function ecrire_cache_boussole($cache, $alias_boussole){
  * Vérifie l'existence du fichier cache d'une boussole et si oui retourne
  * son chemin complet
  *
- * @return boolean
+ * @return string
  */
 function cache_boussole_existe($alias_boussole){
 	// Ecriture du fichier cache
@@ -78,6 +81,7 @@ function cache_boussole_existe($alias_boussole){
 /**
  * Ecriture de la liste des boussoles dans un cache xml
  *
+ * @param string	$cache
  * @return boolean
  */
 function ecrire_cache_liste($cache){
@@ -100,7 +104,7 @@ function ecrire_cache_liste($cache){
  * Vérifie l'existence du fichier cache de la liste et si oui retourne
  * son chemin complet
  *
- * @return boolean
+ * @return string
  */
 function cache_liste_existe(){
 	// Ecriture du fichier cache

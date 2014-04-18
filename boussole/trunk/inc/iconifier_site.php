@@ -38,6 +38,10 @@ function inc_iconifier_site_dist($id_site, $mode, $url_image) {
 	$ajouter_image($type.$mode.$id_site, " ", $image);
 }
 
+/**
+ * @param $url_image
+ * @return array
+ */
 function creer_image_pour_iconifier($url_image) {
 	$image = array('error' => 1);
 
