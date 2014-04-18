@@ -29,8 +29,8 @@
 
 [(#REM) Affichage du detail dans une table ]
 <BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>
-
-<table class="liste-objets contenu-commande">
+<div class="liste-objets">
+<table class="liste contenu-commande">
 	<thead>
 		<tr class="first">
 			<th scope="col" class="objet"><:commandes:label_objet:></th>
@@ -41,7 +41,7 @@
 	<tbody>
 		#SET{total,0}
 		<BOUCLE_details(POUR){tableau #GET{commande/details}}>
-		<tr class="detail[ (#ALTERNER{odd,even})][ (#VALEUR{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
+		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#VALEUR{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
 			<td class="objet">
 				<a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">
 					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet=#VALEUR{objet}, id_objet=#VALEUR{id_objet}})]
@@ -65,9 +65,10 @@
 		</tr>
 		[(#CHEMIN{inclure/commande_frais_de_port.html}|oui)
 		[<tr class="total_ttc">
-			<td colspan="3" class="frais_de_port">(#INCLURE{fond=inclure/commande_frais_de_port, id_commande})</td>
+			<td colspan="3" class="montant frais_de_port">(#INCLURE{fond=inclure/commande_frais_de_port, id_commande})</td>
 		</tr>]
 		]
 	</tfoot>
 </table>
+</div>
 </BOUCLE_test>
