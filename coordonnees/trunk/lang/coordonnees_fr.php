@@ -40,9 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
 	'info_email_utilise_par' => 'Courriel utilisé par :',
-	'info_gauche_numero_adresse' => 'N° Adresse',
-	'info_gauche_numero_email' => 'N° Email',
-	'info_gauche_numero_numero' => 'N° Numéro',
+	'info_gauche_numero_adresse' => 'Adresse N°',
+	'info_gauche_numero_email' => 'Email N°',
+	'info_gauche_numero_numero' => 'Numéro N°',
 	'info_numero_utilise_par' => 'Numéro utilisé par :',
 	'info_aucune_adresse' => 'Aucune adresse',
 	'info_1_adresse' => '1 adresse',

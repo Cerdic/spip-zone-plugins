@@ -23,7 +23,7 @@
 [(#ENV{coordonnee}|oui)
 	[<a href="[(#SELF|parametre_url{coordonnee,''}|parametre_url{id_coordonnee,''}|ancre_url{coordonnees})]" class="ajax bouton_fermer preload">(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{title,<:bouton_fermer:>})</a>]
 	<div class='creer ajax'>
-	[(#FORMULAIRE_{[editer_(#ENV{coordonnee})],#ENV{id_coordonnee,oui},'',#OBJET|concat{'|',#ID_OBJET}})]
+	[(#FORMULAIRE_{[editer_(#ENV{coordonnee})],#ENV{id_coordonnee,new},'',#OBJET|concat{'|',#ID_OBJET}})]
 	</div>
 ]
 
