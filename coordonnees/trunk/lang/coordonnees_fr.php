@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_dissocier_adresse' => 'Retirer cette adresse',
 	'bouton_dissocier_email' => 'Retirer cet email',
 	'bouton_dissocier_numero' => 'Retirer ce numéro',
+	'bouton_dissocier' => 'Retirer',
 
 	// C
 	'configuration_coordonnees' => 'Configuration des coordonnées',

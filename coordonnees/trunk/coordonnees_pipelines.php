@@ -78,7 +78,8 @@ function coordonnees_affiche_gauche($flux) {
 	if (!$e['edition'] AND in_array($type,array('adresse','email','numero'))) {
 		$texte .= recuperer_fond("prive/squelettes/contenu/utilisations_${type}", array(
 			"id_${type}" => intval($id_coordonnee)
-			)
+			),
+			array('ajax'=>true)
 		);
 	}
 

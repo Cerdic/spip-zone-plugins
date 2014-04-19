@@ -23,14 +23,16 @@
 		</td>
 		<td class='action'>
 			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'numero', id_coordonnee:'[(#ID_NUMERO)]'}});" href="#coordonnees" title="<:coordonnees:modifier_numero:>">
-			[(#CHEMIN_IMAGE{edit-16.png}|balise_img{'coordonnees:supprimer_numero'})]
+			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
 			</a>
+			[(#AUTORISER{associernumero,#ID_NUMERO}|oui)
 			[(#BOUTON_ACTION{
-				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'numero:icone_supprimer_numero'})],
+				[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
 				#URL_ACTION_AUTEUR{dissocier_numero,#ID_NUMERO/#OBJET/#ID_OBJET,#SELF},
 				'button link ajax','',
 				<:coordonnees:bouton_dissocier_numero:>}
 			)]
+			]
 		</td>
 	</tr>
 	</BOUCLE_liste_numeros>
