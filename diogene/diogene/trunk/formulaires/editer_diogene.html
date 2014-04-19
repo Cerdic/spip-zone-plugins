@@ -74,7 +74,7 @@
 							champs_ajouts=#GET{champs_ajouts},
 							size=#GET{size}})]
 					]
-					[(#CHAMPS_AJOUTES|unserialize|find{date}|ou{#CHAMPS_AJOUTES|unserialize|find{date_redac}}|oui)
+					[(#CHAMPS_AJOUTES|is_array|non|et{#CHAMPS_AJOUTES|unserialize|find{date}|ou{#CHAMPS_AJOUTES|unserialize|find{date_redac}}})
 						[(#SAISIE{case,cacher_heure,
 							label=<:diogene:label_cacher_heure:>})]
 					]
