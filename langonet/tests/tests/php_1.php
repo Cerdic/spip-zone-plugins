@@ -29,6 +29,7 @@ function langonet_tester_1() {
 	$essai = _T("verification:$arg1");
 	$essai = _T('verification:' . $arg2);
 	$essai = _T("verification:".$arg3);
+	$essai = _T("verification:defini_html_partiel_".$arg3);
 
 	// VERIFICATION _L() : Avertissements
 	$essai = _L('Test 1 _L() de langonet');
