@@ -43,7 +43,8 @@
 				explication=<:diogene:explication_nombre_attente:>})]]
 				
 			[(#SAISIE{case,menu,
-				label=<:diogene:label_menu:>})]
+				label=<:diogene:label_menu:>,
+				label_case=<:diogene:label_menu_case:>})]
 				
 			<li class="fieldset">
 				<fieldset>
@@ -76,7 +77,8 @@
 					]
 					[(#CHAMPS_AJOUTES|is_array|non|et{#CHAMPS_AJOUTES|unserialize|find{date}|ou{#CHAMPS_AJOUTES|unserialize|find{date_redac}}})
 						[(#SAISIE{case,cacher_heure,
-							label=<:diogene:label_cacher_heure:>})]
+							label=<:diogene:label_cacher_heure:>,
+							label_case=<:diogene:label_cacher_heure_case:>})]
 					]
 
 					[(#PLUGIN{polyhier}|et{#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non}|oui)
@@ -109,7 +111,8 @@
 					]
 					[(#SAISIE{case,workflow_simplifie,
 						explication=<:diogene:explication_workflow_simplifie:>,
-						label=<:diogene:label_workflow_simplifie:>})]
+						label=<:diogene:label_workflow_simplifie:>,
+						label_case=<:diogene:label_workflow_simplifie_case:>})]
 				</ul>
 				</fieldset>
 			</li>
