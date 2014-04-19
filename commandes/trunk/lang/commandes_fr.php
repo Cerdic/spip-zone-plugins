@@ -11,6 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_supprimer' => 'Supprimer',
 	'adresse_facturation' => 'Adresse de facturation',
 	'adresse_livraison' => 'Adresse de livraison',
+	'abbr_quantite' => 'Qté',
+	'abbr_hors_taxe' => 'HT',
 
 	// B
 	'bonjour' => 'Bonjour',

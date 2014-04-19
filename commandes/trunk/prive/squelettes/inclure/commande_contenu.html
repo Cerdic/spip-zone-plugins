@@ -18,8 +18,9 @@
 #SET{details, #GET{details}|push{#ARRAY{
 	objet,#OBJET,
 	id_objet,#ID_OBJET,
-	descriptif, #QUANTITE|>{1}|?{#QUANTITE &times;}|concat{#DESCRIPTIF*|supprimer_numero},
+	descriptif, #DESCRIPTIF*,
 	quantite, #QUANTITE,
+	prix_unitaire_ht, #PRIX_UNITAIRE_HT*,
 	prix, #PRIX*}}}
 </BOUCLE_commande_details>
 #SET{commande, #ARRAY{details, #GET{details}}}
@@ -36,26 +37,34 @@
 <table class="liste contenu-commande">
 	<thead>
 		<tr class="first">
+			<th scope="col" class="logo"></th>
 			<th scope="col" class="objet"><:commandes:label_objet:></th>
 			<th scope="col" class="description"><:commandes:designation:></th>
+			<th scope="col" class="quantite"><:commandes:abbr_quantite:></th>
 			<th scope="col" class="montant"><:commandes:montant:></th>
 		</tr>
 	</thead>
 	<tbody>
 		#SET{total,0}
 		<BOUCLE_details(POUR){tableau #GET{commande/details}}>
-		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#VALEUR{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
-			<td class="objet">
+		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="logo">
 				<a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">
 					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet=#VALEUR{objet}, id_objet=#VALEUR{id_objet}})]
+				</a>
+			</td>
+			<td class="objet">
+				<a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">
 					[(#VALEUR{objet}|objet_info{texte_objet}|_T)][ <:info_numero_abbreviation:>(#VALEUR{id_objet})]
 				</a>
 			</td>
 			<td class="description">
-				<a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">
-					[<strong>(#VALEUR{descriptif})</strong>]
-				</a>
+				[(#VALEUR{descriptif})]
+				[(#VALEUR{quantite}|>{1}|oui)
+				[<small class="prix_unitaire">\((#VALEUR{prix_unitaire_ht}|prix_formater) <:commandes:abbr_hors_taxe:>\)</small>]
+				]
 			</td>
+			<td class="quantite">[(#VALEUR{quantite})]</td>
 			<td class="montant">[(#VALEUR{prix}|prix_formater)]</td>
 		</tr>
 		#SET{total,#GET{total}|plus{#VALEUR{prix}}}
@@ -63,14 +72,9 @@
 	</tbody>
 	<tfoot>
 		<tr class="total_ttc">
-			<td colspan="2" class="descriptif"><:prix:label_total_ttc:></td>
+			<td colspan="4" class="descriptif"><:prix:label_total_ttc:></td>
 			<td class="montant">[(#GET{total}|prix_formater)]</td>
 		</tr>
-		[(#CHEMIN{inclure/commande_frais_de_port.html}|oui)
-		[<tr class="total_ttc">
-			<td colspan="3" class="montant frais_de_port">(#INCLURE{fond=inclure/commande_frais_de_port, id_commande})</td>
-		</tr>]
-		]
 	</tfoot>
 </table>
 </div>
