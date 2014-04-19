@@ -99,7 +99,7 @@ function commandes_accueil_encours($flux) {
 	$statuts = array('attente','partiel','paye');
 	foreach( $statuts as $statut ){
 		if ( $nb_{$statut} = sql_countsel(table_objet_sql('commande'), "statut=".sql_quote($statut)) ) {
-			$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, _T('commandes:info_1_commande_statut_'.$statut), _T('commandes:info_nb_commandes_statut_'.$statut, array('nb'=> $nb_{$statut})));
+			$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, 'commandes:info_1_commande_statut_'.$statut, 'commandes:info_nb_commandes_statut_'.$statut);
 			$liste .= recuperer_fond('prive/objets/liste/commandes', array(
 				'titre' => $titre_{$statut},
 				'statut' => $statut,
