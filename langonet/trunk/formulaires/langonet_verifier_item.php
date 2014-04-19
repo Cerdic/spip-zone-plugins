@@ -46,7 +46,7 @@ function formulaires_langonet_verifier_item_traiter() {
 	// non definis ou obsoletes suivant la verification en cours.
 	// Pour la vérification de la fonction _L(), il est possible de corriger plusieurs fichiers correspondant
 	// à plusieurs arborescences de plugins.
-	$items_a_corriger = $resultats['item_non_mais_nok'];
+	$items_a_corriger = $resultats['item_non'];
 	if ($items_a_corriger) {
 		$encodage = 'utf8';
 		if ($verification == 'definition') {
@@ -79,6 +79,7 @@ function formulaires_langonet_verifier_item_traiter() {
 	}
 	else {
 		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
+		$retour['message_ok']['resultats']['module'] = $resultats['module'];
 		$retour['message_ok']['resultats']['ou_fichier'] = $resultats['ou_fichier'];
 		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['item_non'];
 		$retour['message_ok']['resultats']['occurrences_peut_etre'] = $resultats['item_peut_etre'];

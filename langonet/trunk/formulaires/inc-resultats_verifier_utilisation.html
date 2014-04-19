@@ -1,6 +1,6 @@
 [(#REM) <!-- Affichage des resultats --> ]
 <h3><:langonet:legende_resultats:></h3>
-#SET{arborescence, #ENV{resultats}|table_valeur{ou_fichier}}
+#SET{arborescence, #ENV{resultats/ou_fichier}}
 <p>
 	[(#GET{arborescence}|count
 		|singulier_ou_pluriel{langonet:info_verification_utilisation_arbo_1, langonet:info_verification_utilisation_arbo_n})]
@@ -13,16 +13,17 @@
 </ul>
 </B_arborescences>
 [<p>
-	(#ENV{corrections}|table_valeur{explication})
+	(#ENV*{corrections/explication})
 	[(#BOUTON_ACTION{
 		<:langonet:bouton_corriger:>,
-		#URL_ACTION_AUTEUR{langonet_telecharger, #ENV{corrections}|table_valeur{fichier}},
+		#URL_ACTION_AUTEUR{langonet_telecharger, #ENV{corrections/fichier}},
 		'', '', ''})]
 </p>]
 
 <BOUCLE_pertinences(DATA) {liste non,peut_etre}{par cle}>
 	#INCLURE{fond=prive/squelettes/liste/items_utilisation,
-		items=#ENV{resultats}|table_valeur{occurrences_#VALEUR},
+		items=#ENV{resultats/occurrences_#VALEUR},
 		pertinence=#VALEUR,
+		module=#ENV{resultats/module},
 		env}
 </BOUCLE_pertinences>

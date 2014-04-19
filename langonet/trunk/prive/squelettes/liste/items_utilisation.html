@@ -1,4 +1,5 @@
 <B_liste_items>
+[(#ENV{pertinence}|=={peut_etre}|oui)<p><:langonet:info_utilises_peut_etre{module=#ENV{module}}:></p>]
 <div class="liste-objets items_langue">
 	<table class="spip liste">
 		<caption[ class="(#ENV{pertinence}|=={non}|?{error,notice})"]>
@@ -24,3 +25,4 @@
 	[(#VAL{langonet:message_ok_utilises_}|concat{#ENV{pertinence}}|concat{_0}|_T)]
 #BOITE_FERMER
 <//B_liste_items>
+[(#ENV|bel_env)]

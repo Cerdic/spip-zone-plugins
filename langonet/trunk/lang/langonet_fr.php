@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_verification_utilisation_arbo_n' => 'Vous avez choisi de rechercher les items de langues obsolètes dans les fichiers des arborescences :',
 	'info_verifier' => 'Cette option vous permet de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. D\'une part, il est possible de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, et d\'autre part, que certains items de langue définis ne sont plus utilisés.',
 	'info_verifier_l' => 'Cette option vous permet de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
+	'info_utilises_peut_etre' => 'Les items de langue ci-dessous sont peut-être obsolètes. Néanmoins, il est possible qu\'ils soient en fait utilisés dans un contexte complexe comme par exemple :  <code>_T(\'@module@:item_\'.$variable))</code>. Nous vous invitons donc à les vérifier un par un',
 
 	// L
 	'label_affichage' => 'Mode d\'affichage de la traduction',
@@ -142,9 +143,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_nonmaisnok_definis_1' => 'L\'item de langue ci-dessous est utilisé dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais pas comme un item du module «<em>@module@</em>». Étant donné qu\'il n\'est pas défini dans son module de rattachement, nous vous invitons à le vérifier :',
 	'message_ok_nonmaisnok_definis_n' => 'Les @nberr@ items de langue ci-dessous sont utilisés dans des fichiers du répertoire «<em>@ou_fichier@</em>» mais pas comme des items du module «<em>@module@</em>». Étant donné qu\'ils ne sont pas définis dans leur module de rattachement, nous vous invitons à les vérifier un par un :',
 	'message_ok_table_creee' => 'La table des items du fichier de langue @langue@ a été correctement créée.',
-	'message_ok_utilises_peut_etre_0' => 'Aucun item de langue n\'est utilisé dans un contexte complexe (par exemple :  <code>_T(\'@module@:item_\'.$variable))</code>.',
-	'message_ok_utilises_incertains_1' => 'L\'item de langue ci-dessous est peut-être utilisé dans un contexte complexe. Nous vous invitons à le vérifier :',
-	'message_ok_utilises_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont peut-être utilisés dans un contexte complexe. Nous vous invitons à les vérifier un par un :',
+	'message_ok_utilises_peut_etre_0' => 'Aucun item de langue potentiellement obsolète n\'a été détecté',
+	'message_ok_utilises_peut_etre_1' => 'Un seul item de langue potentiellement obsolète',
+	'message_ok_utilises_peut_etre_n' => '@nberr@ items de langue potentiellement obsolètes',
 	'message_ok_fichier_verification' => 'La vérification s\'est correctement déroulée. Vous pouvez consultez les résultats plus bas après le formulaire.',
 	'message_ok_corrections_fonction_l' => 'Les items construits à partir des cas d\'utilisation de la fonction _L() ont été intégrés dans le fichier de langue <code>@fichier@</code>.',
 	'message_ok_corrections_utilisation' => 'Les items obsolètes ont été supprimés du fichier de langue <code>@fichier@</code>.',
