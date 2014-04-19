@@ -49,11 +49,11 @@ if (!defined('_LANGONET_ITEM_XML_ATTRIBUT'))
 /**
  * Verification des items de langue non définis ou obsolètes
  *
- * @param string $module		prefixe du fichier de langue
- * @param string $langue		index du nom de langue
- * @param string $ou_langue		chemin vers le fichier de langue à vérifier
- * @param string $ou_fichiers	tableau des racines d'arborescence à vérifier
- * @param string $verification	type de verification à effectuer
+ * @param string 	$module		prefixe du fichier de langue
+ * @param string 	$langue		index du nom de langue
+ * @param string 	$ou_langue		chemin vers le fichier de langue à vérifier
+ * @param array		$ou_fichiers	tableau des racines d'arborescence à vérifier
+ * @param string 	$verification	type de verification à effectuer
  * @return array
  */
 function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verification) {
@@ -100,6 +100,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 	$resultats['module'] = $module;
 	$resultats['langue'] = $fichier_langue;
 	$resultats['ou_fichier'] = $ou_fichiers;
+	// Todo : c'est quoi cette variable ?
 	$resultats['infos'] = $infos_occurrences;
 
 	return $resultats;
@@ -158,7 +159,7 @@ function collecter_occurrences($fichiers) {
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
 				}
-				else {
+				else {	// type de fichier PHP
 					if (preg_match_all(_LANGONET_ITEM_PHP_OBJET, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
 							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
@@ -176,6 +177,17 @@ function collecter_occurrences($fichiers) {
 	return $utilises;
 }
 
+/**
+ * Identifie le type de fichier dans lequel chercher les occurrences d'utilisation d'items
+ * de langue.
+ *
+ * @param string	$fichier
+ * 		Chemin complet du fichier à scanner
+ *
+ * @return string
+ * 		Extension du fichier parmi 'xml', 'yaml', 'html' et 'php' ou le nom du fichier de descriptio
+ * 		du plugin 'paquet.xml' ou 'plugin.xml'.
+ */
 function identifier_type_fichier($fichier) {
 	// On initialise le type avec l'extension du fichier
 	$informations = pathinfo($fichier);
@@ -194,11 +206,26 @@ function identifier_type_fichier($fichier) {
  * Memorise selon une structure prédéfinie chaque occurrence d'utilisation d'un item.
  * Cette fonction analyse au passage si l'item est dynamique ou pas (_T avec $ ou concatenation).
  *
- * @param array $utilises
- * @param $occurrence
- * @param string $fichier
- * @param string $no_ligne
- * @param bool $eval
+ * @param array		$utilises
+ * 		Tableau des occurrences d'utilisation des items de langues construit à chaque appel
+ * 		de la fonction.
+ * @param array		$occurrence
+ * 		Tableau définissant l'occurrence d'utilisation en cours de mémorisation. Une occurrence
+ * 		est composée des index :
+ *
+ * 		- 0 : le texte de l'expression matchant le pattern
+ * 		- 1 : le module de langue (peut être vide)
+ * 		- 2 : le raccourci de l'item de langue
+ * 		- 3 : suite du texte ???
+ *
+ * @param string 	$fichier
+ * 		Fichier dont est issu l'occurrence en cours de mémorisation.
+ * @param string 	$no_ligne
+ * 		Numéro de ligne à laquelle l'occurrence en cours de mémorisation a été trouvée.
+ * @param string	$ligne
+ * 		Ligne complète dans laquelle l'occurence en cours de mémorisation a été trouvée.
+ *
+ * @return void
  */
 function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne) {
 	include_spip('inc/langonet_utils');
@@ -232,7 +259,7 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $lig
 	}
 
 	list($item, $args) = extraire_arguments($raccourci_regexp);
-	list($raccourci_unique, $raccourci_brut) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
+	list($raccourci_unique, ) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
 //	$raccourci_unique .= $args;
 	// TODO : si un raccourci est identique dans deux modules différents on va écraser l'index existant
 
@@ -242,8 +269,10 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $lig
 	$utilises['modules'][$raccourci_unique] = $module;
 	$utilises['item_tous'][$raccourci_unique][$fichier][$no_ligne][] = $occurrence;
 	$utilises['suffixes'][$raccourci_unique] = $avec_suffixe;
+	$utilises['variables'][$raccourci_unique] = $item_variable;
 	$utilises['debug'][] = $occurrence;
 }
+
 function memoriser_occurrence2(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
 	include_spip('inc/langonet_utils');
 

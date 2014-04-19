@@ -133,7 +133,7 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
 	return $affiche;
 }
 
-function exporter_tableau($tableau, $colonnes, $separateur="\t") {
+function exporter_tableau($tableau, $colonnes, $separateur="|") {
 	if ($tableau) {
 		$contenu = '';
 		if ($colonnes) {
