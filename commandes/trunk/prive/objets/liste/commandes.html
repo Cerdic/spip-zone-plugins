@@ -69,7 +69,7 @@
 							<span class="label"><:commandes:label_passee_le:>:</span><br>
 							(#DATE|affdate_jourcourt)[&nbsp;(#DATE|affdate{H:i})]
 						</li>]
-						[(#DATE_PAIEMENT|intval|oui)
+						[(#DATE_PAIEMENT|intval|>{0}|oui)
 						<li class="date paiement">
 							<span class="label"><:commandes:label_payee_le:>:</span><br>
 							[(#DATE_PAIEMENT|affdate_jourcourt)][&nbsp;(#DATE_PAIEMENT|affdate{H:i})]
@@ -81,7 +81,7 @@
 					<table class="simple">
 						<BOUCLE_detail_commande(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
 						<tr>
-							<td class="titre">[(#DESCRIPTIF*|typo|supprimer_numero)]</td>
+							<td class="titre">[(#QUANTITE|>{1}|oui)[(#QUANTITE|concat{&times;})] ][(#DESCRIPTIF*|typo|supprimer_numero)]</td>
 							[<td class="montant">(#TOTAL_BOUCLE|>{1}|oui)[<small>(#PRIX)</small>]</td>]
 						</td>
 						</tr>
