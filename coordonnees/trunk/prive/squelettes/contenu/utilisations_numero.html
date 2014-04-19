@@ -7,7 +7,17 @@
 		<h4>[(#OBJET|objet_icone{16}) ][(#GRAND_TOTAL|singulier_ou_pluriel{#OBJET|objet_info{info_1_objet},#OBJET|objet_info{info_nb_objets}})]</h4>
 		<ul class="liste-items">
 			<BOUCLE_liens(numeros_liens){id_numero}{objet}{par id_objet}{fusion objet,id_objet}>
-			<li class='item'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">[(#INFO_TITRE{#OBJET,#ID_OBJET})][ <small>\(<:info_numero_abbreviation:>(#ID_OBJET)\)</small>]</a></li>
+			<li class='item'>
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">[(#INFO_TITRE{#OBJET,#ID_OBJET})][ <small>\(<:info_numero_abbreviation:>(#ID_OBJET)\)</small>]</a>
+				[(#AUTORISER{associernumero,#ID_NUMERO}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
+					#URL_ACTION_AUTEUR{dissocier_numero,#ID_NUMERO/#OBJET/#ID_OBJET,#SELF},
+					'button link ajax','',
+					<:coordonnees:bouton_dissocier:>}
+				)]
+				]
+			</li>
 			</BOUCLE_liens>
 		</ul>
 	</div>
