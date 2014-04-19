@@ -44,8 +44,6 @@ function formulaires_langonet_verifier_item_traiter() {
 
 	// Creation du fichier de langue corrigé avec les items detectes comme
 	// non definis ou obsoletes suivant la verification en cours.
-	// Pour la vérification de la fonction _L(), il est possible de corriger plusieurs fichiers correspondant
-	// à plusieurs arborescences de plugins.
 	$items_a_corriger = $resultats['item_non'];
 	if ($items_a_corriger) {
 		$encodage = 'utf8';

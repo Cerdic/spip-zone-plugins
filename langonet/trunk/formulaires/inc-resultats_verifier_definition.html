@@ -1,4 +1,16 @@
 [(#REM) <!-- Affichage des resultats --> ]
 <h3><:langonet:legende_resultats:></h3>
+#SET{arborescence, #ENV{resultats/ou_fichier}}
+<p>
+	[(#GET{arborescence}|count
+		|singulier_ou_pluriel{langonet:info_verification_definition_arbo_1, langonet:info_verification_definition_arbo_n})]
+</p>
+<B_arborescences>
+<ul class="liste arborescence">
+<BOUCLE_arborescences(DATA) {source table, #GET{arborescence}}>
+	<li><code>#VALEUR</code></li>
+</BOUCLE_arborescences>
+</ul>
+</B_arborescences>
 [<p>(#ENV{explication})</p>]
 [(#ENV**{resultats}|bel_env)]
