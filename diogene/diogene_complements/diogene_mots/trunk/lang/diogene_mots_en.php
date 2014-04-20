@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_legend_public' => 'Keywords',
 
 	// L
-	'label_montrer_titre_et_descriptif' => 'When it exists, show the keyword description between brackets',
+	'label_montrer_titre_et_descriptif' => 'When it exists, show the keyword description between brackets', # MODIF
 	'label_mots_creer_dans_public' => 'Allow for creation of new keywords in these groups',
 	'label_mots_facultatifs' => 'Optional keywords groups',
 	'label_mots_obligatoires' => 'Required keyword groups'
