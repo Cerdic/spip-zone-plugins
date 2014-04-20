@@ -19,8 +19,17 @@
 					</p>
 					<input type="text" name="id_rubrique" class="text" value = "#ENV{id_rubrique}" id="id_rubrique" />
 				</li>
+				<li>
+					<label for="nblimite"><:docker:nblimite_label:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nblimite})</span>]
+					<p class='explication'>
+						<:docker:entrer_nblimite_documents:><br />
+					</p>
+					<input type="text" name="nblimite" class="text" value = "#ENV{nblimite,1}" id="nblimite" />
+				</li>
 			</ul>
 	</fieldset>
+
 	
 	[(#INCLURE{fond=prive/liste/documents_distants, env, id_rubrique=#ENV{id_rubrique}})]
          

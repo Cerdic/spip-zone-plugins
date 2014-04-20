@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 
-	<BOUCLE_liste_docs(DOCUMENTS){distant=oui}{id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_docs(DOCUMENTS){distant=oui}{id_article?}{id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{par,id_document},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='info'>			
 			[(#DISTANT|=={oui}|non)#SET{missing,#FICHIER|file_exists|non}]

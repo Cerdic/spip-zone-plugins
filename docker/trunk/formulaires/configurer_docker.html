@@ -1,0 +1,44 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	<h3 class="titrem"><:docker:activer_recopie_intro:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:docker:configuration_copie_idem:></legend>
+					<ul>
+						<li class="editer editer_docker_idem">
+							<p class="explication"><:docker:docker_idem_descriptif:></p>
+							<div class="choix">
+								<input type="checkbox" name="copie_idem"[ checked="(#ENV{copie_idem}|!={''}|?{'checked'})"] id="copie_idem" />
+								<label for="copie_idem"><:docker:copie_idem_label:></label>
+							</div>
+						</li>
+					</ul>
+			
+					<ul>
+						<li class="editer editer_docker_titrer">
+							<p class="explication"><:docker:docker_titrer_descriptif:></p>
+							<div class="choix">
+								<input type="checkbox" name="titrer"[ checked="(#ENV{titrer}|!={''}|?{'checked'})"] id="titrer" />
+								<label for="titrer"><:docker:titrer_label:></label>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
+
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
