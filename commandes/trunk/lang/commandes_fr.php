@@ -6,13 +6,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'abbr_hors_taxe' => 'HT',
+	'abbr_quantite' => 'Qté',
 	'action_facture' => 'Facture',
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
 	'adresse_facturation' => 'Adresse de facturation',
 	'adresse_livraison' => 'Adresse de livraison',
-	'abbr_quantite' => 'Qté',
-	'abbr_hors_taxe' => 'HT',
 
 	// B
 	'bonjour' => 'Bonjour',
