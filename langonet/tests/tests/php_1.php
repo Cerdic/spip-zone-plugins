@@ -7,7 +7,8 @@ function langonet_tester_1() {
 	// VERIFICATION DEFINITION : Erreurs
 	// -- Les items suivants, utilises comme des items du module Langonet, ne sont pas definis dans verification_fr.php
 	$essai = _T('verification:test_item_non_defini_1');
-	$essai = _T('verification:test_item_non_defini_2');
+	$essai = _T("verification:test_item_non_defini_2");
+	$essai = _T("verification:test_item_non_defini_2", array('param1'=>$param1));
 
 	// VERIFICATION DEFINITION : Erreurs
 	// -- Les items suivants, utilises comme des items de modules differents de Langonet, ne sont pas definis dans leur fichier
@@ -24,12 +25,16 @@ function langonet_tester_1() {
 
 	// VERIFICATION DEFINITION : Avertissements
 	// -- Les items suivants sont utilises dans un contexte complexe. Ce sont des items de Langonet ou pas
-	$essai = _T('verification:test_item_1_'.$variable);
-	$essai = _T('test_item_2_'.$variable);
-	$essai = _T("verification:$arg1");
-	$essai = _T('verification:' . $arg2);
-	$essai = _T("verification:".$arg3);
-	$essai = _T("verification:defini_html_partiel_".$arg3);
+	$essai = _T('verification:test_item_1_'.$suite1);
+	$essai = _T('test_item_2_'.$suite2);
+	$essai = _T('test_item_2_'.$suite2, array('param1'=>$param1));
+	$essai = _T('verification:' . $item1);
+	$essai = _T("verification:$item2");
+	$essai = _T("verification:". $item3, array('param1'=>$param1));
+	$essai = _T("verification:defini_html_partiel_".$suite3);
+	$essai = _T("verification:defini_html_partiel_$suite4");
+	$essai = _T("verification:defini_html_partiel_${suite5}");
+	$message = _T("verification:defini_html_partiel_{$suite6['numero']}", array('param1' => $param1, 'param2' => $param2));
 
 	// VERIFICATION _L() : Avertissements
 	$essai = _L('Test 1 _L() de langonet');
