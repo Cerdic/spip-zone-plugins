@@ -140,6 +140,32 @@ function collecter_occurrences($fichiers) {
 
 	foreach ($fichiers as $_fichier) {
 		if ($contenu = file($_fichier)) {
+			$type_fichier = identifier_type_fichier($_fichier);
+			if (isset($GLOBALS['langonet_regexp'][$type_fichier])) {
+				$regexps = $GLOBALS['langonet_regexp'][$type_fichier];
+				foreach ($contenu as $_no_ligne => $_ligne) {
+					foreach ($regexps as $_regexp) {
+						if (preg_match_all($_regexp, $_ligne, $occurrences, PREG_SET_ORDER))
+							foreach ($occurrences as $_occurrence)
+								memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $_regexp);
+					}
+				}
+			}
+			else {
+				spip_log("Ce type de fichier n'est pas scanné : $type_fichier ($fichier)", "langonet");
+			}
+		}
+	}
+
+	return $utilises;
+}
+
+function collecter_occurrences1($fichiers) {
+
+	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array(), 'item_tous' => array());
+
+	foreach ($fichiers as $_fichier) {
+		if ($contenu = file($_fichier)) {
 			foreach ($contenu as $_no_ligne => $_ligne) {
 				$type_fichier = identifier_type_fichier($_fichier);
 				if ($type_fichier == 'paquet.xml') {
