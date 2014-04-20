@@ -7,11 +7,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 if (!defined('_LANGONET_ITEM_PHP_OBJET'))
 	define("_LANGONET_ITEM_PHP_OBJET", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
 // Fontions PHP _T ou _U avec apostrophe
-if (!defined('_LANGONET_ITEM_A'))
-	define("_LANGONET_ITEM_A", '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%S');
+if (!defined('_LANGONET_ITEM_PHP_TRADA'))
+	define("_LANGONET_ITEM_PHP_TRADA", '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%S');
 // Fontions PHP _T ou _U avec guillemet
-if (!defined('_LANGONET_ITEM_G'))
-	define("_LANGONET_ITEM_G", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
+if (!defined('_LANGONET_ITEM_PHP_TRADG'))
+	define("_LANGONET_ITEM_PHP_TRADG", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
 
 // Items de langue dans les fichiers HTML
 // balise <:module:raccourci:> et toutes les formes admises avec paramètres et filtres
@@ -125,50 +125,53 @@ function collecter_occurrences($fichiers) {
 				if ($type_fichier == 'paquet.xml') {
 					if (preg_match_all(_LANGONET_ITEM_PAQUETXML, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 				}
 				elseif ($type_fichier == 'plugin.xml') {
 					if (preg_match_all(_LANGONET_ITEM_PLUGINXML, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 				}
 				elseif ($type_fichier == 'xml') {
 					if (preg_match_all(_LANGONET_ITEM_XML_CONTENU, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 					if (preg_match_all(_LANGONET_ITEM_XML_ATTRIBUT, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 				}
 				elseif ($type_fichier == 'yaml') {
 					if (preg_match_all(_LANGONET_ITEM_YAML, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 				}
 				elseif ($type_fichier == 'html') {
 					if (preg_match_all(_LANGONET_ITEM_HTML_BALISE, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 					if (preg_match_all(_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 					if (preg_match_all(_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 					if (preg_match_all(_LANGONET_ITEM_HTML_FILTRE_T, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
 				}
-				else {	// type de fichier PHP
+				elseif ($type_fichier == 'php') {
 					if (preg_match_all(_LANGONET_ITEM_PHP_OBJET, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
-					if (preg_match_all(_LANGONET_ITEM_A, $_ligne, $occurrences, PREG_SET_ORDER))
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
+					if (preg_match_all(_LANGONET_ITEM_PHP_TRADA, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
-					if (preg_match_all(_LANGONET_ITEM_G, $_ligne, $occurrences, PREG_SET_ORDER))
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
+					if (preg_match_all(_LANGONET_ITEM_PHP_TRADG, $_ligne, $occurrences, PREG_SET_ORDER))
 						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne);
+							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $type_fichier);
+				}
+				else {
+					spip_log("Ce type de fichier n'est pas scanné : $type_fichier", "langonet");
 				}
 			}
 		}
@@ -225,42 +228,62 @@ function identifier_type_fichier($fichier) {
  * @param string	$ligne
  * 		Ligne complète dans laquelle l'occurence en cours de mémorisation a été trouvée.
  *
- * @return void
+ * @return boolean
  */
-function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne) {
+function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $type_fichier) {
 	include_spip('inc/langonet_utils');
 
 	if (!isset($occurrence[3]))
 		$occurrence[3] = '';
 	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
+	$suite = trim($suite);
+
+	$raccourci_partiellement_variable = false;
+	$raccourci_totalement_variable = false;
+
+	// Dans le cas du PHP, les expressions peuvent donner un raccourci variable dans $raccouci_regexp
+	// ou une suite qui ne correspond qu'au paramètres supplémentaires de _T ou _U.
+	// Dans ce cas, il faut nettoyer ces variables
+	if ($type_fichier == 'php') {
+		// Nettoyage de la variable $suite (à faire en premier)
+		$offset_virgule = strpos(trim($suite), ',');
+		if ($offset_virgule !== false) {
+			$suite = trim(substr($suite, 0, $offset_virgule));
+		}
+		// Nettoyage de la variable $raccourci_regexp
+		if ($raccourci_regexp
+		AND preg_match('#^([a-z0-9_]*)(.*)$#im', $raccourci_regexp, $matches)) {
+			if (!$matches[1]) {
+				$raccourci_totalement_variable = true;
+				$raccourci_regexp = $matches[2];
+			}
+			elseif ($matches[2]) {
+				$raccourci_partiellement_variable = true;
+				$raccourci_regexp = $matches[1];
+				$suite = $matches[2];
+			}
+		}
+	}
 
 	// Rechercher si l'occurrence trouvée est dynamique (existence d'un suffixe ou pas)
-	$avec_suffixe = false;
-	$item_variable = false;
 	// -- on commence par traiter le cas ou le raccourci est vide car détecté comme une suite
 	if ($suite AND !$raccourci_regexp) {
-		// Cas de la nouvelle écriture variable du raccourci <:xxx:{=#ENV{yyy}}:>
+		// Cas de la nouvelle écriture variable du raccourci <:xxx:{=#ENV{yyy}}:> ou d'une variable PHP
 		// -- on rétablit le raccourci à partir de la suite qui n'en est pas une.
 		$raccourci_regexp = $suite;
-//		$raccourci_regexp = str_replace(array('=','#',',','{','}',' ',"\t"), '_', $raccourci_regexp);
 		$suite = '';
-		$item_variable = true;
+		$raccourci_totalement_variable = true;
 	}
 	// -- on continue en détectant les suites qui sont de vrais suffixes d'un raccourci incomplet
 	if ($suite) {
 		if (($expression[0] == '#') OR ($expression[0] == '_')){
 			// Cas HTML #VAL{xxx}|yyy|_T dynamique ou PHP _T("xxx:$yyy")
-			$avec_suffixe = true;
+			$raccourci_partiellement_variable = true;
 		}
 	}
-	// -- on détecte enfin les raccourcis variables PHP
-	if ($raccourci_regexp[0] == '$') {
-		$item_variable = true;
-	}
 
-	list($item, $args) = extraire_arguments($raccourci_regexp);
+	list($item, ) = extraire_arguments($raccourci_regexp);
 	list($raccourci_unique, ) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
-//	$raccourci_unique .= $args;
 	// TODO : si un raccourci est identique dans deux modules différents on va écraser l'index existant
 
 	$occurrence[] = $ligne;
@@ -268,9 +291,11 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $lig
 	$utilises['items'][$raccourci_unique] = $item;
 	$utilises['modules'][$raccourci_unique] = $module;
 	$utilises['item_tous'][$raccourci_unique][$fichier][$no_ligne][] = $occurrence;
-	$utilises['suffixes'][$raccourci_unique] = $avec_suffixe;
-	$utilises['variables'][$raccourci_unique] = $item_variable;
+	$utilises['suffixes'][$raccourci_unique] = $raccourci_partiellement_variable;
+	$utilises['variables'][$raccourci_unique] = $raccourci_totalement_variable;
 	$utilises['debug'][] = $occurrence;
+
+	return true;
 }
 
 function memoriser_occurrence2(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
