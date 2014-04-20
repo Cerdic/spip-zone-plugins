@@ -11,9 +11,6 @@
 	<nom>Docker</nom>
 	<auteur lien='http://elastick.net'>Anne-lise Martenot</auteur>
 	<licence>GNU/GPL v3</licence>
-	
-        <pipeline nom="taches_generales_cron" inclure="docker_pipelines.php"/>
-        <pipeline nom="affiche_milieu" inclure="docker_pipelines.php"/>
         
 	<menu nom="configurer_docker" titre="docker:import_docker" parent="menu_configuration" icone="images/docker-16.png" />
 </paquet>
