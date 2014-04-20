@@ -10,12 +10,13 @@
 <div class="liste-objets adresses coordonnees lies">
 <table class='spip liste'>
 	<tbody>
-	<BOUCLE_liste_adresses(ADRESSES liens){id_adresse != #GET{id_adresse_exclus}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,pays},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_adresses(ADRESSES){id_adresse != #GET{id_adresse_exclus}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,pays},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_type(adresses_liens){id_adresse}{objet}{id_objet}>#SET{type,#TYPE}</BOUCLE_type>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
 		<td class='titre principale'>
 			[<span><a href="#URL_ECRIRE{adresse,id_adresse=#ID_ADRESSE}"><small><:info_numero_abbreviation:>(#ID_ADRESSE)</small></a></span>]
-			[(#TYPE|logo_type_adr) ][<span class="#EDIT{titre} titre">(#TITRE)</span>]
+			[(#GET{type}|logo_type_adr) ][<span class="#EDIT{titre} titre">(#TITRE)</span>]
 		</td>
 		<td class='adresse'>
 			[<div class="#EDIT{voie} voie">(#VOIE)</div>]

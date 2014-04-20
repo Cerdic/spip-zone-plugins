@@ -9,12 +9,13 @@
 <div class="liste-objets emails coordonnees lies">
 <table class='spip liste'>
 	<tbody>
-	<BOUCLE_liste_emails(EMAILS liens){id_email != #GET{id_email_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,email},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_emails(EMAILS){id_email != #GET{id_email_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,email},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_type(emails_liens){id_adresse}{objet}{id_objet}>#SET{type,#TYPE}</BOUCLE_type>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
 		<td class='titre principale'>
 			[<span><a href="#URL_ECRIRE{email,id_email=#ID_EMAIL}"><small><:info_numero_abbreviation:>(#ID_EMAIL)</small></a></span>]
-			[(#TYPE|logo_type_mel) ][<span class="#EDIT{titre}">(#TITRE)</span>]
+			[(#GET{type}|logo_type_mel) ][<span class="#EDIT{titre}">(#TITRE)</span>]
 		</td>
 		<td>
 			[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
