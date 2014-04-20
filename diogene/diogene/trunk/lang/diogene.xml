@@ -1,13 +1,13 @@
 <traduction module="diogene" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/diogene?lang_cible=en" total="139" traduits="139" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/diogene?lang_cible=en" total="142" traduits="136" relire="0" modifs="3" nouveaux="3" pourcent="95.77">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/diogene?lang_cible=es" total="139" traduits="139" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/diogene?lang_cible=es" total="142" traduits="136" relire="0" modifs="3" nouveaux="3" pourcent="95.77">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/diogene?lang_cible=fr" total="139" traduits="139" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/diogene?lang_cible=fr" total="142" traduits="142" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>

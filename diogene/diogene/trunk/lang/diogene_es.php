@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type' => 'Identificador',
 
 	// L
-	'label_cacher_heure' => 'No mostrar la hora para las fechas',
+	'label_cacher_heure' => 'No mostrar la hora para las fechas', # MODIF
 	'label_cextras_enleves' => 'Campos extras para no mostrar',
 	'label_champs_ajoutes' => 'Campos a añadir',
 	'label_champs_caches' => 'Campos a ocultar',
@@ -86,14 +86,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_limiter_rubriques' => 'Limitar a las secciones',
 	'label_limiter_secteur' => 'Limitar a la red',
 	'label_logo_site' => 'Logo del sitio',
-	'label_menu' => 'Figurar en el menú público',
+	'label_menu' => 'Figurar en el menú público', # MODIF
 	'label_nombre_attente' => 'Número máximo en espera',
 	'label_polyhier' => 'Polijerarquía',
 	'label_polyhier_desactiver' => 'Desactivar la polijerarquía',
 	'label_rubrique_par_defaut' => 'Publicar por omisión en la sección',
 	'label_statut_auteur' => 'Estatus mínimo de los autores',
 	'label_statut_auteur_publier' => 'Estatus mínimo de los autores que pueden publicar de forma definitiva',
-	'label_workflow_simplifie' => 'Gestión simplificada del workflow de publicación',
+	'label_workflow_simplifie' => 'Gestión simplificada del workflow de publicación', # MODIF
 	'legende_champs_diogene' => 'Campos del formulario',
 	'legende_selecteur_statut' => 'Estatus',
 	'legende_statuts_diogene' => 'Estatus',
