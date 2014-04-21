@@ -51,7 +51,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_cache_boussoles' => 'Cache des boussoles hébergées',
 	'info_configurer_boussole' => 'Ce formulaire vous permet de configurer l’affichage de la boussole en choisissant les sites à afficher ou pas et l’ordre d’affichage dans un groupe. Les sites non affichés sont repérés par un fond hachuré et une police grise.',
 	'info_declarer_boussole_manuelle' => 'Ce formulaire vous permet de déclarer une boussole manuelle hébergée par ce site. Une fois déclarée, la boussole deviendra accessible par les sites client utilisant ce serveur.',
-	'info_fichier_boussole' => 'Saisissez l’url du fichier de description de votre boussole',
 	'info_importer_boussole' => 'Cette option vous permet d’importer l’ensemble des sites d’une boussole installée sur votre site. Si certains sites de la boussole choisie sont déjà référencés, il ne seront pas créés à nouveau mais leurs données seront synchronisées avec celles fournies par la boussole pour ces mêmes sites.',
 	'info_liste_aucun_cache' => 'Aucun cache n’a encore été créé pour les boussoles hébergées. Utilisez le bouton « actualiser les caches » pour les générer.',
 	'info_liste_aucun_hebergement' => 'Aucune boussole n’est encore hébergée sur ce serveur. Utilisez le formulaire ci-dessous pour déclarer une boussole manuelle ou activez un plugin de boussole sur ce site.',

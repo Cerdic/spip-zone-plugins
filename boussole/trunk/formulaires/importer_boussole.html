@@ -24,7 +24,7 @@
 			</B_boussoles>
 
 			[<li class="editer editer_parent obligatoire[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
-			<p class="explication"><:boussole:info_rubrique_parent:></p>
+			<label for="titreparent"><:boussole:info_rubrique_parent:></label>
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>]
 			(#VAL|chercher_rubrique{0,#ENV{id_parent},'site',#ENV{id_secteur},'',0,form_simple})
 			</li>]
