@@ -81,7 +81,7 @@ function formulaires_tradlang_choisir_module_charger($id_tradlang_module="",$lan
 		
 		ksort($langues_possibles);
 		$langues_modules = sql_allfetsel('DISTINCT lang','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module));
-		foreach($langues_module as $langue){
+		foreach($langues_modules as $langue){
 			$langues_presentes[$langue['lang']] = traduire_nom_langue($langue['lang']);
 		}
 		if(is_array($langues_presentes)){
