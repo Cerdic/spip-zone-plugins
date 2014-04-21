@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $langue_mere
  * 		La langue mère du module
  */
-function inc_tradlang_verifier_bilans_dist($module,$langue_mere){
+function inc_tradlang_verifier_bilans_dist($module,$langue_mere,$invalider=true){
 	/**
 	 * Quelle est le total de la langue mère
 	 */
@@ -25,22 +25,22 @@ function inc_tradlang_verifier_bilans_dist($module,$langue_mere){
 	/**
 	 * Les infos du module
 	 */
-	$module_complet = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module));
+	$id_tradlang_module = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($module));
 	/**
 	 * Les différentes langues du module
 	 */
-	$langues = sql_select('lang','spip_tradlangs','module = '.sql_quote($module),'lang');
+	$langues = sql_allfetsel('lang','spip_tradlangs','id_tradlang_module = '.intval($id_tradlang_module),'lang');
 	/**
 	 * Vérification de chaque langue
 	 */
-	while($langue = sql_fetch($langues)){
+	foreach($langues as $langue){
 		$bilan = false;
-		$chaines_ok = sql_countsel('spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue['lang']).' AND statut="OK"');
-		$chaines_relire = sql_countsel('spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue['lang']).' AND statut="RELIRE"');
-		$chaines_modif = sql_countsel('spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue['lang']).' AND statut="MODIF"');
-		$chaines_new = sql_countsel('spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($langue['lang']).' AND statut="NEW"');
+		$chaines_ok = sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($langue['lang']).' AND statut="OK"');
+		$chaines_relire = sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($langue['lang']).' AND statut="RELIRE"');
+		$chaines_modif = sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($langue['lang']).' AND statut="MODIF"');
+		$chaines_new = sql_countsel('spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($langue['lang']).' AND statut="NEW"');
 		$infos_bilan = array(
-							'id_tradlang_module' => $module_complet['id_tradlang_module'],
+							'id_tradlang_module' => $id_tradlang_module,
 							'module' => $module,
 							'lang' => $langue['lang'],
 							'chaines_total' => $total,
@@ -49,13 +49,15 @@ function inc_tradlang_verifier_bilans_dist($module,$langue_mere){
 							'chaines_modif' => $chaines_modif,
 							'chaines_new' => $chaines_new
 						);
-		$bilan = sql_getfetsel('id_tradlang_module','spip_tradlangs_bilans','module='.sql_quote($module).' AND lang='.sql_quote($langue['lang']));
+		$bilan = sql_getfetsel('id_tradlang_module','spip_tradlangs_bilans','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($langue['lang']));
 		if($bilan)
 			sql_updateq('spip_tradlangs_bilans',$infos_bilan,'lang='.sql_quote($langue['lang']).' AND module='.sql_quote($module));
 		else
 			sql_insertq('spip_tradlangs_bilans',$infos_bilan);
 	}
-	include_spip('inc/invalideur');
-	suivre_invalideur('1');
+	if($invalider){
+		include_spip('inc/invalideur');
+		suivre_invalideur('1');
+	}
 }
 ?>

@@ -25,9 +25,9 @@ function formulaires_editer_tradlang_module_verifier($id_tradlang_module,$retour
 	$erreur = array();
 	$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 	$modules = tradlang_getmodules_base();
-	if(!isset($modules[$module])){
+	if(!isset($modules[$module]))
 		$erreur['module'] = _T('tradlang:erreur_module_inexistant');
-	}
+
 	$modok = $modules[$module];
 	foreach($modok as $cle=>$item){
 		if (strncmp($cle, "langue_", 7) == 0)
