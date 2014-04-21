@@ -79,11 +79,11 @@ function formulaires_contact_libre_traiter_dist($adresse, $url='', $sujet=''){
 	if($url)
 		$texte .= "\n\n-- Depuis la page : ".supprimer_tags($url)." --\n";
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$envoyer_mail($adresse, $sujet, $texte, $adres,
-				"X-Originating-IP: ".$GLOBALS['ip']);
-	$message = _T("form_prop_message_envoye");
-
-	return array('message_ok'=>$message);
+	if ($envoyer_mail($adresse, $sujet, $texte, $adres,
+	"X-Originating-IP: ".$GLOBALS['ip']))
+		return array('message_ok' => _T('form_prop_message_envoye'));
+	else
+		return array('message_erreur' => _T('pass_erreur_probleme_technique'));
 }
 
 ?>
