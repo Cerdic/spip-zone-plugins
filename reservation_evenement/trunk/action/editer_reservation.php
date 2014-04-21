@@ -179,7 +179,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
     // Notifications
 
     if ((!$statut_ancien OR $statut != $statut_ancien ) &&
-         ($config['activer']) &&
+         (isset($config['activer'])) &&
          (in_array($statut,$config['quand'])) &&
          ($notifications = charger_fonction('notifications', 'inc', true))
         ) {
