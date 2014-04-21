@@ -11,18 +11,18 @@
 				<fieldset>
 					<h3 class="legend"><:tradlang:titre_traduire:></h3>
 					<ul>
-					    <li class='editer choisir_module obligatoire[ (#ENV**{erreurs}|table_valeur{module}|oui)erreur]'>
+						<li class='editer choisir_module obligatoire[ (#ENV**{erreurs}|table_valeur{module}|oui)erreur]'>
 							<label for='id_tradlang_module'><:tradlang:texte_module_traduire:></label>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{module})</span>
 							]<INCLURE{fond=formulaires/tradlang_selecteur_module,env}>
-					    </li>
-					    <li class='editer choisir_lang_orig[ (#ENV**{erreurs}|table_valeur{lang_orig}|oui)erreur]'>
+						</li>
+						<li class='editer choisir_lang_orig[ (#ENV**{erreurs}|table_valeur{lang_orig}|oui)erreur]'>
 							<label for='lang_orig'><:tradlang:item_langue_origine:></label>
 							<p class="explication"><:tradlang:explication_langue_origine:></p>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_orig})</span>
 							]<INCLURE{fond=formulaires/tradlang_selecteur_langue_module_dispo_complete,lang_orig,name=lang_orig,id_tradlang_module,module}>
-					    </li>
-					    <li class='editer choisir_lang_cible[ (#ENV**{erreurs}|table_valeur{lang_cible}|oui)erreur]'>
+						</li>
+						<li class='editer choisir_lang_cible[ (#ENV**{erreurs}|table_valeur{lang_cible}|oui)erreur]'>
 							<label for='lang_cible'><:tradlang:item_langue_cible:></label>
 							<p class="explication"><:tradlang:explication_langue_cible:></p>[
 							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_cible})</span>
