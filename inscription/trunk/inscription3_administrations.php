@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2013 - cmtmt, BoOz, kent1
+ * © cmtmt, BoOz, kent1
  * Licence GPL v3
  *
  * Fonctions d'installation et de désinstallation du plugin
@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return
  */
 function inscription3_upgrade($nom_meta_base_version,$version_cible){
-    include_spip('inc/config');
+	include_spip('inc/config');
 
 	$exceptions_des_champs_auteurs_elargis = pipeline('i3_exceptions_des_champs_auteurs_elargis',array());
 	
@@ -67,8 +67,8 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 
 	cextras_api_upgrade(inscription3_declarer_champs_extras(), $maj['create']);
 
-    if ($inscription3_meta && !is_array(@unserialize($inscription3_meta)))
-	    $maj['create'][] = array('inscription3_transfert_infos_auteurs');
+	if ($inscription3_meta && !is_array(@unserialize($inscription3_meta)))
+		$maj['create'][] = array('inscription3_transfert_infos_auteurs');
 
 	$maj['3.0.2'] = array(
 		array('i3_installer_pays',array()),

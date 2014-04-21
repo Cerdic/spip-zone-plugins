@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2010 - cmtmt, BoOz, kent1
+ * © cmtmt, BoOz, kent1
  * Licence GPL v3
  *
  * Notifications d'inscription d'un auteur

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2013 - cmtmt, BoOz, kent1
+ * © cmtmt, BoOz, kent1
  * Licence GPL v3
  *
  * Utilisations de pipelines
@@ -133,7 +133,7 @@ function inscription3_affiche_droite($flux){
 		 || (($flux['args']['exec'] == 'cfg') && ((_request('cfg') == 'inscription3') || preg_match('/^i3_/',_request('cfg'))))
 		)
 		 && ($flux['args']['exec'] != 'inscription3_adherents'))
-    		$flux['data'] .= recuperer_fond('prive/inscription3_affiche_droite');
+			$flux['data'] .= recuperer_fond('prive/inscription3_affiche_droite');
 	return $flux;
 }
 
@@ -581,10 +581,10 @@ function inscription3_formulaire_traiter($flux){
 		//toutes les clefs qu'inscription3 peut mettre a jour
 		$clefs = $trouver_table('auteurs');
 		$clefs = $clefs['field'];
-	
+
 		//extrait uniquement les donnees qui ont ete proposees a la modification
 		$val = array_intersect_key($valeurs,$clefs);
-		
+
 		/**
 		 * Si on demande le pass dans le formulaire
 		 * Le compte est automatiquement activé

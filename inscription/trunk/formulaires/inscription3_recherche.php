@@ -50,7 +50,7 @@ function formulaires_inscription3_recherche_verifier_dist(){
 		}
 	}
 
-    return $erreurs;
+	return $erreurs;
 }
 
 /**
@@ -68,12 +68,6 @@ function formulaires_inscription3_recherche_traiter_dist(){
 				$statut = sql_getfetsel('statut','spip_auteurs','id_auteur='.intval($val));
 				if($statut !='0minirezo') {
 					sql_updateq("spip_auteurs",array('statut' => '5poubelle'),"id_auteur=".intval($val));
-
-					if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
-						sql_delete("spip_zones_auteurs","id_auteur=".intval($val));
-
-					if(defined('_DIR_PLUGIN_SPIPLISTES'))
-						sql_delete("spip_auteurs_listes","id_auteur=".intval($val));
 					$nb_auteurs++;
 				}
 			}
@@ -85,6 +79,6 @@ function formulaires_inscription3_recherche_traiter_dist(){
 		else
 			$retour['message_ok'] = _T('inscription3:message_users_supprimes_un');
 	}
-    return $retour;
+	return $retour;
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Inscription3 pour SPIP
- * © 2007-2012 - cmtmt, BoOz, kent1
+ * © cmtmt, BoOz, kent1
  * Licence GPL v3
  * 
  * Formulaire de demande d'effacement de compte
@@ -89,9 +89,8 @@ function formulaires_supprimer_visiteur_traiter_dist(){
 		if ($id_auteur = sql_getfetsel('id_auteur','spip_auteurs',array('cookie_oubli='.sql_quote($p),"statut<>'0minirezo'")))
 			$erreurs['oubli'] = _T('inscription3:erreur_effacement_auto_impossible');
 
-	}else{
+	}else
 		$erreurs['inconnu'] = _T('inscription3:erreur_effacement_auto_impossible');
-	}
 
 	//supprimer un auteur
 	$row = sql_getfetsel("statut","spip_auteurs","id_auteur=".intval($id_auteur));
@@ -99,16 +98,8 @@ function formulaires_supprimer_visiteur_traiter_dist(){
 	if($row['statut'] !='0minirezo' and $row['statut'] !='1comite')
 		sql_delete("spip_auteurs","id_auteur=".intval($id_auteur));
 
-    if(defined('_DIR_PLUGIN_ACCESRESTREINT'))
-        sql_delete("spip_zones_auteurs","id_auteur=".intval($id_auteur));
-
-    if(defined('_DIR_PLUGIN_SPIPLISTES'))
-        sql_delete("spip_auteurs_listes","id_auteur=".intval($id_auteur));
-
-
 	$message = _T('inscription3:message_compte_efface');
-    return array('message_ok' => $message);
+	return array('message_ok' => $message);
 }
-
 
 ?>

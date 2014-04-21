@@ -5,207 +5,207 @@
 <form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
-				<li>
-					<div class="explication">
-						<p><:inscription3:info_defaut_desc:></p>
-						<dl>
-							<dt><strong><:inscription3:thead_form:></strong></dt><dd><:inscription3:form_expl:></dt>
-							<dt><strong><:inscription3:thead_fiche_mod:></strong></dt><dd><:inscription3:fiche_mod_expl:></dt>
-							<dt><strong><:inscription3:thead_fiche:></strong></dt><dd><:inscription3:fiche_expl:></dt>
-							<dt><strong><:inscription3:thead_table:></strong></dt><dd><:inscription3:table_expl:></dt>
-							<dt><strong><:inscription3:thead_obligatoire:></strong></dt><dd><:inscription3:form_oblig_expl:></dt>
-						</dl>
-					</div>
-			 	</li>
+		<ul>
+			<li>
+				<div class="explication">
+					<p><:inscription3:info_defaut_desc:></p>
+					<dl>
+						<dt><strong><:inscription3:thead_form:></strong></dt><dd><:inscription3:form_expl:></dt>
+						<dt><strong><:inscription3:thead_fiche_mod:></strong></dt><dd><:inscription3:fiche_mod_expl:></dt>
+						<dt><strong><:inscription3:thead_fiche:></strong></dt><dd><:inscription3:fiche_expl:></dt>
+						<dt><strong><:inscription3:thead_table:></strong></dt><dd><:inscription3:table_expl:></dt>
+						<dt><strong><:inscription3:thead_obligatoire:></strong></dt><dd><:inscription3:form_oblig_expl:></dt>
+					</dl>
+				</div>
+		 	</li>
 
-				<li class="fieldset">
-					<fieldset>
-						<legend><:inscription3:legende_info_defaut:></legend>
-						<ul>
-							<li>
-								<table>
-									<thead>
-										<tr>
-											<th class="label">&nbsp;</th>
-											<th style="width:70px"><:inscription3:thead_form:></th>
-											<th style="width:70px"><:inscription3:thead_fiche_mod:></th>
-											<th style="width:70px"><:inscription3:thead_fiche:></th>
-											<th style="width:70px" class="i3_table"><:inscription3:thead_table:></th>
-											<th style="width:70px"><:inscription3:thead_obligatoire:></th>
-										</tr>
-									</thead>
-									<tr>
-										<td class="label">
-											<label><:inscription3:label_nom:></label>
-										</td>
-										<td>
-										</td>
-										<td>
-											<input type="checkbox" name="nom_fiche_mod"[ checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
-										</td>
-										<td>
-											<input type="checkbox" name="nom_fiche"[ checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" />
-										</td>
-										<td class="i3_table">
-											<input type="checkbox" name="nom_table"[ checked="(#ENV{nom_table}?{checked})"] id="nom_table" />
-										</td>
-										<td>
-										</td>
-									</tr>
-									<tr>
-										<td class="label"><label><:inscription3:label_email:></label></td>
-										<td>
-										</td>
-										<td>
-											<input type="checkbox" name="email_fiche_mod"[ checked="(#ENV{email_fiche_mod}?{checked})"] id="email_fiche_mod" />
-										</td>
-										<td>
-											<input type="checkbox" name="email_fiche"[ checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" />
-										</td>
-										<td class="i3_table">
-											<input type="checkbox" name="email_table"[ checked="(#ENV{email_table}?{checked})"] id="email_table" />
-										</td>
-										<td>
-										</td>
-									</tr>
-									<tr>
-										<td class="label"><label><:inscription3:label_pass:></label></td>
-										<td>
-											<input type="checkbox" name="pass"[(#ENV{pass}|=={on}|oui) checked="checked"] id="pass" />
-										</td>
-										<td>
-											<input type="checkbox" name="pass_fiche_mod"[ checked="(#ENV{pass_fiche_mod}?{checked})"] id="pass_fiche_mod" />
-										</td>
-										<td class="i3_table"></td>
-										<td></td>
-										<td><input type="checkbox" name="pass_obligatoire"[ checked="(#ENV{pass_obligatoire}?{checked})"] id="pass_obligatoire" /></td>
-									</tr>
-								</table>
-							</li>
-						</ul>
-					</fieldset>
-				</li>
-
-				[(#REM) - INFORMATIONS PERSONNELLES? - ]
-				#INCLURE{fond=fonds/inscription3_infos_persos,env}
-
-				[(#REM) - CHAMPS PRESENTS DANS LES CHAMPS EXTRAS? - ]
-				#INCLURE{fond=fonds/inscription3_cextras,env}
-
-				[(#REM) - GREFFONS - ]
-				#PIPELINE{i3_cfg_form}
-
-				<li class="fieldset">
-					<fieldset>
-						<legend><:inscription3:legende_reglement:></legend>
-						<ul>
-							[(#SAISIE{case, reglement,
-								label=<:inscription3:label_reglement:>,
-								label_case=<:inscription3:label_reglement_explication:>})]
-							<BOUCLE_si_page(CONDITION){si #PLUGIN{pages}|oui}>
-							<INCLURE{fond=formulaires/configurer_inscription3_reglement,env} />
-							</BOUCLE_si_page>
-							</B_si_page>
-							[(#SAISIE{selecteur_article,
-								reglement_article,
-								option_intro=<:inscription3:option_choisissez:>,
-								recursif=oui,
-								label=<:inscription3:label_reglement_article:>})]
-							<//B_si_page>
-						</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<fieldset>
-					<legend><:inscription3:legende_info_internes:></legend>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:inscription3:legende_info_defaut:></legend>
 					<ul>
 						<li>
-							<p class="explication">
-								<:inscription3:explication_info_internes:>
-							</p>
+							<table>
+								<thead>
+									<tr>
+										<th class="label">&nbsp;</th>
+										<th style="width:70px"><:inscription3:thead_form:></th>
+										<th style="width:70px"><:inscription3:thead_fiche_mod:></th>
+										<th style="width:70px"><:inscription3:thead_fiche:></th>
+										<th style="width:70px" class="i3_table"><:inscription3:thead_table:></th>
+										<th style="width:70px"><:inscription3:thead_obligatoire:></th>
+									</tr>
+								</thead>
+								<tr>
+									<td class="label">
+										<label><:inscription3:label_nom:></label>
+									</td>
+									<td>
+									</td>
+									<td>
+										<input type="checkbox" name="nom_fiche_mod"[ checked="(#ENV{nom_fiche_mod}?{checked})"] id="nom_fiche_mod" />
+									</td>
+									<td>
+										<input type="checkbox" name="nom_fiche"[ checked="(#ENV{nom_fiche}?{checked})"] id="nom_fiche" />
+									</td>
+									<td class="i3_table">
+										<input type="checkbox" name="nom_table"[ checked="(#ENV{nom_table}?{checked})"] id="nom_table" />
+									</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td class="label"><label><:inscription3:label_email:></label></td>
+									<td>
+									</td>
+									<td>
+										<input type="checkbox" name="email_fiche_mod"[ checked="(#ENV{email_fiche_mod}?{checked})"] id="email_fiche_mod" />
+									</td>
+									<td>
+										<input type="checkbox" name="email_fiche"[ checked="(#ENV{email_fiche}?{checked})"] id="email_fiche" />
+									</td>
+									<td class="i3_table">
+										<input type="checkbox" name="email_table"[ checked="(#ENV{email_table}?{checked})"] id="email_table" />
+									</td>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td class="label"><label><:inscription3:label_pass:></label></td>
+									<td>
+										<input type="checkbox" name="pass"[(#ENV{pass}|=={on}|oui) checked="checked"] id="pass" />
+									</td>
+									<td>
+										<input type="checkbox" name="pass_fiche_mod"[ checked="(#ENV{pass_fiche_mod}?{checked})"] id="pass_fiche_mod" />
+									</td>
+									<td class="i3_table"></td>
+									<td></td>
+									<td><input type="checkbox" name="pass_obligatoire"[ checked="(#ENV{pass_obligatoire}?{checked})"] id="pass_obligatoire" /></td>
+								</tr>
+							</table>
 						</li>
-						[(#SAISIE{case,valider_comptes,
-							label=<:inscription3:label_valider_comptes:>,
-							label_case=<:inscription3:explication_valider_compte:>})]
-						<li class="editer editer_statut_nouveau">
-							<label><:inscription3:label_statut:></label>
-							#SET{statuts,#EVAL{$GLOBALS['liste_des_statuts']}}
-							<p class="explication"><:inscription3:explication_statut:></p>
-							<select name="statut_nouveau" id="statut_nouveau">
-								<option value='6forum' [selected="(#ENV{statut_nouveau}|=={6forum}|oui)selected"]>[(#GET{statuts}|array_flip|table_valeur{6forum}|_T)]</option>
-								<option value='1comite' [selected="(#ENV{statut_nouveau}|=={1comite}|oui)selected"]>[(#GET{statuts}|array_flip|table_valeur{1comite}_T)]</option>
-							</select>
-						</li>
-
-						[(#SAISIE{case,creation,
-							label=<:inscription3:label_creation:>,
-							label_case=<:inscription3:explication_creation:>})]
 					</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<fieldset>
-						<legend><:inscription3:legende_affordance_form:></legend>
-						<ul>
-							[(#SAISIE{radio, affordance_form,
-								label=<:inscription3:label_affordance_form:>,
-								explication=<:inscription3:explication_affordance_form:>,
-								defaut=login,
-								datas=#ARRAY{
-									login,<:inscription3:choix_affordance_login:>,
-									email,<:inscription3:choix_affordance_email:>,
-									login_et_email,<:inscription3:choix_affordance_login_email:>,
-									libre,<:inscription3:choix_affordance_libre:>}})]
-							[(#SAISIE{input,affordance_form_libre,
-								class=multilang,
-								label=<:inscription3:label_affordance_form_libre:>,
-								size=30})]
-						</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<fieldset>
-						<legend><:inscription3:legende_formulaire_inscription:></legend>
-						<ul>
-							[(#SAISIE{case,auto_login,
-								label=<:inscription3:label_auto_login:>,
-								label_case=<:inscription3:explication_auto_login:>})]
-							[(#SAISIE{radio, inscription_texte,
-								label=<:inscription3:label_inscription_texte:>,
-								explication=<:inscription3:explication_inscription_texte:>,
-								defaut=aucun,
-								datas=#ARRAY{
-									aucun,<:inscription3:choix_inscription_texte_aucun:>,
-									origine,<:inscription3:choix_inscription_texte_origine:>,
-									libre,<:inscription3:choix_inscription_texte_libre:>}})]
-							[(#SAISIE{textarea,inscription_texte_libre,
-								rows=5,
-								class='multilang texte inserer_barre_edition',
-								label=<:inscription3:label_inscription_texte_libre:>})]
-						</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<fieldset>
-						<legend><:inscription3:legende_password:></legend>
-						<ul>
-							[(#SAISIE{case, password_complexite,
-								label=<:inscription3:label_password_complexite:>,
-								label_case=<:inscription3:explication_password_complexite:>})]
-						</ul>
-					</fieldset>
-				</li>
-				<li class="fieldset">
-					<fieldset>
-						<legend><:inscription3:legende_validation:></legend>
-						<ul>
-							[(#SAISIE{case,validation_numero_international,
-								label=<:inscription3:label_validation_numero_international:>})]
-						</ul>
-					</fieldset>
-				</li>
-			</ul>
+				</fieldset>
+			</li>
+
+			[(#REM) - INFORMATIONS PERSONNELLES? - ]
+			#INCLURE{fond=fonds/inscription3_infos_persos,env}
+
+			[(#REM) - CHAMPS PRESENTS DANS LES CHAMPS EXTRAS? - ]
+			#INCLURE{fond=fonds/inscription3_cextras,env}
+
+			[(#REM) - GREFFONS - ]
+			#PIPELINE{i3_cfg_form}
+
+			<li class="fieldset">
+				<fieldset>
+					<legend><:inscription3:legende_reglement:></legend>
+					<ul>
+						[(#SAISIE{case, reglement,
+							label=<:inscription3:label_reglement:>,
+							label_case=<:inscription3:label_reglement_explication:>})]
+						<BOUCLE_si_page(CONDITION){si #PLUGIN{pages}|oui}>
+						<INCLURE{fond=formulaires/configurer_inscription3_reglement,env} />
+						</BOUCLE_si_page>
+						</B_si_page>
+						[(#SAISIE{selecteur_article,
+							reglement_article,
+							option_intro=<:inscription3:option_choisissez:>,
+							recursif=oui,
+							label=<:inscription3:label_reglement_article:>})]
+						<//B_si_page>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+				<legend><:inscription3:legende_info_internes:></legend>
+				<ul>
+					<li>
+						<p class="explication">
+							<:inscription3:explication_info_internes:>
+						</p>
+					</li>
+					[(#SAISIE{case,valider_comptes,
+						label=<:inscription3:label_valider_comptes:>,
+						label_case=<:inscription3:explication_valider_compte:>})]
+					<li class="editer editer_statut_nouveau">
+						<label><:inscription3:label_statut:></label>
+						#SET{statuts,#EVAL{$GLOBALS['liste_des_statuts']}}
+						<p class="explication"><:inscription3:explication_statut:></p>
+						<select name="statut_nouveau" id="statut_nouveau">
+							<option value='6forum' [selected="(#ENV{statut_nouveau}|=={6forum}|oui)selected"]>[(#GET{statuts}|array_flip|table_valeur{6forum}|_T)]</option>
+							<option value='1comite' [selected="(#ENV{statut_nouveau}|=={1comite}|oui)selected"]>[(#GET{statuts}|array_flip|table_valeur{1comite}_T)]</option>
+						</select>
+					</li>
+
+					[(#SAISIE{case,creation,
+						label=<:inscription3:label_creation:>,
+						label_case=<:inscription3:explication_creation:>})]
+				</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:inscription3:legende_affordance_form:></legend>
+					<ul>
+						[(#SAISIE{radio, affordance_form,
+							label=<:inscription3:label_affordance_form:>,
+							explication=<:inscription3:explication_affordance_form:>,
+							defaut=login,
+							datas=#ARRAY{
+								login,<:inscription3:choix_affordance_login:>,
+								email,<:inscription3:choix_affordance_email:>,
+								login_et_email,<:inscription3:choix_affordance_login_email:>,
+								libre,<:inscription3:choix_affordance_libre:>}})]
+						[(#SAISIE{input,affordance_form_libre,
+							class=multilang,
+							label=<:inscription3:label_affordance_form_libre:>,
+							size=30})]
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:inscription3:legende_formulaire_inscription:></legend>
+					<ul>
+						[(#SAISIE{case,auto_login,
+							label=<:inscription3:label_auto_login:>,
+							label_case=<:inscription3:explication_auto_login:>})]
+						[(#SAISIE{radio, inscription_texte,
+							label=<:inscription3:label_inscription_texte:>,
+							explication=<:inscription3:explication_inscription_texte:>,
+							defaut=aucun,
+							datas=#ARRAY{
+								aucun,<:inscription3:choix_inscription_texte_aucun:>,
+								origine,<:inscription3:choix_inscription_texte_origine:>,
+								libre,<:inscription3:choix_inscription_texte_libre:>}})]
+						[(#SAISIE{textarea,inscription_texte_libre,
+							rows=5,
+							class='multilang texte inserer_barre_edition',
+							label=<:inscription3:label_inscription_texte_libre:>})]
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:inscription3:legende_password:></legend>
+					<ul>
+						[(#SAISIE{case, password_complexite,
+							label=<:inscription3:label_password_complexite:>,
+							label_case=<:inscription3:explication_password_complexite:>})]
+					</ul>
+				</fieldset>
+			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:inscription3:legende_validation:></legend>
+					<ul>
+						[(#SAISIE{case,validation_numero_international,
+							label=<:inscription3:label_validation_numero_international:>})]
+					</ul>
+				</fieldset>
+			</li>
+		</ul>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
 		</p>
