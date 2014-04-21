@@ -75,7 +75,7 @@ function inscription3_upgrade($nom_meta_base_version,$version_cible){
 	);
 
 	include_spip('base/upgrade');
-    maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
