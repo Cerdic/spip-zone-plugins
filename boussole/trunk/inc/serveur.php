@@ -173,7 +173,7 @@ function boussole_cacher_liste($boussoles) {
  *
  * @param string $url
  * 		url absolue du fichier xml de description de la boussole
- * @param array &$erreur
+ * @param array $erreur
  * 		tableau des erreurs collectees suite a la validation xml
  *
  * @return boolean
