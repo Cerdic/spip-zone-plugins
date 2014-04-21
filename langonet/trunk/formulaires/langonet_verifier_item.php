@@ -44,7 +44,7 @@ function formulaires_langonet_verifier_item_traiter() {
 
 	// Creation du fichier de langue corrigé avec les items detectes comme
 	// non definis ou obsoletes suivant la verification en cours.
-	$items_a_corriger = $resultats['item_non'];
+	$items_a_corriger = $resultats['occurrences_non'];
 	if ($items_a_corriger) {
 		$encodage = 'utf8';
 		if ($verification == 'definition') {
@@ -56,7 +56,7 @@ function formulaires_langonet_verifier_item_traiter() {
 			$mode = 'oublie';
 		}
 		else {
-			$extra = $resultats['item_non'];
+			$extra = $resultats['occurrences_non'];
 			$mode = 'inutile';
 		}
 
@@ -79,8 +79,8 @@ function formulaires_langonet_verifier_item_traiter() {
 		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
 		$retour['message_ok']['resultats']['module'] = $resultats['module'];
 		$retour['message_ok']['resultats']['ou_fichier'] = $resultats['ou_fichier'];
-		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['item_non'];
-		$retour['message_ok']['resultats']['occurrences_peut_etre'] = $resultats['item_peut_etre'];
+		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['occurrences_non'];
+		$retour['message_ok']['resultats']['occurrences_peut_etre'] = $resultats['occurrences_peut_etre'];
 	}
 	$retour['editable'] = true;
 	return $retour;

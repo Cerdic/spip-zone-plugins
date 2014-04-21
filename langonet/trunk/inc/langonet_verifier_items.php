@@ -121,7 +121,6 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 	$resultats['langue'] = $fichier_langue;
 	$resultats['ou_fichier'] = $ou_fichiers;
 	// Todo : c'est quoi cette variable ?
-	$resultats['infos'] = $infos_occurrences;
 
 	return $resultats;
 }
@@ -146,8 +145,9 @@ function collecter_occurrences($fichiers) {
 				foreach ($contenu as $_no_ligne => $_ligne) {
 					foreach ($regexps as $_regexp) {
 						if (preg_match_all($_regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-							foreach ($occurrences as $_occurrence)
+							foreach ($occurrences as $_occurrence) {
 								memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $_regexp);
+							}
 					}
 				}
 			}
@@ -246,7 +246,7 @@ function collecter_occurrences1($fichiers) {
  * 		Chemin complet du fichier à scanner
  *
  * @return string
- * 		Extension du fichier parmi 'xml', 'yaml', 'html' et 'php' ou le nom du fichier de descriptio
+ * 		Extension du fichier parmi 'xml', 'yaml', 'html' et 'php' ou le nom du fichier de description
  * 		du plugin 'paquet.xml' ou 'plugin.xml'.
  */
 function identifier_type_fichier($fichier) {
@@ -415,7 +415,9 @@ function extraire_arguments($occ) {
 
 function reperer_items_inutiles($utilises, $items) {
 	$item_non = $item_peut_etre = $fichier_peut_etre = array();
+	$index_variable = '';
 	foreach ($items as $_raccourci => $_traduction) {
+		// TODO : c'est bizarre que l'on ne teste pas l'égalité des modules
 		if (!in_array ($_raccourci, $utilises['items'])) {
 			// L'item est soit non utilise, soit utilise dans un contexte variable
 			$contexte_variable = false;
@@ -423,24 +425,23 @@ function reperer_items_inutiles($utilises, $items) {
 				if ($utilises['suffixes'][$_cle]) {
 					if (substr($_raccourci, 0, strlen($_valeur)) == $_valeur) {
 						$contexte_variable = true;
+						$index_variable = $_cle;
 						break;
 					}
 				}
 			}
 			if (!$contexte_variable) {
 				// L'item est vraiment non utilise
-				$item_non[] = $_raccourci;
+				$item_non[$_raccourci] = $_raccourci;
 			} else {
 				// L'item est utilise dans un contexte variable
-				$item_peut_etre[] = $_raccourci;
-				$fichier_peut_etre[$_raccourci] = array();
+				$item_peut_etre[$_raccourci] = $utilises['item_tous'][$index_variable];
 			}
 		}
 	}
 	return array(
-		   'item_non' => $item_non,
-		   'item_peut_etre' => $item_peut_etre,
-		   'fichier_peut_etre' => $fichier_peut_etre,
+		   'occurrences_non' => $item_non,
+		   'occurrences_peut_etre' => $item_peut_etre,
 	       );
 }
 

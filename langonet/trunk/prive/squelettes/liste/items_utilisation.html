@@ -12,10 +12,30 @@
 		<tbody>
 <BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
 			<tr class="trouve row_odd">
-				<td class="raccourci">
-					[<strong>(#VALEUR)</strong>]
+				<td colspan="2" class="raccourci">
+					[<strong>(#CLE)</strong>]
 				</td>
 			</tr>
+	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
+		<B_lignes>
+			<tr class="row_even">
+				<td class="fichier" colspan="3">[(#VAL{.php}|str_replace{'', #CLE})]</td>
+			</tr>
+		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
+			#SET{ligne, #CLE}
+			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
+			<tr class="row_even">
+				<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
+				<td class="occurrence">
+					[<code>(#VALEUR|table_valeur{0}
+						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{4}, 8}
+						|trim
+						|appliquer_filtre{coloration_code_color, php, code, span})</code>]
+				</td>
+			</tr>
+			</BOUCLE_occurrences>
+		</BOUCLE_lignes>
+	</BOUCLE_fichiers>
 </BOUCLE_liste_items>
 		</tbody>
 	</table>
