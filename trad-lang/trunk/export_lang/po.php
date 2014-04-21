@@ -38,7 +38,8 @@ function export_lang_po_dist($module,$langue,$dir_lang){
 	/**
 	 * Les informations du module
 	 */	
-	$info_module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module));
+	$info_module = sql_fetsel('id_tradlang_module,lang_mere,nom_mod','spip_tradlang_modules','module='.sql_quote($module));
+	
 	$url_trad = url_absolue(parametre_url(generer_url_entite($info_module['id_tradlang_module'],'tradlang_module'),'lang_cible',$langue));
 	
 	/**
@@ -49,17 +50,17 @@ function export_lang_po_dist($module,$langue,$dir_lang){
 	 */
 	$last_auteur = array();
 	if($langue != $info_module['lang_mere']){
-		$traducteur = sql_fetsel('id_tradlang,traducteur','spip_tradlangs',"module=".sql_quote($module)." AND lang=".sql_quote($langue),"",'maj DESC','0,1');
+		$traducteur = sql_fetsel('id_tradlang,traducteur','spip_tradlangs',"id_tradlang_module=".intval($info_module['id_tradlang_module'])." AND lang=".sql_quote($langue),"",'maj DESC','0,1');
 		if(is_numeric($traducteur['traducteur']))
 			$id_auteur = $traducteur['traducteur'];
 		else
-			$id_auteur = sql_select('id_auteur','spip_versions','objet="tradlang" AND id_objet='.intval($traducteur['id_tradlang']),"",'id_version DESC','0,1');
-		
+			$id_auteur = sql_getfetsel('id_auteur','spip_versions','objet="tradlang" AND id_objet='.intval($traducteur['id_tradlang']),"",'id_version DESC','0,1');
+
 		$last_auteur = sql_fetsel('nom,email','spip_auteurs','id_auteur='.intval($id_auteur));
 		
 		$traducteurs[$lang] = array();
 		$people_unique = array();
-		$liste_traducteurs = sql_select('DISTINCT(traducteur)','spip_tradlangs','module='.sql_quote($module)." and lang=".sql_quote($langue));
+		$liste_traducteurs = sql_select('DISTINCT(traducteur)','spip_tradlangs','id_tradlang_module='.intval($info_module['id_tradlang_module'])." and lang=".sql_quote($langue));
 		while ($t = sql_fetch($liste_traducteurs)){
 			$traducteurs_lang = explode(',',$t['traducteur']);
 			foreach($traducteurs_lang as $traducteur){
@@ -123,13 +124,13 @@ msgstr ""
 	 * msgid "Item dans la langue originale"
 	 * msgstr "Item dans la langue actuelle (traduit), si non traduit, vide"
 	 */
-	$res=sql_select("id,str,comm,statut","spip_tradlangs","module=".sql_quote($module)." AND lang=".sql_quote($langue),"id");
-	while ($row=sql_fetch($res)) {
+	$res=sql_allfetsel("*","spip_tradlangs","id_tradlang_module=".intval($info_module['id_tradlang_module'])." AND lang=".sql_quote($langue)." AND statut != 'attic'","id");
+	foreach($res as $row){
 		$tous[$row['id']] = $row;
 	}
 	ksort($tous);
 	
-	foreach ($tous as $row) {
+	foreach ($tous as $id => $row) {
 		if (trim($row['comm'])) $row['comm']=" # ".trim($row['comm']); // on rajoute les commentaires ?
 
 		$str = $row['str'];
@@ -142,15 +143,15 @@ msgstr ""
 		);
 		$newmd5 = md5($str);
 
-		if ($oldmd5 !== $newmd5) sql_updateq("spip_tradlangs",array('md5'=>$newmd5), "md5=".sql_quote($oldmd5)." AND module=".sql_quote($module));
-		$str_original = sql_getfetsel('str','spip_tradlangs','id ='.sql_quote($row['id']).' AND module='.sql_quote($module).' AND lang='.sql_quote($info_module['lang_mere']));
-
+		if ($oldmd5 !== $newmd5) sql_updateq("spip_tradlangs",array('md5'=>$newmd5), "md5=".sql_quote($oldmd5)." AND id_tradlang_module=".intval($info_module['id_tradlang_module']));
+		$str_original = sql_getfetsel('str','spip_tradlangs','id ='.sql_quote($id).' AND id_tradlang_module='.intval($info_module['id_tradlang_module']).' AND lang='.sql_quote($info_module['lang_mere']));
 		$x[]=($row['comm'] ? "#".$row['comm']."\n" : "").
 "
 #, ".(($row['statut'] == 'MODIF') ? "fuzzy, php-format" : "php-format")."
 #| msgid \"".$row['id']."\"
 msgid \"".str_replace('"','\"',$str_original)."\"
 msgstr \"".(($row['statut'] == 'NEW') ? '' : str_replace('"','\"',$str))."\"";
+		unset($tous[$id]);
 	}
 
 	$contenu .= str_replace("\r\n", "\n", join("\n",$x));

@@ -35,11 +35,11 @@ function export_lang_spip_dist($module,$langue,$dir_lang,$tout=false){
 	$where = "module=".sql_quote($module)." AND lang=".sql_quote($langue);
 	if(!$tout)
 		$where .= " AND statut IN ('OK','MODIF')";
-	$res=sql_select("id,str,comm,statut","spip_tradlangs",$where,"id");
+	$res=sql_allfetsel("id,str,comm,statut","spip_tradlangs",$where,"id");
 	$x=array();
 	$prev="";
 	$tous = $lorigine; // on part de l'origine comme ca on a tout meme si c'est pas dans la base de donnees (import de salvatore/lecteur.php)
-	while ($row=sql_fetch($res)) {
+	foreach ($res as $row){
 		$tous[$row['id']] = $row;
 	}
 	ksort($tous);

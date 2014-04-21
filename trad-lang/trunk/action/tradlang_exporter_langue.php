@@ -41,6 +41,8 @@ function action_tradlang_exporter_langue_dist(){
 				case 'po':
 					header('Content-Type: application/x-gettext;');
 				break;
+				case 'csv';
+					header('Content-type: text/csv');
 				default:
 					header('Content-Type: application/x-httpd-php;');
 			}
