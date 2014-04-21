@@ -24,9 +24,9 @@ function tradlang_getmodules_base(){
 	/**
 	 * Sélection de tous les modules de langue
 	 */
-	$res = sql_select("*","spip_tradlang_modules");
-	if ($res){
-		while($row=sql_fetch($res)){
+	$res = sql_allfetsel("module,id_tradlang_module","spip_tradlang_modules");
+	if (is_array($res)){
+		foreach($res as $row){
 			$module = $row["module"];
 			$ret[$module] = $row;
 
@@ -34,8 +34,8 @@ function tradlang_getmodules_base(){
 			 * Récupération des différentes langues et calcul du nom des 
 			 * fichiers de langue
 			 */
-			$res2 = sql_select("DISTINCT lang","spip_tradlangs","module='$module'");
-			while($row2=sql_fetch($res2)){
+			$res2 = sql_allfetsel("DISTINCT lang","spip_tradlangs","id_tradlang_module=".intval($row['id_tradlang_module']));
+			foreach($res2 as $row2){
 				$lg = $row2["lang"];
 				$ret[$module]["langue_".$lg] = $row["lang_prefix"]."_".$lg.".php";
 			}
@@ -103,10 +103,10 @@ function tradlang_dir_lang(){
 		return false;
 	else
 		$squelettes = $dossier_squelettes ? $dossier_squelettes : 'squelettes';
-	
+
 	if(!is_dir($dir_lang=_DIR_RACINE.$squelettes.'/lang'))
 		return false;
-	
+
 	return $dir_lang;
 }
 
@@ -133,13 +133,13 @@ function langues_sort($array,$defaut=null){
  */
 function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
 	
 	/**
 	 * Par défaut on tri par priorité et nom_mod
 	 */
 	if (!isset($boucle->modificateur['par']) 
 		&& !isset($boucle->modificateur['tri'])) {
+			$id_table = $boucle->id_table;
 			$boucle->order[] = "'$id_table." ."priorite'";
 			$boucle->order[] = "'$id_table." ."nom_mod'";
 	}
@@ -151,9 +151,10 @@ function boucle_TRADLANG_MODULES_dist($id_boucle, &$boucles) {
  */
 function boucle_TRADLANGS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
-	$id_table = $boucle->id_table;
-	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang')
+	if(isset($boucle->nom) && ($boucle->nom == 'calculer_langues_utilisees') && $boucle->id_boucle == 'tradlang'){
+		$id_table = $boucle->id_table;
 		array_unshift($boucle->where,array("'='", "'$id_table." ."id_tradlang'", "'0'"));
+	}
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -169,7 +170,7 @@ function boucle_TRADLANGS_dist($id_boucle, &$boucles) {
  */
 function critere_langues_preferees_dist($idb,&$boucles,$crit){
 	$boucle = &$boucles[$idb];
-    $id_table = $boucle->id_table;
+	$id_table = $boucle->id_table;
 	$not = ($crit->not ? '' : 'NOT');
 	$primary = 'lang';
 	$c = "sql_in('".$id_table.'.'.$primary."', prepare_langues_preferees()".($not=='NOT' ? "" : ",'NOT'").")";
@@ -229,9 +230,9 @@ function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
 		';
 
 		array_unshift($boucle->where,array("'='", "'$id_table." ."statut'", "'\"OK\"'"));
-        $boucles[$id_boucle]->group[] = "$id_table.lang";
-        $boucles[$id_boucle]->having[] = "\n\t\t".'$module_having';
-    }else
+		$boucles[$id_boucle]->group[] = "$id_table.lang";
+		$boucles[$id_boucle]->having[] = "\n\t\t".'$module_having';
+	}else
 		return (array('zbug_critere_inconnu', array('table' => $crit->op.' ?')));
 } 
 
@@ -246,13 +247,13 @@ function critere_langue_complete_dist($id_boucle, &$boucles, $crit){
  */
 function inc_prepare_module_langue_complete_dist($id_module,  $serveur='') {
 	/**
-	 * On récupère les informations du module nécessaires "module" et "lang_mere"
+	 * On récupère la langue mère du module
 	 */
-	$module = sql_fetsel('module,lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($id_module));
+	$langue_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','id_tradlang_module='.intval($id_module));
 	/**
 	 * On compte le nombre d'éléments de la langue mère ce qui correspond au nombre total d'éléments à traduire pour un module
 	 */
-	$count = sql_countsel('spip_tradlangs','id_tradlang_module='.$id_module.' AND statut="OK" AND lang='.sql_quote($module['lang_mere']).' AND module='.sql_quote($module['module']));
+	$count = sql_countsel('spip_tradlangs','id_tradlang_module='.$id_module.' AND statut="OK" AND lang='.sql_quote($langue_mere));
 	/**
 	 * On crée ainsi la clause $having qui sera utilisée dans la boucle
 	 */
@@ -292,7 +293,7 @@ function langue_possible($lang){
 	$langues = $GLOBALS['codes_langues'];
 	if(key_exists($lang,$langues))
 		return true;
-	
+
 	return false;
 }
 ?>
