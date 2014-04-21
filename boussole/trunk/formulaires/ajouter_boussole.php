@@ -1,7 +1,28 @@
 <?php
+/**
+ * Ce fichier contient les fonctions de gestion du formulaire d'ajout d'une boussole
+ * en base de données d'un site client.
+ *
+ * @package SPIP\BOUSSOLE\Client\BDD
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+/**
+ * Chargement des données : le formulaire propose la liste des boussoles accessibles
+ * à partir des serveurs que le site client a déclaré.
+ *
+ * @uses charger_boussoles()
+ *
+ * @return array
+ * 		le tableau des données à charger par le formulaire :
+ *
+ * 		- 'boussole' : l'alias de la boussole choisie
+ * 		- '_boussoles' : la liste des boussoles accessibles
+ * 		- 'message_erreur' : message d'erreur éventuel retourné par un des serveurs interrogés
+ * 		- 'editable' : booleen à false si une erreur est survenue
+ */
 function formulaires_ajouter_boussole_charger_dist() {
 
 	list($boussoles, $message) = charger_boussoles();
@@ -13,12 +34,29 @@ function formulaires_ajouter_boussole_charger_dist() {
 }
 
 
+/**
+ * Vérification des saisies : aucune nécessaire, le formulaire ne proposnt que des boutons
+ * radio dont un est toujours actif.
+ *
+ * @return array
+ * 		Tableau des erreur toujours vide.
+ */
 function formulaires_ajouter_boussole_verifier_dist(){
 	$erreurs = array();
 	return $erreurs;
 }
 
 
+/**
+ * Exécution de l'action du formulaire : la boussole choisie est acquise par interrogation
+ * du serveur qui l'héberge et son contenu est intégrée à la base de données du client.
+ *
+ * @uses boussole_ajouter()
+ *       
+ * @return array
+ * 		Tableau retourné par le formulaire contenant toujours un message de bonne exécution ou
+ * 		d'erreur. L'indicateur editable est toujours à vrai.
+ */
 function formulaires_ajouter_boussole_traiter_dist(){
 	$retour = array();
 
@@ -44,10 +82,15 @@ function formulaires_ajouter_boussole_traiter_dist(){
 }
 
 /**
- * Chargement des boussoles pouvant être ajoutées sur le client à partir de la liste des serveur configurés.
- * On distingue la boussole spip des autres boussoles en la placant en premier dans le tableau retourné.
+ * Chargement des boussoles pouvant être ajoutées sur le client à partir de la liste
+ * des serveurs déclarés.
+ *
+ * Le chargement se fait en interrogeant chaque serveur avec l'action `serveur_lister_boussoles`.
  *
  * @return array
+ *		La liste des boussoles est rangée de façon à distinguer la boussole spip des autres
+ * 		boussoles en la placant en premier. Chaque boussole est un tableau associatif contenant
+ * 		son alias, son nom et le nom du serveur.
  */
 function charger_boussoles() {
 

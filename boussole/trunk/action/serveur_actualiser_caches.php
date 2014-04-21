@@ -1,4 +1,11 @@
 <?php
+/**
+ * Ce fichier contient l'action `serveur_actualiser_caches` utilisée par un site serveur
+ * pour regénérer les caches des boussoles qu'il héberge.
+ *
+ * @package SPIP\BOUSSOLE\Serveur\Action
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**

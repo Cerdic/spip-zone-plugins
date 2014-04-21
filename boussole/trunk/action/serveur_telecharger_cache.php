@@ -1,6 +1,21 @@
 <?php
+/**
+ * Ce fichier contient l'action `serveur_telecharger_cache` utilisée par un site serveur
+ * pour télécharger un cache.
+ *
+ * @package SPIP\BOUSSOLE\Serveur\Action
+ */
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+
+/**
+ * Action de téléchargement d'un cache d'une boussole hébergée par un site serveur ou de
+ * la liste des boussoles hébergées.
+ *
+ * Cette action est possible dans le privé à partir de la liste des caches affichée dans
+ * l'onglet fonction serveur.
+ *
+ */
 function action_serveur_telecharger_cache_dist(){
 
 	// Securisation: le nom du fichier est attendu en argument
