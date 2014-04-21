@@ -1,0 +1,117 @@
+#SET{objets,#ARRAY}
+#SET{devises,(#VAL|devises)}
+#SET{config,#CONFIG{prix_objets,#ARRAY}
+[(#VAL{inc/cookie}|include_spip|oui)]
+
+
+[(#GET{config}|table_valeur{devises}|?{
+    #SET{selected,#GET{config}|table_valeur{devises}}
+     ,
+     #SET{selected,#ARRAY}     
+})]
+
+
+
+#SET{devise_default,#ENV{devise_default,#GET{config}|table_valeur{devise_default}}
+
+#GET{devise_default}
+<BOUCLE_defaut(DATA){source tableau, #GET{selected}}{si #GET{devise_default}|non}{0,1}>
+        #SET{devise_default,#VALEUR}
+</BOUCLE_defaut>
+
+[(#VAL{geo_devise}|spip_setcookie{#GET{devise_default},#VAL|time|plus{3660*24*365},/}|oui)]
+<BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+    [(#VALEUR{page}|is_string|oui)
+        [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{page},#VALEUR{texte_objets}|_T}}})]
+    ]
+</BOUCLE_objets_liste>
+[(#SET{objets,#GET{objets}|array_merge{#ARRAY{document,#VAL{medias:info_documents}|_T}}})]
+<div class="formulaire_spip formulaire_#FORM">
+
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+    <form action="#ENV{action}" method="post"><div>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <ul>
+            <li class="fieldset">
+                <fieldset><legend><:prix_objets:infos_generales:></legend>
+                    <ul>
+                    [(#SAISIE{checkbox,objets_prix,
+                    datas=#GET{objets},
+                    label=<:prix_objets:label_selection_objet_prix:>}
+                    )]
+                    [(#SAISIE{selecteur_rubrique,rubrique_prix,multiple=non,
+                        label=<:prix_objets:rubrique_prix:>})] 
+                   </ul>
+                </fieldset>
+            </li>            
+        </ul>
+        <ul>
+            <li class="fieldset">
+                <fieldset><legend><:prix_objets:infos_produits:></legend>
+                    
+                        <ul>
+                            <li class="editer_devises_choisis[ (#GET{erreurs}|oui)erreur]"> 
+                                <B_choix>
+                                    <div>
+                                        <:prix_objets:devises_choisis:> :
+                                        <BOUCLE_choix(DATA){source tableau, #GET{selected}}{', '}>
+                                        [(#VALEUR|traduire_devise)]
+                                    </BOUCLE_choix>
+                                </div>
+                            </B_choix>
+                            <li class="editer_choix_devises[ (#GET{erreurs}|oui)erreur]">
+                                <label for="devises"><:prix_objets:choix_devises:></label>
+                                    
+                                    <select name="devises[]" class="forml" style="width:auto;" multiple="multiple" size="5" id="devises">   
+                                        <option value=""><:prix_objets:choix_devise:></option>
+                                        <BOUCLE_selection(DATA){source tableau, #GET{devises}}>
+                                        <option value="#CLE" [(#CLE|in_array{#GET{selected}}|?{' selected="selected"'})]>#VALEUR</option>
+                                    </BOUCLE_selection>
+                                </select>
+                            </li>
+                            
+                            <B_selection_default>
+                                <li class="editer_devise_default[ (#GET{erreurs}|oui)erreur]">
+                                    <label for="devises"><:prix_objets:devise_default:></label>    
+                                        <select name="devise_default" class="forml" style="width:auto;" id="devise_default">    
+                                        <option value=""><:prix_objets:choisir:></option>
+                                        <BOUCLE_selection_default(DATA){source tableau, #GET{selected}}>
+                                        <option value="#VALEUR" [(#GET{devise_default}|=={#VALEUR}|?{'selected="selected"'})]>[(#VALEUR|traduire_devise)]</option>
+                                    </BOUCLE_selection_default>
+                                </select>
+                                
+                            </li>
+                        </B_selection_default>
+                       <B_frais>                           
+                        <li class="editer_frais_livraison[ (#GET{erreurs}|oui)erreur]">
+                                <label for="frais_livraison"><:prix_objets:frais_livraison:></label>
+                                    <BOUCLE_frais(DATA){source tableau, #GET{selected}}{si #PLUGIN{shop_livraisons}|non}>
+                                        <div>
+                                        <input type="text" name="frais_livraison_#VALEUR" id="frais_livraison_#VALEUR" value="#ENV{frais_livraison_#VALEUR}" /> [(#VALEUR|traduire_devise)]
+                                    </div>
+                                </BOUCLE_frais>
+                        </li>
+                        </B_frais>
+                        <li class="editer_taxes[ (#GET{erreurs}|oui)erreur]">
+                            <label for="taxes"><:prix_objets:taxes:> : </label>
+                            <div>
+                                <input type="text" name="taxes" id="taxes" value="#ENV{taxes}" /> %
+                            </div>
+
+                        </li>
+                        [(#SAISIE{oui_non,taxes_inclus,
+                            label=<:prix_objets:taxes_inclus:>
+                            })]                     
+                        
+                    </ul>
+                </fieldset>
+            </li>
+        </ul>           
+        <p class="boutons">
+            <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+        </p>
+        
+    </div></form>
+</div>
