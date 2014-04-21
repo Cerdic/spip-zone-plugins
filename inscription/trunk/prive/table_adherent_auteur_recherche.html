@@ -21,12 +21,11 @@
 			</th>
 			<BOUCLE_champshead(DATA){source table,#CONFIG{inscription3}}{valeur = 'on'}>
 			[(#CLE|match{_table}|oui)
-			<th class="[(#ENV{ordre}|=={[(#CLE|replace{'_table',''})]}|?{[on (#GET{class_desc})],'both'})]">
-				<a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''})]}|parametre_url{'desc',#GET{desc}})]" class="ajax" onclick="jQuery(this).parent('form').submit()">
-					[(#VAL{inscription3:}|concat{[(#CLE|replace{'_table',''})]}|_T)]
+			<th class="[(#ENV{ordre}|=={[(#CLE|replace{'_table',''}|replace{'_nocreation',''})]}|?{[on (#GET{class_desc})],'both'})]">
+				<a href="[(#SELF|parametre_url{'ordre',[(#CLE|replace{'_table',''}|replace{'_nocreation',''})]}|parametre_url{'desc',#GET{desc}})]" class="ajax" onclick="jQuery(this).parent('form').submit()">
+					[(#VAL{inscription3:}|concat{[(#CLE|replace{'_table',''}|replace{'_nocreation',''})]}|_T)]
 				</a>
-			</th>
-			]
+			</th>]
 			</BOUCLE_champshead>
 		</tr>
 	</thead>
@@ -64,8 +63,8 @@
 		</td>
 		<BOUCLE_champscorps(DATA){source table,#CONFIG{inscription3}}{valeur = 'on'}>
 			[(#CLE|match{_table}|oui)
-			<td[ class="(#_auteurs:EDIT{[(#CLE|replace{'_table',''})]})"]>
-				[(#CLE|replace{'_table',''}|inscription3_recuperer_champs{#_auteurs:ID_AUTEUR})]
+			<td[ class="(#_auteurs:EDIT{[(#CLE|replace{'_table',''}|replace{'_nocreation',''})]})"]>
+				[(#CLE|replace{'_table',''}|replace{'_nocreation',''}|inscription3_recuperer_champs{#_auteurs:ID_AUTEUR})]
 			</td>]
 		</BOUCLE_champscorps>
 	</tr>
