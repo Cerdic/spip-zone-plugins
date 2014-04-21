@@ -11,7 +11,7 @@
         <fieldset><legend><:agenda:label_vous_inscrire:></legend>
         [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
         [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-      <ul>
+      <ul class="evenements">
            [(#PLUGIN{declinaisons}|?{
                  [(#INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons,env})]
                  ,
@@ -22,7 +22,7 @@
       </fieldset>
       <fieldset>
           <legend><:form_forum_identifiants:></legend>
-          <ul>
+          <ul class="identifiants">
              <INCLURE{fond=formulaires/inc-reservation_connection,env}/>   
           </ul>
       </fieldset>
