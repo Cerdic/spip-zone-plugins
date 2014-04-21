@@ -122,7 +122,7 @@ function formulaires_reservation_verifier_dist($id='',$id_article=''){
         else{
             $obligatoires=array('nom','email');
             
-        if(_request('id_objet_prix'))array_push($obligatoires,'id_objet_prix');
+        if(test_plugin_actif('declinaisons'))array_push($obligatoires,'id_objet_prix');
         else  array_push($obligatoires,'id_evenement');
        
             foreach($obligatoires AS $champ){
@@ -151,7 +151,7 @@ function formulaires_reservation_verifier_dist($id='',$id_article=''){
         $champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
         $erreurs=array_merge($erreurs,saisies_verifier($champs_extras_auteurs));
         }
-
+	if (count($erreurs) AND !isset($erreurs['message_erreur'])) $erreurs['message_erreur'] = _T('reservation:message_erreur');
 	return $erreurs;
 }
 

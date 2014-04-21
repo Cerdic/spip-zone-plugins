@@ -1,16 +1,13 @@
 <div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,#ENV{id_evenement}}">
-    [(#ENV{editable}|non)
     [<div class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</div]
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-    ]
+
     [(#ENV{editable})
     <form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
         [(#REM) declarer les hidden qui declencheront le service du formulaire 
         parametre : url d'action ]
         #ACTION_FORMULAIRE{#ENV{action}}
         <fieldset><legend><:agenda:label_vous_inscrire:></legend>
-        [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-        [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
       <ul class="evenements">
            [(#PLUGIN{declinaisons}|?{
                  [(#INCLURE{fond=formulaires/inc-reservation_evenements_declinaisons,env})]
