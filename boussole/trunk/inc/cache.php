@@ -1,7 +1,7 @@
 <?php
 /**
  * Ce fichier contient les fonctions qui permettent de construire, vérifier ou créer
- * le fichiers cache et les dossiers les contenant.
+ * les fichiers cache et les dossiers les contenant.
  *
  * @package SPIP\BOUSSOLE\Outils\Cache
  */
@@ -35,12 +35,15 @@ if (!defined('_BOUSSOLE_CACHE'))
 
 
 /**
- * Ecriture des informations complètes d'une boussole dans un cache xml
+ * Ecriture des informations complètes d'une boussole dans un cache au format XML et de son SHA.
  *
  * @param string	$cache
+ * 		Contenu XML du fichier cache à créer.
  * @param string	$alias_boussole
+ * 		Alias de la boussole dont le cache va être créé.
  *
  * @return boolean
+ * 		Toujours à vrai.
  */
 function ecrire_cache_boussole($cache, $alias_boussole){
 	// Création du dossier cache si besoin
@@ -60,9 +63,13 @@ function ecrire_cache_boussole($cache, $alias_boussole){
 
 /**
  * Vérifie l'existence du fichier cache d'une boussole et si oui retourne
- * son chemin complet
+ * son chemin complet.
+ *
+ * @param string	$alias_boussole
+ * 		Alias de la boussole dont on teste l'existence du cache.
  *
  * @return string
+ * 		Chemin du fichier cache si il existe ou chaine vide sinon.
  */
 function cache_boussole_existe($alias_boussole){
 	// Ecriture du fichier cache
@@ -79,10 +86,13 @@ function cache_boussole_existe($alias_boussole){
 
 
 /**
- * Ecriture de la liste des boussoles dans un cache xml
+ * Ecriture de la liste des boussoles dans un cache au format XML et de son SHA.
  *
  * @param string	$cache
+ * 		Contenu XML du fichier cache à créer.
+ *
  * @return boolean
+ * 		Toujours à vrai.
  */
 function ecrire_cache_liste($cache){
 	// Création du dossier cache si besoin
@@ -102,9 +112,10 @@ function ecrire_cache_liste($cache){
 
 /**
  * Vérifie l'existence du fichier cache de la liste et si oui retourne
- * son chemin complet
+ * son chemin complet.
  *
  * @return string
+ * 		Chemin du fichier cache si il existe ou chaine vide sinon.
  */
 function cache_liste_existe(){
 	// Ecriture du fichier cache
@@ -121,9 +132,10 @@ function cache_liste_existe(){
 
 
 /**
- * Supprime tous les fichiers caches xml et sha
+ * Supprime tous les fichiers caches au format XML et les fichiers SHA associés.
  *
  * @return boolean
+ * 		Toujours à vrai.
  */
 function supprimer_caches(){
 	include_spip('inc/flock');
@@ -144,6 +156,10 @@ function supprimer_caches(){
  * associée.
  *
  * @return array
+ * 		Tableau des caches recensés :
+ *
+ * 		- fichier : chemin complet du fichier cache,
+ * 		- alias : alias de la boussole ou vide si on est en présence de la liste des boussoles.
  */
 function trouver_caches(){
 	$caches = array();
