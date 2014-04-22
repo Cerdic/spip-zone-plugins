@@ -467,7 +467,6 @@ function diogene_formulaire_traiter($flux){
 			$flux['data']['editable'] = false;
 		}
 	}
-	spip_log($flux,'test');
 	return $flux;
 }
 

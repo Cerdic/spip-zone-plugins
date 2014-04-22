@@ -106,7 +106,7 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 	$infos_cherchees = array('statut');
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	
-	if ($desc = $trouver_table($table_objet, $serveur)
+	if ($desc = $trouver_table($table_objet)
 		AND isset($desc['field']['id_secteur']))
 			$infos_cherchees[] = 'id_secteur';
 		
