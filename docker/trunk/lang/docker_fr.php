@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'activer_recopie_intro' =>'Configurer l\'importation des documents distants',
+'activer_recopie_intro' =>'Configurer l\'importation des documents distants puis aller sur /?exec=import_docker',
 'configuration_copie_idem'=>'Choississez le traitement lors de l\'importation',
 'titrer_label'=>'Oui, créer les titres depuis le nom du fichier.',
 'docker_description'=>'Traitement par lot pour importer et copier localement les documents distants qui sont déjà dans votre SPIP.',
@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entrer_nblimite_documents'=>'Entrer un nombre',
 'aucun_document_distant'=>'Il n\'existe aucun document distant à importer!',
 'id_rubrique'=>'Numéro de la rubrique (option)',
+'import_docker'=>'Docker',
 'docker_lancer_importation'=>'Lancer l\'importation',
 'docker_idem_descriptif'=>'Faut-il conserver les noms originaux des fichiers?',
 'docker_titrer_descriptif'=>'Et dans ce cas, faut-il créer les titres des documents?',
