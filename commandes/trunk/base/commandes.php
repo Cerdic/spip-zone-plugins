@@ -127,7 +127,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 function commandes_declarer_tables_principales($tables_principales){
 
 	// Table commandes_details
-	$commandes_principales = array(
+	$commandes_details = array(
 		'id_commandes_detail'       => 'bigint(21) not null',
 		'id_commande'               => 'bigint(21) not null default 0',
 		'descriptif'                => 'text not null default ""',
