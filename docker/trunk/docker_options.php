@@ -2,18 +2,16 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/getdocument');
-include_spip('inc/documents');
-include_spip('inc/choisir_mode_document'); // compat core
-include_spip('inc/renseigner_document');
 
-// les options à définir depuis ecrire/?exec=configurer_docker
+// les options sont à définir depuis ecrire/?exec=configurer_docker
 include_spip('inc/config');	
 $config = lire_config('docker');
 $copie_idem= $config['copie_idem'];
 $titrer = $config['titrer'];
+$minuscules = $config['minuscules'];
 
 //si il faut titrer les documents
+//on interviendra en toute fin sur Traitement de formulaires/import_docker.php
 if($titrer){
 	define('_TITRER_DOCUMENTS', true);
 }
@@ -27,7 +25,9 @@ if($copie_idem){
 		return inc_nom_fichier_copie_locale_docker($source, $extension);
 	}
 }
-if($copie_idem OR $titrer){	
+
+if($copie_idem OR $minuscules){
+	
 	function action_ajouter_un_document($id_document, $file, $objet, $id_objet, $mode){
 		//la fonction surchargée est dans  plugins-dist/medias/action/ajouter_documents.php -> action_ajouter_un_document
 		return action_ajouter_un_document_docker($id_document, $file, $objet, $id_objet, $mode);
@@ -88,12 +88,18 @@ function action_ajouter_un_document_docker($id_document, $file, $objet, $id_obje
 
 	$source = $file['tmp_name'];
 	$nom_envoye = $file['name'];
+	
+	// option à définir depuis ecrire/?exec=configurer_docker
+	include_spip('inc/config');	
+	$config = lire_config('docker');
+	$minuscules = $config['minuscules'];
 
 	// passer en minuscules le nom du fichier, pour eviter les collisions
 	// si le file system fait la difference entre les deux il ne detectera
 	// pas que Toto.pdf et toto.pdf
 	// et on aura une collision en cas de changement de file system
-	#$file['name'] = strtolower(translitteration($file['name']));
+	if($minuscules)
+	$file['name'] = strtolower(translitteration($file['name']));
 	
 	// Pouvoir definir dans mes_options.php que l'on veut titrer tous les documents par d?faut
 	if (!defined('_TITRER_DOCUMENTS')) { define('_TITRER_DOCUMENTS', false); }
@@ -211,34 +217,11 @@ function action_ajouter_un_document_docker($id_document, $file, $objet, $id_obje
 		return _T('medias:erreur_insertion_document_base',array('fichier'=>"<em>".$file['name']."</em>"));
 	
 	document_modifier($id_document,$champs);
-	
-	
-//++ ajout plugin docker
-		$row = sql_select('titre,credits','spip_documents','id_document='.sql_quote($id_document));
-
-		if(!isset($row['titre'])){
-			$path_parts = pathinfo($source);
-			$extension = $path_parts ? $path_parts['extension'] : '';
-			if (isset($row['credits'])) $nom_envoye = basename($row['credits']);
-			// retourne le nom du fichier, mon code
-			$nom_envoye = preg_replace('#(?:.*)[^:]/(.*)#Umis','$1',$source);
-			$fichier = "$extension/$nom_envoye";
-			
-			$insert['titre'] = '';
-			if ($titrer){
-				$titre = substr($nom_envoye,0, strrpos($nom_envoye, ".")); // Enlever l'extension du nom du fichier
-				$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
-				$insert['titre'] = preg_replace(',\.([^.]+)$,', '', $titre);
-			}
-			spip_log("source=$source et local=$local et fichier=$fichier et id_document=$id_document et nom_envoye=$nom_envoye et row['credits']=".$row['credits'],"titrer_document");
-			include_spip('inc/modifier');
-			document_modifier($id_document,$insert);
-		}
-
 
 	// permettre aux plugins de faire des modifs a l'ajout initial
 	// ex EXIF qui tourne les images si necessaire
 	// Ce plugin ferait quand même mieux de se placer dans metadata/jpg.php
+	// mauvais endroit pour pouvoir accéder aux données d'un document distant, car se situe avant copier_local
 	pipeline('post_edition',
 		array(
 			'args' => array(
@@ -256,7 +239,7 @@ function action_ajouter_un_document_docker($id_document, $file, $objet, $id_obje
 		)
 	);
 
-	return $id_document ;
+	return $id_document;
 }
 
 

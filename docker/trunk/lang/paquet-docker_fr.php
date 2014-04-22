@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
-	'docker_description' => 'Interface pour l\'importation de documents distants.',
+	'docker_description' => 'Interface pour l\'importation par lots de documents distants.',
 	'docker_nom' => 'Docker',
-	'docker_slogan' => 'Importe vos documents distants',
+	'docker_slogan' => 'Importe les documents distants par lots',
 );
 
 ?>

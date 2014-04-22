@@ -50,9 +50,47 @@ function formulaires_import_docker_traiter(){
 		spip_log("document renommé id_document=".$row['id_document'],"docker");
 		//On traite les documents en les important
 		$copier_fichier($row['id_document']);
+		//On ajoute le titre après
+		docker_titrer($row['id_document']);
 	}
 	
-	return $retour;	
+	return;	
+}
+
+/**
+ * Traitements après l'édition d'un document
+ * reprend un document distant importé
+ *
+**/
+function docker_titrer($id_document){
+	// options à définir depuis ecrire/?exec=configurer_docker
+	$titrer = _TITRER_DOCUMENTS;
+	if(!isset($titrer)) return;
+
+	//on reprend le champ credit pour en extraire le titre
+	$row = sql_fetsel('titre,credits,fichier','spip_documents','id_document='.sql_quote($id_document));
+
+		if($row['titre']==''){
+			$source=$row['credits'];
+			$path_parts = pathinfo($source);
+			$extension = $path_parts ? $path_parts['extension'] : '';
+			if (isset($row['credits'])) $nom_envoye = basename($row['credits']);
+			// retourne le nom du fichier
+			$nom_envoye = preg_replace('#(?:.*)[^:]/(.*)#Umis','$1',$source);
+			$fichier = "$extension/$nom_envoye";
+			
+			$insert['titre'] = '';
+			if ($titrer){
+				$titre = substr($nom_envoye,0, strrpos($nom_envoye, ".")); // Enlever l'extension du nom du fichier
+				$titre = preg_replace(',%20+,u', ' ', $titre); // Enlever les espaces html du nom du fichier
+				$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
+				$insert['titre'] = preg_replace(',\.([^.]+)$,', '', $titre);
+			}
+			spip_log("credits=".$row['credits']."pour id_document=$id_document et nom_envoye=$nom_envoye","titrer_document");
+			include_spip('inc/modifier');
+			document_modifier($id_document,$insert);
+		}
+		
 }
 
 

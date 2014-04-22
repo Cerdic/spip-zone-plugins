@@ -13,6 +13,15 @@
 				<fieldset>
 					<legend><:docker:configuration_copie_idem:></legend>
 					<ul>
+						<li class="editer editer_docker_titrer">
+							<p class="explication"><:docker:docker_titrer_descriptif:></p>
+							<div class="choix">
+								<input type="checkbox" name="titrer"[ checked="(#ENV{titrer}|!={''}|?{'checked'})"] id="titrer" />
+								<label for="titrer"><:docker:titrer_label:></label>
+							</div>
+						</li>
+					</ul>
+					<ul>
 						<li class="editer editer_docker_idem">
 							<p class="explication"><:docker:docker_idem_descriptif:></p>
 							<div class="choix">
@@ -21,13 +30,12 @@
 							</div>
 						</li>
 					</ul>
-			
 					<ul>
-						<li class="editer editer_docker_titrer">
-							<p class="explication"><:docker:docker_titrer_descriptif:></p>
+						<li class="editer editer_docker_minuscules">
+							<p class="explication"><:docker:docker_minuscules_descriptif:></p>
 							<div class="choix">
-								<input type="checkbox" name="titrer"[ checked="(#ENV{titrer}|!={''}|?{'checked'})"] id="titrer" />
-								<label for="titrer"><:docker:titrer_label:></label>
+								<input type="checkbox" name="minuscules"[ checked="(#ENV{minuscules}|!={''}|?{'checked'})"] id="minuscules" />
+								<label for="minuscules"><:docker:minuscules_label:></label>
 							</div>
 						</li>
 					</ul>

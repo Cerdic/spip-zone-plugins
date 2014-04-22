@@ -537,6 +537,8 @@ function recuperer_infos_distantes($source, $max=0, $charger_si_petite_image = t
 			$a['titre'] = corriger_caracteres(trim($regs[1]));
 			if (!$a['taille']) $a['taille'] = strlen($page); # a peu pres
 	}
+	
+	$a['mime_type']=$mime_type;
 
 	return $a;
 }
