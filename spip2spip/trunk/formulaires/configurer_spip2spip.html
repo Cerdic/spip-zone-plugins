@@ -21,7 +21,9 @@
         datas=#ARRAY{            
       			prop,<:sites:info_statut_site_3:>,
       			publie,<:sites:info_statut_site_2:>}})]  
-				
+	<!-- import cron -->
+     [(#SAISIE{input, intervalle_cron,
+				label=<:spip2spip:cfg_intervalle_cron:>})]	
 	<!-- import date -->
    	[(#SAISIE{radio, import_date_article,
 			label=<:spip2spip:cfg_import_date_article:>,

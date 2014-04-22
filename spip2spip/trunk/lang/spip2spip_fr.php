@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_import_mot_groupe_creer' => 'Si oui, où placer les mots-clés importés ?',
   'cfg_import_mot_groupe_creer_oui' => 'Récréer les groupes des mots-clés d\'origine',
   'cfg_import_mot_groupe_creer_non' => 'Placer les mots-clés dans le groupe',
+  'cfg_intervalle_cron' => 'Intervalle de passage du CRON (en minutes)',
   'cfg_titre_parametrages' => 'Options d\'import et d\'export des articles d\'un réseau Spip2spip',
   
   // E

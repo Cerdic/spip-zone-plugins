@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip2spip"
 	categorie="edition"
-	version="3.0.1"
+	version="3.0.2"
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/spip2spip-32.png"
