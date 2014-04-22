@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_cache_boussoles' => 'File cache of hosted compasses list',
 	'info_configurer_boussole' => 'This form allows you to configure the compass display by choosing the websites you want to display or not and their order in a group. The non-displayed websites have hatched background and grey fonts.',
 	'info_declarer_boussole_manuelle' => 'The form allows you to manually declare a compass hosted on this site. Once declared the compass becomes accessible for the client sites using this server.',
-	'info_fichier_boussole' => 'Enter the url of your compass description file.',
 	'info_importer_boussole' => 'This option allows you to import the collection of compass sites installed on your site. If some of the selected compass sites are already referenced, their parameters will be synchronised.',
 	'info_liste_aucun_cache' => 'No file cache has been generated yet for hosted compasses. Click "Update file caches" button to run the generation.',
 	'info_liste_aucun_hebergement' => 'No compasses are being hosted yet. Use the form below to declare a compass manually or activate a compass plugin on that site.',

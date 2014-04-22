@@ -50,7 +50,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_cache_boussole' => 'Cache kompasu "@boussole@"',
 	'info_cache_boussoles' => 'Cache kompasov na serveri',
 	'info_configurer_boussole' => 'Tento formulár vám umožňuje nastaviť zobrazenie kompasu na vybraných stránkach tak, že si vyberiete, v akom poradí a v akej skupine sa stránky majú alebo nemajú zobraziť. Stránky, ktoré sa nebudú zobrazovať, budú označené tieňom v pozadí a sivým písmom.',
-	'info_fichier_boussole' => 'Zadajte adresu súboru s opisom svojho kompasu',
 	'info_liste_aucun_serveur' => 'Pre klientsku stránku nebol nastavený žiaden server.',
 	'info_liste_aucune_boussole' => 'Do vašej databázy ešte nebol pridaný žiaden kompas. Na jeho pridanie použite formulár, ktorý sa nachádza nižšie.',
 	'info_rubrique_parent' => 'Na vytváranie stránok kompasu si musíte vybrať titulnú rubriku.',

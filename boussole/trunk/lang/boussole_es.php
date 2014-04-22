@@ -53,7 +53,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_cache_boussoles' => 'Caché de las brújulas alojadas',
 	'info_configurer_boussole' => 'Este formulario le permite configurar la visualización de la brújula eligiendo los sitios a mostrar o no y el orden de visualización en un grupo. Los sitios no mostrados se indican por un fondo tramado y una fuente color gris. ',
 	'info_declarer_boussole_manuelle' => 'Este formulario le permite añadir una brújula manual alojada en este sitio. Una vez añadida, la brújula estará disponible en los sitios cliente que utilicen este servidor.',
-	'info_fichier_boussole' => 'Introduzca la url del archivo de descripción de su brújula',
 	'info_importer_boussole' => 'Esta opción le permite importar el conjunto de los sitios web de una brújula instalada en su web. Si algunos sitios de la brújula elegida ya están referenciados, no se crearán de nuevo pero sus datos serán sincronizados con aquellos proporcionados por la brújula para estos mismos sitios web.',
 	'info_liste_aucun_cache' => 'Ninguna caché ha sido todavía creada para las brújulas albergadas. Utilice el botón «actualizar las cachés» para crearlas.',
 	'info_liste_aucun_hebergement' => 'Ninguna brújula está aún alojada en este servidor. Utilice el siguiente formulario para añadir una brújula manual o active un plugin de brújula en este sitio.',
