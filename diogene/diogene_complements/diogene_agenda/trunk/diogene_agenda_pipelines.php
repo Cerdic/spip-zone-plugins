@@ -19,38 +19,56 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		if(is_array(unserialize($flux['args']['options_complements']['agenda_caches'])))
 			$flux['args']['contexte']['agenda_caches'] = unserialize($flux['args']['options_complements']['agenda_caches']);
 		
+		$evenement = array();
 		$evenement['repetitions'] = array();
 		if(intval($id_objet)){
 			$evenement = sql_fetsel('*','spip_evenements','id_article='.intval($id_objet));
 			unset($evenement['titre']);
 			unset($evenement['statut']);
 			unset($evenement['id_article']);
-			$repetitons = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($id_evenement),'','date_debut');
-			foreach($repetitons as $d){
-				$evenement['repetitions'][] = date('d/m/Y',strtotime($d['date_debut']));
+			if(intval($evenement['id_evenement']) > 0){
+				$repetitons = sql_allfetsel("date_debut","spip_evenements","id_evenement_source=".intval($evenement['id_evenement']),'','date_debut');
+				foreach($repetitons as $d){
+					$evenement['repetitions'][] = date('d/m/Y',strtotime($d['date_debut']));
+				}
 			}
-		}else{
-			$t=time();
-			$evenement["date_debut"] = date('Y-m-d H:i:00',$t);
-			$evenement["date_fin"] = date('Y-m-d H:i:00',$t+3600);
-			$evenement['horaire'] = 'oui';
+			else{
+				$evenement = array();
+			}
 		}
-		$champs = objet_info('evenement','champs_editables');
 		
+		/**
+		 * Quels sont les champs à charger depuis l'environnement lors du chargement
+		 * Par exemple lorsqu'il y a une erreur dans verifier :
+		 * Les champs editables de la table "evenements"
+		 * On ajoute manuellement heure_debut et heure_fin
+		 */
+		$champs = objet_info('evenement','champs_editables');
+		$champs[] = 'heure_debut';
+		$champs[] = 'heure_fin';
 		foreach($champs as $champ){
 			if(_request($champ))
 				$evenement[$champ] = _request($champ);
 		}
-		$evenement['repetitions'] = implode(',',$evenement['repetitions']);
+		
+		if(count($evenement['repetitions']) > 0)
+			$evenement['repetitions'] = implode(',',$evenement['repetitions']);
 
 		if(isset($flux['args']['options_complements']['agenda_legende']) && strlen($flux['args']['options_complements']['agenda_legende']) > 0){
 			$evenement['agenda_legende'] = $flux['args']['options_complements']['agenda_legende'];
 		}
-		// dispatcher date et heure s'ils existent
-		if($evenement["date_debut"])
+		/**
+		 * dispatcher date et heure s'ils existent
+		 * On ne le fait que si :
+		 * - date_debut et date_fin existent
+		 * - date_debut et date_fin sont des dates mysql (pas récupérées de l'environnement)
+		 */
+		if($evenement["date_debut"] && preg_match('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',$evenement["date_debut"]))
 			list($evenement["date_debut"],$evenement["heure_debut"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_debut"])));
-		if($evenement["date_fin"])
+
+		if($evenement["date_fin"] && preg_match('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',$evenement["date_fin"]))
 			list($evenement["date_fin"],$evenement["heure_fin"]) = explode(' ',date('d/m/Y H:i',strtotime($evenement["date_fin"])));
+
 		// traiter specifiquement l'horaire qui est une checkbox
 		if (_request('date_debut') AND !_request('horaire'))
 			$evenement['horaire'] = 'oui';
