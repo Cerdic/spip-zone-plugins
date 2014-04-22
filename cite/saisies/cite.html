@@ -1,10 +1,14 @@
 #INCLURE{fond=saisies/textarea,env}
 
+#SET{uniqid, #ENV{nom}|uniqid}
+<div id="#GET{uniqid}"></div>
+
 <style type="text/css">
 .editer_[(#ENV{nom}) ] .markItUpHeader{ display:none; }
+.saisie_cite img{ vertical-align:baseline; }
 </style>
-#SET{uniqid, #ENV{nom}|uniqid}
-<script type="text/javascript" id="#GET{uniqid}">
+
+<script type="text/javascript">
 <!--
 ;(function($){
 	$(function(){
@@ -17,32 +21,33 @@
 		var champ = '#ENV{nom}'.toUpperCase();
 		// On cherche le champ HTML et son contenu
 		var textarea = ici.parents('.editer').find('textarea');
+		textarea.val(cite_nettoyer_citations(textarea.val()));
 		// On met la valeur d'origine dans une data
 		textarea.data('oldValue', textarea.val());
-		//var texte = textarea.val();
 		
-		/*$.each(citations, function(i, v){
-			citation = $.trim(citations[i]).replace(/^</, '').replace(/.>$/, '');
-			params = $.map(citation.split('|'), String.trim);
-			params.splice(0,1);
-			params[0] = 'variante=' + params[0];
-			citations[i] = new Object;
-			$.each(params, function(j, param){
-				param = param.split('=');
-				citations[i][param[0].trim()] = param[1].trim();
-			});
-		});*/
-		
+		// On cache le vrai champ et on ajoute l'aide à l'édition en JS
 		textarea
 			.hide()
 			.parents('.saisie_cite')
 				.append(cite_previsu_edit(textarea, champ, objet));
 	});
 	
+	function cite_nettoyer_citations(texte){
+		citations = texte.match(/<cite[^>]*>/g);
+		
+		if (citations){
+			return citations.join("\n") + "\n";
+		}
+		else{
+			return '';
+		}
+	}
+	
 	function cite_previsu_edit(textarea, champ, objet){
-		var phtml;
+		var html;
 		var citations = textarea.val().match(/<cite[^>]*>/g);
 		
+		// On charge la prévisualisation HTML des modèles grâce à l'action du porte-plume
 		$.ajax( {
 			type: 'POST',
 			async: false,
@@ -54,7 +59,7 @@
 			},
 			success: function(data) {
 				var previsu = $(data);
-				phtml = previsu
+				html = previsu
 					.find('.cite')
 						.find('.cite_exports').remove().end()
 						.each(function(i, e){
@@ -98,9 +103,11 @@
 					function(){
 						var oldValue = textarea.data('oldValue');
 						var newValue = textarea.val();
-						
+					
 						if (newValue !== oldValue){
+							newValue = cite_nettoyer_citations(newValue);
 							textarea.data('oldValue', newValue);
+							textarea.val(newValue);
 							// On vire toute la prévisu
 							previsu.remove();
 							// On refait la prévisu
@@ -114,7 +121,7 @@
 				);
 			}
 		} );
-		return phtml;
+		return html;
 	}
 })(jQuery);
 -->
