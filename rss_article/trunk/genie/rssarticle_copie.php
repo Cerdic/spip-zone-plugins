@@ -203,7 +203,7 @@ function clean_utf8($t) {
 	return $t;
 }
 
-//
+
 //passe le html en SPIP
 //repris de memo.php, merci
 
@@ -228,8 +228,8 @@ function html2spip($lapage){
 	include_spip('inc/charsets');
 	$lapage = html2unicode($lapage, true); //secure?
 		
-	// liens
-	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>]*)[^<>]>(.*?)<\/a>,uims", "[\\2->\\1]", $lapage);
+	// liens avec possibilités de non fermeture du tag
+	$lapage = preg_replace(",<a[ \t\n\r][^<>]*href=[^<>]*(http[^<>]*)[^<>]>(.*?)<,uims", "[\\2->\\1] <", $lapage);
 
 	// images (cf ressource)
 	$lapage = preg_replace(",<img[ \t\n\r][^<>]*src=[^<>]*(http[^<>'\"]*)[^<>]*>,uims","[img]\\1[//img]", $lapage);
@@ -258,6 +258,9 @@ function html2spip($lapage){
 	
 	//retablir les images pour les lire avec le plugin ressource
 	$lapage = preg_replace('#\[img\](.*)\[\//img\]#Umis', "<$1>", $lapage);
+	
+	//nettoyer les "] qui dépassent parfois
+	$lapage = preg_replace(",\"\],uims", "]", $lapage);
 	
 	return $lapage;
 }
