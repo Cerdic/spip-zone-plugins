@@ -3,7 +3,7 @@
 	<slogan>Ins&#233;rer des r&#233;f&#233;rences bibliographiques</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.1</version>
+	<version>0.6.1</version>
 	<etat>stable</etat>
 	<description>Le plugin Cite fournit des mod&#232;les permettant de citer proprement des r&#233;f&#233;rences bibliographiques dans vos articles tout en offrant un export dans des formats bibliographiques courants.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3698</lien>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="cite"
 	categorie="edition"
-	version="0.5.1"
+	version="0.6.1"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/cite-32.png"
