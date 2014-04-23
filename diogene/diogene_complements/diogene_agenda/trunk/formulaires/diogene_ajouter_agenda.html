@@ -5,6 +5,11 @@
 		<ul>
 			<li class='editer editer_date fieldset'>
 				<ul>
+					<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre_evenement}|oui)erreur]">
+						<label for="titre_evenement"><:agenda:evenement_titre:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_evenement})</span>
+						]<input type='text' class='text' name='titre_evenement' id='titre_evenement' value="#ENV{titre_evenement}" />
+					</li>
 					<li class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
 						<label for="horaire"><:agenda:evenement_horaire:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
@@ -20,7 +25,7 @@
 						/></span>
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
 						]<label for="date_fin" class='date_fin'><:agenda:evenement_date_a:></label>
-						<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
+						<span class='afficher_hoxraire[(#ENV{horaire}|=={oui}|non)none]'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
 						<input type='text' class='text heure' name='heure_fin' id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]"
 						/></span><input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
 					</li>

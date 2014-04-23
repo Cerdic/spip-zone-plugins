@@ -23,6 +23,8 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		$evenement['repetitions'] = array();
 		if(intval($id_objet)){
 			$evenement = sql_fetsel('*','spip_evenements','id_article='.intval($id_objet));
+			if($evenement['titre'] != sql_getfetsel('titre','spip_evenements','id_article='.intval($id_objet)))
+				$evenement['titre_evenement'] = $evenement['titre'];
 			unset($evenement['titre']);
 			unset($evenement['statut']);
 			unset($evenement['id_article']);
@@ -46,6 +48,7 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		$champs = objet_info('evenement','champs_editables');
 		$champs[] = 'heure_debut';
 		$champs[] = 'heure_fin';
+		$champs[] = 'titre_evenement';
 		foreach($champs as $champ){
 			if(_request($champ))
 				$evenement[$champ] = _request($champ);
@@ -119,10 +122,38 @@ function diogene_agenda_diogene_traiter($flux){
 		include_spip('formulaires/editer_evenement');
 		if(intval($id_article) > 0){
 			set_request('id_parent',$id_article);
+			
+			/**
+			 * On fait attention à donner le titre de l'évènement si envoyé
+			 * sinon ce sera le titre de l'article
+			 */
+			$titre_article = false;
+			if(strlen(_request('titre_evenement')) > 0){
+				$titre_article = _request('titre');
+				set_request('titre',_request('titre_evenement'));
+			}
+			
+			/**
+			 * On fait attention à donner un statut existant au statut
+			 */
+			$statuts = array_keys(objet_info('evenement','statut_titres'));
+			if(!in_array(_request('statut'),$statuts)){
+				$statut_article = _request('statut');
+				set_request('statut',$statuts[0]);
+			}
+
 			if(_request('id_evenement'))
 				formulaires_editer_evenement_traiter_dist(_request('id_evenement'), $id_article,false, false, 'evenements_edit_config');
 			else
 				formulaires_editer_evenement_traiter_dist('new', $id_article,false, false, 'evenements_edit_config');
+			
+			/**
+			 * On remet le statut et le titre de l'article dans l'environnement du $_POST
+			 */
+			if($statut_article)
+				set_request('statut',$statut_article);
+			if($titre_article)
+				set_request('titre',$titre_article);
 		}
 	}
 	return $flux;
