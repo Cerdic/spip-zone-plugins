@@ -1,24 +1,19 @@
 <BOUCLE_commande(COMMANDES){id_commande=#ENV{id}}{statut?}>
-<div class='infos commande'>
+<div class='infos'>
+<div class='numero'><:commandes:info_numero:><p>#ID_COMMANDE</p></div>
 
-	<div class='numero'><:commandes:info_numero:><p>#ID_COMMANDE</p></div>
+[(#FORMULAIRE_INSTITUER_OBJET{commandes,#ID_COMMANDE})]
 
-	[(#FORMULAIRE_INSTITUER_OBJET{commandes,#ID_COMMANDE})]
+[(#REM) Bouton suppression
+][(#AUTORISER{supprimer,commande,#ID_COMMANDE}|oui)
+	[(#URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE,#URL_ECRIRE{commandes}}|icone_horizontale{<:commandes:supprimer:>,commande,del})]
+]
 
-	[(#REM) Mode de paiement
-	][<div class='numero mode_paiement'><:commandes:label_mode_paiement:> :<p>(#MODE_PAIEMENT|nom_mode_paiement)</p></div>]
-
-
-	[(#REM) Bouton suppression
-	][(#AUTORISER{supprimer,commande,#ID_COMMANDE}|oui)
-		[(#URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE,#URL_ECRIRE{commandes}}|icone_horizontale{<:commandes:supprimer:>,commande,del})]
-	]
-
-	[(#REM) Bouton voir en ligne
-	][(#VAL{redirect}
-		|generer_url_action{type=commandes&id=#ID_COMMANDE}
-		|parametre_url{var_mode,calcul}
-		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+[(#REM) Bouton voir en ligne
+][(#VAL{redirect}
+	|generer_url_action{type=commandes&id=#ID_COMMANDE}
+	|parametre_url{var_mode,calcul}
+	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
 
 </div>
 </BOUCLE_commande>
