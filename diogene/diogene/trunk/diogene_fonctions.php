@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Redéfinition de la balise #URL_ARTICLE
  * http://doc.spip.org/@balise_URL_ARTICLE_dist
  * 
- * Si l'article n'existe pas ou n'est pas publier, on envoie vers la page publique de publication
+ * Si l'article n'existe pas ou n'est pas publié, on envoie vers la page publique de publication
  * Pratique pour les liens vers associé à une auteur mais pas encore publiés
  * 
  * @param Champ $p
