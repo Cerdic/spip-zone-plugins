@@ -1,4 +1,13 @@
 <?php
+/**
+ * Fonctions de prix du plugin Commandes
+ *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Prix
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;

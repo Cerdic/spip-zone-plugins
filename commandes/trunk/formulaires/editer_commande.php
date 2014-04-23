@@ -7,7 +7,6 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
-	include_spip('inc/config');
 	return array(
 		array(
 			'saisie' => 'input',
@@ -49,6 +48,22 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 				'horaire' => 'oui'
 			)
 		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'frais_de_port',
+				'label' => _T('commandes:label_frais_de_port'),
+				'explication' => _T('commandes:explication_frais_de_port')
+			)
+		),
+		array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => 'mode_paiement',
+				'label' => _T('commandes:label_mode_paiement'),
+				'datas' => commandes_lister_modes_paiement_dist()
+			)
+		)
 	);
 }
 
@@ -125,7 +140,7 @@ function formulaires_editer_commande_charger($id_commande='new', $retour='', $li
  *     Tableau des erreurs
  */
 function formulaires_editer_commande_verifier($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	//normaliser les champs de dates
+	// normaliser les champs de dates
 	// chaque saisie $date est un tableau avec une entrée "date" (jour/mois/annee) et une entrée "heure" séparée (heures:minutes)
 	$type_dates = array('date','date_envoi','date_paiement');
 	foreach ($type_dates as $type_date){

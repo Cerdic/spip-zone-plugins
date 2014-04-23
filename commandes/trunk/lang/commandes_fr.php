@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'etat' => 'État',
 	'explications_notifications_statuts' => 'Notification lors du changement d’état',
 	'explications_notifications_statuts_aucune' => 'Aucune notification lors du changement d’état',
+	'explication_frais_de_port' => 'Montant sans la devise',
 
 	// F
 	'facture_date' => 'Date : <span>@date@</span>',
@@ -85,11 +86,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_passee_le' => 'passée le',
 	'label_payee_le' => 'payée le',
 	'label_recherche' => 'Rechercher',
+	'label_frais_de_port' => 'Frais de port',
+	'label_mode_paiement' => 'Mode de paiement',
+	'label_sous_total_ttc' => 'Sous-total TTC',
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
 	'modifier_commande_statut' => 'Cette commande est :',
 	'montant' => 'Montant',
+	'montant_ttc' => 'Montant TTC',
 
 	// N
 	'nom_bouton_plugin' => 'Commandes',
@@ -126,6 +131,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'parametres_duree_vie_explication' => 'Saisir la durée de vie (en heures) d’une commande avec le statut en cours',
 	'parametres_duree_vie_label' => 'Durée de vie',
 	'passer_la_commande' => 'Passer la commande',
+	'paiement_espece' => 'Espèces',
+	'paiement_cheque' => 'Chèque',
+	'paiement_virement' => 'Virement bancaire',
+	'paiement_cb' => 'Carte bancaire',
+	'paiement_paypal' => 'Paypal',
+	'paiement_bitcoin' => 'Bitcoin',
+	'paiement_autre' => 'Autre',
 
 	// R
 	'recapitulatif' => 'Récapitulatif de commande :',

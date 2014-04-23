@@ -26,6 +26,7 @@ function commandes_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['commandes'] = 'commandes';
 	$interface['table_des_tables']['commandes_details'] = 'commandes_details';
+	$interface['table_des_traitements']['FRAIS_DE_PORT']['commandes'] = 'prix_formater(%s)';
 	
 	return $interface;
 }
@@ -49,6 +50,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			'id_commande'        => 'bigint(21) not null',
 			'reference'          => 'varchar(255) not null default ""',
+			'frais_de_port'      => 'float NOT NULL DEFAULT 0',
+			'mode_paiement'      => 'tinytext NOT NULL DEFAULT ""',
 			'id_auteur'          => 'bigint(21) not null default 0',
 			'statut'             => 'varchar(25) not null default "encours"', // pourra être "encours", "paye", "envoye", "retour", "retour_partiel"...
 			'date'               => 'datetime not null default "0000-00-00 00:00:00"',
@@ -63,8 +66,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 		),
 		'date'                       => "date",
 		'titre'                      => "reference AS titre, '' AS lang",
-		'champs_editables'           => array('id_auteur', 'date_paiement', 'date_envoi'),
-		'champs_versionnes'          => array('id_auteur', 'date_paiement', 'date_envoi'),
+		'champs_editables'           => array('id_auteur', 'frais_de_port', 'mode_paiement', 'date_paiement', 'date_envoi'),
+		'champs_versionnes'          => array('id_auteur', 'frais_de_port', 'mode_paiement', 'date_paiement', 'date_envoi'),
 		'rechercher_champs'          => array('reference' => 8, 'id_commande' => 8),
 		'rechercher_jointures'       => array(
 		                                    'auteur' => array('nom' => 1),

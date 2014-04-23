@@ -8,7 +8,7 @@
 		commande       tableau contenant le detail de la commande
 ]
 <BOUCLE_commande(COMMANDES){id_commande}{tout}{statut?}>
-
+#SET{frais_de_port,#FRAIS_DE_PORT*}
 [(#REM)
 	stocker le contenu de la commande dans la variable "details"
 	on utilise \#ENV{id_commande}, sinon \#ENV{commande}
@@ -21,6 +21,7 @@
 	descriptif, #DESCRIPTIF*,
 	quantite, #QUANTITE,
 	prix_unitaire_ht, #PRIX_UNITAIRE_HT*,
+	taxe, #TAXE*,
 	prix, #PRIX*}}}
 </BOUCLE_commande_details>
 #SET{commande, #ARRAY{details, #GET{details}}}
@@ -31,7 +32,7 @@
 [(#REM) Affichage du detail dans une table ]
 <BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>
 
-<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>
+[(#REM)<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>]
 
 <div class="liste-objets">
 <table class="liste contenu-commande">
@@ -41,7 +42,7 @@
 			<th scope="col" class="objet"><:commandes:label_objet:></th>
 			<th scope="col" class="description"><:commandes:designation:></th>
 			<th scope="col" class="quantite"><:commandes:abbr_quantite:></th>
-			<th scope="col" class="montant"><:commandes:montant:></th>
+			<th scope="col" class="montant"><:commandes:montant_ttc:></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -60,7 +61,8 @@
 			</td>
 			<td class="description">
 				[(#VALEUR{descriptif})]
-				[(#VALEUR{quantite}|>{1}|oui)
+				[(#REM) On affiche le prix unitaire HT si il y a une taxe, ou si quantité > 1  ]
+				[(#VALEUR{quantite}|>{1}|oui|ou{#VALEUR{taxe}|>{0}|oui}|oui)
 				[<small class="prix_unitaire">\((#VALEUR{prix_unitaire_ht}|prix_formater) <:commandes:abbr_hors_taxe:>\)</small>]
 				]
 			</td>
@@ -72,9 +74,17 @@
 	</tbody>
 	<tfoot>
 		<tr class="total_ttc">
-			<td colspan="4" class="descriptif"><:prix:label_total_ttc:></td>
+			<td colspan="4" class="descriptif">[(#GET{frais_de_port}|>{0}|?{<:commandes:label_sous_total_ttc:>,<:prix:label_total_ttc:>})]</td>
 			<td class="montant">[(#GET{total}|prix_formater)]</td>
 		</tr>
+		[(#GET{frais_de_port}|>{0}|oui)<tr class="total_ttc">
+			<td colspan="4" class="descriptif"><:commandes:label_frais_de_port:></td>
+			<td class="montant">[(#GET{frais_de_port}|prix_formater)]</td>
+		</tr>
+		<tr class="total_ttc">
+			<td colspan="4" class="descriptif"><:prix:label_total_ttc:></td>
+			<td class="montant">[(#GET{frais_de_port}|plus{#GET{total}}|prix_formater)]</td>
+		</tr>]
 	</tfoot>
 </table>
 </div>
