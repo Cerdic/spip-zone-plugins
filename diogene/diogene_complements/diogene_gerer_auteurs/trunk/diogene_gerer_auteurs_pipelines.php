@@ -28,19 +28,22 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 		$id_table_objet = id_table_objet($flux['args']['type']);
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
 		$auteur_uniques = array();
+
 		if(is_numeric($id_objet)){
 			include_spip('inc/autoriser');
 			if(!autoriser('associerauteurs',$objet,$id_objet))
 				return $flux;
 			
 			$nb_auteurs = sql_countsel('spip_auteurs','statut < 7');
+
 			if($nb_auteurs > 1){
-				$auteurs = sql_allfetsel("auteur.nom, auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien USING(id_auteur)","auteur.id_auteur!=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
+				$auteurs = sql_allfetsel("auteur.nom, auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur!=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
+				if($GLOBALS['visiteur_session']['statut']=='0minirezo'){
+					$auteur = sql_fetsel("nom, id_auteur,statut","spip_auteurs","id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']));
+					$flux['args']['contexte']['diogene_gerer_auteurs_remove'][$auteur['id_auteur']] = $auteur['nom'];
+				}
 				if(count($auteurs) > 0){
-					foreach($auteurs as $auteur){
-						$auteur_uniques[$auteur['id_auteur']] = $auteur['nom'];
-					}
-					$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteur_uniques;
+					$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteurs;
 				}
 				if(_request('diogene_gerer_auteurs_supprimer'))
 					$flux['args']['contexte']['diogene_gerer_auteurs_supprimer'] = _request('diogene_gerer_auteurs_supprimer');
@@ -48,7 +51,7 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 			}
 		}else{
 			if($GLOBALS['visiteur_session']['statut']=='0minirezo'){
-				$auteur = sql_fetsel("nom, id_auteur,statut","spip_auteurs","id_auteur=".$GLOBALS['visiteur_session']['id_auteur']);
+				$auteur = sql_fetsel("nom, id_auteur,statut","spip_auteurs","id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']));
 				$auteur_uniques[$auteur['id_auteur']] = $auteur['nom'];
 			}
 			if(count($auteur_uniques) > 0)
