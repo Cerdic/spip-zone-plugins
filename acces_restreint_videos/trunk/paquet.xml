@@ -1,8 +1,8 @@
 <paquet
 	prefix="accesrestreintvideos"
 	categorie="auteur"
-	version="1.1.0"
-	etat="test"
+	version="1.2.0"
+	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/accesrestreintvideos-64.png"
 	documentation=""

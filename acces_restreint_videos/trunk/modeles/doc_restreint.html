@@ -19,7 +19,12 @@
 	[(#ENV{id}|>{0}|?{#INCLURE{fond=modeles/emb,env},#INCLURE{fond=modeles/oembed,env}})]
 </BOUCLE_autorisation>
 	<div class="doc_restreint">
-	<h3 class="h3 h3-like"><:accesrestreintvideos:texte_restreint_titre:></h3>
-	[(#CONFIG{accesrestreintvideos/texte_restreint}|propre|sinon{<:accesrestreintvideos:texte_restreint:>})]
+		[(#REM) S'il y a un identifiant, on essaye de trouver la vignette ]
+		<BOUCLE_vignette(DOCUMENTS){id_document=#ENV{id}}>
+		#LOGO_DOCUMENT{vignette}
+		</BOUCLE_vignette>
+		<hr/>
+		<h3 class="h3 h3-like"><:accesrestreintvideos:texte_restreint_titre:></h3>
+		[(#CONFIG{accesrestreintvideos/texte_restreint}|propre|sinon{<:accesrestreintvideos:texte_restreint:>})]
 	</div>
 <//B_autorisation>
