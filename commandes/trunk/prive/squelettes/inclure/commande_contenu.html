@@ -4,34 +4,11 @@
 ][(#REM)
 	Inclus dans prive/objet/contenu/commande.html
 	Parametres :
-		id_commande    identifiant de la commande
-		commande       tableau contenant le detail de la commande
+		id_commande*    identifiant de la commande
 ]
 <BOUCLE_commande(COMMANDES){id_commande}{tout}{statut?}>
 
-[(#REM)
-	stocker le contenu de la commande dans la variable "details"
-	on utilise \#ENV{id_commande}, sinon \#ENV{commande}
-]
-#SET{details, #ARRAY}
-<BOUCLE_commande_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
-#SET{details, #GET{details}|push{#ARRAY{
-	objet,#OBJET,
-	id_objet,#ID_OBJET,
-	descriptif, #DESCRIPTIF*,
-	quantite, #QUANTITE,
-	prix_unitaire_ht, #PRIX_UNITAIRE_HT*,
-	prix, #PRIX*}}}
-</BOUCLE_commande_details>
-#SET{commande, #ARRAY{details, #GET{details}}}
-</BOUCLE_commande>
-#SET{commande,#ENV{commande}}
-<//B_commande>
-
-[(#REM) Affichage du detail dans une table ]
-<BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>
-
-<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>
+[(#REM)<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>]
 
 <div class="liste-objets">
 <table class="liste contenu-commande">
@@ -40,42 +17,56 @@
 			<th scope="col" class="logo"></th>
 			<th scope="col" class="objet"><:commandes:label_objet:></th>
 			<th scope="col" class="description"><:commandes:designation:></th>
-			<th scope="col" class="quantite"><:commandes:abbr_quantite:></th>
-			<th scope="col" class="montant"><:commandes:montant:></th>
+			<th scope="col" class="prix_unitaire" title="<:commandes:label_prix_unitaire:> <:commandes:abbr_hors_taxe:>"><:commandes:abbr_prix_unitaire:>&nbsp;<:commandes:abbr_hors_taxe:></th>
+			<th scope="col" class="quantite" title="<:commandes:label_quantite:>"><:commandes:abbr_quantite:></th>
+			<th scope="col" class="taxe"><:commandes:label_taxe:></th>
+			<th scope="col" class="montant"><:commandes:montant:> <:commandes:abbr_toutes_taxes_comprises:></th>
 		</tr>
 	</thead>
 	<tbody>
 		#SET{total,0}
-		<BOUCLE_details(POUR){tableau #GET{commande/details}}>
+		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
 		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo">
-				<a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">
-					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet=#VALEUR{objet}, id_objet=#VALEUR{id_objet}})]
+				[(#OBJET|et{#ID_OBJET}|oui)
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet, id_objet})]
 				</a>
-			</td>
-			<td class="objet">
-				<a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">
-					[(#VALEUR{objet}|objet_info{texte_objet}|_T)][ <:info_numero_abbreviation:>(#VALEUR{id_objet})]
-				</a>
-			</td>
-			<td class="description">
-				[(#VALEUR{descriptif})]
-				[(#VALEUR{quantite}|>{1}|oui)
-				[<small class="prix_unitaire">\((#VALEUR{prix_unitaire_ht}|prix_formater) <:commandes:abbr_hors_taxe:>\)</small>]
 				]
 			</td>
-			<td class="quantite">[(#VALEUR{quantite})]</td>
-			<td class="montant">[(#VALEUR{prix}|prix_formater)]</td>
+			<td class="objet">
+				[(#OBJET|et{#ID_OBJET}|oui)
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+					[(#OBJET|objet_info{texte_objet}|_T)][ <:info_numero_abbreviation:>(#ID_OBJET)]
+				</a>
+				]
+			</td>
+			<td class="description">[(#DESCRIPTIF*)]</td>
+			<td class="prix_unitaire">[(#PRIX_UNITAIRE_HT)]</td>
+			<td class="quantite">
+				[(#QUANTITE|>{0}|?{
+					[(#QUANTITE)]
+					,[<span class='null'>(#QUANTITE)</span>]
+				})]
+			</td>
+			<td class="taxe">
+				[(#TAXE*|>{0}|?{
+					[(#TAXE*|mult{100})%]
+					,[<span class='null'>(#TAXE|intval)</span>]
+				})]
+			</td>
+			<td class="montant">[(#PRIX)]</td>
 		</tr>
-		#SET{total,#GET{total}|plus{#VALEUR{prix}}}
+		#SET{total,#GET{total}|plus{#PRIX*}}
 		</BOUCLE_details>
 	</tbody>
 	<tfoot>
 		<tr class="total_ttc">
-			<td colspan="4" class="descriptif"><:prix:label_total_ttc:></td>
+			<td colspan="6" class="descriptif"><:prix:label_total_ttc:></td>
 			<td class="montant">[(#GET{total}|prix_formater)]</td>
 		</tr>
 	</tfoot>
 </table>
 </div>
-</BOUCLE_test>
+
+</BOUCLE_commande>
