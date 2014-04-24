@@ -39,11 +39,14 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 			if($nb_auteurs > 1){
 				$auteurs = sql_allfetsel("auteur.nom, auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur!=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
 				if($GLOBALS['visiteur_session']['statut']=='0minirezo'){
-					$auteur = sql_fetsel("nom, id_auteur,statut","spip_auteurs","id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']));
-					$flux['args']['contexte']['diogene_gerer_auteurs_remove'][$auteur['id_auteur']] = $auteur['nom'];
+					$auteur = sql_fetsel("auteur.nom, auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
+					if(is_array($auteur))
+						$flux['args']['contexte']['diogene_gerer_auteurs_remove'][$auteur['id_auteur']] = $auteur['nom'];
 				}
 				if(count($auteurs) > 0){
-					$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteurs;
+					foreach($auteurs as $auteur){
+						$flux['args']['contexte']['diogene_gerer_auteurs_remove'][$auteur['id_auteur']] = $auteur['nom'];
+					}
 				}
 				if(_request('diogene_gerer_auteurs_supprimer'))
 					$flux['args']['contexte']['diogene_gerer_auteurs_supprimer'] = _request('diogene_gerer_auteurs_supprimer');

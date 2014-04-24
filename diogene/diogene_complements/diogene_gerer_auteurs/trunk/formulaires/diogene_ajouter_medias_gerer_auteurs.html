@@ -15,7 +15,7 @@
 			<li class="editer editer_gerer_auteurs_remove">
 				<label><:diogene_gerer_auteurs:label_gerer_auteurs_remove:></label>
 				<p class="explication"><:diogene_gerer_auteurs:explication_gerer_auteurs_remove:></p>
-				<BOUCLE_auteur_remove(POUR){tableau #ENV**{diogene_gerer_auteurs_remove}}>
+				<BOUCLE_auteur_remove(DATA){source table,#ENV**{diogene_gerer_auteurs_remove,#ARRAY}}>
 					<BOUCLE_si_autoriser(CONDITION){si #SESSION{id_auteur}|=={#CLE}|et{#AUTORISER{configurer}|non}|non}>
 					<div class="choix">
 						<input type="checkbox" name="diogene_gerer_auteurs_supprimer[]" class="checkbox" id='champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE' value='#_auteur_remove:CLE'[(#_auteur_remove:CLE|in_array{#ENV{diogene_gerer_auteurs_supprimer,#ARRAY}}|oui)checked="checked"] />
