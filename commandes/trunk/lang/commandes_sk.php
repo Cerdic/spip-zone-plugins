@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'abbr_hors_taxe' => 'Bez DPH', # RELIRE
+	'abbr_quantite' => 'Množstvo',
 	'action_facture' => 'Faktúra',
 	'action_modifier' => 'Zmeniť',
 	'action_supprimer' => 'Odstrániť',
@@ -29,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference' => 'Číslo',
 	'commande_reference_numero' => 'Č. objednávky ',
 	'commande_statut' => 'Štádium',
+	'commande_titre' => 'Objednávka',
 	'commandes_titre' => 'Objednávky',
 	'configurer_notifications_commandes' => 'Nastaviť oznamy',
 	'configurer_titre' => 'Nastaviť zásuvný modul Objednávky',
@@ -39,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'date_commande_label' => 'Dátum vytvorenia:',
 	'date_envoi_label' => 'Dátum odoslania:',
-	'date_maj_label' => 'Dátum aktualizácie:', # MODIF
+	'date_maj_label' => 'Naposledy aktualizované:',
 	'date_paiement_label' => 'Dátum platby:',
 	'designation' => 'Označenie',
 	'details_commande' => 'Podrobnosti objednávky:',
@@ -68,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_commandes_statut_attente' => '@nb@ objednávok čaká na potvrdenie',
 	'info_nb_commandes_statut_partiel' => '@nb@ objednávok bolo čiastočne zaplatených',
 	'info_nb_commandes_statut_paye' => '@nb@ objednávok bolo zaplatených',
+	'info_numero' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
@@ -79,6 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filtre_tous_clients' => 'Všetci zákazníci',
 	'label_filtre_tous_statuts' => 'Všetky stavy',
 	'label_filtre_toutes_dates' => 'Všetky dátumy',
+	'label_objet' => 'Objekt',
 	'label_passee_le' => 'objednané',
 	'label_payee_le' => 'zaplatené',
 	'label_recherche' => 'Vyhľadávať',
@@ -145,8 +150,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_changer_statut_commande' => 'Táto objednávka je:',
+	'titre_adresse_client' => 'Adresa odberateľa',
+	'titre_adresse_commande' => 'Adresa priradená k objednávke',
+	'titre_adresses_associees' => 'Priradené adresy',
+	'titre_adresses_client' => 'Adresa odberateľa',
+	'titre_adresses_commande' => 'Adresy priradené k objednávke',
 	'titre_commandes_actives' => 'Aktívne objednávky',
 	'titre_commandes_auteur' => 'Objednávky od zákazníka',
+	'titre_contenu_commande' => 'Obsah objednávky',
+	'titre_informations_client' => 'Odberateľ',
+	'titre_logo_commande' => 'Logo objednávky',
 
 	// U
 	'une_commande_de' => 'Objednávka: ',
