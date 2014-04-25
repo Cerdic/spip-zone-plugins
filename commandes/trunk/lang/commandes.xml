@@ -1,5 +1,5 @@
 <traduction module="commandes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/commandes/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="128" traduits="122" relire="1" modifs="1" nouveaux="4" pourcent="95.31">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="133" traduits="122" relire="1" modifs="1" nouveaux="9" pourcent="91.73">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cyril MARION" lien="http://trad.spip.net/auteur/cyril-marion" />
 		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
@@ -9,12 +9,12 @@
 		<traducteur nom="jaro" lien="" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="128" traduits="25" relire="0" modifs="2" nouveaux="101" pourcent="19.53">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="133" traduits="25" relire="0" modifs="2" nouveaux="106" pourcent="18.80">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="128" traduits="128" relire="0" modifs="1" nouveaux="-1" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="133" traduits="133" relire="0" modifs="1" nouveaux="-1" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="128" traduits="128" relire="1" modifs="0" nouveaux="-1" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="133" traduits="128" relire="1" modifs="0" nouveaux="4" pourcent="96.24">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

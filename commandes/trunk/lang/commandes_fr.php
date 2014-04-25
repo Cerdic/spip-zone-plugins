@@ -7,9 +7,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'abbr_hors_taxe' => 'HT',
-	'abbr_toutes_taxes_comprises' => 'TTC',
 	'abbr_prix_unitaire' => 'P.U',
 	'abbr_quantite' => 'Qté',
+	'abbr_toutes_taxes_comprises' => 'TTC',
 	'action_facture' => 'Facture',
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
@@ -86,10 +86,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_objet' => 'Objet',
 	'label_passee_le' => 'passée le',
 	'label_payee_le' => 'payée le',
+	'label_prix_unitaire' => 'Prix unitaire',
+	'label_quantite' => 'Quantité',
 	'label_recherche' => 'Rechercher',
 	'label_taxe' => 'Taxe',
-	'label_quantite' => 'Quantité',
-	'label_prix_unitaire' => 'Prix unitaire',
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
