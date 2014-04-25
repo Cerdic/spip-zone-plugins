@@ -20,7 +20,7 @@ function formulaires_participer_evenement_charger_dist($id_evenement){
 		return false;
 
 	// si anonyme, on echoue avec avertissement
-	if (!isset($GLOBALS['visiteur_session']) || !$GLOBALS['visiteur_session']['id_auteur'])
+	if (!isset($GLOBALS['visiteur_session']['id_auteur']) || !$GLOBALS['visiteur_session']['id_auteur'])
 		return array(
 			'message_erreur'=>_T('agenda:connexion_necessaire_pour_inscription'),
 			'editable'=>false
