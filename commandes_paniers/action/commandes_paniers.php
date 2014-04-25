@@ -17,6 +17,9 @@ function action_commandes_paniers_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 	
+	// création d'une commande "en cours"
+	// Ses détails sont ensuite remplis d'après le panier en session
+	// via la pipeline post_insertion
 	$id_objet = creer_commande_encours();
 	
 	$supprimer_panier = charger_fonction('supprimer_panier_encours', 'action/');
