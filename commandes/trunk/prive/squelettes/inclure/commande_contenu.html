@@ -6,7 +6,7 @@
 	Parametres :
 		id_commande*    identifiant de la commande
 ]
-<BOUCLE_commande(COMMANDES){id_commande}{tout}{statut?}>
+<BOUCLE_commande(COMMANDES){id_commande}{statut?}>
 
 [(#REM)<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>]
 
@@ -24,8 +24,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		#SET{total,0}
-		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
+		#SET{tri,#ARRAY{objet,-1,id_commandes_detail,1}}
+		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{!par objet}{par id_commandes_detail}>
 		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo">
 				[(#OBJET|et{#ID_OBJET}|oui)
@@ -57,13 +57,12 @@
 			</td>
 			<td class="montant">[(#PRIX)]</td>
 		</tr>
-		#SET{total,#GET{total}|plus{#PRIX*}}
 		</BOUCLE_details>
 	</tbody>
 	<tfoot>
 		<tr class="total_ttc">
 			<td colspan="6" class="descriptif"><:prix:label_total_ttc:></td>
-			<td class="montant">[(#GET{total}|prix_formater)]</td>
+			<td class="montant">[(#PRIX)]</td>
 		</tr>
 	</tfoot>
 </table>
