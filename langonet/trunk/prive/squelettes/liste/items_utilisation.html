@@ -1,5 +1,5 @@
 <B_liste_items>
-[(#ENV{pertinence}|=={peut_etre}|oui)<p><:langonet:info_utilises_peut_etre{module=#ENV{module}}:></p>]
+	[(#VAL{langonet:info_utilises_}|concat{#ENV{pertinence}}|_T{#ARRAY{module, #ENV{module}}})]
 <div class="liste-objets items_langue">
 	<table class="spip liste">
 		<caption[ class="(#ENV{pertinence}|=={non}|?{error,notice})"]>

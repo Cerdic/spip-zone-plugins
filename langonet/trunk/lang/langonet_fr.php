@@ -69,6 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_verifier' => 'Cette option vous permet de vérifier les fichiers de langue d\'un module donné sous deux angles complémentaires. D\'une part, il est possible de vérifier si des items de langue utilisés dans un groupe de fichiers (un plugin, par exemple) ne sont pas définis dans le fichier de langue idoine, et d\'autre part, que certains items de langue définis ne sont plus utilisés.',
 	'info_verifier_l' => 'Cette option vous permet de lister et de corriger toutes les utilisations de la fonction _L() dans les fichiers PHP d\'une arborescence donnée.',
 	'info_utilises_peut_etre' => 'Les items de langue ci-dessous sont peut-être obsolètes. Néanmoins, il est possible qu\'ils soient en fait utilisés dans un contexte complexe comme par exemple :  <code>_T(\'@module@:item_\'.$variable))</code>. Nous vous invitons donc à les vérifier un par un en utilisant les cas d\'utilisations affichés en regard de chaque item de langue suspects.',
+	'info_utilises_non' => 'Les items de langue ci-dessous sont obsolètes. Néanmoins, il est possible que cela soit dû à une absence de détection sachant qu\'aujourd\'hui les expressions de langue écrites sur plusieurs lignes ne sont pas recensées. Nous vous invitons donc à vérifier le code.',
 
 	// L
 	'label_affichage' => 'Mode d\'affichage de la traduction',

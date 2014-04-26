@@ -113,10 +113,11 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 		$fichiers_langue = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
 		$resultats = reperer_items_manquants($module, $utilises, $GLOBALS[$var_langue], $fichiers_langue);
 	}
-	elseif ($GLOBALS[$var_langue])
+	elseif ($GLOBALS[$var_langue]) {
 		$resultats = reperer_items_inutiles($utilises, $GLOBALS[$var_langue]);
+	}
 
-	// Completude de la structure de résultats
+	// Compléments de la structure de résultats
 	$resultats['module'] = $module;
 	$resultats['langue'] = $fichier_langue;
 	$resultats['ou_fichier'] = $ou_fichiers;
@@ -288,28 +289,40 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $lig
 /// define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 /// define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*{0,2})");
 
-function extraire_arguments($occ) {
+/**
+ * @param string	$raccourci_regexp
+ *
+ * @return array
+ */
+function extraire_arguments($raccourci_regexp) {
 	include_spip('public/phraser_html');
-	$args = '';
-	if (preg_match_all('/' . NOM_DE_CHAMP . '/S', $occ, $m, PREG_SET_ORDER)) {
-		foreach($m as $match) {
-		  $nom = strtolower($match[4]);
-		  $occ = str_replace($match[0], "@$nom@", $occ);
-		  $args[]= "$nom=" . $match[0];
+	$arguments = '';
+	if (preg_match_all('/' . NOM_DE_CHAMP . '/S', $raccourci_regexp, $matches, PREG_SET_ORDER)) {
+		foreach($matches as $_match) {
+		  $nom = strtolower($_match[4]);
+		  $raccourci_regexp = str_replace($_match[0], "@$nom@", $raccourci_regexp);
+		  $arguments[]= "$nom=" . $_match[0];
 		}
-		$args = '{' . join(',',$args) . '}';
+		$arguments = '{' . join(',',$arguments) . '}';
 	}
 
-	return array($occ, $args);
+	return array($raccourci_regexp, $arguments);
 }
 
-//  Construire la liste des items definis mais apparament pas utilises
 
+/**
+ * Construire la liste des items definis mais apparament pas utilises.
+ *
+ * @param array		$utilises
+ * @param array		$items
+ *
+ * @return array
+ */
 function reperer_items_inutiles($utilises, $items) {
 	$item_non = $item_peut_etre = $fichier_peut_etre = array();
 	$index_variable = '';
 	foreach ($items as $_raccourci => $_traduction) {
-		// TODO : c'est bizarre on, ne teste pas l'égalité des modules
+		// TODO : c'est bizarre on ne teste pas l'égalité des modules
 		if (!in_array ($_raccourci, $utilises['items'])) {
 			// L'item est soit non utilise, soit utilise dans un contexte variable
 			$contexte_variable = false;
@@ -337,11 +350,21 @@ function reperer_items_inutiles($utilises, $items) {
 	       );
 }
 
-// On construit la liste de tous les items definis dans les fichiers de langues fournis
-// Ensuite on construit la liste des items utilises mais non definis
+//
 
+/**
+ * Construit la liste des items utilises mais apparamment non definis.
+ *
+ * @param string	$module
+ * @param array		$utilises
+ * @param array 	$items
+ * @param array 	$fichiers_langue
+ *
+ * @return array
+ */
 function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_langue=array()) {
 
+	// Constitution du tableau de tous les items de langue fr disponibles sur le site
 	$tous_lang = array();
 	foreach ($fichiers_langue as $_fichier) {
 		$module_def = preg_match(',/lang/([^/]+)_fr\.php$,i', $_fichier, $m) ? $m[1] : '';

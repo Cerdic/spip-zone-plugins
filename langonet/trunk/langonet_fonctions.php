@@ -150,7 +150,9 @@ function exporter_tableau($tableau, $colonnes, $separateur="|") {
 			$contenu = rtrim($contenu, $separateur) . "\n";
 		}
 
-		$fichier_csv = sous_repertoire(_DIR_TMP, "csv") . 'occurrences_' . date("Ymd_His") . '.csv';
+		$dossier_csv = sous_repertoire(_DIR_TMP, 'langonet');
+		$dossier_csv = sous_repertoire($dossier_csv, 'export');
+		$fichier_csv = $dossier_csv . 'occurrences_' . date("Ymd_His") . '.csv';
 		if ($contenu)
 			ecrire_fichier($fichier_csv, $contenu);
 	}
