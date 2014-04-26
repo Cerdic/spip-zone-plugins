@@ -39,18 +39,14 @@ function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table des participants ----------------------
 	$spip_evenements_participants = array(
-			"id_evenement_participant" => "BIGINT (21) DEFAULT '0' NOT NULL",
 			"id_evenement"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 			"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-			"nom"	=> "text NOT NULL DEFAULT ''",
-			"email"	=> "tinytext NOT NULL DEFAULT ''",
 			"date" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"reponse" => "char(3) default '?' NOT NULL", // oui, non, ?
 			);
 	
 	$spip_evenements_participants_key = array(
-			"PRIMARY KEY"	=> "id_evenement_participant",
-			"KEY id_evenement"	=> "id_evenement",
+			"PRIMARY KEY"	=> "id_evenement, id_auteur",
 			"KEY id_auteur"	=> "id_auteur");
 	
 	$tables_auxiliaires['spip_evenements_participants'] = array(
