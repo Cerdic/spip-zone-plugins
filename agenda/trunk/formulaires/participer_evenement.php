@@ -12,15 +12,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_participer_evenement_charger_dist($id_evenement){
-	$valeurs = array();
+function formulaires_participer_evenement_charger_dist($id_evenement, $mode=''){
+	$valeurs = array(
+        'nom' => isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['nom'] : _request('nom'),
+        'email' => isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['email'] : _request('email'),
+        'reponse' => _request('reponse'),
+    );
 	// si pas d'evenement ou d'inscription, on echoue silencieusement
 	if (!$row = sql_fetsel('inscription,places','spip_evenements','id_evenement='.intval($id_evenement).' AND date_fin>NOW()')
 		OR !$row['inscription'])
 		return false;
 
 	// si anonyme, on echoue avec avertissement
-	if (!isset($GLOBALS['visiteur_session']['id_auteur']) || !$GLOBALS['visiteur_session']['id_auteur'])
+	if ($mode!='public' && (!isset($GLOBALS['visiteur_session']['id_auteur']) || !$GLOBALS['visiteur_session']['id_auteur']))
 		return array(
 			'message_erreur'=>_T('agenda:connexion_necessaire_pour_inscription'),
 			'editable'=>false
@@ -28,7 +32,8 @@ function formulaires_participer_evenement_charger_dist($id_evenement){
 
 	// valeurs d'initialisation
 	$valeurs['id'] = $id_evenement;
-	$valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
+    if(isset($GLOBALS['visiteur_session']['id_auteur']))
+	    $valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 
 	// si les places sont comptees, regarder si il en reste
 	if ($places = $row['places']){
@@ -49,14 +54,17 @@ function formulaires_participer_evenement_charger_dist($id_evenement){
 	return $valeurs;
 }
 
-function formulaires_participer_evenement_verifier_dist($id_evenement){
+function formulaires_participer_evenement_verifier_dist($id_evenement, $mode=''){
 	$erreurs = array();
 	$reponse = _request('reponse');
+	$nom = _request('nom');
 	// Le test de la ligne suivante sert a savoir si la reponse est vide, non?
 	// On vient juste de la recuperer ci-dessus, pas la peine de la reaffecter...
 	if (!($reponse) OR !in_array($reponse,array('oui','non','?')))
 		$erreurs['reponse'] = _T('agenda:indiquez_votre_choix');
-	elseif ($reponse!=='non') {
+	elseif ($mode=='public' && !isset($GLOBALS['visiteur_session']['id_auteur']) && !$nom)
+        $erreurs['nom'] = _T('agenda:indiquez_votre_nom');
+	elseif ($reponse!=='non' && isset($GLOBALS['visiteur_session']['id_auteur'])) {
 		$row = sql_fetsel('places','spip_evenements','id_evenement='.intval($id_evenement));
 		$valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 		if ($places = $row['places'] AND $valeurs['reponse']!==$reponse){
@@ -82,24 +90,27 @@ function formulaires_participer_evenement_verifier_dist($id_evenement){
 function formulaires_participer_evenement_traiter_dist($id_evenement){
 
 	$reponse = _request('reponse');
-	if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur'])))
-		sql_updateq('spip_evenements_participants',array('reponse'=>$reponse),'id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
-	else
-		sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'id_auteur'=>$GLOBALS['visiteur_session']['id_auteur'],'reponse'=>$reponse,'date'=>'NOW()'));
+    $nom = _request('nom');
+    $email = _request('email');
+    
+    if(isset($GLOBALS['visiteur_session']['id_auteur'])){
+        $editable = true;
+        if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur'])))
+            sql_updateq('spip_evenements_participants',array('reponse'=>$reponse,'date'=>'NOW()'),'id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
+        else
+            sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'id_auteur'=>$GLOBALS['visiteur_session']['id_auteur'],'reponse'=>$reponse,'date'=>'NOW()'));
+    } else {
+        $editable = false;
+        sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'nom'=>$nom,'email'=>$email,'reponse'=>$reponse,'date'=>'NOW()'));
+    }
+    if ($reponse=='oui')
+        $message = _T('agenda:participation_prise_en_compte');
+    elseif ($reponse=='?')
+        $message = _T('agenda:participation_incertaine_prise_en_compte');
+    else
+        $message = _T('agenda:absence_prise_en_compte');
 
-	$retour = array('editable'=>true);
-	if (!$reponse = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']))
-	OR $reponse!=_request('reponse'))
-		$retour['message_erreur'] = _T('agenda:probleme_technique');
-	else {
-		if ($reponse=='oui')
-			$message = _T('agenda:participation_prise_en_compte');
-		elseif ($reponse=='?')
-			$message = _T('agenda:participation_incertaine_prise_en_compte');
-		else
-			$message = _T('agenda:absence_prise_en_compte');
-	}
-	return array('message_ok'=>$message,'editable'=>true);
+	return array('message_ok'=>$message,'editable'=>$editable);
 }
 
 ?>
