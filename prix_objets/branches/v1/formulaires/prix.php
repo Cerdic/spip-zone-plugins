@@ -39,14 +39,18 @@ function formulaires_prix_charger_dist($id_objet,$objet='article'){
 		'id_objet'=>$id_objet,		
 		'prix_ht'=>$taxes_inclus,
 		'objet_titre'	=>'',
-        'id_objet_titre'   =>'',
         'taxes'   =>$taxes, 
         'taxe'   =>'', 
 		);
-    if(test_plugin_actif('shop_declinaisons'))$valeurs['id_declinaison']='';
+
     $valeurs['_hidden'].='<input type="hidden" name="objet" value="'.$objet.'">';  
-    $valeurs['_hidden'].='<input type="hidden" name="id_objet" value="'.$id_objet.'">';         
-    $valeurs['_hidden'].='<input type="hidden" name="id_objet_titre" value="'.$id_objet.'">';       
+    $valeurs['_hidden'].='<input type="hidden" name="id_objet" value="'.$id_objet.'">';  
+	// Si le plugin  declinaisons est activé     
+    if(test_plugin_actif('declinaisons')){
+        $valeurs['id_objet_titre']='';
+    	$valeurs['_hidden'].='<input type="hidden" name="id_objet_titre" value="'.$id_objet.'">'; 	
+    	$valeurs['id_declinaison']='';						
+    }     
 	return $valeurs;			
 }
 
