@@ -34,7 +34,6 @@ function langonet_tester_1() {
 	$essai = _T("verification:defini_html_partiel_".$suite3);
 	$essai = _T("verification:defini_html_partiel_$suite4");
 	$essai = _T("verification:defini_html_partiel_${suite5}");
-	$message = _T("verification:defini_html_partiel_{$suite6['numero']}", array('param1' => $param1, 'param2' => $param2));
 
 	// VERIFICATION _L() : Avertissements
 	$essai = _L('Test 1 _L() de langonet');

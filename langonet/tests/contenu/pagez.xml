@@ -1,0 +1,6 @@
+<page>
+	<nom><:verification:defini_xml_1:></nom>
+	<description><:verification:indefini_xml_3:></description>
+	<bloc id="identifiant" nom="verification:defini_xml_1" description="defini_xml_1:indefini_xml_3" icon="img/fichier.png" />
+	<icon>pboussole_icone-24.png</icon>
+</page>

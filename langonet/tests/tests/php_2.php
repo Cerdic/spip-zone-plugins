@@ -17,6 +17,7 @@ function langonet_tester_2() {
 
 	// VERIFICATION DEFINITION : Avertissements
 	// -- Les items suivants sont utilises dans un contexte complexe. Ce sont des items de Langonet ou pas
+	$message = _T("verification:defini_html_partiel_{$suite6['numero']}", array('param1' => $param1, 'param2' => $param2));
 
 	// VERIFICATION _L() : Erreurs
 	$essai = _L("TEST 7 _L()");
@@ -24,5 +25,12 @@ function langonet_tester_2() {
 	$essai = _L("Test multiple 1") . '_' . _L("Test multiple 2");
 	$essai = _L("Test multiple 3"); _L("Test multiple 4");
 	$essai = _L("Test multiple 5") . ' et la suite ' . _L("Test multiple 5");
+
+	// DETECTION IMPOSSIBLE POUR L'INSTANT !!!
+	$message = singulier_ou_pluriel(
+				$nb,
+				'verification:non_detecte_1_1',
+				"verification:non_detecte_1_n",
+				$options);
 }
 ?>

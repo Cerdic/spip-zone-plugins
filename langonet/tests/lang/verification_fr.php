@@ -20,12 +20,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'defini_html_partiel_4' => 'item défini utilisé dans html dans un contexte partiel #4',
 	'defini_html_singulier' => '@nb@ item défini utilisé dans html pour le singulier',
 	'defini_html_pluriel' => '@nb@ items définis utilisé dans html pour le pluriel',
-	// -- fichiers php
+	// -- fichiers php : utilisent les items ci-dessus
 
 	// Pour la vérification "utilisation"
 	'obsolete_1' => 'item défini mais non utilisé #1',
 	'obsolete_2' => 'item défini mais non utilisé #2',
 	'obsolete_3' => 'item défini mais non utilisé #3',
+
+	// Mise en évidence des cas non détectés
+	// -- avec singulier ou pluriel
+	'non_detecte_1_1' => 'item défini et utilisé mais non détecté car dans une expression sur plusieurs lignes #1 singulier',
+	'non_detecte_1_n' => 'item défini et utilisé mais non détecté car dans une expression sur plusieurs lignes #1 pluriel',
 
 );
 ?>
