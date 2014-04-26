@@ -2,7 +2,7 @@
 	<nom>Commandes de Paniers</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.2</version>
+	<version>0.1.3</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
     <slogan>Remplir une commande</slogan>

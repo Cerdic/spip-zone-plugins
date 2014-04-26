@@ -26,8 +26,8 @@ function panier2commande_post_insertion($flux){
 			$fonction_prix = charger_fonction('prix', 'inc/');
 			$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
 			foreach($panier as $emplette){
-				$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet']);
-				$prix = $fonction_prix($emplette['objet'], $emplette['id_objet']);
+				$prix_ht = $fonction_prix_ht($emplette['objet'], $emplette['id_objet'],3);
+				$prix = $fonction_prix($emplette['objet'], $emplette['id_objet'],3);
 				$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
 				sql_insertq(
 					'spip_commandes_details',
