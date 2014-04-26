@@ -1,9 +1,9 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.9.7"
+	version="1.9.8"
 	etat="test"
-	compatibilite="[3.0.10;3.0.*]"
+	compatibilite="[3.0.16;3.0.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
 	documentation=""
 	schema="1.3.3" 
@@ -25,6 +25,9 @@
 	<necessite nom="cextras" compatibilite="[3.2.4;]" />		
 	<necessite nom="facteur" compatibilite="[2.4.5;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.5;]" />	
+	<utilise nom="prix_objets" compatibilite="[1.6.5;]" />
+	<utilise nom="declinaisons" compatibilite="[1.0.3;]" />
+	<utilise nom="notifications_archive" compatibilite="[1.1.3;]" />				
 
 	<pipeline nom="autoriser" inclure="reservation_evenement_autorisations.php" /> 
 

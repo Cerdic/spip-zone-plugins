@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'merci_de_votre_reservation' => 'Thank you, your booking has been registered.',
+	'message_erreur' => 'Your input has errors!',
 	'montant' => 'Amount',
 
 	// N
