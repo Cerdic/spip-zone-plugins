@@ -38,10 +38,10 @@ if (!defined('_LANGONET_ITEM_PLUGINXML'))
 if (!defined('_LANGONET_ITEM_PAQUETXML'))
 	define("_LANGONET_ITEM_PAQUETXML", ",titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],is");
 // -- pour les autres fichiers XML
-// TODO : comment faire marcher le fait que le tag est le même (contenu) et que les quotes aussi (attribut) ?
-// TODO : comment faire aussi pour ne pas capturer ces portions ?
+// TODO : comment faire marcher le fait que le tag est le même (contenu) et que les quotes aussi (attribut)
+// TODO : comment faire aussi pour ne pas capturer ces portions
 if (!defined('_LANGONET_ITEM_XML_CONTENU'))
-	define("_LANGONET_ITEM_XML_CONTENU", ",<\w+>\s*(?:([a-z0-9_-]+):)([a-z0-9_]+)\s*</\w+>,is");
+	define("_LANGONET_ITEM_XML_CONTENU", ",<\w+>\s*(?:<:)*(?:([a-z0-9_-]+):)([a-z0-9_]+)(?::>)*\s*</\w+>,is");
 if (!defined('_LANGONET_ITEM_XML_ATTRIBUT'))
 	define("_LANGONET_ITEM_XML_ATTRIBUT", ",\w+=['\"](?:([a-z0-9_-]+):)([a-z0-9_]+)['\"],is");
 
@@ -120,7 +120,6 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 	$resultats['module'] = $module;
 	$resultats['langue'] = $fichier_langue;
 	$resultats['ou_fichier'] = $ou_fichiers;
-	// Todo : c'est quoi cette variable ?
 
 	return $resultats;
 }
@@ -160,83 +159,6 @@ function collecter_occurrences($fichiers) {
 	return $utilises;
 }
 
-function collecter_occurrences1($fichiers) {
-
-	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array(), 'item_tous' => array());
-
-	foreach ($fichiers as $_fichier) {
-		if ($contenu = file($_fichier)) {
-			foreach ($contenu as $_no_ligne => $_ligne) {
-				$type_fichier = identifier_type_fichier($_fichier);
-				if ($type_fichier == 'paquet.xml') {
-					$regexp = _LANGONET_ITEM_PAQUETXML;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-				}
-				elseif ($type_fichier == 'plugin.xml') {
-					$regexp = _LANGONET_ITEM_PLUGINXML;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-				}
-				elseif ($type_fichier == 'xml') {
-					$regexp = _LANGONET_ITEM_XML_CONTENU;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-					$regexp = _LANGONET_ITEM_XML_ATTRIBUT;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-				}
-				elseif ($type_fichier == 'yaml') {
-					$regexp = _LANGONET_ITEM_YAML;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-				}
-				elseif ($type_fichier == 'html') {
-					$regexp = _LANGONET_ITEM_HTML_BALISE;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-					$regexp = _LANGONET_ITEM_HTML_FILTRE_PLURIEL_1;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-					$regexp = _LANGONET_ITEM_HTML_FILTRE_PLURIEL_2;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-					$regexp = _LANGONET_ITEM_HTML_FILTRE_T;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-				}
-				elseif ($type_fichier == 'php') {
-					$regexp = _LANGONET_ITEM_PHP_OBJET;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-					$regexp = _LANGONET_ITEM_PHP_TRADA;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-					$regexp = _LANGONET_ITEM_PHP_TRADG;
-					if (preg_match_all($regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-						foreach ($occurrences as $_occurrence)
-							memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $regexp);
-				}
-				else {
-					spip_log("Ce type de fichier n'est pas scanné : $type_fichier", "langonet");
-				}
-			}
-		}
-	}
-
-	return $utilises;
-}
 
 /**
  * Identifie le type de fichier dans lequel chercher les occurrences d'utilisation d'items
@@ -360,36 +282,6 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $lig
 	return true;
 }
 
-function memoriser_occurrence2(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $eval=false) {
-	include_spip('inc/langonet_utils');
-
-	if (!isset($occurrence[3]))
-		$occurrence[3] = '';
-	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
-
-	if (($expression[0] == '<') AND ($suite[0] == '{') AND ($suite[1] == '=')) {
-		// $raccourci_regexp approximatif, mais pas grave: c'est pour le msg
-		$raccourci_regexp .= ' . ' . substr($suite,3);
-		$eval = true;
-	}
-	else
-		$eval = (($suite AND ($suite[0]==='.')) OR ($eval AND strpos($raccourci_regexp, '$')));
-	if (!$raccourci_regexp) return; // TODO : c'est quoi ça ?
-
-	list($item, $args) = extraire_arguments($raccourci_regexp);
-	list($raccourci_argumente, $raccourci_brut) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
-	$raccourci_argumente .= $args;
-
-	$occurrence[] = $ligne;
-
-	$utilises['items'][$raccourci_argumente] = $item;
-	$utilises['modules'][$raccourci_argumente] = $module;
-	$utilises['item_tous'][$raccourci_argumente][$fichier][$no_ligne][] = $occurrence;
-	$utilises['suffixes'][$raccourci_argumente] = $eval;
-	$utilises['debug'][] = $occurrence;
-
-}
-
 
 ///  gerer les args
 /// La RegExp utilisee ci-dessous est defini dans phraser_html ainsi:
@@ -417,7 +309,7 @@ function reperer_items_inutiles($utilises, $items) {
 	$item_non = $item_peut_etre = $fichier_peut_etre = array();
 	$index_variable = '';
 	foreach ($items as $_raccourci => $_traduction) {
-		// TODO : c'est bizarre que l'on ne teste pas l'égalité des modules
+		// TODO : c'est bizarre on, ne teste pas l'égalité des modules
 		if (!in_array ($_raccourci, $utilises['items'])) {
 			// L'item est soit non utilise, soit utilise dans un contexte variable
 			$contexte_variable = false;
