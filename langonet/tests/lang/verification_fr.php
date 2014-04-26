@@ -29,8 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Mise en évidence des cas non détectés
 	// -- avec singulier ou pluriel
-	'non_detecte_1_1' => 'item défini et utilisé mais non détecté car dans une expression sur plusieurs lignes #1 singulier',
-	'non_detecte_1_n' => 'item défini et utilisé mais non détecté car dans une expression sur plusieurs lignes #1 pluriel',
+	'non_detecte_1_1' => 'item défini et utilisé mais non détecté car dans une expression sur plusieurs lignes #1 : singulier',
+	'non_detecte_1_n' => 'item défini et utilisé mais non détecté car dans une expression sur plusieurs lignes #1 : pluriel',
+	'non_detecte_2' => 'item défini et utilisé mais non détecté car dans une expression sur plusieurs lignes #2 : #VAL et _T',
 
 );
 ?>
