@@ -78,6 +78,14 @@ function agenda_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_update',"spip_evenements", array('date_creation'=>'maj')),
 	);
 
+    $maj['0.27.0'] = array(
+        // modification de la cle primaire (id_evenement,id_auteur) : les participants peuvent ne pas être des auteurs
+        // ajout d'une clé primaire "neutre" auto-incrémentée
+        array('sql_alter','TABLE spip_evenements_participants DROP PRIMARY KEY'),
+        array('sql_alter','TABLE spip_evenements_participants ADD id_evenement_participant BIGINT(21) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST'),
+        array('maj_tables',array('spip_evenements_participants')),
+    );
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
