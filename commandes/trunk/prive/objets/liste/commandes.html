@@ -8,11 +8,10 @@
 	date_paiement,-1,
 	reference,1
 	id_auteur,1
-	prix,1
 }})
 ]<B_liste_commandes>
 #ANCRE_PAGINATION
-[(#ENV{titre_dehors}|oui)[<h2>(#ENV*{titre,#TOTAL_BOUCLE|singulier_ou_pluriel{commandes:info_1_commande,commandes:info_nb_commandes}})</h2>]]
+[(#ENV{titre_dehors}|oui)[<h2>(#ENV*{titre,#TOTAL_BOUCLE|objet_afficher_nb{commande}})</h2>]]
 <div class="liste-objets commandes">
 	[(#ENV{cacher_tri}|non)
 	<div class='pagination tri'>
@@ -21,8 +20,9 @@
 		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{id_commande,<:info_numero_abbreviation:>,ajax})][
 		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{reference,<:commandes:reference:>,ajax})][
 		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{statut,<:commandes:etat:>,ajax})][
-		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date,<:commandes:commande_date:>,ajax})][
-		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date_paiement,<:commandes:commande_date_paiement:>,ajax})]
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date,<:commandes:date_commande_label_court:>,ajax})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date_paiement,<:commandes:date_paiement_label_court:>,ajax})][
+		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date_envoi,<:commandes:date_envoi_label_court:>,ajax})]
 	</div>
 	]
 	[<div class="pagination">(#PAGINATION{prive})</div>]
@@ -30,11 +30,11 @@
 		[(#ENV{titre_dehors}|non)[<caption><strong class="caption">(#ENV*{titre,#TOTAL_BOUCLE|singulier_ou_pluriel{commandes:info_1_commande,commandes:info_nb_commandes}})</strong></caption>]]
 		<thead>
 			<tr class='first_row'>
-				<th class='etat' scope='col'><:commandes:etat:></th>
-				<th class='reference' scope='col'><:commandes:reference:></th>
+				<th class='etat' scope='col'>#</th>
+				<th class='infos' scope='col'><:commandes:label_infos:></th>
 				<th class='dates' scope='col'><:commandes:label_commande_dates:></th>
-				<th class='descriptif' scope='col'><:commandes:contenu:></th>
-				<th class='montant' scope='col'><:commandes:montant:></th>
+				<th class='descriptif' scope='col'><:commandes:label_objets:></th>
+				<th class='montant' scope='col'><:prix:label_total_ttc:></th>
 				[(#ENV{simuler}|=={1}|oui)<th scope='col'><:commandes:simuler:></th>]
 			</tr>
 		</thead>
@@ -44,52 +44,59 @@
 			{tri #ENV{order,date},#GET{defaut_tri}}
 			{pagination #ENV{nb,20}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#STATUT)]">
-				<td class='etat'>[(#STATUT|puce_statut{commande,#ID_COMMANDE})&nbsp;][(#STATUT|commandes_lister_statuts)]</td>
+				<td class='etat'>[(#STATUT|puce_statut{commande,#ID_COMMANDE})&nbsp;]</td>
 				<td class='infos'>
-					<div class='id'>
-						<a href="#URL_ECRIRE{commande,id_commande=#ID_COMMANDE}">
-							[<:commandes:commande_titre:>&nbsp;<:info_numero_abbreviation:>(#ID_COMMANDE)]
-						</a>
-					</div>
-					<div class='reference'>
-						<strong>#REFERENCE</strong>
-					</div>
+					[<div class='id'>
+						<a href="[(#ID_COMMANDE|generer_url_entite{commande})]"><:commandes:commande_titre:>&nbsp;<:info_numero_abbreviation:>(#ID_COMMANDE)</a>
+					</div>]
+					[<div class='reference'>
+						(#REFERENCE)
+					</div>]
 					<div class='qui'>
-						[(#ID_AUTEUR|>{0}|?{
-							<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[
-								(#INFO_PRENOM{auteur, #ID_AUTEUR}) ][(#INFO_NOM{auteur, #ID_AUTEUR})
-							]</a>,
-							<em><:info_aucun_auteur:></em>}
-						)]
+						<BOUCLE_client(CONTACTS ?){id_auteur}><a href="[(#ID_CONTACT|generer_url_entite{contact})]">#CIVILITE #PRENOM #NOM </a></BOUCLE_client>
+						[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#INFO_NOM{auteur, #ID_AUTEUR})</a>]<//B_client>
 					</div>
 				</td>
 				<td class='dates'>
 					<ul>
-						[<li class="date">
-							<span class="label"><:commandes:label_passee_le:>:</span><br>
-							(#DATE|affdate_jourcourt)[&nbsp;(#DATE|affdate{H:i})]
-						</li>]
+						#SET{date,#DATE|annee|=={#ENV{date}|annee}|?{
+							#DATE|affdate{jourcourt},
+							#DATE|jour|concat{'&nbsp;',#DATE|nom_mois{abbr},'&nbsp;'#DATE|annee}}}
+						<li class="date">
+							[<span class="label"><:commandes:date_commande_label_court:>&nbsp;:</span>&nbsp;(#GET{date})]
+						</li>
 						[(#DATE_PAIEMENT|intval|>{0}|oui)
+						#SET{date_paiement,#DATE_PAIEMENT|annee|=={#ENV{date}|annee}|?{
+							#DATE_PAIEMENT|affdate{jourcourt},
+							#DATE_PAIEMENT|jour|concat{'&nbsp;',#DATE_PAIEMENT|nom_mois{abbr},'&nbsp;'#DATE_PAIEMENT|annee}}}
 						<li class="date paiement">
-							<span class="label"><:commandes:label_payee_le:>:</span><br>
-							[(#DATE_PAIEMENT|affdate_jourcourt)][&nbsp;(#DATE_PAIEMENT|affdate{H:i})]
+							[<span class="label"><:commandes:date_paiement_label_court:>&nbsp;:</span>&nbsp;(#GET{date_paiement})]
 						</li>
 						]
+						[(#DATE_ENVOI|intval|>{0}|oui)
+						#SET{date_envoi,#DATE_ENVOI|annee|=={#ENV{date}|annee}|?{
+							#DATE_ENVOI|affdate{jourcourt},
+							#DATE_ENVOI|jour|concat{'&nbsp;',#DATE_ENVOI|nom_mois{abbr},'&nbsp;'#DATE_ENVOI|annee}}}
+						<li class="date envoi">
+							[<span class="label"><:commandes:date_envoi_label_court:>&nbsp;:</span>&nbsp;(#GET{date_envoi})]
+						</li>
+						]
+					</ul>
 				</td>
 				<td class='descriptif'>
-					<B_detail_commande>
-					<table class="simple">
-						<BOUCLE_detail_commande(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
-						<tr>
-							<td class="titre">[(#QUANTITE|>{1}|oui)[(#QUANTITE|concat{&times;})] ][(#DESCRIPTIF*|typo|supprimer_numero)]</td>
-							[<td class="montant">(#TOTAL_BOUCLE|>{1}|oui)[<small>(#PRIX)</small>]</td>]
-						</td>
-						</tr>
-						</BOUCLE_detail_commande>
-					</table>
-					</B_detail_commande>
+					<B_details>
+					<ul>
+						<BOUCLE_details(COMMANDES_DETAILS){id_commande}{objet!=''}{id_objet!=0}{!par objet}{par id_commandes_detail}>
+						<li>
+							[[(#QUANTITE|>{1}|oui)[(#QUANTITE|concat{&times;})]&nbsp;]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+								(#DESCRIPTIF*|typo|supprimer_numero|sinon{#VAL{info_sans_titre}|_T|wrap{<em>}})
+							</a>]
+						</li>
+						</BOUCLE_details>
+					</ul>
+					</B_details>
 				</td>
-				<td class='montant'>#PRIX</td>
+				<td class='montant'>[(#PRIX)]</td>
 				[(#ENV{simuler}|=={1}|oui)
 				<td class='simuler'>
 				[(#BOUTON_ACTION{
