@@ -7,9 +7,7 @@
 		id_commande*    identifiant de la commande
 ]
 <BOUCLE_commande(COMMANDES){id_commande}{statut?}>
-
-[(#REM)<h2 class="titrem"><:commandes:titre_contenu_commande:></h2>]
-
+<B_details>
 <div class="liste-objets">
 <table class="liste contenu-commande">
 	<thead>
@@ -27,32 +25,30 @@
 		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{!par objet}{par id_commandes_detail}>
 		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo">
-				[(#OBJET|et{#ID_OBJET}|oui)
+				[(#OBJET|objet_icone|et{#ID_OBJET}|oui)
 				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
 					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet, id_objet})]
 				</a>
 				]
 			</td>
 			<td class="objet">
-				[(#OBJET|et{#ID_OBJET}|oui)
+				[(#OBJET|objet_icone|et{#ID_OBJET}|oui)
 				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
 					[(#OBJET|objet_info{texte_objet}|_T)][ <:info_numero_abbreviation:>(#ID_OBJET)]
 				</a>
 				]
 			</td>
-			<td class="description">[(#DESCRIPTIF*)]</td>
-			<td class="prix_unitaire">[(#PRIX_UNITAIRE_HT)]</td>
-			<td class="quantite">
-				[(#QUANTITE|>{0}|?{
-					[(#QUANTITE)]
-					,[<span class='null'>(#QUANTITE)</span>]
-				})]
+			<td class="description #EDIT{descriptif}">
+				[(#DESCRIPTIF*|typo|supprimer_numero|sinon{#VAL{commandes:info_sans_descriptif}|_T|wrap{<span class='null'>}})]
 			</td>
-			<td class="taxe">
-				[(#TAXE*|>{0}|?{
-					[(#TAXE*|mult{100})%]
-					,[<span class='null'>(#TAXE|intval)</span>]
-				})]
+			<td class="prix_unitaire #EDIT{prix_unitaire_ht}[ (#PRIX_UNITAIRE_HT*|>{0}|non)null]">
+				[(#PRIX_UNITAIRE_HT|round{2})]
+			</td>
+			<td class="quantite #EDIT{quantite}[ (#QUANTITE*|>{0}|non)null]">
+				[(#QUANTITE)]
+			</td>
+			<td class="taxe #EDIT{taxe}[ (#TAXE*|>{0}|non)null]">
+				[(#TAXE*|mult{100})%]
 			</td>
 			<td class="montant">[(#PRIX)]</td>
 		</tr>
@@ -66,5 +62,7 @@
 	</tfoot>
 </table>
 </div>
-
+</B_details>
+<div class="error"><:commandes:info_commande_vide:></div>
+<//B_details>
 </BOUCLE_commande>

@@ -1,58 +1,88 @@
 [(#REM)
-	Informations sur le client d'une commande
+	Informations sur le client d'une commande : nom, emails, numéros de téléphones, et les champs extras éventuels
+	On cherche dans l'ordre :
+	- un contact (si plugin éponyme)
+	- sinon l'auteur
 ][(#REM)
 	Inclus dans prive/objet/contenu/commande.html
-	Parametres :
+	Paramètres :
 		id_commande    identifiant de la commande
 ]
-<BOUCLE_commande(COMMANDES){id_commande}{tout}{statut?}>
+<BOUCLE_commande(COMMANDES){id_commande}{tout}>
 
 <h2 class="titrem"><:commandes:titre_informations_client:></h2>
 
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
-
-[(#REM) On peut avoir le plugin contacts et organisations d'installé
-        Du coup, on stock les infos dans des variables
-        pour éviter d'avoir à doubler le code ]
-<BOUCLE_contact(CONTACTS?){id_auteur}>
-#SET{logo,#LOGO_CONTACT|sinon{#LOGO_AUTEUR}|sinon{#VAL{auteur}|objet_icone}}
-#SET{nom,#NOM|concat{' ',#PRENOM}} #SET{email,#EMAIL} #SET{url,#URL_ECRIRE{contact,id_contact=#ID_CONTACT}}
-#SET{id,#ID_CONTACT} #SET{numeros,#ARRAY}
-<BOUCLE_tel_contact(NUMEROS numeros_liens?){id_contact}>#SET{numeros,#GET{numeros}|push{#NUMERO}}</BOUCLE_tel_contact>
-</BOUCLE_contact>
-#SET{logo,#LOGO_AUTEUR|image_reduire{100}|sinon{#VAL{auteur}|objet_icone}}
-#SET{nom,#NOM|concat{' ',#PRENOM}} #SET{email,#EMAIL} #SET{url,#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}}
-#SET{id,#ID_AUTEUR} #SET{numeros,#ARRAY}
-<BOUCLE_tel(NUMEROS numeros_liens?){id_auteur}>#SET{numeros,#GET{numeros}|push{#NUMERO}}</BOUCLE_tel>
-<//B_contact>
-
 <table class="client-commande">
 	<tbody>
 		<tr>
-			[<td class="logo"><a href="[(#GET{url})]">(#GET{logo})</a></td>]
+
+			[(#REM)
+				Si on a un contact lié à l'auteur, on l'affiche en priorité
+			]
+			<BOUCLE_contact(CONTACTS ?){id_auteur}>
+			[<td class="logo"><a href="[(#ID_CONTACT|generer_url_entite{contact})]">(#LOGO_CONTACT|sinon{#LOGO_AUTEUR}|sinon{#VAL{contact}|objet_icone{32}}|image_reduire{80})</a></td>]
 			<td class="infos">
-				<div class="champ contenu_nom[ (#GET*{nom}|strlen|?{'',vide})]">
-					<a href="[(#GET{url})]"><h3 dir='#LANG_DIR' class='nom'>[(#GET{nom})]</h3></a>
+				<div class="champ contenu_nom[ (#CIVILITE|sinon{#PRENOM}|sinon{#NOM}|non)vide]">
+					<div dir='#LANG_DIR' class='nom'>
+						<h4 class='nom'>
+							[<span class="#EDIT{civilite}">(#CIVILITE)</span>][ <span class="#EDIT{prenom}">(#PRENOM)</span>][ <span class="#EDIT{nom}">(#NOM)</span>]
+						</h4>
+					</div>
 				</div>
-				<div class="champ contenu_email[ (#GET*{email}|strlen|?{'',vide})]">
-					<span class="label"><:email_2:></span>
-					<a href="mailto:[(#GET{email})]"><span dir='#LANG_DIR' class='email'>[(#GET{email})]</span></a>
+				<div class="champ">
+					<div dir='#LANG_DIR'>
+						<a href="[(#ID_CONTACT|generer_url_entite{contact})]">
+							[(#VAL{contact}|objet_info{texte_objet}|_T|concat{' ',#VAL{#VAL{info_numero_abbreviation}|_T},#ID_CONTACT})]
+						</a>
+					</div>
 				</div>
-				<BOUCLE_numeros(DATA){source table, #GET{numeros}}>
-				<div class="champ contenu_numero">
-					<span class="label"><:coordonnees:numero:> \##COMPTEUR_BOUCLE :</span>
-					<span dir='#LANG_DIR' class='numero'>#VALEUR</span>
-				</div>
-				</BOUCLE_numeros>
-				[(#PIPELINE{afficher_contenu_objet,#ARRAY{args,#ARRAY{type,#PLUGIN{contacts}|?{contact,auteur},id_objet,#GET{id}},data,'<div class="nettoyeur"></div>'}})]
+				<BOUCLE_emails_contact(EMAILS ?){id_contact}><div class="champ contenu_email">
+					<div dir='#LANG_DIR' class='#EDIT{email} email'><a href="mailto:[(#EMAIL|htmlspecialchars)]">#EMAIL</a></div>
+				</div></BOUCLE_emails_contact>
+				<BOUCLE_numeros_contact(NUMEROS ?){id_contact}><div class="champ contenu_numero">
+					<div dir='#LANG_DIR' class='#EDIT{numero} numero'>[(#VAL{numero}|objet_icone{16}) ]#NUMERO</div>
+				</div></BOUCLE_numeros_contact>
+				[(#REM) Pipeline pour les champs extras notamment ]
+				[(#PIPELINE{afficher_contenu_objet,#ARRAY{args,#ARRAY{type,contact,id_objet,#ID_CONTACT},data,'<div class="nettoyeur"></div>'}})]
 			</td>
+			</BOUCLE_contact>
+
+			[(#REM)
+				sinon on affiche l'auteur
+			]
+			[<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#LOGO_AUTEUR|sinon{#VAL{auteur}|objet_icone{32}}|image_reduire{80})</a></td>]
+			<td class="infos">
+				<div class="champ contenu_nom[ (#NOM*|strlen|non)vide]">
+					<div dir='#LANG_DIR' class='nom'><h4 class='nom #EDIT{nom}'>[(#NOM)]</h4></div>
+				</div>
+				<div class="champ">
+					<div dir='#LANG_DIR'>
+						<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">
+							[(#VAL{auteur}|objet_info{texte_objet}|_T|concat{' ',#VAL{#VAL{info_numero_abbreviation}|_T},#ID_AUTEUR})]
+						</a>
+					</div>
+				</div>
+				<div class="champ contenu_email">
+					<div dir='#LANG_DIR' class='#EDIT{email} email'><a href="mailto:[(#EMAIL|htmlspecialchars)]">#EMAIL</a></div>
+				</div>
+				<BOUCLE_emails_auteur(EMAILS ?){id_auteur}><div class="champ contenu_email">
+					<div dir='#LANG_DIR' class='#EDIT{email} email'><a href="mailto:[(#EMAIL|htmlspecialchars)]">#EMAIL</a></div>
+				</div></BOUCLE_emails_auteur>
+				<BOUCLE_numeros_auteur(NUMEROS ?){id_auteur}><div class="champ contenu_numero">
+					<div dir='#LANG_DIR' class='#EDIT{numero} numero'>[(#VAL{numero}|objet_icone{16}) ]#NUMERO</div>
+				</div></BOUCLE_numeros_auteur>
+				[(#REM) Pipeline pour les champs extras notamment ]
+				[(#PIPELINE{afficher_contenu_objet,#ARRAY{args,#ARRAY{type,auteur,id_objet,#ID_AUTEUR},data,'<div class="nettoyeur"></div>'}})]
+			</td>
+			<//B_contact>
+
 		</tr>
 	</tbody>
 </table>
-
 </BOUCLE_auteur>
-</B_auteur>
-<div class="notice">Aucun auteur n'est associé à la commande</div>
+
+<div class="error"><:commandes:info_aucun_client:></div>
 <//B_auteur>
 
 </BOUCLE_commande>
