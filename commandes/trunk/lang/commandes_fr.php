@@ -13,8 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_facture' => 'Facture',
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
-	'adresse_facturation' => 'Adresse de facturation',
-	'adresse_livraison' => 'Adresse de livraison',
 
 	// B
 	'bonjour' => 'Bonjour',
@@ -40,17 +38,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contenu' => 'Contenu',
 
 	// D
-	'date_commande_label' => 'Date de création :',
-	'date_envoi_label' => 'Date d’envoi :',
-	'date_maj_label' => 'Dernière mise à jour :',
-	'date_paiement_label' => 'Date de paiement :',
+	'date_commande_label' => 'Date de création',
+	'date_envoi_label' => 'Date d’envoi',
+	'date_maj_label' => 'Dernière mise à jour',
+	'date_paiement_label' => 'Date de paiement',
+	'date_commande_label_court' => 'Création',
+	'date_envoi_label_court' => 'Envoi',
+	'date_paiement_label_court' => 'Paiement',
 	'designation' => 'Désignation',
-	'details_commande' => 'Détails de commande :',
+	'details_commande' => 'Détails de commande :',
 
 	// E
 	'etat' => 'État',
 	'explications_notifications_statuts' => 'Notification lors du changement d’état',
 	'explications_notifications_statuts_aucune' => 'Aucune notification lors du changement d’état',
+	'explication_statuts_actifs' => 'Selon leur statut, certaines commandes peuvent requérir votre attention. Il s\'agit des commandes «actives», nécessitant une action de votre part. Vous pouvez les faire apparaître dans la liste des éléments en attente de validation sur la page d\'accueil.',
+	'explication_accueil_encours' => 'Signaler les commandes actives sur la page d\'accueil ?',
+	'explication_choix_statuts_actifs' => 'Statut(s) correspondant(s) aux commandes actives',
 
 	// F
 	'facture_date' => 'Date : <span>@date@</span>',
@@ -59,21 +63,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_1_commande' => '1 commande',
+	'info_1_commande_active' => '1 commande active',
 	'info_1_commande_statut_attente' => '1 commande en attente de validation',
 	'info_1_commande_statut_partiel' => '1 commande partiellement payée',
 	'info_1_commande_statut_paye' => '1 commande payée',
+	'info_1_commande_statut_envoye' => '1 commande envoyée',
+	'info_1_commande_statut_encours' => '1 commande en cours',
+	'info_1_commande_statut_erreur' => '1 commande erronée',
+	'info_1_commande_statut_retour' => '1 commande retournée',
+	'info_1_commande_statut_retour_partiel' => '1 commande partiellement retournée',
 	'info_aucun_commande' => 'Aucune commande',
 	'info_commandes' => 'Commandes',
 	'info_date_envoi_vide' => 'commande non envoyée',
 	'info_date_non_definie' => 'non définie',
 	'info_date_paiement_vide' => 'commande non payée',
 	'info_nb_commandes' => '@nb@ commandes',
+	'info_nb_commandes_actives' => '@nb@ commandes actives',
 	'info_nb_commandes_statut_attente' => '@nb@ commandes en attente de validation',
 	'info_nb_commandes_statut_partiel' => '@nb@ commandes partiellement payées',
 	'info_nb_commandes_statut_paye' => '@nb@ commandes payées',
+	'info_nb_commandes_statut_envoye' => '@nb@ commandes envoyées',
+	'info_nb_commandse_statut_encours' => '@nb@ commandes en cours',
+	'info_nb_commandes_statut_erreur' => '@nb@ commandes erronées',
+	'info_nb_commandes_statut_retour' => '@nb@ commandes retournées',
+	'info_nb_commandes_statut_retour_partiel' => '@nb@ commandes partiellement retournées',
 	'info_numero' => 'COMMANDE NUMÉRO :',
 	'info_numero_commande' => 'COMMANDE NUMÉRO :',
 	'info_toutes_commandes' => 'Toutes les commandes',
+	'info_commande_vide' => 'La commande ne comporte aucun article',
+	'info_aucun_client' => 'Aucun auteur n\'est associé à la commande',
+	'info_sans_descriptif' => 'Sans descriptif',
 
 	// L
 	'label_commande_dates' => 'Dates',
@@ -90,6 +109,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_quantite' => 'Quantité',
 	'label_recherche' => 'Rechercher',
 	'label_taxe' => 'Taxe',
+	'label_objets' => 'Objets',
+	'label_infos' => 'Infos',
+	'label_statuts_actifs' => 'Statuts',
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
@@ -154,15 +176,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_changer_statut_commande' => 'Cette commande est :',
 	'titre_adresse_client' => 'Adresse du client',
+	'titre_adresses_client' => 'Adresses du client',
+	'titre_adresse_contact' => 'Adresse du contact',
+	'titre_adresses_contact' => 'Adresses du contact',
 	'titre_adresse_commande' => 'Adresse associée à la commande',
 	'titre_adresses_associees' => 'Adresses associées',
-	'titre_adresses_client' => 'Adresses du client',
 	'titre_adresses_commande' => 'Adresses associées à la commande',
 	'titre_commandes_actives' => 'Commandes actives',
 	'titre_commandes_auteur' => 'Commandes de l’auteur',
 	'titre_contenu_commande' => 'Contenu de la commande',
 	'titre_informations_client' => 'Client',
 	'titre_logo_commande' => 'Logo de la commande',
+	'titre_statuts_actifs_parametres' => 'Commandes actives',
 
 	// U
 	'une_commande_de' => 'Une commande de : ',
