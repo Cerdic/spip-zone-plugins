@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'obsolete_1' => 'item défini mais non utilisé #1',
 	'obsolete_2' => 'item défini mais non utilisé #2',
 	'obsolete_3' => 'item défini mais non utilisé #3',
+	'obsolete_4' => 'item défini mais non utilisé dans ce module mais dans un autre module #4',
 
 	// Mise en évidence des cas non détectés
 	// -- avec singulier ou pluriel
