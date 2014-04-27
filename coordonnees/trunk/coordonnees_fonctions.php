@@ -26,17 +26,20 @@ function logo_type_($id='', $val='') {
 	include_spip('inc/utils');
 	global $formats_logos;
 	$type = strtolower($val);
-	$lang = $type ? _T( ($id ? ("coordonnees:type_$id") : 'perso:type' )  . "_$type"  ) : '';
+	$lang = $type ? _T( ($id ? ("coordonnees:type_$id") : 'perso:type' ) . "_$type",'',array('force'=>false)) : '';
 	foreach ($formats_logos as $format) { // inspiration source: ecrire/inc/chercher_logo.php
 		$fichier = 'type'. ($id ? ("_$id") : '') . ($type ? ("_$type") : '') . '.' . $format;
 		if ( $chemin = chemin_image($fichier) )
 			$im = $chemin;
 	}
-	if ($im)
-		return '<img class="type" src="' . $im . '" alt="' . $type . '" title="' . $lang . '" />';
-	elseif ($type)
-		return '<abbr class="type" title="' . $type . '">' . $lang . '</abbr>';
-	else
+	if($lang){
+		if ($im)
+			return '<img class="type" src="' . $im . '" alt="' . $type . '" title="' . $lang . '" />';
+		elseif ($type)
+			return '<abbr class="type" title="' . $type . '">' . $lang . '</abbr>';
+		else
+			return '';
+	} else
 		return '';
 }
 
