@@ -23,16 +23,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     string: chaîne de langue d'un statut
 **/
 function commandes_lister_statuts($statut=false){
-	$statuts =  array(
-		'encours' => _T('commandes:statut_encours'),
-		'erreur' => _T('commandes:statut_erreur'),
-		'attente' => _T('commandes:statut_attente'),
-		'partiel' => _T('commandes:statut_partiel'),
-		'paye' => _T('commandes:statut_paye'),
-		'envoye' => _T('commandes:statut_envoye'),
-		'retour' => _T('commandes:statut_retour'),
-		'retour_partiel' => _T('commandes:statut_retour_partiel'),
-	);
+
+	// retourne les statuts déclarés dans declarer_tables_objets_sql
+	$statuts =  array_map('_T',objet_info('commande','statut_textes_instituer'));
 
 	if ($statut and $nom = $statuts[$statut])
 		return $nom;
