@@ -26,4 +26,5 @@ function action_supprimer_evenement_participant_dist()
     return true;
 }
 
+
 ?>
