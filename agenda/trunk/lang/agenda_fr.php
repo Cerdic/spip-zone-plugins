@@ -57,9 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_descriptif' => 'Descriptif',
 	'evenement_horaire' => 'Toute la journée',
 	'evenement_lieu' => 'Lieu',
-	'evenement_participant_nom' => 'Nom',
 	'evenement_participant_email' => 'Email',
 	'evenement_participant_email_mention' => 'Pour rester en contact, vous pouvez indiquer votre email. Il ne sera pas communiqué sur le site.',
+	'evenement_participant_nom' => 'Nom',
 	'evenement_repetitions' => 'Répétitions',
 	'evenement_titre' => 'Titre',
 	'evenements' => 'Événements',
@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_inscrits' => '@nb@ inscrits',
 	'info_nb_mois' => '@nb@ mois',
 	'info_nb_places' => '@nb@ places',
+	'info_nb_reponses' => '@nb@ réponses',
 	'info_nombre_evenements' => '@nb@ événements',
 	'info_nouvel_evenement' => 'Nouvel événement',
 	'info_reponse_inscription_non' => 'non',
@@ -99,7 +100,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_un_evenement' => '1 événement',
 	'info_un_inscrit' => 'Un inscrit',
 	'info_une_reponse' => 'Une réponse',
-	'info_nb_reponses' => '@nb@ réponses',
 	'inscrits' => 'Inscriptions',
 
 	// L
