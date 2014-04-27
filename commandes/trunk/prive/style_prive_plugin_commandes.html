@@ -23,38 +23,21 @@
 /* ---------------
    PAGE COMMANDES 
    --------------- */
-/* liste commandes */
-.liste-objets.commandes  img 		{ vertical-align: middle; }
-.liste-objets.commandes td		{ padding: .66em; vertical-align: top; }
-.liste-objets.commandes .action 	{ width: 1px; } /* forcer largeur min */
-.liste-objets.commandes .dates		{ min-width: 9em; }
-.liste-objets.commandes .dates .label	{ color: #888; color: rgba(0,0,0,.5); }
-.liste-objets.commandes .dates .item	{ padding: 0 }
-.liste-objets.commandes .descriptif	{ min-width: 10em; }
-.liste-objets.commandes .descriptif .montant { min-width: 4em; text-align: right; }
-.liste-objets.commandes .envoye,
-.liste-objets.commandes .envoye td	{ background-color: [#(#VAL{c5e41d}|couleur_eclaircir|couleur_eclaircir)]; }
 
-/* listes items & tables simples */
-.commandes .liste-items.simple		{ margin: 0; border-top-width: 0; }
-.commandes .liste-items.simple .item:last-child { border-bottom-width: 0; }
-.commandes table.simple			{ margin: 0; }
+/* liste commandes */
+.commandes .liste td				{ padding-top: 1em; padding-bottom: 1em; vertical-align: top; }
+.commandes .liste .dates .label		{ color: #888; color: rgba(0,0,0,.66); }
+.commandes .liste .montant			{ white-space: pre; text-align: right; }
+.commandes .liste .envoye,
+.commandes .liste .envoye td		{ background-color: [#(#VAL{c5e41d}|couleur_eclaircir|couleur_eclaircir)]; }
+
+/* navigation latérale */
+.commandes.navigation .liste-items .on { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+.commandes table.simple				{ margin: 0; }
 .commandes table.simple,
 .commandes table.simple tr,
-.commandes table.simple td		{ background: 0 none; }
-.commandes table.simple td		{ vertical-align: top; padding: 0; border: 0 none; }
-
-
-/* --------------------
-   NAVIGATION COMMANDES 
-   -------------------- */
-.commandes.navigation h4		{
-					margin-bottom: 0;
-					font-size: 1em; color: #666;
-					}
-.commandes.navigation .liste-items .on	{ background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-.commandes.navigation .annee		{ width: 4em; }
-
+.commandes table.simple td			{ background: 0 none; }
+.commandes table.simple td			{ padding: 0; border: 0 none; }
 
 /* --------------
    FICHE COMMANDE 
@@ -64,18 +47,18 @@
 .fiche_objet .formulaire_dater_commande	{ margin-top: 1em; margin-bottom: 1em; }
 /* contenu */
 .contenu-commande .detail td		{ vertical-align: middle; padding-top: 1.25em; padding-bottom: 1.25em; }
-.contenu-commande tfoot td		{ background-color: #eee; font-style: normal; }
-.contenu-commande .montant		{ text-align: right; white-space: pre; }
-.contenu-commande .detail .description	{ font-weight: bold; }
+.contenu-commande tfoot td			{ background-color: #eee; font-style: normal; }
+.contenu-commande .montant			{ text-align: right; white-space: pre; }
+.contenu-commande .detail .description { font-weight: bold; }
 .contenu-commande .description .prix_unitaire{ font-weight: normal; }
 .contenu-commande .quantite,
 .contenu-commande .taxe,
-.contenu-commande .prix_unitaire		{ text-align: center; }
-.contenu-commande .null		{ color: #aaa; }
+.contenu-commande .prix_unitaire	{ text-align: center; }
+.contenu-commande .null				{ color: #aaa; color: rgba(0,0,0,.33); font-weight: normal; font-style= italic; }
 
 .contenu-commande .total_ttc		{ font-weight: bold; }
 .contenu-commande .total_ttc .descriptif{ text-align: right; }
 /* client */
-.client-commande td			{ vertical-align: top; }
-.client-commande .nom			{ margin: 0; }
-.client-commande .logo			{ width: 10px; }
+.client-commande td					{ vertical-align: top; }
+.client-commande .nom				{ margin: 0; }
+.client-commande .logo				{ width: 10px; }
