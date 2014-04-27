@@ -72,10 +72,12 @@ function coordonnees_affiche_gauche($flux) {
 	$texte = "";
 	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
 	$e = trouver_objet_exec($exec);
-	$type = $e['type'];
-	$id_coordonnee = $flux['args']["id_${type}"];
-
-	if (!$e['edition'] AND in_array($type,array('adresse','email','numero'))) {
+	if (
+		!$e['edition']
+		and $type = $e['type']
+		and in_array($type,array('adresse','email','numero'))
+		and $id_coordonnee = $flux['args']["id_${type}"]
+	) {
 		$texte .= recuperer_fond("prive/squelettes/contenu/utilisations_${type}", array(
 			"id_${type}" => intval($id_coordonnee)
 			),
