@@ -6,10 +6,8 @@
 	<div class="liste">
 		<h4>[(#OBJET|objet_icone{16}) ][(#GRAND_TOTAL|objet_afficher_nb{#OBJET})]</h4>
 		<ul>
-			<BOUCLE_liens(adresses_liens){id_adresse}{objet}{par id_objet}{fusion objet,id_objet}>
+			<BOUCLE_liens(adresses_liens){id_adresse}{objet}{par id_objet}{fusion id_objet}>
 			<li>
-				[(#TYPE|logo_type_adr)]
-				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">[(#INFO_TITRE{#OBJET,#ID_OBJET})][ <small>\(<:info_numero_abbreviation:>(#ID_OBJET)\)</small>]</a>
 				[(#AUTORISER{associeradresse,#ID_ADRESSE}|oui)
 				[(#BOUTON_ACTION{
 					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
@@ -18,6 +16,9 @@
 					<:coordonnees:bouton_dissocier:>}
 				)]
 				]
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">
+					[(#INFO_TITRE{#OBJET,#ID_OBJET})][ <small>\(<:info_numero_abbreviation:>(#ID_OBJET)\)</small>]
+				</a>
 			</li>
 			</BOUCLE_liens>
 		</ul>
