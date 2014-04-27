@@ -1,21 +1,21 @@
-[(#SET{defaut_tri,#ARRAY{
-	email,1, 
-	id_email,1,
-	points,-1
-}})]
 #SET{id_email_exclu, #ENV{coordonnee}|=={email}|?{#ENV{id_coordonnee}}}
 <B_liste_emails>
 #ANCRE_PAGINATION
 <div class="liste-objets emails coordonnees lies">
 <table class='spip liste'>
 	<tbody>
-	<BOUCLE_liste_emails(EMAILS){id_email != #GET{id_email_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,email},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
-	<BOUCLE_type(emails_liens){id_adresse}{objet}{id_objet}>#SET{type,#TYPE}</BOUCLE_type>
+	<BOUCLE_liste_emails(emails_liens){id_email != #GET{id_email_exclu}}{objet}{id_objet}{pagination #ENV{nb,10}}>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
+		[(#COMPTEUR_BOUCLE|=={1}|oui)<td class='picto' rowspan='#TOTAL_BOUCLE'></td>]
+		<BOUCLE_email(EMAILS){id_email}>
 		<td class='titre principale'>
-			[<span><a href="#URL_ECRIRE{email,id_email=#ID_EMAIL}"><small><:info_numero_abbreviation:>(#ID_EMAIL)</small></a></span>]
-			[(#GET{type}|logo_type_mel) ][<span class="#EDIT{titre}">(#TITRE)</span>]
+			<div>
+				<a href="[(#ID_EMAIL|generer_url_entite{email})]">
+					[<span><small><:info_numero_abbreviation:>(#ID_EMAIL)</small></span>]
+					[<span class="#EDIT{titre} titre">(#TITRE)</span>]
+				</a>
+			</div>
+			<div>[(#TYPE|logo_type_mel)][ (#VAL{coordonnees:type_mel_}|concat{#TYPE}|_T{'',#ARRAY{'force',''}})]</div>
 		</td>
 		<td>
 			[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
@@ -37,6 +37,7 @@
 			)]
 			]
 		</td>
+		</BOUCLE_email>
 	</tr>
 	</BOUCLE_liste_emails>
 	</tbody>

@@ -9,13 +9,18 @@
 <div class="liste-objets numeros coordonnees lies">
 <table class='spip liste'>
 	<tbody>
-	<BOUCLE_liste_numeros(NUMEROS){id_numero != #GET{id_numero_exclu}}{id_mot?}{objet?}{id_objet?}{where?}{recherche?}{tri #ENV{par,numero},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
-	<BOUCLE_type(numeros_liens){id_adresse}{objet}{id_objet}>#SET{type,#TYPE}</BOUCLE_type>
+	<BOUCLE_liste_numeros(numeros_liens){id_numero != #GET{id_numero_exclu}}{objet}{id_objet}{pagination #ENV{nb,10}}>
 	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-		[(#COMPTEUR_BOUCLE|=={1}|oui) <td class='picto' rowspan='#TOTAL_BOUCLE'></td> ]
-		<td class='principale titre'>
-			[<span><a href="#URL_ECRIRE{numero,id_numero=#ID_NUMERO}"><small><:info_numero_abbreviation:>(#ID_NUMERO)</small></a></span>]
-			[(#GET{type}|logo_type_tel) ][<span class="#EDIT{titre}">(#TITRE)</span>]
+		[(#COMPTEUR_BOUCLE|=={1}|oui)<td class='picto' rowspan='#TOTAL_BOUCLE'></td>]
+		<BOUCLE_numero(NUMEROS){id_numero}>
+		<td class='titre principale'>
+			<div>
+				<a href="[(#ID_NUMERO|generer_url_entite{email})]">
+					[<span><small><:info_numero_abbreviation:>(#ID_NUMERO)</small></span>]
+					[<span class="#EDIT{titre} titre">(#TITRE)</span>]
+				</a>
+			</div>
+			<div>[(#TYPE|logo_type_tel)][ (#VAL{coordonnees:type_tel_}|concat{#TYPE}|_T{'',#ARRAY{'force',''}})]</div>
 		</td>
 		<td class='numero'>
 			[<span class="#EDIT{numero}">(#NUMERO)</span>]
@@ -35,6 +40,7 @@
 			)]
 			]
 		</td>
+		</BOUCLE_numero>
 	</tr>
 	</BOUCLE_liste_numeros>
 	</tbody>
