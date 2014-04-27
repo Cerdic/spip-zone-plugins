@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function creer_commande_encours(){
 	include_spip('inc/session');
-	
+
 	// S'il y a une commande en cours dans la session, on la supprime
 	if (($id_commande = intval(session_get('id_commande'))) > 0){
 		// Si la commande est toujours "encours" on la supprime de la base
@@ -27,50 +27,29 @@ function creer_commande_encours(){
 			spip_log("Suppression d'une commande encours ancienne en session : $id_commande");
 			commandes_effacer($id_commande);
 		}
-		
+
 		// Dans tous les cas on supprime la valeur de session
 		session_set('id_commande');
 	}
-	
+
 	// Le visiteur en cours
 	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
-	
+
 	// La référence
 	$fonction_reference = charger_fonction('commandes_reference', 'inc/');
-	
+
 	$champs = array(
 		'reference' => $fonction_reference($id_auteur),
-		'id_auteur' => $id_auteur,
-		'date' => date('Y-m-d H:i:s'),
-		'statut' => 'encours'
+		'id_auteur' => $id_auteur
 	);
-	
-	// Envoyer aux plugins avant insertion
-	$champs = pipeline('pre_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_commandes',
-			),
-			'data' => $champs
-		)
-	);
-	$id_commande = sql_insertq('spip_commandes', $champs);
-	// Envoyer aux plugins après insertion
-	pipeline('post_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_commandes',
-				'id_objet' => $id_commande
-			),
-			'data' => $champs
-		)
-	);
-	
+
+	// Création de la commande
+	include_spip('action/editer_commande');
+	$id_commande = commande_inserer(null,$champs);
 	session_set('id_commande', $id_commande);
-	
+
 	return $id_commande;
 }
-
 
 
 /**
@@ -174,4 +153,52 @@ function commandes_envoyer_notification( $qui, $id_type, $id_commande, $expedite
 		}
 	}
 }
+
+
+/*
+ * Traitement des notifications d'une commande
+ * Selon les options de configuration, des emails seront envoyés au(x) vendeur(s) et optionnellement au client
+ * 
+ * @param int|string $id_commande
+ *     identifiant de la commande
+ * @return void
+ */
+function traiter_notifications_commande($id_commande=0){
+
+	if (intval($id_commande)==0) return;
+
+	if (
+		include_spip('inc/config')
+		and $config = lire_config('commandes')
+		and $quand = $config['quand'] ? $config['quand'] : array()
+		and $config['activer'] // les notifications sont activées
+		and $statut = sql_getfetsel('statut', table_objet_sql('commande'), "id_commande=".intval($id_commande))
+		and in_array($statut, $quand) // le nouveau statut est valide pour envoyer une notification
+		and $notifications = charger_fonction('notifications', 'inc', true) // la fonction est bien chargée
+	) {
+
+		// Sans les plugins Facteur et Notifications avancées, on ne fait rien
+		if (!defined('_DIR_PLUGIN_NOTIFAVANCEES')) {
+			spip_log("traiter_notifications_commande : notifications impossibles sans le plugins Notifications avancées pour la commande $id_commande",'commandes.' . _LOG_ERREUR);
+			return;
+		}
+
+		// Déterminer l'expéditeur
+		$options = array();
+		if( $config['expediteur'] != "facteur" )
+			$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
+
+		// Envoyer au vendeur
+		spip_log("traiter_notifications_commande : notification vendeur pour la commande $id_commande",'commandes.' . _LOG_INFO);
+		$notifications('commande_vendeur', $id_commande, $options);
+
+		// Envoyer optionnellement au client
+		if($config['client']) {
+			spip_log("traiter_notifications_commande : notification client pour la commande $id_commande",'commandes.' . _LOG_INFO);
+			$notifications('commande_client', $id_commande, $options);
+		}
+
+	}
+}
+
 ?>

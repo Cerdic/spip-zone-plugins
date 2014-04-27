@@ -22,12 +22,12 @@
 	<necessite nom="prix" compatibilite="[0.1.0;]" />
 	<utilise nom="coordonnees" compatibilite="[2.0.0;]" />
 	<utilise nom="notifavancees" compatibilite="[0.2.0;]" />
+	<utilise nom="facteur" compatibilite="[2.0.0;]" />
 
 	<pipeline nom="affiche_milieu" inclure="commandes_pipelines.php" /><!-- fiche commande : formulaires de dates -->
 	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" /><!-- page d'accueil : liste des commandes en attente validation -->
 	<pipeline nom="affiche_auteurs_interventions" inclure="commandes_pipelines.php" /><!-- liste des commandes sur la fiche d'un auteur -->
 	<pipeline nom="insert_head_css" inclure="commandes_pipelines.php" />
-	<pipeline nom="post_edition" inclure="commandes_pipelines.php" /><!-- changement de statut : envoi de notifications et maj dates paiement et envoi -->
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
