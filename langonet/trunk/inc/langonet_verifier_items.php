@@ -114,7 +114,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 		$resultats = reperer_items_manquants($module, $utilises, $GLOBALS[$var_langue], $fichiers_langue);
 	}
 	elseif ($GLOBALS[$var_langue]) {
-		$resultats = reperer_items_inutiles($utilises, $GLOBALS[$var_langue]);
+		$resultats = reperer_items_inutiles($module, $utilises, $GLOBALS[$var_langue]);
 	}
 
 	// Compléments de la structure de résultats
@@ -135,7 +135,15 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
  */
 function collecter_occurrences($fichiers) {
 
-	$utilises = array('items' => array(), 'suffixes' => array(), 'modules' => array(), 'item_tous' => array());
+	$utilises = array(
+					'raccourcis' => array(),
+					'modules' => array(),
+					'items' => array(),
+					'occurrences' => array(),
+					'suffixes' => array(),
+					'variables' => array(),
+					'debug' => array()
+	);
 
 	foreach ($fichiers as $_fichier) {
 		if ($contenu = file($_fichier)) {
@@ -146,7 +154,7 @@ function collecter_occurrences($fichiers) {
 					foreach ($regexps as $_regexp) {
 						if (preg_match_all($_regexp, $_ligne, $occurrences, PREG_SET_ORDER))
 							foreach ($occurrences as $_occurrence) {
-								memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $_regexp);
+								$utilises = memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $_regexp);
 							}
 					}
 				}
@@ -212,9 +220,10 @@ function identifier_type_fichier($fichier) {
  *      Expression régulière utilisée pour trouver l'occurrence d'utilisation en cours de
  * 		mémorisation.
  *
- * @return boolean
+ * @return array
+ * 		Le tableau des occurrences mis à jour avec l'occurrence passée en argument
  */
-function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
+function memoriser_occurrence($utilises, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
 	include_spip('inc/langonet_utils');
 
 	if (!isset($occurrence[3]))
@@ -267,20 +276,22 @@ function memoriser_occurrence(&$utilises, $occurrence, $fichier, $no_ligne, $lig
 			$raccourci_partiellement_variable = true;
 	}
 
+	// TODO : vérifier si avec les traitements précédents extraire_argument est encore nécessaire
 	list($item, ) = extraire_arguments($raccourci_regexp);
-	list($raccourci_unique, ) = calculer_raccourci_unique($raccourci_regexp, $utilises['items']);
+	list($raccourci_unique, ) = calculer_raccourci_unique($raccourci_regexp, $utilises['raccourcis']);
 	// TODO : si un raccourci est identique dans deux modules différents on va écraser l'index existant
 
 	$occurrence[] = $ligne;
 
-	$utilises['items'][$raccourci_unique] = $item;
+	$utilises['raccourcis'][$raccourci_unique] = $item;
 	$utilises['modules'][$raccourci_unique] = $module;
-	$utilises['item_tous'][$raccourci_unique][$fichier][$no_ligne][] = $occurrence;
+	$utilises['items'][$raccourci_unique] = ($module ? "$module:$item" : $item);
+	$utilises['occurrences'][$raccourci_unique][$fichier][$no_ligne][] = $occurrence;
 	$utilises['suffixes'][$raccourci_unique] = $raccourci_partiellement_variable;
 	$utilises['variables'][$raccourci_unique] = $raccourci_totalement_variable;
 	$utilises['debug'][] = $occurrence;
 
-	return true;
+	return $utilises;
 }
 
 
@@ -310,37 +321,30 @@ function extraire_arguments($raccourci_regexp) {
 }
 
 
-/**
- * Construire la liste des items definis mais apparament pas utilises.
- *
- * @param array		$utilises
- * @param array		$items
- *
- * @return array
- */
-function reperer_items_inutiles($utilises, $items) {
-	$item_non = $item_peut_etre = $fichier_peut_etre = array();
-	$index_variable = '';
+function reperer_items_inutiles($module, $utilises, $items) {
+	$item_non = $item_peut_etre = array();
 	foreach ($items as $_raccourci => $_traduction) {
-		// TODO : c'est bizarre on ne teste pas l'égalité des modules
-		if (!in_array ($_raccourci, $utilises['items'])) {
+		$item = "$module:$_raccourci";
+		// Il faut absolument tester l'item complet soit module:raccourci car sinon
+		// on pourrait accepter un raccourci identique d'un autre module.
+		// Pour cela la valeur de chaque index du tableau $utilises['items'] est l'item complet.
+		$index_variable = '';
+		if (!in_array($item, $utilises['items'])) {
 			// L'item est soit non utilise, soit utilise dans un contexte variable
-			$contexte_variable = false;
-			foreach($utilises['items'] as $_cle => $_valeur) {
+			foreach($utilises['raccourcis'] as $_cle => $_valeur) {
 				if ($utilises['suffixes'][$_cle]) {
 					if (substr($_raccourci, 0, strlen($_valeur)) == $_valeur) {
-						$contexte_variable = true;
 						$index_variable = $_cle;
 						break;
 					}
 				}
 			}
-			if (!$contexte_variable) {
+			if (!$index_variable) {
 				// L'item est vraiment non utilise
 				$item_non[$_raccourci] = $_raccourci;
 			} else {
 				// L'item est utilise dans un contexte variable
-				$item_peut_etre[$_raccourci] = $utilises['item_tous'][$index_variable];
+				$item_peut_etre[$_raccourci] = $utilises['occurrences'][$index_variable];
 			}
 		}
 	}
@@ -350,7 +354,6 @@ function reperer_items_inutiles($utilises, $items) {
 	       );
 }
 
-//
 
 /**
  * Construit la liste des items utilises mais apparamment non definis.
@@ -388,7 +391,7 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 				if ($mod == $module) {
 					// Item indefini alors que le module est explicite, c'est une erreur
 					$item_non[] = $_valeur;
-					$fichier_non[$_cle] = $utilises['item_tous'][$_cle];
+					$fichier_non[$_cle] = $utilises['occurrences'][$_cle];
 				} else {
 					// L'item peut etre defini dans un autre module. Le fait qu'il ne soit pas
 					// defini dans le fichier en cours de verification n'est pas forcement une erreur.
@@ -405,9 +408,9 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 					if ($ok) {
 						$definition_non_mais[$_valeur] = array_map('array_shift', $tous_lang[$_valeur]);
 						$item_non_mais[] = $_valeur;
-						$fichier_non_mais[$_cle] = $utilises['item_tous'][$_cle];
+						$fichier_non_mais[$_cle] = $utilises['occurrences'][$_cle];
 					} else {
-						$tous = $utilises['item_tous'][$_cle];
+						$tous = $utilises['occurrences'][$_cle];
 						// Si pas normalise, c'est une auto-definition
 						// Si l'index est deja pris pour un autre texte
 						// (32 caracteres initiaux communs)
@@ -433,7 +436,7 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 					if (substr($_item, 0, strlen($_valeur)) == $_valeur) {
 						$item_trouve = true;
 						$item_peut_etre[] = $_valeur;
-						$fichier_peut_etre[$_item] = is_array($utilises['item_tous'][$_cle]) ? $utilises['item_tous'][$_cle] : array();
+						$fichier_peut_etre[$_item] = is_array($utilises['occurrences'][$_cle]) ? $utilises['occurrences'][$_cle] : array();
 					}
 				}
 				// Si on a pas trouve d'item pouvant correspondre c'est peut-etre que
@@ -442,7 +445,7 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 				if (!$item_trouve) {
 					$_item = ltrim($_valeur, '\'".\\');
 					$item_peut_etre[] = $_item;
-					$fichier_peut_etre[$_item] = is_array($utilises['item_tous'][$_cle]) ? $utilises['item_tous'][$_cle] : array();
+					$fichier_peut_etre[$_item] = is_array($utilises['occurrences'][$_cle]) ? $utilises['occurrences'][$_cle] : array();
 				}
 			}
 		}
