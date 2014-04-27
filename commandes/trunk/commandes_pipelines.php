@@ -79,22 +79,28 @@ function commandes_affiche_milieu($flux) {
  */
 function commandes_accueil_encours($flux) {
 
-	$statuts = array('attente','partiel','paye');
-	foreach( $statuts as $statut ){
-		if ( $nb_{$statut} = sql_countsel(table_objet_sql('commande'), "statut=".sql_quote($statut)) ) {
-			$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, 'commandes:info_1_commande_statut_'.$statut, 'commandes:info_nb_commandes_statut_'.$statut);
-			$liste .= recuperer_fond('prive/objets/liste/commandes', array(
-				'titre' => $titre_{$statut},
-				'statut' => $statut,
-				'cacher_tri' => true),
-				array( 'ajax' => true )
-			);
+	include_spip('inc/config');
+	$activer = lire_config('commandes/accueil_encours');
+	$statuts = lire_config('commandes/statuts_actifs');
+	if ($activer and is_array($statuts)) {
+		foreach($statuts as $statut){
+			if ($nb_{$statut} = sql_countsel(table_objet_sql('commande'), "statut=".sql_quote($statut))) {
+				$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, 'commandes:info_1_commande_statut_'.$statut, 'commandes:info_nb_commandes_statut_'.$statut);
+				$liste .= recuperer_fond('prive/objets/liste/commandes', array(
+					'titre' => $titre_{$statut},
+					'statut' => $statut,
+					'cacher_tri' => true,
+					'nb' => 5),
+					array('ajax' => true)
+				);
+			}
 		}
 	}
 
-	if ( isset($liste) ) {
+	if (isset($liste)) {
 		$flux .= "<div class='commandes'>" . $liste . "</div>";
 	}
+
 	return $flux;
 }
 

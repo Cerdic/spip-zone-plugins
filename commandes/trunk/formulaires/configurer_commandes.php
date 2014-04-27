@@ -192,6 +192,42 @@ function formulaires_configurer_commandes_saisies_dist(){
 					)
 				)
 			)
+		),
+		array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'fieldset_statuts_actifs_parametres',
+				'label' => _T('commandes:titre_statuts_actifs_parametres'),
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'explication',
+					'options' => array(
+						'nom' => 'explication_statuts_actifs',
+						'texte' => _T('commandes:explication_statuts_actifs'),
+					)
+				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'accueil_encours',
+						'label' => _T('commandes:notifications_activer_label'),
+						'explication' => _T('commandes:explication_accueil_encours'),
+						'defaut' => $config['accueil_encours'],
+					)
+				),
+				array(
+					'saisie' => 'checkbox',
+					'options' => array(
+						'nom' => 'statuts_actifs',
+						'label' => _T('commandes:label_statuts_actifs'),
+						'datas' => $statuts,
+						'defaut' => $config['statuts_actifs'],
+						'explication' => _T('commandes:explication_choix_statuts_actifs'),
+						'afficher_si' => '@accueil_encours@ == "on"'
+					)
+				)
+			)
 		)
 	);
 }
