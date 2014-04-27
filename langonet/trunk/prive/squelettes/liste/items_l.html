@@ -18,9 +18,10 @@
 				</td>
 			</tr>
 	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
+		#SET{fichier, #CLE}
 		<B_lignes>
 			<tr class="row_even">
-				<td class="fichier" colspan="3">[(#VAL{.php}|str_replace{'', #CLE})]</td>
+				<td class="fichier" colspan="3">[(#GET{fichier})]</td>
 			</tr>
 		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
 			#SET{ligne, #CLE}
@@ -29,9 +30,8 @@
 				<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
 				<td class="colonne">[C(#CLE|plus{1})]</td>
 				<td class="occurrence">
-					[<code>(#VALEUR|table_valeur{0}
-						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, 8}
-						|appliquer_filtre{coloration_code_color, php, code, span})</code>]
+					[(#VALEUR|table_valeur{0}
+						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{3}, #GET{fichier}, 8})]
 				</td>
 			</tr>
 			</BOUCLE_occurrences>

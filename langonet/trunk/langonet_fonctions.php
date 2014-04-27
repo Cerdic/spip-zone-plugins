@@ -110,7 +110,7 @@ function langonet_creer_select_dossiers($sel_d=array(), $multiple=true) {
 }
 
 
-function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
+function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $cadre=4) {
 	$affiche = '';
 
 	if ($ligne) {
@@ -122,12 +122,26 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $cadre=4) {
 		// avant sans retourner d'erreur. Il faut donc calculer l'index final
 		$index_fin = $debut + strlen($affiche);
 
+		$coloriser = NULL;
+		include_spip('public/parametrer'); // inclure les fichiers fonctions
+		$coloriser = chercher_filtre('coloration_code_color');
+
 		// On encadre l'expression par des points avant et après sauf si on a déjà atteint le bout
 		// -- On détermine au préalable si le filtre de coloration_code va être appliqué ou pas pour éviter dans
 		//    ce cas de mettre les points de suspension typo
-		$informer = chercher_filtre('info_plugin');
-		$suspension = ($informer('coloration_code', 'est_actif') == 1) ? '...' : '&#8230;';
-		$affiche = ($debut > 0 ? $suspension : '') . $affiche . ($index_fin < strlen($ligne)-1 ? $suspension : '');
+		$suspension = ($coloriser ? '...' : '&#8230;');
+		$affiche = ($debut > 0 ? $suspension : '') . trim($affiche) . ($index_fin < strlen($ligne)-1 ? $suspension : '');
+
+		if ($coloriser) {
+			// Traitement de la coloration de l'extrait.
+			// C'est la fonction de coloration qui s'occupe des entites html
+			$infos = pathinfo($fichier);
+			$extension = ($infos['extension'] == 'html') ? 'html4strict' : $infos['extension'];
+			$affiche = $coloriser($affiche,  $extension, 'code', 'span');
+		}
+		else {
+			$affiche = '<code>' . htmlspecialchars($affiche) . '</code>';
+		}
 	}
 
 	return $affiche;
