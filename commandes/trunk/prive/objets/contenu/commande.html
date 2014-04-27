@@ -3,10 +3,8 @@
 
 	[(#REM) date de la dernière mise à jour ]
 	[<div class="champ contenu_maj[ (#MAJ*|intval|>{0}|?{'',vide})]">
-		<p>
-			<label><:commandes:date_maj_label:></label>
-			<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
-		</p>
+		<label><:commandes:date_maj_label:> :</label>
+		<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
 	</div>]
 
 	[(#REM) Contenu détaillé de la commande ]
