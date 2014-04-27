@@ -63,7 +63,7 @@ function formulaires_participer_evenement_verifier_dist($id_evenement, $mode='')
 	if (!($reponse) OR !in_array($reponse,array('oui','non','?')))
 		$erreurs['reponse'] = _T('agenda:indiquez_votre_choix');
 	elseif ($mode=='public' && !isset($GLOBALS['visiteur_session']['id_auteur']) && !$nom)
-        $erreurs['nom'] = _T('agenda:indiquez_votre_nom');
+        $erreurs['nom'] = _T('info_obligatoire');
 	elseif ($reponse!=='non' && isset($GLOBALS['visiteur_session']['id_auteur'])) {
 		$row = sql_fetsel('places','spip_evenements','id_evenement='.intval($id_evenement));
 		$valeurs['reponse'] = sql_getfetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
