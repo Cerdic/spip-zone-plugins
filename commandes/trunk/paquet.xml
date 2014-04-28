@@ -1,12 +1,12 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="0.10.22"
+	version="0.10.23"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/commande.png"
 	documentation=""
-	schema="0.3" 
+	schema="0.3"
 	>
 
 	<nom>Commandes</nom>
@@ -16,7 +16,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<traduire module="commandes" reference="fr" gestionnaire="salvatore" />	
+	<traduire module="commandes" reference="fr" gestionnaire="salvatore" />
 
 	<necessite nom="saisies" compatibilite="[1.18.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.0;]" />
@@ -24,10 +24,11 @@
 	<utilise nom="notifavancees" compatibilite="[0.2.0;]" />
 	<utilise nom="facteur" compatibilite="[2.0.0;]" />
 
-	<pipeline nom="affiche_milieu" inclure="commandes_pipelines.php" /><!-- fiche commande : formulaires de dates -->
-	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" /><!-- page d'accueil : liste des commandes en attente validation -->
-	<pipeline nom="affiche_auteurs_interventions" inclure="commandes_pipelines.php" /><!-- liste des commandes sur la fiche d'un auteur -->
+	<pipeline nom="affiche_milieu" inclure="commandes_pipelines.php" />
+	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="commandes_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="commandes_pipelines.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="commandes_pipelines.php" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
