@@ -58,9 +58,8 @@ function notation_get_nb_notes(){
  * 		Note ponderee en fonction de la configuration du plugin
  */
 function notation_ponderee($note, $nb){
-   $note_ponderee = round($note*(1-exp(-5*$nb/notation_get_ponderation())),2);
-   return $note_ponderee;
+	$note_ponderee = round($note*(1-exp(-5*$nb/notation_get_ponderation())),2);
+	return $note_ponderee;
 }
-
 
 ?>
