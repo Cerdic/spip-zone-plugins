@@ -86,7 +86,7 @@ function commandes_accueil_encours($flux) {
 		foreach($statuts as $statut){
 			if ($nb_{$statut} = sql_countsel(table_objet_sql('commande'), "statut=".sql_quote($statut))) {
 				$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, 'commandes:info_1_commande_statut_'.$statut, 'commandes:info_nb_commandes_statut_'.$statut);
-				$liste .= recuperer_fond('prive/objets/liste/commandes', array(
+				$texte .= recuperer_fond('prive/objets/liste/commandes', array(
 					'titre' => $titre_{$statut},
 					'statut' => $statut,
 					'cacher_tri' => true,
@@ -97,8 +97,8 @@ function commandes_accueil_encours($flux) {
 		}
 	}
 
-	if (isset($liste)) {
-		$flux .= "<div class='commandes'>" . $liste . "</div>";
+	if (isset($texte)) {
+		$flux .= $texte;
 	}
 
 	return $flux;
@@ -112,8 +112,7 @@ function commandes_accueil_encours($flux) {
  * @return array $flux
 **/
 function commandes_affiche_auteurs_interventions($flux) {
-	$texte = "";
-	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
+
 	if ($id_auteur = intval($flux['args']['id_auteur'])) {
 		$texte .= recuperer_fond('prive/objets/liste/commandes', array(
 			'id_auteur' => $id_auteur,
@@ -123,8 +122,7 @@ function commandes_affiche_auteurs_interventions($flux) {
 			array('ajax' => true)
 		);
 	}
-	if ($texte) {
-		$flux['data'] .= "<div class='nettoyeur'></div>";
+	if (isset($texte)) {
 		$flux['data'] .= $texte;
 	}
 
