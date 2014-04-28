@@ -58,7 +58,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'titre' => "titre AS titre, '' AS lang",
 		'champs_editables'		=> array('titre', 'voie', 'complement', 'boite_postale', 'code_postal', 'ville', 'region', 'pays'),
 		'champs_versionnes'		=> array(),
-		'rechercher_champs'		=> array(),
+		'rechercher_champs'		=> array('pays'=>8, 'titre'=>5, 'voie'=>3, 'region'=>3, 'region'=>3, 'ville'=>3),
 		'tables_jointures'		=> array('spip_adresses_liens'),
 		/* Les textes standard */
 		'texte_modifier'		=> 'coordonnees:modifier_adresse',
@@ -89,7 +89,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'titre' => "titre AS titre, '' AS lang",
 		'champs_editables'		=> array( 'titre', 'numero' ),
 		'champs_versionnes'		=> array(),
-		'rechercher_champs'		=> array(),
+		'rechercher_champs'		=> array('titre'=>5, 'numero'=>5),
 		'tables_jointures'		=> array('spip_numeros_liens'),
 		/* Les textes standard */
 		'texte_modifier'		=> 'coordonnees:modifier_numero',
@@ -120,7 +120,7 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'titre' => "titre AS titre, '' AS lang",
 		'champs_editables'		=> array( 'titre', 'email' ),
 		'champs_versionnes'		=> array(),
-		'rechercher_champs'		=> array(),
+		'rechercher_champs'		=> array('titre'=>5, 'email'=>5),
 		'tables_jointures'		=> array('spip_emails_liens'),
 		/* Les textes standard */
 		'texte_modifier'		=> 'coordonnees:modifier_email',

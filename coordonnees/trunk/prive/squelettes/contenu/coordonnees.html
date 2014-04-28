@@ -14,7 +14,7 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/#GET{objet}s, par=titre, nb=10, env, ajax, sinon=#VAL{#GET{objet}|objet_info{info_aucun_objet}|_T}}>
+<INCLURE{fond=prive/objets/liste/#GET{objet}s, nb=10, env, ajax, sinon=#VAL{#GET{objet}|objet_info{info_aucun_objet}|_T}}>
 
 [(#AUTORISER{creer,#GET{objet}})
 	[(#URL_ECRIRE{#GET{objet}_edit,new=oui}|icone_verticale{#VAL{#GET{objet}|objet_info{texte_creer}|_T},#GET{objet},new,right})]
