@@ -130,7 +130,7 @@ function formulaires_editer_commande_verifier($id_commande='new', $retour='', $l
 	$type_dates = array('date','date_paiement','date_envoi');
 	foreach ($type_dates as $type_date){
 		$date = _request($type_date);
-		if (is_array($date) and !empty(array_filter($date))){
+		if (isset($date['date']) and $date['date']){
 			list($jour, $mois, $annee) = explode('/',$date['date']);
 			list($heures, $minutes) = explode(':',$date['heure']);
 			$date = ($date['date'] ? "$annee-$mois-$jour" : '0000-00-00') ." ". ($date['heure'] ? "$heures:$minutes:00" : '00:00:00');
