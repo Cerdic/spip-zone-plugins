@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 function balise_FORMULAIRE_JAIME_JAIMEPAS ($p) {
 	include_spip("balise/formulaire_notation");
 	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
-    $_id_objet = $p->boucles[$p->id_boucle]->primary;
+	$_id_objet = $p->boucles[$p->id_boucle]->primary;
 	return calculer_balise_dynamique(
 		$p,
 		'FORMULAIRE_JAIME_JAIMEPAS',
@@ -32,7 +32,6 @@ function balise_FORMULAIRE_JAIME_JAIMEPAS ($p) {
 		)
 	);
 }
-
 
 function balise_FORMULAIRE_JAIME_JAIMEPAS_stat($args, $filtres) {
 	include_spip("balise/formulaire_notation");

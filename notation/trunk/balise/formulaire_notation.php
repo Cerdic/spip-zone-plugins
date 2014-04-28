@@ -21,8 +21,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
  */
 function balise_FORMULAIRE_NOTATION ($p) {
 	// on prend nom de la cle primaire de l'objet pour calculer sa valeur
-    $i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-    $_id_objet = $p->boucles[$i_boucle]->primary;
+	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	$_id_objet = $p->boucles[$i_boucle]->primary;
 	return calculer_balise_dynamique(
 		$p,
 		'FORMULAIRE_NOTATION',
@@ -33,7 +33,6 @@ function balise_FORMULAIRE_NOTATION ($p) {
 	);
 }
 
-
 function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 	// si on force les parametres par #FORMULAIRE_NOTATION{article,12}
 	// on enleve les parametres calcules
@@ -41,7 +40,7 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 		array_shift($args);
 		array_shift($args);
 	}
-	
+
 	$objet = $args[0];
 	$id_objet = $args[1];
 	// pas dans une boucle ? on generera une erreur ?
@@ -51,7 +50,7 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 	} else {
 		$args[0] = table_objet($objet);
 	}
-	
+
 	// ca s'apparenterait presque a une autorisation...
 	// si on n'avait pas a envoyer la valeur $accepter_forum au formulaire
 	$accepter_note = substr($GLOBALS['meta']["notations_publics"], 0, 3);
@@ -59,11 +58,11 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 	if ($f = charger_fonction($objet . '_accepter_notes', 'inc', true)){
 		$accepter_note = $f($id_objet);
 	}
-	
+
 	if ($accepter_note == 'non') {
 		return false;
 	}
-	
+
 	// on envoie les arguments a la fonction charger
 	// du formulaire CVT fomulaires/notation.php
 	return $args;
