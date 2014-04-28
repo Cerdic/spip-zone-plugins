@@ -124,6 +124,7 @@ function commandes_affiche_auteurs_interventions($flux) {
 		);
 	}
 	if ($texte) {
+		$flux['data'] .= "<div class='nettoyeur'></div>";
 		$flux['data'] .= $texte;
 	}
 
