@@ -59,7 +59,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'key' => array(
 			"PRIMARY KEY"        => "id_commande",
 			"KEY statut"         => "statut",
-			"KEY id_auteur"      => "id_auteur",              
+			"KEY id_auteur"      => "id_auteur",
 		),
 		'date'                       => "date",
 		'titre'                      => "reference AS titre, '' AS lang",
@@ -73,13 +73,13 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'tables_jointures'           => array(),
 		'statut_textes_instituer'    => array(
 			'encours'            => 'commandes:statut_encours',
-			'attente'            => 'commandes:statut_attente',            
+			'attente'            => 'commandes:statut_attente',
 			'partiel'            => 'commandes:statut_partiel',
-			'paye'               => 'commandes:statut_paye',            
+			'paye'               => 'commandes:statut_paye', 
 			'envoye'             => 'commandes:statut_envoye',
 			'retour'             => 'commandes:statut_retour',
 			'retour_partiel'     => 'commandes:statut_retour_partiel',
-			'erreur'             => 'commandes:statut_erreur',            
+			'erreur'             => 'commandes:statut_erreur',
 		),
 		'statut_images' => array(
 			'encours'            => 'puce-commande-encours.png',
@@ -94,8 +94,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'statut'=> array(
 			array(
 				'champ'       => 'statut',
-				'publie'      => 'paye,envoye',
-				'previsu'     => 'paye,envoye',
+				'publie'      => 'attente,partiel,paye,envoye,retour,retour_partiel',
+				'previsu'     => 'attente,partiel,paye,envoye,retour,retour_partiel',
 				'post_date'   => 'date', 
 				'exception'   => array('statut','tout')
 			)
