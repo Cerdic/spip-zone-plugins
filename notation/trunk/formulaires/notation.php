@@ -39,7 +39,7 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 	// si le visiteur a une session, on regarde s'il a deja vote
 	// sinon, non (la verification serieuse en cas de vote deja effectue
 	// se faisant dans verifier() )
-	if ($GLOBALS['visiteur_session'] OR session_get('a_vote')) {
+	if (is_array($GLOBALS['visiteur_session']) OR session_get('a_vote')) {
 
 		// on recupere l'id de l'auteur connecte, sinon ip
 		if (!$id_auteur = $GLOBALS['visiteur_session']['id_auteur']) {
@@ -52,15 +52,13 @@ function formulaires_notation_charger_dist($objet, $id_objet){
 			"id_objet=" . sql_quote($id_objet),
 			);
 		if ($id_auteur)
-			$where[] = "id_auteur=" . sql_quote($id_auteur);
+			$where[] = "id_auteur=" . intval($id_auteur);
 		else
 			$where[] = "ip=" . sql_quote($ip);
 		$id_notation = sql_getfetsel("id_notation","spip_notations",$where);
 		if ($id_notation){
 			$valeurs['id_notation'] = $id_notation;
 		}
-
-
 	}
 	// peut voter ou modifier son vote ?
 	include_spip('inc/autoriser');
@@ -83,7 +81,7 @@ function formulaires_notation_verifier_dist($objet, $id_objet){
 	$table_objet = $trouver_table($table);
 	$_id_objet = id_table_objet($table_objet['table']);
 
-	if (!sql_countsel($table_objet['table'], "$_id_objet=" . sql_quote($id_objet))
+	if (!sql_countsel($table_objet['table'], "$_id_objet=" . intval($id_objet))
 		OR (_request('content')!="")) {
 		$erreurs['message_erreur'] = ' ';
 	// note dans la bonne fourchette
@@ -107,8 +105,8 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 
 	session_set('a_vote', true);
 
-	if ($GLOBALS["auteur_session"]) {
-		$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	if (is_array($GLOBALS["visiteur_session"]) && isset($GLOBALS['visiteur_session']['id_auteur'])) {
+		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	} else {
 		$id_auteur = 0;
 	}
@@ -121,10 +119,10 @@ function formulaires_notation_traiter_dist($objet, $id_objet){
 	// Si pas inscrit : recuperer la note de l'objet sur l'IP
 	// Sinon rechercher la note de l'auteur
 	$where = array(
-		"objet=" . sql_quote($type),
-		"id_objet=" . sql_quote($id_objet),
-		);
-	if ($id_auteur != 0) $where[] = "id_auteur=" . sql_quote($id_auteur);
+				"objet=" . sql_quote($type),
+				"id_objet=" . intval($id_objet),
+			);
+	if ($id_auteur != 0) $where[] = "id_auteur=" . intval($id_auteur);
 	else $where[] = "ip=" . sql_quote($ip);
 	$row = sql_fetsel(
 		array("id_notation", "id_auteur", "note"),

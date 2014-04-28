@@ -13,11 +13,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/notation'); // pour fonction |note_ponderee
 
 function cfg_config_notation_ponderation_verifier(&$cfg){
-    $err = array();
-    if ($cfg->val['ponderation'] < 1) {
-        $cfg->val['ponderation'] = 1;
-    }
-   return $cfg->ajouter_erreurs($err);
+	$err = array();
+	if ($cfg->val['ponderation'] < 1) {
+		$cfg->val['ponderation'] = 1;
+	}
+	return $cfg->ajouter_erreurs($err);
 }
 
 // apres le traitement du formulaire par CFG
