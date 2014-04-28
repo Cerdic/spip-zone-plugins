@@ -11,8 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_facture' => 'Invoice',
 	'action_modifier' => 'Modify',
 	'action_supprimer' => 'Delete',
-	'adresse_facturation' => 'Billing address',
-	'adresse_livraison' => 'Shipping address',
 
 	// B
 	'bonjour' => 'Hello',
@@ -38,10 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contenu' => 'Content',
 
 	// D
-	'date_commande_label' => 'Date of creation:',
-	'date_envoi_label' => 'Date of dispatch:',
-	'date_maj_label' => 'Date of last update:',
-	'date_paiement_label' => 'Date of payment:',
+	'date_commande_label' => 'Date of creation:', # MODIF
+	'date_envoi_label' => 'Date of dispatch:', # MODIF
+	'date_maj_label' => 'Date of last update:', # MODIF
+	'date_paiement_label' => 'Date of payment:', # MODIF
 	'designation' => 'Designation',
 	'details_commande' => 'Details of the order:',
 

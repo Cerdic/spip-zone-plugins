@@ -13,8 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_facture' => 'Faktúra',
 	'action_modifier' => 'Zmeniť',
 	'action_supprimer' => 'Odstrániť',
-	'adresse_facturation' => 'Fakturačná adresa',
-	'adresse_livraison' => 'Doručovacia adresa',
 
 	// B
 	'bonjour' => 'Dobrý deň',
@@ -40,10 +38,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contenu' => 'Obsah',
 
 	// D
-	'date_commande_label' => 'Dátum vytvorenia:',
-	'date_envoi_label' => 'Dátum odoslania:',
-	'date_maj_label' => 'Naposledy aktualizované:',
-	'date_paiement_label' => 'Dátum platby:',
+	'date_commande_label' => 'Dátum vytvorenia:', # MODIF
+	'date_envoi_label' => 'Dátum odoslania:', # MODIF
+	'date_maj_label' => 'Naposledy aktualizované:', # MODIF
+	'date_paiement_label' => 'Dátum platby:', # MODIF
 	'designation' => 'Označenie',
 	'details_commande' => 'Podrobnosti objednávky:',
 

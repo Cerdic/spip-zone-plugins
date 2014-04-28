@@ -10,8 +10,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_facture' => 'فاكتور',
 	'action_supprimer' => 'حذف ',
-	'adresse_facturation' => 'نشاني فاكتور',
-	'adresse_livraison' => 'نشاني ارسال',
 
 	// C
 	'commande_client' => 'خريدار',
