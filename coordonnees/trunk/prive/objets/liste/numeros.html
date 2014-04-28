@@ -1,7 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	numero,1,
-	titre,1, 
-	id_numero,1,
+	num titre,1, 
+	id_numero,-1,
 	points,-1
 }})]<B_liste_numeros>
 #ANCRE_PAGINATION
@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_numeros(NUMEROS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,numero},#GET{defaut_tri}}{par numero}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_numeros(NUMEROS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,id_numero},#GET{defaut_tri}}{par numero}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{numero-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_NUMERO|image_reduire{20,26})]<a href="[(#ID_NUMERO|generer_url_entite{numero})]" title="<:info_numero_abbreviation|attribut_html:> #ID_NUMERO">[(#RANG). ][(#TITRE|sinon{#VAL{info_sans_titre}|_T})]</a></td>

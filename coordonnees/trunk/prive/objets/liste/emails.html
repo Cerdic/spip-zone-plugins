@@ -1,7 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	email,1,
-	titre,1, 
-	id_email,1,
+	num titre,1, 
+	id_email,-1,
 	points,-1
 }})]<B_liste_emails>
 #ANCRE_PAGINATION
@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_emails(EMAILS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,email},#GET{defaut_tri}}{par email}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_emails(EMAILS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,id_email},#GET{defaut_tri}}{par email}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{email-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_EMAIL|image_reduire{20,26})]<a href="[(#ID_EMAIL|generer_url_entite{email})]" title="<:info_numero_abbreviation|attribut_html:> #ID_EMAIL">[(#RANG). ][(#TITRE|sinon{#VAL{info_sans_titre}|_T})]</a></td>
