@@ -839,11 +839,11 @@ function noizetier_tableau_export() {
 	
 	// On calcule le tableau des noisettes
 	$data['noisettes'] = sql_allfetsel(
-		'type, composition, bloc, noisette, parametres',
+		'type, composition, bloc, noisette, parametres, css',
 		'spip_noisettes',
 		'1',
 		'',
-		'type, composition, bloc, rang, css'
+		'type, composition, bloc, rang'
 	);
 	
 	// On remet au propre les parametres
