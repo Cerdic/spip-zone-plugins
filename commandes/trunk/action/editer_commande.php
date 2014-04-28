@@ -2,21 +2,37 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Point d'entree d'edition d'une commande
+ * on ne peut entrer que par un appel en fournissant $idcommande
+ * mais pas pas une url
+ *
+ * @param int $id_commande
+ *     Identifiant de la commande
+ * @return array
+ *     Identifiant de la commande et message d'erreur eventuel
+ */
+function action_editer_commande_dist($id_commande=null) {
 
-function action_editer_commande_dist($arg=null) {
-
-	if (is_null($arg)){
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
+	// appel direct depuis une url interdit
+	if (is_null($id_commande)){
+		//$securiser_action = charger_fonction('securiser_action', 'inc');
+		//$id_commande = $securiser_action();
+		include_spip('inc/minipres');
+		echo minipres(_T('info_acces_interdit'));
+		die();
 	}
 
 	// si id_commande n'est pas un nombre, c'est une creation
-	if (!$id_commande = intval($arg)) {
+	if (!$id_commande = intval($id_commande)) {
 		$id_commande = commande_inserer(null,array('id_auteur'=>_request('id_auteur')));
 	}
 
+	if (!($id_commande = intval($id_commande))>0)
+		return array($id_commande,_L('echec enregistrement en base'));
+
 	// Enregistre l'envoi dans la BD
-	if ($id_commande > 0) $err = commande_modifier($id_commande);
+	$err = commande_modifier($id_commande);
 
 	return array($id_commande,$err);
 }
@@ -28,10 +44,10 @@ function action_editer_commande_dist($arg=null) {
  * @param unknown_type $id_parent
  *     Paramètre inutilisé pour compatibilité avec api modifier objet
  * @param array $champs
- *     Un tableau avec les champs par défaut lors de l'insertion
+ *     Couples des champs/valeurs par défaut
  * @return int|bool 
- *     identifiant de la commande si succès
- *     false en cas d'erreur
+ *     Identifiant de la commande si succès
+ *     False en cas d'erreur
  */
  
 function commande_inserer($id_parent=null, $champs=array()) {
@@ -85,11 +101,14 @@ function commande_inserer($id_parent=null, $champs=array()) {
 }
 
 /**
- * Appelle la fonction de modification d'une commande
+ * Appelle les fonctions de modification d'une commande
  *
  * @param int $id_commande
- * @param unknown_type $set
- * @return $err
+ *     Identifiant de la commande
+ * @param array|null $set
+ *     Couples des champs/valeurs à modifier
+ * @return mixed|string $err
+ *     Message d'erreur éventuel
  */
 function commande_modifier($id_commande, $set=null) {
 	$err = '';
@@ -98,51 +117,54 @@ function commande_modifier($id_commande, $set=null) {
 	$saisies = saisies_chercher_formulaire('editer_commande', array($id_commande));
 	$champs = saisies_lister_champs($saisies, false);
 
-	$c = array();
-	foreach ($champs as $champ)
-		$c[$champ] = _request($champ,$set);
-
 	include_spip('inc/modifier');
-	revision_commande($id_commande, $c);
+	$c = collecter_requests(
+		// whitelist
+		$champs,
+		// blacklist
+		array('date','statut'),
+		// donnees eventuellement fournies
+		$set
+	);
+
+	// Si l'objet est publie, invalider les caches et demander sa reindexation
+	if (objet_test_si_publie('commande',$id_commande)){
+		$invalideur = "id='id_commande/$id_commande'";
+		$indexation = true;
+	}
+	else {
+		$invalideur = "";
+		$indexation = false;
+	}
+
+	if ($err = objet_modifier_champs('commande', $id_commande,
+		array(
+			'nonvide' => array('statut' => _T('info_sans_statut')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+		),
+		$c))
+		return $err;
 
 	// Modification de statut
 	$c = array();
-	foreach (array(
-		'id_auteur', 'date', 'statut', 
-	) as $champ)
+	foreach (array('id_auteur', 'date', 'statut',) as $champ)
 		$c[$champ] = _request($champ, $set);
-	$err .= commande_instituer($id_commande, $c);
+	$err = commande_instituer($id_commande, $c);
 
 	return $err;
-}
-
-/**
- * Enregistre une révision de commande
- *
- * @param int $id_commande
- * @param array $c
- * @return
- */
-function revision_commande($id_commande, $c=false) {
-	$invalideur = "id='id_commande/$id_commande'";
-
-	modifier_contenu('commande', $id_commande,
-		array(
-			'nonvide' => array('statut' => _T('info_sans_statut')),
-			'invalideur' => $invalideur
-		),
-		$c);
-
-	return ''; // pas d'erreur
 }
 
 /**
  * Modifie des éléments à part que sont l'auteur, la date, le statut
  *
  * @param int $id_commande
+ *     Identifiant de la commande
  * @param array $c
+ *     Couples champ/valeur à modifier
  * @param bool $calcul_details
- * @return
+ *     (?) Inutilisé
+ * @return mixed|string
  */
 function commande_instituer($id_commande, $c, $calcul_details=true){
 	include_spip('inc/autoriser');
@@ -231,22 +253,26 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 	include_spip('inc/commandes');
 	traiter_notifications_commande($id_commande);
 
-	return '';
+	return ''; // pas d'erreur
 }
 
 /**
+ * Fabrique la requete d'institution de la commande, avec champs herites
  * Modifie la commande en calculant les dependances des details
  * 
  * @param int $id_commande
+ *     Identifiant de la commande
  * @param array $champs
+ *     Couples des champs/valeurs à modifier
  * @param bool $cond
+ *     (?) inutilisé
  * @return void
  */
 function editer_commande_details($id_commande, $champs, $cond=true) {
 
 	if (!$champs) return;
 
-	sql_updateq('spip_commandes', $champs, "id_commande=$id_commande");
+	sql_updateq(table_objet_sql('commande'), $champs, "id_commande=$id_commande");
 
 	// Changer le statut des elements concernes ? (voir details)
 
@@ -259,22 +285,68 @@ function editer_commande_details($id_commande, $champs, $cond=true) {
 	*/
 }
 
+// Ci dessous, fonctions dépréciées gardées pour rétro-compatibilité
+
 /**
- * Alias de "commande_inserer" pour rétro compatibilité
+ * Enregistre une modification d'une commande
+ * Fonction dépréciée
+ *
+ * @deprecated
+ *     Utiliser commande_modifier();
+ *
+ * @param int $id_commande
+ *     Identifiant de la commande
+ * @param array $c
+ *     Couples des champs/valeurs modifiées
+ * @return mixed|string
+ */
+function revision_commande($id_commande, $c=false) {
+	return commande_modifier($id_commande, $c);
+}
+
+/**
+ * Crée une nouvelle commande
+ * Fonction dépréciée
+ *
+ * @deprecated
+ *     Utiliser commande_inserer();
+ * @param array $champs
+ *     Couples des champs/valeurs par défaut
+ * @return
  */
 function commande_insert($champs=array()){
 	return commande_inserer(null,$champs);
 }
 
 /**
- * Alias de "commande_modifier" pour rétro compatibilité
+ * Appelle les fonctions de modification d'une commande
+ * Fonction dépréciée
+ *
+ * @deprecated
+ *     Utiliser commande_modifier();
+ * @param int $id_commande
+ *     Identifiant de la commande
+ * @param array|null $set
+ *     Couples des champs/valeurs à modifier
+ * @return
  */
 function commande_set($id_commande, $set=null){
 	return commande_modifier($id_commande, $set);
 }
 
 /**
- * Alias de "commande_instituer" pour rétro compatibilité
+ * Modifie des éléments à part que sont l'auteur, la date, le statut
+ * Fonction dépréciée
+ * 
+ * @deprecated
+ *     Utiliser commande_instituer();
+ * @param int $id_commande
+ *     Identifiant de la commande
+ * @param array $c
+ *     Couples des champs/valeurs à modifier
+ * @param bool $calculer_details
+ *     (?) Inutilisé
+ * @return
  */
 function instituer_commande($id_commande, $c, $calcul_details=true){
 	return commande_instituer($id_commande, $c, $calcul_details);
