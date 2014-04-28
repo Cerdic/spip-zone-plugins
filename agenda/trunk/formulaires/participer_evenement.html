@@ -12,7 +12,7 @@
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		<ul>
             [(#SESSION{statut}|oui)
-            [<li><:agenda:evenement_participant_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></li>]
+            [<li><:nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></li>]
             ]
             [(#SESSION{statut}|non)
             <li class="saisie_reponse[ (#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
