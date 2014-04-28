@@ -1,0 +1,36 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_adresse,1,
+	points,-1
+}})]<B_liste_adresses>
+#ANCRE_PAGINATION
+<div class="liste-objets adresses">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{adresse}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:coordonnees:label_titre:>,ajax})]</th>
+			<th class='adresse' scope='col'>[(#TRI{voie,<:coordonnees:adresse:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_adresse,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_adresses(ADRESSES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{adresse-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_ADRESSE|image_reduire{20,26})]<a href="[(#ID_ADRESSE|generer_url_entite{adresse})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ADRESSE">[(#RANG). ][(#TITRE|sinon{#VAL{info_sans_titre}|_T})]</a></td>
+			<td class='adresse'><adress>#VOIE #COMPLEMENT #BOITE_POSTALE #CODE_POSTAL #REGION #VILLE <BOUCLE_pays(PAYS){code=#PAYS*}><strong>#NOM</strong></BOUCLE_pays></adress></td>
+			<td class='id'>[(#AUTORISER{modifier,adresse,#ID_ADRESSE}|?{
+				<a href="[(#URL_ECRIRE{adresse_edit,id_adresse=#ID_ADRESSE})]">#ID_ADRESSE</a>,
+				#ID_ADRESSE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_adresses>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_adresses>[
+<div class="liste-objets adresses caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_adresses>
