@@ -127,10 +127,10 @@ function formulaires_editer_commande_charger($id_commande='new', $retour='', $li
 function formulaires_editer_commande_verifier($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	//normaliser les champs de dates
 	// chaque saisie $date est un tableau avec une entrée "date" (jour/mois/annee) et une entrée "heure" séparée (heures:minutes)
-	$type_dates = array('date','date_envoi','date_paiement');
+	$type_dates = array('date','date_paiement','date_envoi');
 	foreach ($type_dates as $type_date){
 		$date = _request($type_date);
-		if ($date and is_array($date)){
+		if (is_array($date) and !empty(array_filter($date))){
 			list($jour, $mois, $annee) = explode('/',$date['date']);
 			list($heures, $minutes) = explode(':',$date['heure']);
 			$date = ($date['date'] ? "$annee-$mois-$jour" : '0000-00-00') ." ". ($date['heure'] ? "$heures:$minutes:00" : '00:00:00');
