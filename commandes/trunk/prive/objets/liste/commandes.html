@@ -90,7 +90,7 @@
 						<BOUCLE_details(COMMANDES_DETAILS){id_commande}{objet!=''}{id_objet!=0}{!par objet}{par id_commandes_detail}>
 						#SET{objet_spip, #OBJET|in_array{#REM|lister_tables_objets_surnoms|array_keys}|et{#ID_OBJET|>{0}}|?{oui}}
 						#SET{objet_base, #OBJET|table_objet_sql|sql_countsel{#OBJET|id_table_objet|concat{=,#ID_OBJET}}}
-						[(#GET{objet_editorial}|oui)
+						[(#GET{objet_spip}|oui)
 						<li>
 							[(#QUANTITE)&times;&nbsp;][(#GET{objet_base}|oui)<a href="[(#INFO_URL{#OBJET,#ID_OBJET})]">]
 								[(#DESCRIPTIF*|typo|supprimer_numero|sinon{#VAL{info_sans_titre}|_T|wrap{<em>}})]
