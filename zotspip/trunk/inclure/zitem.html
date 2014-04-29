@@ -15,7 +15,7 @@
 		[(#FICHIER|non)[<a href="#URL">(#TITRE)</a>]]]
 	<abbr class="unapi-id" title="#ID_ZITEM"></abbr>
 	[(#ENV{details}|ou{#ENV{export}}|oui)
-	<div class="afficher_details" id="afficher_details_#ID_ZITEM" style="display:none;"><a href="javascript:void(0);"  onClick="$('#details_#ID_ZITEM').toggle(400);"><:zotspip:afficher_masquer_details:></a></div>
+	[(#ENV{nojs}|non)<div class="afficher_details" id="afficher_details_#ID_ZITEM" style="display:none;"><a href="javascript:void(0);"  onClick="$('#details_#ID_ZITEM').toggle(400);"><:zotspip:afficher_masquer_details:></a></div>]
 	<div class="details" id="details_#ID_ZITEM">]
 	[(#ENV{details}|oui)<div class="details">
 		[(#ENV{details}|=={complet}|non)
@@ -42,10 +42,12 @@
 	[(#ENV{lien_voir}|oui)<div style="text-align:right;"><a href="[(#ID_ZITEM|voir_sur_zotero)]" target="_blank"><:zotspip:voir_sur_zotero:></a></div>]
 	[(#ENV{lien_modif}|oui)<div style="text-align:right;"><a href="[(#ID_ZITEM|modifier_sur_zotero)]" target="_blank"><:zotspip:modifier_en_ligne:></a></div>]
 [(#ENV{liste}|?{</li>,</div>})]
-<script type="text/javascript">// <![CDATA[
+[(#ENV{nojs}|non)
+<script type="text/javascript">
 	$(document).ready(function(){
 		$('#afficher_details_#ID_ZITEM').show();
 		$('#details_#ID_ZITEM').hide();
 	});
- //]]></script>
+ </script>
+ ]
 </BOUCLE_zitem>

@@ -18,7 +18,7 @@
 		<form method="get" action="spip.php" target="_blank">
 		<input type="hidden" name="page" value="zotspip_unapi">]
 	<ul class="spip">
-	<BOUCLE_biblio_type(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{par_type_zotero}{pagination #ENV{max,50}}>
+	<BOUCLE_biblio_type(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{id_zitem?}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{par_type_zotero}{pagination #ENV{max,50}}>
 	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne},form_export=#GET{export}}
 	</BOUCLE_biblio_type>
 	</ul>
@@ -34,7 +34,7 @@
 		<form method="get" action="spip.php" target="_blank">
 		<input type="hidden" name="page" value="zotspip_unapi">]
 	<ul class="spip">
-	<BOUCLE_biblio(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{tri,auteurs},#GET{defaut_tri}}{pagination #ENV{max,50}}>
+	<BOUCLE_biblio(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{id_zitem?}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{tri,auteurs},#GET{defaut_tri}}{pagination #ENV{max,50}}>
 	#INCLURE{fond=inclure/zitem,id_zitem,csl,liste=oui,icones=oui,details=#GET{details},export=#GET{export},liens=#GET{liens},souligne=#GET{souligne},form_export=#GET{export}}
 	</BOUCLE_biblio>
 	</ul>

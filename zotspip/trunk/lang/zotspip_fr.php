@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'createurs' => 'Auteur(s)',
 
 	// D
+	'dernieres_publications' => 'Dernières publications',
 	'description_page-biblio' => 'Recherche et affichage des références bibliographiques de la librairie Zotero synchronisée avec ZotSpip.',
 	'deselectionner_tout' => 'Déselectionner tout',
 	'droits_insuffisants' => 'Vous n’avez pas les droits requis pour procéder à cette modification.',
@@ -39,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_autoriser_modif_zotero' => 'Activer les options de modification de la librairie Zotero (par exemple, la fusion d’auteurs) ? Si oui, qui a les droits suffisants pour valider ces modifications ? ATTENTION : vous devez également vérifier que vote <em>Clé API</em> a les droits en écriture.',
 	'explication_corriger_date' => 'Zotero transmets les dates de publication telles qu’elles ont été saisies. Dès lors, le processeur CSL n’est pas toujours en capacité de décomposer correctement ces dernières en raison de la grande variété de formats différents. Si tel est le cas, la date de publication ne sera pas affichée une fois les références mises en forme. ZotSpip peut corriger en amont les dates de publications. Attention : seule l’année sera alors transmise au processeur CSL, sauf si la date est de la forme aaaa-mm-jj ou aaaa-mm. Cette option n’a par contre aucune répercussion sur la librairie Zotero elle-même.',
 	'explication_depuis' => 'Soit une année (par exemple : <em>2009</em>), soit une durée en année suivie du mot français <em>ans</em> (par exemple : <em>3ans</em>) ou du mot anglais <em>years</em> (par exemple : <em>3years</em>).',
+	'explication_flux_rss' => 'Accessible à l\'adresse <em>spip.php?page=biblio-rss</em>, ce flux RSS présente les 50 derniers ajouts à la base bibliographique.',
 	'explication_id_librairie' => 'Pour une librairie personnelle, le <em>userID</em> est indiqué sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pour un groupe, le <em>groupID</em> se trouve dans l’URL de configuration du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.',
 	'explication_maj_zotspip' => 'ZotSpip se synchronise à intervalles réguliers (environ toutes les 4 heures) avec le serveur Zotero. Seules les dernières modifications (depuis la dernière synchronisation) sont prises en compte. Au besoin, vous pouvez forcer une mise à jour complète de la base de données, toutes les références étant alors téléchargées à nouveau (si votre librairie est importante, cette synchronisation se fera en plusieurs étapes, seulement 50 références pouvant être mises à jour à la fois).',
 	'explication_ordre_types' => 'Vous pouvez personnaliser l’ordre utilisé pour les tris par type de référence (changez l’ordre par glisser/déposer).',
@@ -74,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_type_annee' => 'par type puis par année',
 	'item_type_librairie_group' => 'groupe',
 	'item_type_librairie_user' => 'utilisateur',
+	'item_updated' => 'par date de mise à jour',
 	'item_volume' => 'par numéro de volume',
 	'item_webmestre' => 'seulement les webmestres',
 	'items_zotero' => 'Références Zotero',
@@ -92,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_details' => 'Détails',
 	'label_editeur' => 'Maison d’édition',
 	'label_export' => 'Afficher les options d’exportation ?',
+	'label_flux_rss' => 'Activer le flux RSS ?',
 	'label_id_librairie' => 'Identifiant de la librairie',
 	'label_identifiants_zotero' => 'Identifiants Zotero',
 	'label_liens' => 'Afficher les liens ?',

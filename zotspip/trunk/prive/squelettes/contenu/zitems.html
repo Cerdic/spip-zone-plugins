@@ -3,15 +3,15 @@
 	auteurs,1,
 	annee,-1,
 	type_ref,1,
-	volume,-1,
-	numero,-1
+	date_ajout,-1,
+	updated,-1
 }})]
 
 <B_biblio>
-<p class="pagination">[(#TRI{auteurs,<:zotspip:item_premier_auteur:>})] | [(#TRI{annee,<:zotspip:item_annee:>})] | [(#TRI{type_ref,<:zotspip:item_type:>})] | [(#TRI{volume,<:zotspip:item_volume:>})] | [(#TRI{numero,<:zotspip:item_numero:>})]</p>
+<p class="pagination">[(#TRI{auteurs,<:zotspip:item_premier_auteur:>})] | [(#TRI{annee,<:zotspip:item_annee:>})] | [(#TRI{type_ref,<:zotspip:item_type:>})]<br />[(#TRI{date_ajout,<:zotspip:item_date_ajout:>})] | [(#TRI{updated,<:zotspip:item_updated:>})]</p>
 <div class="liste">
 <ul class="liste-items">
-<BOUCLE_biblio(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,auteurs},#GET{defaut_tri}}{pagination 25}>
+<BOUCLE_biblio(ZITEMS spip_zitems_zcollections spip_zcollections){id_parent==0}{auteur?}{type_ref?}{annee?}{publication?}{conference?}{editeur?}{collection?}{type_doc?}{tag?}{spip_zcollections.zcollection?}{json LIKE %#ENV{recherche}%}{zotsip_depuis}{0,#ENV{max,100000}}{tri #ENV{par,updated},#GET{defaut_tri}}{pagination 25}>
 <li class="item"><p><ul>#INCLURE{fond=inclure/zitem,id_zitem,liste=oui,icones=oui,details=complet,export=oui,liens=oui,souligne=#ENV{auteur},lien_voir=oui,afficher_id=oui}</ul></p></li>
 </BOUCLE_biblio>
 </ul></div>

@@ -64,6 +64,14 @@
 				<label for="titre_page_biblio"><:zotspip:label_titre_page_biblio:></label>
 				<input type="text" name="titre_page_biblio" class="text" value="#ENV*{titre_page_biblio}" id="titre_page_biblio" [(#HTML5|oui)required='required']/>
 			</li>
+			<li class="editer_flux_rss[ (#ENV**{erreurs}|table_valeur{flux_rss}|oui)erreur]">
+				<label for='flux_rss'><:zotspip:label_flux_rss:></label>
+				<p class="explication"><:zotspip:explication_flux_rss:></p>
+				<select name="flux_rss" id="flux_rss">
+					<option value=""[(#ENV{flux_rss}|=={''}|oui)selected="selected"]><:item_non:></option>
+					<option value="on"[(#ENV{flux_rss}|=={on}|oui)selected="selected"]><:item_oui:></option>
+				</select>
+			</li>
 			<li class="editer_autoriser_modif_zotero[ (#ENV**{erreurs}|table_valeur{autoriser_modif_zotero}|oui)erreur]">
 				<label for='autoriser_modif_zotero'><:zotspip:label_autoriser_modif_zotero:></label>
 				<p class="explication"><:zotspip:explication_autoriser_modif_zotero:></p>
