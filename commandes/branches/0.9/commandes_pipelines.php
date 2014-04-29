@@ -3,14 +3,22 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// La CSS pour une commande
+
+/**
+ * Insertion de la feuille de style CSS sur les pages publiques
+ * 
+ */
 function commandes_insert_head_css($flux){
 	$css = find_in_path('css/commandes.css');
 	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$css' />\n";
 	return $flux;
 }
 
-// Supprimer toutes les commandes en cours qui sont trop vieilles
+
+/**
+ * Supprimer toutes les commandes en cours qui sont trop vieilles
+ * 
+ */
 function commandes_optimiser_base_disparus($flux){
 	include_spip('inc/config');
 	// On cherche la date depuis quand on a le droit d'avoir fait la commande (par défaut 1h)
@@ -35,28 +43,91 @@ function commandes_optimiser_base_disparus($flux){
 
 
 /**
- * Ajouter une boite sur la fiche de commande
+ * formulaires de dates sur la fiche d'une commande
  *
  * @param string $flux
  * @return string
  */
-function commandes_affiche_gauche($flux) {
-		
-	if ($flux['args']['exec'] == 'commande_edit'
-		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
-		AND $type = objet_type($table)
-		AND $id_table_objet = id_table_objet($type)
-		AND ($id = intval($flux['args'][$id_table_objet]))
-	  AND (autoriser('modifier', 'commande', 0))) {
-		//un test pour todo ajouter un objet (produit,document,article,abonnement,rubrique ...)
-        if (version_compare($GLOBALS['spip_version_branche'],'3.0.0','>'))
-        $flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
-        else $flux['data'] .= recuperer_fond('prive/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
-        
-			
-		}
-	
+function commandes_affiche_milieu($flux) {
+
+	if (
+		$exec = trouver_objet_exec($flux['args']['exec'])
+		and $exec['edition'] == false 
+		and $exec['type'] == 'commande'
+		and $id_table_objet = $exec['id_table_objet']
+		and (isset($flux['args'][$id_table_objet]) and $id_commande = intval($flux['args'][$id_table_objet]))
+	) {
+		$texte = recuperer_fond('prive/squelettes/contenu/commande_affiche_milieu',array('id_commande'=>$id_commande));
+	}
+
+	if (isset($texte)) {
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
+	}
+
 	return $flux;
 }
+
+
+/**
+ * accueil : liste des commandes en attente de validation
+ *
+ * @param string $flux
+ * @return string $flux 
+ */
+function commandes_accueil_encours($flux) {
+
+	include_spip('inc/config');
+	$activer = lire_config('commandes/accueil_encours');
+	$statuts = lire_config('commandes/statuts_actifs');
+	if ($activer and is_array($statuts)) {
+		foreach($statuts as $statut){
+			if ($nb_{$statut} = sql_countsel(table_objet_sql('commande'), "statut=".sql_quote($statut))) {
+				$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, 'commandes:info_1_commande_statut_'.$statut, 'commandes:info_nb_commandes_statut_'.$statut);
+				$texte .= recuperer_fond('prive/objets/liste/commandes', array(
+					'titre' => $titre_{$statut},
+					'statut' => $statut,
+					'cacher_tri' => true,
+					'nb' => 5),
+					array('ajax' => true)
+				);
+			}
+		}
+	}
+
+	if (isset($texte)) {
+		$flux .= $texte;
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Liste des commandes sur la page d'un auteur
+ *
+ * @param array $flux
+ * @return array $flux
+**/
+function commandes_affiche_auteurs_interventions($flux) {
+
+	if ($id_auteur = intval($flux['args']['id_auteur'])) {
+		$texte .= recuperer_fond('prive/objets/liste/commandes', array(
+			'id_auteur' => $id_auteur,
+			'titre' => _T('commandes:titre_commandes_auteur'),
+			'cacher_tri' => true
+			),
+			array('ajax' => true)
+		);
+	}
+	if (isset($texte)) {
+		$flux['data'] .= $texte;
+	}
+
+	return $flux;
+}
+
 
 ?>

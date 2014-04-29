@@ -1,0 +1,14 @@
+[(#REM)
+	Squelette appelant les formulaires permettant de dater une commande
+]
+<BOUCLE_commande(COMMANDES){id_commande}{tout}>
+<div class="ajax">
+	#FORMULAIRE_DATER_COMMANDE{#ID_COMMANDE,creation}
+</div>
+<div class="ajax">
+	#FORMULAIRE_DATER_COMMANDE{#ID_COMMANDE,paiement}
+</div>
+<div class="ajax">
+	#FORMULAIRE_DATER_COMMANDE{#ID_COMMANDE,envoi}
+</div>
+</BOUCLE_commande>

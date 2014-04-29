@@ -1,4 +1,8 @@
 <?php
+/**
+ * Fichier en doublon (et plus synchro) avec commandes_autorisations.php
+ * A supprimer ?
+**/
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;

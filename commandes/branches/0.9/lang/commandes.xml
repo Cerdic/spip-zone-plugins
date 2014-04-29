@@ -1,11 +1,20 @@
 <traduction module="commandes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/commandes/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="157" traduits="152" relire="6" modifs="0" nouveaux="-1" pourcent="96.82">
+		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Cyril MARION" lien="http://trad.spip.net/auteur/cyril-marion" />
+		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
+		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
-		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
+		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="jaro" lien="" />
+		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="fr" />
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="157" traduits="23" relire="0" modifs="2" nouveaux="132" pourcent="14.65">
+		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="157" traduits="157" relire="0" modifs="1" nouveaux="-1" pourcent="100.00">
+	</langue>
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="157" traduits="122" relire="1" modifs="4" nouveaux="30" pourcent="77.71">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

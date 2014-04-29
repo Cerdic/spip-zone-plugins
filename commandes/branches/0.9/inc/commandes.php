@@ -1,16 +1,25 @@
 <?php
+/**
+ * Fonctions (bis) du plugin Commandes
+ *
+ * @plugin     Commandes
+ * @copyright  2013
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Fonctions (bis)
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
+/**
  * Créer une commande en cours pour le visiteur actuel.
  *
  * @return int $id_commande Retourne l'identifiant SQL de la commande
- */
+**/
 function creer_commande_encours(){
 	include_spip('inc/session');
-	
+
 	// S'il y a une commande en cours dans la session, on la supprime
 	if (($id_commande = intval(session_get('id_commande'))) > 0){
 		// Si la commande est toujours "encours" on la supprime de la base
@@ -18,98 +27,72 @@ function creer_commande_encours(){
 			spip_log("Suppression d'une commande encours ancienne en session : $id_commande");
 			commandes_effacer($id_commande);
 		}
-		
+
 		// Dans tous les cas on supprime la valeur de session
 		session_set('id_commande');
 	}
-	
+
 	// Le visiteur en cours
 	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
-	
+
 	// La référence
 	$fonction_reference = charger_fonction('commandes_reference', 'inc/');
-	
+
 	$champs = array(
 		'reference' => $fonction_reference($id_auteur),
-		'id_auteur' => $id_auteur,
-		'date' => date('Y-m-d H:i:s'),
-		'statut' => 'encours'
+		'id_auteur' => $id_auteur
 	);
-	
-	// Envoyer aux plugins avant insertion
-	$champs = pipeline('pre_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_commandes',
-			),
-			'data' => $champs
-		)
-	);
-	$id_commande = sql_insertq('spip_commandes', $champs);
-	// Envoyer aux plugins après insertion
-	pipeline('post_insertion',
-		array(
-			'args' => array(
-				'table' => 'spip_commandes',
-				'id_objet' => $id_commande
-			),
-			'data' => $champs
-		)
-	);
-	
+
+	// Création de la commande
+	include_spip('action/editer_commande');
+	$id_commande = commande_inserer(null,$champs);
 	session_set('id_commande', $id_commande);
-	
+
 	return $id_commande;
 }
-
-
 
 
 /**
  * Suppression d'une ou plusieurs commandes
  * et de ses données associées
  *
- * @param int|array $ids_commande
+ * @param int|array $ids_commandes
  *     Identifiant de commande ou tableau d'identifiants
  * @return bool
  *     false si pas d'identifiant de commande transmis
  *     true sinon.
 **/
-function commandes_effacer($ids_commande) {
-	if (!$ids_commande) return false;
-	if (!is_array($ids_commande)) $ids_commande = array($ids_commande);
+function commandes_effacer($ids_commandes) {
+	if (!$ids_commandes) return false;
+	if (!is_array($ids_commandes)) $ids_commandes = array($ids_commandes);
 
-	spip_log("Suppression de commande : " . implode(',', $ids_commande));
+	spip_log("commandes_effacer : suppression de commande(s) : " . implode(',', $ids_commandes));
 
-	$in_commandes = sql_in('id_commande', $ids_commande);
-	$in_objet_commandes = sql_in('id_objet', $ids_commande);
+	$in_commandes = sql_in('id_commande', $ids_commandes);
 
-	// On supprime son contenu
+	// On supprime ses détails
 	sql_delete('spip_commandes_details', $in_commandes);
 
-	// S'il y a des adresses attachées aux commandes et inutiliséses ailleurs, on les supprime
-	if ($adresses_commande = sql_allfetsel('id_adresse', 'spip_adresses_liens', array('objet = '.sql_quote('commande'), $in_objet_commandes))){
-		$adresses_commande = array_map('reset', $adresses_commande);
-		spip_log("Suppression d'adresses des commandes supprimées : " . implode(',', $adresses_commande));
-		$in_adresses = sql_in('id_adresse', $adresses_commande);
-		sql_delete('spip_adresses_liens', array($in_adresses, 'objet='.sql_quote('commande'), $in_objet_commandes));
+	// On dissocie les commandes et les adresses, et éventuellement on supprime ces dernières
+	include_spip('action/editer_liens');
+	if ($adresses_commandes = objet_trouver_liens(array('adresse'=>'*'), array('commande'=>$ids_commandes))) {
+		$adresses_commandes = array_unique(array_map('reset',$adresses_commandes));
 
-		// si les adresses ne sont plus utilisées nul part, on les supprime
-		$adresses_non_orphelines = sql_allfetsel('id_adresse', 'spip_adresses_liens', $in_adresses);
-		$adresses_non_orphelines = array_map('reset', $adresses_non_orphelines);
-		$adresses_orphelines = array_diff($adresses_commande, $adresses_non_orphelines);
-		if ($adresses_orphelines) {
-			spip_log("Suppression d'adresses orphelines : " . implode(',', $adresses_orphelines));
-			sql_delete('spip_adresses', sql_in('id_adresse', $adresses_orphelines));
-		}
+		// d'abord, on dissocie les adresses et les commandes
+		spip_log("commandes_effacer : dissociation des adresses des commandes à supprimer : " . implode(',', $adresses_commandes));
+		objet_dissocier(array('adresse'=>$adresses_commandes), array('commande'=>$ids_commandes));
+
+		// puis si les adresses ne sont plus utilisées nul part, on les supprime
+		foreach($adresses_commandes as $id_adresse)
+			if (!count(objet_trouver_liens(array('adresse'=>$id_adresse), '*')))
+				sql_delete(table_objet_sql('adresse'), "id_adresse=".intval($id_adresse));
 	}
 
 	// On supprime les commandes
-	sql_delete('spip_commandes', $in_commandes);
+	sql_delete(table_objet_sql('commande'), $in_commandes);
 
 	return true;
 }
-
 
 
 /*
@@ -128,29 +111,33 @@ function commandes_effacer($ids_commande) {
  */
 function commandes_envoyer_notification( $qui, $id_type, $id_commande, $expediteur, $destinataires){
 	spip_log("commandes_envoyer_notification qui? $qui, id_type $id_type, id_commande $id_commande, expediteur $expediteur, destinataires ".implode(", ", $destinataires),'commandes');
-	
+
 	notifications_nettoyer_emails($destinataires);
 
 	if(defined('_DIR_PLUGIN_NOTIFAVANCEES') && defined('_DIR_PLUGIN_FACTEUR')) {
 		spip_log("commandes_envoyer_notification via Notifications avancées",'commandes');
-		if( !notifications_envoyer( $destinataires,
-											 "email",
-											 "commande_".$qui,
-											 $id_commande,
-											 $options=array('from'=>$expediteur)))
+		if (
+			!notifications_envoyer(
+				$destinataires,
+				"email",
+				"commande_".$qui,
+				$id_commande,
+				$options=array('from'=>$expediteur))
+		)
 			spip_log("commandes_envoyer_notification Erreur d'envoi via Notifications avancées",'commandes');
 	} else {
-		$texte = recuperer_fond("notifications/commande",array($id_type=>$id_commande,
-																				 "id"=>$id_commande,
-																				 "format_envoi"=>"plain",
-																				 "qui"=>$qui));
+		$texte = recuperer_fond("notifications/commande",array(
+			$id_type=>$id_commande,
+			"id"=>$id_commande,
+			"format_envoi"=>"plain",
+			"qui"=>$qui));
 		if( $qui == "client" ) {
 			$sujet = _T('commandes:votre_commande_sur', array('nom'=>$GLOBALS['meta']["nom_site"])) ;
 		} else {
 			$sujet = _T('commandes:une_commande_sur', array('nom'=>$GLOBALS['meta']["nom_site"])) ;
 		}
 		// Si un expediteur est impose, on doit utiliser la fonction envoyer_email pour rajouter l'expediteur
-		if($expediteur) {
+		if ($expediteur) {
 			$envoyer_mail = charger_fonction('envoyer_mail','inc');
 			spip_log("commandes_envoyer_notification via $envoyer_mail",'commandes');
 			if( !$envoyer_mail($destinataires, $sujet, $texte, $expediteur))
@@ -158,9 +145,57 @@ function commandes_envoyer_notification( $qui, $id_type, $id_commande, $expedite
 
 		} else {
 			spip_log("commandes_envoyer_notification via notifications_envoyer_mails",'commandes');
-			if( !notifications_envoyer_mails($destinataires, $texte, $sujet))
+			if ( !notifications_envoyer_mails($destinataires, $texte, $sujet) )
 				spip_log("commandes_envoyer_notification Erreur d'envoi via notifications_envoyer_mails",'commandes');
 		}
 	}
 }
+
+
+/*
+ * Traitement des notifications d'une commande
+ * Selon les options de configuration, des emails seront envoyés au(x) vendeur(s) et optionnellement au client
+ * 
+ * @param int|string $id_commande
+ *     identifiant de la commande
+ * @return void
+ */
+function traiter_notifications_commande($id_commande=0){
+
+	if (intval($id_commande)==0) return;
+
+	if (
+		include_spip('inc/config')
+		and $config = lire_config('commandes')
+		and $quand = $config['quand'] ? $config['quand'] : array()
+		and $config['activer'] // les notifications sont activées
+		and $statut = sql_getfetsel('statut', table_objet_sql('commande'), "id_commande=".intval($id_commande))
+		and in_array($statut, $quand) // le nouveau statut est valide pour envoyer une notification
+		and $notifications = charger_fonction('notifications', 'inc', true) // la fonction est bien chargée
+	) {
+
+		// Sans les plugins Facteur et Notifications avancées, on ne fait rien
+		if (!defined('_DIR_PLUGIN_NOTIFAVANCEES')) {
+			spip_log("traiter_notifications_commande : notifications impossibles sans le plugins Notifications avancées pour la commande $id_commande",'commandes.' . _LOG_ERREUR);
+			return;
+		}
+
+		// Déterminer l'expéditeur
+		$options = array();
+		if( $config['expediteur'] != "facteur" )
+			$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
+
+		// Envoyer au vendeur
+		spip_log("traiter_notifications_commande : notification vendeur pour la commande $id_commande",'commandes.' . _LOG_INFO);
+		$notifications('commande_vendeur', $id_commande, $options);
+
+		// Envoyer optionnellement au client
+		if($config['client']) {
+			spip_log("traiter_notifications_commande : notification client pour la commande $id_commande",'commandes.' . _LOG_INFO);
+			$notifications('commande_client', $id_commande, $options);
+		}
+
+	}
+}
+
 ?>

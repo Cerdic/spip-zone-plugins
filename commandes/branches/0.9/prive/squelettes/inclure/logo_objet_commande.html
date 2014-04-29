@@ -1,0 +1,23 @@
+[(#REM)
+	Affiche le logo d'un objet editorial
+	Il s'agit d'un hack faute de disposer d'une balise pour afficher le logo d'un objet donné
+	paramètres :
+		*objet
+		*id_objet
+		largeur      largeur maximale (defaut 50px)
+		hauteur      hauteur maximale (defaut 50px)
+		alt          texte alternatif
+][
+(#ENV{objet}|et{#ENV{id_objet}}|oui)
+#SET{objet,#ENV{objet}|in_array{#LISTE{article,rubrique,auteur}}|?{#ENV{objet}|substr{0,3},#ENV{objet}}}
+#SET{fichier, #GET{objet}|concat{'on',#ENV{id_objet}}}
+#SET{regex, #GET{fichier}|concat{'\.(jpg|gif|png)'}}
+#SET{chemin_logo,#VAL{IMG/}|find_all_in_path{#GET{regex}}|array_flip|array_keys|table_valeur{0}}
+#SET{alt, #ENV*{alt,#INFO_TITRE{#ENV{objet},#ENV{id_objet}}}|attribut_html}
+[(#GET{chemin_logo}
+	|balise_img{#GET{alt},'spip_logos'}
+	|image_reduire{#ENV{largeur,50},#ENV{hauteur,50}}
+	|inserer_attribut{title,#GET{alt}}
+)]
+]
+#FILTRE{trim}

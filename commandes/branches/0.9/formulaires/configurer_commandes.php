@@ -7,6 +7,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 	include_spip('inc/config');
 	include_spip('inc/plugin');
 	include_spip('commandes_fonctions');
+	include_spip('inc/puce_statut');
 	$config = lire_config('commandes');
 
 	$choix_expediteurs = array(
@@ -18,6 +19,10 @@ function formulaires_configurer_commandes_saisies_dist(){
 	if (defined('_DIR_PLUGIN_FACTEUR')){
 		$choix_expediteurs['facteur'] = _T('commandes:notifications_expediteur_choix_facteur');
 	}
+
+	// liste des statuts précédés de leur puce
+	foreach (commandes_lister_statuts() as $k=>$v)
+		$statuts[$k] = http_img_pack(statut_image('commande',$k),'')."&nbsp;".$v;
 
 	return array(
 		array(
@@ -72,13 +77,12 @@ function formulaires_configurer_commandes_saisies_dist(){
 			),
 			'saisies' => array(
 				array(
-					'saisie' => 'selection_multiple',
+					'saisie' => 'checkbox',
 					'options' => array(
 						'nom' => 'quand',
 						'label' => _T('commandes:notifications_quand_label'),
 						'explication' => _T('commandes:notifications_quand_explication'),
-						'cacher_option_intro' => 'on',
-						'datas' => commandes_lister_statuts(),
+						'datas' => $statuts,
 						'defaut' => $config['quand']
 					)
 				),
@@ -185,6 +189,42 @@ function formulaires_configurer_commandes_saisies_dist(){
 						'label' => _T('commandes:notifications_client_label'),
 						'explication' => _T('commandes:notifications_client_explication'),
 						'defaut' => $config['client'],
+					)
+				)
+			)
+		),
+		array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => 'fieldset_statuts_actifs_parametres',
+				'label' => _T('commandes:titre_statuts_actifs_parametres'),
+			),
+			'saisies' => array(
+				array(
+					'saisie' => 'explication',
+					'options' => array(
+						'nom' => 'explication_statuts_actifs',
+						'texte' => _T('commandes:explication_statuts_actifs'),
+					)
+				),
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'accueil_encours',
+						'label' => _T('commandes:notifications_activer_label'),
+						'explication' => _T('commandes:explication_accueil_encours'),
+						'defaut' => $config['accueil_encours'],
+					)
+				),
+				array(
+					'saisie' => 'checkbox',
+					'options' => array(
+						'nom' => 'statuts_actifs',
+						'label' => _T('commandes:label_statuts_actifs'),
+						'datas' => $statuts,
+						'defaut' => $config['statuts_actifs'],
+						'explication' => _T('commandes:explication_choix_statuts_actifs'),
+						'afficher_si' => '@accueil_encours@ == "on"'
 					)
 				)
 			)

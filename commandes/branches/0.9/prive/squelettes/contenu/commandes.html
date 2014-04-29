@@ -1,5 +1,5 @@
-<h1><:commandes:commandes_titre:></h1>
+<h1 class="grostitre"><:commandes:commandes_titre:></h1>
 
-<div class='ajax'>
-[(#INCLURE{fond=prive/objets/liste/commandes, env})]
-</div>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+
+<INCLURE{fond=prive/objets/liste/commandes, titre_dehors=oui, ajax=commandes, env}>

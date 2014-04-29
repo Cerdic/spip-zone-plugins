@@ -7,7 +7,8 @@
 ][(#HTTP_HEADER{Content-type: text/#ENV{format_envoi}[; charset=(#CHARSET)]})]#CACHE{0}
 <BOUCLE_art(COMMANDES){id_commande}{statut?}{tout}>
 
-<BOUCLE_contact(CONTACTS){id_auteur}>#SET{nom_client,#CIVILITE #NOM #PRENOM}</BOUCLE_contact>
+<BOUCLE_contact(CONTACTS?){id_auteur}>#SET{nom_client,#CIVILITE #NOM #PRENOM}</BOUCLE_contact>
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>#SET{nom_client,#NOM}</BOUCLE_auteur><//B_contact>
 
 [(#ENV{qui}|=={client}|oui)
 <p><:commandes:bonjour:> #GET{nom_client}</p>

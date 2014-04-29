@@ -1,0 +1,70 @@
+[(#REM)
+	Contenu détaillé d'une commande :
+	articles, quantités, prix total...
+][(#REM)
+	Inclus dans prive/objet/contenu/commande.html
+	Parametres :
+		id_commande*    identifiant de la commande
+]
+<BOUCLE_commande(COMMANDES){id_commande}{statut?}>
+<B_details>
+<div class="liste-objets">
+<table class="liste contenu-commande">
+	<thead>
+		<tr class="first">
+			<th scope="col" class="logo"></th>
+			<th scope="col" class="objet"><:commandes:label_objet:></th>
+			<th scope="col" class="description"><:commandes:designation:></th>
+			<th scope="col" class="prix_unitaire" title="<:commandes:label_prix_unitaire:> <:commandes:abbr_hors_taxe:>"><:commandes:abbr_prix_unitaire:></th>
+			<th scope="col" class="quantite" title="<:commandes:label_quantite:>"><:commandes:abbr_quantite:></th>
+			<th scope="col" class="taxe"><:commandes:label_taxe:></th>
+			<th scope="col" class="montant"><:commandes:montant:> <:commandes:abbr_toutes_taxes_comprises:></th>
+		</tr>
+	</thead>
+	<tbody>
+		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{!par objet}{par id_commandes_detail}>
+		#SET{objet_spip, #OBJET|in_array{#REM|lister_tables_objets_surnoms|array_keys}|et{#ID_OBJET|>{0}}|?{oui}}
+		#SET{objet_base, #OBJET|table_objet_sql|sql_countsel{#OBJET|id_table_objet|concat{=,#ID_OBJET}}}
+		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="logo">
+				[(#GET{objet_spip}|oui)
+				[(#GET{objet_base}|oui)<a href="[(#INFO_URL{#OBJET,#ID_OBJET})]">]
+					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet, id_objet})]
+				[(#GET{objet_base}|oui)</a>]
+				]
+			</td>
+			<td class="objet">
+				[(#GET{objet_spip}|oui)
+				[(#GET{objet_base}|oui)<a href="[(#INFO_URL{#OBJET,#ID_OBJET})]">]
+					[(#OBJET|objet_info{texte_objet}|_T)][ <:info_numero_abbreviation:>(#ID_OBJET)]
+				[(#GET{objet_base}|oui)</a>]
+				]
+			</td>
+			<td class="description #EDIT{descriptif}">
+				[(#DESCRIPTIF*|typo|supprimer_numero|sinon{#VAL{commandes:info_sans_descriptif}|_T|wrap{<span class='null'>}})]
+			</td>
+			<td class="prix_unitaire #EDIT{prix_unitaire_ht}[ (#PRIX_UNITAIRE_HT*|floatval|=={0.0}|oui)null]">
+				[(#PRIX_UNITAIRE_HT|round{2})]
+			</td>
+			<td class="quantite #EDIT{quantite}[ (#QUANTITE*|>{0}|non)null]">
+				[(#QUANTITE)]
+			</td>
+			<td class="taxe #EDIT{taxe}[ (#TAXE*|floatval|>{0.0}|non)null]">
+				[(#TAXE*|mult{100})%]
+			</td>
+			<td class="montant">[(#PRIX)]</td>
+		</tr>
+		</BOUCLE_details>
+	</tbody>
+	<tfoot>
+		<tr class="total_ttc">
+			<td colspan="6" class="descriptif"><:prix:label_total_ttc:></td>
+			<td class="montant">[(#PRIX)]</td>
+		</tr>
+	</tfoot>
+</table>
+</div>
+</B_details>
+<div class="error"><:commandes:info_commande_vide:></div>
+<//B_details>
+</BOUCLE_commande>

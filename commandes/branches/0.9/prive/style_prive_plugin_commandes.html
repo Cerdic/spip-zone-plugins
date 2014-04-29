@@ -1,4 +1,4 @@
-[(#REM)
+[(#REM)<style>
 
 	Ce squelette definit les styles de l'espace prive
 
@@ -13,9 +13,52 @@
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
+#SET{claire,##ENV{couleur_claire,c5e41c}}
+#SET{foncee,##ENV{couleur_foncee,9dba00}}
 
-.commandes #navigation {display:none;}
-.commandes #contenu {float:none; width:100%;}
-.commandes #contenu .liste .descriptif ul {padding-left:20px;}
 
 #navigation .infos .reference p {font-size:1.5em;}
+
+
+/* ---------------
+   PAGE COMMANDES 
+   --------------- */
+
+/* liste commandes */
+.commandes .liste td				{ padding-top: 1em; padding-bottom: 1em; vertical-align: top; }
+.commandes .liste .dates .label		{ color: #888; color: rgba(0,0,0,.66); }
+.commandes .liste .montant			{ white-space: pre; text-align: right; }
+.commandes .liste .envoye,
+.commandes .liste .envoye td		{ background-color: [#(#VAL{c5e41d}|couleur_eclaircir|couleur_eclaircir)]; }
+
+/* navigation latérale */
+.commandes.navigation .liste-items .on { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
+.commandes table.simple				{ margin: 0; }
+.commandes table.simple,
+.commandes table.simple tr,
+.commandes table.simple td			{ background: 0 none; }
+.commandes table.simple td			{ padding: 0; border: 0 none; }
+
+/* --------------
+   FICHE COMMANDE 
+   -------------- */
+.infos .formulaire_instituer_objet-commandes .statut_envoye .show { background-color: #GET{foncee}; }
+.infos .formulaire_instituer_objet-commandes .statut_paye .show { background-color: [#(#GET{foncee}|couleur_eclaircir|couleur_eclaircir)]; }
+.fiche_objet .formulaire_dater_commande	{ margin-top: 1em; margin-bottom: 1em; }
+/* contenu */
+.contenu-commande .detail td		{ vertical-align: middle; padding-top: 1.25em; padding-bottom: 1.25em; }
+.contenu-commande tfoot td			{ background-color: #eee; font-style: normal; }
+.contenu-commande .montant			{ text-align: right; white-space: pre; }
+.contenu-commande .detail .description { font-weight: bold; }
+.contenu-commande .description .prix_unitaire{ font-weight: normal; }
+.contenu-commande .quantite,
+.contenu-commande .taxe,
+.contenu-commande .prix_unitaire	{ text-align: center; }
+.contenu-commande .null				{ color: #aaa; color: rgba(0,0,0,.33); font-weight: normal; font-style= italic; }
+
+.contenu-commande .total_ttc		{ font-weight: bold; }
+.contenu-commande .total_ttc .descriptif{ text-align: right; }
+/* client */
+.client-commande td					{ vertical-align: top; }
+.client-commande .nom				{ margin: 0; }
+.client-commande .logo				{ width: 10px; }

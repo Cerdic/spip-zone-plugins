@@ -4,17 +4,18 @@
 	[(#REM) Si on trouve une commande on prend ça comme base ]
 	#SET{details, #ARRAY}
 	<BOUCLE_commande_details(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
-	[(#SET_PUSH{details, [(#ARRAY{
-		descriptif, [[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times;</strong> ](#DESCRIPTIF*|supprimer_numero)],
+	#SET{details, #GET{details}|push{#ARRAY{
+		objet,#OBJET,
+		id_objet,#ID_OBJET,
+		descriptif, #QUANTITE|>{1}|?{#QUANTITE &times;}|concat{#DESCRIPTIF*|supprimer_numero},
 		quantite, #QUANTITE,
-		prix, #PRIX*,
-	})]})]
+		prix, #PRIX*}}}
 	</BOUCLE_commande_details>
 	#SET{commande, #ARRAY{details, #GET{details}}}
 </BOUCLE_commande>
 #SET{commande,#ENV{commande}}
 <//B_commande>[
-(#REM) Affichage du detail dans une table si fromat html demande
+(#REM) Affichage du detail dans une table si format html demande
 
 ]<BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>[
 (#REM) Version texte
@@ -22,13 +23,13 @@
 ]<BOUCLE_test_format_texte(CONDITION){si #ENV{format_envoi}|=={plain}|oui}>[
 (#SET{total,0})
 ]<BOUCLE_details_texte(POUR){tableau #GET{commande}|table_valeur{details}}>[
-- (#VALEUR|table_valeur{descriptif}|trim|supprimer_tags)] : [(#VALEUR|table_valeur{prix}|prix_formater)][
-(#SET{total,[(#GET{total}|plus{[(#VALEUR|table_valeur{prix})]})]})
+- (#VALEUR{descriptif}|trim|supprimer_tags)] : [(#VALEUR{prix}|prix_formater)][
+(#SET{total,[(#GET{total}|plus{[(#VALEUR{prix})]})]})
 ]</BOUCLE_details_texte>
 
 <:prix:label_total_ttc:> : [(#GET{total}|prix_formater)]
    </BOUCLE_test_format_texte>
-      <table class="commande" cellspacing="0">
+      <table class="commande[ (#REM|test_espace_prive|oui)liste-objets contenu-commande]"[ (#REM|test_espace_prive|non)cellspacing="0"]>
          <thead>
             <tr>
                <th class="description"><:commandes:designation:></th>
@@ -38,11 +39,11 @@
          <tbody>
             #SET{total,0}
             <BOUCLE_details(POUR){tableau #GET{commande}|table_valeur{details}}>
-            <tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
-               <td class="description">[(#VALEUR|table_valeur{descriptif})]</td>
-               <td class="montant">[(#VALEUR|table_valeur{prix}|prix_formater)]</td>
+            <tr class="detail [(#VALEUR{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
+               <td class="description"><a href="[(#VALEUR{id_objet}|generer_url_entite{#VALEUR{objet}})]">[(#VALEUR{descriptif})]</a></td>
+               <td class="montant">[(#VALEUR{prix}|prix_formater)]</td>
             </tr>
-            [(#SET{total,[(#GET{total}|plus{[(#VALEUR|table_valeur{prix})]})]})]
+            [(#SET{total,[(#GET{total}|plus{[(#VALEUR{prix})]})]})]
             </BOUCLE_details>
          </tbody>
          <tfoot>

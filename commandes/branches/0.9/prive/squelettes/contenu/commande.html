@@ -1,27 +1,34 @@
 <BOUCLE_commande(COMMANDES){id_commande}{statut==.*}{si #ENV{exec}|=={commande}}>
 [(#BOITE_OUVRIR{
-    [(#AUTORISER{modifier,commande,#ID_COMMANDE})
-        [(#ID_COMMANDE|afficher_qui_edite{commande}|non)
-            [(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{<:commandes:commande_editer:>,commande-24.png,edit,right ajax preload})]
-        ]
-        [(#ID_COMMANDE|afficher_qui_edite{commande}|oui)
-            [(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{#ID_COMMANDE|afficher_qui_edite{commande},warning-24,'',right edition_deja ajax preload})]
-        ]
-    ]
+	[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+		[(#ID_COMMANDE|afficher_qui_edite{commande}|non)
+		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{<:commandes:commande_editer:>,commande-24.png,edit,right ajax preload})]
+		]
+		[(#ID_COMMANDE|afficher_qui_edite{commande}|oui)
+		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{#ID_COMMANDE|afficher_qui_edite{commande},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+	<h1><:commandes:reference_ref{ref=#REFERENCE}:></h1>
+	,simple fiche_objet})]
 
-    <h1><:commandes:reference_ref{ref=#REFERENCE}:></h1>
-
-,simple fiche_objet})]
-
-	
+	<!--affiche_milieu-->
 
 	<div id='wysiwyg'>
-	<INCLURE{fond=prive/objets/contenu/commande,id=#ID_COMMANDE,ajax=wysiwyg}>
+		<INCLURE{fond=prive/objets/contenu/commande, id=#ID_COMMANDE, ajax=wysiwyg, env}>
 	</div>
-	
 
+	<div class="nettoyeur"></div>
 
-	[(#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commande,id,#ID_COMMANDE},data}})<div class="nettoyeur"></div>]
+	[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+		[(#ID_COMMANDE|afficher_qui_edite{commande}|non)
+		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{<:commandes:commande_editer:>,commande-24.png,edit,right ajax preload})]
+		]
+		[(#ID_COMMANDE|afficher_qui_edite{commande}|oui)
+		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone_verticale{#ID_COMMANDE|afficher_qui_edite{commande},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	[(#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commande,id,#ID_COMMANDE},data,'<div class="nettoyeur"></div>'}})]
 
 #BOITE_FERMER
 
@@ -29,7 +36,7 @@
 [(#INCLURE{fond=prive/boite/lier_commande_contact}{id_commande=#ID_COMMANDE}{redirect=#SELF})]
 ]
 [(#EVAL{_AJAX}|oui)
-    <script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
 ]
 </BOUCLE_commande>
 [(#ENV**{exec}|=={commande_edit}|?{#INCLURE{fond=prive/squelettes/contenu/commande_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]

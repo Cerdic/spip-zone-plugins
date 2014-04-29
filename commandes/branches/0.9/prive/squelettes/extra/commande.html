@@ -1,3 +1,22 @@
+[(#REM) Liste les changements de statuts qui déclenchent une notification, cf configuration de commandes]
+<BOUCLE_affichage(CONDITION){si #ENV{exec}|!={commande_edit}}>
 #BOITE_OUVRIR
-[(#INCLURE{fond=prive/objets/liste/commandes_details,objet=commande,id_objet=#ID_COMMANDE})]
+<B_data>
+<h4><:commandes:explications_notifications_statuts:></h4>
+<p>
+	<ul>
+		<BOUCLE_data(DATA){source table,#CONFIG{commandes/quand,#LISTE}}>
+		<li>[(#CHEMIN_IMAGE{#VAL{commande}|objet_info{statut_images}|table_valeur{#VALEUR}}|balise_img)&nbsp;][<small>(#VALEUR|commandes_lister_statuts)</small>]</li>
+		</BOUCLE_data>
+	</ul>
+</p>
+</B_data>
+<:commandes:explications_notifications_statuts_aucune:></p>
+<//B_data>
+
+[(#AUTORISER{configurer,commandes}|oui)
+[(#URL_ECRIRE{configurer_commandes}|icone_horizontale{<:commandes:configurer_notifications_commandes:>,commandes-24})]
+]
+
 #BOITE_FERMER
+</BOUCLE_affichage>
