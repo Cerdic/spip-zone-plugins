@@ -23,19 +23,21 @@
 	</thead>
 	<tbody>
 		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{!par objet}{par id_commandes_detail}>
+		#SET{objet_spip, #OBJET|in_array{#REM|lister_tables_objets_surnoms|array_keys}|et{#ID_OBJET|>{0}}|?{oui}}
+		#SET{objet_base, #OBJET|table_objet_sql|sql_countsel{#OBJET|id_table_objet|concat{=,#ID_OBJET}}}
 		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo">
-				[(#OBJET|objet_icone|et{#ID_OBJET}|oui)
-				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+				[(#GET{objet_spip}|oui)
+				[(#GET{objet_base}|oui)<a href="[(#INFO_URL{#OBJET,#ID_OBJET})]">]
 					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet, id_objet})]
-				</a>
+				[(#GET{objet_base}|oui)</a>]
 				]
 			</td>
 			<td class="objet">
-				[(#OBJET|objet_icone|et{#ID_OBJET}|oui)
-				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">
+				[(#GET{objet_spip}|oui)
+				[(#GET{objet_base}|oui)<a href="[(#INFO_URL{#OBJET,#ID_OBJET})]">]
 					[(#OBJET|objet_info{texte_objet}|_T)][ <:info_numero_abbreviation:>(#ID_OBJET)]
-				</a>
+				[(#GET{objet_base}|oui)</a>]
 				]
 			</td>
 			<td class="description #EDIT{descriptif}">
