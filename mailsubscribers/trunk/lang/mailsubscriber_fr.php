@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_adresse_existante' => 'Cette adresse email est déjà dans la liste',
+	'erreur_technique_subscribe' => 'Une erreur technique a empêché votre inscription.',
 	// I
 	'icone_creer_mailsubscriber' => 'Ajouter une inscription',
 	'icone_modifier_mailsubscriber' => 'Modifier cette inscription',

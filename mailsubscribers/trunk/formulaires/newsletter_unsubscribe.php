@@ -53,7 +53,7 @@ function formulaires_newsletter_unsubscribe_traiter_dist($listes=''){
 	$newsletter_unsubscribe($email, $options);
 
 	set_request('email_unsubscribe');
-	return array('message_ok'=>_T('newsletter:unsubscribe_message_ok',array('email'=>$email)),'editable'=>true);
+	return array('message_ok'=>_T('newsletter:unsubscribe_message_ok',array('email'=>"<b>$email</b>")),'editable'=>true);
 }
 
 

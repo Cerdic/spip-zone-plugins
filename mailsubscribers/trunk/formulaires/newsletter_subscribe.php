@@ -53,11 +53,21 @@ function formulaires_newsletter_subscribe_traiter_dist($listes=''){
 	if ($listes AND is_array($listes) AND count($listes))
 		$options['listes'] = $listes;
 
-	$newsletter_subscribe = charger_fonction("subscribe","newsletter");
-	$newsletter_subscribe($email,$options);
+	$res = array(
+		'editable'=>true
+	);
 
+	$newsletter_subscribe = charger_fonction("subscribe","newsletter");
+	if ($newsletter_subscribe($email,$options)){
+		if (lire_config('mailsubscribers/double_optin',0))
+			$res['message_ok'] = _T('newsletter:subscribe_message_ok_confirm',array('email'=>"<b>$email</b>"));
+		else
+			$res['message_ok'] = _T('newsletter:subscribe_message_ok',array('email'=>"<b>$email</b>"));
+	}
+	else
+		$res['message_erreur'] = _T('mailsubscriber:erreur_technique_subscribe');
 	set_request('email');
-	return array('message_ok'=>_T('newsletter:subscribe_message_ok',array('email'=>$email)),'editable'=>true);
+	return $res;
 }
 
 

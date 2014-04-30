@@ -16,8 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_link_unsubscribe' => 'Me désinscrire de cette Newsletter',
 
 	// S
-	'subscribe_message_ok' => 'Votre inscription avec l\'adresse @email@ a bien été prise en compte',
-	'unsubscribe_message_ok' => 'L\'adresse @email@ a été désinscrite de la Newsletter',
+	'subscribe_message_ok' => 'Votre inscription avec l\'adresse @email@ a bien été prise en compte.',
+	'subscribe_message_ok_confirm' => 'Vous allez recevoir un email sur l\'adresse @email@ pour confirmer votre inscription.',
+	'unsubscribe_message_ok' => 'L\'adresse @email@ a été désinscrite de la Newsletter.',
 
 
 );
