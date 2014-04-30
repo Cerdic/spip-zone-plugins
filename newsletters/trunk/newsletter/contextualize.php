@@ -52,6 +52,9 @@ function newsletter_contextualize_dist($content,$context){
 	if (file_exists($f=$tmp.".html") OR file_put_contents($f,$content)){
 		if (_DIR_RACINE AND strncmp($tmp,_DIR_RACINE,strlen(_DIR_RACINE))==0)
 			$tmp = substr($tmp,strlen(_DIR_RACINE));
+		// si chemin absolu, l'ajouter au path
+		elseif (substr(_DIR_CACHE,0,1)=="/")
+			_chemin(_DIR_CACHE);
 		$content = recuperer_fond($tmp,$context);
 
 		#@unlink($f); // on le garde pour l'envoi suivant, mais il faudrait purger a un moment !
