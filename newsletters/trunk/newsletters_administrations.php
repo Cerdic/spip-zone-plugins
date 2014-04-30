@@ -74,7 +74,7 @@ function newsletters_import_from_spiplistes(){
 		$res = sql_select(
 			"C.id_courrier,C.titre as sujet, C.texte as html, C.message_texte as texte," .
 			"C.date_fin_envoi as date,C.date_debut_envoi as date_start, C.statut AS statut",
-			'spip_courriers AS C',"C.id_newsletter=0 AND C.total_abonnes>0 AND C.type=".sql_quote('nl'));
+			'spip_courriers AS C',"C.id_newsletter=0 AND C.total_abonnes>0 AND ".sql_in("C.type",array('nl','auto')));
 		while ($row = sql_fetch($res)){
 
 			$id_courrier = $row['id_courrier'];
@@ -98,6 +98,11 @@ function newsletters_import_from_spiplistes(){
 			$row['html_email']   = $row['html'];
 			$row['html_page']    = $row['html'];
 			unset($row['sujet'], $row['texte'], $row['html'], $row['id'], $row['date_start']);
+			if ($row['statut']=="auto")
+				$row['statut'] = "publie";
+			if (!in_array($row['statut'],array("publie","prop","prepa")))
+				$row['statut'] = 'publie';
+			$row['baked'] = 1;
 
 			// inserer la lettre dans newsletter
 			if ($id_newsletter = newsletters_import_one($row)){
@@ -159,6 +164,7 @@ function newsletters_import_from_spiplettres(){
 			$row['html_email']   = $row['html'];
 			$row['html_page']    = $row['html'];
 			unset($row['sujet'], $row['texte'], $row['html'], $row['date_start']);
+			$row['baked'] = 1;
 
 			if ($id_newsletter = newsletters_import_one($row)){
 				sql_updateq("spip_lettres",array('id_newsletter'=>$id_newsletter),"id_lettre=".intval($id_lettre));
@@ -237,6 +243,7 @@ function newsletters_import_from_clevermail(){
 			$row['html_email']   = $row['html'];
 			$row['html_page']    = $row['html'];
 			unset($row['sujet'], $row['texte'], $row['html'], $row['date_start']);
+			$row['baked'] = 1;
 
 			// inserer la lettre dans newsletter
 			if ($id_newsletter = newsletters_import_one($row)){
@@ -266,8 +273,10 @@ function newsletters_import_from_clevermail(){
  *     Identifiant de la newsletter
 **/
 function newsletters_import_one($set){
+	include_spip("inc/drapeau_edition");
 	$id = objet_inserer("newsletter",0,$set);
 	objet_modifier("newsletter",$id,$set); // double detente
+	debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
 	return $id;
 }
 
