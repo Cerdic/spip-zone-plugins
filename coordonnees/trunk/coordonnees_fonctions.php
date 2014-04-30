@@ -33,9 +33,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
 **/
-function coordonnees_lister_types_coordonnees($coordonnee='', $type='') {
+function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 
-	if (!strlen($coordonnee)) return;
+	if (!strlen($coordonnee) or $type==null) return;
 
 	// On veut définir une liste avec pour chaque objet coordonnée, ses types et les chaînes de langue correspondantes
 	// Or les chaînes de langue suivent la norme : type_{coordonnee}_{type}
