@@ -21,7 +21,7 @@
 [<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{commandes:titre_adresse_commande,commandes:titre_adresses_commande})</h2>]
 <table><tbody>
 	<BOUCLE_adresses_commande(adresses_liens){id_commande}{!par type}>
-	#SET{type, #VAL{coordonnees:type_adr_}|concat{#TYPE}|_T{'',#ARRAY{'force',''}}}
+	#SET{type, #TYPE|coordonnees_lister_types_adresses}
 	#SET{intitule, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
 	#SET{icone, #CHEMIN_IMAGE{#VAL{type_adr_}|concat{#TYPE,.png}}|balise_img}
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
@@ -44,7 +44,7 @@
 [<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{commandes:titre_adresse_contact,commandes:titre_adresses_contact})</h2>]
 <table><tbody>
 	<BOUCLE_adresses_contact(ADRESSES adresses_liens){id_contact}>
-	#SET{type, #VAL{coordonnees:type_adr_}|concat{#TYPE}|_T{'',#ARRAY{'force',''}}}
+	#SET{type, #TYPE|coordonnees_lister_types_adresses}
 	#SET{intitule, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
 	#SET{icone, #CHEMIN_IMAGE{#VAL{type_adr_}|concat{#TYPE,.png}}|balise_img}
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
@@ -67,7 +67,7 @@
 [<h2 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{commandes:titre_adresse_client,commandes:titre_adresses_client})</h2>]
 <table><tbody>
 	<BOUCLE_adresses_auteur(ADRESSES adresses_liens){id_auteur}>
-	#SET{type, #VAL{coordonnees:type_adr_}|concat{#TYPE}|_T{'',#ARRAY{'force',''}}}
+	#SET{type, #TYPE|coordonnees_lister_types_adresses}
 	#SET{intitule, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
 	#SET{icone, #CHEMIN_IMAGE{#VAL{type_adr_}|concat{#TYPE,.png}}|balise_img}
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
