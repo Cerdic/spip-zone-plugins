@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /*
  * Fonction privée mutualisée renvoyant les couples types/chaînes de langue pour une coordonnée
+ * Ou bien la chaîne de langue d'un type donné
  * Utilisée par les fonctions filtre_coordonnees_lister_types_xxx()
  *
  * adresses : RFC2426/CCITT.X520 :         dom home intl parcel postal pref work
@@ -26,10 +27,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     coordonnée dont on veut retourner les types
  *     adresse | numero | email
  *     à éviter : adr | tel | mel
- * @return array
- *     Couple types/chaînes de langues
+ * @param string $type
+ *     Type dont on veut retourner la chaîne de langue
+ * @return array|int
+ *     Couples types/chaînes de langues
+ *     ou chaîne de langue d'un type donné
 **/
-function coordonnees_lister_types_coordonnees($coordonnee='') {
+function coordonnees_lister_types_coordonnees($coordonnee='', $type='') {
 
 	if (!strlen($coordonnee)) return;
 
@@ -63,44 +67,56 @@ function coordonnees_lister_types_coordonnees($coordonnee='') {
 
 	// Remplissage de la liste
 	foreach ($types as $coord=>$types_coord)
-		foreach ($types_coord as $type)
-			$liste[$coord][$type] = _T('coordonnees:type_'.$coord2abbr[$coordonnee].'_'.$type);
+		foreach ($types_coord as $type_coord)
+			$liste[$coord][$type_coord] = _T('coordonnees:type_'.$coord2abbr[$coordonnee].'_'.$type_coord);
 
 	// Envoyer aux plugins pour qu'ils complètent (ou altèrent) la liste
 	$liste = pipeline('types_coordonnees', $liste);
 
-	return $liste[$coordonnee];
+	if ($type)
+		return $liste[$coordonnee][$type];
+	else 
+		return $liste[$coordonnee];
 }
 
 
 /*
  * Filtre renvoyant les types d'adresses possibles, et leurs chaînes de langue
  *
- * @return array
- *     Couples types / chaînes de langues
+ * @param string $type
+ *     Type dont on veut retourner la chaîne de langue
+ * @return array|int
+ *     Couples types/chaînes de langues
+ *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_adresses() {
-	return coordonnees_lister_types_coordonnees('adresse');
+function filtre_coordonnees_lister_types_adresses($type='') {
+	return coordonnees_lister_types_coordonnees('adresse',$type);
 }
 
 /*
  * Filtre renvoyant les types de numéros possibles, et leurs chaînes de langue
  *
- * @return array
- *     Couples types / chaînes de langues
+ * @param string $type
+ *     Type dont on veut retourner la chaîne de langue
+ * @return array|int
+ *     Couples types/chaînes de langues
+ *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_numeros() {
-	return coordonnees_lister_types_coordonnees('numero');
+function filtre_coordonnees_lister_types_numeros($type='') {
+	return coordonnees_lister_types_coordonnees('numero',$type);
 }
 
 /*
  * Filtre renvoyant les types d'emails possibles, et leurs chaînes de langue
  *
- * @return array
- *     Couples types / chaînes de langues
+ * @param string $type
+ *     Type dont on veut retourner la chaîne de langue
+ * @return array|int
+ *     Couples types/chaînes de langues
+ *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_emails() {
-	return coordonnees_lister_types_coordonnees('email');
+function filtre_coordonnees_lister_types_emails($type='') {
+	return coordonnees_lister_types_coordonnees('email',$type);
 }
 
 /*
