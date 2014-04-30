@@ -24,6 +24,7 @@ include_spip('inc/autoriser');
  *   champ obligatoire
  * @param array $options
  *   listes : array
+ *   notify : bool
  * @return bool
  *   true si inscrit, false sinon
  */
@@ -69,8 +70,9 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 		if (count($set)){
 			autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
 			autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber']);
-			// d'abord le statut pour notifier avec le bon mail
-			if (isset($set['statut'])){
+			// d'abord le statut pour notifier avec le bon mail, sauf si notify=false en option
+			if (isset($set['statut'])
+				AND (!isset($options['notify']) OR $options['notify'])){
 				objet_modifier("mailsubscriber",$row['id_mailsubscriber'],array('statut'=>$set['statut']));
 				unset($set['statut']);
 			}
