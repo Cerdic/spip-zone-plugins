@@ -70,7 +70,7 @@ function mailshot_import_from_spiplistes(){
 		sql_alter("TABLE spip_courriers ADD id_mailshot bigint(21) NOT NULL DEFAULT 0");
 		$res = sql_select(
 			"C.id_courrier,C.titre as sujet, C.texte as html, C.message_texte as texte,C.date_fin_envoi as date,C.date_debut_envoi as date_start,C.total_abonnes as total,C.nb_emails_envoyes+C.nb_emails_non_envoyes+C.nb_emails_echec as current,C.nb_emails_non_envoyes+C.nb_emails_echec as failed",
-			'spip_courriers AS C',"C.id_mailshot=0 AND C.total_abonnes>0 AND C.type=".sql_quote('nl'));
+			'spip_courriers AS C',"C.id_mailshot=0 AND C.total_abonnes>0 AND ".sql_in("C.type",array('nl','auto')));
 		while ($row = sql_fetch($res)){
 
 			$id_courrier = $row['id_courrier'];
@@ -352,8 +352,10 @@ function mailshot_import_from_clevermail(){
  *     Identifiant de l'envoi
 **/
 function mailshot_import_one($set){
+	include_spip("inc/drapeau_edition");
 	$id = objet_inserer("mailshot",0,$set);
 	objet_modifier("mailshot",$id,$set); // double detente
+	debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
 	return $id;
 }
 
