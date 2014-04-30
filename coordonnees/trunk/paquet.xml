@@ -1,7 +1,7 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.1.25"
+	version="2.2.0"
 	schema="1.8.2"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
@@ -15,13 +15,13 @@
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 
-	<necessite nom="saisies"	compatibilite="[1.24.0;]" />
-	<necessite nom="pays"		compatibilite="[1.0.5;]" />
-	<necessite nom="verifier"	compatibilite="[0.1.15;]" />
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+	<necessite nom="pays" compatibilite="[1.0.5;]" />
+	<necessite nom="verifier" compatibilite="[0.1.15;]" />
 
 	<!-- Declaration des tables -->
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/coordonnees.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/coordonnees.php" /> 
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/coordonnees.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/coordonnees.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/coordonnees.php" />
 	<!-- Autorisations -->
 	<pipeline nom="autoriser" inclure="coordonnees_autorisations.php" />
@@ -30,7 +30,9 @@
 	<pipeline nom="affiche_auteurs_interventions" inclure="coordonnees_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="coordonnees_pipelines.php" />
 	<!-- optimiser liens -->
-	<pipeline nom="optimiser_base_disparus"		inclure="coordonnees_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="coordonnees_pipelines.php" />
+	<!-- définition des types des coordonnées -->
+	<pipeline nom="types_coordonnees" inclure="coordonnees_pipelines.php" action=""/>
 
 	<menu nom="coordonnees" titre="coordonnees:titre_coordonnees" parent="menu_edition" icone="images/addressbook-16.png" action="coordonnees" />
 

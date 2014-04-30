@@ -57,7 +57,7 @@ function formulaires_editer_email_saisies_dist($id_email='new', $retour='', $ass
 	if($associer_objet) {
 		$saisie_type = array(
 			array (
-			'saisie' => 'type_mel',
+			'saisie' => 'type_email',
 				'options' => array (
 					'nom' => 'type',
 					'label' => _T('coordonnees:label_type_email'),

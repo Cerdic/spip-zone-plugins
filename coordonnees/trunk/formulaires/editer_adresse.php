@@ -101,7 +101,7 @@ function formulaires_editer_adresse_saisies_dist($id_adresse='new', $retour='', 
 	if($associer_objet) {
 		$saisie_type = array(
 			array (
-			'saisie' => 'type_adr',
+			'saisie' => 'type_adresse',
 			'options' => array (
 				'nom' => 'type',
 				'label' => _T('coordonnees:label_type_adresse'),

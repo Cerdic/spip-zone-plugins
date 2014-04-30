@@ -55,7 +55,7 @@ function formulaires_editer_numero_saisies_dist($id_numero='new', $retour='', $a
 	if($associer_objet) {
 		$saisie_type = array(
 			array (
-			'saisie' => 'type_tel',
+			'saisie' => 'type_numero',
 				'options' => array (
 					'nom' => 'type',
 					'label' => _T('coordonnees:label_type_numero'),
