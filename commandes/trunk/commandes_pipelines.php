@@ -130,4 +130,27 @@ function commandes_affiche_auteurs_interventions($flux) {
 }
 
 
+/**
+ * Compléter la liste des types d'adresses du plugin coordonnées
+ *
+ * @param array $flux
+ * @return array $flux
+**/
+function commandes_types_coordonnees($liste) {
+
+	$types_adresses = $liste['adresse'];
+	if (!$types_adresses or !is_array($types_adresses)) $types_adresses = array();
+
+	// on définit les couples types + chaînes de langue à ajouter
+	$types_adresses_commandes = array(
+		'livraison' => _T('commandes:type_adresse_livraison'),
+		'facturation' => _T('commandes:type_adresse_facturation')
+	);
+	// on les rajoute à la liste des types des adresses
+	$liste['adresse'] = array_merge($types_adresses, $types_adresses_commandes);
+
+	return $liste;
+}
+
+
 ?>

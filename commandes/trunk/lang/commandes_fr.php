@@ -187,6 +187,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_informations_client' => 'Client',
 	'titre_logo_commande' => 'Logo de la commande',
 	'titre_statuts_actifs_parametres' => 'Commandes actives',
+	'type_adresse_facturation' => 'Facturation',
+	'type_adresse_livraison' => 'Livraison',
 
 	// U
 	'une_commande_de' => 'Une commande de : ',
