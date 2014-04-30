@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="0.10.25"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/commande.png"
@@ -29,6 +29,7 @@
 	<pipeline nom="affiche_auteurs_interventions" inclure="commandes_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="commandes_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="commandes_pipelines.php" />
+	<pipeline nom="types_coordonnees" inclure="commandes_pipelines.php" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
