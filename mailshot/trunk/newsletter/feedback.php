@@ -76,7 +76,7 @@ function newsletter_feedback_dist($quoi,$email,$tracking_id){
 		sql_updateq("spip_mailshots_destinataires",$set,"id_mailshot=".intval($id_mailshot)." AND email=".sql_quote($email));
 		if ($desabonner){
 			$unsubscribe = charger_fonction("unsubscribe","newsletter");
-			$unsubscribe($email);
+			$unsubscribe($email,array('notify'=>false));
 		}
 	}
 	else {
