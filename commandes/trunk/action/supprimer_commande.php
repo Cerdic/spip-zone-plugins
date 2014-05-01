@@ -1,22 +1,38 @@
 <?php
-
-/*
- * Plugin Commandes
- * Distribue sous licence GPL
+/**
+ * Fonction du plugin Commandes
+ * Action : supprimer une commande
  *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Action
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_supprimer_commande_dist() {
+/**
+ * Supprime une commande et ses données associées (détails + adresses)
+ *
+ * ex: #URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE,#SELF}
+ * 
+ * @param $arg string
+ *     id_commande:    identifiant de la commande
+ * @return void
+ */
+function action_supprimer_commande_dist($arg=null) {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_commande = $securiser_action();
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+	$id_commande = $arg;
 
 	// suppression
 	if ($id_commande = intval($id_commande)) {
-		sql_delete('spip_commandes', 'id_commande=' . $id_commande);
-		sql_delete('spip_commandes_details', 'id_commande=' . $id_commande);
+		include_spip('inc/commandes');
+		commandes_effacer($id_commande);
 	}
 
 }

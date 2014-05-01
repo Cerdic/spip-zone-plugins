@@ -1,9 +1,10 @@
 <?php
 /**
- * Action de suppression d'un détail d'une commande
+ * Fonction du plugin Commandes
+ * Action : suppression d'un détail d'une commande
  *
  * @plugin     Commandes
- * @copyright  2013
+ * @copyright  2014
  * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
  * @licence    GPL 3
  * @package    SPIP\Commandes\Action
@@ -12,18 +13,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Supprime un détail (un article) d'une commande, dans la table spip_commandes_details
- * si on est autorisé (cf. commandes_autorisations.php)
+ * Supprime un détail d'une commande, dans la table spip_commandes_details
+ *
  * ex: #URL_ACTION_AUTEUR{supprimer_detail_commande,#ID_COMMANDE-#ID_COMMANDES_DETAIL,#SELF}
  * 
- * @param $arg string arguments séparés par un charactère non alphanumérique
- *                    id_commande:          identifiant de la commande
- *                    id_commandes_detail:  identifiant du détail
- * @return unknown_type
-**/
+ * @param $arg string
+ *     arguments séparés par un charactère non alphanumérique
+ *     id_commande:            identifiant de la commande
+ *     id_commandes_detail:    identifiant du détail
+ * @return void
+ */
 function action_supprimer_detail_commande($arg=null) {
 
-	if ($arg==null) {
+	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
@@ -38,6 +40,5 @@ function action_supprimer_detail_commande($arg=null) {
 	}
 
 }
-
 
 ?>
