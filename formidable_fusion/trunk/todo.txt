@@ -1,0 +1,31 @@
+Liste des choses à faire et améliorer au 1er Mai 2014
+-----------------------------------------------------
+
+- Lors d'une fusion, permettre de visualiser les champs avant validation. Actuellement, on peut ensuite supprimer un à un les champs, mais c'est long
+- Proposer une sauvegarde des formulaires/groupes de champs dans un dossier spécifique
+- Piocher dans ce dossier les différentes groupes de champs à fusionner
+
+
+Pistes de réflexion pour grouper des champs
+-------------------------------------------
+Autre type de dev possible sur le principe de groupes de saisies à insérer  dans les champs des formulaires formidable.
+
+Conversation IRC avec RastaPopoulos:
+
+RastaPopoulos - dans les idées qui trottent depuis le début, il y a le fait de pouvoir enregistrer des "groupes de saisies" réutilisables, mais je ne sais pas comment ça doit prendre forme, genre "adresse" qui insère direct "rue / code postal / ville"
+
+- ça pourrait être un dossier contenant des yaml avec (titre / description / icône / liste de saisies) et du coup ça serait partageable par ex dans saisies/groupes/adresse.yaml dans Saisies ou dans un sous plugin de Saisies, je ne sais pas, au moins pour le proof of concept, peut-être genre un plugin "Groupes de saisies"
+
+
+- J'ai parlé de yaml pour les groupes prédéfinis à insérer en imaginant qu'il y ait un dossier standard pour lister des "groupes de saisies" par exemple : /saisies/groupes/adresse.yaml avec dedans des YAML qui décrivent des groupes chacun ayant au moins deux champs : titre / saisies + optionnellement : description / icone
+
+-----
+RastaPopoulos - 
+c'est pas vraiment pareil (que ce plugin), parce que le YAML exporté par Formidable est propre à Formidable alors que le constructeur de formulaire est fourni par Saisies et que donc les "groupes" dont je parlais, c'était plus générique, à utiliser directement dans le constructeur de Saisies
+(qui est utilisé par Champs Extras aussi, entre autre)
+
+-----
+
+INFO
+le constructeur de saisie ne fait pas partie de Formidable, il est fournit par saisie et il enregistre en session les choses qu'on lui donne, donc après un import, il faut vider la session
+
