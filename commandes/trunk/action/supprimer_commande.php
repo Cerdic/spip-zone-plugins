@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * ex: #URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE,#SELF}
  * 
  * @param $arg string
- *     id_commande:    identifiant de la commande
+ *     id_commande : identifiant de la commande
  * @return void
  */
 function action_supprimer_commande_dist($arg=null) {
@@ -32,7 +32,7 @@ function action_supprimer_commande_dist($arg=null) {
 	// suppression
 	if ($id_commande = intval($id_commande)) {
 		include_spip('inc/commandes');
-		commandes_effacer($id_commande);
+		commandes_supprimer($id_commande);
 	}
 
 }

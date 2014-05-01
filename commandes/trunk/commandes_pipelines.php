@@ -1,4 +1,13 @@
 <?php
+/**
+ * Pieplines utilisées par le plugin Commandes
+ *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Pipelines
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -34,7 +43,7 @@ function commandes_optimiser_base_disparus($flux){
 	if ($commandes) {
 		$commandes = array_map('reset', $commandes);
 		include_spip('inc/commandes');
-		commandes_effacer($commandes);
+		commandes_supprimer($commandes);
 		$flux['data'] += count($commandes);
 	}
 
