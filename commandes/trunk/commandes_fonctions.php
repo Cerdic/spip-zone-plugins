@@ -3,7 +3,7 @@
  * Fonctions du plugin Commandes
  *
  * @plugin     Commandes
- * @copyright  2013
+ * @copyright  2014
  * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
  * @licence    GPL 3
  * @package    SPIP\Commandes\Fonctions
@@ -35,19 +35,18 @@ function commandes_lister_statuts($statut=false){
 }
 
 /** 
- * Fonction qui retourne l'identifiant du premier webmester
+ * Retourne l'identifiant du premier webmestre
  *
- * @return int
- *     identifiant du premier webmaster
+ * @return int|bool
+ *     identifiant du premier webmestre
+ *     false sinon (improbable...)
 **/
-function commandes_id_premier_webmestre()
-{
-	include_spip('base/abstract_sql');
-	$query = sql_select("id_auteur","spip_auteurs","statut = '0minirezo' AND webmestre = 'oui'","","id_auteur");
-	if ($row = sql_fetch($query)) {
-		return( $row["id_auteur"] );
-	}
-	return false;
+function commandes_id_premier_webmestre(){
+	$id_webmestre = sql_getfetsel('id_auteur', table_objet_sql('auteur'), "statut='0minirezo' AND webmestre='oui'");
+	if ($id_webmestre = intval($id_webmestre))
+		return $id_webmestre;
+	else
+		return false;
 }
 
 
