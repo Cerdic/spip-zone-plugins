@@ -19,8 +19,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  * @param $arg string
  *     arguments séparés par un charactère non alphanumérique
- *     id_commande:            identifiant de la commande
- *     id_commandes_detail:    identifiant du détail
+ *     1) id_commande : identifiant de la commande
+ *     2) id_commandes_details : identifiant du détail
  * @return void
  */
 function action_supprimer_detail_commande($arg=null) {
@@ -34,9 +34,9 @@ function action_supprimer_detail_commande($arg=null) {
 	if (
 		$id_commande = intval($id_commande)
 		and $id_detail = intval($id_detail)
-		and autoriser('supprimerdetail','commande',$id_commande)
 	) {
-		sql_delete("spip_commandes_details", "id_commande=".$id_commande . " AND id_commandes_detail=".$id_detail);
+		include_spip('inc/commandes');
+		commandes_supprimer_detail($id_commande,$id_detail);
 	}
 
 }

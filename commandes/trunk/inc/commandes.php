@@ -3,7 +3,7 @@
  * Fonctions (bis) du plugin Commandes
  *
  * @plugin     Commandes
- * @copyright  2013
+ * @copyright  2014
  * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
  * @licence    GPL 3
  * @package    SPIP\Commandes\Fonctions (bis)
@@ -15,7 +15,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Créer une commande en cours pour le visiteur actuel.
  *
- * @return int $id_commande Retourne l'identifiant SQL de la commande
+ * @return int $id_commande
+ *     identifiant SQL de la commande
 **/
 function creer_commande_encours(){
 	include_spip('inc/session');
@@ -57,12 +58,12 @@ function creer_commande_encours(){
  * et de ses données associées
  *
  * @param int|array $ids_commandes
- *     Identifiant de commande ou tableau d'identifiants
+ *     Identifiant d'une commande ou tableau d'identifiants
  * @return bool
  *     false si pas d'identifiant de commande transmis
- *     true sinon.
+ *     true sinon
 **/
-function commandes_effacer($ids_commandes) {
+function commandes_supprimer($ids_commandes) {
 	if (!$ids_commandes) return false;
 	if (!is_array($ids_commandes)) $ids_commandes = array($ids_commandes);
 
@@ -92,6 +93,47 @@ function commandes_effacer($ids_commandes) {
 	sql_delete(table_objet_sql('commande'), $in_commandes);
 
 	return true;
+}
+/**
+ * Alias de commandes_supprimer pour rétro compatibilité
+ */
+function commandes_effacer($ids_commandes) {
+	return commandes_supprimer($ids_commandes);
+}
+
+
+/**
+ * Suppression d'un ou plusieurs détails d'une commande
+ * et éventuellement de la commande si elle est vide après l'opération
+ *
+ * @param int $id_commande
+ *     Identifiant de la commande
+ * @param int|array $ids_commandes_details
+ *     Identifiant d'un détail ou tableau d'identifiants
+ * @param bool $supprimer_commande
+ *     true pour effacer la commande si elle est vide après l'opération
+ * @return bool
+ *     false si pas d'identifiant de commande transmis, ou si pas autorisé à supprimer
+ *     true sinon
+**/
+function commandes_supprimer_detail($id_commande=0, $ids_details=array(), $supprimer_commande=false) {
+
+	if (!$id_commande) return false;
+	if (!is_array($ids_details)) $ids_details = array($ids_details);
+
+	include_spip('inc/autoriser');
+	if (autoriser('supprimerdetail','commande',$id_commande)) {
+		$nb_details = sql_countsel('spip_commandes_details', "id_commande=".intval($id_commande));
+		// suppression des détails
+		foreach($ids_details as $id_detail)
+			sql_delete('spip_commandes_details', "id_commande=".intval($id_commande) . " AND id_commandes_detail=".intval($id_detail));
+		// optionnellement, si la commande est vide, on la supprime
+		if ($nb_details == count($ids_details) and $supprimer_commande)
+			commande_supprimer($id_commande);
+		return true;
+	} else {
+		return false;
+	}
 }
 
 
