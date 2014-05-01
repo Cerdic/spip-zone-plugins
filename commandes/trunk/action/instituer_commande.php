@@ -19,8 +19,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  * @param $arg string
  *     arguments séparés par un charactère non alphanumérique
- *     id_commande:    identifiant de la commande
- *     statut:         nouveau statut
+ *     1) id_commande : identifiant de la commande
+ *     2) statut : nouveau statut
  * @return void
  */
 function action_instituer_commande($arg=null) {

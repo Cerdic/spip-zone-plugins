@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Commandes
  *
  * @plugin     Commandes
- * @copyright  2013
+ * @copyright  2014
  * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
  * @licence    GPL 3
  * @package    SPIP\Commandes\Autorisations
