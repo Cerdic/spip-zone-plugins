@@ -1,7 +1,7 @@
 <paquet 
 		prefix="elfinder"
 		categorie="maintenance"
-		version="0.2.3"
+		version="0.2.4"
 		etat="dev"
 		compatibilite="[3.0.0;3.0.*]"
 		logo="images/elfinder_48.png"
@@ -12,7 +12,7 @@
 	<auteur lien="http://www.declic3000.com">GuillaumeW</auteur>
 	<licence>GNU-GPL</licence>
 
-	<lib nom="elfinder" lien="https://github.com/downloads/Studio-42/elFinder/elfinder-2.0-rc1.tar.gz" />
+	<lib nom="elfinder" lien="https://github.com/Studio-42/elFinder/archive/2.x.zip" />
 
 	<menu nom="elfinder" titre="elfinder:elfinder" parent="menu_administration" icone="images/elfinder_16.png" />
 
