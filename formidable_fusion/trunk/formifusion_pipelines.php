@@ -16,10 +16,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function formifusion_affiche_droite($flux){
 	if ($flux['args']['exec']=='formulaire_edit'
-		&& $id_formulaire = intval($flux['args']['id_formulaire'])
 		&& $flux['args']['configurer']=='champs'
 		){
-
+		$id_formulaire = $flux['args']['id_formulaire'];
 		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/formifusion',array('id_formulaire'=>$id_formulaire));
 	}
 	return $flux;
