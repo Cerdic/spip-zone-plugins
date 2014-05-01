@@ -35,7 +35,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function coordonnees_lister_types_coordonnees($coordonnee='', $type='') {
 
-	if (!strlen($coordonnee)) return;
+	if (!strlen($coordonnee) or empty($type)) return;
 
 	// On veut définir une liste avec pour chaque objet coordonnée, ses types et les chaînes de langue correspondantes
 	// Or les chaînes de langue suivent la norme : type_{coordonnee}_{type}
