@@ -1,4 +1,13 @@
 <?php
+/**
+ * Pieplines utilisées par le plugin Commandes
+ *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Pipelines
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -34,7 +43,7 @@ function commandes_optimiser_base_disparus($flux){
 	if ($commandes) {
 		$commandes = array_map('reset', $commandes);
 		include_spip('inc/commandes');
-		commandes_effacer($commandes);
+		commandes_supprimer($commandes);
 		$flux['data'] += count($commandes);
 	}
 
@@ -127,6 +136,29 @@ function commandes_affiche_auteurs_interventions($flux) {
 	}
 
 	return $flux;
+}
+
+
+/**
+ * Compléter la liste des types d'adresses du plugin coordonnées
+ *
+ * @param array $flux
+ * @return array $flux
+**/
+function commandes_types_coordonnees($liste) {
+
+	$types_adresses = $liste['adresse'];
+	if (!$types_adresses or !is_array($types_adresses)) $types_adresses = array();
+
+	// on définit les couples types + chaînes de langue à ajouter
+	$types_adresses_commandes = array(
+		'livraison' => _T('commandes:type_adresse_livraison'),
+		'facturation' => _T('commandes:type_adresse_facturation')
+	);
+	// on les rajoute à la liste des types des adresses
+	$liste['adresse'] = array_merge($types_adresses, $types_adresses_commandes);
+
+	return $liste;
 }
 
 
