@@ -12,7 +12,7 @@
 	<auteur lien="http://www.declic3000.com">GuillaumeW</auteur>
 	<licence>GNU-GPL</licence>
 
-	<lib nom="elfinder" lien="https://github.com/Studio-42/elFinder/archive/2.x.zip" />
+	<lib nom="elfinder" lien="https://github.com/Studio-42/elFinder/archive/2.0-rc1.zip" />
 
 	<menu nom="elfinder" titre="elfinder:elfinder" parent="menu_administration" icone="images/elfinder_16.png" />
 
