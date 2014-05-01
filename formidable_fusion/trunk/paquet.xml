@@ -1,0 +1,23 @@
+<paquet
+	prefix="formifusion"
+	categorie="communication"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0-dev;3.0.*]"
+	logo="images/formifusion-64.png"
+	documentation=""
+>
+
+	<nom>Fusions de formulaires pour Formidable</nom>
+
+	<auteur>Anne-lise Martenot</auteur>
+	<auteur lien="http://elastick.net">elastick.net</auteur>
+	<auteur>Arterrien</auteur>
+	<auteur lien="http://arterrien.com">arterrien.com</auteur>
+	<licence>GPL</licence>
+	
+	<pipeline nom="affiche_droite" inclure="formifusion_pipelines.php" />
+	
+	<necessite nom="formidable" compatibilite="[2.5.12;[" />
+	
+</paquet>
