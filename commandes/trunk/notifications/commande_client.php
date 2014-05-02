@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Détermine le destinataire client pour les notifications d'une commande
+ * Détermine le client destinataire des notifications d'une commande
  *
  * @param int $id_commande
  *     Identifiant de la commande

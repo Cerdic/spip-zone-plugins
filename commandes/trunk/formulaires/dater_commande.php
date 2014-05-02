@@ -2,9 +2,9 @@
 /**
  * Gestion du formulaire de datation d'une commande (si si, datation)
  *
- * Le formulaire permet de modifier les 3 champs de dates d'une commande :
+ * Le formulaire permet de modifier un des 3 champs de date d'une commande, en fonction du paramètre adéquat.
  *
- * - date (de création)
+ * - date de création
  * - date de paiement
  * - date d'envoi
  *

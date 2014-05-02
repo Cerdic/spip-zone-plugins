@@ -15,17 +15,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * "Lier" une commande à un objet
  *
- * Attention : il n'y a pas de table de liens 'spip_commandes_liens'.
+ * Attention : il n'y a pas de table de liens `spip_commandes_liens`.
  * Il ne s'agit donc pas à proprement parler d'associer une commande avec un objet.
- * L'action fait appel à la fonction 'lier_commande_{objet}' s'il y a un fichier éponyme dans '/inc'.
- * Dans le cas d'un auteur, la fonction remplit le champ 'id_auteur' dans la table 'spip_commandes'
+ * L'action fait appel à la fonction `lier_commande_{objet}` s'il y a un fichier éponyme dans `/inc`.
+ * Dans le cas d'un auteur, la fonction remplit le champ `id_auteur` dans la table `spip_commandes`
  *
- *     '''
+ *     ```
  *     #URL_ACTION_AUTEUR{lier_commande,#ID_COMMANDE/#ID_AUTEUR/auteur,#SELF}
- *     '''
+ *     ```
  *
  * @param $arg string
- *     arguments séparés par un slash '/'
+ *     arguments séparés par un slash `/`
  *
  *     - id_commande : identifiant de la commande
  *     - id_objet : identifiant de l'objet
