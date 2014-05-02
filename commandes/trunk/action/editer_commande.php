@@ -1,11 +1,25 @@
 <?php
+/**
+ * API d'édition du plugin Commandes
+ *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Editer
+ */
 
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Point d'entree d'edition d'une commande
- * on ne peut entrer que par un appel en fournissant $idcommande
+ * Point d'entrée d'édition d'une commande
+ *
+ * On ne peut entrer que par un appel en fournissant $id_commande
  * mais pas pas une url
+ *
+ * @uses commande_inserer()
+ * @uses commande_modifier()
  *
  * @param int $id_commande
  *     Identifiant de la commande
@@ -39,10 +53,16 @@ function action_editer_commande_dist($id_commande=null) {
 
 
 /**
- * Crée une nouvelle commande et retourne son ID
+ * Crée une nouvelle commande et retourne son identifiant
  *
- * @param unknown_type $id_parent
- *     Paramètre inutilisé pour compatibilité avec api modifier objet
+ * Traite les notifications par email après l'insertion en base et l'appel des pipelines
+ *
+ * @uses traiter_notifications_commande
+ *
+ * @pipeline_appel pre_insertion
+ * @pipeline_appel post_insertion
+ * @param null $id_parent
+ *     Paramètre inutilisé, présent pour compatibilité avec api modifier objet
  * @param array $champs
  *     Couples des champs/valeurs par défaut
  * @return int|bool 
@@ -103,6 +123,9 @@ function commande_inserer($id_parent=null, $champs=array()) {
 /**
  * Appelle les fonctions de modification d'une commande
  *
+ * @uses objet_modifier_champs()
+ * @uses commande_instituer()
+ *
  * @param int $id_commande
  *     Identifiant de la commande
  * @param array|null $set
@@ -156,8 +179,15 @@ function commande_modifier($id_commande, $set=null) {
 }
 
 /**
+ * Instituer une commande
+ *
  * Modifie des éléments à part que sont l'auteur, la date, le statut
  *
+ * @uses editer_commande_details()
+ * @uses traiter_notifications_commande()
+ *
+ * @pipeline_appel pre_edition
+ * @pipeline_appel post_edition
  * @param int $id_commande
  *     Identifiant de la commande
  * @param array $c
@@ -257,8 +287,9 @@ function commande_instituer($id_commande, $c, $calcul_details=true){
 }
 
 /**
- * Fabrique la requete d'institution de la commande, avec champs herites
- * Modifie la commande en calculant les dependances des details
+ * Fabrique la requête d'institution de la commande
+ *
+ * Modifie la commande en calculant les dépendances des détails
  * 
  * @param int $id_commande
  *     Identifiant de la commande
@@ -289,10 +320,9 @@ function editer_commande_details($id_commande, $champs, $cond=true) {
 
 /**
  * Enregistre une modification d'une commande
- * Fonction dépréciée
  *
- * @deprecated
- *     Utiliser commande_modifier();
+ * @deprecated Alias de commande_modifier pour rétro-compatibilité
+ * @uses commande_modifier()
  *
  * @param int $id_commande
  *     Identifiant de la commande
@@ -306,10 +336,10 @@ function revision_commande($id_commande, $c=false) {
 
 /**
  * Crée une nouvelle commande
- * Fonction dépréciée
  *
- * @deprecated
- *     Utiliser commande_inserer();
+ * @deprecated Alias de commande_inserer pour rétro-compatibilité
+ * @uses commande_inserer()
+ *
  * @param array $champs
  *     Couples des champs/valeurs par défaut
  * @return
@@ -320,10 +350,10 @@ function commande_insert($champs=array()){
 
 /**
  * Appelle les fonctions de modification d'une commande
- * Fonction dépréciée
  *
- * @deprecated
- *     Utiliser commande_modifier();
+ * @deprecated Alias de commande_modifier pour rétro-compatibilité
+ * @uses commande_modifier()
+ * 
  * @param int $id_commande
  *     Identifiant de la commande
  * @param array|null $set
@@ -336,15 +366,15 @@ function commande_set($id_commande, $set=null){
 
 /**
  * Modifie des éléments à part que sont l'auteur, la date, le statut
- * Fonction dépréciée
  * 
- * @deprecated
- *     Utiliser commande_instituer();
+ * @deprecated Alias de commande_instituer pour rétro-compatibilité
+ * @uses commande_instituer()
+ * 
  * @param int $id_commande
  *     Identifiant de la commande
  * @param array $c
  *     Couples des champs/valeurs à modifier
- * @param bool $calculer_details
+ * @param bool $calcul_details
  *     (?) Inutilisé
  * @return
  */

@@ -6,18 +6,25 @@
  * @copyright  2014
  * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
  * @licence    GPL 3
- * @package    SPIP\Commandes\Fonctions (bis)
+ * @package    SPIP\Commandes\Fonctions
  */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Créer une commande en cours pour le visiteur actuel.
+ * Créer une commande avec le statut "encours" pour le visiteur actuel.
+ *
+ * On part du principe qu'il ne peut y avoir qu'une seule commande "encours" par session,
+ * aussi on supprime de la base toute ancienne commande "encours" présente en session avant d'en créer une nouvelle.
+ * L'identifiant de la nouvelle commande est ensuite placé dans la session.
+ *
+ * @uses commandes_reference()
+ * @uses commande_inserer()
  *
  * @return int $id_commande
  *     identifiant SQL de la commande
-**/
+ */
 function creer_commande_encours(){
 	include_spip('inc/session');
 
@@ -54,14 +61,19 @@ function creer_commande_encours(){
 
 
 /**
- * Suppression d'une ou plusieurs commandes
- * et de ses données associées
+ * Supprimer une ou plusieurs commandes et leurs données associées
+ *
+ * La fonction va supprimer : 
+ *
+ * - les détails des commandes
+ * - les liens entre les commandes et leurs adresses
+ * - les adresses si elles sont devenues orphelines
  *
  * @param int|array $ids_commandes
  *     Identifiant d'une commande ou tableau d'identifiants
  * @return bool
- *     false si pas d'identifiant de commande transmis
- *     true sinon
+ *     - false si pas d'identifiant de commande transmis
+ *     - true sinon
 **/
 function commandes_supprimer($ids_commandes) {
 	if (!$ids_commandes) return false;
@@ -95,7 +107,16 @@ function commandes_supprimer($ids_commandes) {
 	return true;
 }
 /**
- * Alias de commandes_supprimer pour rétro compatibilité
+ * Supprimer des commandes
+ *
+ * @deprecated Alias de commandes_supprimer() gardée pour rétro-compatibilité
+ * @see commandes_supprimer()
+ *
+ * @param int|array $ids_commandes
+ *     Identifiant d'une commande ou tableau d'identifiants
+ * @return bool
+ *     - false si pas d'identifiant de commande transmis
+ *     - true sinon
  */
 function commandes_effacer($ids_commandes) {
 	return commandes_supprimer($ids_commandes);
@@ -103,19 +124,23 @@ function commandes_effacer($ids_commandes) {
 
 
 /**
- * Suppression d'un ou plusieurs détails d'une commande
- * et éventuellement de la commande si elle est vide après l'opération
+ * Supprimer un ou plusieurs détails d'une commande
+ *
+ * On supprime les détails correspondant à commande dans la table spip_commandes_details.
+ * Si tous ses détails sont supprimés par l'opération, la commande peut également être supprimée en présence du paramètre adéquat. 
+ *
+ * @uses commande_supprimer()
  *
  * @param int $id_commande
  *     Identifiant de la commande
- * @param int|array $ids_commandes_details
+ * @param int|array $ids_details
  *     Identifiant d'un détail ou tableau d'identifiants
  * @param bool $supprimer_commande
  *     true pour effacer la commande si elle est vide après l'opération
  * @return bool
  *     false si pas d'identifiant de commande transmis, ou si pas autorisé à supprimer
  *     true sinon
-**/
+ */
 function commandes_supprimer_detail($id_commande=0, $ids_details=array(), $supprimer_commande=false) {
 
 	if (!$id_commande) return false;
@@ -137,12 +162,15 @@ function commandes_supprimer_detail($id_commande=0, $ids_details=array(), $suppr
 }
 
 
-/*
+/**
  * Envoyer un mail de notification
- * => On veut envoyer du html pour que le tableau de commandes soit lisible par le client
- * => On peut avoir un expediteur specifique
- * => Mais notifications_envoyer_mails() de spip ne peut pas envoyer de mails en html. On ne peut pas non plus y specifier un expediteur.
+ *
+ * - On veut envoyer du html pour que le tableau de commandes soit lisible par le client
+ * - On peut avoir un expediteur specifique
+ * - Mais notifications_envoyer_mails() de spip ne peut pas envoyer de mails en html. On ne peut pas non plus y specifier un expediteur.
  * Donc si les plugins notifications_avancees et Facteur sont presents, on prepare un joli mail en html. Sinon un moche en texte.
+ *
+ * @deprecated Voir traiter_notifications_commande()
  *
  * @param string $qui : vendeur ou client
  * @param string $id_type
@@ -194,12 +222,17 @@ function commandes_envoyer_notification( $qui, $id_type, $id_commande, $expedite
 }
 
 
-/*
- * Traitement des notifications d'une commande
- * Selon les options de configuration, des emails seront envoyés au(x) vendeur(s) et optionnellement au client
- * 
+/**
+ * Traitement des notifications par email d'une commande
+ *
+ * Selon les options de configuration et le statut de la commande, des emails seront envoyés au(x) vendeur(s) et optionnellement au client.
+ * Nécessite le plugin "Notifications avancées" pour fonctionner.
+ * Avec le plugin Facteur, les messages seront au format HTML, sinon au format texte.
+ *
+ * @uses notifications()
+ *
  * @param int|string $id_commande
- *     identifiant de la commande
+ *     Identifiant de la commande
  * @return void
  */
 function traiter_notifications_commande($id_commande=0){

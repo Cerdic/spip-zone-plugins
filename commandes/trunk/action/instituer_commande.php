@@ -1,7 +1,6 @@
 <?php
 /**
- * Fonction du plugin Commandes
- * Action : changer le statut d'une commande
+ * Action du plugin Commandes
  *
  * @plugin     Commandes
  * @copyright  2014
@@ -10,21 +9,24 @@
  * @package    SPIP\Commandes\Action
  */
 
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Change le statut d'une commande
  *
- * ex: #URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-envoye,#SELF}
+ *     #URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-envoye,#SELF}
  * 
  * @param $arg string
  *     arguments séparés par un charactère non alphanumérique
- *     1) id_commande : identifiant de la commande
- *     2) statut : nouveau statut
+ *
+ *     - id_commande : identifiant de la commande
+ *     - statut : nouveau statut
  * @return void
  */
 function action_instituer_commande($arg=null) {
 
+	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();

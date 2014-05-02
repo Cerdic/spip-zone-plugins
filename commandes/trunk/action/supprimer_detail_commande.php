@@ -1,7 +1,6 @@
 <?php
 /**
- * Fonction du plugin Commandes
- * Action : suppression d'un détail d'une commande
+ * Action du plugin Commandes
  *
  * @plugin     Commandes
  * @copyright  2014
@@ -10,21 +9,24 @@
  * @package    SPIP\Commandes\Action
  */
 
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Supprime un détail d'une commande, dans la table spip_commandes_details
  *
- * ex: #URL_ACTION_AUTEUR{supprimer_detail_commande,#ID_COMMANDE-#ID_COMMANDES_DETAIL,#SELF}
+ *     #URL_ACTION_AUTEUR{supprimer_detail_commande,#ID_COMMANDE-#ID_COMMANDES_DETAIL,#SELF}
  * 
  * @param $arg string
  *     arguments séparés par un charactère non alphanumérique
- *     1) id_commande : identifiant de la commande
- *     2) id_commandes_details : identifiant du détail
+ *
+ *     - id_commande : identifiant de la commande
+ *     - id_commandes_details : identifiant du détail
  * @return void
  */
 function action_supprimer_detail_commande($arg=null) {
 
+	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();

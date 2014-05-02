@@ -1,8 +1,23 @@
 <?php
+/**
+ * Gestion du formulaire de configuration du plugin Commandes
+ *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Formulaires
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Description des saisies du formulaire de configuration
+ *
+ * @return array
+ *     Description des saisies
+ */
 function formulaires_configurer_commandes_saisies_dist(){
 	include_spip('inc/config');
 	include_spip('inc/plugin');
