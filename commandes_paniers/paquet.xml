@@ -6,7 +6,6 @@
 	compatibilite="[2.1.8;3.0.*]"
 	logo="images/panier2commande-32.png"
 	documentation=""
-	schema="0.1"
 	>
 
 	<nom>Commandes de Paniers</nom>
