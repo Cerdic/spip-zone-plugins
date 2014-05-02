@@ -11,7 +11,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Remplit le champ "id_auteur" d'une commande
+ * Remplit le champ 'id_auteur' d'une commande
  * 
  * @param int $id_commande
  *     identifiant de la commande

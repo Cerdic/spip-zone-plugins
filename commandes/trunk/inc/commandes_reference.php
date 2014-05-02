@@ -13,7 +13,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Génère un numéro unique utilisé pour remplir le champ "reference" lors de la création d'une commande
+ * Génère un numéro unique utilisé pour remplir le champ 'reference' lors de la création d'une commande.
+ * 
  * Le numéro retourné est le nombre de secondes écoulées depuis le 1er janvier 1970
  * 
  * @param string $id_auteur
