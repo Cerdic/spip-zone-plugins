@@ -2,10 +2,10 @@
 	<nom>Commandes de Paniers</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<version_base>0.1</version_base>
-	<etat>dev</etat>
-    <slogan>Remplir une commande</slogan>
+	<etat>test</etat>
+	<slogan>Remplir une commande</slogan>
 	<description>Permet de remplir une commande avec le contenu d'un panier.</description>
 	<categorie>divers</categorie>
 	<icon>images/panier2commande-32.png</icon>

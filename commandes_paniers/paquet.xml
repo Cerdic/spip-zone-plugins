@@ -1,0 +1,23 @@
+<paquet
+	prefix="panier2commande"
+	categorie="divers"
+	version="0.1.4"
+	etat="test"
+	compatibilite="[2.1.8;3.0.*]"
+	logo="images/panier2commande-32.png"
+	documentation=""
+	schema="0.1"
+	>
+
+	<nom>Commandes de Paniers</nom>
+	<auteur lien="http://www.ldd.fr">Les D&#233;veloppements Durables</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="commandes" compatibilite="[0.3.0;]" />
+	<necessite nom="paniers" compatibilite="[0.1.0;]" />
+	<necessite nom="spip_bonux" compatibilite="[2.2.20;]" />
+
+	<pipeline nom="post_insertion" inclure="panier2commande_pipelines.php" />
+
+</paquet>
