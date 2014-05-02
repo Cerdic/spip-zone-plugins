@@ -48,8 +48,10 @@ function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 		if ($vertical == 1) {
 			$classe .= " image_responsive_v";
 			$v = "v";	
+			if ($h < $taille_defaut) $taille_defaut = $h;
 		} else {
 			$v = "";
+			if ($l < $taille_defaut) $taille_defaut = $l;
 		}
 		
 		if ($htactif) {
