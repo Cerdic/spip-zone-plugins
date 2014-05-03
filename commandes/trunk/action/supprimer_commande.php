@@ -15,10 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Supprime une commande et ses données associées (détails + adresses)
  *
+ * @example
  *     ```
  *     #URL_ACTION_AUTEUR{supprimer_commande,#ID_COMMANDE,#SELF}
  *     ```
- * 
+ *
+ * @uses commandes_supprimer()
+ *
  * @param $arg string
  *     id_commande : identifiant de la commande
  * @return void

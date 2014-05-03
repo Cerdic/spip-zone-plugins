@@ -15,10 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Supprime un détail d'une commande, dans la table `spip_commandes_details`
  *
+ * @example
  *     ```
  *     #URL_ACTION_AUTEUR{supprimer_detail_commande,#ID_COMMANDE-#ID_COMMANDES_DETAIL,#SELF}
  *     ```
- * 
+ *
+ * @uses commandes_supprimer_detail()
+ *
  * @param $arg string
  *     arguments séparés par un charactère non alphanumérique
  *
