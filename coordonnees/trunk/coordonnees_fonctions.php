@@ -11,10 +11,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
- * Fonction privée mutualisée renvoyant les couples types/chaînes de langue pour une coordonnée
- * Ou bien la chaîne de langue d'un type donné
- * Utilisée par les fonctions filtre_coordonnees_lister_types_xxx()
+/**
+ * Renvoie une seule ou l'ensemble des chaînes de langue des types d'une coordonnée
+ * 
+ * Fonction privée mutualisée utilisée par les fonctions filtre_coordonnees_lister_types_xxx().
+ * Si on veut tous les types, ignorer le paramètre $type : la fonction renvoie un tableau contenant les couples types/chaînes de langue de la coordonnée.
+ * Si on veut un seul type en utilisant le paramètre éponyme, elle renvoie la chaîne de langue du type donné.
  *
  * adresses : RFC2426/CCITT.X520 :         dom home intl parcel postal pref work
  * numéros :  RFC2426/CCITT.X500 :         bbs car cell fax home isdn modem msg pager pcs pref video voice work
@@ -22,20 +24,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *                                         +dsl
  * emails :   RFC2426/IANA :               internet pref x400
  *            RFC6350/CCITT.X520+RFC5322 : home (perso) intl work (pro)
- * 
- * @param int $coordonnee
- *     coordonnée dont on veut retourner les types
+ *
+ * @note
+ * Il faut faire la différence entre le cas où on appelle la fonction sans le paramètre `$type`
+ * pour obtenir la liste de tous les types, 
+ * et le cas où on utilise ce paramètre, mais qu'il est vide (`#TYPE|lister_types_adresses par exemple`).
+ * Dans ce cas, la fonction ne doit rien renvoyer.
+ *
+ * @filtre
+ * @param string $coordonnee
+ *     Coordonnée dont on veut retourner les types
  *     adresse | numero | email
  *     à éviter : adr | tel | mel
  * @param string $type
  *     Type dont on veut retourner la chaîne de langue
+ *     A utiliser lorsqu'on ne veut retourner qu'une seule haîne de langue
  * @return array|int
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
-**/
-function coordonnees_lister_types_coordonnees($coordonnee='', $type='') {
+ */
+function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 
-	if (!strlen($coordonnee) or empty($type)) return;
+	// cf. note
+	if (!strlen($coordonnee) or (isset($type) and empty($type))) return;
 
 	// On veut définir une liste avec pour chaque objet coordonnée, ses types et les chaînes de langue correspondantes
 	// Or les chaînes de langue suivent la norme : type_{coordonnee}_{type}
@@ -83,6 +94,9 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type='') {
 /*
  * Filtre renvoyant les types d'adresses possibles, et leurs chaînes de langue
  *
+ * @uses coordonnees_lister_types_coordonnees()
+ *
+ * @filtre
  * @param string $type
  *     Type dont on veut retourner la chaîne de langue
  * @return array|int
@@ -96,6 +110,9 @@ function filtre_coordonnees_lister_types_adresses($type='') {
 /*
  * Filtre renvoyant les types de numéros possibles, et leurs chaînes de langue
  *
+ * @uses coordonnees_lister_types_coordonnees()
+ *
+ * @filtre
  * @param string $type
  *     Type dont on veut retourner la chaîne de langue
  * @return array|int
@@ -109,6 +126,9 @@ function filtre_coordonnees_lister_types_numeros($type='') {
 /*
  * Filtre renvoyant les types d'emails possibles, et leurs chaînes de langue
  *
+ * @uses coordonnees_lister_types_coordonnees()
+ *
+ * @filtre
  * @param string $type
  *     Type dont on veut retourner la chaîne de langue
  * @return array|int
@@ -120,23 +140,26 @@ function filtre_coordonnees_lister_types_emails($type='') {
 }
 
 /*
+ * Renvoie l'icône ou la chaîne de langue d'un type de coordonnée
+ *
  * Fonction privee mutualisée utilisée par les filtres logo_type_xx
- * Renvoit soit une balise <img> si elle est trouvée, soit une balise <abbr>
+ * Renvoie soit une balise <img> si l'image est trouvée, soit une balise <abbr>
  * 
- * nomenclature des fichiers :
- * - avec le paramètre $coordonnee : type_{$coordonnee}_{$type}.ext
- *   ex: type_adresse_home.png
- * - sans le paramètre $coordonnee : type_{$type}.ext
- *   ex: type_home.png
+ * Nomenclature des fichiers :
+ *
+ * - avec le paramètre $coordonnee : `type_{$coordonnee}_{$type}.ext`
+ *   ex: `type_adresse_home.png`
+ * - sans le paramètre $coordonnee : `type_{$type}.ext`
+ *   ex: `type_home.png`
  * 
  * @param string $coordonnee
- *     coordonnée dont on veut retourner le logo
+ *     Coordonnée dont on veut retourner le logo
  *     adresse | numero | email
  *     à éviter : adr | tel | mel
  * @param string $type
- *     le type de coordonnée (dom, home, work etc.)
+ *     Le type de coordonnée (dom, home, work etc.)
  * @return string
- *     balise <img> ou <abbr>
+ *     Balise `<img>` ou `<abbr>`
 **/
 function logo_type_($coordonnee='', $type='') {
 
@@ -148,25 +171,22 @@ function logo_type_($coordonnee='', $type='') {
 	$abbr = array(
 		'adr'    => 'adresse',
 		'tel'    => 'numero',
-		'mel'    => 'email'
+		'mel'    => 'email',
+		'email'  => 'email'
 	);
 	$coord2abbr = array_flip($abbr);
 	if (in_array($coordonnee,$coord2abbr))
 		$coordonnee = $abbr[$coordonnee];
 
-	// on récupère les couples types/chaînes de langues
-	$type = strtolower($type);
-	$types = coordonnees_lister_types_coordonnees($coordonnee);
-	if (!is_array($types)) $types = array();
-
 	// chaîne de langue
-	$langue_coordonnee = $types[$type];
+	$type = strtolower($type);
+	$langue_coordonnee = coordonnees_lister_types_coordonnees($coordonnee,$type);
 	$langue_perso = _T("perso:type_${type}",'',array('force'=>false));
 	$langue = ($type) ? ($coordonnee) ? $langue_coordonnee : $langue_perso : '';
 
 	// fichier image
 	$fichier_coordonnee = "type_${coordonnee}_${type}";
-	$fichier_abbr = "type_" .$abbr[$coordonnee] ."_${type}";
+	$fichier_abbr = "type_" .$coord2abbr[$coordonnee] ."_${type}";
 	$fichier_perso = "type_${type}";
 	foreach ($formats_logos as $ext) {
 		if ($coordonnee) {
@@ -189,10 +209,12 @@ function logo_type_($coordonnee='', $type='') {
 }
 
 /*
- * filtre renvoyant une balise <img> ou <abbr> d'apres le type d'une adresse
+ * Filtre renvoyant une balise `<img>` ou `<abbr>` d'apres le type d'une adresse
+ *
+ * @uses logo_type_()
  *
  * @param string $type_adresse    RFC2426/CCITT.X520 : dom home intl parcel postal pref work
- * @return string                 balise <img> ou <abbr>
+ * @return string                 Balise `<img>` ou `<abbr>`
 **/
 function filtre_logo_type_adresse($type_adresse) {
 	return logo_type_('adresse', $type_adresse);
@@ -202,12 +224,15 @@ function filtre_logo_type_adr($type_adresse) {
 }
 
 /*
- * filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un numero de tel
+ * Filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un numero de tel
  *
+ * @uses logo_type_()
+ *
+ * @filtre
  * @param string $type_tel    RFC2426/CCITT.X500 : bbs car cell fax home isdn modem msg pager pcs pref video voice work
  *                            RFC6350/CCITT.X520.1988 : cell fax pager text textphone video voice x-... (iana-token)
  *                            + : dsl
- * @return string             balise <img> ou <abbr>
+ * @return string             Balise `<img>` ou `<abbr>`
 **/
 function filtre_logo_type_numero($type_numero) {
 	return logo_type_('numero', $type_numero);
@@ -217,20 +242,26 @@ function filtre_logo_type_tel($type_numero) {
 }
 
 /*
- * filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un email
+ * Filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un email
  *
+ * @uses logo_type_()
+ *
+ * @filtre
  * @param string $type_adresse    RFC2426/IANA : internet pref x400
- * @return string                 balise <img> ou <abbr>
+ * @return string                 Balise `<img>` ou `<abbr>`
 **/
 function filtre_logo_type_email($type_email) {
 	return logo_type_('email', $type_email);
 }
 
 /*
- * filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un mel (email)
+ * Filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un mel (email)
  *
+ * @uses logo_type_()
+ *
+ * @filtre
  * @param string $type_adresse    RFC6350/CCITT.X520+RFC5322 : home (perso) intl work (pro)
- * @return string                 balise <img> ou <abbr>
+ * @return string                 Balise `<img>` ou `<abbr>`
 **/
 function filtre_logo_type_mel($type_email) {
 	return logo_type_('email', $type_email);
