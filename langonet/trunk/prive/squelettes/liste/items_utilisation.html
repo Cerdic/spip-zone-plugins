@@ -12,9 +12,14 @@
 		<tbody>
 <BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
 			<tr class="trouve row_odd">
-				<td colspan="2" class="raccourci">
+				<td[ (#ENV{pertinence}|=={peut_etre}|oui)colspan="2"] class="raccourci">
 					[<strong>(#CLE)</strong>]
 				</td>
+			[(#ENV{pertinence}|=={non}|oui)
+				<td class="traduction">
+					[(#VALEUR)]
+				</td>
+			]
 			</tr>
 	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
 		#SET{fichier, #CLE}

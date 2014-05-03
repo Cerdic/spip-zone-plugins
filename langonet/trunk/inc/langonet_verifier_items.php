@@ -321,6 +321,25 @@ function extraire_arguments($raccourci_regexp) {
 }
 
 
+/**
+ * Détection des items de langue obsolètes d'un module.
+ * Cette fonction renvoie un tableau composé des items obsolètes et des items potentiellement obsolètes.
+ *
+ * @param string	$module
+ * 		Nom du module de langue en cours de vérification.
+ * @param array		$utilises
+ * 		Tableau des occurrences d'utilisation d'items de langue dans le code de l'arborescence choisie.
+ * @param array		$items
+ * 		Liste des items de langues contenus dans le module de langue en cours de vérification. L'index est
+ * 		le raccourci, la valeur la traduction brute.
+ *
+ * @return array
+ * 		Tableau des items obsolètes ou potentiellement obsolètes. Ce tableau associatif possède une structure
+ * 		à deux index :
+ *
+ * 		- 'occurrences_non' : liste des items obsolètes;
+ * 		- 'occurrences_peut-etre' : liste des items potentiellement obsolètes (contexte d'utilisation dynamique).
+ */
 function reperer_items_inutiles($module, $utilises, $items) {
 	$item_non = $item_peut_etre = array();
 	foreach ($items as $_raccourci => $_traduction) {
@@ -340,8 +359,9 @@ function reperer_items_inutiles($module, $utilises, $items) {
 				}
 			}
 			if (!$index_variable) {
-				// L'item est vraiment non utilise
-				$item_non[$_raccourci] = $_raccourci;
+				// L'item est vraiment non utilise.
+				// On stocke la traduction afin de l'afficher dans les résultats.
+				$item_non[$_raccourci] = $_traduction;
 			} else {
 				// L'item est utilise dans un contexte variable
 				$item_peut_etre[$_raccourci] = $utilises['occurrences'][$index_variable];
