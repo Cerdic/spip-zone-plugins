@@ -6,7 +6,7 @@ function videos_upgrade($nom_meta_base_version,$version_cible){
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 
-		if ($$current_version == '0.0'){
+		if ($current_version == '0.0'){
 			include_spip('inc/config');
 			ecrire_config('videos/responsive', 'oui');
 		}
