@@ -23,11 +23,10 @@
 	<BOUCLE_adresses_commande(adresses_liens){id_commande}{!par type}>
 	#SET{type, #TYPE|coordonnees_lister_types_adresses}
 	#SET{intitule, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
-	#SET{icone, #CHEMIN_IMAGE{#VAL{type_adr_}|concat{#TYPE,.png}}|balise_img}
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
 	<td>
 		<div class="adresse-commande">
-			<h4>[(#GET{icone}) ][(#GET{type}|sinon{#GET{intitule}}|wrap{<a>}|inserer_attribut{href,#ID_ADRESSE|generer_url_entite{adresse}})]</h4>
+			<h4>[(#TYPE|logo_type_adresse) ][(#GET{type}|sinon{#GET{intitule}}|wrap{<a>}|inserer_attribut{href,#ID_ADRESSE|generer_url_entite{adresse}})]</h4>
 			<INCLURE{fond=prive/objets/contenu/adresse, id_adresse} />
 		</div>
 	</td>
@@ -46,11 +45,10 @@
 	<BOUCLE_adresses_contact(ADRESSES adresses_liens){id_contact}>
 	#SET{type, #TYPE|coordonnees_lister_types_adresses}
 	#SET{intitule, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
-	#SET{icone, #CHEMIN_IMAGE{#VAL{type_adr_}|concat{#TYPE,.png}}|balise_img}
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
 	<td>
 		<div class="adresse-commande">
-			<h4>[(#GET{icone}) ][(#GET{type}|sinon{#GET{intitule}}|wrap{<a>}|inserer_attribut{href,#ID_ADRESSE|generer_url_entite{adresse}})]</h4>
+			<h4>[(#TYPE|logo_type_adresse) ][(#GET{type}|sinon{#GET{intitule}}|wrap{<a>}|inserer_attribut{href,#ID_ADRESSE|generer_url_entite{adresse}})]</h4>
 			<INCLURE{fond=prive/objets/contenu/adresse, id_adresse} />
 		</div>
 	</td>
@@ -69,11 +67,10 @@
 	<BOUCLE_adresses_auteur(ADRESSES adresses_liens){id_auteur}>
 	#SET{type, #TYPE|coordonnees_lister_types_adresses}
 	#SET{intitule, #VAL{adresse}|objet_info{texte_objet}|_T|concat{' \#',#COMPTEUR_BOUCLE}}
-	#SET{icone, #CHEMIN_IMAGE{#VAL{type_adr_}|concat{#TYPE,.png}}|balise_img}
 	[(#TOTAL_BOUCLE|>{#GET{nb_col_max}}|ou{#TOTAL_BOUCLE|<={#GET{nb_col_max}}|et{#COMPTEUR_BOUCLE|=={1}}}|oui)<tr>]
 	<td>
 		<div class="adresse-commande">
-			<h4>[(#GET{icone}) ][(#GET{type}|sinon{#GET{intitule}}|wrap{<a>}|inserer_attribut{href,#ID_ADRESSE|generer_url_entite{adresse}})]</h4>
+			<h4>[(#TYPE|logo_type_adresse) ][(#GET{type}|sinon{#GET{intitule}}|wrap{<a>}|inserer_attribut{href,#ID_ADRESSE|generer_url_entite{adresse}})]</h4>
 			<INCLURE{fond=prive/objets/contenu/adresse, id_adresse} />
 		</div>
 	</td>
