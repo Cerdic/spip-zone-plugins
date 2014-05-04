@@ -1,5 +1,19 @@
 <?php
-
+/**
+ * Plugin Diogene Mots
+ *
+ * Auteurs :
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ * Severo
+ * 
+ *
+ * © 2010-2014 - Distribue sous licence GNU/GPL
+ *
+ * Utilisation des pipelines par Diogene Licence
+ *
+ * @package SPIP\Diogene Licence\Pipelines
+ **/
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
