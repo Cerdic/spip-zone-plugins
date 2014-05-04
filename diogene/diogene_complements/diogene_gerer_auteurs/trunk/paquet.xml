@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene_gerer_auteurs"
 	categorie="edition"
-	version="1.4.0"
+	version="2.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
@@ -17,11 +17,9 @@
 
 	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_gerer_auteurs_pipelines.php" />
 	<pipeline nom="diogene_traiter" inclure="diogene_gerer_auteurs_pipelines.php" />
-	<pipeline nom="diogene_avant_formulaire" inclure="diogene_gerer_auteurs_pipelines.php" />
 	<pipeline nom="diogene_objets" inclure="diogene_gerer_auteurs_pipelines.php" />
-	<pipeline nom="insert_head" inclure="diogene_gerer_auteurs_pipelines.php" />
 
 	<necessite nom="diogene" compatibilite="[1.0.0;[" />
-	<necessite nom="SelecteurGenerique" compatibilite="[0.8.2;[" />
 	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<utilise nom="chosen" />
 </paquet>

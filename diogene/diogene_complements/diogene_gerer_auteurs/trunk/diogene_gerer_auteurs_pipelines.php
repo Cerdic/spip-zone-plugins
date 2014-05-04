@@ -15,23 +15,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Insertion dans le pipeline diogene_avant_formulaire (Diogène)
- * 
- * Insertion de contenu avant le formulaire
- * Le js du sélecteur générique
- *
- * @param array $flux 
- * 	Le contexte du pipeline
- * @return array $flux 
- * 	Le contexte modifié passé aux suivants
- */
-function diogene_gerer_auteurs_diogene_avant_formulaire($flux){
-	if(isset($flux['args']['id']) && is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('auteurs',unserialize($flux['args']['champs_ajoutes'])) && ($flux['args']['type'] != 'page'))
-		$flux['data'] .= recuperer_fond('prive/diogene_gerer_auteurs_avant_formulaire', $flux['args']);
-	return $flux;
-}
-
-/**
  * Insertion dans le pipeline diogene_ajouter_saisies (Diogène)
  * 
  * On ajoute la partie du formulaire concernant les auteurs si nécessaire
@@ -56,28 +39,30 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 			$nb_auteurs = sql_countsel('spip_auteurs','statut < 7');
 
 			if($nb_auteurs > 1){
-				$auteurs = sql_allfetsel("auteur.nom, auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur!=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
+				$auteurs = sql_allfetsel("auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur!=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
 				if($GLOBALS['visiteur_session']['statut']=='0minirezo'){
-					$auteur = sql_fetsel("auteur.nom, auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
+					$auteur = sql_fetsel("auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
 					if(is_array($auteur))
-						$flux['args']['contexte']['diogene_gerer_auteurs_remove'][$auteur['id_auteur']] = $auteur['nom'];
+						$flux['args']['contexte']['auteurs'][] = $auteur['id_auteur'];
 				}
 				if(count($auteurs) > 0){
 					foreach($auteurs as $auteur){
-						$flux['args']['contexte']['diogene_gerer_auteurs_remove'][$auteur['id_auteur']] = $auteur['nom'];
+						$flux['args']['contexte']['auteurs'][] = $auteur['id_auteur'];
 					}
 				}
-				if(_request('diogene_gerer_auteurs_supprimer'))
-					$flux['args']['contexte']['diogene_gerer_auteurs_supprimer'] = _request('diogene_gerer_auteurs_supprimer');
+				if(is_array(_request('diogene_gerer_auteurs')))
+					$flux['args']['contexte']['auteurs'] = _request('diogene_gerer_auteurs');
+				else if(_request('type_diogene'))
+					$flux['args']['contexte']['auteurs'] = array();
 				$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 			}
 		}else{
 			if($GLOBALS['visiteur_session']['statut']=='0minirezo'){
 				$auteur = sql_fetsel("nom, id_auteur,statut","spip_auteurs","id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur']));
-				$auteur_uniques[$auteur['id_auteur']] = $auteur['nom'];
+				$auteur_uniques[] = $auteur['id_auteur'];
 			}
 			if(count($auteur_uniques) > 0)
-				$flux['args']['contexte']['diogene_gerer_auteurs_remove'] = $auteur_uniques;
+				$flux['args']['contexte']['auteurs'] = $auteur_uniques;
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 		}
 	}
@@ -103,30 +88,41 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 		if(!autoriser('associerauteurs',$type,$id_objet))
 			return $flux;
 
-		if(_request('diogene_gerer_id_auteurs') OR is_array(_request('diogene_gerer_auteurs_supprimer'))){
-			include_spip('inc/invalideur');
-			include_spip('action/editer_auteur');
-			if(_request('diogene_gerer_id_auteurs')){
-				/**
-				 * Insertion des auteurs
-				 */
-				$auteurs_associer = _request('diogene_gerer_id_auteurs');
-				$ajout = auteur_associer($auteurs_associer,array($type=>$id_objet));
-				suivre_invalideur("id='id_auteur/$auteurs_associer'",true);
+		include_spip('inc/invalideur');
+		include_spip('action/editer_auteur');
+
+		$auteurs_liste = array();
+		$auteurs = sql_allfetsel("auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur_lien.objet=".sql_quote($type)." AND auteur_lien.id_objet=".intval($id_objet));
+		foreach($auteurs as $auteur){
+			$auteurs_liste[] = $auteur['id_auteur'];
+		}
+		/**
+		 * diogene_gerer_auteurs n'est pas un array, on supprime tous les auteurs sauf soi même si on n'est pas admin
+		 */
+		if(!is_array(_request('diogene_gerer_auteurs'))){
+			foreach($auteurs_liste as $auteur){
+				if(($auteur == $GLOBALS['visiteur_session']['id_auteur']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')){
+					/**
+					 * On ne peut pas s'enlever soit même des auteurs si l'on n'est pas admin
+					 */
+				}
+				else {
+					$suppr = auteur_dissocier($auteur,array($type=>$id_objet));
+					suivre_invalideur("id='id_auteur/$auteur'",true);
+				}
 			}
-			if(is_array(_request('diogene_gerer_auteurs_supprimer'))){
-				/**
-				 * Suppression des auteurs si demandée
-				 */
-				foreach(_request('diogene_gerer_auteurs_supprimer') as $id_auteur){
-					if(($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')){
-						/**
-						 * On ne peut pas s'enlever soit même des auteurs si l'on n'est pas admin
-						 */
-					}else{
-						$suppr = auteur_dissocier($id_auteur,array($type=>$id_objet));
-						suivre_invalideur("id='id_auteur/$id_auteur'",true);
-					}
+		}
+		else {
+			foreach(_request('diogene_gerer_auteurs') as $auteur){
+				if(!in_array($auteur,$auteurs_liste) && $id_auteur = sql_getfetsel('id_auteur','spip_auteurs','id_auteur='.intval($auteur))){
+					$ajout = auteur_associer($auteur,array($type=>$id_objet));
+					suivre_invalideur("id='id_auteur/$auteur'",true);
+				}
+			}
+			foreach($auteurs_liste as $id_auteur){
+				if(!in_array($id_auteur,_request('diogene_gerer_auteurs'))){
+					$suppr = auteur_dissocier($id_auteur,array($type=>$id_objet));
+					suivre_invalideur("id='id_auteur/$id_auteur'",true);
 				}
 			}
 		}
@@ -149,22 +145,6 @@ function diogene_gerer_auteurs_diogene_objets($flux){
 	$flux['article']['champs_sup']['auteurs'] = _T('diogene_gerer_auteurs:label_cfg_ajout_auteurs');
 	if(defined('_DIR_PLUGIN_PAGES'))
 		$flux['page']['champs_sup']['auteurs'] = _T('diogene_gerer_auteurs:label_cfg_ajout_auteurs');
-	return $flux;
-}
-
-/**
- * Insertion dans le pipeline insert_head (SPIP)
- * 
- * On insert les js du sélecteur générique si ils ne le sont pas déjà
- *.
- * @param string $flux
- * 	Le contenu de la balise #INSERT_HEAD
- * @return string $flux
- * 	Le contenu de la balise #INSERT_HEAD modifié
- */
-function diogene_gerer_auteurs_insert_head($flux){
-	include_spip('selecteurgenerique_fonctions');
-	$flux .= selecteurgenerique_verifier_js($flux);
 	return $flux;
 }
 ?>

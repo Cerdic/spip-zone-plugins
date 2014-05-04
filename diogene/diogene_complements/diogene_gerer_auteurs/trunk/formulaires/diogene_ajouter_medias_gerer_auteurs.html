@@ -12,32 +12,12 @@
 			<li class="editer editer_diogene_gerer_auteurs">
 				<label for="diogene_gerer_auteurs"><:diogene_gerer_auteurs:label_diogene_gerer_auteurs:></label>
 				<p class="explication"><:diogene_gerer_auteurs:explication_diogene_gerer_auteurs:></p>
-				<input type="text" class="text nomulti" name="diogene_gerer_auteurs" id="diogene_gerer_auteurs" size="50" data-selecteur="[(#VAL{diogene_auteurs}|parametre_url{id_objet,#ENV{id_objet}}|parametre_url{objet,#ENV{type}})]" data-select-callback="diogene_select"  />
+				<select name="diogene_gerer_auteurs[]" id="diogene_gerer_auteurs" multiple="multiple" class="chosen">
+					<BOUCLE_auteurs(AUTEURS){par nom}{tout}>
+					<option value="#ID_AUTEUR"[(#ENV{id_article}|non)[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)selected="selected"]][(#ID_AUTEUR|in_array{#ENV{auteurs,#ARRAY}}|oui)selected="selected"]>#NOM</option>
+					</BOUCLE_auteurs>
+				</select>
 			</li>
-			<li style="display:none">
-				<input id="diogene_gerer_id_auteurs" class="hidden" type="hidden" name="diogene_gerer_id_auteurs"/>
-			</li>
-			<B_auteur_remove>
-			<li class="editer editer_gerer_auteurs_remove">
-				<label><:diogene_gerer_auteurs:label_gerer_auteurs_remove:></label>
-				<p class="explication"><:diogene_gerer_auteurs:explication_gerer_auteurs_remove:></p>
-				<BOUCLE_auteur_remove(DATA){source table,#ENV**{diogene_gerer_auteurs_remove,#ARRAY}}>
-					<BOUCLE_si_autoriser(CONDITION){si #SESSION{id_auteur}|=={#CLE}|et{#AUTORISER{configurer}|non}|non}>
-					<div class="choix">
-						<input type="checkbox" name="diogene_gerer_auteurs_supprimer[]" class="checkbox" id='champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE' value='#_auteur_remove:CLE'[(#_auteur_remove:CLE|in_array{#ENV{diogene_gerer_auteurs_supprimer,#ARRAY}}|oui)checked="checked"] />
-						<label for="champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE">[(#_auteur_remove:VALEUR|typo)]</label>
-					</div>
-					</BOUCLE_si_autoriser>
-					</B_si_autoriser>
-					<div class="choix">
-						<input type="checkbox" name="diogene_gerer_auteurs_supprimer[]" class="checkbox" id='champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE' value='#_auteur_remove:CLE' disabled="disabled" />
-						<label for="champ_diogene_gerer_auteurs_remove_#_auteur_remove:CLE">[(#_auteur_remove:VALEUR|typo)]</label>
-						<em class="important"><:diogene_gerer_auteurs:message_impossible_supprimer_auteur:></em>
-					</div>
-					<//B_si_autoriser>
-				</BOUCLE_auteur_remove>
-			</li>
-			</B_auteur_remove>
 		</ul>
 	</fieldset>
 </li>
