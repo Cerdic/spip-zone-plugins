@@ -34,9 +34,8 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 					$evenement['repetitions'][] = date('d/m/Y',strtotime($d['date_debut']));
 				}
 			}
-			else{
+			else
 				$evenement = array();
-			}
 		}
 		
 		/**
@@ -119,8 +118,8 @@ function diogene_agenda_diogene_traiter($flux){
 		/**
 		 * On a un id_evenement => on met à jour
 		 */
-		include_spip('formulaires/editer_evenement');
 		if(intval($id_article) > 0){
+			include_spip('formulaires/editer_evenement');
 			set_request('id_parent',$id_article);
 			
 			/**

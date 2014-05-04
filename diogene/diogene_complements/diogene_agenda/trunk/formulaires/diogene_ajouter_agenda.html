@@ -25,7 +25,7 @@
 						/></span>
 						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</span>
 						]<label for="date_fin" class='date_fin'><:agenda:evenement_date_a:></label>
-						<span class='afficher_hoxraire[(#ENV{horaire}|=={oui}|non)none]'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
+						<span class='afficher_horaire[(#ENV{horaire}|=={oui}|non)none]'><label for='heure_fin' class='heure'><:agenda:evenement_date_a_immediat:></label>
 						<input type='text' class='text heure' name='heure_fin' id='heure_fin' size='4' maxlength='5' value="[(#ENV{heure_fin})]"
 						/></span><input type='text' class='text date' name='date_fin' id='date_fin' size='10' maxlength='10' value="[(#ENV{date_fin})]" />
 					</li>
