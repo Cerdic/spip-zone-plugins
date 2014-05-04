@@ -9,9 +9,9 @@
  *
  * © 2010-2014 - Distribue sous licence GNU/GPL
  *
- * Utilisation des pipelines par Diogene Licence
+ * Utilisation des pipelines par Diogene Mots
  *
- * @package SPIP\Diogene Licence\Pipelines
+ * @package SPIP\Diogene Mots\Pipelines
  **/
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
