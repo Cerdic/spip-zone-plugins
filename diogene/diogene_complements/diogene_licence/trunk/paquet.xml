@@ -11,7 +11,7 @@
 
 	<auteur>b_b</auteur>
 	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
-	<copyright>2010-2013</copyright>
+	<copyright>2010-2014</copyright>
 
 	<pipeline nom="diogene_ajouter_saisies" inclure="diogene_licence_pipelines.php" />
 	<pipeline nom="diogene_verifier" inclure="diogene_licence_pipelines.php" />

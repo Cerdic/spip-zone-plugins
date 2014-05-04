@@ -1,8 +1,10 @@
 [(#REM)
 	
-	Plugin Diogene Licences
+	Plugin Diogene Licence
+	
 	La saisie du formulaire s'insérant dans le formulaire d'article afin d'y choisir la licence adéquate
-	© 2010 - b_b
+	
+	Auteur : b_b
 ]
 #CACHE{0}
 <BOUCLE_diogene(DIOGENES){id_diogene}>
@@ -20,7 +22,7 @@
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{licence})</span>]
 			<select name="id_licence" id="licence">
 			<option value="0"[(#ENV{licence,#GET{licence_defaut,#CONFIG{licence/licence_defaut}}}|=={0}|oui) selected="selected"]><:licence:sans_licence:></option>
-			<BOUCLE_selection(POUR){tableau #ENV{licences}}>
+			<BOUCLE_selection(DATA){source table, #ENV{licences}}>
 				[(#SET{licence,[(#VALEUR|table_valeur{id})]})]
 				[(#SET{name_licence,[(#VALEUR|table_valeur{name})]})]
 				<option value="#GET{licence}"[(#GET{licence}|=={#ENV{id_licence,#GET{licence_defaut,#CONFIG{licence/licence_defaut}}}}|oui) selected="selected"]>#GET{name_licence}[ - (#VALEUR|table_valeur{description})]</option>

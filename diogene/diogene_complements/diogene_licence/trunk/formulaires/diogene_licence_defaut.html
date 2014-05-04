@@ -1,8 +1,10 @@
 [(#REM)
 	
-	Plugin Diogene Licences
+	Plugin Diogene Licence
+
 	La saisie du formulaire s'insérant dans le formulaire de diogene afin d'y choisir la licence par défaut
-	© 2010-2012 - b_b
+	
+	Auteur : b_b
 ]
 [(#SET{env_licence,[(#ENV**{options_complements}|unserialize|table_valeur{id_licence_defaut})]})]
 <li class="editer editer_licence[ (#ENV**{erreurs}|table_valeur{licence}|oui)erreur]">
@@ -10,7 +12,7 @@
 	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{licence})</span>]
 	<select name="id_licence_defaut" id="licence_defaut">
 	<option value="0"[(#GET{env_licence,#CONFIG{licence/licence_defaut}}|=={0}|oui) selected="selected"]><:licence:sans_licence:></option>
-	<BOUCLE_selection(POUR){tableau #ENV{licences}}>
+	<BOUCLE_selection(DATA){source table, #ENV{licences}}>
 		[(#SET{licence,[(#VALEUR|table_valeur{id})]})]
 		[(#SET{name_licence,[(#VALEUR|table_valeur{name})]})]
 		<option value="#GET{licence}"[(#GET{licence}|=={#GET{env_licence,#CONFIG{licence/licence_defaut}}}|oui) selected="selected"]>#GET{name_licence}[ - (#VALEUR|table_valeur{description})]</option>
