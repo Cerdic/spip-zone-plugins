@@ -1,4 +1,12 @@
-[(#SET{id_table_objet,[(#ENV{type}|id_table_objet)]})]
+[(#REM)
+
+	Plugin Diogène Auteurs v1.x
+	
+	Code Javascript inséré en début de formulaire via le pipeline "diogene_avant_formulaire"
+
+	Utilise le plugin Sélecteur Générique
+
+][(#SET{id_table_objet,[(#ENV{type}|id_table_objet)]})]
 <script type="text/javascript"><!--
 	var diogene_select = function(event,ui){
 		if (typeof(ui) != 'undefined' && (typeof(ui.item.value) == 'string')) {

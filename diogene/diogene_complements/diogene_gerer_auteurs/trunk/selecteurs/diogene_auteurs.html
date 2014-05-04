@@ -4,20 +4,19 @@
 
 	Menu de selection d'auteurs
 
-	La reponse est en text simple, elle sera exploitee par jquery.autocomplete.js
+	La reponse est en json, elle sera exploitee par jquery.autocomplete.js
+	
+	On élimine d'abors les auteurs liés à l'objet
+	Puis on cherche les auteurs restants correspondant à la requète
+	Si pas d'auteurs, on recherche dans le login
+	
+	On encode la réponse en json
 
-]
-[(#REM)
-	Eliminer d'abord les auteurs deja lies a l'article
-]
-<BOUCLE_e(AUTEURS spip_auteurs_liens){id_objet}{objet}{tout}{doublons} />
-#SET{resultats, #ARRAY}
-[(#REM) Chercher les auteurs correspondant a la requete ]
+]<BOUCLE_e(AUTEURS spip_auteurs_liens){id_objet}{objet}{tout}{doublons} />
+[(#SET{resultats, #ARRAY})]
 <BOUCLE_s(AUTEURS){tout}{nom LIKE %(#ENV{q})%}{0,20}{par nom}{doublons}>
 [(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#NOM*|textebrut|entites_html)],value,[(#ID_AUTEUR)]})]})]})]
-</BOUCLE_s>[(#REM) 
-Si aucun, on recherche dans le login
-]<BOUCLE_s1(AUTEURS){tout}{login LIKE (#ENV{q})%}{0,20}{par nom}{doublons}>
+</BOUCLE_s><BOUCLE_s1(AUTEURS){tout}{login LIKE (#ENV{q})%}{0,20}{par nom}{doublons}>
 [(#SET{resultats, [(#GET{resultats}|push{[(#ARRAY{label,[(#NOM*|textebrut|entites_html)],value,[(#ID_AUTEUR)]})]})]})]
 </BOUCLE_s1>
 <//B_s1>

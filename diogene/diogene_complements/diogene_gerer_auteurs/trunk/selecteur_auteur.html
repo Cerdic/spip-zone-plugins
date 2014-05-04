@@ -2,24 +2,22 @@
 #HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
 [(#REM)
 
+	Plugin Diogène Auteurs v1.x
+	
 	Menu de selection d'auteurs
 
 	La reponse est en text simple, elle sera exploitee par jquery.autocomplete.js
+	
+	On élimine d'abord les auteurs deja lies a l'article
+	Si on n'a aucun résultat, on recherche dans le login
+	Si on n'a encore aucun résultat, on affiche que l'on n'a rien trouvé
 
-]
-[(#REM)
-	Eliminer d'abord les auteurs deja lies a l'article
-]
-<BOUCLE_e(AUTEURS spip_auteurs_liens){id_objet}{objet}{tout}{doublons} />
-[(#REM) Chercher les auteurs correspondant a la requete ]
+]<BOUCLE_e(AUTEURS spip_auteurs_liens){id_objet}{objet}{tout}{doublons} />
 <BOUCLE_s(AUTEURS){tout}{nom LIKE %(#ENV{q})%}{0,20}{par nom}{doublons}>
 #NOM[ - (#LOGIN)]|[(#NOM|textebrut)]|#ID_AUTEUR
-</BOUCLE_s>[(#REM) 
-Si aucun, on recherche dans le login
-]<BOUCLE_s1(AUTEURS){tout}{login LIKE (#ENV{q})%}{0,20}{par nom}{doublons}>
+</BOUCLE_s><BOUCLE_s1(AUTEURS){tout}{login LIKE (#ENV{q})%}{0,20}{par nom}{doublons}>
 [(#STATUT|icone_statut_auteur) ][ - (##NOM)][ - (#BIO|textebrut|couper{20})][ ((#EMAIL))]|[(#NOM|textebrut)]|#ID_AUTEUR
 </BOUCLE_s1>
-[(#REM) Vraiment on n'a rien trouve ]
 <:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0
 <//B_s1>
 <//B_s>

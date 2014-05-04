@@ -1,26 +1,45 @@
 <?php
+/**
+ * Plugin Diogene Auteurs
+ *
+ * Auteurs :
+ * kent1 (http://www.kent1.info - kent1@arscenic.info)
+ *
+ * © 2010-2014 - Distribue sous licence GNU/GPL
+ *
+ * Utilisation des pipelines par Diogene Auteurs
+ *
+ * @package SPIP\Diogene Auteurs\Pipelines
+ **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Insertion dans le pipeline diogene_avant_formulaire (Diogène)
+ * 
  * Insertion de contenu avant le formulaire
  * Le js du sélecteur générique
  *
- * @param array $flux Le contexte du pipeline
- * @return array $flux le contexte modifié passé aux suivants
+ * @param array $flux 
+ * 	Le contexte du pipeline
+ * @return array $flux 
+ * 	Le contexte modifié passé aux suivants
  */
 function diogene_gerer_auteurs_diogene_avant_formulaire($flux){
-	if(isset($flux['args']['id']) && is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('auteurs',unserialize($flux['args']['champs_ajoutes'])) && ($flux['args']['type'] != 'page')){
+	if(isset($flux['args']['id']) && is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('auteurs',unserialize($flux['args']['champs_ajoutes'])) && ($flux['args']['type'] != 'page'))
 		$flux['data'] .= recuperer_fond('prive/diogene_gerer_auteurs_avant_formulaire', $flux['args']);
-	}
 	return $flux;
 }
 
 /**
- * Insertion dans le formulaire diogene_ajouter_saisies
- *
- * @param array $flux Le contexte du pipeline
- * @return array $flux le contexte modifié passé aux suivants
+ * Insertion dans le pipeline diogene_ajouter_saisies (Diogène)
+ * 
+ * On ajoute la partie du formulaire concernant les auteurs si nécessaire
+ * 
+ * @param array $flux 
+ * 	Le contexte du pipeline
+ * @return array $flux 
+ * 	Le contexte modifié passé aux suivants
  */
 function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 	if(is_array(unserialize($flux['args']['champs_ajoutes'])) && in_array('auteurs',unserialize($flux['args']['champs_ajoutes']))){
@@ -29,7 +48,7 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
 		$auteur_uniques = array();
 
-		if(is_numeric($id_objet)){
+		if(is_numeric($id_objet) && intval($id_objet) > 0){
 			include_spip('inc/autoriser');
 			if(!autoriser('associerauteurs',$objet,$id_objet))
 				return $flux;
@@ -66,11 +85,14 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 }
 
 /**
- * Insertion dans le pipeline diogene_traiter
- * Fonction s'exécutant au traitement du formulaire 
+ * Insertion dans le pipeline diogene_traiter (Diogène)
+ * 
+ * Fonction s'exécutant au traitement du formulaire
  *
- * @param array $flux Le contexte du pipeline
- * @return array $flux le contexte modifié passé aux suivants
+ * @param array $flux
+ * 	Le contexte du pipeline
+ * @return array $flux 
+ * 	Le contexte modifié passé aux suivants
  */
 function diogene_gerer_auteurs_diogene_traiter($flux){
 	$id_objet = $flux['args']['id_objet'];
@@ -88,8 +110,9 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 				/**
 				 * Insertion des auteurs
 				 */
-				$ajout = auteur_associer(_request('diogene_gerer_id_auteurs'),array($type=>$id_objet));
-				suivre_invalideur("id='id_auteur/"._request('diogene_gerer_id_auteurs')."'",true);
+				$auteurs_associer = _request('diogene_gerer_id_auteurs');
+				$ajout = auteur_associer($auteurs_associer,array($type=>$id_objet));
+				suivre_invalideur("id='id_auteur/$auteurs_associer'",true);
 			}
 			if(is_array(_request('diogene_gerer_auteurs_supprimer'))){
 				/**
@@ -112,10 +135,15 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 }
 
 /**
- * Insertion dans le pipeline diogene_objets
- * On ajoute le champ auteur dans les articles
+ * Insertion dans le pipeline diogene_objets (Diogène)
  * 
- * @param array $flux La liste des champs pour les diogenes
+ * On ajoute la possibilité d'ajouter le champ auteur dans les articles
+ * dans la configuration d'un Diogène
+ * 
+ * @param array $flux 
+ * 	La liste des champs pour les diogenes
+ * @return array $flux
+ * 	La liste des champs modifiée
  */
 function diogene_gerer_auteurs_diogene_objets($flux){
 	$flux['article']['champs_sup']['auteurs'] = _T('diogene_gerer_auteurs:label_cfg_ajout_auteurs');
@@ -125,10 +153,14 @@ function diogene_gerer_auteurs_diogene_objets($flux){
 }
 
 /**
- * Insertion dans le pipeline insert_head
- * On insert les js du séleceteur générique si ils ne le sont pas déjà
+ * Insertion dans le pipeline insert_head (SPIP)
+ * 
+ * On insert les js du sélecteur générique si ils ne le sont pas déjà
  *.
  * @param string $flux
+ * 	Le contenu de la balise #INSERT_HEAD
+ * @return string $flux
+ * 	Le contenu de la balise #INSERT_HEAD modifié
  */
 function diogene_gerer_auteurs_insert_head($flux){
 	include_spip('selecteurgenerique_fonctions');
