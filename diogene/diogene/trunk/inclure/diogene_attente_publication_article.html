@@ -9,9 +9,11 @@
 	<ul class="liste-items liste_objets_attente">
 		<BOUCLE_articles_attente(ARTICLES){id_secteur = #GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{pagination #ENV{pagination,5}}>
 		<li class="item">
-			<h4><a href="[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_article,#ID_ARTICLE})]">#TITRE</a></h4>
-			[<p><:par_auteur|ucfirst:> : (#LESAUTEURS)</p>]
-			#INTRODUCTION
+			<article class="entry article hentry">
+				<h4 class="entry-title"><a href="[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_article,#ID_ARTICLE})]">[(#TITRE|sinon{<:info_sans_titre:>})]</a></h4>
+				<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span><i class="icon-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
+				[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
+			</article>
 		</li>
 		</BOUCLE_articles_attente>
 	</ul>

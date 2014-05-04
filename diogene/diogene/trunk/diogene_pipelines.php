@@ -3,9 +3,10 @@
  * Plugin Diogene
  *
  * Auteurs :
+ * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2014 - Distribue sous licence GNU/GPL
+ * Distribue sous licence GNU/GPL
  *
  * Utilisation des pipelines par Diogene
  *
@@ -75,7 +76,7 @@ function diogene_editer_contenu_objet($flux){
 		 */
 		if($type == 'article'){
 			if($id_diogene = intval(_request('id_diogene')))
-				$where = "id_diogene = $id_diogene AND id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
+				$where = "id_diogene = ".intval($id_diogene)." AND id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
 			else
 				$where = "id_secteur=".intval($id_secteur)." AND objet IN ('article','emballe_media')";
 		}

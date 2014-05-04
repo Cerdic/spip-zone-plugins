@@ -3,9 +3,10 @@
  * Plugin Diogene
  *
  * Auteurs :
+ * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * Distribue sous licence GNU/GPL
  *
  * Déclaration des tables pour Diogene
  *
@@ -20,10 +21,14 @@ function diogene_declarer_tables_interfaces($interfaces){
 }
 
 /**
- * Declaration des tables auxiliaires
+ * Insertion dans le pipeline declarer_tables_auxiliaires (SPIP)
+ * 
+ * Declaration de la table auxiliaire spip_diogene_liens
  *
  * @param array $tables_auxiliaires
- * @return array
+ * 	Un tableau de description des tables auxiliaires
+ * @return array $tables_auxiliaires
+ * 	Le tableau des tables auxiliaires complété
  */
 function diogene_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_diogenes_liens = array(
@@ -41,6 +46,18 @@ function diogene_declarer_tables_auxiliaires($tables_auxiliaires){
 	return $tables_auxiliaires;
 }
 
+/**
+ * Insertion dans le pipeline declarer_tables_objets_sql (SPIP)
+ * 
+ * Modification de la description des tables SQL :
+ * - On ajoute les champs "lang" et "langue_choisie" dans les champs éditables de la table spip_articles
+ * - On ajoute notre nouvel objet "diogene"
+ * 
+ * @param array $tables
+ * 	La description complète des objets SPIP
+ * @return array $tables
+ * 	La description des objets SPIP modifiée
+ */
 function diogene_declarer_tables_objets_sql($tables){
 	$tables['spip_articles']['champs_editables'][] = 'lang';
 	$tables['spip_articles']['champs_editables'][] = 'langue_choisie';

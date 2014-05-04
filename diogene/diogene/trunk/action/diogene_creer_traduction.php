@@ -3,9 +3,10 @@
  * Plugin Diogene
  *
  * Auteurs :
+ * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * Distribue sous licence GNU/GPL
  *
  * Action de création de traduction depuis l'espace public
  *
@@ -22,9 +23,8 @@ function action_diogene_creer_traduction_dist($arg=null){
 	include_spip('action/editer_article');
 	$lang = _request('langue_forcee');
 
-	if(!is_numeric(intval($arg)) OR !$lang){
+	if(!is_numeric(intval($arg)) OR !$lang)
 		return;
-	}
 	
 	$contenu_article = sql_fetsel('*','spip_articles','id_article = '.intval($arg));
 	
@@ -76,8 +76,8 @@ function action_diogene_creer_traduction_dist($arg=null){
 			 * On lui associe automatiquement le ou les auteurs de l'article original
 			 * L'id_auteur courant est automatiquement ajouté par article_inserer()
 			 */
-			$auteurs = sql_select('id_auteur','spip_auteurs_liens','objet="article" AND id_objet='.intval($id_trad));
-			while($auteur = sql_fetch($auteurs)){
+			$auteurs = sql_allfetsel('id_auteur','spip_auteurs_liens','objet="article" AND id_objet='.intval($id_trad));
+			foreach($auteurs as $auteur){
 				$auteur['id_objet'] = $id_article;
 				$auteur['objet'] = 'article';
 				sql_insertq("spip_auteurs_liens",$auteur);

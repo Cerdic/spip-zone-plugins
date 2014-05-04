@@ -3,9 +3,10 @@
  * Plugin Diogene
  *
  * Auteurs :
+ * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2013 - Distribue sous licence GNU/GPL
+ * Distribue sous licence GNU/GPL
  *
  * Options spécifiques à Diogene
  * 

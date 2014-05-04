@@ -3,9 +3,10 @@
  * Plugin Diogene
  *
  * Auteurs :
+ * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2013 - Distribue sous licence GNU/GPL
+ * Distribue sous licence GNU/GPL
  *
  * Action d'édition d'un diogene
  *
@@ -41,8 +42,8 @@ function action_editer_diogene_dist($arg=null){
 /**
  * Fonction de changement de statut d'un template
  *
- * @param unknown_type $id_diogene
- * @param unknown_type $c
+ * @param int $id_diogene
+ * @param array $c
  */
 function diogene_instituer($id_diogene, $c) {
 
@@ -83,12 +84,11 @@ function diogene_instituer($id_diogene, $c) {
  * Fonction d'insertion d'un template
  * 
  * @return int $id_diogene
- * 		L'identifiant numérique du template créé
+ * 	L'identifiant numérique du template créé
  */
 function diogene_inserer() {
 
-	$champs = array();
-	$champs['id_auteur'] = $GLOBALS['visiteur_session']['id_auteur'];
+	$champs = array('id_auteur' => $GLOBALS['visiteur_session']['id_auteur']);
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion',
 		array(
@@ -111,21 +111,19 @@ function diogene_inserer() {
  * @return bool true/false
  */
 function diogene_supprimer($id_diogene){
-	$diogene = sql_fetsel('*','spip_diogenes','id_diogene='.intval($id_diogene));
-	if(include_spip('inc/autoriser') && $diogene && autoriser('modifier','diogene',$id_diogene)){
+	$diogene = sql_getfetsel('id_diogene','spip_diogenes','id_diogene='.intval($id_diogene));
+	if(is_numeric($diogene) && (intval($diogene) > 0) && include_spip('inc/autoriser') && autoriser('modifier','diogene',$id_diogene)){
 		if($del = sql_delete('spip_diogenes','id_diogene = '.intval($id_diogene))){
 			/**
 			 * Invalider le cache
 			 */
 			include_spip('inc/invalideur');
-			$invalideur = "id='diogene/$id_diogene'";
-			suivre_invalideur("$invalideur");
+			suivre_invalideur("id='diogene/$id_diogene'");
 			return true;
 		}else
 			return false;
-	}else{
+	}else
 		return false;
-	}
 }
 
 /**
@@ -147,9 +145,9 @@ function diogene_modifier($id_diogene,$set=false){
 		$set
 	);
 	
-	if(!_request('menu')){
+	if(!_request('menu'))
 		$c['menu'] = '';
-	}
+
 	/**
 	 * Les champs champs_caches, champs_ajoutes, options_complements
 	 * doivent être des tableau serialisés

@@ -9,10 +9,10 @@
 	<ul class="liste-items liste_objets_attente">
 		<BOUCLE_sites_attente(SITES){id_secteur=#GET{id_secteur}}{id_auteur?}{id_auteur != #ENV{auteur_exclu,0}}{statut !IN publie,poubelle}{pagination #ENV{pagination,5}}>
 		<li class="item">
-			<h4><a href="[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_syndic,#ID_SYNDIC})]">#TITRE</a></h4>
+			<h4><a href="[(#URL_PAGE{#ENV{page},type_objet=#GET{type}}|parametre_url{id_syndic,#ID_SYNDIC})]">[(#TITRE|sinon{<:info_sans_titre:>})]</a></h4>
 			#INTRODUCTION
 			<B_auteur>
-			<p><:par_auteur|ucfirst:> : 
+			<p><:par_auteur|ucfirst:>
 			<BOUCLE_auteur(AUTEURS){id_syndic}{', '}>
 			#NOM
 			</BOUCLE_auteur>

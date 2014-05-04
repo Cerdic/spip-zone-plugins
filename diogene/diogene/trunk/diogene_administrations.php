@@ -3,16 +3,29 @@
  * Plugin Diogene
  *
  * Auteurs :
+ * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2010-2012 - Distribue sous licence GNU/GPL
+ * Distribue sous licence GNU/GPL
  *
- * Installation de diogène
+ * Installation/Désinstallation du plugin Diogène
  *
  **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Fonction d'installation du plugin
+ * 
+ * Création des tables SQL :
+ * - spip_diogenes
+ * - spip_diogenes_liens
+ * 
+ * @param string $nom_meta_base_version
+ * 	Nom de la meta d'installation du plugin
+ * @param float $version_cible
+ * 	Version vers laquelle mettre à jour
+ */
 function diogene_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 	
@@ -49,10 +62,22 @@ function diogene_upgrade($nom_meta_base_version,$version_cible){
 	$maj['0.3.7'] = array(
 		array('maj_tables',array('spip_diogenes'))
 	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
+/**
+ * Fonction de désinstallation du plugin Diogène
+ * 
+ * Suppression des tables :
+ * - spip_diogenes
+ * - spip_diogenes_liens
+ * Suppression de la meta du plugin
+ * 
+ * @param string $nom_meta_base_version
+ * 	Nom de la méta d'installation du plugin
+ */
 function diogene_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 	sql_drop_table('spip_diogenes');
