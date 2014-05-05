@@ -24,8 +24,8 @@ function formulaires_configurer_ckeditor_p8_charger_dist() {
 	$valeurs = array(
 		'tags' => $cke_tags_def,
 	/* faux champs : utilisés pour la gestion du formulaire (ie: initialisation de #ENV) */
-		'intitule' => $cfg['tags'][$modele]['intitule'],
-		'info' => $cfg['tags'][$modele]['info'],
+		'intitule' => (isset($cfg['tags']) && isset($cfg['tags'][$modele]) && isset($cfg['tags'][$modele]['intitule'])?$cfg['tags'][$modele]['intitule']:''),
+		'info' => (isset($cfg['tags']) && isset($cfg['tags'][$modele]) && isset($cfg['tags'][$modele]['info'])?$cfg['tags'][$modele]['info']:''),
 		'_cke_nouveau_modele' => _request('_cke_nouveau_modele'),
 		'_cke_edite_modele' => _request('_cke_edite_modele'),
 		'nouveau_modele' => _request('nouveau_modele'),

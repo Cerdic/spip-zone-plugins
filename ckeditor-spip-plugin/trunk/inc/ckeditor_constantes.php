@@ -21,7 +21,7 @@ define('_CKE_LARGE_DEF', 490 ) ;
 define('_CKE_ETROIT_DEF', 460 ) ;
 define('_CKE_LARGE', ckeditor_lire_config("cktoolslenlarge",_CKE_LARGE_DEF) ) ;
 define('_CKE_ETROIT', ckeditor_lire_config("cktoolslenetroit",_CKE_ETROIT_DEF) ) ;
-define('_CKE_MAXSIZETOOLS', ($_COOKIE['spip_ecran']=='large'?_CKE_LARGE:_CKE_ETROIT)) ;
+define('_CKE_MAXSIZETOOLS', (isset($_COOKIE['spip_ecran']) && $_COOKIE['spip_ecran']=='large'?_CKE_LARGE:_CKE_ETROIT)) ;
 define('_CKE_PREFERED_VERSION', '3.6.5') ;
 define('_CKE_RACINE_REGEX', '#^'.preg_quote(_DIR_RACINE, '#').'#') ;
 define('_CKE_FONTKIT', _DIR_IMG."FontKits") ;

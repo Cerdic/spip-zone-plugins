@@ -15,7 +15,7 @@ foreach($cke_tags as $tagname => $tagdesc) {
 		default: $num = '' ; break ;
 	} 
 	$protectedtags[] = $tagname.$num ;
-	if ($tagdesc['fermante']) { $protectedtags[] = '\\/'.$tagname ; $closedtags[] = $tagname ; }
+	if (isset($tagdesc['fermante']) && $tagdesc['fermante']) { $protectedtags[] = '\\/'.$tagname ; $closedtags[] = $tagname ; }
 }
 define( 'PROTECTED_SPIP_TAGS', "(?:".join('|', $protectedtags).")" );unset($protectedtags);
 define( 'CLOSED_PROTECTED_SPIP_TAGS', "(?:".join('|', $closedtags).")" );unset($closedtags);
@@ -35,16 +35,21 @@ function ckeditor_ecrire_protectedtags($tags=null) {
 		$ptags= array() ;
 		foreach($tags as $tag => $desc) {
 			$ptags[] = $tag . ($desc['type']=='num-obligatoire'?'XX':($desc['type']=='num-facultatif'?'xx':'')) ;
-			if ($desc['fermante']) $ptags[] = '/'.$tag ;
+			if (isset($desc['fermante']) && $desc['fermante']) $ptags[] = '/'.$tag ;
 		}
 		ecrire_config('ckeditor/protectedtags', join(';', $ptags)) ;
 }
 
-global $cke_conf_cs ; $cke_conf_cs = unserialize($GLOBALS['meta']['tweaks_actifs']) ; // pour éviter les unserialize à répétition
+global $cke_conf_cs ;
+if (isset($GLOBALS['meta']['tweaks_actifs'])) {
+	$cke_conf_cs = unserialize($GLOBALS['meta']['tweaks_actifs']) ; // pour éviter les unserialize à répétition
+} else {
+	$cke_conf_cs = array() ;
+}
 
 function ckeditor_tweaks_actifs($tweak) { // pour accéder aux outils du couteau suisse
 	global $cke_conf_cs ;
-	return is_array($cke_conf_cs) && is_array($cke_conf_cs[$tweak]) && $cke_conf_cs[$tweak]['actif'] ;
+	return is_array($cke_conf_cs) && isset($cke_conf_cs[$tweak]) && is_array($cke_conf_cs[$tweak]) && isset($cke_conf_cs[$tweak]['actif']) ;
 }
 
 function ckeditor_dump($var, $html = true ) { // pour afficher le contenu d'une variable (pour débuggage)

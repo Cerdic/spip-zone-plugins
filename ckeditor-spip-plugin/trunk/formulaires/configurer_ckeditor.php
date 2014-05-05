@@ -155,10 +155,10 @@ function formulaires_configurer_ckeditor_charger_dist() {
 
 	$valeurs = array(
                 //'' => array_key_exists('', $cfg)?$cfg['']:_CKE__DEF,
-		'editmode' => $cfg['editmode']?$cfg['editmode']:_CKE_EDITMODE_DEF,
-		'skin' => $cfg['editmode']?$cfg['skin']:_CKE_SKIN_DEF,
-		'taille' => $cfg['taille']?$cfg['taille']:_CKE_HAUTEUR_DEF,
-		'apercu' => $cfg['apercu']?$cfg['apercu']:_CKE_VIGNETTE_DEF,
+		'editmode' => isset($cfg['editmode'])?$cfg['editmode']:_CKE_EDITMODE_DEF,
+		'skin' => isset($cfg['editmode'])?$cfg['skin']:_CKE_SKIN_DEF,
+		'taille' => isset($cfg['taille'])?$cfg['taille']:_CKE_HAUTEUR_DEF,
+		'apercu' => isset($cfg['apercu'])?$cfg['apercu']:_CKE_VIGNETTE_DEF,
 		'startspellcheck' => array_key_exists('startspellcheck', $cfg)?$cfg['startspellcheck']:_CKE_SCAYT_START_DEF,
 		'spellchecklang' => array_key_exists('spellchecklang', $cfg)?$cfg['spellchecklang']:_CKE_SCAYT_LANG_DEF,
 		'ignoreversion' => array_key_exists('ignoreversion', $cfg)?$cfg['ignoreversion']:_CKE_IGNOREVERSION_DEF,

@@ -154,7 +154,7 @@ function ckeditor_header_prive($flux) {
 				}
 			}
 		}
-		if (!$config['type'] && !$config['id']) {
+		if (!isset($config['type']) && !isset($config['id'])) {
 			$type = $exec ;
 			switch($type) {
 				case 'article':
@@ -201,7 +201,7 @@ function ckeditor_insert_head($flux) {
 				}		
 			}
 		} else // on essaie quand même de déterminer le contexte d'édition :
-		if (is_array($GLOBALS['page']) && is_array($GLOBALS['page']['contexte'])) {
+		if (is_array($GLOBALS['page']) && is_array($GLOBALS['page']['contexte']) && isset($GLOBALS['page']['contexte']['type']))  {
 			$type=$GLOBALS['page']['contexte']['type'] ;
 			$id=$GLOBALS['page']['contexte']['id_'.$type];
 			if ($id) {
@@ -231,7 +231,7 @@ function ckeditor_setfilebrowser_dist($cfg) {
 	$cke_cfg['filebrowserImageBrowseLinkUrl'] = $cke_cfg['filebrowserBrowseUrl'] = url_absolue(_DIR_RACINE.'spip.php?page=filebrowser&type=files') ;
 	$cke_cfg['filebrowserImageBrowseUrl'] = url_absolue(_DIR_RACINE.'spip.php?page=filebrowser&type=images') ;
 	$cke_cfg['filebrowserFlashBrowseUrl'] = url_absolue(_DIR_RACINE.'spip.php?page=filebrowser&type=flash') ;
-	if (ckeditor_lire_config('utilise_upload',_CKE_USE_DIRECT_UPLOAD_DEF)) {
+	if (ckeditor_lire_config('utilise_upload',_CKE_USE_DIRECTUPLOAD_DEF)) {
 		$cke_cfg['filebrowserUploadUrl'] = url_absolue(_DIR_RACINE.'spip.php?page=filebrowser&type=files&mode=direct') ;
 		$cke_cfg['filebrowserImageUploadUrl'] = url_absolue(_DIR_RACINE.'spip.php?page=filebrowser&type=images&mode=direct') ;
 		$cke_cfg['filebrowserFlashUploadUrl'] = url_absolue(_DIR_RACINE.'spip.php?page=filebrowser&type=flash&mode=direct') ;
@@ -291,7 +291,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['minwidth'] = (int)_CKE_MAXSIZETOOLS+28 ;
 			$cke_cfg['vignette'] = (int)ckeditor_lire_config('vignette', _CKE_VIGNETTE_DEF) ;
 
-			$arg_select = ((array_search($config['type'], $GLOBALS['cke_types_img_attachable']) !== false) && $config['id'] 
+			$arg_select = ((isset($config['type']) && isset($config['id']) && (array_search($config['type'], $GLOBALS['cke_types_img_attachable']) !== false))
 					? '&'.$config['type'].'='.$config['id'] 
 					: (ckeditor_lire_config('insertall') 
 						? '&type=tout' 
@@ -387,7 +387,7 @@ function ckeditor_preparescript($config) {
 								} 
 								$thissize += $item[_CKE_SIZE] ;	
 								$tb[] = $tool ;
-								$requiredPlugins[] = $item[_CKE_PLUGIN] ;
+								if (isset($item[_CKE_PLUGIN])) $requiredPlugins[] = $item[_CKE_PLUGIN] ;
 							}
 			
 							if (count($pluginsboutons) && ($tool == $plugposref) && ($plug_pos == 'apres')) {
@@ -420,7 +420,7 @@ function ckeditor_preparescript($config) {
 			// on essaie de faire en sorte que la couleur de ckeditor corresponde au theme spip actif
 			$couleurs = charger_fonction('couleurs', 'inc');
 			$couleurs_spip = $couleurs(array(), true) ;
-			$cke_cfg['uiColor'] = (is_array($visiteur_session) && is_array($visiteur_session['prefs']))
+			$cke_cfg['uiColor'] = (isset($visiteur_session['prefs']) && is_array($visiteur_session) && is_array($visiteur_session['prefs']))
 				? couleur_pastelle($couleurs_spip[$visiteur_session['prefs']['couleur']]['couleur_claire'])
 				// si pas de couleur : gris pale
 				: '#eee' ;
@@ -538,12 +538,12 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['filebrowserImageUploadUrl'] = $append_cfg['filebrowserImageUploadUrl'] ;
 			$cke_cfg['filebrowserFlashUploadUrl'] = $append_cfg['filebrowserFlashUploadUrl'] ;
 
-			$cke_cfg['filebrowserWindowWidth'] = ($append_cfg['filebrowserWindowWidth']?$append_cfg['filebrowserWindowWidth']:682) ;
-			$cke_cfg['filebrowserWindowHeight'] = ($append_cfg['filebrowserWindowHeight']?$append_cfg['filebrowserWindowHeight']:500) ;
-			$load_extra_js = $append_cfg['load_extra_js'] ;
-			$extra_js = $append_cfg['extra_js'] ;
+			$cke_cfg['filebrowserWindowWidth'] = (isset($append_cfg['filebrowserWindowWidth'])?$append_cfg['filebrowserWindowWidth']:682) ;
+			$cke_cfg['filebrowserWindowHeight'] = (isset($append_cfg['filebrowserWindowHeight'])?$append_cfg['filebrowserWindowHeight']:500) ;
+			if (isset($append_cfg['load_extra_js'])) $load_extra_js = $append_cfg['load_extra_js'] ;
+			if (isset($append_cfg['extra_js'])) $extra_js = $append_cfg['extra_js'] ;
 
-			if ($append_cfg['extraPlugin'] && $append_cfg['loadExtraPlugin']) {
+			if (isset($append_cfg['extraPlugin']) && isset($append_cfg['loadExtraPlugin'])) {
 				$pluginsactifs[$append_cfg['extraPlugin']] = $append_cfg['loadExtraPlugin'] ;
 			}
 
@@ -573,7 +573,7 @@ function ckeditor_preparescript($config) {
 			// dernières options de configurations
 			$cke_cfg['height'] = intval(ckeditor_lire_config('taille', _CKE_HAUTEUR_DEF)) ;
 			$cke_cfg['scayt_autoStartup'] = (ckeditor_lire_config('startspellcheck', _CKE_SCAYT_START_DEF)=='on') ;
-			$cke_cfg['scayt_sLang'] = ($config['scayt_sLang']?$config['scayt_sLang']:ckeditor_lire_config('spellchecklang', _CKE_SCAYT_LANG_DEF)) ;
+			$cke_cfg['scayt_sLang'] = (isset($config['scayt_sLang'])?$config['scayt_sLang']:ckeditor_lire_config('spellchecklang', _CKE_SCAYT_LANG_DEF)) ;
 			$cke_cfg['resize_enabled'] = true ;
 			$cke_cfg['entities'] = false ;
 			$cke_cfg['skin'] = ckeditor_lire_config('skin', _CKE_SKIN_DEF) ;
@@ -584,7 +584,7 @@ function ckeditor_preparescript($config) {
 			$cke_cfg['fontSize_sizes'] = ckeditor_lire_config('fontsizes', _CKE_FONTSIZES_DEF) ;
 			$cke_cfg['dialog_startupFocusTab'] = true ;
 			$cke_cfg['readOnly'] = false ;
-			$cke_cfg['spip_contexte'] = array('id'=>$config['id'], 'type'=>$config['type']) ;
+			$cke_cfg['spip_contexte'] = array('id'=>(isset($config['id'])?$config['id']:null), 'type'=>(isset($config['type'])?$config['type']:null)) ;
 			$cke_cfg['forceEnterMode'] = true ;
 			$removePlugins = array_diff($allPlugins,$requiredPlugins) ;
 			if ($cke_cfg['forcePasteAsPlainText'] && ! in_array('pastefromword', $removePlugins)) {
@@ -607,10 +607,10 @@ function ckeditor_preparescript($config) {
 	<script type=\"text/javascript\">CKEDITOR.config.jqueryOverrideVal=true;</script>
 	<script type=\"text/javascript\" src=\"".url_absolue(_CKE_JQUERY)."\"></script>
 	<script type=\"text/javascript\" src=\"".(function_exists("produire_fond_statique")?produire_fond_statique("ckeditor4spip.js"):url_absolue(_DIR_RACINE."?page=ckeditor4spip.js"))."\"></script>\n";
-		if ($load_extra_js) { 
+		if (isset($load_extra_js)) { 
 			$script .= "	<script type=\"text/javascript\" src=\"$load_extra_js\"></script>\n" ;
 		}
-		if ($extra_js) {
+		if (isset($extra_js)) {
 			$script .= "	<script type=\"text/javascript\">$extra_js</script>\n" ;
 		}
 	} else {
