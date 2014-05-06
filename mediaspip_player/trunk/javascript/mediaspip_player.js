@@ -24,7 +24,7 @@
  * - autoplay boolean true/false : lit automatiquement la video ou le son (défaut : false)
  * - autoload boolean true/false : précharge automatiquement la video ou le son (défaut : true)
  * - minwidth int : La largeur minimale
- * - movieSize string 'adapt' uniquement pour l'instan:
+ * - movieSize string 'adapt' uniquement pour l'instant :
  * 	- "adapt" fais prendre la largeur du bloc parent à la vidéo
  * - cookie_volume boolean true/false : met dans un cookie ms_volume le niveau de volume 
  *   et dans html_volume_muted la valeur 'muted' si on a désactivé le son
