@@ -13,7 +13,7 @@ Parametres :
 maj:2013-03-22 -->]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"][ (#ENV*{attributs})]>
 	[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-#SET{datas, #REM|coordonnees_lister_types_numeros}
+#SET{datas, #EVAL{null}|coordonnees_lister_types_numeros}
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
 		<option value="#CLE"[(#ENV{valeur,#ENV{defaut}}|=={#CLE}|oui) selected="selected"]>[(#VALEUR)]</option>
 </BOUCLE_selection>

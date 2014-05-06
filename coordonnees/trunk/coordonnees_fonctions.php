@@ -14,8 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Renvoie une seule ou l'ensemble des chaînes de langue des types d'une coordonnée
  * 
- * Fonction privée mutualisée utilisée par les fonctions filtre_coordonnees_lister_types_xxx().
- * Si on veut tous les types, ignorer le paramètre $type : la fonction renvoie un tableau contenant les couples types/chaînes de langue de la coordonnée.
+ * Fonction privée mutualisée utilisée par les fonctions ```filtre_coordonnees_lister_types_xxx()```.
+ * Si on veut tous les types, ignorer le paramètre ```$type``` : la fonction renvoie un tableau contenant les couples types/chaînes de langue de la coordonnée.
  * Si on veut un seul type en utilisant le paramètre éponyme, elle renvoie la chaîne de langue du type donné.
  *
  * adresses : RFC2426/CCITT.X520 :         dom home intl parcel postal pref work
@@ -26,27 +26,26 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *            RFC6350/CCITT.X520+RFC5322 : home (perso) intl work (pro)
  *
  * @note
- * Il faut faire la différence entre le cas où on appelle la fonction sans le paramètre `$type`
- * pour obtenir la liste de tous les types, 
- * et le cas où on utilise ce paramètre, mais qu'il est vide (`#TYPE|lister_types_adresses par exemple`).
- * Dans ce cas, la fonction ne doit rien renvoyer.
+ * Quand la paramètre ```$type``` n'est pas ```NULL```, mais qu'il est vide,
+ * ça veut dire qu'on a utilisé ```#TYPE|coordonnees_lister_types_xxx``` avec un ```#TYPE``` vide.
+ * Dans ce cas là il ne faut rien retourner.
  *
- * @filtre
  * @param string $coordonnee
  *     Coordonnée dont on veut retourner les types
  *     adresse | numero | email
  *     à éviter : adr | tel | mel
  * @param string $type
  *     Type dont on veut retourner la chaîne de langue
- *     A utiliser lorsqu'on ne veut retourner qu'une seule haîne de langue
+ *     A utiliser lorsqu'on ne veut retourner qu'une seule chaîne de langue
  * @return array|int
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
+ *     ou type tel quel si on ne trouve pas sa chaîne de langue
  */
 function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 
 	// cf. note
-	if (!strlen($coordonnee) or (isset($type) and empty($type))) return;
+	if (!strlen($coordonnee) or (!is_null($type) and !strlen($type))) return;
 
 	// On veut définir une liste avec pour chaque objet coordonnée, ses types et les chaînes de langue correspondantes
 	// Or les chaînes de langue suivent la norme : type_{coordonnee}_{type}
@@ -60,7 +59,7 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 	);
 
 	// Attention, les chaînes de langue ne sont pas "type_adresse_xxx", mais "type_adr_xxx" etc.
-	// Il faut donc établir une correspondance abbréviation/coordonnée pour les chaînes de langue
+	// Il faut donc établir une correspondance abbréviation/coordonnée
 	$abbr = array(
 		'adr'    => 'adresse',
 		'tel'    => 'numero',
@@ -84,15 +83,26 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 	// Envoyer aux plugins pour qu'ils complètent (ou altèrent) la liste
 	$liste = pipeline('types_coordonnees', $liste);
 
-	if ($type)
-		return $liste[$coordonnee][$type];
-	else 
+	// Par défaut, renvoyer un tableau de tous les types
+	if (is_null($type))
 		return $liste[$coordonnee];
+	// S'il y a un type, renvoyer sa chaîne de langue ou à défaut, tel quel
+	else if ($type)
+		if ($langue=$liste[$coordonnee][$type])
+			return $langue;
+		else
+			return $type;
+	else return;
+
 }
 
 
 /*
- * Filtre renvoyant les types d'adresses possibles, et leurs chaînes de langue
+ * Filtre renvoyant les couples types d'adresses/chaînes de langue ou la chaîne de langue d'une type en particulier
+ *
+ * @note
+ * Quand on veut lister les types d'adresses depuis un squelette, utiliser
+ * ```#EVAL{null}``` au lieu de ```#REM```
  *
  * @uses coordonnees_lister_types_coordonnees()
  *
@@ -103,12 +113,16 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_adresses($type='') {
+function filtre_coordonnees_lister_types_adresses($type=null) {
 	return coordonnees_lister_types_coordonnees('adresse',$type);
 }
 
 /*
- * Filtre renvoyant les types de numéros possibles, et leurs chaînes de langue
+ * Filtre renvoyant les couples types de numéros/chaînes de langue ou la chaîne de langue d'une type en particulier
+ *
+ * @note
+ * Quand on veut lister les types de numéros depuis un squelette, utiliser
+ * ```#EVAL{null}``` au lieu de ```#REM```
  *
  * @uses coordonnees_lister_types_coordonnees()
  *
@@ -119,12 +133,16 @@ function filtre_coordonnees_lister_types_adresses($type='') {
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_numeros($type='') {
+function filtre_coordonnees_lister_types_numeros($type=null) {
 	return coordonnees_lister_types_coordonnees('numero',$type);
 }
 
 /*
- * Filtre renvoyant les types d'emails possibles, et leurs chaînes de langue
+ * Filtre renvoyant les couples types d'emails/chaînes de langue ou la chaîne de langue d'une type en particulier
+ *
+ * @note
+ * Quand on veut lister les types d'emails depuis un squelette, utiliser
+ * ```#EVAL{null}``` au lieu de ```#REM```
  *
  * @uses coordonnees_lister_types_coordonnees()
  *
@@ -135,7 +153,7 @@ function filtre_coordonnees_lister_types_numeros($type='') {
  *     Couples types/chaînes de langues
  *     ou chaîne de langue d'un type donné
 **/
-function filtre_coordonnees_lister_types_emails($type='') {
+function filtre_coordonnees_lister_types_emails($type=null) {
 	return coordonnees_lister_types_coordonnees('email',$type);
 }
 
@@ -257,6 +275,7 @@ function filtre_logo_type_email($type_email) {
 /*
  * Filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un mel (email)
  *
+ * @deprecated Utiliser le filtre logo_type_email() à la place
  * @uses logo_type_()
  *
  * @filtre
