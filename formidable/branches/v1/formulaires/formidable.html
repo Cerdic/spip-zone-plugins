@@ -12,7 +12,7 @@
     [<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur}|propre)</div>]
 
     [(#ENV{editable}|oui)
-    <form method='post' action='[(#ENV{action}|ancre_url{[formulaire_#ENV{form}-(#ENV{id,nouveau})]' enctype='multipart/form-data'><div>
+    <form method='post' action='[(#ENV{action}|ancre_url{[formulaire_#ENV{form}-(#ENV{id,nouveau})]})]' enctype='multipart/form-data'><div>
         [(#REM) declarer les hidden qui declencheront le service du formulaire
         parametre : url d'action ]
         #ACTION_FORMULAIRE{#ENV{action}}
