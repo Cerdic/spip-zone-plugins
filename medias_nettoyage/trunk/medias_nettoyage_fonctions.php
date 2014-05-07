@@ -58,19 +58,25 @@ function medias_creer_repertoires_orphelins () {
 
 /**
  * Lister les répertoires présents dans IMG/ sans les sous-répertoires.
- *
+ * @param  string $repertoire_img 
+ *         Par défaut, on prend _DIR_IMG en référence.
+ *         On peut l'utiliser aussi pour le répertoire IMG/orphelins ou tout autre nom de répertoire.
  * @return array
  */
 function medias_lister_repertoires ($repertoire_img = _DIR_IMG) {
 	$repertoires = array();
-
-	$rep_img = array_diff(scandir($repertoire_img), array('..','.','.svn')); // On ne liste pas le répertoire .svn
-	foreach ($rep_img as $repertoire) {
-		if (is_dir($repertoire_img . $repertoire)) {
-			$repertoires[] = $repertoire_img . $repertoire;
+	// On vérifie que $repertoire_img passé en paramètre est bien un répertoire existant.
+	// cf. ../IMG/orphelins qui ne serait pas encore créé.
+	if (is_dir($repertoire_img)) {
+		$rep_img = array_diff(scandir($repertoire_img), array('..','.','.svn')); // On ne liste pas le répertoire .svn
+		foreach ($rep_img as $repertoire) {
+			if (is_dir($repertoire_img . $repertoire)) {
+				$repertoires[] = $repertoire_img . $repertoire;
+			}
 		}
 	}
-	return $repertoires;
+
+	return (array) $repertoires;
 }
 
 /**
@@ -96,7 +102,7 @@ function medias_lister_documents_bdd () {
 	// On trie dans l'ordre alphabétique :
 	sort($docs_fichiers);
 
-	return $docs_fichiers;
+	return (array) $docs_fichiers;
 }
 
 /**
@@ -140,7 +146,7 @@ function medias_lister_documents_bdd_complet_taille(){
 function medias_lister_documents_bdd_orphelins(){
 	$docs_bdd = array_unique(array_diff(medias_lister_documents_bdd(), medias_lister_documents_repertoire()));
 	sort($docs_bdd);
-	return $docs_bdd;
+	return (array) $docs_bdd;
 }
 
 /**
@@ -192,7 +198,7 @@ function medias_lister_documents_repertoire ($repertoire_img = _DIR_IMG) {
 	$docs_fichiers = array_unique(array_diff($docs_fichiers, medias_lister_logos_fichiers()));
 	sort($docs_fichiers);
 
-	return $docs_fichiers;
+	return (array) $docs_fichiers;
 }
 
 /**
@@ -219,7 +225,7 @@ function medias_lister_documents_repertoire_taille () {
 function medias_lister_documents_repertoire_orphelins (){
 	$docs_fichiers = array_unique(array_diff(medias_lister_documents_repertoire(), medias_lister_documents_bdd()));
 	sort($docs_fichiers);
-	return $docs_fichiers;
+	return (array) $docs_fichiers;
 }
 
 /**
@@ -249,7 +255,7 @@ function medias_lister_documents_repertoire_complet ($repertoire_img = _DIR_IMG)
 	// On va chercher dans IMG/distant/*/*.*
 	$fichiers = glob($repertoire_img . "*/*/*.*");
 	foreach ($fichiers as $fichier) {
-		$docs_fichiers[] = preg_replace("/\/\//", "/", $fichier); // On évite les doubles slashs '//' qui pourrait arriver comme un cheveu sur la soupe. 
+		$docs_fichiers[] = preg_replace("/\/\//", "/", $fichier); // On évite les doubles slashs '//' qui pourrait arriver comme un cheveu sur la soupe.
 	}
 
 	// On va chercher dans IMG/*/*.*
@@ -267,7 +273,7 @@ function medias_lister_documents_repertoire_complet ($repertoire_img = _DIR_IMG)
 	$docs_fichiers = array_unique($docs_fichiers);
 	sort($docs_fichiers);
 
-	return $docs_fichiers;
+	return (array) $docs_fichiers;
 }
 
 /**
@@ -396,7 +402,7 @@ function medias_calculer_taille_fichiers ($fichiers = array()) {
  * avant de lister les répertoires.
  *
  * @uses medias_lister_repertoires()
- * 
+ *
  * @return array
  */
 function medias_lister_repertoires_orphelins () {
@@ -421,7 +427,7 @@ function medias_lister_repertoires_orphelins_fichiers () {
 	if (is_dir($repertoire_orphelins)) {
 		$docs_fichiers = medias_lister_documents_repertoire_complet($repertoire_orphelins);
 	}
-	return $docs_fichiers;
+	return (array) $docs_fichiers;
 }
 
 /**
@@ -575,13 +581,13 @@ function medias_deplacer_documents_repertoire_orphelins () {
  * Réparer les documents.
  * Il arrive parfois que suite à un problème de droits, les documents ne soient plus rangés correctement dans IMG/ext/fichier.ext
  * mais dans un faux sous répertoire IMG/ext_fichier.ext
- * Le présent script va recopier les fichiers mal placés, et changer leur référence dans la table spip_documents ; 
+ * Le présent script va recopier les fichiers mal placés, et changer leur référence dans la table spip_documents ;
  * il donnera ensuite la liste des fichiers recopiés et des erreurs recontrées dans un fichier de log.
  *
  * Script repris de ce fichier : http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
  *
  * @uses medias_lister_logos_fichiers()
- * 
+ *
  * @return bool
  */
 function medias_reparer_documents_fichiers () {
@@ -606,14 +612,22 @@ function medias_reparer_documents_fichiers () {
 	$docs_fichiers = preg_replace($pattern_img, '', $docs_fichiers);
 
 	if (count($docs_fichiers) > 0) {
-		$docs_bdd = sql_allfetsel('id_document,fichier', 'spip_documents', "fichier IN ('" . join("','", $docs_fichiers) . "')");
+		$docs_bdd = sql_allfetsel('id_document,fichier,extension', 'spip_documents', "fichier IN ('" . join("','", $docs_fichiers) . "') AND mode IN ('document','image')");
 		foreach ($docs_bdd as $document) {
 			$destination = preg_replace(',^([a-z0-3]+)_([^/]+\.(\1))$,i', '$1/$2', $document['fichier']);
+			// On va vérifier si on est bien sous la forme ../IMG/ext/nom_fichier.ext
+			// Sinon, on le construit manuellement. 
+			// (ne pas oublier d'enlever '../IMG/' à notre variable de test 
+			// car cette variable sera enresgitrée en BDD)
+			$destination_test = preg_replace($pattern_img, '', $destination);
+			if (count(explode("/", $destination_test)) == 1) {
+				$destination = $document['extension'] . '/' . $destination_test ;
+			}
 			if ($document['fichier'] != $destination AND rename($repertoire_img . $document['fichier'],$repertoire_img . $destination)) {
 				sql_updateq('spip_documents', array('fichier' => $destination), 'id_document=' . $document['id_document']);
 				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le fichier ' . $repertoire_img . $document['fichier'] . ' a été déplacé vers ' . $repertoire_img . $destination .'.';
 			} else {
-				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le fichier ' . $repertoire_img . $document['fichier'] . ' n\'a pu être déplacé.';
+				$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : le fichier ' . $repertoire_img . $document['fichier'] . ' n\'a pu être déplacé vers ' . $repertoire_img . $destination . '.';
 			}
 		}
 	} else {
