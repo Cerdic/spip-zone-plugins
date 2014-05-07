@@ -16,12 +16,9 @@ function coordonnees_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['numeros'] = 'numeros';
 	$interfaces['table_des_tables']['emails'] = 'emails';
 
-	$interface['tables_jointures']['spip_adresses'][] = 'adresses_liens';
-	$interface['tables_jointures']['spip_auteurs'][] = 'adresses_liens';
-	$interface['tables_jointures']['spip_numeros'][] = 'numeros_liens';
-	$interface['tables_jointures']['spip_auteurs'][] = 'numeros_liens';
-	$interface['tables_jointures']['spip_emails'][] = 'emails_liens';
-	$interface['tables_jointures']['spip_auteurs'][] = 'emails_liens';
+	$interfaces['tables_jointures']['spip_auteurs'][] = 'adresses_liens';
+	$interfaces['tables_jointures']['spip_auteurs'][] = 'numeros_liens';
+	$interfaces['tables_jointures']['spip_auteurs'][] = 'emails_liens';
 
 	$interfaces['table_des_traitements']['VILLE'][] = _TRAITEMENT_TYPO;
 
@@ -41,8 +38,8 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_adresse"       => "bigint(21) NOT NULL",
 			"titre"            => "varchar(255) NOT NULL DEFAULT ''", // perso, pro, vacance...
-			"voie"             => "tinytext NOT NULL", // 2 rue de la rue
-			"complement"       => "tinytext NOT NULL", // 3e etage
+			"voie"             => "tinytext NOT NULL", // p. ex. 21 rue de cotte
+			"complement"       => "tinytext NOT NULL", // p. ex. 3e etage
 			"boite_postale"    => "varchar(40) NOT NULL DEFAULT ''",
 			"code_postal"      => "varchar(40) NOT NULL DEFAULT ''",
 			"ville"            => "tinytext NOT NULL",
