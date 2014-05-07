@@ -1,0 +1,15 @@
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		[(#SAISIE{checkbox,objets,
+			label=<:coordonnees:label_objets_actifs:>,
+			explication=<:coordonnees:explication_objets_actifs:>,
+			datas=[(#VAL{titre}|liste_objets_coordonnees)]})]
+	</ul>
+	<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+</div></form>
+</div>

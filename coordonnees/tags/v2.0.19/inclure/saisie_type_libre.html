@@ -1,0 +1,18 @@
+[(#REM)<!--
+Saisie d'un type de coordonnee avec le plugin "coordonnees"
+Appel direct : [(#INCLURE{fond=inclure/saisie_type_libre})]
+
+Parametres :
+- label_type : le code de langue sans le prefixe "label_type_"
+- type : valeur saisie (nom en dur du champ utilise par le plugin "coordonnees")
+- explication_type : explication/aide a la saisie
+- plus les attributs classiques d'un INPUT (class, maxlength, size, readonly, disabled, readonly, placeholder, requiered, list, autocomplete, etc.)
+
+maj:2013-03-22 -->]
+<li class="editer editer_type saisie_selection">
+	<label for="champ_type">[(#VAL{coordonnees:label_type_#ENV{label_type}}|_T)]</label>
+	[<span class="erreur">(#ENV**{erreurs}|table_valeur{type})</span>]
+	<input type="text" name="type" id="champ_type" maxlength="#ENV{maxlength,25}"[ value="(#ENV{type})"][ class="(#ENV{class})"][ size="(#ENV{size})"][ disabled="(#ENV{disabled})"][ readonly="(#ENV{readonly})"][ required="(#ENV{required})"][ placeholder="(#ENV{placeholder})"][ autocomplete="(#ENV{autocomplete})"][ list="(#ENV{list})"][ (#ENV*{attributs})] />
+	[<em class="explication">(#ENV{explication_type})</em>]
+</li>
+
