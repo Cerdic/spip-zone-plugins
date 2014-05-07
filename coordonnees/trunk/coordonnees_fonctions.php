@@ -12,10 +12,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Renvoie une seule ou l'ensemble des chaînes de langue des types d'une coordonnée
+ * Lister l'ensemble des types de liaisons d'une coordonnée, ou la chaîne de langue d'un type de liaison donné.
  * 
- * Fonction privée mutualisée utilisée par les fonctions ```filtre_coordonnees_lister_types_xxx()```.
- * Si on veut tous les types, ignorer le paramètre ```$type``` : la fonction renvoie un tableau contenant les couples types/chaînes de langue de la coordonnée.
+ * Fonction privée mutualisée utilisée par les fonctions `filtre_coordonnees_lister_types_xxx()`.
+ * Si on veut tous les types, ignorer le paramètre `$type` : la fonction renvoie un tableau contenant les couples types/chaînes de langue de la coordonnée.
  * Si on veut un seul type en utilisant le paramètre éponyme, elle renvoie la chaîne de langue du type donné.
  *
  * adresses : RFC2426/CCITT.X520 :         dom home intl parcel postal pref work
@@ -26,8 +26,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *            RFC6350/CCITT.X520+RFC5322 : home (perso) intl work (pro)
  *
  * @note
- * Quand la paramètre ```$type``` n'est pas ```NULL```, mais qu'il est vide,
- * ça veut dire qu'on a utilisé ```#TYPE|coordonnees_lister_types_xxx``` avec un ```#TYPE``` vide.
+ * Quand la paramètre `$type` n'est pas `NULL`, mais qu'il est vide,
+ * ça veut dire qu'on a utilisé `#TYPE|coordonnees_lister_types_xxx` avec un `#TYPE` vide.
  * Dans ce cas là il ne faut rien retourner.
  *
  * @param string $coordonnee
@@ -35,7 +35,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     adresse | numero | email
  *     à éviter : adr | tel | mel
  * @param string $type
- *     Type dont on veut retourner la chaîne de langue
+ *     Type de liaison dont on veut retourner la chaîne de langue
  *     A utiliser lorsqu'on ne veut retourner qu'une seule chaîne de langue
  * @return array|int
  *     Couples types/chaînes de langues
@@ -157,28 +157,36 @@ function filtre_coordonnees_lister_types_emails($type=null) {
 	return coordonnees_lister_types_coordonnees('email',$type);
 }
 
-/*
- * Renvoie l'icône ou la chaîne de langue d'un type de coordonnée
+/**
+ * Affichage du type de liaison d'une coordonnée
  *
  * Fonction privee mutualisée utilisée par les filtres logo_type_xx
- * Renvoie soit une balise <img> si l'image est trouvée, soit une balise <abbr>
- * 
- * Nomenclature des fichiers :
  *
- * - avec le paramètre $coordonnee : `type_{$coordonnee}_{$type}.ext`
+ * @note
+ * Nomenclature des fichiers d'images :
+ *
+ * - avec le paramètre `$coordonnee` : `type_${coordonnee}_${type}.ext`
  *   ex: `type_adresse_home.png`
- * - sans le paramètre $coordonnee : `type_{$type}.ext`
+ * - sans le paramètre `$coordonnee` : `type_${type}.ext`
  *   ex: `type_home.png`
- * 
+ *
+ * @note
+ * http://www.alsacreations.com/tuto/lire/1222-microformats-design-patterns.html
+ * http://www.alsacreations.com/tuto/lire/1223-microformats-composes.html
+ *
  * @param string $coordonnee
- *     Coordonnée dont on veut retourner le logo
+ *     Suffixe du du filtre logo_type_${coordonnee} appelant ;
+ *     Infixe du logo "type_${coordonnee}_${type}.???" correspondant ;
  *     adresse | numero | email
  *     à éviter : adr | tel | mel
  * @param string $type
- *     Le type de coordonnée (dom, home, work etc.)
+ *     Valeur associée transmise par le filtre logo_type_${coordonnee} ;
+ *     Suffixe du logo "type_${coordonnee}_${type}.???" correspondant ;
+ *     Correspond au "type" de liaison de la la coordonnée (home, work, etc.)
  * @return string
- *     Balise `<img>` ou `<abbr>`
-**/
+ *     Balise `<IMG>` ou `<ABBR>` (sinon),
+ *     avec classes semantiques micro-format et traduction des valeurs clés RFC2426
+ */
 function logo_type_($coordonnee='', $type='') {
 
 	include_spip('inc/utils');
@@ -226,64 +234,80 @@ function logo_type_($coordonnee='', $type='') {
 		return '';
 }
 
-/*
- * Filtre renvoyant une balise `<img>` ou `<abbr>` d'apres le type d'une adresse
+/**
+ * Filtre d'affichage du type d'une adresse
  *
  * @uses logo_type_()
+ * @filtre
  *
- * @param string $type_adresse    RFC2426/CCITT.X520 : dom home intl parcel postal pref work
- * @return string                 Balise `<img>` ou `<abbr>`
-**/
+ * @param string $type_adresse
+ *     Valeur du type de liaison (cf. logo_type_).
+ *     Les valeurs nativement prises en compte sont les codes normalisés
+ *     CCITT.X520/RFC2426 (section 3.2.1) : dom home intl parcel postal pref work
+ * @return string
+ *     Balise HTML micro-format (cf. logo_type_)
+ */
 function filtre_logo_type_adresse($type_adresse) {
 	return logo_type_('adresse', $type_adresse);
 }
+/**
+ * @deprecated
+ * @uses filtre_logo_type_adresse()
+ */
 function filtre_logo_type_adr($type_adresse) {
-	return logo_type_('adresse', $type_adresse);
+	return filtre_logo_type_adresse($type_adresse);
 }
 
-/*
- * Filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un numero de tel
+/**
+ * Filtre d'affichage du type d'un numero
  *
  * @uses logo_type_()
- *
  * @filtre
- * @param string $type_tel    RFC2426/CCITT.X500 : bbs car cell fax home isdn modem msg pager pcs pref video voice work
- *                            RFC6350/CCITT.X520.1988 : cell fax pager text textphone video voice x-... (iana-token)
- *                            + : dsl
- * @return string             Balise `<img>` ou `<abbr>`
-**/
+ *
+ * @param string $type_numero
+ *     Valeur du type de liaison (cf. logo_type_).
+ *     Les valeurs nativement prises en compte sont les codes normalisés
+ *     CCITT.X500/RFC2426 (section 3.3.1) :      bbs car cell fax home isdn modem msg pager pcs pref video voice work
+ *     CCITT.X520.1988/RFC6350 (section 6.4.1) : cell fax pager text textphone video voice x-... (iana-token)
+ *     ainsi que :                               dsl
+ *     (<http://fr.wikipedia.org/wiki/Digital_Subscriber_Line#Familles>)
+ * @return string
+ *     Balise HTML micro-format (cf. logo_type_)
+ */
 function filtre_logo_type_numero($type_numero) {
 	return logo_type_('numero', $type_numero);
 }
+/**
+ * @deprecated
+ * @uses filtre_logo_type_numero()
+ */
 function filtre_logo_type_tel($type_numero) {
-	return logo_type_('numero', $type_numero);
+	return filtre_logo_type_numero($type_numero);
 }
 
-/*
- * Filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un email
+/**
+ * Filtre d'affichage du type d'un courriel
  *
  * @uses logo_type_()
- *
  * @filtre
- * @param string $type_adresse    RFC2426/IANA : internet pref x400
- * @return string                 Balise `<img>` ou `<abbr>`
+ *
+ * @param string $type_email
+ *     Valeur du type de liaison (cf. logo_type_).
+ *     Les valeurs nativement prises en compte sont les codes normalisés
+ *     IANA/RFC2426 (section 3.3.2) :               internet pref x400
+ *     CCITT.X520+RFC5322/RFC6350 (section 6.4.2) : home (perso) intl work (pro)
+ * @return string
+ *     Balise HTML micro-format (cf. logo_type_)
 **/
 function filtre_logo_type_email($type_email) {
 	return logo_type_('email', $type_email);
 }
-
-/*
- * Filtre renvoyant une balise <img> ou <abbr> d'apres le type d'un mel (email)
- *
- * @deprecated Utiliser le filtre logo_type_email() à la place
- * @uses logo_type_()
- *
- * @filtre
- * @param string $type_adresse    RFC6350/CCITT.X520+RFC5322 : home (perso) intl work (pro)
- * @return string                 Balise `<img>` ou `<abbr>`
-**/
+/**
+ * @deprecated
+ * @uses filtre_logo_type_email()
+ */
 function filtre_logo_type_mel($type_email) {
-	return logo_type_('email', $type_email);
+	return filtre_logo_type_email($type_email);
 }
 
 ?>

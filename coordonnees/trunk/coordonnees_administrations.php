@@ -20,7 +20,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $version_cible
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
-**/
+ */
 function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 	$maj['create'] = array(
@@ -66,7 +66,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 			);
 	// mettre les auteurs par defaut comme objet «coordonnable»
 	$maj['1.5'] = array(
-		array('ecrire_meta','coordonnees', serialize(array('objets'=>array('auteur')))),
+		array('ecrire_meta','coordonnees', serialize(array('objets'=>array('spip_auteurs')))),
 	);
 
 	// ajout du champs region a la table adresses
@@ -111,7 +111,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
-**/
+ */
 function coordonnees_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_adresses");
@@ -129,7 +129,7 @@ function coordonnees_vider_tables($nom_meta_base_version) {
 /**
  * Fonction mise a jour du plugin Coordonnees vers 1.3
  * @return void
-**/
+ */
 function coordonnees_upgrade_1_3() {
 	// On parcourt les adresses pour remplir le code du pays
 	$adresses = sql_allfetsel('id_adresse,pays', 'spip_adresses');
@@ -149,7 +149,7 @@ function coordonnees_upgrade_1_3() {
  * Fonction mise a jour du plugin Coordonnees vers 1.8.2
  * Metas : conversion des objets «coordonnables» : on utilise les noms des tables (auteur -> spip_auteurs)
  * @return void
-**/
+ */
 function coordonnees_upgrade_1_8_2() {
 	include_spip('inc/config');
 	if ( $objets = lire_config('coordonnees/objets', null, true) AND is_array($objets) AND count($objets) > 0 ) {
