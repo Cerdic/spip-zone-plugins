@@ -16,6 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'label_plage' => 'Plage de recherche de vos images aléatoires',
   'label_blacklist' => 'Liste noire des auteurs',
   
+   //  T
+  'titre_page_configurer_flickr_rand' => 'Configurer Flickr hasard',
+
+  
 );
 
 ?>
