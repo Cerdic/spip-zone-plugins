@@ -9,9 +9,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse_perso' => 'Domicile',
 	'adresse_pro' => 'Professionnel',
 	'adresses' => 'Adresses',
+	'adresse' => 'Adresse',
 	'ajouter_adresse' => 'Ajouter une adresse',
 	'ajouter_email' => 'Ajouter un email',
 	'ajouter_telephone' => 'Ajouter un numéro',
+	'ajouter_adresse_court' => 'Ajouter adresse',
+	'ajouter_email_court' => 'Ajouter email',
+	'ajouter_telephone_court' => 'Ajouter numéro',
+
+	// B
+	'bouton_dissocier_adresse' => 'Retirer cette adresse',
+	'bouton_dissocier_email' => 'Retirer cet email',
+	'bouton_dissocier_numero' => 'Retirer ce numéro',
+	'bouton_dissocier' => 'Retirer',
 
 	// C
 	'configuration_coordonnees' => 'Configuration des coordonnées',
@@ -34,6 +44,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_gauche_numero_email' => 'N° Email',
 	'info_gauche_numero_numero' => 'N° Numéro',
 	'info_numero_utilise_par' => 'Numéro utilisé par :',
+	'info_aucune_adresse' => 'Aucune adresse',
+	'info_1_adresse' => '1 adresse',
+	'info_nb_adresses' => '@nb@ adresses',
+	'info_aucun_numero' => 'Aucun numero',
+	'info_1_numero' => '1 numero',
+	'info_nb_numeros' => '@nb@ numeros',
+	'info_aucun_email' => 'Aucun courriel',
+	'info_1_email' => '1 courriel',
+	'info_nb_emails' => '@nb@ courriels',
 	'item_nouveau_numero' => 'Nouveau numéro',
 	'item_nouvel_email' => 'Nouveau courriel',
 	'item_nouvelle_adresse' => 'Nouvelle adresse',
@@ -54,6 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_numero' => 'Type de numéro',
 	'label_ville' => 'Ville',
 	'label_voie' => 'N<sup>o</sup> & voie',
+	'logo_adresse' => 'Logo de l\'adresse',
+	'logo_numero' => 'Logo du numero',
+	'logo_email' => 'Logo du courriel',
 
 	// M
 	'modifier_adresse' => 'Modifier cette adresse',
@@ -65,6 +87,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvel_email' => 'Nouveau courriel',
 	'nouvelle_adresse' => 'Nouvelle adresse',
 	'numeros' => 'Numéros',
+	'numero' => 'Numéro',
+
+	// P
+	'placeholder_titre_adresse' => 'Un nom pour identifier l\'adresse',
+	'placeholder_titre_numero' => 'Un nom pour identifier le numéro de téléphone',
+	'placeholder_titre_email' => 'Un nom pour identifier l\'email',
+	'placeholder_complement_adresse' => 'étage, n° du bâtiment...',
+	'placeholder_email' => 'email@site.com',
 
 	// S
 	'supprimer_adresse' => 'Supprimer cette adresse',
@@ -83,6 +113,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_email_internet' => 'Internet',
 	'type_email_pref' => 'Préféré',
 	'type_email_x400' => 'X.400',
+	'type_email_home' => 'Personnel',
+	'type_email_intl' => 'International',
+	'type_email_work' => 'Professionnel',
 	'type_mel_home' => 'Personnel',
 	'type_mel_intl' => 'International',
 	'type_mel_work' => 'Professionnel',

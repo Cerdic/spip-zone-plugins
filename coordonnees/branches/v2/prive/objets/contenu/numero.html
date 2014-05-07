@@ -1,0 +1,12 @@
+<BOUCLE_numero(NUMEROS){id_numero}{statut?}>
+
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label'><:info_titre:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>[(#TITRE)]</div>
+</div>
+
+<div class="champ contenu_numero[ (#NUMERO*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{numero} numero'><h3>[(#NUMERO)]</h3></span>
+</div>
+
+</BOUCLE_numero>

@@ -1,15 +1,24 @@
-<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-<form method='post' action='#ENV{action}'><div>
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
-		[(#SAISIE{checkbox,objets,
+	<h3 class="titrem"><:coordonnees:configuration_coordonnees:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+		[(#REM) choix des objets ]
+		[(#SAISIE{choisir_objets, objets,
 			label=<:coordonnees:label_objets_actifs:>,
 			explication=<:coordonnees:explication_objets_actifs:>,
-			datas=[(#VAL{titre}|liste_objets_coordonnees)]})]
-	</ul>
-	<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-</div></form>
+			exclus=#LISTE{spip_adresses,spip_numeros,spip_emails}
+		})]
+		</ul>
+
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
 </div>

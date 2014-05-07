@@ -1,0 +1,12 @@
+<BOUCLE_email(EMAILS){id_email}{statut?}>
+
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class='label'><:info_titre:></div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
+</div>
+
+<div class="champ contenu_email[ (#EMAIL*|strlen|?{'',vide})]">
+	<span dir='#LANG_DIR' class='#EDIT{email} email'><h3>[(#EMAIL)]</h3></span>
+</div>
+
+</BOUCLE_email>

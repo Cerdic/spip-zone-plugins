@@ -1,0 +1,53 @@
+#SET{id_email_exclu, #ENV{coordonnee}|=={email}|?{#ENV{id_coordonnee}}}
+<B_liste_emails>
+#ANCRE_PAGINATION
+<div class="liste-objets emails coordonnees lies">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_liste_emails(emails_liens){id_email != #GET{id_email_exclu}}{objet}{id_objet}{pagination #ENV{nb,10}}>
+	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		[(#COMPTEUR_BOUCLE|=={1}|oui)<td class='picto' rowspan='#TOTAL_BOUCLE'></td>]
+		<BOUCLE_email(EMAILS){id_email}>
+		<td class='titre principale'>
+			<div>
+				[<a href="[(#URL_ECRIRE{email_edit,id_email=#ID_EMAIL})]">
+					<span><small><:info_numero_abbreviation:>(#ID_EMAIL)</small></span>
+				</a>]
+				[ - <a href="[(#INFO_URL{email,#ID_EMAIL})]">
+					<span class="#EDIT{titre} titre">(#TITRE)</span>
+				</a>]
+			</div>
+			<div>[(#TYPE|logo_type_email) ][(#TYPE|coordonnees_lister_types_emails)]</div>
+		</td>
+		<td>
+			<div>[(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
+			[<span class="#EDIT{email} email">(#EMAIL)</span>]
+			[(#TYPE|match{x400}|non)</a>]</div>
+		</td>
+		[(#REM) Un coup pour les champs extras ]
+		[<td>(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,email,id_objet,#ID_EMAIL,contexte,[(#ENV**|unserialize)]})],data,''})]})
+		</td>]
+		[(#AUTORISER{modifier,email,#ID_EMAIL}|et{#ENV{boutons_actions}}|oui)
+		<td class='action'>
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'email', id_coordonnee:'[(#ID_EMAIL)]'}});" href="#coordonnees" title="<:coordonnees:modifier_email:>">
+			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
+			</a>
+			[(#AUTORISER{associeremail,#ID_EMAIL}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'email:icone_supprimer_email'})],
+					#URL_ACTION_AUTEUR{dissocier_email,#ID_EMAIL/#OBJET/#ID_OBJET,#SELF},
+					'button link ajax','',
+					<:coordonnees:bouton_dissocier_email:>}
+				)]
+			]
+		</td>]
+		</BOUCLE_email>
+	</tr>
+	</BOUCLE_liste_emails>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_emails>[
+<div class="liste-objets coordonnees emails caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_emails>

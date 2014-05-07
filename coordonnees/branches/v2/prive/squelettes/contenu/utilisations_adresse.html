@@ -1,0 +1,30 @@
+<BOUCLE_adresse(ADRESSES){id_adresse}{tout}>
+<B_objets>
+[(#BOITE_OUVRIR{<:coordonnees:info_adresse_utilisee_par:>,'simple coordonnees utilisation'})]
+	<BOUCLE_objets(adresses_liens){id_adresse}{fusion objet}{par objet}>
+	<B_liens>
+	<div class="liste">
+		<h4>[(#OBJET|objet_icone{16}) ][(#GRAND_TOTAL|objet_afficher_nb{#OBJET})]</h4>
+		<ul>
+			<BOUCLE_liens(adresses_liens){id_adresse}{objet}{par id_objet}{fusion id_objet}>
+			<li>
+				[(#AUTORISER{associeradresse,#ID_ADRESSE}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img)],
+					#URL_ACTION_AUTEUR{dissocier_adresse,#ID_ADRESSE/#OBJET/#ID_OBJET,#SELF},
+					'button link ajax','',
+					<:coordonnees:bouton_dissocier:>}
+				)]
+				]
+				<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]" title="#OBJET <:info_numero_abbreviation:>#ID_OBJET">
+					[(#INFO_TITRE{#OBJET,#ID_OBJET})][ <small>\(<:info_numero_abbreviation:>(#ID_OBJET)\)</small>]
+				</a>
+			</li>
+			</BOUCLE_liens>
+		</ul>
+	</div>
+	</B_liens>
+</BOUCLE_objets>
+#BOITE_FERMER
+</B_objets>
+</BOUCLE_adresse>

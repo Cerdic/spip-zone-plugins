@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+	numero,1,
+	num titre,1, 
+	id_numero,-1,
+	points,-1
+}})]<B_liste_numeros>
+#ANCRE_PAGINATION
+<div class="liste-objets numeros">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{numero}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:coordonnees:label_titre:>,ajax})]</th>
+			<th class='numero' scope='col'>[(#TRI{numero,<:coordonnees:numero:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_numero,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_numeros(NUMEROS){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,id_numero},#GET{defaut_tri}}{par numero}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{numero-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_NUMERO|image_reduire{20,26})]<a href="[(#ID_NUMERO|generer_url_entite{numero})]" title="<:info_numero_abbreviation|attribut_html:> #ID_NUMERO">[(#RANG). ][(#TITRE|sinon{#VAL{info_sans_titre}|_T})]</a></td>
+			<td class='numero'>#NUMERO</td>
+			<td class='id'>[(#AUTORISER{modifier,numero,#ID_NUMERO}|?{
+				<a href="[(#URL_ECRIRE{numero_edit,id_numero=#ID_NUMERO})]">#ID_NUMERO</a>,
+				#ID_NUMERO
+			})]</td>
+		</tr>
+	</BOUCLE_liste_numeros>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_numeros>[
+<div class="liste-objets numeros caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_numeros>
