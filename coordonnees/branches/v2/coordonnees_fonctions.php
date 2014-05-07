@@ -102,7 +102,7 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
  *
  * @note
  * Quand on veut lister les types d'adresses depuis un squelette, utiliser
- * ```#EVAL{null}``` au lieu de ```#REM```
+ * `#EVAL{null}` au lieu de `#REM`
  *
  * @uses coordonnees_lister_types_coordonnees()
  *
@@ -122,7 +122,7 @@ function filtre_coordonnees_lister_types_adresses($type=null) {
  *
  * @note
  * Quand on veut lister les types de numéros depuis un squelette, utiliser
- * ```#EVAL{null}``` au lieu de ```#REM```
+ * `#EVAL{null}` au lieu de `#REM`
  *
  * @uses coordonnees_lister_types_coordonnees()
  *
@@ -142,7 +142,7 @@ function filtre_coordonnees_lister_types_numeros($type=null) {
  *
  * @note
  * Quand on veut lister les types d'emails depuis un squelette, utiliser
- * ```#EVAL{null}``` au lieu de ```#REM```
+ * `#EVAL{null}` au lieu de `#REM`
  *
  * @uses coordonnees_lister_types_coordonnees()
  *
