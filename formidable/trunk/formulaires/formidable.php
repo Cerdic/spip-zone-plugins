@@ -15,6 +15,12 @@ include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 
 function formidable_id_formulaire($id){
+	// on utilise une static pour etre sur que si l'appel dans verifier() passe, celui dans traiter() passera aussi
+	// meme si entre temps on perds la base
+	static $id_formulaires = array();
+	if (isset($id_formulaires[$id]))
+		return $id_formulaires[$id];
+
 	if (intval($id)>0)
 		$where = 'id_formulaire = ' . intval($id);
 	elseif (is_string($id))
@@ -27,9 +33,9 @@ function formidable_id_formulaire($id){
 	if ($id_formulaire
 		AND !test_espace_prive()
 	  AND !objet_test_si_publie("formulaire",$id_formulaire))
-		return 0;
+		return $id_formulaires[$id] = 0;
 
-	return $id_formulaire;
+	return $id_formulaires[$id] = $id_formulaire;
 }
 
 /**
@@ -179,22 +185,28 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 	$erreurs = array();
 
 	// On peut donner soit un id soit un identifiant
-	if (!$id_formulaire = formidable_id_formulaire($id))
-		return;
+	if (!$id_formulaire = formidable_id_formulaire($id)){
 
-	// Sale bête !
-	if (_request('mechantrobot')!=''){
-		$erreurs['hahahaha'] = 'hahahaha';
-		return $erreurs;
+		$erreurs['message_erreur'] = _T('formidable:erreur_base');
+
 	}
+	else {
 
-	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire));
-	$saisies = unserialize($formulaire['saisies']);
+		// Sale bête !
+		if (_request('mechantrobot')!=''){
+			$erreurs['hahahaha'] = 'hahahaha';
+			return $erreurs;
+		}
 
-	$erreurs = saisies_verifier($saisies);
+		$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire));
+		$saisies = unserialize($formulaire['saisies']);
 
-	if ($erreurs and !isset($erreurs['message_erreur']))
-		$erreurs['message_erreur'] = _T('formidable:erreur_generique');
+		$erreurs = saisies_verifier($saisies);
+
+		if ($erreurs and !isset($erreurs['message_erreur']))
+			$erreurs['message_erreur'] = _T('formidable:erreur_generique');
+
+	}
 
 	return $erreurs;
 }
@@ -226,9 +238,14 @@ function formulaires_formidable_verifier($id, $valeurs = array(), $id_formulaire
 function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires_reponse = false){
 	$retours = array();
 
+	// POST Mortem de securite : on log le $_POST pour ne pas le perdre si quelque chose se passe mal
+	include_spip("inc/json");
+	$post = json_encode($_POST);
+	spip_log($post,"formidable_post"._LOG_INFO_IMPORTANTE);
+
 	// On peut donner soit un id soit un identifiant
 	if (!$id_formulaire = formidable_id_formulaire($id))
-		return;
+		return array('message_erreur'=>_T('formidable:erreur_base'));
 
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . $id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
@@ -299,7 +316,7 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		}
 	}
 	else {
-		$retours['message_ok'] = _T('formidable:retour_aucun_traitement');
+		$retours['message_erreur'] = _T('formidable:retour_aucun_traitement');
 	}
 
 	// si aucun traitement, alerter le webmestre pour ne pas perdre les donnees
