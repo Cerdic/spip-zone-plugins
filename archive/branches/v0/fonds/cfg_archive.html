@@ -1,0 +1,67 @@
+#CACHE{0}
+[(#REM) descriptif=
+<h2>Le Plugin Archive</h2>
+<p>Rappel sur comment l'utiliser :<br />
+<a href="http://www.spip-contrib.net/Plugin-archive" class="spip_out">Documentation compl&eacute;te</a>
+</p>]
+[(#REM) titre=configuration Plugin Archive]
+
+<p><:archive:version:> <?php echo $GLOBALS['meta']['archive_version'] ?> </p>
+
+<h3><:archive:arch_auto:></h3>
+<p><:archive:info_defaut_desc:></p>
+<form name="archivage_auto" method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset>
+<legend>
+	<:archive:legend_arch_auto:>
+</legend>
+<p><:archive:arch_auto:>
+<label for="oui"><:archive:oui:></label>
+<input type="radio" name="act_archive" id="oui" value="oui" [(#CONFIG{archive/act_archive}|=={oui}|?{checked="checked",''})]/>
+<label for="non"><:archive:non:></label>
+<input type="radio" name="act_archive" value="non" id="non"  [(#CONFIG{archive/act_archive}|=={non}|?{checked="checked",''})]/>
+</p>
+<p><:archive:jours_archive:>
+<input type="text" name="jours" size="3" id="jours" value="#ENV{jours}"/>
+<label for="jours"><:archive:jours:></label>
+</p>
+<p><:archive:rubriques_archiver:></p>
+    <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+<label for="#ID_RUBRIQUE">#TITRE (#ID_RUBRIQUE) </label>
+<input type="checkbox" name="idrub[]" value="#ID_RUBRIQUE" id="#ID_RUBRIQUE"  [(#ID_RUBRIQUE|in_array{[(#CONFIG{archive/idrub,#ARRAY})]}|?{'checked="checked"'})]/><br />
+
+      <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+<label for="#ID_RUBRIQUE">#TITRE (#ID_RUBRIQUE)</label>
+<input type="checkbox" name="idrub[]" value="#ID_RUBRIQUE" id="#ID_RUBRIQUE"   [(#ID_RUBRIQUE|in_array{[(#CONFIG{archive/idrub,#ARRAY})]}|?{'checked="checked"'})]/><br />
+
+   <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+      </BOUCLE_rubriques>
+    </BOUCLE_secteurs>
+<br />
+
+<input type="submit" name="_cfg_ok" value="<:archive:OK:>" />
+<input type="reset" value="<:archive:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:archive:Supprimer:>" />
+</fieldset>
+</form>
+<h3><:archive:articles_archives:></h3>
+[(#REM) determine les articles archivés]
+<BOUCLE_test(ARTICLES) {archive seulement}  {statut IN prop,prepa,publie,refuse,poubelle}>
+	<B_rubrique>
+		<ul>
+	<BOUCLE_rubrique(RUBRIQUES) {unique} {id_rubrique}>
+		<li>#TITRE</li>
+		<B_archive>
+			<ul>
+		<BOUCLE_archive(ARTICLES) {id_rubrique} {archive seulement} {statut IN prop,prepa,publie,refuse,poubelle}>
+			<li>
+				<a href="?exec=articles&id_article=#ID_ARTICLE	"><strong>#TITRE</strong></a> -#STATUT- (archivé le [(#ARCHIVE_DATE|jour)]/[(#ARCHIVE_DATE|mois)]/[(#ARCHIVE_DATE|annee)])
+			</li>
+		</BOUCLE_archive>
+			</ul>
+		</B_archive>
+	</BOUCLE_rubrique>
+		</ul>
+	</B_rubrique>
+</BOUCLE_test>

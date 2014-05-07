@@ -1,0 +1,45 @@
+<plugin>
+	<nom>Archive</nom>
+	<version>0.81.0</version>
+	<version_base>0.1</version_base>
+	<prefix>archive</prefix>
+
+	<etat>dev</etat>
+	<auteur>[Camille Lafitte->http://km.azerttyu.net]</auteur>
+	<licence>GNU/GPL</licence>
+	<icon>images/archive-64.png</icon>
+
+	<slogan>Ajouter le statut &#171; archive &#187; aux articles</slogan>
+	<description>
+Ce plugin ajoute le statut <b>archive</b> aux articles.
+_ Pensez &#224; utiliser le crit&#232;re <b>{archive}</b> ou bien <b>archive seulement</b>
+	</description>
+	
+	<lien>http://www.spip-contrib.net/Plugin-Archive</lien>
+
+	<fonctions>public/archive_criteres.php</fonctions>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>execution</action>
+		<inclure>archive_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>taches_generales_cron</nom>
+        <inclure>archive_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>pre_boucle</nom>
+        <inclure>archive_pipelines.php</inclure>
+	</pipeline>
+
+	<install>base/archive_install.php</install>
+    <pipeline>
+        <nom>declarer_tables_principales</nom>
+        <inclure>base/archive.php</inclure>
+    </pipeline>
+
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="cfg" version="[1.5.0;]" />
+	<categorie>date</categorie>
+</plugin>
