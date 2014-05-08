@@ -31,7 +31,7 @@ function fetch_data_flickr($params,$debug=false) {
 //  Main
 // 
 
-function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1,$id,$iteration=0) {
+function flickr_rand($str,$tags='',$license=5,$align='',$size='Small',$safesearch=1,$id=0,$text='',$texte='',$iteration=0) {
     $api_key =  _KEY_API_FLICKR_RAND;
     
     // etape -1: recuper config sur present
@@ -48,6 +48,11 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
     
     // etape 0: traiter des parametres et ajouter les valeurs par defaut (le php ne les prends pas via fonction a cause du modele)
     $tags = strip_tags($tags);
+    $text = strip_tags($text);
+    $texte = strip_tags($texte);
+    if ($texte!="")
+                $text = $texte;  
+    
     $license = strip_tags($license);
     if ($license == 0 )             
                   $license = 9;               // valeur par defaut
@@ -79,6 +84,7 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
         	'api_key'	=> $api_key,
         	'method'	=> 'flickr.photos.search',
         	'tags'	=> $tags,
+          'text' => $text,
         	'license' => $license,   
         	'safe_search' => $safesearch,  
         	'format'	=> 'php_serial',
@@ -129,7 +135,7 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
             // on refait une recherche
             if (in_array($_photo_rand_owner, $blacklist) && strlen($_photo_rand_owner)>0) {
                 if ($iteration<10) {
-                     return flickr_rand($str,$tags,$license,$align,$size,$safesearch,$id,++$iteration);
+                     return flickr_rand($str,$tags,$license,$align,$size,$safesearch,$id,$text,$texte,++$iteration);
                 } else {
                     return "<!-- flickr_rand: no match -->";
                 }

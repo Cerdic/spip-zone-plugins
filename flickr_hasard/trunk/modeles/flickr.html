@@ -1,12 +1,17 @@
-#CACHE{24*3600}
 [(#REM)
     MODE FIXE
+    
+    doc de l'API flick
+    https://www.flickr.com/services/api/flickr.photos.search.html
+        
     - id        
           id photo flickr  ex. 3674639573
     
     MODE ALEATOIRE      
     - tag
-          mot-clé      
+          mot-clé 
+    - text ou texte          
+          texte de recherche , pour exclure un terme utiliser -
           
     - license
           4 http://creativecommons.org/licenses/by/2.0/ 
@@ -41,4 +46,4 @@
 
 
 
-][(#REM|flickr_rand{#ENV{tag},#ENV{license},#ENV{align},#ENV{size},#ENV{safesearch},#ENV{id}})]
+][(#REM|flickr_rand{#ENV{tag},#ENV{license},#ENV{align},#ENV{size},#ENV{safesearch},#ENV{id},#ENV{text},#ENV{texte}})]
