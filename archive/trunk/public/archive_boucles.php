@@ -1,5 +1,8 @@
 <?php
 
+// Sécurité
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 //
 // <BOUCLE(ARTICLES)>
 // modifie le comportement de la boucle article en fonction de {archive}
@@ -14,7 +17,6 @@ function boucle_ARTICLES($id_boucle, &$boucles) {
  			//ajoute le critere de selection
 			$boucle->where[]= array("'IS'", "'$marchive'", "'NULL'");
 		}
-	} else {
 	}
 
 	return boucle_ARTICLES_dist($id_boucle, $boucles);

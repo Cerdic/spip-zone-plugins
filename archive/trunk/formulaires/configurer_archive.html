@@ -1,0 +1,41 @@
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM">
+	<h3 class="titrem"><:archive:legend_arch_auto:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer editer_act_archive">
+				<label><:archive:arch_auto:></label>
+				<div class="choix">
+					<input type="radio" name="act_archive" id="oui" value="oui"[(#ENV{act_archive}|=={oui}|oui)checked="checked"] />
+					<label for="oui"><:archive:oui:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="act_archive" value="non" id="non"[(#ENV{act_archive}|=={non}|oui)checked="checked"] />
+					<label for="non"><:archive:non:></label>
+				</div>
+			</li>
+			<li class="editer editer_jours">
+				<label for="jours"><:archive:jours:></label>
+				<input type="text" name="jours" size="4" id="jours" class="texte" value="#ENV{jours}"/>
+			</li>
+			<li class="editer editer_idrub">
+				<label for="id_rub"><:archive:rubriques_archiver:></label>
+				<select name="idrub[]" id="idrub" multiple="multiple">
+				<BOUCLE_rubriques(RUBRIQUES){racine}{par num titre,titre}>
+				<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{idrub,#ARRAY}}|oui)selected="selected"]>#TITRE (#ID_RUBRIQUE)</option>
+					<BOUCLE_ss_rubriques(RUBRIQUES) {id_parent} {par titre}>
+					<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{idrub,#ARRAY}}|oui)selected="selected"]>#TITRE (#ID_RUBRIQUE)</option>
+						<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+					</BOUCLE_ss_rubriques>
+				</BOUCLE_rubriques>
+				</select>
+			</li>
+		</ul>
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_enregistrer|attribut_html:>' />
+		</p>
+	</div></form>
+</div>

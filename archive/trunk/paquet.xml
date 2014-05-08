@@ -1,0 +1,30 @@
+	<pipeline>
+        <nom>taches_generales_cron</nom>
+        <inclure>archive_pipelines.php</inclure>
+	</pipeline>
+</plugin>
+<paquet
+	prefix="archive"
+	categorie="date"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/archive-32.png"
+	schema="0.1.0"
+	documentation="http://contrib.spip.net/Plugin-Archive"
+>
+
+	<nom>Archive</nom>
+	<!-- Un statut archive pour les objets -->
+
+	<auteur lien="http://km.azerttyu.net">Camille Lafitte</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
+
+	<copyright>2008-2014</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/archive.php" />
+	<pipeline nom="pre_boucle" inclure="archive_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="archive_pipelines.php" />
+</paquet>
