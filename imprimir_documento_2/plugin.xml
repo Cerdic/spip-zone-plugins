@@ -25,6 +25,6 @@
 	<icon>imprimir_documento.png</icon>
 	<fonctions>baliza_imprimir_documento.php</fonctions>
 	<prefix>imprimir_documento</prefix>
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>edition</categorie>
 </plugin>
