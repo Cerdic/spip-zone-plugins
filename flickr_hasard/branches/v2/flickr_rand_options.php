@@ -15,7 +15,7 @@ function fetch_data_flickr($params,$debug=false) {
    foreach ($params as $k => $v){
        $encoded_params[] = urlencode($k).'='.urlencode($v);
    }
-   $url = "http://api.flickr.com/services/rest/?".implode('&', $encoded_params);
+   $url = "https://api.flickr.com/services/rest/?".implode('&', $encoded_params);
    $rsp = file_get_contents($url);
    $rsp_obj = unserialize($rsp);
    if ($debug) var_dump($rsp_obj);

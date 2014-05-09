@@ -3,7 +3,7 @@
     <slogan>Afficher au hasard des images issues de Flickr</slogan>
     <auteur>[erational->http://www.erational.org]</auteur>
     <licence>&#169; 2011 GNU/GPL</licence>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <etat>stable</etat>
     <categorie>multimedia</categorie>
     <description>Affiche une image al&#233;atoire (ou non) venant de Flickr avec ses indications de titre, auteur et licence
