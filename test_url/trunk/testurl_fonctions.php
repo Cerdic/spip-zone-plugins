@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function testurl_lister_url_du_site($objet="site",$branche=0){
 
