@@ -1,4 +1,14 @@
 <?php
+/**
+ * Pipelines du plugin "Nettoyer la médiathèque"
+ * 
+ * @plugin     Nettoyer la médiathèque
+ * @copyright  2014
+ * @author     Teddy Payet
+ * @licence    GNU/GPL
+ * @package    SPIP\Medias_nettoyage\Pipelines
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**

@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Nettoyer la médiathèque
  *
  * @plugin     Nettoyer la médiathèque
- * @copyright  2013
+ * @copyright  2014
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Medias_nettoyage\Autorisations

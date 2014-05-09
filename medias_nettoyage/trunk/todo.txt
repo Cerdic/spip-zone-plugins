@@ -1,4 +1,3 @@
-- compatibilité SPIP 3.0
 
 Observations :
 - regarder si on ne pourrait pas utiliser ecrire_fichier(), lire_fichier(), sous_repertoire()… Est-ce vraiment utile ? Car ce plugin ne fait que déplacer, donc ne devrait pas prendre plus de place sur le disque normalement.

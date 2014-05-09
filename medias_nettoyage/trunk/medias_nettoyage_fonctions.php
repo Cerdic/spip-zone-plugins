@@ -1,4 +1,13 @@
 <?php
+/**
+ * Fonctions principales du plugin "Nettoyer la médiathèque"
+ * 
+ * @plugin     Nettoyer la médiathèque
+ * @copyright  2014
+ * @author     Teddy Payet
+ * @licence    GNU/GPL
+ * @package    SPIP\Medias_nettoyage\Fonctions
+ */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -26,6 +35,9 @@ function medias_lister_extensions_documents () {
 /**
  * Créer les répertoires des extensions des documents enregistrés en BDD.
  *
+ * @uses medias_lister_extensions_documents()
+ * @uses _DIR_IMG
+ * 
  * @param  string $repertoire_img
  *         Par défaut, on prend _DIR_IMG en référence.
  *         On peut l'utiliser aussi pour le répertoire IMG/orphelins
@@ -44,9 +56,10 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG) {
 
 /**
  * Créer le répertoire "IMG/orphelins".
- * Plus pratique d'avoir une fonction
- * qu'on appellera en cas de besoin.
+ * Plus pratique d'avoir une fonction qu'on appellera en cas de besoin.
  *
+ * @uses _MEDIAS_NETTOYAGE_REP_ORPHELINS
+ * 
  * @return void
  */
 function medias_creer_repertoires_orphelins () {
@@ -58,6 +71,7 @@ function medias_creer_repertoires_orphelins () {
 
 /**
  * Lister les répertoires présents dans IMG/ sans les sous-répertoires.
+ * 
  * @param  string $repertoire_img 
  *         Par défaut, on prend _DIR_IMG en référence.
  *         On peut l'utiliser aussi pour le répertoire IMG/orphelins ou tout autre nom de répertoire.
@@ -82,6 +96,8 @@ function medias_lister_repertoires ($repertoire_img = _DIR_IMG) {
 /**
  * Lister tous les fichiers non distants enregistrés en BDD
  *
+ * @uses get_spip_doc()
+ * 
  * @return array
  *         Tableau contenant les urls des fichiers
  */
@@ -153,20 +169,22 @@ function medias_lister_documents_bdd_orphelins(){
  * Donner la taille en octets des documents enregistrés en BDD
  *
  * @uses medias_lister_documents_bdd_orphelins()
+ * @uses _DIR_IMG
+ * @uses get_spip_doc()
  *
  * @return integer
  */
 function medias_lister_documents_bdd_orphelins_taille(){
 	$documents_orphelins 	= medias_lister_documents_bdd_orphelins();
-	$taille 				= 0;
-	$pattern_img 			= "/" . preg_replace("/\//", "\/", _DIR_IMG) . "/";
+	$taille 		= 0;
+	$pattern_img 		= "/" . preg_replace("/\//", "\/", _DIR_IMG) . "/";
 
 	if (count($documents_orphelins) > 0) {
 		$documents_bdd = sql_allfetsel('fichier,taille','spip_documents', "fichier IN ('" . join("','",preg_replace($pattern_img, '', $documents_orphelins)) . "')");
 		foreach ($documents_bdd as $document_bdd) {
-				if (!file_exists(get_spip_doc($document_bdd['fichier']))) {
-					$taille = $taille + ($document_bdd['taille']/1000); // On divise par 1000 pour éviter la limite de l'integer php.
-				}
+			if (!file_exists(get_spip_doc($document_bdd['fichier']))) {
+				$taille = $taille + ($document_bdd['taille']/1000); // On divise par 1000 pour éviter la limite de l'integer php.
+			}
 		}
 	}
 	return $taille * 1000;
@@ -178,6 +196,9 @@ function medias_lister_documents_bdd_orphelins_taille(){
  * @uses medias_lister_extensions_documents()
  * @uses medias_lister_logos_fichiers()
  *
+ * @param string $repertoire_img
+ *        On peut passer un nom de répertoire/chemin en paramètre.
+ *        Par défaut, on prend le répertoire IMG/
  * @return array
  */
 function medias_lister_documents_repertoire ($repertoire_img = _DIR_IMG) {
@@ -234,6 +255,7 @@ function medias_lister_documents_repertoire_orphelins (){
  *
  * @uses medias_lister_documents_repertoire_orphelins()
  * @uses medias_calculer_taille_fichiers()
+ * 
  * @return integer
  */
 function medias_lister_documents_repertoire_orphelins_taille () {
@@ -253,18 +275,21 @@ function medias_lister_documents_repertoire_complet ($repertoire_img = _DIR_IMG)
 	$docs_fichiers = array();
 
 	// On va chercher dans IMG/distant/*/*.*
+        // Exemple : IMG/distant/jpg/nom_fichier.jpg
 	$fichiers = glob($repertoire_img . "*/*/*.*");
 	foreach ($fichiers as $fichier) {
 		$docs_fichiers[] = preg_replace("/\/\//", "/", $fichier); // On évite les doubles slashs '//' qui pourrait arriver comme un cheveu sur la soupe.
 	}
 
 	// On va chercher dans IMG/*/*.*
+        // Exemple : IMG/pdf/nom_fichier.pdf
 	$fichiers = glob($repertoire_img . "*/*.*");
 	foreach ($fichiers as $fichier) {
 		$docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
 	}
 
 	// On va chercher dans IMG/*.*
+        // Exemple : IMG/arton4.png
 	$fichiers = glob($repertoire_img . "*.*");
 	foreach ($fichiers as $fichier) {
 		$docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
@@ -283,6 +308,9 @@ function medias_lister_documents_repertoire_complet ($repertoire_img = _DIR_IMG)
  * @uses medias_lister_documents_repertoire_complet()
  * @uses medias_calculer_taille_fichiers()
  *
+ * @param string $repertoire_img
+ *        On peut passer un nom de répertoire/chemin en paramètre.
+ *        Par défaut, on prend le répertoire IMG/
  * @return integer
  */
 function medias_lister_documents_repertoire_complet_taille ($repertoire_img = _DIR_IMG) {
@@ -300,6 +328,14 @@ function medias_lister_documents_repertoire_complet_taille ($repertoire_img = _D
  *
  * @todo étendre à d'autres objets éditoriaux.
  *
+ * @param null|string $mode
+ *        + `null` : stockera dans le tableau tous les logos, 
+ *        quelque soit le mode du logo
+ *        + `on` : stockera dans le tableau tous les logos du mode "on"
+ *        + `off` : stockera dans le tableau tous les logos du mode "off"
+ * @param string $repertoire_img
+ *        On peut passer un nom de répertoire/chemin en paramètre.
+ *        Par défaut, on prend le répertoire IMG/
  * @return array
  */
 function medias_lister_logos_fichiers($mode = null, $repertoire_img = _DIR_IMG){
@@ -361,7 +397,12 @@ function medias_lister_logos_fichiers($mode = null, $repertoire_img = _DIR_IMG){
  * @uses medias_lister_logos_fichiers()
  * @uses medias_calculer_taille_fichiers()
  *
- * @return integer
+ * @param null|string $mode
+ *        + `null` : calculera le poids de tous les logos, 
+ *        quelque soit le mode du logo
+ *        + `on` : calculera le poids de tous les logos du mode "on"
+ *        + `off` : calculera le poids de tous les logos du mode "off"
+ * @return integer|string
  */
 function medias_lister_logos_fichiers_taille ($mode = null){
 	return medias_calculer_taille_fichiers(medias_lister_logos_fichiers($mode));
@@ -402,6 +443,7 @@ function medias_calculer_taille_fichiers ($fichiers = array()) {
  * avant de lister les répertoires.
  *
  * @uses medias_lister_repertoires()
+ * @uses _MEDIAS_NETTOYAGE_REP_ORPHELINS
  *
  * @return array
  */
@@ -417,12 +459,13 @@ function medias_lister_repertoires_orphelins () {
  * Lister le contenu du répertoire IMG/orphelins
  *
  * @uses medias_lister_documents_repertoire_complet()
+ * @uses _MEDIAS_NETTOYAGE_REP_ORPHELINS
  *
  * @return array
  */
 function medias_lister_repertoires_orphelins_fichiers () {
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
-	$docs_fichiers 			= array();
+	$docs_fichiers 		= array();
 
 	if (is_dir($repertoire_orphelins)) {
 		$docs_fichiers = medias_lister_documents_repertoire_complet($repertoire_orphelins);
@@ -435,12 +478,13 @@ function medias_lister_repertoires_orphelins_fichiers () {
  *
  * @uses medias_calculer_taille_fichiers()
  * @uses medias_lister_documents_repertoire_complet()
+ * @uses _MEDIAS_NETTOYAGE_REP_ORPHELINS
  *
  * @return integer
  */
 function medias_lister_repertoires_orphelins_fichiers_taille () {
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
-	$taille 				= 0;
+	$taille 		= 0;
 
 	if (is_dir($repertoire_orphelins)) {
 		return medias_calculer_taille_fichiers(medias_lister_documents_repertoire_complet($repertoire_orphelins));
@@ -467,18 +511,20 @@ function test_medias(){
  * pour X raisons n'ont pas été nettoyé de ces coquilles.
  *
  * @uses medias_creer_repertoires_orphelins()
+ * @uses _DIR_IMG
+ * @uses _MEDIAS_NETTOYAGE_REP_ORPHELINS
  *
  * @return void
  */
 function medias_deplacer_rep_obsoletes () {
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement des répertoires obsolètes.',"medias_nettoyage");
 
-	$pattern_obsoletes		= array("cache-","icones");
-	$repertoire_img 		= _DIR_IMG;
+	$pattern_obsoletes	= array("cache-","icones");
+	$repertoire_img 	= _DIR_IMG;
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
 	$repertoires_obsoletes 	= array();
-	$message_log 			= array();
-	$pattern_img 			= "/" . preg_replace("/\//", "\/", $repertoire_img) . "/";
+	$message_log 		= array();
+	$pattern_img 		= "/" . preg_replace("/\//", "\/", $repertoire_img) . "/";
 
 	// On crée le répertoire IMG/orphelins
 	medias_creer_repertoires_orphelins();
@@ -506,8 +552,8 @@ function medias_deplacer_rep_obsoletes () {
 		// S'il n'y a pas de dossiers obsolètes, on met un message histoire de ne pas rester dans le brouillard.
 		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de dossiers ou de fichiers obsolètes';
 	}
-	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement des répertoires obsolètes.',"medias_orphelins");
+	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_nettoyage");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement des répertoires obsolètes.',"medias_nettoyage");
 	return;
 }
 
@@ -518,6 +564,8 @@ function medias_deplacer_rep_obsoletes () {
  * @uses medias_creer_repertoires_orphelins()
  * @uses medias_creer_extensions_repertoires()
  * @uses medias_lister_documents_repertoire_orphelins()
+ * @uses _DIR_IMG
+ * @uses _MEDIAS_NETTOYAGE_REP_ORPHELINS
  *
  * @return array
  */
@@ -527,13 +575,13 @@ function medias_deplacer_documents_repertoire_orphelins () {
 	 * Ainsi, on sait déjà en regardant les logs
 	 * si le script est lancé ou pas.
 	 */
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement.',"medias_orphelins");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de déplacement.',"medias_nettoyage");
 
 	$fichiers_orphelins 	= medias_lister_documents_repertoire_orphelins();
-	$fichiers_deplaces 		= array();
-	$message_log 			= array();
+	$fichiers_deplaces 	= array();
+	$message_log 		= array();
 	$repertoire_orphelins 	= _MEDIAS_NETTOYAGE_REP_ORPHELINS;
-	$pattern_img 			= "/" . preg_replace("/\//", "\/", _DIR_IMG) . "/";
+	$pattern_img 		= "/" . preg_replace("/\//", "\/", _DIR_IMG) . "/";
 
 	// On crée le répertoire IMG/orphelins s'il n'existe pas
 	medias_creer_repertoires_orphelins();
@@ -568,11 +616,11 @@ function medias_deplacer_documents_repertoire_orphelins () {
 		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il ne semble pas avoir de documents orphelins dans IMG/';
 	}
 
-	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
+	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_nettoyage");
 	/**
 	 * Et là, on marque bien la fin du script dans les logs.
 	 */
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement.',"medias_orphelins");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de déplacement.',"medias_nettoyage");
 
 	return true;
 }
@@ -587,6 +635,7 @@ function medias_deplacer_documents_repertoire_orphelins () {
  * Script repris de ce fichier : http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
  *
  * @uses medias_lister_logos_fichiers()
+ * @uses _DIR_IMG
  *
  * @return bool
  */
@@ -596,7 +645,7 @@ function medias_reparer_documents_fichiers () {
 	 * Ainsi, on sait déjà en regardant les logs
 	 * si le script est lancé ou pas.
 	 */
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de réparation des documents.',"medias_orphelins");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Début de la procédure de réparation des documents.',"medias_nettoyage");
 
 	$repertoire_img 	= _DIR_IMG ;
 	$docs_fichiers 		= array();
@@ -634,11 +683,11 @@ function medias_reparer_documents_fichiers () {
 		$message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de documents à réparer.';
 	}
 
-	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_orphelins");
+	spip_log("\n-------\n" . join("\n",$message_log) . "\n-------\n","medias_nettoyage");
 	/**
 	 * Et là, on marque bien la fin du script dans les logs.
 	 */
-	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de réparation des documents.',"medias_orphelins");
+	spip_log(date_format(date_create(), 'Y-m-d H:i:s') . ' : Fin de la procédure de réparation des documents.',"medias_nettoyage");
 
 	return true;
 }

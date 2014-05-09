@@ -4,8 +4,8 @@
 	<slogan>On range nos medias!</slogan>
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
-	<version>0.8.5</version>
-	<etat>dev</etat>
+	<version>0.8.6</version>
+	<etat>stable</etat>
 	<categorie>outil</categorie>
 
 	<auteur>Venfu</auteur>

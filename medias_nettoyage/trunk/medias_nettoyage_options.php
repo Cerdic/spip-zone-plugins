@@ -1,5 +1,15 @@
 <?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
+/**
+ * Options principales du plugin "Nettoyer la médiathèque"
+ * 
+ * @plugin     Nettoyer la médiathèque
+ * @copyright  2014
+ * @author     Teddy Payet
+ * @licence    GNU/GPL
+ * @package    SPIP\Medias_nettoyage\Options
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined("_MEDIAS_NETTOYAGE_PAQUET"))
 	define("_MEDIAS_NETTOYAGE_PAQUET", 200);
