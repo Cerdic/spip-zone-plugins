@@ -3,7 +3,7 @@
 	categorie="maintenance"
 	version="1.0.0"
 	etat="test"
-	compatibilite="[2.0.10;["
+	compatibilite="[3.0.0;["
 	logo="prive/themes/spip/images/test-ok_24.png"
 	documentation="http://contrib.spip.net/Test-URL"
 >
