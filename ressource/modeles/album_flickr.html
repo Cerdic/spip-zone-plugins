@@ -26,7 +26,7 @@
 [(#REM) title=" " pour ne pas avoir de titre ]
 [<figcaption>(#ENV{title}|sinon{#GET{album_photoset}|table_valeur{title}}|trim)</figcaption>]
 
-<ul>
+<ul class="clearfix">
 <BOUCLE_album(DATA)
 	{source json,#GET{api}}{datapath photoset/photo}>
 <li>
