@@ -3,7 +3,7 @@
 	categorie="edition"
 	version="0.2.0"
 	etat="dev"
-	compatibilite="[1.9.0;3.1.*]"
+	compatibilite="[2.1.14;3.1.*]"
 	logo="images/ressource-32.png"
 	documentation="http://www.spip-contrib.net/Ressource"
 >
@@ -17,6 +17,6 @@
 	<pipeline nom="ressource_meta" action="" />
 	<pipeline nom="post_typo" action="post_typo" inclure="inc/ressource.php" />
 	<pipeline nom="pre_liens" action="pre_liens" inclure="inc/ressource.php" />
-	<utilise nom="tw" compatibilite="[0.8.0;1.0.0]" />
+	<utilise nom="tw" compatibilite="[0.8.11;1.0.0]" />
 	<necessite nom="queue" />
 </paquet>

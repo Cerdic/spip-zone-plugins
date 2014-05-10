@@ -15,12 +15,12 @@
 	<description>
 	Un raccourci permettant d'intégrer une ressource externe en indiquant entre chevrons son URL ou son nom de fichier.
 	</description>
-	<!-- lien>http://www.spip-contrib.net/</lien -->
+	<lien>http://www.spip-contrib.net/Ressource</lien>
 	<prefix>
 	ressource
 	</prefix>
 	<!-- icon>
-	images/ressource-128.png
+	images/ressource-32.png
 	</icon -->
 	<chemin dir='' />
 	<categorie>edition</categorie>
