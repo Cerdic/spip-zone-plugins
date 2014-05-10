@@ -26,3 +26,14 @@
       <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
     </div></form>
     ]
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        if (!$('input[name="enregistrer[]"]').is(':checked')) {
+            $('.block_mp').hide(); 
+            } 
+        });
+    $('input[name="enregistrer[]"]').click(function() {
+        $('.block_mp').slideToggle('slow', function() {
+        });
+});   
+</script>
