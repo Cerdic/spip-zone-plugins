@@ -27,7 +27,7 @@
 	[(#LARGEUR|>{150}|?{
 		[(#SET{url,#URL_DOCUMENT})]
 		[(#SET{title,[(#TITRE|sinon{[(#FICHIER|basename)]}|couper{80})]})]
-		[(#SET{alt,[(#GET{title}|couper{60})]})]
+		[(#SET{alt,[(#GET{title})]})]
 	,
 		[(#SET{url,''})]
 		[(#SET{title,''})]
@@ -40,7 +40,7 @@
 #SET{fichier,#GET{fichier}|extraire_attribut{src}}
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-	<dt>[<a href="(#GET{url})"[ title="(#GET{title}|attribut_html)"][ type="(#MIME_TYPE)"][ (#DISTANT|oui)rel="external"][ class="(#ENV{lien_class})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[ alt="(#GET{alt}|attribut_html)"] />[(#GET{url}|?{</a>})]</dt>[
+	<dt>[<a href="(#GET{url})"[ type="(#MIME_TYPE)"][ (#DISTANT|oui)rel="external"][ class="(#ENV{lien_class})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[ alt="(#GET{alt}|attribut_html)"][(#GET{url}|?{[ title="(#GET{title}|attribut_html)"]] />[(#GET{url}|?{</a>})]</dt>[
 	<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#GET{titre})</dt>]
 </dl>
 </BOUCLE_doc>
