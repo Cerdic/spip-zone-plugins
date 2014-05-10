@@ -27,5 +27,6 @@
 	<pipeline><nom>ressource_meta</nom><action></action></pipeline> 
 	<necessite id="SPIP" version="[2.1.14;3.1.99]" />
 	<necessite id="tw" version="[0.8.3;1.0.0]" />
+	<necessite id="queue" />
 	<!-- traduire gestionnaire="salvatore" module="crayons" reference="fr" / -->
 </plugin>
