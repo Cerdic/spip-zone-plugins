@@ -38,7 +38,7 @@
 		<td>
 		[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})]
 		</td>
-		<td class="arial2" style="width: 100%;"><a href="?exec=article&amp;id_article=#ID_ARTICLE">[(#SURTITRE)<br />]<b>#TITRE</b>[<br />(#SOUSTITRE)]</a></td>
+		<td class="arial2" style="width: 100%;"><a href="?exec=article&amp;id_article=#ID_ARTICLE">[(#SURTITRE|supprimer_tags|trim)<br />]<b>#TITRE</b>[<br />(#SOUSTITRE)]</a></td>
 		<td class="arial1" style="white-space:nowrap;">[(#DATE|affdate)]</td>
 		<td style='vertical-align: middle; text-align: center; padding: 0px 20px; width:70px;'>[<a href="?exec=article&amp;id_article=#ID_ARTICLE" [style="display: block; height:(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{height})px]"><img src="(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{src}|url_absolue)" [style="(#LOGO_ARTICLE|image_reduire{70,60}|extraire_attribut{style})]"  /></a>]</td>
 		<td class="arial1"><b style="white-space: nowrap;">N°#ID_ARTICLE</b></td>
@@ -66,7 +66,7 @@
 
 
 [(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
-	<form onsubmit="valeur=Math.floor($('#ajouter_selection').attr('value')); if (valeur > 0){ $('#pave_selection').load('?action=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;ajouter_selection='+valeur); }; return false;" action="index.php" method="get">
+	<form onsubmit="valeur=Math.floor($('#ajouter_selection').val()); if (valeur > 0){ $('#pave_selection').load('?action=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;ajouter_selection='+valeur); }; return false;" action="index.php" method="get">
       <div style=" padding: 5px 10px; background:#FFF">
          <input type="hidden" name="exec" value="rubrique" />
          <input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}" />
