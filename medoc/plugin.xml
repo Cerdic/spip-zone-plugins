@@ -14,6 +14,7 @@
 - Le mod&egrave;le <code><doc></code> affiche une vignette cliquable et n'en change plus
 - Compatibilit&eacute; pr&eacute;serv&eacute;e&nbsp;: les mod&egrave;les historiques <code><img></code> et <code><emb></code> ne sont pas modifi&eacute;és et fonctionnent toujours => pas besoin de corriger les articles pr&eacute;c&eacute;dents.
 </description>
+<lien>http://contrib.spip.net/4026?var_mode=preview</lien>
 <auteur>[tetue->http://spip.tetue.net] - 2011</auteur>
 
 <necessite id="SPIP" version="[2.1.0;3.0.99]" />
