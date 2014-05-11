@@ -1,5 +1,5 @@
 <plugin>
-<nom>Mod&#232;le <code><doc></code> unifi&eacute;</nom>
+<nom>Mod&#232;le &lt;doc&gt; unifi&eacute;</nom>
 <prefix>medoc</prefix>
 <icon>icon/medoc.png</icon>
 
@@ -8,11 +8,11 @@
 <categorie>edition</categorie>
 
 <slogan>Insertion facile des documents</slogan>
-<description>Rustine unifiant le comportement et la syntaxe d'insertion des documents, pour soigner l'inconstance d'affichage dont souffrent les documents de&nbsp;SPIP. D&eacute;sormais, c'est vous qui d&eacute;cidez !
+<description>Patch unifiant le comportement et la syntaxe d'insertion des documents, pour soigner l'inconstance d'affichage dont souffrent les documents de&nbsp;SPIP. D&eacute;sormais, c'est vous qui d&eacute;cidez !
 
-- Une seule syntaxe d'insertion&nbsp;: <code><doc324|left></code>
-- Le mod&egrave;le <code><doc></code> affiche une vignette cliquable et n'en change plus
-- Compatibilit&eacute; pr&eacute;serv&eacute;e&nbsp;: les mod&egrave;les historiques <code><img></code> et <code><emb></code> ne sont pas modifi&eacute;és et fonctionnent toujours => pas besoin de corriger les articles pr&eacute;c&eacute;dents.
+- Le mod&egrave;le &lt;doc&gt; affiche toujours une vignette cliquable
+- Une seule syntaxe d'insertion&nbsp;: &lt;doc324|left&gt;
+- Compatibilit&eacute; pr&eacute;serv&eacute;e&nbsp;: les mod&egrave;les historiques (&lt;img&gt; et &lt;emb&gt;) restent inchang&eacute;s
 </description>
 <lien>http://contrib.spip.net/4026?var_mode=preview</lien>
 <auteur>[tetue->http://spip.tetue.net] - 2011</auteur>
