@@ -5,16 +5,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function pb_selection_interface ( $vars="" ) {
 	$exec = $vars["args"]["exec"];
-	$id_rubrique = $vars["args"]["id_rubrique"];
-	$id_article = $vars["args"]["id_article"];
-	$data =	$vars["data"];
+
+	if (!defined('_PB_SELECTION_RUBRIQUES_EXEC'))
+		define('_PB_SELECTION_RUBRIQUES_EXEC', 'rubriques rubrique');	
 	
-	if ($id_rubrique < 1) $id_rubrique=0;
-	
-	
-	
-	if ($exec == "rubriques" OR $exec == "rubrique") {
+	if (in_array($exec, explode(' ', _PB_SELECTION_RUBRIQUES_EXEC))) {
 		
+		$id_rubrique = $vars["args"]["id_rubrique"];
+		$id_article = $vars["args"]["id_article"];
+		$data =	$vars["data"];
+	
+		if ($id_rubrique < 1) $id_rubrique=0;
+	
 		$contexte = array('id_rubrique'=>$id_rubrique);
 
 		$ret .= "<div id='pave_selection'>";
@@ -23,12 +25,13 @@ function pb_selection_interface ( $vars="" ) {
 		$ret .= $page["texte"];
 
 		$ret .= "</div>";
+
+		$data = $ret.$data;
+
+		$vars["data"] = $data;
 	}
 
 
-	$data = $ret.$data;
-
-	$vars["data"] = $data;
 	return $vars;
 }
 
