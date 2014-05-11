@@ -11,10 +11,9 @@
 	[(#ID_COG_COMMUNE|oui)
 	[(#GET{redirect}|icone_verticale{Retour,cog_commune,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 	]
-	[
+	
 		[(#ID_COG_COMMUNE|?{<:cog_commune:icone_modifier_cog_commune:>,<:cog_commune:icone_creer_cog_commune:>})]
-		<h1>(#ENV{titre,#INFO_NOM{cog_commune,#ID_COG_COMMUNE}|sinon{<:info_sans_titre:>}})</h1>
-	]
+	[	<h1>(#ENV{titre,#INFO_NOM{cog_commune,#ID_COG_COMMUNE}|sinon{<:cog:info_sans_titre:>}})</h1>]
 </div>
 
 #SET{redirect,#ENV{redirect,#ID_COG_COMMUNE|generer_url_entite{cog_commune}}}

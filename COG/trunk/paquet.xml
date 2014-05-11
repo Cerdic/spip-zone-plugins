@@ -1,11 +1,11 @@
 <paquet
 	prefix="cog"
 	categorie="outil"
-	version="2.1.0"
+	version="2.1.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/cog-32.png"
-	schema="1.0"
+	schema="1.1"
 	documentation="http://contrib.spip.net/COG-Toutes-les-communes-departements-regions"
 >
 
@@ -35,5 +35,5 @@
 	
 	<lib nom="PHPExcel" lien="https://github.com/PHPOffice/PHPExcel/archive/master.zip" />
 
-	<menu nom="cog" titre="COG" parent="menu_edition" icone="images/cog-24.png" action="cog" />
+	<menu nom="cog" titre="C.O.G." parent="menu_edition" icone="images/cog-24.png" action="cog" />
 </paquet>

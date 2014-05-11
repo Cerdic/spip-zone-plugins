@@ -10,9 +10,14 @@
 		<label for="fichier"><:cog:fichiers_a_telecharger:></label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier})</span>
 		]<p class='explication'><:cog:choississez_le_fichier_a_telecharger:></p>
-		<select name='objet' [(#ENV{objet,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]>
+
+
+		<select name='objet[]' multiple="multiple" >
+
 		<BOUCLE_fichier(POUR){tableau #ENV{tab_objet}}>
+
 		<option value="#CLE"[ (#ENV{objet}|=={#CLE}|oui) selected="selected"]>
+
 			[(#VALEUR|table_valeur{nom})]
 		</option>
 		</BOUCLE_fichier>

@@ -96,7 +96,7 @@ function formulaires_editer_cog_commune_charger_dist($id_cog_commune='new', $ret
  */
 function formulaires_editer_cog_commune_verifier_dist($id_cog_commune='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
-	return formulaires_editer_objet_verifier('cog_commune',$id_cog_commune, array('chef_lieu', 'code', 'arrondissement', 'canton', 'type_charniere', 'article_majuscule', 'nom_majuscule'));
+	return formulaires_editer_objet_verifier('cog_commune',$id_cog_commune, array( 'code', 'arrondissement', 'canton', 'type_charniere',  'nom_majuscule'));
 
 }
 

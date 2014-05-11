@@ -45,27 +45,12 @@
 				</BOUCLE_secteurs>
 			</select>
 		</li>
-			<li class='configurer_utiliser_article_accueil'>
-				<label><:cog:delimitations_supplementaires:></label>
-				<div class="choix">
-					<input type="checkbox" name="activer_epci" [checked="(#ENV{activer_epci}|=={non}|?{checked})"] id="activer_epci" value='non' />
-					<label for="activer_epci"><:cog:fichier_EPCI:></label>
-				</div>
-					<div class="choix">
-					<input type="checkbox" name="activer_zauer" [checked="(#ENV{activer_zauer}|=={non}|?{checked})"] id="activer_zauer" value='non' />
-					<label for="activer_zauer"><:cog:fichier_ZAUER:></label>
-				</div>
-				<div class="choix">
-					<input type="checkbox" name="activer_zone_emploi" [checked="(#ENV{activer_zone_emploi}|=={non}|?{checked})"] id="activer_zone_emploi" value='non' />
-					<label for="activer_zone_emploi"><:cog:fichier_zone_emploi:></label>
-				</div>
-			</li>
+
 		</ul>
 
 
 		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
 
 	</div></form>
-#CFG_ARBO{cog}
 
 </div>

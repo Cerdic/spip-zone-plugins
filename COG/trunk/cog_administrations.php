@@ -19,6 +19,9 @@ function cog_upgrade($nom_meta_base_version, $version_cible){
 									'spip_cog_zauers_categories'*/)),
 		array('cog_peupler_base')
 	);
+	$maj['1.1'] = array(
+		 array('sql_alter',"TABLE spip_cog_cantons CHANGE `chef_lieu` `chef_lieu` MEDIUMINT( 6 )")
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

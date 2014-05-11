@@ -333,7 +333,7 @@ if($pointeur_fichier<>0){
 					}
 						else
 						{
-							$tab_value[$key] = $tab[$i-$option_decalage];
+							$tab_value[$key] = utf8_encode(trim($tab[$i-$option_decalage]));
 						}
 						$i++;
 				}

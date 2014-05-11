@@ -87,7 +87,7 @@ function formulaires_editer_cog_departement_charger_dist($id_cog_departement='ne
  */
 function formulaires_editer_cog_departement_verifier_dist($id_cog_departement='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
-	return formulaires_editer_objet_verifier('cog_departement',$id_cog_departement, array('region', 'code', 'chef_lieu', 'type_charniere', 'nom_majuscule', 'nom'));
+	return formulaires_editer_objet_verifier('cog_departement',$id_cog_departement, array('region', 'code', 'chef_lieu',  'nom_majuscule', 'nom'));
 
 }
 

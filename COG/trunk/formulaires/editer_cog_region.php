@@ -87,7 +87,7 @@ function formulaires_editer_cog_region_charger_dist($id_cog_region='new', $retou
  */
 function formulaires_editer_cog_region_verifier_dist($id_cog_region='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
-	return formulaires_editer_objet_verifier('cog_region',$id_cog_region, array('chef_lieu', 'type_charniere', 'nom_majuscule', 'nom', 'code'));
+	return formulaires_editer_objet_verifier('cog_region',$id_cog_region, array('chef_lieu',  'nom_majuscule', 'nom', 'code'));
 
 }
 

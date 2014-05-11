@@ -37,6 +37,7 @@ $tables['spip_cog_communes'] = array(
 			"KEY insee" 	=> "departement,code"
 		),
 		'titre' => "nom AS titre, '' AS lang",
+'page'=>'',
 		#'date' => "",
 		'champs_editables' => $tab_champs,
 		'champs_versionnes' => $tab_champs,
@@ -64,7 +65,7 @@ $tables['spip_cog_cantons'] = array(
 			"arrondissement"=> "TINYINT( 1 ) UNSIGNED NOT NULL	COMMENT 'Code arrondissement'",
 			"code"=> "TINYINT( 2 ) UNSIGNED ZEROFILL NOT NULL	COMMENT 'Code canton'",
 			"type_canton"=> "TINYINT( 2 ) UNSIGNED NOT NULL	COMMENT 'Composition communale du canton'",
-			"chef_lieu"=> "SMALLINT(5) NOT NULL DEFAULT '0'	COMMENT 'Chef-lieu de canton'",
+			"chef_lieu"=> "MEDIUMINT(5) NOT NULL DEFAULT '0'	COMMENT 'Chef-lieu de canton'",
 			"type_charniere"=> "TINYINT( 1 ) UNSIGNED NOT NULL		COMMENT 'Type de nom en clair'",
 			"article_majuscule"=> "VARCHAR( 5 ) NOT NULL	COMMENT 'Article (majuscules)'",
 			"nom_majuscule"=> "text NOT NULL	COMMENT 'Nom en clair (majuscules)'",
@@ -83,6 +84,7 @@ $tables['spip_cog_cantons'] = array(
 			'nom' => 8, 'code' => 5, 'departement' => 1
 		),
 		'titre' => "nom AS titre, '' as lang",
+		'page'=>''
 	);
 
 
@@ -122,6 +124,7 @@ $tables['spip_cog_arrondissements'] = array(
 			'nom' => 8, 'code' => 5, 'departement' => 1
 		),
 		'titre' => "nom AS titre, '' as lang",
+		'page'=>''
 	);
 
 
@@ -155,6 +158,7 @@ $tables['spip_cog_departements'] = array(
 			'nom' => 8, 'code' => 5, 'region' => 1
 		),
 		'titre' => "nom AS titre, '' as lang",
+		'page'=>''
 	);
 
 
@@ -189,6 +193,7 @@ $tables['spip_cog_regions'] = array(
 			'nom' => 8, 'code' => 5
 		),
 		'titre' => "nom AS titre, '' as lang",
+		'page'=>''
 	);
 
 
@@ -219,6 +224,7 @@ $tables['spip_cog_epcis'] = array(
 		'champs_versionnes' => $tab_champs,
 		'rechercher_champs' => array('libelle' => 8, 'code' => 5),
 		'titre' => "libelle AS titre, '' as lang",
+		'page'=>'',
 	);
 
 
@@ -241,6 +247,7 @@ $tables['spip_cog_epcis_natures'] = array(
 			'libelle' => 8, 'code' => 5
 		),
 		'titre' => "libelle AS titre, '' as lang",
+		'page'=>'',
 	);
 
 
@@ -272,6 +279,7 @@ $tables['spip_cog_zauers'] = array(
 			'libelle' => 8, 'code' => 5
 		),
 		'titre' => "libelle AS titre, '' as lang",
+		'page'=>'',
 	);
 
 $tab_champs=array('code','libelle');
@@ -292,6 +300,7 @@ $tables['spip_cog_zauers_eus'] = array(
 			'libelle' => 8, 'code' => 5
 		),
 		'titre' => "libelle AS titre, '' as lang",
+		'page'=>'',
 	);
 
 
@@ -317,6 +326,7 @@ $tables['spip_cog_zauers_categories'] = array(
 			'libelle' => 8, 'code' => 5
 		),
 		'titre' => "libelle AS titre, '' as lang",
+		'page'=>'',
 	);
 */
 return $tables;
@@ -363,6 +373,7 @@ function cog_declarer_tables_auxiliaires($tables) {
  function cog_declarer_tables_interfaces($tables_interfaces){
 
 $tables_interfaces['table_des_tables']['cog_communes'] = 'cog_communes';
+$tables_interfaces['table_des_tables']['cog_cantons'] = 'cog_cantons';
 $tables_interfaces['table_des_tables']['cog_communes_liens'] = 'cog_communes_liens';
 $tables_interfaces['table_des_tables']['cog_epcis'] = 'cog_epcis';
 $tables_interfaces['table_des_tables']['cog_arrondissements'] = 'cog_arrondissements';

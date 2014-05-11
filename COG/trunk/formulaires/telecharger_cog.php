@@ -26,7 +26,6 @@ return array('tab_objet'=>$tab_objet);
 
 
 
-
 function formulaires_telecharger_cog_verifier_dist(){
 	include_spip('cog_config');
 	include_spip('inc/config');
@@ -34,36 +33,47 @@ function formulaires_telecharger_cog_verifier_dist(){
 	$tab_objet=cog_config_tab_fichier();
 	$emplacement=_DIR_TMP.lire_config('cog/chemin_donnee');
 	// login trop court ou existant
-	if ($objet = _request('objet')) {
-		if (!isset($tab_objet[$objet])) {
-			$erreurs['objet'] = _T('cog:fichier_incorrect');
-			$erreurs['message_erreur'] .= _T('cog:fichier_incorrect');
-		}
+	$objet = array();
+	$objet = _request('objet');
+	if (count($objet) < 1) {
+		$erreurs['message_erreur'] = _T('cog:erreur_choix');
+		$erreurs['objet'] = _T('cog:erreur_choix');
+
 	}else{
-	$erreurs['objet'] = _T('cog:choix_erronne');
-
+		if (!isset($tab_objet[$objet[0] ])) {
+			$erreurs['objet'] =  _T('cog:fichier_incorrect');
+			$erreurs['message_erreur'] = $erreurs['message_erreur']._T('cog:fichier_incorrect');
+		}
 	}
-
 	return $erreurs;
 }
+
 
 // http://doc.spip.org/@inc_editer_mot_dist
 function formulaires_telecharger_cog_traiter_dist(){
 include_spip('cog_config');
 include_spip('inc/cog_import');
 $tab_objet=cog_config_tab_fichier();
-$objet =_request('objet');
+$objet = array();
 $tab_fichier_telecharger=array();
-$tab_fichier=cog_tab_fichier_telecharger($tab_objet[$objet]['fichier']);
-foreach($tab_fichier as $fichier) {
-	$nom_fichier=cog_telecharger_fichier_distant($fichier);
-	if($nom_fichier)
-		$tab_fichier_telecharger[]=$nom_fichier;
-}
 
+$objet =_request('objet');
+for($i = 0; $i < count($objet); $i++){
+	$objet_nom =$objet_nom.$objet[$i].' ';
+	$tab_fichier=cog_tab_fichier_telecharger($tab_objet[$objet[$i] ]['fichier']);
+	foreach($tab_fichier as $fichier) {
+		$nom_fichier=cog_telecharger_fichier_distant($fichier);
+		if($nom_fichier)
+			$tab_fichier_telecharger[]=$nom_fichier;
+	}
+}
 $retour['editable']=true;
-if(count($tab_fichier_telecharger)==count($tab_fichier)){
-	$retour['message_ok'] = 'Le ou les fichier(s) '.$objet.' a bien été télécharger, vous pouvez procéder à son importation.';
+if(count($tab_fichier_telecharger)==count($objet)){
+	if (count($objet)==1) {
+		$retour['message_ok'] = 'Le fchier '.$objet_nom.' a bien été télécharger, vous pouvez procéder à son importation.';
+	}else{
+		$retour['message_ok'] = 'Les fichiers '.$objet_nom.' ont bien été télécharger, vous pouvez procéder à leur importation.';
+		}
 } else {
 	$retour['message_erreur'] = 'Problème dans l\'importation du fichier';
 }

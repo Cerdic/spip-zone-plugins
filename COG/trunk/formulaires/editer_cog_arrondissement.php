@@ -87,7 +87,7 @@ function formulaires_editer_cog_arrondissement_charger_dist($id_cog_arrondisseme
  */
 function formulaires_editer_cog_arrondissement_verifier_dist($id_cog_arrondissement='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
-	return formulaires_editer_objet_verifier('cog_arrondissement',$id_cog_arrondissement, array('region', 'departement', 'code', 'chef_lieu', 'type_charniere', 'article_majuscule', 'nom_majuscule', 'article', 'nom'));
+	return formulaires_editer_objet_verifier('cog_arrondissement',$id_cog_arrondissement, array('region', 'departement', 'code',   'nom_majuscule',  'nom'));
 
 }
 

@@ -87,7 +87,7 @@ function formulaires_editer_cog_canton_charger_dist($id_cog_canton='new', $retou
  */
 function formulaires_editer_cog_canton_verifier_dist($id_cog_canton='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 
-	return formulaires_editer_objet_verifier('cog_canton',$id_cog_canton, array('region', 'departement', 'arrondissement', 'code', 'type_canton', 'chef_lieu', 'type_charniere', 'article_majuscule', 'nom_majuscule', 'article', 'nom'));
+	return formulaires_editer_objet_verifier('cog_canton',$id_cog_canton, array('region', 'departement', 'arrondissement', 'code', 'type_canton', 'chef_lieu', 'type_charniere', 'nom_majuscule', 'nom'));
 
 }
 

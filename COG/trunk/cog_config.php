@@ -46,11 +46,11 @@ return $tab_cog_fichier;
 function cog_config_tab_table()
 {
 $tab_cog_fichier = array(
-'cog_commune'				=>	array('nom'=>'Commune'),
+'cog_commune'				=>	array('nom'=>'Communes'),
 'cog_canton'				=>	array('nom'=>'Cantons'),
-'cog_arrondissement' 		=>	array('nom'=>'Arrondissement'),
-'cog_departement' 			=>	array('nom'=>'Département'),
-'cog_region' 				=>	array('nom'=>'Région'),
+'cog_arrondissement' 		=>	array('nom'=>'Arrondissements'),
+'cog_departement' 			=>	array('nom'=>'Départements'),
+'cog_region' 				=>	array('nom'=>'Régions'),
 'cog_epci' 				=>	array('nom'=>'EPCI'),
 /*'epcis_natures' 		=>	array('nom'=>'Nature des EPCI'),
 'zauers' 				=>	array('nom'=>'ZAUER'),
