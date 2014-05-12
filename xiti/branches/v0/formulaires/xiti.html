@@ -1,0 +1,52 @@
+<div class="formulaire_spip formulaire_editer" >
+[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#EDITABLE|oui)
+    <form method="post" action="#ENV{action}">
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <p>N° d'inscription à XITI : 
+        <input name="id_xiti" type="text" id="id_xiti" value="#ENV{id_xiti}" size="10">
+      </p>
+      <p>Choix du logo :</p>
+      <table width="100%">
+        <tr>
+          <td colspan="3"><div align="center">
+            <input name="logo" type="radio" id="hit" value="hit" [(#ENV{logo}|=={hit}|?{'checked',''})]>
+            <img src="#CHEMIN{IMG/hit.xiti.gif}" alt="hit.xiti" width="39" height="25" align="absmiddle" ></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">
+              <input type="radio" name="logo" id="hit4" value="grcg" [(#ENV{logo}|=={grcg}|?{'checked',''})]>
+              <img src="#CHEMIN{IMG/grcg.xiti.gif}" alt="hit.xiti" width="81" height="16" align="absmiddle"></div></td>
+          <td><div align="center">
+              <input type="radio" name="logo" id="hit5" value="oco" [(#ENV{logo}|=={oco}|?{'checked',''})]>
+              <img src="#CHEMIN{IMG/oco.xiti.gif}" alt="hit.xiti" width="81" height="16" align="absmiddle"></div></td>
+          <td><div align="center">
+              <input type="radio" name="logo" id="hit6" value="orcr" [(#ENV{logo}|=={orcr}|?{'checked',''})]>
+              <img src="#CHEMIN{IMG/orcr.xiti.gif}" alt="hit.xiti" width="81" height="16" align="absmiddle"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">
+              <input type="radio" name="logo" id="hit2" value="bcg" [(#ENV{logo}|=={bcg}|?{'checked',''})]>
+              <img src="#CHEMIN{IMG/bcg.xiti.gif}" alt="hit.xiti" width="81" height="16" align="absmiddle"></div></td>
+          <td><div align="center">
+              <input type="radio" name="logo" id="hit3" value="g" [(#ENV{logo}|=={g}|?{'checked',''})]>
+              <img src="#CHEMIN{IMG/g.xiti.gif}" alt="hit.xiti" width="81" height="16" align="absmiddle"></div></td>
+          <td><div align="center">
+            <input type="radio" name="logo" id="hit7" value="rcg" [(#ENV{logo}|=={rcg}|?{'checked',''})]>
+          <img src="#CHEMIN{IMG/rcg.xiti.gif}" alt="hit.xiti" width="81" height="16" align="absmiddle"></div></td>
+        </tr>
+        <tr>
+          <td><div align="center">
+            <input type="radio" name="logo" id="hit8" value="vcg">
+          <img src="#CHEMIN{IMG/vcg.xiti.gif}" alt="hit.xiti" width="81" height="16" align="absmiddle"></div></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <p class="boutons">
+        <input type="submit" name="Valider" id="Valider" value="Valider" class="fondo">
+      </p>
+    </form>
+]
+</div>
