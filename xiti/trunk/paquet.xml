@@ -1,0 +1,21 @@
+<paquet
+	prefix="xiti"
+	categorie="statistique"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/xiti-32.png"
+	documentation=""
+	schema="1.0.0"
+>
+
+	<nom>Xiti</nom>
+    <!--Ce plugin permet de tagger des pages avec l'outil de stat Xiti-->
+
+	<auteur>Vincent</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<menu nom="xiti" titre="xiti:icone_xiti" parent="menu_squelette" icone="images/xiti-16.png" action="configurer_xiti" />
+	
+</paquet>
