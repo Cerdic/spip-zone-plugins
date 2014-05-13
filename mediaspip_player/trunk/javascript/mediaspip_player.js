@@ -939,7 +939,7 @@
 					var ratio = (window_width/id.videoWidth),
 						height_final = (id.videoHeight*ratio).toFixed(),
 						top = ((window_height-height_final)/2).toFixed();
-					$(this).css({position:'absolute',width:window_width+'px',height:height_final+'px',top:top+'px',left:'0'});
+					media.css({position:'absolute',width:window_width+'px',height:height_final+'px',top:top+'px',left:'0'});
 				}else{
 					var left = ((window_width-width_final)/2).toFixed();
 					media.css({position:'auto',width:width_final+'px',height:window_height+'px',left:left+'px',top:'0'});
