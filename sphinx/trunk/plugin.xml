@@ -25,7 +25,7 @@
 	<fonctions>inc/sphinx.php</fonctions>
 	<chemin dir='' />
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<necessite id="fulltext" />
 	<necessite id="iterateurs" />
 </plugin>
