@@ -8,28 +8,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_importer' => 'Importer',
+	'bouton_invitation' => "Inviter à s'inscrire à la newsletter",
 	'bouton_previsu_importer' => 'Prévisualiser',
 
 	// C
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Confirmation d\'inscription à la Newsletter',
 	'confirmsubscribe_titre_email' => 'Confirmation d\'inscription à la Newsletter',
+	'confirmsubscribe_invite_texte_email_1' => ' @invite_email_from@ vous invite à vous inscrire à la Newsletter de @nom_site_spip@ avec l\'adresse email @email@.Voici son message <blockquote>@invite_email_text@</blockquote>',
 	'confirmsubscribe_texte_email_1' => 'Vous avez demandé à vous inscrire à la Newsletter de @nom_site_spip@ avec l\'adresse email @email@.',
 	'confirmsubscribe_texte_email_2' => 'Pour confirmer votre inscription, merci de cliquer sur le lien suivant :
 @url_confirmsubscribe@',
 	'confirmsubscribe_texte_email_3' => 'Si il s\'agit d\'une erreur de notre part ou si vous avez changé d\'avis, vous pouvez ignorer ce mail&nbsp;: cette demande sera automatiquement annulée.',
+	'confirmsubscribe_invite_texte_email_3' => 'Si il s\'agit d\'une erreur de notre part, vous pouvez ignorer ce mail&nbsp;: cette demande sera automatiquement annulée.',
 	'confirmsubscribe_texte_email_envoye' => 'Un email a été envoyé à cette adresse pour confirmation.',
+
+	// D
+   'defaut_message_invite_email_subscribe' =>'Bonjour, je suis abonné à la newsletter de @nom_site_spip@ et je te propose de t\'y inscrire également.' ,
 
 	// E
 	'erreur_adresse_existante' => 'Cette adresse email est déjà dans la liste',
 	'erreur_technique_subscribe' => 'Une erreur technique a empêché votre inscription.',
+	'explication_to_email' =>'Email de la personne à préinscrire à la newsletter (plusieurs adresses séparées par une virgule. 5 email maximum)',
+
 	// I
 	'icone_creer_mailsubscriber' => 'Ajouter une inscription',
 	'icone_modifier_mailsubscriber' => 'Modifier cette inscription',
+	'info_email_limite_nombre' => 'Invitation limitée à 5 personnes.',
 	'info_1_mailsubscriber' => '1 inscrit aux envois',
 	'info_aucun_mailsubscriber' => 'Aucun inscrit aux envois',
 	'info_nb_mailsubscribers' => '@nb@ inscrits aux envois',
 	'info_1_adresse_a_importer' => '1 adresse à importer',
 	'info_nb_adresses_a_importer' => '@nb@ adresses à importer',
+	'info_email_obligatoire' => 'Email obligatoire',
+    'info_emails_invalide' => "L'un des email est invalide",
 	'info_statut_prepa' => 'pas inscrit',
 	'info_statut_prop' => 'en attente',
 	'info_statut_valide' => 'inscrit',
@@ -39,13 +50,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_listes' => 'Listes',
 	'label_email' => 'Email',
+	'label_from_email' =>'Email qui invite',
 	'label_lang' => 'Langue',
 	'label_nom' => 'Nom',
 	'label_optin' => 'Opt-in',
 	'label_statut' => 'Statut',
 	'label_mailsubscriber_optin' => 'Je veux recevoir la Newsletter',
+	'label_message_invite_email_subscribe' =>"Message d'accompagnement de l'email envoyé",
 	'label_file_import' => 'Fichier à importer',
 	'label_listes_import_subscribers' => 'Inscrire aux listes',
+	'label_to_email' =>'Email à inviter',
 	'label_toutes_les_listes' => 'Toutes',
 	'label_desactiver_notif_1' => 'Desactiver la notification des inscriptions pour cet import',
 	'label_valid_subscribers_1' => 'Valider directement les inscriptions sans demande de confirmation',

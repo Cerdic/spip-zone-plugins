@@ -29,10 +29,14 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 	elseif ($options['statut_ancien'] == 'valide') {
 		$modele = "notifications/mailsubscriber_unsubscribe";
 	}
-	elseif($options['statut'] == 'prop'){
-		$modele = "notifications/mailsubscriber_confirm";
+	elseif($options['statut'] == 'prop')
+	{
+		$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id_mailsubscriber));
+		if (isset ($row['invite_email_from']))
+  			$modele = "notifications/mailsubscriber_invite_confirm";
+  		else
+  			$modele = "notifications/mailsubscriber_confirm";
 	}
-
 	if ($modele){
 		$destinataires = sql_allfetsel("email","spip_mailsubscribers","id_mailsubscriber=".intval($id_mailsubscriber));
 		$destinataires = array_map('reset',$destinataires);

@@ -18,6 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'subscribe_message_ok' => 'Votre inscription avec l\'adresse @email@ a bien été prise en compte.',
 	'subscribe_message_ok_confirm' => 'Vous allez recevoir un email sur l\'adresse @email@ pour confirmer votre inscription.',
+	'subscribe_message_ok_confirm_invite_singulier' => 'Un email a été envoyé à @email@ pour l\'inviter à s\'inscrire.',
+	'subscribe_message_ok_confirm_invite_pluriel' => 'Un email a été envoyé aux emails suivants @email@ pour les inviter à s\'inscrire.',
 	'unsubscribe_message_ok' => 'L\'adresse @email@ a été désinscrite de la Newsletter.',
 
 

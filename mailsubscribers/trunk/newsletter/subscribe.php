@@ -33,6 +33,8 @@ include_spip('inc/autoriser');
  *   lang : string
  *   force : bool permet de forcer une inscription sans doubleoptin (passe direct en valide)
  *   graceful : bool permet a contrario de ne pas inscrire quelqu'un qui s'est desabonne (utilise lors de l'import en nombre, l'utilisateur est ignore dans ce cas)
+ *   invite_email_from : text . utilisé par le formulaire #INVITER_NEWSLETTER_SUBSCRIBE, permet de renseigner la personne qui invite à s'inscrire à la newsletter
+ *   invite_email_text : text . utilisé par le formulaire #INVITER_NEWSLETTER_SUBSCRIBE, permet de renseigner le message personnalisé d'invitation
  * @return bool
  *   true si inscrit comme demande, false sinon
  */
@@ -46,7 +48,7 @@ function newsletter_subscribe_dist($email,$options = array()){
 	}
 
 	$set = array();
-	foreach (array('lang', 'nom') as $k){
+	foreach (array('lang', 'nom','invite_email_from','invite_email_text') as $k){
 		if (isset($options[$k]))
 			$set[$k] = $options[$k];
 	}
@@ -61,6 +63,10 @@ function newsletter_subscribe_dist($email,$options = array()){
 
 	// Si c'est une creation d'inscrit
 	if (!$row){
+		if ( isset($options['invite_email_from']))
+	      	spip_log("Invitation ". $options['invite_email_from'] . " invite $email a s'inscrire " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
+  		else
+      		spip_log("Inscription liste $email " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
 		// on utilise pas objet_inserer car email unique et on ne veut pas passer par etape insertion email='' qui peut echouer
 		// en cas de doublon
 		$set['email'] = $email;

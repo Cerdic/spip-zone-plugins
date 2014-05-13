@@ -23,6 +23,10 @@ function mailsubscribers_upgrade($nom_meta_base_version, $version_cible) {
 		array('mailsubscribers_import_from_clevermail'),
 	);
 
+	$maj['0.3.0'] = array(
+        array('sql_alter',"TABLE spip_mailsubscribers ADD invite_email_from text NOT NULL DEFAULT '' " ),
+        array('sql_alter',"TABLE spip_mailsubscribers ADD invite_email_text text NOT NULL DEFAULT '' " ),
+    );
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
