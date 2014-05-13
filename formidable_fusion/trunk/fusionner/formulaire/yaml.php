@@ -15,7 +15,7 @@ function fusionner_formulaire_yaml_fusionner_dist($fichier,$id_formulaire){
 			include_spip('action/editer_formulaire');
 			include_spip('base/abstract_sql');
 	
-			//On recupere tous les champs du formulaire choisi depuis sa page
+			//On recupere tous les champs du formulaire de base choisi depuis sa page
 			if ($id_formulaire > 0){
 				$formulaire_from = sql_fetsel(
 					'*',
@@ -35,6 +35,10 @@ function fusionner_formulaire_yaml_fusionner_dist($fichier,$id_formulaire){
 					$formulaire_from['saisies'] = array_merge($formulaire_from['saisies'],$formulaire['saisies']);
 					$formulaire_from['saisies'] = serialize($formulaire_from['saisies']);	
 					
+				//si aucun traitement dans le formulaire de base (formulaire_from) reprendre ceux du formulaire importé
+				if(empty($formulaire_from['traitements'])){
+					$formulaire_from['traitements']=serialize($formulaire['traitements']);	
+				}	
 
 				session_set("constructeur_formulaire_formidable_$id_formulaire");
 				$erreur = formulaire_modifier($id_formulaire, $formulaire_from);
