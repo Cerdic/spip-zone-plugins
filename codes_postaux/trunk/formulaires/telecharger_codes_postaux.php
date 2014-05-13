@@ -31,7 +31,7 @@ function formulaires_telecharger_codes_postaux_verifier_dist(){
 	include_spip('inc/config');
 	$erreurs = array();
 	$tab_objet=codes_postaux_config_tab_fichier();
-	$emplacement=sous_repertoire(_DIR_TMP,lire_config('cog/chemin_donnee'));
+	$emplacement=sous_repertoire(_DIR_TMP,'codes_postaux');
 	// login trop court ou existant
 	if ($objet = _request('objet')) {
 		if (!isset($tab_objet[$objet])) {
@@ -84,7 +84,7 @@ include_spip('inc/distant');
 include_spip('inc/config');
 $fichier=copie_locale($source);
 $infos_fichier=pathinfo($source);
-$emplacement=sous_repertoire(_DIR_TMP,lire_config('codes_postaux/chemin_donnee'));
+$emplacement=sous_repertoire(_DIR_TMP,'codes_postaux');
 chmod($emplacement,0777);
 $nom_fichier=$emplacement.$infos_fichier['filename'].'.'.$infos_fichier['extension'];
 $emplacement.$infos_fichier['filename'].'.txt';

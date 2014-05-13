@@ -39,7 +39,7 @@ function codes_postaux_upgrade($nom_meta_base_version, $version_cible){
 function codes_postaux_peupler_base()
 {
 include_spip('inc/config');
-ecrire_config('codes_postaux/chemin_donnee','donnees/');
+
 }
 
 /**

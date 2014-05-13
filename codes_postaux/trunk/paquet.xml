@@ -1,7 +1,7 @@
 <paquet
 	prefix="codes_postaux"
 	categorie="divers"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/codes_postaux-32.png"
@@ -22,8 +22,6 @@
 	<pipeline nom="jqueryui_plugins" inclure="codes_postaux_pipeline.php" />
 	<pipeline nom="declarer_tables_objets_surnoms" inclure="codes_postaux_pipeline.php" />
 	<pipeline nom="autoriser" inclure="codes_postaux_autoriser.php" />
-
-	<necessite nom="spip_bonux" compatibilite="[3.0.0;3.*.*]" />
 
 	<menu nom="codes_postaux" titre="codes_postaux:codes_postaux" parent="menu_edition" icone="images/codes_postaux-16.png" action="codes_postaux" />
 </paquet>

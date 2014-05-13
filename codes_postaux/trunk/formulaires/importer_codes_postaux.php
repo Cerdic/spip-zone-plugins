@@ -16,7 +16,7 @@ function formulaires_importer_codes_postaux_verifier_dist(){
 	*/
          $erreurs=array();
     $tab_fichier=codes_postaux_config_tab_fichier();
-	$emplacement=sous_repertoire(_DIR_TMP,lire_config('codes_postaux/chemin_donnee'));
+	$emplacement=sous_repertoire(_DIR_TMP,'codes_postaux');
 	if (!file_exists($emplacement.$tab_fichier['code_postal']['nom_fichier'])) {
 			$erreurs['fichier'] .= _T('codes_postaux:fichier_introuvable')." ".$emplacement.$tab_fichier[$fichier]['fichier'] ;
 			$erreurs['message_erreur'] .= _T('codes_postaux:fichier_introuvable');
@@ -84,7 +84,7 @@ if(isset($tab_colonne['liaison'])){
 		$tab_filtres[$tab_temp[0]]=$tab_temp[1];
 		}
 
-	$emplacement=sous_repertoire(_DIR_TMP,lire_config('codes_postaux/chemin_donnee'));
+	$emplacement=sous_repertoire(_DIR_TMP,'codes_postaux');
 	$message=  'Importation du fichier '.$fichier."<br />";
 	$fichier_modele=$emplacement.$tab_fichier['code_postal']['nom_fichier'];
 
