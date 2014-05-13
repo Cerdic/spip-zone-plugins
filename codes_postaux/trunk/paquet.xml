@@ -3,10 +3,10 @@
 	categorie="divers"
 	version="2.0.0"
 	etat="stable"
-	compatibilite="[3.0.0;["
+	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/codes_postaux-32.png"
 	schema="1.0"
-	documentation="http://www.spip-contrib.net/codes_postaux"
+	documentation="http://contrib.spip.net/Codes-postaux"
 >	
 
 	<nom>Codes postaux</nom>
@@ -23,7 +23,7 @@
 	<pipeline nom="declarer_tables_objets_surnoms" inclure="codes_postaux_pipeline.php" />
 	<pipeline nom="autoriser" inclure="codes_postaux_autoriser.php" />
 
-	<necessite nom="spip_bonux" compatibilite="[2.3.0;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;3.*.*]" />
 
 	<menu nom="codes_postaux" titre="codes_postaux:codes_postaux" parent="menu_edition" icone="images/codes_postaux-16.png" action="codes_postaux" />
 </paquet>
