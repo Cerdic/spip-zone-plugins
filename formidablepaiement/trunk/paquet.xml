@@ -20,7 +20,7 @@
 	<pipeline nom="affiche_enfants" inclure="formidablepaiement_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="formidablepaiement_pipelines.php" />
 
-	<necessite nom="bank" compatibilite="[2.8.3;2.*]" />
-	<necessite nom="formidable" compatibilite="[2.5.11;2.*]" />
+	<necessite nom="bank" compatibilite="[2.8.3;2.*.*]" />
+	<necessite nom="formidable" compatibilite="[2.5.11;2.*.*]" />
 
 </paquet>
