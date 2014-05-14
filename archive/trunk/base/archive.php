@@ -28,6 +28,10 @@ function archive_declarer_tables_objets_sql($tables){
 	$tables['spip_articles']['statut_images']['refuse'] = "puce-refuser-8.png";
 	$tables['spip_articles']['statut_images']['poubelle'] = "puce-supprimer-8.png";
 	$tables['spip_articles']['statut_images']['archive'] = "puce-archiver-8.png";
+	if(is_array($tables['spip_articles']['statut'][0]['exception']))
+		$tables['spip_articles']['statut'][0]['exception'][] = 'archive';
+	else
+		$tables['spip_articles']['statut'][0]['exception'] = array($tables['spip_articles']['statut'][0]['exception'],'archive');
 	
 	return $tables;
 }
