@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formifusion-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4526"
 >
 
 	<nom>Fusions de formulaires pour Formidable</nom>
