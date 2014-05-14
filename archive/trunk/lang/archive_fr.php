@@ -18,8 +18,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'doc_complete' => 'Documentation compl&eacute;te',
 	
 	//I
+	'info_article_archive' => 'Article archivé',
 	'info_defaut_desc' => 'Vous pouvez d&eacute;finir ici les param&egrave;tres d\'archivage automatique',
-	
+
 	//J
 	'jours_archive' => 'Archiver les articles de plus de :',
 	'jours' => 'jour(s)',
@@ -39,7 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rappel_utilisation' => 'Rappel sur comment l\'utiliser :',
 	
 	// T
+	'texte_statut_archive' => 'archivé',
 	'titre_archive' => 'Le plugin Archive',
+	'titre_archives_rubrique' => 'Les archives de cette rubrique',
 
 	//V
 	'version' => 'Version en cours :'
