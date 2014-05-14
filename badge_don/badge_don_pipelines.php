@@ -8,7 +8,7 @@ function badge_don_insert_head($flux){
 }
 
 function badge_don_affichage_final($page) {
-
+	// ne rien faire si la page en cours n'est pas du html
 	if (!$GLOBALS['html']) return $page;
 	
 	$badge = recuperer_fond('modeles/badge_don', array());
