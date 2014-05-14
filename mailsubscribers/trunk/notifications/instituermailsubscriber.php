@@ -60,6 +60,10 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 			notifications_envoyer_mails($destinataires, $texte);
 		}
 	}
+	// Une fois la demande mail envoyée on réitinialise. On pet la trace de qui a invité la personne à la newsletter
+	// mais c'est un moindre mal si la personne ne valide pas l'invitation et s'inscrit un an plus tard toute seule
+	$ok = sql_updateq('spip_mailsubscribers',	array('invite_email_from' => '','invite_email_text'=>''), "id_mailsubscriber=".intval($id_mailsubscriber) );
+
 }
 
 ?>

@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Declarer les champs postes et y integrer les valeurs par defaut
  */
-function formulaires_inviter_newsletter_subscribe_charger_dist($listes = ''){
+function formulaires_newsletter_invite_charger_dist($listes = ''){
 	$valeurs = array(
 		'to_email' => '',
 		'from_email' => '',
@@ -28,7 +28,7 @@ function formulaires_inviter_newsletter_subscribe_charger_dist($listes = ''){
 /**
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
-function formulaires_inviter_newsletter_subscribe_verifier_dist($listes = ''){
+function formulaires_newsletter_invite_verifier_dist($listes = ''){
 	$erreurs = array();
 	if (!$email = _request('from_email')) {
 		$erreurs['from_email'] = _T('info_obligatoire');
@@ -74,7 +74,7 @@ function formulaires_inviter_newsletter_subscribe_verifier_dist($listes = ''){
 /**
  * Traiter les champs postes
  */
-function formulaires_inviter_newsletter_subscribe_traiter_dist($listes = ''){
+function formulaires_newsletter_invite_traiter_dist($listes = ''){
 
 	// langue par defaut lors de l'inscription : la langue courante dans la page
 	$options = array('lang' => $GLOBALS['spip_lang']);
