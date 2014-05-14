@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/archive-32.png"
-	schema="0.1.0"
+	schema="0.2.0"
 	documentation="http://contrib.spip.net/Plugin-Archive"
 >
 

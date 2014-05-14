@@ -18,6 +18,11 @@ function archive_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_tables',array('spip_articles','spip_rubriques'))
 	);
 	
+	$maj['0.2.0'] = array(
+		array('maj_tables',array('spip_articles')),
+		array('maj_archives')
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -34,5 +39,19 @@ function archive_vider_tables($nom_meta_base_version) {
 	sql_alter('TABLE spip_rubriques DROP COLUMN archive_date');
 	effacer_meta('archive');
 	effacer_meta($nom_meta_base_version);
+}
+
+/**
+ * Mettre à jour les archives avec le champ archive à 1 vers le statut archive
+ */
+function maj_archives(){
+	$archives = sql_allfetsel('id_article','spip_articles','archive=1');
+	if(is_array($archives) && count($archives) > 0){
+		foreach($archives as $archive){
+			$id_article = $archive['id_article'];
+			$modifs = array('statut' => 'archive');
+			$modif = article_modifier($id_article,$modifs);
+		}
+	}
 }
 ?>

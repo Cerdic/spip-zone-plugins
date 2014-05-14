@@ -13,6 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function archive_declarer_tables_objets_sql($tables){
 	$tables['spip_articles']['field']['archive_date'] = "datetime not null";
+	$tables['spip_articles']['field']['archive_statut'] = "varchar(255)  DEFAULT '0' NOT NULL";
 	$tables['spip_rubriques']['field']['archive_date'] = "datetime not null";
 	
 	/**
