@@ -13,7 +13,7 @@ function genie_archive_cron($t){
 			include_spip('action/editer_article');
 			foreach ($articles as $article) {
 				$id_article = $article['id_article'];
-				$modifs = array('archive_date'=>date(),'statut' => 'archive');
+				$modifs = array('statut' => 'archive');
 				$modif = article_modifier($id_article,$modifs);
 			}
 		}

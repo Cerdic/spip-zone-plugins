@@ -28,7 +28,7 @@
 				<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{idrub,#ARRAY}}|oui)selected="selected"]>#TITRE (#ID_RUBRIQUE)</option>
 					<BOUCLE_ss_rubriques(RUBRIQUES) {id_parent} {par titre}>
 					<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|in_array{#ENV{idrub,#ARRAY}}|oui)selected="selected"]>#TITRE (#ID_RUBRIQUE)</option>
-						<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+						<BOUCLE_sous_rubriques(BOUCLE_ss_rubriques)></BOUCLE_sous_rubriques>
 					</BOUCLE_ss_rubriques>
 				</BOUCLE_rubriques>
 				</select>

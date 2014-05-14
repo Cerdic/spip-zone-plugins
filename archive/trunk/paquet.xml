@@ -1,8 +1,3 @@
-	<pipeline>
-        <nom>taches_generales_cron</nom>
-        <inclure>archive_pipelines.php</inclure>
-	</pipeline>
-</plugin>
 <paquet
 	prefix="archive"
 	categorie="date"
@@ -26,5 +21,6 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/archive.php" />
 	<pipeline nom="pre_boucle" inclure="archive_pipelines.php" />
+	<pipeline nom="post_edition" inclure="archive_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="archive_pipelines.php" />
 </paquet>
