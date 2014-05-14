@@ -3,18 +3,21 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Modification de la requète des objets pour ne pas afficher les archives par défaut
-function archive_pre_boucle($boucle){
-	if ($boucle->type_requete == 'articles') {
-		$id_table = $boucle->id_table;
-		
-		// Si le critere {archive} ou {tout} est absent on affiche uniquement les elements non archivés
-		if (!isset($boucle->modificateur['criteres']['archive']) && !isset($boucle->modificateur['tout']) && !isset($boucle->modificateur['statut'])){
-			$champ_archive = $id_table.'.statut';
-			$boucle->where[]= array("'!='", "'$champ_archive'", "'archive'");
-		}
+/**
+ * Insertion dans le pipeline affiche_milieu (SPIP)
+ *
+ * Sur les pages de rubriques dans le privé, afficher les articles archivés de la rubrique
+ *
+ * @param $flux array
+ * 	Le contexte du pipeline
+ * @return $flux array
+ * 	Le contexte du pipeline modifié
+ */
+function archive_affiche_milieu($flux){
+	if($flux['args']['exec'] == 'rubrique'){
+		$flux['data'] .= recuperer_fond('prive/objets/liste/articles', array('titre'=>_T('archive:titre_archives_rubrique'),'statut'=>'archive','id_rubrique'=>$flux['args']["id_rubrique"]));
 	}
-	return $boucle;
+	return $flux;
 }
 
 // Lancement des taches cron pour l'archivage
