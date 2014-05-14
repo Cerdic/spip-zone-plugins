@@ -7,6 +7,9 @@ function sm_insert_head($flux){
 
 // Ajouter soundmanager s'il n'y est pas déjà et qu'on a des enclosures dans la page
 function sm_affichage_final($page) {
+
+	if (!$GLOBALS['html']) return $page;
+
 	if (!strpos($page, 'script/soundmanager2.js')){
 		if(strpos($page, 'rel="enclosure"')  OR strpos($page, "rel='enclosure'") AND $GLOBALS['html']){					
 			$script .= "\n"."<script type=\"text/javascript\" src=\"" . find_in_path('script/soundmanager2.js') . "\"></script>"."\n";
