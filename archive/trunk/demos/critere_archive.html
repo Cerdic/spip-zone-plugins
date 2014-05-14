@@ -1,0 +1,29 @@
+<h2>Démo du critère <code>{archive}</code></h2>
+
+<h3>Archivés et publiés en même temps avec <code>{archive}</code></h3>
+
+<B_articles>
+#ANCRE_PAGINATION
+<ul>
+<BOUCLE_articles(ARTICLES){archive}{pagination 20}>
+<li>#TITRE[(#STATUT|=={archive}|oui) (Archive)]</li>
+</BOUCLE_articles>
+</ul>
+<div class="pagination">#PAGINATION</div>
+</B_articles>
+Pas d'archives
+<//B_articles>
+
+<h3>Seulement les archives avec <code>{archive seulement}</code></h3>
+
+<B_articles_archives>
+#ANCRE_PAGINATION
+<ul>
+<BOUCLE_articles_archives(ARTICLES){archive seulement}{pagination 20}>
+<li>#TITRE est archivé</li>
+</BOUCLE_articles_archives>
+</ul>
+<div class="pagination">#PAGINATION</div>
+</B_articles_archives>
+Pas d'archives
+<//B_articles_archives>
