@@ -14,6 +14,7 @@ function formulaires_newsletter_invite_charger_dist($listes = ''){
 	$valeurs = array(
 		'to_email' => '',
 		'from_email' => '',
+		'afficher_from_email' => 'oui',
 		'message_invite_email_subscribe' => ''
 	);
 
@@ -21,6 +22,9 @@ function formulaires_newsletter_invite_charger_dist($listes = ''){
 		$valeurs['from_email'] = $GLOBALS['visiteur_session']['email'];
 	elseif (isset($GLOBALS['visiteur_session']['session_email']))
 		$valeurs['from_email'] = $GLOBALS['visiteur_session']['session_email'];
+
+	if ($valeurs['from_email']!='' )
+		$valeurs['afficher_from_email']='non' ;
 
 	return $valeurs;
 }
