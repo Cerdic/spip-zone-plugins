@@ -121,8 +121,8 @@ echo '</pre>';
 #SET{lon,36.817}
 #SET{lat,1.283}
 
-[(#SET{grouper,#VAL{'INTERVAL(GEODIST('}|concat{#GET{lat}}|concat{','}|concat{#GET{lon}}|concat{',UINT(properties.geo.lat),UINT(properties.geo.lon)),100,300,1000,3000,10000,30000)'}})]
-[(#SET{sqlf,"SELECT COUNT(*) AS c, "[(#GET{grouper}) AS grouper, ]GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY grouper ORDER BY c DESC LIMIT 30})]
+[(#SET{grouper,#VAL{'INTERVAL(GEODIST('}|concat{#GET{lat}}|concat{','}|concat{#GET{lon}}|concat{',UINT(properties.geo.lat),UINT(properties.geo.lon)),100,300,1000,3000,10000,30000,100000,300000,1000000,3000000,10000000)'}})]
+[(#SET{sqlf,"SELECT COUNT(*) AS c, "[(#GET{grouper}) AS grouper, ]GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY grouper ORDER BY grouper ASC LIMIT 30})]
 
 
 
@@ -140,7 +140,7 @@ echo '</pre>';
         <B_facette>
             <h2>Liste des facettes</h2>
         <BOUCLE_facette(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
-		#VALEUR{c} = <a href="[(#SELF|parametre_url{tag,[(#VALEUR{facette}|sinon{-})]})]">[(#VALEUR{facette}|sinon{<i>sans tag</i>})]</a><br />
+		<a href="[(#SELF|parametre_url{tag,[(#VALEUR{facette}|sinon{-})]})]">[(#VALEUR{facette}|sinon{<i>sans tag</i>})]</a> (#VALEUR{c} documents)<br />
         </BOUCLE_facette>
         </B_facette>
 
