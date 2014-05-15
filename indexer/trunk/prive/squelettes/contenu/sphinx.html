@@ -63,7 +63,7 @@ echo '</pre>';
 [(#ENV{tag}|?{[(#SET{tag,[IN(properties.tags,(#ENV{tag}|_q)) AS tag]})]})]
 [(#ENV{tag}|=={'-'}?{[(#SET{tag,"LENGTH(properties.tags)=0 AS tag"})]})]
 
-[(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet [, (#GET{tag})] FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)])[ (#GET{tag}|?{AND tag=1})][ ORDER BY (#GET{order})] LIMIT 10})]
+[(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|concat{' '}|concat{#ENV{tag}}|_q|concat{","})]'limit=200') as snippet [, (#GET{tag})] FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)])[ (#GET{tag}|?{AND tag=1})][ ORDER BY (#GET{order})] LIMIT 10})]
 
 
 
