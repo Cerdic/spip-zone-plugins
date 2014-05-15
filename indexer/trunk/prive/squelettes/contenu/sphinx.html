@@ -25,8 +25,11 @@ echo '</pre>';
             <h2>Liste des documents trouvés</h2>
             <dl>
         <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
-                [<dt><a href="[(#URI)]">(#TITLE)</a></dt>
-                <dd>#SNIPPET</dd>]
+                [<dt><a href="[(#URI)]">(#TITLE)</a>
+                 [<small>(#DATE|affdate_court)</small>]
+                </dt>
+                 [<dd>(#SNIPPET|sinon{#SUMMARY})</dd>]
+                ]
         </BOUCLE_documents>
             </dl>
         </B_documents>
