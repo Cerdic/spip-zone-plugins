@@ -1,0 +1,32 @@
+<paquet
+	prefix="sjcycle"
+	categorie="multimedia"
+	version="2.3.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/sjcycle-32.png"
+	schema="0.5"
+	documentation="http://www.spip-contrib.net/Plugin-Spip-jQuery-Cycle-2"
+>	
+
+	<nom>jQuery Cycle</nom>
+	<!-- Un diaporama param&#233;trable pour Spip -->
+
+	<auteur lien="http://www.minimalteck.fr/">Minimalteck</auteur>
+	<auteur>Yffic</auteur>
+
+	<pipeline nom="insert_head_css" inclure="sjcycle_pipelines.php" />
+	<pipeline nom="insert_head" inclure="sjcycle_pipelines.php" />
+	<pipeline nom="header_prive" action="insert_head" inclure="sjcycle_pipelines.php" />
+	<pipeline nom="affiche_gauche" inclure="sjcycle_prive_pipelines.php" />
+	<pipeline nom="ieconfig_metas" inclure="sjcycle_ieconfig_metas.php" />
+	<pipeline nom="autoriser" inclure="inc/sjcycle_autoriser.php" />
+
+	<necessite nom="saisies" compatibilite="[1.9.0;[" />
+	<necessite nom="YAML" compatibilite="[1.4.1;[" />
+
+	<utilise nom="aveline" compatibilite="[1.7.0;[" />
+	<utilise nom="palette" compatibilite="[1.2.2;[" />
+
+	<menu nom="sjcycle" titre="sjcycle:titre_menu" parent="menu_squelette" icone="images/sjcycle-16.png" action="configurer_sjcycle" />
+</paquet>

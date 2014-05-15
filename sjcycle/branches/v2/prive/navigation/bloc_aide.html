@@ -1,0 +1,8 @@
+#BOITE_OUVRIR{#CHEMIN_IMAGE{sjcycle-24.png}|balise_img{'',cadre-icone}|concat{#REM|concat{sjcycle:boite_info_titre}|_T}|concat{#AIDER{sjcycle}},'simple','section'}
+<:sjcycle:boite_info:>
+<div class='raccourcis'>
+[(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, left})]
+[(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, center})]
+[(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, right})]
+</div>
+#BOITE_FERMER
