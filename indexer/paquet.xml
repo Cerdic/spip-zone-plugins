@@ -7,16 +7,13 @@
 	logo="prive/themes/spip/images/indexer-64.png"
 	documentation=""
 >
-	<!--
-		Paquet généré le 2014-05-14 22:41:38
-	-->
 
 	<nom>Indexer</nom>
 
 	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Rastapopoulos</auteur>
+	<auteur>Fil</auteur>
 
 	<licence>GNU/GPL</licence>
-
-
 
 </paquet>
