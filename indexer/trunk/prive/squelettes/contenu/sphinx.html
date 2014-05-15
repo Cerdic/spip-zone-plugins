@@ -1,6 +1,6 @@
 <h1>Test SPHINX</h1>
 
-[(#FORMULAIRE_RECHERCHE{#URL_ECRIRE{sphinx}})]
+[(#FORMULAIRE_RECHERCHE{#SELF})]
 
 <?php
 /*
@@ -14,18 +14,21 @@ echo '</pre>';
 
 ?>
 
-[(#SET{sql,SELECT * FROM [(#ENV{source,spip})] WHERE MATCH('[(#ENV{recherche})]') LIMIT 10})]
+[(#SET{sql,"SELECT *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) LIMIT 10})]
+
+<pre>[(#GET{sql}|htmlspecialchars)]</pre>
 
 
 <BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
 
         <B_documents>
             <h2>Liste des documents trouvés</h2>
-            <ul>
+            <dl>
         <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
-                [<li><a href="[(#URI)]">(#TITLE)</a></li>]
+                [<dt><a href="[(#URI)]">(#TITLE)</a></dt>
+                <dd>#SNIPPET</dd>]
         </BOUCLE_documents>
-            </ul>
+            </dl>
         </B_documents>
 
 
