@@ -69,7 +69,8 @@ class SpipSourcesIndexer {
         return $data + [
             'source' => 0,
             'start'  => 0,
-            'timeout' => 0
+            'timeout' => 0,
+            'sources' => [],
         ];
     }
 
@@ -119,7 +120,7 @@ class SpipSourcesIndexer {
             while ($parts->valid()) {
                 $part = $parts->current();
 
-                $documents = $source->getAllDocuments($part['start'], $part['end']);
+                $documents = $source->getDocuments($part['start'], $part['end']);
 
                 if (count($documents)) {
                     spip_timer('indexage');

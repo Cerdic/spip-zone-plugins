@@ -8,11 +8,11 @@ class Articles extends SpipDocuments {
 
 
 
-    public function getAllDocuments($start = 0, $end = 0) {
+    public function getDocuments($start = 0, $end = 0, $column = 'id_article') {
 
         $where = [];
-        if ($start) $where[] = "id_article >= $start";
-        if ($end)   $where[] = "id_article < $end";
+        if ($start) $where[] = "$column >= $start";
+        if ($end)   $where[] = "$column < $end";
 
         $all = sql_allfetsel(
             [

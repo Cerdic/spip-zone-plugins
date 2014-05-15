@@ -4,10 +4,10 @@ namespace Indexer\Sources;
 
 
 interface SourceInterface {
-    public function getDocuments();
 
+    public function getDocuments($start = 0, $end = 0, $column = '');
 
-    public function getAllDocuments($start = 0, $end = 0);
+    public function getAllDocuments();
 
     /**
      * Indique le nombre de découpages pour indexer, en prenant $count éléments à chaque fois

@@ -13,9 +13,24 @@ class SpipDocuments implements SourceInterface {
 
     public function __toString() { return get_class($this); }
 
-    public function getDocuments() {}
+    /**
+     * Retourne les documents ayant certaines conditions
+     *
+     * @param mixed $start     Condition qui remplira `$column >= $start`
+     * @param mixed $end       Condition qui remplira `$column < $end`
+     * @param string $column   Colonne affectée
+     * @return \Indexer\Sources\Documents[]
+     */
+    public function getDocuments($start = 0, $end = 0, $column = 'id_element') {}
 
-    public function getAllDocuments($start = 0, $end = 0) {}
+    /**
+     * Retourne tous les documents (Peut provoquer des problèmes de mémoire !)
+     * @return \Indexer\Sources\Documents[]
+     */
+    public function getAllDocuments() {
+        return $this->getDocuments();
+    }
+
 
 
     /** @param bool $bool */
@@ -23,9 +38,9 @@ class SpipDocuments implements SourceInterface {
         $this->tables_liens = $bool;
     }
 
-	public function getObjectId($objet, $id_objet){
-		return crc32($GLOBALS['meta']['adresse_site'] . $objet) + intval($id_objet);
-	}
+    public function getObjectId($objet, $id_objet){
+        return crc32($GLOBALS['meta']['adresse_site'] . $objet) + intval($id_objet);
+    }
 
     public function getAuthorsProperties($objet, $id_objet) {
         if ($this->tables_liens) {
