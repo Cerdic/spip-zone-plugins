@@ -1,10 +1,10 @@
 <paquet
 	prefix="numero"
 	categorie="navigation"
-	version="1.1.0"
+	version="2.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/numerote-32.png"
+	logo="prive/themes/spip/images/numeroter-32.png"
 	documentation="http://www.spip-contrib.net/Numerotation-Rapide"
 >	
 

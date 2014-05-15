@@ -12,7 +12,7 @@ function action_renumeroter_dist() {
 		$type = $arg[0];
 	
 	include_spip('inc/numeroter');
-	numero_numeroter_rubrique(intval($arg[1]),$type);
+	numero_numeroter_objets($type,intval($arg[1]));
 }
 
 ?>

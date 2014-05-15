@@ -1,0 +1,36 @@
+<div class="formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{objet}-#ENV{id,nouveau}">
+	<h3 class="titrem"><:numero:titre_formulaire_numeroter:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		#SET{fl,numero}
+		<ul>
+			#SET{fratrie,#ENV{_objet}|numero_lister_fratrie{#ENV{_id_objet}}}
+			#SET{precedent,#ENV{_id_objet}|numero_trouver_precedent{#GET{fratrie}}}
+			#SET{name,precedent}#SET{obli,''}#SET{defaut,#GET{precedent}}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			#SET{value,#ENV{precedent,''}|strlen|?{#ENV{precedent,''},#GET{defaut}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<select name="#GET{name}" class="select" id="#GET{name}">
+					#SET{val,0}
+					<option value="#GET{val}"[(#GET{value}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					<BOUCLE_fratrie(POUR){tableau #GET{fratrie}}>
+					#SET{val,#CLE}
+					<option value="#GET{val}"[(#GET{value}|=={#GET{val}}|oui)selected="selected"][(#GET{val}|=={#ENV{_id_objet}}|oui)disabled="disabled"]>[(#VALEUR)]</option>
+					</BOUCLE_fratrie>
+				</select>
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'>
+			<input type='submit' class='submit' name='renumeroter' value='<:bouton_changer:>' />
+		</p>
+	</div></form>
+</div>
