@@ -12,8 +12,8 @@ class Sources implements \IteratorAggregate {
 
     }
 
-    public function register(SourceInterface $source) {
-        $this->sources[] = $source;
+    public function register($cle, SourceInterface $source) {
+        $this->sources[$cle] = $source;
     }
 
     public function getIterator()

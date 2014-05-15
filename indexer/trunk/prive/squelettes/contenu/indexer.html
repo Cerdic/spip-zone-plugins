@@ -13,7 +13,8 @@ $indexer->registerStorage(
 
 
 $sources = new Indexer\Sources\Sources();
-$sources->register(new Spip\Indexer\Sources\Articles());
+$sources->register('articles', new Spip\Indexer\Sources\Articles());
+$sources = pipeline('indexer_sources', $sources);
 
 $SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
 $SpipSourcesIndexer->setTablesLiensAuto();
