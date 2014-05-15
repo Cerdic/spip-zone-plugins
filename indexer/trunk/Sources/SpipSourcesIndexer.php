@@ -16,6 +16,9 @@ class SpipSourcesIndexer {
     /** @var bool Tables de liens présentes (spip 3 ?) */
     private $tables_liens = true;
 
+    /** @var string clé de config */
+    private $meta_stats = 'indexer/indexing/stats';
+
     /**
      *
      *
@@ -60,28 +63,45 @@ class SpipSourcesIndexer {
     }
 
 
-    public function loadIndexesInfos() {
+    public function loadIndexesStats() {
         include_spip('inc/config');
-        $data = lire_config('indexer/indexing/last', []);
-        if (!is_array($data)) {
-            $data = [];
+        $stats = lire_config($this->meta_stats, []);
+        if (!is_array($stats)) {
+            $stats = [];
         }
-        return $data + [
-            'source' => 0,
-            'start'  => 0,
-            'timeout' => 0,
+        return $stats + [
+            'last' => [
+                'sourceClass' => '',
+                'source'      => 0,
+                'part'        => 0,
+                'documents'   => 0,
+                'time' => [
+                    'documents'   => 0,
+                    'indexing'    => 0,
+                ],
+            ],
             'sources' => [],
         ];
     }
 
-    public function saveIndexesInfos($data) {
-        include_spip('inc/config');
-        ecrire_config('indexer/indexing/last', $data);
+    public function loadIndexesStatsClean() {
+        $stats = $this->loadIndexesStats();
+        $stats['last']['documents'] = 0;
+        $stats['last']['time'] = [
+            'documents'   => 0,
+            'indexing'    => 0,
+        ];
+        return $stats;
     }
 
-    public function resetIndexesInfos() {
+    public function saveIndexesStats($stats) {
         include_spip('inc/config');
-        effacer_config('indexer/indexing/last');
+        ecrire_config($this->meta_stats, $stats);
+    }
+
+    public function resetIndexesStats() {
+        include_spip('inc/config');
+        effacer_config($this->meta_stats);
     }
 
 
@@ -92,82 +112,128 @@ class SpipSourcesIndexer {
 
         $this->initTimeout();
 
-        $infos = $this->loadIndexesInfos();
-        $this->resetIndexesInfos();
-
-        echo "<h1>Indexer tous les contenus :</h1>\n";
-        echo "\n<pre>"; print_r($infos); echo "</pre>\n";
+        $stats = $this->loadIndexesStatsClean();
+        $this->resetIndexesStats();
 
         $sources = $this->sources->getIterator();
-        if ($infos['sources']) {
-            $sources->seek($infos['sources']);
+        // se replacer à la dernière source renseignée (cas d'une indexation non terminée)
+        if ($stats['last']['source']) {
+            $sources->seek($infos['last']['source']);
         }
 
         while ($sources->valid()) {
-            $key    = $sources->key();
-            $source = $sources->current();
+            $skey    = $sources->key();
+            $source  = $sources->current();
 
+            $stats['last']['source'] = $skey;
+            $stats['last']['sourceClass'] = (string)$source;
 
-            $source->setTablesLiens($this->tables_liens); // pour SPIP 2.1
-            echo "<h2>Analyse de $source :</h2>\n";
-            spip_timer('source');
-
-            $parts = new \ArrayIterator($source->getParts(1000));
-            if ($infos['start']) {
-                $parts->seek($infos['start']);
+            if (!isset($stats['sources'][$skey])) {
+                $stats['sources'][$skey] = [
+                    'sourceClass' => (string)$source,
+                    'documents' => 0,
+                    'time' => [
+                        'documents' => 0,
+                        'indexing' => 0,
+                        'total' => 0
+                    ]
+                ];
             }
 
-            while ($parts->valid()) {
-                $part = $parts->current();
-
-                $documents = $source->getDocuments($part['start'], $part['end']);
-
-                if (count($documents)) {
-                    spip_timer('indexage');
-                    $this->indexer->replaceDocuments($documents);
-
-                    echo "<br /><strong>Temps pour indexer " . count($documents). "</strong>\n";
-                    echo "<br /><i>ids entre $part[start] et $part[end] :</i><br />\n";
-                    echo spip_timer('indexage');
-                }
-
-                if ($this->isTimeout()) {
-                    $this->saveIndexesInfos([
-                        'timeout' => true,
-                        'source' => $key,
-                        'sourceClass' => (string)$source,
-                        'sourceTime'  => spip_timer('source'),
-                        'start' => $parts->key(),
-                    ]);
-                    return false;
-                }
-
-                $parts->next();
-            }
-
-
-            echo "<hr /><strong>Temps pour $source :</strong><br />";
-            echo $t = spip_timer('source');
-
+            $this->indexSource($source, $skey, $stats);
 
             if ($this->isTimeout()) {
-                $this->saveIndexesInfos([
-                    'timeout' => true,
-                    'source' => $key,
-                    'sourceClass' => (string)$source,
-                    'sourceTime'  => $t,
-                    'start' => 0,
-                ]);
-                return false;
+                break;
             }
-
 
             $sources->next();
         }
 
+        if ($this->isTimeout()) {
+            $this->saveIndexesStats($stats);
+            return false;
+        }
+
+        $this->resetIndexesStats();
+        return $stats;
+    }
 
 
-        $this->resetIndexesInfos();
-        return true;
+
+    private function indexSource($source, $skey, &$stats) {
+
+        $source->setTablesLiens($this->tables_liens); // pour SPIP 2.1
+
+        echo "<h2>Analyse de $source :</h2>\n";
+        spip_timer('source');
+
+        // on découpe les documents de cette sources en parts d'un certain nombre
+        // afin d'éviter un timeout et une surcharge mémoire
+        $parts = new \ArrayIterator($source->getParts(1000));
+
+        // on se replace à la dernière part renseignée (cas d'une indexation non terminée)
+        if ($stats['last']['part']) {
+            $parts->seek($stats['last']['part']);
+        }
+
+        while ($parts->valid()) {
+            $part = $parts->current();
+            $stats['last']['part'] = $parts->key();
+            $this->indexSourcePart($source, $skey, $part, $stats);
+
+            if ($this->isTimeout()) {
+                $t = spip_timer('source', true);
+                $stats['sources'][$skey]['time']['total'] += $t;
+                return false;
+            }
+            $parts->next();
+        }
+
+        echo "<hr /><strong>Temps pour $source :</strong><br />";
+        $t = spip_timer('source', true);
+        $stats['sources'][$skey]['time']['total'] += $t;
+        echo $this->getNiceTime( $stats['sources'][$skey]['time']['total'] );
+    }
+
+
+
+    private function indexSourcePart($source, $skey, $part, &$stats) {
+
+        spip_timer('documents');
+        $documents = $source->getDocuments($part['start'], $part['end']);
+        $t = spip_timer('documents', true);
+        $nb = count($documents);
+
+        $stats['last']['documents'] += $nb;
+        $stats['last']['time']['documents'] += $t;
+
+        $stats['sources'][$skey]['documents'] += $nb;
+        $stats['sources'][$skey]['time']['documents'] += $t;
+
+        if ($nb) {
+            echo "<br /><strong>Temps pour indexer $nb documents (ids $part[start] à $part[end])</strong>\n";
+            echo "<br />Documents: " . $this->getNiceTime($t) . "\n";
+
+            spip_timer('indexing');
+            $this->indexer->replaceDocuments($documents);
+            $t = spip_timer('indexing', true);
+
+            $stats['last']['time']['indexing'] += $t;
+            $stats['sources'][$skey]['time']['indexing'] += $t;
+            echo "<br />Indexage: " . $this->getNiceTime($t) . "\n";
+        }
+    }
+
+
+
+    /** Retourne un temps formaté pour une belle lecture */
+    public function getNiceTime($p) {
+        if ($p < 1000)
+            $s = '';
+        else {
+            $s = sprintf("%d ", $x = floor($p/1000));
+            $p -= ($x*1000);
+        }
+        return $s . sprintf($s?"%07.3f ms":"%.3f ms", $p);
     }
 }
