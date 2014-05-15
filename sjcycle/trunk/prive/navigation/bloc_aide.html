@@ -1,8 +1,24 @@
-#BOITE_OUVRIR{#CHEMIN_IMAGE{sjcycle-24.png}|balise_img{'',cadre-icone}|concat{#REM|concat{sjcycle:boite_info_titre}|_T}|concat{#AIDER{sjcycle}},'simple','section'}
+#BOITE_OUVRIR{#CHEMIN_IMAGE{sjcycle-24.png}|balise_img{'',cadre-icone}|concat{#REM|concat{sjcycle:boite_info_titre}|_T},'simple','section'}
 <:sjcycle:boite_info:>
 <div class='raccourcis'>
-[(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, left})]
-[(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, center})]
-[(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, right})]
+	[<strong>(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, left})</strong>]
+	[<strong>(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}})</strong>]
+	[<strong>(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, right})</strong>]
 </div>
+
+<:sjcycle:boite_info_explication_docs:>
+<div class="raccourcis">
+	#SET{docs,#ARRAY}
+<BOUCLE_docs(DOCUMENTS){id_article=#ENV{id_article}}{0,2}>#SET{docs,#GET{docs}|push{#ID_DOCUMENT}}</BOUCLE_docs>
+	[<strong>(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, docs=[(#GET{docs}|implode{','})]})</strong>]
+</div>
+
+
+<:sjcycle:boite_info_explication_largeur:>
+<div class="raccourcis">
+	[<strong>(#VAL{sjcycle}|affiche_raccourci_doc{#ENV{id_article}, largeurmax=200})</strong>]
+</div>
+
+<:sjcycle:boite_info_explication:>
+
 #BOITE_FERMER

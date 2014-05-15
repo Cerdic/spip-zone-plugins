@@ -6,8 +6,8 @@ function sjcycle_affiche_gauche($flux){
 	include_spip('inc/meta');
 
 	if ($flux['args']['exec'] == 'article_edit') {
-		$conf_jcycle = lire_config('sjcycle');
-		if($conf_jcycle['afficher_aide']) {
+		$conf_sjcycle = lire_config('sjcycle');
+		if($conf_sjcycle['afficher_aide']) {
 			$document='';
 			$document = sql_countsel('spip_documents as docs JOIN spip_documents_liens AS lien ON docs.id_document=lien.id_document', '(lien.id_objet='.$flux["args"]["id_article"].') AND (lien.objet="article") AND (docs.extension REGEXP "jpg|png|gif")');
 			if ($document >= 2){
