@@ -1,0 +1,47 @@
+<h1>Test SPHINX</h1>
+
+[(#FORMULAIRE_RECHERCHE{#URL_ECRIRE{sphinx}})]
+
+<?php
+/*
+include_spip('inc/indexer');
+$sphinx = new Sphinx\SphinxQL();
+
+echo '<pre>';
+print_r($sphinx->allfetsel('SELECT titre FROM spip WHERE MATCH(\'Paris Brest\') LIMIT 10'));
+echo '</pre>';
+*/
+
+?>
+
+[(#SET{sql,SELECT * FROM [(#ENV{source,spip})] WHERE MATCH('[(#ENV{recherche})]') LIMIT 10})]
+
+
+<BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
+
+        <B_documents>
+            <h2>Liste des documents trouvés</h2>
+            <ul>
+        <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
+                [<li><a href="[(#URI)]">(#TITLE)</a></li>]
+        </BOUCLE_documents>
+            </ul>
+        </B_documents>
+
+
+        <B_meta>
+            <h2>Métas associées</h2>
+            <dl>
+        <BOUCLE_meta(DATA){source tableau, #VALEUR}{si #CLE|=={meta}}>
+                [<dt>(#CLE)</dt>]
+                [<dt><pre>(#VALEUR**|print_r{1})</pre></dt>]
+        </BOUCLE_meta>
+            </dl>
+        </B_meta>
+
+
+
+</BOUCLE_recherche>
+
+
+
