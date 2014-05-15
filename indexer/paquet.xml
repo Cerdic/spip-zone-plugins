@@ -1,0 +1,22 @@
+<paquet
+	prefix="indexer"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[2.1.0;3.1.*]"
+	logo="prive/themes/spip/images/indexer-64.png"
+	documentation=""
+>
+	<!--
+		Paquet généré le 2014-05-14 22:41:38
+	-->
+
+	<nom>Indexer</nom>
+
+	<auteur>Matthieu Marcillaud</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+
+</paquet>
