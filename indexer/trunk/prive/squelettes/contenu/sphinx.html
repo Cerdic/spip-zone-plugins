@@ -14,7 +14,7 @@ echo '</pre>';
 
 ?>
 
-[(#SET{sql,"SELECT *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) LIMIT 10})]
+[(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) LIMIT 10})]
 
 <pre>[(#GET{sql}|htmlspecialchars)]</pre>
 
@@ -25,7 +25,7 @@ echo '</pre>';
             <h2>Liste des documents trouvés</h2>
             <dl>
         <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
-                [<dt><a href="[(#URI)]">(#TITLE)</a>
+                [<dt>#SCORE <a href="[(#URI)]">(#TITLE)</a>
                  [<small>(#DATE|affdate_court)</small>]
                 </dt>
                  [<dd>(#SNIPPET|sinon{#SUMMARY})</dd>]
