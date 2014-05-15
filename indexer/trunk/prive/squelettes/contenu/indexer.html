@@ -7,7 +7,7 @@ include_spip('inc/indexer');
 $indexer = new Indexer\Indexer();
 
 $indexer->registerStorage(
-    new Indexer\Storage\Sphinx(new Sphinx\SphinxQL(), 'spip')
+    new Indexer\Storage\Sphinx(new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), 'spip')
 );
 
 

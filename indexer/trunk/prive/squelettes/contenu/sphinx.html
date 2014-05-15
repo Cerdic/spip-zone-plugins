@@ -5,7 +5,7 @@
 <?php
 /*
 include_spip('inc/indexer');
-$sphinx = new Sphinx\SphinxQL();
+$sphinx = new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 
 echo '<pre>';
 print_r($sphinx->allfetsel('SELECT titre FROM spip WHERE MATCH(\'Paris Brest\') LIMIT 10'));
