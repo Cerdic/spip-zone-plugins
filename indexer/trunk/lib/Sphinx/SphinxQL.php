@@ -17,7 +17,7 @@ class SphinxQL {
 	}
 
 	/**
-	 * Se connecter à Shinx
+	 * Se connecter à Sphinx
 	**/
 	public function connect() {
 		$this->sql = new \PDO("mysql:host=" . $this->host . ";port=" . $this->port, "", "");
