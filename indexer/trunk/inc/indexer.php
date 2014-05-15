@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Constantes pour connexion à Sphinx
 defined('SPHINX_SERVER_HOST') || define('SPHINX_SERVER_HOST', '127.0.0.1');
 defined('SPHINX_SERVER_PORT') || define('SPHINX_SERVER_PORT', 9306);
-
+defined('SPHINX_DEFAULT_INDEX') || define('SPHINX_DEFAULT_INDEX', 'spip');
 
 // Charge les classes possibles de l'indexer
 require_once _DIR_PLUGIN_INDEXER . 'lib/Composer/Autoload/ClassLoader.php';
