@@ -14,7 +14,27 @@ echo '</pre>';
 
 ?>
 
-[(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) LIMIT 10})]
+<aside class="tri">
+
+	[(#ENV{order}|match{date}|?{
+		[(#SET{order,date DESC})]
+		résultats triés par date
+	})]
+
+	<div>
+	[(#GET{order}|?{
+		<a href="[(#SELF|parametre_url{order,''})]">trier par pertinence</a>
+	,
+		<a href="[(#SELF|parametre_url{order,date})]">trier par date</a>
+	})]
+	</div>
+</aside>
+
+
+
+[(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)])[ ORDER BY (#GET{order})] LIMIT 10})]
+
+
 
 <pre>[(#GET{sql}|htmlspecialchars)]</pre>
 
@@ -48,6 +68,4 @@ echo '</pre>';
 
 
 </BOUCLE_recherche>
-
-
 
