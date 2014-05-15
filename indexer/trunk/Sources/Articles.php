@@ -25,7 +25,7 @@ class Articles extends SpipDocuments {
             $where, // Where
             '', // Gr By
             '', // Or By
-            '1000' // Limit
+            '' // Limit
         );
 
         $documents = [];

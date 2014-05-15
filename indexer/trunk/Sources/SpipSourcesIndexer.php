@@ -28,6 +28,12 @@ class SpipSourcesIndexer {
     }
 
 
+    public function setTablesLiensAuto() {
+        include_spip('inc/plugin');
+        $liens = spip_version_compare($GLOBALS['spip_version_branche'], '3.0', '>=');
+        $this->setTablesLiens($liens);
+    }
+
     public function setTablesLiens($bool) {
         $this->tables_liens = (bool)$bool;
     }
@@ -57,7 +63,9 @@ class SpipSourcesIndexer {
     public function loadIndexesInfos() {
         include_spip('inc/config');
         $data = lire_config('indexer/indexing/last', []);
-        if (!is_array($data)) $data = [];
+        if (!is_array($data)) {
+            $data = [];
+        }
         return $data + [
             'source' => 0,
             'start'  => 0,
@@ -67,7 +75,12 @@ class SpipSourcesIndexer {
 
     public function saveIndexesInfos($data) {
         include_spip('inc/config');
-        return ecrire_config('indexer/indexing/last', $data);
+        ecrire_config('indexer/indexing/last', $data);
+    }
+
+    public function resetIndexesInfos() {
+        include_spip('inc/config');
+        effacer_config('indexer/indexing/last');
     }
 
 
@@ -79,27 +92,41 @@ class SpipSourcesIndexer {
         $this->initTimeout();
 
         $infos = $this->loadIndexesInfos();
+        $this->resetIndexesInfos();
 
         echo "<h1>Indexer tous les contenus :</h1>\n";
         echo "\n<pre>"; print_r($infos); echo "</pre>\n";
 
+        $sources = $this->sources->getIterator();
+        if ($infos['sources']) {
+            $sources->seek($infos['sources']);
+        }
 
-        foreach ($this->sources as $key => $source) {
+        while ($sources->valid()) {
+            $key    = $sources->key();
+            $source = $sources->current();
 
-            $source->setTablesLiens(false); // pour SPIP 2.1
+
+            $source->setTablesLiens($this->tables_liens); // pour SPIP 2.1
             echo "<h2>Analyse de $source :</h2>\n";
             spip_timer('source');
 
-            foreach ($source->getParts(1000) as $start => $end) {
+            $parts = new \ArrayIterator($source->getParts(1000));
+            if ($infos['start']) {
+                $parts->seek($infos['start']);
+            }
 
-                $documents = $source->getAllDocuments($start, $end);
+            while ($parts->valid()) {
+                $part = $parts->current();
+
+                $documents = $source->getAllDocuments($part['start'], $part['end']);
 
                 if (count($documents)) {
                     spip_timer('indexage');
                     $this->indexer->replaceDocuments($documents);
 
                     echo "<br /><strong>Temps pour indexer " . count($documents). "</strong>\n";
-                    echo "<br /><i>ids entre $start et $end :</i><br />\n";
+                    echo "<br /><i>ids entre $part[start] et $part[end] :</i><br />\n";
                     echo spip_timer('indexage');
                 }
 
@@ -109,12 +136,13 @@ class SpipSourcesIndexer {
                         'source' => $key,
                         'sourceClass' => (string)$source,
                         'sourceTime'  => spip_timer('source'),
-                        'start' => $start,
+                        'start' => $parts->key(),
                     ]);
                     return false;
                 }
-            }
 
+                $parts->next();
+            }
 
 
             echo "<hr /><strong>Temps pour $source :</strong><br />";
@@ -127,13 +155,18 @@ class SpipSourcesIndexer {
                     'source' => $key,
                     'sourceClass' => (string)$source,
                     'sourceTime'  => $t,
-                    'start' => $start,
+                    'start' => 0,
                 ]);
                 return false;
             }
 
+
+            $sources->next();
         }
 
+
+
+        $this->resetIndexesInfos();
         return true;
     }
 }

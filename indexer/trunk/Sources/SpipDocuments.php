@@ -26,7 +26,7 @@ class SpipDocuments implements SourceInterface {
 	public function getObjectId($objet, $id_objet){
 		return crc32($GLOBALS['meta']['adresse_site'] . $objet) + intval($id_objet);
 	}
-	
+
     public function getAuthorsProperties($objet, $id_objet) {
         if ($this->tables_liens) {
             $auteurs = sql_allfetsel('a.nom', 'spip_auteurs AS a, spip_auteurs_liens AS al', [
@@ -75,7 +75,10 @@ class SpipDocuments implements SourceInterface {
         $bornes = $this->getBounds();
         $parts = [];
         for ($i = $bornes['min']; $i <= $bornes['max']; $i += $count) {
-            $parts[$i] = $i + $count;
+            $parts[] = [
+                'start' => $i,
+                'end'   => $i + $count
+            ];
         }
         return $parts;
     }

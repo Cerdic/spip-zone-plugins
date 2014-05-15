@@ -16,9 +16,11 @@ $sources = new Indexer\Sources\Sources();
 $sources->register(new Spip\Indexer\Sources\Articles());
 
 $SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
-$SpipSourcesIndexer->setTablesLiens(false); // moche (pour spip 2.1 uniquement)
+$SpipSourcesIndexer->setTablesLiensAuto();
 
 $res = $SpipSourcesIndexer->indexAll();
 
-var_dump($res);
+if (!$res) {
+    echo "\n<br/><a href='#SELF'>Recharger la page pour continuer l'indexation</a>";
+}
 
