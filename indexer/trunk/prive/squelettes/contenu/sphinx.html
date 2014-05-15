@@ -1,6 +1,36 @@
+<style>
+#resultats>* {
+	padding: 10px;
+}
+
+#resultats pre {
+	background: #eee;
+	overflow: scroll;
+}
+
+section.recherche {
+	float: left;
+	width: 60%;
+	max-width: 60%;
+}
+
+
+
+aside.facettes {
+	float: right;
+	width: 35%;
+}
+</style>
+
 <h1>Test SPHINX</h1>
 
 [(#FORMULAIRE_RECHERCHE{#SELF})]
+
+
+<div id="resultats">
+
+<section class="recherche">
+
 
 <?php
 /*
@@ -30,9 +60,10 @@ echo '</pre>';
 	</div>
 </aside>
 
+[(#ENV{tag}|?{[(#SET{tag,[IN(properties.tags,(#ENV{tag}|_q)) AS tag]})]})]
+[(#ENV{tag}|=={'-'}?{[(#SET{tag,"LENGTH(properties.tags)=0 AS tag"})]})]
 
-
-[(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)])[ ORDER BY (#GET{order})] LIMIT 10})]
+[(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|_q|concat{","})]'limit=200') as snippet [, (#GET{tag})] FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)])[ (#GET{tag}|?{AND tag=1})][ ORDER BY (#GET{order})] LIMIT 10})]
 
 
 
@@ -67,8 +98,9 @@ echo '</pre>';
 
 
 </BOUCLE_recherche>
+</section>
 
-
+<aside class="facettes">
 
 <h2>Facettes</h2>
 
@@ -77,15 +109,29 @@ echo '</pre>';
 	Facette par calcul d'INTERVAL (regroupement de valeurs numériques dans des classes) ; ici la taille du contenu — ca pourrait ausssi être les dates (moins d'une heure, moins d'un jour, moins d'une semaine etc)...
 
 ]
-[(#SET{grouper,'INTERVAL(UINT(properties.length),100,300,1000,3000,10000,30000)'})]
-[(#SET{sqlf,"SELECT COUNT(*) AS c, "[(#GET{grouper}) AS grouper, ]GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY grouper ORDER BY c DESC LIMIT 10})]
+[(#SET{grouper,'INTERVAL(UINT(properties.length),10000,30000,100000,300000,1000000,300000000)'})]
+[(#SET{sqlf,"SELECT COUNT(*) AS c, "[(#GET{grouper}) AS grouper, ]GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY grouper ORDER BY c DESC LIMIT 30})]
+
+
+[(#REM)
+
+ Distance de Nairobi :
+		GEODIST(lat1,long1,lat2,long2)
+] 
+#SET{lon,36.817}
+#SET{lat,1.283}
+
+[(#SET{grouper,#VAL{'INTERVAL(GEODIST('}|concat{#GET{lat}}|concat{','}|concat{#GET{lon}}|concat{',UINT(properties.geo.lat),UINT(properties.geo.lon)),100,300,1000,3000,10000,30000)'}})]
+[(#SET{sqlf,"SELECT COUNT(*) AS c, "[(#GET{grouper}) AS grouper, ]GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY grouper ORDER BY c DESC LIMIT 30})]
+
+
 
 [(#REM)
 
 	Facette par JSON multivalué
 
 ]
-[(#SET{sqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.tags ORDER BY c DESC LIMIT 10})]
+[(#SET{sqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.tags ORDER BY c DESC LIMIT 30})]
 
 <pre>[(#GET{sqlf}|htmlspecialchars)]</pre>
 
@@ -94,7 +140,7 @@ echo '</pre>';
         <B_facette>
             <h2>Liste des facettes</h2>
         <BOUCLE_facette(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
-		#VALEUR{c} = #VALEUR{facette}<br />
+		#VALEUR{c} = <a href="[(#SELF|parametre_url{tag,[(#VALEUR{facette}|sinon{-})]})]">[(#VALEUR{facette}|sinon{<i>sans tag</i>})]</a><br />
         </BOUCLE_facette>
         </B_facette>
 
@@ -112,3 +158,7 @@ echo '</pre>';
 
 
 </BOUCLE_facettes>
+
+</aside>
+
+</div>
