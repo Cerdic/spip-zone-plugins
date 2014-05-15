@@ -55,8 +55,8 @@ class SphinxQL {
 
 		if ($docs = $this->query($query)) {
 			$meta = $this->query('SHOW meta');
-			$liste['docs'] = $docs->fetchAll(PDO::FETCH_ASSOC);
-			$liste['meta'] = $this->parseMeta($meta->fetchAll(PDO::FETCH_ASSOC));
+			$liste['docs'] = $docs->fetchAll(\PDO::FETCH_ASSOC);
+			$liste['meta'] = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
 		}
 
 		return $liste;

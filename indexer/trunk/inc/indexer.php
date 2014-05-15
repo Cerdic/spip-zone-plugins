@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Charge les classes possibles de l'indexer
 require_once _DIR_PLUGIN_INDEXER . 'lib/Composer/Autoload/ClassLoader.php';
 
