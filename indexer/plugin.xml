@@ -1,0 +1,20 @@
+<plugin>
+	<nom>Indexer</nom>
+	<slogan>Indexeur de contenus</slogan>
+
+	<auteur>Fil</auteur>
+	<auteur>Rastapopoulos</auteur>
+	<auteur>Marcimat</auteur>
+
+	<icon>prive/themes/spip/images/indexer-64.png</icon>
+
+	<licence>GNU/GPL</licence>
+	<version>1.0.0</version>
+	<etat>dev</etat>
+	<description>Gestion d'Indexation de contenus SPIP ou autre. Intégration et requêtes possibles avec Sphinx</description>
+	<prefix>indexer</prefix>
+
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+	<categorie>navigation</categorie>
+</plugin>
+
