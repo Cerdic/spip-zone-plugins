@@ -33,7 +33,7 @@ class Articles extends SpipDocuments {
 
     public function createDocumentArticle($article) {
          return new Document([
-            'id'         => intval($article['id']) * 100 + 1,
+            'id'         => $this->getObjectId('article', $article['id']),
             'title'      => $article['titre'],
             'summary'    => $article['surtitre'] . $article['soustitre'] . $article['chapo'],
             'content'    => $article['texte'],
