@@ -16,6 +16,10 @@ class Sources implements \IteratorAggregate {
         $this->sources[$cle] = $source;
     }
 
+    public function unregister($cle) {
+        unset($this->sources[$cle]);
+    }
+
     public function getIterator()
     {
         return new \ArrayIterator($this->sources);
