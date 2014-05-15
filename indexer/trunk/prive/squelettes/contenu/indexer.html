@@ -7,35 +7,18 @@ include_spip('inc/indexer');
 $indexer = new Indexer\Indexer();
 
 $indexer->registerStorage(
-    new Indexer\Storage\Sphinx(new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
+    new Indexer\Storage\Sphinx(
+        new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
 );
 
 
 $sources = new Indexer\Sources\Sources();
 $sources->register(new Spip\Indexer\Sources\Articles());
 
+$SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
+$SpipSourcesIndexer->setTablesLiens(false); // moche (pour spip 2.1 uniquement)
 
-foreach ($sources as $source) {
+$res = $SpipSourcesIndexer->indexAll();
 
-    # $source->setTablesLiens(false);
-
-    echo "<strong>Temps pour $source :</strong><br />";
-    spip_timer('source');
-
-    $documents = $source->getAllDocuments();
-
-    $t = spip_timer('source');
-    echo $t;
-
-
-    echo "<br /><strong>Temps pour indexer :</strong><br />";
-    spip_timer('indexage');
-
-    $indexer->replaceDocuments($documents);
-
-    $t = spip_timer('indexage');
-    echo $t;
-}
-
-
+var_dump($res);
 

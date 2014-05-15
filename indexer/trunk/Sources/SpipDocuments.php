@@ -15,7 +15,8 @@ class SpipDocuments implements SourceInterface {
 
     public function getDocuments() {}
 
-    public function getAllDocuments() {}
+    public function getAllDocuments($start = 0, $end = 0) {}
+
 
     /** @param bool $bool */
     public function setTablesLiens($bool) {
@@ -57,5 +58,25 @@ class SpipDocuments implements SourceInterface {
             ]);
         }
         return array_map('array_shift', $tags);
+    }
+
+
+    public function getBounds() {
+        return ['min' => 0, 'max' => 0];
+    }
+
+    /**
+     * Crée un tableau de parts
+     *
+     * @param int $count
+     * @return array
+    **/
+    public function getParts($count) {
+        $bornes = $this->getBounds();
+        $parts = [];
+        for ($i = $bornes['min']; $i <= $bornes['max']; $i += $count) {
+            $parts[$i] = $i + $count;
+        }
+        return $parts;
     }
 }

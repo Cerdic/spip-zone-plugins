@@ -7,7 +7,13 @@ use \Indexer\Sources\Document;
 class Articles extends SpipDocuments {
 
 
-    public function getAllDocuments() {
+
+    public function getAllDocuments($start = 0, $end = 0) {
+
+        $where = [];
+        if ($start) $where[] = "id_article >= $start";
+        if ($end)   $where[] = "id_article < $end";
+
         $all = sql_allfetsel(
             [
                 'id_article AS id',
@@ -16,7 +22,7 @@ class Articles extends SpipDocuments {
                 'date', 'date_redac'
             ],
             'spip_articles',
-            '', // Where
+            $where, // Where
             '', // Gr By
             '', // Or By
             '1000' // Limit
@@ -45,4 +51,11 @@ class Articles extends SpipDocuments {
             ]
         ]);
     }
+
+
+    public function getBounds() {
+        return $bornes = sql_fetsel(['MIN(id_article) AS min', 'MAX(id_article) AS max'], 'spip_articles');
+    }
+
+
 }
