@@ -15,6 +15,7 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
         ->from($index)
         ->where("MATCH(" . $sq->quote($recherche) . ")")
         ->facet("properties.authors")
+        ->facet("properties.tags")
         ;
 
     if ($orderby) {
