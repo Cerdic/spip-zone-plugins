@@ -61,7 +61,11 @@ function sphinx_get_query_facette_auteurs($index, $recherche, $tag = '', $auteur
 }
 
 
-function sphinx_get_query_facette($index, $facette, $cle, $recherche, $orderby = 'c DESC', $limit = 30) {
+function sphinx_get_query_facette($index, $facette, $cle, $recherche, $orderby = '', $limit = 0) {
+
+    if (!$orderby) $orderby = 'c DESC';
+    if (!$limit)   $limit   = 30;
+
     include_spip('inc/indexer');
     $sq = new \Sphinx\SphinxQLQuery();
     $sq
@@ -69,7 +73,7 @@ function sphinx_get_query_facette($index, $facette, $cle, $recherche, $orderby =
         ->select('GROUPBY() AS facette')
         ->from($index)
         ->where("MATCH(" . $sq->quote($recherche) . ")")
-        ->orderby("c DESC")
+        ->orderby($orderby)
         ->limit($limit)
         ;
     // facette simple 'properties.tags'

@@ -19,10 +19,11 @@
 })]
 
 [(#INCLURE{fond=inclure/liste_sphinx_facette, env,
-    facette=YEAR(properties.times.publication),
+    facette=YEAR(date),
     cle=annee,
     titre=Par année,
-    texte_vide=Non renseignée
+    texte_vide=Non renseignée,
+    order=date DESC
 })]
 
 
