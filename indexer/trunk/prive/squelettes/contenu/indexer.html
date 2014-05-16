@@ -30,8 +30,8 @@ if (_request('run') || _request('continue')) {
     $res = $SpipSourcesIndexer->indexAll();
 
     if (!$res) {
-        echo "\n<br/><a href='#SELF'>Recharger la page pour continuer l'indexation</a>";
-        echo "<script type='text/javascript'>window.location.reload();</script>";
+        echo "\n<br/><a id='recharger' href='[(#SELF|parametre_url{run,''}|parametre_url{continue,1})]'>Recharger la page pour continuer l'indexation</a>";
+        echo "<script type='text/javascript'>window.location.replace( $('#recharger').attr('href') );</script>";
     } else {
         echo "\n<pre>"; print_r($res); echo "</pre>";
     }
