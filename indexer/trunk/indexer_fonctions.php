@@ -1,6 +1,12 @@
 <?php
 
-
+function sphinx_get_array2query($query_description, $limit=''){
+	include_spip('inc/indexer');
+	$sq = new \Sphinx\SphinxQLQuery($query_description);
+	if ($limit){ $sq->limit($limit); }
+	
+	return $sq->get();
+}
 
 /**
  *

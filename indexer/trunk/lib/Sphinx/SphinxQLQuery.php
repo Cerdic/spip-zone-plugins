@@ -170,7 +170,7 @@ class SphinxQLQuery{
 						// For each values, we build a comparision
 						$comparisons = array();
 						foreach ($filter['values'] as $value){
-							$comparisons[] = $filter['not'] ? '!':'' . '(' . $filter['field'] . $filter['comparison'] . $this->quote($value) . ')';
+							$comparisons[] = ($filter['not'] ? '!':'') . '(' . $filter['field'] . $filter['comparison'] . $this->quote($value) . ')';
 						}
 						if ($comparisons){
 							$comparisons = join(' OR ', $comparisons);
@@ -190,17 +190,10 @@ class SphinxQLQuery{
 						}
 						
 						// For each values, we build an "in" select
-						$where_ins = array();
-						foreach ($filter['values'] as $value){
-							$this->select(
-								'IN(' . $filter['field'] . $this->quote($value) . ') as multi_json'.$as_count
-							);
-							$where_ins[] = 'multi_json'.$as_count . '=' . ($filter['not'] ? '0' : '1');
-						}
-						if ($where_ins){
-							$where_ins = join(' OR ', $where_ins);
-							$this->where($where_ins);
-						}
+						$this->select(
+							'IN(' . $filter['field'] . ', ' . join(', ', array_map(array($this, 'quote'), $filter['values'])) . ') as multi_json_'.$as_count
+						);
+						$this->where('multi_json_'.$as_count . '=' . ($filter['not'] ? '0' : '1'));
 					}
 				}
 			}

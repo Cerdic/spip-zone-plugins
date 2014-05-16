@@ -24,7 +24,7 @@ aside.facettes {
 }
 </style>
 
-<h1>Test SPHINX</h1>
+<h1>Test SPHINX sur #ENV{source}</h1>
 
 [(#FORMULAIRE_RECHERCHE{#SELF})]
 
@@ -69,7 +69,27 @@ echo '</pre>';
 
 [(#SET{sql,[(#GET{sql}|concat{"  FACET properties.tags ORDER BY COUNT(*) DESC"})]})]
 
-<pre>[(#GET{sql}|htmlspecialchars)]</pre>
+#SET{query, #ARRAY{
+	index,#ENV{source,spip},
+	fulltext, #ENV*{recherche},
+	filters, #LISTE{
+		#ARRAY{
+			type,multi_json,
+			field,properties.tags,
+			values,#LISTE{#ENV*{tag}, truc, bidule},
+			not,true,
+		},
+		#ARRAY{
+			type,mono,
+			field,properties.date,
+			values,2014-04,
+			comparison,">=",
+			not,true,
+		},
+	},
+}|sphinx_get_array2query}
+
+<pre>[(#GET{query}|htmlspecialchars)]</pre>
 
 
 <BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
