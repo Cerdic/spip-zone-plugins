@@ -70,7 +70,7 @@ function millimetre2inch($millimetre) {
  * @return	float
  */
 function millibar2inch($millibar) {
-	return $mbar/33.86;
+	return $millibar/33.86;
 }
 
 /**

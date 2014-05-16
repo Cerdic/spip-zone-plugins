@@ -41,8 +41,9 @@ function rainette_dbg_afficher_cache($lieu, $mode='previsions', $service='weathe
 		$charger = charger_fonction('charger_meteo', 'inc');
 		$nom_fichier = $charger($lieu, $mode, $service);
 		if ($nom_fichier) {
-			lire_fichier($nom_fichier,$tableau);
-			$tableau = unserialize($tableau);
+			$contenu = '';
+			lire_fichier($nom_fichier, $contenu);
+			$tableau = unserialize($contenu);
 
 			// On ajoute le lieu, le mode et le service au contexte fourni au modele
 			if ($mode == 'previsions') {
@@ -89,8 +90,9 @@ function rainette_dbg_comparer_services($mode='conditions', $jeu=array()) {
 			$charger = charger_fonction('charger_meteo', 'inc');
 			$nom_fichier = $charger($_lieu, $mode, $_service);
 			if ($nom_fichier) {
-				lire_fichier($nom_fichier,$tableau);
-				$tableau = unserialize($tableau);
+				$contenu = '';
+				lire_fichier($nom_fichier,$contenu);
+				$tableau = unserialize($contenu);
 				if ($tableau) {
 					foreach($tableau as $_donnee => $_valeur) {
 						$type = gettype($tableau[$_donnee]);
