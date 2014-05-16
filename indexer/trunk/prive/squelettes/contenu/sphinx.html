@@ -1,3 +1,5 @@
+#CACHE{0}
+
 <style>
 #resultats>* {
 	padding: 10px;
@@ -148,7 +150,7 @@ echo '</pre>';
 	Facette par JSON multivalué (auteur)
 
 ]
-[(#SET{xxxsqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.authors ORDER BY c DESC LIMIT 30})]
+[(#SET{sqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.authors ORDER BY c DESC LIMIT 30})]
 
 
 <pre>[(#GET{sqlf}|htmlspecialchars)]</pre>
