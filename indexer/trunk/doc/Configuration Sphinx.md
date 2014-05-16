@@ -20,6 +20,8 @@ index spip {
 
 	rt_attr_json          = properties
 
+	rt_attr_string        = signature
+
 	dict = keywords
 }
 
