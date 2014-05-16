@@ -79,7 +79,149 @@ class SphinxQLQuery{
     private $orderby = [];
     private $limit   = '';
     private $facet   = [];
-
+	
+	public function __construct($query_description=array()) {
+		if (!empty($query_description)){
+			// Index (mandatory)
+			if ($query_description['index']){
+				if (!is_array($query_description['index'])){
+					$query_description['index'] = array($query_description['index']);
+				}
+				foreach ($query_description['index'] as $index){
+					$this->from($index);
+				}
+			}
+			
+			// Fulltext search string (optional)
+			if (isset($query_description['fulltext']) and is_string($query_description['fulltext'])){
+				$this->where("match('".$query_description['fulltext']."')");
+			}
+			
+			// All filters
+			$as_count = 0;
+			if (isset($query_description['filters']) and is_array($query_description['filters'])){
+				foreach ($query_description['filters'] as $filter){
+					// Mono value
+					if (
+						$filter['type'] == 'mono'
+						and isset($filter['field']) and is_string($filter['field']) // mandatory
+						and isset($filter['values']) // mandatory
+					){
+						// Default comparision : =
+						if (!isset($filter['comparison'])){
+							$filter['comparison'] = '=';
+						}
+						
+						// Always work with an array of values
+						if (!is_array($filter['values'])){
+							$filter['values'] = array($filter['values']);
+						}
+						
+						// For each values, we build a comparision
+						$comparisons = array();
+						foreach ($filter['values'] as $value){
+							$comparisons[] = $filter['not'] ? '!':'' . '(' . $filter['field'] . $filter['comparison'] . $this->quote($value) . ')';
+						}
+						if ($comparisons){
+							$comparisons = join(' OR ', $comparisons);
+							$this->where($comparisons);
+						}
+					}
+					
+					// Multi value JSON
+					if (
+						$filter['type'] == 'multi_json'
+						and isset($filter['field']) and is_string($filter['field']) // mandatory
+						and isset($filter['values']) // mandatory
+					){
+						// Always work with an array of values
+						if (!is_array($filter['values'])){
+							$filter['values'] = array($filter['values']);
+						}
+						
+						// For each values, we build an "in" select
+						$where_ins = array();
+						foreach ($filter['values'] as $value){
+							$this->select(
+								'IN(' . $filter['field'] . $this->quote($value) . ') as multi_json'.$as_count
+							);
+							$where_ins[] = 'multi_json'.$as_count . '=' . ($filter['not'] ? '0' : '1');
+						}
+						if ($where_ins){
+							$where_ins = join(' OR ', $where_ins);
+							$this->where($where_ins);
+						}
+					}
+				}
+			}
+		}
+		
+		/**
+		// exemple de description
+		array(
+			'index' => 'visites',
+			'fulltext' => 'ma recherche',
+			'filters' => array(
+				array(
+					'type' => 'mono',
+					'field' => 'properties.lang',
+					'values' => array('fr'),
+					'comparison' => '!=', // default : =
+				),
+				array(
+					'type' => 'multi_json',
+					'field' => 'properties.tags',
+					'values' => array('pouet', 'glop'),
+				),
+				array(
+					'type' => 'distance',
+					'center' => array(
+						'lat' => 44.837862,
+						'lon' => -0.580086,
+					),
+					'fields' => array(
+						'lat' => 'properties.geo.lat',
+						'lon' => 'properties.geo.lon',
+					),
+					'distance' => 10000,
+					'comparison' => '>', // default : <=
+				),
+				array(
+					'type' => 'interval',
+					'expression' => 'uint(properties.truc)',
+					'intervals' => array(1,2,3,4,5),
+					'field' => 'truc',
+					'test' => 'truc = 2',
+					'select' => 'interval(uint(properties.truc),1,2,3,4)',
+					'where' => 'test = 2',
+				),
+			),
+			'orders' => array(
+				array(
+					'field' => 'score',
+					'direction' => 'asc', // default : desc
+				),
+				array(
+					'field' => 'distance',
+					'center' => array(
+						'lat' => 44.837862,
+						'lon' => -0.580086,
+					),
+					'fields' => array(
+						'lat' => 'properties.geo.lat',
+						'lon' => 'properties.geo.lon',
+					),
+				),
+			),
+			'facet' => array(
+				'field' => 'properties.tags',
+				'group_name' => 'tag',
+				'order' => 'tag asc', // default : count desc
+			),
+		);
+		**/
+	}
+	
     public function select($select) {
         $this->select[] = $select;
         return $this;
@@ -116,15 +258,19 @@ class SphinxQLQuery{
         return $this;
     }
 
-    public function quote($recherche) {
-        return _q($recherche);
-    }
+    function quote($value, $type='') {
+		return
+			(is_numeric($value)) ? strval($value) :
+				(!is_array($value) ? ("'" . addslashes($value) . "'") :
+					join(",", array_map(array($this, 'quote'), $value))
+				);
+	}
 
     public function get() {
         $query = [];
         if ($this->select)   $query[] = 'SELECT '   . implode(',', $this->select);
         if ($this->from)     $query[] = 'FROM '     . implode(',', $this->from);
-        if ($this->where)    $query[] = 'WHERE '    . implode(' AND ', $this->where);
+        if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
         if ($this->groupby)  $query[] = 'GROUP BY ' . implode(',', $this->groupby);
         if ($this->orderby)  $query[] = 'ORDER BY ' . implode(',', $this->orderby);
         if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
