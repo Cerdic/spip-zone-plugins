@@ -25,9 +25,9 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
 
     if ($tag) {
         if ($tag == '-') {
-            $sq->select("IN(properties.tags, " . $sq->quote($tag) . ") AS tag");
-        } else {
             $sq->select("(LENGTH(properties.tags) = 0) AS tag");
+        } else {
+            $sq->select("IN(properties.tags, " . $sq->quote($tag) . ") AS tag");
         }
         $sq->where("tag = 1");
     }
