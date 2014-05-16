@@ -31,10 +31,9 @@ class Sphinx implements StorageInterface {
 
         foreach ($documents as $document) {
             $data = $this->reformatDocument($document);
-            try {
-                $prepare->execute($data);
-            } catch (PDOException $e) {
-                echo "<div>".$e->getMessage()."</div>";
+            if (!$prepare->execute($data)){
+                echo "<pre>".print_r($prepare->errorInfo(), true)."</pre>";
+                exit;
             }
         }
     }

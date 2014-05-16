@@ -5,13 +5,13 @@ namespace Indexer\Sources;
 
 class Document {
 
-    public $id = null;
-    public $title = null;
-    public $summary = null;
-    public $content = null;
-    public $date = null;
-    public $uri = null;
-    public $properties = null;
+    public $id = 0;
+    public $title = '';
+    public $summary = '';
+    public $content = '';
+    public $date = 0;
+    public $uri = '';
+    public $properties = array();
 
     public function __construct($data) {
         $this->setAll($data);
