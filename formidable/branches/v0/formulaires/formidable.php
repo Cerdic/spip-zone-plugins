@@ -40,7 +40,7 @@ function formulaires_formidable_charger($id, $valeurs=array(), $id_formulaires_r
 		return;
 	
 	// On cherche si le formulaire existe
-	if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))){
+	if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire)){
 		// Est-ce que la personne a le droit de répondre ?
 		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire'=>$formulaire))){
 			$saisies = unserialize($formulaire['saisies']);
