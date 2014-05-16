@@ -144,7 +144,7 @@ class SphinxQLQuery{
 			
 			// Fulltext search string (optional)
 			if (isset($query_description['fulltext']) and is_string($query_description['fulltext'])){
-				$this->where("match('".$query_description['fulltext']."')");
+				$this->where('match(' . $this->quote($query_description['fulltext']) . ')');
 			}
 			
 			// All filters
