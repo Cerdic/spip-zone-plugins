@@ -33,7 +33,7 @@ class Sphinx implements StorageInterface {
             $data = $this->reformatDocument($document);
             try {
                 $prepare->execute($data);
-            } except (PDOException $e) {
+            } catch (PDOException $e) {
                 echo "<div>".$e->getMessage()."</div>";
             }
         }
