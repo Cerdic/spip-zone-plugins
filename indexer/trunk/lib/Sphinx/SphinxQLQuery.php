@@ -78,6 +78,7 @@ class SphinxQLQuery{
     private $groupby = [];
     private $orderby = [];
     private $limit   = '';
+    private $facet   = [];
 
     public function select($select) {
         $this->select[] = $select;
@@ -110,6 +111,11 @@ class SphinxQLQuery{
         return $this;
     }
 
+    public function facet($facet) {
+        $this->facet[] = $facet;
+        return $this;
+    }
+
     public function quote($recherche) {
         return _q($recherche);
     }
@@ -122,6 +128,7 @@ class SphinxQLQuery{
         if ($this->groupby)  $query[] = 'GROUP BY ' . implode(',', $this->groupby);
         if ($this->orderby)  $query[] = 'ORDER BY ' . implode(',', $this->orderby);
         if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
+        if ($this->facet)    $query[] = 'FACET '    . implode(' FACET ', $this->facet);
         return implode(' ', $query);
     }
 

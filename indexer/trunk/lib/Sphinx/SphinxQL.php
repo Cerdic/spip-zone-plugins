@@ -49,14 +49,25 @@ class SphinxQL {
 	**/
 	public function allfetsel($query) {
 		$liste = [
-			'docs' => [],
-			'meta' => []
+			'docs'   => [],
+			'facets' => []
+			'meta'   => [],
 		];
 
 		if ($docs = $this->query($query)) {
+			// les jeux de réponses sont les suivant :
+			// 1) les documents trouvés
+			// 2+) les FACET à la suite
+			$reponses = [];
+			 do {
+				$reponses[] = $docs->fetchAll(\PDO::FETCH_ASSOC);
+			} while ($docs->nextRowset());
+
 			$meta = $this->query('SHOW meta');
-			$liste['docs'] = $docs->fetchAll(\PDO::FETCH_ASSOC);
-			$liste['meta'] = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
+
+			$liste['docs']   = array_shift($reponses);
+			$liste['facets'] = $reponses;
+			$liste['meta']   = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
 		}
 
 		return $liste;

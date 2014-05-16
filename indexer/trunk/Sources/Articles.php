@@ -41,7 +41,7 @@ class Articles extends SpipDocuments {
     public function createDocumentArticle($article) {
          return new Document([
             'id'           => $this->getObjectId('article', $article['id']),
-            'title'        => $article['titre'],
+            'title'        => supprimer_numero($article['titre']),
             'summary'      => $article['surtitre'] . $article['soustitre'] . $article['chapo'],
             'content'      => $article['texte'],
             'date'         => (substr($article['date_redac'],0,4) == '0000') ? $article['date'] : $article['date_redac'],
