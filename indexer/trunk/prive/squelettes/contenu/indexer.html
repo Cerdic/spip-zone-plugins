@@ -6,11 +6,16 @@ include_spip('inc/indexer');
 
 $indexer = new Indexer\Indexer();
 
+try {
 $indexer->registerStorage(
     new Indexer\Storage\Sphinx(
         new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
 );
-
+} catch( PDOException $e ) {
+    if (!$message = $e->getMessage())
+        $message = _L('Erreur inconnue');
+    die("<p class='erreur'>$message</p>");
+}
 
 $sources = new Indexer\Sources\Sources();
 $sources->register('articles', new Spip\Indexer\Sources\Articles());
