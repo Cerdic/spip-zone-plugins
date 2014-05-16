@@ -7,7 +7,7 @@
         #ENV*{recherche},
         #GET{order}})]})]
 
-<BOUCLE_resultats(DATA) {source SphinxQL, #GET{sqlf}} {si #ENV{recherche}}>
+<BOUCLE_resultats(DATA) {source SphinxQL, #GET{sqlf}}>
     <B_facette>
         <h2>#ENV{titre}</h2>
         <div class='liste'>

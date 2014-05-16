@@ -19,7 +19,7 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
         ->select('*')
         ->select("SNIPPET(content, " . $sq->quote($recherche . ($tag ? " $tag" : '')) . ", 'limit=200') AS snippet")
         ->from($index)
-        ->where("MATCH(" . $sq->quote($recherche) . ")")
+        ->where(strlen($recherche) ? "MATCH(" . $sq->quote($recherche) . ")" : null)
         ->facet("properties.authors ORDER BY COUNT(*) DESC")
         ->facet("properties.tags ORDER BY COUNT(*) DESC")
         ->facet("YEAR(date) ORDER BY date DESC")

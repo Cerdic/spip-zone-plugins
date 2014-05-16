@@ -28,7 +28,7 @@
 	<div><a href="[(#SELF|parametre_url{[(#VALEUR)],''})]">x</a> (#ENV{#VALEUR})</div>
 ]</BOUCLE_filtres>
 
-<BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
+<BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}}>
 
     <B_documents>
         <h2>Liste des documents trouvés</h2>

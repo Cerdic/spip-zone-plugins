@@ -269,7 +269,7 @@ class SphinxQLQuery{
         $query = [];
         if ($this->select)   $query[] = 'SELECT '   . implode(',', $this->select);
         if ($this->from)     $query[] = 'FROM '     . implode(',', $this->from);
-        if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
+        if ($this->where = array_filter($this->where))    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
         if ($this->groupby)  $query[] = 'GROUP BY ' . implode(',', $this->groupby);
         if ($this->orderby)  $query[] = 'ORDER BY ' . implode(',', $this->orderby);
         if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
