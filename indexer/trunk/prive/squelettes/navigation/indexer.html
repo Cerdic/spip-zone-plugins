@@ -9,9 +9,10 @@
     </ul>
 </div>
 
+[(#ENV{continue}|non|et{#ENV{run}|non}|oui)
 [(#CONFIG{indexer/indexing/stats}|oui)
 <h3>Dernière indexation</h3>
 <pre>
 [(#CONFIG{indexer/indexing/stats}|print_r{1})]
 </pre>
-]
+]]
