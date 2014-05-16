@@ -15,13 +15,7 @@ class Articles extends SpipDocuments {
         if ($end)   $where[] = "$column < $end";
 
         $all = sql_allfetsel(
-            [
-                'id_article AS id',
-                'titre', 'soustitre', 'surtitre',
-                'texte', 'chapo', 'ps',
-                'date', 'date_redac',
-                'lang'
-            ],
+            '*',
             'spip_articles',
             $where, // Where
             '', // Gr By
@@ -39,19 +33,21 @@ class Articles extends SpipDocuments {
 
 
     public function createDocumentArticle($article) {
+         $id = $article['id_article'];
+
          return new Document([
-            'id'           => $this->getObjectId('article', $article['id']),
+            'id'           => $this->getObjectId('article', $id),
             'title'        => supprimer_numero($article['titre']),
             'summary'      => $article['surtitre'] . $article['soustitre'] . $article['chapo'],
             'content'      => $article['texte'],
             'date'         => (substr($article['date_redac'],0,4) == '0000') ? $article['date'] : $article['date_redac'],
-            'uri'          => generer_url_entite_absolue($article['id'], 'article'),
+            'uri'          => generer_url_entite_absolue($id, 'article'),
             'properties'   =>
             [
-                'authors'  => $this->getAuthorsProperties('article', $article['id']),
-                'tags'     => $this->getTagsProperties('article', $article['id']),
+                'authors'  => $this->getAuthorsProperties('article', $id),
+                'tags'     => $this->getTagsProperties('article', $id),
                 'objet'    => 'article',
-                'id_objet' => $article['id'],
+                'id_objet' => $id,
                 'lang'     => $article['lang']
             ]
         ]);
