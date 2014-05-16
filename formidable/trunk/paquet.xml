@@ -27,10 +27,10 @@
 	<pipeline nom="post_edition" inclure="formidable_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="formidable_pipelines.php" />
 
-	<necessite nom="spip_bonux" compatibilite="[1.9.3;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
 	<necessite nom="saisies" compatibilite="[1.40.3;[" />
-	<necessite nom="verifier" compatibilite="[0.1;[" />
-	<necessite nom="yaml" compatibilite="[1.1;[" />
+	<necessite nom="verifier" compatibilite="[0.1.0;[" />
+	<necessite nom="yaml" compatibilite="[1.5.0;[" />
 	<necessite nom="facteur" compatibilite="[3.0.3;[" />
 
 	<menu nom="formulaires" titre="formidable:bouton_formulaires" parent="menu_edition" icone="images/formulaire-16.png" />
