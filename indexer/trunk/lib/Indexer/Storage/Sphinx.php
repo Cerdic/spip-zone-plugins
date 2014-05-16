@@ -23,9 +23,9 @@ class Sphinx implements StorageInterface {
     public function replaceDocuments($documents){
         $query = "
             REPLACE INTO $this->indexName
-                (id,  title, summary, content, date, uri, properties)
+                (id,  title, summary, content, date, uri, properties, signature)
             VALUES
-                (:id, :title, :summary, :content, :date, :uri, :properties)
+                (:id, :title, :summary, :content, :date, :uri, :properties, :signature)
         ";
         $prepare = $this->sphinxql->prepare($query);
 
@@ -49,9 +49,14 @@ class Sphinx implements StorageInterface {
            "content" => $document->content,
            "date" => strtotime($document->date),
            "uri" => $document->uri,
-           "properties" => json_encode($document->properties)
+           "properties" => json_encode($document->properties),
+            "signature" => $this->signer($document),
         ];
     }
 
+    public function signer($doc) {
+        include_spip('inc/securiser_action');
+        return md5(secret_du_site().json_encode($doc));
+    }
 
 }

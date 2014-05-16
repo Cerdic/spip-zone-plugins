@@ -220,7 +220,7 @@ class SpipSourcesIndexer {
 
             $stats['last']['time']['indexing'] += $t;
             $stats['sources'][$skey]['time']['indexing'] += $t;
-            echo "<br />Indexage: " . $this->getNiceTime($t) . "\n";
+            echo "<br />Enregistrement dans l'index: " . $this->getNiceTime($t) . "\n";
         }
     }
 

@@ -60,17 +60,21 @@ echo '</pre>';
 	</div>
 </aside>
 
-[(#ENV{tag}|?{[(#SET{tag,[IN(properties.tags,(#ENV{tag}|_q)) AS tag]})]})]
+[(#ENV{tag}|?{[(#SET{tag,[IN(properties.tags,(#ENV*{tag}|_q)) AS tag]})]})]
 [(#ENV{tag}|=={'-'}?{[(#SET{tag,"LENGTH(properties.tags)=0 AS tag"})]})]
 
 [(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|concat{' '}|concat{#ENV{tag}}|_q|concat{","})]'limit=200') as snippet [, (#GET{tag})] FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)])[ (#GET{tag}|?{AND tag=1})][ ORDER BY (#GET{order})] LIMIT 10})]
 
+[(#SET{sql2,[(#GET{sql}|concat{"  FACET properties.tags ORDER BY COUNT(*) DESC"})]})]
 
-
-<pre>[(#GET{sql}|htmlspecialchars)]</pre>
+<pre>[(#GET{sql2}|htmlspecialchars)]</pre>
 
 
 <BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
+
+<h2>clé: #CLE</h2>
+
+
         <B_documents>
             <h2>Liste des documents trouvés</h2>
             <dl>
@@ -121,6 +125,10 @@ echo '</pre>';
 #SET{lon,36.817}
 #SET{lat,1.283}
 
+[(#REM) Bordeaux]
+#SET{lon,-0.567}
+#SET{lat,44.833}
+
 [(#SET{grouper,#VAL{'INTERVAL(GEODIST('}|concat{#GET{lat}}|concat{','}|concat{#GET{lon}}|concat{',UINT(properties.geo.lat),UINT(properties.geo.lon)),100,300,1000,3000,10000,30000,100000,300000,1000000,3000000,10000000)'}})]
 [(#SET{sqlf,"SELECT COUNT(*) AS c, "[(#GET{grouper}) AS grouper, ]GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY grouper ORDER BY grouper ASC LIMIT 30})]
 
@@ -128,15 +136,26 @@ echo '</pre>';
 
 [(#REM)
 
-	Facette par JSON multivalué
+	Facette par JSON multivalué (tag)
 
 ]
 [(#SET{sqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.tags ORDER BY c DESC LIMIT 30})]
+
+
+
+[(#REM)
+
+	Facette par JSON multivalué (auteur)
+
+]
+[(#SET{xxxsqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.authors ORDER BY c DESC LIMIT 30})]
+
 
 <pre>[(#GET{sqlf}|htmlspecialchars)]</pre>
 
 
 <BOUCLE_facettes(DATA) {source SphinxQL, #GET{sqlf}} {si #ENV{recherche}}>
+
         <B_facette>
             <h2>Liste des facettes</h2>
         <BOUCLE_facette(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
