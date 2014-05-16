@@ -50,8 +50,8 @@ class SphinxQL {
 	public function allfetsel($query) {
 		$liste = [
 			'docs'   => [],
-			'facets' => []
-			'meta'   => [],
+			'facets' => [],
+			'meta'   => []
 		];
 
 		if ($docs = $this->query($query)) {
