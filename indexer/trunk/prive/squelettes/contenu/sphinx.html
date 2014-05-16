@@ -67,22 +67,21 @@ echo '</pre>';
 
 [(#SET{sql,"SELECT WEIGHT() AS score, *, SNIPPET(content,"[(#ENV*{recherche}|concat{' '}|concat{#ENV{tag}}|_q|concat{","})]'limit=200') as snippet [, (#GET{tag})] FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)])[ (#GET{tag}|?{AND tag=1})][ ORDER BY (#GET{order})] LIMIT 10})]
 
-[(#SET{sql2,[(#GET{sql}|concat{"  FACET properties.tags ORDER BY COUNT(*) DESC"})]})]
+[(#SET{sql,[(#GET{sql}|concat{"  FACET properties.tags ORDER BY COUNT(*) DESC"})]})]
 
-<pre>[(#GET{sql2}|htmlspecialchars)]</pre>
+<pre>[(#GET{sql}|htmlspecialchars)]</pre>
 
 
 <BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
-
-<h2>clé: #CLE</h2>
-
 
         <B_documents>
             <h2>Liste des documents trouvés</h2>
             <dl>
         <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
                 [<dt>#SCORE <a href="[(#URI)]">(#TITLE)</a>
-                 [<small>(#DATE|affdate_court)</small>]
+        	[@(#VALEUR*{properties}|json_decode{1}|table_valeur{login}|print)
+        	][<small>(#DATE|affdate_court)</small>]
+                 
                 </dt>
                  [<dd>(#SNIPPET|sinon{#SUMMARY})</dd>]
                 ]
@@ -101,7 +100,15 @@ echo '</pre>';
             </dl>
         </B_meta>
 
-
+    <B_facettes>
+        <h2>Facettes associées</h2>
+        <dl>
+    <BOUCLE_facettes(DATA){source tableau, #VALEUR}{si #CLE|=={facets}}>
+            [<dt>(#CLE)</dt>]
+            [<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
+    </BOUCLE_facettes>
+        </dl>
+    </B_facettes>
 
 </BOUCLE_recherche>
 </section>
@@ -150,13 +157,13 @@ echo '</pre>';
 	Facette par JSON multivalué (auteur)
 
 ]
-[(#SET{sqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.authors ORDER BY c DESC LIMIT 30})]
+[(#SET{xxxsqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.authors ORDER BY c DESC LIMIT 30})]
 
 
 <pre>[(#GET{sqlf}|htmlspecialchars)]</pre>
 
 
-<BOUCLE_facettes(DATA) {source SphinxQL, #GET{sqlf}} {si #ENV{recherche}}>
+<BOUCLE_facets(DATA) {source SphinxQL, #GET{sqlf}} {si #ENV{recherche}}>
 
         <B_facette>
             <h2>Liste des facettes</h2>
@@ -178,7 +185,7 @@ echo '</pre>';
 
 
 
-</BOUCLE_facettes>
+</BOUCLE_facets>
 
 </aside>
 
