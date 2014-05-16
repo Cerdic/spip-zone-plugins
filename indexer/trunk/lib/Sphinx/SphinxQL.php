@@ -68,6 +68,8 @@ class SphinxQL {
 			$liste['docs']   = array_shift($reponses);
 			$liste['facets'] = $reponses;
 			$liste['meta']   = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
+		} elseif ($errs = $this->sql->errorInfo()) {
+			var_dump($errs);
 		}
 
 		return $liste;

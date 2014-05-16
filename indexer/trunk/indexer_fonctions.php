@@ -59,3 +59,28 @@ function sphinx_get_query_facette_auteurs($index, $recherche, $tag = '', $auteur
 
     return $sq->get();
 }
+
+
+function sphinx_get_query_facette($index, $facette, $cle, $recherche, $orderby = 'c DESC', $limit = 30) {
+    include_spip('inc/indexer');
+    $sq = new \Sphinx\SphinxQLQuery();
+    $sq
+        ->select('COUNT(*) AS c')
+        ->select('GROUPBY() AS facette')
+        ->from($index)
+        ->where("MATCH(" . $sq->quote($recherche) . ")")
+        ->orderby("c DESC")
+        ->limit($limit)
+        ;
+    // facette simple 'properties.tags'
+    if (strpos($facette, '(') === false) {
+        $sq->groupby($facette);
+    }
+    // facette avec calcul 'YEAR(properties.dates.publication)'
+    else {
+        $sq->select("$facette AS data");
+        $sq->groupby("data");
+    }
+
+    return $sq->get();
+}

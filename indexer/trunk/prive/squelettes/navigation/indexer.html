@@ -1,0 +1,17 @@
+
+<h2>Indexer les contenus</h2>
+
+<div class='liste'>
+    <ul class='liste-items'>
+        <li class='item'><a href="[(#SELF|parametre_url{continue,''}|parametre_url{run,1})]">Démarrer</a></li>
+        [(#CONFIG{indexer/indexing/stats}|oui)
+        <li class='item'><a href="[(#SELF|parametre_url{continue,1}|parametre_url{run,''})]">Continuer</a></li>]
+    </ul>
+</div>
+
+[(#CONFIG{indexer/indexing/stats}|oui)
+<h3>Dernière indexation</h3>
+<pre>
+[(#CONFIG{indexer/indexing/stats}|print_r{1})]
+</pre>
+]

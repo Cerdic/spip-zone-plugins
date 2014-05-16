@@ -1,33 +1,29 @@
 
 
 
-[(#REM)
-
-	Facette par JSON multivalué
-
-]
-[(#SET{sqlf, [(#ENV{source,spip}|sphinx_get_query_facette_auteurs{#ENV*{recherche},#ENV*{tag},#ENV*{auteur}})]})]
 
 
-
-<BOUCLE_facettes_auteurs(DATA) {source SphinxQL, #GET{sqlf}} {si #ENV{recherche}}>
-        <B_facette_auteurs>
-            <h2>Liste des auteurs</h2>
-        <BOUCLE_facette_auteurs(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
-            <a href="[(#SELF|parametre_url{auteur,[(#VALEUR{facette}|sinon{-})]})]">[(#VALEUR{facette}|sinon{<i>sans tag</i>})]</a> (#VALEUR{c} documents)<br />
-        </BOUCLE_facette_auteurs>
-        </B_facette_auteurs>
+[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    facette=properties.authors,
+    cle=auteur,
+    titre=Liste des auteurs,
+    texte_vide=Aucun auteur
+})]
 
 
-        <B_meta_facette_auteurs>
-            <h2>Métas associées</h2>
-            <dl>
-        <BOUCLE_meta_facette_auteurs(DATA){source tableau, #VALEUR}{si #CLE|=={meta}}>
-                [<dt>(#CLE)</dt>]
-                [<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
-        </BOUCLE_meta_facette_auteurs>
-            </dl>
-        </B_meta_facette_auteurs>
+[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    facette=properties.tags,
+    cle=tag,
+    titre=Liste des tags,
+    texte_vide=Aucun tag
+})]
+
+[(#INCLURE{fond=inclure/liste_sphinx_facette, env,
+    facette=YEAR(properties.times.publication),
+    cle=annee,
+    titre=Par année,
+    texte_vide=Non renseignée
+})]
 
 
-</BOUCLE_facettes_auteurs>
+
