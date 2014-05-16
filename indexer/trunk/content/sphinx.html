@@ -4,9 +4,29 @@
 [(#FORMULAIRE_RECHERCHE{#SELF})]
 
 
-[(#SET{sql, [(#ENV{source,spip}|sphinx_get_query_documents{#ENV*{recherche},#ENV*{tag},#ENV*{auteur},#ENV{annee}})]})]
+
+<aside class="tri">
+	[(#ENV{order}|match{date}|?{
+		[(#SET{order,date DESC})]
+		résultats triés par date
+	})]
+	<div>
+	[(#GET{order}|?{
+		<a href="[(#SELF|parametre_url{order,''})]">trier par pertinence</a>
+	,
+		<a href="[(#SELF|parametre_url{order,date})]">trier par date</a>
+	})]
+	</div>
+</aside>
 
 
+[(#SET{sql, [(#ENV{source,spip}|sphinx_get_query_documents{#ENV*{recherche},#ENV*{tag},#ENV*{auteur},#ENV{annee},#GET{order}})]})]
+
+<B_filtres>
+<h4>Filtres:</h4>
+<BOUCLE_filtres(DATA){source table,#LISTE{auteur,tag,annee}}>[
+	<div><a href="[(#SELF|parametre_url{[(#VALEUR)],''})]">x</a> (#ENV{#VALEUR})</div>
+]</BOUCLE_filtres>
 
 <BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
 
@@ -46,3 +66,6 @@
         </dl>
     </B_facettes>
 </BOUCLE_recherche>
+
+Debug: <pre>#GET{sql}</pre>
+
