@@ -24,16 +24,18 @@
 
 <B_filtres>
 <h4>Filtres:</h4>
-<BOUCLE_filtres(DATA){source table,#LISTE{auteur,tag,annee}}>[
+<BOUCLE_filtres(DATA){liste auteur,tag,annee}>[
 	<div><a href="[(#SELF|parametre_url{[(#VALEUR)],''})]">x</a> (#ENV{#VALEUR})</div>
 ]</BOUCLE_filtres>
 
-<BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}}>
+<BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}, #ENV{debut_documents}}>
 
     <B_documents>
         <h2>Liste des documents trouvés</h2>
+    [<p class="pagination">(#ANCRE_PAGINATION)</p>]
         <dl>
-    <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
+    <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}
+    {pagination 10}>
             [<dt>#SCORE <a href="[(#URI)]">(#TITLE)</a>
              [<small>(#DATE|affdate_court)</small>]
             </dt>
@@ -41,6 +43,7 @@
             ]
     </BOUCLE_documents>
         </dl>
+    [<p class="pagination">(#PAGINATION)</p>]
     </B_documents>
 
 
@@ -66,6 +69,7 @@
         </dl>
     </B_facettes>
 </BOUCLE_recherche>
+
 
 Debug: <pre>#GET{sql}</pre>
 
