@@ -82,8 +82,58 @@ class SphinxQLQuery{
 	
 	public function __construct($query_description=array()) {
 		if (!empty($query_description)){
+			$this->array2query($query_description);
+		}
+	}
+	
+    public function select($select) {
+        $this->select[] = $select;
+        return $this;
+    }
+
+    public function from($from) {
+        $this->from[] = $from;
+        return $this;
+    }
+
+
+    public function where($where) {
+        $this->where[] = $where;
+        return $this;
+    }
+
+    public function orderby($orderby) {
+        $this->orderby[] = $orderby;
+        return $this;
+    }
+
+    public function groupby($groupby) {
+        $this->groupby[] = $groupby;
+        return $this;
+    }
+
+    public function limit($limit) {
+        $this->limit = $limit;
+        return $this;
+    }
+
+    public function facet($facet) {
+        $this->facet[] = $facet;
+        return $this;
+    }
+
+    function quote($value, $type='') {
+		return
+			(is_numeric($value)) ? strval($value) :
+				(!is_array($value) ? ("'" . addslashes($value) . "'") :
+					join(",", array_map(array($this, 'quote'), $value))
+				);
+	}
+	
+	public function array2query($query_description){
+		if (is_array($query_description)){
 			// Index (mandatory)
-			if ($query_description['index']){
+			if (isset($query_description['index'])){
 				if (!is_array($query_description['index'])){
 					$query_description['index'] = array($query_description['index']);
 				}
@@ -222,50 +272,6 @@ class SphinxQLQuery{
 		**/
 	}
 	
-    public function select($select) {
-        $this->select[] = $select;
-        return $this;
-    }
-
-    public function from($from) {
-        $this->from[] = $from;
-        return $this;
-    }
-
-
-    public function where($where) {
-        $this->where[] = $where;
-        return $this;
-    }
-
-    public function orderby($orderby) {
-        $this->orderby[] = $orderby;
-        return $this;
-    }
-
-    public function groupby($groupby) {
-        $this->groupby[] = $groupby;
-        return $this;
-    }
-
-    public function limit($limit) {
-        $this->limit = $limit;
-        return $this;
-    }
-
-    public function facet($facet) {
-        $this->facet[] = $facet;
-        return $this;
-    }
-
-    function quote($value, $type='') {
-		return
-			(is_numeric($value)) ? strval($value) :
-				(!is_array($value) ? ("'" . addslashes($value) . "'") :
-					join(",", array_map(array($this, 'quote'), $value))
-				);
-	}
-
     public function get() {
         $query = [];
         if ($this->select)   $query[] = 'SELECT '   . implode(',', $this->select);
