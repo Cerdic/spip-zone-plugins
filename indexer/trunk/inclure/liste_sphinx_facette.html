@@ -1,11 +1,11 @@
-
+[(#ENV{order}|=={date}|?{#SET{order,date DESC}})]
 
 [(#SET{sqlf, [(#ENV{source,spip}
     |sphinx_get_query_facette{
         #ENV{facette},
         #ENV{cle},
         #ENV*{recherche},
-        #ENV{order,''}})]})]
+        #GET{order}})]})]
 
 <BOUCLE_resultats(DATA) {source SphinxQL, #GET{sqlf}} {si #ENV{recherche}}>
     <B_facette>
