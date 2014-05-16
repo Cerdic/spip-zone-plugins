@@ -5,7 +5,7 @@
 /**
  *
  */
-function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '', $orderby = '') {
+function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '', $annee='', $orderby = '') {
     include_spip('inc/indexer');
     $sq = new \Sphinx\SphinxQLQuery();
     $sq
@@ -35,6 +35,11 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
     if ($auteur) {
         $sq->select("IN(properties.authors, " . $sq->quote($auteur) . ") AS auteur");
         $sq->where("auteur = 1");
+    }
+
+    if ($annee) {
+        $sq->select("(YEAR(date) = " . $sq->quote($annee) . ") AS annee");
+        $sq->where("annee = 1");
     }
 
     return $sq->get();

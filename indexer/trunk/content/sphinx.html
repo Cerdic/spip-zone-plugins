@@ -4,7 +4,7 @@
 [(#FORMULAIRE_RECHERCHE{#SELF})]
 
 
-[(#SET{sql, [(#ENV{source,spip}|sphinx_get_query_documents{#ENV*{recherche},#ENV*{tag},#ENV*{auteur}})]})]
+[(#SET{sql, [(#ENV{source,spip}|sphinx_get_query_documents{#ENV*{recherche},#ENV*{tag},#ENV*{auteur},#ENV{annee}})]})]
 
 
 
