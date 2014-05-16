@@ -8,11 +8,23 @@ include_spip('inc/saisies');
 include_spip('base/abstract_sql');
 include_spip('inc/autoriser');
 
+function formidable_id_formulaire($id){
+	if (intval($id)>0)
+		$where = 'id_formulaire = ' . intval($id);
+	elseif (is_string($id))
+		$where = 'identifiant = ' . sql_quote($id);
+	else
+		return 0;
+
+	$id_formulaire = intval(sql_getfetsel('id_formulaire','spip_formulaires',$where));
+	return $id_formulaire;
+}
+
 /**
  * Formulaire CVT de Formidable.
  * Genere le formulaire dont l'identifiant (numerique ou texte est indique)
  *
- * @param mixed $id_formulaire identifiant numerique ou textuel
+ * @param int|string $id identifiant numerique ou textuel
  * @param array $valeurs valeurs par defauts passes au contexte du formulaire
  *        exemple : array('hidden_1' => 3) pour que champ identifie "@hidden_1@" soit prerempli
  * @param int $id_formulaires_reponse identifiant d'une reponse
@@ -20,19 +32,15 @@ include_spip('inc/autoriser');
  * 
  * @return array $contexte : le contexte envoye au squelette HTML du formulaire.
 **/
-function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
+function formulaires_formidable_charger($id, $valeurs=array(), $id_formulaires_reponse=false){
 	$contexte = array();
 	
 	// On peut donner soit un id soit un identifiant
-	if (intval($id_formulaire) > 0)
-		$where = 'id_formulaire = '.intval($id_formulaire);
-	elseif (is_string($id_formulaire))
-		$where = 'identifiant = '.sql_quote($id_formulaire);
-	else
+	if (!$id_formulaire = formidable_id_formulaire($id))
 		return;
 	
 	// On cherche si le formulaire existe
-	if ($formulaire = sql_fetsel('*', 'spip_formulaires', $where)){
+	if ($formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = ' . intval($id_formulaire))){
 		// Est-ce que la personne a le droit de répondre ?
 		if (autoriser('repondre', 'formulaire', $formulaire['id_formulaire'], null, array('formulaire'=>$formulaire))){
 			$saisies = unserialize($formulaire['saisies']);
@@ -111,8 +119,12 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 }
 
 
-function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
+function formulaires_formidable_verifier($id, $valeurs=array(), $id_formulaires_reponse=false){
 	$erreurs = array();
+	
+	// On peut donner soit un id soit un identifiant
+	if (!$id_formulaire = formidable_id_formulaire($id))
+		return;
 	
 	// Sale bête !
 	if (_request('mechantrobot') != ''){
@@ -120,7 +132,6 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_f
 		return $erreurs;
 	}
 	
-	$id_formulaire = intval(_request('id_formulaire'));
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
 	$saisies = unserialize($formulaire['saisies']);
 	
@@ -133,15 +144,20 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_f
 }
 
 
-function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
+function formulaires_formidable_traiter($id, $valeurs=array(), $id_formulaires_reponse=false){
 	$retours = array();
-	$id_formulaire = intval(_request('id_formulaire'));
+	
+	// On peut donner soit un id soit un identifiant
+	if (!$id_formulaire = formidable_id_formulaire($id))
+		return;
+	
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
 		
 	// selon le choix, le formulaire se remet en route à la fin ou non
 	$retours['editable'] = ($formulaire['apres']=='formulaire');
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];
+	$retours['id_formulaire'] = $id_formulaire; 
 	
 	// Si on a une redirection valide
 	if (($formulaire['apres']== "redirige") AND ($formulaire['url_redirect']!="")){
