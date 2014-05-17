@@ -248,6 +248,7 @@ class SphinxQLQuery{
 
     public function get() {
         $query = [];
+        $this->removeEmpty();
         if ($this->select)   $query[] = 'SELECT '   . implode(', ', $this->select);
         if ($this->from)     $query[] = 'FROM '     . implode(', ', $this->from);
         if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
