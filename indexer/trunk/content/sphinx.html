@@ -37,7 +37,7 @@
 	<B_documents>
 		<h2>Documents trouvés</h2>
 		<small>
-		[(#VALEUR{meta/total_found}) ]résultats \([(#VALEUR{meta/time}|mult{1000})] ms\)
+		[(#VALEUR{meta/total}|=={1000}|?{'+ de '}) ][(#VALEUR{meta/total}) ]résultats \([(#VALEUR{meta/time}|mult{1000})] ms\)
 		</small>
 
 		<div class='liste long resultats'>

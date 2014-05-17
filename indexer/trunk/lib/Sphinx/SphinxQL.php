@@ -51,7 +51,8 @@ class SphinxQL {
 		$liste = [
 			'docs'   => [],
 			'facets' => [],
-			'meta'   => []
+			'meta'   => [],
+			'query'  => $query
 		];
 
 		if ($docs = $this->query($query)) {
@@ -72,7 +73,7 @@ class SphinxQL {
 			var_dump($errs);
 		}
 
-		return [$liste];
+		return ['query' => $liste];
 	}
 
 
