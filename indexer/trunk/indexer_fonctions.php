@@ -4,7 +4,7 @@ function sphinx_get_array2query($query_description, $limit=''){
 	include_spip('inc/indexer');
 	$sq = new \Sphinx\SphinxQLQuery($query_description);
 	if ($limit){ $sq->limit($limit); }
-	
+
 	return $sq->get();
 }
 
@@ -19,11 +19,14 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
         ->select('*')
         ->select("SNIPPET(content, " . $sq->quote($recherche . ($tag ? " $tag" : '')) . ", 'limit=200') AS snippet")
         ->from($index)
-        ->where(strlen($recherche) ? "MATCH(" . $sq->quote($recherche) . ")" : null)
         ->facet("properties.authors ORDER BY COUNT(*) DESC")
         ->facet("properties.tags ORDER BY COUNT(*) DESC")
         ->facet("YEAR(date) ORDER BY date DESC")
         ;
+
+    if (strlen($recherche)) {
+        $sq->where("MATCH(" . $sq->quote($recherche) . ")");
+    }
 
     if ($orderby) {
         $sq->orderby($orderby);

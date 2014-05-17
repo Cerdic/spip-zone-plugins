@@ -4,72 +4,6 @@ namespace Sphinx;
 
 /**
  * Classe pour créer des requêtes de sélection Sphinx
- *
- * Quelques exemples :
-
-
-SPIP
-
-[(#SET{sql, [(#ENV{source,spip}|sphinx_get_query_documents{#ENV*{recherche},#ENV*{tag},#ENV*{auteur}})]})]
-
-PHP
-
-function sphinx_get_query_documents($source, $recherche, $tag = '', $auteur = '', $orderby = '') {
-    include_spip('inc/indexer');
-    $sq = new \Sphinx\SphinxQLQuery();
-    $sq
-        ->select('WEIGHT() AS score')
-        ->select('*')
-        ->select("SNIPPET(content, " . $sq->quote($recherche . ($tag ? " $tag" : '')) . ", 'limit=200') AS snippet")
-        ->from($source)
-        ->where("MATCH(" . $sq->quote($recherche) . ")");
-
-    if ($orderby) {
-        $sq->orderby($orderby);
-    }
-
-    if ($tag) {
-        if ($tag == '-') {
-            $sq->select("IN(properties.tags.fr, " . $sq->quote($tag) . ") AS tag");
-        } else {
-            $sq->select("(LENGTH(properties.tags.fr) = 0) AS tag");
-        }
-        $sq->where("tag = 1");
-    }
-
-    if ($auteur) {
-        $sq->select("IN(properties.authors, " . $sq->quote($auteur) . ") AS auteur");
-        $sq->where("auteur = 1");
-    }
-
-    return $sq->get();
-}
-
-SPIP
-
-[(#SET{sqlf, [(#ENV{source,spip}|sphinx_get_query_facette_auteurs{#ENV*{recherche},#ENV*{tag},#ENV*{auteur}})]})]
-
-PHP
-
-function sphinx_get_query_facette_auteurs($source, $recherche, $tag = '', $auteur = '', $orderby = '') {
-
-    include_spip('inc/indexer');
-    $sq = new \Sphinx\SphinxQLQuery();
-    $sq
-        ->select('COUNT(*) AS c')
-        ->select('GROUPBY() AS facette')
-        ->from($source)
-        ->where("MATCH(" . $sq->quote($recherche) . ")")
-        ->groupby("properties.authors")
-        ->orderby("c DESC")
-        ->limit("30")
-        ;
-
-    return $sq->get();
-}
-
-
-
  */
 class SphinxQLQuery{
     private $select  = [];
@@ -79,13 +13,13 @@ class SphinxQLQuery{
     private $orderby = [];
     private $limit   = '';
     private $facet   = [];
-	
+
 	public function __construct($query_description=array()) {
 		if (!empty($query_description)){
 			$this->array2query($query_description);
 		}
 	}
-	
+
     public function select($select) {
         $this->select[] = $select;
         return $this;
@@ -129,7 +63,7 @@ class SphinxQLQuery{
 					join(",", array_map(array($this, 'quote'), $value))
 				);
 	}
-	
+
 	public function array2query($query_description){
 		if (is_array($query_description)){
 			// Index (mandatory)
@@ -141,12 +75,12 @@ class SphinxQLQuery{
 					$this->from($index);
 				}
 			}
-			
+
 			// Fulltext search string (optional)
 			if (isset($query_description['fulltext']) and is_string($query_description['fulltext'])){
 				$this->where('match(' . $this->quote($query_description['fulltext']) . ')');
 			}
-			
+
 			// All filters
 			$as_count = 0;
 			if (isset($query_description['filters']) and is_array($query_description['filters'])){
@@ -161,12 +95,12 @@ class SphinxQLQuery{
 						if (!isset($filter['comparison'])){
 							$filter['comparison'] = '=';
 						}
-						
+
 						// Always work with an array of values
 						if (!is_array($filter['values'])){
 							$filter['values'] = array($filter['values']);
 						}
-						
+
 						// For each values, we build a comparision
 						$comparisons = array();
 						foreach ($filter['values'] as $value){
@@ -177,7 +111,7 @@ class SphinxQLQuery{
 							$this->where($comparisons);
 						}
 					}
-					
+
 					// Multi value JSON
 					if (
 						$filter['type'] == 'multi_json'
@@ -188,7 +122,7 @@ class SphinxQLQuery{
 						if (!is_array($filter['values'])){
 							$filter['values'] = array($filter['values']);
 						}
-						
+
 						// For each values, we build an "in" select
 						$this->select(
 							'IN(' . $filter['field'] . ', ' . join(', ', array_map(array($this, 'quote'), $filter['values'])) . ') as multi_json_'.$as_count
@@ -198,7 +132,7 @@ class SphinxQLQuery{
 				}
 			}
 		}
-		
+
 		/**
 		// exemple de description
 		array(
@@ -264,17 +198,25 @@ class SphinxQLQuery{
 		);
 		**/
 	}
-	
+
     public function get() {
         $query = [];
+        $this->removeEmpty();
         if ($this->select)   $query[] = 'SELECT '   . implode(',', $this->select);
         if ($this->from)     $query[] = 'FROM '     . implode(',', $this->from);
-        if ($this->where = array_filter($this->where))    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
+        if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
         if ($this->groupby)  $query[] = 'GROUP BY ' . implode(',', $this->groupby);
         if ($this->orderby)  $query[] = 'ORDER BY ' . implode(',', $this->orderby);
         if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
         if ($this->facet)    $query[] = 'FACET '    . implode(' FACET ', $this->facet);
         return implode(' ', $query);
+    }
+
+    private function removeEmpty() {
+        foreach (['select', 'from', 'where', 'groupby', 'orderby', 'facet'] as $key) {
+            $this->$key = array_filter($this->$key);
+            #$this->$key = array_filter($this->key, 'strlen'); // leaves 0
+        }
     }
 
     public function __tostring() {
