@@ -1,7 +1,0 @@
-- li <markdown33|inline>
-  - li <markdown33|inline>
-    - li <markdown33|inline>
-      - li <markdown33|inline>
-    - li <markdown33|inline>
-  - li <markdown33|inline>
-- li <markdown33|inline>

@@ -1,7 +1,0 @@
-- li [SPIP->http://www.spip.net]
-  - li [SPIP->http://www.spip.net]
-    - li [SPIP->http://www.spip.net]
-      - li [SPIP->http://www.spip.net]
-    - li [SPIP->http://www.spip.net]
-  - li [SPIP->http://www.spip.net]
-- li [SPIP->http://www.spip.net]

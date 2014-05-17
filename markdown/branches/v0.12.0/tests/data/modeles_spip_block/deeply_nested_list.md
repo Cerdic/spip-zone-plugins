@@ -1,7 +1,0 @@
-- li <markdown33|block>
-  - li <markdown33|block>
-    - li <markdown33|block>
-      - li <markdown33|block>
-    - li <markdown33|block>
-  - li <markdown33|block>
-- li <markdown33|block>
