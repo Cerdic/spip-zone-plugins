@@ -25,57 +25,68 @@
 <B_filtres>
 <h4>Filtres:</h4>
 <BOUCLE_filtres(DATA){liste auteur,tag,annee}>[
-	<div><a href="[(#SELF|parametre_url{[(#VALEUR)],''})]">x</a> (#ENV{#VALEUR})</div>
+	<div>
+		<a class="btn btn-mini" href="[(#SELF|parametre_url{#VALEUR,''})]"><i class="icon-remove"></i> (#ENV{#VALEUR})</a>
+	</div>
 ]</BOUCLE_filtres>
+
+
 
 <BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}, #ENV{debut_documents}}>
 
-    <B_documents>
-        <h2>Liste des documents trouvés</h2>
-    [<p class="pagination">(#DEBUT_DOCUMENTS|?{#PAGINATION,#ANCRE_PAGINATION})</p>]
-        <dl>
-    <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}
-    {pagination 10}>
-            [<dt>#SCORE <a href="[(#URI)]">(#TITLE)</a>
-             [<small>(#DATE|affdate_court)</small>]
-            </dt>
-             [<dd>(#SNIPPET|sinon{#SUMMARY})</dd>]
-            ]
-    </BOUCLE_documents>
-        </dl>
-    [<div class="pagination">(#PAGINATION)</div>]
-    </B_documents>
+	<B_documents>
+		<h2>Liste des documents trouvés</h2>
+
+		<div class='liste long resultats'>
+			[<div class="pagination">(#DEBUT_DOCUMENTS|?{#PAGINATION,#ANCRE_PAGINATION})</div>]
+			<ul class='liste-items'>
+	<BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}{pagination 10}>
+				[(#SET{properties,#PROPERTIES|json_decode})]
+				<li class='item'>
+					<article class='entry article hentry'>
+						<strong class='h3-like entry-title'>#SCORE <a href="#URI">#TITLE</a></strong>
+						<p class="publication">
+							[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span> <:par_auteur:> (#GET{properties/authors}|implode{', '})</span>]
+						</p>
+						[<div class="introduction entry-content">(#SNIPPET|sinon{#SUMMARY})</div>]
+					</article>
+				</li>
+	</BOUCLE_documents>
+			</ul>
+		</div>
+	[<div class="pagination">(#PAGINATION)</div>]
+	</B_documents>
 
 
-    <B_meta>
-        <h2>Métas associées</h2>
-        <dl>
-    <BOUCLE_meta(DATA){source tableau, #VALEUR}{si #CLE|=={meta}}>
-            [<dt>(#CLE)</dt>]
-            [<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
-    </BOUCLE_meta>
-        </dl>
-    </B_meta>
+	<B_meta>
+		<h2>Métas associées</h2>
+		<dl>
+	<BOUCLE_meta(DATA){source tableau, #VALEUR}{si #CLE|=={meta}}>
+			[<dt>(#CLE)</dt>]
+			[<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
+	</BOUCLE_meta>
+		</dl>
+	</B_meta>
 
 
 
-    <B_facettes>
-        <h2>Facettes associées</h2>
-        <div class='row-fluid'>
-    <BOUCLE_facettes(DATA){source tableau, #VALEUR}{si #CLE|=={facets}}>
-        <div class='span4'>
-            <h3>#CLE</h3>
-            <div class='liste'>
-                <ul class='liste-items'>
-            <BOUCLE_liste_facettes(DATA){source tableau, #VALEUR}>
-                    <li class='item'>#CLE \(#VALEUR\)</li>
-            </BOUCLE_liste_facettes>
-                </ul>
-            </div>
-        </div>
-    </BOUCLE_facettes>
-        </div>
-    </B_facettes>
+	<B_facettes>
+		<h2>Facettes associées</h2>
+		<div class='row-fluid'>
+	<BOUCLE_facettes(DATA){source tableau, #VALEUR}{si #CLE|=={facets}}>
+		<div class='span4'>
+			<h3>#CLE</h3>
+			<div class='liste'>
+				<ul class='liste-items'>
+			<BOUCLE_liste_facettes(DATA){source tableau, #VALEUR}>
+					<li class='item'>#CLE \(#VALEUR\)</li>
+			</BOUCLE_liste_facettes>
+				</ul>
+			</div>
+		</div>
+	</BOUCLE_facettes>
+		</div>
+	</B_facettes>
 </BOUCLE_recherche>
 
 
