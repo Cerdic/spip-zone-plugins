@@ -73,6 +73,7 @@ function yahoo_url2flux($url) {
  */
 function yahoo_flux2previsions($flux, $lieu) {
 	$tableau = array();
+	$index = 0;
 
 	if (isset($flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'])) {
 		$previsions = $flux['children']['channel'][0]['children']['item'][0]['children']['yweather:forecast'];

@@ -296,7 +296,7 @@ function wunderground_service2credits() {
  * -----------------------------------------------------------------------------------------------
  */
 
-function xml2previsions_wunderground($flux) {
+function xml2previsions_wunderground($flux, $unites) {
 	$tableau = array();
 
 	if (isset($flux['children']['forecast'][0]['children']['simpleforecast'][0]['children']['forecastdays'][0]['children']['forecastday'])) {
