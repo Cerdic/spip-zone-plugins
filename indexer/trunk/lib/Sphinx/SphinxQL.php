@@ -72,7 +72,7 @@ class SphinxQL {
 			var_dump($errs);
 		}
 
-		return $liste;
+		return [$liste];
 	}
 
 

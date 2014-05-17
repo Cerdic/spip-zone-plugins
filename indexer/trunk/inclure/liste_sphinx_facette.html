@@ -12,7 +12,7 @@
         <h2>#ENV{titre}</h2>
         <div class='liste'>
             <ul class='liste-items'>
-    <BOUCLE_facette(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}{0, 10}>
+    <BOUCLE_facette(DATA){source tableau, #DOCS}{0, 10}>
                 <li class='item'>
                     <a href="[(#SELF|parametre_url{#ENV{cle},[(#VALEUR{facette}|sinon{-})]})]">
                         [(#VALEUR{facette}|sinon{<i>#ENV{texte_vide}</i>})]

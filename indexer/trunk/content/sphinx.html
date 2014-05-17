@@ -35,12 +35,15 @@
 <BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}, #ENV{debut_documents}}>
 
 	<B_documents>
-		<h2>Liste des documents trouvés</h2>
+		<h2>Documents trouvés</h2>
+		<small>
+		[(#VALEUR{meta/total_found}) ]résultats \([(#VALEUR{meta/time}|mult{1000})] ms\)
+		</small>
 
 		<div class='liste long resultats'>
 			[<div class="pagination">(#DEBUT_DOCUMENTS|?{#PAGINATION,#ANCRE_PAGINATION})</div>]
 			<ul class='liste-items'>
-	<BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}{pagination 10}>
+	<BOUCLE_documents(DATA){source tableau, #DOCS}{pagination 10}>
 				[(#SET{properties,#PROPERTIES|json_decode})]
 				<li class='item'>
 					<article class='entry article hentry'>
@@ -58,22 +61,11 @@
 	</B_documents>
 
 
-	<B_meta>
-		<h2>Métas associées</h2>
-		<dl>
-	<BOUCLE_meta(DATA){source tableau, #VALEUR}{si #CLE|=={meta}}>
-			[<dt>(#CLE)</dt>]
-			[<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
-	</BOUCLE_meta>
-		</dl>
-	</B_meta>
-
-
 
 	<B_facettes>
 		<h2>Facettes associées</h2>
 		<div class='row-fluid'>
-	<BOUCLE_facettes(DATA){source tableau, #VALEUR}{si #CLE|=={facets}}>
+	<BOUCLE_facettes(DATA){source tableau, #FACETS}>
 		<div class='span4'>
 			<h3>#CLE</h3>
 			<div class='liste'>
@@ -87,8 +79,22 @@
 	</BOUCLE_facettes>
 		</div>
 	</B_facettes>
+
+
+	<B_meta>
+		<h2>Métas associées</h2>
+		<dl>
+	<BOUCLE_meta(DATA){source tableau, #META}>
+			[<dt>(#CLE)</dt>]
+			[<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
+	</BOUCLE_meta>
+		</dl>
+	</B_meta>
+
+
 </BOUCLE_recherche>
 
 
-Debug: <pre>#GET{sql}</pre>
+<h2>Debug:</h2>
+<pre>#GET{sql}</pre>
 
