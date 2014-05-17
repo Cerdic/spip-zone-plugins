@@ -66,7 +66,7 @@ class SphinxQL {
 			$meta = $this->query('SHOW meta');
 
 			$liste['docs']   = array_shift($reponses);
-			$liste['facets'] = $reponses;
+			$liste['facets'] = $this->parseFacets($reponses);
 			$liste['meta']   = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
 		} elseif ($errs = $this->sql->errorInfo()) {
 			var_dump($errs);
@@ -76,6 +76,35 @@ class SphinxQL {
 	}
 
 
+	/**
+	 * Transforme un tableau de FACET en tableau PHP utilisable
+	 *
+	 * @param array $facettes
+	 * @return array
+	**/
+	public function parseFacets($facettes) {
+		$facets = [];
+		if (is_array($facettes)) {
+			foreach($facettes as $facette) {
+				foreach ($facette as $i => $desc) {
+					$nb = $desc['count(*)'];
+					unset($desc['count(*)']);
+					$key  = array_keys($desc);
+					$key  = reset($key);
+					$value = array_shift($desc);
+					if (count($desc)) {
+						var_dump($desc);
+						die("Contenu non pris en compte dans FACET !");
+					}
+					if ($i == 0) {
+						$facets[$key] = [];
+					}
+					$facets[$key][$value] = $nb;
+				}
+			}
+		}
+		return $facets;
+	}
 
 	/**
 	 * Transforme un tableau des Metas en tableau PHP élaboré
