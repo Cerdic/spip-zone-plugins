@@ -71,28 +71,26 @@ echo '</pre>';
 
 #SET{query, #ARRAY{
 	index,#ENV{source,spip},
+	select, #LISTE{id,title,date,uri,properties},
 	fulltext, #ENV*{recherche},
+	snippet,#ARRAY{
+		words,#ENV*{datation},
+		limit,300,
+	},
 	filters, #LISTE{
 		#ARRAY{
 			type,multi_json,
-			field,properties.tags,
-			values,#LISTE{#ENV*{tag}, truc, bidule},
-			not,true,
-		},
-		#ARRAY{
-			type,mono,
-			field,properties.date,
-			values,2014-04,
-			comparison,">=",
-			not,true,
+			field,properties.titres_hierarchie_datation,
+			values,#ENV*{datation},
 		},
 	},
-}|sphinx_get_array2query}
+}|sphinx_get_array2query{5}}
 
+<pre>[(#GET{sql}|htmlspecialchars)]</pre>
 <pre>[(#GET{query}|htmlspecialchars)]</pre>
 
 
-<BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}} {si #ENV{recherche}}>
+<BOUCLE_recherche(DATA) {source SphinxQL, #GET{query}} {si #ENV{recherche}}>
 
         <B_documents>
             <h2>Liste des documents trouvés</h2>
@@ -168,7 +166,7 @@ echo '</pre>';
 	Facette par JSON multivalué (tag)
 
 ]
-[(#SET{sqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.tags ORDER BY c DESC LIMIT 30})]
+[(#SET{sqlf,"SELECT COUNT(*) AS c, "GROUPBY() AS facette FROM [(#ENV{source,spip})] WHERE MATCH([(#ENV*{recherche}|_q)]) GROUP BY properties.titres_hierarchie_datation ORDER BY c DESC LIMIT 30})]
 
 
 
@@ -188,7 +186,7 @@ echo '</pre>';
         <B_facette>
             <h2>Liste des facettes</h2>
         <BOUCLE_facette(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
-		<a href="[(#SELF|parametre_url{tag,[(#VALEUR{facette}|sinon{-})]})]">[(#VALEUR{facette}|sinon{<i>sans tag</i>})]</a> (#VALEUR{c} documents)<br />
+		<a href="[(#SELF|parametre_url{datation,[(#VALEUR{facette}|sinon{-})]})]">[(#VALEUR{facette}|sinon{<i>sans tag</i>})]</a> (#VALEUR{c} documents)<br />
         </BOUCLE_facette>
         </B_facette>
 
