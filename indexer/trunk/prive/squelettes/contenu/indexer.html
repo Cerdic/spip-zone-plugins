@@ -9,7 +9,7 @@ if (_request('run') || _request('continue')) {
     try {
         $indexer->registerStorage(
             new Indexer\Storage\Sphinx(
-                new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
+                new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
         );
     } catch( PDOException $e ) {
         if (!$message = $e->getMessage())

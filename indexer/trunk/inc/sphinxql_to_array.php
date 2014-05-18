@@ -12,7 +12,7 @@ function inc_sphinxql_to_array_dist($u, $debut=''){
        $u = preg_replace('/ FACET /', " LIMIT $debut,20 FACET ", $u, 1);
    }
 
-	$sphinx = new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+	$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 
 	$all = $sphinx->allfetsel($u);
 

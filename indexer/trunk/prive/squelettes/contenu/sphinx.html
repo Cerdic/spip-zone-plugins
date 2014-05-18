@@ -37,7 +37,7 @@ aside.facettes {
 <?php
 /*
 include_spip('inc/indexer');
-$sphinx = new Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+$sphinx = new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
 
 echo '<pre>';
 print_r($sphinx->allfetsel('SELECT titre FROM spip WHERE MATCH(\'Paris Brest\') LIMIT 10'));
@@ -99,7 +99,7 @@ echo '</pre>';
                 [<dt>#SCORE <a href="[(#URI)]">(#TITLE)</a>
         	[@(#VALEUR*{properties}|json_decode{1}|table_valeur{login}|print)
         	][<small>(#DATE|affdate_court)</small>]
-                 
+
                 </dt>
                  [<dd>(#SNIPPET|sinon{#SUMMARY})</dd>]
                 ]
@@ -148,7 +148,7 @@ echo '</pre>';
 
  Distance de Nairobi :
 		GEODIST(lat1,long1,lat2,long2)
-] 
+]
 #SET{lon,36.817}
 #SET{lat,1.283}
 

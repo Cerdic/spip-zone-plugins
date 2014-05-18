@@ -4,7 +4,6 @@
 [(#FORMULAIRE_RECHERCHE{#SELF})]
 
 
-
 <aside class="tri">
 	[(#ENV{order}|match{date}|?{
 		[(#SET{order,date DESC})]
@@ -30,18 +29,27 @@
 
 
 <!--
-	{filtre auteurs, properties.authors, #ENV*{auteur}}
+	{filtre auteurs, properties.authors, ALL, #ENV*{auteur}}
+	{filtre tags, properties.mots.fr, IN, #ENV*{auteur}}
+
+	{mono #ENV{date}, date, =}
+	{mono #ENV{date}, date, >}
+	{mono #ENV{date}, date, IN}
+	{mono #ENV{date}, date, INTERVAL, 100, 200, 300}
+
+	{filtres #ENV*{f}} => tableau ? f[auteurs][description...]
 -->
 
 <BOUCLE_recherche_sphinx(SPHINX)
 	{recherche #ENV*{recherche}}
 
-
+	{filtre multi, properties.authors IN #ENV*{auteur}}
 
 	{facet auteurs, properties.authors ORDER BY COUNT(*) DESC}
 	{facet tags, properties.tags ORDER BY COUNT(*) DESC}
 	{facet date, YEAR(date) ORDER BY date DESC}
 >
+
 	<h1>Dans la boucle (SPHINX)</h1>
 	<pre>#QUERY</pre>
 

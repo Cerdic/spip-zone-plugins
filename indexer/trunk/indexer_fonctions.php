@@ -1,17 +1,88 @@
 <?php
-/*
-// charger les fonctions pour le compilateur SPIP
-// boucles (PMB:NOTICES) ...
-include_spip('iterateur/sphinx');
-*/
 
-function sphinx_get_array2query($query_description, $limit=''){
+
+
+function sphinx_get_array2query($api, $limit=''){
 	include_spip('inc/indexer');
-	$sq = new \Sphinx\SphinxQLQuery($query_description);
+	$sq = new \Sphinx\SphinxQL\QueryApi($api);
 	if ($limit){ $sq->limit($limit); }
 
 	return $sq->get();
 }
+
+
+function sphinx_test_api() {
+    $api = 	// exemple de description
+	array(
+		'index' => 'visites',
+		'select' => array('date', 'properties', '*', 'etc'),
+		'fulltext' => 'ma recherche',
+		'snippet' => array(
+			'words' => 'un mot',
+			'field' => 'content',
+			'limit' => 200,
+		),
+		'filters' => array(
+			array(
+				'type' => 'mono',
+				'field' => 'properties.lang',
+				'values' => array('fr'),
+				'comparison' => '!=', // default : =
+			),
+			array(
+				'type' => 'multi_json',
+				'field' => 'properties.tags',
+				'values' => array('pouet', 'glop'),
+			),
+			array(
+				'type' => 'distance',
+				'center' => array(
+					'lat' => 44.837862,
+					'lon' => -0.580086,
+				),
+				'fields' => array(
+					'lat' => 'properties.geo.lat',
+					'lon' => 'properties.geo.lon',
+				),
+				'distance' => 10000,
+				'comparison' => '>', // default : <=
+			),
+			array(
+				'type' => 'interval',
+				'expression' => 'uint(properties.truc)',
+				'intervals' => array(1,2,3,4,5),
+				'field' => 'truc',
+				'test' => 'truc = 2',
+				'select' => 'interval(uint(properties.truc),1,2,3,4)',
+				'where' => 'test = 2',
+			),
+		),
+		'orders' => array(
+			array(
+				'field' => 'score',
+				'direction' => 'asc', // default : desc
+			),
+			array(
+				'field' => 'distance',
+				'center' => array(
+					'lat' => 44.837862,
+					'lon' => -0.580086,
+				),
+				'fields' => array(
+					'lat' => 'properties.geo.lat',
+					'lon' => 'properties.geo.lon',
+				),
+			),
+		),
+		'facet' => array(
+			'field' => 'properties.tags',
+			'group_name' => 'tag',
+			'order' => 'tag asc', // default : count desc
+		),
+	);
+    echo "\n<pre>"; print_r(sphinx_get_array2query($api)); echo "</pre>";
+}
+
 
 /**
  *
@@ -21,7 +92,7 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
 
     if (!$index) $index = SPHINX_DEFAULT_INDEX;
 
-    $sq = new \Sphinx\SphinxQLQuery();
+    $sq = new \Sphinx\SphinxQL\Query();
     $sq
         ->select('*')
         ->select("SNIPPET(content, " . $sq->quote($recherche . ($tag ? " $tag" : '')) . ", 'limit=200') AS snippet")
@@ -68,7 +139,7 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
 function sphinx_get_query_facette_auteurs($index, $recherche, $tag = '', $auteur = '', $orderby = '') {
 
     include_spip('inc/indexer');
-    $sq = new \Sphinx\SphinxQLQuery();
+    $sq = new \Sphinx\SphinxQL\Query();
     $sq
         ->select('COUNT(*) AS c')
         ->select('GROUPBY() AS facette')
@@ -89,7 +160,7 @@ function sphinx_get_query_facette($index, $facette, $cle, $recherche, $orderby =
     if (!$limit)   $limit   = 30;
 
     include_spip('inc/indexer');
-    $sq = new \Sphinx\SphinxQLQuery();
+    $sq = new \Sphinx\SphinxQL\Query();
     $sq
         ->select('COUNT(*) AS c')
         ->select('GROUPBY() AS facette')

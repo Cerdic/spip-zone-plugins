@@ -14,7 +14,7 @@ class Sphinx implements StorageInterface {
     private $indexName = '';
 
 
-    public function __construct(\Sphinx\SphinxQL $sphinxql, $indexName) {
+    public function __construct(\Sphinx\SphinxQL\SphinxQL $sphinxql, $indexName) {
         $this->sphinxql = $sphinxql;
         $this->indexName = $indexName;
     }

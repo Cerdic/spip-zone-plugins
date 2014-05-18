@@ -27,7 +27,8 @@ function iterateur_SPHINX_dist($b) {
 			'docs' => 'ARRAY',
 			'meta' => 'ARRAY',
 			'facets' => 'ARRAY',
-			'query' => 'STRING'
+			'query' => 'STRING',
+			'*' => 'ALL' // Champ joker *
 		)
 	);
 	return $b;
@@ -105,14 +106,14 @@ class IterateurSPHINX implements Iterator {
 			'facet'     => [],
 		];
 
-		#var_dump($command);
+#var_dump($this->command);
 
 		$this->info = $info;
 
 		include_spip('inc/indexer');
 
-		$this->sphinxQL      = new \Sphinx\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
-		$this->sphinxQLQuery = new \Sphinx\SphinxQLQuery();
+		$this->sphinxQL      = new \Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+		$this->sphinxQLQuery = new \Sphinx\SphinxQL\Query();
 
 		$this->setIndex($this->command['index']);
 		$this->setSelection($this->command['selection']);
