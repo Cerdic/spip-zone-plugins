@@ -43,8 +43,6 @@
 <BOUCLE_recherche_sphinx(SPHINX)
 	{recherche #ENV*{recherche}}
 
-	{filtre multi, properties.authors IN #ENV*{auteur}}
-
 	{facet auteurs, properties.authors ORDER BY COUNT(*) DESC}
 	{facet tags, properties.tags ORDER BY COUNT(*) DESC}
 	{facet date, YEAR(date) ORDER BY date DESC}

@@ -28,7 +28,7 @@ function iterateur_SPHINX_dist($b) {
 			'meta' => 'ARRAY',
 			'facets' => 'ARRAY',
 			'query' => 'STRING',
-			'*' => 'ALL' // Champ joker *
+			#'*' => 'ALL' // Champ joker *
 		)
 	);
 	return $b;
