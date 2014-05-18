@@ -159,14 +159,16 @@ function inscription3_i3_definition_champs($flux){
 			'option_intro'=>_T('inscription3:aucun'),
 			'class' => 'pays',
 			'defaut' => $config_i3['pays_defaut'] ? $config_i3['pays_defaut'] : '',
-			'obligatoire' => ($config_i3['pays_obligatoire'] == 'on') ? true : false
+			'obligatoire' => ($config_i3['pays_obligatoire'] == 'on') ? true : false,
+			'rechercher' => false
 		)
 	);
 	$flux['validite'] = array(
 		'saisie' => 'date_jour_mois_annee', // type de saisie
 		'options'=> array(
 			'sql' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // declaration sql
-			'obligatoire' => ($config_i3['validite_obligatoire'] == 'on') ? true : false
+			'obligatoire' => ($config_i3['validite_obligatoire'] == 'on') ? true : false,
+			'rechercher' => false
 		),
 		'verifier' => array(
 			'type' => 'date',
@@ -179,6 +181,7 @@ function inscription3_i3_definition_champs($flux){
 		'saisie' => 'date_jour_mois_annee', // type de saisie
 		'options' => array(
 			'sql' => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // declaration sql
+			'rechercher' => false
 		),
 		'restrictions' => array(
 			'voir' => array('auteur' => ''),
@@ -191,7 +194,8 @@ function inscription3_i3_definition_champs($flux){
 			'sql' => "DATE DEFAULT '0000-00-00' NOT NULL", // declaration sql
 			'obligatoire' => ($config_i3['naissance_obligatoire'] == 'on') ? true : false,
 			'class'=>'nomulti',
-			'datetime'=>'non'
+			'datetime'=>'non',
+			'rechercher' => false
 		),
 		'verifier' => array(
 			'type' => 'date',
@@ -209,7 +213,8 @@ function inscription3_i3_definition_champs($flux){
 				'M' => _T('inscription3:choix_masculin')
 			),
 			'sql' => "varchar(2) NOT NULL default ''", // declaration sql
-			'obligatoire' => ($config_i3['sexe_obligatoire'] == 'on') ? true : false
+			'obligatoire' => ($config_i3['sexe_obligatoire'] == 'on') ? true : false,
+			'rechercher' => false
 		)
 	);
 	

@@ -66,7 +66,8 @@ function inscription3_declarer_champs_extras($champs = array()){
 								'nom' => $cle,
 								'label' => _T('inscription3:label_'.$cle), // chaine de langue 'prefix:cle'
 								'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-								'obligatoire' => (isset($config[$cle.'_obligatoire']) && $config[$cle.'_obligatoire'] == 'on') ? true : false
+								'obligatoire' => (isset($config[$cle.'_obligatoire']) && $config[$cle.'_obligatoire'] == 'on') ? true : false,
+								'rechercher' => 2
 							),
 							'verifier' => array()
 						);
@@ -84,7 +85,8 @@ function inscription3_declarer_champs_extras($champs = array()){
 								'nom' => $cle,
 								'label' => _T('inscription3:label_'.$cle), // chaine de langue 'prefix:cle'
 								'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-								'obligatoire' => (isset($config[$cle.'_obligatoire']) && $config[$cle.'_obligatoire'] == 'on') ? true : false
+								'obligatoire' => (isset($config[$cle.'_obligatoire']) && $config[$cle.'_obligatoire'] == 'on') ? true : false,
+								'rechercher' => 2,
 							),
 							'verifier' => array()
 						);
