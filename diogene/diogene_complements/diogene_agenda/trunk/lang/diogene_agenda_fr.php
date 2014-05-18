@@ -4,6 +4,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// E
+	'evenement_supprimer' => 'Supprimer l\'évènement',
 
 	// F
 	'form_legend_agenda' => 'Évènement',
@@ -11,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_agenda_caches' => 'Champs de l\'agenda à ne pas afficher',
 	'label_agenda_legende' => 'Légende de la partie "évènement" du formulaire',
+	'label_agenda_obligatoire' => 'L\'évènement est obligatoire',
 	'label_cfg_ajout_agenda' => 'Évènement',
 );
 

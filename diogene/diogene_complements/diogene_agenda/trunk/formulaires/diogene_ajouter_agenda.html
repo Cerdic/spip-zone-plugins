@@ -5,6 +5,12 @@
 		<ul>
 			<li class='editer editer_date fieldset'>
 				<ul>
+					[(#ENV{agenda_obligatoire}|=={on}|non|et{#ENV{id_article}|intval|>{0}|et{#ENV{id_evenement}|intval|>{0}}|oui}|oui)<li class="editer editer_supprimer_evenement">
+						<label for="supprimer_evenement"><:diogene_agenda:evenement_supprimer:></label>
+						<div class="choix">
+							<input type="checkbox" name="supprimer_evenement" id="supprimer_evenement"[(#ENV{supprimer_evenement}|=={on}|oui)checked="checked"] />
+						</div>
+					</li>]
 					<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre_evenement}|oui)erreur]">
 						<label for="titre_evenement"><:agenda:evenement_titre:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_evenement})</span>

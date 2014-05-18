@@ -15,14 +15,14 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
 
 		$flux['args']['contexte']['agenda_caches'] = array();
-
+		
 		if(is_array(unserialize($flux['args']['options_complements']['agenda_caches'])))
 			$flux['args']['contexte']['agenda_caches'] = unserialize($flux['args']['options_complements']['agenda_caches']);
 		
 		$evenement = array();
 		$evenement['repetitions'] = array();
 		if(intval($id_objet)){
-			$evenement = sql_fetsel('*','spip_evenements','id_article='.intval($id_objet));
+			$evenement = sql_fetsel('*','spip_evenements','id_article='.intval($id_objet).' AND statut != "poubelle"');
 			if($evenement['titre'] != sql_getfetsel('titre','spip_evenements','id_article='.intval($id_objet)))
 				$evenement['titre_evenement'] = $evenement['titre'];
 			unset($evenement['titre']);
@@ -75,6 +75,9 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		if (_request('date_debut') AND !_request('horaire'))
 			$evenement['horaire'] = 'oui';
 		
+		if(isset($flux['args']['options_complements']['agenda_obligatoire']) && $flux['args']['options_complements']['agenda_obligatoire'] == 'on')
+			$evenement['agenda_obligatoire'] = "on";
+		$evenement['supprimer_evenement'] = _request('supprimer_evenement');
 		$flux['args']['contexte'] = array_merge($flux['args']['contexte'],$evenement);
 		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_agenda',$flux['args']['contexte']);
 	}
@@ -90,13 +93,29 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
  */
 function diogene_agenda_diogene_verifier($flux){
 	$id_diogene = _request('id_diogene');
-	if(intval($id_diogene)){
+	if(intval($id_diogene) && !_request('supprimer_evenement')){
 		$champs_ajoutes = unserialize(sql_getfetsel("champs_ajoutes","spip_diogenes","id_diogene=".intval($id_diogene)));
 		$erreurs = $flux['args']['erreurs'];
 		if (is_array($champs_ajoutes) && in_array('agenda',$champs_ajoutes)){
 			include_spip('formulaires/editer_evenement');
 			$erreurs = formulaires_editer_evenement_verifier_dist(_request('id_evenement'), $id_article,false, false, 'evenements_edit_config');
 			unset($erreurs['id_parent']);
+			
+			if(!isset($flux['args']['options_complements']['agenda_obligatoire']) OR $flux['args']['options_complements']['agenda_obligatoire'] != 'on'){
+				$champs_post = false;
+				$champs = objet_info('evenement','champs_editables');
+				$champs[] = 'titre_evenement';
+				foreach($champs as $champ){
+					//spip_log($champ,'test.'._LOG_ERREUR);
+					if(!in_array($champ,array('titre','horaire')) && _request($champ)){
+						spip_log('On a '.$champ,'test.'._LOG_ERREUR);
+						$champs_post = true;
+						break;
+					}
+				}
+				if(count($erreurs) > 0 && !$champs_post)
+					$erreurs = array();
+			}
 		}
 		$flux['data'] = array_merge($flux['data'], $erreurs);
 	}
@@ -118,7 +137,18 @@ function diogene_agenda_diogene_traiter($flux){
 		/**
 		 * On a un id_evenement => on met à jour
 		 */
-		if(intval($id_article) > 0){
+		if(intval($id_article) > 0 && !_request('supprimer_evenement')){
+			if(!isset($flux['args']['options_complements']['agenda_obligatoire']) OR $flux['args']['options_complements']['agenda_obligatoire'] != 'on'){
+				$champs_post = false;
+				foreach(objet_info('evenement','champs_editables') as $champ){
+					if(!in_array($champ,array('titre','horaire')) && _request($champ)){
+						$champs_post = true;
+						break;
+					}
+				}
+				if(!$champs_post)
+					return $flux;
+			}
 			include_spip('formulaires/editer_evenement');
 			set_request('id_parent',$id_article);
 			
@@ -154,6 +184,11 @@ function diogene_agenda_diogene_traiter($flux){
 			if($titre_article)
 				set_request('titre',$titre_article);
 		}
+		// Supprimer l'évènement
+		else{
+			include_spip('action/editer_evenement');
+			evenement_instituer(_request('id_evenement'), array('statut'=>'poubelle','id_article'=>$id_article));
+		}
 	}
 	return $flux;
 }
@@ -181,6 +216,7 @@ function diogene_agenda_diogene_champs_texte($flux){
 function diogene_agenda_diogene_champs_pre_edition($array){
 	$array[] = 'agenda_caches';
 	$array[] = 'agenda_legende';
+	$array[] = 'agenda_obligatoire';
 	return $array;
 }
 
