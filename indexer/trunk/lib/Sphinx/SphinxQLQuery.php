@@ -6,13 +6,13 @@ namespace Sphinx;
  * Classe pour créer des requêtes de sélection Sphinx
  */
 class SphinxQLQuery{
-    private $select  = [];
-    private $from    = [];
-    private $where   = [];
-    private $groupby = [];
-    private $orderby = [];
-    private $limit   = '';
-    private $facet   = [];
+	private $select  = [];
+	private $from    = [];
+	private $where   = [];
+	private $groupby = [];
+	private $orderby = [];
+	private $limit   = '';
+	private $facet   = [];
 
 	public function __construct($query_description=array()) {
 		if (!empty($query_description)){
@@ -20,43 +20,43 @@ class SphinxQLQuery{
 		}
 	}
 
-    public function select($select) {
-        $this->select[] = $select;
-        return $this;
-    }
+	public function select($select) {
+		$this->select[] = $select;
+		return $this;
+	}
 
-    public function from($from) {
-        $this->from[] = $from;
-        return $this;
-    }
+	public function from($from) {
+		$this->from[] = $from;
+		return $this;
+	}
 
 
-    public function where($where) {
-        $this->where[] = $where;
-        return $this;
-    }
+	public function where($where) {
+		$this->where[] = $where;
+		return $this;
+	}
 
-    public function orderby($orderby) {
-        $this->orderby[] = $orderby;
-        return $this;
-    }
+	public function orderby($orderby) {
+		$this->orderby[] = $orderby;
+		return $this;
+	}
 
-    public function groupby($groupby) {
-        $this->groupby[] = $groupby;
-        return $this;
-    }
+	public function groupby($groupby) {
+		$this->groupby[] = $groupby;
+		return $this;
+	}
 
-    public function limit($limit) {
-        $this->limit = $limit;
-        return $this;
-    }
+	public function limit($limit) {
+		$this->limit = $limit;
+		return $this;
+	}
 
-    public function facet($facet) {
-        $this->facet[] = $facet;
-        return $this;
-    }
+	public function facet($facet) {
+		$this->facet[] = $facet;
+		return $this;
+	}
 
-    function quote($value, $type='') {
+	function quote($value, $type='') {
 		return
 			(is_numeric($value)) ? strval($value) :
 				(!is_array($value) ? ("'" . addslashes($value) . "'") :
@@ -70,7 +70,7 @@ class SphinxQLQuery{
 			$this->select('snippet(' . $field . ', ' . $this->quote($words) . ", 'limit=$limit') as snippet");
 		}
 	}
-	
+
 	public function array2query($query_description){
 		if (is_array($query_description)){
 			// Index (mandatory)
@@ -93,7 +93,7 @@ class SphinxQLQuery{
 					$this->select($select);
 				}
 			}
-			
+
 			// Fulltext search string (optional)
 			if (isset($query_description['fulltext']) and is_string($query_description['fulltext'])){
 				$this->where('match(' . $this->quote($query_description['fulltext']) . ')');
@@ -113,7 +113,7 @@ class SphinxQLQuery{
 				$limit = isset($query_description['snippet']['limit']) ? $query_description['snippet']['limit'] : 200;
 				$this->generate_snippet($field, $snippet_words, $limit);
 			}
-			
+
 			// All filters
 			$as_count = 0;
 			if (isset($query_description['filters']) and is_array($query_description['filters'])){
@@ -246,29 +246,29 @@ class SphinxQLQuery{
 		**/
 	}
 
-    public function get() {
-        $query = [];
-        $this->removeEmpty();
-        if ($this->select)   $query[] = 'SELECT '   . implode(', ', $this->select);
-        if ($this->from)     $query[] = 'FROM '     . implode(', ', $this->from);
-        if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
-        if ($this->groupby)  $query[] = 'GROUP BY ' . implode(', ', $this->groupby);
-        if ($this->orderby)  $query[] = 'ORDER BY ' . implode(', ', $this->orderby);
-        if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
-        if ($this->facet)    $query[] = 'FACET '    . implode(' FACET ', $this->facet);
-        return implode(' ', $query);
-    }
+	public function get() {
+		$query = [];
+		$this->removeEmpty();
+		if ($this->select)   $query[] = 'SELECT '   . implode(', ', $this->select);
+		if ($this->from)     $query[] = 'FROM '     . implode(', ', $this->from);
+		if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
+		if ($this->groupby)  $query[] = 'GROUP BY ' . implode(', ', $this->groupby);
+		if ($this->orderby)  $query[] = 'ORDER BY ' . implode(', ', $this->orderby);
+		if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
+		if ($this->facet)    $query[] = 'FACET '    . implode(' FACET ', $this->facet);
+		return implode(' ', $query);
+	}
 
-    private function removeEmpty() {
-        foreach (['select', 'from', 'where', 'groupby', 'orderby', 'facet'] as $key) {
-            $this->$key = array_filter($this->$key);
-            #$this->$key = array_filter($this->key, 'strlen'); // leaves 0
-        }
-    }
+	private function removeEmpty() {
+		foreach (['select', 'from', 'where', 'groupby', 'orderby', 'facet'] as $key) {
+			$this->$key = array_filter($this->$key);
+			#$this->$key = array_filter($this->key, 'strlen'); // leaves 0
+		}
+	}
 
-    public function __tostring() {
-        return $this->get();
-    }
+	public function __tostring() {
+		return $this->get();
+	}
 }
 
 
