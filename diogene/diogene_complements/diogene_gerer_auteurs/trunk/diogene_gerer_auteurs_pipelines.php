@@ -54,6 +54,7 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 					$flux['args']['contexte']['auteurs'] = _request('diogene_gerer_auteurs');
 				else if(_request('type_diogene'))
 					$flux['args']['contexte']['auteurs'] = array();
+				spip_log($flux['args']['contexte']['auteurs'],"test."._LOG_ERREUR);
 				$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 			}
 		}else{
@@ -83,7 +84,7 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 	$id_objet = $flux['args']['id_objet'];
 	$type = $flux['args']['type'];
 	$pipeline = pipeline('diogene_objets');
-	if(in_array($type,array_keys($pipeline)) && isset($pipeline[$type]['champs_sup']['auteurs'])){
+	if(_request('id_diogene') && in_array($type,array_keys($pipeline)) && isset($pipeline[$type]['champs_sup']['auteurs'])){
 		include_spip('inc/autoriser');
 		if(!autoriser('associerauteurs',$type,$id_objet))
 			return $flux;
