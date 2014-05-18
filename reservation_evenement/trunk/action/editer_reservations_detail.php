@@ -40,7 +40,7 @@ function reservations_detail_modifier($id_reservations_detail, $set=null) {
 	//Pipeline permettant aux plugins de modifier les détails de la réservation
 	$c = pipeline('reservation_evenement_donnees_details',array(
 					'args'=>$set, 
-					'data'=>array_merge($donnees_reservations_details($id_reservations_detail,$c))
+					'data'=>array_merge($c,$donnees_reservations_details($id_reservations_detail,$c))
 					)
 				);
 
