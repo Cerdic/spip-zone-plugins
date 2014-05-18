@@ -252,7 +252,7 @@ class SphinxQLQuery{
         if ($this->select)   $query[] = 'SELECT '   . implode(', ', $this->select);
         if ($this->from)     $query[] = 'FROM '     . implode(', ', $this->from);
         if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
-        if ($this->groupby)  $query[] = 'GROUP BY ' . implode(',', $this->groupby);
+        if ($this->groupby)  $query[] = 'GROUP BY ' . implode(', ', $this->groupby);
         if ($this->orderby)  $query[] = 'ORDER BY ' . implode(', ', $this->orderby);
         if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
         if ($this->facet)    $query[] = 'FACET '    . implode(' FACET ', $this->facet);

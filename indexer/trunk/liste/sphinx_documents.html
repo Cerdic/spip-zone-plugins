@@ -1,0 +1,26 @@
+
+<B_documents>
+    <h2>Documents trouvés</h2>
+    <small>
+    [(#ENV{meta/total}|=={1000}|?{'+ de '}) ][(#ENV{meta/total}) ]résultats \([(#ENV{meta/time}|mult{1000})] ms\)
+    </small>
+
+    <div class='liste long resultats'>
+        [<div class="pagination">(#DEBUT_DOCUMENTS|?{#PAGINATION,#ANCRE_PAGINATION})</div>]
+        <ul class='liste-items'>
+<BOUCLE_documents(DATA){source tableau, #DOCS}{pagination 10}>
+            [(#SET{properties,#PROPERTIES|json_decode})]
+            <li class='item'>
+                <article class='entry article hentry'>
+                    <strong class='h3-like entry-title'>#SCORE <a href="#URI">#TITLE</a></strong>
+                    <p class="publication">
+                        [<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span> <:par_auteur:> (#GET{properties/authors}|implode{', '})</span>]
+                    </p>
+                    [<div class="introduction entry-content">(#SNIPPET|sinon{#SUMMARY})</div>]
+                </article>
+            </li>
+</BOUCLE_documents>
+        </ul>
+    </div>
+[<div class="pagination">(#PAGINATION)</div>]
+</B_documents>

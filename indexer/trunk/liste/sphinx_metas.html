@@ -1,0 +1,18 @@
+
+
+<B_meta>
+    <h2>Métas associées</h2>
+    <table class='spip'>
+<BOUCLE_meta(DATA){source tableau, #META}>
+    <tr>
+        <th>#CLE</th>
+        <td>
+        [(#CLE|=={keywords}|non) #VALEUR ]
+        [(#CLE|=={keywords}|oui)
+            <pre>[(#VALEUR*|print_r{1})]</pre>
+        ]
+        </td>
+    </tr>
+</BOUCLE_meta>
+    </table>
+</B_meta>

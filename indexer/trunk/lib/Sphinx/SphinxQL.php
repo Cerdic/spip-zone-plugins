@@ -20,7 +20,13 @@ class SphinxQL {
 	 * Se connecter à Sphinx
 	**/
 	public function connect() {
-		$this->sql = new \PDO("mysql:host=" . $this->host . ";port=" . $this->port, "", "");
+		try {
+			$this->sql = new \PDO("mysql:host=" . $this->host . ";port=" . $this->port, "", "");
+		} catch (\Exception $e) {
+			var_dump($e->getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -28,7 +34,7 @@ class SphinxQL {
 	**/
 	public function query($query) {
 		if (!$this->sql) {
-			throw new Exception('Connecteur non exécuté');
+			return false;
 		}
 		return $this->sql->query($query);
 	}
@@ -38,7 +44,7 @@ class SphinxQL {
 	**/
 	public function prepare($query) {
 		if (!$this->sql) {
-			throw new Exception('Connecteur non exécuté');
+			return false;
 		}
 		return $this->sql->prepare($query);
 	}
@@ -48,6 +54,10 @@ class SphinxQL {
 	 * Récupère toutes les informations de la requête ET ses metas
 	**/
 	public function allfetsel($query) {
+		if (!$this->sql) {
+			return false;
+		}
+
 		$liste = [
 			'docs'   => [],
 			'facets' => [],
@@ -68,7 +78,9 @@ class SphinxQL {
 
 			$liste['docs']   = array_shift($reponses);
 			$liste['facets'] = $this->parseFacets($reponses);
-			$liste['meta']   = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
+			if ($meta) {
+				$liste['meta']   = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
+			}
 		} elseif ($errs = $this->sql->errorInfo()) {
 			var_dump($errs);
 		}

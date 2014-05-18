@@ -1,4 +1,9 @@
 <?php
+/*
+// charger les fonctions pour le compilateur SPIP
+// boucles (PMB:NOTICES) ...
+include_spip('iterateur/sphinx');
+*/
 
 function sphinx_get_array2query($query_description, $limit=''){
 	include_spip('inc/indexer');
@@ -13,18 +18,21 @@ function sphinx_get_array2query($query_description, $limit=''){
  */
 function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '', $annee='', $orderby = '') {
     include_spip('inc/indexer');
+
+    if (!$index) $index = SPHINX_DEFAULT_INDEX;
+
     $sq = new \Sphinx\SphinxQLQuery();
     $sq
-        ->select('WEIGHT() AS score')
         ->select('*')
         ->select("SNIPPET(content, " . $sq->quote($recherche . ($tag ? " $tag" : '')) . ", 'limit=200') AS snippet")
         ->from($index)
         ->facet("properties.authors ORDER BY COUNT(*) DESC")
         ->facet("properties.tags ORDER BY COUNT(*) DESC")
-        ->facet("YEAR(date) ORDER BY date DESC")
+        ->facet("YEAR(date) as annee ORDER BY date DESC")
         ;
 
     if (strlen($recherche)) {
+        $sq->select('WEIGHT() AS score');
         $sq->where("MATCH(" . $sq->quote($recherche) . ")");
     }
 

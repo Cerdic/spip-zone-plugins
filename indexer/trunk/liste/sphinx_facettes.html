@@ -1,0 +1,19 @@
+
+
+<B_facettes>
+    <h2>Facettes associées</h2>
+    <div class='row-fluid'>
+<BOUCLE_facettes(DATA){source tableau, #FACETS}>
+    <div class='span4'>
+        <h3>#CLE</h3>
+        <div class='liste'>
+            <ul class='liste-items'>
+        <BOUCLE_liste_facettes(DATA){source tableau, #VALEUR}>
+                <li class='item'>#CLE \(#VALEUR\)</li>
+        </BOUCLE_liste_facettes>
+            </ul>
+        </div>
+    </div>
+</BOUCLE_facettes>
+    </div>
+</B_facettes>
