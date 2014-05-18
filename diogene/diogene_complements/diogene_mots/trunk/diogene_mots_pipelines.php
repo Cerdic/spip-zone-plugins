@@ -208,6 +208,8 @@ function diogene_mots_diogene_traiter($flux){
 	$pipeline = pipeline('diogene_objets');
 	if (in_array($flux['args']['type'],array_keys($pipeline)) && isset($pipeline[$flux['args']['type']]['champs_sup']['mots']) AND ($id_diogene = _request('id_diogene'))) {
 		include_spip('action/editer_mot');
+		$invalider = false;
+		$objet = $flux['args']['type'];
 		$id_objet = $flux['args']['id_objet'];
 
 		$options_complements = unserialize(sql_getfetsel("options_complements","spip_diogenes","id_diogene=".intval($id_diogene)));
@@ -244,6 +246,7 @@ function diogene_mots_diogene_traiter($flux){
 						$c = array('titre' => $titre_propre);
 						// C'est sale - TODO - utiliser plutôt mot_modifier($id_mot, $c)
 						if (sql_updateq('spip_mots', $c, 'id_mot='.$id_mot)) {
+							$invalider = true;
 							// un fois créé, on ajoute l'identifiant pour pouvoir associer le mot ensuite
 							$requete_id_groupe[] = $id_mot;
 						}
@@ -251,7 +254,7 @@ function diogene_mots_diogene_traiter($flux){
 				}
 			}
 
-			$result = sql_allfetsel('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.$flux['args']['type'].'" AND id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
+			$result = sql_allfetsel('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.sql_quote($objet).'" AND id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
 			foreach ($result as $row) {
 				$mots_multiples[] = $row['id_mot'];
 			}
@@ -262,18 +265,26 @@ function diogene_mots_diogene_traiter($flux){
 				 */
 				if(in_array($mot, $mots_multiples))
 					$mots_multiples = array_diff($mots_multiples,array($mot));
-				else
-					sql_insertq('spip_mots_liens', array('id_mot' =>$mot,  'id_objet' => $id_objet,'objet'=> $flux['args']['type']));
+				else{
+					sql_insertq('spip_mots_liens', array('id_mot' =>$mot,  'id_objet' => $id_objet,'objet'=> $objet));
+					$invalider = true;
+				}
 			}
 			/**
 			 * S'il reste quelque chose dans les mots d'origine, on les délie de l'objet
 			 */
-			if(count($mots_multiples)>0)
-				sql_delete('spip_mots_liens','objet="'.$flux['args']['type'].'" AND id_objet='.intval($id_objet).' AND id_mot IN ('.implode(',',$mots_multiples).')');
+			if(count($mots_multiples)>0){
+				sql_delete('spip_mots_liens','objet="'.sql_quote($objet).'" AND id_objet='.intval($id_objet).' AND id_mot IN ('.implode(',',$mots_multiples).')');
+				$invalider = true;
+			}
 
 			// On nettoie les variables mises à jour dans verifier()
 			set_request('groupe_'.$id_groupe, $requete_id_groupe);
 			set_request('nouveaux_groupe_'.$id_groupe, array());
+			if($invalider){
+				include_spip('inc/invalideur');
+				suivre_invalideur("id='$objet/$id_objet'");
+			}
 		}
 	}
 	return $flux;
