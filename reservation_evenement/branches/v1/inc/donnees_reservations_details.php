@@ -73,5 +73,6 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
             }
           }
        }
+
     return $set;
 }

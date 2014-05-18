@@ -36,8 +36,13 @@ function reservations_detail_modifier($id_reservations_detail, $set=null) {
     );
 
     $donnees_reservations_details=charger_fonction('donnees_reservations_details','inc');
-
-    $c = array_merge($c,$donnees_reservations_details($id_reservations_detail,$c));
+    
+	//Pipeline permettant aux plugins de modifier les détails de la réservation
+	$c = pipeline('reservation_evenement_donnees_details',array(
+					'args'=>$set, 
+					'data'=>array_merge($donnees_reservations_details($id_reservations_detail,$c))
+					)
+				);
 
     // Si l'objet est publie, invalider les caches et demander sa reindexation
     if (objet_test_si_publie($objet,$id)){

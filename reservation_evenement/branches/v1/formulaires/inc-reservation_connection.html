@@ -6,9 +6,9 @@
     	<strong class="explication"><:reservation:explication_login{url=#GET{url},titre_login=#GET{titre_login}}:></strong>
     </li>]
     
-    [(#SAISIE{input,nom,label=<:reservation:label_nom:>,obligatoire=oui})]
+    [(#SAISIE{input,#ENV{name_nom,nom},label=<:reservation:label_nom:>,obligatoire=oui})]
     
-    [(#SAISIE{input,email,label=<:reservation:label_email:>,obligatoire=oui})]       
+    [(#SAISIE{input,#ENV{name_email,email},label=<:reservation:label_email:>,obligatoire=oui})]       
     
     [(#REM)Géneration des champs extras auteurs]
     
@@ -20,23 +20,25 @@
     <li>
         [(#SAISIE{checkbox,enregistrer,class=enregistrer,label=<:reservation:label_enregistrer:>,datas=#ARRAY{1,<:reservation:ok:>}})]
         <ul class="block_mp">
-            [(#SAISIE{input,new_login,label=<:item_login:>,obligatoire=#GET{obligatoire}})] 
-            [(#SAISIE{input,new_pass,type="password",label=<:reservation:label_mot_passe:>,obligatoire=#GET{obligatoire},class=password,explication=<:info_plus_cinq_car:>})] 
-            [(#SAISIE{input,new_pass2,type="password",label=<:reservation:label_mot_passe2:>,obligatoire=#GET{obligatoire},class=password})]
+            [(#SAISIE{input,#ENV{name_new_login,new_login},label=<:item_login:>,obligatoire=#GET{obligatoire}})] 
+            [(#SAISIE{input,#ENV{name_new_pass,new_pass},type="password", label=<:reservation:label_mot_passe:>, obligatoire=#GET{obligatoire},class=password,explication=<:info_plus_cinq_car:>})]           
+            [(#SAISIE{input,#ENV{name_new_pass2,new_pass2}, type="password", label=<:reservation:label_mot_passe2:>,obligatoire=#GET{obligatoire},class=password})]
         </ul>
     
     </li>]
-    </ul>
+</ul>
       <!--extra_connection2-->
       
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        if (!$('input[name="enregistrer[]"]').is(':checked')) {
-            $('.block_mp').hide(); 
-            } 
-        });
-    $('input[name="enregistrer[]"]').click(function() {
-        $('.block_mp').slideToggle('slow', function() {
-        });
-});   
-</script>
+     <script type="text/javascript">
+    /*<![CDATA[*/
+        jQuery(document).ready(function(){
+            if (!$('input[name="enregistrer[]"]').is(':checked')) {
+                $('.block_mp').hide(); 
+                } 
+            });
+        $('input[name="enregistrer[]"]').click(function() {
+            $('.block_mp').slideToggle('slow', function() {});
+            });
+           
+    /*]]>*/
+    </script>

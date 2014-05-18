@@ -155,12 +155,11 @@ function formulaires_reservation_verifier_dist($id='',$id_article=''){
 	return $erreurs;
 }
 
-function formulaires_reservation_traiter_dist($id='',$id_article=''){
-	
+function formulaires_reservation_traiter_dist($id='',$id_article=''){	
 	$enregistrer=charger_fonction('reservation_enregistrer','inc');
+	if(isset($GLOBALS['visiteur_session']['id_auteur']))$id_auteur=$GLOBALS['visiteur_session']['id_auteur'];  
  		
-	return $enregistrer($id,$id_article);
-
+	return $enregistrer($id,$id_article,$id_auteur);
 }
 
 ?>

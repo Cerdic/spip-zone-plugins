@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 //Enregistrement d'une réservation
-function inc_reservation_enregistrer_dist($id='',$id_article=''){
+function inc_reservation_enregistrer_dist($id='',$id_article='',$id_auteur='',$champs_extras_auteurs=array()){
  include_spip('inc/session');    
     include_spip('inc/config');
     $config=lire_config('reservation_evenement');
@@ -19,19 +19,24 @@ function inc_reservation_enregistrer_dist($id='',$id_article=''){
 	
     // La référence
     $fonction_reference = charger_fonction('reservation_reference', 'inc/');
-    if(isset($GLOBALS['visiteur_session']['id_auteur']))$id_auteur=$GLOBALS['visiteur_session']['id_auteur'];  
-   $set=array('statut'=>$statut,'lang'=>_request('lang'));
+
+   	$set=array('statut'=>$statut,'lang'=>_request('lang'));
     
     //les champs extras auteur
     include_spip('cextras_pipelines');
     $valeurs_extras=array();
-    if(function_exists('champs_extras_objet')){
-        //Charger les définitions pour la création des formulaires
-        $champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
-       foreach( $champs_extras_auteurs as $value){
-             $valeurs_extras[$value['options']['label']]=_request($value['options']['nom']); 
-            }
-        }
+	
+
+    if(!is_array($champs_extras_auteurs) AND function_exists('champs_extras_objet')){
+		//Charger les définitions pour la création des formulaires
+		$champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
+    }
+	
+	if(is_array($champs_extras_auteurs)){
+		foreach( $champs_extras_auteurs as $value){
+			$valeurs_extras[$value['options']['label']]=_request($value['options']['nom']); 
+    	}
+	}
 
    if(_request('enregistrer')){
             include_spip('actions/editer_auteur');
