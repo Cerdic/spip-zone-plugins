@@ -11,7 +11,7 @@ if (_request('run') || _request('continue')) {
             new Indexer\Storage\Sphinx(
                 new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
         );
-    } catch( PDOException $e ) {
+    } catch( \Exception $e ) {
         if (!$message = $e->getMessage())
             $message = _L('Erreur inconnue');
         die("<p class='erreur'>$message</p>");

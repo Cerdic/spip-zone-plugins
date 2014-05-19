@@ -8,7 +8,7 @@ class SphinxQL {
 
 	private $host;
 	private $port;
-	private $sql; // objet PDO
+	private $sql; // objet MySQLi
 
 	public function __construct($host = '127.0.0.1', $port = 9306) {
 		$this->host = $host;
@@ -21,7 +21,7 @@ class SphinxQL {
 	**/
 	public function connect() {
 		try {
-			$this->sql = new \PDO("mysql:host=" . $this->host . ";port=" . $this->port, "", "");
+			$this->sql = new \MySQLi($this->host, null, null, null, $this->port);
 		} catch (\Exception $e) {
 			var_dump($e->getMessage());
 			return false;
@@ -36,7 +36,7 @@ class SphinxQL {
 		if (!$this->sql) {
 			return false;
 		}
-		return $this->sql->query($query);
+		return $this->sql->multi_query($query);
 	}
 
 	/**
@@ -65,29 +65,33 @@ class SphinxQL {
 			'query'  => $query
 		);
 
-		if ($docs = $this->query($query)) {
-			// les jeux de réponses sont les suivant :
+		try {
+			$docs = $this->query($query);
+
+			// les jeux de réponses sont les suivants :
 			// 1) les documents trouvés
 			// 2+) les FACET à la suite
 			$reponses = array();
-			 do {
-				$reponses[] = $docs->fetchAll(\PDO::FETCH_ASSOC);
-			} while ($docs->nextRowset());
+			do {
+				if ($result = $this->sql->store_result()) {
+					$reponses[] = $result->fetch_all(MYSQLI_ASSOC);
+					$result->free();
+				}
+			} while ($this->sql->next_result());
 
 			$liste['docs']   = array_shift($reponses);
 			$liste['facets'] = $this->parseFacets($reponses);
 
-			$meta = $this->query('SHOW meta');
-			if ($errs = $this->sql->errorInfo()) {
-				# TODO: comprendre le pourquoi de l'erreur
-				# Cannot execute queries while other unbuffered queries are active. Consider using PDOStatement::fetchAll(). Alternatively, if your code is only ever going to run against mysql, you may enable query buffering by setting the PDO::MYSQL_ATTR_USE_BUFFERED_QUERY attribute.
-				var_dump($errs);
-			}
-			if ($meta) {
-				$liste['meta']   = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
-			}
-		} elseif ($errs = $this->sql->errorInfo()) {
-			var_dump($errs);
+		} catch  (\Exception $e) {
+			echo "\n<div><tt>",htmlspecialchars($query),"</tt></div>\n";
+			var_dump($e->getMessage());
+			return false;
+		}
+
+		// recuperer les META
+		if ($meta = $this->query('SHOW META')) {
+			$result = $this->sql->store_result();
+			$liste['meta']   = $this->parseMeta($result->fetch_all(MYSQLI_ASSOC));
 		}
 
 		return array('query' => $liste);

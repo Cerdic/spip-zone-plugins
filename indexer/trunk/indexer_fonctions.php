@@ -109,6 +109,11 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
     }
 
     if ($orderby) {
+        // permettre un order by (formule compliquee AS tseg) dans la boucle DATA
+        if (preg_match(',^(.*) AS (\w+),i', $orderby, $r)) {
+            $sq->select($r[0]);
+            $orderby = str_replace($r[0], $r[2], $orderby);
+        }
         $sq->orderby($orderby);
     }
 
