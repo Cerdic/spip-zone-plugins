@@ -3,14 +3,17 @@
 
 [(#FORMULAIRE_RECHERCHE{#SELF})]
 
+#SET{tri,''}
+#SET{sens_tri,''}
 
 <aside class="tri">
 	[(#ENV{order}|match{date}|?{
-		[(#SET{order,date DESC})]
+		[(#SET{tri,date})]
+		[(#SET{sens_tri,-1})]
 		résultats triés par date
 	})]
 	<div>
-	[(#GET{order}|?{
+	[(#GET{tri}|?{
 		<a href="[(#SELF|parametre_url{order,''})]">trier par pertinence</a>
 	,
 		<a href="[(#SELF|parametre_url{order,date})]">trier par date</a>
@@ -36,6 +39,8 @@
 	{select_filter #ENV{annee},  'YEAR(date) = @valeur' }
 	{select_filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
 	{select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.auteurs) = 0'}
+
+	{par #GET{tri}}{inverse #GET{sens_tri}}
 
 	{facet auteur, properties.authors ORDER BY COUNT(*) DESC}
 	{facet tag,    properties.tags ORDER BY COUNT(*) DESC}

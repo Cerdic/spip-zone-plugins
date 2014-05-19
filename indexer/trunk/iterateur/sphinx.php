@@ -219,6 +219,10 @@ class IterateurSPHINX implements Iterator {
 			return false;
 		}
 		foreach ($orderby as $order) {
+			// juste ASC ou DESC sans le champ… passer le chemin…
+			if (in_array(trim($order), array('ASC', 'DESC'))) {
+				continue;
+			}
 			if (!preg_match('/(ASC|DESC)$/i', $order)) {
 				$order .= ' ASC';
 			}
@@ -337,6 +341,12 @@ class IterateurSPHINX implements Iterator {
 
 
 
+	/**
+	 * Définit des filtres
+	 *
+	 * @param array $facets Tableau des filtres demandées
+	 * @return bool
+	**/
 	public function setSelectFilter($filters) {
 		// compter le nombre de filtres ajoutés à la requête.
 		static $nb = 0;
