@@ -38,7 +38,7 @@
 
 	{select_filter #ENV{annee},  'YEAR(date) = @valeur' }
 	{select_filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
-	{select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.auteurs) = 0'}
+	{select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
 
 	{par #GET{tri}}{inverse #GET{sens_tri}}
 
