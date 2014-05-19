@@ -82,7 +82,7 @@ namespace Sphinx\SphinxQL;
 class QueryApi extends Query {
 
 	/** @var string[] liste des mots pour le snippet */
-	private $snippet_words = [];
+	private $snippet_words = array();
 
 	/**
 	 * Crée une description de requête Sphinx à partir d'un tableau d'API
@@ -124,7 +124,7 @@ class QueryApi extends Query {
 		}
 
 		$ok = true;
-		foreach (['index', 'select', 'fulltext', 'snippet', 'filters', /*'orders', 'facet'*/] as $cle) {
+		foreach (array('index', 'select', 'fulltext', 'snippet', 'filters', /*'orders', 'facet'*/) as $cle) {
 			if (isset($api[$cle])) {
 				$methodApi = 'setApi' . ucfirst($cle);
 				$ok &= $this->$methodApi($api);
@@ -152,7 +152,7 @@ class QueryApi extends Query {
 		}
 		// Always work with an array of values
 		if (!is_array($api['index'])) {
-			$api['index'] = [$api['index']];
+			$api['index'] = array($api['index']);
 		}
 		foreach ($api['index'] as $index){
 			$this->from($index);
@@ -178,7 +178,7 @@ class QueryApi extends Query {
 		}
 		// Always work with an array of values
 		if (!is_array($api['select'])){
-			$api['select'] = [$api['select']];
+			$api['select'] = array($api['select']);
 		}
 		foreach ($api['select'] as $select){
 			$this->select($select);
@@ -380,7 +380,7 @@ class QueryApi extends Query {
 
 		// Always work with an array of values
 		if (!is_array($filter['values'])){
-			$filter['values'] = [$filter['values']];
+			$filter['values'] = array($filter['values']);
 		}
 
 		// For each values, we build a comparison
@@ -417,17 +417,17 @@ class QueryApi extends Query {
 
 		// Always work with an array of values
 		if (!is_array($filter['values'])){
-			$filter['values'] = [[$filter['values']]];
+			$filter['values'] = array(array($filter['values']));
 		}
 
 		// At depth 1, generate AND
-		$ins = [];
+		$ins = array();
 		foreach ($filter['values'] as $values_in){
 			// Always work with an array of values
 			if (!is_array($values_in)){
-				$values_in = [$values_in];
+				$values_in = array($values_in);
 			}
-			$ins[] = 'IN(' . $filter['field'] . ', ' . join(', ', array_map([$this, 'quote'], array_filter($values_in))) . ')';
+			$ins[] = 'IN(' . $filter['field'] . ', ' . join(', ', array_map(array($this, 'quote'), array_filter($values_in))) . ')';
 		}
 
 		if ($ins){
