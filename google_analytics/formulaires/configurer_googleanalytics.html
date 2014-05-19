@@ -16,6 +16,13 @@
 				<p class="explication"><:googleanalytics:explication_id_google:></p>
 				<input type="text" name="idGoogle" class="text" id="idgoogle" size="60" value="#ENV{idGoogle}" placeholder="UA-xxxxxxx-x" />
 			</li>
+			<li class="editer_ga_universal">
+			    <div class="choix">
+				    <p class="explication"><:googleanalytics:explication_ga_universal:></p>
+				    <input type="checkbox" name="ga_universal" class="checkbox" id="ga_universal" value="oui"[ (#ENV{ga_universal}|oui)checked="checked"] />
+				    <label for="ga_universal"><:googleanalytics:label_ga_universal:></label>
+			    </div>
+			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
