@@ -468,7 +468,7 @@ function critere_SPHINX_index_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * Transmettre la recherche (le match fulltext) désiréé
+ * Transmettre la recherche (le match fulltext) désirée
  * @param string $idb
  * @param object $boucles
  * @param object $crit
