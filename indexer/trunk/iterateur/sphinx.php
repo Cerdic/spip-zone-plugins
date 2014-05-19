@@ -537,13 +537,11 @@ function critere_SPHINX_facet_dist($idb, &$boucles, $crit) {
 	// critere multiple
 	$boucle->hash .= "\n\tif (!isset(\$facet_init)) { \$command['facet'] = array(); \$facet_init = true; }\n";
 
-	$boucle->hash .= "\t\$command['facet'][] = [\n"
+	$boucle->hash .= "\t\$command['facet'][] = array(\n"
 		. (isset($crit->param[0]) ? "\t\t'alias'  => ". calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
 		. (isset($crit->param[1]) ? "\t\t'query' => ". calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
-		. "\t];\n";
+		. "\t);\n";
 }
-
-
 
 /**
  * Indiquer les filtres de la requête
