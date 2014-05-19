@@ -54,7 +54,6 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 					$flux['args']['contexte']['auteurs'] = _request('diogene_gerer_auteurs');
 				else if(_request('type_diogene'))
 					$flux['args']['contexte']['auteurs'] = array();
-				spip_log($flux['args']['contexte']['auteurs'],"test."._LOG_ERREUR);
 				$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_gerer_auteurs',$flux['args']['contexte']);
 			}
 		}else{
