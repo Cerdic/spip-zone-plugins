@@ -52,13 +52,13 @@ class IterateurSPHINX implements Iterator {
 	 * Commandes transmises à l'iterateur
 	 * @var array
 	 */
-	protected $command = [];
+	protected $command = array();
 
 	/**
 	 * Infos de debug transmises à l'iterateur
 	 * @var array
 	 */
-	protected $info = [];
+	protected $info = array();
 
 	/**
 	 * Instance de SphinxQL
@@ -76,7 +76,7 @@ class IterateurSPHINX implements Iterator {
 	 * Résultat de la requête à Sphinx
 	 * @var array
 	 */
-	protected $result = [];
+	protected $result = array();
 
 	/**
 	 * Cle courante
@@ -96,15 +96,15 @@ class IterateurSPHINX implements Iterator {
 	 * @param  $command
 	 * @param array $info
 	 */
-	public function __construct($command, $info=[]) {
+	public function __construct($command, $info=array()) {
 
-		$this->command = $command + [
-			'index'     => [],
-			'selection' => [],
-			'recherche' => [],
-			'snippet'   => [],
-			'facet'     => [],
-		];
+		$this->command = $command + array(
+			'index'     => array(),
+			'selection' => array(),
+			'recherche' => array(),
+			'snippet'   => array(),
+			'facet'     => array(),
+		);
 
 #var_dump($this->command);
 
@@ -152,7 +152,7 @@ class IterateurSPHINX implements Iterator {
 	 * @return bool True si au moins un index est ajouté, false sinon
 	**/
 	public function setIndex($index) {
-		if (!is_array($index)) $index = [$index];
+		if (!is_array($index)) $index = array($index);
 		$index = array_filter($index);
 		if (!$index) {
 			$index[] = SPHINX_DEFAULT_INDEX;
@@ -174,7 +174,7 @@ class IterateurSPHINX implements Iterator {
 	 * @return bool True si au moins un index est ajouté, false sinon
 	**/
 	public function setSelection($select) {
-		if (!is_array($select)) $select = [$select];
+		if (!is_array($select)) $select = array($select);
 		$select = array_filter($select);
 		// si aucune selection demandée, on prend tout !
 		if (!$select) {
@@ -195,7 +195,7 @@ class IterateurSPHINX implements Iterator {
 	 * @return bool True si au moins un index est ajouté, false sinon
 	**/
 	public function setRecherche($recherche) {
-		if (!is_array($recherche)) $recherche = [$recherche];
+		if (!is_array($recherche)) $recherche = array($recherche);
 		$recherche = array_filter($recherche);
 		if (!$recherche) {
 			return false;
@@ -209,7 +209,7 @@ class IterateurSPHINX implements Iterator {
 
 
 	public function setOrderby($orderby) {
-		if (!is_array($orderby)) $orderby = [$orderby];
+		if (!is_array($orderby)) $orderby = array($orderby);
 		$orderby = array_filter($orderby);
 		if (!$orderby) {
 			return false;
@@ -252,12 +252,12 @@ class IterateurSPHINX implements Iterator {
 	**/
 	public function setOneSnippet($desc) {
 
-		$desc += [
+		$desc += array(
 			'champ'  => 'content',
 			'phrase' => '',
 			'limit'  => 200,
 			'as'     => 'snippet'
-		];
+		);
 		if (!$desc['phrase']) {
 			return false;
 		}
@@ -278,7 +278,7 @@ class IterateurSPHINX implements Iterator {
 	public function setSnippetAuto($command) {
 		$phrase = $this->getSnippetAutoPhrase($command);
 		if (!$phrase) return false;
-		return $this->setOneSnippet(['phrase' => $phrase]);
+		return $this->setOneSnippet(array('phrase' => $phrase));
 	}
 
 	/**
@@ -294,7 +294,7 @@ class IterateurSPHINX implements Iterator {
 
 		// mots de la recherche
 		$recherche = $command['recherche'];
-		if (!is_array($recherche)) $recherche = [$recherche];
+		if (!is_array($recherche)) $recherche = array($recherche);
 		$recherche = array_filter($recherche);
 		$phrase .= implode(' ', $recherche);
 
@@ -349,7 +349,7 @@ class IterateurSPHINX implements Iterator {
 				$ok =  false;
 				continue;
 			}
-			$this->facet[] = ['alias' => $alias, 'query' => $query];
+			$this->facet[] = array('alias' => $alias, 'query' => $query);
 			$this->sphinxQLQuery->facet($query);
 		}
 		return $ok;

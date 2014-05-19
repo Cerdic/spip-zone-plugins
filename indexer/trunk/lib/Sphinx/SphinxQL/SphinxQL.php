@@ -58,26 +58,31 @@ class SphinxQL {
 			return false;
 		}
 
-		$liste = [
-			'docs'   => [],
-			'facets' => [],
-			'meta'   => [],
+		$liste = array(
+			'docs'   => array(),
+			'facets' => array(),
+			'meta'   => array(),
 			'query'  => $query
-		];
+		);
 
 		if ($docs = $this->query($query)) {
 			// les jeux de réponses sont les suivant :
 			// 1) les documents trouvés
 			// 2+) les FACET à la suite
-			$reponses = [];
+			$reponses = array();
 			 do {
 				$reponses[] = $docs->fetchAll(\PDO::FETCH_ASSOC);
 			} while ($docs->nextRowset());
 
-			$meta = $this->query('SHOW meta');
-
 			$liste['docs']   = array_shift($reponses);
 			$liste['facets'] = $this->parseFacets($reponses);
+
+			$meta = $this->query('SHOW meta');
+			if ($errs = $this->sql->errorInfo()) {
+				# TODO: comprendre le pourquoi de l'erreur
+				# Cannot execute queries while other unbuffered queries are active. Consider using PDOStatement::fetchAll(). Alternatively, if your code is only ever going to run against mysql, you may enable query buffering by setting the PDO::MYSQL_ATTR_USE_BUFFERED_QUERY attribute.
+				var_dump($errs);
+			}
 			if ($meta) {
 				$liste['meta']   = $this->parseMeta($meta->fetchAll(\PDO::FETCH_ASSOC));
 			}
@@ -85,7 +90,7 @@ class SphinxQL {
 			var_dump($errs);
 		}
 
-		return ['query' => $liste];
+		return array('query' => $liste);
 	}
 
 
@@ -96,7 +101,7 @@ class SphinxQL {
 	 * @return array
 	**/
 	public function parseFacets($facettes) {
-		$facets = [];
+		$facets = array();
 		if (is_array($facettes)) {
 			foreach($facettes as $facette) {
 				foreach ($facette as $i => $desc) {
@@ -110,7 +115,7 @@ class SphinxQL {
 						die("Contenu non pris en compte dans FACET !");
 					}
 					if ($i == 0) {
-						$facets[$key] = [];
+						$facets[$key] = array();
 					}
 					$facets[$key][$value] = $nb;
 				}
@@ -125,7 +130,7 @@ class SphinxQL {
 	 * Regroupe entre autres les infos de keywords
 	 */
 	public function parseMeta($metas) {
-		$liste = [];
+		$liste = array();
 		foreach ($metas as $meta) {
 			$cle = $meta['Variable_name'];
 			$val = $meta['Value'];
@@ -135,7 +140,7 @@ class SphinxQL {
 				$index = rtrim($index, ']');
 
 				if (!isset($liste[$cle])) {
-					$liste[$cle] = [];
+					$liste[$cle] = array();
 				}
 
 				$liste[$cle][$index] = $val;
@@ -146,11 +151,11 @@ class SphinxQL {
 		if (isset($liste['keyword'])) {
 			$liste['keywords'] = array();
 			foreach ($liste['keyword'] as $index => $key) {
-				$liste['keywords'][$key] = [
+				$liste['keywords'][$key] = array(
 					'keyword' => $key,
 					'docs' => $liste['docs'][$index],
 					'hits' => $liste['hits'][$index],
-				];
+				);
 			}
 			unset($liste['keyword'], $liste['docs'], $liste['hits']);
 		}

@@ -6,13 +6,13 @@ namespace Sphinx\SphinxQL;
  * Classe pour créer des requêtes de sélection Sphinx
  */
 class Query{
-	private $select  = [];
-	private $from    = [];
-	private $where   = [];
-	private $groupby = [];
-	private $orderby = [];
+	private $select  = array();
+	private $from    = array();
+	private $where   = array();
+	private $groupby = array();
+	private $orderby = array();
 	private $limit   = '';
-	private $facet   = [];
+	private $facet   = array();
 
 	public function __construct() {}
 
@@ -62,7 +62,7 @@ class Query{
 
 
 	public function get() {
-		$query = [];
+		$query = array();
 		$this->removeEmpty();
 		if ($this->select)   $query[] = 'SELECT '   . implode(', ', $this->select);
 		if ($this->from)     $query[] = 'FROM '     . implode(', ', $this->from);
@@ -75,7 +75,7 @@ class Query{
 	}
 
 	private function removeEmpty() {
-		foreach (['select', 'from', 'where', 'groupby', 'orderby', 'facet'] as $key) {
+		foreach (array('select', 'from', 'where', 'groupby', 'orderby', 'facet') as $key) {
 			$this->$key = array_filter($this->$key);
 			#$this->$key = array_filter($this->key, 'strlen'); // leaves 0
 		}
