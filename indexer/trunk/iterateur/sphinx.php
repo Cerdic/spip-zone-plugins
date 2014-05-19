@@ -62,15 +62,15 @@ class IterateurSPHINX implements Iterator {
 
 	/**
 	 * Instance de SphinxQL
-	 * @var \SphinxQL
+	 * @var \Sphinx\SphinxQL\SphinxQL
 	 */
 	protected $sphinxQL = null;
 
 	/**
-	 * Instance de SphinxQLQuery
-	 * @var \SphinxQLQuery
+	 * Instance de SphinxQL\QueryApi
+	 * @var \Sphinx\SphinxQL\QueryAPi
 	 */
-	protected $sphinxQLQuery = null;
+	protected $queryApi = null;
 
 	/**
 	 * Résultat de la requête à Sphinx
@@ -104,6 +104,8 @@ class IterateurSPHINX implements Iterator {
 			'recherche' => array(),
 			'snippet'   => array(),
 			'facet'     => array(),
+
+			'select_filter' => [],
 		);
 
 #var_dump($this->command);
@@ -112,14 +114,16 @@ class IterateurSPHINX implements Iterator {
 
 		include_spip('inc/indexer');
 
-		$this->sphinxQL      = new \Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
-		$this->sphinxQLQuery = new \Sphinx\SphinxQL\Query();
+		$this->sphinxQL  = new \Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT);
+		$this->queryApi  = new \Sphinx\SphinxQL\QueryApi();
 
 		$this->setIndex($this->command['index']);
 		$this->setSelection($this->command['selection']);
 		$this->setRecherche($this->command['recherche']);
 		$this->setOrderBy($this->command['orderby']);
 		$this->setFacet($this->command['facet']);
+
+		$this->setSelectFilter($this->command['select_filter']);
 
 		$this->setSnippet($this->command);
 
@@ -128,7 +132,7 @@ class IterateurSPHINX implements Iterator {
 
 
 	public function runQuery() {
-		$query  = $this->sphinxQLQuery->get();
+		$query  = $this->queryApi->get();
 		$result = $this->sphinxQL->allfetsel($query);
 		if (!$result) {
 			return false;
@@ -139,7 +143,7 @@ class IterateurSPHINX implements Iterator {
 
 
 	public function quote($m) {
-		return $this->sphinxQLQuery->quote($m);
+		return $this->queryApi->quote($m);
 	}
 
 
@@ -158,7 +162,7 @@ class IterateurSPHINX implements Iterator {
 			$index[] = SPHINX_DEFAULT_INDEX;
 		}
 		foreach ($index as $i) {
-			$this->sphinxQLQuery->from($i);
+			$this->queryApi->from($i);
 		}
 		return true;
 	}
@@ -181,7 +185,7 @@ class IterateurSPHINX implements Iterator {
 			$select[] = '*';
 		}
 		foreach ($select as $s) {
-			$this->sphinxQLQuery->select($s);
+			$this->queryApi->select($s);
 		}
 		return true;
 	}
@@ -201,7 +205,7 @@ class IterateurSPHINX implements Iterator {
 			return false;
 		}
 		$match = implode(' ',$recherche);
-		$this->sphinxQLQuery
+		$this->queryApi
 			->select('WEIGHT() AS score')
 			->where('MATCH(' . $this->quote( $recherche ) . ')');
 		return true;
@@ -218,7 +222,7 @@ class IterateurSPHINX implements Iterator {
 			if (!preg_match('/(ASC|DESC)$/i', $order)) {
 				$order .= ' ASC';
 			}
-			$this->sphinxQLQuery->orderby($order);
+			$this->queryApi->orderby($order);
 		}
 		return true;
 	}
@@ -262,12 +266,12 @@ class IterateurSPHINX implements Iterator {
 			return false;
 		}
 
-		$desc['phrase'] = $this->getSnippetWordsFromPhrase($desc['phrase']);
+		$desc['phrase'] = $this->queryApi->get_snippet_words($desc['phrase']);
 
 		if (!$desc['phrase'] OR !$desc['champ']) {
 			return false;
 		}
-		$this->sphinxQLQuery->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase']) . ", 'limit=$desc[limit]') AS $desc[as]");
+		$this->queryApi->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase']) . ", 'limit=$desc[limit]') AS $desc[as]");
 		return true;
 	}
 
@@ -301,30 +305,6 @@ class IterateurSPHINX implements Iterator {
 		return $phrase;
 	}
 
-	/**
-	 * Extrait les mots pertinents d'une phrase pour un snippet
-	 *
-	 * @param string $phrase
-	 * @return string Mots séparés par espace.
-	**/
-	public function getSnippetWordsFromPhrase($phrase) {
-		if (!is_string($phrase)) return '';
-
-		// extraction des mots (évitons les opérateurs, guillements…)
-		preg_match_all('/\w+/u', $phrase, $mots);
-		#var_dump($phrase, $mots);
-		$mots = array_filter($mots[0], function($m) {
-			// nombres >= 4 chiffres
-			if (is_numeric($m)) {
-				return (strlen($m) >= 4);
-			}
-			// mots >= 3 lettres
-			return (strlen($m) >= 3);
-		});
-		return implode(' ', $mots);
-	}
-
-
 
 	/**
 	 * Définit les commandes FACET
@@ -350,11 +330,61 @@ class IterateurSPHINX implements Iterator {
 				continue;
 			}
 			$this->facet[] = array('alias' => $alias, 'query' => $query);
-			$this->sphinxQLQuery->facet($query);
+			$this->queryApi->facet($query);
 		}
 		return $ok;
 	}
 
+
+
+	public function setSelectFilter($filters) {
+		// compter le nombre de filtres ajoutés à la requête.
+		static $nb = 0;
+
+		$facets = array_filter($filters);
+		if (!$filters) {
+			return false;
+		}
+		foreach ($filters as $filter) {
+			// ignorer toutes les données vides
+			if (!is_array($filter) OR !isset($filter['valeur']) OR !$valeur = $filter['valeur']) {
+				continue;
+			}
+			if (is_string($valeur)) {
+				$valeur = trim($valeur);
+				$valeurs = [$valeur];
+			} else {
+				$valeurs = $valeur;
+				$valeur = 'Array !';
+			}
+			$valeurs = array_unique(array_filter($valeurs));
+			if (!$valeurs) {
+				continue;
+			}
+
+			$filter += [
+				'select_oui'  => '',
+				'select_null' => '',
+			];
+
+			// préparer les données
+			$valeur = $this->quote($valeur);
+			$valeurs = array_map([$this, 'quote'], $valeurs);
+			$valeurs = implode(', ', $valeurs);
+
+			if (($valeur == '-') and $filter['select_null']) {
+				$f = $filter['select_null'];
+			} elseif ($filter['select_oui']) {
+				$f = $filter['select_oui'];
+			}
+
+			// remplacer d'abord le pluriel !
+			$f = str_replace(['@valeurs', '@valeur'], [$valeurs, $valeur], $f);
+			$this->queryApi->select("($f) AS f$nb");
+			$this->queryApi->where("f$nb = 1");
+			$nb++;
+		}
+	}
 
 	/**
 	 * Revenir au depart
@@ -503,6 +533,26 @@ function critere_SPHINX_facet_dist($idb, &$boucles, $crit) {
 		. "\t];\n";
 }
 
+
+
+/**
+ * Indiquer les filtres de la requête
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX_select_filter_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	// critere multiple
+	$boucle->hash .= "\n\tif (!isset(\$sfilter_init)) { \$command['select_filter'] = []; \$sfilter_init = true; }\n";
+
+	$boucle->hash .= "\t\$command['select_filter'][] = [\n"
+		. (isset($crit->param[0]) ? "\t\t'valeur'      => ". calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
+		. (isset($crit->param[1]) ? "\t\t'select_oui'  => ". calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
+		. (isset($crit->param[2]) ? "\t\t'select_null' => ". calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
+		. "\t];\n";
+}
 
 
 

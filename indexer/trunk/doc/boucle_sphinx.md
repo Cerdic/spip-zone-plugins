@@ -137,7 +137,7 @@ Ajoute une sous requête de facette selon la syntaxe de sphinx.
 
 TRI SÉLECTIF
 ----------------
-Exemple de tri sur une formule de calcul de « time segment », reprise ici de
+Exemple de tri sur une formule de calcul de « time segment », reprise ici de
 http://sphinxsearch.com/blog/2010/06/27/doing-time-segments-geodistance-searches-and-overrides-in-sphinxql/
 
 ```
@@ -155,3 +155,28 @@ http://sphinxsearch.com/blog/2010/06/27/doing-time-segments-geodistance-searches
 	{facet date, YEAR(date) ORDER BY date DESC}
 >
 ```
+
+
+
+FILTRER
+-------
+
+En attendant mieux…
+
+Cette histoire de filtres n'est vraiment pas simple.
+En attendant mieux, on propose de définir la présence d'un sélect (et d'un where associé)
+si la valeur transmise possède du contenu, sinon le filtre n'est pas appliqué.
+
+Le 3è paramètre utilise une autre sélection, si la valeur vaut '-'.
+Les clés @valeur et @valeurs sont remplacés par la donnée attendue quotée, ou les données attendues quotées et séparés par des virgules.
+
+Si `#ENV{tags}` vaut array('toto','tata'), @valeurs aura `"'toto', 'tata'"`
+
+Chaque filtre crée le where associé (filtre = 1).
+
+----
+
+    {select_filter #TRUC, select si contenu, select si '-'}
+    {select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
+    {select_filter #ENV{tag}, 'IN(properties.tag, @valeurs)', 'LENGTH(properties.tags) = 0'}
+    {select_filter #ENV{annee}, 'YEAR(date) = @valeur' }

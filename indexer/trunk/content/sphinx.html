@@ -28,24 +28,18 @@
 ]</BOUCLE_filtres>
 
 
-<!--
-	{filtre auteurs, properties.authors, ALL, #ENV*{auteur}}
-	{filtre tags, properties.mots.fr, IN, #ENV*{auteur}}
-
-	{mono #ENV{date}, date, =}
-	{mono #ENV{date}, date, >}
-	{mono #ENV{date}, date, IN}
-	{mono #ENV{date}, date, INTERVAL, 100, 200, 300}
-
-	{filtres #ENV*{f}} => tableau ? f[auteurs][description...]
--->
 
 <BOUCLE_recherche_sphinx(SPHINX)
 	{index #ENV{source,spip}}
 	{recherche #ENV*{recherche}}
-	{facet auteurs, properties.authors ORDER BY COUNT(*) DESC}
-	{facet tags, properties.tags ORDER BY COUNT(*) DESC}
-	{facet date, YEAR(date) ORDER BY date DESC}
+
+	{select_filter #ENV{annee},  'YEAR(date) = @valeur' }
+	{select_filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
+	{select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.auteurs) = 0'}
+
+	{facet auteur, properties.authors ORDER BY COUNT(*) DESC}
+	{facet tag,    properties.tags ORDER BY COUNT(*) DESC}
+	{facet annee, YEAR(date) ORDER BY date DESC}
 >
 
 	<h1>Dans la boucle (SPHINX)</h1>
@@ -56,21 +50,5 @@
 	[(#INCLURE{fond=liste/sphinx_metas,meta,env})]
 
 </BOUCLE_recherche_sphinx>
-
-<hr />
-
-
-[(#SET{sql, [(#ENV{source,''}|sphinx_get_query_documents{#ENV*{recherche},#ENV*{tag},#ENV*{auteur},#ENV{annee},#GET{order}})]})]
-
-<BOUCLE_recherche(DATA) {source SphinxQL, #GET{sql}, #ENV{debut_documents}}>
-
-	<h1>Dans la boucle oldschool</h1>
-	<pre>#QUERY</pre>
-
-	[(#INCLURE{fond=liste/sphinx_documents,docs,meta,env})]
-	[(#INCLURE{fond=liste/sphinx_facettes,facets,env})]
-	[(#INCLURE{fond=liste/sphinx_metas,meta,env})]
-
-</BOUCLE_recherche>
 
 

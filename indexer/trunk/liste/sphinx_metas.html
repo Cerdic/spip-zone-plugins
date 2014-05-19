@@ -8,9 +8,26 @@
         <th>#CLE</th>
         <td>
         [(#CLE|=={keywords}|non) #VALEUR ]
-        [(#CLE|=={keywords}|oui)
-            <pre>[(#VALEUR*|print_r{1})]</pre>
-        ]
+        <B_keywords>
+            <table class='spip'>
+                <thead>
+                    <tr>
+                        <th>Mot</th>
+                        <th>Documents</th>
+                        <th>Nombre d'occurrences</th>
+                    </tr>
+                </thead>
+                <tbody>
+        <BOUCLE_keywords(DATA){source tableau, #VALEUR}{si #CLE|=={keywords}}>
+                <tr>
+                    <th>#KEYWORD</th>
+                    <td>#DOCS</td>
+                    <td>#HITS</td>
+                </tr>
+        </BOUCLE_keywords>
+                </tbody>
+            </table>
+        </B_keywords>
         </td>
     </tr>
 </BOUCLE_meta>
