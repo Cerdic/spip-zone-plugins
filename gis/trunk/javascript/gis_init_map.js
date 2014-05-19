@@ -3,14 +3,14 @@ var gis_init_map;
 (function() {
 
 gis_init_map = function(mapcfg) {
-	var map_container = mapcfg["mapid"];
+	var map_container = mapcfg.mapid;
 
 	// Création de la carte Leafleat
-	var map = new L.Map(map_container,{
-		scrollWheelZoom: mapcfg["scrollWheelZoom"],
-		zoomControl: mapcfg["zoomControl"],
-		maxZoom: mapcfg["maxZoom"],
-		minZoom: mapcfg["minZoom"]
+	var map = L.map(map_container,{
+		scrollWheelZoom: mapcfg.scrollWheelZoom,
+		zoomControl: mapcfg.zoomControl,
+		maxZoom: mapcfg.maxZoom,
+		minZoom: mapcfg.minZoom
 	});
 	// affecter sur la globale homonyme a mapid/map_container (compat ascendante)
 	eval(map_container+"=map;");
@@ -19,45 +19,45 @@ gis_init_map = function(mapcfg) {
 
 	// Appeler l'éventuelle fonction de callback et trigger "load"
 	map.on('load',function(e){
-		if (mapcfg["callback"] && typeof(mapcfg["callback"]) === "function") {
-			var callback = mapcfg["callback"];
+		if (mapcfg.callback && typeof(mapcfg.callback) === "function") {
+			var callback = mapcfg.callback;
 			callback(e.target);
 		}
 		jQuery("#"+map_container).trigger('load',e.target);
 	});
 
 	// Déterminer la position initiale de la carte
-	if (!mapcfg['utiliser_bb']){
-		map.setView(new L.LatLng(mapcfg['lat'], mapcfg['lon']), mapcfg['zoom']);
+	if (!mapcfg.utiliser_bb){
+		map.setView([mapcfg.lat, mapcfg.lon], mapcfg.zoom);
 	}
 	else {
 		map.fitBounds(
-			new L.LatLngBounds(
-				new L.LatLng(mapcfg['sw_lat'], mapcfg['sw_lon']),
-				new L.LatLng(mapcfg['ne_lat'], mapcfg['ne_lon'])
+			L.latLngBounds(
+				[mapcfg.sw_lat, mapcfg.sw_lon],
+				[mapcfg.ne_lat, mapcfg.ne_lon]
 			)
 		);
 	}
 
-	var get_layer=function(name){
+	var get_layer = function(name){
 		var layer;
-		if (typeof mapcfg['layers'][name]!=="undefined")
-		eval("layer=new "+ mapcfg['layers'][name]["layer"]+";");
+		if (typeof mapcfg.layers[name]!=="undefined")
+		eval("layer=new "+ mapcfg.layers[name].layer+";");
 		return layer;
-	}
+	};
 
 	// Fond de carte par défaut (layer)
-	var default_layer = get_layer(mapcfg['default_layer']);
+	var default_layer = get_layer(mapcfg.default_layer);
 	map.addLayer(default_layer);
 
-	if (mapcfg['control_type'] && !mapcfg['no_control'] && mapcfg['affiche_layers'].length>1){
-		var layers_control = new L.Control.Layers('','',{collapsed: mapcfg['control_type_collapsed'] ? true : false});
-		layers_control.addBaseLayer(default_layer,mapcfg['layers'][mapcfg['default_layer']]["nom"]);
-		for(var l in mapcfg['affiche_layers']){
-			if (mapcfg['affiche_layers'][l]!==mapcfg['default_layer']){
-				var layer = get_layer(mapcfg['affiche_layers'][l]);
+	if (mapcfg.control_type && !mapcfg.no_control && mapcfg.affiche_layers.length>1){
+		var layers_control = L.control.layers('','',{collapsed: mapcfg.control_type_collapsed ? true : false});
+		layers_control.addBaseLayer(default_layer,mapcfg.layers[mapcfg.default_layer].nom);
+		for(var l in mapcfg.affiche_layers){
+			if (mapcfg.affiche_layers[l] !== mapcfg.default_layer){
+				var layer = get_layer(mapcfg.affiche_layers[l]);
 				if (typeof layer!=="undefined")
-					layers_control.addBaseLayer(layer,mapcfg['layers'][mapcfg['affiche_layers'][l]]["nom"]);
+					layers_control.addBaseLayer(layer,mapcfg.layers[mapcfg.affiche_layers[l]].nom);
 			}
 		}
 		map.addControl(layers_control);
@@ -71,14 +71,14 @@ gis_init_map = function(mapcfg) {
 	map.attributionControl.setPrefix('');
 
 	// Ajout des contrôles de la carte
-	if (!mapcfg['no_control']){
-		if (mapcfg['scale'])
-			map.addControl(new L.Control.Scale());
-		if (mapcfg['fullscreen'])
-			map.addControl(new L.Control.FullScreen());
-		if (mapcfg['overview']){
-			var minimap_layer = get_layer(mapcfg['default_layer']);
-			var miniMap = new L.Control.MiniMap(minimap_layer,{width: 100,height: 100, toggleDisplay: true}).addTo(map);
+	if (!mapcfg.no_control){
+		if (mapcfg.scale)
+			map.addControl(L.control.scale());
+		if (mapcfg.fullscreen)
+			map.addControl(L.control.fullScreen());
+		if (mapcfg.overview){
+			var minimap_layer = get_layer(mapcfg.default_layer);
+			var miniMap = L.control.minimap(minimap_layer,{width: 100,height: 100, toggleDisplay: true}).addTo(map);
 		}
 	}
 
@@ -88,18 +88,18 @@ gis_init_map = function(mapcfg) {
 		if (feature.properties && feature.properties.icon){
 			icon_options = {
 				'iconUrl': feature.properties.icon,
-				'iconSize': new L.Point( feature.properties.icon_size[0], feature.properties.icon_size[1] ),
-				'iconAnchor': new L.Point( feature.properties.icon_anchor[0], feature.properties.icon_anchor[1] )
+				'iconSize': [feature.properties.icon_size[0], feature.properties.icon_size[1]],
+				'iconAnchor': [feature.properties.icon_anchor[0], feature.properties.icon_anchor[1]]
 			};
 			if (feature.properties.popup_anchor)
-				icon_options.popupAnchor = new L.Point( feature.properties.popup_anchor[0], feature.properties.popup_anchor[1] );
+				icon_options.popupAnchor = [feature.properties.popup_anchor[0], feature.properties.popup_anchor[1]];
 			if (feature.properties.shadow)
 				icon_options.shadowUrl = feature.properties.shadow;
 			if (feature.properties.shadow_size)
-				icon_options.shadowSize = new L.Point( feature.properties.shadow_size[0], feature.properties.shadow_size[1] );
-			layer.setIcon(new L.Icon(icon_options));
+				icon_options.shadowSize = [feature.properties.shadow_size[0], feature.properties.shadow_size[1]];
+			layer.setIcon(L.icon(icon_options));
 		}
-	}
+	};
 
 	// API setGeoJsonFeaturePopup : Pour Ajouter le texte de popup d'un point (feature = item d'un GeoJson)
 	map.setGeoJsonFeaturePopup = function (feature, layer) {
@@ -115,7 +115,7 @@ gis_init_map = function(mapcfg) {
 				popupOptions = feature.properties.popup_options;
 			layer.bindPopup(popupContent,popupOptions);
 		}
-	}
+	};
 
 	/*
 		Il y a pour le moment 2 façons d'analyser le GeoJson calculé
@@ -125,12 +125,12 @@ gis_init_map = function(mapcfg) {
 		À réfléchir.
 	*/
 	// API parseGeoJson
-	if (!mapcfg['cluster']){
+	if (!mapcfg.cluster){
 		// Analyse des points et déclaration (sans regroupement des points en cluster)
 		map.parseGeoJson = function(data) {
 			if (data.features.length > 0) {
-				var geojson = new L.geoJson('', {
-					style: mapcfg['path_styles'],
+				var geojson = L.geoJson('', {
+					style: mapcfg.path_styles,
 					onEachFeature: function (feature, layer) {
 						// Déclarer l'icone du point
 						map.setGeoJsonFeatureIcon(feature, layer);
@@ -139,19 +139,19 @@ gis_init_map = function(mapcfg) {
 					}
 				}).addTo(map);
 				geojson.addData(data);
-				if (mapcfg['autocenterandzoom']) {
+				if (mapcfg.autocenterandzoom) {
 					if (data.features.length == 1 && data.features[0].geometry.type == 'Point')
-						map.setView(geojson.getBounds().getCenter(), mapcfg['zoom']);
+						map.setView(geojson.getBounds().getCenter(), mapcfg.zoom);
 					else
 						map.fitBounds(geojson.getBounds());
 				}
-				if (mapcfg['open_id'].length)
-					gis_focus_marker(mapcfg['open_id'],map_container.substring(3));
+				if (mapcfg.open_id.length)
+					gis_focus_marker(mapcfg.open_id,map_container.substring(3));
 
 				if (typeof map.geojsons=="undefined") map.geojsons = [];
 				map.geojsons.push(geojson);
 			}
-		}
+		};
 	}
 	else {
 		// Analyse des points et déclaration (en regroupant les points en cluster)
@@ -159,20 +159,19 @@ gis_init_map = function(mapcfg) {
 			var options = {
 				showCoverageOnHover:false
 			};
-			if (mapcfg["clusterMaxZoom"])
-				options.disableClusteringAtZoom = parseInt(mapcfg["clusterMaxZoom"]);
-			if (mapcfg["clusterShowCoverageOnHover"])
-				options.showCoverageOnHover = Boolean(mapcfg["clusterShowCoverageOnHover"]);
-			if (mapcfg["maxClusterRadius"])
-				options.maxClusterRadius = parseInt(mapcfg["maxClusterRadius"]);
+			if (mapcfg.clusterMaxZoom)
+				options.disableClusteringAtZoom = parseInt(mapcfg.clusterMaxZoom);
+			if (mapcfg.clusterShowCoverageOnHover)
+				options.showCoverageOnHover = Boolean(mapcfg.clusterShowCoverageOnHover);
+			if (mapcfg.maxClusterRadius)
+				options.maxClusterRadius = parseInt(mapcfg.maxClusterRadius);
 
-			map.markers = new L.MarkerClusterGroup(options);
+			map.markers = L.markerClusterGroup(options);
 
 			/* Pour chaque points présents, on crée un marqueur */
 			jQuery.each(data.features, function(i, feature) {
 				if (feature.geometry.coordinates[0]) {
-					var latlng = new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
-					var marker = new L.Marker(latlng);
+					var marker = L.marker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]]);
 
 					// Déclarer l'icone du point
 					map.setGeoJsonFeatureIcon(feature, marker);
@@ -186,48 +185,48 @@ gis_init_map = function(mapcfg) {
 
 			map.addLayer(map.markers);
 
-			if (mapcfg['autocenterandzoom']) {
+			if (mapcfg.autocenterandzoom) {
 				if (data.features.length > 1)
 					map.fitBounds(map.markers.getBounds());
 				else
-					map.setView(map.markers.getBounds().getCenter(), mapcfg['zoom']);
+					map.setView(map.markers.getBounds().getCenter(), mapcfg.zoom);
 			}
-		}
+		};
 	}
 
 	// API Compat Gis3 : addJSON et removeAllMarkers
-	map.addJSON = map.parseGeoJson
+	map.addJSON = map.parseGeoJson;
 	map.removeAllMarkers = function(){
 		if (typeof map.geojsons=="undefined") map.geojsons = [];
-		for(i in map.geojsons){
+		for(var i in map.geojsons){
 			map.geojsons[i].clearLayers();
 			map.removeLayer(map.geojsons[i]);
 		}
 		map.geojsons = [];
-	}
+	};
 
-	if (mapcfg['affiche_points']
-		&& typeof(mapcfg['json_points'])!=="undefined"
-		&& mapcfg['json_points']['url'].length){
+	if (mapcfg.affiche_points
+		&& typeof(mapcfg.json_points) !== "undefined"
+		&& mapcfg.json_points.url.length){
 		// Récupération des points à mettre sur la carte, via json externe
 		var args = {};
-		jQuery.extend(true, args, mapcfg['json_points']['env']);
-		if (typeof mapcfg['json_points']['objets']!=="undefined"){
-			args["objets"] = mapcfg['json_points']['objets'];
-			if (args["objets"]=="point_libre"){
-				args["lat"]=mapcfg['lat'];
-				args["lon"]=mapcfg['lon'];
-				if (typeof mapcfg['json_points']['titre']!=="undefined")
-					args["titre"]= mapcfg['json_points']['titre'];
-				if (typeof mapcfg['json_points']['description']!=="undefined")
-					args["description"]=mapcfg['json_points']['description'];
-				if (typeof mapcfg['json_points']['icone']!=="undefined")
-					args["icone"]=mapcfg['json_points']['icone'];
+		jQuery.extend(true, args, mapcfg.json_points.env);
+		if (typeof mapcfg.json_points.objets !== "undefined"){
+			args.objets = mapcfg.json_points.objets;
+			if (args.objets == "point_libre"){
+				args.lat = mapcfg.lat;
+				args.lon = mapcfg.lon;
+				if (typeof mapcfg.json_points.titre !== "undefined")
+					args.titre = mapcfg.json_points.titre;
+				if (typeof mapcfg.json_points.description !== "undefined")
+					args.description = mapcfg.json_points.description;
+				if (typeof mapcfg.json_points.icone !== "undefined")
+					args.icone = mapcfg.json_points.icone;
 			}
 		}
-		if (typeof mapcfg['json_points']['limit']!=="undefined")
-			args["limit"] = mapcfg['json_points']['limit'];
-		jQuery.getJSON(mapcfg['json_points']['url'],args,
+		if (typeof mapcfg.json_points.limit !== "undefined")
+			args.limit = mapcfg.json_points.limit;
+		jQuery.getJSON(mapcfg.json_points.url,args,
 			function(data) {
 				if (data){
 					// Charger le json (data) et déclarer les points
@@ -238,29 +237,29 @@ gis_init_map = function(mapcfg) {
 		);
 	}
 
-	if (mapcfg['kml'] && mapcfg['kml'].length){
+	if (mapcfg.kml && mapcfg.kml.length){
 		map.kml = {};
-		for(var i in mapcfg['kml']){
-			map.kml[i] = new L.KML(mapcfg['kml'][i], {async: true});
-			if (mapcfg['centrer_fichier']) {
+		for(var i in mapcfg.kml){
+			map.kml[i] = new L.KML(mapcfg.kml[i], {async: true});
+			if (mapcfg.centrer_fichier) {
 				map.kml[i].on("loaded", function(e) { map.fitBounds(e.target.getBounds()); });
 			}
 			map.addLayer(map.kml[i]);
 		}
 	}
-	if (mapcfg['gpx'] && mapcfg['gpx'].length){
+	if (mapcfg.gpx && mapcfg.gpx.length){
 		map.gpx = {};
-		for(var i in mapcfg['gpx']){
-			map.gpx[i] = new L.GPX(mapcfg['gpx'][i], {async: true});
-			if (mapcfg['centrer_fichier']) {
+		for(var i in mapcfg.gpx){
+			map.gpx[i] = new L.GPX(mapcfg.gpx[i], {async: true});
+			if (mapcfg.centrer_fichier) {
 				map.gpx[i].on("loaded", function(e) { map.fitBounds(e.target.getBounds()); });
 			}
 			map.addLayer(map.gpx[i]);
 		}
 	}
-	if (mapcfg['geojson'] && mapcfg['geojson'].length){
-		for(var i in mapcfg['geojson']){
-			jQuery.getJSON(mapcfg['geojson'][i], function(data){
+	if (mapcfg.geojson && mapcfg.geojson.length){
+		for(var i in mapcfg.geojson){
+			jQuery.getJSON(mapcfg.geojson[i], function(data){
 				if (data){
 					map.parseGeoJson(data);
 				}
@@ -268,10 +267,10 @@ gis_init_map = function(mapcfg) {
 		}
 	}
 
-	if (mapcfg['localize_visitor']) {
-		var maxZoom = mapcfg['localize_visitor_zoom'];
+	if (mapcfg.localize_visitor) {
+		var maxZoom = mapcfg.localize_visitor_zoom;
 		map.on('locationerror',function(e){
-			maxZoom = mapcfg['zoom'];
+			maxZoom = mapcfg.zoom;
 			alert(e.message);
 		});
 
@@ -279,8 +278,8 @@ gis_init_map = function(mapcfg) {
 	}
 
 	// si pas de points trigger ici
-	if (!mapcfg['affiche_points'] || !mapcfg['json_points'].length)
+	if (!mapcfg.affiche_points || !mapcfg.json_points.length)
 		jQuery("#"+map_container).trigger('ready',map);
-}
+};
 
 }());
