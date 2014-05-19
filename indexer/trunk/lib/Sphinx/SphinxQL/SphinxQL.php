@@ -74,10 +74,11 @@ class SphinxQL {
 			$reponses = array();
 			do {
 				if ($result = $this->sql->store_result()) {
-					$reponses[] = $result->fetch_all(MYSQLI_ASSOC);
+					$a = array(); while ($row = $result->fetch_assoc()) $a[] = $row;
+					$reponses[] = $a;
 					$result->free();
 				}
-			} while ($this->sql->next_result());
+			} while ($this->sql->more_results() AND $this->sql->next_result());
 
 			$liste['docs']   = array_shift($reponses);
 			$liste['facets'] = $this->parseFacets($reponses);
@@ -91,7 +92,8 @@ class SphinxQL {
 		// recuperer les META
 		if ($meta = $this->query('SHOW META')) {
 			$result = $this->sql->store_result();
-			$liste['meta']   = $this->parseMeta($result->fetch_all(MYSQLI_ASSOC));
+			$a = array(); while ($row = $result->fetch_assoc()) $a[] = $row;
+			$liste['meta']   = $this->parseMeta($a);
 		}
 
 		return array('query' => $liste);
