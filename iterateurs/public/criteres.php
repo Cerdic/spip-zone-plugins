@@ -715,7 +715,7 @@ function calculer_criteres ($idb, &$boucles)
 {
 	$msg = '';
 	$boucle = $boucles[$idb];
-	$table = strtoupper($boucle->id_table);
+	$table = strtoupper(sinon($boucle->id_table,$boucle->type_requete));
 	$defaut = charger_fonction('DEFAUT', 'calculer_critere');
 	// s'il y avait une erreur de syntaxe, propager cette info
 	if (!is_array($boucle->criteres)) return array(); 
