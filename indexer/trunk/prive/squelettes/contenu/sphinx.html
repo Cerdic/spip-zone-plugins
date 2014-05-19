@@ -95,7 +95,7 @@ echo '</pre>';
         <B_documents>
             <h2>Liste des documents trouvés</h2>
             <dl>
-        <BOUCLE_documents(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
+        <BOUCLE_documents(DATA){source tableau, #DOCS}>
                 [<dt>#SCORE <a href="[(#URI)]">(#TITLE)</a>
         	[@(#VALEUR*{properties}|json_decode{1}|table_valeur{login}|print)
         	][<small>(#DATE|affdate_court)</small>]
@@ -111,7 +111,7 @@ echo '</pre>';
         <B_meta>
             <h2>Métas associées</h2>
             <dl>
-        <BOUCLE_meta(DATA){source tableau, #VALEUR}{si #CLE|=={meta}}>
+        <BOUCLE_meta(DATA){source tableau, #META}>
                 [<dt>(#CLE)</dt>]
                 [<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
         </BOUCLE_meta>
@@ -121,7 +121,7 @@ echo '</pre>';
     <B_facettes>
         <h2>Facettes associées</h2>
         <dl>
-    <BOUCLE_facettes(DATA){source tableau, #VALEUR}{si #CLE|=={facets}}>
+    <BOUCLE_facettes(DATA){source tableau, #FACETS}>
             [<dt>(#CLE)</dt>]
             [<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
     </BOUCLE_facettes>
@@ -185,7 +185,7 @@ echo '</pre>';
 
         <B_facette>
             <h2>Liste des facettes</h2>
-        <BOUCLE_facette(DATA){source tableau, #VALEUR}{si #CLE|=={docs}}>
+        <BOUCLE_facette(DATA){source tableau, #DOCS}>
 		<a href="[(#SELF|parametre_url{datation,[(#VALEUR{facette}|sinon{-})]})]">[(#VALEUR{facette}|sinon{<i>sans tag</i>})]</a> (#VALEUR{c} documents)<br />
         </BOUCLE_facette>
         </B_facette>
@@ -194,7 +194,7 @@ echo '</pre>';
         <B_meta2>
             <h2>Métas associées</h2>
             <dl>
-        <BOUCLE_meta2(DATA){source tableau, #VALEUR}{si #CLE|=={meta}}>
+        <BOUCLE_meta2(DATA){source tableau, #META}>
                 [<dt>(#CLE)</dt>]
                 [<dt><pre>(#VALEUR*|print_r{1})</pre></dt>]
         </BOUCLE_meta2>

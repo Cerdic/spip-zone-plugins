@@ -132,7 +132,59 @@ class QueryApi extends Query {
 		}
 		return $ok;
 	}
+	
+	/**
+	 * Ajoute des mots pour la sélection de snippet
+	 *
+	 * @param string $words Mots à ajouter
+	 * @return bool True si au moins un mot présent, false sinon.
+	**/
+	public function addSnippetWords($words) {
+		$words = trim($words);
+		if (!strlen($words)) {
+			return false;
+		}
+		$this->snippet_words[] = $words;
+		return true;
+	}
+	
+	/**
+	 * Extrait et retourne les mots pertinents d'une phrase pour un snippet
+	 *
+	 * @return string Mots séparés par espace.
+	**/
+	public function getSnippetWords() {
+		$phrase = implode(' ', $this->snippet_words);
 
+		// extraction des mots (évitons les opérateurs, guillements…)
+		preg_match_all('/\w+/u', $phrase, $mots);
+		#var_dump($phrase, $mots);
+		$mots = array_filter($mots[0], function($m) {
+			// nombres >= 4 chiffres
+			if (is_numeric($m)) {
+				return (strlen($m) >= 4);
+			}
+			// mots >= 3 lettres
+			return (strlen($m) >= 3);
+		});
+		return implode(' ', $mots);
+	}
+	
+	/**
+	 * Génére le bon select pour produire un snippet suivant un champ et des mots
+	 *
+	 * @param string $field Nom du champ (ou de la combinaison de champs) pour chercher les mots
+	 * @param string $words='' Chaîne contenant les mots à mettre en gras
+	 * @param int $limit=200 Limite facultative (200 par défaut)
+	 * @return void
+	 */
+	public function generateSnippet($field, $words='', $limit=200){
+		if ($words){
+			$limit = intval($limit);
+			$this->select('snippet(' . $field . ', ' . $this->quote($words) . ", 'limit=$limit') as snippet");
+		}
+	}
+	
 	/**
 	 * Définit l'index de la requête.
 	 *
@@ -209,9 +261,8 @@ class QueryApi extends Query {
 		// add the score
 		$this->select('WEIGHT() as score');
 		// add to snippet
-		$this->add_snippet_words($api['fulltext']);
+		$this->addSnippetWords($api['fulltext']);
 	}
-
 
 	/**
 	 * Définit un snippet pour la requête.
@@ -236,65 +287,21 @@ class QueryApi extends Query {
 	 * @return bool True si snippet ajouté, false sinon.
 	**/
 	public function setApiSnippet($api) {
-
-		if (!isset($api['snippet']) or !is_array($api['snippet'])) {
-			return false;
-		}
 		if (isset($api['snippet']['words']) and is_string($api['snippet']['words'])){
-			$this->add_snippet_words($api['snippet']['words']);
+			$this->addSnippetWords($api['snippet']['words']);
 		}
 
 		// If there is fulltext and/or an other words declaration, generate a snippet
-		if (!$words = $this->get_snippet_words()) {
+		if (!$words = $this->getSnippetWords()) {
 			return false;
 		}
 
 		$field = isset($api['snippet']['field']) ? $api['snippet']['field'] : 'content';
 		$limit = isset($api['snippet']['limit']) ? $api['snippet']['limit'] : 200;
 
-		$this->generate_snippet($field, $words, $limit);
+		$this->generateSnippet($field, $words, $limit);
 		return true;
 	}
-
-
-	/**
-	 * Ajoute des mots pour la sélection de snippet
-	 *
-	 * @param string $words Mots à ajouter
-	 * @return bool True si au moins un mot présent, false sinon.
-	**/
-	public function add_snippet_words($words) {
-		$words = trim($words);
-		if (!strlen($words)) {
-			return false;
-		}
-		$this->snippet_words[] = $words;
-		return true;
-	}
-
-
-	/**
-	 * Extrait et retourne les mots pertinents d'une phrase pour un snippet
-	 *
-	 * @return string Mots séparés par espace.
-	**/
-	public function get_snippet_words() {
-		$phrase = implode(' ', $this->snippet_words);
-
-		// extraction des mots (évitons les opérateurs, guillements…)
-		preg_match_all('/\w+/u', $phrase, $mots);
-		#var_dump($phrase, $mots);
-		$mots = array_filter($mots[0], function($m) {
-			// nombres >= 4 chiffres
-			if (is_numeric($m)) {
-				return (strlen($m) >= 4);
-			}
-			// mots >= 3 lettres
-			return (strlen($m) >= 3);
-		});
-		return implode(' ', $mots);
-	}
-
 
 	/**
 	 * Définit les filtres pour la requête.
@@ -341,7 +348,6 @@ class QueryApi extends Query {
 	 * @return bool True si filtres ajouté, false sinon.
 	**/
 	public function setApiFilters($api) {
-
 		if (!isset($api['filters']) or !is_array($api['filters'])) {
 			return false;
 		}
@@ -361,7 +367,6 @@ class QueryApi extends Query {
 		}
 		return true;
 	}
-
 
 	public function setFilterMono($api, $filter) {
 		if (
@@ -387,7 +392,7 @@ class QueryApi extends Query {
 		$comparisons = array();
 		foreach ($filter['values'] as $value){
 			$comparison = $filter['field'] . $filter['comparison'] . $this->quote($value);
-			if ($filter['not']){
+			if (isset($filter['not']) and $filter['not']){
 				$comparison = "!($comparison)";
 			}
 			$comparisons[] = $comparison;
@@ -400,9 +405,7 @@ class QueryApi extends Query {
 		return true;
 	}
 
-
 	public function setFilterMultiJson($api, $filter) {
-
 		static $as_count = 0;
 
 		// Multi value JSON
@@ -432,17 +435,8 @@ class QueryApi extends Query {
 
 		if ($ins){
 			$this->select('(' . join(' AND ', $ins) . ') as select_'.$as_count);
-			$this->where('select_'.$as_count . '=' . ($filter['not'] ? '0' : '1'));
+			$this->where('select_'.$as_count . '=' . ((isset($filter['not']) and $filter['not']) ? '0' : '1'));
 			$as_count++;
-		}
-
-	}
-
-
-	public function generate_snippet($field, $words='', $limit=200){
-		if ($words){
-			$limit = intval($limit);
-			$this->select('snippet(' . $field . ', ' . $this->quote($words) . ", 'limit=$limit') as snippet");
 		}
 	}
 }
