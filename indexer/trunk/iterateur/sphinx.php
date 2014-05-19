@@ -105,7 +105,7 @@ class IterateurSPHINX implements Iterator {
 			'snippet'   => array(),
 			'facet'     => array(),
 
-			'select_filter' => [],
+			'select_filter' => array(),
 		);
 
 #var_dump($this->command);
@@ -352,7 +352,7 @@ class IterateurSPHINX implements Iterator {
 			}
 			if (is_string($valeur)) {
 				$valeur = trim($valeur);
-				$valeurs = [$valeur];
+				$valeurs = array($valeur);
 			} else {
 				$valeurs = $valeur;
 				$valeur = 'Array !';
@@ -362,10 +362,10 @@ class IterateurSPHINX implements Iterator {
 				continue;
 			}
 
-			$filter += [
+			$filter += array(
 				'select_oui'  => '',
 				'select_null' => '',
-			];
+			);
 
 			// préparer les données
 			$valeur = $this->quote($valeur);
@@ -379,7 +379,7 @@ class IterateurSPHINX implements Iterator {
 			}
 
 			// remplacer d'abord le pluriel !
-			$f = str_replace(['@valeurs', '@valeur'], [$valeurs, $valeur], $f);
+			$f = str_replace(array('@valeurs', '@valeur'), array($valeurs, $valeur), $f);
 			$this->queryApi->select("($f) AS f$nb");
 			$this->queryApi->where("f$nb = 1");
 			$nb++;
@@ -450,7 +450,7 @@ class IterateurSPHINX implements Iterator {
 function critere_SPHINX_index_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// critere unique
-	$boucle->hash .= "\n\t" . '$command[\'index\']=[];';
+	$boucle->hash .= "\n\t" . '$command[\'index\'] = array();';
 
 	foreach ($crit->param as $param){
 		$boucle->hash .= "\n\t" . '$command[\'index\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
@@ -466,7 +466,7 @@ function critere_SPHINX_index_dist($idb, &$boucles, $crit) {
 function critere_SPHINX_recherche_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// critere unique
-	$boucle->hash .= "\n\t" . '$command[\'recherche\']=[];';
+	$boucle->hash .= "\n\t" . '$command[\'recherche\'] = array();';
 
 	foreach ($crit->param as $param){
 		$boucle->hash .= "\n\t" . '$command[\'recherche\'][] = '.calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent).';';
@@ -484,7 +484,7 @@ function critere_SPHINX_recherche_dist($idb, &$boucles, $crit) {
 function critere_SPHINX_select_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$select_init)) { \$command['selection'] = []; \$select_init = true; }\n";
+	$boucle->hash .= "\n\tif (!isset(\$select_init)) { \$command['selection'] = array(); \$select_init = true; }\n";
 
 	foreach ($crit->param as $param){
 		$boucle->hash .= "\t\$command['selection'][] = "
@@ -503,7 +503,7 @@ function critere_SPHINX_select_dist($idb, &$boucles, $crit) {
 function critere_SPHINX_snippet_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$snippet_init)) { \$command['snippet'] = []; \$snippet_init = true; }\n";
+	$boucle->hash .= "\n\tif (!isset(\$snippet_init)) { \$command['snippet'] = array(); \$snippet_init = true; }\n";
 
 	$boucle->hash .= "\t\$command['snippet'][] = [\n"
 		. (isset($crit->param[0]) ? "\t\t'champ'  => ". calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
@@ -525,7 +525,7 @@ function critere_SPHINX_snippet_dist($idb, &$boucles, $crit) {
 function critere_SPHINX_facet_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$facet_init)) { \$command['facet'] = []; \$facet_init = true; }\n";
+	$boucle->hash .= "\n\tif (!isset(\$facet_init)) { \$command['facet'] = array(); \$facet_init = true; }\n";
 
 	$boucle->hash .= "\t\$command['facet'][] = [\n"
 		. (isset($crit->param[0]) ? "\t\t'alias'  => ". calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
@@ -545,7 +545,7 @@ function critere_SPHINX_facet_dist($idb, &$boucles, $crit) {
 function critere_SPHINX_select_filter_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$sfilter_init)) { \$command['select_filter'] = []; \$sfilter_init = true; }\n";
+	$boucle->hash .= "\n\tif (!isset(\$sfilter_init)) { \$command['select_filter'] = array(); \$sfilter_init = true; }\n";
 
 	$boucle->hash .= "\t\$command['select_filter'][] = [\n"
 		. (isset($crit->param[0]) ? "\t\t'valeur'      => ". calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
