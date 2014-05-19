@@ -1,11 +1,27 @@
 <?php
+/*
+ * Plugin numero
+ * aide a la numerotation/classement des objets dans l'espace prive
+ *
+ * Auteurs :
+ * Cedric Morin, Nursit.com
+ * (c) 2008-2014 - Distribue sous licence GNU/GPL
+ *
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_denumeroter_dist() {
-	
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+/**
+ * Numeroter les objets d'un type et parent donnes
+ * arg au format type-id
+ */
+function action_denumeroter_dist($arg = null) {
+
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+
 	$arg = explode('-',$arg);
 	$type = 'rubrique';
 	if (preg_match(',^\w*$,',$arg[0]))

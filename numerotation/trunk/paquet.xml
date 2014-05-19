@@ -1,7 +1,7 @@
 <paquet
 	prefix="numero"
 	categorie="navigation"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/numeroter-32.png"
@@ -11,7 +11,7 @@
 	<nom>Num&#233;rotation Rapide</nom>
 	<!-- Gérer facilement la numérotation des articles et rubriques -->
 
-	<auteur mail="cedric.morin@yterium.com">Cedric Morin</auteur>
+	<auteur lien="http://www.nursit.com">Cedric Morin</auteur>
 
 	<pipeline nom="autoriser" inclure="numero_autoriser.php" />
 	<pipeline nom="affiche_droite" inclure="numero_pipeline.php" />

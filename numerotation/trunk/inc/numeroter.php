@@ -1,12 +1,33 @@
 <?php
+/*
+ * Plugin numero
+ * aide a la numerotation/classement des objets dans l'espace prive
+ *
+ * Auteurs :
+ * Cedric Morin, Nursit.com
+ * (c) 2008-2014 - Distribue sous licence GNU/GPL
+ *
+ */
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!defined('_NUMEROTE_STEP')) define('_NUMEROTE_STEP',10);
 
+/**
+ * Enlever le numero d'un titre
+ * @param $titre
+ * @return mixed
+ */
 function numero_denumerote_titre($titre){
 	return preg_replace(',^([0-9]+[.]\s+),','',$titre);
 }
 
+/**
+ * Informations concernant un objet
+ * @param string $objet
+ * @param int $id_objet
+ * @return array
+ */
 function numero_info_objet($objet,$id_objet=0){
 	static $infos = array();
 	include_spip("base/abstract_sql");
@@ -57,6 +78,12 @@ function numero_info_objet($objet,$id_objet=0){
 	return $res;
 }
 
+/**
+ * Requeter le(s) titres d'un objet selon une serie de conditions fournies en argument
+ * @param string $type
+ * @param array $cond
+ * @return resource
+ */
 function numero_requeter_titre($type,$cond = array()){
 	$d = numero_info_objet($type);
 	$select = array(
@@ -71,11 +98,23 @@ function numero_requeter_titre($type,$cond = array()){
 	return $res;
 }
 
+/**
+ * changer le titre d'un objet en base
+ * @param string $type
+ * @param int $id
+ * @param string $titre
+ */
 function numero_titrer_objet($type,$id,$titre){
 	$d = numero_info_objet($type);
 	sql_updateq($d['table_sql'],array($d['titre']=>$titre),$d['primary']."=".intval($id));
 }
 
+/**
+ * Numeroter/denumeroter les objets d'un parent
+ * @param string $type
+ * @param int $id_parent
+ * @param bool $remove
+ */
 function numero_numeroter_objets($type='rubrique',$id_parent,$remove=false){
 	$d = numero_info_objet($type);
 	if (!$d)
@@ -140,7 +179,23 @@ function numero_numeroter_objets($type='rubrique',$id_parent,$remove=false){
 	return;
 }
 
+/**
+ * Compat version anterieure
+ * @param int $id_rubrique
+ * @param string $type
+ * @param bool $numerote
+ */
+function numero_numeroter_rubrique($id_rubrique,$type='rubrique',$numerote=true){
+	return numero_numeroter_objets($type,$id_rubrique,!$numerote);
+}
 
+
+/**
+ * Lister tous les objets freres d'un objet (avec le meme parent)
+ * @param string $objet
+ * @param int $id_objet
+ * @return array
+ */
 function numero_lister_fratrie($objet,$id_objet){
 	// recuperer le titre/parent de l'objet
 	$d = numero_info_objet($objet,$id_objet);
@@ -157,6 +212,13 @@ function numero_lister_fratrie($objet,$id_objet){
 
 	return $fratrie;
 }
+
+/**
+ * Trouver le precedent dans la liste numerotee (ou non)
+ * @param int $id_objet
+ * @param array $fratrie
+ * @return int
+ */
 function numero_trouver_precedent($id_objet,$fratrie){
 	$ids = array_keys($fratrie);
 	$k = array_search($id_objet,$ids);

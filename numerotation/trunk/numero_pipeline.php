@@ -1,7 +1,23 @@
 <?php
+/*
+ * Plugin numero
+ * aide a la numerotation/classement des objets dans l'espace prive
+ *
+ * Auteurs :
+ * Cedric Morin, Nursit.com
+ * (c) 2008-2014 - Distribue sous licence GNU/GPL
+ *
+ */
+
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Afficher en colonne de droite les aides a la numerotation
+ *
+ * @param array $flux
+ * @return array
+ */
 function numero_affiche_droite($flux){
 	$out2 = "";
 	$class = 'boutons_numero';
@@ -74,10 +90,23 @@ function numero_affiche_droite($flux){
 	return $flux;
 }
 
+/**
+ * Compter les objets enfants d'un type et d'un parent donne pour voir si on a besoin du bouton numeroter/denumeroter
+ * @param string $type
+ * @param string $champ_parent
+ * @param int $id_parent
+ * @return bool|int
+ */
 function numero_compte_objets_enfants($type,$champ_parent,$id_parent){
 	return sql_countsel(table_objet_sql($type),"$champ_parent=".intval($id_parent));
 }
 
+/**
+ * Affiche les boutons numeroter/denumeroter pour un type et un parent donnes
+ * @param int $id_parent
+ * @param string $type
+ * @return string
+ */
 function numero_affiche_boutons_objets_enfants($id_parent,$type){
 
 	$out = "";
