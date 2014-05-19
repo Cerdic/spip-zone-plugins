@@ -41,8 +41,8 @@
 -->
 
 <BOUCLE_recherche_sphinx(SPHINX)
+	{index #ENV{source,spip}}
 	{recherche #ENV*{recherche}}
-
 	{facet auteurs, properties.authors ORDER BY COUNT(*) DESC}
 	{facet tags, properties.tags ORDER BY COUNT(*) DESC}
 	{facet date, YEAR(date) ORDER BY date DESC}
