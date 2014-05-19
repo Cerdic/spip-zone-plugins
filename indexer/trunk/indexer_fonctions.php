@@ -1,6 +1,7 @@
 <?php
 
-
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function sphinx_get_array2query($api, $limit=''){
 	include_spip('inc/indexer');
