@@ -39,14 +39,25 @@ class SphinxQL {
 		return $this->sql->multi_query($query);
 	}
 
+
 	/**
-	 * Prépare une requête
+	 * Échappe une chaîne
 	**/
-	public function prepare($query) {
+	public function escape_string($string) {
 		if (!$this->sql) {
 			return false;
 		}
-		return $this->sql->prepare($query);
+		return $this->sql->escape_string($string);
+	}
+
+	/**
+	 * Récupère les dernières erreurs
+	**/
+	public function errors() {
+		if (!$this->sql) {
+			return false;
+		}
+		return $this->sql->error_list;
 	}
 
 

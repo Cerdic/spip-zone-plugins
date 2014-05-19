@@ -25,17 +25,44 @@ class Sphinx implements StorageInterface {
             REPLACE INTO $this->indexName
                 (id,  title, summary, content, date, uri, properties, signature)
             VALUES
-                (:id, :title, :summary, :content, :date, :uri, :properties, :signature)
         ";
-        $prepare = $this->sphinxql->prepare($query);
 
+        // insertion document par document
+        // il semble que sphinxql n'aime pas plusieurs lignes d'un coup.
         foreach ($documents as $document) {
             $data = $this->reformatDocument($document);
-            if (!$prepare->execute($data)){
-                echo "<pre>".print_r($prepare->errorInfo(), true)."</pre>";
+            $data = array_map(array($this->sphinxql, 'escape_string'), $data);
+            $q = $query . "('" . implode("', '", $data) . "')";
+            if (!$this->sphinxql->query($q)) {
+                echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
+                echo "<pre>".print_r($q, true)."</pre>";
                 exit;
-            }
+            }          
         }
+
+        // par lot de 10 entrées
+        /*
+        $sep = $values = '';
+        $n = 0;
+        foreach ($documents as $document) {
+            $data = $this->reformatDocument($document);
+            $data = array_map(array($this->sphinxql, 'escape_string'), $data);
+            $values .= $sep . " ('" . implode("', '", $data) . "')";
+            $sep = ',';
+            if (++$n == 10) {
+                if (!$this->sphinxql->query($query . $values)) {
+                    echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
+                    exit;
+                }
+                $n = 0;
+                $sep = $values = '';
+            };
+        }
+
+        if ($n and !$this->sphinxql->query($query . $values)) {
+            echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
+            exit;
+        }*/
     }
 
 
