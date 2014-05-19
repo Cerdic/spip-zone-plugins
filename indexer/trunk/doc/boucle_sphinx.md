@@ -142,7 +142,7 @@ http://sphinxsearch.com/blog/2010/06/27/doing-time-segments-geodistance-searches
 
 ```
 #SET{tseg,
-	"INTERVAL(date, NOW()-90*86400, NOW()-30*86400, NOW()-7*86400, NOW()-86400, NOW()-3600) AS tseg"
+	"*,INTERVAL(date, NOW()-90*86400, NOW()-30*86400, NOW()-7*86400, NOW()-86400, NOW()-3600) AS tseg"
 }
 <BOUCLE_recherche_sphinx(SPHINX)
 	{index #ENV{source,spip}}
