@@ -379,7 +379,7 @@ class IterateurSPHINX implements Iterator {
 
 			// préparer les données
 			$valeur = $this->quote($valeur);
-			$valeurs = array_map([$this, 'quote'], $valeurs);
+			$valeurs = array_map(array($this, 'quote'), $valeurs);
 			$valeurs = implode(', ', $valeurs);
 
 			if (($valeur == '-') and $filter['select_null']) {
