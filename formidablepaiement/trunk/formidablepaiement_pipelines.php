@@ -23,19 +23,17 @@ function formidablepaiement_formulaire_fond($flux){
 	  AND $id = $flux['args']['args'][0]
 	  AND $flux['args']['je_suis_poste']){
 
-		if (($p1 = strpos($flux['data'],"<!--formidablepaiement-transaction-->"))!==false
-			AND ($p2 = strpos($flux['data'],"<!--//formidablepaiement-transaction-->"))!==false
-		  AND $p2>$p1){
-			$length = $p2-$p1+39;
-			$form = substr($flux['data'],$p1,$length);
-			$flux['data'] = substr_replace($flux['data'],"",$p1,$length);
+		include_spip('inc/securiser_action');
+		$id = md5(@getmypid() . secret_du_site());
+		if (isset($GLOBALS['formidable_post_'.$id])
+		  AND  $form = $GLOBALS['formidable_post_'.$id]){
 			$flux['data'] .=
 				"<div class='formulaire_spip formulaire_paiement'>"
 				. $form
 				. "</div>";
 
 			$css = find_in_path("css/formidablepaiement.css");
-			$flux['data'] .= "<style type='text/css'>@import url('$css');</style>";
+			$flux['data'] .= "<style type='text/css'>@import url('".$css."');</style>";
 		}
 	}
 	return $flux;

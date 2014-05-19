@@ -72,8 +72,9 @@ function traiter_paiement_dist($args, $retours){
 			)
 		);
 
-		$retours['message_ok'] = "<html><!--formidablepaiement-transaction-->$form<!--//formidablepaiement-transaction--></html>" . $retours['message_ok'];
-
+		include_spip('inc/securiser_action');
+		$id = md5(@getmypid() . secret_du_site());
+		$GLOBALS['formidable_post_'.$id] = $form;
 	}
 
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
