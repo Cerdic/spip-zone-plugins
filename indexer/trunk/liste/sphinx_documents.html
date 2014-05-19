@@ -2,7 +2,7 @@
 <B_documents>
     <h2>Documents trouvés</h2>
     <small>
-    [(#ENV{meta/total}|=={1000}|?{'+ de '}) ][(#ENV{meta/total}) ]résultats ([(#ENV{meta/time}|mult{1000})] ms)
+    [(#ENV{meta}|table_valeur{total}|=={1000}|?{'+ de '}) ][(#ENV{meta}|table_valeur{total}) ]résultats ([(#ENV{meta}|table_valeur{time}|mult{1000})] ms)
     </small>
 
     <div class='liste long resultats'>
