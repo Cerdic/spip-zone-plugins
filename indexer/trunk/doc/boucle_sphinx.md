@@ -134,3 +134,9 @@ Ajoute une sous requête de facette selon la syntaxe de sphinx.
 
 
 
+TRI SÉLECTIF
+----------------
+Exemple de tri sur une formule de calcul de « time segment », reprise ici de http://sphinxsearch.com/blog/2010/06/27/doing-time-segments-geodistance-searches-and-overrides-in-sphinxql/
+```
+#SET{tseg,	"INTERVAL(date, NOW()-90*86400, NOW()-30*86400, NOW()-7*86400, NOW()-86400, NOW()-3600) AS tseg"}<BOUCLE_recherche_sphinx(SPHINX)	{index #ENV{source,spip}}	{recherche #ENV*{recherche}}	{select #GET{tseg}}	{!par tseg}	{!par score}	{facet auteurs, properties.authors ORDER BY COUNT(*) DESC}	{facet tags, properties.tags ORDER BY COUNT(*) DESC}	{facet date, YEAR(date) ORDER BY date DESC}>
+```
