@@ -208,6 +208,7 @@ class QueryApi extends Query {
 		$this->where('MATCH(' . $this->quote($api['fulltext']) . ')');
 		// add the score
 		$this->select('WEIGHT() as score');
+		// add to snippet
 		$this->add_snippet_words($api['fulltext']);
 	}
 
