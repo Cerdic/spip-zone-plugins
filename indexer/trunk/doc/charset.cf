@@ -136,10 +136,8 @@ define('_CHARSET_TABLE',
 
 // definition de charset, etc
 define('_CHARSET_INDEXATION',
-'	charset_type	= utf-8
-	enable_star	= 1
+'
 	min_prefix_len	= 3
-	dict		= keywords
 ');
 
 define('_CHARSET_INDEXATION_FR',
