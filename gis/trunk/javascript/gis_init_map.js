@@ -137,8 +137,8 @@ gis_init_map = function(mapcfg) {
 						// Déclarer le contenu de la popup s'il y en a
 						map.setGeoJsonFeaturePopup(feature, layer);
 					}
-				}).addTo(map);
-				geojson.addData(data);
+				}).addData(data).addTo(map);
+				
 				if (mapcfg.autocenterandzoom) {
 					if (data.features.length == 1 && data.features[0].geometry.type == 'Point')
 						map.setView(geojson.getBounds().getCenter(), mapcfg.zoom);
