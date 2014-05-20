@@ -176,10 +176,10 @@ Chaque filtre crée le where associé (filtre = 1).
 
 ----
 
-    {select_filter #TRUC, select si contenu, select si '-'}
-    {select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
-    {select_filter #ENV{tag}, 'IN(properties.tag, @valeurs)', 'LENGTH(properties.tags) = 0'}
-    {select_filter #ENV{annee}, 'YEAR(date) = @valeur' }
+    {filter #TRUC, select si contenu, select si '-'}
+    {filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
+    {filter #ENV{tag}, 'IN(properties.tag, @valeurs)', 'LENGTH(properties.tags) = 0'}
+    {filter #ENV{annee}, 'YEAR(date) = @valeur' }
     
     
 PAGES

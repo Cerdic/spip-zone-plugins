@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @package SPIP\Indexer\Iterateur\Sphinx
 **/
 
+include_spip('iterateur/data');
+
 /**
  * Créer une boucle sur un itérateur SPHINX
  *
@@ -89,12 +91,6 @@ class IterateurSPHINX implements Iterator {
 	protected $valeur = null;
 
 	/**
-	 * Limites demandés de la requête en cas de pagination
-	 * @var array(debut, nombre)
-	 */
-	protected $pagination_limit = array();
-
-	/**
 	 * Constructeur
 	 *
 	 * @param  $command
@@ -108,7 +104,7 @@ class IterateurSPHINX implements Iterator {
 			'recherche' => array(),
 			'snippet'   => array(),
 			'facet'     => array(),
-			'select_filter' => array(),
+			'filter' => array(),
 		);
 
 
@@ -125,7 +121,7 @@ class IterateurSPHINX implements Iterator {
 		$this->setOrderBy($this->command['orderby']);
 		$this->setFacet($this->command['facet']);
 
-		$this->setSelectFilter($this->command['select_filter']);
+		$this->setSelectFilter($this->command['filter']);
 
 		$this->setSnippet($this->command);
 
@@ -144,8 +140,8 @@ class IterateurSPHINX implements Iterator {
 
 		// decaler les docs en fonction de la pagination demandee
 		if (is_array($result['query']['docs'])
-		AND $pagination = $this->getPaginationLimit()) {
-			list($debut) = array_map('intval', $pagination);
+		AND $pagination = $this->queryApi->limit) {
+			list($debut) = array_map('intval',explode(',', $pagination));
 
 			$result['query']['docs'] = array_pad($result['query']['docs'], - count($result['query']['docs']) - $debut, null);
 			$result['query']['docs'] = array_pad($result['query']['docs'], $result['query']['meta']['total'], null);
@@ -253,37 +249,16 @@ class IterateurSPHINX implements Iterator {
 	**/
 	public function setPagination($pagination) {
 		# {pages #DEBUT_DOCUMENTS, 20}
-		if (is_array($pagination) and $pagination) {
-			$nombre = 20;
+		if (is_array($pagination)) {
 			$debut = intval($pagination[0]);
-			if (isset($pagination[1])) {
+			if (isset($pagination[1]))
 				$nombre = intval($pagination[1]);
-			}
-			$this->setPaginationLimit($debut, $nombre);
+			else
+				$nombre = 20;
+			$this->queryApi
+				->limit("$debut,$nombre");
 			return true;
 		}
-	}
-
-	/**
-	 * Affecte une limite à la requête Sphinx (et sauve ses bornes)
-	 *
-	 * @param int Début
-	 * @param int Nombre de résultats
-	**/
-	public function setPaginationLimit($debut, $nombre) {
-		$this->pagination_limit = array($debut, $nombre);
-		$this->queryApi->limit("$debut,$nombre");
-	}
-
-	/**
-	 * Retourne les limites de pagination précédemment sauvées
-	 *
-	 * @param int Début
-	 * @param int Nombre de résultats
-	**/
-	public function getPaginationLimit() {
-		return $this->pagination_limit;
-		# return explode(',', $this->queryApi->getLimit());
 	}
 
 	/**
@@ -434,12 +409,11 @@ class IterateurSPHINX implements Iterator {
 			);
 
 			// préparer les données
-			$sans = ($valeur == '-'); // si aucun demandé
 			$valeur = $this->quote($valeur);
 			$valeurs = array_map(array($this, 'quote'), $valeurs);
 			$valeurs = implode(', ', $valeurs);
 
-			if (($sans == '-') and $filter['select_null']) {
+			if (($valeur == '-') and $filter['select_null']) {
 				$f = $filter['select_null'];
 			} elseif ($filter['select_oui']) {
 				$f = $filter['select_oui'];
@@ -447,7 +421,6 @@ class IterateurSPHINX implements Iterator {
 
 			// remplacer d'abord le pluriel !
 			$f = str_replace(array('@valeurs', '@valeur'), array($valeurs, $valeur), $f);
-
 			$this->queryApi->select("($f) AS f$nb");
 			$this->queryApi->where("f$nb = 1");
 			$nb++;
@@ -608,16 +581,16 @@ function critere_SPHINX_facet_dist($idb, &$boucles, $crit) {
  * @param object $boucles
  * @param object $crit
  */
-function critere_SPHINX_select_filter_dist($idb, &$boucles, $crit) {
+function critere_SPHINX_filter_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$sfilter_init)) { \$command['select_filter'] = array(); \$sfilter_init = true; }\n";
+	$boucle->hash .= "\n\tif (!isset(\$sfilter_init)) { \$command['filter'] = array(); \$sfilter_init = true; }\n";
 
-	$boucle->hash .= "\t\$command['select_filter'][] = [\n"
+	$boucle->hash .= "\t\$command['filter'][] = array(\n"
 		. (isset($crit->param[0]) ? "\t\t'valeur'      => ". calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
 		. (isset($crit->param[1]) ? "\t\t'select_oui'  => ". calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
 		. (isset($crit->param[2]) ? "\t\t'select_null' => ". calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent) . ",\n" : '')
-		. "\t];\n";
+		. "\t);\n";
 }
 
 
