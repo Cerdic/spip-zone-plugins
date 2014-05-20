@@ -1,0 +1,46 @@
+<BOUCLE_doc(DOCUMENTS){id_document}{tout}>
+[(#REM)
+
+	Modele CONSTANT pour <doc> en dl/dt/dd
+	cf. http://pompage.net/pompe/listesdefinitions/
+
+	La largeur du titre est egale a la largeur de la vignette,
+	avec un minimum de 120px et un maximum de 350px.
+	
+]
+
+[(#SET{fichier,[(#LOGO_DOCUMENT)]})]
+[(#SET{url,#URL_DOCUMENT})]
+[(#SET{titre,[(#TITRE|sinon{[(#FICHIER|basename)]})]})]
+[(#SET{title,[(#GET{titre}|couper{80})][ (#MODELE{info_document})]})]
+[(#SET{alt,[(#GET{title})]})]
+
+[(#REM)
+
+	Dans le cas d'une simple image, on affiche sa vignette,
+	avec lien vers la version originale, si elle est plus grande.
+	
+]
+[(#EXTENSION|match{jpg|gif|png}|oui)
+	[(#SET{fichier,[(#FICHIER|image_reduire{150})]})]
+	[(#SET{titre,''})]
+	[(#LARGEUR|>{150}|?{
+		[(#SET{url,#URL_DOCUMENT})]
+		[(#SET{title,[(#TITRE|sinon{[(#FICHIER|basename)]}|couper{80})]})]
+		[(#SET{alt,[(#GET{title})]})]
+	,
+		[(#SET{url,''})]
+		[(#SET{title,''})]
+		[(#SET{alt,[(#TITRE|couper{60})]})]
+	})]
+]
+
+#SET{width,#GET{fichier}|largeur}
+#SET{height,#GET{fichier}|hauteur}
+#SET{fichier,#GET{fichier}|extraire_attribut{src}}
+
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+	<dt>[<a href="(#GET{url})"[ type="(#MIME_TYPE)"][ (#DISTANT|oui)rel="external"][ class="(#ENV{lien_class})"]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}'[ alt="(#GET{alt}|attribut_html)"][(#GET{url}|?{[ title="(#GET{title}|attribut_html)"]] />[(#GET{url}|?{</a>})]</dt>[
+	<dt class='#EDIT{titre} spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#GET{titre})</dt>]
+</dl>
+</BOUCLE_doc>
