@@ -432,12 +432,12 @@ class IterateurSPHINX implements Iterator {
 			);
 
 			// préparer les données
-			$sans = ($valeur == '-'); // si aucun demandé 
+			$aucun = ($valeur == '-'); // si aucun demandé 
 			$valeur = $this->quote($valeur);
 			$valeurs = array_map(array($this, 'quote'), $valeurs);
 			$valeurs = implode(', ', $valeurs);
 
-			if (($sens == '-') and $filter['select_null']) {
+			if (($aucun == '-') and $filter['select_null']) {
 				$f = $filter['select_null'];
 			} elseif ($filter['select_oui']) {
 				$f = $filter['select_oui'];
