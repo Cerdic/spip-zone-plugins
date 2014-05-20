@@ -14,7 +14,6 @@ function sjcycle_upgrade($nom_meta_version_base, $version_cible){
 				'timeout' => '4000',
 				'speed' => '1000',
 				'fx' => 'fade',
-				'caption' => '.cycle-caption',
 				'afficher_aide' => 'oui'
 	)));
 	include_spip('base/upgrade');

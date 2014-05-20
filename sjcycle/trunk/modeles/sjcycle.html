@@ -1,5 +1,6 @@
 
 [(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
+[(#SET{hauteurmax,	[(#ENV{hauteurmax,     	#CONFIG{sjcycle/hauteurmax}})]})]
 [(#SET{timeout,      	[(#ENV{timeout,     	#CONFIG{sjcycle/timeout}})]})]
 [(#SET{speed,      	[(#ENV{speed,     	#CONFIG{sjcycle/speed}})]})]
 [(#SET{pauseonhover,    [(#ENV{pauseonhover,    #CONFIG{sjcycle/pauseonhover}})]})]
@@ -41,7 +42,7 @@
 		[(#GET{liens_individuels}|=={article}|oui)
 		<a href="#URL_ARTICLE"[ title="(#TITRE)"]>#SET{fermer_a,oui}]
 		
-			<img class="no_image_filtrer" src="(#FICHIER|image_passe_partout{#GET{largeurmax},*}|extraire_attribut{src})"[ alt="(#TITRE)"] />
+			<img class="no_image_filtrer" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] />
 		
 		[(#GET{fermer_a}|=={oui}|oui)</a>]
 	]</BOUCLE_img>
