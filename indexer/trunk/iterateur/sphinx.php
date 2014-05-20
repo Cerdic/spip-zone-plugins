@@ -121,7 +121,7 @@ class IterateurSPHINX implements Iterator {
 		$this->setOrderBy($this->command['orderby']);
 		$this->setFacet($this->command['facet']);
 
-		$this->setSelectFilter($this->command['filter']);
+		$this->setFilter($this->command['filter']);
 
 		$this->setSnippet($this->command);
 
@@ -140,8 +140,9 @@ class IterateurSPHINX implements Iterator {
 
 		// decaler les docs en fonction de la pagination demandee
 		if (is_array($result['query']['docs'])
-		AND $pagination = $this->queryApi->limit) {
-			list($debut) = array_map('intval',explode(',', $pagination));
+			AND $pagination = $this->getPaginationLimit()) { 
+
+			list($debut) = array_map('intval', $pagination); 
 
 			$result['query']['docs'] = array_pad($result['query']['docs'], - count($result['query']['docs']) - $debut, null);
 			$result['query']['docs'] = array_pad($result['query']['docs'], $result['query']['meta']['total'], null);
@@ -241,6 +242,29 @@ class IterateurSPHINX implements Iterator {
 		return true;
 	}
 
+
+	/** 
+	* Affecte une limite à la requête Sphinx (et sauve ses bornes) 
+	* 
+	* @param int Début 
+	* @param int Nombre de résultats 
+	**/ 
+	public function setPaginationLimit($debut, $nombre) { 
+		$this->pagination_limit = array($debut, $nombre); 
+		$this->queryApi->limit("$debut,$nombre"); 
+	} 
+
+	/** 
+	* Retourne les limites de pagination précédemment sauvées 
+	* 
+	* @param int Début 
+	* @param int Nombre de résultats 
+	**/ 
+	public function getPaginationLimit() { 
+		return $this->pagination_limit; 
+		# return explode(',', $this->queryApi->getLimit()); 
+	}
+
 	/**
 	 * Définir la pagination
 	 *
@@ -249,14 +273,13 @@ class IterateurSPHINX implements Iterator {
 	**/
 	public function setPagination($pagination) {
 		# {pages #DEBUT_DOCUMENTS, 20}
-		if (is_array($pagination)) {
+		if (is_array($pagination) and $pagination) {
 			$debut = intval($pagination[0]);
-			if (isset($pagination[1]))
+			$nombre = 20;
+			if (isset($pagination[1])) {
 				$nombre = intval($pagination[1]);
-			else
-				$nombre = 20;
-			$this->queryApi
-				->limit("$debut,$nombre");
+			}
+			$this->setPaginationLimit($debut, $nombre); 
 			return true;
 		}
 	}
@@ -378,7 +401,7 @@ class IterateurSPHINX implements Iterator {
 	 * @param array $facets Tableau des filtres demandées
 	 * @return bool
 	**/
-	public function setSelectFilter($filters) {
+	public function setFilter($filters) {
 		// compter le nombre de filtres ajoutés à la requête.
 		static $nb = 0;
 
@@ -409,11 +432,12 @@ class IterateurSPHINX implements Iterator {
 			);
 
 			// préparer les données
+			$sans = ($valeur == '-'); // si aucun demandé 
 			$valeur = $this->quote($valeur);
 			$valeurs = array_map(array($this, 'quote'), $valeurs);
 			$valeurs = implode(', ', $valeurs);
 
-			if (($valeur == '-') and $filter['select_null']) {
+			if (($sens == '-') and $filter['select_null']) {
 				$f = $filter['select_null'];
 			} elseif ($filter['select_oui']) {
 				$f = $filter['select_oui'];
