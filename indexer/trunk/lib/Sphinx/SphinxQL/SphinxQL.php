@@ -33,6 +33,7 @@ class SphinxQL {
 	 * Exécute une requête
 	**/
 	public function query($query) {
+		spip_log($query, 'sphinx');
 		if (!$this->sql) {
 			return false;
 		}
