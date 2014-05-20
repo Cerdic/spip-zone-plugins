@@ -270,8 +270,8 @@ class IterateurSPHINX implements Iterator {
 			return false;
 		}
 
-		$this->queryApi->add_snippet_words( $desc['phrase'] );
-		$desc['phrase'] = $this->queryApi->get_snippet_words();
+		$this->queryApi->addSnippetWords( $desc['phrase'] );
+		$desc['phrase'] = $this->queryApi->getSnippetWords();
 
 		if (!$desc['phrase'] OR !$desc['champ']) {
 			return false;
