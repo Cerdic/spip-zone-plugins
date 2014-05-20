@@ -9,7 +9,7 @@
         <div class='liste'>
             <ul class='liste-items'>
         <BOUCLE_liste_facettes(DATA){source tableau, #VALEUR}>
-                <li class='item'>#CLE (#VALEUR)</li>
+                <li class='item'><a href="[(#SELF|parametre_url{[(#_facettes:CLE|replace{^.*?\.})],#CLE})]">#CLE (#VALEUR)</a></li>
         </BOUCLE_liste_facettes>
             </ul>
         </div>
