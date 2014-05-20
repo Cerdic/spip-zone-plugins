@@ -3,7 +3,7 @@
 <prefix>medoc</prefix>
 <icon>icon/medoc.png</icon>
 
-<version>0.1.7</version>
+<version>0.1.8</version>
 <etat>stable</etat>
 <categorie>edition</categorie>
 
@@ -17,6 +17,6 @@
 <lien>http://contrib.spip.net/4026</lien>
 <auteur>[tetue->http://spip.tetue.net] - 2011</auteur>
 
-<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 <utilise id="medias" version="[;]" />
 </plugin>
