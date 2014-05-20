@@ -75,7 +75,7 @@ gis_init_map = function(mapcfg) {
 		if (mapcfg.scale)
 			map.addControl(L.control.scale());
 		if (mapcfg.fullscreen)
-			map.addControl(L.control.fullScreen());
+			map.addControl(L.control.fullscreen());
 		if (mapcfg.overview){
 			var minimap_layer = get_layer(mapcfg.default_layer);
 			var miniMap = L.control.minimap(minimap_layer,{width: 100,height: 100, toggleDisplay: true}).addTo(map);
