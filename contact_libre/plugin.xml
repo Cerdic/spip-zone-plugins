@@ -2,14 +2,14 @@
 	<nom>Contact libre</nom>
 	<slogan>Formulaire de contact libre</slogan>
 	<auteur>b_b</auteur>
-	<version>0.1.5</version>
+	<version>0.1.6</version>
 	<etat>stable</etat>
 	<prefix>contact_libre</prefix>
 	<icon>images/contact_libre-48.png</icon>
 	<description>
 	Formulaire de contact libre auquel on peut passer directement une adresse mail et une url de r&#233;f&#233;rence (ic&#244;ne de http://www.androidicons.com/).
 	</description>
-	<lien>http://www.spip-contrib.net/Formulaire-de-contact-libre</lien>
+	<lien>http://contrib.spip.net/Formulaire-de-contact-libre</lien>
 	<licence>GPL</licence>
 	<categorie>communication</categorie>
 	<options>contact_libre_options.php</options>
