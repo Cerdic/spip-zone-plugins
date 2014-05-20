@@ -15,7 +15,8 @@ function inc_saveauto_cleaner_dist($options=array()){
 	include_spip('inc/config');
 	$jours_obso = intval(lire_config('saveauto/jours_obso'));
 	$auteur = $options['auteur'] ? $options['auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
-	$dir_dump = lire_config('saveauto/repertoire_save');
+	include_spip("inc/saveauto_repertoire_save");
+	$dir_dump = saveauto_repertoire_save(lire_config('saveauto/repertoire_save'));
 
 	if($jours_obso > 0){
 		$prefixe = lire_config('saveauto/prefixe_save').'_';

@@ -35,6 +35,10 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
      * Vérifier l'existence du répertoire tmp/dump/, le créer si besoin et tester son accessibilité
      */
 	$dir_dump = (isset($repertoire_save) ? $repertoire_save : _DIR_DUMP);
+	
+	include_spip("inc/saveauto_repertoire_save");
+	$dir_dump = saveauto_repertoire_save($dir_dump);
+	
 	if ($dir_dump != _DIR_DUMP AND !@file_exists($dir_dump)) {
 		$erreur .= _T('saveauto:erreur_repertoire_perso_inaccessible',array('rep' => $dir_dump));
 		$dir_dump = _DIR_DUMP;
@@ -47,7 +51,7 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
     if(spip_fopen_lock($dir_dump.'.ok', 'a',LOCK_EX) === false){
     	$erreur .= _T('saveauto:erreur_repertoire_inaccessible',array('rep' => $dir_dump));
     }
-
+    
     if(!$erreur){
 	    // Listing des tables :
 		include_spip('base/dump');
@@ -57,8 +61,7 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 			$exclude = lister_tables_noexport();
 			$tables = base_lister_toutes_tables('', $tables, $exclude, true);
 		}
-
-	    /**
+	     /**
 	     * creation du fichier de sauvegarde
 	     */
 		if ($tables) {
