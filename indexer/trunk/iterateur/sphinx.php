@@ -102,9 +102,11 @@ class IterateurSPHINX implements Iterator {
 			'index'     => array(),
 			'selection' => array(),
 			'recherche' => array(),
+			'orderby'   => array(),
+			'groupby'   => array(),
 			'snippet'   => array(),
 			'facet'     => array(),
-			'filter' => array(),
+			'filter'    => array(),
 		);
 
 
@@ -118,7 +120,8 @@ class IterateurSPHINX implements Iterator {
 		$this->setIndex($this->command['index']);
 		$this->setSelection($this->command['selection']);
 		$this->setRecherche($this->command['recherche']);
-		$this->setOrderBy($this->command['orderby']);
+		$this->setOrderBy($this->command['order']);
+		$this->setGroupBy($this->command['groupby']);
 		$this->setFacet($this->command['facet']);
 
 		$this->setFilter($this->command['filter']);
@@ -238,6 +241,19 @@ class IterateurSPHINX implements Iterator {
 				$order .= ' ASC';
 			}
 			$this->queryApi->orderby($order);
+		}
+		return true;
+	}
+
+
+	public function setGroupby($groupby) {
+		if (!is_array($groupby)) $groupby = array($groupby);
+		$groupby = array_filter($groupby);
+		if (!$groupby) {
+			return false;
+		}
+		foreach ($groupby as $group) {
+			$this->queryApi->groupby($group);
 		}
 		return true;
 	}

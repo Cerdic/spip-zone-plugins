@@ -108,9 +108,11 @@ class IterateurSPHINX2 implements Iterator {
 			'index'     => array(),
 			'selection' => array(),
 			'recherche' => array(),
+			'orderby'   => array(),
+			'group'     => array(),
 			'snippet'   => array(),
 			'facet'     => array(),
-			'filter' => array(),
+			'filter'    => array(),
 		);
 
 
@@ -125,6 +127,7 @@ class IterateurSPHINX2 implements Iterator {
 		$this->setSelection($this->command['selection']);
 		$this->setRecherche($this->command['recherche']);
 		$this->setOrderBy($this->command['orderby']);
+		$this->setGroupBy($this->command['group']); // groupby interfère avec spip :/
 		$this->setFacet($this->command['facet']);
 
 		$this->setFilter($this->command['filter']);
@@ -248,6 +251,18 @@ class IterateurSPHINX2 implements Iterator {
 				$order .= ' ASC';
 			}
 			$this->queryApi->orderby($order);
+		}
+		return true;
+	}
+
+	public function setGroupby($groupby) {
+		if (!is_array($groupby)) $groupby = array($groupby);
+		$groupby = array_filter($groupby);
+		if (!$groupby) {
+			return false;
+		}
+		foreach ($groupby as $group) {
+			$this->queryApi->groupby($group);
 		}
 		return true;
 	}
@@ -474,6 +489,7 @@ class IterateurSPHINX2 implements Iterator {
 	 * @return void
 	 */
 	public function rewind() {
+		if (!is_array($this->result['docs'])) return false;
 		reset($this->result['docs']);
 		list($this->cle, $this->valeur) = each($this->result['docs']);
 	}
@@ -578,6 +594,25 @@ function critere_SPHINX2_select_dist($idb, &$boucles, $crit) {
 
 	foreach ($crit->param as $param){
 		$boucle->hash .= "\t\$command['selection'][] = "
+				. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
+	}
+}
+
+
+/**
+ * Indiquer les group by de la requête
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX2_groupby_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	// critere multiple
+	$boucle->hash .= "\n\tif (!isset(\$group_init)) { \$command['group'] = array(); \$group_init = true; }\n";
+
+	foreach ($crit->param as $param){
+		$boucle->hash .= "\t\$command['group'][] = "
 				. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
 	}
 }
@@ -707,18 +742,6 @@ function critere_SPHINX2_parinverse($idb, $boucles, $crit, $sens = '') {
 
 		$t = $order.$sens;
 		$boucle->order[] = $t;
-	}
-}
-
-function critere_SPHINX2_pages_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-
-	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$pagination_init)) { \$command['pagination'] = array(); \$pagination_init = true; }\n";
-
-	foreach ($crit->param as $param){
-		$boucle->hash .= "\t\$command['pagination'][] = "
-				. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
 	}
 }
 

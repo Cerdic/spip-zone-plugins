@@ -1,25 +1,40 @@
-[(#ENV{order}|=={date}|?{#SET{order,date DESC}})]
 
-[(#SET{sqlf, [(#ENV{source,spip}
-    |sphinx_get_query_facette{
-        #ENV{facette},
-        #ENV{cle},
-        #ENV*{recherche},
-        #GET{order}})]})]
+#SET{tri,#ENV{tri,nb}}
+#SET{sens_tri,#ENV{sens_tri,DESC}}
+#SET{groupby,#ENV{critere}}
 
-<BOUCLE_resultats(DATA) {source SphinxQL, #GET{sqlf}}>
-    <B_facette>
-        <h2>#ENV{titre}</h2>
-        <div class='liste'>
-            <ul class='liste-items'>
-    <BOUCLE_facette(DATA){source tableau, #DOCS}{0, 10}>
-                <li class='item'>
-                    <a href="[(#SELF|parametre_url{#ENV{cle},[(#VALEUR{facette}|sinon{-})]})]">
-                        [(#VALEUR{facette}|sinon{<i>#ENV{texte_vide}</i>})]
-                    </a> (#VALEUR{c} documents)
-                </li>
-    </BOUCLE_facette>
-            </ul>
-        </div>
-    </B_facette>
-</BOUCLE_resultats>
+[(#ENV{critere}|match{'\[\(\]'}|oui)
+	#SET{groupby,valeur}
+]
+
+<B_resultats_facette>
+	<h2>#ENV{titre}</h2>
+		<div class='liste'>
+			<ul class='liste-items'>
+<BOUCLE_resultats_facette(SPHINX2)
+	{index #ENV{source,spip}}
+	{recherche #ENV*{recherche}}
+
+	{select COUNT(*) AS nb}
+	{select GROUPBY() AS facette}
+	{select (#ENV{critere}|concat{' '}) AS valeur}
+
+	{groupby #GET{groupby}}
+
+	{filter #ENV{annee},  'YEAR(date) = @valeur' }
+	{filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
+	{filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
+
+	{par #GET{tri}}{inverse #GET{sens_tri}}
+
+	{0,10}
+>
+			<li class='item'>
+				<a href="[(#SELF|parametre_url{#ENV{cle},[(#FACETTE|sinon{-})]})]">
+					[(#FACETTE|sinon{<i>#ENV{texte_vide}</i>})]
+				</a> (#NB documents)
+			</li>
+</BOUCLE_resultats_facette>
+		</ul>
+	</div>
+</B_resultats_facette>

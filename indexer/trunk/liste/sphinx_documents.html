@@ -8,7 +8,7 @@
     <div class='liste long resultats'>
         [<div class="pagination">(#DEBUT_DOCUMENTS|?{#PAGINATION,#ANCRE_PAGINATION})</div>]
         <ul class='liste-items'>
-<BOUCLE_documents(DATA){source tableau, #DOCS}{pagination 100}>
+<BOUCLE_documents(DATA){source tableau, #DOCS}{pagination 20}>
             [(#SET{properties,#PROPERTIES|json_decode{1}})]
             <li class='item'>
                 <article class='entry article hentry'>
