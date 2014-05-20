@@ -1,7 +1,7 @@
 <paquet
 	prefix="griseusvignettes"
 	categorie="theme"
-	version="0.1.1"
+	version="0.1.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/griseusvignettes-256.png"
@@ -15,5 +15,7 @@
 	<credit lien="http://tiheum.deviantart.com/#/d47vo5d">Matthieu James pour le jeu d'icône "Faïence"</credit>
 
 	<licence>GNU/GPL</licence>
+
+	<utilise nom="medias" compatibilite="[2.0.0;[" />
 
 </paquet>
