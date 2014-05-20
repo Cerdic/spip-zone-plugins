@@ -712,8 +712,10 @@ function diogene_diogene_traiter($flux){
 
 	if(_request('date_orig') || _request('date_redac_orig')){
 		include_spip('inc/date_gestion');
-		if(_request('date_orig'))
+		if(_request('date_orig')){
 			$flux['data']['date'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('orig', 'oui', $erreurs));
+			set_request('date',$flux['data']['date']);
+		}
 		if(_request('date_redac_orig'))
 			$flux['data']['date_redac'] = date('Y-m-d H:i:s',verifier_corriger_date_saisie('redac_orig','oui', $erreurs));
 	}
