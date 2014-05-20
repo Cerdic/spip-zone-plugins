@@ -9,8 +9,8 @@
 
 	<nom>Mod&#232;le &lt;doc&gt; unifi&eacute;</nom>
 
-	<auteur>[tetue->http://spip.tetue.net]</auteur>
-	<auteur lien="http://spip.tetue.net">tetue</auteur>
+	<auteur>tetue</auteur>
+	<auteur lien="http://spip.tetue.net">http://spip.tetue.net</auteur>
 	<licence>GPL</licence>
 		
 	<necessite nom="medias" compatibilite="[2.7.58;[" />
