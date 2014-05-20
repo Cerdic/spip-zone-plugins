@@ -1,10 +1,10 @@
 
+[(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
 [(#SET{timeout,      	[(#ENV{timeout,     	#CONFIG{sjcycle/timeout}})]})]
 [(#SET{speed,      	[(#ENV{speed,     	#CONFIG{sjcycle/speed}})]})]
 [(#SET{pauseonhover,    [(#ENV{pauseonhover,    #CONFIG{sjcycle/pauseonhover}})]})]
 [(#SET{random,		[(#ENV{random,		#CONFIG{sjcycle/random}})]})]
 [(#SET{fx,		[(#ENV{fx,		#CONFIG{sjcycle/fx}})]})]
-[(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
 [(#SET{backgroundcolor, [(#ENV{backgroundcolor,	#CONFIG{sjcycle/backgroundcolor}})]})]
 [(#SET{prev, 		[(#ENV{prev,		#CONFIG{sjcycle/prev}})]})]
 [(#SET{next, 		[(#ENV{next,		#CONFIG{sjcycle/next}})]})]
@@ -13,19 +13,22 @@
 [(#SET{caption,		[(#ENV{caption,		#CONFIG{sjcycle/caption}})]})]
 [(#SET{captiontemplate,	[(#ENV{captiontemplate,	#CONFIG{sjcycle/captiontemplate}})]})]
 
+[(#SET{liens_individuels,	[(#ENV{liens_individuels,	0})]})]
+
 [(#ENV{align}|match{left|right}|=={left}|?{ #SET{marginfl,"margin-right"}, #SET{marginfl,"margin-left"}})]
 [(#SET{style,	[float:(#ENV{align}|match{left|right});#GET{marginfl}:1em;margin-top:0;][background-color:(#GET{backgroundcolor});][max-width:(#GET{largeurmax})px;]	})]
 
 <B_img>
 
-<div class="cycle-slideshow"[ style="(#GET{style})"][ 
+<div class="cycle-slideshow"[ style="(#GET{style})"][(#GET{liens_individuels}|oui)
+	data-cycle-slides="a"][ 
 	data-cycle-speed="(#GET{speed})"][ 
 	data-cycle-timeout="(#GET{timeout})"][ 
 	data-cycle-pause-on-hover="(#GET{pauseonhover})"][ 
 	data-cycle-random="(#GET{random})"][ 
 	data-cycle-paused="(#GET{paused})"][ 
-	data-cycle-prev="(#GET{prev})"]][ 
-	data-cycle-next="(#GET{next})"]][ 
+	data-cycle-prev="(#GET{prev})"][ 
+	data-cycle-next="(#GET{next})"][ 
 	data-cycle-fx="(#GET{fx})"][
 	data-cycle-pager="(#GET{pager})"][
 	data-cycle-caption="(#GET{caption})"][
@@ -35,7 +38,12 @@
 	<div class="cycle-pager"></div>][(#GET{caption}|=={'.cycle-caption'}|oui)
 	<div class="cycle-caption"></div>]
 	<BOUCLE_img(DOCUMENTS){id_article=#ENV{id_sjcycle}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>[
-		<img class="no_image_filtrer" src="(#FICHIER|image_passe_partout{#GET{largeurmax},*}|extraire_attribut{src})"[ alt="(#TITRE)"] />
+		[(#GET{liens_individuels}|=={article}|oui)
+		<a href="#URL_ARTICLE"[ title="(#TITRE)"]>#SET{fermer_a,oui}]
+		
+			<img class="no_image_filtrer" src="(#FICHIER|image_passe_partout{#GET{largeurmax},*}|extraire_attribut{src})"[ alt="(#TITRE)"] />
+		
+		[(#GET{fermer_a}|=={oui}|oui)</a>]
 	]</BOUCLE_img>
 </div>
 
