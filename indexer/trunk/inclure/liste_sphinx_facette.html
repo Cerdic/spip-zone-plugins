@@ -3,7 +3,7 @@
 #SET{sens_tri,#ENV{sens_tri,DESC}}
 #SET{groupby,#ENV{critere}}
 
-[(#ENV{critere}|match{'\[\(\]'}|oui)
+[(#ENV{critere}|match{'\x28'}|oui)
 	#SET{groupby,valeur}
 ]
 
