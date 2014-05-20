@@ -434,11 +434,12 @@ class IterateurSPHINX implements Iterator {
 			);
 
 			// préparer les données
+			$sans = ($valeur == '-'); // si aucun demandé
 			$valeur = $this->quote($valeur);
 			$valeurs = array_map(array($this, 'quote'), $valeurs);
 			$valeurs = implode(', ', $valeurs);
 
-			if (($valeur == '-') and $filter['select_null']) {
+			if (($sans == '-') and $filter['select_null']) {
 				$f = $filter['select_null'];
 			} elseif ($filter['select_oui']) {
 				$f = $filter['select_oui'];
@@ -446,6 +447,7 @@ class IterateurSPHINX implements Iterator {
 
 			// remplacer d'abord le pluriel !
 			$f = str_replace(array('@valeurs', '@valeur'), array($valeurs, $valeur), $f);
+
 			$this->queryApi->select("($f) AS f$nb");
 			$this->queryApi->where("f$nb = 1");
 			$nb++;

@@ -24,9 +24,10 @@
 
 <B_filtres>
 <h4>Filtres:</h4>
-<BOUCLE_filtres(DATA){liste auteur,tag,annee}>[
+<BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année}}>
+[(#ENV{#CLE}|oui)
 	<div>
-		<a class="btn btn-mini" href="[(#SELF|parametre_url{#VALEUR,''})]"><i class="icon-remove"></i> (#ENV{#VALEUR})</a>
+		<a class="btn btn-mini" href="[(#SELF|parametre_url{#CLE,''})]"><i class="icon-remove"></i> [(#ENV{#CLE}|=={-}|?{#VALEUR,#ENV{#CLE}})]</a>
 	</div>
 ]</BOUCLE_filtres>
 
