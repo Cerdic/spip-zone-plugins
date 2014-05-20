@@ -342,20 +342,25 @@ function medias_lister_logos_fichiers($mode = null, $repertoire_img = _DIR_IMG){
 
 	if (intval(spip_version()) == 2) {
 		include_spip('base/connect_sql');
+		$tables_objets = (isset($GLOBALS['tables_principales'])) ? $GLOBALS['tables_principales'] : array('spip_articles','spip_rubriques','spip_auteurs','spip_breves','spip_documents','spip_syndic','spip_mots','spip_forum','spip_groupes_mots');
 	} else if (intval(spip_version()) == 3) {
 		include_spip('base/objets');
+		$tables_objets = array_keys(lister_tables_principales());
 	}
 
 	global $formats_logos;
 	$docs_fichiers_on 	= array();
 	$docs_fichiers_off 	= array();
 	$logos_objet 		= array('art','rub','breve','site','mot','aut');
+	$fichiers 			= array();
 
-	// On va chercher toutes les tables connues de SPIP
-	foreach (sql_alltable() as $table) {
+	// On va chercher toutes les tables principales connues de SPIP
+	foreach ($tables_objets as $table) {
 		// On cherche son type d'objet et on l'ajoute aux logos
-		// Il y a aussi dans ces objets la référence à 'article', 'rubrique' et 'auteur'
-		// On peut les laisser, ça ne mange pas de pain de prendre en compte les "tordus" ;-)
+		// Il y a aussi dans ces objets la référence à 'article',
+		// 'rubrique' et 'auteur'
+		// On peut les laisser, ça ne mange pas de pain de prendre
+		// en compte les "tordus" ;-)
 		$logos_objet[] = objet_type($table);
 	}
 	// On enlève les doublons
@@ -363,7 +368,14 @@ function medias_lister_logos_fichiers($mode = null, $repertoire_img = _DIR_IMG){
 	sort($logos_objet);
 
 	// On va chercher dans IMG/*(on|off)*.*
-	$fichiers = glob($repertoire_img . "{" . join(",",$logos_objet) ."}{on,off}*.*",GLOB_BRACE); // la regex de GLOB_BRACE est très basique...
+	// On fait un foreach pour ne pas avoir de
+	// "Pattern exceeds the maximum allowed length of 260 characters"
+	// sur glob()
+	foreach ($logos_objet as $logo_pattern) {
+		// la regex de GLOB_BRACE est très basique...
+		$liste = glob($repertoire_img . "{" . $logo_pattern ."}{on,off}*.*",GLOB_BRACE); 
+		$fichiers = array_merge($fichiers, $liste);
+	}
 
 	foreach ($fichiers as $fichier) {
 		// ... Donc on fait une regex plus poussée avec un preg_match
@@ -627,12 +639,16 @@ function medias_deplacer_documents_repertoire_orphelins () {
 
 /**
  * Réparer les documents.
- * Il arrive parfois que suite à un problème de droits, les documents ne soient plus rangés correctement dans IMG/ext/fichier.ext
+ * Il arrive parfois que suite à un problème de droits, 
+ * les documents ne soient plus rangés correctement dans IMG/ext/fichier.ext
  * mais dans un faux sous répertoire IMG/ext_fichier.ext
- * Le présent script va recopier les fichiers mal placés, et changer leur référence dans la table spip_documents ;
- * il donnera ensuite la liste des fichiers recopiés et des erreurs recontrées dans un fichier de log.
+ * Le présent script va recopier les fichiers mal placés, 
+ * et changer leur référence dans la table spip_documents ;
+ * il donnera ensuite la liste des fichiers recopiés et 
+ * des erreurs recontrées dans un fichier de log.
  *
- * Script repris de ce fichier : http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
+ * Script repris de ce fichier : 
+ * http://zone.spip.org/trac/spip-zone/browser/_outils_/repare_doc.html
  *
  * @uses medias_lister_logos_fichiers()
  * @uses _DIR_IMG
@@ -661,7 +677,13 @@ function medias_reparer_documents_fichiers () {
 	$docs_fichiers = preg_replace($pattern_img, '', $docs_fichiers);
 
 	if (count($docs_fichiers) > 0) {
-		$docs_bdd = sql_allfetsel('id_document,fichier,extension', 'spip_documents', "fichier IN ('" . join("','", $docs_fichiers) . "') AND mode IN ('document','image')");
+		// On va échapper chaque valeur d'url de fichier car
+		// il peut arriver d'avoir des apostrophes dans le nom de fichier...
+		// #fail
+		foreach ($docs_fichiers as $url_fichier) {
+			$url_fichiers[] = sql_quote($url_fichier);
+		}
+		$docs_bdd = sql_allfetsel('id_document,fichier', 'spip_documents', "fichier IN (" . join(",", $url_fichiers) . ")");
 		foreach ($docs_bdd as $document) {
 			$destination = preg_replace(',^([a-z0-3]+)_([^/]+\.(\1))$,i', '$1/$2', $document['fichier']);
 			// On va vérifier si on est bien sous la forme ../IMG/ext/nom_fichier.ext
