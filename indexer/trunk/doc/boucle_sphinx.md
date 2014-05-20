@@ -25,7 +25,7 @@ INDEX
     {index *}
     {index #ENV{source,spip}}
     {index #ENV{source,''}}    // '' prend l'index par défaut
-    {index spip,visites}       // intérroge 2 index (sur le même serveur sphinx)
+    {index spip,visites}       // interroge 2 index (sur le même serveur sphinx)
 
 
 SELECT
@@ -69,7 +69,7 @@ PAR
 ---
 
 * @syntaxe `{[!]par champ[,champ[,champ[...]]]}`
-* @muliple
+* @multiple
 
 Critère de SPIP surchargé.
 
@@ -79,11 +79,14 @@ Critère de SPIP surchargé.
     {par properties.objet, properties.id_objet}
     {!par properties.objet, properties.id_objet}
 
+  voir aussi, plus bas, la section "tri sélectif"
+
+
 INVERSE
 -------
 
 * @syntaxe `{inverse[ sens]}`
-* @muliple
+* @multiple
 
 Critère de SPIP surchargé
 
@@ -131,13 +134,22 @@ Ajoute une sous requête de facette selon la syntaxe de sphinx.
 
     {facet auteurs, properties.authors ORDER BY COUNT(*) DESC}
     {facet tags, properties.tags ORDER BY COUNT(*) DESC}
-    {facet date, YEAR(date) ORDER BY date DESC}
+    {facet annee, YEAR(date) ORDER BY date DESC}
+	  {facet favs, LENGTH(properties.share) AS favs ORDER BY FACET() DESC}
 
 
 
 TRI SÉLECTIF
 ----------------
-Exemple de tri sur une formule de calcul de « time segment », reprise ici de
+
+## Exemple de tri sur un score calculé
+	{select WEIGHT()*(1+LENGTH(properties.share)) AS score2}
+	{!par score2}
+
+
+
+## Exemple de tri sur un « time segment »
+formule reprise de
 http://sphinxsearch.com/blog/2010/06/27/doing-time-segments-geodistance-searches-and-overrides-in-sphinxql/
 
 ```
@@ -164,7 +176,7 @@ FILTRER
 En attendant mieux…
 
 Cette histoire de filtres n'est vraiment pas simple.
-En attendant mieux, on propose de définir la présence d'un sélect (et d'un where associé)
+En attendant mieux, on propose de définir la présence d'un select (et d'un where associé)
 si la valeur transmise possède du contenu, sinon le filtre n'est pas appliqué.
 
 Le 3è paramètre utilise une autre sélection, si la valeur vaut '-'.
@@ -180,8 +192,10 @@ Chaque filtre crée le where associé (filtre = 1).
     {filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
     {filter #ENV{tag}, 'IN(properties.tag, @valeurs)', 'LENGTH(properties.tags) = 0'}
     {filter #ENV{annee}, 'YEAR(date) = @valeur' }
-    
-    
+    {filter #ENV{favs}, @valeur <= LENGTH(properties.share)}
+
+
+
 PAGES
 -----
 
