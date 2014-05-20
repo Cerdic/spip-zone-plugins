@@ -244,14 +244,14 @@ class IterateurSPHINX implements Iterator {
 	/**
 	 * Définir la pagination
 	 *
-	 * @param array $index Liste des index
+	 * @param array $pagination (#DEBUT_DOCUMENTS,20)
 	 * @return bool True si une pagination est demandee
 	**/
 	public function setPagination($pagination) {
 		# {pages #DEBUT_DOCUMENTS, 20}
 		if (is_array($pagination)) {
 			$debut = intval($pagination[0]);
-			if (isset($pagination[0]))
+			if (isset($pagination[1]))
 				$nombre = intval($pagination[1]);
 			else
 				$nombre = 20;
