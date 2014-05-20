@@ -120,8 +120,8 @@ class IterateurSPHINX implements Iterator {
 		$this->setIndex($this->command['index']);
 		$this->setSelection($this->command['selection']);
 		$this->setRecherche($this->command['recherche']);
-		$this->setOrderBy($this->command['order']);
-		$this->setGroupBy($this->command['groupby']);
+		$this->setOrderBy($this->command['orderby']);
+		$this->setGroupBy($this->command['group']);
 		$this->setFacet($this->command['facet']);
 
 		$this->setFilter($this->command['filter']);
