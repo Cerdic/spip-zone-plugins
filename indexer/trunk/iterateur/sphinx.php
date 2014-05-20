@@ -89,6 +89,12 @@ class IterateurSPHINX implements Iterator {
 	protected $valeur = null;
 
 	/**
+	 * Limites demandés de la requête en cas de pagination
+	 * @var array(debut, nombre)
+	 */
+	protected $pagination_limit = array();
+
+	/**
 	 * Constructeur
 	 *
 	 * @param  $command
@@ -138,8 +144,8 @@ class IterateurSPHINX implements Iterator {
 
 		// decaler les docs en fonction de la pagination demandee
 		if (is_array($result['query']['docs'])
-		AND $pagination = $this->queryApi->getLimit()) {
-			list($debut) = array_map('intval',explode(',', $pagination));
+		AND $pagination = $this->getPaginationLimit()) {
+			list($debut) = array_map('intval', $pagination);
 
 			$result['query']['docs'] = array_pad($result['query']['docs'], - count($result['query']['docs']) - $debut, null);
 			$result['query']['docs'] = array_pad($result['query']['docs'], $result['query']['meta']['total'], null);
@@ -247,16 +253,37 @@ class IterateurSPHINX implements Iterator {
 	**/
 	public function setPagination($pagination) {
 		# {pages #DEBUT_DOCUMENTS, 20}
-		if (is_array($pagination)) {
+		if (is_array($pagination) and $pagination) {
+			$nombre = 20;
 			$debut = intval($pagination[0]);
-			if (isset($pagination[1]))
+			if (isset($pagination[1])) {
 				$nombre = intval($pagination[1]);
-			else
-				$nombre = 20;
-			$this->queryApi
-				->limit("$debut,$nombre");
+			}
+			$this->setPaginationLimit($debut, $nombre);
 			return true;
 		}
+	}
+
+	/**
+	 * Affecte une limite à la requête Sphinx (et sauve ses bornes)
+	 *
+	 * @param int Début
+	 * @param int Nombre de résultats
+	**/
+	public function setPaginationLimit($debut, $nombre) {
+		$this->pagination_limit = array($debut, $nombre);
+		$this->queryApi->limit("$debut,$nombre");
+	}
+
+	/**
+	 * Retourne les limites de pagination précédemment sauvées
+	 *
+	 * @param int Début
+	 * @param int Nombre de résultats
+	**/
+	public function getPaginationLimit() {
+		return $this->pagination_limit;
+		# return explode(',', $this->queryApi->getLimit());
 	}
 
 	/**

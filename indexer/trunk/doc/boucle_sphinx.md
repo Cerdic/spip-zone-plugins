@@ -180,3 +180,14 @@ Chaque filtre crée le where associé (filtre = 1).
     {select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
     {select_filter #ENV{tag}, 'IN(properties.tag, @valeurs)', 'LENGTH(properties.tags) = 0'}
     {select_filter #ENV{annee}, 'YEAR(date) = @valeur' }
+    
+    
+PAGES
+-----
+
+Permet de décaler le tableau de résultats pour exploiter ensuite la pagination d'une boucle DATA avec la liste des documents.
+
+----
+
+    {pages #DEBUT_DOCUMENTS}
+    {pages #DEBUT_DOCUMENTS, 20}

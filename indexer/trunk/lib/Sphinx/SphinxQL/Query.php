@@ -75,10 +75,6 @@ class Query{
 	}
 
 
-	public function getLimit() {
-		return $this->limit;
-	}
-
 	private function removeEmpty() {
 		foreach (array('select', 'from', 'where', 'groupby', 'orderby', 'facet') as $key) {
 			$this->$key = array_filter($this->$key);

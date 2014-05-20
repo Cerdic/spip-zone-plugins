@@ -31,12 +31,11 @@
 ]</BOUCLE_filtres>
 
 
-
 <BOUCLE_recherche_sphinx(SPHINX)
 	{index #ENV{source,spip}}
 	{recherche #ENV*{recherche}}
 
-	{pages #DEBUT_DOCUMENTS, 10}
+	{pages #DEBUT_DOCUMENTS}
 
 	{select_filter #ENV{annee},  'YEAR(date) = @valeur' }
 	{select_filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
