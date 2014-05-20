@@ -11,7 +11,7 @@ class Query{
 	private $where   = array();
 	private $groupby = array();
 	private $orderby = array();
-	private $limit   = '';
+	public $limit   = '';
 	private $facet   = array();
 
 	public function __construct() {}

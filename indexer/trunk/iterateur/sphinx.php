@@ -104,11 +104,9 @@ class IterateurSPHINX implements Iterator {
 			'recherche' => array(),
 			'snippet'   => array(),
 			'facet'     => array(),
-
 			'select_filter' => array(),
 		);
 
-#var_dump($this->command);
 
 		$this->info = $info;
 
@@ -127,6 +125,8 @@ class IterateurSPHINX implements Iterator {
 
 		$this->setSnippet($this->command);
 
+		$this->setPagination($this->command['pagination']);
+
 		$this->runQuery();
 	}
 
@@ -137,6 +137,16 @@ class IterateurSPHINX implements Iterator {
 		if (!$result) {
 			return false;
 		}
+
+		// decaler les docs en fonction de la pagination demandee
+		if (is_array($result['query']['docs'])
+		AND $pagination = $this->queryApi->limit) {
+			list($debut) = array_map('intval',explode(',', $pagination));
+
+			$result['query']['docs'] = array_pad($result['query']['docs'], - count($result['query']['docs']) - $debut, null);
+			$result['query']['docs'] = array_pad($result['query']['docs'], $result['query']['meta']['total'], null);
+		}
+
 		$this->result = $result;
 		return true;
 	}
@@ -232,6 +242,26 @@ class IterateurSPHINX implements Iterator {
 	}
 
 	/**
+	 * Définir la pagination
+	 *
+	 * @param array $index Liste des index
+	 * @return bool True si une pagination est demandee
+	**/
+	public function setPagination($pagination) {
+		# {pages #DEBUT_DOCUMENTS, 20}
+		if (is_array($pagination)) {
+			$debut = intval($pagination[0]);
+			if (isset($pagination[0]))
+				$nombre = intval($pagination[1]);
+			else
+				$nombre = 20;
+			$this->queryApi
+				->limit("$debut,$nombre");
+			return true;
+		}
+	}
+
+	/**
 	 * Définir le snippet
 	 */
 	public function setSnippet($command) {
@@ -276,7 +306,7 @@ class IterateurSPHINX implements Iterator {
 		if (!$desc['phrase'] OR !$desc['champ']) {
 			return false;
 		}
-		$this->queryApi->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase']) . ", 'limit=$desc[limit],html_strip_mode=strip') AS $desc[as]");
+		$this->queryApi->select("SNIPPET($desc[champ], " . $this->quote($desc['phrase']) . ", 'limit=$desc[limit]') AS $desc[as]");
 		return true;
 	}
 
@@ -631,5 +661,15 @@ function critere_SPHINX_parinverse($idb, $boucles, $crit, $sens = '') {
 	}
 }
 
+function critere_SPHINX_pages_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
 
+	// critere multiple
+	$boucle->hash .= "\n\tif (!isset(\$pagination_init)) { \$command['pagination'] = array(); \$pagination_init = true; }\n";
+
+	foreach ($crit->param as $param){
+		$boucle->hash .= "\t\$command['pagination'][] = "
+				. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
+	}
+}
 
