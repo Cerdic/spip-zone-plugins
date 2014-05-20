@@ -8,8 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @package SPIP\Indexer\Iterateur\Sphinx
 **/
 
-include_spip('iterateur/data');
-
 /**
  * Créer une boucle sur un itérateur SPHINX
  *
@@ -140,7 +138,7 @@ class IterateurSPHINX implements Iterator {
 
 		// decaler les docs en fonction de la pagination demandee
 		if (is_array($result['query']['docs'])
-		AND $pagination = $this->queryApi->limit) {
+		AND $pagination = $this->queryApi->getLimit()) {
 			list($debut) = array_map('intval',explode(',', $pagination));
 
 			$result['query']['docs'] = array_pad($result['query']['docs'], - count($result['query']['docs']) - $debut, null);

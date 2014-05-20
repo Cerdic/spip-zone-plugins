@@ -11,7 +11,7 @@ class Query{
 	private $where   = array();
 	private $groupby = array();
 	private $orderby = array();
-	public $limit   = '';
+	private $limit   = '';
 	private $facet   = array();
 
 	public function __construct() {}
@@ -72,6 +72,11 @@ class Query{
 		if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
 		if ($this->facet)    $query[] = 'FACET '    . implode(' FACET ', $this->facet);
 		return implode(' ', $query);
+	}
+
+
+	public function getLimit() {
+		return $this->limit;
 	}
 
 	private function removeEmpty() {

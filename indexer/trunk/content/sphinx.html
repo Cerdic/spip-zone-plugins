@@ -36,6 +36,8 @@
 	{index #ENV{source,spip}}
 	{recherche #ENV*{recherche}}
 
+	{pages #DEBUT_DOCUMENTS, 10}
+
 	{select_filter #ENV{annee},  'YEAR(date) = @valeur' }
 	{select_filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
 	{select_filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
