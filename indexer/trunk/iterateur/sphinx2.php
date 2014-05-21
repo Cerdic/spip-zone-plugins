@@ -131,7 +131,7 @@ class IterateurSPHINX2 implements Iterator {
 
 		$this->setIndex($this->command['index']);
 		$this->setSelection($this->command['selection']);
-		$this->setRecherche($this->command['recherche']);
+		$this->setMatch($this->command['recherche']);
 		$this->setOrderBy($this->command['orderby']);
 		$this->setGroupBy($this->command['group']); // groupby interfère avec spip :/
 		$this->setFacet($this->command['facet']);
@@ -237,16 +237,16 @@ class IterateurSPHINX2 implements Iterator {
 	 * @param array $index Liste des index
 	 * @return bool True si au moins un index est ajouté, false sinon
 	**/
-	public function setRecherche($recherche) {
-		if (!is_array($recherche)) $recherche = array($recherche);
-		$recherche = array_filter($recherche);
-		if (!$recherche) {
+	public function setMatch($match) {
+		if (!is_array($match)) $match = array($match);
+		$match = array_filter($match);
+		if (!$match) {
 			return false;
 		}
-		$match = implode(' ',$recherche);
+		$match = implode(' ',$match);
 		$this->queryApi
 			->select('WEIGHT() AS score')
-			->where('MATCH(' . $this->quote( $recherche ) . ')');
+			->match( $match );
 		return true;
 	}
 

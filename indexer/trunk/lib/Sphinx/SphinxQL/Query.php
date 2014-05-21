@@ -8,6 +8,7 @@ namespace Sphinx\SphinxQL;
 class Query{
 	private $select  = array();
 	private $from    = array();
+	private $match   = null;
 	private $where   = array();
 	private $groupby = array();
 	private $orderby = array();
@@ -29,6 +30,11 @@ class Query{
 
 	public function where($where) {
 		$this->where[] = $where;
+		return $this;
+	}
+
+	public function match($match) {
+		$this->match = $match;
 		return $this;
 	}
 
@@ -64,9 +70,14 @@ class Query{
 	public function get() {
 		$query = array();
 		$this->removeEmpty();
-		if ($this->select)   $query[] = 'SELECT '   . implode(', ', $this->select);
+		if ($this->select)   $query[] = 'SELECT '   . implode(', ', array_unique($this->select));
 		if ($this->from)     $query[] = 'FROM '     . implode(', ', $this->from);
-		if ($this->where)    $query[] = 'WHERE ('   . implode(') AND (', $this->where) . ')';
+
+		// WHERE et MATCH
+		$where = $this->where;
+		if ($this->match) $where[] = 'MATCH('. $this->quote($this->match).')';
+		if ($where)    $query[] = 'WHERE ('   . implode(') AND (', $where) . ')';
+
 		if ($this->groupby)  $query[] = 'GROUP BY ' . implode(', ', $this->groupby);
 		if ($this->orderby)  $query[] = 'ORDER BY ' . implode(', ', $this->orderby);
 		if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
