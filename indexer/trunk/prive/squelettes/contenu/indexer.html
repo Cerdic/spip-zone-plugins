@@ -16,10 +16,9 @@ if (_request('run') || _request('continue')) {
             $message = _L('Erreur inconnue');
         die("<p class='erreur'>$message</p>");
     }
-
-    $sources = new Indexer\Sources\Sources();
-    $sources->register('articles', new Spip\Indexer\Sources\Articles());
-    $sources = pipeline('indexer_sources', $sources);
+	
+	// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
+    $sources = indexer_sources();
 
     $SpipSourcesIndexer = new Spip\Indexer\Sources\SpipSourcesIndexer($indexer, $sources);
     $SpipSourcesIndexer->setTablesLiensAuto();

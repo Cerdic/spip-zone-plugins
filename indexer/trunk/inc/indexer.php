@@ -19,3 +19,23 @@ $loader->addPsr4('Spip\\Indexer\\Sources\\',  _DIR_PLUGIN_INDEXER . 'Sources');
 
 
 $loader->register();
+
+/**
+ * Renvoyer les sources de données disponibles dans le site
+ * 
+ * Un pipeline "indexer_sources" est appelée avec la liste par défaut, permettant de retirer ou d'ajouter des sources.
+ *
+ * @pipeline_appel insexer_sources
+ * @return Sources Retourne un objet Sources listant les sources enregistrées avec la méthode register()
+ */
+function indexer_sources(){
+	static $sources = null;
+	
+	if (is_null($sources)){
+		$sources = new Indexer\Sources\Sources();
+		$sources->register('articles', new Spip\Indexer\Sources\Articles());
+		$sources = pipeline('indexer_sources', $sources);
+	}
+	
+	return $sources;
+}
