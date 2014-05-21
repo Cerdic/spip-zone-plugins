@@ -10,6 +10,7 @@
 [(#SET{backgroundcolor, [(#ENV{backgroundcolor,	#CONFIG{sjcycle/backgroundcolor}})]})]
 [(#SET{prev, 		[(#ENV{prev,		#CONFIG{sjcycle/prev}})]})]
 [(#SET{next, 		[(#ENV{next,		#CONFIG{sjcycle/next}})]})]
+[(#SET{allowwrap, 	[(#ENV{allowwrap,	#CONFIG{sjcycle/allowwrap}})]})]
 [(#SET{paused,		[(#ENV{paused,		#CONFIG{sjcycle/paused}})]})]
 [(#SET{pager,		[(#ENV{pager,		#CONFIG{sjcycle/pager}})]})]
 [(#SET{caption,		[(#ENV{caption,		#CONFIG{sjcycle/caption}})]})]
@@ -56,6 +57,7 @@ $(document).ready(function() {
 	data-cycle-timeout="(#GET{timeout})"][ 
 	data-cycle-delay="(#GET{delay})"][ 
 	data-cycle-pause-on-hover="(#GET{pauseonhover})"][ 
+	data-cycle-allow-wrap="(#GET{allowwrap})"][ 
 	data-cycle-random="(#GET{random})"][ 
 	data-cycle-paused="(#GET{paused})"][ 
 	data-cycle-prev="(#GET{prev})"][ 
