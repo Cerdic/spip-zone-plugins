@@ -2,12 +2,29 @@
     modele redacteur
     
     pour inserer simplement un bouton paypal
+    
+    param
+    - prix      (facultatif pour un don)
+    - libelle    texte du produit
+    - type      (vide) = acheter 
+                donner = faire un don 
 
-]#SET{prix,#ENV{prix}|intval|abs} #SET{libelle,#ENV{titre}|entites_html}
-[(#GET{prix}|oui)
+]#SET{prix,#ENV{prix}|intval|abs} #SET{libelle,#ENV{titre}|entites_html}  #SET{type,#ENV{type}|trim}/// #ENV{type} +++
+[(#GET{prix}|oui)  
 <div class="paypal">
          [(#FORMULAIRE_PAYPAL{#ARRAY{
+            type,#GET{type},
           	prix,#GET{prix},
           	libelle,#GET{libelle}          
           }})]   
-</div>]
+</div>]       
+[(#GET{prix}|non)     
+[(#GET{type}|=={donner}|oui)    
+<div class="paypal">
+         [(#FORMULAIRE_PAYPAL{#ARRAY{
+            type,donner,
+          	libelle,#GET{libelle}          
+          }})]   
+</div>
+]   
+]

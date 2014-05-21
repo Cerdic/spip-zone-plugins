@@ -1,5 +1,5 @@
 [(#REM)
-	Formulaire de paiement Paypal : on peut soit acheter, soit s'abonner
+	Formulaire de paiement Paypal : on peut soit acheter, soit s'abonner, soit donner
 	Plus d'info sur les paramètres sur le site de paypal:
 	https://www.paypalobjects.com/IntegrationCenter/ic_std-variable-ref-cart-upload.html
 
@@ -13,11 +13,13 @@
 		- handling_cart:         idem shipping (?)
 
 		# Achat ou Abonnement ?
-		- type:                  Détermine si on achète ou si on s'abonne
+		- type:                  Détermine si on achète ou si on s'abonne ou si on donne
 		                         "abonnement" = s'abonner
 		                         ""           = acheter
+                             "donner"     = donner
 		# Pour un achat, soit on indique "details", soit on indique "prix"
 		# Pour un abonnement, on indique "prix", "duree" et "periode"
+    # Pour un donation, on indique "prix" s'il est fourni
 		- details:               Tableau associatif détaillant le contenu de l'achat, avec prix et quantité pour chaque article
 		                         array(0=>array(descriptif=>xx, prix=>yy, quantite=>zz), 1=>array(...))
 		- prix:                  Prix de l'achat ou de l'abonnement
@@ -45,11 +47,14 @@
 		# par défaut, il s'agit d'un input image, téléchargée sur le site de Paypal
 		- bouton_paypal_acheter:         URL de l'image personnalisée pour acheter
 		- bouton_paypal_souscrire:       URL de l'image personnalisée pour s'abonner
+    - bouton_paypal_donner:          URL de l'image personnalisée pour donner
 		# pour avoir un input classique, il faut renseigner le paramètre 'xxx_texte'
 		- bouton_paypal_acheter_texte:   Texte du bouton acheter
 		- bouton_paypal_souscrire_texte: Texte du bouton d'abonnement
+    - bouton_paypal_donner_texte:    Texte du bouton d'abonnement
 		- bouton_paypal_acheter_class:   Classe du bouton acheter
 		- bouton_paypal_souscrire_class: Classe du bouton d'abonnement
+    - bouton_paypal_donner_class:    Classe du bouton d'abonnement
 
 		# Personnaliser la page Paypal
 		- logo_url               URL du logo affiché en haut à gauche, 150x150px max (de préférence https)
@@ -128,6 +133,7 @@
 
 [(#REM) Acheter ]
 [(#ENV{type}|=={abonnement}|non|et{#ENV{details}|non})
+[(#ENV{type}|=={donner}|non)
 	[(#REM) Prix/Produit ]
 	<input name="amount" type="hidden" value="#ENV{prix}" />
 	[(#REM) commentaires possibles ? 1 : non, 0 : oui ]
@@ -140,7 +146,7 @@
 	[(#REM) Soit il s'agit d'un bouton traditionnel ]
 	[(#ENV{bouton_paypal_acheter_texte}|oui)<input type="submit" name="submit" alt="[(#ENV{bouton_paypal_acheter_texte})]"  value="[(#ENV{bouton_paypal_acheter_texte})]"[ class="(#ENV{bouton_paypal_acheter_class})"] />]
 	<img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-]
+]]
 
 [(#REM) Ou s'abonner ]
 [(#ENV{type}|=={abonnement}|oui|et{#ENV{details}|non})	
@@ -157,6 +163,22 @@
 	[(#ENV{bouton_paypal_souscrire_texte}|non)<input type="image" name="submit" alt="<:paypal:info_bouton_paypal:>" src="[(#ENV{bouton_paypal_souscrire}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_subscribe_LG.gif})]" />]
 	[(#REM) Soit il s'agit d'un bouton traditionnel ]
 	[(#ENV{bouton_paypal_souscrire_texte}|oui)<input type="submit" name="submit" alt="[(#ENV{bouton_paypal_souscrire_texte})]"  value="[(#ENV{bouton_paypal_souscrire_texte})]"[ class="(#ENV{bouton_paypal_souscrire_class})"] />]
+	<img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+]
+    
+
+[(#REM) Ou donner ]
+[(#ENV{type}|=={donner}|oui|et{#ENV{details}|non})
+	[(#REM) Prix/Produit facultatif]
+	[<input name="amount" type="hidden" value="(#ENV{prix})" />]
+	[(#REM) commentaires possibles ? 1 : non, 0 : oui ]
+	<input name="no_note" type="hidden" value="1" />
+	[(#REM) Bouton...]
+	<input name="cmd" type="hidden" value="_donations" />	
+	[(#REM) Soit le bouton est une image - par défaut ]
+	[(#ENV{bouton_paypal_donner_texte}|non)<input type="image" name="submit" alt="<:paypal:info_bouton_paypal:>" src="[(#ENV{bouton_paypal_donner}|sinon{https://www.paypal.com/fr_FR/FR/i/btn/btn_donate_LG.gif})]" />]
+	[(#REM) Soit il s'agit d'un bouton traditionnel ]
+	[(#ENV{bouton_paypal_donner_texte}|oui)<input type="submit" name="submit" alt="[(#ENV{bouton_paypal_donner_texte})]"  value="[(#ENV{bouton_paypal_donner_texte})]"[ class="(#ENV{bouton_paypal_donner_class})"] />]
 	<img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
 ]
 
