@@ -151,7 +151,7 @@
 			
 		</ul>
 		<fieldset>
-		<legend><:sjcycle:legend_tooltip_box:></legend>
+		<h3 class="legend"><:sjcycle:legend_tooltip_box:></h3>
 		<ul>
 			
 			#SET{name,tooltip}
@@ -165,7 +165,7 @@
 				</div>
 			</li>
 			
-			#SET{name,tooltiptech}
+			#SET{name,tooltip_carac}
 			<li class="editer editer_[(#GET{name})]">
 				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
 				#SET{val,oui}
@@ -191,7 +191,7 @@
 		</fieldset>
 		
 		<fieldset>
-		<legend><:sjcycle:legend_parametres_suplementaires:></legend>
+		<h3 class="legend"><:sjcycle:legend_parametres_suplementaires:></h3>
 		<ul>
 			#SET{name,afficher_aide}
 			<li class="long_label editer editer_[(#GET{name})]">

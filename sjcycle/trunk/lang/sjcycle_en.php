@@ -20,6 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_random'=>'&lt;sjcycleXX<strong>|random=true</strong>&gt; ou &lt;sjcycleXX<strong>|random=false</strong>&gt;',	
 	'explication_speed'=>'speed of the transition in milliseconds',
 	'explication_timeout'=>'Milliseconds between slide transitions (0 to disable auto advance)',
+	'explication_tooltip'=>'On hover, display a tooltip with image title and description. Use the jQuery tooltip plugin',
+	'explication_tooltip_carac'=>'Display the characteristics of the original image in the tooltip: width, heigth and size',
 
 	// L
 	'label_afficher_aide' => 'Display the help box',
@@ -32,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_next' => 'Button <strong>"next"</strong>',
 	'label_prev' => 'Button <strong>"previous"</strong>',
 	'label_timeout' => 'Display time',
+	'label_tooltip' => 'Display tooltips',
+	'label_tooltip_carac' => 'Characteristics of the original image',
 	'legend_parametres_suplementaires' => 'Other parameters',
 	'legend_tooltip_box' => 'Tooltip & mediabox Parameters',
 

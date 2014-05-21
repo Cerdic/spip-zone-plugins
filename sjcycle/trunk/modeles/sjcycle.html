@@ -23,9 +23,9 @@
 [(#SET{cssbox,	[(#EVAL{8}|randomString)]})]
 
 <B_img>
-[<style type="text/css">
-.cycle-paused:after { content:'(#GET{pauseonhovercontent})'; }
-</style>]
+<style type="text/css">
+.cycle-paused:after { content:'[(#GET{pauseonhovercontent})]';[(#GET{pauseonhovercontent}|=={''}|oui) display:none;] }
+</style>
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 $(document).ready(function() {
 	[(#CONFIG{sjcycle/tooltip}|=={oui}|oui)
