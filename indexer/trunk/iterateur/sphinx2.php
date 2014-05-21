@@ -144,12 +144,16 @@ class IterateurSPHINX2 implements Iterator {
 		$this->setPagination($this->command['pagination']);
 
 		$this->runQuery();
+
 	}
 
 
 	public function runQuery() {
 		$query  = $this->queryApi->get();
 		$result = $this->sphinxQL->allfetsel($query);
+
+		$GLOBALS['SphinxSave'][$this->command['id']]['query'] = $query;
+
 		if (!$result) {
 			return false;
 		}
@@ -165,6 +169,7 @@ class IterateurSPHINX2 implements Iterator {
 		}
 
 		$this->result = $result['query'];
+
 		unset($result['query']['docs']);
 
 		// remettre les alias sur les facettes :
@@ -176,6 +181,8 @@ class IterateurSPHINX2 implements Iterator {
 		$result['query']['facets'] = $facets;
 
 		$this->data = new ArrayObject($result['query']);
+
+		$GLOBALS['SphinxSave'][$this->command['id']] = $result['query'];
 
 		return true;
 	}
@@ -808,47 +815,8 @@ function calculer_balise_SPHINX_CHAMP($p, $champ) {
 	}
 
 	$champ = strtolower($champ);
-	$p->code =
-		// iterateur présent ?
-		"(isset(\$Iter) ? "
-		. "((\$d = \$Iter->getIterator()->getMetaData()) ? \$d['$champ'] : '') : "
-		// sinon sauvegarde de #SPHINX_SAVE_META
-		. "(isset(\$GLOBALS['SphinxSave']['$b']['$champ']) ? \$GLOBALS['SphinxSave']['$b']['$champ'] : '') )";
-	$p->interdire_scripts = false;
-	return $p;
-}
+	$p->code = '$GLOBALS["SphinxSave"]["'.$b.'"]["'.$champ.'"]';
 
-/**
- * Sauvegarde les meta données de requête Sphinx pour une
- * utilisation ultérieure dans les parties alternatives de la boucle…
- *
- * - `#SPHINX_SAVE_META`
- *
- * Permet l'usage dans 'avant' ou 'apres' des boucles Sphinx des
- * balises :
- *
- * - `#SPHINX_QUERY`
- * - `#SPHINX_META`
- * - `#SPHINX_FACETS`
- *
- * @param Champ $p
- * @return Champ
-**/
-function balise_SPHINX_SAVE_META_dist($p){
-	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
-	// doit être dans la partie centrale de la boucle
-	if ($b === '' || !isset($p->boucles[$b])) {
-		$msg = array('zbug_champ_hors_boucle', array('champ' => '#SPHINX_SAVE_META' ));
-		erreur_squelette($msg, $p);
-		$p->interdire_scripts = true;
-		return $p;
-	}
-
-	$p->code =
-		  "(!isset(\$GLOBALS['SphinxSave']) ? vide(\$GLOBALS['SphinxSave'] = array()) : '') . "
-		. "(!isset(\$GLOBALS['SphinxSave']['$b']) ? vide(\$GLOBALS['SphinxSave']['$b'] = \$iter->getInnerIterator()->getMetaData()) : '')"
-		#. " . ('<pre>' . print_r( \$GLOBALS['SphinxSave'] , true) . '</pre>')"
-		;
 	$p->interdire_scripts = false;
 	return $p;
 }

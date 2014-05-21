@@ -1,4 +1,4 @@
-
+<ul id=messages>
 <h1>Test SPHINX 2</h1>
 
 [(#FORMULAIRE_RECHERCHE{#SELF})]
@@ -24,8 +24,8 @@
 
 <B_filtres>
 <h4>Filtres:</h4>
-<BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année}}>
-[(#ENV{#CLE}|oui)
+<BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année,stars,Aucune etoile}}>[
+(#ENV{#CLE}|oui)
 	<div>
 		<a class="btn btn-mini" href="[(#SELF|parametre_url{#CLE,''})]"><i class="icon-remove"></i> [(#ENV{#CLE}|=={-}|?{#VALEUR,#ENV{#CLE}})]</a>
 	</div>
@@ -43,6 +43,8 @@
 	<h1>Dans la boucle (SPHINX2)</h1>
 
 	<h2>Documents trouvés</h2>
+
+	[<p>(#SPHINX_MESSAGE)</p>]
 
 	[<div><tt>(#SPHINX_QUERY)</tt></div>]
 
@@ -71,13 +73,11 @@
 
 	{pagination 10}
 >
-	[(#REM) The hack pour les # SPHINX_* des parties alternatives. ]
-	#SPHINX_SAVE_META
 
 	[(#SET{properties,#PROPERTIES|json_decode{1}})]
 	<li class='item'>
 		<article class='entry article hentry'>
-			<strong class='h3-like entry-title'>#SCORE/#GET{max} = [(#SCORE|mult{100}|div{#GET{max}}|intval)%] <a href="#URI">#TITLE</a></strong>
+			<strong class='h3-like entry-title'>#SCORE/#GET{max} = [(#SCORE|mult{100}|div{#GET{max}}|intval)%] <a href="#URI">#DATE</a></strong>
 			<p class="publication">
 				[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span> <:par_auteur:> (#GET{properties}|table_valeur{authors}|implode{', '})</span>]
 			</p>
@@ -96,5 +96,11 @@
 
 </B_recherche_sphinx>
 	<h2>Pas de résultat pour :</h2>
-	<pre>#SPHINX_QUERY</pre>
+	<div><tt>#SPHINX_QUERY</tt></div>
+	[<p>(#SPHINX_MESSAGE)</p>]
+
+	[(#INCLURE{fond=liste/sphinx_metas,meta=#SPHINX_META,env})]
+
 <//B_recherche_sphinx>
+
+</ul>
