@@ -1,0 +1,13 @@
+[(#REM)
+    modele redacteur
+    
+    pour inserer simplement un bouton paypal
+
+]#SET{prix,#ENV{prix}|intval|abs} #SET{libelle,#ENV{titre}|entites_html}
+[(#GET{prix}|oui)
+<div class="paypal">
+         [(#FORMULAIRE_PAYPAL{#ARRAY{
+          	prix,#GET{prix},
+          	libelle,#GET{libelle}          
+          }})]   
+</div>]
