@@ -160,6 +160,16 @@ class IterateurSPHINX2 implements Iterator {
 
 		$this->result = $result['query'];
 		unset($result['query']['docs']);
+
+		// remettre les alias sur les facettes :
+		// {facet truc, FORMULE()} cree la facette 'truc'
+		$facets = array();
+		foreach ($this->facet as $f) {
+			$facets[$f['alias']] = array_shift($result['query']['facets']);
+		}
+		$result['query']['facets'] = $facets;
+
+
 		$this->data = new ArrayObject($result['query']);
 
 		return true;
