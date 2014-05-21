@@ -5,6 +5,7 @@
 [(#SET{speed,      	[(#ENV{speed,     	#CONFIG{sjcycle/speed}})]})]
 [(#SET{delay,      	[(#ENV{delay,     	#CONFIG{sjcycle/delay}})]})]
 [(#SET{pauseonhover,    [(#ENV{pauseonhover,    #CONFIG{sjcycle/pauseonhover}})]})]
+[(#SET{reverse,		[(#ENV{reverse,		#CONFIG{sjcycle/reverse}})]})]
 [(#SET{random,		[(#ENV{random,		#CONFIG{sjcycle/random}})]})]
 [(#SET{fx,		[(#ENV{fx,		#CONFIG{sjcycle/fx}})]})]
 [(#SET{backgroundcolor, [(#ENV{backgroundcolor,	#CONFIG{sjcycle/backgroundcolor}})]})]
@@ -58,6 +59,7 @@ $(document).ready(function() {
 	data-cycle-delay="(#GET{delay})"][ 
 	data-cycle-pause-on-hover="(#GET{pauseonhover})"][ 
 	data-cycle-allow-wrap="(#GET{allowwrap})"][ 
+	data-cycle-reverse="(#GET{reverse})"][ 
 	data-cycle-random="(#GET{random})"][ 
 	data-cycle-paused="(#GET{paused})"][ 
 	data-cycle-prev="(#GET{prev})"][ 

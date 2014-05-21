@@ -91,10 +91,10 @@
 				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 			</li>
 			
-			#SET{name,allowwrap}
+			#SET{name,reverse}
 			<li class="editer editer_[(#GET{name})]">
 				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
-				#SET{val,false}
+				#SET{val,true}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
@@ -125,6 +125,17 @@
 				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
 				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
 				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,allowwrap}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,false}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
 			</li>
 			
 			#SET{name,paused}
