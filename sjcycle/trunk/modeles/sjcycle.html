@@ -8,6 +8,7 @@
 [(#SET{reverse,		[(#ENV{reverse,		#CONFIG{sjcycle/reverse}})]})]
 [(#SET{random,		[(#ENV{random,		#CONFIG{sjcycle/random}})]})]
 [(#SET{fx,		[(#ENV{fx,		#CONFIG{sjcycle/fx}})]})]
+[(#SET{tilevertical,	[(#ENV{tilevertical,	#CONFIG{sjcycle/tilevertical}})]})]
 [(#SET{backgroundcolor, [(#ENV{backgroundcolor,	#CONFIG{sjcycle/backgroundcolor}})]})]
 [(#SET{prev, 		[(#ENV{prev,		#CONFIG{sjcycle/prev}})]})]
 [(#SET{next, 		[(#ENV{next,		#CONFIG{sjcycle/next}})]})]
@@ -65,6 +66,7 @@ $(document).ready(function() {
 	data-cycle-prev="(#GET{prev})"][ 
 	data-cycle-next="(#GET{next})"][ 
 	data-cycle-fx="(#GET{fx})"][
+	data-cycle-tile-vertical="(#GET{tilevertical})"][
 	data-cycle-pager="(#GET{pager})"][
 	data-cycle-caption="(#GET{caption})"][
 	data-cycle-caption-template="(#GET{captiontemplate})"]>[(#GET{prev}|=={.cycle-prev}|oui)
