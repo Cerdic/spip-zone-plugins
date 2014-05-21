@@ -490,12 +490,12 @@ class IterateurSPHINX2 implements Iterator {
 			if (!is_array($filter) OR !isset($filter['valeur']) OR !$valeur = $filter['valeur']) {
 				continue;
 			}
-			if (is_string($valeur)) {
-				$valeur = trim($valeur);
-				$valeurs = array($valeur);
-			} else {
+			if (is_array($valeur)) {
 				$valeurs = $valeur;
 				$valeur = 'Array !';
+			} else {
+				$valeur = trim($valeur);
+				$valeurs = array($valeur);
 			}
 			$valeurs = array_unique(array_filter($valeurs));
 			if (!$valeurs) {
