@@ -65,8 +65,8 @@ $(document).ready(function() {
 	data-cycle-paused="(#GET{paused})"][ 
 	data-cycle-prev="(#GET{prev})"][ 
 	data-cycle-next="(#GET{next})"][ 
-	data-cycle-fx="(#GET{fx})"][
-	data-cycle-tile-vertical="(#GET{tilevertical})"][
+	data-cycle-fx="(#GET{fx})"][(#GET{fx}|=={tileSlide}|oui|ou{#GET{fx}|=={tileBlind}|oui})[
+	data-cycle-tile-vertical="(#GET{tilevertical})"]][
 	data-cycle-pager="(#GET{pager})"][
 	data-cycle-caption="(#GET{caption})"][
 	data-cycle-caption-template="(#GET{captiontemplate})"]>[(#GET{prev}|=={.cycle-prev}|oui)
