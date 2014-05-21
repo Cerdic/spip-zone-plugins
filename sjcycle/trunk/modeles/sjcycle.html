@@ -3,6 +3,7 @@
 [(#SET{hauteurmax,	[(#ENV{hauteurmax,     	#CONFIG{sjcycle/hauteurmax}})]})]
 [(#SET{timeout,      	[(#ENV{timeout,     	#CONFIG{sjcycle/timeout}})]})]
 [(#SET{speed,      	[(#ENV{speed,     	#CONFIG{sjcycle/speed}})]})]
+[(#SET{delay,      	[(#ENV{delay,     	#CONFIG{sjcycle/delay}})]})]
 [(#SET{pauseonhover,    [(#ENV{pauseonhover,    #CONFIG{sjcycle/pauseonhover}})]})]
 [(#SET{random,		[(#ENV{random,		#CONFIG{sjcycle/random}})]})]
 [(#SET{fx,		[(#ENV{fx,		#CONFIG{sjcycle/fx}})]})]
@@ -24,7 +25,7 @@
 
 <B_img>
 <style type="text/css">
-.cycle-paused:after { content:'[(#GET{pauseonhovercontent})]';[(#GET{pauseonhovercontent}|=={''}|oui) display:none;] }
+.cycle-paused:after {[ content:'(#GET{pauseonhovercontent})';][(#GET{pauseonhovercontent}|=={''}|oui) display:none;] }
 </style>
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 $(document).ready(function() {
@@ -53,6 +54,7 @@ $(document).ready(function() {
 	data-cycle-slides="a"][ 
 	data-cycle-speed="(#GET{speed})"][ 
 	data-cycle-timeout="(#GET{timeout})"][ 
+	data-cycle-delay="(#GET{delay})"][ 
 	data-cycle-pause-on-hover="(#GET{pauseonhover})"][ 
 	data-cycle-random="(#GET{random})"][ 
 	data-cycle-paused="(#GET{paused})"][ 

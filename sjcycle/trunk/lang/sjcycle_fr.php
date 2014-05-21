@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_config_image_process' => 'Attention : La méthode de fabrication des vignettes n\'a pas été choisie, veuillez  en sélectionner une dans les <a href=".?exec=configurer_avancees">fonctions avancées</a> de la configuration du site !',
 	'explication_caption' => 'Afficher une légende pour chaque image. Cibler un bloc html par sa classe ou son identifiant css, ou bien par défaut "<strong>.cycle-caption</strong>".<br />&lt;sjcycleXX<strong>|caption=.cycle-caption</strong>&gt;',
 	'explication_captiontemplate' => 'Vide pour avoir le décompte/le nombre total, "<strong>{{alt}}</strong>" pour avoir les titres des images en légende, ou encore par exemple "<strong>Diapositive {{slideNum}} : {{alt}}</strong>"". <a href="http://jquery.malsup.com/cycle2/demo/caption.php">Voir des exemples.</a><br />&lt;sjcycleXX<strong>|captiontemplate={{alt}}</strong>&gt;',
+	'explication_delay'=>'Temps d\'attente avant le départ du diaporama (en millisecondes).',
 	'explication_largeurmax' => 'Toutes les images seront retaillées en largeur à cette valeur, en pixels. Les diaporamas étant en taille proportionnelle, ils s\'adapteront à la largeur définie par l\'interface du site, mais dans la limite définie ici.<br />&lt;sjcycleXX<strong>|largeurmax=150</strong>&gt;',
 	'explication_hauteurmax' => 'En laissant le champ vide, les images seront toujours à la largeur maximum possible. Sinon toutes les images seront retaillées en hauteur à cette valeur, en pixels. Si la largeur de l\'image n\'est pas suffisante, la couleur de fond configurée sera visible. La valeur de couleur de fond "transparent" rendra par contre un fond blanc.<br />&lt;sjcycleXX<strong>|hauteurmax=450</strong>&gt;',
 	'explication_timeout' => 'Temps d\'affichage pour chaque image (en millisecondes).<br />&lt;sjcycleXX<strong>|timeout=4000</strong>&gt;',
@@ -38,8 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_paused' => '&lt;sjcycleXX<strong>|paused=true</strong>&gt; ou &lt;sjcycleXX<strong>|paused=false</strong>&gt;',
 	'explication_pager' => 'Cibler un bloc html qui contiendra la pagination en nommant sa classe ou son identifiant css. Par défaut : "<strong>.cycle-pager</strong>". &lt;sjcycleXX<strong>|pager=.cycle-pager</strong>&gt;',
 	'explication_mediabox'=>'Ouvre l\'image d\'origine suivant <a href=".?exec=configurer_mediabox">vos paramétrages de la mediabox</a>.',
-	'explication_tooltip'=>'Au survol, affiche une infobulle contenant titre et descriptif de l’image. Utilisation du plugin tooltip de jquery',
-	'explication_tooltip_carac'=>'Afficher les caractéristiques de l\'image originale dans l\'infobulle : largeur, hauteur et poids',
+	'explication_tooltip'=>'Au survol, affiche une infobulle contenant titre et descriptif de l’image. Utilisation du plugin Tooltip de jQuery.',
+	'explication_tooltip_carac'=>'Afficher les caractéristiques de l\'image originale dans l\'infobulle : largeur, hauteur et poids.',
 
 	// L
 	'label_afficher_aide' => 'Afficher un bloc d\'aide à la rédaction sur la page d\'édition d\'un article',
@@ -47,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_backgroundcolor' => 'Couleur de fond',
 	'label_caption' => 'Légende',
 	'label_captiontemplate' => 'Format de la légende',
+	'label_delay' => 'Temps d\'attente',
 	'label_largeurmax' => 'Largeur maximum',
 	'label_hauteurmax' => 'Hauteur maximum',
 	'label_timeout' => 'Affichage',

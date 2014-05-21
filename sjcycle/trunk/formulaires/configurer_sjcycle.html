@@ -38,6 +38,13 @@
 				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 			</li>
 			
+			#SET{name,delay}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
 			#SET{name,fx}
 			<li class="editer editer_[(#GET{name})]">
 				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
