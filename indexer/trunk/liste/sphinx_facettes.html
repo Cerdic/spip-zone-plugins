@@ -3,17 +3,17 @@
 <B_facettes>
     <h2>Facettes associées</h2>
     <div class='row-fluid'>
-<BOUCLE_facettes(DATA){source tableau, #FACETS}>
+<BOUCLE_facettes(DATA){source tableau, #FACETS}><B_liste_facettes>
     <div class='span4'>
         <h3>#CLE</h3>
         <div class='liste'>
             <ul class='liste-items'>
-        <BOUCLE_liste_facettes(DATA){source tableau, #VALEUR}>
-                <li class='item'><a href="[(#SELF|parametre_url{[(#_facettes:CLE|replace{^.*?\.})],#CLE})]">#CLE (#VALEUR)</a></li>
-        </BOUCLE_liste_facettes>
+        <BOUCLE_liste_facettes(DATA){source tableau, #VALEUR}>[(#TOTAL_BOUCLE|>{1}|oui)
+                <li class='item'><a href="[(#SELF|parametre_url{[(#_facettes:CLE)],#CLE})]">#CLE ([(#VALEUR)])</a></li>
+        ]</BOUCLE_liste_facettes>
             </ul>
         </div>
     </div>
-</BOUCLE_facettes>
+</B_liste_facettes></BOUCLE_facettes>
     </div>
 </B_facettes>
