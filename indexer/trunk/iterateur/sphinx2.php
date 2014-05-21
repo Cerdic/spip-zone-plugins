@@ -91,6 +91,12 @@ class IterateurSPHINX2 implements Iterator {
 	protected $cle = null;
 
 	/**
+	 * facettes
+	 * @var array
+	 */
+	protected $facet = array();
+
+	/**
 	 * Valeur courante
 	 * @var null
 	 */
@@ -168,7 +174,6 @@ class IterateurSPHINX2 implements Iterator {
 			$facets[$f['alias']] = array_shift($result['query']['facets']);
 		}
 		$result['query']['facets'] = $facets;
-
 
 		$this->data = new ArrayObject($result['query']);
 
