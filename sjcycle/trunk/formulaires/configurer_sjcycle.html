@@ -77,6 +77,13 @@
 				</div>
 			</li>
 			
+			#SET{name,pauseonhovercontent}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
 			#SET{name,random}
 			<li class="editer editer_[(#GET{name})]">
 				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
@@ -143,6 +150,45 @@
 			</li>
 			
 		</ul>
+		<fieldset>
+		<legend><:sjcycle:legend_tooltip_box:></legend>
+		<ul>
+			
+			#SET{name,tooltip}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,tooltiptech}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+			#SET{name,mediabox}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
+		</ul>
+		</fieldset>
 		
 		<fieldset>
 		<legend><:sjcycle:legend_parametres_suplementaires:></legend>
