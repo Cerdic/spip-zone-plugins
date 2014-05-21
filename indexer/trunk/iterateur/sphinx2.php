@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @package SPIP\Indexer\Iterateur\Sphinx
 **/
 
-include_spip('iterateur/data');
 
 /**
  * Créer une boucle sur un itérateur SPHINX
@@ -75,16 +74,6 @@ class IterateurSPHINX2 implements Iterator {
 	protected $result = array();
 
 	/**
-	 * Données de la requête (hors documents récupérés)
-	 *
-	 * ArrayObject pour avoir 1 seul objet non dupliqué
-	 *
-	 * @var ArrayObject
-	 */
-	protected $data = null;
-
-
-	/**
 	 * Cle courante
 	 * @var null
 	 */
@@ -148,11 +137,54 @@ class IterateurSPHINX2 implements Iterator {
 	}
 
 
+	/**
+	 * Sauvegarde des données pour utilisation ultérieure
+	 * dans les squelettes via les balises `#SPHINX_xx`
+	 * où xx est la clé sauvegardée.
+	 *
+	 * @param string $cle
+	 * @param mixed $val
+	 * @return void
+	**/
+	private function save($cle, $val) {
+		if (!isset($GLOBALS['SphinxSave'])) {
+			$GLOBALS['SphinxSave'] = array();
+		}
+		// identifiant de la boucle
+		$id = $this->command['id'];
+		if (!isset($GLOBALS['SphinxSave'][$id])) {
+			$GLOBALS['SphinxSave'][$id] = array();
+		}
+		$GLOBALS['SphinxSave'][$id][$cle] = $val;
+	}
+
+	/**
+	 * Sauvegarde toutes les données pour utilisation ultérieure
+	 *
+	 * @param array $data
+	 * @return void
+	 */
+	private function saveAll($data) {
+		foreach ($data as $cle => $val) {
+			$this->save($cle, $val);
+		}
+	}
+
+
+	/**
+	 * Exécute la requête
+	 *
+	 * Exécute la requête, sauvegarde des données, retravaille
+	 * les résultats pour que la pagination fonctionne.
+	 *
+	 * @param 
+	 * @return 
+	**/
 	public function runQuery() {
 		$query  = $this->queryApi->get();
 		$result = $this->sphinxQL->allfetsel($query);
 
-		$GLOBALS['SphinxSave'][$this->command['id']]['query'] = $query;
+		$this->save('query', $query);
 
 		if (!$result) {
 			return false;
@@ -168,10 +200,6 @@ class IterateurSPHINX2 implements Iterator {
 			$result['query']['docs'] = array_pad($result['query']['docs'], $result['query']['meta']['total'], null);
 		}
 
-		$this->result = $result['query'];
-
-		unset($result['query']['docs']);
-
 		// remettre les alias sur les facettes :
 		// {facet truc, FORMULE()} cree la facette 'truc'
 		$facets = array();
@@ -180,9 +208,10 @@ class IterateurSPHINX2 implements Iterator {
 		}
 		$result['query']['facets'] = $facets;
 
-		$this->data = new ArrayObject($result['query']);
 
-		$GLOBALS['SphinxSave'][$this->command['id']] = $result['query'];
+		$this->result = $result['query'];
+		unset($result['query']['docs']);
+		$this->saveAll($result['query']);
 
 		return true;
 	}
@@ -499,13 +528,6 @@ class IterateurSPHINX2 implements Iterator {
 	}
 
 
-
-	// pour #SPHINX_*, permet de récupérer tous les champs de metadata
-	public function getMetaData() {
-		return $this->data;
-	}
-
-
 	/**
 	 * Revenir au depart
 	 * @return void
@@ -547,12 +569,6 @@ class IterateurSPHINX2 implements Iterator {
 	public function next(){
 		if ($this->valid()) {
 			list($this->cle, $this->valeur) = each($this->result['docs']);
-			// on transmet, pour chaque ligne les metas données avec…
-			// histoire d'être certain qu'on les verra dans $Pile[$SP]
-			// (feinte de sioux)
-			if (is_array($this->valeur)) {
-				$this->valeur['_sphinx_data'] = $this->data;
-			}
 		}
 	}
 
@@ -797,9 +813,6 @@ function balise_SPHINX__dist($p){
 /**
  * Récupère pour une balise `#SPHINX_QQC` la valeur de 'qqc'
  * dans les meta données associées à la requête.
- * 
- * On les puise soit directement dans l'iterateur si on l'a (partie centrale de boucle),
- * soit dans une globale (conjointement à l'utilisation de `#SPHINX_SAVE_META`
  *
  * @param Champ $p
  * @param string $champ
@@ -815,7 +828,7 @@ function calculer_balise_SPHINX_CHAMP($p, $champ) {
 	}
 
 	$champ = strtolower($champ);
-	$p->code = '$GLOBALS["SphinxSave"]["'.$b.'"]["'.$champ.'"]';
+	$p->code = '(isset($GLOBALS["SphinxSave"]["'.$b.'"]["'.$champ.'"]) ? $GLOBALS["SphinxSave"]["'.$b.'"]["'.$champ.'"] : "")';
 
 	$p->interdire_scripts = false;
 	return $p;
