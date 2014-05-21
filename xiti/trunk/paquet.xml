@@ -4,7 +4,7 @@
 	version="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="images/xiti-32.png"
+	logo="prive/themes/spip/images/xiti-32.png"
 	documentation=""
 	schema="1.0.0"
 >
@@ -12,7 +12,7 @@
 	<nom>Xiti</nom>
     <!--Ce plugin permet de tagger des pages avec l'outil de stat Xiti-->
 
-	<auteur>Vincent</auteur>
+	<auteur>France diplomatie - Vincent</auteur>
 
 	<licence>GNU/GPL</licence>
 
