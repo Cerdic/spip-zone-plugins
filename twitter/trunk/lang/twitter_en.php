@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_associer_compte_twitter' => 'Link your twitter account to this site',
 	'label_dissocier_compte_twitter' => '<a href="@url_assoc@">Dissociate the twitter account currently used</a> (<a href="@url_compte@">@nom@</a>)',
 	'label_status' => 'What\'s new ?',
-	'label_twitter_consumer_key' => 'Consumer key of the Twitter API',
-	'label_twitter_consumer_secret' => 'Consumer secret of the Twitter API',
+	'label_twitter_consumer_key' => 'API key of the Twitter API',
+	'label_twitter_consumer_secret' => 'API secret of the Twitter API',
 	'label_username' => 'User name',
 	'lien_documentation' => 'View documentation',
 
