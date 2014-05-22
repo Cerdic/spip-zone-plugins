@@ -76,7 +76,7 @@ window.twttr || (window.twttr = {});
 	twttr.txt.regexen.spaces_group = c(d.join(""));
 	twttr.txt.regexen.spaces = c("["+d.join("")+"]");
 	twttr.txt.regexen.punct = /\!'#%&'\(\)*\+,\\\-\.\/:;<=>\?@\[\]\^_{|}~/;
-	twttr.txt.regexen.atSigns = /[@\u00ef\u00bc ]/;
+	twttr.txt.regexen.atSigns = /[@\u00ef\u00bc]/;
 	twttr.txt.regexen.extractMentions = c(/(^|[^a-zA-Z0-9_])(#{atSigns})([a-zA-Z0-9_]{1,20})(?=(.|$))/g);
 	twttr.txt.regexen.extractReply = c(/^(?:#{spaces})*#{atSigns}([a-zA-Z0-9_]{1,20})/);
 	twttr.txt.regexen.listName = /[a-zA-Z][a-zA-Z0-9_\-\u0080-\u00ff]{0,24}/;
@@ -109,15 +109,15 @@ window.twttr || (window.twttr = {});
 	g(d, 12293, 12293);
 	g(d, 12347, 12347);
 	twttr.txt.regexen.nonLatinHashtagChars = c(d.join(""));
-	twttr.txt.regexen.latinAccentChars = c("\u00c3\u20ac\u00c3\u0081\u00c3\u201a\u00c3\u0192\u00c3\u201e\u00c3\u2026\u00c3\u2020\u00c3\u2021\u00c3\u02c6\u00c3\u2030\u00c3\u0160\u00c3\u2039\u00c3\u0152\u00c3\u008d\u00c3\u017d\u00c3\u008f\u00c3\u0090\u00c3\u2018\u00c3\u2019\u00c3\u201c\u00c3\u201d\u00c3\u2022\u00c3\u2013\u00c3\u02dc\u00c3\u2122\u00c3\u0161\u00c3\u203a\u00c3\u0153\u00c3\u009d\u00c3\u017e\u00c3\u0178\u00c3 \u00c3\u00a1\u00c3\u00a2\u00c3\u00a3\u00c3\u00a4\u00c3\u00a5\u00c3\u00a6\u00c3\u00a7\u00c3\u00a8\u00c3\u00a9\u00c3\u00aa\u00c3\u00ab\u00c3\u00ac\u00c3\u00ad\u00c3\u00ae\u00c3\u00af\u00c3\u00b0\u00c3\u00b1\u00c3\u00b2\u00c3\u00b3\u00c3\u00b4\u00c3\u00b5\u00c3\u00b6\u00c3\u00b8\u00c3\u00b9\u00c3\u00ba\u00c3\u00bb\u00c3\u00bc\u00c3\u00bd\u00c3\u00be\u00c5\u0178\\303\\277");
+	twttr.txt.regexen.latinAccentChars = c("\u00c3\u20ac\u00c3\u0081\u00c3\u201a\u00c3\u0192\u00c3\u201e\u00c3\u2026\u00c3\u2020\u00c3\u2021\u00c3\u02c6\u00c3\u2030\u00c3\u0160\u00c3\u2039\u00c3\u0152\u00c3\u008d\u00c3\u017d\u00c3\u008f\u00c3\u0090\u00c3\u2018\u00c3\u2019\u00c3\u201c\u00c3\u201d\u00c3\u2022\u00c3\u2013\u00c3\u02dc\u00c3\u2122\u00c3\u0161\u00c3\u203a\u00c3\u0153\u00c3\u009d\u00c3\u017e\u00c3\u0178\u00c3\u00c3\u00a1\u00c3\u00a2\u00c3\u00a3\u00c3\u00a4\u00c3\u00a5\u00c3\u00a6\u00c3\u00a7\u00c3\u00a8\u00c3\u00a9\u00c3\u00aa\u00c3\u00ab\u00c3\u00ac\u00c3\u00ad\u00c3\u00ae\u00c3\u00af\u00c3\u00b0\u00c3\u00b1\u00c3\u00b2\u00c3\u00b3\u00c3\u00b4\u00c3\u00b5\u00c3\u00b6\u00c3\u00b8\u00c3\u00b9\u00c3\u00ba\u00c3\u00bb\u00c3\u00bc\u00c3\u00bd\u00c3\u00be\u00c5\u0178\\303\\277");
 	twttr.txt.regexen.endScreenNameMatch = c(/^(?:#{atSigns}|[#{latinAccentChars}]|:\/\/)/);
 	twttr.txt.regexen.hashtagBoundary = c(/(?:^|$|#{spaces}|[\u00e3\u20ac\u0152\u00e3\u20ac\u008d\u00e3\u20ac\u201a\u00e3\u20ac\u0081.,!\u00ef\u00bc\u0081?\u00ef\u00bc\u0178:;"'])/);
 	twttr.txt.regexen.hashtagAlpha = c(/[a-z_#{latinAccentChars}#{nonLatinHashtagChars}]/i);
 	twttr.txt.regexen.hashtagAlphaNumeric = c(/[a-z0-9_#{latinAccentChars}#{nonLatinHashtagChars}]/i);
 	twttr.txt.regexen.autoLinkHashtags = c(/(#{hashtagBoundary})(#|\u00ef\u00bc\u0192)(#{hashtagAlphaNumeric}*#{hashtagAlpha}#{hashtagAlphaNumeric}*)/gi);
-	twttr.txt.regexen.autoLinkUsernamesOrLists = /(^|[^a-zA-Z0-9_]|RT:?)([@\u00ef\u00bc ]+)([a-zA-Z0-9_]{1,20})(\/[a-zA-Z][a-zA-Z0-9_\-]{0,24})?/g;
+	twttr.txt.regexen.autoLinkUsernamesOrLists = /(^|[^a-zA-Z0-9_]|RT:?)([@\u00ef\u00bc]+)([a-zA-Z0-9_]{1,20})(\/[a-zA-Z][a-zA-Z0-9_\-]{0,24})?/g;
 	twttr.txt.regexen.autoLinkEmoticon = /(8\-\#|8\-E|\+\-\(|\`\@|\`O|\&lt;\|:~\(|\}:o\{|:\-\[|\&gt;o\&lt;|X\-\/|\[:-\]\-I\-|\/\/\/\/\u00c3\u2013\\\\\\\\|\(\|:\|\/\)|\u00e2\u02c6\u2018:\*\)|\( \| \))/g;
-	twttr.txt.regexen.validPrecedingChars = c(/(?:[^-\/"'!=A-Za-z0-9_@\u00ef\u00bc \.]|^)/);
+	twttr.txt.regexen.validPrecedingChars = c(/(?:[^-\/"'!=A-Za-z0-9_@\u00ef\u00bc\.]|^)/);
 	twttr.txt.regexen.invalidDomainChars = k("\u00a0#{punct}#{spaces_group}", twttr.txt.regexen);
 	twttr.txt.regexen.validDomainChars = c(/[^#{invalidDomainChars}]/);
 	twttr.txt.regexen.validSubdomain = c(/(?:(?:#{validDomainChars}(?:[_-]|#{validDomainChars})*)?#{validDomainChars}\.)/);
@@ -605,7 +605,7 @@ TWTR = window.TWTR || {};
 					if (a.needle.entities.urls)options.urlEntities = a.needle.entities.urls;
 					if (a.needle.entities.media)options.urlEntities = options.urlEntities.concat(a.needle.entities.media)
 				}
-				return f && f.txt ? f.txt.autoLink(a.needle.text, options).replace(/([@\ufffd ]+)(<[^>]*>)/g, "$2$1") : a.needle.text
+				return f && f.txt ? f.txt.autoLink(a.needle.text, options).replace(/([@\ufffd]+)(<[^>]*>)/g, "$2$1") : a.needle.text
 			}};
 			d.prototype = {start: function (){
 				this.stop().run();
