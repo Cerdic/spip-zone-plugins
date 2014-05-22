@@ -9,7 +9,7 @@
     - type      (vide) = acheter 
                 donner = faire un don 
 
-]#SET{prix,#ENV{prix}|intval|abs} #SET{libelle,#ENV{titre}|entites_html}  #SET{type,#ENV{type}|trim}/// #ENV{type} +++
+][(#SET{prix,#ENV{prix}|replace{",", "."}|floatval|abs|mult{100}|intval|div{100}})] #SET{libelle,#ENV{titre}|entites_html}  #SET{type,#ENV{type}|trim}
 [(#GET{prix}|oui)  
 <div class="paypal">
          [(#FORMULAIRE_PAYPAL{#ARRAY{
