@@ -4,18 +4,9 @@
 
 if (_request('run') || _request('continue')) {
     include_spip('inc/indexer');
-    $indexer = new Indexer\Indexer();
-
-    try {
-        $indexer->registerStorage(
-            new Indexer\Storage\Sphinx(
-                new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
-        );
-    } catch( \Exception $e ) {
-        if (!$message = $e->getMessage())
-            $message = _L('Erreur inconnue');
-        die("<p class='erreur'>$message</p>");
-    }
+    
+    // Appeler la fonction qui donne l'indexeur configuré pour ce SPIP
+    $indexer = indexer_indexer();
 	
 	// Appeler la fonction qui liste les sources et qui comporte un pipeline pour étendre
     $sources = indexer_sources();

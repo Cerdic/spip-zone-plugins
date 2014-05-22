@@ -16,5 +16,10 @@
 
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<categorie>navigation</categorie>
+	
+	<pipeline>
+        <nom>post_edition</nom>
+        <inclure>indexer_pipelines.php</inclure>
+    </pipeline>
 </plugin>
 

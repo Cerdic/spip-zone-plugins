@@ -7,7 +7,6 @@
 	logo="prive/themes/spip/images/indexer-64.png"
 	documentation=""
 >
-
 	<nom>Indexer</nom>
 
 	<auteur>Matthieu Marcillaud</auteur>
@@ -15,5 +14,6 @@
 	<auteur>Fil</auteur>
 
 	<licence>GNU/GPL</licence>
-
+	
+	<pipeline nom="post_edition" inclure="indexer_pipelines.php" />
 </paquet>
