@@ -1,0 +1,27 @@
+<paquet
+	prefix="titre_logo"
+	categorie="edition"
+	version="2.0.1"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	schema="1.0.0"
+	logo="prive/themes/spip/images/image-32.png"
+>
+
+	<nom>Titre de logo</nom>
+	<!-- Ce plugin ajoute un titre et un descriptif aux logos -->
+
+	<auteur>ARNO*</auteur>
+	<auteur>Teddy Payet</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="titre_logo_pipelines.php" />
+	<pipeline nom="autoriser" inclure="titre_logo_autorisations.php" />
+	<pipeline nom="affiche_gauche" inclure="titre_logo_pipelines.php" />
+
+	<menu nom="configurer_titre_logo" titre="paquet-titre_logo:titre_logo_nom" parent="menu_configuration" icone="images/image-16.png" />
+
+</paquet>

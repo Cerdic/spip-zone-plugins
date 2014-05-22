@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+    <h3 class="titrem"><:titre_logo:cfg_titre_parametrages:></h3>
+
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+    <form method="post" action="#ENV{action,#FORM}">
+        <div>
+            #ACTION_FORMULAIRE{#ENV{action}}
+
+            <ul>
+                [(#SAISIE{explication,explication_parametrages,
+                texte=<:titre_logo:cfg_explication_parametrages:>})]
+
+                [(#SAISIE{choisir_objets, objets_titre_logo,
+                label=<:titre_logo:label_objets_titre_logo:>,
+                class='long_label',
+                defaut='spip_articles'})]
+
+            </ul>
+
+            <input type="hidden" name="_meta_casier" value="titre_logo" />
+            <p class="boutons">
+                <input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+            </p>
+        </div>
+    </form>
+</div>
+
+
+

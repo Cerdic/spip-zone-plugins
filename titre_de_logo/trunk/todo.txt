@@ -1,0 +1,4 @@
+Comme dans SPIP 3, tout est squelettisé, il faut surcharger le fichier prive/formulaires/editer_logo.html
+A la fin de ce fichier, on mettra notre formulaire de titre logo. On aura ainsi un #ENV*{logo_on} si le logo normal est chargé.
+Voir si on arrive à récupérer l'environnement sans soucis.
+#FORMULAIRE_EDITER_TITRE_LOGO{#ENV{objet},#ENV{id_objet},'',#ENV**}
