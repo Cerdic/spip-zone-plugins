@@ -82,7 +82,7 @@ $(document).ready(function() {
 		#SET{afficher_infobulle,non}
 		[(#CONFIG{sjcycle/tooltip}|=={oui}|oui)
 			[(#SET{texte_infobulle,[<h4>(#TITRE|supprimer_numero)</h4>][(#DESCRIPTIF)<br />]})]
-			[(#CONFIG{sjcycle/tooltiptech}|=={oui}|oui)
+			[(#CONFIG{sjcycle/tooltip_carac}|=={oui}|oui)
 				[(#SET{texte_infobulle,[(#GET{texte_infobulle}|concat{<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]})]})]
 			]
 			[(#SET{texte_infobulle,[(#GET{texte_infobulle}|trim)]})]
