@@ -47,9 +47,3 @@ options:
       nom: 'champ_organisme_inscription'
       label: '<:formidableinscription:traiter_inscription_option_champ_organisme_label:>'
       env: true
-  -
-    saisie: 'textarea'
-    options:
-      nom: 'message_inscription'
-      label: '<:formidableinscription:traiter_inscription_option_message_label:>'
-      rows: 4
