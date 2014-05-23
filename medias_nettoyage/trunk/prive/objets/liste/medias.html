@@ -1,24 +1,39 @@
 <B_liste_medias>
 [(#ANCRE_PAGINATION)]
 <div class="galerie medias">
-[<h3>(#ENV{titre})</h3>]
+	[<h3>(#ENV{titre})</h3>]
 	<table class="spip liste">
 		[<caption>(#GRAND_TOTAL|singulier_ou_pluriel{medias_nettoyage:un_document,medias_nettoyage:des_documents})</caption>]
 		<thead>
 			<tr class="first_row">
 				<th class="nom principale"><:medias_nettoyage:info_nom:></th>
-				<th class="taille secondaire"><:medias_nettoyage:info_taille:></th>
+				<th class="infos secondaire"><:medias_nettoyage:info_technique:></th>
 				<th class="date secondaire"><:date:></th>
 			</tr>
 		</thead>
 		<tbody>
-		<BOUCLE_liste_medias (DATA) {source table, #ENV{liste}} {par valeur} {pagination #ENV{nb,10}}>
+			<BOUCLE_liste_medias (DATA) {source table, #ENV{liste}} {par valeur} {pagination #ENV{nb,10}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})]
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
-				<td class="nom principale">[(#VALEUR)]</td>
-				<td class="taille secondaire">[(#VALEUR|filesize|taille_en_octets)]</td>
-				<td class="date secondaire">[(#VAL{d-m-Y}|date{#VALEUR|filemtime})]</td>
+				<td class="nom principale">
+					[(#VALEUR|exif_imagetype|is_numeric|oui)[
+					<a href="#VALEUR"[ title="(#VALEUR|basename)"] class="mediabox">(#VALEUR|balise_img|image_reduire{250,100}|inserer_attribut{alt,[(#VALEUR|basename|texte_backend)]})
+						[<br/><em>(#VALEUR|basename)</em>]
+					</a>]]
+					[(#VALEUR|exif_imagetype|is_numeric|non)
+					[<div class="resize-250">
+						<a href="#VALEUR"[ title="(#VALEUR|basename)"]>(#VALEUR|basename)</a>
+					</div>]]
+				</td>
+				<td class="infos secondaire">
+					[<strong>(#GET{pathinfo}|table_valeur{extension})</strong>]
+					[<br/>(#VALEUR|filesize|taille_en_octets)]
+					[<br/>(#VALEUR|exif_imagetype|is_numeric|oui)[(#VALEUR|largeur)] x [(#VALEUR|hauteur)] px]
+				</td>
+				<td class="date secondaire">
+					[(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate)]
+				</td>
 			</tr>
-		</BOUCLE_liste_medias>
+			</BOUCLE_liste_medias>
 		</tbody>
 	</table>
 	[<div class="pagination">(#PAGINATION{#ENV{pagination,prive}})</div>]

@@ -1,11 +1,11 @@
 <paquet
 	prefix="medias_nettoyage"
 	categorie="outil"
-	version="0.8.7"
+	version="0.9.0"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/medias_nettoyage-64.png"
->	
+>
 
 	<nom>Nettoyer la m&#233;diath&#232;que</nom>
 	<!-- On range nos medias! -->
@@ -22,6 +22,7 @@
 	<menu nom="medias_tabbord" titre="medias_nettoyage:titre_page_medias_tabbord" parent="menu_edition" icone="images/medias_tabbord-16.png" action="medias_tabbord" />
 
 	<onglet nom="medias_tabbord" titre="medias_nettoyage:onglet_titre_tabbord" parent="medias_tabbord" icone="images/medias_tabbord-24.png" action="medias_tabbord" />
-	<onglet nom="medias_rep_orphelins" titre="medias_nettoyage:onglet_titre_rep_orphelins" parent="medias_tabbord" icone="images/medias_rep_img-24.png" action="medias_rep_orphelins" />
 	<onglet nom="medias_rep_img" titre="medias_nettoyage:onglet_titre_rep_img" parent="medias_tabbord" icone="images/medias_rep_img-24.png" action="medias_rep_img" />
+	<onglet nom="medias_logos_img" titre="medias_nettoyage:onglet_titre_logos_img" parent="medias_tabbord" icone="images/medias_logos_img-24.png" action="medias_logos_img" />
+	<onglet nom="medias_rep_orphelins" titre="medias_nettoyage:onglet_titre_rep_orphelins" parent="medias_tabbord" icone="images/medias_rep_img-24.png" action="medias_rep_orphelins" />
 </paquet>

@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 	'medias_nettoyage_description' => 'Ce plugin permet de lister les documents présents physiquement dans le répertoire IMG mais qui ne sont plus référencés en BDD. Une tâche de fond déplace ces fichiers dans un répertoire IMG/orphelins.',
+    'medias_nettoyage_nom' => 'Nettoyer la médiathèque',
 	'medias_nettoyage_slogan' => 'On range nos medias!',
 );
 ?>

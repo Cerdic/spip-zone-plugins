@@ -1,8 +1,5 @@
-[(#VAL{'medias_tabbord'}|barre_onglets{medias_rep_img})]
-<div class="nettoyeur"></div>
-
 <h1><:medias_nettoyage:titre_page_medias_rep_img:></h1>
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/medias_rep_img,env,ajax} />
+<INCLURE{fond=prive/objets/liste/repertoires,repertoires=#EVAL{medias_lister_repertoires()},env,ajax} />
 <div class="nettoyeur"></div>
