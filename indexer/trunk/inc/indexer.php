@@ -75,3 +75,26 @@ function indexer_sources(){
 	
 	return $sources;
 }
+
+/**
+ * Indexer une partie des documents d'une source.
+ * 
+ * Cette fonction est utilisable facilement pour programmer un job.
+ *
+ * @param string $alias_de_sources Alias donné à la source enregistrée dans les Sources du site
+ * @param mixed $start Début des documents à indexer
+ * @param mixed $end Fin des documents à indexer
+ * @return void
+ */
+function indexer_job_indexer_source($alias_de_sources, $start, $end){
+	// On va chercher l'indexeur du SPIP
+	$indexer = indexer_indexer();
+	// On va chercher les sources du SPIP
+	$sources = indexer_sources();
+	// On récupère celle demandée en paramètre
+	$source = $sources->getSource($alias_de_sources);
+	// On va chercher les documents à indexer
+	$documents = $source->getDocuments($start, $end);
+	// Et on le remplace (ou ajoute) dans l'indexation
+	$indexer->replaceDocuments($documents);
+}

@@ -45,12 +45,13 @@ function indexer_post_edition($flux){
 			
 			// Si l'objet de la source est le même que dans l'édition, on met à jour l'indexation de l'objet
 			if ($objet_source == $objet){
-				// On va chercher l'indexeur du SPIP
-				$indexer = indexer_indexer();
-				// On va chercher l'unique document à indexer
-				$document = $source->getDocuments($id_objet, $id_objet+1); // +1 car le test est normalement : id < $end
-				// Et on le remplace (ou ajoute) dans l'indexation
-				$indexer->replaceDocuments($document);
+				job_queue_add(
+					'indexer_job_indexer_source',
+					"Réindexer l'objet ($objet - $id_objet)",
+					array($alias, $id_objet, $id_objet+1), // +1 car le test est normalement : id < $end
+					'inc/indexer',
+					true // pas de duplication
+				);
 			}
 		}
 	}
