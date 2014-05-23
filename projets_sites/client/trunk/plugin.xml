@@ -2,8 +2,8 @@
 	<nom><multi>[fr]Sites pour projets - Client</multi></nom>
 	<icon>prive/themes/spip/images/projets_sites_client-32.png</icon>
 	<auteur>Teddy Payet</auteur>
-	<version>0.4.7</version>
-	<etat>dev</etat>
+	<version>0.4.8</version>
+	<etat>stable</etat>
 	<description><multi>
 	[fr]Ce plugin ne fait qu'afficher la configuration du site sur lequel il est actif.
 Il faut renseigner une clé dans la page de configuration pour que la page de config puisse être active.
@@ -38,13 +38,13 @@ On affiche les informations équivalentes au plugin "Sites pour projets" avec qu
 	</bouton>
 
 	<!-- Boutons pour plugin Bandeau -->
-	<bouton id='configurer_projets_sites_client' parent='bando_configuration'>
+	<bouton id='configurer_projets_sites_client_bando' parent='bando_configuration'>
 		<icone>prive/themes/spip/images/projets_sites_client-16.png</icone>
 		<titre>projets_sites_client:titre_configurer_projets_sites_client</titre>
 		<url>configurer_projets_sites_client</url>
 	</bouton>
 
-	<bouton id='info_config' parent='bando_administration'>
+	<bouton id='info_config_bando' parent='bando_administration'>
 		<icone>prive/themes/spip/images/projets_sites_client-16.png</icone>
 		<titre>projets_sites_client:titre_info_config</titre>
 		<url>info_config</url>

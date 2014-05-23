@@ -1,8 +1,8 @@
 <paquet
 	prefix="projets_sites_client"
 	categorie="outil"
-	version="0.4.7"
-	etat="dev"
+	version="0.4.8"
+	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/projets_sites_client-64.png"
 	documentation=""
