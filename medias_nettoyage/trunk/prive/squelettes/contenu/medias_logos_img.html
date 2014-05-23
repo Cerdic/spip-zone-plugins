@@ -1,5 +1,13 @@
 <h1><:medias_nettoyage:titre_page_medias_logos_img:></h1>
 <div class="nettoyeur"></div>
 
+<div class='onglets_simple clearfix'>
+    <ul>
+        [<li>(#SELF|parametre_url{mode,' '}|lien_ou_expose{<:medias_nettoyage:mode_tous:>,#ENV{mode,' '}|=={' '},ajax})</li>]
+        [<li>(#SELF|parametre_url{mode,'on'}|lien_ou_expose{<:medias_nettoyage:mode_on:>,#ENV{mode}|=={'on'},ajax})</li>]
+        [<li>(#SELF|parametre_url{mode,'off'}|lien_ou_expose{<:medias_nettoyage:mode_off:>,#ENV{mode}|=={'off'},ajax})</li>]
+    </ul>
+</div>
+
 <INCLURE{fond=prive/objets/liste/medias,liste=(#ENV{mode,''}|medias_lister_logos_fichiers),sinon=<:medias_nettoyage:aucun_logo:>,env,ajax} />
 <div class="nettoyeur"></div>

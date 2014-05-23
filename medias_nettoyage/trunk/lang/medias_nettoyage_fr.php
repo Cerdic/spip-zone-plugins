@@ -55,6 +55,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // M
     'medias_nettoyage_nom' => 'Nettoyer la médiathèque',
+    'mode_off' => 'Mode \'off\'',
+    'mode_on' => 'Mode \'on\'',
+    'mode_tous' => 'Tous',
 
     // N
     'non' => 'Non <em>(peut faire ralentir votre site)</em>',
