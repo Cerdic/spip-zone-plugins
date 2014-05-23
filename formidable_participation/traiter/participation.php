@@ -54,8 +54,7 @@ function traiter_participation_dist($args, $retours){
 		'organisme' => $organisme_participation,
 		'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
 		'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
-		'tracking_id' => $id_formulaires_reponse,
-		'traiter_participation' => false,
+		'tracking_id' => $retours['id_formulaires_reponse'],
 	);
 	
 	// fabrique le pipeline traiter_formidableparticipation.

@@ -47,9 +47,3 @@ options:
       nom: 'champ_organisme_participation'
       label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
       env: true
-  -
-    saisie: 'textarea'
-    options:
-      nom: 'message_participation'
-      label: '<:formidableparticipation:traiter_participation_option_message_label:>'
-      rows: 4
