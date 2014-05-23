@@ -1,4 +1,0 @@
-
-Observations :
-- regarder si on ne pourrait pas utiliser ecrire_fichier(), lire_fichier(), sous_repertoire()… Est-ce vraiment utile ? Car ce plugin ne fait que déplacer, donc ne devrait pas prendre plus de place sur le disque normalement.
-- il faudrait mettre un verrou sur la fonction medias_deplacer_rep_obsoletes() pour qu'elle ne s'exécute que si un fichier/dossier obsolète existe. Sinon, pas la peine de le mettre en cron. Tant qu'on n'a pas trouvé une solution perrene, on lance un cron à 30 jours.
