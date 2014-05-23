@@ -9,42 +9,42 @@ options:
   -
     saisie: 'champ'
     options:
-      nom: 'champ_choix_abo'
-      label: '<:formidableparticipation:traiter_participation_champ_choix_abo_label:>'
-      explication: '<:formidableparticipation:traiter_participation_champ_choix_abo_explication:>'
+      nom: 'champ_choix_participation'
+      label: '<:formidableparticipation:traiter_participation_champ_choix_participation_label:>'
+      explication: '<:formidableparticipation:traiter_participation_champ_choix_participation_explication:>'
       env: true
   -
     saisie: 'input'
     options:
-      nom: 'choix_abo_oui'
-      label: '<:formidableparticipation:traiter_participation_champ_abo_oui:>'
+      nom: 'choix_participation_oui'
+      label: '<:formidableparticipation:traiter_participation_champ_participation_oui:>'
   -
     saisie: 'input'
     options:
-      nom: 'choix_abo_non'
-      label: '<:formidableparticipation:traiter_participation_champ_abo_non:>'     
+      nom: 'choix_participation_non'
+      label: '<:formidableparticipation:traiter_participation_champ_participation_non:>'     
   -
     saisie: 'champ'
     options:
-      nom: 'champ_email_abo'
+      nom: 'champ_email_participation'
       label: '<:formidableparticipation:traiter_participation_champ_email_label:>'
       env: true
   -
     saisie: 'champ'
     options:
-      nom: 'champ_nom_abo'
+      nom: 'champ_nom_participation'
       label: '<:formidableparticipation:traiter_participation_option_champ_nom_label:>'
       env: true
   -
     saisie: 'champ'
     options:
-      nom: 'champ_prenom_abo'
+      nom: 'champ_prenom_participation'
       label: '<:formidableparticipation:traiter_participation_option_champ_prenom_label:>'
       env: true
   -
     saisie: 'champ'
     options:
-      nom: 'champ_organisme_abo'
+      nom: 'champ_organisme_participation'
       label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
       env: true
   -

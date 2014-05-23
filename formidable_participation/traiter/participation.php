@@ -19,39 +19,39 @@ function traiter_participation_dist($args, $retours){
 	$champs = saisies_lister_champs($saisies);
 
 	// saisies dans le formulaire
-	if ($options['champ_choix_abo'])
-	  $choix_abo = _request($options['champ_choix_abo']);
+	if ($options['champ_choix_participation'])
+	  $choix_participation = _request($options['champ_choix_participation']);
 
-	if ($options['champ_email_abo'])
-	  $email_abo = _request($options['champ_email_abo']);
+	if ($options['champ_email_participation'])
+	  $email_participation = _request($options['champ_email_participation']);
 	
 	
-	if ($options['champ_nom_abo'])
-	  $nom_abo = _request($options['champ_nom_abo']);
+	if ($options['champ_nom_participation'])
+	  $nom_participation = _request($options['champ_nom_participation']);
 	
 	
-	if ($options['champ_prenom_abo'])
-	  $prenom_abo = _request($options['champ_prenom_abo']);
+	if ($options['champ_prenom_participation'])
+	  $prenom_participation = _request($options['champ_prenom_participation']);
 	
-	if ($options['champ_organisme_abo'])
-	  $organisme_abo = _request($options['champ_organisme_abo']);
+	if ($options['champ_organisme_participation'])
+	  $organisme_participation = _request($options['champ_organisme_participation']);
 		  
-	if ($options['champ_choix_abo']){
-		  $choix_abo = _request($options['champ_choix_abo']);
+	if ($options['champ_choix_participation']){
+		  $choix_participation = _request($options['champ_choix_participation']);
 		  
-		  if ($options['choix_abo_oui'])
-		  	  $abo_oui = $options['choix_abo_oui'];
+		  if ($options['choix_participation_oui'])
+		  	  $participation_oui = $options['choix_participation_oui'];
 		  
-		  if($choix_abo == $abo_oui) $choix_abo='participation';
-		  else $choix_abo='desparticipation';
+		  if($choix_participation == $participation_oui) $choix_participation='participation_oui';
+		  else $choix_participation='participation_non';
 	}
 	  
 	$options = array(
-		'choix_abo' => $choix_abo,
-		'email' => $email_abo,
-		'nom' => $nom_abo,
-		'prenom' => $prenom_abo,
-		'organisme' => $organisme_abo,
+		'choix_participation' => $choix_participation,
+		'email' => $email_participation,
+		'nom' => $nom_participation,
+		'prenom' => $prenom_participation,
+		'organisme' => $organisme_participation,
 		'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
 		'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
 		'tracking_id' => $id_formulaires_reponse,
@@ -61,7 +61,10 @@ function traiter_participation_dist($args, $retours){
 	// fabrique le pipeline traiter_formidableparticipation.
 	$pipeline = pipeline('traiter_formidableparticipation',array('args'=>$options,'data'=>$pipeline));
 
-	spip_log("$choix_abo pour $email_abo","formidable_abo");
+	spip_log("$choix_participation pour $email_participation","formidable_participation");
+	
+	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
+	$retours['traitements']['participation'] = true;
 	
 	return $retours;
 }
