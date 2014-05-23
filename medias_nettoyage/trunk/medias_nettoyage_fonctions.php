@@ -374,7 +374,7 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     if (intval(spip_version()) == 2) {
         include_spip('base/connect_sql');
         $tables_objets = (isset($GLOBALS['tables_principales']))
-        ? $GLOBALS['tables_principales']
+        ? array_keys($GLOBALS['tables_principales'])
         : array('spip_articles',
             'spip_rubriques',
             'spip_auteurs',
