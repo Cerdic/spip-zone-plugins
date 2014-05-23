@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Fonction d'installation et de mise à jour du plugin Formulaires de abonnement.
+ * Fonction d'installation et de mise à jour du plugin Formulaires d'inscription
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -28,7 +28,7 @@ function formidableinscription_upgrade($nom_meta_base_version, $version_cible) {
 
 
 /**
- * Fonction de désinstallation du plugin Formulaires de abonnement.
+ * Fonction de désinstallation du plugin Formulaires d'inscription
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP

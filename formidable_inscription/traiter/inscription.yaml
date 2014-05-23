@@ -9,42 +9,42 @@ options:
   -
     saisie: 'champ'
     options:
-      nom: 'champ_choix_abo'
-      label: '<:formidableinscription:traiter_inscription_champ_choix_abo_label:>'
-      explication: '<:formidableinscription:traiter_inscription_champ_choix_abo_explication:>'
+      nom: 'champ_choix_inscription'
+      label: '<:formidableinscription:traiter_inscription_champ_choix_inscription_label:>'
+      explication: '<:formidableinscription:traiter_inscription_champ_choix_inscription_explication:>'
       env: true
   -
     saisie: 'input'
     options:
-      nom: 'choix_abo_oui'
-      label: '<:formidableinscription:traiter_inscription_champ_abo_oui:>'
+      nom: 'choix_inscription_oui'
+      label: '<:formidableinscription:traiter_inscription_champ_inscription_oui:>'
   -
     saisie: 'input'
     options:
-      nom: 'choix_abo_non'
-      label: '<:formidableinscription:traiter_inscription_champ_abo_non:>'     
+      nom: 'choix_inscription_non'
+      label: '<:formidableinscription:traiter_inscription_champ_inscription_non:>'     
   -
     saisie: 'champ'
     options:
-      nom: 'champ_email_abo'
+      nom: 'champ_email_inscription'
       label: '<:formidableinscription:traiter_inscription_champ_email_label:>'
       env: true
   -
     saisie: 'champ'
     options:
-      nom: 'champ_nom_abo'
+      nom: 'champ_nom_inscription'
       label: '<:formidableinscription:traiter_inscription_option_champ_nom_label:>'
       env: true
   -
     saisie: 'champ'
     options:
-      nom: 'champ_prenom_abo'
+      nom: 'champ_prenom_inscription'
       label: '<:formidableinscription:traiter_inscription_option_champ_prenom_label:>'
       env: true
   -
     saisie: 'champ'
     options:
-      nom: 'champ_organisme_abo'
+      nom: 'champ_organisme_inscription'
       label: '<:formidableinscription:traiter_inscription_option_champ_organisme_label:>'
       env: true
   -
