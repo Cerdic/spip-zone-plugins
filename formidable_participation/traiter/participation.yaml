@@ -1,0 +1,55 @@
+
+titre: '<:formidableparticipation:traiter_participation_titre:>'
+description: '<:formidableparticipation:traiter_participation_description:>'
+options:
+  -
+    saisie: 'explication'
+    options:
+      texte: '<:formidableparticipation:traiter_participation_necessite_explication:>'
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_choix_abo'
+      label: '<:formidableparticipation:traiter_participation_champ_choix_abo_label:>'
+      explication: '<:formidableparticipation:traiter_participation_champ_choix_abo_explication:>'
+      env: true
+  -
+    saisie: 'input'
+    options:
+      nom: 'choix_abo_oui'
+      label: '<:formidableparticipation:traiter_participation_champ_abo_oui:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'choix_abo_non'
+      label: '<:formidableparticipation:traiter_participation_champ_abo_non:>'     
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_email_abo'
+      label: '<:formidableparticipation:traiter_participation_champ_email_label:>'
+      env: true
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_nom_abo'
+      label: '<:formidableparticipation:traiter_participation_option_champ_nom_label:>'
+      env: true
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_prenom_abo'
+      label: '<:formidableparticipation:traiter_participation_option_champ_prenom_label:>'
+      env: true
+  -
+    saisie: 'champ'
+    options:
+      nom: 'champ_organisme_abo'
+      label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
+      env: true
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'message_participation'
+      label: '<:formidableparticipation:traiter_participation_option_message_label:>'
+      rows: 4

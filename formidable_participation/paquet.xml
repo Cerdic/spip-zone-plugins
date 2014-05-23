@@ -1,15 +1,15 @@
 <paquet
-	prefix="formidableinscription"
+	prefix="formidableparticipation"
 	categorie="communication"
 	version="1.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/formidableinscription-64.png"
+	logo="prive/themes/spip/images/formidableparticipation-64.png"
 	documentation=""
 	schema="1.0.0"
 >
 
-	<nom>Formulaires d'inscription</nom>
+	<nom>Formulaires de participation</nom>
 
 	<auteur lien='http://elastick.net'>Anne-lise Martenot</auteur>
 
