@@ -1,0 +1,47 @@
+<plugin>
+	<nom>Nettoyer la médiathèque</nom>
+	<description><multi>[fr]Ce plugin permet de lister les documents présents physiquement dans le répertoire IMG mais qui ne sont plus référencés en BDD. Une tâche de fond déplace ces fichiers dans un répertoire IMG/orphelins.</multi></description>
+	<slogan>On range nos medias!</slogan>
+	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
+	<prefix>medias_nettoyage</prefix>
+	<version>0.8.7</version>
+	<etat>stable</etat>
+	<categorie>outil</categorie>
+
+	<auteur>Venfu</auteur>
+	<auteur>Teddy Payet</auteur>
+
+	<options>medias_nettoyage_options.php</options>
+	<fonctions>medias_nettoyage_fonctions.php</fonctions>
+
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>medias_nettoyage_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>medias_nettoyage_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>medias_nettoyage_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="Iterateurs" version="[1.0.1;]" />
+	<necessite id="saisies" version="[1.20.0;]" />
+
+	<bouton id="medias_tabbord" parent="naviguer">
+		<icone>prive/themes/spip/images/medias_tabbord-24.png</icone>
+		<titre>medias_nettoyage:titre_page_medias_tabbord</titre>
+		<url>medias_tabbord</url>
+	</bouton>
+
+	<!-- Pour le plugin Bandeau et SPIP 3 -->
+	<bouton id="medias_tabbord_bando" parent="bando_edition">
+		<icone>images/medias_tabbord-16.png</icone>
+		<titre>medias_nettoyage:titre_page_medias_tabbord</titre>
+		<url>medias_tabbord</url>
+	</bouton>
+
+</plugin>

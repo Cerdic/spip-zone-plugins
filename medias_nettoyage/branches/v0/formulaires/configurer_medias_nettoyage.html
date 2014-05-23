@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:medias_nettoyage:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		[(#SAISIE{radio,activation, obligatoire=oui,
+			label=<:medias_nettoyage:label_activation_horaires:>,
+			explication=<:medias_nettoyage:explication_activation_horaires:>,
+			datas=#ARRAY{oui,<:medias_nettoyage:oui:>,non,<:medias_nettoyage:non:>},
+			defaut='oui'})]
+
+		[(#SAISIE{selection,horaires,
+			label=<:medias_nettoyage:label_horaires:>,
+			explication=<:medias_nettoyage:explication_horaires:>,
+			datas=#ARRAY{0-600,<:medias_nettoyage:horaire_00_06:>,600-1200,<:medias_nettoyage:horaire_06_12:>,1200-1800,<:medias_nettoyage:horaire_12_18:>,1800-2400,<:medias_nettoyage:horaire_18_24:>},
+			defaut='0-600'})]
+		</ul>
+		<input type="hidden" name="_meta_casier" value="medias_nettoyage" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
