@@ -1,17 +1,17 @@
 <?php
 /**
- * Traitement abonnement à la saisie d'un formulaire
+ * Traitement inscription à la saisie d'un formulaire
  *
- * @plugin     Formulaires d'abonnement
+ * @plugin     Formulaires d'inscription
  * @copyright  2014
  * @author     Anne-lise Martenot
  * @licence    GNU/GPL
- * @package    SPIP\Formidableabonnement\traiter\abonnement
+ * @package    SPIP\Formidableinscription\traiter\inscription
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function traiter_abonnement_dist($args, $retours){
+function traiter_inscription_dist($args, $retours){
 	$formulaire = $args['formulaire'];
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
@@ -42,8 +42,8 @@ function traiter_abonnement_dist($args, $retours){
 		  if ($options['choix_abo_oui'])
 		  	  $abo_oui = $options['choix_abo_oui'];
 		  
-		  if($choix_abo == $abo_oui) $choix_abo='abonnement';
-		  else $choix_abo='desabonnement';
+		  if($choix_abo == $abo_oui) $choix_abo='inscription';
+		  else $choix_abo='desinscription';
 	}
 	  
 	$options = array(
@@ -55,11 +55,11 @@ function traiter_abonnement_dist($args, $retours){
 		'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
 		'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
 		'tracking_id' => $id_formulaires_reponse,
-		'traiter_abonnement' => false,
+		'traiter_inscription' => false,
 	);
 	
-	// fabrique le pipeline traiter_formidableabonnement.
-	$pipeline = pipeline('traiter_formidableabonnement',array('args'=>$options,'data'=>$pipeline));
+	// fabrique le pipeline traiter_formidableinscription.
+	$pipeline = pipeline('traiter_formidableinscription',array('args'=>$options,'data'=>$pipeline));
 
 	spip_log("$choix_abo pour $email_abo","formidable_abo");
 	
