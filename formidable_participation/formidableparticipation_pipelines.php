@@ -24,7 +24,7 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 		$id_auteur = $flux['args']['id_auteur'];
 		$nom = $flux['args']['nom'];
 		$prenom = $flux['args']['prenom'];
-		if(isset($flux['args']['organisme'])) $organisme = '('.$flux['args']['organisme'].')';
+		if($flux['args']['organisme']) $organisme = '('.$flux['args']['organisme'].')';
 		$nom = "$prenom $nom $organisme";
 		
 		// si evenement, on insere le participant
@@ -34,12 +34,15 @@ function formidableparticipation_traiter_formidableparticipation($flux){
 			    if($id_auteur>0){
 				if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND id_auteur='.intval($id_auteur)))
 				    sql_updateq('spip_evenements_participants',array('reponse'=>$reponse,'date'=>'NOW()'),'id_evenement='.intval($id_evenement).' AND id_auteur='.intval($id_auteur));
+			    	else
+			    	sql_insertq('spip_evenements_participants',array('id_auteur'=>$id_auteur,'id_evenement'=>$id_evenement,'nom'=>$nom,'email'=>$email,'reponse'=>$reponse,'date'=>'NOW()'));
+
 			    } else {
 				    //sans auteur logé si l'email existe, le mettre à jour
 				    if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement)." AND email=".sql_quote($email)))
 				    sql_updateq('spip_evenements_participants',array('reponse'=>$reponse,'date'=>'NOW()'),'id_evenement='.intval($id_evenement).' AND email='.sql_quote($email));
 				else
-					sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'nom'=>$nom,'email'=>$email,'reponse'=>$reponse,'date'=>'NOW()'));
+				sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'nom'=>$nom,'email'=>$email,'reponse'=>$reponse,'date'=>'NOW()'));
 			    }
 			    
 		}
