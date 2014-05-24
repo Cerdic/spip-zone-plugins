@@ -14,7 +14,9 @@
 	<auteur lien='http://elastick.net'>Anne-lise Martenot</auteur>
 
 	<licence>GNU/GPL</licence>
+	<pipeline nom="traiter_formidableparticipation" inclure="formidableparticipation_pipelines.php" />
 	
 	<necessite nom="formidable" compatibilite="[2.5.11;2.*.*]" />
+	<utilise nom="agenda" compatibilite="[3.14.2;[" />
 
 </paquet>

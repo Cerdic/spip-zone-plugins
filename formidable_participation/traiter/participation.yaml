@@ -28,6 +28,7 @@ options:
     options:
       nom: 'champ_email_participation'
       label: '<:formidableparticipation:traiter_participation_champ_email_label:>'
+      obligatoire: 'oui'
       env: true
   -
     saisie: 'champ'
@@ -47,3 +48,9 @@ options:
       nom: 'champ_organisme_participation'
       label: '<:formidableparticipation:traiter_participation_option_champ_organisme_label:>'
       env: true
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_evenement_participation'
+      label: '<:formidableparticipation:traiter_participation_id_evenement_participation:>'
+      explication: '<:formidableparticipation:traiter_participation_id_evenement_participation_explication:>'

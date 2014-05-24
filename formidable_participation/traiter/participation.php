@@ -16,7 +16,7 @@ function traiter_participation_dist($args, $retours){
 	$options = $args['options'];
 	$saisies = unserialize($formulaire['saisies']);
 	$traitements = unserialize($formulaire['traitements']);
-	$champs = saisies_lister_champs($saisies);
+	//$champs = saisies_lister_champs($saisies);
 
 	// saisies dans le formulaire
 	if ($options['champ_choix_participation'])
@@ -42,11 +42,12 @@ function traiter_participation_dist($args, $retours){
 		  if ($options['choix_participation_oui'])
 		  	  $participation_oui = $options['choix_participation_oui'];
 		  
-		  if($choix_participation == $participation_oui) $choix_participation='participation_oui';
-		  else $choix_participation='participation_non';
+		  if($choix_participation == $participation_oui) $choix_participation='oui';
+		  else $choix_participation='non';
 	}
 	  
 	$options = array(
+		'id_evenement'=> $options['id_evenement_participation'], //si oui, traitement avec agenda
 		'choix_participation' => $choix_participation,
 		'email' => $email_participation,
 		'nom' => $nom_participation,
@@ -60,7 +61,7 @@ function traiter_participation_dist($args, $retours){
 	// fabrique le pipeline traiter_formidableparticipation.
 	$pipeline = pipeline('traiter_formidableparticipation',array('args'=>$options,'data'=>$pipeline));
 
-	spip_log("$choix_participation pour $email_participation","formidable_participation");
+	spip_log("$choix_participation pour $email_participation evenement N°".$options['id_evenement'],"formidable_participation");
 	
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['participation'] = true;
