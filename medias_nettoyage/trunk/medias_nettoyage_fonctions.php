@@ -578,6 +578,7 @@ function test_medias ()
  * pour X raisons n'ont pas été nettoyé de ces coquilles.
  *
  * @uses medias_creer_repertoires_orphelins()
+ * @uses medias_lister_documents_bdd()
  * @uses _DIR_IMG
  * @uses _MEDIAS_NETTOYAGE_REP_ORPHELINS
  *
@@ -603,6 +604,8 @@ function medias_deplacer_rep_obsoletes ()
 
     // on cherche les fichiers de type IMG/cache-20x20-blabla.ext
     $fichiers_obsoletes = find_all_in_path('IMG/', '/cache-');
+    // on vérifie tout de même que ces fichiers ne font pas parti des documents en BDD
+    $fichiers_obsoletes = array_unique(array_diff($fichiers_obsoletes, medias_lister_documents_bdd()));
 
     foreach ($pattern_obsoletes as $pattern) {
         $repertoires = glob($repertoire_img . $pattern . "*");
