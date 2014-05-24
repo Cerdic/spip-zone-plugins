@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/medias_nettoyage-64.png"
+	documentation="http://contrib.spip.net/Nettoyer-la-mediatheque"
 >
 
 	<nom>Nettoyer la m&#233;diath&#232;que</nom>
