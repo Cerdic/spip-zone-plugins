@@ -30,12 +30,12 @@
                 <B_decl_art>
                     <div class="choix">
                     <BOUCLE_decl_art(DECLINAISONS){id_declinaison}{statut ?}{par num titre,titre}>
-                        <input type="checkbox" name="id_objet_prix[#ID_EVENEMENT]" class="checkbox declinaison" id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]" value="#ID_PRIX_OBJET"[(#ID_PRIX_OBJET|in_array{#ENV{id_objet_prix}}|oui) checked="checked"]/>   
+                        <input type="checkbox" name="id_objet_prix[#ID_EVENEMENT]" class="checkbox declinaison" id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]" value="#ID_PRIX_OBJET"[(#ID_PRIX_OBJET|=={#ENV{id_objet_prix}|table_valeur{#ID_EVENEMENT}}|oui) checked="checked"]/>   
                                 <label for="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]">#TITRE[ : <strong data-prix="#ID_PRIX_OBJET">(#GET{prix})</strong>]</label>
                     </BOUCLE_decl_art>     
                     </div>  
                     </B_decl_art>                                            
-                      <input type="checkbox" name="id_objet_prix[#ID_EVENEMENT]" class="checkbox" id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]" value="#ID_PRIX_OBJET"[(#ID_PRIX_OBJET|in_array{#ENV{id_objet_prix}}|oui) checked="checked"]/> 
+                      <input type="checkbox" name="id_objet_prix[#ID_EVENEMENT]" class="checkbox" id="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]" value="#ID_PRIX_OBJET"[(#ID_PRIX_OBJET|=={#ENV{id_objet_prix}|table_valeur{#ID_EVENEMENT}}|oui) checked="checked"]/> 
                        <label for="id_objet_prix[_(#ID_EVENEMENT)][_(#ID_PRIX_OBJET)]">
                         [ <strong data-prix="#ID_PRIX_OBJET">(#GET{prix})</strong>]
                         </label>
