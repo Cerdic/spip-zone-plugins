@@ -725,9 +725,7 @@ function critere_SPHINX2_filter_dist($idb, &$boucles, $crit) {
  */
 function critere_SPHINX2_pagination_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$spagination_init)) { \$command['pagination'] = array(); \$spagination_init = true; }\n";
-
+	// critere unique
 	$boucle->hash .= 	"\t\$command['pagination'] = array("
 		. "intval(@\$Pile[0]['debut".$idb."']),"
 		. (isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) : '0')
