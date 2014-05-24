@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @package SPIP\Indexer\Iterateur\Sphinx
 **/
 
-include_spip('iterateur/data');
 
 /**
  * Créer une boucle sur un itérateur SPHINX
@@ -24,11 +23,7 @@ function iterateur_SPHINX_dist($b) {
 	$b->iterateur = 'SPHINX'; # designe la classe d'iterateur
 	$b->show = array(
 		'field' => array(
-			'docs' => 'ARRAY',
-			'meta' => 'ARRAY',
-			'facets' => 'ARRAY',
-			'query' => 'STRING',
-			#'*' => 'ALL' // Champ joker *
+			'*' => 'ALL' // Champ joker *
 		)
 	);
 	return $b;
@@ -73,7 +68,7 @@ class IterateurSPHINX implements Iterator {
 	protected $queryApi = null;
 
 	/**
-	 * Résultat de la requête à Sphinx
+	 * Résultats par la requête à Sphinx
 	 * @var array
 	 */
 	protected $result = array();
@@ -83,6 +78,12 @@ class IterateurSPHINX implements Iterator {
 	 * @var null
 	 */
 	protected $cle = null;
+
+	/**
+	 * facettes
+	 * @var array
+	 */
+	protected $facet = array();
 
 	/**
 	 * Valeur courante
@@ -103,7 +104,7 @@ class IterateurSPHINX implements Iterator {
 			'selection' => array(),
 			'recherche' => array(),
 			'orderby'   => array(),
-			'groupby'   => array(),
+			'group'     => array(),
 			'snippet'   => array(),
 			'facet'     => array(),
 			'filter'    => array(),
@@ -119,24 +120,72 @@ class IterateurSPHINX implements Iterator {
 
 		$this->setIndex($this->command['index']);
 		$this->setSelection($this->command['selection']);
-		$this->setRecherche($this->command['recherche']);
+		$this->setMatch($this->command['recherche']);
 		$this->setOrderBy($this->command['orderby']);
-		$this->setGroupBy($this->command['group']);
+		$this->setGroupBy($this->command['group']); // groupby interfère avec spip :/
 		$this->setFacet($this->command['facet']);
 
 		$this->setFilter($this->command['filter']);
 
 		$this->setSnippet($this->command);
 
+
 		$this->setPagination($this->command['pagination']);
 
 		$this->runQuery();
+
 	}
 
 
+	/**
+	 * Sauvegarde des données pour utilisation ultérieure
+	 * dans les squelettes via les balises `#SPHINX_xx`
+	 * où xx est la clé sauvegardée.
+	 *
+	 * @param string $cle
+	 * @param mixed $val
+	 * @return void
+	**/
+	private function save($cle, $val) {
+		if (!isset($GLOBALS['SphinxSave'])) {
+			$GLOBALS['SphinxSave'] = array();
+		}
+		// identifiant de la boucle
+		$id = $this->command['id'];
+		if (!isset($GLOBALS['SphinxSave'][$id])) {
+			$GLOBALS['SphinxSave'][$id] = array();
+		}
+		$GLOBALS['SphinxSave'][$id][$cle] = $val;
+	}
+
+	/**
+	 * Sauvegarde toutes les données pour utilisation ultérieure
+	 *
+	 * @param array $data
+	 * @return void
+	 */
+	private function saveAll($data) {
+		foreach ($data as $cle => $val) {
+			$this->save($cle, $val);
+		}
+	}
+
+
+	/**
+	 * Exécute la requête
+	 *
+	 * Exécute la requête, sauvegarde des données, retravaille
+	 * les résultats pour que la pagination fonctionne.
+	 *
+	 * @param 
+	 * @return 
+	**/
 	public function runQuery() {
 		$query  = $this->queryApi->get();
 		$result = $this->sphinxQL->allfetsel($query);
+
+		$this->save('query', $query);
+
 		if (!$result) {
 			return false;
 		}
@@ -151,7 +200,19 @@ class IterateurSPHINX implements Iterator {
 			$result['query']['docs'] = array_pad($result['query']['docs'], $result['query']['meta']['total'], null);
 		}
 
-		$this->result = $result;
+		// remettre les alias sur les facettes :
+		// {facet truc, FORMULE()} cree la facette 'truc'
+		$facets = array();
+		foreach ($this->facet as $f) {
+			$facets[$f['alias']] = array_shift($result['query']['facets']);
+		}
+		$result['query']['facets'] = $facets;
+
+
+		$this->result = $result['query'];
+		unset($result['query']['docs']);
+		$this->saveAll($result['query']);
+
 		return true;
 	}
 
@@ -212,16 +273,16 @@ class IterateurSPHINX implements Iterator {
 	 * @param array $index Liste des index
 	 * @return bool True si au moins un index est ajouté, false sinon
 	**/
-	public function setRecherche($recherche) {
-		if (!is_array($recherche)) $recherche = array($recherche);
-		$recherche = array_filter($recherche);
-		if (!$recherche) {
+	public function setMatch($match) {
+		if (!is_array($match)) $match = array($match);
+		$match = array_filter($match);
+		if (!$match) {
 			return false;
 		}
-		$match = implode(' ',$recherche);
+		$match = implode(' ',$match);
 		$this->queryApi
 			->select('WEIGHT() AS score')
-			->where('MATCH(' . $this->quote( $recherche ) . ')');
+			->match( $match );
 		return true;
 	}
 
@@ -244,7 +305,6 @@ class IterateurSPHINX implements Iterator {
 		}
 		return true;
 	}
-
 
 	public function setGroupby($groupby) {
 		if (!is_array($groupby)) $groupby = array($groupby);
@@ -284,11 +344,11 @@ class IterateurSPHINX implements Iterator {
 	/**
 	 * Définir la pagination
 	 *
-	 * @param array $pagination (#DEBUT_DOCUMENTS,20)
+	 * @param array $pagination
 	 * @return bool True si une pagination est demandee
 	**/
 	public function setPagination($pagination) {
-		# {pages #DEBUT_DOCUMENTS, 20}
+		# {pagination 20}
 		if (is_array($pagination) and $pagination) {
 			$debut = intval($pagination[0]);
 			$nombre = 20;
@@ -430,12 +490,12 @@ class IterateurSPHINX implements Iterator {
 			if (!is_array($filter) OR !isset($filter['valeur']) OR !$valeur = $filter['valeur']) {
 				continue;
 			}
-			if (is_string($valeur)) {
-				$valeur = trim($valeur);
-				$valeurs = array($valeur);
-			} else {
+			if (is_array($valeur)) {
 				$valeurs = $valeur;
 				$valeur = 'Array !';
+			} else {
+				$valeur = trim($valeur);
+				$valeurs = array($valeur);
 			}
 			$valeurs = array_unique(array_filter($valeurs));
 			if (!$valeurs) {
@@ -467,13 +527,15 @@ class IterateurSPHINX implements Iterator {
 		}
 	}
 
+
 	/**
 	 * Revenir au depart
 	 * @return void
 	 */
 	public function rewind() {
-		reset($this->result);
-		list($this->cle, $this->valeur) = each($this->result);
+		if (!is_array($this->result['docs'])) return false;
+		reset($this->result['docs']);
+		list($this->cle, $this->valeur) = each($this->result['docs']);
 	}
 
 	/**
@@ -505,8 +567,9 @@ class IterateurSPHINX implements Iterator {
 	 * @return void
 	 */
 	public function next(){
-		if ($this->valid())
-			list($this->cle, $this->valeur) = each($this->result);
+		if ($this->valid()) {
+			list($this->cle, $this->valeur) = each($this->result['docs']);
+		}
 	}
 
 	/**
@@ -515,7 +578,7 @@ class IterateurSPHINX implements Iterator {
 	 */
 	public function count() {
 		if (is_null($this->total))
-			$this->total = count($this->result);
+			$this->total = count($this->result['docs']);
 	  return $this->total;
 	}
 
@@ -569,6 +632,25 @@ function critere_SPHINX_select_dist($idb, &$boucles, $crit) {
 
 	foreach ($crit->param as $param){
 		$boucle->hash .= "\t\$command['selection'][] = "
+				. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
+	}
+}
+
+
+/**
+ * Indiquer les group by de la requête
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX_groupby_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	// critere multiple
+	$boucle->hash .= "\n\tif (!isset(\$group_init)) { \$command['group'] = array(); \$group_init = true; }\n";
+
+	foreach ($crit->param as $param){
+		$boucle->hash .= "\t\$command['group'][] = "
 				. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
 	}
 }
@@ -633,6 +715,25 @@ function critere_SPHINX_filter_dist($idb, &$boucles, $crit) {
 		. "\t);\n";
 }
 
+
+/**
+ * Pagination
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX_pagination_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	// critere unique
+	$boucle->hash .= 	"\t\$command['pagination'] = array("
+		. "intval(@\$Pile[0]['debut".$idb."']),"
+		. (isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) : '0')
+		. ");\n";
+
+	// appliquer enfin le critere {pagination} normal
+	return critere_pagination_dist($idb, $boucles, $crit);
+}
 
 
 /**
@@ -701,15 +802,53 @@ function critere_SPHINX_parinverse($idb, $boucles, $crit, $sens = '') {
 	}
 }
 
-function critere_SPHINX_pages_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
 
-	// critere multiple
-	$boucle->hash .= "\n\tif (!isset(\$pagination_init)) { \$command['pagination'] = array(); \$pagination_init = true; }\n";
-
-	foreach ($crit->param as $param){
-		$boucle->hash .= "\t\$command['pagination'][] = "
-				. calculer_liste($param, array(), $boucles, $boucles[$idb]->id_parent) . ";\n";
-	}
+/**
+ * Récupère pour une balise `#SPHINX_QQC` la valeur de 'qqc'
+ * dans les meta données associées à la requête
+ *
+ * - `#SPHINX_QUERY`
+ * - `#SPHINX_META`
+ * - `#SPHINX_FACETS`
+ *
+ * @param Champ $p
+ * @return Champ
+**/
+function balise_SPHINX__dist($p){
+	$champ = $p->nom_champ;
+	if ($champ == 'SPHINX_') {
+		$msg = _T('zbug_balise_sans_argument', array('balise' => ' SPHINX_'));
+		erreur_squelette($msg, $p);
+		$p->interdire_scripts = true;
+		return $p;
+	};
+	$champ = substr($champ, 7);
+	return calculer_balise_SPHINX_CHAMP($p, $champ);
 }
 
+
+
+
+/**
+ * Récupère pour une balise `#SPHINX_QQC` la valeur de 'qqc'
+ * dans les meta données associées à la requête.
+ *
+ * @param Champ $p
+ * @param string $champ
+ * @return Champ
+**/
+function calculer_balise_SPHINX_CHAMP($p, $champ) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if ($b === '' || !isset($p->boucles[$b])) {
+		$msg = array('zbug_champ_hors_boucle', array('champ' => '#SPHINX_' . $champ));
+		erreur_squelette($msg, $p);
+		$p->interdire_scripts = true;
+		return $p;
+	}
+
+	$champ = strtolower($champ);
+	$p->code = '(isset($GLOBALS["SphinxSave"]["'.$b.'"]["'.$champ.'"]) ? $GLOBALS["SphinxSave"]["'.$b.'"]["'.$champ.'"] : "")';
+
+	$p->interdire_scripts = false;
+	return $p;
+}

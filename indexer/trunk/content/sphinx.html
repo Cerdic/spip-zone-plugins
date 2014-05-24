@@ -1,4 +1,4 @@
-
+<ul id=messages>
 <h1>Test SPHINX</h1>
 
 [(#FORMULAIRE_RECHERCHE{#SELF})]
@@ -24,19 +24,42 @@
 
 <B_filtres>
 <h4>Filtres:</h4>
-<BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année}}>
-[(#ENV{#CLE}|oui)
+<BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année,stars,Aucune etoile}}>[
+(#ENV{#CLE}|oui)
 	<div>
 		<a class="btn btn-mini" href="[(#SELF|parametre_url{#CLE,''})]"><i class="icon-remove"></i> [(#ENV{#CLE}|=={-}|?{#VALEUR,#ENV{#CLE}})]</a>
 	</div>
 ]</BOUCLE_filtres>
 
 
+<BOUCLE_max_sphinx(SPHINX)
+	{index #ENV{source,spip}}
+	{recherche #ENV*{recherche}}
+	{0,1}
+>#SET{max,#SCORE}</BOUCLE_max_sphinx>
+
+
+<B_recherche_sphinx>
+	<h1>Dans la boucle (SPHINX)</h1>
+
+	<h2>Documents trouvés</h2>
+
+	[<p>(#SPHINX_MESSAGE)</p>]
+
+	[<div><tt>(#SPHINX_QUERY)</tt></div>]
+
+	<small>
+	[(#SPHINX_META|table_valeur{total}|=={1000}|?{'+ de '}) ][(#SPHINX_META|table_valeur{total}) ]résultats
+		([(#SPHINX_META|table_valeur{time}|mult{1000})] ms)
+	</small>
+
+	<div class='liste long resultats'>
+		[<div class="pagination">(#ENV{debut_recherche_sphinx}|?{#PAGINATION,#ANCRE_PAGINATION})</div>]
+		<ul class='liste-items'>
+
 <BOUCLE_recherche_sphinx(SPHINX)
 	{index #ENV{source,spip}}
 	{recherche #ENV*{recherche}}
-
-	{pages #DEBUT_DOCUMENTS}
 
 	{filter #ENV{annee},  'YEAR(date) = @valeur' }
 	{filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
@@ -47,15 +70,37 @@
 	{facet auteur, properties.authors ORDER BY COUNT(*) DESC}
 	{facet tag,    properties.tags ORDER BY COUNT(*) DESC}
 	{facet annee, YEAR(date) ORDER BY date DESC}
+
+	{pagination 10}
 >
 
-	<h1>Dans la boucle (SPHINX)</h1>
-	<pre>#QUERY</pre>
-
-	[(#INCLURE{fond=liste/sphinx_documents,docs,meta,env})]
-	[(#INCLURE{fond=liste/sphinx_facettes,facets,env})]
-	[(#INCLURE{fond=liste/sphinx_metas,meta,env})]
+	[(#SET{properties,#PROPERTIES|json_decode{1}})]
+	<li class='item'>
+		<article class='entry article hentry'>
+			<strong class='h3-like entry-title'>#SCORE/#GET{max} = [(#SCORE|mult{100}|div{#GET{max}}|intval)%] <a href="#URI">#DATE</a></strong>
+			<p class="publication">
+				[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span> <:par_auteur:> (#GET{properties}|table_valeur{authors}|implode{', '})</span>]
+			</p>
+			[<div class="introduction entry-content">(#SNIPPET|sinon{#SUMMARY})</div>]
+		</article>
+	</li>
 
 </BOUCLE_recherche_sphinx>
+		</ul>
+	</div>
 
+	[<div class="pagination">(#PAGINATION)</div>]
 
+	[(#INCLURE{fond=liste/sphinx_facettes,facets=#SPHINX_FACETS,env})]
+	[(#INCLURE{fond=liste/sphinx_metas,meta=#SPHINX_META,env})]
+
+</B_recherche_sphinx>
+	<h2>Pas de résultat pour :</h2>
+	<div><tt>#SPHINX_QUERY</tt></div>
+	[<p>(#SPHINX_MESSAGE)</p>]
+
+	[(#INCLURE{fond=liste/sphinx_metas,meta=#SPHINX_META,env})]
+
+<//B_recherche_sphinx>
+
+</ul>
