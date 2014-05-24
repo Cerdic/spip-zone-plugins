@@ -734,7 +734,7 @@ function critere_SPHINX2_pagination_dist($idb, &$boucles, $crit) {
 		. ");\n";
 
 	// appliquer enfin le critere {pagination} normal
-	return critere_pagination_dist($idb, &$boucles, $crit);
+	return critere_pagination_dist($idb, $boucles, $crit);
 }
 
 
