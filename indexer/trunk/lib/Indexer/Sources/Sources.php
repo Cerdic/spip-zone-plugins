@@ -5,7 +5,7 @@ namespace Indexer\Sources;
 
 class Sources implements \IteratorAggregate {
 	/** @var Indexer\Sources\SourceInterface[] */
-	private $sources = [];
+	private $sources = array();
 	
 	public function __construct() {
 		
