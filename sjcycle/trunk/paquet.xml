@@ -23,6 +23,6 @@
 	
 	<utilise nom="palette" compatibilite="[3.0.5;[" />
 	
-	<menu nom="sjcycle" titre="sjcycle:titre_menu" parent="menu_squelette" icone="prive/themes/spip/images/sjcycle-16.png" action="configurer_sjcycle" />
+	<menu nom="sjcycle" titre="sjcycle:titre_menu" parent="menu_squelette" icone="images/sjcycle-16.png" action="configurer_sjcycle" />
 	
 </paquet>
