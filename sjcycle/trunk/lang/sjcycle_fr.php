@@ -41,9 +41,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_random' => '&lt;sjcycleXX<strong>|random=true</strong>&gt; ou &lt;sjcycleXX<strong>|random=false</strong>&gt;',
 	'explication_paused' => '&lt;sjcycleXX<strong>|paused=true</strong>&gt; ou &lt;sjcycleXX<strong>|paused=false</strong>&gt;',
 	'explication_pager' => 'Cibler un bloc html qui contiendra la pagination en nommant sa classe ou son identifiant css. Par défaut : "<strong>.cycle-pager</strong>". &lt;sjcycleXX<strong>|pager=.cycle-pager</strong>&gt;',
-	'explication_mediabox'=>'Ouvre l\'image d\'origine suivant <a href=".?exec=configurer_mediabox">vos paramétrages de la mediabox</a>.',
-	'explication_tooltip'=>'Au survol, affiche une infobulle contenant titre et descriptif de l’image. Utilisation du plugin Tooltip de jQuery.',
-	'explication_tooltip_carac'=>'Afficher les caractéristiques de l\'image originale dans l\'infobulle : largeur, hauteur et poids.',
+	'explication_mediabox' => 'Ouvre l\'image d\'origine suivant <a href=".?exec=configurer_mediabox">vos paramétrages de la mediabox</a>.',
+	'explication_tooltip' => 'Au survol, affiche une infobulle contenant titre et descriptif de l’image. Utilisation du plugin Tooltip de jQuery.',
+	'explication_tooltip_carac' => 'Afficher les caractéristiques de l\'image originale dans l\'infobulle : largeur, hauteur et poids.',
+	'explication_carouselvisible' => 'Nombre de diapositives affichées simultanément (carousel-visible).<br /><strong>|carouselvisible=3</strong>',
+	'explication_carouseloffset' => 'Décalage (en pixels) de la première diapositive (carousel-offset).<br /><strong>|carouseloffset=20</strong>',
+	'explication_carouselslidedimension' => 'Largeur (carousel horizontal) ou hauteur (carousel vertical) d\'une diapositive (carousel-slide-dimension).<br /><strong>|carouselslidedimension=130</strong>',
+	'explication_carouselvertical' => '(carousel-vertical)<br /><strong>|carouselvertical=true</strong> ou <strong>|carouselvertical=false</strong>',
+	'explication_carouselfluid' => 'Adapter le carousel à la mise en page, seulement si horizontal (carousel-fluid).<br /><strong>|carouselfluid=true</strong> ou <strong>|carouselfluid=false</strong>',
+	'explication_option_carousel' => 'La taille des images doit être réglée avec <a href="#largeurmax">le paramètre "largeurmax"</a> et <a href="#hauteurmax">le paramètre "hauteurmax"</a> si besoin.',
 
 	// L
 	'label_afficher_aide' => 'Afficher un bloc d\'aide à la rédaction sur la page d\'édition d\'un article',
@@ -61,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_pauseonhovercontent' => 'Message lors de la pause au survol',
 	'label_allowwrap' => 'En boucle',
 	'label_allowwrap_false' => 'non',
-	'label_reverse' => 'à l\'envers',
+	'label_reverse' => 'À l\'envers',
 	'label_reverse_true' => 'oui',
 	'label_random' => 'Ordre aléatoire',
 	'label_random_true' => 'oui',
@@ -75,12 +81,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_fx_shuffle' => 'Remplacement - paquet de carte (shuffle)',
 	'label_fx_tileSlide' => 'Glissement par bandes en longueur (tileSlide)',
 	'label_fx_tileBlind' => 'Glissement par bandes en largeur (tileBlind)',
+	'label_fx_carousel' => 'Carousel (carousel)',
+	'label_carouselvisible' => 'Visibilité',
+	'label_carouseloffset' => 'Décalage',
+	'label_carouselslidedimension' => 'Dimension d\'une diapositive',
+	'label_carouselvertical' => 'Vertical',
+	'label_carouselvertical_true' => 'oui',
+	'label_carouselfluid' => 'Adaptatif - responsive',
+	'label_carouselfluid_true' => 'oui',
 	'label_fx_none' => 'Aucun (none)',
 	'label_tilevertical' => 'Glissement vertical',
 	'label_tilevertical_false' => 'non',
 	'label_mediabox' => 'Mediabox',
 	'label_mediabox_oui' => 'oui',
 	'label_next' => 'Bouton "suivant"',
+	'label_overlay' => 'Légende en surimpression',
 	'label_prev' => 'Bouton "précédent"',
 	'label_paused' => 'Départ arrêté',
 	'label_paused_true' => 'oui',
@@ -91,6 +106,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tooltip_carac_oui' => 'oui',
 	'legend_parametres_suplementaires' => 'Paramètres supplémentaires',
 	'legend_tooltip_box' => 'Paramètres tooltip et mediabox',
+	
+	// N
+	'non' => 'non',
+	
+	// O
+	'oui' => 'oui',
 	
 	// P
 	'parametres_diaporama' => 'Paramétrage général des diaporamas du site, peut être corrigé à la rédaction lors de l\'inclusion d\'un diaporama.<br /><small>&lt;sjcycleXX<strong>|right|largeurmax=250</strong>&gt;</small>',

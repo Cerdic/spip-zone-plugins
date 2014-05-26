@@ -57,6 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_alea_defaut' => 'Randomly',
 	'noisette_titre_noisette' => 'Title&nbsp;:',
 	'noisette_titre_sites_defaut' => 'Links',
+	'non' => 'no',
+	
+	// O
+	'oui' => 'yes',
 	
 	// P
 

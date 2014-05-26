@@ -20,17 +20,38 @@
 [(#SET{caption,		[(#ENV{caption,		#CONFIG{sjcycle/caption}})]})]
 [(#SET{captiontemplate,	[(#ENV{captiontemplate,	#CONFIG{sjcycle/captiontemplate}})]})]
 [(#SET{pauseonhovercontent,	[(#ENV{pauseonhovercontent,	#CONFIG{sjcycle/pauseonhovercontent}})]})]
+[(#SET{overlay,			[(#ENV{overlay,			#CONFIG{sjcycle/overlay}})]})]
+[(#SET{carouselvisible,		[(#ENV{carouselvisible,		#CONFIG{sjcycle/carouselvisible}})]})]
+[(#SET{carouseloffset,		[(#ENV{carouseloffset,		#CONFIG{sjcycle/carouseloffset}})]})]
+[(#SET{carouselslidedimension,	[(#ENV{carouselslidedimension,	#CONFIG{sjcycle/carouselslidedimension}})]})]
+[(#SET{carouselvertical,	[(#ENV{carouselvertical,	#CONFIG{sjcycle/carouselvertical}})]})]
+[(#SET{carouselfluid,		[(#ENV{carouselfluid,		#CONFIG{sjcycle/carouselfluid}})]})]
 
 [(#SET{liens_individuels,	[(#ENV{liens_individuels,	0})]})]
 
 [(#ENV{align}|match{left|right}|=={left}|?{ #SET{marginfl,"margin-right"}, #SET{marginfl,"margin-left"}})]
-[(#SET{style,	[float:(#ENV{align}|match{left|right});#GET{marginfl}:1em;margin-top:0;][background-color:(#GET{backgroundcolor});][max-width:(#GET{largeurmax})px;]	})]
+[(#SET{style,	[float:(#ENV{align}|match{left|right});#GET{marginfl}:1em;margin-top:0;][background-color:(#GET{backgroundcolor});][(#GET{fx}|=={carousel}|non)[max-width:(#GET{largeurmax})px;]]	})]
 
 [(#SET{cssbox,	[(#EVAL{8}|randomString)]})]
+
+[(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
+	- Si l'article n'existe pas dans la langue courante on met ou pas un lien
+	vers l'article de reference suivant la valeur de forcer_lien_reference ]
+<BOUCLE_contexte_article(ARTICLES){id_article=#ENV{lien_article}}>
+   [(#ENV{forcer_lien_reference}|oui)
+      #SET{id_article_a_lier,#ID_ARTICLE}
+      #SET{titre_article_a_lier,#TITRE}]
+   <BOUCLE_traductions(ARTICLES){traduction}>
+   	[(#ENV{lang}|=={#LANG}|oui)
+      	#SET{id_article_a_lier,#ID_ARTICLE}
+         #SET{titre_article_a_lier,#TITRE}]
+   </BOUCLE_traductions>
+</BOUCLE_contexte_article>
 
 <B_img>
 <style type="text/css">
 .cycle-paused:after {[ content:'(#GET{pauseonhovercontent})';][(#GET{pauseonhovercontent}|=={''}|oui) display:none;] }
+.texte_infobulle { text-align:left; }
 </style>
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 $(document).ready(function() {
@@ -53,10 +74,16 @@ $(document).ready(function() {
 		$("a.#GET{cssbox}").mediabox(box_settings);
 	]
 });
-
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
-<div class="cycle-slideshow"[ style="(#GET{style})"][(#GET{liens_individuels}|oui|ou{#CONFIG{sjcycle/mediabox}|=={oui}|oui})
-	data-cycle-slides="a"][ 
+
+#SET{slidebalise,img}
+[(#GET{liens_individuels}|oui) #SET{slidebalise,a}]
+[(#CONFIG{sjcycle/mediabox}|=={oui}|oui) #SET{slidebalise,a}]
+[(#GET{id_article_a_lier}|oui) #SET{slidebalise,a}]
+[(#CONFIG{sjcycle/tooltip}|=={oui}|oui|ou{#GET{liens_individuels}|non}) #SET{slidespan,div}]
+
+<div class="cycle-slideshow"[ style="(#GET{style})"][
+	data-cycle-slides="(#GET{slidebalise})"][ 
 	data-cycle-speed="(#GET{speed})"][ 
 	data-cycle-timeout="(#GET{timeout})"][ 
 	data-cycle-delay="(#GET{delay})"][ 
@@ -68,7 +95,12 @@ $(document).ready(function() {
 	data-cycle-prev="(#GET{prev})"][ 
 	data-cycle-next="(#GET{next})"][ 
 	data-cycle-fx="(#GET{fx})"][(#GET{fx}|=={tileSlide}|oui|ou{#GET{fx}|=={tileBlind}|oui})[
-	data-cycle-tile-vertical="(#GET{tilevertical})"]][
+	data-cycle-tile-vertical="(#GET{tilevertical})"]][ 
+	data-cycle-carousel-visible="(#GET{carouselvisible})"][ 
+	data-cycle-carousel-offset="(#GET{carouseloffset})"][ 
+	data-cycle-carousel-slide-dimension="(#GET{carouselslidedimension})"][ 
+	data-cycle-carousel-vertical="(#GET{carouselvertical})"][ 
+	data-cycle-carousel-fluid="(#GET{carouselfluid})"][
 	data-cycle-pager="(#GET{pager})"][
 	data-cycle-caption="(#GET{caption})"][
 	data-cycle-caption-template="(#GET{captiontemplate})"]>[(#GET{prev}|=={.cycle-prev}|oui)
@@ -112,18 +144,22 @@ $(document).ready(function() {
 		#SET{fermer_a,oui}]
 	
 		[(#GET{afficher_infobulle}|=={oui}|oui)
-			<div class="infobulle">
+		<div class="infobulle">
 		]
-			<img class="no_image_filtrer" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] />
+			<img class="no_image_filtrer" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] 
+				[(#GET{overlay}|=={oui}|oui)[ data-cycle-title="(#TITRE)"][ data-cycle-desc="(#DESCRIPTIF)"]]
+			/>
 		
 		[(#GET{afficher_infobulle}|=={oui}|oui)
-		<div class="textinfobulle" style="display:none;text-align:left;">#GET{texte_infobulle}</div>
+		<div class="textinfobulle" style="display:none;">#GET{texte_infobulle}</div>
 		</div> <!-- .infobulle -->
 		]
 		[(#GET{fermer_a}|=={oui}|oui)</a>]
-			
 		
 	]</BOUCLE_img>
+	[(#GET{overlay}|=={oui}|oui)
+	<div class="cycle-overlay"></div>
+	]
 </div>
 
 </B_img>

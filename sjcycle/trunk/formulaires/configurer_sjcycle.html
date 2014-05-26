@@ -9,7 +9,7 @@
 		<h3 class="legend"><:sjcycle:parametres_diaporama:></h3>
 		<ul>
 		#SET{cc,sjcycle}
-		
+			
 			#SET{name,largeurmax}
 			<li class="editer editer_[(#GET{name})]">
 				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
@@ -67,21 +67,77 @@
 					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
 					#SET{val,tileBlind}
 					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
+					#SET{val,carousel}
+					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
 					#SET{val,none}
 					<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</option>
 				</select>
 				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 			</li>
 
-			#SET{name,tilevertical}
-			<li class="editer editer_[(#GET{name})]">
-				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
-				#SET{val,false}
-				<div class="choix">
-					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
-				</div>
+			<li class="editer editer_tile tileSlide tileBlind option">
+				<ul>
+					#SET{name,tilevertical}
+					<li class="editer editer_[(#GET{name})]">
+						<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						#SET{val,false}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:sjcycle:non:></label>
+							<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+						</div>
+					</li>
+				</ul>
+			</li>
+			
+			<li class="editer editer_carousel carousel option">
+			<h3 class="legend"><:sjcycle:explication_option_carousel:></h3>
+				<ul>
+				
+					#SET{name,carouselvisible}
+					<li class="editer editer_[(#GET{name})]">
+						<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+					</li>
+					
+					#SET{name,carouseloffset}
+					<li class="editer editer_[(#GET{name})]">
+						<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+					</li>
+					
+					#SET{name,carouselslidedimension}
+					<li class="editer editer_[(#GET{name})]">
+						<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+						<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+					</li>
+					
+					#SET{name,carouselvertical}
+					<li class="editer editer_[(#GET{name})]">
+						<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						#SET{val,true}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+							<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+						</div>
+					</li>
+					
+					#SET{name,carouselfluid}
+					<li class="editer editer_[(#GET{name})]">
+						<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+						#SET{val,true}
+						<div class="choix">
+							<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+							<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+							<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+						</div>
+					</li>
+					
+				</ul>
 			</li>
 			
 			#SET{name,reverse}
@@ -90,7 +146,7 @@
 				#SET{val,true}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -101,7 +157,7 @@
 				#SET{val,true}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -119,7 +175,7 @@
 				#SET{val,true}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -144,7 +200,7 @@
 				#SET{val,false}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:non:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -155,7 +211,7 @@
 				#SET{val,true}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -181,6 +237,17 @@
 				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 			</li>
 			
+			#SET{name,overlay}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,oui}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
 			#SET{name,backgroundcolor}
 			<li class="editer editer_[(#GET{name})]">
 				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
@@ -200,7 +267,7 @@
 				#SET{val,oui}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -211,7 +278,7 @@
 				#SET{val,oui}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -222,7 +289,7 @@
 				#SET{val,oui}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 				</div>
 			</li>
@@ -239,7 +306,7 @@
 				#SET{val,oui}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}">[(#GET{cc}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
 				</div>
 			</li>
 		</ul>
@@ -255,23 +322,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	// afficher_si = afficher option vertical si fx=tileSlide ou fx=tileBlind
-	var tilefx = $( "#fx option:selected" ).val();
-	var tiles = "tileSlide";
-	var tileb = "tileBlind";
-	if (tilefx==tiles || tilefx==tileb){
-		$('.editer_tilevertical').css({display:'none'});
-	}
+	// afficher_si = afficher option si un bloc de la class valeur de fx existe
+	$('.option').css({display:'none'});
 	$( "#fx" ).change(function () {
-		var str = "";
+		var option = "";
 		$( "#fx option:selected" ).each(function() {
-			str += $( this ).val();
+			option += $( this ).val();
 		});
-		if(str==tiles || str==tileb){
-			$('.editer_tilevertical').show(300);
-		} else {
-			$('.editer_tilevertical').hide(200);
-		}
+		$('.option').hide().siblings('.'+option).show(300);
+		
 	}).change();
 	
 });
