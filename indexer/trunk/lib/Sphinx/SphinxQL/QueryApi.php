@@ -111,7 +111,6 @@ class QueryApi extends Query {
 		}
 	}
 
-
 	/**
 	 * Transforme un tableau d'API en requête Sphinx structurée
 	 *
@@ -119,17 +118,20 @@ class QueryApi extends Query {
 	 * @return bool True si tout s'est bien passé, false sinon.
 	**/
 	public function api2query($api) {
-		if (!is_array($api)) {
-			return false;
-		}
-
 		$ok = true;
+		
+		if (!is_array($api)) {
+			$ok = false;
+		}
+		
+		// Si une clé reconnue existe dans la description demandée, on applique la méthode adaptée
 		foreach (array('index', 'select', 'fulltext', 'snippet', 'filters', /*'orders', 'facet'*/) as $cle) {
 			if (isset($api[$cle])) {
 				$methodApi = 'setApi' . ucfirst($cle);
-				$ok &= $this->$methodApi($api);
+				$ok &= $this->$methodApi($api[$cle]);
 			}
 		}
+		
 		return $ok;
 	}
 	
@@ -198,17 +200,17 @@ class QueryApi extends Query {
 	 * @param array $api Tableau de description
 	 * @return bool True si index présent.
 	**/
-	public function setApiIndex($api) {
-		if (!isset($api['index'])) {
-			return false;
-		}
+	public function setApiIndex($index) {
+		if (!$index){ return false; }
+		
 		// Always work with an array of values
-		if (!is_array($api['index'])) {
-			$api['index'] = array($api['index']);
+		if (!is_array($index)) {
+			$index = array($index);
 		}
-		foreach ($api['index'] as $index){
-			$this->from($index);
+		foreach ($index as $i){
+			$this->from($i);
 		}
+		
 		return true;
 	}
 
@@ -224,20 +226,19 @@ class QueryApi extends Query {
 	 * @param array $api Tableau de description
 	 * @return bool True si select présent.
 	**/
-	public function setApiSelect($api) {
-		if (!isset($api['select'])) {
-			return false;
-		}
+	public function setApiSelect($select) {
+		if (!$select){ return false; }
+		
 		// Always work with an array of values
-		if (!is_array($api['select'])){
-			$api['select'] = array($api['select']);
+		if (!is_array($select)){
+			$select = array($select);
 		}
-		foreach ($api['select'] as $select){
-			$this->select($select);
+		foreach ($select as $s){
+			$this->select($s);
 		}
+		
 		return true;
 	}
-
 
 	/**
 	 * Définit le fulltext (match) de la requête.
@@ -251,16 +252,14 @@ class QueryApi extends Query {
 	 * @param array $api Tableau de description
 	 * @return bool True si fulltext présent.
 	**/
-	public function setApiFulltext($api) {
-		// Fulltext search string (optional)
-		if (!isset($api['fulltext']) OR !is_string($api['fulltext'])) {
-			return false;
-		}
-
+	public function setApiFulltext($fulltext) {
+		if (!is_string($fulltext)) { return false; }
+		
+		// Add the condition in where
 		$this->where('MATCH(' . $this->quote($api['fulltext']) . ')');
-		// add the score
+		// Add the score
 		$this->select('WEIGHT() as score');
-		// add to snippet
+		// Add to snippet
 		$this->addSnippetWords($api['fulltext']);
 	}
 
@@ -286,20 +285,23 @@ class QueryApi extends Query {
 	 * @param array $api Tableau de description
 	 * @return bool True si snippet ajouté, false sinon.
 	**/
-	public function setApiSnippet($api) {
-		if (isset($api['snippet']['words']) and is_string($api['snippet']['words'])){
-			$this->addSnippetWords($api['snippet']['words']);
+	public function setApiSnippet($snippet) {
+		if (isset($snippet['words']) and is_string($snippet['words'])){
+			$this->addSnippetWords($snippet['words']);
 		}
 
 		// If there is fulltext and/or an other words declaration, generate a snippet
 		if (!$words = $this->getSnippetWords()) {
 			return false;
 		}
-
-		$field = isset($api['snippet']['field']) ? $api['snippet']['field'] : 'content';
-		$limit = isset($api['snippet']['limit']) ? $api['snippet']['limit'] : 200;
-
+		
+		// Default values
+		$field = isset($snippet['field']) ? $snippet['field'] : 'content';
+		$limit = isset($snippet['limit']) ? $snippet['limit'] : 200;
+		
+		// Add the snippet in select
 		$this->generateSnippet($field, $words, $limit);
+		
 		return true;
 	}
 
@@ -347,31 +349,37 @@ class QueryApi extends Query {
 	 * @param array $api Tableau de description
 	 * @return bool True si filtres ajouté, false sinon.
 	**/
-	public function setApiFilters($api) {
-		if (!isset($api['filters']) or !is_array($api['filters'])) {
-			return false;
-		}
+	public function setApiFilters($filters) {
+		if (!is_array($filters)) { return false; }
+		
+		$ok = true;
 
-		foreach ($api['filters'] as $filter) {
-			if (!is_array($filter) or !isset($filter['type'])) {
-				continue;
-			}
-			switch ($filter['type']) {
-				case 'mono':
-					$this->setFilterMono($api, $filter);
-					break;
-				case 'multi_json':
-					$this->setFilterMultiJson($api, $filter);
-					break;
+		// For each type of filter, call the right method
+		foreach ($filters as $filter) {
+			if (is_array($filter) and isset($filter['type'])) {
+				switch ($filter['type']) {
+					case 'mono':
+						$ok &= $this->setFilterMono($filter);
+						break;
+					case 'multi_json':
+						$ok &= $this->setFilterMultiJson($filter);
+						break;
+				}
 			}
 		}
-		return true;
+		
+		return $ok;
 	}
-
-	public function setFilterMono($api, $filter) {
+	
+	/**
+	 * Add a mono value filter
+	 *
+	 * @param array $filter Description of the filter
+	 * @return bool Return true if the filter has been added
+	 */
+	public function setFilterMono($filter) {
 		if (
-			($filter['type'] != 'mono')
-			or !isset($filter['field'])
+			!isset($filter['field'])
 			or !is_string($filter['field']) // mandatory
 			or !isset($filter['values']) // mandatory
 		){
@@ -404,14 +412,25 @@ class QueryApi extends Query {
 
 		return true;
 	}
-
-	public function setFilterMultiJson($api, $filter) {
+	
+	/**
+	 * Add a multi values filter in JSON
+	 *
+	 * @param array $filter
+	 * 		Description of the filter
+	 * 		- field : the field to compare to
+	 * 		- values : an array of values
+	 * 			* in this array, all comparisons will be join with AND
+	 * 			* if a value is itself an array, it uses an IN (so like an OR)
+	 * @return bool
+	 * 		Return true if the filter has been added
+	 */
+	public function setFilterMultiJson($filter) {
 		static $as_count = 0;
 
 		// Multi value JSON
 		if (
-			($filter['type'] != 'multi_json')
-			or !isset($filter['field'])
+			!isset($filter['field'])
 			or !is_string($filter['field']) // mandatory
 			or !isset($filter['values']) // mandatory
 		){
@@ -434,9 +453,11 @@ class QueryApi extends Query {
 		}
 
 		if ($ins){
-			$this->select('(' . join(' AND ', $ins) . ') as select_'.$as_count);
-			$this->where('select_'.$as_count . '=' . ((isset($filter['not']) and $filter['not']) ? '0' : '1'));
+			$this->select('(' . join(' AND ', $ins) . ') as multi_'.$as_count);
+			$this->where('multi_'.$as_count . '=' . ((isset($filter['not']) and $filter['not']) ? '0' : '1'));
 			$as_count++;
 		}
+		
+		return true;
 	}
 }
