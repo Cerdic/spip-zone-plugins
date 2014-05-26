@@ -38,6 +38,10 @@ class Query{
 		return $this;
 	}
 
+	public function getMatch() {
+		return $this->match;
+	}
+
 	public function orderby($orderby) {
 		$this->orderby[] = $orderby;
 		return $this;

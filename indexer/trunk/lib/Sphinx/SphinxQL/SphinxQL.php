@@ -102,10 +102,12 @@ class SphinxQL {
 		}
 
 		// recuperer les META
-		if ($meta = $this->query('SHOW META')) {
-			$result = $this->sql->store_result();
-			$a = array(); while ($row = $result->fetch_assoc()) $a[] = $row;
+		if ($meta = $this->sql->query('SHOW META')) {
+			$a = array(); while ($row = $meta->fetch_assoc()) $a[] = $row;
 			$liste['meta']   = $this->parseMeta($a);
+		}
+		else {
+			$liste['meta']   = array('error' => 'meta illisible');
 		}
 
 		return array('query' => $liste);

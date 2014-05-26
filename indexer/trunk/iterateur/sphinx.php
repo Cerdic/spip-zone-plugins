@@ -181,18 +181,67 @@ class IterateurSPHINX implements Iterator {
 	 * @return 
 	**/
 	public function runQuery() {
+		$q = $this->queryApi->getMatch();
+		
+		// on sait deja que cette requete necessite une correction ?
+		if (isset($GLOBALS['sphinxReplace'][$q])) {
+			$this->queryApi->match($GLOBALS['sphinxReplace'][$q]);
+			$this->save('message', $GLOBALS['sphinxReplaceMessage'][$q]);
+		}
+
 		$query  = $this->queryApi->get();
+		$this->save('query', $query);
+
 		$result = $this->sphinxQL->allfetsel($query);
 
-		$this->save('query', $query);
+		// erreur de syntaxe ? correction de la requete
+		if (isset($result['query']['meta']['error'])) {
+			$q = $this->queryApi->getMatch();
+			$GLOBALS['sphinxReplace'][$q] = trim(preg_replace('/\W+/u', ' ', $q));
+			$this->queryApi->match($GLOBALS['sphinxReplace'][$q]);
+			$query  = $this->queryApi->get();
+			$result = $this->sphinxQL->allfetsel($query);
+			$message = _L('transformation de la requête en « ').htmlspecialchars($GLOBALS['sphinxReplace'][$q])." »";
+			$GLOBALS['sphinxReplaceMessage'][$q] = $message;
+			$this->save('message', $message);
+		}
 
 		if (!$result) {
 			return false;
 		}
 
+		// resultat vide et plusieurs mots dont certanis ont 0 hit ?
+		if (is_array($result['query']['docs'])
+		AND count($result['query']['docs']) == 0
+		AND !preg_match('/["\/&|)(]/u', $q)
+		) {
+			$q2 = $msg = array();
+			foreach($result['query']['meta']['keywords'] as $w) {
+				if($w['docs'] == 0) {
+					$msg[] = "<del>".htmlspecialchars($w['keyword'])."</del>";
+				} else {
+					$msg[] = htmlspecialchars($w['keyword']);
+					$q2[] = $w['keyword'];
+				}
+			}
+
+			if (count($q2) >0
+			AND count($q2) < count($result['query']['meta']['keywords'])) {
+				$q2 = trim(join(' ',$q2));
+				$GLOBALS['sphinxReplace'][$q] = trim(preg_replace('/\W+/u', ' ', $q2));
+				$this->queryApi->match($GLOBALS['sphinxReplace'][$q]);
+				$query  = $this->queryApi->get();
+				$result = $this->sphinxQL->allfetsel($query);
+				$GLOBALS['sphinxReplace'][$q] = $q2;
+				$GLOBALS['sphinxReplaceMessage'][$q] = $message = _L('Résultats pour : ').join(' ',$msg);
+				$this->save('message', $message);
+			}
+		}
+
+
 		// decaler les docs en fonction de la pagination demandee
 		if (is_array($result['query']['docs'])
-			AND $pagination = $this->getPaginationLimit()) { 
+		AND $pagination = $this->getPaginationLimit()) { 
 
 			list($debut) = array_map('intval', $pagination); 
 
