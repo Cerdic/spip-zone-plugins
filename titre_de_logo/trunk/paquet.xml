@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	schema="1.0.0"
 	logo="prive/themes/spip/images/image-32.png"
-	documentation="http://contrib.spip.net/Titre-de-logo"
+	documentation="http://contrib.spip.net/Titre-de-logo-v2"
 >
 
 	<nom>Titre de logo</nom>
