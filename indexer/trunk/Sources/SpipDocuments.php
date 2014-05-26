@@ -44,16 +44,16 @@ class SpipDocuments implements SourceInterface {
 
     public function getAuthorsProperties($objet, $id_objet) {
         if ($this->tables_liens) {
-            $auteurs = sql_allfetsel('a.nom', 'spip_auteurs AS a, spip_auteurs_liens AS al', [
+            $auteurs = sql_allfetsel('a.nom', 'spip_auteurs AS a, spip_auteurs_liens AS al', array(
                 "al.id_objet = " . intval($id_objet),
                 "al.objet    = " . sql_quote($objet),
                 "a.id_auteur = al.id_auteur",
-            ]);
+            ));
         } else {
-            $auteurs = sql_allfetsel('a.nom', 'spip_auteurs AS a, spip_auteurs_articles AS al', [
+            $auteurs = sql_allfetsel('a.nom', 'spip_auteurs AS a, spip_auteurs_articles AS al', array(
                 "al.id_article = " . intval($id_objet),
                 "a.id_auteur = al.id_auteur",
-            ]);
+            ));
         }
         return array_map('array_shift', $auteurs);
     }
@@ -61,23 +61,23 @@ class SpipDocuments implements SourceInterface {
 
     public function getTagsProperties($objet, $id_objet) {
         if ($this->tables_liens) {
-            $tags = sql_allfetsel('m.titre', 'spip_mots AS m, spip_mots_liens AS ml', [
+            $tags = sql_allfetsel('m.titre', 'spip_mots AS m, spip_mots_liens AS ml', array(
                 "ml.id_objet = " . intval($id_objet),
                 "ml.objet    = " . sql_quote($objet),
                 "m.id_mot = ml.id_mot",
-            ]);
+            ));
         } else {
-            $tags = sql_allfetsel('m.titre', 'spip_mots AS m, spip_mots_articles AS ml', [
+            $tags = sql_allfetsel('m.titre', 'spip_mots AS m, spip_mots_articles AS ml', array(
                 "ml.id_article = " . intval($id_objet),
                 "m.id_mot = ml.id_mot",
-            ]);
+            ));
         }
         return array_map('array_shift', $tags);
     }
 
 
     public function getBounds() {
-        return ['min' => 0, 'max' => 0];
+        return array('min' => 0, 'max' => 0);
     }
 
     /**
@@ -88,12 +88,12 @@ class SpipDocuments implements SourceInterface {
     **/
     public function getParts($count) {
         $bornes = $this->getBounds();
-        $parts = [];
+        $parts = array();
         for ($i = $bornes['min']; $i <= $bornes['max']; $i += $count) {
-            $parts[] = [
+            $parts[] = array(
                 'start' => $i,
                 'end'   => $i + $count
-            ];
+            );
         }
         return $parts;
     }
