@@ -1,7 +1,5 @@
 
-#SET{listearticles,#ARRAY}
-#SET{listearticles,#GET{listearticles}|push{#ENV{articles,0}}}
-[(#SET{listearticles,	[(#GET{listearticles}|push{#ENV{id_sjcycle}})]})]
+[(#SET{id_article,	[(#ENV{id_sjcycle,	0})]})]
 
 [(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
 [(#SET{hauteurmax,	[(#ENV{hauteurmax,     	#CONFIG{sjcycle/hauteurmax}})]})]
@@ -78,7 +76,7 @@ $(document).ready(function() {
 	<div class="cycle-next"></div>][(#GET{pager}|=={.cycle-pager}|oui)
 	<div class="cycle-pager"></div>][(#GET{caption}|=={'.cycle-caption'}|oui)
 	<div class="cycle-caption"></div>]
-	<BOUCLE_img(DOCUMENTS){id_article IN #GET{listearticles}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>[
+	<BOUCLE_img(DOCUMENTS){id_article?}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>[
 		
 		 #SET{fermer_a,non}
          
