@@ -179,13 +179,15 @@ class SpipSourcesIndexer {
         while ($parts->valid()) {
             $part = $parts->current();
             $stats['last']['part'] = $parts->key();
-            $this->indexSourcePart($source, $skey, $part, $stats);
-
+            
+            // on regarde s'il reste du temps AVANT d'indexer les 1000 suivants
             if ($this->isTimeout()) {
                 $t = spip_timer('source', true);
                 $stats['sources'][$skey]['time']['total'] += $t;
                 return false;
             }
+            
+            $this->indexSourcePart($source, $skey, $part, $stats);
             $parts->next();
         }
 
