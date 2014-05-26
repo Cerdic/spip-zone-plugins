@@ -256,11 +256,13 @@ class QueryApi extends Query {
 		if (!is_string($fulltext)) { return false; }
 		
 		// Add the condition in where
-		$this->where('MATCH(' . $this->quote($api['fulltext']) . ')');
+		$this->where('MATCH(' . $this->quote($fulltext) . ')');
 		// Add the score
 		$this->select('WEIGHT() as score');
 		// Add to snippet
-		$this->addSnippetWords($api['fulltext']);
+		$this->addSnippetWords($fulltext);
+		
+		return true;
 	}
 
 	/**
