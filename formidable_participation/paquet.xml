@@ -1,11 +1,11 @@
 <paquet
 	prefix="formidableparticipation"
 	categorie="communication"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/formidableparticipation-64.png"
-	documentation=""
+	documentation="http://www.spip-contrib.net/4532" 
 	schema="1.0.0"
 >
 
