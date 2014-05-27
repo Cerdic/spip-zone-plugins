@@ -194,7 +194,34 @@ Chaque filtre crée le where associé (filtre = 1).
     {filter #ENV{annee}, 'YEAR(date) = @valeur' }
     {filter #ENV{favs}, @valeur <= LENGTH(properties.share)}
 
+----
 
+Des filtres spécifiques à des cas courants de comparaisons sont pré-programmés, ce qui évite de devoir connaître et écrire soi-même le code Sphinx des tests.
+
+### Filtre pour un champ n'ayant qu'une valeur (mono-valué)
+* @syntaxe `{filtermono test, champ, valeur(s)[, comparaison]}`
+
+Le test en premier permet de passer n'importe quelle valeur (avec filtre ou pas) qui permettra de dire si on va ajouter le filtre ou pas. Le cas courant est de mettre la valeur d'un paramètre de l'URL, et s'il est présent et rempli, on ajoute le filtre.
+
+La comparaison est optionnelle, et vaut "=" par défaut.
+
+Le champ de valeur peut être une liste de plusieurs valeurs, et dans ce cas le test sera un "OU" sur chacune des comparaisons !
+
+```
+{filtermono #ENV{statut}, properties.statut, #ENV{statut,publie}}
+{filtermono #ENV{annee}, year(date), #LISTE{2014,2013}} => l'une OU l'autre
+{filtermono #ENV{favs}, length(properties.share), #ENV{favs}, '>='}
+```
+
+### Filtre pour un champ JSON ayant plusieurs valeurs (multi-valué)
+* @syntaxe `{filtermultijson test, champ, valeur(s)}`
+
+Mêmes principes que pour le critère précédent sauf que le critère cherche si les valeurs font partie du tableau "champ" (qui doit donc être une liste de plusieurs valeurs).
+
+Si on donne plusieurs valeurs, le critère fera un "ET" entre les tests. Si l'une de ces valeurs est elle-même un tableau, le critère fera un "OU" (avec la commande Sphinx IN).
+
+- Si les valeurs sont `#LISTE{mot1, mot2, mot3}` : ça cherchera les documents qui ont mot1 ET mot2 ET mot3.
+- Si les valeurs sont `#LISTE{mot1, #LISTE{mot2, mot3}}` : ça cherchera les documents qui ont mot1 ET (mot2 OU mot3).
 
 PAGES
 -----
