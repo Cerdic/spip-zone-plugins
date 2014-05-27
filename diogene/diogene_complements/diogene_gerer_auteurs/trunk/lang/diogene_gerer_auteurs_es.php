@@ -8,15 +8,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'explication_cfg_ajout_auteurs' => 'Incluir la posibilidad de añadir / eliminar autores en los artículos creados (utilizará el plugin diogene_gerer_auteurs)', # MODIF
-	'explication_diogene_gerer_auteurs' => 'Para añadir otra persona como autor, ésta debe ser miembro del sitio (no puede añadir más de una persona por cada validación de formulario).', # MODIF
+	'explication_cfg_ajout_auteurs' => 'Incluir la posibilidad de añadir / eliminar autores en los artículos creados (utilizará el plugin "Diogène - Autores")',
+	'explication_diogene_gerer_auteurs' => 'Para añadir otra persona como autor, ésta debe ser miembro del sitio.',
 
 	// F
 	'form_legend' => 'Autores',
 
 	// L
 	'label_cfg_ajout_auteurs' => 'Añadir / eliminar autores',
-	'label_diogene_gerer_auteurs' => 'Añadir un autor', # MODIF
+	'label_diogene_gerer_auteurs' => 'Adición y supresión de autor(es)',
 
 	// M
 	'message_impossible_supprimer_auteur' => 'No puede eliminarse a sí mismo de la lista de autores. Perdería su derechos de edición.'
