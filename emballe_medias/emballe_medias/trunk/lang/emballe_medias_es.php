@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_delier_document' => 'Desvincular este documento de este artículo',
 	'bouton_enlever' => 'Quitar',
+	'bouton_enlever_tout' => 'Sacar todo',
 	'bouton_parcourir' => 'Examinar',
 	'bouton_recuperer_document' => 'Recuperar el (los) documento(s)',
 	'bouton_supprimer' => 'Eliminar',
@@ -179,6 +180,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	--------------',
 	'media_valide_url' => 'A la espera, está visible desde esta dirección temporal:',
 	'message_aucun_media_attente' => 'No tiene ningún media a la espera de publicación.',
+	'message_confirm_depublier_plusieurs' => '¿Confirma que quiere des-publicarlos?',
+	'message_confirm_poubelle_plusieurs' => '¿Confirma que quiere eliminarlos?',
 	'message_delier_document' => 'Este documento ya está vinculado a otro objeto. No puede eliminarlo. Solamente puede desvincularlo del objeto en curso. ',
 	'message_doc_trad_indisponible' => 'Ningún documento está disponible en el artículo de origen.',
 	'message_document_original' => 'Este artículo es la versión original de:',
