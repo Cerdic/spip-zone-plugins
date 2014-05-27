@@ -39,7 +39,7 @@
 	#SET{titre, #TITRE|sinon{#FICHIER|basename}|couper{80}|attribut_html}
 	#SET{extension, #EXTENSION|strtoupper|wrap{<abbr>}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}|attribut_html}|inserer_attribut{class,extension}}
 	#SET{taille, #TAILLE|taille_en_octets|wrap{<span>}|inserer_attribut{class,taille}}
-	#SET{dimensions, #MEDIA|=={image}|?{#LARGEUR|concat{'x',#HAUTEUR,' px'}|wrap{<span>}|inserer_attribut{class,dimensions}}}
+	#SET{dimensions, #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span>}|inserer_attribut{class,dimensions}}}
 	#SET{infos, #ENV{infos}|!={non}|?{#ENV{infos,'extension,taille,dimensions'}|explode{','}}}
 		<li>
 			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]">
