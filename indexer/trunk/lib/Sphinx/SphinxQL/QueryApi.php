@@ -361,10 +361,10 @@ class QueryApi extends Query {
 			if (is_array($filter) and isset($filter['type'])) {
 				switch ($filter['type']) {
 					case 'mono':
-						$ok &= $this->setFilterMono($filter);
+						$ok &= $this->setApiFilterMono($filter);
 						break;
 					case 'multi_json':
-						$ok &= $this->setFilterMultiJson($filter);
+						$ok &= $this->setApiFilterMultiJson($filter);
 						break;
 				}
 			}
@@ -379,7 +379,7 @@ class QueryApi extends Query {
 	 * @param array $filter Description of the filter
 	 * @return bool Return true if the filter has been added
 	 */
-	public function setFilterMono($filter) {
+	public function setApiFilterMono($filter) {
 		if (
 			!isset($filter['field'])
 			or !is_string($filter['field']) // mandatory
@@ -427,7 +427,7 @@ class QueryApi extends Query {
 	 * @return bool
 	 * 		Return true if the filter has been added
 	 */
-	public function setFilterMultiJson($filter) {
+	public function setApiFilterMultiJson($filter) {
 		static $as_count = 0;
 
 		// Multi value JSON
