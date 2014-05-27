@@ -16,7 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_legend_public' => 'Palabras clave',
 
 	// L
-	'label_montrer_titre_et_descriptif' => 'Si existe la descripción de la palabra-clave, mostrarla entre paréntesis.', # MODIF
+	'label_montrer_titre_et_descriptif' => 'Descripción',
+	'label_montrer_titre_et_descriptif_case' => 'Si existe, mostrar la descripción de la palabra entre paréntesis.',
 	'label_mots_creer_dans_public' => 'Permitir la creación de nuevas palabras-clave en estos grupos',
 	'label_mots_facultatifs' => 'Grupos de palabras facultativas',
 	'label_mots_obligatoires' => 'Grupos de palabras obligatorias'
