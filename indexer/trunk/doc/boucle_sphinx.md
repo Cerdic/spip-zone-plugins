@@ -207,9 +207,13 @@ La comparaison est optionnelle, et vaut "=" par défaut.
 
 Le champ de valeur peut être une liste de plusieurs valeurs, et dans ce cas le test sera un "OU" sur chacune des comparaisons !
 
+**Exemples**
 ```
-{filtermono #ENV{statut}, properties.statut, #ENV{statut,publie}}
-{filtermono #ENV{annee}, year(date), #LISTE{2014,2013}} => l'une OU l'autre
+// Les documents publiés par défaut, sinon ceux du statut demandé
+{filtermono #ENV{statut,publie}, properties.statut, #ENV{statut,publie}}
+// Les documents de 2014 ou 2013
+{filtermono #ENV{annee}, year(date), #LISTE{2014,2013}}
+// Les documents ayant au moins #ENV{favs} partages
 {filtermono #ENV{favs}, length(properties.share), #ENV{favs}, '>='}
 ```
 
@@ -222,6 +226,14 @@ Si on donne plusieurs valeurs, le critère fera un "ET" entre les tests. Si l'un
 
 - Si les valeurs sont `#LISTE{mot1, mot2, mot3}` : ça cherchera les documents qui ont mot1 ET mot2 ET mot3.
 - Si les valeurs sont `#LISTE{mot1, #LISTE{mot2, mot3}}` : ça cherchera les documents qui ont mot1 ET (mot2 OU mot3).
+
+**Exemples**
+```
+// Un auteur précis parmi ceux du document
+{filtermultijson #ENV{auteur}, properties.authors, #ENV{auteur}}
+// Les documents ayant tous les tags demandés, par ex si tags[]=truc&tags[]=bidule
+{filtermultijson #ENV{tags}, properties.tags, #ENV{tags}}
+```
 
 PAGES
 -----
