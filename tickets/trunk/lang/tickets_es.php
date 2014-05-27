@@ -209,6 +209,7 @@ Indique en particular si se ha producido sistemáticamente u ocasionalmente.',
 	'nouveau_ticket' => 'Nuevo ticket',
 
 	// O
+	'option_intro' => '—',
 	'option_navigateur_autre' => 'Otro',
 	'option_navigateur_tous' => 'Todos los navegadores',
 
