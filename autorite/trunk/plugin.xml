@@ -20,7 +20,7 @@
 	<auteur>Fil, James, Superyms</auteur>
 	<licence>GNU/LGPL</licence>
 	<version>0.10.0</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 		[fr]Ce plugin permet de configurer des autorisations diff&#233;rentes de celles par d&#233;faut.

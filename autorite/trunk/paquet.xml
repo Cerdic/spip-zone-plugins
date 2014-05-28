@@ -2,7 +2,7 @@
 	prefix="autorite"
 	categorie="auteur"
 	version="0.10.0"
-	etat="test"
+	etat="stable"
 	compatibilite="[1.9.2;3.0.*]"
 	logo="illuminati-32.png"
 	schema="0.1"
