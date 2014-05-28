@@ -220,12 +220,14 @@ class IterateurSPHINX implements Iterator {
 		AND !preg_match('/["\/&|)(]/u', $q)
 		) {
 			$q2 = $msg = array();
-			foreach($result['query']['meta']['keywords'] as $w) {
-				if($w['docs'] == 0) {
-					$msg[] = "<del>".htmlspecialchars($w['keyword'])."</del>";
-				} else {
-					$msg[] = htmlspecialchars($w['keyword']);
-					$q2[] = $w['keyword'];
+			if (isset($result['query']['meta']['keywords'])){
+				foreach($result['query']['meta']['keywords'] as $w) {
+					if($w['docs'] == 0) {
+						$msg[] = "<del>".htmlspecialchars($w['keyword'])."</del>";
+					} else {
+						$msg[] = htmlspecialchars($w['keyword']);
+						$q2[] = $w['keyword'];
+					}
 				}
 			}
 

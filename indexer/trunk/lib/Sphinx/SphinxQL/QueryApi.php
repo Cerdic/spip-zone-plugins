@@ -325,11 +325,11 @@ class QueryApi extends Query {
 	 *         ),
 	 *         array(
 	 *             'type' => 'distance',
-	 *             'center' => array(
+	 *             'point1' => array(
 	 *                 'lat' => 44.837862,
 	 *                 'lon' => -0.580086,
 	 *             ),
-	 *             'fields' => array(
+	 *             'point2' => array(
 	 *                 'lat' => 'properties.geo.lat',
 	 *                 'lon' => 'properties.geo.lon',
 	 *             ),
@@ -459,6 +459,45 @@ class QueryApi extends Query {
 			$this->where('multi_'.$as_count . '=' . ((isset($filter['not']) and $filter['not']) ? '0' : '1'));
 			$as_count++;
 		}
+		
+		return true;
+	}
+	
+	/**
+	 * Add a distance filter
+	 *
+	 * @param array $filter
+	 * 		Description of the filter
+	 * 		- point1 : associative array of lat and lon
+	 * 		- point2 : associative array of lat and lon
+	 * 		- distance : distance in meters to compare to
+	 * 		- comparison : operator, default to "<="
+	 * @return bool
+	 * 		Return true if the filter has been added
+	 */
+	public function setApiFilterDistance($filter) {
+		static $as_count = 0;
+
+		// Multi value JSON
+		if (
+			!isset($filter['point1']['lat'])
+			or !isset($filter['point1']['lon'])
+			or !isset($filter['point2']['lat'])
+			or !isset($filter['point2']['lon'])
+			or !isset($filter['distance'])
+		){
+			return false;
+		}
+		
+		// Force type
+		$distance = intval($filter['distance']);
+		
+		// Default comparison : =
+		if (!isset($filter['comparison'])){
+			$filter['comparison'] = '<=';
+		}
+		
+		//$this->select('geodist(' . 
 		
 		return true;
 	}
