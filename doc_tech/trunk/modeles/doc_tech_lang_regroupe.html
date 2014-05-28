@@ -2,7 +2,9 @@
 <BOUCLE_tables(DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
 #SET{spip_table,#VAL{'spip_'}|concat{#VALEUR,'s'}}
 #SET{prefixe_lang,#LISTE{label,documentation,explication}}
-#SET{prefixe_lang,#GET{prefixe_lang}|array_merge{#ENV{label_perso}|explode{','}}}
+[(#ENV{label_perso}|=={''}|non)
+    #SET{prefixe_lang,#GET{prefixe_lang}|array_merge{#ENV{label_perso}|explode{','}}}
+]
 #SET{prefixe_lang,#GET{prefixe_lang}|array_unique|array_filter}
 	<B_info_table>
 <textarea rows="20" cols="40" class="doc_tech_lang_regroupe">

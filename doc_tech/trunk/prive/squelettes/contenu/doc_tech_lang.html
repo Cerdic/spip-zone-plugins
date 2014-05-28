@@ -13,8 +13,12 @@
 	[(#SELF|parametre_url{objets,''}|parametre_url{regroupe,''}|form_hidden)]
 	<ul>
 		<li class="editer editer_objets">
-			<label for="objets"><:doc_tech:label_vos_objets:></label>
-			<input class="text" type='text' name='objets' value='#ENV{objets}' />
+			<label for="champ_objets"><:doc_tech:label_vos_objets:></label>
+			<select name="objets" id="champ_objets">
+				<BOUCLE_objets (DATA) {source table, #REM|doc_tech_lister_objet}>
+					<option value="#VALEUR"[(#ENV{objets}|=={#VALEUR}|oui) selected="selected"]>#VALEUR</option>
+				</BOUCLE_objets>
+			</select>
 			<div class="nettoyeur"> </div>
 		</li>
 		<li class="editer editer_label_perso">

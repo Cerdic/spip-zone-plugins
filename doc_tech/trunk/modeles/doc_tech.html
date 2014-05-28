@@ -1,9 +1,12 @@
 <B_tables>
-<BOUCLE_tables(DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
-#SET{spip_table,#VAL{'spip_'}|concat{#VALEUR,'s'}}
+<BOUCLE_tables (DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
+[(#VALEUR|=={forum}|?{
+	#SET{spip_table,#VAL{'spip_'}|concat{#VALEUR}},
+	#SET{spip_table,#VAL{'spip_'}|concat{#VALEUR,'s'}}
+})]
 	<B_info_table>
 	<table>
-		<BOUCLE_info_table(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
+		<BOUCLE_info_table (DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
 			<caption id="[(#_tables:GET{spip_table}|attribut_html)]">#_tables:GET{spip_table}</caption>
 		<thead>
 			<th><:doc_tech:nom_du_champ:></th>
@@ -13,7 +16,7 @@
 		</thead>
 			<B_label>
 			<tbody>
-				<BOUCLE_label(DATA) {source table, #VALEUR} {par cle}>
+				<BOUCLE_label (DATA) {source table, #VALEUR} {par cle}>
 				<tr id="[(#_tables:GET{spip_table}|attribut_html)_][(#CLE|attribut_html)]">
 					<td><strong>#CLE</strong></td>
 					<td><em>#VALEUR</em></td>

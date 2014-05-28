@@ -3,7 +3,7 @@
 #SET{spip_table,#VAL{'spip_'}|concat{#VALEUR,'s'}}
 #SET{prefixe_lang,#LISTE{label,documentation,explication}}
 #SET{prefixe_lang,#GET{prefixe_lang}|array_merge{#ENV{label_perso}|explode{','}}}
-#SET{prefixe_lang,#GET{prefixe_lang}|array_unique}
+#SET{prefixe_lang,#GET{prefixe_lang}|array_unique|array_filter}
 	<B_info_table>
 <textarea rows="20" cols="40" class="doc_tech_lang_perso">
 <BOUCLE_info_table(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
