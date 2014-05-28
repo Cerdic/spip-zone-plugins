@@ -29,7 +29,7 @@ function albums_afficher_complement_objet($flux) {
 			'objet' => $type,
 			'id_objet' => $id,
 			),
-			array('ajax'=>'albums')
+			array('ajax'=>'documents')
 		);
 	}
 
