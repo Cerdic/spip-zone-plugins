@@ -30,6 +30,11 @@ function messagerie_insert_head($texte){
 	return $texte;
 }
 
+function messagerie_messagerie_statuts_destinataires_possibles(){
+        include_spip('inc/filtres_ecrire');
+        return auteurs_lister_statuts('tous',false);
+}
+
 
 
 ?>

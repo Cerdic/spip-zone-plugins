@@ -24,4 +24,8 @@
 	<pipeline nom="messagerie_signer_message" inclure="messagerie_pipelines.php" />
 	<pipeline nom="insert_head" inclure="messagerie_pipelines.php" />
 	<pipeline nom="notifications" inclure="messagerie_pipelines.php" />
+        <pipeline nom="messagerie_statuts_destinataires_possibles" inclure="messagerie_pipelines.php" />
+	
+	
+	
 </paquet>
