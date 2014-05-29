@@ -106,14 +106,16 @@ class IterateurSPHINX implements Iterator {
 	public function __construct($command, $info=array()) {
 
 		$this->command = $command + array(
-			'index'     => array(),
-			'selection' => array(),
-			'recherche' => array(),
-			'orderby'   => array(),
-			'group'     => array(),
-			'snippet'   => array(),
-			'facet'     => array(),
-			'filter'    => array(),
+			'index'             => array(),
+			'selection'         => array(),
+			'recherche'         => array(),
+			'orderby'           => array(),
+			'group'             => array(),
+			'snippet'           => array(),
+			'facet'             => array(),
+			'filter'            => array(),
+			'filters_mono'       => array(),
+			'filters_multijson'  => array(),
 		);
 
 
@@ -132,6 +134,8 @@ class IterateurSPHINX implements Iterator {
 		$this->setFacet($this->command['facet']);
 
 		$this->setFilter($this->command['filter']);
+		$this->setFiltersMono($this->command['filters_mono']);
+		$this->setFiltersMultiJson($this->command['filters_multijson']);
 
 		$this->setSnippet($this->command);
 
@@ -598,8 +602,35 @@ class IterateurSPHINX implements Iterator {
 			$nb++;
 		}
 	}
-
-
+	
+	function setFiltersMono($filters){
+		$filters = array_filter($filters);
+		if (!$filters) {
+			return false;
+		}
+		
+		$ok = true;
+		foreach ($filters as $filter){
+			$ok &= $this->queryApi->setApiFilterMono($filter);
+		}
+		
+		return $ok;
+	}
+	
+	function setFiltersMultiJson($filters){
+		$filters = array_filter($filters);
+		if (!$filters) {
+			return false;
+		}
+		
+		$ok = true;
+		foreach ($filters as $filter){
+			$ok &= $this->queryApi->setApiFilterMultiJson($filter);
+		}
+		
+		return $ok;
+	}
+	
 	/**
 	 * Revenir au depart
 	 * @return void
@@ -787,6 +818,79 @@ function critere_SPHINX_filter_dist($idb, &$boucles, $crit) {
 		. "\t);\n";
 }
 
+/**
+ * Indiquer les filtres mono-valués de la requête
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX_filtermono_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	
+	if (isset($crit->param[0])) {
+		$test = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[1])) {
+		$field = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[2])) {
+		$values = calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[3])) {
+		$comparison = calculer_liste($crit->param[3], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	
+	// Test
+	$boucle->hash .= "\n\tif ($test) {\n";
+	
+	// Critere multiple
+	$boucle->hash .= "\t\tif (!isset(\$filters_mono_init)) { \$command['filters_mono'] = array(); \$filters_mono_init = true; }\n";
+
+	$boucle->hash .= "\t\t\$command['filters_mono'][] = array(\n"
+		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
+		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
+		. (isset($crit->param[3]) ? "\t\t\t'comparison'  => $comparison,\n" : '')
+		. "\t\t);\n";
+	
+	// Fin de test
+	$boucle->hash .= "\t}\n";
+}
+
+/**
+ * Indiquer les filtres multi-valués JSON de la requête
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX_filtermultijson_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	
+	if (isset($crit->param[0])) {
+		$test = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[1])) {
+		$field = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[2])) {
+		$values = calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	
+	// Test
+	$boucle->hash .= "\n\tif ($test) {\n";
+	
+	// Critere multiple
+	$boucle->hash .= "\t\tif (!isset(\$filters_multijson_init)) { \$command['filters_multijson'] = array(); \$filters_multijson_init = true; }\n";
+
+	$boucle->hash .= "\t\t\$command['filters_multijson'][] = array(\n"
+		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
+		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
+		. "\t\t);\n";
+	
+	// Fin de test
+	$boucle->hash .= "\t}\n";
+}
 
 /**
  * Pagination
