@@ -86,6 +86,12 @@ class IterateurSPHINX implements Iterator {
 	protected $facet = array();
 
 	/**
+	 * index(es) scannés
+	 * @var array
+	 */
+	protected $index = array();
+
+	/**
 	 * Valeur courante
 	 * @var null
 	 */
@@ -100,16 +106,14 @@ class IterateurSPHINX implements Iterator {
 	public function __construct($command, $info=array()) {
 
 		$this->command = $command + array(
-			'index'             => array(),
-			'selection'         => array(),
-			'recherche'         => array(),
-			'orderby'           => array(),
-			'group'             => array(),
-			'snippet'           => array(),
-			'facet'             => array(),
-			'filter'            => array(),
-			'filters_mono'       => array(),
-			'filters_multijson'  => array(),
+			'index'     => array(),
+			'selection' => array(),
+			'recherche' => array(),
+			'orderby'   => array(),
+			'group'     => array(),
+			'snippet'   => array(),
+			'facet'     => array(),
+			'filter'    => array(),
 		);
 
 
@@ -128,8 +132,6 @@ class IterateurSPHINX implements Iterator {
 		$this->setFacet($this->command['facet']);
 
 		$this->setFilter($this->command['filter']);
-		$this->setFiltersMono($this->command['filters_mono']);
-		$this->setFiltersMultiJson($this->command['filters_multijson']);
 
 		$this->setSnippet($this->command);
 
@@ -174,6 +176,19 @@ class IterateurSPHINX implements Iterator {
 		}
 	}
 
+	/*
+	 * Récupérer la forme exacte du mot à partir de
+	 * la version indexée ; utilise snippet(query, racine)
+	 */
+	public function keyword2word($keyword, $q) {
+		$u = $this->sphinxQL->allfetsel(
+		"SELECT SNIPPET("._q($q).","._q($keyword).") AS m "
+		. "FROM ". join(',', $this->index) ." LIMIT 1"
+		);
+		if (!$mot = supprimer_tags(extraire_balise($u['query']['docs'][0]['m'], 'b')))
+			$mot = $keyword;
+		return $mot;
+	}
 
 	/**
 	 * Exécute la requête
@@ -214,7 +229,7 @@ class IterateurSPHINX implements Iterator {
 			return false;
 		}
 
-		// resultat vide et plusieurs mots dont certanis ont 0 hit ?
+		// resultat vide et plusieurs mots dont certains ont 0 hit ?
 		if (is_array($result['query']['docs'])
 		AND count($result['query']['docs']) == 0
 		AND !preg_match('/["\/&|)(]/u', $q)
@@ -222,11 +237,12 @@ class IterateurSPHINX implements Iterator {
 			$q2 = $msg = array();
 			if (isset($result['query']['meta']['keywords'])){
 				foreach($result['query']['meta']['keywords'] as $w) {
+					$mot = $this->keyword2word($w['keyword'], $q);
 					if($w['docs'] == 0) {
-						$msg[] = "<del>".htmlspecialchars($w['keyword'])."</del>";
+						$msg[] = "<del>".htmlspecialchars($mot)."</del>";
 					} else {
-						$msg[] = htmlspecialchars($w['keyword']);
-						$q2[] = $w['keyword'];
+						$msg[] = htmlspecialchars($mot);
+						$q2[] = $mot;
 					}
 				}
 			}
@@ -294,6 +310,7 @@ class IterateurSPHINX implements Iterator {
 		foreach ($index as $i) {
 			$this->queryApi->from($i);
 		}
+		$this->index = $index;
 		return true;
 	}
 
@@ -581,35 +598,8 @@ class IterateurSPHINX implements Iterator {
 			$nb++;
 		}
 	}
-	
-	function setFiltersMono($filters){
-		$filters = array_filter($filters);
-		if (!$filters) {
-			return false;
-		}
-		
-		$ok = true;
-		foreach ($filters as $filter){
-			$ok &= $this->queryApi->setApiFilterMono($filter);
-		}
-		
-		return $ok;
-	}
-	
-	function setFiltersMultiJson($filters){
-		$filters = array_filter($filters);
-		if (!$filters) {
-			return false;
-		}
-		
-		$ok = true;
-		foreach ($filters as $filter){
-			$ok &= $this->queryApi->setApiFilterMultiJson($filter);
-		}
-		
-		return $ok;
-	}
-	
+
+
 	/**
 	 * Revenir au depart
 	 * @return void
@@ -797,79 +787,6 @@ function critere_SPHINX_filter_dist($idb, &$boucles, $crit) {
 		. "\t);\n";
 }
 
-/**
- * Indiquer les filtres mono-valués de la requête
- *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
- */
-function critere_SPHINX_filtermono_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-	
-	if (isset($crit->param[0])) {
-		$test = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	}
-	if (isset($crit->param[1])) {
-		$field = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
-	}
-	if (isset($crit->param[2])) {
-		$values = calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent);
-	}
-	if (isset($crit->param[3])) {
-		$comparison = calculer_liste($crit->param[3], array(), $boucles, $boucles[$idb]->id_parent);
-	}
-	
-	// Test
-	$boucle->hash .= "\n\tif ($test) {\n";
-	
-	// Critere multiple
-	$boucle->hash .= "\t\tif (!isset(\$filters_mono_init)) { \$command['filters_mono'] = array(); \$filters_mono_init = true; }\n";
-
-	$boucle->hash .= "\t\t\$command['filters_mono'][] = array(\n"
-		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
-		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
-		. (isset($crit->param[3]) ? "\t\t\t'comparison'  => $comparison,\n" : '')
-		. "\t\t);\n";
-	
-	// Fin de test
-	$boucle->hash .= "\t}\n";
-}
-
-/**
- * Indiquer les filtres multi-valués JSON de la requête
- *
- * @param string $idb
- * @param object $boucles
- * @param object $crit
- */
-function critere_SPHINX_filtermultijson_dist($idb, &$boucles, $crit) {
-	$boucle = &$boucles[$idb];
-	
-	if (isset($crit->param[0])) {
-		$test = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
-	}
-	if (isset($crit->param[1])) {
-		$field = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
-	}
-	if (isset($crit->param[2])) {
-		$values = calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent);
-	}
-	
-	// Test
-	$boucle->hash .= "\n\tif ($test) {\n";
-	
-	// Critere multiple
-	$boucle->hash .= "\t\tif (!isset(\$filters_multijson_init)) { \$command['filters_multijson'] = array(); \$filters_multijson_init = true; }\n";
-
-	$boucle->hash .= "\t\t\$command['filters_multijson'][] = array(\n"
-		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
-		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
-		. "\t\t);\n";
-	
-	// Fin de test
-	$boucle->hash .= "\t}\n";
-}
 
 /**
  * Pagination
