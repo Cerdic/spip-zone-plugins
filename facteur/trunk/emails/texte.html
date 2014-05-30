@@ -4,8 +4,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>[(#ENV*{sujet})]</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<style type="text/css">
-		[(#SET{siteColor,[#(#LOGO_SITE_SPIP|couleur_extraire|couleur_foncer_si_claire{88}|couleur_eclaircir_si_foncee{168}|sinon{BBB})]})]
+	<style type="text/css">[
+		(#SET{siteColor,[#(#LOGO_SITE_SPIP|couleur_extraire|couleur_foncer_si_claire{88}|couleur_eclaircir_si_foncee{168}|sinon{BBB})]})][
+		(#VAL{_COULEUR_EMAILS_HTML}|defined|oui)#SET{siteColor,#VAL{_COULEUR_EMAILS_HTML}|constant}]
 		#outlook a {padding: 0;}
 		body {width: 100% !important;}
 		body {margin: 0;padding: 0;}
