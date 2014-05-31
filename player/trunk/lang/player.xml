@@ -3,6 +3,10 @@
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/player?lang_cible=es" total="92" traduits="68" relire="0" modifs="0" nouveaux="24" pourcent="73.91">
+		<traducteur nom="dani" lien="http://trad.spip.net/auteur/dani" />
+		<traducteur nom="dcalliconde" lien="http://trad.spip.net/auteur/dcalliconde" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/player?lang_cible=fa" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
