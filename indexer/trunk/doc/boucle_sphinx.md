@@ -235,6 +235,22 @@ Si on donne plusieurs valeurs, le critère fera un "ET" entre les tests. Si l'un
 {filtermultijson #ENV{tags}, properties.tags, #ENV{tags}}
 ```
 
+### Filtre de distance
+* @syntaxe `{filterdistance test, point1, point2, distance[, comparaison[, nom du champ]]}`
+
+Ce critère sélectionne uniquement les réponses qui font que la distance entre le point 1 et le point 2 correspond à la comparaison demandée avec la distance passée en paramètre.
+
+La comparaison est optionnelle est vaut "<=" par défaut.
+Le nom de la distance calculée est optionnelle et vaudra par défaut "distance_0" pour la première distance demandée, puis "distance_1", etc. Ce paramètre permet de maîtriser le nom afin de pouvoir plus facilement demander un tri par le nom voulu, et récupérer la valeur avec une balise.
+
+**Exemple**
+```
+// Tous les documents qui sont à moins de 5km de Bordeaux, avec comme nom #DISTANCE
+#SET{bordeaux, #ARRAY{lat, 44.83717, lon, -0.57403}}
+#SET{point_document, #ARRAY{lat, properties.geo.lat, lon, properties.geo.lon}}
+{filterdistance , testok, #GET{bordeaux}, #GET{point_document}, 5000, '<=', distance}
+```
+
 PAGES
 -----
 

@@ -366,6 +366,9 @@ class QueryApi extends Query {
 					case 'multi_json':
 						$ok &= $this->setApiFilterMultiJson($filter);
 						break;
+					case 'distance':
+						$ok &= $this->setApiFilterDistance($filter);
+						break;
 				}
 			}
 		}
@@ -430,7 +433,7 @@ class QueryApi extends Query {
 	public function setApiFilterMultiJson($filter) {
 		static $as_count = 0;
 
-		// Multi value JSON
+		// Field and values must be there
 		if (
 			!isset($filter['field'])
 			or !is_string($filter['field']) // mandatory
@@ -478,7 +481,7 @@ class QueryApi extends Query {
 	public function setApiFilterDistance($filter) {
 		static $as_count = 0;
 
-		// Multi value JSON
+		// Mandatory parameters
 		if (
 			!isset($filter['point1']['lat'])
 			or !isset($filter['point1']['lon'])
@@ -497,7 +500,14 @@ class QueryApi extends Query {
 			$filter['comparison'] = '<=';
 		}
 		
-		//$this->select('geodist(' . 
+		// Default "as"
+		if (!isset($filter['as'])){
+			$filter['as'] = 'distance_' . $as_count;
+			$as_count++;
+		}
+		
+		$this->select('geodist(double(' . $filter['point1']['lat'] . '), double(' . $filter['point1']['lon'] . '), double(' . $filter['point2']['lat'] . '), double(' . $filter['point2']['lon'] . '), {in=deg}) as ' . $filter['as']);
+		$this->where($filter['as'] . ' ' . $filter['comparison'] . ' ' . $this->quote($filter['distance']));
 		
 		return true;
 	}

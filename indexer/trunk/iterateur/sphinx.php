@@ -114,8 +114,9 @@ class IterateurSPHINX implements Iterator {
 			'snippet'           => array(),
 			'facet'             => array(),
 			'filter'            => array(),
-			'filters_mono'       => array(),
-			'filters_multijson'  => array(),
+			'filters_mono'      => array(),
+			'filters_multijson' => array(),
+			'filters_distance'  => array(),
 		);
 
 
@@ -136,6 +137,7 @@ class IterateurSPHINX implements Iterator {
 		$this->setFilter($this->command['filter']);
 		$this->setFiltersMono($this->command['filters_mono']);
 		$this->setFiltersMultiJson($this->command['filters_multijson']);
+		$this->setFiltersDistance($this->command['filters_distance']);
 
 		$this->setSnippet($this->command);
 
@@ -631,6 +633,20 @@ class IterateurSPHINX implements Iterator {
 		return $ok;
 	}
 	
+	function setFiltersDistance($filters){
+		$filters = array_filter($filters);
+		if (!$filters) {
+			return false;
+		}
+		
+		$ok = true;
+		foreach ($filters as $filter){
+			$ok &= $this->queryApi->setApiFilterDistance($filter);
+		}
+		
+		return $ok;
+	}
+	
 	/**
 	 * Revenir au depart
 	 * @return void
@@ -886,6 +902,53 @@ function critere_SPHINX_filtermultijson_dist($idb, &$boucles, $crit) {
 	$boucle->hash .= "\t\t\$command['filters_multijson'][] = array(\n"
 		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
 		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
+		. "\t\t);\n";
+	
+	// Fin de test
+	$boucle->hash .= "\t}\n";
+}
+
+/**
+ * Indiquer les filtres de distance de la requête
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX_filterdistance_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	
+	if (isset($crit->param[0])) {
+		$test = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[1])) {
+		$point1 = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[2])) {
+		$point2 = calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[3])) {
+		$distance = calculer_liste($crit->param[3], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[4])) {
+		$comparison = calculer_liste($crit->param[4], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	if (isset($crit->param[5])) {
+		$as = calculer_liste($crit->param[5], array(), $boucles, $boucles[$idb]->id_parent);
+	}
+	
+	// Test
+	$boucle->hash .= "\n\tif ($test) {\n";
+	
+	// Critere multiple
+	$boucle->hash .= "\t\tif (!isset(\$filters_distance_init)) { \$command['filters_distance'] = array(); \$filters_distance_init = true; }\n";
+
+	$boucle->hash .= "\t\t\$command['filters_distance'][] = array(\n"
+		. (isset($crit->param[1]) ? "\t\t\t'point1'      => $point1,\n" : '')
+		. (isset($crit->param[2]) ? "\t\t\t'point2'      => $point2,\n" : '')
+		. (isset($crit->param[3]) ? "\t\t\t'distance'    => $distance,\n" : '')
+		. (isset($crit->param[4]) ? "\t\t\t'comparison'  => $comparison,\n" : '')
+		. (isset($crit->param[5]) ? "\t\t\t'as'          => $as,\n" : '')
 		. "\t\t);\n";
 	
 	// Fin de test
