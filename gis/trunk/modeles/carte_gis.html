@@ -12,6 +12,9 @@ Parametres possibles :
 - maxZoom = 13                     zoom maximum autorisé
 - minZoom = 13                     zoom minimum autorisé
 
+- default_layer = acetate                   nom de la couche affichée par défaut
+- affiche_layers = openmapsurfer/acetate    noms des couches proposées (séparées par des /)
+
 - sw_lat = lat - 10°               latitude du sud-ouest de la bounding box
 - sw_lon = lon - 10°               longitude du sud-ouest de la bounding box
 - ne_lat = lat + 10°               latitude du nord-est de la bounding box
@@ -79,62 +82,59 @@ Clustering (regroupement de points proches) :
 
 <script type="text/javascript">/*<!\[CDATA\[*/
 var map[(#GET{id})];
-if (typeof map_cfg=="undefined") var map_cfg = {};
-map_cfg["[(#GET{id})]"] = {
-"mapid":"map[(#GET{id})]",
-"scrollWheelZoom": [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
-"zoomControl": [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})][,
-"maxZoom": (#ENV{maxZoom})][,
-"minZoom": (#ENV{minZoom})],
-"utiliser_bb":[(#GET{utiliser_bb}|?{true,false})],
-"lat":[(#GET{lat})][,
-"sw_lat":(#GET{sw_lat})][,
-"ne_lat":(#GET{ne_lat})],
-"lon":[(#GET{lon})][,
-"sw_lon":(#GET{sw_lon})][,
-"ne_lon":(#GET{ne_lon})],
-"zoom":[(#ENV{zoom,#CONFIG{gis/zoom,0}})],
-"default_layer":"[(#REM|gis_layer_defaut)]",
-"layers":#EVAL{json_encode($GLOBALS['gis_layers'])},
-"affiche_layers":[(#CONFIG{gis/layers,#ARRAY}|json_encode)],
-"control_type":[(#ENV{control_type,#ENV{controle_type}}|=={non}|?{false,true})],
-"control_type_collapsed":[(#ENV{control_type_collapsed,#ENV{control_type_collapsed}}|=={non}|?{false,true})],
-"no_control":[(#ENV{no_control,#ENV{aucun_controle}}|=={oui}|?{true,false})],
-"scale":[(#ENV{scale}|=={oui}|?{true,false})],
-"overview":[(#ENV{overview}|=={oui}|?{true,false})],
-"fullscreen":[(#ENV{fullscreen}|=={oui}|?{true,false})],
-"cluster":[(#ENV{cluster}|=={oui}|?{true,false})],
-"clusterMaxZoom":[(#ENV{clusterMaxZoom, #ENV{maxZoom}|?{#ENV{maxZoom}|moins{2},0}})],
-"clusterShowCoverageOnHover":[(#ENV{clusterShowCoverageOnHover}|?{true,false})],
-"maxClusterRadius":[(#ENV{maxClusterRadius, 80})],
-"path_styles":[(#ENV*{path_styles}|json_encode)],
-"autocenterandzoom":[(#ENV{autocenterandzoom,#ENV{centrer_auto}}|?{true,false})],
-"open_id":"[(#ENV{id_a_ouvrir,''})]",
-"affiche_points":[(#ENV{point,''}|=={non}|?{false,true})],
-"json_points":{
-	"url":"[(#URL_PAGE{gis_json}|url_absolue)]"[,
-	"objets":"(#ENV{objets,#ENV{class}}|trim)"],
-	"limit":[(#ENV{limit,#ENV{limite,500}}|trim)],
-	"env":[(#ENV*{args,#ENV*}|gis_modele_url_json_env|json_encode)][,
-	"titre":(#ENV{titre}|?{#ENV{titre},''}|json_encode)][,
-	"description":(#ENV{description}|?{#ENV{description},''}|json_encode)][,
-	"icone":(#ENV{icone}|?{#ENV{icone},''}|json_encode)]
-	},
-"localize_visitor":[(#ENV{localize_visitor,#ENV{localiser_visiteur}}|?{true,false})],
-"localize_visitor_zoom":[(#ENV{localize_visitor_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})],
-"centrer_fichier":[(#ENV{centrer_fichier,oui}|=={oui}|?{true,false})],
-"kml":[(#ENV{kml,''}|?{[(#ENV{kml}|is_array|?{#ENV{kml},#LISTE{#ENV{kml}}}|gis_kml_to_urls|json_encode)],false})],
-"gpx":[(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})],
-"geojson":[(#ENV{geojson,''}|?{[(#ENV{geojson}|is_array|?{#ENV{geojson},#LISTE{#ENV{geojson}}}|gis_kml_to_urls|json_encode)],false})]
-};
-
 // Charger le javascript de GIS et initialiser la carte (des que DOM ready)
-jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js,cluster=#ENV{cluster,non}})]',function(){
+jQuery.ajax({url: '[(#PRODUIRE{fond=javascript/gis.js})]', dataType: 'script', cache: true}).done(function(){
 	jQuery(function(){
-		if (typeof(callback_map[(#GET{id})]) === "function") {
-			map_cfg["[(#GET{id})]"]['callback']=callback_map[(#GET{id})];
-		}
-		gis_init_map(map_cfg["[(#GET{id})]"]);
+		map[(#GET{id})] = new L.Map.Gis('map[(#GET{id})]',{
+			mapId: '[(#GET{id})]',
+			callback: (typeof(callback_map[(#GET{id})]) === "function") ? callback_map[(#GET{id})] : false,
+			center: [#GET{lat},#GET{lon}],
+			zoom: [(#ENV{zoom,#CONFIG{gis/zoom,0}})][,
+			maxZoom: (#ENV{maxZoom})][,
+			minZoom: (#ENV{minZoom})][,
+			default_layer: '(#ENV{default_layer})'][,
+			affiche_layers: (#ENV{affiche_layers}|?{[(#ENV{affiche_layers}|explode{/}|json_encode)],''})],
+			scrollWheelZoom: [(#ENV{zoom_molette,#ENV{zoom_wheel}}|=={non}|?{false,true})],
+			zoomControl: [(#ENV{no_control,#ENV{aucun_controle}}|!={oui}|?{true,false})],
+			fullscreenControl: [(#ENV{fullscreen}|=={oui}|?{true,false})],
+			scaleControl: [(#ENV{scale}|=={oui}|?{true,false})],
+			overviewControl:[(#ENV{overview}|=={oui}|?{true,false})],
+			layersControl: [(#ENV{control_type,#ENV{controle_type}}|=={non}|?{false,true})],
+			layersControlOptions: {
+				collapsed: [(#ENV{control_type_collapsed,#ENV{control_type_collapsed}}|=={non}|?{false,true})]
+			},
+			noControl: [(#ENV{no_control,#ENV{aucun_controle}}|=={oui}|?{true,false})],
+			utiliser_bb: [(#GET{utiliser_bb}|?{true,false})][,
+			sw_lat: (#GET{sw_lat})][,
+			ne_lat: (#GET{ne_lat})][,
+			sw_lon: (#GET{sw_lon})][,
+			ne_lon: (#GET{ne_lon})],
+			affiche_points: [(#ENV{point,''}|=={non}|?{false,true})],
+			json_points:{
+				url: '[(#URL_PAGE{gis_json}|url_absolue)]'[,
+				objets: '(#ENV{objets,#ENV{class}}|trim)'],
+				limit: [(#ENV{limit,#ENV{limite,500}}|trim)],
+				env: [(#ENV*{args,#ENV*}|gis_modele_url_json_env|json_encode)][,
+				titre: (#ENV{titre}|?{#ENV{titre},''}|json_encode)][,
+				description: (#ENV{description}|?{#ENV{description},''}|json_encode)][,
+				icone: (#ENV{icone}|?{#ENV{icone},''}|json_encode)]
+			},
+			cluster: [(#ENV{cluster}|=={oui}|?{true,false})],
+			clusterOptions: {
+				disableClusteringAtZoom: [(#ENV{clusterMaxZoom, #ENV{maxZoom}|?{#ENV{maxZoom}|moins{2},0}})],
+				showCoverageOnHover: [(#ENV{clusterShowCoverageOnHover}|?{true,false})],
+				maxClusterRadius: [(#ENV{maxClusterRadius,80})]
+			},
+			pathStyles: [(#ENV*{path_styles}|json_encode)],
+			autocenterandzoom: [(#ENV{autocenterandzoom,#ENV{centrer_auto}}|?{true,false})],
+			openId: [(#ENV{id_a_ouvrir,false})],
+			localize_visitor: [(#ENV{localize_visitor,#ENV{localiser_visiteur}}|?{true,false})],
+			localize_visitor_zoom: [(#ENV{localize_visitor_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})],
+			centrer_fichier: [(#ENV{centrer_fichier,oui}|=={oui}|?{true,false})],
+			kml: [(#ENV{kml,''}|?{[(#ENV{kml}|is_array|?{#ENV{kml},#LISTE{#ENV{kml}}}|gis_kml_to_urls|json_encode)],false})],
+			gpx: [(#ENV{gpx,''}|?{[(#ENV{gpx}|is_array|?{#ENV{gpx},#LISTE{#ENV{gpx}}}|gis_kml_to_urls|json_encode)],false})],
+			geojson: [(#ENV{geojson,''}|?{[(#ENV{geojson}|is_array|?{#ENV{geojson},#LISTE{#ENV{geojson}}}|gis_kml_to_urls|json_encode)],false})]
+		});
 	});
 });
 /*\]\]>*/

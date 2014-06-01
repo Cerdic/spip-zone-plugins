@@ -4,8 +4,21 @@
 
 [L.Icon.Default.imagePath = "(#CHEMIN{lib/leaflet/dist/images}|url_absolue)";]
 
-[var geocoder_forwardUrl = '(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=search}|html_entity_decode)';]
-[var geocoder_reverseUrl = '(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=reverse}|html_entity_decode)';]
+(function() {
+
+L.gisConfig = {
+	"gis_layers":#EVAL{json_encode($GLOBALS['gis_layers'])},
+	"default_layer":"[(#REM|gis_layer_defaut)]",
+	"affiche_layers":[(#CONFIG{gis/layers,#ARRAY}|json_encode)]
+};
+
+L.geocoderConfig = {
+	"forwardUrl":"[(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=search}|html_entity_decode)]",
+	"reverseUrl":"[(#VAL{gis_geocoder_rechercher}|generer_url_action{mode=reverse}|html_entity_decode)]"
+};
+
+})();
+
 [(#INCLURE{javascript/gis_geocoder.js})]
 
 [(#INCLURE{javascript/gis_utils.js})]
@@ -35,12 +48,9 @@
 [(#INCLURE{lib/leaflet/plugins/Bing.js})]
 ]
 
-[(#REM) Lib clustering si besoin ]
-[(#ENV{cluster}|=={oui}|oui)
 [(#INCLURE{lib/leaflet/plugins/leaflet.markercluster-src.js})]
-]
 
-[(#INCLURE{javascript/gis_init_map.js})]
+[(#INCLURE{javascript/leaflet.gis.js})]
 
 [(#CONFIG{auto_compress_js}|=={oui}|oui)
 #FILTRE{compacte}

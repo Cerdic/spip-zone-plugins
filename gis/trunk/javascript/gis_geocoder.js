@@ -7,8 +7,8 @@ L.Geocoder = L.Class.extend({
 	includes: L.Mixin.Events,
 
 	options: {
-		forwardUrl: geocoder_forwardUrl,
-		reverseUrl: geocoder_reverseUrl,
+		forwardUrl: L.geocoderConfig.forwardUrl,
+		reverseUrl: L.geocoderConfig.reverseUrl,
 		limit: 1,
 		acceptLanguage:'fr',
 		addressdetails: 1
