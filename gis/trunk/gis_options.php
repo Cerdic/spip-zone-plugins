@@ -118,7 +118,6 @@ $GLOBALS['gis_layers'] = array (
 		'nom' => 'Esri WorldPhysical',
 		'layer' => 'L.tileLayer.provider("Esri.WorldPhysical")'
 	),
-	
 	'esri_oceanbasemap' => array(
 		'nom' => 'Esri OceanBasemap',
 		'layer' => 'L.tileLayer.provider("Esri.OceanBasemap")'
@@ -131,30 +130,10 @@ $GLOBALS['gis_layers'] = array (
 		'nom' => 'Esri WorldGrayCanvas',
 		'layer' => 'L.tileLayer.provider("Esri.WorldGrayCanvas")'
 	),
-	'nokia_normalday' => array(
-		'nom' => 'Nokia normalDay',
-		'layer' => 'L.tileLayer.provider("Nokia.normalDay")'
-	),
-	'nokia_normalgreyday' => array(
-		'nom' => 'Nokia normalGreyDay',
-		'layer' => 'L.tileLayer.provider("Nokia.normalGreyDay")'
-	),
-	'nokia_satellitenolabelsday' => array(
-		'nom' => 'Nokia satelliteNoLabelsDay',
-		'layer' => 'L.tileLayer.provider("Nokia.satelliteNoLabelsDay")'
-	),
-	'nokia_satelliteyeslabelsday' => array(
-		'nom' => 'Nokia satelliteYesLabelsDay',
-		'layer' => 'L.tileLayer.provider("Nokia.satelliteYesLabelsDay")'
-	),
-	'nokia_terrainday' => array(
-		'nom' => 'Nokia terrainDay',
-		'layer' => 'L.tileLayer.provider("Nokia.terrainDay")'
-	),
 	'acetate' => array(
 		'nom' => 'Acetate',
 		'layer' => 'L.tileLayer.provider("Acetate.all")'
-	),
+	)
 );
 
 ?>
