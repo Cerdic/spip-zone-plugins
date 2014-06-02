@@ -24,7 +24,7 @@ function formulaires_csv2auteurs_exportation_verifier_dist(){
 function formulaires_csv2auteurs_exportation_traiter_dist(){
     $nom_champs   = _request('nom_champs');
     $choix_statut = _request('choix_statut');
-    $retour = array();
+    $retour = $login_restreint = array();
     
     // creation du nom du fichier
     $date_du_jour=date(Y_m_d);
@@ -43,9 +43,8 @@ function formulaires_csv2auteurs_exportation_traiter_dist(){
     // ajout de l'admin restreint
     $tableau_csv[0]["ss_groupe"]="ss_groupe";
     // ajout de l'acces restreint s'il existe
-    if (test_plugin_actif("accesrestreint")){
-    $tableau_csv[0]["zone"]="zone";
-    }
+    if (test_plugin_actif("accesrestreint"))
+		$tableau_csv[0]["zone"]="zone";
     $i=1;
 
     // création d'un array contenant tous les logins des admins restreints
