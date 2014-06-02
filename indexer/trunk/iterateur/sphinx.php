@@ -112,6 +112,7 @@ class IterateurSPHINX implements Iterator {
 			'orderby'           => array(),
 			'group'             => array(),
 			'snippet'           => array(),
+			'options'           => array(),
 			'facet'             => array(),
 			'filter'            => array(),
 			'filters_mono'      => array(),
@@ -141,8 +142,8 @@ class IterateurSPHINX implements Iterator {
 
 		$this->setSnippet($this->command);
 
-
 		$this->setPagination($this->command['pagination']);
+		$this->setOptions($this->command['options']);
 
 		$this->runQuery();
 
@@ -434,6 +435,24 @@ class IterateurSPHINX implements Iterator {
 				$nombre = intval($pagination[1]);
 			}
 			$this->setPaginationLimit($debut, $nombre); 
+			return true;
+		}
+	}
+	
+	/**
+	 * Définir les éventuelles options (poids des champs etc)
+	 *
+	 * @param array $options
+	 * @return bool True s'il y a au moins une option
+	 */
+	public function setOptions($options){
+		if (is_array($options) and $options){
+			foreach ($options as $nom=>$option){
+				// Si la clé est bien un nom d'option, càd pas un nombre
+				if (!is_numeric($nom) and is_string($option)){
+					$this->queryApi->option($nom . '=' . $option);
+				}
+			}
 			return true;
 		}
 	}
@@ -795,7 +814,26 @@ function critere_SPHINX_snippet_dist($idb, &$boucles, $crit) {
 		. "\t];\n";
 }
 
-
+/**
+ * Ajouter une option à la requête
+ *
+ * @param string $idb
+ * @param object $boucles
+ * @param object $crit
+ */
+function critere_SPHINX_option_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	// critere multiple
+	$boucle->hash .= "\n\tif (!isset(\$options_init)) { \$command['options'] = array(); \$options_init = true; }\n";
+	
+	// Il faut deux paramètres : le nom et l'option
+	if (isset($crit->param[0]) and isset($crit->param[1])) {
+		$nom = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+		$option = calculer_liste($crit->param[1], array(), $boucles, $boucles[$idb]->id_parent);
+		
+		$boucle->hash .= "\t\$command['options'][$nom] = $option;\n";
+	}
+}
 
 /**
  * Indiquer les facets de la requête

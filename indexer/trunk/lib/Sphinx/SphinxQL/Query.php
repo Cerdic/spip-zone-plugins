@@ -13,6 +13,7 @@ class Query{
 	private $groupby = array();
 	private $orderby = array();
 	private $limit   = '';
+	private $option  = array();
 	private $facet   = array();
 
 	public function __construct() {}
@@ -56,6 +57,11 @@ class Query{
 		$this->limit = $limit;
 		return $this;
 	}
+	
+	public function option($option) {
+		$this->option[] = $option;
+		return $this;
+	}
 
 	public function facet($facet) {
 		$this->facet[] = $facet;
@@ -85,6 +91,7 @@ class Query{
 		if ($this->groupby)  $query[] = 'GROUP BY ' . implode(', ', $this->groupby);
 		if ($this->orderby)  $query[] = 'ORDER BY ' . implode(', ', $this->orderby);
 		if ($this->limit)    $query[] = 'LIMIT '    . $this->limit;
+		if ($this->option)   $query[] = 'OPTION '   . implode(', ', array_unique($this->option));
 		if ($this->facet)    $query[] = 'FACET '    . implode(' FACET ', $this->facet);
 		return implode(' ', $query);
 	}
