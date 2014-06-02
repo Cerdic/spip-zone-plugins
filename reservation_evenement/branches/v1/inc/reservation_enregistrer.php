@@ -4,7 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 //Enregistrement d'une réservation
-function inc_reservation_enregistrer_dist($id='',$id_article='',$id_auteur='',$champs_extras_auteurs=array()){
+function inc_reservation_enregistrer_dist($id='',$id_article='',$id_auteur='',$champs_extras_auteurs=''){
  include_spip('inc/session');    
     include_spip('inc/config');
     $config=lire_config('reservation_evenement');
