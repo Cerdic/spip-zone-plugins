@@ -175,10 +175,9 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 	$patterns_note = '/<a.*href.*class=\'spip_note\'.*>/iUms';
 	$html = preg_replace_callback($patterns_note, 'spipdf_remplaceIdParName', $html);
 
-	// float sur les puces graphiques TODO
-	$patterns_puce = '/<a.*href.*class=\'puce\'.*>/iUms';
-	//$html = preg_replace_callback($patterns_puce, 'spipdf_remplaceFloatPuce', $html);
-	//img src="local/cache-vignettes/L8xH11/puce-32883.gif" class="puce" alt="-" style="height: 11px; width: 8px;" height="11" width="8">
+	// float sur les puces graphiques
+	$patterns_puce = '/<img[^>]*class="puce" alt="-"[^>]*>/iUms';
+	$html = preg_replace($patterns_puce, '-', $html);
 
 	// supprimer les dl autour des images centrer
 	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
@@ -228,10 +227,6 @@ function traite_balise_page($html){
 
 }
 
-// supprimer le puces graphiques (d'après le plugin couteau suisse)
-function spipdf_pre_typo($texte){
-	return preg_replace('/^-\s*(?![-*#])/m', '-* ', $texte);
-}
 
 // traitement principal. avec ce pipeline, le PDF est mis en cache et recalculé "normalement"
 function spipdf_html2pdf($html){
