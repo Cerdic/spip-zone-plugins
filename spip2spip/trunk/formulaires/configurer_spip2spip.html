@@ -1,110 +1,124 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
-	<h3 class="titrem"><:spip2spip:cfg_titre_parametrages:></h3>
+    <h3 class="titrem"><:spip2spip:cfg_titre_parametrages:></h3>
 
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	<form method="post" action="#ENV{action}">
-	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+    <form method="post" action="#ENV{action}">
+        <div>
+            #ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
-     <!-- ******** -->
-     <!--  IMPORT  -->
-     <!-- ******** -->
-     <li><h2><:spip2spip:cfg_import:></h2></li>
-     <!-- import statut-->
-      [(#SAISIE{selection, import_statut,
-				label=<:spip2spip:cfg_import_statut:>,
-        cacher_option_intro=true,
-        datas=#ARRAY{            
-      			prop,<:sites:info_statut_site_3:>,
-      			publie,<:sites:info_statut_site_2:>}})]  
-	<!-- import cron -->
-     [(#SAISIE{input, intervalle_cron,
-				label=<:spip2spip:cfg_intervalle_cron:>})]	
-	<!-- import date -->
-   	[(#SAISIE{radio, import_date_article,
-			label=<:spip2spip:cfg_import_date_article:>,
-			datas=#ARRAY{
-				oui,<:spip2spip:cfg_import_date_article_oui:>,
-				non,<:spip2spip:cfg_import_date_article_non:>}})]
-				
-     <!-- suivi syndic -->
-    [(#SAISIE{checkbox, email_alerte,
-    		label='',
-        datas=#ARRAY{on,<:spip2spip:cfg_email_alerte:>}})] 
-     [(#SAISIE{input, email_suivi,
-				label=<:spip2spip:cfg_email_suivi:>})]
-     
-     <!-- source -->
-    [(#SAISIE{checkbox, citer_source,
-    		label='',
-        datas=#ARRAY{on,<:spip2spip:cfg_citer_source:>}})]
+            <!-- ******** -->
+            <!--  IMPORT  -->
+            <!-- ******** -->
+            <fieldset>
+                <legend><:spip2spip:cfg_import:></legend>
+                <ul>
+                    <!-- import statut-->
+                    [(#SAISIE{selection, import_statut,
+                    label=<:spip2spip:cfg_import_statut:>,
+                    cacher_option_intro=true,
+                    datas=#ARRAY{
+                    prop,<:sites:info_statut_site_3:>,
+                    publie,<:sites:info_statut_site_2:>}})]
 
-    <li><h3><:spip2spip:cfg_import_motcle:></h3></li>
-    
-    [(#SAISIE{checkbox, import_mot_article,
-    		label='',
-        datas=#ARRAY{on,<:spip2spip:cfg_import_mot_article:>}})]
-    [(#SAISIE{checkbox, import_mot_evnt,
-    		label='',
-        datas=#ARRAY{on,<:spip2spip:cfg_import_mot_evnt:>}})]  
+                    <!-- import cron -->
+                    [(#SAISIE{input, intervalle_cron,
+                    label=<:spip2spip:cfg_intervalle_cron:>})]
 
-    [(#SAISIE{radio, import_mot_groupe_creer,
-    		label=,
-    		explication=<:spip2spip:cfg_import_mot_groupe_creer:>,
-    		datas=#ARRAY{
-    			oui,<:spip2spip:cfg_import_mot_groupe_creer_oui:>,
-    			non,<:spip2spip:cfg_import_mot_groupe_creer_non:>}})]
- 
- 
-      
-      #SET{groupe_motcle,#ARRAY}
-      <BOUCLE_groupes1(GROUPES_MOTS){par titre}{titre !=- spip2spip - }>
-      [(#SET{groupe_motcle,#GET{groupe_motcle}|array_merge{#ARRAY{#TITRE,#ID_GROUPE}}})]
-      </BOUCLE_groupes1>
-      [(#SET{groupe_motcle, #GET{groupe_motcle}|array_flip})]
- 
-    	[(#SAISIE{selection,import_mot_groupe,
-    		label=,
-    		datas=#GET{groupe_motcle}})]     
-        
-        
-    
-   <!-- ******** -->
-   <!-- EXPORT  -->
-   <!-- ******** -->     
-    
-    <li><h2><:spip2spip:cfg_export:></h2></li>
-        
-    [(#SAISIE{checkbox, export_mot_article,
-    		label='',
-        datas=#ARRAY{on,<:spip2spip:cfg_export_mot_article:>}})]
-    [(#SAISIE{checkbox, export_mot_evnt,
-    		label='',
-        datas=#ARRAY{on,<:spip2spip:cfg_export_mot_evnt:>}})]   
-        
-      
-      #SET{groupe_motcle,#ARRAY{Tous,-1}
-      <BOUCLE_groupes(GROUPES_MOTS){par titre}>
-      [(#SET{groupe_motcle,#GET{groupe_motcle}|array_merge{#ARRAY{"&rarr; "#TITRE,#ID_GROUPE}}})]
-      </BOUCLE_groupes>
-      [(#SET{groupe_motcle, #GET{groupe_motcle}|array_flip})] 
-        
-      [(#SAISIE{selection_multiple,export_mot_groupe,
-      		label=<:spip2spip:cfg_export_mot_groupe:>,
-          cacher_option_intro=true,
-      		datas=#GET{groupe_motcle}})]     
+                    <!-- import date -->
+                    [(#SAISIE{radio, import_date_article,
+                    label=<:spip2spip:cfg_import_date_article:>,
+                    datas=#ARRAY{
+                    oui,<:spip2spip:cfg_import_date_article_oui:>,
+                    non,<:spip2spip:cfg_import_date_article_non:>}})]
+
+                    <!-- suivi syndic -->
+                    [(#SAISIE{checkbox, email_alerte,
+                    label='',
+                    datas=#ARRAY{on,<:spip2spip:cfg_email_alerte:>}})]
+                    [(#SAISIE{input, email_suivi,
+                    label=<:spip2spip:cfg_email_suivi:>})]
+
+                    <!-- source -->
+                    [(#SAISIE{checkbox, citer_source,
+                    label='',
+                    datas=#ARRAY{on,<:spip2spip:cfg_citer_source:>}})]
+
+                    <!-- créer les thématiques -->
+                    [(#SAISIE{radio, creer_thematique_article,
+                    label=<:spip2spip:cfg_creer_thematique_article:>,
+                    explication=<:spip2spip:cfg_creer_thematique_article_explication:>,
+                    datas=#ARRAY{
+                    oui,<:spip2spip:cfg_creer_thematique_article_oui:>,
+                    non,<:spip2spip:cfg_creer_thematique_article_non:>},
+                    defaut=non})]
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend><:spip2spip:cfg_import_motcle:></legend>
+                <ul>
+                    [(#SAISIE{checkbox, import_mot_article,
+                    label='',
+                    datas=#ARRAY{on,<:spip2spip:cfg_import_mot_article:>}})]
+
+                    [(#SAISIE{checkbox, import_mot_evnt,
+                    label='',
+                    datas=#ARRAY{on,<:spip2spip:cfg_import_mot_evnt:>}})]
+
+                    [(#SAISIE{radio, import_mot_groupe_creer,
+                    label=,
+                    explication=<:spip2spip:cfg_import_mot_groupe_creer:>,
+                    datas=#ARRAY{
+                    oui,<:spip2spip:cfg_import_mot_groupe_creer_oui:>,
+                    non,<:spip2spip:cfg_import_mot_groupe_creer_non:>}})]
+
+                    #SET{groupe_motcle,#ARRAY}
+                    <BOUCLE_groupes1 (GROUPES_MOTS){par titre}{titre !=- spip2spip - }>
+                    [(#SET{groupe_motcle,#GET{groupe_motcle}|array_merge{#ARRAY{#TITRE,#ID_GROUPE}}})]
+                    </BOUCLE_groupes1>
+                    [(#SET{groupe_motcle, #GET{groupe_motcle}|array_flip})]
+
+                    [(#SAISIE{selection,import_mot_groupe,
+                    label=,
+                    datas=#GET{groupe_motcle}})]
+                </ul>
+            </fieldset>
+
+            <!-- ******** -->
+            <!-- EXPORT  -->
+            <!-- ******** -->
+            <fieldset>
+                <legend><:spip2spip:cfg_export:></legend>
+                <ul>
+                    [(#SAISIE{checkbox, export_mot_article,
+                    label='',
+                    datas=#ARRAY{on,<:spip2spip:cfg_export_mot_article:>}})]
+                    [(#SAISIE{checkbox, export_mot_evnt,
+                    label='',
+                    datas=#ARRAY{on,<:spip2spip:cfg_export_mot_evnt:>}})]
 
 
-    </ul>
-    
-		<input type="hidden" name="_meta_casier" value="spip2spip" />
-		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
-	</div>
-	</form>
+                    #SET{groupe_motcle,#ARRAY{Tous,-1}
+                    <BOUCLE_groupes(GROUPES_MOTS){par titre}>
+                    [(#SET{groupe_motcle,#GET{groupe_motcle}|array_merge{#ARRAY{"&rarr; "#TITRE,#ID_GROUPE}}})]
+                    </BOUCLE_groupes>
+                    [(#SET{groupe_motcle, #GET{groupe_motcle}|array_flip})]
+
+                    [(#SAISIE{selection_multiple,export_mot_groupe,
+                    label=<:spip2spip:cfg_export_mot_groupe:>,
+                    cacher_option_intro=true,
+                    datas=#GET{groupe_motcle}})]
+
+
+                </ul>
+            </fieldset>
+
+            <input type="hidden" name="_meta_casier" value="spip2spip" />
+            <p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+        </div>
+    </form>
 </div>
 
 

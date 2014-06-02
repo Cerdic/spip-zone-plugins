@@ -12,17 +12,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'aucun_article' => 'aucun article &agrave; syndiquer actuellement',
   'avis_echec_syndication' => 'Erreur: Impossible de charger le flux',
   'avis_echec_syndication_01' => 'Erreur: Flux mal formé',
-    
+
   // B
   'back' => 'retour',
-  
+
   // C
   'copy_spip2spip' => 'Spip2Spip: Copie SPIP &agrave; SPIP',
   'config_spip2spip' => 'Configurer',
-  'cfg_import_statut'=> 'Statut des articles import&eacute;s',  
+  'cfg_import_statut'=> 'Statut des articles import&eacute;s',
   'cfg_email_alerte'=> 'Pr&eacute;venir par email à chaque nouvelle syndication ?',
   'cfg_email_suivi' => 'Si oui, sur quel email ?',
   'cfg_citer_source' => 'Citer l\'URL de l\'article d\'origine dans l\'article import&eacute;',
+  'cfg_creer_thematique_article' => 'Les thématiques du site SPIP2SPIP',
+  'cfg_creer_thematique_article_explication' => 'Si la thématique d\'un article est inexistante, que faire ?',
+  'cfg_creer_thematique_article_non' => 'Un des administrateurs le créera manuellement.',
+  'cfg_creer_thematique_article_oui' => 'Créer automatiquement le mot-clé correspondant.',
   'cfg_export' => 'Export des articles',
   'cfg_export_motcle' => 'Export des mots-clés',
   'cfg_export_mot_article' => 'Exporter les mots-clés des articles',
@@ -40,24 +44,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_import_mot_groupe_creer_non' => 'Placer les mots-clés dans le groupe',
   'cfg_intervalle_cron' => 'Intervalle de passage du CRON (en minutes)',
   'cfg_titre_parametrages' => 'Options d\'import et d\'export des articles d\'un réseau Spip2spip',
-  
+
   // E
   'erreur_obligatoire' => 'Champ obligatoire',
   'erreur_flux_inconnu' => 'Impossible de charger ce flux',
-  
+
   // F
   'form_s2s_1' => 'Titre du site',
   'form_s2s_2' => 'URL du fil au format SPIP2SPIP',
   'form_s2s_3' => 'Ajouter ce site',
-  
+
   // H
   'how_to' => 'Pensez &agrave; bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots\'>Voir le groupe</a>]<br /><br />
   - attribuez les mots cl&eacute;s de ce groupe aux <strong>articles</strong> dont vous voulez envoyer le contenu vers les autres spip2spip<br /><br />
   - attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s &agrave; une th&eacute;matique donn&eacute;e.',
-  
+
   // I
   'icone_creer_spip2spip' => 'Ajouter un site spip2spip',
-	'icone_modifier_spip2spip' => 'Modifier ce site spip2spip',
+  'icone_modifier_spip2spip' => 'Modifier ce site spip2spip',
   'intro_spip2spip' => 'Permet de recopier automatiquement des articles d\'un SPIP &agrave; l\'autre.',
   'install_spip2spip' => 'Installation des tables de spip2spip',
   'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
@@ -76,34 +80,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave; rien</p>',
   'info_aucun_spip2spip' => 'Aucun site actuellement enregistré',
   'icone_creer_spip2spipicone_creer_spip2spip' => 'Ajouter un nouveau site Spip2spip',
-  
+
   // L
   'label_site_titre' => 'Nom du site',
   'label_site_rss' => 'Adresse du Flux Spip2spip',
   'label_maj' => 'Dernière synchronisation',
   'label_log' => 'Rapport de syndication',
-  
+  'label_thematique' => 'Thématique',
+
   // M
   'maj' => 'Derni&egrave;re syndication',
-  
+
   // N
   'no_target' => 'aucune rubrique li&eacute;e &agrave; ce mot cl&eacute;',
   'not_installed' => 'spip2spip n\'est pas encore install&eacute;.<p><a href=\'?exec=spip2spip_install\'>installer spip2spip</a></p>',
-  
+
   // O
   'origin_url' => 'L\'adresse originale de cet article est',
-  
+
   // R
   'retour_spip2spip' => 'Retour',
-  
-  
+
+
   // T
   'titre' => 'Spip2Spip',
   'titre_spip2spip' => 'Site',
   'titre_spip2spips' => 'Sites Spip2Spip',
   'titre_page_configurer_spip2spip' => 'Spip2Spip',
   'titre_mail' => 'Syndication automatique SPIP2SPIP',
-  
+  'titre_logo_spip2spip' => 'Logo du site SPIP2SPIP',
+
+  // V
+  'voir_thematique' => 'Voir le mot-clé',
+
 );
 
 ?>

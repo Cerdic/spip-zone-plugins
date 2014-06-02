@@ -1,21 +1,21 @@
-<BOUCLE_spip2spip(SPIP2SPIPS){id_spip2spip}>
+<BOUCLE_spip2spip (SPIP2SPIPS){id_spip2spip}>
 
 [<div class="champ contenu_site_rss[ (#SITE_RSS*|strlen|?{'',vide})]">
-	<label style="font-weight:bold;display:block;margin-top:1em;"><:spip2spip:label_site_rss:> : </label>
+	<span class="label visible"><:spip2spip:label_site_rss:> : </span>
 	<span dir='#LANG_DIR' class='#EDIT{site_rss} site_rss'><a href="#SITE_RSS">(#SITE_RSS)</a></span>
 </div>]
 
 [<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
-	<label style="font-weight:bold;display:block;margin-top:1em;"><:spip2spip:label_maj:> : </label>
+	<span class="label visible"><:spip2spip:label_maj:> : </span>
 	<span dir='#LANG_DIR' class='maj'>
       <a href="#SELF"><img src="[(#CHEMIN{themes/spip/images/cache-empty-16.png})]" alt="<:spip2spip:action_syndic:>"/></a>
      &nbsp;(#MAJ)</span>
 </div>]
 
 [<div class="champ contenu_log">
-  <label style="font-weight:bold;display:block;margin-top:1em;"><:spip2spip:label_log:> : </label>
-  <div  style="background:#eaeaea;padding:15px;margin:1em 0;line-height:200%;"> 
-      (#ID_SPIP2SPIP|spip2spip_syndiquer_manuel) 
+  <span class="label visible"><:spip2spip:label_log:> : </span>
+  <div class="liste articles">
+      (#ID_SPIP2SPIP|spip2spip_syndiquer_manuel)
   </div>
 </div>]
 
