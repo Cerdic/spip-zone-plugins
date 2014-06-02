@@ -206,7 +206,7 @@ function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$lien,$titr
 		return $object;
 	$a = '<a href="'.$l['url'].'"';
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
-	$a .= $l['titre'] ? ' title="'.attribut_html($l['titre']).'"' : '';
+	$a .= $l['titre'] ? ' title="'.attribut_html(typo($l['titre'])).'"' : '';
 	$a .= $l['lang'] ? ' hreflang="'.$l['lang'].'"' : '';
 	$a .= $l['mime'] ? ' type="'.$l['mime'].'"' : '';
 	$a .= '>';
