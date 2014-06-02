@@ -159,6 +159,7 @@ function spipdf_remplaceCaption($matches){
 }
 
 function spipdf_nettoyer_html($html, $params_pdf = array()){
+
 	// supprimer les spans autour des images et récupérer le placement
 	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*float:(.*);.*>(.*)<\/span>/iUms';
 	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceSpan' : 'spipdf_remplaceSpan_wfloat', $html);
@@ -170,9 +171,8 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 	// supprimer les dl autour des images et récupérer le placement
 	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*float:(.*);.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
 	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceDt' : 'spipdf_remplaceDt_wfloat', $html);
-
 	// replacer id par name pour les notes
-	$patterns_note = '/<a.*href.*class=\'spip_note\'.*>/iUms';
+	$patterns_note = '/<a[^>]*href[^>]*class=\'spip_note\'[^>]*>/iUms';
 	$html = preg_replace_callback($patterns_note, 'spipdf_remplaceIdParName', $html);
 
 	// float sur les puces graphiques
@@ -402,4 +402,15 @@ function spipdf_affichage_final($texte){
 	return $texte;
 }
 
+/**
+ * Ne pas permettre d'aller chercher un fond en sous-repertoire dans spipdf.html
+ * @param $fond
+ * @return mixed
+ */
+function spipdf_securise_fond($fond){
+	$fond = str_replace("/","_",$fond);
+	$fond = str_replace("\\","_",$fond);
+
+	return $fond;
+}
 ?>
