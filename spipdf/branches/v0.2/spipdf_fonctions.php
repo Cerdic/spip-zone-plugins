@@ -176,7 +176,7 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 	$html = preg_replace_callback($patterns_note, 'spipdf_remplaceIdParName', $html);
 
 	// float sur les puces graphiques
-	$patterns_puce = '/<img[^>]*class="puce" alt="-"[^>]*>/iUms';
+	$patterns_puce = '/<img[^>]*class=[\'"]puce[\'"] alt=[\'"]-[\'"][^>]*>/iUms';
 	$html = preg_replace($patterns_puce, '-', $html);
 
 	// supprimer les dl autour des images centrer
