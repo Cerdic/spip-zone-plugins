@@ -65,7 +65,7 @@ class SpipSourcesIndexer {
 
     public function loadIndexesStats() {
         include_spip('inc/config');
-        $stats = lire_config($this->meta_stats, []);
+        $stats = lire_config($this->meta_stats, array());
         if (!is_array($stats)) {
             $stats = array();
         }
