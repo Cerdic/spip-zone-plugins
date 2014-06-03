@@ -67,30 +67,30 @@ class SpipSourcesIndexer {
         include_spip('inc/config');
         $stats = lire_config($this->meta_stats, []);
         if (!is_array($stats)) {
-            $stats = [];
+            $stats = array();
         }
-        return $stats + [
-            'last' => [
+        return $stats + array(
+            'last' => array(
                 'sourceClass' => '',
                 'source'      => 0,
                 'part'        => 0,
                 'documents'   => 0,
-                'time' => [
+                'time' => array(
                     'documents'   => 0,
                     'indexing'    => 0,
-                ],
-            ],
-            'sources' => [],
-        ];
+                ),
+            ),
+            'sources' => array(),
+        );
     }
 
     public function loadIndexesStatsClean() {
         $stats = $this->loadIndexesStats();
         $stats['last']['documents'] = 0;
-        $stats['last']['time'] = [
+        $stats['last']['time'] = array(
             'documents'   => 0,
             'indexing'    => 0,
-        ];
+        );
         return $stats;
     }
 
@@ -129,15 +129,15 @@ class SpipSourcesIndexer {
             $stats['last']['sourceClass'] = (string)$source;
 
             if (!isset($stats['sources'][$skey])) {
-                $stats['sources'][$skey] = [
+                $stats['sources'][$skey] = array(
                     'sourceClass' => (string)$source,
                     'documents' => 0,
-                    'time' => [
+                    'time' => array(
                         'documents' => 0,
                         'indexing' => 0,
                         'total' => 0
-                    ]
-                ];
+                    )
+                );
             }
 
             $this->indexSource($source, $skey, $stats);
@@ -179,14 +179,14 @@ class SpipSourcesIndexer {
         while ($parts->valid()) {
             $part = $parts->current();
             $stats['last']['part'] = $parts->key();
-            
+
             // on regarde s'il reste du temps AVANT d'indexer les 1000 suivants
             if ($this->isTimeout()) {
                 $t = spip_timer('source', true);
                 $stats['sources'][$skey]['time']['total'] += $t;
                 return false;
             }
-            
+
             $this->indexSourcePart($source, $skey, $part, $stats);
             $parts->next();
         }
