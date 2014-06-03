@@ -37,7 +37,7 @@ class Sphinx implements StorageInterface {
                 echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
                 echo "<pre>".print_r($q, true)."</pre>";
                 exit;
-            }          
+            }
         }
 
         // par lot de 10 entrées
@@ -67,12 +67,12 @@ class Sphinx implements StorageInterface {
 
 
     public function replaceDocument(Document $document){
-        $this->replaceDocuments([$document]);
+        $this->replaceDocuments(array($document));
     }
 
 
     public function reformatDocument(Document $document) {
-        return [
+        return array(
            "id" => $document->id,
            "title" => $document->title,
            "summary" => $document->summary,
@@ -81,7 +81,7 @@ class Sphinx implements StorageInterface {
            "uri" => $document->uri,
            "properties" => json_encode($document->properties),
             "signature" => $this->signer($document),
-        ];
+        );
     }
 
     public function signer($doc) {
