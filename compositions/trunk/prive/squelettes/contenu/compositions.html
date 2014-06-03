@@ -1,28 +1,35 @@
 #SET{compositions,#REM|compositions_lister_disponibles}
-<BOUCLE_compositions(POUR){tableau #GET{compositions}}>
-	<B_pour>
-	<h4>[(#CLE|table_objet|ucfirst)]</h4>
-	<ul class="liste_items compositions">
-	<BOUCLE_pour(POUR){tableau #VALEUR}{par nom}>
+<BOUCLE_compositions (POUR){tableau #GET{compositions}}>
+<B_pour>
+<h4>[(#CLE|table_objet|ucfirst)]</h4>
+<ul class="liste_items compositions">
+	<BOUCLE_pour (POUR){tableau #VALEUR}{par nom}>
 	<li class="item">
-	[(#VALEUR|table_valeur{icon}|image_reduire{24,24}|inserer_attribut{class,logo})]
-	<h3>[(#VALEUR|table_valeur{nom}|supprimer_numero)]</h3>
-	[<div class='descriptif'>(#VALEUR|table_valeur{description})</div>]
+		[(#VALEUR|table_valeur{icon}|image_reduire{24,24}|inserer_attribut{class,logo})]
+		<h3>[(#VALEUR|table_valeur{nom}|supprimer_numero)]</h3>
+		[<div class='descriptif'>(#VALEUR|table_valeur{description})</div>]
 
-        <B_heritages>
-        <div class='descriptif'><:compositions:heritages:> <ul class="spip"><BOUCLE_heritages(POUR){tableau #VALEUR|table_valeur{branche}}><li>#CLE (#VALEUR)</li></BOUCLE_heritages></ul></div>
-        </ul></B_heritages>
+		<B_heritages>
+		<div class='descriptif'><:compositions:heritages:>
+			<ul class="spip">
+				<BOUCLE_heritages (POUR){tableau #VALEUR|table_valeur{branche}}>
+				<li>#CLE (#VALEUR)</li></BOUCLE_heritages>
+			</ul>
+		</div>
+		</B_heritages>
 
 		<B_util>
-			[(#TOTAL_BOUCLE|singulier_ou_pluriel{compositions:une_utilisation,compositions:des_utilisations})]
-			<ul>
-			<BOUCLE_util(POUR){tableau #_compositions:CLE|compositions_lister_utilisations{#CLE}}>
-			<li><a href="[(#VALEUR|table_valeur{id}|generer_url_entite{#_compositions:CLE})]">[(#VALEUR|table_valeur{titre}|supprimer_numero)][ | (#VALEUR|table_valeur{id})]</a></li>
-			</BOUCLE_util>
+		[(#TOTAL_BOUCLE|singulier_ou_pluriel{compositions:une_utilisation,compositions:des_utilisations})]
+		<div class='descriptif'>
+			<ul class="spip">
+				<BOUCLE_util (POUR){tableau #_compositions:CLE|compositions_lister_utilisations{#CLE}}>
+				<li><a href="[(#VALEUR|table_valeur{id}|generer_url_entite{#_compositions:CLE})]">[(#VALEUR|table_valeur{titre}|supprimer_numero)][ | (#VALEUR|table_valeur{id})]</a></li>
+				</BOUCLE_util>
 			</ul>
+		</div>
 		</B_util>
 	</li>
 	</BOUCLE_pour>
-	</ul>
-	</B_pour>
+</ul>
+</B_pour>
 </BOUCLE_compositions>
