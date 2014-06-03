@@ -7,6 +7,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// _
+	'_blank' => 'Ventana nueva',
+	'_self' => 'Ventana actual',
+
 	// A
 	'always' => 'Siempre',
 	'auto' => 'Esconder automáticamente',
@@ -52,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_player_mp3_eraplayer' => 'Player Erational',
 	'label_player_mp3_neoplayer' => 'Player Neolao',
 	'label_player_mp3_pixplayer' => 'One pixel out player',
+	'label_playeralpha' => 'Transparencia del fondo del reproductor:',
 	'label_playercolor' => 'Color del lector: ',
 	'label_playertimeout' => 'Tiempo en segundos antes que el reproductor se oculte:',
 	'label_scrollbarcolor' => 'Coulor de la barra de progresión:',
@@ -60,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_showiconplay' => 'Mostrar el icono PLAY en el medio del video',
 	'label_showmouse' => 'Mostrar el cursor del ratón: ',
 	'label_shownext' => 'Mostrar el botón SIGUIENTE',
+	'label_showplayer' => 'Mostrar barra de botones:',
 	'label_showprevious' => 'Mostrar el botón ANTERIOR',
 	'label_showstop' => 'Mostrar el botón de ALTO',
 	'label_showswitchsubtitles' => 'Mostrar el botón de OCULTAR/MOSTRAR SUBTITULOS',
@@ -67,20 +73,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_showtime_0' => 'Ocultar',
 	'label_showtime_1' => 'Mostrar botón',
 	'label_showtime_2' => 'Mostrar tiempo restante',
+	'label_showtitlebackground' => 'Mostrar título como fondo:',
 	'label_showvolume' => 'Mostrar el botón de VOLUMEN',
 	'label_shuffle' => 'Reproducción Aleatoria',
 	'label_srt' => 'Utilizar Subtítulos SRT',
+	'label_srtbgcolor' => 'Color de fondo de los Subtítulos:',
 	'label_srtcolor' => 'Color de la letra del Subtítulo:',
 	'label_srtsize' => 'Tamaño de letra del Subtítulo:',
 	'label_title' => 'Títutlo(s):',
 	'label_titlecolor' => 'Color de la letra del Título',
 	'label_titlesize' => 'Tamaño de letra del Título:',
+	'label_videobgcolor' => 'Color de fondo cuando hay video:',
 	'label_volume' => 'Nivel de volumen inicial:',
+	'label_width' => 'Fozar ancho del reproductor:',
 
 	// M
 	'maxi' => 'Maxi',
 	'mini' => 'Mini',
 	'multi' => 'Multi',
+
+	// N
+	'normal' => 'Normal',
 
 	// P
 	'player_audio' => 'Reproductor de Audio',
