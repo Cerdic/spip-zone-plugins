@@ -82,8 +82,13 @@ Clustering (regroupement de points proches) :
 
 <script type="text/javascript">/*<!\[CDATA\[*/
 var map[(#GET{id})];
-// Charger le javascript de GIS et initialiser la carte (des que DOM ready)
-jQuery.ajax({url: '[(#PRODUIRE{fond=javascript/gis.js})]', dataType: 'script', cache: true}).done(function(){
+var jQgisloader;
+// Charger le javascript de GIS une seule fois si plusieurs carte
+if (typeof jQgisloader=="undefined"){
+	jQgisloader = jQuery.ajax({url: '[(#PRODUIRE{fond=javascript/gis.js})]', dataType: 'script', cache: true});
+}
+// et initialiser la carte (des que js GIS charge et des que DOM ready)
+jQgisloader.done(function(){
 	jQuery(function(){
 		map[(#GET{id})] = new L.Map.Gis('map[(#GET{id})]',{
 			mapId: '[(#GET{id})]',
