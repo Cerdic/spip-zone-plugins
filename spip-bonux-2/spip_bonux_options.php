@@ -50,6 +50,7 @@ function _T_ou_typo($valeur, $mode_typo='toujours') {
 }
 }
 
+if (!function_exists('spip_array_insert')) {
 /*
  * Insère toutes les valeurs du tableau $arr2 après (ou avant) $cle dans le tableau $arr1.
  * Si $cle n'est pas trouvé, les valeurs de $arr2 seront ajoutés à la fin de $arr1.
@@ -64,7 +65,7 @@ function _T_ou_typo($valeur, $mode_typo='toujours') {
  * @param bool $avant Indique si l'insertion se fait avant la clé (par défaut c'est après)
  * @return array Retourne le tableau avec l'insertion
  */
-function array_insert($arr1, $cle, $arr2, $avant=false){
+function spip_array_insert($arr1, $cle, $arr2, $avant=false){
 	$index = array_search($cle, array_keys($arr1));
 	if($index === false){
 		$index = count($arr1); // insert @ end of array if $key not found
@@ -76,6 +77,7 @@ function array_insert($arr1, $cle, $arr2, $avant=false){
 	}
 	$fin = array_splice($arr1, $index);
 	return array_merge($arr1, $arr2, $fin);
+}
 }
 
 /*

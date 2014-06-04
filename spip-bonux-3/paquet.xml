@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_bonux"
 	categorie="outil"
-	version="3.0.5"
+	version="3.0.6"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img_pack/spip-bonux.png"

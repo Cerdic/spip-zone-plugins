@@ -95,8 +95,8 @@ function _T_ou_typo($valeur, $mode_typo='toujours') {
  * @param bool $avant Indique si l'insertion se fait avant la clé (par défaut c'est après)
  * @return array Retourne le tableau avec l'insertion
  */
-if (!function_exists('array_insert')) {
-function array_insert($arr1, $cle, $arr2, $avant=false){
+if (!function_exists('spip_array_insert')) {
+function spip_array_insert($arr1, $cle, $arr2, $avant=false){
 	$index = array_search($cle, array_keys($arr1));
 	if($index === false){
 		$index = count($arr1); // insert @ end of array if $key not found
