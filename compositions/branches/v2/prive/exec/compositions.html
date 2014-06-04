@@ -1,7 +1,7 @@
 #SET{compositions,#REM|compositions_lister_disponibles}
 <BOUCLE_compositions (POUR){tableau #GET{compositions}}>
 <B_pour>
-<h4>[(#CLE|table_objet|ucfirst)]</h4>
+<h2>[(#CLE|table_objet|ucfirst)]</h2>
 <ul class="liste_items compositions">
 	<BOUCLE_pour (POUR){tableau #VALEUR}{par nom}>
 	<li class="item">
