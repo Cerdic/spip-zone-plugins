@@ -86,10 +86,13 @@ function migrateur_supprimer_toutes_tables_sql() {
 /**
  * Copier le contenu de l'ancienne bdd dans la nouvelle (qui doit être au préalable vidée)
 **/
-function migrateur_copier_la_bdd() {
+function migrateur_copier_la_bdd($source_sql = '') {
 
 	$dest       = MIGRATEUR_DESTINATION_DIR . 'tmp/dump/';
-	$source_sql = MIGRATEUR_NOM_EXPORT_SQL;
+
+	if (!$source_sql) {
+		$source_sql = MIGRATEUR_NOM_EXPORT_SQL;
+	}
 
 	$user = MIGRATEUR_DESTINATION_SQL_USER;
 	$pass = MIGRATEUR_DESTINATION_SQL_PASS;

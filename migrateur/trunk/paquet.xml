@@ -1,7 +1,7 @@
 <paquet
 	prefix="migrateur"
 	categorie="outil"
-	version="2.2.1"
+	version="2.2.2"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/migrateur-64.png"
