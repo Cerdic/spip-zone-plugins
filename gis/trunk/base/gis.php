@@ -75,7 +75,7 @@ function gis_declarer_tables_objets_sql($tables){
 		'titre' => "titre, '' AS lang",
 
 		/* L'édition, l'affichage et la recherche */
-		'page' => 'gis',
+		'page' => false,
 		'url_voir' => 'gis',
 		'url_edit' => 'gis_edit',
 		'editable' => 'oui',
