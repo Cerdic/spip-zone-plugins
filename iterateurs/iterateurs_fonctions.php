@@ -80,7 +80,7 @@ function critere_args($idb, &$boucles, $crit) {
 }
 
 /*
- * Passer une liste de donnees a l'iterateur DATA 
+ * Passer une liste de donnees a l'iterateur DATA
  * (DATA){liste X1, X2, X3}
  */
 function critere_liste($idb, &$boucles, $crit) {
@@ -142,7 +142,7 @@ function critere_pagination($idb, &$boucles, $crit) {
 		$pas = strval($r ? $r : 10);
 	}
 	$type = !isset($crit->param[0][1]) ? "'$idb'" : calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucle->id_parent);
-	$debut = ($type[0]!=="'") ? "'debut'.$type" 
+	$debut = ($type[0]!=="'") ? "'debut'.$type"
 	  : ("'debut" .substr($type,1));
 
 	$boucle->modificateur['debut_nom'] = $type;
