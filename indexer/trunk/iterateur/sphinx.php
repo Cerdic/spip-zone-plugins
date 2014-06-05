@@ -895,7 +895,7 @@ function critere_SPHINX_filtermono_dist($idb, &$boucles, $crit) {
 		$comparison = calculer_liste($crit->param[3], array(), $boucles, $boucles[$idb]->id_parent);
 	}
 	if (isset($crit->param[4])) {
-		$comparison = calculer_liste($crit->param[4], array(), $boucles, $boucles[$idb]->id_parent);
+		$type = calculer_liste($crit->param[4], array(), $boucles, $boucles[$idb]->id_parent);
 	}
 	
 	// Test
@@ -908,6 +908,7 @@ function critere_SPHINX_filtermono_dist($idb, &$boucles, $crit) {
 		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
 		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
 		. (isset($crit->param[3]) ? "\t\t\t'comparison'  => $comparison,\n" : '')
+		. (isset($crit->param[4]) ? "\t\t\t'comparison'  => $type,\n" : '')
 		. "\t\t);\n";
 	
 	// Fin de test
