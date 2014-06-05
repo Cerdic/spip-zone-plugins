@@ -103,6 +103,12 @@ function critere_datapath($idb, &$boucles, $crit) {
 	}
 }
 
+/* le critere {si ...} applicable a toutes les boucles
+ * Doit passer par dessus spip-bonux-2 depuis r82600
+ */
+function critere_CONDITION_si($idb, &$boucles, $crit) {
+	return critere_si($idb, $boucles, $crit);
+}
 
 /* le critere {si ...} applicable a toutes les boucles */
 function critere_si($idb, &$boucles, $crit) {
