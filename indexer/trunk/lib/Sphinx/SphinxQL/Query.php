@@ -76,7 +76,7 @@ class Query{
 			}
 			return join(',', $value);
 		}
-		// If there's a knowed type, cast the value, or consider as a string
+		// If there's a known type, cast the value, or consider as a string
 		elseif ($type) {
 			if (preg_match('/(int|entier)/i', $type)) {
 				return intval($value);
