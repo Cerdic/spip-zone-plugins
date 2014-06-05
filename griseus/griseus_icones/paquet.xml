@@ -1,13 +1,14 @@
 <paquet
 	prefix="griseusico"
 	categorie="theme"
-	version="0.1.4"
+	version="0.1.5"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/griseus/images/griseusico-256.png"
+	documentation="http://contrib.spip.net/Icones-Griseus-pour-l-espace-prive"
 >
 
-	<nom>Icônes Griseus</nom>
+	<nom>Griseus : icônes espace privé</nom>
 
 	<auteur>Charles Razack</auteur>
 
