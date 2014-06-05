@@ -66,10 +66,10 @@ function autoriser_calendrier_bouton_dist($faire, $type='', $id=0, $qui = NULL, 
  */
 
 function autoriser_statistiques_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return $GLOBALS['visiteur_session']['statut']=='0minirezo';
+	return isset($GLOBALS['visiteur_session']['statut']) and $GLOBALS['visiteur_session']['statut']=='0minirezo';
 }
 function autoriser_referers_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
-	return $GLOBALS['visiteur_session']['statut']=='0minirezo';
+	return isset($GLOBALS['visiteur_session']['statut']) and $GLOBALS['visiteur_session']['statut']=='0minirezo';
 }
 function autoriser_forum_reactions_bouton_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	return autoriser('publierdans','rubrique',_request('id_rubrique'));
