@@ -908,7 +908,7 @@ function critere_SPHINX_filtermono_dist($idb, &$boucles, $crit) {
 		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
 		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
 		. (isset($crit->param[3]) ? "\t\t\t'comparison'  => $comparison,\n" : '')
-		. (isset($crit->param[4]) ? "\t\t\t'comparison'  => $type,\n" : '')
+		. (isset($crit->param[4]) ? "\t\t\t'type'        => $type,\n" : '')
 		. "\t\t);\n";
 	
 	// Fin de test
