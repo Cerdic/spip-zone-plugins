@@ -894,6 +894,9 @@ function critere_SPHINX_filtermono_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[3])) {
 		$comparison = calculer_liste($crit->param[3], array(), $boucles, $boucles[$idb]->id_parent);
 	}
+	if (isset($crit->param[4])) {
+		$comparison = calculer_liste($crit->param[4], array(), $boucles, $boucles[$idb]->id_parent);
+	}
 	
 	// Test
 	$boucle->hash .= "\n\tif ($test) {\n";
@@ -930,6 +933,9 @@ function critere_SPHINX_filtermultijson_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[2])) {
 		$values = calculer_liste($crit->param[2], array(), $boucles, $boucles[$idb]->id_parent);
 	}
+	if (isset($crit->param[3])) {
+		$type = calculer_liste($crit->param[3], array(), $boucles, $boucles[$idb]->id_parent);
+	}
 	
 	// Test
 	$boucle->hash .= "\n\tif ($test) {\n";
@@ -940,6 +946,7 @@ function critere_SPHINX_filtermultijson_dist($idb, &$boucles, $crit) {
 	$boucle->hash .= "\t\t\$command['filters_multijson'][] = array(\n"
 		. (isset($crit->param[1]) ? "\t\t\t'field'       => $field,\n" : '')
 		. (isset($crit->param[2]) ? "\t\t\t'values'      => $values,\n" : '')
+		. (isset($crit->param[3]) ? "\t\t\t'type'        => $type,\n" : '')
 		. "\t\t);\n";
 	
 	// Fin de test

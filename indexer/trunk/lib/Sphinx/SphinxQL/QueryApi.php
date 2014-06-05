@@ -400,11 +400,16 @@ class QueryApi extends Query {
 		if (!is_array($filter['values'])){
 			$filter['values'] = array($filter['values']);
 		}
+		
+		// No type by default
+		if (!isset($filter['type'])) {
+			$filter['type'] = '';
+		}
 
 		// For each values, we build a comparison
 		$comparisons = array();
 		foreach ($filter['values'] as $value){
-			$comparison = $filter['field'] . $filter['comparison'] . $this->quote($value);
+			$comparison = $filter['field'] . $filter['comparison'] . $this->quote($value, $filter['type']);
 			if (isset($filter['not']) and $filter['not']){
 				$comparison = "!($comparison)";
 			}
@@ -446,6 +451,11 @@ class QueryApi extends Query {
 		if (!is_array($filter['values'])){
 			$filter['values'] = array(array($filter['values']));
 		}
+		
+		// No type by default
+		if (!isset($filter['type'])) {
+			$filter['type'] = '';
+		}
 
 		// At depth 1, generate AND
 		$ins = array();
@@ -454,7 +464,12 @@ class QueryApi extends Query {
 			if (!is_array($values_in)){
 				$values_in = array($values_in);
 			}
-			$ins[] = 'IN(' . $filter['field'] . ', ' . join(', ', array_map(array($this, 'quote'), array_filter($values_in))) . ')';
+			// Quote all values if necessary
+			$values_in = array_filter($values_in);
+			foreach ($values_in as $k=>$v) {
+				$values_in[$k] = $this->quote($v, $filter['type']);
+			}
+			$ins[] = 'IN(' . $filter['field'] . ', ' . join(', ', $values_in) . ')';
 		}
 
 		if ($ins){

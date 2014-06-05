@@ -69,11 +69,29 @@ class Query{
 	}
 
 	function quote($value, $type='') {
-		return
-			(is_numeric($value)) ? strval($value) :
-				(!is_array($value) ? ("'" . addslashes($value) . "'") :
-					join(",", array_map(array($this, 'quote'), $value))
-				);
+		// If it's an array, quote all internal values
+		if (is_array($value)) {
+			foreach ($value as $k=>$v) {
+				$value[$k] = $this->quote($v);
+			}
+			return join(',', $value);
+		}
+		// If there's a knowed type, cast the value, or consider as a string
+		elseif ($type) {
+			if (preg_match('/(int|entier)/i', $type)) {
+				return intval($value);
+			}
+			elseif (preg_match('/(double|float)/i', $type)) {
+				return floatval($value);
+			}
+			else {
+				return "'" . addslashes(strval($value)) . "'";
+			}
+		}
+		// If no type, all numeric valuee is return as numeric : "1234" => 1234
+		else{
+			return is_numeric($value) ? strval($value) : "'" . addslashes($value) . "'";
+		}
 	}
 
 
