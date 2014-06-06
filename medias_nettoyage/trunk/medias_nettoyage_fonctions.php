@@ -26,8 +26,11 @@ function medias_lister_extensions_documents ()
 {
     $extensions = array();
     $extensions_cibles = sql_allfetsel('DISTINCT extension', 'spip_documents');
-    foreach ($extensions_cibles as $extension) {
-        $extensions[] = $extension['extension'];
+    // On vérifie bien qu'on reçoit un tableau.
+    if (is_array($extensions_cibles) and count($extensions_cibles) > 0) {
+        foreach ($extensions_cibles as $extension) {
+            $extensions[] = $extension['extension'];
+        }
     }
     // On rajoute le répertoire "vignettes"
     $extensions[] = 'vignettes';
@@ -49,9 +52,11 @@ function medias_creer_extensions_repertoires ($repertoire_img = _DIR_IMG)
 {
     $extensions = medias_lister_extensions_documents();
 
-    foreach ($extensions as $extension) {
-        if (!is_dir($repertoire_img . $extension)) {
-            @mkdir($repertoire_img . $extension, _SPIP_CHMOD);
+    if (is_array($extensions) and count($extensions) > 0) {
+        foreach ($extensions as $extension) {
+            if (!is_dir($repertoire_img . $extension)) {
+                @mkdir($repertoire_img . $extension, _SPIP_CHMOD);
+            }
         }
     }
     return;
@@ -87,8 +92,10 @@ function medias_lister_repertoires ($repertoire_img = _DIR_IMG)
     // On vérifie que $repertoire_img passé en paramètre est bien un répertoire existant.
     // cf. ../IMG/orphelins qui ne serait pas encore créé.
     if (is_dir($repertoire_img)) {
+        // Avec la fonction scandir, on liste le contenu (existant) du répertoire cible.
         $rep_img = array_diff(scandir($repertoire_img), array('..','.','.svn')); // On ne liste pas le répertoire .svn
         foreach ($rep_img as $repertoire) {
+            // On vérifie que c'est un répertoire et non un fichier.
             if (is_dir($repertoire_img . $repertoire)) {
                 $repertoires[] = $repertoire_img . $repertoire;
             }
@@ -111,15 +118,18 @@ function medias_lister_documents_bdd ()
     $docs_fichiers = array();
 
     $docs_bdd = sql_allfetsel('fichier', 'spip_documents', "distant='non' AND fichier!=''");
-    foreach ($docs_bdd as $doc) {
-        /**
-         * On formate par rapport au répertoire ../IMG/
-         * On évite les doubles // qu'il peut y avoir
-         */
-        $docs_fichiers[] = preg_replace("/\/\//", "/", get_spip_doc($doc['fichier']));
+    // On vérifie que nous avons au moins un élément dans le tableau
+    if (count($docs_bdd) > 0) {
+        foreach ($docs_bdd as $doc) {
+            /**
+             * On formate par rapport au répertoire ../IMG/
+             * On évite les doubles // qu'il peut y avoir
+             */
+            $docs_fichiers[] = preg_replace("/\/\//", "/", get_spip_doc($doc['fichier']));
+        }
+        // on enlève les url vides issues de la base :
+        $docs_fichiers = array_filter($docs_fichiers);
     }
-    // on enlève les url vides issues de la base :
-    $docs_fichiers = array_filter($docs_fichiers);
 
     // On trie dans l'ordre alphabétique :
     sort($docs_fichiers);
@@ -186,21 +196,23 @@ function medias_lister_documents_bdd_orphelins()
  */
 function medias_lister_documents_bdd_orphelins_taille()
 {
-    $documents_orphelins    = medias_lister_documents_bdd_orphelins();
+    $docs_orphelins    = medias_lister_documents_bdd_orphelins();
     $taille         = 0;
     $pattern_img        = "/" . preg_replace("/\//", "\/", _DIR_IMG) . "/";
 
-    if (count($documents_orphelins) > 0) {
-        $documents_bdd = sql_allfetsel(
+    if (count($docs_orphelins) > 0) {
+        $docs_bdd = sql_allfetsel(
             'fichier,taille',
             'spip_documents',
             "fichier IN ('"
-            . join("','", preg_replace($pattern_img, '', $documents_orphelins)) . "')"
+            . join("','", preg_replace($pattern_img, '', $docs_orphelins)) . "')"
         );
-        foreach ($documents_bdd as $document_bdd) {
-            if (!file_exists(get_spip_doc($document_bdd['fichier']))) {
-                $taille = $taille + ($document_bdd['taille']/1000);
-                // On divise par 1000 pour éviter la limite de l'integer php.
+        if (is_array($docs_bdd) and count($docs_bdd) > 0) {
+            foreach ($docs_bdd as $document_bdd) {
+                if (!file_exists(get_spip_doc($document_bdd['fichier']))) {
+                    $taille = $taille + ($document_bdd['taille']/1000);
+                    // On divise par 1000 pour éviter la limite de l'integer php.
+                }
             }
         }
     }
@@ -223,16 +235,25 @@ function medias_lister_documents_repertoire ($repertoire_img = _DIR_IMG)
     $docs_fichiers = array();
 
     foreach (medias_lister_extensions_documents() as $extension) {
-        // On va chercher dans IMG/$extension/*.*
-        $fichiers = glob($repertoire_img . "$extension/*.*");
-        foreach ($fichiers as $fichier) {
-            $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+        // Par sécurité, on vérifie que l'extension a bel
+        // et bien un répertoire physique
+        if (is_dir($repertoire_img . $extension)) {
+            // On va chercher dans IMG/$extension/*.*
+            $fichiers = glob($repertoire_img . "$extension/*.*");
+            if (is_array($fichiers) and count($fichiers) > 0) {
+                foreach ($fichiers as $fichier) {
+                    $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+                }
+            }
         }
     }
     // On va chercher dans IMG/*.*
     $fichiers = glob($repertoire_img . "*.*");
-    foreach ($fichiers as $fichier) {
-        $docs_fichiers[] = $fichier;
+    // On vérifie que c'est bien un tableau, avec au moins un élément.
+    if (is_array($fichiers) and count($fichiers) > 0) {
+        foreach ($fichiers as $fichier) {
+            $docs_fichiers[] = $fichier;
+        }
     }
     $docs_fichiers = array_unique(
         array_diff(
@@ -304,23 +325,29 @@ function medias_lister_documents_repertoire_complet ($repertoire_img = _DIR_IMG)
     // On va chercher dans IMG/distant/*/*.*
         // Exemple : IMG/distant/jpg/nom_fichier.jpg
     $fichiers = glob($repertoire_img . "*/*/*.*");
-    foreach ($fichiers as $fichier) {
-        $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
-        // On évite les doubles slashs '//' qui pourrait arriver comme un cheveu sur la soupe.
+    if (is_array($fichiers) and count($fichiers) > 0) {
+        foreach ($fichiers as $fichier) {
+            $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+            // On évite les doubles slashs '//' qui pourrait arriver comme un cheveu sur la soupe.
+        }
     }
 
     // On va chercher dans IMG/*/*.*
         // Exemple : IMG/pdf/nom_fichier.pdf
     $fichiers = glob($repertoire_img . "*/*.*");
-    foreach ($fichiers as $fichier) {
-        $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+    if (is_array($fichiers) and count($fichiers) > 0) {
+        foreach ($fichiers as $fichier) {
+            $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+        }
     }
 
     // On va chercher dans IMG/*.*
         // Exemple : IMG/arton4.png
     $fichiers = glob($repertoire_img . "*.*");
-    foreach ($fichiers as $fichier) {
-        $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+    if (is_array($fichiers) and count($fichiers) > 0) {
+        foreach ($fichiers as $fichier) {
+            $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
+        }
     }
 
     $docs_fichiers = array_unique($docs_fichiers);
@@ -411,8 +438,10 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     // On va chercher le logo du site.
     // On force la recherche sur cet élément même si la recherche "classique"
     // devrait gérer cela initialement…
-    if ($logo_site = glob($repertoire_img . "site{on|off}0.*", GLOB_BRACE)
-        and count($logo_site) > 0) {
+    $logo_site = glob($repertoire_img . "site{on|off}0.*", GLOB_BRACE);
+    // On évite d'utiliser la fonction glob() directement dans le if car ça peut créer un bug pour PHP <5.4
+    // cf. http://contrib.spip.net/Nettoyer-la-mediatheque#forum475712
+    if (count($logo_site) > 0) {
         $fichiers = array_merge($fichiers, $logo_site);
     }
 
@@ -423,16 +452,21 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     foreach ($logos_objet as $logo_pattern) {
         // la regex de GLOB_BRACE est très basique...
         $liste = glob($repertoire_img . "{" . $logo_pattern ."}{on,off}*.*", GLOB_BRACE);
-        $fichiers = array_merge($fichiers, $liste);
+        if (is_array($liste) and count($liste) > 0) {
+            $fichiers = array_merge($fichiers, $liste);
+        }
     }
 
-    foreach ($fichiers as $fichier) {
-        // ... Donc on fait une regex plus poussée avec un preg_match
-        if (preg_match("/(" . join("|", $logos_objet) .")on\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
-            $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
-        }
-        if (preg_match("/(" . join("|", $logos_objet) .")off\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
-            $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
+    // il faut avoir au moins un élément dans le tableau de fichiers.
+    if (count($fichiers) > 0) {
+        foreach ($fichiers as $fichier) {
+            // ... Donc on fait une regex plus poussée avec un preg_match
+            if (preg_match("/(" . join("|", $logos_objet) .")on\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
+                $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
+            }
+            if (preg_match("/(" . join("|", $logos_objet) .")off\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
+                $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
+            }
         }
     }
     if ($mode == 'on') {
@@ -609,7 +643,9 @@ function medias_deplacer_rep_obsoletes ()
 
     foreach ($pattern_obsoletes as $pattern) {
         $repertoires = glob($repertoire_img . $pattern . "*");
-        $repertoires_obsoletes = array_merge($repertoires_obsoletes, $repertoires);
+        if (is_array($repertoires) and count($repertoires) > 0) {
+            $repertoires_obsoletes = array_merge($repertoires_obsoletes, $repertoires);
+        }
     }
     // on fusionne avec les fichiers obsolètes
     $repertoires_obsoletes = array_merge($repertoires_obsoletes, $fichiers_obsoletes);
@@ -776,15 +812,17 @@ function medias_reparer_documents_fichiers ()
 
     // On va chercher dans IMG/*.*
     $fichiers = glob($repertoire_img . "*.*");
-    foreach ($fichiers as $fichier) {
-        $docs_fichiers[] = $fichier;
+    if (is_array($fichiers) and count($fichiers) > 0) {
+        foreach ($fichiers as $fichier) {
+            $docs_fichiers[] = $fichier;
+        }
+        $docs_fichiers = array_filter(
+            array_diff(
+                $docs_fichiers,
+                medias_lister_logos_fichiers()
+            )
+        ); // a voir si on n'a pas de logos ce que ça donne comme ça…
     }
-    $docs_fichiers = array_filter(
-        array_diff(
-            $docs_fichiers,
-            medias_lister_logos_fichiers()
-        )
-    ); // a voir si on n'a pas de logos ce que ça donne comme ça…
     $docs_fichiers = preg_replace($pattern_img, '', $docs_fichiers);
 
     if (count($docs_fichiers) > 0) {
@@ -801,40 +839,43 @@ function medias_reparer_documents_fichiers ()
             . join(",", $url_fichiers)
             . ")"
         );
-        foreach ($docs_bdd as $document) {
-            $destination = preg_replace(',^([a-z0-3]+)_([^/]+\.(\1))$,i', '$1/$2', $document['fichier']);
-            // On va vérifier si on est bien sous la forme ../IMG/ext/nom_fichier.ext
-            // Sinon, on le construit manuellement.
-            // (ne pas oublier d'enlever '../IMG/' à notre variable de test
-            // car cette variable sera enresgitrée en BDD)
-            $destination_test = preg_replace($pattern_img, '', $destination);
-            if (count(explode("/", $destination_test)) == 1) {
-                $destination = $document['extension'] . '/' . $destination_test ;
-            }
-            if ($document['fichier'] != $destination
-                and rename($repertoire_img . $document['fichier'], $repertoire_img . $destination)) {
-                sql_updateq(
-                    'spip_documents',
-                    array('fichier' => $destination),
-                    'id_document=' . $document['id_document']
-                );
-                $message_log[] = date_format(date_create(), 'Y-m-d H:i:s')
-                . ' : le fichier '
-                . $repertoire_img
-                . $document['fichier']
-                . ' a été déplacé vers '
-                . $repertoire_img
-                . $destination
-                .'.';
-            } else {
-                $message_log[] = date_format(date_create(), 'Y-m-d H:i:s')
-                . ' : le fichier '
-                . $repertoire_img
-                . $document['fichier']
-                . ' n\'a pu être déplacé vers '
-                . $repertoire_img
-                . $destination
-                . '.';
+
+        if (is_array($docs_bdd) and count($docs_bdd) > 0) {
+            foreach ($docs_bdd as $document) {
+                $destination = preg_replace(',^([a-z0-3]+)_([^/]+\.(\1))$,i', '$1/$2', $document['fichier']);
+                // On va vérifier si on est bien sous la forme ../IMG/ext/nom_fichier.ext
+                // Sinon, on le construit manuellement.
+                // (ne pas oublier d'enlever '../IMG/' à notre variable de test
+                // car cette variable sera enresgitrée en BDD)
+                $destination_test = preg_replace($pattern_img, '', $destination);
+                if (count(explode("/", $destination_test)) == 1) {
+                    $destination = $document['extension'] . '/' . $destination_test ;
+                }
+                if ($document['fichier'] != $destination
+                    and rename($repertoire_img . $document['fichier'], $repertoire_img . $destination)) {
+                    sql_updateq(
+                        'spip_documents',
+                        array('fichier' => $destination),
+                        'id_document=' . $document['id_document']
+                    );
+                    $message_log[] = date_format(date_create(), 'Y-m-d H:i:s')
+                    . ' : le fichier '
+                    . $repertoire_img
+                    . $document['fichier']
+                    . ' a été déplacé vers '
+                    . $repertoire_img
+                    . $destination
+                    .'.';
+                } else {
+                    $message_log[] = date_format(date_create(), 'Y-m-d H:i:s')
+                    . ' : le fichier '
+                    . $repertoire_img
+                    . $document['fichier']
+                    . ' n\'a pu être déplacé vers '
+                    . $repertoire_img
+                    . $destination
+                    . '.';
+                }
             }
         }
     } else {
