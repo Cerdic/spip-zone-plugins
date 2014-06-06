@@ -25,7 +25,7 @@ function lesscss_compile($style, $contexte = array()){
 		$path = _chemin();
 		$import_dirs = array();
 		foreach($path as $p){
-			$import_dirs[$p] = url_absolue($p?$p:"./");
+			$import_dirs[$p] = protocole_implicite(url_absolue($p?$p:"./"));
 		}
 	}
 
@@ -34,7 +34,8 @@ function lesscss_compile($style, $contexte = array()){
 	$parser->relativeUrls = true;
 
 	try {
-		$parser->parse($style,$contexte['file']?url_absolue($contexte['file']):null);
+		$url_absolue = ($contexte['file']?protocole_implicite(url_absolue($contexte['file'])):null);
+		$parser->parse($style,$url_absolue);
 		$out = $parser->getCss();
 
 		if ($files = Less_Parser::AllParsedFiles()
@@ -93,10 +94,15 @@ function less_css($source){
 			$chemin = _chemin();
 			$chemin = md5(serialize($chemin));
 		}
+		// url de base de la source
+		// qui se trouvera dans la css car url absolue des images
+		// il faut que la css generee en depende
+		$url_base_source = protocole_implicite(url_absolue($source));
+
 		$f = basename($source,$r[0]);
 		$f = sous_repertoire (_DIR_VAR, 'cache-less')
 		. preg_replace(",(.*?)(_rtl|_ltr)?$,",
-				"\\1-cssify-" . substr(md5("$source-lesscss-$chemin"), 0,7) . "\\2",
+				"\\1-cssify-" . substr(md5("$url_base_source-lesscss-$chemin"), 0,7) . "\\2",
 				$f, 1)
 		. '.css';
 
@@ -125,8 +131,9 @@ function less_css($source){
 			$contenu = "/* Compilation $source : vide */\n";
 		}
 
-		# passer la css en url absolue (on ne peut pas le faire avant, car c'est du LESS, pas des CSS)
-		$contenu = urls_absolues_css($contenu, $source);
+		# passer la css en url absolue
+		# plus la peine : le parser CSS resoud les ULRs absolues des images en meme temps qu'il les cherche dans le path
+		# $contenu = urls_absolues_css($contenu, $url_base_source);
 
 		// ecrire le fichier destination, en cas d'echec renvoyer la source
 		// on ecrit sur un fichier
@@ -174,7 +181,7 @@ function lesscss_insert_head($flux){
  * les compiler, et les remplacer par leur css compilee
  *
  * @param string $head
- * @return void
+ * @return string
  */
 function lesscss_cssify_head($head){
 	$url_base = url_de_base();
