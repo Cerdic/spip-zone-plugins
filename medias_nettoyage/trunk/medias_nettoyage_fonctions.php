@@ -439,9 +439,10 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     // On force la recherche sur cet élément même si la recherche "classique"
     // devrait gérer cela initialement…
     $logo_site = glob($repertoire_img . "site{on|off}0.*", GLOB_BRACE);
-    // On évite d'utiliser la fonction glob() directement dans le if car ça peut créer un bug pour PHP <5.4
+    // On évite d'utiliser la fonction `glob()` directement dans le if car ça peut créer un bug pour PHP <5.4
+    // S'il n'y a pas de siteon0.ext, `glob()` va retourner un `false`. Donc, on regarde si c'est bien un tableau.
     // cf. http://contrib.spip.net/Nettoyer-la-mediatheque#forum475712
-    if (count($logo_site) > 0) {
+    if (is_array($logo_site) and count($logo_site) > 0) {
         $fichiers = array_merge($fichiers, $logo_site);
     }
 
@@ -457,8 +458,8 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         }
     }
 
-    // il faut avoir au moins un élément dans le tableau de fichiers.
-    if (count($fichiers) > 0) {
+    // Il faut avoir au moins un élément dans le tableau de fichiers.
+    if (is_array($fichiers) and count($fichiers) > 0) {
         foreach ($fichiers as $fichier) {
             // ... Donc on fait une regex plus poussée avec un preg_match
             if (preg_match("/(" . join("|", $logos_objet) .")on\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
