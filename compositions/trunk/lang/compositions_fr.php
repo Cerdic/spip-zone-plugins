@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_composition_explication' => 'Vous êtes Webmestre, vous pouvez',
 	'label_composition_lock' => 'Verrouiller la composition',
 	'label_composition_rubrique' => 'Composition des rubriques',
+	'label_heritages' => 'Héritages',
 	'label_information' => 'Information',
 	'label_masquer_formulaire' => 'Masquer le formulaire',
 	'label_masquer_formulaire_composition' => 'Masquer le formulaire de choix d’une composition lorsque l’utilisateur n’a pas les droits de la modifier.',

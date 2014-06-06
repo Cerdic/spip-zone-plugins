@@ -3,7 +3,7 @@
  * Plugin Compositions
  * (c) 2007-2013 Cedric Morin
  * Distribue sous licence GPL
- * 
+ *
  * @package SPIP\Compositions\Fonctions
  */
 
@@ -31,7 +31,7 @@ function compositions_objets_actives(){
 /**
  * Retrouver le nom du dossier ou sont stockees les compositions
  * reglage par defaut, ou valeur personalisee via cfg
- * 
+ *
  * @return string
  */
 function compositions_chemin(){
@@ -45,7 +45,7 @@ function compositions_chemin(){
 			$config_chemin = rtrim($config['chemin_compositions'],'/').'/';
 		}
 	}
-	
+
 	return $config_chemin;
 }
 
@@ -103,7 +103,7 @@ function compositions_lister_disponibles($type, $informer=true){
 	}
 	// Pipeline compositions_lister_disponibles
 	$res = pipeline('compositions_lister_disponibles',array(
-		'args'=>array('type' => $type,'informer' => $informer), 
+		'args'=>array('type' => $type,'informer' => $informer),
 		'data'=> $res
 		)
 	);
@@ -190,7 +190,7 @@ function compositions_decrire($type, $composition){
  * pour poser des classes generiques sur le <body>
  * si une balise <class>toto</class> est definie dans la composition c'est elle qui est appliquee
  * sinon on pose simplement le nom de la composition
- * 
+ *
  * @param string $composition
  * @param string $type
  * @return string
@@ -227,7 +227,7 @@ function compositions_types(){
  * Renvoie les parametres necessaires pour utiliser l'heritage de composition de façon generique
  * recupere les donnes du pipeline compositions_declarer_heritage.
  * Si $type n'est pas precise, on renvoie simplement le tableau des objets pouvant heriter.
- * 
+ *
  * @param string $type
  * @staticvar array $heritages
  * @return array
@@ -236,7 +236,7 @@ function compositions_recuperer_heritage($type=NULL){
 	static $heritages = NULL;
 	if (is_null($heritages)) // recuperer les heritages declares via le pipeline compositions_declarer_heritage
 		$heritages = pipeline('compositions_declarer_heritage', array());
-	
+
 	if (is_null($type))
 		return $heritages;
 
@@ -245,7 +245,7 @@ function compositions_recuperer_heritage($type=NULL){
 		$table_parent =  table_objet_sql($type_parent);
 		$nom_id_parent = ($type==$type_parent) ? 'id_parent' : id_table_objet($type_parent); // Recursivite pour les rubriques, nom de l'identifiant du parent dans la table enfant
 		$nom_id_table_parent = id_table_objet($type_parent); // Nom de l'identifiant du parent dans la table parent
-		
+
 		// verifier que table et champs existent...
 		$trouver_table = charger_fonction('trouver_table', 'base');
 		if (!$type_parent
@@ -278,7 +278,7 @@ function compositions_recuperer_heritage($type=NULL){
 function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	static $composition = array();
 	$id = intval($id);
-	
+
 	if (isset($composition[$etoile][$serveur][$type][$id]))
 		return $composition[$etoile][$serveur][$type][$id];
 
@@ -324,7 +324,7 @@ function compositions_heriter($type, $id, $id_parent=NULL, $serveur=''){
 	if (intval($id) < 1) return '';
 	static $infos = null;
 	$compo_parent = '';
-	
+
 	$heritage = compositions_recuperer_heritage($type);
 
 	/* Si aucun héritage n'a été défini pour le type d'objet, ce
@@ -336,12 +336,12 @@ function compositions_heriter($type, $id, $id_parent=NULL, $serveur=''){
 	$table_parent = $heritage['table_parent'];
 	$nom_id_parent = $heritage['nom_id_parent'];
 	$nom_id_table_parent = $heritage['nom_id_table_parent'];
-	
+
 	if (is_null($id_parent))
 		$id_parent = sql_getfetsel($nom_id_parent, table_objet_sql($type), id_table_objet($type).'='.intval($id));
-	
+
 	$heritages = compositions_recuperer_heritage();
-	
+
 	do {
 		$select = 'composition';
 		if ($heritages[$type_parent]==$type_parent) // S'il y a recursivite sur le parent
@@ -351,10 +351,10 @@ function compositions_heriter($type, $id, $id_parent=NULL, $serveur=''){
 			$compo_parent = $row['composition'];
 		elseif (strlen($row['composition'])==0 AND isset($heritages[$type_parent])) // Si le parent peut heriter, il faut verifier s'il y a heritage
 			$compo_parent = compositions_determiner($type_parent, $id_parent, $serveur='');
-		
+
 		if (strlen($compo_parent) AND is_null($infos))
 			$infos = compositions_lister_disponibles('');
-			
+
 	}
 	while ($id_parent = $row['id_parent']
 		AND
@@ -416,7 +416,7 @@ function compositions_verrouiller($type, $id, $serveur=''){
 	$config = unserialize($GLOBALS['meta']['compositions']);
 	if (isset($config['tout_verrouiller']) AND $config['tout_verrouiller'] == 'oui')
 		return true;
-	
+
 	include_spip('base/abstract_sql');
 	$table = table_objet($type);
 	$table_sql = table_objet_sql($type);
@@ -445,7 +445,7 @@ function compositions_verrouiller($type, $id, $serveur=''){
  * @return string
  */
 function compositions_verrou_branche($id_rubrique, $serveur=''){
-	
+
 	if (intval($id_rubrique) < 1) return false;
 	if($infos_rubrique = sql_fetsel(array('id_parent','composition_branche_lock'),'spip_rubriques','id_rubrique='.intval($id_rubrique),'','','','',$serveur)) {
 		if ($infos_rubrique['composition_branche_lock'])
