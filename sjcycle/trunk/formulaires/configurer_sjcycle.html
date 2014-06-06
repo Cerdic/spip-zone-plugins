@@ -24,6 +24,13 @@
 				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 			</li>
 			
+			#SET{name,autoheight}
+			<li class="editer editer_[(#GET{name})]">
+				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
 			#SET{name,timeout}
 			<li class="editer editer_[(#GET{name})]">
 				<label for="#GET{name}">[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
@@ -151,6 +158,17 @@
 				</div>
 			</li>
 			
+			#SET{name,sync}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				#SET{val,true}
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
+					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+				</div>
+			</li>
+			
 			#SET{name,pauseonhover}
 			<li class="editer editer_[(#GET{name})]">
 				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
@@ -240,12 +258,15 @@
 			#SET{name,overlay}
 			<li class="editer editer_[(#GET{name})]">
 				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
-				#SET{val,oui}
-				<div class="choix">
-					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name}}}|oui)checked="checked"] />
-					<label for="#GET{name}_#GET{val}"><:sjcycle:oui:></label>
-					<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
-				</div>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
+			</li>
+			
+			#SET{name,overlaytemplate}
+			<li class="editer editer_[(#GET{name})]">
+				<label>[(#GET{cc}|concat{':label_',#GET{name}}|_T)]</label>
+				<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name}}" id="#GET{name}" />
+				<p class="explication">[(#GET{cc}|concat{':explication_',#GET{name}}|_T)]</p>
 			</li>
 			
 			#SET{name,backgroundcolor}

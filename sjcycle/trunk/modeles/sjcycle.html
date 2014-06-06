@@ -1,8 +1,10 @@
 
 [(#SET{id_article,	[(#ENV{id_sjcycle,	0})]})]
+[(#SET{id_rubrique,	[(#ENV{rubrique,	0})]})]
 
 [(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
 [(#SET{hauteurmax,	[(#ENV{hauteurmax,     	#CONFIG{sjcycle/hauteurmax}})]})]
+[(#SET{autoheight,	[(#ENV{autoheight,     	#CONFIG{sjcycle/autoheight}})]})]
 [(#SET{timeout,      	[(#ENV{timeout,     	#CONFIG{sjcycle/timeout}})]})]
 [(#SET{speed,      	[(#ENV{speed,     	#CONFIG{sjcycle/speed}})]})]
 [(#SET{delay,      	[(#ENV{delay,     	#CONFIG{sjcycle/delay}})]})]
@@ -15,17 +17,20 @@
 [(#SET{prev, 		[(#ENV{prev,		#CONFIG{sjcycle/prev}})]})]
 [(#SET{next, 		[(#ENV{next,		#CONFIG{sjcycle/next}})]})]
 [(#SET{allowwrap, 	[(#ENV{allowwrap,	#CONFIG{sjcycle/allowwrap}})]})]
+[(#SET{sync,		[(#ENV{sync,		#CONFIG{sjcycle/sync}})]})]
 [(#SET{paused,		[(#ENV{paused,		#CONFIG{sjcycle/paused}})]})]
 [(#SET{pager,		[(#ENV{pager,		#CONFIG{sjcycle/pager}})]})]
 [(#SET{caption,		[(#ENV{caption,		#CONFIG{sjcycle/caption}})]})]
 [(#SET{captiontemplate,	[(#ENV{captiontemplate,	#CONFIG{sjcycle/captiontemplate}})]})]
-[(#SET{pauseonhovercontent,	[(#ENV{pauseonhovercontent,	#CONFIG{sjcycle/pauseonhovercontent}})]})]
 [(#SET{overlay,			[(#ENV{overlay,			#CONFIG{sjcycle/overlay}})]})]
+[(#SET{overlaytemplate,	[(#ENV{overlaytemplate,	#CONFIG{sjcycle/overlaytemplate}})]})]
+[(#SET{pauseonhovercontent,	[(#ENV{pauseonhovercontent,	#CONFIG{sjcycle/pauseonhovercontent}})]})]
 [(#SET{carouselvisible,		[(#ENV{carouselvisible,		#CONFIG{sjcycle/carouselvisible}})]})]
 [(#SET{carouseloffset,		[(#ENV{carouseloffset,		#CONFIG{sjcycle/carouseloffset}})]})]
 [(#SET{carouselslidedimension,	[(#ENV{carouselslidedimension,	#CONFIG{sjcycle/carouselslidedimension}})]})]
 [(#SET{carouselvertical,	[(#ENV{carouselvertical,	#CONFIG{sjcycle/carouselvertical}})]})]
 [(#SET{carouselfluid,		[(#ENV{carouselfluid,		#CONFIG{sjcycle/carouselfluid}})]})]
+[(#SET{mediabox,		[(#ENV{mediabox,		#CONFIG{sjcycle/mediabox}})]})]
 
 [(#SET{liens_individuels,	[(#ENV{liens_individuels,	0})]})]
 
@@ -70,7 +75,7 @@ $(document).ready(function() {
 			left: 5
 		});
 	]
-	[(#CONFIG{sjcycle/mediabox}|=={oui}|oui)
+	[(#GET{mediabox}|=={oui}|oui)
 		$("a.#GET{cssbox}").mediabox(box_settings);
 	]
 });
@@ -78,7 +83,7 @@ $(document).ready(function() {
 
 #SET{slidebalise,img}
 [(#GET{liens_individuels}|oui) #SET{slidebalise,a}]
-[(#CONFIG{sjcycle/mediabox}|=={oui}|oui) #SET{slidebalise,a}]
+[(#GET{mediabox}|=={oui}|oui) #SET{slidebalise,a}]
 [(#GET{id_article_a_lier}|oui) #SET{slidebalise,a}]
 [(#CONFIG{sjcycle/tooltip}|=={oui}|oui|ou{#GET{liens_individuels}|non}) #SET{slidespan,div}]
 
@@ -91,6 +96,7 @@ $(document).ready(function() {
 	data-cycle-allow-wrap="(#GET{allowwrap})"][ 
 	data-cycle-reverse="(#GET{reverse})"][ 
 	data-cycle-random="(#GET{random})"][ 
+	data-cycle-sync="(#GET{sync})"][ 
 	data-cycle-paused="(#GET{paused})"][ 
 	data-cycle-prev="(#GET{prev})"][ 
 	data-cycle-next="(#GET{next})"][ 
@@ -103,12 +109,16 @@ $(document).ready(function() {
 	data-cycle-carousel-fluid="(#GET{carouselfluid})"][
 	data-cycle-pager="(#GET{pager})"][
 	data-cycle-caption="(#GET{caption})"][
-	data-cycle-caption-template="(#GET{captiontemplate})"]>[(#GET{prev}|=={.cycle-prev}|oui)
+	data-cycle-caption-template="(#GET{captiontemplate})"][
+	data-cycle-overlay="(#GET{overlay})"][
+	data-cycle-overlay-template="(#GET{overlaytemplate})"][
+	data-cycle-auto-height="(#GET{autoheight})"]]]
+	>[(#GET{prev}|=={.cycle-prev}|oui)
 	<div class="cycle-prev"></div>][(#GET{next}|=={.cycle-next}|oui)
 	<div class="cycle-next"></div>][(#GET{pager}|=={.cycle-pager}|oui)
-	<div class="cycle-pager"></div>][(#GET{caption}|=={'.cycle-caption'}|oui)
+	<div class="cycle-pager"></div>][(#GET{caption}|=={.cycle-caption}|oui)
 	<div class="cycle-caption"></div>]
-	<BOUCLE_img(DOCUMENTS){id_article?}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>[
+	<BOUCLE_img(DOCUMENTS){id_article?}{id_rubrique?}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>[
 		
 		 #SET{fermer_a,non}
          
@@ -125,29 +135,30 @@ $(document).ready(function() {
 
 	
 		[(#GET{liens_individuels}|=={article}|oui)
-		<a href="#URL_ARTICLE"[ title="(#TITRE)"]>#SET{fermer_a,oui}]
+		<a href="#URL_ARTICLE"[ title="(#TITRE)"] data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={rubrique}|oui)
-		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"]>
+		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"] data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={externe}|oui)
-		<a href="[(#DESCRIPTIF|supprimer_tags)]"[ title="(#TITRE)"]>
+		<a href="[(#DESCRIPTIF|supprimer_tags)]"[ title="(#TITRE)"] data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
 		#SET{fermer_a,oui}]
 		[(#GET{id_article_a_lier}|oui)
-		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}">
+		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}" data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
 		#SET{fermer_a,oui}]
-		[(#GET{fermer_a}|=={oui}|non|et{#CONFIG{sjcycle/mediabox}|=={oui}|oui})
+		[(#GET{fermer_a}|=={oui}|non|et{#GET{mediabox}|=={oui}|oui})
 		<a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
 						class="#GET{cssbox}"
 						rel="#GET{cssbox}"
 						[(#CONFIG{sjcycle/tooltip}|=={oui}|non) title="[(#TITRE|supprimer_numero|attribut_html)]"]
-						style="display:block;padding:0px;margin:0px;">
+						style="display:block;padding:0px;margin:0px;"
+						data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
 		#SET{fermer_a,oui}]
 	
 		[(#GET{afficher_infobulle}|=={oui}|oui)
 		<div class="infobulle">
 		]
 			<img class="no_image_filtrer" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] 
-				[(#GET{overlay}|=={oui}|oui)[ data-cycle-title="(#TITRE)"][ data-cycle-desc="(#DESCRIPTIF)"]]
+				 data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF"
 			/>
 		
 		[(#GET{afficher_infobulle}|=={oui}|oui)
@@ -157,9 +168,9 @@ $(document).ready(function() {
 		[(#GET{fermer_a}|=={oui}|oui)</a>]
 		
 	]</BOUCLE_img>
-	[(#GET{overlay}|=={oui}|oui)
-	<div class="cycle-overlay"></div>
-	]
+	[(#GET{overlay}|=={.cycle-overlay}|oui)
+	<div class="cycle-overlay"></div>]
+
 </div>
 
 </B_img>

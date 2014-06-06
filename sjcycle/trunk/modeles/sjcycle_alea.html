@@ -1,28 +1,9 @@
-[(#REM) Diaporama d'images aleatoires ]
+[(#REM) Diaporama d'images aleatoires : preserve (simplifie ?) dans la version 3 pour compatibilite avec la version 2 ]
+
 [(#SET{nb,[(#ENV{nb,10})]})]
 [(#SET{fx,[(#ENV{fx,fade})]})]
 [(#SET{duree,[(#ENV{duree,5000})]})]
 [(#SET{largeur,[(#ENV{largeur,200})]})]
 [(#SET{hauteur,[(#ENV{hauteur,0})]})]
 
-<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
-jQuery(document).ready(function() {
-	$('#sjcycle_alea').cycle({ 
-		fx:'#GET{fx}',
-		speed:1500, 
-		timeout:[(#GET{duree})],
-		pause:1
-	});
-});
-/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
-
-<B_docAuHazard>
-	<div id="sjcycle_alea">	
-<BOUCLE_docAuHazard(documents documents_liens){objet=article}{documents.extension==jpg|png|gif}{par hasard}{0, #GET{nb}}>
-		<div class="sjcycle_alea_img">
-			[<a href="#URL_ARTICLE{#ID_OBJET}">(#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}|inserer_attribut{alt,""})</a>]
-         [<br /><span class="legende">(#MODELE{sjcycle_legende}{id_article=#ID_OBJET})</span>]
-		</div>
-</BOUCLE_docAuHazard>
-	</div>
-</B_docAuHazard>
+[(#MODELE{sjcycle}{id_article=#ENV{id_sjcycle_alea}}{random=oui}{limite=#GET{nb}}{fx=#GET{fx}}{timeout=#GET{duree}}{largeurmax=#GET{largeur}}{hauteurmax=#GET{hauteur}})]

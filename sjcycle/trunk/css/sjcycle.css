@@ -16,9 +16,10 @@
     helps avoid flash-of-unstyled-content
     */
     position: absolute; top: 0; left: 0;
-    /*width: 100%;*/ /* commente car cause de soucis en carousel */
+    width: 100%;
     padding: 0; margin:0; display: block;
 }
+.cycle-slideshow[data-cycle-fx="carousel"] img { width:auto; } /* width:100%; cause de soucis en carousel */
 
 /* in case script does not load */
 .cycle-slideshow img:first-child {
