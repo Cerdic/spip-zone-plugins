@@ -61,14 +61,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'mode_tous' => 'Tous',
 
     // N
-    'non' => 'Non <em>(peut faire ralentir votre site)</em>',
+    'non' => 'Régulièrement dans la journée <em>(peut ralentir votre site)</em>',
 
     // O
     'onglet_titre_logos_img' => 'Les logos dans IMG/',
     'onglet_titre_rep_orphelins' => 'Documents orphelins',
     'onglet_titre_rep_img' => 'Répertoire IMG/',
     'onglet_titre_tabbord' => 'Tableau de bord',
-    'oui' => 'Oui <strong>(recommandé)</strong>',
+    'oui' => 'Tranche horaire <strong>(recommandé)</strong>',
 
     // T
     'titre_configurer_medias_nettoyage' => 'Configurer le nettoyage de la médiathèque',
