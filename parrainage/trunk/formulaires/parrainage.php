@@ -49,6 +49,8 @@ function formulaires_parrainage_verifier(){
 function formulaires_parrainage_traiter(){
 	// On revient toujours en éditable
 	$retours = array('editable' => true);
+	// On récupère l'utilisateur en cours qui existe forcément puisque testé dans charger()
+	$id_auteur = session_get('id_auteur');
 	
 	// Si c'est une supression d'un seul filleul
 	if ($id_filleul = intval(_request('supprimer_filleul'))){
