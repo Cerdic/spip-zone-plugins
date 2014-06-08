@@ -3,7 +3,7 @@
 	 <slogan>Afficher des &#233;quation, des fonctions math&#233;matiques</slogan>
     <auteur>Yohann</auteur>
     <licence>&#169; 2010-2011 GNU/GPL</licence>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <etat>stable</etat>
     <categorie>outil</categorie>
     
@@ -13,7 +13,7 @@
 	
 	<icon>images/mathjax-32.png</icon>
 	
-	<lien>http://www.spip-contrib.net/?article3639</lien>
+	<lien>http://contrib.spip.net/MathJax-pour-SPIP</lien>
     
     <prefix>mathjax_spip</prefix>
         
@@ -26,5 +26,5 @@
     	<inclure>mathjax_spip_pipelines.php</inclure>
     </pipeline>
 	<!--<necessite id="lib:mathjax-1.1a" src="https://github.com/mathjax/MathJax/zipball/v1.1a" />-->
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>

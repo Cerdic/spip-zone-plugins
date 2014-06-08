@@ -1,0 +1,27 @@
+<paquet
+	prefix="mathjax_spip"
+	categorie="outil"
+	version="1.2.0"
+	etat="test"
+	logo="prive/themes/spip/images/mathjax-32.png"
+	documentation="http://contrib.spip.net/MathJax-pour-SPIP"
+	compatibilite="[2.0.3;3.0.*]"
+	>	
+
+	<nom>MathJax</nom>
+	<!-- Afficher des equation, des fonctions mathematiques -->
+
+	<auteur lien="http://contrib.spip.net/yohannp">Yohann</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+		
+	<copyright>2011</copyright>
+	
+	<traduire module="mathjax_spip" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head" inclure="mathjax_spip_pipelines.php" />
+	<pipeline nom="header_prive" inclure="mathjax_spip_pipelines.php" />
+	
+	<menu nom="configurer_mathjax" titre="mathjax_spip:configuration_mathjax" parent="menu_squelette" icone="images/mathjax-16.png" />
+
+</paquet>

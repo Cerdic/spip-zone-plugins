@@ -25,7 +25,7 @@ function mathjax_spip_flux(){
 		$flux .= '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>';
 	}
 	else if (lire_config('mathjax/mode_dappel', 'cdn') == 'download') {
-		$js = find_in_path('lib/mathjax-1.1a/MathJax.js').'?config=TeX-AMS_HTML';
+		$js = find_in_path('lib/mathjax/MathJax.js').'?config=TeX-AMS_HTML';
 		$flux .= '<script type="text/javascript" src="'.$js.'"></script>';
 	}
 	return $flux;
