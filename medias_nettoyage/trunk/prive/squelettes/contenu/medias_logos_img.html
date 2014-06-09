@@ -9,5 +9,5 @@
     </ul>
 </div>
 
-<INCLURE{fond=prive/objets/liste/medias,liste=(#ENV{mode,''}|medias_lister_logos_fichiers),sinon=<:medias_nettoyage:aucun_logo:>,env,ajax} />
+<INCLURE{fond=prive/objets/liste/medias,liste=(#ENV{mode,''}|medias_lister_logos_fichiers),logos=oui,sinon=<:medias_nettoyage:aucun_logo:>,env,ajax} />
 <div class="nettoyeur"></div>

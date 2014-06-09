@@ -4,7 +4,7 @@
 	<slogan>On range nos medias!</slogan>
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
-	<version>0.9.5</version>
+	<version>0.9.6</version>
 	<etat>stable</etat>
 	<categorie>outil</categorie>
     <lien>http://contrib.spip.net/Nettoyer-la-mediatheque</lien>

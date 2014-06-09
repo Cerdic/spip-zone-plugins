@@ -378,12 +378,15 @@ function medias_lister_documents_repertoire_complet_taille ($repertoire_img = _D
  * Prend en compte les cas particuliers suivants :
  * - articles (art)
  * - rubriques (rub)
- * - brèves (breve)
  * - sites syndiqués (site)
- * - mot-clé (mot)
  * - auteurs (aut)
  *
- * @todo étendre à d'autres objets éditoriaux.
+ * @uses lister_tables_principales()
+ *       liste en spip 3 les tables principales reconnues par SPIP
+ * @uses id_table_objet()
+ *       retourne la clé primiare de l'objet
+ * @uses type_du_logo()
+ *       retourne le type de logo tel que `art` depuis le nom de la clé primaire de l'objet
  *
  * @param null|string $mode
  *        + `null` : stockera dans le tableau tous les logos,
@@ -397,6 +400,8 @@ function medias_lister_documents_repertoire_complet_taille ($repertoire_img = _D
  */
 function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
 {
+
+    include_spip('inc/chercher_logo');
 
     if (intval(spip_version()) == 2) {
         include_spip('base/connect_sql');
@@ -419,17 +424,19 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     global $formats_logos;
     $docs_fichiers_on   = array();
     $docs_fichiers_off  = array();
+    // Avec l'utilisation de type_du_logo(), ceci n'est plus obligatoire
+    // mais à garder par sécurité.
     $logos_objet        = array('art','rub','breve','site','mot','aut');
     $fichiers           = array();
 
     // On va chercher toutes les tables principales connues de SPIP
     foreach ($tables_objets as $table) {
         // On cherche son type d'objet et on l'ajoute aux logos
-        // Il y a aussi dans ces objets la référence à 'article',
-        // 'rubrique' et 'auteur'
-        // On peut les laisser, ça ne mange pas de pain de prendre
-        // en compte les "tordus" ;-)
-        $logos_objet[] = objet_type($table);
+        // Il y a aussi dans ces objets la référence à `article`,
+        // `rubrique` et `auteur`
+        // Grâce à la fonction `id_table_objet()`, on retrouve le nom de la clé primaire de l'objet.
+        // `type_du_logo()` retourne le type de logo tel que `art` depuis le nom de la clé primaire de l'objet
+        $logos_objet[] = type_du_logo(id_table_objet($table));
     }
     // On enlève les doublons
     $logos_objet = array_unique($logos_objet);
@@ -462,10 +469,29 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     if (is_array($fichiers) and count($fichiers) > 0) {
         foreach ($fichiers as $fichier) {
             // ... Donc on fait une regex plus poussée avec un preg_match
-            if (preg_match("/(" . join("|", $logos_objet) .")on\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
+            if (
+                preg_match(
+                    "/("
+                    . join("|", $logos_objet)
+                    .")on(\d+).("
+                    . join("|", $formats_logos)
+                    .")$/",
+                    $fichier,
+                    $resultat
+                )
+            ) {
                 $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
             }
-            if (preg_match("/(" . join("|", $logos_objet) .")off\d+.(" . join("|", $formats_logos) .")$/", $fichier)) {
+            if (
+                preg_match(
+                    "/("
+                    . join("|", $logos_objet)
+                    .")off(\d+).("
+                    . join("|", $formats_logos)
+                    .")$/",
+                    $fichier
+                )
+            ) {
                 $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
             }
         }
@@ -503,6 +529,25 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
 function medias_lister_logos_fichiers_taille ($mode = null)
 {
     return medias_calculer_taille_fichiers(medias_lister_logos_fichiers($mode));
+}
+
+/**
+ * Vérifier si l'objet associé au logo passé en paramètre est toujours
+ * enresgitré en base de données.
+ *
+ * @param  string $fichier
+ *         nom du fichier de logo
+ * @return bool
+ *         - `true` : si l'objet est toujours en bdd ;
+ *         - `false` : si l'objet n'est plus en bdd.
+ */
+function medias_verifier_logos_objet ($fichier = 'on')
+{
+    if ($fichier == null) {
+        return;
+    }
+    $composer = charger_fonction('composer', 'public');
+    $chercher_logo = charger_fonction('chercher_logo', 'inc');
 }
 
 /**
@@ -602,7 +647,7 @@ function medias_lister_repertoires_orphelins_fichiers_taille ()
 function test_medias ()
 {
     $test = array();
-    $test = @unserialize($GLOBALS['meta']['medias_nettoyage']);
+    $test = medias_lister_logos_fichiers();
     return $test;
 }
 
