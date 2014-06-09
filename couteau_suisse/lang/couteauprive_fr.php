@@ -9,6 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_non' => ' : non',
 	'2pts_oui' => ' : oui',
 
+	'taches_cron:nom' =>  'Tâches CRON',
+	'taches_cron:description' => 'Les tâches CRON à exécuter sont appelées à chaque consultation de page par un visiteur sur le site. Par défaut, ces tâches sont lancées en arrière plan sans faire attendre l’utilisateur. Cet outil permet de rétablir le fonctionnement de ces tâches CRON si vous remarquez que les travaux ne s\'exécutent pas correctement, ou si votre site est protégé par un couple de fichiers htaccess~/~htpasswd.
+	@_CS_CRON@[[%cron_direct_force%]]
+@puce@ Certains serveurs dont le firewall est réglé pour DROP silencieusement toute requête http sortante : fsockopen attend alors 30 sec pour lancer la requête à chaque hit avant de rendre la main. cURL lui n’attend pas mais ne sait pas que sa requête échoue. Résultat le CRON ne tourne jamais et le site a un temps de réponse catastrophique… Si vous savez que vous êtes sur une telle configuration (et que vous ne pouvez pas la changer), cette option  pourra réduire fortement les temps de réponse du site.
+[[%cron_html_bg_force%]]
+' ,
+	'cron_direct_force' => 'Forcer l’exécution de ces tâches directement lors de l’affichage de la page, à chaque visite.',
+	'cron_html_bg_force' => 'Ne pas lancer le CRON par fsockopen/cURL car la configuration du serveur ne le permet pas (SPIP 3.0.14 mini).',
+
 	'liens_internes:nom' =>  'Correction des liens internes',
 	'liens_internes:description' => 'A chaque modification d’un contenu du site, cet outil corrige automatiquement en format abrégé SPIP les liens internes insérés par copier-coller de l’URL.
 _ Exemple : <code>[texte->@_DOMAINE@spip.php?article1]</code> inséré deviendra ici : <code>[texte->1]</code>.

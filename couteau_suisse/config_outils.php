@@ -446,6 +446,31 @@ add_outil( array(
 ));
 
 add_variables( array(
+	'nom' => 'cron_direct_force',
+	'label' => '@_CS_CHOIX@',
+	'check' => 'couteauprive:cron_direct_force',
+//	'defaut' => 1,
+	// code d'appel en realpath() pour config/mes_options.php (SPIP < 2.1)
+	'code:%s' => "define('_DIRECT_CRON_FORCE', 1);",
+), array(
+	'nom' => 'cron_html_bg_force',
+	'label' => '@_CS_CHOIX@',
+//	'format' => _format_NOMBRE,
+	'check' => 'couteauprive:cron_html_bg_force',
+//	'defaut' => 4,
+	'code:%s' => "define('_HTML_BG_CRON_FORCE', 1);",
+));
+add_outil( array(
+	'id' => 'taches_cron',
+	'code:spip_options' => '%%cron_direct_force%%%%cron_html_bg_force%%',
+	'categorie' => 'admin',
+	'autoriser' => "autoriser('administrer','queue')",
+	'version-min' => '1.9300', // SPIP 2.0 mini
+	'pipelinecode:pre_description_outil' => 'if($id=="taches_cron")
+		$texte=str_replace("@_CS_CRON@","\n@puce@ ".trim(recuperer_fond("fonds/taches_cron")) ,$texte);',
+));
+
+add_variables( array(
 	'nom' => 'ecran_actif',
 	'label' => '@_CS_CHOIX@',
 	'check' => 'couteauprive:ecran_activer',
