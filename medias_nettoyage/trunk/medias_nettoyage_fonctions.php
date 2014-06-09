@@ -402,6 +402,7 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
 {
 
     include_spip('inc/chercher_logo');
+    include_spip('base/abstract_sql');
 
     if (intval(spip_version()) == 2) {
         include_spip('base/connect_sql');
@@ -424,78 +425,97 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     global $formats_logos;
     $docs_fichiers_on   = array();
     $docs_fichiers_off  = array();
-    // Avec l'utilisation de type_du_logo(), ceci n'est plus obligatoire
-    // mais à garder par sécurité.
-    $logos_objet        = array('art','rub','breve','site','mot','aut');
     $fichiers           = array();
 
     // On va chercher toutes les tables principales connues de SPIP
     foreach ($tables_objets as $table) {
-        // On cherche son type d'objet et on l'ajoute aux logos
+        // On cherche son type d'objet.
         // Il y a aussi dans ces objets la référence à `article`,
         // `rubrique` et `auteur`
         // Grâce à la fonction `id_table_objet()`, on retrouve le nom de la clé primaire de l'objet.
         // `type_du_logo()` retourne le type de logo tel que `art` depuis le nom de la clé primaire de l'objet
-        $logos_objet[] = type_du_logo(id_table_objet($table));
+        $type_du_logo = type_du_logo(id_table_objet($table));
+
+        // On va chercher dans IMG/$type_du_logo(on|off)*.*
+        // On fait un foreach pour ne pas avoir de
+        // "Pattern exceeds the maximum allowed length of 260 characters"
+        // sur glob()
+        $liste = glob($repertoire_img . "{" . $type_du_logo ."}{on,off}*.*", GLOB_BRACE);
+        if (is_array($liste) and count($liste) > 0) {
+            $fichiers = array_merge($fichiers, $liste);
+        }
+        // Il faut avoir au moins un élément dans le tableau de fichiers.
+        if (is_array($fichiers) and count($fichiers) > 0) {
+            foreach ($fichiers as $fichier) {
+                // ... Donc on fait une regex plus poussée avec un preg_match
+                if (
+                    preg_match(
+                        "/("
+                        . $type_du_logo
+                        .")on(\d+).("
+                        . join("|", $formats_logos)
+                        .")$/",
+                        $fichier,
+                        $r
+                    )
+                ) {
+                    // On fait une requête sql pour savoir si ce logo a toujours un objet référencé en bdd.
+                    $requete = sql_fetsel('*', $table, id_table_objet($table) . "=" . $r[2]);
+                    if ($requete) {
+                        $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
+                    }
+                }
+                if (
+                    preg_match(
+                        "/("
+                        . $type_du_logo
+                        .")off(\d+).("
+                        . join("|", $formats_logos)
+                        .")$/",
+                        $fichier,
+                        $r
+                    )
+                ) {
+                    $requete = sql_fetsel('*', $table, id_table_objet($table) . "=" . $r[2]);
+                    if ($requete) {
+                        $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
+                    }
+                }
+            }
+        }
     }
-    // On enlève les doublons
-    $logos_objet = array_unique($logos_objet);
-    sort($logos_objet);
 
     // On va chercher le logo du site.
     // On force la recherche sur cet élément même si la recherche "classique"
     // devrait gérer cela initialement…
     $logo_site = glob($repertoire_img . "site{on|off}0.*", GLOB_BRACE);
-    // On évite d'utiliser la fonction `glob()` directement dans le if car ça peut créer un bug pour PHP <5.4
+    // On évite d'utiliser la fonction `glob()` directement dans le `if` car ça peut créer un bug pour PHP <5.4
     // S'il n'y a pas de siteon0.ext, `glob()` va retourner un `false`. Donc, on regarde si c'est bien un tableau.
     // cf. http://contrib.spip.net/Nettoyer-la-mediatheque#forum475712
     if (is_array($logo_site) and count($logo_site) > 0) {
-        $fichiers = array_merge($fichiers, $logo_site);
-    }
-
-    // On va chercher dans IMG/*(on|off)*.*
-    // On fait un foreach pour ne pas avoir de
-    // "Pattern exceeds the maximum allowed length of 260 characters"
-    // sur glob()
-    foreach ($logos_objet as $logo_pattern) {
-        // la regex de GLOB_BRACE est très basique...
-        $liste = glob($repertoire_img . "{" . $logo_pattern ."}{on,off}*.*", GLOB_BRACE);
-        if (is_array($liste) and count($liste) > 0) {
-            $fichiers = array_merge($fichiers, $liste);
+        if (
+            preg_match(
+                "/siteon0.("
+                . join("|", $formats_logos)
+                .")$/",
+                $fichier
+            )
+        ) {
+            $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
+        }
+        if (
+            preg_match(
+                "/siteoff0.("
+                . join("|", $formats_logos)
+                .")$/",
+                $fichier
+            )
+        ) {
+            $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
         }
     }
 
-    // Il faut avoir au moins un élément dans le tableau de fichiers.
-    if (is_array($fichiers) and count($fichiers) > 0) {
-        foreach ($fichiers as $fichier) {
-            // ... Donc on fait une regex plus poussée avec un preg_match
-            if (
-                preg_match(
-                    "/("
-                    . join("|", $logos_objet)
-                    .")on(\d+).("
-                    . join("|", $formats_logos)
-                    .")$/",
-                    $fichier,
-                    $resultat
-                )
-            ) {
-                $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
-            }
-            if (
-                preg_match(
-                    "/("
-                    . join("|", $logos_objet)
-                    .")off(\d+).("
-                    . join("|", $formats_logos)
-                    .")$/",
-                    $fichier
-                )
-            ) {
-                $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
-            }
-        }
-    }
+
     if ($mode == 'on') {
         $docs_fichiers_on = array_unique($docs_fichiers_on);
         sort($docs_fichiers_on); // On trie dans l'ordre alphabétique
@@ -509,7 +529,6 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         sort($docs_fichiers); // On trie dans l'ordre alphabétique
         return $docs_fichiers;
     }
-
 }
 
 /**
@@ -529,25 +548,6 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
 function medias_lister_logos_fichiers_taille ($mode = null)
 {
     return medias_calculer_taille_fichiers(medias_lister_logos_fichiers($mode));
-}
-
-/**
- * Vérifier si l'objet associé au logo passé en paramètre est toujours
- * enresgitré en base de données.
- *
- * @param  string $fichier
- *         nom du fichier de logo
- * @return bool
- *         - `true` : si l'objet est toujours en bdd ;
- *         - `false` : si l'objet n'est plus en bdd.
- */
-function medias_verifier_logos_objet ($fichier = 'on')
-{
-    if ($fichier == null) {
-        return;
-    }
-    $composer = charger_fonction('composer', 'public');
-    $chercher_logo = charger_fonction('chercher_logo', 'inc');
 }
 
 /**
