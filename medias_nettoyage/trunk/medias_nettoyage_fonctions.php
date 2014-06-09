@@ -425,7 +425,6 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     global $formats_logos;
     $docs_fichiers_on   = array();
     $docs_fichiers_off  = array();
-    $fichiers           = array();
 
     // On va chercher toutes les tables principales connues de SPIP
     foreach ($tables_objets as $table) {
@@ -441,12 +440,10 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         // "Pattern exceeds the maximum allowed length of 260 characters"
         // sur glob()
         $liste = glob($repertoire_img . "{" . $type_du_logo ."}{on,off}*.*", GLOB_BRACE);
-        if (is_array($liste) and count($liste) > 0) {
-            $fichiers = array_merge($fichiers, $liste);
-        }
+
         // Il faut avoir au moins un élément dans le tableau de fichiers.
-        if (is_array($fichiers) and count($fichiers) > 0) {
-            foreach ($fichiers as $fichier) {
+        if (is_array($liste) and count($liste) > 0) {
+            foreach ($liste as $fichier) {
                 // ... Donc on fait une regex plus poussée avec un preg_match
                 if (
                     preg_match(
@@ -488,30 +485,32 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
     // On va chercher le logo du site.
     // On force la recherche sur cet élément même si la recherche "classique"
     // devrait gérer cela initialement…
-    $logo_site = glob($repertoire_img . "site{on|off}0.*", GLOB_BRACE);
+    $logos_site = glob($repertoire_img . "{site}{on,off}0.*", GLOB_BRACE);
     // On évite d'utiliser la fonction `glob()` directement dans le `if` car ça peut créer un bug pour PHP <5.4
     // S'il n'y a pas de siteon0.ext, `glob()` va retourner un `false`. Donc, on regarde si c'est bien un tableau.
     // cf. http://contrib.spip.net/Nettoyer-la-mediatheque#forum475712
-    if (is_array($logo_site) and count($logo_site) > 0) {
-        if (
-            preg_match(
-                "/siteon0.("
-                . join("|", $formats_logos)
-                .")$/",
-                $fichier
-            )
-        ) {
-            $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
-        }
-        if (
-            preg_match(
-                "/siteoff0.("
-                . join("|", $formats_logos)
-                .")$/",
-                $fichier
-            )
-        ) {
-            $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
+    if (is_array($logos_site) and count($logos_site) > 0) {
+        foreach ($logos_site as $logo_site) {
+            if (
+                preg_match(
+                    "/(siteon)(\d).("
+                    . join("|", $formats_logos)
+                    .")$/",
+                    $logo_site
+                )
+            ) {
+                $docs_fichiers_on[] = preg_replace("/\/\//", "/", $logo_site);
+            }
+            if (
+                preg_match(
+                    "/(siteoff)(\d).("
+                    . join("|", $formats_logos)
+                    .")$/",
+                    $logo_site
+                )
+            ) {
+                $docs_fichiers_off[] = preg_replace("/\/\//", "/", $logo_site);
+            }
         }
     }
 
