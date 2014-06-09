@@ -31,12 +31,6 @@ function odt2spip_affiche_gauche($flux){
 		$out = recuperer_fond('formulaires/odt2spip', array('id_rubrique' => $id_rubrique, 'exec' => 'rubrique'));
 		$flux['data'] .= $out;
 	}
-	if ($flux['args']['exec']=='article'
-	  AND $id_article = $flux['args']['id_article']
-	  AND autoriser('ecrire')){
-		$out = recuperer_fond('formulaires/odt2spip', array('id_article' => $id_article));
-		$flux['data'] .= $out;
-	}
 	elseif ($flux['args']['exec']=='article' 
 		AND $id_article = $flux['args']['id_article']
 		AND autoriser('modifier', 'article', $id_article)){
