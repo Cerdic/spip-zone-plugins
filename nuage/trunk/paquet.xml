@@ -1,7 +1,7 @@
 <paquet
 	prefix="nuage"
 	categorie="navigation"
-	version="4.0.2"
+	version="4.0.3"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/nuage-64.png"

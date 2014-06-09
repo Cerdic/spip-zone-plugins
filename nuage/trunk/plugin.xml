@@ -1,5 +1,5 @@
 <plugin>
-	<version>4.0.2</version>
+	<version>4.0.3</version>
 	<nom>Nuage</nom>
 	<slogan>Afficher les mots-cl&#233;s en faisant varier la taille de la police</slogan>
 	<prefix>nuage</prefix>
