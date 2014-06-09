@@ -3,8 +3,8 @@
 	 <slogan>Afficher des &#233;quation, des fonctions math&#233;matiques</slogan>
     <auteur>Yohann</auteur>
     <licence>&#169; 2010-2011 GNU/GPL</licence>
-    <version>1.1.1</version>
-    <etat>stable</etat>
+    <version>1.2.0</version>
+    <etat>test</etat>
     <categorie>outil</categorie>
     
     <description>

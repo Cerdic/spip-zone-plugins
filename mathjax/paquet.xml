@@ -5,7 +5,7 @@
 	etat="test"
 	logo="prive/themes/spip/images/mathjax-32.png"
 	documentation="http://contrib.spip.net/MathJax-pour-SPIP"
-	compatibilite="[2.0.3;3.0.*]"
+	compatibilite="[2.0.0;3.0.*]"
 	>	
 
 	<nom>MathJax</nom>
