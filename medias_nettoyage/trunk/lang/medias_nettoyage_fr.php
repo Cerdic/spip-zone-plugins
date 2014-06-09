@@ -56,6 +56,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // M
     'medias_nettoyage_nom' => 'Nettoyer la médiathèque',
+    'message_log_tranche_actif_horaire_undefined' => '@date@ : Le CRON par tranche horaire est actif mais non défini.
+    On lance le script @fonction@',
+    'message_log_tranche_actif_horaire_defini' => '@date@ : Le CRON par tranche horaire est actif et défini.
+    On lance le script @fonction@ entre @debut@ et @fin@',
+    'message_log_tranche_defaut' => '@date@ : On est dans la tranche horaire par défaut.
+    On lance le script @fonction@',
+    'message_log_tranche_desactivee' => '@date@ : Le CRON par tranche horaire est désactivé.
+    On lance le script @fonction@ toutes les 5h.',
     'mode_off' => 'Mode \'off\'',
     'mode_on' => 'Mode \'on\'',
     'mode_tous' => 'Tous',
