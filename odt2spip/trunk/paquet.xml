@@ -1,7 +1,8 @@
 <paquet
 	prefix="odt2spip"
 	categorie="edition"
-	version="2.1.1"
+	version="2.1.2"
+	schema="201406091738"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="odt2spip-64.png"

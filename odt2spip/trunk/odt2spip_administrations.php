@@ -19,7 +19,7 @@ function odt2spip_upgrade($nom_meta_base_version,$version_cible) {
 		array('effacer_meta', 'odt2spip_creation'),
 		array('ecrire_config','odt2spip', $defaut),
 	);
-	$maj['2.1.1'] = array(
+	$maj['201406091738'] = array(
 		array('ecrire_config','odt2spip/defaut_attacher', 'oui'),
 	);
 
