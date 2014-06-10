@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:img_max:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+        #SET{erreurs,#ENV**{erreurs}|table_valeur{img_max}}
+        <li class="editer_img_max obligatoire[ (#ENV**{erreurs}|table_valeur{img_max}|oui)erreur]">
+        <label for="champ_img_max"><:img_max:taille_maximale_pixels:></label>
+        [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{img_max})</span>]
+        <input type="text" id="champ_img_max" name="img_max" value="[(#ENV{img_max})]" />
+        </li>
+
+		<input type="hidden" name="_meta_casier" value="img_max" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

@@ -1,0 +1,20 @@
+<paquet
+	prefix="img_max"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.17-dev;3.1.*]"
+	logo=""
+	documentation=""
+    schema="1.0.0"
+>
+	<nom>Image max</nom>
+
+	<auteur>cy_altern;tofulm</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="post_edition" inclure="img_max_pipelines.php" /> 
+
+
+</paquet>
