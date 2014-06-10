@@ -23,6 +23,8 @@ index spip {
 	rt_attr_string        = signature
 
 	dict = keywords
+
+	morphology = stem_en, libstemmer_fr
 }
 
 ```
