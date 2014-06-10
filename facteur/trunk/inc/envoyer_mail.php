@@ -204,11 +204,13 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$facteur->Sender = $adresse_erreur;
 
 	// si entetes personalises : les ajouter
-	// bug : semble ecraser les autres headers. A debug si on veut le rendre fonctionnel
-	//if (!empty($headers)) {
-	//	foreach($headers as $h)
-	//		$facteur->AddCustomHeader($h);
-	//}
+	// attention aux collisions : si on utilise l'option cc de $corps
+	// et qu'on envoie en meme temps un header Cc: xxx, yyy
+	// on aura 2 lignes Cc: dans les headers
+	if (!empty($headers)) {
+		foreach($headers as $h)
+			$facteur->AddCustomHeader($h);
+	}
 	
 	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
 	$facteur = pipeline('facteur_pre_envoi', $facteur);
