@@ -1,0 +1,35 @@
+<style>
+
+.wp_import_box .etape_numero{color:#FFF;background-color:#66CCFF;border-radius:3px;padding:0.25em 0.5em;float:left;margin-right:0.5em;}
+.wp_import_box h3{line-height:1.6;}
+
+</style>
+
+
+<div class="wp_import_box">
+<h1><:wp_import:migration:></h1>
+
+#BOITE_OUVRIR{}
+<h2><:wp_import:mode_d_emploi:></h2>
+
+<div class="etape_numero">1</div>
+<h3><:wp_import:etape1_titre:></h3>
+<p><:wp_import:etape1_texte:></p>
+
+
+<div class="etape_numero">2</div>
+<h3><:wp_import:etape2_titre:></h3>
+<p><:wp_import:etape2_texte:></p>
+
+
+<div class="etape_numero">3</div>
+
+<h3><:wp_import:etape3_titre:></h3>
+<p><:wp_import:etape3_texte:></p>
+[(#SESSION{webmestre}|=={oui}|oui)
+[(#FORMULAIRE_IMPORT_WORDPRESS)]]
+[(#SESSION{webmestre}|=={oui}|non) Vous devez être webmestre pour effectuer l'importation.]
+
+#BOITE_FERMER
+
+</div>
