@@ -40,10 +40,10 @@
 [(#ENV{vitesse}|?{#SET{vitesse,#ENV{vitesse}},#SET{vitesse,1000}})] <!--  durée  -->
 [(#ENV{nolinks}|?{#SET{slide_links,"false"},#SET{slide_links,"'blank'"}})] <!--  num et name sont pas bô alors on limite à false ou 'blank' -->
 [(#ENV{noclic}|?{#SET{ouvririmg,""},#SET{ouvririmg,"true"}})] <!--  noclic=1 empêche d ouvrir l'image seule depuis le slideshow -->
-#SET{taillemax,1200}#SET{qualite,70} <!--  taille max des images - defaut 1200 -->
-[(#ENV{taille}|=={"petit"}|oui)#SET{taillemax,640}#SET{qualite,75}]
-[(#ENV{taille}|=={"normal"}|oui)#SET{taillemax,1200}#SET{qualite,70}]
-[(#ENV{taille}|=={"grand"}|oui)#SET{taillemax,1600}#SET{qualite,65}]
+#SET{taillemax,1200}#SET{qualite,80} <!--  taille max des images - defaut 1200 -->
+[(#ENV{taille}|=={"petit"}|oui)#SET{taillemax,640}#SET{qualite,80}]
+[(#ENV{taille}|=={"normal"}|oui)#SET{taillemax,1200}#SET{qualite,75}]
+[(#ENV{taille}|=={"grand"}|oui)#SET{taillemax,1600}#SET{qualite,70}]
 
 		
 		<script type="text/javascript">
@@ -64,7 +64,7 @@
 					slide_links				:	#GET{slide_links},	// Individual links for each slide (Options: false, 'num', 'name', 'blank') 
 					slides 					:  	[			// Slideshow Images
 <BOUCLE_photos(DOCUMENTS){extension in jpg,png}{mode=document}{", "}{id_rubrique ?}{id_article ?}{id_mot ?}{0,#GET{nbre_max}}{par #GET{tri}}{!par #GET{triinverse}}>
-{image : '[(#FICHIER|image_reduire{[(#GET{taillemax})]}|image_aplatir{jpg,ffffff,[(#GET{qualite})],1}|extraire_attribut{src})]', title : '#TITRE'[, thumb : '(#LOGO_DOCUMENT|fichier)'][(#GET{ouvririmg}|oui), url : '#URL_DOCUMENT']}
+{image : '[(#FICHIER|image_reduire{[(#GET{taillemax})]}|image_aplatir{jpg,ffffff,[(#GET{qualite})],1}|extraire_attribut{src})]', title : '#TITRE'[, thumb : '(#FICHIER|image_reduire{200,150}||extraire_attribut{src})'][(#GET{ouvririmg}|oui), url : '#URL_DOCUMENT']}
 </BOUCLE_photos>
 												]
 					

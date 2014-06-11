@@ -1,8 +1,8 @@
 <paquet
 	prefix="supersized"
 	categorie="multimedia"
-	version="0.5.2"
-	etat="test"
+	version="0.6.0"
+	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/supersized-64.png"
 	documentation="http://supersized.brubel.net/spip.php?rubrique3"
