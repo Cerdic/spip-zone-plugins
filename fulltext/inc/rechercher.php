@@ -145,6 +145,10 @@ function expression_recherche($recherche, $options) {
 	include_spip('inc/charsets');
 	$recherche = trim(translitteration($recherche));
 
+	// retirer les + de +truc et les * de truc*
+	$recherche = preg_replace(",(^|\s)\+(\w),Uims","$1$2",$recherche);
+	$recherche = preg_replace(",(\w)\*($|\s),Uims","$1$2",$recherche);
+
 	// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
 	$recherche = preg_replace(',\s+,'.$u, '|', $recherche);
 
