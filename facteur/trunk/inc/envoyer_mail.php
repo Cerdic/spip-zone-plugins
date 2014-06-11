@@ -53,8 +53,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$repondre_a = $corps['repondre_a'];
 		$adresse_erreur = $corps['adresse_erreur'];
 		$headers = (isset($corps['headers'])?$corps['headers']:$headers);
-		if (is_string($headers))
+		if (is_string($headers)){
 			$headers = array_map('trim',explode("\n",$headers));
+			$headers = array_filter($headers);
+		}
 	}
 	// si $corps est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
@@ -208,8 +210,11 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// et qu'on envoie en meme temps un header Cc: xxx, yyy
 	// on aura 2 lignes Cc: dans les headers
 	if (!empty($headers)) {
-		foreach($headers as $h)
-			$facteur->AddCustomHeader($h);
+		foreach($headers as $h){
+			// verifions le format correct : il faut au moins un ":" dans le header
+			if (strpos($h,":")!==false)
+				$facteur->AddCustomHeader($h);
+		}
 	}
 	
 	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
