@@ -153,7 +153,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 					$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
 
 					if (in_array($jtable, $lesliens))
-						$from .= "
+						$join = "
 						LEFT JOIN (
 						 SELECT lien$i.id_objet,$subscore AS score
 						 FROM spip_${jtable}s_liens as lien$i
@@ -164,7 +164,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 						 ) AS o$i ON o$i.id_objet=t.$_id_table
 						";
 					else
-						$from .= "
+						$join = "
 						LEFT JOIN (
 						 SELECT lien$i.$_id_table,$subscore AS score
 						 FROM spip_${jtable}s_${table}s as lien$i
@@ -173,6 +173,8 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 						 ORDER BY score DESC LIMIT 100
 						 ) AS o$i ON o$i.$_id_table=t.$_id_table
 						";
+					#var_dump($join);
+					$from .= $join;
 				}
 			}
 		}
@@ -183,6 +185,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 		// si on define(_FULLTEXT_WHERE_$table,'date>"2000")
 		// cette contrainte est ajoutee ici:)
 		$requete['WHERE'] = $full_text_where;
+		$requete['WHERE'] = array();
 		if (defined('_FULLTEXT_WHERE_'.$table))
 			$requete['WHERE'][] = constant('_FULLTEXT_WHERE_'.$table);
 		else
@@ -267,7 +270,9 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 						if ($options['champs'])
 							$champs_vus[$champ] = $t[$champ];
 						if ($options['score'])
-							$score += $n * $poids;
+							// on pondere le nombre d'occurence par une fonction inverse de la longueur du contenu
+							// 1 = 1 occurence pour 200 mots de 8 lettres = 1600 signes
+							$score += $n * $poids * sqrt(sqrt(1600/strlen($t[$champ])));
 						if ($options['matches'])
 							$matches[$champ] = $regs;
 

@@ -1,7 +1,7 @@
 <paquet
 	prefix="fulltext"
 	categorie="navigation"
-	version="0.8.1"
+	version="0.8.2"
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/fulltext-32.png"
