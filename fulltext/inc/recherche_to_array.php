@@ -54,8 +54,8 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 
 	list($methode, $q, $preg) = expression_recherche($recherche, $options);
 
-	$l = liste_des_champs();
-	$champs = $l[$table];
+	$liste = liste_des_champs();
+	$champs = $liste[$table];
 
 	$jointures = $options['jointures']
 		? liste_des_jointures()
@@ -195,10 +195,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 		define('_FULLTEXT_MAX_RESULTS', 500);
 
 		// preparer la requete
-		$requete['SELECT'] = array(
-			"t.$_id_table"
-			,$score
-		);
+		$requete['SELECT'][] = $score;
 
 		// popularite ?
 		if (true # config : "prendre en compte la popularite
@@ -244,49 +241,52 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 
 			$r[$id]['score'] = $pts;
 
-		} ELSE
+		}
 		// fin FULLTEXT
 
-		if ($options['toutvoir']
-		OR autoriser('voir', $table, $id)) {
-			// indiquer les champs concernes
-			$champs_vus = array();
-			$score = 0;
-			$matches = array();
 
-			$vu = false;
-			foreach ($champs as $champ => $poids) {
-				$champ = explode('.',$champ);
-				$champ = end($champ);
-				if ($n = 
-					($options['score'] || $options['matches'])
-					? preg_match_all($preg, translitteration_rapide($t[$champ]), $regs, PREG_SET_ORDER)
-					: preg_match($preg, translitteration_rapide($t[$champ]))
-				) {
-					$vu = true;
+		if (!$fulltext OR (defined('_FULLTEXT_FIELD_SCORE') AND _FULLTEXT_FIELD_SCORE)) {
+			if ($options['toutvoir']
+			OR autoriser('voir', $table, $id)) {
+				// indiquer les champs concernes
+				$champs_vus = array();
+				$score = 0;
+				$matches = array();
 
-					if ($options['champs'])
-						$champs_vus[$champ] = $t[$champ];
-					if ($options['score'])
-						$score += $n * $poids;
-					if ($options['matches'])
-						$matches[$champ] = $regs;
+				$vu = false;
+				foreach ($champs as $champ => $poids) {
+					$champ = explode('.',$champ);
+					$champ = end($champ);
+					if ($n =
+						($options['score'] || $options['matches'])
+						? preg_match_all($preg, translitteration_rapide($t[$champ]), $regs, PREG_SET_ORDER)
+						: preg_match($preg, translitteration_rapide($t[$champ]))
+					) {
+						$vu = true;
 
-					if (!$options['champs']
-					AND !$options['score']
-					AND !$options['matches'])
-						break;
+						if ($options['champs'])
+							$champs_vus[$champ] = $t[$champ];
+						if ($options['score'])
+							$score += $n * $poids;
+						if ($options['matches'])
+							$matches[$champ] = $regs;
+
+						if (!$options['champs']
+						AND !$options['score']
+						AND !$options['matches'])
+							break;
+					}
 				}
-			}
 
-			if ($vu) {
-				$r[$id] = array();
-				if ($champs_vus)
-					$r[$id]['champs'] = $champs_vus;
-				if ($score)
-					$r[$id]['score'] = $score;
-				if ($matches)
-					$r[$id]['matches'] = $matches;
+				if ($vu) {
+					$r[$id] = array();
+					if ($champs_vus)
+						$r[$id]['champs'] = $champs_vus;
+					if ($score)
+						$r[$id]['score'] = ($fulltext?$r[$id]['score']:0)+$score;
+					if ($matches)
+						$r[$id]['matches'] = $matches;
+				}
 			}
 		}
 	}
