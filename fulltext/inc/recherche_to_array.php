@@ -134,43 +134,46 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 			$full_text_where[] = $val_where;
 			$score[] = $val;
 		}
+		$full_text_where = array("(".implode(") OR (",$full_text_where).")");
 
 		// On ajoute la premiere cle FULLTEXT de chaque jointure
 		$from = array_pop($requete['FROM']);
 
-		if (is_array($jointures[$table]))
-		foreach(array_keys($jointures[$table]) as $jtable) {
-			$i++;
-			spip_log($pe,'recherche');
-			if ($mkeys = fulltext_keys($jtable, 'obj'.$i, $serveur)) {
-				$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
-				$_id_join = id_table_objet($jtable);
-				$table_join = table_objet($jtable);
-				$lesliens = recherche_tables_liens();
+		if (is_array($jointures[$table])){
+			$i = 0;
+			foreach(array_keys($jointures[$table]) as $jtable) {
+				$i++;
+				spip_log($pe,'recherche');
+				if ($mkeys = fulltext_keys($jtable, 'obj'.$i, $serveur)) {
+					$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+					$_id_join = id_table_objet($jtable);
+					$table_join = table_objet($jtable);
+					$lesliens = recherche_tables_liens();
 
-				$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
+					$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
 
-				if (in_array($jtable, $lesliens))
-					$from .= "
-					LEFT JOIN (
-					 SELECT lien$i.id_objet,$subscore AS score
-					 FROM spip_${jtable}s_liens as lien$i
-					 JOIN spip_${jtable}s as obj$i ON obj$i.$_id_join=lien$i.$_id_join
-					 AND lien$i.objet='${table}'
-					 WHERE $subscore > 0
-					 ORDER BY score DESC LIMIT 100
-					 ) AS o$i ON o$i.id_objet=t.$_id_table
-					";
-				else
-					$from .= "
-					LEFT JOIN (
-					 SELECT lien$i.$_id_table,$subscore AS score
-					 FROM spip_${jtable}s_${table}s as lien$i
-					 JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
-					 WHERE $subscore > 0
-					 ORDER BY score DESC LIMIT 100
-					 ) AS o$i ON o$i.$_id_table=t.$_id_table
-					";
+					if (in_array($jtable, $lesliens))
+						$from .= "
+						LEFT JOIN (
+						 SELECT lien$i.id_objet,$subscore AS score
+						 FROM spip_${jtable}s_liens as lien$i
+						 JOIN spip_${jtable}s as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+						 AND lien$i.objet='${table}'
+						 WHERE $subscore > 0
+						 ORDER BY score DESC LIMIT 100
+						 ) AS o$i ON o$i.id_objet=t.$_id_table
+						";
+					else
+						$from .= "
+						LEFT JOIN (
+						 SELECT lien$i.$_id_table,$subscore AS score
+						 FROM spip_${jtable}s_${table}s as lien$i
+						 JOIN spip_${table_join} AS obj$i ON lien$i.$_id_join=obj$i.$_id_join
+						 WHERE $subscore > 0
+						 ORDER BY score DESC LIMIT 100
+						 ) AS o$i ON o$i.$_id_table=t.$_id_table
+						";
+				}
 			}
 		}
 		$requete['FROM'][] = $from;
@@ -287,7 +290,6 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 			}
 		}
 	}
-
 
 	// Gerer les donnees associees
 	if (!$fulltext
