@@ -1,8 +1,8 @@
 <paquet
 	prefix="sjcycle"
 	categorie="multimedia"
-	version="3.3.1"
-	etat="dev"
+	version="3.4.0"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/sjcycle-32.png"
 	schema="1.0.0"
