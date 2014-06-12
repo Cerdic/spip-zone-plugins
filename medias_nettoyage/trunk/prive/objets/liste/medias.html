@@ -7,31 +7,42 @@
 		<thead>
 			<tr class="first_row">
 				<th class="nom principale"><:medias_nettoyage:info_nom:></th>
-				<th class="infos secondaire"><:medias_nettoyage:info_technique:></th>
+				<th class="exif secondaire"><:medias_nettoyage:info_technique:></th>
 				<th class="date secondaire"><:date:></th>
+				[(#ENV{logos}|=={'oui'}|non)
+				<th class="action secondaire"><:medias_nettoyage:actions:></th>
+				]
 			</tr>
 		</thead>
 		<tbody>
 			<BOUCLE_liste_medias (DATA) {source table, #ENV{liste}} {par valeur} {pagination #ENV{nb,10}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})]
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td class="nom principale">
-					[(#VALEUR|exif_imagetype|is_numeric|oui)[
-					<a href="#VALEUR"[ title="(#VALEUR|basename)"] class="mediabox">(#VALEUR|balise_img|image_reduire{250,100}|inserer_attribut{alt,[(#VALEUR|basename|texte_backend)]})
+					[(#VALEUR|medias_est_image|oui)[
+					<a href="#VALEUR"[ title="(#VALEUR|attribut_html)"] class="mediabox">(#VALEUR|balise_img|image_reduire{125,100}|inserer_attribut{alt,[(#VALEUR|basename|attribut_html)]})
 						[<br/><em>(#VALEUR|basename)</em>]
 					</a>]]
-					[(#VALEUR|exif_imagetype|is_numeric|non)
-					[<div class="resize-250">
-						<a href="#VALEUR"[ title="(#VALEUR|basename)"]>(#VALEUR|basename)</a>
+					[(#VALEUR|medias_est_image|non)
+					[<div class="resize-125">
+						<a href="#VALEUR"[ title="(#VALEUR|attribut_html)"]>(#VALEUR|basename)</a>
 					</div>]]
 				</td>
-				<td class="infos secondaire">
-					[<strong>(#GET{pathinfo}|table_valeur{extension})</strong>]
-					[<br/>(#VALEUR|filesize|taille_en_octets)]
-					[<br/>(#VALEUR|exif_imagetype|is_numeric|oui)[(#VALEUR|largeur)] x [(#VALEUR|hauteur)] px]
+				<td class="exif secondaire">
+					[<strong class="extension">(#GET{pathinfo}|table_valeur{extension})</strong>]
+					[<div class="dimensions">(#VALEUR|medias_est_image|oui)[(#VALEUR|largeur)] x [(#VALEUR|hauteur)] px </div>]
+					[<div class="taille">(#VALEUR|filesize|taille_en_octets)</div>]
+					[<div class="extras">(#VALEUR|replace{'/','/<wbr/>'})</div>]
 				</td>
 				<td class="date secondaire">
 					[(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate)]
 				</td>
+				[(#ENV{logos}|=={'oui'}|non)
+				<td class="action secondaire">
+				[(#AUTORISER{supprimer,medias_orphelins}|oui)
+					[(#URL_ACTION_AUTEUR{supprimer_orphelins,#VALEUR,#SELF|parametre_url{'var_mode','recalcul'}}|icone_horizontale{<:supprimer:>,'',del})]
+				]
+				</td>
+				]
 			</tr>
 			</BOUCLE_liste_medias>
 		</tbody>

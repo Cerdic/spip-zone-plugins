@@ -7,6 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
+    'actions' => 'Actions',
     'aucun_document_orphelin' => 'Il n\'y a aucun document orphelin.',
     'aucun_logo' => 'Il n\'y a aucun logo.',
     'aucun_repertoire' => 'Il n\'y a aucun répertoire.',

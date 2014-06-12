@@ -945,4 +945,26 @@ function medias_reparer_documents_fichiers ()
     return true;
 }
 
+/**
+ * Cette fonction vérifie si le fichier est une image ou pas.
+ * On fait un test selon l'existence des fonctions PHP qui peuvent nous aider.
+ * On évite ainsi une alerte PHP
+ * @param  string $fichier
+ *         url relative du fichier.
+ * @return bool
+ */
+function medias_est_image ($fichier)
+{
+    $image = false;
+    if (function_exists('exif_imagetype')) {
+        if (is_numeric(exif_imagetype($fichier))) {
+            $image = true;
+        }
+    } elseif (function_exists('getimagesize')) {
+        if (is_array(getimagesize($fichier))) {
+            $image = true;
+        }
+    }
+    return $image;
+}
 ?>
