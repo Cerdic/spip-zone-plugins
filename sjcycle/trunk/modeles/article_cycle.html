@@ -88,6 +88,7 @@ $(document).ready(function() {
 [(#GET{liens_individuels}|oui) #SET{slidebalise,a}]
 [(#GET{mediabox}|=={oui}|oui) #SET{slidebalise,a}]
 [(#GET{id_article_a_lier}|oui) #SET{slidebalise,a}]
+[(#ENV{lien_parent}|oui) #SET{slidebalise,a}]
 [(#CONFIG{sjcycle/tooltip}|=={oui}|oui|ou{#GET{liens_individuels}|non}) #SET{slidespan,div}]
 
 <div class="cycle-slideshow"[ style="(#GET{style})"][
@@ -136,17 +137,19 @@ $(document).ready(function() {
 			[(#GET{texte_infobulle}|strlen|!={0}|oui) #SET{afficher_infobulle,oui}]
 		]
 
-	
+		[(#ENV{lien_parent}|oui) 
+		#INCLURE{fond=inclure/lien_parent,id_document}
+		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={article}|oui)
-		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"] data-cycle-title="#TITRE">#SET{fermer_a,oui}]
+		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE">#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={rubrique}|oui)
-		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"] data-cycle-title="#TITRE">
+		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE">
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={externe}|oui)
-		<a href="[(#DESCRIPTIF|supprimer_tags)]"[ title="(#TITRE)"] data-cycle-title="#TITRE">
+		<a href="[(#DESCRIPTIF|supprimer_tags)]" data-cycle-title="#TITRE">
 		#SET{fermer_a,oui}]
 		[(#GET{id_article_a_lier}|oui)
-		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}" data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
+		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" data-cycle-title="#GET{titre_article_a_lier}" data-cycle-desc="#DESCRIPTIF">
 		#SET{fermer_a,oui}]
 		[(#GET{fermer_a}|=={oui}|non|et{#GET{mediabox}|=={oui}|oui})
 		<a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
