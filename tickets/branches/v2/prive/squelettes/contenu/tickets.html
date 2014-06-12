@@ -21,9 +21,10 @@
 		[(#SET{tris,#GET{tris}|array_merge{#ARRAY{projet,<:tickets:classement_projet:>}}})]
 	][(#SET{tris,#GET{tris}|array_merge{#ARRAY{termine,<:tickets:classement_termine:>}}})]
 	<BOUCLE_tri(DATA){source tableau,#GET{tris}}{"<span class='sep'> | </span>"}>
-	<a href="[(#SELF|parametre_url{classement,#CLE})]"[(#ENV{classement}|=={#CLE}|oui) class="on"]>#VALEUR</a>
+	<a href="[(#SELF|parametre_url{classement,#CLE})]"[(#ENV{classement,tous}|=={#CLE}|oui) class="on"]>#VALEUR</a>
 	</BOUCLE_tri>
 [(#BOITE_FERMER)]
+
 
 <h1>[(#VAL{tickets:classement_#ENV{classement,tous}}|_T)]</h1>
 
