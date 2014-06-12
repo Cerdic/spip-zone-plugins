@@ -3,6 +3,8 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('base/abstract_sql');
+
 /**
  * Incrémente le compteur de clics + redirige vers la bonne URL
  * @param unknown_type $arg
