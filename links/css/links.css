@@ -1,0 +1,90 @@
+/* --------------------------------------------------------------
+
+	links.css
+	Style des liens du site
+	romy.tetue.net - GPL - 2011
+
+-------------------------------------------------------------- */
+
+a { background: transparent no-repeat right center; }
+
+/* Liens internes */
+a.spip_note {} /* liens vers notes de bas de page */
+a.spip_ancre {} /* liens internes a la page */
+a.spip_in {} /* liens internes */
+
+/* Liens externes */
+a.spip_out,
+a.spip_url,
+a.external { padding-right: 13px; background-image: url(img/links/external.gif); }
+
+/* Liens courriel */
+a.spip_mail,
+a[href ^="mailto:"] { padding-right: 14px; background-image: url(img/links/mail.gif); }
+a.spip_mail:before { content: ''; }
+
+/* Autres services */
+a[href ^="https://"],
+a.lock { padding-right: 13px; background-image: url(img/links/lock.gif); background-repeat:no repeat; background-position: center left;}
+
+a[href ^="ftp://"],
+a.ftp { padding-right: 13px; background-image: url(img/links/ftp.gif); }
+
+a.gopher,
+a[href ^="gopher://"] { padding-right: 13px; background-image: url(img/links/external.gif); }
+
+a[href ^="news://"],
+a.news { padding-right: 13px; background-image: url(img/links/news.gif); }
+
+a[href ^="irc://"],
+a.extiw[href ^="irc://"],
+a.talk { padding-right: 13px; background-image: url(img/links/talk.gif); }
+
+a.feed { padding-right: 13px; background-image: url(img/links/feed.gif); }
+
+/* Liens vers encyclopedie */
+a.spip_glossaire { padding-right: 13px; background-image: url(img/links/glossaire.gif); }
+
+/* Documents a telecharger */
+a.spip_doc { padding-right: 13px; background-image: url(img/links/spip_doc.gif); }
+a.download { padding-right: 13px; background-image: url(img/links/download.gif); }
+
+a[href$=".pdf"], a[href$=".PDF"],
+a[href*=".pdf#"], a[href*=".PDF#"],
+a[href*=".pdf?"], a[href*=".PDF?"],
+a.pdf { padding-right: 13px; background-image: url(img/links/pdf.gif); }
+
+a[href $=".ogg"], a[href $=".OGG"],
+a[href $=".mid"], a[href $=".MID"],
+a[href $=".midi"], a[href $=".MIDI"],
+a[href $=".mp3"], a[href $=".MP3"],
+a[href $=".wav"], a[href $=".WAV"],
+a[href $=".wma"], a[href $=".WMA"],
+a.audio { padding-right: 13px; background-image: url(img/links/audio.gif); }
+
+a[href $=".ogm"], a[href $=".OGM"],
+a[href $=".avi"], a[href $=".AVI"],
+a[href $=".mpeg"], a[href $=".MPEG"],
+a[href $=".mpg"], a[href $=".MPG"],
+a.video { padding-right: 13px; background-image: url(img/links/video.gif); }
+
+/* Exception previsibles */
+.spip_documents dt a { padding-right: 0; background-image: none; }
+
+/* hreflang */
+a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
+
+/* Autres medias */
+@media print {
+a { text-decoration: underline; }
+a.external,
+a[href ^="mailto:"] { padding-right: 0; background: none; }
+.ie6 a { padding-right: 0; background: none; } /*ie6*/
+a.external:after,
+a[href ^="mailto:"]:after { content: "\0000a0("attr(href)")"; }
+}
+
+/* Liens exposes */
+.on { font-weight: bold; }
+
+/* end */
