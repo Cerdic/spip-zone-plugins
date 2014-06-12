@@ -125,10 +125,17 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// c'est un format standard dans l'envoi de mail
 	// les passer au format array pour phpMailer
 	// mais ne pas casser si on a deja un array en entree
+	// si aucun destinataire du courriel on renvoie false (eviter les warning PHP)
 	if (is_array($destinataire))
 		$destinataire = implode(", ",$destinataire);
-	$destinataire = array_map('trim',explode(",",$destinataire));
-	
+
+	if(strlen($destinataire) > 0)
+		$destinataire = array_map('trim',explode(",",$destinataire));
+	else {
+		spip_log("Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+		return false;
+	}
+
 	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 	
@@ -136,10 +143,10 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	if (empty($from) AND empty($facteur->From)) {
 		$from = $GLOBALS['meta']["email_envoi"];
 		if (empty($from) OR !email_valide($from)) {
-			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.");
+			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.", 'mail.' . _LOG_ERREUR);
 			$from = $destinataire;
 		}
-	}
+	} 
 
 	// "Marie Toto <Marie@toto.com>"
 	if (preg_match(",^([^<>\"]*)<([^<>\"]+)>$,i",$from,$m)){
@@ -180,7 +187,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 			$facteur->AddBCC($bcc);
 	}
 	
-	// S'il y a des copies cachées à envoyer
+	// S'il y a une adresse de reply-to
 	if ($repondre_a){
 		if (is_array($repondre_a))
 			foreach ($repondre_a as $courriel)
@@ -224,7 +231,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$head = $facteur->CreateHeader();
 
 	// Et c'est parti on envoie enfin
-	spip_log("mail via facteur\n$head"."Destinataire:".print_r($destinataire,true),'mail');
+	spip_log("mail via facteur\n$head"."Destinataire:".print_r($destinataire,true),'mail.' . _LOG_ERREUR);
 	spip_log("mail\n$head"."Destinataire:".print_r($destinataire,true),'facteur');
 	$retour = $facteur->Send();
 	
