@@ -1,0 +1,179 @@
+[(#REM) modele pour inclure le diaporama de n'importe quel article n'importe ou dans le site
+usage = <rubriqueN|cycle>
+N est reellement l'id de la rubrique demandée
+cf http://www.spip.net/fr_article3454.html et /squelettes-dist/modeles/article_mots.html
+]
+[(#SET{id_article,	[(#ENV{id_sjcycle,	0})]})]
+
+[(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
+[(#SET{hauteurmax,	[(#ENV{hauteurmax,     	#CONFIG{sjcycle/hauteurmax}})]})]
+[(#SET{autoheight,	[(#ENV{autoheight,     	#CONFIG{sjcycle/autoheight}})]})]
+[(#SET{timeout,      	[(#ENV{timeout,     	#CONFIG{sjcycle/timeout}})]})]
+[(#SET{speed,      	[(#ENV{speed,     	#CONFIG{sjcycle/speed}})]})]
+[(#SET{delay,      	[(#ENV{delay,     	#CONFIG{sjcycle/delay}})]})]
+[(#SET{pauseonhover,    [(#ENV{pauseonhover,    #CONFIG{sjcycle/pauseonhover}})]})]
+[(#SET{reverse,		[(#ENV{reverse,		#CONFIG{sjcycle/reverse}})]})]
+[(#SET{random,		[(#ENV{random,		#CONFIG{sjcycle/random}})]})]
+[(#SET{fx,		[(#ENV{fx,		#CONFIG{sjcycle/fx}})]})]
+[(#SET{tilevertical,	[(#ENV{tilevertical,	#CONFIG{sjcycle/tilevertical}})]})]
+[(#SET{backgroundcolor, [(#ENV{backgroundcolor,	#CONFIG{sjcycle/backgroundcolor}})]})]
+[(#SET{prev, 		[(#ENV{prev,		#CONFIG{sjcycle/prev}})]})]
+[(#SET{next, 		[(#ENV{next,		#CONFIG{sjcycle/next}})]})]
+[(#SET{allowwrap, 	[(#ENV{allowwrap,	#CONFIG{sjcycle/allowwrap}})]})]
+[(#SET{sync,		[(#ENV{sync,		#CONFIG{sjcycle/sync}})]})]
+[(#SET{paused,		[(#ENV{paused,		#CONFIG{sjcycle/paused}})]})]
+[(#SET{pager,		[(#ENV{pager,		#CONFIG{sjcycle/pager}})]})]
+[(#SET{caption,		[(#ENV{caption,		#CONFIG{sjcycle/caption}})]})]
+[(#SET{captiontemplate,	[(#ENV{captiontemplate,	#CONFIG{sjcycle/captiontemplate}})]})]
+[(#SET{overlay,			[(#ENV{overlay,			#CONFIG{sjcycle/overlay}})]})]
+[(#SET{overlaytemplate,	[(#ENV{overlaytemplate,	#CONFIG{sjcycle/overlaytemplate}})]})]
+[(#SET{pauseonhovercontent,	[(#ENV{pauseonhovercontent,	#CONFIG{sjcycle/pauseonhovercontent}})]})]
+[(#SET{carouselvisible,		[(#ENV{carouselvisible,		#CONFIG{sjcycle/carouselvisible}})]})]
+[(#SET{carouseloffset,		[(#ENV{carouseloffset,		#CONFIG{sjcycle/carouseloffset}})]})]
+[(#SET{carouselslidedimension,	[(#ENV{carouselslidedimension,	#CONFIG{sjcycle/carouselslidedimension}})]})]
+[(#SET{carouselvertical,	[(#ENV{carouselvertical,	#CONFIG{sjcycle/carouselvertical}})]})]
+[(#SET{carouselfluid,		[(#ENV{carouselfluid,		#CONFIG{sjcycle/carouselfluid}})]})]
+[(#SET{mediabox,		[(#ENV{mediabox,		#CONFIG{sjcycle/mediabox}})]})]
+
+[(#SET{liens_individuels,	[(#ENV{liens_individuels,	0})]})]
+
+[(#ENV{align}|match{left|right}|=={left}|?{ #SET{marginfl,"margin-right"}, #SET{marginfl,"margin-left"}})]
+[(#SET{style,	[float:(#ENV{align}|match{left|right});#GET{marginfl}:1em;margin-top:0;][background-color:(#GET{backgroundcolor});][(#GET{fx}|=={carousel}|non)[max-width:(#GET{largeurmax})px;]]	})]
+
+[(#SET{cssbox,	[(#EVAL{8}|randomString)]})]
+
+[(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
+	- Si l'article n'existe pas dans la langue courante on met ou pas un lien
+	vers l'article de reference suivant la valeur de forcer_lien_reference ]
+<BOUCLE_contexte_article(ARTICLES){id_article=#ENV{lien_article}}>
+   [(#ENV{forcer_lien_reference}|oui)
+      #SET{id_article_a_lier,#ID_ARTICLE}
+      #SET{titre_article_a_lier,#TITRE}]
+   <BOUCLE_traductions(ARTICLES){traduction}>
+   	[(#ENV{lang}|=={#LANG}|oui)
+      	#SET{id_article_a_lier,#ID_ARTICLE}
+         #SET{titre_article_a_lier,#TITRE}]
+   </BOUCLE_traductions>
+</BOUCLE_contexte_article>
+
+<B_img>
+<style type="text/css">
+.cycle-paused:after {[ content:'(#GET{pauseonhovercontent})';][(#GET{pauseonhovercontent}|=={''}|oui) display:none;] }
+.texte_infobulle { text-align:left; }
+</style>
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+$(document).ready(function() {
+	[(#CONFIG{sjcycle/tooltip}|=={oui}|oui)
+		$('.infobulle').tooltip({
+			bodyHandler: function() {
+				return $($(this).children(".textinfobulle")).html();
+			},
+			track: true,
+			delay: 0,
+			showURL: false,
+			opacity: 1,
+			fixPNG: true,
+			extraClass: "pretty",
+			top: -15,
+			left: 5
+		});
+	]
+	[(#GET{mediabox}|=={oui}|oui)
+		$("a.#GET{cssbox}").mediabox(box_settings);
+	]
+});
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+
+#SET{slidebalise,img}
+[(#GET{liens_individuels}|oui) #SET{slidebalise,a}]
+[(#GET{mediabox}|=={oui}|oui) #SET{slidebalise,a}]
+[(#GET{id_article_a_lier}|oui) #SET{slidebalise,a}]
+[(#CONFIG{sjcycle/tooltip}|=={oui}|oui|ou{#GET{liens_individuels}|non}) #SET{slidespan,div}]
+
+<div class="cycle-slideshow"[ style="(#GET{style})"][
+	data-cycle-slides="(#GET{slidebalise})"][ 
+	data-cycle-speed="(#GET{speed})"][ 
+	data-cycle-timeout="(#GET{timeout})"][ 
+	data-cycle-delay="(#GET{delay})"][ 
+	data-cycle-pause-on-hover="(#GET{pauseonhover})"][ 
+	data-cycle-allow-wrap="(#GET{allowwrap})"][ 
+	data-cycle-reverse="(#GET{reverse})"][ 
+	data-cycle-random="(#GET{random})"][ 
+	data-cycle-sync="(#GET{sync})"][ 
+	data-cycle-paused="(#GET{paused})"][ 
+	data-cycle-prev="(#GET{prev})"][ 
+	data-cycle-next="(#GET{next})"][ 
+	data-cycle-fx="(#GET{fx})"][(#GET{fx}|=={tileSlide}|oui|ou{#GET{fx}|=={tileBlind}|oui})[
+	data-cycle-tile-vertical="(#GET{tilevertical})"]][ 
+	data-cycle-carousel-visible="(#GET{carouselvisible})"][ 
+	data-cycle-carousel-offset="(#GET{carouseloffset})"][ 
+	data-cycle-carousel-slide-dimension="(#GET{carouselslidedimension})"][ 
+	data-cycle-carousel-vertical="(#GET{carouselvertical})"][ 
+	data-cycle-carousel-fluid="(#GET{carouselfluid})"][
+	data-cycle-pager="(#GET{pager})"][
+	data-cycle-caption="(#GET{caption})"][
+	data-cycle-caption-template="(#GET{captiontemplate})"][
+	data-cycle-overlay="(#GET{overlay})"][
+	data-cycle-overlay-template="(#GET{overlaytemplate})"][
+	data-cycle-auto-height="(#GET{autoheight})"]]]
+	>[(#GET{prev}|=={.cycle-prev}|oui)
+	<div class="cycle-prev"></div>][(#GET{next}|=={.cycle-next}|oui)
+	<div class="cycle-next"></div>][(#GET{pager}|=={.cycle-pager}|oui)
+	<div class="cycle-pager"></div>][(#GET{caption}|=={.cycle-caption}|oui)
+	<div class="cycle-caption"></div>]
+	<BOUCLE_img(DOCUMENTS){id_rubrique}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}{0,#ENV{limite,100000000}}>[
+		
+		 #SET{fermer_a,non}
+         
+		[(#REM) Doit-on afficher les infobulles ET y a t'il quelque chose a afficher ?]
+		#SET{afficher_infobulle,non}
+		[(#CONFIG{sjcycle/tooltip}|=={oui}|oui)
+			[(#SET{texte_infobulle,[<h4>(#TITRE|supprimer_numero)</h4>][(#DESCRIPTIF)<br />]})]
+			[(#CONFIG{sjcycle/tooltip_carac}|=={oui}|oui)
+				[(#SET{texte_infobulle,[(#GET{texte_infobulle}|concat{<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]})]})]
+			]
+			[(#SET{texte_infobulle,[(#GET{texte_infobulle}|trim)]})]
+			[(#GET{texte_infobulle}|strlen|!={0}|oui) #SET{afficher_infobulle,oui}]
+		]
+
+	
+		[(#GET{liens_individuels}|=={article}|oui)
+		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"] data-cycle-title="#TITRE">#SET{fermer_a,oui}]
+		[(#GET{liens_individuels}|=={rubrique}|oui)
+		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"] data-cycle-title="#TITRE">
+		#SET{fermer_a,oui}]
+		[(#GET{liens_individuels}|=={externe}|oui)
+		<a href="[(#DESCRIPTIF|supprimer_tags)]"[ title="(#TITRE)"] data-cycle-title="#TITRE">
+		#SET{fermer_a,oui}]
+		[(#GET{id_article_a_lier}|oui)
+		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}" data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
+		#SET{fermer_a,oui}]
+		[(#GET{fermer_a}|=={oui}|non|et{#GET{mediabox}|=={oui}|oui})
+		<a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
+						class="#GET{cssbox}"
+						rel="#GET{cssbox}"
+						[(#CONFIG{sjcycle/tooltip}|=={oui}|non) title="[(#TITRE|supprimer_numero|attribut_html)]"]
+						style="display:block;padding:0px;margin:0px;"
+						data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
+		#SET{fermer_a,oui}]
+	
+		[(#GET{afficher_infobulle}|=={oui}|oui)
+		<div class="infobulle">
+		]
+			<img class="no_image_filtrer" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] 
+				 data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF"
+			/>
+		
+		[(#GET{afficher_infobulle}|=={oui}|oui)
+		<div class="textinfobulle" style="display:none;">#GET{texte_infobulle}</div>
+		</div> <!-- .infobulle -->
+		]
+		[(#GET{fermer_a}|=={oui}|oui)</a>]
+		
+	]</BOUCLE_img>
+	[(#GET{overlay}|=={.cycle-overlay}|oui)
+	<div class="cycle-overlay"></div>]
+
+</div>
+
+</B_img>
