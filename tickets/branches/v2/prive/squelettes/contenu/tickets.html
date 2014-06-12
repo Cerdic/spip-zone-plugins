@@ -25,9 +25,9 @@
 	</BOUCLE_tri>
 [(#BOITE_FERMER)]
 
-<h1>[(#VAL{tickets:classement_#ENV{classement,asuivre}}|_T)]</h1>
+<h1>[(#VAL{tickets:classement_#ENV{classement,tous}}|_T)]</h1>
 
-<INCLURE{fond=prive/squelettes/inclure/inc_classement_#ENV{classement,asuivre}}{env}>
+<INCLURE{fond=prive/squelettes/inclure/inc_classement_#ENV{classement,tous}}{env}>
 
 <BOUCLE_un_ticket(TICKETS){id_auteur=#SESSION{id_auteur}}{tout}{0,1}>
 	<h2><:tickets:tous_vos_tickets:></h2>
