@@ -24,9 +24,58 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 	$maj['0.5.2'] = array(
 		array('menus_fusionne_critere_tri_inverse'),
 	);
+	$maj['0.5.3'] = array(
+		array('menus_fusionne_critere_tri_num_alpha'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_version_base, $version_cible, $maj);
+}
+
+function menus_fusionne_critere_tri_num_alpha(){
+
+	$res = sql_select("*","spip_menus_entrees","","","id_menus_entree");
+	while ($row = sql_fetch($res)){
+		#var_dump($row);
+		$params = unserialize($row['parametres']);
+
+		$change = false;
+		if (isset($params['tri_num']) AND isset($params['tri_alpha'])){
+			$tri = "";
+			if (strlen($params['tri_num'])){
+				$tri = "num ".trim($params['tri_num']);
+				$tri = str_replace("num !","!num ",$tri);
+			}
+			else {
+				$tri = trim($params['tri_alpha']);
+			}
+			$params['tri'] = $tri;
+			unset($params['tri_num']);
+			unset($params['tri_alpha']);
+			$change = true;
+		}
+		if (isset($params['tri_num_articles']) AND isset($params['tri_alpha_articles'])){
+			$tri = "";
+			if (strlen($params['tri_num_articles'])){
+				$tri = "num ".trim($params['tri_num_articles']);
+				$tri = str_replace("num !","!num ",$tri);
+			}
+			else {
+				$tri = trim($params['tri_alpha_articles']);
+			}
+			$params['tri_articles'] = $tri;
+			unset($params['tri_num_articles']);
+			unset($params['tri_alpha_articles']);
+			$change = true;
+		}
+
+		if ($change){
+			#var_dump($params);
+			$params = serialize($params);
+			sql_updateq("spip_menus_entrees",array('parametres'=>$params),"id_menus_entree=".intval($row['id_menus_entree']));
+		}
+
+	}
 }
 
 function menus_fusionne_critere_tri_inverse(){

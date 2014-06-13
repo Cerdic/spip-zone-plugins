@@ -5,7 +5,6 @@
 	<icone>images/menus_mots.png</icone>
 	<parametre nom="id_mot" label="menus:entree_id_mot" obligatoire="oui" />
 	<parametre nom="nombre" label="menus:entree_nombre_articles" />
-	<parametre nom="tri_num" label="menus:entree_tri_num_articles" />
-	<parametre nom="tri_alpha" label="menus:entree_tri_alpha_articles" />
+	<parametre nom="tri" label="menus:entree_tri_articles" />
 	<refuser_sous_menu/>
 </entree>

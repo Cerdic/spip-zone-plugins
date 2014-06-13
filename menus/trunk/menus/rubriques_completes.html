@@ -18,14 +18,14 @@
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
 
 [(#REM) Tri des rubriques ]
-[(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
-[(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
+[(#SET{tri_num, #ENV{tri,titre}|menus_critere_tri{num}})]
+[(#SET{tri_alpha, #ENV{tri,titre}|menus_critere_tri{alpha}})]
 [(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
 [(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
 
 [(#REM) Tri des articles ]
-[(#SET{tri_num_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_num_articles},'titre'}})]
-[(#SET{tri_alpha_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_alpha_articles},'titre'}})]
+[(#SET{tri_num_articles, #ENV{tri_articles,titre}|menus_critere_tri{num}})]
+[(#SET{tri_alpha_articles, #ENV{tri_articles,titre}|menus_critere_tri{alpha}})]
 [(#SET{tri_num_articles_inverse,#GET{tri_num_articles}|match{^!}|oui})]
 [(#SET{tri_alpha_articles_inverse,#GET{tri_alpha_articles}|match{^!}|oui})]
 

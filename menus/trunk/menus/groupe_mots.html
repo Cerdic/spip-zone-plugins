@@ -1,7 +1,7 @@
 [(#SET{id_groupe, #ENV{id_groupe}|intval})]
 [(#SET{nombre_articles_mot, #ENV{nombre_articles_mot}|intval|?{#ENV{nombre_articles_mot},0}})]
-[(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
-[(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
+[(#SET{tri_num, #ENV{tri,titre}|menus_critere_tri{num}})]
+[(#SET{tri_alpha, #ENV{tri,titre}|menus_critere_tri{alpha}})]
 [(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
 [(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
 

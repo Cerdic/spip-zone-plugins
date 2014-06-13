@@ -1,12 +1,12 @@
 <paquet
 	prefix="menus"
 	categorie="navigation"
-	version="1.5.1"
+	version="1.5.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/menu-32.png"
 	documentation="http://www.spip-contrib.net/Plugin-Menus"
-	schema="0.5.2"
+	schema="0.5.3"
 >
 	<nom>Menus</nom>
 

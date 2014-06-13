@@ -1,6 +1,6 @@
 [(#SET{id_rubrique, #ENV{id_rubrique}|intval})]
-[(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
-[(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
+[(#SET{tri_num, #ENV{tri,titre}|menus_critere_tri{num}})]
+[(#SET{tri_alpha, #ENV{tri,titre}|menus_critere_tri{alpha}})]
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
 [(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
 [(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]

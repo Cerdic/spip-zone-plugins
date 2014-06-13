@@ -22,4 +22,27 @@ function menus_exposer($id_objet, $objet, $env, $on='on active', $off=''){
 	include_spip('public/quete');
 	return calcul_exposer($id_objet, $primary, $env, '', $primary) ? $on : $off;
 }
-?>
+
+/**
+ * @param $tri
+ * @param $quoi
+ * @return string
+ */
+function menus_critere_tri($tri,$quoi){
+	$tri = trim($tri);
+	$inverse = ((strncmp($tri,"!",1)==0)?"!":"");
+	if ($inverse)
+		$tri = ltrim($tri,"!");
+	$num = ((strncmp($tri,"num ",4)==0)?"num ":"");
+	if ($num){
+		$tri = trim(substr($tri,4));
+	}
+
+	// num
+	if ($quoi=='num'){
+		return $num?"$inverse$tri":"";
+	}
+	// alpha : on renvoie toujours le meme critre que num si num demande
+	// num titre => {par num titre}{par titre}
+	return "$inverse$tri";
+}
