@@ -2,6 +2,8 @@
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
+[(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
+[(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
@@ -14,7 +16,7 @@
 	<BOUCLE_env_trad(CONDITION){si #ENV{trad}|=={trad}}>
 	#SET{cpt,0}
 	<BOUCLE_cpt_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{origine_traduction}> </BOUCLE_cpt_articles_orig>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles_orig>
-	<BOUCLE_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{origine_traduction}{0,#GET{articles_max_affiches}}>
+	<BOUCLE_articles_orig(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{origine_traduction}{0,#GET{articles_max_affiches}}>
 		<BOUCLE_trad(ARTICLES){traduction}{id_rubrique=#GET{id_rubrique}}{lang=#ENV{lang}}>
 		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 			<a href="#URL_ARTICLE">#TITRE</a>
@@ -34,7 +36,7 @@
 	</B_env_trad>
 	#SET{cpt,0}
 	<BOUCLE_cpt_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}> </BOUCLE_cpt_articles>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles>
-	<BOUCLE_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
+	<BOUCLE_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{articles_max_affiches}}>
 		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 			<a href="#URL_ARTICLE">#TITRE</a>
 		</li>

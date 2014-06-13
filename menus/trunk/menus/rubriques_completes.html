@@ -20,14 +20,14 @@
 [(#REM) Tri des rubriques ]
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
-[(#SET{tri_num_inverse, #ENV{tri_num_inverse}|=={oui}|?{'1','0'}})]
-[(#SET{tri_alpha_inverse, #ENV{tri_alpha_inverse}|=={oui}|?{'1','0'}})]
+[(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
+[(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
 
 [(#REM) Tri des articles ]
 [(#SET{tri_num_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_num_articles},'titre'}})]
 [(#SET{tri_alpha_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_alpha_articles},'titre'}})]
-[(#SET{tri_num_articles_inverse, #ENV{tri_num_articles_inverse}|=={oui}|?{'1','0'}})]
-[(#SET{tri_alpha_articles_inverse, #ENV{tri_alpha_articles_inverse}|=={oui}|?{'1','0'}})]
+[(#SET{tri_num_articles_inverse,#GET{tri_num_articles}|match{^!}|oui})]
+[(#SET{tri_alpha_articles_inverse,#GET{tri_alpha_articles}|match{^!}|oui})]
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #ENV{id_rubrique}|?{#ENV{id_rubrique}|=={courante}|?{<:menus:info_rubrique_courante:>,#INFO_TITRE{rubrique, #GET{id_rubrique}}}, <:info_racine_site:>}})]

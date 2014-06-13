@@ -2,6 +2,8 @@
 [(#SET{nombre, #ENV{nombre}|intval|?{#ENV{nombre},0}})]
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
+[(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
+[(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_mot}|?{#INFO_TITRE{mots, #GET{id_mot}}, <:info_racine_site:>}})]
@@ -23,7 +25,7 @@
 			<BOUCLE_infini(CONDITION){si #GET{nombre}|=={0}}>
 				<B_articles_infini>
 				<ul class="menu-liste menu-items">
-					<BOUCLE_articles_infini(ARTICLES){id_mot}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
+					<BOUCLE_articles_infini(ARTICLES){id_mot}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}>
 						<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
 							<a href="#URL_ARTICLE">#TITRE</a>
 						</li>
@@ -34,7 +36,7 @@
 			<BOUCLE_limite(CONDITION){si #GET{nombre}|>{0}}>
 			<B_articles_limite>
 				<ul class="menu-liste menu-items">
-					<BOUCLE_articles_limite(ARTICLES){id_mot}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{nombre}}>
+					<BOUCLE_articles_limite(ARTICLES){id_mot}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{nombre}}>
 						<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{rubrique,#ENV*{env}})]">
 							<a href="#URL_ARTICLE">#TITRE</a>
 						</li>
