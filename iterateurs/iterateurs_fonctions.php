@@ -56,6 +56,14 @@ function critere_datacache($idb, &$boucles, $crit) {
 	$command[\'datacache\'] = '.calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent).';';
 }
 
+
+/* le critere {tableau ...} applicable a toutes les boucles
+ * Doit passer par dessus spip-bonux-2 depuis r82600
+ */
+function critere_POUR_tableau($idb, &$boucles, $crit) {
+	return critere_tableau($idb, $boucles, $crit);
+}
+
 // {tableau #XX} pour compatibilite ascendante boucle POUR
 // ... preferer la notation {datasource #XX,table}
 function critere_tableau($idb, &$boucles, $crit) {
