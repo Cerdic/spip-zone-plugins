@@ -126,6 +126,11 @@ function newsletter_subscribe_dist($email,$options = array()){
 			if (!$set['listes'])
 				$set['listes'] = mailsubscribers_normaliser_nom_liste();
 		}
+
+		// si deja en prop, on le repasse sauvagement en prepa pour forcer un re-envoi de mail de confirmation
+		if ($row['statut']=='prop'){
+			sql_updateq("spip_mailsubscribers",array('statut'=>'prepa'),'id_mailsubscriber='.intval($row['id_mailsubscriber']));
+		}
 	}
 
 	// si pas deja valide
