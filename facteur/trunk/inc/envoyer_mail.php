@@ -100,6 +100,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 				$message_texte	= nettoyer_caracteres_mail($corps);
 		}
 		$headers = array_map('trim',explode("\n",$headers));
+		$headers = array_filter($headers);
 	}
 	$sujet = nettoyer_titre_email($sujet);
 
@@ -219,7 +220,9 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	if (!empty($headers)) {
 		foreach($headers as $h){
 			// verifions le format correct : il faut au moins un ":" dans le header
-			if (strpos($h,":")!==false)
+			// et on filtre le Content-Type: qui sera de toute facon fourni par facteur
+			if (strpos($h,":")!==false
+			  AND strncmp($h,"Content-Type:",13)!==0)
 				$facteur->AddCustomHeader($h);
 		}
 	}
