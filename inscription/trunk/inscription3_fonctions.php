@@ -130,6 +130,8 @@ function critere_reglement_dist($idb, &$boucles, $crit){
 		if(is_numeric($reglement) && intval($reglement) > 0)
 			$where = "array('=', '".$boucle->id_table.".id_article', '".$reglement."')";
 	}
+	if(!$where)
+		$where = "array('=', '".$boucle->id_table.".id_article', '0')";
 	if($where)
 		$boucle->where[]= $where;
 }
