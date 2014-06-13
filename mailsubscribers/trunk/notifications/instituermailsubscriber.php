@@ -32,10 +32,12 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 	elseif($options['statut'] == 'prop')
 	{
 		$row = sql_fetsel('*','spip_mailsubscribers','id_mailsubscriber='.intval($id_mailsubscriber));
-		if (isset ($row['invite_email_from']))
-  			$modele = "notifications/mailsubscriber_invite_confirm";
-  		else
-  			$modele = "notifications/mailsubscriber_confirm";
+		if (isset($row['invite_email_from']) AND strlen($row['invite_email_from'])){
+			$modele = "notifications/mailsubscriber_invite_confirm";
+		}
+  	else {
+			$modele = "notifications/mailsubscriber_confirm";
+	  }
 	}
 	if ($modele){
 		$destinataires = sql_allfetsel("email","spip_mailsubscribers","id_mailsubscriber=".intval($id_mailsubscriber));
@@ -60,10 +62,11 @@ function notifications_instituermailsubscriber_dist($quoi, $id_mailsubscriber, $
 			notifications_envoyer_mails($destinataires, $texte);
 		}
 	}
-	// Une fois la demande mail envoyée on réitinialise. On pet la trace de qui a invité la personne à la newsletter
-	// mais c'est un moindre mal si la personne ne valide pas l'invitation et s'inscrit un an plus tard toute seule
-	$ok = sql_updateq('spip_mailsubscribers',	array('invite_email_from' => '','invite_email_text'=>''), "id_mailsubscriber=".intval($id_mailsubscriber) );
-
+	if ($modele=="notifications/mailsubscriber_invite_confirm"){
+		// Une fois la demande mail envoyée on réitinialise. On pet la trace de qui a invité la personne à la newsletter
+		// mais c'est un moindre mal si la personne ne valide pas l'invitation et s'inscrit un an plus tard toute seule
+		sql_updateq('spip_mailsubscribers',	array('invite_email_from' => '','invite_email_text'=>''), "id_mailsubscriber=".intval($id_mailsubscriber) );
+	}
 }
 
 ?>

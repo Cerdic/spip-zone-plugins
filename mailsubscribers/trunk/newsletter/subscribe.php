@@ -63,10 +63,12 @@ function newsletter_subscribe_dist($email,$options = array()){
 
 	// Si c'est une creation d'inscrit
 	if (!$row){
-		if ( isset($options['invite_email_from']))
-	      	spip_log("Invitation ". $options['invite_email_from'] . " invite $email a s'inscrire " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
-  		else
-      		spip_log("Inscription liste $email " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
+		if (isset($options['invite_email_from']) AND strlen($options['invite_email_from'])){
+	    spip_log("Invitation ". $options['invite_email_from'] . " invite $email a s'inscrire " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
+		}
+  	else {
+			spip_log("Inscription liste $email " ,"mailsubscribers."._LOG_INFO_IMPORTANTE);
+	  }
 		// on utilise pas objet_inserer car email unique et on ne veut pas passer par etape insertion email='' qui peut echouer
 		// en cas de doublon
 		$set['email'] = $email;

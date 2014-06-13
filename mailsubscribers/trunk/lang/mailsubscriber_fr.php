@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'confirmsubscribe_sujet_email' => '[@nom_site_spip@] Confirmation d\'inscription à la Newsletter',
 	'confirmsubscribe_titre_email' => 'Confirmation d\'inscription à la Newsletter',
-	'confirmsubscribe_invite_texte_email_1' => ' @invite_email_from@ vous invite à vous inscrire à la Newsletter de @nom_site_spip@ avec l\'adresse email @email@.Voici son message <blockquote>@invite_email_text@</blockquote>',
+	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ vous invite à vous inscrire à la Newsletter de @nom_site_spip@ avec l\'adresse email @email@.',
 	'confirmsubscribe_texte_email_1' => 'Vous avez demandé à vous inscrire à la Newsletter de @nom_site_spip@ avec l\'adresse email @email@.',
 	'confirmsubscribe_texte_email_2' => 'Pour confirmer votre inscription, merci de cliquer sur le lien suivant :
 @url_confirmsubscribe@',

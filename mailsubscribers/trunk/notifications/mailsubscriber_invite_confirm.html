@@ -8,9 +8,12 @@
 
 [(#SET{email,<b>#EMAIL</b>})]
 [(#SET{invite_email_from,<b>#INVITE_EMAIL_FROM</b>})]
-[(#SET{invite_email_text,#INVITE_EMAIL_TEXT})]
 [(#SET{nom_site_spip,[<a href="[(#URL_SITE_SPIP|url_absolue)]">(#NOM_SITE_SPIP)</a>]})]
-<p><:mailsubscriber:confirmsubscribe_invite_texte_email_1{invite_email_from=#GET{invite_email_from},invite_email_text=#GET{invite_email_text},email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
+<p><:mailsubscriber:confirmsubscribe_invite_texte_email_1{invite_email_from=#GET{invite_email_from},email=#GET{email},nom_site_spip=#GET{nom_site_spip}}:></p>
+[<blockquote>
+(#INVITE_EMAIL_TEXT)
+[<br /> &mdash; (#INVITE_EMAIL_FROM)]
+</blockquote>]
 
 [(#SET{url,[<br><center>(#INCLURE{fond=emails/inc-button,url=[(#EMAIL|mailsubscriber_url_confirm{#JETON}|url_absolue)],label=<:newsletter:bouton_subscribe:>,width=250px})</center><br>]})]
 <p><:mailsubscriber:confirmsubscribe_texte_email_2{url_confirmsubscribe=#GET{url}}:></p>
