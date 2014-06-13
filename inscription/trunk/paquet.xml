@@ -1,13 +1,13 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.5.1"
+	version="3.5.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="images/inscription3-64.png"
+	logo="prive/themes/spip/images/images/inscription3-64.png"
 	schema="3.0.2"
 	documentation="http://www.mediaspip.net/spip.php?rubrique87"
->
+>	
 
 	<nom>Inscription 3</nom>
 	<!-- Étendre les informations sur les auteurs -->
@@ -46,6 +46,7 @@
 	<pipeline nom="taches_generales_cron" inclure="inscription3_pipelines.php" />
 	<pipeline nom="openid_recuperer_identite" inclure="inscription3_pipelines.php" />
 	<pipeline nom="openid_inscrire_redirect" inclure="inscription3_pipelines.php" />
+	<pipeline nom="post_edition" inclure="inscription3_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.36.0;[" />
 	<necessite nom="cextras" compatibilite="[1.4.3;[" />
@@ -59,5 +60,6 @@
 	<utilise nom="notifications" />
 	<utilise nom="openid" compatibilite="[1.1.11;[" />
 
-	<menu nom="inscription3_adherents" titre="inscription3:icone_afficher_utilisateurs" parent="menu_activite" icone="images/inscription-16.png" action="inscription3_adherents" />
+	<menu nom="inscription3_adherents" titre="inscription3:icone_afficher_utilisateurs" parent="menu_activite" icone="images/inscription3-16.png" action="inscription3_adherents" />
+	<menu nom="configurer_inscription3" titre="inscription3:icone_configurer_inscription3" parent="menu_configuration" icone="images/inscription3-16.png" action="configurer_inscription3" />
 </paquet>
