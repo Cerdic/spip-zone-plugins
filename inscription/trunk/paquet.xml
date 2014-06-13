@@ -4,7 +4,7 @@
 	version="3.5.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/images/inscription3-64.png"
+	logo="prive/themes/spip/images/inscription3-64.png"
 	schema="3.0.2"
 	documentation="http://www.mediaspip.net/spip.php?rubrique87"
 >	
