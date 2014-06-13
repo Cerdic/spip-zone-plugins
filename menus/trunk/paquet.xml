@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/menu-32.png"
-	documentation="http://www.spip-contrib.net/Plugin-Menus"
+	documentation="http://contrib.spip.net/Menus-3139"
 	schema="0.5.3"
 >
 	<nom>Menus</nom>
@@ -28,7 +28,7 @@
 	<menu nom="menus_tous" titre="menus:editer_menus_titre" parent="menu_squelette" icone="images/menu-16.png" />
 
 	<!-- pour _T_ou_typo -->
-	<necessite nom="saisies" compatibilite="[1.9.10;]" />
+	<necessite nom="saisies" compatibilite="[1.14.0;]" />
 	
 	<utilise nom="Z" />
 	<utilise nom="Zpip" />
