@@ -615,7 +615,7 @@ function inscription3_formulaire_traiter($flux){
 		}
 		
 		/**
-		 * On met le compte en "à confirmer" si on a configurer les chose comme cela
+		 * On met le compte en "à confirmer" si on a configuré les choses comme cela
 		 * Dans ce cas on met la bio à '' si elle n'est pas dans le form afin d'enlever le statut temporaire qui y est stocké par SPIP
 		 * Sinon si on a la bio dans le formulaire et qu'on la reçoit, on met directement un statut à 
 		 * l'auteur, sinon on laisse l'ancien (nouveau normalement)
@@ -887,11 +887,18 @@ function inscription3_notifications_destinataires($flux){
 		AND $options['type'] == 'admin') OR
 		($quoi=='i3_inscriptionauteur' 
 		AND $options['type'] == 'admin')){
-		$admins = sql_select('email','spip_auteurs','statut="0minirezo"');
+			/**
+			 * Aller chercher dans la conf les admins à notifier si configuré
+			 */
+			if(is_array(lire_config('inscription3/admin_notifications'))) {
+				$id_admins = lire_config('inscription3/admin_notifications');
+				$admins = sql_allfetsel('email','spip_auteurs','statut="0minirezo" and ' . sql_in('id_auteur', $id_admins));
+			} else 
+				$admins = sql_allfetsel('email','spip_auteurs','statut="0minirezo" and webmestre="oui"');
 
-		while ($qui = sql_fetch($admins)) {
-			$flux['data'][] = $qui['email'];
-		}
+		foreach ($admins as $key => $qui) {
+		 	$flux['data'][] = $qui['email'];
+		 }
 	}
 	return $flux;
 }
@@ -976,6 +983,30 @@ function inscription3_openid_inscrire_redirect($flux){
 	$url = parametre_url($url,'nom_famille',$auteur['nom_famille']);
 	$url = parametre_url($url,'prenom',$auteur['prenom']);
 	$flux['data'] = $url;
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline post_edition (SPIP)
+ *
+ * Notifier les admins et les users quand ils passent de 8aconfirmer à un statut valide
+ *
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte du pipeline modifié
+ */
+function inscription3_post_edition($flux) {
+	if($flux['args']['action'] == 'instituer' 
+		&&  $flux['args']['table'] == 'spip_auteurs'
+		&& $flux['args']['statut_ancien'] == '8aconfirmer') {
+
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('i3_inscriptionauteur', $flux['args']['id_objet'],
+				array('statut_ancien' => '8aconfirmer', 'statut_nouveau' => $flux['data']['statut'])
+			);
+		}
+	}
 	return $flux;
 }
 ?>

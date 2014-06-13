@@ -35,6 +35,11 @@ function notifications_i3_inscriptionauteur($quoi, $id_auteur, $options) {
 		$modele_admin = "notifications/auteur_inscription_confirmer_admin";
 	}
 
+	if ($options['statut_ancien'] == '8aconfirmer' && $options['statut'] != "poubelle") {
+		$modele = "notifications/auteur_inscription_valider";
+		$modele_admin = "notifications/auteur_valide_admin";
+	}
+
 	if (($options['statut'] != '8aconfirmer') && ($options['pass'] == 'ok')) {
 		$modele = "notifications/auteur_inscription_pass";
 	}

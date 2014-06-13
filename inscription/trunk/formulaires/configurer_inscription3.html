@@ -128,6 +128,17 @@
 					[(#SAISIE{case,valider_comptes,
 						label=<:inscription3:label_valider_comptes:>,
 						label_case=<:inscription3:explication_valider_compte:>})]
+
+					#SET{auteurs, #ARRAY}
+					<BOUCLE_choix_auteurs(AUTEURS){statut="0minirezo"}{tout}{par nom}>
+						[(#SET{auteurs, [(#GET{auteurs}|array_merge{[(#ARRAY{#ID_AUTEUR, #NOM})]})]})]
+					</BOUCLE_choix_auteurs>
+					[(#SAISIE{selection_multiple,admin_notifications,
+						cacher_option_intro=oui,
+						label=<:inscription3:label_admin_notifications:>,
+						explication=<:inscription3:explication_admin_notifications:>,
+						datas=#GET{auteurs}})]
+
 					<li class="editer editer_statut_nouveau">
 						<label><:inscription3:label_statut:></label>
 						#SET{statuts,#EVAL{$GLOBALS['liste_des_statuts']}}

@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_suppression_compte_webmestre' => 'Le compte à supprimer est celui d’un webmestre, vous ne pouvez le supprimer.',
 	'erreur_suppression_comptes_impossible' => 'La suppression de compte a échoué',
 	'exp_statut_rel' => 'Champ différent du statut de SPIP, celui-ci sert pour le controle interne d’une institution',
+	'explication_admin_notifications' => 'Choix du ou des administrateurs qui reçoivent les notifications',
 	'explication_affordance_form' => 'Champ affiché sur les formulaires d’identification (#LOGIN_PUBLIC)',
 	'explication_auto_login' => 'Si le mot de passe est rempli dans le formulaire, l’utilisateur sera automatiquement connecté à la validation du formulaire de création de compte.',
 	'explication_creation' => 'Enregistre dans la base de donnée la date de création du compte.',
@@ -92,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_afficher_utilisateurs' => 'Afficher les utilisateurs',
+	'icone_configurer_inscription3' => 'Configurer inscription3',
 	'info_aconfirmer' => 'à confirmer',
 	'info_cextras_desc' => 'Champs extras déjà présents en base.',
 	'info_connection' => 'Informations de connexion',
@@ -105,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_personnelles' => 'Informations personnelles',
 
 	// L
+	'label_admin_notifications' => 'Qui reçoit les notifications d\'inscription ?',
 	'label_adresse' => 'Adresse',
 	'label_affordance_form' => 'Paramétrage des formulaires d’identification',
 	'label_affordance_form_libre' => 'Texte en cas de choix libre',
@@ -188,6 +191,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_auteur_invalide_contenu_user' => 'un administrateur a refusé la validation de votre compte.',
 	'message_auteur_invalide_titre_admin' => '[@nom_site_spip@] Compte de @nom@ refusé',
 	'message_auteur_invalide_titre_user' => '[@nom_site_spip@] Votre compte a été refusé',
+	'message_auteur_inscription_valider_titre_user' => '[@nom_site_spip@] Votre compte a été validé',
+	'message_auteur_inscription_valider_contenu_user' => 'votre compte a été validé par un administrateur du site.',
 	'message_auteur_valide_contenu_admin' => '@admin@ a validé le compte de @nom@.',
 	'message_auteur_valide_titre_admin' => '[@nom_site_spip@] Compte de @nom@ validé',
 	'message_auto' => '(ceci est un message automatique)',
