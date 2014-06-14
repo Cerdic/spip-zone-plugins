@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_personnelles' => 'Informations personnelles',
 
 	// L
-	'label_admin_notifications' => 'Qui reçoit les notifications d\'inscription ?',
+	'label_admin_notifications' => 'Qui reçoit les notifications d’inscription ?',
 	'label_adresse' => 'Adresse',
 	'label_affordance_form' => 'Paramétrage des formulaires d’identification',
 	'label_affordance_form_libre' => 'Texte en cas de choix libre',
@@ -183,6 +183,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_auteur_inscription_pass' => 'votre compte a correctement été créé. Vous avez choisi vous-même votre mot de passe.',
 	'message_auteur_inscription_pass_rappel_login' => 'Rappel : votre login est "@login@".',
 	'message_auteur_inscription_pass_titre_user' => '[@nom_site_spip@] Votre compte a été créé',
+	'message_auteur_inscription_valider_contenu_user' => 'votre compte a été validé par un administrateur du site.',
+	'message_auteur_inscription_valider_titre_user' => '[@nom_site_spip@] Votre compte a été validé',
 	'message_auteur_inscription_verifier_contenu_plusieurs' => 'Plusieurs comptes sont en attente :',
 	'message_auteur_inscription_verifier_contenu_un' => 'Un compte est en attente :',
 	'message_auteur_inscription_verifier_titre_plusieurs' => '[@nom_site_spip@] Plusieurs comptes utilisateurs à valider',
@@ -191,8 +193,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_auteur_invalide_contenu_user' => 'un administrateur a refusé la validation de votre compte.',
 	'message_auteur_invalide_titre_admin' => '[@nom_site_spip@] Compte de @nom@ refusé',
 	'message_auteur_invalide_titre_user' => '[@nom_site_spip@] Votre compte a été refusé',
-	'message_auteur_inscription_valider_titre_user' => '[@nom_site_spip@] Votre compte a été validé',
-	'message_auteur_inscription_valider_contenu_user' => 'votre compte a été validé par un administrateur du site.',
 	'message_auteur_valide_contenu_admin' => '@admin@ a validé le compte de @nom@.',
 	'message_auteur_valide_titre_admin' => '[@nom_site_spip@] Compte de @nom@ validé',
 	'message_auto' => '(ceci est un message automatique)',
