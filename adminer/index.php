@@ -44,13 +44,10 @@ if (!isset($_COOKIE['adminer_sid'])
 	function adminer_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
 		$drivers = array('mysql' => 'server', 'sqlite3' => 'sqlite', 'sqlite2' => 'sqlite2');
 		if($type !== 'mysql') {
-			if (defined('_ROOT_RACINE')){
-				if (defined('_DIR_SITE')){
-				    $chemin_mutu= str_replace('../','',_DIR_SITE);
-				    $dir_base = _ROOT_RACINE. $chemin_mutu . _NOM_PERMANENTS_INACCESSIBLES.'bases/';
-				    }
-				else
-				$dir_base = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'bases/';
+			if (defined('_ROOT_CWD')){
+				include_spip("inc/filtres_mini");
+				$dir_base = _ROOT_CWD._DIR_ETC . 'bases/';
+				$dir_base = resolve_path($dir_base);
 			}
 			else
 				$dir_base = $GLOBALS['adminer_racine'] . _NOM_PERMANENTS_INACCESSIBLES . 'bases/';
@@ -74,4 +71,5 @@ if (!isset($_COOKIE['adminer_sid'])
 }
 
 chdir (_DIR_PLUGIN_ADMINER);
+session_name("adminer_sid");
 require_once 'adminer.php';
