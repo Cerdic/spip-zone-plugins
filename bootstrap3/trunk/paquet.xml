@@ -21,7 +21,6 @@
 
 	<pipeline nom="autoriser" inclure="bootstrap3_autorisations.php" /> 
 
-	<necessite nom="SPIP" compatibilite="[3.0.0;]" />
 	<necessite nom="lesscss" compatibilite="[0.7.2;]" />
 
 	<chemin path="bootstrap" type="public" />
