@@ -44,10 +44,18 @@ if (!isset($_COOKIE['adminer_sid'])
 	function adminer_connect_db($host, $port, $login, $pass, $db='', $type='mysql', $prefixe='', $auth='') {
 		$drivers = array('mysql' => 'server', 'sqlite3' => 'sqlite', 'sqlite2' => 'sqlite2');
 		if($type !== 'mysql') {
-			if (defined('_ROOT_RACINE'))
+			if (defined('_ROOT_RACINE')){
+				if (defined('_DIR_ETC')){
+				    $chemin_mutu= str_replace('../','',_DIR_ETC);
+				    $dir_base = _ROOT_RACINE. $chemin_mutu . 'bases/';
+				    }
+				else
 				$dir_base = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'bases/';
+			}
 			else
 				$dir_base = $GLOBALS['adminer_racine'] . _NOM_PERMANENTS_INACCESSIBLES . 'bases/';
+			
+				
 			$db = $dir_base . $db . '.sqlite';
 		}
 		if(!isset($drivers[$type])) die ('Type de base de donn&eacute;es '.$type.' non reconnu');
