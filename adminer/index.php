@@ -45,9 +45,9 @@ if (!isset($_COOKIE['adminer_sid'])
 		$drivers = array('mysql' => 'server', 'sqlite3' => 'sqlite', 'sqlite2' => 'sqlite2');
 		if($type !== 'mysql') {
 			if (defined('_ROOT_RACINE')){
-				if (defined('_DIR_ETC')){
-				    $chemin_mutu= str_replace('../','',_DIR_ETC);
-				    $dir_base = _ROOT_RACINE. $chemin_mutu . 'bases/';
+				if (defined('_DIR_SITE')){
+				    $chemin_mutu= str_replace('../','',_DIR_SITE);
+				    $dir_base = _ROOT_RACINE. $chemin_mutu . _NOM_PERMANENTS_INACCESSIBLES.'bases/';
 				    }
 				else
 				$dir_base = _ROOT_RACINE . _NOM_PERMANENTS_INACCESSIBLES . 'bases/';
