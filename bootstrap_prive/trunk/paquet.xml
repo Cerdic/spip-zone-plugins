@@ -15,8 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="SPIP" compatibilite="[3.0.0;]" />
-	<necessite nom="bootstrap" compatibilite="[1.4.0;1.9.99]" />
+	<necessite nom="bootstrap" compatibilite="[1.4.0;1.9.*]" />
 	<necessite nom="lesscss" compatibilite="[0.7.2;]" />
 
 </paquet>
