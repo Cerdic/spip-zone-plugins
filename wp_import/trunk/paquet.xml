@@ -3,7 +3,7 @@
 	categorie="divers" 
 	version="1.0.0" 
 	etat="test" 
-	compatibilite="[3.0.0-alpha2;[" 
+	compatibilite="[3.0.0;3.0.*]" 
 	logo="images/wp_import-48.png" 
 	documentation="http://contrib.spip.net/Wordpress-vers-SPIP3">
 
@@ -14,7 +14,7 @@
 
 	<menu nom="wp_import" titre="wp_import:migration" parent="menu_administration" icone="images/wp_import-16.png" />
 
-	<utilise nom="pages" compatibilite="[0.3.7;[" />
-	<utilise nom="polyhier" compatibilite="[1.0.0;[" /> 
+	<utilise nom="pages" compatibilite="[1.0.0;1.*.*]" />
+	<utilise nom="polyhier" compatibilite="[2.0.1;2.*.*]" /> 
 
 </paquet>
