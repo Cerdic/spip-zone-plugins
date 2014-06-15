@@ -39,7 +39,7 @@
 				[(#ENV{logos}|=={'oui'}|non)
 				<td class="action secondaire">
 				[(#AUTORISER{supprimer,medias_orphelins}|oui)
-					[(#URL_ACTION_AUTEUR{supprimer_orphelins,#VALEUR,#SELF|parametre_url{'var_mode','recalcul'}}|icone_horizontale{<:supprimer:>,'',del})]
+					[(#URL_ACTION_AUTEUR{supprimer_orphelins,#VALEUR,#SELF|parametre_url{'var_mode','recalcul'}}|icone_horizontale{<:medias_nettoyage:supprimer:>,'',del})]
 				]
 				</td>
 				]

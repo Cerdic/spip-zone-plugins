@@ -57,6 +57,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // M
     'medias_nettoyage_nom' => 'Nettoyer la médiathèque',
+    'message_log_supprimer_orphelins' => '@date@ : le fichier @fichier@ a été supprimé par l\'auteur \'@auteur@\'
+    (@id_auteur@).',
     'message_log_tranche_actif_horaire_undefined' => '@date@ : Le CRON par tranche horaire est actif mais non défini.
     On lance le script @fonction@',
     'message_log_tranche_actif_horaire_defini' => '@date@ : Le CRON par tranche horaire est actif et défini.
@@ -79,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'onglet_titre_tabbord' => 'Tableau de bord',
     'oui' => 'Tranche horaire <strong>(recommandé)</strong>',
 
+    // S
+    'supprimer' => 'Supprimer',
     // T
     'titre_configurer_medias_nettoyage' => 'Configurer le nettoyage de la médiathèque',
     'titre_page_configurer_medias_nettoyage' => 'Configurer le nettoyage de la médiathèque',
