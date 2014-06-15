@@ -15,9 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 
  * On ajoute le champ id_licence aux tables spip_articles et spip_documents
  * 
- * @param array $flux
+ * @param array $tables_principales
  * 		Le tableau de description des tables
- * @return arrau $flux
+ * @return array $tables_principales
  * 		Le tableau de description des tables complétées
  */
 function licence_declarer_tables_principales($tables_principales){
