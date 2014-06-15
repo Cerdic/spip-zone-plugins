@@ -2,7 +2,7 @@
 /**
  * Plugin Licence
  *
- * (c) 2007-2013 fanouch
+ * (c) 2007-2014 fanouch
  * Distribue sous licence GPL
  *
  * Modification des tables
@@ -27,8 +27,7 @@ function licence_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 	
 	$maj['create'] = array(
-		array('maj_tables',array('spip_articles')),
-		array('maj_tables',array('spip_documents'))
+		array('maj_tables',array('spip_articles','spip_documents'))
 	);
 	
 	$maj['0.2.0'] = array('maj_tables',array('spip_documents'));
