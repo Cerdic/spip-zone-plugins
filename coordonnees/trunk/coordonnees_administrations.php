@@ -100,7 +100,7 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 		array('coordonnees_upgrade_1_8_2'),
 	);
 
-	// 
+	// index (id_objet et objet) sur les tables de liaisons
 	$maj['1.8.3']= array(
 		array('sql_alter', 'TABLE spip_adresses_liens ADD INDEX (id_objet)'),
 		array('sql_alter', 'TABLE spip_adresses_liens ADD INDEX (objet)'),
