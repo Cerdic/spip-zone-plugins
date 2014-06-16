@@ -87,6 +87,24 @@ function tester_convert(){
 }
 
 /**
+ * Vérifier la présence de gifsicle
+ * apt-get install gifsicle
+ * 
+ * @return bool true|false
+ * 		true si présents, sinon false
+ */
+function tester_gifsicle(){
+	exec('gifsicle --version',$out,$int);
+	if(($int == 0)){
+		effacer_config('gifsicle_casse');
+		return true;
+	}else{
+		ecrire_config('gifsicle_casse','oui');
+		return false;
+	}
+}
+
+/**
  * Vérifier si impossibilité d'utiliser les binaires
  *
  * On invalide si smush est cassé pour relancer les metas
@@ -100,6 +118,7 @@ function tester_global(){
 	if((lire_config('imagick_casse') == 'oui')
 		|| (lire_config('jpegtran_casse') == 'oui')
 		|| (lire_config('optipng_casse') == 'oui')
+		|| (lire_config('gifsicle_casse') == 'oui')
 		|| (lire_config('pngnq_casse') == 'oui')){
 			ecrire_config('smush_casse','oui');
 			if($ancienne_valeur != 'oui')

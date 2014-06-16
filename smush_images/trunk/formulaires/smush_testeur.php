@@ -48,7 +48,6 @@ function formulaires_smush_testeur_traiter() {
 		include_spip('inc/renseigner_document');
 		
 		if (is_array($a = renseigner_source_distante($source))) {
-			spip_log($a,'test.'._LOG_ERREUR);
 			if(in_array($a['extension'],array('jpg','png','gif'))){
 				if(!file_exists($a['fichier']))
 					$fichier = copie_locale($a['fichier']);

@@ -2,6 +2,7 @@
 [(#REM|tester_jpegtran|oui) ]
 [(#REM|tester_optipng|oui) ]
 [(#REM|tester_pngnq|oui) ]
+[(#REM|tester_gifsicle|oui) ]
 
 <div class="formulaire_spip formulaire_#FORM">
 
@@ -13,17 +14,23 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		[(#REM|tester_global|oui)
-		<li class="editer_eviter_traitement_auto">
+		<li class="editer editer_eviter_traitement_auto">
 			<div class="choix">
 				<input type="checkbox" id="eviter_traitement_auto" name="eviter_traitement_auto" class="checkbox" value="on"[(#ENV{eviter_traitement_auto}|=={on}|oui)checked="checked"]>
 				<label for="eviter_traitement_auto"><:smush:label_eviter_traitement_auto:></label>
 			</div>
 		</li>]
-		[(#REM|tester_global|non)
-		<li class="erreur">
-			<p><:smush:info_impossible_utilisation_locale:></p>
+		<B_logiciels_casses>
+		<li class="editer erreur">
+			<p class="erreur_message">
+				<:smush:info_impossible_utilisation_locale:>
+				<BOUCLE_logiciels_casses(DATA){si #REM|tester_global|non}{source table,#LISTE{convert,jpegtran,optipng,pngnq,gifsicle}}>
+				[(#CONFIG{#VALEUR|concat{_casse}}|=={oui}|oui)
+				<br /><:smush:info_logiciel_nok{logiciel=#VALEUR}:>]
+				</BOUCLE_logiciels_casses>
+			</p>
 		</li>
-		]
+		</B_logiciels_casses>
 	</ul>
 	<p class="boutons">
 		<input type="submit" value="<:bouton_valider:>" class="submit" />
