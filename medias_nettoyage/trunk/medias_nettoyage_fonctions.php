@@ -514,6 +514,34 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         }
     }
 
+    // On va lister le logo standard des rubriques : rubon0.ext et ruboff0.ext
+    // cf. http://contrib.spip.net/Nettoyer-la-mediatheque#forum475870
+    $logos_rub_racine = glob($repertoire_img . "{rub}{on,off}0.*", GLOB_BRACE);
+    if (is_array($logos_rub_racine) and count($logos_rub_racine) > 0) {
+        foreach ($logos_rub_racine as $logo_rub_racine) {
+            if (
+                preg_match(
+                    "/(rubon)(\d).("
+                    . join("|", $formats_logos)
+                    .")$/",
+                    $logo_rub_racine
+                )
+            ) {
+                $docs_fichiers_on[] = preg_replace("/\/\//", "/", $logo_rub_racine);
+            }
+            if (
+                preg_match(
+                    "/(ruboff)(\d).("
+                    . join("|", $formats_logos)
+                    .")$/",
+                    $logo_rub_racine
+                )
+            ) {
+                $docs_fichiers_off[] = preg_replace("/\/\//", "/", $logo_rub_racine);
+            }
+        }
+    }
+
 
     if ($mode == 'on') {
         $docs_fichiers_on = array_unique($docs_fichiers_on);
