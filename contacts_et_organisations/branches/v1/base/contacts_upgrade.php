@@ -265,6 +265,15 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		contacts_migrer_liens_auteurs();
 		ecrire_meta($nom_meta_base_version, $current_version="1.7.1");
 	}
+
+	if (version_compare($current_version,"1.7.2","<")) {
+		sql_alter('TABLE spip_contacts_liens ADD INDEX (id_objet)');
+		sql_alter('TABLE spip_contacts_liens ADD INDEX (objet)');
+		sql_alter('TABLE spip_organisations_liens ADD INDEX (id_objet)');
+		sql_alter('TABLE spip_organisations_liens ADD INDEX (objet)');
+		ecrire_meta($nom_meta_base_version, $current_version="1.7.2");
+	}
+
 }
 
 

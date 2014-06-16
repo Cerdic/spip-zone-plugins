@@ -128,7 +128,9 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
     );
     $organisations_liens_key = array(
         "PRIMARY KEY"    => "id_organisation, id_objet, objet, type_liaison (25)",
-		"KEY id_organisation" => "id_organisation"
+		"KEY id_organisation" => "id_organisation",
+		"KEY id_objet" => "id_objet",
+		"KEY objet" => "objet"
     );
 	$tables_auxiliaires['spip_organisations_liens'] =
 		array('field' => &$organisations_liens, 'key' => &$organisations_liens_key);
@@ -143,7 +145,9 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
     );
     $contacts_liens_key = array(
         "PRIMARY KEY"    => "id_contact, id_objet, objet, type_liaison (25)",
-		"KEY id_contact" => "id_contact"
+		"KEY id_contact" => "id_contact",
+		"KEY id_objet" => "id_objet",
+		"KEY objet" => "objet"
     );
 	$tables_auxiliaires['spip_contacts_liens'] =
 		array('field' => &$contacts_liens, 'key' => &$contacts_liens_key);
