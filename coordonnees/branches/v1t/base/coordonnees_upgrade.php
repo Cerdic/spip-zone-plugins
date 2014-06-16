@@ -199,6 +199,22 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		else return false;
 	}
 
+	// index en plus sur objet et id_objet des tables de liaison
+	if (version_compare($current_version, "1.9.1", "<")) {
+		sql_alter('TABLE spip_adresses_liens ADD INDEX (id_objet)');
+		sql_alter('TABLE spip_adresses_liens ADD INDEX (objet)');
+
+		sql_alter('TABLE spip_numeros_liens ADD INDEX (id_objet)');
+		sql_alter('TABLE spip_numeros_liens ADD INDEX (objet)');
+
+		sql_alter('TABLE spip_emails_liens ADD INDEX (id_objet)');
+		sql_alter('TABLE spip_emails_liens ADD INDEX (objet)');
+
+		sql_alter('TABLE spip_syndic_liens ADD INDEX (id_objet)');
+		sql_alter('TABLE spip_syndic_liens ADD INDEX (objet)');
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.9.1");
+	}
 }
 
 function coordonnees_vider_tables($nom_meta_base_version) {
