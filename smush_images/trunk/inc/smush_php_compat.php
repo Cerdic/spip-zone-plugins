@@ -7,11 +7,11 @@ if(!function_exists('json_decode')){
 		include_spip('lib/JSON/JSON.php');
 		if($assoc){
 			$json = new Services_JSON(SERVICES_JSON_LOOSE_TYPE);
-        } else {
+		}else {
 			$json = new Services_JSON;
 		}
 		return $json->decode($content);
-    }
+	}
 }
 
 if(!function_exists('json_encode') ){
