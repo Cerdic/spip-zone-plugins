@@ -37,7 +37,6 @@ function action_dissocier_donnee_dist($arg=null){
 			OR autoriser('modifier','infographies_data',$id_objet)
 		)){
 			dissocier_donnee($donnee, $id_objet);
-			spip_log("$donnes $id_objet","test."._LOG_ERREUR);
 		}
 	else
 		spip_log("Interdit de modifier $id_objet","spip");
@@ -84,7 +83,6 @@ function dissocier_donnee($donnee, $id_objet, $check = false){
 		supprimer_lien_donnee($donnee, $id_objet);
 	}
 	else {
-		spip_log("$donnee $id_objet",'test.'._LOG_ERREUR);
 		$s = sql_select('id_infographies_donnee',
 			"spip_infographies_donnees",
 			"id_infographies_data = ".intval($id_objet));
