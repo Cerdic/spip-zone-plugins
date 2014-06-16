@@ -150,7 +150,9 @@ function coordonnees_declarer_tables_auxiliaires($tables) {
 		),
 		'key' => array(
 			"PRIMARY KEY"       => "id_adresse,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
-			"KEY id_adresse"    => "id_adresse"
+			"KEY id_adresse"    => "id_adresse",
+			"KEY id_objet"      => "id_objet",
+			"KEY objet"         => "objet",
 		)
 	);
 	$tables['spip_numeros_liens'] = array(
@@ -163,7 +165,9 @@ function coordonnees_declarer_tables_auxiliaires($tables) {
 		),
 		'key' => array(
 			"PRIMARY KEY"       => "id_numero,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
-			"KEY id_numero"     => "id_numero"
+			"KEY id_numero"     => "id_numero",
+			"KEY id_objet"      => "id_objet",
+			"KEY objet"         => "objet",
 		)
 	);
 	$tables['spip_emails_liens'] = array(
@@ -176,7 +180,9 @@ function coordonnees_declarer_tables_auxiliaires($tables) {
 		),
 		'key' => array(
 			"PRIMARY KEY"       => "id_email,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
-			"KEY id_email"      => "id_email"
+			"KEY id_email"      => "id_email",
+			"KEY id_objet"      => "id_objet",
+			"KEY objet"         => "objet",
 		)
 	);
 
