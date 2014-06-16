@@ -182,6 +182,14 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('contacts_maj_1_10_0'),
 	);
 
+	// Index sur les id_objet et objet des tables de liaisons
+	$maj['1.10.1'] = array(
+		array('sql_alter', 'TABLE spip_contacts_liens ADD INDEX (id_objet)'),
+		array('sql_alter', 'TABLE spip_contacts_liens ADD INDEX (objet)'),
+		array('sql_alter', 'TABLE spip_organisations_liens ADD INDEX (id_objet)'),
+		array('sql_alter', 'TABLE spip_organisations_liens ADD INDEX (objet)'),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
