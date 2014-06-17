@@ -13,8 +13,16 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
   // On récupère la configuration
   $config = lire_config('foundation');
 
+  // Version qui utilise un système large-X ou small-X. J'appel ce groupe les colnum.
+  $colnum = array(4,5);
+
+  // Les versions qui utilise des lettres => les colletr
+  $colettr = array(2,3);
+
   // Si la première variable est un tableau, on va le convertir en class
-  if (is_array($nombre_colonnes)) {
+  // On limite ce système a foundation >= 4
+  if (is_array($nombre_colonnes)
+      and in_array($config['variante'], $colnum)) {
     $class= '';
     foreach ($nombre_colonnes as $key => $value) {
       $class .= $key.'-'.$value.' ';
@@ -22,13 +30,6 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
     return $class;
   }
   else {
-    // Version qui utilise un système large-X ou small-X. J'appel ce groupe les colnum.
-    $colnum = array(4,5);
-
-    // Les versions qui utilise des lettres => les colletr
-    $colettr = array(2,3);
-
-    // on cherche
     // Si on est dans une vesion numérique de foundation, on retourne la syntaxe
     if (in_array($config['variante'], $colnum))
       return $type.'-'.$nombre_colonnes;
