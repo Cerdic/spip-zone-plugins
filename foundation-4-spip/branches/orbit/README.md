@@ -20,6 +20,10 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 ## Foundation-4-SPIP 1.3.5
 
+* Fixe pour les taille équivalente entre input.button et a.buttonOn utilise @-moz-document url-prefix() pour que le hack css des boutons ne cible que firefox.
+
+## Foundation-4-SPIP 1.3.5
+
 * Fixe pour les taille équivalente entre input.button et a.button
 
 ## Foundation-4-SPIP 1.3.4
