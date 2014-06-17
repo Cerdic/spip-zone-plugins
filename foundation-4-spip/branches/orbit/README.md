@@ -19,7 +19,7 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 # Version
 
-## Foundation-4-SPIP 1.4
+## Foundation-4-SPIP 1.4.1
 
 * Finalement les dépendances casse tout, on va retirer les dépendances et laisser le choix au dev de faire avec ce qu'il veux
 
