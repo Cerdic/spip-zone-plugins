@@ -20,36 +20,6 @@ function filtre_iframe_responsive($texte) {
   return preg_replace_callback('/<iframe(.+)><\/iframe>/', 'responsive', $texte);
 }
 
-/**
- * Pas très élégant, cette fonction va renvoyer le nombre en toutes lettre.
- *  Dans ce cas si, cela suffit largement puisqu'il n'y a que 12 chiffres possible.
- *  C'est utiliser pour foundation 2 et 3.
- * @param  int $number nombre de colonne foundation.
- * @return string         string définissant la largeur de la colonne foundation.
- */
-function toWords($number) {
-
-  // Ce tableau fait office de table de conversion.
-  $conversion = array(
-                      1 => 'one',
-                      2 => 'two',
-                      3 => 'three',
-                      4 => 'four',
-                      5 => 'five',
-                      6 => 'six',
-                      7 => 'seven',
-                      8 => 'eight',
-                      9 => 'nine',
-                      11 => 'eleven',
-                      12 => 'twelve'
-                      );
-
-    // On revoie la bonne valeur.
-  if (is_numeric($number))
-    return $conversion[$number];
-  else return false;
-}
-
 
 /**
  * Cette fonction va lire la configuration de foundation et determiner quel syntaxe doit être utilisé.
@@ -73,8 +43,10 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
   if (in_array($config['variante'], $colnum))
     return $type.'-'.$nombre_colonnes;
   // Sinon, on démarrer le moteur de conversion de nombre, et on renvoie la bonne class
-  elseif (in_array($config['variante'], $colettr))
+  elseif (in_array($config['variante'], $colettr)) {
+    include_spip('inc/foundation');
     return toWords($nombre_colonnes);
+  }
 }
 
 /*
