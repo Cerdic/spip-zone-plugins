@@ -13,6 +13,9 @@ function responsive($matches) {
   if (strpos($matches[0], 'vimeo')) $vimeo = ' vimeo';
   else $vimeo = '';
 
+  // On inclu les filtres, au cas ou
+  include_spip('inc/filtres');
+
   // On revoie la bonne structure html d'iframe.
   return wrap('<iframe '.$matches[0].'></iframe>', '<div class="flex-video'.$vimeo.'">');;
 }
