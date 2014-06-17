@@ -8,7 +8,8 @@
   * id_objet: identifiant de l'objet.
 
 ]
-<ul class="[(#ENV{class}|sinon{orbit})]" data-orbit[ data-options="(#ENV{data-option})"]>
+
+<ul class="[(#ENV{class}|sinon{orbit})]" data-orbit[ data-options="(#ENV{data-options})"]>
 
   [(#REM) S'il n'y a pas d'objet passer dans #ENV on tente d'afficher les documents d'un objet SPIP ]
   <BOUCLE_article_slider(DOCUMENTS)
