@@ -1,4 +1,4 @@
-[(#REM) 
+[(#REM)
     Note Didier:
     On place le fichier perso.css à la FIN après les CSS de la balise #INSERT_HEAD,
     sinon on ne peux pas intervenir sur les styles de base de foundation.
@@ -15,23 +15,7 @@
     }
 ]
 
-[(#REM) Faire en sorte que les iframes soit responsive, pour le filtre iframe_responsive ]
-.iframe_container {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    height: 0;
-    overflow: hidden;
-}
-.iframe_container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-[(#REM) 
+[(#REM)
     Il y a un bug sous Firefox (et opéra?) avec les line-height et les input.
     Il faudra probablement le faire pour chaque type de bouton si on veux avoir un affichage similaire entre les a.bouton et les input.button.
 
