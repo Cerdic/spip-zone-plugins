@@ -39,7 +39,7 @@ function foundation_get_js() {
   elseif ($config['variante'] == '5')
     $flux = $flux.recuperer_fond('inclure/head-foundation-5');
   // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
-  elseif ($config['variante'] == '0')
+  else
     return $flux;
 
   // Charger le head commun a foundation
@@ -64,7 +64,7 @@ function foundation_get_css() {
   elseif ($config['variante'] == '5')
     $flux = $flux.recuperer_fond('inclure/css/head-foundation-5');
   // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
-  elseif ($config['variante'] == '0')
+  else
     return $flux;
 
   return $flux;
