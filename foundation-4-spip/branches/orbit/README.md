@@ -18,6 +18,11 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 # Version
 
+## Foundation-4-SPIP 1.3.2
+
+* Ajoute une class langue sur la balise html.
+
+
 ## Foundation-4-SPIP 1.3.1
 
 * Retour de la dépendance à Zpip vu qu'on ce base sur structure.html
