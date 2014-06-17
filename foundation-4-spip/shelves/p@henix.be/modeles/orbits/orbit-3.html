@@ -1,9 +1,15 @@
+[(#REM) Tableau des descriptions ]
+#SET{caption, #ARRAY}
+
 <div id="orbit">
   <BOUCLE_article_slider(DOCUMENTS)
                                   {id_article ?}
                                   {id_breve ?}
                                   {si #ENV{objet}|non}>
     <INCLURE{fond=modeles/orbits/orbit-item-3, id_document, env}>
+    [(#DESCRIPTIF|oui)
+      #SET{caption, #GET{caption}|array_merge{#ARRAY{caption_#ID_DOCUMENT, #DESCRIPTIF}}}
+    ]
   </BOUCLE_article_slider>
 
     [(#REM) Dans une rubrique ]
@@ -11,15 +17,26 @@
                                     {id_rubrique ?}
                                     {si #ENV{objet}|non}>
       <INCLURE{fond=modeles/orbits/orbit-item-3, id_document, env}>
+      [(#DESCRIPTIF|oui)
+        #SET{caption, #GET{caption}|array_merge{#ARRAY{caption_#ID_DOCUMENT, #DESCRIPTIF}}}
+      ]
     </BOUCLE_rubrique_slider>
 
       [(#REM) Si un objet spécifique est passé, on récupère les documents de l'objet ]
       <BOUCLE_objet_slider(DOCUMENTS documents_liens) {objet} {id_objet}>
         <INCLURE{fond=modeles/orbits/orbit-item-3, id_document, env}>
+        [(#DESCRIPTIF|oui)
+          #SET{caption, #GET{caption}|array_merge{#ARRAY{caption_#ID_DOCUMENT, #DESCRIPTIF}}}
+        ]
       </BOUCLE_objet_slider>
     <//B_rubrique_slider>
   <//B_article_slider>
 </div>
+
+[(#REM) On affiche les span pour afficher les discriptif. ]
+<BOUCLE_orbit_caption(DATA){source table, #GET{caption}}>
+  [<span class="orbit-caption" id="#CLE">(#VALEUR)</span>]
+</BOUCLE_orbit_caption>
 
 [(#REM) Lancer le slider ]
 <script type="text/javascript">
