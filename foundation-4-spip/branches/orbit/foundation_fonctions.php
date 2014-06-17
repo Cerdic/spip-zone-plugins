@@ -74,7 +74,7 @@ function balise_ORBIT_dist($p) {
  * sur la balise <button> au lieu de pour assurer la
  * compatibilité avec les class button de foundation
  */
-function filtre_bouton_action($libelle, $url, $class="", $confirm="", $title="", $callback=""){
+function filtre_bouton_action_dist($libelle, $url, $class="", $confirm="", $title="", $callback=""){
   if ($confirm) {
     $confirm = "confirm(\"" . attribut_html($confirm) . "\")";
     if ($callback)
