@@ -26,5 +26,6 @@
     <necessite nom="saisies" compatibilite="[1.31;[" />
 
     <!-- Vu qu'on se base sur ZPIP pour la structure. -->
-    <necessite nom="Z" compatibilite="[1.7.21;[" /> 
+    <necessite nom="zcore" compatibilite="[2.2.3;[" />
+    <necessite nom="z5" compatibilite="[2.0.1;[" />
 </paquet>
