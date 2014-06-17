@@ -1,0 +1,12 @@
+<BOUCLE_orbit_item(DOCUMENTS){id_document}>
+<li>
+  [(#FICHIER
+    |image_passe_partout{#ENV{largeur}, #ENV{hauteur}}
+    |image_recadre{#ENV{largeur}, #ENV{hauteur}, center, #GET{couleur}}
+    )]
+  [(#REM) Placer le desriptif du fichier dans le caption d'orbit. ]
+  [<div class="orbit-caption">
+    (#DESCRIPTIF)
+  </div>]
+</li>
+</BOUCLE_orbit_item>
