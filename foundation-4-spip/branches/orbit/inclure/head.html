@@ -83,10 +83,15 @@
 [(#REM) 
     Il y a un bug sous Firefox (et opéra?) avec les line-height et les input.
     Il faudra probablement le faire pour chaque type de bouton si on veux avoir un affichage similaire entre les a.bouton et les input.button.
+    
+    On utilise @-moz-document url-prefix() pour ne cibler que firefox
 ]
-input.button.secondary.small {
-    padding-top: 0.38em !important;
-    padding-bottom: 0.3em !important;
+@-moz-document url-prefix() {
+    input.button.secondary.small {
+        padding-top: 0.38em !important;
+        padding-bottom: 0.3em !important;
+    }
+
 }
 
 </style>
