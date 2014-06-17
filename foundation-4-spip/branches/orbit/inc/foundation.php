@@ -31,17 +31,17 @@ function foundation_get_js($flux = '') {
 
   // On renvoie le flux head avec le squelette foundation correspondant.
   if ($config['variante'] == '3')
-    $flux .= $flux.recuperer_fond('inclure/head-foundation-3');
+    $flux .= recuperer_fond('inclure/head-foundation-3');
   elseif ($config['variante'] == '4')
-    $flux .= $flux.recuperer_fond('inclure/head-foundation-4');
+    $flux .= recuperer_fond('inclure/head-foundation-4');
   elseif ($config['variante'] == '5')
-    $flux .= $flux.recuperer_fond('inclure/head-foundation-5');
+    $flux .= recuperer_fond('inclure/head-foundation-5');
   // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
   else
     return $flux;
 
   // Charger le head commun a foundation
-  $flux = $flux.recuperer_fond('inclure/head-foundation');
+  $flux .= recuperer_fond('inclure/head-foundation');
 
   return $flux;
 }
@@ -56,14 +56,12 @@ function foundation_get_css($flux = '') {
 
   // On renvoie le flux head avec le squelette foundation correspondant.
   if ($config['variante'] == '3')
-    $flux .= $flux.recuperer_fond('inclure/css/head-foundation-3');
+    return $flux.recuperer_fond('inclure/css/head-foundation-3');
   elseif ($config['variante'] == '4')
-    $flux .= $flux.recuperer_fond('inclure/css/head-foundation-4');
+    return $flux.recuperer_fond('inclure/css/head-foundation-4');
   elseif ($config['variante'] == '5')
-    $flux .= $flux.recuperer_fond('inclure/css/head-foundation-5');
+    return $flux.recuperer_fond('inclure/css/head-foundation-5');
   // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
   else
     return $flux;
-
-  return $flux;
 }
