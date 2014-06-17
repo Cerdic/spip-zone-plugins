@@ -28,3 +28,10 @@
     background: none;
     position: static;
 }
+
+/*
+*   Pas de font-size sur le pied de page.
+*/
+#pied {
+    font-size: 1em;
+}
