@@ -19,8 +19,10 @@ function foundation_insert_head ($flux) {
     // On lit la configuration du plugin pour savoir quel version de Foundation charger.
     $config = lire_config('foundation');
 
-    if ($config['foundation_version'] == '4') return $flux.recuperer_fond('inclure/head-foundation-4');
-    elseif ($config['foundation_version'] == '3') return $flux.recuperer_fond('inclure/head-foundation-3');
+    // On renvoie le flux head avec le squelette foundation correspondant.
+    if ($config['foundation_variante'] == '4') return $flux.recuperer_fond('inclure/head-foundation-4');
+    elseif ($config['foundation_variante'] == '3') return $flux.recuperer_fond('inclure/head-foundation-3');
+    else return $flux;
 }
 
 ?>
