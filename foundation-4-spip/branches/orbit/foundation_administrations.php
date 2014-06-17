@@ -6,28 +6,38 @@
  * @copyright  2013
  * @author     Phenix
  * @licence    GNU/GPL
- * @package    SPIP\Foundation\Autorisations
  */
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-/**
-* Fonction d'installation du plugin et de mise à jour.
-* Vous pouvez :
-* - créer la structure SQL,
-* - insérer du pre-contenu,
-* - installer des valeurs de configuration,
-* - mettre à jour la structure SQL
-**/
-function iview_upgrade($nom_meta_base_version, $version_cible) {
-    // Configuration de base de foundation (désactivé par défaut).
-    $config_default = array(
-        'foundation_version' => 0
-    );
+/*
+*   Configuration de base:
+*   - Foundation desactivé
+*   - Pas de Javascript chargé.
+*/
+function foundation_upgrade($nom_meta_base_version, $version_cible) {
 
-    ecrire_meta('foundation', serialize($config_default));
+    // Création du tableau des mises à jour.
+    $maj = array();
+
+    // Tableau de la configuration par défaut
+    $maj['create'] = array(
+            array('ecrire_meta', 'foundation_variante', 0),
+            array('ecrire_meta', 'foundation_javascript', '')
+        );
+
+    // Maj du plugin.
+    include_spip('base/upgrade');
+    maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
-
-
+/*
+*   Désintaller foundation.
+*/
+function foundation_vider_tables($nom_meta_base_version) {
+    // Supprimer les méta, ou oublie pas celle de la base version.
+    effacer_meta('foundation_base_version');
+    effacer_meta('foundation_variante');
+    effacer_meta('foundation_javascript');
+}
 ?>
