@@ -12,12 +12,16 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-        <h3 class="titrem">
-            [(#CHEMIN{prive/themes/spip/images/entravaux.png}|image_reduire{24,24}|inserer_attribut{class, cadre-icone})]
-            Configuration du plugin "En travaux"
-        </h3>
+        [(#SAISIE{radio, foundation_version, 
+                    label=Version de foundation, 
+                    explication="Choisir la version de foundation à utiliser dans l'espace public.", 
+                    datas=#ARRAY{
+                        3.2.5, foundation 3.2.5,
+                        4.1.2, foundation 4.1.2
+                    }
+        })]
         
-		<input type="hidden" name="_meta_casier" value="foundation" />
+        <input type="hidden" name="_meta_casier" value="foundation" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>
