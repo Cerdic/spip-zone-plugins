@@ -56,13 +56,30 @@
     Foundation utilise un propriété (border-box) qui n'est pas prise en charge nativement par IE.
     On ajoute un fix pour rendre cela compatible.
 ]
+<style type="text/css">
 [(#CONFIG{foundation/fichier_htc}|oui)
-    <style type="text/css">
     *, *:before, *:after {
         [behavior: url((#CHEMIN{boxsizing.htc}));]
     }
-    </style>
+    
 ]
+
+[(#REM) Faire en sorte que les iframes soit responsive, pour le filtre iframe_responsive ]
+.iframe_container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+.iframe_container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
 
 [(#REM) Feuille de style personnalisee pour surcharger les precedentes
 	A noter par defaut cette css n'existe pas

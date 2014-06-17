@@ -7,12 +7,20 @@ Le framework [foundation](http://foundation.zurb.com/) et tout ces plugins.
 
 Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre version (Qu'il faudra intégrer au plugin).
 
+# Filtre ajouté par le plugin:
+
+* |iframe_responsive, détecte les iframes dans une chaine de caractère et ajoute le markup HTML pour les rendres responsive.
+
+
 # ToDo
 
 * Activer les javascripts de foundation séparément plutôt que de charger l'intégralité des scripts.
-* Assurer la possibilité de mettre des iFrames responsive.
 
 # Version
+
+## Foundation-4-SPIP 1.3.0
+
+* Ajoute le filtre |iframe_responsive.
 
 ## Foundation-4-SPIP 1.2.0
 
