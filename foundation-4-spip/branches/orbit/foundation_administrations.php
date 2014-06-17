@@ -20,10 +20,14 @@ function foundation_upgrade($nom_meta_base_version, $version_cible) {
     // Création du tableau des mises à jour.
     $maj = array();
 
+     $config_default = array(
+        'variante' => 0,
+        'javascript' => ''
+    );
+
     // Tableau de la configuration par défaut
     $maj['create'] = array(
-            array('ecrire_meta', 'foundation_variante', 0),
-            array('ecrire_meta', 'foundation_javascript', '')
+            array('ecrire_meta', 'foundation', serialize($config_default))
         );
 
     // Maj du plugin.
@@ -35,9 +39,8 @@ function foundation_upgrade($nom_meta_base_version, $version_cible) {
 *   Désintaller foundation.
 */
 function foundation_vider_tables($nom_meta_base_version) {
-    // Supprimer les méta, ou oublie pas celle de la base version.
+    // Supprimer les méta, ou oublie pas celle de la base.
     effacer_meta('foundation_base_version');
-    effacer_meta('foundation_variante');
-    effacer_meta('foundation_javascript');
+    effacer_meta('foundation');
 }
 ?>
