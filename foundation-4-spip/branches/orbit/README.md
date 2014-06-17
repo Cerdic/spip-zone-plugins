@@ -1,11 +1,11 @@
 Foundation-4-spip
 =================
 
-Ce plugin active différente joyeuseté pour SPIP:
+Ce plugin active différentes joyeusetés pour SPIP:
 
-Le framework [foundation](http://foundation.zurb.com/) et tout ces plugins.
+Le framework [foundation](http://foundation.zurb.com/) et tous ces plugins.
 
-Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre version (Qu'il faudra intégrer au plugin).
+Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre version (qu’il faudra intégrer au plugin).
 
 # Filtre ajouté par le plugin:
 
@@ -14,14 +14,17 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 # ToDo
 
-* Activer les javascripts de foundation séparément plutôt que de charger l'intégralité des scripts.
-* Utiliser la classe flex-video de foundation et adapter les paramètres en fonction de la vidéo (classe widescreen et Vimeo).
+* Activer les JavaScript de foundation séparément plutôt que de charger l’intégralité des scripts.
 
 # Version
 
+## Foundation-4-SPIP 1.5.1
+
+* Meilleur respect des fichiers head, on ne surcharge plus de manière arbitraire. On passe toutes modifications de css via le pipeline.
+
 ## Foundation-4-SPIP 1.4.1
 
-* Finalement les dépendances casse tout, on va retirer les dépendances et laisser le choix au dev de faire avec ce qu'il veux
+* Finalement les dépendances cassent tout, on va retirer les dépendances et laisser le choix aux dev de faire avec ce qu’il veut.
 
 ## Foundation-4-SPIP 1.4
 
@@ -37,15 +40,15 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 ## Foundation-4-SPIP 1.3.7
 
-* Activer Foundation 4 à l'installation de foundation.
+* Activer Foundation 4 à l’installation de foundation.
 
 ## Foundation-4-SPIP 1.3.6
 
-* Fixe pour les taille équivalente entre input.button et a.buttonOn utilise @-moz-document url-prefix() pour que le hack css des boutons ne cible que firefox.
+* Fixe pour les tailles équivalentes entre input.button et a.buttonOn utilise @-moz-document url-prefix() pour que le hack css des boutons ne cible que Firefox.
 
 ## Foundation-4-SPIP 1.3.5
 
-* Fixe pour les taille équivalente entre input.button et a.button
+* Fixe pour les tailles équivalentes entre input.button et a.button
 
 ## Foundation-4-SPIP 1.3.4
 
@@ -58,7 +61,7 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 ## Foundation-4-SPIP 1.3.1
 
-* Retour de la dépendance à Zpip vu qu'on ce base sur structure.html
+* Retour de la dépendance à Zpip vu qu’on ce base sur structure.html
 * Mise à jour de foundation 4 (4.2.2 => 4.2.3)
 
 ## Foundation-4-SPIP 1.3.0
@@ -76,7 +79,7 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 ## Foundation-4-SPIP 1.1.0
 
-* Ajoute la possibilité de désactiver le javascript de foundation.
+* Ajoute la possibilité de désactiver le JavaScript de foundation.
 
 ## Foundation-4-SPIP 1.0.0
 
