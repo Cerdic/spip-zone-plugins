@@ -22,7 +22,8 @@ function foundation_upgrade($nom_meta_base_version, $version_cible) {
 
      $config_default = array(
         'variante' => 0,
-        'javascript' => ''
+        'javascript' => '',
+        'fichier_htc' => ''
     );
 
     // Tableau de la configuration par défaut

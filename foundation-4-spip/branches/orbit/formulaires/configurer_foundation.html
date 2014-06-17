@@ -26,6 +26,11 @@
                     label=Activer les javascripts de foundation ?, 
                     explication="Si vous n'utilisez pas les composants javascripts de foundation il est inutile de les charger dans SPIP.", 
         })]
+
+        [(#SAISIE{oui_non, fichier_htc, 
+                    label=Activer le fichier boxsizing.htc ?, 
+                    explication="Ce fichier peu améliorer la gestion de foundation sous IE7/8. Il faudra activer les fichier .htc dans le fichier .htaccess en ajoutant "AddType text/x-component .htc".", 
+        })]
         
         <input type="hidden" name="_meta_casier" value="foundation" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
