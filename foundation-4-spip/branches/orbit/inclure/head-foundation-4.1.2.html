@@ -4,3 +4,13 @@
 
 [(#REM) Inclusion de modernizr ]
 [<script src="(#CHEMIN{foundation/foundation-4.1.2/js/vendor/custom.modernizr.js})"></script>]
+
+[(#REM) Foundation JS ]
+[<script src="(#CHEMIN{foundation/foundation-4.1.2/js/foundation.min.js})"></script>]
+
+[(#REM) Et enfin lancement de fondation avec toutes options par défaut. ]
+<script>
+jQuery(document).ready(function($) {
+    $(document).foundation();
+});
+</script>
