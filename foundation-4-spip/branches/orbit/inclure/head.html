@@ -79,6 +79,16 @@
     width: 100%;
     height: 100%;
 }
+
+[(#REM) 
+    Il y a un bug sous Firefox (et opéra?) avec les line-height et les input.
+    Il faudra probablement le faire pour chaque type de bouton si on veux avoir un affichage similaire entre les a.bouton et les input.button.
+]
+input.button.secondary.small {
+    padding-top: 0.38em !important;
+    padding-bottom: 0.3em !important;
+}
+
 </style>
 
 [(#REM) Feuille de style personnalisee pour surcharger les precedentes
