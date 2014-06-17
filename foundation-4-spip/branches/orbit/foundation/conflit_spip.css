@@ -34,7 +34,9 @@
 */
 #pied {
     font-size: 1em;
-}/*
+}
+
+/*Résoudre le conflit entre les tailles d'imput de SPIP et celle de foundation (ou choisi la version foundation)
 *   Spip ajoute sur les formulaire un width: 15em. Ce n'est pas fluide donc en remet celui de foundation
 */
 .formulaire_spip input.text {
