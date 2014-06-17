@@ -6,7 +6,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="#LANG"> <!--<![endif]-->
 <head>
     [(#REM) on n'inclut les titles, mots-clés & co que si le plugin SEO n'est pas activé.]
-    [(#PLUGIN{seo}|=={non}|oui)
+    [(#PLUGIN{seo}|non)
       <INCLURE{fond=head/#ENV{type},env}>
     ]
     <INCLURE{fond=inclure/head}>
