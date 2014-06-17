@@ -15,3 +15,8 @@ Les plugins:
 * courtcircuit
 * entravaux
 * saisies
+
+# ToDo
+
+* Activer les javascripts de foundation séparément plutôt que de charger l'intégralité des scripts.
+* 
