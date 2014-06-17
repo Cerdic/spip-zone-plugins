@@ -2,7 +2,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
     'cfg_exemple' => 'Exemple',
     'cfg_exemple_explication' => 'Explication de cet exemple',
@@ -20,5 +20,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'version' => 'Version de foundation',
     'version_explication' => 'Choisir la version de foundation à utiliser dans l\'espace public.',
 );
-
-?>

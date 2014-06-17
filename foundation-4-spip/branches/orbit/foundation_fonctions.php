@@ -100,5 +100,3 @@ function balise_COLONNES_dist($p) {
     $p->interdire_scripts = false;
     return $p;
 }
-
-?>

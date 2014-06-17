@@ -10,5 +10,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'foundation_nom' => 'Foundation-4-spip',
 	'foundation_slogan' => 'Utiliser le framework Foundation dans vos squelettes',
 );
-
-?>
