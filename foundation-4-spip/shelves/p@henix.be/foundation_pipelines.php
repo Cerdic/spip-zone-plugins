@@ -11,10 +11,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
-*   Pipeline Insert_head
-*/
-function foundation_insert_head ($flux) {
+/**
+ * Récupération des fichier javascript de foundation
+ */
+function foundation_get_js() {
+
+    $flux = '';
 
     // On lit la configuration du plugin pour savoir quel version de Foundation charger.
     $config = lire_config('foundation');
@@ -32,11 +34,12 @@ function foundation_insert_head ($flux) {
     return $flux;
 }
 
-/*
-*   Pipeline Insert_head_css
-*/
-function foundation_insert_head_css ($flux) {
+/**
+ * Récupération des fichier css de foundation
+ */
 
+function foundation_get_css() {
+    $flux = '';
     // On lit la configuration du plugin pour savoir quel version de Foundation charger.
     $config = lire_config('foundation');
 
@@ -48,6 +51,21 @@ function foundation_insert_head_css ($flux) {
     elseif ($config['variante'] == '0') return $flux;
 
     return $flux;
+}
+
+
+/*
+*   Pipeline Insert_head
+*/
+function foundation_insert_head ($flux) {
+    return $flux.foundation_get_js();
+}
+
+/*
+*   Pipeline Insert_head_css
+*/
+function foundation_insert_head_css ($flux) {
+    return $flux.foundation_get_css();
 }
 
 // TODO: Charger foundation dans l'espace priver pour pouvoir prévisualiser les modèles.
