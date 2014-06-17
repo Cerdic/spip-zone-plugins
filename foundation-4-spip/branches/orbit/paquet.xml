@@ -1,7 +1,7 @@
 <paquet
     prefix="foundation"
     categorie="outil"
-    version="1.6.1"
+    version="1.6.2"
     etat="stable"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/foundation-64.png"
@@ -17,6 +17,7 @@
 
     <!-- On active le pipeline pour modifier le header -->
     <pipeline nom="insert_head" inclure="foundation_pipelines.php" />
+    <pipeline nom="insert_head_css" inclure="foundation_pipelines.php" />
     
     <!-- On ajoute un bouton pour la configuration -->
     <!-- Bouton pour la configuration -->
