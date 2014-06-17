@@ -13,23 +13,23 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
         [(#SAISIE{radio, variante, 
-                    label=Version de foundation, 
-                    explication="Choisir la version de foundation à utiliser dans l'espace public.", 
+                    label=<:foundation:version:>, 
+                    explication=<:foundation:version_explication:>,
                     datas=#ARRAY{
-                        0, Désactiver Foundation,
-                        3, Foundation 3,
-                        4, Foundation 4
+                        0, <:foundation:desactiver:>,
+                        3, <:foundation:3:>,
+                        4, <:foundation:4:>
                     }
         })]
 
         [(#SAISIE{oui_non, javascript, 
-                    label=Activer les javascripts de foundation ?, 
-                    explication="Si vous n'utilisez pas les composants javascripts de foundation il est inutile de les charger dans SPIP.", 
+                    label=<:foundation:activer_javascript:>, 
+                    explication=<:foundation:activer_javascript_explication:>, 
         })]
 
         [(#SAISIE{oui_non, fichier_htc, 
-                    label=Activer le fichier boxsizing.htc ?, 
-                    explication="Ce fichier peu améliorer la gestion de foundation sous IE7/8. Il faudra activer les fichier .htc dans le fichier .htaccess en ajoutant "AddType text/x-component .htc".", 
+                    label=<:foundation:fichier_htc:>, 
+                    explication=<:foundation:fichier_htc_explication:>, 
         })]
         
         <input type="hidden" name="_meta_casier" value="foundation" />
