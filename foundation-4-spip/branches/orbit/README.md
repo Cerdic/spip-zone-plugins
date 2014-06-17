@@ -10,6 +10,7 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 # ToDo
 
 * Activer les javascripts de foundation séparément plutôt que de charger l'intégralité des scripts.
+* Assurer la possibilité de mettre des iFrames responsive.
 
 # Version
 
