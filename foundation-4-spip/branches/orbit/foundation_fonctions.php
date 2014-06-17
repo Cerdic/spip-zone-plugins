@@ -28,16 +28,16 @@ function filtre_iframe_responsive($texte) {
 *   nombre: le nombre de colonne foundation
 *   (optionnel) type: Dans le cas des version utilisant une syntaxe avec prefix, on lui passe le type (défaut: large)
 */
+
+// On va cherche trouver_syntaxe_foundation dans le inc
+include_spip('inc/trouver_syntaxe_foundation');
 function balise_COLONNES_dist($p) {
   // On récupère les paramètres de la balise.
   $nombre_colonnes = interprete_argument_balise(1, $p);
   $type = interprete_argument_balise(2, $p);
 
   // On met une valeur par défaut à type.
-  if (!$type) $type = 'large';
-
-  // On va cherche trouver_syntaxe_foundation dans le inc
-  include_spip('inc/trouver_syntaxe_foundation');
+  if (!$type) $type = "'large'";
 
   // On calcule la syntaxe
   $p->code = "trouver_syntaxe_foundation($nombre_colonnes, $type).' columns'";
