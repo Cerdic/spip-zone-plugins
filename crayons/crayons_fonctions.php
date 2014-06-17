@@ -294,9 +294,11 @@ function balise_EDIT($p) {
 	// il peut aussi arriver une table sans primary (par ex: une vue)
 	if(!($primary = $p->boucles[$i_boucle]->primary)){
 		include_spip('inc/vieilles_defs'); # 1.9.2 pour trouver_def_table
-		list($nom, $desc) = trouver_def_table(
-			$p->boucles[$i_boucle]->type_requete, $p->boucles[$i_boucle]);
-		$primary = $desc['key']['PRIMARY KEY'];
+		if (function_exists('trouver_def_table')) {
+			list($nom, $desc) = trouver_def_table(
+				$p->boucles[$i_boucle]->type_requete, $p->boucles[$i_boucle]);
+			$primary = $desc['key']['PRIMARY KEY'];
+		}
 	}
 
 	$primary = explode(',',$primary);
