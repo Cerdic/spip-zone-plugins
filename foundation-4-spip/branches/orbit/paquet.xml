@@ -1,7 +1,7 @@
 <paquet
     prefix="foundation"
     categorie="squelette"
-    version="1.1.0"
+    version="1.1.1"
     etat="dev"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/foundation-64.png"
@@ -22,14 +22,6 @@
     <!-- Bouton pour la configuration -->
     <menu nom="foundation_titre" titre="foundation:foundation_titre" parent="menu_configuration" icone="images/foundation-16.png" action="configurer_foundation" />
     
-    <!-- On va chercher Zpip -->
-    <necessite nom="Z" compatibilite="[1.7.21;[" />
-    
     <!-- Les plugins indispensable -->
-    <necessite nom="typoenluminee" compatibilite="[3.3.2;[" />
-    <necessite nom="minibando" compatibilite="[1.1.1;[" />
-    <necessite nom="courtcircuit" compatibilite="[2.4.0;[" />
-    <necessite nom="entravaux" compatibilite="[3.1.14;[" />
     <necessite nom="saisies" compatibilite="[1.31;[" />
-    
 </paquet>
