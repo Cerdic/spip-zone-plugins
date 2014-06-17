@@ -9,7 +9,7 @@ function formulaires_configurer_foundation_charger() {
   $config = lire_config('foundation');
 
   // Ajouter le formulaire au contexte pour utiliser #GENERER_SAISIES
-  // On utilise un _ devant le nom ENV pour évité les traitements automatique.
+  // On utilise un _ devant le nom ENV pour évité les traitements automatiques.
   $config['_form_saisies'] = $formulaire;
 
   return $config;
