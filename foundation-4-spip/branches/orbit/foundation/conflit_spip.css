@@ -18,3 +18,13 @@
 .spip_documents_center {
     display: block;
 }
+
+/*
+*   La #page de SPIP est généralement incluse dans des éléments foundation, le CSS de base de SPIP interfère avec.
+*/
+#page {
+    width: 100%;
+    padding: 0;
+    background: none;
+    position: static;
+}
