@@ -4,7 +4,7 @@
   Foundation.libs.topbar = {
     name : 'topbar',
 
-    version: '5.2.0',
+    version: '5.1.1',
 
     settings : {
       index : 0,
@@ -13,8 +13,7 @@
       back_text: 'Back',
       is_hover: true,
       mobile_show_parent_link: false,
-      scrolltop : true, // jump to top when sticky nav menu toggle is clicked
-      sticky_on : 'all'
+      scrolltop : true // jump to top when sticky nav menu toggle is clicked
     },
 
     init : function (section, method, options) {
@@ -26,13 +25,15 @@
       this.bindings(method, options);
 
       self.S('[' + this.attr_name() + ']', this.scope).each(function () {
-        var topbar = $(this),
+        var topbar = self.S(this),
             settings = topbar.data(self.attr_name(true) + '-init'),
             section = self.S('section', this),
-            titlebar = topbar.children().filter('ul').first();
+            titlebar = $('> ul', this).first();
+
         topbar.data('index', 0);
+
         var topbarContainer = topbar.parent();
-        if(topbarContainer.hasClass('fixed') || self.is_sticky(topbar, topbarContainer, settings) ) {
+        if(topbarContainer.hasClass('fixed') || topbarContainer.hasClass(settings.sticky_class)) {
           self.settings.sticky_class = settings.sticky_class;
           self.settings.sticky_topbar = topbar;
           topbar.data('height', topbarContainer.outerHeight());
@@ -57,22 +58,6 @@
         }
       });
 
-    },
-
-    is_sticky: function (topbar, topbarContainer, settings) {
-      var sticky = topbarContainer.hasClass(settings.sticky_class);
-
-      if (sticky && settings.sticky_on === 'all') {
-        return true;
-      } else if (sticky && this.small() && settings.sticky_on === 'small') {
-        return true;
-      } else if (sticky && this.medium() && settings.sticky_on === 'medium') {
-        return true;
-      } else if (sticky && this.large() && settings.sticky_on === 'large') {
-        return true;
-      }
-
-      return false;
     },
 
     toggle: function (toggleEl) {
@@ -124,7 +109,7 @@
           }
         }
       } else {
-        if(self.is_sticky(topbar, topbar.parent(), settings)) {
+        if(topbar.parent().hasClass(self.settings.sticky_class)) {
           topbar.parent().addClass('fixed');
         }
 
@@ -153,13 +138,6 @@
         .on('click.fndtn.topbar', '[' + this.attr_name() + '] .toggle-topbar', function (e) {
           e.preventDefault();
           self.toggle(this);
-        })
-        .on('click.fndtn.topbar','.top-bar .top-bar-section li a[href^="#"],[' + this.attr_name() + '] .top-bar-section li a[href^="#"]',function (e) {
-            var li = $(this).closest('li');
-            if(self.breakpoint() && !li.hasClass('back') && !li.hasClass('has-dropdown'))
-            {
-            self.toggle();
-            }
         })
         .on('click.fndtn.topbar', '[' + this.attr_name() + '] li.has-dropdown', function (e) {
           var li = S(this),
@@ -288,7 +266,7 @@
             }
         }
 
-        if(self.is_sticky(topbar, stickyContainer, settings)) {
+        if(stickyContainer.length > 0) {
           if(stickyContainer.hasClass('fixed')) {
             // Remove the fixed to allow for correct calculation of the offset.
             stickyContainer.removeClass('fixed');
@@ -313,23 +291,11 @@
       return !matchMedia(Foundation.media_queries['topbar']).matches;
     },
 
-    small : function () {
-      return matchMedia(Foundation.media_queries['small']).matches;
-    },
-
-    medium : function () {
-      return matchMedia(Foundation.media_queries['medium']).matches;
-    },
-
-    large : function () {
-      return matchMedia(Foundation.media_queries['large']).matches;
-    },
-
     assemble : function (topbar) {
       var self = this,
           settings = topbar.data(this.attr_name(true) + '-init'),
           section = self.S('section', topbar),
-          titlebar = $(this).children().filter('ul').first();
+          titlebar = $('> ul', topbar).first();
 
       // Pull element out of the DOM for manipulation
       section.detach();
@@ -389,10 +355,11 @@
 
     update_sticky_positioning: function() {
       var klass = '.' + this.settings.sticky_class,
-          $window = this.S(window), 
+          $window = this.S(window),
           self = this;
 
-      if (self.settings.sticky_topbar && self.is_sticky(this.settings.sticky_topbar,this.settings.sticky_topbar.parent(), this.settings)) {
+
+      if (self.S(klass).length > 0) {
         var distance = this.settings.sticky_topbar.data('stickyoffset');
         if (!self.S(klass).hasClass('expanded')) {
           if ($window.scrollTop() > (distance)) {

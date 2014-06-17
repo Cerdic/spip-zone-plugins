@@ -6,7 +6,7 @@
   Foundation.libs.joyride = {
     name : 'joyride',
 
-    version : '5.2.0',
+    version : '5.1.1',
 
     defaults : {
       expose                   : false,     // turn on or off the expose feature
@@ -55,7 +55,7 @@
     init : function (scope, method, options) {
       Foundation.inherit(this, 'throttle random_str');
 
-      this.settings = this.settings || $.extend({}, this.defaults, (options || method));
+      this.settings = this.defaults;
 
       this.bindings(method, options)
     },
@@ -205,6 +205,7 @@
     },
 
     create : function (opts) {
+      console.log(opts.$li)
       var buttonText = opts.$li.attr(this.add_namespace('data-button')) 
         || opts.$li.attr(this.add_namespace('data-text')),
         tipClass = opts.$li.attr('class'),
@@ -371,6 +372,7 @@
     },
 
     set_target : function () {
+      console.log(this.add_namespace('data-class'))
       var cl = this.settings.$li.attr(this.add_namespace('data-class')),
           id = this.settings.$li.attr(this.add_namespace('data-id')),
           $sel = function () {
@@ -382,6 +384,8 @@
               return $('body');
             }
           };
+
+      console.log(cl, id)
 
       this.settings.$target = $sel();
     },
@@ -458,7 +462,7 @@
 
             this.settings.$next_tip.css({
               top: this.settings.$target.offset().top,
-              left: (this.settings.$target.outerWidth() + this.settings.$target.offset().left + nub_width)});
+              left: (this.outerWidth(this.settings.$target) + this.settings.$target.offset().left + nub_width)});
 
             this.nub_position($nub, this.settings.tip_settings.nub_position, 'left');
 
@@ -466,7 +470,7 @@
 
             this.settings.$next_tip.css({
               top: this.settings.$target.offset().top,
-              left: (this.settings.$target.offset().left - this.settings.$next_tip.outerWidth() - nub_width)});
+              left: (this.settings.$target.offset().left - this.outerWidth(this.settings.$next_tip) - nub_width)});
 
             this.nub_position($nub, this.settings.tip_settings.nub_position, 'right');
 

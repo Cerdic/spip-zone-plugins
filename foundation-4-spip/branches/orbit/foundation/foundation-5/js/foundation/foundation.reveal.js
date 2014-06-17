@@ -4,7 +4,7 @@
   Foundation.libs.reveal = {
     name : 'reveal',
 
-    version : '5.2.0',
+    version : '5.1.1',
 
     locked : false,
 
@@ -65,7 +65,7 @@
         });
 
       S(document)
-        .on('touchend.fndtn.reveal click.fndtn.reveal', this.close_targets(), function (e) {
+        .on('click.fndtn.reveal', this.close_targets(), function (e) {
 
           e.preventDefault();
 
@@ -73,12 +73,8 @@
             var settings = S('[' + self.attr_name() + '].open').data(self.attr_name(true) + '-init'),
                 bg_clicked = S(e.target)[0] === S('.' + settings.bg_class)[0];
 
-            if (bg_clicked) {
-              if (settings.close_on_background_click) {
-                e.stopPropagation();
-              } else {
-                return;
-              }
+            if (bg_clicked && !settings.close_on_background_click) {
+              return;
             }
 
             self.locked = true;
@@ -172,7 +168,8 @@
 
         if (typeof ajax_settings === 'undefined' || !ajax_settings.url) {
           if (open_modal.length > 0) {
-            this.hide(open_modal, settings.css.close);
+            var open_modal_settings = open_modal.data(self.attr_name(true) + '-init');
+            this.hide(open_modal, open_modal_settings.css.close);
           }
 
           this.show(modal, settings.css.open);
@@ -189,7 +186,8 @@
               self.S(modal).foundation('section', 'reflow');
 
               if (open_modal.length > 0) {
-                self.hide(open_modal, settings.css.close);
+                var open_modal_settings = open_modal.data(self.attr_name(true));
+                self.hide(open_modal, open_modal_settings.css.close);
               }
               self.show(modal, settings.css.open);
             }
@@ -229,7 +227,7 @@
 
       if (this.S('.' + this.settings.bg_class).length === 0) {
         this.settings.bg = $('<div />', {'class': this.settings.bg_class})
-          .appendTo('body').hide();
+          .appendTo('body');
       }
 
       if (this.settings.bg.filter(':visible').length > 0) {
@@ -255,11 +253,7 @@
           el.detach().appendTo(rootElement);
         }
 
-        var animData = getAnimationData(settings.animation);
-        if (!animData.animate) {
-          this.locked = false;
-        }
-        if (animData.pop) {
+        if (/pop/i.test(settings.animation)) {
           css.top = $(window).scrollTop() - el.data('offset') + 'px';
           var end_css = {
             top: $(window).scrollTop() + el.data('css-top') + 'px',
@@ -277,8 +271,7 @@
           }.bind(this), settings.animation_speed / 2);
         }
 
-        if (animData.fade) {
-          css.top = $(window).scrollTop() + el.data('css-top') + 'px';
+        if (/fade/i.test(settings.animation)) {
           var end_css = {opacity: 1};
 
           return setTimeout(function () {
@@ -298,7 +291,7 @@
       var settings = this.settings;
 
       // should we animate the background?
-      if (getAnimationData(settings.animation).fade) {
+      if (/fade/i.test(settings.animation)) {
         return el.fadeIn(settings.animation_speed / 2);
       }
 
@@ -311,11 +304,7 @@
       // is modal
       if (css) {
         var settings = el.data(this.attr_name(true) + '-init');
-        var animData = getAnimationData(settings.animation);
-        if (!animData.animate) {
-          this.locked = false;
-        }
-        if (animData.pop) {
+        if (/pop/i.test(settings.animation)) {
           var end_css = {
             top: - $(window).scrollTop() - el.data('offset') + 'px',
             opacity: 0
@@ -331,7 +320,7 @@
           }.bind(this), settings.animation_speed / 2);
         }
 
-        if (animData.fade) {
+        if (/fade/i.test(settings.animation)) {
           var end_css = {opacity: 0};
 
           return setTimeout(function () {
@@ -350,7 +339,7 @@
       var settings = this.settings;
 
       // should we animate the background?
-      if (getAnimationData(settings.animation).fade) {
+      if (/fade/i.test(settings.animation)) {
         return el.fadeOut(settings.animation_speed / 2);
       }
 
@@ -407,21 +396,4 @@
 
     reflow : function () {}
   };
-
-  /*
-   * getAnimationData('popAndFade') // {animate: true,  pop: true,  fade: true}
-   * getAnimationData('fade')       // {animate: true,  pop: false, fade: true}
-   * getAnimationData('pop')        // {animate: true,  pop: true,  fade: false}
-   * getAnimationData('foo')        // {animate: false, pop: false, fade: false}
-   * getAnimationData(null)         // {animate: false, pop: false, fade: false}
-   */
-  function getAnimationData(str) {
-    var fade = /fade/i.test(str);
-    var pop = /pop/i.test(str);
-    return {
-      animate: fade || pop,
-      pop: pop,
-      fade: fade
-    };
-  }
 }(jQuery, this, this.document));

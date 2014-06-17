@@ -11,27 +11,26 @@
 
   var header_helpers = function (class_array) {
     var i = class_array.length;
-    var head = $('head');
 
     while (i--) {
       if($('head').has('.' + class_array[i]).length === 0) {
-        $('head').append('<meta class="' + class_array[i] + '" />');
+        $('head').append('<meta class="' + class_array[i] + '">');
       }
     }
   };
 
   header_helpers([
-    'foundation-mq-small',
-    'foundation-mq-medium',
-    'foundation-mq-large',
-    'foundation-mq-xlarge',
-    'foundation-mq-xxlarge',
+    'foundation-mq-small', 
+    'foundation-mq-medium', 
+    'foundation-mq-large', 
+    'foundation-mq-xlarge', 
+    'foundation-mq-xxlarge', 
     'foundation-data-attribute-namespace']);
 
   // Enable FastClick if present
 
   $(function() {
-    if (typeof FastClick !== 'undefined') {
+    if(typeof FastClick !== 'undefined') {
       // Don't attach to body if undefined
       if (typeof document.body !== 'undefined') {
         FastClick.attach(document.body);
@@ -44,11 +43,10 @@
   // getElementById is not available.
   var S = function (selector, context) {
     if (typeof selector === 'string') {
-      if (context) {
+      if (context) { 
         var cont;
         if (context.jquery) {
           cont = context[0];
-          if (!cont) return context;
         } else {
           cont = context;
         }
@@ -72,12 +70,22 @@
     return arr.join('-');
   };
 
+  var header_helpers = function (class_array) {
+    var i = class_array.length;
+
+    while (i--) {
+      if($('head').has('.' + class_array[i]).length === 0) {
+        $('head').append('<meta class="' + class_array[i] + '">');
+      }
+    }
+  };
+
   var add_namespace = function (str) {
     var parts = str.split('-'),
         i = parts.length,
         arr = [];
 
-    while (i--) {
+    while(i--) {
       if (i !== 0) {
         arr.push(parts[i]);
       } else {
@@ -112,6 +120,7 @@
     } else {
       S('[' + this.attr_name() +']', this.scope).each(function () {
         var should_bind_events = !S(this).data(self.attr_name(true) + '-init');
+
         S(this).data(self.attr_name(true) + '-init', $.extend({}, self.settings, (options || method), self.data_options(S(this))));
 
         if (should_bind_events) {
@@ -148,8 +157,8 @@
     } else {
       bindLoad.call(image);
     }
-  };
-  
+  }
+
   /*
     https://github.com/paulirish/matchMedia.js
   */
@@ -170,7 +179,7 @@
     fakeBody.style.background = "none";
     fakeBody.appendChild(div);
 
-    return function (q) {
+    return function(q){
 
       div.innerHTML = "&shy;<style media=\"" + q + "\"> #mq-test-1 { width: 42px; }</style>";
 
@@ -196,21 +205,21 @@
    * Licensed under the MIT license.
    */
 
-  (function($) {
+  (function( $ ) {
 
   // requestAnimationFrame polyfill adapted from Erik Möller
   // fixes from Paul Irish and Tino Zijdel
   // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
   // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 
-  var animating,
-      lastTime = 0,
-      vendors = ['webkit', 'moz'],
-      requestAnimationFrame = window.requestAnimationFrame,
-      cancelAnimationFrame = window.cancelAnimationFrame,
-      jqueryFxAvailable = 'undefined' !== typeof jQuery.fx;
 
-  for (; lastTime < vendors.length && !requestAnimationFrame; lastTime++) {
+  var animating,
+    lastTime = 0,
+    vendors = ['webkit', 'moz'],
+    requestAnimationFrame = window.requestAnimationFrame,
+    cancelAnimationFrame = window.cancelAnimationFrame;
+
+  for(; lastTime < vendors.length && !requestAnimationFrame; lastTime++) {
     requestAnimationFrame = window[ vendors[lastTime] + "RequestAnimationFrame" ];
     cancelAnimationFrame = cancelAnimationFrame ||
       window[ vendors[lastTime] + "CancelAnimationFrame" ] || 
@@ -218,48 +227,42 @@
   }
 
   function raf() {
-    if (animating) {
-      requestAnimationFrame(raf);
-      
-      if (jqueryFxAvailable) {
-        jQuery.fx.tick();
-      }
+    if ( animating ) {
+      requestAnimationFrame( raf );
+      jQuery.fx.tick();
     }
   }
 
-  if (requestAnimationFrame) {
+  if ( requestAnimationFrame ) {
     // use rAF
     window.requestAnimationFrame = requestAnimationFrame;
     window.cancelAnimationFrame = cancelAnimationFrame;
-    
-    if (jqueryFxAvailable) {
-      jQuery.fx.timer = function (timer) {
-        if (timer() && jQuery.timers.push(timer) && !animating) {
-          animating = true;
-          raf();
-        }
-      };
+    jQuery.fx.timer = function( timer ) {
+      if ( timer() && jQuery.timers.push( timer ) && !animating ) {
+        animating = true;
+        raf();
+      }
+    };
 
-      jQuery.fx.stop = function () {
-        animating = false;
-      };
-    }
+    jQuery.fx.stop = function() {
+      animating = false;
+    };
   } else {
     // polyfill
-    window.requestAnimationFrame = function (callback, element) {
+    window.requestAnimationFrame = function( callback, element ) {
       var currTime = new Date().getTime(),
-        timeToCall = Math.max(0, 16 - (currTime - lastTime)),
-        id = window.setTimeout(function () {
-          callback(currTime + timeToCall);
-        }, timeToCall);
+        timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) ),
+        id = window.setTimeout( function() {
+          callback( currTime + timeToCall );
+        }, timeToCall );
       lastTime = currTime + timeToCall;
       return id;
     };
 
-    window.cancelAnimationFrame = function (id) {
+    window.cancelAnimationFrame = function(id) {
       clearTimeout(id);
     };
-
+      
   }
 
   }( jQuery ));
@@ -276,7 +279,7 @@
   window.Foundation = {
     name : 'Foundation',
 
-    version : '5.2.0',
+    version : '5.1.1',
 
     media_queries : {
       small : S('.foundation-mq-small').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, ''),
@@ -323,12 +326,6 @@
         this.patch(this.libs[lib]);
 
         if (args && args.hasOwnProperty(lib)) {
-            if (typeof this.libs[lib].settings !== 'undefined') {
-                $.extend(true, this.libs[lib].settings, args[lib]);
-            }
-            else if (typeof this.libs[lib].defaults !== 'undefined') {
-                $.extend(true, this.libs[lib].defaults, args[lib]);
-            }
           return this.libs[lib].init.apply(this.libs[lib], [this.scope, args[lib]]);
         }
 
@@ -362,19 +359,10 @@
     },
 
     set_namespace: function () {
-
-      // Don't bother reading the namespace out of the meta tag
-      // if the namespace has been set globally in javascript
-      //
-      // Example: something like Foundation.global.namespace = 'my-namespace';
-      //
-      // Otherwise, if the namespace hasn't been set globally,
-      // read it out of the meta tag
-      //
-      var namespace = this.global.namespace || $('.foundation-data-attribute-namespace').css('font-family');
+      var namespace = $('.foundation-data-attribute-namespace').css('font-family');
 
       if (/false/i.test(namespace)) return;
-      
+
       this.global.namespace = namespace;
     },
 
@@ -409,7 +397,7 @@
       //
       // Returns:
       //    Lazy_function (Function): Function with throttling applied.
-      throttle : function (func, delay) {
+      throttle : function(func, delay) {
         var timer = null;
 
         return function () {
@@ -436,11 +424,11 @@
       //
       // Returns:
       //    Lazy_function (Function): Function with debouncing applied.
-      debounce : function (func, delay, immediate) {
+      debounce : function(func, delay, immediate) {
         var timeout, result;
-        return function () {
+        return function() {
           var context = this, args = arguments;
-          var later = function () {
+          var later = function() {
             timeout = null;
             if (!immediate) result = func.apply(context, args);
           };
@@ -486,7 +474,7 @@
           return ! isNaN (o-0) && o !== null && o !== "" && o !== false && o !== true;
         }
 
-        function trim (str) {
+        function trim(str) {
           if (typeof str === 'string') return $.trim(str);
           return str;
         }
@@ -496,13 +484,7 @@
 
           if (/true/i.test(p[1])) p[1] = true;
           if (/false/i.test(p[1])) p[1] = false;
-          if (isNumber(p[1])) {
-            if (p[1].indexOf('.') === -1) {
-              p[1] = parseInt(p[1], 10);
-            } else {
-              p[1] = parseFloat(p[1], 10);
-            }
-          }
+          if (isNumber(p[1])) p[1] = parseInt(p[1], 10);
 
           if (p.length === 2 && p[0].length > 0) {
             opts[trim(p[0])] = trim(p[1]);
@@ -520,7 +502,7 @@
       //    Foundation.media_queries
       //
       //    Class (String): Class name for the generated <meta> tag
-      register_media : function (media, media_class) {
+      register_media : function(media, media_class) {
         if(Foundation.media_queries[media] === undefined) {
           $('head').append('<meta class="' + media_class + '">');
           Foundation.media_queries[media] = removeQuotes($('.' + media_class).css('font-family'));
@@ -535,13 +517,12 @@
       //
       //    Media (String): Optional media query string for the CSS rule to be 
       //    nested under.
-      add_custom_rule : function (rule, media) {
-        if (media === undefined) {
+      add_custom_rule : function(rule, media) {
+        if(media === undefined) {
           Foundation.stylesheet.insertRule(rule, Foundation.stylesheet.cssRules.length);
         } else {
           var query = Foundation.media_queries[media];
-
-          if (query !== undefined) {
+          if(query !== undefined) {
             Foundation.stylesheet.insertRule('@media ' + 
               Foundation.media_queries[media] + '{ ' + rule + ' }');
           }
@@ -559,14 +540,10 @@
         var self = this,
             unloaded = images.length;
 
-        if (unloaded === 0) {
-          callback(images);
-        }
-
-        images.each(function () {
-          single_image_loaded(self.S(this), function () {
-            unloaded -= 1;
-            if (unloaded === 0) {
+        images.each(function(){
+          single_image_loaded(self.S(this),function(){
+            unloaded -= 1; 
+            if(unloaded == 0){
               callback(images);
             }
           });
@@ -582,11 +559,18 @@
       //
       // Returns:
       //    Rand (String): Pseudo-random, alphanumeric string.
-      random_str : function () {
-        if (!this.fidx) this.fidx = 0;
-        this.prefix = this.prefix || [(this.name || 'F'), (+new Date).toString(36)].join('-');
+      random_str : function (length) {
+        var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
 
-        return this.prefix + (this.fidx++).toString(36);
+        if (!length) {
+          length = Math.floor(Math.random() * chars.length);
+        }
+
+        var str = '';
+        while (length--) {
+          str += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return str;
       }
     }
   };

@@ -4,7 +4,7 @@
   Foundation.libs.clearing = {
     name : 'clearing',
 
-    version: '5.2.0',
+    version: '5.1.1',
 
     settings : {
       templates : {
@@ -31,7 +31,7 @@
 
       this.bindings(method, options);
 
-      if (self.S(this.scope).is('[' + this.attr_name() + ']')) {
+      if (self.S(this.scope).is('[' + this.attr_name() + ']')) { 
         this.assemble(self.S('li', this.scope));
       } else {
         self.S('[' + this.attr_name() + ']', this.scope).each(function () {
@@ -43,10 +43,6 @@
     events : function (scope) {
       var self = this,
       S = self.S;
-
-      if ($('.scroll-container').length > 0) {
-        this.scope = $('.scroll-container');
-      }
 
       S(this.scope)
         .off('.clearing')
@@ -84,9 +80,8 @@
         .on('click.fndtn.clearing', '.clearing-main-prev',
           function (e) { self.nav(e, 'prev') })
         .on('click.fndtn.clearing', this.settings.close_selectors,
-          function (e) { Foundation.libs.clearing.close(e, this) });
-
-      $(document).on('keydown.fndtn.clearing',
+          function (e) { Foundation.libs.clearing.close(e, this) })
+        .on('keydown.fndtn.clearing',
           function (e) { self.keydown(e) });
 
       S(window).off('.clearing').on('resize.fndtn.clearing',
@@ -169,46 +164,11 @@
 
     open : function ($image, current, target) {
       var self = this,
-          body = $(document.body),
           root = target.closest('.clearing-assembled'),
-          container = $('div', root).first(),
-          visible_image = $('.visible-img', container),
-          image = $('img', visible_image).not($image),
-          label = $('.clearing-touch-label', '.clearing-blackout'),
-          error = false;
-
-      image.error(function () {
-        error = true;
-      });
-
-      function startLoad() {
-        setTimeout(function () {
-          this.image_loaded(image, function () {
-            if (image.outerWidth() === 1 && !error) {
-              startLoad.call(this);
-            } else {
-              cb.call(this, image);
-            }
-          }.bind(this));
-        }.bind(this), 50);
-      }
-
-      function cb (image) {
-        var $image = $(image);
-        image.css('visibility', 'visible');
-        // toggle the gallery
-        body.css('overflow', 'hidden');
-        root.addClass('clearing-blackout');
-        container.addClass('clearing-container');
-        visible_image.show();
-        this.fix_height(target)
-          .caption(self.S('.clearing-caption', visible_image), $image)
-          .center_and_label(image, label)
-          .shift(current, target, function () {
-            target.siblings().removeClass('visible');
-            target.addClass('visible');
-          });
-      }
+          container = self.S('div', root).first(),
+          visible_image = self.S('.visible-img', container),
+          image = self.S('img', visible_image).not($image),
+          label = self.S('.clearing-touch-label', container);
 
       if (!this.locked()) {
         // set the image to the selected thumbnail
@@ -216,8 +176,20 @@
           .attr('src', this.load($image))
           .css('visibility', 'hidden');
 
-        startLoad.call(this);
-        
+        this.image_loaded(image, function () {
+          image.css('visibility', 'visible');
+          // toggle the gallery
+          root.addClass('clearing-blackout');
+          container.addClass('clearing-container');
+          visible_image.show();
+          this.fix_height(target)
+            .caption(self.S('.clearing-caption', visible_image), $image)
+            .center_and_label(image,label)
+            .shift(current, target, function () {
+              target.siblings().removeClass('visible');
+              target.addClass('visible');
+            });
+        }.bind(this));
       }
     },
 
@@ -230,11 +202,9 @@
             } else {
               return target.closest('.clearing-blackout');
             }
-          }($(el))),
-          body = $(document.body), container, visible_image;
+          }($(el))), container, visible_image;
 
       if (el === e.target && root) {
-        body.css('overflow', '');
         container = $('div', root).first();
         visible_image = $('.visible-img', container);
         this.settings.prev_index = 0;
@@ -253,7 +223,7 @@
     },
 
     keydown : function (e) {
-      var clearing = $('.clearing-blackout ul[' + this.attr_name() + ']'),
+      var clearing = $('ul[' + this.attr_name() + ']', '.clearing-blackout'),
           NEXT_KEY = this.rtl ? 37 : 39,
           PREV_KEY = this.rtl ? 39 : 37,
           ESC_KEY = 27;
@@ -326,13 +296,10 @@
           marginLeft : -(target.outerWidth() / 2),
           marginTop : -(target.outerHeight() / 2)
         });
-
-        if (label.length > 0) {
-          label.css({
-            marginLeft : -(label.outerWidth() / 2),
-            marginTop : -(target.outerHeight() / 2)-label.outerHeight()-10
-          });
-        }
+        label.css({
+          marginLeft : -(label.outerWidth() / 2),
+          marginTop : -(target.outerHeight() / 2)-label.outerHeight()-10
+        });
       } else {
         target.css({
           marginRight : -(target.outerWidth() / 2),
@@ -340,15 +307,12 @@
           left: 'auto',
           right: '50%'
         });
-
-        if (label.length > 0) {
-          label.css({
-            marginRight : -(label.outerWidth() / 2),
-            marginTop : -(target.outerHeight() / 2)-label.outerHeight()-10,
-            left: 'auto',
-            right: '50%'
-          });
-        }
+        label.css({
+          marginRight : -(label.outerWidth() / 2),
+          marginTop : -(target.outerHeight() / 2)-label.outerHeight()-10,
+          left: 'auto',
+          right: '50%'
+        });
       }
       return this;
     },
