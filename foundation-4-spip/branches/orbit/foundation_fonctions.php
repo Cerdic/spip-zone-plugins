@@ -37,7 +37,7 @@ function balise_COLONNES_dist($p) {
   if (!$type) $type = 'large';
 
   // On va cherche trouver_syntaxe_foundation dans le inc
-  include_spip('inc/foundation');
+  include_spip('inc/trouver_syntaxe_foundation');
 
   // On calcule la syntaxe
   $p->code = "trouver_syntaxe_foundation($nombre_colonnes, $type).' columns'";
