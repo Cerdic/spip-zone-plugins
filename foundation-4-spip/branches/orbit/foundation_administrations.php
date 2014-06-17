@@ -22,7 +22,7 @@ function foundation_upgrade($nom_meta_base_version, $version_cible) {
 
      $config_default = array(
         // Activer par défaut la version 4 de foundation. Désactiver le reste.
-        'variante' => 4, 
+        'variante' => 5,
         'javascript' => '',
         'fichier_htc' => ''
     );
