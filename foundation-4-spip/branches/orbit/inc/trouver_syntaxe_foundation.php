@@ -34,9 +34,8 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
     if (in_array($config['variante'], $colnum))
       return $type.'-'.$nombre_colonnes;
     // Sinon, on démarrer le moteur de conversion de nombre, et on renvoie la bonne class
-    elseif (in_array($config['variante'], $colettr)) {
+    elseif (in_array($config['variante'], $colettr))
       return toWords($nombre_colonnes);
-    }
   }
 }
 
