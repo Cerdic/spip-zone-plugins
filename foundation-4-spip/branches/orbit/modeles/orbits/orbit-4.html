@@ -1,21 +1,7 @@
-[(#REM)
-  Modèle orbit
-
-  Paramètre:
-
-  * class: classe du UL principal. Défaut: orbit.
-  * objet: Type d'objet sur lequel s'applique le slideshow orbit.
-  * id_objet: identifiant de l'objet.
-
-]
 <ul class="[(#ENV{class}|sinon{orbit})]" data-orbit>
 
-  [(#REM) S'il n'y a pas d'objet passer dans #ENV on tente d'afficher les documents d'un objet SPIP ]
-  <BOUCLE_article_slider(DOCUMENTS)
-                                    {id_rubrique ?}
-                                    {id_article ?}
-                                    {id_breve ?}
-                                    {si #ENV{objet}|non}>
+  <B_article_slider>
+  <BOUCLE_article_slider(DOCUMENTS){id_article}>
     <li>
       [(#FICHIER|balise_img{#TITRE, orbit-element})]
 
@@ -25,19 +11,7 @@
       </div>]
     </li>
   </BOUCLE_article_slider>
-
-    [(#REM) Si un objet spécifique est passé, on récupère les documents de l'objet ]
-    <BOUCLE_objet_slider(DOCUMENTS documents_liens) {objet} {id_objet}>
-      <li>
-        [(#FICHIER|balise_img{#TITRE, orbit-element})]
-
-        [(#REM) Placer le desriptif du fichier dans le caption d'orbit. ]
-        [<div class="orbit-caption">
-          (#DESCRIPTIF)
-        </div>]
-      </li>
-    </BOUCLE_objet_slider>
-
+  </B_article_slider>
   <//B_article_slider>
 
 </ul>
