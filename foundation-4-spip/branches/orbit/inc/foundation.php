@@ -14,5 +14,5 @@ function responsive($matches) {
   else $vimeo = '';
 
   // On revoie la bonne structure html d'iframe.
-  return '<div class="flex-video'.$vimeo.'"><iframe '.$matches[0].'></iframe></div>';
+  return wrap('<iframe '.$matches[0].'></iframe>', '<div class="flex-video'.$vimeo.'">');;
 }
