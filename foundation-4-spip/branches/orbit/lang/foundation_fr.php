@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'activer_javascript' => 'Activer les javascripts de foundation ?',
     'activer_javascript_explication' => 'Si vous n\'utilisez pas les composants javascripts de foundation il est inutile de les charger dans SPIP.',
     'fichier_htc' => 'Activer le fichier boxsizing.htc ?',
-    'fichier_htc_explication' => 'Ce fichier peu améliorer la gestion de foundation sous IE7/8. Il faudra activer les fichier .htc dans le fichier .htaccess en ajoutant "AddType text/x-component .htc".',
+    'fichier_htc_explication' => '<strong>Exprimental:</strong> Ce fichier peu améliorer la gestion de foundation sous IE7. Il faudra activer les fichier .htc dans le fichier .htaccess en ajoutant "AddType text/x-component .htc".',
     'version' => 'Version de foundation',
     'version_explication' => 'Choisir la version de foundation à utiliser dans l\'espace public.',
 );
