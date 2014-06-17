@@ -5,13 +5,10 @@
     etat="dev"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/foundation-64.png"
-    documentation=""
+    documentation="http://foundation.zurb.com/docs/"
 >
-    <!--
-        Paquet genere le 2013-04-17 21:04:50
-    -->
-
-    <nom>foundation-4-spip</nom>
+    <nom>Foundation-4-spip</nom>
+    <!-- Plugin qui intégre le framework Foundation a l'interface public de SPIP. -->
 
     <auteur lien='http://p.henix.be'>Phenix</auteur>
 
