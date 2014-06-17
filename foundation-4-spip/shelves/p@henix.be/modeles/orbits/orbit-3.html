@@ -41,6 +41,6 @@
 [(#REM) Lancer le slider ]
 <script type="text/javascript">
   jQuery(window).load(function() {
-    $("#orbit").orbit();
+    $("#orbit").orbit([{(#ENV*{data-options})}]);
   });
 </script>
