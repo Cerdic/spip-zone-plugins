@@ -31,7 +31,7 @@ function responsive($matches) {
  * @param  string $texte HTML pouvant contenir des iFrames
  * @return string        HTML avec les iFrames modifiée pour être responsive.
  */
-function iframe_responsive($texte) {
+function filtre_iframe_responsive($texte) {
   // On détecte tout les iFrames et on les rends responsives.
   return preg_replace_callback('/<iframe(.+)><\/iframe>/', 'responsive', $texte);
 }
