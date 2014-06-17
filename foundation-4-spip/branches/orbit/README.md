@@ -18,6 +18,11 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 # Version
 
+## Foundation-4-SPIP 1.3.1
+
+* Retour de la dépendance à Zpip vu qu'on ce base sur structure.html
+* Mise à jour de foundation 4 (4.2.2 => 4.2.3)
+
 ## Foundation-4-SPIP 1.3.0
 
 * Ajoute le filtre |iframe_responsive.
