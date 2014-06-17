@@ -26,5 +26,3 @@ function foundation_insert_head_css ($flux) {
   include_spip('inc/foundation');
   return foundation_get_css($flux);
 }
-
-// TODO: Charger foundation dans l'espace priver pour pouvoir prévisualiser les modèles.
