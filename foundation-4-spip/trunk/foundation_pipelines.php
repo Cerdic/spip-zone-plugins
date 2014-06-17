@@ -11,69 +11,20 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/**
- * Récupération des fichier javascript de foundation
- */
-function foundation_get_js() {
-
-  $flux = '';
-
-  // On lit la configuration du plugin pour savoir quel version de Foundation charger.
-  $config = lire_config('foundation');
-
-  // On renvoie le flux head avec le squelette foundation correspondant.
-  if ($config['variante'] == '3')
-    $flux = $flux.recuperer_fond('inclure/head-foundation-3');
-  elseif ($config['variante'] == '4')
-    $flux = $flux.recuperer_fond('inclure/head-foundation-4');
-  elseif ($config['variante'] == '5')
-    $flux = $flux.recuperer_fond('inclure/head-foundation-5');
-  // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
-  elseif ($config['variante'] == '0')
-    return $flux;
-
-  // Charger le head commun a foundation
-  $flux = $flux.recuperer_fond('inclure/head-foundation');
-
-  return $flux;
-}
-
-/**
- * Récupération des fichier css de foundation
- */
-
-function foundation_get_css() {
-  $flux = '';
-  // On lit la configuration du plugin pour savoir quel version de Foundation charger.
-  $config = lire_config('foundation');
-
-  // On renvoie le flux head avec le squelette foundation correspondant.
-  if ($config['variante'] == '3')
-    $flux = $flux.recuperer_fond('inclure/css/head-foundation-3');
-  elseif ($config['variante'] == '4')
-    $flux = $flux.recuperer_fond('inclure/css/head-foundation-4');
-  elseif ($config['variante'] == '5')
-    $flux = $flux.recuperer_fond('inclure/css/head-foundation-5');
-  // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
-  elseif ($config['variante'] == '0')
-    return $flux;
-
-  return $flux;
-}
-
-
 /*
 *   Pipeline Insert_head
 */
 function foundation_insert_head ($flux) {
-  return $flux.foundation_get_js();
+  include_spip('inc/foundation');
+  return foundation_get_js($flux);
 }
 
 /*
 *   Pipeline Insert_head_css
 */
 function foundation_insert_head_css ($flux) {
-  return $flux.foundation_get_css();
+  include_spip('inc/foundation');
+  return foundation_get_css($flux);
 }
 
 // TODO: Charger foundation dans l'espace priver pour pouvoir prévisualiser les modèles.

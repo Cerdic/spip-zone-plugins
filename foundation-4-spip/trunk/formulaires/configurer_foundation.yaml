@@ -1,0 +1,23 @@
+-
+  saisie: radio
+  options:
+    nom: variante
+    label: <:foundation:version:>
+    explication: <:foundation:version_explication:>
+    datas:
+      0: <:foundation:desactiver:>
+      3: <:foundation:3:>
+      4: <:foundation:4:>
+      5: <:foundation:5:>
+-
+  saisie: oui_non
+  options:
+    nom: javascript
+    label: <:foundation:activer_javascript:>
+    explication: <:foundation:activer_javascript_explication:>
+-
+  saisie: oui_non
+  options:
+    nom: fichier_htc
+    label: <:foundation:fichier_htc:>
+    explication: <:foundation:fichier_htc_explication:>
