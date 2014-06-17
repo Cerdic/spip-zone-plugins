@@ -20,7 +20,7 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 ## Foundation-4-SPIP 1.7
 
-* On ajoute la balise #COLONNES ()
+* On ajoute la balise #COLONNES (voir: http://contrib.spip.net/Foundation-4-Spip#update1.7)
 
 ## Foundation-4-SPIP 1.6.2
 
