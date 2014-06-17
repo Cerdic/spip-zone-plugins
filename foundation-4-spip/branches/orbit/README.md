@@ -18,6 +18,10 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 # Version
 
+## Foundation-4-SPIP 1.3.4
+
+* Mise à jour de foundation en version 4.3.0
+
 ## Foundation-4-SPIP 1.3.2
 
 * Ajoute une class langue sur la balise html.
