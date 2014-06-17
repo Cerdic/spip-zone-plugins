@@ -8,15 +8,6 @@
  * @licence    GNU/GPL
  * @package    SPIP\Foundation\Autorisations
  */
-
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
-/**
-* Plugin iView pour SPIP
-* (c) 2012 Phenix
-* Licence GNU/GPL
-*/
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
