@@ -25,7 +25,7 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
       and in_array($config['variante'], $colnum)) {
     $class= '';
     foreach ($nombre_colonnes as $key => $value) {
-      $class .= $key.'-'.$value.' ';
+      $class .= $value.'-'.$key.' ';
     }
     return $class;
   }
