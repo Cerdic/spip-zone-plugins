@@ -68,3 +68,47 @@ function balise_ORBIT_dist($p) {
            _q($connect));
   return $p;
 }
+
+
+/**
+ * Fonctionnement identique à #BOUTON_ACTION mais permet d'utiliser
+ * le filtre f_bouton_action qui déplace l'attibrut class sur le bouton
+ * et non pas sur le form.
+ * Cela permet d'utiliser les class "button" de foundation sur ce type
+ * d'objet SPIP
+ */
+function balise_F_BOUTON_ACTION_dist($p){
+
+  $args = array();
+  for ($k=1;$k<=6;$k++){
+    $_a = interprete_argument_balise($k,$p);
+    if (!$_a) $_a="''";
+    $args[] = $_a;
+  }
+  // supprimer les args vides
+  while(end($args)=="''" AND count($args)>2)
+    array_pop($args);
+  $args = implode(",",$args);
+
+  $bouton_action = chercher_filtre("f_bouton_action");
+  $p->code = "$bouton_action($args)";
+  $p->interdire_scripts = false;
+  return $p;
+}
+
+/**
+ * Voir balise_F_BOUTON_ACTION_dist
+ */
+function filtre_f_bouton_action($libelle, $url, $class="", $confirm="", $title="", $callback=""){
+  if ($confirm) {
+    $confirm = "confirm(\"" . attribut_html($confirm) . "\")";
+    if ($callback)
+      $callback = "$confirm?($callback):false";
+    else
+      $callback = $confirm;
+  }
+  $onclick = $callback?" onclick='return ".addcslashes($callback,"'")."'":"";
+  $title = $title ? " title='$title'" : "";
+  return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
+    ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
+}
