@@ -1,4 +1,4 @@
-foundation-4-spip
+Foundation-4-spip
 =================
 
 Ce plugin active différente joyeuseté pour SPIP:
@@ -13,6 +13,11 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 * Assurer la possibilité de mettre des iFrames responsive.
 
 # Version
+
+## Foundation-4-SPIP 1.2.0
+
+* Ajoute la possibilité de désactiver le fichier.
+* Mise à jour du fichier de langue.
 
 ## Foundation-4-SPIP 1.1.1
 
