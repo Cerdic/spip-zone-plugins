@@ -24,20 +24,18 @@ function responsive($matches) {
 /**
  * Récupération des fichier javascript de foundation
  */
-function foundation_get_js() {
-
-  $flux = '';
+function foundation_get_js($flux = '') {
 
   // On lit la configuration du plugin pour savoir quel version de Foundation charger.
   $config = lire_config('foundation');
 
   // On renvoie le flux head avec le squelette foundation correspondant.
   if ($config['variante'] == '3')
-    $flux = $flux.recuperer_fond('inclure/head-foundation-3');
+    $flux .= $flux.recuperer_fond('inclure/head-foundation-3');
   elseif ($config['variante'] == '4')
-    $flux = $flux.recuperer_fond('inclure/head-foundation-4');
+    $flux .= $flux.recuperer_fond('inclure/head-foundation-4');
   elseif ($config['variante'] == '5')
-    $flux = $flux.recuperer_fond('inclure/head-foundation-5');
+    $flux .= $flux.recuperer_fond('inclure/head-foundation-5');
   // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
   else
     return $flux;
@@ -51,18 +49,18 @@ function foundation_get_js() {
 /**
  * Récupération des fichier css de foundation
  */
-function foundation_get_css() {
-  $flux = '';
+function foundation_get_css($flux = '') {
+
   // On lit la configuration du plugin pour savoir quel version de Foundation charger.
   $config = lire_config('foundation');
 
   // On renvoie le flux head avec le squelette foundation correspondant.
   if ($config['variante'] == '3')
-    $flux = $flux.recuperer_fond('inclure/css/head-foundation-3');
+    $flux .= $flux.recuperer_fond('inclure/css/head-foundation-3');
   elseif ($config['variante'] == '4')
-    $flux = $flux.recuperer_fond('inclure/css/head-foundation-4');
+    $flux .= $flux.recuperer_fond('inclure/css/head-foundation-4');
   elseif ($config['variante'] == '5')
-    $flux = $flux.recuperer_fond('inclure/css/head-foundation-5');
+    $flux .= $flux.recuperer_fond('inclure/css/head-foundation-5');
   // Si foundation est désactivé, on revoie directement le flux, sans aller chercher le head-foundation.
   else
     return $flux;
