@@ -6,7 +6,9 @@
 *   Surcharge du box-sizing car il fait bugger la lightbox de spip.
 *   Ça ne résoud pas tout les problèmes sur tout les types de lightbox. Celle par défaut marche bien.
 */
-#colorbox {
+#colorbox,
+#cboxContent,
+#cboxLoadedContent {
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
