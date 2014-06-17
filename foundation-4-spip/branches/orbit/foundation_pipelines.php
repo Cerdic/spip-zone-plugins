@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 */
 function foundation_insert_head ($flux) {
   include_spip('inc/foundation');
-  return $flux.foundation_get_js();
+  return foundation_get_js($flux);
 }
 
 /*
@@ -24,7 +24,7 @@ function foundation_insert_head ($flux) {
 */
 function foundation_insert_head_css ($flux) {
   include_spip('inc/foundation');
-  return $flux.foundation_get_css();
+  return foundation_get_css($flux);
 }
 
 // TODO: Charger foundation dans l'espace priver pour pouvoir prévisualiser les modèles.
