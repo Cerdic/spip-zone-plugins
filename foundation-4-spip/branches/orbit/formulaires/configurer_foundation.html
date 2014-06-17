@@ -9,6 +9,11 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
+        <h3 class="titrem">
+            [(#CHEMIN{prive/themes/spip/images/entravaux.png}|image_reduire{24,24}|inserer_attribut{class, cadre-icone})]
+            Configuration du plugin "En travaux"
+        </h3>
+        
 		<input type="hidden" name="_meta_casier" value="foundation" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
