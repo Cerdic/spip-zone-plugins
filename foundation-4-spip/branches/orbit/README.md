@@ -18,6 +18,8 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 
 # Version
 
+## Foundation-4-SPIP 1.7
+
 ## Foundation-4-SPIP 1.6.2
 
 * On sépare CSS et JavaScript dans les pipeline idoine.
