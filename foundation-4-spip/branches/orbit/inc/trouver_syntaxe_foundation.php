@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Cette fonction va lire la configuration de foundation et determiner quel syntaxe doit être utilisé.
- * @param  int $nombre_colonnes Nombre de colonne désiré
+ * @param  int|array $nombre_colonnes Nombre de colonne désiré
  * @param  string $type            Foundation 4/5, type de colonne (large, medium, small)
  * @return string                  class foundation applicable directement.
  */
