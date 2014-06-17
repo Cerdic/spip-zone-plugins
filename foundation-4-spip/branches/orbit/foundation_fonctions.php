@@ -20,35 +20,6 @@ function filtre_iframe_responsive($texte) {
   return preg_replace_callback('/<iframe(.+)><\/iframe>/', 'responsive', $texte);
 }
 
-
-/**
- * Cette fonction va lire la configuration de foundation et determiner quel syntaxe doit être utilisé.
- * @param  int $nombre_colonnes Nombre de colonne désiré
- * @param  string $type            Foundation 4/5, type de colonne (large, medium, small)
- * @return string                  class foundation applicable directement.
- */
-function trouver_syntaxe_foundation($nombre_colonnes, $type) {
-
-  // On récupère la configuration
-  $config = lire_config('foundation');
-
-  // Version qui utilise un système large-X ou small-X. J'appel ce groupe les colnum.
-  $colnum = array(4,5);
-
-  // Les versions qui utilise des lettres => les colletr
-  $colettr = array(2,3);
-
-  // on cherche
-  // Si on est dans une vesion numérique de foundation, on retourne la syntaxe
-  if (in_array($config['variante'], $colnum))
-    return $type.'-'.$nombre_colonnes;
-  // Sinon, on démarrer le moteur de conversion de nombre, et on renvoie la bonne class
-  elseif (in_array($config['variante'], $colettr)) {
-    include_spip('inc/foundation');
-    return toWords($nombre_colonnes);
-  }
-}
-
 /*
 *   Cette balise va permettre de rendre le squelette compatible avec toutes les versions de Foundation.
 *   La syntaxe est la suivante:
@@ -65,6 +36,10 @@ function balise_COLONNES_dist($p) {
   // On met une valeur par défaut à type.
   if (!$type) $type = 'large';
 
+  // On va cherche trouver_syntaxe_foundation dans le inc
+  include_spip('inc/foundation');
+
+  // On calcule la syntaxe
   $p->code = "trouver_syntaxe_foundation($nombre_colonnes, $type).' columns'";
   $p->interdire_scripts = false;
   return $p;
