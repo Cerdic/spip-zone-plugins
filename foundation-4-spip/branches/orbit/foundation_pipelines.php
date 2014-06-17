@@ -20,8 +20,8 @@ function foundation_insert_head ($flux) {
     $config = lire_config('foundation');
 
     // On renvoie le flux head avec le squelette foundation correspondant.
-    if ($config['foundation_variante'] == '4') return $flux.recuperer_fond('inclure/head-foundation-4');
-    elseif ($config['foundation_variante'] == '3') return $flux.recuperer_fond('inclure/head-foundation-3');
+    if ($config['variante'] == '4') return $flux.recuperer_fond('inclure/head-foundation-4');
+    elseif ($config['variante'] == '3') return $flux.recuperer_fond('inclure/head-foundation-3');
     else return $flux;
 }
 
