@@ -15,6 +15,8 @@ Vous pouvez choisir entre foundation 3 et foundation 4. Ou installer une autre v
 # ToDo
 
 * Activer les JavaScript de foundation séparément plutôt que de charger l’intégralité des scripts.
+* Une balise #TABS pour gérer les Tabs de foundation [doc](http://foundation.zurb.com/docs/components/tabs.html). On pourrait même imaginer un plugin pour le porte-plume de SPIP ?
+* 
 
 # Version
 
