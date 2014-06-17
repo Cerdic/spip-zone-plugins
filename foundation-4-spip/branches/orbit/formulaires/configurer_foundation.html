@@ -12,27 +12,8 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-        [(#SAISIE{radio, variante, 
-                    label=<:foundation:version:>, 
-                    explication=<:foundation:version_explication:>,
-                    datas=#ARRAY{
-                        0, <:foundation:desactiver:>,
-                        3, <:foundation:3:>,
-                        4, <:foundation:4:>,
-                        5, <:foundation:5:>
-                    }
-        })]
+        #GENERER_SAISIES{#ENV{_form_saisies}}
 
-        [(#SAISIE{oui_non, javascript, 
-                    label=<:foundation:activer_javascript:>, 
-                    explication=<:foundation:activer_javascript_explication:>, 
-        })]
-
-        [(#SAISIE{oui_non, fichier_htc, 
-                    label=<:foundation:fichier_htc:>, 
-                    explication=<:foundation:fichier_htc_explication:>, 
-        })]
-        
         <input type="hidden" name="_meta_casier" value="foundation" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
