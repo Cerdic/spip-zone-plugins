@@ -24,8 +24,7 @@ if (!defined('_DEBUG_CRAYONS')) {
  *
  * @return bool
 **/
-function analyse_droits_rapide_dist()
-{
+function analyse_droits_rapide_dist() {
 	return isset($GLOBALS['auteur_session']['statut']);
 }
 
@@ -40,8 +39,7 @@ function analyse_droits_rapide_dist()
  * @return string
  *     Contenu du header
 **/
-function Crayons_insert_head($head)
-{
+function Crayons_insert_head($head) {
 	// verifie la presence d'une meta crayons, si c'est vide
 	// on ne cherche meme pas a traiter l'espace prive
 	$config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
@@ -79,8 +77,7 @@ function Crayons_insert_head($head)
  * @return string
  *     Contenu de la page à envoyer au navigateur
 **/
-function &Crayons_affichage_final(&$page)
-{
+function &Crayons_affichage_final(&$page) {
 
 	// ne pas se fatiguer si le visiteur n'a aucun droit
 	if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist())) {
@@ -146,8 +143,7 @@ function &Crayons_affichage_final(&$page)
  *     - head : seul le header est présent dans `$page`
  * @return
 **/
-function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'page')
-{
+function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'page') {
 	/**
 	 * Si pas forcer_lang, on charge le contrôleur dans la langue que l'utilisateur a dans le privé
 	 */
@@ -272,8 +268,7 @@ EOH;
  * @return Champ
  *   Pile complétée par le code à générer
 **/
-function balise_EDIT($p)
-{
+function balise_EDIT($p) {
 
 	// le code compile de ce qui se trouve entre les {} de la balise
 	$label = interprete_argument_balise(1, $p);
@@ -359,8 +354,7 @@ function balise_EDIT($p)
  * @return Champ
  *   Pile complétée par le code à générer
 **/
-function balise_EDIT_CONFIG_dist($p)
-{
+function balise_EDIT_CONFIG_dist($p) {
 
 	// le code compile de ce qui se trouve entre les {} de la balise
 	$config = interprete_argument_balise(1, $p);
@@ -393,8 +387,7 @@ function balise_EDIT_CONFIG_dist($p)
  * @return string
  *   HTML du crayon, sinon texte d'erreur
 **/
-function creer_le_crayon($class)
-{
+function creer_le_crayon($class) {
 	include_spip('inc/crayons');
 	include_spip('action/crayons_html');
 	$a = affiche_controleur($class, array('w' => 485, 'h' => 300, 'wh' => 500));
@@ -416,8 +409,7 @@ function creer_le_crayon($class)
  * @return Champ
  *   Pile complétée par le code à générer
 **/
-function balise_CRAYON($p)
-{
+function balise_CRAYON($p) {
 	$p = balise_EDIT($p);
 	$p->code = 'creer_le_crayon('.$p->code.')';
 	return $p;
@@ -442,8 +434,7 @@ function balise_CRAYON($p)
  * @return string
  *   Classes CSS (à ajouter dans le HTML à destination du javascript de Crayons)
 **/
-function classe_boucle_crayon($type, $champ, $id)
-{
+function classe_boucle_crayon($type, $champ, $id) {
 	// $type = objet_type($type);
 	$type = $type[strlen($type) - 1] == 's' ?
 		substr($type, 0, -1) :
