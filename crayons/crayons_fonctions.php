@@ -11,12 +11,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_DEBUG_CRAYONS')) {
-    /**
-     * Débuguer les crayons
-     *
-     * Mettre a true dans mes_options pour avoir les crayons non compresses
-     */
-    define('_DEBUG_CRAYONS', false);
+	/**
+	 * Débuguer les crayons
+	 *
+	 * Mettre a true dans mes_options pour avoir les crayons non compresses
+	 */
+	define('_DEBUG_CRAYONS', false);
 }
 
 /**
@@ -26,7 +26,7 @@ if (!defined('_DEBUG_CRAYONS')) {
 **/
 function analyse_droits_rapide_dist()
 {
-    return isset($GLOBALS['auteur_session']['statut']);
+	return isset($GLOBALS['auteur_session']['statut']);
 }
 
 /**
@@ -42,27 +42,27 @@ function analyse_droits_rapide_dist()
 **/
 function Crayons_insert_head($head)
 {
-    // verifie la presence d'une meta crayons, si c'est vide
-    // on ne cherche meme pas a traiter l'espace prive
-    $config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
-    if (empty($config_espace_prive)) {
-        return $head;
-    }
+	// verifie la presence d'une meta crayons, si c'est vide
+	// on ne cherche meme pas a traiter l'espace prive
+	$config_espace_prive = @unserialize($GLOBALS['meta']['crayons']);
+	if (empty($config_espace_prive)) {
+		return $head;
+	}
 
-    // verifie que l'edition de l'espace prive est autorisee
-    if (isset($config_espace_prive['espaceprive'])
-    and $config_espace_prive['espaceprive'] == 'on') {
-        // determine les pages (exec) crayonnables
-        if (($config_espace_prive['exec_autorise'] == '*') ||
-            in_array(_request('exec'), explode(',', $config_espace_prive['exec_autorise']))) {
-            // Calcul des droits
-            include_spip('inc/crayons');
-            $head = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
-        }
-    }
+	// verifie que l'edition de l'espace prive est autorisee
+	if (isset($config_espace_prive['espaceprive'])
+	and $config_espace_prive['espaceprive'] == 'on') {
+		// determine les pages (exec) crayonnables
+		if (($config_espace_prive['exec_autorise'] == '*') ||
+			in_array(_request('exec'), explode(',', $config_espace_prive['exec_autorise']))) {
+			// Calcul des droits
+			include_spip('inc/crayons');
+			$head = Crayons_preparer_page($head, '*', wdgcfg(), 'head');
+		}
+	}
 
-    // retourne l'entete modifiee
-    return $head;
+	// retourne l'entete modifiee
+	return $head;
 }
 
 /**
@@ -82,50 +82,50 @@ function Crayons_insert_head($head)
 function &Crayons_affichage_final(&$page)
 {
 
-    // ne pas se fatiguer si le visiteur n'a aucun droit
-    if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist())) {
-        return $page;
-    }
+	// ne pas se fatiguer si le visiteur n'a aucun droit
+	if (!(function_exists('analyse_droits_rapide')?analyse_droits_rapide():analyse_droits_rapide_dist())) {
+		return $page;
+	}
 
-    // sinon regarder rapidement si la page a des classes crayon
-    if (strpos($page, 'crayon')===false) {
-        return $page;
-    }
+	// sinon regarder rapidement si la page a des classes crayon
+	if (strpos($page, 'crayon')===false) {
+		return $page;
+	}
 
-    // voir un peu plus precisement lesquelles
-    include_spip('inc/crayons');
-    if (!preg_match_all(_PREG_CRAYON, $page, $regs, PREG_SET_ORDER)) {
-        return $page;
-    }
+	// voir un peu plus precisement lesquelles
+	include_spip('inc/crayons');
+	if (!preg_match_all(_PREG_CRAYON, $page, $regs, PREG_SET_ORDER)) {
+		return $page;
+	}
 
-    $wdgcfg = wdgcfg();
+	$wdgcfg = wdgcfg();
 
-    // calculer les droits sur ces crayons
-    include_spip('inc/autoriser');
-    $droits = array();
-    $droits_accordes = 0;
-    foreach ($regs as $reg) {
-        list(,$crayon,$type,$champ,$id) = $reg;
-        if (_DEBUG_CRAYONS) {
-            spip_log("autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))", "crayons_distant");
-        }
-        if (autoriser('modifier', $type, $id, null, array('champ'=>$champ))) {
-            if (!isset($droits['.' . $crayon])) {
-                $droits['.' . $crayon] = 0;
-            }
-            $droits['.' . $crayon]++;
-            $droits_accordes ++;
-        }
-    }
+	// calculer les droits sur ces crayons
+	include_spip('inc/autoriser');
+	$droits = array();
+	$droits_accordes = 0;
+	foreach ($regs as $reg) {
+		list(,$crayon,$type,$champ,$id) = $reg;
+		if (_DEBUG_CRAYONS) {
+			spip_log("autoriser('modifier', $type, $id, NULL, array('champ'=>$champ))", "crayons_distant");
+		}
+		if (autoriser('modifier', $type, $id, null, array('champ'=>$champ))) {
+			if (!isset($droits['.' . $crayon])) {
+				$droits['.' . $crayon] = 0;
+			}
+			$droits['.' . $crayon]++;
+			$droits_accordes ++;
+		}
+	}
 
-    // et les signaler dans la page
-    if ($droits_accordes == count($regs)) { // tous les droits
-        $page = Crayons_preparer_page($page, '*', $wdgcfg);
-    } elseif ($droits) { // seulement certains droits, preciser lesquels
-        $page = Crayons_preparer_page($page, join(',', array_keys($droits)), $wdgcfg);
-    }
+	// et les signaler dans la page
+	if ($droits_accordes == count($regs)) { // tous les droits
+		$page = Crayons_preparer_page($page, '*', $wdgcfg);
+	} elseif ($droits) { // seulement certains droits, preciser lesquels
+		$page = Crayons_preparer_page($page, join(',', array_keys($droits)), $wdgcfg);
+	}
 
-    return $page;
+	return $page;
 }
 
 /**
@@ -148,78 +148,78 @@ function &Crayons_affichage_final(&$page)
 **/
 function &Crayons_preparer_page(&$page, $droits, $wdgcfg = array(), $mode = 'page')
 {
-    /**
-     * Si pas forcer_lang, on charge le contrôleur dans la langue que l'utilisateur a dans le privé
-     */
-    if (!isset($GLOBALS['forcer_lang']) or !$GLOBALS['forcer_lang'] or ($GLOBALS['forcer_lang'] === 'non')) {
-        lang_select($GLOBALS['auteur_session']['lang']);
-    }
+	/**
+	 * Si pas forcer_lang, on charge le contrôleur dans la langue que l'utilisateur a dans le privé
+	 */
+	if (!isset($GLOBALS['forcer_lang']) or !$GLOBALS['forcer_lang'] or ($GLOBALS['forcer_lang'] === 'non')) {
+		lang_select($GLOBALS['auteur_session']['lang']);
+	}
 
-    $jsFile = generer_url_public('crayons.js');
-    if (_DEBUG_CRAYONS) {
-        $jsFile = parametre_url($jsFile, 'debug_crayons', 1, '&');
-    }
-    include_spip('inc/filtres'); // rien que pour direction_css() :(
-    $cssFile = direction_css(find_in_path('crayons.css'));
+	$jsFile = generer_url_public('crayons.js');
+	if (_DEBUG_CRAYONS) {
+		$jsFile = parametre_url($jsFile, 'debug_crayons', 1, '&');
+	}
+	include_spip('inc/filtres'); // rien que pour direction_css() :(
+	$cssFile = direction_css(find_in_path('crayons.css'));
 
-    $config = crayons_var2js(array(
-        'imgPath' => dirname(find_in_path('images/crayon.png')),
-        'droits' => $droits,
-        'dir_racine' => _DIR_RACINE,
-        'self' => self('&'),
-        'txt' => array(
-            'error' => _U('crayons:svp_copier_coller'),
-            'sauvegarder' => $wdgcfg['msgAbandon'] ? _U('crayons:sauvegarder') : ''
-        ),
-        'img' => array(
-            'searching' => array(
-                'txt' => _U('crayons:veuillez_patienter')
-            ),
-            'crayon' => array(
-                'txt' => _U('crayons:editer')
-            ),
-            'edit' => array(
-                'txt' => _U('crayons:editer_tout')
-            ),
-            'img-changed' => array(
-                'txt' => _U('crayons:deja_modifie')
-            )
-        ),
-        'cfg' => $wdgcfg
-    ));
+	$config = crayons_var2js(array(
+		'imgPath' => dirname(find_in_path('images/crayon.png')),
+		'droits' => $droits,
+		'dir_racine' => _DIR_RACINE,
+		'self' => self('&'),
+		'txt' => array(
+			'error' => _U('crayons:svp_copier_coller'),
+			'sauvegarder' => $wdgcfg['msgAbandon'] ? _U('crayons:sauvegarder') : ''
+		),
+		'img' => array(
+			'searching' => array(
+				'txt' => _U('crayons:veuillez_patienter')
+			),
+			'crayon' => array(
+				'txt' => _U('crayons:editer')
+			),
+			'edit' => array(
+				'txt' => _U('crayons:editer_tout')
+			),
+			'img-changed' => array(
+				'txt' => _U('crayons:deja_modifie')
+			)
+		),
+		'cfg' => $wdgcfg
+	));
 
 
-    // Est-ce que PortePlume est la ?
-    $meta_crayon = isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']): array();
-    $pp = '';
-    if (isset($meta_crayon['barretypo']) && $meta_crayon['barretypo']) {
-        if (function_exists('chercher_filtre')
-        and $f = chercher_filtre('info_plugin')
-        and $f('PORTE_PLUME','est_actif')) {
+	// Est-ce que PortePlume est la ?
+	$meta_crayon = isset($GLOBALS['meta']['crayons']) ? unserialize($GLOBALS['meta']['crayons']): array();
+	$pp = '';
+	if (isset($meta_crayon['barretypo']) && $meta_crayon['barretypo']) {
+		if (function_exists('chercher_filtre')
+		and $f = chercher_filtre('info_plugin')
+		and $f('PORTE_PLUME','est_actif')) {
 
-            $pp = <<<EOF
+			$pp = <<<EOF
 cQuery(function() {
-    if (typeof onAjaxLoad == 'function') {
-        function barrebouilles_crayons() {
-            $('.formulaire_crayon textarea.crayon-active')
-            .barre_outils('edition');
-        }
-        onAjaxLoad(barrebouilles_crayons);
-    }
+	if (typeof onAjaxLoad == 'function') {
+		function barrebouilles_crayons() {
+			$('.formulaire_crayon textarea.crayon-active')
+			.barre_outils('edition');
+		}
+		onAjaxLoad(barrebouilles_crayons);
+	}
 });
 EOF;
 
-        }
-    }
+		}
+	}
 
 
-    $incCSS = "<link rel=\"stylesheet\" href=\"{$cssFile}\" type=\"text/css\" media=\"all\" />";
-    $incJS = <<<EOH
+	$incCSS = "<link rel=\"stylesheet\" href=\"{$cssFile}\" type=\"text/css\" media=\"all\" />";
+	$incJS = <<<EOH
 <script type="text/javascript">/* <![CDATA[ */
 var configCrayons;
 function startCrayons() {
-    configCrayons = new cQuery.prototype.cfgCrayons({$config});
-    cQuery.fn.crayonsstart();
+	configCrayons = new cQuery.prototype.cfgCrayons({$config});
+	cQuery.fn.crayonsstart();
 {$pp}
 }
 var cr = document.createElement('script');
@@ -231,27 +231,27 @@ s.parentNode.insertBefore(cr, s);
 
 EOH;
 
-    if ($mode == 'head') {
-        return $page . $incJS . $incCSS; //js inline avant les css, sinon ca bloque le chargement
-    }
+	if ($mode == 'head') {
+		return $page . $incJS . $incCSS; //js inline avant les css, sinon ca bloque le chargement
+	}
 
-    $pos_head = strpos($page, '</head>');
-    if ($pos_head === false) {
-        return $page;
-    }
+	$pos_head = strpos($page, '</head>');
+	if ($pos_head === false) {
+		return $page;
+	}
 
-    // js inline avant la premiere css, ou sinon avant la fin du head
-    $pos_link = strpos($page, '<link ');
-    if (!$pos_link) {
-        $pos_link = $pos_head;
-    }
-    $page = substr_replace($page, $incJS, $pos_link, 0);
+	// js inline avant la premiere css, ou sinon avant la fin du head
+	$pos_link = strpos($page, '<link ');
+	if (!$pos_link) {
+		$pos_link = $pos_head;
+	}
+	$page = substr_replace($page, $incJS, $pos_link, 0);
 
-    // css avant la fin du head
-    $pos_head = strpos($page, '</head>');
-        $page = substr_replace($page, $incCSS, $pos_head, 0);
+	// css avant la fin du head
+	$pos_head = strpos($page, '</head>');
+		$page = substr_replace($page, $incCSS, $pos_head, 0);
 
-    return $page;
+	return $page;
 }
 
 /**
@@ -275,74 +275,74 @@ EOH;
 function balise_EDIT($p)
 {
 
-    // le code compile de ce qui se trouve entre les {} de la balise
-    $label = interprete_argument_balise(1, $p);
+	// le code compile de ce qui se trouve entre les {} de la balise
+	$label = interprete_argument_balise(1, $p);
 
-    // Verification si l'on est dans le cas d'une meta
-    // #EDIT{meta-descriptif_site} ou #EDIT{meta-demo/truc}
-    if (preg_match('/meta-(.*)\'/', $label, $meta)) {
-        $type = 'meta';
-        $label= 'valeur';
-        $primary = $meta[1];
-        $p->code = "classe_boucle_crayon('"
-            . $type
-            ."','"
-            .$label
-            ."',"
-            . "str_replace('/', '__', '$primary')" # chaque / doit être remplacé pour CSS.
-            .").' '";
-        $p->interdire_scripts = false;
-        return $p;
-    }
+	// Verification si l'on est dans le cas d'une meta
+	// #EDIT{meta-descriptif_site} ou #EDIT{meta-demo/truc}
+	if (preg_match('/meta-(.*)\'/', $label, $meta)) {
+		$type = 'meta';
+		$label= 'valeur';
+		$primary = $meta[1];
+		$p->code = "classe_boucle_crayon('"
+			. $type
+			."','"
+			.$label
+			."',"
+			. "str_replace('/', '__', '$primary')" # chaque / doit être remplacé pour CSS.
+			.").' '";
+		$p->interdire_scripts = false;
+		return $p;
+	}
 
-    $i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
-    // #EDIT hors boucle? ne rien faire
-    if (!isset($p->boucles[$i_boucle]) or !$type = ($p->boucles[$i_boucle]->type_requete)) {
-        $p->code = "''";
-        $p->interdire_scripts = false;
-        return $p;
-    }
+	$i_boucle = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
+	// #EDIT hors boucle? ne rien faire
+	if (!isset($p->boucles[$i_boucle]) or !$type = ($p->boucles[$i_boucle]->type_requete)) {
+		$p->code = "''";
+		$p->interdire_scripts = false;
+		return $p;
+	}
 
-    // crayon sur une base distante 'nua__article-intro-5'
-    if ($distant = $p->boucles[$i_boucle]->sql_serveur) {
-        $type = $distant.'__'.$type;
-    }
+	// crayon sur une base distante 'nua__article-intro-5'
+	if ($distant = $p->boucles[$i_boucle]->sql_serveur) {
+		$type = $distant.'__'.$type;
+	}
 
-    // le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
-    // il peut aussi arriver une table sans primary (par ex: une vue)
-    if (!($primary = $p->boucles[$i_boucle]->primary)) {
-        include_spip('inc/vieilles_defs'); # 1.9.2 pour trouver_def_table
-        if (function_exists('trouver_def_table')) {
-            list($nom, $desc) = trouver_def_table(
-                $p->boucles[$i_boucle]->type_requete,
-                $p->boucles[$i_boucle]
-            );
-            $primary = $desc['key']['PRIMARY KEY'];
-        }
-    }
-    // On rajoute ici un debug dans le cas où aucune clé primaire n'est trouvée.
-    // Cela peut se présenter par exemple si on utilise #EDIT{monchamp} directement
-    // dans une boucle CONDITION sans faire référence au nom de la boucle d'au dessus.
-    if (!$primary) {
-        erreur_squelette(_T('crayons:absence_cle_primaire'), $p);
-    }
+	// le compilateur 1.9.2 ne calcule pas primary pour les tables secondaires
+	// il peut aussi arriver une table sans primary (par ex: une vue)
+	if (!($primary = $p->boucles[$i_boucle]->primary)) {
+		include_spip('inc/vieilles_defs'); # 1.9.2 pour trouver_def_table
+		if (function_exists('trouver_def_table')) {
+			list($nom, $desc) = trouver_def_table(
+				$p->boucles[$i_boucle]->type_requete,
+				$p->boucles[$i_boucle]
+			);
+			$primary = $desc['key']['PRIMARY KEY'];
+		}
+	}
+	// On rajoute ici un debug dans le cas où aucune clé primaire n'est trouvée.
+	// Cela peut se présenter par exemple si on utilise #EDIT{monchamp} directement
+	// dans une boucle CONDITION sans faire référence au nom de la boucle d'au dessus.
+	if (!$primary) {
+		erreur_squelette(_T('crayons:absence_cle_primaire'), $p);
+	}
 
-    $primary = explode(',', $primary);
-    $id = array();
-    foreach ($primary as $key) {
-        $id[] = champ_sql(trim($key), $p);
-    }
-    $primary = implode(".'-'.", $id);
+	$primary = explode(',', $primary);
+	$id = array();
+	foreach ($primary as $key) {
+		$id[] = champ_sql(trim($key), $p);
+	}
+	$primary = implode(".'-'.", $id);
 
-    $p->code = "classe_boucle_crayon('"
-        . $type
-        ."',"
-        .sinon($label, "''")
-        .","
-        . $primary
-        .").' '";
-    $p->interdire_scripts = false;
-    return $p;
+	$p->code = "classe_boucle_crayon('"
+		. $type
+		."',"
+		.sinon($label, "''")
+		.","
+		. $primary
+		.").' '";
+	$p->interdire_scripts = false;
+	return $p;
 }
 
 /**
@@ -362,27 +362,27 @@ function balise_EDIT($p)
 function balise_EDIT_CONFIG_dist($p)
 {
 
-    // le code compile de ce qui se trouve entre les {} de la balise
-    $config = interprete_argument_balise(1, $p);
-    if (!$config) {
-        return $p;
-    }
+	// le code compile de ce qui se trouve entre les {} de la balise
+	$config = interprete_argument_balise(1, $p);
+	if (!$config) {
+		return $p;
+	}
 
-    // chaque / du nom de config doit être transformé pour css.
-    // nous utiliserons '__' à la place.
+	// chaque / du nom de config doit être transformé pour css.
+	// nous utiliserons '__' à la place.
 
-    $type = 'meta';
-    $label= 'valeur';
+	$type = 'meta';
+	$label= 'valeur';
 
-    $p->code = "classe_boucle_crayon('"
-        . $type
-        . "','"
-        . $label
-        . "',"
-        . "str_replace('/', '__', $config)"
-        . ").' '";
-    $p->interdire_scripts = false;
-    return $p;
+	$p->code = "classe_boucle_crayon('"
+		. $type
+		. "','"
+		. $label
+		. "',"
+		. "str_replace('/', '__', $config)"
+		. ").' '";
+	$p->interdire_scripts = false;
+	return $p;
 }
 
 /**
@@ -395,10 +395,10 @@ function balise_EDIT_CONFIG_dist($p)
 **/
 function creer_le_crayon($class)
 {
-    include_spip('inc/crayons');
-    include_spip('action/crayons_html');
-    $a = affiche_controleur($class, array('w' => 485, 'h' => 300, 'wh' => 500));
-    return $a['$erreur'] ? $a['$erreur'] : $a['$html'];
+	include_spip('inc/crayons');
+	include_spip('action/crayons_html');
+	$a = affiche_controleur($class, array('w' => 485, 'h' => 300, 'wh' => 500));
+	return $a['$erreur'] ? $a['$erreur'] : $a['$html'];
 }
 
 /**
@@ -418,9 +418,9 @@ function creer_le_crayon($class)
 **/
 function balise_CRAYON($p)
 {
-    $p = balise_EDIT($p);
-    $p->code = 'creer_le_crayon('.$p->code.')';
-    return $p;
+	$p = balise_EDIT($p);
+	$p->code = 'creer_le_crayon('.$p->code.')';
+	return $p;
 }
 
 
@@ -444,26 +444,26 @@ function balise_CRAYON($p)
 **/
 function classe_boucle_crayon($type, $champ, $id)
 {
-    // $type = objet_type($type);
-    $type = $type[strlen($type) - 1] == 's' ?
-        substr($type, 0, -1) :
-        str_replace(
-            array('hierarchie','syndication'),
-            array('rubrique','site'),
-            $type
-        );
+	// $type = objet_type($type);
+	$type = $type[strlen($type) - 1] == 's' ?
+		substr($type, 0, -1) :
+		str_replace(
+			array('hierarchie','syndication'),
+			array('rubrique','site'),
+			$type
+		);
 
-    $plus = (substr($champ, -1) == '+' and $champ = substr($champ, 0, -1))
-        ? " $type--$id"
-        : '';
+	$plus = (substr($champ, -1) == '+' and $champ = substr($champ, 0, -1))
+		? " $type--$id"
+		: '';
 
-    // test rapide pour verifier que l'id est valide (a-zA-Z0-9)
-    if (false !== strpos($id, ' ')) {
-        spip_log("L'identifiant ($id) ne pourra être géré ($type | $champ)", 'crayons');
-        return 'crayon_id_ingerable';
-    }
+	// test rapide pour verifier que l'id est valide (a-zA-Z0-9)
+	if (false !== strpos($id, ' ')) {
+		spip_log("L'identifiant ($id) ne pourra être géré ($type | $champ)", 'crayons');
+		return 'crayon_id_ingerable';
+	}
 
-    return 'crayon ' . $type . '-' . $champ . '-' . $id . $plus;
+	return 'crayon ' . $type . '-' . $champ . '-' . $id . $plus;
 }
 
 ?>
