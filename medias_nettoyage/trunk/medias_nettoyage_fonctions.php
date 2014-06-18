@@ -542,20 +542,26 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         }
     }
 
+    switch ($mode) {
+        case 'on':
+            $docs_fichiers_on = array_unique($docs_fichiers_on);
+            sort($docs_fichiers_on); // On trie dans l'ordre alphabétique
+            return $docs_fichiers_on;
+            break;
 
-    if ($mode == 'on') {
-        $docs_fichiers_on = array_unique($docs_fichiers_on);
-        sort($docs_fichiers_on); // On trie dans l'ordre alphabétique
-        return $docs_fichiers_on;
-    } elseif ($mode == 'off') {
-        $docs_fichiers_off = array_unique($docs_fichiers_off);
-        sort($docs_fichiers_off); // On trie dans l'ordre alphabétique
-        return $docs_fichiers_off;
-    } else {
-        $docs_fichiers = array_unique(array_merge($docs_fichiers_on, $docs_fichiers_off));
-        sort($docs_fichiers); // On trie dans l'ordre alphabétique
-        return $docs_fichiers;
+        case 'off':
+            $docs_fichiers_off = array_unique($docs_fichiers_off);
+            sort($docs_fichiers_off); // On trie dans l'ordre alphabétique
+            return $docs_fichiers_off;
+            break;
+
+        default:
+            $docs_fichiers = array_unique(array_merge($docs_fichiers_on, $docs_fichiers_off));
+            sort($docs_fichiers); // On trie dans l'ordre alphabétique
+            return $docs_fichiers;
+            break;
     }
+
 }
 
 /**
@@ -575,6 +581,162 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
 function medias_lister_logos_fichiers_taille ($mode = null)
 {
     return medias_calculer_taille_fichiers(medias_lister_logos_fichiers($mode));
+}
+
+/**
+ * Fonction qui retourne l'id_objet et l'objet à partir du nom du fichier de logo.
+ * C'est un peu le chemin inverse de quete_logo().
+ * @example
+ *         - logo_vers_objet('arton51.png')
+ *         - [(#LOGO_OBJET|basename|logo_vers_objet)]
+ * @param  string $fichier
+ *         Nom du fichier du logo sans chemin.
+ * @return mixed
+ *         - void : s'il n'y a pas de fichier, on ne renvoie rien
+ *         - string : si $info == objet
+ *         - integer : si $info == id_objet
+ *         - array : si $info == null
+ */
+function logo_vers_objet ($fichier = null, $info = null)
+{
+    $logo_type_raccourcis = array(
+        'art' => 'article',
+        'rub' => 'rubrique',
+        'aut' => 'auteur',
+        'groupe' => 'groupe'
+    );
+    global $formats_logos;
+
+    if (is_null($fichier)) {
+        return;
+    }
+
+    if (preg_match("/(\w+)(on|off)(\d+).(" . join("|", $formats_logos) . ")$/", $fichier, $res)) {
+        $id_objet = $res[3];
+        if (array_key_exists($res[1], $logo_type_raccourcis)) {
+            $objet = $logo_type_raccourcis[$res[1]];
+        } else {
+            $objet = $res[1];
+        }
+
+        switch ($info) {
+            case 'objet':
+                return $objet;
+                break;
+
+            case 'id_objet':
+                return $id_objet;
+                break;
+
+            default:
+                return array('objet' => $objet, 'id_objet' => $id_objet);
+                break;
+        }
+
+    } else {
+        return;
+    }
+}
+/**
+ * Retourne le lien `<a>` vers l'objet, avec le titre.
+ * Fonction basée sur `lien_objet` du plugin médiathèque,
+ * remodelée pour prendre la particularité des logos.
+ *
+ * @param  null|string  $fichier
+ * @param  integer $longueur
+ * @param  null|string  $connect
+ * @return string
+ */
+function logo_generer_url_ecrire_objet_titre ($fichier = null, $longueur = 80, $connect = null)
+{
+    if (is_null($fichier)) {
+        return;
+    }
+    $version_spip = intval(spip_version());
+
+    include_spip('inc/liens');
+    $info_objet = logo_vers_objet($fichier);
+    $type = $info_objet['objet'];
+    $id = $info_objet['id_objet'];
+
+    // Si l'id_objet == 0, on est dans un cas particulier.
+    // Nativement, on regarde si objet est une rubrique ou un site.
+    // Si c'est une rubrique, on est sur le logo standard des rubriques
+    // Si c'est un site, on est sur le logo du site SPIP.
+    if ($id == 0) {
+        switch ($type) {
+            case 'rubrique':
+                $exec = ($version_spip == 2) ? 'naviguer' : 'rubriques';
+                $url = generer_url_ecrire($exec);
+                $titre = _T('ecrire:logo_standard_rubrique');
+                break;
+            case 'site':
+                $exec = ($version_spip == 2) ? 'configuration' : 'configurer_identite';
+                $url = generer_url_ecrire($exec);
+                $type = 'site_spip';
+                $titre = _T('ecrire:logo_site');
+                break;
+        }
+    } else {
+        $titre = traiter_raccourci_titre($id, $type, $connect);
+        $titre = typo($titre['titre']);
+        if (!strlen($titre)) {
+            $titre = _T('info_sans_titre');
+        }
+        $url = generer_url_entite($id, $type);
+    }
+
+    return "<a href='$url' class='$type'>" . couper($titre, $longueur) . "</a>";
+}
+
+/**
+ * Générer l'url de vue d'un objet à partir de son fichier de logo
+ *
+ * @param  string $fichier
+ *         Nom du fichier du logo sans chemin.
+ * @return string
+ */
+function logo_generer_url_ecrire_objet ($fichier = null)
+{
+    if (is_null($fichier)) {
+        return;
+    }
+    $version_spip = intval(spip_version());
+
+    if ($version_spip == 2) {
+        include_spip('base/connect_sql');
+    } elseif ($version_spip == 3) {
+        include_spip('base/objets');
+    }
+
+    include_spip('inc/urls');
+
+    $info_objet = logo_vers_objet($fichier);
+
+    // Si l'id_objet == 0, on est dans un cas particulier.
+    // Nativement, on regarde si objet est une rubrique ou un site.
+    // Si c'est une rubrique, on est sur le logo standard des rubriques
+    // Si c'est un site, on est sur le logo du site SPIP.
+    if ($info_objet['id_objet'] == 0) {
+        switch ($info_objet['objet']) {
+            case 'rubrique':
+                $exec = ($version_spip == 2) ? 'naviguer' : 'rubriques';
+                return generer_url_ecrire($exec);
+                break;
+            case 'site':
+                $exec = ($version_spip == 2) ? 'configuration' : 'configurer_identite';
+                return generer_url_ecrire($exec);
+                break;
+        }
+    } else {
+        return generer_url_ecrire(
+            $info_objet['objet'],
+            id_table_objet($info_objet['objet'])
+            . '='
+            . intval($info_objet['id_objet'])
+        );
+    }
+
 }
 
 /**
