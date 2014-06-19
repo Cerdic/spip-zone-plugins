@@ -343,11 +343,11 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	// afficher_si = afficher option si un bloc de la class valeur de fx existe
+	// afficher_si = afficher option si un bloc de la class = valeur de fx existe
 	$('.option').css({display:'none'});
-	$( "#fx" ).change(function () {
+	$('#fx').change(function () {
 		var option = "";
-		$( "#fx option:selected" ).each(function() {
+		$('#fx option:selected').each(function() {
 			option += $( this ).val();
 		});
 		$('.option').hide().siblings('.'+option).show(300);
