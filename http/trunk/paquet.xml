@@ -1,17 +1,18 @@
 <paquet
 	prefix="http"
 	categorie="outil"
-	version="1.2.0"
+	version="1.2.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="http.png"
+	documentation="http://contrib.spip.net/Serveur-HTTP-abstrait"
 >
 	<nom>Serveur HTTP abstrait</nom>
-	
+
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<credit lien="http://symfony.com/fr/doc/current/components/http_foundation/introduction.html">Symfony pour HTTPFoundation</credit>
 	<copyright>2013</copyright>
 	<licence>GPL v3</licence>
-	
+
 	<pipeline nom="autoriser" inclure="http_autorisations.php" />
 </paquet>

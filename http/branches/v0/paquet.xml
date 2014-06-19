@@ -1,10 +1,11 @@
 <paquet
 	prefix="http"
 	categorie="outil"
-	version="0.1.0"
+	version="0.1.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="http.png"
+	documentation="http://contrib.spip.net/Serveur-HTTP-abstrait"
 >
 	<nom>Serveur HTTP abstrait</nom>
 	
