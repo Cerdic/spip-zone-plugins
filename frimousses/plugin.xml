@@ -2,13 +2,13 @@
 	<nom>Frimousses</nom>
 	<slogan>Mettre des smileys dans le texte</slogan>
 	<auteur>Pierre Andrews (Mortimer), Bionet</auteur>
-	<version>1.2.3</version>
+	<version>1.2.4</version>
 	<icon>frimousse-logo-32.png</icon>
 	<etat>stable</etat>
 	<description>
 	Remplace les codes ASCII pour les frimousses par des petites images.
 	</description>
-	<lien></lien>
+	<lien>http://contrib.spip.net/Smileys-III-Un-point-d-entree-pour</lien>
 	<prefix>frimousses</prefix>
 	<fonctions>frimousses_fonctions.php</fonctions>
 	<pipeline><nom>pre_propre</nom></pipeline>
