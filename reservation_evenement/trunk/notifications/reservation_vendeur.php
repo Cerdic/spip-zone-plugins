@@ -17,8 +17,17 @@ function notifications_reservation_vendeur_dist($quoi,$id_reservation, $options)
     while($data=sql_fetch($sql)){
         $email[]=$data['email'];        
         }
+
+    $subject=_T('reservation:une_reservation_sur',array('nom'=>$GLOBALS['meta']['nom_site']));   
+
+    /*Chercher des chaines de langues spécifiques pour les différents statuts*/	
+    $lang=$options['lang'];
+
+    $var_reservation = 'i18n_reservation_'.$lang;
+    $chaine_statut='sujet_une_reservation_'.$options['statut'];
+
+    if(isset($GLOBALS[$var_reservation][$chaine_statut]))$subject=_T('reservation:'.$chaine_statut,array('nom'=>$GLOBALS['meta']['nom_site']));  
     
-    $subject=_T('reservation:une_reservation_sur',array('nom'=>$GLOBALS['meta']['nom_site']));
 
     $message=recuperer_fond('notifications/contenu_reservation_mail',$options);
      
