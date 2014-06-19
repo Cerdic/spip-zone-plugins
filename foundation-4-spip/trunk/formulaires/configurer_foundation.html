@@ -10,9 +10,9 @@
 
 	<form method="post" action="#ENV{action}">
 	<div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+	  #ACTION_FORMULAIRE{#ENV{action}}
 
-        #GENERER_SAISIES{#ENV{_form_saisies}}
+        #GENERER_SAISIES{#ENV{_saisies}}
 
         <input type="hidden" name="_meta_casier" value="foundation" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
