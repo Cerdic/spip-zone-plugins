@@ -6,9 +6,9 @@
 		</multi>
 	</nom>
 	<auteur>BoOz</auteur>
-	<version>0.1</version>
-	<version_base>0.1</version_base>
-	<etat>dev</etat>
+	<version>1.0.0</version>
+	<version_base>0.1.0</version_base>
+	<etat>stable</etat>
 	<prefix>sm</prefix>
 	<icon>skins/soundmanager.png</icon>
 	<description>
@@ -31,4 +31,5 @@
 		<inclure>sm_pipelines.php</inclure>
 	</pipeline>
 	<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>
