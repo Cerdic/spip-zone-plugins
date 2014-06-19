@@ -19,4 +19,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'fichier_htc_explication' => '<strong>Exprimental:</strong> Ce fichier peu améliorer la gestion de foundation sous IE7. Il faudra activer les fichier .htc dans le fichier .htaccess en ajoutant "AddType text/x-component .htc".',
     'version' => 'Version de foundation',
     'version_explication' => 'Choisir la version de foundation à utiliser dans l\'espace public.',
+    'icons' => 'Utiliser les icones foundation ?',
+    'icons_explication' => 'Ajouter les CSS pour les <a href="http://zurb.com/playground/foundation-icon-fonts-3" title="foundation icon">icones foundation</a>.'
 );

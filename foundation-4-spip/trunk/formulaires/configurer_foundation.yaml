@@ -21,3 +21,9 @@
     nom: fichier_htc
     label: <:foundation:fichier_htc:>
     explication: <:foundation:fichier_htc_explication:>
+-
+  saisie: oui_non
+  options:
+    nom: foundation-icons
+    label: <:foundation:icons:>
+    explication: <:foundation:icons_explication:>
