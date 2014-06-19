@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effets' => 'Efeutos',
 	'explication_exec_autorise' => 'Páxines que se permite camudar
   (?exec=...) : (, pa xebrar los exec).', # MODIF
-	'explication_introduction_article' => 'La introducción d’un artículu amuesa la descripción del artículu, sinón amuesa los sos primeros 600 caráuteres (la entrada siguía pol testu).',
+	'explication_introduction_article' => 'La introducción d’un artículu amuesa la descripción del artículu, sinón amuesa los sos primeros 600 caráuteres (la entrada siguía pol testu).', # MODIF
 	'explication_reduire_logo' => 'Amenorgar el logo si pasa del
   tamañu máximu indicáu en pixels. Exemplu: 100. (0 = enxamás)', # MODIF
 

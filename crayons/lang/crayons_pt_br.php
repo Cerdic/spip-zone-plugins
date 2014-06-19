@@ -19,9 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_@type@_@id@' => 'Editar @type@ @id@ completamente',
 	'editer_tout' => 'Editar tudo',
 	'explication_exec_autorise' => 'Pages autorisées à la modification
-		(?exec=...) : (, pour séparer les exec).',
+		(?exec=...) : (, pour séparer les exec).', # MODIF
 	'explication_reduire_logo' => 'Réduire le logo s’il dépasse
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)',
+		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # MODIF
 
 	// M
 	'modifie_par_ailleurs' => 'Alterado em outro lugar',

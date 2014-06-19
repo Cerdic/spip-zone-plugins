@@ -24,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Éditer tout',
 	'effets' => 'Effets',
 	'explication_exec_autorise' => 'Pages autorisées à la modification
-  (?exec=...) : (, pour séparer les exec - * pour toutes).',
-	'explication_introduction_article' => 'L’introduction d’un article affiche le descriptif de l’article, sinon affiche ses 600 premiers caractères (chapeau puis texte).',
-	'explication_reduire_logo' => 'Réduire le logo s’il dépasse la taille maximale indiquée en pixels. Exemple : 100. (0 = jamais)',
+  (?exec=...) : (, pour séparer les exec - * pour toutes).', # MODIF
+	'explication_introduction_article' => 'L’introduction d’un article affiche le descriptif de l’article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # MODIF
+	'explication_reduire_logo' => 'Réduire le logo s’il dépasse la taille maximale indiquée en pixels. Exemple : 100. (0 = jamais)', # MODIF
 
 	// I
 	'info_experimental' => 'Expérimental',

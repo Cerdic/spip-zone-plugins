@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Editar todo',
 	'effets' => 'Efectos',
 	'explication_exec_autorise' => 'Páginas cuya modificación es permitida
-  (?exec=...): (, para separar los exec - * para todas).',
-	'explication_introduction_article' => 'La introducción de un artículo enseña la descripción del artículo, o los primeros 600 carácteres (epígrafe y luego texto).',
+  (?exec=...): (, para separar los exec - * para todas).', # MODIF
+	'explication_introduction_article' => 'La introducción de un artículo enseña la descripción del artículo, o los primeros 600 carácteres (epígrafe y luego texto).', # MODIF
 	'explication_reduire_logo' => 'Reducir el logotipo si va mas allá
-  del tamaño indicado en píxeles. Ejemplo: 100. (0 = nunca)',
+  del tamaño indicado en píxeles. Ejemplo: 100. (0 = nunca)', # MODIF
 
 	// I
 	'info_experimental' => 'Experimental',

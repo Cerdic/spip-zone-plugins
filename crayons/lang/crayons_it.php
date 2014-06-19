@@ -24,8 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Modifica tutto',
 	'effets' => 'Effetti',
 	'explication_exec_autorise' => 'Pagine autorizzate per la modifica
-  (?exec=...) : (, per separare gli exec - * per tutti).',
-	'explication_introduction_article' => 'L’introduzione di un articolo mostra la descrizione di un articolo, altrimenti mostra i suoi primi 600 caratteri (cappello più testo)',
+  (?exec=...) : (, per separare gli exec - * per tutti).', # MODIF
+	'explication_introduction_article' => 'L’introduzione di un articolo mostra la descrizione di un articolo, altrimenti mostra i suoi primi 600 caratteri (cappello più testo)', # MODIF
 	'explication_reduire_logo' => 'Riduci il logo se supera
   la dimensione massima indicata in pixel. Esempio: 100. (0 = mai)', # MODIF
 

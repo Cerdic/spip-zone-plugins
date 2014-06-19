@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Alles bearbeiten',
 	'effets' => 'Effekte',
 	'explication_exec_autorise' => 'Zur Bearbeitung zugelassene Seiten
-  (?exec=...) : (exec-Skripte mit Komma trennen).',
-	'explication_introduction_article' => 'Die Einleitung eines Artikels zeigt das Feld "Beschreibung" an. Sollte es leer sein, werden die ersten  600 Zeichen des Artikels aus den Feldern "Kopf" und "Text" angezeigt.',
+  (?exec=...) : (exec-Skripte mit Komma trennen).', # MODIF
+	'explication_introduction_article' => 'Die Einleitung eines Artikels zeigt das Feld "Beschreibung" an. Sollte es leer sein, werden die ersten  600 Zeichen des Artikels aus den Feldern "Kopf" und "Text" angezeigt.', # MODIF
 	'explication_reduire_logo' => 'Logo verkleinern wenn es größer als x Pixel ist.
-Beispiel: 100. (0 = niemals)',
+Beispiel: 100. (0 = niemals)', # MODIF
 
 	// I
 	'info_experimental' => 'Expérimentell',
