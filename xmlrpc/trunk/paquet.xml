@@ -1,10 +1,11 @@
 <paquet
 	prefix="xmlrpc"
 	categorie="outil"
-	version="0.4.2"
+	version="0.4.3"
 	etat="test"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="images/xmlrpc.png"
+	documentation="http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/xmlrpc-une-api-xml-rpc-pour-spip/"
 >
 
 	<nom>
