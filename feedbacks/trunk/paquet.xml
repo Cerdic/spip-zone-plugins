@@ -1,12 +1,13 @@
 <paquet
 	prefix="feedback"
 	categorie="communication"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/feedback-32.png"
 	schema="1.0.0"
->	
+	documentation="http://contrib.spip.net/Feedback-1665"
+>
 
 	<nom>Feedback</nom>
 	<!-- Gestion des feedback dans SPIP -->
