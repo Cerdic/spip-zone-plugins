@@ -34,8 +34,16 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
     if (in_array($config['variante'], $colnum))
       return $type.'-'.$nombre_colonnes;
     // Sinon, on démarrer le moteur de conversion de nombre, et on renvoie la bonne class
-    elseif (in_array($config['variante'], $colettr))
-      return toWords($nombre_colonnes);
+    elseif (in_array($config['variante'], $colettr)) {
+
+        // Dans le cas ou un tableau est passé, c'est la colonne la plus large du tableau qui sera utilisée
+        if (is_array($nombre_colonnes)) {
+           $nombre_colonnes = array_keys($nombre_colonnes);
+           return toWords(max($nombre_colonnes));
+        }
+        else
+            return toWords($nombre_colonnes);
+    }
   }
 }
 
