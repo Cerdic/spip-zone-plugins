@@ -25,7 +25,7 @@ cf http://www.spip.net/fr_article3454.html et /squelettes-dist/modeles/article_m
 [(#SET{pager,		[(#ENV{pager,		#CONFIG{sjcycle/pager}})]})]
 [(#SET{caption,		[(#ENV{caption,		#CONFIG{sjcycle/caption}})]})]
 [(#SET{captiontemplate,	[(#ENV{captiontemplate,	#CONFIG{sjcycle/captiontemplate}})]})]
-[(#SET{overlay,			[(#ENV{overlay,			#CONFIG{sjcycle/overlay}})]})]
+[(#SET{overlay,		[(#ENV{overlay,		#CONFIG{sjcycle/overlay}})]})]
 [(#SET{overlaytemplate,	[(#ENV{overlaytemplate,	#CONFIG{sjcycle/overlaytemplate}})]})]
 [(#SET{pauseonhovercontent,	[(#ENV{pauseonhovercontent,	#CONFIG{sjcycle/pauseonhovercontent}})]})]
 [(#SET{carouselvisible,		[(#ENV{carouselvisible,		#CONFIG{sjcycle/carouselvisible}})]})]
@@ -34,6 +34,8 @@ cf http://www.spip.net/fr_article3454.html et /squelettes-dist/modeles/article_m
 [(#SET{carouselvertical,	[(#ENV{carouselvertical,	#CONFIG{sjcycle/carouselvertical}})]})]
 [(#SET{carouselfluid,		[(#ENV{carouselfluid,		#CONFIG{sjcycle/carouselfluid}})]})]
 [(#SET{mediabox,		[(#ENV{mediabox,		#CONFIG{sjcycle/mediabox}})]})]
+[(#SET{tooltip,			[(#ENV{tooltip,			#CONFIG{sjcycle/tooltip}})]})]
+[(#SET{tooltip_carac,		[(#ENV{tooltip_carac,		#CONFIG{sjcycle/tooltip_carac}})]})]
 
 [(#SET{liens_individuels,	[(#ENV{liens_individuels,	0})]})]
 
@@ -85,11 +87,12 @@ $(document).ready(function() {
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 
 #SET{slidebalise,img}
+[(#REM) tooltip en premier car valeur ecrasee par les suivants ]
+[(#GET{tooltip}|=={oui}|oui) #SET{slidebalise,div}]
 [(#GET{liens_individuels}|oui) #SET{slidebalise,a}]
 [(#GET{mediabox}|=={oui}|oui) #SET{slidebalise,a}]
 [(#GET{id_article_a_lier}|oui) #SET{slidebalise,a}]
 [(#ENV{lien_parent}|oui) #SET{slidebalise,a}]
-[(#CONFIG{sjcycle/tooltip}|=={oui}|oui|ou{#GET{liens_individuels}|non}) #SET{slidespan,div}]
 
 <div class="cycle-slideshow"[ style="(#GET{style})"][
 	data-cycle-slides="(#GET{slidebalise})"][ 
@@ -116,7 +119,7 @@ $(document).ready(function() {
 	data-cycle-caption-template="(#GET{captiontemplate})"][
 	data-cycle-overlay="(#GET{overlay})"][
 	data-cycle-overlay-template="(#GET{overlaytemplate})"][
-	data-cycle-auto-height="(#GET{autoheight})"]]]
+	data-cycle-auto-height="(#GET{autoheight})"]
 	>[(#GET{prev}|=={.cycle-prev}|oui)
 	<div class="cycle-prev"></div>][(#GET{next}|=={.cycle-next}|oui)
 	<div class="cycle-next"></div>][(#GET{pager}|=={.cycle-pager}|oui)
@@ -128,10 +131,10 @@ $(document).ready(function() {
          
 		[(#REM) Doit-on afficher les infobulles ET y a t'il quelque chose a afficher ?]
 		#SET{afficher_infobulle,non}
-		[(#CONFIG{sjcycle/tooltip}|=={oui}|oui)
-			[(#SET{texte_infobulle,[<h4>(#TITRE|supprimer_numero)</h4>][(#DESCRIPTIF)<br />]})]
-			[(#CONFIG{sjcycle/tooltip_carac}|=={oui}|oui)
-				[(#SET{texte_infobulle,[(#GET{texte_infobulle}|concat{<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels, [(#TAILLE|taille_en_octets)]})]})]
+		[(#GET{tooltip}|=={oui}|oui)
+			[(#SET{texte_infobulle,[<h4>(#TITRE)</h4>][(#DESCRIPTIF)<br />]})]
+			[(#GET{tooltip_carac}|=={oui}|oui)
+				[(#SET{texte_infobulle,[(#GET{texte_infobulle}|concat{<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels[ - (#TAILLE|taille_en_octets)]})]})]
 			]
 			[(#SET{texte_infobulle,[(#GET{texte_infobulle}|trim)]})]
 			[(#GET{texte_infobulle}|strlen|!={0}|oui) #SET{afficher_infobulle,oui}]
@@ -149,26 +152,26 @@ $(document).ready(function() {
 		<a href="[(#DESCRIPTIF|supprimer_tags)]" data-cycle-title="#TITRE">
 		#SET{fermer_a,oui}]
 		[(#GET{id_article_a_lier}|oui)
-		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" data-cycle-title="#GET{titre_article_a_lier}" data-cycle-desc="#DESCRIPTIF">
+		<a href="#URL_ARTICLE{#GET{id_article_a_lier}}" data-cycle-title="#GET{titre_article_a_lier}" data-cycle-desc="[(#DESCRIPTIF|textebrut)]">
 		#SET{fermer_a,oui}]
 		[(#GET{fermer_a}|=={oui}|non|et{#GET{mediabox}|=={oui}|oui})
 		<a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
 						class="#GET{cssbox}"
 						rel="#GET{cssbox}"
-						[(#CONFIG{sjcycle/tooltip}|=={oui}|non) title="[(#TITRE|supprimer_numero|attribut_html)]"]
+						[(#CONFIG{sjcycle/tooltip}|=={oui}|non) title="[(#TITRE|attribut_html)]"]
 						style="display:block;padding:0px;margin:0px;"
-						data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF">
+						data-cycle-title="#TITRE" data-cycle-desc="[(#DESCRIPTIF|textebrut)]">
 		#SET{fermer_a,oui}]
 	
-		[(#GET{afficher_infobulle}|=={oui}|oui)
+		[(#GET{tooltip}|=={oui}|oui)
 		<div class="infobulle">
 		]
 			<img class="no_image_filtrer" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] 
-				 data-cycle-title="#TITRE" data-cycle-desc="#DESCRIPTIF"
+				 data-cycle-title="#TITRE" data-cycle-desc="[(#DESCRIPTIF|textebrut)]"
 			/>
 		
-		[(#GET{afficher_infobulle}|=={oui}|oui)
-		<div class="textinfobulle" style="display:none;">#GET{texte_infobulle}</div>
+		[(#GET{tooltip}|=={oui}|oui)
+		<span class="textinfobulle" style="display:none;">#GET{texte_infobulle}</span>
 		</div> <!-- .infobulle -->
 		]
 		[(#GET{fermer_a}|=={oui}|oui)</a>]
@@ -177,6 +180,6 @@ $(document).ready(function() {
 	[(#GET{overlay}|=={.cycle-overlay}|oui)
 	<div class="cycle-overlay"></div>]
 
-</div>
+</div><!-- .cycle-slideshow -->
 
 </B_img>
