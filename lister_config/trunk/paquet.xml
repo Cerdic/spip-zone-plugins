@@ -1,11 +1,11 @@
 <paquet
 	prefix="lister_config"
 	categorie="outil"
-	version="0.11.2"
-	etat="test"
+	version="0.11.3"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/lister_config-32.png"
-	documentation=""
+	documentation="http://contrib.spip.net/Lister-les-pages-de-configuration"
 	>
 
 	<nom>Lister les formulaires de configuration</nom>
