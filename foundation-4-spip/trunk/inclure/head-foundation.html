@@ -4,6 +4,12 @@
     sinon on ne peux pas intervenir sur les styles de base de foundation.
 ]
 
+[(#REM) Ajouter les icone foundation si besoin ]
+[(#CONFIG{foundation/foundation-icons}|oui)
+[<link href="(#CHEMIN{lib/foundation-icons/foundation-icons.css}|direction_css)" rel="stylesheet"/>]
+]
+
+
 [(#REM)
     Foundation utilise un propriété (border-box) qui n'est pas prise en charge nativement par IE.
     On ajoute un fix pour rendre cela compatible.
