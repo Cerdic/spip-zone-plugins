@@ -40,7 +40,7 @@ function formulaires_configurer_sjcycle_charger(){
 		'pauseonhovercontent' => '',
 		'random' => '',
 		'next' => '',
-		'perv' => '',
+		'prev' => '',
 		'allowwrap' => '',
 		'paused' => '',
 		'pager' => '',
