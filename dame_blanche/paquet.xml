@@ -1,10 +1,10 @@
 <paquet
     prefix="dame"
     categorie="outil"
-    version="0.1.0"
+    version="0.2.0"
     etat="test"
     compatibilite="[3.0.0;3.0.*]"
-    logo=""
+    logo="imgs/tyto_alba.png"
     >
     <nom>Raccourci~‹dame› blanche</nom>
     <!-- Gérer des dames blanches dans textwheel <dame></dame> -->
