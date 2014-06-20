@@ -1,0 +1,39 @@
+.spip_dame {
+	display: block;
+	margin: 2.5em 10%;
+	padding: 0;
+	font-size: 1.3em;
+	line-height: 140%;
+	-moz-hyphens: none;
+	-webkit-hyphens: none;
+	hyphens: none;
+	text-align: center;
+	position: relative;
+	font-style: normal;
+}
+.spip_dame p {
+	margin: 0;
+	padding: 0;
+	top: 0;
+}
+.spip_dame p+p {
+	margin-top: 0.5em;
+}
+.spip_dame:before {
+	content: "“";
+	top: -0.09em;
+}
+.spip_dame:after {
+	content: "”";
+	bottom: -0.65em;
+}
+.spip_dame:after, .spip_dame:before {
+	position: absolute;
+	display: block;
+	font-size: 4em;
+	width: 100%;
+	text-align: center;
+	opacity: 0.3;
+	line-height: 0.25em;
+
+}

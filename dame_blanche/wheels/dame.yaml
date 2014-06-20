@@ -1,0 +1,8 @@
+--- # callback pour <dame> !spip.yaml
+
+dame:
+  # raccourci <quote>
+  match: ['<dame>', '</dame>']
+  replace: ['<aside class="spip_dame"><p>', '</aside><p>']
+  if_str: '<dame>'
+  type: str

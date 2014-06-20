@@ -1,0 +1,20 @@
+<paquet
+    prefix="dame"
+    categorie="outil"
+    version="0.1.0"
+    etat="test"
+    compatibilite="[3.0.0;3.0.*]"
+    logo=""
+    >
+    <nom>Raccourci~‹dame› blanche</nom>
+    <!-- Gérer des dames blanches dans textwheel <dame></dame> -->
+     
+    <auteur>ARNO*</auteur>     
+    <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+    <copyright>2014</copyright>
+
+    <pipeline nom="insert_head" action="inserer_entete" inclure="dame_pipelines.php" />          
+    <pipeline nom="header_prive" action="inserer_entete" inclure="dame_pipelines.php" />          
+    <pipeline nom="pre_propre" inclure="dame_pipelines.php" />
+
+</paquet>
