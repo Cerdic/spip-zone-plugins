@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Variantes Articles</nom>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<prefix>variantesarticles</prefix>
 	<etat>dev</etat>
 	<auteur>Beurt</auteur>
@@ -13,7 +13,6 @@
 
 		Ce plug-in est sous licence GNU/GPL v3
 	</description>
-	<lien>http://contrib.spip.net/Variantes-d-Articles</lien>
 	<options>
 		variantesarticles_options.php
 	</options>

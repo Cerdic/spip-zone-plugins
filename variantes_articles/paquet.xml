@@ -1,11 +1,10 @@
 <paquet
 	prefix="variantesarticles"
 	categorie="navigation"
-	version="1.0.2"
+	version="1.0.3"
 	etat="dev"
 	compatibilite="[2.1.13;3.0.*]"
 	logo=""
-	documentation="http://contrib.spip.net/Variantes-d-Articles"
 >
 	<!--
 		Paquet généré le 2013-03-27 13:55:54
