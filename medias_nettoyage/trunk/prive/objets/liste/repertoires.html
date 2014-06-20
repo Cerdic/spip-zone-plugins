@@ -1,7 +1,10 @@
+[(#SET{spip_version,[(#SPIP_VERSION|intval)]})]
+
 <B_repertoires>
+[(#ANCRE_PAGINATION)]
 <div class="galerie medias repertoires">
 	[<h3>(#ENV{titre})</h3>]
-	[<div class="pagination">(#PAGINATION{#ENV{pagination,prive}})</div>]
+
 	<table class="spip liste">
 		[<caption>(#GRAND_TOTAL|singulier_ou_pluriel{medias_nettoyage:un_repertoire,medias_nettoyage:des_repertoires})</caption>]
 		<thead>

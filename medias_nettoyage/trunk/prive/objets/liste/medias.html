@@ -1,7 +1,10 @@
+[(#SET{spip_version,[(#SPIP_VERSION|intval)]})]
+
 <B_liste_medias>
 [(#ANCRE_PAGINATION)]
 <div class="galerie medias">
     [<h3>(#ENV{titre})</h3>]
+
     <table class="spip liste">
         [<caption>(#GRAND_TOTAL|singulier_ou_pluriel{medias_nettoyage:un_document,medias_nettoyage:des_documents})</caption>]
         <thead>
@@ -44,7 +47,8 @@
                 [(#ENV{logos}|=={'oui'}|non)
                 <td class="action secondaire">
                 [(#AUTORISER{supprimer,medias_orphelins}|oui)
-                    [(#URL_ACTION_AUTEUR{supprimer_orphelins,#VALEUR,#SELF|parametre_url{'var_mode','recalcul'}}|icone_horizontale{<:medias_nettoyage:supprimer:>,'',del})]
+                [(#SET{url,[(#URL_ACTION_AUTEUR{supprimer_orphelins,#VALEUR,#SELF|parametre_url{'var_mode','recalcul'}})]})]
+                    [(#INCLURE{fond=prive/squelettes/inclure/btn_spip#GET{spip_version}_supprimer}{url=#GET{url}})]
                 ]
                 </td>
                 ]

@@ -94,7 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_tableau_documents_repertoire_orphelins' => 'Contenu dans IMG/orphelins',
 
     // U
-    'un_document' => '@nb@ document',
-    'un_repertoire' => '@nb@ répertoire',
+    'un_document' => 'Un document',
+    'un_repertoire' => 'Un répertoire',
 );
 ?>
