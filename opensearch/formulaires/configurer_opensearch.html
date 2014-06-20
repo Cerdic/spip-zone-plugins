@@ -3,21 +3,30 @@
 <!-- nom=opensearch -->
 
 <div class="formulaire_spip formulaire_editer formulaire_cfg">
-
 	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
 	[<p class="formulaire_message">(#ENV*{message_ok})</p>]
-	
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			[(#SAISIE{input,page_recherche,
-				defaut=recherche,
-				label=<:opensearch:cfg_lbl_page_recherche:>,
-				explication=<:opensearch:cfg_inf_page_recherche:>})]	
-			[(#SAISIE{secteur,id_rubrique,
-				option_intro=<:opensearch:cfg_option_tout:>,
-				label=<:opensearch:cfg_lbl_id_rubrique:>,
-				explication=<:opensearch:cfg_inf_id_rubrique:>})]	
+			#SET{name,page_recherche}#SET{obli,''}[(#SET{defaut,rechecher})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{page_recherche}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:opensearch:cfg_lbl_page_recherche:></label>
+				<p class="explication"><:opensearch:cfg_inf_page_recherche:></p>[
+				<span class="erreur_message">(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" />
+			</li>
+			#SET{name,id_rubrique}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{id_rubrique}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:opensearch:cfg_lbl_id_rubrique:></label>
+				<p class="explication"><:opensearch:cfg_inf_id_rubrique:></p>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<select class="select" name="#GET{name}" id="#GET{name}">
+					<option value=""><:opensearch:cfg_option_tout:></option>
+					<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>
+					<option value="#ID_RUBRIQUE"[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|oui) selected="selected"]>#TITRE</option>
+					</BOUCLE_secteurs>
+				</select>
+			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />

@@ -1,7 +1,7 @@
 <paquet
 	prefix="opensearch"
 	categorie="navigation"
-	version="0.2.0"
+	version="0.2.1"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/opensearch-64.png"
@@ -17,5 +17,4 @@
 
 	<pipeline nom="insert_head" inclure="opensearch_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.1;[" />
 </paquet>
