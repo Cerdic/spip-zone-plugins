@@ -42,8 +42,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_depuis' => 'Soit une année (par exemple : <em>2009</em>), soit une durée en année suivie du mot français <em>ans</em> (par exemple : <em>3ans</em>) ou du mot anglais <em>years</em> (par exemple : <em>3years</em>).',
 	'explication_flux_rss' => 'Accessible à l’adresse <em>spip.php ?page=biblio-rss</em>, ce flux RSS présente les 50 derniers ajouts à la base bibliographique.',
 	'explication_id_librairie' => 'Pour une librairie personnelle, le <em>userID</em> est indiqué sur la <a href="https://www.zotero.org/settings/keys">page Zotero de gestion des clés personnelles</a>. Pour un groupe, le <em>groupID</em> se trouve dans l’URL de configuration du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;groupID&gt;/settings</em>.',
-	'explication_maj_zotspip' => 'ZotSpip se synchronise à intervalles réguliers (environ toutes les 4 heures) avec le serveur Zotero. Seules les dernières modifications (depuis la dernière synchronisation) sont prises en compte. Au besoin, vous pouvez forcer une mise à jour complète de la base de données, toutes les références étant alors téléchargées à nouveau (si votre librairie est importante, cette synchronisation se fera en plusieurs étapes, seulement 50 références pouvant être mises à jour à la fois).',
+	'explication_maj_zotspip' => 'ZotSpip se synchronise à intervalles réguliers (environ toutes les 4 heures) avec le serveur Zotero. Seules les dernières modifications (depuis la dernière synchronisation) sont prises en compte. Au besoin, vous pouvez forcer une mise à jour complète de la base de données, toutes les références étant alors téléchargées à nouveau. La synchronisation est réalisée en plusieurs étapes (références, collections Zotero, nettoyage des éléments supprimés).',
 	'explication_ordre_types' => 'Vous pouvez personnaliser l’ordre utilisé pour les tris par type de référence (changez l’ordre par glisser/déposer).',
+	'explication_pas_sync' => '50 maximum, par défaut 50 pour les références et 5 pour les collections. Diminuez les pas de synchronisation si vous rencontrez des erreurs du type <em>Maximum execution time</em>.',
 	'explication_username' => 'Pour une librairie personnelle, le nom d’utilisateur est indiqué sur la <a href="https://www.zotero.org/settings/account">page de configuration du compte</a>. Pour un groupe partagé, le nom du groupe se situe à la fin de l’URL de la page d’accueil du groupe qui est de la forme <em>https://www.zotero.org/groups/&lt;nom_du_groupe&gt;</em> (dans certain cas, le nom du groupe correspondant à son identifiant numérique).',
 	'exporter' => 'Exporter',
 	'exporter_reference' => 'Exporter la référence :',
@@ -104,6 +105,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_options_affichage' => 'Options d’affichage',
 	'label_ordre_types' => 'Tri par type de référence',
 	'label_page_biblio' => 'Activer la page ‘biblio’ pour Zpip ?',
+	'label_pas_collections' => 'Synchronisation des collections',
+	'label_pas_references' => 'Synchonisation des références',
+	'label_pas_sync' => 'Pas de synchronisation',
 	'label_publication' => 'Publication',
 	'label_recherche_libre' => 'Recherche libre',
 	'label_selection_references' => 'Sélection des références',
@@ -129,6 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifier_en_ligne' => 'Modifier en ligne sur zotero.org',
 
 	// N
+	'nettoyage' => 'nettoyage',
 	'nom_page-biblio' => 'Biblio',
 	'nom_prenom' => 'Nom, Prénom',
 
@@ -138,7 +143,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'outil_inserer_ref' => 'Insérer une réference bibliographie [ref=XXX]',
 
 	// P
+	'plusieurs_collections' => '@nb@ collections',
+	'plusieurs_collections_sync' => '@nb@ collections synchronisées',
 	'plusieurs_references' => '@nb@ références',
+	'plusieurs_references_sync' => '@nb@ références synchronisées',
 	'probleme_survenu_lors_du_remplacement' => 'Un problème est survenu lors du remplacement (code HTTP @code@).',
 
 	// R

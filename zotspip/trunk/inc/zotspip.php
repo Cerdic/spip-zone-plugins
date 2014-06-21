@@ -45,7 +45,10 @@ function zotspip_extraire_collectionkey($url){
 // Mise à jour de la base de données
 // $forcer : forcer la mise à jour complète de la base
 // $n integer : nombre d'items à mettre à jour simultanément (max 50)
-function zotspip_maj_items($forcer=false, $n=50) {
+function zotspip_maj_items($forcer=false, $n=NULL) {
+	include_spip('inc/config');
+	if (!is_int($n)) $n = lire_config('zotero/pas_references',50);
+	
 	if ($n>50) $n=50;
 	
 	if ($forcer)
@@ -268,10 +271,21 @@ function zotspip_maj_items($forcer=false, $n=50) {
 	return 1; //0 si rien à faire, 1 si effectuée, -5 si tâche pas finie
 }
 
-// Mise à jour des collections
+// Mise à jour des collections Zotero
 // $forcer : forcer la mise à jour complète de la base
-function zotspip_maj_collections($forcer=false) {
-	$feed = zotero_get('collections/?format=atom&order=dateModified&sort=desc');
+// $n integer : nombre de collections à mettre à jour simultanément (on limite à 5 en raison du nombre de requêtes)
+function zotspip_maj_collections($forcer=false, $n=NULL) {
+	include_spip('inc/config');
+	if (!is_int($n)) $n = lire_config('zotero/pas_collections',5);
+	
+	if ($n>50) $n=50;
+	
+	if ($forcer)
+		$zotspip_maj_collections = array('forcer' => true, 'start' => 0);
+	else
+		$zotspip_maj_collections = isset($GLOBALS['meta']['zotspip_maj_collections']) ? unserialize($GLOBALS['meta']['zotspip_maj_collections']) : array('forcer' => false, 'start' => 0);
+	
+	$feed = zotero_get('collections/?format=atom&order=dateModified&sort=desc&limit='.$n.'&start='.$zotspip_maj_collections['start']);
 	// On vérifie qu'on a bien eu un retour
 	if (!$feed)
 		return 0;
@@ -287,8 +301,9 @@ function zotspip_maj_collections($forcer=false) {
 			$updated = spip_xml_aplatit($entree['updated']);
 			
 			// Faire une vérification sur la date de maj (seulement si on ne force pas)
-			if (!$zotspip_maj_items['forcer']) {
+			if (!$zotspip_maj_collections['forcer']) {
 				if ($updated==sql_getfetsel('updated','spip_zcollections','id_zcollection='.sql_quote($id_zcollection))) {
+					effacer_meta('zotspip_maj_collections');
 					return 1;
 				}
 			}
@@ -325,6 +340,23 @@ function zotspip_maj_collections($forcer=false) {
 		}
 	}
 	
+	// Faut-il continuer la synchronisation ? 
+	$links = array();
+	if (spip_xml_match_nodes(',^link rel="next",', $xml, $links)) {
+		$link_next = array_keys($links);
+		list($balise, $attributs) = spip_xml_decompose_tag($link_next[0]);
+		if (preg_match('#start=([0-9]+)#',$attributs['href'],$matches)) {
+			if ($matches[1]>$zotspip_maj_collections['start']) {
+				$zotspip_maj_collections['start'] = $matches[1];
+				ecrire_meta('zotspip_maj_collections',serialize($zotspip_maj_collections));
+				ecrire_metas();
+				return -5;
+			}
+		}
+	}
+	
+	// Sinon, c'est qu'on a fini la synchronisation
+	effacer_meta('zotspip_maj_collections');
 	return 1; //0 si rien à faire, 1 si effectuée, -5 si tâche pas finie
 }
 
@@ -373,6 +405,45 @@ function zotspip_supprimer_collection($id_zcollection) {
 	include_spip('base/abstract_sql');
 	sql_delete('spip_zcollections','id_zcollection='.sql_quote($id_zcollection));
 	sql_delete('spip_zitems_zcollections','id_zcollection='.sql_quote($id_zcollection));
+}
+
+// Mise à jour items, puis collections, puis nettoyage
+
+function zotspip_maj($forcer=false){
+	if ($forcer)
+		$zotspip_maj = array('forcer' => true, 'step' => 'items');
+	else
+		$zotspip_maj = isset($GLOBALS['meta']['zotspip_maj']) ? unserialize($GLOBALS['meta']['zotspip_maj']) : array('forcer' => false, 'step' => 'items');
+	if ($zotspip_maj['step'] == 'items'){
+		if (!isset($GLOBALS['meta']['zotspip_maj_items']))
+			$cont = zotspip_maj_items($zotspip_maj['forcer']); // On ne passe forcer qu'au premier appel
+		else
+			$cont = zotspip_maj_items();
+		if ($cont==0) return 0; // Pb de sync
+		if ($cont>0)  // On a fini la sync des items
+			$zotspip_maj['step'] = 'collections';
+		ecrire_meta('zotspip_maj',serialize($zotspip_maj));
+		ecrire_metas();
+		return -5; // Dans tous les cas, on continue la sync
+	}
+	if ($zotspip_maj['step'] == 'collections'){
+		if (!isset($GLOBALS['meta']['zotspip_maj_collections']))
+			$cont = zotspip_maj_collections($zotspip_maj['forcer']); // On ne passe forcer qu'au premier appel
+		else
+			$cont = zotspip_maj_collections();
+		if ($cont==0) return 0; // Pb de sync
+		if ($cont>0)  // On a fini la sync des collections
+			$zotspip_maj['step'] = 'nettoyage';
+		ecrire_meta('zotspip_maj',serialize($zotspip_maj));
+		ecrire_metas();
+		return -5; // Dans tous les cas, on continue la sync
+	}
+	if ($zotspip_maj['step'] == 'nettoyage'){
+		effacer_meta('zotspip_maj');
+		return zotspip_nettoyer();
+	}
+	
+	return 0;
 }
 
 

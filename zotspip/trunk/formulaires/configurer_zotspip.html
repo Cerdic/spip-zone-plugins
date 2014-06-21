@@ -29,17 +29,17 @@
 			<li class="editer_id_librairie[ (#ENV**{erreurs}|table_valeur{id_librairie}|oui)erreur]">
 				<label><:zotspip:label_id_librairie:></label>
 				<p class="explication"><:zotspip:explication_id_librairie:></p>
-				<input type="text" name="id_librairie" class="text" value="#ENV*{id_librairie}" id="id_librairie" [(#HTML5|oui)required='required']/>
+				<input type="text" name="id_librairie" class="text" value="#ENV*{id_librairie}" id="id_librairie" required='required'/>
 			</li>
 			<li class="editer_username[ (#ENV**{erreurs}|table_valeur{username}|oui)erreur]">
 				<label><:zotspip:label_username:></label>
 				<p class="explication"><:zotspip:explication_username:></p>
-				<input type="text" name="username" class="text" value="#ENV*{username}" id="username" [(#HTML5|oui)required='required']/>
+				<input type="text" name="username" class="text" value="#ENV*{username}" id="username" required='required'/>
 			</li>
 			<li class="editer_api_key[ (#ENV**{erreurs}|table_valeur{api_key}|oui)erreur]">
 				<label><:zotspip:label_api_key:></label>
 				<p class="explication"><:zotspip:explication_api_key:></p>
-				<input type="text" name="api_key" class="text" value="#ENV*{api_key}" id="api_key" [(#HTML5|oui)required='required']/>
+				<input type="text" name="api_key" class="text" value="#ENV*{api_key}" id="api_key" required='required'/>
 			</li>
 		</ul></fieldset></li>
 		<li class="fieldset"><fieldset><h3 class="legend"><:zotspip:label_options:></h3><ul>
@@ -62,7 +62,7 @@
 			</li>
 			<li class="editer_titre_page_biblio[ (#ENV**{erreurs}|table_valeur{titre_page_biblio}|oui)erreur]">
 				<label for="titre_page_biblio"><:zotspip:label_titre_page_biblio:></label>
-				<input type="text" name="titre_page_biblio" class="text" value="#ENV*{titre_page_biblio}" id="titre_page_biblio" [(#HTML5|oui)required='required']/>
+				<input type="text" name="titre_page_biblio" class="text" value="#ENV*{titre_page_biblio}" id="titre_page_biblio" required='required'/>
 			</li>
 			<li class="editer_flux_rss[ (#ENV**{erreurs}|table_valeur{flux_rss}|oui)erreur]">
 				<label for='flux_rss'><:zotspip:label_flux_rss:></label>
@@ -108,6 +108,18 @@
 				</ul>
 			</li>
 			</B_ordre_types>
+		</ul></fieldset></li>
+		<li class="fieldset"><fieldset><h3 class="legend"><:zotspip:label_pas_sync:></h3>
+		<p class="explication"><:zotspip:explication_pas_sync:></p>
+		<ul>
+			<li class="editer_pas_references[ (#ENV**{erreurs}|table_valeur{pas_references}|oui)erreur]">
+				<label><:zotspip:label_pas_references:></label>
+				<input type="number" name="pas_references" class="text" value="#ENV*{pas_references,50}" id="pas_references" required='required' min="5" max="50" step="5" />
+			</li>
+			<li class="editer_pas_collections[ (#ENV**{erreurs}|table_valeur{pas_collections}|oui)erreur]">
+				<label><:zotspip:label_pas_collections:></label>
+				<input type="number" name="pas_collections" class="text" value="#ENV*{pas_collections,5}" id="pas_collections" required='required' min="1" max="50"/>
+			</li>
 		</ul></fieldset></li>
 		</ul>
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
