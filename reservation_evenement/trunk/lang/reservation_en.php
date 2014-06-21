@@ -109,6 +109,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statuts_complet_explication' => 'The status codes in the reservation details that are taken into consideration an event as complete.',
+	'sujet_une_reservation_accepte' => 'Confirmation of a booking on @nom@',
+	'sujet_votre_reservation_accepte' => '@nom@: confirmation of your booking',
 
 	// T
 	'texte_ajouter_reservation' => 'Add a booking',
