@@ -95,17 +95,18 @@ function afficher_cacher_champs_select(){
         }
     </BOUCLE_tabS>
 
+    var bSel = false;
     for(var i = 0; i < document.getElementById("choix_equation_debit").length; i++){
         document.getElementById("choix_equation_debit").options[i].style.display="none";
         document.getElementById("choix_equation_debit").options[i].selected=false;
-    }
-
-    var cpt = 0;
-    for(var i in tabAfficher){
-        document.getElementById("choix_equation_debit").options[tabAfficher[i]-1].style.display="list-item";
-        if(cpt == 0){
-            document.getElementById("choix_equation_debit").options[tabAfficher[i]-1].selected=true;
-            cpt++;
+        for(var j in tabAfficher){
+            if(j == document.getElementById("choix_equation_debit").options[i].value) {
+                document.getElementById("choix_equation_debit").options[i].style.display="list-item";
+                if(!bSel) {
+                    bSel = true;
+                    document.getElementById("choix_equation_debit").options[i].selected=true;
+                }
+            }
         }
     }
 }

@@ -361,12 +361,35 @@ abstract class acSection {
     }
 
    /**
+    * Calcul de dy/dx
+    */
+    private function CalcdYdX($Y) {
+        // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
+        return - ($this->oP->rIf - $this->Calc('J',$Y)) / (1 - pow($this->Calc('Fr',$Y),2));
+    }
+
+
+   /**
     * Calcul du point suivant de la courbe de remous par la méthode Euler explicite.
     * @return Tirant d'eau
     */
     public function CalcY_M1($Y) {
         // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
-        return $Y-($this->oP->rDx*($this->oP->rIf-$this->Calc('J',$Y))/(1-pow($this->Calc('Fr',$Y),2)));
+        return $Y+ $this->oP->rDx * $this->CalcdYdX($Y);
+    }
+
+   /**
+    * Calcul du point suivant de la courbe de remous par la méthode RK4.
+    * @return Tirant d'eau
+    */
+    public function CalcY_RK4($Y) {
+        // L'appel à Calc('J') avec Y en paramètre réinitialise toutes les données dépendantes de la ligne d'eau
+        $rDx = $this->oP->rDx;
+        $rk1 = $this->CalcdYdX($Y);
+        $rk2 = $this->CalcdYdX($Y + $rDx / 2 * $rk1);
+        $rk3 = $this->CalcdYdX($Y + $rDx / 2 * $rk2);
+        $rk4 = $this->CalcdYdX($Y + $rDx * $rk3);
+        return $Y + $rDx / 6 * ($rk1 + 2 * ($rk2 + $rk3) + $rk4);
     }
 
    /**

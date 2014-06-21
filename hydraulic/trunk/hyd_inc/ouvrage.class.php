@@ -219,7 +219,7 @@ class cOuvrage {
                 for($nIter = 1; $nIter<=self::IDICMAX;$nIter++) {
                     $rVarC=$X;
                     list($Q,$nFlag) = $this->OuvrageQ();
-                    if(abs($Q/$QT-1.) <= $this->tP['P']) {break;}
+                    if($QT!=0 && abs($Q/$QT-1.) <= $this->tP['P']) {break;}
                     if($QT < $Q xor $Q1 <= $Q2) {
                         // QT < IQ et Q(X1) > Q(X2) ou pareil en inversant les inégalités
                         $X1=$rVarC;

@@ -25,7 +25,7 @@ function numLoi(){
 
     $numLoi = array(
         1 => 'or_cemagref88',
-        2 => 's_cemagref88',
+        //2 => 's_cemagref88',
         3 => 's_denoye',
         4 => 's_noye',
         5 => 'v_denoye',

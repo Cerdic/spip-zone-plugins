@@ -4,7 +4,7 @@
     [en]Calculator for hydraulic</multi></nom>
     <auteur>David Dorchies, Médéric Dulondel</auteur>
     <licence>GNU/GLP</licence>
-    <version>0.6.2</version>
+    <version>0.6.3</version>
     <necessite id="lib:dist" src="https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.0b2_r1012.zip" />
     <slogan>
         <multi>[fr]Des calculs d'hydraulique sous SPIP !
