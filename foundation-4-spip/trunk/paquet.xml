@@ -1,7 +1,7 @@
 <paquet
     prefix="foundation"
     categorie="outil"
-    version="2.1.0"
+    version="2.1.1"
     etat="stable"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/foundation-64.png"
