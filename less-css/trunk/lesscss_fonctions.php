@@ -272,8 +272,11 @@ function lesscss_find_less_or_css_in_path($less_file, $css_file){
 	if (!$c)
 		$c = find_in_path($css_file);
 
-	if (!$l)
-		return ($f?produire_fond_statique($css_file,array('format'=>'css')):$c);
+	if (!$l){
+		// passer le host en contexte pour differencier les CSS en fonction du HOST car il est inscrit en url absolue
+		// dans les chemins d'urls
+		return ($f?produire_fond_statique($css_file,array('format'=>'css','host'=>$_SERVER['HTTP_HOST'])):$c);
+	}
 	elseif(!$c)
 		return $l;
 
@@ -282,8 +285,11 @@ function lesscss_find_less_or_css_in_path($less_file, $css_file){
 	$path = creer_chemin();
 	foreach($path as $dir) {
 		// css prioritaire
-		if (strncmp($c,$dir . $css_file,strlen($dir . $css_file))==0)
-			return ($f?produire_fond_statique($css_file,array('format'=>'css')):$c);;
+		if (strncmp($c,$dir . $css_file,strlen($dir . $css_file))==0){
+			// passer le host en contexte pour differencier les CSS en fonction du HOST car il est inscrit en url absolue
+			// dans les chemins d'urls
+			return ($f?produire_fond_statique($css_file,array('format'=>'css','host'=>$_SERVER['HTTP_HOST'])):$c);
+		}
 		if ($l == $dir . $less_file)
 			return $l;
 	}
