@@ -28,7 +28,7 @@
                 <label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
                 <span class='erreur_message'>(#GET{erreurs})</span>
                 ]
-                <textarea name="#GET{name}" class="textarea">
+                <textarea name="#GET{name}" class="textarea" rows="3">
 <:mailsubscriber:defaut_message_invite_email_subscribe{nom_site_spip=#NOM_SITE_SPIP}:>
 </textarea>
             </li>

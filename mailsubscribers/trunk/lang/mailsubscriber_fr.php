@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_adresse_existante' => 'Cette adresse email est déjà dans la liste',
 	'erreur_technique_subscribe' => 'Une erreur technique a empêché votre inscription.',
-	'explication_to_email' =>'Email de la personne à préinscrire à la newsletter (plusieurs adresses séparées par une virgule. 5 email maximum)',
+	'explication_to_email' =>'Envoyer un email de pré-inscription aux adresses suivantes (plusieurs adresses séparées par une virgule si besoin).',
 
 	// I
 	'icone_creer_mailsubscriber' => 'Ajouter une inscription',

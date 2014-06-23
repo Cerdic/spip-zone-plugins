@@ -34,18 +34,25 @@ function formulaires_newsletter_invite_charger_dist($listes = ''){
  */
 function formulaires_newsletter_invite_verifier_dist($listes = ''){
 	$erreurs = array();
-	if (!$email = _request('from_email')) {
-		$erreurs['from_email'] = _T('info_obligatoire');
-	} else {
-		// verifier que l'email est valide
-		if (!email_valide($email))
-			$erreurs['from_email'] = _T('info_email_invalide');
+
+	if (!isset($GLOBALS['visiteur_session']['email'])
+		AND isset($GLOBALS['visiteur_session']['session_email'])){
+
+		if (!$email = _request('from_email')) {
+			$erreurs['from_email'] = _T('info_obligatoire');
+		}
+		else {
+			// verifier que l'email est valide
+			if (!email_valide($email))
+				$erreurs['from_email'] = _T('info_email_invalide');
+		}
 	}
 
 	// Email destinataires
 	if (!$to_email = _request('to_email')) {
 		$erreurs['to_email'] = _T('mailsubscriber:info_email_obligatoire');
-	} else {
+	}
+	else {
 		$lesemails = preg_split("/,/", $to_email);
 		// Un seul email
 		if (count($lesemails) == 1) {
@@ -71,8 +78,9 @@ function formulaires_newsletter_invite_verifier_dist($listes = ''){
 			}
 		}
 
-		return $erreurs;
 	}
+
+	return $erreurs;
 }
 
 /**
@@ -83,7 +91,14 @@ function formulaires_newsletter_invite_traiter_dist($listes = ''){
 	// langue par defaut lors de l'inscription : la langue courante dans la page
 	$options = array('lang' => $GLOBALS['spip_lang']);
 
-	$options['invite_email_from'] = _request('from_email');
+	if (isset($GLOBALS['visiteur_session']['email']))
+		$from_email = $GLOBALS['visiteur_session']['email'];
+	elseif (isset($GLOBALS['visiteur_session']['session_email']))
+		$from_email = $GLOBALS['visiteur_session']['session_email'];
+	else
+		$from_email = _request('from_email');
+
+	$options['invite_email_from'] = $from_email;
 	$options['invite_email_text'] = _request('message_invite_email_subscribe');
 
 	// pour une invitation on force le double optin
