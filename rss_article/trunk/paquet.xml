@@ -1,11 +1,11 @@
 <paquet
 	prefix="rssarticle"
 	categorie="edition"
-	version="1.1.1"
-	etat="dev"
+	version="1.1.2"
+	etat="stable"
 	compatibilite="[3.0.2;3.0.*]"
 	logo="prive/themes/spip/images/rssarticle-64.png"
-	documentation="http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles"
+	documentation="http://contrib.spip.net/Flux-RSS-en-articles"
 	schema="1.0.0" 
 >
 	<nom>Flux RSS en articles</nom>

@@ -51,12 +51,12 @@ function genie_rssarticle_copie_dist($t){
           $id_syndic_article = $a['id_syndic_article']; 
                     
           // article avec mm titre existe ? (test doublons sur l'url plutot que sr le titre)
-	        if (!$row = sql_fetsel("id_article","spip_articles","url=".sql_quote($url))) {        
+	        if (!$row = sql_fetsel("id_article","spip_articles","url_site=".sql_quote($url))) {        
             
             $texte = $a['descriptif'];
             //traitement pour syntaxe SPIP
             if($html2spip)
-            $texte = html2spip($texte);
+                  $texte = html2spip($texte);
             $lang  = $a['lang'];
             $url   = $a['url'];
             $tags =  $a['tags'];
