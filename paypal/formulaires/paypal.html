@@ -7,7 +7,8 @@
 		- shopping_url:          URL de la boutique, défaut = adresse du site
 		- redirect_ok:           URL de redirection une fois le paiement effectué
 		- libelle:               Libellé décrivant la commande
-		- custom:                Variable de transit jamais présenté au client (?)
+		- custom:                Variable de transit jamais présenté au client.
+		                         Sert à identifier le «type» de transaction. Ex: «payer_commande»
 		- invoice|identifiant:   chaine unique identifiant la commande
 		- shipping:              frais de port, défaut = 0
 		- handling_cart:         idem shipping (?)
@@ -16,10 +17,10 @@
 		- type:                  Détermine si on achète ou si on s'abonne ou si on donne
 		                         "abonnement" = s'abonner
 		                         ""           = acheter
-                             "donner"     = donner
+		                         "donner"     = donner
 		# Pour un achat, soit on indique "details", soit on indique "prix"
 		# Pour un abonnement, on indique "prix", "duree" et "periode"
-    # Pour un donation, on indique "prix" s'il est fourni
+		# Pour un donation, on indique "prix" s'il est fourni
 		- details:               Tableau associatif détaillant le contenu de l'achat, avec prix et quantité pour chaque article
 		                         array(0=>array(descriptif=>xx, prix=>yy, quantite=>zz), 1=>array(...))
 		- prix:                  Prix de l'achat ou de l'abonnement
@@ -47,14 +48,14 @@
 		# par défaut, il s'agit d'un input image, téléchargée sur le site de Paypal
 		- bouton_paypal_acheter:         URL de l'image personnalisée pour acheter
 		- bouton_paypal_souscrire:       URL de l'image personnalisée pour s'abonner
-    - bouton_paypal_donner:          URL de l'image personnalisée pour donner
+		- bouton_paypal_donner:          URL de l'image personnalisée pour donner
 		# pour avoir un input classique, il faut renseigner le paramètre 'xxx_texte'
 		- bouton_paypal_acheter_texte:   Texte du bouton acheter
 		- bouton_paypal_souscrire_texte: Texte du bouton d'abonnement
-    - bouton_paypal_donner_texte:    Texte du bouton faire un don
+		- bouton_paypal_donner_texte:    Texte du bouton faire un don
 		- bouton_paypal_acheter_class:   Classe du bouton acheter
 		- bouton_paypal_souscrire_class: Classe du bouton d'abonnement
-    - bouton_paypal_donner_class:    Classe du bouton faire un don
+		- bouton_paypal_donner_class:    Classe du bouton faire un don
 
 		# Personnaliser la page Paypal
 		- logo_url               URL du logo affiché en haut à gauche, 150x150px max (de préférence https)
