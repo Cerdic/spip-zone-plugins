@@ -436,10 +436,6 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         // `type_du_logo()` retourne le type de logo tel que `art` depuis le nom de la clé primaire de l'objet
         $type_du_logo = type_du_logo(id_table_objet($table));
 
-        echo "<pre>";
-        var_dump($type_du_logo);
-        echo "</pre>";
-
         // On va chercher dans IMG/$type_du_logo(on|off)*.*
         // On fait un foreach pour ne pas avoir de
         // "Pattern exceeds the maximum allowed length of 260 characters"
