@@ -86,7 +86,7 @@ function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 
 function image_responsive($texte, $taille=120, $lazy=0, $vertical=0) {
 	if (!preg_match("/^<img /i", $texte)) {
-		if (file_exists($texte)) $texte = "<img src='$texte'>";
+		if (strlen($texte) < 256 && file_exists($texte)) $texte = "<img src='$texte'>";
 		else return $texte;
 	}
 	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"'.$taille.'",'.$lazy.','.$vertical.');'), $texte);

@@ -99,7 +99,6 @@ function charger_image_lazy(sTop) {
 }
 
 function charger_image_responsive () {
-	
 	// Calculer le "top" des images lazy
 	$(".lazy").each(function() {
 		calculer_top_image_responsive($(this));
@@ -127,4 +126,5 @@ $(window).on("resize load",function() {
 });
 $(window).on("scroll touchmove", function() {
 	charger_image_lazy();
-	});
+});
+	
