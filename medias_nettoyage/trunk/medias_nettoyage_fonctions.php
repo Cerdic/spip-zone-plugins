@@ -421,6 +421,7 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         include_spip('base/objets');
         $tables_objets = array_keys(lister_tables_principales());
     }
+    sort($tables_objets);
 
     global $formats_logos;
     $docs_fichiers_on   = array();
@@ -434,6 +435,10 @@ function medias_lister_logos_fichiers ($mode = null, $repertoire_img = _DIR_IMG)
         // Grâce à la fonction `id_table_objet()`, on retrouve le nom de la clé primaire de l'objet.
         // `type_du_logo()` retourne le type de logo tel que `art` depuis le nom de la clé primaire de l'objet
         $type_du_logo = type_du_logo(id_table_objet($table));
+
+        echo "<pre>";
+        var_dump($type_du_logo);
+        echo "</pre>";
 
         // On va chercher dans IMG/$type_du_logo(on|off)*.*
         // On fait un foreach pour ne pas avoir de
@@ -836,7 +841,7 @@ function medias_lister_repertoires_orphelins_fichiers_taille ()
 function test_medias ()
 {
     $test = array();
-    $test = medias_lister_logos_fichiers();
+    $test = medias_deplacer_documents_repertoire_orphelins();
     return $test;
 }
 

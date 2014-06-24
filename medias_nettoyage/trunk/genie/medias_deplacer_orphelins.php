@@ -7,11 +7,11 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 include_spip('medias_nettoyage_fonctions');
 include_spip('inc/filtres');
 include_spip('inc/meta');
+include_spip('inc/medias_lanceur');
 
 function genie_medias_deplacer_orphelins_dist ($t)
 {
 
-    $medias_lanceur = charger_fonction('medias_lanceur', 'inc');
     // Si on est en SPIP 2, on regarde $GLOBALS
     // En SPIP 3, on passe par la fonction lire_config
     if (intval(spip_version())==2) {
@@ -38,7 +38,7 @@ function genie_medias_deplacer_orphelins_dist ($t)
             ),
             "medias_nettoyage"
         );
-        $medias_lanceur('medias_deplacer_doc_rep_orph');
+        medias_lanceur('medias_deplacer_doc_rep_orph');
 
     } elseif (isset($medias_nettoyage['activation'])
         and $medias_nettoyage['activation'] == 'oui'
@@ -56,7 +56,7 @@ function genie_medias_deplacer_orphelins_dist ($t)
             ),
             "medias_nettoyage"
         );
-        $medias_lanceur('medias_deplacer_doc_rep_orph');
+        medias_lanceur('medias_deplacer_doc_rep_orph');
 
     } elseif (isset($medias_nettoyage['activation'])
         and $medias_nettoyage['activation'] == 'oui'
@@ -76,7 +76,7 @@ function genie_medias_deplacer_orphelins_dist ($t)
             ),
             "medias_nettoyage"
         );
-        $medias_lanceur('medias_deplacer_doc_rep_orph', $horaires[0], $horaires[1]);
+        medias_lanceur('medias_deplacer_doc_rep_orph', $horaires[0], $horaires[1]);
 
     } elseif (isset($medias_nettoyage['activation'])
         and $medias_nettoyage['activation'] == 'non') {
@@ -99,18 +99,5 @@ function genie_medias_deplacer_orphelins_dist ($t)
     return 1;
 }
 
-function medias_lancer_script ($debut = 0, $fin = 600)
-{
-    $timer = date_format(date_create(), 'Hi');
-
-    // On vérifie bien que nous sommes dans la bonne tranche horaire
-    if ($timer >= $debut and $timer < $fin) {
-        if (function_exists('medias_deplacer_documents_repertoire_orphelins')) {
-            medias_deplacer_documents_repertoire_orphelins();
-        }
-    }
-
-    return;
-}
 
 ?>

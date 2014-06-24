@@ -25,7 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return void
  */
-function medias_deplacer_rep_obsoletes ()
+function inc_medias_deplacer_rep_obsoletes_dist ()
 {
     spip_log(
         date_format(date_create(), 'Y-m-d H:i:s')

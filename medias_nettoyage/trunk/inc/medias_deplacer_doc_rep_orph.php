@@ -25,7 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return array
  */
-function medias_deplacer_doc_rep_orph ()
+function inc_medias_deplacer_doc_rep_orph_dist ()
 {
     /**
      * On crée un log vraiment au début du script.

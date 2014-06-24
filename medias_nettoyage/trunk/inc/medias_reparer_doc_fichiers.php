@@ -31,7 +31,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return bool
  */
-function medias_reparer_documents_fichiers ()
+function inc_medias_reparer_doc_fichiers_dist ()
 {
     /**
      * On crée un log vraiment au début du script.
