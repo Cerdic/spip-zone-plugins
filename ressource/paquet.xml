@@ -1,7 +1,7 @@
 <paquet
 	prefix="ressource"
 	categorie="edition"
-	version="0.2.0"
+	version="0.3.0"
 	etat="dev"
 	compatibilite="[2.1.14;3.1.*]"
 	logo="images/ressource-32.png"

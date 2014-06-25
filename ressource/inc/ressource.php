@@ -303,6 +303,11 @@ function embed_ressource($res) {
 #		return recuperer_fond('modeles/doc', $res);
 	}
 
+	if ($res['type_document'] == 'PDF') {
+		return
+			recuperer_fond('modeles/application', $res);
+	}
+
 	return
 #		"<pre>".var_export($res,true)."</pre>" .
 		recuperer_fond('modeles/ressource', $res);
