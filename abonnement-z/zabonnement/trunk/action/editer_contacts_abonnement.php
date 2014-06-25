@@ -282,7 +282,7 @@ function ouvrir_zone($id_auteur,$ids_zone)
 	$array_ids = explode(",", $ids_zone);
 	foreach($array_ids as $id_zone)
 	{
-	if (_DEBUG_ABONNEMENT) spip_log("ouvrir_zone $id_zone pour $id_auteur",'abonnement');
+	//if (_DEBUG_ABONNEMENT) spip_log("ouvrir_zone $id_zone pour $id_auteur",'abonnement');
 		sql_insertq("spip_zones_auteurs", array(
 			"id_zone"=>$id_zone,
 			"id_auteur"=>$id_auteur
