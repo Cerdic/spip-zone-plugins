@@ -50,8 +50,7 @@ function genie_abonnements_verifier_notifications_dist($time){
 					'objet = "abonnement"'
 				)
 			)){
-				spip_log("Il y a ".count($a_notifier)." abonnement(s) se terminant le $echeance","relance");
-			
+							
 				// Pour chacun on programme un envoi de mail
 				foreach ($a_notifier as $notif){
 					
