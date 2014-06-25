@@ -12,6 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// par defaut pas de progressivite d'invalidation du cache : duree=1s
+if (!defined("_DUREE_INVALIDATION_PROGRESSIVE_CACHE"))
+	define("_DUREE_INVALIDATION_PROGRESSIVE_CACHE",1);
+
 /* compat SPIP 1.9 */
 if(!function_exists('test_espace_prive')) {
 	function test_espace_prive() {
@@ -61,7 +65,7 @@ function cache_signature(&$page) {
  *
  * @param array $page
  * @param int $date
- * @return -1/0/1
+ * @return int -1|0|1
  */
 /// http://doc.spip.org/@cache_valide
 function cache_valide(&$page, $date) {
@@ -83,13 +87,6 @@ function cache_valide(&$page, $date) {
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
 	if (!isset($page['entetes']['X-Spip-Statique']) OR $page['entetes']['X-Spip-Statique'] !== 'oui') {
 
-		// Cache invalide par la meta 'derniere_modif'
-		// sauf pour les bots, qui utilisent toujours le cache
-		if (!_IS_BOT
-		AND $GLOBALS['derniere_modif_invalide']
-		AND $date < $GLOBALS['meta']['derniere_modif'])
-			return 1;
-
 		// Apparition d'un nouvel article post-date ?
 		if ($GLOBALS['meta']['post_dates'] == 'non'
 		AND isset($GLOBALS['meta']['date_prochain_postdate'])
@@ -98,7 +95,43 @@ function cache_valide(&$page, $date) {
 			include_spip('inc/rubriques');
 			ecrire_meta('derniere_modif', $now);
 			calculer_prochain_postdate();
-			return 1;
+			#return 1; // on laisse la main au test suivant
+		}
+
+		// Cache invalide par la meta 'derniere_modif'
+		// sauf pour les bots, qui utilisent toujours le cache
+		if (!_IS_BOT
+		  AND $GLOBALS['derniere_modif_invalide']
+		  AND $date < $GLOBALS['meta']['derniere_modif']){
+			// pour les admins on invalide tout de suite pour leur permettre de voir les modifs
+			if (isset($GLOBALS['visiteur_session']['statut'])
+			  AND $GLOBALS['visiteur_session']['statut']=='0minirezo')
+				return 1;
+
+			// pour les autres on invalide progressivement pour repartir la charge
+			// avec une fonction de probabilite lineaire qui vaut
+			// 5% quand t=derniere_modif
+			// 100% quand t=derniere_modif+_DUREE_INVALIDATION_PROGRESSIVE_CACHE
+			static $refresh_ok = null;
+			if (is_null($refresh_ok)){
+				$dt = $_SERVER['REQUEST_TIME']-$GLOBALS['meta']['derniere_modif'];
+				if ($dt>_DUREE_INVALIDATION_PROGRESSIVE_CACHE){
+					$refresh_ok = 1;
+					#spip_log("Cache refresh systematique : REFRESH", "dbgcache");
+				}
+				else {
+					$coeff = (1-$dt/_DUREE_INVALIDATION_PROGRESSIVE_CACHE);
+					$seuil = 15; // 15% de probabilite au depart
+					$prob = mt_rand(1, $seuil+(100-$seuil)*$coeff);
+					$refresh_ok = ($prob<$seuil ? 1 : 0);
+					#spip_log("Cache refresh progresif dt=$dt coeff=$coeff p=$prob" . ($refresh_ok ? " : REFRESH" : ""), "dbgcache");
+				}
+			}
+
+			// si pas de refresh force on laisse la main a la comparaison de date
+			// selon duree de cache
+			if ($refresh_ok)
+				return 1;
 		}
 
 	}
