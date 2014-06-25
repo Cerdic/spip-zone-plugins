@@ -13,7 +13,6 @@
 	</BOUCLE_lib0> 
 	<p><strong><:abo:statut_abonnement:></strong> : [(#VAL{abo:statut_#STATUT_ABONNEMENT}|_T)]</p>
 	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)][ (#VALIDITE|<{#GET{today}}|oui) (<:abo:terme_echu:>)]</p>
-	<p><strong><:relance:dates_relances_archives:></strong> : <BOUCLE_relances_archives(RELANCES_ARCHIVES){id_auteur}{id_abonnement=#ID_OBJET}{','}>[(#DATE|affdate)]</BOUCLE_relances_archives><:relance:aucune_relance:><//B_relances_archives></p>
 	<BOUCLE_quellecommande(COMMANDES_DETAILS){id_commandes_detail}>
 	<p><:abo:liaison_commande:><a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a></p>
 	</BOUCLE_quellecommande><!--<p><:abo:aucune_liaison_commande:></p>--><//B_quellecommande>
@@ -36,7 +35,18 @@
 			]
 		</td>
 	</tr>
+	
 </BOUCLE_actifs>
+<tr><td>
+	<p>
+	<strong><:relance:dates_relances_archives:></strong> : 
+	<BOUCLE_relances_archives(RELANCES_ARCHIVES){id_auteur}{','}>
+	[<p><strong><:abo:abonnement:></strong> : <a href="#URL_ECRIRE{abonnement_edit,id_abonnement=#ID_ABONNEMENT}">(#INFO_TITRE{abonnement,#ID_ABONNEMENT}|unique)</a></p>] 
+	[(#DATE|affdate)]</BOUCLE_relances_archives>
+	<:relance:aucune_relance:>
+	<//B_relances_archives>
+	</p>
+</td></tr>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
