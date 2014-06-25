@@ -1,0 +1,27 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+<p class="explication">Vous pouvez choisir un article dont les événements associés seront transférés vers l'article cible.</p>
+[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+[(#EDITABLE|oui)
+
+
+<form action='#ENV{action}' method='post'>
+	<div>
+	<ul>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	[(#SAISIE{input,
+				id_article_origine, 
+				obligatoire=oui,
+				label=<:move_events:article_origine:>
+				})] 
+	[(#SAISIE{input,
+				id_article_cible, 
+				obligatoire=oui,
+				label=<:move_events:article_cible:>
+				})] 
+	</ul>
+	<p class="boutons"><input type='submit' name='ok' value='Lancer la migration !' /></p>
+	</div>
+</form>
+]
+</div>

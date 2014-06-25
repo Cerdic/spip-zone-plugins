@@ -1,0 +1,24 @@
+<paquet
+	prefix="move_events"
+	categorie="outils"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.14;3.0.*]"
+	logo=""
+	documentation=""
+>
+	<!--
+		Paquet genere le 2014-06-07 15:56:47
+	-->
+
+	<nom>Migration d&#039;événements</nom>
+
+	<auteur lien='http://contrib.spip.net/Amaury-Adon'>amaury</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="agenda"  compatibilite="[1.24.0;]" /> 
+	<necessite nom="saisies"  compatibilite="[1.40.4;]" /> 
+
+
+
+</paquet>
