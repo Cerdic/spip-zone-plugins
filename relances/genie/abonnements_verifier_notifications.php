@@ -40,32 +40,67 @@ function genie_abonnements_verifier_notifications_dist($time){
 				$echeance = date('Y-m-d', strtotime($jourdhui.$ajout));
 			}
 			
-			spip_log("echeance de la relance ".$relance['id_relance']." est pour $echeance","relance");			
+			//if (_DEBUG_RELANCE) spip_log("Aujourd'hui l'echeance pour la relance N°".$relance['id_relance']." doit être $echeance","relance");			
 			
-			// Pour cette relance on cherche donc tous les abonnés ayant cet échéance avec la même offre
+			// Pour chaque relance on cherche tous les abonnemment contractés ayant cet échéance
 			if ($a_notifier = sql_allfetsel(
-				'id_contacts_abonnement, a.id_auteur, objet, id_objet, nom, email',
-				'spip_contacts_abonnements as a left join spip_auteurs as u on a.id_auteur=u.id_auteur',
+				'*','spip_contacts_abonnements',
 				array(
 					'DATE_FORMAT(validite, "%Y-%m-%d") = '.sql_quote($echeance),
-					'objet = "abonnement"',
-					//'id_abonnement = '.intval($relance['id_abonnement']),
-					'email is not null'
+					'objet = "abonnement"'
 				)
 			)){
-			spip_log("On a trouvé au moins un abonnement se terminant le $echeance","relance");
+				spip_log("Il y a ".count($a_notifier)." abonnement(s) se terminant le $echeance","relance");
 			
 				// Pour chacun on programme un envoi de mail
-				foreach ($a_notifier as $abonne){
-					$id_job = job_queue_add(	
-						'abonnements_notifier_echeance',
-						"Notifier ${abonne['nom']} ${relance['duree']} ${relance['periode']} avant la fin de son abonnement ${abonne['id_abonnement']}",
-						array($abonne['id_objet'], $relance['id_relance'], $abonne['id_auteur'], $relance['titre'], $abonne['nom'], $abonne['email'], $relance['duree'], $relance['periode'], 'html'),
-						'inc/abonnements',
-						true
-					);
-					job_queue_link($id_job, array('objet'=>'contacts_abonnement', 'id_objet'=>$abonne['id_contacts_abonnement']));
+				foreach ($a_notifier as $notif){
 					
+					$id_relance=$relance['id_relance'];
+					$id_abonnement = $notif['id_objet'];
+					$id_auteur=$notif['id_auteur'];
+					$id_contacts_abonnement=$notif['id_contacts_abonnement'];
+					
+
+					//si un même auteur a plusieurs fois la même offre, on doit éliminer la plus ancienne						
+					$dernier_id_contacts_abonnement = sql_getfetsel(
+						'id_contacts_abonnement','spip_contacts_abonnements',
+						array(
+							'id_auteur = '.sql_quote($id_auteur),
+							'objet = "abonnement"',
+							'id_objet = '.sql_quote($id_abonnement)
+						),'',array('validite'." DESC "),"0,1"
+					);
+										
+					//ne pas relancer un abonnement qui a déjà été repris
+					if ($id_contacts_abonnement!=$dernier_id_contacts_abonnement) return false;
+					
+					//on verifie que la relance n'a pas déjà été effectuée ce jour
+					$today = date('Y-m-d');
+					$relance_deja=sql_getfetsel("id_relances_archive","spip_relances_archives",
+						array(
+							"id_relance=$id_relance",
+							"id_abonnement=$id_abonnement",
+							"id_auteur=$id_auteur",
+							'DATE_FORMAT(date, "%Y-%m-%d")='.sql_quote($today)
+						)
+					);
+										
+					if(!isset($relance_deja)){
+						if (_DEBUG_RELANCE) spip_log("relancer $nom N°id_auteur ".$id_auteur." pour l'abonnement ".$id_abonnement." id_contacts_abonnement=".$id_contacts_abonnement,"relance");
+						
+						//on va chercher email et nom de l'auteur
+						$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+						$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+	
+						if (function_exists('job_queue_add'))
+						job_queue_add(	
+							'abonnements_notifier_echeance',
+							"Notifier auteur ".$id_auteur." de l'échéance de son abonnement",
+							array($id_abonnement, $id_relance, $id_auteur, $relance['titre'], $nom, $email, $relance['duree'], $relance['periode'], 'html'),
+							'inc/abonnements',
+							true
+						);
+					}
 				}
 			}
 		}
