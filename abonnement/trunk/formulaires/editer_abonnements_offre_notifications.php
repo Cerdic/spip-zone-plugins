@@ -36,8 +36,14 @@ function formulaires_editer_abonnements_offre_notifications_saisies_dist($id_abo
 }
 
 function formulaires_editer_abonnements_offre_notifications_charger_dist($id_abonnements_offre, $retour=''){
+	if (!$id_abonnements_offre or !autoriser('configurer')){
+		return false;
+	}
+	
 	$contexte = array(
 		'supprimer' => array(),
+		'id_abonnements_offre' => $id_abonnements_offre,
+		'_hidden' => '<input type="hidden" name="id_abonnements_offre" value="'.$id_abonnements_offre.'" />',
 	);
 	return $contexte;
 }

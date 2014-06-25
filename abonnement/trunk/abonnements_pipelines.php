@@ -107,7 +107,7 @@ function abonnements_affiche_gauche($flux){
 	if ($flux['args']['exec'] == 'abonnements_offre'){
 		$flux['data'] .= recuperer_fond(
 			'prive/squelettes/navigation/inc-abonnements_notifications',
-			array('id_abonnements_offre' => $flux['args']['id_objet'])
+			array('id_abonnements_offre' => $flux['args']['id_abonnements_offre'])
 		);
 	}
 	

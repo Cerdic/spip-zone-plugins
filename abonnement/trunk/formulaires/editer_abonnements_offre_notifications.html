@@ -17,7 +17,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<BOUCLE_notifications(ABONNEMENTS_OFFRES_NOTIFICATIONS){!par periode}{!par duree}>
+					<BOUCLE_notifications(ABONNEMENTS_OFFRES_NOTIFICATIONS){id_abonnements_offre}{!par periode}{!par duree}>
 					<tr>
 						<td class="duree principale">
 							[(#VAL{abonnementsoffre:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}})]
