@@ -11,7 +11,6 @@ function genie_abonnement_dist($t){
 	include_spip('action/editer_contacts_abonnement');
 	
 	// vérifier les zones pour spip_contacts_abonnements
-	// si un même auteur a plusieurs fois la même offre, on doit éliminer la plus ancienne
 	$now = date('Y-m-d H:i:s');
 	$where = array();
 	$where[] = "contabo.objet='abonnement'";
@@ -41,27 +40,27 @@ function genie_abonnement_dist($t){
 			),'',array('validite'." DESC "),"0,1"
 		);
 										
-		//ne pas toucher à un abonnement qui a déjà été repris
-		if ($id_contabo!=$dernier_id_contacts_abonnement) return false;
+		//ne traiter que le dernier abonnement (par exemple si il a déjà été repris)
+		if ($id_contabo==$dernier_id_contacts_abonnement){
 					
-		
-		//on ferme les zones si la date de validite est passée
-		if($validite<$now){
-		fermer_zone($id_auteur,$ids_zone);
-		
-		if (_DEBUG_ABONNEMENT) spip_log("Pour auteur $id_auteur fermer zones ($ids_zone) id_contacts_abonnement $id_contabo validite=$validite",'abonnement');
-		
-		//on note echu le statut abonnement	
-		sql_updateq("spip_contacts_abonnements",array('statut_abonnement'=>'echu'),"id_contacts_abonnement='$id_contabo'");
+			//on ferme les zones si la date de validite est passée
+			if($validite<$now){
+				fermer_zone($id_auteur,$ids_zone);
 				
-		}
-		
-		//on ouvre les zones si la date validite est à venir
-		if($validite>$now){
-		ouvrir_zone($id_auteur,$ids_zone);
-		
-		if (_DEBUG_ABONNEMENT) spip_log("Pour auteur $id_auteur ouvrir zones ($ids_zone) id_contacts_abonnement $id_contabo validite=$validite",'abonnement');
-		
+				if (_DEBUG_ABONNEMENT) spip_log("Pour auteur $id_auteur fermer zones ($ids_zone) id_contacts_abonnement $id_contabo validite=$validite",'abonnement_fermer');
+				
+				//on note echu le statut abonnement	
+				sql_updateq("spip_contacts_abonnements",array('statut_abonnement'=>'echu'),"id_contacts_abonnement='$id_contabo'");
+						
+			}
+			
+			//on ouvre les zones si la date validite est à venir
+			if($validite>$now){
+				ouvrir_zone($id_auteur,$ids_zone);
+				
+				if (_DEBUG_ABONNEMENT) spip_log("Pour auteur $id_auteur ouvrir zones ($ids_zone) id_contacts_abonnement $id_contabo validite=$validite",'abonnement_ouvrir');
+				
+			}
 		}
 		
 	}
