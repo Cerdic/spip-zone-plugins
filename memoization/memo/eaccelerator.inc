@@ -42,7 +42,7 @@ class MCacheBackend_eaccelerator extends MCacheBackend {
 		return $this->inc($key, -$value, $ttl);
 	}
 	
-	function lock($key) {
+	function lock($key, /* private */ $unlock = false) {
 		return eaccelerator_lock(_CACHE_NAMESPACE.$key);
 	}
 	

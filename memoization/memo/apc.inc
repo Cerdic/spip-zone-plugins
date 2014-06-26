@@ -1,4 +1,4 @@
-<?php
+?<?php
 if (!defined('_CACHE_NAMESPACE'))
 	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].":");
 
@@ -51,7 +51,7 @@ class MCacheBackend_apc extends MCacheBackend {
 		return $this->inc($key, -$value, $ttl);
 	}
 
-	function lock($key) {
+	function lock($key, /* private */ $unlock = false) {
 	   return apc_add($this->key_for_lock($key), true);
 	}
 	
