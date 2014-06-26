@@ -123,15 +123,13 @@ function seo_insere_remplace_metas($head,$contexte){
 
 	/* CANONICAL URL */
 	if (isset($config['canonical_url'])
-		AND $config['canonical_url']['activate']=='yes'
-		AND $is_sommaire){
+		AND $config['canonical_url']['activate']=='yes'){
 		$append .= "\n" . seo_generer_urls_canoniques($contexte);
 	}
 
 	/* GOOGLE ANALYTICS */
 	if (isset($config['analytics'])
-		AND $config['analytics']['activate']=='yes'
-		AND $is_sommaire){
+		AND $config['analytics']['activate']=='yes'){
 		$append .= "\n" . seo_generer_google_analytics();
 	}
 
