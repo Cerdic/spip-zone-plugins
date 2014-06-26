@@ -70,35 +70,36 @@ function genie_abonnements_verifier_notifications_dist($time){
 						),'',array('validite'." DESC "),"0,1"
 					);
 										
-					//ne pas relancer un abonnement qui a déjà été repris
-					if ($id_contacts_abonnement!=$dernier_id_contacts_abonnement) return false;
+					//ne relancer que le dernier abonnement (par exemple si il a déjà été repris)
+					if ($id_contacts_abonnement==$dernier_id_contacts_abonnement){
 					
-					//on verifie que la relance n'a pas déjà été effectuée ce jour
-					$today = date('Y-m-d');
-					$relance_deja=sql_getfetsel("id_relances_archive","spip_relances_archives",
-						array(
-							"id_relance=$id_relance",
-							"id_abonnement=$id_abonnement",
-							"id_auteur=$id_auteur",
-							'DATE_FORMAT(date, "%Y-%m-%d")='.sql_quote($today)
-						)
-					);
-										
-					if(!isset($relance_deja)){
-						if (_DEBUG_RELANCE) spip_log("relancer $nom N°id_auteur ".$id_auteur." pour l'abonnement ".$id_abonnement." id_contacts_abonnement=".$id_contacts_abonnement,"relance");
-						
-						//on va chercher email et nom de l'auteur
-						$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
-						$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
-	
-						if (function_exists('job_queue_add'))
-						job_queue_add(	
-							'abonnements_notifier_echeance',
-							"Notifier auteur ".$id_auteur." de l'échéance de son abonnement",
-							array($id_abonnement, $id_relance, $id_auteur, $relance['titre'], $nom, $email, $relance['duree'], $relance['periode'], 'html'),
-							'inc/abonnements',
-							true
+						//on verifie que la relance n'a pas déjà été effectuée ce jour
+						$today = date('Y-m-d');
+						$relance_deja=sql_getfetsel("id_relances_archive","spip_relances_archives",
+							array(
+								"id_relance=$id_relance",
+								"id_abonnement=$id_abonnement",
+								"id_auteur=$id_auteur",
+								'DATE_FORMAT(date, "%Y-%m-%d")='.sql_quote($today)
+							)
 						);
+											
+						if(!isset($relance_deja)){
+							if (_DEBUG_RELANCE) spip_log("relancer $nom N°id_auteur ".$id_auteur." pour l'abonnement ".$id_abonnement." id_contacts_abonnement=".$id_contacts_abonnement,"relance");
+							
+							//on va chercher email et nom de l'auteur
+							$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+							$email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur=' . intval($id_auteur));
+		
+							if (function_exists('job_queue_add'))
+							job_queue_add(	
+								'abonnements_notifier_echeance',
+								"Notifier auteur ".$id_auteur." de l'échéance de son abonnement",
+								array($id_abonnement, $id_relance, $id_auteur, $relance['titre'], $nom, $email, $relance['duree'], $relance['periode'], 'html'),
+								'inc/abonnements',
+								true
+							);
+						}
 					}
 				}
 			}

@@ -40,7 +40,7 @@
 <tr><td>
 	<p>
 	<strong><:relance:dates_relances_archives:></strong> : 
-	<BOUCLE_relances_archives(RELANCES_ARCHIVES){id_auteur}{','}>
+	<BOUCLE_relances_archives(RELANCES_ARCHIVES){id_auteur}{','}{par id_abonnement}>
 	[<p><strong><:abo:abonnement:></strong> : <a href="#URL_ECRIRE{abonnement_edit,id_abonnement=#ID_ABONNEMENT}">(#INFO_TITRE{abonnement,#ID_ABONNEMENT}|unique)</a></p>] 
 	[(#DATE|affdate)]</BOUCLE_relances_archives>
 	<:relance:aucune_relance:>
