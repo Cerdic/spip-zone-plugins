@@ -294,10 +294,11 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 		}
 
 		// Ne pas exclure les elements qui sont autorises
-		$final_liste_rub_exclues = array_diff(
-			$final_liste_rub_exclues,
-			array_intersect($final_liste_rub_exclues, $liste_rub_inclues[$id_auteur][$publique])
-		);
+    if (isset($GLOBALS['visiteur_session']['id_auteur'])) 
+  		$final_liste_rub_exclues = array_diff(
+  			$final_liste_rub_exclues,
+  			array_intersect($final_liste_rub_exclues, $liste_rub_inclues[$id_auteur][$publique])
+  		);
 	}
 
 	return $final_liste_rub_exclues;
