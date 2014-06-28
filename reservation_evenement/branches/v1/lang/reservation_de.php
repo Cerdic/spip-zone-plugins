@@ -106,6 +106,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_numero' => 'Anmeldung:',
 	'reservation_reference_numero' => 'Referenznummer:',
 
+	// S
+	'sujet_une_reservation_accepte' => 'Bestätigung einer Anmeldung auf @nom@',
+	'sujet_votre_reservation_accepte' => '@nom@ : Bestätigung Ihrer Anmeldung',
+
 	// T
 	'texte_ajouter_reservation' => 'Eine Anmeldung hinzufügen',
 	'texte_changer_statut_reservation' => 'Diese Anmeldung ist:',

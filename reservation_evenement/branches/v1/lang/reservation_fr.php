@@ -107,8 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statuts_complet_explication' => 'Les statuts du détails de résérvation pris en compte pour déterminer si l’événement est complet.',
-	'sujet_une_reservation_accepte' => 'Réservation confirmé sur @nom@',	
-	'sujet_votre_reservation_accepte' => '@nom@ : confirmation de votre réservation',	
+	'sujet_une_reservation_accepte' => 'Réservation confirmé sur @nom@',
+	'sujet_votre_reservation_accepte' => '@nom@ : confirmation de votre réservation',
 
 	// T
 	'texte_ajouter_reservation' => 'Ajouter une réservation',
