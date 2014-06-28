@@ -1,4 +1,4 @@
-?<?php
+<?php
 if (!defined('_CACHE_NAMESPACE'))
 	define('_CACHE_NAMESPACE', $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].":");
 
