@@ -87,6 +87,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_explication' => 'Choisir le(s) destinataire(s) des notifications pour les envois au vendeur',
 	'notifications_vendeur_label' => 'Vendeur',
 	'notifications_vendeur_webmaster_label' => 'Choisir un ou plusieurs webmestres :',
+	
+	//N
+	'nom_reservation_multiples_cours'=>'Réservation de plusieurs cours'
 
 	// P
 	'par_articles' => 'articles',
