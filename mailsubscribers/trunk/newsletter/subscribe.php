@@ -108,6 +108,10 @@ function newsletter_subscribe_dist($email,$options = array()){
 			return false;
 
 		$row['listes'] = explode(',',$row['listes']);
+		// si on etait en refuse, il faut considerer qu'on est abonne a rien
+		if ($row['statut']=='refuse'){
+			$row['listes'] = array();
+		}
 		if (!isset($set['listes'])){
 			// filtrer les listes de newsletter pour voir si l'abonne est abonne a quelque chose
 			$listes = array_map('mailsubscribers_filtre_liste',$row['listes']);
