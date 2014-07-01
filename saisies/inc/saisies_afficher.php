@@ -293,7 +293,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 	$code = '';
 	$code .= '(function($){';
 	$code .= '$(document).ready(function(){chargement=true;';
-		$code .= 'verifier_saisies_'.$id_form.' = function(form){';
+		$code .= 'verifier_saisies_'.$id_form." = function(form){\n";
 				foreach ($saisies as $saisie) {
 					// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
 					// parce que li_class = 'tableau[nom][option]' ne fonctionne evidement pas
@@ -311,7 +311,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							default:
 								$class_li = 'editer_'.$saisie['options']['nom'];
 						}
-						$condition = $saisie['options']['afficher_si']."\n".$saisie['options']['afficher_si_remplissage'];
+						$condition = join("\n", array_filter(array($saisie['options']['afficher_si'], $saisie['options']['afficher_si_remplissage'])));
 						// retrouver l'identifiant
 						$identifiant = '';
 						if (isset($saisie['identifiant']) and $saisie['identifiant']) {
@@ -340,7 +340,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']:checked").val()', $condition);
 									break;
 								case 'case':
-									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find("[name=\''.$nom.'\']").is(":checked") ? $(form).find("[name=\''.$nom.'\']").val() : "")', $condition);
+									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'\']").val() : "")', $condition);
 									break;
 								default:
 									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']").val()', $condition);
@@ -351,11 +351,11 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 						} else {
 							$sel = "li.$class_li";
 						}
-						$code .= 'if ('.$condition.') {$(form).find("'.$sel.'").show(400);} ';
-						$code .= 'else {if (chargement==true) {$(form).find("'.$sel.'").hide(400).css("display","none");} else {$(form).find("'.$sel.'").hide(400);};} ';
+						$code .= "\tif (".$condition.') {$(form).find("'.$sel.'").show(400);} '."\n\t";
+						$code .= 'else {if (chargement==true) {$(form).find("'.$sel.'").hide(400).css("display","none");} else {$(form).find("'.$sel.'").hide(400);};} '."\n";
 					}
 				}
-		$code .= '};';
+		$code .= "};";
 		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").each(function(){verifier_saisies_'.$id_form.'(this);});';
 		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").change(function(){verifier_saisies_'.$id_form.'(this);});';
 	$code .= 'chargement=false;})';
