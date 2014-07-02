@@ -20,5 +20,5 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/pays.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/pays.php" />
 
-	<utilise nom='saisies' compatibilite='[1.0;[' /> 
+	<utilise nom='saisies' compatibilite='[1.0.0;[' /> 
 </paquet>
