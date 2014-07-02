@@ -20,7 +20,7 @@ function informerpremiereconnexion_affichage_final($flux){
 <style type="text/css">
 #informer_premiere_connexion{
 	background-color:#E5F9CD;
-	coor:black;
+	color:black;
 	font-size:1.2em;
 	padding:1em;
 	text-align:center;
