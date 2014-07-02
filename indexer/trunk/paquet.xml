@@ -1,7 +1,7 @@
 <paquet
 	prefix="indexer"
 	categorie="navigation"
-	version="1.0.0"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/indexer-64.png"
@@ -16,4 +16,5 @@
 	<licence>GNU/GPL</licence>
 	
 	<pipeline nom="post_edition" inclure="indexer_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="indexer_pipelines.php" />
 </paquet>

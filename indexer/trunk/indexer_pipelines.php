@@ -58,3 +58,15 @@ function indexer_post_edition($flux){
 	
 	return $flux;
 }
+
+/**
+ * Ajouter une optimisation de l'index RT une fois par jour
+ *
+ * @pipeline taches_generales_cron
+ * @param array $taches Tableau listant les tâches et leur périodicité
+ * @return Retourne le tableau des tâches modifié
+ */
+function indexer_taches_generales_cron($taches){
+	$taches['indexer_optimiser'] = 24*3600; // tous les jours
+	return $taches;
+}

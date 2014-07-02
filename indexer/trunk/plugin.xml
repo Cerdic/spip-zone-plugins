@@ -9,7 +9,7 @@
 	<icon>prive/themes/spip/images/indexer-64.png</icon>
 
 	<licence>GNU/GPL</licence>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<etat>dev</etat>
 	<description>Gestion d'Indexation de contenus SPIP ou autre. Intégration et requêtes possibles avec Sphinx</description>
 	<prefix>indexer</prefix>
@@ -21,6 +21,10 @@
 	
 	<pipeline>
         <nom>post_edition</nom>
+        <inclure>indexer_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>taches_generales_cron</nom>
         <inclure>indexer_pipelines.php</inclure>
     </pipeline>
 </plugin>
