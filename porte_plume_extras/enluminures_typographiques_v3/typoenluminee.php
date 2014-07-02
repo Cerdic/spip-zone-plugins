@@ -251,6 +251,7 @@ function typoenluminee_post_typo($texte) {
 	// Raccourci typographique <sc></sc>
 	$texte = str_replace('<sc>', '<span class="caps">', $texte);
 	$texte = str_replace('</sc>', '</span>', $texte);
+	$texte = acronymes_traiter_raccourcis($texte);
 	return $texte;
 }
 
@@ -261,5 +262,25 @@ function typoenluminee_nettoyer_raccourcis_typo($texte){
 	$texte = str_replace('&hellip;','...',$texte);
 	return $texte;
 }
+
+// traite les raccourcis de la forme [SNCF|societe nationale...]
+// reprise du plugin acronymes
+if (!function_exists('acronymes_traiter_raccourcis')) {
+	function acronymes_traiter_raccourcis($letexte){
+		$pattern="{\[([^\|\]-]+)\|([^\|\]-]+)\]}";
+		preg_match_all ($pattern, $letexte, $tagMatches, PREG_SET_ORDER);
+		$textMatches = preg_split ($pattern, $letexte);
+
+		$tag_attr=array();
+		foreach ($tagMatches as $key => $value) {
+			$tag_attr[]="<acronym title='".texte_backend($value[2])."'>".$value[1]."</acronym>";
+		}
+		for ($i = 0; $i < count ($textMatches); $i ++) {
+			$textMatches [$i] = $textMatches [$i] . $tag_attr [$i];
+		}
+		return implode ("", $textMatches);
+	}
+}
+
 
 ?>
