@@ -260,9 +260,8 @@ function peupler_base_pays() {
         array('id_pays'=>'246','code'=>'BQ','code_num'=>535,'code_alpha3'=>'BES','nom'=>'<multi>[fr]Pays-Bas caribéens[en]Netherlands Caribbean[de]Niederlande Karibik[es]Holanda del Caribe[it]Netherlands Caribbean[nl]Caribisch Nederland[pt]Holanda Caribe</multi>'),
         array('id_pays'=>'247','code'=>'CW','code_num'=>531,'code_alpha3'=>'CUW','nom'=>'<multi>[fr]Curaçao[en]Curacao[de]Curacao[es]Curacao[it]Curacao[nl]Curacao[pt]Curaçao</multi>'),
         array('id_pays'=>'248','code'=>'HM','code_num'=>334,'code_alpha3'=>'HMD','nom'=>'<multi>[fr]Îles Heard-et-McDonald[en]Heard and McDonald Islands[de]Heard und McDonaldinseln[es]Islas Heard y McDonald[it]Isole Heard e McDonald[nl]Heard- en McDonaldeilanden[pt]Ilhas Heard e McDonald</multi>'),
-        array('id_pays'=>'249','code'=>'HM','code_num'=>334,'code_alpha3'=>'HMD','nom'=>'<multi>[fr]Îles Heard-et-McDonald[en]Heard and McDonald Islands[de]Heard und McDonaldinseln[es]Islas Heard y McDonald[it]Isole Heard e McDonald[nl]Heard- en McDonaldeilanden[pt]Ilhas Heard e McDonald</multi>'),
-        array('id_pays'=>'250','code'=>'SS','code_num'=>728,'code_alpha3'=>'SSD','nom'=>'<multi>[fr]Soudan du Sud[en]South Sudan[de]Süd-Sudan[es]Sudán del Sur[it]Sud Sudan[nl]Zuid-Soedan[pt]Sudão do Sul</multi>'),
-        array('id_pays'=>'251','code'=>'SX','code_num'=>534,'code_alpha3'=>'SXM','nom'=>'<multi>[fr]Sint Maarten[en]Sint Maarten[de]Sint Maarten[es]Sint Maarten[it]Sint Maarten[nl]Sint Maarten[pt]Sint Maarten</multi>'),
+        array('id_pays'=>'249','code'=>'SS','code_num'=>728,'code_alpha3'=>'SSD','nom'=>'<multi>[fr]Soudan du Sud[en]South Sudan[de]Süd-Sudan[es]Sudán del Sur[it]Sud Sudan[nl]Zuid-Soedan[pt]Sudão do Sul</multi>'),
+        array('id_pays'=>'250','code'=>'SX','code_num'=>534,'code_alpha3'=>'SXM','nom'=>'<multi>[fr]Sint Maarten[en]Sint Maarten[de]Sint Maarten[es]Sint Maarten[it]Sint Maarten[nl]Sint Maarten[pt]Sint Maarten</multi>'),
             )
     );
 }
