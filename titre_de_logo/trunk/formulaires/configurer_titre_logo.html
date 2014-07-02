@@ -15,8 +15,14 @@
 
                 [(#SAISIE{choisir_objets, objets_autorises,
                 label=<:titre_logo:label_objets_titre_logo:>,
-                class='long_label',
+                li_class='long_label',
                 defaut='spip_articles'})]
+
+                [(#SAISIE{selection, inserer_barre,
+                label=<:titre_logo:label_inserer_barre:>,
+                explication=<:titre_logo:explication_inserer_barre:>,
+                datas=#ARRAY{edition,<:titre_logo:barre_edition:>,forum,<:titre_logo:barre_forum:>},
+                defaut='edition'})]
 
             </ul>
 

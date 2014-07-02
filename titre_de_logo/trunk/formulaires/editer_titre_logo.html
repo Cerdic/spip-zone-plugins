@@ -2,17 +2,18 @@
 	[<h3 class="titrem">(#ENV{_options}|table_valeur{titre})</h3>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method='post' action='#ENV{action}'>
+	<form method='post' action='#ENV{action}'role="form">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
+			[(#SET{inserer_barre,[(#CONFIG{titre_logo/inserer_barre}|sinon{'edition'})]})]
 
 				[(#SAISIE{input,titre_logo,
 				label=<:titre_logo:label_titre_logo:>})]
 
 				[(#SAISIE{textarea, descriptif_logo,
 				label=<:titre_logo:label_descriptif_logo:>,
-				inserer_barre=edition,
+				inserer_barre=#GET{inserer_barre,edition},
 				rows=6})]
 
 			</ul>
