@@ -1,0 +1,22 @@
+<paquet
+	prefix="mobile_detect"
+	categorie="outil"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.10;3.0.*]"
+	logo="prive/themes/spip/images/mobile_detect-64.png"
+	documentation=""
+>
+
+	<nom>SPIP Mobile Detect</nom>
+
+	<auteur>Teddy Payet</auteur>
+	<credit lien="http://thenounproject.com/term/iphone/5765/">Creative Commons – Attribution (CC BY 3.0) - Iphone designed by Kenan Sulayman from the Noun Project</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="mobile_detect_autorisations.php" /> 
+
+	<lib nom="Mobile_Detect" lien="https://github.com/serbanghita/Mobile-Detect/archive/master.zip" />
+
+</paquet>

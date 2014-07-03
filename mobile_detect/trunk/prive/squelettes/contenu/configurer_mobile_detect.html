@@ -1,0 +1,69 @@
+[(#AUTORISER{configurer,_mobile_detect}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:mobile_detect:titre_page_configurer_mobile_detect:> [(#REM|support_script_version)]</h1>
+
+[(#BOITE_OUVRIR{<:mobile_detect:titre_liste_user_agent:>, simple, section})]
+<B_useragent>
+<div class="liste">
+<ul class="liste-items">
+<BOUCLE_useragent (DATA) {source table, #EVAL{support_lister_proprietes()}} {par cle}>
+<li class="item"><strong>#CLE</strong>
+    <ul class="spip">
+    <B_section>
+    <BOUCLE_section (DATA) {source table, #VALEUR} {si #VALEUR|is_array}>
+        <li>#VALEUR</li>
+    </BOUCLE_section>
+    </B_section>
+    <li>#VALEUR</li>
+    <//B_section>
+    </ul>
+</li>
+</BOUCLE_useragent>
+</ul>
+</div>
+</B_useragent>
+[(#BOITE_FERMER)]
+
+[(#BOITE_OUVRIR{<:mobile_detect:titre_liste_telephones:>, simple, section})]
+<B_telephones>
+<div class="liste">
+<ul class="liste-items">
+<BOUCLE_telephones (DATA) {source table, #EVAL{support_lister_telephones()}} {par cle}>
+<li class="item"><strong>#CLE</strong>
+    <ul class="spip">
+    <B_section_telephones>
+    <BOUCLE_section_telephones (DATA) {source table, #VALEUR} {si #VALEUR|is_array}>
+        <li>#VALEUR</li>
+    </BOUCLE_section_telephones>
+    </B_section_telephones>
+        <li>[(#VALEUR|replace{'\|',', '})]</li>
+    <//B_section_telephones>
+    </ul>
+</li>
+</BOUCLE_telephones>
+</ul>
+</div>
+</B_telephones>
+[(#BOITE_FERMER)]
+
+[(#BOITE_OUVRIR{<:mobile_detect:titre_liste_tablettes:>, simple, section})]
+<B_tablettes>
+<div class="liste">
+<ul class="liste-items">
+<BOUCLE_tablettes (DATA) {source table, #EVAL{support_lister_tablettes()}} {par cle}>
+<li class="item"><strong>#CLE</strong>
+    <ul class="spip">
+    <B_section_tablettes>
+    <BOUCLE_section_tablettes (DATA) {source table, #VALEUR} {si #VALEUR|is_array}>
+        <li>#VALEUR</li>
+    </BOUCLE_section_tablettes>
+    </B_section_tablettes>
+        <li>[(#VALEUR|replace{'\|',', '})]</li>
+    <//B_section_tablettes>
+    </ul>
+</li>
+</BOUCLE_tablettes>
+</ul>
+</div>
+</B_tablettes>
+[(#BOITE_FERMER)]
