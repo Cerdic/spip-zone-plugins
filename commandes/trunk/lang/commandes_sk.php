@@ -8,8 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'abbr_hors_taxe' => 'Bez DPH', # RELIRE
-	'abbr_quantite' => 'Množstvo',
+	'abbr_hors_taxe' => 'DPH',
+	'abbr_prix_unitaire' => 'JC',
+	'abbr_quantite' => 'Množ.',
+	'abbr_toutes_taxes_comprises' => 's DPH',
 	'action_facture' => 'Faktúra',
 	'action_modifier' => 'Zmeniť',
 	'action_supprimer' => 'Odstrániť',
@@ -38,10 +40,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contenu' => 'Obsah',
 
 	// D
-	'date_commande_label' => 'Dátum vytvorenia:', # MODIF
-	'date_envoi_label' => 'Dátum odoslania:', # MODIF
-	'date_maj_label' => 'Naposledy aktualizované:', # MODIF
-	'date_paiement_label' => 'Dátum platby:', # MODIF
+	'date_commande_label' => 'Dátum vytvorenia',
+	'date_commande_label_court' => 'Vytvorenie',
+	'date_envoi_label' => 'Dátum odoslania',
+	'date_envoi_label_court' => 'Odoslanie',
+	'date_maj_label' => 'Naposledy aktualizované',
+	'date_paiement_label' => 'Dátum platby',
+	'date_paiement_label_court' => 'Platba',
 	'designation' => 'Označenie',
 	'details_commande' => 'Podrobnosti objednávky:',
 
@@ -58,8 +63,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'info_1_commande' => '1 objednávka',
 	'info_1_commande_statut_attente' => '1 objednávka čaká na potvrdenie',
+	'info_1_commande_statut_envoye' => '1 odoslaná objednávka',
 	'info_1_commande_statut_partiel' => '1 objednávka bola čiastočne zaplatená',
 	'info_1_commande_statut_paye' => '1 objednávka bola zaplatená',
+	'info_1_commande_statut_retour' => '1 vrátená objednávka',
+	'info_1_commande_statut_retour_partiel' => '1 objednávka vrátená čiastočne ',
 	'info_aucun_commande' => 'Žiadna objednávka',
 	'info_commandes' => 'Objednávky',
 	'info_date_envoi_vide' => 'neodoslaná objednávka',
@@ -67,10 +75,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_date_paiement_vide' => 'nezaplatená objednávka',
 	'info_nb_commandes' => '@nb@ objednávok',
 	'info_nb_commandes_statut_attente' => '@nb@ objednávok čaká na potvrdenie',
+	'info_nb_commandes_statut_envoye' => '@nb@ odoslaných objednávok',
 	'info_nb_commandes_statut_partiel' => '@nb@ objednávok bolo čiastočne zaplatených',
 	'info_nb_commandes_statut_paye' => '@nb@ objednávok bolo zaplatených',
+	'info_nb_commandes_statut_retour' => '@nb@ vrátených objednávok',
+	'info_nb_commandes_statut_retour_partiel' => '@nb@ objednávok vrátených čiastočne',
 	'info_numero' => 'OBJEDNÁVKA ČÍSLO:',
 	'info_numero_commande' => 'OBJEDNÁVKA ČÍSLO:',
+	'info_sans_descriptif' => 'Bez opisu',
 	'info_toutes_commandes' => 'Všetky objednávky',
 
 	// L
@@ -81,10 +93,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filtre_tous_clients' => 'Všetci zákazníci',
 	'label_filtre_tous_statuts' => 'Všetky stavy',
 	'label_filtre_toutes_dates' => 'Všetky dátumy',
+	'label_infos' => 'Informácie',
 	'label_objet' => 'Objekt',
 	'label_passee_le' => 'objednané',
 	'label_payee_le' => 'zaplatené',
+	'label_prix_unitaire' => 'Jednotková cena',
+	'label_quantite' => 'Množstvo',
 	'label_recherche' => 'Vyhľadávať',
+	'label_statuts_actifs' => 'Štádiá spracovania',
+	'label_taxe' => 'Daň',
 
 	// M
 	'merci_de_votre_commande' => 'Vašu objednávku sme zaregistrovali a ceníme si Vašu dôveru.',
@@ -150,6 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_changer_statut_commande' => 'Táto objednávka je:',
 	'titre_adresse_client' => 'Adresa odberateľa',
 	'titre_adresse_commande' => 'Adresa priradená k objednávke',
+	'titre_adresse_contact' => 'Adresa',
 	'titre_adresses_associees' => 'Priradené adresy',
 	'titre_adresses_client' => 'Adresa odberateľa',
 	'titre_adresses_commande' => 'Adresy priradené k objednávke',
@@ -158,6 +176,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_contenu_commande' => 'Obsah objednávky',
 	'titre_informations_client' => 'Odberateľ',
 	'titre_logo_commande' => 'Logo objednávky',
+	'type_adresse_facturation' => 'Fakturácia',
+	'type_adresse_livraison' => 'Dodanie',
 
 	// U
 	'une_commande_de' => 'Objednávka: ',
