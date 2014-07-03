@@ -23,7 +23,8 @@ L.Map.Gis = L.Map.extend({
 		clusterOptions: {
 			disableClusteringAtZoom: 0,
 			showCoverageOnHover: false,
-			maxClusterRadius: 80
+			maxClusterRadius: 80,
+			spiderfyOnMaxZoom: false
 		},
 		pathStyles: null,
 		autocenterandzoom: false,

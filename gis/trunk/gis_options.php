@@ -66,6 +66,14 @@ $GLOBALS['gis_layers'] = array (
 		'nom' => 'OpenMapSurfer Grayscale',
 		'layer' => 'L.tileLayer.provider("OpenMapSurfer.Grayscale")'
 	),
+	'hydda' => array(
+		'nom' => 'Hydda',
+		'layer' => 'L.tileLayer.provider("Hydda")'
+	),
+	'hydda_base' => array(
+		'nom' => 'Hydda Base',
+		'layer' => 'L.tileLayer.provider("Hydda.Base")'
+	),
 	'mapquestopen_osm' => array(
 		'nom' => 'Mapquest Open',
 		'layer' => 'L.tileLayer.provider("MapQuestOpen.OSM")'
