@@ -17,6 +17,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'email_simple' => 'Jednoduchý e-mail',
 	'erreur_aucun_fournisseur' => 'Žiadna služba vám teraz nemôže zabezpečiť, aby ste našli svoje kontakty. Nainštalujte si, prosím, aspoň jednu knižnicu na nahrávanie kontaktov.',
 	'erreur_aucun_fournisseur_configure' => 'Neaktivovali ste žiadnu službu na nahrávanie kontaktov.',
+	'explications_liste_email' => 'Zoznam adries zadajte oddelením každej adresy na prázdny riadok.
+
+Akceptovaných je viac formátov: "Meno človeka &lt;email@domaine.tld&gt;", "couriel@domaine.tld Meno človeka", "couriel@domaine.tld".
+',
 
 	// I
 	'importer_bouton_recuperer_contacts' => 'Získať kontakty',
