@@ -174,7 +174,7 @@ document.write("<\/script><script>/*");
 function INCLUREAJAXLOAD_affichage_final($page) {
 	// Si le visiteur est un robot de moteur de recherche,
 	// reconstituer les pages completes
-	if(_IS_BOT || $_COOKIE["no_js"] == "no_js" || _request("no_js") == "oui" ) {
+	if(_IS_BOT || (isset($_COOKIE["no_js"]) && $_COOKIE["no_js"] == "no_js") || _request("no_js") == "oui" ) {
 		include_spip("inc/filtres");
 		include_spip("public/assembler");
 		$page = preg_replace_callback(",(<div class='includeajax[^\']*'><a href=\"(.*)\" rel=\"(.*)\">.*</a></div>),msU", "remettre_fond_ajax", $page);
