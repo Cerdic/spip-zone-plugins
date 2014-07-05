@@ -21,6 +21,18 @@ function image_responsive_insert_head($flux) {
 	return $flux;
 }
 
+function image_responsive_header_prive($flux) {
+	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("image_responsive.css")."'>\n";
+	$flux .= "<script>htactif=false;</script>";
+
+	$flux .= "
+<script type='text/javascript' src='".find_in_path("image_responsive.js")."'></script>
+		";
+
+	return $flux;
+}
+
+
 function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 	$tailles = explode("/", $taille);
 	if (count($tailles) > 1) $taille_defaut = $tailles[1];

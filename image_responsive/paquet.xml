@@ -1,7 +1,7 @@
 <paquet
 	prefix="image_responsive"
 	categorie="outil"
-	version="1.7.1"
+	version="1.8.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 >	
@@ -14,5 +14,6 @@
 
 	<pipeline nom="insert_head_css" action="insert_head_css" />
 	<pipeline nom="insert_head" action="insert_head" />
+	<pipeline nom="header_prive" action="header_prive" />
 
 </paquet>
