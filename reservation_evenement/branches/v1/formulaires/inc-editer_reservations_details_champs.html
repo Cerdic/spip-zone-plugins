@@ -2,7 +2,7 @@
     label=<:reservations_detail:label_reservation:>})]
 
 [(#SAISIE{articles_evenements,id_evenement,obligatoire=oui,
-    label=<:agenda:info_evenement:>})]
+    label=<:agenda:info_evenement:>,class=chosen})]
     
     
 [(#PLUGIN{prix_objets}|oui)
@@ -17,7 +17,7 @@
     label=<:reservations_detail:label_prix_ht:>})]
 
 [(#PLUGIN{prix_objets}|oui)
-<script>
+<script type="text/javascript">
   $(function(){ 
 
         var id_reservation=$("select#champ_id_reservation").val();                

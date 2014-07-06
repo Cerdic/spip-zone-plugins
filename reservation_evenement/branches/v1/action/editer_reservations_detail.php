@@ -37,10 +37,15 @@ function reservations_detail_modifier($id_reservations_detail, $set=null) {
 
     $donnees_reservations_details=charger_fonction('donnees_reservations_details','inc');
     
+    //On retirnt le prix original pour le cas ou celui est modifié par la suite
+
+    $details=$donnees_reservations_details($id_reservations_detail,$c);
+    $details['prix original']=isset($details['prix_ht'])?$details['prix_ht']:'';
+    
 	//Pipeline permettant aux plugins de modifier les détails de la réservation
-	$c = pipeline('reservation_evenement_donnees_details',array(
+    $c = pipeline('reservation_evenement_donnees_details',array(
 					'args'=>$set, 
-					'data'=>array_merge($c,$donnees_reservations_details($id_reservations_detail,$c))
+					'data'=>array_merge($c,$details)
 					)
 				);
 
