@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
+	'explication_objet_promotion' => 'Si définit au niveau article, seront compris tous les évenéments disponible por la réservation de cet article',	
 
 	// I
 	'icone_cacher' => 'Cacher',
@@ -45,6 +46,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mot_passe' => 'Mot de passe :',
 	'label_mot_passe2' => 'Répétez le mot de passe :',
 	'label_nom' => 'Nom :',
+	'label_objet_article' => 'Choissisez les articles dont les événements seront disponibles pour la promotion :',		
+	'label_objet_evenement' => 'Choissisez les les événements disponibles pour la promotion :',			
+	'label_objet_promotion' => 'Définir sur quel niveau on applique la promotion :',	
 	'label_reference' => 'Référence :',
 	'label_reservation' => 'Réservation :',
 	'label_statut' => 'Statut :',
@@ -58,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'montant' => 'Montant',
 
 	// N
+	'nom_reservation_multiples_evenements'=>'Réservation de plusieurs événements', 
 	'notifications_activer_explication' => 'Envoyer par mail des notifications de réservation ?',
 	'notifications_activer_label' => 'Activer',
 	'notifications_cfg_titre' => 'Notifications',
