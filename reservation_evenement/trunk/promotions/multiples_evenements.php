@@ -49,9 +49,8 @@ function promotions_multiples_evenements_dist($flux=array()){
 								        'saisie' => 'radio',
 								        'options' => array(
 								            'nom' => 'type_selection',
-								            'datas' => array('simple'=>_T('reservation:simple'),'choix_precis'=>_T('agenda:choix_precis')),
+								            'datas' => array('simple'=>_T('reservation:simple'),'choix_precis'=>_T('reservation:choix_precis')),
 								            'label' => _T('reservation:label_type_selection'), 
-								            'explication' => _T('reservation:explication_type_selection'),
 								            'obligatoire'=>'oui'	                   
 								        	),	                	
 								    ),
@@ -60,9 +59,10 @@ function promotions_multiples_evenements_dist($flux=array()){
 								        'options' => array(
 								            'nom' => 'nombre_evenements',
 								            'label' => _T('reservation:label_nombre_evenements'),
+								            'explication' => _T('reservation:explication_nombre_evenements'),
 								            'class'=>'auto_submit',
-								        		'obligatoire'=>'oui',
-								        		'afficher_si'=>'@type_selection@=="simple"'		                   
+								        	'obligatoire'=>'oui',
+								        	'afficher_si'=>'@type_selection@=="simple"'		                   
 								        	),	                	
 								    ),								     		
 								    array(
@@ -92,8 +92,8 @@ function promotions_multiples_evenements_dist($flux=array()){
 								        'saisie' => 'input',
 								        'options' => array(
 								            'nom' => 'nombre_evenements_choix',
-								            'label' => _T('reservation:label_nombre_evenements_choix'),
-								            'explication' => _T('reservation:explication_nombre_evenements_choix'),	
+								            'label' => _T('reservation:label_nombre_evenements'),
+								            'explication' => _T('reservation:explication_nombre_evenements').' '._T('reservation:explication_nombre_evenements_choix',array('objet_promotion'=>$objet_promotion)),	
 								        	'afficher_si'=>'@type_selection@=="choix_precis"',
 								        	'obligatoire'=>'oui',
 								        	'defaut'=>'0'		                   
