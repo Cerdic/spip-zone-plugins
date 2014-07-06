@@ -70,11 +70,33 @@ function balise_ORBIT_dist($p) {
 }
 
 /**
+ * Generer un bouton d'action qui accepte les class de foundation
+ */
+function balise_F_BOUTON_ACTION_dist($p){
+
+	$args = array();
+	for ($k=1;$k<=6;$k++){
+		$_a = interprete_argument_balise($k,$p);
+		if (!$_a) $_a="''";
+	  $args[] = $_a;
+	}
+	// supprimer les args vides
+	while(end($args)=="''" AND count($args)>2)
+		array_pop($args);
+	$args = implode(",",$args);
+
+	$bouton_action = chercher_filtre("f_bouton_action");
+	$p->code = "$bouton_action($args)";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/**
  * On surcharge le filtre bouton_action pour ajouter $class
  * sur la balise <button> au lieu de pour assurer la
  * compatibilité avec les class button de foundation
  */
-function filtre_bouton_action_dist($libelle, $url, $class="", $confirm="", $title="", $callback=""){
+function filtre_f_bouton_action_dist($libelle, $url, $class="", $confirm="", $title="", $callback=""){
   if ($confirm) {
     $confirm = "confirm(\"" . attribut_html($confirm) . "\")";
     if ($callback)
@@ -84,6 +106,6 @@ function filtre_bouton_action_dist($libelle, $url, $class="", $confirm="", $titl
   }
   $onclick = $callback?" onclick='return ".addcslashes($callback,"'")."'":"";
   $title = $title ? " title='$title'" : "";
-  return "<form class='bouton_action_post $class' method='post' action='$url'><div>".form_hidden($url)
+  return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
     ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
 }
