@@ -135,7 +135,7 @@ function promotions_multiples_evenements_action_dist($flux,$promotion){
 		//Choix d'événements
 		if($objet_promotion=='evenement'){
 			foreach($evenements AS $id_evenement){
-				if(in_array($id_evenement,$id_objet))$i++;
+				if(in_array($id_evenement,$id_objet) AND in_array($flux['data']['id_evenement'],$id_objet))$i++;
 				}			
 			}
 		//Choix d'article
