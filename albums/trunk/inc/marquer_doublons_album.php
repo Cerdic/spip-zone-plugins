@@ -1,18 +1,38 @@
 <?php
 /**
- * Plugin Albums
- * Licence GNU/GPL
- * Base sur inc/marquer_doublons_doc.php du plugin 'medias'
+ * Mettre à jour les liens des albums pour un objet
+ *
+ * @note
+ * Pompé sur inc/marquer_doublons_doc.php du plugin Médias
+ *
+ * @plugin     Albums
+ * @copyright  2014
+ * @author     Romy Tetue, Charles Razack
+ * @licence    GPL
  */
 
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// On liste tous les champs susceptibles de contenir des albums
-// la dist ne regarde que chapo et texte, on laisse comme ca, mais ca permet d'etendre a descriptif ou toto depuis d'autres plugins
+// On liste tous les champs susceptibles de contenir des albums si on veut que ces derniers soient liés a l'objet lorsqu on y fait reference par <albumXX>
+// la dist ne regarde que chapo et texte, on laisse comme ça, mais ca permet d'étendre à descriptif ou toto depuis d'autres plugins
 $GLOBALS['albums_liste_champs'][] = 'texte';
 $GLOBALS['albums_liste_champs'][] = 'chapo';
- 
-function inc_marquer_doublons_album_dist($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, $desc=array(), $serveur=''){
+
+/**
+ * Mettre à jour les liens des albums pour un objet
+ *
+ * @param $champs              Couples Champs / valeur de l'objet
+ * @param $id                  Identifiant de l'objet
+ * @param $type                Type d'objet (article)
+ * @param $id_table_objet      clé primaire de l'objet (id_article)
+ * @param $table_objet         Nom de l'objet (articles)
+ * @param $table_objet_sql     Nom de la table de l'objet (spip_articles)
+ * @param $desc                Description de la table de l'objet
+ * @param $serveur             Nom du connecteur
+ * @return void
+ */
+function inc_marquer_doublons_album_dist($champs,$id,$type,$id_table_objet,$table_objet,$table_objet_sql,$desc=array(),$serveur=''){
 	$champs_selection=array();
 
 	foreach ($GLOBALS['albums_liste_champs'] as $champs_choisis) {
@@ -39,7 +59,7 @@ function inc_marquer_doublons_album_dist($champs,$id,$type,$id_table_objet,$tabl
 
 	if ($load){
 		$champs[$load] = "";
-		$row = sql_fetsel($load, $spip_table_objet, "$id_table_objet=".sql_quote($id));
+		$row = sql_fetsel($load, $table_objet_sql, "$id_table_objet=".sql_quote($id));
 		if ($row AND isset($row[$load]))
 			$champs[$load] = $row[$load];
 	}
@@ -55,14 +75,14 @@ function inc_marquer_doublons_album_dist($champs,$id,$type,$id_table_objet,$tabl
 		'id_objet' => $id,
 		$id_table_objet => $id
 	);
-	traiter_modeles($champs_a_traiter,array('albums'=>$modeles),'','',null,$env); // detecter les doublons
+	traiter_modeles($champs_a_traiter,array('albums'=>$modeles),'','',null,$env); // détecter les doublons
 	objet_qualifier_liens(array('album'=>'*'),array($type=>$id),array('vu'=>'non'));
 	if (count($GLOBALS['doublons_albums_inclus'])){
-		// on repasse par une requete sur spip_albums pour verifier que les albums existent bien !
+		// on repasse par une requete sur spip_albums pour verifier que les albums existent bien
 		$in_liste = sql_in('id_album',$GLOBALS['doublons_albums_inclus']);
 		$res = sql_allfetsel("id_album", "spip_albums", $in_liste);
 		$res = array_map('reset',$res);
-		// Creer le lien s'il n'existe pas deja
+		// créer le lien s'il n'existe pas deja
 		objet_associer(array('album'=>$res),array($type=>$id),array('vu'=>'oui'));
 		objet_qualifier_liens(array('album'=>$res),array($type=>$id),array('vu'=>'oui'));
 	}
