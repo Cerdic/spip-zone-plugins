@@ -1,0 +1,42 @@
+[(#REM)
+
+	Boîte infos sur la fiche d'un album.
+
+]
+<BOUCLE_album_info(ALBUMS){id_album=#ENV{id}}{tout}>
+<div class='infos'>
+
+<div class='numero'>
+	<:titre_cadre_numero_objet{objet=album}:><p>[(#ID_ALBUM)]</p>
+</div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{album,#ID_ALBUM,'',#VAL{album}|objet_info{editable}})]
+
+[(#AUTORISER{supprimer,album,#ID_ALBUM}|oui)
+	[(#URL_ACTION_AUTEUR{supprimer_album,#ID_ALBUM,#URL_ECRIRE{albums}}|icone_horizontale{<:album:bouton_supprimer:>,album,del})]
+]
+
+[(#REM)
+
+	Bouton voir en ligne | prévisualisation
+
+]
+[(#VA{album}|objet_info{page}|oui)
+	[(#PUBLIE{album, #ID_ALBUM}|oui)
+		[(#VAL{redirect}
+			|generer_url_action{type=album&id=#ID_ALBUM}
+			|parametre_url{var_mode,calcul}
+			|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+	]
+	[(#PUBLIE{album, #ID_ALBUM}|non)
+		#SET{champ_statut,#ENV{type}|objet_info{statut}|table_valeur{0/champ}}
+		[(#AUTORISER{previsualiser,album,#ID_ALBUM,'',#ARRAY{statut,#STATUT}})
+			[(#VAL{redirect}
+				|generer_url_action{type=album&id=#ID_ALBUM}
+				|parametre_url{var_mode,preview}
+				|icone_horizontale{<:previsualiser:>,preview})]
+		]
+	]
+]
+</div>
+</BOUCLE_album_info>
