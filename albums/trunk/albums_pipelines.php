@@ -102,6 +102,7 @@ function albums_affiche_milieu($flux){
 		// message si l'auteur de l'album n'est pas autorisé à le modifier
 		// c'est que l'album est lié à un objet qu'il ne peut pas modifier
 		include_spip('action/editer_liens');
+		$auteurs_album = array();
 		if (is_array($liens_auteurs = objet_trouver_liens(array('auteur'=>'*'),array('album'=>$id_objet))))
 			foreach($liens_auteurs as $l)
 				$auteurs_album[] = $l['id_auteur'];
