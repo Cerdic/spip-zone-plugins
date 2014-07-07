@@ -1,0 +1,18 @@
+[(#REM)
+
+	Popup : aperçu des documents d'un album, sans les outils d'édition.
+
+][(#REM)
+
+	Utilise :
+		prive/squelettes/inclure/documents_album.html
+
+][(#REM)
+
+	Paramètres (*obligatoire) :
+		*id_album    identifiant de l'album
+
+]
+<BOUCLE_album(ALBUMS){id_album}{tout}>
+[(#INCLURE{fond=prive/squelettes/inclure/documents_album, id_album, editable=non})]
+</BOUCLE_album>
