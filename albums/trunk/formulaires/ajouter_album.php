@@ -53,6 +53,10 @@ function formulaires_ajouter_album_charger_dist($objet='', $id_objet=0, $retour=
 	$valeurs_joindre_document = $charger_joindre_document('new',0-$GLOBALS['visiteur_session']['id_auteur'],'album','document');
 	if (count($valeurs_joindre_document)) $valeurs = array_merge($valeurs,$valeurs_joindre_document);
 
+	// valeur de l'identifiant négatif pour l'ajout de documents
+	// cf. medias_pipelines.php L.161
+	$valeurs['_id_temporaire'] = 0-$GLOBALS['visiteur_session']['id_auteur'];
+
 	return $valeurs;
 
 }
