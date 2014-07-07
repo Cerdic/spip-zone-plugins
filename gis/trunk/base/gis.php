@@ -44,7 +44,7 @@ function gis_declarer_tables_objets_sql($tables){
 		/* La table */
 		'field' => array(
 			"id_gis" => "bigint(21) NOT NULL",
-			"titre" => "varchar(255) NOT NULL DEFAULT ''",
+			"titre" => "text NOT NULL DEFAULT ''",
 			"descriptif" => "text NOT NULL DEFAULT ''",
 			"lat" => "double NULL NULL",
 			"lon" => "double NULL NULL",

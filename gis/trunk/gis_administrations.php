@@ -63,6 +63,11 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables',array('spip_gis')),
 	);
 	
+	// Transformer les titres des points de varchar(255) à text
+	$maj['2.0.6'] = array(
+		array('sql_alter', 'TABLE spip_gis CHANGE titre titre text NOT NULL'),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
