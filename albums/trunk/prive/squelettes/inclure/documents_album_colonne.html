@@ -1,0 +1,65 @@
+[(#REM)
+
+	Affichage des documents d'un album.
+	Prévu pour la colonne latérale lors de l'édition d'un objet.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/inclure/album_colonne.html
+
+][(#REM)
+
+	Paramètres (*obligatoire) :
+		*id_album    identifiant de l'album
+		editable     «non» pour ne pas afficher les outils d'édition
+
+]
+#SET{editable,  #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
+<B_documents>
+<div class="documents-album colonne liste_items[ (#GET{editable}|oui)editable]" id="documents-album#ID_ALBUM">
+	<BOUCLE_documents(DOCUMENTS documents_liens types_documents){id_album}{!par media,id_document,extension,date}{tout}>
+	<div class="item[ (#GET{editable}|oui)editable][ (#DISTANT|=={oui}|oui)distant][ (#TITRE|non)sans-titre]"
+		id="document[(#ID_DOCUMENT)]-album[(#ID_ALBUM)]" data-id_document="#ID_DOCUMENT">
+
+		[(#REM) BOUTONS TOURNER ]
+		[(#GET{editable}|oui)
+		[(#EXTENSION|match{gif|png|jpg}|oui) #SET{id,#ID_VIGNETTE|?{#ID_VIGNETTE,#ID_DOCUMENT}}
+		<div class="tourner">
+			[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-gauche-12.png}|balise_img{<:medias:image_tourner_gauche:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',-90'},#SELF},ajax})]
+			[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-droite-12.png}|balise_img{<:medias:image_tourner_droite:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',90'},#SELF},ajax})]
+			[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{tourner-180-12.png}|balise_img{<:medias:image_tourner_180:>})],#URL_ACTION_AUTEUR{tourner,#GET{id}|concat{',180'},#SELF},ajax})]
+		</div>]
+		]
+
+		[(#REM) VIGNETTE ]
+		[(#LOGO_DOCUMENT{#URL_DOCUMENT,100,100})]
+
+		[(#REM) TITRE ]
+		<div class="infos">
+			<div class="meta">
+				[<span class="extension">(#EXTENSION)</span>]
+			</div>
+		</div>
+
+		[(#REM) ACTIONS ]
+		<BOUCLE_album_editable(CONDITION){si #GET{editable}}>
+		<div class='actions'>
+			<BOUCLE_doc_editable(CONDITION){si #AUTORISER{modifier,document,#ID_DOCUMENT}}>
+			<BOUCLE_compte(documents_liens){id_document}{0,2} />
+			[(#TOTAL_BOUCLE|=={1}|et{#AUTORISER{modifier,#OBJET,#ID_OBJET}}|et{#VU|=={non}})[(#BOUTON_ACTION{<:medias:bouton_enlever_supprimer_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT-suppr-safe,#SELF},ajax,<:medias:bouton_enlever_supprimer_document_confirmation:>,'',[(function(){jQuery("#document[(#ID_DOCUMENT)]_album[(#ID_ALBUM)]").animateRemove(ajaxReload("documents-album(#ID_ALBUM)"));return true;})()]})]]
+			[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT--safe,#SELF},ajax,'','',[(function(){jQuery("#document[(#ID_DOCUMENT)]-album[(#ID_ALBUM)]").animateRemove(ajaxReload("documents-album(#ID_ALBUM)"));return true;})()]})]
+			<a href="#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}" target="_blank" class="editbox" role="button" tabindex="0"><:medias:bouton_modifier_document:></a>
+			<//B_compte>
+			[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,document_desc},data,''}})]
+			</BOUCLE_doc_editable>
+			[(#REM) si on a pas le droit de modifier le document, il faut quand même pouvoir le détacher ]
+			[(#BOUTON_ACTION{<:medias:bouton_enlever_document:>,#URL_ACTION_AUTEUR{dissocier_document,#ID_OBJET-#OBJET-#ID_DOCUMENT--safe,#SELF},ajax,'','',[(function(){jQuery("#document[(#ID_DOCUMENT)]-album[(#ID_ALBUM)]").animateRemove(ajaxReload("documents-album(#ID_ALBUM)"));return true;})()]})]
+			<//B_doc_editable>
+		</div><!-- .actions -->
+		</BOUCLE_album_editable>
+
+	</div><!-- .item -->
+	</BOUCLE_documents>
+</div><!-- .documents-album.liste-items -->
+</B_documents>

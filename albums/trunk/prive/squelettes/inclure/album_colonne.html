@@ -1,0 +1,123 @@
+[(#REM)
+
+	Bloc d'un album : titre, descriptif, documents, et boutons d'actions.
+	Prévu pour la colonne latérale lors de l'édition d'un objet.
+
+][(#REM)
+
+	Inclus dans :
+		prive/objets/liste/albums_lies_colonne.html
+	Utilise :
+		prive/squelettes/inclure/documents_album_colonne.html
+
+][(#REM)
+
+	Paramètres (*obligatoire):
+		*id_album    identifiant de l'album
+		editable     «non» pour ne pas afficher les outils d'édition
+
+]
+<BOUCLE_album(ALBUMS){id_album}{tout}>
+<BOUCLE_vu(albums_liens){id_album}{objet}{id_objet}>#SET{vu,#VU}</BOUCLE_vu>
+#SET{self,         #SELF|parametre_url{albums|id_album|album|ajouter,''}|ancre_url{#VAL{album}|concat{#ID_ALBUM}}}
+#SET{editable,     #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
+#SET{actionner,    #AUTORISER{modifier,album,#ID_ALBUM}|ou{#AUTORISER{dissocier,album,#ID_ALBUM,'',#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|?{1}}
+
+[(#BOITE_OUVRIR{'',#VAL{boite-album simple colonne}|concat{#GET{editable}|?{' editable'}}}
+	|inserer_attribut{id,album#ID_ALBUM}
+	|inserer_attribut{data-objet,album}
+	|inserer_attribut{data-id_objet,#ID_ALBUM})]
+
+	<a name='album#ID_ALBUM'></a>
+
+	[(#REM) HEADER ]
+	<div class="header-album clearfix">
+
+		[(#GET{editable}|oui)
+		<div class='boutons-edition'>
+			[<a href="#" class="bouton editer reveal">(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:album:bouton_editer_texte_album:>}|inserer_attribut{title,<:album:bouton_editer_texte_album:>})</a>]
+			[<a href="#" class="bouton fermer" style="display:none;">(#CHEMIN_IMAGE{fermer-16.png}|balise_img{<:bouton_fermer:>}|inserer_attribut{title,<:bouton_fermer:>})</a>]
+		</div><!-- .boutons -->
+		]
+
+		<div class="contenu">
+			<div class="texte">
+				<div class="titre #EDIT{titre}">
+					[(#GET{vu}|=={oui}|oui)[(#CHEMIN_IMAGE{vu-16-10}|balise_img{'icone',<:medias:document_vu:>}|inserer_attribut{title,<:medias:document_vu:>})]]
+					[[(#RANG). ](#TITRE|sinon{<em class="sans-titre"><:info_sans_titre:></em>})]
+				</div>
+				[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF*)</div>]
+			</div>
+			[(#GET{editable}|oui)
+			[<div class="edition" style="display:none;">
+				<div class="ajax">(#FORMULAIRE_EDITER_ALBUM{#ID_ALBUM})</div>
+			</div>]
+			]
+		</div><!-- .contenu -->
+
+	</div><!-- .header-album -->
+
+	<div class="balise-album">
+		<div class="afficher" id="afficher-balise-album#ID_ALBUM">
+			[<div class="code-balise large"><code>(#VAL{<album}|concat{#ID_ALBUM,>}|htmlspecialchars)</code></div>]
+			[(#PLUGIN{yaml}|et{#PLUGIN{saisies}}|oui)<a href="#" class="bouton editer"><:album:texte_personnaliser_balise_album:></a>]
+		</div>
+		<BOUCLE_balise(CONDITION){si #PLUGIN{yaml}|et{#PLUGIN{saisies}}}>
+		<div class="formulaire" id="editer-balise-album#ID_ALBUM" style="display:none;">
+			[<div class="conteneur-fermer"><a href="#" class="bouton fermer">(#CHEMIN_IMAGE{fermer-16.png}|balise_img{<:bouton_fermer:>}|inserer_attribut{title,<:bouton_fermer:>})</a></div>]
+			<div class="ajax">
+			#FORMULAIRE_BALISE_ALBUM{#ID_ALBUM}
+			</div>
+		</div>
+		<script type='text/javascript'>
+		jQuery(document).ready(function($) {
+			var afficher = $('#afficher-balise-album#ID_ALBUM');
+			var editer = $('#editer-balise-album#ID_ALBUM');
+			var btn_editer = afficher.find('a.editer');
+			var btn_fermer = editer.find('a.fermer');
+			btn_editer.click(function() {
+				editer.slideDown(200);
+				afficher.slideUp(200);
+				return false;
+			});
+			btn_fermer.click(function() {
+				editer.slideUp(200);
+				afficher.slideDown(200);
+				return false;
+			});
+		});
+		</script>
+		</BOUCLE_balise>
+	</div><!-- .balise-album -->
+
+	[(#REM) DOCUMENTS ]
+	[(#INCLURE{fond=prive/squelettes/inclure/documents_album_colonne, id_album, editable, ajax=documents-album#ID_ALBUM})]
+
+	[(#REM) FOOTER ]
+	[(#GET{actionner}|oui)
+	#BOITE_PIED{footer-album act}
+
+	[(#REM) Boutons d'actions ]
+	<div class="boutons-edition">
+		[(#REM) Dissocier ]
+		[(#AUTORISER{dissocier,album,#ID_ALBUM,'',#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}|oui)
+		[(#BOUTON_ACTION{
+			<:album:bouton_dissocier:>,
+			#URL_ACTION_AUTEUR{dissocier_album,#ID_ALBUM/#OBJET/#ID_OBJET,#GET{self}|ancre_url{albums}},
+			'ajax dissocier reveal','','',
+			[(function(){jQuery("#album(#ID_ALBUM)").animateRemove(ajaxReload("liste_albums"));return true;})()]})]
+		]
+		[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		<a href="#" class="bouton remplir" role="button" tabindex="0"><:medias:bouton_ajouter_document:></a>
+		]
+	</div><!-- .boutons -->
+
+	[(#REM) Formulaire d'ajout de documents ]
+	<div class="remplir-album" style="display:none;">
+		[<a href="#" class="bouton fermer">(#CHEMIN_IMAGE{fermer-16.png}|balise_img{<:bouton_fermer:>}|inserer_attribut{title,<:bouton_fermer:>})</a>]
+		[<div class='ajax'>(#FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ALBUM,album,document})</div>]
+	</div><!-- .remplir-album -->
+	]
+
+#BOITE_FERMER
+</BOUCLE_album>

@@ -1,0 +1,65 @@
+[(#REM)
+
+	Gestion des documents et des albums liés à un objet,
+	affiché dans la colonne latérale lors de l'édition d'un objet.
+	Surcharge du squelette du plugin Médias : ajout des albums.
+
+][(#REM)
+
+	Utilise :
+		medias/prive/squelettes/inclure/colonne-documents.html
+		prive/squelettes/inclure/portfolio_albums_colonne.html
+
+]
+#SET{ajouter, #EVAL{_request('ajouter')}}
+#SET{onglet, #GET{ajouter}|in_array{#LISTE{documents,albums}}|?{#GET{ajouter},documents}}
+#SET{albums, #AUTORISER{ajouteralbum,#OBJET,#ID_OBJET}}
+#SET{documents, #AUTORISER{joindredocument,#ENV{objet},#ENV{id_objet}}}
+#SET{gestion,
+	#GET{documents}|et{#GET{albums}}|?{
+		tout,
+		#GET{albums}|?{
+			albums,
+			#GET{documents}|?{
+				documents,
+				''
+			}
+		}
+	}
+}
+
+[(#GET{gestion}|=={tout}|oui)
+<div class="menu-edition-albums">
+	[(#SELF|parametre_url{ajouter,documents}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{document-12.png}|balise_img) ]<:medias:info_documents:>,
+			#GET{onglet}|=={documents},
+			ajax})]
+	<span class="sep">|</span>
+	[(#SELF|parametre_url{ajouter,albums}|lien_ou_expose{
+			[(#CHEMIN_IMAGE{album-12.png}|balise_img) ]<:album:titre_albums:>,
+			#GET{onglet}|=={albums},
+			ajax})]
+</div>
+]
+
+[(#REM) DOCUMENTS ]
+[(#GET{gestion}|=={documents}|ou{#GET{gestion}|=={tout}|et{#GET{onglet}|=={documents}}}|oui)
+<div class='ajax'>
+#FORMULAIRE_JOINDRE_DOCUMENT{new,#ENV{id_objet},#ENV{objet}}
+</div>
+[(#INCLURE{fond=plugins-dist/medias/prive/squelettes/inclure/colonne-documents,env,ajax=documents})]
+]
+
+[(#REM) ALBUMS ]
+[(#GET{gestion}|=={albums}|ou{#GET{gestion}|=={tout}|et{#GET{onglet}|=={albums}}}|oui)
+<div id="albums">
+<div class='ajax'>
+#FORMULAIRE_AJOUTER_ALBUM{#ENV{objet},#ENV{id_objet},'',#ENV{lier_trad}}
+</div>
+[(#INCLURE{fond=prive/squelettes/inclure/portfolio_albums_colonne,objet,id_objet,ajax=liste_albums})]
+[(#REM) formulaire pour déplacer les documents par glisser-déposer ]
+[(#AUTORISER{deplacerdocumentsalbums,#ENV{objet},#ENV{objet}}|oui)
+<div class='ajax'>#FORMULAIRE_ALBUMS_DEPLACER_DOCUMENTS</div>
+]
+</div><!-- #albums -->
+]
