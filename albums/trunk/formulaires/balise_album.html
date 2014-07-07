@@ -1,0 +1,32 @@
+[(#REM)
+
+	Formulaire pour générer le code des balises du modèle «album»
+
+]
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_album,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[<div class="code-balise" title="double-clic pour insérer dans le texte"><code[ (#ENV{_balise}|et{#ENV{_js_balise}}|oui)ondblclick="#ENV**{_js_balise}"]>(#ENV*{_balise}|htmlspecialchars)</code></div>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#ENV{fini}|non)
+		<ul>
+		#GENERER_SAISIES{#ENV{_saisies}}
+		</ul>
+		]
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+
+		<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
+			[(#ENV{_etape,1}|=={1}|oui)<input class='submit' type='submit' name='choisir' value='<:bouton_choisir:>' />]
+			[(#ENV{_etape,1}|=={2}|oui|et{#ENV{fini}|non}|oui)<input class='submit' type='submit' name='generer' value='<:bouton_valider:>' />]
+			[(#ENV{_etape,1}|=={1}|non)<input type="submit" class="submit" name="_retour_etape_[(#ENV{_etape}|moins{1})]" value="<:retour:>" />]
+		</p>
+	</div></form>
+	]
+</div>
