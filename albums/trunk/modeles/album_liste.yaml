@@ -1,20 +1,25 @@
 #
-# Modèle <album> par défaut : vue sous forme de vignettes
+# Modèle <album>, variante : vue sous forme de liste
 #
 # La syntaxe est compatible avec celle du plugin «insérer modèles»
 # Les saisies «modele», «id_modele» et «id_album» servent juste à assurer la compatibilité.
 #
-nom: <:album:label_modele_nom_vignettes:>
+nom: <:album:label_modele_nom_liste:>
 logo: 'prive/themes/spip/images/album-24.png'
-icone_barre: 'album-vignettes.png'
-alias: <:album:label_modele_alias_vignettes:>
-description: <:album:label_modele_description_vignettes:>
+icone_barre: 'album-liste.png'
+alias: <:album:label_modele_alias_liste:>
+description: <:album:label_modele_description_liste:>
 parametres:
   -
     saisie: 'hidden'
     options:
       nom: 'modele'
       defaut: 'album'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'liste'
   -
     saisie: 'hidden'
     options:
@@ -38,37 +43,14 @@ parametres:
       label_case: <:album:label_descriptif:>
       valeur_oui: 'oui'
   -
-    saisie: 'case'
+    saisie: 'checkbox'
     options:
-      nom: 'label'
-      label_case: <:album:label_modele_labels_images:>
-      valeur_oui: 'oui'
-  -
-    saisie: 'input'
-    options:
-      nom: 'largeur'
-      label: <:album:label_modele_largeur_images:>
-      placeholder: <:album:label_modele_placeholder_dimension:>
-      verifier:
-        type: 'entier'
-        options:
-          max: 9999
-  -
-    saisie: 'input'
-    options:
-      nom: 'hauteur'
-      label: <:album:label_modele_hauteur_images:>
-      placeholder: <:album:label_modele_placeholder_dimension:>
-      verifier:
-        type: 'entier'
-        options:
-          max: 9999
-  -
-    saisie: 'case'
-    options:
-      nom: 'recadrer'
-      label_case: <:album:label_modele_recadrer_images:>
-      valeur_oui: 'oui'
+      nom: 'metas'
+      label: <:album:label_modele_metas:>
+      datas:
+        extension: <:album:label_modele_meta_extension:>
+        taille: <:album:label_modele_meta_taille:>
+        dimensions: <:album:label_modele_meta_dimensions:>
   -
     saisie: 'selection'
     options:
@@ -77,8 +59,9 @@ parametres:
       cacher_option_intro: 'oui'
       defaut: ''
       datas:
-        '': <:album:label_modele_defaut:>
+        '':  <:album:label_modele_defaut:>
         titre: <:album:label_modele_tri_titre:>
+        media: <:album:label_modele_tri_media:>
         id_document: <:album:label_modele_tri_id:>
         date: <:album:label_modele_tri_date:>
   -
