@@ -1,0 +1,122 @@
+[(#REM)
+
+	Bloc complet d'un album : titre, descriptif, documents, et boutons d'actions.
+
+][(#REM)
+
+	Inclus dans :
+		prive/objets/liste/albums.html
+		prive/objets/liste/albums_lies.html
+	Utilise :
+		prive/squelettes/inclure/documents_album.html
+
+][(#REM)
+
+	Paramètres (*obligatoire):
+		*id_album    identifiant de l'album
+		editable     «non» pour ne pas afficher les outils d'édition
+
+]
+<BOUCLE_album(ALBUMS){id_album}{tout}>
+<BOUCLE_vu(albums_liens){id_album}{objet}{id_objet}>#SET{vu,#VU}</BOUCLE_vu>
+#SET{editable,  #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
+#SET{contexte,  #ENV{objet}|et{#ENV{id_objet}}|?{objet,albumotheque}}
+#SET{actionner, #GET{contexte}|=={objet}|?{
+	#AUTORISER{modifier,album,#ID_ALBUM}|ou{#AUTORISER{dissocier,album,#ID_ALBUM,'',#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}}|?{1},
+	#AUTORISER{modifier,album,#ID_ALBUM}|ou{#AUTORISER{supprimer,album,#ID_ALBUM}}|?{1}}}
+
+[(#BOITE_OUVRIR{'',#VAL{boite-album simple}|concat{#GET{editable}|?{' editable'}}}
+	|inserer_attribut{id,album#ID_ALBUM}
+	|inserer_attribut{data-objet,album}
+	|inserer_attribut{data-id_objet,#ID_ALBUM})]
+
+	<a name='album#ID_ALBUM'></a>
+
+	[(#REM) HEADER ]
+	<div class="header-album clearfix">
+
+		[<div class="id">
+			[(#STATUT|puce_statut{album,#ID_ALBUM})]
+			[(#GET{editable}|oui)<a href="[(#URL_ECRIRE{album_edit,id_album=#ID_ALBUM})]">]
+				<:info_numero_abbreviation:>(#ID_ALBUM)
+			[(#GET{editable}|oui)</a>]
+		</div><!-- .id -->]
+
+		[(#GET{editable}|oui)
+		<div class='boutons-edition'>
+			[<a href="#" class="bouton editer reveal">(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:album:bouton_editer_texte_album:>}|inserer_attribut{title,<:album:bouton_editer_texte_album:>})</a>]
+			[<a href="#" class="bouton fermer" style="display:none;">(#CHEMIN_IMAGE{fermer-16.png}|balise_img{<:bouton_fermer:>}|inserer_attribut{title,<:bouton_fermer:>})</a>]
+		</div><!-- .boutons -->
+		]
+
+		<div class="contenu">
+			<div class="texte">
+				<div class="titre #EDIT{titre}">
+					[(#GET{vu}|=={oui}|oui)[(#CHEMIN_IMAGE{vu-16-10}|balise_img{'icone',<:medias:document_vu:>}|inserer_attribut{title,<:medias:document_vu:>})]]
+					<a href="[(#URL_ECRIRE{album,id_album=#ID_ALBUM})]">
+					[[(#RANG). ](#TITRE|sinon{<em class="sans-titre"><:info_sans_titre:></em>})]
+					</a>
+				</div>
+				[<div class="descriptif #EDIT{descriptif}">(#DESCRIPTIF*)</div>]
+			</div>
+			[(#GET{editable}|oui)
+			[<div class="edition" style="display:none;">
+				<div class="ajax">(#FORMULAIRE_EDITER_ALBUM{#ID_ALBUM})</div>
+			</div>]
+			]
+		</div><!-- .contenu -->
+
+	</div><!-- .header-album -->
+
+	[(#REM) DOCUMENTS ]
+	[(#INCLURE{fond=prive/squelettes/inclure/documents_album, id_album, editable, ajax=documents-album#ID_ALBUM})]
+
+	[(#REM) FOOTER ]
+	[(#GET{actionner}|oui)
+	#BOITE_PIED{footer-album act}
+
+	[(#REM) Boutons d'actions ]
+	<div class="boutons-edition">
+		[(#GET{contexte}|=={objet}|oui)
+			[(#REM) Dissocier ]
+			[(#AUTORISER{dissocier,album,#ID_ALBUM,'',#ARRAY{objet,#OBJET,id_objet,#ID_OBJET}}|oui)
+			[(#BOUTON_ACTION{
+				<:album:bouton_dissocier:>,
+				#URL_ACTION_AUTEUR{dissocier_album,#ID_ALBUM/#OBJET/#ID_OBJET,#SELF|ancre_url{albums}},
+				'ajax dissocier reveal','','',
+				[(function(){jQuery("#album(#ID_ALBUM)").animateRemove(ajaxReload("liste_albums"));return true;})()]})]
+			]
+		]
+		[(#GET{contexte}|=={albumotheque}|oui)
+			[(#REM) Supprimer ]
+			[(#AUTORISER{supprimer,album,#ID_ALBUM}|oui)
+			[(#BOUTON_ACTION{
+				<:album:bouton_supprimer:>,
+				#URL_ACTION_AUTEUR{supprimer_album,#ID_ALBUM,#SELF|ancre_url{albums}},
+				'ajax supprimer reveal',
+				<:album:message_supprimer:>,'',
+				[(function(){jQuery("#album(#ID_ALBUM)").animateRemove(ajaxReload("liste_albums"));return true;})()]})]
+			]
+			[(#REM) Vider ]
+			[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+			[(#BOUTON_ACTION{
+				<:album:bouton_vider:>,
+				#URL_ACTION_AUTEUR{vider_album,#ID_ALBUM,#SELF|ancre_url{albums}},
+				'ajax vider reveal',
+				<:album:message_vider:>})]
+			]
+		]
+		[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
+		<a href="#" class="bouton remplir" role="button" tabindex="0"><:medias:bouton_ajouter_document:></a>
+		]
+	</div><!-- .boutons -->
+
+	[(#REM) Formulaire d'ajout de documents ]
+	<div class="remplir-album" style="display:none;">
+		[<a href="#" class="bouton fermer">(#CHEMIN_IMAGE{fermer-16.png}|balise_img{<:bouton_fermer:>}|inserer_attribut{title,<:bouton_fermer:>})</a>]
+		[<div class='ajax'>(#FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ALBUM,album,document})</div>]
+	</div><!-- .remplir-album -->
+	]
+
+#BOITE_FERMER
+</BOUCLE_album>
