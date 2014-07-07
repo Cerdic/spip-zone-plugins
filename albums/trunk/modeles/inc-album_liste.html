@@ -1,0 +1,42 @@
+[(#REM)
+
+	Variante du modèle «album» : vue sous forme de liste.
+	cf. notes de modeles/album_liste.html
+
+][(#REM)
+
+	Inclus dans :
+		modeles/album_liste.html
+
+][(#REM)
+
+	Paramètres (*obligatoire):
+		*ids_documents    identifiant des documents
+		*env              environnement issu du squelette appelant
+
+]<B_documents_album>
+<div class="album liste[ (#ENV{align})][ (#ENV{classe})]">
+	[(#ENV{titre}|ou{#ENV{titre}|et{#INFO_TITRE{album,#ID_ALBUM}}}|ou{#ENV{descriptif}|et{#INFO_DESCRIPTIF{album,#ID_ALBUM}|strlen}}|oui)
+	<div class="caption">
+		[(#ENV{titre}|oui)[<div class="titre">(#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}|wrap{[<(#ENV{balise_titre}|replace{^<}|replace{>$})>]})</div>]]
+		[(#ENV{descriptif}|oui)[<div class="descriptif">(#INFO_DESCRIPTIF{album,#ID_ALBUM})</div>]]
+	</div>
+	]
+	<ul class="spip">
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #ENV{ids_documents}}>[
+		(#SET{extension, #EXTENSION|strtoupper|wrap{<abbr>}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}|attribut_html}|inserer_attribut{class,extension}})
+		][(#SET{taille, #TAILLE|taille_en_octets|wrap{<span>}|inserer_attribut{class,taille}})
+		][(#SET{dimensions, #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span>}|inserer_attribut{class,dimensions}}})
+		][(#SET{metas, #VAL{'/\[\W\]/'}|preg_split{#ENV*{metas,''}}})
+		]<li>
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]">
+				[<strong class="[(#TITRE|?{titre,fichier})]">(#TITRE|sinon{#FICHIER|basename}|couper{80})</strong>]
+				<B_infos>(<BOUCLE_infos(DATA){source table, #GET{metas}}{'<span class="sep"> - </span>'}{si #GET{metas}}>[
+					(#REM)][(#GET{#VALEUR})][
+				(#REM)]</BOUCLE_infos>)</B_infos>
+			</a>
+		</li>
+		</BOUCLE_documents_album>
+	</ul>
+</div><!-- .album.vignette -->
+</B_documents_album>
