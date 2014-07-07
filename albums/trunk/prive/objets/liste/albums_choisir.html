@@ -1,0 +1,95 @@
+[(#REM)
+
+	Liste des albums associables à un objet.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/contenu/popin-choisir_album.html
+
+][(#REM)
+
+	Paramètres (*obligatoire):
+		nb           nombre pour pagination
+		statut       prepa | publie | poubelle, défaut : «publie»
+		media        pour filtrer les albums contenant un type de document
+		             audio | image | video | file
+		exclus       liste d'albums à ne pas afficher (array ou liste d'ids séparés par des virgules)
+		recherche    pour filtrer les albums correspondants à un terme de recherche
+		sinon        texte affiché si aucun résultat
+		titre        texte affiché à la place du nombre de résultats
+
+]
+#SET{defaut_tri,#ARRAY{
+	id_album,1,
+	date,#ENV{date_sens,-1},
+	num titre,1,
+	points,-1
+}}
+#SET{exclus,#ENV{exclus}|is_array|?{#ENV{exclus}|implode{','},#ENV{exclus}}}
+<B_liste_albums>
+#ANCRE_PAGINATION
+<div class="liste-albums choisir liste-objets">
+
+	[(#REM) entête : filtres, titre et recherche ]
+	<div class="header clearfix">
+		<B_medias><ul class="filtres">
+			[<li>(#SELF|parametre_url{media,''}|lien_ou_expose{Tous,#ENV{media}|=={''},ajax})</li>]
+			<BOUCLE_medias(documents_liens documents){objet=album}{fusion media}>
+			#SET{label,#CHEMIN_IMAGE{#VAL{media-}|concat{#MEDIA}|concat{-16.png}}|balise_img|concat{#VAL{medias:media_}|concat{#MEDIA}|_T}}
+			[<li>(#SELF|parametre_url{media,#MEDIA}|lien_ou_expose{#GET{label},#ENV{media}|=={#MEDIA},ajax})</li>]
+			</BOUCLE_medias>
+		</ul></B_medias>
+		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+		[<h4 class="titre">(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{album}})</h4>]
+	</div>
+
+	<table class="spip liste">
+		<tbody>
+		<BOUCLE_liste_albums(ALBUMS documents)
+			{id_album !IN #GET{exclus}}
+			{statut == #ENV{statut,publie}}
+			{documents.media?}
+			{recherche?}
+			{par id_album, date}{tri #ENV{par,date},#GET{defaut_tri}}
+			{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" id="[album(#ID_ALBUM)_associer]">
+			<td class="identifiant">
+				[(#REM)[(#STATUT|puce_statut{album,#ID_ALBUM})&nbsp;]][<:info_numero_abbreviation:>(#ID_ALBUM)]
+			</td>
+			<td class='texte'>
+				[<div class="titre">(#ID_ALBUM|lien_objet{album})</div>]
+				[<div class="descriptif">(#DESCRIPTIF*)</div>]
+			</td>
+			<td class='contenu secondaire'>
+				#SET{medias,#ARRAY}
+				<BOUCLE_contenu(DOCUMENTS documents_liens){id_album}>
+				#SET{new,#GET{medias}|table_valeur{#MEDIA}|sinon{#ARRAY}|push{#ID_DOCUMENT}}
+				#SET{medias,#GET{medias}|array_merge{#ARRAY{#MEDIA,#GET{new}}}}
+				</BOUCLE_contenu>
+				<B_detail><ul>
+				<BOUCLE_detail(DATA){source table, #GET{medias}}>
+				[<li>[(#CHEMIN_IMAGE{#VAL{media-}|concat{#CLE}|concat{-16.png}}|balise_img)&nbsp;](#VALEUR|count|singulier_ou_pluriel{#VAL{medias:un_}|concat{#CLE},#VAL{medias:des_}|concat{#CLE,s}})</li>]
+				</BOUCLE_detail>
+				</ul></B_detail>
+			</td>
+			<td class='apercu secondaire'>
+				<a href="[(#URL_ECRIRE{popin-documents_album,id_album=#ID_ALBUM})]" class="editbox">[(#CHEMIN_IMAGE{album-chercher-16.png}|balise_img) ]Aperçu</a>
+			</td>
+			<td class='action'>
+				[(#REM) bouton de choix qui appelle une fonction js passée en argument]
+				[<span class="choisir">
+					<input type="submit" onclick="(#ENV{selectfunc,''})([(#ID_ALBUM)]);return false;" value="<:bouton_choisir|attribut_html:>" />
+				</span>]
+			</td>
+		</tr>
+		</BOUCLE_liste_albums>
+		</tbody>
+	</table>
+
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+
+</div><!-- .liste_albums.lies -->
+</B_liste_albums>[
+<div class="liste-objets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_albums>

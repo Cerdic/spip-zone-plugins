@@ -1,0 +1,76 @@
+[(#REM)
+
+	Filtres sur les mot-clés des albums, pour la navigation latérale de l'albumothèque.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/navigation/albums.html
+	Utilise :
+		autocomplete_albums.html
+
+]
+<B_mots_albums>
+
+<strong class='titre-liste'>[(#REM)[(#VAL{mot}|objet_icone{16})&nbsp;]][(#VAL{mot}|objet_info{texte_objets}|_T)]</strong>
+
+[(#REM) option de recherche si liste trop grande ]
+<BOUCLE_recherche(CONDITION){si #_mots_albums:GRAND_TOTAL|>{#ENV{nb,10}}}>
+[<a href='#'
+	onclick="$('#rechercher_mots_albums').toggle().focus();$(this).hide().next().show();return(false);"
+	class='icone s16 recherche loupe reveal dropdown'>
+	(#CHEMIN_IMAGE{album-chercher-16}|balise_img{<:info_rechercher:>})
+</a>]
+
+[<a href='#'
+	onclick="$('#rechercher_mots_albums').toggle().val('');$(this).hide().prev().show();return(false);"
+	class='icone s16 recherche fermer' style='display:none;'>
+	(#CHEMIN_IMAGE{fermer-16}|balise_img{<:bouton_fermer:>})
+</a>]
+
+<input
+	id='rechercher_mots_albums' name='rechercher_objets_albums'
+	data-objet='mot'
+	data-source='[(#URL_PAGE{autocomplete_albums}|parametre_url{objet,mot,&}|parametre_url{objet_lie,album,&})]'
+	data-cle='[(#VAL{mot}|id_table_objet)]'
+	type='text' class='text autocomplete' autocomplete='off'
+	placeholder='<:info_rechercher:> <:info_numero_abbreviation:> ou titre'
+	style='display:none;'/>
+</BOUCLE_recherche>
+
+#ANCRE_PAGINATION
+<ul class='liste-items inline mots'>
+
+	[(#REM) mot sélectionné en premier ]
+	[<li class='item on'>
+		<a
+		href='[(#SELF|parametre_url{id_mot,''})]'
+		onclick="ajaxReload('liste_albums',{args:{id_mot:''}})"
+		class='ajax'>
+			(#INFO_TITRE{mot,#ENV{id_mot}})
+		</a>
+	</li><li class='item sep'>&bull;</li>][
+
+	(#REM) liste des mots
+	]<BOUCLE_mots_albums(MOTS mots_liens)
+		{objet=album}
+		{fusion id_mot}
+		{id_mot!=#ENV{id_mot}}
+		{"<li class='item sep'>&bull;</li>"}
+		{pagination #ENV{nb,10}|moins{#ENV{id_mot}|?{1,0}}}>[
+	(#REM)
+	]<li class='item'>
+		<a
+			href='[(#SELF|parametre_url{id_mot,#ID_MOT})]'
+			onclick="ajaxReload('liste_albums',{args:{id_mot:'[(#ID_MOT)]'}})"
+			class='ajax'>
+			[(#TITRE)]
+		</a>
+	</li>[
+	(#REM)
+	]</BOUCLE_mots_albums>
+
+</ul><!-- .mots -->
+
+[<div class='pagination simple'>(#PAGINATION{page})</div>]
+</B_mots_albums>

@@ -1,0 +1,90 @@
+[(#REM)
+
+	Filtres sur les objets auxquels les albums sont liés, pour la navigation latérale de l'albumothèque.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/navigation/albums.html
+	Utilise :
+		autocomplete_albums.html
+
+]
+<B_objets>
+
+<strong class='titre-liste'><:album:filtre_utilisations:></strong>
+
+<ul class='liste-items liaisons'>
+
+	[(#REM) objets ]
+	<BOUCLE_objets(ALBUMS albums_liens){fusion objet}>
+	#SET{actif, #ENV{objet}|=={#OBJET}|?{1,''}}
+	#SET{param, #GET{actif}|?{'',#OBJET}}
+	#SET{actif_unique, #GET{actif}|et{#ENV{id_objet}}|?{1,''}}
+	<li class='item[ (#GET{actif}|?{on})]'>
+
+		<a
+			href='[(#SELF|parametre_url{objet,#GET{param}}|parametre_url{id_objet,''}|parametre_url{orphelins,''})]'
+			onclick="ajaxReload('liste_albums',{args:{objet:'[(#GET{param})]',id_objet:'',orphelins:''}})"
+			class='ajax'>
+			[(#OBJET|objet_icone{16}) ][(#OBJET|objet_info{texte_objets}|_T)]
+		</a>
+
+		[<a href='#'
+			onclick="$('#rechercher_[(#OBJET)]_albums').toggle().focus();$(this).hide().next().show();return(false);"
+			class='icone s16 recherche loupe reveal dropdown'>
+			(#CHEMIN_IMAGE{album-chercher-16}|balise_img{<:info_rechercher:>})
+		</a>]
+
+		[<a href='#'
+			onclick="$('#rechercher_[(#OBJET)]_albums').toggle().val('');$(this).hide().prev().show();return(false);"
+			class='icone s16 recherche fermer' style='display:none;'>
+			(#CHEMIN_IMAGE{fermer-16}|balise_img{<:bouton_fermer:>})
+		</a>]
+
+		<input
+			id='rechercher_[(#OBJET)]_albums' name='rechercher_albums_objets'
+			data-objet='[(#OBJET)]'
+			data-source='[(#URL_PAGE{autocomplete_albums}|parametre_url{objet,#OBJET,&}|parametre_url{objet_lie,album,&}|parametre_url{pivot_lie,1,&})]'
+			type='text' class='text autocomplete' autocomplete='off'
+			placeholder="<:info_numero_abbreviation:> ou titre"
+			style='display:none;'/>
+
+		[(#GET{actif_unique}|oui)<div class='selection'>[<small><:info_numero_abbreviation:>(#ENV{id_objet}) - </small>][(#INFO_TITRE{#OBJET,#ENV{id_objet}}|couper{80})]</div>]
+
+	</li>
+	</BOUCLE_objets>
+
+	[(#REM) orphelins ]
+	#SET{actif, #ENV{orphelins}|oui|?{1,''}}
+	#SET{param, #GET{actif}|?{'',1}}
+	<li class='item[ (#GET{actif}|?{on})]'>
+		<a
+			href='[(#SELF|parametre_url{orphelins,#GET{param}}|parametre_url{objet,''})]'
+			onclick="ajaxReload('liste_albums',{args:{orphelins:'[(#GET{param})]',objet:''}})"
+			class='ajax'>
+			[(#CHEMIN_IMAGE{album-orphelin-16}|balise_img) ]<:album:filtre_orphelins:>
+		</a>
+	</li>
+
+</ul><!-- .objets -->
+[(#REM) autocomplétion des champs de recherche des objets ayant des albums liés ]
+<script type="text/javascript">
+$(function() {
+	$("input[name='rechercher_albums_objets']").each( function(index) {
+		var valObjet = $(this).data('objet');
+		var page = $(this).data('source');
+		$(this).autocomplete({
+			source: page,
+			minLength: 1,
+			delay: 500,
+			select: function( event, ui) {
+				var id = ui.item.id;
+				ajaxReload('liste_albums', {args:{objet:valObjet,id_objet:id}});
+				$(this).ajaxReload({args:{objet:valObjet,id_objet:id}, history:true});
+			}
+		});
+	});
+});
+</script>
+</B_objets>

@@ -1,0 +1,75 @@
+[(#REM)
+
+	Filtres sur les auteurs des albums, pour la navigation latérale de l'albumothèque.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/navigation/albums.html
+	Utilise :
+		autocomplete_albums.html
+
+]
+<B_auteurs_albums>
+
+<strong class='titre-liste'>[(#REM)[(#VAL{auteur}|objet_icone{16})&nbsp;]][(#VAL{auteur}|objet_info{texte_objets}|_T)]</strong>
+
+[(#REM) option de recherche si liste trop grande ]
+<BOUCLE_recherche(CONDITION){si #_auteurs_albums:GRAND_TOTAL|>{#ENV{nb,10}}}>
+[<a href='#'
+	onclick="$('#rechercher_auteurs_albums').toggle().focus();$(this).hide().next().show();return(false);"
+	class='icone s16 recherche loupe reveal dropdown'>
+	(#CHEMIN_IMAGE{album-chercher-16}|balise_img{<:info_rechercher:>})
+</a>]
+
+[<a href='#'
+	onclick="$('#rechercher_auteurs_albums').toggle().val('');$(this).hide().prev().show();return(false);"
+	class='icone s16 recherche fermer' style='display:none;'>
+	(#CHEMIN_IMAGE{fermer-16}|balise_img{<:bouton_fermer:>})
+</a>]
+
+<input
+	id='rechercher_auteurs_albums' name='rechercher_objets_albums'
+	data-objet='auteur'
+	data-source='[(#URL_PAGE{autocomplete_albums}|parametre_url{objet,auteur,&}|parametre_url{objet_lie,album,&}|parametre_url{champ,nom,&})]'
+	data-cle='[(#VAL{auteur}|id_table_objet)]'
+	type='text' class='text autocomplete' autocomplete='off'
+	placeholder='<:info_rechercher:> <:info_numero_abbreviation:> ou nom'
+	style='display:none;' />
+</BOUCLE_recherche>
+
+#ANCRE_PAGINATION
+<ul class='liste-items auteurs'>
+
+	[(#REM) auteur sélectionné en premier ]
+	[<li class='item on'>
+		<a
+			href='[(#SELF|parametre_url{id_auteur,''})]'
+			onclick="ajaxReload('albums',{args:{id_auteur:''}})"
+			class='ajax'>
+			[<small><:info_numero_abbreviation:>(#ENV{id_auteur})</small>] - (#INFO_TITRE{auteur,#ENV{id_auteur}})
+		</a>
+	</li>]
+
+	<BOUCLE_auteurs_albums(AUTEURS auteurs_liens)
+		{objet=album}
+		{fusion id_auteur}
+		{par nom}
+		{id_auteur!=#ENV{id_auteur}}
+		{pagination #ENV{nb,10}|moins{#ENV{id_auteur}|?{1,0}}}>
+	#SET{actif, #ENV{id_auteur}|=={#ID_AUTEUR}?{1,''}}
+	#SET{param, #GET{actif}|?{'',#ID_AUTEUR}}
+	<li class='item[ (#GET{actif}|?{on})]'>
+		<a
+			href='[(#SELF|parametre_url{id_auteur,#GET{param}})]'
+			onclick="ajaxReload('liste_albums',{args:{id_auteur:'[(#GET{param})]'}})"
+			class='ajax'>
+			<small><:info_numero_abbreviation:>#ID_AUTEUR</small> - #NOM
+		</a>
+	</li>
+	</BOUCLE_auteurs_albums>
+
+</ul><!-- .auteurs -->
+
+[<div class='pagination simple'>(#PAGINATION{page})</div>]
+</B_auteurs_albums>

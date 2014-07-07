@@ -1,0 +1,29 @@
+[(#REM)
+
+	Filtres sur les médias contenus dans les albums, pour la navigation latérale de l'albumothèque.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/navigation/albums.html
+
+]
+<B_medias_albums>
+
+<strong class='titre-liste'><:album:filtre_medias:></strong>
+
+<ul class='liste-items medias'>
+	<BOUCLE_medias_albums(documents_liens documents){objet=album}{fusion media}>
+	#SET{actif, #ENV{media}|=={#MEDIA}|?{1,''}}
+	#SET{param, #GET{actif}|?{'',#MEDIA}}
+	<li class='item[ (#GET{actif}|?{on})]'>
+		<a
+			href='[(#SELF|parametre_url{media,#GET{actif}|?{'',#MEDIA}})]'
+			onclick="ajaxReload('liste_albums',{args:{media:'[(#GET{param})]'}})"
+			class='ajax'>
+			[(#CHEMIN_IMAGE{#VAL{media-}|concat{#MEDIA}|concat{-16.png}}|balise_img)&nbsp;][(#VAL{medias:media_}|concat{#MEDIA}|_T)]
+		</a>
+	</li>
+	</BOUCLE_medias_albums>
+</ul><!-- medias -->
+</B_medias_albums>
