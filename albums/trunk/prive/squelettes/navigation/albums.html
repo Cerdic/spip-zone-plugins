@@ -1,0 +1,68 @@
+[(#REM)
+
+	Filtres de sélection des albums pour l'albumothèque.
+	Il ne s'agit pas de liens type 'lien_ou_expose', mais bien de filtres qu'on peut activer et désactiver.
+	Un clic sur l'icone «loupe» fait apparaître un champ de recherche pour trouver un élément précis.
+
+][(#REM)
+
+	Utilise :
+		prive/squelettes/navigation/inc-albums_filtres_medias.html
+		prive/squelettes/navigation/inc-albums_filtres_objets.html
+		prive/squelettes/navigation/inc-albums_filtres_utilisations.html
+		prive/squelettes/navigation/inc-albums_filtres_mots.html
+		prive/squelettes/navigation/inc-albums_filtres_auteurs.html
+
+]
+<div class='navigation-albums'>
+
+	[(#REM) FICHIERS ]
+	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_documents, env, ajax})]
+
+	[(#REM) MEDIAS ]
+	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_medias, env, ajax})]
+
+	[(#REM) EXTENSIONS ]
+	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_extensions, env, ajax})]
+
+	[(#REM) OBJETS ]
+	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_objets, env, ajax})]
+
+	[(#REM) UTILISATIONS ]
+	[(#REM)[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_utilisations, env, ajax})]]
+
+	[(#REM) MOTS CLES ]
+	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_mots, env, ajax, nb=10})]
+
+	[(#REM) AUTEURS ]
+	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_auteurs, env, ajax, nb=5})]
+
+	[(#REM) JS pour l'autocomplétion des champs de recherche des objets liés aux albums :
+	documents, mot-clés et auteurs ]
+	<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		function autocomplete_objets_albums() {
+			$("input[name='rechercher_objets_albums']").each( function(index) {
+				var valObjet = $(this).data('objet');
+				var page = $(this).data('source');
+				var idTableObjet = $(this).data('cle');
+				$(this).autocomplete({
+					source: page,
+					minLength: 1,
+					delay: 500,
+					select: function( event, ui) {
+						var id = ui.item.id;
+						var valArgs = {};
+						valArgs[idTableObjet] = id;
+						ajaxReload('liste_albums', {args:valArgs});
+						$(this).ajaxReload({args:valArgs, history:true});
+					}
+				});
+			});
+		};
+		autocomplete_objets_albums();
+		if (window.jQuery) jQuery(function(){onAjaxLoad(autocomplete_objets_albums);});
+	});
+	</script>
+
+</div>
