@@ -1,9 +1,16 @@
 [(#REM)
-	Surcharge du plugin medias pour rajouter un id unique sur les blocs, sinon pb javascript
-	quand 2 formulaires sont affichés en meme temps (doc + album)
+
+	Surcharge du plugin Médias pour rajouter un identifiant unique aux blocs,
+	afin de pouvoir afficher plusieurs fois le formulaire sur une même page.
+
+][(#REM)
+
+	Modifs :
+		- L12 : ajout d'un suffixe unique à la variable «domid»
+
 ]
-#SET{id_unique, #VAL{9999}|rand{99999}}
-#SET{domid,_#ENV{mode}|concat{#ENV{id,new},'_',#GET{id_unique}}}
+#SET{domid,_#ENV{mode}|concat{#ENV{id,new},'_',#ENV{objet},#ENV{id_objet}|>{0}|?{#ENV{id_objet},0}}}
+
 #SET{methode,upload}
 [(#ENV{joindre_mediatheque}|oui)#SET{methode,mediatheque}]
 [(#ENV{joindre_distant}|oui)#SET{methode,distant}]

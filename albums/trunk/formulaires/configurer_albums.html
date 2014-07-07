@@ -1,18 +1,23 @@
 [(#REM)
-	Formulaire de configuration des albums.
-][(#REM)
-	Inclus dans /prive/squelettes/contenu/configurer_albums.html
-]
 
+	Formulaire de configuration du plugin Albums.
+
+][(#REM)
+
+	Inclus dans /prive/squelettes/contenu/configurer_albums.html
+
+]
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
 
 <h3 class='titrem'><img src="#CHEMIN_IMAGE{album-24.png}" class="cadre-icone" /><:album:titre_albums:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
 	[(#REM) message affiché si l'ajout de document aux albums n'est pas activé ]
 	[(#VAL{spip_albums}|in_array{#CONFIG{documents_objets}|explode{','}}|non)
-	<p class="reponse_formulaire reponse_formulaire_erreur"><a href='[(#URL_ECRIRE{configurer_contenu})]'><:album:info_documents_joints_albums:></a></p>
+	<p class="notice"><:album:message_avertissement_cfg_documents:><br><a href='[(#URL_ECRIRE{configurer_contenu})]'><:album:message_activer_cfg_documents:></a></p>
 	]
+	<p><:album:texte_activer_ajout_albums:></p>
 
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
