@@ -1,31 +1,47 @@
 <?php
 /**
- * Plugin Albums
- * Licence GNU/GPL
+ * Action : changer le statut d'un album
+ *
+ * @plugin     Albums
+ * @copyright  2014
+ * @author     Romy Tetue, Charles Razack
+ * @licence    GPL
+ * @package    SPIP\Albums\Action
  */
+
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Changer le statut d'un album :
- * arg 1 : prepa, prop, publie, refuse, poubelle (statut)
- * arg 2 : id_album
- * exemple : [(#URL_ACTION_AUTEUR{instituer_album, publie-#ID_ALBUM, #SELF})]
+ * Changer le statut d'un album
+ *
+ * @example
+ *     ```
+ *     #URL_ACTION_AUTEUR{instituer_album, #ID_ALBUM/publie, #SELF}
+ *     ```
+ *
+ * @param string $arg
+ *     Arguments séparés par un charactère non alphanumérique
+ *     sous la forme `$id_album/$statut`
+ *
+ *     - id_album : identifiant de l'album
+ *     - statut   : nouveau statut (prepa|publie|poubelle)
+ * @return void
  */
-function action_instituer_album_dist(){
+function action_instituer_album_dist($arg=null){
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
+	list($id_album, $statut) = preg_split('/\W/', $arg);
+	if (!$statut) $statut = _request('statut_nouv'); // cas POST
+	if (!$statut) return; // sait-on jamais
 
-	$table_arg = explode('-', $arg);
-
-	list($statut,$id_album) = $table_arg;
-	include_spip('inc/autoriser');
-
-	//Changer le statut d'un album
-	if ($id_album = intval($id_album)
-	  AND autoriser('instituer', 'album', $id_album, null, array('statut'=>$statut))){
+	if ($id_album = intval($id_album)) {
 		include_spip('action/editer_objet');
-		objet_modifier("album", $id_album, array("statut" => $statut));
+		objet_instituer('album', $id_album, array('statut'=>$statut),false);
 	}
 
 }
