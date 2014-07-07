@@ -10,10 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_migrer' => 'Prévisualiser la migration',
 
 	// E
-	'erreur_choix_incorrect' => 'Ce choix n\'est pas permis',
-	'explication_migration_albums_article_1' => 'Cet outil permet de transformer les articles d\'une rubrique en albums.',
-	'explication_migration_albums_article_2' => 'Seuls les articles publiés et n\'ayant pas déjà d\'album associé seront migrés.
-	Aucune donnée ne sera supprimée sur les articles : si le résultat ne vous convient pas, il suffit de désinstaller le plugin albums pour retrouver votre rubrique comme avant la migration.',
+	'erreur_choix_incorrect' => 'Ce choix n’est pas permis',
+	'explication_migration_albums_article_1' => 'Cet outil permet de transformer les articles d’une rubrique en albums.',
+	'explication_migration_albums_article_2' => 'Seuls les articles publiés et n’ayant pas déjà d’album associé seront migrés.
+	Aucune donnée ne sera supprimée sur les articles : si le résultat ne vous convient pas, il suffit de désinstaller le plugin albums pour retrouver votre rubrique comme avant la migration.',
 
 	// I
 	'info_migration_articles' => 'à migrer',

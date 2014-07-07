@@ -12,10 +12,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_migrer' => 'Preview the migration',
 
 	// E
-	'erreur_choix_incorrect' => 'That choice isn\'t allowed',
-	'explication_migration_albums_article_1' => 'This tool converts a section\'s articles into albums',
+	'erreur_choix_incorrect' => 'That choice isn’t allowed',
+	'explication_migration_albums_article_1' => 'This tool converts a section’s articles into albums',
 	'explication_migration_albums_article_2' => 'Only articles which are published and not bound with any album will be migrated.
-No data will be erased from articles : if you\'re not pleased with the result, you can uninstall the plugin \'Albums\' in order to recover the section as it was before the migration.',
+No data will be erased from articles : if you’re not pleased with the result, you can uninstall the plugin ’Albums’ in order to recover the section as it was before the migration.',
 
 	// I
 	'info_migration_articles' => 'available for migration', # me semble plus explicite que 'to migrate'

@@ -8,9 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'albums_description' => 'Ce plugin ajoute un nouvel objet éditorial \'album\' que l\'on peut lier aux autres objets.
-		Les albums sont des conteneurs pour les documents : ils vous permettent de réaliser des groupes de documents.
-		L\'insertion de séries de documents au fil du texte s\'en trouve simplifiée.', # NEW
 	'albums_nom' => 'Albumy',
 	'albums_slogan' => 'Zoskupte svoje dokumenty do albumov',
 	'albums_titre' => 'Albumy'
