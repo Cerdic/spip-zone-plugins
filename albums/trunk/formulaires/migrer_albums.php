@@ -1,19 +1,28 @@
 <?php
 /**
- * Plugin albums 4 pour Spip 3.0
- * Licence GPL 3
+ * Gestion du formulaire de migration d'articles en albums
  *
- * 2006-2011
- * Auteurs : cf paquet.xml
+ * @plugin     Albums
+ * @copyright  2014
+ * @author     Romy Tetue, Charles Razack
+ * @licence    GNU/GPL
+ * @package    SPIP\Albums\Formulaires
  */
 
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
+/**
+ * Chargement du formulaire de migration d'articles en albums
+ *
+ * Déclarer les champs postés et y intégrer les valeurs par défaut
+ *
+ * @return array
+ *     Environnement du formulaire
+ */
 function formulaires_migrer_albums_charger_dist(){
 
 	$valeurs = array(
-
 		'id_parent'=>'',
 		'toute_la_branche' => '',
 		'groupes_mots' => array(),
@@ -23,6 +32,14 @@ function formulaires_migrer_albums_charger_dist(){
 	return $valeurs;
 }
 
+/**
+ * Vérifications du formulaire de migration d'articles en albums
+ *
+ * Vérifier les champs postés et signaler d'éventuelles erreurs
+ *
+ * @return array
+ *     Tableau des erreurs
+ */
 function formulaires_migrer_albums_verifier_dist(){
 
 	$erreurs = array();
@@ -60,7 +77,14 @@ function formulaires_migrer_albums_verifier_dist(){
 	return $erreurs;
 }
 
-
+/**
+ * Traitement du formulaire de migration d'articles en albums
+ *
+ * Traiter les champs postés
+ *
+ * @return array
+ *     Retours des traitements
+ */
 function formulaires_migrer_albums_traiter_dist(){
 	$id_rubrique = _request('id_parent');
 	$where_articles = migrer_albums_where_articles($id_rubrique,_request('toute_la_branche'));
@@ -79,8 +103,11 @@ function formulaires_migrer_albums_traiter_dist(){
 	return array('message_ok'=>$message);
 }
 
-
-
+/**
+ * Fonction privée
+ *
+ * @return int nombre d'articles migrés
+ */
 function albums_migrer_articles($where_articles, $where_mots, $refuser){
 	include_spip("action/editer_objet");
 	include_spip("action/editer_liens");
@@ -155,8 +182,11 @@ function albums_migrer_articles($where_articles, $where_mots, $refuser){
 	return $nb;
 }
 
-
-
+/**
+ * Fonction privée
+ *
+ * @return array
+ */
 function migrer_albums_where_articles($id_rubrique,$branche = false){
 
 	$where = array();
@@ -171,6 +201,11 @@ function migrer_albums_where_articles($id_rubrique,$branche = false){
 	return $where;
 }
 
+/**
+ * Fonction privée
+ *
+ * @return array
+ */
 function migrer_albums_where_mots($groupes){
 	$id_groupe = array();
 
