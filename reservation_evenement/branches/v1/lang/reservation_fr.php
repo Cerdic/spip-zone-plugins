@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bonjour' => 'Bonjour',
-	
-	//C
-	'choix_precis'=>'Choix précis',
+
+	// C
+	'choix_precis' => 'Choix précis',
 
 	// D
 	'designation' => 'Désignation',
@@ -24,11 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers 
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
-	'explication_objet_promotion' => 'Si définit au niveau article, seront compris tous les évenéments disponible por la réservation de cet article',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
-	'explication_nombre_evenements' => 'Le nombre nécessaire d\'événements réservés  pour que la promotion s\'applique.',	
-	'explication_nombre_evenements_choix' => 'Si rien ou 0, ce nombre sera égal au nombre d\'@objet_promotion@s choisis ci-haut',		
-	'explication_objet_promotion' => 'Si définit au niveau article, seront compris tous les évenéments disponible por la réservation de cet article.',	
+	'explication_nombre_evenements' => 'Le nombre nécessaire d’événements réservés  pour que la promotion s’applique.',
+	'explication_nombre_evenements_choix' => 'Si rien ou 0, ce nombre sera égal au nombre d’@objet_promotion@s choisis ci-haut',
+	'explication_objet_promotion' => 'Si définit au niveau article, seront compris tous les évenéments disponible por la réservation de cet article.',
 
 	// I
 	'icone_cacher' => 'Cacher',
@@ -52,17 +51,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mot_passe' => 'Mot de passe :',
 	'label_mot_passe2' => 'Répétez le mot de passe :',
 	'label_nom' => 'Nom :',
-	'label_nombre_evenements' => 'Nombre de coincidences :',	
-	'label_objet_article' => 'Choissisez les articles dont les événements seront disponibles pour la promotion :',		
-	'label_objet_evenement' => 'Choissisez les les événements disponibles pour la promotion :',			
-	'label_objet_promotion' => 'Définir sur quel niveau on applique la promotion :',	
+	'label_nombre_evenements' => 'Nombre de coincidences :',
+	'label_objet_article' => 'Choissisez les articles dont les événements seront disponibles pour la promotion :',
+	'label_objet_evenement' => 'Choissisez les les événements disponibles pour la promotion :',
+	'label_objet_promotion' => 'Définir sur quel niveau on applique la promotion :',
 	'label_reference' => 'Référence :',
 	'label_reservation' => 'Réservation :',
 	'label_statut' => 'Statut :',
 	'label_statut_defaut' => 'Statut par défaut :',
 	'label_statuts_complet' => 'Le(s) Statut(s) complet(s) :',
 	'label_type_paiement' => 'Type de paiemement :',
-	'label_type_selection' => 'Type de sélection :',	
+	'label_type_selection' => 'Type de sélection :',
 
 	// M
 	'merci_de_votre_reservation' => 'Nous avons bien enregistré votre réservation et nous vous remercions de votre confiance.',
@@ -70,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'montant' => 'Montant',
 
 	// N
-	'nom_reservation_multiples_evenements'=>'Réservation de plusieurs événements', 
+	'nom_reservation_multiples_evenements' => 'Réservation de plusieurs événements',
 	'notifications_activer_explication' => 'Envoyer par mail des notifications de réservation ?',
 	'notifications_activer_label' => 'Activer',
 	'notifications_cfg_titre' => 'Notifications',
@@ -119,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_reference_numero' => 'Référence n° ',
 
 	// S
-	'simple' => 'Simple',	
+	'simple' => 'Simple',
 	'statuts_complet_explication' => 'Les statuts du détails de résérvation pris en compte pour déterminer si l’événement est complet.',
 	'sujet_une_reservation_accepte' => 'Réservation confirmé sur @nom@',
 	'sujet_votre_reservation_accepte' => '@nom@ : confirmation de votre réservation',

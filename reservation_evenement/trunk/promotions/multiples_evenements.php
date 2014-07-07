@@ -60,7 +60,7 @@ function promotions_multiples_evenements_dist($flux=array()){
 								            'nom' => 'nombre_evenements',
 								            'label' => _T('reservation:label_nombre_evenements'),
 								            'explication' => _T('reservation:explication_nombre_evenements'),
-								            'class'=>'auto_submit',
+								            'defaut'=>'2',
 								        	'obligatoire'=>'oui',
 								        	'afficher_si'=>'@type_selection@=="simple"'		                   
 								        	),	                	
