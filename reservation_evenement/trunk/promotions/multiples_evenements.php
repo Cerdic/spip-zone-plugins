@@ -121,7 +121,8 @@ function promotions_multiples_evenements_action_dist($flux,$promotion){
 	$nombre_evenements_choix=isset($valeurs_promotion['nombre_evenements_choix'])?$valeurs_promotion['nombre_evenements_choix']:'';	
 	
 	//promotion simple
-	if($type_selection=='simple' AND count($evenements)==$nombre_evenements)$flux['data']['applicable']='oui';
+
+	if($type_selection=='simple' AND count($evenements)>=$nombre_evenements)$flux['data']['applicable']='oui';
 	//promotion avec choix précis des évenements
 	elseif($type_selection=='choix_precis'){
 
