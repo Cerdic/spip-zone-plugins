@@ -109,6 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle' => 'à la poubelle',
 	'texte_statut_prepa' => 'non publié',
 	'texte_statut_publie' => 'publié en ligne',
+	'texte_double_clic_inserer_balise' => 'Double-clic pour insérer la balise dans le texte',
 	'titre_album' => 'Album',
 	'titre_albums' => 'Albums',
 	'titre_documents_deplaces' => 'Documents déplacés',

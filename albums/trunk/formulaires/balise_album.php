@@ -45,12 +45,18 @@ function formulaires_balise_album_charger_dist($id_album=0){
 
 	// Il y a 2 étapes
 	$etape = is_null(_request('_etape')) ? 1 : intval(_request('_etape'));
-	$valeurs['_etapes'] = 2;
+	$valeurs['_etapes'] = 3;
 
 	switch ($etape) {
 
-		// étape 1 : choix du modèle
+		// étape 0 : balise de base
 		case 1;
+			$valeurs['_balise'] = $balise = htmlspecialchars('<album'.$id_album.'>');
+			$valeurs['_js_balise'] = js_balise($balise);
+			break;
+
+		// étape 1 : choix du modèle
+		case 2;
 			foreach($liste_modeles as $modele=>$infos)
 				$datas_modeles[$modele] = $infos['alias'];
 			$saisies_modeles = array(
@@ -67,8 +73,8 @@ function formulaires_balise_album_charger_dist($id_album=0){
 			$valeurs['_saisies'] = $saisies_modeles;
 			break;
 
-		// étape 2
-		case 2;
+		// étape 3 : choix des paramètres puis affichage
+		case 3;
 			// choix des paramètres
 			if (_request('choisir')) {
 				$modele = _request('modele');
@@ -111,7 +117,7 @@ function formulaires_balise_album_charger_dist($id_album=0){
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_balise_album_verifier_2_dist($id_album=0){
+function formulaires_balise_album_verifier_3_dist($id_album=0){
 
 	$erreurs = array();
 	include_spip('inc/saisies');
@@ -176,14 +182,24 @@ function formulaires_balise_album_traiter_dist($id_album=0){
 		}
 	}
 	$balise .= '>';
-	set_request('_balise',$balise);
-	$js = "barre_inserer('".texte_script($balise)."', $('textarea[name=texte]')[0]);";
-	set_request('_js_balise',$js);
-	//$res['message_ok'] = "Double-clic pour insérer la balise dans le texte";
+	// ajout de <wbr> devant chaque pipe «|» pour des retours à la ligne corrects
+	$balise_txt = preg_replace("/\|/","<wbr>|",htmlspecialchars($balise));
+	set_request('_balise',$balise_txt);
+	set_request('_js_balise',js_balise($balise));
+	//$res['message_ok'] = _T('album:texte_double_clic_inserer_balise');
 
 	return $res;
 
 }
 
+/**
+ * Micro fonction qui renvoie le code js pour insérer une balise dans le texte
+ *
+ * @param int $balise.
+ * @return int
+ */
+function js_balise($balise) {
+	return "barre_inserer('".texte_script($balise)."', $('textarea[name=texte]')[0]);";
+}
 
 ?>

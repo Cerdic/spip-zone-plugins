@@ -57,38 +57,10 @@
 
 	</div><!-- .header-album -->
 
-	<div class="balise-album">
-		<div class="afficher" id="afficher-balise-album#ID_ALBUM">
-			[<div class="code-balise large"><code>(#VAL{<album}|concat{#ID_ALBUM,>}|htmlspecialchars)</code></div>]
-			[(#PLUGIN{yaml}|et{#PLUGIN{saisies}}|oui)<a href="#" class="bouton editer"><:album:texte_personnaliser_balise_album:></a>]
-		</div>
-		<BOUCLE_balise(CONDITION){si #PLUGIN{yaml}|et{#PLUGIN{saisies}}}>
-		<div class="formulaire" id="editer-balise-album#ID_ALBUM" style="display:none;">
-			[<div class="conteneur-fermer"><a href="#" class="bouton fermer">(#CHEMIN_IMAGE{fermer-16.png}|balise_img{<:bouton_fermer:>}|inserer_attribut{title,<:bouton_fermer:>})</a></div>]
-			<div class="ajax">
-			#FORMULAIRE_BALISE_ALBUM{#ID_ALBUM}
-			</div>
-		</div>
-		<script type='text/javascript'>
-		jQuery(document).ready(function($) {
-			var afficher = $('#afficher-balise-album#ID_ALBUM');
-			var editer = $('#editer-balise-album#ID_ALBUM');
-			var btn_editer = afficher.find('a.editer');
-			var btn_fermer = editer.find('a.fermer');
-			btn_editer.click(function() {
-				editer.slideDown(200);
-				afficher.slideUp(200);
-				return false;
-			});
-			btn_fermer.click(function() {
-				editer.slideUp(200);
-				afficher.slideDown(200);
-				return false;
-			});
-		});
-		</script>
-		</BOUCLE_balise>
-	</div><!-- .balise-album -->
+
+	<div class="ajax">
+	#FORMULAIRE_BALISE_ALBUM{#ID_ALBUM}
+	</div>
 
 	[(#REM) DOCUMENTS ]
 	[(#INCLURE{fond=prive/squelettes/inclure/documents_album_colonne, id_album, editable, ajax=documents-album#ID_ALBUM})]

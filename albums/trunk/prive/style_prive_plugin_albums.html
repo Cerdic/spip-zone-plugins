@@ -128,7 +128,7 @@
     ======================
 */
 .albums-lies .formulaire_ajouter_album  { margin-bottom: 0; }
-.formulaire_ajouter_album .identifiants { width: 50%; }
+.formulaire_ajouter_album input.identifiants { width: 50%; }
 .formulaire_ajouter_album .documents    { margin-bottom: 0; padding-bottom: 0; }
 
 
@@ -186,7 +186,8 @@
 .menu-edition-albums .sep               { margin: 0 .33em; }
 .documents-album.colonne .item,
 .boite-album.colonne .header-album,
-.boite-album.colonne .footer-album      { padding: 5px; }
+.boite-album.colonne .footer-album      { padding: 10px 5px; }
+.documents-album.colonne .item:first-child { border-top-width: 1px; border-top-color: inherit; }
 .documents-album.colonne .tourner form  { float: #ENV{right}; clear: both; }
 .documents-album.colonne .item > a,
 .documents-album.colonne .infos         { display: block; float: none;  width: 100%;  text-align: center; }
@@ -194,22 +195,17 @@
 .documents-album.colonne .infos         { clear: both; margin: .33em 0; }
 .lat .formulaire_ajouter_album          { margin-top: 2.0775em; }
 .lat .formulaire_ajouter_album > *      { font-size: .9em; }
-/* balise */
-.balise-album > .afficher,
-.balise-album > .formulaire             { padding: 10px 0; }
-.balise-album > .afficher               { text-align: center; }
-.balise-album > .formulaire             { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
-.balise-album .code-balise              { word-break: break-all; }
-.balise-album .code-balise.large        { font-size: 1.2em; }
-.balise-album .formulaire_balise_album,
-.balise-album .formulaire_balise_album .boutons { margin: 0; background-color: transparent; border-width: 0; }
-.balise-album .formulaire_balise_album .reponse_formulaire { margin: 0; }
-.balise-album .formulaire_balise_album .saisie_oui_non .choix { display: inline-block; }
-.balise-album .bouton.editer            { font-size: x-small; }
-.balise-album .conteneur-fermer         { text-align: #ENV{right}; }
-.balise-album .formulaire .code-balise  { text-align: center; font-size: .9em; }
-.balise-album .formulaire fieldset      { border-top: 0 none; }
-.balise-album .formulaire .legend       { margin: 0; padding: 0; background-color: transparent; }
+/* formulaire balise */
+.balise-album .code-balise              { text-align: center; }
+.balise-album .code-balise:not(.perso)  {  }
+.balise-album .code-balise.perso        {  }
+.balise-album .code-balise:hover        { cursor: pointer; }
+.balise-album .saisie_oui_non .choix    { display: inline-block; }
+.balise-album .boutons input.personnaliser { display: block; margin: 0 auto; font-size: smaller; font-weight: bold; font-family: unset; color:[#(#GET{claire}|couleur_foncer)]; }
+.boite-album .balise-album,
+.boite-album .balise-album .boutons     { margin: 0; background-color: transparent; border-width: 0; }
+.boite-album .balise-album              { padding: 10px 5px; }
+.boite-album .balise-album.edition      { background-color: [#(#GET{claire}|couleur_eclaircir|couleur_eclaircir)]; }
 
 
 /*
