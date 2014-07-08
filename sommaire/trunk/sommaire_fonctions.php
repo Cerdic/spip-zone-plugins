@@ -194,6 +194,8 @@ function sommaire_filtre($texte, $ajoute=true, $sommaire_seul=false){
 function sommaire_post_propre($texte, $ajoute=true, $sommaire_seul=false){
 	if (strpos($texte, '<h')!==false)
 		$texte = sommaire_filtre_texte_echappe($texte,'sommaire_filtre','html|code|cadre|frame|script|acronym|cite',array($ajoute,$sommaire_seul));
+	elseif ($sommaire_seul)
+                return '';
 	return $texte;
 }
 
