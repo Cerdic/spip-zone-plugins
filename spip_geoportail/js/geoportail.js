@@ -269,6 +269,7 @@ var spipGeoportail = jQuery.geoportail =
 		{	var pf = new jQuery.geoportail.elevation(this.profils[p].div, this.profils[p].options);
 			pf.loadGPX(this.profils[p].fichier);
 		}
+		if (carte.mode == "OSM") $(".gpControlTermsOfService").html("<a href='http://www.openstreetmap.org/copyright'>&copy; OpenStreetMap contributors</a>");
 	},
 	
 	/** Ajouter une fonction d'initialisation
@@ -828,7 +829,7 @@ var spipGeoportail = jQuery.geoportail =
 				description: info.descriptif,
 				metadataURL: info.url,
 				isBaseLayer: true,
-				originators: [{ logo: "osm", pictureUrl: "http://wiki.openstreetmap.org/Wiki.png", url: "http://wiki.openstreetmap.org/wiki/WikiProject_France"}]
+				originators: [{ logo: "osm", pictureUrl: spipGeoportail.imgPath+"osm-logo.png", url: "http://www.openstreetmap.org/copyright"}]
 			});
 		map.getMap().addLayer(l);
 		l.isBaseLayer = false;
@@ -837,7 +838,7 @@ var spipGeoportail = jQuery.geoportail =
 		return l;
 	},
 
-	// Ajouter un layer MapQuest
+	// Ajo	uter un layer MapQuest
 	addMQSTLayer: function (map, titre, server, info, options)
 	{	if (!info) info={};
 		if (!options) options={};
@@ -860,8 +861,8 @@ var spipGeoportail = jQuery.geoportail =
 				description: info.descriptif,
 				metadataURL: info.url,
 				isBaseLayer: true,
-				originators: [{ logo: "osm", pictureUrl: "http://wiki.openstreetmap.org/Wiki.png", url: "http://wiki.openstreetmap.org/wiki/WikiProject_France"},
-					{ logo: "mquest", pictureUrl: "http://www.mapquestapi.com/cdn/common/images/small-logo.png", url: "http://www.mapquest.com/"}]
+				originators: [{ logo: "osm", pictureUrl: spipGeoportail.imgPath+"osm-logo.png", url: "http://www.openstreetmap.org/copyright"},
+					{ logo: "mquest", pictureUrl: spipGeoportail.imgPath+"mq-logo.png", url: "http://www.mapquest.com/"}]
 			});
 		map.getMap().addLayer(l);
 		l.isBaseLayer = false;
