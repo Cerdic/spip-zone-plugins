@@ -183,7 +183,7 @@ function formulaires_balise_album_traiter_dist($id_album=0){
 	}
 	$balise .= '>';
 	// ajout de <wbr> devant chaque pipe «|» pour des retours à la ligne corrects
-	$balise_txt = preg_replace("/\|/","<wbr>|",htmlspecialchars($balise));
+	$balise_txt = preg_replace("/([\|,])/","<wbr>$1",htmlspecialchars($balise));
 	set_request('_balise',$balise_txt);
 	set_request('_js_balise',js_balise($balise));
 	//$res['message_ok'] = _T('album:texte_double_clic_inserer_balise');
