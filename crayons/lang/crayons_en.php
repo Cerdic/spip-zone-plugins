@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'absence_cle_primaire' => 'No primary key!',
 	'activation_barre_impossible' => 'Another plugin is preventing the use of  porte-plume on the public site.',
 	'annuler' => 'Cancel',
 
@@ -23,11 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_@type@_@id@' => 'Edit the whole @type@ @id@',
 	'editer_tout' => 'Edit as a whole',
 	'effets' => 'Effects',
-	'explication_exec_autorise' => 'Pages which are authorised fro changes
-  (?exec=...) : (, to separate several pages- * for all).', # MODIF
-	'explication_introduction_article' => 'The introduction for an article displays the description of the article if there is one, otherwise it displays the first 600 characters (of the standfirst and text).', # MODIF
+	'explication_exec_autorise' => 'Pages which are authorised for changes
+  (?exec=...) : (, to separate several pages - * for all).',
+	'explication_introduction_article' => 'The introduction for an article displays the description of that article if there is one, otherwise it displays the first 600 characters (of the standfirst and text).',
 	'explication_reduire_logo' => 'Reduce the logo size if it exceeds
-  the maximum size (in pixels). Example: 100 (0 = never).', # MODIF
+  the maximum size (in pixels). Example: 100. (0 = never).',
 
 	// I
 	'info_experimental' => 'Experimental',
