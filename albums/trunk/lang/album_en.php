@@ -16,6 +16,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_vider' => 'Empty',
 
 	// C
+	'c_albumotheque_filtres' => 'Filters let you active certain criteria
+		in order to restrict the selection of albums. One click on an entry activates the filter, another click dis-activates it.
+		By combining them you can easily find any album.
+		When the lists are too long, search fields let you find a specific object.',
+	'c_albumotheque_presentation' => 'The albums let you compose groups of documents.',
 	'c_albumotheque_titre_filtres' => 'Filter selection',
 	'c_albumotheque_titre_presentation' => 'Albums',
 	'cfg_titre_albums' => 'Albums',
@@ -25,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_album_numero' => 'One or several ids comma-separated',
 
 	// F
-	'filtre_extensions' => 'File extensions', # RELIRE
+	'filtre_extensions' => 'File extensions',
 	'filtre_medias' => 'Documents types',
 	'filtre_non_vus' => 'Not inserted in text',
 	'filtre_orphelins' => 'Orphans',
@@ -46,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_album_objets' => 'Enable albums for the contents :',
-	'label_album_numero' => 'Album number', # RELIRE
+	'label_album_numero' => 'Album number',
 	'label_case_utiliser_titre_defaut' => 'By default, use the parent object’s title',
 	'label_descriptif' => 'Description',
 	'label_modele_alias_liste' => 'List',
@@ -66,11 +71,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_meta_dimensions' => 'Dimensions',
 	'label_modele_meta_extension' => 'Extension',
 	'label_modele_meta_taille' => 'Size',
-	'label_modele_metas' => 'Show files infos :', # RELIRE
+	'label_modele_metas' => 'File info:',
 	'label_modele_nom_liste' => 'an album (list)',
 	'label_modele_nom_vignettes' => 'an album (thumbnails)',
 	'label_modele_parcourir_albums' => 'Browse albums',
-	'label_modele_placeholder_dimension' => 'Size in pixels, without unity', # RELIRE
+	'label_modele_placeholder_dimension' => 'Size in pixels, without unity',
 	'label_modele_recadrer_images' => 'Crop images',
 	'label_modele_titre_perso' => 'Custom title',
 	'label_modele_tri_date' => 'Date',
@@ -85,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_1_album_ajoute' => '1 album has been added.',
 	'message_activer_cfg_documents' => 'In the document configuration form located in the «site content» menu, tick the « Albums » checkbox.',
 	'message_album_non_editable' => 'This album cannot be edited : it’s in use by one or several objects that you can’t edit.',
-	'message_avertissement_cfg_documents' => 'Warning ! Adding documents to albums is not enabled. This is a necessary option for the albums to work properly.', # RELIRE
+	'message_avertissement_cfg_documents' => 'Warning! Adding documents to albums is not enabled. This is a necessary option for the albums to work properly.',
 	'message_balise_inseree_succes' => 'The tag was inserted in the text',
 	'message_id_album_ajoute' => 'The album @id_album@ has been added.',
 	'message_nb_albums_ajoutes' => '@nb@ albums have been added.',
@@ -98,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_activer_ajout_albums' => 'You can enable the interface to add albums to articles, sections and so on.
-In a similar way to documents from portfolios, albums may then be referenced in the texts or displayed separately.', # RELIRE
+Similar to documents in portfolios, albums may be referenced in the text or displayed separately.',
 	'texte_changer_statut' => 'Album status',
 	'texte_creer_album' => 'Create a new album',
 	'texte_modifier' => 'Edit',
