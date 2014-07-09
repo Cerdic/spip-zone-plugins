@@ -103,6 +103,7 @@ function formidable_declarer_tables_objets_sql($tables) {
 			'refuse'=>'formidable:texte_statut_refuse',
 			'poubelle' => 'texte_statut_poubelle',
 		),
+		'page' => (lire_config('formidable/analyse/activer_pages')=='on') ? 'formulaire' : false,
 
 	);
 

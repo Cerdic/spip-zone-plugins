@@ -6,6 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'activer_pages_label' => 'Autoriser la création de pages publique pour les formulaires',
+	'activer_pages_explication'=>'Par défaut, les pages publiques des formulaires ne sont pas autorisées',
 	'admin_reponses_auteur' => 'Autoriser les auteurs des formulaires à modifier les réponses',
 	'admin_reponses_auteur_explication' => 'Seul les administrateurs peuvent normalement modifier les réponses apportées à un formulaire (à la poubelle, publiée, proposé à l’évaluation). Cette option permet à un auteur d’un formulaire d’en modifier le statut (au risque de fausser d’éventuelles statistiques).',
 	'analyse_avec_reponse' => 'Réponses non-vide',
