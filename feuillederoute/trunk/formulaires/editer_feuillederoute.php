@@ -28,4 +28,4 @@ function formulaires_editer_feuillederoute_traiter_dist(){
 	return array('message_ok' => _T('feuillederoute:message_ok'));
 }
 
-?> 
+?>
