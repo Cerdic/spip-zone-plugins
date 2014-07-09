@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'absence_cle_primaire' => 'Geen primaire sleutel!',
 	'activation_barre_impossible' => 'Een andere plugin verbiedt het gebruik van De Penhouder in de publieke site.',
 	'annuler' => 'Annuleren',
 
@@ -24,10 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Alles uitgeven',
 	'effets' => 'Gevolgen',
 	'explication_exec_autorise' => 'Pagina’s die mogen worden gewijzigd
-  (?exec=...) : (, om de exec’s te scheiden - * voor alle).', # MODIF
-	'explication_introduction_article' => 'De introductie toont de beschrijving  van een artikel, anders geeft het de eerste 600 tekens weer (kop en tekst).', # MODIF
-	'explication_reduire_logo' => 'Verklein het logo als het hoger is dan 
-   de maximale grootte in pixels. Voorbeeld: 100. (0 = nooit)', # MODIF
+  (?exec=...) : (, om de exec’s te scheiden - * voor alle).',
+	'explication_introduction_article' => 'De introductie toont de beschrijving  van een artikel, anders geeft het de eerste 600 tekens weer (kop en tekst).',
+	'explication_reduire_logo' => 'Verklein het logo als het groter is dan 
+   de maximale aantal pixels. Voorbeeld: 100. (0 = nooit)',
 
 	// I
 	'info_experimental' => 'Experimenteel',
