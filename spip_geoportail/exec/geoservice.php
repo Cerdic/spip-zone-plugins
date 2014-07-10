@@ -80,6 +80,12 @@ function exec_geoservice()
 					"edit.gif",
 					"right", 
 					false);
+			$rep .= icone_inline(_T('geoportail:icone_dupliquer_service'), 
+					generer_url_ecrire('geoservice_edit',"id_copy=$id_geoservice"), 
+					"breve-24.gif",
+					"",
+					"right", 
+					false);
 			echo $rep;
 			
 			if ($GLOBALS['spip_version_branche']>2) echo gros_titre (textebrut(typo($row['titre'])),puce_statut($row['statut']), false);

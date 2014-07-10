@@ -21,12 +21,16 @@ include_spip('inc/compat_192');
 function exec_geoservice_edit()
 {	// Gestion 
 	$id_geoservice = _request('id_geoservice');
+	$id_copy = _request('id_copy');
 
 	pipeline('exec_init',array('args'=>array('exec'=>'geoservice_edit','id_geoservice'=>$id_geoservice),'data'=>''));
 
 	// Recherche du service concerne
 	if ($id_geoservice)
 	{	$row = spip_fetch_array(spip_query("SELECT * FROM spip_geoservices WHERE id_geoservice='$id_geoservice'"));
+	}
+	else if ($id_copy)
+	{	$row = spip_fetch_array(spip_query("SELECT * FROM spip_geoservices WHERE id_geoservice='$id_copy'"));
 	}
 	else
 	{	$row = array(
