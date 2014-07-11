@@ -37,6 +37,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *     Environnement du formulaire
  */
 function formulaires_albums_deplacer_documents_charger_dist($objet='',$id_objet=''){
+	// option pas activée = pas de chocolat
+	include_spip('inc/config');
+	if (!lire_config('albums/deplacer_documents','')) $valeurs['editable'] = false;
 	$valeurs = array();
 	// champ contenant la liste des déplacements à effectuer (auto complété par js)
 	$valeurs['_deplacements'] = '';
