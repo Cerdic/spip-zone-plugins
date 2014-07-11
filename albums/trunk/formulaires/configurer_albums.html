@@ -35,21 +35,32 @@
 				]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_albums,spip_documents}}
 			</li>
 
-			[(#REM) titre par défaut d'un nouvel album ]
-			#SET{name,utiliser_titre_defaut} #SET{obli,''} #SET{defaut,#CONFIG{albums/utiliser_titre_defaut}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			[(#REM) utiliser un titre par défaut pour les nouveaux albums ]
+			#SET{name,utiliser_titre_defaut} #SET{obli,''} #SET{defaut,#CONFIG{albums/utiliser_titre_defaut}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{val,on}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:album:label_utiliser_titre_defaut:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]
-				#SET{val,on}
 				<div class="choix">
 					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 					<label for="#GET{name}_#GET{val}"><:album:label_case_utiliser_titre_defaut:></label>
 				</div>
 			</li>
 
-		</ul>
+			[(#REM) activer le déplacement de documents par cliquer-glisser. ]
+			#SET{name,deplacer_documents} #SET{obli,''} #SET{defaut,#CONFIG{albums/deplacer_documents}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{val,on}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label><:album:label_activer_deplacer_documents:></label>
+				<p class="explication"><:album:explication_deplacer_documents:></p>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]
+				<div class="choix">
+					<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+					<label for="#GET{name}_#GET{val}"><:album:label_case_deplacer_documents:></label>
+				</div>
+			</li>
 
+		</ul>
 
 	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	<!--extra-->
