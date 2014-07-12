@@ -210,6 +210,11 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 		else
 			$valeur = _request($champ);
 		
+		// Pour la saisie "destinataires" il faut filtrer si jamais on a mis un premier choix vide
+		if ($saisie['saisie'] == 'destinataires') {
+			$valeur = array_filter($valeur);
+		}
+		
 		// On regarde d'abord si le champ est obligatoire
 		if ($obligatoire
 			and $obligatoire != 'non'
