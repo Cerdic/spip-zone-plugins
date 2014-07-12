@@ -26,8 +26,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_deplacement' => 'Le traitement n’a pas pu être effectué',
 	'explication_album_numero' => 'Un ou plusieurs identifiants séparés par une virgule',
-	'explication_deplacer_documents' => '<strong>Expérimental</strong> : il est possible de déplacer des documents entre abums par cliquer-glisser.
-		Si vous disposez des droits nécessaires, le curseur change à leur survol pour signaler qu\'une action est possible.
+	'explication_deplacer_documents' => '<strong>Expérimental</strong> : il est possible de déplacer des documents entre abums par cliquer-glisser.
+		Si vous disposez des droits nécessaires, le curseur change à leur survol pour signaler qu’une action est possible.
 		Une fois les déplacements effectués, un formulaire apparaît en bas de la liste pour enregistrer les changements.',
 
 	// F
@@ -54,8 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_activer_album_objets' => 'Activer les albums pour les contenus :',
 	'label_activer_deplacer_documents' => 'Cliquer-glisser',
 	'label_album_numero' => 'Album numéro',
-	'label_case_utiliser_titre_defaut' => 'Par défaut, utiliser le titre de l’objet lié',
 	'label_case_deplacer_documents' => 'Déplacement de documents entre albums par cliquer-glisser',
+	'label_case_utiliser_titre_defaut' => 'Par défaut, utiliser le titre de l’objet lié',
 	'label_descriptif' => 'Descriptif',
 	'label_modele_alias_liste' => 'Liste',
 	'label_modele_alias_vignettes' => 'Vignettes',
