@@ -28,7 +28,7 @@
 		<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
 			[(#ENV{_etape,1}|=={1}|oui)<input class="submit link personnaliser" type='submit' name='commencer' value='<:album:texte_personnaliser_balise_album:>' />]
 			[(#ENV{_etape,1}|=={2}|oui)<input class="submit choisir" type='submit' name='choisir' value='<:bouton_choisir:>' />]
-			[(#ENV{_etape,1}|=={3}|oui|et{#ENV{fini}|non}|oui)<input class="submit generer" type='submit' name='generer' value='<:bouton_valider:>' />]
+			[(#ENV{_etape,1}|=={3}|et{#ENV{fini}|is_null}|oui)<input class="submit generer" type='submit' name='generer' value='<:bouton_valider:>' />]
 			[(#ENV{_etape,1}|=={3}|et{#ENV{fini}}|oui)<input class="submit link personnaliser" type='submit' name='_retour_etape_2' value='<:album:texte_personnaliser_balise_album:>' />]
 			[(#ENV{_etape,1}|=={2}|ou{#ENV{_etape,1}|=={3}|et{#ENV{fini}|is_null}}|oui)<input type="submit" class="submit link retour" name="_retour_etape_[(#ENV{_etape}|moins{1})]" value="<:retour:>" />]
 		</p>

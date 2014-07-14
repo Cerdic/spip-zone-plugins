@@ -56,6 +56,7 @@
 		{objet=album}
 		{fusion id_mot}
 		{id_mot!=#ENV{id_mot}}
+		{par titre}
 		{"<li class='item sep'>&bull;</li>"}
 		{pagination #ENV{nb,10}|moins{#ENV{id_mot}|?{1,0}}}>[
 	(#REM)

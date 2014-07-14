@@ -4,6 +4,11 @@ Plugin Albums : règles de commit
 Tout le monde est encouragé à commiter dans la mesure ou ça ne bouleverse pas l'utilisation ou l'apparence du plugin.
 Si c'est le cas, rendez-vous sur la liste de discussion spip-zone ou sur IRC pour en discuter.
 
+## Branches et trunk
+
+Les branches v1, v2 et plus sont pour les versions stables, d'où sont issus les zip.
+Le trunk est une version de développement où on peut faire joujou.
+
 ## Squelettes
 
 En cas d'ajout de squelettes ou de code php, pensez aux autres contributeurs : commentez !

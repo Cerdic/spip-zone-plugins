@@ -362,7 +362,7 @@ function autoriser_autoassocieralbum_dist($faire, $type, $id, $qui, $opts) {
 /**
  * Autorisation à déplacer des documents.
  *
- * Il faut que l'option soit activée, être admin complet
+ * Il faut que l'option soit activée, être admin complet,
  * ou dans le contexte d'un objet, avoir le droit de modifier tous les albums liés.
  *
  * @param  string $faire Action demandée
@@ -374,11 +374,10 @@ function autoriser_autoassocieralbum_dist($faire, $type, $id, $qui, $opts) {
  */
 function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts) {
 	include_spip('inc/config');
-	$autorise_modifier_albums = false;
-	if ($type AND $id=intval($id)){
+	if ($type AND intval($id)>0) {
 		$autorise_modifier_albums = true;
 		include_spip('action/editer_liens');
-		if (is_array($liens_albums = objet_trouver_liens(array('album'=>'*'),array($type=>$id)))){
+		if (is_array($liens_albums=objet_trouver_liens(array('album'=>'*'),array($type=>$id))) AND count($liens_albums)){
 			foreach($liens_albums as $l) {
 				if (!autoriser('modifier','album',$l['id_album'])) {
 					$autorise_modifier_albums = false;
@@ -389,9 +388,9 @@ function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts)
 	}
 	return
 		lire_config('albums/deplacer_documents','')=='on'
-		AND 
+		AND
 		(
-			($qui['statut'] == '0minirezo' AND !$qui['restreint'])
+			$qui['statut'] == '0minirezo' AND !$qui['restreint']
 			OR $autorise_modifier_albums
 		);
 }
