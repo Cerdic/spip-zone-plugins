@@ -3,7 +3,7 @@
  * Fonctions d'installation et de désinstallation du plugin Albums
  *
  * @plugin     Albums
- * @copyright  2013
+ * @copyright  2014
  * @author     Romy Tetue, Charles Razack
  * @licence    GNU/GPL
  * @package    SPIP\Albums\Administrations
@@ -13,48 +13,50 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Fonction d'installation du plugin et de mise à jour.
-**/
+ * Fonction d'installation et de mise à jour du plugin.
+ *
+ * @param string $nom_meta_base_version
+ *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
+ * @param string $version_cible
+ *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
+ * @return void
+ */
 function albums_upgrade($nom_meta_base_version, $version_cible){
 	$maj = array();
 
 	include_spip('inc/config');
 	include_spip('base/abstract_sql');
 
-	# Premiere installation  creation des tables
+	// Création des tables + options de configuration
 	$maj['create'] = array(
-		array('maj_tables', array('spip_albums', 'spip_albums_liens')),
-		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
-		array('ecrire_config','albums/objets', array('spip_articles')),
+		array('maj_tables', array('spip_albums','spip_albums_liens')),
 		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
 		array('ecrire_config','albums/vue_icones', array('titre')),
 		array('ecrire_config','albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions')),
 	);
 
-	# Version 2.0.2 : meta + suppression colonne categorie
-	$maj['2.0.2'] = array(
-		# On supprime la colonne 'categorie'
+	// Suppression de la colonne «categorie»
+	$maj['0.0.2'] = array(
 		array('sql_alter','TABLE spip_albums DROP COLUMN categorie'),
-		# Configuration : valeurs par defaut
-		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
-		array('ecrire_config','albums/objets', array('spip_articles')),
-		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
-		array('ecrire_config','albums/vue_icones', array('titre')),
-		array('ecrire_config','albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions')),
 	);
 
-	# Version 2.0.4 : on utilise le statut prepa au lieu de refuse
-	$maj['2.0.4'] = array(
-		array('sql_updateq', 'spip_albums', array('statut' => 'prepa'), 'statut = '.sql_quote('refuse')),
-		#array(sql_updateq('spip_albums', array('statut' => 'prepa'), 'statut = '.sql_quote('refuse'))),
+	// Statut «prepa» au lieu de «refuse»
+	$maj['0.0.3'] = array(
+		array('sql_updateq', 'spip_albums', array('statut'=>'prepa'), 'statut='.sql_quote('refuse'))
 	);
 
-	# Dans tous les cas on verifie que l'ajout de documents aux albums est active
-	if (!in_array('spip_albums', $e = explode(',',$GLOBALS['meta']['documents_objets']))){
-		$e = array_filter($e);
-		$e[] = 'spip_albums';
-		ecrire_meta('documents_objets',implode(',',$e));
-	}
+	// passer le titre en «text» au lieu de «varchar» pour la recherche fulltext
+	// passer le titre en «text» au lieu de «mediumtext»
+	// passer le satut en «varchar(10)» au lieu 255
+	// nettoyer les options de configuration obsolètes
+	$maj['0.0.4'] = array(
+		array('sql_alter', "TABLE spip_albums CHANGE titre titre text DEFAULT '' NOT NULL"),
+		array('sql_alter', "TABLE spip_albums CHANGE descriptif descriptif text DEFAULT '' NOT NULL"),
+		array('sql_alter', "TABLE spip_albums CHANGE statut statut varchar(10) DEFAULT '' NOT NULL"),
+		array('effacer_config','albums/afficher_champ_descriptif'),
+		array('effacer_config','albums/vue_icones'),
+		array('effacer_config','albums/vue_liste'),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

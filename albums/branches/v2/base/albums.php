@@ -28,15 +28,15 @@ function albums_declarer_tables_objets_sql($tables){
 		'type'				=> "album",
 		'principale'			=> "oui",
 		'field'=> array(
-			"id_album"		=> "bigint(21) NOT NULL",
-			"titre"			=> "varchar(255) DEFAULT '' NOT NULL",
-			"descriptif"		=> "mediumtext DEFAULT '' NOT NULL",
-			"date"			=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"statut"		=> "varchar(255)  DEFAULT '' NOT NULL",
-			"lang"			=> "VARCHAR(10) DEFAULT '' NOT NULL",
-			"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
-			"id_trad"		=> "bigint(21) DEFAULT '0' NOT NULL",
-			"maj"			=> "TIMESTAMP"
+			"id_album"          => "bigint(21) NOT NULL",
+			"titre"             => "text DEFAULT '' NOT NULL",
+			"descriptif"        => "text DEFAULT '' NOT NULL",
+			"date"              => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
+			"statut"            => "varchar(10) DEFAULT '' NOT NULL",
+			"lang"              => "VARCHAR(10) DEFAULT '' NOT NULL",
+			"langue_choisie"    => "VARCHAR(3) DEFAULT 'non'",
+			"id_trad"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"maj"               => "TIMESTAMP"
 		),
 		'key' => array(
 			"PRIMARY KEY"		=> "id_album",
@@ -49,8 +49,8 @@ function albums_declarer_tables_objets_sql($tables){
 		'champs_editables'		=> array('titre', 'descriptif'),
 		'champs_versionnes'		=> array('titre', 'descriptif'),
 		'rechercher_champs' => array(
-			'titre' => 8,
-			'descriptif' => 1
+			'titre' => 10,
+			'descriptif' => 4
 		),
 		'tables_jointures'		=> array(),
 		'modeles'			=> array('album'),
