@@ -55,20 +55,25 @@
 	 * fonction principale
 	 */
 	function deplacerDocuments() {
-		[(#GET{portfolios}|oui)$(placeholderPortfolios);]
-		$(attribuerDatas);
-		$(boutonFermer);
-		$("[(#GET{conteneurs_documents})]").sortable({
-			connectWith: "[(#GET{conteneurs_documents})]",
-			placeholder: "placeholder-album",
-			start:       traiterStart,
-			over:        traiterOver,
-			receive:     traiterReceive,
-			stop:        traiterStop,
-			cursor:      "move",
-			scroll:      true,
-			zIndex:      10
-		});
+		var nb_albums = $("[(#GET{albums})]").length;
+		if (nb_albums > 0) {
+			[(#GET{portfolios}|oui)$(placeholderPortfolios);]
+			$(attribuerDatas);
+			$(boutonFermer);
+			$("[(#GET{conteneurs_documents})]").sortable({
+				connectWith: "[(#GET{conteneurs_documents})]",
+				placeholder: "placeholder-album",
+				start:       traiterStart,
+				over:        traiterOver,
+				receive:     traiterReceive,
+				stop:        traiterStop,
+				cursor:      "move",
+				scroll:      true,
+				zIndex:      10
+			});
+		} else {
+			$("[(#GET{conteneurs_documents})]").sortable("destroy");
+		}
 	}
 
 	/**
