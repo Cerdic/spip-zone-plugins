@@ -70,7 +70,8 @@ class Videopian {
 			'#revver\.com/video/([^/]*)#i'					=> 'revver',
 			'#sevenload.com/.*/(videos|episodes)/([^-]*)#i'	=> 'sevenload',
 			'#veoh\.com/.*/([^?&]*)/?#i'					=> 'veoh',
-			'#vimeo\.com\/([0-9]*)[\/\?]?#i'				=> 'vimeo',
+			'#vimeo\.com\/([0-9]*)#i'						=> 'vimeo',
+			'#youtu\.be\/([a-zA-Z0-9_-]*)[\/\?]?#i'			=> 'youtube',
 			'#youtube\..{0,5}/.*[\?&]v=([^&]*)#i'			=> 'youtube' # TODO: add the support of http://www.youtube.com/v/SToOccPytl8 style URLs
 		);
 		
@@ -586,7 +587,6 @@ class Videopian {
 			case 'vimeo' :
 			
 			# PHP serialized data URL
-			//$url_data = 'http://vimeo.com/api/clip/'.self::$id.'/php';
 			$url_data = 'http://vimeo.com/api/v2/video/'.self::$id.'.php';
 			# Data
 			$data = unserialize(file_get_contents($url_data));
@@ -613,10 +613,10 @@ class Videopian {
 			self::$video->date_updated = null;
 
 			# Thumbnails
-			$thumbnail = new stdClass;
-			$thumbnail->url = $data[0]['thumbnail_small'];
-			list($thumbnail->width, $thumbnail->height) = getimagesize($thumbnail->url);
-			self::$video->thumbnails[] = $thumbnail;
+			// $thumbnail = new stdClass;
+			// $thumbnail->url = $data[0]['thumbnail_small'];
+			// list($thumbnail->width, $thumbnail->height) = getimagesize($thumbnail->url);
+			// self::$video->thumbnails[] = $thumbnail;
 			$thumbnail = new stdClass;
 			$thumbnail->url = $data[0]['thumbnail_medium'];
 			list($thumbnail->width, $thumbnail->height) = getimagesize($thumbnail->url);
@@ -631,7 +631,7 @@ class Videopian {
 			
 			# XML data URL
 			$file_data = 'http://vimeo.com/api/v2/video/'.self::$id.'.xml';
-			self::$video->xml_url = 'http://vimeo.com/api/clip/'.self::$id.'/xml';
+			self::$video->xml_url = 'http://www.vimeo.com/api/v2/video/'.self::$id.'.xml';
 			
 			# XML
 			$xml = new SimpleXMLElement(file_get_contents($file_data), LIBXML_NOCDATA);
