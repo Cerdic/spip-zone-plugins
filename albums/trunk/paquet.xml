@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/albums-128.png"
-	schema="0.0.3"
+	schema="1.0.0"
 	documentation="http://contrib.spip.net/Albums-3"
 >
 	<nom>Albums</nom>

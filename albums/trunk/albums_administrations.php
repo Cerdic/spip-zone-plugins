@@ -28,7 +28,7 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 	include_spip('inc/config');
 	include_spip('base/abstract_sql');
 
-	# Création des tables + options de configuration
+	// Création des tables + options de configuration
 	$maj['create'] = array(
 		array('maj_tables', array('spip_albums','spip_albums_liens')),
 		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
@@ -36,18 +36,24 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 		array('ecrire_config','albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions')),
 	);
 
-	# Suppression de la colonne «categorie»
-	$maj['2.0.2'] = array(
+	// Suppression de la colonne «categorie»
+	$maj['0.0.2'] = array(
 		array('sql_alter','TABLE spip_albums DROP COLUMN categorie'),
 	);
 
-	# Statut «prepa» au lieu de «refuse»
-	$maj['2.0.4'] = array(
-		array('sql_updateq', 'spip_albums', array('statut'=>'prepa'), 'statut = '.sql_quote('refuse'))
+	// Statut «prepa» au lieu de «refuse»
+	$maj['0.0.3'] = array(
+		array('sql_updateq', 'spip_albums', array('statut'=>'prepa'), 'statut='.sql_quote('refuse'))
 	);
 
-	# nettoyer les options de configuration obsolètes
-	$maj['3.0.0'] = array(
+	// passer le titre en «text» au lieu de «varchar» pour la recherche fulltext
+	// passer le titre en «text» au lieu de «mediumtext»
+	// passer le satut en «varchar(10)» au lieu 255
+	// nettoyer les options de configuration obsolètes
+	$maj['1.0.0'] = array(
+		array('sql_alter', "TABLE spip_albums CHANGE titre titre text DEFAULT '' NOT NULL"),
+		array('sql_alter', "TABLE spip_albums CHANGE descriptif descriptif text DEFAULT '' NOT NULL"),
+		array('sql_alter', "TABLE spip_albums CHANGE statut statut varchar(10) DEFAULT '' NOT NULL"),
 		array('effacer_config','albums/afficher_champ_descriptif'),
 		array('effacer_config','albums/vue_icones'),
 		array('effacer_config','albums/vue_liste'),
