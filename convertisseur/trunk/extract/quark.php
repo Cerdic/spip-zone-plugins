@@ -98,6 +98,9 @@ function nettoyage_xtag($c) {
 	// supprimer un sale petit tiret
 	$c = str_replace("&#173;", '', $c);
 
+	// <\a> signale un tiret cadratin
+	$c = str_replace("<\\a>", '--', $c);
+
 	// backtick - http://www.fileformat.info/info/unicode/char/2018/index.htm
 	$c = str_replace("&#145;", '&#8216;', $c);
 
