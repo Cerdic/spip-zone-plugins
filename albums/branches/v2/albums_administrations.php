@@ -33,6 +33,7 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
 		array('ecrire_config','albums/vue_icones', array('titre')),
 		array('ecrire_config','albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions')),
+		array('meta_documents_albums')
 	);
 
 	// Suppression de la colonne «categorie»
@@ -85,6 +86,21 @@ function albums_vider_tables($nom_meta_base_version) {
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",		sql_in("objet", array('album')));
 	sql_delete("spip_versions_fragments",	sql_in("objet", array('album')));
+}
+
+
+/**
+ * Fonction privée : ajouter les albums à la liste des objets
+ * pouvant recevoir des documents
+ *
+ * @return void
+ */
+function meta_documents_albums() {
+	if (!in_array('spip_albums', $e = explode(',',$GLOBALS['meta']['documents_objets']))){
+		$e = array_filter($e);
+		$e[] = 'spip_albums';
+		ecrire_meta('documents_objets',implode(',',$e));
+	}
 }
 
 ?>
