@@ -27,7 +27,7 @@
 		(#SET{extension, #EXTENSION|strtoupper|wrap{<abbr>}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}|attribut_html}|inserer_attribut{class,extension}})
 		][(#SET{taille, #TAILLE|taille_en_octets|wrap{<span>}|inserer_attribut{class,taille}})
 		][(#SET{dimensions, #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span>}|inserer_attribut{class,dimensions}}})
-		][(#SET{metas, #VAL{'/\[\W\]/'}|preg_split{#ENV*{metas}|=={oui}|?{extension-taille-dimensions,#ENV*{metas}}}})
+		][(#SET{metas, #VAL{'/\[\W\]/'}|preg_split{#ENV{metas,#ENV{infos}}|=={oui}|?{extension-taille-dimensions,#ENV*{metas,#ENV*{infos}}}}})
 		]<li>
 			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]">
 				[<strong class="[(#TITRE|?{titre,fichier})]">(#TITRE|sinon{#FICHIER|basename}|couper{80})</strong>]
