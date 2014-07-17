@@ -259,7 +259,10 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	static $memo;
 	if (!isset($memo)) {
-		include_spip('inc/memoization');
+		// cas d'un appel depuis un fichier options charge avant celui de memoization
+		if (!class_exists("MCache")){
+			include_spip("memoization_options");
+		}
 		$cfg = @unserialize($GLOBALS['meta']['memoization']);
 		$memo = new MCache((isset($cfg['pages']) AND $cfg['pages'])? $cfg['pages'] : $cfg['methode']);
 	}
