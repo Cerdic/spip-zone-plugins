@@ -121,7 +121,10 @@ $(document).on("ajaxComplete", function() {
 	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
 });
 
-$(window).on("resize load",function() {
+$(window).on("load",function() {
+	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
+});
+$(window).smartresize(function() {
 	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
 });
 $(window).on("scroll touchmove", function() {

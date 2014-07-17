@@ -15,6 +15,7 @@ function image_responsive_insert_head($flux) {
 	
 	$flux .= "<script>htactif=$htactif;</script>";
 	$flux .= "
+<script type='text/javascript' src='".find_in_path("jquery.smartresize.js")."'></script>
 <script type='text/javascript' src='".find_in_path("image_responsive.js")."'></script>
 		";
 	
@@ -26,6 +27,7 @@ function image_responsive_header_prive($flux) {
 	$flux .= "<script>htactif=false;</script>";
 
 	$flux .= "
+<script type='text/javascript' src='".find_in_path("jquery.smartresize.js")."'></script>
 <script type='text/javascript' src='".find_in_path("image_responsive.js")."'></script>
 		";
 
@@ -88,7 +90,7 @@ function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 		$img = inserer_attribut($img, "class", $classe);
 		
 		if ($vertical == 0) {
-			$r = (($h/$l)*100);
+			$r = floor(($h/$l)*100);
 			$img = "<span style='padding:0;padding-bottom:$r%' class='conteneur_image_responsive_h'>$img</span>";
 		
 		}
