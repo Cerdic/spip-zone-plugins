@@ -21,7 +21,7 @@ function formidable_id_formulaire($id){
 	if (isset($id_formulaires[$id]))
 		return $id_formulaires[$id];
 
-	if (intval($id)>0)
+    if (is_numeric($id))
 		$where = 'id_formulaire = ' . intval($id);
 	elseif (is_string($id))
 		$where = 'identifiant = ' . sql_quote($id);
