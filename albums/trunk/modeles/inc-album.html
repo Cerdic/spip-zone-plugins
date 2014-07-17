@@ -42,7 +42,7 @@
 	</ul>
 	[(#ENV{titre}|ou{#ENV{titre}|et{#INFO_TITRE{album,#ID_ALBUM}}}|ou{#ENV{descriptif}|et{#INFO_DESCRIPTIF{album,#ID_ALBUM}|strlen}}|oui)
 	[<(#HTML5|?{figcaption,div}) class="figcaption">]
-		[(#ENV{titre}|oui)[<div class="titre">(#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}|wrap{[<(#ENV{balise_titre}|replace{^<}|replace{>$})>]})</div>]]
+		[(#ENV{titre}|oui)[<div class="titre">(#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}|wrap{[<(#ENV{balise_titre,#ENV{balise_titraille}}|replace{^<}|replace{>$})>]})</div>]]
 		[(#ENV{descriptif}|oui)[<div class="descriptif">(#INFO_DESCRIPTIF{album,#ID_ALBUM})</div>]]
 	[</(#HTML5|?{figcaption,div})>]
 	]
