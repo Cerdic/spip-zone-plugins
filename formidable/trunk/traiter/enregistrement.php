@@ -22,7 +22,7 @@ function traiter_enregistrement_dist($args, $retours){
         $variables_anonymisation =
             $GLOBALS['formulaires']['variables_anonymisation'][$options['anonymiser_variable']];
         $id = eval("return $variables_anonymisation;");
-        $id_auteur = formidable_scramble($id);
+        $id_auteur = formidable_scramble($id, $id_formulaire);
     }
     // On cherche le cookie et sinon on le crée
     $nom_cookie = formidable_generer_nom_cookie($id_formulaire);

@@ -14,7 +14,8 @@ function traitements_lister_disponibles(){
     if (is_null($traitements)){
         $traitements = array();
         $liste = find_all_in_path('traiter/', '.+[.]yaml$');
-				ksort($liste);
+		ksort($liste);
+		
         if (count($liste)){
             foreach ($liste as $fichier=>$chemin){
                 $type_traitement = preg_replace(',[.]yaml$,i', '', $fichier);
@@ -113,7 +114,7 @@ function formidable_verifier_reponse_formulaire($id_formulaire, $choix_identific
         $variables_anonymisation =
                 $GLOBALS['formulaires']['variables_anonymisation'][$anonymiser_variable];
         $id = eval("return $variables_anonymisation;");
-        $id_auteur = formidable_scramble($id);
+        $id_auteur = formidable_scramble($id, $id_formulaire);
     }
     // ni cookie ni id, on ne peut rien faire
     if (!$cookie and !$id_auteur) {
@@ -361,12 +362,12 @@ function md5_hex_to_dec($hex_str) {
  * 10 milliards de milliards
  * A la fin, on recherche et supprime les éventuels zéros de début
  * @param string $login Login à transformer
+ * @param string $id_form ID du formulaire concerné
  * @param string $passwd Chaîne 'secrète' ajoutée au login et id_formulaire pour éviter
  *  les recoupements d'identité entre plusieurs formulaires
  * @return string Un nombre de 19 chiffres
 */
-function formidable_scramble($login, $passwd = '') {
-    $id_form = (isset($flux['args']['id_form']) ? $flux['args']['id_form'] : '');
+function formidable_scramble($login, $id_form, $passwd = '') {
     if ($passwd == '')
         $passwd = $GLOBALS['formulaires']['passwd']['interne'];
     $login_md5 = md5("$login$passwd$id_form");
