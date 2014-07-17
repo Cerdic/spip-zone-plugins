@@ -46,19 +46,22 @@
 		                  défaut: ''
 		classe            classe(s) css supplémentaire(s) du bloc conteneur (.album)
 
-	Pour rétro compatibilité avec la version 1 :
+		Pour rétro compatibilité avec les versions 1 et 2 :
 		id                sélection prédéfinie de documents, séparés par une virgule.
 		id_article        identifiant d'un article pour sélectionner ses documents.
+		balise_titraille  = balise_titre
+		infos             = metas
+		media             pour restreindre à un type de document
 
 ]#SET{ids_documents,#ARRAY}[
 
 (#REM) 1. «id_album» présent dans l'environnement
 
-]<BOUCLE_album(DOCUMENTS){id_album}{par #ENV{par,media},fichier,titre}{tout}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_album>[
+]<BOUCLE_album(DOCUMENTS){id_album}{par #ENV{par,media},fichier,titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_album>[
 
 (#REM) 2. «id_article» donné explicitement
 
-]<BOUCLE_article(DOCUMENTS){id_article=#ENV{args/id_article}}{par #ENV{par,media},titre}{tout}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
+]<BOUCLE_article(DOCUMENTS){id_article=#ENV{args/id_article}}{par #ENV{par,media},titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
 
 (#REM) 3. «id» donné explicitement
 
