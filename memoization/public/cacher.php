@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// par defaut pas de progressivite d'invalidation du cache : duree=1s
+// par defaut pas de progressivite d'invalidation du cache : duree=0
 if (!defined("_DUREE_INVALIDATION_PROGRESSIVE_CACHE"))
-	define("_DUREE_INVALIDATION_PROGRESSIVE_CACHE",1);
+	define("_DUREE_INVALIDATION_PROGRESSIVE_CACHE",0);
 
 /* compat SPIP 1.9 */
 if(!function_exists('test_espace_prive')) {
@@ -115,7 +115,7 @@ function cache_valide(&$page, $date) {
 			static $refresh_ok = null;
 			if (is_null($refresh_ok)){
 				$dt = $_SERVER['REQUEST_TIME']-$GLOBALS['meta']['derniere_modif'];
-				if ($dt>_DUREE_INVALIDATION_PROGRESSIVE_CACHE){
+				if ($dt>=_DUREE_INVALIDATION_PROGRESSIVE_CACHE){
 					$refresh_ok = 1;
 					#spip_log("Cache refresh systematique : REFRESH", "dbgcache");
 				}
