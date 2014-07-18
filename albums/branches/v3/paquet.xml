@@ -2,7 +2,7 @@
 	prefix="albums"
 	categorie="multimedia"
 	version="3.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/albums-128.png"
 	schema="1.0.0"
