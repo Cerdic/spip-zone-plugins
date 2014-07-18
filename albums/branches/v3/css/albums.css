@@ -1,0 +1,10 @@
+/* ------------------------------------------
+   albums.css : style minimal pour les albums
+   ------------------------------------------ */
+.album                          { margin-bottom: 1.5em; }
+/* vignettes */
+.album.vignettes li             { display: inline-block; margin: 0 10px 10px 0; }
+.album.vignettes ul li:last-child { margin-right: 0; }
+.album.vignettes li a           { display: block; }
+.album.vignettes li,
+.album.vignettes .figcaption    { text-align: center; }

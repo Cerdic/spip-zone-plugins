@@ -1,0 +1,56 @@
+[(#REM)
+
+	Portfolio des albums liés à un objet.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/contenu/portfolio_albums.html
+	Utilise :
+		prive/squelettes/inclure/album.html
+		javascript/albums_edit.js
+		javascript/medias_edit.js
+		javascript/jquery.multifile.js
+
+][(#REM)
+
+	Paramètres (*obligatoire):
+		*objet          type d'objet sur lequel porte l'association
+		*id_objet       identifiant de l'objet
+		statut          prepa | publie | poubelle, défaut: tous
+		nb              nombre pagination, défaut: 10
+		par             critère de tri
+
+]
+<B_albums_lies>
+#ANCRE_PAGINATION
+
+<h2 class="titrem"><:album:titre_albums:></h2>
+
+<div class="liste-albums lies">
+
+	<BOUCLE_albums_lies(ALBUMS){objet}{id_objet}{par #ENV{par,date}, titre}{statut == #ENV{statut,.*}}{pagination #ENV{nb,10}}>
+	[(#INCLURE{fond=prive/squelettes/inclure/album, id_album, objet, id_objet, ajax=#VAL{album}|concat{#ID_ALBUM}})]
+	</BOUCLE_albums_lies>
+
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
+
+</div><!-- .liste-albums.lies -->
+
+[(#REM) bouton «tout enlever» ]
+[(#GRAND_TOTAL|>{1}|oui)
+[(#BOUTON_ACTION{<:medias:lien_tout_enlever:>,#URL_ACTION_AUTEUR{dissocier_album,tous/#ENV{objet}/#ENV{id_objet},#SELF},'ajax dissocier reveal'})]
+]
+
+<script type='text/javascript'>/*<![CDATA[*/
+[(#REM) albums ]
+[(#INCLURE{javascript/albums_edit.js}|compacte{js})]
+[(#REM) documents ]
+[(#AUTORISER{joindredocument,#ENV{objet},#ENV{id_objet}}|non)
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+]
+/*]]>*/</script>
+</B_albums_lies>
+<!-- 0 album -->
+<//B_albums_lies>

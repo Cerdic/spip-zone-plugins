@@ -1,0 +1,42 @@
+[(#REM)
+
+	Albumothèque : page de gestion des albums
+
+][(#REM)
+
+	Utilise :
+		prive/objets/liste/albums.html
+		javascript/albums_edit.js
+		javascript/medias_edit.js
+		javascript/jquery.multifile.js
+
+]
+[(#AUTORISER{administrer,albumotheque}|sinon_interdire_acces)]
+
+<div id='albums' class='albumotheque'>
+
+	#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+
+	[(#INCLURE{fond=prive/objets/liste/albums,
+		nb=10,
+		env,
+		ajax=liste_albums})]
+
+	[(#REM) formulaire pour déplacer les documents par glisser-déposer ]
+	[(#AUTORISER{deplacerdocumentsalbums}|oui)
+	<div class='ajax'>#FORMULAIRE_ALBUMS_DEPLACER_DOCUMENTS</div>
+	]
+
+	[(#AUTORISER{creer,album})
+		[(#URL_ECRIRE{album_edit,new=oui}|icone_verticale{<:album:icone_creer_album:>,album,new,right})]
+	]
+
+</div>
+
+<script type='text/javascript'>/*<![CDATA[*/
+[(#REM) albums ]
+[(#INCLURE{javascript/albums_edit.js}|compacte{js})]
+[(#REM) documents ]
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+/*]]>*/</script>

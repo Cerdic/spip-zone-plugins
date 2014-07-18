@@ -1,0 +1,21 @@
+[(#REM)
+
+	Surcharge du squelette de la dist qui affiche les documents liés à un article.
+	On inclut le squelette «normal», puis on affiche les albums.
+
+][
+
+(#REM) Documents joints classiques (portfolio, illustrations & documents)
+
+][(#INCLURE{fond=squelettes-dist/inclure/documents, env})][
+
+(#REM) Albums liés à l'article et non insérés dans le texte
+
+]<B_albums>
+<div class="menu" id="albums">
+	<h2><:album:titre_albums:></h2>
+	<BOUCLE_albums(albums_liens){id_article}{vu=non}>
+	[(#MODELE{album_liste, id_album, metas=extension-taille, titre=oui, balise_titre=strong})]
+	</BOUCLE_albums>
+</div><!-- #albums -->
+</B_albums>

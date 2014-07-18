@@ -1,0 +1,44 @@
+[(#REM)
+
+	Portfolio des albums liés à un objet.
+	Prévu pour la colonne latérale lors de l'édition d'un objet.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/inclure/colonne_document.html
+	Utilise :
+		prive/squelettes/inclure/album_colonne.html
+		javascript/albums_edit.js
+		javascript/medias_edit.js
+		javascript/jquery.multifile.js
+
+][(#REM)
+
+	Paramètres (*obligatoire):
+		*objet       type d'objet sur lequel porte l'association
+		*id_objet    identifiant de l'objet
+		par          critère de tri
+
+]
+<B_liste_albums_lies>
+<div class="liste-albums lies">
+
+	<BOUCLE_liste_albums_lies(ALBUMS){objet}{id_objet}{par #ENV{par,date}, titre}>
+	[(#INCLURE{fond=prive/squelettes/inclure/album_colonne, id_album, objet, id_objet, ajax=#VAL{album}|concat{#ID_ALBUM}})]
+	</BOUCLE_liste_albums_lies>
+
+</div><!-- .liste_albums.lies -->
+
+<script type='text/javascript'>/*<![CDATA[*/
+[(#REM) albums ]
+[(#INCLURE{javascript/albums_edit.js}|compacte{js})]
+[(#REM) documents ]
+[(#AUTORISER{joindredocument,#ENV{objet},#ENV{id_objet}}|non)
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+]
+/*]]>*/</script>
+</B_liste_albums_lies>
+<!-- 0 album -->
+<//B_liste_albums_lies>

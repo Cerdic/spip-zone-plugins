@@ -1,0 +1,76 @@
+[(#REM)
+
+	Filtres sur les extensions des documents contenus dans les albums, pour la navigation latérale de l'albumothèque.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/navigation/albums.html
+	Utilise :
+		autocomplete_albums.html
+
+]
+#SET{extensions,#ARRAY}
+<BOUCLE_data(documents_liens documents){objet=album}{fusion extension}{extension != #ENV{extension}}>#SET{extensions,#GET{extensions}|push{#EXTENSION}}</BOUCLE_data>
+<B_extensions>
+
+<strong class='titre-liste'><:album:filtre_extensions:></strong>
+
+[(#REM) option de recherche si liste trop grande ]
+<BOUCLE_recherche(CONDITION){si #_extensions:GRAND_TOTAL|>{#ENV{nb,10}}}>
+[<a href='#'
+	onclick="$('#rechercher_extensions_albums').toggle().focus();$(this).hide().next().show();return(false);"
+	class='icone s16 recherche loupe reveal dropdown'>
+	(#CHEMIN_IMAGE{album-chercher-16}|balise_img{<:info_rechercher:>})
+</a>]
+
+[<a href='#'
+	onclick="$('#rechercher_extensions_albums').toggle().val('');$(this).hide().prev().show();return(false);"
+	class='icone s16 recherche fermer' style='display:none;'>
+	(#CHEMIN_IMAGE{fermer-16}|balise_img{<:bouton_fermer:>})
+</a>]
+
+<input
+	id='rechercher_extensions_albums' name='rechercher_objets_albums'
+	data-objet='document'
+	data-source='[<BOUCLE_source(DATA){source table, #GET{extensions}}{","}>{"id":"[(#VALEUR)]","value":"[(#VALEUR)]"}</BOUCLE_source>]'
+	data-cle='extension'
+	type='text' class='text autocomplete' autocomplete='off'
+	placeholder='extension'
+	style='display:none;' />
+</BOUCLE_recherche>
+
+#ANCRE_PAGINATION
+<ul class='liste-items inline extensions'>
+
+	[(#REM) extension sélectionnée en premier ]
+	[<li class='item on'>
+		<a
+		href='[(#SELF|parametre_url{extension,''})]'
+		onclick="ajaxReload('liste_albums',{args:{extension:''}})"
+		class='ajax'>
+			(#ENV{extension})
+		</a>
+	</li><li class='item sep'>&bull;</li>][
+
+	(#REM) liste des extensions
+	]<BOUCLE_extensions(DATA)
+		{source table, #GET{extensions}}
+		{"<li class='item sep'>&bull;</li>"}
+		{pagination #ENV{nb,10}|moins{#ENV{extension}|?{1,0}}}>[
+	(#REM)
+	]<li class='item'>
+		<a
+			href='[(#SELF|parametre_url{extension,#VALEUR})]'
+			onclick="ajaxReload('liste_albums',{args:{extension:'[(#VALEUR)]'}})"
+			class='ajax'>
+			#VALEUR
+		</a>
+	</li>[
+	(#REM)
+	]</BOUCLE_extensions>
+
+</ul><!-- medias -->
+
+[<div class='pagination simple'>(#PAGINATION{page})</div>]
+</B_extensions>

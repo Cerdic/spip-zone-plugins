@@ -1,0 +1,50 @@
+[(#REM)
+
+	Modèle «album» par défaut : vue sous forme de vignettes.
+	cf. notes de modeles/album.html
+
+][(#REM)
+
+	Inclus dans :
+		modeles/album.html
+
+][(#REM)
+
+	Paramètres (*obligatoire):
+		*ids_documents    identifiant des documents
+		*env              environnement issu du squelette appelant
+
+]<B_documents_album>
+[<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})]">]
+	<ul>
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #ENV{ids_documents}}>[
+
+		(#REM)
+
+		]<li>
+			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION|attribut_html)]">
+				[(#SET{dimension,100})
+				][(#SET{fichier,#MEDIA|=={image}|?{
+					#ENV{recadrer}|?{
+						#FICHIER|image_passe_partout{#ENV{largeur,#GET{dimension}},#ENV{hauteur,#GET{dimension}}}|image_recadre{#ENV{largeur,#GET{dimension}},#ENV{hauteur,#GET{dimension}},center},
+						#FICHIER|image_reduire{#ENV{largeur,0},#ENV{hauteur,#GET{dimension}}}},
+					#LOGO_DOCUMENT{icone}}})
+				][(#GET{fichier}
+					|inserer_attribut{class,vignette}
+					|inserer_attribut{alt,#TITRE|sinon{#FICHIER|basename}})]
+			</a>
+			[(#ENV{label}|oui)<span class="label">[(#TITRE|sinon{#FICHIER|basename})]</span>]
+		</li>[
+
+		(#REM)
+
+		]</BOUCLE_documents_album>
+	</ul>
+	[(#ENV{titre}|ou{#ENV{titre}|et{#INFO_TITRE{album,#ID_ALBUM}}}|ou{#ENV{descriptif}|et{#INFO_DESCRIPTIF{album,#ID_ALBUM}|strlen}}|oui)
+	[<(#HTML5|?{figcaption,div}) class="figcaption">]
+		[(#ENV{titre}|oui)[<div class="titre">(#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}|wrap{[<(#ENV{balise_titre,#ENV{balise_titraille}}|replace{^<}|replace{>$})>]})</div>]]
+		[(#ENV{descriptif}|oui)[<div class="descriptif">(#INFO_DESCRIPTIF{album,#ID_ALBUM})</div>]]
+	[</(#HTML5|?{figcaption,div})>]
+	]
+[</(#HTML5|?{figure,div})>]<!-- .album.vignettes -->
+</B_documents_album>

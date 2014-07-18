@@ -1,0 +1,120 @@
+[(#REM)
+
+	Formulaire pour ajouter un ou plusieurs albums à un objet.
+	On peut soit créer et remplir un nouvel album, soit choisir un ou plusieurs albums existants.
+	Dans le premier cas, il s'agit en gros d'un fusion des formulaires «editer_album» et «joindre_document».
+
+][(#REM)
+
+	Utilise :
+		formulaires/inc-upload_document.html
+
+]
+#SET{id_unique,#ENV{objet_associer}|concat{#ENV{id_objet_associer}|>{0}|?{#ENV{id_objet_associer},0}}}
+<div class='formulaire_spip formulaire_#FORM'>
+	<h3 class='titrem'>[(#CHEMIN_IMAGE{album-24.png}|balise_img{'',cadre-icone})]<:album:icone_ajouter_album:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' name="formulaire_ajouter_album" id="formulaire_ajouter_album_#GET{id_unique}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#REM) Création d'un nouvel album ]
+		<div id="creer-album-#GET{id_unique}">
+
+			<h6 class="menu">
+				<span class="creer">Nouvel album</span> | <span class="choisir"><a href="#">Choisir</a></span>
+			</h6>
+
+			<ul>
+				#SET{name,titre} #SET{obli,''} #SET{defaut,#ENV{titre_defaut,''}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:album:label_titre:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" placeholder="<:album:info_nouvel_album|attribut_html:>" />
+				</li>
+				#SET{name,descriptif} #SET{obli,''} #SET{defaut,#ENV{titre_defaut,''}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})_album][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="text_area"><:album:label_descriptif:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<textarea name="#GET{name}" id="#GET{name}"[ lang="(#LANGUE)"] rows='2' cols='40'>[(#ENV*{#GET{name}})]</textarea>
+				</li>
+			</ul>
+
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+
+			[(#REM) documents ]
+			<div class="documents">
+				<strong>[(#CHEMIN_IMAGE{document-12.png}|balise_img) ]<:medias:info_documents:></strong>
+				[(#INCLURE{fond=formulaires/inc-upload_document,
+					env,
+					objet=album,
+					id_objet=#ENV{_id_temporaire},
+					mediatheque=oui,
+					mode=document}
+					|replace{value="<:bouton_upload:>"|value="<:medias:bouton_attacher_document:>"|value="<:bouton_choisir:>",value="<:bouton_enregistrer:>"}
+				)]
+			</div>
+
+		</div><!-- #creer-album -->
+
+		[(#REM) Choix d'un album existant ]
+		<div id="choisir-album-#GET{id_unique}" style="display:none;">
+
+			<h6 class="menu">
+				<span class="creer"><a href="#">Nouvel album</a></span> | <span class="choisir">Choisir</span>
+			</h6>
+
+			<p class="explication"><:album:explication_album_numero:></p>
+			<ul>
+				#SET{name,ids_albums_associer} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:album:label_album_numero:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text identifiants" value="#ENV*{#GET{name},#GET{defaut}}" id="ids_albums_associer_#GET{id_unique}" />
+					<input class='submit' type="button" name="parcourir_albums" value="<:medias:bouton_parcourir:>" 
+						onclick="jQuery.modalboxload('#URL_ECRIRE{popin-choisir_album,var_zajax=contenu&selectfunc=albumselect#GET{id_unique}}&objet=#ENV{objet_associer}&id_objet=#ENV{id_objet_associer}',{autoResize: true});"
+						/>
+				</li>
+			</ul>
+			<script type="text/javascript">/*<!\[CDATA\[*/
+			function albumselect#GET{id_unique}(id){jQuery.modalboxclose();jQuery("#ids_albums_associer_#GET{id_unique}").attr('value',id).focus();jQuery('#formulaire_ajouter_album_[(#GET{id_unique}) ]input\[name=choisir_album\]').get(0).click();}
+			/*\]\]>*/</script>
+
+			<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
+				<input class='submit' type='submit' name='choisir_album' value='<:bouton_enregistrer:>' />
+			</p>
+
+		</div><!-- #choisir-album -->
+
+	</div></form>
+	]
+</div>
+<script type='text/javascript'>/*<![CDATA[*/
+jQuery(document).ready(function($) {
+	function ajouter_album() {
+		var creer = $("#creer-album-[(#GET{id_unique})]");
+		var choisir = $("#choisir-album-[(#GET{id_unique})]");
+		var menu_creer = $("#formulaire_ajouter_album_[(#GET{id_unique}) ].menu .creer");
+		var menu_choisir = $("#formulaire_ajouter_album_[(#GET{id_unique}) ].menu .choisir");
+		menu_creer.click(function() {
+			if (creer.is(':hidden')) {
+				creer.slideDown(function(){$(this).find("input#titre").focus()});
+				choisir.slideUp();
+				return false;
+			}
+		});
+		menu_choisir.click(function() {
+			if (choisir.is(':hidden')) {
+				creer.slideUp()
+				choisir.slideDown(function(){$(this).find("input#ids_albums_associer_#GET{id_unique}").focus()});
+				return false;
+			}
+		});
+	}
+	ajouter_album();
+	if (window.jQuery) jQuery(function(){onAjaxLoad(ajouter_album);});
+});
+/*]]>*/</script>

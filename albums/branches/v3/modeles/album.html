@@ -1,0 +1,79 @@
+[(#REM)
+
+	Modèle «album» par défaut : vue sous forme de vignettes.
+
+	Ce modèle est plutôt destiné aux albums contenant des images.
+	Par défaut, l'affichage est volontairement minimaliste : seuls sont affichées les vignettes retaillées selon une hauteur de 100px.
+	Cf. http://tinytypo.tetue.net/tinytypo.html#album
+	Pour afficher des éléments supplémentaires, utiliser les paramètres indiqués ci-dessous.
+
+	Comme on ne peut pas prendre en compte tous les cas de figure avec une seule boucle (pour rétro compatibilité v1),
+	on a recours à 2 squelettes :
+	- ce squelette sert juste à sélectionner les documents correspondants aux critères demandés (id_album, id ou id_article).
+	- le squelette inclus est le squelette de l'album à proprement parler.
+
+	Utilisation :
+	- Dans un squelette : #MODELE{album, id_album=X}
+	- Dans le texte d'un objet : <albumX>
+	pour rétro compatibilité :
+	- <album|id=1,2,3,N>
+	- <album|id_article=X>
+
+][(#REM)
+
+	Utilise :
+		modeles/inc-album.html
+
+][(#REM)
+
+	Paramètres :
+		id_album          identifiant d'un album.
+		titre             «oui» pour afficher le titre de l'album.
+		                  n'importe quelle chaîne pour un titre personnalisé.
+		                  défaut: ''
+		balise_titre      balise dans laquelle encapsuler le titre, sans les chevrons.
+		                  ex: «h3», «strong»...
+		                  défaut: ''
+		descriptif        «oui» pour afficher le descriptif de l'album.
+		                  défaut: ''
+		label             «oui» pour afficher le label de chaque document (titre ou fichier)
+		                  défaut: ''
+		                  Attention, les noms de fichiers longs perturbent l'agencement.
+		                  Pour un affichage correct, prévoir des styles css supplémentaires.
+		largeur           largeur maximale des images (filtre image_reduire).
+		                  défaut: 0
+		hauteur           hauteur maximale des images (filtre image_reduire).
+		                  défaut: 100
+		recadrer          «oui» pour recadrer les images (filtre image_passe_partout + image_recadre).
+		                  Il faut dans ce cas indiquer «largeur» et «hauteur» (défaut: 100).
+		par               tri des documents.
+		                  id_document | titre | fichier | media | mode | extension | taille
+		                  défaut: media, fichier, titre
+		align             alignement du bloc conteneur (.album)
+		                  left | right | center
+		                  défaut: ''
+		classe            classe(s) css supplémentaire(s) du bloc conteneur (.album)
+
+	Pour rétro compatibilité avec les versions 1 et 2 :
+		id                sélection prédéfinie de documents, séparés par une virgule.
+		id_article        identifiant d'un article pour sélectionner ses documents.
+		balise_titraille  = balise_titre
+		media             pour restreindre à un type de document
+
+]#SET{ids_documents,#ARRAY}[
+
+(#REM) 1. «id_album» présent dans l'environnement
+
+]<BOUCLE_album(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_album>[
+
+(#REM) 2. «id_article» donné explicitement
+
+]<BOUCLE_article(DOCUMENTS){id_article=#ENV{args/id_article}}{par #ENV{par,media},titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
+
+(#REM) 3. «id» donné explicitement
+
+]<BOUCLE_id(DOCUMENTS){id_document IN (#ENV{args/id}|explode{','})}{par #ENV{par,media},titre}{tout}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_id><//B_article><//B_album>[
+
+(#REM) squelette de l'album
+
+][(#INCLURE{fond=modeles/inc-album, ids_documents=#GET{ids_documents}, env})]

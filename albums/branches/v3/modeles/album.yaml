@@ -1,0 +1,95 @@
+#
+# Modèle <album> par défaut : vue sous forme de vignettes
+#
+# La syntaxe est compatible avec celle du plugin «insérer modèles»
+# Les saisies «modele», «id_modele» et «id_album» servent juste à assurer la compatibilité.
+#
+nom: <:album:label_modele_nom_vignettes:>
+logo: 'prive/themes/spip/images/album-24.png'
+icone_barre: 'album-vignettes.png'
+alias: <:album:label_modele_alias_vignettes:>
+description: <:album:label_modele_description_vignettes:>
+parametres:
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'album'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'id_album'
+  -
+    saisie: 'selection_album'
+    options:
+      nom: 'id_modele'
+      label: <:album:label_modele_identifiant:>
+      afficher_si: '@id_album@==""'
+  -
+    saisie: 'case'
+    options:
+      nom: 'titre'
+      label_case: <:album:label_titre:>
+      valeur_oui: 'oui'
+  -
+    saisie: 'case'
+    options:
+      nom: 'descriptif'
+      label_case: <:album:label_descriptif:>
+      valeur_oui: 'oui'
+  -
+    saisie: 'case'
+    options:
+      nom: 'label'
+      label_case: <:album:label_modele_labels_images:>
+      valeur_oui: 'oui'
+  -
+    saisie: 'input'
+    options:
+      nom: 'largeur'
+      label: <:album:label_modele_largeur_images:>
+      placeholder: <:album:label_modele_placeholder_dimension:>
+      verifier:
+        type: 'entier'
+        options:
+          max: 9999
+  -
+    saisie: 'input'
+    options:
+      nom: 'hauteur'
+      label: <:album:label_modele_hauteur_images:>
+      placeholder: <:album:label_modele_placeholder_dimension:>
+      verifier:
+        type: 'entier'
+        options:
+          max: 9999
+  -
+    saisie: 'case'
+    options:
+      nom: 'recadrer'
+      label_case: <:album:label_modele_recadrer_images:>
+      valeur_oui: 'oui'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'par'
+      label: <:album:label_modele_trier:>
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '': <:album:label_modele_defaut:>
+        titre: <:album:label_modele_tri_titre:>
+        id_document: <:album:label_modele_tri_id:>
+        date: <:album:label_modele_tri_date:>
+  -
+    saisie: 'selection'
+    options:
+      nom: 'align'
+      label: <:album:label_modele_alignement:>
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '': <:album:label_modele_defaut:>
+        left: <:album:label_modele_alignement_gauche:>
+        center: <:album:label_modele_alignement_centre:>
+        right: <:album:label_modele_alignement_droite:>

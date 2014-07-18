@@ -1,0 +1,39 @@
+[(#REM)
+
+	Filtres sur les types d'utilisations des albums, pour la navigation latérale de l'albumothèque.
+	Type d'utilisation = inséré ou pas dans le texte (#VU).
+
+][(#REM)
+
+	pas utilisé, mais on garde sous le coude
+
+]
+<BOUCLE_vu(albums_liens){vu=oui}{0,1}>
+
+<strong class='titre-liste'><:album:filtre_types_utilisations:></strong>
+
+<ul class='liste-items utilisations'>
+	[(#REM) vus ]
+	#SET{actif, #ENV{vu}|=={oui}|?{1,''}}
+	#SET{param, #GET{actif}|?{'',oui}}
+	<li class='item[ (#GET{actif}|?{on})]'>
+		<a
+			href='[(#SELF|parametre_url{vu,#GET{param}}|parametre_url{orphelins,''})]'
+			onclick="ajaxReload('liste_albums',{args:{vu:'[(#GET{param})]', orphelins:''}})"
+			class='ajax'>
+			[(#CHEMIN_IMAGE{vu-16-10}|balise_img) ]<:album:filtre_vus:>
+		</a>
+	</li>
+	[(#REM) non vus ]
+	#SET{actif, #ENV{vu}|=={non}|?{1,''}}
+	#SET{param, #GET{actif}|?{'',non}}
+	<li class='item[ (#GET{actif}|?{on})]'>
+		<a
+			href='[(#SELF|parametre_url{vu,#GET{param}}|parametre_url{orphelins,''})]'
+			onclick="ajaxReload('liste_albums',{args:{vu:'[(#GET{param})]', orphelins:''}})"
+			class='ajax'>
+			[(#CHEMIN_IMAGE{vu-16-10}|image_nb|image_alpha{70}) ]<:album:filtre_non_vus:>
+		</a>
+	</li>
+</ul><!-- .utilisations -->
+</BOUCLE_vu>

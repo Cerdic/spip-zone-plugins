@@ -1,0 +1,70 @@
+[(#REM)
+
+	Liste des albums.
+
+][(#REM)
+
+	Inclus dans :
+		prive/squelettes/albums.html
+	Utilise :
+		prive/squelettes/inclure/album.html
+
+][(#REM)
+
+	Paramètres :
+		statut         prepa | publie | poubelle, défaut: tous
+		nb             nombre pour pagination, défaut: 10
+		recherche      pour filtrer les albums correspondants à un terme de recherche
+		id_auteur      pour filtrer les albums d'un auteur
+		id_mot         pour filtrer les albums auxquels est lié un mot clé
+		objet          pour filtrer les albums liés à un type d'objet
+		id_objet       pour filtrer les albums liés à un objet
+		id_document    pour filtrer les albums contenant un document
+		media          pour filtrer les albums contenant un type de document
+		               audio | image | video | file
+		extension      pour filtrer les albums contenant un type d'extension
+
+]
+#SET{defaut_tri,#ARRAY{
+	date,-1,
+	id_album,1,
+	multi titre,1
+}}
+
+<B_liste_albums>
+#ANCRE_PAGINATION
+
+<div class='entete clearfix'>
+	[<h2>(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{album}})</h2>]
+</div>
+
+<div class='tri simple'>
+	[(#TRI{'>', &uarr;, ajax}) <span class='sep'>|</span>]
+	[(#TRI{'<', &darr;, ajax}) <span class='sep'>|</span>]
+	[(#TRI{id_album, <:info_numero_abbreviation:>, ajax}) <span class='sep'>|</span>]
+	[(#TRI{date, <:medias:par_date:>, ajax}) <span class='sep'>|</span>]
+	[(#TRI{titre, <:medias:par_titre:>, ajax})]
+</div>
+
+<div class="liste-albums">
+	<BOUCLE_liste_albums(ALBUMS documents)
+		{documents.id_document?}{documents.media?}{documents.extension?}
+		{albums_liens.objet?}{albums_liens.id_objet?}{albums_liens.vu?}{orphelins?}
+		{auteurs_liens.id_auteur?}{mots_liens.id_mot?}
+		{statut?}
+		{recherche?}
+		{tri #ENV{par,date},#GET{defaut_tri}}
+		{pagination #ENV{nb,10}}>
+
+	[(#INCLURE{fond=prive/squelettes/inclure/album, id_album, env, ajax=#VAL{album}|concat{#ID_ALBUM}})]
+
+	</BOUCLE_liste_albums>
+</div><!-- .liste_albums -->
+
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</B_liste_albums>
+
+<div class='entete clearfix'>
+	[<h2>(#ENV*{sinon,#ENV{recherche}|?{<:album:info_resultat_recherche_aucun:>,<:album:info_aucun_album:>}})</h2>]
+</div>
+<//B_liste_albums>
