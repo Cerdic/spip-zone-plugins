@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_activer_album_objets' => 'Activeer de volgende inhoud voor albums:',
 	'label_album_numero' => 'Albumnummer',
-	'label_case_utiliser_titre_defaut' => 'Standaard wordt de titel van het bovenliggende object gebruikt',
+	'label_case_utiliser_titre_defaut' => 'Standaard wordt de titel van het bovenliggende object gebruikt', # MODIF
 	'label_descriptif' => 'Omschrijving',
 	'label_modele_alias_liste' => 'Lijst',
 	'label_modele_alias_vignettes' => 'Vignetten',
