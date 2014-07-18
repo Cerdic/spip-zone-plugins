@@ -1,0 +1,28 @@
+<paquet
+	prefix="medias_responsive"
+	categorie="outil"
+	version="0.1.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="imgs/medias_responsive.png"
+>
+
+	<nom>Médias compatibles responsive</nom>
+	<!-- Varier les mises en page selon les rubriques, les articles... -->
+
+	<auteur lien="http://www.paris-beyrouth.org">Arnaud Martin / Paris-Beyrouth</auteur>
+
+	<copyright>2014-2015</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="insert_head_css" inclure="medias_responsive_pipelines.php" />
+	<pipeline nom="insert_head" inclure="medias_responsive_pipelines.php" />
+	<pipeline nom="header_prive" inclure="medias_responsive_pipelines.php" />
+
+	<necessite nom="image_responsive" compatibilite="[1.7.0;[" />
+	<necessite nom="medias" compatibilite="[2.0.0;[" />
+	<chemin path="squelettes" />
+	<chemin path="" />
+
+</paquet>

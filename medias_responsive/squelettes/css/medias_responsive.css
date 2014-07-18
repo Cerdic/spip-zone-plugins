@@ -1,0 +1,24 @@
+.spip_documents_left, .spip_documents_right {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+.spip_documents_center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.spip_documents_right {
+	float: right;
+	clear: right;
+	margin-left: 2em;
+}
+.spip_documents_left {
+	float: left;
+	clear: left;
+	margin-right: 2em;
+}
+.spip_documents_center_forcer {
+	float: none;
+	margin: 1em auto !important;
+}
