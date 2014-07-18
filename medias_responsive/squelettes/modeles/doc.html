@@ -38,7 +38,7 @@
 	style="[width:(#GET{width})px;]"[ data-w="(#GET{width})"]>
 [<a href="(#GET{url})"[
 	class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[
-	(#ENV{lien}|?{'',type="#MIME_TYPE"})]>][(#FICHIER|image_responsive{0})][(#GET{url}|?{</a>})]
+	(#ENV{lien}|?{'',type="#MIME_TYPE"})]>][(#GET{fichier}|image_responsive{0})][(#GET{url}|?{</a>})]
 <figcaption class='spip_doc_intitules'>
 	[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE)</strong></div>]
 	[<div class='spip_doc_descriptif #EDIT{descriptif}'>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>]
