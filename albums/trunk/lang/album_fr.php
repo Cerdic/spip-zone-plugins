@@ -18,7 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		afin de restreindre la sélection des albums. Un clic sur une entrée active le filtre, un autre clic le désactive.
 		En les combinant, on peut facilement retrouver n’importe quel album.
 		Quand les listes sont trop longues, des champs de recherche permettent de retrouver un objet précis.',
-	'c_albumotheque_presentation' => 'Les albums servent à composer des groupes de documents. Bla bla.',
+	'c_albumotheque_presentation' => 'Les albums complètent la gestion des documents de SPIP en permettant de composer des groupes de documents.
+		On peut les ajouter aux objets de la même façon que les documents «individuels».',
 	'c_albumotheque_titre_filtres' => 'Filtrer la sélection',
 	'c_albumotheque_titre_presentation' => 'Les albums',
 	'cfg_titre_albums' => 'Albums',
