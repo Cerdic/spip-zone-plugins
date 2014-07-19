@@ -5,11 +5,11 @@
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/verifier?lang_cible=en" total="95" traduits="95" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
+		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/verifier?lang_cible=es" total="95" traduits="95" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
