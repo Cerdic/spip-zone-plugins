@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/sql_requetes, par=titre, env, ajax, sinon=<:sql_requete:info_aucun_sql_requete:>}>
+
+[(#AUTORISER{creer,sql_requete})
+	[(#URL_ECRIRE{sql_requete_edit,new=oui}|icone_verticale{<:sql_requete:icone_creer_sql_requete:>,sql_requete,new,right})]
+]

@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,sql_requete,#ID_SQL_REQUETE}|sinon_interdire_acces)]
+<BOUCLE_sql_requete(SQL_REQUETES){id_sql_requete}{si #ENV{exec}|=={sql_requete}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,sql_requete,#ID_SQL_REQUETE})
+		[(#ID_SQL_REQUETE|afficher_qui_edite{sql_requete}|non)
+			[(#URL_ECRIRE{sql_requete_edit,id_sql_requete=#ID_SQL_REQUETE}|icone_verticale{<:sql_requete:icone_modifier_sql_requete:>,sql_requete,edit,right ajax preload})]
+		]
+		[(#ID_SQL_REQUETE|afficher_qui_edite{sql_requete}|oui)
+			[(#URL_ECRIRE{sql_requete_edit,id_sql_requete=#ID_SQL_REQUETE}|icone_verticale{#ID_SQL_REQUETE|afficher_qui_edite{sql_requete},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{sql_requete-24.png}|balise_img{sql_requete,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{sql_requete,#ID_SQL_REQUETE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/sql_requete,id=#ID_SQL_REQUETE,id_sql_requete=#ID_SQL_REQUETE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,sql_requete,#ID_SQL_REQUETE})
+	[(#ID_SQL_REQUETE|afficher_qui_edite{sql_requete}|non)
+		[(#URL_ECRIRE{sql_requete_edit,id_sql_requete=#ID_SQL_REQUETE}|icone_verticale{<:sql_requete:icone_modifier_sql_requete:>,sql_requete,edit,right ajax preload})]
+	]
+	[(#ID_SQL_REQUETE|afficher_qui_edite{sql_requete}|oui)
+		[(#URL_ECRIRE{sql_requete_edit,id_sql_requete=#ID_SQL_REQUETE}|icone_verticale{#ID_SQL_REQUETE|afficher_qui_edite{sql_requete},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,sql_requete,id,#ID_SQL_REQUETE},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_sql_requete>
+[(#ENV**{exec}|=={sql_requete_edit}|?{#INCLURE{fond=prive/squelettes/contenu/sql_requete_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_sql_requete>

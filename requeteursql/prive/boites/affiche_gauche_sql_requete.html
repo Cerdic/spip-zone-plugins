@@ -1,0 +1,4 @@
+#BOITE_OUVRIR{#CHEMIN_IMAGE{sql_requete_execute-24.png}|balise_img{'',cadre-icone}|concat{#EVAL{_T('requeteursql:export_sql')}},'simple','titrem'}
+
+[(#URL_ECRIRE{sql_export_csv,id_sql_requete=#ENV{id_sql_requete}}|icone_horizontale{<:requeteursql:export_csv:>,sql_requete})]
+#BOITE_FERMER

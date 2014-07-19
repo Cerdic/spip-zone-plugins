@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_sql_requete,1,
+	points,-1
+}})]<B_liste_sql_requetes>
+#ANCRE_PAGINATION
+<div class="liste-objets sql_requetes">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{sql_requete:info_1_sql_requete,sql_requete:info_nb_sql_requetes}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:sql_requete:label_titre:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_sql_requete,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_sql_requetes(SQL_REQUETES){id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{sql_requete-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_SQL_REQUETE|image_reduire{20,26})]<a href="[(#ID_SQL_REQUETE|generer_url_entite{sql_requete})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SQL_REQUETE">[(#RANG). ]#TITRE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,sql_requete,#ID_SQL_REQUETE}|?{
+				<a href="[(#URL_ECRIRE{sql_requete_edit,id_sql_requete=#ID_SQL_REQUETE})]">#ID_SQL_REQUETE</a>,
+				#ID_SQL_REQUETE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_sql_requetes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_sql_requetes>[
+<div class="liste-objets sql_requetes caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_sql_requetes>

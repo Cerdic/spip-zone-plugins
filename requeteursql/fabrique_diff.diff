@@ -1,0 +1,21 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_requeteursql.php ../plugins/fabrique_auto/.backup/requeteursql/paquet.xml ../plugins/fabrique_auto/requeteursql/paquet.xml
+12c12
+< 		Paquet genere le 2014-07-16 21:41:23
+---
+> 		Paquet genere le 2014-07-16 21:58:25
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-12.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-12.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-16.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-16.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-24.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-32.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-32.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-add-16.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-add-16.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-add-24.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-add-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-add-32.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-add-32.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-del-16.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-del-16.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-del-24.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-del-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-del-32.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-del-32.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-edit-16.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-edit-16.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-edit-24.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-edit-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-edit-32.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-edit-32.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-new-16.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-new-16.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-new-24.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-new-24.png differ
+Binary files ../plugins/fabrique_auto/.backup/requeteursql/prive/themes/spip/images/sql_requete-new-32.png and ../plugins/fabrique_auto/requeteursql/prive/themes/spip/images/sql_requete-new-32.png differ

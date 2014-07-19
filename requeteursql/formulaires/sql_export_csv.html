@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_#FORM">
+ 
+<form action="#ENV{action}" method="post"><div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+	<li>
+		<label for='delim'><:requeteursql:export_format:></label>
+		<select name='delim' id='delim'>
+			<option value='1'><:requeteursql:export_classique:></option>
+			<option value='2'><:requeteursql:export_excel:></option>
+			<option value='3'><:requeteursql:export_tabulation:></option>
+        </select>
+    </li>
+</ul>
+<p class="boutons"><input type="submit" class="submit" value="<:requeteursql:exporter:>" /></p>
+</div></form>
+</div>
+        

@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_sql_requetes_selectionnes>
+	<ul>
+	<BOUCLE_sql_requetes_selectionnes(SQL_REQUETES){id_sql_requete IN #GET*{valeur}}
+		{par num titre, titre}{tout}>
+		<li class="choix">#TITRE (#ID_SQL_REQUETE)</li>
+	</BOUCLE_sql_requetes_selectionnes>
+	</ul>
+	</B_sql_requetes_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_sql_requetes_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_sql_requete_selectionne(SQL_REQUETES){id_sql_requete=#ENV{valeur}}
+		{par num titre, titre}{tout}>
+	  	<p>#TITRE (#ID_SQL_REQUETE)</p>
+	</BOUCLE_sql_requete_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_sql_requete_selectionne>
+<//B_test_multiple>

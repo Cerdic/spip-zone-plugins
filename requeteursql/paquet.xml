@@ -1,0 +1,32 @@
+<paquet
+	prefix="requeteursql"
+	categorie="divers"
+	version="1.1.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/requeteursql-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2014-07-16 21:41:23
+	-->
+
+	<nom>Requêteur SQL</nom>
+
+	<auteur lien='http://dorch.fr'>David Dorchies</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+	<necessite nom="coloration_code"  compatibilite="[0.6.6;]" /> 
+
+
+	<pipeline nom="autoriser" inclure="requeteursql_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/requeteursql.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/requeteursql.php" /> 
+	<pipeline nom="affiche_gauche" inclure="inc/pipeline_affiche_gauche.php" />
+	<pipeline nom="header_prive" inclure="requeteursql_pipelines.php" />
+
+	<menu nom="sql_requetes" titre="sql_requete:titre_sql_requetes" parent="menu_edition" icone="images/sql_requete-16.png" action="sql_requetes" /> 
+</paquet>

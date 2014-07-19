@@ -1,0 +1,18 @@
+<BOUCLE_sql_requete(SQL_REQUETES){id_sql_requete}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:sql_requete:label_titre:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_description[ (#DESCRIPTION*|strlen|?{'',vide})]">
+	<label><:sql_requete:label_description:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{description} description'>(#DESCRIPTION)</span>
+</div>]
+
+[<div class="champ contenu_requetesql[ (#REQUETESQL*|strlen|?{'',vide})]">
+	<label><:sql_requete:label_requetesql:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{requetesql} requetesql'>(#REQUETESQL**|coloration_code_color{sql, code})</span>
+</div>] 
+
+</BOUCLE_sql_requete>
