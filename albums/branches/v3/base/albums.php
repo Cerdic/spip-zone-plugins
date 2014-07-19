@@ -73,7 +73,6 @@ function albums_declarer_tables_objets_sql($tables){
 		'tables_jointures'      => array(
 		),
 		'modeles'               => array('album'),
-		'page'                  => false,
 		'statut'=> array(
 			array(
 				'champ'         => 'statut',
