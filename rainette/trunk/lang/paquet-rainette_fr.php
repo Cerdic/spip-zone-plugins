@@ -13,7 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
-	'rainette_description' => 'Ce plugin permet d\'afficher les conditions et les prévisions météorologiques d\'une ville donnée à partir du flux xml fourni par le site weather.com®.
+	'rainette_description' => 'Cette nouvelle version de Rainette permet de choisir son service météo parmi weather.com, Wunderground, World Weather Online, Open Weather Map ou Yahoo. Une configuration est disponible pour chaque service en particulier pour saisir une clé d\'enregistrement. Les affichages proposées par cette version sont incompatibles avec ceux de la branche v1.
+
+Ce plugin permet d\'afficher les conditions et les prévisions météorologiques d\'une ville donnée à partir du flux xml fourni par un des services méteorologiques supportés.
 Il ne stocke aucune information en base de données ni ne gère le choix des villes.
 
 L\'affichage des données météorologiques se fait principalement via l\'utilisation de modèles dans les squelettes. Le plugin propose des 
