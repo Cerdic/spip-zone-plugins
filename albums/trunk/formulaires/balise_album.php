@@ -33,13 +33,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function formulaires_balise_album_charger_dist($id_album=0){
 
 	// sans les plugins adéquats, ni la liste des modèles, on peut pas test
+	// mais il faut quand même afficher la balise de base
 	include_spip('inc/albums');
 	if (
 		!defined('_DIR_PLUGIN_YAML') OR !_DIR_PLUGIN_YAML
 		OR !defined('_DIR_PLUGIN_SAISIES') OR !_DIR_PLUGIN_SAISIES
 		OR !count($liste_modeles = albums_lister_modeles())
-	)
-		return array('editable'=>false);
+	) {
+		$balise = htmlspecialchars('<album'.$id_album.'>');
+		$js_balise = js_balise($balise);
+		return array('editable'=>false, '_balise'=>$balise, '_js_balise'=>$js_balise);
+	}
 
 	$valeurs = array();
 
