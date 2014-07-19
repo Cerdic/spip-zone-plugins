@@ -4,8 +4,8 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/corbeille?lang_cible=de" total="23" traduits="22" relire="0" modifs="0" nouveaux="1" pourcent="95.65">
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/corbeille?lang_cible=en" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
-		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/corbeille?lang_cible=es" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
