@@ -20,7 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		in order to restrict the selection of albums. One click on an entry activates the filter, another click dis-activates it.
 		By combining them you can easily find any album.
 		When the lists are too long, search fields let you find a specific object.',
-	'c_albumotheque_presentation' => 'The albums let you compose groups of documents.',
+	'c_albumotheque_presentation' => 'The albums complete SPIP’s documents management by letting you compose groups of documents.
+Like individual documents, they can be added to objects.', # RELIRE
 	'c_albumotheque_titre_filtres' => 'Filter selection',
 	'c_albumotheque_titre_presentation' => 'Albums',
 	'cfg_titre_albums' => 'Albums',
@@ -57,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_activer_deplacer_documents' => 'Drag and drop',
 	'label_album_numero' => 'Album number',
 	'label_case_deplacer_documents' => 'Drag and drop documents between albums.',
-	'label_case_utiliser_titre_defaut' => 'By default, use the parent object’s title', # MODIF
+	'label_case_utiliser_titre_defaut' => 'By default, suggest the parent object’s title',
 	'label_descriptif' => 'Description',
 	'label_modele_alias_liste' => 'List',
 	'label_modele_alias_vignettes' => 'Thumbnails',
