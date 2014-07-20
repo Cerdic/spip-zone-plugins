@@ -1,7 +1,7 @@
 <paquet
 	prefix="mes_fichiers"
 	categorie="maintenance"
-	version="2.0.12"
+	version="2.0.13"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/mes_fichiers-64.png"
@@ -21,6 +21,5 @@
 	<pipeline nom="taches_generales_cron" inclure="genie/mes_fichiers_cron.php" />
 	<pipeline nom="mes_fichiers_a_sauver" action="" />
 
-	<menu nom="configurer_mes_fichiers" titre="mes_fichiers:bouton_configurer" parent="menu_configuration" icone="images/mes_fichiers-24.png" />
 	<menu nom="mes_fichiers" titre="mes_fichiers:bouton_mes_fichiers" parent="menu_administration" icone="images/mes_fichiers-24.png" />
 </paquet>
