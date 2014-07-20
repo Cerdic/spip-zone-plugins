@@ -3,9 +3,9 @@
 	categorie="outil"
 	version="1.0.1"
 	etat="test"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.0.*]"
 	logo="img/balado.jpg"
-	documentation="http://www.spip-contrib.net/SpipBalado"
+	documentation="http://contrib.spip.net/SpipBalado"
 >	
 
 	<nom>SpipBalado</nom>

@@ -6,7 +6,7 @@
 	<etat>dev</etat>
 	<description>Ce plugin vise essentiellement &#224; rajouter simplement le support du podcast dans les squelettes pour SPIP. Il utilise la syntaxe sp&#233;cifique &#224; iTunes, mais fonctionne tr&#232;s bien avec Rhythmbox sous GNU/Linux Ubuntu</description>
 	<auteur>[Jean-S&eacute;bastien Barboteu->http://www.spip-contrib.net/jsb]</auteur>
-	<lien>http://www.spip-contrib.net/SpipBalado</lien>
+	<lien>http://contrib.spip.net/SpipBalado</lien>
 	<fonctions>balado_fonctions.php</fonctions>
 	<prefix>balado</prefix>
 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
