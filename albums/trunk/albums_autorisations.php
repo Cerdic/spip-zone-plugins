@@ -138,9 +138,10 @@ function autoriser_albumotheque_administrer_dist($faire, $type, $id, $qui, $opts
  */
 function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
 	include_spip('inc/config');
+	$config = lire_config('albums/objets', array());
 	return
 		(
-			in_array(table_objet_sql($type),lire_config('albums/objets', array()))
+			in_array(table_objet_sql($type),array_filter($config))
 		)
 		AND
 		(
