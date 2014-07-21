@@ -9,8 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'albums_nom' => 'Albumy',
-	'albums_slogan' => 'Zoskupte svoje dokumenty do albumov',
-	'albums_titre' => 'Albumy'
+	'albums_slogan' => 'Zoskupte svoje dokumenty do albumov' # MODIF
 );
 
 ?>
