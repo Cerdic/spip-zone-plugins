@@ -24,8 +24,10 @@
 		<div id="creer-album-#GET{id_unique}">
 
 			<h6 class="menu">
-				<span class="creer">Nouvel album</span> | <span class="choisir"><a href="#">Choisir</a></span>
+				<span class="creer"><:album:onglet_ajouter_creer:></span> | <span class="choisir"><a href="#"><:album:onglet_ajouter_choisir:></a></span>
 			</h6>
+
+			<p class="explication"><:album:label_onglet_ajouter_creer:></p>
 
 			<ul>
 				#SET{name,titre} #SET{obli,''} #SET{defaut,#ENV{titre_defaut,''}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -64,10 +66,11 @@
 		<div id="choisir-album-#GET{id_unique}" style="display:none;">
 
 			<h6 class="menu">
-				<span class="creer"><a href="#">Nouvel album</a></span> | <span class="choisir">Choisir</span>
+				<span class="creer"><a href="#"><:album:onglet_ajouter_creer:></a></span> | <span class="choisir"><:album:onglet_ajouter_choisir:></span>
 			</h6>
 
-			<p class="explication"><:album:explication_album_numero:></p>
+			<p class="explication"><:album:label_onglet_ajouter_choisir:> : <:album:explication_album_numero:></p>
+
 			<ul>
 				#SET{name,ids_albums_associer} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
