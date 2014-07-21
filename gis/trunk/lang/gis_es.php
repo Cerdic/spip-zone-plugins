@@ -49,7 +49,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_maptype_hybride' => 'Híbrido',
 	'cfg_lbl_maptype_relief' => 'Relieve',
 	'cfg_lbl_maptype_satellite' => 'Satélite',
-	'cfg_titre_gis' => 'GIS',
 
 	// E
 	'editer_gis_editer' => 'Modificar este punto',
