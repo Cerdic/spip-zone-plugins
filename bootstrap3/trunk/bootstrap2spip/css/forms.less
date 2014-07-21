@@ -1,8 +1,20 @@
 @import "bootstrap/css/forms.less";
+@import "bootstrap/css/buttons.less";
 @import "css/variables.less";
 
 legend {&:extend(h3);}
 
+input {
+	&:extend(.form-control);
+}
+input[type='submit'] {
+	&:extend(.btn);
+}
+form {
+	label {
+		&:extend(.control-label);
+	}
+}
 /* Surcharge RTL */
 .rtl {
 	.form-search .input-append .search-query {

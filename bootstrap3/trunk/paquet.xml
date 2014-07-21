@@ -1,7 +1,7 @@
 <paquet
 	prefix="bootstrap3"
 	categorie="outil"
-	version="1.1.32"
+	version="1.2.32"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="img/bootstrap3-32.png"
