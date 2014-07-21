@@ -55,10 +55,10 @@ dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;pad
 .postmeta >:first-child >.sep:first-child {display: none}
 
 /* Notes */
-.notes {small; padding-top: @vertical-margin-em;margin-top: @vertical-margin-em;max-width: 5*(@padding-base-horizontal*5+@grid-gutter-width);}
+.notes {.small(); padding-top: @vertical-margin-em;margin-top: @vertical-margin-em;}
 .notes > h2 {border-bottom: 2px solid lighten(@gray-light, 20%);}
 .notes > div p {font-size: inherit;line-height: inherit;font-weight: 200;}
-.notes > div {padding-left: @padding-base-horizontal*5+@grid-gutter-width; position: relative; }
+.notes > div { position: relative; }
 .notes .spip_note_ref { display:block;position:absolute;left:0;}
 .secondary {
   .notes > div {padding-left: 2*@grid-gutter-width;}

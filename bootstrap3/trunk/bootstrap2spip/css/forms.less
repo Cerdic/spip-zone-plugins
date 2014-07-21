@@ -1,23 +1,29 @@
 @import "bootstrap/css/forms.less";
+@import "css/variables.less";
 
-legend {h3}
+legend {&:extend(h3);}
 
 /* Surcharge RTL */
 .rtl {
 	.form-search .input-append .search-query {
-		.border-radius(0 14px 14px 0);
+		border-radius: 0 14px 14px 0;
 	}
 	.form-search .input-append .btn {
-		.border-radius(14px 0 0 14px);
+		border-radius: 14px 0 0 14px;
 	}
 	.form-search .input-prepend .search-query {
-		.border-radius(14px 0 0 14px);
+		border-radius: 14px 0 0 14px;
 	}
 	.form-search .input-prepend .btn {
-		.border-radius(0 14px 14px 0);
+		border-radius: 0 14px 14px 0;
 	}
 }
 
+.form-inline {
+	.form-control {
+		width: 100%;
+	}
+}
 
 /* Structure generale des formulaires
 ----------------------------------------------- */
@@ -31,7 +37,6 @@ legend {h3}
 		margin-bottom: 0
 	}
 	.boutons {
-		.form-actions;
 		margin: 0 -@line-height-em -@line-height-em; 
 		padding: @line-height-em;
 		text-align: right;
@@ -65,7 +70,7 @@ legend {h3}
 		> ul {
 			margin-left: 0;
 			list-style: none;
-			.control-group;
+			.form-group;
 		}
 	}
 
@@ -87,14 +92,14 @@ input.submit {
 
 /* choix de mot dans le form forum notamment */
 .formulaire_spip .choix_mots {
-  .calc-grid(12,md,width);
+  .calc-grid-column(12,md,width);
 }
 .formulaire_spip .choix_mots .saisie_mot {
-	.input-block-level();
+	width: 100%;
 	float: left;
 	margin-left: @grid-gutter-width;
-	.calc-grid(4,md,width);
-	
+	.calc-grid-column(4,md,width);
+
 	&:nth-child(3n-2) {
 		margin-left: 0;
 		clear: both;
@@ -178,8 +183,8 @@ form select { width: 80%;}
   background-color: inherit;
   color: inherit;
   text-shadow:inherit;
-  .border-radius(inherit);
-  fieldset;
+  border-radius: inherit;
+  &:extend(fieldset);
 }
 
 /* Selection des langues */
@@ -193,7 +198,7 @@ form select { width: 80%;}
 /* Formulaire de login dans une page */
 .formulaire_login form .editer {clear:left;}
 .formulaire_login form input.text,
-.formulaire_login form input.password {.calc-grid(5,md,width);}
+.formulaire_login form input.password {.calc-grid-column(5,md,width);}
 
 .formulaire_login form .editer_password .details {margin-bottom:0;}
 .formulaire_login #spip_logo_auteur {float:right;}
