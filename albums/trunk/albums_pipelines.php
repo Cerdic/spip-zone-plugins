@@ -144,21 +144,22 @@ function albums_affiche_milieu($flux){
  */
 function albums_affiche_gauche($flux){
 
-	$e              = trouver_objet_exec($flux['args']['exec']);
-	$type           = $e['type'];
-	$id_table_objet = $e['id_table_objet'];
-
-	if (
-		$e['edition'] !== false // page édition uniquement
-		AND (
-			(isset($flux['args'][$id_table_objet]) and $id = intval($flux['args'][$id_table_objet]))
-			// id non défini pour les nouveaux objets : on met un identifiant negatif
-			OR $id = 0-$GLOBALS['visiteur_session']['id_auteur']
-		)
-		AND autoriser('ajouteralbum',$type,$id)
-		AND !autoriser('joindredocument',$type,$id)
-	){
-		$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
+	$e = trouver_objet_exec($flux['args']['exec']);
+	if ($e !== false) {
+		$type           = $e['type'];
+		$id_table_objet = $e['id_table_objet'];
+		if (
+			$e['edition'] !== false // page édition uniquement
+			AND (
+				(isset($flux['args'][$id_table_objet]) and $id = intval($flux['args'][$id_table_objet]))
+				// id non défini pour les nouveaux objets : on met un identifiant negatif
+				OR ($id = 0-$GLOBALS['visiteur_session']['id_auteur'])
+			)
+			AND autoriser('ajouteralbum',$type,$id)
+			AND !autoriser('joindredocument',$type,$id)
+		){
+			$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
+		}
 	}
 
 	return $flux;
