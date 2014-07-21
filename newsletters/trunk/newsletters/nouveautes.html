@@ -18,6 +18,9 @@
 	div#emailbody table#itemcontentlist tr td div ul {list-style-type: square;padding-left: 1em;}
 	div#emailbody table#itemcontentlist tr td div blockquote {padding-left: 6px;border-left: 6px solid #dadada;margin-left: 1em;}
 	div#emailbody table#itemcontentlist tr td div li {margin-bottom: 1em;margin-left: 1em;}
+	div#emailbody table#itemcontentlist tr td .spip_documents_center { display: table; clear: both; margin: 1em auto; }
+	div#emailbody table#itemcontentlist tr td .spip_documents_left { margin-right: 15px; margin-bottom: 5px; }
+	div#emailbody table#itemcontentlist tr td .spip_documents_right { margin-left: 15px; margin-bottom: 5px; }
 	table#itemcontentlist tr td a:link, table#itemcontentlist tr td a:visited, table#itemcontentlist tr td a:active, ul#summarylist li a {color: #CC3300;font-weight: bold;text-decoration: none;}
 	img {border: none;}
 	div.chapo,div.texte,div.ps,div.notes {margin-bottom: 2em;}
@@ -37,7 +40,7 @@
 				<h1 style="margin:0;padding-bottom:6px;">
 					<a
 						style="color:#888;font-size:22px;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:normal;text-decoration:none;"
-						href="#URL_SITE_SPIP" title="(#URL_SITE_SPIP)">
+						href="#URL_SITE_SPIP" title="#NOM_SITE_SPIP">
 						[(#LOGO_SITE_SPIP|image_reduire{100,200}
 										|inserer_attribut{id,feedimage}
 										|inserer_attribut{style,float:right;padding:0 0 10px 3px;border:0;})]
@@ -69,10 +72,10 @@
 					|inserer_attribut{class,logo})]
 
 					[
-					<div class='chapo' style="margin-bottom: 2em;">(#CHAPO)</div>
+					<div class='chapo' style="margin-bottom: 2em;">(#CHAPO|image_reduire{500,0})</div>
 					]
 					[
-					<div class='texte' style="margin-bottom: 2em;">(#TEXTE)</div>
+					<div class='texte' style="margin-bottom: 2em;">(#TEXTE|image_reduire{500,0})</div>
 					]
 					[<br/>
 					<hr/>
@@ -148,7 +151,7 @@
 		<tr>
 			<td
 				style="text-align:left;font-family:Helvetica,Arial,Sans-Serif;font-size:11px;margin:0 6px 1.2em 0;color:#333;">
-				<:newsletter:label_inscrit_newsletter{site=<a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a>}:> 
+				<:newsletter:info_email_inscrit_newletter:> <a href="#URL_SITE_SPIP">#NOM_SITE_SPIP</a>
 				<span class="unsubscribe_link">
 				<br/><a href="@url_unsubscribe@">
 				<:newsletter:label_link_unsubscribe:>

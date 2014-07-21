@@ -14,6 +14,9 @@
 	div#emailbody table#itemcontentlist tr td div ul {list-style-type: square;padding-left: 1em;}
 	div#emailbody table#itemcontentlist tr td div blockquote {padding-left: 6px;border-left: 6px solid #dadada;margin-left: 1em;}
 	div#emailbody table#itemcontentlist tr td div li {margin-bottom: 1em;margin-left: 1em;}
+	div#emailbody table#itemcontentlist tr td .spip_documents_center { display: table; clear: both; margin: 1em auto; }
+	div#emailbody table#itemcontentlist tr td .spip_documents_left { margin-right: 15px; margin-bottom: 5px; }
+	div#emailbody table#itemcontentlist tr td .spip_documents_right { margin-left: 15px; margin-bottom: 5px; }
 	table#itemcontentlist tr td a:link, table#itemcontentlist tr td a:visited, table#itemcontentlist tr td a:active, ul#summarylist li a {color: #CC3300;font-weight: bold;text-decoration: none;}
 	img {border: none;}
 	#emailbody {max-width: 800px;text-align: left;}
@@ -31,12 +34,16 @@
 				<h1 style="margin:0;padding-bottom:6px;">
 					<a
 						style="color:#888;font-size:22px;font-family:Verdana, Arial, Helvetica, sans-serif;font-weight:normal;text-decoration:none;"
-						href="#URL_SITE_SPIP" title="(URL_SITE_SPIP)">
+						href="#URL_SITE_SPIP" title="#NOM_SITE_SPIP">
 						[(#LOGO_SITE_SPIP|image_reduire{100,200}
 										|inserer_attribut{id,feedimage}
 										|inserer_attribut{style,float:right;padding:0 0 10px 3px;border:0;})]
 						<:newsletter:label_a_lire_sur{site=#NOM_SITE_SPIP}:></a>
 				</h1>
+				<p
+					style="font-size:14px;color:#555;margin:9px 0 3px 0;font-family:Georgia,Helvetica,Arial,Sans-Serif;line-height:140%;font-size:14px;">
+					<:newsletter:info_email_not_displaying:><br><a href="#URL_NEWSLETTER" target="_blank"><:newsletter:info_email_voir_en_ligne:></a>.
+				</p>
 			</td>
 		</tr>
 	</table>
@@ -63,10 +70,10 @@
 					|inserer_attribut{class,logo})]
 
 					[
-					<div class='chapo'>(#CHAPO)</div>
+					<div class='chapo'>(#CHAPO|image_reduire{500,0})</div>
 					]
 					[
-					<div class='texte'>(#TEXTE)</div>
+					<div class='texte'>(#TEXTE|image_reduire{500,0})</div>
 					]
 					[<br/>
 					<hr/>
