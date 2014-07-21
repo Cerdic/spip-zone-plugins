@@ -49,23 +49,18 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	}
 
 	/**
-	 * Si c'est un flv on lui applique les metadatas pour éviter les problèmes
-	 * Si c'est un mov ou MP4 on applique qt-faststart
+	 * Si c'est un flv on lui applique les metadatas pour éviter les problèmes (avec flvtool++)
+	 * Si c'est un mov, mp4 ou m4v on applique qt-faststart
 	 */
-	if($extension == 'flv'){
-		/**
-		 * Inscrire les metadatas dans la video finale
-		 * On utilise flvtool++
-		 */
-		if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus'])){
-			$flvtoolplus = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
-			if(isset($flvtoolplus['flvtoolplus'])){
-				$metadatas_flv = "flvtool++ $fichier ".$fichier."_tmp";
-				exec(escapeshellcmd($metadatas_flv),$retour,$retour_int);
-			}
+	if($extension == 'flv' && isset($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus'])){
+		$flvtoolplus = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
+		if(isset($flvtoolplus['flvtoolplus'])){
+			$chemin = defined(_CHEMIN_FLVTOOLPLUS)? _CHEMIN_FLVTOOLPLUS : 'flvtool++';
+			$metadatas_flv = "$chemin $fichier ".$fichier."_tmp";
+			exec(escapeshellcmd($metadatas_flv),$retour,$retour_int);
 		}
 	}
-	if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse'])
+	else if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse'])
 		exec(escapeshellcmd("qt-faststart $fichier ".$fichier."_tmp"),$retour,$retour_int);
 
 	if(file_exists($fichier."_tmp"))
@@ -118,7 +113,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			if(_request($champ))
 				$infos[$champ] = _request($champ);
 			else
-				unset($infos[$champ]);	
+				unset($infos[$champ]);
 		}
 	}
 

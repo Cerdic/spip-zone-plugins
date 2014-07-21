@@ -230,7 +230,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 						$infos['audiocodecid'] = 'vorbis';
 					else
 						$infos['audiocodecid'] = $info[0]['Codec_ID'][0] ? $info[0]['Codec_ID'][0] : strtolower($info[0]['Codec'][0]);
-					if($infos['audiobitrate'] && $infos['audiochannels'] && $infos['audiocodec'] && $infos['audiobitratemode'])
+					if($infos['audiochannels'] || $infos['audiocodec'])
 						$infos['hasaudio'] = 'oui';
 					continue;
 				}
