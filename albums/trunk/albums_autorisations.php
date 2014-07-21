@@ -375,25 +375,31 @@ function autoriser_autoassocieralbum_dist($faire, $type, $id, $qui, $opts) {
  */
 function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts) {
 	include_spip('inc/config');
+	// dans le contexte d'un objet, on doit pouvoir modifier tous les albums liés
 	if ($type AND intval($id)>0) {
-		$autorise_modifier_albums = true;
+		$autoriser_modifier_albums = true;
 		include_spip('action/editer_liens');
 		if (is_array($liens_albums=objet_trouver_liens(array('album'=>'*'),array($type=>$id))) AND count($liens_albums)){
 			foreach($liens_albums as $l) {
 				if (!autoriser('modifier','album',$l['id_album'])) {
-					$autorise_modifier_albums = false;
+					$autoriser_modifier_albums = false;
 					break;
 				}
 			}
 		}
 	}
-	return
+	// sinon, il faut qu'il y ait au moins 2 albums
+	else {
+		$autoriser_modifier_albums = sql_countsel('spip_albums')>1;
+	}
+	$autoriser =
 		lire_config('albums/deplacer_documents','')=='on'
 		AND
 		(
 			$qui['statut'] == '0minirezo' AND !$qui['restreint']
-			OR $autorise_modifier_albums
+			OR $autoriser_modifier_albums
 		);
+	return $autoriser;
 }
 
 
