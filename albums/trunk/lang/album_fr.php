@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_deplacement' => 'Le traitement n’a pas pu être effectué',
 	'explication_album_numero' => 'Identifiants séparés par des virgules',
-	'explication_deplacer_documents' => '<strong>Expérimental</strong> : il est possible de déplacer des documents entre abums par cliquer-glisser.
+	'explication_deplacer_documents' => '<strong>Expérimental</strong> : il est possible de déplacer des documents entre albums par cliquer-glisser.
 		Si vous disposez des droits nécessaires, le curseur change à leur survol pour signaler qu’une action est possible.
 		Une fois les déplacements effectués, un formulaire apparaît en bas de la liste pour enregistrer les changements.',
 
@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_configurer_options' => 'Options',
 	'onglet_configurer_outils' => 'Outils',
 	'onglet_ajouter_creer' => 'Nouvel album',
-	'onglet_ajouter_choisir' => 'Choisir',
+	'onglet_ajouter_choisir' => 'Choisir album(s)',
 
 	// T
 	'texte_activer_ajout_albums' => 'Vous pouvez activer l’interface d’ajout d’albums aux articles, rubriques et autres.

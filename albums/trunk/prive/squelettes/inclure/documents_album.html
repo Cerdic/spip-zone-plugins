@@ -20,6 +20,6 @@
 #SET{editable,  #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
 <div class="documents-album liste_items[ (#GET{editable}|oui)editable]" id="documents-album#ID_ALBUM">
 	<BOUCLE_documents(DOCUMENTS documents_liens types_documents){id_album}{!par media,id_document,extension,date}{tout}>
-	[(#INCLURE{fond=prive/squelettes/inclure/document_album, id_document, id_album, editable, ajax})]
+	[(#INCLURE{fond=prive/squelettes/inclure/document_album, id_document, id_album, editable=#GET{editable}, ajax})]
 	</BOUCLE_documents>
 </div><!-- .documents-album.liste-items -->

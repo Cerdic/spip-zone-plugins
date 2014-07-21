@@ -1,0 +1,14 @@
+[(#REM)
+
+	Surcharge du plugin Médias.
+	Affiche les documents d'un objet et le formulaire d'ajout.
+
+	Pour les albums, on utilise notre squelette maison,
+	car on ne veut pas des groupes «illustrations», «portfolio» et «documents».
+
+]
+[(#ENV{objet}|=={album}|oui)[(#INCLURE{fond=prive/squelettes/inclure/documents_album, env, id_album=#ENV{id_objet}, ajax=documents})<br>]]
+[(#ENV{objet}|=={album}|non)[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents})]]
+[
+(#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, env, ajax})
+]
