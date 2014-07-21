@@ -40,7 +40,7 @@ function albums_afficher_complement_objet($flux) {
 	// Albums liés sur les objets activés
 	if (
 		!$e['edition']
-		AND autoriser(ajouteralbum,$type,$id)
+		AND autoriser('ajouteralbum',$type,$id)
 	) {
 		// on vérifie d'abord que les albums vus sont bien liés
 		$table_objet_sql = table_objet_sql($type);
