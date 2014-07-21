@@ -3,12 +3,27 @@
 	Surcharge du plugin Médias.
 	Affiche les documents d'un objet et le formulaire d'ajout.
 
-	Pour les albums, on utilise notre squelette maison,
-	car on ne veut pas des groupes «illustrations», «portfolio» et «documents».
+	Pour les albums on fait une exception : on utilise notre squelette maison,
+	car on ne veut pas de la séparation en 3 groupes «illustrations», «portfolio» et «documents».
 
-]
-[(#ENV{objet}|=={album}|oui)[(#INCLURE{fond=prive/squelettes/inclure/documents_album, env, id_album=#ENV{id_objet}, ajax=documents})<br>]]
-[(#ENV{objet}|=={album}|non)[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents})]]
-[
+][
+
+(#REM) Documents des albums
+
+][(#ENV{objet}|=={album}|oui)
+[(#INCLURE{fond=prive/squelettes/inclure/documents_album, env, id_album=#ENV{id_objet}, ajax=documents})<br>]
+<script type="text/javascript">/*<!\[CDATA\[*/
+var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+/*\]\]>*/</script>
+][
+
+(#REM) Documents des autres objets
+
+][(#ENV{objet}|=={album}|non)[(#INCLURE{fond=prive/squelettes/inclure/portfolio-documents, env, ajax=documents})]][
+
+(#REM) Formulaire d'ajout de documents
+
+][
 (#INCLURE{fond=prive/squelettes/inclure/ajouter-documents, env, ajax})
 ]
