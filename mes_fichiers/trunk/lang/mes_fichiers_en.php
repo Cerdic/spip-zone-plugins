@@ -8,7 +8,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_configurer' => 'My files',
 	'bouton_mes_fichiers' => 'Backup my files',
 	'bouton_sauver' => 'Backup',
 	'bouton_tout_cocher' => 'Select all',
