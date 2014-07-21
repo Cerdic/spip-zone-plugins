@@ -11,6 +11,7 @@
 
 ]
 #SET{id_unique,#ENV{objet_associer}|concat{#ENV{id_objet_associer}|>{0}|?{#ENV{id_objet_associer},0}}}
+#SET{edition,#EVAL{_request('exec')}|match{_edit$}|?{1}}
 <div class='formulaire_spip formulaire_#FORM'>
 	<h3 class='titrem'>[(#CHEMIN_IMAGE{album-24.png}|balise_img{'',cadre-icone})]<:album:icone_ajouter_album:></h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
@@ -23,9 +24,9 @@
 		[(#REM) Création d'un nouvel album ]
 		<div id="creer-album-#GET{id_unique}">
 
-			<h6 class="menu">
+			<h5 class="menu">
 				<span class="creer"><:album:onglet_ajouter_creer:></span> | <span class="choisir"><a href="#"><:album:onglet_ajouter_choisir:></a></span>
-			</h6>
+			</h5>
 
 			<p class="explication"><:album:label_onglet_ajouter_creer:></p>
 
@@ -40,7 +41,7 @@
 				<li class="editer editer_[(#GET{name})_album][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="text_area"><:album:label_descriptif:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<textarea name="#GET{name}" id="#GET{name}"[ lang="(#LANGUE)"] rows='2' cols='40'>[(#ENV*{#GET{name}})]</textarea>
+					]<textarea name="#GET{name}" id="#GET{name}"[ lang="(#LANGUE)"] rows="[(#GET{edition}|?{2,4})]" cols="40">[(#ENV*{#GET{name}})]</textarea>
 				</li>
 			</ul>
 
@@ -65,9 +66,9 @@
 		[(#REM) Choix d'un album existant ]
 		<div id="choisir-album-#GET{id_unique}" style="display:none;">
 
-			<h6 class="menu">
+			<h5 class="menu">
 				<span class="creer"><a href="#"><:album:onglet_ajouter_creer:></a></span> | <span class="choisir"><:album:onglet_ajouter_choisir:></span>
-			</h6>
+			</h5>
 
 			<p class="explication"><:album:label_onglet_ajouter_choisir:> : <:album:explication_album_numero:></p>
 
