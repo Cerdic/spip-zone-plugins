@@ -1,27 +1,23 @@
 <paquet
 	prefix="bootstrap3"
 	categorie="outil"
-	version="1.0.2"
+	version="1.0.32"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="img/bootstrap3-32.png"
 	documentation=""
 >
-	<!--
-		Paquet genere le 2013-11-10 12:20:50
-	-->
-
 	<nom>Bootstrap3 - Core</nom>
 
 	<auteur lien='http://www.teddypayet.com/'>Teddy Payet</auteur>
 
-	<credit lien='http://getbootstrap.com/'>Bootstrap v3.0.2</credit>
+	<credit lien='http://getbootstrap.com/'>Bootstrap v3.2.0</credit>
 
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="autoriser" inclure="bootstrap3_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="bootstrap3_autorisations.php" />
 
-	<necessite nom="lesscss" compatibilite="[0.7.2;]" />
+	<necessite nom="lesscss" compatibilite="[1.0.0;]" />
 
 	<chemin path="bootstrap" type="public" />
 	<chemin path="bootstrap2spip" type="public" />

@@ -9,8 +9,9 @@
  * @package    SPIP\Bootstrap3\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 /**
  * Fonction d'installation et de mise à jour du plugin Bootstrap3 - Core.
@@ -21,11 +22,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function bootstrap3_upgrade($nom_meta_base_version, $version_cible) {
-	$maj = array();
+function bootstrap3_upgrade($nom_meta_base_version, $version_cible)
+{
+    $maj = array();
 
-	include_spip('base/upgrade');
-	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+    include_spip('base/upgrade');
+    maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
@@ -36,10 +38,9 @@ function bootstrap3_upgrade($nom_meta_base_version, $version_cible) {
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
-function bootstrap3_vider_tables($nom_meta_base_version) {
-
-
-	effacer_meta($nom_meta_base_version);
+function bootstrap3_vider_tables($nom_meta_base_version)
+{
+    effacer_meta($nom_meta_base_version);
 }
 
 ?>
