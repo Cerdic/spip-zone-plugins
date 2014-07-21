@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_lies' => 'PREPOJENÉ ČLÁNKY',
 
 	// C
-	'cfg_a2a' => 'Vzťahy medzi článkami',
 	'changer_type_liaison' => 'Zmeniť',
 	'configurer_a2a' => 'Nastaviť vzťahy medzi článkami',
 

@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_lies' => 'GEKOPPELDE ARTIKELEN',
 
 	// C
-	'cfg_a2a' => 'Relatie tussen artikelen',
 	'changer_type_liaison' => 'Verander',
 	'configurer_a2a' => 'Configureer relaties tussen artikelen',
 
