@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_historique' => 'Sauvegardes MySQL disponibles au téléchargement dans @dossier@',
 	'titre_boite_sauver' => 'Créer une sauvegarde MySQL',
 	'titre_page_configurer' => 'Configuration du plugin Sauvegarde automatique',
-	'titre_page_saveauto' => 'Sauvegarder la base au format MySQL',
+	'titre_page_saveauto' => 'Sauvegarder la base au format MySQL'
 );
 
 ?>

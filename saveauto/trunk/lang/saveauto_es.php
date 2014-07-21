@@ -92,8 +92,7 @@ plugin Saveauto',
 	'titre_boite_historique' => 'Copias de seguridad MySQL disponibles para descargar en @dossier@',
 	'titre_boite_sauver' => 'Crear una copia de seguridad MySQL',
 	'titre_page_configurer' => 'Configuración del plugin Sauvegarde automática',
-	'titre_page_saveauto' => 'Crear una copia de seguridad de la base en formato MySQL',
-	'titre_saveauto' => 'Copia de seguridad automática'
+	'titre_page_saveauto' => 'Crear una copia de seguridad de la base en formato MySQL'
 );
 
 ?>

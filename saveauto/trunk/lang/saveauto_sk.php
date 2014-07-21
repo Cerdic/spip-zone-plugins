@@ -94,8 +94,7 @@ Tieto databázy obsahujú príkazy na <strong>vymazanie</strong> tabuliek vašej
 	'titre_boite_historique' => 'Zálohy MySQL dostupné na stiahnutie na  @dossier@',
 	'titre_boite_sauver' => 'Vytvoriť zálohu MySQL',
 	'titre_page_configurer' => 'Nastavenia modulu Automatická záloha',
-	'titre_page_saveauto' => 'Zálohovať databázu vo formáte MySQL',
-	'titre_saveauto' => 'Automatická záloha'
+	'titre_page_saveauto' => 'Zálohovať databázu vo formáte MySQL'
 );
 
 ?>

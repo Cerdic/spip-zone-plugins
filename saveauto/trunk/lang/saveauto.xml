@@ -1,18 +1,18 @@
 <traduction module="saveauto" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saveauto/trunk/lang/" reference="fr">
-	<langue code="ca" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=ca" total="69" traduits="18" relire="0" modifs="17" nouveaux="34" pourcent="26.09">
+	<langue code="ca" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=ca" total="68" traduits="17" relire="0" modifs="17" nouveaux="34" pourcent="25.00">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=de" total="69" traduits="62" relire="0" modifs="3" nouveaux="4" pourcent="89.86">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=de" total="68" traduits="61" relire="0" modifs="3" nouveaux="4" pourcent="89.71">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=en" total="69" traduits="62" relire="0" modifs="3" nouveaux="4" pourcent="89.86">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=en" total="68" traduits="61" relire="0" modifs="3" nouveaux="4" pourcent="89.71">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=es" total="69" traduits="69" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=es" total="68" traduits="68" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=fr" total="69" traduits="69" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=fr" total="68" traduits="68" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=sk" total="69" traduits="69" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/saveauto?lang_cible=sk" total="68" traduits="68" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
