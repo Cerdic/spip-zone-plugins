@@ -29,14 +29,18 @@ function diogene_mots_diogene_ajouter_saisies($flux){
 		$id_objet = $flux['args']['contexte'][$id_table_objet];
 		$mots_obligatoires = $mots_facultatifs = array();
 
-		if (is_array(unserialize($flux['args']['options_complements']['mots_obligatoires'])))
+		if (is_array(unserialize($flux['args']['options_complements']['mots_obligatoires']))){
 			$mots_obligatoires = unserialize($flux['args']['options_complements']['mots_obligatoires']);
+		}
 
 		if(is_array(unserialize($flux['args']['options_complements']['mots_facultatifs'])))
 			$mots_facultatifs = unserialize($flux['args']['options_complements']['mots_facultatifs']);
 
 		$valeurs_mots['id_groupes'] = $groupes_possibles = array_merge($mots_obligatoires,$mots_facultatifs);
-
+		foreach($valeurs_mots['id_groupes'] as $groupe){
+			if(is_array(unserialize($flux['args']['options_complements']['mot_selection_'.$groupe])))
+				$valeurs_mots['mot_selection_'.$groupe] = unserialize($flux['args']['options_complements']['mot_selection_'.$groupe]);
+		}
 		if (intval($id_objet)){
 			/**
 			 * On récupère les mots qui sont postés ou peut être déjà associés
@@ -290,6 +294,36 @@ function diogene_mots_diogene_traiter($flux){
 	return $flux;
 }
 
+/**
+ * Insertion dans le pipeline pre_edition (SPIP)
+ * On enregistre les limites de mots dans l'édition de diogènes
+ * 
+ * @param array $flux Le contexte du pipeline
+ * @return array $flux le contexte modifié passé aux suivants
+ */
+function diogene_mots_pre_edition($flux){
+	if($flux['args']['table'] == 'spip_diogenes'){
+		$options_complements = unserialize($flux['data']['options_complements']);
+		if(is_array($options_complements)){
+			if(count(unserialize($options_complements['mots_obligatoires'])) > 0){
+				foreach(unserialize($options_complements['mots_obligatoires']) as $groupe_obligatoire){
+					if(count(_request('mot_selection_'.$groupe_obligatoire)) > 0){
+						$options_complements['mot_selection_'.$groupe_obligatoire] = serialize(_request('mot_selection_'.$groupe_obligatoire));
+					}
+				}
+			}
+			if(count(unserialize($options_complements['mots_facultatifs'])) > 0){
+				foreach(unserialize($options_complements['mots_facultatifs']) as $mots_facultatifs){
+					if(count(_request('mot_selection_'.$mots_facultatifs)) > 0){
+						$options_complements['mot_selection_'.$mots_facultatifs] = serialize(_request('mot_selection_'.$mots_facultatifs));
+					}
+				}
+			}
+			$flux['data']['options_complements'] = serialize($options_complements);
+		}
+	}
+	return $flux;
+}
 /**
  * Insertion dans le pipeline diogene_objets (Diogene)
  * Fonction permettant de mettre des mots dans le formulaire d'un Diogene 

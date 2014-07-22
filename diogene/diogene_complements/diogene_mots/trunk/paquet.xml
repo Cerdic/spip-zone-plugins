@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene_mots"
 	categorie="edition"
-	version="1.4.4"
+	version="1.5.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
@@ -24,6 +24,7 @@
 	<pipeline nom="diogene_traiter" inclure="diogene_mots_pipelines.php" />
 	<pipeline nom="diogene_objets" inclure="diogene_mots_pipelines.php" />
 	<pipeline nom="diogene_champs_texte" inclure="diogene_mots_pipelines.php" />
+	<pipeline nom="pre_edition" inclure="diogene_mots_pipelines.php" />
 
 	<necessite nom="diogene" compatibilite="[1.0.0;[" />
 	<necessite nom="mots" compatibilite="[2.4.6;[" />

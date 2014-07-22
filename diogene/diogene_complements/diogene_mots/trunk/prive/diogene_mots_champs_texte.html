@@ -25,11 +25,28 @@
 				size=5,
 				groupes_exclus=#GET{groupes_exclus},
 				table_liaison=articles})]
-			
+
+			<BOUCLE_selection_mots_obligatoires(DATA){source table, #ENV{mots_obligatoires,#ARRAY}}>
+			<BOUCLE_groupe(GROUPES_MOTS){id_groupe=#VALEUR}>
+			[(#SAISIE{mot_complet, mot_selection_#VALEUR,
+				label=<:diogene_mots:limiter_usage_mots{groupe=#TITRE}:>,
+				valeur=[(#ENV**{options_complements}|unserialize|table_valeur{ mot_selection_#VALEUR}|unserialize)],
+				id_groupe=#VALEUR})]
+			</BOUCLE_groupe>
+			</BOUCLE_selection_mots_obligatoires>
+			<BOUCLE_selection_mots_facultatif(DATA){source table, #ENV{mots_facultatifs,#ARRAY}}>
+			<BOUCLE_groupe1(GROUPES_MOTS){id_groupe=#VALEUR}>
+			[(#SAISIE{mot_complet, mot_selection_#VALEUR,
+				label=<:diogene_mots:limiter_usage_mots{groupe=#TITRE}:>,
+				valeur=[(#ENV**{options_complements}|unserialize|table_valeur{ mot_selection_#VALEUR}|unserialize)],
+				id_groupe=#VALEUR})]
+			</BOUCLE_groupe1>
+			</BOUCLE_selection_mots_facultatif>
+
 			[(#SAISIE{case,montrer_titre_et_descriptif,
 				label=<:diogene_mots:label_montrer_titre_et_descriptif:>,
 				label_case=<:diogene_mots:label_montrer_titre_et_descriptif_case:>})]
-			
+
 			[(#PLUGIN{chosen}|oui)
 				[(#SAISIE{case,mots_creer_dans_public,
 					label=<:diogene_mots:label_mots_creer_dans_public:>})]

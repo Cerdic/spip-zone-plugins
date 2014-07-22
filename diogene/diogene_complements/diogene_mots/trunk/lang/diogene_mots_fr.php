@@ -18,7 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_montrer_titre_et_descriptif_case' => 'S’il existe, montrer le descriptif du mot entre parenthèses',
 	'label_mots_creer_dans_public' => 'Permettre la création de nouveaux mots dans ces groupes',
 	'label_mots_facultatifs' => 'Groupes de mots facultatifs',
-	'label_mots_obligatoires' => 'Groupes de mots obligatoires'
+	'label_mots_obligatoires' => 'Groupes de mots obligatoires',
+	'limiter_usage_mots' => 'Limiter à une liste de mots pour le groupe &laquo;@groupe@&raquo;'
 );
 
 ?>
