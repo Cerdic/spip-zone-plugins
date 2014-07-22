@@ -11,7 +11,7 @@
 							<input type="checkbox" name="supprimer_evenement" id="supprimer_evenement"[(#ENV{supprimer_evenement}|=={on}|oui)checked="checked"] />
 						</div>
 					</li>]
-					<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre_evenement}|oui)erreur]">
+					<li class="editer editer_titre_evenement obligatoire[ (#ENV**{erreurs}|table_valeur{titre_evenement}|oui)erreur]">
 						<label for="titre_evenement"><:agenda:evenement_titre:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_evenement})</span>
 						]<input type='text' class='text' name='titre_evenement' id='titre_evenement' value="#ENV{titre_evenement}" />
@@ -47,11 +47,12 @@
 				<textarea name='repetitions' id='repetitions'>#ENV{repetitions}</textarea>[
 				(#ENV{repetitions}|non)</div>]
 			</li>]
+			[(#VAL{descriptif}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
 			<li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 				<label for="descriptif"><:agenda:evenement_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' rows='5' id='descriptif' class="inserer_barre_edition">[(#ENV{descriptif})]</textarea>
-			</li>[
+			</li>][
 			(#VAL{inscription}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
 			<li class="editer editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
 				<div class='choix inscription'>

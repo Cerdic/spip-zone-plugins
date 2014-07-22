@@ -106,9 +106,7 @@ function diogene_agenda_diogene_verifier($flux){
 				$champs = objet_info('evenement','champs_editables');
 				$champs[] = 'titre_evenement';
 				foreach($champs as $champ){
-					//spip_log($champ,'test.'._LOG_ERREUR);
 					if(!in_array($champ,array('titre','horaire')) && _request($champ)){
-						spip_log('On a '.$champ,'test.'._LOG_ERREUR);
 						$champs_post = true;
 						break;
 					}
