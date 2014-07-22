@@ -37,7 +37,8 @@
 				label=<:diogene:label_rubrique_par_defaut:>,
 				multiple=non})]
 
-			[(#ENV{objet}|in_array{#LISTE{article,emballe_media}}|oui)
+			[(#ENV{objet}|in_array{#LISTE{article,emballe_media}}|ou{#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{objet_principal}|=={article}|oui}|oui)
+			#SET{objet_defaut,#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{objet_principal}}
 			[(#SAISIE{input,nombre_attente,
 				label=<:diogene:label_nombre_attente:>,
 				explication=<:diogene:explication_nombre_attente:>})]]
@@ -53,7 +54,7 @@
 					[(#SAISIE{champs_objets,champs_caches,
 						label=<:diogene:label_champs_caches:>,
 						size=40,
-						type=#ENV{objet,article}})]
+						type=#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{objet_principal}|sinon{#ENV{objet,article}}})]
 					[(#PLUGIN{cextras}|oui)
 						<INCLURE{fond=formulaires/cextras_diogene,env}>
 					]
@@ -66,7 +67,7 @@
 						-* licence
 						...
 					]
-					#SET{champs_ajouts,#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{champs_sup}}
+					#SET{champs_ajouts,#GET{pipeline}|table_valeur{#GET{objet_defaut}}|table_valeur{champs_sup}|sinon{#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{champs_sup}}}
 					#SET{size,#GET{champs_ajouts}|count}
 					[(#GET{champs_ajouts}|count|>{0}|oui)
 						[(#SAISIE{champs_objets_ajouts,champs_ajoutes,
