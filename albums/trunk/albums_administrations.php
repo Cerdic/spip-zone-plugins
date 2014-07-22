@@ -3,7 +3,7 @@
  * Fonctions d'installation et de désinstallation du plugin Albums
  *
  * @plugin     Albums
- * @copyright  2013
+ * @copyright  2014
  * @author     Romy Tetue, Charles Razack
  * @licence    GNU/GPL
  * @package    SPIP\Albums\Administrations
@@ -24,9 +24,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function albums_upgrade($nom_meta_base_version, $version_cible){
 	$maj = array();
-
-	include_spip('inc/config');
-	include_spip('base/abstract_sql');
 
 	// Création des tables + options de configuration
 	$maj['create'] = array(
@@ -55,9 +52,9 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', "TABLE spip_albums CHANGE titre titre text DEFAULT '' NOT NULL"),
 		array('sql_alter', "TABLE spip_albums CHANGE descriptif descriptif text DEFAULT '' NOT NULL"),
 		array('sql_alter', "TABLE spip_albums CHANGE statut statut varchar(10) DEFAULT '' NOT NULL"),
-		array('effacer_config','albums/afficher_champ_descriptif'),
-		array('effacer_config','albums/vue_icones'),
-		array('effacer_config','albums/vue_liste'),
+		array('effacer_config', 'albums/afficher_champ_descriptif'),
+		array('effacer_config', 'albums/vue_icones'),
+		array('effacer_config', 'albums/vue_liste'),
 	);
 
 	include_spip('base/upgrade');

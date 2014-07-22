@@ -19,10 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<br>Un clic sur une entrée active le filtre, un autre clic le désactive.
 		En les combinant, on peut facilement retrouver n’importe quel album.
 		<br>Quand les listes sont trop longues, des champs de recherche permettent de retrouver des objets précis.',
-	'c_albumotheque_presentation' => 'Bienvenue sur l\'albumothèque !<br>
+	'c_albumotheque_presentation' => 'Bienvenue dans l\'albumothèque !<br>
 		Vous pouvez créer des albums « autonomes » sur cette page et depuis la barre d\'outils rapides,
 		ou créer des albums liés aux objets éditoriaux depuis leurs pages respectives.
-		<br>Chaque album est éditable sur place (édition du texte & manipulation des documents), ou en vous rendant sur sa fiche.',
+		<br>Chaque album est éditable sur place (édition du texte & manipulation des documents), ou bien en vous rendant sur sa fiche.',
 	'c_albumotheque_titre_filtres' => 'Filtrer la sélection',
 	'c_albumotheque_titre_presentation' => 'Les albums',
 	'cfg_titre_albums' => 'Albums',
