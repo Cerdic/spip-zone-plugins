@@ -10,8 +10,7 @@
 		autocomplete_albums.html
 
 ]
-<B_medias>
-
+<BOUCLE_documents(documents_liens){objet=album}{0,1}>
 <strong class='titre-liste'>[(#VAL{document}|objet_info{texte_objets}|_T)]</strong>
 
 <input
@@ -34,3 +33,4 @@
 		</a>
 	</li>]
 </ul>
+ </BOUCLE_documents>

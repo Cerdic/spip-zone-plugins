@@ -34,22 +34,23 @@ function albums_afficher_complement_objet($flux) {
 
 	$texte = "";
 	$e     = trouver_objet_exec($flux['args']['type']);
-	$type  = $e['type'];
 	$id    = intval($flux['args']['id']);
 
-	// Albums liés sur les objets activés
+	// Fiches des objets activés : albums liés
 	if (
-		!$e['edition']
-		AND autoriser(ajouteralbum,$type,$id)
+		$e !== false // page d'un objet éditorial
+		AND $e['edition'] === false // pas en mode édition
+		AND $type = $e['type']
+		AND autoriser('ajouteralbum',$type,$id)
 	) {
 		// on vérifie d'abord que les albums vus sont bien liés
 		$table_objet_sql = table_objet_sql($type);
-		$table_objet = table_objet($type);
-		$id_table_objet = id_table_objet($type);
-		$champs = sql_fetsel('*',$table_objet_sql,addslashes($id_table_objet)."=".intval($id));
+		$table_objet     = table_objet($type);
+		$id_table_objet  = id_table_objet($type);
+		$champs          = sql_fetsel('*',$table_objet_sql,addslashes($id_table_objet)."=".intval($id));
 		$marquer_doublons_album = charger_fonction('marquer_doublons_album','inc');
 		$marquer_doublons_album($champs,$id,$type,$id_table_objet,$table_objet,$table_objet_sql);
-		//
+		// puis on récupère le squelette
 		$texte .= recuperer_fond('prive/squelettes/contenu/portfolio_albums', array(
 			'objet' => $type,
 			'id_objet' => $id,
@@ -58,8 +59,13 @@ function albums_afficher_complement_objet($flux) {
 		);
 	}
 
-	// Documents liés aux albums quand le portfolio classique n'est pas affiché
-	if (!$e['edition'] AND $type == 'album' and !autoriser('joindredocument',$type,$id)) {
+	// Fiches des albums : documents liés quand les documents «classiques» ne sont pas affichés
+	if (
+		$e !== false // page d'un objet éditorial
+		AND $e['edition'] === false // pas en mode édition
+		AND ($type=$e['type']) == 'album'
+		AND !autoriser('joindredocument',$type,$id)
+	) {
 		$texte .= recuperer_fond('prive/squelettes/inclure/documents_album', array('id_album' => $id));
 	}
 
@@ -87,13 +93,17 @@ function albums_afficher_complement_objet($flux) {
  */
 function albums_affiche_milieu($flux){
 
-	$texte    = "";
-	$e        = trouver_objet_exec($flux['args']['exec']);
-	$id_objet = $flux['args'][$e['id_table_objet']];
+	$texte = "";
+	$e     = trouver_objet_exec($flux['args']['exec']);
 
-	// fiche d'un album
-	if (!$e['edition'] AND $e['type']=='album') {
-		// auteurs liés
+	// Fiches des albums
+	if (
+		$e !== false // page d'un objet éditorial
+		AND $e['edition'] === false // pas en mode édition
+		AND $e['type'] == 'album'
+		AND $id_objet=$flux['args'][$e['id_table_objet']]
+	) {
+		// liste des auteurs liés
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'auteurs',
 			'objet' => 'album',
@@ -144,21 +154,28 @@ function albums_affiche_milieu($flux){
  */
 function albums_affiche_gauche($flux){
 
-	$e              = trouver_objet_exec($flux['args']['exec']);
-	$type           = $e['type'];
-	$id_table_objet = $e['id_table_objet'];
+	$texte = "";
+	$e = trouver_objet_exec($flux['args']['exec']);
 
+	// Edition des objets activés : gestion des albums
 	if (
-		$e['edition'] !== false // page édition uniquement
+		$e !== false // page d'un objet éditorial
+		AND $e['edition'] !== false // mode édition uniquement
+		AND $type = $e['type']
+		AND $id_table_objet = $e['id_table_objet']
 		AND (
-			(isset($flux['args'][$id_table_objet]) and $id = intval($flux['args'][$id_table_objet]))
+			(isset($flux['args'][$id_table_objet]) AND $id = intval($flux['args'][$id_table_objet]))
 			// id non défini pour les nouveaux objets : on met un identifiant negatif
-			OR $id = 0-$GLOBALS['visiteur_session']['id_auteur']
+			OR ($id = 0-$GLOBALS['visiteur_session']['id_auteur'])
 		)
 		AND autoriser('ajouteralbum',$type,$id)
 		AND !autoriser('joindredocument',$type,$id)
 	){
-		$flux['data'] .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
+		$texte .= recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
+	}
+
+	if ($texte) {
+		$flux['data'] .= $texte;
 	}
 
 	return $flux;
@@ -480,21 +497,20 @@ function albums_compagnon_messages($flux) {
 			switch ($exec) {
 
 				case 'albums':
-					// éviter si possible une requête sql.
 					if (!isset($vus['albums'])) {
 						$aides[] = array(
 							'id' => 'albums',
 							'titre' => _T('album:c_albumotheque_titre_presentation'),
 							'texte' => _T('album:c_albumotheque_presentation'),
 							'statuts'=> array('1comite', '0minirezo', 'webmestre'),
-							'target'=> '#albumotheque .entete h2',
+							'target'=> '.albumotheque .entete h2',
 						);
 						$aides[] = array(
 							'id' => 'albums',
 							'titre' => _T('album:c_albumotheque_titre_filtres'),
 							'texte' => _T('album:c_albumotheque_filtres'),
 							'statuts'=> array('1comite', '0minirezo', 'webmestre'),
-							'target'=> '#navigation .navigation-albums .titre-liste',
+							'target'=> '#navigation .navigation-albums',
 						);
 					}
 					break;
