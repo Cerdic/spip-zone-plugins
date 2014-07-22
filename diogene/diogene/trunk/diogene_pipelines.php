@@ -142,6 +142,7 @@ function diogene_editer_contenu_objet($flux){
 			}
 			if (preg_match(",<div [^>]*class=[\"'][^>]*formulaire_editer_($type),Uims",$flux['data'],$regs)){
 				$args['champs_ajoutes'] = $diogene['champs_ajoutes'];
+				$args['diogene_identifiant'] = $diogene['type'];
 				$ajouts = pipeline('diogene_avant_formulaire',array('args'=>$args,'data'=>''));
 				$flux['data'] = preg_replace(",(<div [^>]*class=[\"'][^>]*formulaire_editer_$type),Uims",$ajouts."\\1",$flux['data'],1);
 			}
