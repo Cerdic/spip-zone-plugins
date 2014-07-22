@@ -34,8 +34,7 @@ function albums_autoriser(){}
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_albumcreer_menu_dist($faire, $type, $id, $qui, $opts){
-	$autoriser = autoriser('creer','album',$id,$qui,$opts);
-	return $autoriser;
+	return autoriser('creer','album',$id,$qui,$opts);
 }
 
 
@@ -54,8 +53,7 @@ function autoriser_albumcreer_menu_dist($faire, $type, $id, $qui, $opts){
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_albums_menu_dist($faire, $type, $id, $qui, $opts){
-	$autoriser = autoriser('administrer','albumotheque',$id,$qui,$opts);
-	return $autoriser;
+	return autoriser('administrer','albumotheque',$id,$qui,$opts);
 }
 
 
@@ -72,7 +70,7 @@ function autoriser_albums_menu_dist($faire, $type, $id, $qui, $opts){
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_album_creer_dist($faire, $type, $id, $qui, $opts) {
-	$autoriser = in_array($qui['statut'], array('0minirezo', '1comite'));
+	$autoriser = (in_array($qui['statut'], array('0minirezo', '1comite'))) ? true : false;
 	return $autoriser;
 }
 
@@ -107,7 +105,7 @@ function autoriser_album_voir_dist($faire, $type, $id, $qui, $opts) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_albumotheque_administrer_dist($faire, $type, $id, $qui, $opts) {
-	$autoriser = in_array($qui['statut'], array('0minirezo', '1comite'));
+	$autoriser = (in_array($qui['statut'], array('0minirezo', '1comite'))) ? true : false;
 	return $autoriser;
 }
 
@@ -144,7 +142,7 @@ function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
 
 	include_spip('inc/config');
 	$config = lire_config('albums/objets', array());
-	$autoriser =
+	$autoriser = (
 		(
 			// objet activé
 			in_array(table_objet_sql($type),array_filter($config))
@@ -177,7 +175,8 @@ function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
 					AND autoriser('ecrire', $type, $id, $qui, $opts)
 				)
 			)
-		);
+		)
+	) ? true : false;
 
 	return $autoriser;
 }
@@ -251,10 +250,11 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 	$admin_complet = ($qui['statut'] == '0minirezo' AND !$qui['restreint']) ?
 		true : false;
 
-	$autoriser =
+	$autoriser = (
 		($auteur_album AND $autoriser_modifier_objets_lies)
 		OR $nouvel_album
-		OR $admin_complet;
+		OR $admin_complet
+	) ? true : false;
 
 	return $autoriser;
 }
@@ -279,7 +279,7 @@ function autoriser_album_supprimer_dist($faire, $type, $id, $qui, $opts) {
 	$documents = sql_countsel("spip_documents_liens", "objet=".sql_quote($type)."AND id_objet=$id");
 	$liaisons = sql_countsel("spip_albums_liens", "id_album=$id");
 
-	$autoriser =
+	$autoriser = (
 		!$liaisons # inutilisé
 		AND !$documents # vide
 		AND
@@ -292,7 +292,8 @@ function autoriser_album_supprimer_dist($faire, $type, $id, $qui, $opts) {
 			(
 				$qui['statut'] == '0minirezo' AND !$qui['restreint'] #admin complet
 			)
-		);
+		)
+	) ? true : false;
 
 	return $autoriser;
 }
@@ -323,9 +324,10 @@ function autoriser_album_supprimer_dist($faire, $type, $id, $qui, $opts) {
  */
 function autoriser_album_associer_dist($faire, $type, $id, $qui, $opts) {
 
-	$autoriser = 
+	$autoriser = (
 		($qui['statut'] == '0minirezo' AND !$qui['restreint'])
-		OR (autoriser('modifier', $opts['objet'], $opt['id_objet'], $qui));
+		OR (autoriser('modifier', $opts['objet'], $opt['id_objet'], $qui))
+	) ? true : false;
 
 	return $autoriser;
 }
@@ -356,9 +358,10 @@ function autoriser_album_associer_dist($faire, $type, $id, $qui, $opts) {
  */
 function autoriser_album_dissocier_dist($faire, $type, $id, $qui, $opts) {
 
-	$autoriser =
+	$autoriser = (
 		autoriser('associer', 'album', $id, $qui, $opts)
-		AND (sql_getfetsel('vu', "spip_albums_liens", "id_album=".intval($id)." AND objet=".sql_quote($opts['objet'])." AND id_objet=".intval($opts['id_objet']))=='non');
+		AND (sql_getfetsel('vu', "spip_albums_liens", "id_album=".intval($id)." AND objet=".sql_quote($opts['objet'])." AND id_objet=".intval($opts['id_objet']))=='non')
+	) ? true : false;
 
 	return $autoriser;
 }
@@ -415,13 +418,14 @@ function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts)
 		$autoriser_modifier_albums = sql_countsel('spip_albums')>1;
 	}
 
-	$autoriser =
+	$autoriser = (
 		lire_config('albums/deplacer_documents','')=='on'
 		AND
 		(
 			$qui['statut'] == '0minirezo' AND !$qui['restreint']
 			OR $autoriser_modifier_albums
-		);
+		)
+	) ? true : false;
 
 	return $autoriser;
 }
