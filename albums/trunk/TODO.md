@@ -26,3 +26,6 @@ Il faudrait recharger uniquement les albums impactés.
 
 ## Albumothèque
 Ajouter des filtres selon les statuts ? 
+
+## Squelette pour choisir un album
+Trouver un moyen pour avoir un aperçu plus détaillé des documents
