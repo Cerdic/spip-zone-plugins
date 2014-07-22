@@ -27,10 +27,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_deplacement' => 'Treatment could not be performed',
-	'explication_album_numero' => 'One or several ids comma-separated',
+	'explication_album_numero' => 'One or several ids comma-separated', # MODIF
 	'explication_deplacer_documents' => '<strong>Experimental</strong> : it is possible to drag and drop documents between albums.
 		If you are authorized, when hovering a document, the cursor will change to indicate an action is possible.
-		Once the documents have been moved, a form will appear at the bottom of the list to save the changes.',
+		Once the documents have been moved, a form will appear at the bottom of the list to save the changes.', # MODIF
 
 	// F
 	'filtre_extensions' => 'File extensions',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_activer_album_objets' => 'Enable albums for the contents :',
 	'label_activer_deplacer_documents' => 'Drag and drop',
-	'label_album_numero' => 'Album number',
+	'label_album_numero' => 'Album number', # MODIF
 	'label_case_deplacer_documents' => 'Drag and drop documents between albums.',
 	'label_case_utiliser_titre_defaut' => 'By default, use the parent object’s title',
 	'label_descriptif' => 'Description',

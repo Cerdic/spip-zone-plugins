@@ -14,19 +14,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_vider' => 'Vider',
 
 	// C
-	'c_albumotheque_filtres' => 'Les filtres permettent d’activer certains critères
-		afin de restreindre la sélection des albums. Un clic sur une entrée active le filtre, un autre clic le désactive.
+	'c_albumotheque_filtres' => 'Les filtres latéraux permettent d’activer certains critères
+		afin de restreindre la sélection des albums. Ils apparaitront et s\'étofferont en fonction du nombre de vos albums et de leurs utilisations.
+		<br>Un clic sur une entrée active le filtre, un autre clic le désactive.
 		En les combinant, on peut facilement retrouver n’importe quel album.
-		Quand les listes sont trop longues, des champs de recherche permettent de retrouver un objet précis.',
-	'c_albumotheque_presentation' => 'Les albums servent à composer des groupes de documents. Bla bla.',
+		<br>Quand les listes sont trop longues, des champs de recherche permettent de retrouver des objets précis.',
+	'c_albumotheque_presentation' => 'Bienvenue dans l\'albumothèque !<br>
+		Vous pouvez créer des albums « autonomes » sur cette page et depuis la barre d\'outils rapides,
+		ou créer des albums liés aux objets éditoriaux depuis leurs pages respectives.
+		<br>Chaque album est éditable sur place (édition du texte & manipulation des documents), ou bien en vous rendant sur sa fiche.',
 	'c_albumotheque_titre_filtres' => 'Filtrer la sélection',
 	'c_albumotheque_titre_presentation' => 'Les albums',
 	'cfg_titre_albums' => 'Albums',
 
 	// E
 	'erreur_deplacement' => 'Le traitement n’a pas pu être effectué',
-	'explication_album_numero' => 'Un ou plusieurs identifiants séparés par une virgule',
-	'explication_deplacer_documents' => '<strong>Expérimental</strong> : il est possible de déplacer des documents entre abums par cliquer-glisser.
+	'explication_album_numero' => 'Numéros séparés par des virgules',
+	'explication_deplacer_documents' => '<strong>Expérimental</strong> : il est possible de déplacer des documents entre albums par cliquer-glisser.
 		Si vous disposez des droits nécessaires, le curseur change à leur survol pour signaler qu’une action est possible.
 		Une fois les déplacements effectués, un formulaire apparaît en bas de la liste pour enregistrer les changements.',
 
@@ -53,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_activer_album_objets' => 'Activer les albums pour les contenus :',
 	'label_activer_deplacer_documents' => 'Cliquer-glisser',
-	'label_album_numero' => 'Album numéro',
+	'label_album_numero' => 'Numéro(s)',
 	'label_case_deplacer_documents' => 'Déplacement de documents entre albums par cliquer-glisser',
 	'label_case_utiliser_titre_defaut' => 'Par défaut, proposer le titre de l’objet lié',
 	'label_descriptif' => 'Descriptif',
@@ -86,6 +90,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_tri_media' => 'Type du document',
 	'label_modele_tri_titre' => 'Titre',
 	'label_modele_trier' => 'Trier par :',
+	'label_onglet_ajouter_choisir' => 'Associer des albums existants',
+	'label_onglet_ajouter_creer' => 'Créer et associer un album',
 	'label_titre' => 'Titre',
 	'label_utiliser_titre_defaut' => 'Titre d’un nouvel album',
 
@@ -101,6 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_vider' => 'Retirer tous les docments ?',
 
 	// O
+	'onglet_ajouter_choisir' => 'Choisir album(s)',
+	'onglet_ajouter_creer' => 'Nouvel album',
 	'onglet_configurer_options' => 'Options',
 	'onglet_configurer_outils' => 'Outils',
 
