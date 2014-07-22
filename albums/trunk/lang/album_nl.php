@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_deplacement' => 'De aanpassing kon niet worden uitgevoerd',
-	'explication_album_numero' => 'Een of meer identificaties, gescheiden door een komma',
+	'explication_album_numero' => 'Een of meer identificaties, gescheiden door een komma', # MODIF
 
 	// F
 	'filtre_extensions' => 'Extensies',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activer_album_objets' => 'Activeer de volgende inhoud voor albums:',
-	'label_album_numero' => 'Albumnummer',
+	'label_album_numero' => 'Albumnummer', # MODIF
 	'label_case_utiliser_titre_defaut' => 'Standaard wordt de titel van het bovenliggende object gebruikt', # MODIF
 	'label_descriptif' => 'Omschrijving',
 	'label_modele_alias_liste' => 'Lijst',

@@ -52,8 +52,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nouvel_album' => 'Nouvel album',
 
 	// L
-	'label_onglet_ajouter_creer' => 'Créer et associer un album',
-	'label_onglet_ajouter_choisir' => 'Associer des albums existants',
 	'label_activer_album_objets' => 'Activer les albums pour les contenus :',
 	'label_activer_deplacer_documents' => 'Cliquer-glisser',
 	'label_album_numero' => 'Numéro(s)',
@@ -89,6 +87,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_tri_media' => 'Type du document',
 	'label_modele_tri_titre' => 'Titre',
 	'label_modele_trier' => 'Trier par :',
+	'label_onglet_ajouter_choisir' => 'Associer des albums existants',
+	'label_onglet_ajouter_creer' => 'Créer et associer un album',
 	'label_titre' => 'Titre',
 	'label_utiliser_titre_defaut' => 'Titre d’un nouvel album',
 
@@ -104,10 +104,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_vider' => 'Retirer tous les docments ?',
 
 	// O
+	'onglet_ajouter_choisir' => 'Choisir album(s)',
+	'onglet_ajouter_creer' => 'Nouvel album',
 	'onglet_configurer_options' => 'Options',
 	'onglet_configurer_outils' => 'Outils',
-	'onglet_ajouter_creer' => 'Nouvel album',
-	'onglet_ajouter_choisir' => 'Choisir album(s)',
 
 	// T
 	'texte_activer_ajout_albums' => 'Vous pouvez activer l’interface d’ajout d’albums aux articles, rubriques et autres.
