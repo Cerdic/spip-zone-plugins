@@ -15,6 +15,7 @@
 
 ]
 <div class='navigation-albums'>
+<BOUCLE_albums(ALBUMS){tout}{0,1}>
 
 	[(#REM) FICHIERS ]
 	[(#INCLURE{fond=prive/squelettes/navigation/inc-albums_filtres_documents, env, ajax})]
@@ -65,4 +66,5 @@
 	});
 	</script>
 
-</div>
+</BOUCLE_albums>
+</div><!-- .navigation-albums -->
