@@ -305,14 +305,14 @@ function diogene_mots_pre_edition($flux){
 	if($flux['args']['table'] == 'spip_diogenes'){
 		$options_complements = unserialize($flux['data']['options_complements']);
 		if(is_array($options_complements)){
-			if(count(unserialize($options_complements['mots_obligatoires'])) > 0){
+			if(is_array(unserialize($options_complements['mots_obligatoires'])) && count(unserialize($options_complements['mots_obligatoires'])) > 0){
 				foreach(unserialize($options_complements['mots_obligatoires']) as $groupe_obligatoire){
 					if(count(_request('mot_selection_'.$groupe_obligatoire)) > 0){
 						$options_complements['mot_selection_'.$groupe_obligatoire] = serialize(_request('mot_selection_'.$groupe_obligatoire));
 					}
 				}
 			}
-			if(count(unserialize($options_complements['mots_facultatifs'])) > 0){
+			if(is_array(unserialize($options_complements['mots_facultatifs']))  && count(unserialize($options_complements['mots_facultatifs'])) > 0){
 				foreach(unserialize($options_complements['mots_facultatifs']) as $mots_facultatifs){
 					if(count(_request('mot_selection_'.$mots_facultatifs)) > 0){
 						$options_complements['mot_selection_'.$mots_facultatifs] = serialize(_request('mot_selection_'.$mots_facultatifs));
