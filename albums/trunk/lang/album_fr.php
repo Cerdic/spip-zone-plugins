@@ -14,12 +14,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_vider' => 'Vider',
 
 	// C
-	'c_albumotheque_filtres' => 'Les filtres permettent d’activer certains critères
-		afin de restreindre la sélection des albums. Un clic sur une entrée active le filtre, un autre clic le désactive.
+	'c_albumotheque_filtres' => 'Les filtres latéraux permettent d’activer certains critères
+		afin de restreindre la sélection des albums. Ils apparaitront et s\'étofferont en fonction du nombre de vos albums et de leurs utilisations.
+		<br>Un clic sur une entrée active le filtre, un autre clic le désactive.
 		En les combinant, on peut facilement retrouver n’importe quel album.
-		Quand les listes sont trop longues, des champs de recherche permettent de retrouver un objet précis.',
-	'c_albumotheque_presentation' => 'Les albums complètent la gestion des documents de SPIP en permettant de composer des groupes de documents.
-		On peut les ajouter aux objets de la même façon que les documents « individuels ».',
+		<br>Quand les listes sont trop longues, des champs de recherche permettent de retrouver des objets précis.',
+	'c_albumotheque_presentation' => 'Bienvenue sur l\'albumothèque !<br>
+		Vous pouvez créer des albums « autonomes » sur cette page et depuis la barre d\'outils rapides,
+		ou créer des albums liés aux objets éditoriaux depuis leurs pages respectives.
+		<br>Chaque album est éditable sur place (édition du texte & manipulation des documents), ou en vous rendant sur sa fiche.',
 	'c_albumotheque_titre_filtres' => 'Filtrer la sélection',
 	'c_albumotheque_titre_presentation' => 'Les albums',
 	'cfg_titre_albums' => 'Albums',

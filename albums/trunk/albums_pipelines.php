@@ -481,21 +481,20 @@ function albums_compagnon_messages($flux) {
 			switch ($exec) {
 
 				case 'albums':
-					// éviter si possible une requête sql.
 					if (!isset($vus['albums'])) {
 						$aides[] = array(
 							'id' => 'albums',
 							'titre' => _T('album:c_albumotheque_titre_presentation'),
 							'texte' => _T('album:c_albumotheque_presentation'),
 							'statuts'=> array('1comite', '0minirezo', 'webmestre'),
-							'target'=> '#albumotheque .entete h2',
+							'target'=> '.albumotheque .entete h2',
 						);
 						$aides[] = array(
 							'id' => 'albums',
 							'titre' => _T('album:c_albumotheque_titre_filtres'),
 							'texte' => _T('album:c_albumotheque_filtres'),
 							'statuts'=> array('1comite', '0minirezo', 'webmestre'),
-							'target'=> '#navigation .navigation-albums .titre-liste',
+							'target'=> '#navigation .navigation-albums',
 						);
 					}
 					break;
