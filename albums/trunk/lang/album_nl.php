@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_albumotheque_filtres' => 'Met filters pas je bepaal de criteria toe
 		om de selectie van albums te beperken. Een klik activeert het filter, een tweede klik desactiveert het.
 		Combineer ze om gemakkelijk een bepaald album terug te vinden.
-		Wanneer de lijsten te lang zijn kun je met zoekvelden een specifiek object terugvinden.',
+		Wanneer de lijsten te lang zijn kun je met zoekvelden een specifiek object terugvinden.', # MODIF
 	'c_albumotheque_titre_filtres' => 'De selectie filteren',
 	'c_albumotheque_titre_presentation' => 'De albums',
 	'cfg_titre_albums' => 'Albums',

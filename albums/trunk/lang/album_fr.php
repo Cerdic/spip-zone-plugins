@@ -15,12 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'c_albumotheque_filtres' => 'Les filtres latéraux permettent d’activer certains critères
-		afin de restreindre la sélection des albums. Ils apparaitront et s\'étofferont en fonction du nombre de vos albums et de leurs utilisations.
+		afin de restreindre la sélection des albums. Ils apparaitront et s’étofferont en fonction du nombre de vos albums et de leurs utilisations.
 		<br>Un clic sur une entrée active le filtre, un autre clic le désactive.
 		En les combinant, on peut facilement retrouver n’importe quel album.
 		<br>Quand les listes sont trop longues, des champs de recherche permettent de retrouver des objets précis.',
-	'c_albumotheque_presentation' => 'Bienvenue dans l\'albumothèque !<br>
-		Vous pouvez créer des albums « autonomes » sur cette page et depuis la barre d\'outils rapides,
+	'c_albumotheque_presentation' => 'Bienvenue dans l’albumothèque !<br>
+		Vous pouvez créer des albums « autonomes » sur cette page et depuis la barre d’outils rapides,
 		ou créer des albums liés aux objets éditoriaux depuis leurs pages respectives.
 		<br>Chaque album est éditable sur place (édition du texte & manipulation des documents), ou bien en vous rendant sur sa fiche.',
 	'c_albumotheque_titre_filtres' => 'Filtrer la sélection',
