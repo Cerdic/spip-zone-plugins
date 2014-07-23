@@ -28,9 +28,6 @@ function albums_upgrade($nom_meta_base_version, $version_cible){
 	// Création des tables + options de configuration
 	$maj['create'] = array(
 		array('maj_tables', array('spip_albums','spip_albums_liens')),
-		array('ecrire_config','albums/afficher_champ_descriptif', 'on'),
-		array('ecrire_config','albums/vue_icones', array('titre')),
-		array('ecrire_config','albums/vue_liste', array('icone', 'mimetype', 'poids', 'dimensions')),
 		array('meta_documents_albums')
 	);
 
