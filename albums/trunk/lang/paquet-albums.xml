@@ -1,5 +1,5 @@
 <traduction module="paquet-albums" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-albums?lang_cible=en" total="3" traduits="1" relire="0" modifs="2" nouveaux="0" pourcent="33.33">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/paquet-albums?lang_cible=en" total="3" traduits="1" relire="2" modifs="0" nouveaux="0" pourcent="33.33">
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-albums?lang_cible=es" total="3" traduits="1" relire="0" modifs="2" nouveaux="0" pourcent="33.33">
