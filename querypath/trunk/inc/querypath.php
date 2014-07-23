@@ -9,7 +9,7 @@
  * la classe QueryPath.
  * 
  * @link http://querypath.org/
- * @version 2.1.2
+ * @version 3.0.3
 **/
 
 /**
@@ -27,7 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Permet de chercher et modifier du HTML
  * http://http://querypath.org/
 **/
-include_spip('lib/querypath-3.0.0/src/qp');
+include_spip('lib/querypath-3.0.3/src/qp');
 
 
 /**

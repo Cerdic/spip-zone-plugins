@@ -102,7 +102,18 @@ class QueryPath {
    *
    * @since 2.0
    */
-  const VERSION = '-UNSTABLE%';
+  const VERSION = '3.0.x';
+
+  /**
+   * Major version number.
+   *
+   * Examples:
+   * - 3
+   * - 4
+   *
+   * @since 3.0.1
+   */
+  const VERSION_MAJOR = 3;
 
   /**
    * This is a stub HTML 4.01 document.
@@ -218,7 +229,7 @@ class QueryPath {
   public static function enable($extensionNames) {
 
     if (is_array($extensionNames)) {
-      foreach ($extensionnames as $extension) {
+      foreach ($extensionNames as $extension) {
         \QueryPath\ExtensionRegistry::extend($extension);
       }
     }

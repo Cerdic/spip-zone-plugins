@@ -784,18 +784,24 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
    * @see is()
    */
   public function filter($selector) {
+
     $found = new \SplObjectStorage();
+    $tmp = new \SplObjectStorage();
     foreach ($this->matches as $m) {
-      if (QueryPath::with($m, NULL, $this->options)->is($selector)) {
-        //fprintf(STDOUT, 'Attaching  %s for %s', $m->tagName, $selector);
+      $tmp->attach($m);
+      // Seems like this should be right... but it fails unit
+      // tests. Need to compare to jQuery.
+      // $query = new \QueryPath\CSS\DOMTraverser($tmp, TRUE, $m);
+      $query = new \QueryPath\CSS\DOMTraverser($tmp);
+      $query->find($selector);
+      if (count($query->matches())) {
         $found->attach($m);
       }
+      $tmp->detach($m);
     }
-
     return $this->inst($found, NULL, $this->options);
-    //$this->setMatches($found);
-    //return $this;
   }
+
   /**
    * Sort the contents of the QueryPath object.
    *
@@ -1555,7 +1561,11 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
     }
 
     foreach ($this->matches as $m) {
-      $copy = $data->firstChild->cloneNode(TRUE);
+      if ($data instanceof \DOMDocumentFragment) {
+        $copy = $data->firstChild->cloneNode(true);
+      } else {
+        $copy = $data->cloneNode(true);
+      }
 
       // XXX: Should be able to avoid doing this over and over.
       if ($copy->hasChildNodes()) {
@@ -1603,6 +1613,12 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
       return $this;
     }
 
+    if ($data instanceof \DOMDocumentFragment) {
+      $data = $data->firstChild->cloneNode(true);
+    } else {
+      $data = $data->cloneNode(true);
+    }
+
     if ($data->hasChildNodes()) {
       $deepest = $this->deepestNode($data);
       // FIXME: Does this need fixing?
@@ -1639,22 +1655,29 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
     // No data? Short circuit.
     if (empty($data)) return $this;
 
-    if ($data->hasChildNodes()) {
-      $deepest = $this->deepestNode($data);
-      // FIXME: ???
-      $bottom = $deepest[0];
-    }
-    else
-      $bottom = $data;
-
     foreach ($this->matches as $m) {
+      if ($data instanceof \DOMDocumentFragment) {
+        $wrapper = $data->firstChild->cloneNode(true);
+      } else {
+        $wrapper = $data->cloneNode(true);
+      }
+
+      if ($wrapper->hasChildNodes()) {
+        $deepest = $this->deepestNode($wrapper);
+        // FIXME: ???
+        $bottom = $deepest[0];
+      }
+      else
+        $bottom = $wrapper;
+
       if ($m->hasChildNodes()) {
         while($m->firstChild) {
           $kid = $m->removeChild($m->firstChild);
           $bottom->appendChild($kid);
         }
       }
-      $m->appendChild($data);
+
+      $m->appendChild($wrapper);
     }
     return $this;
   }
@@ -1737,8 +1760,8 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
    * This handles a variety of boilerplate tasks that need doing before an
    * indeterminate object can be inserted into a DOM tree.
    * - If item is a string, this is converted into a document fragment and returned.
-   * - If item is a DOMQuery, then the first item is retrieved and this call function
-   *   is called recursivel.
+   * - If item is a DOMQuery, then all items are retrieved and converted into
+   *   a document fragment and returned.
    * - If the item is a DOMNode, it is imported into the current DOM if necessary.
    * - If the item is a SimpleXMLElement, it is converted into a DOM node and then
    *   imported.
@@ -1777,7 +1800,11 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
       if ($item->size() == 0)
         return;
 
-      return $this->prepareInsert($item->get(0));
+      $frag = $this->document->createDocumentFragment();
+      foreach ($item->matches as $m) {
+        $frag->appendXML($item->document->saveXML($m));
+      }
+      return $frag;
     }
     elseif ($item instanceof \DOMNode) {
       if ($item->ownerDocument !== $this->document) {
@@ -1846,8 +1873,7 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
 
     // Return a clone DOMQuery with just the removed items. If
     // no items are found, this will return an empty DOMQuery.
-    $klass = __CLASS__;
-    return count($found) == 0 ? new $klass() : new $klass($found);
+    return count($found) == 0 ? new static() : new static($found);
   }
   /**
    * This replaces everything that matches the selector with the first value
@@ -2020,15 +2046,33 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
    */
   public function children($selector = NULL) {
     $found = new \SplObjectStorage();
+    $filter = strlen($selector) > 0;
+
+    if ($filter) {
+      $tmp = new \SplObjectStorage();
+    }
     foreach ($this->matches as $m) {
       foreach($m->childNodes as $c) {
-        if ($c->nodeType == XML_ELEMENT_NODE) $found->attach($c);
+        if ($c->nodeType == XML_ELEMENT_NODE) {
+          // This is basically an optimized filter() just for children().
+          if ($filter) {
+            $tmp->attach($c);
+            $query = new \QueryPath\CSS\DOMTraverser($tmp, TRUE, $c);
+            $query->find($selector);
+            if (count($query->matches()) > 0) {
+              $found->attach($c);
+            }
+            $tmp->detach($c);
+
+          }
+          // No filter. Just attach it.
+          else {
+            $found->attach($c);
+          }
+        }
       }
     }
     $new = $this->inst($found, NULL, $this->options);
-    if (!empty($selector)) {
-      return $new->filter($selector);
-    }
     return $new;
   }
   /**
@@ -2440,8 +2484,7 @@ class DOMQuery implements \QueryPath\Query, \IteratorAggregate, \Countable {
   public function text($text = NULL) {
     if (isset($text)) {
       $this->removeChildren();
-      $textNode = $this->document->createTextNode($text);
-      foreach ($this->matches as $m) $m->appendChild($textNode);
+      foreach ($this->matches as $m) $m->appendChild($this->document->createTextNode($text));
       return $this;
     }
     // Returns all text as one string:
