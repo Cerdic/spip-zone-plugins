@@ -193,13 +193,9 @@ FILTRER
 
 En attendant mieux…
 
-Cette histoire de filtres n'est vraiment pas simple.
-En attendant mieux, on propose de définir la présence d'un select (et d'un where associé)
-si la valeur transmise possède du contenu, sinon le filtre n'est pas appliqué.
+Cette histoire de filtres n'est vraiment pas simple. En attendant mieux, on propose de définir la présence d'un select (et d'un where associé) si la valeur transmise possède du contenu, sinon le filtre n'est pas appliqué.
 
-Le 3è paramètre utilise une autre sélection, si la valeur vaut '-'.
-Les clés `@valeur` et `@valeurs` sont remplacées par la donnée attendue quotée,
-ou les données attendues quotées et séparées par des virgules.
+Le 3è paramètre utilise une autre sélection, si la valeur vaut '-'. Les clés `@valeur` et `@valeurs` sont remplacées par la donnée attendue quotée, ou les données attendues quotées et séparées par des virgules.
 
 Si `#ENV{tags}` vaut `array('toto','tata')`, `@valeurs` aura `"'toto', 'tata'"`
 

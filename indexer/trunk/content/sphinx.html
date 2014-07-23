@@ -77,7 +77,7 @@
 	[(#SET{properties,#PROPERTIES|json_decode{1}})]
 	<li class='item'>
 		<article class='entry article hentry'>
-			<strong class='h3-like entry-title'>#SCORE/#GET{max} = [(#SCORE|mult{100}|div{#GET{max}}|intval)%] <a href="#URI">#DATE</a></strong>
+			<strong class='h3-like entry-title'>[(#SCORE|mult{100}|div{#GET{max}}|intval)%] <a href="#URI">#TITLE</a></strong>
 			<p class="publication">
 				[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]">(#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span> <:par_auteur:> (#GET{properties}|table_valeur{authors}|implode{', '})</span>]
 			</p>

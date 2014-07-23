@@ -98,6 +98,12 @@ class IterateurSPHINX implements Iterator {
 	protected $valeur = null;
 
 	/**
+	 * Limite d'une pagination
+	 * @var int
+	**/
+	protected $pagination_limit;
+
+	/**
 	 * Constructeur
 	 *
 	 * @param  $command
@@ -118,6 +124,7 @@ class IterateurSPHINX implements Iterator {
 			'filters_mono'      => array(),
 			'filters_multijson' => array(),
 			'filters_distance'  => array(),
+			'pagination'        => array(),
 		);
 
 
