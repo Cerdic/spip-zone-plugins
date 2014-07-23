@@ -256,9 +256,9 @@ function fabriquer_tableau_chaines($objet) {
 	// les chaines definies pour chaque champ de l'objet
 	if (is_array($objet['champs'])) {
 		foreach ($objet['champs'] as $info) {
-			$chaines[ cle_de_langue('label_' . $info['champ'], $objet) ] = $info['nom'];
+			$chaines[ cle_de_langue('champ_' . $info['champ'] . '_label', $objet) ] = $info['nom'];
 			if ($info['explication']) {
-				$chaines[ cle_de_langue('explication_' . $info['champ'], $objet) ] = $info['explication'];
+				$chaines[ cle_de_langue('champ_' . $info['champ'] . '_explication', $objet) ] = $info['explication'];
 			}
 		}
 	}
