@@ -72,10 +72,10 @@ function exec_spiplistes_courrier_previsu () {
 	
 	$int_values = array(
 		'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
-		, 'annee', 'mois', 'jour', 'heure', 'minute'
 	);
 	$str_values = array(
 		'lang'
+		, 'jour', 'heure'
 		, 'avec_intro', 'message_intro'
 		, 'avec_patron', 'patron', 'patron_pos'
 		, 'avec_sommaire'
@@ -95,6 +95,9 @@ function exec_spiplistes_courrier_previsu () {
 	foreach($int_values as $key) {
 		$$key = intval($$key);
 	}
+
+	list($jour,$mois,$annee) = explode('/',$jour);
+	list($heure,$minute) = explode(':',$heure);
 
 	$date = format_mysql_date($annee,$mois,$jour,$heure,$minute);
 	

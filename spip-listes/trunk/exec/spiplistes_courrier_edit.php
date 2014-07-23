@@ -218,12 +218,20 @@ function exec_spiplistes_courrier_edit(){
 		;
 	
 	if(strpos($GLOBALS['meta']['langues_multilingue'], ",") !== false) {
-		$page_result .= "" 
+		$langues = liste_options_langues('changer_lang');
+		$options = "";
+		$default = $GLOBALS['spip_lang'];
+		foreach ($langues as $l) {
+			$selected = ($l == $default) ? ' selected=\'selected\'' : '';
+			$options .= "<option value='$l'$selected>[".$l."] ".traduire_nom_langue($l)."</option>\n";
+		}
+
+		$page_result .= ""
 			// selecteur de langues
 			. "<div class='boite-generer-option'>\n"
 			. "<label class='verdana2'>"._T('spiplistes:langue_du_courrier_')
 			. "<select name='lang' class='fondo'>\n"
-			. liste_options_langues('changer_lang')
+			. $options
 			. "</select></label>\n"
 			. "</div>\n"
 			;
