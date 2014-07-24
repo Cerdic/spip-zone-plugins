@@ -1,6 +1,6 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
-	<h3 class="titrem"><:projets_sites_client:cfg_titre_parametrages:></h3>
+	<h3 class="titrem"><:info_spip:cfg_titre_parametrages:></h3>
 
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -10,15 +10,15 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 		[(#SAISIE{radio,actif, 
-			label=<:projets_sites_client:label_actif:>,
-			explication=<:projets_sites_client:explication_actif:>,
-			datas=#ARRAY{oui,<:projets_sites_client:oui:>,non,<:projets_sites_client:non:>}})]
+			label=<:info_spip:label_actif:>,
+			explication=<:info_spip:explication_actif:>,
+			datas=#ARRAY{oui,<:info_spip:oui:>,non,<:info_spip:non:>}})]
 
 		[(#SAISIE{input,cle, 
-			label=<:projets_sites_client:label_cle:>,
-			explication=<:projets_sites_client:explication_cle:>})]
+			label=<:info_spip:label_cle:>,
+			explication=<:info_spip:explication_cle:>})]
 		</ul>
-		<input type="hidden" name="_meta_casier" value="projets_sites_client" />
+		<input type="hidden" name="_meta_casier" value="info_spip" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>

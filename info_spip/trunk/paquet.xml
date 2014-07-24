@@ -1,10 +1,10 @@
 <paquet
-	prefix="projets_sites_client"
+	prefix="info_spip"
 	categorie="outil"
-	version="0.4.8"
+	version="0.5.0"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
-	logo="prive/themes/spip/images/projets_sites_client-64.png"
+	logo="prive/themes/spip/images/info_spip-64.png"
 	documentation=""
 >
 
@@ -13,11 +13,11 @@
 	<auteur lien='http://www.teddypayet.com/'>Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
-	<pipeline nom="autoriser" inclure="projets_sites_client_autorisations.php" />
+	<pipeline nom="autoriser" inclure="info_spip_autorisations.php" />
 
 	<necessite nom="saisies" compatibilite="[1.30.0;]" />
 
-	<menu nom="configurer_projets_sites_client" parent="menu_configuration" icone="images/projets_sites_client-16.png" action="configurer_projets_sites_client" titre="projets_sites_client:titre_configurer_projets_sites_client" />
-	<menu nom="info_config" parent="menu_administration" icone="images/projets_sites_client-16.png" action="info_config" titre="projets_sites_client:titre_info_config" />
+	<menu nom="configurer_info_spip" parent="menu_configuration" icone="images/info_spip-16.png" action="configurer_info_spip" titre="info_spip:titre_configurer_info_spip" />
+	<menu nom="info_config" parent="menu_administration" icone="images/info_spip-16.png" action="info_config" titre="info_spip:titre_info_config" />
 
 </paquet>

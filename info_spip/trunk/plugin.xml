@@ -1,8 +1,8 @@
 <plugin>
 	<nom><multi>[fr]Sites pour projets - Client</multi></nom>
-	<icon>prive/themes/spip/images/projets_sites_client-32.png</icon>
+	<icon>prive/themes/spip/images/info_spip-32.png</icon>
 	<auteur>Teddy Payet</auteur>
-	<version>0.4.8</version>
+	<version>0.5.0</version>
 	<etat>stable</etat>
 	<description><multi>
 	[fr]Ce plugin ne fait qu'afficher la configuration du site sur lequel il est actif.
@@ -10,12 +10,12 @@ Il faut renseigner une clé dans la page de configuration pour que la page de co
 On affiche les informations équivalentes au plugin "Sites pour projets" avec qui il va de pair. Ce plugin est toutefois autonome.
 	</multi></description>
 	<lien></lien> <!-- URI de documentation -->
-	<fonctions>projets_sites_client_fonctions.php</fonctions>
-	<prefix>projets_sites_client</prefix>
+	<fonctions>info_spip_fonctions.php</fonctions>
+	<prefix>info_spip</prefix>
 
 	<pipeline>
 		<nom>autoriser</nom>
-		<inclure>projets_sites_client_autorisations.php</inclure>
+		<inclure>info_spip_autorisations.php</inclure>
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
@@ -25,28 +25,28 @@ On affiche les informations équivalentes au plugin "Sites pour projets" avec qu
 
 	<categorie>outil</categorie>
 
-	<bouton id='configurer_projets_sites_client' parent='configuration'>
-		<icone>prive/themes/spip/images/projets_sites_client-32.png</icone>
-		<titre>projets_sites_client:titre_configurer_projets_sites_client</titre>
-		<url>configurer_projets_sites_client</url>
+	<bouton id='configurer_info_spip' parent='configuration'>
+		<icone>prive/themes/spip/images/info_spip-32.png</icone>
+		<titre>info_spip:titre_configurer_info_spip</titre>
+		<url>configurer_info_spip</url>
 	</bouton>
 
 	<bouton id='info_config' parent='statistiques_visites'>
-		<icone>prive/themes/spip/images/projets_sites_client-32.png</icone>
-		<titre>projets_sites_client:titre_info_config</titre>
+		<icone>prive/themes/spip/images/info_spip-32.png</icone>
+		<titre>info_spip:titre_info_config</titre>
 		<url>info_config</url>
 	</bouton>
 
 	<!-- Boutons pour plugin Bandeau -->
-	<bouton id='configurer_projets_sites_client_bando' parent='bando_configuration'>
-		<icone>prive/themes/spip/images/projets_sites_client-16.png</icone>
-		<titre>projets_sites_client:titre_configurer_projets_sites_client</titre>
-		<url>configurer_projets_sites_client</url>
+	<bouton id='configurer_info_spip_bando' parent='bando_configuration'>
+		<icone>prive/themes/spip/images/info_spip-16.png</icone>
+		<titre>info_spip:titre_configurer_info_spip</titre>
+		<url>configurer_info_spip</url>
 	</bouton>
 
 	<bouton id='info_config_bando' parent='bando_administration'>
-		<icone>prive/themes/spip/images/projets_sites_client-16.png</icone>
-		<titre>projets_sites_client:titre_info_config</titre>
+		<icone>prive/themes/spip/images/info_spip-16.png</icone>
+		<titre>info_spip:titre_info_config</titre>
 		<url>info_config</url>
 	</bouton>
 

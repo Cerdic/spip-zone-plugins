@@ -1,4 +1,4 @@
-﻿[(#AUTORISER{voir,_projets_sites_client}|sinon_interdire_acces)]
+﻿[(#AUTORISER{voir,_info_spip}|sinon_interdire_acces)]
 [(#REM)
 	Le code ci-dessous est une méthode "barbare" mais efficace pour soustraire toutes les infos du fichier config/connect.php.
 	Le soucis c'est que ça peut ne pas être sécuritaire car on affiche le mot de passe de la bdd.
@@ -21,33 +21,33 @@
 ]
 
 [<div class="champ contenu_logiciel">
-	<div class="label visible"><:projets_sites_client:label_logiciel:> : </div>
+	<div class="label visible"><:info_spip:label_logiciel:> : </div>
 	<div dir='#LANG_DIR' class='logiciel'>SPIP (#SPIP_VERSION)</div>
 </div>]
 
 [<div class="champ contenu_php_version">
-	<div class="label visible"><:projets_sites_client:label_php_version:> : </div>
+	<div class="label visible"><:info_spip:label_php_version:> : </div>
 	<div dir='#LANG_DIR' class='php_version'>(#EVAL{phpversion()})</div>
 </div>]
 
 [<div class="champ contenu_php_memory">
-	<div class="label visible"><:projets_sites_client:label_php_memory:> : </div>
+	<div class="label visible"><:info_spip:label_php_memory:> : </div>
 	<div dir='#LANG_DIR' class='php_memory'>(#EVAL{ini_get('memory_limit')})</div>
 </div>]
 
 [<div class="champ contenu_date_creation">
-	<div class="label visible"><:projets_sites_client:label_date_creation:> : </div>
+	<div class="label visible"><:info_spip:label_date_creation:> : </div>
 	<div dir='#LANG_DIR' class='date_creation'>(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})</div>
 </div>]
 
 [<div class="champ contenu_fo_url">
-	<div class="label visible"><:projets_sites_client:label_fo_url:> : </div>
+	<div class="label visible"><:info_spip:label_fo_url:> : </div>
 	<div dir='#LANG_DIR' class='fo_url'>(#URL_SITE_SPIP)</div>
 </div>]
 
 <!-- Information webmestre -->
 <div class="fieldset fieldset_webmestre">
-	<h3 class="titrem"><:projets_sites_client:label_webmestre:></h3>
+	<h3 class="titrem"><:info_spip:label_webmestre:></h3>
 </div>
 
 <B_webmestre>
@@ -55,9 +55,9 @@
 	<table class="spip liste">
 		<thead>
 			<tr>
-				<th class="login secondaire"><:projets_sites_client:label_webmestre_login:></th>
-				<th class="email secondaire"><:projets_sites_client:label_webmestre_email:></th>
-				<th class="nom principal"><:projets_sites_client:label_webmestre_nom:></th>
+				<th class="login secondaire"><:info_spip:label_webmestre_login:></th>
+				<th class="email secondaire"><:info_spip:label_webmestre_email:></th>
+				<th class="nom principal"><:info_spip:label_webmestre_nom:></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -75,67 +75,67 @@
 
 <!-- Information applicative -->
 <div class="fieldset fieldset_applicatif">
-	<h3 class="titrem"><:projets_sites_client:label_applicatif:></h3>
+	<h3 class="titrem"><:info_spip:label_applicatif:></h3>
 </div>
 
 <div class="champ contenu_applicatif_path">
-	<div class="label visible"><:projets_sites_client:label_applicatif_path:> : </div>
+	<div class="label visible"><:info_spip:label_applicatif_path:> : </div>
 	<div dir='#LANG_DIR' class='applicatif_path'>#EVAL{$_SERVER['SCRIPT_FILENAME']}</div>
 </div>
 
 <div class="champ contenu_applicatif_port">
-	<div class="label visible"><:projets_sites_client:label_applicatif_port:> : </div>
+	<div class="label visible"><:info_spip:label_applicatif_port:> : </div>
 	<div dir='#LANG_DIR' class='applicatif_port'>#EVAL{$_SERVER['SERVER_PORT']}</div>
 </div>
 
 <div class="champ contenu_applicatif_logiciel">
-	<div class="label visible"><:projets_sites_client:label_applicatif_logiciel:> : </div>
+	<div class="label visible"><:info_spip:label_applicatif_logiciel:> : </div>
 	<div dir='#LANG_DIR' class='applicatif_logiciel'>#EVAL{$_SERVER['SERVER_SOFTWARE']}</div>
 </div>
 
 <div class="champ contenu_applicatif_nom">
-	<div class="label visible"><:projets_sites_client:label_applicatif_nom:> : </div>
+	<div class="label visible"><:info_spip:label_applicatif_nom:> : </div>
 	<div dir='#LANG_DIR' class='applicatif_nom'>#EVAL{$_SERVER['SERVER_NAME']}</div>
 </div>
 
 <!-- Information sgbd -->
 <div class="fieldset fieldset_sgbd">
-	<h3 class="titrem"><:projets_sites_client:label_sgbd:></h3>
+	<h3 class="titrem"><:info_spip:label_sgbd:></h3>
 </div>
 
 <div class="champ contenu_sgbd_serveur">
-	<div class="label visible"><:projets_sites_client:label_sgbd_serveur:> : </div>
+	<div class="label visible"><:info_spip:label_sgbd_serveur:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_nom'>#GET{bdd_host}</div>
 </div>
 
 <div class="champ contenu_sgbd_port">
-	<div class="label visible"><:projets_sites_client:label_sgbd_port:> : </div>
+	<div class="label visible"><:info_spip:label_sgbd_port:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_nom'>#GET{bdd_port}</div>
 </div>
 
 <div class="champ contenu_sgbd_type">
-	<div class="label visible"><:projets_sites_client:label_sgbd_type:> : </div>
+	<div class="label visible"><:info_spip:label_sgbd_type:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_type'>#GET{bdd_type}</div>
 </div>
 
 <div class="champ contenu_sgbd_version">
-	<div class="label visible"><:projets_sites_client:label_sgbd_version:> : </div>
+	<div class="label visible"><:info_spip:label_sgbd_version:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_version'>#EVAL{sql_version()}</div>
 </div>
 
 <div class="champ contenu_sgbd_nom">
-	<div class="label visible"><:projets_sites_client:label_sgbd_nom:> : </div>
+	<div class="label visible"><:info_spip:label_sgbd_nom:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_nom'>#GET{bdd_nom}</div>
 </div>
 
 <div class="champ contenu_sgbd_prefixe">
-	<div class="label visible"><:projets_sites_client:label_sgbd_prefixe:> : </div>
+	<div class="label visible"><:info_spip:label_sgbd_prefixe:> : </div>
 	<div dir='#LANG_DIR' class='sgbd_prefixe'>#GET{bdd_prefixe}</div>
 </div>
 
 <!-- Information plugins -->
 <div class="fieldset fieldset_plugins">
-	<h3 class="titrem"><:projets_sites_client:label_plugins:></h3>
+	<h3 class="titrem"><:info_spip:label_plugins:></h3>
 </div>
 [(#REM) Le nom des fichiers un peu arbitraire, les fichiers plugin.xml sont toujours d'actualité en SPIP 3… ]
 [(#SPIP_VERSION|intval|=={2}|oui)#INCLURE{fond=prive/objets/liste/info_plugins,env}]

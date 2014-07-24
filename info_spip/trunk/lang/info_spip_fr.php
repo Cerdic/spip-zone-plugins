@@ -58,13 +58,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'oui' => 'Oui',
 	
 	// P
-	'projets_sites_client_titre' => 'Sites pour projets - Client',
+	'info_spip_titre' => 'Sites pour projets - Client',
 
 	// T
-	'titre_configurer_projets_sites_client' => 'SPP - Client',
+	'titre_configurer_info_spip' => 'SPP - Client',
 	'titre_info_config' => 'Information de configuration',
 	'titre_page_config' => 'Paramètres du serveur',
-	'titre_page_configurer_projets_sites_client' => 'Paramétrage',
+	'titre_page_configurer_info_spip' => 'Paramétrage',
 );
 
 ?>
