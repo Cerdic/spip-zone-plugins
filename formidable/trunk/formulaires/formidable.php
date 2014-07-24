@@ -103,10 +103,7 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 			// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
 			if ($id_formulaires_reponse = intval($id_formulaires_reponse)){
 				$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
-				if ($ok){
-					// On ajoute un hidden pour dire que c'est une modif
-					$contexte['_hidden'] .= "\n" . '<input type="hidden" name="deja_enregistre_' . $formulaire['id_formulaire'] . '" value="' . $id_formulaires_reponse . '"/>';
-				} else {
+				if ($ok == false){
 					$contexte['editable'] = false;
 					$contexte['message_erreur'] = _T('formidable:traiter_enregistrement_erreur_edition_reponse_inexistante');
 				}
@@ -128,9 +125,6 @@ function formulaires_formidable_charger($id, $valeurs = array(), $id_formulaires
 				){
 					$id_formulaires_reponse = array_pop($reponses);
 					$contexte = formidable_definir_contexte_avec_reponse($contexte, $id_formulaires_reponse, $ok);
-
-					// On ajoute un hidden pour dire que c'est une modif
-					$contexte['_hidden'] .= "\n" . '<input type="hidden" name="deja_enregistre_' . $formulaire['id_formulaire'] . '" value="' . $id_formulaires_reponse . '"/>';
 				}
 
 			}
@@ -289,7 +283,10 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 						$retours = $appliquer_traitement(
 							array(
 								'formulaire' => $formulaire,
-								'options' => $options
+								'options' => $options,
+						        'id_formulaire' => $id_formulaire,
+						        'valeurs' => $valeurs,
+						        'id_formulaires_reponse' => $id_formulaires_reponse,
 							),
 							$retours
 						);

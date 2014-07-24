@@ -8,7 +8,7 @@ function traiter_enregistrement_dist($args, $retours){
     include_spip('base/abstract_sql');
     $options = $args['options'];
     $formulaire = $args['formulaire'];
-    $id_formulaire = intval($formulaire['id_formulaire']);
+    $id_formulaire = $args['id_formulaire'];
     $saisies = unserialize($formulaire['saisies']);
     $saisies = saisies_lister_par_nom($saisies);
 
@@ -34,8 +34,34 @@ function traiter_enregistrement_dist($args, $retours){
     }
 
     // On regarde si c'est une modif d'une réponse existante
-    $id_formulaires_reponse = intval(_request('deja_enregistre_'.$id_formulaire));
+    $id_formulaires_reponse = $args['id_formulaires_reponse'];
 
+    // recherche d'éventuelles anciennes réponses
+   	$reponses = formidable_verifier_reponse_formulaire(
+   			$id_formulaire, 
+   			$options['identification'], 
+   			($options['anonymiser'] == 'on') 
+   				? $options['anonymiser_variable'] 
+   				: false
+	);
+   	
+    // pas d'id_formulaires_reponse : on cherche une éventuelle réponse en base
+    if ($id_formulaires_reponse == false) {
+    	$traitements_formulaire = unserialize($formulaire['traitements']);
+    	
+    	if (isset($traitements_formulaire['enregistrement'])) {
+    		$options =  $traitements_formulaire['enregistrement'];
+
+       		if (isset($options['multiple']) && $options['multiple'] == ''
+    			&& isset($options['modifiable']) && $options['modifiable'] == 'on') {
+		    	$id_formulaires_reponse = max($reponses);
+    		}
+    	}
+    } else {
+    	// vérifier que l'auteur est bien l'auteur de la réponse, si non, on invalide l'id_formulaires_reponse
+    	if (in_array($id_formulaires_reponse, $reponses) == false) $id_formulaires_reponse = false;
+    }
+    
     // Si la moderation est a posteriori ou que la personne est un boss, on publie direct
     if ($options['moderation'] == 'posteriori' or autoriser('instituer', 'formulaires_reponse', $id_formulaires_reponse, null, array('id_formulaire'=>$id_formulaire, 'nouveau_statut'=>'publie')))
         $statut='publie';
@@ -61,6 +87,13 @@ function traiter_enregistrement_dist($args, $retours){
             // Expiration dans 30 jours
             spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time() + 30 * 24 * 3600);
         }
+    } else {
+    	// simple mise à jour du champ maj de la table spip_formulaires_reponses
+    	sql_updateq(
+    		'spip_formulaires_reponses', 
+    		array('maj' => 'NOW()'), 
+    		"id_formulaires_reponse = $id_formulaires_reponse"
+    	);
     }
 
     // Si l'id n'a pas été créé correctement alors erreur

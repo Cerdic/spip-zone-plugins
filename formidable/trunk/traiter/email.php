@@ -101,7 +101,7 @@ function traiter_email_dist($args, $retours){
 		$html = recuperer_fond(
 			$notification,
 			array(
-				'id_formulaire' => $formulaire['id_formulaire'],
+				'id_formulaire' => $args['id_formulaire'],
 				'titre' => _T_ou_typo($formulaire['titre']),
 				'traitements' => $traitements,
 				'saisies' => $saisies,
