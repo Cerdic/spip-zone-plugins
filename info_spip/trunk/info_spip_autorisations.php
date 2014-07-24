@@ -1,12 +1,12 @@
 <?php
 /**
- * Définit les autorisations du plugin Sites pour projets - Client
+ * Définit les autorisations du plugin Info SPIP
  *
- * @plugin     Sites pour projets - Client
+ * @plugin     Info SPIP
  * @copyright  2013
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP\Projets_sites_client\Autorisations
+ * @package    SPIP\Info_SPIP\Autorisations
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

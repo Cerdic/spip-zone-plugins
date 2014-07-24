@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]Sites pour projets - Client</multi></nom>
+	<nom><multi>[fr]Info SPIP</multi></nom>
 	<icon>prive/themes/spip/images/info_spip-32.png</icon>
 	<auteur>Teddy Payet</auteur>
 	<version>0.5.0</version>

@@ -2,7 +2,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
@@ -51,14 +51,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_webmestre_login' => 'Login',
 	'label_webmestre_nom' => 'Nom',
 
-	// N 
+	// N
 	'non' => 'Non',
-	
-	// O 
+
+	// O
 	'oui' => 'Oui',
-	
+
 	// P
-	'info_spip_titre' => 'Sites pour projets - Client',
+	'info_spip_titre' => 'Info SPIP',
 
 	// T
 	'titre_configurer_info_spip' => 'SPP - Client',

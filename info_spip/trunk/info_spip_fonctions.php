@@ -1,12 +1,12 @@
 <?php
 /**
- * Fonctions utiles au plugin Sites pour projets - Client
+ * Fonctions utiles au plugin Info SPIP
  *
- * @plugin     Sites pour projets - Client
+ * @plugin     Info SPIP
  * @copyright  2013
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP\Projets_sites_client\Fonctions
+ * @package    SPIP\Info_SPIP\Fonctions
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;

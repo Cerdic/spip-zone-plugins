@@ -1,6 +1,6 @@
 ﻿<?php
 /*
- * Plugin Sites pour projets - Clients
+ * Plugin Info SPIP
  * (c) 2014 Teddy Payet
  * Distribue sous licence GPL
  *
