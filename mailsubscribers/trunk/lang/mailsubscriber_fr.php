@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmsubscribe_texte_email_envoye' => 'Un email a été envoyé à cette adresse pour confirmation.',
 
 	// D
-   'defaut_message_invite_email_subscribe' =>'Bonjour, je suis abonné à la newsletter de @nom_site_spip@ et je te propose de t\'y inscrire également.' ,
+  'defaut_message_invite_email_subscribe' =>'Bonjour, je suis abonné à la newsletter de @nom_site_spip@ et je te propose de t\'y inscrire également.' ,
 
 	// E
 	'erreur_adresse_existante' => 'Cette adresse email est déjà dans la liste',
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_adresse_a_importer' => '1 adresse à importer',
 	'info_nb_adresses_a_importer' => '@nb@ adresses à importer',
 	'info_email_obligatoire' => 'Email obligatoire',
-    'info_emails_invalide' => "L'un des email est invalide",
+  'info_emails_invalide' => "L'un des email est invalide",
 	'info_statut_prepa' => 'pas inscrit',
 	'info_statut_prop' => 'en attente',
 	'info_statut_valide' => 'inscrit',
