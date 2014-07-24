@@ -1,6 +1,6 @@
 ﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
 <config>
-<BOUCLE_cle (CONDITION){si #ENV{cle}|=={#CONFIG{'sites_client/cle'}}} {si #CONFIG{'sites_client/actif'}|=={'oui'}}> </BOUCLE_cle>
+<BOUCLE_cle (CONDITION){si #ENV{cle}|=={#CONFIG{'info_spip/cle'}}} {si #CONFIG{'info_spip/actif'}|=={'oui'}}> </BOUCLE_cle>
 <logiciel nom="SPIP" version="[(#SPIP_VERSION|explode{' '}|table_valeur{0})]" revision="[(#SPIP_VERSION|explode{' '}|table_valeur{1})]" />
 <php version= "#EVAL{phpversion()}" memory="#EVAL{ini_get('memory_limit')}" />
 <date_creation value="[(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})]" />

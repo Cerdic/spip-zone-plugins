@@ -9,7 +9,9 @@
  * @package    SPIP\Info_SPIP\Options
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 
 ?>

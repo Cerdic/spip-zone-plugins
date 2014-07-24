@@ -9,13 +9,18 @@
  * @package    SPIP\Info_SPIP\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function info_spip_autoriser(){}
+function info_spip_autoriser()
+{
+
+}
 
 
 /**
@@ -28,8 +33,9 @@ function info_spip_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_info_spip_voir_dist($faire, $type, $id, $qui, $opt) {
-        return $qui['statut'] == '0minirezo' AND $qui['webmestre'] == 'oui';
+function autoriser_info_spip_voir_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }
 
 ?>
