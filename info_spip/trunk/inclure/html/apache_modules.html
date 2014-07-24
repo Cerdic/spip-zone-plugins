@@ -1,0 +1,15 @@
+[(#REM) On affiche les modules d'apache.
+On utilise une fonction maison qui teste l'existence de la fonction apache_get_modules() au cas où on serait un autre type de serveur qu'Apache]
+
+<B_modules>
+<!-- Information Modules d'Apache -->
+<div class="fieldset fieldset_plugins">
+    <h3 class="titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_module_apache:>,<:info_spip:info_nb_modules_apache:>})]</h3>
+</div>
+
+<ul class="spip">
+<BOUCLE_modules (DATA) {source table, (#REM|lister_modules_apache)} {par valeur}>
+    <li class="item">#VALEUR</li>
+</BOUCLE_modules>
+</ul>
+</B_modules>

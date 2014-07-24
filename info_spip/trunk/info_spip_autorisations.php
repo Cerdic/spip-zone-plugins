@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Info SPIP
  *
  * @plugin     Info SPIP
- * @copyright  2013
+ * @copyright  2013-2014
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Info_SPIP\Autorisations
@@ -16,7 +16,8 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 /**
  * Fonction d'appel pour le pipeline
- * @pipeline autoriser */
+ * @pipeline autoriser
+ */
 function info_spip_autoriser()
 {
 

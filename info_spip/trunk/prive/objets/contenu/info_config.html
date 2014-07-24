@@ -141,6 +141,11 @@
 [(#SPIP_VERSION|intval|=={2}|oui)#INCLURE{fond=prive/objets/liste/info_plugins,env}]
 [(#SPIP_VERSION|intval|=={3}|oui)#INCLURE{fond=prive/objets/liste/info_paquets,env}]
 
+<!-- Informations complémentaires qui peuvent être ajoutées par des plugins -->
+<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>
+<INCLURE{fond=inclure/html/#VALEUR, env} />
+</BOUCLE_module_info>
+
 <style type="text/css">
 body.info_config #contenu .fiche_objet #wysiwyg .champ { margin-bottom: 1em; }
 body.info_config #contenu .fiche_objet #wysiwyg .champ .label.visible { display: block;}

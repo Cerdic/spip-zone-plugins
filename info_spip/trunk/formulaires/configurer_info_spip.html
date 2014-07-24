@@ -9,14 +9,22 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-		[(#SAISIE{radio,actif, 
+		[(#SAISIE{radio, actif,
 			label=<:info_spip:label_actif:>,
-			explication=<:info_spip:explication_actif:>,
-			datas=#ARRAY{oui,<:info_spip:oui:>,non,<:info_spip:non:>}})]
+			datas=#ARRAY{oui,<:info_spip:oui:>,non,<:info_spip:non:>},
+			explication=<:info_spip:explication_actif:>})]
 
-		[(#SAISIE{input,cle, 
+		[(#SAISIE{input,cle,
 			label=<:info_spip:label_cle:>,
 			explication=<:info_spip:explication_cle:>})]
+
+		[(#SAISIE{selection, type_site,
+			label=<:info_spip:label_type_site:>,
+			datas=#ARRAY{dev,<:info_spip:type_site_dev:>,prep,<:info_spip:type_site_prep:>,prod,<:info_spip:type_site_prod:>,rec,<:info_spip:type_site_rec:>},
+			defaut='prod',
+			explication=<:info_spip:explication_type_site:>})]
+
+
 		</ul>
 		<input type="hidden" name="_meta_casier" value="info_spip" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

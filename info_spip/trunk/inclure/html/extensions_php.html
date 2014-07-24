@@ -1,0 +1,15 @@
+[(#REM) On affiche les extensions de PHP.
+On utilise une fonction maison qui teste l'existence de la fonction get_loaded_extensions() au cas où]
+
+<B_extensions>
+<!-- Information Modules d'Apache -->
+<div class="fieldset fieldset_plugins">
+    <h3 class="titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_extension_php:>,<:info_spip:info_nb_extensions_php:>})]</h3>
+</div>
+
+<ul class="spip">
+<BOUCLE_extensions (DATA) {source table, (#REM|lister_extensions_php)}>
+    <li class="item">#VALEUR</li>
+</BOUCLE_extensions>
+</ul>
+</B_extensions>
