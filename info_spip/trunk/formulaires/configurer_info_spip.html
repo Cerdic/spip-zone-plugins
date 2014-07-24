@@ -24,6 +24,15 @@
 			defaut='prod',
 			explication=<:info_spip:explication_type_site:>})]
 
+		[(#SET{modules,#ARRAY})]
+		<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>
+		    [(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#VALEUR}}})]
+		</BOUCLE_module_info>
+		[(#SAISIE{checkbox, modules,
+		    label=<:info_spip:label_liste_modules:>,
+		    explication=<:info_spip:explication_liste_modules:>,
+		    datas=#GET{modules}})]
+
 
 		</ul>
 		<input type="hidden" name="_meta_casier" value="info_spip" />

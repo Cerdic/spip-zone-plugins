@@ -25,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     <br/> Il ne faudra pas oublier de renseigner la clé d\'identification si vous activez ce service.',
     'explication_cle' => 'Clé permettant de sécuriser l\'utilisation de la page affichant la configuration du site.
     Sans cette clé, la page ne s\'affichera pas.',
+    'explication_liste_modules' => 'Les éléments ci-dessous sont les modules complémentaires qui peuvent être
+    insérés sur les différentes pages <em>info_config</em>',
     'explication_type_site' => 'Quel est le statut de votre site ?',
 
     // I
@@ -44,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_cle' => 'Clé d\'identification',
     'label_date_creation' => 'Date d\'installation',
     'label_fo_url' => 'URL du Front Office',
+    'label_liste_modules' => 'Liste des modules',
     'label_logiciel' => 'Logiciel',
     'label_php_memory' => 'Mémoire allouée à PHP',
     'label_php_version' => 'Version de PHP',

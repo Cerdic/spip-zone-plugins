@@ -142,7 +142,7 @@
 [(#SPIP_VERSION|intval|=={3}|oui)#INCLURE{fond=prive/objets/liste/info_paquets,env}]
 
 <!-- Informations complémentaires qui peuvent être ajoutées par des plugins -->
-<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>
+<BOUCLE_module_info (POUR) {tableau #CONFIG{'info_spip/modules'}}>
 <INCLURE{fond=inclure/html/#VALEUR, env} />
 </BOUCLE_module_info>
 
