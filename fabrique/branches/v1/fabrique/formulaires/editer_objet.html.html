@@ -17,8 +17,8 @@
 	{si #ENV{objet/champ_titre}}>#SET{titre,' '}</BOUCLE_un_titre>
 <BOUCLE_saisies(DATA){source tableau,#ENV{objet/champs}}{saisie != ''}>
 			[(\#SAISIE{#VALEUR{saisie}, #CHAMP,[(#VALEUR|champ_option_presente{obligatoire}|oui)obligatoire=oui,]
-				label=\<:#TYPE:label_#CHAMP:>[,
-				explication=\<:#TYPE:explication_#CHAMP:>(#EXPLICATION|oui)][,
+				label=\<:#TYPE:champ_#CHAMP_label:>[,
+				explication=\<:#TYPE:champ_#CHAMP_explication:>(#EXPLICATION|oui)][,
 				(#SAISIE_OPTIONS|trim)]})][
 
 (#REM) On teste donc s'il faut placer le formulaire de rubrique ici

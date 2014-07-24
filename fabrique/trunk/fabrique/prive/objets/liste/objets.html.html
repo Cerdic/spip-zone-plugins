@@ -20,7 +20,7 @@ Squelette de liste d'un objet
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>[
 			<th class='statut' scope='col'>\[(\#TRI{statut,<span title="\<:lien_trier_statut|attribut_html:>">#</span>,ajax\})\]</th>(#OBJET|champ_present{statut})]
-			<th class='#GET{titre}' scope='col'>\[(\#TRI{#GET{titre},\<:#TYPE:label_#GET{titre}:>,ajax})\]</th>[
+			<th class='#GET{titre}' scope='col'>\[(\#TRI{#GET{titre},\<:#TYPE:champ_#GET{titre}_label:>,ajax})\]</th>[
 			<th class='date' scope='col'>\[(\#TRI{#GET{date},\<:date:>,ajax})\]</th>(#GET{date}|oui)]
 			<th class='id' scope='col'>\[(\#TRI{#ID_OBJET,\<:info_numero_abbreviation:>,ajax})\]</th>
 		</tr>
