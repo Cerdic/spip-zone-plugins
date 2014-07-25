@@ -431,4 +431,25 @@ function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts)
 }
 
 
+/**
+ * Autorisation de vider un album
+ *
+ * Il faut qu'il y ait des documents, et être admin complet
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_album_vider_dist($faire, $type, $id, $qui, $opts) {
+	include_spip('action/editer_liens');
+	$rempli = count(objet_trouver_liens(array('document'=>'*'),array('album'=>$id)))>0;
+	$admin = $qui['statut']=='0minirezo' AND !$qui['restreint'];
+	$autoriser = ($admin AND $rempli) ? true : false;
+	return $autoriser;
+}
+
+
 ?>
