@@ -25,7 +25,7 @@ function info_spip_autoriser()
 
 
 /**
- * Autorisation de voir (info_spip)
+ * Autorisation de voir `info_spip`
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -34,7 +34,22 @@ function info_spip_autoriser()
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_info_spip_voir_dist($faire, $type, $id, $qui, $opt)
+function autoriser_infospip_voir_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
+}
+
+/**
+ * Autorisation de configurer `info_spip`
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_infospip_configurer_dist($faire, $type, $id, $qui, $opt)
 {
     return $qui['statut'] == '0minirezo' and $qui['webmestre'] == 'oui';
 }

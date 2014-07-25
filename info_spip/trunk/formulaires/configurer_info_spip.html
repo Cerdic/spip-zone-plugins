@@ -25,8 +25,8 @@
 			explication=<:info_spip:explication_type_site:>})]
 
 		[(#SET{modules,#ARRAY})]
-		<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>
-		    [(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#VALEUR}}})]
+		<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:nom_'}|concat{#VALEUR}|_T)]})]
+		    [(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
 		</BOUCLE_module_info>
 		[(#SAISIE{checkbox, modules,
 		    label=<:info_spip:label_liste_modules:>,

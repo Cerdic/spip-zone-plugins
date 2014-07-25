@@ -5,30 +5,11 @@
 <date_creation value="[(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})]" />
 <fo url="#URL_SITE_SPIP" />
 [<type_site url="(#CONFIG{'info_spip/type_site'})" />]
-<B_webmestre>
-<webmestres>
-<BOUCLE_webmestre (AUTEURS){webmestre=oui}{tout}>
-<webmestre login="#LOGIN" email="#EMAIL" nom="#NOM" />
-</BOUCLE_webmestre>
-</webmestres>
-</B_webmestre>
-<applicatif path="#EVAL{$_SERVER['SCRIPT_FILENAME']}" port="#EVAL{$_SERVER['SERVER_PORT']}" logiciel="#EVAL{$_SERVER['SERVER_SOFTWARE']}" nom="#EVAL{$_SERVER['SERVER_NAME']}" />[
-(#REM)
-	Le code ci-dessous est une méthode "barbare" mais efficace pour soustraire toutes les infos du fichier config/connect.php.
-	Le soucis c'est que ça peut ne pas être sécuritaire car on affiche le mot de passe de la bdd.
-	Je laisse le code dans la page même si ce n'est pas affiché. C'est pour historique.
-
-	C'est au webmestre qu'appartiendra la décision de surcharger ce fichier pour afficher ce qu'il désire.
-
-] [(#SET{bdd,[(#CHEMIN{config/connect.php}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})] [(#SET{bdd_host,#GET{bdd}|table_valeur{0}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_port,#GET{bdd}|table_valeur{1}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_nom,#GET{bdd}|table_valeur{4}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_type,#GET{bdd}|table_valeur{5}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_prefixe,#GET{bdd}|table_valeur{6}|explode{"'"}|table_valeur{1}})
-]<sgbd serveur="#GET{bdd_host}" port="#GET{bdd_port}" nom="#GET{bdd_nom}" type="#GET{bdd_type}" prefixe="#GET{bdd_prefixe}" version="#EVAL{sql_version()}" />
-[(#SPIP_VERSION|intval|=={2}|oui)#INCLURE{fond=inclure/plugins,env}]
-[(#SPIP_VERSION|intval|=={3}|oui)#INCLURE{fond=inclure/paquets,env}]
-
 <!-- Informations complémentaires qui peuvent être ajoutées par des plugins -->
 <BOUCLE_module_info (POUR) {tableau #CONFIG{'info_spip/modules'}}>
+[(#CHEMIN{inclure/xml/(#VALEUR).html}|oui)
 <INCLURE{fond=inclure/xml/#VALEUR, env} />
-</BOUCLE_module_info>
+]</BOUCLE_module_info>
 
 </B_cle>
 <error>Accès interdit</error>

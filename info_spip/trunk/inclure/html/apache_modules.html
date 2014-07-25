@@ -1,16 +1,17 @@
 [(#REM)
-<template><:info_spip:nom_module_apache:></template>
+<template><:info_spip:nom_apache_modules:></template>
 ]
 
 <B_modules>
-<!-- <:info_spip:nom_module_apache:> -->
-<div class="fieldset fieldset_plugins">
+<!-- <:info_spip:nom_apache_modules:> -->
+<div class="fieldset fieldset_apache_modules">
     <h3 class="titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_module_apache:>,<:info_spip:info_nb_modules_apache:>})]</h3>
 </div>
 
-<ul class="spip">
-<BOUCLE_modules (DATA) {source table, (#REM|lister_modules_apache)} {par valeur}>
-    <li class="item">#VALEUR</li>
-</BOUCLE_modules>
-</ul>
+<div class="champ contenu_apache_modules">
+    <div class="label visible"><:info_spip:label_apache_modules:> : </div>
+    <div dir='#LANG_DIR' class='applicatif_port span'>
+<BOUCLE_modules (DATA) n{source table, (#REM|lister_modules_apache)} {par valeur} {', '}><span class="item">[(#VALEUR|trim)]</span></BOUCLE_modules>
+    </div>
+</div>
 </B_modules>
