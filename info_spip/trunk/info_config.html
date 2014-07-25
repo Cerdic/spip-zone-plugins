@@ -7,7 +7,7 @@
 [<type_site url="(#CONFIG{'info_spip/type_site'})" />]
 <!-- Informations complémentaires qui peuvent être ajoutées par des plugins -->
 <BOUCLE_module_info (POUR) {tableau #CONFIG{'info_spip/modules'}}>
-[(#CHEMIN{inclure/xml/(#VALEUR).html}|oui)
+[(#CHEMIN{#VAL{'inclure/xml/'}|concat{#VALEUR,'.html'}}|oui)
 <INCLURE{fond=inclure/xml/#VALEUR, env} />
 ]</BOUCLE_module_info>
 
