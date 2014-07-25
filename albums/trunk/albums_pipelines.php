@@ -432,11 +432,16 @@ function albums_message_cfg_documents($baliser=false){
  * Compléter le tableau de réponse ou effectuer des traitements supplémentaires pour certains formulaires.
  *
  * - Formulaire d'ajout de documents :
- *   rechargement ajax du conteneur des documents : ajout de js au message de retour.
+ *   quand il s'agit d'un album, rechargement ajax du conteneur des documents.
+ *   On ajoute du js au message de retour.
  *
  * @note
  * L'identifiant de l'album peut être négatif en cas de création
  * cf. joindre_document.php, L.206 à 222
+ *
+ * Attention, il y a une différence dans les retours avant et après SPIP 3.0.17
+ * A partir de SPIP 3.0.17, on a les identifiants des documents ajoutés dans $flux['data']['ids]
+ * Avant, il faut les repérer à la main dans le message de retour.
  *
  * @pipeline formulaire_fond
  *
@@ -450,16 +455,27 @@ function albums_formulaire_traiter($flux){
 		AND !intval($flux['args']['args'][0]) // nouveau document
 		AND $flux['args']['args'][2] == 'album'
 		AND $id_album = intval($flux['args']['args'][1])
-		AND (
-			count($ids_documents = $flux['data']['ids'])
-			OR isset($flux['data']['message_ok'])
-		)
+		AND isset($flux['data']['message_ok']) // ajout = succès
 	) {
-		// animation de chaque document ajouté
-		// id du conteneur : «#documentX_albumY»
-		foreach ($ids_documents as $id_document) $div_documents[] = "#document${id_document}-album${id_album}";
-		$div_documents = implode(',',$div_documents);
-		$callback = "jQuery('$div_documents').animateAppend();";
+		// déterminer les identifiants des documents
+		// soit ils sont donnés dans $flux['data']['ids] (SPIP 3.0.17+)...
+		if (is_array($flux['data']['ids'])) {
+			$ids_documents = $flux['data']['ids'];
+		}
+		// ...soit il faut les récupérer à la main d'après le message de retour
+		// dans le callback du script dans le message, on a les identifiants des divs #docX
+		else {
+			$reg = "/#doc(\d*)/";
+			preg_match_all($reg,$flux['data']['message_ok'],$matches);
+			$ids_documents = is_array($matches[1]) ? array_unique($matches[1]) : array();
+		}
+		// en callback, animation de chaque document ajouté (#documentX_albumY)
+		if (count($ids_documents)) {
+			foreach ($ids_documents as $id_document)
+				$divs_documents[] = "#document${id_document}-album${id_album}";
+			$divs_documents = implode(',',$divs_documents);
+			$callback = "jQuery('$divs_documents').animateAppend();";
+		}
 		// rechargement du conteneur des documents de l'album
 		// id du conteneur : «#documents-albumY»
 		$js = "if (window.jQuery) jQuery(function(){ajaxReload('documents-album$id_album',{callback:function(){ $callback }});});";
