@@ -3,10 +3,10 @@
  * Plugin Diogene Mots
  *
  * Auteurs :
+ * b_b
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * Severo
  * 
- *
  * © 2010-2014 - Distribue sous licence GNU/GPL
  *
  * Utilisation des pipelines par Diogene Mots
@@ -258,10 +258,11 @@ function diogene_mots_diogene_traiter($flux){
 				}
 			}
 
-			$result = sql_allfetsel('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet="'.sql_quote($objet).'" AND id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
+			$result = sql_allfetsel('0+mot.titre AS num, mot.id_mot','spip_mots as mot LEFT JOIN spip_mots_liens as liens ON mot.id_mot=liens.id_mot','liens.objet='.sql_quote($objet).' AND mot.id_groupe='.intval($id_groupe).' AND liens.id_objet='.intval($id_objet),'','num, mot.titre');
 			foreach ($result as $row) {
 				$mots_multiples[] = $row['id_mot'];
 			}
+
 			foreach($requete_id_groupe as $cle => $mot){
 				/**
 				 * Si le mot est déja dans les mots, on le supprime juste
@@ -278,7 +279,7 @@ function diogene_mots_diogene_traiter($flux){
 			 * S'il reste quelque chose dans les mots d'origine, on les délie de l'objet
 			 */
 			if(count($mots_multiples)>0){
-				sql_delete('spip_mots_liens','objet="'.sql_quote($objet).'" AND id_objet='.intval($id_objet).' AND id_mot IN ('.implode(',',$mots_multiples).')');
+				sql_delete('spip_mots_liens','objet='.sql_quote($objet).' AND id_objet='.intval($id_objet).' AND id_mot IN ('.implode(',',$mots_multiples).')');
 				$invalider = true;
 			}
 
