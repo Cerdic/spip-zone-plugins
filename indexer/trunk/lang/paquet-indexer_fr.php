@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'indexer_description' => 'Gestion d\'Indexation de contenus SPIP ou autre. 
-Intégration et requêtes possibles avec Sphinx.
+Intégration et requêtes possibles avec Sphinx. Nécessite Sphinx 2.2 ou version ultérieure
 ',
 	'indexer_nom' => 'Indexer',
 	'indexer_slogan' => 'Indexeur de contenus',
