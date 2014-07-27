@@ -1,0 +1,147 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_site,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_site' value='#ENV{id_site}' />
+		<ul>
+
+			[(#SAISIE{input, logiciel_nom, obligatoire=oui,
+				label=<:projets_site:label_logiciel_nom:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{input, logiciel_version, obligatoire=oui,
+				label=<:projets_site:label_logiciel_version:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{selection, type_site, obligatoire=oui,
+				label=<:projets_site:label_type_site:>,
+				datas=[(#ARRAY{prod,<:projets_site:type_site_prod:>,rec,<:projets_site:type_site_rec:>,dev,<:projets_site:type_site_dev:>,prep,<:projets_site:type_site_prep:>})]})]
+
+			[(#SAISIE{input, uniqid,
+				label=<:projets_site:label_uniqid:>,
+				explication=<:projets_site:explication_uniqid:> ,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{date, date_creation,
+				label=<:projets_site:label_date_creation:>})]
+
+			[(#SAISIE{fieldset, fo_fieldset,
+				label=<:projets_site:label_fo_fieldset:>})]
+
+			[(#SAISIE{input, fo_url,
+				label=<:projets_site:label_fo_url:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, fo_login,
+				label=<:projets_site:label_fo_login:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{input, fo_password,
+				label=<:projets_site:label_fo_password:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{fieldset, bo_fieldset,
+				label=<:projets_site:label_bo_fieldset:>})]
+
+			[(#SAISIE{input, bo_url,
+				label=<:projets_site:label_bo_url:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, bo_login,
+				label=<:projets_site:label_bo_login:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{input, bo_password,
+				label=<:projets_site:label_bo_password:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{fieldset, applicatif_fieldset,
+				label=<:projets_site:label_applicatif_fieldset:>})]
+
+			[(#SAISIE{input, applicatif_serveur,
+				label=<:projets_site:label_applicatif_serveur:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, applicatif_path,
+				label=<:projets_site:label_applicatif_path:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, applicatif_surveillance,
+				label=<:projets_site:label_applicatif_surveillance:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, svn_path,
+				label=<:projets_site:label_svn_path:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, svn_trac,
+				label=<:projets_site:label_svn_trac:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, sas_dpi,
+				label=<:projets_site:label_sas_dpi:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{fieldset, sgbd_fieldset,
+				label=<:projets_site:label_sgbd_fieldset:>})]
+
+			[(#SAISIE{input, sgbd_type,
+				label=<:projets_site:label_sgbd_type:>,
+				explication=<:projets_site:explication_sgbd_type:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{input, sgbd_serveur,
+				label=<:projets_site:label_sgbd_serveur:>,
+				size=255,maxlength=255})]
+
+			[(#SAISIE{input, sgbd_nom,
+				label=<:projets_site:label_sgbd_nom:>,
+				size=50,maxlength=50})]
+
+			[(#SAISIE{input, sgbd_login,
+				label=<:projets_site:label_sgbd_login:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{input, sgbd_password,
+				label=<:projets_site:label_sgbd_password:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{fieldset, autres_fieldset,
+				label=<:projets_site:label_autres_fieldset:>})]
+
+			[(#SAISIE{input, sso,
+				label=<:projets_site:label_sso:>,
+				size=25,maxlength=25})]
+
+			[(#SAISIE{textarea, perimetre_acces,
+				label=<:projets_site:label_perimetre_acces:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, statistiques,
+				label=<:projets_site:label_statistiques:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, moteur_recherche,
+				label=<:projets_site:label_moteur_recherche:>,
+				explication=<:projets_site:explication_moteur_recherche:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, autres_outils,
+				label=<:projets_site:label_autres_outils:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+			[(#SAISIE{textarea, remarques,
+				label=<:projets_site:label_remarques:>,
+				explication=<:projets_site:explication_remarques:>,
+				li_class=haut, class=inserer_barre_edition, rows=6})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
