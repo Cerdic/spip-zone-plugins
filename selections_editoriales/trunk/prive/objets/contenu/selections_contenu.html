@@ -1,0 +1,23 @@
+<BOUCLE_selections_contenu(SELECTIONS_CONTENUS){id_selections_contenu}>
+
+[<div class="champ contenu_id_selection[ (#ID_SELECTION*|strlen|?{'',vide})]">
+	<label><:selections_contenu:champ_id_selection_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_selection} id_selection'>(#ID_SELECTION)</span>
+</div>]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:selections_contenu:champ_titre_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
+	<label><:selections_contenu:champ_url_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{url} url'>(#URL)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:selections_contenu:champ_descriptif_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+</BOUCLE_selections_contenu>

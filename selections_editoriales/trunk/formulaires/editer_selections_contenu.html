@@ -1,0 +1,30 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_selections_contenu,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_selections_contenu' value='#ENV{id_selections_contenu}' />
+		<ul>
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:selections_contenu:champ_titre_label:>})]
+
+			[(#SAISIE{input, url,
+				label=<:selections_contenu:champ_url_label:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:selections_contenu:champ_descriptif_label:>,
+				rows=5})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+			<a class="ajax" href="[(#SELF|parametre_url{editer_contenu,non})]"><:bouton_annuler:></a>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		</p>
+	</div></form>
+	]
+</div>

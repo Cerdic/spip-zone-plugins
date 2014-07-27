@@ -1,0 +1,36 @@
+<paquet
+	prefix="selections_editoriales"
+	categorie="divers"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/selections_editoriales-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2014-07-24 23:34:00
+	-->
+
+	<nom>Sélections éditoriales</nom>
+
+	<auteur lien='http://www.spip.net'>Les Développements Durables</auteur>
+
+	<licence>GNU/GPL v3</licence>
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+
+
+	<pipeline nom="autoriser" inclure="selections_editoriales_autorisations.php" />
+	<pipeline nom="formulaire_charger" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="selections_editoriales_pipelines.php" />
+	<pipeline nom="boite_infos" inclure="selections_editoriales_pipelines.php" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/selections_editoriales.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/selections_editoriales.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/selections_editoriales.php" /> 
+	<pipeline nom="affiche_milieu" inclure="selections_editoriales_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="selections_editoriales_pipelines.php" /> 
+
+	<menu nom="selections" titre="selection:titre_selections" parent="menu_edition" icone="images/selections_contenu-16.png" action="selections" /> 
+	<menu nom="selection_creer" titre="selection:icone_creer_selection" parent="outils_rapides" icone="images/selections_contenu-new-16.png" action="selection_edit" parametres="new=oui" /> 
+</paquet>

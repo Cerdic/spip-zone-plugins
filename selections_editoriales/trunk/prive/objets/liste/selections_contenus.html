@@ -1,0 +1,34 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_selections_contenu,1,
+	points,-1
+}})]<B_liste_selections_contenus>
+#ANCRE_PAGINATION
+<div class="liste-objets selections_contenus">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{selections_contenu:info_1_selections_contenu,selections_contenu:info_nb_selections_contenus}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:selections_contenu:champ_titre_label:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_selections_contenu,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_selections_contenus(SELECTIONS_CONTENUS){id_selection?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{selections_contenu-16.png}|balise_img)]</td>
+			<td class='titre principale'>[(#LOGO_SELECTIONS_CONTENU|image_reduire{20,26})]<a href="[(#ID_SELECTIONS_CONTENU|generer_url_entite{selections_contenu})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SELECTIONS_CONTENU">[(#RANG). ]#TITRE</a></td>
+			<td class='id'>[(#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}|?{
+				<a href="[(#URL_ECRIRE{selections_contenu_edit,id_selections_contenu=#ID_SELECTIONS_CONTENU})]">#ID_SELECTIONS_CONTENU</a>,
+				#ID_SELECTIONS_CONTENU
+			})]</td>
+		</tr>
+	</BOUCLE_liste_selections_contenus>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_selections_contenus>[
+<div class="liste-objets selections_contenus caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_selections_contenus>

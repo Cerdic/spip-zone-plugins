@@ -1,0 +1,15 @@
+<BOUCLE_selection(SELECTIONS){id_selection}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:selection:champ_titre_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:selection:champ_descriptif_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+<INCLURE{fond=prive/squelettes/inclure/editer_selections_contenus,id_selection,env,ajax=selection#ID_SELECTION}>
+
+</BOUCLE_selection>
