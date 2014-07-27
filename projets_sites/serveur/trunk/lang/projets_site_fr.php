@@ -12,14 +12,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'ajouter_lien_projets_site' => 'Ajouter ce site',
 
     // E
-    'explication_uniqid' => 'Une clé d\'identification permettant de récupérer la configuration du serveur
-    du site enregistré.',
     'explication_moteur_recherche' => 'Exemples : Moteur interne au logiciel, Exalead, Google, etc.',
     'explication_remarques' => 'Caractéristiques particulières, fonctionnalités, etc.',
     'explication_sas_protocole' => 'Exemples&nbsp;: FTP, SFTP, etc.',
     'explication_sgbd_type' => 'Exemples: MySQL, Oracle, Microsoft SQL Server, MongoDB, etc.',
     'explication_sso' => 'Méthode d\'authentification unique',
+    'explication_uniqid' => 'Une clé d\'identification permettant de récupérer la configuration du
+    serveur du site enregistré.',
     'explication_versioning_type' => 'Exemples: SVN, CVS, Git, etc.',
+    'explication_webservice' => 'URL pour un suivi de configuration du site.',
 
     // I
     'icone_creer_projets_site' => 'Ajouter un site',
@@ -75,11 +76,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_titre' => 'Titre',
     'label_type_site' => 'Type de site',
     'label_uniqid' => 'Unique ID',
-    'label_url_webservice' => 'Url du Web Service',
     'label_versioning_fieldset' => 'Gestionnaire de versions',
     'label_versioning_path' => 'Chemin du dépôt',
     'label_versioning_trac' => 'Trac du dépôt',
     'label_versioning_type' => 'Type de versioning',
+    'label_webservice' => 'Url du Web Service',
 
     // R
     'retirer_lien_projets_site' => 'Retirer ce site',
