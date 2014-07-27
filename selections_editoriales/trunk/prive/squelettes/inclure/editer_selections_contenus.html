@@ -37,7 +37,7 @@
 	]
 </div>
 
-[(#ENV{editer_contenu,non}|=={non}|oui)
+[(#ENV{editer_contenu,non}|=={non}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
 #BOITE_PIED{act}
 <a class="ajax" href="[(#SELF|parametre_url{editer_contenu,new})]"><:selections_contenu:texte_ajouter_selections_contenu:></a>
 ]

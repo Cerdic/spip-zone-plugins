@@ -127,6 +127,7 @@ function autoriser_selection_supprimer_dist($faire, $type, $id, $qui, $opt) {
 /**
  * Autorisation de créer des contenus dans une sélection
  * - pouvoir modifier la sélection
+ * - ne pas dépasser le nombre limite de contenu s'il existe
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -136,7 +137,18 @@ function autoriser_selection_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_selection_creerselectionscontenudans_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('modifier', $type, $id, $qui, $opt);
+	$id_selection = intval($id);
+	
+	$ok = (
+		autoriser('modifier', $type, $id, $qui, $opt)
+		and (
+			!$limite = intval(sql_getfetsel('limite', 'spip_selections', 'id_selection = '.$id_selection))
+			or
+			$limite > sql_countsel('spip_selections_contenus', 'id_selection = '.$id_selection)
+		)
+	);
+	
+	return $ok;
 }
 
 /**
