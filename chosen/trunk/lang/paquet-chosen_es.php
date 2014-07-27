@@ -15,7 +15,7 @@ Esta rama del plugin Chosen se basa en el fork de koenpunt - versión 1.0.0 - ve
 
 Con este fork, Chosen permite <a href=\'https://github.com/harvesthq/chosen/pull/166\'>crear nuevas opciones</a> en un &lt;select&gt; existente, a condición de que tenga la clase ’chosen-create-option’.
 Cuando chosen crea una nueva &lt;option&gt; (la palabra ’nuevo’ por ejemplo) en un &lt;select&gt;, ésta toma la siguiente forma: <code>&lt;option selected=\'selected\' value=\'chosen_nuevo\'&gt;nuevo&lt;/option&gt;</code>.
-Apreciar el prefijo ’chosen_’ añadido en el parámetro ’value’ para permitir diferenciar las &lt;option&gt; creadas por Chosen.',
+Apreciar el prefijo ’chosen_’ añadido en el parámetro ’value’ para permitir diferenciar las &lt;option&gt; creadas por Chosen.', # MODIF
 	'chosen_nom' => 'Chosen (fork de koenpunt)',
 	'chosen_slogan' => 'Integrar la biblioteca Chosen en SPIP (fork de koenpunt)'
 );

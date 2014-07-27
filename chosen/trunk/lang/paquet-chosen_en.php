@@ -14,7 +14,7 @@ The CSS class <code>chosen</code> on a <code><select></code> will automatically 
 
 Using this fork, Chosen allows to <a href=\'https://github.com/harvesthq/chosen/pull/166\'>create ne< options</a> in an existing &lt;select&gt; tag, under the condition that it has a class of ’chosen-create-option’.
 When Chosen creates a new  &lt;option&gt; (for example word ’dummy’) in a &lt;select&gt;, it takes the following format: <code>&lt;option selected=\'selected\' value=\'chosen_dummy\'&gt;dummy&lt;/option&gt;</code>.
-Take notice of the prefix ’chosen_’ that is added in the ’value’ parameter in order to distinguish the &lt;option&gt; values created by Chosen.',
+Take notice of the prefix ’chosen_’ that is added in the ’value’ parameter in order to distinguish the &lt;option&gt; values created by Chosen.', # MODIF
 	'chosen_nom' => 'Chosen (koenpunt’s fork)',
 	'chosen_slogan' => 'Integrate the Chosen library in SPIP (koenpunt’s fork)'
 );
