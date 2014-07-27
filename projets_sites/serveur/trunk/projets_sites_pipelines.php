@@ -9,8 +9,10 @@
  * @package    SPIP\Projets_sites\Pipelines
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
-	
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
+
 
 
 /**
@@ -21,29 +23,31 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function projets_sites_affiche_milieu($flux) {
-	$texte = "";
-	$e = trouver_objet_exec($flux['args']['exec']);
+function projets_sites_affiche_milieu($flux)
+{
+    $texte = "";
+    $e = trouver_objet_exec($flux['args']['exec']);
 
 
 
-	// projets_sites sur les projets
-	if (!$e['edition'] AND in_array($e['type'], array('projet'))) {
-		$texte .= recuperer_fond('prive/objets/editer/liens', array(
-			'table_source' => 'projets_sites',
-			'objet' => $e['type'],
-			'id_objet' => $flux['args'][$e['id_table_objet']]
-		));
-	}
+    // projets_sites sur les projets
+    if (!$e['edition'] and in_array($e['type'], array('projet'))) {
+        $texte .= recuperer_fond('prive/objets/editer/liens', array(
+            'table_source' => 'projets_sites',
+            'objet' => $e['type'],
+            'id_objet' => $flux['args'][$e['id_table_objet']]
+        ));
+    }
 
-	if ($texte) {
-		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
-			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
-		else
-			$flux['data'] .= $texte;
-	}
+    if ($texte) {
+        if ($p=strpos($flux['data'], "<!--affiche_milieu-->")) {
+            $flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+        } else {
+            $flux['data'] .= $texte;
+        }
+    }
 
-	return $flux;
+    return $flux;
 }
 
 
@@ -55,19 +59,20 @@ function projets_sites_affiche_milieu($flux) {
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
-function projets_sites_optimiser_base_disparus($flux){
-	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('projets_site'=>'*'),'*');
-	return $flux;
+function projets_sites_optimiser_base_disparus($flux)
+{
+    include_spip('action/editer_liens');
+    $flux['data'] += objet_optimiser_liens(array('projets_site'=>'*'), '*');
+    return $flux;
 }
 
 /**
  * Insert header prive
- * 
+ *
  */
-function projets_sites_header_prive($flux){
-	$flux .= '<link rel="stylesheet" href="' . _DIR_PLUGIN_PROJETS_SITES  .'css/projets_sites_prive.css" type="text/css" media="all" />';
-	return $flux;
+function projets_sites_header_prive($flux)
+{
+    return $flux;
 }
 
 ?>

@@ -1,4 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
+	multi titre,1,
 	multi type_site,1,
 	date_creation,-1, 
 	id_site,1
@@ -24,11 +25,10 @@ a mis a jour la valeur avec la page reelle]
 </caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(PROJETS_SITES){tout}{!id_site IN #GET{exclus}}{where?}{recherche?}
-			{tri #ENV{par,multi type_site},#GET{defaut_tri}}{id_site==#GET{afficher_lettres}|?{'.*','A'}}>[
-		(#TYPE_SITE**|extraire_multi|initiale|unique|oui)
+		<BOUCLE_lettre (PROJETS_SITES) {tout} {!id_site IN #GET{exclus}} {where?} {recherche?}  {tri #ENV{par,multi titre},#GET{defaut_tri}} {id_site==#GET{afficher_lettres}|?{'.*','A'}}>[
+		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutproa,@#ID_SITE}|ancre_url{paginationproa}|afficher_initiale{#TYPE_SITE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutproa,@#ID_SITE}|ancre_url{paginationproa}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -39,6 +39,7 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="3"><p class='pagination'>(#GET{p})</p></td></tr>]
 	
 		<tr class='first_row'>
+			<th class='titre' scope='col'>[(#TRI{multi titre,<:projets_site:label_titre:>,ajax})]</th>
 			<th class='type_site' scope='col'>[(#TRI{multi type_site,<:projets_site:label_type_site:>,ajax})]</th>
 			<th class='action' scope='col'></th>
 		</tr>
@@ -46,8 +47,9 @@ a mis a jour la valeur avec la page reelle]
 	<tbody>
 	<BOUCLE_liste_projets_sites(PROJETS_SITES){!id_site IN #GET{exclus}}{where?}{recherche?}
 		{tri #ENV{par,multi type_site},#GET{defaut_tri}}{pagination #ENV{nb,10} proa}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TYPE_SITE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class='type_site'>[(#LOGO_PROJETS_SITE|image_reduire{20,20})]<a href="[(#ID_SITE|generer_url_entite{projets_site})]">#TYPE_SITE</a></td>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
+			<td class='titre'>[(#LOGO_PROJETS_SITE|image_reduire{20,20})]<a href="[(#ID_SITE|generer_url_entite{projets_site})]">#TITRE</a></td>
+			<td class='type_site'>#TYPE_SITE</td>
 			<td class='action'>
 				<button class="button link add" name="ajouter_lien\[projets_site-#ID_SITE-#OBJET-#ID_OBJET\]" value="+"><:projets_site:ajouter_lien_projets_site:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>

@@ -9,13 +9,17 @@
  * @package    SPIP\Projets_sites\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function projets_sites_autoriser(){}
+function projets_sites_autoriser()
+{
+}
 
 
 // -----------------
@@ -32,9 +36,10 @@ function projets_sites_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_projetssites_menu_dist($faire, $type, $id, $qui, $opt){
-	return true;
-} 
+function autoriser_projetssites_menu_dist($faire, $type, $id, $qui, $opt)
+{
+    return true;
+}
 
 
 /**
@@ -47,9 +52,10 @@ function autoriser_projetssites_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_projetssitecreer_menu_dist($faire, $type, $id, $qui, $opt){
-	return autoriser('creer', 'projets_site', '', $qui, $opt);
-} 
+function autoriser_projetssitecreer_menu_dist($faire, $type, $id, $qui, $opt)
+{
+    return autoriser('creer', 'projets_site', '', $qui, $opt);
+}
 
 /**
  * Autorisation de créer (projetssite)
@@ -61,8 +67,9 @@ function autoriser_projetssitecreer_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo'; 
+function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo';
 }
 
 /**
@@ -75,8 +82,9 @@ function autoriser_projetssite_creer_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo';
+function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo';
 }
 
 /**
@@ -89,8 +97,9 @@ function autoriser_projetssite_voir_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_projetssite_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo';
+function autoriser_projetssite_modifier_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo';
 }
 
 /**
@@ -103,8 +112,9 @@ function autoriser_projetssite_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_projetssite_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+function autoriser_projetssite_supprimer_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 
@@ -118,8 +128,9 @@ function autoriser_projetssite_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_associerprojetssites_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+function autoriser_associerprojetssites_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 ?>

@@ -9,7 +9,9 @@
  * @package    SPIP\Projets_sites\Installation
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 
 /**
@@ -21,13 +23,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function projets_sites_upgrade($nom_meta_base_version, $version_cible) {
-	$maj = array();
+function projets_sites_upgrade($nom_meta_base_version, $version_cible)
+{
+    $maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_projets_sites', 'spip_projets_sites_liens')));
+    $maj['create'] = array(array('maj_tables', array('spip_projets_sites', 'spip_projets_sites_liens')));
+    $maj['1.1.0'] = array(
+        array('sql_alter', "TABLE spip_projets_sites CHANGE sas_dpi sas_serveur varchar(255) NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites ADD titre text DEFAULT '' NOT NULL AFTER id_site"),
+        array('sql_alter', "TABLE spip_projets_sites ADD descriptif text DEFAULT '' NOT NULL AFTER titre"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sas_protocole varchar(50) NOT NULL DEFAULT '' AFTER sas_serveur"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sas_login varchar(25) NOT NULL DEFAULT '' AFTER sas_protocole"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sas_password varchar(25) NOT NULL DEFAULT '' AFTER sas_login"),
+    );
 
-	include_spip('base/upgrade');
-	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+    include_spip('base/upgrade');
+    maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
@@ -38,17 +49,18 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible) {
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
-function projets_sites_vider_tables($nom_meta_base_version) {
+function projets_sites_vider_tables($nom_meta_base_version)
+{
 
-	sql_drop_table("spip_projets_sites");
-	sql_drop_table("spip_projets_sites_liens");
+    sql_drop_table("spip_projets_sites");
+    sql_drop_table("spip_projets_sites_liens");
 
-	# Nettoyer les versionnages et forums
-	sql_delete("spip_versions",              sql_in("objet", array('projets_site')));
-	sql_delete("spip_versions_fragments",    sql_in("objet", array('projets_site')));
-	sql_delete("spip_forum",                 sql_in("objet", array('projets_site')));
+    # Nettoyer les versionnages et forums
+    sql_delete("spip_versions", sql_in("objet", array('projets_site')));
+    sql_delete("spip_versions_fragments", sql_in("objet", array('projets_site')));
+    sql_delete("spip_forum", sql_in("objet", array('projets_site')));
 
-	effacer_meta($nom_meta_base_version);
+    effacer_meta($nom_meta_base_version);
 }
 
 

@@ -9,7 +9,9 @@
  * @package    SPIP\Projets_sites\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -35,8 +37,9 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_projets_site_identifier_dist($id_site='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return serialize(array(intval($id_site), $associer_objet));
+function formulaires_editer_projets_site_identifier_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+{
+    return serialize(array(intval($id_site), $associer_objet));
 }
 
 /**
@@ -64,9 +67,10 @@ function formulaires_editer_projets_site_identifier_dist($id_site='new', $retour
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_projets_site_charger_dist($id_site='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('projets_site',$id_site,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	return $valeurs;
+function formulaires_editer_projets_site_charger_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+{
+    $valeurs = formulaires_editer_objet_charger('projets_site', $id_site, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+    return $valeurs;
 }
 
 /**
@@ -94,8 +98,9 @@ function formulaires_editer_projets_site_charger_dist($id_site='new', $retour=''
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_projets_site_verifier_dist($id_site='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_verifier('projets_site',$id_site);
+function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+{
+    return formulaires_editer_objet_verifier('projets_site', $id_site);
 }
 
 /**
@@ -123,22 +128,23 @@ function formulaires_editer_projets_site_verifier_dist($id_site='new', $retour='
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_projets_site_traiter_dist($id_site='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$res = formulaires_editer_objet_traiter('projets_site',$id_site,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
- 
-	// Un lien a prendre en compte ?
-	if ($associer_objet AND $id_site = $res['id_site']) {
-		list($objet, $id_objet) = explode('|', $associer_objet);
+function formulaires_editer_projets_site_traiter_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+{
+    $res = formulaires_editer_objet_traiter('projets_site', $id_site, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
-		if ($objet AND $id_objet AND autoriser('modifier', $objet, $id_objet)) {
-			include_spip('action/editer_liens');
-			objet_associer(array('projets_site' => $id_site), array($objet => $id_objet));
-			if (isset($res['redirect'])) {
-				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_site, '&');
-			}
-		}
-	}
-	return $res;
+    // Un lien a prendre en compte ?
+    if ($associer_objet and $id_site = $res['id_site']) {
+        list($objet, $id_objet) = explode('|', $associer_objet);
+
+        if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
+            include_spip('action/editer_liens');
+            objet_associer(array('projets_site' => $id_site), array($objet => $id_objet));
+            if (isset($res['redirect'])) {
+                $res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_site, '&');
+            }
+        }
+    }
+    return $res;
 
 }
 

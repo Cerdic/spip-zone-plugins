@@ -13,7 +13,7 @@
 	]
 	[
 		[(#ID_SITE|?{<:projets_site:icone_modifier_projets_site:>,<:projets_site:icone_creer_projets_site:>})]
-		<h1>(#ENV{titre,#INFO_TYPE_SITE{projets_site,#ID_SITE}|sinon{<:info_sans_titre:>}})</h1>
+		<h1>(#ENV{titre,#INFO_TITRE{projets_site,#ID_SITE}|sinon{<:info_sans_titre:>}})</h1>
 	]
 </div>
 
