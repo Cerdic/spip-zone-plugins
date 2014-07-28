@@ -1,0 +1,21 @@
+<paquet
+	prefix="medias_logos"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/medias_logos-32.png"
+>
+	<nom>Logos Médias</nom>
+	<!-- Utiliser une image liée à un objet comme logo de ce dernier -->
+
+	<auteur lien="http://razack.wordpress.com">Charles Razack</auteur>
+
+	<licence>GPL</licence>
+
+	<pipeline nom="document_desc_actions" inclure="medias_logos_pipelines.php" />
+	<pipeline nom="autoriser" inclure="medias_logos_autorisations.php" />
+
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
+
+</paquet>
