@@ -270,10 +270,14 @@ function albums_post_edition($flux){
  * @param  array $scripts Liste des js chargés
  * @return array          Liste complétée des js chargés
 **/
-function albums_jqueryui_plugins($scripts){
-	foreach(array('jquery.ui.sortable','jquery.ui.autocomplete') as $jqueryui)
-		$scripts[] = $jqueryui;
-	return $scripts;
+function albums_jqueryui_plugins($plugins){
+	if (test_espace_prive()){
+		include_spip('inc/config');
+		$plugins[] = 'jquery.ui.autocomplete';
+		if (lire_config('albums/deplacer_documents'))
+			$plugins[] = 'jquery.ui.sortable';
+	}
+	return $plugins;
 }
 
 
