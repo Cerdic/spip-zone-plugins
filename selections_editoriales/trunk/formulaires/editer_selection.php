@@ -91,10 +91,11 @@ function formulaires_editer_selection_verifier_dist($id_selection='new', $retour
 	// L'identifiant doit être unique s'il existe
 	if (
 		$identifiant = _request('identifiant')
-		and $id_selection = intval(sql_getfetsel('id_selection', 'spip_selections', 'identifiant = '.sql_quote($identifiant)))
+		and $id = intval(sql_getfetsel('id_selection', 'spip_selections', 'identifiant = '.sql_quote($identifiant)))
+		and $id_selection != $id
 		and include_spip('inc/filtres')
-		and $titre_selection = generer_info_entite($id_selection, 'selection', 'titre')
-		and $url_selection = generer_info_entite($id_selection, 'selection', 'url')
+		and $titre_selection = generer_info_entite($id, 'selection', 'titre')
+		and $url_selection = generer_info_entite($id, 'selection', 'url')
 	) {
 		$erreurs['identifiant'] = _T('selection:erreur_identifiant_existant', array('selection' => "<a href=\"$url_selection\">$titre_selection</a>"));
 	}
@@ -104,8 +105,8 @@ function formulaires_editer_selection_verifier_dist($id_selection='new', $retour
 		$limite = _request('limite')
 		and (
 			!is_numeric($limite) // pas un nombre
-			or $valeur != intval($valeur) // pas un entier
-			or $valeur <= 0 // pas positif
+			or $limite != intval($limite) // pas un entier
+			or $limite <= 0 // pas positif
 		)
 	) {
 		$erreurs['limite'] = _T('selection:erreur_limite_entier');
