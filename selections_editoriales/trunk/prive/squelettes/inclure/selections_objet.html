@@ -7,7 +7,6 @@
 <BOUCLE_selections(SELECTIONS){objet}{id_objet}{par num titre,titre}>
 <INCLURE{fond=prive/squelettes/inclure/editer_selections_contenus, id_selection, editer_selection=oui, env, ajax=selection#ID_SELECTION}>
 </BOUCLE_selections>
-<div class='nettoyeur'></div>
 </B_selections>
 
 [(#AUTORISER{associerselections, #OBJET, #ID_OBJET}|et{#AUTORISER{creer, selection}})
@@ -18,3 +17,4 @@
 ]
 
 </div><!-- #selections -->
+<div class='nettoyeur'></div>
