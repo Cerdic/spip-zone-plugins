@@ -19,17 +19,17 @@
 ]
 [(#AUTORISER{vider,album,#ID_ALBUM}|oui)
 	[(#BOUTON_ACTION{
-		[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img) ]<:album:bouton_vider:>,
+		[(#CHEMIN_IMAGE{album-vider-16.png}|balise_img) ]<:album:bouton_vider:>,
 		#URL_ACTION_AUTEUR{vider_album,#ID_ALBUM,#SELF},
-		'ajax',
+		'ajax link',
 		<:album:message_vider:>,'',
 		[(function(){jQuery("#documents-album(#ID_ALBUM)").animateRemove(ajaxReload("documents-album[(#ID_ALBUM)]"));return true;})()]})]
 ]
 [(#AUTORISER{supprimer,album,#ID_ALBUM}|oui)
 	[(#BOUTON_ACTION{
-		[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img) ]<:album:bouton_supprimer:>,
+		[(#CHEMIN_IMAGE{album-del-16.png}|balise_img) ]<:album:bouton_supprimer:>,
 		#URL_ACTION_AUTEUR{supprimer_album,#ID_ALBUM,#URL_ECRIRE{albums}},
-		'',
+		'link',
 		<:album:message_supprimer:>})]
 ]
 
