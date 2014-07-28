@@ -8,17 +8,12 @@
 	documentation=""
 	schema="1.0.0" 
 >
-	<!--
-		Paquet genere le 2014-07-24 23:34:00
-	-->
-
 	<nom>Sélections éditoriales</nom>
-
-	<auteur lien='http://www.spip.net'>Les Développements Durables</auteur>
-
+	
+	<auteur lien='http://www.ldd.net'>Les Développements Durables</auteur>
 	<licence>GNU/GPL v3</licence>
+	
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
-
 
 	<pipeline nom="autoriser" inclure="selections_editoriales_autorisations.php" />
 	<pipeline nom="formulaire_charger" inclure="selections_editoriales_pipelines.php" />
