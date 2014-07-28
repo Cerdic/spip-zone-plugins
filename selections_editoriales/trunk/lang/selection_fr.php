@@ -16,7 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_limite_explication' => 'Nombre maximum de contenus dans la sélection.',
 	'champ_limite_label' => 'Limite',
 	'champ_titre_label' => 'Titre',
-
+	
+	// E
+	'erreur_identifiant_existant' => 'Cet identifiant est déjà utilisé par la sélection « @selection@ ».',
+	
 	// I
 	'icone_creer_selection' => 'Créer une sélection éditoriale',
 	'icone_modifier_selection' => 'Modifier cette sélection éditoriale',

@@ -9,9 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'selections_editoriales_titre' => 'Sélections éditoriales',
 
 	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
-	'cfg_titre_parametrages' => 'Paramétrages',
+	'configurer_objets_label' => 'Activer l’ajout de sélections sur les contenus :',
 
 	// T
 	'titre_page_configurer_selections_editoriales' => 'Configuration des séléctions éditoriales',

@@ -86,9 +86,20 @@ function formulaires_editer_selection_charger_dist($id_selection='new', $retour=
  *     Tableau des erreurs
  */
 function formulaires_editer_selection_verifier_dist($id_selection='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-
-	return formulaires_editer_objet_verifier('selection',$id_selection, array('titre'));
-
+	$erreurs = formulaires_editer_objet_verifier('selection',$id_selection, array('titre'));
+	
+	// L'identifiant doit être unique s'il existe
+	if (
+		$identifiant = _request('identifiant')
+		and $id_selection = intval(sql_getfetsel('id_selection', 'spip_selections', 'identifiant = '.sql_quote($identifiant)))
+		and include_spip('inc/filtres')
+		and $titre_selection = generer_info_entite($id_selection, 'selection', 'titre')
+		and $url_selection = generer_info_entite($id_selection, 'selection', 'url')
+	) {
+		$erreurs['identifiant'] = _T('selection:erreur_identifiant_existant', array('selection' => "<a href=\"$url_selection\">$titre_selection</a>"));
+	}
+	
+	return $erreurs;
 }
 
 /**

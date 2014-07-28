@@ -1,13 +1,14 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-
-	<h3 class="titrem"><:selections_editoriales:cfg_titre_parametrages:></h3>
-
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			[(#SAISIE{choisir_objets, objets, label=<:selections_editoriales:configurer_objets_label:>, exclus=#LISTE{spip_selections, spip_selections_contenus}})]
+		</ul>
 
 		<input type="hidden" name="_meta_casier" value="selections_editoriales" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
