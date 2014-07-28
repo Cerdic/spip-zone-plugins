@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_id_selection_label' => 'Sélection',
 	'champ_titre_label' => 'Titre',
+	'champ_url_explication' => 'L’URL d’une page (http://exemple) ou le raccourci d’un contenu SPIP (article123, rubrique456, etc).',
 	'champ_url_label' => 'URL',
 
 	// I
