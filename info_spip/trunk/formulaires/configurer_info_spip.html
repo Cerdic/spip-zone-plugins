@@ -8,33 +8,44 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-		[(#SAISIE{radio, actif,
-			label=<:info_spip:label_actif:>,
-			datas=#ARRAY{oui,<:info_spip:oui:>,non,<:info_spip:non:>},
-			explication=<:info_spip:explication_actif:>})]
 
-		[(#SAISIE{input,cle,
-			label=<:info_spip:label_cle:>,
-			explication=<:info_spip:explication_cle:>})]
+		<fieldset>
+			<h3 class="legend">
+				<:info_spip:label_fiche_site:>
+			</h3>
+			<ul>
+				[(#SAISIE{selection, type_site,
+					label=<:info_spip:label_type_site:>,
+					datas=#ARRAY{dev,<:info_spip:type_site_dev:>,prep,<:info_spip:type_site_prep:>,prod,<:info_spip:type_site_prod:>,rec,<:info_spip:type_site_rec:>},
+					defaut='prod',
+					explication=<:info_spip:explication_type_site:>})]
 
-		[(#SAISIE{selection, type_site,
-			label=<:info_spip:label_type_site:>,
-			datas=#ARRAY{dev,<:info_spip:type_site_dev:>,prep,<:info_spip:type_site_prep:>,prod,<:info_spip:type_site_prod:>,rec,<:info_spip:type_site_rec:>},
-			defaut='prod',
-			explication=<:info_spip:explication_type_site:>})]
+				[(#SET{modules,#ARRAY})]
+				<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:nom_'}|concat{#VALEUR}|_T)]})]
+				    [(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
+				</BOUCLE_module_info>
+				[(#SAISIE{checkbox, modules,
+				    label=<:info_spip:label_liste_modules:>,
+				    explication=<:info_spip:explication_liste_modules:>,
+				    datas=#GET{modules}})]
+			</ul>
+		</fieldset>
 
-		[(#SET{modules,#ARRAY})]
-		<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:nom_'}|concat{#VALEUR}|_T)]})]
-		    [(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
-		</BOUCLE_module_info>
-		[(#SAISIE{checkbox, modules,
-		    label=<:info_spip:label_liste_modules:>,
-		    explication=<:info_spip:explication_liste_modules:>,
-		    datas=#GET{modules}})]
+		<fieldset>
+			<h3 class="legend">
+				<:info_spip:label_webservice_fieldset:>
+			</h3>
+			<ul>
+				[(#SAISIE{radio, actif,
+					label=<:info_spip:label_actif:>,
+					datas=#ARRAY{oui,<:info_spip:oui:>,non,<:info_spip:non:>},
+					explication=<:info_spip:explication_actif:>})]
 
-
-		</ul>
+				[(#SAISIE{input,cle,
+					label=<:info_spip:label_cle:>,
+					explication=<:info_spip:explication_cle:>})]
+			</ul>
+		</fieldset>
 		<input type="hidden" name="_meta_casier" value="info_spip" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>

@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_cle' => 'Clé d\'identification',
     'label_date_creation' => 'Date d\'installation',
     'label_extensions_php' => 'Liste des extensions PHP',
+    'label_fiche_site' => 'Fiche du site',
     'label_fo_url' => 'URL du Front Office',
     'label_liste_modules' => 'Liste des modules',
     'label_logiciel' => 'Logiciel',
@@ -70,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_webmestre_email' => 'E-mail',
     'label_webmestre_login' => 'Login',
     'label_webmestre_nom' => 'Nom',
+    'label_webservice_fieldset' => 'Webservice',
 
     // N
     'nom_apache_modules' => 'Modules d\'Apache',
