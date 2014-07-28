@@ -117,6 +117,35 @@ function selections_editoriales_boite_infos($flux) {
 }
 
 /**
+ * Ajoute des sélections sous les objets configurés pour ça
+ * 
+ * 
+ * @pipeline afficher_complement_objet
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function selections_editoriales_afficher_complement_objet($flux){
+	$exec = trouver_objet_exec($flux['args']['type']);
+	$id = intval($flux['args']['id']);
+	
+	if (
+		$exec !== false // page d'un objet éditorial
+		and $exec['edition'] === false // pas en mode édition
+		and $type = $exec['type']
+		and autoriser('associerselections', $type, $id)
+		and autoriser('creer', 'selection')
+	 ) {
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/selections_objet', array(
+			'objet' => $type,
+			'id_objet' => $id,
+			),
+			array('ajax'=>'selections')
+		);
+	}
+	return $flux;
+}
+
+/**
  * Optimiser la base de données en supprimant les liens orphelins
  * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
  *

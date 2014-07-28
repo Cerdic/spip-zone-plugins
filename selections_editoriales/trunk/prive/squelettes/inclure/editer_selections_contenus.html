@@ -1,45 +1,48 @@
 #BOITE_OUVRIR{'',simple}
 
-<div class="liste-items">
-	<BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}{par num titre,titre}>
-	<div class="item" id="selection#ID_SELECTION-contenu#ID_SELECTIONS_CONTENU">
-		[<a class="ajax" title="<:info_telecharger_nouveau_logo|trim{:}:>" href="[(#SELF|parametre_url{editer_contenu_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|?{non,#ID_SELECTIONS_CONTENU}})]">(#LOGO_SELECTIONS_CONTENU|sinon{#CHEMIN{prive/images/rayures-gris.gif}}|image_reduire{60,60}|inserer_attribut{alt,<:info_telecharger_nouveau_logo|trim{:}:>}|inserer_attribut{class,spip_documents_left})</a>]
-		<h4 class="titrem"><span class="#EDIT{titre}"><a href="#URL">#TITRE</a></span></h4>
-		<div class="descriptif #EDIT{descriptif}">#DESCRIPTIF</div>
-		[(#ENV{editer_contenu,non}|=={non}|oui)
-		<div class="actions">
-			[(#AUTORISER{supprimer,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
-			[(#BOUTON_ACTION{<:lien_supprimer:>, #URL_ACTION_AUTEUR{supprimer_selections_contenu,#ID_SELECTIONS_CONTENU,#SELF}, link ajax todo})]
-			]
-			[(#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
-			<a class="ajax" href="[(#SELF|parametre_url{editer_contenu,#ID_SELECTIONS_CONTENU})]"><:bouton_modifier:></a>
-			]
-		</div>
-		]
-		[(#ENV{editer_contenu}|=={#ID_SELECTIONS_CONTENU}|et{#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}})
-		<div class="ajax">
-			#FORMULAIRE_EDITER_SELECTIONS_CONTENU{#ID_SELECTIONS_CONTENU}
-		</div>
-		]
-		[(#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|et{#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}})
-		<div class="ajax">
-			#FORMULAIRE_EDITER_LOGO{selections_contenu,#ID_SELECTIONS_CONTENU}
-		</div>
-		]
-	</div>
-	</BOUCLE_contenus>
-	<div class="item"><:selections_contenu:info_aucun_selections_contenu:></div>
-	<//B_contenus>
-	[(#ENV{editer_contenu}|=={new}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
-	<div class="ajax">
-		#FORMULAIRE_EDITER_SELECTIONS_CONTENU{new,#ID_SELECTION}
-	</div>
+	[(#ENV{editer_selection}|=={oui}|oui)
+		<h3 class="titrem"><a href="[(#ENV{id_selection}|generer_url_entite{selection})]">#INFO_TITRE{selection,#ENV{id_selection}}</a></h3>
 	]
-</div>
+	<div class="liste-items">
+		<BOUCLE_contenus(SELECTIONS_CONTENUS){id_selection}{par num titre,titre}>
+		<div class="item" id="selection#ID_SELECTION-contenu#ID_SELECTIONS_CONTENU">
+			[<a class="ajax" title="<:info_telecharger_nouveau_logo|trim{:}:>" href="[(#SELF|parametre_url{editer_contenu_logo,#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|?{non,#ID_SELECTIONS_CONTENU}})]">(#LOGO_SELECTIONS_CONTENU|sinon{#CHEMIN{prive/images/rayures-gris.gif}}|image_reduire{60,60}|inserer_attribut{alt,<:info_telecharger_nouveau_logo|trim{:}:>}|inserer_attribut{class,spip_documents_left})</a>]
+			<h4 class="titrem"><span class="#EDIT{titre}"><a href="#URL">#TITRE</a></span></h4>
+			<div class="descriptif #EDIT{descriptif}">#DESCRIPTIF</div>
+			[(#ENV{editer_contenu,non}|=={non}|oui)
+			<div class="actions">
+				[(#AUTORISER{supprimer,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
+				[(#BOUTON_ACTION{<:lien_supprimer:>, #URL_ACTION_AUTEUR{supprimer_selections_contenu,#ID_SELECTIONS_CONTENU,#SELF}, link ajax todo})]
+				]
+				[(#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}|oui)
+				<a class="ajax" href="[(#SELF|parametre_url{editer_contenu,#ID_SELECTIONS_CONTENU})]"><:bouton_modifier:></a>
+				]
+			</div>
+			]
+			[(#ENV{editer_contenu}|=={#ID_SELECTIONS_CONTENU}|et{#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}})
+			<div class="ajax">
+				#FORMULAIRE_EDITER_SELECTIONS_CONTENU{#ID_SELECTIONS_CONTENU}
+			</div>
+			]
+			[(#ENV{editer_contenu_logo}|=={#ID_SELECTIONS_CONTENU}|et{#AUTORISER{modifier,selections_contenu,#ID_SELECTIONS_CONTENU}})
+			<div class="ajax">
+				#FORMULAIRE_EDITER_LOGO{selections_contenu,#ID_SELECTIONS_CONTENU}
+			</div>
+			]
+		</div>
+		</BOUCLE_contenus>
+		<div class="item"><:selections_contenu:info_aucun_selections_contenu:></div>
+		<//B_contenus>
+		[(#ENV{editer_contenu}|=={new}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
+		<div class="ajax">
+			#FORMULAIRE_EDITER_SELECTIONS_CONTENU{new,#ID_SELECTION}
+		</div>
+		]
+	</div>
 
-[(#ENV{editer_contenu,non}|=={non}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
-#BOITE_PIED{act}
-<a class="ajax" href="[(#SELF|parametre_url{editer_contenu,new})]"><:selections_contenu:texte_ajouter_selections_contenu:></a>
-]
+	[(#ENV{editer_contenu,non}|=={non}|et{#AUTORISER{creerselectionscontenudans,selection,#ENV{id_selection}}})
+	#BOITE_PIED{act}
+	<a class="ajax" href="[(#SELF|parametre_url{editer_contenu,new})]"><:selections_contenu:texte_ajouter_selections_contenu:></a>
+	]
 
 #BOITE_FERMER

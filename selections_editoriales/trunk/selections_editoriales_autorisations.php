@@ -154,6 +154,7 @@ function autoriser_selection_creerselectionscontenudans_dist($faire, $type, $id,
 /**
  * Autorisation de lier/délier l'élément (selections)
  * - pouvoir modifier l'objet où l'on se trouve
+ * - et qu'il fasse partie des objets configurés
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -163,7 +164,17 @@ function autoriser_selection_creerselectionscontenudans_dist($faire, $type, $id,
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_associerselections_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('modifier', $type, $id, $qui, $opt);
+	include_spip('inc/config');
+	include_spip('base/objets');
+	
+	$ok = (
+		$objets = lire_config('selections_editoriales/objets')
+		and is_array($objets)
+		and in_array(table_objet_sql($type), $objets)
+		and autoriser('modifier', $type, $id, $qui, $opt)
+	);
+	
+	return $ok;
 }
 
 

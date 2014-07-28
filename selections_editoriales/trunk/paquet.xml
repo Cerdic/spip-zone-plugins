@@ -24,7 +24,8 @@
 	<pipeline nom="formulaire_charger" inclure="selections_editoriales_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="selections_editoriales_pipelines.php" />
 	<pipeline nom="boite_infos" inclure="selections_editoriales_pipelines.php" />
-
+	<pipeline nom="afficher_complement_objet" inclure="selections_editoriales_pipelines.php" />
+	
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/selections_editoriales.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/selections_editoriales.php" /> 
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/selections_editoriales.php" /> 
