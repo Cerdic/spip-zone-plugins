@@ -30,10 +30,8 @@ function formulaires_configurer_info_spip_verifier_dist ()
 {
     $erreurs = array();
 
-    foreach (array('cle', 'actif') as $obligatoire) {
-        if (!_request($obligatoire)) {
-            $erreurs[$obligatoire] = _T('info_obligatoire');
-        }
+    if (_request('actif') == 'oui' and !_request('cle')) {
+        $erreurs['cle'] = _T('info_obligatoire');
     }
     return $erreurs;
 }
