@@ -16,11 +16,13 @@
 	</langue>
 	<langue code="el" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=el" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=en" total="92" traduits="91" relire="0" modifs="1" nouveaux="0" pourcent="98.91">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=en" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="Pierre KUHN" lien="http://trad.spip.net/auteur/pierre-kuhn" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=es" total="92" traduits="91" relire="0" modifs="1" nouveaux="0" pourcent="98.91">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=es" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Pierre KUHN" lien="http://trad.spip.net/auteur/pierre-kuhn" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
 	<langue code="et" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=et" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
@@ -30,8 +32,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr_tu" total="92" traduits="91" relire="0" modifs="1" nouveaux="0" pourcent="98.91">
+	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=fr_tu" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
+		<traducteur nom="Pierre KUHN" lien="http://trad.spip.net/auteur/pierre-kuhn" />
 	</langue>
 	<langue code="id" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=id" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
