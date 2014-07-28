@@ -7,18 +7,17 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_selections_contenu' value='#ENV{id_selections_contenu}' />
 		<ul>
-
-			[(#SAISIE{input, titre, obligatoire=oui,
-				label=<:selections_contenu:champ_titre_label:>})]
-
-			[(#SAISIE{input, url,
+			[(#SAISIE{input, url, obligatoire=oui,
 				label=<:selections_contenu:champ_url_label:>,
 				explication=<:selections_contenu:champ_url_explication:>})]
+				
+			[(#SAISIE{input, titre,
+				label=<:selections_contenu:champ_titre_label:>,
+				explication=<:selections_contenu:champ_titre_explication:>})]
 
 			[(#SAISIE{textarea, descriptif,
 				label=<:selections_contenu:champ_descriptif_label:>,
 				rows=5})]
-
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

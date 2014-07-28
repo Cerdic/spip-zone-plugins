@@ -91,9 +91,43 @@ function formulaires_editer_selections_contenu_charger_dist($id_selections_conte
  *     Tableau des erreurs
  */
 function formulaires_editer_selections_contenu_verifier_dist($id_selections_contenu='new', $id_selection=0, $retour='', $config_fonc='', $row=array(), $hidden=''){
-
-	return formulaires_editer_objet_verifier('selections_contenu',$id_selections_contenu, array('titre'));
-
+	$erreurs = formulaires_editer_objet_verifier('selections_contenu',$id_selections_contenu, array('url'));
+	
+	// S'il n'y a pas d'erreurs et que le titre est vide, on va lancer des incantations magiques
+	if (!$erreurs and !_request('titre')) {
+		include_spip('inc/lien');
+		$url = _request('url');
+		
+		// On cherche la sélection parente
+		if ($id_contenu = intval($id_selections_contenu)){
+			$id_selection = sql_getfetsel('id_selection', 'spip_selections_contenus', 'id_selections_contenu = '.$id_contenu);
+		}
+		
+		// On cherche le numéro à lui mettre pour le placer suivant son rang
+		$rang = intval(sql_countsel('spip_selections_contenus', 'id_selection = '.intval($id_selection)));
+		$rang = ($id_contenu ? $rang : ($rang+1)) * 10; // Si c'est une modif on garde le même rang
+		
+		// Si on ne trouve pas d'objet SPIP
+		if (!$infos = traiter_lien_implicite($url, '', 'tout')) {
+			// On cherche le <title> de l'URL
+			include_spip('inc/distant');
+			$infos = recuperer_infos_distantes($url);
+		}
+		
+		// Si on a trouvé un bon titre
+		if ($infos and isset($infos['titre']) and $infos['titre']) {
+			$titre = $infos['titre'];
+		}
+		// Sinon on le remplit par une chaîne moche qui donnera envie de la changer
+		else {
+			$titre = _T('info_sans_titre');
+		}
+		
+		// On  génère le titre
+		set_request('titre', "$rang. $titre");
+	}
+	
+	return $erreurs;
 }
 
 /**
