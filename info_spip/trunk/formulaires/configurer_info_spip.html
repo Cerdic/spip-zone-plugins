@@ -22,12 +22,12 @@
 
 				[(#SET{modules,#ARRAY})]
 				<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:nom_'}|concat{#VALEUR}|_T)]})]
-				    [(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
+					[(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
 				</BOUCLE_module_info>
 				[(#SAISIE{checkbox, modules,
-				    label=<:info_spip:label_liste_modules:>,
-				    explication=<:info_spip:explication_liste_modules:>,
-				    datas=#GET{modules}})]
+					label=<:info_spip:label_liste_modules:>,
+					explication=<:info_spip:explication_liste_modules:>,
+					datas=#GET{modules}})]
 			</ul>
 		</fieldset>
 
@@ -44,6 +44,12 @@
 				[(#SAISIE{input,cle,
 					label=<:info_spip:label_cle:>,
 					explication=<:info_spip:explication_cle:>})]
+
+				[(#SAISIE{input, uuid,
+					label='',
+					type='button',
+					valeur=<:info_spip:label_uuid_generer:>})]
+
 			</ul>
 		</fieldset>
 		<input type="hidden" name="_meta_casier" value="info_spip" />
@@ -51,3 +57,22 @@
 	</div>
 	</form>
 </div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		function generateUUID() {
+			var d = new Date().getTime();
+			var uuid = 'xxxxxxxx-xxxx-yxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = (d + Math.random()*16)%16 | 0;
+				d = Math.floor(d/16);
+				return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+			});
+			return uuid;
+		};
+
+		$("#champ_uuid").on('click', function(event) {
+			event.preventDefault();
+			$('#champ_cle').val(generateUUID());
+		});
+	});
+</script>

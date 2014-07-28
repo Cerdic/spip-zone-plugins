@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_sgbd_type' => 'Type de SGBD',
     'label_sgbd_version' => 'Version de la SGBD',
     'label_type_site' => 'Type du site',
+    'label_uuid_generer' => 'Générer la clé',
     'label_webmestre' => 'Webmestre(s)',
     'label_webmestre_email' => 'E-mail',
     'label_webmestre_login' => 'Login',
