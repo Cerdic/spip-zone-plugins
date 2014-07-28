@@ -13,7 +13,7 @@ Il faut renseigner une clé dans la page de configuration pour que la page de co
 On affiche les informations équivalentes au plugin "Sites pour projets" avec qui il va de pair.
 Ce plugin est toutefois autonome.',
     'info_spip_nom' => 'Info SPIP',
-    'info_spip_slogan' => '',
+    'info_spip_slogan' => 'Garder un oeil sur votre serveur.',
 );
 
 ?>

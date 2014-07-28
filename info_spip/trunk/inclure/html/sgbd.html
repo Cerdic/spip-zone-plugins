@@ -1,7 +1,8 @@
 [(#REM)
 <template><:info_spip:nom_sgbd:></template>
 ]
-
+<BOUCLE_espace_prive (CONDITION) {si (#ENV**{exec}|=={'info_config'}|oui)}>
+</BOUCLE_espace_prive>
 <!-- <:info_spip:nom_sgbd:> -->
 [(#REM)
     Le code ci-dessous est une méthode "barbare" mais efficace pour soustraire toutes les infos du fichier config/connect.php.
@@ -57,3 +58,5 @@
     <div dir='#LANG_DIR' class='sgbd_prefixe span'>#GET{bdd_prefixe}</div>
 </div>
 
+</B_espace_prive>
+<//B_espace_prive>
