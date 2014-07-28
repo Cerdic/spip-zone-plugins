@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Alerte d'urgence</nom>
+	<slogan>Bandeau d'alerte pour diffuser un message d'urgence</slogan>
+	<auteur>Cerdic</auteur>
+	<version>1.0.2</version>
+	<etat>stable</etat>
+	<licence>GNU/GPL</licence>
+	<icon>icon/alerte_urgence.png</icon>
+	<description>Affiche en tête de toutes les pages publiques un bandeau d'alerte pour diffuser un message d'urgence défini dans le fichier de langues.</description>
+	<prefix>alerte_urgence</prefix>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>alerte_urgence_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<categorie>edition</categorie>
+</plugin>
