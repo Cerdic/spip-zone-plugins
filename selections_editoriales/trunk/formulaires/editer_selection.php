@@ -99,6 +99,18 @@ function formulaires_editer_selection_verifier_dist($id_selection='new', $retour
 		$erreurs['identifiant'] = _T('selection:erreur_identifiant_existant', array('selection' => "<a href=\"$url_selection\">$titre_selection</a>"));
 	}
 	
+	// Vérifier que la limite est bien un entier
+	if (
+		$limite = _request('limite')
+		and (
+			!is_numeric($limite) // pas un nombre
+			or $valeur != intval($valeur) // pas un entier
+			or $valeur <= 0 // pas positif
+		)
+	) {
+		$erreurs['limite'] = _T('selection:erreur_limite_entier');
+	}
+	
 	return $erreurs;
 }
 

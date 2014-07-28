@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'erreur_identifiant_existant' => 'Cet identifiant est déjà utilisé par la sélection « @selection@ ».',
+	'erreur_limite_entier' => 'La limite doit être un nombre entier positif.',
 	
 	// I
 	'icone_creer_selection' => 'Créer une sélection éditoriale',
