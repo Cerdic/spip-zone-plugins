@@ -43,13 +43,14 @@ function selections_editoriales_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_selections");
 	sql_drop_table("spip_selections_liens");
 	sql_drop_table("spip_selections_contenus");
-
+	
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",              sql_in("objet", array('selection', 'selections_contenu')));
 	sql_delete("spip_versions_fragments",    sql_in("objet", array('selection', 'selections_contenu')));
 	sql_delete("spip_forum",                 sql_in("objet", array('selection', 'selections_contenu')));
-
+	
 	effacer_meta($nom_meta_base_version);
+	effacer_meta('selections_editoriales');
 }
 
 ?>
