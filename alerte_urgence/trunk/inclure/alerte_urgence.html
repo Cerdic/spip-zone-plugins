@@ -1,9 +1,10 @@
-<div id="alerte_urgence"><strong><:alerte:message_urgent|propre|PtoBR:></strong></div>
+#CACHE{0}
+[<div id="alerte_urgence" class="alerte_urgence">(#CONFIG{alerte_urgence/texte}|propre)</div>
 <style type="text/css">
 @-webkit-keyframes alerte_urgence-pulse { from, 66% { background: #f06; } 33%, to { background: gray; } }
 @-moz-keyframes alerte_urgence-pulse { from, 66% { background: #f06; } 33%, to { background: gray; } }
 @keyframes alerte_urgence-pulse { from, 66% { background: #f06; } 33%, to { background: gray; } }
-div#alerte_urgence {
+#alerte_urgence {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -24,8 +25,8 @@ div#alerte_urgence {
 	-webkit-animation: alerte_urgence-pulse 3s 1s forwards;
 	animation: alerte_urgence-pulse 3s 1s forwards;
 }
-div#alerte_urgence * { font-size: inherit; color: inherit; }
+#alerte_urgence * { font-size: inherit; color: inherit; }
 body { padding-top: 2.5em; }
 .spip-admin-bloc,
 .spip-admin-float { top: 2.5em; }
-</style>
+</style>]

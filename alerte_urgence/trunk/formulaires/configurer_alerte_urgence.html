@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<ul>
+			<li class="editer editer_texte">
+				<label for="champ_texte"><:alerte:configurer_texte_label:></label>
+				<textarea id="champ_texte" cols="40" rows="10" name="texte">#ENV{texte}</textarea>
+			</li>
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="alerte_urgence" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

@@ -4,7 +4,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'message_urgent'=>'Modifiez ce message directement dans le fichier alerte_urgence/lang/alerte_fr.php'
+	// C
+	'configurer_texte_label' => 'Alerte d’urgence à diffuser :',
+	'configurer_titre' => 'Configurer l’alerte d’urgence',
 );
 
 ?>
