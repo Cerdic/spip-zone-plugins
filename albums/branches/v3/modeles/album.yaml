@@ -1,8 +1,9 @@
 #
-# Modèle <album> par défaut : vue sous forme de vignettes
+# Modèle <album> par défaut : vue sous forme de vignettes.
 #
-# La syntaxe est compatible avec celle du plugin «insérer modèles»
-# Les saisies «modele», «id_modele» et «id_album» servent juste à assurer la compatibilité.
+# La syntaxe est compatible avec celle du plugin « insérer modèles », avec 2 paramètres en plus : « alias » et « description ».
+# inc-yaml/album-compat.yaml contient les saisies destinées à assurer la compatiblité avec « insérer modèles » : modele, id_modele, id_album.
+# inc-yaml/album-commun.yaml contient les saisies en commun : titre, descriptif, align, par.
 #
 nom: <:album:label_modele_nom_vignettes:>
 logo: 'prive/themes/spip/images/album-24.png'
@@ -10,39 +11,8 @@ icone_barre: 'album-vignettes.png'
 alias: <:album:label_modele_alias_vignettes:>
 description: <:album:label_modele_description_vignettes:>
 parametres:
-  -
-    saisie: 'hidden'
-    options:
-      nom: 'modele'
-      defaut: 'album'
-  -
-    saisie: 'hidden'
-    options:
-      nom: 'id_album'
-  -
-    saisie: 'selection_album'
-    options:
-      nom: 'id_modele'
-      label: <:album:label_modele_identifiant:>
-      afficher_si: '@id_album@==""'
-  -
-    saisie: 'case'
-    options:
-      nom: 'titre'
-      label_case: <:album:label_titre:>
-      valeur_oui: 'oui'
-  -
-    saisie: 'case'
-    options:
-      nom: 'descriptif'
-      label_case: <:album:label_descriptif:>
-      valeur_oui: 'oui'
-  -
-    saisie: 'case'
-    options:
-      nom: 'label'
-      label_case: <:album:label_modele_labels_images:>
-      valeur_oui: 'oui'
+  - 'inclure:inc-yaml/album-compat.yaml'
+  - 'inclure:inc-yaml/album-commun.yaml'
   -
     saisie: 'input'
     options:
@@ -70,26 +40,8 @@ parametres:
       label_case: <:album:label_modele_recadrer_images:>
       valeur_oui: 'oui'
   -
-    saisie: 'selection'
+    saisie: 'case'
     options:
-      nom: 'par'
-      label: <:album:label_modele_trier:>
-      cacher_option_intro: 'oui'
-      defaut: ''
-      datas:
-        '': <:album:label_modele_defaut:>
-        titre: <:album:label_modele_tri_titre:>
-        id_document: <:album:label_modele_tri_id:>
-        date: <:album:label_modele_tri_date:>
-  -
-    saisie: 'selection'
-    options:
-      nom: 'align'
-      label: <:album:label_modele_alignement:>
-      cacher_option_intro: 'oui'
-      defaut: ''
-      datas:
-        '': <:album:label_modele_defaut:>
-        left: <:album:label_modele_alignement_gauche:>
-        center: <:album:label_modele_alignement_centre:>
-        right: <:album:label_modele_alignement_droite:>
+      nom: 'label'
+      label_case: <:album:label_modele_labels_images:>
+      valeur_oui: 'oui'

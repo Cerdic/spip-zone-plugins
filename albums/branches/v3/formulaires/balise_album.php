@@ -4,12 +4,14 @@
  *
  * Ce formulaire permet de générer la balise d'un album en fonction du modèle et des options choisis.
  * Les modèles et leurs paramètres sont décris dans des fichiers yaml.
- * 
- * Les yaml sont compatibles avec ceux du plugin «Insérer modèles».
- * La saisie «id_modele» n'est là que pour assurer la compatibilité,
- * et la saisie «id_album» permet de restreindre son affichage au formulaire de «Insérer modèle».
- * On a un yaml par variante car les options sont trop différentes.
- * Il y a 2 paramètres supplémentaires : «alias» et «description».
+ * Ces yaml sont compatibles avec ceux du plugin « Insérer modèles », à quelques différences près :
+ *
+ * - On a un yaml par variante car les options sont trop différentes.
+ * - Il y a 2 paramètres supplémentaires pour décrire le modèle : `alias` et `description`.
+ * - Pour chaque saisie, l'option `config` permet d'aller chercher la valeur par défaut dans un meta.
+ *   Exemple : `config: 'nivoslider/width'`
+ * - La saisie `id_modele` n'est là que pour assurer la compatibilité avec « Insérer modèle »,
+ *   c'est pourquoi elle est cachée dans ce formulaire via la saisie `id_album` (afficher_si).
  *
  * @plugin     Albums
  * @copyright  2014
@@ -89,12 +91,17 @@ function formulaires_balise_album_charger_dist($id_album=0){
 					AND is_array($saisies = $infos['parametres'])
 				) {
 					$valeurs['_saisies'] = $saisies;
+					include_spip('inc/config');
+					// valeurs des saisies
 					foreach($saisies as $saisie=>$params) {
-						$param = $params['options']['nom'];
-						// le champ «id_modele» n'est là que pour compat avec le plugin «Insérer modèles»
-						// il est caché avec «afficher_si» quand le champ caché «id_album» est renseigné
-						$valeur = (in_array($param,array('id_modele','id_album'))) ? $id_album : '';
-						$valeurs[$param] = $valeur;
+						$nom = $params['options']['nom'];
+						$valeurs[$nom] = '';
+						// on récupère éventuellement la valeur par défaut dans un meta
+						if (isset($params['options']['config']))
+							$valeurs[$nom] = lire_config($params['options']['config']);
+						// on donne une valeur par défaut à « id_album » afin de cacher le champ « id_modele » (via afficher_si),
+						// qui n'est là que pour compatibilité avec le plugin « Insérer modèles »
+						$valeurs['id_album'] = $id_album;
 					}
 				}
 			}
