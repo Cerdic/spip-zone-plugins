@@ -41,8 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_captionBackcolor' => 'Couleur du fond',
 	'label_captionFrontcolor' => 'Couleur du texte',
 	'label_captionOpacity' => 'Transparence',
+	'label_manualAdvance' => 'Avancement manuel',
 	'label_id_defaut' => 'Article utilisé comme réservoir d\'images lors de l\'inclusion du modèle [(#MODELE{nivoslider})] sans paramètre <i>id_article</i> à partir d\'un squelette :',
 	'legend' => 'Légendes',
+	'label_modele_nom_nivoslider' => 'un album (carousel Nivoslider)',
 	// M
 	// N
 	// O
@@ -51,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	// S
 	// T
+	'titre_nivoslider' => 'Carrousel Nivoslider',
 	// U
 	// V
 	// W

@@ -1,0 +1,155 @@
+#
+# Modèle <album>, variante : carrousel Nivoslider
+#
+# La syntaxe est compatible avec celle du plugin « insérer modèles », avec 2 paramètres en plus : « alias » et « description ».
+# inc-yaml/album-compat.yaml contient les saisies destinées à assurer la compatiblité avec « insérer modèles » : modele, id_modele, id_album.
+#
+nom: <:nivoslider:label_modele_nom_nivoslider:>
+logo: 'images/nivoslider-24.png'
+icone_barre: 'album-nivoslider.png'
+alias: <:nivoslider:titre_nivoslider:>
+description: ''
+parametres:
+  - 'inclure:inc-yaml/album-compat.yaml'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'variante'
+      defaut: 'nivoslider'
+  -
+    saisie: 'case'
+    options:
+      nom: 'titre'
+      label_case: <:album:label_modele_titre:>
+      valeur_oui: 'oui'
+  -
+    saisie: 'input'
+    options:
+      nom: 'width'
+      label: <:nivoslider:label_width:>
+      config: 'nivoslider/width'
+      verifier:
+        type: 'entier'
+        options:
+          max: 9999
+  -
+    saisie: 'input'
+    options:
+      nom: 'height'
+      label: <:nivoslider:label_height:>
+      config: 'nivoslider/height'
+      verifier:
+        type: 'entier'
+        options:
+          max: 9999
+  -
+    saisie: 'selection'
+    options:
+      nom: 'effect'
+      label: <:nivoslider:label_effect:>
+      cacher_option_intro: 'oui'
+      config: 'nivoslider/effect'
+      datas:
+        '':  <:album:label_modele_defaut:>
+        random: 'random'
+        fold: 'fold'
+        fade: 'fade'
+        sliceDownRight: 'sliceDownRight'
+        sliceDownLeft: 'sliceDownLeft'
+        sliceUpRight: 'sliceUpRight'
+        sliceUpLeft: 'sliceUpLeft'
+        sliceUpDown: 'sliceUpDown'
+        sliceUpDownLeft: 'sliceUpDownLeft'
+        boxRandom: 'boxRandom'
+        boxRain: 'boxRain'
+        boxRainReverse: 'boxRainReverse'
+        boxRainGrow: 'boxRainGrow'
+        boxRainGrowReverse: 'boxRainGrowReverse'
+  -
+    saisie: 'input'
+    options:
+      nom: 'slices'
+      label: <:nivoslider:label_slices:>
+      config: 'nivoslider/slices'
+      verifier:
+        type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'animSpeed'
+      label: <:nivoslider:label_animSpeed:>
+      config: 'nivoslider/animSpeed'
+      verifier:
+        type: 'entier'
+  -
+    saisie: 'input'
+    options:
+      nom: 'pauseTime'
+      label: <:nivoslider:label_pauseTime:>
+      config: 'nivoslider/pauseTime'
+      verifier:
+        type: 'entier'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'imageAlign'
+      label: <:nivoslider:label_imageAlign:>
+      cacher_option_intro: 'oui'
+      defaut: ''
+      datas:
+        '': <:album:label_modele_defaut:>
+        left: <:album:label_modele_alignement_gauche:>
+        center: <:album:label_modele_alignement_centre:>
+        right: <:album:label_modele_alignement_droite:>
+  -
+    saisie: 'input'
+    options:
+      nom: 'imageBackcolor'
+      label: <:nivoslider:label_imageBackcolor:>
+      config: 'nivoslider/imageBackcolor'
+  -
+    saisie: 'case'
+    options:
+      nom: 'directionNav'
+      label_case: <:nivoslider:label_directionNav:>
+      config: 'nivoslider/directionNav'
+      valeur_oui: 'true'
+      valeur_non: 'false'
+  -
+    saisie: 'case'
+    options:
+      nom: 'directionNavHide'
+      label_case: <:nivoslider:label_directionNavHide:>
+      config: 'nivoslider/directionNavHide'
+      valeur_oui: 'true'
+      valeur_non: 'false'
+  -
+    saisie: 'case'
+    options:
+      nom: 'pauseOnHover'
+      label_case: <:nivoslider:label_pauseOnHover:>
+      config: 'nivoslider/pauseOnHover'
+      valeur_oui: 'true'
+      valeur_non: 'false'
+  -
+    saisie: 'case'
+    options:
+      nom: 'controlNavThumbs'
+      label_case: <:nivoslider:label_controlNavThumbs:>
+      config: 'nivoslider/controlNavThumbs'
+      valeur_oui: 'true'
+      valeur_non: 'false'
+  -
+    saisie: 'case'
+    options:
+      nom: 'controlNav'
+      label_case: <:nivoslider:label_controlNav:>
+      config: 'nivoslider/controlNav'
+      valeur_oui: 'true'
+      valeur_non: 'false'
+  -
+    saisie: 'input'
+    options:
+      nom: 'bottomMargin'
+      label: <:nivoslider:label_bottomMargin:>
+      config: 'nivoslider/bottomMargin'
