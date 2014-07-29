@@ -82,6 +82,7 @@ function albums_vider_tables($nom_meta_base_version) {
 
 	# Suppression meta
 	effacer_meta($nom_meta_base_version);
+	effacer_meta('albums');
 
 	# Retirer les albums de la liste des objets où téléverser des documents
 	if (in_array('spip_albums', $objets=@array_filter(explode(',',$GLOBALS['meta']['documents_objets'])))){
