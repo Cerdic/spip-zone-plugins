@@ -1,0 +1,18 @@
+#
+# Modèles <album> : saisies à inclure pour assurer la compatiblité avec « Insérer modèles ».
+#
+-
+  saisie: 'hidden'
+  options:
+    nom: 'modele'
+    defaut: 'album'
+-
+  saisie: 'hidden'
+  options:
+    nom: 'id_album'
+-
+  saisie: 'selection_album'
+  options:
+    nom: 'id_modele'
+    label: <:album:label_modele_identifiant:>
+    afficher_si: '@id_album@==""'
