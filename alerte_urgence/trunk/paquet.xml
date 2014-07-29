@@ -14,5 +14,6 @@
 	<auteur lien='http://www.ldd.fr'>Les Développements Durables</auteur>
 	<licence>GNU/GPL v3</licence>
 	
+	<pipeline nom="autoriser" inclure="alerte_urgence_autorisations.php" />
 	<pipeline nom="affichage_final" inclure="alerte_urgence_pipelines.php" />
 </paquet>
