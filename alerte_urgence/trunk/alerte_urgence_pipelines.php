@@ -6,11 +6,18 @@
  *
  */
 
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
 function alerte_urgence_affichage_final($flux) {
-	if ($GLOBALS['html']
-	  AND ($p=strpos($flux,'</body>'))!==false) {
-		$flux = substr_replace($flux, recuperer_fond('inclure/alerte_urgence'), $p, 0);
+	if (
+		$GLOBALS['html'] // si c'est bien du HTML
+		and (strpos($flux,'<body')) !== false // et qu'on a une balise <body>
+	) {
+		//$flux = substr_replace($flux, recuperer_fond('inclure/alerte_urgence'), $p, 0);
+		$flux = preg_replace('|<body[^>]*>|is', '$0'.recuperer_fond('inclure/alerte_urgence'), $flux);
 	}
 	return $flux;
 }
-?>
+
