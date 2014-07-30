@@ -11,13 +11,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// on passe par une globale faute de mieux
-$lock_file = '';
-
-// charger() : on crée le lock_file et on value la globale
+// charger() : on crée le lock_file et on envoie l'alea dans le formulaire via le champ hidden
 function doubleclick_formulaire_charger($flux) {
-	global $lock_file;
 	$lock_file = doubleclick_cree_lock();
+
+	if (isset($flux['data']['_hidden']) == false) $flux['data']['_hidden'] = '';
+	$flux['data']['_hidden'] .= "\n".'<input type="hidden" name="doubleclick_lock" value="'.$lock_file.'">'."\n";
 	
 	return $flux;
 }
@@ -37,19 +36,4 @@ function doubleclick_formulaire_verifier($flux) {
 	
 	return $flux;
 }
-
-/* formulaire_fond() :
- * si on trouve un form et un lock_file valué, on l'insère dans le formulaire
- */
-function doubleclick_formulaire_fond($flux) {
-	global $lock_file;
-	
-	if ($lock_file != '') {
-		// rechercher/remplacer les "<form *> en ajoutant des hidden
-		$hidden = '<input type="hidden" name="doubleclick_lock" value="'.$lock_file.'">';
-		$flux['data'] = preg_replace('/<form[^>]*>/is', "$0\n$hidden\n", $flux['data']);
-	}
-	return $flux;
-}
-
 ?>
