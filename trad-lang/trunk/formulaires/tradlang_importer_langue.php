@@ -22,18 +22,51 @@ function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$
 					$modifs = $undefined = array();
 					$memtrad = $GLOBALS['idx_lang'] = 'i18n_'.crc32($module).'_tmp';
 					include $dest;
+					
+					/**
+					 * Rcupration des statuts dans le fichier
+					 */
+					$contenu=file_get_contents($dest);
+					$contenu = str_replace("\t",'',$contenu);
+					$tab=preg_split("/\r\n|\n\r|;\n|\n\/\/|\(\n|\n\);\n|\'\,\n|\n[\s\t]*(\')|\/\/[\s\t][0-9A-Z]\n[\s\t](\')/", $contenu,'-1',PREG_SPLIT_NO_EMPTY);
+					$liste_trad=array();
+					reset($tab);
+					
+					while (list(,$ligne) = each($tab)){
+						$ligne = str_replace("\'",'',$ligne);
+						if (strlen($ligne)>0) {
+							if (preg_match("/\'(.*?)\'[\s\t]*=>[\s\t]*\'(.*?)\'[\s\t]*,{0,1}[\s\t]*(#.*)?/ms",$ligne,$matches)) {
+								if (isset($matches[1]) and isset($matches[3]) and strlen(trim($matches[3]))>0 ) {
+									list(,$comm)=explode("#",$matches[3]);
+									if(in_array(trim($comm),array('NEW','MODIF','RELIRE')))
+										$liste_trad[$matches[1]]=trim($comm);
+								}
+							}
+						}
+					}
+					reset($liste_trad);
+					$keys_liste_trad = array_keys($liste_trad);
+					
 					$str_lang = $GLOBALS[$memtrad];  // on a vu certains fichiers faire des betises et modifier idx_lang
 					// verifie si c'est un fichier langue
 					if (!is_array($str_lang))
 						$erreurs['fichier_langue'] = _T('tradlang:erreur_upload_fichier_php_array',array('fichier'=>$file['name']));
 					else{
-						$langues_base = sql_allfetsel('id,str','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang));
+						$langues_base = sql_allfetsel('id,str,statut','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang));
 						foreach($langues_base as $strings_id => $strings){
 							$str_lang[$strings['id']] = preg_replace(',^(<(MODIF|NEW|RELIRE|PLUS_UTILISE)>)+,US', '', $str_lang[$strings['id']]);
-							if((strlen($str_lang[$strings['id']]) > 0) && $strings['str'] != $str_lang[$strings['id']])
-								$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']]);
-							elseif(strlen($str_lang[$strings['id']]) == 0)
+							if((strlen($str_lang[$strings['id']]) > 0) && $strings['str'] != $str_lang[$strings['id']]){
+								$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']],'statut' => (in_array($strings['id'],$keys_liste_trad) ? $liste_trad[$strings['id']] : 'OK'));
+							}
+							elseif(strlen($str_lang[$strings['id']]) == 0){
 								$undefined[] = $strings['id'];
+							}
+							elseif(in_array($strings['id'],$keys_liste_trad) && ($strings['statut'] != $liste_trad[$strings['id']])){
+								$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']],'statut' => $liste_trad[$strings['id']]);
+							}
+							elseif(!in_array($strings['id'],$keys_liste_trad) && $strings['statut'] != 'OK'){
+								$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']],'statut' => 'OK');
+							}
 							unset($langues_base[$strings_id]);
 						}
 					}
@@ -88,7 +121,6 @@ function formulaires_tradlang_importer_langue_verifier_1_dist($id_tradlang_modul
 		include_spip('inc/joindre_document');
 		if (is_array($post)){
 			foreach ($post as $file) {
-			//UPLOAD_ERR_NO_FILE
 				if (!($file['error'] == 4)){
 					if (!in_array($file['name'],$fichiers_module)){
 						$fichier_module = $fichier_php.', '.$fichier_po;
@@ -108,16 +140,45 @@ function formulaires_tradlang_importer_langue_verifier_1_dist($id_tradlang_modul
 						if($file['name'] == $fichier_php){
 							$memtrad = $GLOBALS['idx_lang'] = 'i18n_'.crc32($module).'_tmp';
 							include $dest;
+							
+							/**
+							 * Rcupration des statuts dans le fichier
+							 */
+							$contenu=file_get_contents($dest);
+							$contenu = str_replace("\t",'',$contenu);
+							$tab=preg_split("/\r\n|\n\r|;\n|\n\/\/|\(\n|\n\);\n|\'\,\n|\n[\s\t]*(\')|\/\/[\s\t][0-9A-Z]\n[\s\t](\')/", $contenu,'-1',PREG_SPLIT_NO_EMPTY);
+							$liste_trad=array();
+							reset($tab);
+							
+							while (list(,$ligne) = each($tab)){
+								$ligne = str_replace("\'",'',$ligne);
+								if (strlen($ligne)>0) {
+									if (preg_match("/\'(.*?)\'[\s\t]*=>[\s\t]*\'(.*?)\'[\s\t]*,{0,1}[\s\t]*(#.*)?/ms",$ligne,$matches)) {
+										if (isset($matches[1]) and isset($matches[3]) and strlen(trim($matches[3]))>0 ) {
+											list(,$comm)=explode("#",$matches[3]);
+											if(in_array(trim($comm),array('NEW','MODIF','RELIRE')))
+												$liste_trad[$matches[1]]=trim($comm);
+										}
+									}
+								}
+							}
+							reset($liste_trad);
+							$keys_liste_trad = array_keys($liste_trad);
+							
 							$str_lang = $GLOBALS[$memtrad];
 							// verifie si c'est un fichier langue
 							if (!is_array($str_lang))
 								$erreurs['fichier_langue'] = _T('tradlang:erreur_upload_fichier_php_array',array('fichier'=>$file['name']));
 							else{
-								$langues_base = sql_allfetsel('id,str','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang));
+								$langues_base = sql_allfetsel('id,str,statut','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang));
 								$modifs = array();
 								foreach($langues_base as $strings_id => $strings){
 									$str_lang[$strings['id']] = tradlang_utf8(preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $str_lang[$strings['id']]));
 									if($strings['str'] != $str_lang[$strings['id']]){
+										$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']]);
+										break;
+									}
+									if(in_array($strings['id'],$keys_liste_trad) && ($strings['statut'] != $liste_trad[$strings['id']])){
 										$modifs[$strings['id']] = array('orig'=>$strings['str'],'new'=>$str_lang[$strings['id']]);
 										break;
 									}
@@ -213,6 +274,31 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 	if(file_exists($dest = $dir_lang.$fichier_php)){
 		$memtrad = $GLOBALS['idx_lang'] = 'i18n_'.crc32($module).'_tmp';
 		include $dest;
+		
+		/**
+		 * Rcupration des statuts dans le fichier
+		 */
+		$contenu=file_get_contents($dest);
+		$contenu = str_replace("\t",'',$contenu);
+		$tab=preg_split("/\r\n|\n\r|;\n|\n\/\/|\(\n|\n\);\n|\'\,\n|\n[\s\t]*(\')|\/\/[\s\t][0-9A-Z]\n[\s\t](\')/", $contenu,'-1',PREG_SPLIT_NO_EMPTY);
+		$liste_trad=array();
+		reset($tab);
+		
+		while (list(,$ligne) = each($tab)){
+			$ligne = str_replace("\'",'',$ligne);
+			if (strlen($ligne)>0) {
+				if (preg_match("/\'(.*?)\'[\s\t]*=>[\s\t]*\'(.*?)\'[\s\t]*,{0,1}[\s\t]*(#.*)?/ms",$ligne,$matches)) {
+					if (isset($matches[1]) and isset($matches[3]) and strlen(trim($matches[3]))>0 ) {
+						list(,$comm)=explode("#",$matches[3]);
+						if(in_array(trim($comm),array('NEW','MODIF','RELIRE')))
+							$liste_trad[$matches[1]]=trim($comm);
+					}
+				}
+			}
+		}
+		reset($liste_trad);
+		$keys_liste_trad = array_keys($liste_trad);
+		
 		$str_lang = $GLOBALS[$memtrad];  // on a vu certains fichiers faire des betises et modifier idx_lang
 
 		if (is_null($str_lang)) {
@@ -224,7 +310,7 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 		foreach($langues_base as $strings_id => $strings){
 			if(_request($strings['id']) == 'oui'){
 				$set_new = tradlang_utf8(preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $str_lang[$strings['id']]));
-				$set = array('str'=>$set_new,'statut'=>'OK');
+				$set = array('str'=>$set_new,'statut'=> (in_array($strings['id'],$keys_liste_trad) ? $liste_trad[$strings['id']] : 'OK'));
 				tradlang_set($strings['id_tradlang'],$set);
 				$count++;
 				unset($langues_base[$strings_id]);
