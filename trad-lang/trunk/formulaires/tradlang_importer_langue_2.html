@@ -21,7 +21,7 @@
 							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
 						</li>
 						</BOUCLE_tradlang_lang>
-						<BOUCLE_tradlang_langcible(TRADLANGS){id=#CLE}{lang=#ENV{lang_cible}}>
+						<BOUCLE_tradlang_langcible(TRADLANGS){id=#CLE}{id_tradlang_module}{lang=#ENV{lang_cible}}>
 						#SET{statut,#STATUT}
 						<li class="editer editer_valeur_originale">
 							<label><:tradlang:label_valeur_originale:></label>
