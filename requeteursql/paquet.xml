@@ -1,7 +1,7 @@
 <paquet
 	prefix="requeteursql"
 	categorie="divers"
-	version="1.1.0"
+	version="1.2.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/requeteursql-64.png"
@@ -25,8 +25,8 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/requeteursql.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/requeteursql.php" /> 
-	<pipeline nom="affiche_gauche" inclure="inc/pipeline_affiche_gauche.php" />
 	<pipeline nom="header_prive" inclure="requeteursql_pipelines.php" />
+	<pipeline nom="afficher_fiche_objet" inclure="inc/pipeline_affiche_fiche_objet.php" />
 
 	<menu nom="sql_requetes" titre="sql_requete:titre_sql_requetes" parent="menu_edition" icone="images/sql_requete-16.png" action="sql_requetes" /> 
 </paquet>

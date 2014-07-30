@@ -5,13 +5,13 @@
 	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
 </div>]
 
+<h3><:sql_requete:label_description:> : </h3>
 [<div class="champ contenu_description[ (#DESCRIPTION*|strlen|?{'',vide})]">
-	<label><:sql_requete:label_description:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{description} description'>(#DESCRIPTION)</span>
+	<span dir='#LANG_DIR' class='#EDIT{description} description'>(#DESCRIPTION|propre)</span>
 </div>]
 
+<h3><:sql_requete:label_requetesql:> : </h3>
 [<div class="champ contenu_requetesql[ (#REQUETESQL*|strlen|?{'',vide})]">
-	<label><:sql_requete:label_requetesql:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{requetesql} requetesql'>(#REQUETESQL**|coloration_code_color{sql, code})</span>
 </div>] 
 

@@ -1,0 +1,23 @@
+<div style="margin: 0 5px; overflow: auto;">
+    <table class="" border="1" cellpadding="2" cellspacing="0" width="100%">
+        <tbody>
+            <tr><th>&#35;</th>
+                <BOUCLE_rese1(DATA){source table, #ENV{res}}{cle=0}>
+                    <BOUCLE_rese2(DATA){source table, #VALEUR}>
+                        <th>#CLE</th>
+                    </BOUCLE_rese2>
+                </BOUCLE_rese1>
+            </tr>
+            <BOUCLE_resl(DATA){source table, #ENV{res}}{pagination 10}>
+                <tr><td>#CLE</td>
+                <BOUCLE_resc(DATA){source table, #VALEUR}>
+                        <td>#VALEUR</td>
+                </BOUCLE_resc>
+                </tr>
+
+            </BOUCLE_resl>
+        </tbody>
+    </table>
+</div>
+<p class="pagination">#PAGINATION</p>
+</B_resl>
