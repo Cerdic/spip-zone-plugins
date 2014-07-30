@@ -47,7 +47,7 @@ function gis_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_gis CHANGE lon lon DOUBLE NULL NULL'),
 	);
 	
-	// Augmenter la précision des champs de coordonnées
+	// Ajouter des INDEX sur les champs potentiellement utilisables dans des comparaisons/group by/etc.
 	$maj['2.0.4'] = array(
 		array('sql_alter', 'TABLE spip_gis ADD INDEX (lat)'),
 		array('sql_alter', 'TABLE spip_gis ADD INDEX (lon)'),
