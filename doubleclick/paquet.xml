@@ -1,7 +1,7 @@
 <paquet
 	prefix="doubleclick"
 	categorie="performance"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
 	compatibilite="[3.0.14;3.0.*]"
 	logo="prive/themes/spip/images/doubleclick-64.png"
@@ -21,7 +21,8 @@
 	
 	<pipeline nom="formulaire_charger" inclure="doubleclick_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="doubleclick_pipelines.php" />
-	<pipeline nom="affichage_final" inclure="doubleclick_pipelines.php" />
+	<pipeline nom="formulaire_fond" inclure="doubleclick_pipelines.php" />
+
 	<menu nom="configurer_doubleclick" titre="doubleclick:doubleclick_titre" parent="menu_configuration"  icone="images/doubleclick-16.png" />
 
 </paquet>

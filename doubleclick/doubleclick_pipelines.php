@@ -38,16 +38,16 @@ function doubleclick_formulaire_verifier($flux) {
 	return $flux;
 }
 
-/* affichage_final() :
+/* formulaire_fond() :
  * si on trouve un form et un lock_file valué, on l'insère dans le formulaire
  */
-function doubleclick_affichage_final($flux) {
+function doubleclick_formulaire_fond($flux) {
 	global $lock_file;
 	
 	if ($lock_file != '') {
 		// rechercher/remplacer les "<form *> en ajoutant des hidden
 		$hidden = '<input type="hidden" name="doubleclick_lock" value="'.$lock_file.'">';
-		$flux = preg_replace('/<form.*?>/', "$0\n$hidden\n", $flux);
+		$flux['data'] = preg_replace('/<form.*?>/', "$0\n$hidden\n", $flux['data']);
 	}
 	return $flux;
 }
