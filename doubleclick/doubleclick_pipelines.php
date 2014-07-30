@@ -47,7 +47,7 @@ function doubleclick_formulaire_fond($flux) {
 	if ($lock_file != '') {
 		// rechercher/remplacer les "<form *> en ajoutant des hidden
 		$hidden = '<input type="hidden" name="doubleclick_lock" value="'.$lock_file.'">';
-		$flux['data'] = preg_replace('/<form.*?>/', "$0\n$hidden\n", $flux['data']);
+		$flux['data'] = preg_replace('/<form[^>]*>/is', "$0\n$hidden\n", $flux['data']);
 	}
 	return $flux;
 }
