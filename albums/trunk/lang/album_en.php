@@ -71,10 +71,10 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'label_modele_defaut' => 'Default',
 	'label_modele_description_liste' => 'View documents as a list',
 	'label_modele_description_vignettes' => 'View images as thumbnails',
-	'label_modele_hauteur_images' => 'Max height',
+	'label_modele_hauteur_images' => 'Max height', # MODIF
 	'label_modele_identifiant' => 'Album id',
-	'label_modele_labels_images' => 'Label for each image',
-	'label_modele_largeur_images' => 'Max width',
+	'label_modele_labels_images' => 'Label for each image', # MODIF
+	'label_modele_largeur_images' => 'Max width', # MODIF
 	'label_modele_meta_dimensions' => 'Dimensions',
 	'label_modele_meta_extension' => 'Extension',
 	'label_modele_meta_taille' => 'Size',
