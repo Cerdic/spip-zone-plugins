@@ -1,0 +1,27 @@
+<paquet
+	prefix="doubleclick"
+	categorie="performance"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.14;3.0.*]"
+	logo="prive/themes/spip/images/doubleclick-64.png"
+	documentation=""
+>
+	<!--
+		Paquet genere le 2014-07-30 10:20:06
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Double Click</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://www.espci.fr'>Camille Sauvage</auteur>
+
+	<licence>GNU/GPL</licence>
+	
+	<pipeline nom="formulaire_charger" inclure="doubleclick_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="doubleclick_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="doubleclick_pipelines.php" />
+	<menu nom="configurer_doubleclick" titre="doubleclick:doubleclick_titre" parent="menu_configuration"  icone="images/doubleclick-16.png" />
+
+</paquet>
