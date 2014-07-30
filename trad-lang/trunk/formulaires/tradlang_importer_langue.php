@@ -71,6 +71,8 @@ function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$
 	}
 	if(count($undefined) > 0)
 		$valeurs['message_erreur'] = singulier_ou_pluriel(count($undefined),'tradlang:item_non_defini_fichier','tradlang:item_non_defini_fichier_nb');
+		
+	$valeurs['id_tradlang_module'] = $id_tradlang_module;
 	return $valeurs;
 }
 

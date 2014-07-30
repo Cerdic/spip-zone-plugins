@@ -15,7 +15,7 @@
 				<li class="fieldset">
 					<fieldset>
 						<legend>##COMPTEUR_BOUCLE <:tradlang:label_valeur_id:> #CLE</legend>
-						<BOUCLE_tradlang_lang(TRADLANGS){id=#CLE}{lang=#ENV{lang_orig}}>
+						<BOUCLE_tradlang_lang(TRADLANGS){id=#CLE}{id_tradlang_module}{lang=#ENV{lang_orig}}>
 						<li class="editer editer_version_originale_choisie">
 							<label><:tradlang:label_version_originale_choisie{lang=#LANG}:></label>
 							<textarea readonly="readonly" class="readonly" style="text-align:#LANG_LEFT;" dir="#LANG_DIR">[(#STR**|tradlang_utf8|entites_html)]</textarea>
