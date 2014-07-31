@@ -40,6 +40,7 @@
 	<pipeline nom="post_edition" inclure="diogene_pipelines.php" />
 	<pipeline nom="autoriser" inclure="diogene_autoriser.php" />
 	<pipeline nom="ajouter_menus" inclure="diogene_pipelines.php" />
+	<pipeline nom="jqueryui_plugins" inclure="diogene_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.1;[" />
 	<necessite nom="images" />

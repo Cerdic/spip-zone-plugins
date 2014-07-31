@@ -16,6 +16,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * Insertion dans le pipeline jqueryui_plugins (jQuery UI)
+ * On ajoute le datepicker pour être sûr de bénéficier des styles pour le datepicker
+ * 
+ * @param $plugins array
+ * 		La liste des plugins jqueryui à insérer
+ * @return $plugins array
+ * 		La liste des plugins complétée
+ */
+function diogene_jqueryui_plugins($plugins){
+	$plugins[] = 'jquery.ui.datepicker';
+	return $plugins;
+}
+/**
  * Insertion dans le pipeline insert_head_css (SPIP)
  * 
  * Compromis entre faire deux hits pour de petits fichiers sur la page d'upload
@@ -28,9 +41,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function diogene_insert_head_css($flux){
 	$diogene_css = direction_css(find_in_path('css/diogene.css'), lang_dir());
-	$datepicker_css = direction_css(find_in_path('css/jquery.ui.datepicker.css'), lang_dir());
-	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$diogene_css' />\n"
-			 . "<link rel='stylesheet' type='text/css' media='all' href='$datepicker_css' />\n";
+	$flux .= "<link rel='stylesheet' type='text/css' media='all' href='$diogene_css' />\n";
 	return $flux;
 }
 /**
