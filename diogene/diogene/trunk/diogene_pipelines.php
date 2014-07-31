@@ -168,7 +168,6 @@ function diogene_editer_contenu_objet($flux){
 					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
 				$flux['data'] = preg_replace(",(<div [^>]*class=[\"'][^>]*formulaire_editer_$type),Uims",$ajouts."\\1",$flux['data'],1);
 			}
-
 			/**
 			 * On ajoute le formulaire de langue sur les articles
 			 */
@@ -253,6 +252,9 @@ function diogene_editer_contenu_objet($flux){
 					$saisie .= trim(recuperer_fond('formulaires/selecteur_statut_objet',$contexte));
 				}
 				$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims',"\\1<ul>".$saisie."</ul>\\2",$flux['data'],1);
+			}
+			if(($champs_sup = unserialize($diogene['champs_ajoutes'])) && is_array($champs_sup) && in_array('logo',$champs_sup) && !preg_match(',<form.*enctype=.*>,Uims',$flux['data'],$regs)){
+				$flux['data'] = preg_replace(',<(form.*[^>])>,Uims','<\\1 enctype=\'multipart/form-data\'>',$flux['data'],1);
 			}
 		}
 	}
@@ -539,7 +541,7 @@ function diogene_pre_edition($flux){
 	}
 	
 	if($flux['args']['table'] == 'spip_diogenes'){
-		$champs = pipeline('diogene_champs_pre_edition',array('polyhier_desactiver','cextras_enleves','cacher_heure','workflow_simplifie'));
+		$champs = pipeline('diogene_champs_pre_edition',array('polyhier_desactiver','cextras_enleves','cacher_heure','workflow_simplifie','explications_logo'));
 		if(isset($flux['data']['options_complements']))
 			$options_complements = is_array(unserialize($flux['data']['options_complements'])) ? unserialize($flux['data']['options_complements']) : array();
 
@@ -602,6 +604,7 @@ function diogene_post_edition($flux){
  * 		Le tableau modifié
  */
 function diogene_diogene_objets($flux){
+	$flux['article']['champs_sup']['logo'] = _T('ecrire:logo_article');
 	$flux['article']['champs_sup']['date'] = _T('diogene:champ_date_publication');
 	if($GLOBALS['meta']['articles_redac'] !== 'non')
 		$flux['article']['champs_sup']['date_redac'] = _T('diogene:champ_date_publication_anterieure');
@@ -612,11 +615,15 @@ function diogene_diogene_objets($flux){
 		$flux['page']['type_orig'] = 'article';
 		$flux['page']['diogene_max'] = 1;
 		$flux['page']['ss_rubrique'] = true;
+		$flux['article']['champs_sup']['logo'] = _T('ecrire:logo_article');
 	}
-	
+
 	$flux['site'] = array();
-	
+	$flux['site']['champs_sup']['logo'] = _T('ecrire:logo_site');
+
 	$flux['rubrique'] = array();
+	$flux['rubrique']['champs_sup']['logo'] = _T('ecrire:logo_rubrique');
+	
 	return $flux;
 }
 
@@ -653,6 +660,7 @@ function diogene_diogene_avant_formulaire($flux){
  */
 function diogene_diogene_ajouter_saisies($flux){
 	if(is_array(unserialize($flux['args']['champs_ajoutes']))){
+		$flux['args']['contexte']['objet'] = $flux['args']['type'];
 		if(in_array('date_redac',unserialize($flux['args']['champs_ajoutes'])) && in_array('date',unserialize($flux['args']['champs_ajoutes'])) && ($GLOBALS['meta']['articles_redac'] != 'non')){
 			$dates_ajoutees = 'date_full';
 			if(!$flux['args']['contexte']['date'])
@@ -684,6 +692,18 @@ function diogene_diogene_ajouter_saisies($flux){
 			}
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_forums',$flux['args']['contexte']);
 		}
+		if(in_array('logo',unserialize($flux['args']['champs_ajoutes']))){
+			$flux['args']['contexte']['explications_logo'] = $flux['args']['options_complements']['explications_logo'];
+			$chercher_logo = charger_fonction('chercher_logo', 'inc');
+			$etats = array('on');
+			foreach($etats as $etat) {
+				$logo_envoi = $chercher_logo($flux['args']['contexte']['id_objet'], id_table_objet($flux['args']['contexte']['objet']), $etat);
+				if (is_array($logo_envoi) && count($logo_envoi) > 0){
+					$flux['args']['contexte']['logo_'.$etat] = $logo_envoi[0];
+				}
+			}
+			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_logo',$flux['args']['contexte']);
+		}
 	}
 	return $flux;
 }
@@ -701,20 +721,34 @@ function diogene_diogene_ajouter_saisies($flux){
  * 		Le contexte modifié
  */
 function diogene_diogene_verifier($flux){
-	$erreurs = $flux['args']['erreurs'];
 	if(_request('date_orig') || _request('date_redac_orig')){
 		/**
 		 * Ce fichier se trouve dans plugins-dist/organiseur/inc/date_gestion.php
 		 * Mériterait une réincorporation dans SPIP?
 		 */
 		include_spip('inc/date_gestion');
-		if(!$erreurs['date'] && ($date = _request('date_orig')))
-			$date_orig = verifier_corriger_date_saisie('orig', 'oui', $erreurs);
-		if(!$erreurs['date_redac'] && ($date = _request('date_redac_orig')))
-			$date_redac_orig = verifier_corriger_date_saisie('redac_orig', 'oui', $erreurs);
+		if(!$flux['args']['erreurs']['date'] && ($date = _request('date_orig')))
+			$date_orig = verifier_corriger_date_saisie('orig', 'oui', $flux['args']['erreurs']);
+		if(!$flux['args']['erreurs']['date_redac'] && ($date = _request('date_redac_orig')))
+			$date_redac_orig = verifier_corriger_date_saisie('redac_orig', 'oui', $flux['args']['erreurs']);
 	}
-	if(!$erreurs['forums'] && ($forums = _request('forums')) && !in_array($forums,array('pos','pri','abo','non')))
-		$erreurs['forums'] = _T('diogene:erreur_forums');
+	if(!$flux['args']['erreurs']['forums'] && ($forums = _request('forums')) && !in_array($forums,array('pos','pri','abo','non')))
+		$flux['data']['forums'] = _T('diogene:erreur_forums');
+
+	if(($id_diogene = intval(_request('id_diogene'))) && $id_diogene > 0){
+		$champs_ajoutes = unserialize(sql_getfetsel("champs_ajoutes","spip_diogenes","id_diogene=".intval($id_diogene)));
+		if (is_array($champs_ajoutes) && in_array('logo',$champs_ajoutes)){
+			include_spip('formulaires/editer_logo');
+			$sources = formulaire_editer_logo_get_sources();
+			foreach($sources as $etat=>$file) {
+				// seulement si une reception correcte a eu lieu
+				if ($file AND $file['error'] == 0) {
+					if (!in_array(strtolower(pathinfo($file['name'], PATHINFO_EXTENSION)),array('jpg','png','gif','jpeg')))
+						$flux['data']['logo'] = _L('Extension non reconnue');
+				}
+			}
+		}
+	}
 	return $flux;
 }
 
@@ -749,6 +783,51 @@ function diogene_diogene_traiter($flux){
 			ecrire_meta('accepter_visiteurs', 'oui');
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='id_forum/$id_objet'");
+		}
+	}
+
+	// effectuer la suppression si demandee d'un logo
+	if (_request('supprimer_logo_on')){
+		$objet = $flux['args']['type'];
+		$_id_objet = id_table_objet($objet);
+		
+		include_spip('inc/chercher_logo');
+		include_spip('inc/flock');
+		$type = type_du_logo($_id_objet);
+		$chercher_logo = charger_fonction('chercher_logo','inc');
+		
+		$logo = $chercher_logo($flux['args']['id_objet'], $_id_objet, 'on');
+		if ($logo)
+			spip_unlink($logo[0]);
+		set_request('logo_up',' ');
+	}
+	if (!$_FILES)
+		$_FILES = $GLOBALS['HTTP_POST_FILES'];
+
+	if (is_array($_FILES) && isset($_FILES['logo_on'])){
+		include_spip('formulaire/editer_logo');
+
+		$objet = $flux['args']['type'];
+		$_id_objet = id_table_objet($objet);
+		
+		// supprimer l'ancien logo puis copier le nouveau
+		include_spip('inc/chercher_logo');
+		include_spip('inc/flock');
+		$type = type_du_logo($_id_objet);
+		$chercher_logo = charger_fonction('chercher_logo','inc');
+
+		include_spip('action/iconifier');
+		$ajouter_image = charger_fonction('spip_image_ajouter','action');
+		$sources = formulaire_editer_logo_get_sources();
+		foreach($sources as $etat=>$file) {
+			if ($file and $file['error']==0) {
+				$logo = $chercher_logo($flux['args']['id_objet'], $_id_objet, 'on');
+				if ($logo)
+					spip_unlink($logo[0]);
+				if ($err = $ajouter_image($type.$etat.$id_objet," ",$file,true))
+					$flux['message_erreur'] = $err;
+				set_request('logo_up',' ');
+			}
 		}
 	}
 	return $flux;

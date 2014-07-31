@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_change_statut_normal' => 'Modifier le statut de votre article',
 	'label_change_statut_normal_site' => 'Modifier le statut de ce site',
 	'label_description' => 'Description',
+	'label_explications_logo' => 'Explications du logo',
 	'label_limiter_rubriques' => 'Limiter aux rubriques',
 	'label_limiter_secteur' => 'Limiter au secteur',
 	'label_logo_site' => 'Logo du site',
