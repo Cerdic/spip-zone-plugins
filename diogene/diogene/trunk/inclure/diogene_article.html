@@ -37,7 +37,12 @@
 					#FORMULAIRE_EDITER_ARTICLE{#ID_ARTICLE,#ID_RUBRIQUE}
 				</div>
 			</BOUCLE_article_env>
-			<BOUCLE_article_en_cours_de_redac(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_secteur=#_diogene:ID_SECTEUR}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
+			<BOUCLE_compteurs_articles_auteur(ARTICLES){id_auteur=#SESSION{id_auteur}}{id_secteur=#_diogene:ID_SECTEUR}{!statut = 'poubelle'}{!statut = 'publie'}> </BOUCLE_compteurs_articles_auteur>
+			#SET{compteur_actuel,#TOTAL_BOUCLE}
+			</B_compteurs_articles_auteur>
+			#SET{compteur_actuel,0}
+			<//B_compteurs_articles_auteur>
+			<BOUCLE_article_en_cours_de_redac(ARTICLES){si #SESSION{statut}|!={0minirezo}|et{#NOMBRE_ATTENTE|!={0}}|et{#GET{compteur_actuel}|>={#NOMBRE_ATTENTE}}|oui}{id_auteur=#SESSION{id_auteur}}{id_secteur=#_diogene:ID_SECTEUR}{!statut = 'poubelle'}{!statut = 'publie'}{0,1}>
 				[(#SET{titre,[(#TITRE|sinon{<:info_sans_titre:>})]})]
 				<h2 class="h2"><:diogene:titre_modification_article{titre=#GET{titre}}:></h2>
 				<p>

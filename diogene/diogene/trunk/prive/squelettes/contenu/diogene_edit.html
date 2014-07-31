@@ -13,14 +13,15 @@
 		<h1>
 			<BOUCLE_diogene(DIOGENES){id_diogene}>
 			#TITRE
-			#SET{objet,#OBJET}
+			[(#SET{objet,#OBJET})]
 			</BOUCLE_diogene>
-			#SET{objet,#ENV{objet,article}}
+			</B_diogene>
+			[(#SET{objet,#ENV{objet,article}})]
 			[(#ENV{nouveau}|=={oui}|?{<:diogene:formulaire_nouveau:>,#ENV{id_diogene}})]
 			<//B_diogene>
 		</h1>
 	</div>
-	#SET{redirect,#ENV{redirect,#ID_OBJET|generer_url_entite{#OBJET}}}
+
 [(#ENV{retourajax,''}|oui)
 	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
 	<div class="ajax">
