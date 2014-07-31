@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // N
     'not_exist' => 'Cette requête n\'existe pas',
 
+    // P
+    'previsu' => 'Prévisualisation des 100 premiers enregistrements de la requête',
+
     // R
     'retirer_lien_sql_requete' => 'Retirer cette requête',
     'retirer_tous_liens_sql_requetes' => 'Retirer toutes les requêtes',

@@ -14,7 +14,7 @@ function requeteursql_afficher_fiche_objet($flux){
         spip_log($sql);
         if($res = sql_fetch($result)) {
             $sql = $res['requetesql'];
-            if($res = sql_query("$sql")) {
+            if($res = sql_query("$sql LIMIT 0,100")) {
                 $aRes = sql_fetch_all($res);
                 spip_log($aRes);
                 $flux['data'] .= recuperer_fond('prive/squelettes/fiche_objet/sql_requete',array('res'=>$aRes),array('ajax'));
