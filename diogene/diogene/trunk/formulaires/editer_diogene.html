@@ -2,7 +2,7 @@
 <div class="formulaire_spip formulaire_editer formulaire_editer_diogene formulaire_editer_diogene-#ENV{id_diogene,nouveau}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[(#ENV{editable}|oui)
+	<BOUCLE_si_editable(CONDITION){si #ENV{editable}|oui}>
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
@@ -28,14 +28,30 @@
 				label=<:diogene:label_description:>})]
 				
 			[(#SET{pipeline,#PIPELINE{diogene_objets,#ARRAY{args,#ARRAY,data,#ARRAY}}})]
-			[(#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non)
+			
+			[(#REM)
+				L'objet peut être associé à une rubrique?
+			]
+			<BOUCLE_si_pas_ss_rubrique(CONDITION){si #GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non}>
 			[(#SAISIE{secteur,id_secteur,
 				cacher_option_intro=oui,
-				label=<:diogene:label_limiter_secteur:>})]]
+				label=<:diogene:label_limiter_secteur:>})]
 			
-			[(#SAISIE{selecteur_rubrique,rubrique_defaut,
-				label=<:diogene:label_rubrique_par_defaut:>,
-				multiple=non})]
+			[(#REM)
+			
+				On ne permet de définir la rubrique par défaut que 
+				- si le secteur est configuré et existant
+				- si il existe des sous-rubriques dans le secteur
+			]
+			<BOUCLE_secteur(RUBRIQUES){id_secteur}>
+				<BOUCLE_rubriques_secteur(RUBRIQUES){id_parent}{tout}>
+				[(#SAISIE{selecteur_rubrique,rubrique_defaut,
+					label=<:diogene:label_rubrique_par_defaut:>,
+					multiple=non})]
+				</BOUCLE_rubriques_secteur>
+			</BOUCLE_secteur>
+			
+			</BOUCLE_si_pas_ss_rubrique>
 
 			[(#ENV{objet}|in_array{#LISTE{article,emballe_media}}|ou{#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{objet_principal}|=={article}|oui}|oui)
 			#SET{objet_defaut,#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{objet_principal}}
@@ -82,6 +98,11 @@
 							label_case=<:diogene:label_cacher_heure_case:>})]
 					]
 
+					[(#CHAMPS_AJOUTES|is_array|non|et{#CHAMPS_AJOUTES|unserialize|find{logo}})
+						[(#SAISIE{input,explications_logo,
+							label=<:diogene:label_explications_logo:>})]
+					]
+
 					[(#PLUGIN{polyhier}|et{#GET{pipeline}|table_valeur{#ENV{objet,article}}|table_valeur{ss_rubrique}|non}|oui)
 						[(#SAISIE{case, polyhier_desactiver,
 							label=<:diogene:label_polyhier:>,
@@ -125,5 +146,6 @@
 			<input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' />
 		</p>
 	</div>
-	</form>]
+	</form>
+	</BOUCLE_si_editable>
 </div>
