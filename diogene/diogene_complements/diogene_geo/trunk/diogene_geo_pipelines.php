@@ -46,14 +46,15 @@ function diogene_geo_diogene_ajouter_saisies($flux){
 		 * Afficher le select si on veut forcer le point existant
 		 */
 		if(isset($flux['args']['options_complements']['geo_forcer_existant']) && $flux['args']['options_complements']['geo_forcer_existant'] == 'on'){
+			if(intval(_request('id_gis')) > 0)
+				$flux['args']['contexte']['id_gis'] = _request('id_gis');
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_geo_forcer',$flux['args']['contexte']);
 		}
 		/**
 		 * Afficher une carte dans les autres cas
 		 */
-		else{
+		else
 			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_geo',$flux['args']['contexte']);
-		}
 	}
 	return $flux;
 }
