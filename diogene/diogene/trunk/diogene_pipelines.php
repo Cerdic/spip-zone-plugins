@@ -143,20 +143,32 @@ function diogene_editer_contenu_objet($flux){
 				}
 			}
 
-			/**
-			 * On ajoute ce que l'on souhaite ajouter avant le formulaire
-			 */
 			if($type=='page'){
 				$type='article';
 				$args['type'] = 'article';
 				$old_type = 'page';
 			}
+			
+			/**
+			 * On ajoute ce que l'on souhaite ajouter avant le formulaire
+			 * 
+			 * Pour cela, on utilise un pipeline diogene_avant_formulaire utilisable à partir d'autres plugins
+			 * 
+			 * Par défaut :
+			 * - Si on trouve un fichier javascript/$type.js ($type étant le type d'objet : article, rubrique...), on le charge en amont
+			 * - Si on trouve un fichier javascript/$diogene['type'].js ($diogene['type'] étant l'identifiant du diogene), on le charge en amont
+			 */
 			if (preg_match(",<div [^>]*class=[\"'][^>]*formulaire_editer_($type),Uims",$flux['data'],$regs)){
 				$args['champs_ajoutes'] = $diogene['champs_ajoutes'];
 				$args['diogene_identifiant'] = $diogene['type'];
 				$ajouts = pipeline('diogene_avant_formulaire',array('args'=>$args,'data'=>''));
+				if($js = find_in_path('javascript/'.$type.'.js'))
+					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
+				elseif($js = find_in_path('javascript/'.$diogene['type'].'.js'))
+					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
 				$flux['data'] = preg_replace(",(<div [^>]*class=[\"'][^>]*formulaire_editer_$type),Uims",$ajouts."\\1",$flux['data'],1);
 			}
+
 			/**
 			 * On ajoute le formulaire de langue sur les articles
 			 */
