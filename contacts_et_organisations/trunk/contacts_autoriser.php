@@ -40,6 +40,27 @@ function autoriser_organisation_modifier_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
+ * Autorisation de suppression d'une organisation
+ *
+ * Seuls les admins et l'auteur lié s'il existe peuvent supprimer l'organisation.
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_organisation_supprimer_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('configurer')
+		or (
+			$id_auteur = sql_getfetsel('id_auteur', 'spip_organisations', 'id_organisation = '.intval($id))
+			and $id_auteur > 0
+			and $id_auteur == $qui['id_auteur']
+		);
+}
+
+/**
  * Autorisation de modifier un contact
  *
  * Seuls les admins et l'auteur lié s'il existe peuvent modifier le contact
@@ -61,7 +82,7 @@ function autoriser_contact_modifier_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
- * Autorisation de supprimer un contact
+ * Autorisation de suppression un contact
  *
  * Seuls les admins et l'auteur lié s'il existe peuvent supprimer le contact
  *

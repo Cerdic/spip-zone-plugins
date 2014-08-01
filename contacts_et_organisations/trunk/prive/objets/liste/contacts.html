@@ -41,6 +41,7 @@
 			<th class="nom">[(#TRI{nom,<:contacts:label_prenom_nom:>,ajax})]</th>
 			<th class="organisation"><:contacts:label_organisation:></th>
 			<th class='auteur'><:contacts:label_auteur_associe:></th>
+			<th class='id' scope='col'>[(#TRI{id_contact,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -62,6 +63,10 @@
 				<a href="(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})">#NOM</a>
 			</BOUCLE_auteur></B_auteur>-<//B_auteur>
 			</td>
+			<td class='id'>[(#AUTORISER{modifier,contact,#ID_CONTACT}|?{
+				<a href="[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT})]">#ID_CONTACT</a>,
+				#ID_CONTACT
+			})]</td>
 		</tr>
 	</BOUCLE_liste_contacts>
 	</tbody>

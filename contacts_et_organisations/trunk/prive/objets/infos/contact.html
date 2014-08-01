@@ -6,12 +6,12 @@
 	<BOUCLE_auteur_lie (AUTEURS){id_auteur}{tout}{statut==.*}{si #ID_AUTEUR}>
 	<div class="numero">
 		<div class='num'>
-		<:contacts:contact_associe_a_auteur_numero:>
-		<p><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#ID_AUTEUR</a></p>
-		[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#NOM)</a>]
+			<:contacts:contact_associe_a_auteur_numero:>
+			<p><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#ID_AUTEUR</a></p>
+			[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#NOM)</a>]
 		</div>
 		<div class='logo'>
-		[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#LOGO_AUTEUR|image_reduire{40})</a>]
+			[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#LOGO_AUTEUR|image_reduire{40})</a>]
 		</div>
 
 		[(#AUTORISER{modifier, contact, #ID_CONTACT})
@@ -60,7 +60,7 @@
 	[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{contact-del-24.png}
 		|balise_img{<:contacts:supprimer_contact:>}|inserer_attribut{class,co_middle}
 		|concat{' ',<:contacts:supprimer_contact:>})],
-		[(#URL_ACTION_AUTEUR{supprimer_contact,#ID_CONTACT,#URL_ECRIRE{contacts}})],
+		[(#URL_ACTION_AUTEUR{supprimer_contact,contact/#ID_CONTACT,#URL_ECRIRE{contacts}})],
 		ajax icone s24 horizontale danger contact-del-24,<:contacts:confirmer_supprimer_contact:>\n\n<:contacts:explication_supprimer_contact:>})]
 ]
 

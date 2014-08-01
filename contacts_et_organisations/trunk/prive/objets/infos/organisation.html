@@ -28,18 +28,15 @@
 	[(#STATUT|=={5poubelle}|oui)
 		<div class='notice'>
 			<p><:contacts:auteur_associe_est_a_la_poubelle:></p>
-
 			[(#CONFIG{contacts_et_organisations/supprimer_reciproquement_auteurs_et_contacts}|oui)
 				<p><:contacts:suppression_automatique_de_organisation_prochainement:></p>
 			]
 		</div>
 	]
-
 	</BOUCLE_auteur_lie>
 		[(#ID_AUTEUR|oui)
 			<div class='notice'>
 				<p><:contacts:auteur_associe_inexistant:></p>
-
 				[(#CONFIG{contacts_et_organisations/supprimer_reciproquement_auteurs_et_contacts}|oui)
 					<p><:contacts:suppression_automatique_de_organisation_prochainement:></p>
 				]
@@ -51,12 +48,19 @@
 </div>
 
 [(#REM)
-
 	Bouton voir en ligne
-
 ]
 [(#VAL{redirect}
 	|generer_url_action{type=organisation&id=#ID_ORGANISATION}
 	|parametre_url{var_mode,calcul}
 	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+[(#AUTORISER{supprimer, organisation, #ID_ORGANISATION}|oui)
+	[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{organisation-del-24.png}
+		|balise_img{<:contacts:supprimer_organisation:>}|inserer_attribut{class,co_middle}
+		|concat{' ',<:contacts:supprimer_organisation:>})],
+		[(#URL_ACTION_AUTEUR{supprimer_contact,organisation/#ID_ORGANISATION,#URL_ECRIRE{organisations}})],
+		ajax icone s24 horizontale danger organisation-del-24,<:contacts:confirmer_supprimer_organisation:>\n\n<:contacts:explication_supprimer_organisation:>})]
+]
+
+
 </BOUCLE_orga>

@@ -35,7 +35,7 @@ function action_supprimer_contact_dist($arg=null) {
 	// (et de l'adresse avec s'il n'existe plus de liaison ensuite)
 	elseif ($arg[0] == 'organisation' and intval($arg[1])) {
 		action_supprimer_organisation_post($arg[1]);
-	}	
+	}
 
 	else {
 		spip_log("action_supprimer_contact_dist $arg pas compris");

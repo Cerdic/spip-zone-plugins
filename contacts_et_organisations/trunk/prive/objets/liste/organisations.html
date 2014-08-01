@@ -1,6 +1,7 @@
 [(#REM) Tableau complet des organisations, affiché sur la page ?exec=organisations ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
+	id_organisation,1
 	id_auteur,1
 }})
 ]<B_liste_orga>
@@ -38,9 +39,9 @@
 	<thead>
 		<tr class='first_row'>
 			<th class="picto"></th>
-			<th class='nom'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
             <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
-			<th class='action'></th>
+			<th class='id' scope='col'>[(#TRI{id_organisation,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -58,14 +59,12 @@
 			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
 			<td class='nb_contacts'>
-				[(#COMPTEUR_CONTACTS|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts})]
+				[(#COMPTEUR_CONTACTS|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}|sinon{-})]
 			</td>
-			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
-				[(#BOUTON_ACTION{
-					[(#CHEMIN_IMAGE{organisation-del-16.png}|balise_img{<:contacts:supprimer_organisation:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_contact,[organisation/(#ID_ORGANISATION)],[(#ENV{redirect,#SELF})]})],
-					ajax,<:contacts:confirmer_supprimer_organisation:>})]
-			]</td>
+			<td class='id'>[(#AUTORISER{modifier,organisation,#ID_ORGANISATION}|?{
+				<a href="[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION})]">#ID_ORGANISATION</a>,
+				#ID_ORGANISATION
+			})]</td>
 		</tr>
 	</BOUCLE_liste_orga>
 	</tbody>
