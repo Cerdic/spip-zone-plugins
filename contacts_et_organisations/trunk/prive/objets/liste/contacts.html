@@ -40,7 +40,7 @@
 			<th class="picto"></th>
 			<th class="nom">[(#TRI{nom,<:contacts:label_prenom_nom:>,ajax})]</th>
 			<th class="organisation"><:contacts:label_organisation:></th>
-			<th class='action'></th>
+			<th class='auteur'><:contacts:label_auteur_associe:></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -55,14 +55,13 @@
 				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
 			<//BOUCLE_lien_contact>
 			<td class="picto"><a href="[(#GET{url})]">#INCLURE{fond=logo/contact, id_contact}</a></td>
-			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
-			<td class='organisation'>#ORGANISATIONS</td>
-			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
-				[(#BOUTON_ACTION{
-					[(#CHEMIN_IMAGE{contact-del-16.png}|balise_img{<:contacts:supprimer_contact:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_contact,[contact/(#ID_CONTACT)],[(#ENV{redirect,#SELF})]})],
-					ajax,<:contacts:confirmer_supprimer_contact:>})]
-			]</td>
+			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
+			<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
+			<td class='auteur'>
+			<BOUCLE_auteur (AUTEURS) {id_auteur}>
+				<a href="(#URL_ECRIRE{auteur}|parametre_url{id_auteur,#ID_AUTEUR})">#NOM</a>
+			</BOUCLE_auteur></B_auteur>-<//B_auteur>
+			</td>
 		</tr>
 	</BOUCLE_liste_contacts>
 	</tbody>

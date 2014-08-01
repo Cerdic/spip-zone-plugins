@@ -13,6 +13,25 @@
 #CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
+/* #SQUELETTE */
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+*/
+
 
 img.co_middle {vertical-align:middle;}
 
@@ -63,3 +82,43 @@ em.crayon-contactliaison { cursor: pointer; border:0; }
 }
 
 .changer_selection_organisation {float:right;}
+
+body.contact #contenu .fiche_objet #wysiwyg .champ,
+body.organisation #contenu .fiche_objet #wysiwyg .champ {
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 0.5em;
+    border-top: 1px solid #GET{claire};
+}
+body.contact #contenu .fiche_objet #wysiwyg .champ .label.visible,
+body.organisation #contenu .fiche_objet #wysiwyg .champ .label.visible {
+    display: block;
+    width: 30%;
+    margin-top:0;
+    float: left;
+    font-weight: bold;
+    color: #GET{color};
+}
+body.contact #contenu .fiche_objet #wysiwyg .champ .span,
+body.organisation #contenu .fiche_objet #wysiwyg .champ .span {
+    display:block;
+    width: 69%;
+    float: right;
+}
+body.contact #contenu .fiche_objet #wysiwyg .fieldset,
+body.organisation #contenu .fiche_objet #wysiwyg .fieldset {
+    margin-top: 2em;
+}
+body.contact #contenu .fiche_objet #wysiwyg .fieldset + .liste-objets,
+body.organisation #contenu .fiche_objet #wysiwyg .fieldset + .liste-objets {
+    margin-top: 1em;
+}
+body.contact #contenu .fiche_objet #wysiwyg .fieldset .titrem,
+body.organisation #contenu .fiche_objet #wysiwyg .fieldset .titrem {
+    display: block;
+    font-weight: bold;
+    padding: 7px 5px 7px 10px;
+    border-top: 1px solid #GET{color};
+    background-color: #GET{background-color};
+    color: #GET{foncee};
+}

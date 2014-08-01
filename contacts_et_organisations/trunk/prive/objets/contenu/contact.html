@@ -1,26 +1,26 @@
 <BOUCLE_contact(CONTACTS){id_contact}>
 [<div class="champ contenu_civilite[ (#CIVILITE*|strlen|?{'',vide})]">
-	<label><:contacts:label_civilite:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{civilite} civilite'>(#CIVILITE)</span>
+	<div class="label visible"><:contacts:label_civilite:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{civilite} civilite'>(#CIVILITE)</div>
 </div>]
 [<div class="champ contenu_prenom[ (#PRENOM*|strlen|?{'',vide})]">
-	<label><:contacts:label_prenom:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{prenom} prenom'>(#PRENOM)</span>
+	<div class="label visible"><:contacts:label_prenom:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{prenom} prenom'>(#PRENOM)</div>
 </div>]
 [<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
-	<label><:contacts:label_nom:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+	<div class="label visible"><:contacts:label_nom:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{nom} nom'>(#NOM)</div>
 </div>]
 [<div class="champ contenu_fonction[ (#FONCTION*|strlen|?{'',vide})]">
-	<label><:contacts:label_fonction:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{fonction} fonction'>(#FONCTION)</span>
+	<div class="label visible"><:contacts:label_fonction:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{fonction} fonction'>(#FONCTION)</div>
 </div>]
 [<div class="champ contenu_date_naissance[ (#DATE_NAISSANCE*|!={0000-00-00 00:00:00}|?{'',vide})]">
-	<label><:contacts:label_date_naissance:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{date_naissance} date_naissance'>(#DATE_NAISSANCE|=={0000-00-00 00:00:00}|?{'',[(#DATE_NAISSANCE|affdate)]})</span>
+	<div class="label visible"><:contacts:label_date_naissance:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{date_naissance} date_naissance'>(#DATE_NAISSANCE|=={0000-00-00 00:00:00}|?{'',[(#DATE_NAISSANCE|affdate)]})</div>
 </div>]
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-	<label><:contacts:label_descriptif:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+	<div class="label visible"><:contacts:label_descriptif:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
 </div>]
 </BOUCLE_contact>

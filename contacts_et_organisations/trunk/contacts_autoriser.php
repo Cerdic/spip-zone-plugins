@@ -61,6 +61,27 @@ function autoriser_contact_modifier_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
+ * Autorisation de supprimer un contact
+ *
+ * Seuls les admins et l'auteur lié s'il existe peuvent supprimer le contact
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_contact_supprimer_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('configurer')
+		or (
+			$id_auteur = sql_getfetsel('id_auteur', 'spip_contacts', 'id_contact = '.intval($id))
+			and $id_auteur > 0
+			and $id_auteur == $qui['id_auteur']
+		);
+}
+
+/**
  * Autorisation de créer un annuaire
  *
  * Ceux qui peuvent configurer le site

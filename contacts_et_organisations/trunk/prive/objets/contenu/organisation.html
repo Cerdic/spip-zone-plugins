@@ -1,26 +1,26 @@
 <BOUCLE_organisation(ORGANISATIONS){id_organisation?}{id_auteur?}>
 [<div class="champ invisible contenu_nom[ (#NOM*|strlen|?{'',vide})]">
-	<label><:contacts:label_nom:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+	<div class="label visible"><:contacts:label_nom:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{nom} nom'>(#NOM)</div>
 </div>]
 [<div class="champ contenu_statut_juridique[ (#STATUT_JURIDIQUE*|strlen|?{'',vide})]">
-	<label><:contacts:label_statut_juridique:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{statut_juridique} statut_juridique'>(#STATUT_JURIDIQUE)</span>
+	<div class="label visible"><:contacts:label_statut_juridique:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{statut_juridique} statut_juridique'>(#STATUT_JURIDIQUE)</div>
 </div>]
 [<div class="champ contenu_identification[ (#IDENTIFICATION*|strlen|?{'',vide})]">
-	<label><:contacts:label_identification:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{identification} identification'>(#IDENTIFICATION)</span>
+	<div class="label visible"><:contacts:label_identification:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{identification} identification'>(#IDENTIFICATION)</div>
 </div>]
 [<div class="champ contenu_activite[ (#ACTIVITE*|strlen|?{'',vide})]">
-	<label><:contacts:label_activite:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{activite} activite'>(#ACTIVITE)</span>
+	<div class="label visible"><:contacts:label_activite:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{activite} activite'>(#ACTIVITE)</div>
 </div>]
 [<div class="champ contenu_date_creation[ (#DATE_CREATION*|!={0000-00-00 00:00:00}|?{'',vide})]">
-	<label><:contacts:label_date_creation:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{date_creation} date_creation'>(#DATE_CREATION|=={0000-00-00 00:00:00}|?{'',[(#DATE_CREATION|affdate)]})</span>
+	<div class="label visible"><:contacts:label_date_creation:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{date_creation} date_creation'>(#DATE_CREATION|=={0000-00-00 00:00:00}|?{'',[(#DATE_CREATION|affdate)]})</div>
 </div>]
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-	<label><:contacts:label_descriptif:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+	<div class="label visible"><:contacts:label_descriptif:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
 </div>]
 </BOUCLE_organisation>

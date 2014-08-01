@@ -1,7 +1,7 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.10.5"
+	version="2.10.6"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/contacts-128.png"
@@ -31,8 +31,8 @@
 	<pipeline nom="autoriser" inclure="contacts_autoriser.php" />
 
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
-	<necessite nom="medias" compatibilite="[1.6;[" />
-	<necessite nom="editer_liens_simples" compatibilite="[1.0;[" />
+	<necessite nom="medias" compatibilite="[1.6.0;[" />
+	<necessite nom="editer_liens_simples" compatibilite="[1.0.0;[" />
 
 	<utilise nom="coordonnees" compatibilite="[1.2.0;[" />
 	<utilise nom="crayons" compatibilite="[1.10.0;[" />

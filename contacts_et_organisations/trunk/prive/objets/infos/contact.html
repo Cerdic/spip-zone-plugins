@@ -2,8 +2,8 @@
 <div class='infos'>
 <div class='numero'><:contacts:contact_numero:><p>#ID_CONTACT</p></div>
 
-<BOUCLE_si_auteurs(CONDITION){si #CONFIG{contacts_et_organisations/associer_aux_auteurs}}>
-	<BOUCLE_auteur_lie(AUTEURS){id_auteur}{tout}{statut==.*}{si #ID_AUTEUR}>
+<BOUCLE_si_auteurs (CONDITION){si #CONFIG{contacts_et_organisations/associer_aux_auteurs}}>
+	<BOUCLE_auteur_lie (AUTEURS){id_auteur}{tout}{statut==.*}{si #ID_AUTEUR}>
 	<div class="numero">
 		<div class='num'>
 		<:contacts:contact_associe_a_auteur_numero:>
@@ -49,13 +49,20 @@
 </div>
 
 [(#REM)
-
 	Bouton voir en ligne
-
 ]
 [(#VAL{redirect}
 	|generer_url_action{type=contact&id=#ID_CONTACT}
 	|parametre_url{var_mode,calcul}
 	|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+
+[(#AUTORISER{supprimer, contact, #ID_CONTACT}|oui)
+	[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{contact-del-24.png}
+		|balise_img{<:contacts:supprimer_contact:>}|inserer_attribut{class,co_middle}
+		|concat{' ',<:contacts:supprimer_contact:>})],
+		[(#URL_ACTION_AUTEUR{supprimer_contact,#ID_CONTACT,#URL_ECRIRE{contacts}})],
+		ajax icone s24 horizontale danger contact-del-24,<:contacts:confirmer_supprimer_contact:>\n\n<:contacts:explication_supprimer_contact:>})]
+]
+
 
 </BOUCLE_contact>

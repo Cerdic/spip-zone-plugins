@@ -137,6 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_activite' => 'Activité',
+	'label_auteur_associe' => 'Auteur associé',
 	'label_civilite' => 'Civilité',
 	'label_date_creation' => 'Date de création',
 	'label_date_naissance' => 'Date de naissance',
