@@ -1,0 +1,17 @@
+<li class="agenda_fieldset agenda fieldset">
+	<fieldset>
+		[<h3 class="legend">(#ENV{documents_legende,<:diogene_documents:legende_documents:>})</h3>]
+		<ul>
+			<li class='editer editer_fichier_upload[ (#ENV**{erreurs}|table_valeur{fichier_upload}|oui)erreur]'>
+				<label for='fichier_upload#GET{domid}'><:bouton_upload:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier_upload})</span>
+				]<input class='file multi' type="file" name="fichier_upload[]" value='#ENV{fichier_upload}' id="fichier_upload#GET{domid}" size='11' />
+				<!--editer_fichier_upload-->
+				<script type="text/javascript">
+				var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
+				[(#INCLURE{javascript/medias_edit.js}|compacte{js})]
+				</script>
+			</li>
+		</ul>
+	</fieldset>
+</li>

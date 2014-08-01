@@ -1,0 +1,16 @@
+<li class="fieldset">
+	<fieldset>
+		<legend><:medias:info_documents:></legend>
+		<ul>
+			[(#SET{datas,[(#ARRAY{titre,<:info_titre:>,date,<:date:>,descriptif,<:medias:descriptif:>,credits,<:medias:label_credits:>})]})]
+			[(#SAISIE{selection_multiple, champs_documents,
+				cacher_option_intro=oui,
+				label=<:diogene_documents:label_champs_documents:>,
+				datas=#GET{datas}})]
+			[(#SAISIE{input,nombre_documents,
+				label=<:diogene_documents:label_nombre_documents:>,
+				maxlength=2,
+				defaut=0})]
+		</ul>
+	</fieldset>
+</li>
