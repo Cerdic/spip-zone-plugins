@@ -136,7 +136,8 @@
 
 			options = $.extend(defaults, options);
 
-			var media = $(this), id = media[0], playable = id.isFullScreen = id.has_html5_cover = false;
+			var media = $(this), id = media[0], playable = false;
+				
 
 			if(media.is(':hidden')) media.show();
 			if(media.is('audio')) options.movieSize = null;
@@ -145,6 +146,7 @@
 			 * Test si le navigateur dispose du support des balises <video> ou <audio>
 			 */
 			if(typeof(id) != "undefined" && typeof(id.canPlayType) != "undefined"){
+				id.isFullScreen = id.has_html5_cover = false;
 				media.children('source').each(function(){
 					if(!$(this).attr('type').match('flv') && id.canPlayType($(this).attr('type')) !== ''){
 						if(($(this).attr('type').match('video/ogg') || $(this).attr('type').match('video/webm')) && /Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)){
@@ -199,11 +201,9 @@
 						else if(media.height() > 0) height = media.height();
 					}
 
-					if(!IS_IPAD){
-						if(id.controls) id.addcontrols = true;
-						id.controls = false;
-						class_wrapper += ' loading no_metadata';
-					}
+					if(id.controls) id.addcontrols = true;
+					id.controls = false;
+					class_wrapper += ' loading no_metadata';
 
 					if(media.prev().is('img'))
 						media.prev().wrap('<div class="html5_cover"></div>');
@@ -294,7 +294,7 @@
 						media.ms_resize_controls();
 					}
 
-					if(!IS_IPAD){
+					//if(!IS_IPAD){
 						media.bind("loadedmetadata",function(e){
 							id.has_metadatas = true;
 							media.ms_start('loadedmetadata');
@@ -497,7 +497,7 @@
 						}
 					}
 					media.ms_start('canplay');
-				}
+				//}
 			}else
 				media.ms_test_fallback(options);
 			this.trigger('ms_init');
