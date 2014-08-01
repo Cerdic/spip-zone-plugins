@@ -80,6 +80,7 @@ function gis_declarer_tables_objets_sql($tables){
 		'url_edit' => 'gis_edit',
 		'editable' => 'oui',
 		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays'),
+		'champs_versionnes' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays'),
 		/*'champs_editables' => array(), */
 		'icone_objet' => 'gis',
 		'rechercher_champs' => array(
