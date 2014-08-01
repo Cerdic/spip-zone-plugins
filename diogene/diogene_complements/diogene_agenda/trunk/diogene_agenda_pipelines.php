@@ -169,7 +169,7 @@ function diogene_agenda_diogene_traiter($flux){
 				set_request('statut',$statuts[0]);
 			}
 
-			if(_request('id_evenement'))
+			if(intval(_request('id_evenement')) > 0)
 				formulaires_editer_evenement_traiter_dist(_request('id_evenement'), $id_article,false, false, 'evenements_edit_config');
 			else
 				formulaires_editer_evenement_traiter_dist('new', $id_article,false, false, 'evenements_edit_config');
