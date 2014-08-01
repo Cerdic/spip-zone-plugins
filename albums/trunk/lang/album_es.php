@@ -68,12 +68,13 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'label_modele_alignement_gauche' => 'Izquierda',
 	'label_modele_choisir' => 'Selección del modelo', # RELIRE
 	'label_modele_defaut' => 'Por defecto', # RELIRE
+	'label_modele_descriptif' => 'Mostrar descripción',
 	'label_modele_description_liste' => 'Ver los documentos como lista', # RELIRE
 	'label_modele_description_vignettes' => 'Ver imágenes como miniaturas', # RELIRE
-	'label_modele_hauteur_images' => 'Altura máxima', # MODIF
+	'label_modele_hauteur_images' => 'Altura máxima de las imágenes',
 	'label_modele_identifiant' => 'Número del álbum',
-	'label_modele_labels_images' => 'Etiquetar cada imagen', # MODIF
-	'label_modele_largeur_images' => 'Anchura máxima', # MODIF
+	'label_modele_labels_images' => 'Mostrar las etiquetas de las imágenes',
+	'label_modele_largeur_images' => 'Anchura máxima de las imágenes',
 	'label_modele_meta_dimensions' => 'Dimensiones',
 	'label_modele_meta_extension' => 'Extensión',
 	'label_modele_meta_taille' => 'Tamaño',
