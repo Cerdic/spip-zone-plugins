@@ -1,13 +1,13 @@
 <BOUCLE_projets_cadre(PROJETS_CADRES){id_projets_cadre}>
 
 [<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
-	<label><:projets_cadre:label_titre:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+	<div class="label visible"><:projets_cadre:label_titre:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{titre} titre'>(#TITRE)</div>
 </div>]
 
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-	<label><:projets_cadre:label_descriptif:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+	<div class="label visible"><:projets_cadre:label_descriptif:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
 </div>]
 
 </BOUCLE_projets_cadre>
