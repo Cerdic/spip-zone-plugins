@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // A
     'ajouter_lien_sql_requete' => 'Ajouter cette requête',
 
+    // C
+    'choisir_table' => 'Choisir une table',
+
     // I
     'icone_creer_sql_requete' => 'Créer une requête',
     'icone_modifier_sql_requete' => 'Modifier cette requête',
@@ -33,6 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'retirer_tous_liens_sql_requetes' => 'Retirer toutes les requêtes',
 
     // T
+    'tables_champs' => 'Rechercher les tables et leurs champs',
     'texte_ajouter_sql_requete' => 'Ajouter une requête',
     'texte_changer_statut_sql_requete' => 'Cette requête est :',
     'texte_creer_associer_sql_requete' => 'Créer et associer une requête',

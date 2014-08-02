@@ -1,0 +1,34 @@
+<div class="cadre-formulaire-editer">
+<div class="entete-formulaire">
+    <h1><:sql_requete:tables_champs:></h1>
+</div>
+<div class="formulaire_spip formulaire_#FORM">
+<B_lestables>
+<form action="#ENV{action}" method="get">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <ul>
+        <li>
+            <label for="table"><:sql_requete:choisir_table:></label>
+            <select name="table" style="width:auto;">
+            <BOUCLE_lestables(DATA) {source table, #ENV{tables}}>
+                <option value="#VALEUR"[(#ENV{table}|=={#VALEUR}|oui) selected="selected"]>#VALEUR</option>
+            </BOUCLE_lestables>
+            </select>
+        </li>
+    </ul>
+    <p class="boutons">
+        <input type="submit" value="Lister les champs"/>
+    </p>
+    </B_lestables>
+</form>
+    <BOUCLE_listechamps(CONDITION){si #ENV{message_ok}}>
+        <B_leschamps>
+            <ul>
+            <BOUCLE_leschamps(DATA){source table, #ENV{message_ok}}>
+                [<li>(#VALEUR)</li>]
+            </BOUCLE_leschamps>
+            </ul>
+        </B_leschamps>
+    </BOUCLE_listechamps>
+</div>
+</div>
