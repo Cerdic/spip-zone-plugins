@@ -41,7 +41,7 @@
 	<pipeline nom="autoriser" inclure="diogene_autoriser.php" />
 	<pipeline nom="ajouter_menus" inclure="diogene_pipelines.php" />
 
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[1.14.0;[" />
 	<necessite nom="images" />
 	<necessite nom="mediabox" />
 
