@@ -31,10 +31,10 @@
 	<pipeline nom="autoriser" inclure="contacts_autoriser.php" />
 
 	<necessite nom="saisies" compatibilite="[1.15.3;[" />
-	<necessite nom="medias" compatibilite="[1.6.0;[" />
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<necessite nom="editer_liens_simples" compatibilite="[1.0.0;[" />
 
-	<utilise nom="coordonnees" compatibilite="[1.2.0;[" />
+	<utilise nom="coordonnees" compatibilite="[1.4.5;[" />
 	<utilise nom="crayons" compatibilite="[1.10.0;[" />
 
 	<menu nom="contacts_organisations" titre="contacts:bouton_contacts_organisations" parent="menu_edition" icone="images/contacts-16.png" action="repertoire" />
