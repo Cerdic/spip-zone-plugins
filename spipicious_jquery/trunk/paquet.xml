@@ -30,6 +30,6 @@
 	<pipeline nom="post_edition" inclure="spipicious_pipelines.php" />
 
 	<necessite nom="selecteurgenerique" compatibilite="[0.8.0;[" />
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[1.14.0;[" />
 	<necessite nom="nuage" compatibilite="[3.2.1;[" />
 </paquet>
