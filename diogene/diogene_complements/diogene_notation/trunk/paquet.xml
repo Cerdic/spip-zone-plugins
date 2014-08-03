@@ -23,7 +23,7 @@
 	<pipeline nom="diogene_objets" inclure="diogene_notation_pipelines.php" />
 
 	<necessite nom="diogene" compatibilite="[1.0.0;[" />
-	<necessite nom="notation" compatibilite="[0.9.2;[" />
+	<necessite nom="notation" compatibilite="[2.0.0;[" />
 
 	<utilise nom="emballe_medias" />
 </paquet>

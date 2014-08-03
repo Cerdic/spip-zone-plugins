@@ -23,5 +23,5 @@
 
 	<necessite nom="diogene" compatibilite="[1.0.0;[" />
 	<necessite nom="SelecteurGenerique" compatibilite="[0.8.2;[" />
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="saisies" compatibilite="[1.14.0;[" />
 </paquet>
