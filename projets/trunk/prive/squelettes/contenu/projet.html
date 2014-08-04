@@ -39,10 +39,18 @@
 		[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|icone_verticale{#ID_PROJET|afficher_qui_edite{projet},warning-24,'',right edition_deja ajax preload})]
 	]
 ]
-
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projet,id,#ID_PROJET},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
+
+<div class="nettoyeur"></div>
+<BOUCLE_autresobjets(spip_projets_liens){id_projet}{objet !IN projet}{fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projet]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_projet}})]
+	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_projet,ajax,env} />
+</BOUCLE_autresobjets>
+
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
 ]

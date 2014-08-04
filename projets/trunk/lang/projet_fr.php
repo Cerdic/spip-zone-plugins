@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_poubelle'        => "Poubelle",
 	'titre_langue_projet'          => 'Langue de ce projet',
 	'titre_logo_projet'            => 'Logo de ce projet',
+    'titre_objets_lies_projet'     => 'Liés à ce projet :',
 	'titre_projet'                 => 'Projet',
 	'titre_projets'                => 'Projets',
 	'titre_projets_rubrique'       => 'Projets de la rubrique',
