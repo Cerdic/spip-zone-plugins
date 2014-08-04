@@ -33,14 +33,14 @@ function switcher_affichage_final($texte = ""){
 			
 			// Insertion du selecteur de squelettes	
 			$code.='<div id="plugin_switcher" style="top: 0;left: 20px; position: absolute; background-color: transparent;z-index: 100;">';
-			$code.='<form action="" method="post">';
+			$code.='<form action="#" method="post">';
 			$code.='<fieldset style="margin:0;padding:0;border:0">';
 			$code.='<select name="selecteurSkel" style="'.$styleListeSwitcher.'" onchange="gotof(this.options[this.selectedIndex].value)">';
-			$code.='<option selected="selected" value="">Squelettes</option>';
+			$code.='<option value="">Squelettes</option>';
             if (is_array($squelettes_alternatifs))
     			foreach( $squelettes_alternatifs as $key => $value)	{
     			    $selected = ($key == $_COOKIE['spip_skel']) ? " selected='selected' " : "";
-    			    $code.='<option value="'.parametre_url(self(),'var_skel',$key).'"'.$selected.'>&nbsp;-> '.$key.'</option>';
+    			    $code.='<option value="'.parametre_url(self(),'var_skel',$key).'"'.$selected.'>&nbsp;-&gt; '.$key.'</option>';
     			}
 			$code.='</select>';
 			$code.='</fieldset>';
