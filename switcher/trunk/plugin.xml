@@ -34,10 +34,6 @@
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>insert_head_css</nom>
-		<inclure>head.php</inclure>
-	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<necessite id="saisies" />
 	<categorie>maintenance</categorie>
