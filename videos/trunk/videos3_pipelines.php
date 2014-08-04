@@ -3,7 +3,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function videos_insert_head($flux){
 	include_spip('inc/config');
-	$flux .= videos_insert_head_css($flux); // au cas ou il n'est pas implemente 
 	$flux .="
 <!-- Variables de configuration pour le plugin Vidéo(s) -->
 <script type='text/javascript'>var CONFIG_WMODE = '".lire_config('videos/wmode','opaque')."';</script>\n".
@@ -12,16 +11,12 @@ function videos_insert_head($flux){
 }
 
 function videos_insert_head_css($flux){
-	static $done = false;
-	if (!$done) { 
-		$done = true; 
-		include_spip('inc/config');
-		$css = find_in_path('theme/css/videos.css');
-		$flux .="
+	include_spip('inc/config');
+	$css = find_in_path('theme/css/videos.css');
+	$flux .="
 <!-- CSS pour le plugin Vidéo(s) -->".
 '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />'.
 "<!-- // Vidéo(s) -->"."\n";
-	}
 	return $flux;
 }
 
