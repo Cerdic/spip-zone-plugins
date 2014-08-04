@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_creer_associer_projets_site' => 'Créer et associer un site',
     'titre_langue_projets_site' => 'Langue de ce site',
     'titre_logo_projets_site' => 'Logo de ce site',
+    'titre_objets_lies_projets_site' => 'Liés à ce site :',
     'titre_projets_site' => 'Site',
     'titre_projets_sites' => 'Sites des projets',
     'titre_projets_sites_rubrique' => 'Sites de la rubrique',

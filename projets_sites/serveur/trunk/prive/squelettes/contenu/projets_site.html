@@ -38,6 +38,17 @@
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projets_site,id,#ID_SITE},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
+
+<div class="nettoyeur"></div>
+
+<BOUCLE_autresobjets(spip_projets_sites_liens) {id_site} {fusion objet}{par objet}>
+	#SET{table,#OBJET|table_objet}
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projets_site]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_projets_site}})]
+	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_site,ajax,env} />
+</BOUCLE_autresobjets>
+
+
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
 ]
