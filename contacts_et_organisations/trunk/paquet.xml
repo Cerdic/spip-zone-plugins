@@ -1,7 +1,7 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.10.8"
+	version="2.10.9"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/contacts-128.png"
@@ -13,9 +13,9 @@
 	<!-- Ajouter un gestionnaire de contacts à SPIP -->
 
 	<auteur>Cyril MARION</auteur>
-	<auteur lien="http://www.cym.fr">Ateliers CYM</auteur>
-	<auteur lien="http://magraine.net">Matthieu Marcillaud</auteur>
-	<auteur lien="http://www.ldd.fr">Les D&#233;veloppements Durables</auteur>
+	<auteur lien="http://www.cym.fr/">Ateliers CYM</auteur>
+	<auteur lien="http://magraine.net/">Matthieu Marcillaud</auteur>
+	<auteur lien="http://www.ldd.fr/">Les D&#233;veloppements Durables</auteur>
 
 	<traduire module="contacts" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-contacts" reference="fr" gestionnaire="salvatore" />
