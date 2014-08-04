@@ -2,6 +2,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_organisation,1
+	statut_juridique,1
 	id_auteur,1
 }})
 ]<B_liste_orga>
@@ -40,6 +41,7 @@
 		<tr class='first_row'>
 			<th class="picto"></th>
 			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+			<th class='statut_juridique' scope='col'>[(#TRI{statut_juridique,<:contacts:label_statut_juridique:>,ajax})]</th>
             <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
 			<th class='id' scope='col'>[(#TRI{id_organisation,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
@@ -58,6 +60,7 @@
 			<//BOUCLE_lien_organisation>
 			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
+			<td class="statu_juridique">[(#STATUT_JURIDIQUE)]</td>
 			<td class='nb_contacts'>
 				[(#COMPTEUR_CONTACTS|singulier_ou_pluriel{contacts:nb_contact,contacts:nb_contacts}|sinon{-})]
 			</td>

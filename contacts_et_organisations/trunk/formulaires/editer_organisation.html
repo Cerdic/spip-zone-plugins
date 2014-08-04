@@ -14,20 +14,20 @@
 					label=<:contacts:annuaire:>,
 					option_intro=<:contacts:annuaire_aucun:>})]
 				]
-				
+
 				[(#SAISIE{input, nom,
 					label=<:contacts:label_nom:>})]
-					
+
 				[(#CONFIG{contacts_et_organisations/utiliser_organisations_arborescentes}|oui)
 				[(#SAISIE{organisations, id_parent,
 					id_organisation=#ENV{id_organisation},
 					label=<:contacts:label_organisation_parente:>})]
 				]
-				
+
 				[(#SAISIE{input, statut_juridique,
 					label=<:contacts:label_statut_juridique:>,
 					explication=<:contacts:explication_statut_juridique:>})]
-					
+
 				[(#SAISIE{input, identification,
 					label=<:contacts:label_identification:>,
 					explication=<:contacts:explication_identification:>})]
@@ -36,12 +36,12 @@
 					label=<:contacts:label_activite:>,
 					explication=<:contacts:explication_activite:>,
 					datas=#GET{liste_activite}})]
-					
+
 				[(#SAISIE{date_jour_mois_annee, date_creation,
 					label=<:contacts:label_date_creation:>})]
-					
+
 				[(#SAISIE{textarea, descriptif,
-					label=<:contacts:label_descriptif:>,
+					label=<:contacts:label_descriptif:> <em class="aide">[(#AIDER{raccourcis})]</em>,
 					class='inserer_barre_edition inserer_previsualisation',
 					li_class=haut})]
 
@@ -51,7 +51,7 @@
 			<p class='boutons'>
 				<input type='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
 			</p>
-			
+
 		</div></form>
 	</BOUCLE_editable>
 </div>
