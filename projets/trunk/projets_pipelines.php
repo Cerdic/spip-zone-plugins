@@ -23,11 +23,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function projets_affiche_milieu($flux) {
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
+	$objets_selectionnes = lire_config('projets/objets');
+	if (count($objets_selectionnes) > 0) {
+		include_spip('base/objets');
+		foreach ($objets_selectionnes as $key => $value) {
+			$objets_selectionnes[$key] = objet_type($value);
+		}
+	}
+	$objets_selectionnes = array_filter($objets_selectionnes);
 
 	// auteurs sur les projets
 	if (!$e['edition'] AND in_array($e['type'], array('projet'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'auteurs',
+			'objet' => $e['type'],
+			'id_objet' => $flux['args'][$e['id_table_objet']]
+		));
+	}
+
+	if (!$e['edition'] AND in_array($e['type'], $objets_selectionnes)) {
+		$texte .= recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'projets',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));

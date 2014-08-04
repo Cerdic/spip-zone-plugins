@@ -9,9 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'ajouter_lien_projets_cadre' => 'Ajouter ce cadre de projet',
 
+	// C
+	'confirmer_supprimer_projets_cadre' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à ce cadre de projets&nbsp;?',
+
 	// E
 	'explication_descriptif' => 'Vous pouvez décrire plus précisément ce cadre de projet',
 	'explication_titre' => 'Donnez le nom de ce cadre de projet',
+	'explication_supprimer_projets_cadre' => 'La suppression de ce cadre de projets risque de rompre les liens entres objets.',
 
 	// I
 	'icone_creer_projets_cadre' => 'Créer un cadre de projet',
@@ -28,6 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'retirer_lien_projets_cadre' => 'Retirer ce cadre de projet',
 	'retirer_tous_liens_projets_cadres' => 'Retirer tous les cadres de projet',
+
+	// S
+	'supprimer_projets_cadre' => 'Supprimer ce cadre de projet',
 
 	// T
 	'texte_ajouter_projets_cadre' => 'Ajouter un cadre de projet',
