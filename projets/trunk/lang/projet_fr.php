@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // C
     'client_non_trouve' => 'Client non trouvé.',
+	'confirmer_supprimer_projet' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à ce projet&nbsp;?',
 
 	// E
 	'explication_actif'                  => 'Super-statut du projet',
@@ -25,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_nb_heures_estimees'     => "Estimation du nombre d'heures à passer sur le projet",
 	'explication_nb_heures_reelles'      => "Nombre d'heures réellement passées sur le projet",
 	'explication_objectif'               => 'Les objectifs du projet, en quelques mots...',
+	'explication_supprimer_projet'       => 'La suppression de ce projet risque de rompre les liens entres objets.',
 	'explication_url_site'               => 'Vous pouvez indiquer une url permettant de voir le projet en ligne',
 
 	// I
@@ -39,10 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_actif'                  => 'Actif',
-	'label_date_publication'       => 'Date de publication',
 	'label_date_debut'             => 'Date de démarrage',
 	'label_date_livraison'         => 'Date livraison effective',
 	'label_date_livraison_prevue'  => 'Date livraison prévue',
+	'label_date_publication'       => 'Date de publication',
 	'label_descriptif'             => 'Descriptif du projet',
 	'label_enjeux'                 => 'Enjeux',
 	'label_id_parent'              => 'Projet parent',
@@ -60,6 +62,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'retirer_lien_projet'          => 'Retirer ce projet',
 	'retirer_tous_liens_projets'   => 'Retirer tous les projets',
+
+	// S
+	'supprimer_projet' => 'Supprimer ce projet',
 
 	// T
 	'texte_ajouter_projet'         => 'Ajouter un projet',
