@@ -4,6 +4,8 @@
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
 [(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
 [(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
+[(#SET{tri_num,#GET{tri_num}|ltrim{!}})]
+[(#SET{tri_alpha,#GET{tri_alpha}|ltrim{!}})]
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]

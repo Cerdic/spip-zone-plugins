@@ -4,6 +4,8 @@
 [(#SET{tri_alpha, #ENV{tri,titre}|menus_critere_tri{alpha}})]
 [(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
 [(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
+[(#SET{tri_num,#GET{tri_num}|ltrim{!}})]
+[(#SET{tri_alpha,#GET{tri_alpha}|ltrim{!}})]
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_mot}|?{#INFO_TITRE{mots, #GET{id_mot}}, <:info_racine_site:>}})]

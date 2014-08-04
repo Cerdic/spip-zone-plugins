@@ -22,12 +22,17 @@
 [(#SET{tri_alpha, #ENV{tri,titre}|menus_critere_tri{alpha}})]
 [(#SET{tri_num_inverse,#GET{tri_num}|match{^!}|oui})]
 [(#SET{tri_alpha_inverse,#GET{tri_alpha}|match{^!}|oui})]
+[(#SET{tri_num,#GET{tri_num}|ltrim{!}})]
+[(#SET{tri_alpha,#GET{tri_alpha}|ltrim{!}})]
 
 [(#REM) Tri des articles ]
 [(#SET{tri_num_articles, #ENV{tri_articles,titre}|menus_critere_tri{num}})]
 [(#SET{tri_alpha_articles, #ENV{tri_articles,titre}|menus_critere_tri{alpha}})]
 [(#SET{tri_num_articles_inverse,#GET{tri_num_articles}|match{^!}|oui})]
 [(#SET{tri_alpha_articles_inverse,#GET{tri_alpha_articles}|match{^!}|oui})]
+[(#SET{tri_num_articles,#GET{tri_num_articles}|ltrim{!}})]
+[(#SET{tri_alpha_articles,#GET{tri_alpha_articles}|ltrim{!}})]
+
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #ENV{id_rubrique}|?{#ENV{id_rubrique}|=={courante}|?{<:menus:info_rubrique_courante:>,#INFO_TITRE{rubrique, #GET{id_rubrique}}}, <:info_racine_site:>}})]
