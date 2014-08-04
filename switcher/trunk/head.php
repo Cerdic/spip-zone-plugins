@@ -12,7 +12,3 @@ function switcher_insert_head_css($flux){
 ';
 	return $flux;
 }
-function switcher_insert_head($flux){ 
-	$flux .= switcher_insert_head_css($flux); // au cas ou il n'est pas implemente 
-	return $flux;
-}

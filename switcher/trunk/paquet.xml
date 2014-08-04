@@ -16,7 +16,6 @@
         <copyright>2006-2014</copyright>
  
         <pipeline nom="affichage_final" inclure="switcher_fonctions.php" />
-        <pipeline nom="insert_head" inclure="head.php" />
         <pipeline nom="insert_head_css" inclure="head.php" />
   
         <necessite nom="saisies" />
