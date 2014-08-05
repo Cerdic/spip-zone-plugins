@@ -251,7 +251,6 @@ L.Map.Gis = L.Map.extend({
 			jQuery.extend(true, args, map.options.json_points.env);
 			if (typeof map.options.json_points.objets !== "undefined"){
 				args.objets = map.options.json_points.objets;
-				// FIXME !
 				if (args.objets == "point_libre"){
 					args.lat = map.options.center[0];
 					args.lon = map.options.center[1];
