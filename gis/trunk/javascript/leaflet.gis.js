@@ -253,14 +253,14 @@ L.Map.Gis = L.Map.extend({
 				args.objets = map.options.json_points.objets;
 				// FIXME !
 				if (args.objets == "point_libre"){
-					args.lat = mapcfg.lat;
-					args.lon = mapcfg.lon;
-					if (typeof mapcfg.json_points.titre !== "undefined")
-						args.titre = mapcfg.json_points.titre;
-					if (typeof mapcfg.json_points.description !== "undefined")
-						args.description = mapcfg.json_points.description;
-					if (typeof mapcfg.json_points.icone !== "undefined")
-						args.icone = mapcfg.json_points.icone;
+					args.lat = map.options.center[0];
+					args.lon = map.options.center[1];
+					if (typeof map.options.json_points.titre !== "undefined")
+						args.titre = map.options.json_points.titre;
+					if (typeof map.options.json_points.description !== "undefined")
+						args.description = map.options.json_points.description;
+					if (typeof map.options.json_points.icone !== "undefined")
+						args.icone = map.options.json_points.icone;
 				}
 			}
 			if (typeof map.options.json_points.limit !== "undefined")
