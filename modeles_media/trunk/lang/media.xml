@@ -2,6 +2,9 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/media?lang_cible=en" total="57" traduits="57" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="raphael" lien="http://trad.spip.net/auteur/raphael-7042" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/media?lang_cible=es" total="57" traduits="34" relire="2" modifs="0" nouveaux="21" pourcent="59.65">
+		<traducteur nom="Daniel Quisbert" lien="http://trad.spip.net/auteur/daniel-7022" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/media?lang_cible=fr" total="57" traduits="57" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
