@@ -51,7 +51,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_configurer_media_taille_petit' => 'Tamaño ’pequeño’:',
 	'label_credits' => 'Créditos:',
 	'label_descriptif' => 'Descripción:',
-	'label_hauteur' => 'Altura (en pixeles) :'
+	'label_hauteur' => 'Altura (en pixeles) :',
+	'label_id_document' => 'Número de documento:
+Número cd documento:',
+	'label_largeur' => 'Ancho (en píxeles):',
+	'label_legende' => 'Leyenda:',
+	'label_legende_personnalisee' => 'Personalizar leyenda', # RELIRE
+	'label_lien' => 'Enlace:',
+	'label_poids' => 'Peso (en bytes):',
+	'label_taille' => 'Tamaño:',
+	'label_taille_personnalisee' => 'Personalizar tamaño', # RELIRE
+	'label_titre' => 'Título:',
+	'label_titre_lien' => 'Título del enlace:',
+	'label_type' => 'Tipo de documento:',
+	'label_variante' => 'Qué deseas?',
+	'largeur' => 'Ancho:',
+
+	// M
+	'maj' => 'Actualizada el:',
+	'mime_type' => 'Tipo MIME :',
+	'modeles_media' => 'Modelos &lt;media&gt;',
+
+	// N
+	'nom_media' => 'documento',
+
+	// P
+	'pixels_hauteur' => 'píxeles de alto',
+	'pixels_largeur' => 'píxeles de ancho',
+	'pixels_maximum' => 'píxel máximo',
+	'pixels_minimum' => 'píxel mínimo'
 );
 
 ?>
