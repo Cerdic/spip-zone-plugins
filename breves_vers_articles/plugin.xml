@@ -11,7 +11,7 @@
 	<etat>test</etat>
 	<icon>prive/themes/spip/images/br2art.png</icon>
 	<prefix>breves_vers_articles</prefix>
-	<version>1.3.0</version>
+	<version>1.3.1</version>
 	<install>base/breves_vers_articles_upgrade.php</install>
 	<options>breves_vers_articles_options.php</options>
 	<fonctions>breves_vers_articles_fonctions.php</fonctions>	

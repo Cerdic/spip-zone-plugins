@@ -80,87 +80,92 @@ function breves_vers_articles($id_breve, $id_rubrique, $id_auteur, $statut_br) {
 	$nouvel_article['accepter_forum'] = 'pos';
 	$nouvel_article['lang'] = 'fr';
 	$nouvel_article['langue_choisie'] = 'oui';
-	$nouvel_article['id_trad'] = '0';
-	$nouvel_article['id_version'] = '1';
-	$nouvel_article['export'] = 'oui';
+	//$nouvel_article['id_trad'] = '0';
+	//$nouvel_article['id_version'] = '1';
+	//$nouvel_article['export'] = 'oui';
 	
 	$id_article = sql_insertq('spip_articles', $nouvel_article);
-	$message.="<br>Bréve n°".$id_breve." vers l'article ".$id_article;
+	if (!$id_article){
+		$message.="<br>ECHEC Bréve n°".$id_breve;
+	}
+	else {
+		$message.="<br>Bréve n°".$id_breve." vers l'article ".$id_article;
 
-	// relation article <=> auteur
-	if($id_auteur != '') {
+		// relation article <=> auteur
+		if($id_auteur != '') {
+			if (_SPIP3) {
+				objet_associer(
+					array("auteur"=>$id_auteur),
+					array("article"=>$id_article));
+			} else {
+				sql_insertq('spip_auteurs_articles', array('id_auteur' => $id_auteur, 'id_article' => $id_article));
+			}
+		}
+
+		// on s'occupe du logo
+		$logobr = IMG_SPIP_PATH."/breveon".$id_breve;
+		$logoart = IMG_SPIP_PATH."/arton".$id_article;
+
+		$ext = "";
+		if(file_exists($logobr.".jpg")) $ext = ".jpg";
+		else if(file_exists($logobr.".png")) $ext = ".png";
+		else if(file_exists($logobr.".gif")) $ext = ".gif";
+	//	else $message.= '<br>impossible de trouver le logo pour la breve :'.$id_breve;
+
+		if($ext!="") if(!rename($logobr.$ext, $logoart.$ext)) $message.="<br>impossible de renommer:".$logobr.$ext;
+
+		// on s'occupe des mots clés
 		if (_SPIP3) {
-			objet_associer(
-				array("auteur"=>$id_auteur),
-				array("article"=>$id_article));
+
+			$mots = sql_allfetsel('id_mot', 'spip_mots_liens', array('objet='.sql_quote('breve'), 'id_objet='.$id_breve));
+			if ($mots and $mots = array_map('array_shift', $mots)) {
+				objet_associer(
+					array("mot"=>$mots),
+					array("article"=>$id_article));
+			}
 		} else {
-			sql_insertq('spip_auteurs_articles', array('id_auteur' => $id_auteur, 'id_article' => $id_article));
+			$mots = sql_select('id_mot', 'spip_mots_breves', 'id_breve='.$id_breve);
+			while($motscles = sql_fetch($mots)) {
+				sql_insertq('spip_mots_articles', array('id_mot' => $motscles['id_mot'], 'id_article' => $id_article));
+			}
 		}
-	}
 
-	// on s'occupe du logo
-	$logobr = IMG_SPIP_PATH."/breveon".$id_breve;
-	$logoart = IMG_SPIP_PATH."/arton".$id_article;
-	
-	$ext = "";
-	if(file_exists($logobr.".jpg")) $ext = ".jpg";
-	else if(file_exists($logobr.".png")) $ext = ".png";
-	else if(file_exists($logobr.".gif")) $ext = ".gif";
-//	else $message.= '<br>impossible de trouver le logo pour la breve :'.$id_breve;
+		// on s'occupe des forums : ok
 
-	if($ext!="") if(!rename($logobr.$ext, $logoart.$ext)) $message.="<br>impossible de renommer:".$logobr.$ext;
-
-	// on s'occupe des mots clés
-	if (_SPIP3) {
-		
-		$mots = sql_allfetsel('id_mot', 'spip_mots_liens', array('objet='.sql_quote('breve'), 'id_objet='.$id_breve));
-		if ($mots and $mots = array_map('array_shift', $mots)) {
-			objet_associer(
-				array("mot"=>$mots),
-				array("article"=>$id_article));
+		$desc_forum = sql_showtable('spip_forum', true);
+		if($desc_forum['field']['id_breve']) {
+		// Utilisation d'une table forum classique
+			$forums = sql_select('id_forum', 'spip_forum', 'id_breve='.$id_breve);
+			while($forum = sql_fetch($forums)) {
+				sql_updateq('spip_forum', array('id_breve' => '', 'id_article' => $id_article), 'id_forum='.$forum['id_forum']);
+			}
 		}
-	} else {
-		$mots = sql_select('id_mot', 'spip_mots_breves', 'id_breve='.$id_breve);
-		while($motscles = sql_fetch($mots)) {		
-			sql_insertq('spip_mots_articles', array('id_mot' => $motscles['id_mot'], 'id_article' => $id_article));
+		else if($desc_forum['field']['id_objet']){
+		// Utilisation de la version objet de gestion des forums
+			$forums = sql_select('id_forum', 'spip_forum', 'objet="breve" AND id_objet='.$id_breve);
+			while($forum = sql_fetch($forums)) {
+				sql_updateq('spip_forum', array('id_objet' => $id_article, 'objet' => 'article'), 'id_forum='.$forum['id_forum']);
+			}
 		}
-	}
+		else
+			$message .= "<br>Impossible de determiner quelle gestion est utilisée sur les forums (id_breve ou id_objet)";
 
-	// on s'occupe des forums : ok
-	
-	$desc_forum = sql_showtable('spip_forum', true);
-	if($desc_forum['field']['id_breve']) {
-	// Utilisation d'une table forum classique
-		$forums = sql_select('id_forum', 'spip_forum', 'id_breve='.$id_breve);
-		while($forum = sql_fetch($forums)) {		
-			sql_updateq('spip_forum', array('id_breve' => '', 'id_article' => $id_article), 'id_forum='.$forum['id_forum']);
+		// Gestion du statut de la bréve
+		switch($statut_br) {
+			case 'idem':
+				// Rien à faire
+				break;
+			case 'prop':
+				sql_updateq('spip_breves', array('statut' => 'prop'), 'id_breve='.$id_breve);
+				break;
+			case 'refus':
+				sql_updateq('spip_breves', array('statut' => 'refuse'), 'id_breve='.$id_breve);
+				break;
 		}
-	}
-	else if($desc_forum['field']['id_objet']){
-	// Utilisation de la version objet de gestion des forums
-		$forums = sql_select('id_forum', 'spip_forum', 'objet="breve" AND id_objet='.$id_breve);
-		while($forum = sql_fetch($forums)) {		
-			sql_updateq('spip_forum', array('id_objet' => $id_article, 'objet' => 'article'), 'id_forum='.$forum['id_forum']);
-		}
-	}
-	else
-		$message .= "<br>Impossible de determiner quelle gestion est utilisée sur les forums (id_breve ou id_objet)";
-	
-	// Gestion du statut de la bréve
-	switch($statut_br) {
-		case 'idem':
-			// Rien à faire
-			break;
-		case 'prop':
-			sql_updateq('spip_breves', array('statut' => 'prop'), 'id_breve='.$id_breve);
-			break;
-		case 'refus':
-			sql_updateq('spip_breves', array('statut' => 'refuse'), 'id_breve='.$id_breve);
-			break;
-	}
 
-	// correspondance id_breve <-> id_article
-	sql_insertq(TABLE_BREVES_ARTICLES, array('id_breve' => $id_breve, 'id_article' => $id_article));
+		// correspondance id_breve <-> id_article
+		sql_insertq(TABLE_BREVES_ARTICLES, array('id_breve' => $id_breve, 'id_article' => $id_article));
+	}
 
 	return $message;
 }

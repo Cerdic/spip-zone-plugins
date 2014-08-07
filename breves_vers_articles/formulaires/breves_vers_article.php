@@ -68,7 +68,7 @@ function formulaires_breves_vers_article_traiter_dist(){
 	if(_request('lance_conv') == 'toutes') {
 		if($les_breves = sql_select('id_breve', 'spip_breves')) {
 			while($une_breve = sql_fetch($les_breves)) {
-				breves_vers_articles($une_breve['id_breve'], $choix_rub, _request('auteur_br'), _request('statut_br'));
+				$msg .= breves_vers_articles($une_breve['id_breve'], $choix_rub, _request('auteur_br'), _request('statut_br'));
 				spip_log('breves_vers_article : conversion sur breve n'.$une_breve['id_breve']);
 			}
 		}
@@ -76,9 +76,9 @@ function formulaires_breves_vers_article_traiter_dist(){
 			$msg = '<br>Erreur sur sql_select dans boucle sur les breves'.sql_error().'<br>';
 		
 		if(sql_count($les_breves)<1)
-			$msg = "Aucunes bréves trouvées";
+			$msg .= "Aucunes bréves trouvées";
 		else
-			$msg = "Conversion des bréves terminées";
+			$msg .= "Conversion des bréves terminées";
 		
 		spip_log('breves_vers_article : conversion des breves finies');
 	}
