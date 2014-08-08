@@ -21,7 +21,7 @@
 	<pipeline nom="header_prive" inclure="medias_responsive_pipelines.php" />
 
 	<necessite nom="image_responsive" compatibilite="[1.7.0;[" />
-	<necessite nom="medias" compatibilite="[2.0.0;[" />
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<chemin path="squelettes" />
 	<chemin path="" />
 
