@@ -179,7 +179,7 @@ function action_image_responsive() {
 	$xsendfile = _request("xsendfile");
 
 	if (!preg_match(',\.(gif|jpe?g|png)$,i', $img)
-	OR !preg_match(',^\d+$,', $taille)
+	OR !preg_match(',^\d+v?$,', $taille)
 	OR !preg_match(',^[\d\.]*$,', $dpr)
 	OR !file_exists($img)) {
 		header('HTTP/1.1 500 Internal Server Error');
