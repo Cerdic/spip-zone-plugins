@@ -49,6 +49,6 @@
 	[(#SET{height,[(#LOGO_DOCUMENT|extraire_attribut{height})]})]
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[
  style='float:(#ENV{align}|match{left|right});[ width:(#GET{width})px;]']><a href="[(#ENV{lien}|sinon{#URL_DOCUMENT})]"[
- (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|texte_backend)"]>[(#FICHIER|image_responsive{0})]</a></figure>
+ (#ENV{lien}|?{'',type="#MIME_TYPE"})][ title="(#TITRE|textebrut)"]>[(#FICHIER|image_responsive{0})]</a></figure>
 ]</BOUCLE_document>
 #FILTRE{mini_html}
