@@ -71,6 +71,15 @@ function cache_signature(&$page) {
 function cache_valide(&$page, $date) {
 	$now = $_SERVER['REQUEST_TIME'];
 
+	// Apparition d'un nouvel article post-date ?
+	if ($GLOBALS['meta']['post_dates'] == 'non'
+	  AND isset($GLOBALS['meta']['date_prochain_postdate'])
+	  AND $now > $GLOBALS['meta']['date_prochain_postdate']) {
+		spip_log('Un article post-date invalide le cache');
+		include_spip('inc/rubriques');
+		calculer_prochain_postdate(true);
+	}
+
 	if (defined('_VAR_NOCACHE') AND _VAR_NOCACHE) return -1;
 	if (isset($GLOBALS['meta']['cache_inhib']) AND $_SERVER['REQUEST_TIME'] AND $_SERVER['REQUEST_TIME']<$GLOBALS['meta']['cache_inhib']) return -1;
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
@@ -86,17 +95,6 @@ function cache_valide(&$page, $date) {
 	// #CACHE{n,statique} => on n'invalide pas avec derniere_modif
 	// cf. ecrire/public/balises.php, balise_CACHE_dist()
 	if (!isset($page['entetes']['X-Spip-Statique']) OR $page['entetes']['X-Spip-Statique'] !== 'oui') {
-
-		// Apparition d'un nouvel article post-date ?
-		if ($GLOBALS['meta']['post_dates'] == 'non'
-		AND isset($GLOBALS['meta']['date_prochain_postdate'])
-		AND $now > $GLOBALS['meta']['date_prochain_postdate']) {
-			spip_log('Un article post-date invalide le cache');
-			include_spip('inc/rubriques');
-			ecrire_meta('derniere_modif', $now);
-			calculer_prochain_postdate();
-			#return 1; // on laisse la main au test suivant
-		}
 
 		// Cache invalide par la meta 'derniere_modif'
 		// sauf pour les bots, qui utilisent toujours le cache
