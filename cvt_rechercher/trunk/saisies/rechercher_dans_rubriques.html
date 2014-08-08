@@ -1,0 +1,45 @@
+
+[(#REM) Un seul niveau par défaut ]
+#SET{niveau, #ENV{niveau,1}}
+
+[(#REM) Type par défaut ]
+#SET{type, #ENV{type,select}}
+
+[(#REM) Remplissage de data ]
+#SET{data, #ARRAY}
+#SET{vrai_niveau, 0}
+[(#GET{type}|=={input}|et{#ENV{option_intro}})
+	#SET{data, #GET{data}|plus{#ARRAY{0,#ENV{option_intro}}}}
+]
+<BOUCLE_data_rubriques(RUBRIQUES){id_rubrique?}{id_parent?}{!id_rubrique IN #ENV{ids_exclus}}{par num titre,titre}>
+	#SET{vrai_niveau, #GET{vrai_niveau}|plus{1}}
+	#SET{data, #GET{data}|plus{#ARRAY{#ID_RUBRIQUE,#TITRE}}}
+	
+	<BOUCLE_data_sousrubriques(RUBRIQUES){id_parent}{si #GET{niveau}|>{#GET{vrai_niveau}}}{par num titre,titre}>
+		#SET{vrai_niveau, #GET{vrai_niveau}|plus{1}}
+		#SET{espaces, #VAL{&nbsp;}|str_repeat{#GET{vrai_niveau}|moins{1}|mult{2}}}
+		#SET{data, #GET{data}|plus{#ARRAY{#ID_RUBRIQUE,#GET{espaces}#TITRE}}}
+		
+		<BOUCLE_data_soussousrubriques(BOUCLE_data_sousrubriques)/>
+		#SET{vrai_niveau, #GET{vrai_niveau}|moins{1}}
+	</BOUCLE_data_sousrubriques>
+	#SET{vrai_niveau, #GET{vrai_niveau}|moins{1}}
+</BOUCLE_data_rubriques>
+
+[(#GET{type}|=={select}|oui)
+	[(#ENV{multiple}|oui)
+		#INCLURE{fond=saisies/selection_multiple, datas=#GET{data}, env}
+	]
+	[(#ENV{multiple}|non)
+		#INCLURE{fond=saisies/selection, datas=#GET{data}, env}
+	]
+]
+
+[(#GET{type}|=={input}|oui)
+	[(#ENV{multiple}|oui)
+		#INCLURE{fond=saisies/checkbox, datas=#GET{data}, env}
+	]
+	[(#ENV{multiple}|non)
+		#INCLURE{fond=saisies/radio, datas=#GET{data}, env}
+	]
+]

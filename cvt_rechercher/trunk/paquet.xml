@@ -1,0 +1,16 @@
+<paquet
+	prefix="cvt_rechercher"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="cvt_rechercher.png"
+	documentation=""
+>
+	<nom>CVT Rechercher</nom>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GNU/GPL v3</licence>
+	
+	<pipeline nom="formulaire_charger" inclure="cvt_rechercher_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="cvt_rechercher_pipelines.php" />
+</paquet>
