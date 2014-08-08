@@ -15,12 +15,17 @@ function archive_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 	
 	$maj['create'] = array(
-		array('maj_tables',array('spip_articles','spip_rubriques'))
+		array('maj_tables',array('spip_articles','spip_rubriques')),
+		array('maj_archives')
 	);
 	
 	$maj['0.2.0'] = array(
 		array('maj_tables',array('spip_articles')),
 		array('maj_archives')
+	);
+	
+	$maj['0.3.0'] = array(
+			array('maj_archives')
 	);
 
 	include_spip('base/upgrade');
@@ -43,6 +48,7 @@ function archive_vider_tables($nom_meta_base_version) {
 
 /**
  * Mettre à jour les archives avec le champ archive à 1 vers le statut archive
+ * Si un ancien plugin archive mettait le statut à "archi" => "archive"
  */
 function maj_archives(){
 	$archives = sql_allfetsel('id_article','spip_articles','archive=1');
@@ -53,5 +59,6 @@ function maj_archives(){
 			$modif = article_modifier($id_article,$modifs);
 		}
 	}
+	sql_updateq('spip_articles',array('statut'=>'archive'),'statut="archi"');
 }
 ?>
