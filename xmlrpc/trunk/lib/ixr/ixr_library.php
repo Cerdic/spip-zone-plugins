@@ -228,9 +228,6 @@ class IXR_Message
 
         // Bail if there are too many elements to parse
         $element_limit = 30000;
-        if ( function_exists( 'apply_filters' ) ) {
-            $element_limit = apply_filters( 'xmlrpc_element_limit', $element_limit );
-        }
         if ( $element_limit && 2 * $element_limit < substr_count( $this->message, '<' ) ) {
             return false;
         }
