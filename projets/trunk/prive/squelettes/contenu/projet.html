@@ -44,12 +44,12 @@
 #BOITE_FERMER
 
 <div class="nettoyeur"></div>
-<BOUCLE_autresobjets(spip_projets_liens){id_projet}{objet !IN projet}{fusion objet}{par objet}>
+<BOUCLE_lies (spip_projets_liens) {id_projet} {fusion objet} {par objet}>
 	#SET{table,#OBJET|table_objet}
-	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projet]})]
-	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_projet}})]
-	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_projet,ajax,env} />
-</BOUCLE_autresobjets>
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_mot]})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_mot}})]
+	<INCLURE{fond=prive/objets/liste/objets_lies_projet,objet,id_projet,ajax,env} />
+</BOUCLE_lies>
 
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>

@@ -12,7 +12,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_objets(spip_projets_liens){id_projet?}{objet?}{id_objet?}{!par id_objet}{pagination #ENV{nb,10}}>
+	<BOUCLE_objets(spip_projets_liens) {id_projet?} {objet?} {id_objet?} {!par id_objet}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='picto'>#GET{picto}</td>
 			<td class='titre principale'><a
