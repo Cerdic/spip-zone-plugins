@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/sjcycle-32.png"
 	schema="0.5"
-	documentation="http://www.spip-contrib.net/Plugin-Spip-jQuery-Cycle-2"
+	documentation="http://contrib.spip.net/Plugin-Spip-jQuery-Cycle-pour-Spip-2-1-et-3"
 >	
 
 	<nom>jQuery Cycle</nom>
@@ -22,11 +22,11 @@
 	<pipeline nom="ieconfig_metas" inclure="sjcycle_ieconfig_metas.php" />
 	<pipeline nom="autoriser" inclure="inc/sjcycle_autoriser.php" />
 
-	<necessite nom="saisies" compatibilite="[1.9.0;[" />
-	<necessite nom="YAML" compatibilite="[1.4.1;[" />
+	<necessite nom="saisies" compatibilite="[1.14.0;[" />
+	<necessite nom="YAML" compatibilite="[1.5.1;[" />
 
-	<utilise nom="aveline" compatibilite="[1.7.0;[" />
-	<utilise nom="palette" compatibilite="[1.2.2;[" />
+	<utilise nom="aveline" compatibilite="[2.0.0;[" />
+	<utilise nom="palette" compatibilite="[3.0.0;[" />
 
 	<menu nom="sjcycle" titre="sjcycle:titre_menu" parent="menu_squelette" icone="images/sjcycle-16.png" action="configurer_sjcycle" />
 </paquet>
