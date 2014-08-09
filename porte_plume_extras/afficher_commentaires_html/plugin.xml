@@ -6,7 +6,7 @@
 	<version>1.0.0</version>
 	<etat>test</etat>
 	<description>Ce plugin permet d'afficher dans l'espace priv&#233; les commentaires HTML saisis dans le texte des objets &#233;ditoriaux (les articles par exemple). Enfin, un bouton est ajout&#233; au porte-plume pour ins&#233;rer facilement un commentaire.</description>
-	<lien>http://www.spip-contrib.net/?article4184</lien>
+	<lien>http://contrib.spip.net/Afficher-les-commentaires-HTML</lien>
 	<icon>images/afficher_commentaires_html.png</icon>
 	<prefix>commhtml</prefix>
 	<pipeline>
