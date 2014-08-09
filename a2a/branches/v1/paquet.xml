@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/a2a-64.png"
 	schema="0.4.0"
-	documentation="http://contrib.spip.net/Typage-des-relations-entre-articles-avec-A2A"
+	documentation="http://contrib.spip.net/Le-plugin-a2a-pour-lier-des-articles"
 >	
 
 	<nom>A2A</nom>
