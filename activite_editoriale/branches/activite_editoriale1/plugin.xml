@@ -13,7 +13,7 @@ Sont d&#233;j&#224; propos&#233;s :
 -* un tableau de bord pr&#233;sentant les m&#234;mes informations
 
 	</description>
-	<lien>http://www.spip-contrib.net/Activite-editoriale</lien>
+	<lien>http://contrib.spip.net/Activite-editoriale</lien>
 	<etat>stable</etat>
 	<icon>activite_editoriale.png</icon>
 	<prefix>activite_editoriale</prefix>
