@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="img_pack/wcag1AAA.png"
-	documentation="http://www.spip-contrib.net/?article3547"
+	documentation="http://contrib.spip.net/Accessibilite-pour-les-redacteurs"
 >	
 
 	<nom>Accessibilit&#233;</nom>

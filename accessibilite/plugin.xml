@@ -9,7 +9,7 @@
 
 L’objectif de ce plugin et de sa documentation associ&#233;e n’est pas de pr&#233;senter le contenu du RGAA ou l’int&#233;r&#234;t d’une d&#233;marche d’accessibilit&#233; mais de voir th&#233;matique par th&#233;matique en quoi SPIP permet, nativement ou avec quelques ajouts, de produire du contenu accessible pour un r&#233;dacteur.
 	</description>
-	<lien>http://www.spip-contrib.net/?article3547</lien>
+	<lien>http://contrib.spip.net/Accessibilite-pour-les-redacteurs</lien>
 	<prefix>Accessibilite</prefix>
 	<icon>img_pack/wcag1AAA.png</icon>
 	<pipeline>
