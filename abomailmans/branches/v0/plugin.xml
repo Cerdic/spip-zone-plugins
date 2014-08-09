@@ -9,7 +9,7 @@
 			Ensuite il vous est possible de s&#233;lectionner des articles de votre SPIP, par des crit&#232;res de date, de rubrique et/ou de mot-cl&#233; et envoyer leurs contenus &#224; ces listes, en utilisant des squelettes de mise en page du contenu.
 			Le lien avec les listes Mailman, Ezmlm et Sympa se fait par des envois d'e-mail.
 	</description>
-	<lien>http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des</lien>
+	<lien>http://contrib.spip.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion</lien>
 	<options>abomailmans_options.php</options>
 	<fonctions>abomailmans_fonctions.php</fonctions>
 	<prefix>abomailmans</prefix>

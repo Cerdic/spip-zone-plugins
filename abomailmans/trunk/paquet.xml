@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/abomailmans-32.png"
 	schema="0.34"
-	documentation="http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion"
+	documentation="http://contrib.spip.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion"
 >	
 
 	<nom>Abonnement à des listes de diffusion</nom>
