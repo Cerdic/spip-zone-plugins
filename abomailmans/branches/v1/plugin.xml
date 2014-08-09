@@ -67,7 +67,7 @@
 	</bouton>
 	
 	<necessite id="SPIP" version="[2.0.3;2.1.99]" />
-	<necessite id="facteur" version="[1.1;]" />
-	<necessite id='spip_bonux' version='[1.8.10;]' />
+	<necessite id="facteur" version="[1.7.3;]" />
+	<necessite id='spip_bonux' version='[1.9.0;]' />
 	<categorie>communication</categorie>
 </plugin>
