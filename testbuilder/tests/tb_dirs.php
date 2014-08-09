@@ -35,7 +35,7 @@
     array (
       'ecrire' => 'ecrire/',
       'plugins' => 'plugins/',
-      'extensions' => 'extensions/',
+      'plugins-dist' => 'plugins-dist/',
       'prive' => 'prive/',
     ),
     1 => '/',
@@ -46,7 +46,7 @@
     array (
       'ecrire' => 'ecrire/',
       'plugins' => 'plugins/',
-      'extensions' => 'extensions/',
+      'plugins-dist' => 'plugins-dist/',
       'prive' => 'prive/',
     ),
     1 => '/etc/',
@@ -57,7 +57,7 @@
     array (
       'ecrire' => 'ecrire/',
       'plugins' => 'plugins/',
-      'extensions' => 'extensions/',
+      'plugins-dist' => 'plugins-dist/',
       'prive' => 'prive/',
     ),
     1 => '../../',
@@ -68,7 +68,7 @@
     array (
       'ecrire' => 'ecrire/',
       'plugins' => 'plugins/',
-      'extensions' => 'extensions/',
+      'plugins-dist' => 'plugins-dist/',
       'prive' => 'prive/',
     ),
     1 => '../',

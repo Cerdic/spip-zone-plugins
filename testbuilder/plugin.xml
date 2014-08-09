@@ -2,7 +2,7 @@
 	<nom>Test Builder</nom>
 	<slogan>Construire des tests syst&#233;matiques</slogan>
 	<auteur>[Cedric->http://www.yterium.com]</auteur>
-	<version>0.3.4</version>
+	<version>0.3.5</version>
 	<icon>images/tb-32.png</icon>
 	<etat>test</etat>
 	<description>

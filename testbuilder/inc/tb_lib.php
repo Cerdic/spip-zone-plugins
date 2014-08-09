@@ -95,7 +95,7 @@ function tb_liste_fonctions($filename, $clear = false){
  * @return array()
  */
 function tb_liste_dirs_tests(){
-	$bases = array(_DIR_RACINE . 'tests/');
+	$bases = array(_DIR_RACINE . 'tests/unit/');
 	foreach (creer_chemin() as $d) {
 		if ($d && @is_dir("${d}tests"))
 			$bases[] = "${d}tests/";
@@ -229,7 +229,7 @@ function tb_generate_new_blank_test($filename,$funcname){
 			$d="";
 	}
 	if (!$d)
-		$d = sous_repertoire(_DIR_RACINE."tests/",basename($filename,'.php'));
+		$d = sous_repertoire(_DIR_RACINE."tests/unit/",basename($filename,'.php'));
 	ecrire_fichier($f="$d/$funcname.php",$template);
 	return $f;
 }
