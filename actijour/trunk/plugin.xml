@@ -18,7 +18,7 @@
 		</multi>
 	</description>
 	<prefix>actijour</prefix>
-	<lien>http://www.spip-contrib.net/Activite-du-jour</lien>
+	<lien>http://contrib.spip.net/Activite-du-jour</lien>
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>actijour_pipe.php</inclure>
