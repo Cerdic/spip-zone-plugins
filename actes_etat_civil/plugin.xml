@@ -14,7 +14,7 @@ Formulaire multi-&#233;tapes de demande d'acte d'&#233;tat civil en ligne
 	<action>inclure_css</action>
 	<inclure>actes_etat_civil.php</inclure>
 </pipeline>
-<necessite id='cvtm' version='[0.1.0;]' />
+<necessite id='cvtm' version='[0.2.4;]' />
 <necessite id='SPIP' version='[2.1.0;2.1.99]' />
 <categorie>communication</categorie>
 </plugin>
