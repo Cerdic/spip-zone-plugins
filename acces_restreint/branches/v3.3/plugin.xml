@@ -35,7 +35,7 @@ _ Einzelnen Autoren k&#246;nnen Zugangsrechte für Bereiche zugeordnet werden.
 _ ALle Standardschleifen (Abfragen) von SPIP werden &#252;berladen, und um die &#220;berpr&#252;fung der Rechte des jeweiligen Sitebesuchers erg&#228;nzt.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Acces-Restreint-3-0</lien>
+	<lien>http://contrib.spip.net/Acces-Restreint-3-0</lien>
 	<options>acces_restreint_options.php</options>
 	<fonctions>acces_restreint_fonctions.php</fonctions>
 	<fonctions>public/acces_restreint.php</fonctions>
@@ -99,7 +99,7 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden &#252;berladen, und um die &
 	</pipeline>
 	
 	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
-	<necessite id='spip_bonux' version='[1.0;]' />
+	<necessite id='spip_bonux' version='[1.9.0;]' />
 	<categorie>auteur</categorie>
 	<traduire gestionnaire="salvatore" module="accesrestreint" reference="fr" />
 </plugin>
