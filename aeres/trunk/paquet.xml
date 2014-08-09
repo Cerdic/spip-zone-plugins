@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/aeres-48.png"
-	documentation="http://contrib.spip.net/spip.php?article4311"
+	documentation="http://contrib.spip.net/Bibliographie-AERES-2-0"
 >	
 
 	<nom>Bibliographie AERES</nom>
