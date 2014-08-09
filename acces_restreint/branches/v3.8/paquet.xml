@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/zone-32.png"
 	schema="0.4.2"
-	documentation="http://www.spip-contrib.net/Acces-Restreint-3-0"
+	documentation="http://contrib.spip.net/Acces-Restreint-3-0"
 >	
 
 	<nom>Acces Restreint</nom>
@@ -33,5 +33,5 @@
 
 	<menu nom="zones" titre="accesrestreint:icone_menu_config" parent="menu_publication" icone="images/zone-16.png" />
 
-	<utilise nom="medias" compatibilite="[;]" />
+	<utilise nom="medias" compatibilite="[2.7.27;]" />
 </paquet>
