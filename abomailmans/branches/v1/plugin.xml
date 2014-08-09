@@ -24,7 +24,7 @@
 			[en]This plugin adds a form of registration to mailing lists services as [Mailman->http://www.gnu.org/software/mailman/], [Ezmlm->http://www.ezmlm.org/] or [Sympa->http://www.sympa.org] the administrator can manage from the private space via a dedicated interface.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion</lien>
+	<lien>http://contrib.spip.net/Abomailmans-pour-s-abonner-a-des-listes-de-diffusion</lien>
 	<fonctions>abomailmans_fonctions.php</fonctions>
 	<install>base/abomailmans.php</install>
 	<pipeline>
