@@ -12,7 +12,7 @@
 		[en]This plugin allows you to link items in a timely manner without having to use keywords of SPIP. It can be used to set up links such as "See also".
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/a2a</lien>
+	<lien>http://contrib.spip.net/Le-plugin-a2a-pour-lier-des-articles</lien>
 	<prefix>a2a</prefix>
 	<fonctions>a2a_fonctions.php</fonctions>
 	<options>a2a_options.php</options>

@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/a2a-64.png"
 	schema="0.10.0"
-	documentation="http://www.spip-contrib.net/4222"
+	documentation="http://contrib.spip.net/Typage-des-relations-entre-articles-avec-A2A"
 >	
 
 	<nom>A2A</nom>
