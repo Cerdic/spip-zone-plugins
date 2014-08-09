@@ -46,8 +46,7 @@
 <div class="nettoyeur"></div>
 <BOUCLE_lies (spip_projets_liens) {id_projet} {fusion objet} {par objet}>
 	#SET{table,#OBJET|table_objet}
-	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_mot]})]
-	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_mot}})]
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projet]})]
 	<INCLURE{fond=prive/objets/liste/objets_lies_projet,objet,id_projet,ajax,env} />
 </BOUCLE_lies>
 
