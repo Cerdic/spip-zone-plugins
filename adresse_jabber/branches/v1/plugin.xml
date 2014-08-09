@@ -22,7 +22,7 @@ balise correspondante est <code>#JID</code> (appellation standard de l'identifia
 	</description>
 	<etat>test</etat>
 	<prefix>jabberid</prefix>
-	<lien>http://www.spip-contrib.net/Adresse-Jabber</lien>
+	<lien>http://contrib.spip.net/Adresse-Jabber</lien>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[0.7;]" />
 	<install>base/jabberid_install.php</install>

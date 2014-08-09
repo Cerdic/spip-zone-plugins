@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/chat.png"
 	schema="0.1.0"
-	documentation="http://www.spip-contrib.net/Adresse-Jabber"
+	documentation="http://contrib.spip.net/Adresse-Jabber"
 >
 	<nom>Adresse Jabber (JID)</nom>
 	<!-- Une adresse Jabber pour les auteurs -->
