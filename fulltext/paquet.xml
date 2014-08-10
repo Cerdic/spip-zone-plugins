@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/fulltext-32.png"
 	schema="0.2"
-	documentation="http://www.spip-contrib.net/Fulltext"
+	documentation="http://contrib.spip.net/Fulltext"
 >	
 
 	<nom>Fulltext</nom>

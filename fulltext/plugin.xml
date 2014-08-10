@@ -34,7 +34,7 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&#233;ment
 -* Pour les {{ODT, DOCX, PPTX, XLSX}} :
 -** Utilise des fonctions et des classes PHP (n&#233;cessite PHP 5.2 au minimum, ainsi que l'option -enable-zip).
 	</description>
-	<lien>http://www.spip-contrib.net/Fulltext</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Fulltext</lien> <!-- URI de documentation -->
 	<prefix>
 	Fulltext
 	</prefix>
