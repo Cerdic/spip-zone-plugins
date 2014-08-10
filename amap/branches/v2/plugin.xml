@@ -18,7 +18,7 @@
 	<prefix>amap</prefix>
 
 	<icon>prive/themes/spip/images/amapconfig-64.png</icon>
-	<lien>http://www.spip-contrib.net/Plugin-AMAP-Version-2</lien>
+	<lien>http://contrib.spip.net/Plugin-AMAP-Version-2</lien>
 
 	<install>base/amap_installation.php</install>
 	<options>amap_options.php</options>
@@ -58,12 +58,12 @@
 
 	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="agenda" version="[2.2.1;]" />
-	<necessite id="cextras" version="[1.9;]" />
+	<necessite id="cextras" version="[1.9.0;]" />
 	<necessite id="facteur" version="[1.6.2;]" />
 	<necessite id="Iterateurs" version="[0.4.0;]" />
 	<necessite id="saisies" version="[1.7.7;]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />
-	<necessite id="verifier" version="[0.1;]" />
+	<necessite id="verifier" version="[0.1.0;]" />
 	<necessite id="z" version="[1.5.1;]" />
 	<utilise id="fpdf" version="[0.0.1;]" />
 	<categorie>divers</categorie>
