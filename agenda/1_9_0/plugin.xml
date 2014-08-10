@@ -5,7 +5,7 @@
 	<licence>GPL - (c) 2006</licence>
 	<etat>stable</etat>
 	<description>Agenda Ev&#233;nementiel</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/AgenDa</lien>
+	<lien>http://contrib.spip.net/Plugin-Agenda</lien>
 	<options>agenda_mes_options.php</options>
 	<fonctions>agenda_mes_fonctions.php</fonctions>
 	<prefix>Agenda</prefix>

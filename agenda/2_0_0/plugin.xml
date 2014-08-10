@@ -10,7 +10,7 @@
 	<etat>stable</etat>
 	<slogan>Agenda &#233;v&#233;nementiel</slogan>
 	<description>Agenda Ev&#233;nementiel</description>
-	<lien>http://www.spip-contrib.net/article2858</lien>
+	<lien>http://contrib.spip.net/Agenda-2-0</lien>
 	<options>agenda_options.php</options>
 	<fonctions>public/agenda.php</fonctions>
 	<fonctions>agenda_fonctions.php</fonctions>
@@ -92,9 +92,9 @@
 	<necessite id='SPIP' version='[2.0.3;2.1.99]' />
 	<necessite id='spip_bonux' version='[1.9.1;]' />
 <!-- si le plugin fulltext est actif, il faut qu'agenda soit pris en compte avant lui pour le pipeline rechercher_liste_des_champs -->
-	<utilise id='Fulltext' version='[0.2;]' />
-	<utilise id='bando' version='[1.0.0;]' />
-<!-- agenda_programmation nécessite Itérateurs. -->
+	<utilise id='Fulltext' version='[0.5.1;]' />
+	<utilise id='bando' version='[1.1.10;]' />
+<!-- agenda_programmation nÃ©cessite ItÃ©rateurs. -->
 	<utilise id='Iterateurs' version='[0.6.1;]' />
 	<categorie>date</categorie>
 </plugin>
