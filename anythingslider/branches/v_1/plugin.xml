@@ -7,7 +7,7 @@
 	<version>1.1.2</version>
 	<etat>stable</etat>
 	<description>Ce plugin permet d'ins&#233;rer facilement le script jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] dans votre SPIP pour l’utiliser dans vos squelettes. Il peut &#234;tre &#233;galement &#234;tre utilis&#233; comme ressource pour d'autres plugins.</description>
-	<lien>http://www.spip-contrib.net/?article3897</lien>
+	<lien>http://contrib.spip.net/AnythingSlider-version-1-x-x</lien>
 	<prefix>anythingslider</prefix>
 	<pipeline>
 		<nom>anythingslider_charger</nom>

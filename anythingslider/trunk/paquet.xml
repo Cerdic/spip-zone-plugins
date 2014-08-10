@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/anythingslider.png"
-	documentation="http://www.spip-contrib.net/?article4283"
+	documentation="http://contrib.spip.net/AnythingSlider-version-2-x-x"
 >	
 
 	<nom>AnythingSlider</nom>

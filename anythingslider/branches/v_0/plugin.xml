@@ -7,7 +7,7 @@
 	<version>0.1.3</version>
 	<etat>test</etat>
 	<description>Permet d'utiliser le plugin jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] (version 1.5.9) dans les squelettes. Une version plus r&#233;cente du plugin est disponible. Son fonctionnement est l&#233;g&#232;rement diff&#233;rent, notamment pour charger les scripts optionnels et/ou les th&#232;mes additionnels.</description>
-	<lien>http://www.spip-contrib.net/?article3783</lien>
+	<lien>http://contrib.spip.net/AnythingSlider-version-0-1-x</lien>
 	<prefix>anythingslider</prefix>
 	<pipeline>
 		<nom>anythingslider_charger_fx</nom>
