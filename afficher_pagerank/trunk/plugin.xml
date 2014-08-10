@@ -5,7 +5,7 @@
 	<version>0.2.0</version>
 	<etat>dev</etat>
 	<description>Ce plugin affiche le PageRank Google de votre site sur la page &#171;A suivre&#187;.</description>
-	<lien>http://www.spip-contrib.net/Afficher-Pagerank</lien>
+	<lien>http://contrib.spip.net/Afficher-Pagerank</lien>
 	<prefix>pb_pagerank</prefix>
 	<options>pb_pagerank_options.php</options>
 	<pipeline>
