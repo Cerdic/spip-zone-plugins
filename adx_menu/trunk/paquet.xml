@@ -18,5 +18,5 @@
 
 	<pipeline nom="insert_head_css" inclure="adxmenu_pipelines.php" />
 
-	<utilise nom="cfg" compatibilite="[1.0;[" />
+	<utilise nom="cfg" compatibilite="[1.11.0;[" />
 </paquet>

@@ -26,6 +26,6 @@ Une documentation interne est disponible lorsque le plugin est actif sur la page
 		<inclure>adxmenu_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
-	<utilise id="cfg" version="[1.0;]" />
+	<utilise id="cfg" version="[1.11.0;]" />
 	<categorie>navigation</categorie>
 </plugin>
