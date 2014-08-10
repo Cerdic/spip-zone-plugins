@@ -32,7 +32,7 @@ _ To display the number of actives plugins, write <code><apropos|plugins></code>
 _ To display the number of actives extensions, write <code><apropos|extensions></code>.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/A-propos-des-plugins-actifs</lien>
+	<lien>http://contrib.spip.net/A-propos-des-plugins-actifs</lien>
 	<icon>apropos.png</icon>
     <prefix>apropos</prefix>
     <fonctions>apropos_fonctions.php</fonctions>
