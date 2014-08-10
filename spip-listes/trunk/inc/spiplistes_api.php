@@ -28,9 +28,9 @@
 
 if(!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip ('inc/utils');
-include_spip ('inc/filtres');    /* email_valide() */
-include_spip ('inc/acces');      /* creer_uniqid() */
+include_spip('inc/utils');
+include_spip('inc/filtres');    /* email_valide() */
+include_spip('inc/acces');      /* creer_uniqid() */
 include_spip('inc/charsets');
 include_spip('inc/mail');
 

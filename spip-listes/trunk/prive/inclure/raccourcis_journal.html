@@ -1,19 +1,11 @@
 [(#URL_ECRIRE{spiplistes_voir_journal}
     |icone_horizontale{<:spiplistes:log_voir_le_journal:>, #CHEMIN_IMAGE{log-24.png}})]
 
+[(#REM) Informe si le mode verbeuse est actif avec l'adresse IP pour info]
+[(#OPT_CONSOLE_DEBUG|=={'oui'}|?{
 <span class="verdana2" style="display:block;padding:0.5ex;text-align:center">
     <a href="#URL_ECRIRE{spiplistes_config}#regler-console" title="<:spiplistes:log_configurer:>" class="cellule-h" style="text-align:center">
-[(#REM) avertir qu'on est en mode debug]
-<span style="display:block;font-weight:700;color:white;background-color:red;">
-<:spiplistes:mode_debug_actif:></span>
-</a>
-[(#REM) l'adresse IP pour info]
-<span style="display:block;"><?php echo($_SERVER['SERVER_ADDR']);?></span>
+	<span style="display:block;font-weight:700;color:white;background-color:red;"><:spiplistes:mode_debug_actif:></span></a>
+	<span style="display:block;">[(#IP_SERVEUR)]</span>
 </span>
-
-
-
-
-
-
-
+, ''})]

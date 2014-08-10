@@ -301,8 +301,14 @@ function spiplistes_form_input_radio ($name, $value, $label, $checked, $return =
  * @version SPIP-Listes-V: CP:20070923
  */
 function spiplistes_boite_raccourcis ($return = false) {
-
-    return recuperer_fond("prive/inclure/boite_raccourcis");
+	// initialise les options
+	foreach(array(
+			'opt_console_debug'
+	) as $key) {
+		$$key = spiplistes_pref_lire($key);
+	}
+	
+    return recuperer_fond("prive/inclure/boite_raccourcis", array('opt_console_debug' => $opt_console_debug, 'ip_serveur' => $_SERVER['SERVER_ADDR']));
 
 }
 

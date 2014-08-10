@@ -388,8 +388,11 @@ function spiplistes_meleuse ($last_time) {
 				. ' RETURN-PATH: ' . $return_path;
 			
 			if($total_abonnes) {
-		
-				$limit = intval($GLOBALS['meta']['spiplistes_lots']); // nombre de messages envoyes par boucles.	
+				// Fix bug : La meleuse tourne en boucle si spiplistes_lots non définie dans les varaibles meta
+				if(!isset($GLOBALS['meta']['spiplistes_lots'])) {
+					$GLOBALS['meta']['spiplistes_lots'] = _SPIPLISTES_LOT_TAILLE;
+				}
+				$limit = intval($GLOBALS['meta']['spiplistes_lots']); // nombre de messages envoyes par boucles.
 				
 				if($is_a_test) {
 					$sql_adresses_dest = sql_select('id_auteur,nom,email', 'spip_auteurs'

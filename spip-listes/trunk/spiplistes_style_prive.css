@@ -82,3 +82,7 @@ ul.meta-info-liste p { display:inline }
 	padding-left:2ex;
 }
 hr.spiplistes { border:1px solid #ccc; }
+
+/* Style_vieilles_def.html */
+.fondl {background-color: #E4E4E4; background-position: center bottom; border: 1px solid #9DBA00; float: none; font-size: 11px; margin-top: 0; padding: 3px;}
+

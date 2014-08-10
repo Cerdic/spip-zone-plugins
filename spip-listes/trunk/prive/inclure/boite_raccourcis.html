@@ -1,4 +1,3 @@
-
 #BOITE_OUVRIR{'','raccourcis'}
 
   [(#URL_ECRIRE{spiplistes_courrier_edit}
@@ -22,20 +21,11 @@
                 |icone_horizontale{<:titre_admin_tech:>, #CHEMIN_IMAGE{administration-24.gif}})]
 
  			[(#REM)// lecture du journal log]
-                        [(#INCLURE{fond=prive/inclure/raccourcis_journal})]
+                        [(#INCLURE{fond=prive/inclure/raccourcis_journal, opt_console_debug=#OPT_CONSOLE_DEBUG, ip_serveur=#IP_SERVEUR})]
 
 ]
 
   [(#URL_ECRIRE{spiplistes_aide}
                 |icone_horizontale{<:spiplistes:aide_en_ligne:>, #CHEMIN_IMAGE{aide-24.png},'','',onclick="javascript:window.open(this.href,'spip_aide', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;"})]
 
-
-
 #BOITE_FERMER
-
-
-
-
-
-
-

@@ -351,6 +351,90 @@ function spiplistes_cherche_auteur () {
 	return($result);
 } // end spiplistes_cherche_auteur()
 
+function mots_ressemblants($mot, $table_mots, $table_ids='') {
+
+	$result = array();
+
+	if (!$table_mots) return $result;
+
+	$lim = 2;
+	$nb = 0;
+	$opt = 1000000;
+	$mot_opt = '';
+	$mot = reduire_mot($mot);
+	$len = strlen($mot);
+
+	while (!$nb AND $lim < 10) {
+		reset($table_mots);
+		if ($table_ids) reset($table_ids);
+		while (list(, $val) = each($table_mots)) {
+			if ($table_ids) list(, $id) = each($table_ids);
+			else $id = $val;
+			$val2 = trim($val);
+			if ($val2) {
+				if (!isset($distance[$id])) {
+					$val2 = reduire_mot($val2);
+					$len2 = strlen($val2);
+					if ($val2 == $mot)
+						$m = -2; # resultat exact
+					else if (substr($val2, 0, $len) == $mot)
+						$m = -1; # sous-chaine
+					else {
+						# distance
+						$m = levenshtein255($val2, $mot);
+						# ne pas compter la distance due a la longueur
+						$m -= max(0, $len2 - $len);
+					}
+					$distance[$id] = $m;
+				} else $m = 0;
+				if ($m <= $lim) {
+					$selection[$id] = $m;
+					if ($m < $opt) {
+						$opt = $m;
+						$mot_opt = $val;
+					}
+					$nb++;
+				}
+			}
+		}
+		$lim += 2;
+	}
+
+	if (!$nb) return $result;
+	reset($selection);
+	if ($opt > -1) {
+		$moy = 1;
+		while(list(, $val) = each($selection)) $moy *= $val;
+		if($moy) $moy = pow($moy, 1.0/$nb);
+		$lim = ($opt + $moy) / 2;
+	}
+	else $lim = -1;
+
+	reset($selection);
+	while (list($key, $val) = each($selection)) {
+		if ($val <= $lim) {
+			$result[] = $key;
+		}
+	}
+	return $result;
+}
+
+// reduit un mot a sa valeur translitteree et en minuscules
+function reduire_mot($mot) {
+	return strtr(
+			translitteration(trim($mot)),
+			'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+			'abcdefghijklmnopqrstuvwxyz'
+	);
+}
+
+// ne pas faire d'erreur si les chaines sont > 254 caracteres
+function levenshtein255 ($a, $b) {
+	$a = substr($a, 0, 254);
+	$b = substr($b, 0, 254);
+	return @levenshtein($a,$b);
+}
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
