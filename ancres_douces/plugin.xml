@@ -21,6 +21,6 @@
 		<inclure>ancres_douces_pipelines.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<lien>http://www.spip-contrib.net/Ancres-douces</lien>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<lien>http://contrib.spip.net/Ancres-douces</lien>
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 </plugin>

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[1.9.0;3.1.*]"
 	logo="ancres_douces-64.png"
-	documentation="http://www.spip-contrib.net/Ancres-douces"
+	documentation="http://contrib.spip.net/Ancres-douces"
 >
 
 	<nom>Ancres Douces</nom>
