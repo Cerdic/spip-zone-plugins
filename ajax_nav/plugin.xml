@@ -22,7 +22,7 @@
 		</multi>
 	</description>
 	<icon>ajax_nav.png</icon>
-	<lien>http://www.spip-contrib.net/Navigation-AJAX</lien>
+	<lien>http://contrib.spip.net/Navigation-AJAX</lien>
 	<prefix>ajax_nav</prefix>
 	<categorie>navigation</categorie>
 
