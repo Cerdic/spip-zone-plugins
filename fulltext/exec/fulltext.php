@@ -23,7 +23,7 @@ function exec_fulltext()
 	echo gros_titre(_T('fulltext:titre_page_fulltext_index'),'',false);
 	
 	echo debut_gauche("",true);
-	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'agenda_inscriptions', 'id_evenement'=>$id_evenement),'data'=>''));
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'fulltext'),'data'=>''));
 	
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'fulltext'),'data'=>''));
 	
@@ -77,12 +77,8 @@ function exec_fulltext()
 	
 	echo fin_boite_info(true);
 	
-	echo pipeline('affiche_droite',
-			      array('args' => array(
-						    'exec'=>'fulltext'),
-				    'data'=>'')
-			      );
-				  
+	echo pipeline('affiche_droite',array('args' => array('exec'=>'fulltext'),'data'=>''));
+	
 	echo debut_droite("", true);
 	
 	echo debut_cadre_trait_couleur(find_in_path('images/fulltext-24.png'),true,'',"",'fulltext');
@@ -140,6 +136,7 @@ function exec_fulltext()
 
 			// Verification des index existants + suppression en cas de requette
 			if ($keys) {
+				echo "<dl>";
 				foreach($keys as $key=>$def) {
 					echo "<dt>$key".'<a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table.'&index='.$key).'" title="'._T('fulltext:supprimer').'">
                             <img src="'.(find_in_path('images/croix-rouge.gif')).'" alt="'._T('fulltext:supprimer').'"></a>';
@@ -149,6 +146,7 @@ function exec_fulltext()
 					}
 					echo "</dt><dd>$def</dd>\n";
 				}
+				echo "</dl>";
 			} else
 				if (!(_request('creer') == 'tous'))
 					echo "<p>"._T('fulltext:pas_index')."</p>\n";
