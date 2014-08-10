@@ -23,7 +23,7 @@
 			[ru]Позволяет создавать ссылки или ярлыки на статьи
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Alias-d-Article,2854</lien>
+	<lien>http://contrib.spip.net/Alias-d-Article,2854</lien>
 	<icon>img_pack/article-alias-32.png</icon>
 	<prefix>alias</prefix>
 	<pipeline>
