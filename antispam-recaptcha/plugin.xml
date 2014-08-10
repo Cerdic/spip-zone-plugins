@@ -9,7 +9,7 @@ Ce plugin fournit un filtre <code>|antispam</code> (fonction <code>filtre_antisp
 
 Le principal d&#233;faut de ce service est qu'on ne peut pas d&#233;finir la langue comme on le souhaite
 	</description>
-	<lien>http://www.spip-contrib.net/reCAPTCHA</lien>
+	<lien>http://contrib.spip.net/reCAPTCHA</lien>
 	<prefix>reCAPTCHA</prefix>
 
 	<icon>recaptcha.gif</icon>
