@@ -8,9 +8,9 @@
 	<description>
 		Portage pour SPIP d'[Akismet->http://akismet.com], une extension antispam de Wordpress bas&#233;e sur la classe php4 d'[Alex Potsides->http://www.achingbrain.net]
 	</description>
-	<lien>http://www.spip-contrib.net/Akismet</lien>
+	<lien>http://contrib.spip.net/Le-plugin-Akismet</lien>
 	<prefix>akismet</prefix>
 	<categorie>performance</categorie>
-	<necessite id='cfg' version='[1.0;]' />
+	<necessite id='cfg' version='[1.11.0;]' />
 	<necessite id='spip' version='[2.0.0;2.0.99]' />
 </plugin>
