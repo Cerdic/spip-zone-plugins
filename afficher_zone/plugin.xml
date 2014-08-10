@@ -8,7 +8,7 @@
 	    trier/classer/afficher les plugins de la Zone &#224; partir du flux RSS. 
       Trois formats de sortie: RSS, page spip et carte freemind.
 	</description>
-	<lien>http://spip-contrib.net/spip.php?article2733</lien>
+	<lien>http://contrib.spip.net/Plugin-Afficher-la-Zone</lien>
 	<icon>aff_zone.png</icon>
 	<categorie>divers</categorie>
 	<options>aff_zone_options.php</options><!-- gere l'appel de base/aff_zone_tables.php -->
