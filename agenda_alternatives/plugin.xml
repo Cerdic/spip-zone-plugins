@@ -32,6 +32,6 @@ _ Ce plugin a &#233;t&#233; test&#233; sous Spip v1.9.2c et Alternatives v1.9.2c
 	</pipeline>
 	<chemin dir='' type='public' />
 	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
-	<necessite id="Agenda" version="[0.1;]" />
-	<necessite id="WCalendar" version="[0.11;]" />
+	<necessite id="Agenda" version="[0.1.0;]" />
+	<necessite id="WCalendar" version="[0.11.0;]" />
 </plugin>
