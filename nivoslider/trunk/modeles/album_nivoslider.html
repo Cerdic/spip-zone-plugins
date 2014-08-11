@@ -10,5 +10,16 @@
 
 	Paramètres : cf. nivoslider_base.html
 
-][(#ENV{titre}|oui)[<div class="nivo titre">(#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}|wrap{[<(#ENV{balise_titre}|replace{^<}|replace{>$})>]})</div>]]
-<INCLURE{fond=modeles/nivoslider_base,env,id_objet=#ENV{id_album},objet=album,doublons,mode=#ENV{mode,document}} />
+][(#SET{titre,#ENV{titre,''}|replace{^oui$,''}})]
+<BOUCLE_album(ALBUMS){id_album=#ENV{id_album,#ENV{id}}}{statut == #REM|test_espace_prive|?{.*,#ENV{statut,publie}}}>
+[
+	[(#GET{titre}|!={non}|oui)
+		[
+			[(#PLUGIN{albums,version}|intval|>{2}|oui)<div class="nivo titre">]
+			(#GET{titre}|sinon{#TITRE}|wrap{[<(#ENV*{balise_titre,'<h2>'}|replace{^<}|replace{>$})>]})
+			[(#PLUGIN{albums,version}|intval|>{2}|oui)</div>]
+		]
+	]
+	(#INCLURE{fond=modeles/nivoslider_base,env,id_objet=#ID_ALBUM,objet=album,doublons,limite=#ENV{limite,1000},manualAdvance=#ENV{manualAdvance,#ENV{manuel,non}}|=={oui}|?{true,false}})
+]
+</BOUCLE_album>
