@@ -46,6 +46,7 @@ function formidable_declarer_tables_interfaces($interfaces) {
  *     Description complétée des tables
  */
 function formidable_declarer_tables_objets_sql($tables) {
+	include_spip('inc/config');
 	$tables['spip_formulaires'] = array(
 		'type'=>'formulaire',
 		'titre' => "titre, '' AS lang",
