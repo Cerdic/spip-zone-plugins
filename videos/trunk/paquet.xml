@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="theme/img/videos-32.png"
 	schema="0.3"
-	documentation="http://www.spip-contrib.net/?article3636"
+	documentation="http://contrib.spip.net/Plugin-Video-s"
 >	
 
 	<nom>Vid&#233;o(s)</nom>
