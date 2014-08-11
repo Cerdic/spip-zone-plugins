@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_livre' => 'Type du livre :',
 	
 	// U
-	'url_documentation' => 'http://www.spip-contrib.net/Plugin-Bouquinerie'
+	'url_documentation' => 'http://contrib.spip.net/Plugin-Bouquinerie'
 
 );
 

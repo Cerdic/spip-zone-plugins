@@ -14,7 +14,7 @@ _ Il permet en autre :
 -* L'importation de fichiers provenant de sites sp&#233;cialis&#233;s dans la vente de livres.
 -* L'exportation de la base de donn&#233;e dans un fichier xml.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Bouquinerie</lien>
+	<lien>http://contrib.spip.net/Plugin-Bouquinerie</lien>
 	<icon>images/bibliotheque.png</icon>
 	<options>bouq_options.php</options>
 	<fonctions>bouq_fonctions.php</fonctions>
