@@ -9,7 +9,7 @@
 	<description>
 	Ce plugin vise &#224; combler un manque de SPIP 2.1 : &#233;diter par soi-m&#234;me les adresses des rubriques, articles, br&#232;ves, mots-cl&#233;s, auteurs et sites syndiqu&#233;s. A priori, cette fonctionnalit&#233; sera int&#233;gr&#233;e sous forme d'extension sous le nom de urls &#233;tendues dans les prochaines versions de SPIP rendant donc ce plugin obsol&#232;te.
 	</description>
-	<lien>http://www.spip-contrib.net/URLs-editables</lien>
+	<lien>http://contrib.spip.net/URLs-editables</lien>
 	<prefix>urledit</prefix>
 	<pipeline>
 		<nom>affiche_milieu</nom>
