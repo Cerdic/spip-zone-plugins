@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'inscription_statut_webmestres' => 'Webmaster',
 
 	// L
-	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">View documentation</a>',
+	'lien_documentation' => '<a href="http://contrib.spip.net/Notifications" class="spip_out">View documentation</a>',
 
 	// M
 	'message_voir_configuration' => 'Look at the notification setup',
