@@ -14,10 +14,13 @@
 		*ids_documents    identifiant des documents
 		*env              environnement issu du squelette appelant
 
+][
+(#SET{titre,#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}})][
+(#SET{descriptif,#ENV{descriptif}|?{#INFO_DESCRIPTIF{album,#ID_ALBUM}}})
 ]<B_documents_album>
 [<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})]">]
 	<ul>
-		<BOUCLE_documents_album(DOCUMENTS){id_document IN #ENV{ids_documents}}>[
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #ENV{ids_documents}}{tout}>[
 
 		(#REM)
 
@@ -40,10 +43,10 @@
 
 		]</BOUCLE_documents_album>
 	</ul>
-	[(#ENV{titre}|ou{#ENV{titre}|et{#INFO_TITRE{album,#ID_ALBUM}|strlen}}|ou{#ENV{descriptif}|et{#INFO_DESCRIPTIF{album,#ID_ALBUM}|strlen}}|oui)
+	[(#GET{titre}|ou{#GET{descriptif}}|oui)
 	[<(#HTML5|?{figcaption,div}) class="figcaption">]
-		[(#ENV{titre}|oui)[<div class="titre">(#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}|wrap{[<(#ENV{balise_titre,#ENV{balise_titraille}}|replace{^<}|replace{>$})>]})</div>]]
-		[(#ENV{descriptif}|oui)[<div class="descriptif">(#INFO_DESCRIPTIF{album,#ID_ALBUM})</div>]]
+		[<div class="titre_album">(#GET{titre}|wrap{[<(#ENV*{balise_titre,#ENV*{balise_titraille}}|replace{^<}|replace{>$})>]})</div>]
+		[<div class="descriptif_album">(#GET{descriptif})</div>]
 	[</(#HTML5|?{figcaption,div})>]
 	]
 [</(#HTML5|?{figure,div})>]<!-- .album.vignettes -->

@@ -57,7 +57,7 @@
 
 (#REM) 1. «id_album» présent dans l'environnement
 
-]<BOUCLE_album(DOCUMENTS){id_album}{par #ENV{par,media},fichier,titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_album>[
+]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_docs></BOUCLE_album>[
 
 (#REM) 2. «id_article» donné explicitement
 
