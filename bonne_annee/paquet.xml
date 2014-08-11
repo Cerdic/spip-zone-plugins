@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="bonne_annee.png"
-	documentation="http://www.spip-contrib.net/Plugin-Bonne-annee"
+	documentation="http://contrib.spip.net/Plugin-Bonne-annee"
 >
 
 	<nom>Bonne ann&#233;e</nom>
