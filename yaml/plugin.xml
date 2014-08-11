@@ -10,7 +10,7 @@
 	<code>yaml_decode()</code> et <code>yaml_encode()</code>. Il fournit aussi le format yaml pour la boucle (DATA).
 	</description>
 	<prefix>YAML</prefix>
-	<lien>http://www.spip-contrib.net/Le-plugin-YAML</lien>
+	<lien>http://contrib.spip.net/Le-plugin-YAML</lien>
 	<icon>yaml.png</icon>
 	<fonctions>yaml_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.10;3.0.99]" />

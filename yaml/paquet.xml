@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="yaml.png"
-	documentation="http://www.spip-contrib.net/Le-plugin-YAML"
+	documentation="http://contrib.spip.net/Le-plugin-YAML"
 >
 
 	<nom>YAML</nom>
