@@ -19,7 +19,7 @@ Ins&#233;rez la balise <code>#ARTICLE_PDF</code> dans votre squelette pour avoir
 F&#252;gen Sie den Tag <code>#ARTICLE_PDF</code> in Ihr Skelett ein um &#252;ber einen Link zum Herunterladen des Artikels im PDF Format zu verf&#252;gen
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/article2226.html</lien>
+	<lien>http://contrib.spip.net/Article-PDF,2226</lien>
 	<icon>prive/themes/spip/images/article_pdf-64.png</icon>
 	<options>article_pdf_mes_options.php</options>
 	<fonctions>article_pdf_mes_fonctions.php</fonctions>
