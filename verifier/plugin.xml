@@ -18,7 +18,7 @@
 		</multi>
 	</description>
 	<prefix>verifier</prefix>
-	<lien>http://www.spip-contrib.net/Verifier,1505</lien>
+	<lien>http://contrib.spip.net/Verifier,1505</lien>
 	<pipeline>
 		<nom>verifier</nom>
 		<action></action>
