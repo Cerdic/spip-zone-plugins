@@ -1,7 +1,7 @@
 ﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
 <config>
-<nom_site value="[(#NOM_SITE_SPIP|attribut_html)]" />
 <BOUCLE_cle (CONDITION){si #ENV{cle}|=={#CONFIG{'info_spip/cle'}}} {si #CONFIG{'info_spip/actif'}|=={'oui'}}> </BOUCLE_cle>
+<nom_site value="[(#NOM_SITE_SPIP|attribut_html)]" />
 <logiciel nom="SPIP" version="[(#SPIP_VERSION|explode{' '}|table_valeur{0})]" revision="[(#SPIP_VERSION|explode{' '}|table_valeur{1})]" />
 <date_creation value="[(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})]" />
 <fo url="#URL_SITE_SPIP" />
