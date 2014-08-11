@@ -16,7 +16,7 @@
 		[en]This plugin lets you manage a gallery of themes for your site, and change easily among those available. It requires the use of the templates Zpip or Sarka-SPIP that support themes.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/SPIP-Zen-Garden</lien>
+	<lien>http://contrib.spip.net/SPIP-Zen-Garden</lien>
 	<options>zengarden_options.php</options>
 	<pipeline>
 		<nom>affichage_final</nom>
