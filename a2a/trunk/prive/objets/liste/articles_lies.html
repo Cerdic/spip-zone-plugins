@@ -39,9 +39,9 @@
 			</td>]
 			<td><a href="[(#URL_ECRIRE{article,id_article=#ID_ARTICLE})]">#TITRE (#ID_ARTICLE)</a></td>
 			<BOUCLE_autorise(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui}>
-				[<td title="<:a2a:rang_moins:>">(#BOUTON_ACTION{<:a2a:rang_moins:>,#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/moins,#SELF},ajax a2a-rang_moins})</td>]
-				[<td title="<:a2a:rang_plus:>">(#BOUTON_ACTION{<:a2a:rang_plus:>,#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/plus,#SELF},ajax a2a-rang_plus})</td>]
-				[<td title="<:a2a:supprimer_le_lien:>">(#BOUTON_ACTION{<:a2a:supprimer_le_lien:>,#URL_ACTION_AUTEUR{a2a,supprimer_lien/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON,#SELF},ajax a2a-supprimer_le_lien})</td>]
+				[<td title="<:a2a:rang_moins:>">(#BOUTON_ACTION{ [(#CHEMIN_IMAGE{a2a-rang_moins.png}|balise_img{<:a2a:rang_moins:>})],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/moins,#SELF},ajax a2a-rang_moins})</td>]
+				[<td title="<:a2a:rang_plus:>">(#BOUTON_ACTION{[(#CHEMIN_IMAGE{a2a-rang_plus.png}|balise_img{<:a2a:rang_plus:>})],#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/plus,#SELF},ajax a2a-rang_plus})</td>]
+				[<td title="<:a2a:supprimer_le_lien:>">(#BOUTON_ACTION{[(#CHEMIN_IMAGE{a2a-supprimer_le_lien.png}|balise_img{<:a2a:supprimer_le_lien:>})] ,#URL_ACTION_AUTEUR{a2a,supprimer_lien/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON,#SELF},ajax a2a-supprimer_le_lien})</td>]
 				<BOUCLE_lies_both(ARTICLES_LIES){id_article_lie=#_les_articles_lies:ID_ARTICLE_ORIG}{id_article=#ID_ARTICLE_LIE}{type_liaison=#TYPE_LIAISON}>
 					[<td>(#BOUTON_ACTION{<:a2a:supprimer_le_lien_deux_cotes:>,#URL_ACTION_AUTEUR{a2a,supprimer_lien/#ID_ARTICLE/#ID_ARTICLE_ORIG/#TYPE_LIAISON/both,#SELF},ajax})</td>]
 				</BOUCLE_lies_both>
