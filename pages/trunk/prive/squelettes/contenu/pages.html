@@ -1,3 +1,4 @@
+[(#AUTORISER{voir,_pages}|sinon_interdire_acces)]
 <h1 class="grostitre"><:pages:toutes_les_pages:></h1>
 
 #SET{statuts,#SESSION{statut}|statuts_articles_visibles}
@@ -13,3 +14,11 @@
 	sinon=<:pages:aucune_page:>,
 	env,
 	ajax}>
+
+[(#AUTORISER{creer,page})
+	[(#URL_ECRIRE{article_edit}
+			|parametre_url{modele,page}
+			|parametre_url{new,oui}
+			|parametre_url{id_rubrique,-1}
+			|icone_verticale{<:pages:creer_page:>,page,new,right})]
+]

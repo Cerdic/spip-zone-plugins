@@ -245,7 +245,7 @@ function pages_pre_edition_ajouter_page($flux){
 /**
  * Insertion dans le pipeline boite_infos (SPIP)
  * 
- * Ajouter un lien pour transformer une article normal en page inversement
+ * Ajouter un lien pour transformer un article éditorial en page ou inversement
  * 
  * @param array $flux 
  * 		Le contexte du pipeline
@@ -253,12 +253,16 @@ function pages_pre_edition_ajouter_page($flux){
  * 		Le contexte modifié
  */
 function pages_boite_infos($flux){
-	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
+	if ($flux['args']['type'] == 'article') {
 		include_spip('inc/presentation');
-		if (sql_getfetsel('page', 'spip_articles', 'id_article='. intval($flux['args']['id'])) == '')
-			$flux['data'] .= icone_horizontale(_T('pages:convertir_page'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page'), 'page', $fonction="", $dummy="", $javascript="");
-		else
-			$flux['data'] .= icone_horizontale(_T('pages:convertir_article'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article'), 'article', $fonction="", $dummy="", $javascript="");
+		if (sql_getfetsel('page', 'spip_articles', 'id_article='. intval($flux['args']['id'])) == '') {
+			if (autoriser('creer', 'page', $flux['args']['id']))
+				$flux['data'] .= icone_horizontale(_T('pages:convertir_page'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page'), 'page', $fonction="", $dummy="", $javascript="");
+		}
+		else {
+			if (autoriser('modifier', 'page', $flux['args']['id']))
+				$flux['data'] .= icone_horizontale(_T('pages:convertir_article'), parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article'), 'article', $fonction="", $dummy="", $javascript="");
+		}
 	}
 	return $flux;
 }
@@ -283,10 +287,86 @@ function pages_affiche_hierarchie($flux){
 		and sql_getfetsel('page', 'spip_articles', 'id_article='.intval($id_article))
 	){
 		$cherche = "<a href=\"". generer_url_ecrire('rubriques') . "\">" . _T('info_racine_site') . "</a>";
-		$remplace = "<a href=\"". generer_url_ecrire('pages_tous') . "\">" . _T('pages:pages_uniques') . "</a>";
+		$remplace = "<a href=\"". generer_url_ecrire('pages') . "\">" . _T('pages:pages_uniques') . "</a>";
 		$flux['data'] = str_replace($cherche,$remplace,$flux['data']);
 	}
 	return $flux;
+}
+
+
+/**
+ * Insertion dans le pipeline pre_boucle (SPIP)
+ * Pour les listes d'articles purement éditoriaux, il faut exclure les pages uniques afin d'éviter la confusion des genres
+ * ainsi que les liens vers des pages parfois inaccessibles en fonction de l'autorisation de l'auteur.
+ *
+ * @param array $flux
+ * 		Le contexte du pipeline
+ * @return array $flux
+ * 		Le contexte modifié
+ */
+function pages_pre_boucle($boucle){
+
+	// On ne s'intéresse qu'à la boucle ARTICLES
+	if ($boucle->type_requete == 'articles') {
+		// On n'insère le filtre {id_rubriques>0} pour exclure les pages uniques que si aucune des conditions
+		// suivantes n'est vérifiée:
+		// - pas de critère page
+		// - pas de critère explicite {id_rubrique=-1} ou {id_rubrique<0}
+		// - pas de critère {id_rubrique?} pour lequel l'environnement renvoie -1 pour l'id de la rubrique
+		$boucle_articles = true;
+		$critere_page = false;
+
+		// On cherche les critères id_rubrique, id_article ou page
+		foreach($boucle->criteres as $_critere){
+			if (($_critere->op == 'page') // {page} ou {page?}
+			OR ($_critere->param[0][0]->texte == 'page')) { // {page=x}
+				// On considère qu'on cherche toujours des pages uniques donc on force le filtre id_rubrique=-1
+				$boucle_articles = false;
+				$critere_page = true;
+				break;
+			}
+			elseif (($_critere->op == 'id_article') // {id_article} ou {id_article?}
+				OR ($_critere->param[0][0]->texte == 'id_article')) { // {id_article=x}
+				// On pointe sur un article précis, il est donc inutile de rajouter un test sur la rubrique
+				// Pour le critère {id_article?} on considère que si l'on veut sélectionner des pages uniques
+				// ou des articles éditoriaux on doit préciser le critère {id_rubrique}
+				$boucle_articles = false;
+			}
+			elseif ((($_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique=-1}
+					AND ($_critere->op == '=')
+					AND ($_critere->param[1][0]->texte == '-1'))
+				OR (($_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique<0}
+					AND ($_critere->op == '<')
+					AND ($_critere->param[1][0]->texte == '0'))) {
+				// On cherche explicitement des pages uniques
+				$boucle_articles = false;
+				break;
+			}
+			elseif (($_critere->op == 'id_rubrique')) {
+				// On connait pas à ce stade la valeur de id_rubrique qui est passé dans le env.
+				// Aussi, on créer une condition where qui se compile différemment suivant la valeur de l'id_rubrique.
+				// En fait, il suffit de tester si l'id_rubrique est null. Dans ce cas il faut bien rajouter id_rubrique>0
+				// pour éliminer les pages uniques.
+				$boucle_articles = false;
+				$env_id = "\$Pile[0]['id_rubrique']";
+				$boucle->where[] =
+					array("'?'", "(is_array($env_id)?count($env_id):strlen($env_id))", "''", "'articles.id_rubrique>0'");
+				break;
+			}
+		}
+
+		// Si on est en présence d'une boucle article purement éditoriale, on ajoute le filtre id_rubrique>0
+		if ($boucle_articles) {
+			$boucle->where[] = array("'>'", "'articles.id_rubrique'", "'\"0\"'");
+		}
+
+		// Si on est en présence d'un critère {page} quelconque, on force le filtre id_rubrique=-1
+		if ($critere_page) {
+			$boucle->where[] = array("'='", "'articles.id_rubrique'", "'\"-1\"'");
+		}
+	}
+
+	return $boucle;
 }
 
 ?>

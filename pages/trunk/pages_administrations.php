@@ -41,6 +41,8 @@ function pages_upgrade($nom_meta_base_version, $version_cible) {
  * Fonction de désinstallation du plugin
  * Supprimer la colonne 'page' du plugin
  *
+ * TODO : que deviennent les article avec un id_rubrique=-1 ? Ne faut-il pas les traiter ?
+ *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
