@@ -31,18 +31,6 @@ function a2a_declarer_tables_auxiliaires($tables_auxiliaires){
 		"id_article_lie" => "id_article_lie"
 	);
 	
-	$spip_mots_liens = array(
-			"id_mot" => "bigint(21) DEFAULT '0' NOT NULL",
-			"id_objet" => "bigint(21) DEFAULT '0' NOT NULL",
-			"objet" => "VARCHAR (25) DEFAULT '' NOT NULL");
-
-	$spip_mots_liens_key = array(
-			"PRIMARY KEY" => "id_mot,id_objet,objet",
-			"KEY id_mot" => "id_mot",
-			"KEY id_objet" => "id_objet",
-			"KEY objet" => "objet",
-	);
-
 	$tables_auxiliaires['spip_articles_lies'] =
 		array(
 			'field' => &$spip_articles_lies,
