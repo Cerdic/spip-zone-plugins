@@ -43,9 +43,8 @@
 
 <BOUCLE_autresobjets(spip_projets_sites_liens) {id_site} {fusion objet}{par objet}>
 	#SET{table,#OBJET|table_objet}
-	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projets_site]})]
-	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_projets_site}})]
-	<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_site,ajax,env} />
+	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projets_site]})] 
+	<INCLURE{fond=prive/objets/liste/objets_lies_projets_site,objet,id_projets_site,ajax,env} />
 </BOUCLE_autresobjets>
 
 

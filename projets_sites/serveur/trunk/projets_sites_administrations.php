@@ -49,6 +49,18 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('sql_alter', "TABLE spip_projets_sites ADD php_extensions text DEFAULT '' NOT NULL AFTER php_memory"),
     );
 
+    // un port peut avoir 5 chiffres (même si ce n'est utilisé dans notre cas)
+    $maj['1.2.0'] = array(
+        array('sql_alter', "TABLE spip_projets_sites CHANGE serveur_port serveur_port varchar(5) NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE logiciel_nom logiciel_nom varchar(25) NOT NULL DEFAULT '' AFTER webservice"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE logiciel_version logiciel_version varchar(25) NOT NULL DEFAULT '' AFTER logiciel_nom"),
+        array('sql_alter', "TABLE spip_projets_sites ADD logiciel_revision varchar(25) NOT NULL DEFAULT '' AFTER logiciel_version"),
+        array('sql_alter', "TABLE spip_projets_sites ADD logiciel_plugins text DEFAULT '' NOT NULL AFTER logiciel_revision"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sgbd_port varchar(5) NOT NULL DEFAULT '' AFTER sgbd_serveur"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sgbd_prefixe varchar(25) NOT NULL DEFAULT '' AFTER sgbd_nom"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sgbd_version varchar(25) NOT NULL DEFAULT '' AFTER sgbd_type"),
+    );
+
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

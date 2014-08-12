@@ -33,6 +33,16 @@
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_version} logiciel_version'>(#LOGICIEL_VERSION)</div>
 	</div>]
 
+	[<div class="champ contenu_logiciel_revision[ (#LOGICIEL_REVISION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_logiciel_revision:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{logiciel_revision} logiciel_revision'>(#LOGICIEL_REVISION)</div>
+	</div>]
+
+	[<div class="champ contenu_logiciel_plugins[ (#LOGICIEL_PLUGINS*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_logiciel_plugins:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{logiciel_plugins} logiciel_plugins'>(#LOGICIEL_PLUGINS)</div>
+	</div>]
+
 <!-- Front office -->
 <div class="champ fieldset"><h3 class="legend fo_fieldset"><:projets_site:label_fo_fieldset:></h3></div>
 
@@ -97,12 +107,15 @@
 		<div dir='#LANG_DIR' class='span #EDIT{serveur_surveillance} serveur_surveillance'>(#SERVEUR_SURVEILLANCE)</div>
 	</div>]
 
-	<!-- PHP et Apache -->
+<!-- Apache -->
+<div class="champ fieldset"><h3 class="legend apache_fieldset"><:projets_site:label_apache_fieldset:></h3></div>
 	[<div class="champ contenu_apache_modules[ (#APACHE_MODULES*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_apache_modules:> : </div>
 		<div dir='#LANG_DIR' class='span #EDIT{apache_modules} apache_modules'>(#APACHE_MODULES)</div>
 	</div>]
 
+<!-- PHP -->
+<div class="champ fieldset"><h3 class="legend php_fieldset"><:projets_site:label_php_fieldset:></h3></div>
 	[<div class="champ contenu_php_version[ (#PHP_VERSION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_php_version:> : </div>
 		<div dir='#LANG_DIR' class='span #EDIT{php_version} php_version'>(#PHP_VERSION)</div>
@@ -167,14 +180,29 @@
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_type} sgbd_type'>(#SGBD_TYPE)</div>
 	</div>]
 
+	[<div class="champ contenu_sgbd_version[ (#SGBD_VERSION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_sgbd_version:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{sgbd_version} sgbd_version'>(#SGBD_VERSION)</div>
+	</div>]
+
 	[<div class="champ contenu_sgbd_serveur[ (#SGBD_SERVEUR*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_serveur:> : </div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_serveur} sgbd_serveur'>(#SGBD_SERVEUR)</div>
 	</div>]
 
+	[<div class="champ contenu_sgbd_port[ (#SGBD_PORT*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_sgbd_port:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{sgbd_port} sgbd_port'>(#SGBD_PORT)</div>
+	</div>]
+
 	[<div class="champ contenu_sgbd_nom[ (#SGBD_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_nom:> : </div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_nom} sgbd_nom'>(#SGBD_NOM)</div>
+	</div>]
+
+	[<div class="champ contenu_sgbd_prefixe[ (#SGBD_PREFIXE*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_sgbd_prefixe:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{sgbd_prefixe} sgbd_prefixe'>(#SGBD_PREFIXE)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_login[ (#SGBD_LOGIN*|strlen|?{'',vide})]">

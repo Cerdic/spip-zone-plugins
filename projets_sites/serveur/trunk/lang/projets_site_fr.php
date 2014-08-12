@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
     'ajouter_lien_projets_site' => 'Ajouter ce site',
+    'avis_site_introuvable' => 'Site introuvable',
 
     // E
     'explication_moteur_recherche' => 'Exemples : Moteur interne au logiciel, Exalead, Google, etc.',
@@ -26,11 +27,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'icone_creer_projets_site' => 'Ajouter un site',
     'icone_modifier_projets_site' => 'Modifier ce site',
     'info_1_projets_site' => 'Un site',
-    'info_aucun_projets_site' => 'Aucun site lié à ce projet',
+    'info_aucun_projets_site' => 'Aucun site',
     'info_nb_projets_sites' => '@nb@ sites',
     'info_projets_sites_auteur' => 'Les sites de cet auteur',
 
     // L
+    'label_apache_fieldset' => 'Apache',
     'label_apache_modules' => 'Modules Apache',
     'label_autres_fieldset' => 'Autres',
     'label_autres_outils' => 'Autres outils',
@@ -46,10 +48,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_fo_url' => 'Url du Front Office',
     'label_logiciel_fieldset' => 'Logiciel',
     'label_logiciel_nom' => 'Nom du logiciel',
+    'label_logiciel_plugins' => 'Plugins du logiciel',
+    'label_logiciel_revision' => 'Numéro de révision',
     'label_logiciel_version' => 'Version du logiciel',
     'label_moteur_recherche' => 'Moteur de recherche',
     'label_perimetre_acces' => 'Périmètre d\'accès',
     'label_php_extensions' => 'Extensions PHP',
+    'label_php_fieldset' => 'PHP',
     'label_php_memory' => 'Mémoire allouée à PHP',
     'label_php_version' => 'Version de PHP',
     'label_remarques' => 'Remarques',
@@ -69,8 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_sgbd_login' => 'Identifiant',
     'label_sgbd_nom' => 'Nom de la SGBD',
     'label_sgbd_password' => 'Mot de passe',
+    'label_sgbd_prefixe' => 'Préfixe des tables',
     'label_sgbd_serveur' => 'Serveur SGBD',
     'label_sgbd_type' => 'Type de SGBD',
+    'label_sgbd_version' => 'Version de la SGBD',
     'label_sso' => 'SSO',
     'label_statistiques' => 'Outils de statistiques',
     'label_titre' => 'Titre',
@@ -93,6 +100,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_ajouter_projets_site' => 'Ajouter un site',
     'texte_changer_statut_projets_site' => 'Ce site est :',
     'texte_creer_associer_projets_site' => 'Créer et associer un site',
+    'texte_non_fonction_referencement' => 'Vous pouvez préférer ne pas utiliser cette fonction automatique, et indiquer
+    vous-même les éléments concernant ce site…',
+    'texte_referencement_automatique' => '<strong>Ajout automatisé par webservice</strong><br/>Vous pouvez importer les
+    données de votre site par le biais de l\'url de webservice si vous l\'avez configuré sur ce dernier.',
+    'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt>
+    avant d’enregistrer.',
     'titre_langue_projets_site' => 'Langue de ce site',
     'titre_logo_projets_site' => 'Logo de ce site',
     'titre_objets_lies_projets_site' => 'Liés à ce site :',

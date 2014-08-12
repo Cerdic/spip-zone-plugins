@@ -6,8 +6,22 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_site' value='#ENV{id_site}' />
-		<ul>
+			[(#ENV{id_site}|intval|>{0}|sinon{#ENV{webservice}}|non)
+			[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_sites}|>{0}|oui})
+			<fieldset class="editer editer_referencement_automatise fieldset">
+				<ul>
+					<li class="editer editer_url_auto pleine_largeur[ (#ENV**{erreurs}|table_valeur{url_auto}|oui)erreur]">
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{url_auto})</span>]
+						<p class="explication"><:projets_site:texte_referencement_automatique:></p>
+						<input type="text" name="url_auto" id="url_auto" class='text' size='40' value="[(#ENV{webservice}|sinon{http://})]" />
+					</li>
+				</ul>
+				<p class="boutons"><input type='submit' class='submit' name='ajoute_url_auto' value='<:bouton_ajouter:>' /></p>
+				<p class="explication"><:projets_site:texte_non_fonction_referencement:></p>
+			</fieldset>
+			]]
 
+		<ul>
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:projets_site:label_titre:>,
 				size=255,
@@ -53,6 +67,16 @@
 					label=<:projets_site:label_logiciel_version:>,
 					size=25,
 					maxlength=25})]
+
+				[(#SAISIE{input, logiciel_revision,
+					label=<:projets_site:label_logiciel_revision:>,
+					size=25,
+					maxlength=25})]
+
+				[(#SAISIE{textarea, logiciel_plugins,
+					label=<:projets_site:label_logiciel_plugins:>,
+					rows=6})]
+
 			</ul>
 		</fieldset>
 
@@ -134,11 +158,27 @@
 					size=255,
 					maxlength=255})]
 
-	<!-- PHP et Apache -->
+			</ul>
+		</fieldset>
+
+
+		<fieldset>
+			<h3 class="legend">
+				<:projets_site:label_apache_fieldset:>
+			</h3>
+			<ul>
 				[(#SAISIE{textarea, apache_modules,
 					label=<:projets_site:label_apache_modules:>,
 					rows=6})]
 
+			</ul>
+		</fieldset>
+
+		<fieldset>
+			<h3 class="legend">
+				<:projets_site:label_php_fieldset:>
+			</h3>
+			<ul>
 				[(#SAISIE{input, php_version,
 					label=<:projets_site:label_php_version:>,
 					size=25,
@@ -221,15 +261,30 @@
 					size=25,
 					maxlength=25})]
 
+				[(#SAISIE{input, sgbd_version,
+					label=<:projets_site:label_sgbd_version:>,
+					size=25,
+					maxlength=25})]
+
 				[(#SAISIE{input, sgbd_serveur,
 					label=<:projets_site:label_sgbd_serveur:>,
 					size=255,
 					maxlength=255})]
 
+				[(#SAISIE{input, sgbd_port,
+					label=<:projets_site:label_sgbd_port:>,
+					size=5,
+					maxlength=5})]
+
 				[(#SAISIE{input, sgbd_nom,
 					label=<:projets_site:label_sgbd_nom:>,
 					size=50,
 					maxlength=50})]
+
+				[(#SAISIE{input, sgbd_prefixe,
+					label=<:projets_site:label_sgbd_prefixe:>,
+					size=25,
+					maxlength=25})]
 
 				[(#SAISIE{input, sgbd_login,
 					label=<:projets_site:label_sgbd_login:>,

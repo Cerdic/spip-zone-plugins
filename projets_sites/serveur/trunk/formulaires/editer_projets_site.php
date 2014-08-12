@@ -100,7 +100,30 @@ function formulaires_editer_projets_site_charger_dist($id_site = 'new', $retour 
  */
 function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
 {
-    return formulaires_editer_objet_verifier('projets_site', $id_site);
+    include_spip('inc/filtres');
+    include_spip('inc/site');
+    $analyser_webservice = charger_fonction('analyser_webservice', 'inc');
+
+    // $oblis = array('titre','type_site','logiciel_nom','logiciel_service');
+    // Envoi depuis le formulaire d'analyse automatique d'un site
+    if (_request('ajoute_url_auto') AND strlen(vider_url($u = _request('url_auto')))) {
+        if ($auto = $analyser_webservice($u)) {
+            foreach($auto as $k=>$v){
+                set_request($k,$v);
+            }
+            $erreurs['verif_url_auto'] = _T('sites:texte_referencement_automatique_verifier', array('url' => $u));
+        } else {
+            $erreurs['url_auto'] = _T('sites:avis_site_introuvable');
+        }
+    } else {
+        // auto-renseigner le titre si il n'existe pas
+        // d'abord a partir du descriptif en coupant
+        titre_automatique('titre',array('descriptif'));
+        // et sinon l'url du front office, sans couper
+        titre_automatique('titre',array('fo_url'),255);
+        $erreurs = formulaires_editer_objet_verifier('projets_site', $id_site);
+    }
+    return $erreurs;
 }
 
 /**
