@@ -28,12 +28,13 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 	// - l'article est dans l'état "proposé à l'évaluation"
 	// - l'article n'a pas déjà une relecture d'ouverte
 	// - l'article possède au moins un élément textuel non vide
+	// - l'article est bien éditorial (éviter les articles spécialisés du plugin Pages)
 	if ($id_article = intval($id)) {
 		$auteur_autorise = autoriser('modifier', 'article', $id_article, $qui, $opt);
 
 		$from = 'spip_articles';
 		$where = array("id_article=$id_article");
-		$infos = sql_fetsel('statut,chapo,descriptif,texte,ps', $from, $where);
+		$infos = sql_fetsel('statut,chapo,descriptif,texte,ps,id_rubrique', $from, $where);
 
 		$from = 'spip_relectures';
 		$where = array("id_article=$id_article", "statut=" . sql_quote('ouverte'));
@@ -48,7 +49,8 @@ function autoriser_article_ouvrirrelecture_dist($faire, $type, $id, $qui, $opt) 
 			($auteur_autorise
 			AND ($infos['statut']=='prop')
 			AND ($nb_relecture_ouverte==0)
-			AND ($taille_elements > 0));
+			AND ($taille_elements > 0)
+			AND (intval($id_rubrique) > 0));
 	}
 
 	return $autoriser;
