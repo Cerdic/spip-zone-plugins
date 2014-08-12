@@ -1,7 +1,7 @@
 <paquet
 	prefix="info_spip"
 	categorie="outil"
-	version="0.6.9"
+	version="0.6.10"
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/info_spip-64.png"
