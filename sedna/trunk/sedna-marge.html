@@ -52,7 +52,7 @@
 </ul>
 <ul>
 	[(#SESSION{statut}|=={0minirezo}|oui)<li>
-		<a href="[(#URL_ECRIRE{#ENV{id_syndic,''}|?{site,sites_tous}}|parametre_url{id_syndic,#ENV{id_syndic,''}})]">[(#ENV{id_syndic}|?{<:sites:icone_modifier_site:>, <:login_acces_prive:>})]</a>
+		<a href="[(#URL_ECRIRE{#ENV{id_syndic,''}|?{site,sites}}|parametre_url{id_syndic,#ENV{id_syndic,''}})]">[(#ENV{id_syndic}|?{<:sites:icone_modifier_site:>, <:login_acces_prive:>})]</a>
 	</li>]
 	<li>
 	[(#REM) Ici #SELF est passe "a cote'" de #URL_LOGOUT, car il y a des
