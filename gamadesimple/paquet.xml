@@ -10,7 +10,7 @@
 >	
 	<nom>GA Made Simple</nom>
 	<auteur>Nicolas Grillet</auteur>
-	<auteur url="http://www.devictio.fr">Devictio</auteur> 
+	<auteur lien="http://www.devictio.fr">Devictio</auteur> 
 	<pipeline nom="insert_head" inclure="gamadesimple_pipelines.php" />
 	<menu nom="gamadesimple_options" titre="GA Made Simple Paramètres" parent="menu_configuration" icone="images/logo16.png" />
 
