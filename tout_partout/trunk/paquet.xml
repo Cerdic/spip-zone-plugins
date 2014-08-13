@@ -12,7 +12,7 @@
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<auteur lien="http://rastapopoulos.artizanal.info">RastaPopoulos</auteur>
-	<credit url="http://www.weblog.eliaz.fr/article114.html">b_b pour l'inspiration de l'astuce</credit>
+	<credit lien="http://www.weblog.eliaz.fr/article114.html">b_b pour l'inspiration de l'astuce</credit>
 	<licence>GPL v3</licence>
 
 	<pipeline nom="pre_boucle" inclure="toutpartout_pipeline.php" />
