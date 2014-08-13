@@ -50,7 +50,7 @@ function urls_pages_lister_pages () {
 		array (
 			'paquets.id_plugin = plugins.id_plugin',
 			'categorie = "squelette"',
-			'actif = "oui"'
+			'paquets.actif = "oui"'
 		))) {
 		while ($ligne = sql_fetch($r)) {
 			$prefixe = strtolower($ligne['prefixe']);
@@ -82,7 +82,7 @@ function urls_pages_lister_pages () {
 		array (
 			'paquets.id_plugin = plugins.id_plugin',
 			'categorie = "outil"',
-			'actif = "oui"'
+			'paquets.actif = "oui"'
 		))) {
 		while ($ligne = sql_fetch($r)) {
 			$prefixe = strtolower($ligne['prefixe']);
