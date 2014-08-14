@@ -123,6 +123,8 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 			if (!$ok)
 				$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 			
+			//die (phpversion());
+			
 			if($destFormat == "jpg" && function_exists('imageconvolution')) {
 				$intSharpness = _findSharp($srcWidth, $destWidth);
 				$arrMatrix = array(
@@ -130,7 +132,23 @@ function image_reduire_net($source, $taille = 0, $taille_y=0, $dpr=0) {
 					array(-2, $intSharpness + 12, -2),
 					array(-1, -2, -1)
 				);
-				imageconvolution($destImage, $arrMatrix, $intSharpness, 0);
+				
+				$div = array_sum(array_map('array_sum', $arrMatrix));  
+				//die ("div: ".$div);
+				
+				// On s'arrange maintenant pour que le divisor soit 1
+				// parce qu'imageconvoluion en PHP 5.5.9 semble ne prendre en compte
+				// que cette valeur
+				$arrMatrix = array(
+					array(-1/$div, -2/$div, -1/$div),
+					array(-2/$div, ($intSharpness + 12)/$div, -2/$div),
+					array(-1/$div, -2/$div, -1/$div)
+				);
+				$divisor = array_sum(array_map('array_sum', $arrMatrix));            
+				//die ("divisor: ".$divisor);
+								
+
+				imageconvolution($destImage, $arrMatrix, $divisor, 0);
 			}
 			// Sauvegarde de l'image destination
 			$valeurs['fichier_dest'] = $vignette = "$destination.$destFormat";
