@@ -82,6 +82,8 @@ function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 		
 		if (count($tailles) > 1) {
 			sort($tailles);
+			include_spip("inc/json");
+			
 			$img = inserer_attribut($img, "data-tailles", addslashes(json_encode($tailles)));
 		}
 
