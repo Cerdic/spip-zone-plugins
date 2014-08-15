@@ -77,6 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_menu_config' => 'Autorité',
 	'infos_selection' => '(vous pouvez sélectionner plusieurs secteurs avec la touche shift)',
 	'interdire_admin' => 'Cochez les cases ci-dessous pour interdire aux administrateurs de créer',
+	'info_gere_rubriques' => 'Gère les rubriques suivantes :',
+	'info_gere_rubriques_2' => 'Je gère les rubriques suivantes :',
 
 	// M
 	'mots_cles_qui' => '<strong>Mots-clés :</strong> qui peut créer et éditer les mots-clés :',
