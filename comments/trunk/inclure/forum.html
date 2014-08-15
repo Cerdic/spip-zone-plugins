@@ -3,7 +3,7 @@
 	<a href="#forum" name="forum" id="forum"></a> 
 	<INCLURE{fond=comments-#CONFIG{comments/comments_fil,list}|replace{'-',''},env,ajax} />[(#ENV{repondre_url}|oui)
 	[<div class="comment-form">
-		[<h2 class="h2">(#ENV{repondre_titre,<:repondre_article:>}|trim)</h2>]
+		[<h2 class="h2">(#ENV*{repondre_titre,<:repondre_article:>}|trim)</h2>]
 		(#FORMULAIRE_FORUM{#SELF,#ENV{objet},#ENV{id_objet}})
 	</div>]
 	[(#PARAMETRES_FORUM|oui)<INCLURE{fond=comments-feed,env} />]
