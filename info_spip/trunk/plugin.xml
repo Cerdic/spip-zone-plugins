@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Info SPIP</multi></nom>
 	<icon>prive/themes/spip/images/info_spip-32.png</icon>
 	<auteur>Teddy Payet</auteur>
-	<version>0.6.10</version>
+	<version>0.6.11</version>
 	<etat>stable</etat>
 	<description><multi>
 	[fr]Ce plugin ne fait qu'afficher la configuration du site sur lequel il est actif.
@@ -19,9 +19,9 @@ On affiche les informations équivalentes au plugin "Sites pour projets" avec qu
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
-	<necessite id="spip_bonux" version="[2.2.0;[" />
-	<necessite id="Iterateurs" version="[1.0.1;[" />
-	<necessite id="saisies" version="[1.14.0;[" />
+	<necessite id="spip_bonux" version="[2.2.0;]" />
+	<necessite id="Iterateurs" version="[1.0.1;]" />
+	<necessite id="saisies" version="[1.14.0;]" />
 
 	<categorie>outil</categorie>
 

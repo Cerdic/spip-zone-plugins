@@ -70,7 +70,7 @@
 			return uuid;
 		};
 
-		$("#champ_uuid").on('click', function(event) {
+		$("#champ_uuid").click(function(event) {
 			event.preventDefault();
 			$('#champ_cle').val(generateUUID());
 		});
