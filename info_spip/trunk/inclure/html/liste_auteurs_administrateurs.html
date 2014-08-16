@@ -1,0 +1,32 @@
+[(#REM)
+<template><:info_spip:nom_liste_auteurs_administrateurs:></template>
+]
+
+<B_administrateur>
+<!-- <:info_spip:nom_administrateur:> -->
+<div class="fieldset fieldset_administrateurs">
+    <h3 class="titrem"><:info_spip:label_administrateurs:></h3>
+</div>
+
+<div class="liste-objets">
+    <table class="spip liste">
+        <thead>
+            <tr>
+                <th class="login secondaire"><:info_spip:label_auteur_login:></th>
+                <th class="email secondaire"><:info_spip:label_auteur_email:></th>
+                <th class="nom principal"><:info_spip:label_auteur_nom:></th>
+            </tr>
+        </thead>
+        <tbody>
+        <BOUCLE_administrateur(AUTEURS) {statut='0minirezo'} {par id_auteur} {tout}>
+        <tr>
+            <td class="login secondaire">[(#LOGIN|sinon{'-'})]</td>
+            <td class="email secondaire">[(#EMAIL|sinon{'-'})]</td>
+            <td class="nom principal"><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">[(#NOM|sinon{'-'})]</a></td>
+        </tr>
+        </BOUCLE_administrateur>
+        </tbody>
+    </table>
+</div>
+</B_administrateur>
+

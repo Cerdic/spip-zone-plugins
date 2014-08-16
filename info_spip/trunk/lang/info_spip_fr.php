@@ -32,10 +32,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // I
     'info_1_extension_php' => 'Une extension PHP',
     'info_1_module_apache' => 'Un module Apache',
+    'info_1_plugin_actif' => 'Un plugin actif',
+    'info_1_plugin_dist' => 'Un plugin distribué',
+    'info_1_plugin_inactif' => 'Un plugin inactif',
+    'info_spip_titre' => 'Info SPIP',
     'info_nb_extensions_php' => '@nb@ extensions PHP',
     'info_nb_modules_apache' => '@nb@ modules Apache',
+    'info_nb_plugins_actifs' => '@nb@ plugins actifs',
+    'info_nb_plugins_dist' => '@nb@ plugins distribués',
+    'info_nb_plugins_inactifs' => '@nb@ plugins inactifs',
 
     // L
+    'label_administrateurs' => 'Administrateur(s)',
     'label_actif' => 'Activer la consultation externe',
     'label_apache_modules' => 'Modules Apache&nbsp;:',
     'label_applicatif' => 'Applicatif',
@@ -43,6 +51,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_applicatif_nom' => 'Nom&nbsp;:',
     'label_applicatif_path' => 'Chemin de l\'applicatif&nbsp;:',
     'label_applicatif_port' => 'Port&nbsp;:',
+    'label_auteur_email' => 'E-mail',
+    'label_auteur_login' => 'Login',
+    'label_auteur_nom' => 'Nom',
     'label_cle' => 'Clé d\'identification',
     'label_date_creation' => 'Date d\'installation&nbsp;:',
     'label_extensions_php' => 'Liste des extensions PHP&nbsp;:',
@@ -74,30 +85,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_type_site' => 'Type du site&nbsp;:',
     'label_uuid_generer' => 'Générer la clé',
     'label_webmestre' => 'Webmestre(s)',
-    'label_webmestre_email' => 'E-mail',
-    'label_webmestre_login' => 'Login',
-    'label_webmestre_nom' => 'Nom',
     'label_webservice_fieldset' => 'Webservice',
 
     // N
     'nom_apache_modules' => 'Modules d\'Apache',
     'nom_applicatif' => 'Informations sur le serveur',
     'nom_extensions_php' => 'Extensions PHP',
+    'nom_liste_auteurs_administrateurs' => 'Liste des administrateurs',
+    'nom_liste_auteurs_webmestre' => 'Liste des webmestres',
     'nom_liste_plugins' => 'Liste des plugins',
     'nom_sgbd' => 'Informations SGBD',
-    'nom_webmestre' => 'Liste des Webmestres',
     'non' => 'Non',
 
     // O
     'oui' => 'Oui',
 
     // P
-    'info_spip_titre' => 'Info SPIP',
 
     // T
     'titre_configurer_info_spip' => 'Info SPIP',
     'titre_info_config' => 'Information de configuration',
-    'titre_page_config' => 'Paramètres du serveur',
+    'titre_page_config' => 'Information de configuration',
     'titre_page_configurer_info_spip' => 'Configuration du plugin "Info SPIP"',
     'type_site_dev' => 'Développement',
     'type_site_prep' => 'Pré-production',
