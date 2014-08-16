@@ -47,14 +47,4 @@ function lister_extensions_php ()
     return array();
 }
 
-function lister_config_php ()
-{
-    if (function_exists('ini_get_all')) {
-        $extensions = ini_get_all();
-        natcasesort($extensions);
-        return $extensions;
-    }
-
-    return array();
-}
 ?>

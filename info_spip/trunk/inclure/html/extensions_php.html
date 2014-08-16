@@ -30,30 +30,3 @@
 </div>
 </B_extensions>
 
-<B_config>
-<div class="fieldset fieldset_config_php">
-    <h3 class="legend titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_config_php:>,<:info_spip:info_nb_config_php:>})]</h3>
-</div>
-
-<div class="champ contenu_config_php">
-    <div class="label visible"><:info_spip:label_config_php:></div>
-    <div dir='#LANG_DIR' class='applicatif_port span'>
-    <ul class="spip liste">
-    <BOUCLE_config (DATA) {source table, (#REM|lister_config_php)}>
-        <B_config_tableau>
-        <li class="item">#CLE
-        <ul class="spip liste">
-        <BOUCLE_config_tableau (DATA) {source table, #VALEUR} {si #VALEUR|is_array}>
-            <li class="item">#VALEUR</li>
-        </BOUCLE_config_tableau>
-        </ul>
-        </li>
-        </B_config_tableau>
-        <li>#CLE : #VALEUR</li>
-        <//B_config_tableau>
-    </BOUCLE_config>
-    </ul>
-    </div>
-</div>
-</B_config>
-
