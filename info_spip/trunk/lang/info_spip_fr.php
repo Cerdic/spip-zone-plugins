@@ -32,7 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // I
     'info_1_extension_php' => 'Une extension PHP',
     'info_1_module_apache' => 'Un module Apache',
-    'info_nb_extensions_php' => '@nb@ exentsions PHP',
+    'info_nb_extensions_php' => '@nb@ extensions PHP',
     'info_nb_modules_apache' => '@nb@ modules Apache',
 
     // L
