@@ -39,7 +39,7 @@ function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table des participants ----------------------
 	$spip_evenements_participants = array(
-			"id_evenement_participant" => "BIGINT (21) DEFAULT '0' NOT NULL",
+			"id_evenement_participant" => "BIGINT(21) NOT NULL AUTO_INCREMENT",
 			"id_evenement"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 			"id_auteur"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
 			"nom"	=> "text NOT NULL DEFAULT ''",
