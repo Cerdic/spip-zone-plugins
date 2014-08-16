@@ -3,15 +3,16 @@
 ]
 
 <B_administrateur>
-<!-- <:info_spip:nom_administrateur:> -->
-<div class="fieldset fieldset_administrateurs">
-    <h3 class="titrem"><:info_spip:label_administrateurs:></h3>
+<!-- <:info_spip:nom_liste_auteurs_administrateurs:> -->
+<div class="fieldset administrateurs_fieldset">
+    <h3 class="legend titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_administrateur:>,<:info_spip:info_nb_administrateurs:>})]</h3>
 </div>
 
 <div class="liste-objets">
     <table class="spip liste">
         <thead>
             <tr>
+                <th class="id secondaire"><:info_spip:label_auteur_id:></th>
                 <th class="login secondaire"><:info_spip:label_auteur_login:></th>
                 <th class="email secondaire"><:info_spip:label_auteur_email:></th>
                 <th class="nom principal"><:info_spip:label_auteur_nom:></th>
@@ -20,9 +21,10 @@
         <tbody>
         <BOUCLE_administrateur(AUTEURS) {statut='0minirezo'} {par id_auteur} {tout}>
         <tr>
+            <td class="id secondaire">[(#ID_AUTEUR)]</td>
             <td class="login secondaire">[(#LOGIN|sinon{'-'})]</td>
-            <td class="email secondaire">[(#EMAIL|sinon{'-'})]</td>
-            <td class="nom principal"><a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}">[(#NOM|sinon{'-'})]</a></td>
+            <td class="email secondaire">[(#EMAIL|sinon{'-'})]</td>[(#SET{url_auteur,[(#SPIP_VERSION|intval|=={2}|?{'auteur_infos','auteur'})]})]
+            <td class="nom principal"><a href="#URL_ECRIRE{#GET{url_auteur},id_auteur=#ID_AUTEUR}">[(#NOM|sinon{'-'})]</a></td>
         </tr>
         </BOUCLE_administrateur>
         </tbody>

@@ -14,16 +14,6 @@
 	<div dir='#LANG_DIR' class='type_site span'>[(#VAL{'info_spip:type_site_'}|concat{#CONFIG{'info_spip/type_site'}}|_T)]</div>
 </div>]
 
-[<div class="champ contenu_php_version">
-	<div class="label visible"><:info_spip:label_php_version:></div>
-	<div dir='#LANG_DIR' class='php_version span'>(#EVAL{phpversion()})</div>
-</div>]
-
-[<div class="champ contenu_php_memory">
-	<div class="label visible"><:info_spip:label_php_memory:></div>
-	<div dir='#LANG_DIR' class='php_memory span'>(#EVAL{ini_get('memory_limit')})</div>
-</div>]
-
 [<div class="champ contenu_date_creation">
 	<div class="label visible"><:info_spip:label_date_creation:></div>
 	<div dir='#LANG_DIR' class='date_creation span'>(#VAL{'Y-m-d H:i:s'}|date{#CHEMIN{config/connect.php}|filemtime})</div>
