@@ -60,8 +60,6 @@ function traiter_participation_dist($args, $retours){
 	
 	// fabrique le pipeline traiter_formidableparticipation.
 	$pipeline = pipeline('traiter_formidableparticipation',array('args'=>$options,'data'=>$pipeline));
-
-	spip_log("$choix_participation pour $email_participation evenement N°".$options['id_evenement'],"formidable_participation");
 	
 	// noter qu'on a deja fait le boulot, pour ne pas risquer double appel
 	$retours['traitements']['participation'] = true;
