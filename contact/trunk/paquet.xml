@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/contact-32.png"
 	schema="0.2.0"
-	documentation="http://www.spip-contrib.net/Formulaire-de-contact-avance"
+	documentation="http://contrib.spip.net/Formulaire-de-contact-avance"
 >
 
 	<nom>Formulaire de contact avanc&#233;</nom>

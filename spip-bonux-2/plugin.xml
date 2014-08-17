@@ -12,7 +12,7 @@
 		[en]The plugin that offers a lot of nice gifts ! Sweet Interface, CONDITION and POUR loops, arrays, counters, etc.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
+	<lien>http://contrib.spip.net/SPIP-Bonux</lien>
 	<fonctions>public/spip_bonux_criteres.php</fonctions>
 	<fonctions>public/spip_bonux_balises.php</fonctions>
 	<fonctions>spip_bonux_fonctions.php</fonctions>
@@ -51,7 +51,7 @@
 		[en]The plugin that offers a lot of nice gifts ! Sweet Interface, CONDITION and POUR loops, arrays, counters, etc.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
+	<lien>http://contrib.spip.net/SPIP-Bonux</lien>
 	<fonctions>public/spip_bonux_criteres.php</fonctions>
 	<fonctions>public/spip_bonux_balises.php</fonctions>
 	<fonctions>spip_bonux_fonctions.php</fonctions>

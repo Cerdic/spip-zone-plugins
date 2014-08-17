@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="prive/themes/spip/images/socialtags-32.png"
-	documentation="http://www.spip-contrib.net/Social-tags"
+	documentation="http://contrib.spip.net/Social-tags"
 >	
 
 	<nom>Social tags</nom>

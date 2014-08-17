@@ -11,7 +11,7 @@
 			[en]Plugin which enables to offer the users to add a custom search engine related to your website on their browser.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-OpenSearch</lien>
+	<lien>http://contrib.spip.net/Plugin-OpenSearch</lien>
 	<licence>GNU/GPL</licence>
 	<icon>images/opensearch-64.png</icon>
 	<pipeline>

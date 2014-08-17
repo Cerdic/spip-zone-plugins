@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="outilsarticle.png"
     schema="0.1.0"
-	documentation="http://www.spip-contrib.net/Boite-a-outils-pour-articles"
+	documentation="http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin"
 >	
 
 	<nom>Boite &#224; outils</nom>

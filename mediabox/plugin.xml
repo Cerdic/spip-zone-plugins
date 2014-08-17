@@ -50,7 +50,7 @@ A configuration panel lets you change the general settings to your liking, and t
 
 This plugin works on skeletons which have the <code>#INSERT_HEAD</code> tag.
 	</multi></description>
-	<lien>http://www.spip-contrib.net/MediaBox</lien>
+	<lien>http://contrib.spip.net/MediaBox</lien>
 	<prefix>mediabox</prefix>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<utilise id="cfg" version="[1.9.4;]" />

@@ -25,7 +25,7 @@
 	<fonctions>spiplistes_mes_fonctions.php</fonctions>
 	<prefix>spiplistes</prefix>
 	<install>base/spiplistes_init.php</install>
-	<lien>http://www.spip-contrib.net/SPIP-Listes</lien>
+	<lien>http://contrib.spip.net/SPIP-Listes</lien>
 
 	<pipeline>
 		<nom>affiche_milieu</nom>

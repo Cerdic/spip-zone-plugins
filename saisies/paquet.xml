@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/logo_saisie_48.png"
-	documentation="http://www.spip-contrib.net/Saisies"
+	documentation="http://contrib.spip.net/Saisies"
 >
 	<nom>Saisies</nom>
 	<auteur lien="http://contrib.spip.net/Matthieu-Marcillaud">Matthieu Marcillaud</auteur>

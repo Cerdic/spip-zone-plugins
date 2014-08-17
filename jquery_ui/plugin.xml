@@ -21,7 +21,7 @@ This meta plugin takes care to properly manage the inclusion of the jQuery UI li
 
 {Note that the jQuery UI library is integrated into the core of Spip 3}
 	</multi></description>
-	<lien>http://www.spip-contrib.net/spip.php?article3612</lien>
+	<lien>http://contrib.spip.net/jQuery-UI-pour-SPIP</lien>
 	<prefix>jqueryui</prefix>
 	<icon>images/jqueryui.png</icon>
 	<options>jqueryui_options_20.php</options>
@@ -63,7 +63,7 @@ This meta plugin takes care to properly manage the inclusion of the jQuery UI li
 
 {Note that the jQuery UI library is integrated into the core of Spip 3}
 	</multi></description>
-	<lien>http://www.spip-contrib.net/spip.php?article3612</lien>
+	<lien>http://contrib.spip.net/jQuery-UI-pour-SPIP</lien>
 	<prefix>jqueryui</prefix>
 	<icon>images/jqueryui.png</icon>
 	<options>jqueryui_options.php</options>

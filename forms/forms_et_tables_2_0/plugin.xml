@@ -27,7 +27,7 @@
 		[de]Verwaltung und Konfiguration editierbarer Eingabeformulare. Mit diesem Plugin k&ouml;nnen auch Befragungen und Abstimmungen realisiert werden. Die Ergebnisse werden in der Datenbank erfa&szlig;t und k&ouml;nnen als CSV-Datei oder Excel-Datei heruntergeladen werden.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Forms-Tables-2-0</lien>
+	<lien>http://contrib.spip.net/Forms-Tables-2-0,3351</lien>
 	<options>forms_options.php</options>
 	<fonctions>forms_fonctions.php</fonctions>
 	<fonctions>public/forms_boucles.php</fonctions>

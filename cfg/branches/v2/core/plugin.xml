@@ -24,7 +24,7 @@ Es wird von vielen Plugins verwendet, kann aber auch anderen Nutzen finden wie d
     </multi>
     </description>
     <lien>
-    [<multi>[fr]Documentation[de]Dokumentation</multi>->http://www.spip-contrib.net/?rubrique575]
+    [<multi>[fr]Documentation[de]Dokumentation</multi>->http://contrib.spip.net/?rubrique575]
     </lien>
     <prefix>cfg</prefix>
     <icon>images/cfg-128.png</icon>

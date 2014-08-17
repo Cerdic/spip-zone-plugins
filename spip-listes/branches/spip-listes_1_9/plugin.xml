@@ -8,7 +8,7 @@
 	<options>spiplistes_mes_options.php</options>
 	<fonctions>spiplistes_mes_fonctions.php</fonctions>
 	<prefix>spiplistes</prefix>
-	<lien>http://www.spip-contrib.net/SPIP-Listes</lien>
+	<lien>http://contrib.spip.net/SPIP-Listes</lien>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>

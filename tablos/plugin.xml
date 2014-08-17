@@ -9,7 +9,7 @@
 	<description>
 		Ce plugin permet d'importer un fichier csv (provenant d'un logiciel tableur) dans un article et de l'afficher en ins&#233;rant la balise <code><embxx></code>.
 	</description>
-	<lien>http://www.spip-contrib.net/Tablos</lien>
+	<lien>http://contrib.spip.net/Tablos</lien>
 	<prefix>tablos</prefix>	
 	<pipeline>
 		<nom>insert_head</nom>

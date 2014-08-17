@@ -26,7 +26,7 @@
 		</multi>
 	</description>
 
-	<lien>http://www.spip-contrib.net/?article2228</lien>
+	<lien>http://contrib.spip.net/Plugin-envoyer-a-un-ami</lien>
 	<icon>sobre.gif</icon>
 	<fonctions>baliza_enviar_email.php</fonctions>
 	<prefix>enviar_email</prefix>

@@ -9,7 +9,7 @@
 	<slogan>
 		<multi>
 		[fr]Collection d'outils pour articles
-		[es]Colecci&#242;n de herramientas a los artículos
+		[es]Colecci&#242;n de herramientas a los artÃ­culos
 		</multi>		
 	</slogan>
 	<auteur>[Christophe Vallois->http://www.spip-contrib.net/_vcris_]</auteur>
@@ -25,7 +25,7 @@
 -* <code>[(#INCLURE{fond=inc-boite-outils}{id_article})]</code> para la versi&oacute;n cojea
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Boite-a-outils-pour-articles</lien>
+	<lien>http://contrib.spip.net/Boite-a-outils-pour-articles-version-plugin</lien>
 	<icon>outilsarticle.png</icon>
 	<fonctions>boiteoutils_fonctions.php</fonctions>
 	<prefix>outils_article</prefix>
