@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'spip_visuels_titre' => 'Visuel',
+	'spip_visuels_titre' => 'Visuels',
 
 	// C
 	'cfg_exemple' => 'Exemple',

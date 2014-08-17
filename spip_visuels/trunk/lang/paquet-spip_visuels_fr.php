@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'spip_visuels_description' => '',
-	'spip_visuels_nom' => 'Visuel',
+	'spip_visuels_nom' => 'Visuels',
 	'spip_visuels_slogan' => '',
 );
 
