@@ -5,7 +5,9 @@
 /*
 *   Surcharge du box-sizing car il fait bugger la lightbox de spip.
 *   Ça ne résoud pas tout les problèmes sur tout les types de lightbox. Celle par défaut marche bien.
+* La média médiabox 0.8.5 (spip 3.0.17) inclut ce fix par défaut
 */
+[(#PLUGIN{mediabox, version}|<{0.8.5}|oui)
 #colorbox,
 #cboxContent,
 #cboxLoadedContent {
@@ -13,7 +15,7 @@
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
 }
-
+]
 /*
 *   Si on laisse le display: table; de SPIP on perd le redimentionnement de l'image en fonction.
 */
