@@ -1,0 +1,13 @@
+[(#REM) 
+	TODO
+	- intégrer une limite (0,n)
+	- intégrer un numéro ! Pour par exemple extraire le 3è visuel de type XXX
+]
+
+[(#SET{article,#ENV{id_article}})]
+[(#SET{le_type,#ENV{type}})]
+
+<BOUCLE_les_articles(VISUELS){id_article=#GET{article}}{type=#GET{le_type}}>
+	[(#SET{le_fichier,[IMG/(#FICHIER)]})]
+	[(#GET{le_fichier}|balise_img)]
+</BOUCLE_les_articles>

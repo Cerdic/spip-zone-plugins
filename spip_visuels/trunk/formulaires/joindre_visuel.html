@@ -1,0 +1,23 @@
+<div class='formulaire_spip'>
+	[(#ENV*{message_ok}|oui)
+	<script>ajaxReload('port');</script>
+	]
+	[<p class='formulaire_erreur erreurForm'>(#ENV*{message_erreur})</p>]
+	[<p class='formulaire_erreur erreurForm'>(#ENV*{erreurs}|table_valeur{email_non_valide})</p>]
+
+	<h4>Ajouter un visuel</h4>
+
+	<form method="post" action="[(#ENV{action})]" enctype="multipart/form-data">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="objet" value="#ENV{objet}" />
+		<input type="hidden" name="id_objet" value="#ENV{id_objet}" />
+		<div class="row requiredRow">
+			<label for="txt_nom" id="nom-ariaLabel">Choisir un fichier</label>
+			<input class="file multi" type="file" name="fichier_visuel_upload[]" value="" id="" size="11" />
+		</div>
+		
+		<div class="row boutons">
+			<input type="submit" value="Téléverser" />
+		</div>
+	</form>
+</div>

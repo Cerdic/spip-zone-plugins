@@ -1,0 +1,38 @@
+<BOUCLE_lienDoc(spip_visuels_liens){id_objet=#ENV{id_objet}}{objet=#ENV{objet}}>
+	[(#SET_PUSH{les_docs,#ID_VISUEL})]
+</BOUCLE_lienDoc>
+
+#SET{nbdocs,0}
+
+	[(#REM) Les visuels]
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{Visuels pour cet article},'simple','titrem'}
+	<div class="liste" id='liste_visuels'>
+			<B_documents>
+			[<p class="pagination">(#PAGINATION)</p>]
+			<ul class="liste-items">
+				<BOUCLE_documents(spip_visuels){id_visuel IN #GET{les_docs}}{par date,id_visuel}{pagination 50}>
+					<li class="item" id="visu#ID_VISUEL">
+						<a href="#URL_SITE_SPIP/IMG/#FICHIER" class='mediabox'><img src="#URL_SITE_SPIP/IMG/#FICHIER" alt="" width='40' class='visuel' /></a>
+
+						<div class='ajax'>#FORMULAIRE_CHANGER_TYPE{#ID_VISUEL,#TYPE}</div>
+						<a href="#URL_ACTION_AUTEUR{supprimer_visuel,#ID_VISUEL:#ID_OBJET:#OBJET,#SELF|ancre_url{liste_visuels}}" class='lien_suppr_visuel' onclick="return confirm(&quot;Êtes-vous sûr de vouloir supprimer ce visuel ?&quot;)?((function(){jQuery(&quot;#visu#ID_VISUEL&quot;).animateRemove();return true;})()):false">Supprimer le visuel</a>
+					</li>
+				</BOUCLE_documents>
+				[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
+				
+			</ul>
+			#SET{nbdocs,#GET{nbdocs}|plus{#GRAND_TOTAL}}
+			</B_documents>
+
+			<div class='ajax'>#FORMULAIRE_JOINDRE_VISUEL{#ENV{objet},#ENV{id_objet}}</div>
+	</div>
+	#BOITE_FERMER
+
+<style>
+	/*#liste_visuels{background-color: #ffffff;border:1px solid #000000;padding: 5px;}*/
+	#liste_visuels .item .visuel, #liste_visuels .item .changer_type_visuel {float:left;}
+	#liste_visuels .item .lien_suppr_visuel {float:right;}
+	#liste_visuels .item .changer_type_visuel input, #liste_visuels .item .changer_type_visuel select {float: left;display: inline;height: 20px;}
+	#liste_visuels .item .changer_type_visuel select {margin-right: 20px;}
+	#liste_visuels .item .changer_type_visuel {width:250px;margin-left:102px;}
+</style>

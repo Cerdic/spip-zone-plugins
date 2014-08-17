@@ -1,0 +1,26 @@
+<paquet
+	prefix="spip_visuels"
+	categorie="edition"
+	version="0.0.1"
+	etat="dev"
+	compatibilite="[3.0.17-dev;3.0.*]"
+	logo="prive/themes/spip/images/spip_visuels-64.png"
+	documentation=""
+	schema="0.1.0" 
+>
+
+	<nom>Visuels</nom>
+
+	<auteur lien="http://demo.apsulis.com" mail="hadrien@apsulis.com">Hady</auteur>
+	<auteur lien="http://demo.apsulis.com" mail="XDjuj@apsulis.com">XDjuj</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="spip_visuels_autorisations.php" /> 
+	<pipeline nom="affiche_milieu" inclure="spip_visuels_pipelines.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/spip_visuels.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spip_visuels.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/spip_visuels.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/spip_visuels.php" />
+
+</paquet>

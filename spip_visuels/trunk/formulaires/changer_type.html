@@ -1,0 +1,22 @@
+[(#ENV*{message_ok}|oui)
+<script>ajaxReload('port');</script>
+]
+
+[(#SET{les_types,#CONFIG{spip_visuels/liste_types}})]
+[(#SET{les_types,#GET{les_types}|explode{;}})]
+
+<B_les_types>
+<form method="post" action="[(#ENV{action})]" class='changer_type_visuel'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type="hidden" name="id_visuel" value="#ENV{id_visuel}" />
+	<label for='select_type_visuel_#ENV{id_visuel}'>Choisir un rôle pour ce visuel</label>
+	<select name='select_type_visuel_#ENV{id_visuel}' id='select_type_visuel_#ENV{id_visuel}'>
+		<option value=''>Aucun</option>
+		<BOUCLE_les_types(DATA){source table, #GET{les_types}}>
+			[(#SET{le_type,#VALEUR|explode{"/"}})]
+			<option value='#GET{le_type/0}'[(#ENV{type}|=={#GET{le_type/0}}|oui) selected='selected']>#GET{le_type/1}</option>
+		</BOUCLE_les_types>
+	</select>
+	<input type='submit' value='ok' />
+</form>
+</B_les_types>
