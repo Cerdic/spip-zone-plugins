@@ -15,7 +15,7 @@ Si vous {{mettez &#224; jour}} depuis une version 1.8* de SPIP qui utilisait la 
 version 0.61 ou 0.7, vous {{DEVEZ}} proc&#233;der &#224; la mise &#224; jour des tables de la base de donn&#233;es
 en utilisant le script <code>/plugins/acces_groupes/maj_tables.php</code> {{AVANT}} d'activer ce plugin !
 	</description>
-	<lien>http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Creer-des-groupes-limiter-l-acces</lien> <!-- URI de documentation -->
 	<icon>img_pack/groupe-48.png</icon>
 	<prefix>accesgroupes</prefix>
 	<!-- fichier charge a chaque hit -->
@@ -30,5 +30,3 @@ en utilisant le script <code>/plugins/acces_groupes/maj_tables.php</code> {{AVAN
 	<necessite id="SPIP" version="[1.9.0;1.9.2)" />
 	<categorie>auteur</categorie>
 </plugin>
-
-

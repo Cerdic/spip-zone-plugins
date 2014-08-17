@@ -9,7 +9,7 @@
 	<description>
 	Ajoute un bloc de 4 actualit&#233;s sur votre site. La position d'insertion, les dimensions et le nombre d'actus sont param&#233;trables.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Acunite</lien>
+	<lien>http://contrib.spip.net/Plugin-Actunite</lien>
 	<icon>img_pack/picto_actunite_64x64.png</icon>
 	<pipeline>
 		<nom>insert_head</nom>

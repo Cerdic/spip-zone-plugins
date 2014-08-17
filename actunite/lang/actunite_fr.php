@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legend_boucle' 			=> 'Param&egrave;tres de la boucle',
 	'cfg_label_titre_insertion'		=> 'Position d\'insertion',
 	'cfg_titre_descriptif'			=> 'Le plugin Actunite',
-	'cfg_texte_descriptif'			=> 'Cette page de configuration du plugin <strong>Actunite</strong> vous permet de d&eacute;finir diff&eacute;rents param&egrave;tres de personnalisation.</p><p><a href="http://www.spip-contrib.net/Plugin-Acunite?var_mode=preview" class="spip_out">Doc en ligne, forum, FAQ sur SPIP-Contrib</a></p>',
+	'cfg_texte_descriptif'			=> 'Cette page de configuration du plugin <strong>Actunite</strong> vous permet de d&eacute;finir diff&eacute;rents param&egrave;tres de personnalisation.</p><p><a href="http://contrib.spip.net/Plugin-Actunite" class="spip_out">Doc en ligne, forum, FAQ sur SPIP-Contrib</a></p>',
 
 );
 

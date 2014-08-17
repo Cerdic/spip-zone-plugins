@@ -15,7 +15,7 @@
 	<auteur>cy_altern</auteur>
 	<licence>GNU/LGPL - (c) 2010</licence>
 
-	<description>Ce plugin extra-simple (aa) est le résultat d'un [tutoriel de spip-contrib->http://www.spip-contrib.net/?article1605] ayant pour sujet l'apprentissage du plugin CFG, qui permet de gérer les paramètres de configuration d'un plugin de façon simple</description>
+	<description>Ce plugin extra-simple (aa) est le résultat d'un [tutoriel de spip-contrib->http://contrib.spip.net/Coder-un-plugin-simple-avec-cfg] ayant pour sujet l'apprentissage du plugin CFG, qui permet de gérer les paramètres de configuration d'un plugin de façon simple</description>
 
 	<pipeline>
 		<nom>ajouter_boutons</nom>

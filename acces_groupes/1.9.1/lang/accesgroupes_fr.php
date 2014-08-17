@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lancer_patch' => 'Lancer la modification des tables',
 'titre_patch' => 'Mise &agrave; jour des tables utilis&eacute;es par le plugin acces_groupes',
 'info_patch' => 'Ce script permet de modifier les tables de la base de donn&eacute;es de la contrib 
-						 		 "<a href="http://www.spip-contrib.net/Creer-des-groupes-limiter-l-acces">acc&egrave;s restreints par groupes</a>"
+						 		 "<a href="http://contrib.spip.net/Creer-des-groupes-limiter-l-acces">acc&egrave;s restreints par groupes</a>"
 								 afin de les rendre compatibles avec sa version en plugin (acces_groupes v1.0) .
 						 		 <br><strong>Si vous n\'aviez pas install&eacute; cette contrib sur votre spip 1.8, il n\'est pas n&eacute;cessaire : passez votre chemin !</strong>
 								 <br>Versions support&eacute;es : contrib version 0.6* et version 0.7
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'base_SQL' => 'Base de donn&eacute du SPIP', 
 'user_SQL' => 'Utilisateur serveur MySQL',
 'pass_SQL' => 'Mot de passe serveur MySQL',
-'prefixe_tables' => 'Préfixe des tables SPIP',
+'prefixe_tables' => 'PrÃ©fixe des tables SPIP',
 
 'module_titre'=>'Acc&egrave;s restreints par groupes',
 'module_info'=>'Ce plugin permet de g&eacute;rer les restrictions d\'acc&egrave;s aux rubriques.<br />
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'msg_demande_acces6' => '(lorsque vous aurez trait&eacute; la demande de cet auteur, ce message sera automatiquement effac&eacute; et un message l\'informant de votre d&eacute;cision lui sera envoy&eacute;)',
 'msg_demande_acces7' => 'Message de l\'utilisateur :',
 'titre_demande_acces' => 'Demande d\'int&eacute;gration dans un groupe pour acc&eacute;der &agrave; une rubrique restreinte',
-'demande_ok' => 'Votre demande à été envoy&eacute;e au(x) gestionnaire(s) du groupe',
+'demande_ok' => 'Votre demande Ã  Ã©tÃ© envoy&eacute;e au(x) gestionnaire(s) du groupe',
 'duplicata_demande_acces' => 'Il existe d&eacute;ja une demande d\'int&eacute;gration dans ce groupe &agrave; votre nom: merci d\'&ecirc;tre patient et d\'attendre que cette demande ait &eacute;t&eacute; trait&eacute;e...',
 'erreur_creation_demande_acces' => 'Une erreur s\'est produite lors de la cr&eacute;ation de votre demande d\'acc&egrave;s',
 'titre_msg_text' => 'Information',

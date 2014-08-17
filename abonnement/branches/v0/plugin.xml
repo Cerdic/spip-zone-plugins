@@ -7,7 +7,7 @@
 	<icon>img/abonnement_48.png</icon>
 	<slogan>Acc&#232;s restreints sur abonnement</slogan>
 	<description>Un plugin pour gerer des abonnements.</description>
-	<lien>http://www.spip-contrib.net/Abonnements-Notes</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Abonnements-Notes</lien> <!-- URI de documentation -->
 	<prefix>abonnement</prefix>
 	<options>abonnement_options.php</options>
 	<fonctions>abonnement_fonctions.php</fonctions>
