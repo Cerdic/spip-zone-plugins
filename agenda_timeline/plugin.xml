@@ -2,7 +2,7 @@
 	<nom>Timeline pour le plugin Agenda</nom>
 	<auteur>[Quentin Drouet->http://www.kent1.info]</auteur>
 	<licence>GPL - (c) 2006</licence>
-	<lien>http://www.spip-contrib.net/article1396.html</lien>
+	<lien>http://contrib.spip.net/Plugin-Agenda</lien>
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>Timeline pour l'Agenda Evenementiel.</description>

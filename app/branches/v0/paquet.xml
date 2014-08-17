@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="app.png"
-	documentation="http://www.spip-contrib.net/?articleXXXX"
+	documentation=>"http://contrib.spip.net/?articleXXXX"
 >
 	<nom>Atom Publishing Protocol</nom>
 	

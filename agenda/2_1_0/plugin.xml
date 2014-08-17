@@ -9,7 +9,7 @@
 	<version_base>0.23</version_base>
 	<etat>test</etat>
 	<description>Agenda Ev&#233;nementiel</description>
-	<lien>http://www.spip-contrib.net/article2858</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Agenda-2-0</lien> <!-- URI de documentation -->
 	<options>agenda_options.php</options>
 	<fonctions>public/agenda.php</fonctions>
 	<fonctions>agenda_fonctions.php</fonctions>

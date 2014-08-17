@@ -11,7 +11,7 @@
 	Pour afficher l'agenda dans vos squelettes, il vous suffit de mettre un "div" avec un id='agendax'.
 	Pour modifier l'apparence, vous pouvez modifier le fichier des css : agendax.css
 	</description>
-	<lien>http://www.spip-contrib.net/?article2377</lien>
+	<lien>http://contrib.spip.net/Agendax-simple-calendrier-ajax</lien>
 	<prefix>Agendax</prefix>
 
 	<pipeline>

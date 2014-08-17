@@ -40,7 +40,7 @@ An internal documentation page is available ({in french}) : [internal documentat
 -* [&#034;simple text&#034; mode->@mode_brut@] ({simple html + INSERT_HEAD tag})
 -* [&#034;Zpip skeleton&#034; mode->@mode_zpip@] ({Z compatible skeleton})
 -* [&#034;SPIP skeleton&#034; mode->@mode_spip@] ({compatible with distribution})',
-	'info_skel_contrib' => 'A full documentation page is available online at spip-contrib ({in french}) : [->http://www.spip-contrib.fr/?article3566].',
+	'info_skel_contrib' => 'A full documentation page is available online at spip-contrib ({in french}) : [->http://contrib.spip.net/ADX-Menu-un-joli-menu-deroulant].',
 	'new_window' => 'New window',
 );
 ?>

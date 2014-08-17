@@ -40,7 +40,7 @@ Le menu ci-dessous vous pr&eacute;sente un exemple en utilisant les 3 premiers s
 	'pas_cfg_installe' => 'Le plugin CFG ne semble pas install&eacute; sur votre site.',
 	'documentation' => '{{{Utilisation & configuration}}}
 
-Le plugin peut s\'utiliser de deux fa&ccedil;ons d&eacute;taill&eacute;es ci-dessous. Il est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} mais celui-ci n\'est pas obligatoire[[Cela ne concerne que les versions de SPIP inférieures à 3.0 ; au-delà, la configuration est proposée en interne.]].
+Le plugin peut s\'utiliser de deux fa&ccedil;ons d&eacute;taill&eacute;es ci-dessous. Il est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://contrib.spip.net/Config-CFG]}} mais celui-ci n\'est pas obligatoire[[Cela ne concerne que les versions de SPIP inférieures à 3.0 ; au-delà, la configuration est proposée en interne.]].
 
 La page de configuration permet de d&eacute;finir notamment le sens d\'ouverture du menu ; celui-ci peut &ecirc;tre {{horizontal}}, de {{bas en haut}} ou de {{haut en bas}}, mais aussi {{vertical}}, de {{gauche &agrave; droite}} ou de {{droite &agrave; gauche}}[[Cette option n\'est accessible que si le plugin {{CFG}} est install&eacute; sur votre site. &Agrave; d&eacute;faut, vous pouvez &eacute;diter directement le fichier "adxmenu_options.php" &agrave; la racine du plugin.]].
 
@@ -64,7 +64,7 @@ Exemple pour un menu contenant les rubriques 1, 3 et 12, des titres coup&eacute;
 
 {{{La classe "adxm admenu"}}}
 
-L\'effet menu ouvrant s\'applique en ajoutant simplement la classe "adxm adxmenu" &agrave; n\'importe quel menu ({liste imbriqu&eacute;e de &lt;ul&gt;&lt;li&gt;})[[Cette m&eacute;thode permet notamment d\'utiliser le plugin sur des menus d&eacute;finis gr&acirc;ce au plugin {{[Menus->http://www.spip-contrib.net/Plugin-Menus]}}, en ajoutant au menu concern&eacute; la classe "adxm adxmenu".]].
+L\'effet menu ouvrant s\'applique en ajoutant simplement la classe "adxm adxmenu" &agrave; n\'importe quel menu ({liste imbriqu&eacute;e de &lt;ul&gt;&lt;li&gt;})[[Cette m&eacute;thode permet notamment d\'utiliser le plugin sur des menus d&eacute;finis gr&acirc;ce au plugin {{[Menus->http://contrib.spip.net/Menus-3139]}}, en ajoutant au menu concern&eacute; la classe "adxm adxmenu".]].
 
 Exemple :
 
@@ -85,7 +85,7 @@ Il est conseill&eacute; de bien tester vos personnalisations pour v&eacute;rifie
 
 {{{Compatibilit&eacute;}}}
 
-Les CSS utilis&eacute;s pour g&eacute;n&eacute;rer le menu sont compatibles avec la distribution ({bien-s&ucirc;r}) mais &eacute;galement avec les squelettes Z compatibles. Vous pouvez notamment, si vous utilisez un squelette [Zpip->http://www.spip-contrib.net/Zpip], pr&eacute;ciser la classe "adxm adxmenu" au menu g&eacute;n&eacute;ral utilis&eacute; par le squelette, l\'effet ouvrant s\'ajoutera automatiquement, en accord avec le sens d\'ouverture de vos r&eacute;glages.
+Les CSS utilis&eacute;s pour g&eacute;n&eacute;rer le menu sont compatibles avec la distribution ({bien-s&ucirc;r}) mais &eacute;galement avec les squelettes Z compatibles. Vous pouvez notamment, si vous utilisez un squelette [Zpip->http://contrib.spip.net/Zpip], pr&eacute;ciser la classe "adxm adxmenu" au menu g&eacute;n&eacute;ral utilis&eacute; par le squelette, l\'effet ouvrant s\'ajoutera automatiquement, en accord avec le sens d\'ouverture de vos r&eacute;glages.
 
 {{{Conditions d\'utilisation}}}
 
@@ -111,7 +111,7 @@ Pour plus d\'informations, reportez-vous &agrave; la page d&eacute;di&eacute;e p
 -* [Mode &#034;texte simple&#034;->@mode_brut@] ({html simple + balise INSERT_HEAD})
 -* [Mode &#034;squelette Zpip&#034;->@mode_zpip@] ({squelette Z compatible})
 -* [Mode &#034;squelette SPIP&#034;->@mode_spip@] ({compatible distribution})',
-	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->http://www.spip-contrib.fr/?article3566].',
+	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->http://contrib.spip.net/3566].',
 	'new_window' => 'Nouvelle fenêtre',
 );
 ?>
