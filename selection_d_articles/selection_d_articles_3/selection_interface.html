@@ -19,7 +19,7 @@
 		</strong>
 	</caption>
 
-<BOUCLE_selection(ARTICLES){statut==prop|prepa|publie|refuse|poubelle}{id_article IN #SELECTION_ARTICLE{#ID_RUBRIQUE}}>
+<BOUCLE_selection(ARTICLES){tout}{id_article IN #SELECTION_ARTICLE{#ID_RUBRIQUE}}>
 	<tr class='tr_liste' id="selection#ID_ARTICLE">
 		[(#REM)
 			[<td><img src="(#EVAL{puce_statut_article_dist([(#ID_ARTICLE)], "[(#STATUT)]", "[(#ID_RUBRIQUE)]", 'article', 0) }|extraire_attribut{src}|url_absolue)" alt="" /></td>]
