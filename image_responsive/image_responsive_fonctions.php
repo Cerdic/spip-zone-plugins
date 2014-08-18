@@ -37,7 +37,7 @@ function image_responsive_header_prive($flux) {
 
 function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 	$tailles = explode("/", $taille);
-	if (count($tailles) > 1) $taille_defaut = $tailles[1];
+	if (count($tailles) > 1) $taille_defaut = $tailles[0];
 	else $taille_defaut = $taille;
 	
 //	$img = $img[0];
