@@ -1,11 +1,11 @@
 <paquet
 	prefix="corbeille"
 	categorie="maintenance"
-	version="3.0.3"
+	version="3.0.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/trash-full-32.png"
-	documentation="http://www.spip-contrib.net/Corbeille,2855"
+	documentation="http://contrib.spip.net/2855"
 >	
 
 	<nom>Corbeille</nom>
@@ -14,7 +14,7 @@
 	<auteur lien="http://www.japanim.net/">Matthieu Onfray (Japanim)</auteur>
 	<credit>adapté en plugin avec tendresse par la communauté</credit>
 
-	<copyright>2005-2008</copyright>
+	<copyright>2005-2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 

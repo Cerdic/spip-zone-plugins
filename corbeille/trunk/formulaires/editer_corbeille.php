@@ -24,9 +24,9 @@ function formulaires_editer_corbeille_traiter_dist($table){
 	
 	if ($res){
 		if (count($res)>1)
-			$message = _T('corbeille:elements_supprimes',array('ids'=>'#'.join(',#',$res)));
+			$message = _T('corbeille:elements_supprimes',array('ids'=>'#'.join(', #',$res)));
 		else
-			$message = _T('corbeille:element_supprime',array('ids'=>'#'.join(',#',$res)));
+			$message = _T('corbeille:element_supprime',array('ids'=>'#'.join(', #',$res)));
 	}
 	else
 		$message = _T('corbeille:aucun_element_supprime');
