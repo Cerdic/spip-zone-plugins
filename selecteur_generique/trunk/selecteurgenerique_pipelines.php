@@ -239,20 +239,24 @@ function selecteurgenerique_inserer_javascript($flux) {
 	OR _request('exec') == 'rubriques_edit') {
 		$js .= selecteurgenerique_inserer_rubrique();
 	}
-	if ($js){
-		/**
-		 * On insère les fonctions de bases supplémentaires
-		 */
-		if(strpos($flux,'selecteur_generique_functions')===FALSE){
-			$functions = find_in_path('javascript/selecteur_generique_functions.js');
-			$js_final .= "\n<script type='text/javascript' src='$functions'></script>\n";
-		};
-		$js_final .= '<script type="text/javascript"><!--'
-		. "\n"
-		. $js
-		. "\n"
-		. '// --></script>'
-		. "\n";
+
+	/**
+	 * On insére les fonctions génériques de l'autocomplétion (attribut data-selecteur)
+	 */
+	if(strpos($flux,'selecteur_generique_functions')===FALSE){
+		$functions = find_in_path('javascript/selecteur_generique_functions.js');
+		$js_final .= "\n<script type='text/javascript' src='$functions'></script>\n";
+	};
+	/**
+	 * On compléte selon le contexte de l'espace privé
+        */
+	if ($js) {
+	    $js_final .= '<script type="text/javascript"><!--'
+	    . "\n"
+	    . $js
+	    . "\n"
+	    . '// --></script>'
+	    . "\n";
 	}
 	return $flux.$js_final;
 
