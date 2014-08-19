@@ -13,11 +13,11 @@ function formulaires_changer_type_charger_dist($id_visuel,$type=''){
 
 
 function formulaires_changer_type_verifier_dist(){
-	$erreurs = array();
+	// $erreurs = array();
 
-	if (count($erreurs))
-		$erreurs['message_erreur'] = 'Votre saisie comporte des erreurs';
-	return $erreurs;
+	// if (count($erreurs))
+	// 	$erreurs['message_erreur'] = 'Votre saisie comporte des erreurs';
+	// return $erreurs;
 
 }
 

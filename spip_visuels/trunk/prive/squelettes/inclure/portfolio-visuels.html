@@ -5,7 +5,8 @@
 #SET{nbdocs,0}
 
 	[(#REM) Les visuels]
-	#BOITE_OUVRIR{#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{Visuels pour cet article},'simple','titrem'}
+	[(#SET{chaine_langue_titre_boite,<:spip_visuels:titre_boite:>})]
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{article-24.png}|balise_img{'',cadre-icone}|concat{#GET{chaine_langue_titre_boite}},'simple','titrem'}
 	<div class="liste" id='liste_visuels'>
 			<B_documents>
 			[<p class="pagination">(#PAGINATION)</p>]
@@ -15,7 +16,7 @@
 						<a href="#URL_SITE_SPIP/IMG/#FICHIER" class='mediabox'><img src="#URL_SITE_SPIP/IMG/#FICHIER" alt="" width='40' class='visuel' /></a>
 
 						<div class='ajax'>#FORMULAIRE_CHANGER_TYPE{#ID_VISUEL,#TYPE}</div>
-						<a href="#URL_ACTION_AUTEUR{supprimer_visuel,#ID_VISUEL:#ID_OBJET:#OBJET,#SELF|ancre_url{liste_visuels}}" class='lien_suppr_visuel' onclick="return confirm(&quot;Êtes-vous sûr de vouloir supprimer ce visuel ?&quot;)?((function(){jQuery(&quot;#visu#ID_VISUEL&quot;).animateRemove();return true;})()):false">Supprimer le visuel</a>
+						<a href="#URL_ACTION_AUTEUR{supprimer_visuel,#ID_VISUEL:#ID_OBJET:#OBJET,#SELF|ancre_url{liste_visuels}}" class='lien_suppr_visuel' onclick="return confirm(&quot;Êtes-vous sûr de vouloir supprimer ce visuel ?&quot;)?((function(){jQuery(&quot;#visu#ID_VISUEL&quot;).animateRemove();return true;})()):false"><:spip_visuels:supprimer_visuel:></a>
 					</li>
 				</BOUCLE_documents>
 				[(#TOTAL_BOUCLE|>{20}|oui)<p class="pagination">#PAGINATION</p>]
