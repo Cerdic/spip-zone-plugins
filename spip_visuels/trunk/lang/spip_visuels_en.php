@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_types_visuels_label' => 'Type of pictures',
-	'cfg_types_visuels_explication' => 'A list <strong>id/label</strong> separated by points comma.<br/><u>Example :</u><br>home_picture/Picture for homepage;aside_picture/Picture for the aside',
+	'cfg_types_visuels_explication' => 'A list <strong>id;label</strong> separated by line breaks.<br/><u>Example :</u><br>home_picture;Picture for homepage<br />aside_picture;Picture for the aside',
 	'cfg_titre_parametrages' => 'Configurations',
 
 	// F

@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_types_visuels_label' => 'Types de visuels',
-	'cfg_types_visuels_explication' => 'Une liste <strong>id/label</strong> séparée par des points virgule.<br/><u>Exemple :</u><br>visuel_accueil/Visuel pour page d\'accueil;visuel_col_droite/visuel pour colonne de droite',
+	'cfg_types_visuels_explication' => 'Une liste <strong>id;label</strong> séparée par des sauts de ligne.<br/><u>Exemple :</u><br>visuel_accueil;Visuel pour page d\'accueil<br />visuel_col_droite;visuel pour colonne de droite',
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	// F

@@ -2,8 +2,7 @@
 <script>ajaxReload('port');</script>
 ]
 
-[(#SET{les_types,#CONFIG{spip_visuels/liste_types}})]
-[(#SET{les_types,#GET{les_types}|explode{;}})]
+[(#SET{les_types,[(#CONFIG{spip_visuels/liste_types}|parser_liste_types)]})]
 
 <B_les_types>
 <form method="post" action="[(#ENV{action})]" class='changer_type_visuel'>
@@ -13,7 +12,7 @@
 	<select name='select_type_visuel_#ENV{id_visuel}' id='select_type_visuel_#ENV{id_visuel}'>
 		<option value=''><:spip_visuels:form_role_aucun:></option>
 		<BOUCLE_les_types(DATA){source table, #GET{les_types}}>
-			[(#SET{le_type,#VALEUR|explode{"/"}})]
+			[(#SET{le_type,#VALEUR|explode{";"}})]
 			<option value='#GET{le_type/0}'[(#ENV{type}|=={#GET{le_type/0}}|oui) selected='selected']>#GET{le_type/1}</option>
 		</BOUCLE_les_types>
 	</select>
