@@ -1,9 +1,9 @@
 <paquet
 	prefix="spip_visuels"
 	categorie="edition"
-	version="0.0.1"
+	version="0.0.2"
 	etat="dev"
-	compatibilite="[3.0.17-dev;3.0.*]"
+	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/spip_visuels-64.png"
 	documentation=""
 	schema="0.1.0" 
