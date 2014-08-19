@@ -24,7 +24,7 @@
 	</thead>
 	<tbody>
 	
-	<BOUCLE_liste_articles_lies(ARTICLES_LIES){id_article = #ENV{id_article_orig}}{pagination #ENV{nb,10}}{where?}{recherche?}{tri #ENV{par,rang},#GET{defaut_tri}}{pagination #ENV{nb,15}}>
+	<BOUCLE_liste_articles_lies(ARTICLES_LIES){id_article = #ENV{id_article_orig}}{pagination #ENV{nb,10}}{where?}{tri #ENV{par,rang},#GET{defaut_tri}}{pagination #ENV{nb,15}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE)]">
 			<BOUCLE_les_articles_lies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}{statut==.*}>
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
