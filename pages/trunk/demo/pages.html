@@ -1,0 +1,129 @@
+<h1>BOUCLES PAGES UNIQUES</h1>
+<h2>BOUCLE_p1(ARTICLES) {page=mentions_legales}{id_rubrique=-1}</h2>
+<B_p1>
+<ul>
+<BOUCLE_p1(ARTICLES) {page=mentions_legales}{id_rubrique=-1}>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_p1>
+</ul>
+</B_p1>
+	<p>Aucun article</p>
+<//B_p1>
+<br />
+
+<h2>BOUCLE_p2(ARTICLES) {page?}</h2>
+<B_p2>
+<ul>
+<BOUCLE_p2(ARTICLES) {page?}>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_p2>
+</ul>
+</B_p2>
+	<p>Aucun article</p>
+<//B_p2>
+<br />
+
+<h2>BOUCLE_p3(ARTICLES) {page}</h2>
+<B_p3>
+<ul>
+<BOUCLE_p3(ARTICLES) {page}>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_p3>
+</ul>
+</B_p3>
+	<p>Aucun article</p>
+<//B_p3>
+<br />
+
+<h2>BOUCLE_p4(ARTICLES){id_rubrique<0}</h2>
+<B_p4>
+<ul>
+<BOUCLE_p4(ARTICLES){id_rubrique<0}>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_p4>
+</ul>
+</B_p4>
+	<p>Aucun article</p>
+<//B_p4>
+<br />
+
+<h2>BOUCLE_p5(ARTICLES){id_rubrique=-1}</h2>
+<B_p5>
+<ul>
+<BOUCLE_p5(ARTICLES){id_rubrique=-1}>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_p5>
+</ul>
+</B_p5>
+	<p>Aucun article</p>
+<//B_p5>
+<br />
+
+<h2>BOUCLE_p6(ARTICLES){id_rubrique=-1}{statut?}</h2>
+<B_p6>
+<ul>
+<BOUCLE_p6(ARTICLES){id_rubrique=-1}{statut?}>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_p6>
+</ul>
+</B_p6>
+	<p>Aucun article</p>
+<//B_p6>
+<br />
+
+
+<h1>BOUCLES ARTICLES SANS INCLURE</h1>
+<h2>BOUCLE_a1(ARTICLES)</h2>
+<B_a1>
+<ul>
+<BOUCLE_a1(ARTICLES)>
+	<li>=> #ID_ARTICLE - #TITRE \(#STATUT\)</li>
+</BOUCLE_a1>
+</ul>
+</B_a1>
+	<p>Aucun article</p>
+<//B_a1>
+<br />
+
+<h2>BOUCLE_a2(ARTICLES){id_rubrique=2}</h2>
+<B_a2>
+<ul>
+<BOUCLE_a2(ARTICLES){id_rubrique=2}>
+	<li>=> #ID_ARTICLE - #TITRE</li>
+</BOUCLE_a2>
+</ul>
+</B_a2>
+	<p>Aucun article</p>
+<//B_a2>
+<br />
+
+<h2>BOUCLE_a2(ARTICLES){page=''}</h2>
+<B_a3>
+<ul>
+<BOUCLE_a3(ARTICLES){page=''}>
+	<li>=> #ID_ARTICLE - #TITRE</li>
+</BOUCLE_a3>
+</ul>
+</B_a3>
+	<p>Aucun article</p>
+<//B_a3>
+<br />
+
+
+<h1>BOUCLES ARTICLES AVEC INCLURE inc-articles</h1>
+<h2>BOUCLE -> article : inclure rubrique=1</h2>
+<INCLURE{fond=demo/inc-articles,
+	id_rubrique=1,
+	env} />
+<br />
+
+<h2>BOUCLE -> article : inclure rubrique=2</h2>
+<INCLURE{fond=demo/inc-articles,
+	id_rubrique=2,
+	env} />
+<br />
+
+<h2>BOUCLE -> article : aucun parametre</h2>
+<INCLURE{fond=demo/inc-articles,
+	env} />
+<br />

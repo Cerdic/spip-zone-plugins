@@ -310,7 +310,7 @@ function pages_pre_boucle($boucle){
 	if ($boucle->type_requete == 'articles') {
 		// On n'insère le filtre {id_rubriques>0} pour exclure les pages uniques que si aucune des conditions
 		// suivantes n'est vérifiée:
-		// - pas de critère page
+		// - pas de critère page autre que {page=''}
 		// - pas de critère explicite {id_rubrique=-1} ou {id_rubrique<0}
 		// - pas de critère {id_rubrique?} pour lequel l'environnement renvoie -1 pour l'id de la rubrique
 		$boucle_articles = true;
@@ -318,12 +318,24 @@ function pages_pre_boucle($boucle){
 
 		// On cherche les critères id_rubrique, id_article ou page
 		foreach($boucle->criteres as $_critere){
-			if (($_critere->op == 'page') // {page} ou {page?}
-			OR ($_critere->param[0][0]->texte == 'page')) { // {page=x}
+			if ($_critere->op == 'page') { // {page} ou {page?}
 				// On considère qu'on cherche toujours des pages uniques donc on force le filtre id_rubrique=-1
 				$boucle_articles = false;
 				$critere_page = true;
 				break;
+			}
+			elseif ($_critere->param[0][0]->texte == 'page') { // {page=x}
+				if (($_critere->op == '=')
+				AND ($_critere->param[1][0]->texte == '')) {
+					// On veut exclure explicitement les pages
+					break;
+				}
+				else {
+					// on désigne bien des pages par leur champ 'page'
+					$boucle_articles = false;
+					$critere_page = true;
+					break;
+				}
 			}
 			elseif (($_critere->op == 'id_article') // {id_article} ou {id_article?}
 				OR ($_critere->param[0][0]->texte == 'id_article')) { // {id_article=x}
