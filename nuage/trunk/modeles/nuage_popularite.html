@@ -10,17 +10,15 @@
 </BOUCLE_maxmot>
 <B_tags>
 <ul class="nuage">
-<BOUCLE_tags(MOTS){id_groupe==^((#ENV{id_groupe,.*}))$} {id_groupe!==^((#ENV{notid,-1}))$} {par num titre,titre}><B_expose>
-  [(#REM) définir les mot exposés]
-  #SET{expose,''}
+<BOUCLE_tags(MOTS){id_groupe==^((#ENV{id_groupe,.*}))$} {id_groupe!==^((#ENV{notid,-1}))$} {par num titre,titre}>[
+  (#REM) définir les mot exposés
+  ]#SET{expose,''}
   <BOUCLE_expose(ARTICLES){id_article}{id_mot}{0,1}>[
       (#SET{expose,' '})
   ]</BOUCLE_expose>[
   (#ENV{id_mot}|=={#ID_MOT}|oui)
       #SET{expose,' '}
-  ]<B_popularite>
-
-	#SET{pop,0}
+  ]#SET{pop,0}
 	<BOUCLE_popularite(ARTICLES) {id_mot}>[
 	(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})
 	]</BOUCLE_popularite>[
