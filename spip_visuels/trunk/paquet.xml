@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_visuels"
 	categorie="edition"
-	version="0.0.2"
+	version="0.0.3"
 	etat="dev"
 	compatibilite="[3.0.0-dev;3.0.*]"
 	logo="prive/themes/spip/images/spip_visuels-64.png"
@@ -22,5 +22,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/spip_visuels.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/spip_visuels.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/spip_visuels.php" />
+
+	<menu nom="spip_visuels" titre="spip_visuels:spip_visuels_titre" parent="menu_squelette" icone="images/spip_visuels-16.png" action="configurer_spip_visuels" />
 
 </paquet>
