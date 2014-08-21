@@ -17,7 +17,7 @@ function mailsubscribers_autoriser(){}
 
 // bouton de menu
 function autoriser_mailsubscribers_menu_dist($faire, $type, $id, $qui, $opts){
-	return true;
+        return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 } 
 
 
@@ -33,7 +33,7 @@ function autoriser_mailsubscriber_iconifier_dist($faire, $type, $id, $qui, $opt)
 
 // voir les fiches completes
 function autoriser_mailsubscriber_voir_dist($faire, $type, $id, $qui, $opt) {
-	return true;
+	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
 
 // modifier
