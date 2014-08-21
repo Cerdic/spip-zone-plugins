@@ -5,7 +5,11 @@ cf http://www.spip.net/fr_article3454.html et /squelettes-dist/modeles/article_m
 ]
 [(#SET{id_article,	[(#ENV{id_sjcycle,	0})]})]
 
+[(#CONFIG{sjcycle/largeurmax}|?{
 [(#SET{largeurmax,	[(#ENV{largeurmax,     	#CONFIG{sjcycle/largeurmax}})]})]
+,
+[(#SET{largeurmax,	[(#ENV{width,	#CONFIG{sjcycle/img_width}})]})]
+})]
 [(#SET{hauteurmax,	[(#ENV{hauteurmax,     	#CONFIG{sjcycle/hauteurmax}})]})]
 [(#SET{autoheight,	[(#ENV{autoheight,     	#CONFIG{sjcycle/autoheight}})]})]
 [(#SET{timeout,      	[(#ENV{timeout,     	#CONFIG{sjcycle/timeout}})]})]
