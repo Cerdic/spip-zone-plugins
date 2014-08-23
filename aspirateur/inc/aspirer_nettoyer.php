@@ -26,6 +26,7 @@ function clean_contenu($chaine){
 
    //on exclut les images du chemin donné
    $motif_chemin_documents_exclure = lire_config('aspirateur/motif_chemin_documents_exclure');
+   if($motif_chemin_documents_exclure)
    $chaine = preg_replace("#<img\s+[^>]*?src=[^>]*$motif_chemin_documents_exclure*/[^>]*>#Umis",'', $chaine);
 		
    //parfois le à n'est pas bon!

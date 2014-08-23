@@ -56,31 +56,36 @@
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							#SET{name,motif_debut_contenu_regex}#SET{obli,''}[(#SET{defaut,'<!-- debut contenu -->'})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							[(#REM) <!-- debut contenu -->]
+							#SET{name,motif_debut_contenu_regex}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							#SET{name,motif_fin_contenu_regex}#SET{obli,''}[(#SET{defaut,'<!-- fin contenu -->'})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							[(#REM) <!-- fin contenu -->]
+							#SET{name,motif_fin_contenu_regex}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							#SET{name,motif_chemin_documents}#SET{obli,''}[(#SET{defaut,'upload/'})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							[(#REM) upload/]
+							#SET{name,motif_chemin_documents}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							#SET{name,motif_chemin_documents_exclure}#SET{obli,''}[(#SET{defaut,'design/'})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							[(#REM) design/]
+							#SET{name,motif_chemin_documents_exclure}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							#SET{name,motif_chemin_pages_exclure}#SET{obli,''}[(#SET{defaut,'recommander.asp|faq.asp'})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							[(#REM) recommander.asp|faq.asp]
+							#SET{name,motif_chemin_pages_exclure}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>

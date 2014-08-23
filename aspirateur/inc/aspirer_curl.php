@@ -65,8 +65,8 @@ function isoler_contenu($chaine){
 	//Identifiant du div pour isoler le contenu via xpath
 	$div_id_contenu = trim(lire_config('aspirateur/div_id_contenu'));
 	if($div_id_contenu){
-		$doc = new DOMDocument();
-		$doc->loadHTML($chaine);
+		@$doc = new DOMDocument();
+		@$doc->loadHTML($chaine);
 		$xpath = new DOMXpath($doc);
 
 		$tags = $xpath->query("//*[@id='$div_id_contenu']");
@@ -90,7 +90,7 @@ function isoler_contenu($chaine){
 	//Sinon ereg sur variables de début et de fin pour isoler le contenu
 	$motif_debut_contenu_regex = lire_config('aspirateur/motif_debut_contenu_regex');
 	$motif_fin_contenu_regex = lire_config('aspirateur/motif_fin_contenu_regex');
-	if (preg_match("/$motif_debut_contenu_regex(.*)$motif_fin_contenu_regex/sU", $chaine, $contenu))
+	if($motif_debut_contenu_regex && $motif_fin_contenu_regex && preg_match("/$motif_debut_contenu_regex(.*)$motif_fin_contenu_regex/sU", $chaine, $contenu))
 		$chaine = $contenu[1];
 	else $chaine = $contenu;
 	}
@@ -205,7 +205,7 @@ function traite_texte_documents($texte){
 		$documents = array();
 		foreach ($all_links as $linkin){
 			//verifie si le lien est un document à conserver grace au motif demandé
-			if (preg_match("'$motif_chemin_documents'", $linkin)){
+			if($motif_chemin_documents && preg_match("'$motif_chemin_documents'", $linkin)){
 				$documents[] = $linkin;
 							
 				if($activer_spip==1){

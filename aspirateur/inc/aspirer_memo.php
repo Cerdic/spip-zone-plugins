@@ -23,8 +23,8 @@ function need_traitement($url_page,$url_site_aspirer){
 	//on sort si la page n'a pas à être scanné ou est un document
 	$motif_chemin_pages_exclure = lire_config('aspirateur/motif_chemin_pages_exclure');
 	$motif_chemin_documents = lire_config('aspirateur/motif_chemin_documents');
-	if (preg_match("'$motif_chemin_documents'", $url_page) OR preg_match("'$motif_chemin_pages_exclure'", $url_page)) 
-	return;
+	if($motif_chemin_documents && preg_match("'$motif_chemin_documents'", $url_page)) return;
+	if($motif_chemin_pages_exclure && preg_match("'$motif_chemin_pages_exclure'", $url_page)) return;
 	
 	$aspirateur_tmp_liste=aspirateur_tmp_liste($url_site_aspirer);
 		//lit le fichier qui liste les urls des pages traitées
