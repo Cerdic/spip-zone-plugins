@@ -44,6 +44,9 @@ function do_rss($fichier,$nombre_de_pages){
 	$flux.= "<rss version='2.0'	
 		xmlns:dc='http://purl.org/dc/elements/1.1/'
 		xmlns:content='http://purl.org/rss/1.0/modules/content/'
+		xmlns:wfw='http://wellformedweb.org/CommentAPI/'
+		xmlns:sy='http://purl.org/rss/1.0/modules/syndication/'
+		xmlns:slash='http://purl.org/rss/1.0/modules/slash/'
 		xmlns:atom='http://www.w3.org/2005/Atom'>\n";
 	
 	$flux.= "<channel xml:lang='fr'>\n";
@@ -108,7 +111,7 @@ function traiter_items($links,$url_du_site){
 		$texte=$traite_texte_documents['texte'];
 		
 		//traitement du texte via SPIP pour rss
-		$texte = texte_backend($texte); 
+		//$texte = texte_backend($texte); 
 		
 		//cree un item pour chaque page
 		$flux.= "\n<item xml:lang='fr'>\n";
@@ -152,8 +155,9 @@ function do_item($titre,$url_page,$texte_encoded){
 	$flux.= "<dc:language>fr</dc:language>\n";
 	$flux.= "<dc:creator>".$nom_site_aspirer."</dc:creator>\n";
 	$flux.= "<description></description>\n"; //todo
-	$flux.= "<pubDate></pubDate>\n";
-	$flux.= "<content:encoded>".$texte_encoded."</content:encoded>\n";
+	$flux.= "<pubDate></pubDate>\n"; //todo
+	$flux.= "<content:encoded><![CDATA[".$texte_encoded."]]>\n";
+	$flux.= "</content:encoded>\n";
 	
 	return $flux;
 }

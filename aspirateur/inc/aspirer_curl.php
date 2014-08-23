@@ -64,13 +64,27 @@ function la_page($url) {
 function isoler_contenu($chaine){
 	//Identifiant du div pour isoler le contenu via xpath
 	$div_id_contenu = trim(lire_config('aspirateur/div_id_contenu'));
-	if($div_id_contenu){
+	$div_class_contenu_exclure = trim(lire_config('aspirateur/div_class_contenu_exclure'));
+
+	if($div_id_contenu OR $div_class_contenu_exclure){
 		@$doc = new DOMDocument();
+		$doc->preserveWhiteSpace = false;
 		@$doc->loadHTML($chaine);
 		$xpath = new DOMXpath($doc);
-
+		
+		if($div_id_contenu)
 		$tags = $xpath->query("//*[@id='$div_id_contenu']");
-		    
+		//sinon on prend large soit le noeud body de la page
+		if (is_null($tags)){
+			$tags = $xpath->query("//body");
+		}
+		
+		//on exclut un noeud div avec une class donnée (option*)
+		if($div_class_contenu_exclure){
+			foreach($xpath->query(".//*[@class='$div_class_contenu_exclure']") as $node) {
+			  $node->parentNode->removeChild($node);
+			}
+		}
 			if (!is_null($tags)) {
 				foreach ($tags as $tag) {
 				    $innerHTML = '';
@@ -78,25 +92,38 @@ function isoler_contenu($chaine){
 				    //see http://fr.php.net/manual/en/class.domelement.php#86803
 				    $children = $tag->childNodes;
 				    foreach ($children as $child) {
-					$tmp_doc = new DOMDocument();
-					$tmp_doc->appendChild($tmp_doc->importNode($child,true));       
+				    	$tmp_doc = new DOMDocument();
+					$tmp_doc->appendChild($tmp_doc->importNode($child,true)); 					
 					$innerHTML .= $tmp_doc->saveHTML();
 				    }
 				
-				    return trim($innerHTML);
+				    $chaine = trim($innerHTML);
 				}
 			}
 	}else{
-	//Sinon ereg sur variables de début et de fin pour isoler le contenu
-	$motif_debut_contenu_regex = lire_config('aspirateur/motif_debut_contenu_regex');
-	$motif_fin_contenu_regex = lire_config('aspirateur/motif_fin_contenu_regex');
-	if($motif_debut_contenu_regex && $motif_fin_contenu_regex && preg_match("/$motif_debut_contenu_regex(.*)$motif_fin_contenu_regex/sU", $chaine, $contenu))
+	$chaine = $contenu;
+	//2em méthode Sinon ereg sur variables de début et de fin pour isoler le contenu
+	$motif_debut_contenu_regex = trim(lire_config('aspirateur/motif_debut_contenu_regex'));
+	$motif_fin_contenu_regex = trim(lire_config('aspirateur/motif_fin_contenu_regex'));
+	if(isset($motif_debut_contenu_regex) && isset($motif_fin_contenu_regex) && preg_match("/$motif_debut_contenu_regex(.*)$motif_fin_contenu_regex/sU", $chaine, $contenu))
 		$chaine = $contenu[1];
-	else $chaine = $contenu;
 	}
-
+	
 	return $chaine;   
 }
+
+function deleteNode($node) {
+    deleteChildren($node);
+    $parent = $node->parentNode;
+    $oldnode = $parent->removeChild($node);
+} 
+
+function deleteChildren($node) {
+    while (isset($node->firstChild)) {
+        deleteChildren($node->firstChild);
+        $node->removeChild($node->firstChild);
+    }
+} 
 
 
 /**

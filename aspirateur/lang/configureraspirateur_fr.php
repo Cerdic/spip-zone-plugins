@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_activer_spip_1'=>'Réécrire le chemin des documents pour SPIP',
 	
 	'label_div_id_contenu'=>'Identifiant du div pour isoler le contenu',
+	'label_div_class_contenu_exclure'=>'Exclure tous les divs avec cette class',
 	'label_motif_debut_contenu_regex'=>'Sinon motif Regex pour le debut du contenu',	
 	'label_motif_fin_contenu_regex'=>'Sinon motif Regex pour la fin du contenu',
 	'label_motif_chemin_documents'=>'Motif nécessaire dans le chemin des documents',

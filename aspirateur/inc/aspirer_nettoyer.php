@@ -129,7 +129,7 @@ function clean_contenu($chaine){
  *
 **/
 function char($chaine){
-	return preg_replace_callback("/(&#[0-9]+;)/", function($m) { return mb_convert_encoding($m[1], "UTF-8", "HTML-ENTITIES"); }, $chaine); 
-	//return html_entity_decode($chaine, ENT_NOQUOTES, "UTF-8");
+	//return preg_replace_callback("/(&#[0-9]+;)/", function($m) { return mb_convert_encoding($m[1], "UTF-8", "HTML-ENTITIES"); }, $chaine); 
+	return html_entity_decode($chaine, ENT_NOQUOTES, "UTF-8");
 }
 

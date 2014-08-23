@@ -50,6 +50,7 @@
 					<fieldset>
 						<legend><:configureraspirateur:legend_motifs_regex_aspirateur:></legend>
 						<ul>
+							[(#REM) content]
 							#SET{name,div_id_contenu}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
@@ -65,6 +66,13 @@
 							</li>
 							[(#REM) <!-- fin contenu -->]
 							#SET{name,motif_fin_contenu_regex}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+							</li>
+							[(#REM) socialtags ]
+							#SET{name,div_class_contenu_exclure}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
