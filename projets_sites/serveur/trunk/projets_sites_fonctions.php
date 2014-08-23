@@ -13,4 +13,25 @@ if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
+function formater_tableau ($chaine)
+{
+	$listing = array();
+	if (preg_match("/\n/", $chaine)) {
+		$listing = explode("\n", $chaine);
+		if (is_array($listing) and count($listing) > 0) {
+			foreach ($listing as $cle => $valeur) {
+				$listing[$cle] = formater_valeur($valeur);
+			}
+		}
+	} else if (preg_match("|", $chaine)) {
+		$listing[] = formater_valeur($chaine);
+	}
+	return $listing;
+}
+
+function formater_valeur ($valeur)
+{
+	$valeur = explode("|", $valeur);
+	return $valeur;
+}
 ?>

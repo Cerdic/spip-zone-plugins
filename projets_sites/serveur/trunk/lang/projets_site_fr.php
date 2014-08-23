@@ -54,6 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // L
     'label_apache_fieldset' => 'Apache',
     'label_apache_modules' => 'Modules Apache',
+    'label_auteur_email' => 'E-mail',
+    'label_auteur_id' => '#',
+    'label_auteur_login' => 'Login',
+    'label_auteur_nom' => 'Nom',
     'label_auteurs_admin' => 'Administrateurs',
     'label_auteurs_admin_fieldset' => 'Administrateurs',
     'label_auteurs_fieldset' => 'Les auteurs',

@@ -49,7 +49,15 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('sql_alter', "TABLE spip_projets_sites ADD php_extensions text DEFAULT '' NOT NULL AFTER php_memory"),
     );
 
-    // un port peut avoir 5 chiffres (même si ce n'est utilisé dans notre cas)
+    /* un port peut avoir 5 chiffres (même si ce n'est utilisé dans notre cas)
+     * On met logiciel_nom après webservice et suivi de logiciel_version
+     * Ajout de :
+     * - logiciel_revision
+     * - logiciel_plugins
+     * - sgbd_port
+     * - sgbd_prefixe
+     * - sgbd_version
+    **/
     $maj['1.2.0'] = array(
         array('sql_alter', "TABLE spip_projets_sites CHANGE serveur_port serveur_port varchar(5) NOT NULL DEFAULT ''"),
         array('sql_alter', "TABLE spip_projets_sites CHANGE logiciel_nom logiciel_nom varchar(25) NOT NULL DEFAULT '' AFTER webservice"),
@@ -60,9 +68,12 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('sql_alter', "TABLE spip_projets_sites ADD sgbd_prefixe varchar(25) NOT NULL DEFAULT '' AFTER sgbd_nom"),
         array('sql_alter', "TABLE spip_projets_sites ADD sgbd_version varchar(25) NOT NULL DEFAULT '' AFTER sgbd_type"),
     );
+    /*
+     * On ajoute auteurs_admin et auteurs_webmestres après logiciel_plugins
+    **/
     $maj['1.2.1'] = array(
         array('sql_alter', "TABLE spip_projets_sites ADD auteurs_webmestres text DEFAULT '' NOT NULL AFTER logiciel_plugins"),
-        array('sql_alter', "TABLE spip_projets_sites ADD auteurs_administrateurs text DEFAULT '' NOT NULL AFTER logiciel_plugins"),
+        array('sql_alter', "TABLE spip_projets_sites ADD auteurs_admin text DEFAULT '' NOT NULL AFTER logiciel_plugins"),
     );
 
     include_spip('base/upgrade');
