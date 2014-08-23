@@ -1,0 +1,21 @@
+<paquet
+	prefix="aspirateur"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/aspirateur-64.png"
+	documentation=""
+>
+
+	<nom>Aspirateur</nom>
+
+	<auteur>Anne-lise Martenot</auteur>
+	<auteur lien="http://elastick.net">elastick.net</auteur>
+	<licence>GPL</licence>
+	
+	<utilise nom="rssarticle" compatibilite="[1.1.2;["  />	
+	<utilise nom="docker" compatibilite="[0.2.1;["  />
+	<utilise nom="ressource" compatibilite="[0.2.0;["  />
+	
+</paquet>

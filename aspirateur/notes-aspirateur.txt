@@ -1,0 +1,34 @@
+Quelques étapes dans l'aspiration d'un site
+
+A1/ récupère tout d'une page depuis son url
+A2/ scanne tous les liens de cette page
+A3/ isole les liens des pages à suivre (si relatives au site et si elles ne sont pas des documents)
+
+Pour chaque page à suivre
+B1/ récupère tout d'une page depuis son url
+B2/ extrait le contenu spécifique
+B3/ isole les liens de ce contenu
+B4/ isole les liens documents depuis un motif, les soustrait de B3
+B5/ réécrit les liens documents dans le texte
+B6/ créé pour chaque page un item pour le contenu et ses documents
+
+C1/ Fabrique le rss spécifique, les liens locaux sont réécrits dans le texte en absolu, en minuscules (à activer?), mais pas les enclosures qui conserve le href exact (pour les rapatrier dans le site avec Docker), on reste en html
+
+Pour passer les articles en SPIP, on peut déjà le faire à la main
+D1/ Activez les sites et leur syndication complète
+D2/ Entrez le chemin du fichier RSS en syndication
+D1/ Activer le plugin Docker dès l'import du plugin RSS2articles ! On importe les articles en site syndiqué avec RSS2articles en activant la syntaxe SPIP -> ça doit conserver les <a> sans balise fermante…
+D4/ On télécharge ensuite les documents distants avec Docker les liens, en local, + réécrit en minuscules + en titrant les documents
+D5/ Il suffit de repasser les liens dans la base de type http://local/IMG/ en http://production/IMG/  ou même en ../IMG/ peut-être? 
+D6/ utiliser le plugin ressources pour afficher les liens images dans le texte
+
+------------
+
+TODO
+- Un suivi des liens de la page pour re-scanner toutes les pages
+- Un cron pour tous les liens du site, car c'est lourd
+- Il faudrait pouvoir rapatrier les documents indépendamment pour penser à importer ailleurs qu'en SPIP.
+
+
+
+
