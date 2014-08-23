@@ -25,7 +25,7 @@ function inc_analyser_webservice_dist($url)
     $xml = $convertir($page);
     $valeurs['webservice'] = $url;
     $parse_url = parse_url($url);
-    parse_str($parse_url['query'],$query);
+    parse_str($parse_url['query'], $query);
 
     if (isset($query['cle'])) {
         $valeurs['uniqid'] = $query['cle'];
@@ -71,12 +71,19 @@ function inc_analyser_webservice_dist($url)
                     $valeurs['php_version'] = $xml[$key]['version'];
                     $valeurs['php_memory'] = $xml[$key]['memory'];
                     break;
+                case 'administrateurs':
+                    foreach ($xml[$key][0] as $key => $value) {
+                        $value = array_filter($value);
+                        $valeurs['auteurs_admin'][] = implode('|', $value);
+                    }
+                    $valeurs['auteurs_admin'] = implode("\n", $valeurs['auteurs_admin']);
+                    break;
                 case 'webmestres':
                     foreach ($xml[$key][0] as $key => $value) {
                         $value = array_filter($value);
-                        $valeurs['webmestres'][] = implode('|', $value);
+                        $valeurs['auteurs_webmestres'][] = implode('|', $value);
                     }
-                    $valeurs['webmestres'] = implode("\n", $valeurs['webmestres']);
+                    $valeurs['auteurs_webmestres'] = implode("\n", $valeurs['auteurs_webmestres']);
                     break;
                 case 'plugins':
                     foreach ($xml[$key][0] as $key => $value) {

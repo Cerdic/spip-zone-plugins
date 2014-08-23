@@ -1,3 +1,4 @@
+[(#SET{plugin_statut_class,[(#ARRAY{dist,info,actif,success,inactif,warning})]})]
 <BOUCLE_projets_site(PROJETS_SITES){id_site}>
 
 	[<div class="champ contenu_type_site[ (#TYPE_SITE*|strlen|?{'',vide})]">
@@ -18,29 +19,6 @@
 	[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_descriptif:> : </div>
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_nom} descriptif'>(#DESCRIPTIF)</div>
-	</div>]
-
-<!-- Logiciel/CMS -->
-<div class="champ fieldset"><h3 class="legend logiciel_fieldset"><:projets_site:label_logiciel_fieldset:></h3></div>
-
-	[<div class="champ contenu_logiciel_nom[ (#LOGICIEL_NOM*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_nom:> : </div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_nom} logiciel_nom'>(#LOGICIEL_NOM)</div>
-	</div>]
-
-	[<div class="champ contenu_logiciel_version[ (#LOGICIEL_VERSION*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_version:> : </div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_version} logiciel_version'>(#LOGICIEL_VERSION)</div>
-	</div>]
-
-	[<div class="champ contenu_logiciel_revision[ (#LOGICIEL_REVISION*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_revision:> : </div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_revision} logiciel_revision'>(#LOGICIEL_REVISION)</div>
-	</div>]
-
-	[<div class="champ contenu_logiciel_plugins[ (#LOGICIEL_PLUGINS*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_plugins:> : </div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_plugins} logiciel_plugins'>(#LOGICIEL_PLUGINS)</div>
 	</div>]
 
 <!-- Front office -->
@@ -78,6 +56,60 @@
 		<div class="label visible"><:projets_site:label_bo_password:> : </div>
 		<div dir='#LANG_DIR' class='span #EDIT{bo_password} bo_password'>(#BO_PASSWORD)</div>
 	</div>]
+
+<!-- Logiciel/CMS -->
+<div class="champ fieldset"><h3 class="legend logiciel_fieldset"><:projets_site:label_logiciel_fieldset:></h3></div>
+
+	[<div class="champ contenu_logiciel_nom[ (#LOGICIEL_NOM*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_logiciel_nom:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{logiciel_nom} logiciel_nom'>(#LOGICIEL_NOM)</div>
+	</div>]
+
+	[<div class="champ contenu_logiciel_version[ (#LOGICIEL_VERSION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_logiciel_version:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{logiciel_version} logiciel_version'>(#LOGICIEL_VERSION)</div>
+	</div>]
+
+	[<div class="champ contenu_logiciel_revision[ (#LOGICIEL_REVISION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_logiciel_revision:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{logiciel_revision} logiciel_revision'>(#LOGICIEL_REVISION)</div>
+	</div>]
+[(#REM)
+	On va afficher la liste des plugins en tableaux si on respecte "prefixe|x.y.z|titre|statut".
+	Sinon, on affiche la balise #LOGICIEL_PLUGINS directement.
+]
+<B_plugins>
+	<div class="champ contenu_logiciel_plugins">
+		<div class="label visible"><:projets_site:label_logiciel_plugins:> : </div>
+		<div dir='#LANG_DIR' class='#EDIT{logiciel_plugins} logiciel_plugins clearfix'>
+		<table class="table spip liste">
+			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_plugin,projets_site:info_nb_plugins})]</caption>
+			<thead>
+				<tr>
+					<th class="principale prefixe"><:projets_site:label_prefixe:></th>
+					<th class="secondaire version"><:projets_site:label_version:></th>
+					<th class="principale titre"><:projets_site:label_titre:></th>
+					<th class="secondaire statut"><:projets_site:label_statut:></th>
+				</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_plugins (DATA) {source table, (#LOGICIEL_PLUGINS*|replace{\n,"////"}|explode{"////"})} {si (#LOGICIEL_PLUGINS|match{"\|"})} {par valeur}><B_plugin>
+				<tr><BOUCLE_plugin (DATA) {source table, (#VALEUR|explode{"|"})}>
+					[(#REM|test_espace_prive|oui)<td>][
+					(#REM|test_espace_prive|non)<td class="[(#GET{plugin_statut_class}|table_valeur{#VALEUR|trim})]">][(#VALEUR|trim)]</td></BOUCLE_plugin>
+				</tr>
+			</B_plugin>
+			</BOUCLE_plugins>
+			</tbody>
+		</table><!-- /.table spip liste -->
+		</div><!-- /.logiciel_plugins -->
+	</div>
+</B_plugins>
+	[<div class="champ contenu_logiciel_plugins[ (#LOGICIEL_PLUGINS*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_logiciel_plugins:> : </div>
+		<div dir='#LANG_DIR' class='span #EDIT{logiciel_plugins} logiciel_plugins'>(#LOGICIEL_PLUGINS)</div>
+	</div>]
+<//B_plugins>
 
 <!-- Serveur  -->
 <div class="champ fieldset"><h3 class="legend serveur_fieldset"><:projets_site:label_serveur_fieldset:></h3></div>
@@ -249,3 +281,11 @@
 </div>]
 
 </BOUCLE_projets_site>
+[(#REM|test_espace_prive|non)
+<script type="text/javascript">
+$('.contenu_logiciel_plugins table.liste tbody tr td:last-child').each(function(index, el) {
+	var class_tableau = $(this).attr("class");
+	$(this).parent('tr').addClass( class_tableau + " text-" + class_tableau );
+});
+</script>
+]

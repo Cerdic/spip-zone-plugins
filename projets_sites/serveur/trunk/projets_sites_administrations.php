@@ -60,6 +60,10 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('sql_alter', "TABLE spip_projets_sites ADD sgbd_prefixe varchar(25) NOT NULL DEFAULT '' AFTER sgbd_nom"),
         array('sql_alter', "TABLE spip_projets_sites ADD sgbd_version varchar(25) NOT NULL DEFAULT '' AFTER sgbd_type"),
     );
+    $maj['1.2.1'] = array(
+        array('sql_alter', "TABLE spip_projets_sites ADD auteurs_webmestres text DEFAULT '' NOT NULL AFTER logiciel_plugins"),
+        array('sql_alter', "TABLE spip_projets_sites ADD auteurs_administrateurs text DEFAULT '' NOT NULL AFTER logiciel_plugins"),
+    );
 
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);

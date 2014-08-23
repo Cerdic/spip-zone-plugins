@@ -53,33 +53,6 @@
 
 		</ul>
 
-<!-- Logiciel -->
-		<fieldset>
-			<h3 class="legend">
-				<:projets_site:label_logiciel_fieldset:>
-			</h3>
-			<ul>
-				[(#SAISIE{input, logiciel_nom, obligatoire=oui,
-					label=<:projets_site:label_logiciel_nom:>,
-					size=25,maxlength=25})]
-
-				[(#SAISIE{input, logiciel_version, obligatoire=oui,
-					label=<:projets_site:label_logiciel_version:>,
-					size=25,
-					maxlength=25})]
-
-				[(#SAISIE{input, logiciel_revision,
-					label=<:projets_site:label_logiciel_revision:>,
-					size=25,
-					maxlength=25})]
-
-				[(#SAISIE{textarea, logiciel_plugins,
-					label=<:projets_site:label_logiciel_plugins:>,
-					rows=6})]
-
-			</ul>
-		</fieldset>
-
 <!-- Front Office -->
 		<fieldset>
 			<h3 class="legend">
@@ -128,6 +101,59 @@
 			</ul>
 		</fieldset>
 
+<!-- Logiciel -->
+		<fieldset>
+			<h3 class="legend">
+				<:projets_site:label_logiciel_fieldset:>
+			</h3>
+			<ul>
+				[(#SAISIE{input, logiciel_nom, obligatoire=oui,
+					label=<:projets_site:label_logiciel_nom:>,
+					size=25,maxlength=25})]
+
+				[(#SAISIE{input, logiciel_version, obligatoire=oui,
+					label=<:projets_site:label_logiciel_version:>,
+					size=25,
+					maxlength=25})]
+
+				[(#SAISIE{input, logiciel_revision,
+					label=<:projets_site:label_logiciel_revision:>,
+					size=25,
+					maxlength=25})]
+
+				[(#SAISIE{explication,explication_logiciel_plugins,
+					inserer_debut=<:projets_site:explication_logiciel_plugins_titre:>,
+					texte=<:projets_site:explication_logiciel_plugins:>})]
+
+				[(#SAISIE{textarea, logiciel_plugins,
+					label=<:projets_site:label_logiciel_plugins:>,
+					rows=6})]
+
+			</ul>
+		</fieldset>
+
+<!-- Les auteurs -->
+		<fieldset>
+			<h3 class="legend">
+				<:projets_site:label_auteurs_fieldset:>
+			</h3>
+			<!-- /.legend -->
+			<ul>
+				[(#SAISIE{explication,explication_auteurs,
+					inserer_debut=<:projets_site:explication_auteurs_titre:>,
+					texte=<:projets_site:explication_auteurs:>})]
+
+				[(#SAISIE{textarea, auteurs_admin,
+					label=<:projets_site:label_auteurs_admin:>,
+					rows=6})]
+
+				[(#SAISIE{textarea, auteurs_webmestres,
+					label=<:projets_site:label_auteurs_webmestres:>,
+					rows=6})]
+
+			</ul>
+		</fieldset>
+
 <!-- applicatif -->
 		<fieldset>
 			<h3 class="legend">
@@ -161,7 +187,7 @@
 			</ul>
 		</fieldset>
 
-
+<!-- Apache -->
 		<fieldset>
 			<h3 class="legend">
 				<:projets_site:label_apache_fieldset:>
@@ -174,6 +200,7 @@
 			</ul>
 		</fieldset>
 
+<!-- PHP -->
 		<fieldset>
 			<h3 class="legend">
 				<:projets_site:label_php_fieldset:>

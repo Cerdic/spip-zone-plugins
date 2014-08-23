@@ -32,6 +32,9 @@ function projets_sites_declarer_tables_interfaces($interfaces)
     $interfaces['table_des_traitements']['MOTEUR_RECHERCHE'][]= _TRAITEMENT_RACCOURCIS;
     $interfaces['table_des_traitements']['AUTRES_OUTILS'][]= _TRAITEMENT_RACCOURCIS;
     $interfaces['table_des_traitements']['REMARQUES'][]= _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['LOGICIEL_PLUGINS'][]= _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['AUTEURS_ADMIN'][]= _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['AUTEURS_WEBMESTRES'][]= _TRAITEMENT_RACCOURCIS;
 
     $interfaces['exceptions_des_jointures']['id_site'] = array('spip_projets_sites_liens', 'id_site');
 
@@ -66,6 +69,8 @@ function projets_sites_declarer_tables_objets_sql($tables)
             "logiciel_version"   => "varchar(25) NOT NULL DEFAULT ''",
             "logiciel_revision"  => "varchar(25) NOT NULL DEFAULT ''",
             "logiciel_plugins"   => "text DEFAULT '' NOT NULL",
+            "auteurs_admin"      => "text DEFAULT '' NOT NULL",
+            "auteurs_webmestres" => "text DEFAULT '' NOT NULL",
             "fo_url"             => "varchar(255) NOT NULL DEFAULT ''",
             "fo_login"           => "varchar(25) NOT NULL DEFAULT ''",
             "fo_password"        => "varchar(25) NOT NULL DEFAULT ''",
@@ -120,6 +125,8 @@ function projets_sites_declarer_tables_objets_sql($tables)
             'logiciel_version',
             'logiciel_plugins',
             'logiciel_revision',
+            'auteurs_admin',
+            'auteurs_webmestres',
             'date_creation',
             'fo_fieldset',
             'fo_url',
@@ -170,6 +177,8 @@ function projets_sites_declarer_tables_objets_sql($tables)
             'logiciel_version',
             'logiciel_plugins',
             'logiciel_revision',
+            'auteurs_admin',
+            'auteurs_webmestres',
             'date_creation',
             'fo_fieldset',
             'fo_url',
@@ -215,6 +224,8 @@ function projets_sites_declarer_tables_objets_sql($tables)
             "descriptif" => 5,
             "logiciel_nom" => 6,
             "logiciel_version" => 6,
+            "auteurs_admin" => 6,
+            "auteurs_webmestres" => 6,
             "type_site" => 6,
             "uniqid" => 6,
             "fo_url" => 6,

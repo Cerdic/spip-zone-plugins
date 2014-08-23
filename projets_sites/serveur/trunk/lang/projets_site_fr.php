@@ -13,6 +13,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'avis_site_introuvable' => 'Site introuvable',
 
     // E
+    'explication_auteurs' => 'Saisir la liste des auteurs du site en respectant les règles suivantes&nbsp;: </p>
+    <ul class="spip">
+    <li>Un administrateur par ligne&nbsp;;</li>
+    <li>L\'identifiant, le login, l\'email et le nom seront séparés par un pipe&nbsp;"|"&nbsp;;</li>
+    <li>Pas de raccourcis typographiques de SPIP, ni de code html.</li>
+    </ul>',
+    'explication_auteurs_titre' => '<h4>Règles de saisies</h4>',
+    'explication_logiciel_plugins' => 'Saisir la liste des plugins du site en respectant les règles suivantes&nbsp;: </p>
+    <ul class="spip">
+    <li>Un plugin par ligne&nbsp;;</li>
+    <li>Le préfixe, le numéro de version, le titre complet et le statut du plugin seront séparés par un pipe&nbsp;"|"&nbsp;;</li>
+    <li>Pas de raccourcis typographiques de SPIP, ni de code html.</li>
+    </ul>',
+    'explication_logiciel_plugins_titre' => '<h4>Règles de saisies</h4>',
     'explication_moteur_recherche' => 'Exemples : Moteur interne au logiciel, Exalead, Google, etc.',
     'explication_remarques' => 'Caractéristiques particulières, fonctionnalités, etc.',
     'explication_sas_protocole' => 'Exemples&nbsp;: FTP, SFTP, etc.',
@@ -26,14 +40,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // I
     'icone_creer_projets_site' => 'Ajouter un site',
     'icone_modifier_projets_site' => 'Modifier ce site',
+    'info_1_auteur_admin' => 'Un administrateur',
+    'info_1_auteur_webmestre' => 'Un webmestre',
     'info_1_projets_site' => 'Un site',
+    'info_1_plugin' => 'Un plugin',
     'info_aucun_projets_site' => 'Aucun site',
+    'info_nb_auteurs_admin' => '@nb@ administrateurs',
+    'info_nb_auteurs_webmestres' => '@nb@ webmestres',
     'info_nb_projets_sites' => '@nb@ sites',
+    'info_nb_plugins' => '@nb@ plugins',
     'info_projets_sites_auteur' => 'Les sites de cet auteur',
 
     // L
     'label_apache_fieldset' => 'Apache',
     'label_apache_modules' => 'Modules Apache',
+    'label_auteurs_admin' => 'Administrateurs',
+    'label_auteurs_admin_fieldset' => 'Administrateurs',
+    'label_auteurs_fieldset' => 'Les auteurs',
+    'label_auteurs_webmestres' => 'Webmestres',
+    'label_auteurs_webmestres_fieldset' => 'Webmestres',
     'label_autres_fieldset' => 'Autres',
     'label_autres_outils' => 'Autres outils',
     'label_bo_fieldset' => 'Back office',
@@ -57,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_php_fieldset' => 'PHP',
     'label_php_memory' => 'Mémoire allouée à PHP',
     'label_php_version' => 'Version de PHP',
+    'label_prefixe' => 'Préfixe',
     'label_remarques' => 'Remarques',
     'label_sas_fieldset' => 'Système d\'accès sécurisé (SAS)',
     'label_sas_login' => 'Identifiant',
@@ -80,9 +106,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_sgbd_version' => 'Version de la SGBD',
     'label_sso' => 'SSO',
     'label_statistiques' => 'Outils de statistiques',
+    'label_statut' => 'Statut',
     'label_titre' => 'Titre',
     'label_type_site' => 'Type de site',
     'label_uniqid' => 'Unique ID',
+    'label_version' => 'Version',
     'label_versioning_fieldset' => 'Gestionnaire de versions',
     'label_versioning_path' => 'Chemin du dépôt',
     'label_versioning_trac' => 'Trac du dépôt',
