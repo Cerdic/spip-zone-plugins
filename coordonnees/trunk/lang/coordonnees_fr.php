@@ -39,21 +39,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
 
 	// I
+	'info_1_adresse' => '1 adresse',
+	'info_1_email' => '1 courriel',
+	'info_1_numero' => '1 numero',
 	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
+	'info_aucun_email' => 'Aucun courriel',
+	'info_aucun_numero' => 'Aucun numero',
+	'info_aucune_adresse' => 'Aucune adresse',
 	'info_email_utilise_par' => 'Courriel utilisé par :',
 	'info_gauche_numero_adresse' => 'Adresse N°',
 	'info_gauche_numero_email' => 'Email N°',
 	'info_gauche_numero_numero' => 'Numéro N°',
-	'info_numero_utilise_par' => 'Numéro utilisé par :',
-	'info_aucune_adresse' => 'Aucune adresse',
-	'info_1_adresse' => '1 adresse',
 	'info_nb_adresses' => '@nb@ adresses',
-	'info_aucun_numero' => 'Aucun numero',
-	'info_1_numero' => '1 numero',
-	'info_nb_numeros' => '@nb@ numeros',
-	'info_aucun_email' => 'Aucun courriel',
-	'info_1_email' => '1 courriel',
 	'info_nb_emails' => '@nb@ courriels',
+	'info_nb_numeros' => '@nb@ numeros',
+	'info_numero_utilise_par' => 'Numéro utilisé par :',
 	'item_nouveau_numero' => 'Nouveau numéro',
 	'item_nouvel_email' => 'Nouveau courriel',
 	'item_nouvelle_adresse' => 'Nouvelle adresse',
@@ -69,14 +69,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_region' => 'Région',
 	'label_telephone' => 'Téléphone',
 	'label_titre' => 'Titre',
+	'label_type' => 'Type',
 	'label_type_adresse' => 'Type d\'adresse',
 	'label_type_email' => 'Type de courriel',
 	'label_type_numero' => 'Type de numéro',
 	'label_ville' => 'Ville',
 	'label_voie' => 'N<sup>o</sup> & voie',
 	'logo_adresse' => 'Logo de l\'adresse',
-	'logo_numero' => 'Logo du numero',
 	'logo_email' => 'Logo du courriel',
+	'logo_numero' => 'Logo du numero',
 
 	// M
 	'modifier_adresse' => 'Modifier cette adresse',
@@ -91,11 +92,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'numero' => 'Numéro',
 
 	// P
-	'placeholder_titre_adresse' => 'Un nom pour identifier l\'adresse',
-	'placeholder_titre_numero' => 'Un nom pour identifier le numéro de téléphone',
-	'placeholder_titre_email' => 'Un nom pour identifier l\'email',
 	'placeholder_complement_adresse' => 'étage, n° du bâtiment...',
 	'placeholder_email' => 'email@site.com',
+	'placeholder_titre_adresse' => 'Un nom pour identifier l\'adresse',
+	'placeholder_titre_email' => 'Un nom pour identifier l\'email',
+	'placeholder_titre_numero' => 'Un nom pour identifier le numéro de téléphone',
 
 	// S
 	'supprimer_adresse' => 'Supprimer cette adresse',
@@ -111,12 +112,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_adr_postal' => 'Postale (en poste restante)',
 	'type_adr_pref' => 'Principale',
 	'type_adr_work' => 'Professionnelle',
-	'type_email_internet' => 'Internet',
-	'type_email_pref' => 'Préféré',
-	'type_email_x400' => 'X.400',
 	'type_email_home' => 'Personnel',
+	'type_email_internet' => 'Internet',
 	'type_email_intl' => 'International',
+	'type_email_pref' => 'Préféré',
 	'type_email_work' => 'Professionnel',
+	'type_email_x400' => 'X.400',
 	'type_mel_home' => 'Personnel',
 	'type_mel_intl' => 'International',
 	'type_mel_work' => 'Professionnel',
@@ -136,7 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_tel_textphone' => 'Retranscripteur texte',
 	'type_tel_video' => 'Visiophone (visioconférence)',
 	'type_tel_voice' => 'Vocal',
-	'type_tel_work' => 'Professionnel'
+	'type_tel_work' => 'Professionnel',
 );
 
 ?>
