@@ -3,10 +3,11 @@
 	<auteur>b_b</auteur>
 	<version>0.2</version>
 	<version_base>0.2</version_base>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<prefix>sympatic</prefix>
 	<icon>images/sympatic.png</icon>
 	<description>Gestion des abonnements à des listes sympa depuis SPIP.</description>
+	<lien>http://contrib.spip.net/4074</lien>
 	<install>base/sympatic_upgrade.php</install>
 	<bouton id='sympatic_tous' parent='naviguer'>
 	    <icone>images/sympatic-24.png</icone>
