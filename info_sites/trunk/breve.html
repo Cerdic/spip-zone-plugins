@@ -1,0 +1,7 @@
+<?php if ($auteur_session) { ?>
+<BOUCLE_breve_principal(BREVES) {id_breve}>
+<INCLURE{fond=structure,env,id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE},id_secteur=#ID_SECTEUR,type-page=breve,composition=#COMPOSITION} />
+</BOUCLE_breve_principal>
+<?php } else { ?>
+<INCLURE{fond=structure,env,type-page=login,composition=login} />
+<?php } ?>

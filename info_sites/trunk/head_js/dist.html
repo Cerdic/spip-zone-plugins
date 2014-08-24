@@ -1,0 +1,27 @@
+<script type='text/javascript'>
+	jQuery(document).ready(function($) {
+		if ($('#aside').height() < $('#content').height()) {
+			$('#aside').css({
+				height: $('#content').height()
+			});
+		} else {
+			$('#content').css({
+				height: $('#aside').height()
+			});
+		};
+		// On active les tooltips pour la sidebar.
+		$('#aside a').tooltip({
+			placement: 'right',
+			trigger: 'hover'
+		});
+		$('[type=submit]').each(function(event) {
+			$(this).addClass('btn btn-default');
+		});
+		$('#content .icone.s24 a').each(function(event) {
+			$(this).addClass('btn btn-default');
+		});
+		$('table.spip.liste').each(function(event) {
+			$(this).addClass('table table-striped table-bordered');
+		});
+	});
+</script>

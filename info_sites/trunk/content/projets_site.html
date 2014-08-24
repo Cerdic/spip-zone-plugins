@@ -1,0 +1,56 @@
+
+<BOUCLE_projets_site (PROJETS_SITES) {id_site} {tous}>
+[(#BOITE_OUVRIR{[
+
+	<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h2>
+],simple fiche_objet})]
+
+
+<div class="row">
+	<div class="col-md-6">
+		[(#LOGO_PROJETS_SITE|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
+		<div class="clearfix"></div>
+
+		<div id="wysiwyg">
+		<INCLURE{fond=prive/objets/contenu/projets_site,id=#ID_SITE,id_site=#ID_SITE,ajax=wysiwyg} />
+		</div>
+		<div class="clearfix"></div>
+
+	</div>
+	<!-- /.col-md-6 -->
+	<div class="col-md-6">
+		<div class="block">
+			<div class="btn-group">
+			[(#AUTORISER{modifier,projets_site,#ID_SITE})
+				<a href="[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
+				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|parametre_url{url,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:projets_site:icone_modifier_projets_site:></a>
+			][(#AUTORISER{modifier,projets_site,#ID_SITE})
+				<a href="[(#URL_ECRIRE{projets_site,id_site=#ID_SITE})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:projets_site_editer_liens:></a>
+			]
+			</div>
+		</div>
+		<div class="block">
+			<div class="clearfix clear"> </div>
+			[(#SET{projets_id,#ARRAY})]
+			<BOUCLE_projets_lies (projets_sites_liens) {id_site} {objet='projet'}>
+			[(#SET{projets_id,[(#GET{projets_id}|push{#ID_OBJET})]})]
+			</BOUCLE_projets_lies>
+			[(#SET{projets_id,[(#GET{projets_id}|count|=={0}|?{0,[(#GET{projets_id}|join{","})]})]})]
+			[(#SET{where,projets.id_projet IN \(#GET{projets_id}\)})]
+			<INCLURE{fond=objets/liste/projets,where=#GET{where},ajax,env} />
+		</div>
+
+	</div>
+	<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+
+
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_projets_site>
+[(#ENV**{type-page}|=={projets_site_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projets_site_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projets_site>

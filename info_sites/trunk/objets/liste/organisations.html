@@ -1,0 +1,79 @@
+[(#REM) Tableau complet des organisations, affiché sur la page ?exec=organisations ]
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	id_organisation,1
+	statut_juridique,1
+	id_auteur,1
+}})
+]<B_liste_orga>
+#ANCRE_PAGINATION
+
+<BOUCLE_test_annuaire(CONDITION){si #CONFIG{contacts_et_organisations/utiliser_annuaires}}>
+<div class="onglets_simple clearfix">
+	<ul>
+		<li>
+			[(#ENV{id_annuaire}|is_null|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,''})]">})]
+			<:contacts:organisations_tout:>
+			[(#ENV{id_annuaire}|is_null|?{</strong>, </a>})]
+		</li>
+		<BOUCLE_filtre_annuaires(ANNUAIRES){par titre}>
+		<li>
+			<BOUCLE_comptage_organisations_annuaire(ORGANISATIONS){id_annuaire}{id_parent ?= #ENV{id_parent}}/>#SET{nb_organisations,#TOTAL_BOUCLE}<//B_comptage_organisations_annuaire>
+			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,#ID_ANNUAIRE})]">})]
+			#TITRE (#GET{nb_organisations})
+			[(#ENV{id_annuaire}|=={#ID_ANNUAIRE}|?{</strong>,</a>})]
+		</li>
+		</BOUCLE_filtre_annuaires>
+		<li>
+			<BOUCLE_comptage_organisations_aucun(ORGANISATIONS){id_annuaire=0}{id_parent ?= #ENV{id_parent}}/>#SET{nb_organisations,#TOTAL_BOUCLE}<//B_comptage_organisations_aucun>
+			[(#ENV{id_annuaire}|=={0}|?{<strong>, <a class="ajax" href="[(#SELF|parametre_url{id_annuaire,0})]">})]
+			<:contacts:annuaire_aucun:> (#GET{nb_organisations})
+			[(#ENV{id_annuaire}|=={0}|?{</strong>, </a>})]
+		</li>
+	</ul>
+</div>
+</BOUCLE_test_annuaire>
+
+<div class="liste-objets organisations">
+<table class='table table-striped table-bordered'>
+[<caption><strong class="caption">(#ENV*{titre,<:contacts:info_toutes_organisations:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class="picto"></th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+			<th class='statut_juridique' scope='col'>[(#TRI{statut_juridique,<:contacts:label_statut_juridique:>,ajax})]</th>
+            <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
+            <th class="nb_projets"><:info_sites:info_nb_projets:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_orga(ORGANISATIONS)
+		{compteur_contacts}
+		{id_annuaire?}{id_contact?}{id_auteur?}{id_parent ?= #ENV{id_parent}}
+		{recherche?}{auteurs.statut ?= #ENV{statut,''}}
+		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
+				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+			</BOUCLE_lien_organisation>
+				[(#SET{url,[(#ID_ORGANISATION|generer_url_entite{organisation})]})]
+			<//BOUCLE_lien_organisation>
+			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
+			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
+			<td class="statu_juridique">[(#STATUT_JURIDIQUE)]</td>
+			<td class='nb_contacts'>
+				[<span class="badge">(#COMPTEUR_CONTACTS|sinon{-})</span>]
+				<BOUCLE_contacts (CONTACTS) {id_organisation} {par nom} {' / '}><span class="contact">[(#PRENOM) ][(#NOM)]</span></BOUCLE_contacts>
+			</td>
+			<td class="nb_projets">
+				<BOUCLE_projets (PROJETS) {id_organisation}>[(#REM) ]</BOUCLE_projets><span class="badge">#TOTAL_BOUCLE</span><//B_projets>
+			</td>
+		</tr>
+	</BOUCLE_liste_orga>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_orga>[
+<div class="liste-objets organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_orga>

@@ -1,0 +1,61 @@
+
+<BOUCLE_projet (PROJETS) {id_projet} {tous}>
+[(#BOITE_OUVRIR{[
+
+	<h2>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h2>
+],simple fiche_objet})]
+
+
+<div class="row">
+	<div class="col-md-6">
+		[(#LOGO_PROJET|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
+		<div class="clearfix"></div>
+
+		<div id="wysiwyg">
+		<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
+		</div>
+		<div class="clearfix"></div>
+
+		<INCLURE{fond=prive/objets/liste/projets,
+			id_parent=#ID_PROJET,
+			titre=<:contacts:info_projets_filles:>,
+			ajax}>
+
+	</div>
+	<!-- /.col-md-6 -->
+	<div class="col-md-6">
+		<div class="block">
+			<div class="btn-group">
+			[(#AUTORISER{modifier,projet,#ID_PROJET})
+				<a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
+				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{url,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:projet:icone_modifier_projet:></a>
+			][(#AUTORISER{modifier,projet,#ID_PROJET})
+				<a href="[(#URL_ECRIRE{projet,id_projet=#ID_PROJET})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:projet_editer_liens:></a>
+			]
+			</div>
+		</div>
+		<div class="block">
+			<div class="clearfix clear"> </div>
+			<INCLURE{fond=objets/liste/projets_sites,projet,id_projet,ajax,env} />
+		</div>
+
+	</div>
+	<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+
+
+
+
+
+
+
+
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_projet>
+[(#ENV**{type-page}|=={projet_edit}|?{#INCLURE{fond=prive/squelettes/contenu/projet_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_projet>

@@ -1,0 +1,24 @@
+#SET{id_email_exclu, #ENV{coordonnee}|=={email}|?{#ENV{id_coordonnee}}}
+<B_liste_emails>
+#ANCRE_PAGINATION
+<div class="liste-objets emails coordonnees lies">
+    [<h5>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{coordonnees:info_1_email,coordonnees:info_nb_emails}})</h5>]
+    <BOUCLE_liste_emails (emails_liens) {id_email != #GET{id_email_exclu}} {objet} {id_objet} {pagination #ENV{nb,10}}>
+        <BOUCLE_email(EMAILS){id_email}>
+        <div class="champ contenu_email">
+            <div class='label visible type'>
+                [(#TYPE|logo_type_email) ][(#TYPE|coordonnees_lister_types_emails)]
+            </div>
+            <div class="span email">
+                [(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
+                [<span class="#EDIT{email} email">(#EMAIL)</span>]
+                [(#TYPE|match{x400}|non)</a>]
+            </div>
+        </div>
+        </BOUCLE_email>
+    </BOUCLE_liste_emails>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_emails>[
+<div class="liste-objets coordonnees emails caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_emails>

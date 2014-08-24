@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_publication,-1,
+	date_debut,-1,
+	nom,1, 
+	id_projet,1,
+	statut,1,
+	points,-1
+}})]
+<B_liste_projets>
+#ANCRE_PAGINATION
+<div class="liste-objets projets">
+<table class='table table-striped table-bordered'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projet:info_1_projet,projet:info_nb_projets}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='organisation' scope='col'><:contacts:label_organisation:></th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:projet:label_nom:>,ajax})]</th>
+            <th class='date' scope='col'>[(#TRI{date_publication,<:date:>,ajax})]</th>
+            <th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
+            <th class='id' scope='col'>[(#TRI{id_projet,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_projets(PROJETS) {id_parent?} {id_projets_cadre?} {id_mot?} {auteurs_liens.id_auteur?} {where?} {statut?} {recherche?} {tri #ENV{par,date_publication},#GET{defaut_tri}} {!par date_publication} {pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class="organisation">
+				<BOUCLE_organisation (ORGANISATIONS projets_liens) {id_projet} {' / '}>
+				<span class="organisation"><a href="[(#URL_ORGANISATION)]">#NOM</a></span></BOUCLE_organisation>
+			</td>
+			<td class='nom principale'>[(#LOGO_PROJET|image_reduire{20,26})]<a href="[(#ID_PROJET|generer_url_entite{projet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJET">[(#RANG). ]#NOM</a></td>
+            <td class='date secondaire'>[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
+            <td class='date secondaire'>[(#DATE_DEBUT|affdate_jourcourt|sinon{-})]</td>
+            <td class='id'>[(#AUTORISER{modifier,projet,#ID_PROJET}|?{
+				<a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET})]">#ID_PROJET</a>,
+				#ID_PROJET
+			})]</td>
+		</tr>
+	</BOUCLE_liste_projets>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_projets>[
+<div class="liste-objets projets caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_projets>

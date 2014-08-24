@@ -1,0 +1,22 @@
+<BOUCLE_content(AUTEURS){id_auteur}>
+<section class="vcard" itemscope itemtype="http://schema.org/Person"> [(#REM) microformat vcard]
+	<header class="cartouche">
+		<h1 class="#EDIT{qui} fn" itemprop="name">[(#LOGO_AUTEUR|image_reduire|inserer_attribut{itemprop,image})]#NOM</h1>
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{bio} chapo bio">(#BIO|adaptive_images)</div>]
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url spip_out" itemprop="url">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	</div>
+
+	<aside>
+		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
+
+		#FORMULAIRE_ECRIRE_AUTEUR
+	</aside>
+
+	<footer>
+		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+	</footer>
+</section>
+</BOUCLE_content>

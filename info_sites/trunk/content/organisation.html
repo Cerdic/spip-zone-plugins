@@ -1,0 +1,74 @@
+
+<BOUCLE_organisation (ORGANISATIONS) {id_organisation} {tous}>
+[(#BOITE_OUVRIR{[
+
+	<h2>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h2>
+],simple fiche_objet})]
+
+
+<div class="row">
+	<div class="col-md-6">
+		[(#LOGO_ORGANISATION|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
+		<div class="clearfix clear"></div>
+
+		<div id="wysiwyg">
+		<INCLURE{fond=prive/objets/contenu/organisation,id=#ID_ORGANISATION,id_organisation=#ID_ORGANISATION,ajax=wysiwyg} />
+		</div>
+		<div class="clearfix clear"></div>
+
+		<INCLURE{fond=prive/objets/liste/organisations,
+			id_parent=#ID_ORGANISATION,
+			titre=<:contacts:info_organisations_filles:>,
+			ajax}>
+
+	</div>
+	<!-- /.col-md-6 -->
+	<div class="col-md-6">
+		<div class="block">
+			<div class="btn-group">
+				[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+					<a href="[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
+					onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{url,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a>
+				][(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+					<a href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:organisation_editer_liens:></a>
+				]
+			</div>
+		</div>
+		<div class="block">
+			<div class="clearfix clear"> </div>
+			<INCLURE{fond=objets/liste/contacts,organisation,id_organisation,ajax,env} />
+		</div>
+		<div class="block">
+			<div class="clearfix clear"> </div>
+			<INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env} />
+		</div>
+		<div class="block">
+			<div class="clearfix clear"></div>
+			<BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet}>
+				#SET{table,#OBJET|table_objet}
+				[(#SET{titre,[#OBJET:info_(#GET{table})_liees_organisation]})]
+				[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},organisations_lies}})]
+				<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_projet,ajax,env} />
+			</BOUCLE_autresobjets>
+		</div>
+
+	</div>
+	<!-- /.col-md-6 -->
+</div>
+<!-- /.row -->
+
+
+
+
+
+
+
+
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_organisation>
+[(#ENV**{type-page}|=={organisation_edit}|?{#INCLURE{fond=prive/squelettes/contenu/organisation_edit,redirect=#SELF,env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_organisation>

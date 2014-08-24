@@ -1,0 +1,8 @@
+<BOUCLE_content(MOTS) {id_mot} {doublons}>
+<ul class="breadcrumb">
+	<li><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="divider"> &gt; </span></li>
+	<li><span><:mots_clefs:></span><span class="divider"> &gt; </span></li>
+	<BOUCLE_ariane(GROUPES_MOTS){id_groupe}><li><span>[(#TITRE|couper{80})]</span><span class="divider"> &gt; </span></li></BOUCLE_ariane>
+	<li class="active"><span>[(#TITRE|couper{80})]</span></li>
+</ul>
+</BOUCLE_content>

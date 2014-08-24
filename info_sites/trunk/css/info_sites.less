@@ -1,0 +1,448 @@
+@import "css/variables.less";
+
+body {
+	background-color: @gray-dark;
+}
+h1 {
+	small {
+		color: @gray-second;
+	}
+}
+.block {
+	margin-bottom: 1em;
+}
+.icone {
+	&.s24 {
+		&.right {
+			a {
+				img {
+					margin-right: 0.5em;
+				}
+			}
+		}
+		&.left {
+			a {
+				img {
+					margin-left: 0.5em;
+				}
+			}
+		}
+	}
+}
+
+.introduction {
+	text-align: justify;
+}
+
+.publication {
+	color: @gray-light;
+}
+
+table {
+	margin-bottom: 20px;
+	max-width: 100%;
+	width: 100%;
+	border: 1px solid #ddd;
+	> caption + thead, > thead:first-child {
+		> tr {
+			&:first-child {
+				> th, > td {
+					border-top: 0 none;
+				}
+			}
+		}
+	}
+	> thead {
+		> tr {
+			> th, > td {
+				border: 1px solid #ddd;
+				border-bottom-width: 2px;
+			}
+		}
+	}
+}
+
+.liste {
+	&.documents_joints {
+		ul {
+			padding-left: 0;
+			list-style: none;
+			li {
+				padding-left: 50px;
+				position: relative;
+				border-top: 1px solid @gray-second;
+				padding-top: 1em;
+				margin-bottom: 1em;
+				.spip_logos {
+					position: absolute;
+					left: 0;
+				}
+			}
+		}
+	}
+}
+// --------
+// Les grands blocs de pages
+// --------
+#header {
+	background-color: @white;
+	> .row {
+		background-color: @white;
+	}
+	header {
+	}
+	.form-search {
+		margin-top: 1em;
+		padding-top: 1em;
+
+		#formulaire_recherche {
+			.form-inline {
+				.form-group {
+					&:first-of-type {
+						width: 85%;
+						input {
+							width: 100%;
+						}
+					}
+				}
+			}
+		}
+
+	}
+}
+#aside {
+	background-color: @gray-dark;
+	color: @white;
+	a {
+		color: @white;
+		&:hover {
+			color: @black;
+		}
+	}
+	.menu {
+		&.menu_pages {
+			margin-top: 1em;
+			padding-top: 1px;
+			ul {
+				> li {
+					font-size: 1.25em;
+					a {
+						color: @gray-second;
+						&:hover, &.active {
+							color: @white;
+							background-color: transparent;
+						}
+						i {
+							min-width: 45px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#content {
+	background-color: @white;
+	padding-bottom: 1em;
+}
+
+// On va styler tous les formulaires d'édition d'un objet.
+.formulaire_spip {
+	padding: 0.5em;
+	background-color: @gray-lighter;
+	overflow: hidden;
+	ul {
+		padding-left: 0;
+		list-style: none;
+		li {
+			overflow: hidden;
+			padding-bottom: 0.5em;
+			margin-bottom: 1em;
+			label {
+				width: 25%;
+				margin-right: 3%;
+				float: left;
+				text-align: right;
+				word-break:break-all;
+			}
+			input, .edition, .explication, select {
+				width: 72%;
+				float: right;
+			}
+			textarea {
+				width: 100%;
+			}
+			.choix {
+				float: left;
+				margin-right: 1em;
+				overflow: hidden;
+				width: auto;
+				label {
+					width: auto;
+					margin-right: 0.5em;
+				}
+				input {
+					width: auto;
+				}
+			}
+		}
+	}
+	p.boutons {
+		width: 72%;
+		float: right;
+		input {
+		}
+	}
+}
+
+.cadre-formulaire-editer {
+	.formulaire_spip {
+		&:extend{.formulaire_spip};
+	}
+}
+
+#footer {
+	background-color: @gray-dark;
+	color: @white;
+	text-align: left;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	background-image: url('images/spip_forme_web.png');
+	background-repeat: no-repeat;
+	background-position: 50% 100%;
+	background-size: auto 50%;
+	.menu_rubriques {
+
+		h2 {
+			display: none;
+		}
+		ul {
+			> li {
+				font-size: 1em;
+				a {
+					color: @gray-second;
+					&:hover {
+						color: @white;
+						background-color: transparent;
+					}
+					i {
+						min-width: 45px;
+					}
+				}
+			}
+		}
+	}
+}
+
+// On style les inclures prive/objets/contenu/xxxx.html
+#wysiwyg {
+	.champ {
+		overflow: hidden;
+		border-top: 1px solid @gray-lighter;
+		padding-top: 1em;
+		margin-bottom: 1em;
+		.label {
+			color: black;
+			display: block;
+			float: left;
+			font-size: 0.95em;
+			margin-right: 1%;
+			text-align: left;
+			width: 25%;
+			word-break:break-all;
+			word-wrap: break-word;
+			overflow: hidden;
+			hyphens: auto;
+		}
+		.span {
+			width: 70%;
+			float: right;
+			text-align: left;
+			display: block;
+		}
+	}
+}
+
+// formulaire de liens dans le front
+.formulaire_editer_liens, .formulaire_editer_liens_simples {
+	margin: 1em 0;
+	display: block;
+	overflow: hidden;
+	position: relative;
+	padding: 0.5em;
+	border: 1px solid @brand-primary;
+	.over {
+		height: 1%;
+		left: -3000em;
+		position: absolute;
+	}
+	.toggle_box_link {
+		position: absolute;
+		right: 5px;
+		top: 5px;
+	}
+	.selecteur {
+		display: block;
+		h3.titrem {
+			background-color: @brand-primary;
+			margin: 0 -0.5em 0.5em;
+			font-size: 1.25em;
+			font-weight: bold;
+			padding: 0.5em;
+		}
+		.boutons {
+			padding: 0.5em;
+			border: 1px solid @brand-primary;
+			background-color: lighten(@brand-primary, 10%);
+			margin: 0.5em -0.5em -0.5em;
+			text-align: right;
+		}
+	}
+}
+button {
+	&.link {
+		background: none repeat scroll 0 0 transparent;
+		border: 0 none;
+		color: @gray-dark;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+// page de connexion au back office
+.page_login {
+	background-color: @gray-lighter;
+	body {
+		background-color: @gray-lighter;
+	}
+	#content {
+		.cartouche {
+			h1 {
+				margin: 0 auto;
+				width: 50%;
+			}
+		}
+		.formulaire_menu_lang {
+			width: 50%;
+			float: right;
+			margin: 1em auto;
+			text-align: right;
+		}
+	}
+	.container {
+		margin-top: 2em;
+		padding-top: 2em;
+		padding-bottom: 2em;
+		> .row {
+			position: relative;
+			header {
+				text-align: right;
+				margin-bottom: 1em;
+				h1 {
+					overflow: hidden;
+					margin-top: 0;
+					margin-bottom: 1em;
+					small {
+						display: block;
+					}
+				}
+			}
+			div.col-md-6 {
+				background-color: @white;
+				padding-top: 2em;
+				padding-bottom: 2em;
+			}
+		}
+	}
+}
+.formulaire_login {
+	#formulaire_login {
+		width: auto;
+		margin: 0 auto;
+	}
+	ul {
+		padding-left: 0;
+		margin: 0;
+		list-style: none;
+		li {
+			position: relative;
+			overflow: hidden;
+			label {
+				display: block;
+				float: left;
+				width: 42%;
+				margin-right: 3%;
+				padding: 10px 0;
+				font-weight: normal;
+			}
+			&.obligatoire {
+				label {
+					font-weight: bold;
+				}
+			}
+			.erreur_message {
+				display: block;
+				padding: 10px;
+			}
+			input {
+				width: 55%;
+				float: right;
+				display: block;
+				padding: 10px;
+				font-size: 1em;
+				height: auto;
+				box-sizing: border-box;
+				position: relative;
+				&.password, &[type='password'] {
+					&:before {
+						content: "hello";
+						display: block;
+						width: auto;
+						background-color: gray;
+					}
+				}
+				&[type='checkbox'] {
+					text-align: left;
+					width: auto;
+					float: left;
+					margin: 10px 10px 10px 0;
+
+				}
+			}
+			.details {
+				width: 55%;
+				float: right;
+				display: block;
+				padding: 5px 0;
+			}
+			#pass_securise {
+				position: absolute;
+				top: 10px;
+				right: 5px;
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	#aside {
+		.menu {
+			&.menu_pages {
+				ul {
+					> li {
+						a {
+							padding: 10px 0;
+							text-align: center;
+							i {
+								min-width: inherit;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

@@ -1,0 +1,21 @@
+[(#REM) Fil d'Ariane ]
+<ul class="breadcrumb">
+	#SET{objet,''}#SET{id_objet,''}
+
+	[(#ENV{id_rubrique}|oui)#SET{objet,rubrique}#SET{id_objet,#ENV{id_rubrique}}]
+	[(#ENV{id_syndic}|oui)#SET{objet,site}#SET{id_objet,#ENV{id_syndic}}]
+	[(#ENV{id_breve}|oui)#SET{objet,breve}#SET{id_objet,#ENV{id_breve}}]
+	[(#ENV{id_article}|oui)#SET{objet,article}#SET{id_objet,#ENV{id_article}}]
+	[(#ENV{id_objet}|oui)#SET{objet,#ENV{objet}}#SET{id_objet,#ENV{id_objet}}]
+
+	[(#GET{objet}|oui)
+	#INCLURE{fond=breadcrumb/inc-objet,id_objet=#GET{id_objet},objet=#GET{objet},expose=''}
+	][(#GET{objet}|non)
+	<li><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="divider"> &gt; </span></li>
+	]
+	<BOUCLE_for(FORUMS){id_forum}>
+	<li><a href="#URL_FORUM">[(#TITRE|couper{80})]</a><span class="divider"> &gt; </span></li>
+	</BOUCLE_for>
+
+	<li class="active"><span><:poster_message:></span></li>
+</ul>

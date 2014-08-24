@@ -1,0 +1,39 @@
+[(#REM)
+	Modèle album : vue en mode 'icones'
+]
+
+#SET{statut,#ENV{statut,publie}}
+[(#REM|test_espace_prive|oui)
+	#SET{statut,'.*'}
+	[(#INCLURE{fond=prive/squelettes/inclure/albums_modele_infos_prive,env})]
+]
+
+<BOUCLE_album(ALBUMS){id_album}{statut == #GET{statut}}>
+<div class="album vue_icones clearfix[ (#ENV{align})]">
+
+	[<h2>(#_album:TITRE)</h2>]
+
+	<B_documents_joints>
+	<ul class="thumbnails">
+		<BOUCLE_documents_joints(DOCUMENTS){id_album}{tout}>
+		<li>
+		<figure class="thumbnail">
+		<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>
+		[(#MEDIA|=={image}|?{[(#FICHIER
+			|image_passe_partout{150,150}
+			|image_recadre{150,150,center,transparent}
+			|image_aplatir{jpg,#ffffff})],[(#LOGO_DOCUMENT)]}
+			|inserer_attribut{class,spip_logos}
+			|inserer_attribut{alt,[(#TITRE|attribut_html|couper{60})]})]
+		[(#CONFIG{albums/vue_icones}|find{titre}|oui) 
+			[<figcaption class='caption'>(#TITRE)</figcaption>]
+		]
+		</a>
+		</figure>
+		</li>
+		</BOUCLE_documents_joints>
+	</ul>
+	</B_documents_joints>
+
+</div>
+</BOUCLE_album>

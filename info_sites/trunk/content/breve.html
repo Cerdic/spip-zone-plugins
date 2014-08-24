@@ -1,0 +1,25 @@
+<BOUCLE_content(BREVES) {id_breve}>
+<article>
+	
+	<header class="cartouche">
+	  <h1 class="#EDIT{titre}">[(#LOGO_BREVE|image_reduire)]#TITRE</h1>
+	  <p class="publication"><time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> [(#DATE|nom_jour) ][(#DATE|affdate)]</time></p>
+	</header>
+
+	<div class="main">
+		[<div class="#EDIT{texte} texte">(#TEXTE|adaptive_images)</div>]
+		[<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	</div>
+
+
+	<footer>
+		[<div class="notes"><hr />(#NOTES)</div>]
+	</footer>
+
+	<aside>
+		[(#REM) Forum de la breve
+		NB : pour desactiver les forums de breve, supprimez simplement la ligne ci-dessous ]
+		<INCLURE{fond=inclure/forum,id_breve,repondre_url=(#PARAMETRES_FORUM|url_reponse_forum),repondre_titre=<:repondre_breve:>} />
+	</aside>
+</article>
+</BOUCLE_content>

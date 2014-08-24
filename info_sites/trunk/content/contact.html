@@ -1,0 +1,31 @@
+<BOUCLE_contact(CONTACTS) {id_contact}>
+[(#BOITE_OUVRIR{[
+
+    <h1>[(#RANG). ](#NOM)[, (#PRENOM)]</h1>
+],simple fiche_objet})]
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div id="wysiwyg">
+            <INCLURE{fond=prive/objets/contenu/contact, id=#ID_CONTACT, id_contact=#ID_CONTACT, ajax=wysiwyg} />
+        <div class="clearfix clear"></div>
+
+        <INCLURE{fond=content/coordonnees_fiche_objet, objet=contact, id=#ID_CONTACT, id_objet=#ID_CONTACT, ajax=wysiwyg} />
+
+        </div>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+    <script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>
+]
+</BOUCLE_contact>
+</B_contact>
+[(#ENV**{type-page}|=={contact_edit}|?{#INCLURE{fond=prive/squelettes/contenu/contact_edit,redirect=#SELF,env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_contact>
