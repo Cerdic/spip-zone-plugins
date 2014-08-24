@@ -30,6 +30,6 @@
 	<icon>sobre.gif</icon>
 	<fonctions>baliza_enviar_email.php</fonctions>
 	<prefix>enviar_email</prefix>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>communication</categorie>
 </plugin>
