@@ -137,9 +137,8 @@
 			<h3 class="legend">
 				<:projets_site:label_auteurs_fieldset:>
 			</h3>
-			<!-- /.legend -->
 			<ul>
-				[(#SAISIE{explication,explication_auteurs,
+				[(#SAISIE{explication, explication_auteurs,
 					inserer_debut=<:projets_site:explication_auteurs_titre:>,
 					texte=<:projets_site:explication_auteurs:>})]
 
@@ -368,3 +367,5 @@
 	</div></form>
 	]
 </div>
+
+[<pre>(#ENV**|unserialize|foreach)</pre>]

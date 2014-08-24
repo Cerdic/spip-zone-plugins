@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'ajouter_lien_projets_site' => 'Ajouter ce site',
     'avis_site_introuvable' => 'Site introuvable',
 
+    // C
+    'confirmer_supprimer_projets_site' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à ce site&nbsp;?',
+
     // E
     'explication_auteurs' => 'Saisir la liste des auteurs du site en respectant les règles suivantes&nbsp;: </p>
     <ul class="spip">
@@ -32,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'explication_sas_protocole' => 'Exemples&nbsp;: FTP, SFTP, etc.',
     'explication_sgbd_type' => 'Exemples: MySQL, Oracle, Microsoft SQL Server, MongoDB, etc.',
     'explication_sso' => 'Méthode d\'authentification unique',
+    'explication_supprimer_projets_site' => 'La suppression de ce site risque de rompre les liens entres objets.',
     'explication_uniqid' => 'Une clé d\'identification permettant de récupérer la configuration du
     serveur du site enregistré.',
     'explication_versioning_type' => 'Exemples: SVN, CVS, Git, etc.',
@@ -104,6 +108,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_sgbd_login' => 'Identifiant',
     'label_sgbd_nom' => 'Nom de la SGBD',
     'label_sgbd_password' => 'Mot de passe',
+    'label_sgbd_port' => 'Port',
     'label_sgbd_prefixe' => 'Préfixe des tables',
     'label_sgbd_serveur' => 'Serveur SGBD',
     'label_sgbd_type' => 'Type de SGBD',
@@ -127,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // S
     'site_orphelin' => 'Site sans projet(s)',
+    'supprimer_projets_site' => 'Supprimer ce site',
 
     // T
     'texte_ajouter_projets_site' => 'Ajouter un site',

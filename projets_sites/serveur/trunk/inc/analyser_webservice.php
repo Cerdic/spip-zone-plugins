@@ -1,7 +1,7 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) {
-	return;
+    return;
 }
 
 /**
@@ -26,6 +26,9 @@ function inc_analyser_webservice_dist($url)
     $valeurs['webservice'] = $url;
     $parse_url = parse_url($url);
     parse_str($parse_url['query'], $query);
+    // echo "<pre>";
+    // var_dump($xml);
+    // echo "</pre>";
 
     if (isset($query['cle'])) {
         $valeurs['uniqid'] = $query['cle'];
@@ -107,8 +110,10 @@ function inc_analyser_webservice_dist($url)
         }
     }
     ksort($valeurs);
+    // echo "<pre>";
     // var_dump($valeurs);
-	return $valeurs;
+    // echo "</pre>";
+    return $valeurs;
 }
 
 

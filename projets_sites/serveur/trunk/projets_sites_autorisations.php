@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Sites pour projets
  *
  * @plugin     Sites pour projets
- * @copyright  2013
+ * @copyright  2013-2014
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Projets_sites\Autorisations

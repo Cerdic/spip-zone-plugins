@@ -3,7 +3,7 @@
  * Gestion du formulaire de d'édition de projets_site
  *
  * @plugin     Sites pour projets
- * @copyright  2013
+ * @copyright  2013-2014
  * @author     Teddy Payet
  * @licence    GNU/GPL
  * @package    SPIP\Projets_sites\Formulaires
@@ -106,10 +106,13 @@ function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour
 
     // $oblis = array('titre','type_site','logiciel_nom','logiciel_service');
     // Envoi depuis le formulaire d'analyse automatique d'un site
-    if (_request('ajoute_url_auto') AND strlen(vider_url($u = _request('url_auto')))) {
+    if (_request('ajoute_url_auto') and strlen(vider_url($u = _request('url_auto')))) {
         if ($auto = $analyser_webservice($u)) {
-            foreach($auto as $k=>$v){
-                set_request($k,$v);
+            foreach ($auto as $k => $v) {
+                // echo "<pre>";
+                // var_dump($k);
+                // echo "</pre>";
+                set_request($k, $v);
             }
             $erreurs['verif_url_auto'] = _T('sites:texte_referencement_automatique_verifier', array('url' => $u));
         } else {
@@ -118,9 +121,9 @@ function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour
     } else {
         // auto-renseigner le titre si il n'existe pas
         // d'abord a partir du descriptif en coupant
-        titre_automatique('titre',array('descriptif'));
+        titre_automatique('titre', array('descriptif'));
         // et sinon l'url du front office, sans couper
-        titre_automatique('titre',array('fo_url'),255);
+        titre_automatique('titre', array('fo_url'), 255);
         $erreurs = formulaires_editer_objet_verifier('projets_site', $id_site);
     }
     return $erreurs;
