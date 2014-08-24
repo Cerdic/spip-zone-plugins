@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Sympatic</nom>
 	<auteur>b_b</auteur>
-	<version>0.2</version>
-	<version_base>0.2</version_base>
+	<version>0.3.0</version>
+	<version_base>0.3.0</version_base>
 	<etat>stable</etat>
 	<prefix>sympatic</prefix>
 	<icon>images/sympatic.png</icon>
@@ -46,6 +46,6 @@
 		<nom>affiche_milieu</nom>
 		<inclure>sympatic_pipelines.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.1.8;]' />
+	<necessite id='SPIP' version='[2.1.8;2.1.99]' />
 	<necessite id="saisies" version="[1.1;]" />
 </plugin>

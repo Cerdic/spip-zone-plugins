@@ -14,9 +14,9 @@ function sympatic_upgrade($nom_meta_base_version,$version_cible){
 			creer_base();
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
-		if (version_compare($current_version,'0.2','<')){
+		if (version_compare($current_version,'0.3.0','<')){
 			maj_tables('spip_sympatic_listes');
-			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
+			ecrire_meta($nom_meta_base_version,$current_version="0.3.0",'non');
 		}
 	}
 }
