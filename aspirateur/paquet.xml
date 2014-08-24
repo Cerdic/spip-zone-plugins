@@ -14,6 +14,9 @@
 	<auteur lien="http://elastick.net">elastick.net</auteur>
 	<licence>GPL</licence>
 	
+	<traduire module="aspirateur" reference="fr" gestionnaire="salvatore" />
+	<traduire module="configureraspirateur" reference="fr" gestionnaire="salvatore" />
+	
 	<utilise nom="rssarticle" compatibilite="[1.1.2;["  />	
 	<utilise nom="docker" compatibilite="[0.2.1;["  />
 	<utilise nom="ressource" compatibilite="[0.2.0;["  />

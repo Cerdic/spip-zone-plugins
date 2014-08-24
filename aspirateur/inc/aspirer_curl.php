@@ -133,14 +133,14 @@ function recupere_titre($url){
    	// Clean up title: remove EOL's and excessive whitespace.
         $titre = preg_replace('/\s+/', ' ', $title_matches[1]);
         $titre = trim($titre);
-        if ($titre!='') return $titre;	
+        if ($titre!='') return char($titre);	
    }
    
    $pattern = "/<h1(.*?)>(.*?)<\/h1>/";
    if(preg_match($pattern, $la_page, $h1)){
    $titre=$h1[2];
    $titre = preg_replace('#&nbsp;#Umis','',$titre);
-   return $titre;	
+   return char($titre);	
    }
    return "titre_temporaire_de_la_page";
 }
