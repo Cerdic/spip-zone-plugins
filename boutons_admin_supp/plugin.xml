@@ -32,7 +32,7 @@
 	Eine Konfigurationsdatei erlaubt es, die zus&#228;tzlichen Buttons zu w&#228;hlen, die angezeigt oder definitif versteckt werden sollen. Die Konfiguration ist global und betrifft alle Nutzer.
 	</multi>
     </description>
-    <lien>http://www.spip-contrib.net/article1553.html</lien>
+    <lien>http://contrib.spip.net/Boutons-d-administration-supplementaires</lien>
 	<licence>GNU/GPL</licence>
     <auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
 	

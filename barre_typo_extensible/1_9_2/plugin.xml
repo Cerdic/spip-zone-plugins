@@ -5,8 +5,8 @@
 	<auteur><!-- Auteur du plugin -->
 	Bill (Stephane LAURENT - spipcarto@gmail.com) &#224; partir de (et incompatible avec) la Barre Typo Enlumin&#233;e de 
  	[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]
-_ Pr&#233;visualisation : [->http://www.spip-contrib.net/Previsualisation-dynamique-d]
-_ Editeur de tableaux : [Christian Quentin->http://www.spip-contrib.net/_quentic_] &#224; partir du travail de [Courcy->http://www.spip-contrib.net/_courcy_] dans l'[article->http://www.spip-contrib.net/Editeur-de-tableau-pour-la-1-7] pour l'&eacute;diteur de tableau
+_ Pr&#233;visualisation : [->http://contrib.spip.net/Previsualisation-dynamique-d-articles-avec-Ajax]
+_ Editeur de tableaux : [Christian Quentin->http://www.spip-contrib.net/_quentic_] &#224; partir du travail de [Courcy->http://www.spip-contrib.net/_courcy_] dans l'[article->http://contrib.spip.net/Editeur-de-tableau-pour-la-1-7] pour l'&eacute;diteur de tableau
 	Le code initial de Courcy a a &eacute;t&eacute; en grande partie r&eacute;-&eacute;crit pour : 
 -* g&eacute;n&eacute;rer une syntaxe de tableau SPIP et non HTML (l'&eacute;diteur de couleur de cellules disparait donc aussi)
 -* pour permettre de cr&eacute;er mais aussi de modifier un tableau existant

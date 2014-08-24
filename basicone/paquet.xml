@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/basicone.png"
-	documentation="http://www.spip-contrib.net/basicone-icones-du-theme-prive"
+	documentation="http://contrib.spip.net/basicone-icones-du-theme-prive"
 >	
 
 	<nom>Basic&#244;ne</nom>

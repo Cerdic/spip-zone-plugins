@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/bigbrother.png"
 	schema="0.2"
-	documentation="http://www.spip-contrib.net/Plugin-Big-Brother"
+	documentation="http://contrib.spip.net/Plugin-Big-Brother"
 >	
 
 	<nom>Big Brother</nom>

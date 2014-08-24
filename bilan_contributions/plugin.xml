@@ -11,7 +11,7 @@
 		</multi>
 	</description>
 	<icon>images/bilancontrib-32.png</icon>
-	<lien>http://www.spip-contrib.net/Bilan-des-contributions</lien>
+	<lien>http://contrib.spip.net/Bilan-des-contributions</lien>
 	<prefix>bilancontrib</prefix>
 	<fonctions>bilancontrib_fonctions.php</fonctions>
 	<pipeline>

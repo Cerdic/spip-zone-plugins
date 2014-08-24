@@ -46,12 +46,12 @@
 -* Verwaltung der hypertext links mit Hilfeblasen
 -* Tabellenverwaltung
 -* Eine Such- und Ersetzenfunktion im Artikeltext
--* Einfügen von Spezialzeichen
+-* EinfÃ¼gen von Spezialzeichen
 -* &Auml;nderung der Gross- und Kleinschrift
 -* Textstatistik berechnen (Worte, Zeichen, Buchstaben)
 </multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Barre-Typographique-V2</lien>
+	<lien>http://contrib.spip.net/Plugin-Barre-Typographique-V2</lien>
 	<prefix>BarreTypoEnrichie</prefix>
 	<options>typo_options.php</options>
 	<icon>img_pack/moinecopiste.gif</icon>

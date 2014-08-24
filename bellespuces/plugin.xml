@@ -13,7 +13,7 @@
 	<description>
 	Ce plugin traite le raccourci SPIP &#171;&#160;<code>-</code>&#160;&#187; comme &#171;&#160;<code>-*</code>&#160;&#187;, g&#233;n&#233;rant de vraies listes (<code>ul/li</code>) dans les deux cas.
 	</description>
-	<lien>http://www.spip-contrib.net/3724</lien>
+	<lien>http://contrib.spip.net/3724</lien>
 	
 	<pipeline>
 		<nom>pre_typo</nom>

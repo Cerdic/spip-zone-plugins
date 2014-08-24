@@ -9,7 +9,7 @@ Ce petit plugin met en oeuvre une balise <code>#BANNIERE</code> &#244; installer
 	</description>
 	<prefix>bannieres</prefix>	
 	<install>base/bannieres_gestion.php</install>
-	<lien>http://www.spip-contrib.net/Plugin-Bannieres</lien>
+	<lien>http://contrib.spip.net/Plugin-Bannieres</lien>
     <icon>bannieres.png</icon>
 
     <fonctions>bannieres_fonctions.php</fonctions>

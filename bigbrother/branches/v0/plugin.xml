@@ -24,7 +24,7 @@
 		(eg: visits of persons, length of visits, creation and modification of objects ...)
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Big-Brother</lien>
+	<lien>http://contrib.spip.net/Plugin-Big-Brother</lien>
 	<prefix>
 		bigbrother
 	</prefix>

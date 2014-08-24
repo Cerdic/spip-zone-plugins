@@ -7,7 +7,7 @@
 	<description>
 	Ce filtre permet &#224; tous ceux qui ont d&#233;j&#224; fait des articles sur forum utilisant le [BBCode->http://fr.wikipedia.org/wiki/Bbcode] de ne pas refaire la syntaxe de leurs articles. Il est aussi utile pour ceux qui ne veulent pas se s&#233;parer du BBcode.
 	</description>
-	<lien>http://www.spip-contrib.net/Du-BBcode-dans-SPIP</lien>	
+	<lien>http://contrib.spip.net/Du-BBcode-dans-SPIP</lien>	
 	<prefix>bbcode_propre</prefix>
 	<pipeline>
 		<nom>pre_propre</nom>

@@ -8,7 +8,7 @@
 	<slogan>Outils de pagination chronologique</slogan>
 	<description>Outils simples de squelettes pour besoin simple en mati&#234;re de pagination chronologique.</description>
 	<fonctions>calendrier_fonctions.php</fonctions>
-	<lien>http://www.spip-contrib.net/Gestion-de-dates-et-calendriers</lien>
+	<lien>http://contrib.spip.net/Gestion-de-dates-et-calendriers</lien>
 
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id="CFG" version="[1.0;]" />

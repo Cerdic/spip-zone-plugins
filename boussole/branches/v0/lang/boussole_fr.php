@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'La boussole SPIP regroupe l\'ensemble des sites « officiels » de la galaxie SPIP. Elle définit pour chaque site, son logo, son nom, son slogan et sa description. N\'hésitez donc pas à l\'utiliser dans vos propres sites pour aiguiller vos visiteurs dans la galaxie SPIP.',
 	'descriptif_site_spip_blog' => 'Par ce que SPIP est un projet collaboratif, SPIP-BLOG.net  rassemble billets techniques, auto-dérision, humeurs, trolls, annonces diverses,... En cela il est bien le reflet de la communauté SPIP : d\'abord et avant tout, énormément de tendresse.',
-	'descriptif_site_spip_contrib' => 'Site collaboratif, SPIP-CONTRIB.net met à disposition l\'ensemble des contributions externes : plugins, scripts, filtres, squelettes, documentations, trucs et astuces,... versées à la communauté (liens de téléchargement) par les utilisateurs de SPIP. Ses forums assurent le lien entre développeurs et utilisateurs.',
+	'descriptif_site_spip_contrib' => 'Site collaboratif, contrib.spip.net met à disposition l\'ensemble des contributions externes : plugins, scripts, filtres, squelettes, documentations, trucs et astuces,... versées à la communauté (liens de téléchargement) par les utilisateurs de SPIP. Ses forums assurent le lien entre développeurs et utilisateurs.',
 	'descriptif_site_spip_core' => 'Le site CORE.SPIP.org rassemble l\'historique des modifications du code de SPIP, une gestion de tickets permettant de signaler des bugs et de proposer des suggestions d\'amélioration et un espace de téléchargement des versions de SPIP.',
 	'descriptif_site_spip_demo' => 'Site de test réinitialisé chaque nuit, DEMO.SPIP.net permet à tout un chacun de tester SPIP dans sa dernière version stable (avec, au choix, le statut de rédacteur ou d\'administrateur), en un clic et sans avoir à l\'installer.',
 	'descriptif_site_spip_doc' => 'CODE.SPIP.net est un espace de documentation du logiciel SPIP pour ses APIs, son code source, et certains de ses fonctionnements techniques.',
@@ -123,7 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_extension' => 'Contributions',
 	'nom_groupe_spip_reference' => 'Documentation',
 	'nom_site_spip_blog' => 'SPIP Blog',
-	'nom_site_spip_contrib' => 'SPIP-Contrib',
+	'nom_site_spip_contrib' => 'contrib.spip',
 	'nom_site_spip_core' => 'SPIP Core',
 	'nom_site_spip_demo' => 'SPIP Démo',
 	'nom_site_spip_doc' => 'SPIP Code',

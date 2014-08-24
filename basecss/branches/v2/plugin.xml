@@ -9,7 +9,7 @@
 	
 	<slogan>Framework CSS pour SPIP</slogan>
 	<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&#233;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&#233;trables, proposant les pr&#233;r&#233;glages fondamentaux.</description>
-	<lien>http://www.spip-contrib.net/3752</lien>
+	<lien>http://contrib.spip.net/3752</lien>
 	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 	
 	<necessite id="SPIP" version="[2.1.0;2.1.99]"/>

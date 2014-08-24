@@ -17,7 +17,7 @@
 		[de]Dieses Plugin aktiviert die typografische Toolbar von SPIP auf alle Textbereiche (Rubriken, Webseiten, Schlagw&#246;rter, etc.)
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien>
+	<lien>http://contrib.spip.net/Barre-typographique-generalisee</lien>
 	<categorie>edition</categorie>
 
 	<pipeline>

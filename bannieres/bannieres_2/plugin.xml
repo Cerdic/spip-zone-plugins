@@ -16,7 +16,7 @@ Un lien est plac&#233; sur les images et le clic est comptabilis&#233;.
 
 Enfin, la campagne s'affiche pendant la p&#233;riode que vous d&#233;finissez dans l'espace priv&#233;.
 	</description>
-	<lien>http://www.spip-contrib.net/Bannieres-2</lien>
+	<lien>http://contrib.spip.net/Bannieres-2</lien>
 	<icon>images/bannieres.png</icon>
 	<prefix>bannieres</prefix> 	
 	<fonctions>bannieres_fonctions.php</fonctions>	

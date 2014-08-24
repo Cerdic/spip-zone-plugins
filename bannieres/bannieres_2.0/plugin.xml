@@ -11,7 +11,7 @@
 	<prefix>bannieres</prefix>	
 	<install>base/bannieres_gestion.php</install>
 	<lien>
-      [Documentation->http://www.spip-contrib.net/Plugin-Bannieres]
+      [Documentation->http://contrib.spip.net/Plugin-Bannieres]
     </lien>
     <icon>bannieres.png</icon>
 

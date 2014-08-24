@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/boussole/boussole-spip.png"
-	documentation="http://www.spip-contrib.net/Boussole,3688"
+	documentation="http://contrib.spip.net/Boussole"
 >	
 
 	<nom>Boussole SPIP</nom>

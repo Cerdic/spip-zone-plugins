@@ -6,7 +6,7 @@
 	<description>
 	Transforme les br&#232;ves d'un site en articles, les range dans une rubrique, leur attribue un auteur, fait suivre les logos et les forums, et convertit les liens raccourcis, permet d'assurer la redirection vis-&#224;-vis des moteurs de recherche.
 	</description>
-	<lien>http://www.spip-contrib.net/3835</lien>
+	<lien>http://contrib.spip.net/3835</lien>
 	<categorie>maintenance</categorie>
 	<etat>test</etat>
 	<icon>prive/themes/spip/images/br2art.png</icon>
@@ -26,4 +26,3 @@
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 </plugin>
-
