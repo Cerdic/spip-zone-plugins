@@ -5,7 +5,7 @@
   etat="stable"
   compatibilite="[3.0.0;3.0.*]"
   logo="prive/themes/spip/images/CompteurGraphique.gif"
-  documentation="http://www.spip-contrib.net/Plugin-Compteur-Graphique"
+  documentation="http://contrib.spip.net/Plugin-Compteur-Graphique"
   schema="2012.11.23"
 >
   <nom>Compteurs graphiques</nom>

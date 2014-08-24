@@ -30,7 +30,7 @@
 Avec ce plugin, plus aucun objet n’est supprim&#233; automatiquement. La poubelle garde tous les articles ou autres objets que vous y avez mis, et vous pouvez toujours revenir en arri&#232;re.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Corbeille,2855</lien>
+	<lien>http://contrib.spip.net/Corbeille,2855</lien>
 	<prefix>corbeille</prefix>	
    <icon>img_pack/trash-full-32.png</icon>
    <options>corbeille_options.php</options>

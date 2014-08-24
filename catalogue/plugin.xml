@@ -13,7 +13,7 @@ _ Il utilise le plugin [Contacts &amp; Organisations->http://files.spip.org/spip
 _ This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts_et_organisations.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Catalogue</lien>
+	<lien>http://contrib.spip.net/Plugin-Catalogue</lien>
 	<icon>img/picto_catalogue_128x128.png</icon>
 	<prefix>catalogue</prefix>
 
@@ -66,4 +66,3 @@ _ This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip
 	<!-- pour la deco -->
 	<necessite id="afficher_objets" version="[1.1.0;]" />
 </plugin>
-

@@ -21,7 +21,7 @@ _ <code><comarquage|categorie=associations|xml=N20.xml|xsl=spNoeud.xsl></code>
 
 Ce plugin n&#233;ecessite la pr&#233;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&#233;e.
 	</description>
-	<lien>http://spip-contrib.net/?article3659</lien>
+	<lien>http://contrib.spip.net/?article3659</lien>
 	<prefix>comarquage</prefix>
 	<pipeline>
 		<nom>post_propre</nom>

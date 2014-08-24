@@ -12,7 +12,7 @@
 			[en]Displaying messages in list, as blog comments, with simplified form. Microformated comments, uniform nomenclature.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/?article3448</lien>
+	<lien>http://contrib.spip.net/?article3448</lien>
 	<prefix>comments</prefix>
 	
 	<options>comments_options.php</options>

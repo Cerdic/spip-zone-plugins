@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/fatcow/32/email_open.png"
 	schema="0.9"
-	documentation="http://www.spip-contrib.net/CleverMail"
+	documentation="http://contrib.spip.net/CleverMail"
 	
 >	
 

@@ -15,7 +15,7 @@
 	[en] An additional field on authors table: date_inscription (registration date)
 	[es] Un nuevo campo en la table de autores: date_inscription (fecha de inscripci&#243;n)
 	</multi></description>
-	<lien>http://www.spip-contrib.net/Date-d-inscription</lien>
+	<lien>http://contrib.spip.net/Date-d-inscription</lien>
 	<licence>GPL</licence>
 	<icon></icon>
 	<install>base/date_inscription.php</install>

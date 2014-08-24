@@ -13,7 +13,7 @@
 	- <code>#NB_COMMENTAIRES</code> : affiche le nombre de commentaires dans le topic phpBB
 	- <code>#TOPIC_ID</code> : identifiant du topic cr&#233;e dans phpBB (pour faire un lien vers le topic : http://leforum.tld/viewtopic.php?t=#TOPIC_ID)
 	</description>
-	<lien>http://www.spip-contrib.net/article3015</lien>
+	<lien>http://contrib.spip.net/?article3015</lien>
 	
 	<install>base/comments_phpbb_upgrade.php</install>
 	

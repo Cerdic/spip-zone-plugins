@@ -7,7 +7,7 @@
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<description>Remplace le traditionnel <code>#FORMULAIRE_FORUM</code> de SPIP par un formulaire de commentaires simplifi&#233;.</description>
-	<lien>http://www.spip-contrib.net/?article3362</lien>
+	<lien>http://contrib.spip.net/?article3362</lien>
 	<prefix>comments</prefix>
 	<fonctions>comments_fonctions.php</fonctions>
 	<necessite id='SPIP' version='[1.9.2;1.9.2]' />

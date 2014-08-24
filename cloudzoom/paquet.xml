@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.0.9;3.0.*]"
 	logo="prive/themes/spip/images/cloudzoom-32.png"
-	documentation="http://www.spip-contrib.net/cloudzoom"
+	documentation="http://contrib.spip.net/Cloudzoom"
 >
 
 	<nom>CloudZoom</nom>

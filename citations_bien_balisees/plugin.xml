@@ -10,7 +10,7 @@
 
 	L'objectif est de respecter les usages en HTML (les citations courtes doivent &#234;tre entour&eacute;es par &lt;q&gt;, les citations contenant des paragraphes doivent &ecirc;tre entour&eacute;es des &lt;blockquote&gt;).
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Citations-bien-balisees</lien>
+	<lien>http://contrib.spip.net/Citations-bien-balisees</lien>
 	<prefix>citations_bb</prefix>
 	<icon>images/citations_bb.png</icon>		
 	<pipeline>

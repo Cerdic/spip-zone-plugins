@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/cooliris-32.png"
 	meta="cooliris"
-	documentation="http://www.spip-contrib.net/Cooliris-pour-SPIP"
+	documentation="http://contrib.spip.net/Cooliris-pour-SPIP"
 >	
 	<nom>Cooliris</nom>
 	<!-- Affiche un mur 3D avec les images jointes d’un article -->

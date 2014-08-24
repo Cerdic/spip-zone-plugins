@@ -10,7 +10,7 @@
 	<etat>experimental</etat>
 	<description>Permet de modifier les couleurs de l'habillage par d&#233;faut (squelette dist) du site SPIP via une interface graphique sans avoir &#224; &#233;diter le code</description>
 	<prefix>coloriagedist</prefix>
-	<lien>http://www.spip-contrib.net/Plugin-pour-colorier-la-dist</lien>
+	<lien>http://contrib.spip.net/Colorier-la-dist</lien>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>maintenance</categorie>
 	<bouton id='coloriagedist1' parent='naviguer'>

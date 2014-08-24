@@ -13,7 +13,7 @@
 			[it]Crea nuovi campi per gli oggetti editoriali di SPIP
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Champs-Extras-2</lien>
+	<lien>http://contrib.spip.net/Champs-Extras-2</lien>
 	<etat>test</etat>
 	<prefix>cextras</prefix>
 	<options>cextras_options.php</options>

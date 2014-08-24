@@ -64,7 +64,7 @@ _ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in
 _ <code>#TEXTE**|coloration_code_color{spip,code}</code>: colora #TEXTE con le regole del linguaggio "spip" in formato code (senza il riquadro), vedi l'esempio lecode.html. L'url per vedere il codice dell'articolo dalla sua stessa pagina sar&aacute;: <code>#URL_SITE_SPIP/spip.php?page=lecode&id_article=#ENV{id_article}</code>
 	  </multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Coloration-Code,2938</lien>
+	<lien>http://contrib.spip.net/Coloration-Code</lien>
    <fonctions>coloration_code_fonctions.php</fonctions>
 	<prefix>coloration_code</prefix>
 	<necessite id="SPIP" version="[2.0.0;3.0.99]" />

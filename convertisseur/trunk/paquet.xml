@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="img_pack/convertisseur.png"
-	documentation="http://www.spip-contrib.net/Plugin-Convertisseur"
+	documentation="http://contrib.spip.net/Plugin-Convertisseur"
 >
   <nom>Convertisseur</nom>
   

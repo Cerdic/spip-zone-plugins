@@ -5,7 +5,7 @@
     etat="dev"
     compatibilite="[3.0.0;3.0.*]"
     logo="prive/themes/spip/images/picto-comarquage-service-public-50.png"
-    documentation="http://spip-contrib.net/?article3659"
+    documentation="http://contrib.spip.net/?article3659"
 >
     <nom>Comarquage</nom>
     <auteur>IPEOS I-Solutions</auteur>

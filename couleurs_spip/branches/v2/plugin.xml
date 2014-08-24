@@ -11,7 +11,7 @@
 -* Orange : <code><cs_orange>le texte en orange</cs></code>
 -* xxl : <code><cs_xxl>le texte en plus gros</cs></code>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3180</lien>
+	<lien>http://contrib.spip.net/?article3180</lien>
 	<prefix>couleurs_spip</prefix>
 	<pipeline>
 		<nom>post_propre</nom>

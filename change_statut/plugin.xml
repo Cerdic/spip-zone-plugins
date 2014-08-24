@@ -13,7 +13,7 @@
 	</description>
 	<icon>prive/themes/spip/images/changestatut-32.png</icon>
 	<prefix>changestatut</prefix>
-	<lien>http://www.spip-contrib.net/Change-Statut</lien>
+	<lien>http://contrib.spip.net/Change-Statut</lien>
 	<install>base/changestatut_install.php</install>
 	<pipeline>
 		<nom>header_prive</nom>

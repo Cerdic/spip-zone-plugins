@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="minical-32.png"
-	documentation="http://www.spip-contrib.net/Calendrier-Mini-2-0"
+	documentation="http://contrib.spip.net/Calendrier-Mini-2-0"
 >	
 
 	<nom>Mini Calendrier</nom>

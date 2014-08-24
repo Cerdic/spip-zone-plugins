@@ -11,7 +11,7 @@ Sistema de selecci&#243;n de esqueletos por men&#250; desplegable. Para utilizar
 -* Pon en esa carpeta los esqueletos que quieras, cada uno en una subcarpeta y a una ll&#225;mala "predeterminada"
 -* Coloca la baliza #CAMBIAR_ESQUELETO donde quieras que aparezca el desplegable (cabecera del sitio, men&#250; de navegaci&#243;n,...)
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-para-cambiar-la</lien>
+	<lien>http://contrib.spip.net/Plugin-para-cambiar-la</lien>
 	<prefix>cambiar_esqueleto</prefix>
 	<options>cambiar_esqueleto_options.php</options>
 	<fonctions>baliza_cambiar_esqueleto.php</fonctions>

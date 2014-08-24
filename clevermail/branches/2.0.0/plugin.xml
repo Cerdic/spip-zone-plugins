@@ -20,7 +20,7 @@ Ce plugin propose les fonctionnalit&#233;s suivantes :
 
 Ic&#244;nes issues de la collection [FatCow->http://www.fatcow.com/free-icons].
 	</description>
-	<lien>http://www.spip-contrib.net/CleverMail</lien>
+	<lien>http://contrib.spip.net/CleverMail</lien>
 	<icon>prive/themes/spip/images/fatcow/32/email_open.png</icon>
 	<install>base/clevermail.php</install>
 	<options>clevermail_options.php</options>

@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/changestatut-32.png"
 	schema="0.1"
-	documentation="http://www.spip-contrib.net/Change-Statut"
+	documentation="http://contrib.spip.net/Change-Statut"
 >	
 
 	<nom>Change Statut</nom>

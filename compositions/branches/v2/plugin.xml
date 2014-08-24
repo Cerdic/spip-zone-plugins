@@ -13,7 +13,7 @@
 			[en]This plugin allows you to define several variants of compositions for each kind of SPIP objects (article, sections, etc..) and to easily apply them, case by case, from the private area.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/?article3777</lien>
+	<lien>http://contrib.spip.net/?article3777</lien>
 	<install>base/compositions.php</install>
 	<prefix>compositions</prefix>
 	<fonctions>compositions_fonctions.php</fonctions>

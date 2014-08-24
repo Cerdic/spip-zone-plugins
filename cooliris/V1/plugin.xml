@@ -6,7 +6,7 @@
 	<version>0.3.0</version>
 	<etat>test</etat>
 	<description>Cooliris est une application permettant d’afficher des images sur un mur 3D, avec des fonctionnalit&#233;s de zoom, de diaporama, de partage... Cooliris utilise la technologie flash.</description>
-	<lien>http://www.spip-contrib.net/Cooliris-pour-SPIP</lien>
+	<lien>http://contrib.spip.net/Cooliris-pour-SPIP</lien>
 	<icon>images/3D.png</icon>
 	<prefix>spipiris</prefix>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />

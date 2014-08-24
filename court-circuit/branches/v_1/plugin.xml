@@ -11,7 +11,7 @@
 <description>Acc&#233;s direct aux articles et reset des squelettes par d&eacute;faut. Ce plugin court-circuite deux choses&nbsp;:
 -* les squelettes par d&#233;faut de SPIP, qui renvoient en&nbsp;404, pour &eacute;viter les diffusions intempestives ;
 -* les rubriques, qui affichent directement leur premier article, pour naviguer plus efficacement.</description>
-<lien>http://www.spip-contrib.net/?article3748</lien>
+<lien>http://contrib.spip.net/?article3748</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2011</auteur>
 
 <necessite id='SPIP' version='[2.0.0;2.1.99]' />

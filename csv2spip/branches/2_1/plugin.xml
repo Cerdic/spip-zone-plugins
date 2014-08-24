@@ -9,7 +9,7 @@
 	<description>
 	Ce plugin permet de r&#233;aliser l'int&#233;gration d'auteurs et administrateurs restreints &#224; partir de fichiers CSV. Il g&#232;re &#233;galement la cr&#233;ation de rubriques pour les admins restreints. Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&#233;s avec &#233;ventuellement la sauvegarde/gestion de leurs articles.
 	</description>
-	<lien>http://www.spip-contrib.net/?article1550</lien>
+	<lien>http://contrib.spip.net/?article1550</lien>
 	<prefix>csv2spip</prefix>
 	<icon>img_pack/csv2spip-24.png</icon>
 	<pipeline>

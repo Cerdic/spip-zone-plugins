@@ -26,7 +26,7 @@
 	</description>
 	<etat>dev</etat>
 	<prefix>iextras</prefix>
-	<lien>http://www.spip-contrib.net/Champs-Extras-2-Interface</lien>
+	<lien>http://contrib.spip.net/Champs-Extras-2-Interface</lien>
 	
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[1.10.0;]" />

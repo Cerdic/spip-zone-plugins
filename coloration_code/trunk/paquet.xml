@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="coloration-32.png"
-	documentation="http://www.spip-contrib.net/Coloration-Code,2938"
+	documentation="http://contrib.spip.net/Coloration-Code"
 >
 
 	<nom>Coloration Code</nom>

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/cite-32.png"
-	documentation="http://www.spip-contrib.net/spip.php?article3698"
+	documentation="http://contrib.spip.net/?article3698"
 >
 
 	<nom>Cite</nom>

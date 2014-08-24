@@ -11,7 +11,7 @@
 	Ce plugin, construit dans le cadre du d&#233;veloppement du squelette EVA-web, se propose de g&#233;n&#233;rer des images de compteurs de visites param&#233;trables aussi bien au niveau graphique que fonctionnel. Il peut s'int&#233;grer &#224; n'importe quel site fonctionnant sous SPIP.
 	{Certains habillages sont issus du site [Icons Etc->http://icons.mysitemyway.com/]}
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Compteur-Graphique</lien>
+	<lien>http://contrib.spip.net/Plugin-Compteur-Graphique</lien>
 	<prefix>CompteurGraphique</prefix>
 	<options>CompteurGraphique_mes_options.php</options>
 	<install>CompteurGraphique_install.php</install>

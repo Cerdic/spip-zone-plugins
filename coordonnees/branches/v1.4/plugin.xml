@@ -12,7 +12,7 @@
 	[en]Provides the ability to add postal details (addresses, e-mail, phone numbers) to SPIP objects, specifically to authors. Several addresses or phone numbers can be given to each single author.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Coordonnees</lien>
+	<lien>http://contrib.spip.net/Plugin-Coordonnees</lien>
 	<icon>images/addressbook-128.png</icon>
 
 	<version>1.4.25</version>

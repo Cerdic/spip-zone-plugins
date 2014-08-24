@@ -19,7 +19,7 @@ Ce plugin permet de choisir une police pour les images typo parmi toutes celles 
 -* |margeh= marge &#224; droite et &#224; gauche de l'image (avec unit&#233;: px ou em au choix)
 -* |valign= alignement vertical de l'image typo (valeurs possibles: bottom, baseline, middle, top)
 	</description>
-	<lien>http://www.spip-contrib.net/Choix-Police-Typo</lien>
+	<lien>http://contrib.spip.net/Choix-Police-Typo</lien>
 	<prefix>choix_police</prefix>
    <fonctions>choix_police_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.10;2.1.99]" />

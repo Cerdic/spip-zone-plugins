@@ -22,7 +22,7 @@
     	[en]Converts various formats (wiki, phpBB) into SPIP format
       </multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Convertisseur</lien>
+	<lien>http://contrib.spip.net/Plugin-Convertisseur</lien>
 	<prefix>convertisseur</prefix>
   <bouton id='convertisseur1' parent='naviguer'>
 		<titre>convertisseur:convertir_titre</titre>

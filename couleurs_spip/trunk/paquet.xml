@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="couleurs_spip.png"
-	documentation="http://www.spip-contrib.net/spip.php?article3180"
+	documentation="http://contrib.spip.net/?article3180"
 >	
 
 	<nom>Couleurs Spip</nom>

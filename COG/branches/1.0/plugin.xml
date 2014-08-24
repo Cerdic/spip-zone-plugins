@@ -13,7 +13,7 @@
 	[acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=cog]
 	</description>
 	<prefix>cog</prefix>
-	<lien>http://www.spip-contrib.net/cog</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/COG-Toutes-les-communes-departements-regions</lien> <!-- URI de documentation -->
 	<install>base/cog_install.php</install>
 	<fonctions>cog_fonctions.php</fonctions>
 	<options>cog_options.php</options>

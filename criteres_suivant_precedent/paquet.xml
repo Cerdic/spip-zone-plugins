@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="images/precedent_suivant-128.png"
-	documentation="http://www.spip-contrib.net/Criteres-precedent-et-suivant"
+	documentation="http://contrib.spip.net/Criteres-precedent-et-suivant"
 >	
 
 	<nom>Crit&#232;res Suivant / Pr&#233;c&#233;dent</nom>

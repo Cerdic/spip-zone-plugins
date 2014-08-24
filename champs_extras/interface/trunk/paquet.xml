@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/iextras-64.png"
-	documentation="http://www.spip-contrib.net/?article4028"
+	documentation="http://contrib.spip.net/?article4028"
 	schema="1.0.0"
 >
 

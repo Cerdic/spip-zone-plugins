@@ -5,7 +5,7 @@
 	etat="experimental"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/ieextras-64.png"
-	documentation="http://www.spip-contrib.net/Importer-Exporter-des-descriptions-de-champs-extras"
+	documentation="http://contrib.spip.net/Importer-Exporter-des-descriptions-de-champs-extras"
 >	
 
 	<nom>Import/Export de Champs Extras</nom>

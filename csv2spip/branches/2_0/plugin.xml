@@ -19,7 +19,7 @@
 					Il permet aussi la suppression des utilisateurs qui ne seraient plus souhait&#233;s avec &#233;ventuellement la sauvegarde/gestion
 					de leurs articles.
         </description>
-				<lien>http://www.spip-contrib.net/?article1550</lien> <!-- URI de documentation -->
+				<lien>http://contrib.spip.net/?article1550</lien> <!-- URI de documentation -->
         <prefix>
           csv2spip
         </prefix>

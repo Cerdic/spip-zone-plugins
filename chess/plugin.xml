@@ -23,7 +23,7 @@ _ Il suffit d&#39;ins&#233;rer dans un article la balise &#60;chessXX&#62; o&#24
 _ To insert the widget you have just to write in your article the tag &#60;chessXX&#62; where XX is the number of the article, then upload the PGN files.
 	  </multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Chess</lien>
+	<lien>http://contrib.spip.net/Plugin-Chess</lien>
 	<prefix>chess</prefix>
 	<fonctions>chess_fonctions.php</fonctions>
 	<pipeline>

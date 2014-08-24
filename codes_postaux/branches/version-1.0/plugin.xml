@@ -12,7 +12,7 @@
 	Ajouter &agrave; la base de donn&eacute;es les codes postaux récuperer sur le site geonames.
 	</description>
 	<prefix>cp</prefix>
-	<lien>http://www.spip-contrib.net/cp</lien>
+	<lien>http://contrib.spip.net/cp</lien>
 	<install>base/cp_upgrade.php</install>
 	<fonctions>cp_fonctions.php</fonctions>
 	<bouton id='cp' parent='naviguer'>

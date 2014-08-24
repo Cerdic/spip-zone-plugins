@@ -22,7 +22,7 @@ Les autres formulaires &#224; venir bient&#244;t ....
 
 {{Avertissement:}} Utiliser les captchas limite l'accessibilt&#233; de votre site [information->http://www.yoyodesign.org/doc/w3c/turingtest-20051123/]
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Captcha2</lien>
+	<lien>http://contrib.spip.net/Plugin-Captcha2</lien>
 	<prefix>captcha2</prefix>
   <options>rbl.php</options>
 	<categorie>performance</categorie>

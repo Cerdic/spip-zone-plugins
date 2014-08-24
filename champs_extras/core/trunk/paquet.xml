@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/cextras-64.png"
-	documentation="http://www.spip-contrib.net/?article4068"
+	documentation="http://contrib.spip.net/?article4068"
 >
 
 	<nom>Champs Extras</nom>

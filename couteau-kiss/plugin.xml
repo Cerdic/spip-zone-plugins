@@ -10,7 +10,7 @@
 _ Un couteau qui tient vraiment dans la poche en
 une unique page de configuration pour les r&#233;glages cach&#233;s de SPIP.
 	</description>
-	<lien>http://www.spip-contrib.net/Couteau-KISS</lien>
+	<lien>http://contrib.spip.net/Couteau-KISS</lien>
 	<prefix>ck</prefix>
 	<options>ck_options.php</options>
 	<onglet id="ck" parent="configuration">

@@ -18,7 +18,7 @@
 		</multi>
 	</description>
 	<etat>dev</etat>
-	<lien>http://www.spip-contrib.net/Date-pour-Rubriques</lien>
+	<lien>http://contrib.spip.net/Date-pour-Rubriques</lien>
 	<prefix>daterubriques</prefix>
 	<install>base/daterubriques_install.php</install>
    <fonctions>daterubriques_fonctions.php</fonctions>

@@ -32,5 +32,3 @@
 	<menu nom="chat_creer" titre="chat:icone_creer_chat" parent="outils_rapides" icone="images/chat-new-16.png" action="chat_edit" parametres="new=oui" />
 
 </paquet>
-
-

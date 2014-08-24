@@ -16,7 +16,7 @@
 		[en]Makes available click counting related to syndicated websites and its related articles and provides <code>#TOTAL_CLICS</code> balise. Preview on your website : <code>spip.php?page=clic_demo</code>
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article2410</lien>
+	<lien>http://contrib.spip.net/?article2410</lien>
 	<icon>img/compte_clics_icone_48.png</icon>
 
 	<fonctions>compteclics_fonctions.php</fonctions>

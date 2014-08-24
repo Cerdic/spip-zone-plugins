@@ -20,7 +20,7 @@ Options suppl&#233;mentaires:
 On peut aussi simplement activer un plugin d&#233;j&#224; pr&#233;sent par:
 -* <code>spip.php?action=charger&amp;activer=nom</code>
 	</description>
-	<lien>http://www.spip-contrib.net/Chargeur-Activateur</lien>
+	<lien>http://contrib.spip.net/Chargeur-Activateur</lien>
 	<prefix>chargeur</prefix>
 	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>maintenance</categorie>

@@ -10,7 +10,7 @@
 			[fr] Integration de [cocomment.com->http://www.cocomment.com] au formulaire de forum.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-coComment</lien> 
+	<lien>http://contrib.spip.net/Plugin-coComment</lien> 
 	<fonctions>cocomment_fonctions.php</fonctions>
 	<prefix>cocomment</prefix>
 	<necessite id="SPIP" version="[1.9.0;1.9.2]" />

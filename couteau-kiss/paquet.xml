@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/pocket-knife-32.png"
-	documentation="http://www.spip-contrib.net/Couteau-KISS"
+	documentation="http://contrib.spip.net/Couteau-KISS"
 >
 
 	<nom>Couteau Kiss</nom>

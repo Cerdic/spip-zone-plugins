@@ -10,7 +10,7 @@
 Le plugin fournit un bloc image zoomable.
 _ Les param&#232;tres de personnalisation et de r&#233;glage sont accessibles via un formulaire (param&#233;trage des options)
 	</description>
-	<lien>http://www.spip-contrib.net/Cloudzoom</lien>
+	<lien>http://contrib.spip.net/Cloudzoom</lien>
 	<prefix>cloudzoom</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

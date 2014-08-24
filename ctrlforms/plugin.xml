@@ -6,7 +6,7 @@
 	<etat>dev</etat>
 	<description>Ajout d'une fonctionnalit&eacute; de controle de champ pour le plugin Forms&amp;tables
 	</description>
-	<lien>http://</lien>
+	<lien></lien>
 	<prefix>ctrlforms</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id='forms' version='[0.301;]' />

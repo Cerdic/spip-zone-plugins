@@ -5,7 +5,7 @@
 	<version>0.1.0</version>
 	<etat>stable</etat>
 	<description>Ajouter une case &agrave; cocher permettant d'inscrire les visiteurs &agrave; une liste de discussion</description>
-	<lien>http://www.spip-contrib.net/?article1385</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/?article1385</lien> <!-- URI de documentation -->
 	<icon>caseacocher_ml.png</icon>
 	<prefix>caseacocher_ml</prefix>
 	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
