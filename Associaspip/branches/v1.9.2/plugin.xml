@@ -7,7 +7,7 @@
 	<description>Gestion de petites associations.</description>
 	<prefix>association</prefix>
 	<install>base/association_gestion.php</install>
-	<lien>http://www.spip-contrib.net/1611</lien>
+	<lien>http://contrib.spip.net/1611</lien>
     <icon>annonce.gif</icon>
     <fonctions>association_fonctions.php</fonctions>
 	<pipeline>

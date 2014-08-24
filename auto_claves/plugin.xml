@@ -14,7 +14,7 @@
 [es]Para automatizar la asignaci&oacute;n de palabras clave. Compara el texto del art&iacute;culo con las palabras clave y permite asignar en bloque las seleccionadas.
 	</multi>
 </description>
-<lien>http://www.spip-contrib.net/spip.php?articlexxx</lien>
+<lien>http://contrib.spip.net/?articlexxx</lien>
 <prefix>autoclaves</prefix>
 <pipeline>
 	<nom>post_propre</nom>

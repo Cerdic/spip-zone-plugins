@@ -31,7 +31,7 @@
 			[es]Este plugin te permite atribuir un artículo de inicio a las secciones. De ahí, se puede usar el campo id_article_accueil en los esqueletos.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/?article3776</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/?article3776</lien> <!-- URI de documentation -->
 	<install>base/article_accueil.php</install>
 	<prefix>article_accueil</prefix>
 	<pipeline>

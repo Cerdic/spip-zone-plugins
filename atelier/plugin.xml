@@ -19,7 +19,7 @@ Il propose :
 -* G&#233;n&#233;ration de feuilles priv&#233;es et publiques
 -* Explorateur de fichier
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Atelier</lien>
+	<lien>http://contrib.spip.net/Plugin-Atelier</lien>
 	<options>atelier_options.php</options>
 	<fonctions>atelier_fonctions.php</fonctions>
 	<prefix>atelier</prefix>

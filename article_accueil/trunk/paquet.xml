@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/article_accueil-48.png"
 	schema="0.1.0"
-	documentation="http://www.spip-contrib.net/?article3776"
+	documentation="http://contrib.spip.net/?article3776"
 >
 
 	<nom>Articles d'accueil</nom>

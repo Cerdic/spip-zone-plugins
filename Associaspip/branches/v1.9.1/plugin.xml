@@ -3,7 +3,7 @@
 	<auteur>Fran&#231;ois de Montlivault</auteur>
 	<version>1.9.1</version><!-- 0.50 -->
 	<etat>test</etat>
-	<lien>http://www.spip-contrib.net/1611</lien>
+	<lien>http://contrib.spip.net/1611</lien>
 	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>

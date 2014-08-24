@@ -15,7 +15,7 @@ Ce plugin ajoute le statut <b>archive</b> aux articles.
 _ Pensez &#224; utiliser le crit&#232;re <b>{archive}</b> ou bien <b>archive seulement</b>
 	</description>
 	
-	<lien>http://www.spip-contrib.net/Plugin-Archive</lien>
+	<lien>http://contrib.spip.net/Plugin-Archive</lien>
 
 	<fonctions>public/archive_criteres.php</fonctions>
 

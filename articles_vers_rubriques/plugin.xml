@@ -6,7 +6,7 @@
 	<description>
 	Transforme les articles d'un site en rubriques, les range dans une rubrique, fait suivre les logos et les documents, et convertit les liens raccourcis, permet d'assurer la redirection vis-&#224;-vis des moteurs de recherche.
 	</description>
-	<lien>http://www.spip-contrib.net/4164</lien>
+	<lien>http://contrib.spip.net/4164</lien>
 	<categorie>maintenance</categorie>
 	<etat>test</etat>
 	<icon>prive/themes/spip/images/logo-28.png</icon>
