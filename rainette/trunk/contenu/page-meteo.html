@@ -7,21 +7,36 @@
 [(#REM) Fil d'Ariane ]
 <p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:rainette:meteo|ucfirst:></strong></p>
 
-#SET{nom_ville, #RAINETTE_INFOS{#ENV{ville, FRXX0076}, ville}}
+#SET{nom_ville, #RAINETTE_INFOS{#ENV{ville, FRXX0076}, ville, #ENV{service, weather}}}
 <div class="cartouche">
 	<h1 class="h1"><:rainette:meteo_consultation{ville=#GET{nom_ville}}:></h1>
 	<p class="info-publi">
 		<small>
-			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, longitude}|rainette_afficher_unite{angle})]
-			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{#ENV{ville, FRXX0076}, latitude}|rainette_afficher_unite{angle})]
+			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
+													#ENV{ville, FRXX0076},
+													longitude,
+													#ENV{service, weather}}|rainette_afficher_unite{angle})]
+			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
+											#ENV{ville, FRXX0076},
+											latitude,
+											#ENV{service, weather}}|rainette_afficher_unite{angle})]
 		</small>
 	</p>
 </div>
 <br class="nettoyeur"/>
 
 <h2 class="h2"><:rainette:meteo_conditions|ucfirst:></h2>
-[(#MODELE{rainette_conditions,code=#ENV{ville, FRXX0076},sous_modele=conditions_tempsreel})]
+[(#MODELE{rainette_conditions,
+	code=#ENV{ville, FRXX0076},
+	sous_modele=conditions_tempsreel,
+	service=#ENV{service, weather}})]
 <br class="nettoyeur"/>
 
-<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=#EVAL{_RAINETTE_JOURS_PREVISION}}|ucfirst:></h2>
-[(#MODELE{rainette_previsions,code=#ENV{ville, FRXX0076},type=x_jours,jour=#EVAL{_RAINETTE_JOURS_PREVISION},sous_modele=previsions_24h})]
+#SET{max_previsions, #RAINETTE_INFOS{#ENV{ville, FRXX0076}, max_previsions,	#ENV{service, weather}}}
+<h2 class="h2"><:rainette:meteo_previsions_n_jours{nbj=#GET{max_previsions}}|ucfirst:></h2>
+[(#MODELE{rainette_previsions,
+	code=#ENV{ville, FRXX0076},
+	type=x_jours,
+	jour=#GET{max_previsions},
+	sous_modele=previsions_24h,
+	service=#ENV{service, weather}})]

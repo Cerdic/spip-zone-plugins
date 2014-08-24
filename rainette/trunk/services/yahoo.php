@@ -4,8 +4,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_RAINETTE_YAHOO_URL_BASE'))
 	define('_RAINETTE_YAHOO_URL_BASE', 'http://weather.yahooapis.com/forecastrss');
-if (!defined('_RAINETTE_YAHOO_JOURS_PREVISION'))
-	define('_RAINETTE_YAHOO_JOURS_PREVISION', 5);
+if (!defined('_RAINETTE_YAHOO_JOURS_PREVISIONS'))
+	define('_RAINETTE_YAHOO_JOURS_PREVISIONS', 5);
 
 
 function yahoo_service2cache($lieu, $mode) {
@@ -124,7 +124,7 @@ function yahoo_flux2previsions($flux, $lieu) {
 				$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s', $date_maj);
 			}
 			// On stocke le nombre max de jours de prévisions pour le service
-			$tableau[$index]['max_jours'] = _RAINETTE_YAHOO_JOURS_PREVISION;
+			$tableau[$index]['max_jours'] = _RAINETTE_YAHOO_JOURS_PREVISIONS;
 		}
 	}
 
@@ -232,6 +232,9 @@ function yahoo_flux2infos($flux, $lieu){
 
 			$tableau['population'] = NULL;
 		}
+
+		// Ajout du nombre de jours max de prévisions
+		$tableau['max_previsions'] = _RAINETTE_YAHOO_JOURS_PREVISIONS;
 	}
 
 	// Traitement des erreurs de flux

@@ -10,8 +10,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_RAINETTE_WEATHER_URL_BASE'))
 	define('_RAINETTE_WEATHER_URL_BASE', 'http://xml.weather.com/weather/local/');
-if (!defined('_RAINETTE_WEATHER_JOURS_PREVISION'))
-	define('_RAINETTE_WEATHER_JOURS_PREVISION', 10);
+if (!defined('_RAINETTE_WEATHER_JOURS_PREVISIONS'))
+	define('_RAINETTE_WEATHER_JOURS_PREVISIONS', 10);
 
 function weather_service2cache($lieu, $mode) {
 
@@ -30,7 +30,7 @@ function weather_service2url($lieu, $mode) {
 
 	$url = _RAINETTE_WEATHER_URL_BASE . strtoupper($lieu) . '?unit=' . $unite;
 	if ($mode != 'infos') {
-		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_WEATHER_JOURS_PREVISION : '&cc=*';
+		$url .= ($mode == 'previsions') ? '&dayf=' . _RAINETTE_WEATHER_JOURS_PREVISIONS : '&cc=*';
 	}
 
 	return $url;
@@ -153,7 +153,7 @@ function weather_flux2previsions($flux, $lieu) {
 
 	// On stocke en fin de tableau la date de derniere mise a jour et le nombre max de  jours de prévisions
 	$tableau[$index]['derniere_maj'] = date('Y-m-d H:i:s',$date_maj);
-	$tableau[$index]['max_jours'] = _RAINETTE_WEATHER_JOURS_PREVISION;
+	$tableau[$index]['max_jours'] = _RAINETTE_WEATHER_JOURS_PREVISIONS;
 
 	return $tableau;
 }
@@ -226,6 +226,7 @@ function weather_flux2infos($flux, $lieu){
 		$tableau['latitude'] = floatval($infos['lat'][0]);
 
 		$tableau['population'] = NULL;
+		$tableau['max_previsions'] = _RAINETTE_WEATHER_JOURS_PREVISIONS;
 	}
 
 	// Traitement des erreurs de flux

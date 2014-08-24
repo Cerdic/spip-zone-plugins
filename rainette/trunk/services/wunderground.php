@@ -269,8 +269,9 @@ function wunderground_flux2infos($flux, $lieu) {
 	include_spip('inc/config');
 	$format = lire_config('rainette/wunderground/format', 'json');
 
-	// Construire le tableau standard des informations sur le lieu
+	// Construire le tableau standard des informations sur le lieu et ajouter le nombre de jours de prévisions
 	$tableau = ($format == 'json') ? json2infos_wunderground($flux) : xml2infos_wunderground($flux);
+	$tableau['max_previsions'] = _RAINETTE_WUNDERGROUND_JOURS_PREVISIONS;
 
 	// Traitement des erreurs de flux
 	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';

@@ -225,6 +225,9 @@ function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
  */
 function rainette_coasser_previsions($lieu, $type='1_jour', $jour=0, $modele='previsions_2x12h', $service='weather'){
 
+	// Initialisation du retour
+	$texte = '';
+
 	// Recuperation du tableau des prévisions pour tous les jours disponibles
 	$charger = charger_fonction('charger_meteo', 'inc');
 	$nom_fichier = $charger($lieu, 'previsions', $service);
@@ -277,10 +280,11 @@ function rainette_coasser_previsions($lieu, $type='1_jour', $jour=0, $modele='pr
 			$texte = recuperer_fond("modeles/$modele", $contexte);
 		}
 		else if ($type == 'x_jours') {
+			// Si le nombre de jours demandés est supérieur à celui possible on ne renvoie pas une erreur
+			// mais le nombre de jours maximal
 			if ($jour == 0) $jour = $index_extra;
 			$nb_jours = min($jour, $index_extra);
 
-			$texte = '';
 			for ($i = 0; $i < $nb_jours; $i++) {
 				$contexte = array_merge($tableau[$i], $tableau[$index_extra]);
 				$texte .= recuperer_fond("modeles/$modele", $contexte);

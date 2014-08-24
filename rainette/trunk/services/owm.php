@@ -251,8 +251,9 @@ function owm_flux2infos($flux, $lieu) {
 	include_spip('inc/config');
 	$format = lire_config('rainette/owm/format', 'xml');
 
-	// Construire le tableau standard des informations sur le lieu
+	// Construire le tableau standard des informations sur le lieu et ajouter le nombre de jours de prévisions
 	$tableau = ($format == 'xml') ? xml2infos_owm($flux) : json2infos_owm($flux);
+	$tableau['max_previsions'] = _RAINETTE_OWM_JOURS_PREVISIONS;
 
 	// Traitement des erreurs de flux
 	$tableau['erreur'] = (!$tableau) ? 'chargement' : '';
