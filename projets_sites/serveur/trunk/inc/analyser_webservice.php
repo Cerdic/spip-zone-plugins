@@ -80,6 +80,7 @@ function inc_analyser_webservice_dist($url)
                         $valeurs['auteurs_admin'][] = implode('|', $value);
                     }
                     $valeurs['auteurs_admin'] = implode("\n", $valeurs['auteurs_admin']);
+                    // $valeurs['auteurs_admin_length'] = strlen($valeurs['auteurs_admin']);
                     break;
                 case 'webmestres':
                     foreach ($xml[$key][0] as $key => $value) {
@@ -87,6 +88,7 @@ function inc_analyser_webservice_dist($url)
                         $valeurs['auteurs_webmestres'][] = implode('|', $value);
                     }
                     $valeurs['auteurs_webmestres'] = implode("\n", $valeurs['auteurs_webmestres']);
+                    // $valeurs['auteurs_webmestres_length'] = strlen($valeurs['auteurs_webmestres']);
                     break;
                 case 'plugins':
                     foreach ($xml[$key][0] as $key => $value) {
