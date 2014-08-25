@@ -8,8 +8,8 @@
 
 [(#SET{logo,#LOGODOCUMENT})]
 [(#SET{fichier,[(#GET{logo}||extraire_attribut{src})]})]
-[(#SET{width,[(#GET{logo}||extraire_attribut{width})]})]
-[(#SET{height,[(#GET{logo}||extraire_attribut{height})]})]
+[(#SET{width,#ENV*{width}})]
+[(#SET{height,#ENV*{height}})]
 #SET{url,#ENV{lien,#HREF}}
 
 [(#SET{captionspip,[

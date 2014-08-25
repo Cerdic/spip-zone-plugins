@@ -297,6 +297,14 @@ function embed_ressource($res) {
 	// si la ressource a un embed, charger le modele ressource_embed
 	// qui l'encapsule dans un <figure>, ajoute eventuellement une légende etc.
 	if (isset($res['embed'])) {
+		if (!isset($res['width'])
+		AND $w = extraire_attribut($res['embed'], 'width'))
+			$res['width'] = $w;
+		if (!isset($res['height'])
+		AND $h = extraire_attribut($res['embed'], 'height'))
+			$res['height'] = $h;
+
+var_dump($res);
 		return recuperer_fond('modeles/ressource_embed', $res);
 	}
 
