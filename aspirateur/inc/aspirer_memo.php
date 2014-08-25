@@ -17,6 +17,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * Utilisé par la fonction verifier_le_lien
  *
+ * @param string $url_page
+ *	l'url de la page à traiter
+ *
+ * @param string $url_site_aspirer
+ *	l'url du site à aspirer
+ *
+ * @return string $url_page
+ *	l'url de la page à traiter ou rien
+ *
 **/
 function need_traitement($url_page,$url_site_aspirer){
 	$page_referente = lire_config('aspirateur/page_referente');
@@ -46,6 +55,11 @@ function need_traitement($url_page,$url_site_aspirer){
  *
  * créé avec un md5 sur @param $url_parent
  *
+ * @param string $url_parent
+ *	l'url du site à aspirer
+ *
+ * @return string
+ *	le fichier créé dans IMG/aspirateur/
  *
 **/
 function aspirateur_tmp_liste($url_parent){
@@ -67,6 +81,8 @@ function aspirateur_tmp_liste($url_parent){
 /**
  *
  * Fonction reprise de SPIP (plugin dist urls_etendues)
+ *
+ * todo, sortir la fonction url_nettoyer pour être réutilisable ici ou ailleurs
  *
  *
 **/

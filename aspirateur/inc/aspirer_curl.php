@@ -62,7 +62,7 @@ function la_page($url) {
  *
 **/
 function isoler_contenu($chaine){
-	//Identifiant du div pour isoler le contenu via xpath
+	//Identifiant donné pour isoler le contenu via xpath (tout tag accepté) (option*)
 	$div_id_contenu = trim(lire_config('aspirateur/div_id_contenu'));
 	$div_class_contenu_exclure = trim(lire_config('aspirateur/div_class_contenu_exclure'));
 
@@ -79,7 +79,7 @@ function isoler_contenu($chaine){
 			$tags = $xpath->query("//body");
 		}
 		
-		//on exclut un noeud div avec une class donnée (option*)
+		//on exclut les noeuds ayant une class donnée (tout tag accepté) (option*)
 		if($div_class_contenu_exclure){
 			foreach($xpath->query(".//*[@class='$div_class_contenu_exclure']") as $node) {
 			  $node->parentNode->removeChild($node);
@@ -128,19 +128,19 @@ function isoler_contenu($chaine){
 function recupere_titre($url){
    //recupere toute la page
    $la_page=la_page($url);
-   //fabriquer le titre -> todo réviser pour tester en premier le <title> sur $texte_encoded
+   //fabrique le titre depuis <title>
    if(preg_match("/<title>(.*)<\/title>/siU", $la_page, $title_matches)){
    	// Clean up title: remove EOL's and excessive whitespace.
         $titre = preg_replace('/\s+/', ' ', $title_matches[1]);
         $titre = trim($titre);
         if ($titre!='') return char($titre);	
    }
-   
+   //sinon depuis le h1
    $pattern = "/<h1(.*?)>(.*?)<\/h1>/";
    if(preg_match($pattern, $la_page, $h1)){
-   $titre=$h1[2];
-   $titre = preg_replace('#&nbsp;#Umis','',$titre);
-   return char($titre);	
+	   $titre=$h1[2];
+	   $titre = preg_replace('#&nbsp;#Umis','',$titre);
+	   return char($titre);	
    }
    return "titre_temporaire_de_la_page";
 }

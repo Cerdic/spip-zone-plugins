@@ -78,7 +78,6 @@ function recupere_links($parent,$methode="loadHTMLFile",$thistag='a',$thisattrib
 function clean_href($chaine){
 	$chaine = preg_replace('#[[:blank:]]#Umis','',$chaine);
 	$chaine = str_replace("\r\n", "", $chaine);
-	//$href = strtolower(translitteration($href)); //reecrit les liens, necessite SPIP
 	return $chaine;
 }
 

@@ -14,13 +14,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * Fabriquer un flux pour un fichier rss et l'enregistrer
  *
- * La seule variable est le nom du fichier
  *
  * @example 
- * 	echo do_rss("nom_fichier.xml");
+ * 	do_rss("nom_fichier.xml",3);
  *
  * @param string $fichier
  *	Le nom du fichier xml à enregistrer
+ *
+ * @param string $nombre_de_pages
+ *	Le nombre_de_pages à traiter en items
  *
  * @return string 
  * 	Le flux_rss.xml enregistré
@@ -110,9 +112,6 @@ function traiter_items($links,$url_du_site){
 		$traite_texte_documents=traite_texte_documents($texte);
 		$texte=$traite_texte_documents['texte'];
 		
-		//traitement du texte via SPIP pour rss
-		//$texte = texte_backend($texte); 
-		
 		//cree un item pour chaque page
 		$flux.= "\n<item xml:lang='fr'>\n";
 		
@@ -134,19 +133,21 @@ function traiter_items($links,$url_du_site){
  * Compose le contenu d'un item à insérer dans une collection d'items rss
  *
  * @example 
- * 	do_item($titre,$url_page,$texte_encoded);
+ * 	do_item($titre,$url_page,$texte);
  *
  * @param string $titre
  *	Le titre de l'item
+ *
  * @param string $url_page
  *	L'url de l'item
- * @param string $texte_encoded
- *	Le texte html encodé pour le RSS de l'item
+ *
+ * @param string $texte
+ *	Le texte html (encodé ou pas) pour le RSS de l'item
  *
  * @return string 
  *
 **/
-function do_item($titre,$url_page,$texte_encoded){
+function do_item($titre,$url_page,$texte){
 	$nom_site_aspirer = lire_config('aspirateur/nom_site_aspirer');
 	$flux = "<title>".$titre."</title>\n";
 	$flux.= "<guid isPermaLink='true'>".quote_amp($url_page)."</guid>\n";
@@ -156,7 +157,7 @@ function do_item($titre,$url_page,$texte_encoded){
 	$flux.= "<dc:creator>".$nom_site_aspirer."</dc:creator>\n";
 	$flux.= "<description></description>\n"; //todo
 	$flux.= "<pubDate></pubDate>\n"; //todo
-	$flux.= "<content:encoded><![CDATA[".$texte_encoded."]]>\n";
+	$flux.= "<content:encoded><![CDATA[".$texte."]]>\n";
 	$flux.= "</content:encoded>\n";
 	
 	return $flux;
@@ -182,48 +183,3 @@ function enclosure_doc($fichier){
 	//if($type !='text/html')
 	return '<enclosure url="'.$fichier.'" length="'.$length.'" type="'.$type.'" />'."\n";	
 }
-
-// not use
-/**
- * Encode du HTML pour transmission XML
- * notamment dans les flux RSS
- *
- * http://doc.spip.org/@texte_backend
- *
- * @param $texte
- * @return mixed
- */
-
-function texte_backend_aspirateur($texte) {
-
-	static $apostrophe = array("&#8217;", "'"); # n'allouer qu'une fois
-
-	// echapper les tags &gt; &lt;
-	$texte = preg_replace(',&(gt|lt);,S', '&amp;\1;', $texte);
-
-	// importer les &eacute;
-	$texte = filtrer_entites($texte);
-
-	// " -> &quot; et tout ce genre de choses
-	$u = $GLOBALS['meta']['pcre_u'];
-	$texte = str_replace("&nbsp;", " ", $texte);
-	$texte = preg_replace('/\s\s+/'," ",$texte);
-	// ne pas echapper les sinqle quotes car certains outils de syndication gerent mal
-	$texte = entites_html($texte, false, false);
-
-	// verifier le charset
-	$texte = charset2unicode($texte);
-
-	// Caracteres problematiques en iso-latin 1
-	if ($GLOBALS['meta']['charset'] == 'iso-8859-1') {
-		$texte = str_replace(chr(156), '&#156;', $texte);
-		$texte = str_replace(chr(140), '&#140;', $texte);
-		$texte = str_replace(chr(159), '&#159;', $texte);
-	}
-
-	// l'apostrophe curly pose probleme a certains lecteure de RSS
-	// et le caractere apostrophe alourdit les squelettes avec PHP
-	// ==> on les remplace par l'entite HTML
-	return str_replace($apostrophe, "'", $texte);
-}
-

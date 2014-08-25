@@ -21,6 +21,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string 
  * 	le contenu html nettoyé
  *
+ * todo passer en xpath le plus possible
+ *
 **/
 function clean_contenu($chaine){
 
