@@ -2,7 +2,7 @@
 	prefix="diogene_documents"
 	categorie="edition"
 	version="1.0.1"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
 >
