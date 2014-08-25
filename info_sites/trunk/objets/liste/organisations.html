@@ -36,14 +36,14 @@
 
 <div class="liste-objets organisations">
 <table class='table table-striped table-bordered'>
-[<caption><strong class="caption">(#ENV*{titre,<:contacts:info_toutes_organisations:>})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_sites:info_1_organisation,info_sites:info_nb_organisations}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class="picto"></th>
 			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
 			<th class='statut_juridique' scope='col'>[(#TRI{statut_juridique,<:contacts:label_statut_juridique:>,ajax})]</th>
-            <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
-            <th class="nb_projets"><:info_sites:info_nb_projets:></th>
+            <th class="nb_contacts"><:info_sites:info_nombre_contacts:></th>
+            <th class="nb_projets"><:info_sites:info_nombre_projets:></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -62,11 +62,15 @@
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
 			<td class="statu_juridique">[(#STATUT_JURIDIQUE)]</td>
 			<td class='nb_contacts'>
-				[<span class="badge">(#COMPTEUR_CONTACTS|sinon{-})</span>]
-				<BOUCLE_contacts (CONTACTS) {id_organisation} {par nom} {' / '}><span class="contact">[(#PRENOM) ][(#NOM)]</span></BOUCLE_contacts>
+				<B_contacts>
+				[<span class="badge pull-right">(#COMPTEUR_BOUCLE)</span>]
+				<ul class="list-unstyled spip">
+				<BOUCLE_contacts (CONTACTS) {id_organisation} {par nom}><li class="contact"><a href="#URL_CONTACT">[(#NOM)][, (#PRENOM)]</a></li></BOUCLE_contacts>
+				</ul>
+				</B_contacts><span class="badge pull-right">0</span><//B_contacts>
 			</td>
 			<td class="nb_projets">
-				<BOUCLE_projets (PROJETS) {id_organisation}>[(#REM) ]</BOUCLE_projets><span class="badge">#TOTAL_BOUCLE</span><//B_projets>
+				<BOUCLE_projets (PROJETS) {id_organisation}>[(#REM) ]</BOUCLE_projets><span class="badge pull-right">#TOTAL_BOUCLE</span><//B_projets>
 			</td>
 		</tr>
 	</BOUCLE_liste_orga>

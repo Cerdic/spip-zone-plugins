@@ -23,9 +23,7 @@
 			<div class="btn-group">
 			[(#AUTORISER{modifier,projets_site,#ID_SITE})
 				<a href="[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
-				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|parametre_url{url,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:projets_site:icone_modifier_projets_site:></a>
-			][(#AUTORISER{modifier,projets_site,#ID_SITE})
-				<a href="[(#URL_ECRIRE{projets_site,id_site=#ID_SITE})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:projets_site_editer_liens:></a>
+				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projets_site:></a>
 			]
 			</div>
 		</div>

@@ -32,8 +32,8 @@
             <td class='logiciel_nom'>[(#LOGICIEL_NOM)]</td>
             <td class='logiciel_version'>[(#LOGICIEL_VERSION)]</td>
             <td class='fo_url' scope='col'>[<a href="#FO_URL">(#FO_URL)</a>]</td>
-            <td class='id'>[(#AUTORISER{modifier,projet,#ID_PROJET}|?{
-				<a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET})]">#ID_SITE</a>,
+            <td class='id'>[(#AUTORISER{modifier,projets_site,#ID_SITE}|?{
+				<a href="[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE})]">#ID_SITE</a>,
 				#ID_SITE
 			})]</td>
 		</tr>

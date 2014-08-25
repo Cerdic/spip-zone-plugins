@@ -8,8 +8,8 @@
 	<!-- /.col-md-9 -->
 	<div class="col-md-4">
 		[(#AUTORISER{creer,organisation})
-			<a href="[(#URL_ECRIRE{organisation_edit,new=oui})]" class="btn btn-default" rel="nofollow" target="_blank"
-			onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit}|parametre_url{new,'oui'}|parametre_url{url,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:contacts:organisation_creer:></a>
+			<a href="[(#URL_ECRIRE{organisation_edit,new=oui})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
+			onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:contacts:organisation_creer:></a>
 		]
 
 	</div>

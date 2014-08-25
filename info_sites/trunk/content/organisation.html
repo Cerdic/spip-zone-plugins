@@ -28,7 +28,7 @@
 			<div class="btn-group">
 				[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
 					<a href="[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
-					onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{url,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a>
+					onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a>
 					<a href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:editer_liens_organisation:></a>
 				]
 			</div>

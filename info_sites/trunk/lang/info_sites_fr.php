@@ -14,13 +14,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'editer_liens_contact' => '&Eacute;diter les liens de ce contact',
     'editer_liens_organisation' => '&Eacute;diter les liens de cette organisation',
     'editer_liens_projet' => '&Eacute;diter les liens de ce projet',
+    'editer_liens_projets_site' => '&Eacute;diter les liens de ce site',
 
 
     // I
     'icone_modifier_contact' => 'Modifier ce contact',
     'icone_modifier_organisation' => 'Modifier cette organisation',
     'icone_modifier_projet' => 'Modifier ce projet',
-    'info_nb_projets' => 'Nombre de projets',
+    'icone_modifier_projets_site' => 'Modifier ce site',
+    'info_1_contact' => 'Un contact',
+    'info_1_organisation' => 'Une organisation',
+    'info_1_projet' => 'Un projet',
+    'info_1_projets_site' => 'Un site',
+    'info_nb_contacts' => '@nb@ contacts',
+    'info_nb_organisations' => '@nb@ organisations',
+    'info_nb_projets' => '@nb@ projets',
+    'info_nb_projets_sites' => '@nb@ sites',
+    'info_nombre_contacts' => 'Contacts liés',
+    'info_nombre_projets' => 'Nombre de projets',
 
     // M
     'menu_organisations' => 'Organisations',
