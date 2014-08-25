@@ -303,8 +303,6 @@ function embed_ressource($res) {
 		if (!isset($res['height'])
 		AND $h = extraire_attribut($res['embed'], 'height'))
 			$res['height'] = $h;
-
-var_dump($res);
 		return recuperer_fond('modeles/ressource_embed', $res);
 	}
 
