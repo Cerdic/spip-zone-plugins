@@ -10,15 +10,6 @@ define('_EXTRAIRE_RESSOURCES', ',' . '<"?(https?://|[\w -]+\.[\w -]+).*>'.',Uims
 define('_RESSOURCE_VIGNETTE_LARGEUR_DEFAUT','small');
 define('_RESSOURCE_IMAGE_LARGEUR_DEFAUT', 'large');
 
-function traiter_ressources($r) {
-	if ($ressource = charger_fonction('ressource', 'inc', true))
-		$html = $ressource($r[0]);
-	else
-		$html = htmlspecialchars($r[0]);
-
-	return '<html>'.$html.'</html>';
-}
-
 /* pipeline pour typo */
 function ressource_post_typo($t) {
 	if (strpos($t, '<') !== false) {
@@ -37,6 +28,15 @@ function ressource_pre_liens($t) {
 			$t = echappe_html($t);
 	}
 	return $t;
+}
+
+function traiter_ressources($r) {
+	if ($ressource = charger_fonction('ressource', 'inc', true))
+		$html = $ressource($r[0]);
+	else
+		$html = htmlspecialchars($r[0]);
+
+	return '<html>'.$html.'</html>';
 }
 
 function inc_ressource_dist($r) {
@@ -118,7 +118,7 @@ function ressource_meta($res) {
 		include_spip('autoembed/autoembed');
 		if (function_exists('embed_url')
 		AND $u = embed_url($src)) {
-			$meta['extract'] = $u;
+			$meta['embed'] = $u;
 		}
 
 		/* autre exemple de traitement avec oembed */
@@ -127,7 +127,7 @@ function ressource_meta($res) {
 			AND $u = oembed($src)
 			AND $u != $src) 
 		{
-			$meta['extract'] = $u;
+			$meta['embed'] = $u;
 		}
 
 		/* recuperer un album flickr */
@@ -696,3 +696,4 @@ function nettoyer_utf8($t) {
 		$t = preg_replace_callback(',&#x([0-9a-f]+);,i', 'utf8_do', utf8_encode(utf8_decode($t)));
 	return $t;
 }
+
