@@ -11,9 +11,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'cfg_exemple' => 'Exemple',
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
+    'editer_liens_contact' => '&Eacute;diter les liens de ce contact',
+    'editer_liens_organisation' => '&Eacute;diter les liens de cette organisation',
+    'editer_liens_projet' => '&Eacute;diter les liens de ce projet',
+
 
     // I
+    'icone_modifier_contact' => 'Modifier ce contact',
     'icone_modifier_organisation' => 'Modifier cette organisation',
+    'icone_modifier_projet' => 'Modifier ce projet',
     'info_nb_projets' => 'Nombre de projets',
 
     // M
@@ -22,11 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'menu_projets_sites' => 'Sites',
     'menu_statistiques' => 'Statistiques',
 
-    // O
-    'organisation_editer_liens' => '&Eacute;diter les liens de cette organisation',
-
     // P
-    'projet_editer_liens' => '&Eacute;diter les liens de ce projet',
 
     // S
     'info_sites_titre' => 'Info Sites',

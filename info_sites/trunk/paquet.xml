@@ -1,7 +1,7 @@
 <paquet
     prefix="info_sites"
     categorie="outil"
-    version="0.1.1"
+    version="0.1.2"
     etat="dev"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/info_sites-64.png"
@@ -17,7 +17,7 @@
     <necessite nom="saisies" compatibilite="[1.24.0;]" />
     <necessite nom="Zcore" compatibilite="[2.4.0;]" />
     <necessite nom="contacts" compatibilite="[2.10.0;]" />
-    <necessite nom="coordonnees" compatibilite="[2.3.2;]" />
+    <necessite nom="coordonnees" compatibilite="[2.2.4;]" />
     <necessite nom="projets" compatibilite="[1.0.9;]" />
     <necessite nom="lesscss" compatibilite="[1.0.0;]" />
     <necessite nom="projets_sites" compatibilite="[1.0.1;]" />

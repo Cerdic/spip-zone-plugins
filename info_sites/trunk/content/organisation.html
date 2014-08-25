@@ -29,8 +29,7 @@
 				[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
 					<a href="[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
 					onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{url,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a>
-				][(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
-					<a href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:organisation_editer_liens:></a>
+					<a href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:editer_liens_organisation:></a>
 				]
 			</div>
 		</div>
@@ -40,7 +39,7 @@
 		</div>
 		<div class="block">
 			<div class="clearfix clear"> </div>
-			<INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env} />
+			<INCLURE{fond=objets/liste/projets, organisation, id_organisation, ajax, env} />
 		</div>
 		<div class="block">
 			<div class="clearfix clear"></div>

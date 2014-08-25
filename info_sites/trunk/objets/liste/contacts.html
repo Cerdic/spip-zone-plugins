@@ -46,7 +46,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_contacts(CONTACTS)
-		{id_organisation?}{recherche ?}{id_annuaire?}
+		{id_organisation?} {recherche ?} {id_annuaire?} {id_projet ?}
 		{auteurs.statut ?= #ENV{statut,''}}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
