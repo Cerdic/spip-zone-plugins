@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'La SPIP-kompaso kunigas la aron de « oficialaj » retejoj de la SPIP galaksio. Ĝi registras pri ĉiu retejo ĝian vinjeton, ĝian nomon, ĝian devizon kaj ĝian priskribon. Do ne hezitu uzi ĝin ĉe viaj propraj retejoj por orientigi viajn vizitantojn tra la SPIP galaksio.',
 	'descriptif_site_spip_blog' => 'Ĉar SPIP estas kunlaboriga projekto, spip-blog.net kolektas teknikajn artikoletojn, mem mokadojn, trolojn, diversajn anoncojn , … Pro tio ĝi bone respegulas la SPIP komunumon : unue kaj precipe multege de tenero.',
-	'descriptif_site_spip_contrib' => 'Kiel kunlaboriga retejo, spip-contrib.net disponigas la tuton de la exteraj kontribuaĵoj : kromprogramojn, skriptojn, filtrilojn, skeletojn, dokumentojn, trukojn kaj elturnigilojn,… el la komunumo (elŝutligoj) far la SPIP uzantoj. Ĝiaj forumoj plenumas la ligon inter konceptistoj kaj uzantoj.',
+	'descriptif_site_spip_contrib' => 'Kiel kunlaboriga retejo, spip-contrib.net disponigas la tuton de la exteraj kontribuaĵoj : kromprogramojn, skriptojn, filtrilojn, skeletojn, dokumentojn, trukojn kaj elturnigilojn,… el la komunumo (elŝutligoj) far la SPIP uzantoj. Ĝiaj forumoj plenumas la ligon inter konceptistoj kaj uzantoj.', # MODIF
 	'descriptif_site_spip_core' => 'La retejo core.spip.org arigas la historion de la modifoj de la SPIP kodo, mastrumadon de la petoslipoj kiuj ebligas averti pri cimoj kaj proponi sugestojn por plibonigado, kaj elŝuta spaco de la SPIP versioj.',
 	'descriptif_site_spip_demo' => 'Retejo de testo ĝisdatigita ĉiunokte, demo.spip.net ebligas al ĉiu provi SPIP-on en ĝia plej nova stabila versio (kun, elekteble, la redakta aŭ mastrumada statuso), per nura alklako kaj sen instali ĝin. ',
 	'descriptif_site_spip_doc' => 'La retejo code.spip.net estas referenco kie estas detaligita, analizita kaj komentita (nomo, loko, argumentoj, rolo kaj uzado) ĉiu el la funkcioj de la SPIP fontokodo.', # MODIF
@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_extension' => 'Kontribuoj',
 	'nom_groupe_spip_reference' => 'Dokumentado',
 	'nom_site_spip_blog' => 'SPIP Blogo',
-	'nom_site_spip_contrib' => 'SPIP-Kontribuo',
+	'nom_site_spip_contrib' => 'SPIP-Kontribuo', # MODIF
 	'nom_site_spip_core' => 'SPIP Kerno',
 	'nom_site_spip_demo' => 'SPIP Elmontrado',
 	'nom_site_spip_doc' => 'SPIP Kodo',

@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'Kompas SPIPu zoskupuje všetky "oficiálne" stránky galaxie SPIPu. Pri každej stránke uvádza jej logo, názov, slogan a jej opis. Pokojne ju môžete použiť na vlastných stránkach na nasmerovanie svojich návštevníkov do galaxie SPIPu.',
 	'descriptif_site_spip_blog' => 'Keďže SPIP je kolektívny projekt, SPIP-BLOG.net  sústreďuje technické poznámky, staršie verzie, nálady, chyby, rôzne oznamy, atď. Takto odráža komunitu okolo SPIPu: na prvom mieste a predovšetkým ľahkosťou. énormément de tendresse.',
-	'descriptif_site_spip_contrib' => 'Kolektívna stránka SPIP-CONTRIB.net poskytuje všetky externé príspevky: zásuvné moduly, skripty, filtre, šablóny, dokumentáciu, tipy a triky, atď., ktoré vytvorila komunita okolo SPIPu (v podobe odkazov na sťahovanie) pre používateľov SPIPu. V diskusných fórach nájdete hypertextové odkazy vývojárov pre používateľov.',
+	'descriptif_site_spip_contrib' => 'Kolektívna stránka SPIP-CONTRIB.net poskytuje všetky externé príspevky: zásuvné moduly, skripty, filtre, šablóny, dokumentáciu, tipy a triky, atď., ktoré vytvorila komunita okolo SPIPu (v podobe odkazov na sťahovanie) pre používateľov SPIPu. V diskusných fórach nájdete hypertextové odkazy vývojárov pre používateľov.', # MODIF
 	'descriptif_site_spip_core' => 'Stránka CORE.SPIP.org sústreďuje históriu zmien kódu SPIPu, riadenie lístkov umožňujúcich nahlasovanie chýb i posielanie návrhov na vylepšenie a je miestom na sťahovanie jednotlivých verzií SPIPu.',
 	'descriptif_site_spip_demo' => 'DEMO.SPIP.org je testovacia stránka, ktorá sa nanovo nastavuje každú noc, každému umožňuje otestovať najnovšiu stabilnú verziu SPIPu (s výberom funkcie redaktora alebo administrátora) jedným klikom a bez inštalácie.',
 	'descriptif_site_spip_doc' => 'CODE.SPIP.org je priestor pre dokumentáciu programu SPIP pre jeho aplikácie, zdrojový kód a jeho niektoré technické funkcie.',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_extension' => 'Príspevky',
 	'nom_groupe_spip_reference' => 'Dokumentácia',
 	'nom_site_spip_blog' => 'Blog o SPIPe',
-	'nom_site_spip_contrib' => 'SPIP-Contrib',
+	'nom_site_spip_contrib' => 'SPIP-Contrib', # MODIF
 	'nom_site_spip_core' => 'Jadro SPIPu',
 	'nom_site_spip_demo' => 'Demo stránka so SPIPom',
 	'nom_site_spip_doc' => 'Kód SPIPu',

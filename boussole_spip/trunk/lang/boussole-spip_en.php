@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'SPIP compass gathers "official" websites of the SPIP galaxy. For each website, logo, name, slogan and description are defined. Do not hesitate to use this compass on your own website for guiding visitors into the SPIP galaxy.',
 	'descriptif_site_spip_blog' => 'SPIP is a collaborative project, so SPIP-BLOG.net  gathers technical notes and announcements as well as self-mockeries, trolls and humorous articles. In this regard, it reflects the SPIP community spirit: tenderness first!.',
-	'descriptif_site_spip_contrib' => 'SPIP-CONTRIB.net is a collaborative website where external contributions are published: plugins, scripts, functions, templates, documentations, tip and tricks... are given to the community (e.g. download links) by SPIP users. Forums preserve relationship between users and developers.',
+	'descriptif_site_spip_contrib' => 'SPIP-CONTRIB.net is a collaborative website where external contributions are published: plugins, scripts, functions, templates, documentations, tip and tricks... are given to the community (e.g. download links) by SPIP users. Forums preserve relationship between users and developers.', # MODIF
 	'descriptif_site_spip_core' => 'CORE.SPIP.org gathers modification history of SPIP source code, issues tracking to manage bugs and improvements and a SPIP releases download area.',
 	'descriptif_site_spip_demo' => 'DEMO.SPIP.net is a test website reset every night. In one click and without having to install it, you can test, as administrator or editor, the SPIP latest stable release.',
 	'descriptif_site_spip_doc' => 'CODE.SPIP.net is a place where every API, fonction, constant, etc from the SPIP source code is detailed, analysed and comment (name, parameters, description and usage).',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_extension' => 'Contributions',
 	'nom_groupe_spip_reference' => 'Documentation',
 	'nom_site_spip_blog' => 'SPIP Blog',
-	'nom_site_spip_contrib' => 'SPIP-Contrib',
+	'nom_site_spip_contrib' => 'SPIP-Contrib', # MODIF
 	'nom_site_spip_core' => 'SPIP Core',
 	'nom_site_spip_demo' => 'SPIP Demo',
 	'nom_site_spip_doc' => 'SPIP Code',
