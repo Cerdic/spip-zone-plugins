@@ -2,10 +2,44 @@
 	<fieldset>
 		[<h3 class="legend">(#ENV{documents_legende,<:diogene_documents:legende_documents:>})</h3>]
 		<ul>
+			<BOUCLE_documents(DOCUMENTS){id_article}{tout}>
+			<li class="editer editer_document_#ID_DOCUMENT">
+				<div class="logo_document">
+				#LOGO_DOCUMENT
+				</div>
+				<ul>
+					[(#VAL{titre}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+					<li class="editer editer_titre_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{titre_#ID_DOCUMENT}|oui)erreur]">
+						<label for="titre_#ID_DOCUMENT">[(#ENV{mode}|=={document}|?{<:medias:entree_titre_document:>,<:medias:entree_titre_image:>})]</label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+						]<input type='text' class='text' name='titre_#ID_DOCUMENT' id='titre_#ID_DOCUMENT' value="[(#ENV**{titre_#ID_DOCUMENT,''})]" />
+					</li>]
+					[(#VAL{descriptif}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+					<li class="editer editer_descriptif_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{descriptif_#ID_DOCUMENT}|oui)erreur]">
+						<label for="descriptif_#ID_DOCUMENT"><:info_description:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif_#ID_DOCUMENT})</span>
+						]<textarea name='descriptif_#ID_DOCUMENT' id='descriptif_#ID_DOCUMENT'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif_#ID_DOCUMENT,''})]</textarea>
+					</li>]
+					[(#VAL{credits}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+					<li class="editer editer_credits_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{credits_#ID_DOCUMENT}|oui)erreur]">
+						<label for="credits_#ID_DOCUMENT"><:medias:label_credits:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits_#ID_DOCUMENT})</span>
+						]<input type='text' class='text' name='credits_#ID_DOCUMENT' id='credits_#ID_DOCUMENT' value="[(#ENV**{credits_#ID_DOCUMENT,''})]" />
+					</li>]
+					<li class="editer editer_supprimer_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{supprimer_#ID_DOCUMENT}|oui)erreur]">
+						<div class="choix">
+							<input type="checkbox" name="supprimer_#ID_DOCUMENT" id="supprimer_#ID_DOCUMENT"[(#ENV{supprimer_#ID_DOCUMENT}|oui)checked="checked"] />
+							<label for="supprimer_#ID_DOCUMENT"><:lien_supprimer:></label>
+						</div>
+					</li>
+				</ul>
+			</li>
+			</BOUCLE_documents>
 			<li class='editer editer_fichier_upload[ (#ENV**{erreurs}|table_valeur{fichier_upload}|oui)erreur]'>
 				<label for='fichier_upload#GET{domid}'><:bouton_upload:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier_upload})</span>
 				]<input class='file multi' type="file" name="fichier_upload[]" value='#ENV{fichier_upload}' id="fichier_upload#GET{domid}" size='11' />
+				<input type="hidden" name="joindre_upload" value="on" />
 				<!--editer_fichier_upload-->
 				<script type="text/javascript">
 				var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
