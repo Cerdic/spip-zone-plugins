@@ -294,8 +294,10 @@ function phraser_tag($rr) {
 }
 
 function embed_ressource($res) {
+	// si la ressource a un embed, charger le modele ressource_embed
+	// qui l'encapsule dans un <figure>, ajoute eventuellement une légende etc.
 	if (isset($res['embed'])) {
-		return $res['embed'];
+		return recuperer_fond('modeles/ressource_embed', $res);
 	}
 
 	// si la ressource est un document, renvoyer <doc1>

@@ -1,0 +1,32 @@
+[(#REM)
+
+	Modele pour <doc> en <figure>
+
+	Dans le cas d'une simple image -mode=image-, on affiche
+	le document lui-meme, sans lien de telechargement
+]
+
+[(#SET{logo,#LOGODOCUMENT})]
+[(#SET{fichier,[(#GET{logo}||extraire_attribut{src})]})]
+[(#SET{width,[(#GET{logo}||extraire_attribut{width})]})]
+[(#SET{height,[(#GET{logo}||extraire_attribut{height})]})]
+#SET{url,#ENV{lien,#HREF}}
+
+[(#SET{captionspip,[
+	<div class='#EDIT_TITRE spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE|sinon{[(#DESCRIPTIF*|oui)]})</strong></div>[
+	<div class='#EDIT_DESCRIPTIF spip_doc_descriptif quiet'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF|PtoBR)[(#NOTES|PtoBR)]</div>
+	]
+]
+})]
+
+[(#SET{caption,[(#CAPTION
+	|sinon{#LEGEND}
+	|sinon{#LEGENDE}
+	|propre|PtoBR
+	|sinon{#GET{captionspip}}
+)]})]
+
+<figure class='[spip_document_(#ID_DOCUMENT) ]spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'>
+[<span class="(#IMGCLASS)">][(#ENV*{embed})][(#IMGCLASS|?{</span>})][
+<figcaption>(#GET{caption})</figcaption>]
+</figure>
