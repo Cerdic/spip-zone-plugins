@@ -56,11 +56,17 @@
 			else if((statut_defaut != 'publie') && ($(this).val() != 'poubelle'))
 				jQuery(this).parents('form').unbind('form-pre-serialize');
 			else{
-				if(jQuery(this).val() == 'poubelle')
-					var message = '<:diogene:message_confirm_poubelle:>';
-				else if(statut_defaut == 'publie')
-					var message = '<:diogene:message_confirm_depublier:>';
-				if (message) {
+				if(jQuery(this).val() == 'poubelle'){
+					if(jQuery('.editer_liste_medias input:checked').size() > 1)
+						var message = '<:emballe_medias:message_confirm_poubelle_plusieurs:>';
+					else
+						var message = '<:diogene:message_confirm_poubelle:>';
+				}else if(statut_defaut == 'publie'){
+					if(jQuery('.editer_liste_medias input:checked').size() > 1)
+						var message = '<:diogene:message_confirm_depublier_plusieurs:>';
+					else
+						var message = '<:diogene:message_confirm_depublier:>';
+				}if (message) {
 					jQuery(this).parents('form').unbind('form-pre-serialize').bind('form-pre-serialize', function(event, $form, formOptions, veto){
 						if (!confirm(message)) {
 							jQuery(this).removeClass('loading');
