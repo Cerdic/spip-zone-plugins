@@ -23,7 +23,7 @@ function formater_tableau ($chaine)
                 $listing[$cle] = formater_valeur($valeur);
             }
         }
-    } elseif (preg_match("|", $chaine)) {
+    } else if (preg_match("/\|/", $chaine)){
         $listing[] = formater_valeur($chaine);
     }
     return $listing;
