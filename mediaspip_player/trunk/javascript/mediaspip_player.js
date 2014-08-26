@@ -5,7 +5,7 @@
  * Player html5 pour les balises <audio> et <video>
  * avec fallback vers version flash pour flv/mp4/mp3/aac
  * 
- * $version : 1.3.0
+ * $version : 1.3.1
  * © GNU/GPL v3 - kent1 (http://kent1.info - kent1@arscenic.info)
  * cf : http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/html5-player-video-sound-media/
  * 
@@ -93,6 +93,7 @@
 	var slider = (typeof($.ui) == 'object') && (typeof($.ui.slider) == 'function'),
 		cookies = (typeof($.cookie) == 'function'),
 		stop_message_timeout = false,
+		error_message = false,
 		browser = $.browser,
 		IS_IE = browser.msie,
 		UA = navigator.userAgent,
@@ -137,7 +138,6 @@
 			options = $.extend(defaults, options);
 
 			var media = $(this), id = media[0], playable = false;
-				
 
 			if(media.is(':hidden')) media.show();
 			if(media.is('audio')) options.movieSize = null;
@@ -147,6 +147,7 @@
 			 */
 			if(typeof(id) != "undefined" && typeof(id.canPlayType) != "undefined"){
 				id.isFullScreen = id.has_html5_cover = false;
+				
 				media.children('source').each(function(){
 					if(!$(this).attr('type').match('flv') && id.canPlayType($(this).attr('type')) !== ''){
 						if(($(this).attr('type').match('video/ogg') || $(this).attr('type').match('video/webm')) && /Safari/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)){
@@ -167,7 +168,9 @@
 				if(!playable && (typeof($.fn.ms_test_fallback) == 'function'))
 					media.ms_test_fallback(options);
 				else{
-					var	wrapper = control = false,
+					var	wrapper = false,
+						control = false,
+						controls = false,
 						class_wrapper = '',
 						styles = ' style="',
 						style = true,
@@ -272,7 +275,7 @@
 
 					if(id.type== 'video' && !height){
 						height = media.parents('.media_wrapper').find('.controls').height();
-						media.parents('.media_wrapper').add(media).height(height);
+						media.parents('.media_wrapper').height(height);
 					}
 
 					if(wrapper){
@@ -293,7 +296,7 @@
 							progress_elapse = control.find('.progress_elapsed_time');
 						media.ms_resize_controls();
 					}
-
+					
 					//if(!IS_IPAD){
 						media.bind("loadedmetadata",function(e){
 							id.has_metadatas = true;
@@ -550,6 +553,7 @@
 						wrapper.css({width:'auto'}).removeAttr('width');
 						media.animate({width:'100%'},'fast').ms_resize_controls();
 					}
+					media.removeAttr('height');
 					var handler_media_resize = function(){
 						if(!id.isFullScreen){
 							wrapper.css({width:'auto'}).css({height:(wrapper.width()/id.ratio)+'px'});
@@ -568,8 +572,11 @@
 							wrapper.height(media.width()/id.ratio);
 							media.animate({height:'100%',width:'100%'},'fast').removeAttr('height').removeAttr('width').ms_resize_controls();
 						}
-					}else if(id.type == 'video')
+					}else if(id.type == 'video'){
 						wrapper.add(media).width(media.height()*id.ratio).removeAttr('width');
+						media.animate({width:'100%'},'fast')
+						media.removeAttr('height');
+					}
 				}
 
 				if(id.addcontrols){
