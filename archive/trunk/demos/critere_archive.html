@@ -3,6 +3,8 @@
 <h3>Archivés et publiés en même temps avec <code>{archive}</code></h3>
 
 <B_articles>
+(#GRAND_TOTAL)
+
 #ANCRE_PAGINATION
 <ul>
 <BOUCLE_articles(ARTICLES){archive}{pagination 20}>
@@ -17,6 +19,8 @@ Pas d'archives
 <h3>Seulement les archives avec <code>{archive seulement}</code></h3>
 
 <B_articles_archives>
+(#GRAND_TOTAL)
+
 #ANCRE_PAGINATION
 <ul>
 <BOUCLE_articles_archives(ARTICLES){archive seulement}{pagination 20}>
@@ -27,3 +31,18 @@ Pas d'archives
 </B_articles_archives>
 Pas d'archives
 <//B_articles_archives>
+
+<h3>Tous les articles publiés</h3>
+
+<B_articles_publies>
+(#GRAND_TOTAL)
+
+#ANCRE_PAGINATION
+<ul>
+<BOUCLE_articles_publies(ARTICLES){pagination 20}>
+<li>#TITRE[(#STATUT|=={archive}|oui) (Archive)]</li>
+</BOUCLE_articles_publies>
+</ul>
+<div class="pagination">#PAGINATION</div>
+</B_articles_publies>
+<//B_articles_publies>

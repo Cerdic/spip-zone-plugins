@@ -13,10 +13,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return $flux array
  * 	Le contexte du pipeline modifié
  */
-function archive_affiche_milieu($flux){
-	if($flux['args']['exec'] == 'rubrique'){
+function archive_affiche_enfants($flux){
+	if($flux['args']['exec'] == 'rubrique')
 		$flux['data'] .= recuperer_fond('prive/objets/liste/articles', array('titre'=>_T('archive:titre_archives_rubrique'),'statut'=>'archive','id_rubrique'=>$flux['args']["id_rubrique"]));
-	}
 	return $flux;
 }
 

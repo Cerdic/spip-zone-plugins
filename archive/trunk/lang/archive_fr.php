@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'jours' => 'jour(s)',
 	
 	// L
+	'label_archiver_publier' => 'Les archives sont visibles dans l\'espace public',
 	'legend_arch_auto' => 'Param&egrave;tres d\'archivage automatique',
 	
 	//N
