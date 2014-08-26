@@ -1,8 +1,8 @@
 <paquet
 	prefix="archive"
 	categorie="date"
-	version="1.0.0"
-	etat="dev"
+	version="1.1.0"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/archive-32.png"
 	schema="0.3.0"
@@ -22,5 +22,5 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/archive.php" />
 	<pipeline nom="post_edition" inclure="archive_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="archive_pipelines.php" />
-	<pipeline nom="affiche_milieu" inclure="archive_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="archive_pipelines.php" />
 </paquet>
