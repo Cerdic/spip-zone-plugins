@@ -1,0 +1,23 @@
+<B_admins>
+<table class="table spip liste">
+    <caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_auteur_webmestre,projets_site:info_nb_auteurs_webmestres})]</caption>
+    <thead>
+        <tr>
+            <th class="secondaire id"><:projets_site:label_auteur_id:></th>
+            <th class="secondaire login"><:projets_site:label_auteur_login:></th>
+            <th class="secondaire email"><:projets_site:label_auteur_email:></th>
+            <th class="principale statut"><:projets_site:label_auteur_nom:></th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_admins (DATA) {source table, (#ENV{array})} {si (#ENV{array}|is_array)} {par valeur}><B_admin>
+        <tr><BOUCLE_admin (DATA) {source table, #VALEUR}>
+            <td>[(#VALEUR|trim)]</td></BOUCLE_admin>
+        </tr>
+    </B_admin>
+    </BOUCLE_admins>
+    </tbody>
+</table><!-- /.table spip liste -->
+</B_admins>
+    [(#ENV{array})]
+<//B_admins>

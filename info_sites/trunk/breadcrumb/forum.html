@@ -11,10 +11,10 @@
 	[(#GET{objet}|oui)
 	#INCLURE{fond=breadcrumb/inc-objet,id_objet=#GET{id_objet},objet=#GET{objet},expose=''}
 	][(#GET{objet}|non)
-	<li><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="divider"> &gt; </span></li>
+	<li><a href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
 	]
 	<BOUCLE_for(FORUMS){id_forum}>
-	<li><a href="#URL_FORUM">[(#TITRE|couper{80})]</a><span class="divider"> &gt; </span></li>
+	<li><a href="#URL_FORUM">[(#TITRE|couper{80})]</a></li>
 	</BOUCLE_for>
 
 	<li class="active"><span><:poster_message:></span></li>

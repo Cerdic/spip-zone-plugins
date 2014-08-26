@@ -7,10 +7,15 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+    // B
+    'btn_diagnostic_iso' => 'Diagnostic ISO',
+
     // C
     'cfg_exemple' => 'Exemple',
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
+
+    // E
     'editer_liens_contact' => '&Eacute;diter les liens de ce contact',
     'editer_liens_organisation' => '&Eacute;diter les liens de cette organisation',
     'editer_liens_projet' => '&Eacute;diter les liens de ce projet',
@@ -32,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_nb_projets_sites' => '@nb@ sites',
     'info_nombre_contacts' => 'Contacts liés',
     'info_nombre_projets' => 'Nombre de projets',
+    'info_sites_titre' => 'Info Sites',
 
     // M
     'menu_organisations' => 'Organisations',
@@ -40,9 +46,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'menu_statistiques' => 'Statistiques',
 
     // P
+    'page_diagnostic_iso' => 'Diagnostic ISO',
 
     // S
-    'info_sites_titre' => 'Info Sites',
 
     // T
     'titre_page_configurer_info_sites' => 'Configurer le plugin Info Sites',
