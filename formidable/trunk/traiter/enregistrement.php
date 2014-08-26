@@ -53,7 +53,8 @@ function traiter_enregistrement_dist($args, $retours){
     		$options =  $traitements_formulaire['enregistrement'];
 
        		if (isset($options['multiple']) && $options['multiple'] == ''
-    			&& isset($options['modifiable']) && $options['modifiable'] == 'on') {
+	    			&& isset($options['modifiable']) && $options['modifiable'] == 'on'
+					&& is_array($reponses) && count($reponses) > 0) {
 		    	$id_formulaires_reponse = max($reponses);
     		}
     	}
