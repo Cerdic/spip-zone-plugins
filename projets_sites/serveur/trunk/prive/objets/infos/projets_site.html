@@ -4,11 +4,12 @@
 <div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_SITE</p></div>
 
 [(#AUTORISER{supprimer, projetssite, #ID_SITE}|oui)
-    [(#BOUTON_ACTION{[(#CHEMIN_IMAGE{projets_site-del-24.png}
-        |balise_img{<:projets_site:supprimer_projets_site:>}|inserer_attribut{class,co_middle}
-        |concat{' ',<:projets_site:supprimer_projets_site:>})],
-        [(#URL_ACTION_AUTEUR{supprimer_projets_site, #ID_SITE, #URL_ECRIRE{projets_sites}})],
-        ajax icone s24 horizontale danger projets_site-del-24,<:projets_site:confirmer_supprimer_projets_site:>\n\n<:projets_site:explication_supprimer_projets_site:>})]
+	[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{projets_site-del-24.png}
+		|balise_img{<:projets_site:supprimer_projets_site:>}|inserer_attribut{class,co_middle}
+		|concat{' ',<:projets_site:supprimer_projets_site:>})],
+		[(#URL_ACTION_AUTEUR{supprimer_projets_site,#ID_SITE,#URL_ECRIRE{projets_sites}})],
+		ajax icone s24 horizontale danger projets_site-del-24,<:projets_site:confirmer_supprimer_projets_site:>\n\n<:projets_site:explication_supprimer_projets_site:>})]
 ]
+
 </div>
 </BOUCLE_projets_site>

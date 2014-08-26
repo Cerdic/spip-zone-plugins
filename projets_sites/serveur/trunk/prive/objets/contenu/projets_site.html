@@ -2,22 +2,22 @@
 <BOUCLE_projets_site(PROJETS_SITES){id_site}>
 
 	[<div class="champ contenu_type_site[ (#TYPE_SITE*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_type_site:> : </div>
+		<div class="label visible"><:projets_site:label_type_site:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{type_site} type_site'>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)</div>
 	</div>]
 
 	[<div class="champ contenu_uniqid[ (#UNIQID*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_uniqid:> : </div>
+		<div class="label visible"><:projets_site:label_uniqid:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{uniqid} uniqid'>(#UNIQID)</div>
 	</div>]
 
 	[<div class="champ contenu_webservice[ (#WEBSERVICE*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_webservice:> : </div>
+		<div class="label visible"><:projets_site:label_webservice:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{webservice} webservice'><a href="#WEBSERVICE" class="spip_out">(#WEBSERVICE)</a></div>
 	</div>]
 
 	[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_descriptif:> : </div>
+		<div class="label visible"><:projets_site:label_descriptif:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_nom} descriptif'>(#DESCRIPTIF)</div>
 	</div>]
 
@@ -25,17 +25,17 @@
 <div class="champ fieldset"><h3 class="legend fo_fieldset"><:projets_site:label_fo_fieldset:></h3></div>
 
 	[<div class="champ contenu_fo_url[ (#FO_URL*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_fo_url:> : </div>
+		<div class="label visible"><:projets_site:label_fo_url:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{fo_url} fo_url'>(#FO_URL)</div>
 	</div>]
 
 	[<div class="champ contenu_fo_login[ (#FO_LOGIN*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_fo_login:> : </div>
+		<div class="label visible"><:projets_site:label_fo_login:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{fo_login} fo_login'>(#FO_LOGIN)</div>
 	</div>]
 
 	[<div class="champ contenu_fo_password[ (#FO_PASSWORD*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_fo_password:> : </div>
+		<div class="label visible"><:projets_site:label_fo_password:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{fo_password} fo_password'>(#FO_PASSWORD)</div>
 	</div>]
 
@@ -43,17 +43,17 @@
 <div class="champ fieldset"><h3 class="legend bo_fieldset"><:projets_site:label_bo_fieldset:></h3></div>
 
 	[<div class="champ contenu_bo_url[ (#BO_URL*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_bo_url:> : </div>
+		<div class="label visible"><:projets_site:label_bo_url:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{bo_url} bo_url'>(#BO_URL)</div>
 	</div>]
 
 	[<div class="champ contenu_bo_login[ (#BO_LOGIN*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_bo_login:> : </div>
+		<div class="label visible"><:projets_site:label_bo_login:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{bo_login} bo_login'>(#BO_LOGIN)</div>
 	</div>]
 
 	[<div class="champ contenu_bo_password[ (#BO_PASSWORD*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_bo_password:> : </div>
+		<div class="label visible"><:projets_site:label_bo_password:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{bo_password} bo_password'>(#BO_PASSWORD)</div>
 	</div>]
 
@@ -61,17 +61,17 @@
 <div class="champ fieldset"><h3 class="legend logiciel_fieldset"><:projets_site:label_logiciel_fieldset:></h3></div>
 
 	[<div class="champ contenu_logiciel_nom[ (#LOGICIEL_NOM*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_nom:> : </div>
+		<div class="label visible"><:projets_site:label_logiciel_nom:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_nom} logiciel_nom'>(#LOGICIEL_NOM)</div>
 	</div>]
 
 	[<div class="champ contenu_logiciel_version[ (#LOGICIEL_VERSION*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_version:> : </div>
+		<div class="label visible"><:projets_site:label_logiciel_version:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_version} logiciel_version'>(#LOGICIEL_VERSION)</div>
 	</div>]
 
 	[<div class="champ contenu_logiciel_revision[ (#LOGICIEL_REVISION*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_revision:> : </div>
+		<div class="label visible"><:projets_site:label_logiciel_revision:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_revision} logiciel_revision'>(#LOGICIEL_REVISION)</div>
 	</div>]
 
@@ -81,7 +81,7 @@
 ]
 <B_plugins>
 	<div class="champ contenu_logiciel_plugins">
-		<div class="label visible"><:projets_site:label_logiciel_plugins:> : </div>
+		<div class="label visible"><:projets_site:label_logiciel_plugins:></div>
 		<div dir='#LANG_DIR' class='#EDIT{logiciel_plugins} logiciel_plugins clearfix'>
 		<table class="table spip liste">
 			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_plugin,projets_site:info_nb_plugins})]</caption>
@@ -107,7 +107,7 @@
 	</div>
 </B_plugins>
 	[<div class="champ contenu_logiciel_plugins[ (#LOGICIEL_PLUGINS*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_logiciel_plugins:> : </div>
+		<div class="label visible"><:projets_site:label_logiciel_plugins:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_plugins} logiciel_plugins'>(#LOGICIEL_PLUGINS)</div>
 	</div>]
 <//B_plugins>
@@ -120,10 +120,10 @@
 ]
 <B_admins>
 	<div class="champ contenu_auteurs_admin[ (#AUTEURS_ADMIN*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_auteurs_admin:> : </div>
+		<div class="label visible"><:projets_site:label_auteurs_admin:></div>
 		<div dir='#LANG_DIR' class='#EDIT{auteurs_admin} auteurs_admin clearfix'>
 		<table class="table spip liste">
-			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_auteur_admin,projets_site:info_nb_auteurs_admins})]</caption>
+			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_auteur_admin,projets_site:info_nb_auteurs_admin})]</caption>
 			<thead>
 				<tr>
 					<th class="secondaire id"><:projets_site:label_auteur_id:></th>
@@ -145,7 +145,7 @@
 	</div>
 </B_admins>
 	[<div class="champ contenu_auteurs_admin[ (#AUTEURS_ADMIN*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_auteurs_admin:> : </div>
+		<div class="label visible"><:projets_site:label_auteurs_admin:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{auteurs_admin} auteurs_admin'>(#AUTEURS_ADMIN)</div>
 	</div>]
 <//B_admins>
@@ -156,7 +156,7 @@
 ]
 <B_webmestres>
 	<div class="champ contenu_auteurs_webmestres[ (#AUTEURS_WEBMESTRES*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_auteurs_webmestres:> : </div>
+		<div class="label visible"><:projets_site:label_auteurs_webmestres:></div>
 		<div dir='#LANG_DIR' class='#EDIT{auteurs_webmestre} auteurs_webmestres clearfix'>
 		<table class="table spip liste">
 			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_auteur_webmestre,projets_site:info_nb_auteurs_webmestres})]</caption>
@@ -181,7 +181,7 @@
 	</div>
 </B_webmestres>
 	[<div class="champ contenu_auteurs_webmestre[ (#AUTEURS_WEBMESTRES*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_auteurs_webmestres:> : </div>
+		<div class="label visible"><:projets_site:label_auteurs_webmestres:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{auteurs_webmestres} auteurs_webmestres'>(#AUTEURS_WEBMESTRES)</div>
 	</div>]
 <//B_webmestres>
@@ -190,51 +190,51 @@
 <div class="champ fieldset"><h3 class="legend serveur_fieldset"><:projets_site:label_serveur_fieldset:></h3></div>
 
 	[<div class="champ contenu_serveur_nom[ (#SERVEUR_NOM*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_serveur_nom:> : </div>
+		<div class="label visible"><:projets_site:label_serveur_nom:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{serveur_nom} serveur_nom'>(#SERVEUR_NOM)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_port[ (#SERVEUR_PORT*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_serveur_port:> : </div>
+		<div class="label visible"><:projets_site:label_serveur_port:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{serveur_port} serveur_port'>(#SERVEUR_PORT)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_path[ (#SERVEUR_PATH*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_serveur_path:> : </div>
+		<div class="label visible"><:projets_site:label_serveur_path:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{serveur_path} serveur_path'>(#SERVEUR_PATH)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_logiciel[ (#SERVEUR_LOGICIEL*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_serveur_logiciel:> : </div>
+		<div class="label visible"><:projets_site:label_serveur_logiciel:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{serveur_logiciel} serveur_logiciel'>(#SERVEUR_LOGICIEL)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_surveillance[ (#SERVEUR_SURVEILLANCE*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_serveur_surveillance:> : </div>
+		<div class="label visible"><:projets_site:label_serveur_surveillance:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{serveur_surveillance} serveur_surveillance'>(#SERVEUR_SURVEILLANCE)</div>
 	</div>]
 
 <!-- Apache -->
 <div class="champ fieldset"><h3 class="legend apache_fieldset"><:projets_site:label_apache_fieldset:></h3></div>
 	[<div class="champ contenu_apache_modules[ (#APACHE_MODULES*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_apache_modules:> : </div>
+		<div class="label visible"><:projets_site:label_apache_modules:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{apache_modules} apache_modules'>(#APACHE_MODULES)</div>
 	</div>]
 
 <!-- PHP -->
 <div class="champ fieldset"><h3 class="legend php_fieldset"><:projets_site:label_php_fieldset:></h3></div>
 	[<div class="champ contenu_php_version[ (#PHP_VERSION*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_php_version:> : </div>
+		<div class="label visible"><:projets_site:label_php_version:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{php_version} php_version'>(#PHP_VERSION)</div>
 	</div>]
 
 	[<div class="champ contenu_php_memory[ (#PHP_MEMORY*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_php_memory:> : </div>
+		<div class="label visible"><:projets_site:label_php_memory:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{php_memory} php_memory'>(#PHP_MEMORY)</div>
 	</div>]
 
 	[<div class="champ contenu_php_extensions[ (#PHP_EXTENSIONS*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_php_extensions:> : </div>
+		<div class="label visible"><:projets_site:label_php_extensions:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{php_extensions} php_extensions'>(#PHP_EXTENSIONS)</div>
 	</div>]
 
@@ -242,17 +242,17 @@
 <div class="champ fieldset"><h3 class="legend versioning_fieldset"><:projets_site:label_versioning_fieldset:></h3></div>
 
 	[<div class="champ contenu_versioning_type[ (#VERSIONING_TYPE*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_versioning_type:> : </div>
+		<div class="label visible"><:projets_site:label_versioning_type:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{versioning_type} versioning_type'>(#VERSIONING_TYPE)</div>
 	</div>]
 
 	[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_versioning_path:> : </div>
+		<div class="label visible"><:projets_site:label_versioning_path:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{versioning_path} versioning_path'>(#VERSIONING_PATH)</div>
 	</div>]
 
 	[<div class="champ contenu_versioning_trac[ (#VERSIONING_TRAC*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_versioning_trac:> : </div>
+		<div class="label visible"><:projets_site:label_versioning_trac:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{versioning_trac} versioning_trac'>(#VERSIONING_TRAC)</div>
 	</div>]
 
@@ -260,22 +260,22 @@
 <div class="champ fieldset"><h3 class="legend sas_fieldset"><:projets_site:label_sas_fieldset:></h3></div>
 
 	[<div class="champ contenu_sas_protocole[ (#SAS_PROTOCOLE*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sas_protocole:> : </div>
+		<div class="label visible"><:projets_site:label_sas_protocole:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sas_protocole} sas_protocole'>(#SAS_PROTOCOLE)</div>
 	</div>]
 
 	[<div class="champ contenu_sas_serveur[ (#SAS_SERVEUR*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sas_serveur:> : </div>
+		<div class="label visible"><:projets_site:label_sas_serveur:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sas_serveur} sas_serveur'>(#SAS_SERVEUR)</div>
 	</div>]
 
 	[<div class="champ contenu_sas_login[ (#SAS_LOGIN*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sas_login:> : </div>
+		<div class="label visible"><:projets_site:label_sas_login:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sas_login} sas_login'>(#SAS_LOGIN)</div>
 	</div>]
 
 	[<div class="champ contenu_sas_password[ (#SAS_PASSWORD*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sas_password:> : </div>
+		<div class="label visible"><:projets_site:label_sas_password:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sas_password} sas_password'>(#SAS_PASSWORD)</div>
 	</div>]
 
@@ -283,42 +283,42 @@
 <div class="champ fieldset"><h3 class="legend sgbd_fieldset"><:projets_site:label_sgbd_fieldset:></h3></div>
 
 	[<div class="champ contenu_sgbd_type[ (#SGBD_TYPE*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_type:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_type:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_type} sgbd_type'>(#SGBD_TYPE)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_version[ (#SGBD_VERSION*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_version:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_version:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_version} sgbd_version'>(#SGBD_VERSION)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_serveur[ (#SGBD_SERVEUR*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_serveur:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_serveur:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_serveur} sgbd_serveur'>(#SGBD_SERVEUR)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_port[ (#SGBD_PORT*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_port:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_port:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_port} sgbd_port'>(#SGBD_PORT)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_nom[ (#SGBD_NOM*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_nom:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_nom:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_nom} sgbd_nom'>(#SGBD_NOM)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_prefixe[ (#SGBD_PREFIXE*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_prefixe:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_prefixe:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_prefixe} sgbd_prefixe'>(#SGBD_PREFIXE)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_login[ (#SGBD_LOGIN*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_login:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_login:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_login} sgbd_login'>(#SGBD_LOGIN)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_password[ (#SGBD_PASSWORD*|strlen|?{'',vide})]">
-		<div class="label visible"><:projets_site:label_sgbd_password:> : </div>
+		<div class="label visible"><:projets_site:label_sgbd_password:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_password} sgbd_password'>(#SGBD_PASSWORD)</div>
 	</div>]
 
@@ -326,32 +326,32 @@
 <div class="champ fieldset"><h3 class="legend autres_fieldset"><:projets_site:label_autres_fieldset:></h3></div>
 
 [<div class="champ contenu_sso[ (#SSO*|strlen|?{'',vide})]">
-	<div class="label visible"><:projets_site:label_sso:> : </div>
+	<div class="label visible"><:projets_site:label_sso:></div>
 	<div dir='#LANG_DIR' class='span #EDIT{sso} sso'>(#SSO)</div>
 </div>]
 
 [<div class="champ contenu_perimetre_acces[ (#PERIMETRE_ACCES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projets_site:label_perimetre_acces:> : </div>
+	<div class="label visible"><:projets_site:label_perimetre_acces:></div>
 	<div dir='#LANG_DIR' class='span #EDIT{perimetre_acces} perimetre_acces'>(#PERIMETRE_ACCES)</div>
 </div>]
 
 [<div class="champ contenu_statistiques[ (#STATISTIQUES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projets_site:label_statistiques:> : </div>
+	<div class="label visible"><:projets_site:label_statistiques:></div>
 	<div dir='#LANG_DIR' class='span #EDIT{statistiques} statistiques'>(#STATISTIQUES)</div>
 </div>]
 
 [<div class="champ contenu_moteur_recherche[ (#MOTEUR_RECHERCHE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projets_site:label_moteur_recherche:> : </div>
+	<div class="label visible"><:projets_site:label_moteur_recherche:></div>
 	<div dir='#LANG_DIR' class='span #EDIT{moteur_recherche} moteur_recherche'>(#MOTEUR_RECHERCHE)</div>
 </div>]
 
 [<div class="champ contenu_autres_outils[ (#AUTRES_OUTILS*|strlen|?{'',vide})]">
-	<div class="label visible"><:projets_site:label_autres_outils:> : </div>
+	<div class="label visible"><:projets_site:label_autres_outils:></div>
 	<div dir='#LANG_DIR' class='span #EDIT{autres_outils} autres_outils'>(#AUTRES_OUTILS)</div>
 </div>]
 
 [<div class="champ contenu_remarques[ (#REMARQUES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projets_site:label_remarques:> : </div>
+	<div class="label visible"><:projets_site:label_remarques:></div>
 	<div dir='#LANG_DIR' class='span #EDIT{remarques} remarques'>(#REMARQUES)</div>
 </div>]
 
