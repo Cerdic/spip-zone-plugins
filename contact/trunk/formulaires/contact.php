@@ -110,7 +110,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	if($tracer){
 		$trace=explode('-',$tracer);
 		if( !(count($trace)==2) or !(intval($trace[1])>0) ){
-			$erreurs['message_erreur'] = 'Une erreur de transmission s’est produite, merci de renouveler votre demande.';
+			$erreurs['message_erreur'] = _T('contact:message_erreur_transmission');
 		}
 	}
 	if (!_request('destinataire'))
@@ -138,7 +138,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 		$erreurs['texte'] = _T('contact:forum_attention_nbre_caracteres',array('nbre_caract'=>$texte_min));
 
 	if ($nobot=_request('nobot'))
-		$erreurs['nobot'] = 'Vous êtes un robot. Méchant robot.';
+		$erreurs['nobot'] = _T('contact:message_erreur_robot');
 
 	// On s'occupe des pièces jointes.
 	$pj_fichiers = $_FILES['pj_fichiers'];
