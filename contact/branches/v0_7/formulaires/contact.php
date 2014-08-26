@@ -110,7 +110,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	if($tracer){
 		$trace=explode('-',$tracer);
 		if( !(count($trace)==2) or !(intval($trace[1])>0) ){
-			$erreurs['message_erreur'] = 'Une erreur de transmission s\'est produite, merci de renouveller vôtre demande.';
+			$erreurs['message_erreur'] = 'Une erreur de transmission s’est produite, merci de renouveler votre demande.';
 		}
 	}
 	if (!_request('destinataire'))
