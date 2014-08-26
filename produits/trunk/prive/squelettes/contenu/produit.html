@@ -11,8 +11,10 @@
 	]
 
 	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{produit-24.png}|balise_img{produit,cadre-icone})]</h1>
-	<h2 class="prix_ht"><:prix:prix_ht{prix=#PRIX_HT}:></h2>
-	[(#REFERENCE)<h4 class="reference"><:produits:produit_reference{reference=#REFERENCE}:></h4>]
+	<h2 class="prix_ht"><:produits:produit_champ_prix_ht_label:> : [(#PRIX_HT*|appliquer_filtre{prix_formater,true})]</h2>
+	[(#CONFIG{produits/editer_ttc}|oui)<h2 class="prix_ttc"><:produits:produit_champ_prix_ttc_label:> : [(#PLUGIN{prix}|?{#PRIX,#PRIX_HT|plus{#PRIX_HT|mult{#TAXE}}}|floatval|appliquer_filtre{prix_formater,true})]</h2>]
+	<h4>[(#TAXE|floatval|>{0}|?{<:produits:produit_champ_taxe_label:>,<:produits:configurer_taxe_defaut_label:>}) : ][(#TAXE|floatval|>{0}|?{#TAXE,#CONFIG{produits/taxe,0}}|mult{100})&nbsp;&#37;]</h4>
+	[(#REFERENCE|strlen|oui)<h4 class="reference"><:produits:produit_reference{reference=#REFERENCE}:></h4>]
 
 ],simple fiche_objet})]
 
