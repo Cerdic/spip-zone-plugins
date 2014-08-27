@@ -2,14 +2,14 @@
 	<nom><multi>[fr]Info SPIP</multi></nom>
 	<icon>prive/themes/spip/images/info_spip-32.png</icon>
 	<auteur>Teddy Payet</auteur>
-	<version>0.7.1</version>
+	<version>0.7.2</version>
 	<etat>test</etat>
 	<description><multi>
 	[fr]Ce plugin ne fait qu'afficher la configuration du site sur lequel il est actif.
 Il faut renseigner une clé dans la page de configuration pour que la page de config puisse être active.
 On affiche les informations équivalentes au plugin "Sites pour projets" avec qui il va de pair. Ce plugin est toutefois autonome.
 	</multi></description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Plugin-Info-SPIP</lien> <!-- URI de documentation -->
 	<fonctions>info_spip_fonctions.php</fonctions>
 	<prefix>info_spip</prefix>
 

@@ -1,11 +1,11 @@
 <paquet
 	prefix="info_spip"
 	categorie="outil"
-	version="0.7.1"
+	version="0.7.2"
 	etat="test"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/info_spip-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/Plugin-Info-SPIP"
 >
 
 	<nom>Info SPIP</nom>
