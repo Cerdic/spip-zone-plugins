@@ -1,28 +1,41 @@
 ﻿#CACHE{0}
-[(#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET})]
-
-<h1>Enregistrement des fichiers pour Cairn</h1>
-
-[(#VAL{cairn}|mkdir)]
-[(#VAL{cairn/.htaccess}|ecrire_fichier{"Deny from all"})]
-
-
-<BOUCLE_meta(RUBRIQUES){id_parent=115}{!par id_rubrique}{0,8}>
-<h2>#ID_RUBRIQUE:#TITRE</h2>
-#SET{numero,#TITRE|match{\d+?}}
-[(#VAL{cairn/#GET{numero}}|mkdir)]
-<ul>
-<BOUCLE_numero(ARTICLES){branche}{par page_debut}>
-#SET{file,cairn/#GET{numero}/Vacarme#GET{numero}-#PAGE_DEBUT.xml}
-<li>#GET{file}:
-	[(#GET{file}|file_exists|?{
-		OK,
-		[<b>(#GET{file}|ecrire_fichier{
-			#INCLURE{fond=cairn/article,id_article,numero=#_meta:TITRE}
-			|cairn_figure{cairn/#GET{numero}}
-		}|?{<span style='color:green'>sauvé</span>,<span style='color:red'>erreur</span>})</b>]
-	})]
-</li>
-</BOUCLE_numero>
-</ul>
-</BOUCLE_meta>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="#CHARSET">
+    <title>Enregistrement des fichiers pour Cairn</title>
+    <style>
+        span {white-space: nowrap;}
+        .statut {margin-right:1em; width:5%; display: inline-block;}
+        .ok{color:green;}.erreur{color:red;}
+        .table{display:table;}.cell {display:table-cell;}
+        .b1{width:100%;border-bottom:1px solid #ccc;padding:0.25em 0;}
+        .b2{width:30%;}
+        .b3{width:60%;}
+    </style>
+</head>
+<body>
+    <h1>Enregistrement des fichiers pour Cairn</h1>
+    [(#VAL{cairn}|mkdir)]
+    [(#VAL{cairn/.htaccess}|ecrire_fichier{"Deny from all"})]
+    <BOUCLE_meta(RUBRIQUES){id_parent=115}{!par titre}{id_rubrique?}>
+    <h2>#ID_RUBRIQUE:#TITRE</h2>
+    #SET{numero,#TITRE|match{\d+?}}
+    [(#VAL{cairn/#GET{numero}}|mkdir)]
+    <ol>
+    <BOUCLE_numero(ARTICLES){branche}{par page_debut}>
+        #SET{file,cairn/#GET{numero}/Vacarme#GET{numero}-#PAGE_DEBUT-#ID_ARTICLE.xml}
+        <li class="table b1"><span class="cell b2">#GET{file}</span>
+            [(#GET{file}|file_exists|?{
+                [<span class="cell b3"><span class="statut ok">Ok</span> <em>(#TITRE)</em>]</span>,
+                [<span class="cell b3">(#GET{file}|ecrire_fichier{
+                    #INCLURE{fond=cairn/article,id_article,numero=#_meta:TITRE}
+                    |cairn_figure{cairn/#GET{numero}}
+                }|?{<span class="statut ok">Sauvé</span>,<span class="statut erreur">Erreur</span>})[ <em>(#TITRE)</em>]</span>]
+            })]
+        </li>
+    </BOUCLE_numero>
+    </ol>
+    </BOUCLE_meta>
+</body>
+</html>
