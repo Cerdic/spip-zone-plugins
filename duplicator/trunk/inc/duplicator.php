@@ -43,9 +43,11 @@ function dupliquer_article($id_article,$rubrique){
 	$id_article = insert_article($rubrique);
 	revision_article($id_article, $infos_de_l_article);
 	
-	// On lui rend son statut
-	$c = array('statut' => $infos['statut']);
-	article_instituer($id_article, $c);
+	// Suivant la configuration, on lui rend son statut ou on le laisse en brouillon
+	if (strcmp(lire_config('duplicator/config/duplic_article_etat_pub'),"oui") == 0) {
+		$c = array('statut' => $infos['statut']);
+		article_instituer($id_article, $c);
+	}
 
 	// On lui remet ses mots clefs
 	remettre_les_mots_clefs($mots_clefs_de_l_article,$id_article,'article');
