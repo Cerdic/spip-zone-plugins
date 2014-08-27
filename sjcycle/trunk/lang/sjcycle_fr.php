@@ -116,6 +116,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_tooltip_box' => 'Paramètres tooltip et mediabox',
 	
 	// N
+	'noisette_alea_description' => 'Affiche un diaporama aléatoire jcycle des images du site',
+	'noisette_alea_nom_noisette' => 'Diaporama aléatoire',
+	'noisette_description' => 'Affiche un diaporama jcycle des images d\'un article',
+	'noisette_duree' => 'Durée (ms) :',
+	'noisette_fx' => 'Effet :',
+	'noisette_hauteur' => 'Hauteur (px) :',
+	'noisette_id_sjcycle' => 'Numéro de l\'article contenant les images',
+	'noisette_label_afficher_nom_site' => 'Afficher le nom du site sous le logo :',
+	'noisette_label_afficher_titre_menu' => 'Afficher le titre :',
+	'noisette_largeur' => 'Largeur (px) :',
+	'noisette_nb' => 'Nombre d\'images :',
+	'noisette_nom_noisette' => 'Diaporama',
+	'noisette_sites_description' => 'Affiche un diaporama des logos des sites enregistrés',
+	'noisette_sites_nom_noisette' => 'Diaporama des sites',
+	'noisette_titre_alea_defaut' => 'Au Hasard',
+	'noisette_titre_noisette' => 'Titre :',
+	'noisette_titre_sites_defaut' => 'Liens',
 	'non' => 'non',
 	
 	// O
