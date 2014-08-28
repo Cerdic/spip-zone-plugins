@@ -63,4 +63,3 @@ function autoriser_article_dupliquer($faire, $type='', $id=0, $qui = NULL, $opt 
 }
 
 ?>
-
