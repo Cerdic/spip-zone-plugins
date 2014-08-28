@@ -1,6 +1,5 @@
 - Ajouter un import "massif" par fichier csv
 
 Interaction avec le plugin info_spip (fichier xml -> ?page=info_spip&cle=xxxxxxxxx) :
-- Permettre le remplissage du formulaire par le biais du webservice
 - Sur la page de site (dans le privé), avoir un bouton pour un diagnostic "iso" avec le site en ligne
 - Ajouter un cron pour mise à jour des infos

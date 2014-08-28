@@ -31,7 +31,10 @@ function formater_tableau ($chaine)
 
 function formater_valeur ($valeur)
 {
-    $valeur = explode("|", $valeur);
-    return $valeur;
+    $tableau = explode("|", $valeur);
+    foreach ($tableau as $key => $value) {
+        $tableau[$key] = trim($value);
+    }
+    return $tableau;
 }
 ?>
