@@ -5,7 +5,7 @@
  * Player html5 pour les balises <audio> et <video>
  * avec fallback vers version flash pour flv/mp4/mp3/aac
  * 
- * $version : 1.3.1
+ * $version : 1.3.2
  * © GNU/GPL v3 - kent1 (http://kent1.info - kent1@arscenic.info)
  * cf : http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/html5-player-video-sound-media/
  * 
@@ -28,7 +28,6 @@
  * 	- "adapt" fais prendre la largeur du bloc parent à la vidéo
  * - cookie_volume boolean true/false : met dans un cookie ms_volume le niveau de volume 
  *   et dans html_volume_muted la valeur 'muted' si on a désactivé le son
- * - messages boolean : affiche ou pas des messages à même le lecteur : 
  *   play / pause / autres changements d'état... (defaut : true)
  * - volume int : un int représentant un pourcentage de volume
  * - volume_bloque boolean : bloquer le niveau de volume
@@ -128,6 +127,7 @@
 				volume:100, // Niveau de volume au chargement
 				volume_bloque:false, // bloque le niveau de volume
 				volume_slider_orientation:'horizontal', // Si on a les sliders, orientation du slider de volume
+				volume_mousewheel:true,
 				muted:false, // Le lecteur n'est pas mute par défaut
 				muted_bloque:false, // On autorise le switch mute/unmute sur le lecteur
 				cookie_volume:false, // Garder le niveau de volume de l'utilisateur dans un cookie
@@ -228,11 +228,14 @@
 						else
 							controls = '';
 
-						controls += '<div class="controls small">'
-							+'<div class="buttons_left">'
+						controls += '<div class="controls small">';
+						if($.inArray('play_pause',options.boutons_caches) == '-1')
+						controls += '<div class="buttons_left">'
 								+'<span class="play_pause_button" title="'+ms_player_lang.bouton_loading+'"></span>'
-							+'</div>'
-							+'<div class="progress_bar">'
+							+'</div>';
+						
+						if($.inArray('progress_bar',options.boutons_caches) == '-1')
+						controls += '<div class="progress_bar">'
 								+'<em class="elapsed_time" title="'+ms_player_lang.info_ecoule+'"></em>'
 								+'<div class="progress_back">'
 									+'<div class="progress_loading_wrapper">'
@@ -244,7 +247,8 @@
 								+'</div>'
 								+'<em class="remaining_time remaining" title="'+ms_player_lang.info_restant+'"></em>'
 							+'</div>'
-							+'<div class="buttons_right">';
+
+						controls += '<div class="buttons_right">';
 						controls += ($.inArray('volume',options.boutons_caches) == '-1') ? '<span class="volume_button '+ (id.muted ? 'muted' : '') +'" title="'+ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)"></span>' : '';
 
 						/**
@@ -489,7 +493,7 @@
 						 * - augmente le volume de 10% lors d'un scroll haut avec la souris;
 						 * - si le volume est "muted", l'action ne fait rien sur le volume;
 						 */
-						if(id.addcontrols && wrapper && !options.volume_bloque && typeof($.fn.mousewheel) != "undefined"){
+						if(id.addcontrols && wrapper && !options.volume_bloque && typeof($.fn.mousewheel) != "undefined" && options.volume_mousewheel){
 							wrapper.mousewheel(function(event, delta) {
 								if(!id.muted && id.duration){
 									var volume_new = Math.round((id.volume + parseFloat((delta > 0) ? '0.1' : '-0.1'))*10)/10;
