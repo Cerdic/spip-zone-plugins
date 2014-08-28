@@ -32,6 +32,11 @@
 		<fieldset>
 			<legend>Comportement</legend>
 			<ul class="choix ">
+				<li class="links_window_same[ (#ENV**{erreurs}|table_valeur{window_same}|oui)erreur]">
+					<input type="radio" class="radio" name="window" id="window_same"[ (#ENV{window}|!={on}|?{'checked="checked"'})] value="off" />
+					<label for="window_same">Laisser l'internaute libre de choisir (recommand&eacute;)</label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{window_same})</span>]
+				</li>
 				<li class="links_window_new[ (#ENV**{erreurs}|table_valeur{window_new}|oui)erreur]">
 					<input type="radio" class="radio" name="window" id="window_new" [(#ENV{window}|=={on}|?{'checked="checked"'})] value="on" />
 					<label for="window_new">Forcer l'ouverture de certains liens dans une nouvelle fen&ecirc;tre (d&eacute;conseill&eacute;)</label>[
@@ -49,18 +54,13 @@
 							<span class='erreur'>(#ENV**{erreurs}|table_valeur{download})</span>]
 							<ul>
 								<li class="links_doc_list[ (#ENV**{erreurs}|table_valeur{doc_list}|oui)erreur]">
-									<label for="doc_list">Indiquer les extensions, s&eacute;par&eacute;es d'une virgule (exemple : .pdf,.doc,.xls,.ppt,.odt )</label>[
+									<label for="doc_list">Indiquer les extensions, s&eacute;par&eacute;es d'une virgule (exemple : .pdf,.doc,.xls,.ppt,.odt)</label>[
 									<span class='erreur'>(#ENV**{erreurs}|table_valeur{doc_list})</span>
 									]<input type="text" class="text" name="doc_list" id="doc_list" value="[(#ENV{doc_list})]" />
 								</li>
 							</ul>
 						</li>
 					</ul>
-				</li>
-				<li class="links_window_same[ (#ENV**{erreurs}|table_valeur{window_same}|oui)erreur]">
-					<input type="radio" class="radio" name="window" id="window_same"[ (#ENV{window}|!={on}|?{'checked="checked"'})] value="off" />
-					<label for="window_same">Laisser l'internaute libre de choisir (recommand&eacute;)</label>[
-					<span class='erreur'>(#ENV**{erreurs}|table_valeur{window_same})</span>]
 				</li>
 			</ul>
 		</fieldset>

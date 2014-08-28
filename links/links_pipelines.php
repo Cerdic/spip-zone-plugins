@@ -19,17 +19,20 @@ function links_insert_head($flux) {
 
 	//Ouverture d'une nouvelle fenetre
 	if($links['window'] == 'on'){
-		//Ouverture dune nouvelel fenetre sur les liens externes
+		$variables_links = "";
+		//Ouverture d'une nouvelle fenetre sur les liens externes
 		if($links['external'] == 'on'){
-			$flux .= '<script type="text/javascript">var js_nouvelle_fenetre=\''._T('links:js_nouvelle_fenetre').'\';var links_site = \''.$GLOBALS['meta']['adresse_site'].'\';</script>';
+			$variables_links .= 'var links_site = \''.$GLOBALS['meta']['adresse_site'].'\';';
 		}
 		//Ouverture d'une nouvelle fenetre sur les documents (extensions a preciser)
 		if(($links['download'] == 'on')&&($links['doc_list'])){
-			$flux .= '<script type="text/javascript">var links_doc = \''.$links['doc_list'].'\';</script>';
+			$variables_links .= 'var links_doc = \''.$links['doc_list'].'\';';
 		}
-		$flux .= '<script src="'.find_in_path('links.js').'" type="text/javascript"></script>';
+		$flux .= '
+<!-- Liens explicites -->
+<script type="text/javascript">var js_nouvelle_fenetre=\''._T('links:js_nouvelle_fenetre').'\';'.$variables_links.'</script>
+<script src="'.find_in_path('links.js').'" type="text/javascript"></script>
+<!-- // Liens explicites -->';
 	}
 	return $flux;
 }
-
-?>

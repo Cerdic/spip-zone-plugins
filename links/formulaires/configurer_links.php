@@ -8,7 +8,7 @@ function formulaires_configurer_links_charger_dist(){
 		'style' => $links['style'] ? $links['style'] : '',
 		'external' => $links['external'] ? $links['external'] : 'off',
 		'download' => $links['download'] ? $links['download'] : 'off',
-		'window' => $links['window'] ? $links['external'] : 'off',
+		'window' => $links['window'] ? $links['window'] : 'off',
 		'doc_list' => $links['doc_list'] ? $links['doc_list'] : '.pdf,.ppt,.xls,.doc'
 	);
 
@@ -41,4 +41,3 @@ function formulaires_configurer_links_traiter_dist(){
 	}
 	return $res;
 }
-?>
