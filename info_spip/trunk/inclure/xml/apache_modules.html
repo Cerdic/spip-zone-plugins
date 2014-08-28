@@ -3,6 +3,6 @@ On utilise une fonction maison qui teste l'existence de la fonction apache_get_m
 
 <B_modules>
 <apache><BOUCLE_modules (DATA) {source table, (#REM|lister_modules_apache)} {par valeur}>
-    <module nom="#VALEUR" /></BOUCLE_modules>
+    <module nom="[(#VALEUR|attribut_html)]" /></BOUCLE_modules>
 </apache>
 </B_modules>
