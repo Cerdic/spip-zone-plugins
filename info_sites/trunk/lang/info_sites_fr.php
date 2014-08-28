@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // B
     'btn_diagnostic_iso' => 'Diagnostic ISO',
+    'btn_diagnostic' => 'Diagnostic',
 
     // C
     'cfg_exemple' => 'Exemple',
@@ -38,6 +39,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_nombre_contacts' => 'Contacts liés',
     'info_nombre_projets' => 'Nombre de projets',
     'info_sites_titre' => 'Info Sites',
+
+    // L
+    'label_branche' => 'Branche',
+    'label_branche_version' => 'Version',
+    'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',
+    'label_selectionner_site' => 'Sélectionner un site&nbsp;:',
 
     // M
     'menu_organisations' => 'Organisations',

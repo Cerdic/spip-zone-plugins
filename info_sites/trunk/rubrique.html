@@ -3,5 +3,6 @@
 <INCLURE{fond=structure,env,id_secteur=#ID_SECTEUR,type-page=rubrique,composition=#COMPOSITION} />
 </BOUCLE_principale_rubrique>
 <?php } else { ?>
-<INCLURE{fond=structure,env,type-page=login,composition=login} />
+[(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
+<INCLURE{fond=structure,env,type-page=login,composition=login,url=#GET{url}} />
 <?php } ?>

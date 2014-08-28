@@ -14,7 +14,6 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_site:info_1_projets_site,projets_site:info_nb_projets_sites}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
 			<th class='nom' scope='col'>[(#TRI{titre,<:projets_site:label_titre:>,ajax})]</th>
             <th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:label_type_site:>,ajax})]</th>
             <th class='logiciel_nom' scope='col'>[(#TRI{logiciel_nom,<:projets_site:label_logiciel_nom:>,ajax})]</th>
@@ -26,7 +25,6 @@
 	<tbody>
 	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_site?} {id_projet?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,type_site},#GET{defaut_tri}}{!par type_site}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#LOGO_PROJETS_SITE|image_reduire{16,16})]</td>
 			<td class='nom principale'><a href="[(#ID_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SITE">[(#RANG). ]#TITRE</a></td>
             <td class='type_site'>[(#TYPE_SITE)]</td>
             <td class='logiciel_nom'>[(#LOGICIEL_NOM)]</td>
