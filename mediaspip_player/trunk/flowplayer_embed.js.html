@@ -12,6 +12,7 @@
 #SET{titre_article,#TITRE}
 </BOUCLE_article_bis>
 <//B_docorig>
+[(#SET{url_player,[(#ENV{secure}|=={oui}|?{[(#CHEMIN{flash/flowplayer.content.swf}|url_absolue|replace{http://,https://})],[(#CHEMIN{flash/flowplayer.content.swf}|url_absolue)]})]})]
 [(#SET{plugins,[(#ARRAY{controls,
 	[(#ARRAY{
 		autoHide,[(#EXTENSION|=={mp3}|?{fullscreen,true})],
@@ -28,7 +29,7 @@
 [(#CONFIG{mediaspip_player/infos_embed}|=={on}|oui)
 [(#SET{plugins,[(#GET{plugins}|array_merge{[(#ARRAY{title,
 [(#ARRAY{
-	url,[(#CHEMIN{flash/flowplayer.content.swf}|url_absolue)],
+	url,#GET{url_player},
 	top,0,
 	closeButton,true,
 	left,0,
@@ -40,7 +41,7 @@
 	backgroundGradient,none,
 	borderRadius,0,
 	opacity,0.8,
-	stylesheet,[(#CHEMIN{css/flowplayer_content-plugin.css}|url_absolue)],
+	stylesheet,[(#ENV{secure,non}|=={oui}|?{[(#CHEMIN{css/flowplayer_content-plugin.css}|url_absolue|replace{http://,https://})],[(#CHEMIN{css/flowplayer_content-plugin.css}|url_absolue)]})],
 	html,[(#VAL{<span class="title">[(#TITRE|sinon{#GET{titre_article}}|sinon{[(#FICHIER|basename)]}|replace{"'",'"'})]</span>}|concat{[ - <span class="desc">(#CREDITS|replace{"'",'"'}|liens_absolus|replace{'<a ','<a target="_blank" '})</span>]}|concat{[ - <span class="url"><a href="#URL_SITE_SPIP" target="_blank">(#NOM_SITE_SPIP|replace{"'",'"'})</a></span>]})]})]})]})]})]]
 
 [(#SET{canvas,[(#ARRAY{
@@ -48,7 +49,7 @@
 				backgroundGradient,none})]})]
 
 [(#SET{playlist,[(#ARRAY{
-	0,[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)],
+	0,[(#ENV{secure,non}|=={oui}|?{[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue|replace{http://,https://})],[(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)]})],
 	1,[(#ARRAY{
 		url,[(#URL_DOCUMENT|url_absolue)],
 		autoPlay,false,
