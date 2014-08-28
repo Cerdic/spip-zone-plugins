@@ -155,8 +155,10 @@
 				movieSize:'(#ENV{moviesize})',][(#ENV{cookie_volume,#CONFIG{mediaspip_player/cookie_volume,non}}|=={oui}|oui)
 				cookie_volume:true,][
 				(#ENV{autoplay,#ENV{autostart,non}}|in_array{#LISTE{false,non,none}}|non)autoplay:true,][
+				(#ENV{messages,oui}|in_array{#LISTE{false,non,none}}|oui)messages:false,][
 				(#ENV{volume}|is_numeric|oui)volume : #ENV{volume},][
 				(#ENV{volume_bloque}|=={oui}|oui)volume_bloque : true,][
+				(#ENV{volume_mousewheel,oui}|in_array{#LISTE{false,non,none}}|oui)volume_mousewheel:false,][
 				(#GET{ratio}|oui)ratio : #GET{ratio},][
 				(#ENV{muted_bloque}|=={oui}|oui)muted_bloque : true,][
 				(#ENV{boutons_caches}|oui)boutons_caches : [(#ENV{boutons_caches}|explode{','}|json_encode)],][(#GET{largeur}|oui)[
@@ -168,7 +170,7 @@
 	}
 	$(function(){
 		ms_player_init_[(#GET{id_document_voir})]();
-		onAjaxLoad(function(){setTimeout(function(){ms_player_init_[(#GET{id_document_voir})]();},500)});
+		//onAjaxLoad(function(){setTimeout(function(){ms_player_init_[(#GET{id_document_voir})]();},500)});
 	});
 })(jQuery);
 </script>
