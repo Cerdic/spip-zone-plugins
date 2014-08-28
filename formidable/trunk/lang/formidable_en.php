@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'analyse_avec_reponse' => 'Non-empty answers',
+	'analyse_exclure_champs_label' => 'Fields to exclude',
 	'analyse_exporter' => 'Export analysis',
 	'analyse_longueur_moyenne' => 'Average number in words length',
 	'analyse_nb_reponses_total' => '@nb@ people responded to this form.',
@@ -19,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_formulaires' => 'Forms',
+	'bouton_revert_formulaire' => 'Back to the last saved version',
 
 	// C
 	'cfg_analyse_classe_explication' => 'You can specify CSS classes that will be added on the container of each graph, such as 
@@ -28,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_page_configurer_formidable' => 'Configure Formidable',
 	'cfg_titre_parametrages_analyse' => 'Settings in the answers analysis',
 	'champs' => 'Fields',
+	'changer_statut' => 'This form is:',
 
 	// E
 	'echanger_formulaire_forms_importer' => 'Forms & Tables (.xml)',
@@ -81,10 +84,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'importer_formulaire' => 'Import a form',
 	'importer_formulaire_fichier_label' => 'File to import',
 	'importer_formulaire_format_label' => 'File format',
+	'info_1_formulaire' => '1 form',
+	'info_1_reponse' => '1 answer',
+	'info_aucun_formulaire' => 'No form',
+	'info_aucune_reponse' => 'No answer',
+	'info_formulaire_refuse' => 'Archived',
+	'info_formulaire_utilise_par' => 'Form used by:',
+	'info_nb_formulaires' => '@nb@ forms',
+	'info_nb_reponses' => '@nb@ answers',
+	'info_reponse_proposee' => 'To moderate',
+	'info_reponse_proposees' => 'To moderate',
+	'info_reponse_publiee' => 'Validated',
+	'info_reponse_publiees' => 'Validated',
+	'info_reponse_supprimee' => 'Deleted',
+	'info_reponse_supprimees' => 'Deleted',
+	'info_reponse_toutes' => 'All',
+	'info_utilise_1_formulaire' => 'Form used:',
+	'info_utilise_nb_formulaires' => 'Forms used:',
 
 	// M
 	'modele_label_formulaire_formidable' => 'Which form ?',
-	'modele_nom_formulaire' => 'One form',
+	'modele_nom_formulaire' => 'one form',
 
 	// N
 	'noisette_label_afficher_titre_formulaire' => 'Dispaly the title of the form ?',
@@ -108,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_liste_prop' => 'Answers pending for validation',
 	'reponses_liste_publie' => 'All validated answers',
 	'reponses_nb' => '@nb@ answers',
+	'reponses_supprimer' => 'Delete all the answers to this form',
 	'reponses_voir_detail' => 'See the answer',
 	'retour_aucun_traitement' => 'Your reply was accepted. But as the function of the form has not yet been configured, nothing was done with your data!',
 
@@ -115,7 +136,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sans_reponses' => 'Unanswered',
 
 	// T
+	'texte_statut_poubelle' => 'deleted',
+	'texte_statut_propose_evaluation' => 'proposed',
+	'texte_statut_publie' => 'validated',
+	'texte_statut_refuse' => 'archived',
 	'titre_cadre_raccourcis' => 'Shortcuts',
+	'titre_formulaires_archives' => 'Archives',
+	'titre_reponses' => 'Answers',
 	'traitements_actives' => 'Activated treatments',
 	'traitements_aide_memoire' => 'List of shortcuts:',
 	'traitements_avertissement_creation' => 'Changes to the form fields have been successfully saved. You can now define which treatments will be performed when using the form.',
@@ -149,7 +176,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
-	'traiter_enregistrement_option_anonymiser_explication' => 'Make the form results anonymous (don’t keep any tracks of user who have answered).', # MODIF
+	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved', # RELIRE
+	'traiter_enregistrement_option_anonymiser_explication' => 'Results anonymous (don’t keep any tracks of user who have answered).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'What system variable used to calculate a single value for each author without revealing his identity.',
 	'traiter_enregistrement_option_anonymiser_variable_label' => 'Variable from witch the form will be anonymized',
@@ -159,9 +187,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_option_identification_explication' => 'If the answers can be changed, which method is used first to know the answer to modify ?',
 	'traiter_enregistrement_option_identification_label' => 'Identification',
 	'traiter_enregistrement_option_moderation_label' => 'Moderation',
-	'traiter_enregistrement_option_modifiable_explication' => 'May visitors change their answers afterwards?', # MODIF
+	'traiter_enregistrement_option_modifiable_explication' => 'Editable: Visitors can change their answers afterwards.',
 	'traiter_enregistrement_option_modifiable_label' => 'Answers can be modified',
-	'traiter_enregistrement_option_multiple_explication' => 'May a single person answer several times to the form?', # MODIF
+	'traiter_enregistrement_option_multiple_explication' => 'Multiple: A single person may answer several times.',
 	'traiter_enregistrement_option_multiple_label' => 'Multiple answers',
 	'traiter_enregistrement_titre' => 'Record the results',
 
