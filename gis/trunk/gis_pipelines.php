@@ -10,7 +10,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function gis_insert_head_css($flux){
 	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path('lib/leaflet/dist/leaflet.css') .'" />';
-	$flux .="\n".'<link rel="stylesheet" href="'. find_in_path('lib/leaflet/plugins/leaflet-plugins.css') .'" />';
+	$flux .="\n".'<link rel="stylesheet" href="'. sinon(find_in_path('css/leaflet-plugins.css'),find_in_path('lib/leaflet/plugins/leaflet-plugins.css')) .'" />';
 	$flux .="\n".'<link rel="stylesheet" href="'. sinon(find_in_path('css/leaflet.markercluster.css'),find_in_path('lib/leaflet/plugins/leaflet.markercluster.css')) .'" />';
 	return $flux;
 }
