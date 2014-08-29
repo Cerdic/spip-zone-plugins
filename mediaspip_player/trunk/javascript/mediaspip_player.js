@@ -5,7 +5,7 @@
  * Player html5 pour les balises <audio> et <video>
  * avec fallback vers version flash pour flv/mp4/mp3/aac
  * 
- * $version : 1.3.2
+ * $version : 1.3.3
  * © GNU/GPL v3 - kent1 (http://kent1.info - kent1@arscenic.info)
  * cf : http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/html5-player-video-sound-media/
  * 
@@ -34,7 +34,7 @@
  * - volume_slider_orientation vertical|horizontal : permet de définir l'orientation du slider de volume (défaut vertical)
  * - muted boolean : true si muted à l'initialisation, false sinon
  * - muted_bloque boolean : true pour rendre impossible le changement de mute
- * - boutons_caches array : un tableau des boutons à ne pas afficher ['fullscreen','volume','loop']
+ * - boutons_caches array : un tableau des boutons à ne pas afficher ['fullscreen','volume','loop','time_remaining','time_elapsed','play_pause','progress_bar']
  * - messages bool : si false, n'affiche pas les messages au dessus du player lors d'actions utilisateur
  */
 
@@ -234,19 +234,20 @@
 								+'<span class="play_pause_button" title="'+ms_player_lang.bouton_loading+'"></span>'
 							+'</div>';
 						
-						if($.inArray('progress_bar',options.boutons_caches) == '-1')
-						controls += '<div class="progress_bar">'
-								+'<em class="elapsed_time" title="'+ms_player_lang.info_ecoule+'"></em>'
-								+'<div class="progress_back">'
-									+'<div class="progress_loading_wrapper">'
-										+'<div class="progress_loading_stripes"></div>'
-									+'</div>'
-									+'<div class="progress_buffered"></div>'
-									+'<div class="progress_elapsed_time"></div>'
-									+'<span class="progress_indicator"></span>'
-								+'</div>'
-								+'<em class="remaining_time remaining" title="'+ms_player_lang.info_restant+'"></em>'
-							+'</div>'
+						if($.inArray('progress_bar',options.boutons_caches) == '-1'){
+							controls += '<div class="progress_bar">';
+							controls += ($.inArray('time_elapsed',options.boutons_caches) == '-1') ? '<em class="elapsed_time" title="'+ms_player_lang.info_ecoule+'"></em>' : '';
+							controls += '<div class="progress_back">'
+										+'<div class="progress_loading_wrapper">'
+											+'<div class="progress_loading_stripes"></div>'
+										+'</div>'
+										+'<div class="progress_buffered"></div>'
+										+'<div class="progress_elapsed_time"></div>'
+										+'<span class="progress_indicator"></span>'
+									+'</div>';
+							controls += ($.inArray('time_remaining',options.boutons_caches) == '-1') ? +'<em class="remaining_time remaining" title="'+ms_player_lang.info_restant+'"></em>' : '';
+							controls += '</div>';
+						}
 
 						controls += '<div class="buttons_right">';
 						controls += ($.inArray('volume',options.boutons_caches) == '-1') ? '<span class="volume_button '+ (id.muted ? 'muted' : '') +'" title="'+ms_player_lang.bouton_volume+' ('+Math.floor(id.volume*100)+'%)"></span>' : '';
@@ -992,10 +993,11 @@
 			var remaining_width = controls.find(".remaining_time").outerWidth()+parseFloat(controls.find('.remaining_time').css('margin-left'))+parseFloat(controls.find('.remaining_time').css('margin-right')),
 				elapsed_width = controls.find(".elapsed_time").outerWidth()+parseFloat(controls.find('.elapsed_time').css('margin-left'))+parseFloat(controls.find('.elapsed_time').css('margin-right'));
 
-			if(controls.find(".remaining_time").is(':hidden')) remaining_width = 0;
+			if((controls.find(".remaining_time").size() == 0) || controls.find(".remaining_time").is(':hidden')) remaining_width = 0;
+			if((controls.find(".elapsed_time").size() == 0) || controls.find(".elapsed_time").is(':hidden')) elapsed_width = 0;
 
 			var progressback_width = progresswidth - elapsed_width - remaining_width - parseFloat(controls.find('.progress_back').css('border-left-width')) - parseFloat(controls.find('.progress_back').css('border-right-width'))-parseFloat(controls.find('.progress_back').css('margin-right')) - parseFloat(controls.find('.progress_back').css('margin-left')) - parseFloat(controls.find('.progress_back').css('padding-right')) - parseFloat(controls.find('.progress_back').css('padding-left'))-2;
-
+			console.log(progressback_width);
 			if(slider && progressback_width < 0 && !force){
 				if(id.slider && (typeof(id.slider_volume) == 'object')){
 					id.slider_volume.slider('option',{'orientation':'vertical'});
