@@ -245,7 +245,7 @@
 										+'<div class="progress_elapsed_time"></div>'
 										+'<span class="progress_indicator"></span>'
 									+'</div>';
-							controls += ($.inArray('time_remaining',options.boutons_caches) == '-1') ? +'<em class="remaining_time remaining" title="'+ms_player_lang.info_restant+'"></em>' : '';
+							controls += ($.inArray('time_remaining',options.boutons_caches) == '-1') ? '<em class="remaining_time remaining" title="'+ms_player_lang.info_restant+'"></em>' : '';
 							controls += '</div>';
 						}
 
