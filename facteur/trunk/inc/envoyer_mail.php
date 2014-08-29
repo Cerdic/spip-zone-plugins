@@ -70,8 +70,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 				AND strpos($corps,"<")!==false // eviter les tests suivants si possible
 				AND $ttrim = trim($corps)
 				AND substr($ttrim,0,1)=="<"
-			  AND substr($ttrim,-1,1)==">"
-			  AND stripos($ttrim,"</html>")!==false){
+				AND substr($ttrim,-1,1)==">"
+				AND stripos($ttrim,"</html>")!==false){
 
 				if(!strlen($sujet)){
 					// dans ce cas on ruse un peu : extraire le sujet du title
