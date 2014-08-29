@@ -1,0 +1,28 @@
+<BOUCLE_commit(COMMITS){id_commit}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<div class="lable visible"><:commit:champ_titre_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{titre} titre span'>(#TITRE)</div>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<div class="lable visible"><:commit:champ_descriptif_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif span'>(#DESCRIPTIF)</div>
+</div>]
+
+[<div class="champ contenu_auteur[ (#AUTEUR*|strlen|?{'',vide})]">
+	<div class="lable visible"><:commit:champ_auteur_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{auteur} auteur span'>(#AUTEUR)</div>
+</div>]
+
+[<div class="champ contenu_url_revision[ (#URL_REVISION*|strlen|?{'',vide})]">
+	<div class="lable visible"><:commit:champ_url_revision_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{url_revision} url_revision span'>(#URL_REVISION)</div>
+</div>]
+
+[<div class="champ contenu_id_projet[ (#ID_PROJET*|strlen|?{'',vide})]">
+	<div class="lable visible"><:commit:champ_id_projet_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{id_projet} id_projet span'>(#ID_PROJET)</div>
+</div>]
+
+</BOUCLE_commit>
