@@ -8,6 +8,7 @@
 	<icon>images/sympatic.png</icon>
 	<description>Gestion des abonnements à des listes sympa depuis SPIP.</description>
 	<lien>http://contrib.spip.net/4074</lien>
+	<categorie>communication</categorie>
 	<install>base/sympatic_upgrade.php</install>
 	<bouton id='sympatic_tous' parent='naviguer'>
 	    <icone>images/sympatic-24.png</icone>
