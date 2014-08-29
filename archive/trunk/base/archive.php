@@ -24,6 +24,9 @@ function archive_declarer_tables_objets_sql($tables){
 	$tables['spip_articles']['statut_titres']['archive'] = "archive:info_article_archive";
 	$tables['spip_articles']['statut_textes_instituer']['archive'] = "archive:texte_statut_archive";
 	
+	/**
+	 * Si on souhaite que l'archivage ne dépublie pas les articles
+	 */
 	include_spip('inc/config');
 	if(lire_config('archive/archiver_publier','non') == 'oui'){
 			$tables['spip_articles']['statut'][0]['publie'] .= ',archive';
