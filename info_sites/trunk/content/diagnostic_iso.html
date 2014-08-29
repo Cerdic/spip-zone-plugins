@@ -39,9 +39,9 @@
 <td>
 [(#VALEUR|=={0}|oui)<strong>]
 [(#VAL{#_tableau:VALEUR}|in_array{#GET{formater_tableau}}|oui)
-    [(#INCLURE{fond=inclure/formater_tableau/#_tableau:VALEUR, array=[(#GET{tableau}|table_valeur{#VALEUR}|table_valeur{#_tableau:VALEUR})]})]
+    [(#INCLURE{fond=inclure/formater_tableau/#_tableau:VALEUR, array=[(#GET{tableau/#VALEUR/#_tableau:VALEUR})]})]
 ][(#VAL{#_tableau:VALEUR}|in_array{#GET{formater_tableau}}|non)
-    [(#GET{tableau}|table_valeur{#VALEUR}|table_valeur{#_tableau:VALEUR})]
+    [(#GET{tableau/#VALEUR/#_tableau:VALEUR})]
 [(#VALEUR|=={0}|oui)</strong>]
 ]</td></BOUCLE_cellule>
 </tr>

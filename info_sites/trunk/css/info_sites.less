@@ -123,11 +123,17 @@ table {
 			ul {
 				> li {
 					font-size: 1.25em;
+					&:hover {
+						background-color: @black;
+					}
 					a {
 						color: @gray-second;
 						&:hover, &.active {
 							color: @white;
 							background-color: transparent;
+						}
+						&.active {
+							border-left: 5px solid @brand-primary;
 						}
 						i {
 							min-width: 45px;
