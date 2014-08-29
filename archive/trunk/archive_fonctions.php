@@ -30,4 +30,8 @@ function critere_archive_dist($idb, &$boucles, $crit){
 		}
 	}
 }
+
+function balise_archive_dist(){
+	
+}
 ?>
