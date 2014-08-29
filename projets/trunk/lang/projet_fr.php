@@ -55,6 +55,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom'                    => 'Nom du projet',
 	'label_objectif'               => 'Objectif',
 	'label_url_site'               => 'Voir en ligne',
+	'label_projet_champs'          => 'Champs de la table <em>spip_projets</em>',
+	'label_id_projet'              => 'Identifiant du projet',
+	'label_statut'                 => 'Statut',
+	'label_maj'                    => 'Date de mise à jour',
 
 	// N
 	'non_renseigne'                => 'Non renseigné',
@@ -70,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_ajouter_projet'         => 'Ajouter un projet',
 	'texte_changer_statut_projet'  => 'Ce projet est :',
 	'texte_creer_associer_projet'  => 'Créer et associer un projet',
-	'texte_statut_preparation'     => "En préparation",
+	'texte_statut_prepa'           => "En préparation",
 	'texte_statut_redaction'       => "Cahier des charges en cours",
 	'texte_statut_elabore'         => "Projet élaboré",
 	'texte_statut_chiffrage'       => "Proposition en cours",

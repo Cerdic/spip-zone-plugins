@@ -63,7 +63,7 @@ function projets_declarer_tables_objets_sql($tables) {
 		'rechercher_champs' => array("nom" => 7, "url_site" => 2, "objectif" => 3, "enjeux" => 2, "methode" => 1, "descriptif" => 2),
 		'tables_jointures'  => array('spip_projets_liens'),
 		'statut_textes_instituer' => array(
-			'prepa'          => 'projet:texte_statut_preparation',
+			'prepa'          => 'projet:texte_statut_prepa',
 			'redaction'      => 'projet:texte_statut_redaction',
 			'elabore'        => 'projet:texte_statut_elabore',
 			'chiffrage'      => 'projet:texte_statut_chiffrage',

@@ -26,7 +26,10 @@ function projets_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_drop_table', 'spip_projets_categories'),
 		array('sql_alter', 'TABLE spip_projets DROP id_projets_categorie'),
 	);
-	
+	$maj['1.1.1'] = array(
+		array('maj_tables',array('spip_projets')),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
