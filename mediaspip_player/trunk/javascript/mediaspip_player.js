@@ -379,7 +379,7 @@
 						}).bind("ended", function(e){
 							if(id.addcontrols){
 								if(!id.loop){
-									wrapper.addClass('paused').find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_lire);
+									wrapper.addClass('ended').find('.play_pause_button').removeClass('pause').attr('title',ms_player_lang.bouton_lire);
 									id.paused = true;
 								}else{
 									id.currentTime = 0;
@@ -406,7 +406,7 @@
 
 						media.parent().find('.ms_splash').click(function(){
 							if((id.paused || id.ended) && $(this).is(':visible')){
-								wrapper.removeClass('paused');
+								wrapper.removeClass('paused').removeClass('ended');
 								if(!id.has_metadatas)
 									wrapper.addClass('loading');
 								media.ms_play_pause();
@@ -690,7 +690,7 @@
 					media.ms_messages('pause',ms_player_lang.statut_pause);
 				}
 				else if (id.ended){
-					wrapper.removeClass('loading').removeClass('paused').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
+					wrapper.removeClass('loading').removeClass('paused').removeClass('ended').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
 					id.currentTime = id.startTime ? id.startTime : '0';
 					if(!id.options.volume_bloque && cookies && id.options.cookie_volume){
 						var volume_cookie = parseFloat($.cookie('ms_volume'));
@@ -703,7 +703,7 @@
 				else{
 					// On a déjà les metadonnées
 					if(id.has_metadatas){
-						wrapper.removeClass('loading').removeClass('paused').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
+						wrapper.removeClass('loading').removeClass('paused').removeClass('ended').find('.play_pause_button').addClass('pause').attr('title',ms_player_lang.bouton_pause);
 						media.ms_messages('play',ms_player_lang.statut_play);
 					}else{
 						wrapper.addClass('loading');
@@ -724,7 +724,7 @@
 			if(id.addcontrols && id.mediacanplay && !id.seeking){
 				if(id.paused || id.ended){
 					id.play();
-					$(this).parent().removeClass('paused');
+					$(this).parent().removeClass('paused').removeClass('ended');
 					this.trigger('ms_play');
 				}else{
 					id.pause();
@@ -1024,12 +1024,12 @@
 		 * @param type string : type de message (utilisé comme class sur le span entourant le message)
 		 * @param message string : le contenu du message 
 		 */
-		ms_messages : function(type,message){
+		ms_messages : function(type,message,force){
 			var media = $(this),
 				id = media[0],
 				wrapper = $(this).is('.media_wrapper') ? $(this) : $(this).parents('.media_wrapper');
 
-			if(!id.options.messages || id.controls) return;
+			if((!id.options.messages || id.controls) && !force) return;
 
 			var messages = wrapper.find('.messages'),
 				message = (type == 'error') ? '<span>'+message+'</span>' : '<span class="'+type+'">'+message+'</span>';
