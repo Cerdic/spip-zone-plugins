@@ -11,7 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Indique si une saisie peut être affichée.
- * 
+ *
  * On s'appuie sur l'éventuelle clé "editable" du $champ.
  * Si editable vaut :
  *    - absent : le champ est éditable
@@ -26,7 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Environnement transmis à la saisie, certainement l'environnement du formulaire
  * @param bool $utiliser_editable
  *     - false pour juste tester le cas -1
- * 
+ *
  * @return bool
  *     Retourne un booléen indiquant l'état éditable ou pas :
  *     - true si la saisie est éditable (peut être affichée)
@@ -65,7 +65,7 @@ function saisie_editable($champ, $env, $utiliser_editable=true) {
 			}
 		}
 	}
-	
+
 	// aucun des paramètres demandés n'avait de contenu
 	return false;
 }
@@ -101,9 +101,9 @@ function saisies_generer_html($champ, $env=array()){
 	if (!saisie_editable($champ, $env)) {
 		return '';
 	}
-	
+
 	$contexte = array();
-	
+
 	// On sélectionne le type de saisie
 	$contexte['type_saisie'] = $champ['saisie'];
 	// Identifiant unique de saisie, si present
@@ -121,7 +121,7 @@ function saisies_generer_html($champ, $env=array()){
 			$options[$option] = _T_ou_typo($valeur, 'multi');
 		}
 	}
-	
+
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
 
@@ -133,7 +133,7 @@ function saisies_generer_html($champ, $env=array()){
 		// car les sous-saisies ne doivent pas être affectees
 		// par les modification sur l'environnement servant à generer la saisie mère
 		$contexte['_env'] = $env;
-		
+
 		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
 		unset($env['inserer_debut']);
 		unset($env['inserer_fin']);
@@ -144,7 +144,7 @@ function saisies_generer_html($champ, $env=array()){
 				unset($env[$option_a_supprimer]);
 			}
 		}
-		
+
 		$contexte = array_merge($env, $contexte);
 	}
 	// Sinon on ne sélectionne que quelques éléments importants
@@ -173,7 +173,7 @@ function saisies_generer_html($champ, $env=array()){
 	// Si ya des enfants on les remonte dans le contexte
 	if (isset($champ['saisies']) and is_array($champ['saisies']))
 		$contexte['saisies'] = $champ['saisies'];
-	
+
 	// On génère la saisie
 	return recuperer_fond(
 		'saisies/_base',
@@ -200,10 +200,10 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 		return '';
 
 	$contexte = array();
-		
+
 	// On sélectionne le type de saisie
 	$contexte['type_saisie'] = $saisie['saisie'];
-	
+
 	// Peut-être des transformations à faire sur les options textuelles
 	$options = $saisie['options'];
 	foreach ($options as $option => $valeur){
@@ -214,7 +214,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 			$options[$option] = _T_ou_typo($valeur, 'multi');
 		}
 	}
-	
+
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
 
@@ -227,7 +227,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 		// par les modification sur l'environnement servant à generer la saisie mère
 		$contexte['_env'] = $env;
 
-		// À partir du moment où on passe tout l'environnement, il faut enlever 
+		// À partir du moment où on passe tout l'environnement, il faut enlever
 		// certains éléments qui ne doivent absolument provenir que des options
 		$saisies_disponibles = saisies_lister_disponibles();
 		if (is_array($saisies_disponibles[$contexte['type_saisie']]['options'])){
@@ -236,12 +236,12 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 				unset($env[$option_a_supprimer]);
 			}
 		}
-		
+
 		$contexte = array_merge($env, $contexte);
 	}
 
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
-	
+
 	// On regarde en priorité s'il y a un tableau listant toutes les valeurs
 	if ($env['valeurs'] and is_array($env['valeurs']) and isset($env['valeurs'][$contexte['nom']])){
 		$contexte['valeur'] = $env['valeurs'][$contexte['nom']];
@@ -366,7 +366,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 /**
  * Lorsque l'on affiche les saisies (#VOIR_SAISIES), les saisies ayant une option afficher_si
  * et dont les conditions ne sont pas remplies doivent être retirées du tableau de saisies.
- * 
+ *
  * Cette fonction sert aussi lors de la vérification des saisies avec saisies_verifier().
  * À ce moment là, les saisies non affichées sont retirées de _request
  * (on passe leur valeur à NULL).

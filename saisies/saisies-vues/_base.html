@@ -17,15 +17,15 @@
 
 [(#REM) Cas normal avec présentation ]
 [(#GET{valeur_uniquement}|non)
-<div class="afficher[ afficher_(#ENV{nom})][ saisie_(#ENV{type_saisie})][ (#ENV{li_class})][ (#GET{reponse}|non)sans_reponse]">
+<div class="champ afficher[ contenu_(#ENV{nom})][ saisie_(#ENV{type_saisie})][ (#ENV{li_class})][ (#GET{reponse}|non)vide]">
 	[(#REM) S'il y a des enfants on n'inclut que la vue ]
 	[(#GET{enfants}|oui)
 		#GET{reponse}
 	]
 	[(#GET{enfants}|non|et{#ENV{type_saisie}|!={explication}})
-		[<strong class="label">(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong>]
-		<div class="valeur">
-		[(#GET{reponse}|sinon{#GET{sans_reponse}}|propre)]
+		[<div class="label visible">(#ENV{label_case,#ENV{label,#ENV{nom}}})</div>]
+		<div class="#EDIT{#ENV{nom}} [(#ENV{nom})] span">
+		[(#GET{reponse}|sinon{#GET{sans_reponse}})]
 		</div>
 	]
 </div>

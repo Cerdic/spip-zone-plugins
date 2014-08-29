@@ -25,7 +25,7 @@ function saisies_affichage_final($flux){
 		    include_spip("jqueryui_pipelines");
 			if (function_exists("jqueryui_dependances")){
 				$ui_plugins = jqueryui_dependances(array("jquery.ui.datepicker"));
-			
+
 				array_push($ui_plugins,"jquery.ui.theme");
 				foreach ($ui_plugins as $ui_plug){
 					$ui_plug_css = find_in_path("css/$ui_plug.css");
@@ -36,7 +36,7 @@ function saisies_affichage_final($flux){
 			}
 		}
 
-		$flux = substr_replace($flux, $ins_css, $pi, 0);		
+		$flux = substr_replace($flux, $ins_css, $pi, 0);
 		// On insère le JS à la fin du <head>
 		$pos_head = strpos($flux, '</head');
 		$js = find_in_path('javascript/saisies.js');
@@ -56,7 +56,7 @@ function saisies_formulaire_charger($flux){
 	if (!is_array($flux['data'])){
 		return $flux;
 	}
-	
+
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
 	if (include_spip('inc/saisies')
 		and $saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'])
@@ -85,7 +85,7 @@ function saisies_styliser($flux){
 	){
 		$flux['data'] = preg_replace("/\.$ext$/", '', find_in_path("formulaires/inc-saisies-cvt.$ext"));
 	}
-	
+
 	return $flux;
 }
 
