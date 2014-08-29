@@ -12,12 +12,33 @@
 		<div class="clearfix"></div>
 
 		<div id="wysiwyg">
-		<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
-			<div class="label visible"><:projet:label_statut:>&nbsp;: </div>
-			<div dir='#LANG_DIR' class='span statut'>[(#STATUT|puce_statut{projet,#ID_PROJET}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</div>
-		</div>
+			<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
+				<div class="label visible"><:projet:label_statut:>&nbsp;: </div>
+				<div dir='#LANG_DIR' class='span statut'>[(#STATUT|puce_statut{projet,#ID_PROJET}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</div>
+			</div>
 
-		<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
+			<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
+
+			[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide hidden})]">
+				<div class="label visible"><:commit:champ_versioning_path_label:>&nbsp;: </div>
+				<div dir='#LANG_DIR' class='span #EDIT{versioning_path} versioning_path'><a href="#VERSIONING_PATH">(#VERSIONING_PATH)</a></div>
+			</div>]
+
+			[<div class="champ contenu_versioning_trac[ (#VERSIONING_TRAC*|strlen|?{'',vide hidden})]">
+				<div class="label visible"><:commit:champ_versioning_trac_label:>&nbsp;: </div>
+				<div dir='#LANG_DIR' class='span #EDIT{versioning_trac} versioning_trac'><a href="#VERSIONING_TRAC">(#VERSIONING_TRAC)</a></div>
+			</div>]
+
+			[<div class="champ contenu_versioning_type[ (#VERSIONING_TYPE*|strlen|?{'',vide hidden})]">
+				<div class="label visible"><:commit:champ_versioning_type_label:>&nbsp;: </div>
+				<div dir='#LANG_DIR' class='span #EDIT{versioning_type} versioning_type'><a href="#VERSIONING_TYPE">(#VERSIONING_TYPE)</a></div>
+			</div>]
+
+			[<div class="champ contenu_versioning_rss[ (#VERSIONING_RSS*|strlen|?{'',vide hidden})]">
+				<div class="label visible"><:commit:champ_versioning_rss_label:>&nbsp;: </div>
+				<div dir='#LANG_DIR' class='span #EDIT{versioning_rss} versioning_rss'><a href="#VERSIONING_RSS">(#VERSIONING_RSS)</a></div>
+			</div>]
+
 		</div>
 		<div class="clearfix"></div>
 
