@@ -21,7 +21,7 @@ function pays_declarer_tables_interfaces($interface){
 function pays_declarer_tables_objets_sql($tables){
 
 $tables['spip_pays'] = array(
-	
+
 		'principale' => "oui",
 		'field'=> array(
 			"id_pays"		=> "smallint(6) NOT NULL auto_increment",
@@ -39,7 +39,10 @@ $tables['spip_pays'] = array(
 			"code", "nom"
 		),
 		'titre' => "nom AS titre, '' AS lang",
-		'type' => "pay",
+		'table_objet' => 'pays',
+		'table_objet_surnoms' => array('pays'),
+		'type' => "pays",
+		'type_surnoms' => array("pay"),
 
 		'texte_modifier' => "pays:icone_modifier_pays",
 		'texte_creer' => "pays:icone_creer_pays",
@@ -51,7 +54,7 @@ $tables['spip_pays'] = array(
 		'texte_logo_objet' => "pays:texte_logo_pays"
 
 	);
-	
+
 	return $tables;
 
 

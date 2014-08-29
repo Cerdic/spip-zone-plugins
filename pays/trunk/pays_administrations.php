@@ -36,7 +36,9 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 	$maj['1.3.0'] = array(
 		array('maj_130_pays'),
 	);
-
+	$maj['1.3.1'] = array(
+		array('maj_tables',array('spip_pays')),
+	);
 
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
