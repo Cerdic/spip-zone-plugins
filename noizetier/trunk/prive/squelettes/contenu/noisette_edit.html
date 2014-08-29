@@ -1,6 +1,6 @@
 [(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
 <BOUCLE_noisette(NOISETTES){id_noisette}>
-[(#SET{redirect,[(#URL_ECRIRE{page,page=#TYPE[-(#COMPOSITION)]#noisette-#ID_NOISETTE})]})]
+[(#SET{redirect,[(#URL_ECRIRE{noizetier_page,page=#TYPE[-(#COMPOSITION)]#noisette-#ID_NOISETTE})]})]
 #SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">

@@ -1,7 +1,0 @@
-[(#ENV{exec}|=={page}|oui)
-<a href="#URL_ECRIRE{pages}" title="<:noizetier:editer_noizetier_titre:>"><img src="#CHEMIN_IMAGE{noizetier-16.png}" /></a> > <a href="#URL_ECRIRE{pages}"><:noizetier:liste_pages:></a>
-> <strong class="on"> [(#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{nom})]</strong>
-]
-[(#ENV{exec}|=={noisette_edit}|oui)<INCLURE{fond=prive/squelettes/hierarchie/noisette_edit,env}>]
-[(#ENV{exec}|=={noisette_add}|oui)<INCLURE{fond=prive/squelettes/hierarchie/noisette_add,env}>]
-[(#ENV{exec}|=={page_edit}|oui)<INCLURE{fond=prive/squelettes/hierarchie/page_edit,env}>]

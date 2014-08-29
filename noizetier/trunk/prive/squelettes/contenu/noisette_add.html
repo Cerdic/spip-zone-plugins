@@ -1,5 +1,5 @@
 [(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
-#SET{retour,#URL_ECRIRE{page,page=#ENV{page}#bloc-#ENV{bloc}}}
+#SET{retour,#URL_ECRIRE{noizetier_page,page=#ENV{page}#bloc-#ENV{bloc}}}
 #SET{retour,#ENV{retour}|sinon{#GET{retour}}}
 #SET{redirect,#URL_ECRIRE{noisette_edit,id_noisette=@id_noisette@}}
 #SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}

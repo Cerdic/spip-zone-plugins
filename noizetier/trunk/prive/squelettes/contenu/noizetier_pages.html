@@ -5,13 +5,13 @@
 <ul class="liste-items liste-pages noizetier-liste-pages">
 	<BOUCLE_pages(POUR){tableau #NOIZETIER_LISTE_PAGES}{par cle}>
 	<li class="item page" [ style="background-image: url((#VALEUR|table_valeur{icon}|sinon{page-24.png}|noizetier_chemin_icone));"]>
-		<a href="#URL_ECRIRE{page,page=#CLE}">[(#VALEUR|table_valeur{nom}|sinon{#CLE})]</a>
+		<a href="#URL_ECRIRE{noizetier_page,page=#CLE}">[(#VALEUR|table_valeur{nom}|sinon{#CLE})]</a>
 		[<br />(#VALEUR|table_valeur{description})]
 	</li>
 	</BOUCLE_pages>
 </ul>
 [(#PLUGIN{compositions}|oui)
-	[(#URL_ECRIRE{page_edit}|parametre_url{new,oui}|icone_verticale{<:noizetier:editer_nouvelle_page:>,page-24,'new',right})]
+	[(#URL_ECRIRE{noizetier_page_edit}|parametre_url{new,oui}|icone_verticale{<:noizetier:editer_nouvelle_page:>,page-24,'new',right})]
 ]
 #BOITE_FERMER
 </B_pages>

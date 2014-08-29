@@ -1,10 +1,10 @@
 [(#AUTORISER{configurer,noizetier}|sinon_interdire_acces)]
 [(#ENV{page}|oui)
-	[(#SET{redirect,[(#URL_ECRIRE{page,page=#ENV{page}})]})]
+	[(#SET{redirect,[(#URL_ECRIRE{noizetier_page,page=#ENV{page}})]})]
 	[(#SET{icone_retour,#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{icon}})]
 ]
 [(#ENV{new}|oui)
-	#SET{redirect,#URL_ECRIRE{pages}}
+	#SET{redirect,#URL_ECRIRE{noizetier_pages}}
 	#SET{icone_retour,noizetier-24.png}
 ]
 #SET{redirect,#ENV{redirect}|sinon{#GET{redirect}}}
@@ -27,8 +27,8 @@
 </div>
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/
-		jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'page_edit','page':'#ENV{page}','new':'#ENV{new}'}});
-		jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'page_edit','page':'#ENV{page}','new':'#ENV{new}'}});
+		jQuery('#chemin').find('>div').ajaxReload({'args':{'exec':'noizetier_page_edit','page':'#ENV{page}','new':'#ENV{new}'}});
+		jQuery('#navigation').find('>div').ajaxReload({'args':{'exec':'noizetier_page_edit','page':'#ENV{page}','new':'#ENV{new}'}});
 	/*\]\]>*/</script>
 ]
 </div>

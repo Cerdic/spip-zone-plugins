@@ -1,4 +1,4 @@
-<a href="#URL_ECRIRE{pages}" title="<:noizetier:editer_noizetier_titre:>"><img src="#CHEMIN_IMAGE{noizetier-16.png}" /></a> > <a href="#URL_ECRIRE{pages}"><:noizetier:liste_pages:></a>
-> <a href="#URL_ECRIRE{page,page=#ENV{page}}"> [(#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{nom})]</a>
+<a href="#URL_ECRIRE{noizetier_pages}" title="<:noizetier:editer_noizetier_titre:>"><img src="#CHEMIN_IMAGE{noizetier-16.png}" /></a> > <a href="#URL_ECRIRE{noizetier_pages}"><:noizetier:liste_pages:></a>
+> <a href="#URL_ECRIRE{noizetier_page,page=#ENV{page}}"> [(#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{nom})]</a>
 > [(#NOIZETIER_LISTE_PAGES{#ENV{page}}|table_valeur{blocs}|table_valeur{#ENV{bloc}}|table_valeur{nom})]
 > <strong class="on"><:noizetier:formulaire_ajouter_noisette:></strong>

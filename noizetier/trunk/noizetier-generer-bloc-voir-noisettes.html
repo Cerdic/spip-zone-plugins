@@ -4,7 +4,7 @@
 <input type='hidden' name='ordre[]' value='bloc-#ENV{bloc}' class="noizetier-tri" />
 <input type='hidden' name='ordre[]' value='page-#ENV{type}[-(#ENV{composition})]' class="noizetier-tri" />
 <div style="color:#8A1F11; font-size:2em; margin:5px 0;">[(#NOIZETIER_LISTE_PAGES{#ENV{type}[-(#ENV{composition})]}|table_valeur{blocs}|table_valeur{#ENV{bloc}}|table_valeur{nom}|sinon{#ENV{bloc}})]</div>
-<div>[<strong>(#NOIZETIER_LISTE_PAGES{#ENV{type}[-(#ENV{composition})]}|table_valeur{nom})</strong>] ([(#ENV{type})][-(#ENV{composition})]) [\[<a href="(#URL_ECRIRE{page,page=#ENV{type}[-(#ENV{composition})]})"><:noizetier:modifier_dans_prive:></a>\]]</div>
+<div>[<strong>(#NOIZETIER_LISTE_PAGES{#ENV{type}[-(#ENV{composition})]}|table_valeur{nom})</strong>] ([(#ENV{type})][-(#ENV{composition})]) [\[<a href="(#URL_ECRIRE{noizetier_page,page=#ENV{type}[-(#ENV{composition})]})"><:noizetier:modifier_dans_prive:></a>\]]</div>
 	<BOUCLE_noisettes(NOISETTES){bloc=#ENV{bloc}}{type=#ENV{type}}{composition=#ENV{composition}}{par rang}>
 	<div class="noizetier-noisette" id="noizetier-noisette-#ID_NOISETTE"
 		style="padding:10px; border:2px solid #9DBA00; margin:10px 0;"

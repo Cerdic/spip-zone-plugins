@@ -1,6 +1,6 @@
 <BOUCLE_ariane(NOISETTES){id_noisette}>
-<a href="#URL_ECRIRE{pages}" title="<:noizetier:editer_noizetier_titre:>"><img src="#CHEMIN_IMAGE{noizetier-16.png}" /></a> > <a href="#URL_ECRIRE{pages}"><:noizetier:liste_pages:></a>
-> <a href="[(#URL_ECRIRE{page,page=#TYPE[-(#COMPOSITION)]})]"> [(#NOIZETIER_LISTE_PAGES{#TYPE[-(#COMPOSITION)]}|table_valeur{nom})]</a>
+<a href="#URL_ECRIRE{noizetier_pages}" title="<:noizetier:editer_noizetier_titre:>"><img src="#CHEMIN_IMAGE{noizetier-16.png}" /></a> > <a href="#URL_ECRIRE{noizetier_pages}"><:noizetier:liste_pages:></a>
+> <a href="[(#URL_ECRIRE{noizetier_page,page=#TYPE[-(#COMPOSITION)]})]"> [(#NOIZETIER_LISTE_PAGES{#TYPE[-(#COMPOSITION)]}|table_valeur{nom})]</a>
 > [(#NOIZETIER_LISTE_PAGES{#TYPE[-(#COMPOSITION)]}|table_valeur{blocs}|table_valeur{#BLOC}|table_valeur{nom})]
 > <strong class="on">[(#NOIZETIER_INFO_NOISETTE{#NOISETTE}|table_valeur{nom})]</strong>
 </BOUCLE_ariane>
