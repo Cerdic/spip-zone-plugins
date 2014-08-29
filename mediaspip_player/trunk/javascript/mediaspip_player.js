@@ -997,7 +997,6 @@
 			if((controls.find(".elapsed_time").size() == 0) || controls.find(".elapsed_time").is(':hidden')) elapsed_width = 0;
 
 			var progressback_width = progresswidth - elapsed_width - remaining_width - parseFloat(controls.find('.progress_back').css('border-left-width')) - parseFloat(controls.find('.progress_back').css('border-right-width'))-parseFloat(controls.find('.progress_back').css('margin-right')) - parseFloat(controls.find('.progress_back').css('margin-left')) - parseFloat(controls.find('.progress_back').css('padding-right')) - parseFloat(controls.find('.progress_back').css('padding-left'))-2;
-			console.log(progressback_width);
 			if(slider && progressback_width < 0 && !force){
 				if(id.slider && (typeof(id.slider_volume) == 'object')){
 					id.slider_volume.slider('option',{'orientation':'vertical'});
