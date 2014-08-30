@@ -1,7 +1,7 @@
 <paquet
 	prefix="panier2commande"
 	categorie="divers"
-	version="0.1.4"
+	version="0.1.5"
 	etat="test"
 	compatibilite="[2.1.8;3.0.*]"
 	logo="images/panier2commande-32.png"
