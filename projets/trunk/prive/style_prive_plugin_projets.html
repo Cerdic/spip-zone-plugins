@@ -34,14 +34,18 @@ Valeurs par defaut :
 
 
 body.projet #contenu .fiche_objet #wysiwyg .champ,
-body.projets_cadre #contenu .fiche_objet #wysiwyg .champ {
+body.projets_cadre #contenu .fiche_objet #wysiwyg .champ,
+body.projet #contenu .fiche_objet #wysiwyg .afficher,
+body.projets_cadre #contenu .fiche_objet #wysiwyg .afficher {
     margin-bottom: 1em;
     overflow: hidden;
     padding-top: 0.5em;
     border-top: 1px solid #GET{claire};
 }
 body.projet #contenu .fiche_objet #wysiwyg .champ .label.visible,
-body.projets_cadre #contenu .fiche_objet #wysiwyg .champ .label.visible {
+body.projets_cadre #contenu .fiche_objet #wysiwyg .champ .label.visible,
+body.projet #contenu .fiche_objet #wysiwyg .afficher .label,
+body.projets_cadre #contenu .fiche_objet #wysiwyg .afficher .label {
     display: block;
     width: 30%;
     margin-top:0;
@@ -50,11 +54,19 @@ body.projets_cadre #contenu .fiche_objet #wysiwyg .champ .label.visible {
     color: #GET{color};
 }
 body.projet #contenu .fiche_objet #wysiwyg .champ .span,
-body.projets_cadre #contenu .fiche_objet #wysiwyg .champ .span {
+body.projets_cadre #contenu .fiche_objet #wysiwyg .champ .span,
+body.projet #contenu .fiche_objet #wysiwyg .afficher .valeur,
+body.projets_cadre #contenu .fiche_objet #wysiwyg .afficher .valeur {
     display:block;
     width: 69%;
     float: right;
 }
+
+body.projet #contenu .fiche_objet #wysiwyg .afficher .valeur p,
+body.projets_cadre #contenu .fiche_objet #wysiwyg .afficher .valeur p {
+    margin-bottom: 0;
+}
+
 body.projet #contenu .fiche_objet #wysiwyg .fieldset,
 body.projets_cadre #contenu .fiche_objet #wysiwyg .fieldset {
     margin-top: 2em;
