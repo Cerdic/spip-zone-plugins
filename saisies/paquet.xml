@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="1.40.8"
+	version="1.40.9"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/logo_saisie_48.png"
@@ -13,7 +13,7 @@
 	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<licence>GNU/GPL</licence>
-	
+
 	<traduire module="saisies" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="header_prive" inclure="saisies_pipelines.php" />
