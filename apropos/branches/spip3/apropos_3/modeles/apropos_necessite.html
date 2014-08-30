@@ -1,0 +1,53 @@
+<!-- 
+On va récupérer dans la table spip_paquets le champ dependances et on fait une boucle récursive pour 
+reprendre la colonne necessite.
+
+fichier modele/apropos_necessite.html
+
+ -->
+
+<!-- on récupère le préfixe passé en paramètre et on le passe en majuscule pour être sûr du traitement -->
+#SET{lePrefixe,#ENV*{prefixe}|mb_strtoupper} 
+
+<B_>
+<BOUCLE_(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{actif=oui}{prefixe=#GET{lePrefixe}}>
+#NOM
+[(#REM)<!-- Boucle sur le tableau  -->]
+    <BOUCLE_data_tab(DATA){source table, #DEPENDANCES}>       
+                 [(#VALEUR|print)]
+           <B_data>
+                  [(#REM)<!-- Boucle sur le tableau et toute sa profondeur -->]
+                <BOUCLE_data(DATA){source table, #VALEUR{0}}>
+                        #SET{lenom,#VALEUR{nom}}
+                        #SET{lacompat,#VALEUR{compatibilite}|replace{(\\[), }|replace{(\\]), }|replace{(\;), }}
+                        <span class='apropos-nom'>[(#GET{lenom})]</span>&nbsp;&ge;&nbsp;[(#GET{lacompat})].<br />
+                 <BOUCLE_recursive_data(BOUCLE_data)/>
+                    </BOUCLE_data>
+            </B_data>
+    </BOUCLE_data_tab>
+</BOUCLE_>
+</B_>
+CACA #NOM[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{<:pluginspip:info_aucune_compatibilite_spip:>})]
+            <dl class="bloc_infos">
+                [<dt><:pluginspip:label_necessite_plugins:></dt>
+                <dd>(#DEPENDANCES|svp_afficher_dependances{necessite})</dd>]
+                [<dt><:pluginspip:label_necessite_librairies:></dt>
+                <dd>(#DEPENDANCES|svp_afficher_dependances{librairie})</dd>]
+                [<dt><:pluginspip:label_utilise_plugins:></dt>
+                <dd>(#DEPENDANCES|svp_afficher_dependances{utilise})</dd>]
+            </dl>
+			<dt><:pluginspip:label_module:></dt>
+			<dd>[(#CLE)]</dd>
+			<dt><:pluginspip:label_langue_reference:></dt>
+			<dd>[(#VALEUR{reference}|traduire_nom_langue)]</dd>
+			[<dt><:pluginspip:label_gestionnaire:></dt>
+			<dd>(#VALEUR{gestionnaire})</dd>]
+			<dt><:pluginspip:label_traductions:></dt>
+			<dd>
+			<BOUCLE_traductions(DATA){source table, #VALEUR}{datapath langues}{", "}>
+				[(#CLE|traduire_nom_langue)]
+				<B_traducteurs>(<BOUCLE_traducteurs(DATA){source table, #VALEUR}{", "}>[(#VALEUR|table_valeur{lien}|?{[<a[ href="(#VALEUR|table_valeur{lien})"]>(#VALEUR|table_valeur{nom}|filtrer_entites)</a>],[(#VALEUR|table_valeur{nom}|filtrer_entites)]})]</BOUCLE_traducteurs>)</B_traducteurs>
+			</BOUCLE_traductions>
+			[(#VALEUR{reference}|traduire_nom_langue)]
+			<//B_traductions>
+			</dd>

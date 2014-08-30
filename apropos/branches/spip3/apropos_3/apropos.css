@@ -1,0 +1,82 @@
+.apropos{
+	font-size: 1em;
+	text-align: left;
+}
+.apropos-liste{
+	text-align: left;
+	}
+.apropos h2{
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-top: 1em;
+	}
+.apropos-liste h3, .apropos h3{
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-top: 1em;
+}
+.apropos-liste img{
+	margin-left: 5px;
+}
+.apropos ul{
+	border-top: thin solid #d4d4d4;
+	margin-top: 20px;
+	padding-top: 4px;
+}
+.apropos-liste li, .apropos li{
+	list-style-type: none;
+	/*height: 48px;*/
+	padding-left: 50px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+.apropos-intro{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 0;
+	text-align: left;
+}
+.apropos-icon{
+	float: left;
+	margin-left: -40px;
+	padding: 4px;
+}
+.apropos-nom{
+	font-weight: bold;
+}
+.apropos-version{
+	font-size: 0.9em;
+	}
+.apropos-etat{
+	font-size: 0.9em;
+}
+.apropos-description{
+	font-size: 0.9em;
+	text-align: justify;
+	line-height: 1.1em;
+	padding-bottom: 6px;
+}
+.apropos-resume{
+	font-size: 1em;
+	height: auto;
+	padding-left: 40px;
+	padding-top: 10px;
+}
+.apropos-auteur{
+	font-style: italic;
+	margin-top: 1.2em;
+	font-size: 0.9em;
+}
+.apropos-svn{
+	font-size: 0.8em;
+	margin-bottom: 10px;
+}
+.apropos-erreur{
+	color: #fb2217;
+}
+.apropos-total{
+	font-weight: bold;
+	padding-right: 20px;
+	border-bottom: medium solid #212121;
+	padding-top: 30px;
+}

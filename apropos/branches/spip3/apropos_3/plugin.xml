@@ -1,0 +1,55 @@
+<plugin>
+    <nom>&#192; propos des Plugins actifs</nom>
+    <auteur>[Jean-Philippe Guihard|Se rendre sur le site de Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
+    <version>1.0.3</version>
+    <etat>Dev</etat>
+	<slogan>Liste les plugins actifs et affiche une description sommaire</slogan>
+    <description>
+    <multi>
+	[fr] Liste les plugins actifs et affiche une description sommaire de ceux-ci.
+    
+    Il sert &#224; afficher sur une page de type « &#224; propos du site » un r&#233;capitulatif des plugins actifs, y compris l'ic&#244;ne de ceux-ci.
+    <br />
+	Dans votre squelette, tapez les code suivant : <br />
+	
+	<code><INCLURE{fond=modeles/apropos_liste}></code> pour afficher la liste des plugins et plugins verrouill&eacute;s actifs ;<br />
+	<code><INCLURE{fond=modeles/apropos_nombre></code> pour n\'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs ;<br />
+	<code><INCLURE{fond=modeles/apropos_plugins></code> pour n\'afficher que le nombre de plugins actifs ;<br />
+	<code><INCLURE{fond=modeles/apropos_extensions></code> pour n\'afficher que le nombre de plugins verrouill&eacute;s actifs ; <br />
+	<code><INCLURE{fond=modeles/apropos_adisposition></code> pour n\'afficher que le nombre de plugins dans le dossier plugins ;<br />
+	<code><INCLURE{fond=modeles/apropos_disponible></code> pour n\'afficher que le nombre total de plugins verrouill&eacute;s et de plugins de votre configuration.<br />
+	<code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code> si vous souhaitez afficher la description compl&egrave;te d\'un plugin sp&eacute;cifique, &eacute;crivez <code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code>. Ainsi, par exemple, pour afficher dans un article la description compl&egrave;te de ce plugin, utilisez <code><INCLURE{fond=modeles/apropos}{prefixe=apropos}></code>.<hr />
+	
+		Pour afficher la liste dans un article, il faut &#233;crire dans l'article <code><apropos|liste></code>.<br />
+	Pour n'afficher que le nombre de plugins ET de plugins verrouill&eacute;s actifs, utilisez <code><apropos|nombre></code>.<br />
+	Pour n'afficher que le nombre de plugins actifs, utilisez <code><apropos|plugins></code>.<br />
+	Pour n'afficher que le nombre de plugins verrouill&eacute;s actifs, utilisez <code><apropos|extensions></code>.
+	[en]Lists the active plugins and displays a brief description of them.
+	It is used to display a page of type "about the site" with a summary of actives plugins, including the icon of these.
+	<br />
+	You can use the new balise #APROPOS into your templates. This balise has 4 parameters:<br />
+	- if you wrote: <code>#APROPOS{liste}</code>, you get the list of the actives plugins,
+	- if you wrote: <code>#APROPOS{nombre}</code>, you get the number of all the actives plugins AND locked plugins.
+	- if you wrote: <code>#APROPOS{plugins}</code>, you get the number of the actives plugins.
+	- if you wrote: <code>#APROPOS{extensions}</code>, you get the number of the actives locked plugins.
+	
+	To personalize the informations which are displayed before and after the list, modify the file modeles/apropos_liste.html after copying it into your folder squelettes/modeles. 
+	<br />To view the list in an article, you must write <code><apropos|liste></code>. 
+	To display the number of actives plugins AND locked plugins, write <code><apropos|nombre></code>.
+    To display the number of actives plugins, write <code><apropos|plugins></code>.
+    To display the number of actives locked plugins, write <code><apropos|extensions></code>.<br />
+    If you want to display the full description of a specific plugin, use this: <code><apropos|prefixe=the prefixe of the plugin></code>. For example, to display the description of this plugin, write: <code><apropos|prefixe=apropos></code>.
+    </multi>
+	</description>
+	<lien>http://contrib.spip.net/A-propos-des-plugins-actifs</lien>
+	<icon>apropos.png</icon>
+    <prefix>apropos</prefix>
+    <fonctions>apropos_fonctions.php</fonctions>
+	<pipeline>
+	  <nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>apropos_pipeline.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
+	<categorie>divers</categorie> 
+</plugin>

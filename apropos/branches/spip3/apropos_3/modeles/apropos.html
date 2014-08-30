@@ -1,0 +1,60 @@
+[(#REM)
+SVP crée 2 tables (spip_paquets et spip-plugins) pour stocker différentes informations relatives aux plugins installés
+Ces informations n'étant pas redondantes, il nous faut piocher dans l'une et l'autre
+D'ou l'utilisation des 2 boucles pour prendre les éléments dans chacune des tables.
+
+fichier modele/apropos.html
+]
+  
+
+
+<!-- affichage des informations synthétiques d'un plugin -->
+
+<!-- on récupère le préfixe passé en paramètre et on le passe en majuscule pour être sûr du traitement -->
+#SET{leprefixe,#ENV*{prefixe}|mb_strtoupper} 
+<div class='apropos'>
+
+<B_utilisation>
+<BOUCLE_utilisation(PAQUETS) {tout}{constante LIKE _DIR_PLUGINS%}{prefixe=#GET{leprefixe}}>
+
+	<BOUCLE_plugin(PLUGINS) {prefixe=#GET{leprefixe}} {tout}>
+	<!-- on récupère le nom, le nombre de visites du plugin depuis la table spip_plugins -->
+		#SET{lenom,#NOM} 
+		#SET{nombresite,#NBR_SITES}
+	</BOUCLE_plugin>
+	
+	<div class='apropos-resume'>
+		<div class='apropos-icon'>
+		[(#CHEMIN{#LOGO}|balise_img{"L'icone du plugin "#NOM}|image_reduire{32}|sinon{#CHEMIN{apropos/img/generique.png}|balise_img{"Icone g&eacute;n&eacute;rique de plugin"}})] 
+
+		</div>
+		[<span class='apropos-nom'>(#GET{lenom}), #GET{linformation}</span>]
+		<span class='apropos-version'>version #VERSION, [(#ETAT|svp_afficher_etat)]#FICHIER.</span>
+		
+		<div class='apropos-description'>
+			[(#DESCRIPTION|extraire_multi)]
+		</div>
+		<span class='apropos-auteur'>
+			[<:public:par_auteur:> (#AUTEUR*|svp_afficher_credits)]
+		</span><br />
+		<div class='apropos-etat'>
+		
+			[(#GET{nombresite}|?{
+				[(#GET{nombresite}|singulier_ou_pluriel{svpstats:info_nbr_sites_1, svpstats:info_nbr_sites_n})],
+				<:svpstats:info_nbr_sites_0:> 
+			}).]
+			<br />
+			
+				[<:apropos:la_documentation:> <a href="#LIEN_DOC" title="Lisez la documentation du plugin [(#GET{lenom})].">(#LIEN_DOC)</a><br />]
+				[<:apropos:la_demonstration:> <a href="#LIEN_DEMO" title="La page de démonstration du plugin [(#GET{lenom})].">(#LIEN_DEMO)</a><br />]
+			
+				Plus d'information sur le plugin <a href="http://plugins.spip.net/#ENV*{prefixe}.html" title="Tout sur le plugin [(#GET{lenom})] via le site plugin.spip.net.">[(#GET{lenom})]</a> sur le site plugin.spip.net.
+		</div>
+	</div>
+
+</BOUCLE_utilisation>
+</B_utilisation>
+<div class="apropos-erreur">
+</div>
+<//B_utilisation>
+</div>

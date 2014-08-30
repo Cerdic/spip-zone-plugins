@@ -1,0 +1,15 @@
+<B_pluginstiers>
+#SET{nbreplginsactifs,#TOTAL_BOUCLE}
+<BOUCLE_pluginstiers(spip_paquets){constante=_DIR_PLUGINS}>
+</BOUCLE_pluginstiers>
+</B_pluginstiers>
+
+
+<B_extensions>
+#SET{nbreextensionactifs,#TOTAL_BOUCLE}
+<BOUCLE_extensions(spip_paquets){constante=_DIR_PLUGINS_DIST}>
+</BOUCLE_extensions>
+</B_extensions>
+
+#SET{latotale,#GET{nbreextensionactifs}|plus{#GET{nbreplginsactifs}}}
+#GET{latotale}
