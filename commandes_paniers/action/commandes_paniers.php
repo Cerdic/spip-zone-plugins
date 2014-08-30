@@ -42,8 +42,8 @@ function action_commandes_paniers_dist($arg=null){
 	}
 
 	// Si aucun panier ne pas agir
-	if (is_null($id_panier)) 
-		return;        
+	if (is_null($id_panier))
+		return;
 
 	// création d'une commande "en cours"
 	// Ses détails sont ensuite remplis d'après le panier en session
