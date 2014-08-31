@@ -1,11 +1,12 @@
-<BOUCLE_content(AUTEURS){id_auteur}>
-<section class="vcard" itemscope itemtype="http://schema.org/Person"> [(#REM) microformat vcard]
+<BOUCLE_content(AUTEURS){id_auteur}{tout}>
 	<header class="cartouche">
 		<h1 class="#EDIT{qui} fn" itemprop="name">[(#LOGO_AUTEUR|image_reduire|inserer_attribut{itemprop,image})]#NOM</h1>
 	</header>
 
+<div class="row">
+<section class="vcard col-md-6" itemscope itemtype="http://schema.org/Person"> [(#REM) microformat vcard]
 	<div class="main">
-		[<div class="#EDIT{bio} chapo bio">(#BIO|adaptive_images)</div>]
+		[<div class="#EDIT{bio} chapo bio">(#BIO)</div>]
 		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url spip_out" itemprop="url">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
 	</div>
 
@@ -19,4 +20,12 @@
 		[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 	</footer>
 </section>
+<div class="col-md-6">
+	<div class="block">
+		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
+		<INCLURE{fond=prive/objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />
+
+	</div>
+</div>
+</div>
 </BOUCLE_content>
