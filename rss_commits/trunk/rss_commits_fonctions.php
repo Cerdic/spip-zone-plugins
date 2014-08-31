@@ -47,4 +47,5 @@ function lister_rss_commits ()
 
     return $rss_items;
 }
+
 ?>
