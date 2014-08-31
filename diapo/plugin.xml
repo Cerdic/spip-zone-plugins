@@ -13,13 +13,13 @@
     <etat>stable</etat>
     <description>
 		 <multi>
-			  [fr]Plugin ajoutant le mod&#232;le <code><diapoXX></code> permettant d’ins&#233;rer les images de l’article XX sous forme de galerie/diaporama reprenant le fonctionnement de la galerie Walma.
+			  [fr]Plugin ajoutant le mod&#232;le <code><diapoXX></code> permettant d'ins&#233;rer les images de l'article XX sous forme de galerie/diaporama reprenant le fonctionnement de la galerie Walma.
 			  [de]Durch dieses Plugin wird die M&oumlglichkeit geschaffen, mit dem SPIP-Tag <code><diapoXX></code> eine Galerie/Diashow einzuf&#252;gen, wobei die Bilder hierf&#252;r dem Artikel XX entstammen.
 			  [it]Modulo galleria/diaporama
 			  [es]Plugin que agrega el modelo <code><diapoXX></code> que permite insertar las im&#225;genes del art&#237;culo XX en forma de galer&#237;a o presentaci&#243;n de diapositivas que reproduce el funcionamiento de la galer&#237;a Walma.
 		 </multi>
     </description>
-    <lien>http://www.spip-contrib.net/Plugin-Diapo</lien>
+    <lien>http://contrib.spip.net/Plugin-Diapo</lien>
     <prefix>diapo</prefix>
     <chemin dir='' />
     <options>diapo_options.php</options>

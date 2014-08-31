@@ -5,7 +5,7 @@
 	<licence>(c) 2009 GPL</licence>
 	<version>1.0.0</version>
 	<etat>stable</etat>
-	<lien>http://www.spip-contrib.net/Edition-en-plein-ecran</lien>
+	<lien>http://contrib.spip.net/Edition-en-plein-ecran</lien>
 	<description>
 	Tous les champs multilignes (textarea) peuvent d&#233;sormais &#234;tre &#233;dit&#233;s en mode plein &#233;cran. Pour cela: double-cliquer dans un champ: la page dispara&#238;t et seul le champ d'&#233;dition occupe tout l'&#233;cran. Pour sortir de ce mode d'&#233;dition, utiliser la touche &#171;Esc&#187; (escape).
 	

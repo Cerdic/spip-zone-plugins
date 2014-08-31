@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/exclure_secteur.jpg"
-	documentation="http://www.spip-contrib.net/Plugin-Exclure-secteur"
+	documentation="http://contrib.spip.net/Plugin-Exclure-secteur"
 	schema="0.1.0"
 >
 

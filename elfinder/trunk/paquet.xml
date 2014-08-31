@@ -5,7 +5,7 @@
 		etat="dev"
 		compatibilite="[3.0.0;3.0.*]"
 		logo="images/elfinder_48.png"
-		documentation="http://www.spip-contrib.net/elFinder"
+		documentation="http://contrib.spip.net/elFinder"
 >
 	<nom>elFinder</nom>
 

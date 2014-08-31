@@ -13,7 +13,7 @@
     	[fr]Ce plugin permet de convertir &#224; la vol&#233;e des pdf, tiff et autres types de document en image ou s&#233;rie d'images. Ces images sont ensuite exploitables via une boucle sp&#233;cifique.
 		[en]This plugin will convert on the fly pdf, tiff and other kind of documents in image or serie of images. These images can then be used with a specific loop.
 	</multi></description>
-    <lien>http://www.spip-contrib.net/doc2img</lien>
+    <lien>http://contrib.spip.net/doc2img</lien>
 	<icon>images/doc2img-128.png</icon>
     <prefix>doc2img</prefix>
 	<install>base/doc2img_install.php</install>

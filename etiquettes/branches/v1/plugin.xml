@@ -14,7 +14,7 @@ Il propose donc une balise avec param&#232;tres qui va g&#233;n&#233;rer un cham
 -* Une liste &#224; cliquer (sur les m&#234;mes principes que les cases &#224; cocher)
 -* Aucune aide
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Etiquettes</lien>
+	<lien>http://contrib.spip.net/Etiquettes,2656</lien>
 	<prefix>etiquettes</prefix>
 	<icon>images/etiquettes.png</icon>
 	<options>etiquettes_options.php</options>

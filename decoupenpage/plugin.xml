@@ -9,7 +9,7 @@
 	<description>
 	Un plugin pour d&#233;couper l'affichage public d'un article en plusieurs pages. R&#233;digez vos articles en utilisant trois signes plus cons&#233;cutifs (+++) &#224; l'endroit qui doit recevoir la coupure.
 	</description>
-	<lien>http://www.spip-contrib.net/Decouper-un-article-en-plusieurs</lien>
+	<lien>http://contrib.spip.net/Decouper-un-article-en-plusieurs</lien>
 	<fonctions>decouper_fonctions.php</fonctions>
 	<options>decouper_options.php</options>
 	<prefix>decouper</prefix>

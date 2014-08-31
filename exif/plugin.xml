@@ -28,7 +28,7 @@
 	  [it]Un nuovo segnaposto SPIP per visualizzare le informazioni delle immagini. In piu, questo plugin permitte di avere la data della photo (EXIF) e non la data del upload.
 	  </multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Afficher-les-donnees-EXIF-des-images</lien>
+	<lien>http://contrib.spip.net/Afficher-les-donnees-EXIF-des-images</lien>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	  plug_exif.php
 	</fonctions>

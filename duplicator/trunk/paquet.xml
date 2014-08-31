@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/duplicator.png"
-	documentation="http://www.spip-contrib.net/?article3354"
+	documentation="http://contrib.spip.net/?article3354"
 >
 
 	<nom>Duplicator</nom>

@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/etiquettes.png"
-	documentation="http://www.spip-contrib.net/Plugin-Etiquettes"
+	documentation="http://contrib.spip.net/Etiquettes,2656"
 >	
 
 	<nom>&#201;tiquettes</nom>

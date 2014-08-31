@@ -9,7 +9,7 @@
 	<icon>images/docker-128.png</icon>
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="docker" reference="fr" />
-	<lien>http://www.spip-contrib.net/4334</lien>
+	<lien>http://contrib.spip.net/4334</lien>
     <bouton id='docker' parent='configuration'>
 		<icone>images/docker-24.png</icone>
 		<titre>import_docker</titre>

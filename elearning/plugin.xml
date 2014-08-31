@@ -12,7 +12,7 @@ Ce plugin permet d'utiliser SPIP comme une plateforme simple de E-Learning.
 Sur le principe, ce plugin est une aggr&#233;ggation de plusieurs plugins, plus des fonctionnalit&#233;s qui lui sont propres.
 _ En plus d'avoir ses cours en ligne, on peut donc faire des tests not&#233;s, voir les connexions et les pages visit&#233;es par les &#233;l&#232;ves, d&#233;finir une progression dans les cours suivant les notes du cours pr&#233;c&#233;dent, etc.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-E-learning</lien>
+	<lien>http://contrib.spip.net/Plugin-E-learning</lien>
 	<prefix>elearning</prefix>
 	<options>elearning_options.php</options>
 	<fonctions>elearning_fonctions.php</fonctions>

@@ -9,9 +9,9 @@
 </multi>
 </description>
 <auteur><!-- Auteur du plugin -->
-- [Jean-S&eacute;bastien Barboteu->http://www.spip-contrib.net/jsb]
+- [Jean-S&eacute;bastien Barboteu->http://contrib.spip.net/jsb]
 </auteur>
-<lien>http://www.spip-contrib.net/ebiblio</lien> <!-- URI de documentation -->
+<lien>http://contrib.spip.net/ebiblio</lien> <!-- URI de documentation -->
 <fonctions>ebiblio_fonctions.php</fonctions>
 <!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 sur le mode Rien::

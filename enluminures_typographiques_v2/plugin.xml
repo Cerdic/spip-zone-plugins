@@ -3,10 +3,10 @@
 	<slogan>Plein de raccourcis pour la mise en forme !</slogan>
 	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_], &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]</auteur>
 	<licence>&#169; 2007 GNU/GPL</licence>
-	<lien>http://www.spip-contrib.net/Plugin-Enluminures-typographiques</lien>
+	<lien>http://contrib.spip.net/Plugin-Enluminures-typographiques</lien>
 	<version>2.1.4</version>
 	<etat>stable</etat>
-	<description>Ce plugin ajoute au [Plugin Barre Typographique V2->http://www.spip-contrib.net/Plugin-Barre-Typographique-V2] les raccourcis typographiques et les boutons pr&#233;sents dans le [Plugin Barre Typographique Enlumin&#233;e->http://www.spip-contrib.net/Plugin-Barre-Typographique]. Par exemple :
+	<description>Ce plugin ajoute au [Plugin Barre Typographique V2->http://contrib.spip.net/Plugin-Barre-Typographique-V2] les raccourcis typographiques et les boutons pr&#233;sents dans le [Plugin Barre Typographique Enlumin&#233;e->http://contrib.spip.net/Plugin-Barre-Typographique]. Par exemple :
 -* Paragraphes :
 -** {{Sous-titres}} <code>{n{</code>Texte du titre<code>}n}</code>, n variant de 2 &#224; 5, la barre de raccourcis ne proposant que 2 et 3
 -** {{Centrer}} <code>[|</code>Paragraphe centr&#233;<code>|]</code>

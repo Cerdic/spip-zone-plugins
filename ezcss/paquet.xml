@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/logo.jpg"
-	documentation="http://www.spip-contrib.fr/?article3538"
+	documentation="http://contrib.spip.net/?article3538"
 >
 	<nom>ezcss</nom>
 	<auteur lien="http://www.ez-css.org/">Thierry Koblenz et port&eacute; pour SPIP par Gilles Klein</auteur>

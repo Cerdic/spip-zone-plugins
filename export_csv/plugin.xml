@@ -28,7 +28,7 @@
 		</multi>
 	</description>
 	
-	<lien>http://www.spip-contrib.net/Export-CSV-des-articles-et-petitions-pour-SPIP-1-9-2</lien>
+	<lien>http://contrib.spip.net/Export-CSV-des-articles-et-petitions-pour-SPIP-1-9-2</lien>
 	<prefix>exportcsv</prefix>
 	<icon>img_pack/exportcsv-72.png</icon> <!-- http://commons.wikimedia.org/wiki/Nuvola -->
 	

@@ -12,7 +12,7 @@
 	
 	[->http://www.dublincore.org/]
 	</description>
-	<lien>http://www.spip-contrib.net/Dublin-Core</lien>
+	<lien>http://contrib.spip.net/Dublin-Core</lien>
 	<prefix>dublin_core</prefix>
 	<icon>images/dublin_core-48.png</icon>
 	<fonctions>dublin_core_fonctions.php</fonctions>

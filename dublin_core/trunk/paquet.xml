@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/dublin_core-48.png"
-	documentation="http://www.spip-contrib.net/Dublin-Core"
+	documentation="http://contrib.spip.net/Dublin-Core"
 >
 
 	<nom>Dublin Core</nom>

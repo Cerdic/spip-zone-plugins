@@ -8,7 +8,7 @@
 	<description>
 		Ce plugin permet d'importer &#171; beaucoup &#187; de documents distants d'un seul coup, en les affectant &#224; un article (ou une rubrique, ou une br&#232;ve). &#192; condition d'avoir r&#233;cup&#233;r&#233; toutes les urls des documents &#224; ajouter. Il ne permet pas, par exemple, de r&#233;cup&#233;rer tous les documents situ&#233;s dans un dossier sur le net.
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-d-importation-massive-de-documents-distants</lien>
+	<lien>http://contrib.spip.net/Le-plugin-d-importation-massive-de-documents-distants</lien>
 
 	<prefix>documents_distants</prefix>
 	<pipeline>

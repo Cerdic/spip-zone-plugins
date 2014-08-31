@@ -7,7 +7,7 @@
 	<description>
 		Ce plugin ajoute une fonctionnalit&#233; dans la zone de configuration du site permettant de t&#233;l&#233;charger le dump de la base de donn&#233;es du site sur son ordinateur sans acc&#232;s FTP.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Download-Dump</lien>
+	<lien>http://contrib.spip.net/Plugin-Download-Dump</lien>
 	<icon>dd.png</icon>
 	<prefix>dd</prefix>
 	<pipeline>

@@ -7,7 +7,7 @@
 	<icon>diapos.png</icon>
 	<description>Comme son nom l’indique, c’est un (petit) plugin qui rappelle un peu le fonctionnement d’un projecteur de diapositives</description>
 	<prefix>diapos</prefix>
-   <lien>http://www.spip-contrib.net/Diapos</lien>
+   <lien>http://contrib.spip.net/Diapos</lien>
 	<pipeline>
   		<nom>insert_head</nom>
   		<inclure>diapos_pipelines.php</inclure>

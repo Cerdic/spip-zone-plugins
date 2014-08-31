@@ -4,7 +4,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// Original
 	'titre_original' => 'EuDock, plugin pour SPIP 2.0+',
 	'licence_originale' => 'Script javascript original "{{EuDock}}" version 2.0 - {{copyright &#169; 2006 [Parodi (Pier...) Eugenio->http://eudock.jules.it] distribu&eacute; sous licence [LGPL->http://eudock.jules.it/LICENSE.txt]}} ({cf. fichier "LICENSE.txt" dans le r&eacute;pertoire du plugin}).',
-	'licence_actuelle' => 'Plugin pour SPIP 2.0+ : {{"EuDock" - copyright &#169; 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] sous licence &eacute;tendue [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.',
+	'licence_actuelle' => 'Plugin pour SPIP 2.0+ : {{"EuDock" - copyright &#169; 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] sous licence &eacute;tendue [GPL->http://www.opensource.org/licenses/gpl-3.0.html] }}.',
 	// Documentation
 	'doc_titre_page' => 'Page de documentation du plugin EuDock',	
 	'doc_titre_court' => 'Documentation EuDock',	
@@ -112,6 +112,6 @@ L\'exemple de <a href="@lien_gadgets@">cette page</a> pr&eacute;sente quelques g
 -* [Mode &#034;texte simple&#034;->@mode_brut@] ({html simple + balise INSERT_HEAD})
 -* [Mode &#034;squelette Zpip&#034;->@mode_zpip@] ({squelette Z compatible})
 -* [Mode &#034;squelette SPIP&#034;->@mode_spip@] ({compatible distribution})',
-	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->http://www.spip-contrib.net/?article3567].',
+	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur contrib.spip : [->http://contrib.spip.net/?article3567].',
 );
 ?>

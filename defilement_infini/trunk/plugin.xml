@@ -6,7 +6,7 @@
     <etat>stable</etat>
    <!--  <icon>images/infinite-scroll-64.png</icon> -->
 	<description>Ce plugin active un d&#233;filement infini sur les listes d'articles. Le principe de l'&#171; Infinite Scroll &#187; est de charger du contenu pendant que la barre de d&#233;filement descend. Concr&#234;tement, cela permet de ne pas avoir &#224; mettre en place une pagination et &#233;vite aux utilisateurs d'avoir &#224; cliquer sur des liens &#171; pages suivantes &#187;. On all&#232;ge aussi le chargement de ces pages en affichant uniquement le d&#233;but.</description>
-	<lien>http://www.spip-contrib.net/?article3914</lien>
+	<lien>http://contrib.spip.net/?article3914</lien>
 	<prefix>defilement_infini</prefix>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 

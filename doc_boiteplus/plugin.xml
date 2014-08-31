@@ -5,7 +5,7 @@
 	<auteur>	<!-- Auteur du plugin -->
 	alm elastick.net
 	</auteur>
-	<lien>http://www.spip-contrib.net</lien>
+	<lien>http://contrib.spip.net/</lien>
 	<version>
 	  0.1
 	</version>
@@ -14,7 +14,7 @@
 	</etat>
 	<description>
 	  Permet d'ajouter une boite dans le portfolio de l'article, necessite le plugin 
-_ http://www.spip-contrib.net/Des-mots-clefs-partout
+_ http://contrib.spip.net/Des-mots-clefs-partout
 	</description>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::

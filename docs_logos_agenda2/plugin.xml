@@ -15,13 +15,13 @@
 	<etat>test</etat>
 	<description>
 	<multi>
-	[fr]Ce plugin propose un formulaire d'ajout de logo et de documents sur l'&#233;dition d’un &#233;v&#233;nement d'Agenda 2, de la m&#234;me mani&#232;re que pour un objet spip standard (comme un article, une rubrique...).
+	[fr]Ce plugin propose un formulaire d'ajout de logo et de documents sur l'&#233;dition d'un &#233;v&#233;nement d'Agenda 2, de la m&#234;me mani&#232;re que pour un objet spip standard (comme un article, une rubrique...).
 	[es]Documentos y logos en los eventos del Agenda 2
 	[en]Documents and logos on the events of Agenda 2
 	[de]Dokumente und Logos die auf die event der Agenda 2
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Documents-et-logo-des-evenements-Agenda-2,3444</lien>
+	<lien>http://contrib.spip.net/Documents-et-logo-sur-les-evenements</lien>
 	<fonctions>agenda_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>

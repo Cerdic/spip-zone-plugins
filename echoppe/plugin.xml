@@ -11,7 +11,7 @@ Un projet de boutique g&#233;n&#233;raliste pour spip.
 
 {{Pour le logo, c'est du provisoire :D}}
 	</description>
-	<lien>http://www.spip-contrib.net/Echoppe</lien>
+	<lien>http://contrib.spip.net/Echoppe</lien>
 	<icon>images/echoppe_blk_50.png</icon>
 	<prefix>echoppe</prefix>
 	<necessite id='spip' version='[2.0.0;2.0.99]' />

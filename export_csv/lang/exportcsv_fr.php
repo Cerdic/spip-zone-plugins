@@ -4,9 +4,9 @@
  * Export des articles / rubriques SPIP en fichiers CSV.
  *
  * Auteur :
- * Stéphanie De Nadaï
+ * StÃ©phanie De NadaÃ¯
  * webdesigneuse.net
- * © 2008 - Distribué sous licence GNU/GPL
+ * Â© 2008 - DistribuÃ© sous licence GNU/GPL
  *
 ##############################################################*/
 

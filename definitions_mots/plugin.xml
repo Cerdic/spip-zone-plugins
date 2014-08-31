@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>D&#233;finitions de mots cl&#233;s</nom>
-	<slogan>Afficher les d&#233;finitions de mots cl&#233;s &#224; l’int&#233;rieur du texte</slogan>
+	<slogan>Afficher les d&#233;finitions de mots cl&#233;s &#224; l'int&#233;rieur du texte</slogan>
 	<auteur>Arnault Pachot - [OpenStudio->http://www.openstudio.fr]</auteur>
 	<version>1.1.0</version>
 	<etat>test</etat>
@@ -14,7 +14,7 @@ Ce plugin a &#233;t&#233; d&#233;velopp&#233; dans le cadre du projet {{Casa d'A
 
 	<licence>GNU/GPL</licence>
 
-	<lien>http://www.spip-contrib.net/Afficher-les-definitions-de-mots</lien>
+	<lien>http://contrib.spip.net/Afficher-les-definitions-de-mots</lien>
 	<prefix>definitions</prefix>
 	<fonctions>definitions_mes_fonctions.php</fonctions>
 	<pipeline>

@@ -16,7 +16,7 @@ La duplication reprend :
 
 La nouvelle rubrique est cr&#233;&#233;e au m&#234;me niveau que la rubrique copi&#233;e.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Duplicator</lien>
+	<lien>http://contrib.spip.net/Plugin-Duplicator</lien>
 	<prefix>duplicator</prefix>
 	
 	<pipeline>

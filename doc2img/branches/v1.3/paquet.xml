@@ -6,7 +6,7 @@
 	compatibilite="[2.1.14;3.0.*]"
 	logo="images/doc2img-128.png"
 	schema="0.94"
-	documentation="http://www.spip-contrib.net/doc2img"
+	documentation="http://contrib.spip.net/doc2img"
 >	
 
 	<nom>Documents en Images</nom>

@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.2;3.0.*]"
 	logo="prive/themes/spip/images/docker-128.png"
-	documentation="http://www.spip-contrib.net/4334" 
+	documentation="http://contrib.spip.net/4334" 
 >
 	<nom>Docker</nom>
 	<auteur lien='http://elastick.net'>Anne-lise Martenot</auteur>

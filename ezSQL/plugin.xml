@@ -6,7 +6,7 @@
    <version_base>0.1</version_base>
    <etat>stable</etat>
    <description>Permet d'ex&#233;cuter des requ&#232;tes SQL, d'afficher la structure de la base et d'exporter le resultat d'un SELECT sous forme de fichier CSV</description>
-   <lien>http://www.spip-contrib.net/ezSQL-requetes-SQL-et-export-CSV</lien>
+   <lien>http://contrib.spip.net/ezSQL-requetes-SQL-et-export-CSV</lien>
    <icon>img_pack/logo_odb_150.png</icon>
    <prefix>ezsql</prefix>
    <pipeline>

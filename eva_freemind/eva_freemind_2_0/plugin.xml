@@ -8,7 +8,7 @@
 	<etat>stable</etat>
     <description>
 Permet d'ins&#233;rer des animations Freemind ou Freeplane (format mm) gr&#226;ce &#224; un mod&#232;le.
-_ Plugin cr&#233;&#233; gr&#226;ce &#224; l'article de [ivandps sur SPIP-Contrib->http://www.spip-contrib.net/Inserer-une-carte-Freemind-dans-un].
+_ Plugin cr&#233;&#233; gr&#226;ce &#224; l'article de [ivandps sur SPIP-Contrib->http://contrib.spip.net/Inserer-une-carte-Freemind-dans-un].
 	</description>
 	<lien>http://www.eva-web.edres74.ac-grenoble.fr/spip.php?article73</lien>
 	<prefix>eva_freemind</prefix>

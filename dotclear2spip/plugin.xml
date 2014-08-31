@@ -4,7 +4,7 @@
 	<icon>dc.png</icon>
 	<categorie>divers</categorie>
 	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net]</auteur>
-	<lien>http://www.spip-contrib.net/Doctlear-vers-SPIP</lien>
+	<lien>http://contrib.spip.net/Doctlear-vers-SPIP</lien>
 	<version>0.2.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>

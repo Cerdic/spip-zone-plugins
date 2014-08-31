@@ -11,7 +11,7 @@
 	<etat>test</etat>
 	<description>Parfois des articles n’ont plus d’int&#233;r&#234;t &#224; une date donn&#233;e et vous souhaitez programmer leur d&#233;publication pour qu’elle s’effectue automatiquement. Les articles passent alors dans un &#233;tat pr&#233;d&#233;fini (propos&#233;, valid&#233;, poubelle ou un &#233;tat sp&#233;cifique cr&#233;&#233; par l'utilisateur). Vous pouvez aussi renseigner une date d’expiration des droits d’un auteur. A la date donn&#233;e, l’utilisateur sera mis automatiquement &#224; la poubelle et il ne pourra donc plus se connecter sur l’applicatif.
 	</description>
-	<lien>http://www.spip-contrib.net/Depublication,3642</lien>
+	<lien>http://contrib.spip.net/Depublication,3642</lien>
 	<prefix>depublication</prefix>
 	
 	<install>base/depublication_install.php</install>

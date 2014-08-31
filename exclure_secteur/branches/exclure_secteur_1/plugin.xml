@@ -6,7 +6,7 @@
 	<icon>exclure_secteur.jpg</icon>
 	<version>1.2.0</version>
 	<etat>stable</etat>
-	<lien>http://www.spip-contrib.net/Plugin-Exclure-secteur</lien>
+	<lien>http://contrib.spip.net/Plugin-Exclure-secteur</lien>
    <description>
 Ce plugin exclut automatiquement les secteurs s&#233;l&#233;ctionn&#233;s des boucles ARTICLES / SITES / RUBRIQUES / BREVES / FORUMS (suivant la r&#233;gle de SPIP, qui ne prend en compte que les forums li&#233;s &#224; des articles).
 

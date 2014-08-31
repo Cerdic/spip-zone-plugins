@@ -23,7 +23,7 @@
 			Erm&#246;glicht es Spip Objekete im Backoffice direkt auf von deren Seite her zu bearbeiten. Die gew&#252;nschten Objekte m&#252;ssen zuerst via cfg aktiviert werden
 		</multi>	
 	</description>
-	<lien>http://www.spip-contrib.net/Edition-directe,3840</lien>
+	<lien>http://contrib.spip.net/Edition-directe,3840</lien>
 	<licence>GPL 3</licence>
 	<prefix>edition_directe</prefix>
 	<icon>img/logo_aed_edit_32.png</icon>

@@ -20,7 +20,7 @@
 	
 	<pipeline nom="intranet_pages_ok" inclure="embed_code_pipelines.php" />
 	
-	<necessite nom="medias" compatibilite="[1.6.12;[" />
+	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<utilise nom="mediabox" compatibilite="[0.8.1;[" />
 	<utilise nom="mediaspip_player" />
 </paquet>
