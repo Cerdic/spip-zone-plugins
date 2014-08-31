@@ -1,7 +1,7 @@
 <?php
 // On va créer les champs extras pour spip_projets
 
-function commits_declarer_champs_extras($champs = array())
+function rss_commits_declarer_champs_extras($champs = array())
 {
     $champs['spip_projets']['versioning_path'] = array(
         'saisie' => 'input',//Type du champ (voir plugin Saisies)

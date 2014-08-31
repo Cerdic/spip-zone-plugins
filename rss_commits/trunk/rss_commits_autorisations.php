@@ -9,13 +9,17 @@
  * @package    SPIP\Commits\Autorisations
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function commits_autoriser(){}
+function rss_commits_autoriser()
+{
+}
 
 
 // -----------------
@@ -32,9 +36,10 @@ function commits_autoriser(){}
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_commits_menu_dist($faire, $type, $id, $qui, $opt){
-	return true;
-} 
+function autoriser_rss_commits_menu_dist($faire, $type, $id, $qui, $opt)
+{
+    return true;
+}
 
 
 /**
@@ -47,9 +52,10 @@ function autoriser_commits_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_commitcreer_menu_dist($faire, $type, $id, $qui, $opt){
-	return autoriser('creer', 'commit', '', $qui, $opt);
-} 
+function autoriser_commitcreer_menu_dist($faire, $type, $id, $qui, $opt)
+{
+    return autoriser('creer', 'commit', '', $qui, $opt);
+}
 
 /**
  * Autorisation de créer (commit)
@@ -61,8 +67,9 @@ function autoriser_commitcreer_menu_dist($faire, $type, $id, $qui, $opt){
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_commit_creer_dist($faire, $type, $id, $qui, $opt) {
-	return false; 
+function autoriser_commit_creer_dist($faire, $type, $id, $qui, $opt)
+{
+    return false;
 }
 
 /**
@@ -75,8 +82,9 @@ function autoriser_commit_creer_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_commit_voir_dist($faire, $type, $id, $qui, $opt) {
-	return true;
+function autoriser_commit_voir_dist($faire, $type, $id, $qui, $opt)
+{
+    return true;
 }
 
 /**
@@ -89,8 +97,9 @@ function autoriser_commit_voir_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_commit_modifier_dist($faire, $type, $id, $qui, $opt) {
-	return false;
+function autoriser_commit_modifier_dist($faire, $type, $id, $qui, $opt)
+{
+    return false;
 }
 
 /**
@@ -103,8 +112,9 @@ function autoriser_commit_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_commit_supprimer_dist($faire, $type, $id, $qui, $opt) {
-	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+function autoriser_commit_supprimer_dist($faire, $type, $id, $qui, $opt)
+{
+    return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 

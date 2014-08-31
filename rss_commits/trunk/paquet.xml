@@ -1,5 +1,5 @@
 <paquet
-	prefix="commits"
+	prefix="rss_commits"
 	categorie="divers"
 	version="0.2.0"
 	etat="dev"
@@ -18,12 +18,11 @@
 	<necessite nom="projets"  compatibilite="[1.0.10;]" />
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 
-	<pipeline nom="autoriser" inclure="commits_autorisations.php" />
+	<pipeline nom="autoriser" inclure="rss_commits_autorisations.php" />
 
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/commits.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/commits.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/rss_commits.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/rss_commits.php" />
 	<pipeline nom="declarer_champs_extras" inclure="base/projets_depots.php" />
 
 	<menu nom="commits" titre="commit:titre_commits" parent="menu_edition" icone="images/commit-16.png" action="commits" />
-	<menu nom="commit_creer" titre="commit:icone_creer_commit" parent="outils_rapides" icone="images/commit-new-16.png" action="commit_edit" parametres="new=oui" />
 </paquet>

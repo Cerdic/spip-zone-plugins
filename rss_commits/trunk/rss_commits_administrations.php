@@ -26,12 +26,12 @@ include_spip('base/projets_depots');
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function commits_upgrade($nom_meta_base_version, $version_cible)
+function rss_commits_upgrade($nom_meta_base_version, $version_cible)
 {
     $maj = array();
 
     $maj['create'] = array(array('maj_tables', array('spip_commits')));
-    cextras_api_upgrade(commits_declarer_champs_extras(), $maj['create']);
+    cextras_api_upgrade(rss_commits_declarer_champs_extras(), $maj['create']);
 
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -45,11 +45,11 @@ function commits_upgrade($nom_meta_base_version, $version_cible)
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
-function commits_vider_tables($nom_meta_base_version)
+function rss_commits_vider_tables($nom_meta_base_version)
 {
 
     sql_drop_table("spip_commits");
-    cextras_api_vider_tables(commits_declarer_champs_extras());
+    cextras_api_vider_tables(rss_commits_declarer_champs_extras());
 
     # Nettoyer les versionnages et forums
     sql_delete("spip_versions", sql_in("objet", array('commit')));
