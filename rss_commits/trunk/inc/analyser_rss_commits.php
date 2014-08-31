@@ -18,7 +18,7 @@ function inc_analyser_rss_commits_dist($url)
         // Transformer les <content:encoded> du rss de Git en faveur de <texte>
         $page = preg_replace("/content:encoded\>/", "texte>", $page);
         // Merci _Eric_ pour ce code.
-        $xml = json_decode(json_encode(simplexml_load_string($page)), true);
+        $xml = json_decode(json_encode(simplexml_load_string($page, NULL, LIBXML_NOCDATA), JSON_PRETTY_PRINT), true);
     }
 
     // echo "<pre>";
