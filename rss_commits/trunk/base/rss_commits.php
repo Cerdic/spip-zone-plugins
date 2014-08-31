@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP\Commits\Pipelines
+ * @package    SPIP\RSSCommits\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {
@@ -51,8 +51,10 @@ function rss_commits_declarer_tables_objets_sql($tables)
             "id_commit"          => "bigint(21) NOT NULL",
             "titre"              => "text NOT NULL DEFAULT ''",
             "descriptif"         => "text NOT NULL DEFAULT ''",
+            "texte"              => "text NOT NULL DEFAULT ''",
             "auteur"             => "varchar(25) NOT NULL DEFAULT ''",
             "url_revision"       => "text NOT NULL DEFAULT ''",
+            "guid"               => "text NOT NULL DEFAULT ''",
             "id_projet"          => "bigint(21) NOT NULL DEFAULT 0",
             "date_creation"      => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
             "maj"                => "TIMESTAMP"
@@ -62,9 +64,9 @@ function rss_commits_declarer_tables_objets_sql($tables)
         ),
         'titre' => "titre AS titre, '' AS lang",
         'date' => "date_creation",
-        'champs_editables'  => array('titre', 'descriptif', 'auteur', 'url_revision', 'id_projet'),
-        'champs_versionnes' => array('titre', 'descriptif', 'auteur', 'url_revision', 'id_projet'),
-        'rechercher_champs' => array("titre" => 6, "descriptif" => 7, "auteur" => 8, "url_revision" => 5),
+        'champs_editables'  => array('titre', 'descriptif', 'texte', 'auteur', 'url_revision', 'guid', 'id_projet'),
+        'champs_versionnes' => array('titre', 'descriptif', 'texte', 'auteur', 'url_revision', 'guid', 'id_projet'),
+        'rechercher_champs' => array("titre" => 6, "descriptif" => 7, "texte" => 7, "auteur" => 8, "url_revision" => 5),
         'tables_jointures'  => array(),
 
 

@@ -6,7 +6,7 @@
  * @copyright  2014
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP\Commits\Installation
+ * @package    SPIP\RSSCommits\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) {

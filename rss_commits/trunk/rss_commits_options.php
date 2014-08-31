@@ -6,10 +6,12 @@
  * @copyright  2014
  * @author     Teddy Payet
  * @licence    GNU/GPL
- * @package    SPIP\Commits\Options
+ * @package    SPIP\RSSCommits\Options
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION')) {
+    return;
+}
 
 
 ?>
