@@ -1,0 +1,90 @@
+[(#REM)
+
+    Ce squelette definit les styles de l'espace prive
+
+    Note: l'entete "Vary:" sert a repousser l'entete par
+    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+    genant en cas de "rotation du cookie de session" apres
+    un changement d'IP (effet de clignotement).
+
+    ATTENTION: il faut absolument le charset sinon Firefox croit que
+    c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/* #SQUELETTE */
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+*/
+
+
+.commit #wysiwyg .champ {
+    margin-bottom: 1em;
+    overflow: hidden;
+    padding-top: 0.5em;
+    border-top: 1px solid #GET{claire};
+}
+.commit #wysiwyg .champ.fieldset {
+    margin: 2em -15px 0;
+    padding-top: 0;
+    border-top: 1px solid #GET{claire};
+    background-color: #GET{background-color};
+}
+
+.commit #wysiwyg .champ.fieldset h3 {
+    padding: 0.5em 15px;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+.commit #wysiwyg .champ .label.visible {
+    display: block;
+    width: 30%;
+    margin-top:0;
+    float: left;
+    font-weight: bold;
+    color: #GET{color};
+}
+.commit #wysiwyg .champ .span {
+    display:block;
+    width: 69%;
+    float: right;
+}
+.commit #wysiwyg .fieldset + .liste-objets {
+    margin-top: 1em;
+}
+.commit #wysiwyg .fieldset .titrem {
+    display: block;
+    font-weight: bold;
+    padding: 7px 5px 7px 10px;
+    border-top: 1px solid #GET{claire};
+    background-color: #GET{background-color};
+    color: #GET{foncee};
+}
+
+.liste.statuts .liste-items .item a img {
+    vertical-align: baseline;
+}
+
+.icone.horizontale.danger a,
+.icone.horizontale.danger .submit {
+    line-height: 1em;
+    text-align: left;
+    padding: 0;
+}
+
