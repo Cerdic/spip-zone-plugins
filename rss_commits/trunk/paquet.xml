@@ -1,7 +1,7 @@
 <paquet
 	prefix="rss_commits"
 	categorie="divers"
-	version="0.3.0"
+	version="0.3.1"
 	etat="dev"
 	compatibilite="[3.0.8;3.0.*]"
 	logo="prive/themes/spip/images/commits-64.png"
@@ -19,7 +19,10 @@
 	<necessite nom="cextras" compatibilite="[3.0.5;[" />
 
 	<pipeline nom="autoriser" inclure="rss_commits_autorisations.php" />
+
 	<pipeline nom="taches_generales_cron" inclure="rss_commits_pipelines.php" />
+	<pipeline nom="affiche_enfants" inclure="rss_commits_pipelines.php" />
+	<pipeline nom="affiche_auteurs_interventions" inclure="rss_commits_pipelines.php" />
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/rss_commits.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/rss_commits.php" />

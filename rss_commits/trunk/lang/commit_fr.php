@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
     'ajouter_lien_commit' => 'Ajouter ce commit',
+    'aucun_commit_projet' => 'Aucun commit pour ce projet',
 
     // C
     'champ_auteur_label' => 'Auteur',
@@ -31,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_1_commit' => 'Un commit',
     'info_aucun_commit' => 'Aucun commit',
     'info_commits_auteur' => 'Les commits de cet auteur',
+    'info_commits_projet' => 'Les commits de ce projet',
     'info_nb_commits' => '@nb@ commits',
 
     // R
@@ -43,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_creer_associer_commit' => 'Créer et associer un commit',
     'titre_commit' => 'Commit',
     'titre_commits' => 'Commits',
+    'titre_commits_projet' => 'Commits du projet',
     'titre_commits_rubrique' => 'Commits de la rubrique',
     'titre_langue_commit' => 'Langue de ce commit',
     'titre_logo_commit' => 'Logo de ce commit',

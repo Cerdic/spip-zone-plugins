@@ -19,6 +19,8 @@ function genie_import_commits_dist ($t)
                 . $value['url_revision']
                 . '"'
             )) {
+                // On nettoie un peu le texte de tout espace indésirable dùu au CDATA.
+                $value['texte'] = trim($value['texte']);
                 $id_commit = sql_insertq('spip_commits', $value);
             }
         }

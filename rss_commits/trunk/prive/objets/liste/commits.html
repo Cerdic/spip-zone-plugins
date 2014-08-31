@@ -4,6 +4,7 @@
 	id_commit,1,
 	points,-1
 }})]<B_liste_commits>
+<div class="nettoyeur"></div>
 #ANCRE_PAGINATION
 <div class="liste-objets commits">
 <table class='spip liste'>
@@ -17,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_commits (COMMITS) {id_projet?} {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {par titre} {pagination #ENV{nb,10}}>
+	<BOUCLE_liste_commits (COMMITS) {id_projet?} {id_mot?} {id_auteur?} {tout} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {par #ENV{par,titre}} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_COMMIT|image_reduire{20,26})]<a href="[(#ID_COMMIT|generer_url_entite{commit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMIT">[(#RANG). ]#TITRE</a></td>
@@ -34,4 +35,5 @@
 </div>
 </B_liste_commits>[
 <div class="liste-objets commits caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="nettoyeur"></div>
 ]<//B_liste_commits>

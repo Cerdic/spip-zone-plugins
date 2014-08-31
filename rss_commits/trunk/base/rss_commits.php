@@ -52,7 +52,7 @@ function rss_commits_declarer_tables_objets_sql($tables)
             "titre"              => "text NOT NULL DEFAULT ''",
             "descriptif"         => "text NOT NULL DEFAULT ''",
             "texte"              => "text NOT NULL DEFAULT ''",
-            "auteur"             => "varchar(25) NOT NULL DEFAULT ''",
+            "auteur"             => "varchar(255) NOT NULL DEFAULT ''",
             "url_revision"       => "text NOT NULL DEFAULT ''",
             "guid"               => "text NOT NULL DEFAULT ''",
             "id_projet"          => "bigint(21) NOT NULL DEFAULT 0",
@@ -61,6 +61,7 @@ function rss_commits_declarer_tables_objets_sql($tables)
         ),
         'key' => array(
             "PRIMARY KEY"        => "id_commit",
+            "KEY id_projet"      => "id_projet"
         ),
         'titre' => "titre AS titre, '' AS lang",
         'date' => "date_creation",
