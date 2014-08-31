@@ -22,7 +22,7 @@
 
 [<div class="champ contenu_id_projet[ (#ID_PROJET*|strlen|?{'',vide})]">
 	<div class="label visible"><:commit:champ_id_projet_label:> : </div>
-	<div dir='#LANG_DIR' class='#EDIT{id_projet} id_projet span'>(#ID_PROJET). <a href="#URL_ECRIRE{projet,id_projet=#ID_PROJET}">[(#INFO_TITRE{projet,#ID_PROJET})]</a></div>
+	<div dir='#LANG_DIR' class='#EDIT{id_projet} id_projet span'>(#ID_PROJET). <a href="[(#ID_PROJET|generer_url_entite{projet})]">[(#INFO_TITRE{projet,#ID_PROJET})]</a></div>
 </div>]
 
 </BOUCLE_commit>
