@@ -11,9 +11,6 @@ function inc_analyser_rss_commits_dist($url)
     $valeurs = array();
     $xml = false;
     $page = recuperer_page($url);
-    echo "<pre>";
-    var_dump($page);
-    echo "</pre>";
 
 
     if (!is_null($page)) {
@@ -25,10 +22,6 @@ function inc_analyser_rss_commits_dist($url)
         // Merci _Eric_ pour ce code.
         $xml = json_decode(json_encode(simplexml_load_string($page, null, LIBXML_NOCDATA)), true);
     }
-
-    echo "<pre>";
-    var_dump($xml);
-    echo "</pre>";
 
     return $xml;
 }

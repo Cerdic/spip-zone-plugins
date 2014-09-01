@@ -41,9 +41,6 @@ function lister_rss_commits ()
                         );
                 }
                 $rss_items = array_merge($rss_items, $items);
-                // echo "<pre>";
-                // var_dump($rss_items);
-                // echo "</pre>";
             }
         } // end foreach $projet_rss
     }
