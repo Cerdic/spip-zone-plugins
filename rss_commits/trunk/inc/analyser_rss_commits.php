@@ -11,29 +11,24 @@ function inc_analyser_rss_commits_dist($url)
     $valeurs = array();
     $xml = false;
     $page = recuperer_page($url);
+    echo "<pre>";
+    var_dump($page);
+    echo "</pre>";
+
+
     if (!is_null($page)) {
-        $page = preg_replace("/\<\?(.*)\?\>/", "", $page);
+        // $page = preg_replace("/\<\?(.*)\?\>/", "", $page);
         // Transformer les <dc:creator> en faveur de <author>
         $page = preg_replace("/dc:creator\>/", "author>", $page);
         // Transformer les <content:encoded> du rss de Git en faveur de <texte>
         $page = preg_replace("/content:encoded\>/", "texte>", $page);
         // Merci _Eric_ pour ce code.
-        $xml = json_decode(
-            json_encode(
-                simplexml_load_string(
-                    $page,
-                    null,
-                    LIBXML_NOCDATA
-                ),
-                JSON_PRETTY_PRINT
-            ),
-            true
-        );
+        $xml = json_decode(json_encode(simplexml_load_string($page, null, LIBXML_NOCDATA)), true);
     }
 
-    // echo "<pre>";
-    // var_dump($xml);
-    // echo "</pre>";
+    echo "<pre>";
+    var_dump($xml);
+    echo "</pre>";
 
     return $xml;
 }

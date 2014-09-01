@@ -15,9 +15,19 @@
 	<div dir='#LANG_DIR' class='#EDIT{auteur} auteur span'>(#AUTEUR)</div>
 </div>]
 
+[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+	<div class="label visible"><:commit:champ_texte_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{texte} texte span'>(#TEXTE)</div>
+</div>]
+
 [<div class="champ contenu_url_revision[ (#URL_REVISION*|strlen|?{'',vide})]">
 	<div class="label visible"><:commit:champ_url_revision_label:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{url_revision} url_revision span'><a href="#URL_REVISION" class="spip_out">(#URL_REVISION)</a></div>
+</div>]
+
+[<div class="champ contenu_guid[ (#GUID*|strlen|?{'',vide})]">
+	<div class="label visible"><:commit:champ_guid_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{guid} guid span'><a href="#GUID" class="spip_out">(#GUID)</a></div>
 </div>]
 
 [<div class="champ contenu_id_projet[ (#ID_PROJET*|strlen|?{'',vide})]">

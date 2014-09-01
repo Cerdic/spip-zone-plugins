@@ -19,7 +19,7 @@ function lister_rss_commits ()
 {
     $rss_items = array();
     $items = array();
-    $projet_rss = sql_allfetsel('versioning_rss,id_projet', 'spip_projets', "versioning_rss IS NOT NULL");
+    $projet_rss = sql_allfetsel('versioning_rss,id_projet', 'spip_projets', "versioning_rss !=''");
 
     $analyser_rss_commits = charger_fonction('analyser_rss_commits', 'inc');
     if (count($projet_rss) >0) {
@@ -29,9 +29,8 @@ function lister_rss_commits ()
                 foreach ($contenu_rss['channel']['item'] as $key => $value) {
                         $items[$key]['titre'] = $value['title'];
                         $items[$key]['descriptif'] = $value['description'];
-                        $items[$key]['texte'] = $value['texte'];
-                        $value['author'] = preg_replace("/\</", "&lt;", $value['author']);
-                        $value['author'] = preg_replace("/\>/", "&gt;", $value['author']);
+                        $items[$key]['texte'] = trim($value['texte']);
+                        $value['author'] = echapper_tags($value['author']);
                         $items[$key]['auteur'] = $value['author'];
                         $items[$key]['url_revision'] = $value['link'];
                         $items[$key]['guid'] = $value['guid'];
