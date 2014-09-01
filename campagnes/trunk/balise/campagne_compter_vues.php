@@ -11,7 +11,7 @@ function balise_CAMPAGNE_COMPTER_VUES_stat($args, $context_compil) {
 	return $args;
 }
 
-function balise_CAMPAGNE_COMPTER_VUES_dyn($id_campagne, $id_encart) {
+function balise_CAMPAGNE_COMPTER_VUES_dyn($id_campagne, $id_encart=false) {
 	static $fait = array();
 	
 	// On s'assure que le comptage d'une même pub n'est fait qu'une seule fois par hit et pas par un robot
