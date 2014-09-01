@@ -8,5 +8,3 @@ function sjcycle_ieconfig_metas($table){
 	$table['sjcycle']['metas_serialize'] = 'sjcycle';
 	return $table;
 }
-
-?>

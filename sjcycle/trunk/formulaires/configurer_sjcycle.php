@@ -57,4 +57,3 @@ function formulaires_configurer_sjcycle_charger(){
 	return $valeurs;
 
 }
-?>

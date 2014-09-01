@@ -16,4 +16,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'sjcycle_description' => 'Configurable slideshow for Spip based on [jQuery Cycle->http://malsup.com/jquery/cycle/] plugin. The slide show can be inserted in the text of your articles. The plugin also provides models for example to add a random slide show of images or a slideshow of the syndicated sites in the skeleton ...',
 	'sjcycle_slogan' => 'A configurable slideshow for Spip',
 );
-?>

@@ -29,5 +29,3 @@ function sjcycle_insert_head($flux){
 	
 	return $flux;
 }
-
-?>

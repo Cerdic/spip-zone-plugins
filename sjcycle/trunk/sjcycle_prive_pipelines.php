@@ -17,4 +17,3 @@ function sjcycle_affiche_gauche($flux){
 	 }
     return $flux;
 }
-?>

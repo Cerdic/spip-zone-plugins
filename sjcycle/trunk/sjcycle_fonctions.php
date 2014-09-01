@@ -15,5 +15,3 @@ function randomString($length = 8){
 	}
 	return substr($passe, 0, $length);
 }
-
-?>

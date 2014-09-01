@@ -9,5 +9,3 @@ function autoriser_sjcycle_menu_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_sjcycle_configurer_dist($faire, $type, $id, $qui, $opt) {
 	return ($qui['webmestre'] == 'oui');
 }
-
-?>
