@@ -42,7 +42,7 @@ function action_editer_syndic_dist($arg=NULL) {
 // pas si absente --cependant sait parfois recuperer.)
 function insert_site() {
 	$objet = _request('objet');
-	$id_objets = intval(_request('id_objet'));
+	$id_objet = intval(_request('id_objet'));
 	// Rien avec formulaire editer_syndic car on veut lier les sites a n'importe quel objet et independament des rubriques.
 	// Mais avec le formulaire natif editer_site il ne faut pas perdre cette valeur !
 	$id_rubrique = intval(_request('id_parent'));
@@ -51,7 +51,7 @@ function insert_site() {
 		switch ($objet) {
 			case 'rubrique':
 			case 'rub' :
-				$id_rubrique = $id_objets;
+				$id_rubrique = $id_objet;
 				break;
 			case 'article':
 			case 'art' :
