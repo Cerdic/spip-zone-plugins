@@ -8,8 +8,8 @@
 [<type_site value="(#CONFIG{'info_spip/type_site'}|attribut_html)" />]
 <!-- Informations complémentaires qui peuvent être ajoutées par des plugins -->
 <BOUCLE_module_info (POUR) {tableau #CONFIG{'info_spip/modules'}}>
-[(#CHEMIN{#VAL{'inclure/xml/'}|concat{#VALEUR,'.html'}}|oui)
-<INCLURE{fond=inclure/xml/#VALEUR, env} />
+[(#CHEMIN{#VAL{'infos_spip/xml/'}|concat{#VALEUR,'.html'}}|oui)
+<INCLURE{fond=infos_spip/xml/#VALEUR, env} />
 ]</BOUCLE_module_info>
 
 </B_cle>

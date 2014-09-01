@@ -26,7 +26,7 @@
 
 <!-- Informations complémentaires qui peuvent être ajoutées par des modules -->
 <BOUCLE_module_info (POUR) {tableau #CONFIG{'info_spip/modules'}}>
-[(#CHEMIN{#VAL{'inclure/html/'}|concat{#VALEUR,'.html'}}|oui)
-<INCLURE{fond=inclure/html/#VALEUR, env} />
+[(#CHEMIN{#VAL{'infos_spip/html/'}|concat{#VALEUR,'.html'}}|oui)
+<INCLURE{fond=infos_spip/html/#VALEUR, env} />
 ]</BOUCLE_module_info>
 

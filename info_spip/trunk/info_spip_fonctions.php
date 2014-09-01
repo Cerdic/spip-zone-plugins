@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 function lister_noisettes_info_spip ($repertoire)
 {
-    $noisettes = find_all_in_path('inclure/' . $repertoire . '/', '.html$');
+    $noisettes = find_all_in_path('infos_spip/' . $repertoire . '/', '.html$');
 
     if (is_array($noisettes) and count($noisettes) > 0) {
         foreach ($noisettes as $key => $value) {
