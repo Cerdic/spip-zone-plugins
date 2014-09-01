@@ -1,7 +1,7 @@
 <paquet
   prefix="jclicmodele"
   categorie="divers"
-  version="0.2.2"
+  version="0.2.3"
   etat="stable"
   compatibilite="[1.9.2;3.0.*]"
   logo="img_pack/jclic_logo.png"
