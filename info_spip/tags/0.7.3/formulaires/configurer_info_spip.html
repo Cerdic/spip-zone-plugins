@@ -1,0 +1,78 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:info_spip:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<fieldset>
+			<h3 class="legend">
+				<:info_spip:label_fiche_site:>
+			</h3>
+			<ul>
+				[(#SAISIE{selection, type_site,
+					label=<:info_spip:label_type_site:>,
+					datas=#ARRAY{dev,<:info_spip:type_site_dev:>,prep,<:info_spip:type_site_prep:>,prod,<:info_spip:type_site_prod:>,rec,<:info_spip:type_site_rec:>},
+					defaut='prod',
+					explication=<:info_spip:explication_type_site:>})]
+
+				[(#SET{modules,#ARRAY})]
+				<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:nom_'}|concat{#VALEUR}|_T)]})]
+					[(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
+				</BOUCLE_module_info>
+				[(#SAISIE{checkbox, modules,
+					label=<:info_spip:label_liste_modules:>,
+					explication=<:info_spip:explication_liste_modules:>,
+					datas=#GET{modules}})]
+			</ul>
+		</fieldset>
+
+		<fieldset>
+			<h3 class="legend">
+				<:info_spip:label_webservice_fieldset:>
+			</h3>
+			<ul>
+				[(#SAISIE{radio, actif,
+					label=<:info_spip:label_actif:>,
+					datas=#ARRAY{oui,<:info_spip:oui:>,non,<:info_spip:non:>},
+					explication=<:info_spip:explication_actif:>})]
+
+				[(#SAISIE{input, cle,
+					label=<:info_spip:label_cle:>,
+					explication=<:info_spip:explication_cle:>})]
+
+				[(#SAISIE{input, uuid,
+					label='',
+					type='button',
+					valeur=<:info_spip:label_uuid_generer:>})]
+
+			</ul>
+		</fieldset>
+		<input type="hidden" name="_meta_casier" value="info_spip" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		function generateUUID() {
+			var d = new Date().getTime();
+			var uuid = 'xxxxxxxx-xxxx-yxxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = (d + Math.random()*16)%16 | 0;
+				d = Math.floor(d/16);
+				return (c=='x' ? r : (r&0x7|0x8)).toString(16);
+			});
+			return uuid;
+		};
+
+		$("#champ_uuid").click(function(event) {
+			event.preventDefault();
+			$('#champ_cle').val(generateUUID());
+		});
+	});
+</script>
