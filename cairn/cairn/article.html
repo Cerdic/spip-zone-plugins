@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="#CHARSET"?>
+[(#REM) Données attribuée par Cairn, ici spécifique à Vacarme ]
+    #SET{revue,VACA} #SET{editeur,AVACA} #SET{issn,1253-2479} #SET{issn_num,2107-092X}
+[(#REM) calculer le numéro ]
+[(#SET{numero,[(#GET{revue}|concat{[_(#NUMERO|filtre_formater{"%03s"})]})]})]
 <BOUCLE_a(ARTICLES){id_article}>
-<article lang="#LANG" traitement="artr" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink"><admin><infoarticle>
+<article idproprio="[(#GET{numero}|concat{[_(#PAGE_DEBUT|filtre_formater{"%04s"})]})]" lang="#LANG" traitement="artr" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink"><admin><infoarticle>
 <BOUCLE_dossier(RUBRIQUES){id_rubrique}><section_sommaire>#TITRE</section_sommaire></BOUCLE_dossier>
 <pagination>[<ppage>(#PAGE_DEBUT)</ppage>][<dpage>(#PAGE_FIN)</dpage>]</pagination>[<nbpage>(#PAGES_TOTAL)</nbpage>]<nbpara>[(#VAL{/<p /}|preg_split{#TEXTE*}|count)]</nbpara>
 <nbmot>[(#VAL{/\W+/}|preg_split{#TEXTE*}|count)]</nbmot>
-</infoarticle><revue id="[(#NOM_SITE_SPIP|match{\w+?})]"><titrerev>[(#NOM_SITE_SPIP|cdata)]</titrerev><titrerevabr>[(#NOM_SITE_SPIP|cdata)]</titrerevabr><idissn>#VAL{'issn'}</idissn><idissnnum>#VAL{'idissnum'}</idissnnum></revue><numero id="[(#NUMERO|replace{' ','_'}|cdata)]"><volume>#NUMERO</volume><pub><annee>[(#DATE_REDAC|sinon{#DATE}|annee)]</annee></pub><pubnum><date>[(#DATE_REDAC|sinon{#DATE}|affdate)]</date></pubnum><theme>[(#TITRE|filtrer_texte_cairn|cdata)]</theme><idisbn>#VAL{'isbn'}</idisbn></numero><editeur id="[(#NOM_SITE_SPIP|match{\w+?})]"><nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg></editeur><prodnum id="SPIP"><nomorg>Rezo/SPIP</nomorg></prodnum><diffnum id="CairnD"><nomorg>Cairn</nomorg></diffnum><dtd nom="Erudit Article" version="vCairn 1.0"/><droitsauteur>© <nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg>, [(#DATE_REDAC|sinon{#DATE}|annee)]</droitsauteur></admin>
+</infoarticle><revue id="#GET{revue}"><titrerev>[(#NOM_SITE_SPIP|cdata)]</titrerev><titrerevabr>[(#NOM_SITE_SPIP|cdata)]</titrerevabr><idissn>#GET{issn}</idissn><idissnnum>#GET{issn_num}</idissnnum></revue><numero id="[(#GET{numero})]"><volume>#NUMERO</volume><pub><annee>[(#DATE_NUMERO|sinon{#DATE}|annee)]</annee></pub><pubnum><date>[(#DATE_NUMERO|sinon{#DATE}|affdate)]</date></pubnum><theme>#VAL{'Varia'}</theme><idisbn>#ISBN</idisbn></numero><editeur id="#GET{editeur}"><nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg></editeur><prodnum id="SPIP"><nomorg>Rezo/SPIP</nomorg></prodnum><diffnum id="CairnD"><nomorg>Cairn</nomorg></diffnum><dtd nom="Erudit Article" version="vCairn 1.0"/><droitsauteur>© <nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg>, [(#DATE_REDAC|sinon{#DATE}|annee)]</droitsauteur></admin>
 <liminaire>
 <grtitre>
-	<titre>[(#TITRE|filtrer_texte_cairn|cdata)]</titre>
+    <titre>[(#TITRE|filtrer_texte_cairn|cdata)]</titre>
 </grtitre>
 <B_auteurs>
 <grauteur>
@@ -32,14 +36,13 @@ concat{"
 <BOUCLE_portfolio(DOCUMENTS){id_article}{vu=non}{mode=document}{extension IN gif,jpg,png,pdf}>
 #MODELE{doc,id_document=#ID_DOCUMENT}
 </BOUCLE_portfolio>
-
-[<partieann>
-<grnotes>
-(#NOTES|cairn_traiter_notes)
-</grnotes>
-</partieann>]
-
 </corps>
+
+[<partiesann>
+<grnote>
+(#NOTES|cairn_traiter_notes)
+</grnote>
+</partiesann>]
 
 </article>
 

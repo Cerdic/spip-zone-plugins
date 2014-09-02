@@ -21,6 +21,8 @@
     <BOUCLE_meta(RUBRIQUES){id_parent=115}{!par titre}{id_rubrique?}>
     <h2>#ID_RUBRIQUE:#TITRE</h2>
     #SET{numero,#TITRE|match{\d+?}}
+    #SET{isbn,#ISBN}
+    #SET{date_numero,#DATE_NUMERO}
     [(#VAL{cairn/#GET{numero}}|mkdir)]
     <ol>
     <BOUCLE_numero(ARTICLES){branche}{par page_debut}>
@@ -29,7 +31,7 @@
             [(#GET{file}|file_exists|?{
                 [<span class="cell b3"><span class="statut ok">Ok</span> <em>(#TITRE)</em>]</span>,
                 [<span class="cell b3">(#GET{file}|ecrire_fichier{
-                    #INCLURE{fond=cairn/article,id_article,numero=#_meta:TITRE}
+                    #INCLURE{fond=cairn/article,id_article,numero=#_meta:TITRE,isbn=#GET{isbn},date_numero=#GET{date_numero}}
                     |cairn_figure{cairn/#GET{numero}}
                 }|?{<span class="statut ok">Sauvé</span>,<span class="statut erreur">Erreur</span>})[ <em>(#TITRE)</em>]</span>]
             })]

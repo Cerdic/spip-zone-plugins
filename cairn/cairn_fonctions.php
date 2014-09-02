@@ -1,5 +1,11 @@
 ﻿<?php
 
+// formater un nombre
+// pour $format, voir http://php.net//manual/fr/function.sprintf.php
+function filtre_formater($chaine,$format) {
+    return sprintf($format,$chaine);
+}
+
 // stocker une chaine dans un CDATA
 // a noter qu'il faut "echapper" un eventuel "]]>"
 // http://www.w3.org/TR/xml/#charsets
@@ -44,9 +50,9 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 		$src = extraire_attribut($img, 'src');
 
 		if ($src AND $l = copie_locale(url_absolue($src))) {
-			$file = "images/".basename($l);
+			$file = basename($l);
 			@mkdir("$numero/images");
-			rename($l, "$numero/$file");
+			rename($l, "$numero/images/$file");
 
 			$ext = preg_replace(',^.*\.,', '', $file);
 			if ($ext == 'jpg') $ext = 'jpeg';
@@ -119,7 +125,7 @@ function cairn_decoupe_h3($texte, $reset) {
 
 	foreach ($sections as $p) {
 		$cpt++;
-		list($para, $suite) = preg_split(',</h3\b[^>]*>,i', $p);
+		list($para, $suite) = preg_split(',</h[23]\b[^>]*>,i', $p);
 
 		$t .= _CHEVRONA."section1 id=\"s1n$cpt\""._CHEVRONB
 			. _CHEVRONA."titre"._CHEVRONB.cairn_decoupe_para_cdata($para)._CHEVRONA."/titre"._CHEVRONB
@@ -161,7 +167,7 @@ function cairn_decoupe_para_cdata($texte, $reset=false) {
 	$texte = preg_replace(',</(ol|ul)\b[^>]*>,iS', '$0</p>', $texte);
 
 	// sauts de ligne
-	$texte = preg_replace(',<br\b[^>]*>,iS', _CHEVRONA."br /"._CHEVRONB."\n", $texte);
+	$texte = preg_replace(',<br\b[^>]*>,iS', '', $texte);
 
 	// liens a href
 	foreach (extraire_balises($texte, 'a') as $l) {
@@ -247,7 +253,5 @@ function filtrer_texte_cairn($t) {
 
 	#return filtre_cdata($t);
 }
-
-
 
 ?>
