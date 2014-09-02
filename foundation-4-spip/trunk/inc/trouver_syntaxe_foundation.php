@@ -25,9 +25,14 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
     and in_array($config['variante'], $colnum)) {
         $class= '';
         foreach ($nombre_colonnes as $key => $value) {
-
-
-            $class .= $value.'-'.$key.' ';
+            // Ancienne écriture
+            if (is_numeric($value)) {
+                $class .= $value.'-'.$key.' ';
+            }
+            // Utiliser un tableau large => 4 plutôt que 4 => large
+            else {
+                $class .= $key.'-'.$value.' ';
+            }
         }
         return $class;
     }
