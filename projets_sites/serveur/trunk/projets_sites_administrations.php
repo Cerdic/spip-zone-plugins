@@ -76,6 +76,15 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('sql_alter', "TABLE spip_projets_sites ADD auteurs_admin text DEFAULT '' NOT NULL AFTER logiciel_plugins"),
     );
 
+    /*
+     * Le logo étant calculé à partir de la clé primaire, on ne peut avoir id_site.
+     * On le  change pour id_projets_site
+    **/
+    $maj['1.3.0'] = array(
+        array('sql_alter', "TABLE spip_projets_sites CHANGE id_site id_projets_site bigint(21) NOT NULL"),
+        array('sql_alter', "TABLE spip_projets_sites_liens CHANGE id_site id_projets_site bigint(21) NOT NULL"),
+    );
+
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

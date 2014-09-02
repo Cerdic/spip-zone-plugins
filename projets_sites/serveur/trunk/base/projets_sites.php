@@ -36,7 +36,7 @@ function projets_sites_declarer_tables_interfaces($interfaces)
     $interfaces['table_des_traitements']['AUTEURS_ADMIN'][]= _TRAITEMENT_RACCOURCIS;
     $interfaces['table_des_traitements']['AUTEURS_WEBMESTRES'][]= _TRAITEMENT_RACCOURCIS;
 
-    $interfaces['exceptions_des_jointures']['id_site'] = array('spip_projets_sites_liens', 'id_site');
+    $interfaces['exceptions_des_jointures']['id_projets_site'] = array('spip_projets_sites_liens', 'id_projets_site');
 
     return $interfaces;
 }
@@ -59,7 +59,7 @@ function projets_sites_declarer_tables_objets_sql($tables)
         'principale' => "oui",
         'table_objet_surnoms' => array('projetssite'), // table_objet('projets_site') => 'projets_sites'
         'field'=> array(
-            "id_site"            => "bigint(21) NOT NULL",
+            "id_projets_site"    => "bigint(21) NOT NULL",
             "titre"              => "text DEFAULT '' NOT NULL",
             "descriptif"         => "text DEFAULT '' NOT NULL",
             "type_site"          => "varchar(4) NOT NULL DEFAULT ''",
@@ -111,7 +111,7 @@ function projets_sites_declarer_tables_objets_sql($tables)
             "maj"                => "TIMESTAMP"
         ),
         'key' => array(
-            "PRIMARY KEY"        => "id_site",
+            "PRIMARY KEY"        => "id_projets_site",
         ),
         'titre' => "titre AS titre, '' AS lang",
         'date' => "date_creation",
@@ -270,14 +270,14 @@ function projets_sites_declarer_tables_auxiliaires($tables)
 
     $tables['spip_projets_sites_liens'] = array(
         'field' => array(
-            "id_site"            => "bigint(21) DEFAULT '0' NOT NULL",
+            "id_projets_site"            => "bigint(21) DEFAULT '0' NOT NULL",
             "id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
             "objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
             "vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
         ),
         'key' => array(
-            "PRIMARY KEY"        => "id_site,id_objet,objet",
-            "KEY id_site"        => "id_site"
+            "PRIMARY KEY"        => "id_projets_site,id_objet,objet",
+            "KEY id_projets_site"        => "id_projets_site"
         )
     );
 

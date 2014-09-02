@@ -1,12 +1,12 @@
-<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_site,nouveau}'>
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_projets_site,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' name='id_site' value='#ENV{id_site}' />
-			[(#ENV{id_site}|intval|>{0}|sinon{#ENV{webservice}}|non)
+		<input type='hidden' name='id_projets_site' value='#ENV{id_projets_site}' />
+			[(#ENV{id_projets_site}|intval|>{0}|sinon{#ENV{webservice}}|non)
 			[(#SESSION{statut}|=={0minirezo}|?{' ',#ENV{config}|table_valeur{proposer_sites}|>{0}|oui})
 			<fieldset class="editer editer_referencement_automatise fieldset">
 				<ul>

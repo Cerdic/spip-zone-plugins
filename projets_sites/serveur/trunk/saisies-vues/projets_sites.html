@@ -2,18 +2,18 @@
 	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
 	<B_projets_sites_selectionnes>
 	<ul>
-	<BOUCLE_projets_sites_selectionnes(PROJETS_SITES){id_site IN #GET*{valeur}}
+	<BOUCLE_projets_sites_selectionnes(PROJETS_SITES){id_projets_site IN #GET*{valeur}}
 		{par num type_site, type_site}{tout}>
-		<li class="choix">#TYPE_SITE (#ID_SITE)</li>
+		<li class="choix">#TYPE_SITE (#ID_PROJETS_SITE)</li>
 	</BOUCLE_projets_sites_selectionnes>
 	</ul>
 	</B_projets_sites_selectionnes>
    	[(#ENV*{sans_reponse}|propre)]
 	<//B_projets_sites_selectionnes>
 </BOUCLE_test_multiple>
-	<BOUCLE_projets_site_selectionne(PROJETS_SITES){id_site=#ENV{valeur}}
+	<BOUCLE_projets_site_selectionne(PROJETS_SITES){id_projets_site=#ENV{valeur}}
 		{par num type_site, type_site}{tout}>
-	  	<p>#TYPE_SITE (#ID_SITE)</p>
+	  	<p>#TYPE_SITE (#ID_PROJETS_SITE)</p>
 	</BOUCLE_projets_site_selectionne>
    	[(#ENV*{sans_reponse}|propre)]
 	<//B_projets_site_selectionne>

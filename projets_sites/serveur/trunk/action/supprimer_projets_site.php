@@ -26,11 +26,11 @@ function action_supprimer_projets_site_dist($id = null)
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $id = $securiser_action();
     }
-    $id_site = intval($id);
+    $id_projets_site = intval($id);
 
-    if ($id_site) {
-        sql_delete('spip_projets_sites', 'id_site='.$id_site);
-        sql_delete('spip_projets_sites_liens', 'id_site='.$id_site);
+    if ($id_projets_site) {
+        sql_delete('spip_projets_sites', 'id_projets_site='.$id_projets_site);
+        sql_delete('spip_projets_sites_liens', 'id_projets_site='.$id_projets_site);
     } else {
         spip_log(__FUNCTION__ . " $id pas compris");
     }

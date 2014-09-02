@@ -1,12 +1,12 @@
-[(#AUTORISER{voir,projets_site,#ID_SITE}|sinon_interdire_acces)]
-<BOUCLE_projets_site(PROJETS_SITES){id_site}{si #ENV{exec}|=={projets_site}}>
+[(#AUTORISER{voir,projets_site,#ID_PROJETS_SITE}|sinon_interdire_acces)]
+<BOUCLE_projets_site(PROJETS_SITES){id_projets_site}{si #ENV{exec}|=={projets_site}}>
 [(#BOITE_OUVRIR{[
-	[(#AUTORISER{modifier,projets_site,#ID_SITE})
-		[(#ID_SITE|afficher_qui_edite{projets_site}|non)
-			[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|icone_verticale{<:projets_site:icone_modifier_projets_site:>,projets_site,edit,right ajax preload})]
+	[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
+		[(#ID_PROJETS_SITE|afficher_qui_edite{projets_site}|non)
+			[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|icone_verticale{<:projets_site:icone_modifier_projets_site:>,projets_site,edit,right ajax preload})]
 		]
-		[(#ID_SITE|afficher_qui_edite{projets_site}|oui)
-			[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|icone_verticale{#ID_SITE|afficher_qui_edite{projets_site},warning-24,'',right edition_deja ajax preload})]
+		[(#ID_PROJETS_SITE|afficher_qui_edite{projets_site}|oui)
+			[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|icone_verticale{#ID_PROJETS_SITE|afficher_qui_edite{projets_site},warning-24,'',right edition_deja ajax preload})]
 		]
 	]
 
@@ -15,33 +15,33 @@
 ],simple fiche_objet})]
 
 <div class="ajax">
-	#FORMULAIRE_DATER{projets_site,#ID_SITE}
+	#FORMULAIRE_DATER{projets_site,#ID_PROJETS_SITE}
 </div>
 
 <!--affiche_milieu-->
 
 <div id="wysiwyg">
-<INCLURE{fond=prive/objets/contenu/projets_site,id=#ID_SITE,id_site=#ID_SITE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+<INCLURE{fond=prive/objets/contenu/projets_site,id=#ID_PROJETS_SITE,id_projets_site=#ID_PROJETS_SITE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
 </div>
 
 <div class="nettoyeur"></div>
 
-[(#AUTORISER{modifier,projets_site,#ID_SITE})
-	[(#ID_SITE|afficher_qui_edite{projets_site}|non)
-		[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|icone_verticale{<:projets_site:icone_modifier_projets_site:>,projets_site,edit,right ajax preload})]
+[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
+	[(#ID_PROJETS_SITE|afficher_qui_edite{projets_site}|non)
+		[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|icone_verticale{<:projets_site:icone_modifier_projets_site:>,projets_site,edit,right ajax preload})]
 	]
-	[(#ID_SITE|afficher_qui_edite{projets_site}|oui)
-		[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE}|icone_verticale{#ID_SITE|afficher_qui_edite{projets_site},warning-24,'',right edition_deja ajax preload})]
+	[(#ID_PROJETS_SITE|afficher_qui_edite{projets_site}|oui)
+		[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|icone_verticale{#ID_PROJETS_SITE|afficher_qui_edite{projets_site},warning-24,'',right edition_deja ajax preload})]
 	]
 ]
 
-#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projets_site,id,#ID_SITE},data,'<div class="nettoyeur"></div>'}}
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,projets_site,id,#ID_PROJETS_SITE},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
 
 <div class="nettoyeur"></div>
 
-<BOUCLE_autresobjets(spip_projets_sites_liens) {id_site} {fusion objet}{par objet}>
+<BOUCLE_autresobjets(spip_projets_sites_liens) {id_projets_site} {fusion objet}{par objet}>
 	#SET{table,#OBJET|table_objet}
 	[(#SET{titre,[#OBJET:info_(#GET{table})_liees_projets_site]})] 
 	<INCLURE{fond=prive/objets/liste/objets_lies_projets_site,objet,id_projets_site,ajax,env} />

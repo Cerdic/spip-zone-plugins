@@ -19,7 +19,7 @@ include_spip('inc/editer');
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
  *
- * @param int|string $id_site
+ * @param int|string $id_projets_site
  *     Identifiant du projets_site. 'new' pour un nouveau projets_site.
  * @param string $retour
  *     URL de redirection après le traitement
@@ -37,9 +37,9 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_projets_site_identifier_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+function formulaires_editer_projets_site_identifier_dist($id_projets_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
 {
-    return serialize(array(intval($id_site), $associer_objet));
+    return serialize(array(intval($id_projets_site), $associer_objet));
 }
 
 /**
@@ -49,7 +49,7 @@ function formulaires_editer_projets_site_identifier_dist($id_site = 'new', $reto
  *
  * @uses formulaires_editer_objet_charger()
  *
- * @param int|string $id_site
+ * @param int|string $id_projets_site
  *     Identifiant du projets_site. 'new' pour un nouveau projets_site.
  * @param string $retour
  *     URL de redirection après le traitement
@@ -67,9 +67,9 @@ function formulaires_editer_projets_site_identifier_dist($id_site = 'new', $reto
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_projets_site_charger_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+function formulaires_editer_projets_site_charger_dist($id_projets_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
 {
-    $valeurs = formulaires_editer_objet_charger('projets_site', $id_site, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+    $valeurs = formulaires_editer_objet_charger('projets_site', $id_projets_site, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
     return $valeurs;
 }
 
@@ -80,7 +80,7 @@ function formulaires_editer_projets_site_charger_dist($id_site = 'new', $retour 
  *
  * @uses formulaires_editer_objet_verifier()
  *
- * @param int|string $id_site
+ * @param int|string $id_projets_site
  *     Identifiant du projets_site. 'new' pour un nouveau projets_site.
  * @param string $retour
  *     URL de redirection après le traitement
@@ -98,7 +98,7 @@ function formulaires_editer_projets_site_charger_dist($id_site = 'new', $retour 
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+function formulaires_editer_projets_site_verifier_dist($id_projets_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
 {
     include_spip('inc/filtres');
     include_spip('inc/site');
@@ -124,7 +124,7 @@ function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour
         titre_automatique('titre', array('descriptif'));
         // et sinon l'url du front office, sans couper
         titre_automatique('titre', array('fo_url'), 255);
-        $erreurs = formulaires_editer_objet_verifier('projets_site', $id_site);
+        $erreurs = formulaires_editer_objet_verifier('projets_site', $id_projets_site);
     }
     return $erreurs;
 }
@@ -136,7 +136,7 @@ function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour
  *
  * @uses formulaires_editer_objet_traiter()
  *
- * @param int|string $id_site
+ * @param int|string $id_projets_site
  *     Identifiant du projets_site. 'new' pour un nouveau projets_site.
  * @param string $retour
  *     URL de redirection après le traitement
@@ -154,19 +154,19 @@ function formulaires_editer_projets_site_verifier_dist($id_site = 'new', $retour
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_projets_site_traiter_dist($id_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
+function formulaires_editer_projets_site_traiter_dist($id_projets_site = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '')
 {
-    $res = formulaires_editer_objet_traiter('projets_site', $id_site, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+    $res = formulaires_editer_objet_traiter('projets_site', $id_projets_site, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
     // Un lien a prendre en compte ?
-    if ($associer_objet and $id_site = $res['id_site']) {
+    if ($associer_objet and $id_projets_site = $res['id_projets_site']) {
         list($objet, $id_objet) = explode('|', $associer_objet);
 
         if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
             include_spip('action/editer_liens');
-            objet_associer(array('projets_site' => $id_site), array($objet => $id_objet));
+            objet_associer(array('projets_site' => $id_projets_site), array($objet => $id_objet));
             if (isset($res['redirect'])) {
-                $res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_site, '&');
+                $res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_projets_site, '&');
             }
         }
     }
