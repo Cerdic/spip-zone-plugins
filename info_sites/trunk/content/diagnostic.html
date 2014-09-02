@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-9">
-<BOUCLE_projets_site (PROJETS_SITES) {id_site}>
+<BOUCLE_projets_site (PROJETS_SITES) {id_projets_site}>
 [(#BOITE_OUVRIR{[
 		<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h2>
 ],simple fiche_objet})]
@@ -52,9 +52,9 @@
 			<form action="#SELF" method="get" role="form" class="form">
 				<input type="hidden" name="page" value="#ENV{page}" />
 				<div class="form-group">
-					<label for="id_site" class="control-label"><:info_sites:label_selectionner_site:></label>
-					<select name="id_site" class="form-control">
-						<BOUCLE_sites (PROJETS_SITES)><option value="#ID_SITE"[(#ENV{id_site}|=={#ID_SITE}|oui) selected="selected"]>#TITRE[ \((#TYPE_SITE)\)]</option></BOUCLE_sites>
+					<label for="id_projets_site" class="control-label"><:info_sites:label_selectionner_site:></label>
+					<select name="id_projets_site" class="form-control">
+						<BOUCLE_sites (PROJETS_SITES)><option value="#ID_PROJETS_SITE"[(#ENV{id_projets_site}|=={#ID_PROJETS_SITE}|oui) selected="selected"]>#TITRE[ \((#TYPE_SITE)\)]</option></BOUCLE_sites>
 					</select>
 				</div>
 				<div class="form-group">

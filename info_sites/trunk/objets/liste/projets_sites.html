@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	id_site,1,
+	id_projets_site,1,
 	titre,1,
 	type_site,1,
 	logiciel_nom,1,
@@ -19,20 +19,20 @@
             <th class='logiciel_nom' scope='col'>[(#TRI{logiciel_nom,<:projets_site:label_logiciel_nom:>,ajax})]</th>
             <th class='logiciel_version' scope='col'>[(#TRI{logiciel_version,<:projets_site:label_logiciel_version:>,ajax})]</th>
             <th class='fo_url' scope='col'>[(#TRI{fo_url,<:projets_site:label_fo_url:>,ajax})]</th>
-            <th class='id' scope='col'>[(#TRI{id_site,<:info_numero_abbreviation:>,ajax})]</th>
+            <th class='id' scope='col'>[(#TRI{id_projets_site,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_site?} {id_projet?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,type_site},#GET{defaut_tri}}{!par type_site}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_projets_site?} {id_projet?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,type_site},#GET{defaut_tri}}{!par type_site}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='nom principale'><a href="[(#ID_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_SITE">[(#RANG). ]#TITRE</a></td>
+			<td class='nom principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ]#TITRE</a></td>
             <td class='type_site'>[(#TYPE_SITE)]</td>
             <td class='logiciel_nom'>[(#LOGICIEL_NOM)]</td>
             <td class='logiciel_version'>[(#LOGICIEL_VERSION)]</td>
             <td class='fo_url' scope='col'>[<a href="#FO_URL">(#FO_URL)</a>]</td>
-            <td class='id'>[(#AUTORISER{modifier,projets_site,#ID_SITE}|?{
-				<a href="[(#URL_ECRIRE{projets_site_edit,id_site=#ID_SITE})]">#ID_SITE</a>,
-				#ID_SITE
+            <td class='id'>[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|?{
+				<a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE})]">#ID_PROJETS_SITE</a>,
+				#ID_PROJETS_SITE
 			})]</td>
 		</tr>
 	</BOUCLE_liste_projets_sites>
