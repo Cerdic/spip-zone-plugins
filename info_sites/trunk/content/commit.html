@@ -6,23 +6,13 @@
 ],simple fiche_objet})]
 
 
-<div class="row">
-    <div class="col-md-6">
-        [(#LOGO_COMMIT|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
-        <div class="clearfix"></div>
+[(#LOGO_COMMIT|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
+<div class="clearfix"></div>
 
-        <div id="wysiwyg">
-            <INCLURE{fond=prive/objets/contenu/commit,id=#ID_COMMIT,id_commit=#ID_COMMIT,ajax=wysiwyg} />
-        </div>
-        <div class="clearfix"></div>
-
-    </div>
-    <!-- /.col-md-6 -->
-    <div class="col-md-6">
-    </div>
-    <!-- /.col-md-6 -->
+<div id="wysiwyg">
+    <INCLURE{fond=prive/objets/contenu/commit,id=#ID_COMMIT,id_commit=#ID_COMMIT,ajax=wysiwyg} />
 </div>
-<!-- /.row -->
+<div class="clearfix"></div>
 
 #BOITE_FERMER
 

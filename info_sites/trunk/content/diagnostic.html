@@ -1,72 +1,15 @@
-<div class="row">
-	<div class="col-md-9">
 <BOUCLE_projets_site (PROJETS_SITES) {id_projets_site}>
 [(#BOITE_OUVRIR{[
-		<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h2>
+		<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>}) [\((#TYPE_SITE)\)]</h2>
 ],simple fiche_objet})]
 
 
 		[(#LOGO_PROJETS_SITE|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
 		<div class="clearfix"></div>
-
-		<table class="table table-striped">
-			<thead class="bg-primary">
-				<tr>
-					<th class="text-center" colspan="5"><:projets_site:titre_projets_site:></th>
-					<th class="text-center" colspan="2"><:info_sites:titre_logiciel_plugins_maj:></th>
-				</tr>
-				<tr>
-					<th class="col text-center" scope="col"><:projets_site:label_prefixe:></th>
-					<th class="col text-center" scope="col"><:projets_site:label_titre:></th>
-					<th class="col text-center" scope="col"><:projets_site:label_statut:></th>
-					<th class="col text-center" scope="col"><:projets_site:label_version:></th>
-					<th class="col text-center" scope="col"><:projets_site:label_logiciel_nom:></th>
-					<th class="col text-center" scope="col"><:info_sites:label_branche:></th>
-					<th class="col text-center" scope="col"><:info_sites:label_branche_version:></th>
-				</tr>
-			</thead>
-		<tbody>
-		<BOUCLE_plugins_site (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {par /0}>[(#SET{plugin,[(#ARRAY{prefixe,[(#VALEUR{0})],titre,[(#VALEUR{2})], statut,[(#VALEUR{3})], version,[(#VALEUR{1})]})]})]
-			<tr class="[(#GET{plugin/prefixe}|strtolower)]">
-				<td>[(#GET{plugin/prefixe})]</td><!-- prefixe -->
-				<td>[(#GET{plugin/titre})]</td><!-- titre -->
-				<td>[(#GET{plugin/statut})]</td><!-- statut -->
-				<td>[(#GET{plugin/version})]</td><!-- version -->
-				<td>[(#_projets_site:LOGICIEL_NOM)][ (#_projets_site:LOGICIEL_VERSION|version2branche)]</td>
-				<BOUCLE_paquet (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {0,1}>
-				<td class="[(#_plugins_site:LOGICIEL_VERSION|version2branche|in_array{[(#BRANCHES_SPIP|explode{','})]}|?{'success','danger'})]">[(#BRANCHES_SPIP|replace{",",", "})]</td><!-- branche -->
-				<td class="[(#VERSION|=={#_plugins_site:GET{plugin/version}}|?{'success','danger'})]">#VERSION</td><!-- branche_version -->
-				</BOUCLE_paquet>
-			</tr>
-		</BOUCLE_plugins_site>
-		</tbody>
-		</table>
-		<div class="clearfix"></div>
-
+[(#SET{inclure, [(#VAL{'diagnostic/'}|concat{[(#LOGICIEL_NOM|strtolower)],'/diagnostic'})]})]
+[(#CHEMIN{[(#GET{inclure}).html]}|?{
+    [(#INCLURE{fond=[(#GET{inclure})], id_projets_site, env})],
+    <info_sites:diagnostic_logiciel_absent:>
+})]
 #BOITE_FERMER
 </BOUCLE_projets_site>
-	</div>
-	<!-- /.col-md-9 -->
-	<div class="col-md-3">
-		<div class="block">
-			<form action="#SELF" method="get" role="form" class="form">
-				<input type="hidden" name="page" value="#ENV{page}" />
-				<div class="form-group">
-					<label for="id_projets_site" class="control-label"><:info_sites:label_selectionner_site:></label>
-					<select name="id_projets_site" class="form-control">
-						<BOUCLE_sites (PROJETS_SITES)><option value="#ID_PROJETS_SITE"[(#ENV{id_projets_site}|=={#ID_PROJETS_SITE}|oui) selected="selected"]>#TITRE[ \((#TYPE_SITE)\)]</option></BOUCLE_sites>
-					</select>
-				</div>
-				<div class="form-group">
-					<button type="submit" class="submit btn btn-default"><:bouton_valider:></button>
-				</div>
-			</form>
-		</div>
-
-	</div>
-	<!-- /.col-md-3 -->
-</div>
-<!-- /.row -->
-
-
-

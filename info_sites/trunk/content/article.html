@@ -1,6 +1,5 @@
 <BOUCLE_content(ARTICLES){id_article}>
-<article class="row">
-	<div class="col-md-6">
+<article>
 		<header class="cartouche blog-header">
 			[(#LOGO_ARTICLE|image_reduire{200,200})]
 			[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
@@ -51,8 +50,7 @@
 			[<div class="#EDIT{ps} ps surlignable"><h2><:info_ps:></h2>(#PS|adaptive_images)</div>]
 			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 		</footer>
-	</div>
-	<aside class="col-md-6">
+	<aside>
 		[(#REM) Gestion du portfolio et des documents ]
 		[(#INCLURE{fond=inclure/documents,id_article})]
 

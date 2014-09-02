@@ -6,78 +6,47 @@
 ],simple fiche_objet})]
 
 
-<div class="row">
-	<div class="col-md-6">
-		[(#LOGO_PROJET|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
-		<div class="clearfix"></div>
+[(#LOGO_PROJET|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
+<div class="clearfix"></div>
 
-		<div id="wysiwyg">
-			<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
-				<div class="label visible"><:projet:label_statut:>&nbsp;: </div>
-				<div dir='#LANG_DIR' class='span statut'>[(#STATUT|puce_statut{projet,#ID_PROJET}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</div>
-			</div>
-
-			<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
-
-			[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide hidden})]">
-				<div class="label visible"><:commit:champ_versioning_path_label:>&nbsp;: </div>
-				<div dir='#LANG_DIR' class='span #EDIT{versioning_path} versioning_path'><a href="#VERSIONING_PATH">(#VERSIONING_PATH)</a></div>
-			</div>]
-
-			[<div class="champ contenu_versioning_trac[ (#VERSIONING_TRAC*|strlen|?{'',vide hidden})]">
-				<div class="label visible"><:commit:champ_versioning_trac_label:>&nbsp;: </div>
-				<div dir='#LANG_DIR' class='span #EDIT{versioning_trac} versioning_trac'><a href="#VERSIONING_TRAC">(#VERSIONING_TRAC)</a></div>
-			</div>]
-
-			[<div class="champ contenu_versioning_type[ (#VERSIONING_TYPE*|strlen|?{'',vide hidden})]">
-				<div class="label visible"><:commit:champ_versioning_type_label:>&nbsp;: </div>
-				<div dir='#LANG_DIR' class='span #EDIT{versioning_type} versioning_type'><a href="#VERSIONING_TYPE">(#VERSIONING_TYPE)</a></div>
-			</div>]
-
-			[<div class="champ contenu_versioning_rss[ (#VERSIONING_RSS*|strlen|?{'',vide hidden})]">
-				<div class="label visible"><:commit:champ_versioning_rss_label:>&nbsp;: </div>
-				<div dir='#LANG_DIR' class='span #EDIT{versioning_rss} versioning_rss'><a href="#VERSIONING_RSS">(#VERSIONING_RSS)</a></div>
-			</div>]
-
-		</div>
-		<div class="clearfix"></div>
-
-		<INCLURE{fond=prive/objets/liste/projets,
-			id_parent=#ID_PROJET,
-			titre=<:contacts:info_projets_filles:>,
-			ajax}>
-
-		<div class="clearfix"></div>
-		<INCLURE{fond=prive/objets/liste/commits, id_projet, par=date_creation, env, ajax} />
-
+<div id="wysiwyg">
+	<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
+		<div class="label visible"><:projet:label_statut:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span statut'>[(#STATUT|puce_statut{projet,#ID_PROJET}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</div>
 	</div>
-	<!-- /.col-md-6 -->
-	<div class="col-md-6">
-		<div class="block">
-			<div class="btn-group">
-			[(#AUTORISER{modifier,projet,#ID_PROJET})
-				<a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
-				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projet:></a>
-				<a href="[(#URL_ECRIRE{projet,id_projet=#ID_PROJET})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:editer_liens_projet:></a>
-			]<BOUCLE_site_secu (PROJETS_SITES) {id_projet} {tout} {0,1}> </BOUCLE_site_secu><a href="[(#URL_PAGE{diagnostic_iso}|parametre_url{id_projet,#ID_PROJET})]" class="btn btn-default btn-sm"><i class="fa fa-list fa-lg"></i> <:info_sites:btn_diagnostic_iso:></a></B_site_secu>
-			</div>
-		</div>
-		<div class="block">
-			<div class="clearfix clear"> </div>
-			<INCLURE{fond=objets/liste/projets_sites,projet,id_projet,ajax,env} />
-		</div>
 
-	</div>
-	<!-- /.col-md-6 -->
+	<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
+
+	[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_path_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_path} versioning_path'><a href="#VERSIONING_PATH">(#VERSIONING_PATH)</a></div>
+	</div>]
+
+	[<div class="champ contenu_versioning_trac[ (#VERSIONING_TRAC*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_trac_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_trac} versioning_trac'><a href="#VERSIONING_TRAC">(#VERSIONING_TRAC)</a></div>
+	</div>]
+
+	[<div class="champ contenu_versioning_type[ (#VERSIONING_TYPE*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_type_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_type} versioning_type'><a href="#VERSIONING_TYPE">(#VERSIONING_TYPE)</a></div>
+	</div>]
+
+	[<div class="champ contenu_versioning_rss[ (#VERSIONING_RSS*|strlen|?{'',vide hidden})]">
+		<div class="label visible"><:commit:champ_versioning_rss_label:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_rss} versioning_rss'><a href="#VERSIONING_RSS">(#VERSIONING_RSS)</a></div>
+	</div>]
+
 </div>
-<!-- /.row -->
+<div class="clearfix"></div>
 
+<INCLURE{fond=prive/objets/liste/projets,
+	id_parent=#ID_PROJET,
+	titre=<:contacts:info_projets_filles:>,
+	ajax}>
 
-
-
-
-
-
+<div class="clearfix"></div>
+<INCLURE{fond=prive/objets/liste/commits, id_projet, par=date_creation, env, ajax} />
 
 
 #BOITE_FERMER

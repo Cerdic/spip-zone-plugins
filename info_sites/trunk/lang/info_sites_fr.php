@@ -16,6 +16,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
 
+    // D
+    'diagnostic_logiciel_absent' => 'Il n\'y a pas de protocole de diagnostic défini pour ce logiciel.',
+
     // E
     'editer_liens_contact' => '&Eacute;diter les liens de ce contact',
     'editer_liens_organisation' => '&Eacute;diter les liens de cette organisation',
@@ -54,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // P
     'page_diagnostic_iso' => 'Diagnostic ISO',
+    'page_diagnostic' => 'Diagnostic',
 
     // S
 

@@ -11,7 +11,17 @@
 						<INCLURE{fond=header/#ENV{type-page},env} />
 					</div>
 					<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
-					<INCLURE{fond=content/#ENV{type-page},env} />
+					<div class="row">
+						<div class="col-md-6">
+							<INCLURE{fond=content/#ENV{type-page},env} />
+						</div>
+						<!-- /.col-md-6 -->
+						<div class="col-md-6">
+							<INCLURE{fond=extra/#ENV{type-page},env} />
+						</div>
+						<!-- /.col-md-6 -->
+					</div>
+					<!-- /.row -->
 				</div>
 			</div>
 

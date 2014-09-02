@@ -6,36 +6,10 @@
 ],simple fiche_objet})]
 
 
-<div class="row">
-	<div class="col-md-6">
-		<div id="wysiwyg">
-		<INCLURE{fond=prive/objets/contenu/projets_cadre,id=#ID_PROJETS_CADRE,id_projets_cadre=#ID_PROJETS_CADRE,ajax=wysiwyg} />
-		</div>
-		<div class="clearfix"></div>
-
-	</div>
-	<!-- /.col-md-6 -->
-	<div class="col-md-6">
-		[(#LOGO_PROJETS_CADRE|image_reduire{350,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height})]
-
-		[(#AUTORISER{modifier,projets_cadre,#ID_PROJETS_CADRE})
-			<a href="[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#SELF})]" class="btn btn-default" rel="nofollow" target="_blank"
-			onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:projets_cadre:icone_modifier_projets_cadre:></a>
-		]
-		<div class="clearfix"></div>
-
-	</div>
-	<!-- /.col-md-6 -->
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/projets_cadre,id=#ID_PROJETS_CADRE,id_projets_cadre=#ID_PROJETS_CADRE,ajax=wysiwyg} />
 </div>
-<!-- /.row -->
-
-
-
-
-
-
-
-
+<div class="clearfix"></div>
 
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)

@@ -1,0 +1,16 @@
+<BOUCLE_extra (CONTACTS) {id_contact}>
+
+<div class="block">
+    <div class="btn-group">
+        [(#AUTORISER{modifier,contact,#ID_CONTACT})
+            <a href="[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
+            onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{contact_edit,id_contact=#ID_CONTACT}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_contact:></a>
+            <a href="[(#URL_ECRIRE{contact,id_contact=#ID_CONTACT})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:editer_liens_contact:></a>
+        ]
+    </div>
+</div>
+<div class="block">
+    <INCLURE{fond=objets/liste/organisations, id_contact=#ID_CONTACT, ajax=wysiwyg} />
+</div>
+
+</BOUCLE_extra>

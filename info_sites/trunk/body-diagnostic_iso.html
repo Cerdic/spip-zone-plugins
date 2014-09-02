@@ -1,0 +1,31 @@
+<body>
+    <div class="page">
+        <div class="container-fluid">
+
+            <div class="row">
+                <aside class="aside secondary col-md-3 col-xs-2" id="aside">
+                    <INCLURE{fond=aside/#ENV{type-page},env} />
+                </aside>
+                <div class="content col-md-9 col-xs-10" id="content">
+                    <div class="header" id="header">
+                        <INCLURE{fond=header/#ENV{type-page},env} />
+                    </div>
+                    <INCLURE{fond=breadcrumb/#ENV{type-page},env} />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <INCLURE{fond=content/#ENV{type-page},env} />
+                        </div>
+                        <!-- /.col-md-12 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+
+            <div class="footer row" id="footer">
+                <div class="col-md-12">
+                    <INCLURE{fond=footer/#ENV{type-page},env} />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

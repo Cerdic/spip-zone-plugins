@@ -1,0 +1,12 @@
+<BOUCLE_extra (PROJETS_CADRES) {id_projets_cadre} {tout}>
+
+[(#LOGO_PROJETS_CADRE|image_reduire{350,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height})]
+
+[(#AUTORISER{modifier,projets_cadre,#ID_PROJETS_CADRE})
+    <a href="[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#SELF})]" class="btn btn-default" rel="nofollow" target="_blank"
+    onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:projets_cadre:icone_modifier_projets_cadre:></a>
+]
+<div class="clearfix"></div>
+
+
+</BOUCLE_extra>

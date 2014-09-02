@@ -1,22 +1,4 @@
 <h1><:projets_site:titre_projets_sites:></h1>
 <div class='clearfix'></div>
 
-<div class="row">
-	<div class="col-md-8">
-		<INCLURE{fond=objets/liste/projets_sites,env,ajax,sinon=<:projets_site:info_aucun_projets_site:>}>
-	</div>
-	<!-- /.col-md-9 -->
-	<div class="col-md-4">
-		<div class="btn-group">
-			[(#AUTORISER{creer,projet})
-				<a href="[(#URL_ECRIRE{projets_site_edit,new=oui})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
-				onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a>
-			]
-		</div>
-
-	</div>
-	<!-- /.col-md-3 -->
-</div>
-<!-- /.row -->
-
-
+<INCLURE{fond=objets/liste/projets_sites,env,ajax,sinon=<:projets_site:info_aucun_projets_site:>}>

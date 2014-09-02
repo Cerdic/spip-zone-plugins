@@ -1,0 +1,6 @@
+<div class="btn-group">
+    [(#AUTORISER{creer,projet})
+        <a href="[(#URL_ECRIRE{projets_site_edit,new=oui})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
+        onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a>
+    ]
+</div>

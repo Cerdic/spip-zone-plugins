@@ -1,18 +1,4 @@
 <h2 class="grostitre"><:contacts:organisations:></h2>
 <div class='clearfix'></div>
 
-<div class="row">
-	<div class="col-md-8">
-		<INCLURE{fond=objets/liste/organisations,env,ajax,sinon=<:contacts:aucune_organisation:>}>
-	</div>
-	<!-- /.col-md-9 -->
-	<div class="col-md-4">
-		[(#AUTORISER{creer,organisation})
-			<a href="[(#URL_ECRIRE{organisation_edit,new=oui})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
-			onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:contacts:organisation_creer:></a>
-		]
-
-	</div>
-	<!-- /.col-md-3 -->
-</div>
-<!-- /.row -->
+<INCLURE{fond=objets/liste/organisations,env,ajax,sinon=<:contacts:aucune_organisation:>}>
