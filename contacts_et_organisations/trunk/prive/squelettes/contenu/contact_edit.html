@@ -10,7 +10,10 @@
 		[(#ID_CONTACT|oui)
 		[(#GET{retour}|icone_verticale{<:icone_retour:>,contact,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
 		]
-		[[(#ID_CONTACT|?{<:contacts:contact_editer:>,<:contacts:contact_ajouter:>})]
+		[[(#ID_CONTACT|?{<:contacts:contact_editer:>,#ENV{associer_objet}|?{<:contacts:contact_ajouter_associe_a:>,<:contacts:contact_ajouter:>}})]
+		[(#ENV{associer_objet}|oui) [(#SET{associer_objet,[(#ENV{associer_objet}|explode{"|"})]})]
+		 <a href="[(#GET{associer_objet/1}|generer_url_entite{#GET{associer_objet/0}})]">[(#INFO_TITRE{#GET{associer_objet/0},#GET{associer_objet/1}})]</a>
+		]
 		<h1>(#ENV{titre,#INFO_PRENOM{contact,#ID_CONTACT}|concat{' ',#INFO_NOM{contact,#ID_CONTACT}}|trim|sinon{<:info_sans_titre:>}})</h1>]
 	</div>
 
