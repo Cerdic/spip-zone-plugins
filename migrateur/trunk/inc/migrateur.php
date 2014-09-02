@@ -75,6 +75,29 @@ function migrateur_obtenir_commande_serveur($command) {
 }
 
 /**
+ * Calcule un numéro de branche depuis une version donnée, ou depuis la version de spip actuellement utilisé
+ *
+ * @param string $version
+ *     Numéro de version dont on souhaite le numéro de branche, tel que 2.1.9, 3.0.0-beta2...
+ *     En absence, prend la version du SPIP actuellement utilisé
+ * @return string
+ *     Numéro de branche, exemple : 3.0
+**/
+function migrateur_obtenir_numero_branche($version = null) {
+	if (is_null($version)) {
+		// 3.0.0-alpha
+		$version = $GLOBALS['spip_version_branche'];
+	}
+
+	// 3.0.0
+	$version = strtolower(preg_replace(',([0-9])[\s-.]?(dev|alpha|a|beta|b|rc|pl|p),i','\\1', $version));
+
+	// 3.0
+	$t = explode('.', $version);
+	return $t[0] . '.' . $t[1];
+}
+
+/**
  * Active un ou plusieurs plugins ayant le préfixe indiqué
  *
  * @param string|array $prefixes
@@ -95,10 +118,16 @@ function migrateur_activer_plugin_prefixes($prefixes, $redirect=null) {
 
 	$prefixes_majuscule = array_map('strtoupper', $prefixes);
 
+	// sélectionner uniquement les paquets compatibles avec notre branche !
+	// [fixme] peut poser problème avec les versions dev : cela va ignorer
+	// des paquets, même si la constante _DEV_PLUGINS est définie 
+	$branche_spip = migrateur_obtenir_numero_branche();
+
 	$ids_paquets = sql_allfetsel('id_paquet', 'spip_paquets', array(
 		sql_in('prefixe', $prefixes_majuscule),
 		'obsolete=' . sql_quote('non'),
-		'id_depot=' . sql_quote(0)
+		'id_depot=' . sql_quote(0),
+		'branches_spip REGEXP "(^|,)' . preg_quote($branche_spip) . '($|,)"',
 	), 'prefixe', 'etatnum DESC');
 	if ($ids_paquets) {
 		$ids_paquets = array_map('array_shift', $ids_paquets);
