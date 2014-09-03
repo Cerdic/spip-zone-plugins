@@ -9,7 +9,20 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<input type="hidden" name="_meta_casier" value="commits" />
+		<ul>
+
+			[(#SAISIE{explication, explication_curl,
+				texte=<:commits:explication_curl:>})]
+
+			[(#SAISIE{input, login,
+				label=<:commits:label_login:>})]
+
+			[(#SAISIE{input, password,
+				label=<:commits:label_password:>})]
+
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="rss_commits" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>
