@@ -19,16 +19,16 @@ function inc_analyser_webservice_dist($url)
 {
     include_spip('iterateur/data');
     include_spip('inc/distant');
-    $valeurs = array();
-    $page = recuperer_page($url);
-    $convertir = charger_fonction('xml_to_array', 'inc');
-    $xml = $convertir($page);
-    $valeurs['webservice'] = $url;
+    $recuperer_flux = charger_fonction('recuperer_flux', 'inc');
+    $convertir      = charger_fonction('xml_to_array', 'inc');
+
+    $valeurs   = array();
+    $page      = $recuperer_flux($url);
+    $xml       = $convertir($page['content']);
     $parse_url = parse_url($url);
     parse_str($parse_url['query'], $query);
-    // echo "<pre>";
-    // var_dump($xml);
-    // echo "</pre>";
+
+    $valeurs['webservice'] = $url;
 
     if (isset($query['cle'])) {
         $valeurs['uniqid'] = $query['cle'];
@@ -112,12 +112,8 @@ function inc_analyser_webservice_dist($url)
         }
     }
     ksort($valeurs);
-    // echo "<pre>";
-    // var_dump($valeurs);
-    // echo "</pre>";
+
     return $valeurs;
 }
-
-
 
 ?>
