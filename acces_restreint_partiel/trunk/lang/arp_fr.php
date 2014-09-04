@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages' => 'Paramétrages',
 	'cfg_titre_parametrages_regles' => 'Paramétrage des règles',
 	'cfg_mot_regle' => 'Règle',
-	'cfg_explication_parametrages_regles' => 'Le plugin vous permet de définir N règles de filtrage ; N étant configurable.<br />Vous pouvez faire référence à ces règles soit directement et de façon prioritaire dans un article en collant un mot-clé (ex : arp_regle1) , soit de façon globale pour l\'ensemble du site (voir ci-dessous). Si pas de mot-clé affecté à l\'article, c\'est la règle globale qui est appliquée.<br />Pour chaque règle, on définit un filtre à appliquer ainsi que le paramètre xxx correspondant.',
+	'cfg_explication_parametrages_regles' => 'Le plugin vous permet de définir 8 règles de filtrage.<br />Vous pouvez faire référence à ces règles soit directement et de façon prioritaire dans un article en collant un mot-clé (ex : arp_regle1) , soit de façon globale pour l\'ensemble du site (voir ci-dessous). Si pas de mot-clé affecté à l\'article, c\'est la règle globale qui est appliquée.<br />Pour chaque règle, on définit un filtre à appliquer ainsi que le paramètre xxx correspondant.',
 
 	'cfg_label_nregle' => 'Combien de règles désirez-vous ?',
 	'cfg_nregle_erreur' => 'Veuillez entrer une valeur numérique pour le nombre de règle',
