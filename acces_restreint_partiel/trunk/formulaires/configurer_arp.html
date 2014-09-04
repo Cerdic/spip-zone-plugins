@@ -1,0 +1,114 @@
+[(#ENV{arp_nregle}|is_numeric|?{
+	#SET{arp_nregle,#ENV{arp_nregle}}
+	,
+	#SET{arp_nregle,5} 
+})]
+[(#ENV{arp_nregle}|<{1}|oui)
+	#SET{arp_nregle,1}
+]
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<h3 class="titrem"><:arp:cfg_titre_parametrages_regles:></h3>
+		<p class='explication'><:arp:cfg_explication_parametrages_regles:></p>
+		<ul>
+			#SET{selection_regle,#ARRAY}
+			<BOUCLE_SELECTION_REGLE(DATA){enum 1,8}>  [(#REM) #GET{arp_nregle}]
+				[(#SET{libele_regle,<:arp:cfg_mot_regle:>&nbsp;##VALEUR&nbsp;:&nbsp;[(#ENV{arp_regle_#VALEUR})]&#91;[(#ENV{arp_filtre_param_#VALEUR})]&#93;})]
+				[(#ENV{arp_regle_#VALEUR}|oui)
+					#SET{selection_regle, #GET{selection_regle}|array_merge{#ARRAY{arp_regle_#VALEUR,#GET{libele_regle}}}}
+				]
+			</BOUCLE_SELECTION_REGLE>
+
+			[(#SAISIE{selection, arp_regle_defaut,
+				label=<:arp:cfg_label_regle_defaut:>,
+				explication=<:arp:cfg_explication_regle_defaut:>,
+				datas=#GET{selection_regle}})]
+
+			[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{arp_nregle}|is_numeric|non)<:arp:cfg_nregle_erreur:></p>]
+			[(#SAISIE{input, arp_nregle,
+				label=<:arp:cfg_label_nregle:>,
+				})]
+		</ul>
+		
+		<BOUCLE_REGLE(DATA){enum 1,8}> [(#REM) #GET{arp_nregle}]
+			<fieldset>
+				<legend onclick="var obj=document.getElementById('regle_#VALEUR'); if (obj.style.display=='block') obj.style.display='none'; else obj.style.display='block';"><:arp:cfg_mot_regle:>&nbsp;##VALEUR&nbsp;:&nbsp;#ENV{arp_regle_#VALEUR}&#91;#ENV{arp_filtre_param_#VALEUR}&#93;</legend>
+				<ul id='regle_#VALEUR' style='display:none;'>
+					[(#SAISIE{selection, arp_regle_#VALEUR,
+						label=<:arp:cfg_label_regle:>,
+						explication=<:arp:cfg_explication_regle:>,
+						datas=#ARRAY{
+							arp_filtre_ncar,<:arp:cfg_label_filtre_ncar:>,
+							arp_filtre_pourcentage,<:arp:cfg_label_filtre_pourcentage:>,
+							arp_filtre_nintertitre,<:arp:cfg_label_filtre_nintertitre:>,
+							arp_filtre_que_intertitre,<:arp:cfg_label_filtre_que_intertitre:>,
+							arp_filtre_tout,<:arp:cfg_label_filtre_tout:>,
+							arp_filtre_rien,<:arp:cfg_label_filtre_rien:>,
+							}})]
+
+					[(#SAISIE{input, arp_filtre_param_#VALEUR,
+						label=<:arp:cfg_label_filtre_param:>,
+						explication=<:arp:cfg_explication_filtre_param:>})]
+
+					[(#SAISIE{input, arp_ncar_min_#VALEUR,
+						label=<:arp:cfg_label_filtre_ncar_min:>,
+						explication=<:arp:cfg_explication_filtre_ncar_min:>})]
+				</ul>
+			</fieldset>
+		</BOUCLE_REGLE>
+
+		
+		<h3 class="titrem"><:arp:cfg_titre_parametrages_avantapres:></h3>
+		<p class='explication'><:arp:cfg_explication_parametrages_avantapres:></p>
+
+		<fieldset>
+			<legend onclick="var obj=document.getElementById('texte_aa_global'); if (obj.style.display=='block') obj.style.display='none'; else obj.style.display='block';"><:arp:cfg_texte_aa_global:></legend>
+			<ul id='texte_aa_global' style='display:none;'>
+				[(#SAISIE{textarea, arp_texte_avant,
+					label=<:arp:cfg_label_texte_avant:>,
+					explication=<:arp:cfg_explication_texte_avant:>,
+				})]
+
+				[(#SAISIE{textarea, arp_texte_apres,
+					label=<:arp:cfg_label_texte_apres:>,
+					explication=<:arp:cfg_explication_texte_apres:>,
+				})]
+			</ul>
+		</fieldset>
+
+		<BOUCLE_ZONES(ZONES)>
+			<fieldset>
+				<legend onclick="var obj=document.getElementById('texte_aa_#ID_ZONE'); if (obj.style.display=='block') obj.style.display='none'; else obj.style.display='block';">Zone #ID_ZONE, #TITRE</legend>
+				<ul id='texte_aa_#ID_ZONE' style='display:none;'>
+					[(#SAISIE{selection, arp_regle_zone_#ID_ZONE,
+						label=<:arp:cfg_label_regle_zone:>,
+						explication=<:arp:cfg_explication_regle_zone:>,
+						datas=#GET{selection_regle}})]
+
+					[(#SAISIE{textarea, arp_texte_avant_#ID_ZONE,
+						label=<:arp:cfg_label_texte_avant:>,
+						explication=<:arp:cfg_explication_texte_avant:>,
+					})]
+
+					[(#SAISIE{textarea, arp_texte_apres_#ID_ZONE,
+						label=<:arp:cfg_label_texte_apres:>,
+						explication=<:arp:cfg_explication_texte_apres:>,
+					})]
+				</ul>
+			</fieldset>
+		</BOUCLE_ZONES>
+
+	
+		<input type="hidden" name="_meta_casier" value="arp" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

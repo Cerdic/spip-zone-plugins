@@ -1,0 +1,14 @@
+[(#REM) Liste les documents de l'article courant, sous forme de vignettes non-cliquables.
+width : (facultatif) largeur de la vignette
+raz : (facultatif) indique le nombre de vignette côte-à-côte. Permet de forcer un retour à la ligne toutes les N vignettes
+]
+<B_DOC>
+	<div class='liste_doc'>
+	<ul>
+<BOUCLE_DOC(DOCUMENTS){id_article}{vu=oui}>
+	<li><img src="[(#LOGO_DOCUMENT||image_reduire{#ENV{width,50}}|extraire_attribut{'src'})]" alt="#TITRE"></li>
+	[(#COMPTEUR_BOUCLE|modulo{#ENV{raz}}|=={0}|oui)<br class='nettoyeur' />]
+</BOUCLE_DOC>
+	</ul>
+	</div>
+</B_DOC>
