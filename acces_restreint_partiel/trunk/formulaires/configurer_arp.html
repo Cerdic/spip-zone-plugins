@@ -31,13 +31,13 @@
 				label=<:arp:cfg_label_regle_defaut:>,
 				explication=<:arp:cfg_explication_regle_defaut:>,
 				datas=#GET{selection_regle}})]
-
+[(#REM) 
 			[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{arp_nregle}|is_numeric|non)<:arp:cfg_nregle_erreur:></p>]
 			[(#SAISIE{input, arp_nregle,
 				label=<:arp:cfg_label_nregle:>,
 				})]
 		</ul>
-		
+]
 		<BOUCLE_REGLE(DATA){enum 1,8}> [(#REM) #GET{arp_nregle}]
 			<fieldset>
 				<legend onclick="var obj=document.getElementById('regle_#VALEUR'); if (obj.style.display=='block') obj.style.display='none'; else obj.style.display='block';"><:arp:cfg_mot_regle:>&nbsp;##VALEUR&nbsp;:&nbsp;#ENV{arp_regle_#VALEUR}&#91;#ENV{arp_filtre_param_#VALEUR}&#93;</legend>
