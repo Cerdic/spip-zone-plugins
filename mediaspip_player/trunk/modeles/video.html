@@ -91,13 +91,15 @@
 
 ]
 [(#GET{largeur}|match{%}|non)
-[(#LOGO_DOCUMENT{vignette}|extraire_attribut{width}|>{#GET{largeur}}|oui)
-	[(#SET{logo,[(#ENV{logo,#LOGO_DOCUMENT{vignette}|extraire_attribut{src}}|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur}}|extraire_attribut{src}|url_absolue)]})]]
-[(#LOGO_DOCUMENT{vignette}|extraire_attribut{width}|>{#GET{largeur}}|non)
-	[(#SET{logo,[(#ENV{logo,[(#LOGO_DOCUMENT{vignette}|extraire_attribut{src}|url_absolue)]})]})]]
-]
-[(#GET{largeur}|match{%}|oui)
-	[(#SET{logo,[(#ENV{logo,#LOGO_DOCUMENT{vignette}|extraire_attribut{src}}|url_absolue)]})]
+[(#ENV{logo}|in_array{#LISTE{non,false,none}}|non)
+	[(#LOGO_DOCUMENT{vignette}|extraire_attribut{width}|>{#GET{largeur}}|oui)
+		[(#SET{logo,[(#ENV{logo,#LOGO_DOCUMENT{vignette}|extraire_attribut{src}}|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur}}|extraire_attribut{src}|url_absolue)]})]]
+	[(#LOGO_DOCUMENT{vignette}|extraire_attribut{width}|>{#GET{largeur}}|non)
+		[(#SET{logo,[(#ENV{logo,[(#LOGO_DOCUMENT{vignette}|extraire_attribut{src}|url_absolue)]})]})]]
+	]
+	[(#GET{largeur}|match{%}|oui)
+		[(#SET{logo,[(#ENV{logo,#LOGO_DOCUMENT{vignette}|extraire_attribut{src}}|url_absolue)]})]
+	]
 ]
 [(#SET{id_document_voir, [(#ID_DOCUMENT)_][(#VAL{0}|rand{100000})]})] 
 [(#SET{titre,#TITRE})]
