@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // C
     'confirmer_supprimer_projets_site' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à ce site&nbsp;?',
+    'consultation_webservice' => 'Consultation du webservice',
 
     // E
     'explication_auteurs' => 'Saisir la liste des auteurs du site en respectant les règles suivantes&nbsp;: </p>
@@ -129,6 +130,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_versioning_type' => 'Type de versioning',
     'label_webservice' => 'Url du Web Service&nbsp;:',
 
+    // M
+    'maj_webservice_log_ko' => 'Le site de projet n°@id@ n\'a pu être mis à jour par l\'url @webservice@',
+    'maj_webservice_log_ok' => 'Le site de projet n°@id@ a été mis à jour par l\'url @webservice@',
+
     // R
     'retirer_lien_projets_site' => 'Retirer ce site',
     'retirer_tous_liens_projets_sites' => 'Retirer tous les sites',
@@ -141,8 +146,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'texte_ajouter_projets_site' => 'Ajouter un site',
     'texte_changer_statut_projets_site' => 'Ce site est :',
     'texte_creer_associer_projets_site' => 'Créer et associer un site',
-    'texte_non_fonction_referencement' => 'Vous pouvez préférer ne pas utiliser cette fonction automatique, et indiquer
-    vous-même les éléments concernant ce site…',
+    'texte_non_fonction_referencement' => 'Vous pouvez préférer ne pas utiliser cette fonction automatique,
+    et indiquer vous-même les éléments concernant ce site…',
     'texte_referencement_automatique' => '<strong>Ajout automatisé par webservice</strong><br/>Vous pouvez importer les
     données de votre site par le biais de l\'url de webservice si vous l\'avez configuré sur ce dernier.',
     'texte_referencement_automatique_verifier' => 'Veuillez vérifier les informations fournies par <tt>@url@</tt>
@@ -165,6 +170,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'type_site_prep_court' => 'Pré-production',
     'type_site_prod_court' => 'Production',
     'type_site_rec_court' => 'Recettes',
+
+    // W
+    'webservice_absent' => 'Aucun webservice',
 );
 
 ?>

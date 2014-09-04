@@ -23,7 +23,7 @@ function formater_tableau ($chaine)
                 $listing[$cle] = formater_valeur($valeur);
             }
         }
-    } else if (preg_match("/\|/", $chaine)){
+    } else if (preg_match("/\|/", $chaine)) {
         $listing[] = formater_valeur($chaine);
     }
     return $listing;
@@ -37,4 +37,21 @@ function formater_valeur ($valeur)
     }
     return $tableau;
 }
+
+function url_webservice_array ($url)
+{
+    $recuperer_flux = charger_fonction('recuperer_flux', 'inc');
+    $convertir = charger_fonction('xml_to_array', 'inc');
+
+    $page = $recuperer_flux($url);
+    $xml = $convertir($page['content']);
+    ksort($xml);
+    // echo "<pre>";
+    // var_dump($xml);
+    // echo "</pre>";
+
+
+    return $xml;
+}
+
 ?>

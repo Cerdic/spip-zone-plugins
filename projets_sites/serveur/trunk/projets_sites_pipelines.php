@@ -1,6 +1,6 @@
 <?php
 /**
- * Utilisations de pipelines par Sites pour projets
+ * Utilisations de pipelines par `Sites pour projets`
  *
  * @plugin     Sites pour projets
  * @copyright  2013-2014
@@ -11,6 +11,18 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) {
     return;
+}
+
+/**
+ * Ajouter les tâches de CRON du plugin `Sites pour projets`
+ *
+ * @param  array  $taches Tableau des tâches et leur périodicité en seconde
+ * @return array         Tableau des tâches et leur périodicité en seconde
+ */
+function projets_sites_taches_generales_cron($taches)
+{
+    $taches['maj_webservice'] = 7*24*3600; // tous 7 jours
+    return $taches;
 }
 
 
