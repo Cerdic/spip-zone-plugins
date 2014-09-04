@@ -14,6 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 include_spip('base/abstract_sql');
+include_spip('inc/filtres');
 
 function lister_rss_commits ()
 {
