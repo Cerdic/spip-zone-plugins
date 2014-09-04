@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *          URL du webservice
  * @return array $valeurs
  */
-function inc_analyser_webservice_dist($url)
+function inc_analyser_webservice_dist($url, $login = '', $password = '')
 {
     include_spip('iterateur/data');
     include_spip('inc/distant');
@@ -23,7 +23,7 @@ function inc_analyser_webservice_dist($url)
     $convertir      = charger_fonction('xml_to_array', 'inc');
 
     $valeurs   = array();
-    $page      = $recuperer_flux($url);
+    $page      = $recuperer_flux($url, $login, $password);
     $xml       = $convertir($page['content']);
     $parse_url = parse_url($url);
     parse_str($parse_url['query'], $query);
@@ -85,6 +85,7 @@ function inc_analyser_webservice_dist($url)
                 case 'webmestres':
                     foreach ($xml[$key][0] as $key => $value) {
                         $value = array_filter($value);
+                        unset($value[0]);
                         $valeurs['auteurs_webmestres'][] = implode('|', $value);
                     }
                     $valeurs['auteurs_webmestres'] = implode("\n", $valeurs['auteurs_webmestres']);
@@ -92,7 +93,8 @@ function inc_analyser_webservice_dist($url)
                     break;
                 case 'plugins':
                     foreach ($xml[$key][0] as $key => $value) {
-                        $value = array_filter($value);
+                        // $value = array_filter($value);
+                        unset($value[0]);
                         $valeurs['logiciel_plugins'][] = implode('|', $value);
                     }
                     $valeurs['logiciel_plugins'] = implode("\n", $valeurs['logiciel_plugins']);

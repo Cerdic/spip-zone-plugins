@@ -1,15 +1,19 @@
 <BOUCLE_projets_site(PROJETS_SITES){id_projets_site=#ENV{id}}>
 <div class='infos'>
-[(#SET{texte_objet,<:projets_site:titre_projets_site:>})]
-<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PROJETS_SITE</p></div>
+	[(#SET{texte_objet,<:projets_site:titre_projets_site:>})]
+	<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_PROJETS_SITE</p></div>
 
-[(#AUTORISER{supprimer, projetssite, #ID_PROJETS_SITE}|oui)
-	[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{projets_site-del-24.png}
-		|balise_img{<:projets_site:supprimer_projets_site:>}|inserer_attribut{class,co_middle}
-		|concat{' ',<:projets_site:supprimer_projets_site:>})],
-		[(#URL_ACTION_AUTEUR{supprimer_projets_site,#ID_PROJETS_SITE,#URL_ECRIRE{projets_sites}})],
-		icone s24 horizontale danger projets_site-del-24,<:projets_site:confirmer_supprimer_projets_site:>\n\n<:projets_site:explication_supprimer_projets_site:>})]
-]
+	[(#VAL{redirect}
+		|generer_url_action{type=projets_site&id=#ID_PROJETS_SITE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+	[(#AUTORISER{supprimer, projetssite, #ID_PROJETS_SITE}|oui)
+		[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{projets_site-del-24.png}
+			|balise_img{<:projets_site:supprimer_projets_site:>}|inserer_attribut{class,co_middle}
+			|concat{' ',<:projets_site:supprimer_projets_site:>})],
+			[(#URL_ACTION_AUTEUR{supprimer_projets_site,#ID_PROJETS_SITE,#URL_ECRIRE{projets_sites}})],
+			icone s24 horizontale danger projets_site-del-24,<:projets_site:confirmer_supprimer_projets_site:>\n\n<:projets_site:explication_supprimer_projets_site:>})]
+	]
 
 </div>
 </BOUCLE_projets_site>

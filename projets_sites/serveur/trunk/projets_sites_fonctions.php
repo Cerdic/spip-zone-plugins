@@ -46,12 +46,16 @@ function url_webservice_array ($url)
     $page = $recuperer_flux($url);
     $xml = $convertir($page['content']);
     ksort($xml);
-    // echo "<pre>";
-    // var_dump($xml);
-    // echo "</pre>";
-
 
     return $xml;
 }
 
+function url_webservice_xml ($url, $login = '', $password = '')
+{
+    $recuperer_flux = charger_fonction('recuperer_flux', 'inc');
+
+    $page = $recuperer_flux($url, $login, $password);
+
+    return $page['content'];
+}
 ?>

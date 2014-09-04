@@ -1,9 +1,8 @@
 [(#BOITE_OUVRIR)]
-<BOUCLE_extra (PROJETS_SITES) {id_projets_site} {webservice!=''}>
-<a href="[(#URL_ECRIRE{webservice,id_projets_site=#ID_PROJETS_SITE})]"><:projets_site:consultation_webservice:></a>
-</BOUCLE_extra>
+<BOUCLE_extra (PROJETS_SITES) {id_projets_site}>
 
-</B_extra>
-<:projets_site:webservice_absent:>
-<//B_extra>
+[(#URL_ECRIRE{webservice,id_projets_site=#ID_PROJETS_SITE}
+|icone_horizontale{<:projets_site:consultation_webservice:>, webservice})]
+
+</BOUCLE_extra>
 [(#BOITE_FERMER)]

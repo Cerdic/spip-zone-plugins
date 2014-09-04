@@ -1,56 +1,11 @@
 [(#AUTORISER{voir,projets_site,#ID_PROJETS_SITE}|sinon_interdire_acces)]
 <BOUCLE_projets_site (PROJETS_SITES){id_projets_site}>
 [(#BOITE_OUVRIR{[
-    <h1>[(#RANG). ](#TITRE|?{#TITRE,<:info_sans_titre:>})[(#CHEMIN_IMAGE{projet_site-24.png}|balise_img{projet_site,cadre-icone})]</h1>
+    <h1>[(#RANG). ](#TITRE|?{#TITRE,<:info_sans_titre:>})[(#CHEMIN_IMAGE{projets_site-24.png}|balise_img{projets_site,cadre-icone})]</h1>
 ],simple fiche_objet})]
-<:projets_site:consultation_webservice:>
 
-<BOUCLE_webservice (DATA) {source table, (#WEBSERVICE*|url_webservice_array)}>
-<B_tableau>
-<h3>#CLE</h3>
-<table class="spip liste">
-<BOUCLE_tableau (DATA) {source table, #VALEUR{'@attributes'}}>
-<tr><td>[(#CLE)]</td><td>[(#VALEUR)]</td></tr>
-</BOUCLE_tableau>
-</table>
-</B_tableau>
-    <B_tableau2>
-    <h3>#CLE</h3>
-    <table class="spip liste">
-    <BOUCLE_tableau2 (DATA) {source table, #VALEUR}>
-        <B_tableau3>
-        <BOUCLE_tableau3 (DATA) {source table, #VALEUR}>
-            <B_tableau4>
-            <tr><td>[(#CLE)]</td></tr>
-            <BOUCLE_tableau4 (DATA) {source table, #VALEUR}>
-                <B_tableau5>
-                <tr><td>[(#CLE)]</td></tr>
-                <BOUCLE_tableau5 (DATA) {source table, #VALEUR} {cle!=0}>
-                    <B_tableau6>
-                    <tr><BOUCLE_tableau6 (DATA) {source table, #VALEUR} {cle!=0}>
-                    <td>[(#VALEUR)]</td>
-                    </BOUCLE_tableau6></tr>
-                    </B_tableau6>
-                    <tr><td>[(#CLE)]</td><td>[(#VALEUR)]</td></tr>
-                    <//B_tableau6>
-                </BOUCLE_tableau5>
-                </B_tableau5>
-                <tr><td>[(#CLE)]</td><td>[(#VALEUR)]</td></tr>
-                <//B_tableau5>
-            </BOUCLE_tableau4>
-            </B_tableau4>
-            <tr><td>[(#CLE)]</td><td>[(#VALEUR)]</td></tr>
-            <//B_tableau4>
-        </BOUCLE_tableau3>
-        </B_tableau3>
-            <tr><td>[(#CLE)]</td><td>[(#VALEUR)]</td></tr>
-        <//B_tableau3>
-    </BOUCLE_tableau2>
-    </table>
-    </B_tableau2>
-    <//B_tableau2>
-<//B_tableau>
-</BOUCLE_webservice>
-
+[<div class="coloration_code cadre">
+<pre class="xml">(#WEBSERVICE*|url_webservice_xml{#FO_LOGIN, #FO_PASSWORD}|entites_html)</pre>
+</div>]
 [(#BOITE_FERMER)]
 </BOUCLE_projets_site>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_sites"
 	categorie="divers"
-	version="1.4.1"
+	version="1.4.2"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/projets_sites-64.png"
@@ -13,6 +13,7 @@
 	<auteur>Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
+	<credit lien="https://www.iconfinder.com/icons/127910/document_file_format_specification_specs_standard_tag_text_xaml_xml_icon">Aha-Soft (Icône webservice)</credit>
 	<necessite nom="saisies" compatibilite="[1.24.0;]" />
 	<necessite nom="projets" compatibilite="[1.0.9;]" />
 
