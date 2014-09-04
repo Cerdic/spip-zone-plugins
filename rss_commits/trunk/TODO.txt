@@ -1,0 +1,2 @@
+- utiliser la fonction sale() du plugin http://zone.spip.org/trac/spip-zone/browser/_plugins_/sale/sale_fonctions.php
+- ajouter un bouton de mise à jour des commits sur un projet mais aussi sur la page des commits.

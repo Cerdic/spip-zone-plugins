@@ -5,7 +5,6 @@ include_spip('base/abstract_sql');
 
 function genie_import_commits_dist ($t)
 {
-    $commits = lister_rss_commits();
 
     $commits = lister_rss_commits();
     if (count($commits) > 0) {

@@ -14,9 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'cfg_titre_parametrages' => 'Paramétrages',
 
     // E
-    'explication_curl' => 'Veuillez indiquer le login et le mot de passe utilisés pour se connecter
-    sur les pages du webservice. Ces informations seront utilisées avec la fonction CURL de PHP
-    si elle est présente sur votre site.',
+    'explication_curl' => 'Veuillez indiquer le login et le mot de passe utilisés pour se connecter sur les pages du webservice. Ces informations seront utilisées avec la fonction CURL de PHP si elle est présente sur votre site.',
 
     // L
     'label_login' => 'Login',

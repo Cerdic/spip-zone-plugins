@@ -8,11 +8,9 @@
  * @param string $url URL de la page à récupérer
  * @return array
  */
-function inc_recuperer_rss_commits_dist ($url)
+function inc_recuperer_rss_commits_dist ($url, $login = '', $password = '')
 {
     include_spip('inc/config');
-    $login    = lire_config('rss_commits/login');
-    $password = lire_config('rss_commits/password');
     $header   = array();
 
     // On teste si CURL est présent ou pas.
@@ -25,7 +23,6 @@ function inc_recuperer_rss_commits_dist ($url)
             CURLOPT_POST           => false,    // set to GET
             CURLOPT_RETURNTRANSFER => true,     // return web page
             CURLOPT_HEADER         => false,    // don't return headers
-            CURLOPT_USERPWD        => $login . ':' . $password,    // don't return headers
             CURLOPT_FOLLOWLOCATION => true,     // follow redirects
             CURLOPT_AUTOREFERER    => true,     // set referer on redirect
             CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect
@@ -33,6 +30,14 @@ function inc_recuperer_rss_commits_dist ($url)
             CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects
             CURLOPT_SSL_VERIFYPEER => false,    // stop after 10 redirects
         );
+
+        if (isset($login) and $login != '') {
+            $options[CURLOPT_USERPWD] = $login . ':' . $password;    // don't return headers
+        } else {
+            $login    = lire_config('rss_commits/login');
+            $password = lire_config('rss_commits/password');
+            $options[CURLOPT_USERPWD] = $login . ':' . $password;    // don't return headers
+        }
 
         $ch      = curl_init($url);
         curl_setopt_array($ch, $options);
