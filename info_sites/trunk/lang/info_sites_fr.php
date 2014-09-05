@@ -7,6 +7,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+    // A
+    'auteur_identifie_informations' => 'Vos informations',
+    'auteur_identifie_profil' => 'Votre profil',
+
     // B
     'btn_diagnostic_iso' => 'Diagnostic ISO',
     'btn_diagnostic' => 'Diagnostic',

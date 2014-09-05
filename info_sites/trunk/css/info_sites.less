@@ -1,7 +1,66 @@
 @import "css/variables.less";
 
-body {
-	background-color: @gray-dark;
+.bg-primary {
+  background-color: @bg-primary;
+  color: white;
+}
+
+.bg-primary-light {
+  background-color: @bg-primary-light;
+  color: white;
+}
+
+.bg-success {
+  background-color: @bg-success;
+  color: white;
+}
+
+.bg-info {
+  background-color: @bg-info;
+  color: white;
+}
+
+.bg-warning {
+  background-color: @bg-warning;
+  color: white;
+}
+
+.bg-danger {
+  background-color: @bg-danger;
+  color: white;
+}
+
+.bg-orange {
+  background-color: @bg-orange;
+  color: white;
+}
+
+.bg-violet {
+  background-color: @bg-violet;
+  color: white;
+}
+
+.bg-dark {
+  background-color: @bg-dark;
+  color: white;
+}
+
+.bg-bright {
+  background-color: @bg-bright;
+  color: #767676;
+}
+
+.bg-reverse {
+  background-color: @bg-reverse;
+  color: #767676;
+}
+
+html, body {
+	background-color: @white;
+	height: 100%;
+}
+.page {
+	background-color: @bg-success;
 }
 h1 {
 	small {
@@ -57,6 +116,16 @@ table {
 			}
 		}
 	}
+	tr {
+		> td {
+			&.bg-warning {
+				background-color: @bg-warning !important;
+				table {
+					color: @black;
+				}
+			}
+		}
+	}
 }
 
 .liste {
@@ -82,11 +151,17 @@ table {
 // Les grands blocs de pages
 // --------
 #header {
-	background-color: @white;
+	background-color: transparent;
 	> .row {
-		background-color: @white;
+		background-color: @gray-dark;
 	}
 	header {
+		h1 {
+			color: @white;
+			a {
+				color: @gray-lighter;
+			}
+		}
 	}
 	.form-search {
 		margin-top: 1em;
@@ -107,8 +182,11 @@ table {
 
 	}
 }
+#extra {
+	padding-bottom: 1em;
+}
 #aside {
-	background-color: @gray-dark;
+	background-color: @gray-third;
 	color: @white;
 	a {
 		color: @white;
@@ -120,23 +198,31 @@ table {
 		&.menu_pages {
 			margin-top: 1em;
 			padding-top: 1px;
+			z-index: 1000;
 			ul {
+				margin-bottom: 2em;
 				> li {
 					font-size: 1.25em;
 					&:hover {
-						background-color: @black;
+						background-color: @gray-dark;
 					}
 					a {
-						color: @gray-second;
-						&:hover, &.active {
+						color: @gray-light;
+						&.active {
+							color: @black;
+						}
+						&:hover {
 							color: @white;
 							background-color: transparent;
 						}
 						&.active {
-							border-left: 5px solid @brand-primary;
 						}
 						i {
-							min-width: 45px;
+							height: 45px;
+							margin: -15px 10px -15px -15px;
+							width: 55px;
+							padding: 15px;
+							text-align: center;
 						}
 					}
 				}
@@ -147,7 +233,7 @@ table {
 
 #content {
 	background-color: @white;
-	padding-bottom: 1em;
+	overflow: hidden;
 }
 
 // On va styler tous les formulaires d'édition d'un objet.
@@ -208,15 +294,18 @@ table {
 }
 
 #footer {
-	background-color: @gray-dark;
+	background-color: @bg-success;
 	color: @white;
 	text-align: left;
 	padding-top: 2em;
 	padding-bottom: 2em;
-	background-image: url('images/spip_forme_web.png');
+	background-image: url('images/spip_forme_web_dark.png');
 	background-repeat: no-repeat;
 	background-position: 50% 100%;
 	background-size: auto 50%;
+	a {
+		color: @white;
+	}
 	.menu_rubriques {
 
 		h2 {
@@ -241,12 +330,15 @@ table {
 }
 
 // On style les inclures prive/objets/contenu/xxxx.html
-#wysiwyg {
 	.champ {
 		overflow: hidden;
 		border-top: 1px solid @gray-lighter;
 		padding-top: 1em;
 		margin-bottom: 1em;
+		&.vide {
+			visibility: hidden;
+			display: none;
+		}
 		.label {
 			color: black;
 			display: block;
@@ -267,7 +359,6 @@ table {
 			display: block;
 		}
 	}
-}
 
 // formulaire de liens dans le front
 .formulaire_editer_liens, .formulaire_editer_liens_simples {
@@ -318,7 +409,7 @@ button {
 
 // page de connexion au back office
 .page_login {
-	background-color: @gray-lighter;
+	background-color: @bg-success;
 	body {
 		background-color: @gray-lighter;
 	}

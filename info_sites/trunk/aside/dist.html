@@ -1,7 +1,7 @@
-<div class="menu menu_pages" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+<div class="menu menu_pages" data-spy="affix" data-offset-top="0" data-offset-bottom="0">
 <ul class="nav nav-stacked">
 <BOUCLE_menu (DATA) {source tableau, #CONFIG{"info_sites_menu"}}>
-<li[(#ENV{type-page}|=={#CLE}|oui) class="active"]><a href="#URL_PAGE{#CLE}" data-toggle="tooltip" data-placement="right" title="[(#VALEUR**{nom}|_T|attribut_html)]"[(#ENV{type-page}|=={#CLE}|oui) class="active"]><i class="#VALEUR{icone}"></i> [<span class="hidden-xs hidden-sm">(#VALEUR**{nom}|_T)</span>]</a></li>
+<li [(#ENV{type-page}|=={#CLE}|oui) class="active"]><a href="#URL_PAGE{#CLE}" data-toggle="tooltip" data-placement="right" title="[(#VALEUR**{nom}|_T|attribut_html)]"[(#ENV{type-page}|=={#CLE}|oui) class="active"]><i class="[(#VALEUR{icone})] [(#COMPTEUR_BOUCLE|alterner{bg-violet,bg-primary,bg-orange,bg-success,bg-dark,bg-danger})]"></i> [<span class="hidden-xs hidden-sm">(#VALEUR**{nom}|_T)</span>]</a></li>
 </BOUCLE_menu>
 </div>
 

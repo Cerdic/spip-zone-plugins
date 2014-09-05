@@ -32,7 +32,7 @@
     Ces champs correspondent à l'index à appeler de chaque array de #GET{tableau}
 ]
     <BOUCLE_tableau (DATA) {liste id_projets_site, titre, descriptif, type_site, uniqid, webservice, logiciel_nom, logiciel_version, logiciel_revision, logiciel_plugins, auteurs_admin, auteurs_webmestres, fo_url, fo_login, fo_password, bo_url, bo_login, bo_password, serveur_nom, serveur_port, serveur_path, serveur_logiciel, serveur_surveillance, versioning_path, versioning_trac, versioning_type, sas_serveur, sas_protocole, sas_login, sas_password, sgbd_type, sgbd_version, sgbd_serveur, sgbd_port, sgbd_nom, sgbd_prefixe, sgbd_login, sgbd_password, apache_modules, php_version, php_memory, php_extensions, sso, perimetre_acces, statistiques, moteur_recherche, autres_outils, remarques, date_creation, maj}>
-    <tr class="#VALEUR">
+    <tr class="#VALEUR data">
         <BOUCLE_cellule (DATA) {enum 0,#GET{compteur}}>
         <td>
         [(#VALEUR|=={0}|oui)<strong>]
