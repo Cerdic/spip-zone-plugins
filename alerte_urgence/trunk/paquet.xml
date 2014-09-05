@@ -2,7 +2,7 @@
 	prefix="alerte_urgence"
 	categorie="edition"
 	version="2.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="alerte_urgence.png"
 	documentation=""
