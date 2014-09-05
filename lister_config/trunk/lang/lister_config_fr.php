@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	(vous pouvez aussi passer vos squelettes dans ce plugin, qui pourra faciliter vos migrations).',
 
 	// I
+	'icone_page_plugin' => 'Page',
 	'intertitre_exec' => 'Selon exec/*.php',
 	'intertitre_exec_contenu' => 'Selon squelettes/contenu',
 

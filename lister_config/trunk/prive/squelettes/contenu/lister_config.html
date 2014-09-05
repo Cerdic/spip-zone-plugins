@@ -25,6 +25,7 @@
 				#SET{prefixe,#PREFIXE|strtolower}
 					[(#CHEMIN_IMAGE{ok-16.png}|balise_img{<:svp:plugin_info_actif:>,picto_actif}|inserer_attribut{title,<:svp:plugin_info_actif:>})]
 					[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
+					[(#INCLURE{fond=prive/squelettes/inclure/page_link,prefixe=#GET{prefixe},nom=#NOM})]
 				</div>
 			</li>
 			</BOUCLE_config>
