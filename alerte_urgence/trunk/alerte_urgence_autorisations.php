@@ -24,7 +24,7 @@ function autoriser_alerteurgence_configurer($faire, $quoi, $id, $qui, $options) 
 			include_spip('inc/config')
 			and $utilisateurs = lire_config('alerte_urgence/utilisateurs')
 			and is_array($utilisateurs)
-			and in_array(intval($id), $utilisateurs)
+			and in_array(intval($qui['id_auteur']), $utilisateurs)
 		)
 	) {
 		return true;

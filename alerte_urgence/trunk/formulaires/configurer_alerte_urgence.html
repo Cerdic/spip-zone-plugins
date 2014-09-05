@@ -11,6 +11,18 @@
 				<label for="champ_texte"><:alerte:configurer_texte_label:></label>
 				<textarea id="champ_texte" cols="40" rows="10" name="texte">#ENV{texte}</textarea>
 			</li>
+			
+			<B_utilisateurs>
+			<li>
+				<label for="champ_utilisateurs"><:alerte:configurer_utilisateurs_label:></label>
+				<p class="explication"><:alerte:configurer_utilisateurs_explication:></p>
+				<select name="utilisateurs\[\]" id="champ_utilisateurs" multiple="multiple" size="10">
+					<BOUCLE_utilisateurs(AUTEURS){si #AUTORISER{configurer}}{statut IN #LISTE{0minirezo,1comite,6forum}}{statut != 5poubelle}{par num nom,nom}{tout}>
+						<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{utilisateurs,#LISTE}}|oui) selected="selected"] [style="background:url((#CHEMIN_IMAGE{auteur-#STATUT-16})) no-repeat left; padding-left: 20px;"]>#NOM</option>
+					</BOUCLE_utilisateurs>
+				</select>
+			</li>
+			</B_utilisateurs>
 		</ul>
 
 		<input type="hidden" name="_meta_casier" value="alerte_urgence" />
