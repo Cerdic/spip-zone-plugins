@@ -11,8 +11,9 @@
 
 	<aside>
 		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
-
-		#FORMULAIRE_ECRIRE_AUTEUR
+		[(#EMAIL|oui)
+		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
+		<INCLURE{fond=prive/objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />]
 	</aside>
 
 	<footer>

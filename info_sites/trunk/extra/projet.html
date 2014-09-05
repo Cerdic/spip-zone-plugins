@@ -3,10 +3,10 @@
 <div class="block">
     <div class="btn-group">
     [(#AUTORISER{modifier,projet,#ID_PROJET})
-        <a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"
+        <a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-lg" rel="nofollow" target="_blank"
         onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projet:></a>
-        <a href="[(#URL_ECRIRE{projet,id_projet=#ID_PROJET})]" class="btn btn-default btn-sm" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:editer_liens_projet:></a>
-    ]<BOUCLE_site_secu (PROJETS_SITES) {id_projet} {tout} {0,1}> </BOUCLE_site_secu><a href="[(#URL_PAGE{diagnostic_iso}|parametre_url{id_projet,#ID_PROJET})]" class="btn btn-default btn-sm"><i class="fa fa-list fa-lg"></i> <:info_sites:btn_diagnostic_iso:></a></B_site_secu>
+        <a href="[(#URL_ECRIRE{projet,id_projet=#ID_PROJET})]" class="btn btn-default btn-lg" rel="nofollow" target="_blank"><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:editer_liens_projet:></a>
+    ]<BOUCLE_site_secu (PROJETS_SITES) {id_projet} {tout} {0,1}> </BOUCLE_site_secu><a href="[(#URL_PAGE{diagnostic_iso}|parametre_url{id_projet,#ID_PROJET})]" class="btn btn-default btn-lg"><i class="fa fa-list fa-lg"></i> <:info_sites:btn_diagnostic_iso:></a></B_site_secu>
     </div>
 </div>
 <div class="block">

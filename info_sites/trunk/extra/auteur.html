@@ -1,6 +1,5 @@
 <BOUCLE_extra2_auteur(AUTEURS){id_auteur}>
 	<div class="block">
-		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
-		<INCLURE{fond=prive/objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />
+		#FORMULAIRE_ECRIRE_AUTEUR
 	</div>
 </BOUCLE_extra2_auteur>
