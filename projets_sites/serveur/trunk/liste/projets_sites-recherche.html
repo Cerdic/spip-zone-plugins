@@ -1,0 +1,13 @@
+[(#REM) Projets_sites trouvees ]
+<B_projets_sites>
+<div class="liste resultats projets_sites">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:projets_site:titre_projets_sites:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
+		<BOUCLE_projets_sites(PROJETS_SITES) {recherche} {!par points} {pagination 5}>
+		<li class="item"><a href="#URL_PROJETS_SITE">#TITRE</a></li>
+		</BOUCLE_projets_sites>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_projets_sites>
