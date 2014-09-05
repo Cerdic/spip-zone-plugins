@@ -1,0 +1,13 @@
+[(#REM) Contacts trouvees ]
+<B_contacts>
+<div class="liste resultats contacts">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:contact:titre_contacts:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
+		<BOUCLE_contacts(CONTACTS) {recherche} {!par points} {pagination 5}>
+		<li class="item"><a href="#URL_CONTACT">#TITRE</a></li>
+		</BOUCLE_contacts>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_contacts>

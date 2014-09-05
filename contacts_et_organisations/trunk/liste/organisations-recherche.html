@@ -1,0 +1,13 @@
+[(#REM) Organisations trouvees ]
+<B_organisations>
+<div class="liste resultats organisations">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:organisation:titre_organisations:> (#GRAND_TOTAL)</h2>
+	<ul class="liste-items">
+		<BOUCLE_organisations(ORGANISATIONS) {recherche} {!par points} {pagination 5}>
+		<li class="item"><a href="#URL_ORGANISATION">#TITRE</a></li>
+		</BOUCLE_organisations>
+	</ul>
+	[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_organisations>
