@@ -18,10 +18,15 @@
 					<div class="short">
 						[(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{80}})]
 					</div>
-					<div class="icon">[
-						(#CHEMIN{#LOGO}|balise_img|image_reduire{32})][
-						(#LOGO|non)<INCLURE{fond=prive/squelettes/inclure/icon-logo,id_plugin=#ID_PLUGIN} />]
-					</div>
+					[(#LOGO|trim|match{^http}|oui)
+					[(#LOGO|oui)<div class="icon">
+						[(#CONSTANTE|constant|concat{#LOGO}|image_reduire{32})]
+					</div>]
+					][(#LOGO|trim|match{^http}|non)
+					[(#LOGO|oui)<div class="icon">
+						[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]
+					</div>]
+					]
 				#SET{prefixe,#PREFIXE|strtolower}
 					[(#CHEMIN_IMAGE{ok-16.png}|balise_img{<:svp:plugin_info_actif:>,picto_actif}|inserer_attribut{title,<:svp:plugin_info_actif:>})]
 					[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
