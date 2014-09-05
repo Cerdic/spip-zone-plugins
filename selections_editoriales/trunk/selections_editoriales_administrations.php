@@ -24,8 +24,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function selections_editoriales_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_selections', 'spip_selections_liens', 'spip_selections_contenus')));
-
+	$maj['create'] = array(
+		array('maj_tables', array('spip_selections', 'spip_selections_liens', 'spip_selections_contenus')),
+	);
+	
+	// Ajout d'un champ pour ajouter des classes CSS à un contenu sélectionné
+	$maj['1.1.0'] = array(
+		array('maj_tables', array('spip_selections_contenus')),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

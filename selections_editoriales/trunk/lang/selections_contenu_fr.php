@@ -10,6 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_selections_contenu' => 'Ajouter ce contenu sélectionné',
 
 	// C
+	'champ_css_explication' => 'Une ou plusieurs classes CSS à ajouter à ce contenu sélectionné.',
+	'champ_css_label' => 'Classes CSS',
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_id_selection_label' => 'Sélection',
 	'champ_titre_explication' => 'Si le titre est vide, il essayera de se remplir magiquement.',

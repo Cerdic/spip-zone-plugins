@@ -77,6 +77,7 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 			"titre"              => "text NOT NULL DEFAULT ''",
 			"url"                => "text NOT NULL DEFAULT ''",
 			"descriptif"         => "text NOT NULL DEFAULT ''",
+			"css"                => "varchar(255) not null default ''",
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
@@ -84,8 +85,8 @@ function selections_editoriales_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		 #'date' => "",
-		'champs_editables'  => array('titre', 'url', 'descriptif', 'id_selection'),
-		'champs_versionnes' => array('titre', 'url', 'descriptif'),
+		'champs_editables'  => array('titre', 'url', 'descriptif', 'id_selection', 'css'),
+		'champs_versionnes' => array('titre', 'url', 'descriptif', 'css'),
 		'rechercher_champs' => array("titre" => 8, "descriptif" => 4),
 		'tables_jointures'  => array(),
 		
