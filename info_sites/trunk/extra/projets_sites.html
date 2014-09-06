@@ -1,6 +1,6 @@
-<div class="btn-group">
-    [(#AUTORISER{creer,projet})
-        <a href="[(#URL_ECRIRE{projets_site_edit,new=oui})]" class="btn btn-default btn-lg" rel="nofollow" target="_blank"
-        onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a>
-    ]
-</div>
+<ul class="boutons_action">
+[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
+    <li class="action"><a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projets_site:></a></li>
+]
+</ul>
+<div class="clearfix"></div>

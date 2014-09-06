@@ -1,0 +1,5 @@
+<ul class="boutons_action">
+[(#AUTORISER{creer,contact})
+    <li class="action"><a href="[(#URL_ECRIRE{contact_edit,new=oui})]" class="bouton creer" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{contact_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:contacts:contact_creer:></a></li>
+]</ul>
+

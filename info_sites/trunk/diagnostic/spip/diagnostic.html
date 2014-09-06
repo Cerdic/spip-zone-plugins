@@ -1,8 +1,10 @@
+[(#SET{plugin_statut_class,[(#ARRAY{dist,info,actif,success,inactif,warning})]})]
 <BOUCLE_diagnostic (PROJETS_SITES) {id_projets_site}>
 <table class="table table-striped">
     <thead class="bg-primary">
         <tr>
             <th class="text-center" colspan="5"><:projets_site:titre_projets_site:></th>
+            <th class="text-center" colspan="2"><:info_sites:titre_logiciel_plugins_maj_meme_branche:></th>
             <th class="text-center" colspan="2"><:info_sites:titre_logiciel_plugins_maj:></th>
         </tr>
         <tr>
@@ -13,6 +15,8 @@
             <th class="col text-center" scope="col"><:projets_site:label_logiciel_nom:></th>
             <th class="col text-center" scope="col"><:info_sites:label_branche:></th>
             <th class="col text-center" scope="col"><:info_sites:label_branche_version:></th>
+            <th class="col text-center" scope="col"><:info_sites:label_branche:></th>
+            <th class="col text-center" scope="col"><:info_sites:label_branche_version:></th>
         </tr>
     </thead>
 <tbody>
@@ -20,11 +24,15 @@
     <tr class="[(#GET{plugin/prefixe}|strtolower)]">
         <td>[(#GET{plugin/prefixe})]</td><!-- prefixe -->
         <td>[(#GET{plugin/titre})]</td><!-- titre -->
-        <td>[(#GET{plugin/statut})]</td><!-- statut -->
+        <td class="[(#GET{plugin_statut_class}|table_valeur{#GET{plugin/statut}|trim})]">[(#GET{plugin/statut})]</td><!-- statut -->
         <td>[(#GET{plugin/version})]</td><!-- version -->
-        <td>[(#_projets_site:LOGICIEL_NOM)][ (#_projets_site:LOGICIEL_VERSION|version2branche)]</td>
+        <td>[(#_diagnostic:LOGICIEL_NOM)][ (#_diagnostic:LOGICIEL_VERSION|version2branche)]</td>
+        <BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_diagnostic:LOGICIEL_VERSION|version2branche)%} {0,1}>
+        <td class="[(#_diagnostic:LOGICIEL_VERSION|version2branche|in_array{[(#BRANCHES_SPIP|explode{','})]}|?{'success','danger'})]">[(#BRANCHES_SPIP|replace{",",", "})]</td><!-- branche -->
+        <td class="[(#VERSION|=={#_plugins_site:GET{plugin/version}}|?{'success','danger'})]">#VERSION</td><!-- branche_version -->
+        </BOUCLE_paquet_meme_branche>
         <BOUCLE_paquet (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {0,1}>
-        <td class="[(#_plugins_site:LOGICIEL_VERSION|version2branche|in_array{[(#BRANCHES_SPIP|explode{','})]}|?{'success','danger'})]">[(#BRANCHES_SPIP|replace{",",", "})]</td><!-- branche -->
+        <td class="[(#_diagnostic:LOGICIEL_VERSION|version2branche|in_array{[(#BRANCHES_SPIP|explode{','})]}|?{'success','danger'})]">[(#BRANCHES_SPIP|replace{",",", "})]</td><!-- branche -->
         <td class="[(#VERSION|=={#_plugins_site:GET{plugin/version}}|?{'success','danger'})]">#VERSION</td><!-- branche_version -->
         </BOUCLE_paquet>
     </tr>

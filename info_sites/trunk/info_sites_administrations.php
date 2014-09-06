@@ -28,6 +28,7 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible)
     $maj['create'] = array(array('info_sites_menu_pages'));
     $maj['1.0.2'][] = array('info_sites_menu_pages');
     $maj['1.0.3'][] = array('info_sites_menu_pages');
+    $maj['1.0.4'][] = array('info_sites_menu_pages');
 
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -57,6 +58,9 @@ function info_sites_menu_pages ()
             'organisations' => array(
                 'nom' => 'info_sites:menu_organisations',
                 'icone' => 'fa fa-university fa-lg'),
+            'contacts' => array(
+                'nom' => 'info_sites:menu_contacts',
+                'icone' => 'fa fa-users fa-lg'),
             'projets' => array(
                 'nom' => 'info_sites:menu_projets',
                 'icone' => 'fa fa-folder fa-lg'),

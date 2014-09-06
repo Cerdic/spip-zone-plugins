@@ -51,10 +51,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_branche' => 'Branche',
     'label_branche_version' => 'Version',
     'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',
+    'titre_logiciel_plugins_maj_meme_branche' => 'Mise à jour des plugins sur la même branche',
     'label_selectionner_site' => 'Sélectionner un site&nbsp;:',
 
     // M
     'menu_organisations' => 'Organisations',
+    'menu_contacts' => 'Contacts',
     'menu_projets' => 'Projets',
     'menu_projets_sites' => 'Sites',
     'menu_statistiques' => 'Statistiques',

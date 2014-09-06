@@ -1,15 +1,13 @@
 <BOUCLE_extra (PROJETS_SITES) {id_projets_site}>
+<ul class="boutons_action">
+[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
+    <li class="action"><a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projets_site:></a></li>
+][(#LOGICIEL_PLUGINS*|strlen|oui)
+        <li class="action"><a href="[(#URL_PAGE{diagnostic}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton diagnostic"><i class="fa fa-table fa-lg"></i>  <:info_sites:btn_diagnostic:></a></li>
+]
+</ul>
+<div class="clearfix"></div>
 
-<div class="block">
-    <div class="btn-group">
-    [(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
-        <a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#SELF})]" class="btn btn-default btn-lg" rel="nofollow" target="_blank"
-        onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projets_site:></a>
-    ][(#LOGICIEL_PLUGINS*|strlen|oui)
-        <a href="[(#URL_PAGE{diagnostic}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="btn btn-default btn-lg"><i class="fa fa-table fa-lg"></i>  <:info_sites:btn_diagnostic:></a>
-    ]
-    </div>
-</div>
 <div class="block">
     <div class="clearfix clear"> </div>
     [(#SET{projets_id,#ARRAY})]
@@ -20,6 +18,6 @@
     [(#SET{where,projets.id_projet IN \(#GET{projets_id}\)})]
     <INCLURE{fond=objets/liste/projets,where=#GET{where},ajax,env} />
 </div>
-
+<div class="clearfix"></div>
 
 </BOUCLE_extra>

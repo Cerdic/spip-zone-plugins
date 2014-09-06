@@ -56,7 +56,7 @@
 }
 
 html, body {
-	background-color: @white;
+	background-color: @bg-success;
 	height: 100%;
 }
 .page {
@@ -69,6 +69,9 @@ h1 {
 }
 .block {
 	margin-bottom: 1em;
+}
+.breadcrumb {
+	margin-top: 20px;
 }
 .icone {
 	&.s24 {
@@ -147,6 +150,70 @@ table {
 		}
 	}
 }
+
+// --------
+// Les boutons d'action
+// --------
+.boutons_action {
+	list-style: none;
+	padding-left: 0;
+	margin-bottom: 1em;
+	overflow: hidden;
+	.action {
+		display: inline-block;
+		float: left;
+		width: 50%;
+		padding: 15px;
+		font-size: 1.250em;
+		.bouton {
+			color: @white;
+			display: block;
+			padding: 15px;
+			margin: -15px;
+			background-color: @bg-info;
+			&:hover {
+				background-color: darken(@bg-info, 10%);
+			}
+			&.creer {
+				background-color: @bg-info;
+				color: @white;
+				&:hover {
+					background-color: darken(@bg-info, 10%);
+				}
+			}
+			&.modifier {
+				background-color: @bg-success;
+				color: @white;
+				&:hover {
+					background-color: darken(@bg-success, 10%);
+				}
+			}
+			&.supprimer {
+				background-color: @bg-danger;
+				color: @white;
+				&:hover {
+					background-color: darken(@bg-danger, 10%);
+				}
+			}
+			&.editer_liens {
+				background-color: @bg-primary-light;
+				color: @white;
+				&:hover {
+					background-color: darken(@bg-primary-light, 10%);
+				}
+			}
+		}
+	}
+}
+.col-md-3 {
+	.boutons_action {
+		.action {
+			width: 100%;
+		}
+	}
+}
+
+
 // --------
 // Les grands blocs de pages
 // --------
@@ -186,7 +253,6 @@ table {
 	padding-bottom: 1em;
 }
 #aside {
-	background-color: @gray-third;
 	color: @white;
 	a {
 		color: @white;
@@ -411,7 +477,7 @@ button {
 .page_login {
 	background-color: @bg-success;
 	body {
-		background-color: @gray-lighter;
+		background-color: @bg-success;
 	}
 	#content {
 		.cartouche {
@@ -431,6 +497,7 @@ button {
 		margin-top: 2em;
 		padding-top: 2em;
 		padding-bottom: 2em;
+		background-color: @white;
 		> .row {
 			position: relative;
 			header {
