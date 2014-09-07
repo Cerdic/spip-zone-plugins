@@ -27,6 +27,7 @@ function formulaires_migrer_albums_charger_dist(){
 		'toute_la_branche' => '',
 		'groupes_mots' => array(),
 		'refuser_articles' => '',
+		'lier_rubriques' => '',
 	);
 
 	return $valeurs;
@@ -122,8 +123,12 @@ function albums_migrer_articles($where_articles, $where_mots, $refuser){
 		if (!count($liens)
 		  AND $id_album = objet_inserer('album')){
 
-			// associer tout de suite
+			// associer tout de suite à l'article
 			objet_associer(array('album'=>$id_album),array('article'=>$row['id_article']));
+			// et peut-être en plus à la rubrique
+			if (_request('lier_rubriques') == 'oui'){
+				objet_associer(array('album'=>$id_album),array('rubrique'=>$row['id_rubrique']));
+			}
 
 			// titrer et decrire
 			$descriptif = array();
