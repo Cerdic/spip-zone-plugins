@@ -41,7 +41,7 @@ function formulaires_aspirateur_traiter_dist(){
 	$descriptif_site = lire_config('aspirateur/descriptif_site');
 	$page_referente = lire_config('aspirateur/page_referente');
 	$suivre_liens = lire_config('aspirateur/suivre_liens');
-	$div_id_contenu = lire_config('aspirateur/div_id_contenu');
+	$contenu_inclure_tag_attribut = lire_config('aspirateur/contenu_inclure_tag_attribut');
 	$motif_contenu_regex = lire_config('aspirateur/motif_contenu_regex');
 	$motif_chemin_documents_exclure = lire_config('aspirateur/motif_chemin_documents_exclure');
 	$motif_chemin_documents = lire_config('aspirateur/motif_chemin_documents');

@@ -19,7 +19,10 @@ D1/ Activez les sites et leur syndication complète
 D2/ Entrez le chemin du fichier RSS en syndication
 D1/ Activer le plugin Docker dès l'import du plugin RSS2articles ! On importe les articles en site syndiqué avec RSS2articles en activant la syntaxe SPIP -> ça doit conserver les <a> sans balise fermante…
 D4/ On télécharge ensuite les documents distants avec Docker les liens, en local, + réécrit en minuscules + en titrant les documents
-D5/ Il suffit de repasser les liens dans la base de type http://local/IMG/ en http://production/IMG/  ou même en ../IMG/ peut-être? 
+D5/ Il suffit de replacer les liens dans la base de type http://local/IMG/ en http://production/IMG/  ou même en ../IMG/ 
+UPDATE spip_articles
+SET `texte` = REPLACE(`texte`,'http://localhost/site_local/', 'http://site_production/')
+WHERE `texte` LIKE '%http://localhost/site_local/%'
 D6/ utiliser le plugin ressources pour afficher les liens images dans le texte
 
 ------------

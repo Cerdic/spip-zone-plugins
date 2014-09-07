@@ -62,28 +62,46 @@ function la_page($url) {
  *
 **/
 function isoler_contenu($chaine){
-	//Identifiant donné pour isoler le contenu via xpath (tout tag accepté) (option*)
-	$div_id_contenu = trim(lire_config('aspirateur/div_id_contenu'));
-	$div_class_contenu_exclure = trim(lire_config('aspirateur/div_class_contenu_exclure'));
+	//isoler le contenu via xpath (tout tag accepté) (option*)
+	$contenu_inclure_tag_attribut = trim(lire_config('aspirateur/contenu_inclure_tag_attribut'));
+	$contenu_exclure_tag_attribut = trim(lire_config('aspirateur/contenu_exclure_tag_attribut'));
 
-	if($div_id_contenu OR $div_class_contenu_exclure){
+	if($contenu_inclure_tag_attribut OR $contenu_exclure_tag_attribut){
 		@$doc = new DOMDocument();
 		$doc->preserveWhiteSpace = false;
 		@$doc->loadHTML($chaine);
 		$xpath = new DOMXpath($doc);
 		
-		if($div_id_contenu)
-		$tags = $xpath->query("//*[@id='$div_id_contenu']");
+		//inclure les noeuds ayant une class ou id donnée (tout tag accepté) (option*)
+		if($contenu_inclure_tag_attribut){
+			$class_ou_id_inclure=class_ou_id($contenu_inclure_tag_attribut);
+			$selecteur_inclure=$class_ou_id_inclure['selecteur'];
+			$nom_atttribut_inclure=$class_ou_id_inclure['nom_attribut'];
+			spip_log("aspirer_curl inclure $selecteur_inclure / $nom_atttribut_inclure","aspirateur");
+			//on prend le noeud d'un element même ayant plusieurs class
+			$tags = $xpath->query(".//*[contains(concat(' ', normalize-space(@$selecteur_inclure), ' '), ' $nom_atttribut_inclure ')]");
+		}
 		//sinon on prend large soit le noeud body de la page
 		if (is_null($tags)){
 			$tags = $xpath->query("//body");
 		}
 		
-		//on exclut les noeuds ayant une class donnée (tout tag accepté) (option*)
-		if($div_class_contenu_exclure){
-			foreach($xpath->query(".//*[@class='$div_class_contenu_exclure']") as $node) {
-			  $node->parentNode->removeChild($node);
-			}
+		//exclure les noeuds ayant une class ou id donnée (tout tag accepté) (option*)
+		if($contenu_exclure_tag_attribut){
+			//explode sur .sociable|.navigation| etc
+			$explode_exclure_tag_attribut=explode('|',$contenu_exclure_tag_attribut);
+			
+			foreach($explode_exclure_tag_attribut as $exclure_tag_attribut){
+				
+				$class_ou_id_exclure=class_ou_id($exclure_tag_attribut);
+				$selecteur_exclure=$class_ou_id_exclure['selecteur'];
+				$nom_atttribut_exclure=$class_ou_id_exclure['nom_attribut'];
+				spip_log("aspirer_curl exclure $selecteur_exclure / $nom_atttribut_exclure","aspirateur");
+				//on prend le noeud d'un element même ayant plusieurs class
+				foreach($xpath->query(".//*[contains(concat(' ', normalize-space(@$selecteur_exclure), ' '), ' $nom_atttribut_exclure ')]")as $node) {
+				  $node->parentNode->removeChild($node);
+				}
+			}	
 		}
 			if (!is_null($tags)) {
 				foreach ($tags as $tag) {
@@ -102,7 +120,7 @@ function isoler_contenu($chaine){
 			}
 	}else{
 	$chaine = $contenu;
-	//2em méthode Sinon ereg sur variables de début et de fin pour isoler le contenu
+	//2em méthode Sinon regex sur variables de début et de fin pour isoler le contenu
 	$motif_debut_contenu_regex = trim(lire_config('aspirateur/motif_debut_contenu_regex'));
 	$motif_fin_contenu_regex = trim(lire_config('aspirateur/motif_fin_contenu_regex'));
 	if(isset($motif_debut_contenu_regex) && isset($motif_fin_contenu_regex) && preg_match("/$motif_debut_contenu_regex(.*)$motif_fin_contenu_regex/sU", $chaine, $contenu))
@@ -110,6 +128,24 @@ function isoler_contenu($chaine){
 	}
 	
 	return $chaine;   
+}
+
+/**
+ *
+ * Distinguer class ou id à partir du premier caractère
+ *
+ * @param string $attribut
+ *	.une_class / #une_id
+ *
+ * @return array 
+ *	['selecteur'] class ou id, ['nom_attribut'] attribut sans son premier caractère
+ *
+**/
+function class_ou_id($attribut){
+	$n=substr($attribut,0,1);
+	$nom_attribut= str_replace($n, '', $attribut);
+	if($n==".") return array('selecteur'=>'class','nom_attribut'=>$nom_attribut);
+	elseif($n=="#") return array('selecteur'=>'id','nom_attribut'=>$nom_attribut);
 }
 
 
@@ -202,7 +238,7 @@ function recupere_contenu($page_referente,$url_site_aspirer){
 function traite_texte_documents($texte){
 	
 		$motif_chemin_documents = lire_config('aspirateur/motif_chemin_documents');
-		//si SPIP demandé faire un str_replace dans le texte pour les documents rapatriés dans  SPIP
+		//si SPIP demandé faire un str_replace dans le texte pour les documents rapatriés dans SPIP
 		$activer_spip = lire_config('aspirateur/activer_spip');
 	
 		//pour les documents, isoler les liens, en vérifiant que c'est bien le dossier qui nous intéresse

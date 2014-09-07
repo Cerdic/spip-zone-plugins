@@ -48,11 +48,12 @@
 				-->]
 				<li class="fieldset">
 					<fieldset>
-						<legend><:configureraspirateur:legend_motifs_regex_aspirateur:></legend>
+						<legend><:configureraspirateur:legend_motifs_aspirateur:></legend>
 						<ul>
-							[(#REM) content]
-							#SET{name,div_id_contenu}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							
+							#SET{name,contenu_inclure_tag_attribut}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
@@ -60,6 +61,7 @@
 							[(#REM) <!-- debut contenu -->]
 							#SET{name,motif_debut_contenu_regex}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
@@ -67,34 +69,47 @@
 							[(#REM) <!-- fin contenu -->]
 							#SET{name,motif_fin_contenu_regex}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							[(#REM) socialtags ]
-							#SET{name,div_class_contenu_exclure}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-								<span class='erreur_message'>(#GET{erreurs})</span>
-								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
-							</li>
+							
 							[(#REM) upload/]
 							#SET{name,motif_chemin_documents}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							[(#REM) design/]
+							
+						</ul>
+					</fieldset>
+				</li>
+				<li class="fieldset">
+					<fieldset>
+						<legend><:configureraspirateur:legend_motifs_exclusion:></legend>
+						<ul>
+							#SET{name,contenu_exclure_tag_attribut}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
+								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+								<span class='erreur_message'>(#GET{erreurs})</span>
+								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+							</li>
+							
 							#SET{name,motif_chemin_documents_exclure}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 							</li>
-							[(#REM) recommander.asp|faq.asp]
+							
 							#SET{name,motif_chemin_pages_exclure}#SET{obli,''}[(#SET{defaut,''})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+								<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>
 								<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 								<span class='erreur_message'>(#GET{erreurs})</span>
 								]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
