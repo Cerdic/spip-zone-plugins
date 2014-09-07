@@ -164,10 +164,10 @@ function blocsdepliables_porte_plume_cs_pre_charger($flux) {
 		"replaceWith" => "\n<visible>"._T('couteau:pp_un_titre')."\n\n"._T('couteau:pp_votre_texte')."\n</visible>\n",
 		"display" => true));
 	foreach(cs_pp_liste_barres('blocs') as $b) {
-        if($b!='forum') {
-		    $flux[$b] = isset($flux[$b])?array_merge($flux[$b], $r):$r;
-        }
-    }
+		if($b!='forum') {
+			$flux[$b] = isset($flux[$b])?array_merge($flux[$b], $r):$r;
+		}
+	}
 	return $flux;
 }
 function blocsdepliables_porte_plume_lien_classe_vers_icone($flux) {
