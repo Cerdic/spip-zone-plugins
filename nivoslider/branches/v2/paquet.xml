@@ -5,13 +5,13 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/nivoslider-32.png"
-	documentation="http://www.spip-contrib.net/Nivo-Slider-pour-SPIP"
+	documentation="http://contrib.spip.net/Nivo-Slider,3747"
 >	
 
 	<nom>NivoSlider</nom>
 	<!-- Diaporama jQuery avec de belles transitions ! -->
 
-	<auteur lien="http://www.spip-contrib.net/ngombe">Grégory Pascal</auteur>
+	<auteur lien="http://contrib.spip.net/ngombe">Grégory Pascal</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
