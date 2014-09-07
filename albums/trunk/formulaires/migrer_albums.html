@@ -19,11 +19,13 @@
 		<ul>
 
 			[(#REM) Select: choix de la rubrique ]
+			#SET{id_parent,#ENV{id_parent}}
+			[(#ENV{id_parent}|=={-1000}|oui) #SET{id_parent,0} ]
 			[<li class="editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
 				<label for="id_parent"><:migreralbums:label_rubrique_source:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
 				]
-				(#VAL|chercher_rubrique{0,#ENV{id_parent},'article',0,0,0,form_simple})
+				(#VAL|chercher_rubrique{0,#GET{id_parent},'article',0,0,0,form_simple}|replace{value=("|')0("|'),value="-1000"}|replace{\(<option\[^>\]*value="-1000"\[^>\]*>\),$1<:migreralbums:label_tout_le_site:>})
 			 </li>]
 
 			[(#REM) Checkbox : inclure les sous-rubriques ? ]

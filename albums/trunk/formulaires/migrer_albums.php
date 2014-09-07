@@ -88,15 +88,16 @@ function formulaires_migrer_albums_verifier_dist(){
  */
 function formulaires_migrer_albums_traiter_dist(){
 	$id_rubrique = _request('id_parent');
-	$where_articles = migrer_albums_where_articles($id_rubrique,_request('toute_la_branche'));
-	$refuser = (_request('refuser_articles')?true:false);
+	$where_articles = migrer_albums_where_articles($id_rubrique, _request('toute_la_branche'));
+	$refuser = (_request('refuser_articles') ? true : false);
+	$lier_rubriques = (_request('lier_rubriques') ? true : false);
 	$groupes = _request('groupes_mots');
 	if (!$groupes)
 		$groupes = array();
 	$where_mots = migrer_albums_where_mots($groupes);
 
 	// et migrer les articles
-	$nb = albums_migrer_articles($where_articles, $where_mots, $refuser);
+	$nb = albums_migrer_articles($where_articles, $where_mots, $refuser, $lier_rubriques);
 
 	$message = sinon(singulier_ou_pluriel($nb,'info_1_article','info_nb_articles'),_T('info_aucun_article'));
 	$message .= " " ._T('migreralbums:info_migration_articles_reussi');
@@ -109,7 +110,7 @@ function formulaires_migrer_albums_traiter_dist(){
  *
  * @return int nombre d'articles migrés
  */
-function albums_migrer_articles($where_articles, $where_mots, $refuser){
+function albums_migrer_articles($where_articles, $where_mots, $refuser, $lier_rubriques){
 	include_spip("action/editer_objet");
 	include_spip("action/editer_liens");
 
@@ -126,10 +127,21 @@ function albums_migrer_articles($where_articles, $where_mots, $refuser){
 			// associer tout de suite à l'article
 			objet_associer(array('album'=>$id_album),array('article'=>$row['id_article']));
 			// et peut-être en plus à la rubrique
-			if (_request('lier_rubriques') == 'oui'){
+			if ($lier_rubriques){
 				objet_associer(array('album'=>$id_album),array('rubrique'=>$row['id_rubrique']));
 			}
-
+			
+			// réassocier les bons auteurs
+			if ($liens_auteurs = objet_trouver_liens(array('auteur'=>'*'), array('article'=>$row['id_article']))){
+				$auteurs = array();
+				foreach ($liens_auteurs as $lien){
+					$auteurs[] = $lien['id_auteur'];
+				}
+				objet_dissocier(array('auteur'=>'*'), array('album'=>$id_album));
+				objet_associer(array('auteur'=>$auteurs), array('album'=>$id_album));
+			}
+			
+			
 			// titrer et decrire
 			$descriptif = array();
 			if (strlen($row['chapo']))
@@ -196,12 +208,14 @@ function migrer_albums_where_articles($id_rubrique,$branche = false){
 
 	$where = array();
 	$where[] = "statut=".sql_quote('publie');
-	if ($branche){
-		include_spip("inc/rubriques");
-		$where[] = sql_in('id_rubrique',calcul_branche_in($id_rubrique));
+	if ($id_rubrique > 0){
+		if ($branche){
+			include_spip("inc/rubriques");
+			$where[] = sql_in('id_rubrique',calcul_branche_in($id_rubrique));
+		}
+		else
+			$where[] = "id_rubrique=".intval($id_rubrique);
 	}
-	else
-		$where[] = "id_rubrique=".intval($id_rubrique);
 
 	return $where;
 }

@@ -24,6 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_lier_rubriques_oui' => 'Lier chaque album à la rubrique de l’article dont il est issu',
 	'label_refuser_articles_oui' => 'Passer les articles en "refusé" après leur transformation en albums',
 	'label_rubrique_source' => 'Rubrique à migrer',
+	'label_tout_le_site' => 'Tout le site !',
 	'label_toute_la_branche_oui' => 'Inclure les sous-rubriques',
 
 	// T
