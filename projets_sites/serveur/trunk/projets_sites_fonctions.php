@@ -58,4 +58,19 @@ function url_webservice_xml ($url, $login = '', $password = '')
 
     return $page['content'];
 }
+
+function version2branche($version)
+{
+    if (preg_match("/\./", $version)) {
+        $numeros = explode(".", $version);
+        if (count($numeros) >= 3) {
+            $version = $numeros[0] . "." . $numeros[1];
+        } elseif (count($numeros) <= 2) {
+            $version = $numeros[0];
+        }
+    }
+
+    return $version;
+}
+
 ?>
