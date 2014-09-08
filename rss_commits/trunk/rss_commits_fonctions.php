@@ -28,14 +28,13 @@ function lister_rss_commits ()
             $contenu_rss = $analyser_rss_commits($value_rss["versioning_rss"]);
             if (count($contenu_rss) > 0) {
                 foreach ($contenu_rss['channel']['item'] as $key => $value) {
-                        $items[$key]['titre'] = $value['title'];
-                        $items[$key]['descriptif'] = $value['description'];
-                        $items[$key]['texte'] = trim($value['texte']);
-                        $value['author'] = echapper_tags($value['author']);
-                        $items[$key]['auteur'] = $value['author'];
-                        $items[$key]['url_revision'] = $value['link'];
-                        $items[$key]['guid'] = $value['guid'];
-                        $items[$key]['id_projet'] = $value_rss['id_projet'];
+                        $items[$key]['titre']         = echapper_tags($value['title']);
+                        $items[$key]['descriptif']    = echapper_tags($value['description']);
+                        $items[$key]['texte']         = echapper_tags(trim($value['texte']));
+                        $items[$key]['auteur']        = echapper_tags($value['author']);
+                        $items[$key]['url_revision']  = $value['link'];
+                        $items[$key]['guid']          = $value['guid'];
+                        $items[$key]['id_projet']     = $value_rss['id_projet'];
                         $items[$key]['date_creation'] = strftime(
                             "%Y-%m-%d %H:%M:%S",
                             strtotime($value['pubDate'])
