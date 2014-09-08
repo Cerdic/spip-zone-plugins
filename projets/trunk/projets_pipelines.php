@@ -23,7 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function projets_affiche_milieu($flux) {
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
-	$objets_selectionnes = lire_config('projets/objets');
+	$objets_selectionnes = lire_config('projets/objets', array());
 	if (count($objets_selectionnes) > 0) {
 		include_spip('base/objets');
 		foreach ($objets_selectionnes as $key => $value) {
