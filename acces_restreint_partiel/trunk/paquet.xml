@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/arp-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/Acces-Restreint-Partiel"
 	schema="1.0.0" 
 >
 	<!--
