@@ -12,18 +12,21 @@
 <div class="clearfix"></div>
 
 <div class="block">
-    <INCLURE{fond=objets/liste/projets, organisation, id_organisation, ajax, env} />
+    <INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env} />
 </div>
 <div class="clearfix"></div>
 
+<B_autresobjets>
 <div class="block">
     <BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet}>
         #SET{table,#OBJET|table_objet}
         [(#SET{titre,[#OBJET:info_(#GET{table})_liees_organisation]})]
         [(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},organisations_lies}})]
-        <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_projet,ajax,env} />
+        <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_organisation,ajax,env} />
     </BOUCLE_autresobjets>
 </div>
 <div class="clearfix"></div>
+</B_autresobjets>
 
 </BOUCLE_extra>
+

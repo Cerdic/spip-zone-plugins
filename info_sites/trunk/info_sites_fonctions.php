@@ -15,5 +15,18 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 
 include_spip('inc/filtres_ecrire');
+include_spip('base/abstract_sql');
+include_spip('base/objets');
 
+function lister_tables_liens () {
+	$tables_auxilaires = lister_tables_auxiliaires();
+	$tables_auxilaires_objets = array();
+
+	foreach ($tables_auxilaires as $key => $table_auxilaire) {
+		if (isset($table_auxilaire['field']['objet'])) {
+			$tables_auxilaires_objets[] = $key;
+		}
+	}
+	return $tables_auxilaires_objets;
+}
 ?>

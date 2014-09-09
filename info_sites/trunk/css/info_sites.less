@@ -105,6 +105,10 @@ table {
 	max-width: 100%;
 	width: 100%;
 	border: 1px solid #ddd;
+	> caption {
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+	}
 	> caption + thead, > thead:first-child {
 		> tr {
 			&:first-child {
@@ -129,6 +133,11 @@ table {
 			}
 		}
 	}
+}
+
+.liste-objets {
+	margin-top: 1em;
+	border-top: 1px solid @gray-third;
 }
 
 .liste {

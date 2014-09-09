@@ -24,10 +24,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'diagnostic_logiciel_absent' => 'Il n\'y a pas de protocole de diagnostic défini pour ce logiciel.',
 
     // E
-    'editer_liens_contact' => '&Eacute;diter les liens de ce contact',
-    'editer_liens_organisation' => '&Eacute;diter les liens de cette organisation',
-    'editer_liens_projet' => '&Eacute;diter les liens de ce projet',
-    'editer_liens_projets_site' => '&Eacute;diter les liens de ce site',
+    'editer_liens_contact' => '&Eacute;diter les liens',
+    'editer_liens_organisation' => '&Eacute;diter les liens',
+    'editer_liens_projet' => '&Eacute;diter les liens',
+    'editer_liens_projets_site' => '&Eacute;diter les liens',
 
 
     // I

@@ -5,12 +5,33 @@
 ]    <BOUCLE_site_secu (PROJETS_SITES) {id_projet} {tout} {0,1}> </BOUCLE_site_secu><li class="action"><a href="[(#URL_PAGE{diagnostic_iso}|parametre_url{id_projet,#ID_PROJET})]" class="bouton diagnostic"><i class="fa fa-list fa-lg"></i> <:info_sites:btn_diagnostic_iso:></a></li></B_site_secu>
 </ul>
 <div class="clearfix"></div>
+<B_autresobjets>
+<div class="block">
+<BOUCLE_autresobjets(spip_projets_liens) {id_projet} {objet !IN projets_site} {fusion objet} {par objet}>
+<div class="champ">
+	<div class="label visible">[(#OBJET|objet_info{texte_objet}|_T)]</div>
+	<div class="span" dir="#LANG_DIR"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></div>
+</div>
+</BOUCLE_autresobjets>
+</div>
+<div class="clearfix"></div>
+</B_autresobjets>
+
+<B_auteurs>
+<div class="block">
+<BOUCLE_auteurs(spip_auteurs_liens) {id_objet=#ID_PROJET} {objet='projet'}>
+<div class="champ">
+	<div class="label visible">[(#VAL{auteur}|objet_info{texte_objet}|_T)]</div>
+	<div class="span" dir="#LANG_DIR"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#INFO_TITRE{auteur,#ID_AUTEUR})]</a></div>
+</div>
+</BOUCLE_auteurs>
+</div>
+<div class="clearfix"></div>
+</B_auteurs>
 
 <div class="block">
-    <div class="clearfix clear"> </div>
     <INCLURE{fond=objets/liste/projets_sites,projet,id_projet,ajax,env} />
 </div>
-
-
+<div class="clearfix"></div>
 
 </BOUCLE_extra>

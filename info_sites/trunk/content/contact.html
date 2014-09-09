@@ -4,7 +4,8 @@
     <h1>[(#RANG). ](#NOM)[, (#PRENOM)]</h1>
 ],simple fiche_objet})]
 
-
+[(#LOGO_CONTACT|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix clear"></div>]
 
 <div id="wysiwyg">
     <INCLURE{fond=prive/objets/contenu/contact, id=#ID_CONTACT, id_contact=#ID_CONTACT, ajax=wysiwyg} />

@@ -5,9 +5,8 @@
 	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h1>
 ],simple fiche_objet})]
 
-
-[(#LOGO_PROJET|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})]
-<div class="clearfix"></div>
+[(#LOGO_PROJET|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix"></div>]
 
 <div id="wysiwyg">
 	<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
@@ -29,7 +28,7 @@
 
 	[<div class="champ contenu_versioning_type[ (#VERSIONING_TYPE*|strlen|?{'',vide hidden})]">
 		<div class="label visible"><:commit:champ_versioning_type_label:>&nbsp;: </div>
-		<div dir='#LANG_DIR' class='span #EDIT{versioning_type} versioning_type'><a href="#VERSIONING_TYPE">(#VERSIONING_TYPE)</a></div>
+		<div dir='#LANG_DIR' class='span #EDIT{versioning_type} versioning_type'>(#VERSIONING_TYPE)</div>
 	</div>]
 
 	[<div class="champ contenu_versioning_rss[ (#VERSIONING_RSS*|strlen|?{'',vide hidden})]">
