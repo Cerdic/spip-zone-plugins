@@ -16,11 +16,16 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 include_spip('base/abstract_sql');
 include_spip('inc/filtres');
 
-function lister_rss_commits ()
+function lister_rss_commits ($id_projet = null)
 {
     $rss_items = array();
     $items = array();
-    $projet_rss = sql_allfetsel('versioning_rss,id_projet', 'spip_projets', "versioning_rss !=''");
+    $where = "versioning_rss !=''";
+    if ($id_projet and is_int($id_projet)) {
+        $where = "versioning_rss !='' AND id_projet=$id_projet";
+    }
+
+    $projet_rss = sql_allfetsel('versioning_rss,id_projet', 'spip_projets', $where);
 
     $analyser_rss_commits = charger_fonction('analyser_rss_commits', 'inc');
     if (count($projet_rss) >0) {

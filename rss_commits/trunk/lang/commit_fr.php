@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'champ_versioning_rss_label' => 'RSS des commits du dépôt',
     'champ_versioning_trac_label' => 'Trac du dépôt',
     'champ_versioning_type_label' => 'Type de versioning',
+    'confirmer_maj_commits_projet' => 'Mettre à jour les commits',
 
     // I
     'icone_creer_commit' => 'Créer un commit',
@@ -39,6 +40,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_commits_auteur' => 'Les commits de cet auteur',
     'info_commits_projet' => 'Les commits de ce projet',
     'info_nb_commits' => '@nb@ commits',
+
+    // M
+    'maj_commits_projet' => 'Mettre à jour les commits',
 
     // R
     'retirer_lien_commit' => 'Retirer ce commit',
