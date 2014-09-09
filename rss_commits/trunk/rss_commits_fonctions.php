@@ -29,8 +29,8 @@ function lister_rss_commits ()
             if (count($contenu_rss) > 0) {
                 foreach ($contenu_rss['channel']['item'] as $key => $value) {
                         $items[$key]['titre']         = echapper_tags($value['title']);
-                        $items[$key]['descriptif']    = echapper_tags($value['description']);
-                        $items[$key]['texte']         = echapper_tags(trim($value['texte']));
+                        $items[$key]['descriptif']    = $value['description'];
+                        $items[$key]['texte']         = trim($value['texte']);
                         $items[$key]['auteur']        = echapper_tags($value['author']);
                         $items[$key]['url_revision']  = $value['link'];
                         $items[$key]['guid']          = $value['guid'];

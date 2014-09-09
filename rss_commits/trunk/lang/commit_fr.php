@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
     'ajouter_lien_commit' => 'Ajouter ce commit',
+    'aucun_commit' => 'Aucun commit',
     'aucun_commit_auteur' => 'Aucun commit pour cet auteur',
     'aucun_commit_auteur_identifie' => 'Vous n\'avez aucun commit',
     'aucun_commit_projet' => 'Aucun commit pour ce projet',
