@@ -1,4 +1,4 @@
-<?
+<?php
 
 function _findSharp($intOrig, $intFinal) {
   $intFinal = $intFinal * (750.0 / $intOrig);
