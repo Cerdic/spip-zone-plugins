@@ -94,12 +94,14 @@
 				</tr>
 			</thead>
 			<tbody>
-			<BOUCLE_plugins (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {si (#LOGICIEL_PLUGINS|match{"\|"})} {par valeur}><B_plugin>
-				<tr><BOUCLE_plugin (DATA) {source table, #VALEUR}>
-					[(#REM|test_espace_prive|oui)<td>][
-					(#REM|test_espace_prive|non)<td class="[(#GET{plugin_statut_class}|table_valeur{#VALEUR|trim})]">][(#VALEUR|trim)]</td></BOUCLE_plugin>
+			<BOUCLE_plugins (DATA) {source table, (#LOGICIEL_PLUGINS**|formater_tableau)} {si (#LOGICIEL_PLUGINS|match{"\|"})} {par valeur}>
+				<tr>
+					<td>[(#VALEUR{0}|trim)]</td>
+					<td>[(#VALEUR{1}|trim)]</td>
+					<td>[(#VALEUR{2}|trim)]</td>
+					<td class="[
+					(#REM|test_espace_prive|non)[(#GET{plugin_statut_class}|table_valeur{#VALEUR{3}|trim})]]">[(#VALEUR{3}|trim)]</td>
 				</tr>
-			</B_plugin>
 			</BOUCLE_plugins>
 			</tbody>
 		</table><!-- /.table spip liste -->
@@ -133,11 +135,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<BOUCLE_admins (DATA) {source table, (#AUTEURS_ADMIN**|formater_tableau)} {si (#AUTEURS_ADMIN|match{"\|"})} {par valeur}><B_admin>
-				<tr><BOUCLE_admin (DATA) {source table, #VALEUR}>
-					<td>[(#VALEUR|trim)]</td></BOUCLE_admin>
+			<BOUCLE_admins (DATA) {source table, (#AUTEURS_ADMIN**|formater_tableau)} {si (#AUTEURS_ADMIN|match{"\|"})} {par valeur}>
+				<tr>
+					<td>[(#VALEUR{0}|trim)]</td>
+					<td>[(#VALEUR{1}|trim)]</td>
+					<td>[(#VALEUR{2}|trim|replace{"@","@<wbr/>"})]</abbr></td>
+					<td>[(#VALEUR{3}|trim)]</td>
 				</tr>
-			</B_admin>
 			</BOUCLE_admins>
 			</tbody>
 		</table><!-- /.table spip liste -->
