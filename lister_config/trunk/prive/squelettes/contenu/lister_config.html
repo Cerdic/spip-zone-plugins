@@ -18,12 +18,12 @@
 					<div class="short">
 						[(#GET{erreur}|ltrim{'-'}|sinon{#SLOGAN|extraire_multi|typo|sinon{#DESCRIPTION|extraire_multi|propre}|PtoBR|explode{'<br />'}|reset|couper{80}})]
 					</div>
-					[(#LOGO|trim|match{^http}|oui)
-					[(#LOGO|oui)<div class="icon">
+					[(#LOGO|oui)[
+					(#LOGO|trim|match{^http}|oui)
+					<div class="icon">
 						[(#CONSTANTE|constant|concat{#LOGO}|image_reduire{32})]
-					</div>]
-					][(#LOGO|trim|match{^http}|non)
-					[(#LOGO|oui)<div class="icon">
+					</div>][(#LOGO|trim|match{^http}|non)
+					<div class="icon">
 						[(#CONSTANTE|constant|concat{#SRC_ARCHIVE/#LOGO}|image_reduire{32})]
 					</div>]
 					]
