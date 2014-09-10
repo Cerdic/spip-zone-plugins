@@ -83,7 +83,7 @@ function action_api_docrestreint_dist($arg=null) {
 	$repertoires_autorises = pipeline('accesrestreint_repertoires_toujours_autorises', array('nl'));
 
 	if ($Document->est_dans_repertoire($repertoires_autorises)) {
-		$Document->statut = 200;
+		$Document->status = 200;
 		accesrestreint_afficher_document_selon_status($Document);
 		return;
 	}
