@@ -111,11 +111,15 @@ function traiter_items($links,$url_du_site){
 		//dans le texte transforme les liens des documents en chemin SPIP (option *)
 		$traite_texte_documents=traite_texte_documents($texte);
 		$texte=$traite_texte_documents['texte'];
+	
+		//todo trouver une fonction configurable (choix du tag daté)
+		$date = extraire_date($texte);
+		$date = $date ? $date : gmdate("Y-m-d\TH:i:s\Z");
 		
 		//cree un item pour chaque page
 		$flux.= "\n<item xml:lang='fr'>\n";
 		
-			$flux.=do_item($titre,$link,$texte);
+			$flux.=do_item($titre,$link,$texte,$date);
 			
 			//enclosure des liens de documents trouvés dans le contenu
 			foreach ($documents as $document){
@@ -133,7 +137,7 @@ function traiter_items($links,$url_du_site){
  * Compose le contenu d'un item à insérer dans une collection d'items rss
  *
  * @example 
- * 	do_item($titre,$url_page,$texte);
+ * 	do_item($titre,$url_page,$texte,$date);
  *
  * @param string $titre
  *	Le titre de l'item
@@ -144,14 +148,17 @@ function traiter_items($links,$url_du_site){
  * @param string $texte
  *	Le texte html (encodé ou pas) pour le RSS de l'item
  *
+ * @param string $date
+ *	La date de l'item
+ *
  * @return string 
  *
 **/
-function do_item($titre,$url_page,$texte){
+function do_item($titre,$url_page,$texte,$date){
 	$nom_site_aspirer = lire_config('aspirateur/nom_site_aspirer');
 	$flux = "<title>".$titre."</title>\n";
 	$flux.= "<guid isPermaLink='true'>".quote_amp($url_page)."</guid>\n";
-	$flux.= "<dc:date>".gmdate("Y-m-d\TH:i:s\Z")."</dc:date>\n"; //todo
+	$flux.= "<dc:date>$date</dc:date>\n";
 	$flux.= "<dc:format>text/html</dc:format>\n";
 	$flux.= "<dc:language>fr</dc:language>\n";
 	$flux.= "<dc:creator>".$nom_site_aspirer."</dc:creator>\n";
