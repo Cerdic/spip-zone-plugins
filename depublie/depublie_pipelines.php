@@ -132,7 +132,7 @@ function depublie_formulaire_traiter($flux){
 function depublie_post_edition($flux){
 	
 	//si on a demandé la durée automatique de publication se greffer sur le traitement post_edition de changement de statut d'un article
-	$duree= lire_config('depublie/publication_duree');
+	$duree = lire_config('depublie/publication_duree');
 	
 	if ($duree>0 
 		and ($action = $flux['args']['action']) == 'instituer' // action instituer
@@ -146,7 +146,7 @@ function depublie_post_edition($flux){
 		$infos_article = sql_fetsel('id_rubrique, id_secteur','spip_articles','id_article='._q($id_objet));
 		$id_secteur = $infos_article['id_secteur'];
 		$id_rubrique = $infos_article['id_rubrique'];
-		$id_secteur_choisi= explode(',',lire_config('depublie/secteur_depubli'));
+		$id_secteur_choisi= explode(',',lire_config('depublie/secteur_depublie'));
 		$id_rubrique_choisie= explode(',',lire_config('depublie/rubrique_depublie'));
 
 		//seulement si secteur ou rubrique sont dans la config
