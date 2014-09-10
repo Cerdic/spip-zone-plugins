@@ -1,10 +1,12 @@
 <BOUCLE_extra (PROJETS) {id_projet}>
-
-[(#AUTORISER{maj, commits}|oui)
-    [(#BOUTON_ACTION{[(#CHEMIN_IMAGE{projet-del-24.png}
-        |balise_img{<:commit:maj_commits_projet:>}|inserer_attribut{class,co_middle}
-        |concat{' ',<:commit:maj_commits_projet:>})],
-        [(#URL_ACTION_AUTEUR{maj_commits_projet,#ID_PROJET,#SELF})],
-        ajax icone s24 horizontale danger commit,<:commit:confirmer_maj_commits_projet:>})]
+[(#VERSIONING_RSS|oui)
+    [(#AUTORISER{maj, commits}|oui)
+        [(#BOUTON_ACTION{[(#CHEMIN_IMAGE{commit-24.png}
+            |balise_img{<:commit:maj_commits_projet:>}|inserer_attribut{class,co_middle}
+            |concat{' ',<:commit:maj_commits_projet:>})],
+            [(#URL_ACTION_AUTEUR{maj_commits_projet, #ID_PROJET, #SELF})],
+            icone s24 horizontale danger commit-24,
+            <:commit:confirmer_maj_commits_projet:>})]
+    ]
 ]
 </BOUCLE_extra>

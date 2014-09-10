@@ -29,6 +29,7 @@ function action_maj_commits_projet_dist($id = null)
     $id_projet = intval($id);
 
     if ($id_projet) {
+        include_spip('rss_commits_fonctions');
         $log = array();
         $log[] = "\n ----------"
         . date_format(date_create(), 'Y-m-d H:i:s')
@@ -89,6 +90,8 @@ function action_maj_commits_projet_dist($id = null)
     } else {
         spip_log(__FUNCTION__ . " $id pas compris", 'rss_commits');
     }
+
+    return true;
 }
 
 ?>

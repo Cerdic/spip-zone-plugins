@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'champ_versioning_rss_label' => 'RSS des commits du dépôt',
     'champ_versioning_trac_label' => 'Trac du dépôt',
     'champ_versioning_type_label' => 'Type de versioning',
-    'confirmer_maj_commits_projet' => 'Mettre à jour les commits',
+    'confirmer_maj_commits_projet' => 'Veuillez confirmer la demande de mise à jour des commits de ce projet.',
 
     // I
     'icone_creer_commit' => 'Créer un commit',

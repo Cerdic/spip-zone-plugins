@@ -80,5 +80,30 @@ function rss_commits_affiche_auteurs_interventions($flux)
     return $flux;
 }
 
+/**
+ * Afficher le nombre de documents dans chaque rubrique
+ *
+ * @param array $flux
+ * @return array
+ */
+function rss_commits_boite_infos($flux)
+{
+    // Dans le $flux de la boite infos, on a un array :
+    // 'data' => contient toutes les données, textes du bloc d'infos
+    // 'args' => 'type' => le type d'objet
+    // 'args' => 'id' => l'id de l'objet
+
+    if ($flux['args']['type']=='projet'
+        and $id_projet = $flux['args']['id']){
+        $flux['data'] .= recuperer_fond(
+            'prive/objets/infos/projet_commits',
+            array(
+                'id_projet'=>$id_projet
+            )
+        );
+    }
+
+    return $flux;
+}
 
 ?>
