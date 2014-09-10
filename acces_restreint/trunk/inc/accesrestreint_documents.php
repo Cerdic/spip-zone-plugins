@@ -19,6 +19,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return bool
  */
 function accesrestreint_gerer_htaccess($active = true) {
+
 	if (!$active){
 		spip_unlink(_DIR_IMG . _ACCESS_FILE_NAME);
 		effacer_meta("creer_htaccess");
@@ -44,12 +45,13 @@ rewrite;
 				$rewrite = $rewritebase."\n".$rewrite;
 			}
 		}
-		
+
 		ecrire_fichier(_DIR_IMG . _ACCESS_FILE_NAME,$rewrite);
 		// verifier sur l'url de test
 		include_spip('inc/distant');
 		$url_test = url_absolue(_DIR_IMG . "test/.test?0/1");
 		$test = recuperer_page($url_test);
+
 		// si l'url de test renvoie bien "OK" alors rewrite rule fonctionne et on peut baser la protection de document sur ce shema
 		if ($test == "OK") {
 			effacer_meta("creer_htaccess"); // securite, et permet de generer des urls permanentes
