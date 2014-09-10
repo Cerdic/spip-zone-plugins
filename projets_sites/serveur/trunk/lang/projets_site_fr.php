@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // C
     'confirmer_supprimer_projets_site' => 'Êtes-vous sûr de vouloir supprimer les informations relatives à ce site&nbsp;?',
     'consultation_webservice' => 'Consultation du webservice',
+    'confirmer_maj_projets_site' => 'Veuillez confirmer la demande de mise à jour de ce site par le biais du webservice.',
 
     // E
     'explication_auteurs' => 'Saisir la liste des auteurs du site en respectant les règles suivantes&nbsp;: </p>
@@ -131,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_webservice' => 'Url du Web Service&nbsp;:',
 
     // M
+    'maj_projets_site' => 'Mettre à jour le site',
     'maj_webservice_log_ko' => 'Le site de projet n°@id@ n\'a pu être mis à jour par l\'url @webservice@',
     'maj_webservice_log_ok' => 'Le site de projet n°@id@ a été mis à jour par l\'url @webservice@',
 
