@@ -3,10 +3,10 @@ include_spip('inc/bible_tableau');
 function generer_url_passage_lire($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lire,$lang){
 	list($chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$petit) = lire_petit_livre($livre,$chapitre_debut,$verset_debut,$chapitre_fin,$verset_fin,$lang);
 	if (!$petit){
-		return "http://lire.la-bible.net/index.php?reference=$livre+$chapitre_debut&versions[]=$lire";	
+		return "http://lire.la-bible.net/index.php?reference=$livre+$chapitre_debut&versions%5B%5D=$lire";	
 	}
 	else {
-		return "http://lire.la-bible.net/index.php?reference=$livre&versions[]=$lire";	
+		return "http://lire.la-bible.net/index.php?reference=$livre&versions%5B%5D=$lire";	
 	}
 }
 
