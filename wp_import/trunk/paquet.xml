@@ -1,7 +1,7 @@
 <paquet 
 	prefix="wp_import" 
 	categorie="divers" 
-	version="1.0.0" 
+	version="1.0.1" 
 	etat="test" 
 	compatibilite="[3.0.0;3.0.*]" 
 	logo="images/wp_import-48.png" 
@@ -14,7 +14,8 @@
 
 	<menu nom="wp_import" titre="wp_import:migration" parent="menu_administration" icone="images/wp_import-16.png" />
 
-	<utilise nom="pages" compatibilite="[1.0.0;1.*.*]" />
-	<utilise nom="polyhier" compatibilite="[2.0.1;2.*.*]" /> 
+	<necessite nom="pages" compatibilite="[1.0.0;1.*.*]" />
+	<necessite nom="polyhier" compatibilite="[2.0.1;2.*.*]" />
+    <necessite nom="saisies" compatibilite="[1.19.0;]" />
 
 </paquet>
