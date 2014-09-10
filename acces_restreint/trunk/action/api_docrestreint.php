@@ -39,7 +39,7 @@ function action_api_docrestreint_dist($arg=null) {
 
 	// manque des arguments : 404
 	if (count($arg) < 3) {
-		accesrestreint_afficher_404_document();
+		accesrestreint_afficher_erreur_document(404);
 		return;
 	}
 
@@ -63,20 +63,25 @@ function action_api_docrestreint_dist($arg=null) {
 	$file = get_spip_doc($f);
 	spip_log($file, 'dbg');
 
-	$status = $doc = false;
-	$dossiers_a_exclure = array('nl');
-
 	// securite : on refuse tout ../ ou url absolue
 	if ((strpos($f, '../') !== false) OR (preg_match(',^\w+://,', $f))) {
-		$status = 403;
-	} elseif (!file_exists($file) OR !is_readable($file)) {
-		$status = 404;
+		accesrestreint_afficher_erreur_document(403);
+		return;
 	}
+
+	// inexistant ou illisible : 404
+	if (!file_exists($file) OR !is_readable($file)) {
+		accesrestreint_afficher_erreur_document(404);
+		return;
+	}
+
+	$status = $doc = false;
+	$dossiers_a_exclure = array('nl');
 
 	// Si c'est dans un sous-dossier explicitement utilisé pour autre chose que les documents
 	// (exemple : les newsletters)
 	// et bien on ne teste pas l'accès
-	elseif (preg_match('%^(' . join('|', $dossiers_a_exclure) . ')/%', $f)){
+	if (preg_match('%^(' . join('|', $dossiers_a_exclure) . ')/%', $f)){
 		$status = 200;
 	}
 	else {
@@ -130,12 +135,11 @@ function action_api_docrestreint_dist($arg=null) {
 	switch($status) {
 
 	case 403:
-		include_spip('inc/minipres');
-		echo minipres("","","",true);
+		accesrestreint_afficher_erreur_document(403);
 		break;
 
 	case 404:
-		accesrestreint_afficher_404_document();
+		accesrestreint_afficher_erreur_document(404);
 		break;
 
 	default:
@@ -191,12 +195,25 @@ function accesrestreint_vider_buffers() {
 }
 
 /**
- * Retourne une page 404 indiquant un document introuvable
- * 
+ * Affiche une page indiquant un document introuvable ou interdit
+ *
+ * @param string $status
+ *     Numero d'erreur (403 ou 404)
  * @return void
 **/
-function accesrestreint_afficher_404_document() {
-	http_status(404);
-	include_spip('inc/minipres');
-	echo minipres(_T('erreur') . ' 404', _T('medias:info_document_indisponible'), "", true);
+function accesrestreint_afficher_erreur_document($status = 404) {
+
+	switch ($status)
+	{
+		case 403:
+			include_spip('inc/minipres');
+			echo minipres("","","",true);
+			break;
+
+		case 404:
+			http_status(404);
+			include_spip('inc/minipres');
+			echo minipres(_T('erreur') . ' 404', _T('medias:info_document_indisponible'), "", true);
+			break;
+	}
 }
