@@ -223,12 +223,11 @@ function accesrestreint_afficher_document(Accesrestreint_document $Document) {
 
 	$chemin_fichier = $Document->get_chemin_complet_fichier();
 
+	// toujours envoyer un content type, meme vide !
+	header("Content-Type: " . $Document->get_mime_type());
+
 	// document décrit dans la table spip_documents ?
 	if ($doc = $Document->get_spip_document()) {
-		if ($doc['mime_type']) {
-			header("Content-Type: " . $doc['mime_type']);
-		}
-
 		// pour les images ne pas passer en attachment
 		// sinon, lorsqu'on pointe directement sur leur adresse,
 		// le navigateur les downloade au lieu de les afficher
@@ -300,6 +299,13 @@ class Accesrestreint_document {
 	 * @var string|int
 	**/
 	public $status = "";
+
+	/**
+	 * Mime type pour ce document
+	 *
+	 * @var string
+	**/
+	private $mime_type = "";
 
 
 	/**
@@ -508,4 +514,42 @@ class Accesrestreint_document {
 		return $ETag;
 	}
 
+	/**
+	 * Calcule et retourne un content type
+	 *
+	 * Cherche
+	 * - un content type déjà indiqué,
+	 * - sinon dans le document spip,
+	 * - sinon rien
+	 *
+	 * @note
+	 *     Tester l'extension du fichier si on n'en trouve pas ?
+	 *
+	 * @param bool $calculer
+	 *     Calculer le mime type si absent à partir de spip_documents
+	 * @return string
+	**/
+	public function get_mime_type($calculer = true) {
+		if ($this->mime_type) {
+			return $this->mime_type;
+		}
+		if (!$calculer) {
+			return "";
+		}
+		if ($doc = $this->get_spip_document()) {
+			if ($doc['mime_type']) {
+				return $doc['mime_type'];
+			}
+		}
+		return "";
+	}
+
+	/**
+	 * Définit un type mime pour ce document
+	 *
+	 * @param string $mime_type Mime type
+	**/
+	public function set_mime_type($mime_type) {
+		$this->mime_type = $mime_type;
+	}
 }
