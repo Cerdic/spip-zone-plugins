@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.17;3.0.*]"
 	logo="prive/themes/spip/images/cookiebar-64.png"
-	documentation="http://contrib.spip.net/"
+	documentation="http://contrib.spip.net/4554"
 >
   <nom>cookiebar</nom>
   <auteur lien='http://www.primebox.co.uk/projects/cookie-bar/'>primebox</auteur>
