@@ -263,7 +263,9 @@ function accesrestreint_afficher_document(Accesrestreint_document $Document) {
 /**
  * Décrit un document qu'un utilisateur cherche à afficher.
  *
- * En aura t'il le droit ?
+ * @note
+ *     La propriété 'status' est publique et servira à déterminer
+ *     quel type de status http transmettre.
 **/
 class Accesrestreint_document {
 
@@ -316,6 +318,31 @@ class Accesrestreint_document {
 		$this->id_document = $id_document;
 		$this->cle_action  = $cle_action;
 	}
+
+	/**
+	 * Récupérer le chemin du fichier (depuis IMG/)
+	 * @return string
+	**/
+	public function get_chemin_fichier() {
+		return $this->_fichier;
+	}
+
+	/**
+	 * Récupérer le numéro de document
+	 * @return int
+	**/
+	public function get_id_document() {
+		return $this->document;
+	}
+
+	/**
+	 * Récupérer la clé d'action
+	 * @return int|string
+	**/
+	public function get_cle_action() {
+		return $this->cle_action;
+	}
+
 
 	/**
 	 * Test si le document demandé vérifie simplement le fonctionnement correct du .htaccess dans IMG posé par Acces Restreint
