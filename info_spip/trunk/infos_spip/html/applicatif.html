@@ -8,8 +8,8 @@
 </div>
 
 <div class="champ contenu_applicatif_path">
-    <div class="label visible"><:info_spip:label_applicatif_path:></div>
-    <div dir='#LANG_DIR' class='applicatif_path span'>[(#EVAL{$_SERVER\['SCRIPT_FILENAME'\]}|replace{'ecrire/index.php',''})]</div>
+    <div class="label visible"><:info_spip:label_applicatif_path:></div>#SET{applicatif_path,#EVAL{$_SERVER['SCRIPT_FILENAME']}}
+    <div dir='#LANG_DIR' class='applicatif_path span'>[(#GET{applicatif_path}|replace{'ecrire/index.php',''})]</div>
 </div>
 
 <div class="champ contenu_applicatif_port">
