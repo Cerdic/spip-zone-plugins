@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Sitemap lisibles pour les humains</nom>
+	<slogan>Il n'y a pas que les machines dans la vie</slogan>
+	<auteur>[Jacques Pyrat->http://www.pyrat.net/]</auteur>
+	<licence>© 2014 - GPL</licence>
+	<lien></lien>
+	
+	<version>1.0.0</version>
+	
+	<etat>stable</etat>
+	<description>
+Ce plugin permet d'afficher la site map d'une manière exploitable par un être humain.
+
+Inspiré de https://www.drupal.org/project/xmlsitemap
+	</description>
+	<icon>img_pack/sitemapxsl_32.png</icon>
+
+ 	<prefix>sitemapxsl</prefix>
+	
+	<categorie>divers</categorie>
+	<necessite id='SPIP' version='[2.1.26;2.1.99]' />
+
+	<chemin dir='' />
+</plugin>
