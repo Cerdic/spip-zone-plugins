@@ -12,6 +12,8 @@
 Ce plugin permet d'afficher la site map d'une manière exploitable par un être humain.
 
 Inspiré de https://www.drupal.org/project/xmlsitemap
+
+Icone SiteMap_color de http://www.famfamfam.com/lab/icons/silk/ en licence http://creativecommons.org/licenses/by/2.5/
 	</description>
 	<icon>img_pack/sitemapxsl_32.png</icon>
 
