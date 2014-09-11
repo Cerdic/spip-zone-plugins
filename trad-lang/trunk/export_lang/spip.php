@@ -34,7 +34,7 @@ function export_lang_spip_dist($module,$langue,$dir_lang,$tout=false){
 	$tab = "\t";
 	$where = "module=".sql_quote($module)." AND lang=".sql_quote($langue);
 	if(!$tout)
-		$where .= " AND statut IN ('OK','MODIF')";
+		$where .= " AND statut IN ('OK','MODIF','RELIRE')";
 	$res=sql_allfetsel("id,str,comm,statut","spip_tradlangs",$where,"id");
 	$x=array();
 	$prev="";
