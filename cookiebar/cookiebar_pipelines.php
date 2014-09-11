@@ -34,20 +34,4 @@ function cookiebar_insert_head($flux){
   return $flux;
 }
 
-    /*
-    	$markitup = find_in_path('javascript/jquery.markitup_pour_spip.js');
-	$js_previsu = find_in_path('javascript/jquery.previsu_spip.js');
-	$js_start = parametre_url(generer_url_public('porte_plume_start.js'), 'lang', $lang);
-	if (defined('_VAR_MODE') AND _VAR_MODE=="recalcul")
-		$js_start = parametre_url($js_start, 'var_mode', 'recalcul');
-
-	$flux .= 
-		   "<script type='text/javascript' src='$markitup'></script>\n"
-		.  "<script type='text/javascript' src='$js_previsu'></script>\n"
-		.  "<script type='text/javascript' src='$js_start'></script>\n";
-     *
-	return $flux;
-      */
-
-
 ?>
