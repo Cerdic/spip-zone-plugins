@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Paramétrages des dépublications',
-	'configurer_duree_publication' => 'Durée de la publication (Lors de la validation de l\'article, cette option indique automatiquement la date de dépublication). Ne rien indiquer pour saisir manuellement la date de dépublication',
+	'configurer_duree_publication' => 'Durée de la publication (Lors de la validation de l’article, cette option indique automatiquement la date de dépublication). Ne rien indiquer pour saisir manuellement la date de dépublication',
 	'configurer_rubrique_depublie' => 'Activer la dépublication sur les rubriques et secteurs suivants (séparer les identifiants par des virgules).',
 	'configurer_statut_depublie' => 'Choisissez le statut à donner à la dépublication',
 
