@@ -37,7 +37,7 @@
 <figure class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'
 	style="[width:(#GET{width})px;]"[ data-w="(#GET{width})"]>
 [<a href="(#GET{url})"[
-	class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[
+	class="(#ENV{lien_class})"] [ title="(#TITRE|supprimer_numero|texte_backend)"][
 	(#ENV{lien}|?{'',type="#MIME_TYPE"})]>][(#GET{fichier}|image_responsive{0})][(#GET{url}|?{</a>})]
 <figcaption class='spip_doc_intitules'>
 	[<div class='spip_doc_titre #EDIT{titre}'><strong>(#TITRE)</strong></div>]
