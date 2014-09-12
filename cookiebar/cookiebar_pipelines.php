@@ -24,9 +24,9 @@ function cookiebar_insert_head_css($flux){
  * @return mixed
  */
 function cookiebar_insert_head($flux){
-  $js_cookiebar = parametre_url(generer_url_public('jquery.cookiebar.js'), 'lang', $lang);
+  //$js_cookiebar = parametre_url(generer_url_public('jquery.cookiebar.js'), 'lang', $lang);
+  $js_cookiebar = produire_fond_statique("jquery.cookiebar.js", array("lang"=>$lang));
 
-  //$flux .= '<script type='text/javascript' src="'.find_in_path('js/jquery.cookiebar.js').'"></script>';
   $flux .= 
            "<script type='text/javascript' src='$js_cookiebar'></script>\n"
          . "<script type='text/javascript' src='".find_in_path('js/jquery.cookiebar.call.js')."'></script>";
