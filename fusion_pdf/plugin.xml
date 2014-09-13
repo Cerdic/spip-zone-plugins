@@ -8,7 +8,7 @@
 	<description>
     Fabriquer un pdf de plusieurs pages &#224; partir d'un autre. Attention MODIF essentielle sur fpdf/fpdf.php : fusion marche uniquement sur file (case 'F') ligne 1049 remplacer break par return true;
    </description>
-	<lien>http://www.spip-contrib.net/</lien>
+	<lien>http://contrib.spip.net</lien>
 	<prefix>fusionpdf</prefix>
 	<fonctions>inc/fusionpdf_fonctions.php</fonctions>
 	<necessite id="lib:PDFMerger" src="http://pdfmerger.codeplex.com/" />

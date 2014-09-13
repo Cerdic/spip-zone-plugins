@@ -26,7 +26,7 @@
 		 </multi>
 	</description>
 	<options>fblogin_options.php</options>
-	<lien>http://www.spip-contrib.net/</lien><!-- URI de documentation : à compléter -->
+	<lien>http://contrib.spip.net</lien><!-- URI de documentation : à compléter -->
 	<prefix>fblogin</prefix>
   	<install>base/fblogin.php</install>
 	<pipeline>

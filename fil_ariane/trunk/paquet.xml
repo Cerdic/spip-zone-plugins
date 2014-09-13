@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="img/fil_ariane-128.png"
-	documentation="http://contrib.spip.net/Plugin-Fil-d-Ariane?var_mode=preview"
+	documentation="http://contrib.spip.net/Plugin-Fil-d-Ariane"
 >
 
 	<nom>Fil d'Ariane</nom>

@@ -10,7 +10,7 @@ Flickr CC vous permet de rechercher des images Flickr en Creative Commons et de 
 Ce produit utilise l'API Flickr mais n'est ni soutenu, ni certifi&#233; par Flickr.
 	</description>
 	<icon>imgs/flickrcc.png</icon>
-	<lien>http://www.spip-contrib.net/Flickr-CC</lien>
+	<lien>http://contrib.spip.net/Flickr-CC</lien>
 	<prefix>flickr_cc</prefix>
 	<licence>GPL v3</licence>
 	<options>flickr_cc_options.php</options>
@@ -23,4 +23,3 @@ Ce produit utilise l'API Flickr mais n'est ni soutenu, ni certifi&#233; par Flic
 	<categorie>multimedia</categorie>
 	<traduire gestionnaire="salvatore" module="flickrcc" reference="fr" />
 </plugin>
-

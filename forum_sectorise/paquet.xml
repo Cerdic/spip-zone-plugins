@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/forumsectorise-32.png"
 	schema="0.3"
-	documentation="http://www.spip-contrib.net/Forum-sectorise"
+	documentation="http://contrib.spip.net/Forum-sectorise"
 >	
 
 	<nom>Forum Sectoris&#233;</nom>

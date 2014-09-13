@@ -26,5 +26,5 @@
         <nom>autoriser</nom>
         <inclure>fusionmots_pipeline.php</inclure>
     </pipeline>
-    <lien>http://www.spip-contrib.net/Fusion-de-mots-clef</lien>
+    <lien>http://contrib.spip.net/Fusion-de-mots-clef</lien>
 </plugin>

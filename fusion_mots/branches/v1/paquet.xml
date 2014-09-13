@@ -4,7 +4,7 @@
 	version="1.0.0" 
 	etat="test" 
 	logo="images/fusion_mots_64.png" 
-	documentation="http://www.spip-contrib.net/Fusion-de-mots-clef" 
+	documentation="http://contrib.spip.net/Fusion-de-mots-clef" 
 	compatibilite="[3.0.0;3.0.*]"
 >
 

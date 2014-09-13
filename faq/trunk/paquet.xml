@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="faq_logo-128.png"
-	documentation="http://www.spip-contrib.net/?rubrique891"
+	documentation="http://contrib.spip.net/Definitions-et-FAQ"
 >
 
 	<nom>D&#233;finitions et FAQ</nom>

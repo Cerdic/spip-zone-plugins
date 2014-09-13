@@ -6,17 +6,17 @@
 		[en]JQuery Fluxslider for SPIP!
 		</multi>
 	</slogan>
-	<auteur>[Gr&#233;gory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
+	<auteur>[Gr&#233;gory Pascal->http://contrib.spip.net/ngombe]</auteur>
 	<version>0.0.1</version>
 	<licence>GNU/GPL</licence>
 	<etat>test</etat>
 	<description>
 		<multi>
-		[fr] Ajoute les balises {{&lt;fluxsliderXX&gt;}}, {{&lt;fluxslider_doc&gt;}} et {{&lt;fluxslider_rub&gt;}} pour cr&#233;er un diaporama <a href="http://www.joelambert.co.uk/flux/" title="FluxSlider">"Flux Slider" </a> param&#233;trable via <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
-		[en] Add {{&lt;fluxsliderXX&gt;}}, {{&lt;fluxslider_doc&gt;}} and {{&lt;fluxslider_rub&gt;}} tags to create a <a href="http://www.joelambert.co.uk/flux/" title="FluxSlider">"Flux Slider" </a> using <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+		[fr] Ajoute les balises {{&lt;fluxsliderXX&gt;}}, {{&lt;fluxslider_doc&gt;}} et {{&lt;fluxslider_rub&gt;}} pour cr&#233;er un diaporama <a href="http://www.joelambert.co.uk/flux/" title="FluxSlider">"Flux Slider" </a> param&#233;trable via <a href="http://contrib.spip.net/Config-cfg" title="CFG">CFG</a>.
+		[en] Add {{&lt;fluxsliderXX&gt;}}, {{&lt;fluxslider_doc&gt;}} and {{&lt;fluxslider_rub&gt;}} tags to create a <a href="http://www.joelambert.co.uk/flux/" title="FluxSlider">"Flux Slider" </a> using <a href="http://contrib.spip.net/Config-cfg" title="CFG">CFG</a>.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Flux-Slider-pour-SPIP</lien>
+	<lien>http://contrib.spip.net/FluxSlider</lien>
 	<icon>prive/themes/spip/images/fluxslider-32.png</icon>
 	<prefix>fluxslider</prefix>
 	<pipeline>

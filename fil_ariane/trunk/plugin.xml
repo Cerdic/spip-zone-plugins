@@ -8,7 +8,7 @@
 			[fr]Le plugin <i>Fil d'Ariane</i> facilite la création du petit menu de navigation communément appelé "Fil d'Ariane" et permettant de situer un objet éditorial dans un site SPIP. Il est destiné aux concepteur de squelettes et permet de générer un "fil d'Ariane" complet simplement avec la balise #FIL_ARIANE.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Fil-d-Ariane</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Plugin-Fil-d-Ariane</lien> <!-- URI de documentation -->
 	<icon>img/fil_ariane-128.png</icon>
 
 	<version>0.1.12</version>

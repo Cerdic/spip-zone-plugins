@@ -12,7 +12,7 @@
 		  and the [introduction article on spip-contrib->http://www.spip-contrib.net/Le-plugin-FpipR]
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-FpipR</lien>
+	<lien>http://contrib.spip.net/Le-plugin-FpipR</lien>
 	<prefix>FpipR</prefix>
 	<icon>FpipR.png</icon>
 	<pipeline>

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="feedburner-64.png"
-	documentation="http://www.spip-contrib.net/feedburner"
+	documentation="http://contrib.spip.net/Plugin-FeedBurner"
 >	
 
 	<nom>FeedBurner</nom>

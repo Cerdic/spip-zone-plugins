@@ -1,7 +1,7 @@
 <plugin>
 	<categorie>multimedia</categorie>
 	<version>0.6.1</version>
-	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<lien>http://contrib.spip.net/FancyBox,3020</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
 	<etat>stable</etat>
@@ -30,7 +30,7 @@
 <plugin spip='[2.1.0;2.1.99]' >
 	<categorie>multimedia</categorie>
 	<version>0.6.1</version>
-	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<lien>http://contrib.spip.net/FancyBox,3020</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
 	<etat>stable</etat>

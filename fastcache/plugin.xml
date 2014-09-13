@@ -16,7 +16,7 @@ Pour l'activer dans un squelette, ajouter la balise <code>#FASTCACHE</code>.
 cache rapide. En-dehors de ce cas, si  un squelette doit afficher quelque chose de sp&#233;cifique pour chaque visiteur, il n'est pas compatible avec <code>#FASTCACHE</code>.
 -* Fast Cache est compatible avec les stats de SPIP, mais son efficacit&#233; est beaucoup plus grande lorsque les statistiques des visites sont d&#233;sactiv&#233;es.
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-Fastcache</lien>
+	<lien>http://contrib.spip.net/Le-plugin-Fastcache</lien>
 	<prefix>Fastcache</prefix>
 	<icon>icon-fastcache.png</icon>
 	<options>fastcache_options.php</options>

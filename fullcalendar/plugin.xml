@@ -12,12 +12,12 @@
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Gestion de calendriers pour l'espace public bas&#233;e sur [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/], <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a> et le plugin [jQuery UI->http://www.spip-contrib.net/jQuery-UI-pour-SPIP].
-			[en]Calendar suite for SPIP, based on [Adam Shaw->http://arshaw.com/]'s [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/], <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a> and [jQuery UI->http://www.spip-contrib.net/jQuery-UI-pour-SPIP].
+			[fr]Gestion de calendriers pour l'espace public bas&#233;e sur [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/], <a href="http://contrib.spip.net/Config-cfg" title="CFG">CFG</a> et le plugin [jQuery UI->http://contrib.spip.net/jQuery-UI-pour-SPIP].
+			[en]Calendar suite for SPIP, based on [Adam Shaw->http://arshaw.com/]'s [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/], <a href="http://contrib.spip.net/Config-cfg" title="CFG">CFG</a> and [jQuery UI->http://contrib.spip.net/jQuery-UI-pour-SPIP].
 		</multi>
 	</description>
 	<icon>prive/themes/spip/images/fullcalendar-32.png</icon>
-	<lien>http://www.spip-contrib.net/Fullcalendar</lien>
+	<lien>http://contrib.spip.net/Fullcalendar</lien>
 	<prefix>fullcalendar</prefix>
 	<install>base/fullcalendar_init.php</install>
 	<noisette>modeles/fullcalendar.html</noisette>

@@ -17,7 +17,7 @@
 		</multi>
 	</description>
 	<prefix>FormulaireUpload</prefix>
-	<lien>http://www.spip-contrib.net/Formulaire-upload,952</lien>
+	<lien>http://contrib.spip.net/Formulaire-upload</lien>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/formulaire_upload.php</inclure>

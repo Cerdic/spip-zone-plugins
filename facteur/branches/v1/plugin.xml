@@ -18,7 +18,7 @@
 		</multi>
 	</description>
 	<categorie>communication</categorie>
-	<lien>http://www.spip-contrib.net/Facteur</lien>
+	<lien>http://contrib.spip.net/Facteur</lien>
 	<install>base/facteur.php</install>
 	<icon>prive/images/facteur-48.png</icon>
 	<prefix>facteur</prefix>

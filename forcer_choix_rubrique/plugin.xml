@@ -7,13 +7,13 @@
 	<prefix>forcer_choix_rubrique</prefix>
 	<etat>stable</etat>
 	<categorie>edition</categorie>
-	<lien>http://www.spip-contrib.net/Forcer-le-choix-d-une-rubrique</lien>
+	<lien>http://contrib.spip.net/Forcer-le-choix-d-une-rubrique</lien>
 	<description>
 	Ce plugin &#171;&#160;force&#160;&#187; les r&#233;dacteurs &#224; choisir une rubrique lorsqu&#8217;ils cr&#233;ent un nouvel article&#160;: une bo&#238;te appara&#238;t au-dessus de la fen&#234;tre de r&#233;daction leur rappelant l&#8217;importance de ce choix. Celle-ci ne se manifeste que si le r&#233;dacteur ne naviguait pas dans l&#8217;arborescence des rubriques avant de cliquer sur le bouton &#171;&#160;&#201;crire un nouvel article&#160;&#187;. En effet, dans ce cas le nouvel article est automatiquement class&#233; dans la rubrique en cours (comportement par d&#233;faut de SPIP).
 
 	Le message en HTML de la bo&#238;te peut &#234;tre personnalis&#233; en modifiant le fichier <code>message_boite.inc</code>.
 
-	Le fichier de configuration <code>forcer_choix_rubrique_options.php</code> permet, si on le d&#233;sire, de classer par d&#233;faut les nouveaux articles non rubriqu&#233;s dans une rubrique pr&#233;cise, ce qui prend tout son sens avec le plugin {[Acc&#232;s restreint par groupes->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]}&#160;: on peut ainsi cr&#233;er une rubrique &#171;&#160;fant&#244;me&#160;&#187; (nomm&#233;e par exemple {Choisissez une rubrique}) qui ne peut pas appara&#238;tre dans le site public mais peut recevoir les articles qui resteraient non rubriqu&#233;s malgr&#233; l&#8217;avertissement.
+	Le fichier de configuration <code>forcer_choix_rubrique_options.php</code> permet, si on le d&#233;sire, de classer par d&#233;faut les nouveaux articles non rubriqu&#233;s dans une rubrique pr&#233;cise, ce qui prend tout son sens avec le plugin {[Acc&#232;s restreint par groupes->http://contrib.spip.net/Le-plugin-acces-restreint-par]}&#160;: on peut ainsi cr&#233;er une rubrique &#171;&#160;fant&#244;me&#160;&#187; (nomm&#233;e par exemple {Choisissez une rubrique}) qui ne peut pas appara&#238;tre dans le site public mais peut recevoir les articles qui resteraient non rubriqu&#233;s malgr&#233; l&#8217;avertissement.
 	</description>
 	<icon>forcer_choix_rubrique.png</icon>
 	<pipeline>

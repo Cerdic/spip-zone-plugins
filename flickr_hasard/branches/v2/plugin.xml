@@ -10,7 +10,7 @@
     
       Ce plugin utilise l'API Flickr mais n’est ni soutenu, ni certifi&#233; par Flickr.
     </description>    
-    <lien>http://www.spip-contrib.net/Flickr-hasard</lien>
+    <lien>http://contrib.spip.net/Flickr-hasard</lien>
     <prefix>flickr_rand</prefix>
     <icon>img/logo_flickrnd_48.png</icon>  
     <options>flickr_rand_options.php</options> 

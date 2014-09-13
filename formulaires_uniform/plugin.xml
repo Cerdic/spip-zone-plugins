@@ -9,7 +9,7 @@
 		
 		Attention&#160;: l&#8217;affichage est d&#233;faillant sous MSIE 7 et sous Firefox 2; n'activer ce plugin que si vous &#234;tes seul(e) &#224; utiliser votre site avec un navigateur compatible.
 	</description>
-	<lien>http://www.spip-contrib.net/Formulaires-Uniform</lien>
+	<lien>http://contrib.spip.net/Formulaires-Uniform</lien>
 	<licence>MIT</licence>
  	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<prefix>form_uniform</prefix>
@@ -23,4 +23,3 @@
 	<categorie>outil</categorie>
 
 </plugin>
-

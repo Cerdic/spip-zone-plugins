@@ -6,7 +6,7 @@
  	<auteur>[Mathieu Imbert->mailto:mathieu_imbert@hotmail.fr], [Arnault Pachot OpenStudio->http://www.openstudio.fr], [Cyrille Kazis->http://www.screencom.com]</auteur>
  	<description>Plugin permettant d'ouvrir une fen&#234;tre flottante avec effet de transparence. Ce plugin impl&#233;mente la fonction floating windows de la biblioth&#234;que interface.js de JQuery</description>
  	<etat>stable</etat>
-	<lien>http://www.spip-contrib.net/Les-fenetres-flottantes</lien>
+	<lien>http://contrib.spip.net/Les-fenetres-flottantes</lien>
  	<fonctions></fonctions>
  	<pipeline>
   		<nom>insert_head</nom>

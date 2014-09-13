@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/facteur-32.png"
 	schema="1.1"
-	documentation="http://www.spip-contrib.net/Facteur"
+	documentation="http://contrib.spip.net/Facteur"
 >	
 	
 	<nom>Facteur</nom>

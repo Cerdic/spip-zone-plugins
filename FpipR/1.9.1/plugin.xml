@@ -10,7 +10,7 @@
 		[en] add photos and sets from your Flickr.com account to articles and sections. see the lisezmoi file. Version 0.2 introduces SPIP loops to access Flickr's API from your templates.
 	  </multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-FpipR</lien>
+	<lien>http://contrib.spip.net/Le-plugin-FpipR</lien>
 	<prefix>FpipR</prefix>
 	<pipeline>
 	  <nom>affiche_milieu</nom>

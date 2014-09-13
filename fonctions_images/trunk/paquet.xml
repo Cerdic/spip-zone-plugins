@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/fonctions_images_48.png"
-	documentation="http://contrib.spip.net/Plugin-fonctions-d-images"
+	documentation="http://contrib.spip.net/Plugin-fonctions-d-images-les-filtres-de-traitement"
 >	
 
 	<nom>Fonctions d'images</nom>

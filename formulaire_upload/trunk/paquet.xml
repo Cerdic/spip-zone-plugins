@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/formulaireupload-32.png"
-	documentation="http://www.spip-contrib.net/Formulaire-upload,952"
+	documentation="http://contrib.spip.net/Formulaire-upload"
 >
 	<nom>Formulaire Upload</nom>
 	<auteur lien="http://zzz.rezo.net">Fil</auteur>

@@ -7,7 +7,7 @@
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
 	<description>Enregistrement des donn&#233;es d'un formulaire formidable dans une table utilisateur, avec correspondance de chaque champ du formulaire vers un champ de la table utilisateur, et traitement optionnel des donn&#233;es.</description>
-	<lien>http://www.spip-contrib.net/FormiTable</lien>
+	<lien>http://contrib.spip.net/FormiTable</lien>
 	<prefix>formitable</prefix>
 	<necessite id="spip" version="[2.0.0;2.1.99]"/>
 	<necessite id="formidable" />

@@ -8,7 +8,7 @@
 	<description>
 	 Int&#233;gration de la phototheque Gallery2 (version 2.2 et 2.3) dans SPIP (version 2.0). La connexion &#224; Gallery s'effectue par le m&#234;me login/password que celui de SPIP. Les comptes utilisateurs dans Gallery sont automatiquement synchronis&#233; avec ceux de SPIP. L'affichage des photos ou des albums dans le site web s'effectue par le biais du squelette g2embed.html en mode "guest" qui est appel&#233; par le menu "Galerie". L'affichage d'une photo de Gallery dans un article est par ailleurs possible via le mod&#232;le GPHOTO.
 	</description>
-	<lien>http://www.spip-contrib.net/Gallery2-pour-SPIP</lien>
+	<lien>http://contrib.spip.net/Gallery2-pour-SPIP</lien>
 	<icon>img/g2logo.png</icon>
 	<fonctions>g2photos.php</fonctions>
 	<prefix>g2</prefix> 	
