@@ -118,7 +118,7 @@
 				autoplay:false, // Lire automatiquement au chargement
 				autoload:true, // Précharger automatiquement au chargement
 				minwidth:null, // Largeur minimale
-				movieSize:null,
+				movieSize:'adapt',
 				ratio:null,
 				volume:100, // Niveau de volume au chargement
 				volume_bloque:false, // bloque le niveau de volume
@@ -274,7 +274,7 @@
 
 					if(!wrapper) wrapper = media.parent();
 
-					if(id.type== 'video' && !height){
+					if(id.type == 'video' && !height){
 						height = media.parents('.media_wrapper').find('.controls').height();
 						media.parents('.media_wrapper').height(height);
 					}
