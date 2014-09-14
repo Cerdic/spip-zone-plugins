@@ -9,7 +9,7 @@
 >
 	<nom>Vignettes Oxygen (52)</nom>
 	<!-- Collection d'icônes pour les documents -->
-	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 	<credit lien="http://www.oxygen-icons.org/">Team Oxygen</credit>
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL</licence>
 	<utilise nom="medias" />

@@ -14,7 +14,7 @@ $GLOBALS['i18n_imageflow_fr'] = array(
 		compos&#233; de plusieurs scripts.<br /><br />
 		Les divers scripts ont une licence d&#39;utilisation sp&#233;cifique.<br /><br />
 		Avant d&#39;utiliser <strong>Portfolio ImageFlow</strong> sur votre site, consultez :<br />
-		- <a href='http://www.spip-contrib.net/ImageFlow-pour-SPIP'>Spip-contrib</a><br />
+		- <a href='http://contrib.spip.netImageFlow-pour-SPIP'>Spip-contrib</a><br />
 		- <a href='http://194.95.111.244/~countzero/scripts/_myImageFlow/'>ImageFlow 0.9</a><br />
 		- <a href='http://194.95.111.244/~countzero/myCMS/index.php?tag=ImageFlow'>DragonFly</a><br />
 		- <a href='http://reflection.corephp.co.uk/v3.php'>Reflections</a>

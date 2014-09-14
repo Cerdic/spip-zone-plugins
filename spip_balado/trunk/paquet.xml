@@ -11,5 +11,5 @@
 	<nom>SpipBalado</nom>
 	<!-- Générer un flux RSS spécifique à iTunes -->
 
-	<auteur lien="http://www.spip-contrib.net/jsb">Jean-S&eacute;bastien Barboteu</auteur>
+	<auteur lien="http://contrib.spip.net/jsb">Jean-S&eacute;bastien Barboteu</auteur>
 </paquet>

@@ -9,7 +9,7 @@
 
 	<nom>Portfolio ImageFlow</nom>
 	<slogan>Portfolio avec effet de reflet sur les vignettes</slogan>
-	<auteur>[Christian Paulus->http://www.quesaco.org/], [Finn Rudolph (script JS)->http://imageflow.finnrudolph.de/], [Richard Davey (script Reflect)->http://reflection.corephp.co.uk/v3.php], [St&#233;phane Kus (squelette)->http://www.spip-contrib.net/ImageFlow-pour-SPIP]</auteur>
+	<auteur>[Christian Paulus->http://www.quesaco.org/], [Finn Rudolph (script JS)->http://imageflow.finnrudolph.de/], [Richard Davey (script Reflect)->http://reflection.corephp.co.uk/v3.php], [St&#233;phane Kus (squelette)->http://contrib.spip.net/ImageFlow-pour-SPIP]</auteur>
 
 	<description>Ce plugin permet d'afficher un menu d&#233;roulant d'images et la s&#233;lection de l'une d'elles pour affichage. Les vignettes du menu d&#233;roulant sont accompagn&#233;es d'un effet de reflet. La navigation entre les images peut &#234;tre r&#233;alis&#233;e en d&#233;pla&#231;ant le curseur sur la ligne ou via la roulette de la souris.</description>
 	<lien>http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP</lien>

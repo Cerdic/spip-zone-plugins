@@ -7,7 +7,7 @@
 	<description>
 Ce plugin permet d'afficher un slideshow de l ensemble des images du site
 	</description>
-	<lien>http://www.spip-contrib.net/Rainette</lien>
+	<lien>http://contrib.spip.net/Rainette</lien>
 	<prefix>slideshow</prefix>
 	<icon>rainette-64.png</icon>
 	<pipeline>

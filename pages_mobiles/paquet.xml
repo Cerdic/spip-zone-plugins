@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.4;3.0.*]"
 	logo="prive/themes/spip/images/pages_mobiles-64.png"
-	documentation="http://www.spip-contrib.net/4235"
+	documentation="http://contrib.spip.net/4235"
 >
 
 	<nom>Pages pour mobiles</nom>

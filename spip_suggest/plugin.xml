@@ -8,7 +8,7 @@
 	<etat>stable</etat>
 	<icon>images/spip_suggest-64.png</icon>
 	<description>SPIP Suggest permet d'afficher des suggestions pour le formulaire de recherche "&#224; la Google Suggest". Le plugin n&#233;cessite le programme Myisam_fulltext disponible sous licence GPL.</description>
-	<lien>http://www.spip-contrib.net/?rubrique1303</lien>
+	<lien>http://contrib.spip.net/?rubrique1303</lien>
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>suggest_fonctions.php</inclure>

@@ -14,7 +14,7 @@ Google a mis en place un r&#233;pertoire de polices enrichies utilisables librem
 Ce plugin facilite compl&#232;tement l&#8217;utilisation de ces polices, et prenant en charge l&#8217;insertion des directives de chargement depuis le r&#233;pertoire des polices propos&#233;es par Google dans votre site.
 	</description>
 	<prefix>webfonts</prefix>
-	<lien>http://www.spip-contrib.net/Webfonts</lien>
+	<lien>http://contrib.spip.net/Webfonts</lien>
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
 	<pipeline>

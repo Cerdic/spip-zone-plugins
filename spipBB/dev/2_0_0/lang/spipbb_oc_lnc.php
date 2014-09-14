@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Cliquer sur Oui pour activer SpipBB', # NEW
 	'admin_config_tables' => 'Configuration des tables de SpipBB', # NEW
 	'admin_config_tables_erreur' => 'Probl&egrave;me avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
-Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]', # NEW
+Consultez la [documentation sur Spip-Contrib->http://contrib.spip.netSpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]', # NEW
 	'admin_config_tables_ok' => 'Les tables de SpipBB sont correctement install&eacute;es (@tables_ok@)', # NEW
 	'admin_date_ouverture' => 'Date d\'ouverture', # NEW
 	'admin_debug_log' => 'Fichier de log @log_name@', # NEW
@@ -77,12 +77,12 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'admin_interface' => 'Options de l\'interface', # NEW
 	'admin_nombre_lignes_messages' => 'Nombre de lignes de messages', # NEW
 	'admin_plugin_requis_erreur' => 'Le plugin requis suivant manque. Activez-le !', # NEW
-	'admin_plugin_requis_erreur_balisesession' => 'Installez le plugin Balise SESSION et activez le ! [Documentation ici->http://www.spip-contrib.net/?article1224], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/balise_session.zip].', # NEW
-	'admin_plugin_requis_erreur_cfg' => 'Installez le plugin CFG et activez le ! [Documentation ici->http://www.spip-contrib.net/?article1605], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/cfg.zip].', # NEW
+	'admin_plugin_requis_erreur_balisesession' => 'Installez le plugin Balise SESSION et activez le ! [Documentation ici->http://contrib.spip.net?article1224], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/balise_session.zip].', # NEW
+	'admin_plugin_requis_erreur_cfg' => 'Installez le plugin CFG et activez le ! [Documentation ici->http://contrib.spip.net?article1605], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/cfg.zip].', # NEW
 	'admin_plugin_requis_erreur_s' => 'Les plugins requis suivants manquent. Activez-les !', # NEW
 	'admin_plugin_requis_ok' => 'Plugin(s)  install&eacute;(s) et actif(s) :', # NEW
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifi&eacute;.', # NEW
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : fourni des fonctions et des balises.', # NEW
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net?article1224] : fourni les informations sur les visiteurs authentifi&eacute;.', # NEW
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net?article1605] : fourni des fonctions et des balises.', # NEW
 	'admin_sous_titre' => 'Acc&egrave;der au panneau d\'administration des forums avec SpipBB', # NEW
 	'admin_spip_config_forums' => 'Configuration de SPIP&nbsp;:', # NEW
 	'admin_spip_forums_ok' => 'Les forums publics sont bien activ&eacute;s.', # NEW
@@ -350,20 +350,20 @@ _ Un postit est situé en dessous des annonces, avant les messages ordinaires. I
 	'pagine_sujet_' => ' sujet', # NEW
 	'pagine_sujet_s' => ' sujets', # NEW
 	'par_' => 'par ', # NEW
-	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]', # NEW
+	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://contrib.spip.netPlugin-SpipBB#contributeurs]', # NEW
 	'plugin_description' => 'Le plugin SpipBB permet :
 -* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
 -* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
 
 {{Consultez :}}
 -* &bull;[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* &bull;[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* &bull;[La documentation sur Spip-contrib->http://contrib.spip.netSpipBB-le-forum].
 
 _ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risques et p&eacute;rils}}
 
 _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]', # NEW
 	'plugin_licence' => 'Distribu&eacute; sous licence GPL', # NEW
-	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]', # NEW
+	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://contrib.spip.netSpipBB-le-forum]', # NEW
 	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec votre version de SPIP !', # NEW
 	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP', #  Pour faciliter les traductions de plugin.xml NEW
 	'post_aucun_pt' => 'aucun&nbsp;!', # NEW
@@ -404,14 +404,14 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]', # 
 	'secteur_forum' => 'SECTORS FORUMS', # MODIF
 	'selection_efface' => 'Escafar la seleccion ...', # MODIF
 	'selection_tri_dpt' => 'S&eacute;lectionner la m&eacute;thode de tri&nbsp;:', # NEW
-	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
-_ &bull; [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
+	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
+_ &bull; [La documentation sur Spip-Contrib->http://contrib.spip.net?article2460]
 _ &bull; [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@', # NEW
 	'sign_maj' => '<br />Version plus r&eacute;cente disponible&nbsp;: @version@', # NEW
 	'sign_ok' => '&agrave; jour.', # NEW
 	'sign_reinit' => '<p>R&eacute;-initialisation&nbsp;:
 _ &bull; [de tout le plugin->@plugin@]</p>', # NEW
-	'sign_tempo' => 'R&eacute;alis&eacute; avec <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>', # NEW
+	'sign_tempo' => 'R&eacute;alis&eacute; avec <a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>', # NEW
 	'signature' => 'Signature', # NEW
 	'sinscrire' => 's\'enregistrar', # MODIF
 	'site_propose' => 'Site propos&eacute; par @auteur_post@', # NEW

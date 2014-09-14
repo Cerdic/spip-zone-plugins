@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Afficher les commentaires HTML</nom>
 	<slogan>Affiche les commentaires HTML dans l'espace priv&#233;</slogan>
-	<auteur>[Joseph->http://www.spip-contrib.net/Joseph]</auteur>
+	<auteur>[Joseph->http://contrib.spip.net/Joseph]</auteur>
 	<licence>GPL v3</licence>
 	<version>1.0.0</version>
 	<etat>test</etat>

@@ -7,7 +7,7 @@
 	<etat>dev</etat>
 	<description>Ajoute un bouton au porte-plume permettant le chargemente de boutons pour inserer les raccourci LaTeX.
 	</description>
-	<lien>http://www.spip-contrib.net/2978</lien>
+	<lien>http://contrib.spip.net/2978</lien>
 	<icon>images/euler128.png</icon>
 	<prefix>pp_latex</prefix>
 	<pipeline>

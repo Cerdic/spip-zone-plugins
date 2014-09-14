@@ -6,7 +6,7 @@
 	<etat>dev</etat>
 	<description>Ce plugin permet aux r&#233;dacteurs de s&#233;lectionner et t&#233;l&#233;charger plusieurs fichiers en une seule fois.</description>
 	<icon>images/uploadify-24.png</icon>
-	<lien>http://www.spip-contrib.net/article3045</lien>
+	<lien>http://contrib.spip.net/article3045</lien>
 	<prefix>uploadify</prefix>
 
 	<pipeline>

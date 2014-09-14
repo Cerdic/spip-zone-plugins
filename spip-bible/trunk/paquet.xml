@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="bible.jpg"
-	documentation="http://www.spip-contrib.net/Spip-Bible,1125"
+	documentation="http://contrib.spip.net/Spip-Bible,1125"
 	schema="0.3.0"
 >	
 

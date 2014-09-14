@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Vignettes Oxygen</nom>
 	<slogan>Collection d'ic&#244;nes pour les documents</slogan>
-	<auteur>[Team Oxygen->http://www.oxygen-icons.org/] pour les ic&#244;nes originales, [Joseph->http://www.spip-contrib.net/Joseph]</auteur>
+	<auteur>[Team Oxygen->http://www.oxygen-icons.org/] pour les ic&#244;nes originales, [Joseph->http://contrib.spip.net/Joseph]</auteur>
 	<icon>images/oxygen.png</icon>
 	<licence>LGPL</licence>
 	<version>0.2.0</version>

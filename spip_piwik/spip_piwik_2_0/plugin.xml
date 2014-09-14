@@ -13,7 +13,7 @@
 		</multi>
 	</description>
 	<icon>piwik.png</icon>
-	<lien>http://www.spip-contrib.net/?article2860</lien>
+	<lien>http://contrib.spip.net/?article2860</lien>
 	<prefix>piwik</prefix>
 	<install>piwik_administrations.php</install>
 	<pipeline>

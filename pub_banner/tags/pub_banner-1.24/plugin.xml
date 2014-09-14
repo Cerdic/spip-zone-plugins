@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Pub Banner</nom>
 	<slogan>Gestionnaire de banni&#232;res publicitaires</slogan>
-	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>Creative Commons BY-SA</licence>
 	<description>
 Gestion et statistiques de banni&#232;res publicitaires pour int&#233;gr&#233;es aux squelettes SPIP ...
@@ -28,7 +28,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 	<fonctions>pubban_fonctions.php</fonctions>
 	<install>base/pubban_upgrade.php</install>
  	<prefix>pubban</prefix>
-	<lien>http://www.spip-contrib.net/?article3637</lien>
+	<lien>http://contrib.spip.net/?article3637</lien>
 	<chemin dir='public' type='public' />
 	<chemin dir='prive' type='prive' />
 	<chemin dir='' />

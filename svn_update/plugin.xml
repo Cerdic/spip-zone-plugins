@@ -17,7 +17,7 @@ _ Par exemple :
 _ <code>svn://zone.spip.org/spip-zone/_squelettes_/sedna squelettes/sedna</code>
 _ <code>svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg</code>
 	</description>
-	<lien>http://www.spip-contrib.net/SVN-Update-Notes</lien>
+	<lien>http://contrib.spip.net/SVN-Update-Notes</lien>
 	<prefix>svn_update</prefix>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<options>svn_update_options.php</options>

@@ -8,7 +8,7 @@
 	<description>Ce plugin permet &#224; tout r&#233;dacteur, administrateur ou visiteur connect&#233; de mettre des articles en favoris afin de les retrouver plus facilement. Il n’utilise pas le syst&#234;me des cookies mais ajoute une toute petite table dans la base de donn&#233;es.</description>
 	<prefix>favotexte</prefix>
 	<icon>img_pack/Favoris32_2.jpg</icon>
-	<lien>http://www.spip-contrib.net/Plugin-Textes-Favoris</lien>
+	<lien>http://contrib.spip.net/Plugin-Textes-Favoris</lien>
 	<install>base/favotexte_init.php</install>
 	<bouton id='favoris' parent='naviguer'>
       <icone>img_pack/favo.gif</icone>

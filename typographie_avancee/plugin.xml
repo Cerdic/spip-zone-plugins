@@ -17,7 +17,7 @@
 {{Attention.}} N&#233;cessite {{PHP~5}} au minimum.
 	</description>
 	<prefix>typo_avancee</prefix>
-	<lien>http://www.spip-contrib.net/Typographie-avancee</lien>
+	<lien>http://contrib.spip.net/Typographie-avancee</lien>
 	<fonctions>typo_avancee.php</fonctions>
 	<pipeline>
 		<nom>pre_typo</nom>

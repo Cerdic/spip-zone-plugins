@@ -17,7 +17,7 @@
 	<version>0.1.0</version>
 	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
-	<auteur>Dom Lepaisant, [d'apr&#232;s une contrib de Paul Sanchez->http://www.spip-contrib.net/Recherche-multi-critere-par-mots]</auteur>
+	<auteur>Dom Lepaisant, [d'apr&#232;s une contrib de Paul Sanchez->http://contrib.spip.net/Recherche-multi-critere-par-mots]</auteur>
 	<icon>img_pack/rec_mc-48.png</icon>
 	<install>base/rec_mc_upgrade.php</install>
 	<pipeline>

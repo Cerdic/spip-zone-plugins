@@ -5,14 +5,14 @@
 	etat="stable"
 	compatibilite="[2.0.3;3.0.*]"
 	logo="prive/themes/spip/images/typoenluminee-32.png"
-	documentation="http://www.spip-contrib.net/Enluminures-typographiques-V3-pour-SPIP-2-avec"
+	documentation="http://contrib.spip.net/Enluminures-typographiques-V3-pour-SPIP-2-avec"
 >	
 
 	<nom>Enluminures typographiques</nom>
 	<!-- Plein de raccourcis pour la mise en forme ! -->
 
-	<auteur lien="http://www.spip-contrib.net/_Jacques-PYRAT_">Jacques</auteur>
-	<auteur lien="http://www.spip-contrib.net/_Francois-Schreuer_">François</auteur>
+	<auteur lien="http://contrib.spip.net/_Jacques-PYRAT_">Jacques</auteur>
+	<auteur lien="http://contrib.spip.net/_Francois-Schreuer_">François</auteur>
 
 	<copyright>2007</copyright>
 

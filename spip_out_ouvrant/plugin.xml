@@ -7,7 +7,7 @@
 	<description>
 		Pour transformer les liens <code>spip_out</code> en liens ouvrants sur une nouvelle fen&#234;tre (oui, c'est horrible). Ne modifie pas le code source g&#233;n&#233;r&#233;, qui reste {compliant}.
 	</description>
-	<lien>http://www.spip-contrib.net/Liens-spip_out-ouvrants</lien>
+	<lien>http://contrib.spip.net/Liens-spip_out-ouvrants</lien>
 	<licence>GPL 3</licence>
 	<prefix>spip_out_ouvrants</prefix>
 

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Enluminures typographiques</nom>
 	<slogan>Plein de raccourcis pour la mise en forme !</slogan>
-	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_], &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]</auteur>
+	<auteur>[Jacques->http://contrib.spip.net/_Jacques-PYRAT_], &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://contrib.spip.net/_Francois-Schreuer_]</auteur>
 	<licence>&#169; 2007 GNU/GPL</licence>
 	<lien>http://contrib.spip.net/Plugin-Enluminures-typographiques</lien>
 	<version>2.1.4</version>

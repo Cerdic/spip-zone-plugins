@@ -17,7 +17,7 @@
 
 	qui permettent de g&#233;n&#233;rer des QRcodes aux contenus vari&#233;s.
 	</description>
-    <lien>http://www.spip-contrib.net/Qrcode</lien>
+    <lien>http://contrib.spip.net/Qrcode</lien>
 	<prefix>qrcode</prefix>
 
 	<pipeline>

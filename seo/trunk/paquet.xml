@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="seo.png"
 	schema="1.1.1"
-	documentation="http://www.spip-contrib.net/?rubrique1248"
+	documentation="http://contrib.spip.net/?rubrique1248"
 >	
 
 	<nom>SEO</nom>

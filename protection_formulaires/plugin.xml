@@ -6,7 +6,7 @@
 	<licence>(c) 2009 - GPL</licence>
 	<version>0.2.0</version>
 	<etat>test</etat>
-	<lien>http://www.spip-contrib.net/Protection-des-formulaires</lien>
+	<lien>http://contrib.spip.net/Protection-des-formulaires</lien>
 	<description>
 		Exp&#233;rimental: quand on a modifi&#233; un formulaire dans l'espace priv&#233;, les clics sur les liens hypertextes sont intercept&#233;s par un message de confirmation, de fa&#231;on &#224; &#233;viter de perdre accidentellement les modifications.
 	</description>

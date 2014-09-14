@@ -13,7 +13,7 @@ Un effet de zoom sur les images de vos articles
 	Ajoute un effet [Zoombox->http://www.grafikart.fr/zoombox] sur les liens de votre choix.
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Zoombox-pour-Spip</lien>
+	<lien>http://contrib.spip.net/Plugin-Zoombox-pour-Spip</lien>
 	<prefix>Zoombox</prefix>
 	<pipeline>
 		<nom>insert_head_css</nom>

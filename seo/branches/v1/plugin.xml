@@ -10,7 +10,7 @@
 			[en]SEO is a plugin who add the possibility to insert in the head of your website: meta tags, canoical URL, Google webmaster tools Meta Code and Google Analytics javascript code. It is fully configurable in the SPIP configuration page and in each article or rubrique page for meta tags.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/?rubrique1248</lien>
+	<lien>http://contrib.spip.net/?rubrique1248</lien>
 	<licence>(c) 2009-2012 GPL v2</licence>
 	<etat>test</etat>
 	

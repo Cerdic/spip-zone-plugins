@@ -13,7 +13,7 @@ via des pages pr&#234;tes &#224; l'emploi, &#171; Evangile &#187; et &#171; Sain
 
 Essayez la page de d&#233;mo {demo/spiperipsum.html} pour des exemples d'utilisation.
 	</description>
-	<lien>http://www.spip-contrib.net/article3346</lien>
+	<lien>http://contrib.spip.net/article3346</lien>
 	<prefix>spiperipsum</prefix>
 	<icon>spiperipsum-64.png</icon>
 	<fonctions>spiperipsum_fonctions.php</fonctions>

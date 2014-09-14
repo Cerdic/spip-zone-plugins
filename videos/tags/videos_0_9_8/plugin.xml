@@ -36,7 +36,7 @@
 			of video in MP4, H.264, Ogg, WebM anf Mkv formats, even in mobile browsers.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/?article3636</lien>
+	<lien>http://contrib.spip.net/?article3636</lien>
 	<prefix>videos</prefix>
 	<!-- Base de données -->
 	<install>base/videos_sql.php</install>

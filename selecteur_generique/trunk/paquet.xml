@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/selecteur_generique-64.png"
-	documentation="http://www.spip-contrib.net/Selecteur-generique"
+	documentation="http://contrib.spip.net/Selecteur-generique"
 >	
 
 	<nom>S&#233;lecteur g&#233;n&#233;rique</nom>

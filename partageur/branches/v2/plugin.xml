@@ -6,9 +6,9 @@
 	<version>0.3.1</version>
 	<etat>test</etat>
 	<description>
-		Contrairement aux plugins [SPIP2SPIP->http://www.spip-contrib.net/SPIP2SPIP,353] et [Flux RSS en articles->http://www.spip-contrib.net/Flux-RSS-en-articles], le principe d'import de ce plugin n'est pas bas&#233; sur la syndication automatique mais sur une s&#233;lection manuelle. Une fois install&#233;, il permet de "piocher" dans les articles des bases documentaires que l'on a pr&#233;alablement inscrites.
+		Contrairement aux plugins [SPIP2SPIP->http://contrib.spip.net/SPIP2SPIP,353] et [Flux RSS en articles->http://contrib.spip.net/Flux-RSS-en-articles], le principe d'import de ce plugin n'est pas bas&#233; sur la syndication automatique mais sur une s&#233;lection manuelle. Une fois install&#233;, il permet de "piocher" dans les articles des bases documentaires que l'on a pr&#233;alablement inscrites.
 	</description>
-	<lien>http://www.spip-contrib.net/Partageur</lien>
+	<lien>http://contrib.spip.net/Partageur</lien>
 	<prefix>partageur</prefix>
 	<categorie>edition</categorie>
 	<icon>img/partageur.png</icon>

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/thumbsites-32.png"
-	documentation="http://www.spip-contrib.net/?article2584"
+	documentation="http://contrib.spip.net/?article2584"
 >	
 
 	<nom>Thumbsites</nom>

@@ -37,7 +37,7 @@ Categoriile disponibile sunt: Administrare, Amelior&#259;ri tipografice, Scurt&#
 
 Descoperi&#355;i &icirc;n aces plug-in tool-urile dumneavoastr&#259; favorite: {Ghilimele tipografice}, {Fonturi dr&#259;gu&#355;e}, etc., etc.
 
-Nu ezita&#355;i s&#259; consulta&#355;i articolele de documenta&#355;ie publicate la : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Nu ezita&#355;i s&#259; consulta&#355;i articolele de documenta&#355;ie publicate la : [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
 
 Compatibilitate : SPIP toate versiunile 1.91',
 

@@ -5,7 +5,7 @@
 	<licence>(c) 2011 GPL</licence>
 	<version>0.1.0</version>
 	<description>Faire un annuaire de sites suivant votre th&#232;me avec le concept Z.</description>
-	<lien>http://www.spip-contrib.net/?article3762</lien>
+	<lien>http://contrib.spip.net/?article3762</lien>
 	<etat>dev</etat>
 	<icon>img/annuaire-64.png</icon>
 	<prefix>zannuaire</prefix>

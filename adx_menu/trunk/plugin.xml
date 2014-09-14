@@ -1,7 +1,7 @@
 <plugin>
 	<nom>ADX menu</nom>
 	<auteur>[Aleksandar Vacic->http://aplus.rs/adxmenu/] pour le script original - 
-	Mis en plugin pour SPIP par [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	Mis en plugin pour SPIP par [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<version>1.23.2</version>
 	<licence>[Creative Commons BY 3.0 Attribution->http://creativecommons.org/licenses/by/3.0/]</licence>
 	<lien>http://contrib.spip.net/ADX-Menu-un-joli-menu-deroulant</lien>

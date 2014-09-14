@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Scenari</nom>
-	<auteur>[Gr&#233;gory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
+	<auteur>[Gr&#233;gory Pascal->http://contrib.spip.net/ngombe]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.0.1</version>
 	<etat>test</etat>
@@ -15,7 +15,7 @@
 	[en]Make it easy to add a [scenari->http://scenari-platform.org/] archive in articles.
 	</multi></description>
 	<icon>images/scenari-32.png</icon>
-	<lien>http://www.spip-contrib.net/Scenari-pour-SPIP</lien>
+	<lien>http://contrib.spip.net/Scenari-pour-SPIP</lien>
 	<necessite id="SPIP" version='[2.1.0;3.0.99]' />
 	<bouton id='scenari_2' parent='naviguer'>
 		<icone>images/scenari-24.png</icone>

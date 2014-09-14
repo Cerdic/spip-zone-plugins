@@ -10,7 +10,7 @@
 
 		Ce plugin propose plusieurs nouveaux objets pour pallier à l'impossibilit&eacute; sur SPIP de <i>relayer</i> simplement de l'information, c'est &agrave; dire publier sans contenu. Typiquement (mais ce n'est qu'un exemple) ceci est très utile pour une activit&eacute; de veille th&eacute;matique.
 	</description>
-	<lien>[Pour une pr&eacute;sentation d&eacute;taill&eacute;e du plugin->http://www.spip-contrib.net/article3066]</lien>
+	<lien>[Pour une pr&eacute;sentation d&eacute;taill&eacute;e du plugin->http://contrib.spip.net/article3066]</lien>
 	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
 
 	<etat>stable</etat>

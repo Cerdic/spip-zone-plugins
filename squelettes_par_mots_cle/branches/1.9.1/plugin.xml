@@ -44,7 +44,7 @@
 	Cos&#236;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Choix-des-squelettes-par-mot-clef</lien>
+	<lien>http://contrib.spip.net/Choix-des-squelettes-par-mot-clef</lien>
 	<prefix>SquelettesMots</prefix>
 	<pipeline>
 		<nom>ajouter_onglets</nom>

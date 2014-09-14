@@ -6,7 +6,7 @@
 	<version>0.1.0</version>
 	<etat>stable</etat>
 	<description>Porfolio simple est la d&#233;clinaison la plus simpliste d’un portfolio d’artiste : il suffit d’attacher les images &#224; une rubrique. Il n’y a donc que deux pages : celle du portfolio et une page contact.</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3389</lien>
+	<lien>http://contrib.spip.net/spip.php?article3389</lien>
 	<icon>portfolio_simple.png</icon>
 	<prefix>Porfolio_Simple</prefix>
 	<categorie>multimedia</categorie>

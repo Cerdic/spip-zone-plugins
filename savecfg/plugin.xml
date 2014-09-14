@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SaveCFG</nom>
 	<slogan>Import/export des configurations de CFG</slogan>
-	<auteur>Yohann Prigent (potter64), [Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]</auteur>
+	<auteur>Yohann Prigent (potter64), [Jacques->http://contrib.spip.net/_Jacques-PYRAT_]</auteur>
 	<licence>(c) 2009-2011 GNU/GPL</licence>
 	<version>2.6.1</version>
 	<version_base>0.2</version_base>
@@ -9,7 +9,7 @@
 	<description>SaveCFG vous permet de sauvegarder &#224; volont&#233; vos configurations &#233;dit&#233;es avec le plugin CFG. Il vous permet aussi de les exporter sur votre disque dur pour les importer sur un autre site.</description>
 	<prefix>savecfg</prefix>
 	<icon>images/savecfg-32.png</icon>
-	<lien>http://www.spip-contrib.net/SaveCFG</lien>
+	<lien>http://contrib.spip.net/SaveCFG</lien>
 	<install>base/savecfg.php</install>
 	<fonctions>savecfg_fonctions.php</fonctions>
 	<pipeline>

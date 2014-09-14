@@ -42,7 +42,7 @@
 			vengono automaticamente cancellati.
 		</multi>
 	</description>
-	<lien>contrib->http://www.spip-contrib.net/?article1442</lien>
+	<lien>contrib->http://contrib.spip.net/?article1442</lien>
 	<icon>img_pack/saveauto-24.png</icon>
 	<prefix>saveauto</prefix>
 	<pipeline>

@@ -19,7 +19,7 @@
    </description>
    <prefix>palette</prefix>
    <icon>images/palette-128.png</icon>
-   <lien>http://www.spip-contrib.net/Palette</lien>
+   <lien>http://contrib.spip.net/Palette</lien>
 	<options>palette_options.php</options>
    <pipeline>
        <nom>insert_head</nom>

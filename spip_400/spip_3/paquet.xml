@@ -5,13 +5,13 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="stop_32.png"
-	documentation="http://www.spip-contrib.net/?article3884"
+	documentation="http://contrib.spip.net/?article3884"
 >	
 
 	<nom>SPIP 400</nom>
 	<!-- Gestion des erreurs HTTP (401, 404) pour SPIP -->
 
-	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+	<auteur lien="http://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
 
 	<copyright>2011-2012</copyright>
 

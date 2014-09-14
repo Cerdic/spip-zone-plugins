@@ -6,7 +6,7 @@
 					        compatibilite="[3.0.0 ;3.0.*]"
 						        logo="prive/themes/spip/images/soapsympa-128.png"
 							        schema="0.1.5"
-								        documentation="http://www.spip-contrib.net/Spip-ML-SYMPA"
+								        documentation="http://contrib.spip.net/Spip-ML-SYMPA"
 									        >       
 										        <nom>soapsympa_nom</nom>
 											        

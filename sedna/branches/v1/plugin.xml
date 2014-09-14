@@ -15,7 +15,7 @@ Sedna est un agr&#233;gateur de flux RSS (et ATOM etc) bas&#233; sur les sites s
 
 Son objectif est d&#8217;&#234;tre et de rester simple dans son code, et rapide &#224; charger. Esth&#233;tique un peu, aussi.
 	</description>
-	<lien>http://www.spip-contrib.net/Sedna-agregateur</lien>
+	<lien>http://contrib.spip.net/Sedna-agregateur</lien>
 	<icon>images/sedna-logo.jpg</icon>
 	<prefix>sedna</prefix>
 	<necessite id='SPIP' version='[2.1.0;2.1.99]' />

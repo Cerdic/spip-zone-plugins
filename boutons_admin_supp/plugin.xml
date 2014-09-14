@@ -25,7 +25,7 @@
 
 	Ein Button (in Form eines plus oder minus) erm&#246;glicht, die Toolbar anzuzeigen oder zu verstecken, ein anderer (eine B&#252;roklammer) erlaubt, die Toolbar im Vordergrund zu lassen (dieser Button ist nicht aktiv f&#252;r Internet Explorer).
 
-	Die verwendete Technik ist nicht besonders originell (&#220;berladung der Datei <code>formulaire_admin.html</code>): sie ist zum Beispiel [auf dieser Seite->http://www.spip-contrib.net/Administrer-un-site-web-depuis-l] erkl&#228;rt. Die einzige Originalit&#228;t ist hier die Pr&#228;sentation in Form eines Plugins, das keine &#196;nderung von Dateien oder Skeletten notwendig macht und die Updates erleichtert. Die Titel der Buttons werden der jeweiligen Sprache der Oberfl&#228;che angepasst.
+	Die verwendete Technik ist nicht besonders originell (&#220;berladung der Datei <code>formulaire_admin.html</code>): sie ist zum Beispiel [auf dieser Seite->http://contrib.spip.net/Administrer-un-site-web-depuis-l] erkl&#228;rt. Die einzige Originalit&#228;t ist hier die Pr&#228;sentation in Form eines Plugins, das keine &#196;nderung von Dateien oder Skeletten notwendig macht und die Updates erleichtert. Die Titel der Buttons werden der jeweiligen Sprache der Oberfl&#228;che angepasst.
 
 	Zu bachten ist, dass die Rubriken, Artikel etc die durch die Buttons erzeugt worden sind, in der Rubrik platziert sind von der aus man im &#246;ffentlichen Bereich auf den Button geklickt hat.
 
@@ -34,7 +34,7 @@
     </description>
     <lien>http://contrib.spip.net/Boutons-d-administration-supplementaires</lien>
 	<licence>GNU/GPL</licence>
-    <auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
+    <auteur>[Vincent Ramos->http://contrib.spip.net/auteur7639.html]</auteur>
 	
     <pipeline>
         <nom>insert_head</nom>

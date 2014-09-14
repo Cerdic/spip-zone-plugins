@@ -14,11 +14,11 @@
 Distingue les personnes pysiques (contacts) des personnes morales (organisations) en conservant tous les attributs des auteurs SPIP.
 _ Permet d'attribuer des droits d'acc&#232;s &#224; des organisations avec un mot de passe unique et d'&#233;tendre &#224; la fois les champs unitaires (pr&#233;nom, date de naissance...) et les champs multipes (num&#233;ros de t&#233;l&#233;phone, adresses mail...).
 
-Plugin d&#233;velopp&#233; dans le cadre du gestionnaire de projets [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] et du plugin [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue].
+Plugin d&#233;velopp&#233; dans le cadre du gestionnaire de projets [SPIPMINE->http://contrib.spip.net/Plugin-Spipmine] et du plugin [Catalogue->http://contrib.spip.net/Plugin-Catalogue].
 
 [en] Enhances SPIP with the functionnalities of a contact management system. Makes a difference between companies (organisations) and persons (contacts) while keeping all the SPIP author's attributes. Allows to give access rights to accounts with unique password. Allows to extend unique fields (such as frist name, date of birth...) together with multiple fields (phone numbers, mail addresses...).
 
-This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] and [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue] projects.
+This plugin has been developped inside the [SPIPMINE->http://contrib.spip.net/Plugin-Spipmine] and [Catalogue->http://contrib.spip.net/Plugin-Catalogue] projects.
 		</multi>
 	</description>
 

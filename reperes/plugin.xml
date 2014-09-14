@@ -23,7 +23,7 @@ M&#234;mes fonctionnalit&#233;s que le plugin {WebDeveloper - Lignes de rep&#232
 -* les rep&#232;res ne disparaissent pas au rechargement de la page
 	</description>
 
-	<lien>http://www.spip-contrib.net/Plugin-Reperes</lien>
+	<lien>http://contrib.spip.net/Plugin-Reperes</lien>
 	
 	<!--pipeline>
 		<nom>insert_head_css</nom>

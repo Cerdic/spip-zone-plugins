@@ -44,7 +44,7 @@
 	Cos&#236;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/SPMC-Squelette-par-mot-cle-V2-0</lien>
+	<lien>http://contrib.spip.net/SPMC-Squelette-par-mot-cle-V2-0</lien>
 	<prefix>SquelettesMots</prefix>
 	<pipeline>
 		<nom>header_prive</nom>

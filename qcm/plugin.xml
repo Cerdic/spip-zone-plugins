@@ -22,7 +22,7 @@ D&#233;mo : [->http://www.ensemble-claudio-monteverdi.fr/article17]
 - soit &#224; placer une introduction dans votre article entre les balises &lt;intro&gt; et &lt;/intro&gt;
 - soit &#224; remplir le descriptif de l'article.
   </description>
-  <lien>[Mode d'emploi->http://www.spip-contrib.net/Un-QCM-dans-vos-articles]</lien> <!-- URI de documentation -->
+  <lien>[Mode d'emploi->http://contrib.spip.net/Un-QCM-dans-vos-articles]</lien> <!-- URI de documentation -->
   <fonctions>qcm_fonctions.php</fonctions>
   <options></options>
   <prefix>qcm</prefix>

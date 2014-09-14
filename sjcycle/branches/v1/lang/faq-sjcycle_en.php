@@ -1,5 +1,5 @@
 <?php
-// Pour le plugin Manuel de redaction du site http://www.spip-contrib.net/Manuel-de-redaction-du-site
+// Pour le plugin Manuel de redaction du site http://contrib.spip.netManuel-de-redaction-du-site
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(

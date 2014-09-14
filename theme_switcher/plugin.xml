@@ -16,7 +16,7 @@
 	Ajoute une liste d&#233;roulante permettant de basculer entre les th&#232;mes du r&#233;pertoire themes.
 	</multi>
 	</description>
-	<lien>[->http://www.spip-contrib.net/Switcher-de-themes-pour-l-espace]</lien> <!-- URI de documentation -->
+	<lien>[->http://contrib.spip.net/Switcher-de-themes-pour-l-espace]</lien> <!-- URI de documentation -->
 	<prefix> 
 	tswitcher
 	</prefix>	

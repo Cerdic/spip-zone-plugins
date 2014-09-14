@@ -4,7 +4,7 @@
   <auteur>[Shazaam->http://www.mutins.net], C&#233;dric Morin</auteur>
   <licence>(c) 2009 GPL</licence>
   <version>1.0.0</version>
-	<lien>http://www.spip-contrib.net/Pagination_simple</lien>
+	<lien>http://contrib.spip.net/Pagination_simple</lien>
   <etat>stable</etat>
   <description>Ce plugin propose un mod&#232;le de pagination ultra simple pour vos &#233;l&#233;ments SPIP</description>
   <prefix>paginationsimple</prefix>

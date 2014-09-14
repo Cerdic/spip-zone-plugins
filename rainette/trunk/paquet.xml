@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.11;3.0.*]"
 	logo="rainette-64.png"
-	documentation="http://www.spip-contrib.net/article3133"
+	documentation="http://contrib.spip.net/article3133"
 	developpement="http://zone.spip.org/trac/spip-zone/query?component=plugins%2Frainette&amp;group=type&amp;col=id&amp;col=summary&amp;col=owner&amp;col=type&amp;col=status&amp;col=priority&amp;col=severity&amp;report=2&amp;order=priority"
 >
 

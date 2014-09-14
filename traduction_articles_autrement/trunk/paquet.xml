@@ -5,7 +5,7 @@
 	   etat="stable"
 	   compatibilite="[3.0.0;3.0.*]"
 	   logo="img_pack/Translation-icon_32.png"
-	   documentation="http://www.spip-contrib.net/Traductions-d-articles-autrement-3"
+	   documentation="http://contrib.spip.net/Traductions-d-articles-autrement-3"
 	   >	
 
 	<nom>Traduction d'articles autrement</nom>

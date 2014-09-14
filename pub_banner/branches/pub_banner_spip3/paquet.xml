@@ -6,13 +6,13 @@
 	compatibilite="[2.0.0;3.0.*]"
 	logo="img/ico-pubban.png"
 	schema="0.8"
-	documentation="http://www.spip-contrib.net/?article3637"
+	documentation="http://contrib.spip.net/?article3637"
 >	
 
 	<nom>Pub Banner</nom>
 	<!-- Gestionnaire de bannières publicitaires -->
 
-	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+	<auteur lien="http://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
 
 	<licence>Creative Commons BY-SA</licence>
 

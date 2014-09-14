@@ -6,7 +6,7 @@
 	<version>0.3.0</version>
 	<etat>test</etat>
 	<description>Ajoute un bouton au porte-plume permettant d'indiquer un changement de langue dans le texte.</description>
-	<lien>http://www.spip-contrib.net/?article3705</lien>
+	<lien>http://contrib.spip.net/?article3705</lien>
 	<icon>images/chgt_lg-128.png</icon>
 	<prefix>pp_chgt_lg</prefix>
 	<pipeline>

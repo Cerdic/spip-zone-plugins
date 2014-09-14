@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/skeleditor-32.png"
-	documentation="http://www.spip-contrib.net/SkelEditor-2-0"
+	documentation="http://contrib.spip.net/SkelEditor-2-0"
 >
 
 	<nom>SkelEditor</nom>

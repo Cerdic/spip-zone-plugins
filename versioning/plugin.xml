@@ -8,7 +8,7 @@
 	<description>
 Ce plugin permet de cr&#233;er une nouvelle version d'un article sans modifier celle qui est en ligne, puis quand l'administrateur l'estime opportun, de d&#233;ployer la nouvelle version de l'article &#224; la place de la premi&#232;re version, faisant passer cette derni&#232;re au statut &#171; archiv&#233; &#187;.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-versionning</lien>
+	<lien>http://contrib.spip.net/Plugin-versionning</lien>
 	<options>versioning_options.php</options>
 	<pipeline>
 		<nom>insert_head</nom>

@@ -12,7 +12,7 @@
 		</multi>
 	</description>
 	
-	<lien>http://www.spip-contrib.net/Publication_continue</lien>
+	<lien>http://contrib.spip.net/Publication_continue</lien>
 	<icon>images/publication-128.png</icon>
 	
 	<prefix>publication_continue</prefix>

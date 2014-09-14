@@ -6,7 +6,7 @@
 		</multi>
 	</nom>
 	<slogan>Convertir l'article affich&#233; au format pdf</slogan>
-	<auteur>[chag->http://www.spip-contrib.net/_chag_], [Paul Sanches->http://www.spip-contrib.net/_Paul-Sanches_], [Aquinatus->http://www.spip-contrib.net/_Aquinatus_], [C&#233;dric Morin->http://www.notre-ville.net]</auteur>
+	<auteur>[chag->http://contrib.spip.net/_chag_], [Paul Sanches->http://contrib.spip.net/_Paul-Sanches_], [Aquinatus->http://contrib.spip.net/_Aquinatus_], [C&#233;dric Morin->http://www.notre-ville.net]</auteur>
 	<version>0.4.5</version>
 	<etat>stable</etat>
 	<description>

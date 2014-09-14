@@ -9,7 +9,7 @@
 La version {Kiss} ({Keep it simple, stupid!}) est moins param&#233;trable que la version {Tickets} disponible par ailleurs. En revanche, elle est imm&#233;diatement fonctionnelle, sans n&#233;cessiter l'installation d'autres plugins ni passage par une page de configuration.
 	</description>
 	<icon>imgs/logo-bugs.png</icon>
-	<lien>http://www.spip-contrib.net/Tickets-Kiss</lien>
+	<lien>http://contrib.spip.net/Tickets-Kiss</lien>
 	<version>1.10.3</version>
 	<version_base>0.6</version_base>
 	<etat>stable</etat>

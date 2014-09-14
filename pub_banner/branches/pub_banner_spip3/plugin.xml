@@ -10,7 +10,7 @@
 	-->
 	<nom>Pub Banner</nom>
 	<slogan>Gestionnaire de banni&#232;res publicitaires</slogan>
-	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>Creative Commons BY-SA</licence>
 	<slogan>Gestionnaire de banni&#232;res publicitaires</slogan>
 	<description>
@@ -34,7 +34,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 	<!--
 	Infos SPIP-Contrib
 	-->
-	<lien>http://www.spip-contrib.net/?article3637</lien>
+	<lien>http://contrib.spip.net/?article3637</lien>
 	<!--
 	Infos SPIP-Zone
 	-->
@@ -88,7 +88,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 		<url>statistiques_bannieres</url>
 	</bouton>
 	<!--
-	Boutons compatibles avec le plugin [Bandeau->http://www.spip-contrib.net/?article3556]
+	Boutons compatibles avec le plugin [Bandeau->http://contrib.spip.net/?article3556]
 	et SPIP 3 (yeah !)
 	-->
 	<bouton id='pubban_bando' parent='bando_edition'>

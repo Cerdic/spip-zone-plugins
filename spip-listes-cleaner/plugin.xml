@@ -8,7 +8,7 @@
 	<icon>spip-listes-cleaner.png</icon>
 	<description><multi>[fr]R&#233;cupere et supprime les erreurs d'envoi de mails &#224; partir d'un compte pop ou imap (n&#233;cessite php-imap) et nettoie la base de donn&#233;e de la liste spip pour les mails qui ne sont plus valides.[en]Get failure delivery emails from a pop or imap account (need php-imap) and clean the spip-liste database of all emails that are not valid and delete failure delivery emails in the mail account.</multi></description>
 	<prefix>spiplistescleaner</prefix>
-	<lien>http://www.spip-contrib.net/SPIP-Listes-Cleaner</lien>
+	<lien>http://contrib.spip.net/SPIP-Listes-Cleaner</lien>
 	
 	<install>base/spiplistescleaner_update.php</install>
 	

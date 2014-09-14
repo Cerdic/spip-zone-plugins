@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Remove this link',
 
 	// C
-	'cfg_descr_gis' => 'Geographic Information System.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Link to the documentation.</a>',
+	'cfg_descr_gis' => 'Geographic Information System.<br /><a href="http://contrib.spip.net3887" class="spip_out">Link to the documentation.</a>',
 	'cfg_inf_adresse' => 'Displays additional address fields (country, city, state, address ...)',
 	'cfg_inf_cloudmade' => 'This API needs a key you can create on <a href=\'@url@\'>the CloudMade website</a>.',
 	'cfg_inf_geocoder' => 'Enable geocoder functions in forms (search from an address, recovery of the address from the coordinates).',

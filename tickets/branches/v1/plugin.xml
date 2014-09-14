@@ -23,7 +23,7 @@
 		</multi>
 	</description>
 	<icon>imgs/logo-bugs.png</icon>
-	<lien>http://www.spip-contrib.net/Tickets-suivi-de-bugs</lien>
+	<lien>http://contrib.spip.net/Tickets-suivi-de-bugs</lien>
 
 	<version>1.8.7</version>
 	<version_base>0.7</version_base>

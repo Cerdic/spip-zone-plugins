@@ -12,7 +12,7 @@
 	<!-- Acc&#232;s direct aux articles -->
 
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
-	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 
 	<pipeline nom="styliser" inclure="courtcircuit_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="courtcircuit_ieconfig_metas.php" />

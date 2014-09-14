@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_config_creer_preview' => 'Caution: the generation of miniatures of the images is currently inactive, please activate it in the <a href=".?exec=config_fonctions">advanced functions</a> of the site configuration !',
 	'erreur_config_image_process' => 'Caution: Method of thumbnails creation was not selected, please select of them one din the <a href=".?exec=config_fonctions">advanced functions</a> of the site configuration !',
 	'explication_afficher_aide'=>'Display the help box in the left column on the edition pages of articles',
-	'explication_fancy'=>'On clic, display the original image in a jQuery fancybox. Need the <a href="http://www.spip-contrib.net/FancyBox,3020" target="_blank">FancyBox plugin</a>',
+	'explication_fancy'=>'On clic, display the original image in a jQuery fancybox. Need the <a href="http://contrib.spip.netFancyBox,3020" target="_blank">FancyBox plugin</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Type the background color in hexa format or with the palette if the Palette Plugin is available. To force transparent background, type "transparent" (in which case, the final images will be with in png format)',
 	'explication_imgparams'=>'Images are automatically resized and cropped in order to preserve the page layout during the insertion of the slideshow within the text. This treatment is carried out on the images according to:
 -* their position in the slideshow, combination of the values of alignment "left/center/right" and "top/center/bottom" (ex "left center")
 -* their desired final size (width height)',
-	'explication_mediabox'=>'On clic, display the original image in a jQuery mediabox. Need the <a href="http://www.spip-contrib.net/MediaBox" target="_blank">Mediabox plugin</a>',
+	'explication_mediabox'=>'On clic, display the original image in a jQuery mediabox. Need the <a href="http://contrib.spip.netMediaBox" target="_blank">Mediabox plugin</a>',
 	'explication_pause'=>'Enable pause of the slideshow on hover',
 	'explication_random'=>'true for random, false for sequence (not applicable to shuffle fx) ',	
 	'explication_speed'=>'speed of the transition in milliseconds',

@@ -5,7 +5,7 @@
 	<version>1.3.0</version>
 	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net]</auteur>
 	<licence>GPL</licence>
-	<lien>http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la</lien>
+	<lien>http://contrib.spip.net/Plugin-scrutin-de-liste-a-la</lien>
 	<description>
 	Vous pouvez ins&#233;rer dans un article un formulaire de la mani&#232;re suivante.
 	<code><formulaire|scrut_prop|liste=A;B;C;...></code>, ou A;B;C,... sont des noms de liste.

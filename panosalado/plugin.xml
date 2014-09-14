@@ -7,7 +7,7 @@
 	<description>Ce plugin fournit un mod&#232;le qui permet l’affichage d’images panoramiques sph&#233;riques (360&#176; x 180&#176;) et cylindriques (360&#176;). Il utilise la technologie Flash [PanoSalado->http://os.ivrpa.org/panosalado/]</description>
 	<licence>GNU/GPL</licence>
 	<icon>img_pack/panosalado_logo.png</icon>
-	<lien>http://www.spip-contrib.net/Panosalado</lien>
+	<lien>http://contrib.spip.net/Panosalado</lien>
 	<prefix>panosaladomodele</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

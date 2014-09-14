@@ -19,7 +19,7 @@
 			[fr] Initialise la liste des auteurs du site en fonction d'un critere de recherche sur l'annuaire Ldap.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Peuplement-LDAP</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Peuplement-LDAP</lien> <!-- URI de documentation -->
 	<options>peuplement_ldap_options.php</options>
 	<fonctions>peuplement_ldap.php</fonctions>
 	<prefix>PeuplementLdap</prefix>

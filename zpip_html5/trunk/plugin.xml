@@ -12,7 +12,7 @@
 			[en]HTML5 default skeleton for SPIP 3 + Z-core : modular and flexible
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Zpip-dist-en-HTML5</lien>
+	<lien>http://contrib.spip.net/Zpip-dist-en-HTML5</lien>
 	<prefix>Z5</prefix>
 	<options>z5_options.php</options>
 	<categorie>squelette</categorie>

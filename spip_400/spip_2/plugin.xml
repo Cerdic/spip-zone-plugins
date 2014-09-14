@@ -2,7 +2,7 @@
 	<nom>SPIP 400</nom>
 	<version>0.21.0</version>
 	<etat>stable</etat>
-	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>&#169; 2011 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
  	<prefix>spip_400</prefix>
 	<chemin dir='public' type='public' />
@@ -19,7 +19,7 @@ Il propose notamment :
 - l'envoi d'un mail au webmestre avec une info compl&#232;te sur l'erreur en question ({utilisateur SPIP, URL, REFERER, backtrace PHP, etc}), 
 - l'&#233;criture de messages de LOG dans un fichier sp&#233;cifique ...
 
-Une page de configuration est propos&#233;e en option si vous utilisez le plugin [CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575].
+Une page de configuration est propos&#233;e en option si vous utilisez le plugin [CFG : moteur de configuration->http://contrib.spip.net/?rubrique575].
 	</description>
  	<icon>stop_32.png</icon>
 	<options>spip_400_options.php</options>

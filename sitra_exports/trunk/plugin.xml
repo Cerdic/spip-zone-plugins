@@ -6,7 +6,7 @@
 	<description>
 R&#233;cup&#233;ration et mise en base des exports SITRA, gestion des exports multilingues en un seul fichier compress&#233;s ou non. Importation des images principales, r&#233;cup&#233;ration des images distantes (principales, secondaires ou logos). R&#233;cup&#233;ration des s&#233;lections SITRA, des cat&#233;gories et sous-cat&#233;gories des objets, des crit&#232;res internes affect&#233;s.
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3917</lien>
+	<lien>http://contrib.spip.net/spip.php?article3917</lien>
 	<slogan>Importer des donn&#233;es touristiques SITRA dans SPIP</slogan>
 	<icon>images/sitra-64.png</icon>
 	<licence>GPL 3 - &#169; 2011</licence>

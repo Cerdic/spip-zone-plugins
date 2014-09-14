@@ -5,13 +5,13 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/idisk-dir-36.png"
-	documentation="http://www.spip-contrib.net/?article3516"
+	documentation="http://contrib.spip.net/?article3516"
 >	
 
 	<nom>SPIP Mentions L&#233;gales</nom>
 	<!-- Mentions Légales, Conditions d'Utilisation et Copyright automatiques -->
 
-	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+	<auteur lien="http://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
 
 	<copyright>2009-2012</copyright>
 

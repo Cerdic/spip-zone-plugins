@@ -18,7 +18,7 @@ Pour cr&#233;er ou restaurer une copie compl&#232;te de votre spip:
 
 Remarque: La restauration fonctionne par d&#233;faut sur le fichier d'archives le plus r&#233;cent et s'appuie sur le script spip_loader.php qui doit &#234;tre pr&#233;sent &#224; la racine du site.
 	</description>
-	<lien>http://www.spip-contrib.net/Mes-fichiers</lien>
+	<lien>http://contrib.spip.net/Mes-fichiers</lien>
 	<auteur>James</auteur>
 	<licence>(c) 2007 GNU/GPL</licence>
 	<necessite id="SPIP" version="[1.9.0;1.9.2]" />

@@ -8,7 +8,7 @@
 	<etat>dev</etat>
 	<icon>img_pack/picto_spip_mine_64x64.png</icon>
 	<description>Ce plugin est compos&#233; de diff&#233;rents modules permettant de g&#233;rer au quotidien une activit&#233; de cr&#233;ation de sites.</description>
-	<lien>http://www.spip-contrib.net/Plugin-Spipmine</lien>
+	<lien>http://contrib.spip.net/Plugin-Spipmine</lien>
 	<fonctions>spipmine_fonctions.php</fonctions>
 	<options>spipmine_options.php</options>
 	<install>base/spipmine_install.php</install>

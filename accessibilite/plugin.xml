@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Accessibilit&#233;</nom>
 	<slogan>Am&#233;liorations de l'accessibilit&#233; pour les r&#233;dacteurs</slogan>
-	<auteur>Goetsu et [RealET->http://www.spip-contrib.net/_RealET_]</auteur>
+	<auteur>Goetsu et [RealET->http://contrib.spip.net/_RealET_]</auteur>
 	<licence>GNU/LGPL (c) 2011</licence>
 	<version>0.8.7</version>
 	<etat>stable</etat>

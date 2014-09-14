@@ -13,7 +13,7 @@
 	<!-- Attribuer un article d'accueil aux rubriques -->
 
 	<auteur lien="http://www.yterium.com">Cedric Morin</auteur>
-	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

@@ -1,6 +1,6 @@
 <plugin>
 	<nom>URLs Propres avec Arborescence</nom>
-	<auteur>[J&eacute;r&ocirc;me Breton->jerome.breton@gmail.com] ([GroupeReflect->http://www.groupereflect.net]), [David Lafon->david.lafon@gmail.com] ([GroupeReflect->http://www.groupereflect.net]) bas&#233; sur le travail de [Boris Lechner->http://www.spip-contrib.net/URL-propres-en-arborescence]</auteur>
+	<auteur>[J&eacute;r&ocirc;me Breton->jerome.breton@gmail.com] ([GroupeReflect->http://www.groupereflect.net]), [David Lafon->david.lafon@gmail.com] ([GroupeReflect->http://www.groupereflect.net]) bas&#233; sur le travail de [Boris Lechner->http://contrib.spip.net/URL-propres-en-arborescence]</auteur>
 	<version>1.0.1</version>
 	<etat>stable</etat>
 	<icon>url-propres-arbo/icon.png</icon>

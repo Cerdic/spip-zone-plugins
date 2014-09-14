@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/sedna-logo.jpg"
 	schema="0.1.0"
-	documentation="http://www.spip-contrib.net/Sedna-agregateur"
+	documentation="http://contrib.spip.net/Sedna-agregateur"
 	demonstration="http://sedna.spip.net"
 >	
 

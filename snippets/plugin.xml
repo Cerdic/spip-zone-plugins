@@ -10,7 +10,7 @@
 -*  depuis une page rubrique, importer un article en cr&#233;e un nouveau
 -*  depuis une page article, importer un article ajoute le contenu de l'import champ &#224; champ &#224; l'article existant.
 	</description>
-	<lien>http://www.spip-contrib.net/Import-export-avec-Snippets</lien>
+	<lien>http://contrib.spip.net/Import-export-avec-Snippets</lien>
 	<prefix>snippets</prefix>
 	<pipeline>
 		<nom>affiche_droite</nom>

@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/rechremp-32.png"
-	documentation="http://www.spip-contrib.net/3941"
+	documentation="http://contrib.spip.net/3941"
 >
 
 	<nom>Rechercher/Remplacer</nom>

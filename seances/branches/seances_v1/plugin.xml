@@ -5,7 +5,7 @@
 	<etat>stable</etat>
 	<icon>images/seances-48.png</icon>
 	<licence>GPL 3 - (c) 2010</licence>
-	<lien>http://www.spip-contrib.net/spip.php?article3599</lien>
+	<lien>http://contrib.spip.net/spip.php?article3599</lien>
 	<description>Gestion de dates de s&#233;ances et de leur r&#233;p&#233;tition. Un spectacle, une projection = un article auquel sont associ&#233;s des s&#233;ances. Une s&#233;ance est d&#233;finie par une date et un endroit. Les endroits sont d&#233;finis ind&#233;pendamment et peuvent &ecirc;tre associ&#233;s &#224; un article.</description>
 	<prefix>seances</prefix>
 	<fonctions>seances_fonctions.php</fonctions>

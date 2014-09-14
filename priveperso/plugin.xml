@@ -12,7 +12,7 @@
 	(activer les br&#232;ves, la syndication, les mots-cl&#233;s, etc.)et de les adapter en fonction des rubriques. 
 	De m&#234;me il est possible de personnaliser les champs de saisie de l’espace priv&#233; pour les objets &#233;ditoriaux.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-personnaliser-l-espace-prive-par-rubriques</lien>
+	<lien>http://contrib.spip.net/Plugin-personnaliser-l-espace-prive-par-rubriques</lien>
 	<install>base/install_priveperso.php</install>
 	<prefix>priveperso</prefix>
 	<categorie>maintenance</categorie>

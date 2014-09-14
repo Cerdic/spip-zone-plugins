@@ -10,7 +10,7 @@
     <icon></icon>
     <description> Gestionnaire de Torrent</description>
     <!-- URL de documentation -->
-    <lien>http://www.spip-contrib.net/spiptorrent</lien>
+    <lien>http://contrib.spip.net/spiptorrent</lien>
 
     <!-- précise le prefixe utilisé pour toutes les fonctions du plugin, en général le nom du plugin -->
     <prefix>torrent</prefix>

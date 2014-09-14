@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_bouton_valider' => 'Validar les dades',
 
 	// C
-	'cfg_descriptif' => 'Aquesta pàgina us permet configurar el plugin Thumbsites, i, en particular, escollir el servidor de vinyetes. Per saber-ne més, consulteu la <a href="http://www.spip-contrib.net/?article2584">documentació a contrib</a>',
+	'cfg_descriptif' => 'Aquesta pàgina us permet configurar el plugin Thumbsites, i, en particular, escollir el servidor de vinyetes. Per saber-ne més, consulteu la <a href="http://contrib.spip.net?article2584">documentació a contrib</a>',
 	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'Les vinyetes generades seran com a molt de 160 x 120 píxels (aquest valor es pot modificar al lloc de Girafa)',

@@ -8,7 +8,7 @@
 	<description>
 Menu de côté responsive basé sur le plugin jQuery [Sidr->http://www.berriart.com/sidr/].
 	</description>
-	<lien>http://www.spip-contrib.net/sidr</lien>
+	<lien>http://contrib.spip.net/sidr</lien>
 	<prefix>sidr</prefix>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<utilise id="cfg" version="[1.9.4;]" />

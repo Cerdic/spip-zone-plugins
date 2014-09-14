@@ -5,7 +5,7 @@
 	etat="stable"
 	logo="images/spipclear-128.png"
 	compatibilite="[2.0.6;3.0.*]"
-	documentation="http://www.spip-contrib.net/SpipClear-2-1"
+	documentation="http://contrib.spip.net/SpipClear-2-1"
 >	
 
 	<nom>SpipClear</nom>

@@ -9,7 +9,7 @@
 
 <slogan>De jolis boutons&nbsp;!</slogan>
 <description>De jolis boutons&nbsp;: s&#233;duisants, l&#233;gers et performants (en CSS3 sans image), pour styler d'un coup tous les appels &#224; l'action du site. S'applique &#224; tout ce qui porte le s&#233;lecteur .submit (notamment : <code>button, input, a</code>).</description>
-<lien>http://www.spip-contrib.net/varicelle</lien>
+<lien>http://contrib.spip.net/varicelle</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 
 <pipeline>

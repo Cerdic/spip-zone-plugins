@@ -5,13 +5,13 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/spip-tinymce-60.png"
-	documentation="http://www.spip-contrib.net/?article4276"
+	documentation="http://contrib.spip.net/?article4276"
 >	
 
 	<nom>TinyMCE pour SPIP</nom>
 	<!-- Un WYSIWYG pour SPIP -->
 
-	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+	<auteur lien="http://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
 
 	<licence lien="http://www.gnu.org/copyleft/lesser.html">LGPL 1991</licence>
 

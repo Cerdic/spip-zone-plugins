@@ -10,7 +10,7 @@
     <icon></icon>
     <description> Ce plugin permet d'exporter l'ensemble des documents d'un repertoire ou article.</description>
     <!-- URI de documentation -->
-    <lien>http://www.spip-contrib.net/portezip</lien>
+    <lien>http://contrib.spip.net/portezip</lien>
 
     <!-- precise le prefixe utilis+ pour toutes les fonctions du plugin, en general le nom du plugin -->
     <prefix>portezip</prefix>

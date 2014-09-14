@@ -1,7 +1,7 @@
 <plugin>
 	<nom>AnythingSlider</nom>
 	<slogan>Faire d&#233;filer diff&#233;rents types de contenus (image, texte, vid&#233;os) dans vos squelettes</slogan>
-	<auteur>[Chris Coyier, Remy Sharp, Doug Neiner, ProLoser->https://github.com/ProLoser/AnythingSlider/wiki/Credits] pour le script AnythingSlider, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin SPIP</auteur>
+	<auteur>[Chris Coyier, Remy Sharp, Doug Neiner, ProLoser->https://github.com/ProLoser/AnythingSlider/wiki/Credits] pour le script AnythingSlider, [Joseph->http://contrib.spip.net/Joseph] pour la mise en plugin SPIP</auteur>
 	<icon>images/anythingslider.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>0.1.3</version>

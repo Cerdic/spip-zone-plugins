@@ -9,7 +9,7 @@
 	<description>Champs additionnels de paiement en ligne pour le plugin Formidable
 _ Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointscoeur.org/]
 	</description>
-	<lien>http://www.spip-contrib.net/Transaction-creer-des-formulaires-avec-paiement-en</lien>
+	<lien>http://contrib.spip.net/Transaction-creer-des-formulaires-avec-paiement-en</lien>
 	<icon>images/transaction-64.png</icon>
 	<prefix>transaction</prefix>
 	<install>base/transaction_upgrade.php</install>

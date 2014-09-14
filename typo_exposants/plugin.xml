@@ -11,8 +11,8 @@
 	<description>
 	Ce plugin am&eacute;liore le rendu typographique d'abr&eacute;viations fr&eacute;quentes, notamment par la mise en exposant de leurs &eacute;l&eacute;ments et/ou leur correction. Les abr&eacute;viations obtenues sont conformes &agrave; celles de l'Imprimerie nationale telles qu'indiqu&eacute;es dans le {Lexique des r&egrave;gles typographiques en usage &agrave; l'Imprimerie nationale} (article &laquo;&nbsp;Abr&eacute;viations&nbsp;&raquo;, presses de l'Imprimerie nationale, Paris, 2002).
 	</description>
-	<lien>http://www.spip-contrib.net/article1564.html</lien>
-	<auteur>[Rapha&euml;l Meyssan->http://www.spip-contrib.net/Filtre-typographique-exposants], [Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
+	<lien>http://contrib.spip.net/article1564.html</lien>
+	<auteur>[Rapha&euml;l Meyssan->http://contrib.spip.net/Filtre-typographique-exposants], [Vincent Ramos->http://contrib.spip.net/auteur7639.html]</auteur>
 	<licence>GNU/GPL</licence>
 	
 	<pipeline>

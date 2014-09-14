@@ -198,7 +198,7 @@ Esta herramienta puede acoplarse con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo;.',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenci&oacute;n:</span> la barra de tipograf&iacute;as (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versi&oacute;n superior o igual a @mini@.',
 	'erreur:description' => '&iexcl;falta la id en la definici&oacute;n de la herramienta!',
 	'erreur:distant' => 'el servidor externo',
-	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} parece estar inactiva para esta p&aacute;gina. Consulta [aqu&iacute;->http://www.spip-contrib.net//La-navaja-suiza] el p&aacute;rrafo sobre las dependencias del plugin, o recarga esta p&aacute;gina.',
+	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} parece estar inactiva para esta p&aacute;gina. Consulta [aqu&iacute;->http://contrib.spip.net/La-navaja-suiza] el p&aacute;rrafo sobre las dependencias del plugin, o recarga esta p&aacute;gina.',
 	'erreur:js' => 'Parece que ha ocurrido un error de JavaScript en esta p&aacute;gina que impide su buen funcionamiento. Intenta activar JavaScript en tu navegador o desactivar ciertos plugins de SPIP de tu sitio web.',
 	'erreur:nojs' => 'JavaScript est&aacute; desactivado en esta p&aacute;gina.',
 	'erreur:nom' => '&iexcl;Error!',
@@ -254,7 +254,7 @@ Los bloques multi se muestran siempre en el idioma solicitado por el visitante.'
 	// H
 	'help' => '{{Esta p&aacute;gina s&oacute;lo es accesible para los responsables del sitio.}} Permite la configuraci&oacute;n de las diversas funciones suplementarias aportadas por el plugin &laquo;{{La&nbsp;Navaja&nbsp;Suiza}}&raquo;.',
 	'help2' => 'Version local: @version@',
-	'help3' => '<p>Enlaces a documentaci&oacute;n:<br/>• [La&nbsp;Navaja&nbsp;Suisza->http://www.spip-contrib.net/La-navaja-suiza]@contribs@</p><p>Reinicializaciones:
+	'help3' => '<p>Enlaces a documentaci&oacute;n:<br/>• [La&nbsp;Navaja&nbsp;Suisza->http://contrib.spip.netLa-navaja-suiza]@contribs@</p><p>Reinicializaciones:
 _ • [De las herramientas ocultas|Volver al aspecto inicial de esta p&aacute;gina->@hide@]
 _ • [De todo el plugin|Volver al estado inicial del plugin->@reset@]@install@
 </p>',
@@ -418,7 +418,7 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@sp
 	'outil_desactiver_le' => 'Desactivar la herramienta',
 	'outil_inactif' => 'Herramienta inactiva',
 	'outil_intro' => 'Esta p&aacute;gina lista las funciones que el plugin pone a tu disposici&oacute;n.<br /><br />Pulsando sobre el nombre de los &uacute;tiles de m&aacute;s abajo, los seleccionas y podr&aacute;s cambiar su estado con ayuda del bot&oacute;n central: los &uacute;tiles activados se desactivar&aacute;n y <i>viceversa</i>. Con cada pulsaci&oacute;n, aparece la descripci&oacute;n bajo las listas. Las categor&iacute;as son desplegables y los &uacute;tiles se pueden ocultar. El doble-clic permite cambiar r&aacute;pidamente de herramienta.<br /><br />En la primera utilizaci&oacute;n, se recomienda activar las herramientas una a una, por si acaso apareciese alguna incompatibilidad con tu esqueleto, con SPIP o con otros plugins.<br /><br />Nota: la simple carga de esta p&aacute;gina recompila el conjunto de herramientas de la Navaja Suiza.',
-	'outil_intro_old' => 'Esta interfaz est&aacute; anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.',
+	'outil_intro_old' => 'Esta interfaz est&aacute; anticuada.<br /><br />Si encuentras problemas para utilizar la <a href=\'./?exec=admin_couteau_suisse\'>nueva interfaz</a>, no dudes en avisarnos en el foro de <a href=\'http://contrib.spip.net?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@: @nb@ &uacute;til',
 	'outil_nbs' => '@pipe@ : @nb@ &uacute;tiles',
 	'outil_permuter' => '&iquest;Cambiar la herramienta: &laquo; @text@ &raquo;?',

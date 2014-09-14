@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Analyclick</nom>
 	<slogan>Compteur de t&#233;l&#233;chargements pour les documents SPIP</slogan>
-	<auteur>[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]</auteur>
+	<auteur>[Jean-Marc Viglino->http://contrib.spip.net/_Viglino-Jean-Marc_]</auteur>
 	<version>0.1.3</version>
 	<icon>anaclic.png</icon>
 	<etat>test</etat>

@@ -13,7 +13,7 @@ Dans l\'interface de gestion le menu &eacute;dition vous permettra d\'acc&eacute
 L\'installation des projets se fait dans le r&eacute;pertoire IMG/didapages/monprojet du site.
 
 Pour cr&eacute;er le lien vers un projet didapages dans votre article, il suffit de mettre ensuite le code suivant : {{didapages}}{{@monprojet}}{{@}}.
-_ {Le plugin ["thickbox"->http://www.spip-contrib.net/Plugin-Thickbox] n\'est pas obligatoire mais peut &ecirc;tre utilis&eacute; selon l\'affichage choisi.}
+_ {Le plugin ["thickbox"->http://contrib.spip.netPlugin-Thickbox] n\'est pas obligatoire mais peut &ecirc;tre utilis&eacute; selon l\'affichage choisi.}
 {{Passage &agrave; revoir car il faut trouver un successeur &agrave; Thickbox sous SPIP 3}}',
 );
 ?>

@@ -14,7 +14,7 @@
 		</multi>
 	</description>
 	<etat>test</etat>
-	<lien>http://www.spip-contrib.net/Plugin-Mot-de-Passe-Complique</lien>
+	<lien>http://contrib.spip.net/Plugin-Mot-de-Passe-Complique</lien>
 	<auteur>Bruno Bergot</auteur>
 	<prefix>passe_complexe</prefix>
 	<pipeline>

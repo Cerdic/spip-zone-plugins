@@ -14,7 +14,7 @@ La pr&#233;sente version a &#233;t&#233; d&#233;velopp&#233;e dans le but de fac
 	
 	<etat>dev</etat>
 	<version_base>0.1</version_base>
-	<lien>http://www.spip-contrib.net/Des-quiz-SPIP-exportables</lien>
+	<lien>http://contrib.spip.net/Des-quiz-SPIP-exportables</lien>
 
 	<install>base/quiz_upgrade.php</install>
 	<bouton id='quiz' parent='naviguer'>

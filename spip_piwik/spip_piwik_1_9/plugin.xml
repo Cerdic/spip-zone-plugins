@@ -11,7 +11,7 @@
 		</multi>
 	</description>
 	<icon>piwik.png</icon>
-	<lien>http://www.spip-contrib.net/?article2860</lien>
+	<lien>http://contrib.spip.net/?article2860</lien>
 	<prefix>piwik</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

@@ -8,7 +8,7 @@
 	<description>Introduit une ancre translitter&#233;e pour chaque intertitre du champ #TEXTE des ARTICLES,
 	ainsi qu'une balise #TABLE_MATIERES (facultative) associ&#233;e &#224; placer, bien s&#251;r, dans une boucle ARTICLES.</description>
 	<etat>stable</etat>
-	<lien>[Documentation sur spip-contrib.net->http://www.spip-contrib.net/Table-des-Matieres]</lien>
+	<lien>[Documentation sur spip-contrib.net->http://contrib.spip.net/Table-des-Matieres]</lien>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

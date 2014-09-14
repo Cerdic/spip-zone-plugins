@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Annonces Core</nom>
 	<icon></icon>
-	<auteur>[b_b->http://www.spip-contrib.net/b_b]</auteur>
+	<auteur>[b_b->http://contrib.spip.net/b_b]</auteur>
 	<licence>GPL 3</licence>
 	<version>1.0.0</version>
 	<etat>stable</etat>

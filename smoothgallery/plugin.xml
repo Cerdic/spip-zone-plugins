@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Smoothgallery</nom>
 	<slogan>Douce Galerie</slogan>
-	<auteur>[Phil 2007->yaquoi.com], [Vincent Ramos->http://www.spip-contrib.net/Vincent-Ramos]</auteur>
+	<auteur>[Phil 2007->yaquoi.com], [Vincent Ramos->http://contrib.spip.net/Vincent-Ramos]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.0.3</version>
 	<etat>test</etat>
 	<description>Affiche un lecteur d'images en javascript</description>
 	<icon>sg-22.png</icon>
-	<lien>http://www.spip-contrib.net/Plugin-Douce-Galerie</lien>
+	<lien>http://contrib.spip.net/Plugin-Douce-Galerie</lien>
 	<prefix>Smoothgallery</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

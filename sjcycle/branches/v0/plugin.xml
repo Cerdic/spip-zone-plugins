@@ -23,7 +23,7 @@
 	<img src="../prive/puce_prive.gif" width="16" height="14" alt="-" />&nbsp;Int&eacute;gration pour Spip [2.0.x] 
 	<ul>
 		<li>bas&#233;e sur les formulaires <a href="http://www.spip.net/fr_article3800.html" style="color:#999;text-decoration:underline;" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;</li>
-		<li>utilisant le moteur de configuration <a href="http://www.spip-contrib.net/Config-cfg" style="color:#999;text-decoration:underline;" title="CFG sur Spip-Contrib">CFG</a> [1.10].</li>
+		<li>utilisant le moteur de configuration <a href="http://contrib.spip.net/Config-cfg" style="color:#999;text-decoration:underline;" title="CFG sur Spip-Contrib">CFG</a> [1.10].</li>
 	</ul>
 </description>
 <icon>

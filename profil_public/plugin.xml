@@ -7,7 +7,7 @@
 	<description>
 	Le plugin  permet de cr&#233;er une page perso pour les auteurs enregistr&#233;s, rassemblant divers widgets d&#233;placables, r&#233;ductibles et refermables &#224; l'envie. L'appel se fait via la page spip.php?page=profil. Vous pouvez choisir les widgets &#224; afficher avec cfg.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-profil-public</lien>
+	<lien>http://contrib.spip.net/Plugin-profil-public</lien>
 	<icon>img/icon.png</icon>
 	<prefix>profilpublic</prefix>
 	<pipeline>

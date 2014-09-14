@@ -61,7 +61,7 @@
 		Ins&#233;rez le tag #ABCALENDRIER dans les squelettes. Il est possible d'&#233;crire #ABCALENDRIER{7} pour limiter la liste d'&#233;v&#232;nements visualis&#233;s sous le calendrier &#224; 7.
 
 		{{{Merci}}}
-		Je remercie les auteurs du [minicalendrier pour Eva-&gt;http://eva-web.edres74.net/spip.php?article35], Olivier Gautier et tous ceux qui ont contribu&#233; au d&#233;veloppement de la documentation du plugin. Enfin un remerciement sp&eacute;cial &agrave; [Tropicaloo->http://www.spip-contrib.net/Tropicaloo] pour les traductions
+		Je remercie les auteurs du [minicalendrier pour Eva-&gt;http://eva-web.edres74.net/spip.php?article35], Olivier Gautier et tous ceux qui ont contribu&#233; au d&#233;veloppement de la documentation du plugin. Enfin un remerciement sp&eacute;cial &agrave; [Tropicaloo->http://contrib.spip.net/Tropicaloo] pour les traductions
 		</multi>
 	</description>
 	<lien>http://contrib.spip.net/Plugin-ABCalendrier-2686</lien>

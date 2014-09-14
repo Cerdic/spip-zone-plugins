@@ -9,8 +9,8 @@
 	
 	<slogan>Correction automatique des guillemets, selon la langue</slogan>
 	<description>Ce plugin remplace automatiquement les guillemets droits (") par les guillemets typographiques (&#171;&#187;&#8220;&#8221;&#8222;) de la langue de composition et guillemette correctement la balise <code><q></code>. Les liens automatiques <code>[->1]</code> vers des articles dont le titre contient des &#171;guillemets fran&#231;ais&#187; passent en guillemets &#8220;de second niveau&#8221;. Le remplacement, transparent pour l'utilisateur, ne modifie pas le texte mais seulement l'affichage final.</description>
-	<lien>http://www.spip-contrib.net/article1592.html</lien>
-	<auteur>[Vincent Ramos->http://www.spip-contrib.net/auteur7639.html]</auteur>
+	<lien>http://contrib.spip.net/article1592.html</lien>
+	<auteur>[Vincent Ramos->http://contrib.spip.net/auteur7639.html]</auteur>
 	<licence>GNU/GPL</licence>
 
 	<fonctions>typo_guillemets_fonctions.php</fonctions>

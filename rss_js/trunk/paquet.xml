@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/rssjs-128.png"
-	documentation="http://www.spip-contrib.net/spip.php?article4359"
+	documentation="http://contrib.spip.net/spip.php?article4359"
 >
 
 	<nom>RSS-JS</nom>

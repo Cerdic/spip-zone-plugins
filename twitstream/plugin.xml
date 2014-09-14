@@ -10,7 +10,7 @@
 Twitstream vous permet d'extraire des gazouillis par recherche de hashtag sur vos pages web
 _ Jquery propos&#233; par [->http://kjc-designs.com/TwitStream] de [@noah_cooper->http://twitter.com/#!/noah_cooper]
 	</description>
-	<lien>http://www.spip-contrib.net/Twitstream</lien>
+	<lien>http://contrib.spip.net/Twitstream</lien>
 	<prefix>twitstream</prefix>
 	<icon>img_pack/twitstream-64.png</icon>
 	<pipeline>

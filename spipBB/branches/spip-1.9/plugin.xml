@@ -11,7 +11,7 @@
 			[fr]Gestion des forums
 		</multi>
 	</slogan>
-	<auteur>[La SpipBB Team->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]</auteur>
+	<auteur>[La SpipBB Team->http://contrib.spip.net/Plugin-SpipBB#contributeurs]</auteur>
 	<licence>GPL - (c) 2006-2008</licence>
 	<version>0.6.17</version>
 	<etat>dev</etat>
@@ -23,7 +23,7 @@
 
 {{Please check :}}
 -* [help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* [the documentation on Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* [the documentation on Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 
@@ -33,7 +33,7 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 
 {{Consulteu:}}
 -* [l'ajuda i suport a spipbb.spip-zone.info-&gt;http://spipbb.spip-zone.info/spip.php?article11],
--* [La documentaci&#243; a Spip-contrib-&gt;http://www.spip-contrib.net/SpipBB-le-forum].
+-* [La documentaci&#243; a Spip-contrib-&gt;http://contrib.spip.net/SpipBB-le-forum].
 
  _ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-los assumint-ne els riscs i els perills}}
 [pt]
@@ -43,7 +43,7 @@ O plugin SpipBB permite :
 
 {{Consulte :}}
 -* [ a ajuda e apoio sobre spipbb.spip-zone.info - http://spipbb.spip-zone.info/spip.php?article11],
--* [ A documenta&ccedil;&#227;o sobre Spip-contrib - http://www.spip-contrib.net/SpipBB-le-forum].
+-* [ A documenta&ccedil;&#227;o sobre Spip-contrib - http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &#224; vos risques et p&#233;rils}}
 
@@ -53,7 +53,7 @@ _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &#224; vos risques 
 
 {{Consultez :}}
 -* [l'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* [la documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* [la documentation sur Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &#224; vos risques et p&#233;rils}}
 
@@ -63,7 +63,7 @@ _ {{Plugin spipbb en cours de developpement. Vous l'utilisez &#224; vos risques 
 
 {{Raadplegen:}}
 -* [de hulp en steun op spipbb.spip-zone.info - > http://spipbb.spip-zone.info/spip.php?article11],
--* [De documentatie over Spip-contrib-> http://www.spip-contrib.net/SpipBB-le-forum].
+-* [De documentatie over Spip-contrib-> http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb in ontwikkeling. U gebruikt het met uw risico\'s en gevaren}}
 
@@ -75,7 +75,7 @@ _ [Toegang tot het administratie paneel ->.? exec=spipbb_configuration]
 
 {{Consulte :}}
 -* [a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* [a documentaci&#243;n en Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* [a documentaci&#243;n en Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{M&#243;dulo spipbb en curso de desenvolvemento. &#218;seo ao seu risco e ventura}}
 
@@ -85,12 +85,12 @@ _ {{M&#243;dulo spipbb en curso de desenvolvemento. &#218;seo ao seu risco e ven
 
 {{Consultez :}}
 -* [l\'aide et support sur spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* [La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* [La documentation sur Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &#224; vos risques et p&#233;rils}}
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/SpipBB-le-forum</lien>
+	<lien>http://contrib.spip.net/SpipBB-le-forum</lien>
 	<icon>img_pack/spipbb-48.png</icon>
 	<fonctions>spipbb_fonctions.php</fonctions>
 	<options>spipbb_options.php</options>

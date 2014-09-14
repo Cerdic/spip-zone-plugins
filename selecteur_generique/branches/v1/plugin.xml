@@ -23,7 +23,7 @@
 		</multi>
 	</description>
 	<prefix>SelecteurGenerique</prefix>
-	<lien>http://www.spip-contrib.net/Selecteur-generique</lien>
+	<lien>http://contrib.spip.net/Selecteur-generique</lien>
 	<fonctions>public/selecteur_generique_criteres.php</fonctions>
 	<pipeline>
 		<nom>header_prive</nom>
@@ -59,7 +59,7 @@
 		</multi>
 	</description>
 	<prefix>SelecteurGenerique</prefix>
-	<lien>http://www.spip-contrib.net/Selecteur-generique</lien>
+	<lien>http://contrib.spip.net/Selecteur-generique</lien>
 	<fonctions>public/selecteur_generique_criteres.php</fonctions>
 	<options>selecteur_generique_options.php</options>
 	<pipeline>

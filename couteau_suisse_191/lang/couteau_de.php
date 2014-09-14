@@ -61,7 +61,7 @@ Sie k&ouml;nnen folgende Einstellungen vornehmen: Verwaltung, typografische Verb
 
 W&auml;hlen Sie die f&uuml;r Sie wichtigsten Funktionen: {Ziffern entfernen}, {Typ der URLs}, {typografische Hochstellungen}, {typografische Anf&uuml;hrungszeichen}, {sch&ouml;ne Listen-Punkte}, {SPAM Bek&auml;mpfung}, {MailCrypt}, {&auml;sthetische URLs},  {SPIP und externe Links}, {Smileys}, {Inhaltsverzeichnis f&uuml;r Artikel},  {Aufteilung in Seiten und Reiter}, etc. pp.
 
-Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
 
 Kompatibel mit: SPIP 1.91',
 

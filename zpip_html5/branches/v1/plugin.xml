@@ -8,7 +8,7 @@
 	<etat>test</etat>
 	<description>Une surcharge des squelettes Zpip-dist qui tire parti des nouvelles balises offertes par la sp&#233;cification HTML5. Les choix de balisage ne sont pas encore fix&#233;s &#224; 100%, n'h&#233;sitez pas &#224; faire vos commentaires.
 	</description>
-	<lien>http://www.spip-contrib.net/Zpip-dist-en-HTML5</lien>
+	<lien>http://contrib.spip.net/Zpip-dist-en-HTML5</lien>
 	<prefix>zpip_html5</prefix>
 	<necessite id="Z" version="[1.2.0;]" />
 	<necessite id="html5" />

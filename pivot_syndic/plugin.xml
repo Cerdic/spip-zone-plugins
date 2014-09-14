@@ -8,7 +8,7 @@
 	<etat>dev</etat>
 	<description>Transformation des nombreux formats de syndication RSS, Atom et d&#233;riv&#233;s en un unique format pivot utile &#224; SPIP.</description>
 	<icon>images/pivot_syndic.png</icon>
-	<lien>http://www.spip-contrib.net/Pivot-de-syndication</lien>
+	<lien>http://contrib.spip.net/Pivot-de-syndication</lien>
 	<prefix>pivotsyndic</prefix>
 	<chemin dir='' />
 	<pipeline>

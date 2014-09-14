@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_bouton_valider' => 'Confirm the entries',
 
 	// C
-	'cfg_descriptif' => 'This page is sued for configuring the Thumbsites plugin, and in particular, to select the thumbnails server. To find out more, please refer to the <a href="http://www.spip-contrib.net/?article2584">documentation on contrib</a>',
+	'cfg_descriptif' => 'This page is sued for configuring the Thumbsites plugin, and in particular, to select the thumbnails server. To find out more, please refer to the <a href="http://contrib.spip.net?article2584">documentation on contrib</a>',
 	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'The thumbnails generated will have a maximum size of 160 x 120 pixels (these values can be modified on the Girafa site)',

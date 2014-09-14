@@ -11,7 +11,7 @@
 		[de]Dieses Plugin erm&#246;glicht ihnen, den SPIP-Tag <code>#SLOGAN_SITE_SPIP</code> in ihren Skeletten zu verwenden
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Un-slogan-pour-votre-site-SPIP-2-0</lien>
+	<lien>http://contrib.spip.net/Un-slogan-pour-votre-site-SPIP-2-0</lien>
 	<prefix>slogan</prefix>
 	<fonctions>slogan_fonctions.php</fonctions>
 	<pipeline>

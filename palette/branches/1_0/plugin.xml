@@ -18,7 +18,7 @@
 		[en]Set class palette to an input to add a color picker: <code><input class="palette" name="couleur" value="#dfdfdf" /></code>
 		</multi>
 	</description>
-   <lien>http://www.spip-contrib.net/Palette</lien>
+   <lien>http://contrib.spip.net/Palette</lien>
 	<prefix>palette</prefix>
 	<icon>images/palette.png</icon>
 	<options>palette_options.php</options>

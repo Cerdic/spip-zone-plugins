@@ -61,7 +61,7 @@ Les cat&eacute;gories disponibles sont : Administration, Am&eacute;liorations ty
 
 D&eacute;couvre dans ce plugin tes outils favoris : {Supprime le num&eacute;ro}, {Format des URLs}, {Exposants typographiques}, {Guillemets typographiques}, {Belles puces}, {Lutte contre le SPAM}, {Mailcrypt}, {Belles URLs}, {SPIP et les liens... externes}, {Smileys}, {Un sommaire pour vos articles}, {D&eacute;coupe en pages et onglets}, etc., etc.
 
-N\'h&eacute;site pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+N\'h&eacute;site pas &agrave; consulter les articles de documentation du plugin publi&eacute;s sur : [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
 
 Compatibilit&eacute; : SPIP v1.91',
 

@@ -18,7 +18,7 @@
 
 Le plugin utilise l'architecture de squelettes ZPIP.
 	</description>
-	<lien>http://www.spip-contrib.net/?article3974</lien>
+	<lien>http://contrib.spip.net/?article3974</lien>
 	<options>fraisdon_mes_options.php</options>
 	<fonctions>fraisdon_mes_fonctions.php</fonctions>
 	<install>base/fraisdon_upgrade.php</install>

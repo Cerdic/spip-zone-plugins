@@ -18,7 +18,7 @@
 	[en]Plugin for creating cross-links by referencing sections
 	and articles to other sections that their direct parent.
 	</multi></description>
-	<lien>http://www.spip-contrib.net/Polyhierarchie</lien>
+	<lien>http://contrib.spip.net/Polyhierarchie</lien>
 	<prefix>polyhier</prefix>
 	<install>base/polyhier.php</install>
 	<fonctions>public/polyhier_criteres.php</fonctions>

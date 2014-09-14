@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/polyhier-32.png"
 	schema="0.1.0"
-	documentation="http://www.spip-contrib.net/Polyhierarchie"
+	documentation="http://contrib.spip.net/Polyhierarchie"
 >
 
 	<nom>PolyHierarchy</nom>

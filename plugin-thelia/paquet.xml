@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/logo_thelia.png"
-	documentation="http://www.spip-contrib.net/Plugin-Thelia"
+	documentation="http://contrib.spip.net/Plugin-Thelia"
 >	
 
 	<nom>Interface Th&#233;lia</nom>

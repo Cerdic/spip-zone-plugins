@@ -3,7 +3,7 @@
 	<slogan>G&#233;n&#233;ration automatique de Mentions L&#233;gales</slogan>
 	<version>1.61.0</version>
 	<etat>stable</etat>
-	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>GPLv3</licence>
 	<description>
 Ce plugin vous propose la g&#233;n&#233;ration automatique de {{Mentions L&#233;gales}}, {{Conditions d'Utilisation}} et informations de {{Copyright}} propres &#224; votre site SPIP.
@@ -20,7 +20,7 @@ Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://ww
 	</description>
 
  	<icon>images/idisk-dir-36.png</icon>
-	<lien>http://www.spip-contrib.net/?article3516</lien>
+	<lien>http://contrib.spip.net/?article3516</lien>
 	<categorie>communication</categorie>
 	
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />

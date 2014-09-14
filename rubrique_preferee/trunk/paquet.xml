@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/rubriquepreferee-32.png"
 	schema="0.1"
-	documentation="http://www.spip-contrib.net/Rubrique-preferee"
+	documentation="http://contrib.spip.net/Rubrique-preferee"
 >	
 
 	<nom>Rubrique pr&#233;f&#233;r&#233;e</nom>

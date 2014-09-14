@@ -15,7 +15,7 @@
 	<description>
 	Un raccourci permettant d'intégrer une ressource externe en indiquant entre chevrons son URL ou son nom de fichier.
 	</description>
-	<lien>http://www.spip-contrib.net/Ressource</lien>
+	<lien>http://contrib.spip.net/Ressource</lien>
 	<prefix>
 	ressource
 	</prefix>

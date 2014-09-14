@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.15;3.0.*]"
 	logo="prive/themes/spip/images/qrcode-64.png"
-	documentation="http://www.spip-contrib.net/Qrcode"
+	documentation="http://contrib.spip.net/Qrcode"
 	schema="1.0.0" 
 >
 

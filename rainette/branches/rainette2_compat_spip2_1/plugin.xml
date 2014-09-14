@@ -17,7 +17,7 @@ Une page &#171; Meteo &#187; compatible avec les squelettes Z est disponible : e
 
 Essayez la page de d&#233;mo {demo/rainette.html} pour des exemples d'utilisation.
 	</description>
-	<lien>http://www.spip-contrib.net/article3133</lien>
+	<lien>http://contrib.spip.net/article3133</lien>
 	<prefix>rainette</prefix>
 	<icon>rainette-64.png</icon>
 	<fonctions>rainette_fonctions.php</fonctions>

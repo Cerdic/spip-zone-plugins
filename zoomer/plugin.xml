@@ -12,7 +12,7 @@ Anne-lise Martenot (elastick.net)
 	<description> cf http://www.dynamicdrive.com/dynamicindex4/featuredzoomer.htm
 	  Ce plugin ajoute un mod&#232;le pour afficher une loupe et offrir un agrandissement localis&#233; : <code>&lt;img|zoom&gt;</code>.
 </description>
-	<lien>http://www.spip-contrib.net/Une-loupe-pour-vos-vignette</lien>
+	<lien>http://contrib.spip.net/Une-loupe-pour-vos-vignette</lien>
     <necessite id="SPIP" version="[1.9.2;2.0.99]" />
 	<prefix>zoomer</prefix>
 	<pipeline>

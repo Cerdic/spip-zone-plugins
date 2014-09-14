@@ -104,7 +104,7 @@ Ces banni&egrave;res s\'int&egrave;grent dans vos squelettes en indiquant simple
 Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est remplac&eacute;e par une frame de la taille de la banni&egrave;re.',
 	'documentation_2' => 'Pour une raison pratique [[Spip Bonux est utilis&eacute; par Pub Banner pour sa fonctionnalit&eacute; \'POUR\', qui permet de cr&eacute;er des boucles depuis des array PHP (ndlr) ...]], le plugin PUB BANNER n&eacute;cessite d\'avoir install&eacute; au pr&eacute;alable le plugin {{Spip Bonux}} en version 1.3 au minimum.
 
--* Vous pouvez lire une description de ce plugin sur le site Spip-Contrib &agrave; l\'adresse : [->http://www.spip-contrib.net/SPIP-Bonux].
+-* Vous pouvez lire une description de ce plugin sur le site Spip-Contrib &agrave; l\'adresse : [->http://contrib.spip.netSPIP-Bonux].
 -* Vous pouvez le t&eacute;l&eacute;charger &agrave; l\'adresse : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({ici en version 2}).
 ',
 	'documentation_3' => 'Le plugin propose de suivre l\'efficacit&eacute; des campagnes de plusieurs fa&ccedil;ons :
@@ -225,7 +225,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'licence_stats' => '<i><b>LICENCES :</b><br /><b>\'wz_jsgraphics.js\'</b> :: v. 2.33 - (c) 2002-2004 Walter Zorn [<a href="http://www.walterzorn.com" target="_blank">www.walterzorn.com</a>]<br /><b>\'graph.js\', \'line.js\' & \'pie.js\'</b> :: (c) Balamurugan S. 2005 [<a href="http://www.jexp.com" target="_blank">www.jexp.com</a>]</i>',
 	'liste_pub' => 'Liste des publiclit&eacute;s',
 	'leaderboard_banner' => 'Banni&egrave;re "Leaderboard"',
-	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribué sous licence [Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l\'Identique->http://creativecommons.org/licenses/by-sa/3.0/].',
+	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://contrib.spip.netPieroWbmstr] distribué sous licence [Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l\'Identique->http://creativecommons.org/licenses/by-sa/3.0/].',
 
 // M //
 	'manque_date_fin' => 'Veuillez pr&eacute;ciser une date de fin',

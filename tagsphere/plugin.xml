@@ -6,7 +6,7 @@
 	<version>0.4.0</version>
 	<etat>stable</etat>
 	<description>Affiche les mots cl&#233; du site sous la forme d'un nuage 3D</description>
-	<lien>http://www.spip-contrib.net/Plugin-TagSphere</lien>
+	<lien>http://contrib.spip.net/Plugin-TagSphere</lien>
 	<prefix>tagsphere</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

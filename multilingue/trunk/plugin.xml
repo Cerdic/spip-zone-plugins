@@ -16,7 +16,7 @@
 			- [Traductions de rubriques autrement->http://contrib.spip.net/Traductions-de-rubriques-autrement-3]
 			- [Traductions d’articles autremen->http://contrib.spip.net/Traductions-d-articles-autrement-3]
 			
-			Sous Spip 2 ou 2.1 il es recommendable d\'installer auparavant le plugin [Step->http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins], puis d'installer ce plugin ce qui forcera également l\'installation de tous les autres plugin nécessaires.
+			Sous Spip 2 ou 2.1 il es recommendable d\'installer auparavant le plugin [Step->http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins], puis d'installer ce plugin ce qui forcera également l\'installation de tous les autres plugin nécessaires.
 					
 			Le plugin modifie également quelques squelettes (rubriques et articles) et quelques noisettes de bases.
 			

@@ -6,10 +6,10 @@
 	<etat>stable</etat>
 	<description>
 		<multi>
-		[fr]Ce plugin, d&#233;stin&#233; pour les sites mutlilingues avec [un secteur par langue->http://www.spip-contrib.net/Un-exemple-de-site-multilingue], vous offre une approche similaire au niveau de la navigation et de la gestion de traductions des rubriques &#224; celle du plugin [Traduction articles autrement->http://files.spip.org/spip-zone/traduction_articles_autrement.zip] dont l'installation est recommand&#233;. Comme spip ne propose pas nativement la traduction des rubriques l'installation du plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip] est n&#233;cessaire.
+		[fr]Ce plugin, d&#233;stin&#233; pour les sites mutlilingues avec [un secteur par langue->http://contrib.spip.net/Un-exemple-de-site-multilingue], vous offre une approche similaire au niveau de la navigation et de la gestion de traductions des rubriques &#224; celle du plugin [Traduction articles autrement->http://files.spip.org/spip-zone/traduction_articles_autrement.zip] dont l'installation est recommand&#233;. Comme spip ne propose pas nativement la traduction des rubriques l'installation du plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip] est n&#233;cessaire.
 		</multi>	
 	</description>
-	<lien>http://www.spip-contrib.net/Traduction-de-rubriques-autrement</lien>
+	<lien>http://contrib.spip.net/Traduction-de-rubriques-autrement</lien>
 	<licence>GPL 3</licence>
 	<prefix>trad_rub</prefix>
 	<icon>img_pack/Translation-icon_32.png</icon>

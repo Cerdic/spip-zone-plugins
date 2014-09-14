@@ -10,7 +10,7 @@
 	<icon>images/recommander_logo.png</icon>
 	<version>1.0.7</version>
 	<etat>stable</etat>
-	<lien>http://www.spip-contrib.net/Recommander</lien>
+	<lien>http://contrib.spip.net/Recommander</lien>
 	<description>
 		<multi>
 			[fr]Fonction recommander un article &#224; un ami.

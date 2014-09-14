@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // CFG
 	'titre_descr_cfg' => 'Configuration de l\'outil "Popup"',
-	'descr_cfg' => 'Documentation du plugin pour plus d\'infos : [spip-contrib.net/?article3573->http://www.spip-contrib.net/?article3573]',
+	'descr_cfg' => 'Documentation du plugin pour plus d\'infos : [spip-contrib.net/?article3573->http://contrib.spip.net?article3573]',
 	'legend_cfg_balise' => 'Concernant la fen&ecirc;tre externe',
 	'skel_defaut' => 'Squelette par d&eacute;faut utilis&eacute; pour afficher le contenu de la fen&ecirc;tre',
 	'skel_defaut_comment' => 'Il s\'agit initialement du squelette "popup_defaut.html" pr&eacute;sent &agrave; la racine du plugin.',

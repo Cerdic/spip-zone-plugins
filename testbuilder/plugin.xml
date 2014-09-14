@@ -10,7 +10,7 @@ Un plugin pour aider les d&#233;veloppeurs de plugin &#224; &#233;crire plus vit
 
 Ce plugin est un outil de d&#233;veloppement. Il a tout son int&#233;r&#234;t install&#233; sur votre machine de d&#233;veloppement, mais il est tr&#232;s vivement d&#233;conseill&#233; de l'installer sur un serveur en ligne car il manipule les scripts PHP dans l'arborescence de votre site et permet de lancer l'ex&#233;cution de code PHP arbitraire.
 	</description>
-	<lien>http://www.spip-contrib.net/TestBuilder</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/TestBuilder</lien> <!-- URI de documentation -->
 	<prefix>tb</prefix>
 	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<categorie>outil</categorie>
@@ -38,7 +38,7 @@ Un plugin pour aider les d&#233;veloppeurs de plugin &#224; &#233;crire plus vit
 
 Ce plugin est un outil de d&#233;veloppement. Il a tout son int&#233;r&#234;t install&#233; sur votre machine de d&#233;veloppement, mais il est tr&#232;s vivement d&#233;conseill&#233; de l'installer sur un serveur en ligne car il manipule les scripts PHP dans l'arborescence de votre site et permet de lancer l'ex&#233;cution de code PHP arbitraire.
 	</description>
-	<lien>http://www.spip-contrib.net/TestBuilder</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/TestBuilder</lien> <!-- URI de documentation -->
 	<prefix>tb</prefix>
 	<categorie>outil</categorie>
 	<bouton id="tb" parent="configuration">

@@ -1,6 +1,6 @@
 <plugin>
 	<nom>SPIP-G&#233;oportail</nom>
-	<auteur>[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]</auteur>
+	<auteur>[Jean-Marc Viglino->http://contrib.spip.net/_Viglino-Jean-Marc_]</auteur>
 	<slogan>Afficher des objets SPIP sur une carte</slogan>
 	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<licence>GNU/GPL, BSD pour l'API Geoportail/OpenLayers</licence>
@@ -16,7 +16,7 @@ Ce plugin permet, en utilisant l'API G&#233;oportail (Openlayers), le g&#233;or&
 
 Pour visualiser des exemples d'affichage de carte Geoportail, OSM, Google Maps, Yahoo! ou Bing veuillez vous rendre &#224; l'adresse suivante : [->http://grafreex.free.fr/?-Geoportail-].
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-SPIP-Geoportail</lien>
+	<lien>http://contrib.spip.net/Plugin-SPIP-Geoportail</lien>
 	<prefix>geoportail</prefix>
 	<pipeline> <!-- definition des autorisations -->
 		<nom>autoriser</nom>

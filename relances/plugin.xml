@@ -13,7 +13,7 @@
 	<description>Créer et paramétrer des mails de relance.</description>
 	<etat>dev</etat>
 	<prefix>relance</prefix>
-	<lien>http://www.spip-contrib.net/?article4410</lien>
+	<lien>http://contrib.spip.net/?article4410</lien>
 	<install>base/relances_upgrade.php</install>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>

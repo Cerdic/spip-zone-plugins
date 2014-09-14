@@ -14,7 +14,7 @@
 	[de] Im privaten Raum erlaubt Herausgeber die Aktenskelette 
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Editeur-de-squelettes-Skel-editor</lien>
+	<lien>http://contrib.spip.net/Editeur-de-squelettes-Skel-editor</lien>
 	<prefix>skeleditor</prefix>
 	<fonctions>spip_200/skeleditor_fonctions.php</fonctions>
 	<!-- bouton prive -->
@@ -52,7 +52,7 @@
 	[es]Redactor esquel&#233;tico - En espacio privado, no prohibe a redactor los esqueletos de los archivos
 	[de]Skeleton Herausgeber - Im privaten Raum erlaubt Herausgeber die Aktenskelette
 	</multi></description>
-	<lien>http://www.spip-contrib.net/SkelEditor-2-0</lien>
+	<lien>http://contrib.spip.net/SkelEditor-2-0</lien>
 	<prefix>skeleditor</prefix>
 	<options>spip_210/skeleditor_pipelines.php</options>
 

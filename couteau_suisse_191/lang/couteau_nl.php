@@ -57,7 +57,7 @@ De beschikbare categorie&euml;n zijn: Bestuur, typografische Verbeteringen, typo
 
 Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af… externe}, {Niet van onbekende forums}, {D&eacute;coupe in bladzijdes en tabben}, etc., etc.
 
-Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
 
 De verenigbaarheid: SPIP iedereen betaalden 1.91',
 

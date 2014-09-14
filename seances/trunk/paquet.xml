@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/seance-128.png"
 	schema="1.0.0"
-	documentation="http://www.spip-contrib.net/spip.php?article3599"
+	documentation="http://contrib.spip.net/spip.php?article3599"
 >	
 
 	<nom>S&#233;ances</nom>

@@ -45,7 +45,7 @@
 		</multi>
 	</description>
 	<icon>spip_death.png</icon>
-	<lien>http://www.spip-contrib.net/SPMC-Squelette-par-mot-cle-V2-0</lien>
+	<lien>http://contrib.spip.net/SPMC-Squelette-par-mot-cle-V2-0</lien>
 	<prefix>SquelettesMots</prefix>
 	
 	<pipeline>

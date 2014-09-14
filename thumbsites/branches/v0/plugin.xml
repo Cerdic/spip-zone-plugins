@@ -9,7 +9,7 @@
 	<description>
 Thumbsites fournit un syst&#232;me de capture d'&#233;cran de site g&#233;n&#233;r&#233;e par des serveurs d&#233;di&#233;s. Le plugin propose des balises, des filtres et des mod&#232;les pour afficher la vignette d'un site donn&#233;. Ce plugin g&#232;re aussi un cache qui permet de pallier les indisponibilit&#233;s fr&#233;quentes des serveurs et d'acc&#233;l&#233;rer les affichages. Une configuration est disponible dans l'espace priv&#233;.
 	</description>
-	<lien>http://www.spip-contrib.net/?article2584</lien>
+	<lien>http://contrib.spip.net/?article2584</lien>
 	<prefix>thumbsites</prefix>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cfg" version="[1.7.6;]" />

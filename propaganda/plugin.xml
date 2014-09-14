@@ -16,7 +16,7 @@
 			[es]Env&#237;o de tarjetas postales electr&#243;nicas desde un sitio SPIP.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Propaganda</lien>
+	<lien>http://contrib.spip.net/Plugin-Propaganda</lien>
 	<install>base/propaganda_upgrade.php</install>
  
 	<prefix>propaganda</prefix>

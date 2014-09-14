@@ -54,7 +54,7 @@ Tillg&auml;ngliga kategorier &auml;r: Administration, Typografiska f&ouml;rb&aum
 
 Find your favourite tools in this plugin: {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {A summary for your articles}, {Smileys}, {Delete the number}, {Fine URLs}, {SPIP and external links}, {No anonymous forums}, {Division in pages and tab}, etc., etc.
 
-See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+See the documentation articles at: [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
 
 Compatibility: SPIP 1.91',
 

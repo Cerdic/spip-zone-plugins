@@ -6,17 +6,17 @@
 			[en]Send a page by e-mail
 		</multi>
 	</slogan>
-	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<version>1.5.1</version>
 	<licence>GPLv3 - (c) 2009-2011</licence>
 	<etat>stable</etat>
 	<description>
 Ce plugin propose un formulaire complet pour envoyer une page d'un site SPIP ({n'importe laquelle}) &#224; une liste d'adresses e-mail.
-_ Il s'utilise en pla&#231;ant la balise {{&#035;TIPAFRIEND}} dans vos squelettes ; le formulaire appara&#238;t en fen&#234;tre popup par d&#233;faut, mais peut &#234;tre int&#233;gr&#233; en div type {{thickbox}} ({plugin SPIP}) via le panneau de configuration accessible depuis le plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} ({optionnel}).
+_ Il s'utilise en pla&#231;ant la balise {{&#035;TIPAFRIEND}} dans vos squelettes ; le formulaire appara&#238;t en fen&#234;tre popup par d&#233;faut, mais peut &#234;tre int&#233;gr&#233; en div type {{thickbox}} ({plugin SPIP}) via le panneau de configuration accessible depuis le plugin {{[CFG : moteur de configuration->http://contrib.spip.net/?rubrique575]}} ({optionnel}).
 
 Logo et certaines images du plugin : [->http://pixel-mixer.com/]
 	</description>
-	<lien>http://www.spip-contrib.net/?article3638</lien>
+	<lien>http://contrib.spip.net/?article3638</lien>
 	<icon>img/letter_32.png</icon>
 	<options>tipafriend_options.php</options>
 	<prefix>tipafriend</prefix>

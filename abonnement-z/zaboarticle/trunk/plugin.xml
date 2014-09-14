@@ -15,7 +15,7 @@
    G&#233;rer des abonnements aux articles et aux rubriques, n&#233;cessite les plugins acces restreint et abonnement.
    On peut ajouter un systeme de commande payant li&#233; à l'abonnement.
     </description>
-	<lien>http://www.spip-contrib.net/</lien>
+	<lien>http://contrib.spip.net/</lien>
 	<prefix>zaboarticle</prefix>
  	<pipeline>
 		<nom>autoriser</nom>

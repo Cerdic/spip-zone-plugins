@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.12;3.0.*]"
 	logo="images/recommander_logo.png"
-	documentation="http://www.spip-contrib.net/Recommander"
+	documentation="http://contrib.spip.net/Recommander"
 >	
 
 	<nom>Recommander &#224; un ami</nom>

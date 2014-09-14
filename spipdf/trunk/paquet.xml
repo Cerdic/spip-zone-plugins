@@ -5,7 +5,7 @@
 	etat="test"
     compatibilite="[3.0.0;3.0.*]"
 	logo="spipdf.png"
-    documentation="http://www.spip-contrib.net/spiPDF-v0-2-0-generer-des-contenus-sur-mesure-en-PDF"
+    documentation="http://contrib.spip.net/spiPDF-v0-2-0-generer-des-contenus-sur-mesure-en-PDF"
 	schema="2012072001"
 >	
 

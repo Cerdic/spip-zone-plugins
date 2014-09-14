@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.8]"
 	logo="rubrique_a_linscription.png"
 	schema="0.3"
-	documentation="http://www.spip-contrib.net/Rubrique-a-l-inscription"
+	documentation="http://contrib.spip.net/Rubrique-a-l-inscription"
 >	
 
 	<nom>Rubrique &#224; l'inscription</nom>

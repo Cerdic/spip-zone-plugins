@@ -5,12 +5,12 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/popup-128.png"
-	documentation="http://www.spip-contrib.net/?article3573"
+	documentation="http://contrib.spip.net/?article3573"
 >      
 	<nom>Balise &#035;POPUP</nom>
 	<!-- Gestion d'une fenêtre popup unique -->
 
-	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+	<auteur lien="http://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

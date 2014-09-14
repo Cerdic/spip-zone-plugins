@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contacts_nom' => 'Contacts & Organizations',
 	'contacts_description' => 'Enhances SPIP with the functionnalities of a contact management system. Makes a difference between companies (organisations) and persons (contacts) while keeping all the SPIP author\'s attributes. Allows to give access rights to accounts with unique password. Allows to extend unique fields (such as frist name, date of birth...) together with multiple fields (phone numbers, mail addresses...).
 
-This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] and [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue] projects.',
+This plugin has been developped inside the [SPIPMINE->http://contrib.spip.netPlugin-Spipmine] and [Catalogue->http://contrib.spip.netPlugin-Catalogue] projects.',
 	'contacts_slogan' => 'Enhance SPIP with a contact management system',
 );
 ?>

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>AnythingSlider</nom>
 	<slogan>Faire d&#233;filer du contenu dans vos squelettes</slogan>
-	<auteur><i lang="en">Original by [Chris Coyier->http://css-tricks.com] and [many others->https://github.com/CSS-Tricks/AnythingSlider/wiki/Credits]</i>, incluant [AnythingSlider-Themes->https://github.com/CSS-Tricks/AnythingSlider-Themes], mis en plugin par [Joseph->http://www.spip-contrib.net/Joseph], [Cedric Morin Yterium->http://www.yterium.com] et [romy.tetue.net->http://romy.tetue.net]</auteur>
+	<auteur><i lang="en">Original by [Chris Coyier->http://css-tricks.com] and [many others->https://github.com/CSS-Tricks/AnythingSlider/wiki/Credits]</i>, incluant [AnythingSlider-Themes->https://github.com/CSS-Tricks/AnythingSlider-Themes], mis en plugin par [Joseph->http://contrib.spip.net/Joseph], [Cedric Morin Yterium->http://www.yterium.com] et [romy.tetue.net->http://romy.tetue.net]</auteur>
 	<icon>prive/themes/spip/images/anythingslider.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>2.0.0</version>

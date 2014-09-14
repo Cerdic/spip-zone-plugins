@@ -5,7 +5,7 @@
     etat="stable"
     compatibilite="[1.9.2;3.0.*)"
     logo="prive/themes/spip/images/logo_menu_50.png"
-    documentation="http://www.spip-contrib.net/spip.php?article3055"
+    documentation="http://contrib.spip.net/spip.php?article3055"
 >       
 	
     <nom>Menu babbibel</nom>

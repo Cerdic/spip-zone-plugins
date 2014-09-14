@@ -30,7 +30,7 @@
 		</multi>
 	</description>
 	<lien>
-	http://www.spip-contrib.net/Ordonner-les-auteurs-d-un-article
+	http://contrib.spip.net/Ordonner-les-auteurs-d-un-article
 	</lien>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::

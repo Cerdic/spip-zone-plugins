@@ -12,7 +12,7 @@
 	<version>0.15.7</version>
 	<version_base>0.6</version_base>
 	<install>base/step_upgrade.php</install>
-	<lien>http://www.spip-contrib.net/STEP-Systeme-de-Telechargements-de-Plugins</lien>
+	<lien>http://contrib.spip.net/STEP-Systeme-de-Telechargements-de-Plugins</lien>
 	<icon>images/step-128.png</icon>
 
 	<etat>dev</etat>

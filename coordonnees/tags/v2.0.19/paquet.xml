@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="images/addressbook-128.png"
-	documentation="http://www.spip-contrib.net/Plugin-Coordonnees"
+	documentation="http://contrib.spip.net/Plugin-Coordonnees"
 >
 
 	<nom>Coordonn&eacute;es</nom>

@@ -21,7 +21,7 @@
 -* Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3
 -* Avec <code>[(#MODELE{playliste_video}{id_article=XX})]</code> vous pouvez afficher une playliste video.
 	</description>
-	<lien>http://www.spip-contrib.net/Lecteur-Multimedia</lien>
+	<lien>http://contrib.spip.net/Lecteur-Multimedia</lien>
 	<options>player_options.php</options>
 	<fonctions>player_fonctions.php</fonctions>
 	<prefix>Player</prefix>

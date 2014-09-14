@@ -12,7 +12,7 @@ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEA
 
 Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &#60; 1.9.2
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Thickbox</lien>
+	<lien>http://contrib.spip.net/Plugin-Thickbox</lien>
 	<prefix>ThickBox1</prefix>
 	<pipeline>
 		<nom>insert_head_css</nom>

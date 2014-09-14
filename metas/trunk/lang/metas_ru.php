@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configuration_metas' => 'Метаданные',
 'aide_ecrire_metas' => '<h4>M&eacute;tadonn&eacute;es</h4>
 <p>Настройка МЕТА-данных для вашего сайта.</p>
-<p>Для получения подробной информации о плагине - смотрите <a href="http://www.spip-contrib.net/?rubrique1250">документацию</a>.</p>',
+<p>Для получения подробной информации о плагине - смотрите <a href="http://contrib.spip.net?rubrique1250">документацию</a>.</p>',
 
 // Metadonnees par defaut
 'config_metas_defaut' => 'META-данные для главной страницы',

@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="images/configure_toolbars-48.png"
-	documentation="http://www.spip-contrib.net/Plugin-Porte-plume-partout"
+	documentation="http://contrib.spip.net/Plugin-Porte-plume-partout"
 >	
 
 	<nom>Porte Plume Partout</nom>

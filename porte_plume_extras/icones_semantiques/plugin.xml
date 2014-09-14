@@ -23,7 +23,7 @@
 -** <code>{</code>accolades simples<code>}</code> sont remplac&#233;es par <code><em></em></code> au lieu de <code><i></i></code>
 -** <code>{{</code>accolades doubles<code>}}</code> sont remplac&#233;es par <code><strong></strong></code> au lieu de <code><b></b></code>
 	</description>
-	<lien>http://www.spip-contrib.net/Icones-semantiques-pour-le-Porte-plume</lien>
+	<lien>http://contrib.spip.net/Icones-semantiques-pour-le-Porte-plume</lien>
 	<prefix>icones_semantiques</prefix>
 	<options>icones_semantiques_options.php</options>
 	<categorie>edition</categorie>

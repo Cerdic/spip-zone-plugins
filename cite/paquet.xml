@@ -11,7 +11,7 @@
 	<nom>Cite</nom>
 	<!-- Insérer des r&#233;f&#233;rences bibliographiques -->
 
-	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 	
 	<utilise nom="verifier" compatibilite="[0.1.8;[" />

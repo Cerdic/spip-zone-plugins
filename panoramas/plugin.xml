@@ -8,7 +8,7 @@
 	<icon>img_pack/panoramas-64.png</icon>
 	<description>Ce plugin s'applique sur les documents et images ins&#233;r&#233;es dans le texte de vos articles, rubriques ou br&#234;ves en pr&#233;cisant lors de l'insertion <code><embXX|panorama></code> ou <code><imgXX|panorama></code></description>
 	<prefix>panoramas</prefix>
-	<lien>http://www.spip-contrib.net/Plugin-Panoramas-360o</lien>
+	<lien>http://contrib.spip.net/Plugin-Panoramas-360o</lien>
 	<options> <!-- fichier charge a chaque hit -->
 		panoramas_mes_options.php
 	</options>

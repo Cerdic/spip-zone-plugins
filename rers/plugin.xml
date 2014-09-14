@@ -12,7 +12,7 @@ Utilisez SPIP pour centraliser les offres et demandes de savoirs des adh&#233;re
 
 Ce plugin a &#233;t&#233; d&#233;velopp&#233; initialement pour le r&#233;seau d'&#233;changes de savoirs RERS du sud de l'aisne en 2009.
 	</description>
-	<lien>http://www.spip-contrib.net/?article3059</lien>
+	<lien>http://contrib.spip.net/?article3059</lien>
 	<necessite id='SPIP' version='[2.0.5;2.0.99]' />
 	<necessite id='AHUNTSIC' version='[1.0.0;]' />
 	<necessite id='AGENDA' version='[2.0.0;]' />

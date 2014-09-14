@@ -24,7 +24,7 @@
 	[es]Activar previsualizar de los art&#237;culos en curso de redacci&#243;n
 	[de]Aktivieren vorschau anzeigen f&#252;r Artikel in Bearbeitung
 	</multi></description>
-	<lien>http://www.spip-contrib.net/Previsualiser-en-cours-de</lien>
+	<lien>http://contrib.spip.net/Previsualiser-en-cours-de</lien>
 	<prefix>previsu_redac</prefix>	
    <icon>previsu_redaction.png</icon>
    <pipeline>

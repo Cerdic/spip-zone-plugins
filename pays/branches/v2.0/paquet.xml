@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/pays-32.png"
 	schema="1.2.1"
-	documentation="http://www.spip-contrib.net/Liste-des-pays-avec-codes-ISO-3166-1"
+	documentation="http://contrib.spip.net/Liste-des-pays-avec-codes-ISO-3166-1"
 >	
 	<nom>Pays ISO 3166-1</nom>
 	<!-- Liste officielle des pays -->

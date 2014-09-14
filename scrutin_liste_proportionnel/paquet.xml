@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="scrutin.png"
-	documentation="http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la"
+	documentation="http://contrib.spip.net/Plugin-scrutin-de-liste-a-la"
 >	
 
 	<nom>Scrutin &#224; la proportionnelle</nom>

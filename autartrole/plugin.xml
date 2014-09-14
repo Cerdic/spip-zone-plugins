@@ -1,6 +1,6 @@
 <plugin>
     <nom>R&ocirc;le d'auteur par article</nom>
-    <auteur>[gilcot->http://http://www.spip-contrib.net/gilcot]</auteur>
+    <auteur>[gilcot->http://http://contrib.spip.net/gilcot]</auteur>
     <licence>GLP</licence>
     <version>0.3.1</version>
     <slogan>R&ocirc;le de l'auteur par raport &agrave; un article</slogan>

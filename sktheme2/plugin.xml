@@ -21,7 +21,7 @@ _ Notez que sktheme utilise les fichiers theme.xml pour detecter les disdributio
 _ Cette version ne contient pas de switcher
 </multi>
 </description>
-	<lien>[->http://www.spip-contrib.net/Plugin-Sktheme]</lien> <!-- URI de documentation -->
+	<lien>[->http://contrib.spip.net/Plugin-Sktheme]</lien> <!-- URI de documentation -->
  <prefix>sktheme</prefix>
  <options>sktheme_options.php</options>
  <pipeline>

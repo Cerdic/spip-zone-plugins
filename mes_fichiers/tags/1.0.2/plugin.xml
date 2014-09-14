@@ -26,7 +26,7 @@ The archive file is created in <code>tmp/mes_fichiers/</code> and is called <cod
 
 It is also possible to initiate an automatic daily backup of all customization files.</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Mes-Fichiers-2</lien>
+	<lien>http://contrib.spip.net/Mes-Fichiers-2</lien>
 
 	<prefix>mes_fichiers</prefix>
 	<options>mes_fichiers_options.php</options>

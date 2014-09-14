@@ -9,7 +9,7 @@
 	<description>
 		Ce plugin est une petite boutique en ligne avec SPIP. La gestion des produits se fait depuis la partie administration du site.
 	</description>
-	<lien>http://www.spip-contrib.net/Ma-petite-boutique</lien> 
+	<lien>http://contrib.spip.net/Ma-petite-boutique</lien> 
 	<icon>images/bag1_32.png</icon>
 	<prefix>boutique</prefix>
 		<install>base/boutique_upgrade.php</install>

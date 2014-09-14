@@ -6,7 +6,7 @@
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<description>Ce plugin permet d’utiliser le [m&#233;dia player de Yahoo !->http://developer.yahoo.com/mediaplayer/]. Le lecteur est g&#233;r&#233; enti&#232;rement par Yahoo, il suffit d’activer le plugin pour que tout vos mp3 soient pris en charge.</description>
-	<lien>http://www.spip-contrib.net/Y-Media-Player</lien>
+	<lien>http://contrib.spip.net/Y-Media-Player</lien>
 	<prefix>ymediaplayer</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

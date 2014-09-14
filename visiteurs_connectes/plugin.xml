@@ -34,7 +34,7 @@
 	<multi></description>
 	<fonctions>visiteurs_fonctions.php</fonctions>
 	<prefix>visiteurs_connectes</prefix>
-	<lien>http://www.spip-contrib.net/Nombres-de-visiteurs-connectes</lien>
+	<lien>http://contrib.spip.net/Nombres-de-visiteurs-connectes</lien>
 	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>statistique</categorie>
 </plugin>

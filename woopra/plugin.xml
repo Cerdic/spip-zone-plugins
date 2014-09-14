@@ -9,7 +9,7 @@
 	<description>
 	Woopra est un syst&#232;me destin&#233; &#224; fournir un outil de statistiques pour site web. Son originalit&#233;, c&#8217;est d&#8217;&#234;tre accompagn&#233; d&#8217;un logiciel client &#224; t&#233;l&#233;charger (Windows, Mac et Linux) qui permet de suivre les statistiques en temps r&#233;el ! [->http://www.woopra.com/]
 	</description>
-	<lien>http://www.spip-contrib.net/Statistiques-avec-Woopra</lien>
+	<lien>http://contrib.spip.net/Statistiques-avec-Woopra</lien>
 	<prefix>woopra</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

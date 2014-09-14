@@ -8,7 +8,7 @@
 	<etat>stable</etat>
 	<description>Le plugin Walma vous permet de regrouper toutes les images documents qui sont dans des articles de votre site et de cr&#233;er automatiquement des galeries. Il suffit ensuite de se rendre sur [?page=walma->../?page=walma]. Explications et forum voir aussi [->http://elastick.net/?article51].
 	</description>
-	<lien>http://www.spip-contrib.net/Presentation-de-Walma</lien>
+	<lien>http://contrib.spip.net/Presentation-de-Walma</lien>
 	<prefix>walma</prefix>
 	<!-- recommande id="cfg" version='[1.5.0;]' src="http://files.spip.org/spip-zone/cfg.zip" / -->
 	<install>

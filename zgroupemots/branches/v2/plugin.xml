@@ -7,7 +7,7 @@
 	<version>2.0.0</version>
 	<etat>stable</etat>
 	<description>Avec ce plugin, une page pour les groupe de mots cl&#233;s est ajout&#233;e. On peut y acc&#233;der avec un lien directement dans son squelette <code>#URL_PAGE{groupes_mot,id_groupe=#ID_GROUPE}</code>.</description>
-	<lien>http://www.spip-contrib.net/?article3341</lien>
+	<lien>http://contrib.spip.net/?article3341</lien>
 	<prefix>zgroupemots</prefix>
 	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />

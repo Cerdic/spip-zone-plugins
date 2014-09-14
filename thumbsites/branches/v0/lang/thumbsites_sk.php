@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_bouton_valider' => 'Potvrdiť vstupy',
 
 	// C
-	'cfg_descriptif' => 'Táto stránka vám umožňuje nastaviť zásuvný modul Thumbsites a najmä vybrať si server pre miniatúry. Ak chcete zistiť viac informácií, pozrite si <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>dokumentáciu na contribe</a>',
+	'cfg_descriptif' => 'Táto stránka vám umožňuje nastaviť zásuvný modul Thumbsites a najmä vybrať si server pre miniatúry. Ak chcete zistiť viac informácií, pozrite si <a href="http://contrib.spip.net?article2584">documentation sur contrib</a>dokumentáciu na contribe</a>',
 	'cfg_inf_apercite_parametres' => 'Prosím, zadajte svoje osobné údaje:',
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</ a> ponúka bezplatnú službu, ktorá si nevyžaduje identifikáciu.',
 	'cfg_inf_girafa_description' => 'Vytvorená miniatúra bude mať maximálnu veľkosť 160 x 120 pixelov (tieto hodnoty môžete zmeniť na stránke Girafy)',

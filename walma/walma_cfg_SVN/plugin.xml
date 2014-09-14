@@ -28,7 +28,7 @@ _ le plugin [CFG->http://files.spip.org/spip-zone/cfg.zip] est n&#233;cessaire p
 
 _ Explications et forum voir [->http://elastick.net/?id_article=51]
 	</description>
-	<lien>http://www.spip-contrib.net/Presentation-de-Walma</lien>
+	<lien>http://contrib.spip.net/Presentation-de-Walma</lien>
 	<prefix>
 walma
 	</prefix>

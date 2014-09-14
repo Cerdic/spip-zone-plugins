@@ -9,7 +9,7 @@
 		<multi>[fr]Insere un bloc partager et une page speciale (/?page=partager) pour suivre la vie du site </a>. necessite Zpip, utiliser socialtags id=#followme
 		[en]Insert a block to share and a special page (/?page=partager) to follow the website. need Zpip, use socialtags with id=#followme</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/</lien>
+	<lien>http://contrib.spip.net/</lien>
 	<prefix>partager</prefix>
 	<options>partager_options.php</options>
 	<fonctions>partager_fonctions.php</fonctions>

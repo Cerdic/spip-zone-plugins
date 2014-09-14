@@ -2,7 +2,7 @@
 	<nom>Alin&#233;as&#160;: &#171;&#160;Retour simple&#160;&#187;</nom>
 	<slogan>Pour le respect des &#171;&#160;retours &#224; la ligne&#160;&#187; simples</slogan>
 	<licence>GPL</licence>
-	<auteur>[Fil->http://www.spip-contrib.net/auteur4], [Ma&#239;eul->http://www.spip-contrib.net/auteur2650], [PatV->http://www.spip-contrib.net/auteur5714]</auteur>
+	<auteur>[Fil->http://contrib.spip.net/auteur4], [Ma&#239;eul->http://contrib.spip.net/auteur2650], [PatV->http://contrib.spip.net/auteur5714]</auteur>
 	<version>0.2.0</version>
 	<etat>stable</etat>
 	<description>
@@ -18,7 +18,7 @@ P.S.&#160;1&#160;: S&#8217;agissant des plus r&#233;centes versions de SPIP, le 
 
 P.S.&#160;2&#160;: {Le pr&#233;sent plugin ne fonctionne pas si le &#171;&#160;Couteau suisse&#160;&#187; est install&#233;&#160;; dans ce cas, utiliser la &#8220;lame&#8221; &#171;&#160;Retours de ligne automatiques&#160;&#187; du Couteau suisse.}
 	</description>
-	<lien>http://www.spip-contrib.net/Alineas-Retour-simple</lien>
+	<lien>http://contrib.spip.net/Alineas-Retour-simple</lien>
 	<prefix>retoursimple</prefix>
 	<icon>retoursimple.png</icon>
 	<options>retoursimple.php</options>

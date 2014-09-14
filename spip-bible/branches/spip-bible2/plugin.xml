@@ -24,7 +24,7 @@ Ces options sont :
 -* ref : Pour afficher les r&#233;f&#233;rences &#224; la suite du passage
 -* traduction : Pour choisir la traduction.
 
-La liste des traductions disponibles est sur [Spip-Contrib->http://www.spip-contrib.net/Spip-Bible-traductions-disponibles]
+La liste des traductions disponibles est sur [Spip-Contrib->http://contrib.spip.net/Spip-Bible-traductions-disponibles]
 	</description>
 	
 	<prefix>bible</prefix>
@@ -42,5 +42,5 @@ La liste des traductions disponibles est sur [Spip-Contrib->http://www.spip-cont
 	<fonctions>bible_fonctions.php</fonctions>
 	
 	<categorie>divers</categorie>
-	<lien>http://www.spip-contrib.net/Spip-Bible,1125</lien>
+	<lien>http://contrib.spip.net/Spip-Bible,1125</lien>
 </plugin>

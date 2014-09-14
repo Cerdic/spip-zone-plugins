@@ -4,7 +4,7 @@
 	<version>0.2.0</version>
 	<auteur>Fil</auteur>
 	<etat>test</etat>
-	<lien>http://www.spip-contrib.net/Shoutbox-pour-SPIP</lien>
+	<lien>http://contrib.spip.net/Shoutbox-pour-SPIP</lien>
 	<prefix>shoutbox</prefix>
 	<description>
 Chaque objet du site peut avoir sa shoutbox, qui permet &#224; tout visiteur de laisser un commentaire rapide. Contrairement au tchat classique :

@@ -33,7 +33,7 @@
 			Accessibility proof with management for subtitles, description and so on.
 		</multi>
 	</description>
-	<!-- <lien>http://www.spip-contrib.net/?articleXXXX</lien> -->
+	<!-- <lien>http://contrib.spip.net/?articleXXXX</lien> -->
 	<prefix>html5_medias</prefix>
 	
 	<pipeline>

@@ -5,7 +5,7 @@
 	<etat>test</etat>
 	<icon>images/sitra-64.png</icon>
 	<licence>GPL 3 - &#169; 2011</licence>
-	<lien>http://www.spip-contrib.net/spip.php?article3944</lien>
+	<lien>http://contrib.spip.net/spip.php?article3944</lien>
 	<slogan>Une interface de gestion des noisettes pour SITRA dans SPIP</slogan>
 	<description>Gestion des noisettes pour l'affichage des donn&#233;es SITRA dans les squelettes par formulaire de s&#233;lection des des cat&#233;gories et sous-cat&#233;gories des objets, des crit&#232;res internes et autres.</description>
 	<prefix>sitra_select</prefix>

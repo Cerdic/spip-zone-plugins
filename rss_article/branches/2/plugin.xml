@@ -15,7 +15,7 @@
 
 Pour &#233;viter les doublons et les imports successifs, une fois l'article cr&#233;&#233; l'article syndiqu&#233; est rejet&#233; (ce qui permet de suivre o&#249; en sont les recopi&#233;s).
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles</lien>
+	<lien>http://contrib.spip.net/Plugin-Flux-RSS-en-articles</lien>
 	<install>base/rssarticle_upgrade.php</install>
 	<prefix>rssarticle</prefix>
 	<categorie>edition</categorie>

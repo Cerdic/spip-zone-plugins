@@ -5,7 +5,7 @@
 	<licence>Apache License Version 2.0</licence>
 	<version>0.2.0</version>
 	<etat>test</etat>
-	<lien>http://www.spip-contrib.net/3758</lien>
+	<lien>http://contrib.spip.net/3758</lien>
 	<description>
 Readability est au d&#233;part un javascript d&#233;velopp&#233; par la soci&#233;t&#233; [arc90->http://lab.arc90.com/2009/03/02/readability/] qui permet de retirer tout le superflu d'une page Web, et d&#8217;en afficher le contenu essentiel, sans la navigation, la pub, etc.
 

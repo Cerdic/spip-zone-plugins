@@ -9,7 +9,7 @@
     <version_base>0.3</version_base>
   
     <etat>stable</etat>
-    <lien>http://www.spip-contrib.net/Rubrique-a-l-inscription</lien>
+    <lien>http://contrib.spip.net/Rubrique-a-l-inscription</lien>
 
     <description> Si le formulaire d'inscription est pass&#233; avec l'argument 0minirezo (<code>#FORMULAIRE_INSCRIPTION{0minirezo}</code>), une rubrique est automatiquement cr&#233;&#233;e, o&#249; l'auteur est admin restreint.</description>
     <icon>rubrique_a_linscription.png</icon>
@@ -45,6 +45,6 @@
 
 	<install>base/rubrique_a_linscription.php</install>
   	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-  	<lien>http://www.spip-contrib.net/Rubrique-a-l-inscription</lien>
+  	<lien>http://contrib.spip.net/Rubrique-a-l-inscription</lien>
 	<categorie>auteur</categorie>
 </plugin>

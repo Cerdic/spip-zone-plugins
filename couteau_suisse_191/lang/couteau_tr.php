@@ -57,7 +57,7 @@ Mevcut kategoriler &#351;unlard&#305;r : Y&ouml;netim, Tipografik Geli&#351;tirm
 
 Bu eklentide favori gere&ccedil;lerinizi bulacaks&#305;n&#305;z : {Numaray&#305; sil}, {URL formatlar&#305;}, {Tipografik t&#305;rnaklar}, {G&uuml;zel i&#351;aretler}, {Makaleleriniz i&ccedil;in i&ccedil;indekiler}, {G&uuml;len suratlar}, {SPAM\'e kar&#351;&#305; sava&#351;}, {G&uuml;zel URLler}, {SPIP ve d&#305;&#351; ba&#287;lar}, {Anonim forum yasaklama}, {Sayfa ve sekmelere ay&#305;rma}, vb.
 
-Eklentinin belgeleme makalelerini inceleyiniz : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Eklentinin belgeleme makalelerini inceleyiniz : [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
 
 Uyumluluk : SPIP 1.91',
 

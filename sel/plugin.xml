@@ -39,8 +39,8 @@
 	La gestion en ligne des adh&eacute;sions, leur renouvellement, leur caducit&eacute;, est pr&eacute;vue.
 	</multi>
 	</description>
-    <!-- URL de documentation http://www.spip-contrib.net/ -->
-    <lien>http://www.spip-contrib.net/SEL-systeme-d-echange-local</lien>
+    <!-- URL de documentation http://contrib.spip.net/ -->
+    <lien>http://contrib.spip.net/SEL-systeme-d-echange-local</lien>
 
     <!-- precise le prefixe utilis?our toutes les fonctions du plugin, en g?ral le nom du plugin -->
     <prefix>sel</prefix>

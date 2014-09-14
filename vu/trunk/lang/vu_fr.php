@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'apercu_source' => 'source : ',
 
 // C
-	'cfg_descriptif' => '<h4>Configurer le plugin Vu !</h4> <p>Vous pouvez ici choisir quels sont les types d\'objets actifs ainsi que les champs optionnels &agrave; utiliser pour chacun d\'entre eux.</p><p><b>Par défaut</b>, tous les objets et tous les champs optionnels sont activ&eacute;s.</p><p><b>Nota : </b>d&eacute;sactiver un objet ou un champ n\'a aucune incidence sur le contenu de la base de donn&eacute;e. On se contente simplement de retirer les formulaires superflux de l\'interface priv&eacute;e. Par cons&eacute;quent, quelque soit le param&eacute;trage choisi le contenu reste disponible depuis l\'interface publique, si le squelette le permet.</p><p><a href="http://www.spip-contrib.net/Vu-la-documentation" class="spip_out">Documentation</a>',
+	'cfg_descriptif' => '<h4>Configurer le plugin Vu !</h4> <p>Vous pouvez ici choisir quels sont les types d\'objets actifs ainsi que les champs optionnels &agrave; utiliser pour chacun d\'entre eux.</p><p><b>Par défaut</b>, tous les objets et tous les champs optionnels sont activ&eacute;s.</p><p><b>Nota : </b>d&eacute;sactiver un objet ou un champ n\'a aucune incidence sur le contenu de la base de donn&eacute;e. On se contente simplement de retirer les formulaires superflux de l\'interface priv&eacute;e. Par cons&eacute;quent, quelque soit le param&eacute;trage choisi le contenu reste disponible depuis l\'interface publique, si le squelette le permet.</p><p><a href="http://contrib.spip.netVu-la-documentation" class="spip_out">Documentation</a>',
 	'cfg_titre' => 'Vu !',
 	'cfg_soustitre1' => 'Les objets actifs',
 	'cfg_soustitre2' => 'Les champs optionnels',

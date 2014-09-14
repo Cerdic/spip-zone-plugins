@@ -18,7 +18,7 @@
 		Ainsi, l'administrateur du site peut commencer &#224; attribuer des droits personnalis&#233;s sans avoir &#224; attendre la premi&#232;re connexion de l'auteur.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Peuplement-LDAP</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Peuplement-LDAP</lien> <!-- URI de documentation -->
 	<options>peuplement_ldap_options.php</options>
 	<fonctions>peuplement_ldap.php</fonctions>
 	<prefix>PeuplementLdap</prefix>

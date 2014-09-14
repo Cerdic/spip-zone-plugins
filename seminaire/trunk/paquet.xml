@@ -5,12 +5,12 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/seminaire-64.png"
-	documentation="http://www.spip-contrib.net/?article4288"
+	documentation="http://contrib.spip.net/?article4288"
 	schema="1.1.0" 
 >
 	<nom>Séminaire</nom>
 
-	<auteur lien='http://www.spip-contrib.net/Amaury-Adon'>Amaury Adon</auteur>
+	<auteur lien='http://contrib.spip.net/Amaury-Adon'>Amaury Adon</auteur>
 
 	<licence>GNU/GPL</licence>
 

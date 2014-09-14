@@ -5,13 +5,13 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/letter_32.png"
-	documentation="http://www.spip-contrib.net/?article3638"
+	documentation="http://contrib.spip.net/?article3638"
 >	
 
 	<nom>Tip A Friend</nom>
 	<!-- Envoyer une page d'un site SPIP à une liste d'adresses e-mail -->
 
-	<auteur lien="http://www.spip-contrib.net/PieroWbmstr">Piero Wbmstr</auteur>
+	<auteur lien="http://contrib.spip.net/PieroWbmstr">Piero Wbmstr</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

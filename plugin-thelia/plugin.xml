@@ -6,7 +6,7 @@
 	<slogan>Interfacer SPIP avec le logiciel de vente en ligne Th&#233;lia</slogan>
  	<description>Plugin permettant d'utiliser les boucles Th&#233;lia dans vos squelettes</description>
 	<licence>GNU/GPL</licence>
-	<lien>http://www.spip-contrib.net/Plugin-Thelia</lien>
+	<lien>http://contrib.spip.net/Plugin-Thelia</lien>
  	<etat>stable</etat>
  	<options>spip_thelia_options.php</options>
 	<fonctions>spip_thelia_fonctions.php</fonctions>

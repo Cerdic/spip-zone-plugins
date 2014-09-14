@@ -8,9 +8,9 @@
 	<icon>images/article_accueil-48.png</icon>
 	<auteur>
 		<multi>
-			[fr][Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin autonome.
-			[en][Cedric Morin->http://www.yterium.com] for the original contribution in the plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] to create the standalone plugin.
-			[es][Cedric Morin->http://www.yterium.com] por la contribuci&#243;n inicial en el plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] por transformarlo en un plugin autónomo.
+			[fr][Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, [Joseph->http://contrib.spip.net/Joseph] pour la mise en plugin autonome.
+			[en][Cedric Morin->http://www.yterium.com] for the original contribution in the plugin Compositions, [Joseph->http://contrib.spip.net/Joseph] to create the standalone plugin.
+			[es][Cedric Morin->http://www.yterium.com] por la contribuci&#243;n inicial en el plugin Compositions, [Joseph->http://contrib.spip.net/Joseph] por transformarlo en un plugin autónomo.
 		</multi>
 	</auteur>
 	<licence>GPL</licence>

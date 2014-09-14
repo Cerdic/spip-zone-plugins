@@ -11,7 +11,7 @@ Ce portail web pour [PMB->http://www.pmbservices.fr] contient un squelette pr&#2
 
 PMB est un Sigb (Syst&#232;me Int&#233;gr&#233; de Gestion de Biblioth&#232;que) libre.
 	</description>
-	<lien>http://www.spip-contrib.net/Portail-Web-pour-PMB</lien>
+	<lien>http://contrib.spip.net/Portail-Web-pour-PMB</lien>
 	<options>pmb_mes_options.php</options>
 	
 	<fonctions>pmb_mes_fonctions.php</fonctions>
