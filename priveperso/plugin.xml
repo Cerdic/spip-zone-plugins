@@ -3,7 +3,7 @@
 	<slogan>A chaque rubrique son style</slogan>
 	<auteur>S&#233;bastien Zamith</auteur>
 	<icon>prive/themes/spip/images/priveperso-24.png</icon>
-	<version>0.6.1</version>
+	<version>0.6.2</version>
 	<version_base>0.4.0</version_base>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
@@ -24,6 +24,7 @@
 		<titre>priveperso:prive_perso</titre>
 	</bouton>
 	<bouton id='priveperso_bando' parent='bando_configuration'>
+		<url>priveperso</url>
 		<icone>prive/themes/spip/images/priveperso-24.png</icone>
 		<titre>priveperso:prive_perso</titre>
 	</bouton>
