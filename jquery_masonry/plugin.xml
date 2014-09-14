@@ -11,7 +11,7 @@
 		</multi>
 	</description>
 	<icon>prive/themes/spip/images/jquerymasonry-32.png</icon>
-	<lien>http://www.spip-contrib.net/JQuery-Masonry</lien>
+	<lien>http://contrib.spip.net/JQuery-Masonry</lien>
 	<prefix>jquerymasonry</prefix>
 	<install>base/jquerymasonry_install.php</install>
 	<pipeline>

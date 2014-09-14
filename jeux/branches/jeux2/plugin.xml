@@ -34,7 +34,7 @@ Cr&#233;dits :
 -** Mots crois&#233;s et scores : Ma&#239;eul Rouquette
 -** Diagrammes d'&#233;checs : Fran&#231;ois Schreuer
 	</description>
-	<lien>http://www.spip-contrib.net/Des-jeux-dans-vos-articles</lien>
+	<lien>http://contrib.spip.net/Des-jeux-dans-vos-articles</lien>
 	<fonctions>jeux_fonctions.php</fonctions>
 	<options>jeux_options.php</options>
 	<prefix>jeux</prefix>

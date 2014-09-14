@@ -14,7 +14,7 @@ l'&#233;criture de feuilles de style complexes. [->http://lessphp.gpeasy.com/]
 Ce plugin compile &#224; la vol&#233;e tous les fichiers .less.css ou .less du squelette qui contient #INSERT_HEAD. Vous pouvez aussi forcer la compilation d'un fichier ou d'une feuille de style calcul&#233;e &#224; l'aide du filtre less_css.
 	</description>
 	<prefix>lesscss</prefix>
-	<lien>http://www.spip-contrib.net/CSS-facile-avec-LESSpip</lien>
+	<lien>http://contrib.spip.net/CSS-facile-avec-LESSpip-Less-CSS</lien>
 	<categorie>outil</categorie>
 	<fonctions>lesscss_fonctions.php</fonctions>
 	<pipeline>

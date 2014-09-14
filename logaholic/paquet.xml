@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[1.9.2;3.0.*]"
 	logo="images/logaholic-32x32.png"
-	documentation="http://www.spip-contrib.net/?article4153"
+	documentation="http://contrib.spip.net/?article4153"
 >	
 
 	<nom>Logaholic</nom>

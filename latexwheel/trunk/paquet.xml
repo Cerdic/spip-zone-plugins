@@ -4,7 +4,7 @@
 	version="1.0.2"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="spiplatex.png"
-	documentation="http://www.spip-contrib.net/Livre-avec-SPIP"
+	documentation="http://contrib.spip.net/Livre-avec-SPIP"
 	etat="test">
 	<nom>LaTeXWheel</nom>
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>

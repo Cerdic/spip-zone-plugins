@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'auteur' => 'Auteur',
 
 'nouveau_jeu' => 'Nouveau jeu',
-'explication_jeu'=> 'Le titre priv&eacute; sert simplement &agrave; identifier le jeu en partie priv&eacute;e.<br /><br />Le contenu du jeu doit suivre la syntaxe d&eacute;crite dans <a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">la&nbsp;documentation</a> du plugin.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
+'explication_jeu'=> 'Le titre priv&eacute; sert simplement &agrave; identifier le jeu en partie priv&eacute;e.<br /><br />Le contenu du jeu doit suivre la syntaxe d&eacute;crite dans <a href="http://contrib.spip.net/Des-jeux-dans-vos-articles">la&nbsp;documentation</a> du plugin.<br /><br />Ici, les balises &lt;jeux> et &lt;/jeux> sont inutiles.',
 'modifier_jeu' => 'Modifier le jeu num&eacute;ro @id@',
 'modifier_ce_jeu' => 'Modifier ce jeu',
 'voir_jeu' => 'Voir le jeu',

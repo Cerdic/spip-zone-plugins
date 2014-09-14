@@ -9,7 +9,7 @@
 	<description>
 Ce plugin permet d'ex&#233;cuter des actions de v&#233;rification et de nettoyage des fichiers de langue de SPIP, des plugins ou des squelettes. Il est aussi possible de consulter l'ensemble des items contenus dans les fichiers de langue disponibles sur le site et d'effectuer des recherches d'items dans les fichiers de langue de SPIP. Sous certaines conditions, il produit automatiquement des items de langue &#224; partir des textes libres rep&#233;r&#233;s.
 	</description>
-	<lien>http://www.spip-contrib.net/langOnet-Presentation-generale</lien>
+	<lien>http://contrib.spip.net/langOnet-Presentation-generale</lien>
 	<prefix>langonet</prefix>
 
 	<fonctions>langonet_fonctions.php</fonctions>

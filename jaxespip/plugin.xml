@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
-<!-- mais pourquoi SPIP n'est-il pas capable de gérer un encodage de caractères ?!? -->
+<!-- mais pourquoi SPIP n'est-il pas capable de gÃ©rer un encodage de caractÃ¨res ?!? -->
 	<!-- Parce que les fichiers dans spip-zone (comme dans le code de spip) sont en us-ascii (Nicolas Krebs, 2006-10-30)-->
-<!-- les entités HTML sont interdites ici, mais SPIP oblige à en mettre... -->
-<!-- contrairement à ce que l'on pourrait croire, ce fichier n'est donc pas un fichier XML -->
+<!-- les entitÃ©s HTML sont interdites ici, mais SPIP oblige Ã  en mettre... -->
+<!-- contrairement Ã  ce que l'on pourrait croire, ce fichier n'est donc pas un fichier XML -->
 <plugin>
 	<nom>JaxeSPIP</nom>
 	<auteur>Damien Guillaume</auteur>

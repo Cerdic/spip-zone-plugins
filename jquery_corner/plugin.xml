@@ -12,7 +12,7 @@
 		</multi>
 	</description>
 	<icon>prive/themes/spip/images/jquerycorner-32.png</icon>
-	<lien>http://www.spip-contrib.net/JQuery-Corner</lien>
+	<lien>http://contrib.spip.net/JQuery-Corner</lien>
 	<prefix>jquerycorner</prefix>
 	<install>base/jquerycorner_install.php</install>
 	<pipeline>

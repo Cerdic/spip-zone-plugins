@@ -25,7 +25,7 @@
 	</description>
 	<licence>GNU/GPL</licence>
 	<icon>images/legendes-128.png</icon>
-	<lien>http://www.spip-contrib.net/Legendes</lien>
+	<lien>http://contrib.spip.net/Legendes</lien>
 	<fonctions>legendes_fonctions.php</fonctions>
 	<install>legendes_administrations.php</install>
 	<pipeline>

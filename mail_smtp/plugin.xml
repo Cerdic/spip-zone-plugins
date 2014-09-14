@@ -6,7 +6,7 @@
 	<description>Utilisation d'un serveur SMTP pour l'envoi des mails par SPIP
 _ Les param&#232;tres du serveur SMTP sont configur&#233;s dans la panneau de configuration des fonctions avanc&#233;es.	
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-Mail-SMTP-test</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Le-plugin-Mail-SMTP-test</lien> <!-- URI de documentation -->
 	<prefix>smtp</prefix>
 	<pipeline>
 		<nom>affiche_milieu</nom>

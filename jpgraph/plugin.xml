@@ -12,7 +12,7 @@
 	<etat>dev</etat>
 	<prefix>jpgraph</prefix>
 	<icon>img/jpgraph.png</icon>
-	<lien>http://www.spip-contrib.net/plugin-JpGraph</lien>
+	<lien>http://contrib.spip.net/JpGraph</lien>
 	<fonctions>jpgraph_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<necessite id="lib:jpgraph-3.0.7" src="http://jpgraph.net/download/download.php?p=1" />

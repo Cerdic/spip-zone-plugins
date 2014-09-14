@@ -8,7 +8,7 @@
 	<description>
 	Ce plugin permet d'ins&#233;rer des notations musicales dans les articles et les forums en utilisant le logiciel libre [Lilypond->http://lilypond.org/].
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Lilyspip-version-Codepress</lien>
+	<lien>http://contrib.spip.net/Plugin-Lilyspip-version-Codepress</lien>
 	<prefix>lilyspip</prefix>
 	<install>lilyspip_gestion.php</install>	
 	<options>lilyspip_options.php</options>

@@ -12,7 +12,7 @@ Ce plugin coupl&eacute; au plugin scssphp permet d'utiliser le framework CSS Kna
 [->http://knacss.com]
 	</description>
 	<prefix>knacsss</prefix>
-	<lien>http://www.spip-contrib.net/CSS-facile-avec-LESSpip</lien>
+	<lien>http://contrib.spip.net/CSS-facile-avec-LESSpip-Less-CSS</lien>
 	<categorie>outil</categorie>
 	<pipeline>
 		<nom>insert_head</nom>

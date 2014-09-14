@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Javascript Scroller</nom>
-	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<version>1.44.1</version>
 	<licence>&#169; 2009 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
 	<icon>javascriptb.png</icon>

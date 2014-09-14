@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// General
 	'js_scroller' => 'Javascript Scroller',
 	'titre_original' => 'Javascript Scroller, plugin pour SPIP',
-	'licence_actuelle' => 'Copyright &#169; 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribu&eacute; sous licence [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html].',
+	'licence_actuelle' => 'Copyright &#169; 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] distribu&eacute; sous licence [GNU GPL v3->http://www.opensource.org/licenses/gpl-3.0.html].',
 	'licence_originale' => 'Le code javascript est tir&#233; de [->http://javascripts.vbarsan.com/] (licence libre).',
 
 	// Documentation
@@ -71,7 +71,7 @@ Vous pouvez tester vos diff&eacute;rentes options en &eacute;ditant le fichier \
 
 {{{Documentation & Suivi des bugs}}}
 
-Une documentation compl&egrave;te et un forum sont disponibles en ligne : [->http://www.spip-contrib.net/?article3570].',
+Une documentation compl&egrave;te et un forum sont disponibles en ligne : [->http://contrib.spip.net/?article3570].',
 
 	// Infos squelette de documentation
 	'docskel_sep' => '----',
@@ -82,6 +82,6 @@ Une documentation compl&egrave;te et un forum sont disponibles en ligne : [->htt
 -* [Mode &#034;texte simple&#034;->@mode_brut@] ({html simple + balise INSERT_HEAD})
 -* [Mode &#034;squelette Zpip&#034;->@mode_zpip@] ({squelette Z compatible})
 -* [Mode &#034;squelette SPIP&#034;->@mode_spip@] ({compatible distribution})',
-	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->http://www.spip-contrib.net/?article3570].',
+	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->http://contrib.spip.net/?article3570].',
 );
 ?>

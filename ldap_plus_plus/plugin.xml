@@ -2,7 +2,7 @@
 	<nom>Ldap++</nom>
 	<auteur>VincentL</auteur>
 	<licence>&#169; 2009 - GPL</licence>
-	<lien>http://www.spip-contrib.net/LDAP</lien>
+	<lien>http://contrib.spip.net/LDAP</lien>
 	<icon>ldaplus.png</icon>
 	<version>0.1.0</version>
 	<etat>dev</etat>

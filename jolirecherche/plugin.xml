@@ -8,7 +8,7 @@
 	<etat>stable</etat>
 	<description>Ce plugin remplace le formulaire de recherche de Spip par de jolie bo&#238;te de saisie</description>
 	<icon>images/jolirecherche.png</icon>
-	<lien>http://www.spip-contrib.net/Plugin-Jolie-Recherche</lien>
+	<lien>http://contrib.spip.net/Plugin-Jolie-Recherche</lien>
 	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>recherche_public.php</inclure>

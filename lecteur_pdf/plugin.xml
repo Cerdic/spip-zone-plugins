@@ -13,7 +13,7 @@
 		dev
 	</etat>
 	<description>
-	ins&#232;re un lecteur de fichier pdf directement dans un article en y ins&#233;rant le code<code>&lt;lecteurpdfXX&gt;</code> en remplaçant XX par le num&#233;ro de l'article 
+	ins&#232;re un lecteur de fichier pdf directement dans un article en y ins&#233;rant le code<code>&lt;lecteurpdfXX&gt;</code> en remplaÃ§ant XX par le num&#233;ro de l'article 
  
 	</description>
 	<icon>css/images/logo_article.png</icon>

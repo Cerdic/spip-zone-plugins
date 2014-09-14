@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.0.*]"
 	logo="img/jeux-48.png"
 	schema="0.17"
-	documentation="http://www.spip-contrib.net/Des-jeux-dans-vos-articles"
+	documentation="http://contrib.spip.net/Des-jeux-dans-vos-articles"
 >	
 	<nom>Des jeux dans vos articles</nom>
 	<auteur>Patrice VANNEUFVILLE, Ma&#239;eul Rouquette</auteur>

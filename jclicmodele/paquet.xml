@@ -5,7 +5,7 @@
   etat="stable"
   compatibilite="[1.9.2;3.0.*]"
   logo="img_pack/jclic_logo.png"
-  documentation="http://www.spip-contrib.net/Jclic-Modele"
+  documentation="http://contrib.spip.net/Jclic-Modele"
 >
   <nom>Jclic Mod&#232;le</nom>
   <auteur>Olivier Gautier</auteur>

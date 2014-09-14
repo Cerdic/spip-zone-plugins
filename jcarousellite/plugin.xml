@@ -12,7 +12,7 @@
 
 		</multi>
 	</description>
-    <lien>http://www.spip-contrib.net/?article</lien>
+    <lien>http://contrib.spip.net/?article</lien>
     <prefix>jcarousellite</prefix>
 	<necessite id="SPIP" version="[2.0;]" />
 	<pipeline>

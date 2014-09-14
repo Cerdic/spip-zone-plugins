@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	logo="images/legendes-128.png"
 	schema="0.1"
-	documentation="http://www.spip-contrib.net/Legendes"
+	documentation="http://contrib.spip.net/Legendes"
 >	
 
 	<nom>L&#233;gendes</nom>

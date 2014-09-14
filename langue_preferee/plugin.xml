@@ -27,7 +27,7 @@ If not any website language suits the visitor's preferred language, the website 
 It's possible to let the visitor choose it's own preferred language, that may be different from its browser, by adding (for example selecting english) <code>/?lang=en</code> calling sommaire page. Therefore this choice is stored in a cookie for further use and will take precedence to the browser preference. The <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE</code> tag allows you to add a link allowing to remove this cookie. Using a parameter like: <code>#LANGUE_PREFEREE_LIEN_EFFACE_COOKIE{my own message}</code> prompts your "own message" instead of the default one.
 		</multi>
    </description>
-	<lien>http://www.spip-contrib.net/Plugin-Langue-preferee-par-l-internaute</lien>
+	<lien>http://contrib.spip.net/Plugin-Langue-preferee-par-l-internaute</lien>
    <chemin dir='' />
 	<prefix>languepreferee</prefix>
 	<options>languepreferee_options.php</options>

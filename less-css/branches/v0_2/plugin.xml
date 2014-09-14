@@ -13,7 +13,7 @@ Ce plugin cr&#233;&#233; les fichiers css correspondant &#224; vos fichiers less
 	<etat>dev</etat>
 	<prefix>lesspip</prefix>
 	<icon>img/lesspip.png</icon>
-	<lien>http://www.spip-contrib.net/CSS-facile-avec-LESSpip</lien>
+	<lien>http://contrib.spip.net/CSS-facile-avec-LESSpip-Less-CSS</lien>
 	<fonctions>lessphp/gen_styles.php</fonctions>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>outil</categorie>
