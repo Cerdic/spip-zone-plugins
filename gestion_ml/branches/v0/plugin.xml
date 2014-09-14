@@ -13,7 +13,7 @@
 	<prefix>gestionml</prefix>
 	<install>base/gestionml_install.php</install>
 	<icon>images/gestionml-32.png</icon>
-	<lien>http://www.spip-contrib.net/Gestion-ML-avec-Soap</lien>
+	<lien>http://contrib.spip.net/Gestion-ML-avec-Soap</lien>
    <pipeline>
    	<nom>autoriser</nom>
 		<inclure>inc/gestionml_autoriser.php</inclure>

@@ -6,7 +6,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/gis.png"
-	documentation="http://www.spip-contrib.net/GIS2"
+	documentation="http://contrib.spip.net/GIS-2-GIS-3"
 >
 
 	<nom>GIS</nom>

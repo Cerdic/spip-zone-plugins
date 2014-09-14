@@ -8,7 +8,7 @@
 	<licence>(c) 2007-2013 GPL</licence>
 	<description>Ajouter un moteur de recherche suppl&#233;mentaire &#224; votre SPIP pour remplacer ou compl&#233;ter le moteur de recherche existant.. {{R&#233;f&#233;rence :}} [API Google Custum Search->https://developers.google.com/custom-search/docs/element]
 	</description> 
-	<lien>http://www.spip-contrib.net/Plugin-Google-Ajax-Search</lien>
+	<lien>http://contrib.spip.net/Plugin-Google-Ajax-Search</lien>
 	<prefix>googleajaxsearch</prefix>
 	<icon>img_pack/google_but.png</icon>
 	<pipeline>

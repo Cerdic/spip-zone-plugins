@@ -7,7 +7,7 @@
 	<icon>prive/images/guestbook_logo.png</icon>
 	<etat>stable</etat>
 	<description>Guestbook vous procure un Livre d'or pour votre site Spip. Passez la souris sur le bouton Forum pour voir apparaitre l'interface de mod&eacute;ration</description>
-	<lien>http://www.spip-contrib.net/Guestbook</lien>
+	<lien>http://contrib.spip.net/Guestbook</lien>
 	<prefix>guestbook</prefix>
 	<fonctions>guestbook_fonctions.php</fonctions>
 	<install>base/guestbook_upgrade.php</install>

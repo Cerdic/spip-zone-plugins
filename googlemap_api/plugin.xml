@@ -25,7 +25,7 @@ _ Help to use the API in several plugins (Gis, Geoforms...).
 	</multi>
 	</description>
 
-	<lien>http://www.spip-contrib.net/Plugin-Google-Maps-API</lien>
+	<lien>http://contrib.spip.net/Plugin-Google-Maps-API</lien>
 	<install>base/geomap_upgrade.php</install>
 	<fonctions>public/geomap_balises.php</fonctions>
 	<prefix>geomap</prefix>

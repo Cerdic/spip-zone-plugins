@@ -8,7 +8,7 @@
 	<icon>theme/img/gmaps_v3-32.png</icon>
 	<etat>dev</etat>
 	<description>Ce plugin offre une interface de configuration de l'API Google Maps v3</description>
-	<lien>http://www.spip-contrib.net/?article3632</lien>
+	<lien>http://contrib.spip.net/?article3632</lien>
 	<prefix>gmaps_v3</prefix>
 
 	<pipeline>

@@ -6,7 +6,7 @@
  <auteur>Philippe Auriol [contact->mailto:philippe.auriol@gmail.com]
 _ [page perso->http://philippe.auriol.free.fr/]</auteur>
  <description> Ce plugin est un glossaire bas&#233; sur la 
- [contrib de Francois Schreuer->http://www.spip-contrib.net/Un-glossaire-interne], 
+ [contrib de Francois Schreuer->http://contrib.spip.net/Un-glossaire-interne], 
  il a &#233;t&#233; modifi&#233; pour supporter la pr&#233;sence des mots dans les liens 
  et en ne prenant la chaine de caractere que si elle est entouree de deux espaces.
  Il est distribu&#233; sous licence GNU/GPL

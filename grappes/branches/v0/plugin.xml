@@ -7,7 +7,7 @@
 	<etat>test</etat>
 	<prefix>grappes</prefix>
 	<icon>images/grappe-24.gif</icon>
-	<lien>http://www.spip-contrib.net/Plugin-Grappes</lien>
+	<lien>http://contrib.spip.net/Grappes,3278</lien>
 	<description><multi>
 	[fr]Permet de regrouper des &#233;l&#233;ments de SPIP
 	comme des auteurs, rubriques, articles (lorsque l'interface existe pour)...

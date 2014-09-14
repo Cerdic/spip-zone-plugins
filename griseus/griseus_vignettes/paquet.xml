@@ -16,6 +16,6 @@
 
 	<licence>GNU/GPL</licence>
 
-	<utilise nom="medias" compatibilite="[2.0.0;[" />
+	<utilise nom="medias" compatibilite="[2.7.27;[" />
 
 </paquet>

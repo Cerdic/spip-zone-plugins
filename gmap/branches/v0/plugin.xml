@@ -12,7 +12,7 @@
 _ Dans l&apos;espace public, vous pouvez ins&#233;rer des cartes dans les squelettes ou dans les textes en ma&#238;trisant finement la repr&#233;sentation des points et les informations qui leur sont associ&#233;es.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-GMap-geolocalisation-et-cartographie-des-objets</lien>
+	<lien>http://contrib.spip.net/Plugin-GMap-geolocalisation-et-cartographie</lien>
 	<categorie>divers</categorie>
 	 
 	<install>base/gmap_install.php</install>
@@ -29,7 +29,7 @@ _ Dans l&apos;espace public, vous pouvez ins&#233;rer des cartes dans les squele
     <!-- Options SPIP -->
 	<options>gmap_options.php</options>
 
-    <!-- Installation de la base de données -->
+    <!-- Installation de la base de donnÃ©es -->
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/gmap_tables.php</inclure>
@@ -49,7 +49,7 @@ _ Dans l&apos;espace public, vous pouvez ins&#233;rer des cartes dans les squele
 		<inclure>gmap_autoriser.php</inclure>
 	</pipeline>
 	
-	<!-- Saisie dans la zone privée -->
+	<!-- Saisie dans la zone privÃ©e -->
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>insert_head_prive</action>

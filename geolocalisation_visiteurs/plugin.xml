@@ -7,7 +7,7 @@
     <version_base>0.1</version_base>
   
     <etat>test</etat>
-	<lien>http://www.spip-contrib.net/Geolocaliser-les-articles-en-fonction-de-l-ip-des</lien>
+	<lien>http://contrib.spip.net/Geolocaliser-les-articles-en-fonction-de-l-ip-de-l</lien>
     <description>G&#233;olocaliser les visiteurs afin d'afficher les articles correspondant.</description>
     <prefix>geo_visiteurs</prefix>
 	<fonctions>geo_visiteurs_fonctions.php</fonctions>

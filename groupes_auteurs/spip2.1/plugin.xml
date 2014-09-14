@@ -9,7 +9,7 @@
 	<description>
 		Ce plugin permet de cr&#233;er des groupes d'auteurs et de les associer &#233;ventuellement aux zones du plugin Acc&#232;s restreint.
 	</description>
-	<lien>http://www.spip-contrib.net/Gestion-de-Groupes-d-auteurs-2,3135</lien>
+	<lien>http://contrib.spip.net/Gestion-de-Groupes-d-auteurs-2,3135</lien>
 	<icon>img_pack/groupes_auteurs.png</icon>
 	<prefix>groupes</prefix>
 	<install>base/groupes_install.php</install>

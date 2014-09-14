@@ -25,7 +25,7 @@ This plugin adds two talbes to the database, one named {{spip_gis}} and the othe
 	</multi>
 	</description>
 
-	<lien>http://www.spip-contrib.net/Plugin-Gis-escoitar</lien>
+	<lien>http://contrib.spip.net/Plugin-Gis-escoitar</lien>
 	<install>base/gis_upgrade.php</install>
 	<options>gis_options.php</options>
 	<prefix>gis</prefix>

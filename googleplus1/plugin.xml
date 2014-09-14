@@ -16,7 +16,7 @@
 		</multi>
 	</description>
 	<icon>images/plusone-32.png</icon>
-	<lien>http://www.spip-contrib.net/Google-1</lien>
+	<lien>http://contrib.spip.net/Google-1</lien>
 	<prefix>googleplus1</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

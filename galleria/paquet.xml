@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[1.9.2;3.0.*]"
 	logo="galleria.png"
-	documentation="http://www.spip-contrib.net/Galleria"
+	documentation="http://contrib.spip.net/Galleria"
 >
 	<nom>Galleria plugin pour SPIP</nom>
 	<auteur>LUU-THO Th&#224;nh</auteur>

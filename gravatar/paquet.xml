@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/gravatar-64.png"
-	documentation="http://www.spip-contrib.net/gravatar"
+	documentation="http://contrib.spip.net/gravatar"
 >	
 
 	<nom>Gravatar</nom>

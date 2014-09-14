@@ -7,7 +7,7 @@
 	<description>Ce plugin permet de remplir la table qui lie les m&#233;tadonn&#233;es et les articles ou les rubriques.
 	- il permet aussi de modifier les url propres de chacun de ces objets
 	- il permet aussi de mettre en &eacute;vidence des mots choisi comme importants : tous les mots &eacute;crits dans [->./?exec=cfg&amp;cfg=motsimportantssont] modifier par entour&eacute; par la balise html strong</description>
-	<lien>http://www.spip-contrib.net/gestion-des-metas</lien>
+	<lien>http://contrib.spip.net/Plugin-de-gestion-des-metas</lien>
 	<fonctions>GestionMetas.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>

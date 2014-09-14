@@ -16,7 +16,7 @@
 		Jquery propos&eacute; par Chris Dary <umbrae@gmail.com>
 		http://lab.arc90.com/2009/07/09/hashmask-another-more-secure-experiment-in-password-masking/	
 	</multi>	</description>
-	<lien>http://www.spip-contrib.net/Hashmask</lien>
+	<lien>http://contrib.spip.net/Hashmask</lien>
 	<prefix>hashmask</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

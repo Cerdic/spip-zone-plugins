@@ -30,7 +30,7 @@ Also extend the #LOGO_AUTEUR tag in order to take into account the gravatar of a
 _ Configures a default image, and image size.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/gravatar</lien>
+	<lien>http://contrib.spip.net/gravatar</lien>
 	<prefix>gravatar</prefix>
 	<fonctions>gravatar_fonctions.php</fonctions>
 	<pipeline>

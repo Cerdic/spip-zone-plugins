@@ -14,7 +14,7 @@ _ Icone de [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] sous 
 _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] under CC BY-NC-SA license
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/GIS2</lien>
+	<lien>http://contrib.spip.net/GIS-2-GIS-3</lien>
 	<prefix>gis</prefix>
 	<icon>images/gis.png</icon>
 	<options>gis_options.php</options>

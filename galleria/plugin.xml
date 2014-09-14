@@ -35,7 +35,7 @@ Les options du mod&#232;le sont :
  
 ex : <code><galleria22></code> une galerie dans l'article 22 ; <code><galleria22|lightbox=true></code> activation de l'effet lightbox.
 [emthanh@free.fr->mailto:emthanh@free.fr] 
-[Le site du plugin->http://www.spip-contrib.net/Galleria]
+[Le site du plugin->http://contrib.spip.net/Galleria]
 [Galleria, librairie javascript->http://galleria.aino.se/]
 | version 1.3.1 | fix plusieurs galleries |
 | version 1.3.0 | galleria js librairie 1.2.9 |
@@ -58,7 +58,7 @@ The options of the modele are :
  
 ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|lightbox=true></code> activate the lightbox effect.
 [emthanh@free.fr->mailto:emthanh@free.fr] 
-[the plugin's website->http://www.spip-contrib.net/Galleria]
+[the plugin's website->http://contrib.spip.net/Galleria]
 [Galleria, javascript library->http://galleria.aino.se/]
 | version 1.3.1 | fix several galeries |
 | version 1.3.0 | galleria js librairy 1.2.9 |
@@ -69,7 +69,7 @@ ex : <code><galleria22></code> a gallery in the article 22 ; <code><galleria22|l
 	</description>
 	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	<categorie>multimedia</categorie>
-	<lien>http://www.spip-contrib.net/Galleria</lien>
+	<lien>http://contrib.spip.net/Galleria</lien>
 	<prefix>galleria</prefix>
 	<pipeline>
 	 <nom>insert_head</nom>

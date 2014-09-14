@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/google_but.png"
-	documentation="http://www.spip-contrib.net/Plugin-Google-Ajax-Search"
+	documentation="http://contrib.spip.net/Plugin-Google-Ajax-Search"
 >	
 	<nom>Google Ajax Search</nom>
 	<auteur lien="http://www.erational.org">erational</auteur>

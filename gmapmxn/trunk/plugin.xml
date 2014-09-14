@@ -11,7 +11,7 @@
 _ Il permet donc d&apos;utiliser des cartes de diff&#233;rents fournisseurs (notamment OpenLayers, Bing et Yahoo).
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-GMapMXN-utiliser-la-librairie-Mapstraction-dans</lien>
+	<lien>http://contrib.spip.net/Plugin-GMapMXN-utiliser-la-librairie-Mapstraction-dans</lien>
 	<categorie>divers</categorie>
 	 
 	<prefix>gmapmxn</prefix>

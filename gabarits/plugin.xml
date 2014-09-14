@@ -2,13 +2,13 @@
 	<nom>Gabarits</nom>
 	<slogan>Des mod&#232;les de contenu pour les objets de SPIP</slogan>
 	<icon>prive/themes/spip/images/gabarits-64.png</icon>
-	<auteur>[b_b->http://www.spip-contrib.net/b_b]</auteur>
+	<auteur>[b_b->http://contrib.spip.net/b_b]</auteur>
 	<licence>GPL 3</licence>
 	<version>1.1.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>Gestion de gabarits (mod&#232;les de contenu) pour les &#233;l&#233;ments de SPIP.</description>
-	<lien>http://www.spip-contrib.net/Gabarits</lien>
+	<lien>http://contrib.spip.net/Gabarits</lien>
 	<categorie>edition</categorie>
 	<options>gabarits_options.php</options>
 	<fonctions>gabarits_fonctions.php</fonctions>

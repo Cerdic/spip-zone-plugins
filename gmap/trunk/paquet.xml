@@ -6,7 +6,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/logo-gmap.png"
-	documentation="http://www.spip-contrib.net/Plugin-GMap-geolocalisation-et-cartographie-des-objets"
+	documentation="http://contrib.spip.net/Plugin-GMap-geolocalisation-et-cartographie"
 >
 
 	<nom>G&#233;olocalisation et cartographie</nom>

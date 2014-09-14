@@ -6,7 +6,7 @@
 	compatibilite="[2.1.0;3.0.*]"
 	schema="0.1"
 	logo="prive/themes/spip/images/greves-64.png"
-	documentation="http://www.spip-contrib.net/Mettre-son-site-en-greve"
+	documentation="http://contrib.spip.net/Mettre-son-site-en-greve"
 >	
 
 	<nom>En gr&#232;ve</nom>

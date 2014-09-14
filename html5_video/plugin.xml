@@ -7,8 +7,8 @@
 	<auteur>[Pierre Rudloff->mailto:rudloff.p@gmail.com]</auteur>
 	<description>Ce plugin remplace la balise <code><video></code> par un lecteur en HTML5. Il utilise le code propos&#233; par [Video for Everybody!->http://camendesign.com/code/video_for_everybody].
 	
-	{{Ce plugin n’est plus mis &#224; jour ! Vous devriez utiliser [ce plugin->http://www.spip-contrib.net/Plugin-Video-s] &#224; la place.}}</description>
-	<lien>http://www.spip-contrib.net/Plugin-video-HTML5</lien>
+	{{Ce plugin n’est plus mis &#224; jour ! Vous devriez utiliser [ce plugin->http://contrib.spip.net/Plugin-Video-s] &#224; la place.}}</description>
+	<lien>http://contrib.spip.net/Plugin-video-HTML5</lien>
 	<necessite id="SPIP" version='[2.1.0;2.1.99]' />
 	<categorie>multimedia</categorie>
 </plugin>

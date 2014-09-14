@@ -12,7 +12,7 @@
 -* Filtre <code>lier_au_glossaire</code> &#224; appliquer aux champs de texte dans les squelettes
 -* N&#233;cessite la balise <code>#INSERT_HEAD</code>
 	</description>
-	<lien>http://www.spip-contrib.net/1459</lien>
+	<lien>http://contrib.spip.net/1459</lien>
 	<fonctions>glossaire_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>

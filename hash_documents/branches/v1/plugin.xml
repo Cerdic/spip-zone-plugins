@@ -16,7 +16,7 @@
 		[en]The number of documents in the directory IMG/extension/ site can become too important and affect the performance of the server's file system. The solution proposed by this plugin is to "hash" directory IMG/.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-hash_documents</lien>
+	<lien>http://contrib.spip.net/Le-plugin-hash_documents</lien>
 	<prefix>hasher</prefix>
 	<icon>hash_documents.png</icon>
 	<pipeline>

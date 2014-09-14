@@ -6,7 +6,7 @@
 	<etat>test</etat>
 	<licence>GNU/GPL</licence>
 	<description>Int&#233;gration de l'application Gallery 2 dans SPIP sous forme d'une page de squelette et de mod&#232;les</description>
-	<lien>http://www.spip-contrib.net/Gallery2-pour-SPIP</lien>
+	<lien>http://contrib.spip.net/Gallery2-pour-SPIP</lien>
 	<prefix>g2</prefix>
 	<fonctions>gallery_fonctions.php</fonctions>
 	<options>gallery_options.php</options>

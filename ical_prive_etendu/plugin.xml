@@ -12,7 +12,7 @@ _ Pour chaque auteur, le plugin v&#233;rifie les droits de visualiser un article
  articles et les br&#232;ves qu'il peut visualiser dans l'espace priv&#233;. En ce sens, ce plugin est compatible avec acces_restreint. 
 _ Si celui-ci est activ&#233;, alors chaque r&#233;dacteur ne verra dans ce flux que s'il est autoris&#233; &#224; voir dans l'espace priv&#233;.
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article2500</lien>
+	<lien>http://contrib.spip.net/2500</lien>
 	<prefix>icpe</prefix>
 	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>date</categorie>

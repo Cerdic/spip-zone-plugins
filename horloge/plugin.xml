@@ -10,7 +10,7 @@
 	<br />&lt;horloge|fmt=h12&gt; : 7:13 pm
 	<br />&lt;horloge|fmt=enlong&gt; : 19:13 (7:13pm) Monday, 23 February
     </description>
-	<lien>http://www.spip-contrib.net/ecrire/?exec=articles&amp;id_article=2995</lien>
+	<lien>http://contrib.spip.net/2995</lien>
     <prefix>horloge</prefix>
     <pipeline>
         <nom>insert_head</nom>
