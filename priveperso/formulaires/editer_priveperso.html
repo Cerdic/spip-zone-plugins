@@ -1,263 +1,412 @@
 <div class="formulaire_spip formulaire_editer formulaire_#FORM">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<form method='post' action='#ENV{action}'><div>
-		#ACTION_FORMULAIRE{#ENV{action}}
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form method='post' action='#ENV{action}'>
+        <div>
+        #ACTION_FORMULAIRE{#ENV{action}}
 
-<input type="hidden" name="activer_perso" value="[(#ENV{activer_perso}|sinon{'oui'})]" />
+        <input type="hidden" name="activer_perso" value="[(#ENV{activer_perso}|sinon{'oui'})]" />
 
-<fieldset><legend><h3><:priveperso:personnaliser_espace_prive:></h3> </legend>
-   <label><:priveperso:choix_rubrique:></label>
-   <select name="rub_id">
-    <B_def><option value="#ENV{rub_id}"><BOUCLE_def(RUBRIQUES){id_rubrique=#ENV{rub_id}}{tout}><:priveperso:rubrique:> #ID_RUBRIQUE : #TITRE</BOUCLE_def></option></B_def>
-     <option value="#ENV{rub_id}"><:priveperso:racine:></option>
-  	 <BOUCLE_secteurs(RUBRIQUES) {racine} {par titre} {tout}>
-  	    <option <BOUCLE_dis_sect(PRIVEPERSO){rub_id=#ID_RUBRIQUE}>disabled</BOUCLE_dis_sect> value="#ID_RUBRIQUE" style="font-weight: bold;"><strong><:priveperso:rubrique:> #ID_RUBRIQUE: #TITRE</strong></option>
-  			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre} {tout}>
-  			   <option <BOUCLE_dis(PRIVEPERSO){rub_id=#ID_RUBRIQUE}>disabled</BOUCLE_dis> value="#ID_RUBRIQUE"  style="font-weight: bold;">&nbsp;&nbsp;<:priveperso:rubrique:> #ID_RUBRIQUE : #TITRE</option>
-  				 <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
-  			</BOUCLE_rubriques>
-  	 </BOUCLE_secteurs>
-  	 <//B_def>
-   </select>
-<table border='0' cellspacing='1' cellpadding='3' width="100%">
-	<tr><td align='left' class='verdana2'>
-   <label><:priveperso:appliquer_sous_rubriques:></label><td align='left' class='verdana2'>
-   <input type="radio" name="sousrub" value="non" [checked="(#ENV{sousrub}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="sousrub" value="oui" [checked="(#ENV{sousrub}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-	<tr><td align='left' class='verdana2'>
-   <label><:priveperso:autoriser_les_articles:></label><td align='left' class='verdana2'>
-   <input type="radio" name="autoriser_articles" value="non" [checked="(#ENV{autoriser_articles}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="autoriser_articles" value="oui" [checked="(#ENV{autoriser_articles}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:priveperso:autoriser_les_sous_rubriques:></label><td align='left' class='verdana2'>
-   <input type="radio" name="autoriser_sous_rubriques" value="non" [checked="(#ENV{autoriser_sous_rubriques}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="autoriser_sous_rubriques" value="oui" [checked="(#ENV{autoriser_sous_rubriques}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>  
-   <label><:priveperso:personnaliser_texte_interro:></label><td align='left' class='verdana2'>
-   <input type="radio" name="textperso" value="non" [checked="(#ENV{textperso}|=={non}|oui)"] /><label><:priveperso:non:></label>
-   <input type="radio" name="textperso" value="oui" [checked="(#ENV{textperso}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>   
-</table>
-</fieldset>
+        <fieldset>
+            <legend><h3><:priveperso:personnaliser_espace_prive:></h3> </legend>
+            <ul>
+                <li class="editer_rub_id editer">
+                    <label><:priveperso:choix_rubrique:></label>
+                    <select name="rub_id">
+                        <B_def>
+                        <option value="#ENV{rub_id}"><BOUCLE_def (RUBRIQUES){id_rubrique=#ENV{rub_id}}{tout}><:priveperso:rubrique:> #ID_RUBRIQUE : #TITRE</BOUCLE_def></option>
+                        </B_def>
+                        <option value="#ENV{rub_id}"><:priveperso:racine:></option>
+                        <BOUCLE_secteurs (RUBRIQUES) {racine} {par titre} {tout}>
+                        <option <BOUCLE_dis_sect (PRIVEPERSO){rub_id=#ID_RUBRIQUE}>disabled</BOUCLE_dis_sect> value="#ID_RUBRIQUE" style="font-weight: bold;"><strong><:priveperso:rubrique:> #ID_RUBRIQUE: #TITRE</strong></option>
+                        <BOUCLE_rubriques (RUBRIQUES) {id_parent} {par titre} {tout}>
+                        <option <BOUCLE_dis (PRIVEPERSO){rub_id=#ID_RUBRIQUE}>disabled</BOUCLE_dis> value="#ID_RUBRIQUE"  style="font-weight: bold;">&nbsp;&nbsp;<:priveperso:rubrique:> #ID_RUBRIQUE : #TITRE</option>
+                        <BOUCLE_sous_rubriques (BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+                        </BOUCLE_rubriques>
+                        </BOUCLE_secteurs>
+                        <//B_def>
+                    </select>
+                </li>
+                <li class="editer editer_sousrub long_label">
+                    <label><:priveperso:appliquer_sous_rubriques:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="sousrub" value="non" [checked="(#ENV{sousrub}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="sousrub" value="oui" [checked="(#ENV{sousrub}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
 
-<BOUCLE_aff(RUBRIQUES){id_rubrique=#ENV{rub_id}}{tout}>
+                <li class="editer editer_autoriser_articles long_label">
+                    <label><:priveperso:autoriser_les_articles:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="autoriser_articles" value="non" [checked="(#ENV{autoriser_articles}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="autoriser_articles" value="oui" [checked="(#ENV{autoriser_articles}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
 
-[<fieldset>
-	<legend><h4><:priveperso:info_contenu_articles:></h4></legend>
-<table border='0' cellspacing='1' cellpadding='3' width="100%">
-	<tr><td align='left' class='verdana2'>
-	<label><:ecrire:info_surtitre:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_surtitre" value="non" [checked="(#ENV{articles_surtitre}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_surtitre" value="oui" [checked="(#ENV{articles_surtitre}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:ecrire:info_sous_titre:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_soustitre" value="non" [checked="(#ENV{articles_soustitre}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_soustitre" value="oui" [checked="(#ENV{articles_soustitre}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-	<label><:ecrire:info_descriptif:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_descriptif" value="non" [checked="(#ENV{articles_descriptif}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_descriptif" value="oui" [checked="(#ENV{articles_descriptif}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:ecrire:info_texte:> :</label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_texte" value="non" [checked="(#ENV{articles_texte}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_texte" value="oui" [checked="(#ENV{articles_texte}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:ecrire:info_chapeau_2:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_chapeau" value="non" [checked="(#ENV{articles_chapeau}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_chapeau" value="oui" [checked="(#ENV{articles_chapeau}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:ecrire:info_post_scriptum_2:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_ps" value="non" [checked="(#ENV{articles_ps}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_ps" value="oui" [checked="(#ENV{articles_ps}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:ecrire:info_date_publication_anterieure:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_redac" value="non" [checked="(#ENV{articles_redac}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_redac" value="oui" [checked="(#ENV{articles_redac}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:ecrire:info_lien_hypertexte:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="articles_urlref" value="non" [checked="(#ENV{articles_urlref}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_urlref" value="oui" [checked="(#ENV{articles_urlref}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-</table>
-</fieldset>(#ENV{autoriser_articles}|=={oui}|oui)]
+                <li class="editer editer_autoriser_sous_rubriques long_label">
+                    <label><:priveperso:autoriser_les_sous_rubriques:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="autoriser_sous_rubriques" value="non" [checked="(#ENV{autoriser_sous_rubriques}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="autoriser_sous_rubriques" value="oui" [checked="(#ENV{autoriser_sous_rubriques}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
 
-<fieldset><legend><h4><:priveperso:info_contenu_rubriques:></h4></legend>
-<table border='0' cellspacing='1' cellpadding='3' width="100%">
-	<tr><td align='left' class='verdana2'>	
-	<label><:ecrire:info_descriptif:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="rubriques_descriptif" value="non" [checked="(#ENV{rubriques_descriptif}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="rubriques_descriptif" value="oui" [checked="(#ENV{rubriques_descriptif}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-   <tr><td align='left' class='verdana2'>
-   <label><:ecrire:info_texte:> :</label></td><td align='left' class='verdana2'>
-   <input type="radio" name="rubriques_texte" value="non" [checked="(#ENV{rubriques_texte}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="rubriques_texte" value="oui" [checked="(#ENV{rubriques_texte}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-</table>
-</fieldset>
+                <li class="editer editer_textperso long_label">
+                    <label><:priveperso:personnaliser_texte_interro:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="textperso" value="non" [checked="(#ENV{textperso}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="textperso" value="oui" [checked="(#ENV{textperso}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+            </ul>
+        </fieldset>
 
-<fieldset>
-<table border='0' cellspacing='1' cellpadding='3' width="100%">
-	<tr><td align='left' class='verdana2'>	
-	<label><:priveperso:les_breves:></label></td><td align='left' class='verdana2'>
-   <input type="radio" name="activer_breves" value="non" [checked="(#ENV{activer_breves}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="activer_breves" value="oui" [checked="(#ENV{activer_breves}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-   </td></tr>
-</table>
-</fieldset>
+        <BOUCLE_aff (RUBRIQUES){id_rubrique=#ENV{rub_id}} {tout}>
 
-<fieldset>
-	<label><:priveperso:les_articles_syndiques:></label>
-   <input type="radio" name="activer_sites" value="non" [checked="(#ENV{activer_sites}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="activer_sites" value="oui" [checked="(#ENV{activer_sites}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-</fieldset>
+        [<fieldset>
+            <legend><h4><:priveperso:info_contenu_articles:></h4></legend>
+            <ul>
+                <li class="editer editer_articles_surtitre long_label">
+                    <label><:ecrire:info_surtitre:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_surtitre" value="non" [checked="(#ENV{articles_surtitre}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_surtitre" value="oui" [checked="(#ENV{articles_surtitre}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
 
-<fieldset>
-	<label><:priveperso:les_mots_cles:></label>
-   <input type="radio" name="articles_mots" value="non" [checked="(#ENV{articles_mots}|=={non}|oui)"] /><label><:priveperso:non:></label>   
-   <input type="radio" name="articles_mots" value="oui" [checked="(#ENV{articles_mots}|=={oui}|oui)"] /><label><:priveperso:oui:></label>
-</fieldset>
+                <li class="editer editer_articles_soustitre long_label">
+                    <label><:ecrire:info_sous_titre:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_soustitre" value="non" [checked="(#ENV{articles_soustitre}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_soustitre" value="oui" [checked="(#ENV{articles_soustitre}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
 
-[
-<fieldset><legend><h3><:priveperso:personnaliser_texte:></h3> </legend></fieldset>
-<:priveperso:info_multilangue:>
+                <li class="editer editer_articles_descriptif long_label">
+                    <label><:ecrire:info_descriptif:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_descriptif" value="non" [checked="(#ENV{articles_descriptif}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_descriptif" value="oui" [checked="(#ENV{articles_descriptif}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
 
+                <li class="editer editer_articles_texte long_label">
+                    <label><:ecrire:info_texte:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_texte" value="non" [checked="(#ENV{articles_texte}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_texte" value="oui" [checked="(#ENV{articles_texte}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
 
-[
-<fieldset><legend><h4><:priveperso:info_contenu_articles:></h4></legend>
-   <label><:texte_date_publication_article:></label>
-	<input type="text" class="text" name="texte_date_publication_article" value="#ENV{texte_date_publication_article}" size="40" />
-   <br>
-	<label><:texte_date_creation_article:></label>
-	<input type="text" class="text" name="texte_date_creation_article" value="#ENV{texte_date_creation_article}" size="40" />
-   <br>
-   [<label><:texte_date_publication_anterieure:></label>
-	<input type="text" class="text" name="texte_date_publication_anterieure" value="#ENV{texte_date_publication_anterieure}" size="40" />
-	<br>(#ENV{articles_redac}|=={oui}|oui)]
-	<label><:icone_modifier_article:></label>
-	<input type="text" class="text" name="icone_modifier_article" value="#ENV{icone_modifier_article}" size="40" />
-   <br>
-	<label><:texte_modifier_article:></label>
-	<input type="text" class="text" name="texte_modifier_article" value="#ENV{texte_modifier_article}" size="40" />
-   <br>  
-   <label><:icone_ecrire_article:> :</label>
-	<input type="text" class="text" name="icone_ecrire_article" value="#ENV{icone_ecrire_article}" size="40" />
-	<br>
-	<label><:info_nouvel_article:></label>
-   <input type="text" class="text" name="info_nouvel_article" value="#ENV{info_nouvel_article}" size="40" />
-   <br>
-   [<label><:texte_sur_titre:></label>
-	<input type="text" class="text" name="texte_sur_titre" value="#ENV{texte_sur_titre}" size="40" />
-   <br>(#ENV{articles_surtitre}|=={oui}|oui)]
-   <label><:info_titre:></label>
-	<input type="text" class="text" name="info_titre" value="#ENV{info_titre}" size="40" />
-	<br>
-	[<label><:texte_sous_titre:></label>
-	<input type="text" class="text" name="texte_sous_titre" value="#ENV{texte_sous_titre}" size="40" />
-   <br>(#ENV{articles_soustitre}|=={oui}|oui)]
-   [<label><:texte_descriptif_rapide:></label>
-	<input type="text" class="text" name="texte_descriptif_rapide" value="#ENV{texte_descriptif_rapide}" size="40" />
-	<br>(#ENV{articles_descriptif}|=={oui}|oui)]
-   [<label><:info_chapeau:></label>
-	<input type="text" class="text" name="info_chapeau" value="#ENV{info_chapeau}" size="40" />
-	<br>(#ENV{articles_chapeau}|=={oui}|oui)]
-   [<label><:entree_liens_sites:></label>
-	<input type="text" class="text" name="entree_liens_sites" value="#ENV{entree_liens_sites}" size="40" />
-	<br>
-	<label><:info_titre_url:></label>
-	<input type="text" class="text" name="info_titre_url" value="#ENV{info_titre_url}" size="40" />
-	<br>
-	<label><:info_url:></label>
-	<input type="text" class="text" name="info_url" value="#ENV{info_url}" size="40" />
-	<br>(#ENV{articles_urlref}|=={oui}|oui)]
-   [<label><:info_texte:></label>
-	<input type="text" class="text" name="info_texte" value="#ENV{info_texte}" size="40" />   
-	<br>(#ENV{articles_texte}|=={oui}|oui)]	
-   [<label><:info_post_scriptum:></label>
-	<input type="text" class="text" name="info_post_scriptum" value="#ENV{info_post_scriptum}" size="40" />
-	<br>(#ENV{articles_ps}|=={oui}|oui)]
-</fieldset>(#ENV{autoriser_articles}|=={oui}|oui)]
-<fieldset><legend><h4><:priveperso:info_contenu_rubriques:></h4></legend>
-	<label><:icone_creer_rubrique:></label>
-	<input type="text" class="text" name="icone_creer_rubrique" value="#ENV{icone_creer_rubrique}" size="40" />
-   <br>   
-   <label><:icone_creer_sous_rubrique:> :</label>
-	<input type="text" class="text" name="icone_creer_sous_rubrique" value="#ENV{icone_creer_sous_rubrique}" size="40" />
-	<br>
-	<label><:icone_modifier_rubrique:></label>
-   <input type="text" class="text" name="icone_modifier_rubrique" value="#ENV{icone_modifier_rubrique}" size="40" />
-   <br>
-	<label><:info_modifier_rubrique:></label>
-   <input type="text" class="text" name="info_modifier_rubrique" value="#ENV{info_modifier_rubrique}" size="40" />
-   <br>
-	<label><:titre_nouvelle_rubrique:></label>
-   <input type="text" class="text" name="titre_nouvelle_rubrique" value="#ENV{titre_nouvelle_rubrique}" size="40" />
-   <br>
-	<label><:info_titre_rubriques:></label>
-   <input type="text" class="text" name="info_titre_rubriques" value="#ENV{info_titre_rubriques}" size="40" />
-   <br>
-	[<label><:texte_descriptif_rapide_rubriques:></label>
-   <input type="text" class="text" name="texte_descriptif_rapide_rubriques" value="#ENV{texte_descriptif_rapide_rubriques}" size="40" />
-   <br>
-	<label><:entree_contenu_rubrique:></label>
-   <input type="text" class="text" name="entree_contenu_rubrique" value="#ENV{entree_contenu_rubrique}" size="40" />
-   <br>(#ENV{rubriques_descriptif}|=={oui}|oui)]
-	[<label><:info_texte_explicatif:></label>
-   <input type="text" class="text" name="info_texte_explicatif" value="#ENV{info_texte_explicatif}" size="40" />
-   <br>(#ENV{rubriques_texte}|=={oui}|oui)]
-</fieldset>
-[<fieldset><legend><h4><:priveperso:info_contenu_breves:></h4></legend>
-	<label><:icone_nouvelle_breve:></label>
-	<input type="text" class="text" name="icone_nouvelle_breve" value="#ENV{icone_nouvelle_breve}" size="40" />
-   <br>   
-   <label><:icone_modifier_breve:> :</label>
-	<input type="text" class="text" name="icone_modifier_breve" value="#ENV{icone_modifier_breve}" size="40" />
-	<br>
-	<label><:info_modifier_breve:></label>
-   <input type="text" class="text" name="info_modifier_breve" value="#ENV{info_modifier_breve}" size="40" />
-   <br>
-	<label><:titre_nouvelle_breve:></label>
-   <input type="text" class="text" name="titre_nouvelle_breve" value="#ENV{titre_nouvelle_breve}" size="40" />
-   <br>
-	<label><:info_titre_breves:></label>
-   <input type="text" class="text" name="info_titre_breves" value="#ENV{info_titre_breves}" size="40" />
-   <br>
-	<label><:entree_texte_breve:></label>
-   <input type="text" class="text" name="entree_texte_breve" value="#ENV{entree_texte_breve}" size="40" />
-   <br>
-	<label><:entree_liens_sites_breves:></label>
-   <input type="text" class="text" name="entree_liens_sites_breves" value="#ENV{entree_liens_sites_breves}" size="40" />
-   <br>
-	<label><:info_titre_url_breves:></label>
-   <input type="text" class="text" name="info_titre_url_breves" value="#ENV{info_titre_url_breves}" size="40" />
-   <br>
-  	<label><:info_url_breves:></label>
-   <input type="text" class="text" name="info_url_breves" value="#ENV{info_url_breves}" size="40" />
-   <br>
-</fieldset>
-(#ENV{activer_breves}|=={oui}|oui)]
-(#ENV{textperso}|=={oui}|oui)]
+                <li class="editer editer_articles_chapeau long_label">
+                    <label><:ecrire:info_chapeau_2:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_chapeau" value="non" [checked="(#ENV{articles_chapeau}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_chapeau" value="oui" [checked="(#ENV{articles_chapeau}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+                <li class="editer editer_articles_ps long_label">
+                    <label><:ecrire:info_post_scriptum_2:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_ps" value="non" [checked="(#ENV{articles_ps}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_ps" value="oui" [checked="(#ENV{articles_ps}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+                <li class="editer editer_articles_redac long_label">
+                    <label><:ecrire:info_date_publication_anterieure:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_redac" value="non" [checked="(#ENV{articles_redac}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_redac" value="oui" [checked="(#ENV{articles_redac}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+                <li class="editer editer_articles_urlref long_label">
+                    <label><:ecrire:info_date_publication_anterieure:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_urlref" value="non" [checked="(#ENV{articles_urlref}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_urlref" value="oui" [checked="(#ENV{articles_urlref}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+            </ul>
+
+        </fieldset>(#ENV{autoriser_articles}|=={oui}|oui)]
+
+        <fieldset>
+            <legend><h4><:priveperso:info_contenu_rubriques:></h4></legend>
+            <ul>
+                <li class="editer editer_rubriques_descriptif long_label">
+                    <label><:ecrire:info_descriptif:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="rubriques_descriptif" value="non" [checked="(#ENV{rubriques_descriptif}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="rubriques_descriptif" value="oui" [checked="(#ENV{rubriques_descriptif}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+                <li class="editer editer_rubriques_texte long_label">
+                    <label><:ecrire:info_texte:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="rubriques_texte" value="non" [checked="(#ENV{rubriques_texte}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="rubriques_texte" value="oui" [checked="(#ENV{rubriques_texte}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <ul>
+                <li class="editer editer_activer_breves long_label">
+                    <label><:priveperso:les_breves:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="activer_breves" value="non" [checked="(#ENV{activer_breves}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="activer_breves" value="oui" [checked="(#ENV{activer_breves}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <ul>
+                <li class="editer editer_activer_sites long_label">
+                    <label><:priveperso:les_articles_syndiques:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="activer_sites" value="non" [checked="(#ENV{activer_sites}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="activer_sites" value="oui" [checked="(#ENV{activer_sites}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <ul>
+                <li class="editer editer_articles_mots long_label">
+                    <label><:priveperso:les_mots_cles:></label>
+                    <div class="choix choix_non">
+                        <label><input type="radio" name="articles_mots" value="non" [checked="(#ENV{articles_mots}|=={non}|oui)"] /> <:priveperso:non:></label>
+                    </div>
+                    <div class="choix choix_oui">
+                        <label><input type="radio" name="articles_mots" value="oui" [checked="(#ENV{articles_mots}|=={oui}|oui)"] /> <:priveperso:oui:></label>
+                    </div>
+                </li>
+
+            </ul>
+        </fieldset>
+
+        [
+        <fieldset>
+            <legend><h3><:priveperso:personnaliser_texte:></h3> </legend>
+            <p class="explication"><:priveperso:info_multilangue:></p>
+        </fieldset>
 
 
+        [
+        <fieldset>
+            <legend><h4><:priveperso:info_contenu_articles:></h4></legend>
+            <ul>
+            <li class="editer editer_texte_date_publication_article">
+                <label for="texte_date_publication_article"><:texte_date_publication_article:></label>
+                <input type="text" class="text" name="texte_date_publication_article" value="#ENV{texte_date_publication_article}" size="40" />
+            </li>
+            <li class="editer editer_texte_date_creation_article">
+                <label for="texte_date_creation_article"><:texte_date_creation_article:></label>
+                <input type="text" class="text" name="texte_date_creation_article" value="#ENV{texte_date_creation_article}" size="40" />
+            </li>
+            [<li class="editer editer_texte_date_publication_anterieure">
+                <label for="texte_date_publication_anterieure"><:texte_date_publication_anterieure:></label>
+                <input type="text" class="text" name="texte_date_publication_anterieure" value="#ENV{texte_date_publication_anterieure}" size="40" />
+            </li>(#ENV{articles_redac}|=={oui}|oui)]
+            <li class="editer editer_texte_date_creation_article">
+                <label for="icone_modifier_article"><:icone_modifier_article:></label>
+                <input type="text" class="text" name="icone_modifier_article" value="#ENV{icone_modifier_article}" size="40" />
+            </li>
+            <li class="editer editer_texte_modifier_article">
+                <label for="texte_modifier_article"><:texte_modifier_article:></label>
+                <input type="text" class="text" name="texte_modifier_article" value="#ENV{texte_modifier_article}" size="40" />
+            </li>
+            <li class="editer editer_icone_ecrire_article">
+                <label for="icone_ecrire_article"><:icone_ecrire_article:> :</label>
+                <input type="text" class="text" name="icone_ecrire_article" value="#ENV{icone_ecrire_article}" size="40" />
+            </li>
+            <li class="editer editer_info_nouvel_article">
+                <label><:info_nouvel_article:></label>
+                <input type="text" class="text" name="info_nouvel_article" value="#ENV{info_nouvel_article}" size="40" />
+            </li>
+            [<li class="editer editer_texte_sur_titre">
+                <label><:texte_sur_titre:></label>
+                <input type="text" class="text" name="texte_sur_titre" value="#ENV{texte_sur_titre}" size="40" />
+            </li>(#ENV{articles_surtitre}|=={oui}|oui)]
+            <li class="editer editer_info_titre">
+                <label><:info_titre:></label>
+                <input type="text" class="text" name="info_titre" value="#ENV{info_titre}" size="40" />
+            </li>
+            [<li class="editer editer_texte_sous_titre">
+                <label><:texte_sous_titre:></label>
+                <input type="text" class="text" name="texte_sous_titre" value="#ENV{texte_sous_titre}" size="40" />
+            </li>(#ENV{articles_soustitre}|=={oui}|oui)]
+            [<li class="editer editer_texte_descriptif_rapide">
+                <label><:texte_descriptif_rapide:></label>
+                <input type="text" class="text" name="texte_descriptif_rapide" value="#ENV{texte_descriptif_rapide}" size="40" />
+            </li>(#ENV{articles_descriptif}|=={oui}|oui)]
+            [<li class="editer editer_info_chapeau">
+                <label><:info_chapeau:></label>
+                <input type="text" class="text" name="info_chapeau" value="#ENV{info_chapeau}" size="40" />
+            </li>(#ENV{articles_chapeau}|=={oui}|oui)]
+            [<li class="editer editer_entree_liens_sites">
+                <label><:entree_liens_sites:></label>
+                <input type="text" class="text" name="entree_liens_sites" value="#ENV{entree_liens_sites}" size="40" />
+            </li>
+            <li class="editer editer_info_titre_url">
+                <label><:info_titre_url:></label>
+                <input type="text" class="text" name="info_titre_url" value="#ENV{info_titre_url}" size="40" />
+            </li>
+            <li class="editer editer_info_url">
+                <label><:info_url:></label>
+                <input type="text" class="text" name="info_url" value="#ENV{info_url}" size="40" />
+            </li>(#ENV{articles_urlref}|=={oui}|oui)]
+            [<li class="editer editer_info_texte">
+                <label><:info_texte:></label>
+                <input type="text" class="text" name="info_texte" value="#ENV{info_texte}" size="40" />
+            </li>(#ENV{articles_texte}|=={oui}|oui)]
+            [<li class="editer editer_info_post_scriptum">
+                <label><:info_post_scriptum:></label>
+                <input type="text" class="text" name="info_post_scriptum" value="#ENV{info_post_scriptum}" size="40" />
+            </li>(#ENV{articles_ps}|=={oui}|oui)]
+        </ul>
+        </fieldset>(#ENV{autoriser_articles}|=={oui}|oui)]
 
-</BOUCLE_aff>
+        <fieldset>
+            <legend><h4><:priveperso:info_contenu_rubriques:></h4></legend>
+            <ul>
+                <li class="editer editer_icone_creer_rubrique">
+                    <label for="icone_creer_rubrique"><:icone_creer_rubrique:></label>
+                    <input type="text" class="text" name="icone_creer_rubrique" value="#ENV{icone_creer_rubrique}" size="40" />
+                </li>
+                <li class="editer editer_icone_creer_sous_rubrique">
+                    <label for="icone_creer_sous_rubrique"><:icone_creer_sous_rubrique:> :</label>
+                    <input type="text" class="text" name="icone_creer_sous_rubrique" value="#ENV{icone_creer_sous_rubrique}" size="40" />
+                </li>
+                <li class="editer editer_icone_modifier_rubrique">
+                    <label for="icone_modifier_rubrique"><:icone_modifier_rubrique:></label>
+                    <input type="text" class="text" name="icone_modifier_rubrique" value="#ENV{icone_modifier_rubrique}" size="40" />
+                </li>
+                <li class="editer editer_info_modifier_rubrique">
+                    <label for="info_modifier_rubrique"><:info_modifier_rubrique:></label>
+                    <input type="text" class="text" name="info_modifier_rubrique" value="#ENV{info_modifier_rubrique}" size="40" />
+                </li>
+                <li class="editer editer_titre_nouvelle_rubrique">
+                    <label for="titre_nouvelle_rubrique"><:titre_nouvelle_rubrique:></label>
+                    <input type="text" class="text" name="titre_nouvelle_rubrique" value="#ENV{titre_nouvelle_rubrique}" size="40" />
+                </li>
+                <li class="editer editer_info_titre_rubriques">
+                    <label for="info_titre_rubriques"><:info_titre_rubriques:></label>
+                    <input type="text" class="text" name="info_titre_rubriques" value="#ENV{info_titre_rubriques}" size="40" />
+                </li>
+                [<li class="editer editer_texte_descriptif_rapide_rubriques">
+                    <label for="texte_descriptif_rapide_rubriques"><:texte_descriptif_rapide_rubriques:></label>
+                    <input type="text" class="text" name="texte_descriptif_rapide_rubriques" value="#ENV{texte_descriptif_rapide_rubriques}" size="40" />
+                </li>
+                <li class="editer editer_entree_contenu_rubrique">
+                    <label for="entree_contenu_rubrique"><:entree_contenu_rubrique:></label>
+                    <input type="text" class="text" name="entree_contenu_rubrique" value="#ENV{entree_contenu_rubrique}" size="40" />
+                </li>(#ENV{rubriques_descriptif}|=={oui}|oui)]
+                [<li class="editer editer_info_texte_explicatif">
+                    <label for="info_texte_explicatif"><:info_texte_explicatif:></label>
+                    <input type="text" class="text" name="info_texte_explicatif" value="#ENV{info_texte_explicatif}" size="40" />
+                </li>(#ENV{rubriques_texte}|=={oui}|oui)]
+            </ul>
+        </fieldset>
+
+        [<fieldset>
+            <legend><h4><:priveperso:info_contenu_breves:></h4></legend>
+            <ul>
+                <li class="editer editer_icone_nouvelle_breve">
+        <label for="icone_nouvelle_breve"><:icone_nouvelle_breve:></label>
+        <input type="text" class="text" name="icone_nouvelle_breve" value="#ENV{icone_nouvelle_breve}" size="40" />
+                </li>
+                <li class="editer editer_icone_modifier_breve">
+                    <label for="icone_modifier_breve"><:icone_modifier_breve:> :</label>
+                    <input type="text" class="text" name="icone_modifier_breve" value="#ENV{icone_modifier_breve}" size="40" />
+                </li>
+                <li class="editer editer_info_modifier_breve">
+                    <label for="info_modifier_breve"><:info_modifier_breve:></label>
+                    <input type="text" class="text" name="info_modifier_breve" value="#ENV{info_modifier_breve}" size="40" />
+                </li>
+                <li class="editer editer_titre_nouvelle_breve">
+                    <label for="titre_nouvelle_breve"><:titre_nouvelle_breve:></label>
+                    <input type="text" class="text" name="titre_nouvelle_breve" value="#ENV{titre_nouvelle_breve}" size="40" />
+                </li>
+                <li class="editer editer_info_titre_breves">
+                    <label for="info_titre_breves"><:info_titre_breves:></label>
+                    <input type="text" class="text" name="info_titre_breves" value="#ENV{info_titre_breves}" size="40" />
+                </li>
+                <li class="editer editer_entree_texte_breve">
+                    <label for="entree_texte_breve"><:entree_texte_breve:></label>
+                    <input type="text" class="text" name="entree_texte_breve" value="#ENV{entree_texte_breve}" size="40" />
+                </li>
+                <li class="editer editer_entree_liens_sites_breves">
+                    <label for="entree_liens_sites_breves"><:entree_liens_sites_breves:></label>
+                    <input type="text" class="text" name="entree_liens_sites_breves" value="#ENV{entree_liens_sites_breves}" size="40" />
+                </li>
+                <li class="editer editer_info_titre_url_breves">
+                    <label for="info_titre_url_breves"><:info_titre_url_breves:></label>
+                    <input type="text" class="text" name="info_titre_url_breves" value="#ENV{info_titre_url_breves}" size="40" />
+                </li>
+                <li class="editer editer_info_url_breves">
+                    <label for="info_url_breves"><:info_url_breves:></label>
+                    <input type="text" class="text" name="info_url_breves" value="#ENV{info_url_breves}" size="40" />
+                </li>
+            </ul>
+        </fieldset>
+        (#ENV{activer_breves}|=={oui}|oui)]
+        (#ENV{textperso}|=={oui}|oui)]
 
 
-		<p class='boutons'>
-		<input type='submit' class='submit' value='[(#ENV{rub_id}|?{<:bouton_modifier:>,<:bouton_ajouter:>})]' />
-		<input type='submit' class='submit' name="annuler" value='<:bouton_annuler:>' />
-		<BOUCLE_aff1(RUBRIQUES){id_rubrique=#ENV{rub_id}}{tout}><input type="submit" name="supprimer" value='<:priveperso:bouton_supprimer:>'></BOUCLE_aff1>		
-		</p>
-	</div></form>
+
+        </BOUCLE_aff>
+
+
+            <p class='boutons'>
+                <input type='submit' class='submit' value='[(#ENV{rub_id}|?{<:bouton_modifier:>,<:bouton_ajouter:>})]' />
+                <input type='submit' class='submit' name="annuler" value='<:bouton_annuler:>' />
+                <BOUCLE_aff1(RUBRIQUES){id_rubrique=#ENV{rub_id}}{tout}><input type="submit" name="supprimer" value='<:priveperso:bouton_supprimer:>'></BOUCLE_aff1>
+            </p>
+        </div>
+    </form>
 </div>

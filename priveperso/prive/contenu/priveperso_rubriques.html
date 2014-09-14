@@ -3,14 +3,15 @@
 	[(#CHEMIN{images/priveperso-24.png}|debut_cadre_trait_couleur{1, "", <:priveperso:liste_des_rubriques_perso:>})]
 <BOUCLE_rubrique_perso(PRIVEPERSO)>
 <ul class="liste_priveperso">
-		<BOUCLE_rub(RUBRIQUES){tout}{id_rubrique=#RUB_ID}> 
-		<li><strong>	#RUB_ID . #TITRE 	</strong></li>
+	<BOUCLE_rub (RUBRIQUES){tout}{id_rubrique=#RUB_ID}> 
+		<li><strong>#RUB_ID. #TITRE</strong>
 				<ul class="actions">
 					<li><a href="?exec=priveperso_edit&rub_id=#RUB_ID" title="<:priveperso:action_modifier_title|attribut_html:>"><:priveperso:action_modifier:></a></li>
 					<li><a href="[(#URL_ACTION_AUTEUR{priveperso, supp_rub/#RUB_ID, #SELF})]" class="supprimer" title="<:priveperso:action_supprimer_title|attribut_html:>"><:priveperso:action_supprimer:></a></li>
 					[<li><a href="[(#URL_ACTION_AUTEUR{priveperso, activer/#RUB_ID, #SELF})]" class="activer" title="<:priveperso:action_activer_title|attribut_html:>"><:priveperso:action_activer:></a></li>(#ACTIVER_PERSO|=={non}|oui)]
 					[<li><a href="[(#URL_ACTION_AUTEUR{priveperso, desactiver/#RUB_ID, #SELF})]" class="desactiver" title="<:priveperso:action_desactiver_title|attribut_html:>"><:priveperso:action_desactiver:></a></li>(#ACTIVER_PERSO|=={oui}|oui)]
 				</ul>
+		</li>
 		</BOUCLE_rub>
 		</B_rub>
 			<strong><i><:priveperso:rubrique_inexistante{rubrique=#RUB_ID}:></i></strong>

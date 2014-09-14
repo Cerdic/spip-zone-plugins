@@ -2,37 +2,43 @@
 	<nom>Personnaliser l'espace priv&#233;</nom>
 	<slogan>A chaque rubrique son style</slogan>
 	<auteur>S&#233;bastien Zamith</auteur>
-	<icon>images/priveperso-24.png</icon>
-	<version>0.6.0</version>
-	<version_base>0.4</version_base>
+	<icon>prive/themes/spip/images/priveperso-24.png</icon>
+	<version>0.6.1</version>
+	<version_base>0.4.0</version_base>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
+	<prefix>priveperso</prefix>
 	<description>
-	Ce plugin permet de reprendre une partie des options de configuration du site 
-	(activer les br&#232;ves, la syndication, les mots-cl&#233;s, etc.)et de les adapter en fonction des rubriques. 
-	De m&#234;me il est possible de personnaliser les champs de saisie de l’espace priv&#233; pour les objets &#233;ditoriaux.
+		Ce plugin permet de reprendre une partie des options de configuration du site 
+		(activer les br&#232;ves, la syndication, les mots-cl&#233;s, etc.)et de les adapter en fonction des rubriques. 
+		De m&#234;me il est possible de personnaliser les champs de saisie de l’espace priv&#233; pour les objets &#233;ditoriaux.
 	</description>
 	<lien>http://contrib.spip.net/Plugin-personnaliser-l-espace-prive-par-rubriques</lien>
 	<install>base/install_priveperso.php</install>
-	<prefix>priveperso</prefix>
 	<categorie>maintenance</categorie>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
-	<onglet id='priveperso' parent='configuration'>
+
+	<bouton id='priveperso' parent='configuration'>
 		<url>priveperso</url>
-   		<icone>images/priveperso-24.png</icone>
-    	<titre>priveperso:Prive_perso</titre>
-	</onglet>
+		<icone>prive/themes/spip/images/priveperso-24.png</icone>
+		<titre>priveperso:prive_perso</titre>
+	</bouton>
+	<bouton id='priveperso_bando' parent='bando_configuration'>
+		<icone>prive/themes/spip/images/priveperso-24.png</icone>
+		<titre>priveperso:prive_perso</titre>
+	</bouton>
+
 	<pipeline>
-       <nom>declarer_tables_principales</nom>
-       <inclure>base/pipelines_priveperso.php</inclure>
-       <action>init_tables_principales</action>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/pipelines_priveperso.php</inclure>
+		<action>init_tables_principales</action>
 	</pipeline>
 	<pipeline>
-        <nom>declarer_tables_interfaces</nom>
-        <inclure>base/pipelines_priveperso.php</inclure>
-        <action>init_tables_interfaces</action>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/pipelines_priveperso.php</inclure>
+		<action>init_tables_interfaces</action>
 	</pipeline>
-		<pipeline>
+	<pipeline>
 		<nom>exec_init</nom>
 		<inclure>base/pipelines_priveperso.php</inclure>
 	</pipeline>
@@ -41,8 +47,4 @@
 		<inclure>inc/priveperso_autoriser.php</inclure>
 	</pipeline>
 
-	<bouton id='priveperso' parent='bando_configuration'>
-		<icone>images/priveperso-24.png</icone>
-		<titre>priveperso:Prive_perso</titre>
-	</bouton>
 </plugin>

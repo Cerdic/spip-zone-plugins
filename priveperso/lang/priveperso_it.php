@@ -12,20 +12,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_desactiver' => 'disattiva',
 	'action_desactiver_title' => 'Disattiva la personalizzazione della rubrica',
 	'autoriser_les_articles' => 'Utilizza gli articoli?',
-	'autoriser_les_sous_rubriques' => 'Utilizza le sottorubriche?',		
-	
+	'autoriser_les_sous_rubriques' => 'Utilizza le sottorubriche?',
+
 	//B
-	
+
 	'bouton_supprimer' => 'Elimina',
 
 	//C
 
 	'choix_rubrique' => 'Scegli la rubrica da personalizzare:',
-	
+
 	//E
 
 	'erreur_action' => "L'azione @action@ non esiste",
-	
+
 	//I
 	'icone_creer_priveperso' => 'Crea una nuova personalizzazione di rubrica',
 	'info_contenu_articles' => 'Contenuto degli articoli',
@@ -35,9 +35,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modif_priveperso' => 'Modifica della personalizzazione della rubrica @rubrique@:',
 	'info_nouveau_priveperso' => 'Nuova personalizzazione di rubrica',
 	'info_description_priveperso' => "Queste pagina ti consente di personalizzare la redazione per rubriche. Le personalizzazioni delle rubriche impostate verranno elencate qui. Avrai quindi la possibilit&agrave; di modificarle, eliminarle o solo disattivarle temporaneamente.",
-	'info_description_priveperso_creer' => "Puoi scegliere il tipo di oggetto da mostrare, se utilizzare o no gli articoli, le sottorubriche, le brevi, la syndication dei siti, rubrica per rubrica. Puoi anche modificare i campi per gli articoli, le rubriche e le brevi.",		
-		
-				
+	'info_description_priveperso_creer' => "Puoi scegliere il tipo di oggetto da mostrare, se utilizzare o no gli articoli, le sottorubriche, le brevi, la syndication dei siti, rubrica per rubrica. Puoi anche modificare i campi per gli articoli, le rubriche e le brevi.",
+
+
 	//L
 
 	'liste_des_rubriques_perso' => 'Elenco delle rubriche personalizzate',
@@ -46,13 +46,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'les_mots_cles' => 'Utilizza le parole chiave?',
 
 	//N
-	
-	'non' =>'No',	
-	
+
+	'non' =>'No',
+
 	//O
 
-	'oui' => 'Si',	
-	
+	'oui' => 'Si',
+
 	//P
 
 	'personnaliser_espace_prive' => 'Personalizza la redazione',
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'personnaliser_texte_interro' => 'Personalizza il testo dei campi?',
 	'perso_sauvegarde' => 'Personalizzazione della rubrica salvata!',
 	'pb_sauvegarde' => 'Si &egrave; verificato un problema durante la scrittura in database',
-	'Prive_perso'=> 'Personalizza redazione',
+	'prive_perso'=> 'Personalizza redazione',
 
 	//R
 	'racine' => 'Radice',
