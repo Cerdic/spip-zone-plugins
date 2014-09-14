@@ -99,11 +99,7 @@
 		IS_IPAD = /iPad|MeeGo/.test(UA),
 		IS_IPHONE = /iP(hone|od)/i.test(UA),
 		IS_ANDROID = /Android/.test(UA),
-		IS_MOBILE = IS_IPAD || IS_ANDROID || IS_IPHONE,
-		IPAD_VER = IS_IPAD ? parseFloat(/Version\/(\d\.\d)/.exec(UA)[1], 10) : 0,
-		dataload = !IS_IPAD && !IS_IPHONE,
-		zeropreload = !IS_IE && !IS_ANDROID,
-		touch = ('ontouchstart' in window);
+		IS_MOBILE = IS_IPAD || IS_ANDROID || IS_IPHONE;
 	
 	/**
 	 * Fonction d'initialisation du lecteur sur une balise <audio> ou <video>
