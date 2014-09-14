@@ -14,7 +14,7 @@ Utilisation :
 -* <code><img234|ragged|couleur></code> pour sp&#233;cifier la couleur de fond &#224; d&#233;couper. Si on n'en sp&#233;cifie pas, on d&#233;toure le transparent.
 	</description>
 	<icon>image_ragged.png</icon>
-	<lien>http://www.spip-contrib.net/Un-habillage-irregulier</lien>
+	<lien>http://contrib.spip.net/Un-habillage-irregulier</lien>
 	<fonctions> <!-- fichier charge a chaque recalul de page -->
 	image_ragged_filtre.php
 	</fonctions>

@@ -3,7 +3,7 @@
 	<slogan>Un chat dans votre spip</slogan>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>images/jappix.png</icon>
-	<lien>http://www.spip-contrib.net/Jappix-Mini</lien>
+	<lien>http://contrib.spip.net/Jappix-Mini</lien>
 	<version>0.2.0</version>
 	<categorie>communication</categorie>
 	<etat>test</etat>

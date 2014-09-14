@@ -18,7 +18,7 @@
 		Invalideur
 	</prefix>
 
-	<lien>http://www.spip-contrib.net/Plugin-Invalideur</lien>
+	<lien>http://contrib.spip.net/Plugin-Invalideur</lien>
 
 	<version_base>0.1</version_base>
 	<install>base/invalideur_install.php</install>

@@ -21,7 +21,7 @@
 	<prefix>
 	Importerblog
 	</prefix>
-	<lien>http://www.spip-contrib.net/Importer_blog</lien>
+	<lien>http://contrib.spip.net/Importer_blog</lien>
 	<categorie>outils</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>

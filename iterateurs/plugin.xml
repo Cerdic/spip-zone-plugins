@@ -14,7 +14,7 @@ Ce plugin met cette fonctionnalit&#233; &#224; disposition dans SPIP 2.1. Prenez
 	<icon>iterateurs.png</icon>
 
 	<fonctions>iterateurs_fonctions.php</fonctions>
-	<lien>http://www.spip-contrib.net/?article3667</lien>
+	<lien>http://contrib.spip.net/?article3667</lien>
 
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />

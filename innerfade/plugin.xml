@@ -19,7 +19,7 @@ Ce plugin fournit des modeles produisant des diaporamas en jquery innerfade
 [Jquery Innerfade->http://medienfreunde.com/lab/innerfade/]
 	</description>
 	<lien>
-	[Documentation sur contrib->http://www.spip-contrib.net/Diaporama-Innerfade-developpement]
+	[Documentation sur contrib->http://contrib.spip.net/Diaporama-Innerfade-developpement]
 	</lien>
 	<prefix>
 	innerfade

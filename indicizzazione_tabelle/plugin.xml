@@ -15,4 +15,3 @@ Consente di indicizzare tabelle esterne a SPIP e consentire ricerche
 	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>outil</categorie>
 </plugin>
-

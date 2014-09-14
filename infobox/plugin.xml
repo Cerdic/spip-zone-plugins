@@ -17,7 +17,7 @@ Affiche des messages en provenance des squelettes &#224; destination des r&#233;
 INFOBOX permet aux concepteurs de squelettes de faire remonter des messages d'alerte &#224; l'intention des r&#233;dacteurs. Les messages s'affichent "par dessus" le site public et sont g&#233;n&#233;r&#233;s par des balises #INFOBOX plac&#233;es &#224; l'int&#233;rieur des squelettes.
 	</description>
 
-	<lien>http://www.spip-contrib.net/Plugin-Infobox-Les-squelettes</lien>
+	<lien>http://contrib.spip.net/Plugin-Infobox-Les-squelettes</lien>
 	
 	<icon>img_pack/picto_infobox_64x64.png</icon>
 	

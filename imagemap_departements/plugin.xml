@@ -21,7 +21,7 @@ qui accepte les param&#232;tres suivants:
 Cr&#233;dits:
 -* Source de la carte [Lionel Delvarre->http://www.lion1906.com/]
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-image-map-des-departements</lien>
+	<lien>http://contrib.spip.net/Plugin-image-map-des-departements</lien>
 	<icon>imapdepart.png</icon>
 	<install>base/imapdepart_install.php</install>
 	<options>imapdepart_options.php</options><!-- gere l'appel de base/imapdepart_base.php -->

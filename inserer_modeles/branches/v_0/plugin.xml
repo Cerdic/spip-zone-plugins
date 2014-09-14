@@ -8,7 +8,7 @@
 	<description>
 		Ce plugin fournit une aide &#224; l'insertion des mod&#232;les dans vos textes &#224; travers des formulaires de saisies. Ces formulaires sont accessibles dans la colonne de droite ou via un bouton dans le porte-plume.
 	</description>
-	<lien>http://www.spip-contrib.net/?article3631</lien>
+	<lien>http://contrib.spip.net/?article3631</lien>
 	<icon>images/inserer_modeles-48.png</icon>
 	<prefix>inserer_modeles</prefix>
 	<pipeline>

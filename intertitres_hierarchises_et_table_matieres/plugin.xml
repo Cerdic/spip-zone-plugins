@@ -10,7 +10,7 @@
 	</description>
 	<icon>itdm-64.png</icon>
 	<licence>GNU/GPL v2</licence>
-	<lien>http://www.spip-contrib.net/Des-intertitres-hierarchises-et</lien>
+	<lien>http://contrib.spip.net/Des-intertitres-hierarchises-et-des-outils-pour-les</lien>
 	<options>intertitres_tdm_options.php</options>
 	<pipeline>
 		<nom>header_prive</nom>

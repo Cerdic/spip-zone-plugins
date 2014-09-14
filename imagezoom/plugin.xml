@@ -19,7 +19,7 @@ Le plugin ne marche qu'avec les squelettes utilisant la balise <code>#INSERT_HEA
 Si vous utilisez SPIP 1.9.2, il faut t&#233;l&#233;charger la biblioth&#232;que javascript [TJPZoom->http://valid.tjp.hu/tjpzoom/tjpzoom.zip] et placer le contenu de l'archive dans un r&#233;pertoire {tjpzoom} dans votre r&#233;pertoire {squelettes}. Si vous avec SPIP 2, cela sera fait automatiquement pour vous.
 	</description>
 	<prefix>tjpzoom</prefix>
-	<lien>http://www.spip-contrib.net/Une-Loupe-pour-les-Vignettes</lien>
+	<lien>http://contrib.spip.net/Une-Loupe-pour-les-Vignettes</lien>
 
 	<pipeline>
 		<nom>insert_head</nom> 

@@ -8,7 +8,7 @@
 	<prefix>icalendar</prefix>
 	<chemin dir='' />
 	<icon>icalendar.png</icon>
-	<lien>http://www.spip-contrib.net/Plugin-iCalendar</lien>
+	<lien>http://contrib.spip.net/Plugin-iCalendar</lien>
 	<categorie>date</categorie>
 	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
 	<utilise id="iterateurs" version="[0.6.1;[" />

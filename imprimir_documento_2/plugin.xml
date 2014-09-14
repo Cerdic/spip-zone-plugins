@@ -21,7 +21,7 @@
 		[fr]Plugin pour obtenir une version imprimable des articles et des br&#232;ves... Pour l'utiliser, il suffit d'ajouter la balise <code>#IMPRIMIR_DOCUMENTO**</code> dans les squelettes sans oublier les deux ast&#233;risques (dans les aricles et br&#232;ves)
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/article2227.html</lien>
+	<lien>http://contrib.spip.net/article2227.html</lien>
 	<icon>imprimir_documento.png</icon>
 	<fonctions>baliza_imprimir_documento.php</fonctions>
 	<prefix>imprimir_documento</prefix>

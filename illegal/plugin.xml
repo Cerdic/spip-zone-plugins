@@ -9,7 +9,7 @@
 	</description>
 	<prefix>illegal</prefix>
 
-	<lien>http://www.spip-contrib.net/Illegal</lien>
+	<lien>http://contrib.spip.net/Illegal</lien>
 
 	<icone>images/illegal-24.png</icone><!-- by Rachel Fu - http://www.iconfinder.com/icondetails/13487/24/cancel_delete_forbidden_icon -->
 	<necessite id="cfg" />

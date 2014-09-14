@@ -7,7 +7,7 @@
 	<description>Ce plugin permet d'afficher une image al&#233;atoire provenant de toutes les images du site et renvoyant sur l'article d'origine de l'image. Utilise le plugin [jQuery Cycle->http://jquery.malsup.com/cycle/]
 	</description>
 	<icon>css/images/logo_article.png</icon>
-	<lien>http://www.spip-contrib.net/Une-image-aleatoire-en-page-d</lien>
+	<lien>http://contrib.spip.net/Une-image-aleatoire-en-page-d-accueil-ou-ailleurs</lien>
 	<prefix>imagecycle</prefix>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id='cfg' version='[1.3.8;]' />

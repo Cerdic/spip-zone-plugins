@@ -8,7 +8,7 @@
 	<description>
 	Ce plugin permet d'ajouter des images cliquables dans le texte de vos articles, rubriques, br&#232;ves...
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Image-Cliquable</lien>
+	<lien>http://contrib.spip.net/Plugin-Image-Cliquable</lien>
 	<icon>image_cliquable.png</icon>
 	<prefix>image_cliquable</prefix>
 	<necessite id="SPIP" version="[2.1.14;3.0.99]" />

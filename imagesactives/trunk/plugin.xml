@@ -9,7 +9,7 @@
 	Ce plugin fournit un mod&#232;le de document doc_image_active pour afficher une Image Active dans un contenu SPIP
 	</description>
 	<prefix>imagesactives</prefix>
-	<lien>http://www.spip-contrib.net/?4159</lien>
+	<lien>http://contrib.spip.net/?4159</lien>
 	<lien>http://images-actives.crdp-versailles.fr/</lien>
 	<prefix>imagesactives</prefix>
 	<icon>prive/themes/spip/images/images_actives-32.png</icon>
