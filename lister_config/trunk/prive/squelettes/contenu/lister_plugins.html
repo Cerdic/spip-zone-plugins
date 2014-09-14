@@ -1,11 +1,12 @@
+<div class="nettoyeur"> </div>
+<h1 class="grostitre"><:lister_config:titre_lister_plugins:></h1>
+<p><:lister_config:description_lister_plugins:></p>
+<div class="nettoyeur"></div>
+
 [(#SET{actif, #ARRAY})]
 <BOUCLE_actif(PLUGINS paquets) {tout} {actif=='oui'}>[(#SET{chemin, configurer_#PREFIXE|strtolower})]
 [(#GET{chemin}|tester_url_ecrire|oui)[(#SET{actif, #GET{actif}|push{#PREFIXE}})] ]
 </BOUCLE_actif>
-[(#VAL{lister_config}|barre_onglets{lister_plugins})]
-<div class="nettoyeur"> </div>
-		<h1 class="grostitre"><:lister_config:titre_lister_plugins:></h1>
-		<p><:lister_config:description_lister_plugins:></p>
 <B_config>
 
 <div class="liste-plugins">

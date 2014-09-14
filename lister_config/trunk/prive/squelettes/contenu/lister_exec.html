@@ -1,6 +1,5 @@
-[(#VAL{lister_config}|barre_onglets{lister_exec})]
 <div class="nettoyeur"> </div>
-<h1><:lister_config:titre_lister_exec:></h1>
+<h1 class="grostitre"><:lister_config:titre_lister_exec:></h1>
 <p><:lister_config:description_lister_exec:></p>
 <div class="nettoyeur"></div>
 
@@ -10,7 +9,7 @@
 #SET{blackliste,#ARRAY}
 
 <B_contenu_exec>
-<BOUCLE_contenu_exec(DATA) {source pregfiles, #EVAL{_DIR_RACINE}, '.*/squelettes/contenu/.*\.html'}>#SET{exec,#VALEUR|match{#GET{regex}}|replace{"/",''}|replace{".html",''}}
+<BOUCLE_contenu_exec(DATA) {source pregfiles, #EVAL{_DIR_RACINE}, '.*/prive/squelettes/contenu/.*\.html'}>#SET{exec,#VALEUR|match{#GET{regex}}|replace{"/",''}|replace{".html",''}}
 [(#GET{exec}|match{'_edit$'}|oui)
 #SET{blackliste,#GET{blackliste}|push{#GET{exec}}}
 #SET{blackliste,#GET{blackliste}|push{#GET{exec}|replace{'_edit',''}}}
@@ -36,7 +35,7 @@
 <h2><:lister_config:intertitre_exec_contenu:></h2>
 <ul class="liste-items">
 <BOUCLE_liste(DATA) {source table, #GET{liste}} {par valeur}>
-<li class="item"><a href="#URL_ECRIRE{#VALEUR}">#VALEUR</a></li>
+<li class="item"><a href="#URL_ECRIRE{#VALEUR}" title="[(#CHEMIN{#VAL{prive/squelettes/contenu/}|concat{#VALEUR,'.html'}})]">#VALEUR</a></li>
 </BOUCLE_liste>
 </ul>
 </B_liste>
