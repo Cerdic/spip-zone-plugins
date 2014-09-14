@@ -10,7 +10,7 @@ Ce plugin permet aux utilisateurs des forums publics configur&#233;s {{&#224; pr
 _ Ceci ne fonctionne que pour les forums publics {{&#224; priori}}.
 _ On peut choisir quels types de commentateurs auront droit &#224; la mod&#233;ration mod&#233;r&#233;e (visiteur / r&#233;dacteur / admin) mais ils doivent tous &#234;tre logu&#233;s.
 	</description>
-	<lien>http://www.spip-contrib.net/Moderation-Moderee</lien>
+	<lien>http://contrib.spip.net/Moderation-Moderee</lien>
 	<prefix>moderation</prefix>
 	<pipeline>
 		<nom>pre_edition</nom>

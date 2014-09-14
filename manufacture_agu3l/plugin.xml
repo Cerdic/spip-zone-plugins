@@ -7,7 +7,7 @@
 	<prefix>theme_manufacture</prefix>
   	<slogan>Th&#232;me Z orange et gris, 2 colonnes</slogan>
   	<description>Un th&#232;me sur orange et gris, largeur fixe sur 2 colonnes.</description>
-	<lien>http://www.spip-contrib.net/Logistix</lien>
+	<lien>http://contrib.spip.net/Logistix</lien>
   	<icon>vignette.jpg</icon>
 	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
   	<utilise id="Z" version="[1.2.0;]" />

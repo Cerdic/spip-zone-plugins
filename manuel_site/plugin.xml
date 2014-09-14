@@ -23,7 +23,7 @@
 	</multi>
 	</description>
 	<icon>prive/themes/spip/images/manuelsite-32.png</icon>
-	<lien>http://www.spip-contrib.net/Manuel-de-redaction-du-site</lien>
+	<lien>http://contrib.spip.net/Manuel-de-redaction-du-site</lien>
 	<prefix>manuelsite</prefix>
 	<install>base/manuelsite_install.php</install>
 	<fonctions>manuelsite_fonctions.php</fonctions>

@@ -18,7 +18,7 @@ permet de s&#233;lectionner par type technique
 	</multi>
 	</description>
 	<prefix>mots_techniques</prefix>
-	<lien>http://www.spip-contrib.net/Mots-techniques</lien>
+	<lien>http://contrib.spip.net/Mots-techniques</lien>
 	<pipeline>
 		<nom>pre_boucle</nom>
 		<inclure>mots_techniques_pipelines.php</inclure>

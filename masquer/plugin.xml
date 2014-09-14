@@ -9,7 +9,7 @@
 	<etat>test</etat>
 	<prefix>masquer</prefix>
 	<icon>masquer.png</icon>
-	<lien>http://www.spip-contrib.net/Plugin-masquer</lien>
+	<lien>http://contrib.spip.net/Plugin-masquer</lien>
 	<fonctions>masquer_fonctions.php</fonctions>
 	<pipeline>
 		<nom>pre_boucle</nom>

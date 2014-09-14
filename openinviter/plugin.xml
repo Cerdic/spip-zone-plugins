@@ -9,7 +9,7 @@
 	<categorie>outil</categorie>
 	<icon>images/openinviter.gif</icon>
 	<traduire gestionnaire="salvatore" module="openinviter" reference="fr" />
-	<lien>http://www.spip-contrib.net/OpenInviter</lien>
+	<lien>http://contrib.spip.net/?article3979</lien>
 	
 	<prefix>openinviter</prefix>
 	<options>openinviter_options.php</options>

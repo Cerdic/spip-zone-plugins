@@ -3,13 +3,13 @@
 	<nom>Mots Partout</nom>
 	<slogan>G&#233;rer des mots clefs sur tous les &#233;l&#233;ments SPIP</slogan>
 	<auteur>Pierre Andrews (Mortimer), Stephane Laurent (Bill), Yoann Nogues (Zerax)</auteur>
-	<lien>http://www.spip-contrib.net/mot-clefs-partout</lien>
+	<lien>http://contrib.spip.net/mot-clefs-partout</lien>
 	<version>0.5.1</version>
 	<etat>test</etat>
 	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<categorie>navigation</categorie>
 	<description>
-		Cette contribution fournit une nouvelle page pour l’interface priv&#233;e permettant d'ajouter facilement des mots sur les &#233;l&#233;ments spip que l'on veut. Cette version int&#233;gre les mots clefs arborescents. 
+		Cette contribution fournit une nouvelle page pour l'interface priv&#233;e permettant d'ajouter facilement des mots sur les &#233;l&#233;ments spip que l'on veut. Cette version int&#233;gre les mots clefs arborescents. 
 	</description>
 	<prefix>MotsPartout</prefix>
 	<options>mots_partout_choses.php</options>

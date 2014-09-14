@@ -24,7 +24,7 @@
 		[en]This plugin provides a horizontal dropdown menu based on jQuery library, without depth limitation and configurable with CFG. The code is very simple, the menu is easy to customize.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3055</lien>
+	<lien>http://contrib.spip.net/?article3055</lien>
 
 	<bouton id='babbi' parent='configuration'>
         	<icone>prive/themes/spip/images/logo_menu-27-24.png</icone>

@@ -7,7 +7,7 @@
 	<description>
 	Les mod&#232;les <doc>, <img> et <emb> produisent chacun un r&#233;sultat diff&#233;rent et ce r&#233;sultat, pour les images, d&#233;pend du fait qu&#8217;elle soit dans le portfolio ou non. Ce plugin propose une nouvelle s&#233;rie de mod&#232;les ayant un comportement unifi&#233; et ind&#233;pendant du mode des images. Les mod&#232;les existants (doc, emb, img) ne sont pas modifi&#233;s afin d&#8217;assurer la r&#233;trocompatibilit&#233;.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Modeles-media</lien>
+	<lien>http://contrib.spip.net/Plugin-Modeles-media</lien>
 	<icon>images/media-24.png</icon>
 	<prefix>media</prefix>
 	<fonctions>media_balises.php</fonctions>

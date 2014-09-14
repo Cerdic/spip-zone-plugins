@@ -9,7 +9,7 @@
 		Permet de composer une lettre en s&#233;lectionnant manuellement les articles que l'on d&#233;sire ajouter  pour l'envoyer 
 	sur une lettre de diffusion g&#233;r&#233;e ext&#233;rieurement &#224; SPIP (de type [SYMPA->http://www.sympa.org], [Mailman->http://www.gnu.org/software/mailman/]...).
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Ma-lettre</lien>
+	<lien>http://contrib.spip.net/Ma-lettre</lien>
 	<prefix>malettre</prefix>
 	<icon>img/malettre.png</icon>
 	<pipeline>

@@ -6,7 +6,7 @@
 	<version>0.4.0</version>
 	<etat>test</etat>
 	<description>Module d'abonnement pour logiciels de publipostages de type MaxBulker Mailer</description>
-	<lien>http://www.spip-contrib.net/Mes-abonnes</lien>
+	<lien>http://contrib.spip.net/Mes-abonnes</lien>
 	<prefix>mesabonnes</prefix>
 	<icon>images/logo_mesabonnes_48.png</icon>
 	<install>base/mesabonnes_upgrade.php</install>

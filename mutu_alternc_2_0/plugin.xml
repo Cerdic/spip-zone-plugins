@@ -23,7 +23,7 @@
 		[en]This plugin provides some function that facilitate site's mutualisation, particularly: <code>demarrer_site()</code>, <code>prefixe_mutualisation()</code> and <code>mutualiser_creer()</code>. It can bind to an [AlternC->www.alternc.org] panel. Be careful, the installation of this plugin is different than general one (see documentation).
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/La-mutualisation-facile</lien>
+	<lien>http://contrib.spip.net/La-mutualisation-facile-modifications-manuelles</lien>
 	<icon>mutualiser.png</icon>
 	<prefix>
 		  Mutualisation

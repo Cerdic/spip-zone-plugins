@@ -3,10 +3,10 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'legende' => 'Les paramètre de votre lapin',
-'serial' => 'le numéro de série de votre lapin',
-'token' => 'le numéro token de votre lapin',
+'legende' => 'Les paramÃ¨tre de votre lapin',
+'serial' => 'le numÃ©ro de sÃ©rie de votre lapin',
+'token' => 'le numÃ©ro token de votre lapin',
 'name' => 'le nom de votre lapin',
-'voix' => 'Sélectionnez la voix du votre lapin',
+'voix' => 'SÃ©lectionnez la voix du votre lapin',
 );
 ?>

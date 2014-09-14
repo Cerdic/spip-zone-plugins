@@ -8,7 +8,7 @@
 	<description>Permet une gestion fine des notifications à envoyer avec possibilité de s'inscrire/se désinscrire et de choisir les modes d'envois.</description>
 	<icon>images/notifications-128.png</icon>
 	<categorie>outil</categorie>
-	<lien>http://www.spip-contrib.net/Notifications-avancees</lien>
+	<lien>http://contrib.spip.net/Notifications-avancees</lien>
 	
 	<prefix>notifavancees</prefix>
 	

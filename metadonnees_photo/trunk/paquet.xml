@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="imgs_photo/logo-pb_plugin.png"
-	documentation="http://www.spip-contrib.net/Metadonnees-Photo"
+	documentation="http://contrib.spip.net/Metadonnees-Photo"
 >	
 
 	<nom>Metadonn&#233;es photo</nom>
@@ -17,6 +17,6 @@
 
 	<pipeline nom="afficher_metas_document" inclure="photo_infos_fonctions.php" />
 
-	<necessite nom="medias" compatibilite="[2.6.0;]" />
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
 
 </paquet>

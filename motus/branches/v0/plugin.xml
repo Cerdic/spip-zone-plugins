@@ -12,7 +12,7 @@ Ce qui peut faciliter la prise en main d'un site par des r&#233;dacteurs en n'af
 	</description>
 	<etat>test</etat>
 	<prefix>motus</prefix>
-	<lien>http://www.spip-contrib.net/Motus</lien>
+	<lien>http://contrib.spip.net/Motus</lien>
 	
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[1.4.3;]" />

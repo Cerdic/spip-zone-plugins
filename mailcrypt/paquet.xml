@@ -5,16 +5,16 @@
 	etat="stable"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="images/mailcrypt-256.png"
-	documentation="http://www.spip-contrib.net/?article3828"
+	documentation="http://contrib.spip.net/?article3828"
 >	
 
 	<nom>MailCrypt 2</nom>
 	<!-- Protéger les liens de courriels -->
 
-	<auteur lien="http://www.spip-contrib.net/Alexis-Roussel">Alexis Roussel</auteur>
-	<auteur lien="http://www.spip-contrib.net/paolo">Paolo</auteur>
-	<auteur lien="http://www.spip-contrib.net/Patrice-Vanneufville">Patrice Vanneufville</auteur>
-	<auteur lien="http://www.spip-contrib.net/Joseph">Joseph</auteur>
+	<auteur lien="http://contrib.spip.net/Alexis-Roussel">Alexis Roussel</auteur>
+	<auteur lien="http://contrib.spip.net/paolo">Paolo</auteur>
+	<auteur lien="http://contrib.spip.net/Patrice-Vanneufville">Patrice Vanneufville</auteur>
+	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 
 	<pipeline nom="post_propre" inclure="mailcrypt_fonctions.php" />
 	<pipeline nom="affichage_final" inclure="mailcrypt_fonctions.php" />

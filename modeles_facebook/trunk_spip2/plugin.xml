@@ -3,11 +3,11 @@
 	<slogan>Un ensemble de mod&#232;les pour inclure les modules sociaux Facebook</slogan>
 	<version>0.17.0</version>
 	<etat>stable</etat>
-	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<auteur>[Piero Wbmstr->http://contrib.spip.net/PieroWbmstr]</auteur>
 	<licence>GNU/GPL 3</licence>
  	<prefix>fb_modeles</prefix>
 	<chemin dir='' />
-	<lien>http://www.spip-contrib.net/?article3872</lien>
+	<lien>http://contrib.spip.net/?article3872</lien>
 	<description>Ce plugin propose un ensemble de mod&#232;les SPIP pour int&#233;grer simplement et rapidement les modules sociaux du site Facebook :
 -*  {{send}} : le bouton &#171; Envoyer &#187; classique (avec commentaire)
 -*  {{like}} : le bouton &#171; J'aime &#187; classique (avec commentaire)

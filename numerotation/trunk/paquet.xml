@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/numeroter-32.png"
-	documentation="http://www.spip-contrib.net/Numerotation-Rapide"
+	documentation="http://contrib.spip.net/Numerotation-Rapide"
 >	
 
 	<nom>Num&#233;rotation Rapide</nom>

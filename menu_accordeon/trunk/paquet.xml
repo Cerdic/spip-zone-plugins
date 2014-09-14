@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/accordeon-32.png"
-	documentation="http://www.spip-contrib.net/?article3763"
+	documentation="http://contrib.spip.net/?article3763"
 >	
 
 	<nom>Menu accord&#233;on</nom>

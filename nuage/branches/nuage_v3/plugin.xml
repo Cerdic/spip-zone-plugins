@@ -15,7 +15,7 @@
 -* nuage_popularite : affiche les mots cl&#233;s du site (ou d'un groupe), la taille variant en fonction de sa popularit&#233; relative (somme des popularit&#233; des articles ayant ce mot)
 	</description>
 	<icon>images/nuage-64.png</icon>
-	<lien>http://www.spip-contrib.net/Nuage-de-mots-cles</lien>
+	<lien>http://contrib.spip.net/Nuage-de-mots-cles</lien>
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head_css</nom> 

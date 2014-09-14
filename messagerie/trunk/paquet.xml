@@ -6,7 +6,7 @@
 	compatibilite="[3.0.0;3.0.*]"
 	logo="habillage/messagerie-32.png"
 	schema="1.0.0"
-	documentation="http://www.spip-contrib.net/Messagerie-entre-membres"
+	documentation="http://contrib.spip.net/Messagerie-entre-membres"
 >	
 
 	<nom>Messagerie</nom>

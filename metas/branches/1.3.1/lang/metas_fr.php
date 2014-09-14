@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configuration_metas' => 'M&eacute;tas',
 'aide_ecrire_metas' => '<h4>M&eacute;tadonn&eacute;es</h4>
 <p>Ici vous pouvez configurer les m&eacute;tadonn&eacute;es de votre site.</p>
-<p>Pour en savoir plus sur ce plugin, consultez sa <a href="http://www.spip-contrib.net/?rubrique1250">documentation en&nbsp;ligne</a>.</p>',
+<p>Pour en savoir plus sur ce plugin, consultez sa <a href="http://contrib.spip.net/Metas">documentation en&nbsp;ligne</a>.</p>',
 
 // Metadonnees par defaut
 'config_metas_defaut' => 'M&eacute;tadonn&eacute;es par defaut',

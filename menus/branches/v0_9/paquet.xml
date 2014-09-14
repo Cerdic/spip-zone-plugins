@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[2.0.9;3.0.*]"
 	logo="images/menus-48.png"
-	documentation="http://www.spip-contrib.net/Plugin-Menus"
+	documentation="http://contrib.spip.net/Menus-3139"
 	schema="0.5.0"
 >
 

@@ -28,13 +28,13 @@
 	<install>base/menudep_install.php</install>
 
 	<pipeline>
-		<!-- les onglets de config dans l'espace privé -->
+		<!-- les onglets de config dans l'espace privÃ© -->
 		<nom>ajouter_onglets</nom>
 		<inclure>inc/menudep_pipeline_ajouter_onglets.php</inclure>
 	</pipeline>
 
 	<pipeline>
-		<!-- les css du plugin dans l'espace privé -->
+		<!-- les css du plugin dans l'espace privÃ© -->
 		<nom>header_prive</nom>
 		<inclure>inc/menudep_pipeline_header_prive.php</inclure>
 	</pipeline>

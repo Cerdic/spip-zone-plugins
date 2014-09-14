@@ -1,6 +1,6 @@
 <?php
 /* 
-* odt2spip est un plugin pour créer des articles SPIP à partir de fichiers OOo Writer (format .odt)
+* odt2spip est un plugin pour crÃ©er des articles SPIP Ã  partir de fichiers OOo Writer (format .odt)
 *
 * Auteur : cy_altern (cy_altern@yahoo.fr)
 *  

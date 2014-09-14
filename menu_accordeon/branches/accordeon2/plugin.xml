@@ -5,7 +5,7 @@
 	<categorie>navigation</categorie>
 	<auteur>[Ma&#239;eul Rouquette->http://www.maieul.net] d'apr&#232;s b_b</auteur>
 	<version>2.4.0</version>
-	<lien>http://www.spip-contrib.net/?article3763</lien>
+	<lien>http://contrib.spip.net/?article3763</lien>
 	<etat>stable</etat>
 	<icon>prive/themes/spip/images/accordeon-32.png</icon>
 	<description>Ce plugin permet d'appliquer &#224; une structure ul/li un effet accord&#233;on (pr&#233;sentation &#171; en tiroir &#187;). Il utilise le script <a href="http://jqueryui.com/demos/accordion/">jQuery UI Accordeon</a>. Le travail de g&#233;n&#233;ration de la structure ul/li peut-&#234;tre d&#233;l&#233;gu&#233; au plugin Menus ou &#224; une noisette Aveline par exemple ou m&#234;me g&#233;r&#233; ind&#233;pendamment en squelette. Il suffit de donner au ul principal la classe accordeon.

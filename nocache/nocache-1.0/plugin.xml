@@ -17,7 +17,7 @@
 	</description>
 	<auteur>[Sylvain Beucler->beuc@beuc.net], [Cliss XXI->http://www.cliss21.com/]</auteur>
 	<licence>GPL v3</licence>
-	<lien>http://www.spip-contrib.net/NoCache</lien>
+	<lien>http://contrib.spip.net/NoCache</lien>
 	<options>nocache_options.php</options>
 	<necessite id="SPIP" version='[1.9.2;2.1.99]' />
 	<categorie>outil</categorie>

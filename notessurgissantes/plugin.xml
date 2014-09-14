@@ -21,7 +21,7 @@
 		<inclure>notessurgissantes_pipelines.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<lien>http://www.spip-contrib.net/</lien>
+	<lien>http://contrib.spip.net</lien>
 	<chemin dir='' />
 	<utilise id="textwheel" /><!-- pour les div englobant les notes -->
 </plugin>

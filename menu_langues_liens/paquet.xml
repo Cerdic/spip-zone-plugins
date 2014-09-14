@@ -5,11 +5,11 @@
 	etat="stable"
 	compatibilite="[2.0.10;3.0.*]"
 	logo="prive/themes/spip/images/world_link-32.png"
-	documentation="http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens"
+	documentation="http://contrib.spip.net/Menu-de-langues-sous-forme-de-liens"
 	>
 	<nom>Menu de langues avec liens</nom>
 	<!-- Afficher les langues sous forme de liens cliquables -->
-	<auteur lien="http://www.spip-contrib.net/_Jacques-PYRAT_">Jacques</auteur>
+	<auteur lien="http://contrib.spip.net/RealET">Jacques</auteur>
 	<auteur>Jean-Baptiste Pressac</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 	<auteur>Cédric Morin</auteur>

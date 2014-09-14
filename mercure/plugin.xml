@@ -12,7 +12,7 @@
 		</multi>
 	</description>
 	<prefix>Mercure</prefix>
-	<lien>http://www.spip-contrib.net/Mercure-Chat-pour-Redacteurs</lien>
+	<lien>http://contrib.spip.net/Mercure-Chat-pour-Redacteurs</lien>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>

@@ -34,7 +34,7 @@
 		<titre>migrateur:migrateur_titre</titre>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.1;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.3.0;]" />
 	<necessite id="step" version="[0.15.6;]" />
 </plugin>

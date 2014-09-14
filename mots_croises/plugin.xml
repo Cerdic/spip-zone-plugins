@@ -35,7 +35,7 @@ _ Il n&#233;cessite l'activation du plugin {{jQuery}} ou une version de spip sup
 
 {{Spip 1.9.1 minimum}}
 	</description>
-	<lien>[->http://www.spip-contrib.net/article1379.html]</lien> <!-- URI de documentation -->
+	<lien>[->http://contrib.spip.net/?article1379]</lien> <!-- URI de documentation -->
 	<fonctions>mots_croises_fonctions.php</fonctions>
 	<options>mots_croises_options.php</options>
 	<prefix>mots_croises</prefix>

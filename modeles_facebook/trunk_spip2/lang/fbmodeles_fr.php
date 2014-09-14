@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cf_navigation' => 'Cf. [colonne de navigation->@url@]',
 	'configuration' => '{{{Configuration}}}
 
-Le plugin est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} mais celui-ci n\'est pas obligatoire.
+Le plugin est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://contrib.spip.net/?rubrique575]}} mais celui-ci n\'est pas obligatoire.
 
 @bloc_cfg@
 ',
@@ -80,7 +80,7 @@ Le plugin propose &eacute;galement un mod&egrave;le g&eacute;n&eacute;rant des i
 	// Documentation
 	'exemple' => '{{{Exemple}}}
 
-Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaque mod&egrave;le avec des valeurs fictives ({la page utilisera vos valeurs si vous utilisez [CFG->http://www.spip-contrib.net/?rubrique575]}). Reportez-vous au mod&egrave;le correspondant pour les options.',
+Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaque mod&egrave;le avec des valeurs fictives ({la page utilisera vos valeurs si vous utilisez [CFG->http://contrib.spip.net/?rubrique575]}). Reportez-vous au mod&egrave;le correspondant pour les options.',
 
 // F //
 	'fb_modeles' => 'Mod&egrave;les Facebook',
@@ -89,7 +89,7 @@ Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaq
 	'javascript_inactif' => 'Le javascript est inactif sur votre navigateur. Certaines fonctionnalit&eacute;s de cet outil seront inactives ...',
 	
 // L //
-	'licence' => 'Plugin pour SPIP 2.0+ : {{"Facebook Models" - copyright &#169; 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] sous licence ([GPL->http://www.opensource.org/licenses/gpl-3.0.html]}) }}.',
+	'licence' => 'Plugin pour SPIP 2.0+ : {{"Facebook Models" - copyright &#169; 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] sous licence ([GPL->http://www.opensource.org/licenses/gpl-3.0.html]}) }}.',
 
 // N //
 	'new_window' => 'Nouvelle fen&ecirc;tre',
@@ -122,7 +122,7 @@ Par exemple pour le module Facebook "Send" :
 -* [Mode &#034;texte simple&#034;->@mode_brut@] ({html simple + balise INSERT_HEAD})
 -* [Mode &#034;squelette Zpip&#034;->@mode_zpip@] ({squelette Z compatible})
 -* [Mode &#034;squelette SPIP&#034;->@mode_spip@] ({compatible distribution})',
-	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->http://www.spip-contrib.fr/?article3567].',
+	'info_skel_contrib' => 'Page de documentation compl&egrave;te en ligne sur spip-contrib : [->http://contrib.spip.net/?article3567].',
 
 );
 ?>

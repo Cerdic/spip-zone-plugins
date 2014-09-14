@@ -25,7 +25,7 @@ Le but du plugin {{Menus}} est donc de permettre de facilement &#233;laborer des
 			[it]Crea i tuoi men&#249; in redazione.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Menus</lien>
+	<lien>http://contrib.spip.net/Menus-3139</lien>
 	<icon>images/menus-48.png</icon>
 	<prefix>menus</prefix>
 	

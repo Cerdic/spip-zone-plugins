@@ -7,7 +7,7 @@
 	<slogan>Choisir l'orientation des images, portrait ou paysage</slogan>
 	<description>Le plugin orientation ajoute les crit&#232;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos.
 	</description>
-	<lien>http://www.spip-contrib.net/Portrait-ou-Paysage</lien>
+	<lien>http://contrib.spip.net/Portrait-ou-Paysage</lien>
 	<fonctions>orientation.php</fonctions>
 	<prefix>orientation</prefix>
 	<necessite id="SPIP" version="[1.9.0;3.0.99]" />

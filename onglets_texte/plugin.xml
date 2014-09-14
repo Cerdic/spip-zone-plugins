@@ -4,8 +4,8 @@
 	<etat>stable</etat>
 	<icon>icon.png</icon>
 	<description>Afficher du texte en blocs &agrave; onglets.</description>
-	<lien>http://www.spip-contrib.net/?rubrique445</lien>
-	<auteur>[Pi R->http://www.spip-contrib.net/?auteur214]</auteur>
+	<lien>http://contrib.spip.net/?rubrique445</lien>
+	<auteur>[Pi R->http://contrib.spip.net/?auteur214]</auteur>
 	<prefix>onglets_texte</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

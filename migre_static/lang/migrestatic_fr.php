@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // Inutilisee
-'err_liste_pages_vide' => '<strong>Erreur: La liste des pages est vide.</strong> Ce plugin r&eacute;cup&egrave;re une liste d\'adresses internet (URLs) contenues dans la page web http://www.mondomaine.com/la_liste_des_pages.html. Ce fichier doit contenir une suite de liens hypertexte vers les pages à importer dans spip, sous la forme &gt;a href="http://www.mondomaine.com/page_a_importer_1.html"&lt;Titre dans spip&gt;/a&lt;',
+'err_liste_pages_vide' => '<strong>Erreur: La liste des pages est vide.</strong> Ce plugin r&eacute;cup&egrave;re une liste d\'adresses internet (URLs) contenues dans la page web http://www.mondomaine.com/la_liste_des_pages.html. Ce fichier doit contenir une suite de liens hypertexte vers les pages Ã  importer dans spip, sous la forme &gt;a href="http://www.mondomaine.com/page_a_importer_1.html"&lt;Titre dans spip&gt;/a&lt;',
 
 'migre_last' => ''
 

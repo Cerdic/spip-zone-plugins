@@ -18,5 +18,5 @@
   <!-- <pipeline nom="affichage_final" inclure="mejs_pipelines.php" /> --> 
   <pipeline nom="header_prive" inclure="mejs_pipelines.php" />
   
-  <utilise nom="medias" compatibilite="[1.0.0;[" />
+  <utilise nom="medias" compatibilite="[2.7.27;[" />
 </paquet>

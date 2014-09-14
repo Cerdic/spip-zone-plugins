@@ -6,7 +6,7 @@
 	<etat>test</etat>
 	<slogan>G&eacute;rer une mailing liste &agrave; l&#39;aide de mailchimp</slogan>
 	<description>G&eacute;rer une mailing liste &agrave; l&#39;aide de [mailchimp-&gt;http://www.mailchimp.com]. Utilisation du plugin mes_abonnes pour garder les abonn&eacute;s en local, mais inscription &eacute;galement des emails chez mailchimp ( pour l&#39;envoi ult&eacute;rieur de mailing par l&#39;interface mailchimp)</description>
-	<lien>http://www.spip-contrib.net/mailchimp</lien>
+	<lien>http://contrib.spip.net/mailchimp</lien>
 	<prefix>mailchimp</prefix>
 	<icon>images/light_freddie.png</icon>
 	<necessite id="mesabonnes" version="[0.2;]" />

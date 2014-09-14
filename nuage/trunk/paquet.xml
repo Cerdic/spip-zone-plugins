@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/nuage-64.png"
-	documentation="http://www.spip-contrib.net/Nuage-de-mots-cles"
+	documentation="http://contrib.spip.net/Nuage-de-mots-cles"
 >	
 
 	<nom>Nuage</nom>

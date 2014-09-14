@@ -27,7 +27,7 @@ EXIF, IPTC, GPS informations are extract with the plugin Photo metadata by ARNO*
 		</multi>
 	</description>
 	<licence>LGPL</licence>
-	<lien>http://www.spip-contrib.net/Metadonnees-pour-la-mediatheque</lien>
+	<lien>http://contrib.spip.net/Metadonnees-pour-la-mediatheque</lien>
 	<prefix>medias_metas</prefix>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>multimedia</categorie>
@@ -35,4 +35,3 @@ EXIF, IPTC, GPS informations are extract with the plugin Photo metadata by ARNO*
 	<necessite id="photo_infos" version="[1.2;]" />
 	<utilise id="cfg">
 </plugin>
-

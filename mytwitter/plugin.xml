@@ -11,7 +11,7 @@ Le plugin fournit un bloc de pr&#233;sentation de votre compte Twitter. Les para
 
 le bloc est accessible via l'insertion d'un mod&#232;le (qui offre la possibilit&#233; de passer en param&#232;tre un autre compte que celui d&#233;crit par cfg) ou via une page d&#233;di&#233; pour les utilisateurs de squelette de type Z (page=mytwitter)
 </description>
-	<lien>http://www.spip-contrib.net/Plugin-Mytwitter</lien>
+	<lien>http://contrib.spip.net/Twitter-pour-zpip</lien>
 	<prefix>mytwitter</prefix>
 	<pipeline>
 		<nom>insert_head</nom>

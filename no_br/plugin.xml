@@ -6,7 +6,7 @@
 	<etat>stable</etat>
 	<auteur>ARNO*</auteur>
 	<icon>logo.png</icon>
-	<lien>http://www.spip-contrib.net/Interdire-les-retours-chariot</lien>
+	<lien>http://contrib.spip.net/Interdire-les-retours-chariot</lien>
 	<description>
 		Les retours-chariot c'est mal, les retours-chariot sont une plaie, les retours-chariot nuisent &#224; votre sant&#233;. Ce plugin interdit l'insertion de retours-chariot dans le texte en les rempla&#231;ant par des changements de paragraphe (ce qu'ils devraient toujours &#234;tre).
 	</description>

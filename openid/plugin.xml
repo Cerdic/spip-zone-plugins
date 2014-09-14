@@ -19,7 +19,7 @@
 		</multi>
 	</description>
 	<options>openid_options.php</options>
-	<lien>http://www.spip-contrib.net/Plugin-d-authentification-OpenID</lien><!-- URI de documentation -->
+	<lien>http://contrib.spip.net/OpenID-pour-SPIP</lien><!-- URI de documentation -->
 	<necessite id='SPIP' version="[2.0.0;2.0.99]" />
 	<necessite id="lib:openid-php-openid-ee669c6" src="http://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
 	<chemin dir="./" />
@@ -82,7 +82,7 @@
 		</multi>
 	</description>
 	<options>openid_options.php</options>
-	<lien>http://www.spip-contrib.net/Plugin-d-authentification-OpenID</lien>
+	<lien>http://contrib.spip.net/OpenID-pour-SPIP</lien>
 	<necessite id="lib:openid-php-openid-ee669c6" src="http://contrib.spip.net/IMG/zip/openid-php-openid-master-ee669c6.zip" />
 	<chemin dir="./" />
 	<chemin dir="spip_2_1" />

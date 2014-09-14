@@ -8,7 +8,7 @@
 	<description>		
 		Le plugin "Publication Ouverte" a pour but de fournir une interface de publication d'article publique et anonyme permettant &#224; n'importe quel visiteur d'un site spip de publier un article sans aucune authentification. Cette m&#233;thode de gestion/cr&#233;ation de contenu est appel&#233; "Publication ouverte" (ou open-publishing en anglais). La publication ouverte est pratiqu&#233; par le r&#233;seau indym&#233;dia, ainsi que de nombreux autres sites d'informations alternatives.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Publication-Ouverte</lien>
+	<lien>http://contrib.spip.net/Plugin-Publication-Ouverte</lien>
 	<prefix>op</prefix>
 	<icon>openpublishing.png</icon>
 	<options>op_options.php</options>

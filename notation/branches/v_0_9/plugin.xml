@@ -21,7 +21,7 @@ _ Defines the models <code><autxx|notation|id_article=yy></code> which gives the
 and <code><notation|topten></code> which gives the 10 best articles.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Notation-d-elements-SPIP</lien>
+	<lien>http://contrib.spip.net/Notation-d-elements-SPIP</lien>
 	<licence>GNU/GPL - (c) 2008-2012</licence>
 	<necessite id="spip" version="[2.0.0;2.1.99]" />
 	<utilise id="cfg" version="[1.10.4;]" />

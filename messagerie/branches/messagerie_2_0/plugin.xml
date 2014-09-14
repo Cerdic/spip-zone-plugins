@@ -7,7 +7,7 @@
 	<version>2.0.1</version>
 	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
-	<lien>http://www.spip-contrib.net/Messagerie-entre-membres</lien>
+	<lien>http://contrib.spip.net/Messagerie-entre-membres</lien>
 	<description>
 	Gestion de la messagerie interne entre auteurs dans les squelettes publics.
 	</description>

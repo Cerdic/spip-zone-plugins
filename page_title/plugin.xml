@@ -8,7 +8,7 @@
 	<description>
 	Ajoute un <code><title>...</title></code> aux pages html qui n'en ont pas.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Page-title</lien>
+	<lien>http://contrib.spip.net/Plugin-Page-title</lien>
 	<prefix>page_title</prefix>
 	<pipeline>
 		<nom>affichage_final</nom>

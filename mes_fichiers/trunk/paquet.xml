@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/mes_fichiers-64.png"
-	documentation="http://www.spip-contrib.net/Mes-Fichiers-2"
+	documentation="http://contrib.spip.net/Mes-Fichiers-2"
 >	
 
 	<nom>Mes fichiers</nom>

@@ -8,7 +8,7 @@
 	<description>
 		MailCrypt remplace les liens de courriels dans vos textes par un lien javascript afin d'&#233;viter que des robots spammeurs ne collectent les emails affich&#233;s sur votre site. La modification est transparente sur un navigateur disposant de javascript. Lorsque javascript n'est pas install&#233;, le mail reste compr&#233;hensible par un &#234;tre humain.
 	</description>
-	<lien>http://www.spip-contrib.net/?article3828</lien>
+	<lien>http://contrib.spip.net/?article3828</lien>
 	<prefix>mailcrypt</prefix>
 	<categorie>performance</categorie>
 	<fonctions>mailcrypt_fonctions.php</fonctions>

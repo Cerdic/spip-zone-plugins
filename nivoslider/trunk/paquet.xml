@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/nivoslider-32.png"
-	documentation="http://www.spip-contrib.net/Nivo-Slider-pour-SPIP"
+	documentation="http://contrib.spip.net/Nivo-Slider,3747"
 >	
 
 	<nom>NivoSlider</nom>

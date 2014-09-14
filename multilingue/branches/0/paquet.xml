@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/multilingue-64.png"
-	documentation="http://www.spip-contrib.net/Site-multilingue-facile"
+	documentation="http://contrib.spip.net/Site-multilingue-facile"
 >
 	<nom>Site multilingue facile</nom>
 	<!-- Créer facilement un site multilingue -->

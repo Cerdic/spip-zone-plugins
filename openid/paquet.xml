@@ -6,7 +6,7 @@
 	compatibilite="[2.0.0;3.0.*]"
 	logo="images/openid-100.png"
 	schema="0.2"
-	documentation="http://www.spip-contrib.net/Plugin-d-authentification-OpenID"
+	documentation="http://contrib.spip.net/OpenID-pour-SPIP"
 >	
 
 	<nom>OpenID</nom>

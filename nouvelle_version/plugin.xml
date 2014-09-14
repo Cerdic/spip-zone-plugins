@@ -30,5 +30,5 @@
     
     <version_base>0.1</version_base>
     <install>base/duplicator_install.php</install>
-    <lien>http://www.spip-contrib.net/Nouvelle-version-Moderation-de-modifications</lien>
+    <lien>http://contrib.spip.net/Nouvelle-version-Moderation-de-modifications</lien>
 </plugin>

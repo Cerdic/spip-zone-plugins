@@ -29,7 +29,7 @@
 		[en]Document management tools, with summary page listing all the documents on the site.
 		[de]Dokumentenverwaltung mit &#220;bersichtsseite f&#252;r alle Dokumente der Website und erweiterten Funktionen f&#252;r Dokumente in Artikeln und Rubriken.
 	</multi></description>
-	<lien>http://www.spip-contrib.net/mediatheque</lien>
+	<lien>http://contrib.spip.net/mediatheque</lien>
 	<install>base/medias.php</install>
 	<fonctions>medias_fonctions.php</fonctions>
 	<pipeline>

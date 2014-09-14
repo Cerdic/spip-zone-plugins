@@ -5,7 +5,7 @@
 	<version>0.1.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<lien>http://www.spip-contrib.net/Omnipresence</lien>
+	<lien>http://contrib.spip.net/Omnipresence</lien>
 	<slogan>Pr&#233;sence &#233;tendue et activit&#233; d'un utilisateur Jabber</slogan>
 	<description>
 Permet d'acc&#233;der aux infos de présence étendue et d'activité d'un utilisateur Jabber, via plusieurs

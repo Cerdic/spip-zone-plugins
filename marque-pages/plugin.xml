@@ -6,7 +6,7 @@
 	<version>0.2.0</version>
 	<etat>dev</etat>
 	<description>Des outils pour d&#233;velopper un syst&#232;me de marque-pages en ligne, du style [Scuttle->http://scuttle.org/].</description>
-	<lien>http://www.spip-contrib.net/Plugin-Marque-pages</lien>
+	<lien>http://contrib.spip.net/Plugin-Marque-pages</lien>
 	<prefix>marquepages</prefix>
 	<icon>images/marquepages.png</icon>
 	

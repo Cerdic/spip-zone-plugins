@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controls' => 'Contrôles',
 	'controlnav' => 'Afficher les puces',
 	'cfg_title_nivoslider' => 'Nivo Slider',
-	'cfg_boite_nivoslider' => 'Configuration du plugin Nivo Slider.<br /><br />[Documentation->http://www.spip-contrib.net/Nivo-Slider-pour-SPIP]',
+	'cfg_boite_nivoslider' => 'Configuration du plugin Nivo Slider.<br /><br />[Documentation->http://contrib.spip.net/Nivo-Slider,3747]',
 	// D
 	'default' => 'Diaporama par défaut',
 	'default_info' => 'Article utilisé comme réservoir d\'images lors de l\'inclusion du modèle [(#MODELE{nivoslider})] sans paramètre <i>id_article</i> à partir d\'un squelette :',

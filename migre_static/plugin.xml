@@ -25,7 +25,7 @@ _ Preview on your website in migre_formulaire private page.
 _ and if CFG plugin is installed you can access to a configuration form.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article2421</lien> <!-- [fr] URI de documentation [en] documentation URI -->
+	<lien>http://contrib.spip.net/?article2421</lien> <!-- [fr] URI de documentation [en] documentation URI -->
 	<icon>img/migre_static_icone.png</icon> <!-- [fr] icone du plugin [en] plugin icon -->
 
 	<prefix>migrestatic</prefix>

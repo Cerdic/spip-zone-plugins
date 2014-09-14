@@ -6,7 +6,7 @@
 	<version>0.1.0</version>
 	<etat>stable</etat>
 	<description>Ce plugin permet d'un clic de num&#233;roter/re-num&#233;roter/d&#233;-num&#233;roter tous les articles ou sous-rubriques d'une rubrique.</description>
-	<lien>http://www.spip-contrib.net/Numerotation-Rapide</lien> <!-- URI de documentation -->
+	<lien>http://contrib.spip.net/Numerotation-Rapide</lien> <!-- URI de documentation -->
 	<prefix>numero</prefix>
 	<pipeline>
 		<nom>affiche_droite</nom>

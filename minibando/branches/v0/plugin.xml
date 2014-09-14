@@ -8,7 +8,7 @@
 	<description>
 	Le plugin minibando remplace les boutons d’administration de SPIP par une barre d'outils qui reprend les &#233;l&#233;ments disponibles dans la navigation haute de l’espace priv&#233; de SPIP.
 	</description>
-	<lien>http://www.spip-contrib.net/minibando</lien>
+	<lien>http://contrib.spip.net/minibando</lien>
 	<licence>GPL</licence>
 	<icon>images/minibando-64.png</icon>
 	<pipeline>

@@ -59,4 +59,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									  'groupe_racine'=>"Aucun - groupe de mots clefs &agrave; la racine"
 
 									   );
-

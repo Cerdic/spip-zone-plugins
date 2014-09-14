@@ -8,7 +8,7 @@
 	<description>
 		Ce plugin permet de g&#233;n&#233;rer un article SPIP &#224; partir du t&#233;l&#233;chargement d'un fichier OpenOffice Writer (format .ODT). Il g&#232;re la majorit&#233; des raccourcis typographiques, d&#233;tecte les diff&#233;rents niveaux de titre et fait l'int&#233;gration des images automatiquement.
 	</description>
-	<lien>http://www.spip-contrib.net/odt2spip-creation-d-articles-a-partir-de-fichiers</lien>
+	<lien>http://contrib.spip.net/odt2spip-creation-d-articles-a-partir-de-fichiers</lien>
 	<icon>images/odt2spip-64.png</icon>
 	<prefix>odt2spip</prefix>
 	<pipeline>

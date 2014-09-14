@@ -6,7 +6,7 @@
 			[en]JQuery slideshow with nice transitions!
 		</multi>
 	</slogan>
-	<auteur>[Gr&#233;gory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
+	<auteur>[Gr&#233;gory Pascal->http://contrib.spip.net/ngombe]</auteur>
 	<version>0.1.2</version>
 	<licence>GNU/GPL</licence>
 	<etat>test</etat>
@@ -14,7 +14,7 @@
 	[fr]Ajoute les balises <code><nivosliderXX></code>, <code><nivoslider_doc></code> et <code><nivoslider_rub></code> pour cr&#233;er un diaporama [Nivo Slider->http://nivo.dev7studios.com/] param&#233;trable.
 	[en]Add <code><nivosliderXX></code>, <code><nivoslider_doc></code> and <code><nivoslider_rub></code> tags to create a [Nivo Slider->http://nivo.dev7studios.com/] slideshow.
 	</multi></description>
-	<lien>http://www.spip-contrib.net/Nivo-Slider-pour-SPIP</lien>
+	<lien>http://contrib.spip.net/Nivo-Slider,3747</lien>
 	<icon>img_pack/nivoslider-32.png</icon>
 	<prefix>nivoslider</prefix>
 	<pipeline>

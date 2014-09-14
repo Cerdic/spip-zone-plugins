@@ -7,7 +7,7 @@
 	<description>
 		Ce plugin ajoute le correcteur orthographique de Google &#224; l'ensemble des zone de texte de SPIP (forum, article, ps,...) aussi bien dans la partie priv&#233;e que publique.
 	</description>
-	<lien>http://www.spip-contrib.net/OrthoGoogle-correcteur</lien>
+	<lien>http://contrib.spip.net/OrthoGoogle-correcteur</lien>
 	<prefix>orthogoogle</prefix>
 
 	<pipeline>

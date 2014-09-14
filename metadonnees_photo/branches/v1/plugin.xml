@@ -30,7 +30,7 @@ IPTC informations requires the "iptcparse" PHP function and use the class "class
 		</multi>
 	</description>
 	<licence>LGPL</licence>
-	<lien>http://www.spip-contrib.net/Metadonnees-Photo</lien>
+	<lien>http://contrib.spip.net/Metadonnees-Photo</lien>
 	<fonctions>photo_infos_fonctions.php</fonctions>
 	<prefix>photo_infos</prefix>
 	<pipeline>
@@ -41,4 +41,3 @@ IPTC informations requires the "iptcparse" PHP function and use the class "class
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
-

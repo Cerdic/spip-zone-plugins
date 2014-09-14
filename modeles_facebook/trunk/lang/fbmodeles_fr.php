@@ -65,7 +65,7 @@ Les différents blocs ci-dessous vous présentent un exemple de chaque modèle a
 	// I
 	'info_doc' => 'Si vous rencontrez des problèmes pour afficher cette page, [cliquez-ici->@link@].',
 	'info_doc_titre' => 'Note concernant l’affichage de cette page',
-	'info_skel_contrib' => 'Page de documentation complète en ligne sur spip-contrib : [->http://www.spip-contrib.fr/?article3567].',
+	'info_skel_contrib' => 'Page de documentation complète en ligne sur spip-contrib : [->http://contrib.spip.net/?article3567].',
 	'info_skel_doc' => 'Cette page de documentation est conçue sous forme de squelette SPIP fonctionnant avec la distribution standard ({fichiers du répertoire "squelettes-dist/"}). Si vous ne parvenez pas à visualiser la page, ou que votre site utilise ses propres squelettes, les liens ci-dessous vous permettent de gérer son affichage :
 
 -* [Mode "texte simple"->@mode_brut@] ({html simple + balise INSERT_HEAD})
