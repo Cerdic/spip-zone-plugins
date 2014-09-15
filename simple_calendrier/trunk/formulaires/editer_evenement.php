@@ -133,18 +133,13 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_rubr
 	set_request("date_fin", date_saisie2sql(_request("date_fin")));
 	
 	
-	// On reconstitue les champs 'type' et 'id_objet' à partir du champ 'ref'
+	// On reconstitue les champs 'type' et 'id_objet' a partir du champ 'ref'
 	$config = $config_fonc($row);
-	
-	//print_r($row);
-	//die("yeah !");
-	
 	if ($config['simplecal_refobj'] == 'oui'){
 		$ref = trim(_request('ref'));
 		if ($ref){
 			
 			$tab = simplecal_get_tuple_from_ref($ref);
-			//die("yeah ! ".$tab['type'].$tab['id_objet']);
 			set_request("type", $tab['type']);
 			set_request("id_objet", $tab['id_objet']);
 		} else {

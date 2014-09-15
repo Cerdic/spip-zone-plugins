@@ -78,16 +78,17 @@ function simplecal_affiche_enfants($flux) {
 			}
 		}
 		
+		// S'il y a des évènements dans une rubrique, tjr les afficher.
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/simplecal-rubrique-enfants', array('id_rubrique'=>$id_rubrique));
+		
+		// Bouton de création seulement si la config l'autorise.
 		if ($affiche) {
-			$bouton_evenements = '';
 			$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.$id_rubrique);
-			if (autoriser('creerevenementdans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
-				$bouton_evenements .= icone_verticale(_T('simplecal:icone_nouvel_evenement'), generer_url_ecrire("evenement_edit","id_rubrique=$id_rubrique&new=oui"), "evenement-24.png","new", 'right')
-				. "<br class='nettoyeur' />";
+			if (autoriser('creerevenementdans', 'rubrique', $id_rubrique, NULL, array('id_parent'=>$id_parent))) {
+				$bouton_evenements = icone_verticale(_T('simplecal:icone_nouvel_evenement'), generer_url_ecrire("evenement_edit","id_rubrique=$id_rubrique&new=oui"), "evenement-24.png","new", 'right');
+				$bouton_evenements .= "<br class='nettoyeur' />";
+				$flux['data'] .= $bouton_evenements;
 			}
-			
-			$flux['data'] .= recuperer_fond('prive/squelettes/inclure/simplecal-rubrique-enfants', array('id_rubrique'=>$id_rubrique));
-			$flux['data'] .= $bouton_evenements;
 		}
 	}
 	return $flux;
@@ -132,6 +133,30 @@ function simplecal_boite_infos($flux){
 	
 	return $flux;
 }
+
+
+function simplecal_afficher_fiche_objet($flux){
+
+	if (in_array($type = $flux['args']['type'],array('evenement'))
+	  AND $GLOBALS['meta']['forum_prive_objets'] != 'non'){
+		$id = $flux['args']['id'];
+		$table = table_objet($type);
+		$id_table_objet = id_table_objet($type);
+		$contexte = array_merge($flux['args']['contexte'],
+			array(
+				'objet'=>$type,
+				'id_objet'=>$id,
+				'quoi'=>'interne',
+				'statut'=>'prive'
+			)
+		);
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/discuter_forum',$contexte,array('ajax'=>true));
+	}
+	
+	return $flux;
+}
+
+
 
 
 function simplecal_configurer_liste_metas($metas) {

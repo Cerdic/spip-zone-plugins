@@ -8,6 +8,8 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Envoi depuis le formulaire d'edition d'un evenement
+// formulaires_editer_evenement_traiter_dist > formulaires_editer_objet_traiter > action/editer_evenement
 function action_editer_evenement_dist($arg=null) {
 
 	if (is_null($arg)){
@@ -15,17 +17,20 @@ function action_editer_evenement_dist($arg=null) {
 		$arg = $securiser_action();
 	}
 
-	// Envoi depuis le formulaire d'edition d'un evenement
+	// Creation d'un nouvel evenement
 	if (!$id_evenement = intval($arg)) {
 		$id_evenement = evenement_inserer(_request('id_parent'));
 	}
 
-	if (!$id_evenement)
-		return array(0,''); // erreur
+	// Cas d'erreur
+	if (!$id_evenement) {
+		return array(0, ''); 
+	}
 
+	// Modification d'un evenement
 	$err = evenement_modifier($id_evenement);
 
-	return array($id_evenement,$err);
+	return array($id_evenement, $err);
 }
 
 /**
@@ -38,10 +43,10 @@ function evenement_inserer($id_rubrique) {
 
 	include_spip('inc/rubriques');
 
-	// Si id_rubrique vaut 0 ou n'est pas definie, creer l'evenement
-	// dans la premiere rubrique racine
+	// Si id_rubrique vaut 0 ou n'est pas definie
+	// => l'evenement n'est rattache a aucune rubrique.
 	if (!$id_rubrique = intval($id_rubrique)) {
-		$id_rubrique = sql_getfetsel("id_rubrique", "spip_rubriques", "id_parent=0",'', '0+titre,titre', "1");
+		$id_rubrique = 0;
 	} else {
 		$row = sql_fetsel("lang, id_secteur", "spip_rubriques", "id_rubrique=$id_rubrique");
 	}

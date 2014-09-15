@@ -1,7 +1,7 @@
 <paquet
 	prefix="simplecal"
 	categorie="date"
-	version="2.0.5"
+	version="2.0.7"
 	etat="dev"
 	compatibilite="[3.0.0-dev;["
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -24,6 +24,7 @@
 	<pipeline nom="affiche_milieu" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_gauche" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_auteurs_interventions" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
+	<pipeline nom="afficher_fiche_objet" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="rubrique_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="affiche_enfants" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
 	<pipeline nom="accueil_encours" inclure="simplecal_pipelines.php" /> <!-- OK SPIP3 -->
