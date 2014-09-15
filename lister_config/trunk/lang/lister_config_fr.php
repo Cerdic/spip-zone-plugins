@@ -14,11 +14,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	Utilisable comme pseudo-plugin pour reconfigurer votre site (cf. mes_fichiers) !<br />
 	(vous pouvez aussi passer vos squelettes dans ce plugin, qui pourra faciliter vos migrations).',
 
+	'extensions_php_pas_fonctions' => 'Il n\'y a pas de fonctions pour cette extension PHP. Ou est-ce un Objet&nbsp;?',
+
 	// I
 	'icone_page_plugin' => 'Page',
 	'intertitre_exec' => 'Selon exec/*.php',
 	'intertitre_exec_contenu' => 'Selon squelettes/contenu/*.html',
-
+	'info_1_extension_php' => 'Une extension PHP',
+	'info_nb_extensions_php' => '@nb@ extensions PHP',
 	// O
 	'objets_sans_tableaux' => 'Voici les objets n\'ayant pas de tableau (cf. <em>prive/objets/liste/nom_objet.html</em>)',
 	'objets_vides' => 'Voici la liste des objets ayant un tableau ne retournant aucun résultat, ou résultat alternatif.',
@@ -26,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_lister_config' => 'Les pages de configuration',
 	'titre_lister_exec' => 'La liste des pages ?exec=xxx',
+	'titre_lister_extensions_php' => 'La liste des extensions PHP chargées',
 	'titre_lister_objets' => 'Liste des objets principaux',
 	'titre_lister_plugins' => 'Les plugins nécessaires au site',
 	'titre_objets_sans_tableaux' => 'Objets sans tableaux',
