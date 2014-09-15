@@ -110,6 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chaine_titre_langue_objet_feminin' => 'Langue de cette @type@',
 	'chaine_titre_objets_rubrique' => '@mobjets@ de la rubrique',
 	'chaine_titre_objets_rubrique_feminin' => '@mobjets@ de la rubrique',
+	'chaine_texte_definir_comme_traduction_objet' => 'Ce @type@ est une traduction du @type@ numéro :',
+	'chaine_texte_definir_comme_traduction_objet_feminin' => 'Cette @type@ est une traduction de la @type@ numéro :',
 
 	'champ_auto_rempli' => 'Le champ sera automatiquement rempli si vous laissez vide.',
 	'champ_ajoute' => 'Un champ a été ajouté',
