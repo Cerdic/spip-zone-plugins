@@ -1,0 +1,35 @@
+[(#REM)
+Ce fichier lit la base joomla, et permettra de l'importer dans SPIP
+Il faut mettre les documents du repertoire images/ de joomla dans un repertoire documents/ à la racine du SPIP
+]
+#CACHE{0}
+<html>
+<head>
+  <title>Joomla2SPIP</title>
+  #INSERT_HEAD
+  <style type="text/css">
+  body,pre {font-family:arial,sans-serif;font-size:small;}
+  pre {overflow:scroll;}
+  h2 {background:yellow;padding:3px;}
+  #menu{float:right;padding:0px 20px;width:25%;}
+  #contenu{float:left;padding:0px 20px;width:60%;margin-bottom:20px;}
+  #pied{clear:both;padding:20px;background:#eee;}
+  .champ{border:1px solid #ccc;padding:10px;}
+  .label{padding:20px 10px;background:#ccc;}  
+  .desc {font-size:x-small;border:1px solid #eee;padding:5;}
+  .log {color:#f60;float:left;}
+  .log_short {font-size:x-small;}
+  hr.sep {border-top:dotted #eee 1px;border-bottom: dotted white 0;}  
+  </style>
+</head>
+
+<body>
+
+
+<h1>Joomla -> SPIP</h1>
+
+<ul>
+<li style="float:right;list-style:none;"><a href="./?page=joomla2spip-conversion" style="color:red;background:#FFEFEF;padding:8px;">Conversion Joomla -> SPIP</a></li>
+<li><a href="./?page=joomla2spip">Contenus Joomla formatés par SPIP</a></li>
+<li><a href="./?page=joomla-documents">Documents Joomla</a></li>
+</ul>

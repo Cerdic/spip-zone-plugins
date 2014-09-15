@@ -1,0 +1,26 @@
+#CACHE{0}
+<INCLURE{fond=inclure/joomla2spip-entete} />
+<B_secteurs>
+<h2>Secteurs</h2>
+<BOUCLE_secteurs(jos_sections)>
+  <h3>#TITLE</h3>
+  <div>[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter|propre)]</div>
+  [(#SET{desc,[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter)]})]
+  [(#SET{ma_rubrique,#ARRAY{descriptif,#GET{desc},titre,#TITLE}})]
+  [(#SET{id_secteur,[(#GET{ma_rubrique}|rubrique_import)]})]
+  
+  <B_sous_rubriques>
+  <ul>
+  <BOUCLE_sous_rubriques(jos_categories){section=#ID}>
+  <li><h4>#TITLE</h4>
+    <div class="log">[(#SET{desc,[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter)]})]
+  [(#SET{ma_rubrique,#ARRAY{descriptif,#GET{desc},titre,#TITLE}})]
+  [(#GET{ma_rubrique}|rubrique_import{#GET{id_secteur},#GET{id_secteur}})]</div>
+    <div class="desc">[(#DESCRIPTION*|joomla2spip_nettoyer_texte|pas_d_inter|propre)]</div>
+  </BOUCLE_sous_rubriques>
+  </li>
+  </ul>  
+  <B_sous_rubriques>
+
+</BOUCLE_secteurs>
+<INCLURE{fond=inclure/joomla2spip-pied} />
