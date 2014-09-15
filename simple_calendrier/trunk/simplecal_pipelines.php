@@ -22,43 +22,41 @@ function simplecal_header_prive($flux){
 
 // Pipeline. Entete des pages de l'espace public
 function simplecal_insert_head_css($flux) {
-	// Thèmes base sur : http://jqueryui.com/themeroller/
+	// Themes base sur : http://jqueryui.com/themeroller/
 	$theme_public = $GLOBALS['meta']['simplecal_themepublic'];
 	$flux .= "\n".'<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_SIMPLECAL.'css/datepicker/'.$theme_public.'.css" />';
 	return $flux;
 }
 
+// Evenements en statut 'publie' de la page d'accueil
+function simplecal_accueil_informations($texte) {
+	$texte .= recuperer_fond('prive/squelettes/inclure/simplecal-accueil-informations', array());
+	return $texte;
+}
 
-// Pipeline : elements 'en cours' de la page d'accueil
+// Evenements en statut 'prop' de la page d'accueil
 function simplecal_accueil_encours($flux) {
-	$lister_objets = charger_fonction('lister_objets','inc');
-
-	$flux .= $lister_objets('evenements', array(
-		'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:info_evenements_valider'),
-		'statut'=>array('prop'),
-		'par'=>'date'));
-
+	$flux .= recuperer_fond('prive/squelettes/inclure/simplecal-accueil-prop', array());
 	return $flux;
 }
 
+// Evenements de l'auteur
+function simplecal_affiche_auteurs_interventions($flux){
+	$id_auteur = intval($flux['args']['id_auteur']);
+	$flux['data'] .= recuperer_fond('prive/squelettes/inclure/simplecal-auteur-interventions', array('id_auteur'=>$id_auteur));
+	return $flux;
+}
 
-// Pipeline : elements 'en cours' d'une rubrique
+// Evenements en statut 'prop' de la rubrique
 function simplecal_rubrique_encours($flux) {
 	if ($flux['args']['type'] == 'rubrique') {
-		$lister_objets = charger_fonction('lister_objets','inc');
-
 		$id_rubrique = $flux['args']['id_objet'];
-
-		$flux['data'] .= $lister_objets('evenements', array(
-			'titre'=>_T('simplecal:info_evenements_valider'),
-			'statut'=>array('prop'),
-			'id_rubrique'=>$id_rubrique,
-			'par'=>'date'));
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/simplecal-rubrique-prop', array('id_rubrique'=>$id_rubrique));
 	}
 	return $flux;
 }
 
-// Pipeline : les evenements references au niveau d'une rubrique
+// Evenements en statut 'publie' et 'redac' de la rubrique
 function simplecal_affiche_enfants($flux) {
 	if ($e = trouver_objet_exec($flux['args']['exec']) AND $e['type'] == 'rubrique' AND $e['edition'] == false) {
 		$id_rubrique = $flux['args']['id_rubrique'];
@@ -81,7 +79,6 @@ function simplecal_affiche_enfants($flux) {
 		}
 		
 		if ($affiche) {
-			$lister_objets = charger_fonction('lister_objets','inc');
 			$bouton_evenements = '';
 			$id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.$id_rubrique);
 			if (autoriser('creerevenementdans','rubrique',$id_rubrique,NULL,array('id_parent'=>$id_parent))) {
@@ -89,23 +86,14 @@ function simplecal_affiche_enfants($flux) {
 				. "<br class='nettoyeur' />";
 			}
 			
-			$flux['data'] .= $lister_objets('evenements', array(
-				'titre'=>_T('simplecal:titre_contenu_rubrique'), 
-				'where'=>"statut != 'prop' AND statut != 'prepa'", 
-				'id_rubrique'=>$id_rubrique, 
-				'par'=>'date')
-			);
+			$flux['data'] .= recuperer_fond('prive/squelettes/inclure/simplecal-rubrique-enfants', array('id_rubrique'=>$id_rubrique));
 			$flux['data'] .= $bouton_evenements;
 		}
 	}
 	return $flux;
 }
 
-// Pipeline : synthese des elements 'publies' de la page d'accueil
-function simplecal_accueil_informations($texte) {
-	$texte .= recuperer_fond('prive/squelettes/inclure/evenement-accueil-information', array());
-	return $texte;
-}
+
 
 // Zone de contenu
 function simplecal_affiche_milieu($flux) {
@@ -120,26 +108,8 @@ function simplecal_affiche_milieu($flux) {
 }
 
 
-// OK SPIP3
-function simplecal_affiche_auteurs_interventions($flux){
-	$id_auteur = intval($flux['args']['id_auteur']);
-	
-	$lister_objets = charger_fonction('lister_objets','inc');
-	$listing = $lister_objets('evenements', array(
-		'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:liste_evenements_auteur'),
-		'id_auteur'=>$id_auteur,
-		'par'=>'date'));
 
-	
-	$flux['data'] .= $listing;
-	return $flux;
-}
-
-
-/**
- * Afficher le nombre d'evenements de l'auteur ou de la rubrique
- *
- */
+// Nombre d'evenements de l'auteur / de la rubrique
 function simplecal_boite_infos($flux){
 	$type = $flux['args']['type'];
 	$id = intval($flux['args']['id']);

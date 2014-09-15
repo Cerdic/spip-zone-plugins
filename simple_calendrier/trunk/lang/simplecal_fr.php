@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enregistrer_dabord_une_fois' => "C'est possible ! <br /><br />Pour cela, veuillez enregistrer la fiche une premi&egrave;re fois...",
 	'evenement' => "&Eacute;v&egrave;nement",
 	'evenements' => "&Eacute;v&egrave;nements",
+	'evenements_recents' => "&Eacute;v&egrave;nements r&eacute;cents",
 	
 // F
 	'filtres' => 'filtres',
@@ -129,8 +130,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_evenement' => 'Ev&egrave;nement',
 	'info_evenements' => 'Ev&egrave;nements',
 	'info_evenements_02' => 'Ev&egrave;nements',
-	'info_evenements_valider' => 'Ev&egrave;nements &agrave; valider',
 	'info_evenements_lies' => 'Ev&egrave;nements associ&eacute;s',
+	'info_evenements_proposes' => 'Ev&egrave;nements propos&eacute;s',
+	'info_tous_evenements_en_redaction' => 'Tous les &eacute;v&egrave;nements en cours de r&eacute;daction',
+	'info_tous_evenements_presents' => 'Tous les &eacute;v&egrave;nements publi&eacute;s dans cette rubrique',
+	'info_tous_evenements_refuses' => 'Tous les &eacute;v&egrave;nements refus&eacute;s',
+	'info_evenements_auteur' => "Les &eacute;v&egrave;nements de cet auteur",
 	'icone_nouvel_evenement' => '&Eacute;crire un nouvel &eacute;v&egrave;nement',
 	'icone_evenements' => 'Ev&egrave;nements',
 
@@ -140,7 +145,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_evenements_prepa' => "Ev&egrave;nements en cours de r&eacute;daction.",
 	'liste_evenements_refuse' => "Ev&egrave;nements refus&eacute;s.",
 	'liste_evenements_poubelle' => 'Ev&egrave;nement &agrave; la poubelle',
-	'liste_evenements_auteur' => "Les &eacute;v&egrave;nements de cet auteur",
 	'logo_evenement' => "LOGO DE L'EVENEMENT",
 	'lieu' => 'Lieu',
 	'liste_des_evenements' => 'Liste des &eacute;v&egrave;nements',

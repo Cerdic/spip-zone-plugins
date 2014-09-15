@@ -94,6 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enregistrer_dabord_une_fois' => "It's possible ! <br /><br />But first, please save this page one time...",
 	'evenement' => "Event",
 	'evenements' => "Events",
+	'evenements_recents' => "Most recent events",
 	
 // F
 	'filtres' => 'filters',
@@ -127,6 +128,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_evenement' => '1&nbsp;event',
 	'info_nb_evenements' => '@nb@ events',
 	'info_evenement' => 'event',
+	'info_evenements_proposes' => 'Events submitted',
+	'info_tous_evenements_en_redaction' => 'All events in progress',
+	'info_tous_evenements_presents' => 'All events published in this section',
+	'info_tous_evenements_refuses' => 'All refused events',
+	'info_evenements_auteur' => "This author's events",
 	'icone_nouvel_evenement' => 'Write a new event',
 	'icone_evenements' => 'Events',
 
@@ -136,7 +142,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_evenements_prepa' => "Events in progress.",
 	'liste_evenements_refuse' => "Events rejected.",
 	'liste_evenements_poubelle' => 'Event in the dustbin',
-	'liste_evenements_auteur' => "This author's events",
 	'logo_evenement' => "LOGO EVENT",
 	'lieu' => 'Place',
 	'liste_des_evenements' => 'Events list',

@@ -1,0 +1,15 @@
+[(#REM)
+	Les evenements en cours de redaction
+]
+[(#AUTORISER{publierdans,rubrique,#ID_RUBRIQUE}|?{
+	#INCLURE{fond=prive/objets/liste/evenements,titre=<:simplecal:info_tous_evenements_en_redaction:>,statut=prepa,id_rubrique,par=date,ajax,env}
+	,
+	#INCLURE{fond=prive/objets/liste/evenements,titre=<:simplecal:info_tous_evenements_en_redaction:>,statut=prepa,id_rubrique,id_auteur=#SESSION{id_auteur},par=date,ajax,env}
+	})
+]
+
+[(#REM)
+	Les evenements publies
+]
+[(#INCLURE{fond=prive/objets/liste/evenements,titre=<:simplecal:info_tous_evenements_presents:>,statut=publie,id_rubrique,par=date,ajax,env}
+	|sinon{#INCLURE{fond=prive/objets/liste/evenements,titre=<:simplecal:info_tous_evenements_refuses:>,statut=refuse,id_rubrique,par=date,ajax,env}})]

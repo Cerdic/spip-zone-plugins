@@ -4,7 +4,11 @@
 
 
 #SET{editable,#AUTORISER{creer,evenement}}
-<INCLURE{fond=prive/objets/liste/evenements,date_like=#ENV{annee},titre=#TITRE,status=#ARRAY{0,prop,1,publie,2,#GET{editable}|?{refuse,xx}},env,ajax} />
+[(#SET{where,[(#VAL{''}|simplecal_evenements_where{#ENV{mode,''}, #ENV{annee,''},#ENV{mois,''}})]})]
+
+
+[(#INCLURE{fond=prive/objets/liste/evenements,where=#GET{where},par=date,ajax,env})]
+
 
 [(#GET{editable})
 [(#URL_ECRIRE{evenement_edit,new=oui&retour=liste}
