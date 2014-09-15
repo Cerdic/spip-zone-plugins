@@ -67,7 +67,7 @@ Rôzne bloky, ktoré sa nachádzajú nižšie, slúžia ako príklad každej ša
 	// I
 	'info_doc' => 'Ak sa vám táto stránka nezobrazuje správne, [kliknite sem.->@link@]',
 	'info_doc_titre' => 'Poznámka o zobrazení tejto stránky',
-	'info_skel_contrib' => 'Stránka s kompletnou dokumentáciou spip-contribu online: [->http://www.spip-contrib.fr/?article3567].',
+	'info_skel_contrib' => 'Stránka s kompletnou dokumentáciou spip-contribu online: [->http://www.spip-contrib.fr/?article3567].', # MODIF
 	'info_skel_doc' => 'Táto stránka dokumentácie je vytvorená ako šablóna SPIPu, ktorá funguje spolu so štandardne distribuovanou verziou ({súbory adresára "squelettes-dist/"}). Ak túto stránku neviete zobraziť alebo ak vaša stránka používa vlastné šablóny, s úpravou zobrazenia tejto stránky dokumentácie vám pomôžu tieto odkazy:
 
 -* [formát "neformátovaný text"->@mode_brut@] ({jednoduché HTML + tag INSERT_HEAD})

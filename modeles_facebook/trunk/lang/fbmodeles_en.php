@@ -66,7 +66,7 @@ Different blocks below show you an example of each model with dummy values​​
 	// I
 	'info_doc' => 'If you are having problems viewing this page [click here->@link@].',
 	'info_doc_titre' => 'Note on the display of this page',
-	'info_skel_contrib' => 'Online complete documentation page on spip-contrib : [->http://www.spip-contrib.fr/?article3567].',
+	'info_skel_contrib' => 'Online complete documentation page on spip-contrib : [->http://www.spip-contrib.fr/?article3567].', # MODIF
 	'info_skel_doc' => 'This manual page is designed as a skeleton SPIP operating with the standard distribution ({files from the "squelettes-dist/"}). If you are unable to view the page, or if your site uses its own skeletons, the links below can manage its display:
 
 -* [Mode "plain text"->@mode_brut@] ({simple html + tag INSERT_HEAD})
