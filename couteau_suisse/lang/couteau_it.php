@@ -77,7 +77,7 @@ Le categorie disponibili sono:Amministrazione, Miglioramenti tipografici, Scorci
 
 Scopri in questo plugin le tue funzioni preferite: {Sopprimi il numero}, {Formato degli URL}, {Evidenziatori tipografici}, {Virgolette tipografiche}, {Simboli di spunta}, {Lotta contro lo SPAM}, {Mailcrypt}, {Belle URL}, {SPIP e i link... esterni}, {Smileys}, {Un sommario per i tuoi articoli}, {Dividi in pagine e schede}, ecc., ecc.
 
-Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Non esitare a leggere gli articoli di documentazione del plugin pubblicati su: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilità : SPIP v1.92x e v2.0.x', # MODIF
 

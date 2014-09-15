@@ -180,7 +180,7 @@ _ Bu gereç {makaleleriniz için bir özet} ile birlikte kullanılabilir.', # MO
 	'erreur:bt' => '<span style="color:red;">Dikkat :</span> tipografik çizgi (sürüm @version@) artık eskidi.<br />İsviçre Çakısı @mini@ veya daha yeni bi rsürüm ile uyumludur.', # MODIF
 	'erreur:description' => 'Alet tanımında id eksik !',
 	'erreur:distant' => 'uzak sunucu',
-	'erreur:jquery' => '{{Not}} : {jQuery} kütüphanesi bu sayfada pasif durumda görülüyor. Eklentinin bağımlılıkları paragrafına bakınız [->http://www.spip-contrib.net/?article2166].', # MODIF
+	'erreur:jquery' => '{{Not}} : {jQuery} kütüphanesi bu sayfada pasif durumda görülüyor. Eklentinin bağımlılıkları paragrafına bakınız [->http://contrib.spip.net/?article2166].', # MODIF
 	'erreur:js' => 'bu sayfada bir JavaScript hatası oluştu ve sayfanın doğru çalışmasını engelliyor. Lütfen gezgininizde JavaScript\'i aktive edin veyasitenizdeki bazı SPIP eklentilerini deaktive edin.',
 	'erreur:nojs' => 'JavaScript bu sayfada deaktive edilmiş.',
 	'erreur:nom' => 'Hata !',
@@ -230,7 +230,7 @@ Dikkat : forumlarda, dilekçelerde, paylaşılan akılarda ve benzerlerinde java
 	// H
 	'help' => '{{Bu sayfa yalnız site sorumlularının erişimine açıktır.}} «{{İsviçre Çakısı}}» eklentisinin getirdiği farklı bir çok ek işlevin düzenlenmesine izin verir .',
 	'help2' => 'Yerel sürüm : @version@',
-	'help3' => 'Belgelendirme bağlantıları :<br/>• [İsviçre Çakısı->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden başlatılması :
+	'help3' => 'Belgelendirme bağlantıları :<br/>• [İsviçre Çakısı->http://contrib.spip.net/?article2166]@contribs@</p><p>Yeniden başlatılması :
 _ • [Gizli gereçlerin|Bu sayfanın ilk görünümüne dönülmesi->@hide@]
 _ • [Tüm eklentinin|Eklentini ilk durumuna dönülmesi->@reset@]@install@
 </p>', # MODIF
@@ -387,7 +387,7 @@ _ • {Yaygın} : şu tipteki bağlar da değiştirilir {<html>moi@spip.net</htm
 	'outil_desactiver_le' => 'Aleti deaktive et',
 	'outil_inactif' => 'İnaktif aktif',
 	'outil_intro' => 'Bu sayfa size sunulan eklenti işlevlerini listeler. <br /><br />Aşağıdaki gereç isimlerine tıklayarak merkezî düğme ile durumlarını değiştirebileceğiniz gereçleri seçebilirsiniz : etkinleştirilen gereçler pasifleştirilecektir veya <i>tam tersi</i>. Her tıklamada tanımlama listenin altında görülür. Kategoriler katlanabilir ve gereçler saklanabilir. Çift tıklama bir gerecin durumunu hızlıca değiştirmeye olanak tanır. <br /><br />İlk kullanım için, SPIP iskeletinizle veya diğer eklentilerle çakışma olabileceği sebebiyle gereçleri birer birer etkinleştirmeniz önerilir.<br /><br />Not : bu sayfanın tekrar yüklenmesi İsviçre Çakısı\'nı tekrardan derler.',
-	'outil_intro_old' => 'Bu arayüz eski.<br /><br />Eğer <a href=\'./?exec=admin_couteau_suisse\'>yeni arayüz</a>\'ün kullanımında sorunla karşılaşırsanız, bizle <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a> forumunda paylaşmaktan çekinmeyin.', # MODIF
+	'outil_intro_old' => 'Bu arayüz eski.<br /><br />Eğer <a href=\'./?exec=admin_couteau_suisse\'>yeni arayüz</a>\'ün kullanımında sorunla karşılaşırsanız, bizle <a href=\'http://contrib.spip.net/?article2166\'>Spip-Contrib</a> forumunda paylaşmaktan çekinmeyin.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ alet', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ alet', # MODIF
 	'outil_permuter' => '« @text@ » gereci değiştirilsin mi ?',

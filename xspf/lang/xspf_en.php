@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_xspf' => '
 <h4>XSPF plugin configuration</h4>
 <p>Here you can configure all the options of each different players.</p>
-Waitin the full documentation on <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consult <a href="http://kent1.sklunk.net/spip.php?article96"> kent1\'s notepad</a>',
+Waitin the full documentation on <a href="http://contrib.spip.net">Spip-Contrib</a>, consult <a href="http://kent1.sklunk.net/spip.php?article96"> kent1\'s notepad</a>',
 
 'size_anim' => 'Animation size',
 'width' => 'Width',
@@ -40,7 +40,7 @@ You stay free to install them and we aren\'t responsible if you don\'t respect t
 'description_musicplayer' => '
 <h4>Musicplayer\' configuration</h4>
 <p>Here you can configure all the options of the &quote;musicplayer&quote; player.</p>
-Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip-Contrib</a>, you can consul the <a href="http://kent1.sklunk.net/spip.php?article96"> kent1\'s notepad</a>',
+Waiting for the full documentation on <a href="http://contrib.spip.net">Spip-Contrib</a>, you can consul the <a href="http://kent1.sklunk.net/spip.php?article96"> kent1\'s notepad</a>',
 
 'conf_msc' => 'Musicplayer settings',
 'conf_slim' => 'Slimplayer settings',
@@ -52,7 +52,7 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'description_mediaplayer' => '
 <h4>Mediaplayer\'s configuration</h4>
 <p>Here you can configure all the options for the Jeroen Wijering\'s mediaplayer.</p>
-Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip-Contrib</a>, you can consult the <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele"> kent1\'s notepad</a>',
+Waiting for the full documentation on <a href="http://contrib.spip.net">Spip-Contrib</a>, you can consult the <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele"> kent1\'s notepad</a>',
 
 'mediaplayer_exemple' => 'Previsualization of the "mediaplayer" template (on the whole site)',
 'typefichier' => 'File Types used',
@@ -95,7 +95,7 @@ Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip
 'description_rotator' => '
 <h4>Rotator\'s configuration</h4>
 <p>Here you can configure all the options for the Jeroen Wijering\'s "rotator".</p>
-Waiting for the full documentation on <a href="http://www.spip-contrib.net">Spip-Contrib</a>, you can consult the <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele-rotator"> kent1\'s notepad</a>',
+Waiting for the full documentation on <a href="http://contrib.spip.net">Spip-Contrib</a>, you can consult the <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele-rotator"> kent1\'s notepad</a>',
 
 'rotator_exemple' => 'Previsualization of the "rotator" template (on the whole site)',
 'enablejs' => 'Enable JS',

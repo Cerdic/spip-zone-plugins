@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 mit einem Modul zur Farbauswahl zu ergänzen,
 indem es die CSS-Lasse «palette» erhält.',
 	'config_exemple' => 'Beispiel:',
-	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Siehe Dokumentation</a>',
+	'config_lien_doc' => '<a href="http://contrib.spip.net/Palette" class="spip_out">Siehe Dokumentation</a>',
 
 	// F
 	'fermer' => 'Palette schließen',

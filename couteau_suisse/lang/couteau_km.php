@@ -88,7 +88,7 @@ Available categories are: Administration, Typographical improvements, Typographi
 
 Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Fine URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
 
-See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+See the documentation articles at: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW

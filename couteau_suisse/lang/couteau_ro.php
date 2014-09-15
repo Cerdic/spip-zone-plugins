@@ -61,7 +61,7 @@ Categoriile disponibile sunt: Administrare, Ameliorări tipografice, Scurtături
 
 Descoperiţi în aces plug-in tool-urile dumneavoastră favorite: {Ghilimele tipografice}, {Fonturi drăguţe}, etc., etc.
 
-Nu ezitaţi să consultaţi articolele de documentaţie publicate la : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Nu ezitaţi să consultaţi articolele de documentaţie publicate la : [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilitate : SPIP 1.9x şi v2.0', # MODIF
 

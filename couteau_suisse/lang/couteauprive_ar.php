@@ -305,7 +305,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'erreur:bt' => '<span style=\\"color:red;\\">تنبيه:</span> يبدو ان شريط ادوات الكتابة (الإصدار @version@) قديم.<br />يتوافق سكين الجيب مع الإصدار @mini@ أو أحدث. ', # MODIF
 	'erreur:description' => 'رقم متسلسل غير موجود في تعريف الاداة!',
 	'erreur:distant' => 'الخادم البعيد',
-	'erreur:jquery' => '{{ملاحظة}}: يبدو ان مكتبة {jQuery} غير نشطة في هذه الصفحة. الرجاء مراجعة الفقرة حول علاقات الملحق [هنا->http://www.spip-contrib.net/?article2166] او اعادة تحديث الصفحة.',
+	'erreur:jquery' => '{{ملاحظة}}: يبدو ان مكتبة {jQuery} غير نشطة في هذه الصفحة. الرجاء مراجعة الفقرة حول علاقات الملحق [هنا->http://contrib.spip.net/?article2166] او اعادة تحديث الصفحة.',
 	'erreur:js' => 'يبدو ان خطأ جافاسكريبت وقع في هذه الصفحة وحال دون تنفيذها. الرجاء تفعيل جافاسكريبت في متصفحك أو ايقاف عمل بعض ملحقات SPIP في موقعك.',
 	'erreur:nojs' => 'جافاسكريبت معطل في هذه الصفحة.',
 	'erreur:nom' => 'خطأ!',
@@ -566,7 +566,7 @@ Pour forcer l\'affichage des contenus masqués, il suffit d\'ajouter le critère
 	'outil_desactiver_le' => 'إيقاف الأداة',
 	'outil_inactif' => 'أداة غير نشطة',
 	'outil_intro' => 'تعرض هذه الصفحة أدوات الملحق المتوافرة.<br /><br /> بالنقر على أسماء الأدوات أدناه، تتمكن من تحديد الأدوات التي سيتم تغيير حالتها بواسطة الزر الأوسط: فيتم تفعيل الأدوات المتوقفة وبالعكس. وتؤدي كل نقرة الى عرض وصف الأداة تحت اللائحة. كما يمكن إخفاء مكونات أصناف الأدوات بالنقر على عناوين هذه الأصناف. أما النقر المزدوج فيتيح تغيير حالة الأداة بسرعة. <br /><br />لدى أول استخدام، ننصح بتفعيل الأدوات واحدة تلو الأخرى لتعقب اي مشكلة توافق قد تظهر مع صفحاتك النموذجية او مع SPIP او مع ملحقات أخرى.<br /><br />ملاحظة: إعادة تحميل الصفحة يعيد تحديث مجمل أدوات سكين الجيب.',
-	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si vous rencontrez des problèmes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'hésitez pas à nous en faire part sur le forum de <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # NEW
+	'outil_intro_old' => 'Cette interface est ancienne.<br /><br />Si vous rencontrez des problèmes dans l\'utilisation de la <a href=\'./?exec=admin_couteau_suisse\'>nouvelle interface</a>, n\'hésitez pas à nous en faire part sur le forum de <a href=\'http://contrib.spip.net/?article2166\'>Spip-Contrib</a>.', # NEW
 	'outil_nb' => '@pipe@ : @nb@ اداة',
 	'outil_nbs' => '@pipe@ : @nb@ اداة',
 	'outil_permuter' => 'Permuter l\'outil : « @text@ » ?', # NEW

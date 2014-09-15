@@ -20,7 +20,7 @@ $rers_rub_vie = lire_config('rers/rers_rub_vie');
 
 
 
-//   Pour récupérer le secteur , voir   http://www.spip-contrib.net/Personnaliser-les-champs-de-l
+//   Pour récupérer le secteur , voir   http://contrib.spip.net/Personnaliser-les-champs-de-l
 $id_art = $_GET['id_article'];
 $id_rub = $_GET['id_rubrique'];
 if ($id_rub == ''){

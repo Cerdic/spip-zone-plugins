@@ -16,7 +16,7 @@ K dispozícii sú tieto kategórie: Riadenie, Zabezpečenie, Súkromné rozhran
 
 Objavte v tomto zásuvnom module svoje obľúbené nástroje: {Vymazanie čísla}, {Formát URL}, {Klávesové indexy}, {Inteligentné úvodzovky}, {Pekné odrážky}, {Boj proti SPAMU}, {Šifrovanie pošty}, {Pekné internetové adresy}, {SPIP a externé odkazy...}, {Smajlíky}, {Zhrnutie článku}, {Vystrihovanie na stránkach a kartách} atď., atď.
 
-Pokojne si prečítajte dokumentáciu k zásuvnému modulu publikovanú na: [spip-contrib.net.->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Pokojne si prečítajte dokumentáciu k zásuvnému modulu publikovanú na: [spip-contrib.net.->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Kompatibilita: SPIP v1.92x, v2.x.x a v3.0',
 	'couteau_suisse_slogan' => 'Veľa malých nových a užitočných funkcií pre vašu stránku!'

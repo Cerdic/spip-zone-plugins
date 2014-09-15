@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_jeu'=> 'Der interne Titel dient nur dazu, das Spiel im
 	Redaktionsbereich zu bezeichnen.<br /><br />
 	Der Inhalt des Spiels muss in der in der
-	<a href="http://www.spip-contrib.net/Des-jeux-dans-vos-articles">
+	<a href="http://contrib.spip.net/Des-jeux-dans-vos-articles">
 	Dokumentation</a> beschriebenen Syntax formuliert werden.
 	<br /><br />
 	Bei intern verwalteten Spielen sind die Tags &lt;jeux> und &lt;/jeux>

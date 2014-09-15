@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // S
 	'site_utilise' => 'This site use a <a href=\"http://en.wikipedia.org/wiki/Content_management_system\" title=\"Definition of a Content management system on Wikipedia\">CMS</a>. It is developed and works with <a href=\"http://www.spip.net/rubrique25.html\" title=\"The official site of SPIP\">SPIP</a>, version',
-	'spip_contrib' => 'For more informations about these plugins, go on the site: <a href=\"http://www.spip-contrib.net/-English-\" title=\"A lot of SPIP users are maintaining the external contributions site SPIP-CONTRIB: it is a mine of information and solutions for various problems.\">http://www.spip-contrib.net</a>.',
+	'spip_contrib' => 'For more informations about these plugins, go on the site: <a href=\"http://contrib.spip.net/-English-\" title=\"A lot of SPIP users are maintaining the external contributions site SPIP-CONTRIB: it is a mine of information and solutions for various problems.\">http://contrib.spip.net</a>.',
 	'spip_plugins' => 'You can also go to the plugins Spip web site at: <a href="http://plugins.spip.net/" title="Le site des plugins de Spip">http://plugins.spip.net/</a>.',
 
 // T

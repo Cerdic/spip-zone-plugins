@@ -88,7 +88,7 @@ Les categories disponibles són: Administració, Millores tipogràfiques, Drecer
 
 Descobriu en aquest connector les vostres eines favorites: {Suprimir el número}, {Format dels URLs}, {Exponents tipogràfics}, {Cometes tipogràfiques}, {Bonics símbols gràfics}, {Lluita contra l’SPAM}, {Encriptació del correu electrònic}, {Bonics URLs}, {SPIP i els enllaços... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en pàgines i pestanyes}, etc., etc.
 
-No dubteu a consultar els articles de la documentació del connector publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+No dubteu a consultar els articles de la documentació del connector publicats a: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x', # MODIF
 	'pp_autobr' => 'Inserir un bloc allà on els salts de línia són automàtics ', # MODIF

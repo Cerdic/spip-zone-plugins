@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controls' => 'Controls',
 	'controlnav' => 'Show pagination',
 	'cfg_title_fluxslider' => 'Flux Slider',
-	'cfg_boite_fluxslider' => 'Flux Slider configuration form.<br /><br />[Documentation->http://www.spip-contrib.net/Flux-Slider-pour-SPIP]',
+	'cfg_boite_fluxslider' => 'Flux Slider configuration form.<br /><br />[Documentation->http://contrib.spip.net/Flux-Slider-pour-SPIP]',
 	// D
 	'delay' => 'Animation speed',
 	'default' => 'Default article',

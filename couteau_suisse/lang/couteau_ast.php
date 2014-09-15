@@ -61,7 +61,7 @@ Les categoríes disponibles son: Alministración, Meyores tipográfiques, Atayos
 
 Descubre nesti plugin les tos ferramientes favorites: {Suprime’l númberu}, {Formatu de les URLs}, {Esponentes tipográficos}, {Comines tipográfiques}, {Marques de llista guapes}, {Llucha escontra la Puxarra}, {Mailcrypt}, {URLs guapes}, {SPIP y los enllaces... esternos}, {Caruques}, {Un sumariu pa los tos artículos}, {Divide en páxines y llingüetes}, etc., etc.
 
-Si quies consultar los artículos de la documentación del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Si quies consultar los artículos de la documentación del plugin, tan espublizaos en: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidá: SPIP v1.9x y v2.0', # MODIF
 

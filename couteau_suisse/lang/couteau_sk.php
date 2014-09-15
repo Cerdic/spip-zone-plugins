@@ -91,7 +91,7 @@ K dispozícii sú kategórie: Administrácia, Zabezpečenie, Súkromná zóna, V
 
 Objavte v tomto zásuvnom module svoje najobľúbenejšie nástroje: {Vymazať číslo}, {Formáty URL},{Horný index}, {Okrúhle obrátené bodky}, {Krásne odrážky}, {Boj proti SPAMU}, {Šifrovanie pošty}, {Pekné URL}, {SPIP a externé odkazy}, {Smajlíky}, {Zhrnutie pre vaše články}, {Rozdelenie na stránky a karty}, atď., atď.
 
-Prečítajte si dokumentáciu na: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Prečítajte si dokumentáciu na: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Kompatibilita: SPIP 1.92x, v2.0.x a v3.0',
 	'pp_autobr' => 'Vložte blok textu s automatickým dopĺňaním',

@@ -78,7 +78,7 @@ De verschillende blokken hieronder geven een voorbeeld van ieder model. Gegevens
 	'javascript_inactif' => 'Javascript is niet geactiveerd in de browser. Bepaalde functionaliteit zal niet werken...',
 
 	// L
-	'licence' => 'Plugin voor SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] onder ([GPL->http://www.opensource.org/licenses/gpl-3.0.html]}) licentie}}.',
+	'licence' => 'Plugin voor SPIP 2.0+ : {{"Facebook Models" - copyright © 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] onder ([GPL->http://www.opensource.org/licenses/gpl-3.0.html]}) licentie}}.',
 
 	// N
 	'new_window' => 'Nieuw venster',

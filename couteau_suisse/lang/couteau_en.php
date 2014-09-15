@@ -91,7 +91,7 @@ The categories are: Administration, Security, Private interface, text enhancemen
 
 Check out this plugin in your favorite tools: {Removes the number}, {URLs Format}, {Typographical superscript}, {Smart Quotes}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Beautiful URLs} , {SPIP and external links...}, {Smileys}, {A summary for your articles}, {cut in pages and tabs}, etc.., etc..
 
-Feel free to consult the articles of plugin documentation that are published on: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Feel free to consult the articles of plugin documentation that are published on: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP v1.92x, v2.x.x and v3.0',
 	'pp_autobr' => 'Insert a block of text with automatic line returns',

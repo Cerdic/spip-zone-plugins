@@ -316,7 +316,7 @@ Pri oficiálnej aktualizácii aktualizujte prepojený vzdialený súbor (kliknit
 	'erreur:bt' => '<span style=\\"color:red;\\">Pozor:</span> zdá sa, že verzia typografického panela je stará(@version@).<br />Modul Vreckový nožík je kompatibilný iba s verziou @mini@ alebo s novšou.',
 	'erreur:description' => 'V definícii nástroja chýba id!',
 	'erreur:distant' => 'Vzdialený server',
-	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.', # MODIF
+	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://contrib.spip.net/?article2166] or reload this page.', # MODIF
 	'erreur:js' => 'A Javascript error appears to have occurred on this page, hindering its action. Please activate Javascript in your browser, or try deactivating some SPIP plugins which may be causing interference.',
 	'erreur:nojs' => 'Javascript has been deactivated on this page.',
 	'erreur:nom' => 'Chyba!',
@@ -378,7 +378,7 @@ Takto sa multibloky vždy zobrazia v jazyku podľa požiadavky návštevníka.'
 	// H
 	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Penknife}}.',
 	'help2' => 'Lokálna verzia: @version@',
-	'help3' => '<p>Odkazy na dokumentáciu:<br/>• [{{Vreckový nožík}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Obnovenie:
+	'help3' => '<p>Odkazy na dokumentáciu:<br/>• [{{Vreckový nožík}}->http://contrib.spip.net/?article2166]@contribs@</p><p>Obnovenie:
 _ • [Skryté nastavenia|Návrat na pôvodný vzhľad tejto stránky->@hide@]
 _ • [Celý zásuvný modul|Nastaviť na pôvodné nastavenia zásuvného modulu->@reset@]@install@
 </p>',
@@ -591,7 +591,7 @@ Publikované objekty, ale skryté pred verejnosťou:
 	'outil_desactiver_le' => 'Deactivate this tool',
 	'outil_inactif' => 'Neaktívny nástroj',
 	'outil_intro' => 'This page lists the functionalities which the plugin makes available to you.<br /><br />By clicking on the names of the tools below, you choose the ones which you can then switch on/off using the central button: active tools will be disabled and <i>vice versa</i>. When you click, the tools description is shown above the list. The tool categories are collapsible to hide the tools they contain. A double-click allows you to directly switch a tool on/off.<br /><br />For first use, it is recommended to activate tools one by one, thus reavealing any incompatibilites with your templates, with SPIP or with other plugins.<br /><br />N.B.: simply loading this page recompiles all the Penknife tools.',
-	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\'./?exec=admin_couteau_suisse\'>the new interface</a>, please let us know in the forum of <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'This is the old interface.<br /><br />If you have difficulties in using <a href=\'./?exec=admin_couteau_suisse\'>the new interface</a>, please let us know in the forum of <a href=\'http://contrib.spip.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@: @nb@ nástroj',
 	'outil_nbs' => '@pipe@: @nb@ nástrojov',
 	'outil_permuter' => 'Switch the tool: « @text@ » ?',

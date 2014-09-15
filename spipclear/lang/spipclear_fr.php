@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'commentaires_pour' => 'commentaires pour',
 'commentaires_fermes' => 'Les commentaires pour ce billet sont ferm&eacute;s',
 'credits' => '<a href="http://www.spip.net/fr">motoris&eacute; par SPIP</a>,
-<a href="http://www.spip-contrib.net/SpipClear">propuls&eacute; par Spip.Clear</a>',
+<a href="http://contrib.spip.net/SpipClear">propuls&eacute; par Spip.Clear</a>',
 
 //D
 'date_jour_abbr_1' => 'dim', // Non utilise
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'de' => 'de', // Non utilise
 
 //E
-'explication_configurer' => 'Consulter la <a href="http://www.spip-contrib.net/Spip-Clear" class="spip_out">documentation</a> sur SPIP-Contrib.',
+'explication_configurer' => 'Consulter la <a href="http://contrib.spip.net/Spip-Clear" class="spip_out">documentation</a> sur SPIP-Contrib.',
 
 //F
 'fil_rss' => 'Fil RSS des billets',

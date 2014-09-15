@@ -225,7 +225,7 @@ _ Esta utilidade pode ser emparellada con « [.->sommaire] ».', # MODIF
 	'erreur:bt' => '<span style=\\"color:red;\\">Aviso:</span> a barra tipográfica (version @version@) parece antiga.<br />A Navalla Suíza é  compatible cunha versión superior ou igual a @mini@.', # MODIF
 	'erreur:description' => 'Falta o id na definición da ferramenta!',
 	'erreur:distant' => 'O servidor remoto',
-	'erreur:jquery' => '{{Nota}} : a libraría {jQuery} parece inactiva nesta páxina. Consulte [aquí->http://www.spip-contrib.net/?article2166] o parágrafo verbo das dependencias do plugin ou recargar esta páxina.', # MODIF
+	'erreur:jquery' => '{{Nota}} : a libraría {jQuery} parece inactiva nesta páxina. Consulte [aquí->http://contrib.spip.net/?article2166] o parágrafo verbo das dependencias do plugin ou recargar esta páxina.', # MODIF
 	'erreur:js' => 'Un erro de JavaScript parece terse producido nesta páxina e impide o seu funcionamento correcto. Active JavaScript no seu navegador ou desactive algúns módulos do seu web.',
 	'erreur:nojs' => 'O JavaScript está desactivado nesta páxina.',
 	'erreur:nom' => 'Erro !',
@@ -280,7 +280,7 @@ Os bloques multi móstranse entón sempre na lingua demandada polo visitante.', 
 	// H
 	'help' => '{{Esta páxina só é accesible para o responsable do web.}}<p>Dá acceso ás diferentes funcións suplementarias achegadas polo módulo «{{Le Couteau Suisse}}».',
 	'help2' => 'Versión local: @version@',
-	'help3' => '<p>Ligazóns de documentación:<br/>• [A Navalla Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
+	'help3' => '<p>Ligazóns de documentación:<br/>• [A Navalla Suiza->http://contrib.spip.net/?article2166]@contribs@</p><p>Reinicios:
 _ • [Ferramentas cacheadas|Volver á apariencia inicial desta páxina->@hide@]
 _ • [De todo o módulo|Volver ao estado inicial do módulo->@reset@]@install@
 </p>', # MODIF
@@ -452,7 +452,7 @@ Nota : os paquetes <code>.zip</code> non son reconstruídos instantaneamente, po
 	'outil_desactiver_le' => 'Desactivar a ferramenta',
 	'outil_inactif' => 'Utilidade inactiva',
 	'outil_intro' => 'Esta páxina lista as características do módulo postas á súa disposición. <br /> <br /> Ao premer sobre o nome das ferramentas que aparecen a seguir, seleccione, as que pode cambiar o estado usando o botón central: as ferramentas activadas serán desactivadas e <i> viceversa </ i>. Con cada clic, a descrición aparece a seguir das listas. As categorías son pregables e as ferramentas pódense ocultar. O dobre clic permite trocar rapidamente unha ferramenta. <br /> <br /> Nun primeiro uso, recoméndase activar as ferramentas unha por unha, no caso de apareceren certas incompatibilidades co seu esqueleto, con SPIP ou con outros módulos. <br /> <br /> Nota: a simple carga desta páxina compila o conxunto das ferramentas da Navalla Suíza .',
-	'outil_intro_old' => 'Esta interface é antiga.<br /><br />Se vostede encontra problema coa utilización da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en facérnolo saber no foro <a href=\'http://www.spip-contrib.net/?article2166\'>Spip-Contrib</a>.', # MODIF
+	'outil_intro_old' => 'Esta interface é antiga.<br /><br />Se vostede encontra problema coa utilización da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en facérnolo saber no foro <a href=\'http://contrib.spip.net/?article2166\'>Spip-Contrib</a>.', # MODIF
 	'outil_nb' => '@pipe@ : @nb@ ferramenta', # MODIF
 	'outil_nbs' => '@pipe@ : @nb@ ferramentas', # MODIF
 	'outil_permuter' => 'Cambiar a ferramenta : « @text@ » ?',

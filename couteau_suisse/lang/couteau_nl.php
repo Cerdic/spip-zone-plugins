@@ -88,7 +88,7 @@ De beschikbare categorieën zijn: Bestuur, typografische Verbeteringen, typograf
 
 Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typografische Aanhalingstekens}, {Mooi chips}, {schaft een overzicht voor uw artikelen}, {Smileys}, {het nummer}, {Mooi URLs}, {SPIP en de band af… externe}, {Niet van onbekende forums}, {Découpe in bladzijdes en tabben}, enz., enz.
 
-Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Verenigbaarheid: SPIP 1.92x, v2.x.x en v.3.0', # MODIF
 	'pp_autobr' => 'Plaats een blok waar de regeleinden zijn automatische',

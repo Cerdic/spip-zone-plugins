@@ -88,7 +88,7 @@ As categorias disponíveis são: Administração, Melhoramentos tipográficos, A
 
 Descobra neste plugin as suas ferramentas favoritas: {Suprime o número}, {Formato dos URLs}, {Sobrescritos}, {Aspas tipográficas}, {Bullets melhorados}, {Luta contra o SPAM}, {MailCrypt}, {URLs melhorados}, {SPIP e links... externos}, {Smileys}, {Um índice para os seus artigos}, {Dividir em páginas e guias}, etc., etc.
 
-Não deixe de consultar os artigos de documentação do plugin, publicados em: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Não deixe de consultar os artigos de documentação do plugin, publicados em: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidade: SPIP v1.9x, v2.0 e v2.1.x', # MODIF
 	'pp_autobr' => 'Inserir um bloco onde as quebras de linha são automáticas',

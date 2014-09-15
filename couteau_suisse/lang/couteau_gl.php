@@ -87,7 +87,7 @@ As categorías dispoñibles son : Administración, Melloras tipográficas, Atall
 
 Descubra neste módulo as súas ferramentas favoritas : {Suprimir o numéro}, {Formato dos URL}, {Superíndices  tipográficos}, {Vírgulas tipográficas}, {Viñetas fermosas}, {Loita contra o SPAM}, {URL fermosos} {Mailcrypt}, {SPIP e as ligazóns... externas}, {Emoticonas}, {Un sumario para os seus artigos}, {Partir en páxinas e separadores}, etc., etc.
 
-Non dubide en consultar os artigos de documentación do módulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Non dubide en consultar os artigos de documentación do módulo publicados en  : [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidade : SPIP todas as versións 1.9x, v2.0 e v2.1.x', # MODIF
 	'pp_blocs_bloc' => 'Inserir un bloque repregado',

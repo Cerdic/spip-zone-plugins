@@ -67,7 +67,7 @@ Las categorías disponibles son: Administración, Mejoras tipográficas, Atajos 
 
 Encuentra en este plugin tus herramientas favoritas: {Suprimir números}, {Formato de las URLs}, {Exponentes tipográficos}, {Comillas tipográficas}, {Viñetas bonitas}, {Lucha contra el SPAM}, {Mailcrypt}, {URLs elegantes}, {SPIP y los enlaces... externos}, {Emoticones}, {Un sumario para tus artículos}, {Dividir en páginas y pestañas}, etc., etc.
 
-No dudes en consultar los artículos de documentación del plugin publicados en: [spip-contrib.net->http://www.spip-contrib.net/La-navaja-suiza].
+No dudes en consultar los artículos de documentación del plugin publicados en: [spip-contrib.net->http://contrib.spip.net/La-navaja-suiza].
 
 Compatibilidad: SPIP v1.9x y v2.0', # MODIF
 

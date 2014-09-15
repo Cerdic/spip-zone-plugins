@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description_xspf' => '
 <h4>Configuration du plugin xspf</h4>
 <p>Ici vous pouvez configurer les diff&eacute;rentes options de chacun des lecteurs.</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+En attendant la documentation sur <a href="http://contrib.spip.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
 
 'size_anim' => 'Dimensions de l&rsquo;animation',
 'width' => 'Largeur',
@@ -43,7 +43,7 @@ Vous &ecirc;tes libres de les installer selon vos convictions et nous ne pouvons
 'description_musicplayer' => '
 <h4>Configuration du musicplayer</h4>
 <p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur musicplayer.</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
+En attendant la documentation sur <a href="http://contrib.spip.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/spip.php?article96"> bloc note de kent1</a>',
 
 'conf_msc' => 'Configuration de musicplayer',
 'conf_slim' => 'Configuration de slimplayer',
@@ -55,7 +55,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'description_mediaplayer' => '
 <h4>Configuration du mediaplayer</h4>
 <p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "mediaplayer" de Jeroen Wijering.</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele"> bloc note de kent1</a>',
+En attendant la documentation sur <a href="http://contrib.spip.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele"> bloc note de kent1</a>',
 
 'mediaplayer_exemple' => 'Pr&eacute;visualisation du mod&egrave;le "mediaplayer" (sur tout le site)',
 'typefichier' => 'Type de fichiers g&eacute;r&eacute;s',
@@ -98,7 +98,7 @@ En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Con
 'description_rotator' => '
 <h4>Configuration de rotator</h4>
 <p>Ici vous pouvez configurer les diff&eacute;rentes options du lecteur "rotator" de Jeroen Wijering.</p>
-En attendant la documentation sur <a href="http://www.spip-contrib.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele-rotator"> bloc note de kent1</a>',
+En attendant la documentation sur <a href="http://contrib.spip.net">Spip-Contrib</a>, consultez le <a href="http://kent1.sklunk.net/SPIP-Plugin-XSPF-Le-modele-rotator"> bloc note de kent1</a>',
 
 'rotator_exemple' => 'Pr&eacute;visualisation du mod&egrave;le "rotator" (sur tout le site)',
 'enablejs' => 'Enable JS',

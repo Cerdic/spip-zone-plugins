@@ -61,7 +61,7 @@ Mevcut kategoriler şunlardır : Yönetim, Tipografik Geliştirme, Tipografik K�
 
 Bu eklentide favori gereçlerinizi bulacaksınız : {Numarayı sil}, {URL formatları}, {Tipografik tırnaklar}, {Güzel işaretler}, {Makaleleriniz için içindekiler}, {Gülen suratlar}, {SPAM’e karşı savaş}, {Güzel URLler}, {SPIP ve dış bağlar}, {Anonim forum yasaklama}, {Sayfa ve sekmelere ayırma}, vb.
 
-Eklentinin belgeleme makalelerini inceleyiniz : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Eklentinin belgeleme makalelerini inceleyiniz : [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Uyumluluk : SPIP 1.9x ve 2.0 ', # MODIF
 

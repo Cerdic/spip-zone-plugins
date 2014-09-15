@@ -77,7 +77,7 @@ Setu ar rummadoù kinniget : Merañ, Gwellaat an dipografiezh, berradennoù tipo
 
 Kavit en adveziant-mañ un nebeud binvioù :  {Diverkañ an niverenn}, {Furmad an URLoù}, {gallouterioù tipografek}, {klochedigoù tipogradek}, {padelligoù brav}, {Stourm a-enep d’ar strob}, {Mailcrypt}, {URLoù kaer}, {SPIP hag al liammoù... diavaez}, {Fromlunigoù}, {Un daolenn evit ho pennadoù}, {didroc’hañ dre pajennoù hag ivinelloù}, hag all. 
 
-Gallout a rit teurel ur sell war ar pennadoù titouriñ diwar-benn an adveziantoù war : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Gallout a rit teurel ur sell war ar pennadoù titouriñ diwar-benn an adveziantoù war : [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Kenglotus gant : SPIP v1.92x ha v2.0.x', # MODIF
 

@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_onglet' => 'Alerte/Mots',
 
 'cfg_titre' => 'Alerte Mots Cl&#233; auteur',
-'cfg_texte' => '[Cf. documentation->http://www.spip-contrib.net]',
+'cfg_texte' => '[Cf. documentation->http://contrib.spip.net]',
 
 'cfg_boite_titre' => 'R&#233;glage des notifications',
 'cfg_form_titre' => 'Alerte par mots cl&#233; auteur',

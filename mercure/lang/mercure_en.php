@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
       =========================================================================
 */
 'documentation' => '<strong>Documentation</strong><br /><br />The most recent documentation can be found here :<br /><br /><ul>
-<li><strong>On Spip-Contrib</strong><br />&nbsp;&nbsp;&nbsp;<a href="http://www.spip-contrib.net/article3154" target="_blank" title="Ouvrir dans une nouvelle fen&ecirc;tre">www.spip-contrib.net</a></li><br />
+<li><strong>On Spip-Contrib</strong><br />&nbsp;&nbsp;&nbsp;<a href="http://contrib.spip.net/article3154" target="_blank" title="Ouvrir dans une nouvelle fen&ecirc;tre">www.spip-contrib.net</a></li><br />
 <li><strong>On the author\'s site</strong><br />&nbsp;&nbsp;&nbsp;<a href="http://www.encyclopedie-incomplete.com/?Plugin-Mercure-Redactor-s-Chat" target="_blank" title="Ouvrir dans une nouvelle fen&ecirc;tre">www.encyclopedie-incomplete.com</a></li>
 </ul><br /><br />',
 'minidoc' => '<strong>Some elements</strong><br /><br />
