@@ -1,7 +1,7 @@
 <paquet
     prefix="info_sites"
     categorie="outil"
-    version="0.5.0"
+    version="0.5.1"
     etat="dev"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/info_sites-64.png"
@@ -21,6 +21,7 @@
     <necessite nom="projets" compatibilite="[1.0.9;]" />
     <necessite nom="lesscss" compatibilite="[1.0.0;]" />
     <necessite nom="projets_sites" compatibilite="[1.0.1;]" />
+    <necessite nom="rss_commits" compatibilite="[0.5.0;]" />
 
     <utilise nom="info_spip" compatibilite="[0.6.8;]" />
 

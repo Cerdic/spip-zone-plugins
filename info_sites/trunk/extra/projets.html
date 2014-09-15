@@ -1,6 +1,7 @@
-<ul class="boutons_action">
-[(#AUTORISER{creer,projet})
-    <li class="action"><a href="[(#URL_ECRIRE{projet_edit,new=oui})]" class="bouton creer" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projet_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:projet:icone_creer_projet:></a></li>
-]</ul>
-
+<div class="boutons_block">
+	<ul class="boutons_action">
+	[(#AUTORISER{creer,projet})
+	    <li class="action"><a href="[(#URL_ECRIRE{projet_edit,new=oui})]" class="bouton creer" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projet_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-plus-circle"></i> <:projet:icone_creer_projet:></a></li>
+	]</ul>
+</div>
 <div class="clearfix"></div>

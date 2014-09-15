@@ -184,57 +184,69 @@ table {
 // --------
 // Les boutons d'action
 // --------
-.boutons_action {
-	list-style: none;
-	padding-left: 0;
-	margin-bottom: 1em;
+.boutons_block {
+	display: block;
+	border-collapse: collapse;
+	width: 100%;
 	overflow: hidden;
-	.action {
-		display: inline-block;
-		float: left;
-		width: 50%;
-		padding: 15px;
-		font-size: 1.250em;
-		.bouton {
-			color: @white;
-			display: block;
-			padding: 15px;
-			margin: -15px;
-			background-color: @bg-info;
-			&:hover {
-				background-color: darken(@bg-info, 10%);
+	.boutons_action {
+		list-style: none;
+		padding-left: 0;
+		margin-bottom: 1em;
+		overflow: hidden;
+		width: 100%;
+		.action {
+			display: inline-block;
+			float: left;
+			width: 50%;
+			padding: 15px 5%;
+			font-size: 1.250em;
+			&:nth-child(odd) {
+				clear: left;
 			}
-			&.creer {
-				background-color: @bg-info;
+			.bouton {
 				color: @white;
+				display: block;
+				padding: 15px 12.75%;
+				margin: -15px -12.5%;
+				background-color: @bg-info;
 				&:hover {
 					background-color: darken(@bg-info, 10%);
+					text-decoration: none;
 				}
-			}
-			&.modifier {
-				background-color: @bg-success;
-				color: @white;
-				&:hover {
-					background-color: darken(@bg-success, 10%);
+				&.creer {
+					background-color: @bg-info;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-info, 10%);
+					}
 				}
-			}
-			&.supprimer {
-				background-color: @bg-danger;
-				color: @white;
-				&:hover {
-					background-color: darken(@bg-danger, 10%);
+				&.modifier {
+					background-color: @bg-success;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-success, 10%);
+					}
 				}
-			}
-			&.editer_liens {
-				background-color: @bg-primary-light;
-				color: @white;
-				&:hover {
-					background-color: darken(@bg-primary-light, 10%);
+				&.supprimer {
+					background-color: @bg-danger;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-danger, 10%);
+					}
+				}
+				&.editer_liens {
+					background-color: @bg-primary-light;
+					color: @white;
+					&:hover {
+						background-color: darken(@bg-primary-light, 10%);
+					}
 				}
 			}
 		}
 	}
 }
+
 .col-md-3 {
 	.boutons_action {
 		.action {

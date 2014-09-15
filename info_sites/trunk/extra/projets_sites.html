@@ -1,6 +1,8 @@
-<ul class="boutons_action">
-[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
-    <li class="action"><a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projets_site:></a></li>
-]
-</ul>
+<div class="boutons_block">
+	<ul class="boutons_action">
+	[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE})
+	    <li class="action"><a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_projets_site:></a></li>
+	]
+	</ul>
+</div>
 <div class="clearfix"></div>
