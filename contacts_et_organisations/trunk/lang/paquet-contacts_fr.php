@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Distingue les personnes pysiques (contacts) des personnes morales (organisations) en conservant tous les attributs des auteurs SPIP.
 _ Permet d\'attribuer des droits d\'accès à des organisations avec un mot de passe unique et d\'étendre à la fois les champs unitaires (prénom, date de naissance...) et les champs multipes (numéros de téléphone, adresses mail...).
 
-Plugin développé dans le cadre du gestionnaire de projets [SPIPMINE->http://contrib.spip.netPlugin-Spipmine] et du plugin [Catalogue->http://contrib.spip.netPlugin-Catalogue].',
+Plugin développé dans le cadre du gestionnaire de projets [SPIPMINE->http://contrib.spip.net/Plugin-Spipmine] et du plugin [Catalogue->http://contrib.spip.net/Plugin-Catalogue].',
 	'contacts_slogan' => 'Ajouter un gestionnaire de contacts à SPIP',
 );
 ?>

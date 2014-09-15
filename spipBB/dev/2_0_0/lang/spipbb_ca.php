@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Feu clic damunt de Si per activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute; de les taules d\'SpipBB',
 	'admin_config_tables_erreur' => 'Problema amb les taules d\'SpipBB: @tables_erreur@ s&oacute;n incorrectes (les taules @tables_ok@ semblen correctes).
-Consulteu la [documentaci&oacute; a Spip-Contrib->http://contrib.spip.netSpipBB-le-forum] o el [suport a spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
+Consulteu la [documentaci&oacute; a Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] o el [suport a spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Les taules d\'SpipBB estan instal&middot;lades correctament (@tables_ok@)',
 	'admin_date_ouverture' => 'Data d\'obertura',
 	'admin_debug_log' => 'Fitxer de registre @log_name@',
@@ -77,12 +77,12 @@ Consulteu la [documentaci&oacute; a Spip-Contrib->http://contrib.spip.netSpipBB-
 	'admin_interface' => 'Opcions de la interf&iacute;cie',
 	'admin_nombre_lignes_messages' => 'N&uacute;mero de l&iacute;nies dels missatges',
 	'admin_plugin_requis_erreur' => 'Falta el seg&uuml;ent plugin requerit. Activeu-lo!',
-	'admin_plugin_requis_erreur_balisesession' => 'Instal&middot;leu el plugin Balise SESSION i activeu-lo! [Documentaci&oacute; aqu&iacute;->http://contrib.spip.net?article1224], [Archiu ZIP aqu&iacute;->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'Instal&middot;leu el plugin CFG i activeu-lo! [Documentaci&oacute; aqu&iacute;->http://contrib.spip.net?article1605], [Archiu ZIP aqu&iacute;->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => 'Instal&middot;leu el plugin Balise SESSION i activeu-lo! [Documentaci&oacute; aqu&iacute;->http://contrib.spip.net/?article1224], [Archiu ZIP aqu&iacute;->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'Instal&middot;leu el plugin CFG i activeu-lo! [Documentaci&oacute; aqu&iacute;->http://contrib.spip.net/?article1605], [Archiu ZIP aqu&iacute;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Falten els seg&uuml;ents plugins requerits. Activeu-los!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instal&middot;lat(s) i actiu(s): ',
-	'admin_plugin_requis_ok_balisesession' => 'Plugin BALISE_SESSION->http://contrib.spip.net?article1224]: proporciona les informacions sobre els visitants autentificats.',
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net?article1605]: proporciona funcions i etiquetes.',
+	'admin_plugin_requis_ok_balisesession' => 'Plugin BALISE_SESSION->http://contrib.spip.net/?article1224]: proporciona les informacions sobre els visitants autentificats.',
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net/?article1605]: proporciona funcions i etiquetes.',
 	'admin_sous_titre' => 'Accedir al panell d\'administraci&oacute; dels f&ograve;rums amb SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute; d\'SPIP&nbsp;:',
 	'admin_spip_forums_ok' => 'Els f&ograve;rums p&uacute;blics estan ben activats.',
@@ -350,20 +350,20 @@ _ Un post-it est&agrave; situat a sota dels anuncis, abans dels missatges ordina
 	'pagine_sujet_' => ' assumpte',
 	'pagine_sujet_s' => 'assumptes',
 	'par_' => 'per ',
-	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://contrib.spip.netPlugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'La SpipBB Team: [veure la llista de col&middot;laboradors a Spip-contrib->http://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'El plugin SpipBB permet:
 -* Gestionar de manera centralitzada els f&ograve;rums d\'SPIP (interf&iacute;cie privada),
 -* Utilitzar un sector com a base d\'un grup de f&ograve;rums com els &laquo;Bulletin Board&raquo; tals com phpBB. En aquest sector, les subseccions s&oacute;n grups de f&ograve;rums, els articles f&ograve;rums, cada missatge al f&ograve;rum d\'un article hi inicia un fil.
 
 {{Consulteu:}}
 -* •[l\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentaci&oacute; a Spip-contrib->http://contrib.spip.netSpipBB-le-forum].
+-* •[La documentaci&oacute; a Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en curs de desenvolupament. Utilitzeu-lo assumint-ne els riscs i els perills}}
 
 _ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&iuml;t sota llic&egrave;ncia GPL',
-	'plugin_lien' => '[Consultar la documentaci&oacute; del plugin a Spip-contrib->http://contrib.spip.netSpipBB-le-forum]',
+	'plugin_lien' => '[Consultar la documentaci&oacute; del plugin a Spip-contrib->http://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Aquesta versi&oacute; del plugin no &eacute;s compatible amb la vostra versi&oacute; d\'SPIP!',
 	'plugin_nom' => 'SpipBB: Gesti&oacute; dels f&ograve;rums d\'SPIP',
 	'post_aucun_pt' => 'cap!',
@@ -404,14 +404,14 @@ _ [Acc&eacute;s al panell d\'administraci&oacute;-> .?exec=spipbb_configuration]
 	'secteur_forum' => 'ARREL',
 	'selection_efface' => 'Esborrar la selecci&oacute;...',
 	'selection_tri_dpt' => 'Seleccionar el m&egrave;tode d\'ordenaci&oacute;:',
-	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; i tamb&eacute; a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
-_ • [La documentaci&oacute; a Spip-Contrib->http://contrib.spip.net?article2460]
+	'sign_admin' => '{{Aquesta p&agrave;gina nom&eacute;s est&agrave; disponible pels responsables del lloc.}}<p>D&oacute;na acc&eacute;s a la configuraci&oacute; del plugin &laquo;{{<a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; i tamb&eacute; a la gesti&oacute; dels f&ograve;rums del lloc Web.</p><p>Versi&oacute;: @version@ @distant@</p><p>Consulteu:
+_ • [La documentaci&oacute; a Spip-Contrib->http://contrib.spip.net/?article2460]
 _ • [L\'ajuda i suport a spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />La versi&oacute; m&eacute;s recent disponible: @version@',
 	'sign_ok' => 'actualitzat.',
 	'sign_reinit' => '<p>Arrencar de nou:
  _ • [tot el plugin->@plugin@]</p>',
-	'sign_tempo' => 'Realitzat amb <a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'sign_tempo' => 'Realitzat amb <a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signatura',
 	'sinscrire' => 'Registrar-se',
 	'site_propose' => 'Lloc proposat per @auteur_post@',

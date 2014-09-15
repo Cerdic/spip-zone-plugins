@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_bouton_valider' => 'Validar as saídas',
 
 	// C
-	'cfg_descriptif' => 'Cette page vous permez de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consultez la <a href="http://contrib.spip.net?article2584">documentation sur contrib</a>', # NEW
+	'cfg_descriptif' => 'Cette page vous permez de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consultez la <a href="http://contrib.spip.net/?article2584">documentation sur contrib</a>', # NEW
 	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'Les vignettes générées seront au maximum de 160 x 120 pixels (cette valeur peut être modifiée sur le site de Girafa)', # NEW

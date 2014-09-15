@@ -61,7 +61,7 @@ As categor&iacute;as dispo&ntilde;ibles son : Administraci&oacute;n, Melloras ti
 
 Descubra neste m&oacute;dulos as s&uacute;as ferramentas favoritas : {Suprimir o num&eacute;ro}, {Formato das URL}, {Super&iacute;ndices  tipogr&aacute;ficos}, {V&iacute;rgulas tipogr&aacute;ficas}, {Vi&ntilde;etas fermosas}, {Riso&ntilde;os}, {Mailcrypt}, {SPIP e as ligaz&oacute;ns... externas}, {Ning&uacute;n foro an&oacute;nimo}, {Un sumario para os seus artigos}, {Partir en p&aacute;xinas e separadores}, etc., etc.
 
-Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
+Non dubide en consultar os artigos de documentaci&oacute;n do m&oacute;dulo publicados en  : [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidade : SPIP todas as versi&oacute;ns 1.91',
 

@@ -57,7 +57,7 @@ As categorias dispon&iacute;veis s&atilde;o: Administra&ccedil;&atilde;o, Melhor
 
 Descobra neste plugin as suas ferramentas favoritas: {Suprime o n&uacute;mero}, {Formato dos URLs}, {Sobrescritos}, {Aspas tipogr&aacute;ficas}, {Bullets melhorados}, {Luta contra o SPAM}, {MailCrypt}, {URLs melhorados}, {SPIP e links... externos}, {Smileys}, {Um &iacute;ndice para os seus artigos}, {Dividir em p&aacute;ginas e guias}, etc., etc.
 
-N&atilde;o deixe de consultar os artigos de documenta&ccedil;&atilde;o do plugin, publicados em: [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
+N&atilde;o deixe de consultar os artigos de documenta&ccedil;&atilde;o do plugin, publicados em: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidade: SPIP v1.91',
 

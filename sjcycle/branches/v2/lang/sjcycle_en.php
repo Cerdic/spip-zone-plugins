@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_imgparams'=>'Images are automatically resized and cropped in order to preserve the page layout during the insertion of the slideshow within the text. This treatment is carried out on the images according to:
 -* their position in the slideshow, combination of the values of alignment "left/center/right" and "top/center/bottom" (ex "left center")
 -* their desired final size (width height)',
-	'explication_mediabox'=>'On clic, display the original image in a jQuery mediabox. Need the <a href="http://contrib.spip.netMediaBox" target="_blank">Mediabox plugin</a>',
+	'explication_mediabox'=>'On clic, display the original image in a jQuery mediabox. Need the <a href="http://contrib.spip.net/MediaBox" target="_blank">Mediabox plugin</a>',
 	'explication_pause'=>'Enable pause of the slideshow on hover',
 	'explication_random'=>'true for random, false for sequence (not applicable to shuffle fx) ',	
 	'explication_speed'=>'speed of the transition in milliseconds',

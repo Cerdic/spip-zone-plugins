@@ -205,7 +205,7 @@ _ Esta utilidade pode ser emparellada con &laquo;&nbsp;[.->sommaire]&nbsp;&raquo
 	'erreur:bt' => '<span style=\\"color:red;\\">Aviso:</span> a barra tipogr&aacute;fica (version @version@) parece antiga.<br />A Navalla Su&iacute;za &eacute;  compatible cunha versi&oacute;n superior ou igual a @mini@.',
 	'erreur:description' => 'Falta o id na definici&oacute;n da ferramenta!',
 	'erreur:distant' => 'O servidor remoto',
-	'erreur:jquery' => '{{Nota}} : a librar&iacute;a {jQuery} parece inactiva nesta p&aacute;xina. Consulte [aqu&iacute;->http://contrib.spip.net?article2166] o par&aacute;grafo verbo das dependencias do plugin ou recargar esta p&aacute;xina.',
+	'erreur:jquery' => '{{Nota}} : a librar&iacute;a {jQuery} parece inactiva nesta p&aacute;xina. Consulte [aqu&iacute;->http://contrib.spip.net/?article2166] o par&aacute;grafo verbo das dependencias do plugin ou recargar esta p&aacute;xina.',
 	'erreur:js' => 'Un erro de JavaScript parece terse producido nesta p&aacute;xina e impide o seu funcionamento correcto. Active JavaScript no seu navegador ou desactive alg&uacute;ns m&oacute;dulos do seu web.',
 	'erreur:nojs' => 'O JavaScript est&aacute; desactivado nesta p&aacute;xina.',
 	'erreur:nom' => 'Erro !',
@@ -260,7 +260,7 @@ Os bloques multi m&oacute;stranse ent&oacute;n sempre na lingua demandada polo v
 	// H
 	'help' => '{{Esta p&aacute;xina s&oacute; &eacute; accesible para o responsable do web.}}<p>D&aacute; acceso &aacute;s diferentes funci&oacute;ns suplementarias achegadas polo m&oacute;dulo &laquo;{{Le&nbsp;Couteau&nbsp;Suisse}}&raquo;.',
 	'help2' => 'Versi&oacute;n local: @version@',
-	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>• [A&nbsp;Navalla&nbsp;Suiza->http://contrib.spip.net?article2166]@contribs@</p><p>Reinicios:
+	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>• [A&nbsp;Navalla&nbsp;Suiza->http://contrib.spip.net/?article2166]@contribs@</p><p>Reinicios:
 _ • [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
 _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
 </p>',
@@ -427,7 +427,7 @@ _ • {Estendido} : son substitu&iacute;das ademais as ligaz&oacute;ns do tipo {
 	'outil_desactiver_le' => 'Desactivar a ferramenta',
 	'outil_inactif' => 'Utilidade inactiva',
 	'outil_intro' => 'Esta p&aacute;xina lista as caracter&iacute;sticas do m&oacute;dulo postas &aacute; s&uacute;a disposici&oacute;n. <br /> <br /> Ao premer sobre o nome das ferramentas que aparecen a seguir, seleccione, as que pode cambiar o estado usando o bot&oacute;n central: as ferramentas activadas ser&aacute;n desactivadas e <i> viceversa </ i>. Con cada clic, a descrici&oacute;n aparece a seguir das listas. As categor&iacute;as son pregables e as ferramentas p&oacute;dense ocultar. O dobre clic permite trocar rapidamente unha ferramenta. <br /> <br /> Nun primeiro uso, recom&eacute;ndase activar as ferramentas unha por unha, no caso de apareceren certas incompatibilidades co seu esqueleto, con SPIP ou con outros m&oacute;dulos. <br /> <br /> Nota: a simple carga desta p&aacute;xina compila o conxunto das ferramentas da Navalla Su&iacute;za .',
-	'outil_intro_old' => 'Esta interface &eacute; antiga.<br /><br />Se vostede encontra problema coa utilizaci&oacute;n da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en fac&eacute;rnolo saber no foro <a href=\'http://contrib.spip.net?article2166\'>Spip-Contrib</a>.',
+	'outil_intro_old' => 'Esta interface &eacute; antiga.<br /><br />Se vostede encontra problema coa utilizaci&oacute;n da <a href=\'./?exec=admin_couteau_suisse\'>nova     interface</a>, non dubide en fac&eacute;rnolo saber no foro <a href=\'http://contrib.spip.net/?article2166\'>Spip-Contrib</a>.',
 	'outil_nb' => '@pipe@ : @nb@ ferramenta',
 	'outil_nbs' => '@pipe@ : @nb@ ferramentas',
 	'outil_permuter' => 'Cambiar a ferramenta : &laquo; @text@ &raquo; ?',

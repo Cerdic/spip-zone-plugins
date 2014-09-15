@@ -186,7 +186,7 @@ Vi bruger ikke din mail adresse til andet end at sende dig et password.</p>',
 
 	// S
 	's_abonner_a' => 'RSS: aboner på denne tråd',
-	'sign_tempo' => 'Bygget med <a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'sign_tempo' => 'Bygget med <a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'sinscrire' => 'Registrer',
 	'site_propose' => 'Foreslået site',
 	'site_web' => 'site',

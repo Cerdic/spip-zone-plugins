@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_config_creer_preview' => 'Attention : la génération de miniatures des images est actuellement inactive, veuillez  l\'activer dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
 	'erreur_config_image_process' => 'Attention : La méthode de fabrication des vignettes n\'a pas été choisie, veuillez  en sélectionner une dans les <a href=".?exec=config_fonctions">fonctions avancées</a> de la configuration du site !',
 	'explication_afficher_aide'=>'Afficher la boite d\'aide dans la colonne de gauche des pages d\'édition des articles',
-	'explication_fancy'=>'Au clic, afficher l\'image originale dans une fancybox jQuery. Nécessite le plugin <a href="http://contrib.spip.netFancyBox,3020" target="_blank">FancyBox</a>',
+	'explication_fancy'=>'Au clic, afficher l\'image originale dans une fancybox jQuery. Nécessite le plugin <a href="http://contrib.spip.net/FancyBox,3020" target="_blank">FancyBox</a>',
 	'explication_fx'=>'Consultez les exemples en ligne : <a href="http://malsup.com/jquery/cycle/browser.html" target="_blank">jQuery Cycle Plugin</a>',
 	'explication_img_background' => 'Saisir la couleur de fond au format hexadecimal (#FF0000 par exemple) ou via la palette si le plugin Palette est installé. Pour un fond transparent, saisir "transparent" (auquel cas, les images finales seront au format png).',
 	'explication_imgparams'=>'Les images sont redimensionnées et recadrées automatiquement afin de préserver la mise en page lors de l\'insertion du diaporama au sein du texte. Ce traitement se réalise sur les images suivant :
 -* leur position dans le diaporama, combinaison des valeurs d\'alignement "left/center/right" et "top/center/bottom" (ex "left center")
 -* leur taille finale souhaitée (largeur, hauteur)',
-	'explication_mediabox'=>'Au clic, afficher l\'image originale dans une mediabox jQuery. Nécessite le plugin <a href="http://contrib.spip.netMediaBox" target="_blank">Mediabox</a>',
+	'explication_mediabox'=>'Au clic, afficher l\'image originale dans une mediabox jQuery. Nécessite le plugin <a href="http://contrib.spip.net/MediaBox" target="_blank">Mediabox</a>',
 	'explication_pause'=>'Active la mise en pause du diaporama automatique au survol de la souris',
 	'explication_random'=>'Active le défilement aléatoire',
 	'explication_speed'=>'Vitesse de la transition en millisecondes',

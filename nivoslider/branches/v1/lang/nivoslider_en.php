@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'controls' => 'Controls',
 	'controlnav' => 'Show bullets',
 	'cfg_title_nivoslider' => 'Nivo Slider',
-	'cfg_boite_nivoslider' => 'Nivo Slider plugin configuration.<br /><br />[Documentation->http://contrib.spip.netNivo-Slider-pour-SPIP]',
+	'cfg_boite_nivoslider' => 'Nivo Slider plugin configuration.<br /><br />[Documentation->http://contrib.spip.net/Nivo-Slider-pour-SPIP]',
 	// D
 	'default' => 'Default article',
 	'default_info' => 'Default article used by the snippet [#MODELE{nivoslider}] as default article id to use...<br/>',

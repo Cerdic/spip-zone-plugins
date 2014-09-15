@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Suprimir está asociación',
 
 	// C
-	'cfg_descr_gis' => 'Sistema de Información Geográfica.<br /><a href="http://contrib.spip.net3887">Ir a la documentación</a>.', # MODIF
+	'cfg_descr_gis' => 'Sistema de Información Geográfica.<br /><a href="http://contrib.spip.net/3887">Ir a la documentación</a>.', # MODIF
 	'cfg_inf_adresse' => 'Mostrar campos adicionales de dirección (país, ciudad, región, dirección...)', # MODIF
 	'cfg_inf_cloudmade' => 'Está API necesita una clave a generar en <a href=\'@url@\'>el sitio de CloudMade</a>.', # MODIF
 	'cfg_inf_geocoder' => 'Activar las funciones del geocoder (búsqueda desde una dirección, recuperación de la dirección a partir de las coordenadas).', # MODIF

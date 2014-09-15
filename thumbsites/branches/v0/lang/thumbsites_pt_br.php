@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_bouton_valider' => 'Validar as entradas',
 
 	// C
-	'cfg_descriptif' => 'Esta página permite configurar o plugin Thumbsites e, em particular, escolher o servidor de ícones. Para saber mais, consulte a <a href="http://contrib.spip.net?article2584">documentação sobre contrib</a>',
+	'cfg_descriptif' => 'Esta página permite configurar o plugin Thumbsites e, em particular, escolher o servidor de ícones. Para saber mais, consulte a <a href="http://contrib.spip.net/?article2584">documentação sobre contrib</a>',
 	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'Os ícone gerados terão no máximo 160 x 120 pixels (este valor pode ser alterado no site do Girafa)',

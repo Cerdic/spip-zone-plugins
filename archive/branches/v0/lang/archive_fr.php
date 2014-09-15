@@ -3,7 +3,7 @@
 /*
  * Plugin ARCHIVE pour SPIP
  * (c) jilou 2008, distribue sous licence GNU/GPL
- * Documentation et contact: http://contrib.spip.net
+ * Documentation et contact: http://contrib.spip.net/
  *
  */
 

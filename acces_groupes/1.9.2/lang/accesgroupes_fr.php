@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lancer_patch' => 'Lancer la modification des tables',
 'titre_patch' => 'Mise &agrave; jour des tables utilis&eacute;es par le plugin acces_groupes',
 'info_patch' => 'Ce script permet de modifier les tables de la base de donn&eacute;es de la contrib 
-						 		 "<a href="http://contrib.spip.netCreer-des-groupes-limiter-l-acces">acc&egrave;s restreints par groupes</a>"
+						 		 "<a href="http://contrib.spip.net/Creer-des-groupes-limiter-l-acces">acc&egrave;s restreints par groupes</a>"
 								 afin de les rendre compatibles avec sa version en plugin (acces_groupes v1.0) .
 						 		 <br><strong>Si vous n\'aviez pas install&eacute; cette contrib sur votre spip 1.8, il n\'est pas n&eacute;cessaire : passez votre chemin !</strong>
 								 <br>Versions support&eacute;es : contrib version 0.6* et version 0.7

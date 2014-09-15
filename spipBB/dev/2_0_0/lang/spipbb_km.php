@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => '&#6023;&#6098;&#6042;&#6078;&#6047;&#6042;&#6078;&#6047; &#6041;&#6043;&#6091;&#6038;&#6098;&#6042;&#6040; &#6047;&#6086;&#6042;&#6070;&#6036;&#6091;&#6050;&#6035;&#6075;&#6025;&#6098;&#6025;&#6070;&#6031; SpipBB',
 	'admin_config_tables' => '&#6016;&#6070;&#6042;&#6016;&#6086;&#6030;&#6031;&#6091;&#6033;&#6086;&#6042;&#6020;&#6091; &#6035;&#6083;&#6031;&#6070;&#6042;&#6070;&#6020; SpipBB',
 	'admin_config_tables_erreur' => 'Problem with SpipBB tables: @tables_erreur@ are incorrect (the tables @tables_ok@ seem to be all right).
- Refer to the [documentation on Spip-Contrib->http://contrib.spip.netSpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # NEW
+ Refer to the [documentation on Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] or [support on spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]', # NEW
 	'admin_config_tables_ok' => 'The SpipBB database tables are installed correctly (@tables_ok@)', # NEW
 	'admin_date_ouverture' => 'Openning date', # NEW
 	'admin_debug_log' => 'Log file @log_name@', # NEW
@@ -77,12 +77,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_interface' => '&#6023;&#6086;&#6042;&#6078;&#6047;&#6037;&#6098;&#6033;&#6070;&#6086;&#6020;&#6036;&#6098;&#6042;&#6033;&#6070;&#6016;&#6091;',
 	'admin_nombre_lignes_messages' => 'Number of lines of messages', # NEW
 	'admin_plugin_requis_erreur' => 'The following required plugin is missing. Activate it!', # NEW
-	'admin_plugin_requis_erreur_balisesession' => 'Install le "Balise SESSION" plugin  and activate it! [Documentation here->http://contrib.spip.net?article1224], [ZIP file here->http://files.spip.org/spip-zone/balise_session.zip].', # NEW
-	'admin_plugin_requis_erreur_cfg' => 'Install the CFG plugin and activate it![Documentation here->http://contrib.spip.net?article1605], [Zip file here->http://files.spip.org/spip-zone/cfg.zip].', # NEW
+	'admin_plugin_requis_erreur_balisesession' => 'Install le "Balise SESSION" plugin  and activate it! [Documentation here->http://contrib.spip.net/?article1224], [ZIP file here->http://files.spip.org/spip-zone/balise_session.zip].', # NEW
+	'admin_plugin_requis_erreur_cfg' => 'Install the CFG plugin and activate it![Documentation here->http://contrib.spip.net/?article1605], [Zip file here->http://files.spip.org/spip-zone/cfg.zip].', # NEW
 	'admin_plugin_requis_erreur_s' => 'The following required plugins are missing. Activate them!', # NEW
 	'admin_plugin_requis_ok' => 'Installed and activated plugin(s):', # NEW
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net?article1224] : gives information on visitors who are logged in.', # NEW
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net?article1605] : provides tags and functions.', # NEW
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/?article1224] : gives information on visitors who are logged in.', # NEW
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net/?article1605] : provides tags and functions.', # NEW
 	'admin_sous_titre' => 'Go to the SpipBB forums admin panel', # NEW
 	'admin_spip_config_forums' => '&#6016;&#6070;&#6042;&#6016;&#6086;&#6030;&#6031;&#6091;&#6033;&#6086;&#6042;&#6020;&#6091; SPIP&#6102;',
 	'admin_spip_forums_ok' => 'The public forums are enabled.', # NEW
@@ -350,20 +350,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pagine_sujet_' => '&#6036;&#6098;&#6042;&#6034;&#6070;&#6035;&#6036;&#6033;',
 	'pagine_sujet_s' => '&#6036;&#6098;&#6042;&#6034;&#6070;&#6035;&#6036;&#6033;',
 	'par_' => '&#6026;&#6084;&#6041;',
-	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://contrib.spip.netPlugin-SpipBB#contributeurs]', # NEW
+	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://contrib.spip.net/Plugin-SpipBB#contributeurs]', # NEW
 	'plugin_description' => 'The SpipBB plugin provides the following features:
 -* centralizes the forum management in SPIP (in the private area),
 -* turns a main section (sector) of the site into a group of forum, "Bulletin Board" style, similar to phpBB. In this sector, sub-sections are used as forum groups, articles are dedicated forums where threads are made of messages posted to an article.
 
 {{Please check:}}
 -* [help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* [the documentation on Spip-contrib->http://contrib.spip.netSpipBB-le-forum].
+-* [the documentation on Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 
 _ [Access to the management panel-> .?exec=spipbb_configuration]', # NEW
 	'plugin_licence' => 'Distributed under the GPL licence', # NEW
-	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://contrib.spip.netSpipBB-le-forum]', # NEW
+	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://contrib.spip.net/SpipBB-le-forum]', # NEW
 	'plugin_mauvaise_version' => 'This version of the plugin cannot be used with your version of SPIP!', # NEW
 	'plugin_nom' => 'SpipBB: Management of SPIP forums', # NEW
 	'post_aucun_pt' => '&#6018;&#6098;&#6040;&#6070;&#6035;&#6040;&#6077;&#6041;&#6030;&#6070;&nbsp;!',
@@ -428,14 +428,14 @@ nbr_post@ message(s). Deleted along with it!\\n', # NEW
 	'secteur_forum' => '&#6059;&#6047;',
 	'selection_efface' => '&#6036;&#6070;&#6035;&#6043;&#6075;&#6036;&#6021;&#6081;&#6025; &#6023;&#6086;&#6042;&#6078;&#6047;... ',
 	'selection_tri_dpt' => '&#6023;&#6098;&#6042;&#6078;&#6047;&#6042;&#6078;&#6047; &#6044;&#6071;&#6034;&#6072;&#6042;&#6080;&#6036;&#6043;&#6086;&#6026;&#6070;&#6036;&#6091;&#6102;',
-	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
-_ • [The documentation of Spip-Contrib->http://contrib.spip.net?article2460]
+	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
+_ • [The documentation of Spip-Contrib->http://contrib.spip.net/?article2460]
 _ • [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@', # NEW
 	'sign_maj' => '<br />&#6016;&#6070;&#6042;&#6036;&#6035;&#6098;&#6033;&#6070;&#6035;&#6091;&#6047;&#6040;&#6096;&#6041; &#6040;&#6070;&#6035;&#6047;&#6098;&#6042;&#6070;&#6036;&#6091;&#6102; @version@',
 	'sign_ok' => '&#6033;&#6070;&#6035;&#6091;&#6047;&#6040;&#6096;&#6041;',
 	'sign_reinit' => '<p>Reset:
  _ • [the whole plugin->@plugin@]</p>', # NEW
-	'sign_tempo' => 'Build with <a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>', # NEW
+	'sign_tempo' => 'Build with <a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>', # NEW
 	'signature' => '&#6048;&#6031;&#6098;&#6032;&#6043;&#6081;&#6017;&#6070;',
 	'sinscrire' => '&#6021;&#6075;&#6087;&#6024;&#6098;&#6040;&#6084;&#6087;',
 	'site_propose' => 'Proposed Website', # NEW

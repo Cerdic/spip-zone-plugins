@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Klikit war Ya evitobergant SpipBB',
 	'admin_config_tables' => 'Ober war-dro diazo&ugrave; SpipBB',
 	'admin_config_tables_erreur' => 'Kudenn gant diazo&ugrave; SpipBB : direizh eo @tables_erreur@ (reizh e seblant beza&ntilde; @tables_ok@)
-Gwelit an [diello&ugrave; diwar-benn Spip-Contrib->http://contrib.spip.netSpipBB-le-forum] pe [skoazell spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
+Gwelit an [diello&ugrave; diwar-benn Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] pe [skoazell spipbb.spip-zone->http://spipbb.spip-zone.info/spip.php?article11]',
 	'admin_config_tables_ok' => 'Staliet mat eo diazo&ugrave; SpipBB (@tables_ok@)',
 	'admin_date_ouverture' => 'Deiziad digeri&ntilde;',
 	'admin_debug_log' => 'Restr log @log_name@',

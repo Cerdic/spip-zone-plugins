@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_bouton_valider' => 'تأييد اقلام',
 
 	// C
-	'cfg_descriptif' => 'اين صفحه به شما اجازه مي‌دهد تا پلاگين تام‌سايتز (Thumbsites) را پيكربندي كنيد، و به ويژه، سرور ريزنش‌ها را انتخاب كنيد. براي اطلاعات بيشتر به اينجا مراجعه كنيد: <a href="http://contrib.spip.net?article2584">documentation sur contrib</a>',
+	'cfg_descriptif' => 'اين صفحه به شما اجازه مي‌دهد تا پلاگين تام‌سايتز (Thumbsites) را پيكربندي كنيد، و به ويژه، سرور ريزنش‌ها را انتخاب كنيد. براي اطلاعات بيشتر به اينجا مراجعه كنيد: <a href="http://contrib.spip.net/?article2584">documentation sur contrib</a>',
 	'cfg_inf_apercite_parametres' => 'مي‌توانيد داده‌هاي شخصي را وارد كنيد:',
 	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> خدمات رايگاني را پيشنهاد مي‌دهد كه نيازي به شناسايي ندارد.',
 	'cfg_inf_girafa_description' => 'ريزنقش‌هاي خلق شده حداكثر 160x120 پيكسل خواهند بود(اين مقادرمي‌تواند در سايت Girafa اصلاح شود)',

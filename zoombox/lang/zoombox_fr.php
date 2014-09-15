@@ -1,7 +1,7 @@
 <?php
 $GLOBALS['i18n_zoombox_fr'] = array(
 	"titre" => "Zoombox",
-	"descr_cfg" => "<p>Configuration du plugin <strong>Zoombox</strong></p><br/><a href='http://contrib.spip.netZoombox-pour-SPIP' target='_blank'>Documentation du plugin</a>",
+	"descr_cfg" => "<p>Configuration du plugin <strong>Zoombox</strong></p><br/><a href='http://contrib.spip.net/Zoombox-pour-SPIP' target='_blank'>Documentation du plugin</a>",
 	"general_legend" => "Configuration &nbsp;",
 	"selecteur" => "S&eacute;lecteurs (pointeurs CSS) : ",
 	"theme" => "Th&eacute;me : ",

@@ -64,9 +64,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_supprimer_contact' => 'Deleting this contact will remove all the additional informations which have been filled on the author page.',
 	'explication_supprimer_organisation' => 'Deleting this organization will remove all the additional informations which have been filled on the author page.',
 	'explications_page_contacts' => '<MODIF>Page en cours de développement. <br /><br />Actions envisagées :<ul>
- <li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.netPlugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+ <li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 	'explications_page_organisations' => '<MODIF>Page en cours de développement. <br /><br />Actions envisagées :<ul>
- <li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.netPlugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+ <li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 
 	// I
 	'info_contacts_organisation' => 'Organisation\'s contacts',

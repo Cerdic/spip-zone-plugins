@@ -100,7 +100,7 @@ Pour plus d\'informations, reportez-vous &agrave; la page d&eacute;di&eacute;e p
 	'page_test_in_new_window' => 'Page de test en nouvelle fen&#234;tre',
 	'titre_original' => 'ADX Menu, plugin pour SPIP 2.0+',
 	'licence_originale' => 'Script CSS/javascript original : {{"ADXmenu" version 4.21 de [Aleksandar Vacic->http://aplus.rs/] distribu&eacute; sous licence {[Creative Commons BY 3.0 Attribution->http://creativecommons.org/licenses/by/3.0/]} }}.',
-	'licence_actuelle' => 'Plugin pour SPIP 2.0+ : {{"ADX Menu" - copyright &#169; 2009 [Piero Wbmstr->http://contrib.spip.netPieroWbmstr] sous la licence originale ({[Creative Commons BY 3.0 Attribution->http://creativecommons.org/licenses/by/3.0/]}) }}.',
+	'licence_actuelle' => 'Plugin pour SPIP 2.0+ : {{"ADX Menu" - copyright &#169; 2009 [Piero Wbmstr->http://contrib.spip.net/PieroWbmstr] sous la licence originale ({[Creative Commons BY 3.0 Attribution->http://creativecommons.org/licenses/by/3.0/]}) }}.',
 
 	// Infos squelette de doc
 	'docskel_sep' => '----',

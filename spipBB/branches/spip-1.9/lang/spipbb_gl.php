@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Premer sobre Si para activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n das t&aacute;boas de SpipBB',
 	'admin_config_tables_erreur' => 'Problema coas t&aacute;boas de SpipBB : @tables_erreur@ est&aacute;n incorrectas (as t&aacute;boas @tables_ok@ parecen correctas).
-Consulte a [documentaci&oacute;n en Spip-Contrib->http://contrib.spip.netSpipBB-le-forum] ou a [axuda en spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
+Consulte a [documentaci&oacute;n en Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] ou a [axuda en spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'As t&aacute;boas de SpipBB foron correctamente instaladas (@tables_ok@)',
 	'admin_date_ouverture' => 'Data de apertura',
 	'admin_debug_log' => 'Ficheiro de rexistro @log_name@',
@@ -77,12 +77,12 @@ Consulte a [documentaci&oacute;n en Spip-Contrib->http://contrib.spip.netSpipBB-
 	'admin_interface' => 'Opci&oacute;ns da interface',
 	'admin_nombre_lignes_messages' => 'N&uacute;mero de li&ntilde;as de mensaxes',
 	'admin_plugin_requis_erreur' => 'O m&oacute;dulo requirido falta. Act&iacute;veo !',
-	'admin_plugin_requis_erreur_balisesession' => 'Instale o m&oacute;dulo Balise SESSION e act&iacute;veo ! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net?article1224], [Arquivo ZIP aqu&iacute;->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => 'Instale o m&oacute;dulos CFG e act&iacute;veo ! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net?article1605], [Arquivo ZIP aqu&iacute;->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => 'Instale o m&oacute;dulo Balise SESSION e act&iacute;veo ! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net/?article1224], [Arquivo ZIP aqu&iacute;->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => 'Instale o m&oacute;dulos CFG e act&iacute;veo ! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net/?article1605], [Arquivo ZIP aqu&iacute;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Os m&oacute;dulos requiridos faltan. Act&iacute;veos !',
 	'admin_plugin_requis_ok' => 'Modulo(s)  instalado(s) e activo(s) :',
-	'admin_plugin_requis_ok_balisesession' => '[M&oacute;dulo BALISE_SESSION->http://contrib.spip.net?article1224] : fornece os datos sobe visitantes autenticados.',
-	'admin_plugin_requis_ok_cfg' => '[M&oacute;dulo CFG->http://contrib.spip.net?article1605] : fornece funci&oacute;ns e balizas.',
+	'admin_plugin_requis_ok_balisesession' => '[M&oacute;dulo BALISE_SESSION->http://contrib.spip.net/?article1224] : fornece os datos sobe visitantes autenticados.',
+	'admin_plugin_requis_ok_cfg' => '[M&oacute;dulo CFG->http://contrib.spip.net/?article1605] : fornece funci&oacute;ns e balizas.',
 	'admin_sous_titre' => 'Acceder ao panel de control de foros con  SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute;n de SPIP&nbsp;:',
 	'admin_spip_forums_ok' => 'Os foros p&uacute;blicos foron correctamente activados.',
@@ -350,20 +350,20 @@ _ Un destacado sit&uacute;ase por baixo dos anuncios, antes das mensaxes ordinar
 	'pagine_sujet_' => 'asunto',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por',
-	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->http://contrib.spip.netPlugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'O equipo SpipBB : [ver a lista de contribuidores en Spip-contrib->http://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'O m&oacute;dulo de SpipBB permite :
 -* Xestionar de forma centralizada os foros d SPIP (interface privada),
 -* Usar un sector como base dun grupo de de foros de tipo &laquo;Bulletin Board&raquo; como phpBB. Neste sector, as subsecci&oacute;ns son grupos de foros, os artigos son os foros, cada mensaxe dentro do foro dun artigo comeza un f&iacute;o.
 
 {{Consulte :}}
 -* •[a axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11],
--* •[a documentaci&oacute;n en Spip-contrib->http://contrib.spip.netSpipBB-le-forum].
+-* •[a documentaci&oacute;n en Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{M&oacute;dulo spipbb en curso de desenvolvemento. &Uacute;seo a seu risco e ventura}}
 
 _ [Acceso ao panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribu&iacute;do baixo licenza GPL',
-	'plugin_lien' => '[Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib->http://contrib.spip.netSpipBB-le-forum]',
+	'plugin_lien' => '[Consulte a documentaci&oacute;n do m&oacute;dulo en Spip-contrib->http://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => 'Esta versi&oacute;n do m&oacute;dulo non &eacute; compatible coa s&uacute;a versi&oacute;n de SPIP !',
 	'plugin_nom' => 'SpipBB : xesti&oacute;n de foros de SPIP',
 	'post_aucun_pt' => 'ning&uacute;n&nbsp;!',
@@ -425,14 +425,14 @@ nbr_post@ mensaxe(s). Borradas con el&nbsp;!\\n',
 	'secteur_forum' => 'RA&Iacute;Z',
 	'selection_efface' => 'Borrar a selecci&oacute;n ...',
 	'selection_tri_dpt' => 'Seleccionar o m&eacute;todo de sa&iacute;da&nbsp;:',
-	'sign_admin' => '{{Esta p&aacute;xina &eacute; unicamente accesible para os responsables do web.}}<p>Proporciona acceso &aacute; configuraci&oacute;n do m&oacute;dulo &laquo;{{<a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as&iacute; como &aacute; xesti&oacute;n dos foros do web.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulte&nbsp;:
-_ • [A documentaci&oacute;n en Spip-Contrib->http://contrib.spip.net?article2460]
+	'sign_admin' => '{{Esta p&aacute;xina &eacute; unicamente accesible para os responsables do web.}}<p>Proporciona acceso &aacute; configuraci&oacute;n do m&oacute;dulo &laquo;{{<a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as&iacute; como &aacute; xesti&oacute;n dos foros do web.</p><p>Versi&oacute;n : @version@ @distant@</p><p>Consulte&nbsp;:
+_ • [A documentaci&oacute;n en Spip-Contrib->http://contrib.spip.net/?article2460]
 _ • [A axuda en spipbb.spip-zone.info->http://spipbb.spip-zone.info/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Versi&oacute;n m&aacute;is recente dispo&ntilde;&iacute;bel&nbsp;: @version@',
 	'sign_ok' => 'actualizar.',
 	'sign_reinit' => '<p>Re-inicializaci&oacute;n&nbsp;:
 _ • [de todo o m&oacute;dulo->@plugin@]</p>',
-	'sign_tempo' => 'Realizado con <a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'sign_tempo' => 'Realizado con <a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Sinatura',
 	'sinscrire' => 'Rexistrarse',
 	'site_propose' => 'Web proposto por @auteur_post@',

@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb_info' => 'Pulsa en S&iacute; para activar SpipBB',
 	'admin_config_tables' => 'Configuraci&oacute;n de las tablas de SpipBB',
 	'admin_config_tables_erreur' => 'Problema con las tablas de SpipBB: @tables_erreur@ son incorrectas (las tablas @tables_ok@ parecen correctas).
-Consulta la [documentaci&oacute;n en Spip-Contrib->http://contrib.spip.netSpipBB-le-forum] o el [soporte de spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
+Consulta la [documentaci&oacute;n en Spip-Contrib->http://contrib.spip.net/SpipBB-le-forum] o el [soporte de spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]',
 	'admin_config_tables_ok' => 'Las tablas de SpipBB se han instalado correctamente (@tables_ok@)',
 	'admin_date_ouverture' => 'Fecha de apertura',
 	'admin_debug_log' => 'Fichero de registro @log_name@',
@@ -77,12 +77,12 @@ Consulta la [documentaci&oacute;n en Spip-Contrib->http://contrib.spip.netSpipBB
 	'admin_interface' => 'Opciones de la interfaz',
 	'admin_nombre_lignes_messages' => 'N&uacute;mero de l&iacute;neas de mensajes',
 	'admin_plugin_requis_erreur' => 'Falta el siguiente plugin requerido. &iexcl;Act&iacute;valo!',
-	'admin_plugin_requis_erreur_balisesession' => '&iexcl;Instala el plugin Balise SESSION y act&iacute;valo! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net?article1224], [Archivo ZIP ac&aacute;->http://files.spip.org/spip-zone/balise_session.zip].',
-	'admin_plugin_requis_erreur_cfg' => '&iexcl;Instala el plugin CFG y act&iacute;valo! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net?article1605], [Archivo ZIP ac&aacute;->http://files.spip.org/spip-zone/cfg.zip].',
+	'admin_plugin_requis_erreur_balisesession' => '&iexcl;Instala el plugin Balise SESSION y act&iacute;valo! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net/?article1224], [Archivo ZIP ac&aacute;->http://files.spip.org/spip-zone/balise_session.zip].',
+	'admin_plugin_requis_erreur_cfg' => '&iexcl;Instala el plugin CFG y act&iacute;valo! [Documentaci&oacute;n aqu&iacute;->http://contrib.spip.net/?article1605], [Archivo ZIP ac&aacute;->http://files.spip.org/spip-zone/cfg.zip].',
 	'admin_plugin_requis_erreur_s' => 'Faltan los siguientes plugins requeridos. &iexcl;Act&iacute;valos!',
 	'admin_plugin_requis_ok' => 'Plugin(s) instalado(s) y activo(s):',
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.netBaliza-SESSION]: ofrece informaci&oacute;n sobre los visitantes autentificados.',
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net?article1605]: provee funciones y balizas.',
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://contrib.spip.net/Baliza-SESSION]: ofrece informaci&oacute;n sobre los visitantes autentificados.',
+	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://contrib.spip.net/?article1605]: provee funciones y balizas.',
 	'admin_sous_titre' => 'Acceder al panel de administraci&oacute;n de los foros con SpipBB',
 	'admin_spip_config_forums' => 'Configuraci&oacute;n de SPIP&nbsp;:',
 	'admin_spip_forums_ok' => 'Los foros p&uacute;blicos est&aacute;n activados correctamente.',
@@ -350,20 +350,20 @@ _ Un postit est&aacute; situado bajo los anuncios, antes de los mensajes ordinar
 	'pagine_sujet_' => ' asunto',
 	'pagine_sujet_s' => ' asuntos',
 	'par_' => 'por ',
-	'plugin_auteur' => 'El Equipo SpipBB: [ver la lista de colaboradores en Spip-contrib->http://contrib.spip.netPlugin-SpipBB#contributeurs]',
+	'plugin_auteur' => 'El Equipo SpipBB: [ver la lista de colaboradores en Spip-contrib->http://contrib.spip.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'El plugin SpipBB permite:
 -* Gestionar de modo centralizado los foros de SPIP (interfaz privada),
 -* Utilizar un sector como base de un grupo de foros como los &laquo;Bulletin Board&raquo; parecidos a phpBB. En ese sector, las subsecciones son grupos de foros; los art&iacute;culos son foros, y cada mensaje del foro de un art&iacute;culo inicia un hilo de discusi&oacute;n.
 
 {{Consulta:}}
 -* •[la ayuda y soporte en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* •[La documentaci&oacute;n en Spip-contrib->http://contrib.spip.netSpipBB-le-forum].
+-* •[La documentaci&oacute;n en Spip-contrib->http://contrib.spip.net/SpipBB-le-forum].
 
 _ {{Plugin spipbb en fase de desarrollo. T&uacute; asumes el riesgo si lo utilizas}}
 
 _ [Acceso al panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distribuido bajo licencia GPL',
-	'plugin_lien' => '[Consultar la documentaci&oacute;n del plugin en Spip-contrib->http://contrib.spip.netSpipBB-le-forum]',
+	'plugin_lien' => '[Consultar la documentaci&oacute;n del plugin en Spip-contrib->http://contrib.spip.net/SpipBB-le-forum]',
 	'plugin_mauvaise_version' => '&iexcl;Esta versi&oacute;n del plugin no es compatible con la versi&oacute;n instalada de SPIP!',
 	'plugin_nom' => 'SpipBB : Gesti&oacute;n de los foros de SPIP',
 	'post_aucun_pt' => '&iexcl;ninguno!',
@@ -406,14 +406,14 @@ _ [Acceso al panel de administraci&oacute;n-> .?exec=spipbb_configuration]',
 	'secteur_forum' => 'RA&Iacute;Z',
 	'selection_efface' => 'Borrar la selecci&oacute;n ...',
 	'selection_tri_dpt' => 'Seleccionar el m&eacute;todo de ordenaci&oacute;n:',
-	'sign_admin' => '{{Esta p&aacute;gina es accesible &uacute;nicamente para los responsables del sitio.}}<p>Da acceso a la configuraci&oacute;n del plugin &laquo;{{<a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la gesti&oacute;n de los foros del sitio.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
-_ • [La documentaci&oacute;n en Spip-Contrib->http://contrib.spip.net?article2460]
+	'sign_admin' => '{{Esta p&aacute;gina es accesible &uacute;nicamente para los responsables del sitio.}}<p>Da acceso a la configuraci&oacute;n del plugin &laquo;{{<a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; igual que a la gesti&oacute;n de los foros del sitio.</p><p>Versi&oacute;n: @version@ @distant@</p><p>Consulta:
+_ • [La documentaci&oacute;n en Spip-Contrib->http://contrib.spip.net/?article2460]
 _ • [La ayuda y soporte en spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@',
 	'sign_maj' => '<br />Hay disponible una versi&oacute;n m&aacute;s reciente: @version@',
 	'sign_ok' => 'al d&iacute;a.',
 	'sign_reinit' => '<p>Reinicializaci&oacute;n:
 _ • [de todo el plugin->@plugin@]</p>',
-	'sign_tempo' => 'Realizado con <a href="http://contrib.spip.netPlugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
+	'sign_tempo' => 'Realizado con <a href="http://contrib.spip.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Firma',
 	'sinscrire' => 'Registrarse',
 	'site_propose' => 'Sitio propuesto por @auteur_post@',

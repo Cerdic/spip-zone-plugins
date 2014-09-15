@@ -37,7 +37,7 @@ Setu ar ranno&ugrave; kinniget : Mera&ntilde;, Gwellaat ar skritur, berradenno&u
 
 Kavit en astenn-ma&ntilde; un nebeud binviji :  {gallouterien}, {klochedigo&ugrave;}, {c\'hwen vrav}, {ur roll evit ho pennado&ugrave;}, {skeudennigo&ugrave;-imor}, {dilemel an niverenn}, {chomlec\'hio&ugrave; brav}, {SPIP hag al liammo&ugrave; diavaez}, {foromo&ugrave; dianv ebet}, {didroc\'ha&ntilde; e pajenno&ugrave; hag e ivinello&ugrave;}, hag all. 
 
-Gallout a rit teurel ur sell war ar pennado&ugrave;-titouri&ntilde; diwar-benn an astenno&ugrave; war : [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
+Gallout a rit teurel ur sell war ar pennado&ugrave;-titouri&ntilde; diwar-benn an astenno&ugrave; war : [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Heglot gant SPIP holl stummo&ugrave; adalek 1.91',
 

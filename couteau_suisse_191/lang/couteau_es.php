@@ -57,7 +57,7 @@ Las categor&iacute;as disponibles son: Administraci&oacute;n, Mejoras tipogr&aac
 
 Encuentra en este plugin tus herramientas favoritas: {Suprimir el n&uacute;mero}, {Formato de las URLs}, {Exponentes tipogr&aacute;ficos}, {Comillas tipogr&aacute;ficas}, {Marcas bonitas}, {Lucha contra el SPAM}, {Mailcrypt}, {URLs elegantes}, {SPIP y los enlaces... externos}, {Smileys}, {Un sumario para tus art&iacute;culos}, {Dividir en p&aacute;ginas y pesta&ntilde;as}, etc., etc.
 
-No dudes en consultar los art&iacute;culos de documentaci&oacute;n del plugin publicados en: [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
+No dudes en consultar los art&iacute;culos de documentaci&oacute;n del plugin publicados en: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilidad: SPIP v1.91',
 

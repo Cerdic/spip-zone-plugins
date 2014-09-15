@@ -61,7 +61,7 @@ Les categories disponibles s&oacute;n: Administraci&oacute;, Millores tipogr&agr
 
 Descobriu en aquest plugin les vostres eines utilitats favorites: {Suprimir el n&uacute;mero}, {Format dels URLs}, {Exponents tipogr&agrave;fics}, {Cometes tipogr&agrave;fiques}, {Bonics s&iacute;mbols gr&agrave;fics}, {Lluita contra l\'SPAM}, {Encriptaci&oacute; del correu electr&ograve;nic}, {Belles URLs}, {SPIP i els enlla&ccedil;os... externs}, {Emoticones}, {Un sumari pels vostres articles}, {Tallar en p&agrave;gines i pestanyes}, etc., etc.
 
-No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://contrib.spip.netLe-Couteau-Suisse].
+No dubteu a consultar els articles de la documentaci&oacute; del plugin publicats a: [spip-contrib.net->http://contrib.spip.net/Le-Couteau-Suisse].
 
 Compatibilitat: SPIP v1.91',
 

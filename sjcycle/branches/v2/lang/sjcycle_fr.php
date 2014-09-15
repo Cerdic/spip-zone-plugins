@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_imgparams'=>'Les images sont redimensionnées et recadrées automatiquement afin de préserver la mise en page lors de l\'insertion du diaporama au sein du texte. Ce traitement se réalise sur les images suivant :
 -* leur position dans le diaporama, combinaison des valeurs d\'alignement "left/center/right" et "top/center/bottom" (ex "left center")
 -* leur taille finale souhaitée (largeur, hauteur)',
-	'explication_mediabox'=>'Au clic, afficher l\'image originale dans une mediabox jQuery. Nécessite le plugin <a href="http://contrib.spip.netMediaBox" target="_blank">Mediabox</a>',
+	'explication_mediabox'=>'Au clic, afficher l\'image originale dans une mediabox jQuery. Nécessite le plugin <a href="http://contrib.spip.net/MediaBox" target="_blank">Mediabox</a>',
 	'explication_pause'=>'Active la mise en pause du diaporama automatique au survol de la souris',
 	'explication_random'=>'Active le défilement aléatoire',
 	'explication_speed'=>'Vitesse de la transition en millisecondes',
