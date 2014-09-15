@@ -12,7 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explication_aspirateur_fin' => 'Prévisualiser les liens des pages à récupérer, vous pouvez aussi modifier cette liste une fois générée.',
 	'explication_tmp_liste' => 'Les liens aspirés pour @url_site@ sont listés dans @url_tmp_liste@ il faut supprimer ce fichier pour recommencer l\'aspiration.',
-	
+	'explication_nombre_de_pages_rss'=>'Chaque page aspirée devient un item du flux RSS reprenant son contenu traité et ses documents en enclosures.',
+
 	// I
 	'info_result_aspiration_contenu'=>'Résultat de l\'aspiration du contenu',
 	'info_result_aspiration_liens'=>'Résultat de l\'aspiration des liens de pages',
@@ -36,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_result_contenu'=>'Contenu ',
 	
 	// L
+	'label_nombre_de_pages_rss' => 'Nombre de pages',
 
 
 	// T

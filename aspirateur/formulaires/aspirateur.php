@@ -45,7 +45,6 @@ function formulaires_aspirateur_traiter_dist(){
 	$motif_contenu_regex = lire_config('aspirateur/motif_contenu_regex');
 	$motif_chemin_documents_exclure = lire_config('aspirateur/motif_chemin_documents_exclure');
 	$motif_chemin_documents = lire_config('aspirateur/motif_chemin_documents');
-	$activer_rss = lire_config('aspirateur/activer_rss');
 	$activer_spip = lire_config('aspirateur/activer_spip');
 
 	//actions

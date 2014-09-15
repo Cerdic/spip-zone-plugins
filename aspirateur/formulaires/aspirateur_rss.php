@@ -20,7 +20,7 @@ include_spip('inc/aspirer_rss');
 function formulaires_aspirateur_rss_charger_dist(){
 	
 	$valeurs = array(
-	'nombre_de_pages' => _request('nombre_de_pages'),
+	'nombre_de_pages' => _request('nombre_de_pages_rss'),
 	);
 
 	return $valeurs;
@@ -36,7 +36,7 @@ function formulaires_aspirateur_rss_verifier_dist(){
 
 function formulaires_aspirateur_rss_traiter_dist(){
 	
-	$nombre_de_pages = _request('nombre_de_pages');
+	$nombre_de_pages = _request('nombre_de_pages_rss');
 	$nom_site_aspirer = lire_config('aspirateur/nom_site_aspirer');
 	$url_site_aspirer = lire_config('aspirateur/url_site_aspirer');
 	$descriptif_site = lire_config('aspirateur/descriptif_site');
@@ -46,14 +46,13 @@ function formulaires_aspirateur_rss_traiter_dist(){
 	$motif_contenu_regex = lire_config('aspirateur/motif_contenu_regex');
 	$motif_chemin_documents_exclure = lire_config('aspirateur/motif_chemin_documents_exclure');
 	$motif_chemin_documents = lire_config('aspirateur/motif_chemin_documents');
-	$activer_rss = lire_config('aspirateur/activer_rss');
 	$activer_spip = lire_config('aspirateur/activer_spip');
 
 	//actions
 	
 	//le rss
 	$aspirateur_tmp_liste=aspirateur_tmp_liste($url_site_aspirer);
-	if($activer_rss==1 && $rss = do_rss("aspirateur_rss.xml",$nombre_de_pages)) {
+	if($rss = do_rss("aspirateur_rss.xml",$nombre_de_pages)) {
 		$message = _T('aspirateur:explication_tmp_liste', array('url_site'=>$url_site_aspirer,'url_tmp_liste'=>"<a href='".$aspirateur_tmp_liste."'>".$aspirateur_tmp_liste."</a>"));
 		$message .= "<br /><strong>"._T('aspirateur:info_result_aspiration_rss')."</strong> ";
 		$message .= " (".sinon(singulier_ou_pluriel($nombre_de_pages,'aspirateur:info_1_contenu','aspirateur:info_nb_contenus'),_T('aspirateur:info_aucun_contenu')).") ";

@@ -7,11 +7,12 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		#SET{fl,configureraspirateur}
+		#SET{fl,aspirateur}
 				<ul>
 				<!--EX01-->
-				#SET{name,nombre_de_pages}#SET{obli,''}[(#SET{defaut,'1'})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				#SET{name,nombre_de_pages_rss}#SET{obli,''}[(#SET{defaut,'1'})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<p class="explication">[(#GET{fl}|concat{':explication_',#GET{name}}|_T)]</p>			
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>

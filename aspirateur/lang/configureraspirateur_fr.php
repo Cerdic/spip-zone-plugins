@@ -32,7 +32,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'legend_motifs_exclusion' =>'Motifs d\'exclusion',
 	
-	'label_activer_rss_1'=>'Activer la fabrication d\'un flux RSS',
 	'label_activer_spip_1'=>'Réécrire le chemin des documents pour SPIP',
 	
 	'label_contenu_inclure_tag_attribut'=>'Aspirer le contenu d\'un tag HTML ayant la class ou l\'id suivante (xpath)',
