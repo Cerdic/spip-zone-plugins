@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Deze bladzijde maakt het mogelijk om de stijl van het vergrootglas te configureren. Een verpersoonlijkte stijl kan verklaard worden; <a href= " http://plugins.spip.net/?page=article&id_article=48 ">  zien de on-line documentatie</a>. Webmestres SPIP',
+	'descriptif' => 'Deze bladzijde maakt het mogelijk om de stijl van het vergrootglas te configureren. Een verpersoonlijkte stijl kan verklaard worden; <a href= " http://plugins.spip.net/?page=article&id_article=48 ">  zien de on-line documentatie</a>. Webmestres SPIP', # MODIF
 
 	// E
 	'example' => 'Grafisch resultaat',
