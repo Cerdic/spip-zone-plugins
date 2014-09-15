@@ -31,6 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'champ_versioning_trac_label' => 'Trac du dépôt',
     'champ_versioning_type_label' => 'Type de versioning',
     'confirmer_maj_commits_projet' => 'Veuillez confirmer la demande de mise à jour des commits de ce projet.',
+    'curl_actif' => 'L\'extension cURL de PHP est actif. De ce fait, vous pourrez en profiter dans ce plugin.',
+    'curl_inactif' => 'L\'extension cURL de PHP n\'est pas actif. De ce fait, la fonction <em>recuperer_page</em> sera utilisée pour récupérer le contenu des flux RSS des commits.',
 
     // I
     'icone_creer_commit' => 'Créer un commit',

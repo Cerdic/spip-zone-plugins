@@ -30,8 +30,9 @@ function action_maj_commits_projet_dist($id = null)
 
     if ($id_projet) {
         include_spip('rss_commits_fonctions');
+        include_spip('base/abstract_sql');
         $log = array();
-        $log[] = "\n ----------"
+        $log[] = "\n----------\n"
         . date_format(date_create(), 'Y-m-d H:i:s')
         . ' : on lance '
         . __FUNCTION__
@@ -83,7 +84,7 @@ function action_maj_commits_projet_dist($id = null)
         . ' a fini son travail'
         . ' pour le projet n#'
         . $id_projet
-        . "\n ----------";
+        . "\n----------\n";
 
         spip_log(implode("\n", $log), 'rss_commits');
 

@@ -1,7 +1,7 @@
 [(#AUTORISER{configurer, commits}|sinon_interdire_acces)]
 
 <h1 class="grostitre"><:commits:titre_page_configurer_commits:></h1>
-
+[<p class="explication">(#VAL{'curl'}|extension_loaded|?{<:commit:curl_actif:>,<:commit:curl_inactif:>})</p>]
 <div class="ajax">
 	#FORMULAIRE_CONFIGURER_RSS_COMMITS
 </div>

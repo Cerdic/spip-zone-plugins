@@ -1,7 +1,7 @@
 <paquet
 	prefix="rss_commits"
 	categorie="divers"
-	version="0.5.0"
+	version="0.5.1"
 	etat="dev"
 	compatibilite="[3.0.8;3.0.*]"
 	logo="prive/themes/spip/images/commits-64.png"

@@ -33,10 +33,12 @@ function inc_recuperer_rss_commits_dist ($url, $login = '', $password = '')
 
         if (isset($login) and $login != '') {
             $options[CURLOPT_USERPWD] = $login . ':' . $password;    // don't return headers
+            spip_log($login . ' ' . $password, 'rss_commits');
         } else {
             $login    = lire_config('rss_commits/login');
             $password = lire_config('rss_commits/password');
             $options[CURLOPT_USERPWD] = $login . ':' . $password;    // don't return headers
+            spip_log($login . ' ' . $password, 'rss_commits');
         }
 
         $ch      = curl_init($url);
