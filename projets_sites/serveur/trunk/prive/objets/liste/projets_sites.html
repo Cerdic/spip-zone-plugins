@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_sites (PROJETS_SITES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num type_site},#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets_sites (PROJETS_SITES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num type_site},#GET{defaut_tri}} {pagination #ENV{nb,10}} {0,#ENV{limit,n}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projets_site-16.png}|balise_img)]</td>
 			[(#REM) Comme la table spip_projets a déjà une table de liens, SPIP n'arrive pas à faire la jointure avec spip_projets_sites_liens pour avoir cette requête :
