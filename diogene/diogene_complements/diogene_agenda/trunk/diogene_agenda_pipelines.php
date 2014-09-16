@@ -25,7 +25,10 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 			$evenement = sql_fetsel('*','spip_evenements','id_article='.intval($id_objet).' AND statut != "poubelle"');
 			if($evenement['titre'] != sql_getfetsel('titre','spip_evenements','id_article='.intval($id_objet)))
 				$evenement['titre_evenement'] = $evenement['titre'];
+			
+			$evenement['descriptif_evenement'] = $evenement['descriptif'];
 			unset($evenement['titre']);
+			unset($evenement['descriptif']);
 			unset($evenement['statut']);
 			unset($evenement['id_article']);
 			if(intval($evenement['id_evenement']) > 0){
@@ -48,6 +51,8 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		$champs[] = 'heure_debut';
 		$champs[] = 'heure_fin';
 		$champs[] = 'titre_evenement';
+		$champs[] = 'descriptif_evenement';
+		unset($champs['descriptif']);
 		foreach($champs as $champ){
 			if(_request($champ))
 				$evenement[$champ] = _request($champ);
@@ -105,6 +110,8 @@ function diogene_agenda_diogene_verifier($flux){
 				$champs_post = false;
 				$champs = objet_info('evenement','champs_editables');
 				$champs[] = 'titre_evenement';
+				$champs[] = 'descriptif_evenement';
+				unset($champs['descriptif']);
 				foreach($champs as $champ){
 					if(!in_array($champ,array('titre','horaire')) && _request($champ)){
 						$champs_post = true;
@@ -160,6 +167,9 @@ function diogene_agenda_diogene_traiter($flux){
 				set_request('titre',_request('titre_evenement'));
 			}
 			
+			if(strlen(_request('descriptif_evenement')) > 0){
+				set_request('descriptif',_request('descriptif_evenement'));
+			}
 			/**
 			 * On fait attention à donner un statut existant au statut
 			 */
