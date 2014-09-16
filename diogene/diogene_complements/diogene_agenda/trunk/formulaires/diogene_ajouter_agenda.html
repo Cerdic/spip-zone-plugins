@@ -19,7 +19,7 @@
 					<li class="editer editer_horaire[ (#ENV**{erreurs}|table_valeur{horaire}|oui)erreur]">
 						<label for="horaire"><:agenda:evenement_horaire:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{horaire})</span>
-						]<input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
+						] <input type='checkbox' name='horaire' id='horaire' value='non' [(#ENV{horaire}|=={oui}|non)checked='checked']
 							onclick="if (this.checked==false) { $('span.afficher_horaire').show();} else {$('span.afficher_horaire').hide();}" />
 					</li>
 					<li class="editer editer_date_debut_fin[ (#ENV**{erreurs}|table_valeur{date_debut}|oui)erreur][ (#ENV**{erreurs}|table_valeur{date_fin}|oui)erreur]">
@@ -48,10 +48,10 @@
 				(#ENV{repetitions}|non)</div>]
 			</li>]
 			[(#VAL{descriptif}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
-			<li class="editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
-				<label for="descriptif"><:agenda:evenement_descriptif:></label>[
+			<li class="editer editer_descriptif editer_descriptif_evenement[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="descriptif_evenement"><:agenda:evenement_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
-				]<textarea name='descriptif' rows='5' id='descriptif' class="inserer_barre_edition">[(#ENV{descriptif})]</textarea>
+				]<textarea name='descriptif_evenement' rows='5' id='descriptif_evenement' class="inserer_barre_edition">[(#ENV{descriptif_evenement})]</textarea>
 			</li>][
 			(#VAL{inscription}|in_array{#ENV{agenda_caches,#ARRAY}}|non)
 			<li class="editer editer_inscription[ (#ENV**{erreurs}|table_valeur{inscription}|oui)erreur]">
