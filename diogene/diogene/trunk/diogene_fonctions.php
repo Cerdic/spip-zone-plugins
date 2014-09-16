@@ -121,7 +121,7 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 	 * Si on ne force pas, on envoit vers la page de l'objet
 	 */
 	if($forcer === false){
-		if($infos_objet['statut'] == 'publie')
+		if(in_array($infos_objet['statut'],array('publie','archive')))
 			return generer_url_entite($id,$objet);
 	}
 	$objets[] = $objet;
