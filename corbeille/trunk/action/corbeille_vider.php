@@ -44,9 +44,11 @@ function corbeille_table_infos($table=-1){
 		),
 		"auteurs" => array(
 			"statut" => "5poubelle",
+			"tableliee"=> array("spip_documents_liens"),
 		),					
 		"breves"=> array(
-			"statut" => "refuse", 
+			"statut" => "refuse",
+			"tableliee"=> array("spip_documents_liens"),
 		),
 		"forums_publics" => array(
 			"statut" => "off",
@@ -61,7 +63,7 @@ function corbeille_table_infos($table=-1){
 		),
 		"sites" => array(
 			"statut" => "refuse",
-			"tableliee"=> array("spip_syndic_articles","spip_mots_syndic"),
+			"tableliee"=> array("spip_syndic_articles","spip_mots_syndic","spip_documents_liens"),
 		),
 	);
 	$param = pipeline('corbeille_table_infos', $param);
