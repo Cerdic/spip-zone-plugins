@@ -32,8 +32,8 @@ function projets_affiche_milieu($flux) {
 	}
 	$objets_selectionnes = array_filter($objets_selectionnes);
 
-	// auteurs sur les projets
-	if (!$e['edition'] AND in_array($e['type'], array('projet'))) {
+	// auteurs sur les projets et cadres de projet
+	if (!$e['edition'] AND in_array($e['type'], array('projet', 'projets_cadre'))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array(
 			'table_source' => 'auteurs',
 			'objet' => $e['type'],
@@ -69,6 +69,11 @@ function projets_affiche_auteurs_interventions($flux) {
 		$flux['data'] .= recuperer_fond('prive/objets/liste/projets', array(
 			'id_auteur' => $id_auteur,
 			'titre' => _T('projet:info_projets_auteur')
+		), array('ajax' => true));
+
+		$flux['data'] .= recuperer_fond('prive/objets/liste/projets_cadres', array(
+			'id_auteur' => $id_auteur,
+			'titre' => _T('projets_cadre:info_projets_cadres_auteur')
 		), array('ajax' => true));
 
 	}

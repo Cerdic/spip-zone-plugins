@@ -1,82 +1,78 @@
-<BOUCLE_projet(PROJETS){id_projet}{statut?}>
+<BOUCLE_projet (PROJETS) {id_projet} {statut?}>
 
-<BOUCLE_si_parent(CONDITION){si #ID_PARENT|intval}>
+<BOUCLE_si_parent (CONDITION) {si #ID_PARENT|intval}>
 <div class="champ contenu_id_parent[ (#ID_PARENT*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_id_parent:> : </div>
+	<div class="label visible"><:projet:label_id_parent:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='#_projet:EDIT{id_parent} id_parent'>
-		<BOUCLE_parent(PROJETS){id_projet=#ID_PARENT}{statut==.*}>
-			<a href='[(#ID_PROJET|generer_url_entite{projet})]'>#NOM</a>
-		</BOUCLE_parent>
+		<a href='[(#ID_PARENT|generer_url_entite{projet})]'>#INFO_NOM{projet,#ID_PARENT}</a>
 	</div>
 </div>
 </BOUCLE_si_parent>
 
 [<div class="champ invisible hidden contenu_nom[ (#NOM*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_nom:> : </div>
+	<div class="label visible"><:projet:label_nom:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{nom} nom'>(#NOM)</div>
 </div>]
 
 [<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_url_site:> : </div>
-	<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'>(#URL_SITE)</div>
+	<div class="label visible"><:projet:label_url_site:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'><a href="#URL_SITE" class="spip_out">(#URL_SITE)</a></div>
 </div>]
 
-<BOUCLE_si_cadre(CONDITION){si #ID_PROJETS_CADRE|intval}>
+<BOUCLE_si_cadre (CONDITION) {si #ID_PROJETS_CADRE|intval}>
 <div class="champ contenu_id_projets_cadre[ (#ID_PROJETS_CADRE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_id_projets_cadre:> : </div>
-	<div dir='#LANG_DIR' class='span #_projet:EDIT{id_projets_cadre} id_projets_cadre'>
-		<BOUCLE_cadre(PROJETS_CADRES){id_projets_cadre}>#TITRE</BOUCLE_cadre>
-	</div>
+	<div class="label visible"><:projet:label_id_projets_cadre:>&nbsp;: </div>
+	<div dir='#LANG_DIR' class='span #_projet:EDIT{id_projets_cadre} id_projets_cadre'>#INFO_TITRE{projets_cadre,#ID_PROJETS_CADRE}</div>
 </div>
 </BOUCLE_si_cadre>
 
 [<div class="champ contenu_date_debut[ (#DATE_DEBUT*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_date_debut:> : </div>
+	<div class="label visible"><:projet:label_date_debut:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{date_debut} date_debut'>(#DATE_DEBUT|affdate)</div>
 </div>]
 
 [<div class="champ contenu_date_livraison_prevue[ (#DATE_LIVRAISON_PREVUE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_date_livraison_prevue:> : </div>
+	<div class="label visible"><:projet:label_date_livraison_prevue:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{date_livraison_prevue} date_livraison_prevue'>(#DATE_LIVRAISON_PREVUE|affdate)</div>
 </div>]
 
 [<div class="champ contenu_date_livraison[ (#DATE_LIVRAISON*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_date_livraison:> : </div>
+	<div class="label visible"><:projet:label_date_livraison:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{date_livraison} date_livraison'>(#DATE_LIVRAISON|affdate)</div>
 </div>]
 
 [<div class="champ contenu_nb_heures_estimees[ (#NB_HEURES_ESTIMEES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_nb_heures_estimees:> : </div>
+	<div class="label visible"><:projet:label_nb_heures_estimees:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{nb_heures_estimees} nb_heures_estimees'>(#NB_HEURES_ESTIMEES)</div>
 </div>]
 
 [<div class="champ contenu_nb_heures_reelles[ (#NB_HEURES_REELLES*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_lenb_heures_resel:> : </div>
+	<div class="label visible"><:projet:label_lenb_heures_resel:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{nb_heures_reelles} nb_heures_reelles'>(#NB_HEURES_REELLES)</div>
 </div>]
 
 [<div class="champ contenu_actif[ (#ACTIF*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_actif:> : </div>
+	<div class="label visible"><:projet:label_actif:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{actif} actif'>(#ACTIF)</div>
 </div>]
 
 [<div class="champ contenu_objectif[ (#OBJECTIF*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_objectif:> : </div>
+	<div class="label visible"><:projet:label_objectif:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{objectif} objectif'>(#OBJECTIF)</div>
 </div>]
 
 [<div class="champ contenu_enjeux[ (#ENJEUX*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_enjeux:> : </div>
+	<div class="label visible"><:projet:label_enjeux:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{enjeux} enjeux'>(#ENJEUX)</div>
 </div>]
 
 [<div class="champ contenu_methode[ (#METHODE*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_methode:> : </div>
+	<div class="label visible"><:projet:label_methode:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{methode} methode'>(#METHODE)</div>
 </div>]
 
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-	<div class="label visible"><:projet:label_descriptif:> : </div>
+	<div class="label visible"><:projet:label_descriptif:>&nbsp;: </div>
 	<div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
 </div>]
 

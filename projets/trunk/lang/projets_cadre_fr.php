@@ -27,7 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_descriptif' => 'Descriptif',
-	'label_titre' => 'Titre',
+	'label_id_projets_cadre'  => 'Identifiant du cadre de projet',
+	'label_maj'        => 'Date de mise à jour',
+	'label_titre'      => 'Titre',
 
 	// R
 	'retirer_lien_projets_cadre' => 'Retirer ce cadre de projet',
