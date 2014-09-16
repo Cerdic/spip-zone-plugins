@@ -2,23 +2,23 @@
  *  boutonstexte.js (c) toggg http://toggg.com 2006 -- licence LGPL
  */
 
-// on dÃ©pend de jQuery
+// on dépend de jQuery
 if (typeof jQuery == 'function')
 (function($){
 	$(function(){
 
 		var boutons = $('<span class="boutonstexte"></span>');
 
-		if (!$("img.textsizeup").length && boutonstexte.txtSizeUp) {
-			$('<a href="#" class="textsizeup"><img src="'+boutonstexte.imgPath+'fontsizeup.png" alt="' + boutonstexte.txtSizeUp +'" /></a>')
+		if (!$(".textsizeup").length && boutonstexte.txtSizeUp) {
+			$('<a href="#" class="textsizeup auto"><img src="'+boutonstexte.imgPath+'fontsizeup.png" alt="' + boutonstexte.txtSizeUp +'" /></a>')
 			.appendTo(boutons);
 		}
-		if (!$("img.textsizedown").length && boutonstexte.txtSizeDown) {
-			$('<a href="#" class="textsizedown"><img src="'+boutonstexte.imgPath+'fontsizedown.png" alt="' + boutonstexte.txtSizeDown +'" /></a>')
+		if (!$(".textsizedown").length && boutonstexte.txtSizeDown) {
+			$('<a href="#" class="textsizedown auto"><img src="'+boutonstexte.imgPath+'fontsizedown.png" alt="' + boutonstexte.txtSizeDown +'" /></a>')
 			.appendTo(boutons);
 		}
-		if (!$("img.textonly").length && boutonstexte.txtOnly) {
-			$('<a href="#" class="textonly"><img src="'+boutonstexte.imgPath+'textonly.png" alt="' + boutonstexte.txtOnly +'" /></a>')
+		if (!$(".textonly").length && boutonstexte.txtOnly) {
+			$('<a href="#" class="textonly auto"><img src="'+boutonstexte.imgPath+'textonly.png" alt="' + boutonstexte.txtOnly +'" /></a>')
 			.appendTo(boutons);
 		}
 
@@ -26,25 +26,25 @@ if (typeof jQuery == 'function')
 			$(boutonstexte.selector).before(boutons);
 		}
 
-		$("img.textsizeup,a.textsizeup")
+		$("img.textsizeup,a.textsizeup,button.textsizeup")
 		.click(function(e) {
-			boutonstexte.fontBigger($(this).is('a') ? this : null);
+			boutonstexte.fontBigger($(this).is('.auto') ? this : null);
 			e.stopPropagation();
 			return false;
 		})
 		.attr({'alt':boutonstexte.txtSizeUp, 'title':boutonstexte.txtSizeUp});
 
-		$("img.textsizedown,a.textsizedown")
+		$("img.textsizedown,a.textsizedown,button.textsizedown")
 		.click(function(e) {
-			boutonstexte.fontSmaller($(this).is('a') ? this : null);
+			boutonstexte.fontSmaller($(this).is('.auto') ? this : null);
 			e.stopPropagation();
 			return false;
 		})
 		.attr({'alt':boutonstexte.txtSizeDown, 'title':boutonstexte.txtSizeDown});
 
-		$("img.textonly,a.textonly")
+		$("img.textonly,a.textonly,button.textonly")
 		.click(function(e) {
-			boutonstexte.texteOnly($(this).is('a') ? this : null);
+			boutonstexte.texteOnly($(this).is('.auto') ? this : null);
 			e.stopPropagation();
 			return false;
 		})
@@ -128,3 +128,4 @@ boutonsTexte.prototype.fontSmaller = function(elt)
 
 function dump(elt)
 {var txt=''; for (var prop in elt) {txt += prop+'='+elt[prop]+'/';} alert(txt);}
+
