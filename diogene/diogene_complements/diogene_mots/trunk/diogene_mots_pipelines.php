@@ -262,16 +262,26 @@ function diogene_mots_diogene_traiter($flux){
 			foreach ($result as $row) {
 				$mots_multiples[] = $row['id_mot'];
 			}
-
-			foreach($requete_id_groupe as $cle => $mot){
-				/**
-				 * Si le mot est déja dans les mots, on le supprime juste
-				 * de l'array des mots originaux
-				 */
-				if(in_array($mot, $mots_multiples))
-					$mots_multiples = array_diff($mots_multiples,array($mot));
+			
+			if(is_array($requete_id_groupe)){
+				foreach($requete_id_groupe as $cle => $mot){
+					/**
+					 * Si le mot est déja dans les mots, on le supprime juste
+					 * de l'array des mots originaux
+					 */
+					if(in_array($mot, $mots_multiples))
+						$mots_multiples = array_diff($mots_multiples,array($mot));
+					else{
+						sql_insertq('spip_mots_liens', array('id_mot' =>$mot,  'id_objet' => $id_objet,'objet'=> $objet));
+						$invalider = true;
+					}
+				}
+			}
+			else{
+				if(in_array($requete_id_groupe, $mots_multiples))
+					$mots_multiples = array_diff($mots_multiples,array($requete_id_groupe));
 				else{
-					sql_insertq('spip_mots_liens', array('id_mot' =>$mot,  'id_objet' => $id_objet,'objet'=> $objet));
+					sql_insertq('spip_mots_liens', array('id_mot' =>$requete_id_groupe,  'id_objet' => $id_objet,'objet'=> $objet));
 					$invalider = true;
 				}
 			}
