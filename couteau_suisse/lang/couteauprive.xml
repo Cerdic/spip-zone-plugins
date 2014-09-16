@@ -19,7 +19,6 @@
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr" total="584" traduits="583" relire="0" modifs="0" nouveaux="1" pourcent="99.83">
-		<traducteur nom="Salvatore" lien="http://trad.spip.net/auteur/salvatore" />
 	</langue>
 	<langue code="fr_tu" url="http://trad.spip.net/tradlang_module/couteauprive?lang_cible=fr_tu" total="584" traduits="557" relire="0" modifs="7" nouveaux="20" pourcent="95.38">
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
