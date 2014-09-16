@@ -93,6 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Mevrouw',
 	'mademoiselle' => 'Mejuffrouw',
+	'message_erreur_robot' => 'Je bent een robot. Gemene robot.',
+	'message_erreur_transmission' => 'Er is een fout in de verzending opgetreden, doe alsjeblieft je verzoek opnieuw.',
 	'message_redemander_pass' => 'Je e-mailadres "@email@" werd al geregistreerd bij een eerder contactbericht. Vraag om je account aan te passen een <a href="@url_pass@">wijziging van het wachtwoord</a> en identificeer jezelf een eerste keer.',
 	'modele_label_auteur' => 'Vooraf een auteur selecteren (facultatief)?',
 	'modele_nom_formulaire' => 'het geavanceerde contactformulier',
