@@ -11,7 +11,7 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commit:info_1_commit,commit:info_nb_commits}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='picto' scope='col'></th>
+			<th class='picto hidden' scope='col'></th>
 			<th class='titre' scope='col'>[(#TRI{titre,<:commit:champ_titre_label:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_commit,<:info_numero_abbreviation:>,ajax})]</th>
@@ -20,7 +20,7 @@
 	<tbody>
 	<BOUCLE_liste_commits (COMMITS) {id_projet?} {id_mot?} {id_auteur?} {tout} {where?} {recherche?} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</td>
+			<td class='picto hidden'>[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_COMMIT|image_reduire{20,26})]<a href="[(#ID_COMMIT|generer_url_entite{commit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMIT">[(#RANG). ]#TITRE</a></td>
 			<td class='date secondaire'>[(#DATE_CREATION|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,commit,#ID_COMMIT}|?{
