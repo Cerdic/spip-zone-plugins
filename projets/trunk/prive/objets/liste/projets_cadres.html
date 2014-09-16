@@ -15,7 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_cadres (PROJETS_CADRES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {par titre} {pagination #ENV{nb,10}} {0,#ENV{limit,n}}>
+	<BOUCLE_liste_projets_cadres (PROJETS_CADRES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {par titre} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projets_cadre-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_PROJETS_CADRE|image_reduire{20,26})]<a href="[(#ID_PROJETS_CADRE|generer_url_entite{projets_cadre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_CADRE">[(#RANG). ]#TITRE</a></td>
