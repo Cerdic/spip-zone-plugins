@@ -93,6 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Madam',
 	'mademoiselle' => 'Miss',
+	'message_erreur_robot' => 'You are a robot. Bad robot.',
+	'message_erreur_transmission' => 'A transmission error has occurred, please renew your request.',
 	'message_redemander_pass' => 'Your email address "@email@" is already recorded due to a contact message. To validate your account, ask a <a href="@url_pass@">password change</a> and log in a first time.',
 	'modele_label_auteur' => 'Pre-select an author (optional)?',
 	'modele_nom_formulaire' => 'the contact form',
