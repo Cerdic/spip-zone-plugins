@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_commits (COMMITS) {id_projet?} {id_mot?} {id_auteur?} {tout} {where?} {recherche?} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}} {0,#ENV{limit,n}}>
+	<BOUCLE_liste_commits (COMMITS) {id_projet?} {id_mot?} {id_auteur?} {tout} {where?} {recherche?} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto hidden'>[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</td>
 			<td class='titre principale'>[(#LOGO_COMMIT|image_reduire{20,26})]<a href="[(#ID_COMMIT|generer_url_entite{commit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMIT">[(#RANG). ]#TITRE</a></td>
