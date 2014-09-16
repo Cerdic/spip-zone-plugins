@@ -14,6 +14,26 @@
  * no responsibility for any damage caused by using this plugin
  * or the documentation provided.
  */
+[(#CONFIG{cookiebar/message_txt}|?{
+    [(#SET{message,#CONFIG{cookiebar/message_txt}|propre|addslashes})],
+    [(#SET{message,<:cookiebar:message_message|addslashes:>})]
+})]
+[(#CONFIG{cookiebar/accept_txt}|?{
+    [(#SET{accepttext,#CONFIG{cookiebar/accept_txt}|propre|addslashes})],
+    [(#SET{accepttext,<:cookiebar:message_accepttext|addslashes:>})]
+})]
+[(#CONFIG{cookiebar/decline_txt}|?{
+    [(#SET{declinetext,#CONFIG{cookiebar/decline_txt}|propre|addslashes})],
+    [(#SET{declinetext,<:cookiebar:message_declinetext|addslashes:>})]
+})]
+[(#CONFIG{cookiebar/policy_txt}|?{
+    [(#SET{policytext,#CONFIG{cookiebar/policy_txt}|propre|addslashes})],
+    [(#SET{policytext,<:cookiebar:message_policytext|addslashes:>})]
+})]
+    
+      
+    
+ 
 (function($){
 	$.cookieBar = function(options,val){
 		if(options=='cookies'){
@@ -24,19 +44,19 @@
 			var doReturn = false;
 		}
 		var defaults = {
-			message: '<:cookiebar:message_message|addslashes:>', //Message displayed on bar   
+			message: '#GET{message}', //Message displayed on bar   
 			acceptButton:  #CONFIG{cookiebar/accept_button,true} , //Set to true to show accept/enable button
-			acceptText: '<:cookiebar:message_accepttext|addslashes:>', //Text on accept/enable button
+			acceptText: '#GET{accepttext}', //Text on accept/enable button
 			declineButton: #CONFIG{cookiebar/decline_button,true}, //Set to true to show decline/disable button
-			declineText: '<:cookiebar:message_declinetext|addslashes:>', //Text on decline/disable button
+			declineText: '#GET{declinetext}', //Text on decline/disable button
 			policyButton: #CONFIG{cookiebar/policy_button,false}, //Set to true to show Privacy Policy button
-			policyText: '<:cookiebar:message_policytext|addslashes:>', //Text on Privacy Policy button
+			policyText: '#GET{policytext}', //Text on Privacy Policy button
 			policyURL: '#CONFIG{cookiebar/policy_url}', //URL of Privacy Policy
 			autoEnable: true, //Set to true for cookies to be accepted automatically. Banner still shows
 			acceptOnContinue: false, //Set to true to silently accept cookies when visitor moves to another page
 			expireDays: 365, //Number of days for cookieBar cookie to be stored for
 			forceShow: false, //Force cookieBar to show regardless of user cookie preference
-			effect: 'slide', //Options: slide, fade, hide
+			effect: '[(#CONFIG{cookiebar/effet,slide})]', //Options: slide, fade, hide 
 			element: 'body', //Element to append/prepend cookieBar to. Remember "." for class or "#" for id.
 			append: false, //Set to true for cookieBar HTML to be placed at base of website. Actual position may change according to CSS
 			fixed: [(#CONFIG{cookiebar/position}|match{fixed}|?{true,false})], //Set to true to add the class "fixed" to the cookie bar. Default CSS should fix the position
