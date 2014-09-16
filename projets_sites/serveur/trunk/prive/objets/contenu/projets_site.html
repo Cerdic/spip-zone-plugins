@@ -3,7 +3,7 @@
 
 	[<div class="champ contenu_type_site[ (#TYPE_SITE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_type_site:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{type_site} type_site'>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{type_site})]] type_site'>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)</div>
 	</div>]
 
 	[<div class="champ contenu_uniqid[ (#UNIQID*|strlen|?{'',vide})]">
@@ -16,6 +16,11 @@
 		<div dir='#LANG_DIR' class='span #EDIT{webservice} webservice'><a href="#WEBSERVICE" class="spip_out">(#WEBSERVICE)</a></div>
 	</div>]
 
+	[<div class="champ contenu_date_creation[ (#DATE_CREATION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_date_creation:></div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{date_creation})]] date_creation'>(#DATE_CREATION|affdate)</div>
+	</div>]
+
 	[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_descriptif:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{logiciel_nom} descriptif'>(#DESCRIPTIF)</div>
@@ -26,7 +31,7 @@
 
 	[<div class="champ contenu_fo_url[ (#FO_URL*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_fo_url:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{fo_url} fo_url'><a href="#FO_URL" class="spip_out">(#FO_URL)</a></div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{fo_url})]]  fo_url'><a href="#FO_URL" class="spip_out">(#FO_URL)</a></div>
 	</div>]
 
 	[<div class="champ contenu_fo_login[ (#FO_LOGIN*|strlen|?{'',vide})]">
@@ -62,17 +67,17 @@
 
 	[<div class="champ contenu_logiciel_nom[ (#LOGICIEL_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_logiciel_nom:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_nom} logiciel_nom'>(#LOGICIEL_NOM)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{logiciel_nom})]] logiciel_nom'>(#LOGICIEL_NOM)</div>
 	</div>]
 
 	[<div class="champ contenu_logiciel_version[ (#LOGICIEL_VERSION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_logiciel_version:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_version} logiciel_version'>(#LOGICIEL_VERSION)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{logiciel_version})]] logiciel_version'>(#LOGICIEL_VERSION)</div>
 	</div>]
 
 	[<div class="champ contenu_logiciel_revision[ (#LOGICIEL_REVISION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_logiciel_revision:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_revision} logiciel_revision'>(#LOGICIEL_REVISION)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{logiciel_revision})]] logiciel_revision'>(#LOGICIEL_REVISION)</div>
 	</div>]
 
 [(#REM)
@@ -82,7 +87,7 @@
 <B_plugins>
 	<div class="champ contenu_logiciel_plugins">
 		<div class="label visible"><:projets_site:label_logiciel_plugins:></div>
-		<div dir='#LANG_DIR' class='#EDIT{logiciel_plugins} logiciel_plugins clearfix'>
+		<div dir='#LANG_DIR' class='[(#WEBSERVICE|non)[(#EDIT{logiciel_plugins})]] logiciel_plugins clearfix'>
 		<table class="table spip liste">
 			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_plugin,projets_site:info_nb_plugins})]</caption>
 			<thead>
@@ -110,7 +115,7 @@
 </B_plugins>
 	[<div class="champ contenu_logiciel_plugins[ (#LOGICIEL_PLUGINS*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_logiciel_plugins:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{logiciel_plugins} logiciel_plugins'>(#LOGICIEL_PLUGINS)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{logiciel_plugins})]] logiciel_plugins'>(#LOGICIEL_PLUGINS)</div>
 	</div>]
 <//B_plugins>
 
@@ -123,7 +128,7 @@
 <B_admins>
 	<div class="champ contenu_auteurs_admin[ (#AUTEURS_ADMIN*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_auteurs_admin:></div>
-		<div dir='#LANG_DIR' class='#EDIT{auteurs_admin} auteurs_admin clearfix'>
+		<div dir='#LANG_DIR' class='[(#WEBSERVICE|non)[(#EDIT{auteurs_admin})]] auteurs_admin clearfix'>
 		<table class="table spip liste">
 			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_auteur_admin,projets_site:info_nb_auteurs_admin})]</caption>
 			<thead>
@@ -150,7 +155,7 @@
 </B_admins>
 	[<div class="champ contenu_auteurs_admin[ (#AUTEURS_ADMIN*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_auteurs_admin:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{auteurs_admin} auteurs_admin'>(#AUTEURS_ADMIN)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{auteurs_admin})]] auteurs_admin'>(#AUTEURS_ADMIN)</div>
 	</div>]
 <//B_admins>
 
@@ -161,7 +166,7 @@
 <B_webmestres>
 	<div class="champ contenu_auteurs_webmestres[ (#AUTEURS_WEBMESTRES*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_auteurs_webmestres:></div>
-		<div dir='#LANG_DIR' class='#EDIT{auteurs_webmestre} auteurs_webmestres clearfix'>
+		<div dir='#LANG_DIR' class='[(#WEBSERVICE|non)[(#EDIT{auteurs_webmestres})]] auteurs_webmestres clearfix'>
 		<table class="table spip liste">
 			<caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_auteur_webmestre,projets_site:info_nb_auteurs_webmestres})]</caption>
 			<thead>
@@ -186,7 +191,7 @@
 </B_webmestres>
 	[<div class="champ contenu_auteurs_webmestre[ (#AUTEURS_WEBMESTRES*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_auteurs_webmestres:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{auteurs_webmestres} auteurs_webmestres'>(#AUTEURS_WEBMESTRES)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{auteurs_webmestres})]] auteurs_webmestres'>(#AUTEURS_WEBMESTRES)</div>
 	</div>]
 <//B_webmestres>
 
@@ -195,22 +200,22 @@
 
 	[<div class="champ contenu_serveur_nom[ (#SERVEUR_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_serveur_nom:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{serveur_nom} serveur_nom'>(#SERVEUR_NOM)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{serveur_nom})]] serveur_nom'>(#SERVEUR_NOM)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_port[ (#SERVEUR_PORT*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_serveur_port:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{serveur_port} serveur_port'>(#SERVEUR_PORT)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{serveur_port})]] serveur_port'>(#SERVEUR_PORT)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_path[ (#SERVEUR_PATH*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_serveur_path:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{serveur_path} serveur_path'>(#SERVEUR_PATH)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{serveur_path})]] serveur_path'>(#SERVEUR_PATH)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_logiciel[ (#SERVEUR_LOGICIEL*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_serveur_logiciel:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{serveur_logiciel} serveur_logiciel'>(#SERVEUR_LOGICIEL)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{serveur_logiciel})]] serveur_logiciel'>(#SERVEUR_LOGICIEL)</div>
 	</div>]
 
 	[<div class="champ contenu_serveur_surveillance[ (#SERVEUR_SURVEILLANCE*|strlen|?{'',vide})]">
@@ -222,24 +227,24 @@
 <div class="champ fieldset"><h3 class="legend apache_fieldset"><:projets_site:label_apache_fieldset:></h3></div>
 	[<div class="champ contenu_apache_modules[ (#APACHE_MODULES*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_apache_modules:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{apache_modules} apache_modules'>(#APACHE_MODULES)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{apache_modules})]] apache_modules'>(#APACHE_MODULES)</div>
 	</div>]
 
 <!-- PHP -->
 <div class="champ fieldset"><h3 class="legend php_fieldset"><:projets_site:label_php_fieldset:></h3></div>
 	[<div class="champ contenu_php_version[ (#PHP_VERSION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_php_version:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{php_version} php_version'>(#PHP_VERSION)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{php_version})]] php_version'>(#PHP_VERSION)</div>
 	</div>]
 
 	[<div class="champ contenu_php_memory[ (#PHP_MEMORY*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_php_memory:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{php_memory} php_memory'>(#PHP_MEMORY)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{php_memory})]] php_memory'>(#PHP_MEMORY)</div>
 	</div>]
 
 	[<div class="champ contenu_php_extensions[ (#PHP_EXTENSIONS*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_php_extensions:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{php_extensions} php_extensions'>(#PHP_EXTENSIONS)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{php_extensions})]] php_extensions'>(#PHP_EXTENSIONS)</div>
 	</div>]
 
 <!-- Gestion de versions -->
@@ -288,32 +293,32 @@
 
 	[<div class="champ contenu_sgbd_type[ (#SGBD_TYPE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_type:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{sgbd_type} sgbd_type'>(#SGBD_TYPE)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_type})]] sgbd_type'>(#SGBD_TYPE)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_version[ (#SGBD_VERSION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_version:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{sgbd_version} sgbd_version'>(#SGBD_VERSION)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_version})]] sgbd_version'>(#SGBD_VERSION)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_serveur[ (#SGBD_SERVEUR*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_serveur:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{sgbd_serveur} sgbd_serveur'>(#SGBD_SERVEUR)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_serveur})]] sgbd_serveur'>(#SGBD_SERVEUR)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_port[ (#SGBD_PORT*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_port:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{sgbd_port} sgbd_port'>(#SGBD_PORT)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_port})]] sgbd_port'>(#SGBD_PORT)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_nom[ (#SGBD_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_nom:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{sgbd_nom} sgbd_nom'>(#SGBD_NOM)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_nom})]] sgbd_nom'>(#SGBD_NOM)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_prefixe[ (#SGBD_PREFIXE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_prefixe:></div>
-		<div dir='#LANG_DIR' class='span #EDIT{sgbd_prefixe} sgbd_prefixe'>(#SGBD_PREFIXE)</div>
+		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_prefixe})]] sgbd_prefixe'>(#SGBD_PREFIXE)</div>
 	</div>]
 
 	[<div class="champ contenu_sgbd_login[ (#SGBD_LOGIN*|strlen|?{'',vide})]">
