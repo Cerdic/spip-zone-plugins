@@ -51,7 +51,7 @@
 		{compteur_contacts}
 		{id_annuaire?} {id_contact?} {id_auteur?} {id_parent ?= #ENV{id_parent}}
 		{recherche?} {auteurs.statut ?= #ENV{statut,''}} {where ?}
-		{tri #ENV{order,nom},#GET{defaut_tri}} {pagination #ENV{nb,20}}>
+		{tri #ENV{order,nom},#GET{defaut_tri}} {pagination #ENV{nb,20}} {0,#ENV{limit,n}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
 				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
