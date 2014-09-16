@@ -109,3 +109,28 @@ function filtre_f_bouton_action_dist($libelle, $url, $class="", $confirm="", $ti
   return "<form class='bouton_action_post' method='post' action='$url'><div>".form_hidden($url)
     ."<button type='submit' class='submit $class'$title$onclick>$libelle</button></div></form>";
 }
+
+
+/**
+ * Filtre pour afficher des étoiles à la suite via les
+ * icone foundation.
+ *
+ * @param mixed $nombre
+ * @access public
+ * @return mixed
+ */
+function filtre_etoile_foundation_dist ($nombre) {
+
+    $config = lire_config('foundation');
+
+    if (!$config['foundation-icons'])
+        return '<span>Les icones foundation ne sont pas activée !</span>';
+
+    $etoile = '<span class="foundation_etoile">';
+    for ($i=0;$i<$nombre; $i++) {
+        $etoile .= '<span class="fi-star"></span>';
+    }
+    $etoile .= '</span>';
+
+    return $etoile;
+}
