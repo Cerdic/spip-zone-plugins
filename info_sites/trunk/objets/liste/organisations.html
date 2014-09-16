@@ -42,8 +42,8 @@
 			<th class="picto"></th>
 			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
 			<th class='statut_juridique' scope='col'>[(#TRI{statut_juridique,<:contacts:label_statut_juridique:>,ajax})]</th>
-            <th class="nb_contacts"><:info_sites:info_nombre_contacts:></th>
-            <th class="nb_projets"><:info_sites:info_nombre_projets:></th>
+            <th class="nb_contacts" scope="col"><:info_sites:info_nombre_contacts:></th>
+            <th class="nb_projets" scope="col"><:info_sites:info_nombre_projets:></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -63,14 +63,14 @@
 			<td class="statu_juridique">[(#STATUT_JURIDIQUE)]</td>
 			<td class='nb_contacts'>
 				<B_contacts>
-				[<span class="badge pull-right">(#COMPTEUR_BOUCLE)</span>]
+				[<span class="badge pull-right">(#TOTAL_BOUCLE)</span>]
 				<ul class="list-unstyled spip">
 				<BOUCLE_contacts (CONTACTS) {id_organisation} {par nom}><li class="contact"><a href="#URL_CONTACT">[(#NOM)][, (#PRENOM)]</a></li></BOUCLE_contacts>
 				</ul>
 				</B_contacts><span class="badge pull-right">0</span><//B_contacts>
 			</td>
 			<td class="nb_projets">
-				<BOUCLE_projets (PROJETS) {id_organisation}>[(#REM) ]</BOUCLE_projets><span class="badge pull-right">#TOTAL_BOUCLE</span><//B_projets>
+				<BOUCLE_projets (PROJETS) {id_organisation} {statut==.*}>[(#REM) ]</BOUCLE_projets><span class="badge pull-right">#TOTAL_BOUCLE</span><//B_projets>
 			</td>
 		</tr>
 	</BOUCLE_liste_orga>

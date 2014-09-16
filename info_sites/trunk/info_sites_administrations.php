@@ -29,6 +29,7 @@ function info_sites_upgrade($nom_meta_base_version, $version_cible)
     $maj['1.0.2'][] = array('info_sites_menu_pages');
     $maj['1.0.3'][] = array('info_sites_menu_pages');
     $maj['1.0.4'][] = array('info_sites_menu_pages');
+    $maj['1.0.5'][] = array('info_sites_menu_pages');
 
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -64,6 +65,9 @@ function info_sites_menu_pages ()
             'projets' => array(
                 'nom' => 'info_sites:menu_projets',
                 'icone' => 'fa fa-folder fa-lg'),
+            'projets_cadres' => array(
+                'nom' => 'info_sites:menu_projets_cadres',
+                'icone' => 'fa  fa-clipboard fa-lg'),
             'projets_sites' => array(
                 'nom' => 'info_sites:menu_projets_sites',
                 'icone' => 'fa fa-desktop fa-lg'),

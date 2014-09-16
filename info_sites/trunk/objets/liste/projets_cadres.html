@@ -1,0 +1,35 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1, 
+	id_projets_cadre,1,
+	points,-1
+}})]<B_liste_projets_cadres>
+#ANCRE_PAGINATION
+<div class="liste-objets projets_cadres">
+<table class='table table-striped table-bordered'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_cadre:info_1_projets_cadre,projets_cadre:info_nb_projets_cadres}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id' scope='col'>[(#TRI{id_projets_cadre,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:projets_cadre:label_titre:>,ajax})]</th>
+			<th class='nb_projets' scope='col'><:info_sites:info_nombre_projets:></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_projets_cadres (PROJETS_CADRES) {id_mot?}{id_auteur?} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {par titre} {pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='id'>[(#AUTORISER{modifier,projets_cadre,#ID_PROJETS_CADRE}|?{
+				<a href="[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE})]">#ID_PROJETS_CADRE</a>,
+				#ID_PROJETS_CADRE
+			})]</td>
+			<td class='titre principale'>[(#LOGO_PROJETS_CADRE|image_reduire{20,26})]<a href="[(#ID_PROJETS_CADRE|generer_url_entite{projets_cadre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_CADRE">[(#RANG). ]#TITRE</a></td>
+			<td><BOUCLE_projets (PROJETS) {statut==.*} {id_projets_cadre}> </BOUCLE_projets>[<span class="badge">(#TOTAL_BOUCLE)</span>]</B_projets>
+			</td>
+		</tr>
+	</BOUCLE_liste_projets_cadres>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_projets_cadres>[
+<div class="liste-objets projets_cadres caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_projets_cadres>

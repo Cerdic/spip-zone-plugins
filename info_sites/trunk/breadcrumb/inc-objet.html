@@ -1,7 +1,8 @@
 <li><a href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
-<BOUCLE_contexte_rubrique(RUBRIQUES) {id_rubrique=(#OBJET|=={rubrique}|?{#INFO_ID_PARENT{#OBJET,#ID_OBJET},#INFO_ID_RUBRIQUE{#OBJET,#ID_OBJET}})}>
-<BOUCLE_ariane_hier(HIERARCHIE) {id_rubrique}{tout}>
+<BOUCLE_contexte_rubrique (RUBRIQUES) {id_rubrique=(#OBJET|=={rubrique}|?{#INFO_ID_PARENT{#OBJET,#ID_OBJET},#INFO_ID_RUBRIQUE{#OBJET,#ID_OBJET}})}>
+<BOUCLE_ariane_hier (HIERARCHIE) {id_rubrique}{tout}>
 <li><a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></li>
 </BOUCLE_ariane_hier>
 </BOUCLE_contexte_rubrique>
+[<li><a href="[(#URL_PAGE{[(#OBJET|table_objet)]})]">(#OBJET|objet_info{texte_objets}|_T)</a></li>]
 <li[(#ENV{expose,' '}|oui)class="active"]>[(#ID_OBJET|generer_url_entite{#OBJET}|lien_ou_expose{#INFO_TITRE{#OBJET,#ID_OBJET}|sinon{?}|couper{80},#ENV{expose,' '}|?{span}})][<span class="divider">(#ENV{expose,' '}|non)&gt; </span>]</li>

@@ -14,6 +14,11 @@
 		<div dir='#LANG_DIR' class='span statut'>[(#STATUT|puce_statut{projet,#ID_PROJET}) ][(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)]</div>
 	</div>
 
+	[<div class="champ contenu_date_publication[ (#DATE_PUBLICATION*|strlen|?{'',vide})]">
+		<div class="label visible"><:projet:label_date_publication:>&nbsp;: </div>
+		<div dir='#LANG_DIR' class='span #EDIT{date_publication} date_publication'>(#DATE_PUBLICATION|affdate)</div>
+	</div>]
+
 	<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
 
 	[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide hidden})]">
