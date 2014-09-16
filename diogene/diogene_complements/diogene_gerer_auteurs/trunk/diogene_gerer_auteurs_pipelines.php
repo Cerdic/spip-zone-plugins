@@ -39,7 +39,7 @@ function diogene_gerer_auteurs_diogene_ajouter_saisies($flux){
 			$nb_auteurs = sql_countsel('spip_auteurs','statut < 7');
 
 			if($nb_auteurs > 1){
-				$auteurs = sql_allfetsel("auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur!=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
+				$auteurs = sql_allfetsel("auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
 				if($GLOBALS['visiteur_session']['statut']=='0minirezo'){
 					$auteur = sql_fetsel("auteur.id_auteur","spip_auteurs as auteur LEFT join spip_auteurs_liens as auteur_lien ON auteur.id_auteur=auteur_lien.id_auteur","auteur.id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND auteur_lien.objet=".sql_quote($objet)." AND auteur_lien.id_objet=".intval($id_objet));
 					if(is_array($auteur))
@@ -121,8 +121,10 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 			}
 			foreach($auteurs_liste as $id_auteur){
 				if(!in_array($id_auteur,_request('diogene_gerer_auteurs'))){
-					$suppr = auteur_dissocier($id_auteur,array($type=>$id_objet));
-					suivre_invalideur("id='id_auteur/$id_auteur'",true);
+					if(!($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')){
+						$suppr = auteur_dissocier($id_auteur,array($type=>$id_objet));
+						suivre_invalideur("id='id_auteur/$id_auteur'",true);
+					}
 				}
 			}
 		}
