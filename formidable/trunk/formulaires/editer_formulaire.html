@@ -62,6 +62,13 @@
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				<p class="explication"><:formidable:editer_redirige_url_explication:></p>
 			</li>
+			#SET{name,resume_reponse}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:formidable:editer_resume_reponse:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				<p class="explication"><:formidable:editer_resume_reponse_explication:></p>
+			</li>
 		</ul>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

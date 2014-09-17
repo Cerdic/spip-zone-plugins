@@ -65,3 +65,43 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
 		);
 	}
 }
+
+/**
+ * Afficher le resume d'une reponse selon un modele qui contient des noms de champ "@input_1@ ..."
+ *
+ * @param int $id_formulaires_reponse
+ * @param int $id_formulaire
+ * @param string $resume_reponse
+ * @return string
+ */
+function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire=null, $modele_resume=null){
+	static $modeles_resume = array();
+	static $reponses_valeurs = array();
+	$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
+
+	if (is_null($id_formulaire)){
+		$id_formulaire = sql_getfetsel("id_formulaire","spip_formulaires_reponses","id_formulaires_reponse=".intval($id_formulaires_reponse));
+	}
+	if (is_null($modele_resume) AND !isset($modeles_resume[$id_formulaire])){
+		$modeles_resume[$id_formulaire] = sql_getfetsel("resume_reponse","spip_formulaires","id_formulaire=".intval($id_formulaire));
+	}
+	if (is_null($modele_resume))
+		$modele_resume = $modeles_resume[$id_formulaire];
+
+	if (!$modele_resume)
+		return "";
+
+	if (is_null($reponses_valeurs[$id_formulaires_reponse])) {
+		if ($champs = sql_allfetsel('nom,valeur', 'spip_formulaires_reponses_champs', 'id_formulaires_reponse = '.intval($id_formulaires_reponse))) {
+			foreach ($champs as $champ) {
+				$valeur = $tenter_unserialize($champ['valeur']);
+				if (is_array($valeur)) {
+					$valeur = implode(", ",$valeur);
+				}
+				$reponses_valeurs[$id_formulaires_reponse]["@".$champ['nom']."@"] = $valeur;
+			}
+		}
+	}
+
+	return str_replace(array_keys($reponses_valeurs[$id_formulaires_reponse]),array_values($reponses_valeurs[$id_formulaires_reponse]),$modele_resume);
+}

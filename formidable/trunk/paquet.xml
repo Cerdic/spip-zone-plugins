@@ -1,11 +1,11 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="2.6.6"
+	version="2.7.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
-	schema="0.6.3"
+	schema="0.6.4"
 	documentation="http://contrib.spip.net/Formidable-le-generateur-de-formulaires"
 >
 

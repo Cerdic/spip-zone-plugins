@@ -65,6 +65,10 @@ function formidable_upgrade($nom_meta_base_version, $version_cible){
 	$maj['0.6.3'] = array(
 		array('sql_alter','TABLE spip_formulaires_reponses_champs ADD UNIQUE reponse (id_formulaires_reponse,nom)'),
 	);
+	$maj['0.6.4'] = array(
+		// champ resume_reponse
+		array('maj_tables',array('spip_formulaires')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
