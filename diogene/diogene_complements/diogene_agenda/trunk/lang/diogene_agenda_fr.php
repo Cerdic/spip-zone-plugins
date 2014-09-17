@@ -1,6 +1,5 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/diogene/diogene_complements/diogene_gerer_auteurs/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -16,6 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_agenda_multiple' => 'Permettre de lier plusieurs événements à un article',
 	'label_agenda_obligatoire' => 'L\'événement est obligatoire',
 	'label_cfg_ajout_agenda' => 'Événement',
+	
+	// T
+	'titre_evenements_lies' => 'Événements liés'
 );
 
 ?>

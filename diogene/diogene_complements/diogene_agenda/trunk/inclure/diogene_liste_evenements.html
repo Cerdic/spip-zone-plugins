@@ -1,0 +1,17 @@
+<B_evenements>
+<div class="evenements_lies">
+<h2><:diogene_agenda:titre_evenements_lies:> (#GRAND_TOTAL)</h2>
+#ANCRE_PAGINATION
+<ul class="liste liste-items">
+<BOUCLE_evenements(EVENEMENTS){si #ENV{agenda_multiple,non}|=={on}}{id_article}{pagination 5}{!par date_debut}>
+<li class="item">
+	<INCLURE{fond=inclure/resume/diogene_evenement_simple,id_evenement} />
+	<p class="action">[(#ENV{editer_id_evenement}|=={#ID_EVENEMENT}|non)<a href="[(#SELF|parametre_url{editer_id_evenement,#ID_EVENEMENT})]" class="btn ajax"><:bouton_modifier:></a>][(#ENV{editer_id_evenement}|=={#ID_EVENEMENT}|oui)<a href="[(#SELF|parametre_url{editer_id_evenement,''})]" class="btn ajax"><:bouton_fermer:></a>] <a href="[(#URL_ACTION_AUTEUR{instituer_objet,evenement-#ID_EVENEMENT-poubelle,[(#SELF|parametre_url{editer_id_evenement,'0'})]})]" class="btn"><:agenda:lien_retirer_evenement:></a></p>
+	[(#ENV{editer_id_evenement}|=={#ID_EVENEMENT}|oui)
+	[(#FORMULAIRE_EDITER_EVENEMENT{#ID_EVENEMENT,#ID_ARTICLE,[(#SELF|parametre_url{editer_id_evenement,'0'})]})]]
+</li>
+</BOUCLE_evenements>
+</ul>
+[<div class="pagination">(#PAGINATION)</div>]
+</div>
+</B_evenements>

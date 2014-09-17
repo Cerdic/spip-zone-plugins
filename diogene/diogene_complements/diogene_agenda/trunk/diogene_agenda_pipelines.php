@@ -21,7 +21,10 @@ function diogene_agenda_diogene_ajouter_saisies($flux){
 		
 		$evenement = array();
 		$evenement['repetitions'] = array();
-		if(intval($id_objet)){
+		/**
+		 * Charger les champs de l'évènement
+		 */
+		if(intval($id_objet) && $flux['args']['options_complements']['agenda_multiple'] != 'on'){
 			$evenement = sql_fetsel('*','spip_evenements','id_article='.intval($id_objet).' AND statut != "poubelle"');
 			if($evenement['titre'] != sql_getfetsel('titre','spip_evenements','id_article='.intval($id_objet)))
 				$evenement['titre_evenement'] = $evenement['titre'];
@@ -224,12 +227,35 @@ function diogene_agenda_diogene_champs_texte($flux){
 function diogene_agenda_diogene_champs_pre_edition($array){
 	$array[] = 'agenda_caches';
 	$array[] = 'agenda_legende';
+	$array[] = 'agenda_multiple';
 	$array[] = 'agenda_obligatoire';
 	return $array;
 }
 
 function diogene_agenda_insert_head_css($flux){
 	$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('css/diogene_agenda.css')).'" type="text/css" media="all" />';
+	return $flux;
+}
+
+/**
+ * Insertion dans le formulaire diogene_avant_formulaire (plugin Diogene)
+ * 
+ * Insert des scripts javascript nécessaire au bon fonctionnement des formulaires d'édition :
+ * -* prive/javascript/presentation.js
+ * -* formulaires/dateur/inc-dateur.html si une date est présente dans le formulaire
+ * 
+ * @param array $flux 
+ * 		Le contexte du pipeline
+ * @return array $flux 
+ * 		Le contexte modifié
+ */
+function diogene_agenda_diogene_avant_formulaire($flux){
+	if(is_array(unserialize($flux['args']['champs_ajoutes'])) &&
+		(in_array('agenda',unserialize($flux['args']['champs_ajoutes'])))){
+			spip_log($flux['args']['options_complements']['agenda_multiple'],'test.'._LOG_ERREUR);
+			if($flux['args']['type'] && isset($flux['args']['id']) && intval($flux['args']['id']) > 0)
+				$flux['data'] .= recuperer_fond('inclure/diogene_liste_evenements',array('id_article'=>$flux['args']['id'],'editer_id_evenement' => _request('editer_id_evenement'),'agenda_multiple' => $flux['args']['options_complements']['agenda_multiple'],'debut_evenements' => _request('debut_evenements')));
+	}
 	return $flux;
 }
 ?>
