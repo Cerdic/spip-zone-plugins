@@ -22,7 +22,7 @@ function albums_afficher_complement_objet($flux) {
 	$type = $e['type'];
 	$id = intval($flux['args']['id']);
 
-	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('albums/objets'))) {
+	if (!$e['edition'] AND in_array(table_objet_sql($type),lire_config('albums/objets',array()))) {
 		$texte .= '<div class=\'nettoyeur\'></div>';
 		$texte .= recuperer_fond('prive/squelettes/contenu/albums_afficher_complement_objet', array(
 			'table_source' => 'albums',
