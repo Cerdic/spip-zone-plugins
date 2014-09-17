@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Verwijder deze link',
 
 	// C
-	'cfg_descr_gis' => 'Geografisch Informatie Systeem.<br /><a href="http://www.spip-contrib.net/3887" class="spip_out">Naar de documentatie</a>.', # MODIF
+	'cfg_descr_gis' => 'Geografisch Informatie Systeem.<br /><a href="http://www.spip-contrib.net/4189" class="spip_out">Naar de documentatie</a>.',
 	'cfg_inf_adresse' => 'Toon extra addresvelden (land, stad, staat, adres ...)',
 	'cfg_inf_bing' => 'De Bing Aerial layer heeft een sleutel nodig die je kunt aanmaken op <a href=\'@url@\' class="spip_out">de Bing website</a>.',
 	'cfg_inf_cloudmade' => 'Deze API heeft een sleutel nodig die je kunt aanmaken op <a href=\'@url@\' class="spip_out">de CloudMade website</a>.',
