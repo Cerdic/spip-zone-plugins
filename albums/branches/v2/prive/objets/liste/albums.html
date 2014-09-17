@@ -27,7 +27,7 @@
 #SET{liste, #ENV{liste, associer}}
 #SET{header, #ENV{header}|?{
 	#ENV{header}|is_array|?{#ENV{header},#VAL{'/\W/'}|preg_split{#ENV{header}}},
-	#LISTE{recherche}}
+	#LISTE{thead}}
 }
 #SET{colonnes, #ENV{colonnes}|?{
 	#ENV{colonnes}|is_array|?{#ENV{colonnes},#VAL{'/\W/'}|preg_split{#ENV{colonnes}}},
@@ -38,17 +38,8 @@
 <B_albums>
 #ANCRE_PAGINATION
 
-<div class='entete clearfix[ (#GET{liste})]'>
-	[<h2>(#ENV{recherche}|?{
-		[(#GRAND_TOTAL|singulier_ou_pluriel{album:info_resultat_recherche_un,album:info_resultat_recherche_plus})],
-		[(#GRAND_TOTAL|objet_afficher_nb{album})]
-	})</h2>]
-	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|et{#VAL{recherche}|in_array{#GET{header}}}|oui)
-		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-	]
-</div>
-
-<div class="liste-objets[ (#GET{liste})]">
+<div class="liste-objets albums[ (#GET{liste})]">
+	[<strong class="caption">(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{album}})</strong>]
 
 	[(#VAL{tri}|in_array{#GET{header}}|oui)
 	<navigation>
@@ -180,26 +171,6 @@
 	[<p class='pagination'>(#PAGINATION{prive})</p>]
 
 </div>
-</B_albums>
-
-<div class='entete bas clearfix[ (#GET{liste})]'>
-	[(#ENV{recherche}|oui)
-		<:album:info_resultat_recherche_aucun:>
-	]
-	[(#ENV{recherche}|non)
-		<h2>
-		#SET{nb_albums_total,#VAL{album}|table_objet_sql|sql_countsel{#ARRAY{objet=album}}}
-		[(#GET{nb_albums_total}=={0}|oui)
-			<:album:info_aucun_album:>
-		]
-		[(#GET{nb_albums_total}=={0}|non)
-			[(#GET{liste}|=={associer}|oui) <:album:info_aucun_album_supplementaire:> ]
-		]
-		</h2>
-	]
-	[(#GRAND_TOTAL|>{#ENV{nb}}|ou{#ENV{recherche}}|et{#VAL{recherche}|in_array{#GET{header}}}|oui)
-		#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-	]
-</div>
-
-<//B_albums>
+</B_albums>#SET{nb_albums_total,#VAL{album}|table_objet_sql|sql_countsel{#ARRAY{objet=album}}}[
+<div class="liste-objets albums caption-wrap"><strong class="caption">(#ENV*{sinon,[(#ENV{recherche}|?{'',[(#GET{nb_albums_total}|et{#GET{liste}|=={associer}|oui}|?{<:album:info_aucun_album_supplementaire:>,<:album:info_aucun_album:>})]})]})</strong></div>
+]<//B_albums>
