@@ -14,6 +14,12 @@
 .agenda_fieldset .editer_inscription .choix {display:inline;}
 .agenda_fieldset .editer_inscription .choix input.text {width:50px;margin-left:1em;/*vertical-align:top;*/}
 
+.editer_date_debut_fin label{
+  display:inline;
+}
+.formulaire_editer_evenement li.editer_date label.heure{
+  display:none;
+}
 /* le picker */
 
 /* begin: jQuery UI Datepicker moving pixels fix */
