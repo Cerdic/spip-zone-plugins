@@ -27,8 +27,9 @@ function action_maj_commits_projet_dist($id = null)
     }
 
     $id_projet = intval($id);
+    $import_auto = lire_config('rss_commits/import_auto', 'non');
 
-    if ($id_projet) {
+    if ($id_projet and $import_auto == 'oui') {
         include_spip('rss_commits_fonctions');
         include_spip('base/abstract_sql');
         $log = array();
@@ -89,7 +90,11 @@ function action_maj_commits_projet_dist($id = null)
         spip_log(implode("\n", $log), 'rss_commits');
 
     } else {
-        spip_log(__FUNCTION__ . " $id pas compris", 'rss_commits');
+        if ($import_auto == 'non') {
+            spip_log(__FUNCTION__ . " / L'import automatique est désactivée.", 'rss_commits');
+        } else {
+            spip_log(__FUNCTION__ . " / $id pas compris", 'rss_commits');
+        }
     }
 
     return true;

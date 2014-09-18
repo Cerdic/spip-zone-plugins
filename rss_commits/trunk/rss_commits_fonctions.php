@@ -21,7 +21,7 @@ function lister_rss_commits ($id_projet = null)
     $rss_items = array();
     $items = array();
     $where = "versioning_rss !=''";
-    if ($id_projet and is_int($id_projet)) {
+    if (!is_null($id_projet) and $id_projet = intval($id_projet)) {
         $where = "versioning_rss !='' AND id_projet=$id_projet";
     }
 

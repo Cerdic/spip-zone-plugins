@@ -1,0 +1,14 @@
+<h1><:commit:titre_commits:></h1>
+[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+<p class="explication"><:commits:alerte_import_auto_desactive:></p>]
+<div class="nettoyeur"></div>
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/commits, par=date_creation, env, ajax, sinon=<:commit:info_aucun_commit:>}>
+
+[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+<INCLURE{fond=prive/objets/liste/rss_commits, par=date_creation, env, ajax, sinon=<:commit:info_aucun_commit:>}>]
+[(#AUTORISER{creer,commit})
+	[(#URL_ECRIRE{commit_edit,new=oui}|icone_verticale{<:commit:icone_creer_commit:>,commit,new,right})]
+]

@@ -5,6 +5,11 @@
 	<div dir='#LANG_DIR' class='#EDIT{titre} titre span'>(#TITRE)</div>
 </div>]
 
+[<div class="champ contenu_date_creation[ (#DATE_CREATION*|strlen|?{'',vide})]">
+	<div class="label visible"><:commit:champ_date_creation_label:> : </div>
+	<div dir='#LANG_DIR' class='#EDIT{date_creation} date_creation span'>(#DATE_CREATION|affdate)</div>
+</div>]
+
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 	<div class="label visible"><:commit:champ_descriptif_label:> : </div>
 	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif span'>(#DESCRIPTIF)</div>

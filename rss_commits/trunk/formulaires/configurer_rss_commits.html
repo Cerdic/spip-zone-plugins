@@ -11,6 +11,12 @@
 
 		<ul>
 
+			[(#SAISIE{radio, import_auto,
+				label=<:commits:label_import_auto:>,
+				datas=#ARRAY{oui,<:commits:oui:>,non,<:commits:non:>},
+				explication=<:commits:explication_import_auto:>,
+				defaut=non})]
+
 			[(#SAISIE{explication, explication_curl,
 				texte=<:commits:explication_curl:>})]
 

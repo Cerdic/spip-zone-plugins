@@ -21,7 +21,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function rss_commits_taches_generales_cron($taches)
 {
-    $taches['import_commits'] = 1*3600; // toutes les heures
+    $import_auto = lire_config('rss_commits/import_auto', 'non');
+    if ($import_auto == 'oui') {
+        $taches['import_commits'] = 1*3600; // toutes les heures
+    }
     return $taches;
 }
 
