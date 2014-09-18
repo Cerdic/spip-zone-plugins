@@ -38,4 +38,16 @@ function declinaisons_formulaire_charger($flux){
     }
      return($flux);
 }
+
+// declare l'object pour le Plugin shop https://github.com/abelass/shop
+function declinaisons_shop_objets($flux){
+	
+	$flux['data']['declinaisons']=array(
+            'action'=>'declinaisons',
+            'nom_action'=>_T('declinaison:titre_declinaisons'),
+            'icone'=>'declinaisons-16.png',
+            );
+
+    return $flux;
+}
 ?>
