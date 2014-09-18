@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Signaler des abus
+ * Plugin Prix Objets
  * (c) 2012 My Chacra
  * Licence GNU/GPL
  */

@@ -34,4 +34,19 @@ function prix_objets_affiche_milieu($flux){
             }
     return $flux;
 }
+
+// declare l'object pour le Plugin shop https://github.com/abelass/shop
+function prix_objets_shop_objets($flux){
+	
+	$flux['data']['prix_objets']=array(
+	            'action'=>'prix_objets',
+	            'nom_action'=>_T('prix_objets:prix_objets_titre'),
+	            'icone'=>'prix_objets-16.png',
+	            'configurer'=>array(
+	                'titre'=>_T('prix_objets:titre_prix_objets'),
+	                'chemin'=>'prive/squelettes/contenu/configurer_prix_objets')
+            );
+
+    return $flux;
+}
 ?>
