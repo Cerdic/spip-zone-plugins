@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidable"
 	categorie="communication"
-	version="2.7.0"
+	version="2.7.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/formidable-64.png"
@@ -16,6 +16,8 @@
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="formidable_affiche_resume_reponse" action="" />
 
 	<pipeline nom="autoriser" inclure="formidable_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/formidable_tables.php" />

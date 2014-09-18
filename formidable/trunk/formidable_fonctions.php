@@ -25,6 +25,18 @@ function balise_VOIR_REPONSE_dist($p) {
 	return $p;
 }
 
+/**
+ * @param int $id_formulaires_reponse
+ * @param int $id_formulaire
+ * @param string $nom
+ * @param string $type_retour
+ *   'brut' : valeur brute
+ *   'valeur_uniquement' : la valeur seulement
+ *   defaut : tout le HTML de la saisie
+ * @param null|string $sans_reponse
+ *   texte affiche si aucune valeur en base pour ce champ
+ * @return array|string
+ */
 function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $type_retour=null, $sans_reponse=null){
 	static $formulaires_saisies = array();
 	static $reponses_valeurs = array();
@@ -76,8 +88,7 @@ function calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $nom, $t
  */
 function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire=null, $modele_resume=null){
 	static $modeles_resume = array();
-	static $reponses_valeurs = array();
-	$tenter_unserialize = charger_fonction('tenter_unserialize', 'filtre/');
+	static $modeles_vars = array();
 
 	if (is_null($id_formulaire)){
 		$id_formulaire = sql_getfetsel("id_formulaire","spip_formulaires_reponses","id_formulaires_reponse=".intval($id_formulaires_reponse));
@@ -91,17 +102,33 @@ function affiche_resume_reponse($id_formulaires_reponse, $id_formulaire=null, $m
 	if (!$modele_resume)
 		return "";
 
-	if (is_null($reponses_valeurs[$id_formulaires_reponse])) {
-		if ($champs = sql_allfetsel('nom,valeur', 'spip_formulaires_reponses_champs', 'id_formulaires_reponse = '.intval($id_formulaires_reponse))) {
-			foreach ($champs as $champ) {
-				$valeur = $tenter_unserialize($champ['valeur']);
-				if (is_array($valeur)) {
-					$valeur = implode(", ",$valeur);
-				}
-				$reponses_valeurs[$id_formulaires_reponse]["@".$champ['nom']."@"] = $valeur;
-			}
-		}
+	if (!isset($modeles_vars[$modele_resume])){
+		preg_match_all(",@(.*)@,Uims",$modele_resume,$matches);
+		$modeles_vars[$modele_resume] = $matches[1];
 	}
 
-	return str_replace(array_keys($reponses_valeurs[$id_formulaires_reponse]),array_values($reponses_valeurs[$id_formulaires_reponse]),$modele_resume);
+	$valeurs = array();
+	foreach($modeles_vars[$modele_resume] as $var){
+		$valeur = calculer_voir_reponse($id_formulaires_reponse, $id_formulaire, $var, 'valeur_uniquement', '');
+		$valeur = str_ireplace("</p>","",$valeur); // on ne veut pas du \n de PtoBR, mais on ne veut pas non plus faire un trim
+		$valeur = PtoBR($valeur);
+		if (strpos($valeur,"</li>")){
+			$valeur = explode("</li>",$valeur);
+			array_pop($valeur);
+			$valeur = implode(", ",$valeur);
+		}
+		$valeur = supprimer_tags($valeur);
+		$valeurs["@$var@"] = $valeur;
+	}
+	return pipeline('formidable_affiche_resume_reponse',
+		array(
+			'args' => array(
+				'id_formulaire' => $id_formulaire,
+				'id_formulaires_reponse' => $id_formulaires_reponse,
+				'modele_resume' => $modele_resume,
+				'valeurs' => $valeurs,
+			),
+			'data' => str_replace(array_keys($valeurs),array_values($valeurs),$modele_resume),
+		)
+	);
 }
