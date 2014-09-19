@@ -342,25 +342,22 @@
 									<span class='erreur_message'>(#GET{erreurs})</span>
 									]<input type="text" name="[(#GET{name}|cfgname_to_inputname)]" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="[(#GET{name}|cfgname_to_id)]" [(#HTML5|et{#GET{obli}})required='required']/>
 								</li>
-                                        			#SET{name,analytics/universal}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-                                        			<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-                                                        		<span class='erreur_message'>(#GET{erreurs})</span>
-                                                        		]
-                                                        		#SET{val_non,no}                                                        #SET{val,yes}
-                                                        		<div class="choix">[
-                                                                		(#REM) Valeur envoyee si case non cochee]
-                                                                		<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-                                                                		<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-                                                                		<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_analytics_universal:></label>
-                                                        		</div>
-                                        			</li>
+								#SET{name,analytics/universal}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									][(#SET{val_non,no})] [(#SET{val,yes})]
+									<div class="choix">[
+											(#REM) Valeur envoyee si case non cochee]
+											<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+											<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+											<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_analytics_universal:></label>
+									</div>
+								</li>
 							</ul>
 						</fieldset>
 					</li>
 				</ul>
 			</fieldset>
-
-
 			<p class="boutons">
 				<input type="submit" value="<:bouton_valider:>" class="submit" />
 			</p>
