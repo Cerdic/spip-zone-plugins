@@ -1,9 +1,10 @@
 <BOUCLE_extra (ORGANISATIONS) {id_organisation}>
-<div class="boutons_block">
-    <ul class="boutons_action">
+<div class="dropdown boutons">
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAction" data-toggle="dropdown"><:info_sites:btn_label_actions:> <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownAction">
     [(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
-        <li class="action"><a href="[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" ><i class="fa fa-lg fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a></li>
-        <li class="action"><a href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION})]" class="bouton editer_liens" rel="nofollow" target="_blank"><i class="fa fa-lg fa-link"></i> <:info_sites:editer_liens_organisation:></a></li>
+        <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}" title="<:info_sites:icone_modifier_organisation|attribut_html:>"><i class="fa fa-pencil-square-o"></i> <:info_sites:icone_modifier_organisation:></a></li>
+        <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION})]" class="bouton editer_liens" rel="nofollow" target="_blank" title="<:info_sites:editer_liens_organisation|attribut_html:>"><i class="fa fa-link"></i> <:info_sites:editer_liens_organisation:></a></li>
     ]</ul>
 </div>
 <div class="clearfix"></div>

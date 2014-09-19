@@ -47,12 +47,12 @@
 
 .bg-bright {
   background-color: @bg-bright;
-  color: #767676;
+  color: @gray-light;
 }
 
 .bg-reverse {
   background-color: @bg-reverse;
-  color: #767676;
+  color: @gray-light;
 }
 
 html, body {
@@ -182,8 +182,247 @@ table {
 }
 
 // --------
+// Les boutons de bootstrap
+// --------
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+.btn:hover, .btn:focus {
+    color: @gray-light;
+    text-decoration: none;
+}
+.btn:active, .btn.active {
+    outline: 0;
+    background-image: none;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.btn-default {
+    color: @gray-light;
+    background-color: @bg-bright;
+    border-color: darken(@bg-bright, 5%);
+    .badge {
+        color: @bg-bright;
+        background-color: @gray-light;
+    }
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open >.btn-default.dropdown-toggle {
+    color: @gray-light;
+    background-color: lighten(@gray-light, 41.5%);
+    border-color: lighten(@gray-light, 34.5%);
+}
+.btn-default:active, .btn-default.active, .open >.btn-default.dropdown-toggle {
+    background-image: none;
+}
+.btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
+    background-color: @bg-bright;
+    border-color: darken(@bg-bright, 5%);
+}
+.btn-primary {
+    color: white;
+    background-color: @bg-primary;
+    border-color: darken(@bg-primary, 5%); // #196fa5;
+    .badge {
+        color: @bg-primary;
+        background-color: white;
+    }
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open >.btn-primary.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-primary, 10%); // #15608f;
+    border-color: darken(@bg-primary, 17%); // #114b70;
+}
+.btn-primary:active, .btn-primary.active, .open >.btn-primary.dropdown-toggle {
+    background-image: none;
+}
+.btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
+    background-color: @bg-primary;
+    border-color: darken(@bg-primary, 5%); // #196fa5;
+}
+.btn-success {
+    color: white;
+    background-color: @bg-success; // @bg-success;
+    border-color: darken(@bg-success, 5%); // #1f9978;
+    .badge {
+        color: @bg-success; // @bg-success;
+        background-color: white;
+    }
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-success, 10%); //#1a8468;
+    border-color: darken(@bg-success, 17%); //#146650;
+}
+.btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
+    background-image: none;
+}
+.btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success[disabled].active, fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
+    background-color: @bg-success;
+    border-color: darken(@bg-success, 5%); // #1f9978;
+}
+.btn-info {
+    color: white;
+    background-color: @bg-info;
+    border-color: darken(@bg-info, 5%); // #1f9978;
+    .badge {
+        color: @bg-info;
+        background-color: white;
+    }
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open >.btn-info.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-info, 10%); // #259aa2;
+    border-color:  darken(@bg-info, 17%); // #1e7e85;
+}
+.btn-info:active, .btn-info.active, .open >.btn-info.dropdown-toggle {
+    background-image: none;
+}
+.btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active {
+    background-color: @bg-info; // #2ec1cc;
+    border-color:  darken(@bg-info, 5%); // #29adb7;
+}
+.btn-warning {
+    color: white;
+    background-color: @bg-warning;
+    border-color: darken(@bg-warning, 5%);
+    .badge {
+        color: @bg-warning;
+        background-color: white;
+    }
+}
+.btn-warning:hover, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open >.btn-warning.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-warning, 10%);
+    border-color: darken(@bg-warning, 17%);
+}
+.btn-warning:active, .btn-warning.active, .open >.btn-warning.dropdown-toggle {
+    background-image: none;
+}
+.btn-warning.disabled, .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled:active, .btn-warning.disabled.active, .btn-warning[disabled], .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled]:active, .btn-warning[disabled].active, fieldset[disabled] .btn-warning, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning:active, fieldset[disabled] .btn-warning.active {
+    background-color: @bg-warning;
+    border-color: darken(@bg-warning, 5%);
+}
+.btn-danger {
+    color: white;
+    background-color: @bg-danger;
+    border-color: darken(@bg-danger, 5%);
+    .badge {
+        color: @bg-danger;
+        background-color: white;
+    }
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open >.btn-danger.dropdown-toggle {
+    color: white;
+    background-color: darken(@bg-danger, 10%);
+    border-color: darken(@bg-danger, 17%);
+}
+.btn-danger:active, .btn-danger.active, .open >.btn-danger.dropdown-toggle {
+    background-image: none;
+}
+.btn-danger.disabled, .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled:active, .btn-danger.disabled.active, .btn-danger[disabled], .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled]:active, .btn-danger[disabled].active, fieldset[disabled] .btn-danger, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger:active, fieldset[disabled] .btn-danger.active {
+    background-color: @bg-danger;
+    border-color: darken(@bg-danger, 5%);
+}
+.btn-link {
+    color: @gray-dark;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius: 0;
+}
+.btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+    border-color: transparent;
+}
+.btn-link:hover, .btn-link:focus {
+    color: lighten(@black, 5%); // #0d0d0d;
+    text-decoration: underline;
+    background-color: transparent;
+}
+.btn-link[disabled]:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:hover, fieldset[disabled] .btn-link:focus {
+    color: lighten(@black, 60%); // #999999;
+    text-decoration: none;
+}
+.btn-lg, .btn-group-lg >.btn {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 2px;
+}
+.btn-sm, .btn-group-sm >.btn {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+.btn-xs, .btn-group-xs >.btn {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+.btn-block {
+    display: block;
+    width: 100%;
+    + .btn-block {
+            margin-top: 5px;
+        }
+}
+input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"].btn-block {
+    width: 100%;
+}
+
+
+
+// --------
 // Les boutons d'action
 // --------
+
+.boutons {
+	.largeur {
+		button {
+			width: 100%;
+		}
+		&.open {
+			ul.dropdown-menu {
+				width: 100%;
+			}
+		}
+	}
+}
+
 .boutons_block {
 	display: block;
 	border-collapse: collapse;
@@ -198,11 +437,10 @@ table {
 		.action {
 			display: inline-block;
 			float: left;
-			width: 50%;
+			width: 100%;
 			padding: 15px 5%;
-			font-size: 1.250em;
+			font-size: 1.125em;
 			&:nth-child(odd) {
-				clear: left;
 			}
 			.bouton {
 				color: @white;
@@ -293,6 +531,11 @@ table {
 }
 #extra {
 	padding-bottom: 1em;
+	.block {
+		.champ:first-child {
+			margin-top: 1em;
+		}
+	}
 }
 #aside {
 	color: @white;

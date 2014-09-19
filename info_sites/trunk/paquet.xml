@@ -1,7 +1,7 @@
 <paquet
     prefix="info_sites"
     categorie="outil"
-    version="0.6.0"
+    version="0.7.0"
     etat="dev"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/info_sites-64.png"
@@ -24,6 +24,8 @@
     <necessite nom="rss_commits" compatibilite="[0.5.0;]" />
 
     <utilise nom="info_spip" compatibilite="[0.6.8;]" />
+
+    <pipeline nom="affiche_milieu" inclure="info_sites_pipelines.php" />
 
     <pipeline nom="autoriser" inclure="info_sites_autorisations.php" />
 

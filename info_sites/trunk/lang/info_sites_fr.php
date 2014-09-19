@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // B
     'btn_diagnostic_iso' => 'Diagnostic ISO',
     'btn_diagnostic' => 'Diagnostic',
+    'btn_webservice_consultation' => 'Consulter le webservice',
+    'btn_label_actions' => 'Actions',
 
     // C
     'cfg_exemple' => 'Exemple',
@@ -63,6 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_branche_version' => 'Version',
     'label_controle' => 'Points de contrôle',
     'label_selectionner_site' => 'Sélectionner un site&nbsp;:',
+    'label_stats_general' => 'Statistiques générales',
+    'label_total' => 'Total',
     'label_validation' => 'Validation',
 
     // M
@@ -89,6 +93,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',
     'titre_logiciel_plugins_maj_meme_branche' => 'Mise à jour des plugins sur la même branche',
     'titre_page_configurer_info_sites' => 'Configurer le plugin Info Sites',
+
+    // W
+    'webservice_consultation' => 'Consultation du webservice',
 );
 
 ?>

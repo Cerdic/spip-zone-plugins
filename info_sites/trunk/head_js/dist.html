@@ -43,5 +43,21 @@
 			});
 		});
 
+		$('.liste-objets.commits .commit span.titre').click(function(event){
+			event.preventDefault();
+			var target = $(this);
+			var fiche = target.closest('tr').next('.fiche_commit');
+			if (fiche.hasClass('hidden')) {
+				fiche.addClass('visible').removeClass('hidden');
+				target.addClass('ouvert').removeClass('ferme');
+				target.find('i').addClass('fa-angle-double-down').removeClass('fa-angle-double-right');
+			} else if (fiche.hasClass('visible')) {
+				fiche.addClass('hidden').removeClass('visible');
+				target.addClass('ferme').removeClass('ouvert');
+				target.find('i').addClass('fa-angle-double-right').removeClass('fa-angle-double-down');
+			};
+		});
+
 	});
 </script>
+

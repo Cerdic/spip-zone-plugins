@@ -1,0 +1,65 @@
+[(#SET{auteur,#ENV{auteur,''}})]
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	date_creation,-1,
+	id_projet,1,
+	points,-1
+}})]<B_rss_commits>
+[(#ANCRE_PAGINATION)]
+<div class="liste-objets commits">
+<table class="spip liste table table-striped table-bordered">
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commit:info_1_commit,commit:info_nb_commits}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class="titre">[(#TRI{titre,<:commit:champ_titre_label:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th>
+			<th class='id_projet' scope='col'>[(#TRI{id_projet,<:commit:champ_id_projet_label:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_rss_commits (DATA) {source table, (#ENV{id_projet,''}|lister_rss_commits)} {auteur=#GET{auteur,''}} {descriptif ?} {texte ?} {pagination 10} {datacache 2400} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}} {env}>
+		<tr class="commit">
+			<td><span class="titre"><i class="fa fa-angle-double-right"></i> #TITRE</span></td>
+			<td><abbr title="#DATE_CREATION">[(#DATE_CREATION|affdate)]</abbr></td>
+			<td>[(#ID_PROJET). ]<a href="[(#ID_PROJET|generer_url_entite{projet})]">[(#INFO_TITRE{projet,#ID_PROJET})]</a></td>
+		</tr>
+		<tr class="fiche_commit hidden">
+			<td colspan="3">
+				<div class="fiche">
+					[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+						<div class="label visible"><:commit:champ_descriptif_label:> : </div>
+						<div dir='#LANG_DIR' class='descriptif span'>(#DESCRIPTIF)</div>
+					</div>]
+
+					[<div class="champ contenu_auteur[ (#AUTEUR*|strlen|?{'',vide})]">
+						<div class="label visible"><:commit:champ_auteur_label:> : </div>
+						<div dir='#LANG_DIR' class='auteur span'>(#AUTEUR)</div>
+					</div>]
+
+					[<div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+						<div class="label visible"><:commit:champ_texte_label:> : </div>
+						<div dir='#LANG_DIR' class='texte span'>(#TEXTE)</div>
+					</div>]
+
+					[<div class="champ contenu_url_revision[ (#URL_REVISION*|strlen|?{'',vide})]">
+						<div class="label visible"><:commit:champ_url_revision_label:> : </div>
+						<div dir='#LANG_DIR' class='url_revision span'><a href="#URL_REVISION" class="spip_out">(#URL_REVISION)</a></div>
+					</div>]
+
+					[<div class="champ contenu_guid[ (#GUID*|strlen|?{'',vide})]">
+						<div class="label visible"><:commit:champ_guid_label:> : </div>
+						<div dir='#LANG_DIR' class='guid span'><a href="#GUID" class="spip_out">(#GUID)</a></div>
+					</div>]
+				</div>
+			</td>
+		</tr>
+	</BOUCLE_rss_commits>
+	</tbody>
+</table>
+[<div class="pagination">(#PAGINATION{prive})</div>]
+</div>
+
+</B_rss_commits>[
+<div class="liste-objets commits caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="nettoyeur"></div>
+]<//B_rss_commits>
