@@ -7,7 +7,8 @@ function inc_preparer_destinataires($quoi, $id, $options) {
 	// Recuperation des destinataires configurés
 	$mails = lire_config('saveauto/notif_mail');
 	$tous = ($mails) ? explode(',', $mails) : array();
-	$tous[] = $GLOBALS['meta']['email_webmaster'];
+	if (lire_config('saveauto/notification_webmestre') == 1)
+		$tous[] = $GLOBALS['meta']['email_webmaster'];
 	$destinataires = pipeline('notifications_destinataires',
 		array(
 			'args'=>array('quoi'=>$quoi,'id'=>$id,'options'=>$options),

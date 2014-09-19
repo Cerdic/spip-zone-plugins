@@ -4,6 +4,8 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// A
+	'ajouter_webmestre' => "Ajouter le webmestre aux destinataires",
 
 	// B
 	'bouton_sauvegarder' => 'Sauvegarder la base',
@@ -28,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_mail_max_size' => 'Saisir la taille maximale en Mo du fichier de sauvegarde au-delà de laquelle le mail ne sera pas envoyé (valeur à vérifier auprès de votre fournisseur de mail).',
 	'help_max_zip' => 'Le fichier de sauvegarde est automatiquement zippé si sa taille est inférieure à un seuil. Saisir ce seuil en Mo. (Ce seuil est nécessaire pour ne pas planter le serveur par la confection d’un trop gros zip)',
 	'help_notif_active' => 'Si vous souhaitez être prévenus des traitements automatiques activez les notifications. Pour la sauvegarde automatique vous recevrez le fichier généré par mail si celui-ci n’est pas trop volumineux et que le plugin Facteur est activé.',
-	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",". Ces adresses s’ajoutent à celle du webmestre du site.',
+	'help_notif_mail' => 'Saisir les adresses en les séparant par des virgules ",".',
 	'help_obsolete' => 'Saisir la durée de conservation des sauvegardes en jours',
 	'help_prefixe' => 'Saisir le préfixe accolé au nom de chaque fichier de sauvegarde',
 	'help_repertoire' => 'Pour utiliser un répertoire de stockage différent de celui des sauvegardes SPIP, indiquez son chemin depuis la racine du site (avec / à la fin)',

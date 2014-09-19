@@ -116,6 +116,10 @@
 					<p class="explication"><:saveauto:help_notif_mail:></p>
 					<label for="notif_mail"><:saveauto:label_notif_mail:></label>
 					<input type="text" name="notif_mail" class="text" id="notif_mail" value="[(#ENV{notif_mail})]" />
+					<p class="explication choix"><label>
+						<input name="notification_webmestre" type="checkbox" value="1" [(#ENV{notification_webmestre}|=={1}|oui)checked="checked"] />
+						<:saveauto:ajouter_webmestre:>
+					</label></p>
 				</li>
 				<li class="editer_mail_max_size">
 					<label for="mail_max_size"><:saveauto:label_mail_max_size:></label>

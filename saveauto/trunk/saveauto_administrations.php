@@ -22,6 +22,9 @@ function saveauto_upgrade($nom_meta_base_version,$version_cible) {
 	$maj['0.1.1'] = array(
 		array('ecrire_config','saveauto/repertoire_save', _DIR_DUMP),
 	);
+	$maj['0.1.2'] = array(
+		array('ecrire_config','saveauto/notification_webmestre', 1),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -49,6 +52,7 @@ function saveauto_declarer_config() {
 		'tout_saveauto'			=> 'oui',
 		'tables_saveauto'		=> $tables,
 		'repertoire_save'		=> _DIR_DUMP,
+		'notification_webmestre'=> 1,
 	);
 
 	return $config;
