@@ -55,6 +55,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 // renvoie la configuration du pack actuel
 function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
+	include_spip('inc/presentation');
 	return debut_cadre_relief('', true)
 		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;" . couteauprive_T('pack_titre') . '</h3>'
 		. ((strlen($temp = cs_action_rapide('pack')))?"<div class='cs_action_rapide' id='cs_action_rapide'>$temp</div>":'')
@@ -94,6 +95,7 @@ function cs_description_trad() {
 	$modules = array('couteau', 'couteauprive', 'paquet-couteau_suisse');
 	$res = array();
 	foreach($modules as $m) $res[] = "\n-* " . couteauprive_T('trad_mod', array('mod'=>$m)) . cs_liste_langues($m);
+	include_spip('inc/presentation');
 	return debut_cadre_relief('', true)
 		. "<h3 class='titrem'><img src='"._DIR_IMG_PACK."puce-verte.gif' width='9' height='9' alt='-' />&nbsp;"
 		. (defined('_SPIP30000')?_T('info_traductions'):ucfirst(_T('afficher_trad'))) . '</h3>'

@@ -329,6 +329,7 @@ function glossaire_affiche_milieu($flux) {
 	if($flux['args']['exec']=='mot') {
 		$titre = sql_getfetsel('titre', 'spip_mots', '(id_mot='.intval($flux['args']['id_mot']).') AND (type='.glossaire_groupes().')');
 		if(!$titre) return $flux; // Ce n'est pas un mot du glossaire
+		include_spip('inc/presentation');
 		$flux['data'] .= debut_cadre_relief(cs_icone(24), true).'<b>'
 			. cs_lien(generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil=glossaire#cs_infos'), couteauprive_T('glossaire:nom')).'</b>'
 			. '<br/>&nbsp; > <b>'._T('info_titre').'</b> '.htmlentities($titre, ENT_QUOTES, $GLOBALS['meta']['charset']);
