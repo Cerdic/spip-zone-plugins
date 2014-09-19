@@ -1,6 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	titre,1,
 	date_creation,-1,
+	id_projet,1,
 	id_commit,1,
 	points,-1
 }})]<B_liste_commits>
@@ -13,6 +14,7 @@
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
 			<th class='titre' scope='col'>[(#TRI{titre,<:commit:champ_titre_label:>,ajax})]</th>
+			<th class='id_projet' scope='col'>[(#TRI{id_projet,<:commit:champ_id_projet_label:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_commit,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
@@ -20,8 +22,9 @@
 	<tbody>
 	<BOUCLE_liste_commits (COMMITS) {id_projet?} {id_mot?} {id_auteur?} {tout} {where?} {recherche?} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
-			<td class='picto'>[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</td>
+			<td class='picto'><a href="[(#ID_COMMIT|generer_url_entite{commit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMIT">[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</a></td>
 			<td class='titre principale'>[(#LOGO_COMMIT|image_reduire{20,26})]<a href="[(#ID_COMMIT|generer_url_entite{commit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_COMMIT">[(#RANG). ]#TITRE</a></td>
+			<td class="id_projet secondaire">[(#ID_PROJET). ]<a href="[(#ID_PROJET|generer_url_entite{projet})]">[(#INFO_TITRE{projet,#ID_PROJET})]</a></td>
 			<td class='date secondaire'>[(#DATE_CREATION|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,commit,#ID_COMMIT}|?{
 				<a href="[(#URL_ECRIRE{commit_edit,id_commit=#ID_COMMIT})]">#ID_COMMIT</a>,

@@ -32,13 +32,12 @@ function rss_commits_taches_generales_cron($taches)
  * Ajout de contenu sur certaines pages,
  * notamment des formulaires de liaisons entre objets
  *
- * @pipeline affiche_milieu
+ * @pipeline affiche_enfants
  * @param  array $flux Données du pipeline
  * @return array       Données du pipeline
  */
 function rss_commits_affiche_enfants($flux)
 {
-    $texte = "";
     $e = trouver_objet_exec($flux['args']['exec']);
     $lister_objets = charger_fonction('lister_objets', 'inc');
 
@@ -47,6 +46,35 @@ function rss_commits_affiche_enfants($flux)
         $id_projet = $flux['args']['id_projet'];
         $flux['data'] .= $lister_objets(
             'commits',
+            array(
+                'sinon'=>_T('commit:aucun_commit_projet'),
+                'id_projet'=>$id_projet,
+                'par'=>'date_creation'
+            )
+        );
+    }
+
+    return $flux;
+}
+
+/**
+ * Ajout de contenu sur certaines pages
+ *
+ * @pipeline afficher_complement_objet
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function rss_commits_afficher_complement_objet($flux)
+{
+    $texte = "";
+    $e = $flux['args'];
+    $import_auto = lire_config('rss_commits/import_auto', 'non');
+
+    // commits sur les projets
+    if (in_array($e['type'], array('projet'))
+        and $import_auto == 'non') {
+        $id_projet = $e['id'];
+        $flux['data'] .= recuperer_fond('prive/objets/liste/rss_commits',
             array(
                 'sinon'=>_T('commit:aucun_commit_projet'),
                 'id_projet'=>$id_projet,
@@ -109,4 +137,52 @@ function rss_commits_boite_infos($flux)
     return $flux;
 }
 
+/**
+ * Ajouter le fichier javascript dans la partie privée
+ *
+ * @param string $flux
+ * @return string
+ */
+function rss_commits_header_prive($flux)
+{
+    $flux .= "\n";
+    $flux .= '<script type="application/javascript" src="' . _DIR_PLUGIN_RSS_COMMITS . 'js/prive_rss_commits.js"></script>';
+    $flux .= "\n";
+
+    return $flux;
+}
+
+/**
+ * Affichage de la fiche complete des projets
+ *
+ * @param array $flux
+ * @return array
+ */
+function rss_commits_afficher_fiche_objet($flux)
+{
+    $import_auto = lire_config('rss_config/import_auto','non');
+    if (in_array($type = $flux['args']['type'],array('projet'))) {
+        $id = $flux['args']['id'];
+        $table = table_objet($type);
+        $id_table_objet = id_table_objet($type);
+        if ($import_auto == 'non') {
+            $flux['data'] .= recuperer_fond('prive/objets/liste/rss_commits',
+                array(
+                    'sinon'=>_T('commit:aucun_commit_projet'),
+                    'id_projet'=>$id,
+                    'par'=>'date_creation'
+                )
+            );
+        }
+        $flux['data'] .= recuperer_fond('prive/objets/liste/commits',
+            array(
+                'sinon'=>_T('commit:aucun_commit_projet'),
+                'id_projet'=>$id,
+                'par'=>'date_creation'
+            )
+        );
+    }
+
+    return $flux;
+}
 ?>

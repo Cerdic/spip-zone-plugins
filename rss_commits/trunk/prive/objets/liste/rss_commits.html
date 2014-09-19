@@ -7,20 +7,27 @@
 }})]<B_rss_commits>
 [(#ANCRE_PAGINATION)]
 <div class="liste-objets commits">
-<table class="spip liste table table-striped table-bordered">
+<table class="spip liste">
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{commit:info_1_commit,commit:info_nb_commits}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class="titre">[(#TRI{titre,<:commit:champ_titre_label:>,ajax})]</th>
-			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th>
-			<th class='id_projet' scope='col'>[(#TRI{id_projet,<:commit:champ_id_projet_label:>,ajax})]</th>
+			<th class='picto' scope='col'></th>
+			<th class="titre principale">[(#TRI{titre,<:commit:champ_titre_label:>,ajax})]</th>
+			<th class='id_projet secondaire' scope='col'>[(#TRI{id_projet,<:commit:champ_id_projet_label:>,ajax})]</th>
+			<th class='date secondaire' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_rss_commits (DATA) {source table, (#ENV{id_projet,''}|lister_rss_commits)} {auteur=#GET{auteur,''}} {descriptif ?} {texte ?} {pagination 10} {datacache 2400} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}} {env}>
 		<tr class="commit">
-			<td><span class="titre">#TITRE</span>
-				<div class="fiche hidden">
+			<td class='picto'>[(#CHEMIN_IMAGE{commit-16.png}|balise_img)]</td>
+			<td class="titre principale"><div class="titre">#TITRE</div></td>
+			<td class="id_projet secondaire">[(#ID_PROJET). ]<a href="[(#ID_PROJET|generer_url_entite{projet})]">[(#INFO_TITRE{projet,#ID_PROJET})]</a></td>
+			<td class="date secondaire"><abbr title="#DATE_CREATION">[(#DATE_CREATION|affdate)]</abbr></td>
+		</tr>
+		<tr class="fiche_commit hidden">
+			<td colspan="4">
+				<div class="fiche">
 					[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 						<div class="label visible"><:commit:champ_descriptif_label:> : </div>
 						<div dir='#LANG_DIR' class='descriptif span'>(#DESCRIPTIF)</div>
@@ -45,32 +52,14 @@
 						<div class="label visible"><:commit:champ_guid_label:> : </div>
 						<div dir='#LANG_DIR' class='guid span'><a href="#GUID" class="spip_out">(#GUID)</a></div>
 					</div>]
-
 				</div>
 			</td>
-			<td><abbr title="#DATE_CREATION">[(#DATE_CREATION|affdate)]</abbr></td>
-			<td>[(#ID_PROJET). ]<a href="[(#ID_PROJET|generer_url_entite{projet})]">[(#INFO_TITRE{projet,#ID_PROJET})]</a></td>
 		</tr>
 	</BOUCLE_rss_commits>
 	</tbody>
 </table>
 [<div class="pagination">(#PAGINATION{prive})</div>]
 </div>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.liste-objets.commits .commit span.titre').click(function(event){
-			event.preventDefault();
-			var fiche = $(this).next('.fiche');
-			fiche.toggleClass('hidden','visible');
-			if (fiche.hasClass('hidden')) {
-				$(this).addClass('ferme').removeClass('ouvert');
-			} else if (fiche.hasClass('visible')) {
-				$(this).addClass('ouvert').removeClass('ferme');
-			};
-		});
-	});
-</script>
 
 </B_rss_commits>[
 <div class="liste-objets commits caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
