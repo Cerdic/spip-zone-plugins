@@ -13,9 +13,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function seo_metas_editable($objet){
 	include_spip("inc/config");
-	$table_sql = table_objet_sql($objet);
-	if (in_array($table_sql,lire_config("seo/meta_tags/editable_tables",array("spip_articles","spip_rubriques"))))
-		return true;
+	if(lire_config('seo/meta_tags/activate','off') == 'yes' && lire_config('seo/meta_tags/activate_editing','off') == 'yes'){
+		$table_sql = table_objet_sql($objet);
+		if (in_array($table_sql,lire_config("seo/meta_tags/editable_tables",array("spip_articles","spip_rubriques"))))
+			return true;
+	}
 	return false;
 }
 /**
@@ -74,9 +76,9 @@ function seo_formulaire_traiter($flux){
 	if (strncmp($flux['args']['form'],"editer_",7)==0
 		AND $objet = substr($flux['args']['form'],7)
 		AND _request('seo_metas')
-	  AND $id_table_objet=id_table_objet($objet)
-	  AND isset($flux['data'][$id_table_objet])
-	  AND $id_objet=$flux['data'][$id_table_objet]){
+		AND $id_table_objet=id_table_objet($objet)
+		AND isset($flux['data'][$id_table_objet])
+		AND $id_objet=$flux['data'][$id_table_objet]){
 
 		$editer_seo = charger_fonction('editer_seo','action');
 			$err = $editer_seo($objet, $id_objet, "meta_");
@@ -89,7 +91,6 @@ function seo_formulaire_traiter($flux){
 				unset($flux['data']['redirect']);
 		}
 	}
-
 	return $flux;
 }
 
