@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ondoubleclick' => 'Action double-click sur la vidéo (’none’, ’fullscreen’, ’playpause’, ou URL à ouvrir) : ',
 	'label_ondoubleclicktarget' => 'Cible de l’URL au double click sur la vidéo : ',
 	'label_player_mp3' => 'Choix du lecteur',
+	'label_player_mp3_mejs' => 'Media Element Player',
 	'label_player_mp3_dewplayer' => 'Dew player',
 	'label_player_mp3_eraplayer' => 'Erational player',
 	'label_player_mp3_neoplayer' => 'Neolao player',

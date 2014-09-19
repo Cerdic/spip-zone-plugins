@@ -18,7 +18,7 @@ function player_upgrade($nom_meta_base_version,$version_cible){
 	$maj = array();
 
 	$default = array(
-		'player_mp3' => 'eraplayer'
+		'player_mp3' => 'mejs'
 	);
 	
 	$meta = (isset($GLOBALS['meta']['player'])?$GLOBALS['meta']['player']:$default);
