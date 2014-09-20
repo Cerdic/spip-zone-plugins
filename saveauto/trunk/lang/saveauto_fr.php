@@ -4,8 +4,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// A
-	'ajouter_webmestre' => "Ajouter le webmestre aux destinataires",
+	'ajouter_webmestre' => 'Ajouter le webmestre aux destinataires',
 
 	// B
 	'bouton_sauvegarder' => 'Sauvegarder la base',
