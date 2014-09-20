@@ -31,7 +31,7 @@
             <td class='date secondaire'>[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
             <td class='date secondaire'>[(#DATE_DEBUT|affdate_jourcourt|sinon{-})]</td>
             <td class='id'>[(#AUTORISER{modifier,projet,#ID_PROJET}|?{
-				<a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET})]">#ID_PROJET</a>,
+				<a href="[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if \(jQuery.modalbox\) {jQuery.modalbox\('[(#URL_ECRIRE{projet_edit,id_projet=#ID_PROJET}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]'\);return false;}" title="<:info_sites:icone_modifier_projet|attribut_html:>">#ID_PROJET</a>,
 				#ID_PROJET
 			})]</td>
 		</tr>

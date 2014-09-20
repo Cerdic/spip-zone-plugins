@@ -18,7 +18,7 @@
 	<BOUCLE_liste_projets_cadres (PROJETS_CADRES) {id_mot?}{id_auteur?} {where?} {recherche?} {tri #ENV{par,num titre},#GET{defaut_tri}} {par titre} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='id'>[(#AUTORISER{modifier,projets_cadre,#ID_PROJETS_CADRE}|?{
-				<a href="[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE})]">#ID_PROJETS_CADRE</a>,
+				<a href="[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if \(jQuery.modalbox\) {jQuery.modalbox\('[(#URL_ECRIRE{projets_cadre_edit,id_projets_cadre=#ID_PROJETS_CADRE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]'\);return false;}" title="<:info_sites:icone_modifier_projets_cadre|attribut_html:>">#ID_PROJETS_CADRE</a>,
 				#ID_PROJETS_CADRE
 			})]</td>
 			<td class='titre principale'>[(#LOGO_PROJETS_CADRE|image_reduire{20,26})]<a href="[(#ID_PROJETS_CADRE|generer_url_entite{projets_cadre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_CADRE">[(#RANG). ]#TITRE</a></td>

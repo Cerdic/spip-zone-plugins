@@ -30,8 +30,8 @@
             <td class='logiciel_nom'>[(#LOGICIEL_NOM)]</td>
             <td class='logiciel_version'>[(#LOGICIEL_VERSION)]</td>
             <td class='fo_url' scope='col'>[<a href="#FO_URL">(#FO_URL)</a>]</td>
-            <td class='id'>[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|?{
-				<a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE})]">#ID_PROJETS_SITE</a>,
+            <td class='id'>[(#SET{lien,''})][(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|?{
+				<a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if \(jQuery.modalbox\) {jQuery.modalbox\('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]'\);return false;}" title="<:info_sites:icone_modifier_projets_site|attribut_html:>">#ID_PROJETS_SITE</a>,
 				#ID_PROJETS_SITE
 			})]</td>
 		</tr>
