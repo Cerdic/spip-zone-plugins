@@ -12,7 +12,7 @@
 				<th><:projet:titre_projets:></th>
 				<th><:projets_cadre:titre_projets_cadres:></th>
 				<th><:projets_site:titre_projets_sites:></th>
-				<th><:commit:titre_commits:></th>
+				[(#PLUGIN{RSS_COMMITS}|oui)<th><:commit:titre_commits:></th>]
 			</tr>
 		</thead>
 		<tbody>
@@ -22,7 +22,7 @@
 				<td>[(#REM|nb_projets)]</td>
 				<td>[(#REM|nb_projets_cadres)]</td>
 				<td>[(#REM|nb_projets_sites)]</td>
-				<td>[(#REM|lister_rss_commits|count)]</td>
+				[(#PLUGIN{RSS_COMMITS}|oui)<td>[(#REM|lister_rss_commits|count)]</td>]
 			</tr>
 		</tbody>
 	</table>
@@ -60,6 +60,7 @@
 		<thead>
 			<tr>
 				<th><:projets_site:label_logiciel_nom:></th>
+				<th><:info_sites:stats_nb_logiciel_version:></th>
 				<th><:info_sites:label_total:></th>
 			</tr>
 		</thead>
@@ -67,6 +68,7 @@
 			<BOUCLE_logiciels (PROJETS_SITES) {fusion logiciel_nom}>
 			<tr>
 				<td>[(#LOGICIEL_NOM|sinon{-})]</td>
+				<td><BOUCLE_logiciel_version (PROJETS_SITES) {fusion logiciel_version} {logiciel_nom=#LOGICIEL_NOM}> </BOUCLE_logiciel_version>[(#TOTAL_BOUCLE)]</B_logiciel_version></td>
 				<td>[(#VAL{spip_projets_sites}|sql_countsel{logiciel_nom="#LOGICIEL_NOM"})]</td>
 			</tr>
 			</BOUCLE_logiciels>
@@ -74,6 +76,8 @@
 	</table>
 </div>
 </B_logiciels>
+
+
 
 <B_type_site>
 <div class="liste projets_sites type_site">

@@ -22,12 +22,14 @@
     [(#SET{projets_id,[(#GET{projets_id}|count|=={0}|?{0,[(#GET{projets_id}|join{","})]})]})]
     [(#SET{where,projets.id_projet IN \(#GET{projets_id}\)})]
     <INCLURE{fond=objets/liste/projets,where=#GET{where},ajax,env} />
-    [(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
-    [(#SET{where,commits.id_projet IN \(#GET{projets_id}\)})]
-    <INCLURE{fond=prive/objets/liste/commits,where=#GET{where},ajax,env} />]
-    [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
-    [(#SET{where,IN \(#GET{projets_id}\)})]
-    <INCLURE{fond=objets/liste/rss_commits,id_projet=#GET{projets_id},ajax,env} />]
+    [(#PLUGIN{RSS_COMMITS}|oui)
+        [(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
+        [(#SET{where,commits.id_projet IN \(#GET{projets_id}\)})]
+        <INCLURE{fond=prive/objets/liste/commits,where=#GET{where},ajax,env} />]
+        [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+        [(#SET{where,IN \(#GET{projets_id}\)})]
+        <INCLURE{fond=objets/liste/rss_commits,id_projet=#GET{projets_id},ajax,env} />]
+    ]
     [(#SET{where,''})]
 </div>
 <div class="clearfix"></div>

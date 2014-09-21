@@ -12,7 +12,7 @@
 
 		<INCLURE{fond=liste/projets-recherche,env,ajax} />
 
-		<INCLURE{fond=liste/commits-recherche,env,ajax} />
+		[(#PLUGIN{RSS_COMMITS}|oui)<INCLURE{fond=liste/commits-recherche,env,ajax} />]
 
 		<INCLURE{fond=liste/projets_sites-recherche,env,ajax} />
 

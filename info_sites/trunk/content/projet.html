@@ -20,7 +20,7 @@
 	</div>]
 
 	<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
-
+[(#PLUGIN{RSS_COMMIT}|oui)
 	[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide hidden})]">
 		<div class="label visible"><:commit:champ_versioning_path_label:>&nbsp;: </div>
 		<div dir='#LANG_DIR' class='span #EDIT{versioning_path} versioning_path'><a href="#VERSIONING_PATH">(#VERSIONING_PATH)</a></div>
@@ -40,7 +40,7 @@
 		<div class="label visible"><:commit:champ_versioning_rss_label:>&nbsp;: </div>
 		<div dir='#LANG_DIR' class='span #EDIT{versioning_rss} versioning_rss'><a href="#VERSIONING_RSS">(#VERSIONING_RSS)</a></div>
 	</div>]
-
+]
 </div>
 <div class="clearfix"></div>
 
@@ -48,11 +48,12 @@
 	id_parent=#ID_PROJET,
 	titre=<:contacts:info_projets_filles:>,
 	ajax}>
-
 <div class="clearfix"></div>
-<INCLURE{fond=prive/objets/liste/rss_commits, id_projet, par=date_creation, env, ajax} />
 
-
+[(#PLUGIN{RSS_COMMITS}|oui)
+	<INCLURE{fond=prive/objets/liste/rss_commits, id_projet, par=date_creation, env, ajax} />
+	<div class="clearfix"></div>
+]
 
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)

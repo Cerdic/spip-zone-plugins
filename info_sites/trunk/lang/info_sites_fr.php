@@ -88,6 +88,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'page_diagnostic' => 'Diagnostic',
 
     // S
+    'stats_nb_logiciel_version' => 'Nombre de versions du logiciel',
+    'stats_nb_versions' => 'Nombre de versions',
 
     // T
     'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',

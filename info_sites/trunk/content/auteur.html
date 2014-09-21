@@ -38,12 +38,13 @@
 		<div class="clearfix"></div>
 	</BOUCLE_autresobjets>
 
+	[(#PLUGIN{RSS_COMMITS}|oui)
 		[(#EMAIL|oui)
 		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
 		<INCLURE{fond=prive/objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />]
 		[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
 		<INCLURE{fond=objets/liste/rss_commits, par=date_creation,auteur=^#GET{email}, env, ajax, sinon=<:commit:info_aucun_commit:>}>]
-
+	]
 		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
 
 	</aside>

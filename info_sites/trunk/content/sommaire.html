@@ -27,8 +27,9 @@
         <div class="clearfix"></div>
     </BOUCLE_autresobjets>
 
+[(#PLUGIN{RSS_COMMITS}|oui)
     [(#SESSION{'email'}|oui)
     [(#SET{email,[(#SESSION{'email'}|explode{'@'}|table_valeur{0})]})]
     <INCLURE{fond=prive/objets/liste/commits,titre=<:commit:vos_commits:>,where=commits.auteur LIKE '%#GET{email}%',par=date_creation,sinon=<:commit:aucun_commit_auteur_identifie:>,ajax} />]
-
+]
 </section>
