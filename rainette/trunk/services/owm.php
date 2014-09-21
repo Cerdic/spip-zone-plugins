@@ -144,7 +144,6 @@ function owm_flux2previsions($flux, $lieu) {
 	$format = lire_config('rainette/owm/format', 'xml');
 
 	// Identification des suffixes d'unite pour choisir le bon champ
-	// -> wunderground fournit toujours les valeurs dans les deux systemes d'unites
 	$unite = lire_config('rainette/owm/unite', 'm');
 
 	// Construire le tableau standard des prévisions météorologiques propres au service
@@ -163,7 +162,7 @@ function owm_flux2previsions($flux, $lieu) {
 				// Determination, suivant le mode choisi, du code, de l'icone et du resume qui seront affiches
 				if ($condition == 'owm') {
 					// On affiche les prévisions natives fournies par le service.
-				// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
+					// Celles-ci etant deja traduites dans la bonne langue on stocke le texte exact retourne par l'API
 					$tableau[$_index][0]['icone']['code'] = $_prevision[0]['code_meteo'];
 					$url = _RAINETTE_OWM_URL_BASE_ICONE . '/' . $_prevision[0]['icon_meteo'] . '.png';
 					$tableau[$_index][0]['icone']['url'] = copie_locale($url);
