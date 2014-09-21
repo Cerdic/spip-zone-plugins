@@ -20,7 +20,13 @@
 				<p class="explication"><:projets_site:texte_non_fonction_referencement:></p>
 			</fieldset>
 			]]
-[(#SET{disabled,[(#ENV{webservice}|?{'oui',''})]})]
+[(#REM)
+	Si on a un webservice, on ne touche pas aux champs mis à jour par ce dernier
+][(#SET{disabled,[(#ENV{webservice}|?{'oui',''})]})]
+[(#REM)
+	Mais si on est sur une création d'un nouveau site (new=oui), on ne doit pas mettre 'disabled'
+	sur les champs, car SPIP 'reconnait' les champs disabled et ne les insère pas dans la table.
+][(#SET{disabled,[(#ENV{id}|=={new}|?{'',#GET{disabled}})]})]
 		<ul>
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:projets_site:label_titre:>,
