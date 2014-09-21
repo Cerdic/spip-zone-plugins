@@ -35,7 +35,7 @@ function projets_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			"id_projet"             => "bigint(21) NOT NULL",
 			"id_parent"             => "int(11) DEFAULT 0 NOT NULL",
-			"nom"                   => "varchar(75) DEFAULT '' NOT NULL",
+			"nom"			        => "text NOT NULL default ''",
 			"url_site"              => "varchar(255) DEFAULT '' NOT NULL",
 			"id_projets_cadre"      => "int(11) DEFAULT 0 NOT NULL",
 			"date_debut"            => "datetime NULL DEFAULT NULL",
