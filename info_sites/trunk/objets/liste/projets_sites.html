@@ -24,7 +24,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_projets_site?} {id_projet?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,type_site},#GET{defaut_tri}}{!par type_site}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_projets_site?} {id_projet?} {type_site ?} {logiciel_nom ?} {logiciel_version ?} {fo_url ?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,type_site},#GET{defaut_tri}}{!par type_site}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class="projets"><BOUCLE_liste_projets (spip_projets_sites_liens) {id_projets_site} {objet='projet'} {par id_objet}{', '}><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></BOUCLE_liste_projets></td>
 			<td class='nom principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ]#TITRE</a></td>

@@ -147,6 +147,12 @@ table {
 .liste-objets {
 	margin-top: 1em;
 	border-top: 1px solid @gray-third;
+	&.projets_sites {
+		&.caption-wrap {
+			padding-top: 0.5em;
+			padding-bottom: 0.5em;
+		}
+	}
 }
 
 .liste {
@@ -533,6 +539,9 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	padding-bottom: 1em;
 	.block {
 		.champ:first-child {
+			margin-top: 1em;
+		}
+		&.liste {
 			margin-top: 1em;
 		}
 	}
