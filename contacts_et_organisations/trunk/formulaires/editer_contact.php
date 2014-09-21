@@ -5,7 +5,7 @@
  * @plugin Contacts & Organisations pour Spip 3.0
  * @license GPL (c) 2009 - 2013
  * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
- * 
+ *
  * @package SPIP\Contacts\Formulaires
 **/
 
@@ -25,7 +25,7 @@ include_spip('inc/editer');
  *     URL de redirection après le traitement
  * @param string $associer_objet
  *     Éventuel 'objet|x' indiquant de lier le contact à cet objet,
- *     tel que 'article|3'   
+ *     tel que 'article|3'
  * @return array
  *     Environnement du formulaire
 **/
@@ -49,7 +49,7 @@ function formulaires_editer_contact_charger_dist($id_contact='new', $id_organisa
  *     URL de redirection après le traitement
  * @param string $associer_objet
  *     Éventuel 'objet|x' indiquant de lier le contact à cet objet,
- *     tel que 'article|3'   
+ *     tel que 'article|3'
  * @return array
  *     Tableau des éventuelles erreurs
 **/
@@ -63,7 +63,7 @@ function formulaires_editer_contact_verifier_dist($id_contact='new', $id_organis
  *
  * Crée l'enregistrement et l'association éventuelle avec un objet
  * indiqué
- * 
+ *
  * @param int|string $id_contact
  *     Identifiant du contact. 'new' pour un nouveau contact.
  * @param int $id_organisation
@@ -72,7 +72,7 @@ function formulaires_editer_contact_verifier_dist($id_contact='new', $id_organis
  *     URL de redirection après le traitement
  * @param string $associer_objet
  *     Éventuel 'objet|x' indiquant de lier le contact à cet objet,
- *     tel que 'article|3'   
+ *     tel que 'article|3'
  * @return array
  *     Retour des traitements
 **/
@@ -102,7 +102,7 @@ function formulaires_editer_contact_traiter_dist($id_contact='new', $id_organisa
 				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_contact, '&');
 		}
 	}
-	
+
 	return $res;
 }
 

@@ -26,19 +26,19 @@ include_spip('base/create');
  */
 function contacts_upgrade($nom_meta_base_version, $version_cible){
 	$maj = array();
-	
+
 	$maj['create'] = array(
 		array('creer_base'),
 	);
-	
+
 	$maj['1.1.0'] = array(
 		array('sql_alter', 'TABLE spip_contacts CHANGE prenom prenom tinytext NOT NULL DEFAULT ""'),
 	);
-	
+
 	$maj['1.1.1'] = array(
 		array('maj_tables', 'spip_contacts'),
 	);
-	
+
 	// Dupliquer pour les jointures automatiques
 	$maj['1.1.2'] = array(
 		array('maj_tables', array('spip_contacts', 'spip_comptes')),
@@ -48,12 +48,12 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_update', 'spip_contacts', array('id_contact'=>'id_auteur')),
 		array('sql_update', 'spip_comptes', array('id_compte'=>'id_auteur')),
 	);
-	
+
 	// On passe de compte à organisation
 	$maj['1.2.0'] = array(
 		array('sql_alter', 'TABLE spip_comptes DROP INDEX id_compte'),
 		array('sql_alter', 'TABLE spip_comptes_contacts DROP INDEX id_compte'),
-		
+
 		array('sql_alter', 'TABLE spip_comptes RENAME spip_organisations'),
 		array('sql_alter', 'TABLE spip_comptes_contacts RENAME spip_organisations_contacts'),
 
@@ -61,9 +61,9 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_organisations_contacts CHANGE id_compte id_organisation bigint(21) NOT NULL'),
 
 		array('sql_alter', 'TABLE spip_organisations ADD INDEX (id_organisation)'),
-		array('sql_alter', 'TABLE spip_organisations_contacts ADD INDEX (id_organisation)'),		
+		array('sql_alter', 'TABLE spip_organisations_contacts ADD INDEX (id_organisation)'),
 	);
-	
+
 	// On modifie quelques champs de la table organisations
 	$maj['1.2.1'] = array(
 		// renomme le champ 'type' en 'statut_juridique'
@@ -73,33 +73,33 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		// ajoute le champ 'activite'
 		array('sql_alter', "TABLE spip_organisations ADD activite TINYTEXT NOT NULL DEFAULT '' AFTER identification"),
 	);
-	
+
 	// Les clés primaires des tables contacts et organisations
 	// passent sur le id_contact et id_organisation au lieu du id_auteur
 	// afin de gérer éventuellement des contacts/organisations autonomes.
 	$maj['1.3.0'] = array(
 		array('sql_alter', 'TABLE spip_organisations DROP INDEX id_organisation'),
 		array('sql_alter', 'TABLE spip_organisations DROP PRIMARY KEY'),
-		array('sql_alter', 'TABLE spip_organisations CHANGE id_auteur id_auteur bigint(21) NOT NULL'), 
+		array('sql_alter', 'TABLE spip_organisations CHANGE id_auteur id_auteur bigint(21) NOT NULL'),
 		array('sql_alter', 'TABLE spip_organisations CHANGE id_organisation id_organisation bigint(21) NOT NULL auto_increment PRIMARY KEY'),
 		array('sql_alter', 'TABLE spip_organisations ADD INDEX (id_auteur)'),
-		
+
 		array('sql_alter', 'TABLE spip_contacts DROP INDEX id_contact'),
 		array('sql_alter', 'TABLE spip_contacts DROP PRIMARY KEY'),
-		array('sql_alter', 'TABLE spip_contacts CHANGE id_auteur id_auteur bigint(21) NOT NULL'), 
+		array('sql_alter', 'TABLE spip_contacts CHANGE id_auteur id_auteur bigint(21) NOT NULL'),
 		array('sql_alter', 'TABLE spip_contacts CHANGE id_contact id_contact bigint(21) NOT NULL auto_increment PRIMARY KEY'),
 		array('sql_alter', 'TABLE spip_contacts ADD INDEX (id_auteur)'),
 	);
-	
+
 	$maj['1.3.1'] = array(
 		array('sql_alter', "TABLE spip_contacts CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL"),
 		array('sql_alter', "TABLE spip_organisations CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL"),
 	);
-	
+
 	$maj['1.3.3'] = array(
 		array('sql_alter', "TABLE spip_contacts CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL"),
 	);
-	
+
 	// le champ id_auteur sur spip_organisations peut ne pas etre unique si une organisation
 	// n'est pas liee a un auteur (id_auteur=0). Plus tard, il faudra certainement mettre une
 	// table de relation spip_organisations_liens pour cela.
@@ -109,28 +109,28 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', "TABLE spip_organisations CHANGE id_auteur id_auteur bigint(21) DEFAULT 0 NOT NULL"),
 		array('sql_alter', "TABLE spip_organisations ADD INDEX (id_auteur)"),
 	);
-	
+
 	// Le champ id_parent sur spip_organisations pour définir des hiérarchies d'organisations.
 	$maj['1.3.5'] = array(
 		array('sql_alter', "TABLE spip_organisations ADD COLUMN id_parent bigint(21) DEFAULT 0 NOT NULL"),
 	);
-	
+
 	// Le champ type_liaison sur spip_organisations_contacts pour définir des types de liaisons donc.
 	$maj['1.3.6'] = array(
 		array('sql_alter', "TABLE spip_organisations_contacts ADD COLUMN type_liaison tinytext NOT NULL DEFAULT ''"),
 	);
-	
+
 	// On crée la table spip_organisations_liens
 	$maj['1.3.7'] = array(
 		array('maj_tables', 'spip_organisations_liens'),
 	);
-	
+
 	// Coquille sur la clé de spip_organisations_liens
 	$maj['1.4.1'] = array(
 		array('sql_alter', 'TABLE spip_organisations DROP INDEX id_contact'),
 		array('sql_alter', 'TABLE spip_organisations ADD INDEX (id_organisation)'),
 	);
-	
+
 	// Rajout d'un type_liaison dans les liens
 	$maj['1.4.2'] = array(
 		array('maj_tables', array('spip_contacts_liens', 'spip_organisations_liens')),
@@ -139,7 +139,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE `spip_contacts_liens` DROP PRIMARY KEY'),
 		array('sql_alter', 'TABLE `spip_contacts_liens` ADD PRIMARY KEY ( `id_contact` , `id_objet` , `objet`, `type_liaison`(25)) '),
 	);
-	
+
 	/*
 	Il s'agissait de supprimer spip_organisations_contacts
 	pour le mettre dans spip_organisations_liens...
@@ -149,7 +149,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	$maj['1.6.0'] = array(
 		array('contacts_maj_1_6_0'),
 	);
-	
+
 	$maj['1.7.1'] = array(
 		array('contacts_migrer_liens_auteurs'),
 	);
@@ -164,18 +164,18 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', "TABLE spip_contacts_liens CHANGE type_liaison type_liaison VARCHAR(25) NOT NULL DEFAULT ''"),
 		array('sql_alter', 'TABLE spip_contacts_liens ADD PRIMARY KEY ( id_contact, id_objet, objet, type_liaison)'),
 	);
-	
+
 	// Pour ceux qui ont déjà le plugin installé, on active déjà la gestion de l'arborescence pour garder la compat
 	$maj['1.8.0'] = array(
 		array('include_spip', 'inc/config'),
 		array('ecrire_config', 'contacts_et_organisations/utiliser_organisations_arborescentes', 'on'),
 	);
-	
+
 	// Ajout de la gestion d'annuaires différents
 	$maj['1.9.0'] = array(
 		array('maj_tables', array('spip_annuaires', 'spip_organisations', 'spip_contacts')),
 	);
-	
+
 	// Ajout de la possibilité de lier les fiches à n'importe quels objets, pas juste les rubriques
 	// Il faut donc migrer l'option lier_organisations_rubriques vers une autre plus générique
 	$maj['1.10.0'] = array(
@@ -231,7 +231,7 @@ function contacts_vider_tables($nom_meta_base_version) {
 function contacts_maj_1_6_0(){
 	// remettre spip_organisations_contacts si besoin
 	creer_base();
-	
+
 	// repeupler
 	$contacts = sql_allfetsel(
 		array('id_objet AS id_contact', 'id_organisation', 'type_liaison'),
@@ -290,14 +290,14 @@ function contacts_migrer_liens_auteurs() {
 			if (!$auteurs) {
 				// enlever eventuellement des id_auteur = 0 ?
 				sql_delete($table . '_liens', 'objet='.sql_quote('auteur'));
-			} 
+			}
 		}
 	}
 }
 
 /**
  * Mise à jour de la base 1.10.0
- * 
+ *
  * Déplace l'option lier_organisations_rubriques vers lier_organisations_objets plus générique
  *
  * @return void
@@ -305,10 +305,10 @@ function contacts_migrer_liens_auteurs() {
 function contacts_maj_1_10_0() {
 	include_spip('inc/config');
 	$lier_organisations_rubriques = lire_config('contacts_et_organisations/lier_organisations_rubriques');
-	
+
 	// On supprime l'ancienne option
 	effacer_config('contacts_et_organisations/lier_organisations_rubriques');
-	
+
 	// Si l'option était activée, on la réactive autre part
 	if ($lier_organisations_rubriques){
 		ecrire_config('contacts_et_organisations/lier_organisations_objets', array('spip_rubriques'));

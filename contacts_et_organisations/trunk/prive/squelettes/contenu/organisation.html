@@ -1,8 +1,8 @@
 <BOUCLE_organisation(ORGANISATIONS){id_organisation}{tous}{si #ENV{exec}|=={organisation}}>
 [(#BOITE_OUVRIR{[
-	
+
 	[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
-	
+
 		[(#ID_ORGANISATION|afficher_qui_edite{organisation}|non)
 			[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}|icone_verticale{<:contacts:organisation_editer:>,organisation,edit,right ajax preload})]
 		]

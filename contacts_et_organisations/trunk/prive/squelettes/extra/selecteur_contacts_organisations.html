@@ -12,7 +12,7 @@
 			<:contacts:est_un_contact:>
 		</a>
 </BOUCLE_est_un_contact>
-	
+
 	<BOUCLE_est_une_organisation(ORGANISATIONS){id_auteur}>
 		#SET{id_organisation,#ID_ORGANISATION}
 		<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]" title="<:contacts:organisation_voir:>">
@@ -22,19 +22,19 @@
 	</BOUCLE_est_une_organisation>
 			#SET{rien,1}
 	<//B_est_une_organisation>
-	
+
 <//B_est_un_contact>
 
 [(#AUTORISER{modifier,auteur,#ENV{id_auteur}})
 	[(#GET{rien}|oui)
 		<p class='explication'><:contacts:explication_contacts_ou_organisations:></p>
-		
+
 		[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{contact-24.png}
 			|balise_img{<:contacts:definir_auteur_comme_contact:>}|inserer_attribut{class,co_middle}
 			|concat{' ',<:contacts:definir_auteur_comme_contact:>})],
 			[(#URL_ACTION_AUTEUR{definir_contact,contact/#ID_AUTEUR,#SELF})],
 			ajax})]
-			
+
 		[(#BOUTON_ACTION{[(#CHEMIN_IMAGE{organisation-24.png}
 			|balise_img{<:contacts:definir_auteur_comme_organisation:>}|inserer_attribut{class,co_middle}
 			|concat{' ',<:contacts:definir_auteur_comme_organisation:>})],

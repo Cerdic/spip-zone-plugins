@@ -57,14 +57,14 @@ a mis a jour la valeur avec la page reelle]
 					<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 				</BOUCLE_liaison_autre>
 					[(#REM)
-						Ici, on liste les organisations mais elles sont liées 
+						Ici, on liste les organisations mais elles sont liées
 						sur autre chose que sur spip_organisations_liens
 						On ne peut savoir si la table a un type de liaison...
 						<td class='type'></td>
 					]
 				<//B_liaison_autre>
 			<//B_liaison_sur_contact>
-		
+
 			<td class='action'>
 				[(#AUTORISER{modifier, organisation, #ID_ORGANISATION}|oui)
 					<button class="button link delete" name="supprimer_lien#EVAL{chr(91)}organisation-#ID_ORGANISATION-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:contacts:organisation_retirer_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>

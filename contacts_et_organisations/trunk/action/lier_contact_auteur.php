@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Action pour lier un contact à un auteur
- * 
+ *
  * @param null|string $arg
  *     Couple `id_contact/id_auteur` tel que `8/3`
  *     En absence utilise l'argument de l'action sécurisée.
@@ -38,7 +38,7 @@ function action_lier_contact_auteur_dist($arg=null) {
 
 /**
  * Lie un contact à un auteur
- * 
+ *
  * @param int $id_contact
  *     Identifiant du contact
  * @param int $id_auteur

@@ -2,7 +2,7 @@
 
 /**
  * Gestion de l'action `definir_contact`
- * 
+ *
  * Crée et lie un contact ou une organisation à un auteur
  *
  * @plugin Contacts & Organisations pour Spip 3.0
@@ -42,7 +42,7 @@ function action_definir_contact_dist($arg=null) {
 	// Si on défini une organisation
 	elseif ($arg[0] == 'organisation' and intval($arg[1])) {
 		return action_definir_organisation_post($arg[1]);
-	}	
+	}
 	// Sinon ça veut rien dire
 	else {
 		spip_log("action_definir_contact_dist $arg pas compris");

@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Ajoute un fil d'ariane sur les auteurs définis comme contacts ou organisation
  *
  * @pipeline affiche_hierarchie
- * 
+ *
  * @param array $flux
  *     Données du pipeline
  * @return array
@@ -45,13 +45,13 @@ function contacts_affiche_hierarchie($flux)
 
 /**
  * Utilisation du pipeline afficher_contenu_objet
- * 
+ *
  * - Insertion dans la vue des auteurs des informations relatives aux
  *   contacts et organisations
  * - Insertion sur les rubriques du choix des organisations
  *
  * @pipeline afficher_contenu_objet
- * 
+ *
  * @param array $flux
  *     Données du pipeline
  * @return array
@@ -59,7 +59,7 @@ function contacts_affiche_hierarchie($flux)
  */
 function contacts_afficher_contenu_objet($flux) {
 	include_spip('inc/config');
-	
+
 	if ($flux['args']['type'] == 'auteur') {
 		if (lire_config('contacts_et_organisations/associer_aux_auteurs') and
 			lire_config('contacts_et_organisations/afficher_infos_sur_auteurs')) {
@@ -80,7 +80,7 @@ function contacts_afficher_contenu_objet($flux) {
 			}
 		}
 	}
-	
+
 	// Ajouter un bloc de liaison avec les organisations sur les objets configurés pour ça
 	if ($table = table_objet_sql($flux['args']['type']) and in_array($table, lire_config('contacts_et_organisations/lier_organisations_objets', array()))) {
 		$id = $flux['args']['id_objet'];
@@ -92,7 +92,7 @@ function contacts_afficher_contenu_objet($flux) {
 		));
 		$flux['data'] .= $infos;
 	}
-	
+
 	// Ajouter un bloc de liaison avec les contacts sur les objets configurés pour ça
 	if ($table = table_objet_sql($flux['args']['type']) and in_array($table, lire_config('contacts_et_organisations/lier_contacts_objets', array()))) {
 		$id = $flux['args']['id_objet'];
@@ -112,12 +112,12 @@ function contacts_afficher_contenu_objet($flux) {
 
 /**
  * Utilisation du pipeline affiche gauche
- * 
+ *
  * - Affichage du formulaire de choix Contact/Organisation
  *   dans la colonne de vue d'un auteur
  *
  * @pipeline affiche_gauche
- * 
+ *
  * @param array $flux
  *     Données du pipeline
  * @return array
@@ -141,7 +141,7 @@ function contacts_affiche_gauche($flux){
  * Ajoute une feuille de style pour la v-card
  *
  * @pipeline insert_head_css
- * 
+ *
  * @param string $flux
  *     Code HTML de chargement des CSS
  * @return string
@@ -160,7 +160,7 @@ function contacts_insert_head_css($flux){
  *
  * Si la configuration du plugin indique que la suppression d'un auteur entraîne la suppression
  * de la fiche de contact, alors on supprime effectivement ce contact.
- * 
+ *
  * @param array $flux
  * @return array
  */

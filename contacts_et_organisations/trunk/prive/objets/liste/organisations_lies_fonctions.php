@@ -8,7 +8,7 @@
  * @plugin Contacts & Organisations pour Spip 3.0
  * @license GPL (c) 2009 - 2013
  * @author Cyril Marion, Matthieu Marcillaud, Rastapopoulos
- * 
+ *
  * @package SPIP\Contacts\Fonctions
 **/
 

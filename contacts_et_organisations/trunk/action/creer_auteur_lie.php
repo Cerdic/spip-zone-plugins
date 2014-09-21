@@ -2,7 +2,7 @@
 
 /**
  * Gestion de l'action `creer_auteur_lie`
- * 
+ *
  * Crée et lie un auteur à un contact ou une organisation
  *
  * @plugin Contacts & Organisations pour Spip 3.0
@@ -22,7 +22,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * cette fonction ou en argument de l'action sécurisée et indique sur
  * qui est lié l'auteur créé.
  *
- * 
+ *
  * @param null|string
  *     Couple `type/id` où `type` est le type d'objet (organisation ou contact)
  *     et `id` son identifiant. En absence utilise l'argument de l'action sécurisée.
@@ -43,7 +43,7 @@ function action_creer_auteur_lie_dist($arg=null) {
 		switch($arg[0]) {
 
 			case 'contact':
-				$contact = sql_fetsel("nom, prenom", "spip_contacts", "id_contact=$arg[1]"); 
+				$contact = sql_fetsel("nom, prenom", "spip_contacts", "id_contact=$arg[1]");
 				$nom = trim($contact['prenom'] . " " . $contact['nom']);
 
 				// créer l'auteur en suivant l'API pour que les pipelines s'activent
@@ -60,10 +60,10 @@ function action_creer_auteur_lie_dist($arg=null) {
 				contact_modifier($arg[1], array("id_auteur" => $id_auteur));
 				break;
 
-			case 'organisation': 
+			case 'organisation':
 
 				// Code pour le cas present ou le id_auteur est dans la table organisations...
-				$organisation = sql_getfetsel("nom", "spip_organisations", "id_organisation=$arg[1]"); 
+				$organisation = sql_getfetsel("nom", "spip_organisations", "id_organisation=$arg[1]");
 				$nom = trim($organisation);
 
 				// créer l'auteur en suivant l'API pour que les pipelines s'activent

@@ -221,7 +221,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_contact' => 'Détails du contact',
+	'titre_contacts' => 'Les contacts',
 	'titre_organisation' => 'Détails de l’organisation',
+	'titre_organisations' => 'Les organisations',
 	'titre_page_configurer_contacts_et_organisations' => 'Configurer Contacts & Organisations',
 	'titre_page_contacts' => 'Gestion des contacts',
 	'titre_page_organisations' => 'Gestion des organisations',

@@ -1,5 +1,5 @@
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
-	
+
 <h3 class="titrem"><:contacts:titre_parametrages:></h3>
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -12,11 +12,11 @@
 	[(#SAISIE{oui_non,utiliser_annuaires,
 		label=<:contacts:cfg_utiliser_annuaires_label:>,
 		explication=<:contacts:cfg_utiliser_annuaires_explication:>})]
-	
+
 	[(#SAISIE{oui_non,utiliser_organisations_arborescentes,
 		label=<:contacts:cfg_utiliser_organisations_arborescentes_label:>,
 		explication=<:contacts:cfg_utiliser_organisations_arborescentes_explication:>})]
-		
+
 	[(#SAISIE{oui_non,activer_squelettes_publics_zpip1,
 		label=<:contacts:cfg_activer_squelettes_publics_zpip1:>,
 		explication=<:contacts:cfg_activer_squelettes_publics_zpip1_explication:>})]
@@ -39,7 +39,7 @@
 			</ul>
 		</fieldset>
 	</li>
-	
+
 	<li class='fieldset'>
 		<fieldset>
 			<legend><:contacts:cfg_relations_avec_objets:></legend>
@@ -48,7 +48,7 @@
 					label=<:contacts:cfg_lier_organisations_objets_label:>,
 					explication=<:contacts:cfg_lier_organisations_objets_explication:>,
 					exclus=#LISTE{spip_auteurs, spip_organisations, spip_contacts}})]
-				
+
 				[(#SAISIE{choisir_objets,lier_contacts_objets,
 					label=<:contacts:cfg_lier_contacts_objets_label:>,
 					explication=<:contacts:cfg_lier_contacts_objets_explication:>,
