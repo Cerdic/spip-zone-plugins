@@ -14,7 +14,8 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_site:info_1_projets_site,projets_site:info_nb_projets_sites}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='nom' scope='col'>[(#TRI{titre,<:projets_site:label_titre:>,ajax})]</th>
+			<th class='projets' scope='col'><:projet:titre_projets:></th>
+			<th class='nom principale' scope='col'>[(#TRI{titre,<:projets_site:label_titre:>,ajax})]</th>
             <th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:label_type_site:>,ajax})]</th>
             <th class='logiciel_nom' scope='col'>[(#TRI{logiciel_nom,<:projets_site:label_logiciel_nom:>,ajax})]</th>
             <th class='logiciel_version' scope='col'>[(#TRI{logiciel_version,<:projets_site:label_logiciel_version:>,ajax})]</th>
@@ -25,8 +26,9 @@
 	<tbody>
 	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_projets_site?} {id_projet?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,type_site},#GET{defaut_tri}}{!par type_site}{pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class="projets"><BOUCLE_liste_projets (spip_projets_sites_liens) {id_projets_site} {objet='projet'} {par id_objet}{', '}><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></BOUCLE_liste_projets></td>
 			<td class='nom principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ]#TITRE</a></td>
-            <td class='type_site'>[(#TYPE_SITE)]</td>
+            <td class='type_site'>[(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)]</td>
             <td class='logiciel_nom'>[(#LOGICIEL_NOM)]</td>
             <td class='logiciel_version'>[(#LOGICIEL_VERSION)]</td>
             <td class='fo_url' scope='col'>[<a href="#FO_URL">(#FO_URL)</a>]</td>
