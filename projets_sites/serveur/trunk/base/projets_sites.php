@@ -90,7 +90,7 @@ function projets_sites_declarer_tables_objets_sql($tables)
             "sas_login"          => "varchar(25) NOT NULL DEFAULT ''",
             "sas_password"       => "varchar(25) NOT NULL DEFAULT ''",
             "sgbd_type"          => "varchar(25) NOT NULL DEFAULT ''",
-            "sgbd_version"       => "varchar(25) NOT NULL DEFAULT ''",
+            "sgbd_version"       => "varchar(50) NOT NULL DEFAULT ''",
             "sgbd_serveur"       => "varchar(255) NOT NULL DEFAULT ''",
             "sgbd_port"          => "varchar(5) NOT NULL DEFAULT ''",
             "sgbd_nom"           => "varchar(50) NOT NULL DEFAULT ''",

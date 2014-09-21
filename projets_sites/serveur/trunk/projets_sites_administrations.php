@@ -85,6 +85,13 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('sql_alter', "TABLE spip_projets_sites_liens CHANGE id_site id_projets_site bigint(21) NOT NULL"),
     );
 
+    /*
+     * Il peut arriver que le numéro de version de la SGBD soit plus grand que 25. Exemple rencontré : `5.1.73-1.1+squeeze+build0+1-log`
+    **/
+    $maj['1.3.2'] = array(
+        array('sql_alter', "TABLE spip_projets_sites CHANGE sgbd_version sgbd_version varchar(50) NOT NULL DEFAULT ''")
+    );
+
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
