@@ -3,7 +3,7 @@
     # Si on nomme une regle, elle devient surchargeable
 
 todos:
-  match: "%(?:<todo([^>]*(?:format=([\"'])([^\"']+)\2)[^>]*|)>|[+][+][+])\n(.*?)\n(</todo>|[+][+][+])%s"
+  match: "%(?:<todo([^>]*(?:format=([\"'])([^\"']+)\2)[^>]*|)>|(?:\n|^)(?:\+\+\+))\n(.*?)\n(</todo>|(?:\+\+\+)(?:\n|$))%s"
   is_callback: Y
   replace: tw_todo
   priority: -40
