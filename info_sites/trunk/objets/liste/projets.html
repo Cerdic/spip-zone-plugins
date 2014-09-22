@@ -21,7 +21,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_projets(PROJETS) {id_parent?} {id_projets_cadre?} {id_organisation ?} {contacts_liens.id_contact ?} {id_mot?} {auteurs_liens.id_auteur?} {where?} {statut?} {recherche?} {tri #ENV{par,date_publication},#GET{defaut_tri}} {!par date_publication} {pagination #ENV{nb,10}}>
+	<BOUCLE_liste_projets(PROJETS) {id_projet_parent?} {id_projets_cadre?} {id_organisation ?} {contacts_liens.id_contact ?} {id_mot?} {auteurs_liens.id_auteur?} {where?} {statut?} {recherche?} {tri #ENV{par,date_publication},#GET{defaut_tri}} {!par date_publication} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class="organisation">
 				<BOUCLE_organisation (ORGANISATIONS projets_liens) {id_projet} {' / '}>

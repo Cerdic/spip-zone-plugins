@@ -624,6 +624,9 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 					width: 100%;
 				}
 			}
+			.explication + .choix {
+					margin-left: 28%;
+				}
 			.choix {
 				float: left;
 				margin-right: 1em;
@@ -635,6 +638,23 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 				}
 				input {
 					width: auto;
+				}
+			}
+			&.saisie_date {
+				position: relative;
+				.explication {
+					clear: right;
+				}
+				input {
+					width: 72%;
+					clear: right;
+				}
+				.ui-datepicker-trigger {
+					float: right;
+					position: absolute;
+					margin-left: 0;
+					right: 5px;
+					bottom: 10px;
 				}
 			}
 		}
