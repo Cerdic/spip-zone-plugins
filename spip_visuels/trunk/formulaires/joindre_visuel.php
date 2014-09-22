@@ -58,7 +58,7 @@ function formulaires_joindre_visuel_traiter_dist($objet,$id_objet){
 
 	
 	foreach ($fichiers as $cle => $valeur) {
-		$id_document[$cle] = joindre_le_visuel($id_objet,$valeur);
+		$id_document[$cle] = joindre_le_visuel($objet,$id_objet,$valeur);
 	}
 
 	foreach ($id_document as $numero => $id) {
@@ -103,10 +103,9 @@ function formulaires_joindre_visuel_traiter_dist($objet,$id_objet){
 ******************* */
 
 
-function joindre_le_visuel($id_objet,$fichier){
+function joindre_le_visuel($objet='article',$id_objet,$fichier){
 	if (!empty($fichier)) {
 		$id_document='new';
-		$objet='article';
 		$mode = 'auto';
 		$galerie = false;
 		$proposer_media=true;

@@ -5,7 +5,12 @@
 #SET{nbdocs,0}
 
 	[(#REM) Les visuels]
-	[(#SET{chaine_langue_titre_boite,<:spip_visuels:titre_boite:>})]
+	[(#ENV{objet}|=={article}|oui)
+		[(#SET{chaine_langue_titre_boite,<:spip_visuels:titre_boite_article:>})]
+	]
+	[(#ENV{objet}|=={rubrique}|oui)
+		[(#SET{chaine_langue_titre_boite,<:spip_visuels:titre_boite_rubrique:>})]
+	]
 	#BOITE_OUVRIR{#CHEMIN_IMAGE{spip_visuels-24.png}|balise_img{'',cadre-icone}|concat{#GET{chaine_langue_titre_boite}},'simple','titrem'}
 	<div class="liste" id='liste_visuels'>
 			<B_documents>

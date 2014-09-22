@@ -22,7 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_spip_visuels' => 'Configurer les visuels',
-	'titre_boite' => 'Visuels pour cet article',
+	'titre_boite_article' => 'Visuels pour cet article',
+	'titre_boite_rubrique' => 'Visuels pour cette rubrique',
 );
 
 ?>
