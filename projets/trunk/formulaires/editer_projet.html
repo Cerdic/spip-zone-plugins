@@ -2,16 +2,17 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#ENV{editable})
+	<BOUCLE_editable (PROJETS) {tout} {si #ENV{editable}}> </BOUCLE_editable>
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_projet' value='#ENV{id_projet}' />
 		<ul>
 
-			[(#SAISIE{projets, id_parent,
-				label=<:projet:label_id_parent:>,
-				explication=<:projet:explication_id_parent:> ,
+			[(#SAISIE{projets, id_projet_parent,
+				label=<:projet:label_id_projet_parent:>,
+				explication=<:projet:explication_id_projet_parent:>,
 				recursif=oui,id_projet=#ID_PROJET})]
+
 
 			[(#SAISIE{input, nom, obligatoire=oui,
 				label=<:projet:label_nom:>})]
@@ -76,5 +77,5 @@
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
-	]
+	</B_editable>
 </div>

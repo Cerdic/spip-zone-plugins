@@ -48,14 +48,14 @@ function exec_puce_statut_projets_args($id, $type)
 		$id = intval($id);
 		$r = sql_fetsel("id_projet,statut", $table_objet_sql, "$prim=$id");
 		$statut = $r['statut'];
-		$id_parent = $r['id_parent'];
+		$id_projet_parent = $r['id_projet_parent'];
 	}
 	else {
-		$id_parent = intval($id);
+		$id_projet_parent = intval($id);
 		$statut = 'prop'; // arbitraire
 	}
 	$puce_statut = charger_fonction('puce_statut', 'inc');
-	ajax_retour($puce_statut($id,$statut,$id_parent,$type, true));
+	ajax_retour($puce_statut($id,$statut,$id_projet_parent,$type, true));
 }
 
 ?>

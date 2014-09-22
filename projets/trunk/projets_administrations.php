@@ -33,6 +33,11 @@ function projets_upgrade($nom_meta_base_version, $version_cible) {
         array('sql_alter', "TABLE spip_projets CHANGE nom nom text NOT NULL default ''"),
 	);
 
+	$maj['1.1.3']  = array(
+        array('sql_alter', "TABLE spip_projets CHANGE id_parent id_projet_parent bigint(21) NOT NULL DEFAUT 0"),
+        array('sql_alter', "TABLE spip_projets CHANGE id_projets_cadre id_projets_cadre bigint(21) NOT NULL DEFAUT 0"),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

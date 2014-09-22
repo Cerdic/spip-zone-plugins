@@ -24,9 +24,12 @@ function formulaires_editer_projet_charger_dist($id_projet='new', $retour='', $a
 	$valeurs = formulaires_editer_objet_charger('projet',$id_projet,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
     if (!$valeurs['actif']) $valeurs['actif'] = 'oui';
 
-	if (!intval($id_projet) and $id_parent = _request('id_parent')){
-		$valeurs['id_parent'] = $id_parent;
+	if (!intval($id_projet) and $id_projet_parent = _request('id_projet_parent')){
+		$valeurs['id_projet_parent'] = $id_projet_parent;
 	}
+
+    $log = print_r($valeurs, true);
+    spip_log($log, 'projets');
 
 	return $valeurs;
 }
@@ -37,6 +40,9 @@ function formulaires_editer_projet_charger_dist($id_projet='new', $retour='', $a
 function formulaires_editer_projet_verifier_dist($id_projet='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
     $erreurs = formulaires_editer_objet_verifier('projet',$id_projet, array('nom'));
     $verifier = charger_fonction('verifier', 'inc');
+
+    $log = print_r($erreurs, true);
+    spip_log($log, 'projets');
 
     foreach (array(
         'date_publication',
@@ -63,6 +69,9 @@ function formulaires_editer_projet_verifier_dist($id_projet='new', $retour='', $
  */
 function formulaires_editer_projet_traiter_dist($id_projet='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$res = formulaires_editer_objet_traiter('projet',$id_projet,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+
+    $log = print_r($res, true);
+    spip_log($log, 'projets');
 
 	// Un lien a prendre en compte ?
 	if ($associer_objet AND $id_projet = $res['id_projet']) {

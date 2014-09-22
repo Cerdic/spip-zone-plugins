@@ -16,7 +16,7 @@
  *     Identifiant de l'objet
  * @param string $statut
  *     Statut actuel de l'objet
- * @param int $id_parent
+ * @param int $id_projet_parent
  *     Identifiant du parent, un formulaire
  * @param string $type
  *     Type d'objet
@@ -28,7 +28,7 @@
  * @return string
  *     Code HTML de l'image de puce de statut à insérer (et du menu de changement si présent)
 **/
-function puce_statut_projet_dist($id, $statut, $id_parent, $type='projet', $ajax = false, $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
+function puce_statut_projet_dist($id, $statut, $id_projet_parent, $type='projet', $ajax = false, $menu_rapide=_ACTIVER_PUCE_RAPIDE) {
 
 	$src = statut_image($type, $statut);
 	if (!$src)
