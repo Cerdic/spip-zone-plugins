@@ -18,8 +18,8 @@
 			<ul class="liste-items">
 				<BOUCLE_documents(spip_visuels){id_visuel IN #GET{les_docs}}{par date,id_visuel}{pagination 50}>
 					<li class="item" id="visu#ID_VISUEL">
-						<a href="#URL_SITE_SPIP/IMG/#FICHIER" class='mediabox'><img src="#URL_SITE_SPIP/IMG/#FICHIER" alt="" width='40' class='visuel' /></a>
-
+						[(#SET{le_fichier,[#URL_SITE_SPIP/IMG/(#FICHIER)]})]
+						<a href="#GET{le_fichier}" class='mediabox'>[(#GET{le_fichier}|balise_img{'','visuel'}|image_reduire{60})]</a>
 						<div class='ajax'>#FORMULAIRE_CHANGER_TYPE{#ID_VISUEL,#TYPE}</div>
 						<a href="#URL_ACTION_AUTEUR{supprimer_visuel,#ID_VISUEL:#ID_OBJET:#OBJET,#SELF|ancre_url{liste_visuels}}" class='lien_suppr_visuel' onclick="return confirm(&quot;Êtes-vous sûr de vouloir supprimer ce visuel ?&quot;)?((function(){jQuery(&quot;#visu#ID_VISUEL&quot;).animateRemove();return true;})()):false"><:spip_visuels:supprimer_visuel:></a>
 					</li>
