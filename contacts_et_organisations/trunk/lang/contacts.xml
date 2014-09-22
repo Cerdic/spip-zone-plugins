@@ -1,17 +1,17 @@
 <traduction module="contacts" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/contacts_et_organisations/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="176" traduits="127" relire="1" modifs="12" nouveaux="36" pourcent="72.16">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=en" total="178" traduits="127" relire="1" modifs="12" nouveaux="38" pourcent="71.35">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cyril MARION" lien="http://trad.spip.net/auteur/cyril-marion" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fa" total="176" traduits="88" relire="0" modifs="8" nouveaux="80" pourcent="50.00">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fa" total="178" traduits="88" relire="0" modifs="8" nouveaux="82" pourcent="49.44">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fr" total="176" traduits="176" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=fr" total="178" traduits="178" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=sk" total="176" traduits="167" relire="0" modifs="0" nouveaux="9" pourcent="94.89">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/contacts?lang_cible=sk" total="178" traduits="167" relire="0" modifs="0" nouveaux="11" pourcent="93.82">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
