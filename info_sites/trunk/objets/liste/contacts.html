@@ -37,7 +37,6 @@
 [<caption><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class="picto"></th>
 			<th class="nom">[(#TRI{nom,<:contacts:label_prenom_nom:>,ajax})]</th>
 			<th class="organisation"><:contacts:label_organisation:></th>
 			<th class='auteur'><:contacts:label_auteur_associe:></th>
@@ -45,7 +44,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_contacts(CONTACTS)
+	<BOUCLE_liste_contacts (CONTACTS)
 		{id_organisation?} {recherche ?} {id_annuaire?} {id_projet ?}
 		{auteurs.statut ?= #ENV{statut,''}}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
@@ -55,7 +54,6 @@
 			</BOUCLE_lien_contact>
 				[(#SET{url,[(#ID_CONTACT|generer_url_entite{contact})]})]
 			<//BOUCLE_lien_contact>
-			<td class="picto"><a href="[(#GET{url})]">#INCLURE{fond=logo/contact, id_contact}</a></td>
 			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir|attribut_html:>">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
 			<td class='organisation'>[(#ORGANISATIONS|sinon{-})]</td>
 			<td class='auteur'>

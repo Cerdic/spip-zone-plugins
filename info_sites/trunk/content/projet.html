@@ -44,14 +44,17 @@
 </div>
 <div class="clearfix"></div>
 
-<INCLURE{fond=prive/objets/liste/projets,
+<INCLURE{fond=objets/liste/projets,
 	id_projet_parent=#ID_PROJET,
-	titre=<:contacts:info_projets_filles:>,
-	ajax}>
-<div class="clearfix"></div>
+	titre=<:projet:info_tous_les_sous_projets:>,
+	env,ajax}>
+[(#INCLURE{fond=objets/liste/projets, id_projet_parent=#ID_PROJET}|strlen|>{0}|oui)<div class="clearfix"></div>]
 
 [(#PLUGIN{RSS_COMMITS}|oui)
-	<INCLURE{fond=prive/objets/liste/rss_commits, id_projet, par=date_creation, env, ajax} />
+	[(#SET{id_projet,[(#VERSIONING_RSS|?{#ID_PROJET,#ID_PROJET_PARENT})]})]
+	[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+	<INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{id_projet}, par=date_creation, env, ajax} />][(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
+	<INCLURE{fond=objets/liste/commits, id_projet=#GET{id_projet}, par=date_creation, env, ajax} />]
 	<div class="clearfix"></div>
 ]
 

@@ -39,7 +39,6 @@
 	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_sites:info_1_organisation,info_sites:info_nb_organisations}})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class="picto"></th>
 			<th class='nom' scope='col'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
 			<th class='statut_juridique' scope='col'>[(#TRI{statut_juridique,<:contacts:label_statut_juridique:>,ajax})]</th>
             <th class="nb_contacts" scope="col"><:info_sites:info_nombre_contacts:></th>
@@ -58,7 +57,6 @@
 			</BOUCLE_lien_organisation>
 				[(#SET{url,[(#ID_ORGANISATION|generer_url_entite{organisation})]})]
 			<//BOUCLE_lien_organisation>
-			<td class="picto"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
 			<td class="statu_juridique">[(#STATUT_JURIDIQUE)]</td>
 			<td class='nb_contacts'>

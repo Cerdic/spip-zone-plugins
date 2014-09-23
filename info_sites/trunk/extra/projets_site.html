@@ -25,7 +25,7 @@
     [(#PLUGIN{RSS_COMMITS}|oui)
         [(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
         [(#SET{where,commits.id_projet IN \(#GET{projets_id}\)})]
-        <INCLURE{fond=prive/objets/liste/commits,where=#GET{where},ajax,env} />]
+        <INCLURE{fond=objets/liste/commits,where=#GET{where},ajax,env} />]
         [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
         [(#SET{where,IN \(#GET{projets_id}\)})]
         <INCLURE{fond=objets/liste/rss_commits,id_projet=#GET{projets_id},ajax,env} />]
