@@ -12,15 +12,15 @@
 		</tr>
 		<tr>
 			<td><a href="[(#URL_ECRIRE{configurer_contacts})#lier_contacts_objets_spip_projets]"><:info_sites:controle_contacts_lies_aux_projets:></a></td>
-			<td class="[(#VAL{'spip_projets'}|in_array{#CONFIG{contacts_et_organisations/lier_contacts_objets}}|?{success,notice warning})]"><span>[(#VAL{'spip_projets'}|in_array{#CONFIG{contacts_et_organisations/lier_contacts_objets}}|?{<:info_sites:oui:>,<:info_sites:non:>})]</span></td>
+			<td class="[(#VAL{'spip_projets'}|in_array{#CONFIG{contacts_et_organisations/lier_contacts_objets,#ARRAY}}|?{success,notice warning})]"><span>[(#VAL{'spip_projets'}|in_array{#CONFIG{contacts_et_organisations/lier_contacts_objets}}|?{<:info_sites:oui:>,<:info_sites:non:>})]</span></td>
 		</tr>
 		<tr>
 			<td><a href="[(#URL_ECRIRE{configurer_coordonnees})#objets_spip_contacts]"><:info_sites:controle_coordonnees_liees_contacts:></a></td>
-			<td class="[(#VAL{'spip_contacts'}|in_array{#CONFIG{coordonnees/objets}}|?{success,notice warning})]"><span>[(#VAL{'spip_contacts'}|in_array{#CONFIG{coordonnees/objets}}|?{<:info_sites:oui:>,<:info_sites:non:>})]</span></td>
+			<td class="[(#VAL{'spip_contacts'}|in_array{#CONFIG{coordonnees/objets,#ARRAY}}|?{success,notice warning})]"><span>[(#VAL{'spip_contacts'}|in_array{#CONFIG{coordonnees/objets,#ARRAY}}|?{<:info_sites:oui:>,<:info_sites:non:>})]</span></td>
 		</tr>
 		<tr>
 			<td><a href="[(#URL_ECRIRE{configurer_projets})#objets_spip_organisations]"><:info_sites:controle_projets_lies_organisations:></a></td>
-			<td class="[(#VAL{'spip_organisations'}|in_array{#CONFIG{projets/objets}}|?{success,notice warning})]"><span>[(#VAL{'spip_organisations'}|in_array{#CONFIG{projets/objets}}|?{<:info_sites:oui:>,<:info_sites:non:>})]</span></td>
+			<td class="[(#VAL{'spip_organisations'}|in_array{#CONFIG{projets/objets,#ARRAY}}|?{success,notice warning})]"><span>[(#VAL{'spip_organisations'}|in_array{#CONFIG{projets/objets,#ARRAY}}|?{<:info_sites:oui:>,<:info_sites:non:>})]</span></td>
 		</tr>
 		<tr>
 			<td><:info_sites:controle_info_sites_menu_organisations:></td>

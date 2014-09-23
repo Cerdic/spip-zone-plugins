@@ -1,7 +1,7 @@
 <paquet
     prefix="info_sites"
     categorie="outil"
-    version="0.8.2"
+    version="0.8.3"
     etat="dev"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/info_sites-64.png"
