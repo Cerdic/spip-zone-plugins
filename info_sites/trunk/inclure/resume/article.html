@@ -5,29 +5,36 @@
 
 ]
 <BOUCLE_articles(ARTICLES) {id_article} {statut?}>
-<article class="entry article hentry">
-	<div class="panel-title">
-		<h3 class="h3-like entry-title"><a href="#URL_ARTICLE" rel="bookmark">[(#ENV{logo_rubrique,' '}|?{#LOGO_ARTICLE_RUBRIQUE,#LOGO_ARTICLE}|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]#TITRE <span class="read-more hide"><i class="fa fa-lg fa-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a></h3>
+<article class="entry article hentry row">
+	<div class="col-xs-3">
+		<a href="#URL_ARTICLE" rel="bookmark">[(#ENV{logo_rubrique,' '}|?{#LOGO_ARTICLE_RUBRIQUE,#LOGO_ARTICLE}|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]</a>
 	</div>
-	<div class="panel-body">
-		<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="fa fa-lg fa-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span><i class="fa fa-lg fa-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
-		[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
-		<p class="postmeta">
-		<BOUCLE_nb_commentaires (FORUMS) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
-			<span class="comments">
-			<span class="sep">|</span>
-			<a[ href="(#URL_ARTICLE|ancre_url{comments})"] class="nb_commentaires" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_commentaire,zcore:info_nb_commentaires}|attribut_html)"]>[<i class="fa fa-lg fa-comment"></i> (#TOTAL_BOUCLE)]</a>
-			</span>
-			]
-		<//B_nb_commentaires>
-		<BOUCLE_combien (SIGNATURES) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
-			<span class="signatures">
-			<span class="sep">|</span>
-			<a[ href="(#URL_ARTICLE|ancre_url{petition})"] class="nb_signatures" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_signature,zcore:info_nb_signatures}|attribut_html)"]>[<i class="fa fa-lg fa-ok-circle"></i> (#TOTAL_BOUCLE)]</a>
-			</span>
-			]
-		<//B_combien>
-		</p>
+	<!-- /.col-xs-3 -->
+	<div class="col-xs-9">
+		<div class="title">
+			<h3 class="h3-like entry-title"><a href="#URL_ARTICLE" rel="bookmark">#TITRE <span class="read-more hide"><i class="fa fa-lg fa-chevron-right" title="<:zcore:lire_la_suite|attribut_html:><:zcore:lire_la_suite_de|attribut_html:>&laquo;[(#TITRE|attribut_html)]&raquo;"></i></span></a></h3>
+		</div>
+		<div class="body">
+			<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="fa fa-lg fa-calendar"></i> (#DATE|affdate_jourcourt)</time>][<span class="authors"><span class="sep">, </span><i class="fa fa-lg fa-user"></i> <:par_auteur:> (#LESAUTEURS)</span>]</p>
+			[<div class="#EDIT{intro} introduction entry-content">(#INTRODUCTION{#ENV{coupe,300}})</div>]
+			<p class="postmeta">
+			<BOUCLE_nb_commentaires (FORUMS) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
+				<span class="comments">
+				<span class="sep">|</span>
+				<a[ href="(#URL_ARTICLE|ancre_url{comments})"] class="nb_commentaires" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_commentaire,zcore:info_nb_commentaires}|attribut_html)"]>[<i class="fa fa-lg fa-comment"></i> (#TOTAL_BOUCLE)]</a>
+				</span>
+				]
+			<//B_nb_commentaires>
+			<BOUCLE_combien (SIGNATURES) {id_article}{plat} />[(#TOTAL_BOUCLE|oui)
+				<span class="signatures">
+				<span class="sep">|</span>
+				<a[ href="(#URL_ARTICLE|ancre_url{petition})"] class="nb_signatures" [title="(#TOTAL_BOUCLE|singulier_ou_pluriel{zcore:info_1_signature,zcore:info_nb_signatures}|attribut_html)"]>[<i class="fa fa-lg fa-ok-circle"></i> (#TOTAL_BOUCLE)]</a>
+				</span>
+				]
+			<//B_combien>
+			</p>
+		</div>
 	</div>
+	<!-- /.col-xs-9 -->
 </article>
 </BOUCLE_articles>
