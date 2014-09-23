@@ -3,7 +3,7 @@
 <BOUCLE_si_parent (CONDITION) {si #ID_PROJET_PARENT|intval}>
 <div class="champ contenu_id_projet_parent[ (#ID_PROJET_PARENT*|strlen|?{'',vide})]">
 	<div class="label visible"><:projet:label_id_projet_parent:>&nbsp;: </div>
-	<div dir='#LANG_DIR' class='#_projet:EDIT{id_projet_parent} id_projet_parent'>
+	<div dir='#LANG_DIR' class='span #_projet:EDIT{id_projet_parent} id_projet_parent'>
 		<a href='[(#ID_PROJET_PARENT|generer_url_entite{projet})]'>#INFO_NOM{projet,#ID_PROJET_PARENT}</a>
 	</div>
 </div>

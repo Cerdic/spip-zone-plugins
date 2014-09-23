@@ -42,6 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_projets'                 => '@nb@ projets',
 	'info_projets'                    => 'Les projets',
 	'info_projets_auteur'             => 'Les projets de cet auteur',
+	'info_tous_les_sous_projets'      => 'Les sous-projets',
 
 	// L
 	'label_actif'                  => 'Actif',
