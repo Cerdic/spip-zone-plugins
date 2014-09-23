@@ -2,6 +2,6 @@
 <div class='clearfix'></div>
 
 [(#CONFIG{'rss_commits/import_auto','non'}|=={oui}|?{
-	<INCLURE{fond=objets/liste/commits,env,ajax,sinon=<:commit:aucun_commit:>}>,
-	<INCLURE{fond=objets/liste/rss_commits,env,ajax,sinon=<:commit:aucun_commit:>}>
+	#INCLURE{fond=objets/liste/commits,env,ajax,sinon=<:commit:aucun_commit:>},
+	#INCLURE{fond=objets/liste/rss_commits,env,ajax,sinon=<:commit:aucun_commit:>}
 })]
