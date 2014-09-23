@@ -153,9 +153,7 @@ if(!function_exists('autoriser_rubrique_voir')){
 		if(!$statut)
 			$statut = '0minirezo';
 	
-		return
-			($qui['statut'] AND $id
-			AND ($qui['statut'] <= $statut));
+		return ($qui['statut'] AND ($qui['statut'] <= $statut));
 			// OR
 			//autoriser_voir_dist('voir','rubrique', $id, $qui, $opt);
 	}
