@@ -75,6 +75,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_cfg_titre' => 'Notifications',
 	'notifications_client_explication' => 'Envoyer les notifications au client ?',
 	'notifications_client_label' => 'Client',
+	'notifications_destinateur_label' => 'Destinateur',	
+	'notifications_destinateur_label_explication' => 'Choisir le(s) destinataire(s) des notifications',		
 	'notifications_envoi_separe' => 'Activer le mode Envoi Séparé pour le statut :',
 	'notifications_envoi_separe_explication' => 'Permet de déclencher l’envoi des notifications pour chaque Détail de Résérvation séparément',
 	'notifications_expediteur_administrateur_label' => 'Choisir un administrateur :',
@@ -96,7 +98,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_choix_webmaster' => 'un ou des webmestres',
 	'notifications_vendeur_email_explication' => 'Saisir un ou plusieurs email séparés par des virgules :',
 	'notifications_vendeur_email_label' => 'Email(s) :',
-	'notifications_vendeur_explication' => 'Choisir le(s) destinataire(s) des notifications pour les envois au vendeur',
 	'notifications_vendeur_label' => 'Vendeur',
 	'notifications_vendeur_webmaster_label' => 'Choisir un ou plusieurs webmestres :',
 
