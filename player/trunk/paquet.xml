@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/player-32.png"
-	documentation="http://www.spip-contrib.net/Lecteur-Multimedia"
+	documentation="http://contrib.spip.net/Lecteur-Multimedia"
 	schema="0.2.4"
 >	
 
