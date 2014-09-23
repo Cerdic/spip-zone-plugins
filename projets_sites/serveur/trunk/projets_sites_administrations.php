@@ -92,6 +92,13 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('sql_alter', "TABLE spip_projets_sites CHANGE sgbd_version sgbd_version varchar(50) NOT NULL DEFAULT ''")
     );
 
+    /*
+     * On ajoute sas_port après sas_serveur
+    **/
+    $maj['1.3.3'] = array(
+        array('sql_alter', "TABLE spip_projets_sites ADD sas_port varchar(5) NOT NULL DEFAULT '' AFTER sas_serveur"),
+    );
+
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

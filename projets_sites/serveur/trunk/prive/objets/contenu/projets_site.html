@@ -278,6 +278,11 @@
 		<div dir='#LANG_DIR' class='span #EDIT{sas_serveur} sas_serveur'>(#SAS_SERVEUR)</div>
 	</div>]
 
+	[<div class="champ contenu_sas_port[ (#SAS_PORT*|strlen|?{'',vide})]">
+		<div class="label visible"><:projets_site:label_sas_port:></div>
+		<div dir='#LANG_DIR' class='span #EDIT{sas_port} sas_port'>(#SAS_PORT)</div>
+	</div>]
+
 	[<div class="champ contenu_sas_login[ (#SAS_LOGIN*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sas_login:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sas_login} sas_login'>(#SAS_LOGIN)</div>
