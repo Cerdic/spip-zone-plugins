@@ -1,4 +1,7 @@
 <h2 class="grostitre"><:commit:titre_commits:></h2>
 <div class='clearfix'></div>
 
-<INCLURE{fond=objets/liste/commits,env,ajax,sinon=<:commit:aucun_commit:>}>
+[(#CONFIG{'rss_commits/import_auto','non'}|=={oui}|?{
+	<INCLURE{fond=objets/liste/commits,env,ajax,sinon=<:commit:aucun_commit:>}>,
+	<INCLURE{fond=objets/liste/rss_commits,env,ajax,sinon=<:commit:aucun_commit:>}>
+}
