@@ -1,0 +1,25 @@
+#SET{id,#ENV{id}}
+#SET{url, #CONFIG{prestashop_api/url}|replace{(https?://), $1#CONFIG{prestashop_api/cle}@}}
+
+<BOUCLE_ean13(DATA){si #ENV{id}|non}{source simplexml, #GET{url}/api/products?filter[ean13]=#ENV{ean13}}{datapath root/children/products/0/children/product/0/attributes}>
+[(#CLE|=={id}|oui) #SET{id,#VALEUR} ]
+</BOUCLE_ean13>
+
+<BOUCLE_product(DATA){si #GET{id}|oui}{source simplexml, #GET{url}/api/products/#GET{id}, 1}{datapath root/children/product}>
+#SET{titre, #VALEUR{children/meta_title/0/children/language/0/text}}
+#SET{url_product,#CONFIG{prestashop_api/url}|concat{/index.php?controller=product&id_product=#GET{id}}|recuperer_lapage}
+<article class="product produit" itemtype="schema" itemscope>
+	<a href="#GET{url_product}" itemprop="url">
+	[(#VALEUR{children/id_default_image/0/attributes/xlink:href}
+		|replace{(https?://), $1#CONFIG{prestashop_api/cle}@}
+		|copie_locale|find_in_path|balise_img{#GET{titre}}
+		|image_reduire{#ENV{largeur,200},0}
+		|inserer_attribut{itemprop,image})]
+	</a>
+	<h3 itemprop="name">
+		<a href="#GET{url_product}" itemprop="url">#GET{titre}</a>
+	</h3>
+	[<div class="price prix" itemprop="price">(#VALEUR{children/price/0/text}|number_format{2}) €</div>]
+	<a href="#GET{url_product}" class="acheter buy button btn" itemprop="url">[(#ENV{message_acheter, <:prestashop_api:product_acheter:>})]</a>
+</article>
+</BOUCLE_product>

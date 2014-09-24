@@ -1,0 +1,17 @@
+<paquet
+	prefix="prestashop_api"
+	categorie="outil"
+	version="1.0.0"
+	schema="1.0.0" 
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prestashop_api.jpg"
+	documentation=""
+>
+	<nom>Liaison avec l'API de Prestashop</nom>
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.28.2;]" />
+</paquet>
