@@ -1,0 +1,26 @@
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
+[(#REM)
+   appel cookiechoices selon la config
+   ref. http://www.cookiechoices.org/#tools
+]
+[(#CONFIG{cookiechoices/message_txt}|?{
+    [(#SET{message,#CONFIG{cookiechoices/message_txt}|propre|texte_script})],
+    [(#SET{message,<:cookiechoices:message_message|texte_script:>})]
+})]
+[(#CONFIG{cookiechoices/close_txt}|?{
+    [(#SET{closetext,#CONFIG{cookiechoices/close_txt}|propre|texte_script})],
+    [(#SET{closetext,<:cookiechoices:message_closetext|texte_script:>})]
+})]
+[(#CONFIG{cookiechoices/policy_txt}|?{
+    [(#SET{policytext,#CONFIG{cookiechoices/policy_txt}|propre|texte_script})],
+    [(#SET{policytext,<:cookiechoices:message_policytext|texte_script:>})]
+})]
+
+document.addEventListener('DOMContentLoaded', function(event) {
+      [(#CONFIG{cookiechoices/position}|match{popin}|?{cookieChoices.showCookieConsentDialog,cookieChoices.showCookieConsentBar})](
+                                         "[(#GET{message}|replace{"&#8217;","'"})]", 
+                                         "[(#GET{closetext}|replace{"&#8217;","'"})]", 
+                                         "[(#GET{policytext}|replace{"&#8217;","'"})]", 
+                                         "#CONFIG{cookiechoices/policy_url}"
+                                        );
+});

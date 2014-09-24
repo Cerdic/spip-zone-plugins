@@ -1,0 +1,16 @@
+<paquet
+	prefix="cookiechoices"
+	categorie="communication"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.17;3.0.*]"
+	logo="prive/themes/spip/images/cookiechoices-64.png"
+	documentation="http://contrib.spip.net/"
+>
+  <nom>cookiechoices</nom>
+  <auteur lien='http://www.cookiechoices.org'>Google</auteur>
+  <auteur lien="http://www.erational.org">erational (mise en plugin)</auteur>
+  <licence lien=" http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</licence>
+  
+  <pipeline nom="affichage_final" inclure="cookiechoices_pipelines.php" />
+</paquet>
