@@ -9,7 +9,7 @@
 >
   <nom>cookiebar</nom>
   <auteur lien='http://www.primebox.co.uk/projects/cookie-bar/'>primebox</auteur>
-  <auteur lien="http://www.erational.org.com">erational (mise en plugin)</auteur>
+  <auteur lien="http://www.erational.org">erational (mise en plugin)</auteur>
   <licence lien="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</licence>
   
   <pipeline nom="insert_head_css" inclure="cookiebar_pipelines.php" />
