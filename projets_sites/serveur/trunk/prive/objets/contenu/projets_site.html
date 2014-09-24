@@ -6,6 +6,7 @@
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{type_site})]] type_site'>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)</div>
 	</div>]
 
+[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
 	[<div class="champ contenu_uniqid[ (#UNIQID*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_uniqid:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{uniqid} uniqid'>(#UNIQID)</div>
@@ -15,7 +16,7 @@
 		<div class="label visible"><:projets_site:label_webservice:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{webservice} webservice'><a href="#WEBSERVICE" class="spip_out">(#WEBSERVICE)</a></div>
 	</div>]
-
+]
 	[<div class="champ contenu_date_creation[ (#DATE_CREATION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_date_creation:></div>
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{date_creation})]] date_creation'>(#DATE_CREATION|affdate)</div>
@@ -283,6 +284,7 @@
 		<div dir='#LANG_DIR' class='span #EDIT{sas_port} sas_port'>(#SAS_PORT)</div>
 	</div>]
 
+[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
 	[<div class="champ contenu_sas_login[ (#SAS_LOGIN*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sas_login:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sas_login} sas_login'>(#SAS_LOGIN)</div>
@@ -292,7 +294,7 @@
 		<div class="label visible"><:projets_site:label_sas_password:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sas_password} sas_password'>(#SAS_PASSWORD)</div>
 	</div>]
-
+]
 <!-- SGBD -->
 <div class="champ fieldset"><h3 class="legend sgbd_fieldset"><:projets_site:label_sgbd_fieldset:></h3></div>
 
@@ -316,16 +318,18 @@
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_port})]] sgbd_port'>(#SGBD_PORT)</div>
 	</div>]
 
+[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
 	[<div class="champ contenu_sgbd_nom[ (#SGBD_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_nom:></div>
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_nom})]] sgbd_nom'>(#SGBD_NOM)</div>
 	</div>]
-
+]
 	[<div class="champ contenu_sgbd_prefixe[ (#SGBD_PREFIXE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_prefixe:></div>
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{sgbd_prefixe})]] sgbd_prefixe'>(#SGBD_PREFIXE)</div>
 	</div>]
 
+[(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
 	[<div class="champ contenu_sgbd_login[ (#SGBD_LOGIN*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:label_sgbd_login:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_login} sgbd_login'>(#SGBD_LOGIN)</div>
@@ -335,7 +339,7 @@
 		<div class="label visible"><:projets_site:label_sgbd_password:></div>
 		<div dir='#LANG_DIR' class='span #EDIT{sgbd_password} sgbd_password'>(#SGBD_PASSWORD)</div>
 	</div>]
-
+]
 <!-- Autres -->
 <div class="champ fieldset"><h3 class="legend autres_fieldset"><:projets_site:label_autres_fieldset:></h3></div>
 
