@@ -1,8 +1,8 @@
 <paquet
 	prefix="aeres"
 	categorie="edition"
-	version="2.0.3"
-	etat="test"
+	version="2.0.4"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/aeres-48.png"
 	documentation="http://contrib.spip.net/Bibliographie-AERES-2-0"

@@ -34,8 +34,8 @@ function formulaires_configurer_aeres_charger_dist(){
 		$zcreators[$cle] = $zcreator['auteur'];
 	$non_membres = array_diff($zcreators,$membres);
 	
-	$valeurs['membres'] = $membres;
-	$valeurs['non_membres'] = $non_membres;
+	$valeurs['membres'] = aeres_tri_alpha($membres);
+	$valeurs['non_membres'] = aeres_tri_alpha($non_membres);
 	
 	return $valeurs;
 }
@@ -52,11 +52,11 @@ function formulaires_configurer_aeres_verifier_dist(){
 
 function formulaires_configurer_aeres_traiter_dist(){
 	$membres = _request('membres');
-	if (count($membres)) sort($membres);
+	if (count($membres)) aeres_tri_alpha($membres);
 	else $membres = array();
 	set_request('membres',$membres); // On retransmet le tableau correctement trié
 	$non_membres = _request('non_membres');
-	if (count($non_membres)) sort($non_membres);
+	if (count($non_membres)) aeres_tri_alpha($non_membres);
 	else $non_membres = array();
 	set_request('non_membres',$non_membres);
 	$config = array(
@@ -80,6 +80,30 @@ function formulaires_configurer_aeres_traiter_dist(){
 	ecrire_meta('aeres',serialize($config));
 	
 	return array('message_ok'=>_T('config_info_enregistree'));
+}
+
+// Source: http://www.memorandom.fr/php/trier-la-colonne-dun-tableau-sans-prendre-en-compte-la-casse-et-les-accents/
+
+function aeres_tri_alpha($data) {
+	$sans_accent = function ($chaine) {
+        if (version_compare(PHP_VERSION, '5.2.3', '>='))
+            $str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8", false);
+        else
+            $str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8");
+ 
+        // NB : On ne peut pas utiliser strtr qui fonctionne mal avec utf8.
+        $str = preg_replace('#\&([A-za-z])(?:acute|cedil|circ|grave|ring|tilde|uml)\;#', '\1', $str);
+ 
+        return $str;
+	};
+
+	//On supprime les accents
+	$array_sans_accent = array_map($sans_accent , $data);
+	//On met en minuscule
+	$array_lowercase = array_map('strtolower', $array_sans_accent);
+	// Ajoute $data en tant que dernier paramètre, pour trier par la clé commune
+	array_multisort($array_lowercase, SORT_ASC, $data);
+	return $data;
 }
 
 ?>
