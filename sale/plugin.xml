@@ -3,7 +3,7 @@
 	<slogan>Conversion (X)HTML vers SPIP</slogan>
 	<prefix>sale</prefix>
 	<auteur> Ma&#239;eul ROUQUETTE d'apr&#232;s le Travail de James ("Klike")</auteur>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>dev</etat>
 	<description>Proposer une fonction sale() qui permet de passer du (X)HTML vers du SPIP</description>
 	<fonctions>sale_fonctions.php </fonctions>

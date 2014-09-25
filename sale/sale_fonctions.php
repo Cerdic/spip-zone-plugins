@@ -40,11 +40,6 @@
 			$trans['&#176;'] = "°";
 			// des caracteres non supportes
 			$trans["&nbsp;&euro;"]=' €';
-	  	if ($GLOBALS['meta']['charset'] == 'utf-8'){
-				foreach ($trans as $key=>$value)
-					$transutf[$key]=utf8_encode($value);
-				$trans = $transutf;
-			}
 		}
 		return strtr($texte, $trans);
 	}
