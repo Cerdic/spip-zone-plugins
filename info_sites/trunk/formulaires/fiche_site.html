@@ -1,0 +1,166 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<div class="row">
+		<div class="col-md-12">
+		<h3 class="titrem"><:info_sites:creation_rapide_fiche:></h3>
+
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+		</div>
+	</div>
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<hr/>
+		<div class="row">
+			<div class="col-md-6">
+				<fieldset>
+					<ul>
+						<li class="editer editer_organisation">
+							<label for="choix_organisation"><:contacts:organisation:></label>
+							<input list="organisations" type="text" id="choix_organisation" name="organisation" value="[(#ENV{organisation})]" />
+							<B_organisations>
+							<datalist id="organisations">
+								<BOUCLE_organisations (ORGANISATIONS) {par nom}>
+								<option value="#ID_ORGANISATION">#NOM</option></BOUCLE_organisations>
+							</datalist>
+							</B_organisations>
+						</li>
+
+						<li class="editer editer_projet">
+							<label for="choix_projet"><:projet:titre_projet:></label>
+							<input list="projets" type="text" id="choix_projet" name="projet" value="[(#ENV{projet})]" />
+							<B_projets>
+							<datalist id="projets">
+								<BOUCLE_projets (PROJETS) {par nom}>
+								<option value="#ID_PROJET">#NOM</option></BOUCLE_projets>
+							</datalist>
+							</B_projets>
+						</li>
+
+						<li class="editer editer_projet_parent">
+							<label for="choix_projet_parent"><:projet:label_id_projet_parent:></label>
+							<input list="projets_parent" type="text" id="choix_projet_parent" name="projet_parent" value="[(#ENV{projet_parent})]" />
+							<B_projets_parent>
+							<datalist id="projets_parent">
+								<BOUCLE_projets_parent (PROJETS) {par nom}>
+								<option value="#ID_PROJET">#NOM</option></BOUCLE_projets_parent>
+							</datalist>
+							</B_projets_parent>
+						</li>
+					</ul>
+				</fieldset>
+				<hr/>
+				<fieldset>
+					<ul>
+
+					[(#SAISIE{input, titre, obligatoire=oui,
+						label=<:projets_site:label_titre:>,
+						size=255,
+						maxlength=255})]
+
+					[(#SAISIE{selection, type_site, obligatoire=oui,
+						datas=[(#ARRAY{prod,<:projets_site:type_site_prod:>,rec,<:projets_site:type_site_rec:>,dev,<:projets_site:type_site_dev:>,prep,<:projets_site:type_site_prep:>})],
+						label=<:projets_site:label_type_site:>,
+						defaut=prod})]
+
+					[(#SAISIE{input, webservice,
+						label=<:projets_site:label_webservice:>,
+						explication=<:projets_site:explication_webservice:>})]
+
+					</ul>
+				</fieldset>
+				<hr/>
+				<fieldset>
+					<ul>
+
+						[(#SAISIE{input, logiciel_nom,
+							obligatoire=oui,
+							label=<:projets_site:label_logiciel_nom:>,
+							size=25,
+							maxlength=25})]
+
+						[(#SAISIE{input, logiciel_version,
+							obligatoire=oui,
+							label=<:projets_site:label_logiciel_version:>,
+							size=25,
+							maxlength=25})]
+
+					</ul>
+				</fieldset>
+				<hr/>
+			</div>
+			<div class="col-md-6">
+[(#PLUGIN{RSS_COMMITS}|oui)
+				<fieldset>
+					<ul>
+
+						[(#SAISIE{input, versioning_path,
+							label=<:commit:champ_versioning_path_label:>})]
+
+						[(#SAISIE{input, versioning_trac,
+							label=<:commit:champ_versioning_trac_label:>})]
+
+						[(#SAISIE{input, versioning_type,
+							label=<:commit:champ_versioning_type_label:>,
+							placeholder='svn / GIT / CVS / etc.'})]
+
+						[(#SAISIE{input, versioning_rss,
+							label=<:commit:champ_versioning_rss_label:>})]
+
+					</ul>
+				</fieldset>
+				<hr/>]
+				<fieldset>
+					<ul>
+
+						[(#SAISIE{input, fo_url,
+							obligatoire=oui,
+							label=<:projets_site:label_fo_url:>,
+							size=255,
+							maxlength=255,
+							placeholder='http://'})]
+
+						[(#SAISIE{input, fo_login,
+							label=<:projets_site:label_fo_login:>,
+							size=25,
+							maxlength=25})]
+
+						[(#SAISIE{input, fo_password,
+							label=<:projets_site:label_fo_password:>,
+							size=25,
+							maxlength=25})]
+
+					</ul>
+				</fieldset>
+				<hr/>
+				<fieldset>
+					<ul>
+
+						[(#SAISIE{input, bo_url,
+							obligatoire=oui,
+							label=<:projets_site:label_bo_url:>,
+							size=255,
+							maxlength=255,
+							placeholder='http://'})]
+
+						[(#SAISIE{input, bo_login,
+							label=<:projets_site:label_bo_login:>,
+							size=25,
+							maxlength=25})]
+
+						[(#SAISIE{input, bo_password,
+							label=<:projets_site:label_bo_password:>,
+							size=25,
+							maxlength=25})]
+
+					</ul>
+				</fieldset>
+				<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+

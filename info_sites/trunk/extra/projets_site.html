@@ -16,21 +16,35 @@
 <div class="block">
     <div class="clearfix clear"> </div>
     [(#SET{projets_id,#ARRAY})]
+    [(#SET{projets_id_rss,#ARRAY})]
     <BOUCLE_projets_lies (projets_sites_liens) {id_projets_site} {objet='projet'}>
     [(#SET{projets_id,[(#GET{projets_id}|push{#ID_OBJET})]})]
     </BOUCLE_projets_lies>
+    <BOUCLE_projets_rss (PROJETS) {id_projet IN #GET{projets_id}}>
+        [(#VERSIONING_RSS|oui)
+            [(#SET{projets_id_rss, [(#GET{projets_id_rss}|push{#ID_PROJET})]})]
+        ][(#VERSIONING_RSS|non)[(#ID_PROJET_PARENT|=={0}|non)[(#INFO_VERSIONING_RSS{projet,#ID_PROJET_PARENT}|oui)
+            [(#SET{projets_id_rss, [(#GET{projets_id_rss}|push{#ID_PROJET_PARENT})]})]
+        ]]
+    </BOUCLE_projets_rss>
+
+    [(#SET{projets_id,[(#GET{projets_id}|array_unique|array_filter)]})]
     [(#SET{projets_id,[(#GET{projets_id}|count|=={0}|?{0,[(#GET{projets_id}|join{","})]})]})]
     [(#SET{where,projets.id_projet IN \(#GET{projets_id}\)})]
     <INCLURE{fond=objets/liste/projets,where=#GET{where},ajax,env} />
+
     [(#PLUGIN{RSS_COMMITS}|oui)
+        [(#SET{projets_id_rss,[(#GET{projets_id_rss}|array_unique|array_filter)]})]
+        [(#SET{projets_id_rss,[(#GET{projets_id_rss}|count|=={0}|?{0,[(#GET{projets_id_rss}|join{","})]})]})]
         [(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
-        [(#SET{where,commits.id_projet IN \(#GET{projets_id}\)})]
+        [(#SET{where,commits.id_projet IN \(#GET{projets_id_rss}\)})]
         <INCLURE{fond=objets/liste/commits,where=#GET{where},ajax,env} />]
         [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
-        [(#SET{where,IN \(#GET{projets_id}\)})]
-        <INCLURE{fond=objets/liste/rss_commits,id_projet=#GET{projets_id},ajax,env} />]
+        [(#SET{where,IN \(#GET{projets_id_rss}\)})]
+        <INCLURE{fond=objets/liste/rss_commits,id_projet=#GET{projets_id_rss},ajax,env} />]
     ]
     [(#SET{where,''})]
+    </B_projets_lies>
 </div>
 <div class="clearfix"></div>
 

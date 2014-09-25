@@ -600,6 +600,10 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	padding: 0.5em;
 	background-color: @gray-lighter;
 	overflow: hidden;
+	.titrem {
+		display: none;
+		visibility: hidden;
+	}
 	ul {
 		padding-left: 0;
 		list-style: none;
@@ -607,25 +611,49 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 			overflow: hidden;
 			padding-bottom: 0.5em;
 			margin-bottom: 1em;
+			&.erreur {
+				.erreur_message {
+					font-weight: bold;
+					color: @bg-danger;
+					text-align: right;
+					display: none;
+				}
+				input, select {
+					border: 1px solid @bg-danger;
+				}
+			}
 			label {
 				width: 25%;
 				margin-right: 3%;
 				float: left;
 				text-align: right;
-				word-break:break-all;
+				word-break:normal;
+				font-weight: normal;
+			}
+			&.obligatoire {
+				label {
+					font-weight: bold;
+				}
 			}
 			input, .edition, .explication, select, textarea {
 				width: 72%;
 				float: right;
+				margin-top: 0.3em;
 			}
 			.edition {
 				textarea {
 					width: 100%;
 				}
 			}
-			.explication + .choix {
+			.explication {
+				margin-top: 0;
+				+ .choix {
 					margin-left: 28%;
 				}
+				+ input, .edition, .explication, select, textarea {
+					margin-top: 0;
+				}
+			}
 			.choix {
 				float: left;
 				margin-right: 1em;
@@ -656,6 +684,17 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 					bottom: 10px;
 				}
 			}
+		}
+	}
+	.reponse_formulaire {
+		padding: 0.5em;
+		&.reponse_formulaire_ok {
+			background-color: @bg-success;
+			color: @white;
+		}
+		&.reponse_formulaire_erreur {
+			background-color: @bg-warning;
+			color: @white;
 		}
 	}
 	p.boutons {

@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
+    'ajouter_fiche_site_rapide' => 'Ajouter rapidement un site',
     'auteur_identifie_informations' => 'Vos informations',
     'auteur_identifie_profil' => 'Votre profil',
 
@@ -31,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'controle_info_sites_menu_projets_sites' => 'Est-ce que l\'entrée <strong>"Sites"</strong> est présente dans le menu de navigation&nbsp;?',
     'controle_info_sites_menu_statistiques' => 'Est-ce que l\'entrée <strong>"Statistiques"</strong> est présente dans le menu de navigation&nbsp;?',
     'controle_projets_lies_organisations' => 'Est-ce que les projets sont liés aux organisations&nbsp;?',
+    'creation_rapide_fiche' => 'Fiche condensée',
 
     // D
     'diagnostic_logiciel_absent' => 'Il n\'y a pas de protocole de diagnostic défini pour ce logiciel.',
@@ -41,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'editer_liens_projet' => '&Eacute;diter les liens',
     'editer_liens_projets_site' => '&Eacute;diter les liens',
 
-
     // I
+    'icone_creer_fiche_siste' => 'Créer une fiche de site',
     'icone_modifier_contact' => 'Modifier ce contact',
     'icone_modifier_organisation' => 'Modifier cette organisation',
     'icone_modifier_projet' => 'Modifier ce projet',

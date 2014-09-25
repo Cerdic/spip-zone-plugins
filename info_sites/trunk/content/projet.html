@@ -20,7 +20,7 @@
 	</div>]
 
 	<INCLURE{fond=prive/objets/contenu/projet,id=#ID_PROJET,id_projet=#ID_PROJET,ajax=wysiwyg} />
-[(#PLUGIN{RSS_COMMIT}|oui)
+[(#PLUGIN{RSS_COMMITS}|oui)
 	[<div class="champ contenu_versioning_path[ (#VERSIONING_PATH*|strlen|?{'',vide hidden})]">
 		<div class="label visible"><:commit:champ_versioning_path_label:>&nbsp;: </div>
 		<div dir='#LANG_DIR' class='span #EDIT{versioning_path} versioning_path'><a href="#VERSIONING_PATH">(#VERSIONING_PATH)</a></div>
