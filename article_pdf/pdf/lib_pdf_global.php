@@ -9,7 +9,6 @@
  //  Fichier de dump pour debug
 define (DUMP_FILE_FULL_PATH_NAME,"Dump.txt");
 
- 
 class PDF extends FPDF
 {
 var $HREF;
@@ -94,8 +93,8 @@ function WriteHTML($html,$LineFeedHeight)
 {
 	$this->texteAddSpace=false;
 	//Parseur HTML, enlevé pour une meilleure récupération des tag.
-  //Il faut détecter les vraies balises "<" HTML et pas les < de texte "&lt;" HTML 
-  //Parseur remis + loin pour l'édition du texte
+	//Il faut détecter les vraies balises "<" HTML et pas les < de texte "&lt;" HTML 
+	//Parseur remis + loin pour l'édition du texte
 	//$html=$this->unhtmlentities($html);
 	
 	$a=preg_split(',(<[/a-zA-Z].*>),Ums', $html, -1, PREG_SPLIT_DELIM_CAPTURE);
@@ -108,7 +107,7 @@ function WriteHTML($html,$LineFeedHeight)
 		//Balise 
 	$Balise= preg_match(',<(?=[/a-zA-Z0-9])(/)?([/a-zA-Z0-9]+)((\s.*|/)?)>,',$e,$match);
 	if ($Balise){
-      $tag=strtoupper($match[2]);
+		$tag=strtoupper($match[2]);
 			$closing = $match[1]=="/";
 			
 			if (($this->ProcessingBloc) AND (!in_array($tag,$this->BlocTags[$this->ProcessingBloc-1])))
@@ -206,15 +205,14 @@ function WriteHTML($html,$LineFeedHeight)
 						}
 					} else 
 					{
-					//Parseur remis ici
+						//Parseur remis ici
 						$e=$this->unhtmlentities($e);
-            $this->Write(5,$e);
+						$this->Write(5,$e);
 					}
 				}
 			}
 		}
 	}
-  
 }
 
 function OpenTag($tag,$e,$LineFeedHeight)
@@ -332,7 +330,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 	}
 
 	if ($tag=='IMG') {
-    $this->SRC=extraire_attribut($e,'src');
+		$this->SRC=extraire_attribut($e,'src');
 
 		// si l'image est manquante mettre un lien avec le texte alt
 		if (!@is_readable($this->SRC)){
@@ -380,7 +378,7 @@ function OpenTag($tag,$e,$LineFeedHeight)
 				$ratio = 0.24;	# ce qui fait environ 600 pixels sur 16cm d'espace utile (160/600) - 2 pouillièmes
 				$imgX=$size[0]*$ratio;
 				$imgY=$size[1]*$ratio;
-	
+
 				if ($size[1] > 900 || ($plen - ($size[1]*$ratio)  < 0)) {
 					if ($plen - ($size[1]*$ratio*0.8)  < 0) {
 						$this->AddPage();
@@ -391,12 +389,12 @@ function OpenTag($tag,$e,$LineFeedHeight)
 						$ratioY *= 0.8;
 					}
 				}
-	
+
 				$ratio=min(0.24, $ratioX, $ratioY);
-	
+
 				$imgX=$size[0]*$ratio;
 				$imgY=$size[1]*$ratio;
-	
+
 				$this->Image($this->SRC, $this->GetX()+($pwidth-$imgX)/2, $this->GetY(), $imgX, $imgY,'',$this->HREF);
 				$this->SetY($this->GetY()+$imgY);
 			}
@@ -508,14 +506,14 @@ function CloseTag($tag,$LineFeedHeight)
 	}
 
 	if($tag=='CODE') {
-    $this->ProcessingCadre=false;
+		$this->ProcessingCadre=false;
 		if (strlen($content=$this->BlocContent[$this->ProcessingBloc-1])){
 			$this->ProcessingBloc--;
 			$this->BlocShow(0,$content,1,$LineFeedHeight);
-      }
+		}
 		$this->SetTextColor(0);
 		$this->SetFont('helvetica','',10);
-//    $this->Write(5,"\n<\code>");
+		// $this->Write(5,"\n<\code>");
 	}
 
 	if(($tag=='H2') OR ($tag=='H3') OR ($tag=='H4') OR ($tag=='H5') OR ($tag=='H6')){		
@@ -654,24 +652,24 @@ function CellSize($htmlContent,$fontFamily,$fontSize,$LineFeedHeight,$cellmargin
 }
 
 function OutputCell($width,$height,$htmlContent,$border=0,$LineFeedHeight=0,$align='',$fill=0,$cellmargin=3){
-		// dessiner la cellule vide
-		$this->Cell($width, $height, '', $border, 0, $align, $fill);
-		// on note la position apres la cellule
-		$x = $this->x; $y = $this->y;
-		$lmargin = $this->lMargin;
-		$rmargin = $this->rMargin;
-		
-		// on se remet en debut de cellule
-		$this->x-=$width;
-		$this->x = $this->x+$cellmargin/2;
-		$this->lMargin = $this->x; // pour que les retour ligne se fassent correctement dans la cellule
-		$this->rMargin = $this->w-$this->x-$width+$cellmargin/2; 
-		
-		$this -> WriteHTML($htmlContent,$LineFeedHeight);
-		// on se remet a la fin de la cellule
-		$this->x = $x; $this->y = $y;
-		$this->lMargin = $lmargin;
-		$this->rMargin = $rmargin;
+	// dessiner la cellule vide
+	$this->Cell($width, $height, '', $border, 0, $align, $fill);
+	// on note la position apres la cellule
+	$x = $this->x; $y = $this->y;
+	$lmargin = $this->lMargin;
+	$rmargin = $this->rMargin;
+	
+	// on se remet en debut de cellule
+	$this->x-=$width;
+	$this->x = $this->x+$cellmargin/2;
+	$this->lMargin = $this->x; // pour que les retour ligne se fassent correctement dans la cellule
+	$this->rMargin = $this->w-$this->x-$width+$cellmargin/2; 
+	
+	$this -> WriteHTML($htmlContent,$LineFeedHeight);
+	// on se remet a la fin de la cellule
+	$this->x = $x; $this->y = $y;
+	$this->lMargin = $lmargin;
+	$this->rMargin = $rmargin;
 }
 
 function BlocShow($left_margin,$htmlContent,$border=0,$LineFeedHeight){
@@ -695,7 +693,7 @@ function TableShow($align,$LineFeedHeight)
 	$tableFontFamily='helvetica';
 	$cellmargin=3.0;		// pifomètre : un peu de marge sur la largeur de cellule
 	$wrwi=$this->w - $this->lMargin - $this->rMargin;
-//-----------
+	//-----------
 	$tableFontSize=10;
 	$TableWidth = 1.01*$wrwi;
 	$max_width=0;
@@ -803,11 +801,11 @@ function InitDumpFile()
 function Dump($String)
 {
 	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
-    {
+	{
 		@fwrite($f,$String);
-        @fwrite($f,"\n");
+		@fwrite($f,"\n");
 		@fclose($f);
-    }
+	}
 }
 
 // trace un tableau dans un fichier 
@@ -815,15 +813,13 @@ function DumpArray($String,$Array)
 {
 	$Result=print_r($Array,true);
 	
-	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a"))
-    {
+	if ($f = @fopen(DUMP_FILE_FULL_PATH_NAME,"a")){
 		@fwrite($f,$String);
 		@fwrite($f,"\n\n");
-        if(@fwrite($f,$Result))
-        {
-            @fclose($f);
-        }
-    }
+		if(@fwrite($f,$Result)){
+			@fclose($f);
+		}
+	}
 	$Array.reset();
 }
 
