@@ -19,8 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_parametrages'            => 'Paramétrages',
 
 	// E
+	'erreur_date_fin_plus_ancien'       => "L'heure de fin ne doit pas être antérieure à l'heure de début",
 	'erreur_saisie_invalide'            => "Votre saisie contient des erreurs !",
-	// 'explication_id_auteur'             => "Sélectionnez des collaborateurs potentiels parmi tous les auteurs du site.",
+	'erreur_saisie_nb_h_passees_diff'   => "Le nombre que vous avez saisi ne correspond pas à l'heure de début et de fin. Cela devrait être '@indic@'",
+	'erreur_saisie_nb_h_passees_vide'   => "Vous n'avez pas saisi d'heures passées alors que vous avez une heure de début et de fin. Pour indication, vous devait saisir '@indic@'",
 	'explication_activite_par_defaut'   => "Précisez le type d'activité sélectionné par défaut",
 	'explication_detail_activite'       => "Décrivez l'activité effectuée",
 	'explication_duree'                 => "Indiquez la date de l'activité, en précisant les horaires de début et de fin, puis ajustez la durée calculée",

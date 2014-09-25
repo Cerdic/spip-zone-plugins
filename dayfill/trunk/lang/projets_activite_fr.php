@@ -28,8 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_auteur_activite'                 => "Auteur",
 	'label_date_activite'                   => "Date",
-	'label_date_debut'                      => 'Heure debut',
-	'label_date_fin'                        => 'Heure fin',
+	'label_date_debut'                      => 'Heure de début',
+	'label_date_fin'                        => 'Heure de fin',
 	'label_date_debut_fin'                  => 'Quand',
 	'label_descriptif'                      => 'Descriptif',
 	'label_duree_activite'                  => "Durée",
@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'texte_ajouter_projets_activite'        => 'Ajouter une activité',
-	'texte_changer_statut_projets_activite' => 'Cette activité est :',
+	'texte_changer_statut_projets_activite' => 'Cette activité est&nbsp;:',
 	'texte_creer_associer_projets_activite' => 'Créer et associer une activité',
 	'titre_langue_projets_activite'         => 'Langue de cette activité',
 	'titre_logo_projets_activite'           => 'Logo de cette activité',

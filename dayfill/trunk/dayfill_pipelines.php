@@ -3,7 +3,7 @@
  * Utilisations de pipelines par DayFill
  *
  * @plugin     DayFill
- * @copyright  2013
+ * @copyright  2014
  * @author     Cyril Marion
  * @licence    GNU/GPL
  * @package    SPIP\Dayfill\Pipelines

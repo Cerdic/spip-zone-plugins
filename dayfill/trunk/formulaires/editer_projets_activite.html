@@ -20,6 +20,13 @@
 				label=<:projets_activite:label_id_auteur:>,
 				explication=<:projets_activite:explication_id_auteur:> })]
 
+[(#ENV{erreurs/erreur_date_fin_plus_ancien}|oui)
+		#SET{erreur_date_fin_plus_ancien,#ENV{erreurs/erreur_date_fin_plus_ancien}}
+		[(#SAISIE{explication, erreur_date_fin_plus_ancien,
+		li_class='notice gauche',
+		texte=#GET{erreur_date_fin_plus_ancien}})]
+]
+
 			[(#SAISIE{date, date_debut, obligatoire=oui,
 				label=<:projets_activite:label_date_debut:>,
 				defaut=#DATE,

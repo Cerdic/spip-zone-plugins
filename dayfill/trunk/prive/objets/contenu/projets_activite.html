@@ -1,45 +1,45 @@
 <BOUCLE_projets_activite(PROJETS_ACTIVITES){id_projets_activite}>
 
 <div class="champ contenu_id_projet[ (#ID_PROJET*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_id_projet:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_projet} id_projet'>
+	<div class="label"><:projets_activite:label_id_projet:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{id_projet} id_projet'>
 	<BOUCLE_projet(PROJETS){id_projet}{si #ID_PROJET}{statut==.*}{tout}>
 			<a href="[(#ID_PROJET|generer_url_entite{projet})]">#NOM</a>
 	</BOUCLE_projet>
 		<:projet:non_renseigne:>
 	<//B_projet>
-	</span>
+	</div>
 </div>
 
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_descriptif:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+	<div class="label"><:projets_activite:label_descriptif:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{descriptif} descriptif'>(#DESCRIPTIF)</div>
 </div>]
 
 <div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_auteur_activite:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>
+	<div class="label"><:projets_activite:label_auteur_activite:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{id_auteur} id_auteur'>
 	<BOUCLE_auteur(AUTEURS){id_auteur}{si #ID_AUTEUR}{statut==.*}{tout}>
 		<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#NOM|sinon{#PSEUDO})]</a>
 	</BOUCLE_auteur>
 		<:projet:non_renseigne:>
 	<//B_auteur>
-	</span>
+	</div>
 </div>
 
 [<div class="champ contenu_date_debut_fin[ (#DATE_DEBUT*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_date_debut_fin:> : </label>
-	<span dir='#LANG_DIR' class='date_debut_fin'>(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})</span>
+	<div class="label"><:projets_activite:label_date_debut_fin:> : </div>
+	<div dir='#LANG_DIR' class='span date_debut_fin'>(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN})</div>
 </div>]
 
 [<div class="champ contenu_nb_heures_passees[ (#NB_HEURES_PASSEES*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_nb_heures_passees:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{nb_heures_passees} nb_heures_passees'>(#NB_HEURES_PASSEES)</span>
+	<div class="label"><:projets_activite:label_nb_heures_passees:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{nb_heures_passees} nb_heures_passees'>(#NB_HEURES_PASSEES)</div>
 </div>]
 
 [<div class="champ contenu_nb_heures_decomptees[ (#NB_HEURES_DECOMPTEES*|strlen|?{'',vide})]">
-	<label><:projets_activite:label_nb_heures_decomptees:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{nb_heures_decomptees} nb_heures_decomptees'>(#NB_HEURES_DECOMPTEES)</span>
+	<div class="label"><:projets_activite:label_nb_heures_decomptees:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{nb_heures_decomptees} nb_heures_decomptees'>(#NB_HEURES_DECOMPTEES)</div>
 </div>]
 
 </BOUCLE_projets_activite>
