@@ -1,7 +1,7 @@
 [(#ENV{sans_reponse}|is_null|oui) [(#SET{sans_reponse,<:saisies:vue_sans_reponse:>})] ]
 [(#ENV{sans_reponse}|is_null|non) [(#SET{sans_reponse,#ENV{sans_reponse}})] ]
 
-#SET{valeur_uniquement,#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|?{' ',''}}
+#SET{valeur_uniquement,#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|oui}
 #SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
 
 [(#REM) On génère la réponse et on l'enregistre dans une variable. Doit être VIDE s'il n'y a pas de réponse. ]
