@@ -311,7 +311,9 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							default:
 								$class_li = 'editer_'.$saisie['options']['nom'];
 						}
-						$condition = join("\n", array_filter(array($saisie['options']['afficher_si'], $saisie['options']['afficher_si_remplissage'])));
+						$afficher_si = isset($saisie['options']['afficher_si']) ? $saisie['options']['afficher_si'] : '';
+						$afficher_si_remplissage = isset($saisie['options']['afficher_si_remplissage']) ? $saisie['options']['afficher_si_remplissage'] : '';
+						$condition = join("\n", array_filter(array($afficher_si, $afficher_si_remplissage)));
 						// retrouver l'identifiant
 						$identifiant = '';
 						if (isset($saisie['identifiant']) and $saisie['identifiant']) {
