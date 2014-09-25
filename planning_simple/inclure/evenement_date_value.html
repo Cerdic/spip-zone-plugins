@@ -1,0 +1,30 @@
+<BOUCLE_vevent(EVENEMENTS){id_article}{tout}{date_debut=#ENV{date_evalue}}>
+
+  [(#REM) <!-- la duree -->]
+  [(#SET{duree,[(#DATE_DEBUT|duree{#DATE_FIN,minutes})]})] 
+  
+  [(#GET{duree}|>{30}|oui)
+  	[(#SET{nb_rowspan,[(#GET{duree}|div{30})]})]
+  ]
+ 
+  [(#REM) <!-- si la periode n'est pas occupée par un rowspan précédent (array pour chaque td_supprime), afficher le td, en cas contraire le supprimer -->]	 
+  [(#ENV{td_supprime}|=={non}|oui)
+	  [(#REM) <!-- si 2 evenements en même temps les mettre dans une seule cellule td (donc on ne crée pas le td de l'evenement suivant) -->]
+	  			
+	  [(#COMPTEUR_BOUCLE|=={1}|oui)<td class="cellule_pleine [ (#TITRE|temps_url_nettoyer{200}|strtolower)]" rowspan="#GET{nb_rowspan}" alt="[(#DATE_DEBUT|nom_jour) ][(#DATE_DEBUT|affdate{H:i}) ][(#DATE_FIN|nom_jour) ][(#DATE_FIN|affdate{H:i})]">]
+		
+	  	<div class="evenement [(#TOTAL_BOUCLE|>{1}|oui) evenementplus#COMPTEUR_BOUCLE] [ (#TITRE|temps_url_nettoyer{200}|strtolower)]">
+			<strong class="#EDIT{titre} [(#TITRE|=={x}|oui) camouflage]">[(#TITRE)]</strong>
+			<div class="#EDIT{lieu} lieu [(#LIEU|=={''}|oui) camouflage]">[(#LIEU|sinon{x})]</div>
+		</div>
+		
+	  [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)</td>]
+	  
+  ]
+  
+</BOUCLE_vevent>
+	[(#REM) <!-- sinon la case est vide -->]
+	[(#ENV{td_supprime}|=={non}|oui)
+	<td class="cellule vide"><div class="evenement camouflage" alt="[(#ENV{date_evalue}|nom_jour) ][(#ENV{date_evalue}|affdate{H:i}) ][(#GET{date_evalue_plus}|nom_jour) ][(#GET{date_evalue_plus}|affdate{H:i})]">x</div></td>
+	]
+<//B_vevent>

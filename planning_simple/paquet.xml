@@ -1,0 +1,15 @@
+<paquet
+	prefix="planning_simple_simple"
+	categorie="outil"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[2.1.0;3.0.*]"
+	logo="planning_simple.png"
+	documentation=""
+>
+
+	<nom>Planning Simple</nom>
+	<auteur lien="http://elastick.net">Anne-lise Martenot, elastick.net</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+</paquet>

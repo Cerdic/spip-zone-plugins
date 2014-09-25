@@ -1,0 +1,119 @@
+#SET{heure_max_fin,00}
+#SET{heure_max_debut,24}
+[(#SET{tds_supprimer,#ARRAY})]
+
+<BOUCLE_donnees(EVENEMENTS){par date_debut}{id_article}>
+
+[(#REM) <!-- heure max de début --->]
+[(#DATE_DEBUT|affdate{H:i}|<{#GET{heure_max_debut}}|oui) 
+	[(#SET{heure_max_debut,[(#DATE_DEBUT|affdate{H})]})]
+]
+
+[(#REM) <!-- heure max de fin --->]
+[(#DATE_FIN|affdate{H:i}|>{#GET{heure_max_fin}}|oui) 
+	[(#SET{heure_max_fin,[(#DATE_FIN|affdate{H})]})]
+]
+
+[(#REM) <!-- quel jour au_debut --->]
+[(#COMPTEUR_BOUCLE|=={1}|oui) 
+	[(#SET{jour_debut_numero,[(#DATE_DEBUT|affdate{w})]})]
+	[(#SET{au_debut,[(#DATE_DEBUT|affdate{Y-m-d H:i}|strtotime)]})]
+	[(#SET{date_zero,[(#DATE_DEBUT|affdate{Y-m-d H:i})]})]
+	#SET{date_zerook,#DATE_DEBUT}
+]
+
+[(#REM) <!-- quel jour au_final --->]
+[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui) 
+	[(#SET{jour_fin,[(#DATE_DEBUT|affdate{w})]})]
+	[(#SET{au_final,[(#DATE_FIN|affdate{Y-m-d H:i}|strtotime)]})]
+	#SET{au_finalok,#DATE_FIN}
+]
+
+[(#REM) <!-- on calcule les cases à ne pas occuper -->]
+[(#SET{debute_mn,[(#GET{date_zero}|duree{#DATE_DEBUT,minutes})]})]
+[(#SET{duree_mn,[(#DATE_DEBUT|duree{#DATE_FIN,minutes})]})]		
+[(#SET{nb_td,[(#GET{duree_mn}|div{30})]})]
+<BOUCLE_ajouter_td(DATA){enum 1,#GET{nb_td}|moins{1}}>
+[(#SET{td_a_virer,[(#GET{debute_mn}|plus{[(#VALEUR|mult{30})]})]})]
+#SET{tds_supprimer, #GET{tds_supprimer}|push{#GET{td_a_virer}}}
+</BOUCLE_ajouter_td>
+
+</BOUCLE_donnees>
+
+[(#REM) <!-- nombre de jours colonnes --->]
+[(#SET{nb_jours,
+	[(#GET{date_zerook}|duree{#GET{au_finalok},days}|plus{1})]
+})]
+
+[(#REM) <!-- nombre d'heures --->]
+[(#SET{nb_heures,
+	[(#EVAL{[(#GET{heure_max_fin}|intval)]-[(#GET{heure_max_debut}|intval)]}|plus{1})]
+})]
+
+
+[(#REM) <!-- nombre de minutes --->]
+[(#SET{nb_minutes,
+	[(#GET{nb_heures}|moins{1}|mult{60}|plus{1})]
+})]
+
+[(#REM) <!-- 
+<p>Les #GET{nb_jours} jours
+entre [(#VAL{date_jour_#GET{jour_debut_numero}|plus{1}}|_T)] et [(#VAL{date_jour_#GET{jour_fin}|plus{1}}|_T)] vont au maximum de [(#GET{heure_max_debut})h] [à (#GET{heure_max_fin})h]</p>
+<p>La table aura donc #GET{nb_heures} heures pour [ (#GET{nb_minutes}) ] minutes sur [ (#GET{nb_jours}) ] colonnes (les jours)</p>
+-->]
+
+<style type="text/css">
+#planning_simple td{width:[(#EVAL{750}|div{#GET{nb_jours}})px];} /* 750 = table 800px moins heures 50px*/
+</style>
+
+
+
+<div class='planning_simple'>
+[(#REM) <!-- l'emploi du temps en table, la construction tr/td est réalisé puis remplit en fonction des minutes, de 0 lundi 8h à 6400… le vendredi 16h -->]
+<table id="planning_simple">
+<caption>#INFO_TITRE{article,#ENV{id_article}}</caption>
+<tbody>
+<tr>
+		<th class="horaires"><!--Horaires--></th>
+	[(#REM) <!-- les jours (colonnes) de la semaine en multilingues -->]
+	<BOUCLE_jours(DATA){enum 1,#GET{nb_jours}}>
+		<th class="jours">[(#VAL{date_jour_#GET{jour_debut_numero}|plus{#VALEUR}}|_T|ucfirst)]</th>
+	</BOUCLE_jours>
+	
+</tr>
+
+	[(#REM) <!-- 1 ligne = 30 minutes -->]	
+	<BOUCLE_30_minutes(DATA){enum 0,#GET{nb_minutes},30}>
+		[(#SET{30_minutes,[(#EVAL{date("H:i", strtotime("+[(#GET{heure_max_debut}|round|moins{1}) hours ][(#VALEUR)] minutes","00:00"))})]})]
+		<tr class="#GET{30_minutes} [ (#COMPTEUR_BOUCLE|alterner{heure,demie})]">
+				
+			<td class="horaires">#GET{30_minutes}</td>
+			
+			[(#REM) <!-- les evenements de chaque cellules -->]
+			<BOUCLE_cellules(DATA){enum 1,#GET{nb_jours}}>
+				
+				[(#REM) <!-- calcule la période en minutes a additionner à la cellule zéro (exemple 490 minutes) -->]
+				[(#SET{periode,[(#VALEUR|moins{1}|intval|mult{1440}|plus{#_30_minutes:VALEUR})]})]
+				
+				[(#REM) <!-- additionne la cellule zéro + la période -->]
+				[(#SET{date_evalue,[(#EVAL{date("Y-m-d H:i", strtotime("[+(#GET{periode}) minutes]","[(#GET{au_debut})]"))})]})]
+				
+				[(#REM) <!-- la cellule doit-elle disparaitre au profit d'un rowspan précédent, reprend le array -->]
+				#SET{td_supprime,non}
+				[(#GET{periode}|in_array{#GET{tds_supprimer}}|oui) [(#SET{td_supprime,oui})]]
+				
+				[(#REM) <!-- affiche l'evenement qui correspond à cette date -->]
+				<INCLURE{fond=inclure/evenement_date_value,id_article,date_evalue=#GET{date_evalue},td_supprime=#GET{td_supprime}} />
+						
+			</BOUCLE_cellules>	
+		</tr>
+	</BOUCLE_30_minutes>
+
+</tbody>
+</table>
+
+</div>
+
+</B_donnees><:planning_simple:aucune_donnee:><code>/?page=planning_simple&id_article=13</code>
+<:planning_simple:explication_evenements_dependances:>
+<//B_donnees>
