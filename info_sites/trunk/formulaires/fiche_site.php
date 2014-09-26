@@ -204,24 +204,20 @@ function formulaires_fiche_site_traiter_dist()
             // Si oui, on prend son id comme référent
             if ($organisation_existante = sql_fetsel('id_organisation', 'spip_organisations', 'nom=' . sql_quote($organisation))) {
                 $id_organisation = $organisation_existante['id_organisation'];
+                spip_log('Organisation #' . $id_organisation . ' existante', 'info_sites');
             } else {
                 // Pas d'organisation existante, on la crée en BDD
                 $id_organisation = sql_insertq('spip_organisations', array('nom' => $organisation));
+                spip_log('Organisation #' . $id_organisation . ' a été créé', 'info_sites');
             }
             // Si la liaison entre le projet parent et l'organisation n'existe pas,
             // on crée la liaison
-            if (is_int($id_projet_parent)
-                and is_int($id_organisation)
-                and $compteur = sql_countsel('spip_projets_liens', 'id_projet=' . $id_projet_parent . ' and id_objet=' . $id_organisation . " and objet='organisation'")
-                and $compteur == false) {
+            if ($id_projet_parent and $id_organisation) {
                 sql_insertq('spip_projets_liens', array('id_projet' => $id_projet_parent, 'id_objet' => $id_organisation, 'objet' => 'organisation'));
             }
             // Si la liaison entre le projet et l'organisation n'existe pas,
             // on crée la liaison
-            if (is_int($id_projet)
-                and is_int($id_organisation)
-                and $compteur = sql_countsel('spip_projets_liens', 'id_projet=' . $id_projet . ' and id_objet=' . $id_organisation . " and objet='organisation'")
-                and $compteur == false) {
+            if ($id_projet and $id_organisation) {
                 sql_insertq('spip_projets_liens', array('id_projet' => $id_projet, 'id_objet' => $id_organisation, 'objet' => 'organisation'));
             }
         } elseif (is_int($_id_organisation)) {
