@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem">
+		<:rubriqueur:rubriqueur_titre:>
+	</h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>] 
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#EDITABLE)
+	<form method="post" action="#ENV{action}#confirmation">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			
+			[(#SAISIE{selecteur_rubrique, rubrique_racine, 
+				label=<:rubriqueur:rubrique_racine:>, 
+				explication=<:rubriqueur:rubrique_racine_explications:>})]
+			
+			[(#SAISIE{textarea, rubriques, obligatoire=oui, 
+				label=<:rubriqueur:rubriques:>, 
+				explication=<:rubriqueur:rubriques_explications:>})]
+			
+			#SET{intitule_bouton,#EVAL{_T('previsualiser')}}
+			[<a name="confirmation"></a>
+			<li class="">
+				<span class="h3"><:rubriqueur:apercu_import:></span>
+				(#ENV**{erreurs}|table_valeur{previsu}|propre)
+			</li>
+			[(#SAISIE{oui_non, confirmer, label=<:rubriqueur:confirmer_import:>})]
+			#SET{intitule_bouton,#EVAL{_T('rubriqueur:bouton_creer')}}
+			]
+			
+			<p class="boutons">
+				<span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="#GET{intitule_bouton}"/>
+			</p>
+
+		</div>
+	</form>
+	]
+	
+</div>

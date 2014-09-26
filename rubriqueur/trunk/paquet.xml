@@ -1,0 +1,22 @@
+<paquet
+        prefix="rubriqueur"
+        categorie="edition"
+        version="1.0.0"
+        etat="stable"
+        compatibilite="[3.0.0;3.0.*]"
+        logo="prive/themes/spip/images/rubriqueur-64.png"
+        documentation=""
+        >
+
+    <nom>Rubriqueur</nom>
+
+    <auteur>nicod_</auteur>
+    <credit lien="http://www.thenounproject.com/prerakpatel">Icone créée par Prerak Patel / The Noun Project</credit>
+    
+    <licence>GNU/GPL</licence>
+    
+    <menu nom="rubriqueur" titre="rubriqueur:rubriqueur_titre" parent="menu_edition" icone="images/rubriqueur-16.png" action="rubriqueur" />
+
+    <pipeline nom="autoriser" inclure="rubriqueur_autorisations.php"/>
+
+</paquet>
