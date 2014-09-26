@@ -1,0 +1,51 @@
+<paquet
+	prefix="chatbox"
+	categorie="communication"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/chatbox-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2013-02-09 09:22:51
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Chatbox</nom>
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://www.root-me.org'>g0uZ</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="chatbox_autorisations.php" />
+		<pipeline nom="insert_head" inclure="chatbox_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (à éviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="chatbox" titre="chatbox:chatbox_titre" parent="menu_edition"  icone="images/chatbox-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="chatbox" titre="chatbox:chatbox_titre" parent="configuration" icone="images/chatbox-24.png" />
+	-->
+
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="chatbox_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/chatbox.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/chatbox.php" /> 
+
+	<menu nom="chatbox_messages" titre="chatbox_message:titre_chatbox_messages" parent="menu_edition" icone="images/chatbox_message-16.png" action="chatbox_messages" /> 
+	<menu nom="chatbox_message_creer" titre="chatbox_message:icone_creer_chatbox_message" parent="outils_rapides" icone="images/chatbox_message-new-16.png" action="chatbox_message_edit" parametres="new=oui" /> 
+</paquet>

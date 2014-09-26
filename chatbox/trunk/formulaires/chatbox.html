@@ -1,0 +1,45 @@
+<script type="text/javascript">
+<!--
+//[CDATA[
+
+function count(div){
+    var max_length=250;
+    if (div.value.length > max_length ){ 
+	div.style.backgroundColor='red'; 
+	$('#nbc').css({color: 'red'}); 
+	document.formulaire_chatbox.submit.disabled=true;
+    } else {
+	div.style.backgroundColor='white'; 
+	$('#nbc').css({color: 'green'});
+	document.formulaire_chatbox.submit.disabled=false;
+    } 
+    $('#nbc').html('<em><:chatbox:max:> : '+div.value.length + '/' + max_length + '</em>');
+}
+
+//]]>
+//-->
+</script>
+
+[<script type="text/javascript">
+<!--
+$(document).ready(function(){
+    ajaxReload('chat_box');
+    if (jQuery.modalbox) setTimeout(function(){$.modalboxclose();}, 2000);
+    else setTimeout(function(){document.location="[(#URL_SITE_SPIP)]"}, 2000);
+});
+//-->
+</script>
+<div class='ts success'>(#ENV*{message_ok})</div>]
+
+[<div class='ts error'>(#ENV*{message_erreur})</div>]
+<div class="formulaire_spip formulaire_chatbox formulaire_editer_message_chatbox" id="formulaire_chatbox">
+    <br class='bugajaxie' />
+    <form name="formulaire_chatbox" method="post" action="[(#ENV{action})]">
+	  [(#ACTION_FORMULAIRE{#ENV{action}})]
+	  <textarea class="inserer_barre_edition" onkeyup="count(this);" name="message">#ENV{message}</textarea>
+	  <span id="nbc" class="italic fright tright"><:chatbox:max:>:&nbsp;250&nbsp;<:chatbox:characteres:></span><br/><br/>
+	  
+	  <p class="tcenter italic ts"><:chatbox:explication_utilisation_chatbox:></p>
+	  <input id="submit" class="submit" type="submit" value="<:envoyer:>"/><br/>
+    </form>
+</div>

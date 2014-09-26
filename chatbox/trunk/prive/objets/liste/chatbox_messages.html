@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	message,1, 
+	date,-1, 
+	id_chatbox_message,1,
+	points,-1
+}})]<B_liste_chatbox_messages>
+#ANCRE_PAGINATION
+<div class="liste-objets chatbox_messages">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chatbox_message:info_1_chatbox_message,chatbox_message:info_nb_chatbox_messages}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='message' scope='col'>[(#TRI{message,<:chatbox_message:label_message:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_chatbox_message,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_chatbox_messages(CHATBOX_MESSAGES){id_auteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num message},#GET{defaut_tri}}{par message}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{chatbox_message-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{chatbox_message,#ID_CHATBOX_MESSAGE})]</td> 
+			<td class='message principale'>[(#LOGO_CHATBOX_MESSAGE|image_reduire{20,26})]<a href="[(#ID_CHATBOX_MESSAGE|generer_url_entite{chatbox_message})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHATBOX_MESSAGE">[(#RANG). ]#MESSAGE</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,chatbox_message,#ID_CHATBOX_MESSAGE}|?{
+				<a href="[(#URL_ECRIRE{chatbox_message_edit,id_chatbox_message=#ID_CHATBOX_MESSAGE})]">#ID_CHATBOX_MESSAGE</a>,
+				#ID_CHATBOX_MESSAGE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_chatbox_messages>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_chatbox_messages>[
+<div class="liste-objets chatbox_messages caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_chatbox_messages>

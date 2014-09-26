@@ -1,0 +1,13 @@
+<BOUCLE_chatbox_message(CHATBOX_MESSAGES){id_chatbox_message}{statut?}>
+
+[<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+	<label><:chatbox_message:label_id_auteur:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#ID_AUTEUR|colore_user)</span>
+</div>]
+
+[<div class="champ contenu_message[ (#MESSAGE*|strlen|?{'',vide})]">
+	<label><:chatbox_message:label_message:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{message} message'>(#MESSAGE)</span>
+</div>]
+
+</BOUCLE_chatbox_message>

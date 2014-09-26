@@ -1,0 +1,22 @@
+[(#CACHE{0})]
+<B_chat_box_archive>
+    [(#ANCRE_PAGINATION)]
+    <ul>
+        <BOUCLE_chat_box_archive(CHATBOX_MESSAGES){par id_chatbox_message}{pagination 4}{inverse}{0,20}{lang}>
+            <li>
+                <span class="[(#COMPTEUR_BOUCLE|alterner{fleft,fright})]">[(#ID_AUTEUR|afficher_avatar{'',50})]</span>
+                <span class="[(#COMPTEUR_BOUCLE|alterner{fleft,'tright fright'})]" style="margin-[(#COMPTEUR_BOUCLE|alterner{left,right})]: 0.5rem;">
+                    [(#ID_AUTEUR|colore_user{#LANG})]<br/>
+                    <span class="ts gris [(#COMPTEUR_BOUCLE|alterner{fleft,tright})]">[(#DATE|affdate)]&nbsp;<:a:>&nbsp;[(#DATE|affdate{"H:i"})]</span>
+                </span>
+                <div class="clearfix"></div>
+                <br/>
+                
+                <p class="ts [(#COMPTEUR_BOUCLE|alterner{tleft,tright})]">[(#MESSAGE|PtoBR|liens_ouvrants|lignes_longues{30})]</p>
+            </li>
+        </BOUCLE_chat_box_archive>
+    </ul>
+    [(#PAGINATION{precedent_suivant})]
+</B_chat_box_archive>
+
+

@@ -1,0 +1,26 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_chatbox_message,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_chatbox_message' value='#ENV{id_chatbox_message}' />
+		<ul>
+
+			[(#SAISIE{auteurs, id_auteur,
+				label=<:chatbox_message:label_id_auteur:>,
+				explication=<:chatbox_message:explication_id_auteur:> })]
+
+			[(#SAISIE{textarea, message, obligatoire=oui,
+				label=<:chatbox_message:label_message:>,
+				explication=<:chatbox_message:explication_message:> ,
+				li_class=haut, class=inserer_barre_edition, rows=4})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
