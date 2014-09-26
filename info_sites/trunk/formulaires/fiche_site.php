@@ -35,18 +35,19 @@ function formulaires_fiche_site_charger_dist()
 }
 
 /*
-*   Fonction de vérification, cela fonction avec un tableau d'erreur.
-*   Le tableau est formater de la sorte:
+*   Fonction de vérification, cela fonctionne avec un tableau d'erreur.
+*   Le tableau est formaté de la sorte:
 *   if (!_request('NomErreur')) {
 *       $erreurs['message_erreur'] = '';
 *       $erreurs['NomErreur'] = '';
 *   }
-*   Pensez à utiliser _T('info_obligatoire'); pour les éléments obligatoire.
+*   Pensez à utiliser _T('info_obligatoire'); pour les éléments obligatoires.
 */
 function formulaires_fiche_site_verifier_dist()
 {
     $erreurs = array();
 
+    // On s'occupe des champs obligatoires
     $obligatoires = array('logiciel_nom', 'logiciel_version', 'titre', 'type_site', 'fo_url', 'bo_url');
     foreach ($obligatoires as $obligatoire) {
         if (!_request($obligatoire)) {
@@ -65,12 +66,14 @@ function formulaires_fiche_site_traiter_dist()
 
     // --------------------
     // On récupère les valeurs transmises par le formulaire
-    $organisation        = trim(_request('organisation')); // On enlève les espaces inutiles avant et après
-    $projet              = trim(_request('projet')); // On enlève les espaces inutiles avant et après
-    $projet_parent       = trim(_request('projet_parent')); // On enlève les espaces inutiles avant et après
+    // On enlève sur chaque valeur les espaces inutiles avant et après
+    // C'est juste pour éviter des erreurs d'étourderies quand on frappe au clavier
+    $organisation        = trim(_request('organisation'));
+    $projet              = trim(_request('projet'));
+    $projet_parent       = trim(_request('projet_parent'));
     $webservice          = trim(_request('webservice'));
 
-    // On retrouve la clé (cf. uniqid) à partir du webservice
+    // On retrouve la clé (cf. 'uniqid') à partir du webservice
     if ($webservice) {
         $parse_url       = parse_url($webservice);
         parse_str($parse_url['query'], $query);
@@ -95,7 +98,7 @@ function formulaires_fiche_site_traiter_dist()
     $fo_password         = trim(_request('fo_password'));
     $bo_url              = trim(_request('bo_url'));
     $bo_login            = trim(_request('bo_login'));
-    $bo_password         = trim(_request('bo_password'));
+    $bo_password         = trim(_request('bo_password')); // Est-ce vraiement utile de faire un trim() sur un password ?
     $date                = date_format(date_create(), 'Y-m-d H:i:s');
 
     // --------------------
@@ -111,7 +114,14 @@ function formulaires_fiche_site_traiter_dist()
         }
 
         if (!is_int($_id_projet_parent) or $_id_projet_parent == 0) {
-            $id_projet_parent = sql_insertq('spip_projets', array('nom' => $projet_parent));
+            // On va vérifier que le nom renseigné n'est pas déjà dans la bdd.
+            // Si oui, on prend son id comme référent
+            if ($projet_parent_existant = sql_fetsel('id_projet', 'spip_projets', 'nom=' . sql_quote($projet_parent))) {
+                $id_projet_parent = $projet_parent_existant['id_projet'];
+            } else {
+                // Pas de projet existant, on l'insère en BDD
+                $id_projet_parent = sql_insertq('spip_projets', array('nom' => $projet_parent));
+            }
         } elseif (is_int($_id_projet_parent)) {
             $id_projet_parent = $_id_projet_parent;
         }
@@ -127,36 +137,44 @@ function formulaires_fiche_site_traiter_dist()
             $_id_projet = $projet;
         }
 
+        // On n'est pas sur un integer mais un string
         if ($projet and (!is_int($_id_projet) or $_id_projet == 0)) {
-            $champs['nom']                    = $projet;
-            $champs['url_site']               = $fo_url;
-            $champs['date_publication']       = $date;
-            if ($rss_commits) {
-                $champs['versioning_trac']    = $versioning_trac;
-                $champs['versioning_type']    = $versioning_type;
-                $champs['versioning_path']    = $versioning_path;
-                $champs['versioning_rss']     = $versioning_rss;
-            }
-            if ($id_projet_parent and $id_projet_parent != $projet) {
-                $champs['id_projet_parent']   = $id_projet_parent;
-            }
-            if ($type_site == 'prod') {
-                $champs['statut']  = 'production';
-            }
-            if ($type_site == 'rec') {
-                $champs['statut']  = 'test';
-            }
-            if ($type_site == 'prep') {
-                $champs['statut']  = 'recette';
-            }
-            if ($type_site == 'dev') {
-                $champs['statut']  = 'fabrication';
-            }
-            $id_projet = sql_insertq('spip_projets', $champs);
-            if (is_int($id_projet) and is_int($id_auteur)) {
-                // On reprend le comportement du plugin PROJETS quand on crée un nouveau projet,
-                // on lie l'auteur au projet qu'il a créé
-                sql_insertq('spip_auteurs_liens', array('id_auteur' => $id_auteur, 'id_objet' => $id_projet, 'objet' => 'projet'));
+            // On va vérifier que le nom renseigné n'est pas déjà dans la bdd.
+            // Si oui, on prend son id comme référent
+            if ($projet_existant = sql_fetsel('id_projet', 'spip_projets', 'nom=' . sql_quote($projet))) {
+                $id_projet = $projet_existant['id_projet'];
+            } else {
+                // pas de projet existant, donc on peut l'ajouter en BDD
+                $champs['nom']                    = $projet;
+                $champs['url_site']               = $fo_url;
+                $champs['date_publication']       = $date;
+                if ($rss_commits) {
+                    $champs['versioning_trac']    = $versioning_trac;
+                    $champs['versioning_type']    = $versioning_type;
+                    $champs['versioning_path']    = $versioning_path;
+                    $champs['versioning_rss']     = $versioning_rss;
+                }
+                if ($id_projet_parent and $id_projet_parent != $projet) {
+                    $champs['id_projet_parent']   = $id_projet_parent;
+                }
+                if ($type_site == 'prod') {
+                    $champs['statut']  = 'production';
+                }
+                if ($type_site == 'rec') {
+                    $champs['statut']  = 'test';
+                }
+                if ($type_site == 'prep') {
+                    $champs['statut']  = 'recette';
+                }
+                if ($type_site == 'dev') {
+                    $champs['statut']  = 'fabrication';
+                }
+                $id_projet = sql_insertq('spip_projets', $champs);
+                if (is_int($id_projet) and is_int($id_auteur)) {
+                    // On reprend le comportement du plugin PROJETS quand on crée un nouveau projet,
+                    // on lie l'auteur au projet qu'il a créé
+                    sql_insertq('spip_auteurs_liens', array('id_auteur' => $id_auteur, 'id_objet' => $id_projet, 'objet' => 'projet'));
+                }
             }
         } elseif (is_int($_id_projet)) {
             $id_projet = $_id_projet;
@@ -172,12 +190,30 @@ function formulaires_fiche_site_traiter_dist()
             $_id_organisation = $organisation;
         }
 
+        // on n'est pas sur un integer ou mais un string
         if (!is_int($_id_organisation) or $_id_organisation == 0) {
-            $id_organisation = sql_insertq('spip_organisations', array('nom' => $organisation));
-            if (is_int($id_projet_parent) and is_int($id_organisation)) {
+            // On vérifie que le nom renseigné n'est pas déjà dans la bdd.
+            // Si oui, on prend son id comme référent
+            if ($organisation_existante = sql_fetsel('id_organisation', 'spip_organisations', 'nom=' . sql_quote($organisation))) {
+                $id_organisation = $organisation_existante['id_organisation'];
+            } else {
+                // Pas d'organisation existante, on la crée en BDD
+                $id_organisation = sql_insertq('spip_organisations', array('nom' => $organisation));
+            }
+            // Si la liaison entre le projet parent et l'organisation n'existe pas,
+            // on crée la liaison
+            if (is_int($id_projet_parent)
+                and is_int($id_organisation)
+                and $compteur = sql_countsel('spip_projets_liens', 'id_projet=' . $id_projet_parent . ' and id_objet=' . $id_organisation . " and objet='organisation'")
+                and $compteur == 0) {
                 sql_insertq('spip_projets_liens', array('id_projet' => $id_projet_parent, 'id_objet' => $id_organisation, 'objet' => 'organisation'));
             }
-            if (is_int($id_projet) and is_int($id_organisation)) {
+            // Si la liaison entre le projet et l'organisation n'existe pas,
+            // on crée la liaison
+            if (is_int($id_projet)
+                and is_int($id_organisation)
+                and $compteur = sql_countsel('spip_projets_liens', 'id_projet=' . $id_projet . ' and id_objet=' . $id_organisation . " and objet='organisation'")
+                and $compteur == 0) {
                 sql_insertq('spip_projets_liens', array('id_projet' => $id_projet, 'id_objet' => $id_organisation, 'objet' => 'organisation'));
             }
         } elseif (is_int($_id_organisation)) {
@@ -202,15 +238,19 @@ function formulaires_fiche_site_traiter_dist()
         $champs['bo_login']         = $bo_login;
         $champs['bo_password']      = $bo_password;
         $champs['date_creation']    = $date;
-        $id_projets_site = sql_insertq('spip_projets_sites', $champs);
+
+        $id_projets_site            = sql_insertq('spip_projets_sites', $champs);
         if (is_int($id_projets_site) and is_int($id_projet) and $id_projet != 0) {
             sql_insertq('spip_projets_sites_liens', array('id_projets_site' => $id_projets_site, 'id_objet' => $id_projet, 'objet' => 'projet'));
         }
     }
 
+    // Et hop! On regarde si on n'a pas un id_projet_site
+    // Dans ce cas, erreur...
     if (!$id_projets_site) {
         $res['message_erreur']      = _T('enregistrement_ko');
     } else {
+        // Le must est que tout se passe bien :-)
         $res['message_ok']          = _T('enregistrement_ok');
         $res['redirect']            = generer_url_entite($id_projets_site, 'projets_site');
     }

@@ -7,7 +7,7 @@
     ][(#LOGICIEL_PLUGINS*|strlen|oui)
             <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{diagnostic}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton diagnostic" title="<:info_sites:btn_diagnostic|attribut_html:>"><i class="fa fa-table"></i> <:info_sites:btn_diagnostic:></a></li>
     ][(#WEBSERVICE*|strlen|oui)
-            <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{webservice}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton website" title="<:info_sites:btn_webservice_consultation|attribut_html:>"><i class="fa fa-list"></i> <:info_sites:btn_webservice_consultation:></a></li>
+            <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{webservice}|parametre_url{id_projets_site,#ID_PROJETS_SITE})]" class="bouton website" title="<:info_sites:btn_webservice_consultation|attribut_html:>"><i class="fa fa-globe"></i> <:info_sites:btn_webservice_consultation:></a></li>
     ]
     </ul>
 </div>
@@ -25,7 +25,7 @@
             [(#SET{projets_id_rss, [(#GET{projets_id_rss}|push{#ID_PROJET})]})]
         ][(#VERSIONING_RSS|non)[(#ID_PROJET_PARENT|=={0}|non)[(#INFO_VERSIONING_RSS{projet,#ID_PROJET_PARENT}|oui)
             [(#SET{projets_id_rss, [(#GET{projets_id_rss}|push{#ID_PROJET_PARENT})]})]
-        ]]
+        ]]]
     </BOUCLE_projets_rss>
 
     [(#SET{projets_id,[(#GET{projets_id}|array_unique|array_filter)]})]
