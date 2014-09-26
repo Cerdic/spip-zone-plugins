@@ -69,8 +69,9 @@ function formulaires_fiche_site_traiter_dist()
         return $res['message_erreur'] = _T('projets_site:info_creer_projetssite_non_autorise');
     }
 
-    $liste_plugins       = isset($GLOBALS['meta']['plugin'])? unserialize($GLOBALS['meta']['plugin']) : array();
+    $liste_plugins       = isset($GLOBALS['meta']['plugin']) ? array_keys(unserialize($GLOBALS['meta']['plugin'])) : array();
     $id_ateur            = session_get('id_auteur');
+    $rss_commits         = false;
 
     // --------------------
     // On récupère les valeurs transmises par le formulaire
@@ -92,7 +93,7 @@ function formulaires_fiche_site_traiter_dist()
 
     $titre               = trim(_request('titre'));
     $type_site           = trim(_request('type_site'));
-    if (in_array('rss_commits', $liste_plugins)) {
+    if (in_array('RSS_COMMITS', $liste_plugins)) {
         $rss_commits     = true;
         $versioning_trac = trim(_request('versioning_trac'));
         $versioning_type = trim(_request('versioning_type'));
