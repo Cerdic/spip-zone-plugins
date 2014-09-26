@@ -5,7 +5,7 @@
         etat="stable"
         compatibilite="[3.0.0;3.0.*]"
         logo="prive/themes/spip/images/rubriqueur-64.png"
-        documentation=""
+        documentation="http://contrib.spip.net/4561"
         >
 
     <nom>Rubriqueur</nom>
