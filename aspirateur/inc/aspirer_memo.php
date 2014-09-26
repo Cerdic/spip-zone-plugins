@@ -70,71 +70,11 @@ function aspirateur_tmp_liste($url_parent){
                         return _T('aspirateur:erreur_ecrire_stockage').$path; 
         }
         //passage en minuscules (filtre SPIP d'urls_etendus)
-	$url_parent=aspirateur_url_nettoyer($url_parent,50);
+        // pour url_nettoyer
+        include_spip('action/editer_url'); 
+	$url_parent=url_nettoyer($url_parent,50);
 	$m = md5($url_parent);
 	$md5url_parent=substr($m, 0, 5)."_".basename($url_parent);
 	$aspirateur_tmp_liste=$path.$md5url_parent.".txt";
 	return $aspirateur_tmp_liste;
-}
-
-
-/**
- *
- * Fonction reprise de SPIP (plugin dist urls_etendues)
- *
- * todo, sortir la fonction url_nettoyer pour être réutilisable ici ou ailleurs
- *
- *
-**/
-function aspirateur_url_nettoyer($titre,$longueur_maxi,$longueur_min=0,$separateur='-',$filtre=''){
-
-	$titre = supprimer_tags(supprimer_numero(extraire_multi($titre)));
-	$url = translitteration(corriger_caracteres($titre));
-
-	if ($filtre)
-		$url = $filtre($url);
-
-	// on va convertir tous les caracteres de ponctuation et espaces
-	// a l'exception de l'underscore (_), car on veut le conserver dans l'url
-	$url = str_replace('_', chr(7), $url);
-	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
-	$url = str_replace(chr(7), '_', $url);
-
-	// S'il reste trop de caracteres non latins, les gerer comme wikipedia
-	// avec rawurlencode :
-	if (preg_match_all(",[^a-zA-Z0-9 _]+,", $url, $r, PREG_SET_ORDER)) {
-		foreach ($r as $regs) {
-			$url = substr_replace($url, rawurlencode($regs[0]),
-				strpos($url, $regs[0]), strlen($regs[0]));
-		}
-	}
-
-	// S'il reste trop peu, renvoyer vide
-	if (strlen($url) < $longueur_min)
-		return '';
-
-	// Sinon couper les mots et les relier par des $separateur
-	$mots = preg_split(",[^a-zA-Z0-9_%]+,", $url);
-	$url = '';
-	foreach ($mots as $mot) {
-		if (!strlen($mot)) continue;
-		$url2 = $url.$separateur.$mot;
-
-		// Si on depasse $longueur_maxi caracteres, s'arreter
-		// ne pas compter 3 caracteres pour %E9 mais un seul
-		$long = preg_replace(',%.,', '', $url2);
-		if (strlen($long) > $longueur_maxi) {
-			break;
-		}
-
-		$url = $url2;
-	}
-	$url = substr($url, 1);
-
-	// On enregistre en utf-8 dans la base
-	$url = rawurldecode($url);
-
-	if (strlen($url) < $longueur_min)
-		return '';
-	return $url;
 }
