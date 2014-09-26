@@ -61,6 +61,13 @@ function formulaires_fiche_site_verifier_dist()
 function formulaires_fiche_site_traiter_dist()
 {
     $res                 = array();
+
+    // On vérifie si l'auteur a le droit de créer des sites de projet
+    // S'il n'a pas les droits, pas la peine d'aller plus loin
+    if (!autoriser('creer','projets_site')) {
+        return $res['message_erreur'] = _T('projets_site:info_creer_projetssite_non_autorise');
+    }
+
     $liste_plugins       = isset($GLOBALS['meta']['plugin'])? unserialize($GLOBALS['meta']['plugin']) : array();
     $id_ateur            = session_get('id_auteur');
 
