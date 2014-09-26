@@ -3,14 +3,11 @@
  *
  * Fonction reprise de SPIP (plugin dist urls_etendues)
  *
- * todo, sortir la fonction url_nettoyer pour être réutilisable ici ou ailleurs
- *
  *
 **/
-function temps_url_nettoyer($titre,$longueur_maxi,$longueur_min=0,$separateur='-',$filtre=''){
-	include_spip('action/editer_url'); 
-	return url_nettoyer($titre,$longueur_maxi,$longueur_min,$separateur,$filtre);
-}
+// pour url_nettoyer
+include_spip('action/editer_url'); 
+
 
 /*
  *
