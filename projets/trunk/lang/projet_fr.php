@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_publication'       => 'Date de publication',
 	'label_descriptif'             => 'Descriptif du projet',
 	'label_enjeux'                 => 'Enjeux',
-	'label_id_projet_parent'              => 'Projet parent',
+	'label_id_projet_parent'       => 'Projet parent',
 	'label_id_projet'              => 'Identifiant du projet',
 	'label_id_projets_cadre'       => 'Cadre du projet',
 	'label_maj'                    => 'Date de mise à jour',
@@ -73,7 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_tous_liens_projets'   => 'Retirer tous les projets',
 
 	// S
-	'supprimer_projet' => 'Supprimer ce projet',
+	'supprimer_projet'             => 'Supprimer ce projet',
 
 	// T
 	'texte_ajouter_projet'         => 'Ajouter un projet',
