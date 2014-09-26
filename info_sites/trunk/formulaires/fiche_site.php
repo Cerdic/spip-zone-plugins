@@ -205,7 +205,7 @@ function formulaires_fiche_site_traiter_dist()
             if (is_int($id_projet_parent)
                 and is_int($id_organisation)
                 and $compteur = sql_countsel('spip_projets_liens', 'id_projet=' . $id_projet_parent . ' and id_objet=' . $id_organisation . " and objet='organisation'")
-                and $compteur == 0) {
+                and $compteur == false) {
                 sql_insertq('spip_projets_liens', array('id_projet' => $id_projet_parent, 'id_objet' => $id_organisation, 'objet' => 'organisation'));
             }
             // Si la liaison entre le projet et l'organisation n'existe pas,
@@ -213,7 +213,7 @@ function formulaires_fiche_site_traiter_dist()
             if (is_int($id_projet)
                 and is_int($id_organisation)
                 and $compteur = sql_countsel('spip_projets_liens', 'id_projet=' . $id_projet . ' and id_objet=' . $id_organisation . " and objet='organisation'")
-                and $compteur == 0) {
+                and $compteur == false) {
                 sql_insertq('spip_projets_liens', array('id_projet' => $id_projet, 'id_objet' => $id_organisation, 'objet' => 'organisation'));
             }
         } elseif (is_int($_id_organisation)) {
