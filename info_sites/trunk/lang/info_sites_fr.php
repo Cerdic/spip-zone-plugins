@@ -61,6 +61,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_nombre_contacts' => 'Contacts liés',
     'info_nombre_projets' => 'Nombre de projets',
     'info_sites_titre' => 'Info Sites',
+    'info_vos_criteres' => 'Vos critères',
+    'info_critere_sans_webservice' => 'Sans URL de webservice',
 
     // L
     'label_branche' => 'Branche',
@@ -97,6 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',
     'titre_logiciel_plugins_maj_meme_branche' => 'Mise à jour des plugins sur la même branche',
     'titre_page_configurer_info_sites' => 'Configurer le plugin Info Sites',
+    'titre_page_lister_projets_sites' => 'Lister les sites de projets',
 
     // W
     'webservice_consultation' => 'Consultation du webservice',

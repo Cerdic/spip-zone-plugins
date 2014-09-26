@@ -129,6 +129,7 @@ function formulaires_fiche_site_traiter_dist()
             } else {
                 // Pas de projet existant, on l'insère en BDD
                 $id_projet_parent = sql_insertq('spip_projets', array('nom' => $projet_parent));
+                sql_insertq('spip_auteurs_liens', array('id_auteur' => $id_auteur, 'id_objet' => $id_projet_parent, 'objet' => 'projet'));
             }
         } elseif (is_int($_id_projet_parent)) {
             $id_projet_parent = $_id_projet_parent;
@@ -178,7 +179,7 @@ function formulaires_fiche_site_traiter_dist()
                     $champs['statut']  = 'fabrication';
                 }
                 $id_projet = sql_insertq('spip_projets', $champs);
-                if (is_int($id_projet) and is_int($id_auteur)) {
+                if ($id_projet and $id_auteur) {
                     // On reprend le comportement du plugin PROJETS quand on crée un nouveau projet,
                     // on lie l'auteur au projet qu'il a créé
                     sql_insertq('spip_auteurs_liens', array('id_auteur' => $id_auteur, 'id_objet' => $id_projet, 'objet' => 'projet'));

@@ -1,0 +1,24 @@
+[(#AUTORISER{voir,projets_site}|sinon_interdire_acces)]
+<h1><:info_sites:titre_page_lister_projets_sites:></h1>
+
+<div class="formulaire_spip">
+    <form action="#ENV{action}" method="post">
+    	#ACTION_FORMULAIRE{#ENV{action}}
+    	<ul>
+    	<li>
+    		<label for="champ_where"><:info_sites:info_vos_criteres:></label>
+    		<select name="where">
+    			<option value=""></option>
+    			<option value="projets_sites.webservice NOT LIKE '%http%'"><:info_sites:info_critere_sans_webservice:></option>
+    		</select>
+    	</li>
+
+    	</ul>
+
+        <p class="boutons">
+            <input type="submit" class="submit" value="<:pass_ok:>" />
+        </p>
+    </form>
+</div>
+
+<INCLURE{fond=objets/liste/projets_sites,where=#ENV**{where},env,ajax} />
