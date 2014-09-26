@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('base/abstract_sql');
 include_spip('inc/session');
+include_spip('inc/autoriser');
 
 function formulaires_fiche_site_charger_dist()
 {
@@ -64,7 +65,7 @@ function formulaires_fiche_site_traiter_dist()
 
     // On vérifie si l'auteur a le droit de créer des sites de projet
     // S'il n'a pas les droits, pas la peine d'aller plus loin
-    if (!autoriser('creer','projets_site')) {
+    if (!autoriser('creer','projetssite')) {
         return $res['message_erreur'] = _T('projets_site:info_creer_projetssite_non_autorise');
     }
 
