@@ -46,6 +46,8 @@ function recupere_links($parent,$methode="loadHTMLFile",$thistag='a',$thisattrib
 	foreach ($tags as $tag){
 		$attribut=$tag->getAttribute($thisattribut);
 		$attribut=clean_href($attribut);
+		//pour reprendre au besoin des documents externes laisser la main au "Motif nécessaire dans le chemin des documents (Regex)" 
+		if($thistag=='a')
 		$attribut=verifier_le_lien($attribut);
 		
 		//récupérer les textes des liens
