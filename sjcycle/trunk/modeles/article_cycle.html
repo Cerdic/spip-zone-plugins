@@ -91,12 +91,12 @@ $(document).ready(function() {
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 
 #SET{slidebalise,img}
-[(#REM) tooltip en premier car valeur ecrasee par les suivants ]
-[(#GET{tooltip}|=={oui}|oui) #SET{slidebalise,div}]
 [(#GET{liens_individuels}|oui) #SET{slidebalise,a}]
 [(#GET{mediabox}|=={oui}|oui) #SET{slidebalise,a}]
 [(#GET{id_article_a_lier}|oui) #SET{slidebalise,a}]
 [(#ENV{lien_parent}|oui) #SET{slidebalise,a}]
+[(#REM) tooltip en dernier car valeur ecrase les precedentes ]
+[(#GET{tooltip}|=={oui}|oui) #SET{slidebalise,div.infobulle}]
 
 <div class="cycle-slideshow"[ style="(#GET{style})"][
 	data-cycle-slides="(#GET{slidebalise})"][ 
@@ -134,21 +134,25 @@ $(document).ready(function() {
 		 #SET{fermer_a,non}
          
 		[(#REM) Doit-on afficher les infobulles ET y a t'il quelque chose a afficher ?]
-		#SET{afficher_infobulle,non}
+		
 		[(#GET{tooltip}|=={oui}|oui)
 			[(#SET{texte_infobulle,[<h4>(#TITRE)</h4>][(#DESCRIPTIF)<br />]})]
 			[(#GET{tooltip_carac}|=={oui}|oui)
 				[(#SET{texte_infobulle,[(#GET{texte_infobulle}|concat{<strong>Original :</strong> l. #LARGEUR x L. #HAUTEUR pixels[ - (#TAILLE|taille_en_octets)]})]})]
 			]
 			[(#SET{texte_infobulle,[(#GET{texte_infobulle}|trim)]})]
-			[(#GET{texte_infobulle}|strlen|!={0}|oui) #SET{afficher_infobulle,oui}]
 		]
 
+		[(#GET{tooltip}|=={oui}|oui)
+		<div class="infobulle">
+		]
+		[(#REM) garder pour compatibilite, mais il faudrait refaire cette partie : pour tous les liens differents, une seule variable pour une valeur au choix, pour eviter de doubler la balise <a> ]
 		[(#ENV{lien_parent}|oui) 
 		#INCLURE{fond=inclure/lien_parent,id_document}
 		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={article}|oui)
-		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE">#SET{fermer_a,oui}]
+		<a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE">
+		#SET{fermer_a,oui}]
 		[(#GET{liens_individuels}|=={rubrique}|oui)
 		<a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}" data-cycle-title="#TITRE">
 		#SET{fermer_a,oui}]
@@ -167,18 +171,16 @@ $(document).ready(function() {
 						data-cycle-title="#TITRE" data-cycle-desc="[(#DESCRIPTIF|textebrut)]">
 		#SET{fermer_a,oui}]
 	
-		[(#GET{tooltip}|=={oui}|oui)
-		<div class="infobulle">
-		]
-			<img class="no_image_filtrer" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] 
+			<img class="no_image_filtrer no-adapt-img" src="(#FICHIER|image_reduire{#GET{largeurmax},#GET{hauteurmax}}|image_recadre{#GET{largeurmax},#GET{hauteurmax},top center,#GET{backgroundcolor}}|extraire_attribut{src})"[ alt="(#TITRE)"] 
 				 data-cycle-title="#TITRE" data-cycle-desc="[(#DESCRIPTIF|textebrut)]"
 			/>
+			
+		[(#GET{fermer_a}|=={oui}|oui)</a>]
 		
 		[(#GET{tooltip}|=={oui}|oui)
 		<span class="textinfobulle" style="display:none;">#GET{texte_infobulle}</span>
 		</div> <!-- .infobulle -->
 		]
-		[(#GET{fermer_a}|=={oui}|oui)</a>]
 		
 	]</BOUCLE_img>
 	[(#GET{overlay}|=={.cycle-overlay}|oui)
