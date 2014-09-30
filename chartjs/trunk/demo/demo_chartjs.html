@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
+  <head>
+  <INCLURE{fond=inclure/head} />
+  <title><:chartjs:demo_titre:></title>
+  <style>
+  body {margin:2% 8%;}
+  h2 {text-align:left;}
+  .code-chart {padding:1em;border-radius:1em;background:#333;color:#fff;text-align:left;overflow:hidden;}
+  .spip-chart-wrap {text-align:left;background:pink;padding:1em;}
+  </style>
+  </head>
+  
+  
+  
+<body>
+<h1><:chartjs:demo_titre:></h1>
+
+
+
+
+
+<!-- pie -->
+<h2><:chartjs:demo_pie:></h2>
+#SET{data,"10,32,50,25,5"}
+[(#MODELE{chart}{id=camembert1,type=pie,canvaswidth=250,canvasheight=250,data=#GET{data}})]
+<pre class="code-chart">
+&lt;charte
+|id=camembert1
+|canvaswidth=250
+|canvasheight=250
+|type=pie
+|data=10,32,50,25,5&gt;
+</pre>
+
+<!-- Doughnut -->
+<h2><:chartjs:demo_doughnut:></h2>
+#SET{data,"30,10,55,25,15,8"}
+#SET{colors,"#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264"}
+[(#MODELE{chart}{id=anneau,type=doughnut,data=#GET{data},colors=#GET{colors}})]
+<pre class="code-chart">
+&lt;charte
+|id=anneau
+|type=doughnut
+|data=30,10,55,25,15,8
+|colors=#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264&gt;
+</pre>
+
+
+<!-- polarArea -->
+<h2><:chartjs:demo_polaire:></h2>
+#SET{data,"40,32,5,25,50,45"}
+#SET{labels,"Noix,Amandes,Raisins,Autres sucreries,Salés,Six"}
+[(#MODELE{chart}{id=polaire,type=polarArea,canvaswidth=250,canvasheight=250,data=#GET{data},labels=#GET{labels}})]
+<pre class="code-chart">
+&lt;charte
+|id=polaire
+|type=polarArea
+|data=40,32,5,25,50,45
+|labels=Noix,Amandes,Raisins,Autres sucreries,Salés,Six
+|canvaswidth=250
+|canvasheight=250&gt;
+</pre>
+
+         BUG PAS LAVEL
+
+<!-- bar -->
+<h2><:chartjs:demo_bar:></h2>
+#SET{data,"40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22"}
+#SET{labels,"Salé,Sucré,Amer,Acide"}
+[(#MODELE{chart}{id=barre,type=bar,canvaswidth=450,canvasheight=450,datasets=#GET{data},labels=#GET{labels}})]
+<pre class="code-chart">
+&lt;charte
+|id=barre
+|type=bar
+|datasets=40,32,50,35 next 20,25,45,42 next 40,43, 61,50 next 33,15,40,22
+|labels=Salé,Sucré,Amer,Acide
+|canvaswidth=450
+|canvasheight=450&gt;
+</pre>
+
+<!-- line -->
+<h2><:chartjs:demo_line:></h2>
+#SET{data,"40,43,61,50 next 33,15,40,22"}
+#SET{labels,"Janvier, Février, Mars, Avril"}
+[(#MODELE{chart}{id=ligne,type=line,canvaswidth=450,canvasheight=450,datasets=#GET{data},labels=#GET{labels}})]
+<pre class="code-chart">
+&lt;charte
+|id=ligne
+|type=line
+|datasets=40,43,61,50 next 33,15,40,22
+|labels=Janvier, Février, Mars, Avril
+|canvaswidth=450
+|canvasheight=450&gt;
+</pre>
+
+<!-- radar -->
+<h2><:chartjs:demo_radar:></h2>
+#SET{data,"20,22,40,25,55 next 15,20,30,40,35"}
+#SET{labels,"Précis, Rapide, Joli, Complet, かわい"}
+#SET{colors,"#CEBC17,#CE4264"}
+[(#MODELE{chart}{id=radar45,type=radar,canvaswidth=450,canvasheight=450,datasets=#GET{data},labels=#GET{labels},colors=#GET{colors}})]
+<pre class="code-chart">
+&lt;charte
+|id=radar45
+|type=radar
+|datasets=40,43,61,50 next 33,15,40,22
+|labels=Précis, Rapide, Joli, Complet, かわい
+|canvaswidth=450
+|canvasheight=450
+|colors=#CEBC17,#CE4264&gt;
+</pre>
+
+<!-- spip -->
+<h2><:chartjs:demo_spip_data:></h2>
+#SET{nb_article,0}
+<BOUCLE_articles(ARTICLES)> </BOUCLE_articles>#SET{nb_article,#TOTAL_BOUCLE} </B_articles>
+#SET{nb_auteur,0}
+<BOUCLE_auteurs(AUTEURS)> </BOUCLE_auteurs>#SET{nb_auteur,#TOTAL_BOUCLE} </B_auteurs>
+#SET{data,#GET{nb_article}|concat{",",#GET{nb_auteur}}} 
+#SET{labels,"Articles, Auteurs"}
+[(#MODELE{chart}{id=barrespip,type=bar,canvaswidth=450,canvasheight=450,datasets=#GET{data},labels=#GET{labels}})]
+<pre class="code-chart">
+&#35;SET{nb_article,0}
+&lt;BOUCLE_articles(ARTICLES)&gt; &lt;/BOUCLE_articles&gt;&#35;SET{nb_article,&#35;TOTAL_BOUCLE} &lt;/B_articles&gt;
+&#35;SET{nb_auteur,0}
+&lt;BOUCLE_auteurs(AUTEURS)&gt; &lt;/BOUCLE_auteurs&gt;&#35;SET{nb_auteur,&#35;TOTAL_BOUCLE} &lt;/B_auteurs&gt;
+&#35;SET{data,&#35;GET{nb_article}|concat{",",&#35;GET{nb_auteur}}} 
+&#35;SET{labels,"Articles, Auteurs"}
+[(&#35;MODELE{chart}{id=barrespip,type=bar,canvaswidth=450,canvasheight=450,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
+</pre>
+
+
+<!-- spip data -->
+<h2><:chartjs:demo_spip_bigdata:></h2>
+#SET{data,''}
+#SET{labels,''}
+<BOUCLE_cours(DATA){source simplexml,http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml?#ENV{date}}{datapath root/children/cube/0/children/cube}{0,30}>
+#SET{labels, #GET{labels}|concat{",",#VALEUR{attributes/time}|affdate{d/m/y}}} 
+<BOUCLE_yen(DATA){source tableau,#VALEUR{children/cube}}>[
+(#VALEUR{attributes/currency}|=={JPY}|oui)
+ #SET{data,#GET{data}|concat{",",#VALEUR{attributes/rate}}
+]</BOUCLE_yen> 
+</BOUCLE_cours>
+#SET{data,#GET{data}|substr{1}}
+#SET{labels,#GET{labels}|substr{1}} 
+[(#MODELE{chart}{id=coursduyen,type=line,canvaswidth=850,canvasheight=350,datasets=#GET{data},labels=#GET{labels}})]
+<strong><:chartjs:demo_spip_legend:></strong>
+
+<pre class="code-chart">
+&#35;SET{data,''}
+&#35;SET{labels,''}
+&lt;BOUCLE_cours(DATA){source simplexml,http://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml?&#35;ENV{date}}{datapath root/children/cube/0/children/cube}{0,30}&gt;
+&#35;SET{labels, &#35;GET{labels}|concat{",",&#35;VALEUR{attributes/time}|affdate{d/m/y}}} 
+&lt;BOUCLE_yen(DATA){source tableau,&#35;VALEUR{children/cube}}&gt;[
+(&#35;VALEUR{attributes/currency}|=={JPY}|oui)
+ &#35;SET{data,&#35;GET{data}|concat{",",&#35;VALEUR{attributes/rate}}
+]&lt;/BOUCLE_yen&gt; 
+&lt;/BOUCLE_cours&gt;
+&#35;SET{data,&#35;GET{data}|substr{1}}
+&#35;SET{labels,&#35;GET{labels}|substr{1}} 
+[(&#35;MODELE{chart}{id=coursduyen,type=line,canvaswidth=850,canvasheight=350,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
+</pre>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

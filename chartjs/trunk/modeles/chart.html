@@ -1,0 +1,117 @@
+[(#REM)
+    modèle pour chart.js
+
+]
+#SET{type,pie}         [(#ENV{type}|oui) #SET{type,#ENV{type}|trim|strtolower|ucfirst}]
+                       [(#GET{type}|=={Polararea}|oui) #SET{type,PolarArea}]
+#SET{title,chart}      [(#ENV{id}|oui) #SET{title,#ENV{id}|trim}]
+#SET{canvaswidth,625}  [(#ENV{canvaswidth}|oui) #SET{canvaswidth,#ENV{canvaswidth}|intval}]
+#SET{canvasheight,625} [(#ENV{canvasheight}|oui) #SET{canvasheight,#ENV{canvasheight}|intval}]
+#SET{width,auto}       [(#ENV{width}|oui) #SET{width,#ENV{width}|trim}]
+#SET{height,auto}      [(#ENV{height}|oui) #SET{height,#ENV{height}|trim}]
+#SET{margin,5px}       [(#ENV{margin}|oui) #SET{margin,#ENV{margin}|trim}]
+#SET{relativewidth,1}  [(#ENV{relativewidth}|oui) #SET{relativewidth,#ENV{relativewidth}|trim}]
+#SET{align,align-none} [(#ENV{align}|oui) #SET{align,#ENV{align}|trim}]
+#SET{class,class-none} [(#ENV{class}|oui) #SET{class,#ENV{class}|trim}]
+#SET{labels,null}      [(#ENV{labels}|oui) #SET{labels,#ENV{labels}|trim}]
+#SET{data,0}           [(#ENV{data}|oui) #SET{data,#ENV{data}|trim}] 
+#SET{datasets,null}    [(#ENV{datasets}|oui) #SET{datasets,#ENV{datasets}|trim}] 
+#SET{colors,'#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264,#F7464A,#46BFBD,#FDB45C'}   
+                       [(#ENV{colors}|oui) #SET{colors,#ENV{colors}|trim}]
+#SET{fillopacity,0.7}  [(#ENV{fillopacity}|oui) #SET{fillopacity,#ENV{fillopacity}|trim}]
+#SET{pointstrokecolor,#FFFFFF}    
+                       [(#ENV{pointstrokecolor}|oui) #SET{pointstrokecolor,#ENV{pointstrokecolor}|trim}]
+#SET{animation,true}   [(#ENV{animation}|oui) #SET{animation,#ENV{animation}|trim}] 
+#SET{scalefontsize,12} [(#ENV{scalefontsize}|oui) #SET{scalefontsize,#ENV{scalefontsize}|trim}]
+#SET{scalefontcolor,#666}  [(#ENV{scalefontcolor}|oui) #SET{scalefontcolor,#ENV{scalefontcolor}|trim}]
+#SET{scaleoverride,false}  [(#ENV{scaleoverride}|oui) #SET{scaleoverride,#ENV{scaleoverride}|trim}]
+#SET{scalesteps,null}      [(#ENV{scalesteps}|oui) #SET{scalesteps,#ENV{scalesteps}|trim}]
+#SET{scalestepwidth,null}  [(#ENV{scalestepwidth}|oui) #SET{scalestepwidth,#ENV{scalestepwidth}|trim}]
+#SET{scalestartvalue,null} [(#ENV{scalestartvalue}|oui) #SET{scalestartvalue,#ENV{scalestartvalue}|trim}]
+  
+[(#REM) traitement]
+#SET{title,#GET{title}|replace{" ",""}}   
+#SET{data,#GET{data}|replace{" ",""}|explode{","}} 
+#SET{datasets,#GET{datasets}|replace{" ",""}|explode{"next"}}
+#SET{colors,#GET{colors}|replace{" ",""}|explode{","}}
+#SET{labels,#GET{labels}|replace{"&#039;","'"}|html_entity_decode|addslashes|explode{","}|}
+
+#SET{dataJs,''}   
+[(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{'{'}})] ]
+[(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'\['}})] ]
+                   
+
+<BOUCLE_rond(POUR){tableau #GET{data}}{si #GET{type}|match{'Pie|Doughnut|PolarArea'}}>
+ #SET{color_temp,#f60}
+ [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}}  ] 
+ [(#SET{dataJs,#GET{dataJs}|concat{\{value:#VALEUR,",",color:",#GET{color_temp},'"},'}})]
+</BOUCLE_rond>
+
+#SET{dataLabel,''}
+<BOUCLE_label(POUR){tableau #GET{labels}}{si #GET{type}|match{'Line|Radar|Bar'}}>
+  [(#SET{dataLabel,#GET{dataLabel}|concat{'"',#VALEUR,'",'}})]  
+</BOUCLE_label>
+
+
+[(#GET{type}|match{'Line|Radar|Bar'}|oui) 
+   [(#SET{dataJs,#GET{dataJs}|concat{'labels : \[',#GET{dataLabel},'\]'}})]
+   [(#SET{dataJs,#GET{dataJs}|concat{',datasets : \['}})]
+
+]
+
+
+<BOUCLE_barre(POUR){tableau #GET{datasets}}{si #GET{type}|match{'Bar'}}>
+ #SET{color_temp,#f60}
+ [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}|chartjs_hex2rgb}] 
+ #SET{color_temp2,#GET{color_temp}|concat{",",#GET{fillopacity}}}
+ [(#SET{dataJs,#GET{dataJs}|concat{\{
+                        fillColor 	: "rgba\(#GET{color_temp2},)",
+                        ",",
+                        strokeColor	: "rgba\(#GET{color_temp},",",1)",
+                        ",",
+                        data: \[#VALEUR\],'},'}})]
+  <br >#CLE -> #VALEUR
+</BOUCLE_barre>
+
+<BOUCLE_line(POUR){tableau #GET{datasets}}{si #GET{type}|match{'Line|Radar'}}>
+ #SET{color_temp,#f60}
+ [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}|chartjs_hex2rgb}] 
+ #SET{color_temp2,#GET{color_temp}|concat{",",#GET{fillopacity}}}
+ [(#SET{dataJs,#GET{dataJs}|concat{\{
+                        fillColor 	: "rgba\(#GET{color_temp2},)",
+                        ",",
+                        strokeColor	: "rgba\(#GET{color_temp},",",1)",
+                        ",",
+                        pointColor	: "rgba\(#GET{color_temp},",",1)",
+                        ",",
+                        pointStrokeColor	: "rgba\(#GET{color_temp},",",1)",
+                        ",",
+                        data: \[#VALEUR\],'},'}})]
+  <br >#CLE -> #VALEUR
+</BOUCLE_line>
+
+
+ 
+[(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{']};'}})] ]
+[(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'];'}})] ]
+  
+  
+
+<div class="spip-chart-wrap [(#GET{align})] [(#GET{class})]" 
+     style="max-width:100%;width:#GET{width};height:#GET{height};margin:#GET{margin}" data-proportion="#GET{relativewidth}"><canvas id="#GET{title}" height="#GET{canvasheight}" width="#GET{canvaswidth}" class="spip-chart-canvas" data-proportion="#GET{relativewidth}"></canvas></div>
+<script>
+var [(#GET{title})]Ops = { 	animation: #GET{animation},
+[(#GET{type}|match{'Line|Radar|Bar|PolarArea'}|oui)   
+     scaleFontSize:#GET{scalefontsize},
+     scaleFontColor:"#GET{scalefontcolor}",
+     scaleOverride:#GET{scaleoverride},
+     scaleSteps:#GET{scalesteps}, 
+     scaleStepWidth:#GET{scalestepwidth},
+     scaleStartValue:#GET{scalestartvalue},
+]}; 
+
+var [(#GET{title})]Data = #GET{dataJs};
+[(#GET{type}|match{'Pie|Doughnut|Line|Radar|Bar|PolarArea'}|oui) 
+    var spipChart[(#GET{title})][(#GET{type})] = new Chart(document.getElementById("[(#GET{title})]").getContext("2d")).[(#GET{type})]([(#GET{title})]Data,[(#GET{title})]Ops);
+]
+</script>

@@ -1,0 +1,23 @@
+/* charts_js responsive canvas CSS override*/
+/*      
+.spip_charts_canvas {
+    				width:100%!important;
+    				max-width:100%;
+}   
+    
+@media screen and (max-width:640px) {
+    				.spip-chart-wrap   {
+    					width:100%!important;
+    					float: none!important;
+						  margin-left: auto!important;
+						  margin-right: auto!important;
+					   	text-align: center;              
+    				}
+           
+            .spip-chart-canvas {
+              	width:100%!important;                 
+            }
+            
+}  
+
+*/ 
