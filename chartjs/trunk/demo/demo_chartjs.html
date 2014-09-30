@@ -17,19 +17,18 @@
 <h1><:chartjs:demo_titre:></h1>
 
 
-
-
-
 <!-- pie -->
 <h2><:chartjs:demo_pie:></h2>
 #SET{data,"10,32,50,25,5"}
-[(#MODELE{chart}{id=camembert1,type=pie,canvaswidth=250,canvasheight=250,data=#GET{data}})]
+#SET{labels,"Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima"}
+[(#MODELE{chart}{id=camembert1,type=pie,canvaswidth=250,canvasheight=250,data=#GET{data},labels=#GET{labels}})]
 <pre class="code-chart">
 &lt;charte
 |id=camembert1
 |canvaswidth=250
 |canvasheight=250
 |type=pie
+|labels=Tôkyô - 東京,Kyoto, Osaka,Chiba,Hiroshima
 |data=10,32,50,25,5&gt;
 </pre>
 
@@ -64,7 +63,7 @@
 |canvasheight=250&gt;
 </pre>
 
-         BUG PAS DE LABEL
+     
 
 <!-- bar -->
 <h2><:chartjs:demo_bar:></h2>

@@ -41,8 +41,10 @@
 
 <BOUCLE_rond(POUR){tableau #GET{data}}{si #GET{type}|match{'Pie|Doughnut|PolarArea'}}>
  #SET{color_temp,#f60}
- [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}}  ] 
- [(#SET{dataJs,#GET{dataJs}|concat{\{value:#VALEUR,",",color:",#GET{color_temp},'"},'}})]
+ [(#GET{colors}|table_valeur{#CLE}|oui)  #SET{color_temp,#GET{colors}|table_valeur{#CLE}}  ]
+ #SET{label_temp,''} 
+ [(#GET{labels}|table_valeur{#CLE}|oui)  [(#GET{labels}|table_valeur{#CLE}|!={null}|oui) #SET{label_temp,#GET{labels}|table_valeur{#CLE}}  ]]
+ [(#SET{dataJs,#GET{dataJs}|concat{\{value:#VALEUR,",",color:",#GET{color_temp},'",label:"',#GET{label_temp},'"},'}})]
 </BOUCLE_rond>
 
 #SET{dataLabel,''}
@@ -88,7 +90,8 @@
  
 [(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{']};'}})] ]
 [(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'];'}})] ]
-  
+
+
 
 <div class="spip-chart-wrap [spip-chart-align-(#GET{align})] [(#GET{class})]" 
      style="max-width:100%;width:[(#GET{width}|!={null}|?{#GET{width},#GET{canvaswidth}px})];height:[(#GET{height}|!={null}|?{#GET{height},#GET{canvasheight}px})];"><canvas id="#GET{title}" height="#GET{canvasheight}" width="#GET{canvaswidth}" class="spip-chart-canvas"></canvas></div>
