@@ -57,6 +57,10 @@ function responsive_logo($logo){
 	$src = extraire_attribut($img,"src");
 	$class = extraire_attribut($img,"class");
 
+	// timestamper l'url si pas deja fait
+	if (strpos($src,"?")==false)
+		$src = timestamp($src);
+
 	$hover = "";
 	if ($hover_on = extraire_attribut($img,"onmouseover")){
 		$hover_off = extraire_attribut($img,"onmouseout");
