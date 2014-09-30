@@ -48,14 +48,14 @@ function boutonstexte_insert_head($flux)
 	$flux .= <<<EOH
 <script src="{$jsFile}" type="text/javascript"></script>
 <script type="text/javascript"><!--
-	var boutonstexte = new boutonsTexte({
+	var boutonstexte_options = {
 		'selector':'{$selector}',
 		'imgPath':'{$imgPath}',
 		'txtOnly':'{$txtOnly}',
 		'txtBackSpip':'{$txtBackSpip}',
 		'txtSizeUp':'{$txtSizeUp}',
 		'txtSizeDown':'{$txtSizeDown}'
-	});
+	};
 //-->
 </script>
 EOH;

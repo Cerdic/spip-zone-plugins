@@ -2,10 +2,11 @@
  *  boutonstexte.js (c) toggg http://toggg.com 2006 -- licence LGPL
  */
 
-// on dépend de jQuery
+// on dÃ©pend de jQuery
 if (typeof jQuery == 'function')
 (function($){
 	$(function(){
+		var boutonstexte = new boutonsTexte(boutonstexte_options);
 
 		var boutons = $('<span class="boutonstexte"></span>');
 
@@ -128,4 +129,3 @@ boutonsTexte.prototype.fontSmaller = function(elt)
 
 function dump(elt)
 {var txt=''; for (var prop in elt) {txt += prop+'='+elt[prop]+'/';} alert(txt);}
-
