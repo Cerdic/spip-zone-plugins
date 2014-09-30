@@ -7,11 +7,9 @@
 #SET{title,chart}      [(#ENV{id}|oui) #SET{title,#ENV{id}|trim}]
 #SET{canvaswidth,625}  [(#ENV{canvaswidth}|oui) #SET{canvaswidth,#ENV{canvaswidth}|intval}]
 #SET{canvasheight,625} [(#ENV{canvasheight}|oui) #SET{canvasheight,#ENV{canvasheight}|intval}]
-#SET{width,auto}       [(#ENV{width}|oui) #SET{width,#ENV{width}|trim}]
-#SET{height,auto}      [(#ENV{height}|oui) #SET{height,#ENV{height}|trim}]
-#SET{margin,5px}       [(#ENV{margin}|oui) #SET{margin,#ENV{margin}|trim}]
-#SET{relativewidth,1}  [(#ENV{relativewidth}|oui) #SET{relativewidth,#ENV{relativewidth}|trim}]
-#SET{align,align-none} [(#ENV{align}|oui) #SET{align,#ENV{align}|trim}]
+#SET{width,null}       [(#ENV{width}|oui) #SET{width,#ENV{width}|trim}]
+#SET{height,null}      [(#ENV{height}|oui) #SET{height,#ENV{height}|trim}]
+#SET{align,none} [(#ENV{align}|oui) #SET{align,#ENV{align}|trim}]
 #SET{class,class-none} [(#ENV{class}|oui) #SET{class,#ENV{class}|trim}]
 #SET{labels,null}      [(#ENV{labels}|oui) #SET{labels,#ENV{labels}|trim}]
 #SET{data,0}           [(#ENV{data}|oui) #SET{data,#ENV{data}|trim}] 
@@ -70,7 +68,6 @@
                         strokeColor	: "rgba\(#GET{color_temp},",",1)",
                         ",",
                         data: \[#VALEUR\],'},'}})]
-  <br >#CLE -> #VALEUR
 </BOUCLE_barre>
 
 <BOUCLE_line(POUR){tableau #GET{datasets}}{si #GET{type}|match{'Line|Radar'}}>
@@ -87,18 +84,14 @@
                         pointStrokeColor	: "rgba\(#GET{color_temp},",",1)",
                         ",",
                         data: \[#VALEUR\],'},'}})]
-  <br >#CLE -> #VALEUR
 </BOUCLE_line>
-
-
  
 [(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{']};'}})] ]
 [(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'];'}})] ]
   
-  
 
-<div class="spip-chart-wrap [(#GET{align})] [(#GET{class})]" 
-     style="max-width:100%;width:#GET{width};height:#GET{height};margin:#GET{margin}" data-proportion="#GET{relativewidth}"><canvas id="#GET{title}" height="#GET{canvasheight}" width="#GET{canvaswidth}" class="spip-chart-canvas" data-proportion="#GET{relativewidth}"></canvas></div>
+<div class="spip-chart-wrap [spip-chart-align-(#GET{align})] [(#GET{class})]" 
+     style="max-width:100%;width:[(#GET{width}|!={null}|?{#GET{width},#GET{canvaswidth}px})];height:[(#GET{height}|!={null}|?{#GET{height},#GET{canvasheight}px})];"><canvas id="#GET{title}" height="#GET{canvasheight}" width="#GET{canvaswidth}" class="spip-chart-canvas"></canvas></div>
 <script>
 var [(#GET{title})]Ops = { 	animation: #GET{animation},
 [(#GET{type}|match{'Line|Radar|Bar|PolarArea'}|oui)   

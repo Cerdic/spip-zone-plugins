@@ -6,8 +6,8 @@
   <style>
   body {margin:2% 8%;}
   h2 {text-align:left;}
-  .code-chart {padding:1em;border-radius:1em;background:#333;color:#fff;text-align:left;overflow:hidden;}
-  .spip-chart-wrap {text-align:left;background:pink;padding:1em;}
+  .code-chart {clear:both;padding:1em;border-radius:1em;background:#333;color:#fff;text-align:left;overflow:hidden;}
+  .spip-chart-wrap {/*text-align:left;*/background:white;/*padding:1em;*/box-shadow: 8px 8px 4px #aaa;}
   </style>
   </head>
   
@@ -37,11 +37,12 @@
 <h2><:chartjs:demo_doughnut:></h2>
 #SET{data,"30,10,55,25,15,8"}
 #SET{colors,"#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264"}
-[(#MODELE{chart}{id=anneau,type=doughnut,data=#GET{data},colors=#GET{colors}})]
+[(#MODELE{chart}{id=anneau,type=doughnut,align=right,data=#GET{data},colors=#GET{colors}})]
 <pre class="code-chart">
 &lt;charte
 |id=anneau
 |type=doughnut
+|align=right
 |data=30,10,55,25,15,8
 |colors=#69D2E7,#E0E4CC,#F38630,#96CE7F,#CEBC17,#CE4264&gt;
 </pre>
@@ -51,18 +52,19 @@
 <h2><:chartjs:demo_polaire:></h2>
 #SET{data,"40,32,5,25,50,45"}
 #SET{labels,"Noix,Amandes,Raisins,Autres sucreries,Salés,Six"}
-[(#MODELE{chart}{id=polaire,type=polarArea,canvaswidth=250,canvasheight=250,data=#GET{data},labels=#GET{labels}})]
+[(#MODELE{chart}{id=polaire,type=polarArea,align=center,canvaswidth=250,canvasheight=250,data=#GET{data},labels=#GET{labels}})]
 <pre class="code-chart">
 &lt;charte
 |id=polaire
 |type=polarArea
+|align=center
 |data=40,32,5,25,50,45
 |labels=Noix,Amandes,Raisins,Autres sucreries,Salés,Six
 |canvaswidth=250
 |canvasheight=250&gt;
 </pre>
 
-         BUG PAS LAVEL
+         BUG PAS DE LABEL
 
 <!-- bar -->
 <h2><:chartjs:demo_bar:></h2>
@@ -144,7 +146,7 @@
 </BOUCLE_cours>
 #SET{data,#GET{data}|substr{1}}
 #SET{labels,#GET{labels}|substr{1}} 
-[(#MODELE{chart}{id=coursduyen,type=line,canvaswidth=850,canvasheight=350,datasets=#GET{data},labels=#GET{labels}})]
+[(#MODELE{chart}{id=coursduyen,type=line,width=auto,height=auto,canvaswidth=850,canvasheight=350,datasets=#GET{data},labels=#GET{labels}})]
 <strong><:chartjs:demo_spip_legend:></strong>
 
 <pre class="code-chart">
@@ -159,7 +161,7 @@
 &lt;/BOUCLE_cours&gt;
 &#35;SET{data,&#35;GET{data}|substr{1}}
 &#35;SET{labels,&#35;GET{labels}|substr{1}} 
-[(&#35;MODELE{chart}{id=coursduyen,type=line,canvaswidth=850,canvasheight=350,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
+[(&#35;MODELE{chart}{id=coursduyen,type=line,width=auto,height=auto,canvaswidth=850,canvasheight=350,datasets=&#35;GET{data},labels=&#35;GET{labels}})]
 </pre>
 
 

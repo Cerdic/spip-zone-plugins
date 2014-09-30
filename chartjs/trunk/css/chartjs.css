@@ -1,23 +1,21 @@
-/* charts_js responsive canvas CSS override*/
-/*      
-.spip_charts_canvas {
-    				width:100%!important;
-    				max-width:100%;
-}   
-    
+/*****************************
+ * charts_js 
+ *****************************/
+ 
+.spip-chart-align-right {float:right;margin-bottom:1em;margin-left:1em;}
+.spip-chart-align-left  {float:left;margin-bottom:1em;margin-right:1em;}
+.spip-chart-align-center {margin-left:auto;margin-right:auto;}
+  
+/* Responsive: tous les graphes en plein taille */   
 @media screen and (max-width:640px) {
     				.spip-chart-wrap   {
-    					width:100%!important;
+    					width:100%!important;               
     					float: none!important;
 						  margin-left: auto!important;
 						  margin-right: auto!important;
-					   	text-align: center;              
+					   	text-align: center;                          
     				}
            
-            .spip-chart-canvas {
-              	width:100%!important;                 
-            }
             
 }  
 
-*/ 
