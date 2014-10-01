@@ -13,8 +13,7 @@
 	<script>
 		var mejsloader;
 		if (typeof mejsloader=="undefined"){
-			mejsloader = jQuery.getScript("#CHEMIN{players/mejs/build/mediaelement-and-player.min.js}");
-			mejsloader.done(function(){
+			mejsloader = jQuery.getScript("#CHEMIN{players/mejs/build/mediaelement-and-player.min.js}",function(){
 				var cpt = 0;
 				(function($) {
 					jQuery("audio.mejs").each(function(){
@@ -37,7 +36,6 @@
 				})(jQuery);
 			});
 		}
-
 	</script>
 	<link rel="stylesheet" href="#CHEMIN{players/mejs/build/mediaelementplayer.min.css}" />
 </dd>
