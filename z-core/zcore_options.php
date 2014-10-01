@@ -61,6 +61,9 @@ function responsive_logo($logo){
 	if (strpos($src,"?")==false)
 		$src = timestamp($src);
 
+	if (defined('_STATIC_IMAGES_DOMAIN'))
+		$src = url_absolue($src,_STATIC_IMAGES_DOMAIN);
+
 	$hover = "";
 	if ($hover_on = extraire_attribut($img,"onmouseover")){
 		$hover_off = extraire_attribut($img,"onmouseout");
