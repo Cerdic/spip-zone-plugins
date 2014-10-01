@@ -371,7 +371,7 @@ function albums_optimiser_base_disparus($flux){
 	){
 		$ids_albums_poubelle = array_keys($ids_albums_poubelle);
 		include_spip('inc/albums');
-		albums_supprimer($ids_albums_poubelle);
+		supprimer_albums($ids_albums_poubelle);
 	}
 
 	// optimiser les liens morts entre documents et albums
