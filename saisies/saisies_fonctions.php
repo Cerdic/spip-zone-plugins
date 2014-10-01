@@ -7,6 +7,35 @@ include_spip('balise/saisie');
 // picker_selected (spip 3)
 include_spip('formulaires/selecteur/generique_fonctions');
 
+/**
+ * Traiter la valeur de la vue en fonction du env
+ * si un traitement a ete fait en amont (champs extra) ne rien faire
+ * si pas de traitement defini (formidable) passer typo ou propre selon le type du champ
+ *
+ * @param string $valeur
+ * @param string|array $env
+ * @return string
+ */
+function saisie_traitement_vue($valeur,$env){
+	if (is_string($env))
+		$env = unserialize($env);
+	if (!function_exists('propre'))
+		include_spip('inc/texte');
+
+	// si traitement est renseigne, alors le champ est deja mis en forme
+	// (saisies)
+	// sinon on fait une mise en forme smart
+	if (!isset($env['traitements'])){
+		if (in_array($env['type_saisie'],array('textarea'))){
+			$valeur = propre($valeur);
+		}
+		else {
+			$valeur = typo($valeur);
+		}
+	}
+
+	return trim($valeur);
+}
 
 /**
  * Passer un nom en une valeur compatible avec une classe css

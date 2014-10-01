@@ -1,5 +1,4 @@
-[(#ENV{sans_reponse}|is_null|oui) [(#SET{sans_reponse,<:saisies:vue_sans_reponse:>})] ]
-[(#ENV{sans_reponse}|is_null|non) [(#SET{sans_reponse,#ENV{sans_reponse}})] ]
+[(#SET{sans_reponse,#ENV{sans_reponse}|is_null|?{<:saisies:vue_sans_reponse:>,#ENV{sans_reponse}}})]
 
 #SET{valeur_uniquement,#ENV{valeur_uniquement}|et{#ENV{valeur_uniquement}|!={non}}|oui}
 #SET{enfants,#ENV*{saisies}|et{#ENV*{saisies}|is_array}}
@@ -10,7 +9,7 @@
 		#SET{reponse,#INCLURE{fond=saisies-vues/#ENV{type_saisie},env,sans_reponse=#GET{sans_reponse}}|trim}
 	]
 	[(#CHEMIN{saisies-vues/#ENV{type_saisie}.html}|non)
-		#SET{reponse,#ENV*{valeur}|trim}
+		#SET{reponse,#ENV*{valeur}|saisie_traitement_vue{#ENV**}}
 	]
 
 [(#REM) Maintenant on affiche en encapsulant ou pas ]
@@ -25,7 +24,7 @@
 	[(#GET{enfants}|non|et{#ENV{type_saisie}|!={explication}})
 		[<strong class="label">(#ENV{label_case,#ENV{label,#ENV{nom}}})</strong>]
 		<div class="valeur">
-		[(#GET{reponse}|sinon{#GET{sans_reponse}}|propre)]
+		[(#GET{reponse}|sinon{#GET{sans_reponse}})]
 		</div>
 	]
 </div>
@@ -38,6 +37,6 @@
 		#GET{reponse}
 	]
 	[(#GET{enfants}|non)
-		[(#GET{reponse}|sinon{#GET{sans_reponse}}|propre)]
+		[(#GET{reponse}|sinon{#GET{sans_reponse}})]
 	]
 ]
