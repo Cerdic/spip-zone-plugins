@@ -16,6 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function cookiechoices_affichage_final($page){
   //$js_cookiechoices = parametre_url(generer_url_public('cookiechoices_call.js'), 'lang', $lang);
+  include_spip('inc/filtres');
   $js_cookiechoices = produire_fond_statique("cookiechoices_call.js", array("lang"=>$lang));
 
    $script .=           
