@@ -109,7 +109,9 @@ function albums_post_edition($flux){
  *     Liste complétée des js chargés
 **/
 function albums_jqueryui_plugins($scripts){
-	$scripts[] = "jquery.ui.sortable";
+	if (test_espace_prive()){
+		$scripts[] = "jquery.ui.sortable";
+	}
 	return $scripts;
 }
 
