@@ -143,6 +143,7 @@
 			 */
 			if(typeof(id) != "undefined" && typeof(id.canPlayType) != "undefined"){
 				id.isFullScreen = id.has_html5_cover = false;
+				id.options = options;
 				
 				media.children('source').each(function(){
 					if(!$(this).attr('type').match('flv') && id.canPlayType($(this).attr('type')) !== ''){
@@ -173,8 +174,7 @@
 						bloc_messages = '',
 						height = options.height,
 						width = options.width;
-
-					id.options = options;
+					
 					id.mediacanplay = id.isFullScreen = id.slider_control = id.slider_volume = id.has_metadas = id.has_to_play = false;
 					id.percent_loaded = 0;
 					id.messages = options.messages;

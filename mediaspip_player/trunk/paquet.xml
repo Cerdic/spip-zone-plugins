@@ -1,7 +1,7 @@
 <paquet
 	prefix="mediaspip_player"
 	categorie="multimedia"
-	version="1.5.6"
+	version="1.5.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/html5_player_logo.png"
