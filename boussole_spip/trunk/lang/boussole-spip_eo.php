@@ -10,23 +10,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'La SPIP-kompaso kunigas la aron de « oficialaj » retejoj de la SPIP galaksio. Ĝi registras pri ĉiu retejo ĝian vinjeton, ĝian nomon, ĝian devizon kaj ĝian priskribon. Do ne hezitu uzi ĝin ĉe viaj propraj retejoj por orientigi viajn vizitantojn tra la SPIP galaksio.',
 	'descriptif_site_spip_blog' => 'Ĉar SPIP estas kunlaboriga projekto, spip-blog.net kolektas teknikajn artikoletojn, mem mokadojn, trolojn, diversajn anoncojn , … Pro tio ĝi bone respegulas la SPIP komunumon : unue kaj precipe multege de tenero.',
-	'descriptif_site_spip_contrib' => 'Kiel kunlaboriga retejo, spip-contrib.net disponigas la tuton de la exteraj kontribuaĵoj : kromprogramojn, skriptojn, filtrilojn, skeletojn, dokumentojn, trukojn kaj elturnigilojn,… el la komunumo (elŝutligoj) far la SPIP uzantoj. Ĝiaj forumoj plenumas la ligon inter konceptistoj kaj uzantoj.', # MODIF
+	'descriptif_site_spip_contrib' => 'Kiel kunlaboriga retejo, contrib.spip disponigas la tuton de la exteraj kontribuaĵoj : kromprogramojn, skriptojn, filtrilojn, skeletojn, dokumentojn, trukojn kaj elturnigilojn,… el la komunumo (elŝutligoj) far la SPIP uzantoj. Ĝiaj forumoj plenumas la ligon inter konceptistoj kaj uzantoj.',
 	'descriptif_site_spip_core' => 'La retejo core.spip.org arigas la historion de la modifoj de la SPIP kodo, mastrumadon de la petoslipoj kiuj ebligas averti pri cimoj kaj proponi sugestojn por plibonigado, kaj elŝuta spaco de la SPIP versioj.',
 	'descriptif_site_spip_demo' => 'Retejo de testo ĝisdatigita ĉiunokte, demo.spip.net ebligas al ĉiu provi SPIP-on en ĝia plej nova stabila versio (kun, elekteble, la redakta aŭ mastrumada statuso), per nura alklako kaj sen instali ĝin. ',
-	'descriptif_site_spip_doc' => 'La retejo code.spip.net estas referenco kie estas detaligita, analizita kaj komentita (nomo, loko, argumentoj, rolo kaj uzado) ĉiu el la funkcioj de la SPIP fontokodo.', # MODIF
+	'descriptif_site_spip_doc' => 'CODE.SPIP.net estas dokumentiga spaco de la SPIP-programaro por siaj interfacoj je aplika programado (API), sia fontokodo, kaj kelkaj el siaj teknikaj funkciiloj.',
 	'descriptif_site_spip_edgard' => 'Edgard estas nelacigebla kaj fidela kompano de SPIP tuja babilejo kie ĝi ĉiam intervenas taŭge, tenere kaj humure. El sia domo edgard.spip.net ĝi portas al IRC siajn konsilojn, respondojn kaj gajecon. Cetere, Edgard estas roboto (sed ĝi sajnigas ne konsii pri tio).',
 	'descriptif_site_spip_forum' => 'Forum.spip.net estas la retejo por interŝanĝo kaj interhelpo de la SPIP uzantoj. Tiu retejo ekzistas en deko da lingvoj kaj dispartiĝas laŭ kvar grandaj rubrikoj : instalado kaj ĝisdatigo, uzado de la privata spaco, bontenado, mastrumado, retejagordo, kreado de skeletoj.',
 	'descriptif_site_spip_herbier' => 'La SPIP herbaro ne estas ligaro kiel aliaj. Ne. Estas memoralbumo de retejoj efektivigitaj per SPIP, kaptitaj je certa momento de ilia ekzisto ĉe la Reto. Ĝi rakontas pri la reta historio, tiu de SPIP ekde 2001. Tiu herbaro arigas la retejojn kiujn ni emis afiŝi, ĉar interesaj laŭ ia enhavo agrable valorigita, ia homa aventuro, ia lerte uzita funksiigilo, aŭ nur vide allogaj. Estas retejoj pri kiuj oni memoras, ĉe kiuj oni revenas, kiu estis referencoj signante ilian epokon iel aŭ tiel.',
+	'descriptif_site_spip_info' => 'En kelkaj paĝoj, SPIP-INFO.net respondas la demandojn metitajn de geuzantoj kiuj evaluas la kapablecon de SPIP servi kiel bazo de ilia disvolviga projekto por retejo. Privatuloj, asocioj, entreprenoj trovos tie ĉi ĉiujn informojn por apogi ilian elekton.',
+	'descriptif_site_spip_irc' => 'La SPIP-komunumo, neniam dormante, dotiĝis per IRC-kanalo (senprokrasta diskutado per Interreto) malfermita al ĉiuj :
+http://webchat.freenode.net/?channels=#spip',
+	'descriptif_site_spip_mag' => 'Priskribo de la retejo SPIP Magazino',
+	'descriptif_site_spip_net' => 'Je la dispono de la uzantoj kaj de la retejestroj, SPIP.net estas la oficiala retejo konsilata por ĉiuj geuzantoj kiuj deziras instali retejon per SPIP, kompreni la lingvaĵo de iteracioj, etikedoj kaj filtriloj, skribi kaj uzi skeletojn. Ĝi prezentas glosaron, lernilojn, konsilojn, historoj pri versioj kaj spaco de elŝutado. SPIP.net estas tradukita al pli ol dudek lingvoj.',
 
 	// N
-	'nom_boussole_spip' => 'SPIP-Galakcio', # MODIF
+	'nom_boussole_spip' => 'SPIP-Orientigilo',
 	'nom_groupe_spip_actualite' => 'Aktualaĵo',
 	'nom_groupe_spip_aide' => 'Reciproka helpo',
 	'nom_groupe_spip_decouverte' => 'Ekmalkovro',
 	'nom_groupe_spip_extension' => 'Kontribuoj',
 	'nom_groupe_spip_reference' => 'Dokumentado',
 	'nom_site_spip_blog' => 'SPIP Blogo',
-	'nom_site_spip_contrib' => 'SPIP-Kontribuo', # MODIF
+	'nom_site_spip_contrib' => 'SPIP-Kontribuo',
 	'nom_site_spip_core' => 'SPIP Kerno',
 	'nom_site_spip_demo' => 'SPIP Elmontrado',
 	'nom_site_spip_doc' => 'SPIP Kodo',
@@ -45,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_site_spip_trad' => 'SPIP Traduki',
 	'nom_site_spip_twit' => 'SPIP.org',
 	'nom_site_spip_user' => 'SPIP Uzantoj',
-	'nom_site_spip_video' => 'SPIP Mediateko', # MODIF
+	'nom_site_spip_video' => 'SPIP Mediateko',
 	'nom_site_spip_zine' => 'SPIP Fanzino',
 	'nom_site_spip_zone' => 'SPIP Bazaro',
 
