@@ -89,9 +89,10 @@ function numero_info_objet($objet,$id_objet=0){
  * Requeter le(s) titres d'un objet selon une serie de conditions fournies en argument
  * @param string $type
  * @param array $cond
- * @return resource
+ * @param bool $count
+ * @return resource|int
  */
-function numero_requeter_titre($type,$cond = array()){
+function numero_requeter_titre($type,$cond = array(), $count=false){
 	$d = numero_info_objet($type);
 	$select = array(
 		$d['primary']." AS id",
@@ -106,7 +107,10 @@ function numero_requeter_titre($type,$cond = array()){
 	if ($d['tri_date']){
 		$order .= "," . $d['tri_date']." DESC";
 	}
-	$res = sql_select($select,$d['table_sql'],$cond,'',$order);
+	if ($count)
+		$res  = sql_countsel($d['table_sql'],$cond,'');
+	else
+		$res = sql_select($select,$d['table_sql'],$cond,'',$order);
 	return $res;
 }
 
@@ -217,11 +221,17 @@ function numero_lister_fratrie($objet,$id_objet){
 	$cond = array();
 	if ($d['parent'])
 		$cond = array($d['parent']."=".$row['id_parent']);
+
+	// si plus de 1000 on n'affiche plus rien
+	$n = numero_requeter_titre($objet,$cond, true);
+	if ($n>1000)
+		return array();
+
 	$res = numero_requeter_titre($objet,$cond);
 	$fratrie = array();
-	while($row = sql_fetch($res))
+	while($row = sql_fetch($res)){
 		$fratrie[$row['id']] = $row['titre'];
-
+	}
 	return $fratrie;
 }
 
