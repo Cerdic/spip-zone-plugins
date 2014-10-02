@@ -61,7 +61,14 @@ function numero_info_objet($objet,$id_objet=0){
 			'desc' => $desc,
 			'parent' => $parent,
 			'titre' => 'titre',
+			'tri_date' => '',
 		);
+		if (isset($desc['date'])){
+			$infos[$objet]['tri_date'] = $desc['date'];
+		}
+		elseif(isset($desc['field']['maj'])){
+			$infos[$objet]['tri_date'] = 'maj';
+		}
 		// extraire le champ titre
 		if (isset($desc['titre'])){
 			$infos[$objet]['titre'] = explode(',',$desc['titre']);
@@ -94,7 +101,12 @@ function numero_requeter_titre($type,$cond = array()){
 		$select[] = $d['parent']." AS id_parent";
 	else
 		$select[] = '0 AS id_parent';
-	$res = sql_select($select,$d['table_sql'],$cond,'',"0+titre,titre,maj DESC");
+
+	$order = "0+titre,titre";
+	if ($d['tri_date']){
+		$order .= "," . $d['tri_date']." DESC";
+	}
+	$res = sql_select($select,$d['table_sql'],$cond,'',$order);
 	return $res;
 }
 
