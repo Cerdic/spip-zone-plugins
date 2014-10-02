@@ -24,5 +24,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_precedent_0' => 'En premier',
 
 	'titre_formulaire_numeroter' => 'Numeroter',
+	'texte_sous_rubriques' => 'Sous rubriques',
 );
 ?>

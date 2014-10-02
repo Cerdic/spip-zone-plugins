@@ -40,7 +40,8 @@ function numero_affiche_droite($flux){
 		// lister tous les types dispo, voir si ils ont un id_rubrique, et si il y en a dans cette rubrique
 		$objets = lister_tables_objets_sql();
 		foreach($objets as $table_sql => $desc){
-			if (isset($desc['field']['id_rubrique'])
+			if ($desc['type']!=='rubrique'
+				AND isset($desc['field']['id_rubrique'])
 			  AND numero_compte_objets_enfants($desc['type'],"id_rubrique",$id_rubrique)){
 				// verifier qu'il y en a bien dans la rubrique
 				$out .= numero_affiche_boutons_objets_enfants($id_rubrique,$desc['type']);
@@ -112,19 +113,11 @@ function numero_affiche_boutons_objets_enfants($id_parent,$type){
 	$out = "";
 	$out .= "<h4>";
 	$texte_objets = _T(objet_info($type,"texte_objets"));
+	if ($type=="rubrique" AND $id_parent){
+		$texte_objets = _T('numero:texte_sous_rubriques');
+	}
 	$out .= "<span class='label'>".$texte_objets."</span>";
 	$out .= "<span class='boutons'>";
-	if ($type=="rubrique"){
-		$alt = ($id_parent?_T("numero:info_denumeroter_rubriques"):_T("numero:info_denumeroter_secteurs"));
-	}
-	else {
-		$alt = _T("numero:info_denumeroter_objets",array('objets'=>$texte_objets));
-	}
-	$out .= bouton_action(
-		http_img_pack(find_in_theme("images/denumeroter-24.png"),$alt),
-		generer_action_auteur('denumeroter', "$type-$id_parent", self('&')),
-		"","",$alt
-	);
 	if ($type=="rubrique"){
 		$alt = ($id_parent?_T("numero:info_numeroter_rubriques"):_T("numero:info_numeroter_secteurs"));
 	}
@@ -134,6 +127,17 @@ function numero_affiche_boutons_objets_enfants($id_parent,$type){
 	$out .= bouton_action(
 		http_img_pack(find_in_theme("images/numeroter-24.png"),$alt),
 		generer_action_auteur('renumeroter', "$type-$id_parent", self('&')),
+		"","",$alt
+	);
+	if ($type=="rubrique"){
+		$alt = ($id_parent?_T("numero:info_denumeroter_rubriques"):_T("numero:info_denumeroter_secteurs"));
+	}
+	else {
+		$alt = _T("numero:info_denumeroter_objets",array('objets'=>$texte_objets));
+	}
+	$out .= bouton_action(
+		http_img_pack(find_in_theme("images/denumeroter-24.png"),$alt),
+		generer_action_auteur('denumeroter', "$type-$id_parent", self('&')),
 		"","",$alt
 	);
 	$out .= "</span>";
