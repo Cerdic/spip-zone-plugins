@@ -30,7 +30,7 @@ function saisie_traitement_vue($valeur,$env){
 			$valeur = propre($valeur);
 		}
 		else {
-			$valeur = typo($valeur);
+			$valeur = "<p>" . typo($valeur) . "</p>";
 		}
 	}
 
