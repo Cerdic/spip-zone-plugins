@@ -63,7 +63,7 @@ function numero_info_objet($objet,$id_objet=0){
 			'titre' => 'titre',
 			'tri_date' => '',
 		);
-		if (isset($desc['date'])){
+		if (isset($desc['date']) AND isset($desc['field'][$desc['date']])){
 			$infos[$objet]['tri_date'] = $desc['date'];
 		}
 		elseif(isset($desc['field']['maj'])){
