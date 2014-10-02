@@ -1,8 +1,8 @@
 <paquet 
 	prefix="multidomaines"
 	categorie="maintenance"
-	version="2.2.1"
-	etat="dev"
+	version="2.3.0"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/multidomaines-72.png"
 	documentation="http://contrib.spip.net/?article4182"
@@ -17,5 +17,6 @@
 
 	<pipeline nom="calculer_URL_SECTEUR" inclure="multidomaines_fonctions.php" />
 	<pipeline nom="calculer_URL_RUBRIQUE" inclure="multidomaines_fonctions.php" />
+	<pipeline nom="pre_liens" inclure="multidomaines_pipelines.php" />
 	<pipeline nom="" inclure="multidomaines_options.php" />
 </paquet>
