@@ -62,8 +62,9 @@ entre [(#VAL{date_jour_#GET{jour_debut_numero}|plus{1}}|_T)] et [(#VAL{date_jour
 <p>La table aura donc #GET{nb_heures} heures pour [ (#GET{nb_minutes}) ] minutes sur [ (#GET{nb_jours}) ] colonnes (les jours)</p>
 -->]
 
+[(#REM) <!-- diviser la table de 800px moins 50px de la colonne .horaire en nombre de colonnes/jours puis par 2 (colspan=2") -->]
 <style type="text/css">
-#planning_simple td{width:[(#EVAL{750}|div{#GET{nb_jours}})px];} /* 750 = table 800px moins heures 50px*/
+#planning_simple td{width:[(#EVAL{750}|div{#GET{nb_jours}|mult{2}})px];}
 </style>
 
 
@@ -77,7 +78,7 @@ entre [(#VAL{date_jour_#GET{jour_debut_numero}|plus{1}}|_T)] et [(#VAL{date_jour
 		<th class="horaires"><!--Horaires--></th>
 	[(#REM) <!-- les jours (colonnes) de la semaine en multilingues -->]
 	<BOUCLE_jours(DATA){enum 1,#GET{nb_jours}}>
-		<th class="jours">[(#VAL{date_jour_#GET{jour_debut_numero}|plus{#VALEUR}}|_T|ucfirst)]</th>
+		<th class="jours" colspan="2">[(#VAL{date_jour_#GET{jour_debut_numero}|plus{#VALEUR}}|_T|ucfirst)]</th>
 	</BOUCLE_jours>
 	
 </tr>
