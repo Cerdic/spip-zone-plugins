@@ -334,14 +334,12 @@ function cextras_formulaire_verifier($flux){
  * @return array      Données du pipeline
 **/ 
 function cextras_revisions_chercher_label($flux){
-	$saisies_tables = pipeline('declarer_champs_extras', array());
 	$table = table_objet_sql($flux['args']['objet']);
-	if(isset($saisies_tables[$table])){
-		foreach($saisies_tables[$table] as $champ){
-			if($champ['options']['nom'] == $flux['args']['champ']){
-				$flux['data'] = $champ['options']['label'];
-				break;
-			}
+	$saisies_tables = champs_extras_objet($table);
+	foreach($saisies_tables as $champ){
+		if($champ['options']['nom'] == $flux['args']['champ']){
+			$flux['data'] = $champ['options']['label'];
+			break;
 		}
 	}
 	return $flux;
