@@ -131,7 +131,7 @@ function mailshot_envoyer_lot($nb_max=5){
 				$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"0,$nb_max");
 		}
 
-		if (!count($dests)){
+		if ($nb_max AND !count($dests)){
 			// plus de destinataires ? on a fini, on met a jour compteur et statut
 			$sent = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('sent'));
 			$failed = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('fail'));
@@ -144,7 +144,7 @@ function mailshot_envoyer_lot($nb_max=5){
 			sql_updateq("spip_mailshots",$set,"id_mailshot=".intval($shoot['id_mailshot']));
 			mailshot_update_meta_processing();
 		}
-		if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
+		if (!$nb_max OR time()>_MAILSHOT_MAX_TIME) return $nb_restant;
 	}
 
 	return 0; // plus rien a envoyer sur ce lot
