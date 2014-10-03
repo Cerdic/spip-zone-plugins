@@ -163,10 +163,11 @@ class FacteurMailjet extends Facteur {
 		  AND $id = $this->send_options['tracking_id']){
 
 			$campaign = protocole_implicite($GLOBALS['meta']['adresse_site'])."/#".$this->send_options['tracking_id'];
-			$this->AddCustomHeader("X-mailjet-campaign: $campaign");
-			$this->AddCustomHeader("X-Mailjet-DeduplicateCampaign: true");
-			$this->AddCustomHeader("X-Mailjet-TrackOpen: true");
-			$this->AddCustomHeader("X-Mailjet-TrackClick: true");
+			$this->AddCustomHeader("X-Mailjet-campaign: $campaign");
+			$this->AddCustomHeader("X-Mailjet-DeduplicateCampaign: 1");
+			$this->AddCustomHeader("X-Mailjet-TrackOpen: 1");
+			$this->AddCustomHeader("X-Mailjet-TrackClick: 1");
+			$this->AddCustomHeader("X-Mailjet-Prio: 0");
 		}
 
 		return parent::Send();
