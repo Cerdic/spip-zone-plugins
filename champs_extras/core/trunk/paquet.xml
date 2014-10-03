@@ -1,7 +1,7 @@
 <paquet
 	prefix="cextras"
 	categorie="outil"
-	version="3.2.7"
+	version="3.2.8"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/cextras-64.png"
@@ -21,6 +21,7 @@
 	<pipeline nom="afficher_contenu_objet" inclure="cextras_pipelines.php" />
 	<pipeline nom="pre_edition" inclure="cextras_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="cextras_pipelines.php" />
+	<pipeline nom="revisions_chercher_label" inclure="cextras_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.21.0;]" />
 	<utilise nom="verifier" compatibilite="[0.1.12;]" />
