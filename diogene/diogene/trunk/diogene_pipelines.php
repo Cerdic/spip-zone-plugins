@@ -211,7 +211,7 @@ function diogene_editer_contenu_objet($flux){
 				else
 					$flux['data'] = preg_replace(",(<li [^>]*class=[\"']$class.*)(<li [^>]*class=[\"'](editer|fieldset).*),Uims","\\2",$flux['data'],1);
 				if(($class == 'editer editer_parents') && ($args['options_complements']['polyhier_desactiver'] == 'on')){
-					$sous_rub_count = sql_countsel('id_rubrique','spip_rubriques','id_secteur='.intval($args['id_secteur']));
+					$sous_rub_count = sql_countsel('spip_rubriques','id_secteur='.intval($args['id_secteur']));
 					if($sous_rub_count == 0){
 						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parent.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
 						$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_parents.*)(<li [^>]*class=[\"']editer.*),Uims",''."\\2",$flux['data'],1);
