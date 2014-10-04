@@ -10,6 +10,7 @@
 	<etat>stable</etat>
 	<icon>prive/themes/spip/images/simplog-24.gif</icon>
 	<prefix>simplog</prefix>
+	<lien>http://contrib.spip.net/Simples-Logs</lien>
 	<categorie>outil</categorie>
 
 	<pipeline>

@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/simplog-24.gif"
+	documentation="http://contrib.spip.net/Simples-Logs"
 >	
 
 	<nom>Simples Logs</nom>
