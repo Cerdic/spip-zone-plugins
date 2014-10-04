@@ -184,8 +184,11 @@ function diogene_agenda_diogene_traiter($flux){
 
 			if(intval(_request('id_evenement')) > 0)
 				formulaires_editer_evenement_traiter_dist(_request('id_evenement'), $id_article,false, false, 'evenements_edit_config');
-			else
-				formulaires_editer_evenement_traiter_dist('new', $id_article,false, false, 'evenements_edit_config');
+			else{
+				set_request('ctr_titre','');
+				set_request('ctr_descriptif','');
+				$res = formulaires_editer_evenement_traiter_dist('new', $id_article,false, false, 'evenements_edit_config');
+			}
 			
 			/**
 			 * On remet le statut et le titre de l'article dans l'environnement du $_POST
