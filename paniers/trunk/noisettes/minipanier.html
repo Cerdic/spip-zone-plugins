@@ -4,12 +4,12 @@
 [(#SET{niveau_titre, #ENV{niveau_titre}|sinon{h2}})]
 
 <div class="minipanier">
-   [(#ENV{afficher_titre_noisette}|oui)
-   [<[(#GET{niveau_titre}) ]class="#GET{niveau_titre}">(#GET{titre})</[(#GET{niveau_titre})]>]]
-   #SET{nb_produits,0}
+	[(#ENV{afficher_titre_noisette}|oui)
+	[<[(#GET{niveau_titre}) ]class="#GET{niveau_titre}">(#GET{titre})</[(#GET{niveau_titre})]>]]
+	#SET{nb_produits,0}
 	<BOUCLE_contenu_panier(PANIERS_LIENS){id_panier=#SESSION{id_panier}}>
-   	[(#SET{nb_produits,#GET{nb_produits}|plus{#QUANTITE}})]
-   </BOUCLE_contenu_panier>
+	[(#SET{nb_produits,#GET{nb_produits}|plus{#QUANTITE}})]
+	</BOUCLE_contenu_panier>
 	<div class="minipanier-content">
 		<ul>
 			<li>[(#GET{nb_produits}|singulier_ou_pluriel{'paniers:produit_un', 'paniers:produits_plusieurs'})]</li>
@@ -17,9 +17,9 @@
 		</ul>
 	</div>
 
-   [(#ENV{afficher_lien_page_panier}|oui)
-      <div class="minipanier-lienpagepanier">
-         [(#URL_PAGE{panier}|lien_ou_expose{<:paniers:voir_mon_panier:>})]
-      </div>
-   ]
+	[(#ENV{afficher_lien_page_panier}|oui)
+	<div class="minipanier-lienpagepanier">
+	[(#URL_PAGE{panier}|lien_ou_expose{<:paniers:voir_mon_panier:>})]
+	</div>]
 </div>
+#FILTRE{trim}
