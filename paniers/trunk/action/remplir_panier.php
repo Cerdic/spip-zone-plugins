@@ -28,6 +28,8 @@ function action_remplir_panier_dist($arg=null) {
 		$id_panier = paniers_creer_panier();
 	}
 	
+	$id_panier = intval($id_panier);
+
 	// On ne fait que s'il y a bien un panier existant et un objet valable
 	if ($id_panier > 0 and $objet and $id_objet) {
 		// Il faut maintenant chercher si cet objet précis est *déjà* dans le panier
