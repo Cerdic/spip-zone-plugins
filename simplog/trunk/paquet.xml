@@ -1,10 +1,10 @@
 <paquet
 	prefix="simplog"
 	categorie="outil"
-	version="1.0.4"
+	version="1.0.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="prive/themes/spip/images/simplog-24.gif"
+	logo="prive/themes/spip/images/simplog-32.png"
 	documentation="http://contrib.spip.net/Simples-Logs"
 >	
 
@@ -17,5 +17,5 @@
 	<licence>GNU/GLP</licence>
 
 	<pipeline nom="autoriser" inclure="inc/simplog_autoriser.php" />
-	<menu nom="simplog_bt" titre="simplog:logs" parent="menu_administration" icone="images/simplog-16.gif" action="simplog" />
+	<menu nom="simplog_bt" titre="simplog:logs" parent="menu_administration" icone="images/simplog-16.png" action="simplog" />
 </paquet>
