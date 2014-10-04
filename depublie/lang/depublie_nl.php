@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Parameters voor depublicatie',
-	'configurer_duree_publication' => 'Geef een publicatieduur aan als de status in gepubliceerd verandert, laat anders leeg', # MODIF
-	'configurer_rubrique_depublie' => 'Het weergeven van het depublicatie-formulier vereist de identificatie van een of meerdere hoofd- en subrubrieken, gescheiden door een komma', # MODIF
+	'configurer_duree_publication' => 'Geef een publicatieduur aan als de status in gepubliceerd verandert, laat anders leeg.',
+	'configurer_rubrique_depublie' => 'Het weergeven van het depublicatie-formulier vereist de identificatie van een of meerdere hoofd- en subrubrieken, gescheiden door een komma.',
 	'configurer_statut_depublie' => 'Kies de tot te wijzen statut bij depublicatie',
 
 	// L
