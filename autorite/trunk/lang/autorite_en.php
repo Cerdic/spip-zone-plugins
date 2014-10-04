@@ -77,6 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_menu_config' => 'Authority',
+	'info_gere_rubriques' => 'Manage the following sections:',
+	'info_gere_rubriques_2' => 'I manage the following sections:',
 	'infos_selection' => '(you can select multiple sectors with the shift key)',
 	'interdire_admin' => 'Check the boxes below to prohibit administrators to create',
 
