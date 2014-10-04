@@ -255,7 +255,6 @@ function diogene_agenda_insert_head_css($flux){
 function diogene_agenda_diogene_avant_formulaire($flux){
 	if(is_array(unserialize($flux['args']['champs_ajoutes'])) &&
 		(in_array('agenda',unserialize($flux['args']['champs_ajoutes'])))){
-			spip_log($flux['args']['options_complements']['agenda_multiple'],'test.'._LOG_ERREUR);
 			if($flux['args']['type'] && isset($flux['args']['id']) && intval($flux['args']['id']) > 0)
 				$flux['data'] .= recuperer_fond('inclure/diogene_liste_evenements',array('id_article'=>$flux['args']['id'],'editer_id_evenement' => _request('editer_id_evenement'),'agenda_multiple' => $flux['args']['options_complements']['agenda_multiple'],'debut_evenements' => _request('debut_evenements')));
 	}
