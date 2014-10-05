@@ -71,6 +71,23 @@ function oembed($url, $maxwidth=0, $maxheight=0){
 	return $url;
 }
 
+/**
+ * Modifier l'iframe d'une video pour la passer en autoplay
+ * quand on l'injecte en async dans le html
+ * @param $html
+ * @return mixed
+ */
+function oembed_force_video_autoplay($html){
+
+	if ($e = extraire_balise($html,'iframe')
+	  AND $src = extraire_attribut($e,'src')){
+
+		$src_autoplay = parametre_url($src,"autoplay","1");
+		$html = str_replace($src,$src_autoplay,$html);
+	}
+
+	return $html;
+}
 
 function inc_ressource_dist($rac) {
 	static $null_allowed = null;

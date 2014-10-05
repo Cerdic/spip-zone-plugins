@@ -28,3 +28,15 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oe-link-block .link_logo {float: right;margin:0;margin-bottom: 10px;margin-left: 10px;border: 5px solid #ddd;}
 .oembed .storify .oembed {margin: 3em auto;text-align: center;}
 .oembed .storify .oembed iframe,.oembed .storify .oembed object {margin: 0 auto;}
+
+/* Video */
+.oembed_video {max-width: 100%;}
+.oembed_video .rwd-video-container {position: relative;}
+.oembed_video .rwd-video-container iframe {position: absolute;top:0;left: 0;width: 100%;height: 100%;}
+.oembed_video .oembed-source {display: none;}
+.oembed_video .oe-video {margin-left: auto;margin-right: auto;}
+.oembed_video .oe-video+.spip_doc_titre {margin-top: 0.5em;}
+.oe-play-button {position: relative;cursor: pointer;}
+.oe-play-button:before {content:"";position: absolute;display: block;left: 50%;top: 50%;background: #000;border: 1px solid #fff;width: 60px;height: 60px;margin-left: -30px;margin-top: -30px;z-index:10;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;}
+.oe-play-button:after {content:"";position: absolute;display: block;left: 50%;top: 50%;border-left:20px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left: -7px;margin-top: -10px;z-index:11;}
+.oe-play-button:hover:before{background-color: #DD2826;}
