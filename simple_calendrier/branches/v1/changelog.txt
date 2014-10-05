@@ -1,6 +1,12 @@
 ﻿Plugin Simple Calendrier pour SPIP 2.1
 ------------------------------------------
 
+1.2.12 le 05/10/2014
+--------------------
+Ajout du critère 'simplecalperiode' permettant de retourner les évènements sur une periode donnée.
+A utiliser dans des modèles.
+
+
 1.2.11 le 05/10/2013
 --------------------
 Surcharge de la fonction 'boucle_DOCUMENTS_dist' du core, afin qu'elle puisse retourner les documents rattachés aux évènements.
