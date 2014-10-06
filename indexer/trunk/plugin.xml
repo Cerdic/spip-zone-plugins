@@ -11,14 +11,16 @@
 	<licence>GNU/GPL</licence>
 	<version>1.1.1</version>
 	<etat>dev</etat>
-	<description>Gestion d'Indexation de contenus SPIP ou autre. Intégration et requêtes possibles avec Sphinx. Nécessite Sphinx 2.2 ou version ultérieure</description>
+	<description>Gestion d'indexation de contenus avec SPIP. Intégration et requêtes possibles avec Sphinx. Nécessite Sphinx 2.2 ou version ultérieure</description>
 	<prefix>indexer</prefix>
 
 	<fonctions>indexer_fonctions.php</fonctions>
 
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<categorie>navigation</categorie>
-	
+
+	<lien>http://contrib.spip.net/Sphinx-Indexer</lien>
+
 	<pipeline>
         <nom>post_edition</nom>
         <inclure>indexer_pipelines.php</inclure>
