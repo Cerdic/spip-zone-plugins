@@ -41,7 +41,8 @@ function microcache($id, $fond, $calcul=false) {
 	if (!$key
 	OR $calcul
 	OR in_array($_GET['var_mode'], array('recalcul', 'debug'))
-	OR is_null($contenu = cache_get($key))) {
+	OR !($contenu = cache_get($key))
+	) {
 		$contenu = recuperer_fond($fond, array('id'=>$id));
 		if ($key
 		AND $_GET['var_mode'] != 'inclure'
