@@ -2,7 +2,7 @@
 	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 	<div class="info_article_accueil">
 	<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}>
-		<:article_accueil:rubrique_article_en_accueil:> <a href="#URL_ARTICLE">#TITRE</a>
+		<:article_accueil:rubrique_article_en_accueil:> <a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a>
 	</BOUCLE_article>
 	</B_article>
 	<:article_accueil:aucun_article_accueil:>
