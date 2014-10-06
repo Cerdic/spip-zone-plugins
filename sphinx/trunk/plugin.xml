@@ -12,10 +12,10 @@
 	0.1.0
 	</version>
 	<etat>
-	test
+	dev
 	</etat>
 	<description>
-	Intégration du moteur de recherche SPHINX
+	Intégration du moteur de recherche SPHINX ; attention, ce plugin est OBSOLETE, utiliser desormais le plugin INDEXER.
 	</description>
 	<prefix>
 	sphinx
