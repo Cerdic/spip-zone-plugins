@@ -68,8 +68,8 @@ function bulkmailer_mandrill_webhook_dist($arg){
 
 	foreach ($events as $event){
 		$quoi = $event['event'];
-		if ($quoi=="open") $quoi=="read"; // open chez mandrill, read ici
-		if ($quoi=="click") $quoi=="clic"; // click chez mandrill, clic ici
+		if ($quoi=="open") $quoi="read"; // open chez mandrill, read ici
+		if ($quoi=="click") $quoi="clic"; // click chez mandrill, clic ici
 
 		$email = $event['msg']['email'];
 		$tags = $event['msg']['tags'];
