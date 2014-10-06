@@ -32,7 +32,7 @@
 		][(#SET{dimensions, #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span>}|inserer_attribut{class,dimensions}}})
 		][(#SET{metas, #VAL{'/\[\W\]/'}|preg_split{#ENV{metas,#ENV{infos}}|=={oui}|?{extension-taille-dimensions,#ENV*{metas,#ENV*{infos}}}}})
 		]<li>
-			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]">
+			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]" title="[(#TITRE|sinon{#FICHIER|basename}|couper{80}|attribut_html)]">
 				[<strong class="titre_album[ (#TITRE|non)fichier]">(#TITRE|sinon{#FICHIER|basename}|couper{80})</strong>]
 				<B_infos>(<BOUCLE_infos(DATA){source table, #GET{metas}}{'<span class="sep"> - </span>'}{si #GET{metas}}>[
 					(#REM)][(#GET{#VALEUR})][

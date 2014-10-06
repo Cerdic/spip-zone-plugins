@@ -25,7 +25,7 @@
 		(#REM)
 
 		]<li>
-			<a href="#URL_DOCUMENT" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION|attribut_html)]">
+			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION|attribut_html)]" title="[(#TITRE|sinon{#FICHIER|basename}|couper{80}|attribut_html)]">
 				[(#SET{dimension,100})
 				][(#SET{fichier,#MEDIA|=={image}|?{
 					#ENV{recadrer}|?{
