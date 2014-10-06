@@ -8,3 +8,5 @@
 .album.vignettes li a           { display: block; }
 .album.vignettes li,
 .album.vignettes .figcaption    { text-align: center; }
+/* squelettes de la dist : albums après le portfolio */
+.portfolio-albums               { clear: both; }
