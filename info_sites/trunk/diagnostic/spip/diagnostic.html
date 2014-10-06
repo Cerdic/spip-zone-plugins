@@ -27,14 +27,19 @@
         <td class="[(#GET{plugin_statut_class}|table_valeur{#GET{plugin/statut}|trim})]">[(#GET{plugin/statut})]</td><!-- statut -->
         <td>[(#GET{plugin/version})]</td><!-- version -->
         <td>[(#_diagnostic:LOGICIEL_NOM)][ (#_diagnostic:LOGICIEL_VERSION|version2branche)]</td>
-        <BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_diagnostic:LOGICIEL_VERSION|version2branche)%} {0,1}>
+        <BOUCLE_paquet_meme_branche (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {branches_spip LIKE %(#_diagnostic:LOGICIEL_VERSION|version2branche)%} {id_depot>0} {0,1}>
         <td class="[(#_diagnostic:LOGICIEL_VERSION|version2branche|in_array{[(#BRANCHES_SPIP|explode{','})]}|?{'success','danger'})]">[(#BRANCHES_SPIP|replace{",",", "})]</td><!-- branche -->
-        <td class="[(#VERSION|=={#_plugins_site:GET{plugin/version}}|?{'success','danger'})]">#VERSION</td><!-- branche_version -->
+        <td class="[(#VERSION|=={#_plugins_site:GET{plugin/version}}|?{'success','danger'})]">#VERSION
+        <BOUCLE_archive_mm_branche (DEPOTS) {id_depot} {si (#VERSION|=={#_plugins_site:GET{plugin/version}}|non)}> <a href="[(#URL_ARCHIVES)/#_paquet_meme_branche:NOM_ARCHIVE]" title="<:svp:titre_form_charger_plugin_archive|attribut_html:>"><i class="fa fa-download"></i></a> <a href="[(#URL_SERVEUR)/#_paquet_meme_branche:SRC_ARCHIVE]" title="<:svp:label_type_depot_svn|attribut_html:>"><i class="fa fa-paperclip"></i></a></BOUCLE_archive_mm_branche></td><!-- branche_version -->
         </BOUCLE_paquet_meme_branche>
-        <BOUCLE_paquet (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {!par version} {0,1}>
+        <td></td> <td></td>
+        <//B_paquet_meme_branche>
+        <BOUCLE_paquet (PAQUETS) {tout} {prefixe=(#GET{plugin/prefixe})} {id_depot>0} {!par version} {0,1}>
         <td class="[(#_diagnostic:LOGICIEL_VERSION|version2branche|in_array{[(#BRANCHES_SPIP|explode{','})]}|?{'success','danger'})]">[(#BRANCHES_SPIP|replace{",",", "})]</td><!-- branche -->
-        <td class="[(#VERSION|=={#_plugins_site:GET{plugin/version}}|?{'success','danger'})]">#VERSION</td><!-- branche_version -->
+        <td class="[(#VERSION|=={#_plugins_site:GET{plugin/version}}|?{'success','danger'})]">#VERSION<BOUCLE_archive (DEPOTS) {id_depot} {si (#VERSION|=={#_plugins_site:GET{plugin/version}}|non)}> <a href="[(#URL_ARCHIVES)/#_paquet:NOM_ARCHIVE]" title="<:svp:titre_form_charger_plugin_archive|attribut_html:>"><i class="fa fa-download"></i></a> <a href="[(#URL_SERVEUR)/#_paquet:SRC_ARCHIVE]" title="<:svp:label_type_depot_svn|attribut_html:>"><i class="fa fa-paperclip"></i></a></BOUCLE_archive></td><!-- branche_version -->
         </BOUCLE_paquet>
+        <td></td> <td></td>
+        <//B_paquet>
     </tr>
 </BOUCLE_plugins_site>
 </tbody>
