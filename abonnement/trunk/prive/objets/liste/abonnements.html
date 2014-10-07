@@ -3,6 +3,7 @@
 	date_fin,-1,
 	id_abonnement,1,
 	id_auteur,1,
+	nom,1,
 	points,-1
 }})]<B_liste_abonnements>
 #ANCRE_PAGINATION
@@ -16,7 +17,7 @@
 			<th class="id_abonnements_offre" scope="col">[(#TRI{id_abonnements_offre,<:abonnement:champ_id_abonnements_offre_label:>,ajax})]</th>
 			]
 			[(#ENV{masquer_auteur}|non)
-			<th class="id_auteur" scope="col">[(#TRI{id_auteur,<:abonnement:champ_id_auteur_label:>,ajax})]</th>
+			<th class="nom" scope="col">[(#TRI{nom,<:abonnement:champ_id_auteur_label:>,ajax})]</th>
 			]
 			<th class="date date_debut" scope="col">[(#TRI{date_debut,<:abonnement:champ_date_debut_label:>,ajax})]</th>
 			<th class="date date_fin" scope="col">[(#TRI{date_fin,<:abonnement:champ_date_fin_label:>,ajax})]</th>  
@@ -25,14 +26,21 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_abonnements(ABONNEMENTS){id_abonnements_offre?}{id_auteur?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_abonnements(ABONNEMENTS auteurs)
+		{where?}
+		{id_abonnements_offre?}
+		{id_auteur?}
+		{statut?}
+		{recherche?}
+		{tri #ENV{par,date_debut},#GET{defaut_tri}}{pagination #ENV{nb,10}}
+	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{abonnement,#ID_ABONNEMENT})]</td> 
 			[(#ENV{masquer_offre}|non)
 			<td class="id_abonnements_offre principale"><a href="[(#ID_ABONNEMENT|generer_url_entite{abonnement})]" title="<:abonnement:titre_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">#INFO_TITRE{abonnements_offre,#ID_ABONNEMENTS_OFFRE}</a></td>
 			]
 			[(#ENV{masquer_auteur}|non)
-			<td class="id_auteur principale"><a href="[(#ID_ABONNEMENT|generer_url_entite{abonnement})]" title="<:abonnement:titre_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">#INFO_TITRE{auteur,#ID_AUTEUR}</a></td>
+			<td class="nom principale"><a href="[(#ID_ABONNEMENT|generer_url_entite{abonnement})]" title="<:abonnement:titre_abonnement|attribut_html:> <:abonnement:info_numero_abbr|attribut_html:>#ID_ABONNEMENT">#NOM</a></td>
 			]
 			#SET{horaires, #INFO_PERIODE{abonnements_offre, #ID_ABONNEMENTS_OFFRE}|=={heures}|?{' ',''}}
 			<td class="date date_debut secondaire">[(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_DEBUT|affdate_heure)], [(#DATE_DEBUT|affdate_jourcourt)]})]})]</td>

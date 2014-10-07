@@ -1,4 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
+	num titre,1,
 	titre,1, 
 	id_abonnement,1,
 	points,-1
@@ -18,7 +19,14 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_abonnements_offres(ABONNEMENTS_OFFRES){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_abonnements_offres(ABONNEMENTS_OFFRES)
+		{where?}
+		{id_auteur?}
+		{statut?}
+		{recherche?}
+		{tri #ENV{par,num titre},#GET{defaut_tri}}
+		{pagination #ENV{nb,10}}
+	>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="statut">[(#STATUT|puce_statut{abonnements_offre,#ID_ABONNEMENTS_OFFRE})]</td> 
 			<td class="titre principale">[(#LOGO_ABONNEMENTS_OFFRE|image_reduire{20,26})]<a href="[(#ID_ABONNEMENTS_OFFRE|generer_url_entite{abonnements_offre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ABONNEMENTS_OFFRE">[(#RANG). ]#TITRE</a></td>
