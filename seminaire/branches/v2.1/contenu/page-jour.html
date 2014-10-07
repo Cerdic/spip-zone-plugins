@@ -18,7 +18,7 @@
 
 <h2 class="agenda">[(#DESCRIPTIF|attribut_html)]</h2>
 	<ul class="liste-items evenements">
-	<BOUCLE_ev(EVENEMENTS){date_debut<=#ENV{date}|replace{00:00:00, 23:59:59}}{date_fin>=#ENV{date}}{par date_debut}{titre_mot=#_mot_evenements:TITRE}>
+	<BOUCLE_ev(EVENEMENTS){date_debut<=#ENV{date}|replace{00:00:00, 23:59:59}}{date_fin>=#ENV{date}}{par date_debut}{id_mot=#_mot_evenements:ID_MOT}>
 		<li class="item">
 			<h3>#INFO_TITRE{article,#ID_ARTICLE}</h3>
 			#MODELE{evenement_vevent}
