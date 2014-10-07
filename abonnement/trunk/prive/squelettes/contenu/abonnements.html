@@ -1,0 +1,5 @@
+<h1><:abonnement:titre_abonnements:></h1>
+<INCLURE{fond=prive/objets/liste/abonnements,env,ajax,sinon=<:abonnement:info_aucun_abonnement:>} />
+[(#AUTORISER{creer,abonnement}|oui)
+	[(#REM|generer_url_ecrire_entite_edit{abonnement}|parametre_url{new,oui}|icone_verticale{<:abonnement:icone_creer_abonnement:>,abonnement,new,right})]
+]

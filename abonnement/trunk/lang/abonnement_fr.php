@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_creer_associer_abonnement' => 'Créer et associer un abonnement',
 	'titre_abonnement' => 'Abonnement',
 	'titre_abonnements' => 'Abonnements',
+	'titre_abonnements_suivre' => 'Suivre les abonnements',
 	'titre_abonnements_rubrique' => 'Abonnements de la rubrique',
 	'titre_langue_abonnement' => 'Langue de cet abonnement',
 	'titre_logo_abonnement' => 'Logo de cet abonnement',

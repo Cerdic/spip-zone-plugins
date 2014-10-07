@@ -36,4 +36,5 @@
 	<pipeline nom="affiche_milieu" inclure="abonnements_pipelines.php" />
 
 	<menu nom="abonnements_offres" titre="abonnementsoffre:titre_abonnementsoffres" parent="menu_publication" icone="images/abonnement-16.png" action="abonnements_offres" /> 
+	<menu nom="abonnements" titre="abonnement:titre_abonnements_suivre" parent="menu_activite" icone="images/abonnement-16.png" action="abonnements" /> 
 </paquet>
