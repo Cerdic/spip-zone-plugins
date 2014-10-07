@@ -1,6 +1,6 @@
 [(#SET{defaut_tri,#ARRAY{
-	date_debut,-1,
-	date_fin,-1,
+	date_debut,#ENV{date_debut_sens,-1},
+	date_fin,#ENV{date_fin_sens,-1},
 	id_abonnement,1,
 	id_auteur,1,
 	nom,1,
@@ -9,7 +9,7 @@
 #ANCRE_PAGINATION
 <div class="liste-objets abonnements">
 <table class="spip liste">
-	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{abonnement:info_1_abonnement,abonnement:info_nb_abonnements}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{#ENV{titre_singulier,abonnement:info_1_abonnement},#ENV{titre_pluriel,abonnement:info_nb_abonnements}}})</strong></caption>]
 	<thead>
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
