@@ -77,6 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_menu_config' => 'Autorita',
+	'info_gere_rubriques' => 'Spravuje tieto rubriky:',
+	'info_gere_rubriques_2' => 'Spravujem tieto rubriky:',
 	'infos_selection' => '(viac možností môžete vybrať klávesom Shift)',
 	'interdire_admin' => 'Zaškrtnite polia, ak chcete zakázať administrátorom vytváranie',
 
