@@ -1,4 +1,4 @@
-<BOUCLE_abonnement(ABONNEMENTS){id_abonnement}{statut?}>
+<BOUCLE_abonnement(ABONNEMENTS auteurs){id_abonnement}{statut?}>
 
 [<div class="champ contenu_id_abonnements_offre[ (#ID_ABONNEMENTS_OFFRE*|strlen|?{'',vide})]">
 	<label><:abonnement:champ_id_abonnements_offre_label:> : </label>
@@ -7,7 +7,8 @@
 
 [<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
 	<label><:abonnement:champ_id_auteur_label:> : </label>
-	<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"><span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#INFO_TITRE{auteur,#ID_AUTEUR})</span></a>
+	<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"><span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#NOM)</span></a>
+	[(<a href="mailto:#EMAIL">(#EMAIL)</a>)]
 </div>]
 
 #SET{horaires, #INFO_PERIODE{abonnements_offre, #ID_ABONNEMENTS_OFFRE}|=={heures}|?{' ',''}}
