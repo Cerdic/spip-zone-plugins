@@ -33,5 +33,5 @@ EXIF, IPTC, GPS informations are extract with the plugin Photo metadata by ARNO*
 	<categorie>multimedia</categorie>
 	<necessite id="medias" version="[1.6.1;]" />
 	<necessite id="photo_infos" version="[1.2;]" />
-	<utilise id="cfg">
+	<utilise id="cfg" />
 </plugin>

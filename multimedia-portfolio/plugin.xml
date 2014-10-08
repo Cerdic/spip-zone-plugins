@@ -11,7 +11,7 @@
 -* Impl&#233;mente [jquery multimedia portfolio 2->http://www.openstudio.fr/jquery-multimedia-portfolio/]
 -* Supporte de nombreux formats : photos, vid&#233;os (fichiers flv et liens youtube), mp3 et pdf
 -* Le plugin va d&#233;tecter automatiquement le type de fichier cible et appliquer le viewer adapt&#233;.
--* Exemple : <code><multimedia_portfolio123></code> affichera les documents joints &#224; l'article 123
+-* Exemple : <code>&#60;multimedia_portfolio123&#62;</code> affichera les documents joints &#224; l'article 123
 	</description>
 	<lien></lien>
 	<pipeline>

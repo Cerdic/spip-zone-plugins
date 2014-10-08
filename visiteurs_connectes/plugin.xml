@@ -15,22 +15,22 @@
 	<description><multi>
 [fr]
 -* Un plugin gadget qui permet d'afficher le nombre de visiteurs connect&#233;s sur votre site.
--* Ajouter <code><INCLURE{fond=inc-visiteurs}></code> dans vos pages.
+-* Ajouter <code>&#60;INCLURE{fond=inc-visiteurs}&#62;</code> dans vos pages.
 [ar]
 -* &#1610;&#1593;&#1585;&#1590; &#1593;&#1583;&#1583; &#1575;&#1604;&#1586;&#1608;&#1575;&#1585; &#1593;&#1604;&#1609; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;.
--* &#1571;&#1590;&#1610;&#1601; <code><INCLURE{fond=inc-visiteurs}></code> &#1601;&#1610; &#1589;&#1601;&#1581;&#1575;&#1578;&#1603;.
+-* &#1571;&#1590;&#1610;&#1601; <code>&#60;INCLURE{fond=inc-visiteurs}&#62;</code> &#1601;&#1610; &#1589;&#1601;&#1581;&#1575;&#1578;&#1603;.
 [en]
 -* Displays the number of visitors connected on the site.
--* Add <code><INCLURE{fond=inc-visiteurs}></code> in your pages.
+-* Add <code>&#60;INCLURE{fond=inc-visiteurs}&#62;</code> in your pages.
 [es]
 -* Muestra el n&#250;mero de visitantes conectados en el sitio.
--* Agregar <code><INCLURE{fond=inc-visiteurs}></code> en tus p&#225;ginas.
+-* Agregar <code>&#60;INCLURE{fond=inc-visiteurs}&#62;</code> en tus p&#225;ginas.
 [it]
 -* Visualizza il numero di visitatori collegati sul sito.
--* Aggiungere <code><INCLURE{fond=inc-visiteurs}></code> nelle vostre pagine.
+-* Aggiungere <code>&#60;INCLURE{fond=inc-visiteurs}&#62;</code> nelle vostre pagine.
 [de]
 -* Zeigt die anzahl der besucher auf der website verbunden.
--* hinzuf&#252;gen <code><INCLURE{fond=inc-visiteurs}></code> in ihre seiten.
+-* hinzuf&#252;gen <code>&#60;INCLURE{fond=inc-visiteurs}&#62;</code> in ihre seiten.
 	<multi></description>
 	<fonctions>visiteurs_fonctions.php</fonctions>
 	<prefix>visiteurs_connectes</prefix>

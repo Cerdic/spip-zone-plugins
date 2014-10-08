@@ -3,6 +3,7 @@
 	<slogan><multi>
 		[en]XSPF documents lists and multimedia players models
 		[fr]Liste de documents XSPF et mod&#232;les de lecteurs multim&#233;dia
+		</multi>
 	</slogan>
 	<auteur>Collectif spip</auteur>
 	<licence>GNU/GPL</licence>
@@ -13,15 +14,15 @@
 [en]This plugin provides a template which generate a [XSPF->http://www.xspf.org/] format documents list.
 
 It proposes multimedia players models such as:
--* <code><buttonplayer123></code>  where 123 is an id article providing mp3, <code><slimplayer123></code> and <code><musicplayer123></code>. [Musicplayer->http://musicplayer.sourceforge.net/]
--* <code><rotator123></code> where 123 is an id article providing images and <code><mediaplayer123></code>. [Jeroen Wijering->http://www.longtailvideo.com/players/]
+-* <code>&#60;buttonplayer123&#62;</code>  where 123 is an id article providing mp3, <code>&#60;slimplayer123&#62;</code> and <code>&#60;musicplayer123&#62;</code>. [Musicplayer->http://musicplayer.sourceforge.net/]
+-* <code>&#60;rotator123&#62;</code> where 123 is an id article providing images and <code>&#60;mediaplayer123&#62;</code>. [Jeroen Wijering->http://www.longtailvideo.com/players/]
 
 Beware that the three last players licence is half-commerciale, this is why they are not included in this distribution. 
 [fr]Ce plugin fournit un squelette produisant des listes de documents au format [XSPF->http://www.xspf.org/].
 
 Il est actuellement accompagn&#233; de cinq mod&#232;les pour agr&#233;menter votre site :
--* <code><buttonplayer123></code>  o&#249; 123 est un id article fournissant les mp3, <code><slimplayer123></code> et <code><musicplayer123></code>. [Musicplayer->http://musicplayer.sourceforge.net/]
--* <code><rotator123></code> o&#249; 123 est un id article fournissant les images et <code><mediaplayer123></code>. [Jeroen Wijering->http://www.longtailvideo.com/players/]
+-* <code>&#60;buttonplayer123&#62;</code>  o&#249; 123 est un id article fournissant les mp3, <code>&#60;slimplayer123&#62;</code> et <code>&#60;musicplayer123&#62;</code>. [Musicplayer->http://musicplayer.sourceforge.net/]
+-* <code>&#60;rotator123&#62;</code> o&#249; 123 est un id article fournissant les images et <code>&#60;mediaplayer123&#62;</code>. [Jeroen Wijering->http://www.longtailvideo.com/players/]
 
 Attention, la licence de ces trois derniers lecteurs est semi-commerciale, c'est pourquoi ils ne sont pas inclus dans cette contribution.
 

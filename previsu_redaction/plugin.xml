@@ -5,14 +5,14 @@
 	[en]Show preview
 	[es]Previsualizar
 	[de]Vorschau
-	</muli></nom>
+	</multi></nom>
 	<slogan><multi>
 	[fr]Pr&#233;visualisation pour les articles en cours de r&#233;daction
 	[ar]&#1593;&#1585;&#1590; &#1605;&#1587;&#1576;&#1602; &#1604;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1601;&#1610; &#1602;&#1610;&#1583; &#1575;&#1604;&#1578;&#1581;&#1585;&#1610;&#1585;
 	[en]Show preview for articles editing in progress
 	[es]Previsualizar los art&#237;culos en curso de redacci&#243;n
 	[de]Vorschau anzeigen f&#252;r Artikel in Bearbeitung
-	</muli></slogan>
+	</multi></slogan>
 	<auteur>[C&#233;dric Morin->http://www.yterium.net], superyms (traduction)</auteur>
 	<version>1.0.0</version>
 	<etat>stable</etat>

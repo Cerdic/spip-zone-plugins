@@ -10,7 +10,7 @@
 
 	<nom>Traductions de rubriques autrement</nom>
 
-	<auteur lien="http://websimple.be">Rainer Müller</auteur>	
+	<auteur lien="http://websimple.be">Rainer M&#252;ller</auteur>	
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<traduire module="tra" reference="fr" gestionnaire="salvatore" />	

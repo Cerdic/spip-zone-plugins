@@ -26,7 +26,7 @@
 		
 		Used with the generalized typographical bar, this plugin offers to easily use multilingualism on every textareas, such as titles, descriptions, and texts.
 		
-		It is based on the use of <code><multi></code>. tags.
+		It is based on the use of <code>&#60;multi&#62;</code>. tags.
 		</multi>
 	</description>
 	<prefix>ExtensionMultilingue</prefix>

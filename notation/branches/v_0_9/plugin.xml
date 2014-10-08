@@ -14,11 +14,11 @@
 	<description>
 		<multi>
 [fr]D&#233;finition de la balise <code>#FORMULAIRE_NOTATION</code> permettant la saisie et l'affichage de la note d'un &#233;l&#233;ment de boucle.
-_ D&#233;finition des mod&#232;les <code><autxx|notation|id_article=yy></code> qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
-et <code><notation|topten></code> qui donne les 10 meilleurs articles.
+_ D&#233;finition des mod&#232;les <code>&#60;autxx|notation|id_article=yy&#62;</code> qui donne la note de l'auteur <i>xx</i> pour l'article <i>yy</i>
+et <code>&#60;notation|topten&#62;</code> qui donne les 10 meilleurs articles.
 [en]Defines the <code>#FORMULAIRE_NOTATION</code> tag which allows the capture and the display of the rating of a loop element.
-_ Defines the models <code><autxx|notation|id_article=yy></code> which gives the author's rating <i>xx</i> for the article <i>yy</i>
-and <code><notation|topten></code> which gives the 10 best articles.
+_ Defines the models <code>&#60;autxx|notation|id_article=yy&#62;</code> which gives the author's rating <i>xx</i> for the article <i>yy</i>
+and <code>&#60;notation|topten&#62;</code> which gives the 10 best articles.
 		</multi>
 	</description>
 	<lien>http://contrib.spip.net/Notation-d-elements-SPIP</lien>
