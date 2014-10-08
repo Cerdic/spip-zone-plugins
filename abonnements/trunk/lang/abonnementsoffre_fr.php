@@ -1,13 +1,13 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_lien_abonnementsoffre' => 'Ajouter cette offre d’abonnement',
-	
+
 	// C
 	'champ_descriptif_label' => 'Descriptif',
 	'champ_duree_0' => 'Sans limite',
@@ -23,8 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_prix_label' => 'Prix',
 	'champ_titre_label' => 'Titre',
 	'configurer_notifications' => 'Configurer les notifications',
-	'configurer_notifications_quand' => 'Quand ?',
-	
+	'configurer_notifications_quand' => 'Quand ?',
+
 	// I
 	'icone_creer_abonnementsoffre' => 'Créer une offre d’abonnement',
 	'icone_modifier_abonnementsoffre' => 'Modifier cette offre d’abonnement',
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_abonnementsoffres' => 'Offres d’abonnement',
 	'titre_abonnementsoffres_rubrique' => 'Offres d’abonnement de la rubrique',
 	'titre_langue_abonnementsoffre' => 'Langue de cette offre d’abonnement',
-	'titre_logo_abonnementsoffre' => 'Logo de cette offre d’abonnement',
+	'titre_logo_abonnementsoffre' => 'Logo de cette offre d’abonnement'
 );
 
 ?>
