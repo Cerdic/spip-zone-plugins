@@ -377,7 +377,7 @@ function vues_dist($type, $modele, $id, $content, $wid){
 function crayons_objet_modifier($id, $data, $type, $ref) {
 	if (include_spip('action/editer_objet')
 	    AND function_exists('objet_modifier')) {
-		return objet_modifier($type,$id,$data);
+		return objet_modifier(objet_type($type),$id,$data);
 	}
 	// fallback
 	return crayons_update($id, $data, $type);
