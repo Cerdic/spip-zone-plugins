@@ -15,7 +15,11 @@ define('_ZPIP',true);
 // avec un . ou un /
 if ($z = _request('var_zajax')
   AND !preg_match(",[^\w-],",$z)) {
-	$GLOBALS['marqueur'] .= "$z:";
+	if (!isset($GLOBALS['marqueur'])) {
+		$GLOBALS['marqueur'] = "$z:";
+	} else {
+		$GLOBALS['marqueur'] .= "$z:";
+	}
 	$GLOBALS['flag_preserver'] = true;
 }
 else {
