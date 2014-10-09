@@ -1,0 +1,23 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+    <form action="#ENV{action}" method="post">
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    [(#SELF|parametre_url{prefixe,''}|form_hidden)]
+    <ul>
+        <li>
+            <label for="champ_prefixe"><:fonction:label_prefixe_constante:></label>
+            <select name="prefixe" id="champ_prefixe">
+            <option value=""><:fonction:tout_voir:></option>
+            <BOUCLE_lister (DATA) {source table, (#REM|lister_constantes|array_keys)} {par valeur}>
+                <option value="#VALEUR" [(#ENV{prefixe}|=={#VALEUR}|oui)selected="selected"]>#VALEUR [((#VALEUR|lister_constantes|count))]</option>
+            </BOUCLE_lister>
+            </select>
+        </li>
+    </ul>
+        <p class="boutons">
+            <input type="submit" class="submit" value="<:bouton_valider:>" />
+        </p>
+    </form>
+</div>

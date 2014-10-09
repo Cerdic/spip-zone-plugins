@@ -1,0 +1,30 @@
+<paquet
+	prefix="dev"
+	categorie="outil"
+	version="0.3.9"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/dev-32.png"
+>
+
+	<nom>D&#233;veloppement</nom>
+	<!-- Outils de developpement -->
+
+	<auteur>Collectif SPIP</auteur>
+
+    <menu nom="menu_dev" titre="fonction:icone_dev" icone="images/developpement-48.png" action="navigation" parametres="menu=menu_dev" />
+    <menu nom="charte" titre="charter:titre_charte" parent="menu_dev" action="charte" />
+    <menu nom="source_fonctions_utilisateur" titre="fonction:titre_onglet_fonctions" parent="menu_dev" action="source_fonctions_utilisateur" icone="images/fonctions-16.png"/>
+
+	<onglet nom="charte" titre="charter:titre_charte" parent="charte" action="charte" />
+	<onglet nom="charte_icones" titre="charter:titre_icones" parent="charte" action="charte_icones" />
+	<onglet nom="charte_typo" titre="charter:titre_typo" parent="charte" action="charte_typo" />
+	<onglet nom="charte_boites" titre="charter:titre_boites" parent="charte" action="charte_boites" />
+	<onglet nom="charte_listes" titre="charter:titre_listes" parent="charte" action="charte_listes" />
+	<onglet nom="charte_forms" titre="charter:titre_formulaires" parent="charte" action="charte_forms" />
+
+	<onglet nom="source_fonctions_utilisateur" titre="fonction:titre_onglet_fonctions_utilisateur" parent="source_fonctions_utilisateur" action="source_fonctions_utilisateur" />
+	<onglet nom="source_fonctions_completes" titre="fonction:titre_onglet_fonctions_completes" parent="source_fonctions_utilisateur" action="source_fonctions_completes" />
+	<onglet nom="source_constantes" titre="fonction:titre_onglet_constantes" parent="source_fonctions_utilisateur" action="source_constantes" />
+	<onglet nom="source_images" titre="fonction:titre_onglet_images" parent="source_fonctions_utilisateur" action="source_images" />
+</paquet>

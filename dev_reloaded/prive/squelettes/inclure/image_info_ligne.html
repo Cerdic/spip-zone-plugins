@@ -1,0 +1,21 @@
+[(#SET{pathinfo,[(#ENV{image}|pathinfo)]})]
+[(#SET{icone_ok,[(#CHEMIN_IMAGE{ok-16.png}|balise_img)]})]
+[(#SET{icone_ko,[(#CHEMIN_IMAGE{supprimer-8.png}|balise_img)]})]
+[<tr class="prefixe">
+    <td colspan="3"><h3>(#ENV{prefixe})</h3></td>
+</tr>]
+<tr class="[(#ENV{class})]">
+    <td class="nom principale">
+        [<a href="#ENV{image}"[ title="(#ENV{image}|attribut_html)"] class="mediabox">(#ENV{image}|balise_img|image_reduire{125,100}|inserer_attribut{alt,[(#ENV{image}|basename|attribut_html)]})
+        [<br/><em>(#ENV{image}|basename)</em>]
+        </a>]
+    </td>
+    <td class="exif secondaire">
+        [<strong class="extension">(#GET{pathinfo}|table_valeur{extension})</strong>]
+        <div class="dimensions">[(#ENV{image}|largeur)] x [(#ENV{image}|hauteur)] px </div>
+        [<div class="taille">(#ENV{image}|filesize|taille_en_octets)</div>]
+    </td>
+    <td class="core secondaire">
+        [(#ENV{image}|match{'/plugins/'}|?{#GET{icone_ko},#GET{icone_ok}})]
+    </td>
+</tr>

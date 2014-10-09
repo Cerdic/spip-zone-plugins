@@ -1,0 +1,44 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribué sous licence GPL
+
+]
+<h1 class="grostitre">Icônes</h1>
+
+#BOITE_OUVRIR{'|icone_verticale','info'}
+<tt>[(&#35;URL_ECRIRE{accueil}
+|icone_verticale{<:</tt><tt>icone_modifier_article:>,article,new})]</tt>
+[(#URL_ECRIRE{accueil}|icone_verticale{<:icone_modifier_article:>,article,new})]
+<hr style="clear:both;" />
+<tt>[(&#35;SELF|icone_verticale{<:</tt><tt>icone_modifier_article:>,article,edit,left})]</tt>
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,edit,left})]
+<hr style="clear:both;" />
+<tt>[(&#35;SELF|icone_verticale{<:</tt><tt>icone_modifier_article:>,article,new,right})]</tt>
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,new,right})]
+<hr style="clear:both;" />
+<tt>[(&#35;SELF|icone_verticale{<:</tt><tt>icone_modifier_article:>,article,new,center})]</tt>
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,new,center})]
+<hr style="clear:both;" />
+<tt>[(&#35;SELF|icone_verticale{<:</tt><tt>icone_modifier_article:>,article,del,right})]</tt>
+[(#SELF|icone_verticale{<:icone_modifier_article:>,article,del,right})]
+#BOITE_FERMER
+
+#BOITE_OUVRIR{'|icone_horizontale','info'}
+	<tt>[(&#35;SELF|icone_horizontale{<:</tt><tt>icone_modifier_article:>,article,new})]</tt>
+	<table><tr>
+		<td>[(#SELF|icone_horizontale{<:icone_modifier_article:>,article,new})]
+		</td>
+		<td>[(#SELF|icone_horizontale{texte sur plusieurs<br />lignes pour voir si l'icône<br /> se centre bien <br />verticalement,rubrique,edit})]</td>
+		<td>[(#SELF|icone_horizontale{'deux<br />lignes',site,del})]</td>
+		<td>[(#SELF|icone_horizontale{'short',mot})]</td>
+	</tr></table>
+#BOITE_FERMER
+#BOITE_OUVRIR{'|icone_horizontale','info'}
+		<tt>[(&#35;SELF|icone_horizontale{<:</tt><tt>icone_modifier_article:>,article,new})]</tt>
+		[(#SELF|icone_horizontale{<:icone_modifier_article:>,article,new})]
+		[(#SELF|icone_horizontale{texte sur plusieurs<br />lignes pour voir si l'icône<br /> se centre bien <br />verticalement,rubrique,edit})]
+		[(#SELF|icone_horizontale{'deux<br />lignes',site,del})]
+		[(#SELF|icone_horizontale{'short',mot})]
+#BOITE_FERMER

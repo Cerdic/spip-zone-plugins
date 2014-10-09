@@ -1,0 +1,55 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribué sous licence GPL
+
+]
+
+<h1 class="grostitre">Charte</h1>
+
+<p>
+Ces pages donnent des exemples de structures HTML utilisées par les squelettes de l'espace privé	
+</p>
+[(#VAL{charte}|barre_onglets{charte})]
+<p>Le menu à onglet est généré par le code <tt>[(&#35;VAL{nomdelabarreonglet}|barre_onglets{pagecourante})]</tt>
+<br />Ce menu n'a pas l'apparence de vrais onglets car il constitue une navigation avec changement de page. Ce menu est extensible par les plugins car la liste des pages le constituant est décrite dans <tt>paquet.xml</tt>
+</p>
+
+
+<h3>Des onglets simples à deux niveaux</h3>
+<p>Les onglets simples sont utilisés préférentiellement pour de la navigation ou du filtrage au sein de la même page. Ils sont utilisés avec des liens ajax pour être plus réactifs, ce qui est attendu par les utilisateurs confrontés à un onglet.
+<br />
+Il n'y a pas de filtre pour les construire car leur structure HTML est très simple.</p>
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li><strong>Onglet expos&eacute;</strong></li>
+		<li><a>Onglet cliquable</a></li>
+		<li><a>Onglet cliquable</a></li>
+	</ul>
+</div>
+
+<div class='onglets_simple second clearfix'>
+	<ul>
+		<li><strong>Onglet expos&eacute;</strong></li>
+		<li><a>Onglet cliquable</a></li>
+		<li><a>Onglet cliquable</a></li>
+	</ul>
+</div>
+<textarea rows="15" cols="60">
+<div class='onglets_simple clearfix'>
+	<ul>
+		<li><strong>Onglet expos&eacute;</strong></li>
+		<li><a>Onglet cliquable</a></li>
+		<li><a>Onglet cliquable</a></li>
+	</ul>
+</div>
+
+<div class='onglets_simple second clearfix'>
+	<ul>
+		<li><strong>Onglet expos&eacute;</strong></li>
+		<li><a>Onglet cliquable</a></li>
+		<li><a>Onglet cliquable</a></li>
+	</ul>
+</div>
+</textarea>

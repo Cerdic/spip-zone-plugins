@@ -1,0 +1,26 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    [(#SET{prefixe,#ARRAY})]
+<BOUCLE_prefixe (DATA) {source json, (#INCLURE{fond=dev_json,objets=source_fonctions_completes})}>
+[(#SET{prefixe,[(#GET{prefixe}|push{#CLE})]})]
+</BOUCLE_prefixe>
+    <form action="#ENV{action}" method="post">
+    [(#ACTION_FORMULAIRE{#ENV{action}})]
+    [(#SELF|parametre_url{prefixe,''}|form_hidden)]
+    <ul>
+        <li>
+            <label for="champ_prefixe"><:fonction:label_prefixe_fonction:></label>
+            <select name="prefixe" id="champ_prefixe">
+            <option value=""><:fonction:tout_voir:></option>
+            <BOUCLE_lister (DATA) {source table, (#GET{prefixe})} {par valeur}>
+                <option value="#VALEUR" [(#ENV{prefixe}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+            </BOUCLE_lister>
+            </select>
+        </li>
+    </ul>
+        <p class="boutons">
+            <input type="submit" class="submit" value="<:bouton_valider:>" />
+        </p>
+    </form>
+</div>
