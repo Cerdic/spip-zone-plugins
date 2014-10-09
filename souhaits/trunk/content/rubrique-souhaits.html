@@ -21,7 +21,7 @@
 		<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
 			<BOUCLE_souhaits_classes(SOUHAITS){id_rubrique}{0,1}>
 			<div class="liste souhaits">
-				<INCLURE{fond=liste/souhaits-resume,env,ajax,id_rubrique,titre=#_sous_rubriques:TITRE} />
+				<INCLURE{fond=liste/souhaits-resume,env,ajax,id_rubrique,statut=#LISTE{libre,cagnotte,propose,achete},titre=#_sous_rubriques:TITRE} />
 			</div>
 			</BOUCLE_souhaits_classes>
 		</BOUCLE_sous_rubriques>
