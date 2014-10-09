@@ -13,7 +13,7 @@
 		[(#REM) On affiche les souhaits de cette rubrique s'il y en a ]
 		<BOUCLE_souhaits_ici(SOUHAITS){id_rubrique}{0,1}>
 		<div class="liste souhaits">
-			<INCLURE{fond=liste/souhaits-resume,env,ajax} />
+			<INCLURE{fond=liste/souhaits-resume,env,ajax,statut=#LISTE{libre,cagnotte,propose,achete}} />
 		</div>
 		</BOUCLE_souhaits_ici>
 		
