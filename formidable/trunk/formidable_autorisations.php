@@ -144,10 +144,10 @@ function autoriser_formulaire_repondre_dist($faire, $type, $id, $qui, $opt){
     $traitements = unserialize($formulaire['traitements']);
 
     // S'il n'y a pas d'enregistrement, c'est forcément bon
-    if (!($options = $traitements['enregistrement']))
+    if (!isset($traitements['enregistrement']) OR !($options = $traitements['enregistrement'])) {
         return true;
     // Sinon faut voir les options
-    else{
+    } else {
         // Si multiple = oui c'est bon
         if ($options['multiple'])
             return true;

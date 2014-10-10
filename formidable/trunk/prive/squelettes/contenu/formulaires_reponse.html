@@ -27,7 +27,7 @@
 [(#VAL{formulaires_reponse}|concat{-enfants}|trouver_fond{prive/objets/contenu/}|oui)
 	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/formulaires_reponse-enfants,id_objet,env})]})]
 ]
-[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet,formulaires_reponse,id_objet,#ID_FORMULAIRES_REPONSE},data,#GET{enfants}})]})]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,formulaires_reponse,objet,formulaires_reponse,id_objet,#ID_FORMULAIRES_REPONSE},data,#GET{enfants}})]})]
 
 </BOUCLE_autoriser>
 </BOUCLE_formulaires_reponse>
