@@ -9,6 +9,10 @@ Liste de choses à faire, notes et idées diverses, sans version particulière c
 - Bouton pour transvaser les documents du portfolio dans un nouvel album.
 (portfolio = illustrations + portfolio + documents)
 
+## Liste des albums
+Quand on fait une recherche dans l'espace privé, la liste des albums n'a pas une apparence identique aux autres listes : les listes "standard" sont en un seul bloc, tandis que la liste des albums est constituée de plusieurs blocs, avec le nombre de résultats et les critères de tri en dehors.
+Ça jure un peu dans ce beau tableau. Essayer, si possible, de rendre la liste un peu plus standard.
+
 ## Fichiers surchargés du plugin Médias
 Plusieurs fichiers sont surchargés pour régler des problèmes javascripts, ou ajouter des éléments.
 Des fois il n'y a pas le choix, mais voir s'il y a moyen de s'en passer.
