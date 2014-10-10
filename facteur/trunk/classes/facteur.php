@@ -30,23 +30,16 @@ class Facteur extends PHPMailer {
 	 *
 	 */
 	function Facteur($email, $objet, $message_html, $message_texte, $options = array()) {
-		$defaut = array(
-			'adresse_envoi' => $GLOBALS['meta']['facteur_adresse_envoi'],
-			'adresse_envoi_email' => $GLOBALS['meta']['facteur_adresse_envoi_email'],
-			'adresse_envoi_nom' => $GLOBALS['meta']['facteur_adresse_envoi_nom'],
-			'cc' => $GLOBALS['meta']['facteur_cc'],
-			'bcc' => $GLOBALS['meta']['facteur_bcc'],
-			'smtp' => $GLOBALS['meta']['facteur_smtp'],
-			'smtp_host' => $GLOBALS['meta']['facteur_smtp_host'],
-			'smtp_port' => $GLOBALS['meta']['facteur_smtp_port'],
-			'smtp_auth' => $GLOBALS['meta']['facteur_smtp_auth'],
-			'smtp_username' => $GLOBALS['meta']['facteur_smtp_username'],
-			'smtp_password' => $GLOBALS['meta']['facteur_smtp_password'],
-			'smtp_secure' => $GLOBALS['meta']['facteur_smtp_secure'],
-			'smtp_sender' => $GLOBALS['meta']['facteur_smtp_sender'],
-			'filtre_images' => $GLOBALS['meta']['facteur_filtre_images'],
-			'filtre_iso_8859' => $GLOBALS['meta']['facteur_filtre_iso_8859'],
-		);
+		$defaut = array();
+		foreach (array(
+			'adresse_envoi', 'adresse_envoi_email', 'adresse_envoi_nom',
+			'cc', 'bcc',
+			'smtp', 'smtp_host', 'smtp_port', 'smtp_auth',
+			'smtp_username', 'smtp_password', 'smtp_secure', 'smtp_sender',
+			'filtre_images', 'filtre_iso_8859',
+		) as $config) {
+			$defaut[$config] = isset($GLOBALS['meta']["facteur_$config"]) ? $GLOBALS['meta']["facteur_$config"] : '';
+		}
 		$options = array_merge($defaut, $options);
 
 		if (defined('_FACTEUR_DEBUG_SMTP')) {

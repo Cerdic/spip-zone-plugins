@@ -39,6 +39,8 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = "") {
 	$message_html	= '';
 	$message_texte	= '';
+	$nom_envoyeur = $cc = $bcc = $repondre_a = '';
+	$pieces_jointes = array();
 
 	// si $corps est un tableau -> fonctionnalites etendues
 	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
