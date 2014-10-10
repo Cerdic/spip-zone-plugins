@@ -3,17 +3,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function gis_declarer_tables_interfaces($interface){
-	$interface['tables_jointures']['spip_gis'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_gis_liens'][] = 'gis';
-	$interface['tables_jointures']['spip_articles'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_auteurs'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_breves'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_documents'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_groupes_mots'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_mots'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_rubriques'][] = 'gis_liens';
-	$interface['tables_jointures']['spip_syndic'][] = 'gis_liens';
-
 	$interface['table_des_tables']['gis'] = 'gis';
 	$interface['table_des_tables']['gis_liens'] = 'gis_liens';
 
@@ -68,6 +57,9 @@ function gis_declarer_tables_objets_sql($tables){
 			'KEY ville' => 'ville(500)',
 			'KEY code_postal' => 'code_postal',
 		),
+		'join' => array(
+				"id_gis"=>"id_gis"
+		),
 		'principale' => 'oui',
 		'modeles' => array('carte_gis', 'carte_gis_preview'),
 
@@ -81,7 +73,6 @@ function gis_declarer_tables_objets_sql($tables){
 		'editable' => 'oui',
 		'champs_editables' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays'),
 		'champs_versionnes' => array('lat', 'lon', 'zoom', 'titre', 'descriptif', 'adresse', 'code_postal', 'ville', 'region', 'departement', 'pays', 'code_pays'),
-		/*'champs_editables' => array(), */
 		'icone_objet' => 'gis',
 		'rechercher_champs' => array(
 			'titre' => 8,
@@ -107,18 +98,19 @@ function gis_declarer_tables_objets_sql($tables){
 		'texte_logo_objet' => 'gis:libelle_logo_gis',
 	);
 
-	$spip_gis_liens = array(
-		"id_gis" => "bigint(21) NOT NULL",
-		"objet" => "VARCHAR (25) DEFAULT '' NOT NULL",
-		"id_objet" => "bigint(21) NOT NULL");
+	$tables[]['tables_jointures'][]= 'gis_liens';
+	$tables[]['champs_versionnes'][] = 'jointure_gis';
 
-	$spip_gis_liens_key = array(
-		"PRIMARY KEY" => "id_gis,id_objet,objet",
-		"KEY id_objet" => "id_gis");
-
-	$tables_auxiliaires['spip_gis_liens'] = array(
-		'field' => &$spip_gis_liens,
-		'key' => &$spip_gis_liens_key);
+	// recherche jointe sur les points gis pour tous les objets
+	$tables[]['rechercher_jointures']['gis'] = array(
+			'titre' => 3,
+			'descriptif' => 2,
+			'pays' => 4,
+			'region' => 1,
+			'departement' => 1,
+			'ville' => 1,
+			'code_postal' => 1
+		);
 
 	return $tables;
 }
