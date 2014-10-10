@@ -1,4 +1,7 @@
 <traduction module="paquet-abozones" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/abonnements_zones/trunk/lang/" reference="fr">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paquet-abozones?lang_cible=es" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
+	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/paquet-abozones?lang_cible=fr" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 </traduction>
