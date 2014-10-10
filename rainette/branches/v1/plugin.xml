@@ -6,10 +6,10 @@
 	<licence>GNU/GPL</licence>
 	<slogan>La m&#233;t&#233;o au quotidien</slogan>
 	<description>
-Ce plugin permet d'afficher les conditions et les pr&#233;visions m&#233;t&#233;orologiques d'une ville donn&#233;e &agrave; partir du flux xml fourni par le site weather.com&reg;.
-Il ne stocke aucune information en base de donn&#233;es ni ne g&egrave;re le choix des villes.
+Ce plugin permet d'afficher des conditions et des pr&#233;visions m&#233;t&#233;orologiques obtenues en interrogeant le site weather.com&reg;.
+Le plugin ne stocke aucune information en base de donn&#233;es, ni ne g&egrave;re le code météorologique des villes, qu'il faut préalablement retrouver par l'URL http://wxdata.weather.com/wxdata/search/search?where=X où X est le nom de la ville.
 
-L'affichage des donn&#233;es m&#233;t&#233;orologiques se fait principalement via l'utilisation de mod&egrave;les dans les squelettes. Le plugin propose des 
+Les donn&#233;es m&#233;t&#233;orologiques sont affichées principalement vi des mod&egrave;les dans les squelettes. Le plugin propose des 
 mod&egrave;les par d&#233;faut comme {{rainette_previsions}} et {{rainette_conditions}}. Il est possible aussi d'afficher les informations sur la ville choisie soit via le mod&egrave;le {{rainette_infos}},
 soit via la balise {{RAINETTE_INFOS}}. Tous les affichages propos&#233;s par Rainette sont personnalisables (ic&ocirc;nes, libell&#233;s, unit&#233;s, pr&#233;sentation...).
 
