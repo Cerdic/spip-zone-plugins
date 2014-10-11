@@ -31,4 +31,3 @@ function cookiechoices_affichage_final($page){
 }
 
 ?>
-   
