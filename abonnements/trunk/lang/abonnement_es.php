@@ -31,14 +31,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_abonnement' => 'Ninguna inscripción',
 	'info_aucun_abonnement_actif' => 'Ninguna inscripción activa',
 	'info_aucun_abonnement_inactif' => 'Ninguna inscripción inactiva',
-	'info_nb_abonnements' => '@nb@  inscripciones', # RELIRE
-	'info_nb_abonnements_actifs' => '@nb@  inscripciones activas', # RELIRE
-	'info_nb_abonnements_inactifs' => '@nb@ inscripciones inactivos', # RELIRE
+	'info_nb_abonnements' => '@nb@  inscripciones',
+	'info_nb_abonnements_actifs' => '@nb@  inscripciones activas',
+	'info_nb_abonnements_inactifs' => '@nb@ inscripciones inactivas',
 	'info_numero_abbr' => 'n°',
 	'info_numero_abbr_maj' => 'N°',
 
 	// J
-	'job_desactivation' => 'Desactivación de la inscripción @id@' # RELIRE
+	'job_desactivation' => 'Desactivación de la inscripción @id@',
+
+	// N
+	'notification_echeance_corps' => '<p>Buenos días @nom@,</p>
+		<p>Usted recibe este correo porque usted está inscrito en el sitio @nom_site_spip@ con la oferta "@offre@".</p>
+		<p>Su inscripción  vence dentro de : 
+<strong>@echeance@</strong>.<br/>
+		Le invitamos a renovarla antes de que expire.</p>
+		<p>Gracias por su confianza, y no dude en contactarnos para cualquier información complementaria.</p>',
+	'notification_echeance_sujet_jours' => 'Su inscripción se termina dentro de  @duree@ jour(s) !',
+	'notification_echeance_sujet_mois' => 'Su inscripción se termina dentro de @duree@ mois !',
+
+	// R
+	'retirer_lien_abonnement' => 'Retirar esta inscripción',
+	'retirer_tous_liens_abonnements' => 'Retirar  todas las inscripciones',
+
+	// S
+	'statut_actif' => 'activa',
+	'statut_inactif' => 'desactivada',
+
+	// T
+	'texte_ajouter_abonnement' => 'Añadir una inscripción',
+	'texte_changer_statut_abonnement' => 'Esta inscripción es :',
+	'texte_creer_associer_abonnement' => 'Crear et asociar una inscripción',
+	'titre_abonnement' => 'Inscripción',
+	'titre_abonnements' => 'inscripciones',
+	'titre_abonnements_rubrique' => 'Inscripciones de la rúbrica',
+	'titre_abonnements_suivre' => 'Seguir las inscripciones',
+	'titre_langue_abonnement' => 'Lengua  de esta inscripción',
+	'titre_logo_abonnement' => 'Logo de esta inscripción'
 );
 
 ?>
