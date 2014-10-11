@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_description_titre' => 'Configuración del plugin Video(s)',
 	'cfg_explication_hauteur' => 'Elija la altura por defecto para sus videos. Esta opción se puede reemplazar en la llamada a la modelo.',
 	'cfg_explication_largeur' => 'Elija el ancho predeterminado para los videos. Esta opción se puede reemplazar en la llamada a la modelo.',
-	'cfg_explication_liste_definition' => 'Encapsular el vídeo en un dl/dt/dd en SPIP se puede por su gestión de documentos.', # RELIRE
+	'cfg_explication_liste_definition' => 'Encapsular el vídeo en un dl/dt/dd en SPIP como puede hacer SPIP por su gestión de documento.',
 	'cfg_explication_responsive' => 'Hacer que el ancho y el alto del vídeo en vivo: permite integrar mejor dentro de un sitio "sensible".',
 	'cfg_explication_titre_descriptif' => 'Mostrar el título y la descripción del video. Esta opción se puede reemplazar en la llamada a la modelo.',
 	'cfg_explication_wmode' => 'Elija la forma de aplicar a los objetos de Flash (fallback Flowplayer, iFrames Dailymotion, Youtube, Vimeo).',
@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_html5' => 'Configuración HTML5 / Alternativo',
 	'cfg_titre_configurations_vimeo' => 'Configuraciones Vimeo',
 	'cfg_titre_configurations_youtube' => 'Configuraciones Youtube',
-	'confirmation_ajout' => 'El video "@titre@" se ha añadido. &lt;video@id_document@&gt;', # RELIRE
+	'confirmation_ajout' => 'El video "@titre@" se ha añadido. &lt;video@id_document@&gt;',
 
 	// E
 	'erreur_adresse_invalide' => 'Esta dirección no es válida. Si intenta importar un archivo de vídeo (MP4 u otro), gracias a que utiliza la adición  documento convencional de SPIP.',
