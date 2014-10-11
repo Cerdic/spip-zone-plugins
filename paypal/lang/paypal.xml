@@ -3,6 +3,9 @@
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/paypal?lang_cible=es" total="23" traduits="18" relire="5" modifs="0" nouveaux="0" pourcent="78.26">
+		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
+	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/paypal?lang_cible=fa" total="23" traduits="20" relire="0" modifs="2" nouveaux="1" pourcent="86.96">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
