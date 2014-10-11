@@ -325,8 +325,8 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 		$erreur_sujet = "[ERREUR] Traitement Formulaire $id";
 		// dumper la saisie pour ne pas la perdre
 		$erreur_texte .= "\n".var_export($_REQUEST,true);
-		$envoyer_mail = charger_fonction("envoyer_mail","inc");
-		$envoyer_mail($GLOBALS['meta']['email_webmaster'],$erreur_sujet,$erreur_texte);
+		$envoyer_mail = charger_fonction("envoyer_mail", "inc");
+		$envoyer_mail($GLOBALS['meta']['email_webmaster'], $erreur_sujet, $erreur_texte);
 	}
 	unset($retours['traitements']);
 
