@@ -48,7 +48,7 @@
 				</li>
         
         <!-- policy url -->
-        #SET{name,policy_url}#SET{obli,''}[(#SET{defaut,#HTML5|oui|?{'',http://}})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+        #SET{name,policy_url}#SET{obli,''}[(#SET{defaut,http://})]#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
