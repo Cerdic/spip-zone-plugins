@@ -7,8 +7,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=fr" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=nl" total="28" traduits="27" relire="0" modifs="0" nouveaux="1" pourcent="96.43">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=nl" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=ru" total="28" traduits="27" relire="0" modifs="0" nouveaux="1" pourcent="96.43">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />

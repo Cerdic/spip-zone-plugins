@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_composition_explication' => 'Je bent webmaster. Je mag',
 	'label_composition_lock' => 'Vergrendel de compositie',
 	'label_composition_rubrique' => 'Compositie van rubrieken',
+	'label_heritages' => 'Erfenis',
 	'label_information' => 'Informatie',
 	'label_masquer_formulaire' => 'Het formulier verbergen',
 	'label_masquer_formulaire_composition' => 'Verberg het compositie-keuzemenu wanneer de gebruiker het recht niet heeft ze te veranderen.',
