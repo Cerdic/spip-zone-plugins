@@ -2,7 +2,7 @@
 
 [<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
 	<label><:chatbox_message:label_id_auteur:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#ID_AUTEUR|colore_user)</span>
+	<span dir='#LANG_DIR' class='nom_auteur'>(#INFO_NOM{auteur,#ID_AUTEUR})</span>
 </div>]
 
 [<div class="champ contenu_message[ (#MESSAGE*|strlen|?{'',vide})]">
