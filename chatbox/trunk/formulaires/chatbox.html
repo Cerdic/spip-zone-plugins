@@ -7,11 +7,11 @@ function count(div){
     if (div.value.length > max_length ){ 
 	div.style.backgroundColor='red'; 
 	$('#nbc').css({color: 'red'}); 
-	document.formulaire_chatbox.submit.disabled=true;
+	document.formulaire_chatbox.chatbox_submit.disabled=true;
     } else {
 	div.style.backgroundColor='white'; 
 	$('#nbc').css({color: 'green'});
-	document.formulaire_chatbox.submit.disabled=false;
+	document.formulaire_chatbox.chatbox_submit.disabled=false;
     } 
     $('#nbc').html('<em><:chatbox:max:> : '+div.value.length + '/' + max_length + '</em>');
 }
@@ -25,7 +25,6 @@ function count(div){
 $(document).ready(function(){
     ajaxReload('chat_box');
     if (jQuery.modalbox) setTimeout(function(){$.modalboxclose();}, 2000);
-    else setTimeout(function(){document.location="[(#URL_SITE_SPIP)]"}, 2000);
 });
 //-->
 </script>
@@ -40,6 +39,6 @@ $(document).ready(function(){
 	  <span id="nbc" class="italic fright tright"><:chatbox:max:>:&nbsp;250&nbsp;<:chatbox:characteres:></span><br/><br/>
 	  
 	  <p class="tcenter italic ts"><:chatbox:explication_utilisation_chatbox:></p>
-	  <input id="submit" class="submit" type="submit" value="<:envoyer:>"/><br/>
+	  <input id="chatbox_submit" class="submit" type="submit" value="<:envoyer:>"/><br/>
     </form>
 </div>
