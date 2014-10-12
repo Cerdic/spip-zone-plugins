@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'img_dir' => 'Chemin physique des documents',
-	'img_dir_desc' => 'Pour copier les documents du site source dans le site hôte, indiquez leur chemin physique (chemin absolu sur le disque dur). Si le champ est vide, aucun document ne sera importé, vous devrez les copier manuellemnent.',
+	'img_dir_desc' => 'Pour copier les documents du site source dans le site hôte, indiquez leur chemin physique (chemin absolu sur le disque dur, par exemple <code>/home/edgard/www/edgard_spip/IMG</code>). Si le champ est vide, aucun document ne sera importé, vous devrez les copier manuellemnent.',
 
 	// M
 	'maj_base' => 'Mise à jour de la base de données',
