@@ -117,7 +117,10 @@ function formulaires_fusion_spip_traiter_dist() {
 		@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 
 		$time_start = microtime(true);
-		fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
+
+        //commençons par vider la table de traitement fusion_spip pour pouvoir faire le comptage en fin de traiter
+        sql_delete("spip_fusion_spip");
+        fusion_spip_log('Démarrage de la fusion', 'fusion_spip_'.$connect);
 
 		$principales = fusion_spip_lister_tables_principales($connect, true);
 		$auxiliaires = fusion_spip_lister_tables_auxiliaires($connect, true, $traite_stats, $traite_referers);
@@ -173,8 +176,21 @@ function formulaires_fusion_spip_traiter_dist() {
 		$time = $time_end - $time_start;
 		fusion_spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
-		$retour = array(
-			'message_ok' => _T('fusion_spip:message_import_ok')
+        // Un résumé des objets importés
+        $res = sql_select('objet, count(*) as count', 'spip_fusion_spip' , '', 'objet');
+        $texte='';
+        while ($ligne = sql_fetch($res))
+        {
+            if ($ligne['count'] >0 )
+            {
+                $texte.=$ligne['objet']. ":". $ligne['count'].", " ;
+            }
+        }
+
+
+
+            $retour = array(
+			'message_ok' => _T('fusion_spip:message_import_ok') . $texte
 		);
 	}
 
