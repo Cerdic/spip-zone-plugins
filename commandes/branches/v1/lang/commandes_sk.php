@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filtre_toutes_dates' => 'Všetky dátumy',
 	'label_infos' => 'Informácie',
 	'label_objet' => 'Objekt',
+	'label_objets' => 'Objekty',
 	'label_passee_le' => 'objednané',
 	'label_payee_le' => 'zaplatené',
 	'label_prix_unitaire' => 'Jednotková cena',
