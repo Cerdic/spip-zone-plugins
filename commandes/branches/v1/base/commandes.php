@@ -159,9 +159,9 @@ function commandes_declarer_tables_principales($tables_principales){
 
 
 /**
- * Définir la jointure commande_auteur qui n'est pas sur spip_commandes_auteurs
+ * Définir la jointure `commande_auteur` qui n'est pas sur `spip_commandes_auteurs`
  * 
- * @note cf. inc/rechercher.php
+ * @note cf. `inc/rechercher.php`
  * 
  * @param array $table
  * @param array $table_liee

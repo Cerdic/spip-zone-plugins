@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Point d'entrée d'édition d'une commande
  *
- * On ne peut entrer que par un appel en fournissant '$id_commande'
+ * On ne peut entrer que par un appel en fournissant `$id_commande`
  * mais pas pas une url
  *
  * @uses commande_inserer()

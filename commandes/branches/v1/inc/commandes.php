@@ -13,10 +13,10 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Créer une commande avec le statut 'encours' pour le visiteur actuel.
+ * Créer une commande avec le statut `encours` pour le visiteur actuel.
  *
- * On part du principe qu'il ne peut y avoir qu'une seule commande 'encours' par session,
- * aussi on supprime de la base toute ancienne commande 'encours' présente en session avant d'en créer une nouvelle.
+ * On part du principe qu'il ne peut y avoir qu'une seule commande `encours` par session,
+ * aussi on supprime de la base toute ancienne commande `encours` présente en session avant d'en créer une nouvelle.
  * L'identifiant de la nouvelle commande est ensuite placé dans la session.
  *
  * @uses commandes_reference()
@@ -126,7 +126,7 @@ function commandes_effacer($ids_commandes) {
 /**
  * Supprimer un ou plusieurs détails d'une commande
  *
- * On supprime les détails correspondant à commande dans la table 'spip_commandes_details'.
+ * On supprime les détails correspondant à commande dans la table `spip_commandes_details`.
  * Si tous ses détails sont supprimés par l'opération, la commande peut également être supprimée en présence du paramètre adéquat. 
  *
  * @uses commande_supprimer()
@@ -167,7 +167,7 @@ function commandes_supprimer_detail($id_commande=0, $ids_details=array(), $suppr
  *
  * - On veut envoyer du html pour que le tableau de commandes soit lisible par le client
  * - On peut avoir un expediteur specifique
- * - Mais 'notifications_envoyer_mails()' de spip ne peut pas envoyer de mails en html. On ne peut pas non plus y specifier un expediteur.
+ * - Mais `notifications_envoyer_mails()` de spip ne peut pas envoyer de mails en html. On ne peut pas non plus y specifier un expediteur.
  * Donc si les plugins notifications_avancees et Facteur sont presents, on prepare un joli mail en html. Sinon un moche en texte.
  *
  * @deprecated Voir traiter_notifications_commande()

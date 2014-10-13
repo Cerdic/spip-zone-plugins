@@ -68,7 +68,7 @@ function autoriser_commande_voir_dist($faire, $type, $id, $qui, $opts) {
 /**
  * Autorisation à supprimer une commande
  *
- * - statut "en cours"
+ * - statut `encours`
  * - admin (mais pas restreint) ou auteur de la commande
  *
  * @param  string $faire Action demandée
