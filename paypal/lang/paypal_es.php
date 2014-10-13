@@ -25,26 +25,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Que entorno deséa usted utilizar ?',
 	'explication_identifiant_vendeur' => 'Corresponde a la dirección  email de la cuenta del vendedor',
 	'explication_soumission' => 'En que página de Paypal es enviado el formulario ?',
-	'explication_tax' => 'Eventualmente el valor de la tasa que  debe  aplicarse (ejemplo pour IVA : 21)', # RELIRE
+	'explication_tax' => 'Eventualmente el valor de la tasa que  debe  aplicarse (ejemplo pour IVA : 21)',
 
 	// I
 	'info_bouton_paypal' => 'Efectúe sus pagos con  PayPal :
 		una solución rápida, gratuita y segura',
 
 	// L
-	'label_account' => 'Cuenta (email)', # RELIRE
+	'label_account' => 'Cuenta (email)',
 	'label_currency_code' => 'Divisa',
 	'label_currency_code_eur' => 'Euro (€)',
-	'label_currency_code_usd' => 'Dolar ($)', # RELIRE
+	'label_currency_code_usd' => 'Dolar ($)',
 	'label_environnement' => 'Entorno',
 	'label_environnement_prod' => 'Entorno de producción',
 	'label_environnement_test' => 'Entorno de prueba',
 	'label_identifiant_vendeur' => 'Identificador del vendedor',
-	'label_password' => 'API Password (password)', # RELIRE
+	'label_password' => 'API Password (contraseña)',
 	'label_signature' => 'Firma',
 	'label_soumission' => 'Enviar el formulario',
 	'label_tax' => 'Tasas',
-	'label_username' => 'API Username (idenfiant)' # RELIRE
+	'label_username' => 'API Username (idenficador)'
 );
 
 ?>
