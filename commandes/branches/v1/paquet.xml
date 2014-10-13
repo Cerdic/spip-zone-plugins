@@ -20,7 +20,7 @@
 
 	<necessite nom="saisies" compatibilite="[1.18.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.0;]" />
-	<utilise nom="coordonnees" compatibilite="[2.0.0;]" />
+	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
 	<utilise nom="notifavancees" compatibilite="[0.2.0;]" />
 	<utilise nom="facteur" compatibilite="[2.0.0;]" />
 
