@@ -33,8 +33,8 @@
 ]
 
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
-#SET{datas, #ENV*{datas}}
-#SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
+#SET{datas, #ENV*{datas}|saisies_chaine2tableau}
+
 [(#REM) Attention, la valeur ou la valeur forcée peut être une chaine vide. On doit donc tester avec is_null. ]
 #SET{valeur,#ENV{valeur_forcee}|is_null|?{#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}},#ENV{valeur_forcee}}}
 

@@ -31,6 +31,14 @@
 <select name="#ENV{nom}[]" id="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size,10})"][ (#ENV*{attributs})]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
+	<B_cond>
+	<optgroup label="#CLE">
+	<BOUCLE_cond(CONDITION){si #VALEUR|is_array}><BOUCLE_optgroup(POUR){tableau #VALEUR}>
+		<option value="#CLE" [(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"]>#VALEUR</option>
+	</BOUCLE_optgroup></BOUCLE_cond>
+	</optgroup>
+	</B_cond>
 	<option value="#CLE" [(#CLE|in_array{#ENV{valeur_forcee,#GET{valeur,#GET{defaut}}}}|oui) selected="selected"]>#VALEUR</option>
+	<//B_cond>
 </BOUCLE_selection>
 </select>
