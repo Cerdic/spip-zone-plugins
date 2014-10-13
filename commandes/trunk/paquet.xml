@@ -20,7 +20,7 @@
 
 	<necessite nom="saisies" compatibilite="[1.18.2;]" />
 	<necessite nom="prix" compatibilite="[0.1.0;]" />
-	<utilise nom="coordonnees" compatibilite="[2.0.0;]" />
+	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
 	<utilise nom="notifavancees" compatibilite="[0.2.0;]" />
 	<utilise nom="facteur" compatibilite="[2.0.0;]" />
 
@@ -34,7 +34,6 @@
 	<pipeline nom="declarer_tables_interfaces" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/commandes.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/commandes.php" />
-	<pipeline nom="declarer_tables_objets_surnoms" inclure="base/commandes.php" />
 
 	<pipeline nom="autoriser" inclure="commandes_autorisations.php" />
 
