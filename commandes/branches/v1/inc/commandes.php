@@ -109,7 +109,7 @@ function commandes_supprimer($ids_commandes) {
 /**
  * Supprimer des commandes
  *
- * @deprecated Alias de commandes_supprimer() gardée pour rétro-compatibilité
+ * @deprecated Alias de commandes_supprimer() pour rétro-compatibilité
  * @see commandes_supprimer()
  *
  * @param int|array $ids_commandes

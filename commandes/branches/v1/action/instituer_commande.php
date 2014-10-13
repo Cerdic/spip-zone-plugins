@@ -15,10 +15,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Change le statut d'une commande
  *
+ * @example
  *     ```
  *     #URL_ACTION_AUTEUR{instituer_commande,#ID_COMMANDE-envoye,#SELF}
  *     ```
- * 
+ *
+ * @uses commande_instituer()
+ *
  * @param $arg string
  *     arguments séparés par un charactère non alphanumérique
  *
