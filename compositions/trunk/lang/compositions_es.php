@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_composition_explication' => 'Usted es administrador, puede',
 	'label_composition_lock' => 'Bloquear la composición',
 	'label_composition_rubrique' => 'Composición de las secciones',
+	'label_heritages' => 'Herencias',
 	'label_information' => 'Información',
 	'label_masquer_formulaire' => 'Ocultar el formulario',
 	'label_masquer_formulaire_composition' => 'Ocultar el formulario de elección de una composición cuando el usuario no tenga los derechos para modificarla. ',

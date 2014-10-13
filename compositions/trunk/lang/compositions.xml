@@ -2,7 +2,8 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=en" total="28" traduits="27" relire="0" modifs="0" nouveaux="1" pourcent="96.43">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=es" total="28" traduits="27" relire="0" modifs="0" nouveaux="1" pourcent="96.43">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=es" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/compositions?lang_cible=fr" total="28" traduits="28" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
