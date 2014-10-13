@@ -10,7 +10,21 @@ icone_barre: 'album-nivoslider.png'
 alias: <:nivoslider:titre_nivoslider:>
 description: ''
 parametres:
-  - 'inclure:inc-yaml/album-compat.yaml'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'modele'
+      defaut: 'album'
+  -
+    saisie: 'hidden'
+    options:
+      nom: 'id_album'
+  -
+    saisie: 'input'
+    options:
+      nom: 'id_modele'
+      label: "Numéro de l'album"
+      afficher_si: '@id_album@==""'
   -
     saisie: 'hidden'
     options:
@@ -20,7 +34,7 @@ parametres:
     saisie: 'case'
     options:
       nom: 'titre'
-      label_case: <:album:label_modele_titre:>
+      label_case: 'Afficher le titre'
       valeur_oui: 'oui'
   -
     saisie: 'input'
@@ -97,10 +111,10 @@ parametres:
       cacher_option_intro: 'oui'
       defaut: ''
       datas:
-        '': <:album:label_modele_defaut:>
-        left: <:album:label_modele_alignement_gauche:>
-        center: <:album:label_modele_alignement_centre:>
-        right: <:album:label_modele_alignement_droite:>
+        '': 'Défaut'
+        left: 'Gauche'
+        center: 'Milieu'
+        right: 'Droite'
   -
     saisie: 'input'
     options:
