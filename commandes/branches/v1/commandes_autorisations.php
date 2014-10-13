@@ -14,13 +14,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Fonction d'appel pour le pipeline
- * @pipeline autoriser */
+ * @pipeline autoriser
+ */
 function commandes_autoriser(){}
 
 
 /**
  * Autorisation à passer une commande
+ *
  * - un client (auteur+contact)
+ * Nécessite le plugin Contacts et organisations
+ * Todo : autoriser en absence du plugin
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -29,7 +33,7 @@ function commandes_autoriser(){}
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/ 
-function autoriser_commander_dist($faire, $quoi, $id, $qui, $ops){
+function autoriser_commander_dist($faire, $type, $id, $qui, $opts){
 	if (
 		$id_auteur = $qui['id_auteur'] > 0
 		and $contact = sql_getfetsel('id_contact', 'spip_contacts_liens', 'objet = '.sql_quote('auteur').' and id_objet = '.sql_quote($id_auteur))
@@ -42,6 +46,7 @@ function autoriser_commander_dist($faire, $quoi, $id, $qui, $ops){
 
 /**
  * Autorisation à voir une commande
+ *
  * - l'auteur de la commande
  * - admin (mais pas restreint)
  *
@@ -52,7 +57,7 @@ function autoriser_commander_dist($faire, $quoi, $id, $qui, $ops){
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/ 
-function autoriser_commande_voir_dist($faire, $quoi, $id, $qui, $opts) {
+function autoriser_commande_voir_dist($faire, $type, $id, $qui, $opts) {
 	return
 		$qui['id_auteur'] == sql_getfetsel('id_auteur', 'spip_commandes', 'id_commande = '.sql_quote($id)) OR 
 			( $qui['statut'] == '0minirezo'
@@ -62,6 +67,7 @@ function autoriser_commande_voir_dist($faire, $quoi, $id, $qui, $opts) {
 
 /**
  * Autorisation à supprimer une commande
+ *
  * - statut "en cours"
  * - admin (mais pas restreint) ou auteur de la commande
  *
@@ -82,6 +88,7 @@ function autoriser_commande_supprimer_dist($faire, $type, $id, $qui, $opts) {
 
 /**
  * Autorisation à supprimer un détail d'une commande
+ *
  * - l'auteur de la commande 
  * - admin (mais pas restreint)
  *
@@ -101,6 +108,7 @@ function autoriser_commande_supprimerdetail_dist($faire, $type, $id, $qui, $opts
 
 /**
  * Autorisation à modifier une commande
+ *
  * - l'auteur de la commande
  * - admin (mais pas restreint)
  *
@@ -111,7 +119,7 @@ function autoriser_commande_supprimerdetail_dist($faire, $type, $id, $qui, $opts
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/ 
-function autoriser_commande_modifier_dist($faire, $quoi, $id, $qui, $opts) {
+function autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts) {
 	return
 		$qui['id_auteur'] == sql_getfetsel('id_auteur', 'spip_commandes', 'id_commande = '.sql_quote($id)) OR 
 			( $qui['statut'] == '0minirezo'
@@ -121,6 +129,7 @@ function autoriser_commande_modifier_dist($faire, $quoi, $id, $qui, $opts) {
 
 /**
  * Autorisation à dater une commande
+ *
  * Idem autorisation modifier
  *
  * @param  string $faire Action demandée
@@ -130,8 +139,8 @@ function autoriser_commande_modifier_dist($faire, $quoi, $id, $qui, $opts) {
  * @param  array  $opts  Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/ 
-function autoriser_commande_dater_dist($faire, $quoi, $id, $qui, $opts) {
-	return autoriser_commande_modifier_dist($faire, $quoi, $id, $qui, $opts);
+function autoriser_commande_dater_dist($faire, $type, $id, $qui, $opts) {
+	return autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts);
 }
 
 ?>
