@@ -250,40 +250,42 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 	return $erreurs;
 }
 
-/*
+/**
  * Applatie une description tabulaire
  * @param string $tab, le tableau à aplatir
  * @return $nouveau_tab
  */
 function saisies_aplatir_tableau($tab){
-    $nouveau_tab = array();
-    foreach($tab as $entree=>$contenu){
-        if (is_array($contenu)){
-            foreach ($contenu as $cle => $valeur){
-                $nouveau_tab[$cle] = $valeur;
-                }
-            }
-        else{
-            $nouveau_tab[$entree] = $contenu;
-            }
-        }
-    return $nouveau_tab;
+	$nouveau_tab = array();
+	foreach($tab as $entree=>$contenu){
+		if (is_array($contenu)) {
+			foreach ($contenu as $cle => $valeur) {
+				$nouveau_tab[$cle] = $valeur;
+			}
+		} else {
+			$nouveau_tab[$entree] = $contenu;
+		}
+	}
+	return $nouveau_tab;
 }
 
-/*
+/**
  * Applatie une description chaînée, en supprimant les sous-groupes.
  * @param string $chaine, la chaîne à aplatir
  * @return $chaine
  */
 function saisies_aplatir_chaine($chaine){
-    return trim(preg_replace("#(?:^|\n)(\*(?:.*)|/\*)\n#i","\n",$chaine));
-    }
-/*
+	return trim(preg_replace("#(?:^|\n)(\*(?:.*)|/\*)\n#i","\n",$chaine));
+}
+
+/**
  * Transforme une chaine en tableau avec comme principe :
+ * 
  * - une ligne devient une case
  * - si la ligne est de la forme truc|bidule alors truc est la clé et bidule la valeur
  * - si la ligne commence par * alors on commence un sous-tableau
  * - si la ligne est égale à /*, alors on fini le sous-tableau
+ * 
  * @param string $chaine Une chaine à transformer
  * @return array Retourne un tableau PHP
  */
@@ -298,36 +300,34 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
 			// Si ce n'est pas une ligne sans rien
 			if ($ligne !== ''){
 				// si ca commence par * c'est qu'on va faire un sous tableau
-				if (strpos($ligne,"*")===0){
+				if (strpos($ligne,"*")===0) {
 					$soustab=True;
 					$soustab_cle 	= _T_ou_typo(substr($ligne,1), 'multi');
 					if (!isset($tableau[$soustab_cle])){
 						$tableau[$soustab_cle] = array();
 					}
 				}
-				elseif ($ligne=="/*"){//si on finit sous tableau
+				elseif ($ligne=="/*") {//si on finit sous tableau
 					$soustab=False;
 				}
 				else{//sinon c'est une entrée normale
 				// Si on trouve un découpage dans la ligne on fait cle|valeur
-					if (strpos($ligne, '|') !== false){
+					if (strpos($ligne, '|') !== false) {
 						list($cle,$valeur) = explode('|', $ligne, 2);
 						// permettre les traductions de valeurs au passage
 						if ($soustab == True){
 							$tableau[$soustab_cle][$cle] = _T_ou_typo($valeur, 'multi');
-							}
-						else{
+						} else {
 							$tableau[$cle] = _T_ou_typo($valeur, 'multi');
-							}
+						}
 					}
 				// Sinon on génère la clé
 					else{
-						if ($soustab == True){
+						if ($soustab == True) {
 							$tableau[$soustab_cle][$i] = _T_ou_typo($ligne,'multi');
-							}
-						else{
+						} else {
 							$tableau[$i] = _T_ou_typo($ligne,'multi');
-							}
+						}
 					}
 				}
 			}
@@ -337,14 +337,14 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
 	// Si c'est déjà un tableau on lui applique _T_ou_typo (qui fonctionne de manière récursive avant de le renvoyer
 	elseif (is_array($chaine)){
 		return _T_ou_typo($chaine, 'multi');
-	}
-	else{
+	} else {
 		return array();
 	}
 }
 
-/*
+/**
  * Transforme un tableau en chaine de caractères avec comme principe :
+ * 
  * - une case de vient une ligne de la chaine
  * - chaque ligne est générée avec la forme cle|valeur
  * - si une entrée du tableau est elle même un tableau, on met une ligne de la forme *clef
