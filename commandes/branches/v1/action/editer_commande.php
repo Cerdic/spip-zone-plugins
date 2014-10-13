@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Point d'entrée d'édition d'une commande
  *
- * On ne peut entrer que par un appel en fournissant $id_commande
+ * On ne peut entrer que par un appel en fournissant '$id_commande'
  * mais pas pas une url
  *
  * @uses commande_inserer()
@@ -55,9 +55,9 @@ function action_editer_commande_dist($id_commande=null) {
 /**
  * Crée une nouvelle commande et retourne son identifiant
  *
- * Traite les notifications par email après l'insertion en base et l'appel des pipelines
+ * Les notifications par email sont traitées après l'insertion en base et l'appel des pipelines
  *
- * @uses traiter_notifications_commande
+ * @uses traiter_notifications_commande()
  *
  * @pipeline_appel pre_insertion
  * @pipeline_appel post_insertion
@@ -65,9 +65,9 @@ function action_editer_commande_dist($id_commande=null) {
  *     Paramètre inutilisé, présent pour compatibilité avec api modifier objet
  * @param array $champs
  *     Couples des champs/valeurs par défaut
- * @return int|bool 
- *     Identifiant de la commande si succès
- *     False en cas d'erreur
+ * @return int|bool
+ *     - Identifiant de la commande si succès
+ *     - False en cas d'erreur
  */
  
 function commande_inserer($id_parent=null, $champs=array()) {
@@ -321,7 +321,7 @@ function editer_commande_details($id_commande, $champs, $cond=true) {
 /**
  * Enregistre une modification d'une commande
  *
- * @deprecated Alias de commande_modifier pour rétro-compatibilité
+ * @deprecated Alias de 'commande_modifier' pour rétro-compatibilité
  * @uses commande_modifier()
  *
  * @param int $id_commande
@@ -337,7 +337,7 @@ function revision_commande($id_commande, $c=false) {
 /**
  * Crée une nouvelle commande
  *
- * @deprecated Alias de commande_inserer pour rétro-compatibilité
+ * @deprecated Alias de 'commande_inserer' pour rétro-compatibilité
  * @uses commande_inserer()
  *
  * @param array $champs
@@ -351,7 +351,7 @@ function commande_insert($champs=array()){
 /**
  * Appelle les fonctions de modification d'une commande
  *
- * @deprecated Alias de commande_modifier pour rétro-compatibilité
+ * @deprecated Alias de 'commande_modifier' pour rétro-compatibilité
  * @uses commande_modifier()
  * 
  * @param int $id_commande
@@ -367,7 +367,7 @@ function commande_set($id_commande, $set=null){
 /**
  * Modifie des éléments à part que sont l'auteur, la date, le statut
  * 
- * @deprecated Alias de commande_instituer pour rétro-compatibilité
+ * @deprecated Alias de 'commande_instituer' pour rétro-compatibilité
  * @uses commande_instituer()
  * 
  * @param int $id_commande

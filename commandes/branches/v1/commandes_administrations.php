@@ -15,6 +15,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'installation et de mise à jour du plugin Commandes.
  *
+ * @uses commandes_id_premier_webmestre()
+ * @uses commandes_lister_statuts()
+ *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @param string $version_cible

@@ -16,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Permet d'obtenir le prix HT d'un détail d'une commande.
  *
  * C'est le résultat de cette fonction qui est utilisée pour calculer le prix TTC.
- * Prix HT = quantité x prix unitaire HT
+ * Prix HT = quantité * prix unitaire HT
  *
  * @param int $id_commandes_detail
  *     Identifiant du détail (paramètre inutilisé)

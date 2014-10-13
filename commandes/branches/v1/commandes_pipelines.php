@@ -62,7 +62,7 @@ function commandes_optimiser_base_disparus($flux){
 /**
  * Ajout de contenu sur certaines pages
  *
- * - Formulaires de dates sur la fiche d'une commande
+ * - Formulaires pour modifier les dates sur la fiche d'une commande
  *
  * @pipeline affiche_milieu
  * @param  array $flux Données du pipeline
@@ -158,6 +158,8 @@ function commandes_affiche_auteurs_interventions($flux) {
 
 /**
  * Compléter la liste des types d'adresses du plugin Coordonnées
+ *
+ * Ajout de 2 types d'adresses : facturation et livraison
  *
  * @pipeline types_coordonnees
  * @param  array $liste Données du pipeline

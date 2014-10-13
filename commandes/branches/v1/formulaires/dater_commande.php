@@ -1,8 +1,13 @@
 <?php
 /**
- * Gestion du formulaire de datation d'une commande
+ * Gestion du formulaire de datation d'une commande (si si, datation)
  *
- * Si si, datation
+ * Le formulaire permet de modifier les 3 champs de dates d'une commande :
+ *
+ * - date (de création)
+ * - date de paiement
+ * - date d'envoi
+ *
  *
  * @plugin     Commandes
  * @copyright  2014
