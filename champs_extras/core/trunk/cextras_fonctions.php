@@ -103,7 +103,9 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
  *     ```
  *     #LISTER_CHOIX{champ}
  *     #LISTER_CHOIX{champ, " > "}
- *     #LISTER_CHOIX**{champ} // retourne un tableau cle/valeur
+ *     // ** pour retourner un tableau (cle => valeur),
+ *     // ou tableau groupe => tableau (cle => valeur) si déclaration de groupements.
+ *     #LISTER_CHOIX**{champ}
  *     ```
  *
  * @balise
@@ -138,7 +140,8 @@ function balise_LISTER_CHOIX_dist($p) {
 	if (!$separateur) $separateur = "', '";
 
 	// generer le code d'execution
-	$p->code = "calculer_balise_LISTER_CHOIX('$objet', $colonne)";
+	$applatir = ($p->etoile == "**") ? 'false' : 'true';
+	$p->code = "calculer_balise_LISTER_CHOIX('$objet', $colonne, $applatir)";
 
 	// retourne un array si #LISTER_CHOIX**
 	// sinon fabrique une chaine avec le separateur designe.
@@ -153,19 +156,43 @@ function balise_LISTER_CHOIX_dist($p) {
 /**
  * Retourne les choix possibles d'un champ extra indiqué
  *
+ * @note
+ *     Le plugin saisies tolère maintenant des sélections avec
+ *     un affichage par groupe (optgroup / options) avec une syntaxe
+ *     spécifique. Ici nous devons pouvoir applatir
+ *     toutes les cle => valeur.
+ * 
  * @param string $objet
  *     Type d'objet
  * @param string $colonne
  *     Nom de la colonne SQL
+ * @param bool $applatir
+ *     true pour applatir les choix possibles au premier niveau
+ *     même si on a affaire à une liste de choix triée par groupe
  * @return string|array
  *     - Tableau des couples (clé => valeur) des choix
  *     - Chaîne vide si le champs extra n'est pas trouvé
  */
-function calculer_balise_LISTER_CHOIX($objet, $colonne) {
+function calculer_balise_LISTER_CHOIX($objet, $colonne, $applatir = true) {
 	if ($options = calculer_balise_CHAMP_EXTRA($objet, $colonne)) {
 		if (isset($options['datas']) and $options['datas']) {
 			include_spip('inc/saisies');
-			return saisies_chaine2tableau($options['datas']);
+			$choix = saisies_chaine2tableau($options['datas']);
+			// applatir les sous-groupes si présents
+			if ($applatir) {
+				$choix_plats = array();
+				foreach ($choix as $cle => $valeur) {
+					// cas d'un groupe
+					if (is_array($valeur)) {
+						$choix_plats = array_merge($choix_plats, $valeur);
+					// cas normal
+					} else {
+						$choix_plats[$cle] = $valeur;
+					}
+				}
+				$choix = $choix_plats;
+			}
+			return $choix;
 		}
 	}
 	return '';
