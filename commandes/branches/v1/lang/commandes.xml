@@ -2,12 +2,12 @@
 	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="159" traduits="152" relire="6" modifs="0" nouveaux="1" pourcent="95.60">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cyril MARION" lien="http://trad.spip.net/auteur/cyril-marion" />
-		<traducteur nom="drBouvierLeduc" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="jaro" lien="" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
+		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
 	<langue code="fa" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="159" traduits="23" relire="0" modifs="2" nouveaux="134" pourcent="14.47">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
