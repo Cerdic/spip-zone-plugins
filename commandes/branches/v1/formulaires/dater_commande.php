@@ -1,19 +1,34 @@
 <?php
+/**
+ * Gestion du formulaire de datation d'une commande
+ *
+ * Si si, datation
+ *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Formulaires
+ */
 
+// Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('formulaires/dater');
 
 /**
- * Chargement 
+ * Chargement du formulaire de datation d'une commande
+ *
+ * Déclarer les champs postés et y intégrer les valeurs par défaut
  *
  * @param integer $id_commande
- *	identifiant de la commande
+ *     Identifiant de la commande
  * @param string $type_date
- * 	creation|paiement|envoi
+ *     creation|paiement|envoi
  * @param string $retour
- *	adresse de redirection
+ *     Adresse de redirection
  * @return Array
+ *     Environnement du formulaire
  */
 function formulaires_dater_commande_charger_dist($id_commande, $type_date='creation', $retour=''){
 
@@ -64,22 +79,32 @@ function formulaires_dater_commande_charger_dist($id_commande, $type_date='creat
 }
 
 /**
- * Identifier le formulaire en faisant abstraction des parametres qui
- * ne representent pas l'objet edite
+ * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
+ *
+ * @param integer $id_commande
+ *     Identifiant de la commande
+ * @param string $type_date
+ *     creation|paiement|envoi
+ * @param string $retour
+ *     Adresse de redirection
+ * @return string
+ *     Hash du formulaire
  */
 function formulaires_dater_commande_identifier_dist($id_commande, $type_date='creation', $retour=''){
 	return serialize(array($id_commande));
 }
 
 /**
- * Verification avant traitement
+ * Vérifications du formulaire de datation d'une commande
+ *
+ * Vérifier les champs postés et signaler d'éventuelles erreurs
  *
  * @param integer $id_commande
- *	identifiant de la commande
+ *     Identifiant de la commande
  * @param string $type_date
- * 	creation|paiement|envoi
+ *     creation|paiement|envoi
  * @param string $retour
- *	adresse de redirection
+ *     Adresse de redirection
  * @return Array Tableau des erreurs
  */
 function formulaires_dater_commande_verifier($id_commande, $type_date='creation', $retour=''){
@@ -92,21 +117,20 @@ function formulaires_dater_commande_verifier($id_commande, $type_date='creation'
 	elseif ($v=_request($champ_date."_heure") AND !dater_recuperer_heure_saisie($v))
 		$erreurs[$champ_date] = _T('format_heure_incorrecte');
 
-	/*if (intval(_request($champ_date."_jour"))==0)
-		$erreurs[$champ_date] = _T('info_obligatoire');*/
-
 	return $erreurs;
 }
 
 /**
- * Traitement 
+ * Traitement du formulaire de datation d'une commande
+ *
+ * Traiter les champs postés 
  *
  * @param integer $id_commande
- *	identifiant de la commande
+ *     Identifiant de la commande
  * @param string $type_date
- * 	creation|paiement|envoi
+ *     creation|paiement|envoi
  * @param string $retour
- *	adresse de redirection
+ *     Adresse de redirection
  * @return Array
  */
 function formulaires_dater_commande_traiter_dist($id_commande, $type_date='creation', $retour=''){

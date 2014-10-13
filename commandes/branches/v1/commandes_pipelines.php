@@ -15,7 +15,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Insertion de la feuille de style CSS sur les pages publiques
- * 
+ *
+ * @pipeline insert_head_css
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
  */
 function commandes_insert_head_css($flux){
 	$css = find_in_path('css/commandes.css');
@@ -25,8 +28,13 @@ function commandes_insert_head_css($flux){
 
 
 /**
- * Supprimer toutes les commandes en cours qui sont trop vieilles
+ * Optimiser la base de donnée en supprimant toutes les commandes en cours qui sont trop vieilles
  * 
+ * Le délai de "péremption" est défini dans les options de configuration du plugin
+ *
+ * @pipeline optimiser_base_disparus
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
  */
 function commandes_optimiser_base_disparus($flux){
 	include_spip('inc/config');
@@ -52,10 +60,13 @@ function commandes_optimiser_base_disparus($flux){
 
 
 /**
- * formulaires de dates sur la fiche d'une commande
+ * Ajout de contenu sur certaines pages
  *
- * @param string $flux
- * @return string
+ * - Formulaires de dates sur la fiche d'une commande
+ *
+ * @pipeline affiche_milieu
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
  */
 function commandes_affiche_milieu($flux) {
 
@@ -81,10 +92,13 @@ function commandes_affiche_milieu($flux) {
 
 
 /**
- * accueil : liste des commandes en attente de validation
+ * Ajout de contenu dans la liste des éléments en attente de validation
  *
- * @param string $flux
- * @return string $flux 
+ * - Liste des commandes aux statuts définis comme "actifs" dans les options de configuration
+ *
+ * @pipeline accueil_encours
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline 
  */
 function commandes_accueil_encours($flux) {
 
@@ -115,10 +129,13 @@ function commandes_accueil_encours($flux) {
 
 
 /**
- * Liste des commandes sur la page d'un auteur
+ * Ajout de liste sur la vue d'un auteur
  *
- * @param array $flux
- * @return array $flux
+ * - Liste des commandes de l'auteur
+ *
+ * @pipeline affiche_auteurs_interventions
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
 **/
 function commandes_affiche_auteurs_interventions($flux) {
 
@@ -140,10 +157,11 @@ function commandes_affiche_auteurs_interventions($flux) {
 
 
 /**
- * Compléter la liste des types d'adresses du plugin coordonnées
+ * Compléter la liste des types d'adresses du plugin Coordonnées
  *
- * @param array $flux
- * @return array $flux
+ * @pipeline types_coordonnees
+ * @param  array $liste Données du pipeline
+ * @return array        Données du pipeline
 **/
 function commandes_types_coordonnees($liste) {
 

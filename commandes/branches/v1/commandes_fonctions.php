@@ -13,14 +13,16 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Une fonction qui retourne les différents statuts possibles pour une commande ou le nom d'un statut précis
+ * Retourne les différents statuts possibles pour une commande ou le nom d'un statut précis
+ *
+ * @filtre
  *
  * @param bool|string $statut
- *     vide ou false pour retourner un tableau
- *     nom d'un statut précis pour retourner sa chaîne de langue
+ *     - vide ou false pour retourner un tableau
+ *     - nom d'un statut précis pour retourner sa chaîne de langue
  * @return array|string
- *     array: tableau associatif des statuts possibles et leurs chaînes de langue
- *     string: chaîne de langue d'un statut
+ *     - array: tableau associatif des statuts possibles et leurs chaînes de langue
+ *     - string: chaîne de langue d'un statut
 **/
 function commandes_lister_statuts($statut=false){
 

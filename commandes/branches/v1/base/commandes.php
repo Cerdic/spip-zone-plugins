@@ -3,7 +3,7 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Commandes
- * @copyright  2013
+ * @copyright  2014
  * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
  * @licence    GPL 3
  * @package    SPIP\Commandes\Pipelines
@@ -22,12 +22,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Déclarations d'interface pour le compilateur
  */
-function commandes_declarer_tables_interfaces($interface){
+function commandes_declarer_tables_interfaces($interfaces){
 	// 'spip_' dans l'index de $tables_principales
-	$interface['table_des_tables']['commandes'] = 'commandes';
-	$interface['table_des_tables']['commandes_details'] = 'commandes_details';
-	
-	return $interface;
+	$interfaces['table_des_tables']['commandes'] = 'commandes';
+	$interfaces['table_des_tables']['commandes_details'] = 'commandes_details';
+
+	return $interfaces;
 }
 
 
@@ -158,8 +158,17 @@ function commandes_declarer_tables_principales($tables_principales){
 }
 
 
-// definir la jointure commande_auteur qui n'est pas sur spip_commandes_auteurs
-// cf. inc/rechercher.php
+/**
+ * Définir la jointure commande_auteur qui n'est pas sur spip_commandes_auteurs
+ * 
+ * @note cf. inc/rechercher.php
+ * 
+ * @param array $table
+ * @param array $table_liee
+ * @param integer $ids
+ * @param string $serveur
+ * @return array
+ */
 function inc_rechercher_joints_commande_auteur_dist($table, $table_liee, $ids, $serveur) {
 	if (!autoriser('voir', 'commande')) {
 		return array("id_commande", "id_auteur", array());

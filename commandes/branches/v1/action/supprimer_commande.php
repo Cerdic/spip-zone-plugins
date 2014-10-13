@@ -1,7 +1,6 @@
 <?php
 /**
- * Fonction du plugin Commandes
- * Action : supprimer une commande
+ * Action du plugin Commandes
  *
  * @plugin     Commandes
  * @copyright  2014
@@ -10,6 +9,7 @@
  * @package    SPIP\Commandes\Action
  */
 
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
@@ -23,6 +23,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_supprimer_commande_dist($arg=null) {
 
+	// Si $arg n'est pas donné directement, le récupérer via _POST ou _GET
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();

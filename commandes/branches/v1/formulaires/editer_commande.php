@@ -1,4 +1,13 @@
 <?php
+/**
+ * Gestion du formulaire de d'édition d'une commande
+ *
+ * @plugin     Commandes
+ * @copyright  2014
+ * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
+ * @licence    GPL 3
+ * @package    SPIP\Commandes\Formulaires
+ */
 
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -6,6 +15,16 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
 
+/**
+ * Description des saisies du formulaire d'édition d'une commande
+ *
+ * @param int|string $id_commande
+ *     Identifiant du commande. 'new' pour une nouvelle commande.
+ * @param string $retour
+ *     URL de redirection après le traitement
+ * @return array
+ *     Description des saisies
+ */
 function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 	include_spip('inc/config');
 	return array(
