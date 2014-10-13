@@ -17,6 +17,9 @@ function embed_url($url) {
 	$fichier = md5($url).".php";
 	$dossier = substr(md5($url), 0, 3);
 
+	// Gérer les elements de dropbox (remplacer www par dl)
+	$url = preg_replace("/^(https\:\/\/)(www)(\.dropbox\.com\/.*\/.*\/.*?)(\?dl=[01])?$/", '\1dl\3', $url);
+
 	// Si l'embed a deja été sauvegardé
 	if (file_exists(_DIR_CACHE."$host/$dossier/$fichier")) {
 		$html = implode("", file(_DIR_CACHE."$host/$dossier/$fichier"));
@@ -91,7 +94,7 @@ function embed_url($url) {
 				if ($html) $code_ae = "<div class='oembed-container'>$html</div>";
 			}
 		}
-		else if (preg_match(",^https?://[^\"\'\`\<\>\@\*\$]*?\.mp3$,i", $url)) {
+		else if (preg_match(",^https?://[^\"\'\`\<\>\@\*\$]*?\.mp3(\?.*)?$,i", $url)) {
 
 			$html = file_get_contents(dirname(__FILE__).'/modeles/mp3.html');
 			$html = str_replace('{source}', htmlspecialchars($url), $html);
