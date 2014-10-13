@@ -180,17 +180,7 @@ function calculer_balise_LISTER_CHOIX($objet, $colonne, $applatir = true) {
 			$choix = saisies_chaine2tableau($options['datas']);
 			// applatir les sous-groupes si présents
 			if ($applatir) {
-				$choix_plats = array();
-				foreach ($choix as $cle => $valeur) {
-					// cas d'un groupe
-					if (is_array($valeur)) {
-						$choix_plats = array_merge($choix_plats, $valeur);
-					// cas normal
-					} else {
-						$choix_plats[$cle] = $valeur;
-					}
-				}
-				$choix = $choix_plats;
+				$choix = saisies_aplatir_tableau($choix);
 			}
 			return $choix;
 		}
