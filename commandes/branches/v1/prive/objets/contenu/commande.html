@@ -10,6 +10,10 @@
 	[(#REM) Contenu détaillé de la commande ]
 	<INCLURE{fond=prive/squelettes/inclure/commande_contenu, id_commande}>
 
+	[(#PLUGIN{bank}|oui)
+	<INCLURE{fond=prive/objets/liste/transactions, id_commande}>
+	]
+
 	[(#REM) Adresses liées à la commande ou à défaut au contact ]
 	[(#PLUGIN{coordonnees}|oui)
 	<INCLURE{fond=prive/squelettes/inclure/commande_adresses, id_commande}>
