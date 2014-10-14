@@ -109,7 +109,7 @@ function commandes_accueil_encours($flux) {
 		foreach($statuts as $statut){
 			if ($nb_{$statut} = sql_countsel(table_objet_sql('commande'), "statut=".sql_quote($statut))) {
 				$titre_{$statut} = singulier_ou_pluriel($nb_{$statut}, 'commandes:info_1_commande_statut_'.$statut, 'commandes:info_nb_commandes_statut_'.$statut);
-				$texte .= recuperer_fond('prive/objets/liste/commandes', array(
+				$flux .= recuperer_fond('prive/objets/liste/commandes', array(
 					'titre' => $titre_{$statut},
 					'statut' => $statut,
 					'cacher_tri' => true,
@@ -118,10 +118,6 @@ function commandes_accueil_encours($flux) {
 				);
 			}
 		}
-	}
-
-	if (isset($texte)) {
-		$flux .= $texte;
 	}
 
 	return $flux;
@@ -140,16 +136,13 @@ function commandes_accueil_encours($flux) {
 function commandes_affiche_auteurs_interventions($flux) {
 
 	if ($id_auteur = intval($flux['args']['id_auteur'])) {
-		$texte .= recuperer_fond('prive/objets/liste/commandes', array(
+		$flux['data'] .= recuperer_fond('prive/objets/liste/commandes', array(
 			'id_auteur' => $id_auteur,
 			'titre' => _T('commandes:titre_commandes_auteur'),
 			'cacher_tri' => true
 			),
 			array('ajax' => true)
 		);
-	}
-	if (isset($texte)) {
-		$flux['data'] .= $texte;
 	}
 
 	return $flux;
@@ -182,4 +175,101 @@ function commandes_types_coordonnees($liste) {
 }
 
 
+/**
+ * Enregistrer le bon reglement d'une commande liee a une transaction du plugin bank
+ *
+ * @param array $flux
+ * @return array mixed
+ */
+function commandes_bank_traiter_reglement($flux){
+	// Si on est dans le bon cas d'un paiement de commande et qu'il y a un id_commande et que la commande existe toujours
+	if ($id_transaction = $flux['args']['id_transaction']
+	  AND $transaction = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))
+		AND $id_commande = $transaction['id_commande']
+		AND $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'id_commande='.intval($id_commande))){
+
+		$statut_commande = $commande['statut'];
+		$montant_regle = $transaction['montant_regle'];
+		$statut_nouveau = 'paye';
+
+		$fonction_prix = charger_fonction('prix', 'inc/');
+		$prix_commande = $fonction_prix('commande', $id_commande);
+		spip_log("commande #$id_commande prix:$prix_commande regle:$montant_regle",'commandes');
+
+		// Si on a pas assez payé
+		if (floatval($prix_commande)-floatval($montant_regle)>=0.01){
+			$statut_nouveau = 'partiel';
+		}
+
+		if ($statut_nouveau !== $statut_commande){
+			spip_log("commandes_bank_traiter_reglement marquer la commande #$id_commande statut=$statut_nouveau",'commandes');
+			//on met a jour la commande
+			include_spip("action/editer_commande");
+			commande_modifier($id_commande,array('statut'=>$statut_nouveau));
+		}
+	}
+
+	return $flux;
+}
+
+/**
+ * Enregistrer le reglement en attente d'une commande liee a une transaction du plugin bank
+ * (cas du reglement par cheque par exemple)
+ *
+ * @param array $flux
+ * @return array mixed
+ */
+function commandes_trig_bank_reglement_en_attente($flux){
+	// Si on est dans le bon cas d'un paiement de commande et qu'il y a un id_commande et que la commande existe toujours
+	if ($id_transaction = $flux['args']['id_transaction']
+	  AND $transaction = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))
+		AND $id_commande = $transaction['id_commande']
+		AND $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'id_commande='.intval($id_commande))){
+
+		$statut_commande = $commande['statut'];
+		$statut_nouveau = 'attente';
+		if ($statut_nouveau !== $statut_commande){
+			spip_log("commandes_trig_bank_reglement_en_attente marquer la commande #$id_commande statut=$statut_nouveau",'commandes');
+			//on met a jour la commande
+			include_spip("action/editer_commande");
+			commande_modifier($id_commande,array('statut'=>$statut_nouveau));
+		}
+	}
+
+	return $flux;
+}
+
+
+/**
+ * Enregistrer le reglement en echec d'une commande liee a une transaction du plugin bank
+ * (cas du reglement annule ou du refus de carte etc)
+ *
+ * @param array $flux
+ * @return array mixed
+ */
+function commandes_trig_bank_reglement_en_echec($flux){
+	// Si on est dans le bon cas d'un paiement de commande et qu'il y a un id_commande et que la commande existe toujours
+	if ($id_transaction = $flux['args']['id_transaction']
+	  AND $transaction = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))
+		AND $id_commande = $transaction['id_commande']
+		AND $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'id_commande='.intval($id_commande))){
+
+		$statut_commande = $commande['statut'];
+		$statut_nouveau = $statut_commande;
+
+		// on ne passe la commande en erreur que si le reglement a effectivement echoue,
+		// pas si c'est une simple annulation (retour en arriere depuis la page de paiement bancaire)
+		if (strncmp($transaction['statut'],"echec",5)==0){
+			$statut_nouveau = 'erreur';
+		}
+		if ($statut_nouveau !== $statut_commande){
+			spip_log("commandes_trig_bank_reglement_en_attente marquer la commande #$id_commande statut=$statut_nouveau",'commandes');
+			//on met a jour la commande
+			include_spip("action/editer_commande");
+			commande_modifier($id_commande,array('statut'=>$statut_nouveau));
+		}
+	}
+
+	return $flux;
+}
 ?>
