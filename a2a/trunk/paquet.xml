@@ -1,9 +1,9 @@
 <paquet
 	prefix="a2a"
 	categorie="navigation"
-	version="2.1.6"
+	version="2.1.7"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/a2a-64.png"
 	schema="0.11.0"
 	documentation="http://contrib.spip.net/Le-plugin-a2a-pour-lier-des-articles"

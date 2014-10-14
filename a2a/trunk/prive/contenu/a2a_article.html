@@ -1,24 +1,34 @@
 #CACHE{0}
 
 [(#REM) afficher les evenements de cet article]
-#BOITE_OUVRIR
+
+[(#SPIP_VERSION|match{^3.1}|non)
+	#BOITE_OUVRIR
 	<div id="pave_a2a">
-	<INCLURE{fond=prive/objets/liste/articles_lies,nb=10,sinon=<:a2a:pas_articles_lies:>,id_article = #ID_ARTICLE_ORIG,env}{ajax=bloca2a}>
-	[(#ENV{articles_lies_visibles}|=={oui}|non)<div class="toggle_box_link">
-		&#91;<a href="[(#SELF|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a_bloc})]" class="ajax"><:a2a:lien_lier_article:></a>&#93;
-	</div>]
+]
+[(#SPIP_VERSION|match{^3.1}|oui)
+	<div id="pave_a2a_31" class="formulaire_spip formulaire_editer formulaire_editer_liens">
+]
+		<INCLURE{fond=prive/objets/liste/articles_lies,nb=10,sinon=<:a2a:pas_articles_lies:>,id_article = #ID_ARTICLE_ORIG,env}{ajax=bloca2a}>
+		[(#ENV{articles_lies_visibles}|=={oui}|non)<div class="toggle_box_link">
+			&#91;&nbsp;<a href="[(#SELF|parametre_url{articles_lies_visibles,oui}|ancre_url{pave_a2a_bloc})]" class="ajax"><:a2a:lien_lier_article:></a>&nbsp;&#93;
+		</div>]
+
+		[(#ENV{articles_lies_visibles}|=={oui}|oui)
+		<div id="pave_a2a_bloc">
+			<div class="toggle_box_link">
+				&#91;<a href="[(#SELF|parametre_url{articles_lies_visibles,''}|ancre_url{pave_a2a})]" class="ajax"><:bouton_fermer:></a>&#93;
+			</div>
+			<p id="type_recherche_a2a">
+				<a href="#" id="recherche_texte" class="on"><:a2a:recherche_texte:></a> | 
+				<a href="#" id="recherche_arbo"><:a2a:recherche_arbo:></a>
+			</p>
+			#FORMULAIRE_RECHERCHE_A2A{#ID_ARTICLE_ORIG}
+			#FORMULAIRE_NAVIGATEUR_A2A{#ID_ARTICLE_ORIG}
+		</div>]
+
+
 	</div>
-	[(#ENV{articles_lies_visibles}|=={oui}|oui)<div id="pave_a2a_bloc">
-		<div class="toggle_box_link">
-			&#91;<a href="[(#SELF|parametre_url{articles_lies_visibles,''}|ancre_url{pave_a2a})]" class="ajax"><:bouton_fermer:></a>&#93;
-		</div>
-		<p id="type_recherche_a2a">
-			<a href="#" id="recherche_texte" class="on"><:a2a:recherche_texte:></a> | 
-			<a href="#" id="recherche_arbo"><:a2a:recherche_arbo:></a>
-		</p>
-		#FORMULAIRE_RECHERCHE_A2A{#ID_ARTICLE_ORIG}
-		#FORMULAIRE_NAVIGATEUR_A2A{#ID_ARTICLE_ORIG}
-	</div>]
 	<script type="text/javascript">
 	(function($){
 		$(function(){
@@ -31,4 +41,7 @@
 		});
 	})(jQuery);
 	</script>
-#BOITE_FERMER
+
+[(#SPIP_VERSION|match{^3.1}|non)
+	#BOITE_FERMER
+]
