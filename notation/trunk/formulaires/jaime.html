@@ -4,7 +4,7 @@
 #SET{total,#NOMBRE_VOTES}
 </BOUCLE_note>
 <div class="formulaire_notation formulaire_#FORM ajax">
-	[(#NOTATION_ETOILE{[(#GET{note_ponderee})],[(#ENV*{_objet})][(#ENV*{_id_objet})]})]
+	[(#NOTATION_ETOILE{[(#GET{note_ponderee})],[(#ENV*{_objet})][(#ENV*{_id_objet})],[(#HTML5|oui)oui]})]
 	[<span class="[(#PLUGIN{bootstrap}|?{badge,note})]">(#GET{total}) [(#GET{total}|>{1}|?{<:notation:votes:>,<:notation:vote:>})]</span>]
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
