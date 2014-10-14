@@ -112,26 +112,22 @@ function cairn_traiter_notes($t, $reset) {
 function cairn_decoupe_hN($texte, $reset) {
 	static $cpt;
 	if ($reset) $cpt=0;
-
 	if (!strlen(trim($texte))) return '';
+	$texte = preg_replace_callback(
+		'/(<h([2-6]) class="spip">)(.*?)(<\/h[2-6]>)/si',
+		function($match) {
+			static $cpt_titre = 1;
+			$niveau = $match[2]-1;
+			$titre = supprimer_tags($match[3]);
+			$titre = _CHEVRONA."section".$niveau." id=\"s".$niveau."n".$cpt_titre."\""._CHEVRONB
+					.$titre
+            		._CHEVRONA."/section".$niveau._CHEVRONB;
+			$cpt_titre++;
+			return $titre;
+		}, $texte);
 
-	$texte = preg_replace_callback('/(<h([2-6]) class="spip">)(.*?)(<\/h[2-6]>)/si','callback_intertitre', $texte);
 	$texte = cairn_decoupe_para_cdata($texte, $reset);
 	return $texte;
-}
-
-function callback_intertitre($r) {
-    static $i=0;
-    $i++;
-    // niveau de l'intertitre (de h2 à h6 = niveau 1 à niveau 5)
-    $niveau = $r[2]-1;
-    // spip ajoute des ancres a, on supprime pour ne garder que l'intertitre
-    $titre = supprimer_tags($r[3]);
-
-    $titre = _CHEVRONA."section".$niveau." id=\"s".$niveau."n".$i."\""._CHEVRONB
-            .$titre
-            ._CHEVRONA."/section".$niveau._CHEVRONB;
-    return $titre;
 }
 
 function callback_poesie($r) {
