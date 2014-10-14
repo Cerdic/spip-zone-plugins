@@ -454,6 +454,15 @@ function autoriser_groupemots_modifier($faire, $type, $id, $qui, $opt) {
 	# signaler un risque de bug avec un autoriser_mot_modifier personnalise
 	if (function_exists('autoriser_mot_modifier'))
 		$autorite_erreurs[] = 'autoriser_mot_modifier';
+		
+// la config d'autorite sur le groupe de mot doit être idem sur les mots
+	function autoriser_mot_modifier($faire, $type, $id, $qui, $opt) {
+		return autoriser_groupemots_modifier($faire, $type, $id, $qui, $opt);
+	}
+	function autoriser_mot_creer($faire, $type, $id, $qui, $opt) {
+		return autoriser_groupemots_modifier($faire, $type, $id, $qui, $opt);
+	}
+		
 } else
 	$autorite_erreurs[] = 'autoriser_groupemots_modifier';
 }
