@@ -1,13 +1,15 @@
 #CACHE{0}
-[<div id="alerte_urgence" class="alerte_urgence[ (#EDIT{meta-alerte_urgence/texte})]">(#CONFIG{alerte_urgence/texte}|propre)</div>
+[<div id="alerte_urgence" class="alerte_urgence[ (#EDIT{meta-alerte_urgence/texte})]">
+	<div class="alerte_urgence-texte">
+		(#CONFIG{alerte_urgence/texte}|propre)
+	</div>
+</div>
 <style type="text/css">
 .alerte_urgence {
 	font-size: 100%;
-	line-height: 1;
-	padding: .75em;
+	padding: 1.5em;
 	background: #B03838;
 	color: #fff;
-	font-weight: bold;
 	text-align: center;
 	/*white-space: nowrap;*/
 	overflow: hidden;
@@ -17,5 +19,8 @@
 .alerte_urgence a {
 	color:white;
 	text-decoration:underline;
+}
+.alerte_urgence p:last-child{
+	margin-bottom:0;
 }
 </style>]
