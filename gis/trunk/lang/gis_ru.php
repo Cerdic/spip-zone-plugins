@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_maptype_hybride' => 'Гибрид',
 	'cfg_lbl_maptype_relief' => 'Рельеф',
 	'cfg_lbl_maptype_satellite' => 'Спутник',
+	'cfg_titre_gis' => 'GIS', # MODIF
 
 	// E
 	'editer_gis_editer' => 'Изменить точку',

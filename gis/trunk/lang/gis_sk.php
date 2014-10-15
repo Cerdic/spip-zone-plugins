@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_maptype_hybride' => 'Zmiešaná',
 	'cfg_lbl_maptype_relief' => 'Reliéf',
 	'cfg_lbl_maptype_satellite' => 'Satelitná',
+	'cfg_titre_gis' => 'GIS', # MODIF
 
 	// E
 	'editer_gis_editer' => 'Upraviť tento bod',
