@@ -67,7 +67,7 @@ De verschillende blokken hieronder geven een voorbeeld van ieder model. Gegevens
 	// I
 	'info_doc' => 'Heb je problemen met het weergeven van deze bladzijde, [klik dan hier->@link@].',
 	'info_doc_titre' => 'Opmerking over het weergeven van deze bladzijde',
-	'info_skel_contrib' => 'Volledige documentatie online op [spip-contrib->http://www.spip-contrib.fr/?article3567].', # MODIF
+	'info_skel_contrib' => 'Volledige documentatie online op [spip-contrib->http://www.spip-contrib.fr/?article3567].',
 	'info_skel_doc' => 'Deze documentatie-bladzijde is uitgevoerd als standaard SPIP-model ({bestanden in map "squelettes-dist/"}). Lukt het je niet deze bladzijde te tonen, of gebruikt jouw site afwijkende modellen, dan lukt het waarschijnlijk met een van onderstaande links:
 
 -* [Modus "tekst"->@mode_brut@] ({eenvoudige HTML + INSERT_HEAD})
