@@ -7,6 +7,10 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// Fix SPIP <3.0.18
+if (test_espace_prive()){
+	include_spip('formulaires/selecteur/generique_fonctions');
+}
 
 /**
  * un filtre pour transformer les URLs relatives en URLs absolues ;
