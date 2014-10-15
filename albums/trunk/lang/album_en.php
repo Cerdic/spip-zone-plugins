@@ -20,9 +20,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		in order to restrict the selection of albums. One click on an entry activates the filter, another click dis-activates it.
 		By combining them you can easily find any album.
 		When the lists are too long, search fields let you find a specific object.',
-	'c_albumotheque_presentation' => 'Welcome to the « albumothèque » !<br>
+	'c_albumotheque_presentation' => 'Welcome to the «albumothèque»!<br>
 You can create autonomous albums from this page and from the toolbar, or create albums associated with editorial objects on their own pages.
-<br>Each album is editable «on site» (editing text and manipulating documents), or from their page.', # RELIRE
+<br>Each album is editable «on site» (editing text and manipulating documents), or from its page.',
 	'c_albumotheque_titre_filtres' => 'Filter selection',
 	'c_albumotheque_titre_presentation' => 'Albums',
 	'cfg_titre_albums' => 'Albums',
