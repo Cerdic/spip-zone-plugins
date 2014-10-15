@@ -3,10 +3,10 @@
     #SET{revue,VACA} #SET{editeur,AVACA} #SET{issn,1253-2479} #SET{issn_num,2107-092X}
 [(#REM) calculer le numéro ]
 [(#SET{numero,[(#GET{revue}|concat{[_(#NUMERO|filtre_formater{"%03s"})]})]})]
-<BOUCLE_a(ARTICLES){id_article}>
-<article idproprio="[(#GET{numero}|concat{[_(#PAGE_DEBUT|filtre_formater{"%04s"})]})]" lang="#LANG" traitement="artr" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink"><admin><infoarticle>
-<BOUCLE_dossier(RUBRIQUES){id_rubrique}><section_sommaire>#TITRE</section_sommaire></BOUCLE_dossier>
-<pagination>[<ppage>(#PAGE_DEBUT)</ppage>][<dpage>(#PAGE_FIN)</dpage>]</pagination>[<nbpage>(#PAGES_TOTAL)</nbpage>]<nbpara>[(#VAL{/<p /}|preg_split{#TEXTE*}|count)]</nbpara>
+<BOUCLE_a(ARTICLES){id_article}>[
+(#SET{tri,[(#GET{numero}|concat{[_(#PAGE_DEBUT|filtre_formater{"%04s"})]})]})
+]<article idproprio="#GET{tri}" lang="#LANG" traitement="artr" typeart="article" xmlns:xlink="http://www.w3.org/1999/xlink"><admin><infoarticle>
+<BOUCLE_dossier(RUBRIQUES){id_rubrique}><section_sommaire>#TITRE</section_sommaire></BOUCLE_dossier>[<tri>(#GET{tri})</tri>]<pagination>[<ppage>(#PAGE_DEBUT)</ppage>][<dpage>(#PAGE_FIN)</dpage>]</pagination>[<nbpage>(#PAGES_TOTAL)</nbpage>]<nbpara>[(#VAL{/<p /}|preg_split{#TEXTE*}|count)]</nbpara>
 <nbmot>[(#VAL{/\W+/}|preg_split{#TEXTE*}|count)]</nbmot>
 </infoarticle><revue id="#GET{revue}"><titrerev>[(#NOM_SITE_SPIP|cdata)]</titrerev><titrerevabr>[(#NOM_SITE_SPIP|cdata)]</titrerevabr><idissn>#GET{issn}</idissn><idissnnum>#GET{issn_num}</idissnnum></revue><numero id="[(#GET{numero})]"><volume>#NUMERO</volume><pub><annee>[(#DATE_NUMERO|sinon{#DATE}|annee)]</annee></pub><pubnum><date>[(#DATE_NUMERO|sinon{#DATE}|affdate)]</date></pubnum><theme>#VAL{'Varia'}</theme><idisbn>#ISBN</idisbn></numero><editeur id="#GET{editeur}"><nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg></editeur><prodnum id="SPIP"><nomorg>Rezo/SPIP</nomorg></prodnum><diffnum id="CairnD"><nomorg>Cairn</nomorg></diffnum><dtd nom="Erudit Article" version="vCairn 1.0"/><droitsauteur>© <nomorg>[(#NOM_SITE_SPIP|cdata)]</nomorg>, [(#DATE_REDAC|sinon{#DATE}|annee)]</droitsauteur></admin>
 <liminaire>

@@ -31,7 +31,7 @@
             [(#GET{file}|file_exists|?{
                 [<span class="cell b3"><span class="statut ok">Ok</span> <em>(#TITRE)</em>]</span>,
                 [<span class="cell b3">(#GET{file}|ecrire_fichier{
-                    #INCLURE{fond=cairn/article,id_article,numero=#_meta:TITRE,isbn=#GET{isbn},date_numero=#GET{date_numero}}
+                    #INCLURE{fond=cairn/article,id_article,numero=#GET{numero},isbn=#GET{isbn},date_numero=#GET{date_numero}}
                     |cairn_figure{cairn/#GET{numero}}
                 }|?{<span class="statut ok">Sauvé</span>,<span class="statut erreur">Erreur</span>})[ <em>(#TITRE)</em>]</span>]
             })]

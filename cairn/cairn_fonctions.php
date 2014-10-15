@@ -27,8 +27,18 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 	$c = ++ $cpt[$numero];
 	foreach (extraire_balises($html, 'figure') as $fig) {
 		$legende = extraire_balise($fig, 'figcaption');
+		// titre
+		$titre = '';
 		$titre = extraire_balise($legende, 'h3');
-		if ($titre) $legende = str_replace($titre,'', $legende);
+		// description
+		$desc = '';
+		if (preg_match('/span/',$legende)) {
+			// la description
+			foreach (extraire_balises($fig,'span') as $description) {
+				$desc .= "<alinea>".trim(supprimer_tags($description))."</alinea>";
+			}
+		}
+		
 
 		// fichiers PDF
 		$src = extraire_attribut(extraire_balise($fig, 'a'), 'href');
@@ -39,9 +49,7 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 			rename($l, "$numero/$file");
 		}
 
-		$titre = supprimer_tags($titre);
-		$legende = supprimer_tags($legende);
-		$figure = cairn_figure(extraire_balise($fig,'img'), $numero, $titre,$legende);
+		$figure = cairn_figure(extraire_balise($fig,'img'),$numero,$titre,$desc);
 		$html = str_replace($fig, $figure, $html);
 	}
 
@@ -58,10 +66,9 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 			if ($ext == 'jpg') $ext = 'jpeg';
 		}
 
+		// le titre
 		if ($titre)
-			$titre = "<titre>".filtre_cdata(trim($titre))."</titre>";
-		if ($desc)
-			$desc = "<alinea>".filtre_cdata(trim($desc))."</alinea>";
+			$titre = "<titre>".trim(supprimer_tags($titre))."</titre>";
 		if ($titre OR $desc) {
 			$legende = "    <legende lang='fr'>
         $titre
@@ -92,28 +99,26 @@ function cairn_prenom_nom($blaze) {
 }
 
 // convertir un HTML en format eruditArticle
-function cairn_traiter($t, $reset) {
-
-	$t = cairn_decoupe_h3($t, $reset);
-
+function cairn_traiter($t, $reset) { 
+	$t = cairn_decoupe_hN($t, $reset);
 	return str_replace(array(_CHEVRONA,_CHEVRONB), array('<', '>'), $t);
 }
 
 // convertir un HTML en format eruditArticle
 function cairn_traiter_notes($t, $reset) {
+	$t = preg_replace(',<div\b[^>]*>(.*)</div>,UimsS','\1',$t);
 
 	$t = cairn_decoupe_para_cdata($t, $reset);
-
 	return str_replace(array(_CHEVRONA,_CHEVRONB), array('<', '>'), $t);
 }
 
-function cairn_decoupe_h3($texte, $reset) {
+function cairn_decoupe_hN($texte, $reset) {
 	static $cpt;
 	if ($reset) $cpt=0;
 
 	if (!strlen(trim($texte))) return '';
 
-	$sections = preg_split('/<h[23]\b[^>]*>/i', $texte);
+	$sections = preg_split('/<h[2-6] class="spip">/i', $texte);
 
 	$t = array_shift($sections);
 	if (strlen($t)) {
@@ -125,7 +130,7 @@ function cairn_decoupe_h3($texte, $reset) {
 
 	foreach ($sections as $p) {
 		$cpt++;
-		list($para, $suite) = preg_split(',</h[23]\b[^>]*>,i', $p);
+		list($para, $suite) = preg_split(',</h[2-6]>,i', $p);
 
 		$t .= _CHEVRONA."section1 id=\"s1n$cpt\""._CHEVRONB
 			. _CHEVRONA."titre"._CHEVRONB.cairn_decoupe_para_cdata($para)._CHEVRONA."/titre"._CHEVRONB
@@ -167,7 +172,7 @@ function cairn_decoupe_para_cdata($texte, $reset=false) {
 	$texte = preg_replace(',</(ol|ul)\b[^>]*>,iS', '$0</p>', $texte);
 
 	// sauts de ligne
-	$texte = preg_replace(',<br\b[^>]*>,iS', '', $texte);
+	$texte = preg_replace(',<br\b[^>]*>,iS', '</alinea><alinea>', $texte);
 
 	// liens a href
 	foreach (extraire_balises($texte, 'a') as $l) {
@@ -178,6 +183,10 @@ function cairn_decoupe_para_cdata($texte, $reset=false) {
 			$lien = str_replace(array('<','>'), array(_CHEVRONA, _CHEVRONB), $lien);
 			$texte = str_replace($l, $lien, $texte);
 		}
+		// ne pas oublier de supprimer les ancres (dans les intertitres notamment)
+		/*else {
+			$texte = str_replace($l,'',$texte);
+		}*/
 	}
 
 	// images (seront traitees a la fin)
@@ -206,17 +215,27 @@ function cairn_decoupe_para_cdata($texte, $reset=false) {
 
 		if ($a = extraire_balise($para, 'a')
 		AND extraire_attribut($a, 'rev') == 'footnote') {
-			$note = supprimer_tags($a);
-			$t .= "<note id=\"no$note\"><alinea>"
-				. filtrer_texte_cairn(str_replace($a, supprimer_tags($a), $para))
+			$numero_note = supprimer_tags($a);
+			$texte_note = str_replace(extraire_balise($para,'span'),'',$para);
+			$t .= "<note id=\"no$numero_note\"><no>$numero_note</no><alinea>"
+				. filtrer_texte_cairn($texte_note)
 				. "</alinea></note>"
 				. filtrer_texte_cairn($suite);
 		}
-		else
-			$t .= "<para id=\"pa$cpt\"><alinea>"
-				. filtrer_texte_cairn($para)
-				. "</alinea></para>"
-				. filtrer_texte_cairn($suite);
+		else {
+			// les listes sont immédiatement après <para> sans <alinea>
+		    if (preg_match('/^<[u|o]l\b[^>]*>/Ui',$para)) {
+		        $t .= "<para id=\"pa$cpt\">"
+		            . filtrer_texte_cairn($para)
+		            . "</para>"
+		            . filtrer_texte_cairn($suite);
+		    } else {
+		        $t .= "<para id=\"pa$cpt\"><alinea>"
+		            . filtrer_texte_cairn($para)
+		            . "</alinea></para>"
+		            . filtrer_texte_cairn($suite);
+		    }
+		}
 	}
 
 	return $t;
@@ -246,8 +265,7 @@ function filtrer_texte_cairn($t) {
 	$t = proteger_amp(unicode_to_utf_8(html2unicode($t)));
 	$t = str_replace('&#8217;', '’', $t);
 
-	$t = trim(supprimer_tags($t));
-
+	$t = trim($t);
 
 	return $t;
 

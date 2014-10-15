@@ -1,0 +1,16 @@
+- sections
+============
+
+le niveau d'intertitre devrait se répecuter sur la section. Et suppose une imbrication des sections de niveaux différents pour donner ceci :
+h2                  section1
+    h3                  section2
+        h4                  section3
+        p                       para
+        p                       para
+                            /section3
+                        /section2
+                    /section1
+
+- images
+=========
+si un article contient un intertitre et une image avec un titre, l'export se prend les pieds dans le tapis.
