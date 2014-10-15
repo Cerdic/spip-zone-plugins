@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_composition_explication' => 'You are Webmaster, you can',
 	'label_composition_lock' => 'Lock the composition',
 	'label_composition_rubrique' => 'Sections composition',
+	'label_heritages' => 'Heritages',
 	'label_information' => 'Information',
 	'label_masquer_formulaire' => 'Hide the form',
 	'label_masquer_formulaire_composition' => 'Hide the selection form of a composition when the user does not have the rights to edit it.',
