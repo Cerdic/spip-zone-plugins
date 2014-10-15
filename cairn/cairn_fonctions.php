@@ -43,12 +43,10 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 		$legende = supprimer_tags($legende);
 		$figure = cairn_figure(extraire_balise($fig,'img'), $numero, $titre,$legende);
 		$html = str_replace($fig, $figure, $html);
-
-		$titre = null; 
-		$legende = null;
 	}
 
 	foreach (extraire_balises($html, 'img') as $img) {
+
 		$src = extraire_attribut($img, 'src');
 
 		if ($src AND $l = copie_locale(url_absolue($src))) {
@@ -95,8 +93,8 @@ function cairn_prenom_nom($blaze) {
 
 // convertir un HTML en format eruditArticle
 function cairn_traiter($t, $reset) {
-	//$t = cairn_decoupe_para_cdata($t, $reset);
-	$t = cairn_decoupe_hN($t, $reset);
+
+	$t = cairn_decoupe_h3($t, $reset);
 
 	return str_replace(array(_CHEVRONA,_CHEVRONB), array('<', '>'), $t);
 }
@@ -109,25 +107,34 @@ function cairn_traiter_notes($t, $reset) {
 	return str_replace(array(_CHEVRONA,_CHEVRONB), array('<', '>'), $t);
 }
 
-function cairn_decoupe_hN($texte, $reset) {
+function cairn_decoupe_h3($texte, $reset) {
 	static $cpt;
 	if ($reset) $cpt=0;
-	if (!strlen(trim($texte))) return '';
-	$texte = preg_replace_callback(
-		'/(<h([2-6]) class="spip">)(.*?)(<\/h[2-6]>)/si',
-		function($match) {
-			static $cpt_titre = 1;
-			$niveau = $match[2]-1;
-			$titre = supprimer_tags($match[3]);
-			$titre = _CHEVRONA."section".$niveau." id=\"s".$niveau."n".$cpt_titre."\""._CHEVRONB
-					.$titre
-            		._CHEVRONA."/section".$niveau._CHEVRONB;
-			$cpt_titre++;
-			return $titre;
-		}, $texte);
 
-	$texte = cairn_decoupe_para_cdata($texte, $reset);
-	return $texte;
+	if (!strlen(trim($texte))) return '';
+
+	$sections = preg_split('/<h[23]\b[^>]*>/i', $texte);
+
+	$t = array_shift($sections);
+	if (strlen($t)) {
+		$cpt ++;
+		$t = _CHEVRONA."section1 id=\"s1n$cpt\""._CHEVRONB
+			. cairn_decoupe_para_cdata($t, $reset)
+			. _CHEVRONA."/section1"._CHEVRONB;
+	}
+
+	foreach ($sections as $p) {
+		$cpt++;
+		list($para, $suite) = preg_split(',</h[23]\b[^>]*>,i', $p);
+
+		$t .= _CHEVRONA."section1 id=\"s1n$cpt\""._CHEVRONB
+			. _CHEVRONA."titre"._CHEVRONB.cairn_decoupe_para_cdata($para)._CHEVRONA."/titre"._CHEVRONB
+			. cairn_decoupe_para_cdata($suite)
+			. _CHEVRONA."/section1"._CHEVRONB;
+	}
+
+	return $t;
+
 }
 
 function callback_poesie($r) {
@@ -205,20 +212,11 @@ function cairn_decoupe_para_cdata($texte, $reset=false) {
 				. "</alinea></note>"
 				. filtrer_texte_cairn($suite);
 		}
-		else {
-			// les listes sont immédiatement après <para> sans <alinea>
-		    if (preg_match('/^<[u|o]l\b[^>]*>/Ui',$para)) {
-		        $t .= "<para id=\"pa$cpt\">"
-		            . filtrer_texte_cairn($para)
-		            . "</para>"
-		            . filtrer_texte_cairn($suite);
-		    } else {
-		        $t .= "<para id=\"pa$cpt\"><alinea>"
-		            . filtrer_texte_cairn($para)
-		            . "</alinea></para>"
-		            . filtrer_texte_cairn($suite);
-		    }
-		}
+		else
+			$t .= "<para id=\"pa$cpt\"><alinea>"
+				. filtrer_texte_cairn($para)
+				. "</alinea></para>"
+				. filtrer_texte_cairn($suite);
 	}
 
 	return $t;
@@ -252,6 +250,8 @@ function filtrer_texte_cairn($t) {
 
 
 	return $t;
+
+	#return filtre_cdata($t);
 }
 
 ?>
