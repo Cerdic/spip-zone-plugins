@@ -3,7 +3,7 @@
 	categorie="multimedia"
 	version="0.10.10"
 	etat="dev"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="theme/img/videos-32.png"
 	schema="0.3"
 	documentation="http://contrib.spip.net/Plugin-Video-s"
