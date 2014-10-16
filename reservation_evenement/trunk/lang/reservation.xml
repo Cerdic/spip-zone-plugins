@@ -8,4 +8,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=fr" total="110" traduits="110" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=pt_br" total="110" traduits="96" relire="6" modifs="0" nouveaux="8" pourcent="87.27">
+		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
+	</langue>
 </traduction>
