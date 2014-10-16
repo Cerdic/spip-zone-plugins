@@ -39,6 +39,29 @@
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 			</li>
+			#SET{name,robots}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="[(#GET{name})]"><:seo:meta_robots:></label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<select name="[(#GET{name})]" class="select" id="[(#GET{name})]">
+					#SET{val,''}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+					#SET{val,'INDEX, FOLLOW'}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+					#SET{val,'INDEX, NOFOLLOW'}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+					#SET{val,'NOINDEX, FOLLOW'}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+					#SET{val,'NOINDEX, NOFOLLOW'}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+					#SET{val,'INDEX, FOLLOW, NOARCHIVE'}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+					#SET{val,'INDEX, NOFOLLOW, NOARCHIVE'}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+					#SET{val,'NOINDEX, NOFOLLOW, NOARCHIVE'}
+					<option value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{val})]</option>
+				</select>
+			</li>
 	  </ul>
 
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

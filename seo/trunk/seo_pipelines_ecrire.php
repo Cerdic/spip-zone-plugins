@@ -55,6 +55,7 @@ function seo_formulaire_charger($flux){
 			'meta_keywords'=>'',
 			'meta_copyright'=>'',
 			'meta_author'=>'',
+			'meta_robots'=>'',
 		);
 		if ($id_objet=intval($flux['args']['args'][0])){
 			$metas = sql_select("*", "spip_seo", "id_objet =".intval($id_objet)." AND objet =".sql_quote($objet));
