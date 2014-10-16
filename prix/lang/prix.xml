@@ -7,6 +7,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/prix?lang_cible=fr" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/prix?lang_cible=pt_br" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/prix?lang_cible=sk" total="7" traduits="7" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
