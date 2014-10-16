@@ -69,8 +69,8 @@ function embed_url($url) {
 			$img = $json->{'url'};
 			if ($img) $code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 		}
-		else if (preg_match("/^http\:\/\/(www\.)?soundcloud\.com/i", $url)) {
-			$oembed = "http://soundcloud.com/oembed/?format=json&url=".$url;
+		else if (preg_match("/^https?\:\/\/(www\.)?soundcloud\.com/i", $url)) {
+			$oembed = "http://soundcloud.com/oembed?format=json&url=".$url;
 			$json = join("",file($oembed));
 			$json = json_decode($json);
 			$html = $json->{'html'};
