@@ -8,23 +8,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_configurer_reservation_evenement_saisies_dist(){
 
-    $liste_objets=lister_tables_objets_sql();
-    $statuts=array();
-    $statuts_selectionnees=array();
+	$liste_objets=lister_tables_objets_sql();
+	$statuts=array();
+	$statuts_selectionnees=array();
 	include_spip('inc/config');
 	include_spip('inc/plugin');
 	$config = lire_config('reservation_evenement',array());
 	$quand=isset($config['quand'])?$config['quand']:array();
-     //Le statuts du plugin, sauf en cours
-     foreach($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut=>$label){
-         if($statut!='encours')$statuts[$statut]=_T($label);
-		 if(in_array($statut,$quand))$statuts_selectionnees[$statut]=_T($label);
-     }
-     
+	//Le statuts du plugin, sauf en cours
+	foreach($liste_objets['spip_reservations']['statut_textes_instituer'] AS $statut=>$label){
+		if($statut!='encours')$statuts[$statut]=_T($label);
+		if(in_array($statut,$quand))$statuts_selectionnees[$statut]=_T($label);
+	}
+	 
 	$choix_expediteurs = array(
-			'webmaster' => _T('reservation:notifications_expediteur_choix_webmaster'),
-			'administrateur' => _T('reservation:notifications_expediteur_choix_administrateur'),
-			'email' => _T('reservation:notifications_expediteur_choix_email')
+		'webmaster' => _T('reservation:notifications_expediteur_choix_webmaster'),
+		'administrateur' => _T('reservation:notifications_expediteur_choix_administrateur'),
+		'email' => _T('reservation:notifications_expediteur_choix_email')
 	);
 	
 	if (defined('_DIR_PLUGIN_FACTEUR')){
@@ -39,31 +39,31 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 				'label' => _T('reservation_evenement:cfg_titre_parametrages')
 			),
 
-            'saisies' => array(
-               array(
-                    'saisie' => 'selection',
-                    'options' => array(
-                        'nom' => 'statut_defaut',
-                        'datas' => $statuts,
-                        'defaut'=> 'valide',
-                        'cacher_option_intro' => 'on',
-                        'label' => _T('reservation:label_statut_defaut'),
-                        'defaut'=> $config['statut_defaut']
-                    )
-                ), 
-                array(
-                    'saisie' => 'selection_multiple',
-                    'options' => array(
-                        'nom' => 'statuts_complet',
-                        'datas' => $statuts,
-                        'defaut'=> 'valide',
-                        'cacher_option_intro' => 'on',
-                        'label' => _T('reservation:label_statuts_complet'),
-                        'explication' => _T('reservation:statuts_complet_explication'),                       
-                        'defaut'=> $config['statuts_complet']
-                    )
-                ),                                             
-            )            
+			'saisies' => array(
+			   array(
+					'saisie' => 'selection',
+					'options' => array(
+						'nom' => 'statut_defaut',
+						'datas' => $statuts,
+						'defaut'=> 'valide',
+						'cacher_option_intro' => 'on',
+						'label' => _T('reservation:label_statut_defaut'),
+						'defaut'=> $config['statut_defaut']
+					)
+				), 
+				array(
+					'saisie' => 'selection_multiple',
+					'options' => array(
+						'nom' => 'statuts_complet',
+						'datas' => $statuts,
+						'defaut'=> 'valide',
+						'cacher_option_intro' => 'on',
+						'label' => _T('reservation:label_statuts_complet'),
+						'explication' => _T('reservation:statuts_complet_explication'),
+						'defaut'=> $config['statuts_complet']
+					)
+				),
+			)			
 		),
 		array(
 			'saisie' => 'fieldset',
@@ -224,7 +224,7 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 						'datas' => $statuts_selectionnees,
 						'defaut' => $config['envoi_separe']
 					)
-				)															
+				)
 			)
 		)
 	);
