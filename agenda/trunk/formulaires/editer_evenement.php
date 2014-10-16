@@ -74,22 +74,23 @@ function evenements_edit_config(){
 
 function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
 	$erreurs = formulaires_editer_objet_verifier('evenement',$id_evenement,array('titre','date_debut','date_fin'));
-
 	include_spip('inc/date_gestion');
 
 	$horaire = _request('horaire')=='non'?false:true;
-	$date_debut = verifier_corriger_date_saisie('debut',$horaire,$erreurs);
-	$date_fin = verifier_corriger_date_saisie('fin',$horaire,$erreurs);
+	if(!$erreurs['date_debut'])
+		$date_debut = verifier_corriger_date_saisie('debut',$horaire,$erreurs);
+	if(!$erreurs['date_fin'])
+		$date_fin = verifier_corriger_date_saisie('fin',$horaire,$erreurs);
 
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
 		$erreurs['date_fin'] = _T('agenda:erreur_date_avant_apres');
 
 	include_spip('formulaires/selecteur/selecteur_fonctions');
 	if (count($id = picker_selected(_request('parents_id'),'article'))
-	  AND $id = reset($id)
-	  AND $id = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
-	  // reinjecter dans id_parent
-	  set_request('id_parent',$id);
+		AND $id = reset($id)
+		AND $id = sql_getfetsel('id_article','spip_articles','id_article='.intval($id))){
+		// reinjecter dans id_parent
+		set_request('id_parent',$id);
 	}
 
 	if (!$id_parent = intval(_request('id_parent')))
@@ -118,8 +119,8 @@ function formulaires_editer_evenement_traiter_dist($id_evenement='new', $id_arti
 	// si c'est une creation dans un article publie, passer l'evenement en publie
 	// l'article peut être renseigné/modifié par l'utilisateur dans le formulaire. On le retrouve.
 	if (!intval($id_evenement)
-	  AND $id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.$res['id_evenement'])
-	  AND objet_test_si_publie('article',$id_article)){
+		AND $id_article = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement='.$res['id_evenement'])
+		AND objet_test_si_publie('article',$id_article)){
 		// sera refuse si auteur pas autorise
 		evenement_modifier($res['id_evenement'],array('statut'=>'publie'));
 	}
