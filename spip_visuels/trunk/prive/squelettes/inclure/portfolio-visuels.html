@@ -11,7 +11,13 @@
 	[(#ENV{objet}|=={rubrique}|oui)
 		[(#SET{chaine_langue_titre_boite,<:spip_visuels:titre_boite_rubrique:>})]
 	]
-	#BOITE_OUVRIR{#CHEMIN_IMAGE{spip_visuels-24.png}|balise_img{'',cadre-icone}|concat{#GET{chaine_langue_titre_boite}},'simple','titrem'}
+
+#SET{classes,'titrem'}
+[(#SPIP_VERSION|match{^3.1}|oui) #SET{classes,'titrem spip_3_1'} ]
+
+<div id='spip_visuels_box'>
+	#BOITE_OUVRIR{#CHEMIN_IMAGE{spip_visuels-32.png}|balise_img{'',cadre-icone}|concat{#GET{chaine_langue_titre_boite}},'simple',#GET{classes}}
+
 	<div class="liste" id='liste_visuels'>
 			<B_documents>
 			[<p class="pagination">(#PAGINATION)</p>]
@@ -32,13 +38,19 @@
 
 			<div class='ajax'>#FORMULAIRE_JOINDRE_VISUEL{#ENV{objet},#ENV{id_objet}}</div>
 	</div>
+
 	#BOITE_FERMER
+</div><!-- #spip_visuels_box -->
 
 <style>
+	#spip_visuels_box{clear: both}
 	/*#liste_visuels{background-color: #ffffff;border:1px solid #000000;padding: 5px;}*/
 	#liste_visuels .item .visuel, #liste_visuels .item .changer_type_visuel {float:left;}
 	#liste_visuels .item .lien_suppr_visuel {float:right;}
 	#liste_visuels .item .changer_type_visuel input, #liste_visuels .item .changer_type_visuel select {float: left;display: inline;height: 20px;}
 	#liste_visuels .item .changer_type_visuel select {margin-right: 20px;}
 	#liste_visuels .item .changer_type_visuel {width:250px;margin-left:102px;}
+	.simple .inner .spip_3_1{height: 25px;line-height: 25px;padding-left: 50px;}
+		.simple .inner .spip_3_1 h3{line-height: 25px;font-size: 13px;}
+		.simple .inner .spip_3_1 .cadre-icone{top: 3px;}
 </style>
