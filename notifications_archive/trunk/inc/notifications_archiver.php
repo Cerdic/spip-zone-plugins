@@ -12,9 +12,9 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function inc_notifications_archiver_dist($data=array()){
-    $data = pipeline('notifications_archive',$data);
+	$data = pipeline('notifications_archive',$data);
 
-    return  $data;
+	return  $data;
 }
 
 ?>
