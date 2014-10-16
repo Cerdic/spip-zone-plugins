@@ -39,6 +39,6 @@
 	</pipeline>
 	<fonctions>selection_interface_balises.php</fonctions>
 
-	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[3.0.0;3.1.*]" />
 	<categorie>navigation</categorie>
 </plugin>
