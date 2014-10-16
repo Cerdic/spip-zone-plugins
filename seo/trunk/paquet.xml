@@ -3,7 +3,7 @@
 	categorie="statistique"
 	version="2.1.2"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="seo.png"
 	schema="1.1.1"
 	documentation="http://contrib.spip.net/?rubrique1248"
