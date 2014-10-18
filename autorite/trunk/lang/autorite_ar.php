@@ -76,6 +76,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_menu_config' => 'السلطة',
+	'info_gere_rubriques' => 'يدير القسم التالي:',
+	'info_gere_rubriques_2' => 'ادير الأقسام التالية:',
 	'infos_selection' => '(يمكن تحديد عدة أقسام رئيسية بالضغط على مفتاح العالي)',
 	'interdire_admin' => 'حدد الخانات ادناه لمنع المدراء من إنشاء',
 
