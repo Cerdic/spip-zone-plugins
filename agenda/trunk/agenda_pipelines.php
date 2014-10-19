@@ -249,5 +249,28 @@ function agenda_compositions_declarer_heritage($heritages) {
 	return $heritages;
 }
 
+/**
+ * Insertion dans le pipeline revisions_chercher_label (Plugin révisions)
+ * Trouver le bon label à afficher sur les champs dans les listes de révisions
+ * 
+ * Si un champ est un champ extra, son label correspond au label défini du champs extra
+ * 
+ * @pipeline revisions_chercher_label
+ * @param array $flux Données du pipeline
+ * @return array      Données du pipeline
+**/ 
+function agenda_revisions_chercher_label($flux){
+	foreach(array('date_debut', 'date_fin','horaire','lieu') as $champ){
+		if($flux['args']['champ'] == $champ){
+			$flux['data'] = _T('agenda:evenement_'.$champ);
+			return $flux;
+		}
+	}
+	
+	if($flux['args']['champ'] == 'id_article')
+		$flux['data'] = _T('agenda:evenement_article');
+	
+	return $flux;
+}
 
 ?>

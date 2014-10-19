@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.14.3"
+	version="3.14.4"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -17,7 +17,7 @@
 	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
 	<auteur lien="http://www.cahri.com">Julien Tessier</auteur>
 
-	<copyright>2006-2013</copyright>
+	<copyright>2006-2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
@@ -36,6 +36,7 @@
 	<pipeline nom="post_edition" inclure="agenda_pipelines.php" />
 	<pipeline nom="post_edition_lien" inclure="agenda_pipelines.php" />
 	<pipeline nom="quete_calendrier_prive" inclure="agenda_pipelines.php" />
+	<pipeline nom="revisions_chercher_label" inclure="agenda_pipelines.php" />
 
 	<utilise nom="Fulltext" compatibilite="[0.6.6;[" />
 	<utilise nom="mots" compatibilite="[2.4.6;[" />
