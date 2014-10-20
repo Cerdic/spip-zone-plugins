@@ -91,8 +91,12 @@ function tooltip_jquery_plugins($plugins){
 function tooltip_jqueryui_plugins($plugins){
 	$f = chercher_filtre('info_plugin');
 	include_spip('plugins/installer');
-	if(function_exists('spip_version_compare') && spip_version_compare($f('jqueryui','version'),'1.10.1','>='))
-		$plugins[] = "jquery.ui.tooltip";
+	if(function_exists('spip_version_compare') && spip_version_compare($f('jqueryui','version'),'1.10.1','>=')){
+		if(spip_version_compare($f('jqueryui','version'),'1.11.2','>='))
+			$plugins[] = "tooltip";
+		else
+			$plugins[] = "jquery.ui.tooltip";
+	}
 	return $plugins;
 }
 ?>
