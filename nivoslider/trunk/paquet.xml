@@ -1,7 +1,7 @@
 <paquet
 	prefix="nivoslider"
 	categorie="multimedia"
-	version="3.1.5"
+	version="3.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/nivoslider-32.png"
@@ -16,8 +16,6 @@
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
 	<pipeline nom="insert_head_css" />
-	<pipeline nom="affichage_final" />
 	<pipeline nom="header_prive_css" action="insert_head_css" />
-	<pipeline nom="affichage_final_prive" action="affichage_final" />
 
 </paquet>

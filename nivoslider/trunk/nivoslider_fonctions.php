@@ -15,21 +15,6 @@ function nivoslider_insert_head_css($flux){
 	return $flux;
 }
 
-function nivoslider_affichage_final($texte){
-	if (($GLOBALS['html'] OR test_espace_prive())
-	  AND strpos($texte,"nivoSlider")!==false
-		AND stripos($texte,"</script>")
-	  AND $p = stripos($texte,"</body>")
-	){
-		$js = find_in_path('javascript/jquery.nivo.slider.pack.js');
-		lire_fichier(find_in_path('javascript/nivoslider.init.js'),$init);
-		$ins = '<script type="text/javascript">/*<![CDATA[*/
-if (typeof jQuery.fn.nivoSlider=="undefined") jQuery.getScript("'.$js.'",function(){'.$init.'});/*]]>*/</script>';
-		$texte = substr_replace($texte,$ins,$p,0);
-	}
-	return $texte;
-}
-
 
 /**
  * Mise en forme de la balise img : src direct ou gif transparent selon le cas
