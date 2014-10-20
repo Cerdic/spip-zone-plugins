@@ -3,12 +3,12 @@
 
 En cours de réflexions…
 
-Ce n'est pas très simples pour plusierus raisons.
+Ce n'est pas très simples pour plusieurs raisons.
 
 1) On ne peut pas transmettre le mot de passe (de façon sécurisée).
    Soit il faut une clé entre serveurs, soit il faut le programme 'sshpass'
 
-2) Il faut que les utilisateurs avec qui on se connectent aient les droits
+2) Il faut que les utilisateurs avec qui on se connecte aient les droits
    corrects sur les répertoires.
 
    Sinon il faut qu'ils soient sudoers, ce qui entraine encore d'autres
@@ -18,8 +18,8 @@ Ce n'est pas très simples pour plusierus raisons.
 ## Établir une connexion SSH entre serveur, avec clé
 
 Lorsque le site de distination n'est pas sur le même serveur
-que le site source, il est nécessaire, si certaines actions tel que
-rsync ou export SQL sont à réaliser, de passer par une connexion SSH.
+que le site source, il est nécessaire – si certaines actions tel que
+rsync ou export SQL sont à réaliser – de passer par une connexion SSH.
 
 Cette connexion SSH doit se dérouler sans demande de mot de passe, c'est
 à dire par la création d'une clé ssh sur le sur le serveur destination.
