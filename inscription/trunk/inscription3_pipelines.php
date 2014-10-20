@@ -710,8 +710,8 @@ function inscription3_formulaire_traiter($flux){
 					}
 					if($config_i3['auto_login'] == 'on'){
 						$auteur = sql_fetsel('*','spip_auteurs','id_auteur='.intval($user['id_auteur']));
-						$session = charger_fonction('session','inc');
-						$session($auteur);
+						include_spip('inc/auth');
+						auth_loger($auteur);
 						$traiter_plugin['message_ok'] = _T('inscription3:form_retour_inscription_pass_logue');
 					}
 				}else{
