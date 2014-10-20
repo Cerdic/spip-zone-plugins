@@ -1,9 +1,9 @@
 <paquet
 	prefix="selecteurgenerique"
 	categorie="outil"
-	version="0.8.7"
+	version="0.8.8"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/selecteur_generique-64.png"
 	documentation="http://contrib.spip.net/Selecteur-generique"
 >	
