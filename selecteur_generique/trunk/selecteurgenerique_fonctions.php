@@ -10,7 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function selecteurgenerique_verifier_js($flux){
 	include_spip('inc/plugin');
 	if(spip_version_compare($spip_version_branche,"3.1.0",'<'))
-		$prep = "'.$prep.'";
+		$prep = "jquery.ui.";
 	$contenu = "";
 		/**
 		 * On a besoin de '.$prep.'autocomplete.js et de ses dépendances
