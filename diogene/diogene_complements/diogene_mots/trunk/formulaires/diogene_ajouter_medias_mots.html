@@ -2,7 +2,7 @@
 <B_groupes>
 <li class="fieldset diogene_mots">
 	<fieldset>
-		<legend><:diogene_mots:form_legend_public:></legend>
+		<legend>[(#ENV{legende,<:diogene_mots:form_legend_public:>})]</legend>
 		<ul>
 		<BOUCLE_groupes(GROUPES_MOTS){id_groupe IN #ENV{id_groupes}}{par num titre,titre}>
 		[(#UNSEUL|=={non}|?{#SET{multiple,oui},#SET{multiple,non}})]
