@@ -7,6 +7,10 @@
 [(#SET{largeur_defaut,560})]
 [(#SET{titre_descriptif_defaut,non})]
 [(#SET{liste_definition_defaut,non})]
+[(#SET{afficher_suggestions_defaut,non})]
+[(#SET{afficher_commandes_defaut,oui})]
+[(#SET{afficher_titres_et_actions_defaut,oui})]
+[(#SET{mode_confidentialite_defaut,oui})]
 
 <div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
 
@@ -73,6 +77,61 @@
 					</li>
 				</ul>
 			</li>
+
+			<li class="fieldset">
+				<h3 class="legend"><:videos:cfg_titre_configurations_youtube:></h3>
+				<ul>
+					<li>
+						<label for="liste_definition"><:videos:cfg_label_mode_confidentialite:></label>
+						<p class='explication'><:videos:cfg_explication_mode_confidentialite:></p>
+						<div class="choix">
+							<input type="radio" name="mode_confidentialite" class="radio" id="mode_confidentialite_on" value="oui" [(#ENV{mode_confidentialite,#GET{mode_confidentialite_defaut}}|=={oui}|oui) checked="checked"] />
+							<label for='mode_confidentialite_on'><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="mode_confidentialite" class="radio" id="mode_confidentialite_off" value="non" [(#ENV{mode_confidentialite,#GET{mode_confidentialite_defaut}}|=={non}|oui) checked="checked"] />
+							<label for='mode_confidentialite_off'><:item_non:></label>
+						</div>
+					</li>
+					<li>
+						<label for="liste_definition"><:videos:cfg_label_afficher_commandes:></label>
+						<p class='explication'><:videos:cfg_explication_afficher_commandes:></p>
+						<div class="choix">
+							<input type="radio" name="afficher_commandes" class="radio" id="afficher_commandes_on" value="oui" [(#ENV{afficher_commandes,#GET{afficher_commandes_defaut}}|=={oui}|oui) checked="checked"] />
+							<label for='afficher_commandes_on'><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="afficher_commandes" class="radio" id="afficher_commandes_off" value="non" [(#ENV{afficher_commandes,#GET{afficher_commandes_defaut}}|=={non}|oui) checked="checked"] />
+							<label for='afficher_commandes_off'><:item_non:></label>
+						</div>
+					</li>
+					<li>
+						<label for="liste_definition"><:videos:cfg_label_afficher_titres_et_actions:></label>
+						<p class='explication'><:videos:cfg_explication_afficher_titres_et_actions:></p>
+						<div class="choix">
+							<input type="radio" name="afficher_titres_et_actions" class="radio" id="afficher_titres_et_actions_on" value="oui" [(#ENV{afficher_titres_et_actions,#GET{afficher_titres_et_actions_defaut}}|=={oui}|oui) checked="checked"] />
+							<label for='afficher_titres_et_actions_on'><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="afficher_titres_et_actions" class="radio" id="afficher_titres_et_actions_off" value="non" [(#ENV{afficher_titres_et_actions,#GET{afficher_titres_et_actions_defaut}}|=={non}|oui) checked="checked"] />
+							<label for='afficher_titres_et_actions_off'><:item_non:></label>
+						</div>
+					</li>
+					<li>
+						<label for="liste_definition"><:videos:cfg_label_afficher_suggestions:></label>
+						<p class='explication'><:videos:cfg_explication_afficher_suggestions:></p>
+						<div class="choix">
+							<input type="radio" name="afficher_suggestions" class="radio" id="afficher_suggestions_on" value="oui" [(#ENV{afficher_suggestions,#GET{afficher_suggestions_defaut}}|=={oui}|oui) checked="checked"] />
+							<label for='afficher_suggestions_on'><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="afficher_suggestions" class="radio" id="afficher_suggestions_off" value="non" [(#ENV{afficher_suggestions,#GET{afficher_suggestions_defaut}}|=={non}|oui) checked="checked"] />
+							<label for='afficher_suggestions_off'><:item_non:></label>
+						</div>
+					</li>
+				</ul>
+			</li>
+
 		[(#REM)
 			<li class="fieldset">
 				<h3 class="legend"><:videos:cfg_titre_configurations_dailymotion:></h3>
@@ -86,16 +145,6 @@
 		[(#REM)
 			<li class="fieldset">
 				<h3 class="legend"><:videos:cfg_titre_configurations_vimeo:></h3>
-				<ul>
-					<li>
-						<p>En travaux...</p>
-					</li>
-				</ul>
-			</li>]
-
-			[(#REM)
-			<li class="fieldset">
-				<h3 class="legend"><:videos:cfg_titre_configurations_youtube:></h3>
 				<ul>
 					<li>
 						<p>En travaux...</p>

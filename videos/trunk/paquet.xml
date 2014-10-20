@@ -1,7 +1,7 @@
 <paquet
 	prefix="videos"
 	categorie="multimedia"
-	version="0.10.10"
+	version="0.10.11"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="theme/img/videos-32.png"

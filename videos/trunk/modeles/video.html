@@ -6,6 +6,10 @@
 #SET{wmode,#ENV{wmode,#CONFIG{videos/wmode,'opaque'}}}
 #SET{responsive,#ENV{responsive,#CONFIG{videos/responsive,'oui'}}}
 #SET{liste_definition,#ENV{liste_definition,#CONFIG{videos/liste_definition,'non'}}}
+#SET{afficher_suggestions,#ENV{afficher_suggestions,#CONFIG{videos/afficher_suggestions,'non'}}}
+#SET{afficher_commandes,#ENV{afficher_commandes,#CONFIG{videos/afficher_commandes,'oui'}}}
+#SET{afficher_titres_et_actions,#ENV{afficher_titres_et_actions,#CONFIG{videos/afficher_titres_et_actions,'oui'}}}
+#SET{mode_confidentialite,#ENV{mode_confidentialite,#CONFIG{videos/mode_confidentialite,'oui'}}}
 
 [(#REM) "Extensions" gérées ou rajoutées par le plugin
 <!--
@@ -111,7 +115,11 @@
 ]
 	[(#EXTENSION|=={dist_youtu}|oui)
 		[(#GET{responsive}|=={oui}|oui)<div class="capsule-video"><div class="mini_capsule-video">]
-			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="//www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0" allowfullscreen class="youtube-player"></iframe>
+			#SET{url_youtube,//www.youtube-nocookie.com/embed}
+			[(#GET{mode_confidentialite}|=={non}|oui)#SET{url_youtube,//www.youtube.com/embed}]
+			[(#SET{url_complete,
+				#GET{url_youtube}/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}[&amp;rel=0(#GET{afficher_suggestions}|=={non}|oui)][&amp;controls=0(#GET{afficher_commandes}|=={non}|oui)][&amp;showinfo=0(#GET{afficher_titres_et_actions}|=={non}|oui)]})]
+			<iframe[ title="(#GET{titre_video}|couper{80})"] width="#GET{largeur}" height="#GET{hauteur}" src="[(#GET{url_complete}|replace{' ',''})]" frameborder="0" allowfullscreen class="youtube-player"></iframe>
 		[(#GET{responsive}|=={oui}|oui)</div></div> <!-- .capsule-video .mini_capsule-video -->]
 	]
 
