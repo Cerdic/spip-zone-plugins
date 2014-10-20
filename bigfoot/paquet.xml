@@ -1,0 +1,22 @@
+<paquet
+	prefix="bigfoot"
+	categorie="divers"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="bigfoot-128.png"
+	documentation=""
+>
+
+	<nom>Bigfoot</nom>
+	<!-- Des infobulles pour les notes de bas de page -->
+
+	<auteur>b_b</auteur>
+	<credit lien="https://github.com/lemonmade/bigfoot">Chris Sauve</credit>
+	<licence>MIT</licence>
+
+	<pipeline nom="insert_head" inclure="bigfoot_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="bigfoot_pipelines.php" />
+	<pipeline nom="header_prive" inclure="bigfoot_pipelines.php" />
+	
+</paquet>
