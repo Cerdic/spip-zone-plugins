@@ -220,12 +220,18 @@ function migrateur_exemple_supprimer_vignettes_logos() {
  * l'uptime du serveur
 **/
 function migrateur_test_ssh_uptime() {
-
 	$ssh = migrateur_source_ssh();
-	$cmd = migrateur_obtenir_commande_serveur('ssh');
-
-	$run = "$cmd  -o StrictHostKeyChecking=no -p {$ssh->port} {$ssh->user}@{$ssh->server} uptime 2>&1";
-	migrateur_log($run);
-	exec($run, $output, $err);
-	migrateur_log(implode("\n", $output));
+	if ($ssh) {
+		$cmd = $ssh->obtenir_commande_serveur();
+		if ($cmd) {
+			$run = "$cmd uptime 2>&1";
+			migrateur_log($run);
+			exec($run, $output, $err);
+			migrateur_log(implode("\n", $output));
+		} else {
+			migrateur_log("Pas de commande 'ssh' locale !");
+		}
+	} else {
+		migrateur_log("Pas de serveur distant défini.");
+	}
 }

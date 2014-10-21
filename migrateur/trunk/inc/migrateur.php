@@ -57,6 +57,18 @@ class Migrateur_SSH {
 		}
 		return $this->$prop;
 	}
+
+	/**
+	 * Retourne la commande d'exécution
+	 *
+	 * Retourne 'ssh -o StrictHostKeyChecking=no -p XX user@serveur.tld'
+	 * @return string
+	**/
+	public function obtenir_commande_serveur() {
+		$cmd = migrateur_obtenir_commande_serveur('ssh');
+		if (!$cmd) return false;
+		return "$cmd -o StrictHostKeyChecking=no -p {$this->port} {$this->user}@{$this->server}";
+	}
 }
 
 /**
