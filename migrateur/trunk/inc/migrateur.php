@@ -59,7 +59,7 @@ class Migrateur_SSH {
 	}
 
 	/**
-	 * Retourne la commande d'exécution
+	 * Retourne la commande d'exécution pour se connecter à ce serveur
 	 *
 	 * Retourne 'ssh -o StrictHostKeyChecking=no -p XX user@serveur.tld'
 	 * @return string
@@ -69,6 +69,43 @@ class Migrateur_SSH {
 		if (!$cmd) return false;
 		return "$cmd -o StrictHostKeyChecking=no -p {$this->port} {$this->user}@{$this->server}";
 	}
+
+	/**
+	 * Obtient le chemin d'un executable sur un serveur distant.
+	 *
+	 * @example
+	 *     ```
+	 *     $ssh = migrateur_source_ssh();
+	 *     $cmd_ssh = $ssh->obtenir_commande_serveur();
+	 *     $cmd = $ssh->obtenir_commande_serveur_distant('mysqldump');
+	 *     if ($cmd) 
+	 *         exec("$cmd_ssh $cmd ...");
+	 *     }
+	 *     ```
+	 * @param string $command
+	 *     Nom de la commande
+	 * @return string
+	 *     Chemin de la commande
+	**/
+	function obtenir_commande_serveur_distant($command) {
+		static $commands = array();
+		if (array_key_exists($command, $commands)) {
+			return $commands[$command];
+		}
+	
+		$ssh_cmd = $this->obtenir_commande_serveur();
+		if (!$ssh_cmd) {
+			return $commands[$command] = '';
+		}
+		exec("$ssh_cmd which $command", $output, $err);
+		if (!$err and count($output) and $cmd = trim($output[0])) {
+			migrateur_log("Commande distante '$command' trouvée dans $cmd");
+			return $commands[$command] = $cmd;
+		}
+		migrateur_log("/!\ Commande distante '$command' introuvable sur le serveur…");
+		return $commands[$command] = '';
+	}
+
 }
 
 /**
@@ -144,14 +181,21 @@ function migrateur_vider_cache() {
  *     Chemin de la commande
 **/
 function migrateur_obtenir_commande_serveur($command) {
+	static $commands = array();
+	if (array_key_exists($command, $commands)) {
+		return $commands[$command];
+	}
+	
 	exec("which $command", $output, $err);
 	if (!$err and count($output) and $cmd = trim($output[0])) {
 		migrateur_log("Commande '$command' trouvée dans $cmd");
-		return $cmd;
+		return $commands[$command] = $cmd;
 	}
 	migrateur_log("/!\ Commande '$command' introuvable sur ce serveur…");
-	return '';
+	return $commands[$command] = '';
 }
+
+
 
 /**
  * Calcule un numéro de branche depuis une version donnée, ou depuis la version de spip actuellement utilisé
