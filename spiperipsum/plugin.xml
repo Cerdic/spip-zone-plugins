@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SPIPer Ipsum</nom>
 	<auteur>Eric Lupinacci, Gwen (id&#233;e et ic&#244;ne du plugin)</auteur>
-	<version>1.5.3</version>
+	<version>1.6.0</version>
 	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
 	<slogan>Saint et &#233;vangile au quotidien</slogan>
@@ -19,5 +19,5 @@ Essayez la page de d&#233;mo {demo/spiperipsum.html} pour des exemples d'utilisa
 	<fonctions>spiperipsum_fonctions.php</fonctions>
 	<options>spiperipsum_options.php</options>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 </plugin>

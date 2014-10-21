@@ -386,36 +386,55 @@ function charger_lectures($langue, $jour) {
 	$cache = $dir . $code_langue . "_" . $date . ".txt";
 
 	if (!file_exists($cache) OR _SPIPERIPSUM_FORCER_CHARGEMENT) {
-		// Determination de la sous-chaine url correspondant a la date (vide si jour courant)
-		$url_date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? '' : date2url_date($date);
-		// Url de base de tous les flux
-		$url_base = 'http://feed.evangelizo.org/reader.php?lang=' . $code_langue . '&date=' . date('Ymd', strtotime($date));
-
-		// traitement des différentes versions de la date
-		$tableau['date'] = flux2date($url_base, $charset, $date);
-
-		// Traitement de l'evangile
-		$tableau['evangile'] = flux2lecture(_SPIPERIPSUM_LECTURE_EVANGILE, $url_base, $charset, $lettrine);
-
-		// Traitement de la premiere lecture
-		$tableau['premiere'] = flux2lecture(_SPIPERIPSUM_LECTURE_PREMIERE, $url_base, $charset, $lettrine);
-
-		// Traitement de la seconde lecture - uniquement le dimanche
-		if (date2jour_semaine($date) == 0) {
-			$tableau['seconde'] = flux2lecture(_SPIPERIPSUM_LECTURE_SECONDE, $url_base, $charset, $lettrine);
+		$tableau = false;
+		// recuperer via endpoint centralise si defini et si c'est pas le site courant ! :)
+		// define('_SPIPERIPSUM_EVANGILE_ENDPOINT','http://example.org/evangile.api/');
+		if (defined('_SPIPERIPSUM_EVANGILE_ENDPOINT')
+			AND strpos(_SPIPERIPSUM_EVANGILE_ENDPOINT,$GLOBALS['meta']['adresse_site'])===false){
+			$url = _SPIPERIPSUM_EVANGILE_ENDPOINT . "$langue/$date";
+			include_spip("inc/distant");
+			$res = recuperer_page($url);
+			if (!function_exists('json_decode'))
+				include_spip("inc/json");
+			if ($res
+			  AND $res = json_decode($res,true)){
+				$tableau = $res;
+			}
 		}
+		// sinon ou si echec, aller chercher chez evangelizo en 16 requetes...
+		if (!$tableau) {
+			$tableau = array();
+			// Determination de la sous-chaine url correspondant a la date (vide si jour courant)
+			$url_date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? '' : date2url_date($date);
+			// Url de base de tous les flux
+			$url_base = 'http://feed.evangelizo.org/reader.php?lang=' . $code_langue . '&date=' . date('Ymd', strtotime($date));
 
-		// Traitement du psaume
-		$tableau['psaume'] = flux2lecture(_SPIPERIPSUM_LECTURE_PSAUME, $url_base, $charset, $lettrine);
+			// traitement des différentes versions de la date
+			$tableau['date'] = flux2date($url_base, $charset, $date);
 
-		// Traitement du commentaire
-		$tableau['commentaire'] = flux2commentaire($url_base, $charset);
+			// Traitement de l'evangile
+			$tableau['evangile'] = flux2lecture(_SPIPERIPSUM_LECTURE_EVANGILE, $url_base, $charset, $lettrine);
 
-		// Traitement du saint du jour
-		$tableau['saint'] = flux2saint($url_base, $charset);
+			// Traitement de la premiere lecture
+			$tableau['premiere'] = flux2lecture(_SPIPERIPSUM_LECTURE_PREMIERE, $url_base, $charset, $lettrine);
 
-		// Traitement de la fête du jour
-		$tableau['fete'] = flux2fete($url_base, $charset);
+			// Traitement de la seconde lecture - uniquement le dimanche
+			if (date2jour_semaine($date) == 0) {
+				$tableau['seconde'] = flux2lecture(_SPIPERIPSUM_LECTURE_SECONDE, $url_base, $charset, $lettrine);
+			}
+
+			// Traitement du psaume
+			$tableau['psaume'] = flux2lecture(_SPIPERIPSUM_LECTURE_PSAUME, $url_base, $charset, $lettrine);
+
+			// Traitement du commentaire
+			$tableau['commentaire'] = flux2commentaire($url_base, $charset);
+
+			// Traitement du saint du jour
+			$tableau['saint'] = flux2saint($url_base, $charset);
+
+			// Traitement de la fête du jour
+			$tableau['fete'] = flux2fete($url_base, $charset);
+		}
 
  		ecrire_fichier($cache, serialize($tableau));
 	}
