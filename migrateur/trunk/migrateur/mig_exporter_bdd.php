@@ -17,6 +17,7 @@ function migrateur_mig_exporter_bdd() {
 
 	$output = "";
 	exec("rm $dest$source_sql;");
+	exec("rm $dest$source_sql.gz;");
 
 	// source et destination sur serveurs différents
 	if ($ssh = migrateur_source_ssh()) {
@@ -25,10 +26,29 @@ function migrateur_mig_exporter_bdd() {
 		$cmd = $ssh->obtenir_commande_serveur_distant('mysqldump');
 
 		if ($ssh_cmd and $cmd) {
+			$gzip = $ssh->obtenir_commande_serveur_distant('gzip');
+			$gunzip = migrateur_obtenir_commande_serveur('gunzip');
+			if ($gzip and $gunzip) {
+				migrateur_log("Gzip présents : utilisation de compression");
+			}
 			migrateur_log("Exécution de mysqldump distant…");
-			$run = "$ssh_cmd \"$cmd -u $user --password=$pass $bdd\" > $dest$source_sql 2>&1";
+			if ($gzip) {
+				$run = "$ssh_cmd \"$cmd -u $user --password=$pass $bdd | $gzip\" > $dest$source_sql.gz 2>&1";
+			} else {
+				$run = "$ssh_cmd \"$cmd -u $user --password=$pass $bdd\" > $dest$source_sql 2>&1";
+			}
 			#migrateur_log($run);
 			exec($run, $output, $err);
+
+			if (!$err and $gzip) {
+				exec("$gunzip $dest$source_sql.gz", $goutput, $gerr);
+				if ($gerr) {
+					migrateur_log("! Erreurs de décompression : $gerr");
+				} else {
+					migrateur_log("Décompression OK");
+					migrateur_log( implode("\n", $goutput) );
+				}
+			}
 
 			if ($err) {
 				migrateur_log("! Erreurs survenues : $err");
