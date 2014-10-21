@@ -86,6 +86,7 @@ function langue2code($langue) {
 }
 
 function code2charset($code_langue) {
+
 	switch(strtoupper($code_langue))
 	{
 		case 'FR':
@@ -155,8 +156,8 @@ function page2page_propre($page, $charset, $no_tag=false) {
 	);
 	static $nettoyage_charset = array(
 				'iso-8859-1' => array(
-						'regexp' => array('#Å#UimsS', ',Ü,UimsS'),
-						'replace' => array('&oelig;', '&dagger;')),
+						'regexp' => array('#Å#UimsS', ',Ü,UimsS', ',ââ¢,Uims', ',â¦,Uims' ),
+						'replace' => array('&oelig;', '&dagger;', '&#8217;', '…')),
 	);
 
 	$regexp = $nettoyage_commun['regexp'];
@@ -416,7 +417,6 @@ function charger_lectures($langue, $jour) {
 		// Traitement de la fête du jour
 		$tableau['fete'] = flux2fete($url_base, $charset);
 
-//		var_dump($tableau);
  		ecrire_fichier($cache, serialize($tableau));
 	}
 	return $cache;
