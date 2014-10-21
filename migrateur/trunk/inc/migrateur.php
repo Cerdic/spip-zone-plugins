@@ -26,6 +26,73 @@ function migrateur_log($msg, $type="") {
 
 
 /**
+ * Stocker les données de connexion à un serveur via ssh
+**/
+class Migrateur_SSH {
+	private $server = '';
+	private $port = 22;
+	private $user = '';
+
+	/**
+	 * Constructeur. 
+	 *
+	 * Permet de passer un tableau de couples de données (cle => valeur)
+	**/
+	public function __construct($props = array()) {
+		if (is_array($props)) {
+			foreach($props as $prop => $val) {
+				if (property_exists($this, $prop)) {
+					$this->$prop = $val;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Permet d'obtenir une propriété de la classe
+	**/
+	public function __get($prop) {
+		if (!property_exists($this, $prop)) {
+			throw new Exception("Paramètre " . $prop . " inconnu");
+		}
+		return $this->$prop;
+	}
+}
+
+/**
+ * Retourne les données d'accès au serveur source s'il est par SSH
+ * 
+ * Si le SPIP source se trouve sur un autre serveur que le SPIP de distination
+ * (là où on execute le plugin migrateur), alors des données
+ * de connexion SSH sont définies.
+ *
+ * Si elles sont là, on les retoune
+ *
+ * @return null|Migrateur_SSH
+ *     Données de connexion SSH si définies
+**/
+function migrateur_source_ssh() {
+	$props = array();
+
+	foreach (array(
+		'MIGRATEUR_SOURCE_SSH_SERVER' => 'server', 
+		'MIGRATEUR_SOURCE_SSH_USER' => 'user', 
+		'MIGRATEUR_SOURCE_SSH_PORT' => 'port'
+	) as $const => $prop) { 
+		if (defined($const) and constant($const)) {
+			$props[$prop] = constant($const);
+		}
+	}
+
+	if (isset($props['server'])) {
+		return new Migrateur_SSH($props);
+	}
+
+	return null;
+}
+
+
+/**
  * Vider les caches, tous les caches !
  *
  * Vider le cache de SPIP (voir action/purger.php)

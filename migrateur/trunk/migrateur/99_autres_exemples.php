@@ -24,7 +24,7 @@ function migrateur_exemple_installer_plugins() {
 /**
  * Configurer des metas
 **/
-function migration_exemple_configurer_site() {
+function migrateur_exemple_configurer_site() {
 	ecrire_meta('adresse_site', "http://www2.exemple.com");
 	ecrire_meta('image_process', "gd2");
 	ecrire_meta('type_urls', "arbo");
@@ -37,7 +37,7 @@ function migration_exemple_configurer_site() {
 /**
  * Configurer des metas (exemple inc/config)
 **/
-function migration_exemple_configurer_site() {
+function migrateur_exemple_configurer_site2() {
 	include_spip('inc/config');
 	ecrire_config('adresse_site', "http://www2.exemple.com");
 	ecrire_config('image_process', "gd2");
@@ -76,7 +76,7 @@ function migrateur_exemple_definir_compositions() {
 /**
  * Supprimer des tables
 **/
-function migration_exemple_nettoyage_sql() {
+function migrateur_exemple_nettoyage_sql() {
 	sql_drop_table('spip_ortho_cache');
 	sql_drop_table('spip_ortho_dico');
 	sql_drop_table('spip_geo_pays');
@@ -86,7 +86,7 @@ function migration_exemple_nettoyage_sql() {
 /**
  * Supprimer des tables (autre exemple)
 **/
-function migration_exemple_supprimer_tables_inutiles() {
+function migrateur_exemple_supprimer_tables_inutiles() {
 	$tables = sql_alltable('%');
 	sort($tables);
 	foreach($tables as $table) {
@@ -111,7 +111,7 @@ function migration_exemple_supprimer_tables_inutiles() {
  * 
  * S'appuie sur migrateur_deplacer_table_complete()
 **/
-function migration_exemple_migrer_projets_cadres() {
+function migrateur_exemple_migrer_projets_cadres() {
 	// migrer les projets cadres
 	$ok = migrateur_deplacer_table_complete('spip_types_facturation', 'spip_projets_cadres', array(
 		'id_type_facturation'   => 'id_projets_cadre',
@@ -201,7 +201,7 @@ function proj_callback_factures_ligne($couples_inseres, $couples_anciens) {
 /**
  * Suppression des vignettes de logo de SPIP 1.8.3
 **/ 
-function migration_exemple_supprimer_vignettes_logos() {
+function migrateur_exemple_supprimer_vignettes_logos() {
 	$ori = MIGRATEUR_DESTINATION_DIR . 'IMG/';
 	foreach (scandir($ori) as $filename) {
 		if (preg_match('/.*-[0-9]+x[0-9]+\.(jpg|gif|png)/i', $filename)) {
@@ -210,3 +210,22 @@ function migration_exemple_supprimer_vignettes_logos() {
 	}
 }
 
+
+
+
+/**
+ * Test ssh uptime
+ *
+ * Tente de se connecter en ssh au serveur source et d'obtenir
+ * l'uptime du serveur
+**/
+function migrateur_test_ssh_uptime() {
+
+	$ssh = migrateur_source_ssh();
+	$cmd = migrateur_obtenir_commande_serveur('ssh');
+
+	$run = "$cmd  -o StrictHostKeyChecking=no -p {$ssh->port} {$ssh->user}@{$ssh->server} uptime 2>&1";
+	migrateur_log($run);
+	exec($run, $output, $err);
+	migrateur_log(implode("\n", $output));
+}

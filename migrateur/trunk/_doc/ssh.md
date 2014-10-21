@@ -40,6 +40,27 @@ Il est peut être nécessaire de faire redemander la passphrase à ssh :
 
 
 
+## Migrer d'un serveur distant en local sous ubuntu
+
+1) Il faut que apache ait une clé publique en local
+
+    sudo mkdir /var/www/.ssh
+    sudo chown -R www-data:nobody /var/www/.ssh/
+    sudo -u www-data ssh-keygen -t rsa
+
+2) Il faut ajouter sa clé sur le serveur distant
+
+    Se connecter au serveur avec l'utilisateur désiré et ajouter
+    le contenu de /var/www/.ssh/id_rsa.pub (local) dans ~/.ssh/authorized_keys2
+    sur 1 seule nouvelle ligne.
+
+Dans les tests, en cas de réponse "Host key verification failed", voir
+http://askubuntu.com/questions/45679/ssh-connection-problem-with-host-key-verification-failed-error.
+
+Une solution est d'appeler SSH avec `-o StrictHostKeyChecking=no` systématiquement
+
+
+
 ## Rsync avec utilisateur sudoer
 
 Rien n'est simple dans ce monde. Si l'utilisateur qui se connecte a des
