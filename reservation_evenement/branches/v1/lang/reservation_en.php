@@ -86,7 +86,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_vendeur_choix_webmaster' => 'one or more webmasters',
 	'notifications_vendeur_email_explication' => 'Enter one or more email separated by commas:',
 	'notifications_vendeur_email_label' => 'Emails for vendor alerts:',
-	'notifications_vendeur_explication' => 'Choose (the) recipient(s) for the vendor alerts',
 	'notifications_vendeur_label' => 'Vendor',
 	'notifications_vendeur_webmaster_label' => 'Select one or more webmasters:',
 

@@ -12,14 +12,14 @@ function inc_statuts_complet_dist(){
 		$statut=charger_fonction('defaut','inc/statut');
 		$statut_defaut=$statut($statut_defaut);
 		$statuts=array($statut_defaut);
-		}	
+		}
 	return $statuts;
 }
 
 function inc_statut_defaut_dist($statut=''){
 	if(!$statut OR $statut=='rien'){
 		include_spip('inc/config');
-		if(!$statut=lire_config('reservation_evenement/statut_defaut'))$statut='attente';		
+		if(!$statut=lire_config('reservation_evenement/statut_defaut'))$statut='attente';
 	}		
 	return $statut;
 }
