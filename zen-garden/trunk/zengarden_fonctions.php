@@ -77,7 +77,7 @@ function zengarden_liste_themes($tous){
 	 * 
 	 * Pour être compatible un thème doit avoir un <utilise...> du squelette en question dans son paquet.xml
 	 */
-	$search = "";
+	$search = "dist";
 	if (defined('_ZENGARDEN_FILTRE_THEMES')) $search=_ZENGARDEN_FILTRE_THEMES;
 	elseif (defined('_DIR_PLUGIN_ZPIP')) $search="zpip";
 	elseif (defined('_DIR_PLUGIN_Z')) $search="z";
@@ -117,6 +117,31 @@ function zengarden_filtrer_liste_plugins($flux){
 		}
 	}
 	return $flux;
+}
+
+
+
+/**
+ * Afficher les auteurs ou licences
+ *
+ * Vient de plugin.xml ou paquet.xml
+ * 
+ * @param array $donnees
+ * @return string
+**/
+function zengarden_affiche_info($donnees) {
+	if (count($donnees)) {
+		$liste = array();
+		foreach ($donnees as $d) {
+			if (!is_array($d)) {
+				$liste[] = $d;
+			} else {
+				$liste[] = $d['nom'];
+			}
+		}
+		return implode(',', $liste);
+	}
+	return '';
 }
 
 ?>
