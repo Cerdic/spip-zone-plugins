@@ -58,7 +58,7 @@ function migrateur_exemple_configurer_site3() {
 	$prefixe_dev = "*** DEV *** ";
 	$nom_site = lire_config('nom_site');
 	$nom_site = str_replace($prefixe_dev, '', $nom_site);
-	ecrire_config('nom_site', $dev . $nom_site);
+	ecrire_config('nom_site', $prefixe_dev . $nom_site);
 	migrateur_log("Nom du site changé en $nom_site");
 }
 
