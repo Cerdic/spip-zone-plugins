@@ -386,13 +386,13 @@ function charger_lectures($langue, $jour) {
 	$cache = $dir . $code_langue . "_" . $date . ".txt";
 
 	if (!file_exists($cache) OR _SPIPERIPSUM_FORCER_CHARGEMENT) {
+		include_spip("inc/distant");
 		$tableau = false;
 		// recuperer via endpoint centralise si defini et si c'est pas le site courant ! :)
 		// define('_SPIPERIPSUM_EVANGILE_ENDPOINT','http://example.org/evangile.api/');
 		if (defined('_SPIPERIPSUM_EVANGILE_ENDPOINT')
 			AND strpos(_SPIPERIPSUM_EVANGILE_ENDPOINT,$GLOBALS['meta']['adresse_site'])===false){
 			$url = _SPIPERIPSUM_EVANGILE_ENDPOINT . "$langue/$date";
-			include_spip("inc/distant");
 			$res = recuperer_page($url);
 			if (!function_exists('json_decode'))
 				include_spip("inc/json");
