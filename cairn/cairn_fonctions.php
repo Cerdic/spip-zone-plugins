@@ -131,6 +131,8 @@ function cairn_decoupe_hN($texte, $reset) {
 	foreach ($sections as $p) {
 		$cpt++;
 		list($para, $suite) = preg_split(',</h[2-6]>,i', $p);
+		// supprimer les ancres d'un titre
+		$para = supprimer_tags($para);
 
 		$t .= _CHEVRONA."section1 id=\"s1n$cpt\""._CHEVRONB
 			. _CHEVRONA."titre"._CHEVRONB.cairn_decoupe_para_cdata($para)._CHEVRONA."/titre"._CHEVRONB
@@ -264,7 +266,8 @@ function filtrer_texte_cairn($t) {
 
 	$t = proteger_amp(unicode_to_utf_8(html2unicode($t)));
 	$t = str_replace('&#8217;', '’', $t);
-
+	// les appels de notes sont entourés d'un span.
+	$t = preg_replace(',<span class="spip_note_ref">(.*)</span>,UimsS','$1',$t);
 	$t = trim($t);
 
 	return $t;
