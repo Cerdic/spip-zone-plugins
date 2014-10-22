@@ -45,6 +45,23 @@ function migrateur_exemple_configurer_site2() {
 	ecrire_config('plugin/nom', 'exemple');
 }
 
+/**
+ * Configurer des metas avec des variables
+**/
+function migrateur_exemple_configurer_site3() {
+	include_spip('inc/config');
+
+	$adresse_site = "http://adresse_du_nouvau_site";
+	ecrire_config('adresse_site', $adresse_site);
+	migrateur_log("Adresse du site passée à $adresse_site");
+
+	$prefixe_dev = "*** DEV *** ";
+	$nom_site = lire_config('nom_site');
+	$nom_site = str_replace($prefixe_dev, '', $nom_site);
+	ecrire_config('nom_site', $dev . $nom_site);
+	migrateur_log("Nom du site changé en $nom_site");
+}
+
 
 /**
  * Définir les compositions
