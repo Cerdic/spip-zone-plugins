@@ -383,7 +383,7 @@
 <item>
 <title>Twitter</title>
 <author>twitter</author>
-<link>http://twitter.com/share?text=%t&amp;url=%u</link>
+<link>http://twitter.com/intent/tweet?text=%t&amp;url=%u</link>
 <description>Microblogging</description>
 <category>1</category>
 </item>
