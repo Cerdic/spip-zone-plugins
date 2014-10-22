@@ -14,6 +14,7 @@ function action_api_evangile_dist(){
 	  AND !_IS_BOT){
 		// formater correctement la date
 		$date = date('Y-m-d',$date);
+		include_spip("inc/filtres");
 		include_spip("inc/spiperipsum_utils");
 		$nom_fichier = charger_lectures($lang, $date);
 		lire_fichier($nom_fichier,$res);
