@@ -1,4 +1,4 @@
-<?
+<?php
 
 /***************************************************************************\
  * Plugin Duplicator pour Spip 3.0
@@ -61,5 +61,3 @@ function autoriser_article_dupliquer($faire, $type='', $id=0, $qui = NULL, $opt 
 	return false;
 
 }
-
-?>
