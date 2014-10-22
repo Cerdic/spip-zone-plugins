@@ -14,3 +14,11 @@ h2                  section1
 - images
 =========
 si un article contient un intertitre et une image avec un titre, l'export se prend les pieds dans le tapis.
+
+- chapeau
+=========
+si le chapeau comprend plusieurs paragraphes, c'est l'ensemble du chapeau qui est entouré de <strong></strong> (et non chaque paragraphe) et le remplacement par la balise gras Cairn n'est pas effectué. 
+
+- url
+===============
+Les url internes ne sont pas traitées (uniquement les externes).
