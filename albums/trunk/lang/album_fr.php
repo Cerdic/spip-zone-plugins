@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_id_album_ajoute' => 'L’album N° @id_album@ a été ajouté.',
 	'message_nb_albums_ajoutes' => '@nb@ albums ont été ajoutés.',
 	'message_supprimer' => 'Supprimer définitivement ?',
-	'message_vider' => 'Retirer tous les docments ?',
+	'message_vider' => 'Retirer tous les documents ?',
 
 	// O
 	'onglet_ajouter_choisir' => 'Choisir album(s)',

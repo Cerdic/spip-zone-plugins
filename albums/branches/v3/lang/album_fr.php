@@ -15,12 +15,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'c_albumotheque_filtres' => 'Les filtres latéraux permettent d’activer certains critères
-		afin de restreindre la sélection des albums. Ils apparaitront et s\'étofferont en fonction du nombre de vos albums et de leurs utilisations.
+		afin de restreindre la sélection des albums. Ils apparaitront et s’étofferont en fonction du nombre de vos albums et de leurs utilisations.
 		<br>Un clic sur une entrée active le filtre, un autre clic le désactive.
 		En les combinant, on peut facilement retrouver n’importe quel album.
 		<br>Quand les listes sont trop longues, des champs de recherche permettent de retrouver des objets précis.',
-	'c_albumotheque_presentation' => 'Bienvenue dans l\'albumothèque !<br>
-		Vous pouvez créer des albums « autonomes » sur cette page et depuis la barre d\'outils rapides,
+	'c_albumotheque_presentation' => 'Bienvenue dans l’albumothèque !<br>
+		Vous pouvez créer des albums « autonomes » sur cette page et depuis la barre d’outils rapides,
 		ou créer des albums liés aux objets éditoriaux depuis leurs pages respectives.
 		<br>Chaque album est éditable sur place (édition du texte & manipulation des documents), ou bien en vous rendant sur sa fiche.',
 	'c_albumotheque_titre_filtres' => 'Filtrer la sélection',
@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_id_album_ajoute' => 'L’album N° @id_album@ a été ajouté.',
 	'message_nb_albums_ajoutes' => '@nb@ albums ont été ajoutés.',
 	'message_supprimer' => 'Supprimer définitivement ?',
-	'message_vider' => 'Retirer tous les docments ?',
+	'message_vider' => 'Retirer tous les documents ?',
 
 	// O
 	'onglet_ajouter_choisir' => 'Choisir album(s)',

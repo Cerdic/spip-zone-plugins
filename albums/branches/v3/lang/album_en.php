@@ -16,21 +16,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_vider' => 'Empty',
 
 	// C
-	'c_albumotheque_filtres' => 'Filters let you active certain criteria
+	'c_albumotheque_filtres' => 'Lateral filters let you active certain criteria
 		in order to restrict the selection of albums. One click on an entry activates the filter, another click dis-activates it.
 		By combining them you can easily find any album.
 		When the lists are too long, search fields let you find a specific object.',
-	'c_albumotheque_presentation' => 'The albums let you compose groups of documents.',
+	'c_albumotheque_presentation' => 'Welcome to the «albumothèque»!<br>
+You can create autonomous albums from this page and from the toolbar, or create albums associated with editorial objects on their own pages.
+<br>Each album is editable «on site» (editing text and manipulating documents), or from its page.',
 	'c_albumotheque_titre_filtres' => 'Filter selection',
 	'c_albumotheque_titre_presentation' => 'Albums',
 	'cfg_titre_albums' => 'Albums',
 
 	// E
 	'erreur_deplacement' => 'Treatment could not be performed',
-	'explication_album_numero' => 'One or several ids comma-separated', # MODIF
+	'explication_album_numero' => 'One or several numbers comma-separated',
 	'explication_deplacer_documents' => '<strong>Experimental</strong> : it is possible to drag and drop documents between albums.
 		If you are authorized, when hovering a document, the cursor will change to indicate an action is possible.
-		Once the documents have been moved, a form will appear at the bottom of the list to save the changes.', # MODIF
+		Once the documents have been moved, a form will appear at the bottom of the list to save the changes.',
 
 	// F
 	'filtre_extensions' => 'File extensions',
@@ -55,9 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_activer_album_objets' => 'Enable albums for the contents :',
 	'label_activer_deplacer_documents' => 'Drag and drop',
-	'label_album_numero' => 'Album number', # MODIF
+	'label_album_numero' => 'Number(s)',
 	'label_case_deplacer_documents' => 'Drag and drop documents between albums.',
-	'label_case_utiliser_titre_defaut' => 'By default, use the parent object’s title',
+	'label_case_utiliser_titre_defaut' => 'By default, suggest the parent object’s title',
 	'label_descriptif' => 'Description',
 	'label_modele_alias_liste' => 'List',
 	'label_modele_alias_vignettes' => 'Thumbnails',
@@ -89,6 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_tri_media' => 'Document type',
 	'label_modele_tri_titre' => 'Title',
 	'label_modele_trier' => 'Sort by :',
+	'label_onglet_ajouter_choisir' => 'Associate existing albums',
+	'label_onglet_ajouter_creer' => 'Create and associate an album',
 	'label_titre' => 'Title',
 	'label_utiliser_titre_defaut' => 'Title of a new album',
 
@@ -104,6 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_vider' => 'Remove all the documents ?',
 
 	// O
+	'onglet_ajouter_choisir' => 'Choose album(s)',
+	'onglet_ajouter_creer' => 'New album',
 	'onglet_configurer_options' => 'Options',
 	'onglet_configurer_outils' => 'Tools',
 
