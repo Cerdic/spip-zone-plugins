@@ -45,9 +45,13 @@ function zengarden_liste_themes($tous){
 
 	$themes = array();
 
+	// charger les themes de themes-dist/
+	if (is_dir(_DIR_THEMES_DIST))
+		$themes = array_merge($themes, zengarden_charge_themes(_DIR_THEMES_DIST, $tous));
+
 	// charger les themes de themes/
 	if (is_dir(_DIR_THEMES))
-		$themes = array_merge($themes,zengarden_charge_themes(_DIR_THEMES,$tous));
+		$themes = array_merge($themes, zengarden_charge_themes(_DIR_THEMES, $tous));
 
 	// ceux de squelettes/themes/
 	if (is_dir($skels=_DIR_RACINE."squelettes/themes/"))

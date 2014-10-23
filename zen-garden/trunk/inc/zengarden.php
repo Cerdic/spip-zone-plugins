@@ -8,7 +8,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_DIR_THEMES'))
-	define('_DIR_THEMES',_DIR_RACINE."themes/");
+	define('_DIR_THEMES', _DIR_RACINE . "themes/");
+
+if (!defined('_DIR_THEMES_DIST'))
+	define('_DIR_THEMES_DIST', _DIR_RACINE . "themes-dist/");
 
 function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = false){
 	$themes = array();
