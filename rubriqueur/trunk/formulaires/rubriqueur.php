@@ -4,6 +4,8 @@ if( !defined('_ECRIRE_INC_VERSION') ){
 	return;
 }
 
+define('_RUBRIQUEUR_SEPARATEUR', '%%SLASH%%');
+
 function formulaires_rubriqueur_charger_dist() {
 
 	return array(
@@ -43,7 +45,7 @@ function formulaires_rubriqueur_traiter_dist() {
 	$rubriques       = rubriqueur_parse_texte(_request('rubriques'));
 	include_spip('inc/rubriques');
 	foreach( $rubriques as $rubrique ) {
-		creer_rubrique_nommee($rubrique, $rubrique_racine);
+		rubriqueur_creer_rubrique_nommee($rubrique, $rubrique_racine, _RUBRIQUEUR_SEPARATEUR);
 	}
 	return array(
 		'message_ok' => _T('rubriqueur:rubriques_creees'),
@@ -73,10 +75,69 @@ function rubriqueur_parse_texte($texte, $mode = 'creer', $indentation = '  ') {
 			$retour[] = '-' . str_repeat('*', $profondeur) . '* ' . $ligne;
 		}
 		else {
-			$retour[] = join('/', $chemin);
+			$retour[] = join(_RUBRIQUEUR_SEPARATEUR, $chemin);
 		}
 		$rappel_profondeur = $profondeur;
 	}
 
 	return $retour;
+}
+
+/**
+ * Crée une arborescence de rubrique
+ *
+ * Copie modifiée de creer_rubrique_nommee() depuis /ecrire/inc/rubriques,
+ * pour ne pas modifier la signature de la fonction originale.
+ * Ajout du séparateur en paramètre.
+ * 
+ * @param string $titre
+ *     Titre des rubriques, séparés par des $separateur
+ * @param int $id_parent
+ *     Identifiant de la rubrique parente
+ * @param string $separateur
+ *     Séparateur du chemin
+ * @param string $serveur
+ *     Nom du connecteur à la base de données
+ * 
+*@return int
+ *     Identifiant de la rubrique la plus profonde.
+ */
+function rubriqueur_creer_rubrique_nommee($titre, $id_parent=0, $separateur='/', $serveur='') {
+
+	// eclater l'arborescence demandee
+	// echapper les </multi> et autres balises fermantes html
+	$titre = preg_replace(",</([a-z][^>]*)>,ims","<@\\1>",$titre);
+	$arbo = explode($separateur, preg_replace(',^/,', '', $titre));
+	include_spip('base/abstract_sql');
+	foreach ($arbo as $titre) {
+		// retablir les </multi> et autres balises fermantes html
+		$titre = preg_replace(",<@([a-z][^>]*)>,ims","</\\1>",$titre);
+		$r = sql_getfetsel("id_rubrique", "spip_rubriques", "titre = ".sql_quote($titre)." AND id_parent=".intval($id_parent),
+			$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
+		if ($r !== NULL) {
+			$id_parent = $r;
+		} else {
+			$id_rubrique = sql_insertq('spip_rubriques', array(
+					'titre' => $titre,
+					'id_parent' => $id_parent,
+					'statut' => 'prive')
+				,$desc=array(), $serveur);
+			if ($id_parent > 0) {
+				$data = sql_fetsel("id_secteur,lang", "spip_rubriques", "id_rubrique=$id_parent",
+					$groupby = array(), $orderby = array(), $limit = '', $having = array(), $serveur);
+				$id_secteur = $data['id_secteur'];
+				$lang = $data['lang'];
+			} else {
+				$id_secteur = $id_rubrique;
+				$lang = $GLOBALS['meta']['langue_site'];
+			}
+
+			sql_updateq('spip_rubriques', array('id_secteur'=>$id_secteur, "lang"=>$lang), "id_rubrique=$id_rubrique", $desc='', $serveur);
+
+			// pour la recursion
+			$id_parent = $id_rubrique;
+		}
+	}
+
+	return intval($id_parent);
 }
