@@ -72,4 +72,24 @@ if (!isset($_COOKIE['adminer_sid'])
 
 chdir (_DIR_PLUGIN_ADMINER);
 session_name("adminer_sid");
+
+function adminer_object() {
+    // required to run any plugin
+    include_once "./plugins/plugin.php";
+    
+    // autoloader
+    foreach (glob("plugins/*.php") as $filename) {
+        include_once "./$filename";
+    }
+    
+    $plugins = array(
+        // specify enabled plugins here
+        new AdminerAllowedDatabases(array($GLOBALS['connexions'][0]["db"])),
+    );
+
+    
+    return new AdminerPlugin($plugins);
+}
+
+
 require_once 'adminer.php';
