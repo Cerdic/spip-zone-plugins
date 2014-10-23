@@ -73,6 +73,8 @@ if (!isset($_COOKIE['adminer_sid'])
 chdir (_DIR_PLUGIN_ADMINER);
 session_name("adminer_sid");
 
+if (is_defined('_ADMINER_VERROUILLER_DB')) $_GET['db'] = $GLOBALS['connexions'][0]["db"];
+
 function adminer_object() {
     // required to run any plugin
     include_once "./plugins/plugin.php";

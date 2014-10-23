@@ -7,6 +7,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Commentez cette ligne si vous voulez donner un acces eventuel aux autres bases masquees
+define('_ADMINER_VERROUILLER_DB',true);
+
 // aiguiller sur adminer si les bonnes conditions
 if (strpos($_SERVER['REQUEST_URI'],"prive.php")!==false AND !_DIR_RESTREINT){
 	if (
