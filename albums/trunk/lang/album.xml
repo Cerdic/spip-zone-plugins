@@ -1,11 +1,11 @@
 <traduction module="album" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="97" traduits="97" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="97" traduits="96" relire="0" modifs="1" nouveaux="0" pourcent="98.97">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/album?lang_cible=es" total="97" traduits="71" relire="26" modifs="0" nouveaux="0" pourcent="73.20">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/album?lang_cible=es" total="97" traduits="70" relire="26" modifs="1" nouveaux="0" pourcent="72.16">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>

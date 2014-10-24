@@ -104,7 +104,7 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'message_id_album_ajoute' => 'El álbum número @id_album@ ha sido añadido.',
 	'message_nb_albums_ajoutes' => 'Se han añadido @nb@ álbumes.',
 	'message_supprimer' => '¿ Suprimir permanentemente ?', # RELIRE
-	'message_vider' => '¿ Retirar todos los documentos ?',
+	'message_vider' => '¿ Retirar todos los documentos ?', # MODIF
 
 	// O
 	'onglet_ajouter_choisir' => 'Elijar álbumes', # RELIRE
