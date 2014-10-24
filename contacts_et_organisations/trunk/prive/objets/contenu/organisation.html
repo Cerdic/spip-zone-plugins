@@ -15,9 +15,21 @@
 	<div class="label visible"><:contacts:label_activite:> : </div>
 	<div dir='#LANG_DIR' class='span #EDIT{activite} activite'>(#ACTIVITE)</div>
 </div>]
+[<div class="champ contenu_url_site[ (#URL_SITE*|strlen|?{'',vide})]">
+	<div class="label visible"><:contacts:label_url_site:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{url_site} url_site'><a href="#URL_SITE">(#URL_SITE)</a></div>
+</div>]
 [<div class="champ contenu_date_creation[ (#DATE_CREATION*|!={0000-00-00 00:00:00}|?{'',vide})]">
 	<div class="label visible"><:contacts:label_date_creation:> : </div>
 	<div dir='#LANG_DIR' class='span #EDIT{date_creation} date_creation'>(#DATE_CREATION|=={0000-00-00 00:00:00}|?{'',[(#DATE_CREATION|affdate)]})</div>
+</div>]
+[<div class="champ contenu_ouvertures[ (#OUVERTURES*|strlen|?{'',vide})]">
+	<div class="label visible"><:contacts:label_ouvertures:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{ouvertures} ouvertures'>(#OUVERTURES)</div>
+</div>]
+[<div class="champ contenu_tarifs[ (#TARIFS*|strlen|?{'',vide})]">
+	<div class="label visible"><:contacts:label_tarifs:> : </div>
+	<div dir='#LANG_DIR' class='span #EDIT{tarifs} tarifs'>(#TARIFS)</div>
 </div>]
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 	<div class="label visible"><:contacts:label_descriptif:> : </div>
