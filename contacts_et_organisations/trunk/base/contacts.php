@@ -125,7 +125,7 @@ function contacts_declarer_tables_objets_sql($tables){
 		'champs_editables' => array(
 			'id_parent', 'id_auteur', 'id_annuaire',
 			'nom', 'statut_juridique', 'identification', 'activite',
-			'date_creation', 'descriptif'),
+			'date_creation', 'descriptif', 'ouvertures', 'tarifs', 'url_site'),
 		'field'=> array(
 			"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
 			'id_annuaire'		=> 'bigint(21) NOT NULL default 0',
@@ -137,7 +137,10 @@ function contacts_declarer_tables_objets_sql($tables){
 			"activite"			=> "tinytext DEFAULT '' NOT NULL", // Secteur d'activité : humanitaire, formation...
 			"date_creation"		=> "datetime NOT NULL default '0000-00-00 00:00:00'",
 			"descriptif"		=> "TEXT DEFAULT '' NOT NULL",
-			"maj"				=> "TIMESTAMP"
+			"ouvertures"		=> "text not null default ''",
+			"tarifs"			=> "text not null default ''",
+			"url_site"			=> "text not null default ''",
+			"maj"				=> "TIMESTAMP",
 		),
 		'key' => array(
 			"PRIMARY KEY"		=> "id_organisation",
@@ -164,7 +167,7 @@ function contacts_declarer_tables_objets_sql($tables){
 		'champs_versionnes' => array(
 			'id_parent', 'id_auteur', 'id_annuaire',
 			 'nom', 'descriptif', 'identification', 'statut_juridique',
-			 'activite', 'date_creation'),
+			 'activite', 'date_creation', 'ouvertures', 'tarifs', 'url_site'),
 	);
 
 

@@ -1,11 +1,11 @@
 <paquet
 	prefix="contacts"
 	categorie="auteur"
-	version="2.10.16"
+	version="2.11.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/contacts-128.png"
-	schema="1.10.1"
+	schema="1.11.0"
 	documentation="http://contrib.spip.net/Plugin-Contacts-Organisations"
 >
 

@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		comme étant un contact ou comme étant une organisation.
 		Ces attributions donnent accès à des champs de saisies supplémentaires
 		dans la fiche de renseignement de l’auteur.',
+	'explication_ouvertures' => 'Jours, horaires, saisons…',
 	'explication_identification' => 'Identifiant de l’organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
 	'explication_statut_juridique' => 'SA, SARL, association...',
 	'explication_supprimer_contact' => 'La suppression du contact supprimera
@@ -152,6 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom_organisation' => 'Organisation',
 	'label_organisation' => 'Organisation liée',
 	'label_organisation_parente' => 'Organisation parente',
+	'label_ouvertures' => 'Périodes d’ouverture',
 	'label_prenom' => 'Prénom',
 	'label_prenom_nom' => 'Prénom + Nom',
 	'label_pseudo' => 'Pseudo',
@@ -159,8 +161,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche_contacts' => 'Chercher dans les contacts',
 	'label_recherche_organisations' => 'Chercher dans les organisations',
 	'label_statut_juridique' => 'Statut juridique',
+	'label_tarifs' => 'Tarifs',
 	'label_telephone' => 'Tél.',
 	'label_type_liaison' => 'Liaison',
+	'label_url_site' => 'Site internet',
 	'lier_ce_contact' => 'Lier ce contact',
 	'lier_cet_auteur' => 'Lier',
 	'lier_cette_organisation' => 'Lier cette organisation',

@@ -189,6 +189,13 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		array('sql_alter', 'TABLE spip_organisations_liens ADD INDEX (id_objet)'),
 		array('sql_alter', 'TABLE spip_organisations_liens ADD INDEX (objet)'),
 	);
+	
+	// Ajouter des champs courants pour des organisations
+	$maj['1.11.0'] = array(
+		array('sql_alter', "TABLE spip_organisations ADD COLUMN ouvertures text not null default ''"),
+		array('sql_alter', "TABLE spip_organisations ADD COLUMN tarifs text not null default ''"),
+		array('sql_alter', "TABLE spip_organisations ADD COLUMN url_site text not null default ''"),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
