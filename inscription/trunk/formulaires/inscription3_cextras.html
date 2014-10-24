@@ -16,7 +16,7 @@
 	]
 	#SET{valeur,#VALEUR}
 	[(#VALEUR|table_valeur{options}|table_valeur{obligatoire}|=={on}|oui)
-		[(#CONFIG{inscription3/[(#CLE)]_obligatoire_nocreation}|!={on}|oui)
+		[(#CONFIG{inscription3/[(#VALEUR|table_valeur{options}|table_valeur{nom})]_obligatoire_nocreation}|!={on}|oui)
 			#SET{options,#VALEUR|table_valeur{options}}
 			#SET{array,#ARRAY{options,#GET{options}|array_merge{#ARRAY{obligatoire,non}}}}
 			#SET{valeur,#VALEUR|array_merge{#GET{array}}}
