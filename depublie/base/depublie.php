@@ -22,9 +22,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function depublie_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['depublies'] = 'depublies';
-	
-	$interface['tables_jointures']['spip_articles'][] = 'depublies';
-	$interface['tables_jointures']['spip_depublies'][] = 'articles';
+	$interfaces['tables_jointures']['spip_articles'][] = 'depublies';
+	$interfaces['tables_jointures']['spip_depublies'][] = 'articles';
 
 	return $interfaces;
 }
@@ -57,7 +56,7 @@ function depublie_declarer_tables_auxiliaires($tables_auxiliaires){
 		'field' => &$spip_depublies,
 		'key' => &$spip_depublies_key
 	);
-		
+
 	return $tables_auxiliaires;
 }
 
