@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'diogene_geo_description' => 'Geolocation add-on for "Diogene".', # MODIF
-	'diogene_geo_nom' => 'Diogene - Geo', # MODIF
-	'diogene_geo_slogan' => 'Geolocation add-on for "Diogene"' # MODIF
+	'diogene_geo_description' => 'Enable to select a geographic position of an object from its edit form if this option is enabled in the mask form of "Diogene"',
+	'diogene_geo_nom' => 'Diogene - Geo',
+	'diogene_geo_slogan' => 'Geolocation add-on for "Diogene"'
 );
 
 ?>
