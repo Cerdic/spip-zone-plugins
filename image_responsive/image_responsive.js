@@ -50,7 +50,10 @@ function charger_url_image_responsive(this_img) {
 		} else {
 		
 			if(dPR && dPR > 1) {
-				
+				// si l'image d'origine n'est pas nettement plus grande que l'image demandée, 
+				// ne pas passer dPR, sinon on récupère image de même taille mais trop compressée
+				if (vertical && h < 1.5*dim) dPR = false;
+				else if (l < 1.5*dim) dPR = false;
 			} else {
 				dPR = false;
 			}
