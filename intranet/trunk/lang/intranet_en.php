@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'explications_message' => 'Customized message to display above the login form.',
 	'explications_pages_intranet' => 'Add SPIP specific pages accessible without being connected (separate them with commas ",").',
+	'explications_plageip' => 'IP or IP range to view the entire website without being connected. Example: <code> 10.5.0.1-10.5.22.13,10.6.134.132 </ code>',
 
 	// I
 	'info_intranet' => 'Mandatory identification',
@@ -20,7 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_message' => 'Customizing the message',
-	'label_pages_intranet' => 'Accessible pages'
+	'label_pages_intranet' => 'Accessible pages',
+	'label_plageip' => 'IP range'
 );
 
 ?>
