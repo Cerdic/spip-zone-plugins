@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_form_tickets_autorisations' => 'Permissions',
 	'cfg_form_tickets_general' => 'General parameters',
 	'cfg_form_tickets_typologie' => 'Classification',
+	'cfg_groupe_versions' => 'Group of keywords of versions',
 	'cfg_groupe_versions_aucun' => 'None',
 	'cfg_groupe_versions_explication' => 'Select, if existing, the group of keywords that contains the versions for the roadmap',
 	'cfg_inf_type_autorisation' => 'If you choose by status or by author, you will be prompted below your selection of status or authors.',

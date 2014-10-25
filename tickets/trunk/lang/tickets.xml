@@ -5,9 +5,10 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=de" total="240" traduits="72" relire="0" modifs="14" nouveaux="154" pourcent="30.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=en" total="240" traduits="239" relire="0" modifs="0" nouveaux="1" pourcent="99.58">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/tickets?lang_cible=en" total="240" traduits="240" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
+		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
