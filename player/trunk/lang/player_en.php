@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_player_mp3' => 'Player’s choice',
 	'label_player_mp3_dewplayer' => 'Dew player',
 	'label_player_mp3_eraplayer' => 'Erational player',
+	'label_player_mp3_mejs' => 'Media Element Player',
 	'label_player_mp3_neoplayer' => 'Neolao player',
 	'label_player_mp3_pixplayer' => 'One pixel out player',
 	'label_playeralpha' => 'Player background transparency: ',
