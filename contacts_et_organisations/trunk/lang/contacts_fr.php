@@ -116,8 +116,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		comme étant un contact ou comme étant une organisation.
 		Ces attributions donnent accès à des champs de saisies supplémentaires
 		dans la fiche de renseignement de l’auteur.',
-	'explication_ouvertures' => 'Jours, horaires, saisons…',
 	'explication_identification' => 'Identifiant de l’organisation, comme par exemple N° de TVA, SIRET, SIRENE...',
+	'explication_ouvertures' => 'Jours, horaires, saisons…',
 	'explication_statut_juridique' => 'SA, SARL, association...',
 	'explication_supprimer_contact' => 'La suppression du contact supprimera
 		toutes les informations supplémentaires renseignées sur l’auteur.',
