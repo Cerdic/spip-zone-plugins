@@ -1,10 +1,13 @@
 <traduction module="http" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/http/trunk/lang/" reference="fr">
-	<langue code="es" url="http://trad.spip.net/tradlang_module/http?lang_cible=es" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/http?lang_cible=en" total="5" traduits="4" relire="0" modifs="1" nouveaux="0" pourcent="80.00">
+		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/http?lang_cible=es" total="5" traduits="4" relire="0" modifs="1" nouveaux="0" pourcent="80.00">
 		<traducteur nom="severo" lien="http://trad.spip.net/auteur/severo" />
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/http?lang_cible=fr" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="nl" url="http://trad.spip.net/tradlang_module/http?lang_cible=nl" total="5" traduits="5" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="nl" url="http://trad.spip.net/tradlang_module/http?lang_cible=nl" total="5" traduits="4" relire="0" modifs="1" nouveaux="0" pourcent="80.00">
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 	</langue>
 </traduction>
