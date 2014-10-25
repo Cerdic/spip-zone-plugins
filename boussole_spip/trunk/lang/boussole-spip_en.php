@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'SPIP compass gathers "official" websites of the SPIP galaxy. For each website, logo, name, slogan and description are defined. Do not hesitate to use this compass on your own website for guiding visitors into the SPIP galaxy.',
 	'descriptif_site_spip_blog' => 'SPIP is a collaborative project, so SPIP-BLOG.net  gathers technical notes and announcements as well as self-mockeries, trolls and humorous articles. In this regard, it reflects the SPIP community spirit: tenderness first!.',
-	'descriptif_site_spip_contrib' => 'SPIP-CONTRIB.net is a collaborative website where external contributions are published: plugins, scripts, functions, templates, documentations, tip and tricks... are given to the community (e.g. download links) by SPIP users. Forums preserve relationship between users and developers.', # MODIF
+	'descriptif_site_spip_contrib' => 'contrib.spip.net is a collaborative website where external contributions are published: plugins, scripts, functions, templates, documentations, tip and tricks... are given to the community (e.g. download links) by SPIP users. Forums preserve relationship between users and developers.',
 	'descriptif_site_spip_core' => 'CORE.SPIP.org gathers modification history of SPIP source code, issues tracking to manage bugs and improvements and a SPIP releases download area.',
 	'descriptif_site_spip_demo' => 'DEMO.SPIP.net is a test website reset every night. In one click and without having to install it, you can test, as administrator or editor, the SPIP latest stable release.',
 	'descriptif_site_spip_doc' => 'CODE.SPIP.net is a place where every API, fonction, constant, etc from the SPIP source code is detailed, analysed and comment (name, parameters, description and usage).',
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_irc' => 'SPIP community never sleeps! A SPIP IRC channel opened 24/7 to everyone: http://webchat.freenode.net/?channels=#spip',
 	'descriptif_site_spip_mag' => 'SPIP Mag’ website description',
 	'descriptif_site_spip_net' => 'SPIP.net is the official website for users and webmasters willing to install a SPIP website, to understand SPIP language (loops, markers and filters), to write and use SPIP templates. Glossary, tutorials, advices and a downloading area of SPIP old versions are available. SPIP.net is translated in more than 20 languages.',
-	'descriptif_site_spip_party' => 'To spend some time on coding SPIP: it’s nice. To meet users and developers in real life, with cakes and fruit juice  (or any other beverage...): it’s better! SPIP-PARTY.net provides information about past meetings (minutes, photos) and coming events (date, agenda).',
+	'descriptif_site_spip_party' => 'To spend some time on coding SPIP: it’s nice. To meet users and developers in real life, with cakes and fruit juice  (or any other beverage...): it’s better! SPIP-PARTY.net provides information about past meetings (minutes, photos) and coming events (date, agenda).', # MODIF
 	'descriptif_site_spip_plugin' => 'PLUGINS.SPIP.net is a complete directory of add-ons SPIP (plugins, skeletons, themes). For each add-on are indicated: description, author, licence, compatibility per SPIP version, last updates, status of translations, statistics, documentation and download links.',
 	'descriptif_site_spip_programmer' => 'PROGRAMMER.SPIP.net is for developpers or webmasters skilled in PHP, SQL, HTML, CSS and JavaScript. PROGRAMMER.SPIP.net shows most of SPIP technical features (API, overloading, pipeline,...) with numerous coding examples. You can download the entire website in pdf format under free licence cc-by-sa. PROGRAMMER.SPIP.net is translated in French, English and Spanish.',
 	'descriptif_site_spip_sedna' => 'SEDNA.SPIP.net is the RSS feeder on news about the SPIP galaxy. Latest news from more than 70 websites can be read.',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_extension' => 'Contributions',
 	'nom_groupe_spip_reference' => 'Documentation',
 	'nom_site_spip_blog' => 'SPIP Blog',
-	'nom_site_spip_contrib' => 'SPIP-Contrib', # MODIF
+	'nom_site_spip_contrib' => 'contrib.spip',
 	'nom_site_spip_core' => 'SPIP Core',
 	'nom_site_spip_demo' => 'SPIP Demo',
 	'nom_site_spip_doc' => 'SPIP Code',
