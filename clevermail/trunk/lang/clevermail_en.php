@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_partir_csv' => 'From a CSV file :', # MODIF
+	'a_partir_csv' => 'From a CSV file:',
 	'abonne' => 'subscriber',
 	'abonne_ajoute' => 'Added subscriber',
 	'abonne_aucune_lettre' => 'Subscribed to no newsletter',
@@ -88,26 +88,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_votre_desinscription' => 'Deregistration confirmation',
 	'confirmation_votre_desinscription_text' => 'Hello,
 
-Please confirm your deregistration by clicking on the following link :
+Please confirm your deregistration by clicking on the following link:
 
  @@URL_CONFIRMATION@@
 
-Thanks', # MODIF
+Thanks',
 	'confirmation_votre_inscription' => 'Registration confirmation',
 	'confirmation_votre_inscription_multiple' => 'Registration confirmation',
-	'confirmation_votre_inscription_text' => '
-Hello,
+	'confirmation_votre_inscription_text' => 'Hello,
 
-Please confirm your registration  to the newsletter @@NOM_COMPLET@@ at the format @@FORMAT_INSCRIPTION@@, by clicking on the following link :
+Please confirm your registration to the newsletter @@NOM_COMPLET@@ at the format @@FORMAT_INSCRIPTION@@, by clicking on the following link:
 
  @@URL_CONFIRMATION@@
 
 Thanks
-', # MODIF
-	'confirmation_votre_inscription_text_multiple' => '
-Hello,
+',
+	'confirmation_votre_inscription_text_multiple' => 'Hello,
 
-Please confirm your registration  to the following newsletters :
+Please confirm your registration  to the following newsletters:
 
  @@NOM_COMPLET@@ 
 
@@ -116,18 +114,18 @@ by clicking on the link :
  @@URL_CONFIRMATION@@
 
 Thanks
-', # MODIF
+',
 	'confirme_desabonnement_multiple_lettre' => 'You are about to delete several subscribers from this letter. Are you sure ?',
 	'confirme_suppression_multiple_base' => 'You are about to delete subscribers from the database. Are you sure ?',
 	'corps_mail_mod' => 'Hello,
 
 You receive this message as a moderator of the letter @@NOM_LETTRE@@.
 
-To valid the registration of @mail@ to this letter, click on the link :
+To valid the registration of @mail@ to this letter, click on the link:
 
  @@URL_CONFIRMATION@@
 
-Thanks', # MODIF
+Thanks',
 	'cree' => 'Created',
 	'creer' => 'Create',
 	'creer_lettre' => 'Create a newsletter',
@@ -135,9 +133,9 @@ Thanks', # MODIF
 	'creer_nouveau_message' => 'Create a new message',
 
 	// D
-	'deja_inscrit' => 'You have already registered to the letter « @lst_name@ ». Your registration mode has been updated.', # MODIF
+	'deja_inscrit' => 'You have already registered to the letter « @lst_name@ ». Your registration mode has been updated.',
 	'deja_validee' => 'Sorry. This operation has already been validated.',
-	'demande_transmise' => 'Your subscription request to the letter « @lst_name@ » will be examined as soon as possible.', # MODIF
+	'demande_transmise' => 'Your subscription request to the letter « @lst_name@ » will be examined as soon as possible.',
 	'desabonner' => 'Unsubscribe',
 	'desabonner2' => 'unsubscribe',
 	'desabonner_abonnes' => 'Deregister the selected subscribers',
@@ -145,7 +143,7 @@ Thanks', # MODIF
 	'description' => 'Description',
 	'desinscription_confirmation_debut' => 'Unsubscribe from the newsletter',
 	'desinscription_confirmation_fin' => 'requested. You will receive a message asking for confirmation.',
-	'desinscription_validee' => 'Unsubscribing to the letter « @lst_name@ » is enabled. See you soon.', # MODIF
+	'desinscription_validee' => 'Your Deregistration to the letter « @lst_name@ » has been validated. See you soon.',
 
 	// E
 	'editer_lettre' => 'Edit the newsletter',
@@ -172,21 +170,21 @@ Thanks', # MODIF
 	'info_parametres' => 'The e-mail address of the administrator is used by default e-mail of the moderator at the creation of a newsletter',
 	'infolettres' => 'Newsletters',
 	'informations' => 'Informations',
-	'inscription_deja_abonne_autre_mode' => 'You have already registered to the letter to the « @lst_name@ » in another mode, the modification is made.', # MODIF
-	'inscription_deja_abonne_meme_mode' => 'You have already registered to the letter  « @lst_name@ » in the same mode. Nevertheless, we appreciate your enthusiasm.', # MODIF
+	'inscription_deja_abonne_autre_mode' => 'You have already registered to the letter to the « @lst_name@ » in another mode, the modification is made.',
+	'inscription_deja_abonne_meme_mode' => 'You have already registered to the letter  « @lst_name@ » in the same mode. Nevertheless, we appreciate your enthusiasm.',
 	'inscription_encours' => 'Your subscription request to the letter @nom_lettre@ is under consideration. Thank you for your patience.',
-	'inscription_mok' => 'Your subscription request to the letter « @lst_name@ » was submitted to the moderator. You will be informed of his decision.', # MODIF
+	'inscription_mok' => 'Your subscription request to the letter « @lst_name@ » was submitted to the moderator. You will be informed of his decision.',
 	'inscription_nok' => 'Subscription is not authorized for this newsletter',
-	'inscription_ok' => 'You will receive a message of subscription confirmation for your registration to the letter « @lst_name@ ».', # MODIF
-	'inscription_ok_multiple' => 'You will receive a message asking you to confirm your subscription to the letter « @lst_name@ ».', # MODIF
-	'inscription_validee' => 'Your subscribtion to the letter « @lst_name@ » is enabled. Thank you.', # MODIF
+	'inscription_ok' => 'You will receive a message of subscription confirmation for your registration to the letter « @lst_name@ ».',
+	'inscription_ok_multiple' => 'You will receive a message asking you to confirm your subscription to the letter « @lst_name@ ».',
+	'inscription_validee' => 'Your subscribtion to the letter « @lst_name@ » is enabled. Thank you.',
 
 	// L
 	'label_contenu_html' => 'HTML content',
 	'label_contenu_text' => 'Text content',
-	'label_inscription_email' => 'Your e-mail address :', # MODIF
-	'label_inscription_lettres' => 'Choose between the newsletters :', # MODIF
-	'label_inscription_version' => 'Message type :', # MODIF
+	'label_inscription_email' => 'Your e-mail address:',
+	'label_inscription_lettres' => 'Choose between the newsletters:',
+	'label_inscription_version' => 'Message type:',
 	'le_format_des_adresses_email_ne_semble_pas_bon' => 'The e-mail address format doesn’t seem to be right.',
 	'lettre_meme_nom' => 'Another newsletter already has this name',
 	'lettre_sans_nom' => 'A newsletter must have a name',
@@ -199,12 +197,12 @@ Thanks', # MODIF
 	'liste_messages' => 'Messages',
 
 	// M
-	'mail_info_desinscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ) :
+	'mail_info_desinscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ):
 
-Deregistration from @sub_email@ to the letter « @lst_name@ »', # MODIF
-	'mail_info_inscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ) :
+Deregistration from @sub_email@ to the letter « @lst_name@ »',
+	'mail_info_inscription_corps' => 'Alert sent by the plugin CleverMail form the website @nom_site@ ( @url_site@ ):
 
-Subscription from @sub_email@ to the letter « @lst_name@ »', # MODIF
+Subscription from @sub_email@ to the letter « @lst_name@ »',
 	'mail_info_inscription_sujet' => 'Subscription to @sub_email@',
 	'mail_inscription_multiple' => 'Hello,
 
@@ -212,11 +210,11 @@ Please confirm your registration to the following newsletters :
 
  @@NOM_COMPLET@@
 
-by clicking on the link :
+by clicking on the link:
 
  @@URL_CONFIRMATION@@
 
-Thanks', # MODIF
+Thanks',
 	'maj_inscription' => 'updated subscription',
 	'maj_inscriptions' => 'updated subscriptions',
 	'mauvais_affichage' => 'If you do not see this email properly, read it on the website',
@@ -236,10 +234,10 @@ Thanks', # MODIF
 	'mod_closed' => 'Closed',
 	'mod_email' => 'E-mail',
 	'mod_explication' => 'The different modes of moderation are described there.',
-	'mod_explication_closed' => 'Closed : Nobody can subscribe', # MODIF
-	'mod_explication_email' => 'E-mail: anyone can register after confirmation by e-mail', # MODIF
-	'mod_explication_mod' => 'Moderated : the moderator must accept the subscription', # MODIF
-	'mod_explication_open' => 'Open: anyone can register without confirmation', # MODIF
+	'mod_explication_closed' => 'Closed: Nobody can subscribe',
+	'mod_explication_email' => 'E-mail: anyone can register after confirmation by e-mail',
+	'mod_explication_mod' => 'Moderated: the moderator must accept the subscription',
+	'mod_explication_open' => 'Open: anyone can register without confirmation',
 	'mod_mod' => 'Moderated',
 	'mod_open' => 'Open',
 	'mode' => 'Mode',
