@@ -69,8 +69,8 @@ function sommaire_d_une_page(&$texte, &$nbh3, $page=0, $num_pages=0) {
 			$artpage = "\n<li>" . ( function_exists('sommaire_id_page')
 				?sommaire_id_page($artpage, $page):sommaire_id_page_dist($artpage, $page) );
 			if($niveau==$n) $sommaire .= ($sommaire?'</li>':'').$artpage;
-			elseif($niveau<$n) $sommaire .= "\n<ul>".$artpage;
-			else $sommaire .= '</li></ul></li>'.$artpage;
+			elseif($niveau<$n) $sommaire .= "\n<ul>".str_repeat('<li><ul>',$n-$niveau-1).$artpage;
+			else $sommaire .= '</li>'.str_repeat('</ul></li>',$niveau-$n).$artpage;
 			$niveau = $n;
 		}
 	}
