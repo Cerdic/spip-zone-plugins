@@ -105,7 +105,7 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'message_id_album_ajoute' => 'The album @id_album@ has been added.',
 	'message_nb_albums_ajoutes' => '@nb@ albums have been added.',
 	'message_supprimer' => 'Delete permanently ?',
-	'message_vider' => 'Remove all the documents ?', # MODIF
+	'message_vider' => 'Remove all the documents ?',
 
 	// O
 	'onglet_ajouter_choisir' => 'Choose album(s)',

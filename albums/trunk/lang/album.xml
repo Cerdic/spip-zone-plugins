@@ -1,6 +1,7 @@
 <traduction module="album" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="97" traduits="96" relire="0" modifs="1" nouveaux="0" pourcent="98.97">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="97" traduits="97" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
