@@ -33,19 +33,14 @@ $(document).ready(function(){
 				$(this).parent().find('>div.diff').toggle();
 		});
 
-		[(#REM) faire dépendre le stockage de Basket de la version de jqueryUI ]
-		[(#SET{ui_version,#PLUGIN{jqueryui,version}})]
-
 		/* Installer les onglets et accordions */
 		/* Renouveler tous les 7 jours… ie. Pas la peine de garder si on utilise plus cette version */
-		basket.require({url: "#CHEMIN{javascript/ui/jquery.ui.core.js}",   key: "ui.core.#GET{ui_version}",   expire: 24 * 7}).then(function(){
-		basket.require({url: "#CHEMIN{javascript/ui/jquery.ui.widget.js}", key: "ui.widget.#GET{ui_version}", expire: 24 * 7}).then(function(){
-		basket.require({url: "#CHEMIN{javascript/ui/jquery.ui.mouse.js}",  key: "ui.mouse.#GET{ui_version}",  expire: 24 * 7}).then(function(){
-		basket.require(
-			{url: "#CHEMIN{javascript/ui/jquery.ui.tabs.js}",      key: "ui.tabs.#GET{ui_version}",      expire: 24 * 7},
-			{url: "#CHEMIN{javascript/ui/jquery.ui.accordion.js}", key: "ui.accordion.#GET{ui_version}", expire: 24 * 7},
-			{url: "#CHEMIN{javascript/ui/jquery.ui.sortable.js}",  key: "ui.sortable.#GET{ui_version}",  expire: 24 * 7}
-		).then(function(){
+		$.getScript("[(#CHEMIN{javascript/ui/core.js}|timestamp)]", function(){
+		$.getScript("[(#CHEMIN{javascript/ui/widget.js}|timestamp)]", function(){
+		$.getScript("[(#CHEMIN{javascript/ui/mouse.js}|timestamp)]", function(){
+		$.getScript("[(#CHEMIN{javascript/ui/tabs.js}|timestamp)]", function(){
+		$.getScript("[(#CHEMIN{javascript/ui/accordion.js}|timestamp)]", function(){
+		$.getScript("[(#CHEMIN{javascript/ui/sortable.js}|timestamp)]", function(){
 			/*
 				ACCORDION avant TABS sinon la largeur de
 				l'accordion actif (autre que le premier)
@@ -123,7 +118,7 @@ $(document).ready(function(){
 						}
 					});
 			}
-		})})})});
+		})})})})})});
 
 		<BOUCLE_skeleditor(CONDITION){si #PLUGIN{skeleditor}}>
 		/* un peu de coloration syntaxique */
@@ -135,17 +130,14 @@ $(document).ready(function(){
 			}
 		});
 
-		[(#REM) faire dépendre le stockage de Basket de la version de skeleditor ]
-		[(#SET{sk_version,#PLUGIN{skeleditor,version}})]
-
 		function fabrique_coloriage(textarea, code) {
-			basket.require({url: "#CHEMIN{codemirror/lib/codemirror.js}",  key: "codemirror.#GET{sk_version}",     expire: 24*7 }).then(function(){
-			basket.require({url: "#CHEMIN{codemirror/mode/xml/xml.js}",    key: "codemirror.xml.#GET{sk_version}", expire: 24*7 }).then(function(){
-			basket.require(
-				{url: "#CHEMIN{codemirror/mode/javascript/javascript.js}", key: "codemirror.javascript.#GET{sk_version}", expire: 24*7},
-				{url: "#CHEMIN{codemirror/mode/css/css.js}",               key: "codemirror.css.#GET{sk_version}",        expire: 24*7},
-				{url: "#CHEMIN{codemirror/mode/clike/clike.js}",           key: "codemirror.clike.#GET{sk_version}",      expire: 24*7}).then(function(){
-			basket.require({url: "#CHEMIN{codemirror/mode/php/php.js}",    key: "codemirror.php.#GET{sk_version}",        expire: 24*7}).then(function(){
+			$.getScript("#CHEMIN{codemirror/lib/codemirror.js}", function(){
+			$.getScript("#CHEMIN{codemirror/mode/xml/xml.js}", function(){
+			$.getScript("#CHEMIN{codemirror/mode/xml/xml.js}", function(){
+			$.getScript("#CHEMIN{codemirror/mode/javascript/javascript.js}", function(){
+			$.getScript("#CHEMIN{codemirror/mode/css/css.js}", function(){
+			$.getScript("#CHEMIN{codemirror/mode/clike/clike.js}", function(){
+			$.getScript("#CHEMIN{codemirror/mode/php/php.js}", function(){
 					var cm_options = {
 						lineNumbers: true,
 						matchBrackets: true,
@@ -166,7 +158,7 @@ $(document).ready(function(){
 						}
 					}
 					CodeMirror.fromTextArea(textarea, cm_options);
-			})})})});
+			})})})})})})});
 		}
 		</BOUCLE_skeleditor>
 
