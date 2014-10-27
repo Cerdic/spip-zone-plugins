@@ -15,8 +15,8 @@
 	<credit>Nouveaux Territoires</credit>
 
 	<licence>GNU/GPL</licence>
-    
-    <traduire module="depublie" reference="fr" gestionnaire="salvatore" />
+
+	<traduire module="depublie" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-depublie" reference="fr" gestionnaire="salvatore" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/depublie.php" />
@@ -28,5 +28,6 @@
 	<pipeline nom="formulaire_traiter" inclure="depublie_pipelines.php" />
 	<pipeline nom="post_edition" inclure="depublie_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="depublie_pipelines.php" />
+	<pipeline nom="autoriser" inclure="depublie_autoriser.php" />
 
 </paquet>

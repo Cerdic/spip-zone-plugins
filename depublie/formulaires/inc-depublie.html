@@ -1,13 +1,8 @@
-#SET{rubautorisees,#CONFIG{depublie/rubrique_depublie}|explode{','}}
-#SET{secteurautorises,#CONFIG{depublie/secteur_depublie}|explode{','}}
-
-[(#REM) <!-- On affiche ce morceau dans le formulaire dater des articles uniquement si la ou les rubriques/ le ou les secteurs sont ceux configurés-->]
-
-[(#INFO_ID_RUBRIQUE{article,#ENV{id_objet}}|in_array{#GET{rubautorisees}}|ou{
-#INFO_ID_SECTEUR{article,#ENV{id_objet}}|in_array{#GET{secteurautorises}}
-}
-|oui)
-	#SET{name,date_depublie}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+[(#REM) 
+	On affiche ce morceau dans le formulaire dater des articles uniquement si la ou les rubriques/ le ou les secteurs sont ceux configur√©s
+]
+[(#AUTORISER{depublierafficher,#ENV{objet},#ENV{id_objet}}|oui)
+	[(#SET{name,date_depublie})][(#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}})]
 	<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 		<label for="#GET{name}"><:depublie:texte_date_depublication:> #AIDER{artdate_depublie}</label>[
 		<span class='erreur_message'>(#GET{erreurs})</span>]
