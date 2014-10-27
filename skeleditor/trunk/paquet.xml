@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="2.7.9"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/skeleditor-32.png"
 	documentation="http://contrib.spip.net/SkelEditor-2-0"
 >
