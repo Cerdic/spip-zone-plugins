@@ -25,12 +25,12 @@ function genie_depublier_dist($time) {
 
 			//on cherche la table de l'objet donné
 			$_id_objet = id_table_objet($objet); //id_article
-			$table = table_objet($objet); //articles
+			$table = table_objet_sql($objet); //articles
 
 			//si le statut est différent de celui demandé
-			if ($a_depublier = sql_select($_id_objet,"spip_$table","'statut' !='$statut_depublication' AND '$_id_objet'=$id_objet")){
+			if ($a_depublier = sql_getfetsel($_id_objet,$table,"statut != ".sql_quote($statut_depublication)." AND $_id_objet = ".intval($id_objet))){
 				//si les conditions sont remplies, on change le statut dans cette table
-				sql_updateq("spip_$table", array("statut" => $statut_depublication), "$_id_objet=$id_objet");
+				sql_updateq($table, array("statut" => $statut_depublication), "$_id_objet= ".intval($id_objet));
 				//et on supprime l'entrée
 				sql_delete('spip_depublies', 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
 			}
