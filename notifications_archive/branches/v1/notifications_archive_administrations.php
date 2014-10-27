@@ -30,14 +30,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function notifications_archive_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
-    $notifications=charger_fonction('notifications_archiver','inc',true);
-    $notifications=$notifications();
-    
+	$notifications=charger_fonction('notifications_archiver','inc',true);
+	$notifications=$notifications();
+	
 
 	$maj['create'] = array(
-	   array('maj_tables', array('spip_notifications')),
-        array('ecrire_config', 'notifications_archive', $notifications)    
-       );
+		array('maj_tables', array('spip_notifications')),
+		array('ecrire_config', 'notifications_archive', $notifications)    
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -70,7 +70,7 @@ function notifications_archive_vider_tables($nom_meta_base_version) {
 	sql_delete("spip_forum",                 sql_in("objet", array('notification')));
 
 	effacer_meta($nom_meta_base_version);
-    effacer_meta('notifications_archive');    
+	effacer_meta('notifications_archive');    
 }
 
 ?>

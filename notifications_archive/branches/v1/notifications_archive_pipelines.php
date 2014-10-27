@@ -13,8 +13,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 	
 
 function notifications_archive_taches_generales_cron($taches){
-    $taches['eliminer_notifications'] = 24*3600; // tous les jours
-    return $taches;
+	$taches['eliminer_notifications'] = 24*3600; // tous les jours
+	return $taches;
 }
 
 

@@ -57,7 +57,7 @@ function notifications_archive_declarer_tables_objets_sql($tables) {
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_notification",
-            "KEY id_objet"        => "id_objet,objet",		          		
+			"KEY id_objet"        => "id_objet,objet",		          		
 		),
 		'titre' => "sujet AS titre, '' AS lang",
 		'date' => "date",
