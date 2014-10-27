@@ -23,6 +23,7 @@ function oembed_lister_providers(){
 	// voir aussi http://embed.ly/providers qui donne les scheme mais pas les endpoint
 	$providers = array(
 		'http://*.youtube.com/watch*'    =>   'http://www.youtube.com/oembed',
+		'http://*.youtube.com/playlist*'    =>   'http://www.youtube.com/oembed',
 		'http://youtu.be/*'              =>   'http://www.youtube.com/oembed',
 		'http://blip.tv/*'          =>   'http://blip.tv/oembed/',
 		'http://*.vimeo.com/*'           =>   'http://vimeo.com/api/oembed.json',
@@ -60,8 +61,9 @@ function oembed_lister_providers(){
 		'http://techcrunch.com/*'        =>   'http://public-api.wordpress.com/oembed/1.0/',
 		'http://wp.me/*'                 =>   'http://public-api.wordpress.com/oembed/1.0/',
 		'http://my.opera.com/*'           => 'http://my.opera.com/service/oembed',
-		'http://*.viddler.com/*'         =>   'http://lab.viddler.com/services/oembed/',
 		'http://www.collegehumor.com/video/*'=>'http://www.collegehumor.com/oembed.json',
+		'http://imgur.com/*'        =>   'http://api.imgur.com/oembed',
+		'http://*.imgur.com/*'      =>   'http://api.imgur.com/oembed',
 
 
 		#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
