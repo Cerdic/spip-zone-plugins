@@ -24,7 +24,7 @@ function autoriser_depublierafficher($faire,$type,$id,$qui,$opt){
 		$table = table_objet_sql($type);
 		$id_table_objet = id_table_objet($type);
 		$infos_rubrique = sql_fetsel('id_rubrique,id_secteur',$table,"$id_table_objet = ".intval($id));
-		if(in_array($infos_rubrique['id_rubrique'],lire_config('depublie/rubrique_depublie',array())) || in_array($infos_rubrique['id_secteur'],lire_config('depublie/secteur_depublie',array())))
+		if(in_array($infos_rubrique['id_rubrique'],explode(',',lire_config('depublie/rubrique_depublie'))) || in_array($infos_rubrique['id_secteur'],explode(',',lire_config('depublie/secteur_depublie'))))
 			return autoriser('modifier',$type,$id,$qui,$opt) OR autoriser('dater',$type,$id,$qui,$opt);
 	}
 	else{
