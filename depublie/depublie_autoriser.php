@@ -20,8 +20,7 @@ function autoriser_depublierafficher($faire,$type,$id,$qui,$opt){
 	if(!function_exists('lire_config')){
 		include_spip('inc/config');
 	}
-	if(lire_config('depublie/rubrique_depublie') != '' || lire_config('depublie/rubrique_depublie') !=''){
-		var_dump((count(explode(',',lire_config('depublie/rubrique_depublie'))) + count(explode(',',lire_config('depublie/rubrique_depublie')))));
+	if(lire_config('depublie/rubrique_depublie') != '' || lire_config('depublie/secteur_depublie') !=''){
 		$table = table_objet_sql($type);
 		$id_table_objet = id_table_objet($type);
 		$infos_rubrique = sql_fetsel('id_rubrique,id_secteur',$table,"$id_table_objet = ".intval($id));
