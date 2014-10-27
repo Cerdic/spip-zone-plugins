@@ -27,28 +27,27 @@ function depublie_recuperer_fond($flux){
 	return $flux;
 }
 
-// Les pipelines greffent les champs supplémentaires aux flux des étapes CVT du formulaire dater
-
+/**
+ * Insertion dans le pipeline formulaire_charger (SPIP)
+ * 
+ * Chargement de la valeur du champ date_depublie du formulaire dater
+ * 
+ * @param array $flux
+ * @return array $flux
+ */
 function depublie_formulaire_charger($flux){
 	// si formulaire dater, charger les données des champs supplémentaires
 	if ($flux['args']['form'] == 'dater'){
 		$objet=$flux['data']['objet'];
 		$id_objet=$flux['data']['id_objet'];
-		
-		$select = "`date_depublie`,`statut`";
-		
-		$row = sql_fetsel($select, "spip_depublies", "id_objet=".intval($id_objet)." AND objet='$objet'");
+
+		$row = sql_fetsel("date_depublie,statut", "spip_depublies", "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet));
 		$possedeDateDepublie = false;
 		
 		if (isset($row['date_depublie']) AND
-			$regs = recup_date($row['date_depublie'], false)) {
-			$annee_depublie = $regs[0];
-			$mois_depublie = $regs[1];
-			$jour_depublie = $regs[2];
-			$heure_depublie = $regs[3];
-			$minute_depublie = $regs[4];
+			list($annee_depublie,$mois_depublie,$jour_depublie,$heure_depublie,$minute_depublie) = recup_date($row['date_depublie'], false)) {
 			$possedeDateDepublie = true;
-			// attention : les vrai dates de l'annee 1 sont stockee avec +9000 => 9001
+			// attention : les vrais dates de l'annee 1 sont stockee avec +9000 => 9001
 			// mais reviennent ici en annee 1 par recup_date
 			// on verifie donc que le intval($row['date_depublie']) qui ressort l'annee
 			// est bien lui aussi <=1 : dans ce cas c'est une date sql 'nulle' ou presque, selon
@@ -56,41 +55,51 @@ function depublie_formulaire_charger($flux){
 			if (intval($row['date_depublie'])<=1 AND ($annee_depublie<=1) AND ($mois_depublie<=1) AND ($jour_depublie<=1))
 				$possedeDateDepublie = false;
 		}
-		else
-			$annee_depublie = $mois_depublie = $jour_depublie = $heure_depublie = $minute_depublie = 0;
-		
+		else{
+			$annee_depublie = $mois_depublie = $jour_depublie = 0;
+			$heure_depublie = $minute_depublie = "00";
+		}
 		// attention, si la variable s'appelle date ou date_depublie, le compilo va
 		// la normaliser, ce qu'on ne veut pas ici.
 		$flux['data']['afficher_date_depublie'] = ($possedeDateDepublie?$row['date_depublie']:'');
 		$flux['data']['date_depublie_jour'] = dater_formater_saisie_jour($jour_depublie,$mois_depublie,$annee_depublie);
 		$flux['data']['date_depublie_heure'] = "$heure_depublie:$minute_depublie";
-	
 		$flux['data']['sans_depublie'] = !$possedeDateDepublie;
 	}
-
 	return $flux;
 }
 
-
+/**
+ * Insertion dans le pipeline formulaire_verifier (SPIP)
+ * 
+ * Vérification de la valeur du champ date_depublie du formulaire dater
+ * 
+ * @param array $flux
+ * @return array $flux
+ */
 function depublie_formulaire_verifier($flux){
-		// si formulaire dater, vérifier les données des champs supplémentaires
-		if ($flux['args']['form'] == 'dater'){
-				
+	if ($flux['args']['form'] == 'dater' && _request('changer')){
 		$k='date_depublie';
-		if ($v=_request($k."_jour") AND !dater_recuperer_date_saisie($v))
+		
+		if(_request('date_jour') && _request($k."_jour") && (dater_recuperer_date_saisie(_request('date_jour')) >= dater_recuperer_date_saisie(_request($k."_jour"))))
+			$flux[$k] = _T('depublie:erreur_date_superieure');
+		else if ($v=_request($k."_jour") AND !dater_recuperer_date_saisie($v))
 			$flux[$k] = _T('format_date_incorrecte');
 		elseif ($v=_request($k."_heure") AND !dater_recuperer_heure_saisie($v))
 			$flux[$k] = _T('format_heure_incorrecte');
-		}
-		
+	}
 	return $flux;
 }
 
-/*	
-Traitement du formulaire dater
-*/
+/**
+ * Insertion dans le pipeline formulaire_traiter (SPIP)
+ * 
+ * Traitement du champ date_depublie du formulaire dater
+ * 
+ * @param array $flux
+ * @return array $flux
+ */
 function depublie_formulaire_traiter($flux){
-	//si formulaire dater, se greffer pour enregistrer les données des champs supplémentaires
 	if ($flux['args']['form'] == 'dater' && _request('changer')){
 
 		//récupère les arguments objet/id_objet
@@ -101,7 +110,7 @@ function depublie_formulaire_traiter($flux){
 		$possedeDateDepublie = sql_getfetsel('date_depublie', "spip_depublies", 'id_objet='.intval($id_objet).' AND objet='.sql_quote($objet));
 
 		$set = array();
-		$set['statut']= lire_config('depublie/statut_depublie');
+		$set['statut']= lire_config('depublie/statut_depublie','prepa');
 		$set['objet']=$objet;
 		$set['id_objet']=$id_objet;
 
