@@ -136,13 +136,16 @@ function depublie_formulaire_traiter($flux){
 	return $flux;
 }
 
-/* Gérer la date de dépublication au changement de statut en publié */
-	
+/**
+ * Insertion dans le pipeline post_edition (SPIP)
+ * En cas de configuration de dépublication automatique, gérer la date de dépublication au changement de statut en publié
+ * 
+ * @param array $flux
+ * @return array $flux
+ */ 
 function depublie_post_edition($flux){
-	
-	//si on a demandé la durée automatique de publication se greffer sur le traitement post_edition de changement de statut d'un article
 	$duree = lire_config('depublie/publication_duree');
-	
+
 	if ($duree>0 
 		and ($action = $flux['args']['action']) == 'instituer' // action instituer
 		and ($table = $flux['args']['table']) == table_objet_sql('article') // on institue un article
@@ -150,9 +153,9 @@ function depublie_post_edition($flux){
 		and $statut == 'publie' // uniquement en cas de publication
 		and $id_objet = $flux['args']['id_objet'] // on a bien un identifiant
 	) {
-	
+
 		$objet='article';
-		$infos_article = sql_fetsel('id_rubrique, id_secteur','spip_articles','id_article='._q($id_objet));
+		$infos_article = sql_fetsel('id_rubrique, id_secteur','spip_articles','id_article='.intval($id_objet));
 		$id_secteur = $infos_article['id_secteur'];
 		$id_rubrique = $infos_article['id_rubrique'];
 		$id_secteur_choisi= explode(',',lire_config('depublie/secteur_depublie'));
@@ -167,9 +170,8 @@ function depublie_post_edition($flux){
 			//on récupère la configuation de la durée de publication
 			$periode= lire_config('depublie/publication_periode');
 			$duree= lire_config('depublie/publication_duree');
-			$set['statut']=lire_config('depublie/statut_depublie');
-			
-			
+			$set['statut']=lire_config('depublie/statut_depublie','prepa');
+
 			// jour
 			if ($periode == 'jours') {
 				$set['date_depublie'] = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
@@ -179,17 +181,17 @@ function depublie_post_edition($flux){
 				$set['date_depublie'] = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$duree,date('j'),date('Y')));
 			}
 
-			//détecter si il y a déjà une date de dépublication
-			$row = sql_fetsel('date_depublie', "spip_depublies", "id_objet=".intval($id_objet)." AND objet='$objet'");
+			// détecter si il y a déjà une date de dépublication
+			$row = sql_fetsel('date_depublie', "spip_depublies", "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet));
 				$possedeDateDepublie = false;
 				if (isset($row['date_depublie'])) $possedeDateDepublie = true;
 			
 				$set['objet']=$objet;
 				$set['id_objet']=$id_objet;
 
-			//update ou insert
+			// update ou insert
 			if($possedeDateDepublie == true) {
-			    sql_updateq('spip_depublies', $set, "id_objet=".intval($id_objet)." AND objet='$objet'");
+				sql_updateq('spip_depublies', $set, "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet));
 			} else {
 				sql_insertq('spip_depublies',$set);
 			}
@@ -198,7 +200,14 @@ function depublie_post_edition($flux){
 	return $flux;
 }
 
-// déclaration des taches à exécuter
+/**
+ * Insertion dans le pipeline taches_generales_cron (SPIP)
+ * 
+ * Ajouter les tâches de CRON deux fois par jour
+ * 
+ * @param array $taches
+ * @return array $taches
+ */
 function depublie_taches_generales_cron($taches){
 	$taches['depublier'] = 60*60*12; // 2 fois par jour
 	return $taches;
