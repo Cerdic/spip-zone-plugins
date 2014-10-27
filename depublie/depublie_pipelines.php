@@ -1,12 +1,8 @@
 <?php
-/* 
- 2014
- Anne-lise Martenot 
- elastick.net 
-*/
 /**
  * Déclarations des pipelines pour le formulaire de dates
  *
+ * @author     Anne-lise Martenot (http://elastick.net)
  * @plugin     Depublie
  * @copyright  2014
  * @licence    GNU/GPL
@@ -15,17 +11,21 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
-Insere via le pipeline le morceau de squelette calculé (juste le input) avec la date de dépublication dans le formulaire dater
-*/
+/**
+ * Insertion dans le pipeline recuperer_fond (SPIP)
+ * 
+ * Ajouter le champ date_publier dans le formulaire dater
+ * 
+ * @param array $flux
+ * @return array $flux
+ */
 function depublie_recuperer_fond($flux){
 	if($flux['args']['fond'] == 'formulaires/dater'){
-		 $ajouter_depublier = recuperer_fond("formulaires/inc-depublie",$flux['args']['contexte']);
-		 $flux['data']['texte'] = preg_replace("%(<\/ul>.*<!--extra-->)%is", "$ajouter_depublier $0", $flux['data']['texte']);
+		$ajouter_depublier = recuperer_fond("formulaires/inc-depublie",$flux['args']['contexte']);
+		$flux['data']['texte'] = preg_replace("%(<\/ul>.*<!--extra-->)%is", "$ajouter_depublier $0", $flux['data']['texte']);
 	}
 	return $flux;
 }
-
 
 // Les pipelines greffent les champs supplémentaires aux flux des étapes CVT du formulaire dater
 
