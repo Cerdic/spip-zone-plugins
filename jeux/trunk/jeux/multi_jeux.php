@@ -37,6 +37,9 @@ Exemple de syntaxe dans l'article :
 </jeux>
 */
 
+// Separateur pour l'enregistrement des resultats detailles en base
+@define('_SEP_BASE_MULTI_JEUX', '<br />');
+
 // configuration par defaut : jeu_{mon_jeu}_init()
 function jeux_multi_jeux_init() {
 	return "
@@ -73,6 +76,8 @@ function jeux_multi_jeux($texte, $indexJeux) {
 	// sortir du mode 'multi-jeux'
 	$scores = $scoreMULTIJEUX;
 	$scoreMULTIJEUX = array();
+	// detail des scores intermediaires
+	$scores['details'][] = join(', ', $scores['score']).' / '.join(', ', $scores['total']);
 
 	unset($textes[0]);
 	$texte = join("\n", $textes);
@@ -80,7 +85,7 @@ function jeux_multi_jeux($texte, $indexJeux) {
 	$pied = '';
 	$id_jeu = _request('id_jeu');
 
-	if(!isset($_POST["var_correction_".$indexJeux])) {
+	if(!jeux_form_correction($indexJeux)) {
 		if($b = jeux_config('bouton_corriger', $scores['config'])) $texte .= jeux_bouton(strlen($b)?$b:'corriger', $id_jeu);
 		$texte = jeux_form_debut('multi_jeux', $indexJeux).$texte.jeux_form_fin();
 	} else {
@@ -89,9 +94,8 @@ function jeux_multi_jeux($texte, $indexJeux) {
 		elseif(jeux_config('bouton_recommencer', $scores['config'])) $texte .= jeux_bouton('recommencer', $id_jeu);
 		// affichage du bouton 'Reset'
 		elseif($b = jeux_config('bouton_refaire', $scores['config'])) $texte .= jeux_bouton($b, $id_jeu);
-		$pied = jeux_afficher_score(array_sum($scores['score']), array_sum($scores['total']), $id_jeu, join('<br />',$scores['details']), $categ_score);
+		$pied = jeux_afficher_score(array_sum($scores['score']), array_sum($scores['total']), $id_jeu, join(_SEP_BASE_MULTI_JEUX,$scores['details']), $categ_score);
 	}
-	
 	return $tete.$html.$texte.$pied.'</div>';
 
 }
