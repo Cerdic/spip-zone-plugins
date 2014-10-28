@@ -48,6 +48,8 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		$extension = strtolower(array_pop(explode('.',basename($fichier))));
 	}
 
+	$fichier_tmp = $fichier.'_tmp';
+
 	/**
 	 * Si c'est un flv on lui applique les metadatas pour éviter les problèmes
 	 * Si c'est un mov ou MP4 on applique qt-faststart
@@ -65,7 +67,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			$flvtool2 = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
 
 		if($flvtoolplus['flvtoolplus'])
-			$metadatas_flv = "flvtool++ $fichier ".$fichier."_tmp";
+			$metadatas_flv = "flvtool++ $fichier $fichier_tmp";
 		else if($flvtool2['flvtool2'])
 			$metadatas_flv = "flvtool2 -xUP $fichier";
 
@@ -73,7 +75,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 			exec(escapeshellcmd($metadatas_flv),$retour,$retour_int);
 	}
 	if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse'])
-		exec(escapeshellcmd("qt-faststart $fichier ".$fichier."_tmp"),$retour,$retour_int);
+		exec(escapeshellcmd("qt-faststart $fichier $fichier_tmp"),$retour,$retour_int);
 
 	if(file_exists($fichier."_tmp"))
 		rename($fichier_tmp,$fichier);
