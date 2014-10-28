@@ -242,7 +242,11 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 		);
 }
 function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-    return autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt);
+	if (function_exists('autoriserrubrique_publierdans')) {
+		return autoriserrubrique_publierdans($faire, $type, $id, $qui, $opt);
+	} else if (function_exists('autoriserrubrique_publierdans_dist')) {
+		return autoriserrubrique_publierdans($faire, $type, $id, $qui, $opt);
+	}
 }
 } else
 	$autorite_erreurs[] = 'autoriser_article_modifier';
