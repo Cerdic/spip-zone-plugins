@@ -342,6 +342,7 @@ function jeux_block_depliable($texte, $block) {
 // renvoie le couple array(id, name) pour construire un input
 // les index doivent etre positifs
 function jeux_idname($indexJeux, $index=-1, $prefixe='', $index2=-1, $prefixe2='') {
+	$indexJeux = str_replace('.','_',$indexJeux);
 	$indexJeux = 'reponses' . $indexJeux;
 	if($index<0) return array($indexJeux, $indexJeux);
 	if($index2<0) return array($indexJeux.'-'.$prefixe.$index, $indexJeux.'['.$prefixe.$index.']');
@@ -350,16 +351,16 @@ function jeux_idname($indexJeux, $index=-1, $prefixe='', $index2=-1, $prefixe2='
 
 // renvoie la reponse trimee du formulaire (NULL si n'existe pas)
 function jeux_form_reponse($indexJeux, $index=-1, $prefixe='', $index2=-1, $prefixe2='') {
-  	$reponse = _request('reponses'.$indexJeux);
+  	$reponse = _request('reponses'.str_replace('.','_',$indexJeux));
 	if($index>=0 && is_array($reponse)) $reponse = isset($reponse[$prefixe.$index])?$reponse[$prefixe.$index]:NULL;
 	if($index2>=0 && is_array($reponse)) $reponse = isset($reponse[$prefixe2.$index2])?$reponse[$prefixe2.$index2]:NULL;
 	if(is_string($reponse) && strlen($reponse)) $reponse = trim($reponse);
 	return $reponse;
 }
 
-// indique si on doit corriger ou non
+// indique si on doit corriger ou non (attention aux multi jeux)
 function jeux_form_correction($indexJeux) {
-	return intval(_request('correction'.$indexJeux))?true:false;
+	return intval(_request('correction'.intval($indexJeux)))?true:false;
 }
 
 // deux fonctions qui encadrent un jeu dans un formulaire

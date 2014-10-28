@@ -37,7 +37,7 @@ Exemple de syntaxe dans l'article :
 </jeux>
 */
 
-// Separateur pour l'enregistrement des resultats detailles en base
+// Separateur pour l'enregistrement en base des resultats longs
 @define('_SEP_BASE_MULTI_JEUX', '<br />');
 
 // configuration par defaut : jeu_{mon_jeu}_init()
@@ -70,7 +70,7 @@ function jeux_multi_jeux($texte, $indexJeux) {
 	$c = count($textes); $res = '';
 	for($i=1; $i<$c; $i++) {
 		// decoder le texte obtenu en fonction des signatures et (re!)inclure le jeu
-		jeux_decode_les_jeux($textes[$i], $indexJeux);
+		jeux_decode_les_jeux($textes[$i], $indexJeux+$i/1000);
 	}
 
 	// sortir du mode 'multi-jeux'
@@ -97,6 +97,6 @@ function jeux_multi_jeux($texte, $indexJeux) {
 		$pied = jeux_afficher_score(array_sum($scores['score']), array_sum($scores['total']), $id_jeu, join(_SEP_BASE_MULTI_JEUX,$scores['details']), $categ_score);
 	}
 	return $tete.$html.$texte.$pied.'</div>';
-
 }
+
 ?>

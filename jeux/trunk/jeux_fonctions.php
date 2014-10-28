@@ -52,9 +52,9 @@ function traite_contenu_jeu($texte, $id_jeu, $jeuCVT='non', $indexJeux=0) {
 function ajoute_config_jeu($texte, $config=array()) {
 	// separateurs inutiles ici, le texte est celui d'un seul jeu
 	$texte = str_replace(array(_JEUX_DEBUT, _JEUX_FIN), '', $texte);
-	if(!is_array($config)) return $texte . "\n[config]" . $config;
+	if(!is_array($config)) return $texte . "\n["._JEUX_CONFIG.']' . $config;
 	array_walk($config, create_function('&$v,&$k','$v = trim($k)."=".trim($v);'));
-	return $texte . "[config]" . join("\n", $config);
+	return $texte . '['._JEUX_CONFIG.']' . join("\n", $config);
 }
 
 // fonction de traitement appelant directement une fonction de pipeline
@@ -102,6 +102,13 @@ function balise_TEXTE_JEU_dist($p) {
 	return $p;
 }
 
+// renvoie la configuration interne d'un jeu
+function balise_CONFIG_INTERNE_dist($p) {
+	$texte = champ_sql('texte', $p);
+	$param = interprete_argument_balise(1, $p);
+	$p->code = "jeux_trouver_configuration_interne($texte, ".($param?$param:"''").')';
+	return $p;
+}
 
 // traduction longue du type de resultat
 function balise_TYPE_RESULTAT_LONG_dist($p) {
@@ -153,5 +160,32 @@ function jeux_icone_horizontale($texte, $lien, $image){
 	return icone_base($lien, $texte, $image, "", "horizontale", "");
 }
 
+/*
+ filtre interpretant le resultat long d'un jeu multiple
+ exemples d'utilisation : 
+ 	[(#RESULTAT_LONG|resultat_intermediaire{nb})]
+ 	[(#RESULTAT_LONG|resultat_intermediaire{score,1})]
+ $index doit commencer a 1
+ valeurs reconnues pour $code : 
+ 	score => renvoie le score intermediaire
+	total => renvoie le total intermediaire
+	detail => renvoie le resultat long intermediaire
+	nb => renvoie le nombre de sous-jeux
+*/
+function filtre_resultat_intermediaire($texte, $code='score', $index=0) {
+	include_spip('jeux/multi_jeux');
+	$nb = count($t = explode(_SEP_BASE_MULTI_JEUX, $texte));
+	if($nb<2) return '';
+	if($code=='nb') return $nb-1;
+	if($index<1 || $index>$nb) return 'ERR';
+	switch($code) {
+		case 'score': case 'total':
+			$t = array_pop($t);
+			$t = explode('/', $t, 2);
+			$t = explode(',', $t[$code=='score'?0:1]);
+			return trim($t[$index-1]);
+		case 'detail': return $t[$index-1];
+	}
+}
 
 ?>
