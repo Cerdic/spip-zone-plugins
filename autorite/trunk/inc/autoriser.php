@@ -250,10 +250,10 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 }
 if (defined('_SPIP3')) {
 	function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-		if (function_exists('autoriserrubrique_publierdans')) {
-			return autoriserrubrique_publierdans($faire, $type, $id, $qui, $opt);
-		} else if (function_exists('autoriserrubrique_publierdans_dist')) {
-			return autoriserrubrique_publierdans($faire, $type, $id, $qui, $opt);
+		if (function_exists('autoriser_rubrique_publierdans')) {
+			return autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt);
+		} else if (function_exists('autoriser_rubrique_publierdans_dist')) {
+			return autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
 		}
 	}
 }
