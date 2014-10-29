@@ -153,24 +153,37 @@ function logo_revision($id, $file, $type, $ref) {
 	if ($file['logo']) {
 		define('FILE_UPLOAD', true); // message pour crayons_json_export :(
 
-		// supprimer l'ancien logo
-		$on = $chercher_logo($id, $_id_objet, 'on');
-		if ($on) @unlink($on[0]);
+		if (include_spip("action/editer_logo")
+		  AND function_exists("logo_modifier")){
+			logo_modifier($type, $id, "on", $file['logo']);
+		}
+		// compat SPIP < 3.1
+		else {
+			// supprimer l'ancien logo
+			$on = $chercher_logo($id, $_id_objet, 'on');
+			if ($on) @unlink($on[0]);
 
-		// ajouter le nouveau
-		include_spip('action/iconifier');
-		action_spip_image_ajouter_dist(
-			type_du_logo($_id_objet).'on'.$id, false, false
-		); // beurk
+			// ajouter le nouveau
+			include_spip('action/iconifier');
+			action_spip_image_ajouter_dist(
+				type_du_logo($_id_objet).'on'.$id, false, false
+			); // beurk
+		}
 	}
 
-	else
-
-	// Suppression du logo ?
-	if ($wid = array_pop($ref)
-	AND $_POST['content_'.$wid.'_logo_supprimer'] == 'on') {
-		if ($on = $chercher_logo($id, $_id_objet, 'on'))
-			@unlink($on[0]);
+	else {
+		// Suppression du logo ?
+		if ($wid = array_pop($ref)
+		AND $_POST['content_'.$wid.'_logo_supprimer'] == 'on') {
+			if (include_spip("action/editer_logo")
+			  AND function_exists("logo_supprimer")){
+				logo_supprimer($type, $id, "on");
+			}
+			else {
+				if ($on = $chercher_logo($id, $_id_objet, 'on'))
+					@unlink($on[0]);
+			}
+		}
 	}
 
 	// Reduire le logo ?
@@ -183,10 +196,16 @@ function logo_revision($id, $file, $type, $ref) {
 		$img2 = preg_replace(',[?].*,', '', extraire_attribut($img1, 'src'));
 		if (@file_exists($img2)
 		AND $img2 !=  $temp) {
-			@unlink($on[0]);
-			$dest = $on[1].$on[2].'.'
-				.preg_replace(',^.*\.(gif|jpg|png)$,', '\1', $img2);
-			@rename($img2,$dest);
+			if (include_spip("action/editer_logo")
+			  AND function_exists("logo_modifier")){
+				logo_modifier($type, $id, "on", $img2);
+			}
+			else {
+				@unlink($on[0]);
+				$dest = $on[1].$on[2].'.'
+					.preg_replace(',^.*\.(gif|jpg|png)$,', '\1', $img2);
+				@rename($img2,$dest);
+			}
 		}
 		@unlink($temp);
 	}
