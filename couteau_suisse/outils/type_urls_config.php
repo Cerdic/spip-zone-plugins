@@ -153,7 +153,7 @@ array(
 ), array(
 	'nom' => 'url_max_arbo',
 	'format' => _format_NOMBRE,
-	'defaut' => 35,
+	'defaut' => defined("_SPIP30000")?80:35,
 	'label' => '<:label:url_max_propres:>',
 	'code' => "define('_URLS_ARBO_MAX', %s);",
 ), array(
