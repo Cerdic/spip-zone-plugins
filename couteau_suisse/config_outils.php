@@ -599,9 +599,28 @@ add_outil( array(
 	'code:spip_options' => (defined('_SPIP30000')?'%%filtre_gravite_trace%%%%filtre_gravite%%%%log_brut%%%%log_fileline%%':'')
 		. '%%dir_log%%%%file_log%%%%file_log_suffix%%%%max_log%%%%taille_des_logs%%%%nombre_de_logs%%%%log_non%%',
 	'categorie' =>'devel',
+	'contrib'=>4569,
 	'pipelinecode:pre_description_outil' => 'if($id=="spip_log")
 	$texte=str_replace(array("@DIR_LOG@","@SPIP_OPTIONS@"),
 	array("<code>".cs_root_canonicalize(_DIR_LOG)."</code>",!defined("_CS_SPIP_OPTIONS_OK")?"<br/>"._T("couteauprive:detail_spip_options2"):""),$texte);',
+));
+
+add_variables( array(
+	'nom' => 'req_lentes',
+	'check' => 'couteauprive:req_lentes',
+	'defaut' => 0,
+	'code:%s' => "defined('_DEBUG_SLOW_QUERIES') || define('_DEBUG_SLOW_QUERIES',true);",
+), array(
+	'nom' => 'boucles_lentes',
+	'format' => _format_NOMBRE,
+	'defaut' => 0, // Secondes (0 : pas de profiling)
+	'code:%s>0 && %s<=30' => "defined('_BOUCLE_PROFILER') || define('_BOUCLE_PROFILER',%s*1000);",
+));
+add_outil( array(
+	'id' => 'profiling',
+	'code:spip_options' => '%%req_lentes%%%%boucles_lentes%%',
+	'categorie' =>'devel',
+	'contrib'=>4569,
 ));
 
 add_outil( array(

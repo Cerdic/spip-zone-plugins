@@ -828,9 +828,17 @@ _ • {Contrôle du cache} : option identique à la précédente, avec une écri
 	'spip_log:description2' => '@puce@ Le filtre de gravité de SPIP permet de sélectionner le niveau d\'importance maximal à prendre en compte avant la mise en logs d\'une donnée. Un niveau 8 permet par exemple de stocker tous les messages émis par SPIP. Le niveau par défaut est le niveau 5.',
 	'spip_log:description3' => '@puce@ Les logs spécifiques au Couteau Suisse s\'activent ici : «[.->cs_comportement]».
 _ @puce@ Le décalage horaire utilisé par les fonctions de date/heure se configure ici : «[.->timezone]» {(PHP 5.1 minimum)}.
+_ @puce@ Le profiling des requêtes SQL se configure ici  : «[.->profiling]»}.
 ',
 	'spip_log:description4' => '@puce@ Les logs spécifiques aux autorisations s\'activent ici : «[.->autorisations]».',
 	'spip_log:nom' => 'SPIP et les logs',
+	'profiling:nom' => 'Profiling',
+	'profiling:description' => '[[Base de données :->@puce@ %req_lentes%]][[-><br/>@puce@ Tracer les boucles demandant plus de %boucles_lentes% secondes pour s’exécuter <small>(SPIP 3.0.9 mini ou SPIP 2.1 avec le plugin « itérateurs »)</small>.<q3>{Mettre à zéro cette option désactive le suivi.<br/>Valeur maximale admise : 30 secondes.}</q3>]]
+
+@puce@ Rappel : L’appel en URL du paramètre {{« var_profile=1 »}} affiche le détail des requêtes SQL et les temps de calcul de chacune. 
+
+@puce@ Configurez les options de journalisation grâce à l\'outil «[.->spip_log]».',
+	'req_lentes' => 'Tracer les informations correspondant aux requêtes [« lentes »->https://dev.mysql.com/doc/refman/5.0/en/slow-query-log.html] <small>(MySQL uniquement, SPIP 2.1.22 et 3.0.9 mini)</small>.',
 	'stat_auteurs' => 'Les auteurs en stat',
 	'statut' => 'Statut',
 	'statuts_spip' => 'Uniquement les statuts SPIP suivants :',

@@ -667,7 +667,7 @@ function cs_php_format($valeur, $is_chaine = true, $dblguill=false) {
 function cs_get_code_php_variable($variable, $valeur) {
 	global $cs_variables;
 	// si la variable n'a pas ete declaree
-	if(!isset($cs_variables[$variable])) return _L("/* Variable '$variable' inconnue ! */");
+	if(!isset($cs_variables[$variable])) return "/* Variable '$variable' inconnue ! */";
 	$cs_variable = &$cs_variables[$variable];
 	// mise en forme php de $valeur
 	if(!strlen($valeur)) {
