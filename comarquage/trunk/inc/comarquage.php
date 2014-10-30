@@ -47,7 +47,6 @@ if (!isset($default_xsl_file)){
 
 // recuperer le contenu compile d'une page xml
 function & comarquage_compile_page_xml($parametres,$url_base){
-	global $type_urls;
 	// regarder si la page parsee est en cache et valide
 	comarquage_prepare_parametres_cache($parametres,$url_base);
 	if ($ma_page =& comarquage_lire_cache($parametres))
@@ -80,18 +79,21 @@ function & comarquage_compile_page_xml($parametres,$url_base){
 	if (isset($parametres['motcle'])) $parametres_xsl['MOTCLE'] = $parametres['motcle'];
 
 	/* Réglage pour l'URL */
-	$parametres_xsl['REFERER'] = $GLOBALS['REQUEST_URI'];
+	$parametres_xsl['REFERER'] = self();
 	// spip_log("REFERER 1 : ".$parametres_xsl['REFERER'],"comarquage");
-	$parametres_xsl['REFERER'] = parametre_url($parametres_xsl['REFERER'],"var_mode",'','&');
 	$parametres_xsl['REFERER'] = parametre_url($parametres_xsl['REFERER'],"xml",'','&'); // on enlève les paramètres d'url
 	// spip_log("REFERER 2 : ".$parametres_xsl['REFERER'],"comarquage");
 	$parametres_xsl['REFERER'] = parametre_url($parametres_xsl['REFERER'],"xsl",'','&');
 	// spip_log("REFERER 3 : ".$parametres_xsl['REFERER'],"comarquage");
 	//$parametres_xsl['REFERER'] = $GLOBALS['REQUEST_URI'].'?&' ; // url principale du comarquage
 
-	// Si un autre jeu d'URL est utilisé (propre), on ajoute l'esperluette
-	if ($type_urls == "page") $parametres_xsl['REFERER'] .= '&';
-	else $parametres_xsl['REFERER'] .= '?&';
+	// On teste s'il faut un "?" ou un "&" pour la suite
+	if (strpos($parametres_xsl['REFERER'], '?') !== false){
+		$parametres_xsl['REFERER'] .= '&';
+	}
+	else{
+		$parametres_xsl['REFERER'] .= '?';
+	}
 
 
 	// MODIF VI :  REFERER / PICTOS / SITEURL / IMAGES / PIVOTS / XMLURL / CATEGORIE
