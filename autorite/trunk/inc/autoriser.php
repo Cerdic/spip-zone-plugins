@@ -16,13 +16,6 @@ if ($GLOBALS['spip_version_code'] < '1.93'
 AND $f = charger_fonction('compat_autorite', 'inc'))
 	$f(array('sql_fetch','sql_count'));
 
-include_spip('plugins/installer'); // spip_version_compare dans SPIP 3.x 
-include_spip('inc/plugin'); // spip_version_compare dans SPIP 2.x 
-if (function_exists(spip_version_compare)) { // gerer son absence dans les branche precedente a SPIP 2.x
-if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0alpha', '>=')) 
-	define('_SPIP3', true);
-} 
-
 
 //
 // Les DEFINE
@@ -248,14 +241,8 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 			AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
 		);
 }
-if (defined('_SPIP3')) {
-	function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-		if (function_exists('autoriser_rubrique_publierdans')) {
-			return autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt);
-		} else if (function_exists('autoriser_rubrique_publierdans_dist')) {
-			return autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
-		}
-	}
+function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
+	return autoriser_voir_dist($faire, $type, $id, $qui, $opt);
 }
 } else
 	$autorite_erreurs[] = 'autoriser_article_modifier';
