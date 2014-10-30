@@ -146,28 +146,28 @@ if ($GLOBALS['autorite']['espace_wiki']) {
 
 
 ##
-## une fonction qui gere les droits wiki gÃ©rÃ© par mot clef
+## une fonction qui gere les droits wiki par mot clef
 ##
 if ($GLOBALS['autorite']['espace_wiki_motsclef']) {
 	if (!function_exists('autorisation_wiki_motsclef_visiteur')) {
 	function autorisation_wiki_motsclef_visiteur($qui, $id_article) {
 
-	    //determine les mots clef affectÃ©s Ã  l'article
+	    //determine les mots clef affectés à l'article
 	    if (intval($GLOBALS['spip_version_branche'])<3)
 	      $s = spip_query("SELECT id_mot FROM spip_mots_articles WHERE id_article=".$id_article);
 	    else
 	      $s = spip_query("SELECT id_mot FROM spip_mots_liens WHERE objet='article' AND id_objet=".$id_article);
 
-	    //obtient la liste des mots clefs affectÃ© Ã  l'article
+	    //obtient la liste des mots clefs affectés à l'article
         while ( $r = sql_fetch($s) ) { 
             $array_mot[] = $r['id_mot'];
         }	    
         
-        //aucun mot clef d'affecter Ã  l'article, rien Ã  faire
+        //aucun mot clef d'affecter à  l'article, rien Ã  faire
         if (is_null($array_mot))
             return false;
 	            	    	    
-	    //vÃ©rification que l'article possÃ©de un mot clef correspondant au staut du visiteur
+	    //vérification que l'article possèe un mot clef correspondant au staut du visiteur
 		switch($qui['statut']) {
 			case '0minirezo':
 			case '1comite':
