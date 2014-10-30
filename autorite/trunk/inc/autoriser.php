@@ -167,7 +167,7 @@ if ($GLOBALS['autorite']['espace_wiki_motsclef']) {
         if (is_null($array_mot))
             return false;
 	            	    	    
-	    //vérification que l'article possèe un mot clef correspondant au staut du visiteur
+	    //vérification que l'article possède un mot clef correspondant au staut du visiteur
 		switch($qui['statut']) {
 			case '0minirezo':
 			case '1comite':
