@@ -3,7 +3,7 @@
 ][(#ID_GIS|non)
 	[(#AUTORISER{creer,gis,#ID_GIS,'','',#ARRAY{associer_objet,#ENV{associer_objet}}}|sinon_interdire_acces)]
 ]
-#SET{redirect,#ENV{redirect,#ENV{id_gis}|?{#URL_ECRIRE{gis,id_gis=#ID_GIS},#URL_ECRIRE{gis_tout}}}}
+#SET{redirect,#ENV{redirect,#ENV{id_gis}|?{#URL_ECRIRE{gis,id_gis=#ID_GIS},#URL_ECRIRE{gis_tous}}}}
 
 #SET{objet, #ENV{objet, ''}}
 #SET{id_objet, #ENV{id_objet, 0}}
