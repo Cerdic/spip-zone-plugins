@@ -58,7 +58,7 @@
 		<inclure>saisies_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<utilise id="verifier" />
 	<utilise id="spip_bonux" />
 	<traduire gestionnaire="salvatore" module="saisies" reference="fr" />

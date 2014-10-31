@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="1.42.0"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="images/logo_saisie_48.png"
 	documentation="http://contrib.spip.net/Saisies"
 >
