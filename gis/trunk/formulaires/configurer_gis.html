@@ -169,6 +169,14 @@
 			geocoder.geocode(address);
 		});
 		
+		// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
+		$('#champ_map_config_geocoder').keypress(function(e){
+			if (e.which == 13) {
+				$('a#map_config_rechercher_geocodage').trigger("click");
+				return false;
+			}
+		});
+		
 		// mettre à jour le zoom quand on le modifie
 		map.on('zoomend', function(e) {
 			$("#champ_zoom").val(e.target._zoom);
