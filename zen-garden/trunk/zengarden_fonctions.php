@@ -134,7 +134,7 @@ function zengarden_filtrer_liste_plugins($flux){
  * @return string
 **/
 function zengarden_affiche_info($donnees) {
-	if (count($donnees)) {
+	if (is_array($donnees) AND count($donnees)) {
 		$liste = array();
 		foreach ($donnees as $d) {
 			if (!is_array($d)) {
