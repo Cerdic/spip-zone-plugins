@@ -42,6 +42,7 @@ function gis_insert_head($flux){
 
 /**
  * Insertion des scripts et css du plugin dans les pages de l'espace privé
+ *
  * @param $flux
  * @return mixed
  */
@@ -51,6 +52,12 @@ function gis_header_prive($flux){
 	return $flux;
 }
 
+/**
+ * Insertion du bloc GIS dans les pages des objets de l'espace privé
+ *
+ * @param $flux
+ * @return mixed
+ */
 function gis_afficher_contenu_objet($flux){
 	if ($objet = $flux['args']['type']
 		and include_spip('inc/config')
@@ -72,9 +79,17 @@ function gis_afficher_contenu_objet($flux){
 	return $flux;
 }
 
+/**
+ * Si la geolocalisation des documents est activée dans la config,
+ * création/suppression d'un point à partir des métadonnées du document ajouté (jpg, kml et kmz)
+ *
+ * @param $flux
+ * @return mixed
+ */
 function gis_post_edition($flux){
 	if (is_array($flux) && isset($flux['args']['operation']) && ($flux['args']['operation'] == 'ajouter_document') 
 		AND ($document = sql_fetsel("*","spip_documents","id_document=".intval($flux['args']['id_objet'])))
+		AND (in_array(table_objet_sql('document'), lire_config('gis/gis_objets', array())))
 	) {
 		if(in_array($document['extension'],array('jpg','kml','kmz'))){
 			$config = @unserialize($GLOBALS['meta']['gis']);
