@@ -58,9 +58,6 @@ function gis_afficher_contenu_objet($flux){
 		and ($id = intval($flux['args']['id_objet']))
 		
 	){
-		// TODO : seulement si la conf permet de geolocaliser cet objet
-		// -> ajouter un element a la array suivante (qqch comme ca - voir les mots):
-		//   'editable'=>autoriser('associergis',$type,$id)?'oui':'non'
 		$texte = recuperer_fond(
 			'prive/contenu/gis_objet',
 			array(
