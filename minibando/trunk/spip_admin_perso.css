@@ -22,10 +22,11 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 #minibando #bando1_menu_squelette { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -240px no-repeat; }
 #minibando #bando1_menu_administration { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -120px no-repeat; }
 #minibando #bando1_menu_configuration { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -216px no-repeat; }
+#minibando #bando1_menu_dev { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -288px no-repeat; }
 #minibando #minibando_outils_rapides > a { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -24px no-repeat; }
 #minibando #minibando_bouton_modifier > a { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -48px no-repeat; }
 #minibando #minibando_bouton_statistiques > a { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -192px no-repeat; }
-#minibando #minibando_bouton_recalcul > a { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -72px no-repeat; }
+#minibando #minibando_bouton_recalcul > a { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -71px no-repeat; }
 #minibando #minibando_bouton_debug > a { background: #f8f8f8 url(images/minibando_stripes_optim.png) 50% -144px no-repeat; }
 #minibando li.minibando_sep { width: 1px; margin: 4px 2px 0 2px; height: 24px; background-color: #bdbdbd; }
 #minibando li li a { background-image: none; text-indent: 0; width: 190px; height: auto; border: none; text-decoration: none;
