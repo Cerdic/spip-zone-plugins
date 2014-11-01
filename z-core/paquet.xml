@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="2.4.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="img/z-core-32.png"
 	documentation="http://www.yterium.net/108"
 >	
