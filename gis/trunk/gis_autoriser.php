@@ -71,7 +71,8 @@ function autoriser_gis_lier_dist($faire,$quoi,$id,$qui,$opts){
 
 /**
  * Autorisation a délier un point d'un objet
- * Un auteur peut délier un point à un autre objet que s'il peut modifier l'objet à lier en question
+ * Un auteur peut délier un point d'un autre objet que s'il peut modifier l'objet en question
+ * Si l'objet lié n'existe plus, on vérifie que l'auteur a le droit de modifier le point
  * 
  * @param string $faire L'action
  * @param string $type Le type d'objet
@@ -81,7 +82,12 @@ function autoriser_gis_lier_dist($faire,$quoi,$id,$qui,$opts){
  * @return boolean true/false
  */
 function autoriser_gis_delier_dist($faire,$quoi,$id,$qui,$opts){
-	return autoriser('lier','gis',$id,$qui,$opts);
+	$table = table_objet_sql($opts['objet']);
+	$_id_objet = id_table_objet($table);
+	if (!sql_getfetsel($_id_objet,$table,"$_id_objet=".intval($opts['id_objet'])))
+		return autoriser('modifier','gis',$id,$qui,$opts);
+	else
+		return autoriser('lier','gis',$id,$qui,$opts);
 }
 
 /**
