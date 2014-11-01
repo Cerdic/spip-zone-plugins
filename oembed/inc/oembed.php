@@ -64,6 +64,7 @@ function oembed_lister_providers(){
 		'http://www.collegehumor.com/video/*'=>'http://www.collegehumor.com/oembed.json',
 		'http://imgur.com/*'        =>   'http://api.imgur.com/oembed',
 		'http://*.imgur.com/*'      =>   'http://api.imgur.com/oembed',
+		'http://*.onf.ca/*'      =>   'http://www.onf.ca/remote/services/oembed/',
 
 
 		#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
@@ -155,7 +156,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 
 	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
 	if ($cache[$data_url]){
-		$provider_name= strtolower($cache[$data_url]['provider_name']);
+		$provider_name= str_replace(" ", "_", strtolower($cache[$data_url]['provider_name']));
 		$type = strtolower($cache[$data_url]['type']);
 		// securisons le nom de la fonction (provider peut contenir n'importe quoi)
 		$f1 = preg_replace(",\W,","","posttraite_{$provider_name}_$type");
