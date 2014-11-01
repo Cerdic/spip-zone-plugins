@@ -301,16 +301,20 @@ function gis_post_edition($flux){
 
 
 /**
- * Insertion dans le pipeline taches_generales_cron
+ * Optimiser la base de données en supprimant les liens orphelins
  *
- * Supprime les liens de spip_gis_liens qui pointent vers des objets inexistants
- * 
- * @param array $taches_generales Un array des tâches du cron de SPIP
- * @return L'array des taches complété
+ * @param array $flux
+ * @return array
  */
-function gis_taches_generales_cron($taches_generales){
-	$taches_generales['gis_nettoyer_base'] = 3600*48;
-	return $taches_generales;
+function gis_optimiser_base_disparus($flux){
+
+	include_spip('action/editer_liens');
+	// optimiser les liens morts :
+	// entre gis vers des objets effaces
+	// depuis des gis effaces
+	$flux['data'] += objet_optimiser_liens(array('gis'=>'*'),'*');
+
+	return $flux;
 }
 
 function gis_saisies_autonomes($flux){

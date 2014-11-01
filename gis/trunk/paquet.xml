@@ -1,10 +1,10 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="4.24.1"
+	version="4.25.0"
 	schema="2.0.7"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/gis.png"
 	documentation="http://contrib.spip.net/4189"
 >
@@ -66,7 +66,7 @@
 		inclure="gis_pipelines.php"
 	/>
 	<pipeline
-		nom="taches_generales_cron"
+		nom="optimiser_base_disparus"
 		inclure="gis_pipelines.php"
 	/>
 	<pipeline
