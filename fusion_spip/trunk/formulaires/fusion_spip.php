@@ -176,21 +176,18 @@ function formulaires_fusion_spip_traiter_dist() {
 		$time = $time_end - $time_start;
 		fusion_spip_log('Fusion terminée : '.number_format($time, 2).' secondes)', 'fusion_spip_'.$connect);
 
-        // Un résumé des objets importés
-        $res = sql_select('objet, count(*) as count', 'spip_fusion_spip' , '', 'objet');
-        $texte='';
-        while ($ligne = sql_fetch($res))
-        {
-            if ($ligne['count'] >0 )
-            {
-                $texte.=$ligne['objet']. ":". $ligne['count'].", " ;
-            }
-        }
+		// Un résumé des objets importés
+		$res            = sql_select('objet, count(*) as count', 'spip_fusion_spip', '', 'objet');
+		$resume_imports = array();
+		while( $ligne = sql_fetch($res) ) {
+			if( $ligne['count'] > 0 ){
+				$resume_imports[] = table_objet($ligne['objet']) . " : " . $ligne['count'];
+			}
+		}
+		$resume_imports = join("<br>", $resume_imports);
 
-
-
-            $retour = array(
-			'message_ok' => _T('fusion_spip:message_import_ok') . $texte
+		$retour = array(
+			'message_ok' => _T('fusion_spip:message_import_ok') . $resume_imports
 		);
 	}
 
