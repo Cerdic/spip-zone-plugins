@@ -31,6 +31,6 @@ _ for example
 _ Url, introduction and subject are optionals.</multi>
 	</description>
 	<prefix>recommander</prefix>
-	<necessite id="SPIP" version="[2.0.12;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.12;3.1.99]" />
 	<categorie>communication</categorie>
 </plugin>
