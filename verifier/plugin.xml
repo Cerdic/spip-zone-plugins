@@ -23,7 +23,7 @@
 		<nom>verifier</nom>
 		<action></action>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.10;3.1.99]" />
 	<utilise id="yaml" />	
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="verifier" reference="fr" />
