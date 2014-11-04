@@ -1,7 +1,7 @@
 <paquet
         prefix="eval_critique"
         categorie="squelette"
-        version="0.1.2"
+        version="1.0.0"
         etat="dev"
         compatibilite="[3.0.5;3.0.*]"
         logo="img/eval_critique-48.png"
@@ -16,8 +16,7 @@
 
     <pipeline nom="insert_head_css" inclure="eval_critique_pipelines.php" />
 
-	<necessite nom="evaluations"    compatibilite="[1.1.0;[" />
-	<necessite nom="compositions"   compatibilite="[3.0.0;[" />
-	<necessite nom="spipr_dist"     compatibilite="[0.4.0;[" />
+    <necessite nom="evaluations" compatibilite="[1.1.0;[" />
+    <necessite nom="compositions" compatibilite="[3.0.0;[" />
 
 </paquet>

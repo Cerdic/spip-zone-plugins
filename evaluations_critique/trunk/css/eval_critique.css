@@ -1,9 +1,36 @@
-.composition_eval_critique #content {background-color:#FFFFCC; width:auto}
+.composition_eval_critique #content {
+	 width:auto}
 .composition_eval_critique #extra1,
 .composition_eval_critique #extra2 {display:none}
 
-.composition_eval_critique dl.liste-items {width:auto; float:none}
+/* un bloc dl */
+.composition_eval_critique dl.liste-items {
+	width:18.8%;
+	float:left; 
+	border:1px solid gray;
+	position:relative;
+	margin-bottom:0.5em;
+	margin-right:0.5em;
+}
+
+/* le clearfix  sur les dl */
 .composition_eval_critique dl.liste-items:after {content:"."; display:block; clear:both; height:0; visibility:hidden;}
-.composition_eval_critique dl.liste-items dd {float:left}
-.composition_eval_critique dl.liste-items dd.vignette {width:30%}
-.composition_eval_critique dl.liste-items dd.texte {width:70%}
+
+/* les dd */
+.composition_eval_critique dl.liste-items dd {}
+.composition_eval_critique dl.liste-items dd.vignette {}
+.composition_eval_critique dl.liste-items dd.texte {}
+
+/* on centre les images dans les dd */
+.composition_eval_critique dl.liste-items dd.vignette {
+	text-align:center;
+}
+
+/* on descend le titre dans le bas du dl */
+.composition_eval_critique dl.liste-items dd.texte {
+	position:absolute;
+	bottom:0;
+	width:100%;
+	background-color:rgba(128, 128, 128, 0.6);
+	color:white;
+}
