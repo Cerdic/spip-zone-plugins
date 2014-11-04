@@ -1,10 +1,8 @@
-<h2>ici</h2>
-
 <BOUCLE_content(ARTICLES){id_article}>
 
 <article class="content-principal">
 	<header class="cartouche">
-		[(#LOGO_ARTICLE|image_reduire{200,200})]
+		[(#LOGO_ARTICLE|image_reduire{200,200}|sinon{})]
 		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
 		[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
@@ -14,6 +12,9 @@
 		#MODELE{article_traductions}
 	</header>
 
+	[(#REM) Gestion du portfolio et des documents ]
+	[(#INCLURE{fond=inclure/documents,id_article})]
+
 	[<section class="#EDIT{chapo} chapo surlignable">(#CHAPO|image_reduire{500,0})</section>]
 	[<section class="#EDIT{texte} texte surlignable">(#TEXTE|image_reduire{500,0})</section>]
 	[<section class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></section>]
@@ -21,14 +22,13 @@
 
 	#FORMULAIRE_EVALUATION{#CONFIG{eval_critique/eval_critique}}
 
-	[(#REM) Gestion du portfolio et des documents ]
-	[(#INCLURE{fond=inclure/documents,id_article})]
 
 	<footer>
 		[<aside class="notes"><h2><:info_notes:></h2>(#NOTES)</aside>]
 		[(#REM) inclure de partage RS ]
 		[(#REM) bloc precedent/suivant en guise de <nav></nav> ]
 	</footer>
+
 </article>
 
 [(#REM) Petition :

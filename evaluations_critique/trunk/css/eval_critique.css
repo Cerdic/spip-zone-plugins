@@ -6,6 +6,7 @@
 /* un bloc dl */
 .composition_eval_critique dl.liste-items {
 	width:18.8%;
+	height:10em;
 	float:left; 
 	border:1px solid gray;
 	position:relative;
@@ -29,8 +30,16 @@
 /* on descend le titre dans le bas du dl */
 .composition_eval_critique dl.liste-items dd.texte {
 	position:absolute;
-	bottom:0;
-	width:100%;
+	bottom:-1.5em;
+	display:block;
+	width:92%;
 	background-color:rgba(128, 128, 128, 0.6);
 	color:white;
+	padding: 0.5em;
+	font-size: 0.9em;
+}
+
+/* on traite spécialement les textes de liens */
+.composition_eval_critique dl.liste-items dd.texte a {
+	color: white;
 }

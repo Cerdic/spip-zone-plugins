@@ -11,12 +11,10 @@
 	<dl class="liste-items">
         <dd class="vignette">
         <BOUCLE_docs(DOCUMENTS){id_article}{extension IN jpg,png,gif}{0,1}>
-			[(#FICHIER|image_passe_partout{150,150}|image_recadre{190,190})]
+			[<a href="#URL_ARTICLE">(#FICHIER|image_passe_partout{150,150}|image_reduire{150,150})</a>]
         </BOUCLE_docs>
         </dd>
-        <dd class="texte">
-            <h3 class="#EDIT{titre}"><a href="#URL_ARTICLE">#TITRE</a></h3>
-        </dd>
+        <dd class="texte #EDIT{titre}"><a href="#URL_ARTICLE">#TITRE</a></dd>
 	</dl>
     </BOUCLE_articles>
 	[<p class="pagination">(#PAGINATION)</p>]
