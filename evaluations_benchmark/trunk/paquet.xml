@@ -1,7 +1,7 @@
 <paquet
 	prefix="eval_benchmark"
 	categorie="squelette"
-	version="0.3.1"
+	version="0.3.2"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="img/eval_benchmark-48.png"
@@ -21,7 +21,6 @@
 
 	<necessite nom="evaluations"    compatibilite="[1.1.0;[" />
 	<necessite nom="compositions"   compatibilite="[3.0.0;[" />
-	<necessite nom="spipr_dist"     compatibilite="[0.4.0;[" />
 
 	<necessite nom="article_accueil" compatibilite="[1.1.0;]" />
 	<necessite nom="thumbsites" compatibilite="[1.1.0;]" />
