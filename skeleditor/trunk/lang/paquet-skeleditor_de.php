@@ -4,8 +4,8 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	'skeleditor_slogan'=>"Skeleton Herausgeber",
-	'skeleditor_description'=>"Im privaten Raum erlaubt Herausgeber die Aktenskelette",
+	'skeleditor_slogan'=>"Template Editor",
+	'skeleditor_description'=>"SPIP-Templates (Skelette) im Redaktionssystem bearbeiten",
 
 );
 
