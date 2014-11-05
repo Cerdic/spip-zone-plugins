@@ -1,10 +1,11 @@
+/* formatter la page */
 .composition_eval_critique #content {
 	 width:auto}
 .composition_eval_critique #extra1,
 .composition_eval_critique #extra2 {display:none}
 
 /* un bloc dl */
-.composition_eval_critique dl.liste-items {
+.planche-contact dl.liste-items {
 	width:18.8%;
 	height:10em;
 	float:left; 
@@ -15,20 +16,20 @@
 }
 
 /* le clearfix  sur les dl */
-.composition_eval_critique dl.liste-items:after {content:"."; display:block; clear:both; height:0; visibility:hidden;}
+.planche-contact dl.liste-items:after {content:"."; display:block; clear:both; height:0; visibility:hidden;}
 
 /* les dd */
-.composition_eval_critique dl.liste-items dd {}
-.composition_eval_critique dl.liste-items dd.vignette {}
-.composition_eval_critique dl.liste-items dd.texte {}
+.planche-contact dl.liste-items dd {}
+.planche-contact dl.liste-items dd.vignette {}
+.planche-contact dl.liste-items dd.texte {}
 
 /* on centre les images dans les dd */
-.composition_eval_critique dl.liste-items dd.vignette {
+.planche-contact dl.liste-items dd.vignette {
 	text-align:center;
 }
 
 /* on descend le titre dans le bas du dl */
-.composition_eval_critique dl.liste-items dd.texte {
+.planche-contact dl.liste-items dd.texte {
 	position:absolute;
 	bottom:-1.5em;
 	display:block;
@@ -40,6 +41,6 @@
 }
 
 /* on traite spécialement les textes de liens */
-.composition_eval_critique dl.liste-items dd.texte a {
+.planche-contact dl.liste-items dd.texte a {
 	color: white;
 }

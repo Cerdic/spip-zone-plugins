@@ -2,7 +2,7 @@
 
 <article class="content-principal">
 	<header class="cartouche">
-		[(#LOGO_ARTICLE|image_reduire{200,200}|sinon{})]
+		[(#LOGO_ARTICLE|image_reduire{200,200})]
 		[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
 		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
 		[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
@@ -21,7 +21,6 @@
 	[<section class="#EDIT{ps} ps surlignable"><h2><:info_ps:></h2>(#PS|image_reduire{500,0})</section>]
 
 	#FORMULAIRE_EVALUATION{#CONFIG{eval_critique/eval_critique}}
-
 
 	<footer>
 		[<aside class="notes"><h2><:info_notes:></h2>(#NOTES)</aside>]
