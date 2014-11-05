@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2011                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -21,54 +21,13 @@ function liste_des_champs() {
 	static $liste=null;
 	if (is_null($liste)) {
 		$liste = array();
-		if(intval($GLOBALS['spip_version_branche']) > 2){
-			// recuperer les tables_objets_sql declarees
-			include_spip('base/objets');
-			$tables_objets = lister_tables_objets_sql();
-			foreach($tables_objets as $t=>$infos){
-				if ($infos['rechercher_champs']){
-					$liste[$infos['type']] = $infos['rechercher_champs'];
-				}
+		// recuperer les tables_objets_sql declarees
+		include_spip('base/objets');
+		$tables_objets = lister_tables_objets_sql();
+		foreach($tables_objets as $t=>$infos){
+			if ($infos['rechercher_champs']){
+				$liste[$infos['type']] = $infos['rechercher_champs'];
 			}
-		}
-		else {
-			$liste =
-				array(
-					'article' => array(
-						'surtitre' => 5, 'titre' => 8, 'soustitre' => 5, 'chapo' => 3,
-						'texte' => 1, 'ps' => 1, 'nom_site' => 1, 'url_site' => 1,
-						'descriptif' => 4
-					),
-					'breve' => array(
-						'titre' => 8, 'texte' => 2, 'lien_titre' => 1, 'lien_url' => 1
-					),
-					'rubrique' => array(
-						'titre' => 8, 'descriptif' => 5, 'texte' => 1
-					),
-					'site' => array(
-						'nom_site' => 5, 'url_site' => 1, 'descriptif' => 3
-					),
-					'mot' => array(
-						'titre' => 8, 'texte' => 1, 'descriptif' => 5
-					),
-					'auteur' => array(
-						'nom' => 5, 'bio' => 1, 'email' => 1, 'nom_site' => 1, 'url_site' => 1, 'login' => 1
-					),
-					'forum' => array(
-						'titre' => 3, 'texte' => 1, 'auteur' => 2, 'email_auteur' => 2, 'nom_site' => 1, 'url_site' => 1
-					),
-					'document' => array(
-						'titre' => 3, 'descriptif' => 1, 'contenu' => 1, 'fichier' => 1
-					),
-					'syndic_article' => array(
-						'titre' => 5, 'descriptif' => 1
-					),
-					'signature' => array(
-						'nom_email' => 2, 'ad_email' => 4,
-						'nom_site' => 2, 'url_site' => 4,
-						'message' => 1
-					)
-				);
 		}
 		// puis passer dans le pipeline
 		$liste = pipeline('rechercher_liste_des_champs', $liste);
@@ -84,36 +43,13 @@ function liste_des_jointures() {
 	static $liste=null;
 	if (is_null($liste)) {
 		$liste = array();
-		if(intval($GLOBALS['spip_version_branche']) > 2){
-			// recuperer les tables_objets_sql declarees
-			include_spip('base/objets');
-			$tables_objets = lister_tables_objets_sql();
-			foreach($tables_objets as $t=>$infos){
-				if ($infos['rechercher_jointures']){
-					$liste[$infos['type']] = $infos['rechercher_jointures'];
-				}
+		// recuperer les tables_objets_sql declarees
+		include_spip('base/objets');
+		$tables_objets = lister_tables_objets_sql();
+		foreach($tables_objets as $t=>$infos){
+			if ($infos['rechercher_jointures']){
+				$liste[$infos['type']] = $infos['rechercher_jointures'];
 			}
-		}
-		else {
-			$liste =
-				array(
-				'article' => array(
-					'auteur' => array('nom' => 10),
-					'mot' => array('titre' => 3),
-					'document' => array('titre' => 2, 'descriptif' => 1, 'contenu' => 1)
-				),
-				'breve' => array(
-					'mot' => array('titre' => 3),
-					'document' => array('titre' => 2, 'descriptif' => 1, 'contenu' => 1)
-				),
-				'rubrique' => array(
-					'mot' => array('titre' => 3),
-					'document' => array('titre' => 2, 'descriptif' => 1, 'contenu' => 1)
-				),
-				'document' => array(
-					'mot' => array('titre' => 3)
-				)
-			);
 		}
 		// puis passer dans le pipeline
 		$liste = pipeline('rechercher_liste_des_jointures', $liste);
@@ -141,6 +77,13 @@ function fulltext_keys($table, $prefix=null, $serveur=null) {
 
 
 function expression_recherche($recherche, $options) {
+	// ne calculer qu'une seule fois l'expression par hit
+	// (meme si utilisee dans plusieurs boucles)
+	static $expression = array();
+	$key = serialize(array($recherche, $options['preg_flags']));
+	if (isset($expression[$key]))
+		return $expression[$key];
+
 	$u = $GLOBALS['meta']['pcre_u'];
 	include_spip('inc/charsets');
 	$recherche = trim(translitteration($recherche));
@@ -195,7 +138,7 @@ function expression_recherche($recherche, $options) {
 		$q = sql_quote($recherche);
 	}
 
-	return array($methode, $q, $preg);
+	return $expression[$key] = array($methode, $q, $preg);
 }
 
 
@@ -265,7 +208,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 		# TODO : ici plutot charger un iterateur via l'API iterateurs
 		$to_array = charger_fonction('recherche_to_array', 'inc');
 		$results[$table] = $to_array($recherche,
-			array_merge($options, array('table' => $table))
+			array_merge($options, array('table' => $table, 'champs' => $champs))
 		);
 		##var_dump($results[$table]);
 
@@ -314,7 +257,7 @@ function remplace_en_base($recherche='', $remplace=NULL, $tables=NULL, $options=
 						$modifs[$key] = $repl;
 				}
 				if ($modifs)
-					modifier_contenu($table, $id,
+					objet_modifier_champs($table, $id,
 						array(
 							'champs' => array_keys($modifs),
 						),
