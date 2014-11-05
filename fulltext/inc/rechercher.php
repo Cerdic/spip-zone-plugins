@@ -251,22 +251,23 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 	//      id1 = { 'score' => x, attrs => { } },
 	//      id2 = { 'score' => x, attrs => { } },
 	// }
+	
+	include_spip('inc/memoization');
+	include_spip('inc/recherche_to_array');
+
 	foreach ($tables as $table => $champs) {
 		# lock via memoization, si dispo
-		include_spip('inc/memoization');
 		if (function_exists('cache_lock'))
 			cache_lock($lock = 'fulltext '.$table.' '.$recherche);
 
 		spip_timer('rech');
 
 		# TODO : ici plutot charger un iterateur via l'API iterateurs
-		include_spip('inc/recherche_to_array');
 		$to_array = charger_fonction('recherche_to_array', 'inc');
 		$results[$table] = $to_array($recherche,
 			array_merge($options, array('table' => $table))
 		);
 		##var_dump($results[$table]);
-
 
 		spip_log("recherche $table ($recherche) : ".count($results[$table])." resultats ".spip_timer('rech'),'recherche');
 
