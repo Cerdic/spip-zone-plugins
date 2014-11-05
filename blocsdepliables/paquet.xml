@@ -15,9 +15,11 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="pre_typo" inclure="blocsdepliables_pipelines.php" />
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="blocsdepliables_pipelines.php" />
 	<pipeline nom="porte_plume_cs_pre_charger" inclure="blocsdepliables_pipelines.php" />
 	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="blocsdepliables_pipelines.php" />
 	<pipeline nom="insert_head_css" inclure="blocsdepliables_pipelines.php" />
 	<pipeline nom="insert_head" inclure="blocsdepliables_pipelines.php" />
 
+	<utilise nom="typoenluminee" />
 </paquet>
