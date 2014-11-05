@@ -165,49 +165,45 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			$i = 0;
 
 			foreach ($jointures[$table] as $table_liee => $champs) {
-			//foreach(array_keys($jointures[$table]) as $jtable) {
 				$i++;
 				spip_log($pe,'recherche');
 				if ($mkeys = fulltext_keys($table_liee, 'obj'.$i, $serveur)) {
 					$_id_join = id_table_objet($table_liee);
 					$table_join = table_objet($table_liee);
-					//$lesliens = recherche_tables_liens();
 
 					$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
 					// on peut definir une fonction de recherche jointe pour regler les cas particuliers
-						$cle_arrivee =  id_table_objet($table_liee);
-						$table_arrivee = table_objet($table_liee,$serveur);
-						$desc_arrivee = $trouver_table($table_arrivee,$serveur);
-						// cas simple : $cle_depart dans la table_liee
-						if (isset($desc_arrivee['field'][$cle_depart])){
-							//$s = sql_select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
-						}
-						// cas simple : $cle_arrivee dans la table
-						elseif (isset($desc_depart['field'][$cle_arrivee])){
-							//$s = sql_select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
-						}
-						// sinon cherchons une table de liaison
-						// cas recherche principale article, objet lie document : passer par spip_documents_liens
-						elseif ($l = objet_associable($table_liee)){
-							list($primary, $table_liens) = $l;
-							$join = "
-							LEFT JOIN (
+					$cle_arrivee =  id_table_objet($table_liee);
+					$table_arrivee = table_objet($table_liee,$serveur);
+					$desc_arrivee = $trouver_table($table_arrivee,$serveur);
+					// cas simple : $cle_depart dans la table_liee
+					if (isset($desc_arrivee['field'][$cle_depart])){
+						//$s = sql_select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+					}
+					// cas simple : $cle_arrivee dans la table
+					elseif (isset($desc_depart['field'][$cle_arrivee])){
+						//$s = sql_select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+					}
+					// sinon cherchons une table de liaison
+					// cas recherche principale article, objet lie document : passer par spip_documents_liens
+					elseif ($l = objet_associable($table_liee)){
+						list($primary, $table_liens) = $l;
+						$join = "
+						LEFT JOIN (
 							SELECT lien$i.id_objet,$subscore AS score
 							FROM $table_liens as lien$i
 							JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
 							AND lien$i.objet='$table'
 							WHERE $subscore > 0
 							ORDER BY score DESC LIMIT 100
-							) AS o$i ON o$i.id_objet=t.$_id_table
-							";
-							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
-							$from .= $join;
-							//$s = sql_select("id_objet as $cle_depart, $primary as $cle_arrivee", $table_liens, array("objet='$table'",sql_in($primary, array_keys($ids_trouves))), '','','','',$serveur);
-						}
-						// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
-						elseif ($l = $depart_associable){
-							list($primary, $table_liens) = $l;
-							$join = "
+							) AS o$i ON o$i.id_objet=t.$_id_table";
+						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+						$from .= $join;
+					}
+					// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
+					elseif ($l = $depart_associable){
+						list($primary, $table_liens) = $l;
+						$join = "
 							LEFT JOIN (
 							SELECT lien$i.id_objet,$subscore AS score
 							FROM $table_liens as lien$i
@@ -216,11 +212,11 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 									WHERE $subscore > 0
 									ORDER BY score DESC LIMIT 100
 							) AS o$i ON o$i.id_objet=t.$_id_table";
-							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
-							$from .= $join;
-						}
+						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+						$from .= $join;
 					}
 				}
+			}
 		}
 		
 		$requete['FROM'][] = $from;
