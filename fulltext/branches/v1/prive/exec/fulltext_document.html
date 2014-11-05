@@ -1,0 +1,31 @@
+    <!--#hierarchie-->
+    <ul id="chemin">
+        <li class="racine"><a href="[(#URL_ECRIRE{navigation}|parametre_url{menu,bando_configuration})]">Configuration</a></li>
+		<li><em>&gt; </em><a href="#URL_ECRIRE{fulltext}">Fulltext</a></li>
+		<li><em>&gt; </em><:fulltext:configuration_indexation_document:></li>
+    </ul>
+    <!--/#hierarchie-->
+     
+    <h1><:fulltext:configuration_indexation_document:></h1>
+	<p><:fulltext:que_des_exemples:></p>
+    <div class="ajax">
+		#FORMULAIRE_CONFIGURER_DOCUMENT_FULLTEXT
+	</div>
+     
+    <!--#navigation-->
+    <div class='cadre cadre-info'>
+		<a href="#URL_ECRIRE{fulltext}"><img src="[(#CHEMIN{fulltext.png})]" alt="Fulltext" /></a>
+		<p><:fulltext:infos_fulltext_document:></p>
+		<p><:fulltext:fulltext_documentation:>
+			<a href="http://www.spip-contrib.net/Fulltext">http://www.spip-contrib.net/Fulltext</a>
+		</p>
+    </div>
+    <!--/#navigation-->
+	
+	<!--#extra-->
+	<div class='cadre cadre-info'>
+		<p><a href="#URL_ECRIRE{fulltext}"><:fulltext:retour_configuration_fulltext:></a></p>
+	</div>
+	<!--/#extra-->
+     
+

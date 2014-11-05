@@ -1,0 +1,216 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend"><:fulltext:general:></h3>
+				<ul>
+					<li class="editer fulltext_intervalle_cron[ (#ENV**{erreurs}|table_valeur{intervalle_cron}|oui)erreur]">
+						<label for="nb_docs"><:fulltext:intervalle_cron:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{intervalle_cron})</span>
+						]<input type="text" class="text" name="intervalle_cron" id="intervalle_cron" value="[(#ENV{intervalle_cron})]" />
+					</li>
+					<li class="editer fulltext_nb_docs[ (#ENV**{erreurs}|table_valeur{nb_docs}|oui)erreur]">
+						<label for="nb_docs"><:fulltext:nombre_documents:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nb_docs})</span>
+						]<input type="text" class="text" name="nb_docs" id="nb_docs" value="[(#ENV{nb_docs})]" />
+					</li>
+					<li class="editer fulltext_taille_index[ (#ENV**{erreurs}|table_valeur{taille_index}|oui)erreur]">
+						<label for="taille_index"><:fulltext:nombre_caracteres:></label>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{taille_index})</span>
+						]<input type="text" class="text" name="taille_index" id="taille_index" value="[(#ENV{taille_index})]" />
+					</li>
+				</ul>
+			</li>
+			<li class="fieldset">
+				<h3 class="legend">PDF</h3>
+				<ul>
+					<li class="editer fulltext_pdf">
+						<label><:fulltext:activer_indexation{ext=pdf}:></label>
+						<div class="choix">
+							<input type="radio" class="radio" name="pdf_index" id="pdf_index_on" [(#ENV{pdf_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="pdf_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="pdf_index" id="pdf_index_off"[ (#ENV{pdf_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="pdf_index_off"><:item_non:></label>
+						</div>
+					</li>
+					<li class="editer fulltext_pdf_bin[ (#ENV**{erreurs}|table_valeur{pdf_bin}|oui)erreur]">
+						<label for="pdf_bin"><:fulltext:indiquer_chemin_bin:> .pdf</label>
+						[(#ENV{pdf_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pdf_bin})</span>
+						]<input type="text" class="text" name="pdf_bin" id="pdf_bin" value="[(#ENV{pdf_bin})]"[(#ENV{pdf_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+					<li class="editer fulltext_pdf_opt[ (#ENV**{erreurs}|table_valeur{pdf_opt}|oui)erreur]">
+						<label for="pdf_opt"><:fulltext:indiquer_options_bin:> .pdf</label>
+						[(#ENV{pdf_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pdf_opt})</span>
+						]<input type="text" class="text" name="pdf_opt" id="pdf_opt" value="[(#ENV{pdf_opt})]"[(#ENV{pdf_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+				</ul>
+			</li>
+			<li class="fieldset">
+				<h3 class="legend">ODT</h3>
+				<ul>
+					<li class="editer fulltext_odt[ (#ENV**{erreurs}|table_valeur{odt_index}|oui)erreur]">
+						<label for="odt_index"><:fulltext:activer_indexation{ext=odt}:></label>
+						<p class="explication"><:fulltext:necessite_version_php:></p>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{odt_index})</span>]
+						<div class="choix">
+							<input type="radio" class="radio" name="odt_index" id="odt_index_on" [(#ENV{odt_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="odt_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="odt_index" id="odt_index_off"[ (#ENV{odt_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="odt_index_off"><:item_non:></label>
+						</div>
+					</li>
+				</ul>
+			</li>	
+			<li class="fieldset">
+				<h3 class="legend">DOC</h3>
+				<ul>
+					<li class="editer fulltext_doc">
+						<label for="doc_index"><:fulltext:activer_indexation{ext=doc}:></label>
+						<div class="choix">
+							<input type="radio" class="radio" name="doc_index" id="doc_index_on" [(#ENV{doc_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="doc_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="doc_index" id="doc_index_off"[ (#ENV{doc_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="doc_index_off"><:item_non:></label>
+						</div>
+					</li>
+					<li class="editer fulltext_doc_bin[ (#ENV**{erreurs}|table_valeur{doc_bin}|oui)erreur]">
+						<label for="doc_bin"><:fulltext:indiquer_chemin_bin:> .doc</label>
+						[(#ENV{doc_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{doc_bin})</span>
+						]<input type="text" class="text" name="doc_bin" id="doc_bin" value="[(#ENV{doc_bin})]"[(#ENV{doc_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+					<li class="editer fulltext_doc_opt[ (#ENV**{erreurs}|table_valeur{doc_opt}|oui)erreur]">
+						<label for="doc_opt"><:fulltext:indiquer_options_bin:> .doc</label>
+						[(#ENV{doc_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{doc_opt})</span>
+						]<input type="text" class="text" name="doc_opt" id="doc_opt" value="[(#ENV{doc_opt})]"[(#ENV{doc_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+				</ul>
+			</li>
+			<li class="fieldset">
+				<h3 class="legend">DOCX</h3>
+				<ul>
+					<li class="editer fulltext_docx[ (#ENV**{erreurs}|table_valeur{docx_index}|oui)erreur]">
+						<label><:fulltext:activer_indexation{ext=docx}:></label>
+						<p class="explication"><:fulltext:necessite_version_php:></p>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{docx_index})</span>]
+						<div class="choix">
+							<input type="radio" class="radio" name="docx_index" id="docx_index_on" [(#ENV{docx_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="docx_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="docx_index" id="docx_index_off"[ (#ENV{docx_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="docx_index_off"><:item_non:></label>
+						</div>
+					</li>
+				</ul>
+			</li>			
+			<li class="fieldset">
+				<h3 class="legend">PPT</h3>
+				<ul>
+					<li class="editer fulltext_ppt">
+						<label for="ppt_index"><:fulltext:activer_indexation{ext=ppt}:></label>
+						<div class="choix">
+							<input type="radio" class="radio" name="ppt_index" id="ppt_index_on" [(#ENV{ppt_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="ppt_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="ppt_index" id="ppt_index_off"[ (#ENV{ppt_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="ppt_index_off"><:item_non:></label>
+						</div>
+					</li>
+					<li class="editer fulltext_ppt_bin[ (#ENV**{erreurs}|table_valeur{ppt_bin}|oui)erreur]">
+						<label for="ppt_bin"><:fulltext:indiquer_chemin_bin:> .ppt</label>
+						[(#ENV{ppt_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ppt_bin})</span>
+						]<input type="text" class="text" name="ppt_bin" id="ppt_bin" value="[(#ENV{ppt_bin})]"[(#ENV{ppt_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+					<li class="editer fulltext_ppt_opt[ (#ENV**{erreurs}|table_valeur{ppt_opt}|oui)erreur]">
+						<label for="ppt_opt"><:fulltext:indiquer_options_bin:> .ppt</label>
+						[(#ENV{ppt_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ppt_opt})</span>
+						]<input type="text" class="text" name="ppt_opt" id="ppt_opt" value="[(#ENV{ppt_opt})]"[(#ENV{ppt_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+				</ul>
+			</li>	
+			<li class="fieldset">
+				<h3 class="legend">PPTX</h3>
+				<ul>
+					<li class="editer fulltext_pptx[ (#ENV**{erreurs}|table_valeur{pptx_index}|oui)erreur]">
+						<label for="pptx_index"><:fulltext:activer_indexation{ext=pptx}:></label>
+						<p class="explication"><:fulltext:necessite_version_php:></p>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{pptx_index})</span>]
+						<div class="choix">
+							<input type="radio" class="radio" name="pptx_index" id="pptx_index_on" [(#ENV{pptx_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="pptx_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="pptx_index" id="pptx_index_off"[ (#ENV{pptx_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="pptx_index_off"><:item_non:></label>
+						</div>
+					</li>
+				</ul>
+			</li>
+			<li class="fieldset">
+				<h3 class="legend">XLS</h3>
+				<ul>
+					<li class="editer fulltext_xls">
+						<label for="xls_index"><:fulltext:activer_indexation{ext=xls}:></label>
+						<div class="choix">
+							<input type="radio" class="radio" name="xls_index" id="xls_index_on" [(#ENV{xls_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="xls_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="xls_index" id="xls_index_off"[ (#ENV{xls_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="xls_index_off"><:item_non:></label>
+						</div>
+					</li>
+					<li class="editer fulltext_xls_bin[ (#ENV**{erreurs}|table_valeur{xls_bin}|oui)erreur]">
+						<label for="xls_bin"><:fulltext:indiquer_chemin_bin:> .xls</label>
+						[(#ENV{xls_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{xls_bin})</span>
+						]<input type="text" class="text" name="xls_bin" id="xls_bin" value="[(#ENV{xls_bin})]"[(#ENV{xls_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+					<li class="editer fulltext_xls_opt[ (#ENV**{erreurs}|table_valeur{xls_opt}|oui)erreur]">
+						<label for="xls_opt"><:fulltext:indiquer_options_bin:> .xls</label>
+						[(#ENV{xls_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{xls_opt})</span>
+						]<input type="text" class="text" name="xls_opt" id="xls_opt" value="[(#ENV{xls_opt})]"[(#ENV{xls_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
+					</li>
+				</ul>
+			</li>
+			<li class="fieldset">
+				<h3 class="legend">XLSX</h3>
+				<ul>
+					<li class="editer fulltext_xlsx[ (#ENV**{erreurs}|table_valeur{xlsx_index}|oui)erreur]">
+						<label><:fulltext:activer_indexation{ext=xlsx}:></label>
+						<p class="explication"><:fulltext:necessite_version_php:></p>
+						[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{xlsx_index})</span>]
+						<div class="choix">
+							<input type="radio" class="radio" name="xlsx_index" id="xlsx_index_on" [(#ENV{xlsx_index}|=={on}|?{'checked="checked"'})] value="on" />
+							<label for="xlsx_index_on"><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" class="radio" name="xlsx_index" id="xlsx_index_off"[ (#ENV{xlsx_index}|!={on}|?{'checked="checked"'})] value="off" />
+							<label for="xlsx_index_off"><:item_non:></label>
+						</div>
+					</li>
+				</ul>
+			</li>
+		</ul>	
+		<p class="boutons">
+			<input type="submit" name="enregistrer" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+	</div></form>
+</div>
