@@ -3,7 +3,7 @@
  * Plugin Inscription3 pour SPIP
  * © cmtmt, BoOz, kent1
  * Licence GPL v3
- * 
+ *
  * Fichiers de fonctions d'autorisations spécifiques
  */
 
@@ -13,7 +13,7 @@ function inscription3_autoriser(){}
 
 /**
  * Autoriser les utilisateurs à modifier leur profil
- * 
+ *
  * On garde les autorisations par défaut pour les administrateurs et les rédacteurs
  * Par contre on autorise les visiteurs (6forum) à modifier un profil:
  * -* s'il sont eux même l'utilisateur à modifier
@@ -38,7 +38,7 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 			!$opt['statut']
 			AND (lire_config('inscription3/'.$opt['champ'].'_fiche_mod','off') == 'on')
 			AND $qui['statut'] == '6forum'
-			AND $id == $qui['id_auteur'];	
+			AND $id == $qui['id_auteur'];
 	}else
 		return
 			!$opt['statut']
@@ -49,7 +49,7 @@ function autoriser_auteur_modifier($faire, $type, $id, $qui, $opt) {
 
 /**
  * Autoriser les utilisateurs à modifier leur logo
- * 
+ *
  * On garde les autorisations par défaut pour les administrateurs
  * Par contre on autorise les visiteurs (6forum) et rédacteurs (1comite) à modifier leur logo:
  * -* s'il sont eux même l'utilisateur à modifier

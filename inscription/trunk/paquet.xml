@@ -1,13 +1,13 @@
 <paquet
 	prefix="inscription3"
 	categorie="auteur"
-	version="3.5.4"
+	version="3.5.5"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/inscription3-64.png"
 	schema="3.0.2"
 	documentation="http://www.mediaspip.net/spip.php?rubrique87"
->	
+>
 
 	<nom>Inscription 3</nom>
 	<!-- Étendre les informations sur les auteurs -->
@@ -51,7 +51,7 @@
 	<necessite nom="saisies" compatibilite="[1.36.0;[" />
 	<necessite nom="cextras" compatibilite="[1.4.3;[" />
 	<necessite nom="verifier" compatibilite="[0.1.18;[" />
-	
+
 	<lib nom="jquery-validation-1.10.0" lien="https://github.com/downloads/jzaefferer/jquery-validation/jquery-validation-1.10.0.zip" />
 
 	<utilise nom="Z" />
