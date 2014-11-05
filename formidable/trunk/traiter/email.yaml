@@ -62,3 +62,15 @@ options:
       nom: 'sujet_accuse'
       label: '<:formidable:traiter_email_option_sujet_accuse_label:>'
       explication: '<:formidable:traiter_email_option_sujet_explication:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'courriel_envoyeur_accuse'
+      label: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_label:>'
+      explication: '<:formidable:traiter_email_option_courriel_envoyeur_accuse_explication:>'
+  -
+    saisie: 'input'
+    options:
+      nom: 'nom_envoyeur_accuse'
+      label: '<:formidable:traiter_email_option_nom_envoyeur_accuse_label:>'
+      explication: '<:formidable:traiter_email_option_nom_envoyeur_accuse_explication:>'
