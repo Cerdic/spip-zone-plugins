@@ -1,0 +1,38 @@
+#BOITE_OUVRIR
+
+	<p><:fulltext:configurer_egalement_doc:></p>
+	<a href='#URL_ECRIRE{fulltext_document}'><:fulltext:configuration_indexation_document:></a>
+	
+	<p><:fulltext:statistiques_indexation:></p>
+	
+	<BOUCLE_documents_indexes(DOCUMENTS){extrait=oui}{tout}> </BOUCLE_documents_indexes>
+	<:fulltext:nb_index:> : <strong>#TOTAL_BOUCLE</strong><br />
+	</B_documents_indexes>
+	<:fulltext:nb_index:> : <strong>0</strong><br />
+	<//B_documents_indexes>
+
+	<BOUCLE_documents_non_indexes(DOCUMENTS){extrait=non}{tout}> </BOUCLE_documents_non_indexes>
+	<:fulltext:nb_non_index:> : <strong>#TOTAL_BOUCLE</strong><br />
+	</B_documents_non_indexes>
+	<:fulltext:nb_non_index:> : <strong>0</strong><br />
+	<//B_documents_non_indexes>
+	
+	<BOUCLE_documents_ptg(DOCUMENTS){extrait=ptg}{tout}> </BOUCLE_documents_ptg>
+	<:fulltext:nb_ptg:> : <strong>#TOTAL_BOUCLE</strong><br />
+	<a href='#URL_ECRIRE{fulltext_document_ptg}'><:fulltext:voir_doc_ptg:></a><br />
+	</B_documents_ptg>
+	<:fulltext:nb_ptg:> : <strong>0</strong><br />
+	<//B_documents_ptg>
+	
+	<BOUCLE_documents_err(DOCUMENTS){extrait=err}{tout}> </BOUCLE_documents_err>
+	<:fulltext:nb_err:> : <strong>#TOTAL_BOUCLE</strong><br />
+	</B_documents_err>
+	<:fulltext:nb_err:> : <strong>0</strong><br />
+	<//B_documents_err>
+
+	<p><a href='[(#SELF|parametre_url{reinitialise,document})]'><:fulltext:reinitialise_index_doc:></a></p>
+
+	<p><a href='[(#SELF|parametre_url{reinitialise,document_ptg})]'><:fulltext:reinitialise_index_ptg:></a></p>
+
+	<p><a href='[(#SELF|parametre_url{reinitialise,document_tout})]'><:fulltext:reinitialise_totalement_doc:></a></p>
+#BOITE_FERMER	
