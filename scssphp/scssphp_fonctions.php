@@ -91,7 +91,7 @@ function scss_css($source){
 
 		if (
 			!$changed
-			and (!defined('_VAR_MODE') OR _VAR_MODE != 'recalcul')
+			and (!($mode=_request('var_mode')) or $mode != 'css')
 		) {
 			return $f;
 		}
@@ -275,7 +275,7 @@ function scss_find_scss_or_css_in_path($scss_file, $css_file) {
 	}
 
 	if (!$l) {
-		return ($f?produire_fond_statique($css_file,array('format'=>'css')):$c);
+		return ($f ? produire_fond_statique($css_file,array('format'=>'css')) : $c);
 	}
 	elseif (!$c) {
 		return $l;

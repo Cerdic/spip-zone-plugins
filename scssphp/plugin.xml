@@ -4,8 +4,8 @@
 	<auteur>Anne-lise Martenot, elastick.net</auteur>
 	<auteur>Jean-Baptiste Bourgoin</auteur>
 	<licence>GPL 3</licence>
-	<version>1.0.7</version>
-	<etat>test</etat>
+	<version>1.1.0</version>
+	<etat>stable</etat>
 	<icon>scsscss.png</icon>
 	<description>
 SCSS est une syntaxe SASS, un préprocesseur CSS qui permet d'ajouter des variables, classes, op&#233;rations, ou imbrications au langage. Facilitant ainsi
