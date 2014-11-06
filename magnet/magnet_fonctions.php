@@ -73,20 +73,30 @@ function magnet_pre_boucle(&$boucle){
 function magnet_formulaire_admin($flux){
 	if ($flux['args']['contexte']['objet']=='article'
 	  AND $id_objet = intval($flux['args']['contexte']['id_objet'])){
-		$magnet_status = magnet_status($flux['args']['contexte']['objet'], $id_objet);
-		$bouton = "";
-		$ur_action = generer_action_auteur("magnetize",$flux['args']['contexte']['objet']."-".$id_objet."-".($magnet_status?"off":"on"),self());
+		$objet = $flux['args']['contexte']['objet'];
+		$magnet_rang = magnet_rang($objet, $id_objet);
+		$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-".($magnet_rang?"off":"on"),self());
 		$balise_img = chercher_filtre("balise_img");
 		$class = "spip-admin-boutons magnet ";
-		if ($magnet_status) {
+		if ($magnet_rang) {
 			$class .= "magnetized";
-			$label = "<span>Enlever</span>";
+			$label = "($magnet_rang) <span>Enlever</span>";
+			$bouton = bouton_action($label,$ur_action,$class);
+			if ($magnet_rang>1){
+				$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up",self());
+				$bouton = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-up-24.png","monter"),$ur_action,"spip-admin-boutons magnet-up") . $bouton;
+			}
+			if ($magnet_rang<magnet_count($objet)){
+				$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down",self());
+				$bouton = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-down-24.png","monter"),$ur_action,"spip-admin-boutons magnet-down") . $bouton;
+			}
 		}
 		else {
 			$class .= "demagnetized";
 			$label = "<span>Aimanter</span>";
+			$bouton = bouton_action($label,$ur_action,$class);
 		}
-		$bouton = bouton_action($label,$ur_action,$class);
+		$bouton .= " ";
 		$p = strpos($flux['data'],"<a");
 		$flux['data'] = substr_replace($flux['data'],$bouton,$p,0);
 		$img_on = _DIR_PLUGIN_MAGNET."magnet-gray-32.png";
@@ -96,7 +106,8 @@ function magnet_formulaire_admin($flux){
 		$styles = <<<css
 <style>
 .spip-admin-boutons button {border: none;background: none;padding: 0;color:inherit;}
-.spip-admin-boutons.magnet button {padding-right:32px;min-height:32px;background: url($img_on) no-repeat right center;}
+.spip-admin-boutons.magnet button {padding-left:32px;min-height:32px;background: url($img_on) no-repeat left center;}
+.spip-admin-boutons.magnet-up,.spip-admin-boutons.magnet-down {padding-left: 0;padding-right: 0;}
 .spip-admin-boutons.magnet.magnetized button {}
 .spip-admin-boutons.magnet.magnetized:hover button {background-image:url($img_remove);}
 .spip-admin-boutons.magnet.demagnetized button {background-image:url($img_off);}
@@ -112,11 +123,33 @@ css;
 	return $flux;
 }
 
-function magnet_status($objet, $id_objet){
+/**
+ * Renvoie le rang de l'objet :
+ * 1 si arrive en tete de la boucle,
+ * 2 ensuite ....
+ * 0 si n'est pas magnetise
+ *
+ * @param string $objet
+ * @param int $id_objet
+ * @return bool|mixed
+ */
+function magnet_rang($objet, $id_objet){
 	$meta_magnet = "magnet_" . table_objet($objet);
 	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'0');
 	$magnets = explode(',',$magnets);
 	if (!in_array($id_objet, $magnets))
 		return false;
-	return array_search($id_objet,array_reverse($magnets))+1;
+	return array_search($id_objet,$magnets)+1;
+}
+
+/**
+ * Compter le nombre d'objet magnetises
+ * @param string $objet
+ * @return int
+ */
+function magnet_count($objet){
+	$meta_magnet = "magnet_" . table_objet($objet);
+	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'');
+	$magnets = explode(',',$magnets);
+	return count($magnets);
 }
