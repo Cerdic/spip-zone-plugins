@@ -71,8 +71,13 @@ function magnet_set_status($objet, $id_objet, $status){
 	}
 	$magnets = array_filter($magnets);
 	$magnets = array_unique($magnets);
+
 	if (!count($magnets))
 		$magnets[] = "0";
+
+	if (count($magnets)>20)
+		$magnets = array_slice($magnets,0,20);
+
 	$magnets = implode(",",$magnets);
 
 	ecrire_meta($meta_magnet,$magnets);
