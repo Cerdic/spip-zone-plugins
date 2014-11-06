@@ -1,0 +1,80 @@
+[(#AUTORISER{configurer,fulltext}|sinon_interdire_acces)]
+
+<h1 class="grostitre"><:fulltext:documents_proteges:></h1>
+<div class="ajax">
+	<B_doc_ptg>
+		<h2>#GRAND_TOTAL documents</h2>
+		#ANCRE_PAGINATION
+		<div class="pagination">
+			#PAGINATION{page}
+		</div>
+		<table>
+			<thead>
+				<th><:fulltext:id:></th>
+				<th><:fulltext:logo:></th>
+				<th><:fulltext:infos:></th>
+				<th><:fulltext:descriptif:></th>
+				<th></th>
+			</thead>
+			<BOUCLE_doc_ptg(DOCUMENTS){extrait='ptg'}{tout}{pagination}>
+				<tr>
+					<td><strong>#ID_DOCUMENT</strong></td>
+					<td class="logo"> #SET{fichier,#DISTANT|=={oui}|?{#FICHIER,#FICHIER|basename}}
+					[(#MEDIA|=={image}|oui)[ <a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{apercu,125,50}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a> ]]
+					[(#MEDIA|=={image}|non)[
+					<div class="#EDIT{vignette} resize-250">
+						<a href="#URL_DOCUMENT" type="#MIME_TYPE"[ title="(#GET{fichier})"]>(#LOGO_DOCUMENT{auto,125,50}|inserer_attribut{alt,[(#TITRE|couper{60}|texte_backend)]})</a>
+					</div>]] </td>
+					<td class="exif"> [
+					<div class="fichier">
+						#GET{fichier}
+					</div><strong class="extension">(#EXTENSION)</strong>]
+					[
+					<div class="dimensions">
+						(#LARGEUR|?{[(#LARGEUR)[ x (#HAUTEUR) pixels]],''})
+					</div>]
+					[
+					<div class="taille">
+						(#TAILLE|taille_en_octets)
+					</div>]
+					[
+					<div class="date">
+						(#DATE|affdate{d/m/Y})
+					</div>]
+					<B_liens>
+						[(#TOTAL_BOUCLE|>{1}|oui)
+						<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">[(#TOTAL_BOUCLE|singulier_ou_pluriel{fulltext:une_utilisation, fulltext:des_utilisations, nb})]</a>
+						<div style='display: none;'>
+							]
+							<BOUCLE_liens(documents_liens){id_document}{'<br />'}>
+								[(#ID_OBJET|lien_objet_ptg{#OBJET})]
+								</BOUCLE_liens>
+								[(#TOTAL_BOUCLE|>{1}|oui)
+						</div>
+						]
+					</B_liens></td>
+					<td class="descriptif"> [<strong class="titre #EDIT{titre}">(#TITRE|sinon{#VAL{<i>}|concat{<:info_sans_titre:>,'</i>'}})</strong>]
+					[
+					<div class="descriptif #EDIT{descriptif}">
+						(#DESCRIPTIF|couper{100})
+					</div>]
+					[
+					<p class="credits #EDIT{credits}">
+						(#CREDITS)
+					</p>] </td>
+					<td> [(#AUTORISER{modifier,document,#ID_DOCUMENT})[&#91;<a href='(#URL_ECRIRE{documents_edit,id_document=#ID_DOCUMENT})'><:bouton_modifier:></a>&#93;]]
+					[<span class='supprimer'>(#AUTORISER{supprimer,document,#ID_DOCUMENT})[(#BOUTON_ACTION{<:medias:bouton_supprimer:>,#URL_ACTION_AUTEUR{supprimer_document,#ID_DOCUMENT,#SELF},ajax})]</span>]
+
+					[(#PIPELINE{document_desc_actions,#ARRAY{args,#ARRAY{id_document,#ID_DOCUMENT,position,galerie},data,''}})] </td>
+				</tr>
+				</BOUCLE_doc_ptg>
+		</table>
+		<div class="pagination">
+			#PAGINATION{page}
+		</div>
+	</B_doc_ptg>
+	<p class="infos">
+		<:fulltext:pas_document_ptg:>
+	</p>
+	<//B_doc_ptg>
+</div>
