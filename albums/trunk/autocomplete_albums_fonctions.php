@@ -24,14 +24,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @example
  *
- * - Albums avec `toto` dans le titre :
- *   `...autocomplete('album','','','toto')`
- * - Articles avec `toto` dans le titre et ayant des albums liés :
- *   `...autocomplete('article','album',true,'toto')`
- * - Auteurs ayant `toto` dans leur email et liés à des albums :
- *   `...autocomplete('auteur','album','','toto','email')`
- * - Mot-clés liés à des albums :
- *   `...autocomplete('mot','album')`
+ * - Albums avec `toto` dans le titre : `...autocomplete('album','','','toto')`
+ * - Articles avec `toto` dans le titre et ayant des albums liés : `...autocomplete('article','album',true,'toto')`
+ * - Auteurs ayant `toto` dans leur email et liés à des albums : `...autocomplete('auteur','album','','toto','email')`
+ * - Mot-clés liés à des albums : `...autocomplete('mot','album')`
  *
  * @param string $type
  *     Type d'objet recherché
@@ -42,7 +38,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Le pivot est l'objet qui porte la table de liens
  *     dont on se sert pour récupérer les liaisons.
  *     Par défaut on cherche dans la table de liens de l'objet principal.
- * @param string $term
+ * @param string $terme
  *     Terme de recherche (optionnel)
  * @param string $champ
  *     Champ spécial dans lequel le terme doit être recherché.

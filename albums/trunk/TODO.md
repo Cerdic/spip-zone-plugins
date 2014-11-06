@@ -33,3 +33,8 @@ Ajouter des filtres selon les statuts ?
 
 ## Squelette pour choisir un album
 Trouver un moyen pour avoir un aperçu plus détaillé des documents
+
+## Compatibilité avec le plugin «insérer modèles»
+Formulaire pour insérer les balises `<album>` : inutile de réinventer la roue, se reposer entièrement sur plugin insérer modèles.
+Mais pour ça, il va falloir intervenir sur celui-ci légèrement : dans la 1ère étape, il faudrait qu'il puisse lister les variantes d'un seul type de modèle, par exemple en ajoutant un paramètre au formulaire. Ajouter également la prise en charge du paramètre de saisie `config=plugin/option`.
+Eventuellement, en faire une dépendance obligatoire ?

@@ -16,6 +16,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Supprimer proprement un ou plusieurs albums
  *
+ * - suppression des liens faisant référence à l'album dans `spip_documents_liens`
+ * - suppression des liens faisant référence à l'album dans `spip_albums_liens`
+ * - suppression de l'album
+ *
  * @param int|string|array $id_albums
  *     Identifiant unique ou tableau d'identifiants des albums
  * @param bool $supprimer_docs_orphelins
