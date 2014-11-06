@@ -71,8 +71,5 @@ function extracteur_doc($fichier, &$charset, $bin='', $opt = '') {
 	# http://www.winfield.demon.nl/
 	@exec('antiword '.escapeshellarg($fichier), $r, $e);
 	if (!$e) return @join(' ', $r);
-
-  
-  
 }
 ?>
