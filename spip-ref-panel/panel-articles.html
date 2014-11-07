@@ -1,0 +1,55 @@
+[(#REM) Si on n'est pas logué en admin, cette page n'existe simplement pas ! ]
+[(#SESSION{statut}|=={0minirezo}|non)
+  [(#HTTP_HEADER{Status: 301 Moved Permanently})]
+  [(#HTTP_HEADER{Location: [(#URL_SITE_SPIP|PtoBR)]})]
+]  
+#CACHE{0}
+	<head>
+		<title>Articles (ref_panel) - #NOM_SITE_SPIP</title>
+		<meta name="robots" content="none" />
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+		#INSERT_HEAD
+		<style type="text/css"> 
+			body{padding-top:1em;}
+			.table {font-size:90%;} 
+		</style>
+	</head>
+  <body>
+    <div class="container">
+    <div class="bs-header"><a class="btn btn-primary" href="#URL_PAGE{tool-url-articles}">Articles</a>  <a class="btn btn-default btn-sm" href="#URL_PAGE{tool-url-rub}">rubriques</a> <a  class="btn btn-default btn-sm" href="#URL_PAGE{tool-url-mots}">mots</a>
+    <h1>Tous les articles <strong>publiés</strong> de votre site SPIP</h1>
+    <p>Pour voir les articles 'en cours de rédaction' et 'publiés', rendez-vous dans votre espace privé</p>
+    </div>
+
+    <table id="example" class="table table-striped table-hover table-condensed spip display dataTable">
+      <thead>
+	      <tr>
+	        <th>ID</th>  
+	        <th>TITRE</th>
+			<th>URL</th>
+			<th>URL 301 ?</th>
+			<th>Dans la rubrique</th>	
+			<th>Action</th>			
+	      </tr>
+      </thead>
+      <tbody>
+	      <BOUCLE_a(ARTICLES){par id_article}>
+				
+			<tr[(#ART_URL_301|oui) class="warning"]>
+				<td>[(#ID_ARTICLE)]</td>
+				<td class="#EDIT{titre}">#TITRE</td>
+				<td>[<a href="[(#URL_ARTICLE)]" [(#ART_URL_301|oui) style="color:red!important;font-weight:bold;" ]>(#URL_ARTICLE|url_absolue)</a>]</td>
+				<td class="#EDIT{art_url_301}">[(#ART_URL_301|?{<a href="#ART_URL_301" target="_blank">#ART_URL_301</a>, "URL ici"})]</td>
+				<td><BOUCLE_ariane(HIERARCHIE){id_article}><small> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a> (#ID_RUBRIQUE )</small></BOUCLE_ariane></td>
+				<td class="center"><a href="?exec=article&id_article=#ID_ARTICLE" target="_blank">M</a> | <a target="_blank" href="/ecrire/?exec=article_edit&id_article=#ID_ARTICLE">E</a></td>
+			</tr>
+				
+	      </BOUCLE_a>
+      </tbody>
+    </table>
+</div>
+	<script type="text/javascript" src="#CHEMIN{javascript/tablefilter.js}"></script>
+	<script type="text/javascript">$(document).ready(function() { $('#example').tableFilter(); });</script>	
+  </body>
+ </html>

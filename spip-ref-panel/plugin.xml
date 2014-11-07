@@ -8,17 +8,15 @@
 	<etat>experimental</etat>
 	<description>
 		<multi>
-			[fr]Ce (meta) plugin g&eacute;n&egrave;re les dépendances &agrave; plusieurs plugins utiles pour le r&eacute;f&eacute;rencement de sites web et offre un squelette ( <code>spip.php?page=ref-panel</code> ) permettant la modifications de masse sur les informations les plus courament manipul&eacute;es par les r&eacute;f&eacute;renceurs (Titles, metas, urls, Hx, ...)
-			[en]This (meta) plugin brings you dependancies for usefull SEO plugins and offers a panel ( <code>spip.php?page=ref-panel</code> ) allowing usual SEO data bulk edition (such as titles, metas, urls, Hx, ...)
+			[fr]Ce (meta) plugin g&eacute;n&egrave;re les dépendances &agrave; plusieurs plugins utiles pour le r&eacute;f&eacute;rencement de sites web et offre un jeu de squelettes 'page' ( <code>spip.php?page=panel-articles ; spip.php?page=panel-rubriques ; spip.php?page=panel-mots</code> ) permettant la modifications de masse sur les informations les plus courament manipul&eacute;es par les r&eacute;f&eacute;renceurs (Titles, metas, urls, Titrailles, ...)
 		</multi>
 	</description>
-	<lien>http://nutzme5.loiseau2nuit.net/</lien>
+	<lien>http://nutzme5.loiseau2nuit.net/spip-ref-panel-plugin-seo</lien>
 	<prefix>srp</prefix>
 	<!-- options>srp_options.php</options -->
 	<categorie>outils</categorie>
 	<necessite id="SPIP" version="[3.0-dev;[" />
-	<!-- necessite metas -->
-	<!-- SPIP 2 : necessite urledit -->
-	<!-- necessite liens_contenus -->
-	<!-- utilise PIWIK ou GAnalytics -->
+	<necessite id="metas" version="[1.4.0;]" />
+	<lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+	<!-- todo: utilise PIWIK ou GAnalytics -->
 </plugin>

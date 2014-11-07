@@ -1,0 +1,58 @@
+[(#REM) Si on n'est pas logué en admin, cette page n'existe simplement pas ! ]
+[(#SESSION{statut}|=={0minirezo}|non)
+  [(#HTTP_HEADER{Status: 301 Moved Permanently})]
+  [(#HTTP_HEADER{Location: [(#URL_SITE_SPIP|PtoBR)]})]
+]  
+#CACHE{0}
+	<head>
+		<title>Mot-clés (ref_panel) - #NOM_SITE_SPIP</title>
+		<meta name="robots" content="none" />
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css">
+		#INSERT_HEAD
+		<style type="text/css"> 
+			body{padding-top:1em;}
+			.table {font-size:90%;} 
+		</style>
+	</head>
+  <body>
+<div class="container">
+    <div class="bs-header"><a class="btn btn-default btn-sm" href="#URL_PAGE{tool-url-articles}">Articles</a>  <a class="btn btn-default btn-sm" href="#URL_PAGE{tool-url-rub}">rubriques</a> <a  class="btn btn-primary" href="#URL_PAGE{tool-url-mots}">mots</a>
+    <h1>Tous les mot-clés de votre site SPIP</h1>
+   	</div>
+
+    <table id="example" class="table table-striped table-hover table-condensed spip display dataTable">
+      <thead>
+	      <tr>
+	        <th>ID</th>  
+	        <th>TITRE</th>
+			<th>Nbr articles</th>
+			<th>Nbr rubriques</th>
+			<th>URL</th>
+			<th>URL 301 ?</th>
+			<th>Dans le groupe de mots</th>
+			<th>Action</th>			
+	      </tr>
+      </thead>
+      <tbody>
+	      <BOUCLE_a(MOTS){par id_mot}>
+				
+			<tr[(#MOT_URL_301|oui) class="warning"]>
+				<td class="center">[(#ID_MOT)]</td>
+				<td class="#EDIT{titre}">[(#TITRE)]</td>
+				<td class="center"><BOUCLE_z(ARTICLES){id_mot}></BOUCLE_z>#_z:TOTAL_BOUCLE</td>
+				<td class="center"><BOUCLE_y(RUBRIQUES){id_mot}></BOUCLE_y>#_y:TOTAL_BOUCLE</td>
+				<td[(#MOT_URL_301|oui) class="danger" ]>[<a href="[(#URL_MOT)]" target="_blank">(#URL_MOT|url_absolue)</a>]</td>
+				<td class="#EDIT{mot_url_301}">[(#MOT_URL_301|?{<a href="#MOT_URL_301" target="_blank">#MOT_URL_301</a>, "URL ici"})]</td>
+				<td><BOUCLE_ariane(GROUPES_MOTS){id_mot}>&gt; [(#TITRE|couper{80})] (#ID_GROUPE)</BOUCLE_ariane></td>
+				<td class="center"><a href="?exec=mot&id_mot=#ID_MOT" target="_blank">M</a> | <a target="_blank" href="/ecrire/?exec=mot_edit&id_mot=#ID_MOT">E</a></td>
+			</tr>
+				
+	      </BOUCLE_a>
+      </tbody>
+    </table>
+</div>
+	<script type="text/javascript" src="#CHEMIN{javascript/tablefilter.js}"></script>
+	<script type="text/javascript">$(document).ready(function() { $('#example').tableFilter(); });</script>	
+  </body>
+ </html>

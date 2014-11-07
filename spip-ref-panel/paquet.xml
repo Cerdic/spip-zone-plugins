@@ -11,8 +11,9 @@
 
 	<nom>Spip Ref Panel</nom>
 	<auteur lien="http://nutzme5.loiseau2nuit.net/">Loiseau2nuit</auteur>
-<!--	
+	<lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+	
 	<onglet nom="srp" titre="srp:configuration_srp" parent="menu_configuration" icone="images/srp-24.png" action="srp"/>
-  <menu nom="srp" titre="srp:configuration_srp" parent="menu_configuration" icone="images/srp-16.png" action="srp"/>
--->  
+	<menu nom="srp" titre="srp:configuration_srp" parent="menu_configuration" icone="images/srp-16.png" action="srp"/>
+
 </paquet>
