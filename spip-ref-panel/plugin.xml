@@ -17,6 +17,6 @@
 	<categorie>outils</categorie>
 	<necessite id="SPIP" version="[3.0-dev;[" />
 	<necessite id="metas" version="[1.4.0;]" />
-	<lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+	<!-- lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" / -->
 	<!-- todo: utilise PIWIK ou GAnalytics -->
 </plugin>

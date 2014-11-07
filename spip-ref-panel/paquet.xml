@@ -6,12 +6,12 @@
 	compatibilite="[3.0-dev;["
 	logo="images/srp-24.png"
 	schema="1.0"
-  documentation="http://nutzme5.loiseau2nuit.net/"
+  documentation="http://nutzme5.loiseau2nuit.net/spip-ref-panel-plugin-seo"
 >
 
 	<nom>Spip Ref Panel</nom>
-	<auteur lien="http://nutzme5.loiseau2nuit.net/">Loiseau2nuit</auteur>
-	<lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" />
+	<auteur lien="http://seo2night.com/">Loiseau2nuit</auteur>
+	<!-- lib nom="tabFilter" lien="https://github.com/hail2u/jquery.table-filter/archive/master.zip" / -->
 	
 	<onglet nom="srp" titre="srp:configuration_srp" parent="menu_configuration" icone="images/srp-24.png" action="srp"/>
 	<menu nom="srp" titre="srp:configuration_srp" parent="menu_configuration" icone="images/srp-16.png" action="srp"/>
