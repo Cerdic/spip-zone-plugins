@@ -2,10 +2,12 @@
 
 	Modèle «album» par défaut : vue sous forme de vignettes.
 
-	Ce modèle est plutôt destiné aux albums contenant des images.
-	Par défaut, l'affichage est volontairement minimaliste : seuls sont affichées les vignettes retaillées selon une hauteur de 100px.
 	Cf. http://tinytypo.tetue.net/tinytypo.html#album
+	Ce modèle est plutôt destiné aux albums contenant des images.
+	Par défaut, l'affichage est volontairement minimaliste : seuls sont affichées les vignettes.
 	Pour afficher des éléments supplémentaires, utiliser les paramètres indiqués ci-dessous.
+	Les vignettes sont retaillées en hauteur par défaut. La taille est définie ainsi, par ordre de priorité :
+	paramètres passés au modèle > constante `_ALBUMS_TAILLE_PREVIEW` > taille des vignettes SPIP (dans fonctions avancées) > taille en dur dans le squelette
 
 	Comme on ne peut pas prendre en compte tous les cas de figure avec une seule boucle (pour rétro compatibilité v1),
 	on a recours à 2 squelettes :
