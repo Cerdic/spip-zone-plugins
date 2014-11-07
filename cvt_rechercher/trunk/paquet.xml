@@ -1,8 +1,8 @@
 <paquet
 	prefix="cvt_rechercher"
 	categorie="outil"
-	version="1.0.0"
-	etat="dev"
+	version="1.0.1"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="cvt_rechercher.png"
 	documentation=""

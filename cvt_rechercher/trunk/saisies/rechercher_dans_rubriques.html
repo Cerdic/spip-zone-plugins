@@ -11,11 +11,11 @@
 [(#GET{type}|=={input}|et{#ENV{option_intro}})
 	#SET{data, #GET{data}|plus{#ARRAY{0,#ENV{option_intro}}}}
 ]
-<BOUCLE_data_rubriques(RUBRIQUES){id_rubrique?}{id_parent?}{!id_rubrique IN #ENV{ids_exclus}}{par num titre,titre}>
+<BOUCLE_data_rubriques(RUBRIQUES){tout}{id_rubrique?}{id_parent?}{!id_rubrique IN #ENV{ids_exclus}}{par num titre,titre}>
 	#SET{vrai_niveau, #GET{vrai_niveau}|plus{1}}
 	#SET{data, #GET{data}|plus{#ARRAY{#ID_RUBRIQUE,#TITRE}}}
 	
-	<BOUCLE_data_sousrubriques(RUBRIQUES){id_parent}{si #GET{niveau}|>{#GET{vrai_niveau}}}{par num titre,titre}>
+	<BOUCLE_data_sousrubriques(RUBRIQUES){tout}{id_parent}{si #GET{niveau}|>{#GET{vrai_niveau}}}{par num titre,titre}>
 		#SET{vrai_niveau, #GET{vrai_niveau}|plus{1}}
 		#SET{espaces, #VAL{&nbsp;}|str_repeat{#GET{vrai_niveau}|moins{1}|mult{2}}}
 		#SET{data, #GET{data}|plus{#ARRAY{#ID_RUBRIQUE,#GET{espaces}#TITRE}}}
