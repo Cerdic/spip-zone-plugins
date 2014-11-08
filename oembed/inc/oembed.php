@@ -32,7 +32,7 @@ function oembed_lister_providers(){
 		'http://dai.ly/*'                         => 'http://www.dailymotion.com/services/oembed',
 		'http://*.flickr.com/*'                   => 'https://www.flickr.com/services/oembed/',
 		'http://flickr.com/*'                     => 'https://www.flickr.com/services/oembed/',
-		'http://flic.kr/*'                        => 'http://www.flickr.com/services/oembed/',
+		'http://flic.kr/*'                        => 'https://www.flickr.com/services/oembed/',
 		'http://soundcloud.com/*'                 => 'http://soundcloud.com/oembed',
 		'http://mixcloud.com/*'                   => 'http://mixcloud.com/oembed',
 		'http://*.soundcloud.com/*'               => 'http://soundcloud.com/oembed',
