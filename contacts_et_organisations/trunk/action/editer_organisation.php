@@ -51,7 +51,7 @@ function action_editer_organisation_dist($arg=null) {
  * @return int
  *     Identifiant de l'organisation créée
  */
-function organisation_inserer($champs=array()) {
+function organisation_inserer($id_parent=null, $champs=array()) {
 
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',

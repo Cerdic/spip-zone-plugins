@@ -58,7 +58,7 @@ function action_editer_contact_dist($arg=null) {
  * @return int
  *     Identifiant du contact créé
  */
-function contact_inserer($champs=array()) {
+function contact_inserer($id_parent=null, $champs=array()) {
 
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',
