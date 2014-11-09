@@ -126,6 +126,9 @@ function autoriser_albumotheque_administrer_dist($faire, $type, $id, $qui, $opts
  * Dans ce cas il faut contourner le problème en vérifiant si l'objet vient juste d'être créé.
  * cf. autorisation à modifier un album : même combat.
  *
+ * TODO
+ * Le problème du hack est réglé avec SPIP 3.1, n'y avoir recours que pour les versions antérieures.
+ *
  * @example
  *     ```
  *     #AUTORISER{ajouteralbum,#OBJET,#ID_OBJET}
@@ -186,8 +189,9 @@ function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
  * Autorisation à modifier un album.
  *
  * Il faut être l'auteur et avoir le droit de modifier tous les objets auxquels l'album est lié,
- * ou qu'il s'agisse d'un album en cours de création (vide, pas d'auteur et récent, cf. note).
- * ou être admin complet.
+ * ou qu'il s'agisse d'un album en cours de création (vide, pas d'auteur et récent, cf. note),
+ * ou être admin complet,
+ * ou que l'album soit lié à une rubrique wiki/ouverte ou un de ses article et utilisé une seule fois (plugin autorité).
  *
  * @note
  * Hack pénible : quand on ajoute des documents à un nouvel album pas encore enregistré en base,
@@ -198,6 +202,9 @@ function autoriser_ajouteralbum_dist($faire, $type, $id, $qui, $opts) {
  * Pour ne pas renvoyer un faux négatif dans ce cas là, on vérifie si l'album
  * vient juste d'être créé selon ces critères : âge, sans auteur et vide.
  * cf. autorisation à ajouter un album : même combat.
+ *
+ * TODO
+ * Le problème du hack est réglé avec SPIP 3.1, n'y avoir recours que pour les versions antérieures.
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -222,7 +229,8 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 	// l'album peut être lié à un nouvel objet pas encore enregistré en base,
 	// dans ce cas id_objet est négatif
 	$autoriser_modifier_objets_lies = true;
-	if (is_array($liens_objets = objet_trouver_liens(array('album'=>$id),'*'))){
+	$liens_objets = objet_trouver_liens(array('album'=>$id),'*');
+	if (is_array($liens_objets)){
 		foreach($liens_objets as $l) {
 			$objet = $l['objet'];
 			$id_objet = $l['id_objet'];
@@ -250,10 +258,46 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 	$admin_complet = ($qui['statut'] == '0minirezo' AND !$qui['restreint']) ?
 		true : false;
 
+	// album lié à une rubrique wiki/ouverte ou un de ses article et utilisé une seule fois (plugin autorité)
+	$album_wiki = false;
+	if (defined('_DIR_PLUGIN_AUTORITE') AND _DIR_PLUGIN_AUTORITE){
+		if (
+			is_array($liens_objets)
+			AND count($liens_objets) == 1
+			AND $objet = $liens_objets[0]['objet']
+			AND $id_objet = $liens_objets[0]['id_objet']
+			AND in_array($objet,array('article','rubrique'))
+		) {
+			$id_secteur = sql_getfetsel('id_secteur',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet));
+			// on cherche à savoir la rubrique est wiki/ouverte.
+			// comme autorité ne fournit pas de fonction générique pour ça,
+			// on reprend une partie du code de l'autorisation 'rubrique_publierdans'.
+			// cf. inc/autoriser.php L291 à 317
+			if (
+				(
+					$GLOBALS['autorite']['espace_publieur']
+					AND autorisation_publie_visiteur($qui, $id_secteur)
+					AND $qui['statut']
+				)
+				OR (
+					$GLOBALS['autorite']['espace_wiki']
+					AND autorisation_wiki_visiteur($qui, $id_secteur)
+					AND (
+						$GLOBALS['autorite']['espace_wiki_rubrique_anonyme']
+						OR $qui['statut']
+					)
+				)
+			){
+				$album_wiki = true;
+			}
+		}
+	}
+
 	$autoriser = (
 		($auteur_album AND $autoriser_modifier_objets_lies)
 		OR $nouvel_album
 		OR $admin_complet
+		OR $album_wiki
 	) ? true : false;
 
 	return $autoriser;
@@ -326,7 +370,7 @@ function autoriser_album_associer_dist($faire, $type, $id, $qui, $opts) {
 
 	$autoriser = (
 		($qui['statut'] == '0minirezo' AND !$qui['restreint'])
-		OR (autoriser('modifier', $opts['objet'], $opt['id_objet'], $qui))
+		OR (autoriser('modifier', $opts['objet'], $opts['id_objet'], $qui))
 	) ? true : false;
 
 	return $autoriser;
