@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choix_precis' => 'Choix précis',
-	'cron_explication' => 'Quand l\'événement de la résérvation est passé, la réservation sera automatiquement cloturée par le système. Si "cloturé" est choisis sous "Déclenchement", un email de cloture sera alors envoyé.',	
+	'cron_explication' => 'Quand l\'événement de la résérvation est passé, la réservation sera automatiquement cloturée par le système. Si "cloturé" est choisis sous "Déclenchement", un email de cloture sera alors envoyé. Videz le cache afin que cela soit bien activé',	
 	'cron_label' => 'Cloturer automatiquement une réservation',	
 
 	// D

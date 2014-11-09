@@ -37,7 +37,8 @@
 	<pipeline nom="affiche_auteurs_interventions" inclure="reservation_evenement_pipelines.php" /> 
 	<pipeline nom="affiche_gauche" inclure="reservation_evenement_pipelines.php" /> 
 	<pipeline nom="affiche_milieu" inclure="reservation_evenement_pipelines.php" /> 	
-	<pipeline nom="notifications_archive" inclure="reservation_evenement_pipelines.php" /> 
+	<pipeline nom="notifications_archive" inclure="reservation_evenement_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="reservation_evenement_pipelines.php" />	 
 	
 	<pipeline nom="reservation_evenement_donnees_details" action='' /> 		
 

@@ -126,8 +126,6 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 						'defaut' => $config['periodicite_cron'],
 						'afficher_si' => '@cron@ == "on"',
 						'size'=>'10',
-						
-						
 					)
 				),						
 				array(
