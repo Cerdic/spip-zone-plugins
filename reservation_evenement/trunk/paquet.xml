@@ -1,12 +1,12 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.13.5"
+	version="1.14.0"
 	etat="test"
 	compatibilite="[3.0.16;3.0.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
 	documentation=""
-	schema="1.3.3" 
+	schema="1.4.0" 
 >
 
 	<nom>Réservation Événements</nom>
@@ -32,13 +32,17 @@
 	<pipeline nom="autoriser" inclure="reservation_evenement_autorisations.php" /> 
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_evenement.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/reservation_evenement.php" /> 	
 	<pipeline nom="declarer_tables_interfaces" inclure="base/reservation_evenement.php" /> 
-		
+
 	<pipeline nom="affiche_auteurs_interventions" inclure="reservation_evenement_pipelines.php" /> 
 	<pipeline nom="affiche_gauche" inclure="reservation_evenement_pipelines.php" /> 
 	<pipeline nom="affiche_milieu" inclure="reservation_evenement_pipelines.php" /> 	
 	<pipeline nom="notifications_archive" inclure="reservation_evenement_pipelines.php" />
-	<pipeline nom="taches_generales_cron" inclure="reservation_evenement_pipelines.php" />	 
+	<pipeline nom="taches_generales_cron" inclure="reservation_evenement_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="reservation_evenement_pipelines.php" />	
+	<pipeline nom="evenement_recuperer_fond" inclure="reservation_evenement_pipelines.php" />		
+		 
 	
 	<pipeline nom="reservation_evenement_donnees_details" action='' /> 		
 

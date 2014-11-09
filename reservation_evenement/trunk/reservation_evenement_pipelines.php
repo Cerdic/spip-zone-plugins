@@ -97,3 +97,37 @@ function reservation_evenement_taches_generales_cron($taches) {
 	}
 	return $taches;
 }
+
+function reservation_evenement_formulaire_charger($flux){
+	$form = $flux['args']['form'];
+	$forms=array('editer_article','editer_evenements');
+	if (in_array($form,$forms)){
+		if ($form==$forms[0]){
+			
+			
+		}
+
+		$flux['data']['action_cloture'] .= "";
+	}
+	return $flux;
+}
+
+function reservation_evenement_recuperer_fond($flux){
+    $fond=$flux['args']['fond'];
+	
+	//Inclure les champs extras dans le formulaire reservation
+    if ($fond == 'inclure/champs_listes'){
+        $champs_amis=recuperer_fond('formulaires/inc-reservation_amies',$flux['data']);
+        $flux['data']['texte'] .= $champs_amis;
+    }
+	//Selecteur des mailignlists
+    /*if ($fond == 'formulaires/newsletter_subscribe'){
+    	$flux['data']['status']='open';
+		$contexte=$flux['data']['contexte'];
+		$contexte['status']='open';
+		$contexte['name']='listes';		
+        $listes=recuperer_fond('formulaires/inc-check-subscribinglists',$contexte);
+        $flux['data']['texte'] = str_replace('<!--extra-->',$listes. '<!--extra-->',$flux['data']['texte']);
+    }-*/    
+    return $flux;
+}
