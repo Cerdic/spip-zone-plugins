@@ -131,6 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_accepte' => ' accepté',
 	'texte_statut_attente' => ' dans liste d’attente',
 	'texte_statut_attente_paiement' => ' en attente du paiement',
+	'texte_statut_cloture' => ' cloturé',	
 	'texte_statut_encours' => ' en cours',
 	'texte_statut_poubelle' => ' à la poubelle',
 	'texte_statut_refuse' => ' refusé',
