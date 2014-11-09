@@ -38,7 +38,7 @@
 		</li>
 		</BOUCLE_documents_album>
 	</ul>
-	[(#GET{titre}|ou{#GET{descriptif}}|oui)
+	[(#GET{titre_album}|ou{#GET{descriptif_album}}|oui)
 	[<(#HTML5|?{figcaption,div}) class="figcaption">]
 		[<div class="titre_album">(#GET{titre_album}|wrap{[<(#ENV*{balise_titre,#ENV*{balise_titraille}}|replace{^<}|replace{>$})>]})</div>]
 		[<div class="descriptif_album">(#GET{descriptif_album})</div>]

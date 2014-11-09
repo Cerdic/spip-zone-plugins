@@ -19,7 +19,7 @@
 (#SET{descriptif_album,#ENV{descriptif}|?{#INFO_DESCRIPTIF{album,#ID_ALBUM}}})
 ]<B_documents_album>
 <div class="album liste[ (#ENV{align})][ (#ENV{classe})]">
-    [(#GET{titre}|ou{#GET{descriptif}}|oui)
+    [(#GET{titre_album}|ou{#GET{descriptif_album}}|oui)
 	<div class="caption">
 		[<div class="titre_album">(#GET{titre_album}|wrap{[<(#ENV*{balise_titre,#ENV*{balise_titraille}}|replace{^<}|replace{>$})>]})</div>]
 		[<div class="descriptif_album">(#GET{descriptif_album})</div>]
