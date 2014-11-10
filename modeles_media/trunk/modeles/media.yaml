@@ -15,6 +15,7 @@ parametres:
       label: '<:media:label_id_document:>'
       defaut: ''
       env: 'oui'
+      id: ''
       obligatoire: 'oui'
     verifier:
       type: 'id_document'
