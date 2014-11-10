@@ -15,8 +15,8 @@ function migrateur_mig_exporter_bdd() {
 	$sauvegarde = $dest->dir . 'tmp/dump/' . MIGRATEUR_NOM_EXPORT_SQL;
 
 	$output = "";
-	exec("rm $dir_dest$source_sql;");
-	exec("rm $dir_dest$source_sql.gz;");
+	exec("rm $sauvegarde;");
+	exec("rm $sauvegarde.gz;");
 
 	// source par ssh ?
 	if ($ssh = $source->ssh) {
