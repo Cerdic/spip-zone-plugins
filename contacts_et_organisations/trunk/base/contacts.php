@@ -42,6 +42,8 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_traitements']['CIVILITE'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['FONCTION'][] = _TRAITEMENT_TYPO;
 	$interface['table_des_traitements']['ACTIVITE'][] = _TRAITEMENT_TYPO;
+	$interface['table_des_traitements']['OUVERTURES'][] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['TARIFS'][] = _TRAITEMENT_RACCOURCIS;
 	
 	// Chercher plus facilement dans les annuaires avec {annuaire=truc}
 	$interface['exceptions_des_tables']['organisations']['annuaire'] = array('spip_annuaires', 'identifiant');
