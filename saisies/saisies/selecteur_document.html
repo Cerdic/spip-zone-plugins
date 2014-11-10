@@ -63,11 +63,12 @@
 	);"
 /></p>
 
+
 [(#ENV{_modalbox_retour}|non)
 <script type="text/javascript">
 	function mediaselect1_#ENV{nom}(id){
 		jQuery.modalboxclose();
-		jQuery("#champ_#ENV{nom}").attr('value',id).focus();
+		jQuery("#champ_#ENV{id,#ENV{nom}}").attr('value',id).focus();
 	};
 </script>
 ]
