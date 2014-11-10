@@ -26,9 +26,9 @@ function migrateur_mig_exporter_bdd() {
 		if ($cmd) {
 			migrateur_log("Exécution de mysqldump distant…");
 			$gzip   = $ssh->obtenir_commande_serveur('gzip');
-			$gunzip = $ssh->obtenir_commande_serveur('gunzip');
+			$gunzip = $dest->obtenir_commande_serveur('gunzip');
 			if ($gzip and $gunzip) {
-				migrateur_log("Gzip présents : utilisation de compression");
+				migrateur_log("Gzip présent : utilisation de compression");
 				$run = "$ssh_cmd \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd} | $gzip\" > $sauvegarde.gz 2>&1";
 			} else {
 				$run = "$ssh_cmd \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd}\" > $sauvegarde 2>&1";
