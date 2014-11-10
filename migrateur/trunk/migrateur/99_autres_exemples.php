@@ -237,9 +237,9 @@ function migrateur_exemple_supprimer_vignettes_logos() {
  * l'uptime du serveur
 **/
 function migrateur_test_ssh_uptime() {
-	$ssh = migrateur_source_ssh();
-	if ($ssh) {
-		$cmd = $ssh->obtenir_commande_serveur();
+	$source = migrateur_source();
+	if ($source->ssh) {
+		$cmd = $source->ssh->obtenir_commande_connexion();
 		if ($cmd) {
 			$run = "$cmd uptime 2>&1";
 			migrateur_log($run);

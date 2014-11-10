@@ -6,21 +6,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Synchroniser le répertoire IMG de destination avec la source
 **/
 function migrateur_mig_rsync_img() {
-	$source     = MIGRATEUR_SOURCE_DIR  . 'IMG/';
-	$dest       = MIGRATEUR_DESTINATION_DIR . 'IMG';
-	$cmd = migrateur_obtenir_commande_serveur('rsync');
+	$source = migrateur_source();
+	$dest   = migrateur_destination();
+
+	$dir_source = $source->dir  . 'IMG/';
+	$dir_dest   = $dest->dir . 'IMG';
+
+	$cmd = $dest->commande('rsync');
 	if ($cmd) {
+		$cmd = "$cmd -a --delete --stats";
 
 		// source et destination sur serveurs différents
-		if ($ssh = migrateur_source_ssh()) {
-			exec("$cmd -a --no-o --no-p --delete --stats -e 'ssh -o StrictHostKeyChecking=no -p {$ssh->port}' {$ssh->user}@{$ssh->server}:$source $dest 2>&1", $output, $err);
-			migrateur_log(implode("\n", $output));
+		if ($ssh = $source->ssh) {
+			$dir_source = $source->ssh->obtenir_rysnc_parametres() . $dir_source;
 		}
 
-		// source et destination sur le meme serveur
-		else {
-			exec("$cmd -a --delete --stats $source $dest 2>&1", $output, $err);
-			migrateur_log(implode("\n", $output));
-		}
+		$cmd = "$cmd $dir_source $dir_dest 2>&1";
+		#migrateur_log($cmd);
+		exec($cmd, $output, $err);
+		migrateur_log(implode("\n", $output));
+
 	}
 }
