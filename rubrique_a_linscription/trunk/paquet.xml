@@ -1,7 +1,7 @@
 <paquet
 	prefix="rubrique_a_linscription"
 	categorie="auteur"
-	version="2.1.0"
+	version="2.1.1"
 	etat="stable"
 	compatibilite="[3.0.9;3.1.*]"
 	logo="rubrique_a_linscription.png"
