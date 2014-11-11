@@ -1,0 +1,33 @@
+<plugin>
+    <nom>Nouvelle Bersion</nom>
+    <slogan>Dupliquer & Publier - Agora spirit</slogan>
+    <icon>images/article_new_version-24.png</icon>
+    <auteur>[FwedBoot->mailto:fwedboot@gmail.com]</auteur>
+    <licence>GPL &#169; 2014</licence>
+    <version>2.1.0</version>
+
+    <etat>test</etat>
+    <description>Ce plugin permet de dupliquer un article et son contenu depuis l'espace privé en ajoutant un bouton dans la navigation de gauche dans l'espace privé, puis de le publier en lieu et place de l'article original. l'article original est alors archivé
+
+    Cela permet en somme une modération des modifications sur un article publié (comme le permettait la fonctionnalité 'nouvelle version' d'Agora-SPIP)
+    </description>
+    <lien></lien>
+    <prefix>versioning</prefix>
+
+    <pipeline>
+        <nom>boite_infos</nom>
+        <inclure>versioning_pipeline.php</inclure>
+    </pipeline>
+
+    <categorie>edition</categorie>
+    <necessite id="SPIP" version='[2.0.0;2.1.99]' />
+
+    <pipeline>
+        <nom>declarer_tables_principales</nom>
+        <inclure>base/versioning.php</inclure>
+    </pipeline>
+
+    <version_base>0.1</version_base>
+    <install>base/versioning_install.php</install>
+    <lien>http://contrib.spip.net/Nouvelle-version-Moderation-de-modifications</lien>
+</plugin>
