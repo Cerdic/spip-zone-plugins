@@ -52,14 +52,10 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 
 		
 		// Création de la rubrique
-		if (!$meta['id_parent'] or $meta['id_parent']==0){
-			$id_rubrique = sql_insertq("spip_rubriques", array('titre'=> _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription)), 'id_secteur'=> 0));
-			sql_update("spip_rubriques",array("id_secteur"=>$id_rubrique), "id_rubrique=".$id_rubrique);
-		}
-		else{
-			$id_secteur  	= sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.$meta['id_parent']);
-			$id_rubrique 	= sql_insertq("spip_rubriques", array('titre'=> _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription)), 'id_secteur'=> $id_secteur,'id_parent'=>$meta['id_parent']));	
-		}
+		include_spip('inc/rubriques');
+		$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription));
+		$id_rubrique = creer_rubrique_nommee($titre_rubrique, $meta['id_parent']);
+		
 		
 		sql_insertq('spip_auteurs_liens', array(
 		'id_auteur' => $id_auteur,
