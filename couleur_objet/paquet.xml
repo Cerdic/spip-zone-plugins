@@ -1,0 +1,25 @@
+<paquet
+	prefix="couleur_objet"
+	categorie="maintenance"
+	version="0.1.0"
+	schema="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="img/couleur_objet.png"
+	documentation="http://www.spip-contrib.net"
+>	
+
+	<nom>Couleur d'Objet</nom>
+	<!-- Une couleur pour chaque objet -->
+	
+	<auteur>chankalan</auteur>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<utilise nom="palette" compatibilite="[3.0.0;[" />
+	
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/couleur_objet.php" />
+	<pipeline nom="affiche_droite" inclure="couleur_objet_pipelines.php" />
+	<pipeline nom="header_prive" inclure="couleur_objet_pipelines.php" />
+	
+</paquet>
