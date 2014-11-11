@@ -1,7 +1,7 @@
 <paquet
 	prefix="fabrique"
 	categorie="outil"
-	version="2.0.8"
+	version="2.0.9"
 	etat="dev"
 	compatibilite="[3.1.0-dev;3.1.*]"
 	logo="prive/themes/spip/images/fabrique-64.png"
@@ -21,7 +21,7 @@
 
 	<pipeline nom="compagnon_messages" inclure="fabrique_pipelines.php" />
 
-	<menu nom="fabrique" titre="fabrique:fabrique_titre" parent="menu_squelette"  icone="images/fabrique-16.png" />
+	<menu nom="fabrique" titre="fabrique:fabrique_titre" parent="menu_developpement"  icone="images/fabrique-16.png" />
 
 	<onglet nom="fabrique" titre="fabrique:onglet_fabrique" parent="fabrique"  icone="images/fabrique-24.png" />
 	<onglet nom="fabrique_restaurer" titre="fabrique:onglet_fabrique_restaurer" parent="fabrique"  icone="images/fabrique_restaurer-24.png" />
