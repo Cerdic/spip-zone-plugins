@@ -1,0 +1,23 @@
+<paquet
+	prefix="versioning"
+	categorie="edition"
+	version="3.0.0"
+	etat="test"
+	compatibilite="[3.0.0 ;3.0.*]"
+	logo="images/article_new_version-24.png"
+	schema="0.1"
+	documentation="http://contrib.spip.net/Nouvelle-version-Moderation-de-modifications"
+>	
+
+	<nom>Dupliquer et Publier</nom>
+	<!-- Nouvelle version - Agora spirit -->
+
+	<auteur mail="mailto:fwedboot@gmail.com">FwedBoot</auteur>
+
+	<copyright>2014</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="boite_infos" inclure="versioning_pipeline.php" />  
+	<pipeline nom="declarer_tables_principales" inclure="base/versioning.php" />
+</paquet>
