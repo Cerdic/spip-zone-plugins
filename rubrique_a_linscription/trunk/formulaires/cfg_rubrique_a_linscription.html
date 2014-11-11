@@ -32,6 +32,7 @@
 			<li class="editer_statut">
 				<label for="statut"><:rubrique_a_linscription:cfg_statut:></label>
 				<select id="statut" name="statut">
+					<option value="6forum"[ selected="(#ENV{statut}|=={6forum}|oui)"]><:info_visiteur_1:></option>
 					<option value="1comite"[ selected="(#ENV{statut}|=={1comite}|oui)"]><:auteur:></option>
 					<option value="0minirezo"[ selected="(#ENV{statut}|=={0minirezo}|oui)"]><:statut_admin_restreint:></option>
 				</select>
