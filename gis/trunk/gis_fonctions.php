@@ -353,14 +353,16 @@ function gis_modele_url_json_env($env){
 		$tables_sql = lister_tables_objets_sql();
 		foreach (array_keys($tables_sql) as $table){
 			$primary = id_table_objet($table);
-			if (isset($env[$primary]))
-				$contexte[$primary] = $env[$primary];
+			if (isset($env[$primary])) {
+				$contexte[$primary] = is_array($env[$primary]) ? $env[$primary] : trim($env[$primary]);
+			}
 		}
 		// puis cas particuliers et ceux ajoutés par le pipeline
 		$keys = pipeline('gis_modele_parametres_autorises', array("objet", "id_objet","id_secteur","id_parent","media","recherche","mots","pays","code_pays","region","departement","ville","code_postal","adresse"));
 		foreach ($keys as $key){
-			if (isset($env[$key]))
-				$contexte[$key] = $env[$key];
+			if (isset($env[$key])) {
+				$contexte[$key] = is_array($env[$key]) ? $env[$key] : trim($env[$key]);
+			}
 		}
 	}
 	return $contexte;
