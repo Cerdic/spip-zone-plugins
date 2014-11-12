@@ -8,11 +8,11 @@
     $(document).ready(function() {
         $(".version legend").after('<p><a class="coche" href="#">Tout cocher</a> | <a class="decoche" href="#">Tout decocher</a> </p>');
         $("a.decoche").click(function() {
-                $(this).parents("fieldset").find(":checkbox").removeAttr("checked");
+                $(this).parents("fieldset").find(":checkbox").prop("checked",false);
                 return false;
         });
         $("a.coche").click(function() {
-                $(this).parents("fieldset").find(":checkbox").attr("checked","checked");
+                $(this).parents("fieldset").find(":checkbox").prop("checked",true);
                 return false;
         });
 });

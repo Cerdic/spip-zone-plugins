@@ -1,9 +1,9 @@
 <paquet
 	prefix="bible"
 	categorie="divers"
-	version="5.0.3"
+	version="5.0.4"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="bible.jpg"
 	documentation="http://contrib.spip.net/Spip-Bible,1125"
 	schema="0.3.0"
