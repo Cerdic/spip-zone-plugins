@@ -1,4 +1,13 @@
-<div class="formulaire_spip formulaire_config formulaire_#FORM">
+[(#REM)
+	Formulaire de choix de couleur sur un objet
+][(#REM)
+	Action (CVT) :
+		formulaires/couleur_objet.php
+	Inclus dans :
+		inclure/couleur_objet.html avec les paramètres :
+			#ENV{id_objet},#ENV{objet},#ENV{couleur_objet}
+		
+]<div class="formulaire_spip formulaire_config formulaire_#FORM">
 	<h3 class="titrem">[(#CHEMIN{img_pack/couleur_objet-24.png}|balise_img{'',cadre-icone})]Couleur</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok none">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
