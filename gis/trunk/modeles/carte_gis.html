@@ -127,7 +127,7 @@ jQgisloader.done(function(){
 			},
 			cluster: [(#ENV{cluster}|=={oui}|?{true,false})],
 			clusterOptions: {
-				disableClusteringAtZoom: [(#ENV{clusterMaxZoom, #ENV{maxZoom}|?{#ENV{maxZoom}|moins{2},0}})],
+				disableClusteringAtZoom: [(#ENV{clusterMaxZoom,0}})],
 				showCoverageOnHover: [(#ENV{clusterShowCoverageOnHover}|?{true,false})],
 				spiderfyOnMaxZoom: [(#ENV{clusterSpiderfyOnMaxZoom}|?{true,false})],
 				maxClusterRadius: [(#ENV{maxClusterRadius,80})]
