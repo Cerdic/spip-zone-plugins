@@ -20,8 +20,8 @@ function migrateur_mig_exporter_bdd() {
 
 	// source par ssh ?
 	if ($ssh = $source->ssh) {
-		$connexion = $ssh->obtenir_chemin_commande_connexion();
-		$cmd = $ssh->obtenir_commande_serveur('mysqldump');
+		$connexion = $ssh->obtenir_commande_connexion();
+		$cmd = $ssh->obtenir_chemin_commande_serveur('mysqldump');
 
 		if ($cmd) {
 			migrateur_log("Exécution de mysqldump distant…");
