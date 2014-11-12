@@ -12,12 +12,12 @@ function couleur_objet_declarer_tables_auxiliaires($tables) {
 
 	$tables['spip_couleur_objet_liens'] = array(
 		'field' => array(
-			"id_objet"     => "bigint(21) DEFAULT '0' NOT NULL",
 			"objet"        => "VARCHAR (25) DEFAULT '' NOT NULL",
+			"id_objet"     => "bigint(21) DEFAULT '0' NOT NULL",
 			"couleur_objet"      => "VARCHAR (25) DEFAULT '' NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY"  => "id_objet,objet,couleur_objet",
+			"PRIMARY KEY"  => "objet,id_objet,couleur_objet",
 		)
 	);
 

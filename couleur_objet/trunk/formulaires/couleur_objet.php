@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_couleur_objet_charger_dist($id_objet,$objet,$couleur_objet){
+function formulaires_couleur_objet_charger_dist($objet,$id_objet,$couleur_objet){
 	// autorisation : #ENV{editable} est evite car on veut toujours voir le formulaire meme apres validation
 	$editable = true;
 	if ($GLOBALS['visiteur_session']['statut']!=='0minirezo')
@@ -13,8 +13,8 @@ function formulaires_couleur_objet_charger_dist($id_objet,$objet,$couleur_objet)
 	}
 	// chargement des valeurs du formulaire
 	$valeurs = array(
-		'id_objet' => $id_objet,
 		'objet' => $objet,
+		'id_objet' => $id_objet,
 		'couleur_objet' => $couleur_objet,
 		'supprimer' => '',
 		"editable" => $editable,
@@ -22,7 +22,7 @@ function formulaires_couleur_objet_charger_dist($id_objet,$objet,$couleur_objet)
 	return $valeurs;
 }
 
-function formulaires_couleur_objet_traiter_dist($id_objet,$objet,$couleur_objet){
+function formulaires_couleur_objet_traiter_dist($objet,$id_objet,$couleur_objet){
 	$res = array();
 	if (_request('supprimer')){
 		// requête sql dans spip_couleur_objet_liens pour supprimer la ligne où #ID_OBJET = $id_objet et #OBJET = $objet
@@ -32,11 +32,11 @@ function formulaires_couleur_objet_traiter_dist($id_objet,$objet,$couleur_objet)
 	}
 	else {
 		$couleur_objet = _request('couleur_objet');
-		$where =  "id_objet=".intval($id_objet)." AND objet=".sql_quote($objet);
+		$where =  "objet=".sql_quote($objet)." AND id_objet=".intval($id_objet);
 		// si la ligne $id_objet / $objet existe dans la table spip_couleur_objet_liens alors on fait sql_updateq
 		if (sql_countsel('spip_couleur_objet_liens', array(
-			"id_objet=" . sql_quote($id_objet),
-			"objet=" . sql_quote($objet)
+			"objet=" . sql_quote($objet),
+			"id_objet=" . sql_quote($id_objet)
 		))) {
 			sql_updateq('spip_couleur_objet_liens', array('couleur_objet' => $couleur_objet), $where);
 		}else{

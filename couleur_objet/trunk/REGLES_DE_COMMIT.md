@@ -20,7 +20,7 @@ Exemple complet :
         Description du squelette
 
     ][(#REM)
-   
+
         Utilise :
             inclure/noisette.html
         Inclus dans :

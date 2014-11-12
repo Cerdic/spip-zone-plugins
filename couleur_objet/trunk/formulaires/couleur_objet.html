@@ -5,7 +5,7 @@
 		formulaires/couleur_objet.php
 	Inclus dans :
 		inclure/couleur_objet.html avec les paramètres :
-			#ENV{id_objet},#ENV{objet},#ENV{couleur_objet}
+			#ENV{objet},#ENV{id_objet},#ENV{couleur_objet}
 		
 ]<div class="formulaire_spip formulaire_config formulaire_#FORM">
 	<h3 class="titrem">[(#CHEMIN{img_pack/couleur_objet-24.png}|balise_img{'',cadre-icone})]Couleur</h3>
@@ -15,8 +15,8 @@
 	[(#ENV{editable}|oui)
 	<form method="post" action="#ENV{action}">
 		#ACTION_FORMULAIRE{#ENV{action}}
-		[<input type='hidden' name='id_objet' value='(#ENV{id_objet})' />]
 		[<input type='hidden' name='objet' value='(#ENV{objet})' />]
+		[<input type='hidden' name='id_objet' value='(#ENV{id_objet})' />]
 		<ul>
 			[<li>
 				<label><:couleur_objet:couleur_actuelle:></label>
@@ -26,12 +26,12 @@
 			<li class="editer_couleur_objet[(#ENV**{erreurs}|table_valeur{couleur_objet}|oui)erreur]">
 				<label for="couleur_objet"><:couleur_objet:choisir_une_nouvelle_couleur:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{couleur_objet})</span>
-				]<input type='color' id='couleur_objet' name='couleur_objet' value="#COULEUR_OBJET" style="width:100%;text-transform:uppercase;" />
+				]<input type='color' class="palette" id='couleur_objet' name='couleur_objet' value="#COULEUR_OBJET" style="width:100%;text-transform:uppercase;" />
 			</li>
 		</ul>
 		<div class="boutons clearfix">
 			<input type="submit" class="submit" value="<:bouton_enregistrer|attribut_html:>" style="float:right;" />
-			<input type="submit" class="submit" name="supprimer" value="<:couleur_objet:bouton_supprimer|attribut_html:>" style="float:left;" />
+			[(#COULEUR_OBJET|oui) <input type="submit" class="submit" name="supprimer" value="<:couleur_objet:bouton_supprimer|attribut_html:>" style="float:left;" />]
 		</div>
 	</form>
 	]
