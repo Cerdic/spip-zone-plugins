@@ -1,4 +1,4 @@
-[(#SET{config, [(#CONFIG{'info_spip/modules'}|unserialize)]})]
+[(#SET{config, [(#CONFIG{'info_spip/modules'}|is_array|?{[(#CONFIG{'info_spip/modules'})],[(#CONFIG{'info_spip/modules'}|unserialize)]})]})]
 <BOUCLE_secu (CONDITION) {si [(#VAL{'sgbd'}|in_array{#GET{config}})]}>
 </BOUCLE_secu>
 [(#REM)
