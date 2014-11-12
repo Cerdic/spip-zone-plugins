@@ -84,8 +84,7 @@ function formulaires_configurer_aeres_traiter_dist(){
 
 // Source: http://www.memorandom.fr/php/trier-la-colonne-dun-tableau-sans-prendre-en-compte-la-casse-et-les-accents/
 
-function aeres_tri_alpha($data) {
-	$sans_accent = function ($chaine) {
+function aeres_sans_accent($chaine) {
         if (version_compare(PHP_VERSION, '5.2.3', '>='))
             $str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8", false);
         else
@@ -97,8 +96,9 @@ function aeres_tri_alpha($data) {
         return $str;
 	};
 
+function aeres_tri_alpha($data) {
 	//On supprime les accents
-	$array_sans_accent = array_map($sans_accent , $data);
+	$array_sans_accent = array_map(aeres_sans_accent , $data);
 	//On met en minuscule
 	$array_lowercase = array_map('strtolower', $array_sans_accent);
 	// Ajoute $data en tant que dernier paramètre, pour trier par la clé commune
