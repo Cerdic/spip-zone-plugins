@@ -1,5 +1,5 @@
-Plugin Albums : règles de commit
-================================
+Plugin Couleur d'Objet : règles de commit
+=========================================
 
 Tout le monde est encouragé à commiter dans la mesure ou ça ne bouleverse pas l'utilisation ou l'apparence du plugin.
 Si c'est le cas, rendez-vous sur la liste de discussion spip-zone ou sur IRC pour en discuter.
