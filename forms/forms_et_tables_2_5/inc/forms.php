@@ -4,6 +4,8 @@
  * Gestion de formulaires editables dynamiques
  *
  * Auteurs :
+ * Sylvain BLANC
+ * Loic LE MAO
  * Antoine Pitrou
  * Cedric Morin
  * Renato
@@ -519,7 +521,7 @@
 		if (!count($erreur)){
 			if (count($champs_mod)){
 				include_spip('base/abstract_sql');
-				$in_champs = calcul_mysql_in('champ',join(',',array_map('_q', $champs_mod)));
+				$in_champs = sql_in('champ',join(',',array_map('_q', $champs_mod)));
 				spip_query("DELETE FROM spip_forms_donnees_champs WHERE $in_champs AND id_donnee="._q($id_donnee));
 			}
 			if (count($inserts)){
@@ -922,7 +924,7 @@ function Forms_afficher_liste_donnees_liees($type_source, $id, $type_lie, $type_
 	if ($type_table){
 		include_spip("base/abstract_sql");
 		include_spip("base/forms_base_api");
-		$in_type_table = calcul_mysql_in('d.id_form',implode(",",Forms_liste_tables($type_table)))." AND";
+		$in_type_table = sql_in('d.id_form',implode(",",Forms_liste_tables($type_table)))." AND";
 	}
 
 	$out = "";

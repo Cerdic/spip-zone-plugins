@@ -4,6 +4,8 @@
  * Gestion de formulaires editables dynamiques
  *
  * Auteurs :
+ * Sylvain BLANC
+ * Loic LE MAO
  * Antoine Pitrou
  * Cedric Morin
  * Renato
@@ -169,7 +171,7 @@ function Forms_liste_recherche_donnees($recherche,$les_donnees,$type,$type_table
 		$max_items = 200;
 	//if ($recherche!==NULL){
 		include_spip('base/abstract_sql');
-		$in = calcul_mysql_in('d.id_donnee',$les_donnees,'NOT');
+		$in = sql_in('d.id_donnee',$les_donnees,'NOT');
 		$limit = "";
 		if ($max_items>0)
 			$limit = "LIMIT 0,".intval($max_items);

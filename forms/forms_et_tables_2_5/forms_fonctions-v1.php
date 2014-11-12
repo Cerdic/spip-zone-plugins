@@ -6,6 +6,8 @@
  * Gestion de formulaires editables dynamiques
  *
  * Auteurs :
+ * Sylvain BLANC
+ * Loic LE MAO
  * Antoine Pitrou
  * Cedric Morin
  * Renato
@@ -94,7 +96,7 @@ if(!function_exists('ajax_action_auteur')) {
 			$liste_table[$type] = implode(",",Forms_liste_tables($type));
 		}
 		include_spip("base/abstract_sql");
-		$in = calcul_mysql_in("d.id_form",$liste_table[$type]); 
+		$in = sql_in("d.id_form",$liste_table[$type]); 
 		$pre = $prefixi18n[$type];
 		$res = spip_query(
 		  "SELECT id_donnee_liee 

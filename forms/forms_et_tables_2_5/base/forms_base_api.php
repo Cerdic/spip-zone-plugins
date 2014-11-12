@@ -4,6 +4,8 @@
  * Gestion de formulaires editables dynamiques
  *
  * Auteurs :
+ * Sylvain BLANC
+ * Loic LE MAO
  * Antoine Pitrou
  * Cedric Morin
  * Renato Formato
@@ -145,7 +147,7 @@ function Forms_rechercher_donnee($recherche,$id_form=0,$champ=NULL,$sous_ensembl
 	$in = "";
 	if (is_array($sous_ensemble)){
 		include_spip('base/abstract_sql');
-		$in = calcul_mysql_in('dc.id_donnee',implode(',',$sous_ensemble));
+		$in = sql_in('dc.id_donnee',implode(',',$sous_ensemble));
 	}
 	$res = spip_query(
 	    "SELECT dc.id_donnee FROM spip_forms_donnees_champs AS dc"
@@ -185,7 +187,7 @@ function Forms_decrit_donnee($id_donnee,$specifiant=true,$linkable=false){
 function Forms_donnees_liees($id_donnee,$type_form_lie){
 	include_spip('base/abstract_sql');
 	$liste = Forms_liste_tables($type_form_lie);
-	$in_liste = calcul_mysql_in('id_form',implode(',',$liste));
+	$in_liste = sql_in('id_form',implode(',',$liste));
 	$res = spip_query("SELECT * FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." OR id_donnee_liee="._q($id_donnee));
 	$valeurs = array();
 	while ($row = spip_fetch_array($res)){
@@ -204,7 +206,7 @@ function Forms_delier_donnee($id_donnee,$id_donnee_liee=0,$type_form_lie = ""){
 	else {
 		include_spip('base/abstract_sql');
 		$liste = Forms_liste_tables($type_form_lie);
-		$in_liste = calcul_mysql_in('id_form',implode(',',$liste));
+		$in_liste = sql_in('id_form',implode(',',$liste));
 		$res = spip_query("SELECT * FROM spip_forms_donnees_donnees WHERE id_donnee="._q($id_donnee)." OR id_donnee_liee="._q($id_donnee));
 		while ($row = spip_fetch_array($res)){
 			$liee = $row['id_donnee']+$row['id_donnee_liee']-$id_donnee;

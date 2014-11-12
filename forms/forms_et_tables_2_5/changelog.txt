@@ -1,4 +1,7 @@
-﻿2013-04-10
+﻿2014-11-12
+- Correction de bug sur l'utilisation d'une fonction dépréciée (calcul_mysql_in remplacée par sql_in) dans plusieurs fichiers.
+
+2013-04-10
 - Modification des fichiers de création de la structure du formulaire pour être conforme à la norme RGAA
 	- forms_champ_select.html ajout de l'attr title dans les select
 	- forms_structure.html ajout de l'attr title l'aide + un rel="no-follow"
