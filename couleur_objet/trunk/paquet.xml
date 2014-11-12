@@ -5,7 +5,7 @@
 	schema="1.0.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="img/couleur_objet.png"
+	logo="img/couleur_objet-64.png"
 	documentation="http://www.spip-contrib.net"
 >	
 
