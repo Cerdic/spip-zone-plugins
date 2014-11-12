@@ -20,18 +20,18 @@ function migrateur_mig_exporter_bdd() {
 
 	// source par ssh ?
 	if ($ssh = $source->ssh) {
-		$connexion = $ssh->obtenir_commande_connexion();
+		$connexion = $ssh->obtenir_chemin_commande_connexion();
 		$cmd = $ssh->obtenir_commande_serveur('mysqldump');
 
 		if ($cmd) {
 			migrateur_log("Exécution de mysqldump distant…");
-			$gzip   = $ssh->obtenir_commande_serveur('gzip');
+			$gzip   = $ssh->obtenir_chemin_commande_serveur('gzip');
 			$gunzip = $dest->obtenir_commande_serveur('gunzip');
 			if ($gzip and $gunzip) {
 				migrateur_log("Gzip présent : utilisation de compression");
-				$run = "$ssh_cmd \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd} | $gzip\" > $sauvegarde.gz 2>&1";
+				$run = "$connexion \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd} | $gzip\" > $sauvegarde.gz 2>&1";
 			} else {
-				$run = "$ssh_cmd \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd}\" > $sauvegarde 2>&1";
+				$run = "$connexion \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd}\" > $sauvegarde 2>&1";
 			}
 			#migrateur_log($run);
 			exec($run, $output, $err);
