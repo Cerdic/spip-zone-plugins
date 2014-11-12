@@ -7,6 +7,11 @@
 		inclure/couleur_objet.html avec les paramètres :
 			#ENV{objet},#ENV{id_objet},#ENV{couleur_objet}
 		
+][(#REM)
+	Particularités :
+		Si plugin Palette activé et si #COULEUR_OBJET n'existe pas, il faut un code hexadécimal pour initialisé la saisie,
+		c'est pourquoi value=#FFFFFF
+		
 ]<div class="formulaire_spip formulaire_config formulaire_#FORM">
 	<h3 class="titrem">[(#CHEMIN{img_pack/couleur_objet-24.png}|balise_img{'',cadre-icone})]Couleur</h3>
 	[<p class="reponse_formulaire reponse_formulaire_ok none">(#ENV*{message_ok})</p>]
@@ -20,13 +25,17 @@
 		<ul>
 			[<li>
 				<label><:couleur_objet:couleur_actuelle:></label>
-				<div class="couleur_objet_actuelle" style="margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[(#COULEUR_OBJET|couleur_inverser|couleur_extreme{0.45})];border:1px solid;"
+				<div class="couleur_objet_actuelle" style="margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[#(#COULEUR_OBJET|couleur_extreme|couleur_inverser)];border:1px solid;"
 				>(#COULEUR_OBJET)</div>
 			</li>]
 			<li class="editer_couleur_objet[(#ENV**{erreurs}|table_valeur{couleur_objet}|oui)erreur]">
 				<label for="couleur_objet"><:couleur_objet:choisir_une_nouvelle_couleur:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{couleur_objet})</span>
-				]<input type='color' class="palette" id='couleur_objet' name='couleur_objet' value="#COULEUR_OBJET" style="width:100%;text-transform:uppercase;" />
+				]<input type="color" class="palette" id='couleur_objet' name='couleur_objet'[ (#PLUGIN{palette}|?{
+					[(#COULEUR_OBJET|?{value="#COULEUR_OBJET",value="#FFFFFF"})]
+				,
+					value="#COULEUR_OBJET"
+				})] style="width:100%;text-transform:uppercase;" />
 			</li>
 		</ul>
 		<div class="boutons clearfix">
@@ -39,7 +48,7 @@
 		[(#COULEUR_OBJET|non)<p><:couleur_objet:aucune_couleur_definie:></p>]
 		[<p class="clearfix">
 			<strong><:couleur_objet:couleur_actuelle:></label>
-			<div class="couleur_objet_actuelle" style="margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[(#COULEUR_OBJET|couleur_inverser|couleur_extreme{0.45})];border:1px solid;"
+			<div class="couleur_objet_actuelle" style="margin:0 0 2px 2px;text-align:center;text-transform:uppercase;background:[(#COULEUR_OBJET)];color:[#(#COULEUR_OBJET|couleur_extreme|couleur_inverser)];border:1px solid;"
 			>(#COULEUR_OBJET)</div>
 		</p>]
 	]
