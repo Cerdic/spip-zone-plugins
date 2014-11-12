@@ -48,6 +48,7 @@ function migrateur_mig_exporter_bdd() {
 
 			if ($err) {
 				migrateur_log("! Erreurs survenues : $err");
+				if ($output) migrateur_log( implode("\n", $output) );
 			} else {
 				$taille = filesize($sauvegarde);
 				include_spip('inc/filtres');
@@ -74,6 +75,7 @@ function migrateur_mig_exporter_bdd() {
 			exec("$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd} > $sauvegarde 2>&1", $output, $err);
 			if ($err) {
 				migrateur_log("! Erreurs survenues : $err");
+				if ($output) migrateur_log( implode("\n", $output) );
 			} else {
 				$taille = filesize($sauvegarde);
 				include_spip('inc/filtres');
