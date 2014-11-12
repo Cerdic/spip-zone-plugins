@@ -45,11 +45,11 @@
 	};
 
 	function palid(element) {
-		if (!$(element).attr("id")){
+		if (!$(element).prop("id")){
 			/* pas de id : on en cree un aleatoire, avec un numéro élevé pour pas trop risquer de collision */  
 			var newid = parseInt(10000 + 10000*Math.random());
 			return newid;
 		}
-		return $(element).attr("id");
+		return $(element).prop("id");
 	};
 })(jQuery)};
