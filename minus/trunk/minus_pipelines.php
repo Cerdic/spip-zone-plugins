@@ -10,7 +10,7 @@ function minus_formulaire_charger($flux){
     return $flux;
 }
 function minus_formulaire_verifier($flux){
-	if (substr($flux["args"]["form"],0,7) == "editer_" and !(_request("id_".substr($flux["args"]["form"],7))>0)){
+	if (substr($flux["args"]["form"],0,7) == "editer_" and $flux["args"]["args"][0]=='oui'){// on suppose que les formulaires editer_xxx passse tout oui si on edite pour la première fois
 		if (trop_majuscules() and !_request("titre_trop_majusucules")){ // si ion a trop de majuscules, on l'affiche, sauf si on l'a déjà affiché une fois.
 		    $flux["data"]["titre"] = _T("minus:trop_majuscule");
 		    }
