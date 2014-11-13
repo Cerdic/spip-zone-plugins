@@ -1,9 +1,9 @@
 <paquet
 	prefix="formulaireupload"
 	categorie="outil"
-	version="1.0.4"
+	version="1.0.5"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/formulaireupload-32.png"
 	documentation="http://contrib.spip.net/Formulaire-upload"
 >
