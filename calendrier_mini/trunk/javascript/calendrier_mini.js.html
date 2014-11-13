@@ -1,8 +1,8 @@
 #HTTP_HEADER{Content-type:text/javascript}
 if (!jQuery.fn.datepicker){
-#INCLURE{javascript/ui/jquery.ui.core.js}
-#INCLURE{javascript/ui/jquery.ui.widget.js}
-#INCLURE{javascript/ui/jquery.ui.datepicker.js}
+[(#INCLURE{javascript/ui/core.js}|sinon{#INCLURE{javascript/ui/jquery.ui.core.js}})]
+[(#INCLURE{javascript/ui/widget.js}|sinon{#INCLURE{javascript/ui/jquery.ui.widget.js}})]
+[(#INCLURE{javascript/ui/datepicker.js}|sinon{#INCLURE{javascript/ui/jquery.ui.datepicker.js}})]
 }
 if (!jQuery.fn.multiDatesPicker){
 #INCLURE{javascript/jquery-ui.multidatespicker.js}
