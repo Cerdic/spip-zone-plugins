@@ -10,8 +10,8 @@
 <div id="page">
 
 	[(#REM) Entete de la page + titre du site ]
-	<INCLURE{fond=inc-entete}>
-
+	[(#CHEMIN{inc-entete.html}|oui)<INCLURE{fond=inc-entete}>]
+	[(#CHEMIN{inclure/head.html}|oui)<INCLURE{fond=inclure/head}>]
 	<div id="conteneur">
 	<div id="contenu">
 		
