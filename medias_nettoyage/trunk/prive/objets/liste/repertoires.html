@@ -11,6 +11,7 @@
 			<tr class="first_row">
 				<th class="nom"><:medias_nettoyage:info_nom:> </th>
 				<th class="date secondaire"><:date:></th>
+				<th class="bdd"><:medias_nettoyage:en_bdd:></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,6 +19,11 @@
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})]">
 				<td class="nom">#VALEUR</td>
 				<td class="date secondaire">[(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate)]</td>
+				<td>
+					<BOUCLE_en_bdd (DOCUMENTS) {extension=(#VALEUR|set_spip_doc)} {0,1}><:medias_nettoyage:oui:></BOUCLE_en_bdd></B_en_bdd>
+					<BOUCLE_distant (DOCUMENTS) {si [(#VALEUR|set_spip_doc|=={'distant'})]} {distant='oui'} {0,1}><:medias_nettoyage:oui:></BOUCLE_distant></B_distant><:medias_nettoyage:non:><//B_distant>
+					<//B_en_bdd>
+				</td>
 			</tr>
 			</BOUCLE_repertoires>
 		</tbody>

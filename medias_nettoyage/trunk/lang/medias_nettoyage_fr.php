@@ -7,11 +7,14 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
-    'actions' => 'Actions',
+    'activation_horaires_non' => 'Régulièrement dans la journée <em>(peut ralentir votre site)</em>',
+    'activation_horaires_oui' => 'Tranche horaire <strong>(recommandé)</strong>',
     'aucun_document_orphelin' => 'Il n\'y a aucun document orphelin.',
     'aucun_logo' => 'Il n\'y a aucun logo.',
     'aucun_repertoire' => 'Il n\'y a aucun répertoire.',
+    'actions' => 'Actions',
 
+    // C
     'cfg_titre_parametrages' => 'Paramétrages',
 
     // D
@@ -19,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'des_repertoires' => '@nb@ répertoires',
 
     // E
+    'en_bdd' => 'En BDD',
     'explication_activation_horaires' => 'Désirez-vous que le nettoyage se fasse à tout moment de la
     journée ? Ou juste dans une tranche horaire pour ne pas pénaliser les performances du site ?',
     'explication_horaires' => 'Veuillez sélectionner la tranche horaire dans laquel le nettoyage de la
@@ -72,14 +76,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'mode_tous' => 'Tous',
 
     // N
-    'non' => 'Régulièrement dans la journée <em>(peut ralentir votre site)</em>',
+    'non' => 'Non',
 
     // O
     'onglet_titre_logos_img' => 'Les logos dans IMG/',
     'onglet_titre_rep_orphelins' => 'Documents orphelins',
     'onglet_titre_rep_img' => 'Répertoire IMG/',
     'onglet_titre_tabbord' => 'Tableau de bord',
-    'oui' => 'Tranche horaire <strong>(recommandé)</strong>',
+    'oui' => 'Oui',
 
     // S
     'supprimer' => 'Supprimer',
