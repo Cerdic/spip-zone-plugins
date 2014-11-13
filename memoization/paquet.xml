@@ -3,7 +3,7 @@
 	categorie="performance"
 	version="1.5.4"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="memoization.png"
 	documentation="http://zzz.rezo.net/Memoization.html"
 >	
@@ -13,7 +13,7 @@
 
 	<auteur>Fil</auteur>
 
-	<copyright>2009-2013</copyright>
+	<copyright>2009-2014</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL 3</licence>
 	<licence lien="http://opensource.org/licenses/mit-license.php">MIT</licence>
