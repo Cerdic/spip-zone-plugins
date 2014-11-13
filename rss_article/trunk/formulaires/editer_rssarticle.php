@@ -1,5 +1,8 @@
 <?php
 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/autoriser');
 
 /**
@@ -34,8 +37,7 @@ function formulaires_editer_rssarticle_verifier_dist($id_syndic='new', $retour='
 */
 function formulaires_editer_rssarticle_traiter_dist($id_syndic='new', $retour=''){
 	
-  $message = array('editable'=>true, 'message_ok'=>'');
-  
+
   if (_request('rssarticle')=='oui') {
     	sql_updateq('spip_syndic',array(
         'rssarticle'=> 'oui',
@@ -52,7 +54,8 @@ function formulaires_editer_rssarticle_traiter_dist($id_syndic='new', $retour=''
      	sql_updateq('spip_syndic',array('rssarticle'=> 'non'),'id_syndic='.intval($id_syndic)); 
   }
 	
-  $message = _T("rssarticle:site_maj");
+  
+  $message = array('editable'=>true, 'message_ok'=>_T("rssarticle:site_maj"));
 
 	return $message;
 	
