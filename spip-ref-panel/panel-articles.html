@@ -44,13 +44,14 @@
 					[<span class="#EDIT{soustitre}">(#SOUSTITRE|sinon{"Entrer un sous titre"})</span>]
 				</td>
 				<td>[<a href="[(#URL_ARTICLE)]" [(#SPIPREF_ART_URL_301|oui) style="color:red!important;font-weight:bold;" ]>(#URL_ARTICLE|url_absolue)</a>]<br/>
-				<span class="#EDIT{art_url_301}">[(#SPIPREF_ART_URL_301|?{<a href="#SPIPREF_ART_URL_301" target="_blank">#SPIPREF_ART_URL_301</a>, "URL 301 ici"})]</span></td>
+				<span class="#EDIT{spipref_art_url_301}">[(#SPIPREF_ART_URL_301|?{<a href="#SPIPREF_ART_URL_301" target="_blank">#SPIPREF_ART_URL_301</a>, "URL 301 ici"})]</span></td>
 				<td>
 					<BOUCLE_metas(METAS){id_article = #_a:ID_ARTICLE}>
-						[<strong class="#EDIT{titre}">(#TITRE|sinon{"title par défaut"})</strong>]<br/>
-						[<span class="#EDIT{description}">(#DESCRIPTION|sinon{"description par défaut"})</span>]</br>
-						[<small class="#EDIT{keywords}">(#KEYWORDS|sinon{"balise meta newskeywords"})</small>]
+						[<strong class="#EDIT{titre}">(#TITRE|sinon{"title par défaut"})</strong>]
+						[<br/><span class="#EDIT{description}">(#DESCRIPTION|sinon{"description par défaut"})</span>]
+						[<br/><small class="#EDIT{keywords}">(#KEYWORDS|sinon{"balise meta newskeywords"})</small>]
 					</BOUCLE_metas>
+					[<br/><small class="#EDIT{spipref_article_meta_robots}">(#SPIPREF_ARTICLE_META_ROBOTS|sinon{"directives aux robots (par défaut: index, follow)"})</small>]
 				</td>
 				<td><BOUCLE_ariane(HIERARCHIE){id_article}><small> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a> (#ID_RUBRIQUE )</small></BOUCLE_ariane></td>
 				<td class="center"><a class="btn btn-primary btn-sm" href="?exec=article&id_article=#ID_ARTICLE" target="_blank" title="<:srp:modifier_objet:>"><span class="glyphicon glyphicon-wrench"></span></a> <a class="btn btn-primary btn-sm" target="_blank" href="/ecrire/?exec=article_edit&id_article=#ID_ARTICLE" title="<:srp:editer_objet:>"><span class="glyphicon glyphicon-pencil"></span></a></td>

@@ -43,7 +43,7 @@
 				<td class="center"><BOUCLE_z(ARTICLES){id_mot}></BOUCLE_z>#_z:TOTAL_BOUCLE</td>
 				<td class="center"><BOUCLE_y(RUBRIQUES){id_mot}></BOUCLE_y>#_y:TOTAL_BOUCLE</td>
 				<td[(#SPIPREF_MOT_URL_301|oui) class="danger" ]>[<a href="[(#URL_MOT)]" target="_blank">(#URL_MOT|url_absolue)</a>]</td>
-				<td class="#EDIT{mot_url_301}">[(#SPIPREF_MOT_URL_301|?{<a href="#SPIPREF_MOT_URL_301" target="_blank">#SPIPREF_MOT_URL_301</a>, "URL ici"})]</td>
+				<td class="#EDIT{spipref_mot_url_301}">[(#SPIPREF_MOT_URL_301|?{<a href="#SPIPREF_MOT_URL_301" target="_blank">#SPIPREF_MOT_URL_301</a>, "URL ici"})]</td>
 				<td><BOUCLE_ariane(GROUPES_MOTS){id_mot}>&gt; [(#TITRE|couper{80})] (#ID_GROUPE)</BOUCLE_ariane></td>
 				<td class="center"><a href="?exec=mot&id_mot=#ID_MOT" target="_blank">M</a> | <a target="_blank" href="/ecrire/?exec=mot_edit&id_mot=#ID_MOT">E</a></td>
 			</tr>
