@@ -36,11 +36,11 @@
       <tbody>
 	      <BOUCLE_a(RUBRIQUES){par id_rubrique}>
 				
-			<tr[(#RUB_URL_301|oui) class="warning"]>
+			<tr[(#SPIPREF_RUB_URL_301|oui) class="warning"]>
 				<td>[(#ID_RUBRIQUE)]</td>
 				<td class="#EDIT{titre}">[(#TITRE)]</td>
-				<td[(#RUB_URL_301|oui) class="danger" ]>[<a href="[(#URL_RUBRIQUE)]" [(#RUB_URL_301|oui) style="color:red!important;font-weight:bold;" ]>(#URL_RUBRIQUE|url_absolue)</a>]</td>
-				<td class="#EDIT{rub_url_301}">[(#RUB_URL_301|?{<a href="#RUB_URL_301" target="_blank">#RUB_URL_301</a>, "URL ici"})]</td>
+				<td[(#SPIPREF_RUB_URL_301|oui) class="danger" ]>[<a href="[(#URL_RUBRIQUE)]" [(#SPIPREF_RUB_URL_301|oui) style="color:red!important;font-weight:bold;" ]>(#URL_RUBRIQUE|url_absolue)</a>]</td>
+				<td class="#EDIT{rub_url_301}">[(#SPIPREF_RUB_URL_301|?{<a href="#SPIPREF_RUB_URL_301" target="_blank">#SPIPREF_RUB_URL_301</a>, "URL ici"})]</td>
 				<td><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a> (#ID_RUBRIQUE )</BOUCLE_ariane> &gt; Racine<//B_ariane></td>
 				<td><a href="/ecrire/?exec=rubriques&id_rubrique=[(#ID_RUBRIQUE)]">Edit</a></td>
 			</tr>
