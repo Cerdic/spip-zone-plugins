@@ -63,8 +63,8 @@
   <p class="boutons"><input type="submit" class="submit" value="<:malettre:lettre_envoyer:>" /></p>
    
   <br />   
-  <h5><:malettre:apercu:></h5>
-  <iframe height="400" style="overflow:scroll;width:98%;margin-bottom:15px;" src="[(#CHEMIN{#EVAL{_DIR_IMG}|concat{lettre/_malettre.html}})]?nocache=#DATE"></iframe>
+  <h5><:malettre:apercu:></h5>  
+  <iframe height="400" style="overflow:scroll;width:98%;margin-bottom:15px;" src="#VAL{#EVAL{_DIR_IMG}|concat{lettre/_malettre.html}}?nocache=#DATE"></iframe>
   
   <h5><:malettre:version_html:></h5>
   <textarea cols='70' rows='20'>#ENV{sourcehtml}</textarea>

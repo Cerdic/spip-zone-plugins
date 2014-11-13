@@ -1,5 +1,5 @@
 <?php
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // recuperer la page lettre avec le contexte
 // 
