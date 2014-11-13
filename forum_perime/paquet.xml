@@ -1,9 +1,9 @@
 <paquet
 	prefix="forum_perime"
 	categorie="communication"
-	version="1.0.0"
+	version="1.0.1"
 	etat="dev"
-	compatibilite="[3.0.5;3.0.*]"
+	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/forum_perime-64.png"
 	documentation="http://contrib.spip.net/Forum-perime-4261"
 >
@@ -14,6 +14,5 @@
 	<licence>GNU/GPL</licence>
   
   <pipeline nom="formulaire_charger" inclure="forum_perime_pipelines.php" />
-
 
 </paquet>
