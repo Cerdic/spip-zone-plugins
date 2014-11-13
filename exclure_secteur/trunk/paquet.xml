@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="2.0.6"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/exclure_secteur.jpg"
 	documentation="http://contrib.spip.net/Plugin-Exclure-secteur"
 	schema="0.1.0"
