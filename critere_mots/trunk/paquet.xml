@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="2.1.3"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="img_pack/stock_filter-data-by-criteria-24.png"
 	documentation="http://contrib.spip.net/Critere-mots"
 >	
