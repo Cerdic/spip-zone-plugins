@@ -1,8 +1,0 @@
-[(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
-[(#CONFIG{partageur/cle}|=={#ENV{cle}}|oui)
-    [(#ENV{recherche}|non)<INCLURE{fond=inc/partageur_arbo_json}{env}/>]
-    [(#ENV{recherche}|oui)<INCLURE{fond=inc/partageur_recherche_json}{env}/>]
-]
-[(#CONFIG{partageur/cle}|=={#ENV{cle}}|non)
-arbocallback({"erreur":"cle"});
-]

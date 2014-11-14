@@ -1,6 +1,0 @@
-#SET{which_groupe,#CONFIG{partageur/export_mot_groupe,#ARRAY{0,-1}}}<B_list_mot_courant><mot[(#ENV{type_objet})]s> 
-     <BOUCLE_list_mot_courant(MOTS){id_article ?}{id_groupe IN #GET{which_groupe}}><mot[(#ENV{type_objet})]>
-            <groupe>[(#TYPE*|texte_backend)]</groupe>
-            <titre>[(#TITRE*|texte_backend)]</titre>
-    </mot[(#ENV{type_objet})]></BOUCLE_list_mot_courant>
-</mot[(#ENV{type_objet})]s></B_list_mot_courant>
