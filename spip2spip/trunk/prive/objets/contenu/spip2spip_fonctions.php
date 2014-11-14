@@ -3,7 +3,7 @@
 //
 // syndication manuelle
 
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function spip2spip_syndiquer_manuel($id_spip2spip){
   include_spip("inc/spip2spip");
