@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin spip2spip
- * (c) 2013 erational
+ * 
  * Licence GNU/GPL
  */
 if (!defined('_ECRIRE_INC_VERSION')) return;

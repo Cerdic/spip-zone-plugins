@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function genie_spip2spip_syndic_dist($t){
   include_spip("inc/spip2spip");
 

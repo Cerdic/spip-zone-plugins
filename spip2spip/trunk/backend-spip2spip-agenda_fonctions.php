@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /*
  *   +----------------------------------+
  *    Nom du Filtre :   spip2spip_respecte_ln                                            

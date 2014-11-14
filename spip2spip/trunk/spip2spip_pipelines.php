@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Spip2spip
- * (c) 2013 erational
+ * 
  * Licence GNU/GPL
  */
 
