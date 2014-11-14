@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS['mesabonnes_base_version'] = 0.1;
     
 function mesabonnes_upgrade(){

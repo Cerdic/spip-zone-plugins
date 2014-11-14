@@ -3,14 +3,14 @@
 	<slogan>Gestion d'abonnement pour logiciels de publipostages</slogan>
 	<auteur>[erational->http://www.erational.org]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<etat>test</etat>
 	<description>Module d'abonnement pour logiciels de publipostages de type MaxBulker Mailer</description>
 	<lien>http://contrib.spip.net/Mes-abonnes</lien>
 	<prefix>mesabonnes</prefix>
 	<icon>images/logo_mesabonnes_48.png</icon>
 	<install>base/mesabonnes_upgrade.php</install>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<bouton id='mesabonnes1' parent='naviguer'>
 		<titre>mesabonnes:mes_abonnes</titre>
 		<icone>images/logo_mesabonnes_24.png</icone>

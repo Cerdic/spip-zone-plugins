@@ -3,6 +3,8 @@
 //  Mes abonnés
 // ---------------------------------------------------------
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function exec_mesabonnes(){ 
   global $connect_statut;
 	global $connect_toutes_rubriques;
