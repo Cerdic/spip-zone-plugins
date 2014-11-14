@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Partageur
- * (c) 2012 erational
+ * 
  * Licence GNU/GPL
  */
 

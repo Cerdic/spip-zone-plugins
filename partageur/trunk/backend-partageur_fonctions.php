@@ -1,5 +1,5 @@
 <?php
-
+if (!defined('_ECRIRE_INC_VERSION')) return;
 /*
  *   +----------------------------------+
  *    Nom du Filtre :   partageur_respecte_ln                                          

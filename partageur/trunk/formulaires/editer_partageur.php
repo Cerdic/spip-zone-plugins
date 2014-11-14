@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Partageur
- * (c) 2012 erational
+ * 
  * Licence GNU/GPL
  */
 
@@ -29,8 +29,6 @@ function formulaires_editer_partageur_charger_dist($id_partageur='new', $retour=
  * Verifier les champs postes et signaler d'eventuelles erreurs
  */
 function formulaires_editer_partageur_verifier_dist($id_partageur='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	// version de base fabrique
-  //return formulaires_editer_objet_verifier('partageur',$id_partageur);
   
   $erreurs = formulaires_editer_objet_verifier('partageur',$id_partageur,array('titre'));
   
@@ -44,7 +42,7 @@ function formulaires_editer_partageur_verifier_dist($id_partageur='new', $retour
       // "ping" si flux distant disponible
       include_spip('inc/distant');     
       $url = _request('url_site')."/spip.php?page=backend-partageur&id_article=1";
-    	$ping = recuperer_lapage($url);  
+    	$ping = recuperer_page($url);  
     	if (!$ping) {    		
     		 $erreurs['url_site'] = _T('partageur:erreur_flux_inconnu')."<br /><a href='$url'>$url</a>";
     	} else if ($row_site = sql_fetsel("url_site","spip_partageurs",'id_partageur!='.intval($id_partageur).' AND statut="publie" AND url_site='.sql_quote(_request('url_site'))))   
