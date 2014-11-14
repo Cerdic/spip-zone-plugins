@@ -21,12 +21,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_pwd' => 'Préfixe',
   'cfg_pwd_explication' => '<i>(Facultatif)</i> Phrase secrète à ajouter dans le sujet de l\'email pour qu\'il soit traité par le plugin.<br />Si ce champs est vide, tous les emails seront importés',
   'cfg_id_rubrique' => 'Id de la rubrique où importer les articles',
+  'cfg_titre_parametrages' => 'Votre boite email',
 
 	// T
-  'test_connection' => 'Test de connection au serveur IMAP',
+  'test_connection' => 'Etape 2: Test de connection au serveur IMAP',
   'test_connection_ok' => 'Authentification réussie !',
   'test_connection_notok' => 'Erreur: Impossible de se connecter à<br /><i>@connection@</i>',
 	'titre_page_configurer_emailtospip' => 'Publication par email',
+  'test_imap' => 'Etape 1: Vérification de la présence de IMAP dans votre configuration PHP',
+  'test_imap_exist_true' => 'OK. Les fonctions IMAP sont disponibles.',
+  'test_imap_exist_false' => 'Erreur : Les fonctions IMAP ne sont pas disponibles dans votre configuration PHP. Le plugin ne peut pas fonctionner.',
 );
 
 ?>
