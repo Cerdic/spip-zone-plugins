@@ -160,7 +160,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			'organisations_liens',
 		),
 		'rechercher_champs' => array(
-			'id_organisation' => 12, 'nom' => 8,
+			'id_organisation' => 12, 'nom' => 8, 'descriptif' => 4, 'activite' => 4, 'statut_juridique' => 2, 'ouvertures' => 1, 'tarifs' => 1,
 		),
 		/*
 		'rechercher_jointures' => array(
@@ -221,7 +221,7 @@ function contacts_declarer_tables_objets_sql($tables){
 			'contacts_liens',
 		),
 		'rechercher_champs' => array(
-			'id_contact' => 12, 'nom' => 8, 'prenom' => 2,
+			'id_contact' => 12, 'nom' => 8, 'prenom' => 2, 'descriptif' => 4, 'fonction' => 2,
 		),
 		/*
 		'rechercher_jointures' => array(
