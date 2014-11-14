@@ -32,7 +32,7 @@
 		(#SET{titre_document_long,#GET{titre_document}|concat{' - ',#TYPE_DOCUMENT,' - ',#TAILLE|taille_en_octets}})]
 		<li>
 			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION|attribut_html)]" title="[(#GET{titre_document_long}|attribut_html)]">
-				[(#GET{src}|balise_img{#GET{titre_long},vignette})]
+				[(#GET{src}|balise_img{#GET{titre_document_long},vignette})]
 			</a>
 			[(#ENV{label}|oui)[<span class="label">(#GET{titre_document})</span>]]
 		</li>
