@@ -1,9 +1,9 @@
 <paquet
 	prefix="convertisseur"
 	categorie="edition"
-	version="0.4.3"
+	version="0.4.4"
 	etat="test"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="img_pack/convertisseur.png"
 	documentation="http://contrib.spip.net/Plugin-Convertisseur"
 >

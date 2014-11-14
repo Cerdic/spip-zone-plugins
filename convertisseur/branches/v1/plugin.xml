@@ -8,7 +8,7 @@
 	<auteur>[erational->http://www.erational.org], Fil</auteur>
 	<licence>GNU/GPL</licence>
 	<icon>img_pack/convertisseur.png</icon>
-	<version>0.4.3</version>
+	<version>0.4.4</version>
 	<etat>test</etat>
 	<slogan>
 		<multi>
@@ -34,6 +34,6 @@
 		<icone>img_pack/icon_convertisseur.png</icone>
 		<url>convertisseur</url>
 	</bouton>
-  <necessite id="SPIP" version="[2.0.0;3.0.99]" />
+  <necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<categorie>edition</categorie>
 </plugin>
