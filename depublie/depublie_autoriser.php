@@ -22,8 +22,9 @@ function autoriser_depublierafficher($faire,$type,$id,$qui,$opt){
 	}
 	if(lire_config('depublie/rubrique_depublie') != '' || lire_config('depublie/secteur_depublie') !=''){
 		$table = table_objet_sql($type);
-		if ($table == "spip_evenements")
-            return false;    // compat plugin agenda:  pas provoquer d'erreur SQL sur page evenements pas champs id_rubrique  sur cette table
+    // patch rapide
+		if ($table == "spip_evenements" || $table == "")
+            return false;    // compat plugin agenda et autres spip2spip:  pas provoquer d'erreur SQL sur page evenements pas champs id_rubrique  sur cette table
 
     $id_table_objet = id_table_objet($type);
 		$infos_rubrique = sql_fetsel('id_rubrique,id_secteur',$table,"$id_table_objet = ".intval($id));

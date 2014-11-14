@@ -36,6 +36,7 @@ function depublie_recuperer_fond($flux){
  * @return array $flux
  */
 function depublie_formulaire_charger($flux){
+
 	// si formulaire dater, charger les données des champs supplémentaires
 	if ($flux['args']['form'] == 'dater'){
 		$objet=$flux['data']['objet'];
@@ -66,6 +67,7 @@ function depublie_formulaire_charger($flux){
 		$flux['data']['date_depublie_heure'] = "$heure_depublie:$minute_depublie";
 		$flux['data']['sans_depublie'] = !$possedeDateDepublie;
 	}
+  
 	return $flux;
 }
 
