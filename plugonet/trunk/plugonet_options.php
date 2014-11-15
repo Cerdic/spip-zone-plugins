@@ -25,15 +25,18 @@ $GLOBALS['index_aide_plugonet'] = array(
 	'paqxmlexe'
 );
 
+
 // Version SPIP minimale quand un plugin ne le precise pas
 // -- Version SPIP correspondant a l'apparition des plugins
-define('_PLUGONET_VERSION_SPIP_MIN', '1.9.0');
+if (!defined('_PLUGONET_VERSION_SPIP_MIN'))
+	define('_PLUGONET_VERSION_SPIP_MIN', '1.9.0');
 // -- Pour l'instant on ne connait pas la borne sup exacte
-define('_PLUGONET_VERSION_SPIP_MAX', '3.0.99');
+if (!defined('_PLUGONET_VERSION_SPIP_MAX'))
+	define('_PLUGONET_VERSION_SPIP_MAX', '3.1.99');
 
 // Balises dites techniques contenues dans le fichier plugin.xml
 $GLOBALS['balises_techniques_plugin'] = array(
-	'menu', 'chemin', 'lib', 'necessite', 'onglet', 'procure', 'pipeline', 'utilise',
+	'menu', 'chemin', 'lib', 'necessite', 'onglet', 'procure', 'pipeline', 'utilise', 'style', 'script',
 	'options', 'fonctions', 'install');
 
 // Liste des licences de plugin
@@ -76,4 +79,5 @@ $GLOBALS['licences_plugin'] = array(
 					'nom' => 'CC BY@suffixe@ @version@',
 					'url' => 'http://creativecommons.org/licenses/by@suffixe@/@version@/')
 	);
+
 ?>

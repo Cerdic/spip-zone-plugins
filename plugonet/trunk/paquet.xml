@@ -1,9 +1,9 @@
 <paquet
 	prefix="plugonet"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="plugonet-64.png"
 	documentation="http://blog.smellup.net/spip.php?article7"
 >	
@@ -20,5 +20,8 @@
 
 	<necessite nom="langonet" compatibilite="[0.6.3;[" />
 
-	<menu nom="plugonet-21" titre="plugonet:bouton_plugonet" parent="bando_administration" icone="images/plugonet-16.png" action="plugonet" parametres="operation=generer" />
+	<menu nom="plugonet" titre="plugonet:bouton_plugonet" parent="menu_developpement" icone="images/plugonet-16.png" action="plugonet" parametres="operation=generer" />
+	<spip compatibilite="[3.0.0;3.0.*]">
+		<menu nom="plugonet" titre="plugonet:bouton_plugonet" parent="bando_administration" icone="images/plugonet-16.png" action="plugonet" parametres="operation=generer" />
+	</spip>
 </paquet>
