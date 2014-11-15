@@ -1,9 +1,9 @@
 <paquet
 	prefix="nospam"
 	categorie="performance"
-	version="1.5.6"
+	version="1.5.7"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="images/nospam-32.png"
 	documentation="http://contrib.spip.net/NoSPAM,1165"
 >	
