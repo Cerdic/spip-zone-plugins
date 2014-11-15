@@ -1,6 +1,6 @@
 <B_choix_groupe>
 <ul>
-	<li>[(#ENV{id_groupe}|=={tous}|?{<b><:fusionmots:tous_groupes:></b>,<a href="[(#SELF|parametre_url{id_groupe,tous})]"><:fusionmots:tous_groupes:></a>})]</li>
+	<li>[(#ENV{id_groupe}|=={0}|?{<b><:fusionmots:tous_groupes:></b>,<a href="[(#SELF|parametre_url{id_groupe,0})]"><:fusionmots:tous_groupes:></a>})]</li>
 </ul>
 #PAGINATION
 <ul>

@@ -1,0 +1,7 @@
+#SET{id_groupe,#ENV{id_groupe,#CONFIG{groupemot_actif}}}
+
+#BOITE_OUVRIR{'','info'}
+[(#GET{id_groupe}|?{<:fusionmots:explication:>,<:fusionmots:explication_intro:>})]
+
+[(#GET{id_groupe}|>{-1}|oui)#INCLURE{fond=inc/choix_groupe,id_groupe=#GET{id_groupe}}]
+#BOITE_FERMER

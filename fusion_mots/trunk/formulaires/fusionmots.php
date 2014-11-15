@@ -1,11 +1,11 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_fusionmots_charger_dist(){
-    return array("remplacer"=>array(),'par'=>'');
+function formulaires_fusionmots_charger_dist($id_groupe){
+    return array("id_groupe"=>$id_groupe, "remplacer"=>array(),'par'=>'');
 }
 
-function formulaires_fusionmots_verifier_dist(){
+function formulaires_fusionmots_verifier_dist($id_groupe){
     $erreurs    = array();
     
     if (!_request('remplacer')){
@@ -18,7 +18,7 @@ function formulaires_fusionmots_verifier_dist(){
     return $erreurs;        
 }
 
-function formulaires_fusionmots_traiter_dist(){
+function formulaires_fusionmots_traiter_dist($id_groupe){
 	$remplacer 	= _request('remplacer');
 	$par		= _request('par');
 	include_spip('inc/fusionner_mots');

@@ -1,0 +1,12 @@
+[(#AUTORISER{fusionner,mots}|oui)
+#SET{id_groupe,#ENV{id_groupe,#CONFIG{groupemot_actif}}}
+<h1><:fusionmots:fusionmots:></h1>
+	[(#GET{id_groupe}|>{-1}|oui)
+		<div class='ajax'>
+			#FORMULAIRE_FUSIONMOTS{#GET{id_groupe}}
+		</div>]
+	[(#GET{id_groupe}|>{-1}|non)
+		<h3><:fusionmots:choisir_groupe:></h3>
+		#INCLURE{fond=inc/choix_groupe}
+	]
+][(#AUTORISER{fusionner,mots}|non)Achtung forbiden !]

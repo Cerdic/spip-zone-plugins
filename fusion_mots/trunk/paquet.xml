@@ -1,11 +1,11 @@
 <paquet 
 	prefix="fusionmots" 
 	categorie="navigation" 
-	version="1.0.0" 
+	version="1.0.1" 
 	etat="test" 
 	logo="images/fusion_mots_64.png" 
 	documentation="http://contrib.spip.net/Fusion-de-mots-clef" 
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 >
 
 	<nom>Fusion de mots-cl&#233;s</nom>
