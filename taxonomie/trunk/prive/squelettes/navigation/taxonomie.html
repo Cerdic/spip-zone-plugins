@@ -1,0 +1,8 @@
+[(#REM) <!-- Boite d'information sur la fonction client ou serveur --> ]
+[#BOITE_OUVRIR{#CHEMIN_IMAGE{taxonomie_gerer-24.png}|balise_img{'',cadre-icone}, info}
+	(#VAL{taxonomie:info_boite_taxonomie_}|concat{#ENV{fonction, client}}|_T)
+#BOITE_FERMER]
+
+[(#REM) <!-- Menu des onglets --> ]
+<INCLURE{fond=prive/squelettes/inclure/inc-navigation,
+	env} />

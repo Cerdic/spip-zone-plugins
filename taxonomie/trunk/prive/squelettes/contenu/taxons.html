@@ -1,0 +1,7 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/taxons,
+	par=nom_scientifique,
+	env,
+	ajax, sinon=<:taxon:info_aucun_taxon:>}>

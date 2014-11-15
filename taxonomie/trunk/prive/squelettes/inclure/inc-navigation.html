@@ -1,0 +1,18 @@
+[(#REM) <!-- Menu des onglets "fonction client", "fonction serveur" et "configuration du plugin"
+	L'item "fonction serveur" n'est présent que si la fonction serveur est activée sur le site.
+ --> ]
+<ul class="liste-items sous_navigation">
+	[<li class="item">
+		(#URL_ECRIRE{taxonomie}|parametre_url{fonction, client}
+			|lien_ou_expose{
+				<:taxonomie:onglet_taxon:>,
+				[(#ENV{exec}|=={taxonomie}|et{#ENV{fonction, client}|=={client}})]})
+	</li>]
+	[<li class="item">
+		(#URL_ECRIRE{configurer_taxonomie}
+			|lien_ou_expose{
+				<:taxonomie:onglet_configuration:>,
+				[(#ENV{exec}|=={configurer_taxonomie})]})
+	</li>]
+
+</ul>

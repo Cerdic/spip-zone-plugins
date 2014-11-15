@@ -1,0 +1,49 @@
+[(#AUTORISER{voir,taxon,#ID_TAXON}|sinon_interdire_acces)]
+<BOUCLE_taxon(TAXONS){id_taxon}{si #ENV{exec}|=={taxon}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,taxon,#ID_TAXON})
+		[(#ID_TAXON|afficher_qui_edite{taxon}|non)
+			[(#URL_ECRIRE{taxon_edit,id_taxon=#ID_TAXON}|icone_verticale{<:taxon:icone_modifier_taxon:>,taxon,edit,right ajax preload})]
+		]
+		[(#ID_TAXON|afficher_qui_edite{taxon}|oui)
+			[(#URL_ECRIRE{taxon_edit,id_taxon=#ID_TAXON}|icone_verticale{#ID_TAXON|afficher_qui_edite{taxon},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>(#NOM_SCIENTIFIQUE|sinon{<:info_sans_titre:>}|ucfirst)[(#CHEMIN_IMAGE{taxon-24.png}|balise_img{taxon,cadre-icone})]</h1>
+	[<h2 class='soustitre #EDIT{soustitre}'>(#NOM_COMMUN|extraire_multi|ucfirst)</h2>]
+
+],simple fiche_objet})]
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/taxon,id=#ID_TAXON,id_taxon=#ID_TAXON,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,taxon,#ID_TAXON})
+	[(#ID_TAXON|afficher_qui_edite{taxon}|non)
+		[(#URL_ECRIRE{taxon_edit,id_taxon=#ID_TAXON}|icone_verticale{<:taxon:icone_modifier_taxon:>,taxon,edit,right ajax preload})]
+	]
+	[(#ID_TAXON|afficher_qui_edite{taxon}|oui)
+		[(#URL_ECRIRE{taxon_edit,id_taxon=#ID_TAXON}|icone_verticale{#ID_TAXON|afficher_qui_edite{taxon},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,taxon,id,#ID_TAXON},data,'<div class="nettoyeur"></div>'}}
+#BOITE_FERMER
+
+#SET{enfants,''}
+[(#VAL{taxon-enfants}|trouver_fond{prive/objets/contenu/}|oui)
+	[(#SET{enfants, [(#INCLURE{fond=prive/objets/contenu/taxon-enfants, id_taxon, env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet, taxon, id_objet, #ID_TAXON}, data, #GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_taxon>
+[(#ENV**{exec}|=={taxon_edit}|?{#INCLURE{fond=prive/squelettes/contenu/taxon_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_taxon>

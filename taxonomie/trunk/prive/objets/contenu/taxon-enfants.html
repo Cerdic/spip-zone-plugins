@@ -1,0 +1,12 @@
+[(#REM) <!-- Liste des descendants directs du taxon --> ]
+<BOUCLE_enfants_taxon(TAXONS) {id_taxon}>
+	[(#SET{inclusion, [(#VAL{tsn_parent=}|concat{#TSN})]})]
+	[(#INCLURE{fond=prive/objets/liste/taxons,
+		titre=<:taxonomie:titre_liste_fils_taxon:>,
+		par=nom_scientifique,
+		nb=30,
+		where=#GET{inclusion},
+		classe=enfants,
+		ajax,
+		env})]
+</BOUCLE_enfants_taxon>

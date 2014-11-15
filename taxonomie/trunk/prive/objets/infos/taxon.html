@@ -1,0 +1,23 @@
+<BOUCLE_taxon(TAXONS){id_taxon=#ENV{id}}>
+<div class='infos'>
+	[(#SET{texte_objet,<:taxon:titre_taxon:>})]
+	<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:>
+		<p>#ID_TAXON</p>
+	</div>
+	<div class="numero">
+		<:taxon:champ_tsn_label:>&nbsp;:
+		<p>#TSN</p>
+	</div>
+	[<div class="numero">
+		[(#CHEMIN_IMAGE{[regne_(#REGNE)-32.png]}
+			|image_reduire{32,32}
+		|inserer_attribut{alt, logo_regne}
+		|inserer_attribut{style, 'margin: 0 auto'}
+			|inserer_attribut{class, 'clearfix icone-regne'})]
+		(#VAL{taxonomie:regne_}|concat{#REGNE}|_T|ucfirst)
+	</div>]
+	[<div class="numero">
+		(#VAL{taxonomie:rang_}|concat{#RANG}|_T)
+	</div>]
+</div>
+</BOUCLE_taxon>

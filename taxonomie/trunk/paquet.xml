@@ -1,0 +1,24 @@
+<paquet
+	prefix="taxonomie"
+	categorie="divers"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[3.0.17;3.1.*]"
+	logo="taxonomie_logo-64.png"
+	documentation=""
+	schema="1"
+>
+	<nom>Taxonomie</nom>
+	<!--Créer une base taxonomique-->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="taxonomie_autorisations.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/taxonomie_declarations.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/taxonomie_declarations.php" />
+
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
+
+	<menu nom="taxonomie" titre="taxonomie:bouton_taxonomie" parent="menu_edition" icone="images/taxonomie-16.png" action="taxonomie" />
+</paquet>

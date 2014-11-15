@@ -1,0 +1,62 @@
+[(#REM) <!-- Liste des règnes chargés en base de données :
+
+Les parametres d'environnement specifiques sont :
+@param	titre   : le titre de la liste
+@param	par		: la colonne de tri
+@param	where	: condition supplementaire construite par l'appelant (exclusion de certaines lignes par ex)
+ -->]
+
+[(#SET{defaut_tri,#ARRAY{
+	nom_scientifique, 1,
+	nom_commun, 1,
+	maj, -1,
+}})]
+<B_liste_regnes>
+<div class="liste-objets regnes">
+	<table class="spip liste">
+		[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{taxonomie:label_1_regne, taxonomie:label_n_regnes}})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="logo" scope="col">&nbsp;</th>
+				<th class="titre principale" scope="col">[(#TRI{nom_scientifique, <:taxon:champ_nom_scientifique_label:>, ajax})]</th>
+				<th class="titre" scope="col">[(#TRI{nom_commun, <:taxon:champ_nom_commun_label:>, ajax})]</th>
+				<th class="descriptif" scope="col"><:taxonomie:label_colonne_statistiques:></th>
+				<th class="date" scope="col">[(#TRI{maj, <:taxonomie:label_colonne_actualisation:>, ajax})]</th>
+			</tr>
+		</thead>
+		<tbody>
+	<BOUCLE_liste_regnes(TAXONS) {rang=kingdom}{where?}{tri #ENV{par, nom_scientifique}, #GET{defaut_tri}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
+				<td class="logo">
+					[(#CHEMIN_IMAGE{[regne_(#NOM_SCIENTIFIQUE)-32.png]}
+						|image_reduire{20,26}
+						|inserer_attribut{alt, logo})]
+				</td>
+				<td class="titre principale">
+					<a[ href="(#ID_TAXON|generer_url_entite{taxon})""]>
+						[(#NOM_SCIENTIFIQUE|ucfirst)]
+					</a>
+				</td>
+				<td class="titre" scope="col">[(#NOM_COMMUN|extraire_multi)]</td>
+				<td class="descriptif">
+					#SET{meta_regne, #CONFIG{taxonomie_#NOM_SCIENTIFIQUE}}
+					[(#SET{rang_mini, [(#VAL{taxonomie:rang_}|concat{#GET{meta_regne/rang}}|_T)]})]
+					<ul>
+						<li>[(#VAL{taxonomie:info_regne_compteur_taxons}|_T{#ARRAY{nb, #GET{meta_regne/compteur}, rang, #GET{rang_mini}}})]</li>
+					<BOUCLE_traductions(DATA) {source table, #GET{meta_regne/langues}}>
+						#SET{nb, #VALEUR|table_valeur{compteur}}
+						<li><:taxonomie:info_regne_compteur_traductions{nb=#GET{nb}, langue=#CLE}:></li>
+					</BOUCLE_traductions>
+					</ul>
+				</td>
+				<td class="date">[(#MAJ|affdate)]</td>
+			</tr>
+	</BOUCLE_liste_regnes>
+		</tbody>
+	</table>
+</div>
+</B_liste_regnes>
+#BOITE_OUVRIR{'','notice'}
+	<p><:taxonomie:notice_liste_aucun_regne:></p>
+#BOITE_FERMER
+<//B_liste_regnes>

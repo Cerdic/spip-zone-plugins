@@ -1,0 +1,48 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+	<style>
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+/* Espacer un peu les blocs numero de la boite d'infos */
+#navigation .infos .numero { margin-bottom: 10px; }
+
+/* Mettre en exergue l'auteur comme le descriptif */
+.taxon .fiche_objet #wysiwyg .contenu_auteur {
+    background-color: #eee;
+    border: 0 none;
+    padding: 10px 15px;
+	margin-left: -15px;
+	margin-right: -15px;
+	margin-bottom: 10px;
+}
+/* Décaler chaque rang taxonomique de l'ascendance */
+.taxon .fiche_objet #wysiwyg .contenu_ascendance .kingdom { padding-left: 10px; }
+.taxon .fiche_objet #wysiwyg .contenu_ascendance .phylum { padding-left: 20px; }
+.taxon .fiche_objet #wysiwyg .contenu_ascendance .class { padding-left: 30px; }
+.taxon .fiche_objet #wysiwyg .contenu_ascendance .order { padding-left: 40px; }
+.taxon .fiche_objet #wysiwyg .contenu_ascendance .family { padding-left: 50px; }
+.taxon .fiche_objet #wysiwyg .contenu_ascendance .genus { padding-left: 60px; }
+
+/* Variations des colonnes de la liste des taxons */
+.liste-objets.taxons .nom { display: none; }
+.liste-objets.taxons.enfants .nom { display: table-cell; }
+.liste-objets.taxons.enfants .regne { display: none; }
+
+[(#REM)	</style>]

@@ -1,0 +1,18 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+<h1><:taxonomie:titre_page_taxonomie:></h1>
+
+[(#REM) <!-- Suivant la fonction client ou serveur affichée, le contenu est soit :
+	- la liste des boussoles, le formulaire d'ajout/mise à jour des boussoles,
+	  la liste des serveurs et le formulaire d'ajout d'un serveur (client)
+	- la liste des caches pour les boussoles hébergées (serveur)
+ --> ]
+
+[(#REM) <!-- Liste des règnes chargés --> ]
+<INCLURE{fond=prive/squelettes/liste/regnes,
+	titre=<:taxonomie:titre_liste_regnes:>,
+	env, ajax} />
+
+[(#ENV{fonction, client}|=={client}|oui)
+	[(#REM) <!-- xxx --> ]
+	#FORMULAIRE_CHARGER_TAXONOMIE
+]

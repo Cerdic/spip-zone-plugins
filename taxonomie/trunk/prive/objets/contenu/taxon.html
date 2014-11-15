@@ -1,0 +1,35 @@
+<BOUCLE_taxon(TAXONS){id_taxon}>
+
+[<div class="champ contenu_auteur[ (#AUTEUR*|strlen|?{'',vide})]">
+	<label><:taxon:champ_auteur_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{auteur} auteur">(#AUTEUR)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:taxon:champ_descriptif_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+[(#SET{ascendance, [(#ID_TAXON|taxonomie_informer_ascendance{#TSN_PARENT, descendant})]})]
+<div class="champ contenu_ascendance[ (#TSN_PARENT*|strlen|?{'',vide})]">
+<B_ascendance>
+		<label><:taxonomie:label_ascendance:> : </label>
+		<ul>
+<BOUCLE_ascendance(DATA) {source table, #GET{ascendance}}>
+		[<li[ class="(#VALEUR|table_valeur{rang})"]>
+			<span dir="#LANG_DIR">
+				(#VAL{taxonomie:rang_}|concat{#VALEUR|table_valeur{rang}}|_T|ucfirst) :
+				[<a[ href="(#VALEUR|table_valeur{id_taxon}|generer_url_entite{taxon})"]>
+					(#VALEUR|table_valeur{nom_scientifique}|ucfirst)
+				</a>]
+				[ \((#VALEUR|table_valeur{nom_commun}|extraire_multi|ucfirst)\)]
+			</span>
+		</li>]
+</BOUCLE_ascendance>
+		</ul>
+	</div>
+</B_ascendance>
+</div>
+<//B_ascendance>
+
+</BOUCLE_taxon>
