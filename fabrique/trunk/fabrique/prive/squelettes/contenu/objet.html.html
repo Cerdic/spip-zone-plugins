@@ -47,6 +47,14 @@
 \#PIPELINE{afficher_complement_objet,\#ARRAY{args,\#ARRAY{type,#TYPE,id,\##MID_OBJET},data,'<div class="nettoyeur"></div>'}}
 
 \#BOITE_FERMER
+
+
+\#SET{enfants,''}
+\[(\#VAL{prive/objets/contenu/#TYPE-enfants}|trouver_fond|oui)
+	\[(\#SET{enfants,\[(\#INCLURE{fond=prive/objets/contenu/#TYPE-enfants,#ID_OBJET,env})\]})\]
+\]
+\[(\#PIPELINE{affiche_enfants,\[(\#ARRAY{args,\#ARRAY{exec,#TYPE,objet,#TYPE,id_objet,\##MID_OBJET},data,\#GET{enfants}})\]})\]
+
 \[(\#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\\[CDATA\\\[*/reloadExecPage('\#ENV{exec}','\#navigation,\#chemin,\#extra');/*\\\]\\\]>*/</script>
 \]

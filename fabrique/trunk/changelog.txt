@@ -2,6 +2,12 @@ Plugin Fabrique pour SPIP
 Ce plugin génère d'autres plugins !
 -----------------------------------
 
+
+2.0.11 le 15 11 2014
+--------------------
+
+* Ajout du pipeline affiche_enfants dans le squelette généré prive/squelettes/contenu/{type}.html
+
 2.0.8 le 16 10 2014
 -------------------
 
