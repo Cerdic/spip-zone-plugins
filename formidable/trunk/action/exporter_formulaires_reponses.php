@@ -22,7 +22,7 @@ function action_exporter_formulaires_reponses_dist($arg=null) {
 		and $reponses = sql_allfetsel('*', 'spip_formulaires_reponses', 'id_formulaire = '.$id_formulaire.' and statut = '.sql_quote('publie'))
 	) {
 		include_spip('inc/saisies');
-		include_spip('classes/facteur');
+		include_spip('facteur_fonctions');
 		include_spip('inc/filtres');
 		$reponses_completes = array();
 		
@@ -56,7 +56,7 @@ function action_exporter_formulaires_reponses_dist($arg=null) {
 				);
 				if (is_array(unserialize($valeur)))
 					$valeur = unserialize($valeur);
-				$reponse_complete[] = Facteur::html2text(
+				$reponse_complete[] = facteur_mail_html2text(
 					recuperer_fond(
 						'saisies-vues/_base',
 						array_merge(
