@@ -9,6 +9,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Configuration du plugin Taxonomie',
+	'citation_itis' => 'Integrated Taxonomic Information System (ITIS), @url@.',
+	'citation_cinfo' => 'Commission internationale des noms français des oiseaux (CINFO), @url@.',
+	'citation_wikipedia' => 'Wikipedia, @url@.',
 
 	// D
 
@@ -19,7 +22,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_langues_regne' => 'Les taxons sont chargés par défaut avec leur nom scientifique. Cette option permet de compléter certains taxons avec leur nom commun dans la ou les langues précisées.',
 
 	// I
-	'info_boite_taxonomie_client' => 'Cette page permet aux webmestres de consulter, charger, mettre à jour ou vider les règnes animal, végétal et fongique gérés par le plugin.',
+	'info_boite_taxonomie_gestion' => 'Cette page permet aux webmestres de consulter, charger, mettre à jour ou vider les règnes animal, végétal et fongique gérés par le plugin.',
+	'info_boite_taxonomie_navigation' => 'Cette page permet aux utilisateurs de consulter la liste des taxons chargés en base de données et de naviguer de taxon en taxon.',
 	'info_regne_charge' => 'déjà chargé',
 	'info_regne_compteur_taxons' => '@nb@ taxons chargés du règne au @rang@',
 	'info_regne_compteur_traductions' => '@nb@ noms communs en [@langue@]',
@@ -51,9 +55,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regne_plantae' => 'règne végétal',
 
 	// O
-	'onglet_taxon' => 'Gestion des taxons',
+	'onglet_gestion' => 'Gestion des règnes',
 	'onglet_configuration' => 'Configuration du plugin',
-	'onglet_serveur' => 'Fonction Serveur',
+	'onglet_navigation' => 'Navigation dans la taxonomie',
 
 	// S
 	'succes_vider_regne' => 'Le règne @regne@ a bien été supprimé de la base de données.',

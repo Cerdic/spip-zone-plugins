@@ -2,7 +2,7 @@
 
 [<div class="champ contenu_auteur[ (#AUTEUR*|strlen|?{'',vide})]">
 	<label><:taxon:champ_auteur_label:> : </label>
-	<span dir="#LANG_DIR" class="#EDIT{auteur} auteur">(#AUTEUR)</span>
+	<span dir="#LANG_DIR" class="auteur">(#AUTEUR)</span>
 </div>]
 
 [<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
@@ -13,8 +13,8 @@
 [(#SET{ascendance, [(#ID_TAXON|taxonomie_informer_ascendance{#TSN_PARENT, descendant})]})]
 <div class="champ contenu_ascendance[ (#TSN_PARENT*|strlen|?{'',vide})]">
 <B_ascendance>
-		<label><:taxonomie:label_ascendance:> : </label>
-		<ul>
+	<label><:taxonomie:label_ascendance:> : </label>
+	<ul>
 <BOUCLE_ascendance(DATA) {source table, #GET{ascendance}}>
 		[<li[ class="(#VALEUR|table_valeur{rang})"]>
 			<span dir="#LANG_DIR">
@@ -26,10 +26,25 @@
 			</span>
 		</li>]
 </BOUCLE_ascendance>
-		</ul>
-	</div>
+	</ul>
+</div>
 </B_ascendance>
 </div>
 <//B_ascendance>
+
+[(#SET{sources, [(#ID_TAXON|taxonomie_informer_sources{#SOURCES})]})]
+<B_sources>
+<div class="champ contenu_ps">
+	<label><:taxon:champ_sources_label:> : </label>
+	<ul>
+<BOUCLE_sources(DATA) {source table, #GET{sources}}>
+		[<li class="sources">
+			<span dir="#LANG_DIR">(#VALEUR|table_valeur{texte})<span>
+		</li>]
+</BOUCLE_sources>
+	</ul>
+</div>
+</B_sources>
+<//B_sources>
 
 </BOUCLE_taxon>

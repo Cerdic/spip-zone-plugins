@@ -27,7 +27,7 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 	$meta_regne = array();
 
 	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
-	include_spip('services/itis/itis');
+	include_spip('services/itis/itis_api');
 	$taxons = itis_read_hierarchy($regne, $rang, $meta_regne['sha']);
 
 	// Ajout des noms communs extraits de la base ITIS dans la langue demandée
@@ -137,7 +137,7 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
 
 	// Si on ne passe pas le tsn du parent correspondant au taxon pour lequel on cherche l'ascendance
 	// alors on le cherche en base de données.
-	// Le fait de passer ce tsn parent est une uniquement optimisation.
+	// Le fait de passer ce tsn parent est uniquement une optimisation.
 	if (is_null($tsn_parent)) {
 		$tsn_parent = sql_getfetsel('tsn_parent', 'spip_taxons', 'id_taxon=' . intval($id_taxon));
 	}
@@ -157,6 +157,52 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
 		$ascendance = array_reverse($ascendance);
 
 	return $ascendance;
+}
+
+
+/**
+ * Fourniture des sources d'information ayant permises de compléter le taxon.
+ * La référence ITIS n'est pas répétée dans le champ sources de chaque taxon car elle est à la base de chaque règne.
+ * Elle est donc insérée par la fonction elle-même.
+ *
+ * @api
+ * @filtre
+ *
+ * @param int		$id_taxon
+ * 		Id du taxon pour lequel il faut fournir l'ascendance
+ * @param string	$sources_specifiques
+ * 		Tableau sérialisé des identifiants des sources possibles autres qu'ITIS (CINFO, WIKIPEDIA...).
+ * 		Ce paramètre permet d'optimiser le traitement mais n'est pas obligatoire.
+ *
+ * @return array
+ */
+function taxonomie_informer_sources($id_taxon, $sources_specifiques=null) {
+	$sources = array();
+
+	// Si on ne passe pas les sources du taxon concerné alors on le cherche en base de données.
+	// Le fait de passer ce champ sources est uniquement une optimisation.
+	if (is_null($sources_specifiques)) {
+		$sources_specifiques = sql_getfetsel('sources', 'spip_taxons', 'id_taxon=' . intval($id_taxon));
+	}
+
+	// On merge ITIS et les autres sources
+	$liste_sources = array('itis' => '');
+	if ($sources_specifiques) {
+		$liste_sources = array_merge($liste_sources, unserialize($sources_specifiques));
+	}
+
+	// Puis on construit le fichier
+	foreach ($liste_sources as $_source => $_champs) {
+		include_spip("services/${_source}/${_source}_api");
+		if (function_exists($citer = "${_source}_citation")) {
+			$sources[$_source] = array(
+				'texte' => $citer(),
+				'champs' => $_champs
+			);
+		}
+	}
+
+	return $sources;
 }
 
 ?>

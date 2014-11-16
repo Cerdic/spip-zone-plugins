@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_nom_scientifique_label' => 'Nom scientifique',
 	'champ_rang_label' => 'Rang',
 	'champ_regne_label' => 'Règne',
+	'champ_sources_label' => 'Sources',
 	'champ_tsn_label' => 'Identifiant ITIS',
 	'champ_tsn_parent_label' => 'Taxon ascendant',
 

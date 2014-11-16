@@ -13,6 +13,12 @@ if (!defined('_TAXONOMIE_ITIS_URL_BASE_REQUETE'))
 	 * Le service fournit des données au format XML ou JSON
 	 */
 	define('_TAXONOMIE_ITIS_URL_BASE_REQUETE', 'http://www.itis.gov/ITISWebService/');
+if (!defined('_TAXONOMIE_ITIS_URL_CITATION'))
+	/**
+	 * Préfixe des URL du service web de ITIS.
+	 * Le service fournit des données au format XML ou JSON
+	 */
+	define('_TAXONOMIE_ITIS_URL_CITATION', 'http://www.itis.gov');
 if (!defined('_TAXONOMIE_ITIS_LANGUE_DEFAUT'))
 	/**
 	 * Langue par défaut pour les api utilisant des noms communs
@@ -387,6 +393,10 @@ function itis_list_vernaculars($language_code) {
 	return $vernaculars;
 }
 
+function itis_citation() {
+	$link = '<a href="' . _TAXONOMIE_ITIS_URL_CITATION . '">' . _TAXONOMIE_ITIS_URL_CITATION . '</a>';
+	return _T('taxonomie:citation_itis', array('url' => $link));
+}
 
 /**
  * @param $format
