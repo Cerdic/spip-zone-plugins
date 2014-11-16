@@ -1,8 +1,8 @@
 <?php
 /**
- * Ce fichier contient l'ensemble des constantes et functions implémentant le service de taxonomie ITIS.
+ * Ce fichier contient l'ensemble des constantes et functions implémentant le service web de wikipedia.
  *
- * @package SPIP\TAXONOMIE\ITIS
+ * @package SPIP\TAXONOMIE\WIKIPEDIA
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
