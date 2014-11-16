@@ -37,7 +37,7 @@ Les parametres d'environnement specifiques sont :
 						[(#NOM_SCIENTIFIQUE|ucfirst)]
 					</a>
 				</td>
-				<td class="titre" scope="col">[(#NOM_COMMUN|extraire_multi)]</td>
+				<td class="titre" scope="col">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{force_langue, #EVAL{true}}})]</td>
 				<td class="descriptif">
 					#SET{meta_regne, #CONFIG{taxonomie_#NOM_SCIENTIFIQUE}}
 					[(#SET{rang_mini, [(#VAL{taxonomie:rang_}|concat{#GET{meta_regne/rang}}|_T)]})]

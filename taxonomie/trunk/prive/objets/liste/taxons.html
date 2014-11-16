@@ -27,7 +27,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{taxon-16.png}|balise_img)]</td>
 			<td class="titre principale">[(#LOGO_TAXON|image_reduire{20,26})]<a href="[(#ID_TAXON|generer_url_entite{taxon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_TAXON">[(#NOM_SCIENTIFIQUE|ucfirst)]</a></td>
-			<td class="nom">[(#NOM_COMMUN|extraire_multi)]</td>
+			<td class="nom">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{force_langue, #EVAL{true}}})]</td>
 			<td class="rang">[(#VAL{taxonomie:rang_}|concat{#RANG}|_T)]</td>
 			<td class="regne">[(#REGNE|ucfirst)]</td>
 			<td class="numero">#TSN</td>
