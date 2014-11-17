@@ -100,34 +100,65 @@ function reservation_evenement_taches_generales_cron($taches) {
 
 function reservation_evenement_formulaire_charger($flux){
 	$form = $flux['args']['form'];
-	$forms=array('editer_article','editer_evenements');
+	$forms=array('editer_article','editer_evenement');
+	$contexte = $flux['data'];
+	
+	//Charger les valeurs par défaut
 	if (in_array($form,$forms)){
-		if ($form==$forms[0]){
-			
-			
+		$action_cloture=$contexte['action_cloture'];
+		$id_evenement=isset($contexte['id_evenement'])?$contexte['id_evenement']:'0';
+		if($form==$forms[1] AND (!$action_cloture OR $action_cloture==0) AND $form=='editer_evenement'){
+			$action_cloture=sql_getfetsel('action_cloture','spip_articles','id_article='.$contexte['id_parent']);				
 		}
-
-		$flux['data']['action_cloture'] .= "";
+			
+		if($action_cloture) $flux['data']['action_cloture'] = $action_cloture;
 	}
+		
+		
 	return $flux;
 }
 
+function reservation_evenement_formulaire_traiter($flux){
+    $form = $flux['args']['form'];
+	$forms=array('editer_article','editer_evenement');
+    if (in_array($form,$forms)){
+		list($edit,$table)=explode('_',$form);
+		sql_updateq('spip_'.$table.'s',array('action_cloture'=>_request('action_cloture')));
+    }
+    
+    return $flux;
+}
+
+
 function reservation_evenement_recuperer_fond($flux){
     $fond=$flux['args']['fond'];
-	
-	//Inclure les champs extras dans le formulaire reservation
-    if ($fond == 'inclure/champs_listes'){
-        $champs_amis=recuperer_fond('formulaires/inc-reservation_amies',$flux['data']);
-        $flux['data']['texte'] .= $champs_amis;
-    }
-	//Selecteur des mailignlists
-    /*if ($fond == 'formulaires/newsletter_subscribe'){
-    	$flux['data']['status']='open';
-		$contexte=$flux['data']['contexte'];
-		$contexte['status']='open';
-		$contexte['name']='listes';		
-        $listes=recuperer_fond('formulaires/inc-check-subscribinglists',$contexte);
-        $flux['data']['texte'] = str_replace('<!--extra-->',$listes. '<!--extra-->',$flux['data']['texte']);
-    }-*/    
+	$contexte=$flux['data']['contexte'];
+	$fonds=array('formulaires/editer_article','formulaires/editer_evenement');
+	//Ajouter le champ action_cloture
+    if (in_array($fond,$fonds)){
+        $action_cloture='<ul>'.recuperer_fond('formulaires/inc-action_cloture',$contexte).'</ul>';
+        $flux['data']['texte'] = str_replace('<!--extra-->',$action_cloture. '<!--extra-->',$flux['data']['texte']);
+    }   
     return $flux;
+}
+
+// ajouter le champ action_cloture
+function reservation_evenement_afficher_contenu_objet($flux){
+	$type=$flux['args']['type'];
+	$types=array('article','evenement');
+	
+	
+	if (in_array($type,$types)) {
+		$etats=array(
+			1=>_T('item:oui'),
+			2=>_T('item:non'),
+			3=>_T('reservation:evenement_cloture')
+		);
+		
+		$action_cloture=sql_getfetsel('action_cloture','spip_'.$type.'s','id_'.$type.'='.$type=$flux['args']['id_objet']);
+		if($action_cloture!=0)$contexte['cloture_etat']=$etats[$action_cloture];
+		$action_cloture = recuperer_fond('prive/objets/contenu/inc-action_cloture',$contexte);
+		$flux['data'] .= "\n".$action_cloture;
+	}
+	return $flux;
 }

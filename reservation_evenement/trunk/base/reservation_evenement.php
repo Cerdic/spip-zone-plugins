@@ -39,6 +39,11 @@ function reservation_evenement_declarer_tables_interfaces($interfaces) {
  *     Description complétée des tables
  */
 function reservation_evenement_declarer_tables_objets_sql($tables) {
+	
+	$tables['spip_articles']['field']['action_cloture'] = "tinyint(1) NOT NULL";
+	$tables['spip_articles']['champs_editable'][] = "action_cloture";	
+	$tables['spip_evenements']['field']['action_cloture'] = "tinyint(1) NOT NULL";
+	$tables['spip_evenements']['champs_editable'][] = "action_cloture";	
 
 	$tables['spip_reservations'] = array(
 		'type' => 'reservation',
@@ -200,11 +205,3 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 	return $tables;
 }
 
-function reservation_evenement_declarer_tables_principales($tables_principales) {
-
-	$tables_principales['spip_articles']['field']['action_cloture'] = "tinyint(1) NOT NULL";
-	$tables_principales['spip_evenements']['field']['action_cloture'] = "tinyint(1) NOT NULL";
-
-	return $tables_principales;
-
-}

@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
+	'evenement_cloture' => 'Évenement cloturé',	
 	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers 
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
@@ -42,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_voir_reservations_poubelle' => 'Voir les Résevations mises à la poubelle',
 
 	// L
+	'label_action_cloture' => 'Cloture automatique :',	
 	'label_date' => 'Date :',
 	'label_date_paiement' => 'Date de paiement :',
 	'label_donnees_auteur' => 'Données Auteur :',
