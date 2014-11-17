@@ -16,7 +16,7 @@ function genie_fulltext_index_document_dist($t) {
 				$doc = $row['fichier'];
 				//On indexe seulement si c'est autorise
 				if(($fulltext[$extension.'_index'] == 'on')||(defined('_FULLTEXT_'.strtoupper($extension).'_EXE'))){
-		      		spip_log('Indexation de '.$doc, 'extract');
+					spip_log('Indexation de '.$doc, 'extract');
 					global $extracteur;
 					if (include_spip('extract/'.$extension)
 						AND function_exists($lire = $extracteur[$extension])) {
@@ -56,7 +56,7 @@ function genie_fulltext_index_document_dist($t) {
 						sql_updateq('spip_documents', array('contenu' => '', 'extrait' => 'err'),"extrait = 'non' AND extension=".sql_quote($extension));
 						spip_log("Impossible d'indexer tous les .$extension", 'extract');
 					}
-				}else{			
+				}else{
 					// si pas autoriser inutile de parcourir un par un tous les docs avec la meme extension !
 					sql_updateq('spip_documents', array('contenu' => '', 'extrait' => 'err'),"extrait = 'non' AND extension=".sql_quote($extension));
 					spip_log("Interdiction d'indexer tous les .$extension", 'extract');
