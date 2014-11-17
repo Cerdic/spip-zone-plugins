@@ -6,7 +6,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img/couleur_objet-64.png"
-	documentation="http://www.spip-contrib.net"
+	documentation="http://contrib.spip.net/Couleur-d-Objet"
 >	
 
 	<nom>Couleur d'Objet</nom>
