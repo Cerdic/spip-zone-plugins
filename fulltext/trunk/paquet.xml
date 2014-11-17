@@ -21,7 +21,7 @@
 
 	<traduire module="fulltext" reference="fr" gestionnaire="salvatore" />
 
-	<pipeline nom="declarer_tables_principales" inclure="base/fulltext.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/fulltext.php" />
 	<pipeline nom="autoriser" inclure="fulltext_autoriser.php" />
 	<pipeline nom="taches_generales_cron" inclure="fulltext_pipelines.php" />
 
