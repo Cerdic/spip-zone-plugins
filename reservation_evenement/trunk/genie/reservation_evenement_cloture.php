@@ -19,10 +19,12 @@ function genie_reservation_evenement_cloture_dist ($t) {
 		'*',
 		'spip_reservations_details,spip_evenements',
 		'spip_reservations_details.statut="accepte" AND 
-		spip_evenements.date_fin <="'.$date.'"');
+		spip_reservations_details.id_evenement=spip_evenements.id_evenement AND
+		spip_evenements.date_fin <="'.$date.'" AND
+		spip_evenements.action_cloture =1' );
 		
 	while($data=sql_fetch($sql)){
-		spip_log($data,'teste');		
+		reservations_detail_instituer($data['id_reservations_detail'],array('statut'=>'cloture'));	
 	};
 	
 

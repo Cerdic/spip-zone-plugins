@@ -169,17 +169,17 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 	if ($s != $statut AND in_array($s,$statuts) AND !in_array($statut,$statuts)) {
 		// Si il y a une limitation de places prévu, on sélectionne les détails de réservation qui ont le statut_complet
 		if($places AND $places>0){
-			$sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut IN ("'.implode('","',$statuts).'")');
-			
+			$sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut IN ("'.implode('","',$statuts).'")');		
 			$reservations=array();
 			while($data=sql_fetch($sql)){
 				$reservations[]=$data['quantite'];
 			}
-			if(array_sum($reservations)>=$places)$champs['statut']='attente';
-						   
+			if(array_sum($reservations)>=$places)$champs['statut']='attente';						   
 		}
-
 	}
+	
+	//On ne peut changer vers cloture seulement si les statut anterieur était accepté
+	if($statut_ancien!='accepte' and $s =='cloture') $champs['statut']=$statut_ancien;
 
 
 	// Envoyer aux plugins
@@ -218,6 +218,8 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 			'data' => $champs
 		)
 	);
+	
+
 	
 	// Notifications si en mode différé et ne pas déclencher par le changement de statut de la réservation
 	
