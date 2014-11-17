@@ -1,9 +1,9 @@
 <paquet
 	prefix="couleur_objet"
 	categorie="maintenance"
-	version="0.2.1"
+	version="0.2.2"
 	schema="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="img/couleur_objet-64.png"
 	documentation="http://www.spip-contrib.net"

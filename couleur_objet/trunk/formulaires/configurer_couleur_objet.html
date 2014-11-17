@@ -21,7 +21,7 @@
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label>[(#GET{co}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_documents}}
+					]#INCLURE{fond=formulaires/inc-choisir-objets, name=#GET{name}, selected=#ENV**{#GET{name}}, exclus=#LISTE{spip_documents,spip_groupes_mots}}
 				</li>
 				[(#REM) bloquer le changement de couleur ]
 				#SET{name,bloquer} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
