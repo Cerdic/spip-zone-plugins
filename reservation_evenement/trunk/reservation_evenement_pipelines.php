@@ -107,7 +107,7 @@ function reservation_evenement_formulaire_charger($flux){
 	if (in_array($form,$forms)){
 		$action_cloture=$contexte['action_cloture'];
 		$id_evenement=isset($contexte['id_evenement'])?$contexte['id_evenement']:'0';
-		if($form==$forms[1] AND (!$action_cloture OR $action_cloture==0) AND $form=='editer_evenement'){
+		if($form==$forms[1] AND (!$action_cloture OR $action_cloture==0) AND $form=='editer_evenement' AND intval($contexte['id_parent'])){
 			$action_cloture=sql_getfetsel('action_cloture','spip_articles','id_article='.$contexte['id_parent']);				
 		}
 			
@@ -120,10 +120,11 @@ function reservation_evenement_formulaire_charger($flux){
 
 function reservation_evenement_formulaire_traiter($flux){
     $form = $flux['args']['form'];
+	spip_log($flux,'teste');
 	$forms=array('editer_article','editer_evenement');
     if (in_array($form,$forms)){
-		list($edit,$table)=explode('_',$form);
-		sql_updateq('spip_'.$table.'s',array('action_cloture'=>_request('action_cloture')));
+		list($edit,$objet)=explode('_',$form);
+		sql_updateq('spip_'.$objet.'s',array('action_cloture'=>_request('action_cloture')),'id_'.$objet.'='.$flux['data']['id_'.$objet]);
     }
     
     return $flux;
