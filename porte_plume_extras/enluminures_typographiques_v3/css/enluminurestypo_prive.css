@@ -23,3 +23,7 @@ h5.spip {
 }
 
 acronym, abbr { border-bottom: .1em dotted; cursor: help; }
+
+.preview  ol.spip {
+	padding: 0;
+}
