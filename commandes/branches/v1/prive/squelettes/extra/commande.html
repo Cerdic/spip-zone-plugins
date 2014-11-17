@@ -5,7 +5,7 @@
 <h4><:commandes:explications_notifications_statuts:></h4>
 <p>
 	<ul>
-		<BOUCLE_data(DATA){source table,#CONFIG{commandes/quand,#LISTE}}>
+		<BOUCLE_data(DATA){source table,#CONFIG{commandes/quand,#LISTE}}{si #CONFIG{commandes/activer}|oui}>
 		<li>[(#CHEMIN_IMAGE{#VAL{commande}|objet_info{statut_images}|table_valeur{#VALEUR}}|balise_img)&nbsp;][<small>(#VALEUR|commandes_lister_statuts)</small>]</li>
 		</BOUCLE_data>
 	</ul>
