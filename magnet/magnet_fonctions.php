@@ -32,6 +32,36 @@ function critere_ignore_magnet_dist($idb, &$boucles, $crit) {
 }
 
 /**
+ * Generer les boutons pour d'admin magnet selon les droits du visiteur
+ *
+ * @param object $p
+ * @return object
+ */
+function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
+	if (($_id = interprete_argument_balise(1,$p))===NULL)
+		$_id = champ_sql('id_article', $p);
+
+	$_objet = "'article'";
+
+		$p->code = "
+'<'.'?php
+	if (isset(\$GLOBALS[\'visiteur_session\'][\'statut\'])
+	  AND \$GLOBALS[\'visiteur_session\'][\'statut\']==\'0minirezo\'
+		AND (\$id = '.intval($_id).')
+		AND	include_spip(\'inc/autoriser\')
+		AND autoriser(\'administrermagnet\',$_objet,\$id)) {
+			echo \"<div class=\'boutons spip-admin actions magnet\'>\"
+			. magnet_html_boutons_admin($_objet,\$id)
+			. \"</div>\";
+		}
+?'.'>'";
+
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+
+/**
  * Inserer la clause order : le champ magnet prend 0 pour les articles non magnet et un indice croissant pour les articles magnet
  * le dernier magnetize arrive en premier
  * pour remonter un article magnet en tete il faut le demagnetizer/remagnetizer
@@ -65,6 +95,43 @@ function magnet_pre_boucle(&$boucle){
 	return $boucle;
 }
 
+
+/**
+ * Generer le HTML des boutons d'admin magnet
+ *
+ * @param $objet
+ * @param $id_objet
+ * @param string $class
+ * @return string
+ */
+function magnet_html_boutons_admin($objet, $id_objet, $class=""){
+	$magnet_rang = magnet_rang($objet, $id_objet);
+	$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-".($magnet_rang?"off":"on"),self());
+	$balise_img = chercher_filtre("balise_img");
+	$bclass = $class . " magnet ";
+	if ($magnet_rang) {
+		$bclass .= "magnetized";
+		$label = "($magnet_rang) <span>Enlever</span>";
+		$bouton = bouton_action($label,$ur_action,$bclass);
+		if ($magnet_rang>1){
+			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up",self());
+			$bouton = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-up-24.png","monter"),$ur_action, $class ." magnet-up") . $bouton;
+		}
+		if ($magnet_rang<magnet_count($objet)){
+			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down",self());
+			$bouton = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-down-24.png","monter"),$ur_action, $class ." magnet-down") . $bouton;
+		}
+	}
+	else {
+		$bclass .= "demagnetized";
+		$label = "<span>Aimanter</span>";
+		$bouton = bouton_action($label,$ur_action,$bclass);
+	}
+
+	return $bouton;
+}
+
+
 /**
  * Ajouter un bouton pour magnetiser/demagnetiser un article
  * @param $flux
@@ -72,31 +139,13 @@ function magnet_pre_boucle(&$boucle){
  */
 function magnet_formulaire_admin($flux){
 	if ($flux['args']['contexte']['objet']=='article'
-	  AND $id_objet = intval($flux['args']['contexte']['id_objet'])){
-		$objet = $flux['args']['contexte']['objet'];
-		$magnet_rang = magnet_rang($objet, $id_objet);
-		$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-".($magnet_rang?"off":"on"),self());
-		$balise_img = chercher_filtre("balise_img");
-		$class = "spip-admin-boutons magnet ";
-		if ($magnet_rang) {
-			$class .= "magnetized";
-			$label = "($magnet_rang) <span>Enlever</span>";
-			$bouton = bouton_action($label,$ur_action,$class);
-			if ($magnet_rang>1){
-				$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up",self());
-				$bouton = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-up-24.png","monter"),$ur_action,"spip-admin-boutons magnet-up") . $bouton;
-			}
-			if ($magnet_rang<magnet_count($objet)){
-				$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down",self());
-				$bouton = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-down-24.png","monter"),$ur_action,"spip-admin-boutons magnet-down") . $bouton;
-			}
-		}
-		else {
-			$class .= "demagnetized";
-			$label = "<span>Aimanter</span>";
-			$bouton = bouton_action($label,$ur_action,$class);
-		}
-		$bouton .= " ";
+	  AND $objet = $flux['args']['contexte']['objet']
+	  AND $id_objet = intval($flux['args']['contexte']['id_objet'])
+	  AND isset($GLOBALS['visiteur_session']['statut'])
+		AND $GLOBALS['visiteur_session']['statut']=='0minirezo'
+	  AND include_spip('inc/autoriser')
+	  AND autoriser('administrermagnet',$objet,$id_objet)){
+		$bouton = magnet_html_boutons_admin($objet, $id_objet,"spip-admin-boutons spip-admin-boutons-magnet") . " ";
 		$p = strpos($flux['data'],"<a");
 		$flux['data'] = substr_replace($flux['data'],$bouton,$p,0);
 		$img_on = _DIR_PLUGIN_MAGNET."magnet-gray-32.png";
