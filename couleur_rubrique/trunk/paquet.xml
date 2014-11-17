@@ -1,9 +1,9 @@
 <paquet
 prefix="pb_couleur_rubrique"
 categorie="maintenance"
-version="2.3.5"
+version="2.3.6"
 etat="stable"
-compatibilite="[3.0.0;3.0.*]"
+compatibilite="[3.0.0;3.1.*]"
 logo="img_pack/pb_couleur_rubrique.png"
 documentation="http://contrib.spip.net/Couleur-de-Rubrique"
 	>	
