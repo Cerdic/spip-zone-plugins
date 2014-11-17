@@ -2,7 +2,7 @@
 	<nom><multi>[en]Invoices &amp; Quotations[fr]Factures &amp; Devis</multi></nom>
 	<icon>images/factures-32.png</icon>
 
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<version_base>1.0.1</version_base>
 	<install>base/factures_upgrade.php</install>
 
@@ -72,10 +72,6 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 	</bouton>
 
 
-	<!--pipeline>
-		<nom>insert_head</nom>
-		<inclure>factures_pipelines.php</inclure>
-	</pipeline-->
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="coordonnees" version="[1.4.0;]" />
     <necessite id="mots_objets" version="[1.0.0;]" />
