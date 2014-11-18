@@ -143,6 +143,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
 	
+	
 	$row = sql_fetsel('*','spip_reservations_details','id_reservations_detail='.intval($id_reservations_detail));
 	$id_reservation=$row['id_reservation'];
 	$id_evenement=$row['id_evenement'];
@@ -169,18 +170,15 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 	if ($s != $statut AND in_array($s,$statuts) AND !in_array($statut,$statuts)) {
 		// Si il y a une limitation de places prévu, on sélectionne les détails de réservation qui ont le statut_complet
 		if($places AND $places>0){
-			$sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut IN ("'.implode('","',$statuts).'")');
-			
+			$sql=sql_select('quantite','spip_reservations_details','id_evenement='.$id_evenement.' AND statut IN ("'.implode('","',$statuts).'")');		
 			$reservations=array();
 			while($data=sql_fetch($sql)){
 				$reservations[]=$data['quantite'];
 			}
-			if(array_sum($reservations)>=$places)$champs['statut']='attente';
-						   
+			if(array_sum($reservations)>=$places)$champs['statut']='attente';						   
 		}
-
 	}
-
+	
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
@@ -219,9 +217,12 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 		)
 	);
 	
+
+	
 	// Notifications si en mode différé et ne pas déclencher par le changement de statut de la réservation
 	
-	if($envoi_separe_actif!='non'){		
+	if($envoi_separe_actif!='non'){
+			
 		//Déterminer la langue pour les notifications	
 		if(!$lang=sql_getfetsel('lang','spip_reservations','id_reservation='.$id_reservation)) $lang=lire_config('langue_site');				
 
@@ -230,7 +231,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 		$config = lire_config('reservation_evenement');
 		$envoi_separe_config=isset($config['envoi_separe'])?$config['envoi_separe']:array(); 
 		
-		if(in_array($s, $envoi_separe_config)){
+		if(in_array($s, $envoi_separe_config) OR $s == 'cloture'){
 			
 			 if ((!$statut_ancien OR $s != $statut_ancien ) &&
 			 ($config['activer']) &&
@@ -242,7 +243,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 				$email=$row['email'];
 				
 				// Determiner l'expediteur
-				$options = array('statut'=>$s,'id_reservations_detail'=>$id_reservations_detail);
+				$options = array('statut'=>$s,'id_reservations_detail'=>$id_reservations_detail,'lang'=>$lang);
 				if( $config['expediteur'] != "facteur" )
 					$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
 		

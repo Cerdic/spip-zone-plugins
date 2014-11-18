@@ -5,7 +5,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function notifications_reservation_client_dist($quoi,$id_reservation, $options) {
     include_spip('inc/config');
     $config = lire_config('reservation_evenement');
-
     $envoyer_mail = charger_fonction('envoyer_mail','inc');
     
     $options['id_reservation']=$id_reservation;  
@@ -18,6 +17,8 @@ function notifications_reservation_client_dist($quoi,$id_reservation, $options) 
  
     $var_reservation = 'i18n_reservation_'.$lang;
     $chaine_statut='sujet_votre_reservation_'.$options['statut'];
+	
+	 spip_log("$var_reservation $chaine_statut",'teste');
 
     if(isset($GLOBALS[$var_reservation][$chaine_statut]))$subject=_T('reservation:'.$chaine_statut,array('nom'=>$GLOBALS['meta']['nom_site']));  
 

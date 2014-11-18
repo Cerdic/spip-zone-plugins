@@ -107,7 +107,27 @@ function formulaires_configurer_reservation_evenement_saisies_dist(){
 						'defaut' => $config['quand']
 					)
 					
-				),				
+				),	
+				array(
+					'saisie' => 'oui_non',
+					'options' => array(
+						'nom' => 'cron',
+						'label' => _T('reservation:cron_label'),
+						'explication' => _T('reservation:cron_explication'),
+						'defaut' => $config['cron'],
+					)
+				),
+				array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => 'periodicite_cron',
+						'label' => _T('reservation:periodicite_cron_label'),
+						'explication' => _T('reservation:periodicite_cron_explication'),
+						'defaut' => $config['periodicite_cron'],
+						'afficher_si' => '@cron@ == "on"',
+						'size'=>'10',
+					)
+				),						
 				array(
 					'saisie' => 'selection',
 					'options' => array(

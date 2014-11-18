@@ -1,0 +1,9 @@
+[(#ENV{action_cloture}|!={3}|?{
+	[(#SAISIE{radio,action_cloture,
+	label=<:reservation:label_action_cloture:>,
+	datas=#ARRAY{1,oui,2,non},
+	})]	
+	,
+	<li><:reservation:evenement_cloture:></li>
+})]
+	
