@@ -36,7 +36,6 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 	<categorie>edition</categorie>
 	<fonctions>factures_fonctions.php</fonctions>
 
-
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/factures.php</inclure>
@@ -70,7 +69,6 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 		<icone>images/factures-16.png</icone>
 		<url>config_factures</url>
 	</bouton>
-
 
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="coordonnees" version="[1.4.0;]" />

@@ -31,6 +31,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 - bouton cr&eacute;er facture',
 	'explications_page_config_factures' => 'essentiellement choix du groupe de mots cl&eacute; définissant les types de factures (facture, devis, proforma, avoir) et les organisations &eacute;mettrices de factures (au moins une, celle de celui qui facture); si pas de groupe pré-défini on en crée un; si pas d\'Organisation pré-définie, on en crée une.',
 
+	// L
+	'label_telephone' => "Téléphone",
+	'label_telecopie' => "Télécopie",
+
+	// M
+	'montant' => "Montant",
+
 	// F
 	'fin_validite' => "Fin de validité",
 
@@ -41,12 +48,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'montant' => "Montant",
 
 	// N
-	'nom_defaut' => 'Fiche facture par défaut',
-	'num_facture' => "Numéro facture",
+	'nom_defaut' => "Fiche facture par défaut",
+	'numero_tva' => "Numéro de TVA",
+
+	// R
+	'recipiendaire' => "A l'attention de ",
+	'reglement_conditions' => "à réception de facture",
+	'reglement_destinataire' => "Règlement à adresser à <strong>@emetteur@</strong>,",
+	'reglement_moyen' => ", par chèque ou virement bancaire :",
+	'regle_le' => "Réglé le",
+	'regle_par' => 'par',
 
 	// T
-	'titre_page_factures' => 'Gérer les Factures & Devis',
-	'titre_page_config_factures' => 'Configuration du plugin Factures & Devis',
+	'titre_page_factures' => "Gérer les Factures et Devis",
+	'titre_page_config_factures' => "Configuration du plugin Factures & Devis",
 	'titre_liste_factures' => 'Liste des factures existantes',
 
 	// Z
