@@ -14,8 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choix_precis' => 'Choix précis',
-	'cron_explication' => 'Quand l\'événement de la résérvation est passé, la réservation sera automatiquement cloturée par le système. Si "cloturé" est choisis sous "Déclenchement", un email de cloture sera alors envoyé. Videz le cache afin que cela soit bien activé',	
-	'cron_label' => 'Cloturer automatiquement une réservation',	
+	'cron_explication' => 'Pour tout événement ayant activé la clôture automatique. Quand l\'événement de la résérvation est passé, la réservation sera automatiquement clôturée par le système. Si "clôturé" est choisis sous "Déclenchement", un email de clôture sera alors envoyé. Videz le cache afin que cela soit bien activé. ',	
+	'cron_label' => 'Clôturer automatiquement une réservation',	
 
 	// D
 	'designation' => 'Désignation',
@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
-	'evenement_cloture' => 'Évenement cloturé',	
+	'evenement_cloture' => 'Évenement clôturé',	
 	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers 
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_voir_reservations_poubelle' => 'Voir les Résevations mises à la poubelle',
 
 	// L
-	'label_action_cloture' => 'Cloture automatique :',	
+	'label_action_cloture' => 'Clôture automatique :',	
 	'label_date' => 'Date :',
 	'label_date_paiement' => 'Date de paiement :',
 	'label_donnees_auteur' => 'Données Auteur :',
@@ -70,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'merci_de_votre_reservation' => 'Nous avons bien enregistré votre réservation et nous vous remercions de votre confiance.',
 	'message_erreur' => 'Votre saisie contient des erreurs !',
+	'message_evenement_cloture' => 'L\'évènement @titre@ vient de se terminer. <br />Nous aimerions vous remercier pour votre participation.',	
 	'montant' => 'Montant',
 
 	// N
@@ -109,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_articles' => 'articles',
 	'par_evenements' => 'événements',
 	'par_reservations' => 'réservations',
-	'periodicite_cron_explication' => 'Periode aprês laquelle le système vérifie si des résérvations doivent être cloturées (min 600 : 10 min)',	
+	'periodicite_cron_explication' => 'Periode aprês laquelle le système vérifie si des résérvations doivent être clôturées (min 600 : 10 min)',	
 	'periodicite_cron_label' => 'Périodicité du cron en secondes',	
 
 	// R
@@ -129,6 +130,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statuts_complet_explication' => 'Les statuts du détails de résérvation pris en compte pour déterminer si l’événement est complet.',
 	'sujet_une_reservation_accepte' => 'Réservation confirmé sur @nom@',
 	'sujet_votre_reservation_accepte' => '@nom@ : confirmation de votre réservation',
+	'sujet_une_reservation_cloture' => 'Évènement clôturé sur @nom@',
+	'sujet_votre_reservation_cloture' => '@nom@ : clôture de l\'évènement',	
 
 	// T
 	'texte_ajouter_reservation' => 'Ajouter une réservation',
@@ -137,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_accepte' => ' accepté',
 	'texte_statut_attente' => ' dans liste d’attente',
 	'texte_statut_attente_paiement' => ' en attente du paiement',
-	'texte_statut_cloture' => ' cloturé',	
+	'texte_statut_cloture' => ' clôturé',	
 	'texte_statut_encours' => ' en cours',
 	'texte_statut_poubelle' => ' à la poubelle',
 	'texte_statut_refuse' => ' refusé',
