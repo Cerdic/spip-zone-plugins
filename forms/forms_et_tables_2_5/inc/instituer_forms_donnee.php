@@ -67,7 +67,7 @@ function inc_instituer_forms_donnee_dist($id_form, $id_donnee, $statut, $rang=NU
 		OR autoriser('instituer','donnee',$id_donnee,NULL,array('id_form'=>$id_form,'statut'=>$statut,'nouveau_statut'=>$s)) 
 		)
 			$res .= "<option"  . 
-				mySel($s, $statut)  . " " .
+				forms_mySel($s, $statut)  . " " .
 				$atts[$s] . " >" .
 				trim($lib) .
 				"</option>\n";

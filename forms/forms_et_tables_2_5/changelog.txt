@@ -1,4 +1,9 @@
-﻿2014-11-12
+﻿2014-11-18
+- Correction du bug javascript sur le chargement de jtip.js en Front.
+- Préfixage de la fonction MySel pour éviter les effets de bord.
+
+
+2014-11-12
 - Correction de bug sur l'utilisation d'une fonction dépréciée (calcul_mysql_in remplacée par sql_in) dans plusieurs fichiers.
 
 2013-04-10

@@ -364,8 +364,8 @@ if(!function_exists('ajax_action_auteur')) {
 		}
 	}
 	
-	if(!function_exists("mySel")){
-function mySel($varaut,$variable, $option = NULL) {
+	if(!function_exists("forms_mySel")){
+function forms_mySel($varaut,$variable, $option = NULL) {
 	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
 
 	return  (!isset($option) ? $res : "<option$res>$option</option>\n");
