@@ -22,7 +22,6 @@ function genie_reservation_evenement_cloture_dist ($t) {
 		'id_reservations_detail,spip_reservations_details.id_evenement',
 		'spip_reservations_details,spip_evenements',
 		'spip_reservations_details.statut="accepte" AND 
-			spip_reservations_details.id_reservation=spip.reservations.id_reservation,
 			spip_reservations_details.id_evenement=spip_evenements.id_evenement AND
 			spip_evenements.date_fin <="'.$date.'" AND
 			spip_evenements.action_cloture =1' 
