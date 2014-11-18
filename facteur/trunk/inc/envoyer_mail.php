@@ -236,12 +236,12 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$head = $facteur->CreateHeader();
 
 	// Et c'est parti on envoie enfin
-	spip_log("mail via facteur\n$head"."Destinataire:".print_r($destinataire,true),'mail.' . _LOG_ERREUR);
+	spip_log("mail via facteur\n$head"."Destinataire:".print_r($destinataire,true),'mail');
 	spip_log("mail\n$head"."Destinataire:".print_r($destinataire,true),'facteur');
 	$retour = $facteur->Send();
 	
 	if (!$retour)
-		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'facteur');
+		spip_log("Erreur Envoi mail via Facteur : ".print_r($facteur->ErrorInfo,true),'facteur.'._LOG_ERREUR);
 
 	return $retour ;
 }
