@@ -152,7 +152,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 
 					$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
 
-					if (in_array($jtable, $lesliens))
+					if (in_array($jtable, $lesliens)) {
 						$join = "
 						LEFT JOIN (
 						 SELECT lien$i.id_objet,$subscore AS score
@@ -163,7 +163,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 						 ORDER BY score DESC LIMIT 100
 						 ) AS o$i ON o$i.id_objet=t.$_id_table
 						";
-					else
+					} else if(in_array("spip_${jtable}s_${table}s", array_keys(lister_tables_spip()))) {
 						$join = "
 						LEFT JOIN (
 						 SELECT lien$i.$_id_table,$subscore AS score
@@ -173,6 +173,11 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 						 ORDER BY score DESC LIMIT 100
 						 ) AS o$i ON o$i.$_id_table=t.$_id_table
 						";
+					} else {
+						$join = "
+						, (select 0 as score) AS o$i 
+						";
+					}
 					#var_dump($join);
 					$from .= $join;
 				}
@@ -309,26 +314,32 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 			$it = id_table_objet($table);
 			$ij =  id_table_objet($jtable);
 			$lesliens = recherche_tables_liens();
-			if (in_array($jtable, $lesliens))
-				$s = sql_select("id_objet as $it", "spip_${jtable}s_liens", array("objet='$table'",sql_in('id_'.${jtable}, array_keys($jj))), '','','','',$serveur);
-			else
-				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_'.${jtable}, array_keys($jj)), '','','','',$serveur);
-			while ($t = sql_fetch($s)) {
-				$id = $t[$it];
-				$joint = $jj[$t[$ij]];
-				if (!isset($r))
-					$r = array();
-				if (!isset($r[$id]))
-					$r[$id] = array();
-				if ($joint['score'])
-					$r[$id]['score'] += $joint['score'];
-				if ($joint['champs'])
-				foreach($joint['champs'] as $c => $val)
-					$r[$id]['champs'][$jtable.'.'.$c] = $val;
-				if ($joint['matches'])
-				foreach($joint['matches'] as $c => $val)
-					$r[$id]['matches'][$jtable.'.'.$c] = $val;
+			$s = null;
+			if (in_array($jtable, $lesliens)) {
+				$s = sql_select("id_objet as $it", "spip_${jtable}s_liens", array("objet='$table'", sql_in('id_' . ${jtable}, array_keys($jj))), '', '', '', '', $serveur);
+			} else if(in_array("spip_${jtable}s_${table}s", array_keys(lister_tables_spip()))) {
+				$s = sql_select("$it,$ij", "spip_${jtable}s_${table}s", sql_in('id_' . ${jtable}, array_keys($jj)), '', '', '', '', $serveur);
 			}
+			if($s) {
+				while( $t = sql_fetch($s) ) {
+					$id	= $t[$it];
+					$joint = $jj[$t[$ij]];
+					if( !isset($r) )
+						$r = array();
+					if( !isset($r[$id]) )
+						$r[$id] = array();
+					if( $joint['score'] )
+						$r[$id]['score'] += $joint['score'];
+					if( $joint['champs'] )
+						foreach( $joint['champs'] as $c => $val )
+							$r[$id]['champs'][$jtable . '.' . $c] = $val;
+					if( $joint['matches'] )
+						foreach( $joint['matches'] as $c => $val )
+							$r[$id]['matches'][$jtable . '.' . $c] = $val;
+				}
+			}
+			
+				
 		}
 	}
 
