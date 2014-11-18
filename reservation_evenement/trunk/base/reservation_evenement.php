@@ -93,6 +93,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'attente' => 'reservation:texte_statut_attente',
 			'attente_paiement' => 'reservation:texte_statut_attente_paiement',
 			'accepte' => 'reservation:texte_statut_accepte',
+			'cloture' => 'reservation:texte_statut_cloture',			
 			'encours' => 'reservation:texte_statut_encours',
 			'refuse' => 'reservation:texte_statut_refuse',
 			'poubelle' => 'reservation:texte_statut_poubelle',
@@ -101,13 +102,14 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			'attente' => 'puce-reservation-attente-16.png',
 			'attente_paiement' => 'puce-reservation-attente_paiement-16.png',
 			'accepte' => 'puce-reservation-accepte-16.png',
+			'cloture' => 'puce-reservation-cloture-16.png',
 			'encours' => 'puce-reservation-encours-16.png',
 			'refuse' => 'puce-reservation-refuse-16.png',
 			'poubelle' => 'puce-reservation-poubelle-16.png',
 		),
 		'statut' => array( array(
 				'champ' => 'statut',
-				'publie' => 'accepte',
+				'publie' => 'accepte,cloture',
 				'previsu' => 'accepte,attente,attente_paiement',
 				'post_date' => 'date',
 				'exception' => array(
