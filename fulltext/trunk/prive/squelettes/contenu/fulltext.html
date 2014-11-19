@@ -4,7 +4,7 @@
 
 #BOITE_OUVRIR{'',box important,#CHEMIN{images/fulltext-24.png}}
 
-#SET{tables, #REM|liste_des_champs}
+#SET{tables,#REM|liste_des_champs}
 #SET{nombre,0}
 #SET{myisam_nombre,0}
 [(#ENV{creer}|=={tous}|oui)
@@ -29,7 +29,7 @@
 #SET{regexp,^[a-z_0-9]+$}
 <BOUCLE_siok(CONDITION){si #GET{engine}|=={''}|ou{#GET{engine}|strtolower|!={myisam}}|non}>
 	[(#ENV{table,''}|=={#GET{table}}|et{#ENV{nom,''}|!={""}}|et{#ENV{nom,''}|concat{#GET{table}}|match{#GET{regexp}}}|oui)
-		[(#GET{table}|Fulltext_creer_index{#ENV{nom},#VALEUR})]
+		[(#GET{table}|Fulltext_creer_index{#ENV{nom},[(#VALEUR|array_keys)]})]
 	]
 	[(#ENV{regenerer}|=={#GET{table}}|ou{#ENV{regenerer}|=={tous}}|oui)
 		[(#GET{table}|Fulltext_regenerer_index)]
@@ -50,7 +50,7 @@
 			<BOUCLE_liste_cles(DATA){source table,#GET{cles}}>
 			<dt>
 				#CLE <a href="[(#SELF|parametre_url{supprimer,#GET{table}}|parametre_url{index,#CLE})]" title="<:fulltext:supprimer:>">
-				<img src="#CHEMIN{images/croix-rouge.gif}" alt="<:fulltext:supprimer:>"></a>
+				[(#CHEMIN{images/croix-rouge.gif}|balise_img{<:fulltext:supprimer:>})]</a>
 				[(#ENV{supprimer}|=={#GET{table}}|et{#ENV{index}|=={#CLE}}|oui)
 					[(#GET{table}|Fulltext_supprimer_index{#CLE})]
 				]
