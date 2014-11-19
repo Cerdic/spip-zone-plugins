@@ -1,7 +1,7 @@
 <paquet
 	prefix="autorite"
 	categorie="auteur"
-	version="0.10.7"
+	version="0.10.8"
 	etat="stable"
 	compatibilite="[1.9.2;3.1.*]"
 	logo="illuminati-32.png"

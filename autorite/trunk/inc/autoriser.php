@@ -241,8 +241,10 @@ function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
 			AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
 		);
 }
-function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
-	return autoriser_voir_dist($faire, $type, $id, $qui, $opt);
+if (!function_exists('autoriser_rubrique_creerarticledans')) {
+	function autoriser_rubrique_creerarticledans($faire, $type, $id, $qui, $opt) {
+		return autoriser_voir_dist($faire, $type, $id, $qui, $opt);
+	}
 }
 } else
 	$autorite_erreurs[] = 'autoriser_article_modifier';
