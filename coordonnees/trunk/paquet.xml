@@ -1,14 +1,13 @@
 <paquet
 	prefix="coordonnees"
 	categorie="auteur"
-	version="2.3.3"
+	version="2.3.4"
 	schema="1.8.3"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/addressbook-128.png"
 	documentation="http://contrib.spip.net/Plugin-Coordonnees"
 >
-
 	<nom>Coordonnées</nom>
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
@@ -35,5 +34,4 @@
 	<pipeline nom="types_coordonnees" inclure="coordonnees_pipelines.php" action=""/>
 
 	<menu nom="coordonnees" titre="coordonnees:titre_coordonnees" parent="menu_edition" icone="images/addressbook-16.png" action="coordonnees" />
-
 </paquet>
