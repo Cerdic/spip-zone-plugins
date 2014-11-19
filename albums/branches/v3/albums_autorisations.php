@@ -230,7 +230,7 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 	// dans ce cas id_objet est négatif
 	$autoriser_modifier_objets_lies = true;
 	$liens_objets = objet_trouver_liens(array('album'=>$id),'*');
-	if (is_array($liens_objets)){
+	if (is_array($liens_objets) AND count($liens_objets)){
 		foreach($liens_objets as $l) {
 			$objet = $l['objet'];
 			$id_objet = $l['id_objet'];
