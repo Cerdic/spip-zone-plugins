@@ -37,6 +37,16 @@ function compter_elements($table) {
 	return $nb;
 }
 
+/**
+ * Récupération de l'engine utilisé par une table sql
+ * 
+ * Retourne MyISAM ou InnoDB
+ * 
+ * @param string $table
+ * 		La table à analyser
+ * @return string 
+ * 		Le moteur utilisé
+ */
 function Fulltext_trouver_engine_table($table) {
 	if ($s = sql_query("SHOW CREATE TABLE " . table_objet_sql($table), $serveur) AND $t = sql_fetch($s) AND $create = array_pop($t) AND preg_match('/\bENGINE=([^\s]+)/', $create, $engine))
 		return $engine[1];
@@ -60,7 +70,6 @@ function Fulltext_index($table, $champs, $nom = null) {
 		else
 			unset($champs[$i]);
 	}
-
 	return "`$nom` (" . join(',', $champs) . ")";
 }
 
