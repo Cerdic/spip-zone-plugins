@@ -29,6 +29,7 @@
 			</h5>
 
 			<p class="explication"><:album:label_onglet_ajouter_creer:></p>
+			<p class="explication"><:album:explication_onglet_ajouter_creer:></p>
 
 			<ul>
 				#SET{name,titre} #SET{obli,''} #SET{defaut,#ENV{titre_defaut,''}} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -70,7 +71,8 @@
 				<span class="creer"><a href="#"><:album:onglet_ajouter_creer:></a></span> | <span class="choisir"><:album:onglet_ajouter_choisir:></span>
 			</h5>
 
-			<p class="explication"><:album:label_onglet_ajouter_choisir:> : <:album:explication_album_numero:></p>
+			<p class="explication"><:album:label_onglet_ajouter_choisir:></p>
+			<p class="explication"><:album:explication_onglet_ajouter_choisir:></p>
 
 			<ul>
 				#SET{name,ids_albums_associer} #SET{obli,''} #SET{defaut,''} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}

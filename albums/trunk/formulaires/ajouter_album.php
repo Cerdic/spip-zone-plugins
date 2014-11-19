@@ -84,20 +84,34 @@ function formulaires_ajouter_album_verifier_dist($objet='', $id_objet=0, $retour
 
 	$erreurs = array();
 
-	// créer un album
+	// onglet créer un album
 	if (!_request('choisir_album')) {
 
 		// erreurs du formulaire d'édition d'un album
 		$verifier_editer_album = charger_fonction('verifier','formulaires/editer_album');
 		$erreurs_editer_album = $verifier_editer_album('new',$retour,$objet.'|'.$id_objet,$lier_trad);
-		if (count($erreurs_editer_album)) $erreurs = array_merge($erreurs, $erreurs_editer_album);
+		if (
+			is_array($erreurs_editer_album)
+			AND count($erreurs_editer_album)
+		) {
+			$erreurs = array_merge($erreurs, $erreurs_editer_album);
+		}
 
 		// erreurs du formulaire d'ajout de documents
+		// on autorise le fait de ne pas avoir choisi de fichier (album vide)
+		// FIXME on se base sur le texte du message d'erreur retourné, il y a sans doute plus propre
 		$verifier_joindre_document = charger_fonction('verifier','formulaires/joindre_document');
 		$erreurs_joindre_document = $verifier_joindre_document('new',0-$GLOBALS['visiteur_session']['id_auteur'],'album','document');
-		if (count($erreurs_joindre_document)) $erreurs = array_merge($erreurs, $erreurs_joindre_document);
+		$messages_aucun_document = array(_T('medias:erreur_indiquez_un_fichier'),_T('medias:erreur_aucun_document'));
+		if (
+			is_array($erreurs_joindre_document)
+			AND count($erreurs_joindre_document)
+			AND !in_array($erreurs_joindre_document['message_erreur'],$messages_aucun_document)
+		) {
+			$erreurs = array_merge($erreurs, $erreurs_joindre_document);
+		}
 
-	// choisir un album
+	// onglet choisir un album
 	} else {
 		if (!_request('ids_albums_associer'))
 			$erreurs['ids_albums_associer'] = _T('info_obligatoire');
@@ -129,17 +143,24 @@ function formulaires_ajouter_album_traiter_dist($objet='', $id_objet=0, $retour=
 
 	$res = array();
 
-	// créer un album
+	// onglet créer un album
 	if (!_request('choisir_album')) {
 
-		// traitement des documents
-		$id_temporaire = 0-$GLOBALS['visiteur_session']['id_auteur'];
-		$traiter_joindre_document = charger_fonction('traiter','formulaires/joindre_document');
-		$res_joindre_document = $traiter_joindre_document('new',$id_temporaire,'album','document');
-		$res = array_merge($res, $res_joindre_document);
-		// pas besoin du js ajouté dans le message de retour
-		if (isset($res['message_ok']) AND $res['message_ok']){
-			$res['message_ok'] = preg_replace('/(<script.*<\/script>)/is','',$res['message_ok']);
+		// traitement des documents si des fichiers ont été choisis
+		include_spip('inc/joindre_document');
+		$files = joindre_trouver_fichier_envoye();
+		if (
+			is_array($files)
+			AND count($files)
+		){
+			$id_temporaire = 0-$GLOBALS['visiteur_session']['id_auteur'];
+			$traiter_joindre_document = charger_fonction('traiter','formulaires/joindre_document');
+			$res_joindre_document = $traiter_joindre_document('new',$id_temporaire,'album','document');
+			$res = array_merge($res, $res_joindre_document);
+			// pas besoin du js ajouté dans le message de retour
+			if (isset($res['message_ok']) AND $res['message_ok']){
+				$res['message_ok'] = preg_replace('/(<script.*<\/script>)/is','',$res['message_ok']);
+			}
 		}
 
 		// traitement de l'album
@@ -157,7 +178,7 @@ function formulaires_ajouter_album_traiter_dist($objet='', $id_objet=0, $retour=
 			foreach(array('titre','descriptif','refdoc_joindre') as $champ) set_request($champ,'');
 		}
 
-	// choisir un album
+	// onglet choisir un album
 	} else {
 		$ids = _request('ids_albums_associer');
 		$ids = explode(',',$ids);

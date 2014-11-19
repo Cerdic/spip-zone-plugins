@@ -29,7 +29,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_deplacement' => 'Le traitement n’a pas pu être effectué',
-	'explication_album_numero' => 'Numéros séparés par des virgules',
+	'explication_onglet_ajouter_choisir' => 'Indiquez leur numéros séparés par des virgules, ou cliquez sur « Parcourir » pour les choisir manuellement.',
+	'explication_onglet_ajouter_creer' => 'Le titre et le descriptif sont optionnels. Vous pouvez ajouter des documents tout de suite, ou plus tard une fois l\'album créé.',
 	'explication_deplacer_documents' => '<strong>Expérimental</strong> : il est possible de déplacer des documents entre albums par cliquer-glisser.
 		Si vous disposez des droits nécessaires, le curseur change à leur survol pour signaler qu’une action est possible.
 		Une fois les déplacements effectués, un formulaire apparaît en bas de la liste pour enregistrer les changements.',
@@ -91,8 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_tri_media' => 'Type du document',
 	'label_modele_tri_titre' => 'Titre',
 	'label_modele_trier' => 'Trier par :',
-	'label_onglet_ajouter_choisir' => 'Associer des albums existants',
-	'label_onglet_ajouter_creer' => 'Créer et associer un album',
+	'label_onglet_ajouter_choisir' => 'Associer un ou plusieurs albums existants.',
+	'label_onglet_ajouter_creer' => 'Créer et associer un nouvel album.',
 	'label_titre' => 'Titre',
 	'label_utiliser_titre_defaut' => 'Titre d’un nouvel album',
 
@@ -108,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_vider' => 'Retirer tous les documents ?',
 
 	// O
-	'onglet_ajouter_choisir' => 'Choisir album(s)',
+	'onglet_ajouter_choisir' => 'Choisir un album',
 	'onglet_ajouter_creer' => 'Nouvel album',
 	'onglet_configurer_options' => 'Options',
 	'onglet_configurer_outils' => 'Outils',

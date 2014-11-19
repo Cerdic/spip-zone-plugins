@@ -25,8 +25,9 @@ modifications afin de pouvoir afficher plusieurs fois le formulaire sur une mêm
 pour afficher les documents des albums, utiliser notre squelette maison.
 
 ## Déplacements des documents entre album par cliquer-glisser
-Lorsqu'on valide le formulaire, la liste entière des albums est rechargée.
-Il faudrait recharger uniquement les albums impactés.
+
+- Lorsqu'on valide le formulaire, la liste entière des albums est rechargée. Il faudrait recharger uniquement les albums impactés.
+- Enregistrer la position des documents : ajouter une colonne `position` dans la table `spip_albums_liens` et s'en servir pour trier les docs d'un album (marcimat).
 
 ## Albumothèque
 Ajouter des filtres selon les statuts ? 
