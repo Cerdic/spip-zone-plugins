@@ -2,7 +2,7 @@
 	<nom>MailCrypt 2</nom>
 	<slogan>Prot&#233;ger les liens de courriels</slogan>
 	<auteur>Alexis Roussel, Paolo, Patrice Vanneufville, Joseph</auteur>
-	<version>2.4.1</version>
+	<version>2.4.2</version>
 	<icon>images/mailcrypt-256.png</icon>
 	<etat>stable</etat>
 	<description>
@@ -24,5 +24,5 @@
 		<nom>facteur_pre_envoi</nom>
 		<inclure>mailcrypt_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 </plugin>

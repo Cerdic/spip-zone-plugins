@@ -1,9 +1,9 @@
 <paquet
 	prefix="mailcrypt"
 	categorie="performance"
-	version="2.4.1"
+	version="2.4.2"
 	etat="stable"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[2.1.0;3.1.*]"
 	logo="images/mailcrypt-256.png"
 	documentation="http://contrib.spip.net/?article3828"
 >	
