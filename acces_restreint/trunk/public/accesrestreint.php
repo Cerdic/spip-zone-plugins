@@ -33,6 +33,13 @@ function accesrestreint_pre_boucle(&$boucle){
 		
 		switch ($boucle->type_requete) {
 			case 'hierarchie':
+				$primary = $boucle->id_table.'.'.$boucle->primary;
+				$t = $boucle->id_table . '.id_rubrique';
+				$boucle->select = array_merge($boucle->select, array($t, $primary)); // pour postgres
+				// Test sur l'objet lui-même
+				$boucle->where[] = accesrestreint_objets_accessibles_where($boucle->id_table, $primary);
+				$securise = true;
+				break;
 			case 'articles':
 			case 'breves':
 			case 'syndication':
@@ -40,7 +47,8 @@ function accesrestreint_pre_boucle(&$boucle){
 				$t = $boucle->id_table . '.id_rubrique';
 				$boucle->select = array_merge($boucle->select, array($t, $primary)); // pour postgres
 				// Test sur l'objet lui-même
-				$boucle->where[] = accesrestreint_objets_accessibles_where($boucle->id_table, $primary);
+				if($boucle->id_table != 'rubrique')
+					$boucle->where[] = accesrestreint_objets_accessibles_where($boucle->id_table, $primary);
 				// Test sur la hiérarchie
 				$boucle->where[] = accesrestreint_rubriques_accessibles_where($t);
 				$securise = true;

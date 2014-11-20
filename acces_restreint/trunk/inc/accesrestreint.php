@@ -73,7 +73,7 @@ function accesrestreint_liste_contenu_zone_rub_direct($id_zone_ou_where) {
 	$liste_rubriques = sql_allfetsel('id_objet', 'spip_zones_liens AS zr INNER JOIN spip_zones AS z ON zr.id_zone=z.id_zone', $where);
 	$liste_rubriques = array_map('reset', $liste_rubriques);
 	$liste_rubriques = array_unique($liste_rubriques);
-	
+
 	return $liste_rubriques;
 }
 
@@ -239,10 +239,10 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 	// On stocke la liste finale qui pourra être modifiée suivant l'option ci-dessous
 	$final_liste_rub_exclues = $liste_rub_exclues[$id_auteur][$publique];
 	
-	// AR_TYPE_RESTRICTION définit le type de réstriction pour traiter les élements communs à plusieurs zone
+	// AR_TYPE_RESTRICTION définit le type de restriction pour traiter les élements communs à plusieurs zones
 	//
 	// - Une restriction exclusive (ou forte) donne l'acces aux rubriques restreintes par 
-	//   plusieurs zones aux seuls membres de *toutes* les zones concernees.
+	//   plusieurs zones aux seuls membres de *toutes* les zones concernées.
 	// - Une restriction faible donne acces à une rubrique, même restreinte par
 	//   plusieurs zones, aux membres de chaque zone concernée.
 	// - Valeurs possibles : 'faible', 'forte, ou 'exclusive'		
@@ -294,11 +294,11 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 		}
 
 		// Ne pas exclure les elements qui sont autorises
-    if (isset($GLOBALS['visiteur_session']['id_auteur'])) 
-  		$final_liste_rub_exclues = array_diff(
-  			$final_liste_rub_exclues,
-  			array_intersect($final_liste_rub_exclues, $liste_rub_inclues[$id_auteur][$publique])
-  		);
+	if (isset($GLOBALS['visiteur_session']['id_auteur'])) 
+		$final_liste_rub_exclues = array_diff(
+			$final_liste_rub_exclues,
+			array_intersect($final_liste_rub_exclues, $liste_rub_inclues[$id_auteur][$publique])
+		);
 	}
 
 	return $final_liste_rub_exclues;
@@ -365,7 +365,7 @@ function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=
 	
 	// Si c'est pour les rubriques, on redirige pour l'instant directement vers l'ancienne fonction
 	if ($objets == 'rubriques') {
-		return accesrestreint_liste_rubriques_exclues($publique, $id_auteur, ($publique == 'tout' ? true : false));
+		return accesrestreint_liste_rubriques_exclues($publique, $id_auteur, ($publique === 'tout' ? true : false));
 	}
 	
 	// Si pas d'auteur, on prend le visiteur en cours si connecté
@@ -455,6 +455,5 @@ function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=
 			array_intersect($final_liste_objets_exclus, $liste_objets_inclus[$objets][$id_auteur][$publique])
 		);
 	}
-
 	return $final_liste_objets_exclus;
 }
