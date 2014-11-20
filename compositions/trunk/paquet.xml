@@ -1,9 +1,9 @@
 <paquet
 	prefix="compositions"
 	categorie="outil"
-	version="3.3.7"
-	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	version="3.3.8"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/composition-32.png"
 	schema="0.5.0"
 	documentation="http://contrib.spip.net/?article3777"
