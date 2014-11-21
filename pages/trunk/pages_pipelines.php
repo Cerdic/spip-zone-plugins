@@ -129,7 +129,6 @@ function pages_formulaire_charger($flux){
  * 		Le contexte du pipeline modifié
  */
 function pages_formulaire_verifier($flux){
-	spip_log($flux,'test.'._LOG_ERREUR);
 	// Si on est dans l'édition d'un article/page ou dans le formulaire d'édition d'un identifiant page
 	if ( 
 		is_array($flux)
