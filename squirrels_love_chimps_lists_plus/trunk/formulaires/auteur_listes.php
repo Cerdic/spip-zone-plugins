@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 
- function formulaires_auteur_listes_charger_dist($id_auteur){
+function formulaires_auteur_listes_charger_dist($id_auteur){
 
 	# API mailchimp
 	include_spip('inc/1.3/MCAPI.class');	 
@@ -131,7 +131,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 	 $liste=sql_select('id_liste','spip_auteurs_listes','statut="valide" AND id_auteur='.$id_auteur);
 	 
 
-	$format=sql_getfetsel('format','spip_auteurs','id_auteur='.$id_auteur);
 	
 	$listes_abos=array(); 
 	while($data=sql_fetch($liste)){

@@ -61,7 +61,7 @@ function inc_syncroniser_listes_dist($api='',$id_liste_spip,$id_liste_mailchimp,
 	if($identifiant_joints)$where=' AND '.$identifiant_joints;
 		
 
-	$champs=implode(',',$champs).',spip_auteurs_listes.maj,spip_auteurs_listes.date_syncro,spip_auteurs_listes.statut,spip_auteurs.id_auteur,spip_auteurs.id_mailchimp';	
+	$champs=concat(implode(',',$champs),',spip_auteurs_listes.maj,spip_auteurs_listes.date_syncro,spip_auteurs_listes.statut,spip_auteurs.id_auteur,spip_auteurs.id_mailchimp');	
 	
 	// syncroniser tout, n'importe la date de la dernière mise à jour
 	if(!$forcer)$since='0000-00-00 00:00:00';
