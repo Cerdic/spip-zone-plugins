@@ -22,7 +22,7 @@ function formulaires_editer_declinaison_identifier_dist($id_declinaison='new', $
  */
 function formulaires_editer_declinaison_charger_dist($id_declinaison='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('declinaison',$id_declinaison,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-    $valeurs['_hidden']='<input type="hidden" value="publie" name="statut"/>';
+	$valeurs['_hidden']='<input type="hidden" value="publie" name="statut"/>';
 	return $valeurs;
 }
 

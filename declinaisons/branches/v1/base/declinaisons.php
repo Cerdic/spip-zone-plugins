@@ -14,19 +14,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function declinaisons_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['declinaisons'] = 'declinaisons';
-
 	return $interfaces;
 }
 
 
 function declinaisons_declarer_tables_principales($tables_principales){
 
-        $tables_principales['spip_prix_objets']['field']['id_declinaison']= "bigint(21) NOT NULL";
-
-        return $tables_principales;
-        
-        
-        
+	$tables_principales['spip_prix_objets']['field']['id_declinaison']= "bigint(21) NOT NULL";
+	return $tables_principales;
 }
 
 /**
@@ -78,7 +73,5 @@ function declinaisons_declarer_tables_objets_sql($tables) {
 
 	return $tables;
 }
-
-
 
 ?>
