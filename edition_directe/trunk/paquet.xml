@@ -1,9 +1,9 @@
 <paquet
 	   prefix="edition_directe"
 	   categorie="edition"
-	   version="3.2.13"
+	   version="3.2.14"
 	   etat="test"
-	   compatibilite="[3.0.0;3.0.*]"
+	   compatibilite="[3.0.17;3.1.*]"
 	   logo="img/logo_aed_edit_128.png"
 	   documentation="http://contrib.spip.net/Edition-directe-3"
 	   >	
