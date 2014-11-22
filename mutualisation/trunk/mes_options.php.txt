@@ -50,7 +50,7 @@
 	 */
 	define ('_INSTALL_PREFIX_DB','mu_');
 	define ('_INSTALL_SITE_PREF', prefixe_mutualisation($site));
-	define ('_INSTALL_NAME_DB', _INSTALL_DB_PREFIX. _INSTALL_SITE_PREF);
+	define ('_INSTALL_NAME_DB', _INSTALL_PREFIX_DB. _INSTALL_SITE_PREF);
 
 	define ('_INSTALL_SERVER_DB', 'mysql'); 
 	define ('_INSTALL_HOST_DB', 'localhost'); 
