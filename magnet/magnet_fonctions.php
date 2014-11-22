@@ -142,22 +142,19 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 
 	if (!$done){
 		$done = true;
-		$img_on = _DIR_PLUGIN_MAGNET . "magnet-gray-32.png";
-		$img_set = _DIR_PLUGIN_MAGNET . "magnet-32.png";
-		$img_off = _DIR_PLUGIN_MAGNET . "magnet-off-gray-32.png";
-		$img_remove = _DIR_PLUGIN_MAGNET . "magnet-off-32.png";
+		$img_on = _DIR_PLUGIN_MAGNET . "spt-magnets.png";
 		$styles = <<<css
 <style>
 .bouton_action_post.spip-admin-boutons,.bouton_action_post.spip-admin-boutons div {display:inline;}
 .spip-admin-boutons button {border: none;background: none;padding: 0;color:inherit;}
 .admin-magnet button {min-height:32px;position: relative;}
 .admin-magnet.magnet button i {display:inline-block;width:32px;}
-.admin-magnet.magnet button i:after {content:"";;display:block;position:absolute;left:0;top:50%;margin-top:-16px;width:32px;height:32px;background:url($img_on) no-repeat left center;}
+.admin-magnet.magnet button i:after {content:"";;display:block;position:absolute;left:0;top:50%;margin-top:-16px;width:32px;height:32px;background:url($img_on) no-repeat left -64px;}
 .admin-magnet.magnet-up,.spip-admin-boutons.magnet-down {padding-left: 0;padding-right: 0;}
 .admin-magnet.magnet.magnetized button {}
-.admin-magnet.magnet.magnetized:hover button i:after {background-image:url($img_remove);}
-.admin-magnet.magnet.demagnetized button i:after {background-image:url($img_off);}
-.admin-magnet.magnet.demagnetized:hover button i:after {background-image:url($img_set);}
+.admin-magnet.magnet.magnetized:hover button i:after {background-position:left -32px;}
+.admin-magnet.magnet.demagnetized button i:after {background-position:left -96px;}
+.admin-magnet.magnet.demagnetized:hover button i:after {background-position:left 0;}
 .admin-magnet.magnet span {visibility: hidden;}
 .admin-magnet.magnet:hover span {visibility: visible;}
 .spip-admin.magnets {text-align:right;}
