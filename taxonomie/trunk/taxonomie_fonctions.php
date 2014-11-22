@@ -205,4 +205,9 @@ function taxonomie_informer_sources($id_taxon, $sources_specifiques=null) {
 	return $sources;
 }
 
+function taxonomie_informer($recherche) {
+	include_spip('services/wikipedia/wikipedia_api');
+	return wikipedia_get($recherche);
+}
+
 ?>
