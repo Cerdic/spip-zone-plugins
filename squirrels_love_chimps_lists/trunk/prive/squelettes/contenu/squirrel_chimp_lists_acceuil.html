@@ -1,11 +1,7 @@
 [(#REM)Récuperation des listes de mailchimp]
 
-#SET{listes_choisies,#CONFIG{squirrel_chimp/mailinglists}}
-
+#SET{listes_choisies,#CONFIG{squirrel_chimp/mailinglists}|array_flip}
 #SET{filters,#GET{listes_choisies}|array_filtre_lists}
-
-
-
 #SET{listes,#CONFIG{squirrel_chimp/apiKey}|recuperer_listes{#GET{filters}}}
 
 [(#GET{listes}|table_valeur{error}|?{

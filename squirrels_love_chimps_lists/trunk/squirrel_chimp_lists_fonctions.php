@@ -9,7 +9,7 @@ function array_filtre_lists($mailinglists){
 
 	if(is_array($mailinglists)){
 		if(count($mailinglists)>1)$lists=$mailinglists;
-        else {$lists=implode(',',$mailinglists); echo 1;}
+        else {$lists=implode(',',$mailinglists); }
 	}
 	else $lists=explode(',',$mailinglists);
 	return array('list_id'=>$lists);
@@ -159,8 +159,8 @@ function donnees_sync($id_liste_spip='',$table='',$identifiant='',$where_add='')
 			}
 		}
 			
-	if(!$champs)$champs='*';		
-	else $champs['email']='spip_auteurs.email';	
+	if(!$champs)$champs[]='spip_auteurs.email';		
+	//else $champs[]='spip_auteurs.email';	
 	
 	$identifiant_joints=implode(' AND ',$where_secondaire);
 	if($identifiant)$identifiant_principal=$table_principale.'.'.$identifiant_defaut.'='.$identifiant;
