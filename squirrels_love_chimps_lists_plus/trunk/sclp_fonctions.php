@@ -87,9 +87,9 @@ function inscription_batch_spip($id_liste_spip,$abonnements){
 		else{
 
 			// l'auteur existe
-			if($id_auteur){
+			/*if($id_auteur){
 
-				//On actualise si il a déjà été insscrit à la mailinglist
+				//On actualise si il a déjà été inscrit à la mailinglist
 				$test=sql_getfetsel('maj','spip_auteurs_listes','id_liste='.$id_liste_spip.' AND id_auteur='.$id_auteur);
 				spip_log($test, 'sclp');
 				$val=array('statut'=>'valide','maj'=>$donnees['timestamp'],'date_syncro'=>$donnees['timestamp']);
@@ -105,7 +105,7 @@ function inscription_batch_spip($id_liste_spip,$abonnements){
 					sql_insertq('spip_auteurs_listes',$val);
 					}
 				}
-			else{
+			else{*/
 
 				// On cherche les infos du membre mailchimp
 				$member_info=membres_liste_info_mc($api,$id_liste_mc,$donnees['email']);
@@ -148,7 +148,7 @@ function inscription_batch_spip($id_liste_spip,$abonnements){
 				sql_insertq('spip_auteurs_listes',$valeurs);
 				$id_auteur='';	
 
-				}
+				//}
 			}
 		}
 	return;

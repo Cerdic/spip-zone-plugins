@@ -2,7 +2,7 @@
 	<nom>Squirrels Love Chimps Lists Plus</nom>
 	<auteur>[Spade->http://blog.spade.be/] et [Web Simple->http://websimple.be]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<version_base>0.2.14</version_base>	
 	<licence>MIT</licence>
 	<etat>test</etat>
@@ -14,7 +14,7 @@
 	</description>
 	<prefix>sclp</prefix>
 	<icon>images/logo_slc_lists.png</icon>
-	<necessite id="SPIP" version="[2.0.14;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.14;3.1.99]" />
 	<necessite id="squirrel_chimp" version="[2.0.0;]" />
 	<necessite id="squirrel_chimp_lists" version="[2.0.0;]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
