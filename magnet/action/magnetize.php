@@ -9,13 +9,18 @@ function action_magnetize_dist(){
 	$securiser_action = charger_fonction("securiser_action","inc");
 	$arg = $securiser_action();
 
-	list($objet, $id_objet, $action) = explode("-",$arg);
+	$arg = explode("-",$arg);
+	$pile = "";
+	if (count($arg)==4){
+		$pile =array_pop($arg);
+	}
+	list($objet, $id_objet, $action) = $arg;
 
 	if (in_array($action,array('on','off'))){
-		magnet_set_status($objet, $id_objet, $action=="on"?true:false);
+		magnet_set_status($objet, $id_objet, $action=="on"?true:false, $pile);
 	}
 	if (in_array($action,array('up','down'))){
-		magnet_set_order($objet, $id_objet, $action=="up"?-1:+1);
+		magnet_set_order($objet, $id_objet, $action=="up"?-1:+1, $pile);
 	}
 
 	include_spip("inc/invalideur");
@@ -27,9 +32,10 @@ function action_magnetize_dist(){
  * @param string $objet
  * @param int $id_objet
  * @param int $offset
+ * @param string $pile
  */
-function magnet_set_order($objet, $id_objet, $offset){
-	$meta_magnet = "magnet_" . table_objet($objet);
+function magnet_set_order($objet, $id_objet, $offset, $pile=''){
+	$meta_magnet = "magnet_" .($pile?$pile."_":""). table_objet($objet);
 	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'0');
 	$magnets = explode(',',$magnets);
 	if (!in_array($id_objet,$magnets))
@@ -55,9 +61,10 @@ function magnet_set_order($objet, $id_objet, $offset){
  * @param string $objet
  * @param int $id_objet
  * @param bool $status
+ * @param string $pile
  */
-function magnet_set_status($objet, $id_objet, $status){
-	$meta_magnet = "magnet_" . table_objet($objet);
+function magnet_set_status($objet, $id_objet, $status, $pile=''){
+	$meta_magnet = "magnet_" .($pile?$pile."_":""). table_objet($objet);
 	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'0');
 	$magnets = explode(',',$magnets);
 
