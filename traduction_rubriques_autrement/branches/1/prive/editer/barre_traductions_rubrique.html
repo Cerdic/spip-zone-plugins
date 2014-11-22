@@ -3,8 +3,6 @@
 	#SET{langues_dispos,#CONFIG{taa/utiliser_langues}},
 	#SET{langues_dispos,#CONFIG{langues_multilingue}|explode{','}}
 	})]
-
-
 <BOUCLE_rub(RUBRIQUES){id_rubrique}{tout}>
 	#SET{lang,#LANG}
 	#SET{langues_traduites,#ARRAY}
@@ -20,9 +18,8 @@
 	
 	<B_ld>
 		<div class="onglets_traduction rubriques barre_onglet">	
-		<ul  class="clearfix">
-		<BOUCLE_ld(POUR){tableau #GET{langues_dispos}}>
-		
+		<ul>
+		<BOUCLE_ld(DATA){source tableau, #GET{langues_dispos}}>		
 		[(#GET{langues_traduites}|table_valeur{#VALEUR}|=={#GET{id_trad}}|oui)#SET{ref_#VALEUR,oui}]
 			[(#VALEUR|array_key_exists{#GET{langues_traduites}}|?{
 				[(#VALEUR|=={#GET{lang}}|?{
@@ -39,21 +36,17 @@
 						#SET{parent_trad,#GET{donnees_trad}|table_valeur{0}}
 						#SET{trad,#GET{donnees_trad}|table_valeur{1}}	
 						[(#GET{donnees_trad}|table_valeur{2}|oui)#SET{alert,class="avis_source"}]				
-						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<li class="non_traduit onglet"><a[ (#GET{alert})]  href="[(#URL_ECRIRE{rubrique_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{trad}}|parametre_url{trad_new,#GET{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></li>]
+						[(#AUTORISER{creerrubriquedans,rubrique,#GET{parent_trad}})<li class="non_traduit box_onglet"><a[ (#GET{alert})]  href="[(#URL_ECRIRE{rubrique_edit}|parametre_url{new,oui}|parametre_url{id_parent,#GET{parent_trad}}|parametre_url{lang_dest,#VALEUR}|parametre_url{lier_trad,#GET{trad}}|parametre_url{trad_new,#GET{trad_new}}|parametre_url{retour,nav})]">[(#VALEUR|traduire_nom_langue)]</a></li>]
 						})]	
-				})]		
-
+				})]
 		</BOUCLE_ld>
-		[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
-			[(#ENV{voir}|non)<li class="bouton_options"><a  class="ajax" href="[(#SELF|parametre_url{voir,options})]" title="<:taa:options:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a></li>]
-			[(#ENV{voir}|oui)<li class="bouton_options"><a class="ajax" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a></li>]
-			]
 		</ul>
-			
+		[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE})
+			[(#ENV{voir}|non)<a  class="ajax bouton_options" href="[(#SELF|parametre_url{voir,options})]" title="<:taa:options:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
+			[(#ENV{voir}|oui)<a class="ajax bouton_options" href="[(#SELF|parametre_url{voir,''})]" title="<:taa:fermer:>"><img src="#CHEMIN{img_pack/Translation-icon_32.png}"/></a>]
+			]			
 		</div>	
 	</B_ld>
-
-	
 [(#SET{icone_delier,		
 	[(#BOUTON_ACTION{
 		[(#CHEMIN{images/traductions-delete-24.gif}
@@ -61,8 +54,6 @@
 			|concat{' ',<:tra:trad_delier_rubrique:>})],
 		[(#URL_ACTION_AUTEUR{dereferencer_traduction_rubrique,rubrique/#ID_RUBRIQUE,#SELF})],ajax})]
 })]			
-
-
 [(#ENV{voir}|oui) 
 <div class="changer [(#ENV{voir}|?{cadre-e,defaut})]">
 [(#GET{trads}|>{1}
