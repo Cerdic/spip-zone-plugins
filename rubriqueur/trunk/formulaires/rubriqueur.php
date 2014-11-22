@@ -19,7 +19,8 @@ function formulaires_rubriqueur_verifier_dist() {
 	if( !_request('rubriques') ){
 		$retour['rubriques'] = _T('champ_obligatoire');
 	}
-	$rubrique_racine = array_pop(picker_selected(_request('rubrique_racine'), 'rubrique'));
+	$rubrique_racine = picker_selected(_request('rubrique_racine'), 'rubrique');
+	$rubrique_racine = array_pop($rubrique_racine);
 	if( !autoriser('creerrubriquedans','rubrique',$rubrique_racine)){
 		$retour['message_erreur'] = _T('rubriqueur:pas_autorise');
 	}
@@ -41,7 +42,8 @@ function formulaires_rubriqueur_verifier_dist() {
 }
 
 function formulaires_rubriqueur_traiter_dist() {
-	$rubrique_racine = array_pop(picker_selected(_request('rubrique_racine'), 'rubrique'));
+	$rubrique_racine = picker_selected(_request('rubrique_racine'), 'rubrique');
+	$rubrique_racine = array_pop($rubrique_racine);
 	$rubriques       = rubriqueur_parse_texte(_request('rubriques'));
 	include_spip('inc/rubriques');
 	foreach( $rubriques as $rubrique ) {
