@@ -120,7 +120,6 @@ function reservation_evenement_formulaire_charger($flux){
 
 function reservation_evenement_formulaire_traiter($flux){
     $form = $flux['args']['form'];
-	spip_log($flux,'teste');
 	$forms=array('editer_article','editer_evenement');
     if (in_array($form,$forms)){
 		list($edit,$objet)=explode('_',$form);
