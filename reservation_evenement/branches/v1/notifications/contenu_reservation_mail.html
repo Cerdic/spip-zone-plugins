@@ -49,8 +49,11 @@
 	<BOUCLE_detail(RESERVATIONS_DETAILS evenements){id_reservations_detail}>
 	[(#ENV{qui}|=={client}|oui)
 		<p><:reservation:bonjour:> #GET{nom_client}</p>
-		]
 		<p><:reservation:message_evenement_cloture{titre=#TITRE}:></p>
+		]
+	[(#ENV{qui}|=={vendeur}|oui)
+		<p><:reservation:message_evenement_cloture_vendeur{titre=#TITRE,client=#GET{nom_client},email=#GET{email}}:></p>
+	]
 	</BOUCLE_detail>
 <//B_test_statut>
 

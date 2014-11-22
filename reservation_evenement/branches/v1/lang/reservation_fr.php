@@ -71,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'merci_de_votre_reservation' => 'Nous avons bien enregistré votre réservation et nous vous remercions de votre confiance.',
 	'message_erreur' => 'Votre saisie contient des erreurs !',
 	'message_evenement_cloture' => 'L\'évènement @titre@ vient de se terminer. <br />Nous aimerions vous remercier pour votre participation.',	
+	'message_evenement_cloture_vendeur' => 'L\'évènement @titre@ vient de se terminer. <br />Le système vient d\'envoyer un message de cloture à @client@ - @email@.',		
 	'montant' => 'Montant',
 
 	// N
