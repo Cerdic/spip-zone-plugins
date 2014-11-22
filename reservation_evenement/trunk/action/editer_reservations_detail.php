@@ -248,7 +248,8 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 					$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
 		
 				// Envoyer au vendeur et au client
-				$notifications('reservation_vendeur', $id_reservation, $options);
+				if ($s!='cloture') //Pour le moment pas d'envoi à l'administrateur, prévoir un seul mail pour tout l'événement.
+					$notifications('reservation_vendeur', $id_reservation, $options);
 				if($config['client']){
 					//$row['email']=trim($row['email']);
 						if(intval($id_auteur) AND $id_auteur>0)$options['email']=sql_getfetsel('email','spip_auteurs','id_auteur='.$id_auteur);
