@@ -60,7 +60,7 @@ function compositions_styliser_auto(){
 	}
 	elseif (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
-		$config_styliser = isset($config['styliser_auto']) and ($config['styliser_auto'] != 'non');
+		$config_styliser = (!isset($config['styliser_auto']) OR ($config['styliser_auto'] != 'non'));
 	}
 	return $config_styliser?' ':'';
 }
