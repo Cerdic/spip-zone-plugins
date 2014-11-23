@@ -31,7 +31,7 @@ if (!defined('_TAXONOMIE_WIKIPEDIA_LANGUE_DEFAUT'))
  * @param $nom_commun
  * @return array
  */
-function wikipedia_get($recherche) {
+function wikipedia_get($recherche, $section='') {
 	global $spip_lang;
 	$information = '';
 
@@ -45,11 +45,13 @@ function wikipedia_get($recherche) {
 	include_spip('inc/taxonomer');
 	$data = url2json_data($url);
 
-	// Récupération du TSN du taxon recherché
+	// Récupération de la section demandée. Si vide on renvoie tout le texte
+
 
 	return $information;
 }
-//http://fr.wikipedia.org/w/api.php&rvprop=content&continue=&format=json&action=query&titles=Arthropoda
+
+
 /**
  * @param $format
  * @param $area
@@ -62,9 +64,9 @@ function wikipedia_api2url($format, $action, $langue, $recherche) {
 
 	// Construire l'URL de l'api sollicitée
 	$url = str_replace('%langue%', $langue, _TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE)
-		. '&rvprop=content&continue='
-		. '&format=' . $format
 		. '&action=' . $action
+		. '&prop=revisions&rvprop=content&continue=&redirects=1'
+		. '&format=' . $format
 		. '&titles=' . rawurlencode(ucfirst($recherche));
 
 	return $url;

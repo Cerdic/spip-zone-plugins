@@ -22,7 +22,7 @@
 				[<a[ href="(#VALEUR|table_valeur{id_taxon}|generer_url_entite{taxon})"]>
 					(#VALEUR|table_valeur{nom_scientifique}|ucfirst)
 				</a>]
-				[ \((#VALEUR|table_valeur{nom_commun}|extraire_multi{#LANG, #ARRAY{force_langue, #EVAL{true}}}|ucfirst)\)]
+				[ \((#VALEUR|table_valeur{nom_commun}|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}}|ucfirst)\)]
 			</span>
 		</li>]
 </BOUCLE_ascendance>
