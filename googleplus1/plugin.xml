@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Google +1</nom>
 	<auteur>Phil</auteur>
-	<version>0.4.1</version>
+	<version>0.4.2</version>
 	<etat>stable</etat>
 	<slogan>
 		<multi>
@@ -22,6 +22,6 @@
 		<nom>insert_head</nom>
 		<inclure>googleplus1_insert_head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.10;3.1.99]" />
 	<categorie>communication</categorie>
 </plugin>
