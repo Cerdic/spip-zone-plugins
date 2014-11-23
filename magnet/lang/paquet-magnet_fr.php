@@ -6,8 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'paquet_description' => '',
-	'paquet_slogan' => 'Aimanter les articles pour les faire remonter en Home',
+	'magnet_description' => '',
+	'magnet_slogan' => 'Aimanter les articles pour les faire remonter en Home',
 );
 
 ?>
