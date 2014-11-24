@@ -345,7 +345,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'\']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'\']").val() : "")', $condition);
 									break;
 								case 'checkbox':
-									preg_match_all('#@(.+)@ == "(.*)"$#U', $condition, $matches2);
+									preg_match_all('#@(.+)@\s*==\s*"(.*)"$#U', $condition, $matches2);
 									foreach ($matches2[2] as $value) {
 										$condition = preg_replace('#@'.preg_quote($nom).'@#U', '($(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").is(":checked") ? $(form).find(".checkbox[name=\''.$nom.'[]\'][value='.$value.']").val() : "")', $condition);
 										}
