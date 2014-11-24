@@ -1,23 +1,6 @@
 #CACHE{0}
 
-<h1 class="grostitre"><:courtcircuit:configurer_courtcircuit:></h1>
+<h1 class="grostitre">[(#CHEMIN{icon/courtcircuit-24.png}|balise_img)] <:courtcircuit:configurer_courtcircuit:></h1>
 <div class="ajax">
 	#FORMULAIRE_CONFIGURER_COURTCIRCUIT
 </div>
-
-<!--#navigation-->
-<div class='cadre cadre-info verdana1'>
-<div class="cadre-padding">
-<div class="infos">
-	[<p>(#PLUGIN{courtcircuit, icon}|find_in_path|image_reduire{48})</p>]
-	[<p><strong>(#PLUGIN{courtcircuit, nom}|typo)</strong></p>]
-	[<p>(#PLUGIN{courtcircuit, description}|typo)</p>]
-	[<p><a href="(#PLUGIN{courtcircuit, lien})"><:courtcircuit:aide_en_ligne:>
-	<img src="#CHEMIN{images/aide-12.png}" alt="<:courtcircuit:aide_en_ligne:>" /></a></p>]
-	<ul class="liste-items">
-		[<li><:version:>&nbsp;(#PLUGIN{courtcircuit, version})[&nbsp;-&nbsp;(#ENV{infos}|table_valeur{etat})]</li>]
-	</ul>
-</div>
-</div>
-</div>
-<!--/#navigation-->
