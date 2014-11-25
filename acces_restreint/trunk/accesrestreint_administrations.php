@@ -32,10 +32,10 @@ function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_tables',array('spip_zones')), // publique, privee
 	);
 	$maj['0.3.0'] = array(
-		array('sql_alter',"TABLE zones_auteurs DROP INDEX id_zone"),
-		array('sql_alter',"TABLE zones_auteurs ADD PRIMARY KEY ( id_zone , id_auteur )"),
-		array('sql_alter',"TABLE zones_rubriques DROP INDEX id_zone"),
-		array('sql_alter',"TABLE zones_rubriques ADD PRIMARY KEY ( id_zone , id_rubrique )"),
+		array('sql_alter',"TABLE spip_zones_auteurs DROP INDEX id_zone"),
+		array('sql_alter',"TABLE spip_zones_auteurs ADD PRIMARY KEY ( id_zone , id_auteur )"),
+		array('sql_alter',"TABLE spip_zones_rubriques DROP INDEX id_zone"),
+		array('sql_alter',"TABLE spip_zones_rubriques ADD PRIMARY KEY ( id_zone , id_rubrique )"),
 	);
 	$maj['0.3.1'] = array(
 		array('sql_alter',"TABLE spip_zones ALTER titre SET DEFAULT ''"),
