@@ -114,13 +114,7 @@ function saisies_lister_par_type($contenu) {
 					$saisies[ $ligne['saisie'] ][ $ligne['options']['nom'] ] = $ligne;
 				}
 				if (is_array($ligne['saisies'])){
-					$saisies_filles = saisies_lister_par_type($ligne['saisies']);
-					foreach( $saisies_filles as $key => $value ) {
-						if (!isset($saisies[$key]) ) {
-							$saisies[$key] = array();
-						}
-						$saisies[$key] = array_merge($saisies[$key], $value);
-					}
+					$saisies = array_merge_recursive($saisies, saisies_lister_par_type($ligne['saisies']));
 				}
 			}
 		}
