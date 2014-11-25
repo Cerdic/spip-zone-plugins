@@ -219,10 +219,10 @@ function inscription3_i3_definition_champs($flux){
 	);
 
 	$flux['commentaire']['saisie'] = 'textarea';
-	$flux['commentaire']['options'] = array_merge((is_array($flux['commentaire']['options']) ? $flux['commentaire']['options'] : array()),array('rows'=>5,'class'=>'adresse'));
+	$flux['commentaire']['options'] = array_merge(((isset($flux['commentaire']['options']) and is_array($flux['commentaire']['options'])) ? $flux['commentaire']['options'] : array()),array('rows'=>5,'class'=>'adresse'));
 
 	$flux['adresse']['saisie'] = 'textarea';
-	$flux['adresse']['options'] = array_merge((is_array($flux['adresse']['options']) ? $flux['adresse']['options'] : array()),array('rows'=>5,'class'=>'adresse'));
+	$flux['adresse']['options'] = array_merge(((isset($flux['adresse']['options']) and is_array($flux['adresse']['options'])) ? $flux['adresse']['options'] : array()),array('rows'=>5,'class'=>'adresse'));
 
 	$flux['telephone']['verifier']['type'] = 'telephone';
 	$flux['telephone']['options'] = array('class'=>'nomulti');
