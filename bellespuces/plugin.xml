@@ -1,11 +1,9 @@
 <plugin>
 	<nom>Belles puces</nom>
 	<prefix>bellespuces</prefix>
-	<icon>bellespuces.png</icon>
-	
-	<version>0.1.1</version>
-	<etat>stable</etat>
-	
+	<icon>bellespuces.png</icon>	
+	<version>0.1.2</version>
+	<etat>stable</etat> 	
 	<auteur>[J&#233;r&#244;me Combaz->http://conseil-recherche-innovation.net/le-cri/jerome-combaz]</auteur>
 	<licence>GNU/GPL</licence>
 	
@@ -18,9 +16,9 @@
 	<pipeline>
 		<nom>pre_typo</nom>
 		<action>pre_typo</action>
-	<inclure>bellespuces.php</inclure>
+	 <inclure>bellespuces.php</inclure>
 	</pipeline>
 	
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 </plugin>
