@@ -38,8 +38,8 @@ function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_alter',"TABLE zones_rubriques ADD PRIMARY KEY ( id_zone , id_rubrique )"),
 	);
 	$maj['0.3.1'] = array(
-		array('sql_alter',"TABLE spip_zone ALTER titre SET DEFAULT ''"),
-		array('sql_alter',"TABLE spip_zone ALTER descriptif SET DEFAULT ''"),
+		array('sql_alter',"TABLE spip_zones ALTER titre SET DEFAULT ''"),
+		array('sql_alter',"TABLE spip_zones ALTER descriptif SET DEFAULT ''"),
 	);
 
 	include_spip('maj/svn10000');
@@ -51,8 +51,8 @@ function accesrestreint_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_drop_table',"spip_zones_rubriques"),
 	);
 	$maj['0.4.1'] = array(
-		array('sql_alter',"TABLE spip_zone CHANGE publique publique char(3) DEFAULT 'oui' NOT NULL"),
-		array('sql_alter',"TABLE spip_zone CHANGE privee privee char(3) DEFAULT 'oui' NOT NULL"),
+		array('sql_alter',"TABLE spip_zones CHANGE publique publique char(3) DEFAULT 'oui' NOT NULL"),
+		array('sql_alter',"TABLE spip_zones CHANGE privee privee char(3) DEFAULT 'oui' NOT NULL"),
 	);
 	$maj['0.4.2'] = array(
 		array('accesrestreint_upgrade_protection_documents'),
