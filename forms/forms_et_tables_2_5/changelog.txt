@@ -1,4 +1,10 @@
-﻿2014-11-18
+﻿2014-11-26
+- Correction du ticket Warning : Illegal string offset ’id_auteur’ in forms_et_tables/balise/forms.php on line 162 
+
+2014-11-24
+- Correction bug Parse error : syntax error, unexpected ’<<’ (T_SL), expecting ’)’ in /plugins/forms_et_tables/balise/forms.php on line 163
+
+2014-11-18
 - Correction du bug javascript sur le chargement de jtip.js en Front.
 - Préfixage de la fonction MySel pour éviter les effets de bord.
 

@@ -150,7 +150,7 @@ function balise_FORMS_dyn($id_form = 0, $id_article = 0, $id_donnee = 0, $id_don
 	include_spip('inc/forms_lier_donnees');
 	if(!isset($message_complementaire))$message_complementaire="";
 	if(!isset($url_validation))$url_validation="";
-	return array('formulaires/forms', 0, 
+	return @array('formulaires/forms', 0, 
 		array(
 			'erreur_message'=>isset($erreur['@'])?$erreur['@']:'',
 			'erreur'=>serialize($erreur),
