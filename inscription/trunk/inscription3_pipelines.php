@@ -323,10 +323,14 @@ function inscription3_formulaire_verifier($flux){
 		$erreurs = $flux['args']['erreurs'];
 		if(!$erreurs OR (count($erreurs) == 0)){
 			$email = _request('oubli');
-			$statut = sql_getfetsel('statut','spip_auteurs','email='.sql_quote($email));
-			if($statut == '8aconfirmer'){
-				$flux['data']['oubli'] = _T('inscription3:erreur_compte_attente_mail');
-				$flux['data']['message_erreur'] = _T('inscription3:erreur_compte_attente');
+			if(!empty($email)) {
+				$statut = sql_getfetsel('statut','spip_auteurs','email='.sql_quote($email));
+				if($statut == '8aconfirmer'){
+					$flux['data']['oubli'] = _T('inscription3:erreur_compte_attente_mail');
+					$flux['data']['message_erreur'] = _T('inscription3:erreur_compte_attente');
+				}
+			}else{
+				$erreurs['email'] = "Champ email vide";
 			}
 		}
 	}
