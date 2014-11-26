@@ -9,6 +9,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_reglement' => "Ajouter un règlement :",
+
 	// B
 	'bouton_factures' => 'Factures & Devis',
 	'bouton_configurer_factures' => 'Configurer Factures & Devis',
