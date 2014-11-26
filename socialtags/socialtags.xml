@@ -89,6 +89,13 @@
 </item>
 
 <item>
+<title>Diaspora*</title>
+<author>diaspora</author>
+<link>http://sharetodiaspora.github.io/?title=%t&amp;url=%u</link>
+<description>Partage vers un pod Diaspora*.</description>
+</item>
+
+<item>
 <title>Digg</title>
 <author>digg</author>
 <link>http://digg.com/submit?phase=2&amp;url=%u&amp;title=%t</link>
