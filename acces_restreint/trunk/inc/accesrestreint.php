@@ -409,6 +409,19 @@ function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=
 
 		// On liste maintenant tous les objets d'un type qui sont dans les zones *non-autorisées*
 		$liste_objets_exclus[$objets][$id_auteur][$publique] = accesrestreint_liste_contenu_zone_objets($objets, $where);
+		
+		// On passe la liste des exclus dans un pipeline, qu'on garde aussi dans le cache statique
+		$liste_objets_exclus[$objets][$id_auteur][$publique] = pipeline(
+			'accesrestreint_liste_objets_exclus',
+			array(
+				'args' => array(	
+					'table_objet' => $objets,
+					'id_auteur' => $id_auteur,
+					'publique' => $publique,
+				),
+				'data' => $liste_objets_exclus[$objets][$id_auteur][$publique],
+			)
+		);
 	}
 	
 	// On stocke la liste finale qui pourra être modifiée suivant l'option ci-dessous
@@ -455,5 +468,6 @@ function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=
 			array_intersect($final_liste_objets_exclus, $liste_objets_inclus[$objets][$id_auteur][$publique])
 		);
 	}
+	
 	return $final_liste_objets_exclus;
 }
