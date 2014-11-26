@@ -129,9 +129,11 @@
 						label=<:inscription3:label_valider_comptes:>,
 						label_case=<:inscription3:explication_valider_compte:>})]
 
-					#SET{auteurs, #ARRAY}
 					<BOUCLE_choix_auteurs(AUTEURS){statut="0minirezo"}{tout}{par nom}>
-						[(#SET{auteurs, [(#GET{auteurs}|array_merge{[(#ARRAY{#ID_AUTEUR, #NOM})]})]})]
+						[(#SET{
+							auteurs,
+							[(#GET{auteurs}|concat{[(#ID_AUTEUR)|][(#NOM|attribut_html)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui)|]})]
+						})]
 					</BOUCLE_choix_auteurs>
 					[(#SAISIE{selection_multiple,admin_notifications,
 						cacher_option_intro=oui,
