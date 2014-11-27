@@ -141,6 +141,22 @@ $GLOBALS['gis_layers'] = array (
 	'acetate' => array(
 		'nom' => 'Acetate',
 		'layer' => 'L.tileLayer.provider("Acetate.all")'
+	),
+	'cartodb_positron' => array(
+		'nom' => 'CartoDB Positron',
+		'layer' => 'L.tileLayer.provider("CartoDB.Positron")'
+	),
+	'cartodb_positron_base' => array(
+		'nom' => 'CartoDB Positron Base',
+		'layer' => 'L.tileLayer.provider("CartoDB.PositronNoLabels")'
+	),
+	'cartodb_darkmatter' => array(
+		'nom' => 'CartoDB DarkMatter',
+		'layer' => 'L.tileLayer.provider("CartoDB.DarkMatter")'
+	),
+	'cartodb_darkmatter_base' => array(
+		'nom' => 'CartoDB DarkMatter Base',
+		'layer' => 'L.tileLayer.provider("CartoDB.DarkMatterNoLabels")'
 	)
 );
 
