@@ -6,7 +6,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'skeleditor_slogan'=>"Template Editor",
 	'skeleditor_description'=>"SPIP-Templates (Skelette) im Redaktionssystem bearbeiten",
-
 );
 
 
