@@ -100,13 +100,20 @@ function formulaires_participer_evenement_traiter_dist($id_evenement){
         else
             sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'id_auteur'=>$GLOBALS['visiteur_session']['id_auteur'],'reponse'=>$reponse,'date'=>'NOW()'));
     } else {
-        $editable = false;
-        sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'nom'=>$nom,'email'=>$email,'reponse'=>$reponse,'date'=>'NOW()'));
+        if (sql_fetsel('reponse','spip_evenements_participants','id_evenement='.intval($id_evenement).' AND email='.sql_quote($email))) {
+        	$editable = true;
+        	$reponse = 'doublon';
+        } else {
+			$editable = false;
+        	sql_insertq('spip_evenements_participants',array('id_evenement'=>$id_evenement,'nom'=>$nom,'email'=>$email,'reponse'=>$reponse,'date'=>'NOW()'));
+		}
     }
-    if ($reponse=='oui')
+    if ($reponse == 'oui')
         $message = _T('agenda:participation_prise_en_compte');
-    elseif ($reponse=='?')
+    elseif ($reponse == '?')
         $message = _T('agenda:participation_incertaine_prise_en_compte');
+    elseif ($reponse == 'doublon')
+    	$message = _T('erreur_email_deja_existant');
     else
         $message = _T('agenda:absence_prise_en_compte');
 
