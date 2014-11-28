@@ -144,10 +144,9 @@ function inc_prepare_mots_dist($mots, $table='articles', $cond=false, $score, $s
 
 
 function critere_mots_enleve_mot_de_liste($listemots, $id_mot) {
+	if (!is_array($listemots) OR !$listemots)
+		return $listemots;
 	$listemots = array_unique($listemots);
-	while (array_search($id_mot,$listemots)!==false)
-		unset($listemots[array_search($id_mot,$listemots)]);
+	$listemots = array_diff($listemots,array($id_mot));
 	return $listemots;
 }
-
-?>
