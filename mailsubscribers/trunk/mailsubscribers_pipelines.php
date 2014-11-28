@@ -7,6 +7,12 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+function mailsubscribers_taches_generales_cron($taches){
+	// a peu pres tous les jours mais en se decalant un peu
+	$taches['mailsubscribers_synchro_lists'] = 23 * 3600;
+	return $taches;
+}
+
 /**
  * Ajouter un jeton unique sur chaque inscrit (sert aux signatures d'action)
  * @param $flux

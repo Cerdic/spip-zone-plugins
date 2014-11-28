@@ -43,6 +43,30 @@ function mailsubscribers_test_email_obfusque($email){
 }
 
 /**
+ * Compter les inscrits a une liste
+ * @param $liste
+ * @return mixed
+ */
+function mailsubscribers_compte_inscrits($liste){
+	$subscribers = charger_fonction("subscribers","newsletter");
+	return $subscribers(array($liste),array('count'=>true));
+}
+
+/**
+ * Trouver une fonction de synchronisation pour une liste donnee
+ * @param $liste
+ * @return mixed|string
+ */
+function mailsubscribers_trouver_fonction_synchro($liste){
+	$f = mailsubscribers_normaliser_nom_liste($liste);
+	$f = str_replace("::","_",$f);
+	include_spip("public/parametrer"); // fichier mes_fonctions.php
+	if (function_exists($f="mailsubscribers_synchro_list_$f"))
+		return $f;
+	return "";
+}
+
+/**
  * Informer un subscriber : ici juste l'url unsubscribe a calculer
  * @param array $infos
  * @return array mixed
@@ -80,7 +104,10 @@ function mailsubscribers_filtre_liste($liste,$category="newsletter"){
  *   category : filtrer les listes par category (dans ce cas la categorie est enlevee de l'id)
  *   status : filtrer les listes sur le status
  * @return array
- *   listes
+ *   array
+ *     id : identifiant
+ *     titre : titre de la liste
+ *     status : status de la liste
  */
 function mailsubscribers_listes($options = array()){
 	$filtrer_status = $filtrer_category = false;
@@ -221,4 +248,102 @@ function mailsubscribers_supprimer_identifiant_liste($liste) {
 		}
 	}
 	return true;
+}
+
+
+function mailsubscribers_do_synchro_list($liste){
+	if ($f = mailsubscribers_trouver_fonction_synchro($liste)){
+		$abonnes = $f();
+		$n = count($abonnes);
+		spip_log("Synchronise liste $liste avec $n abonnes (fonction $f)","mailsubscribers");
+		mailsubscribers_synchronise_liste($liste,$abonnes);
+	}
+}
+
+
+/**
+ * Retourner la liste des abonnes qu'on veut voir dans la liste newsletter::0minirezo
+ * @return array
+ */
+function mailsubscribers_synchro_list_newsletter_0minirezo(){
+	$auteurs = sql_allfetsel("email,nom","spip_auteurs","statut=".sql_quote("0minirezo"));
+	return $auteurs;
+}
+
+/**
+ * Retourner la liste des abonnes qu'on veut voir dans la liste newsletter::1comite
+ * @return array
+ */
+function mailsubscribers_synchro_list_newsletter_1comite(){
+	$auteurs = sql_allfetsel("email,nom","spip_auteurs","statut=".sql_quote("1comite"));
+	return $auteurs;
+}
+
+/**
+ * Retourner la liste des abonnes qu'on veut voir dans la liste newsletter::6forum
+ * @return array
+ */
+function mailsubscribers_synchro_list_newsletter_6forum(){
+	$auteurs = sql_allfetsel("email,nom","spip_auteurs","statut=".sql_quote("6forum"));
+	return $auteurs;
+}
+
+
+/**
+ * Synchroniser les abonnes d'une liste en base avec un tableau fourni
+ * TODO : permettre de fournir une resource SQL en entree et ne pas manipuler de gros tableau en memoire (robustesse)
+ * @param string $liste
+ *   liste avec laquelle on synchronise les abonnes
+ * @param array $abonnes
+ *   chaque abonne est un tableau avec l'entree 'email' et les entrees optionnelles 'nom' et 'prenom'
+ */
+function mailsubscribers_synchronise_liste($liste,$abonnes){
+	$listes = array($liste);
+
+	// desactiver toutes les notifications pendant cette operation
+	// on ne veut pas envoyer de mail a ceux qu'on ajoute/retire de la liste
+	$GLOBALS['notification_instituermailsubscriber_status'] = false;
+
+	$abonnes_emails = array();
+	while(count($abonnes)){
+		$abonne = array_shift($abonnes);
+		if (isset($abonne['email'])
+		  AND strlen(trim($abonne['email']))){
+			$abonnes_emails[$abonne['email']] = $abonne;
+		}
+	}
+
+	$subscribers = charger_fonction('subscribers','newsletter');
+	$subscribe = charger_fonction('subscribe','newsletter');
+	$unsubscribe = charger_fonction('unsubscribe','newsletter');
+
+	// d'abord on prend la liste de tous les abonnes en base
+	// et on retire ceux qui ne sont plus dans le tableau $abonnes
+	$subs = $subscribers($listes);
+	foreach($subs as $sub){
+		// OK il est toujours dans les abonnes
+		if (isset($abonnes_emails[$sub['email']])){
+			unset($abonnes_emails[$sub['email']]);
+		}
+		// il n'est plus dans les abonnes on l'enleve
+		else {
+			//echo "unsubscribe ".$sub['email']."<br />";
+			$unsubscribe($sub['email'],array('listes'=>$listes));
+		}
+	}
+
+	// si il reste du monde dans $abonnes, c'est ceux qui ne sont pas en base
+	// on les subscribe
+	foreach($abonnes_emails as $email=>$abonne){
+		//echo "subscribe ".$email."<br />";
+		$nom = (isset($abonne['nom'])?$abonne['nom'].' ':'');
+		$nom .= (isset($abonne['prenom'])?$abonne['prenom'].' ':'');
+		$subscribe($email,array(
+			'nom' => trim($nom),
+			'listes' => $listes,
+			'force' => true,
+		));
+	}
+
+	$GLOBALS['notification_instituermailsubscriber_status'] = true;
 }

@@ -32,5 +32,3 @@ function mailsubscriber_url_confirm($email,$jeton,$sep="&amp;"){
 	$url = parametre_url($url,"arg",mailsubscriber_cle_action("confirm",$email,$jeton),$sep);
 	return $url;
 }
-
-?>

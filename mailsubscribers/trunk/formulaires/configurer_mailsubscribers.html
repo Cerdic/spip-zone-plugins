@@ -40,6 +40,9 @@
 					#SET{tableau,#ARRAY{category,newsletter}|mailsubscribers_listes}
 					<BOUCLE_listes(POUR){tableau #GET{tableau}|array_merge{#ARRAY{new1,#LISTE,new2,#LISTE}}}>
 						#SET{index,#COMPTEUR_BOUCLE|moins{1}}
+						<h3 class="legend">#ENV*{lists/#GET{index}/titre,#VALEUR{titre}}</h3>
+						[<p class="explication">(#ENV*{lists/#GET{index}/id}|sinon{'-'}|mailsubscribers_compte_inscrits|singulier_ou_pluriel{mailsubscriber:info_1_mailsubscriber,mailsubscriber:info_nb_mailsubscribers}
+							|concat{'. ',#ENV*{lists/#GET{index}/id}|sinon{'-'}|mailsubscribers_trouver_fonction_synchro|?{<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>}}|ltrim{'.'}|trim)</p>]
 						<ul class="liste-diffusion">
 							#SET{name,id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
 							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -88,7 +91,27 @@
 					</BOUCLE_listes>
 				</fieldset>
 			</li>
-
+			#SET{name,listes_auto_auteurs}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<B_statuts>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:mailsubscriberscfg:legend_listes_automatiques:></legend>
+					<ul>
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]
+							<BOUCLE_statuts(POUR){tableau #ENV{_auteurs_possibles}}>
+							#SET{val,#CLE}
+							<div class="choix">
+								<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name}}|_T{#ARRAY{'statut',#VALEUR}})]</label>
+							</div>
+							</BOUCLE_statuts>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			</B_statuts>
 		</ul>
 
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
@@ -96,9 +119,12 @@
 	</form>
 </div>
 <style type="text/css">
-ul.liste-diffusion {border-bottom: 1px solid #eee;padding-top: 1em !important;padding-bottom: 1em !important;}
+h3.legend {margin-top: 1.5em;margin-bottom: 0}
+.formulaire_spip ul.liste-diffusion {border-bottom: 1px solid #eee;padding-top: 1em !important;padding-bottom: 1em !important;margin-left: 125px}
 ul.liste-diffusion .editer {padding-top: 2px;padding-bottom: 2px;}
 ul.liste-diffusion .editer .choix.left {float: left}
 ul.liste-diffusion .editer .choix.right {float: right}
-ul.liste-diffusion .choix_close { margin-left:3em;}
+ul.liste-diffusion .choix_close { margin-left:1em;}
+ul.liste-diffusion .choix_close label { margin-left:0;}
+ul.liste-diffusion .explication {clear: both}
 </style>

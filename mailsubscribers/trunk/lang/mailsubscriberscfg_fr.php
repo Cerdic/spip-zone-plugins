@@ -21,7 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'label_proposer_signup_optin_1'=> 'Proposer l\'inscription à la Newsletter lors de l\'inscription au site',
 
+	'label_listes_auto_auteurs' => 'Liste des <b>@statut@</b>',
+
 	'legend_listes_diffusion' => 'Listes de diffusion',
+	'legend_listes_automatiques' => 'Listes de diffusion automatiques',
+
+	'info_liste_synchronisee_automatiquement' => 'Cette liste est automatiquement synchronisée.',
 
 	// T
 	'titre_page_configurer_mailsubscriber' => 'Inscriptions à la Newsletter',
