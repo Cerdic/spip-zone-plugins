@@ -413,7 +413,7 @@ function balise_COMPOSITION_dist($p) {
  * @return string
  */
 function compositions_verrouiller($type, $id, $serveur=''){
-	$config = unserialize($GLOBALS['meta']['compositions']);
+	$config = (isset($GLOBALS['meta']['compositions']) ? unserialize($GLOBALS['meta']['compositions']) : array());
 	if (isset($config['tout_verrouiller']) AND $config['tout_verrouiller'] == 'oui')
 		return true;
 

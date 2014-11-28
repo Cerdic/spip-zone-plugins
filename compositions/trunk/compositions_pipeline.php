@@ -95,7 +95,7 @@ function compositions_affiche_milieu($flux){
 	  AND $e['edition']===false){
 		$type = $e['type'];
 		if ($id = $flux['args'][$e['id_table_objet']]) {
-			$config = unserialize($GLOBALS['meta']['compositions']);
+			$config = (isset($GLOBALS['meta']['compositions']) ? unserialize($GLOBALS['meta']['compositions']) : array());
 			$aut = autoriser('styliser',$type,$id);
 			if ((!isset($config['masquer_formulaire']) OR $config['masquer_formulaire'] != 'oui' OR $aut)
 				AND (
