@@ -10,7 +10,7 @@
 	<slogan>Acc&#232;s direct aux articles</slogan>
 	<description>Permet de rediriger certaines rubriques vers un article particulier. Vous pouvez configurer, dans l'espace priv&#233;, les r&eacute;gles de redirection &#224;&nbsp;appliquer.</description>
 	<lien>http://contrib.spip.net/3831</lien>
-	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://contrib.spip.net/Joseph]</auteur>
+	<auteur>[Tetue->http://spip.tetue.net], [Joseph->http://contrib.spip.net/Joseph]</auteur>
 	
 	<fonctions>courtcircuit_fonctions.php</fonctions>
 	<pipeline>

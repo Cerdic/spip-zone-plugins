@@ -11,7 +11,7 @@
 	<nom>Court-circuit</nom>
 	<!-- Acc&#232;s direct aux articles -->
 
-	<auteur lien="http://romy.tetue.net">romy.tetue.net</auteur>
+	<auteur lien="http://spip.tetue.net">Tetue</auteur>
 	<auteur lien="http://contrib.spip.net/Joseph">Joseph</auteur>
 
 	<pipeline nom="styliser" inclure="courtcircuit_pipelines.php" />
