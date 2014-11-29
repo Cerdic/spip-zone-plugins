@@ -10,7 +10,7 @@
 	<slogan>Changez de navigateur pour mieux voir le Web !</slogan>
 	<description>Affichez un gentil message aux internautes surfant avec Internet Explorer afin de les pr&#233;venir qu'ils ne visitent pas le site dans les meilleures conditions.</description>
 	<lien>http://contrib.spip.net/Changez-de-navigateur</lien>
-	<auteur>Fil, [romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
+	<auteur>Fil, [Tetue->http://spip.tetue.net] - 2009</auteur>
 	<licence>GPL</licence>
 	
 	<pipeline>
