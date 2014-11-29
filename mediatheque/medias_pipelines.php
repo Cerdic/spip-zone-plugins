@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Portfolio/Gestion des documents
- * Licence GPL (c) 2006-2008 Cedric Morin, romy.tetue.net
+ * Licence GPL (c) 2006-2008 Cedric Morin, Tetue
  *
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
