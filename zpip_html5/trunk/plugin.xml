@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Zpip-dist HTML5</nom>
 	<slogan><multi>[fr]Zpip-dist HTML 5 pour SPIP 3 + Z-core[en]Zpip-dist HTML 5 for SPIP 3 + Z-core</multi></slogan>
-	<auteur>Loiseau2nuit, davux, Matthieu Marcillaud, C&#233;dric Morin, Romy T&ecirc;tue, Collectif SPIP</auteur>
+	<auteur>Loiseau2nuit, davux, Matthieu Marcillaud, C&#233;dric Morin, Tetue, Collectif SPIP</auteur>
 	<icon>img/z5.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>2.0.2</version>
