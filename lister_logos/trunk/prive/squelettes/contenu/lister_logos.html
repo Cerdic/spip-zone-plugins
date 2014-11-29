@@ -38,7 +38,7 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
 [(#SET{regex,[(#EVAL{_DIR_IMG}|concat{'{',[(#ENV{logo,spip_articles}|id_table_objet|type_du_logo)],'}{on,off}*.*'})]})]
 <B_ls2>
 <div class="galerie[ media-(#ENV{logo,spip_articles})]">
-    <h2>[(#VAL|lister_tables_objets_sql|table_valeur{#ENV{logo,spip_articles}/texte_objets}|_T)]</h2>
+    <h2>[(#VAL|lister_tables_objets_sql|table_valeur{#ENV{logo,spip_articles}/texte_objets}|_T)][<br/><em><small>(#GRAND_TOTAL|singulier_ou_pluriel{lister_logos:info_1_logo,lister_logos:info_nb_logos})</small></em>]</h2>
     [(#ANCRE_PAGINATION)]
     [<div class="pagination">(#PAGINATION{prive})</div>]
     <table>

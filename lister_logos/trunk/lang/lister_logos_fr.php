@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // I
     'info_logos' => 'Logos',
+    'info_1_logo' => 'Un logo',
+    'info_nb_logos' => '@nb@ logos',
 
     // L
     'lister_logos_titre' => 'Lister les logos',
