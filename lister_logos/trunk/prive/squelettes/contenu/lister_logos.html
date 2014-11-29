@@ -1,0 +1,88 @@
+[(#REM)
+    On liste les tables principales qui ne sont pas des objets éditoriaux
+][
+(#SET{exclus,#LISTE{spip_jobs,spip_menus,spip_menus_entrees,spip_types_documents}})]
+
+[(#REM)
+on liste les types de logos des objets principaux de SPIP en prenant en compte les cas spéciaux
+][
+(#SET{tables_principales, [(#VAL|lister_tables_principales|array_keys|array_diff{#GET{exclus}})]})]
+<div class="formulaire_spip formulaire_editer formulaire_editer_logo">
+    <form action="#SELF" role="form">
+    <ul>
+        [(#SELF
+        |parametre_url{logo,''}
+        |form_hidden)]
+        <B_objets>
+        <li class="editer editer_logo">
+            <label for="champ_logo"><:lister_logos:objets_label:></label>
+            <select name="logo" id="champ_logo" class="form-control">
+                <BOUCLE_objets (DATA) {source table, #GET{tables_principales}} {par valeur}>
+                <option value="[(#VALEUR)]"[ (#ENV{logo}|=={#VALEUR|id_table_objet|type_du_logo}|oui)selected="selected"]>[(#VAL|lister_tables_objets_sql|table_valeur{#VALEUR/texte_objets}|_T)]</option></BOUCLE_objets>
+            </select>
+        </li>
+        </B_objets>
+        </ul>
+        <p class="boutons">
+            <button type="submit" class="btn btn-default"><:bouton_valider:></button>
+        </p>
+    </form>
+</div>
+
+
+
+[(#REM)
+Maintenant qu'on a les types de logos de tous les objets éditoriaux de SPIP
+On scanne objet par objet les logos contenus dans le répertoire IMG/
+]
+[(#SET{regex,[(#EVAL{_DIR_IMG}|concat{'{',[(#ENV{logo,spip_articles}|id_table_objet|type_du_logo)],'}{on,off}*.*'})]})]
+<B_ls2>
+<div class="galerie[ media-(#ENV{logo,spip_articles})]">
+    <h2>[(#VAL|lister_tables_objets_sql|table_valeur{#ENV{logo,spip_articles}/texte_objets}|_T)]</h2>
+    [(#ANCRE_PAGINATION)]
+    [<div class="pagination">(#PAGINATION{prive})</div>]
+    <table>
+        <thead>
+            <tr>
+                <th class="id"><:medias:id:></th>
+                <th></th>
+                <th><:medias:logo:></th>
+                <th><:medias:infos:></th>
+                <th><:medias:descriptif:></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <BOUCLE_ls2 (DATA){source glob, #GET{regex}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})]
+            <tr>
+                <td class="id">
+                    <strong><a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">[(#VALEUR|logo_infos{3})]</a></strong>
+                </td>
+                <td class='statut'></td>
+                <td class="logo">
+                    <a href="[(#VALEUR)]"[ title='(#GET{pathinfo/basename}|attribut_html)'][ type="(#VALEUR|mime_content_type)"]>[(#VALEUR|balise_img|image_reduire{250,100}|inserer_attribut{alt,#VALEUR}|inserer_attribut{class,spip_logos})]</a>
+                    [<div class="fichier">(#GET{pathinfo/basename})</div>]
+                </td>
+                <td class="exif">
+                    [<strong class="extension">(#GET{pathinfo/extension})</strong>]
+                    <div class="dimensions">[(#VALEUR|largeur)] x [(#VALEUR|hauteur)] pixels </div>
+                    [<div class="taille">(#VALEUR|filesize|taille_en_octets)</div>]
+                    [<div class="date">(#VAL{Y-m-d h:i:s}|date{#VALEUR|filemtime}|affdate{d/m/Y})</div>]
+                    [<a class="[(#ENV{logo,spip_articles}|table_objet)]" href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">(#INFO_TITRE{[(#ENV{logo,spip_articles}|table_objet)],[(#VALEUR|logo_infos{3})]})</a>]
+                    [(#INFO_TITRE{[(#ENV{logo,spip_articles}|table_objet)],[(#VALEUR|logo_infos{3})]}|non)<em><:lister_logos:objet_supprime:></em>]
+                </td>
+                <td class="descriptif">
+                    [<strong>(#VALEUR|logo_etat)</strong>]
+                </td>
+                <td></td>
+            </tr>
+        </BOUCLE_ls2>
+        </tbody>
+    </table>
+    [<div class="pagination">(#PAGINATION{prive})</div>]
+</div>
+</B_ls2>
+    <h2>[(#VAL|lister_tables_objets_sql|table_valeur{#ENV{logo,spip_articles}/texte_objets}|_T)]</h2>
+    <p><:lister_logos:pas_de_logos:></p>
+<//B_ls2>
+

@@ -1,0 +1,20 @@
+<paquet
+	prefix="lister_logos"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.9;3.0.*]"
+	logo="prive/themes/spip/images/lister_logos-64.png"
+	documentation=""
+>
+	<nom>Lister les logos</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="lister_logos_autorisations.php" />
+	<menu nom="lister_logos" titre="lister_logos:info_logos" parent="menu_edition" icone="images/lister_logos-16.png" />
+
+
+</paquet>
