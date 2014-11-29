@@ -10,7 +10,7 @@
 	<slogan>FAQ d&#233;pliable</slogan>
 	<description>Transformez les listes de d&#233;finitions marqu&#233;es du s&eacute;lecteur &#171;<code>faq</code>&#187; en <abbr title="Foire Aux Questions">FAQ</abbr> d&#233;pliable.</description>
 	<lien>http://contrib.spip.net/Definitions-et-FAQ</lien>
-	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+	<auteur>[Tetue->http://spip.tetue.net]</auteur>
 	<licence>GPL 2009</licence>
 	
 	<pipeline>
