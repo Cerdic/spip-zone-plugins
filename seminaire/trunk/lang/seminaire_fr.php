@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_exemple'				 => 	'Exemple',
 	'cfg_exemple_explication'	 => 	'Explication de cet exemple',
-	'cfg_titre_parametrages'	 => 	'Paramétrages',
+	'cfg_titre_parametrages'	 => 	'Paramétrages du plugin Séminaire',
 	'choix_mot'					 =>		'Type d\'événement',
 	'creer_evenement'			 =>		'Ajouter un événement', 
 
@@ -29,22 +29,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenements_du_jour'		 =>		'Les événements du jour',	
 	'evenements_seul'			 =>		'Détails d\'un évènement',	
 	'exemple'					 =>		'Par exemple : CMI - Salle R164',
+	'explication_groupe_mot_categorie' => 'Groupe de mots indiquant la catégorie de l\'événement.',
+	'explication_groupe_mot_type'=>		'Groupe de mots indiquant la nature de l\'événement.',
+	'explication_mail_attendee'	 =>		'Le champ ATTENDEE doit avoir un mail. Choisissez le no-reply qui vous convient (no-reply@example.org par défaut).',
+	'explication_prodid' 		 =>		'Moins de 50 caractères',
 
-	// I
-	'info_seances_nb'			=>		'@nb@ séances',
-	'info_seances_une'			=>		'1 séance',
-	'info_seminaire'			=>		'Séminaire : ',
-	
 	// L
 	'label_groupe_mot_categorie' =>		'Mots sur les articles de séminaires',
 	'label_groupe_mot_type'		 =>		'Mots sur les évènements de séminaires',
-	'label_prodid'				 =>		'PRODID pour le calendrier (moins de 50 caractères)',
+	'label_prodid'				 =>		'PRODID pour le calendrier',
+	'label_mail_attendee' 		 =>		'Mail attendee' ,
 	'label_seminaire'			 =>		'Séminaire ?',
 	'lien_tout_replier'			 =>		'Sans résumé',
 	'lien_tout_deplier'			 =>		'Avec résumé',
 	'lieu'						 =>		'Lieu',
 
 	// M
+	'modifier_article'			 => 	'Modifier l\'article',
 	'mots_categorie_kitcnrs'	 => 	'Les mots clés à affecter aux articles pour que les événements soient encore mieux triés',
 	'mots_cles_categories'		 =>		'Les différentes catégories de séminaires, groupes de travail et événements exceptionnels',
 	'mots_cles_techniques_kitcnrs'=>	'Les mots clés pour repérer plus finement les différents types d\'événements',
