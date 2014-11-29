@@ -2,7 +2,7 @@
 	<nom>Comments</nom>
 	<slogan>Des commentaires, tout simplement</slogan>
 	<icon>comments.png</icon>
-	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+	<auteur>[Tetue->http://spip.tetue.net]</auteur>
 	<licence>GNU/GPL - (c) 2009-2011</licence>
 	<version>2.1.14</version>
 	<etat>stable</etat>
