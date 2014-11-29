@@ -1,11 +1,11 @@
 <paquet
 	prefix="magnet"
 	categorie="outil"
-	version="0.4.1"
+	version="0.5.0"
 	etat="test"
 	compatibilite="[3.0.0;["
 	logo="magnet-32.png"
-	documentation=""
+	documentation="http://contrib.spip.net/magnet"
 >
 
 	<nom>Magnet</nom>
@@ -14,6 +14,7 @@
 	<copyright>2014</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 
+	<pipeline nom="boite_infos" inclure="magnet_fonctions.php" />
 	<pipeline nom="pre_boucle" inclure="magnet_fonctions.php" />
 	<pipeline nom="formulaire_admin" inclure="magnet_fonctions.php" />
 

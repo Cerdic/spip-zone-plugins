@@ -149,7 +149,7 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 .spip-admin-boutons button {border: none;background: none;padding: 0;color:inherit;}
 .admin-magnet button {min-height:32px;position: relative;}
 .admin-magnet.magnet button i {display:inline-block;width:32px;}
-.admin-magnet.magnet button i:after {content:"";;display:block;position:absolute;left:0;top:50%;margin-top:-16px;width:32px;height:32px;background:url($img_on) no-repeat left -64px;}
+.admin-magnet.magnet button i:after {content:"";display:block;position:absolute;left:0;top:50%;margin-top:-16px;width:32px;height:32px;background:url($img_on) no-repeat left 0px;}
 .admin-magnet.magnet-up,.spip-admin-boutons.magnet-down {padding-left: 0;padding-right: 0;}
 .admin-magnet.magnet.magnetized button {}
 .admin-magnet.magnet.magnetized:hover button i:after {background-position:left -32px;}
@@ -225,4 +225,12 @@ function magnet_count($objet, $pile=''){
 	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'');
 	$magnets = explode(',',$magnets);
 	return count($magnets);
+}
+
+function magnet_boite_infos($flux){
+	if ($flux['args']['type']=='article'
+	  AND $id_article = $flux['args']['id']){
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/magnet-admin',array('id_article'=>$id_article));
+	}
+	return $flux;
 }
