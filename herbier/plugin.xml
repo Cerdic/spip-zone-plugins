@@ -10,7 +10,7 @@
 <slogan>Affichez l'Herbier sur votre site&nbsp;!</slogan>
 <description>Il suffit d'installer ce plugin pour syndiquer automatiquement [l'Herbier de SPIP->http://herbier.spip.net] et ses sites remarquables. Ajoutez ensuite <code><INCLURE{fond=inclure/herbier}></code> dans vos squelettes pour afficher une capture d'ecran d'un site pris au hasard dans l'Herbier.</description>
 <lien>http://herbier.spip.net/2</lien>
-<auteur>James et Romy, pour [l'Herbier de SPIP->http://herbier.spip.net]</auteur>
+<auteur>James et Tetue, pour [l'Herbier de SPIP->http://herbier.spip.net]</auteur>
 <licence>GPL</licence>
 
 <install>herbier_install.php</install>
