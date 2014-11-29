@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Groupe de mots pour Zcore</nom>
 	<slogan>Ajout d'une page groupe_mots.html pour tout squelettes bas&eacute;s sur Zcore (ex: zpip-dist v2)</slogan>
-	<auteur>Denis Chenu et surtout Matthieu Marcillaud, C&#233;dric Morin, Romy Tetue, Collectif SPIP</auteur>
+	<auteur>Denis Chenu et surtout Matthieu Marcillaud, C&#233;dric Morin, Tetue, Collectif SPIP</auteur>
 	<licence>GNU/GPL</licence>
 	<icon>img/zgroupemots-64.png</icon>
 	<version>2.0.0</version>
