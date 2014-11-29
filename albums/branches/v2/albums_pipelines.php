@@ -4,7 +4,7 @@
  *
  * @plugin     Albums
  * @copyright  2013
- * @author     Romy Tetue, Charles Razack
+ * @author     Tetue, Charles Razack
  * @licence    GNU/GPL
  * @package    SPIP\Albums\Pipelines
 **/

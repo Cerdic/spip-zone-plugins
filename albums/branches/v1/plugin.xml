@@ -7,7 +7,7 @@
 <slogan>Albums au fil du texte</slogan>
 <description>Afficher une ou liste de documents, au fil du texte, dans les articles et ailleurs, pr&eacute;sent&eacute;s en galerie d'images ou en liste.</description>
 <lien>http://contrib.spip.net/Albums</lien>
-<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+<auteur>[Tetue->http://spip.tetue.net]</auteur>
 <licence>GPL - 2011</licence>
 
 <version>1.1.0</version>
