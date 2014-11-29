@@ -1,7 +1,7 @@
 <plugin>
 	<nom>FeedBurner</nom>
 	<icon>feedburner-64.png</icon>
-	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+	<auteur>[Tetue->http://spip.tetue.net]</auteur>
 	<licence>GPL - (c) 2008</licence>
 	<version>1.0.0</version>
 	<etat>stable</etat>
