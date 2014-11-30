@@ -10,7 +10,7 @@
 		<a href="#URL_SITE_SPIP"><:accueil_site:></a> &gt; <:seminaire:aujour:>
 	</p>
 ]
-
+<div id="texte">
 <BOUCLE_mot_evenements(MOTS){type=Type}>
 
 <B_ev>
@@ -19,7 +19,7 @@
 
 <h2 class="agenda">[(#DESCRIPTIF|attribut_html)]</h2>
 	<ul class="liste-items evenements">
-	<BOUCLE_ev(EVENEMENTS){date_debut<=#ENV{date}|replace{00:00:00, 23:59:59}}{date_fin>=#ENV{date}}{par date_debut}{titre_mot=#_mot_evenements:TITRE}>
+	<BOUCLE_ev(EVENEMENTS){date_debut<=#ENV{date}|replace{00:00:00, 23:59:59}}{date_fin>=#ENV{date}}{par date_debut}{id_mot}>
 		<li class="item">
 			<h3>#INFO_TITRE{article,#ID_ARTICLE}</h3>
 			#MODELE{evenement_vevent}
@@ -30,3 +30,7 @@
 
 </B_ev>
 </BOUCLE_mot_evenements>
+
+
+
+</div>
