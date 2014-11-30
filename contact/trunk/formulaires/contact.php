@@ -177,13 +177,13 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	}
 
 	//Pour les pj qui ont déjà été récupérées avec succes, on remet le tableau des informations sur les pj à jour
-	$pj_enregistrees_nom = _request('pj_enregistrees_nom');
+	$pj_enregistrees_nomfichier = _request('pj_enregistrees_nomfichier');
 	$pj_enregistrees_mime = _request('pj_enregistrees_mime');
 	$pj_enregistrees_extension = _request('pj_enregistrees_extension');
 	$pj_enregistrees_vignette = _request('pj_enregistrees_vignette');
 
-	if (is_array($pj_enregistrees_nom))
-		foreach ($pj_enregistrees_nom as $cle => $nom){
+	if (is_array($pj_enregistrees_nomfichier))
+		foreach ($pj_enregistrees_nomfichier as $cle => $nom){
 			$infos_pj[$cle]['message'] = 'ajout fichier';
 			$infos_pj[$cle]['nom'] = $nom;
 			$infos_pj[$cle]['mime'] = $pj_enregistrees_mime[$cle];
@@ -197,10 +197,19 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 		if (_request('pj_supprimer_'.$cle)) {
 			//On récupère le nom de la pièce jointe à supprimer
 			$nom_pj_supprimer = $infos_pj[$cle]['nom'];
-			//On supprime le fichier portant ce nom
-			unlink($repertoire_temp_pj.$nom_pj_supprimer);
-			//On re-propose la possibilité de télécharger un fichier en supprimant les infos du fichier
-			unset($infos_pj[$cle]);
+
+			/* Avant de supprimer le fichier demandé, on vérifie qu’il
+			 * est bien situé dans le répertoire temporaire et que
+			 * l’on ne tente pas de manipuler le chemin. */
+			$repertoire_temp_pj_complet = realpath(getcwd() . DIRECTORY_SEPARATOR . $repertoire_temp_pj);
+			$nom_pj_complet = realpath($repertoire_temp_pj_complet . DIRECTORY_SEPARATOR . $nom_pj_supprimer);
+
+			if($nom_pj_complet !== false && strpos($nom_pj_complet, $repertoire_temp_pj_complet) === 0) {
+				// On supprime le fichier portant ce nom
+				unlink($repertoire_temp_pj.$nom_pj_supprimer);
+				//On re-propose la possibilité de télécharger un fichier en supprimant les infos du fichier
+				unset($infos_pj[$cle]);
+			}
 		}
 	}
 
@@ -295,18 +304,18 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	$texte = filtrer_entites($texte);
 
 	// On va vérifie s'il y a des pièces jointes
-	$pj_enregistrees_nom = _request('pj_enregistrees_nom');
+	$pj_enregistrees_nomfichier = _request('pj_enregistrees_nomfichier');
 	$pj_enregistrees_mime = _request('pj_enregistrees_mime');
 	$pj_enregistrees_extension = _request('pj_enregistrees_extension');
 	$repertoire_temp_pj = _DIR_TMP.'/contact_pj/';
 
 	// Si oui on les ajoute avec le plugin Facteur
-	if ($pj_enregistrees_nom != null) {
+	if ($pj_enregistrees_nomfichier != null) {
 		//On rajoute des sauts de ligne pour différencier du message.
 		$texte_final = array(
 			'texte' => $texte_final
 		);
-		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
+		foreach ($pj_enregistrees_nomfichier as $cle => $nom_pj) {
 			$texte_final['pieces_jointes'][$cle] = array(
 				'chemin' => $repertoire_temp_pj.$nom_pj,
 				'nom' => $nom_pj,
@@ -354,11 +363,11 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		);
 
 		// S'il y a des pièces jointes on les ajoute aux documents de SPIP.
-		if ($pj_enregistrees_nom != null) {
+		if ($pj_enregistrees_nomfichier != null) {
 			//On charge la fonction pour ajouter le document là où il faut
 			$ajouter_documents = charger_fonction('ajouter_documents','action');
 			$files[] = array('tmp_name'=>$repertoire_temp_pj.$nom_pj,'name'=>$nom_pj);
-			foreach ($pj_enregistrees_nom as $nom_pj) {
+			foreach ($pj_enregistrees_nomfichier as $nom_pj) {
 				$id_doc = $ajouter_documents("new", $files, 'message', $id_message, 'document');
 			}
 		}
@@ -376,7 +385,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		}
 
 		$memoire = generer_url_ecrire('message', 'id_message='.$id_message);
-		if ($pj_enregistrees_nom != null) {
+		if ($pj_enregistrees_nomfichier != null) {
 			$texte_final['texte'] .= "\n\n"._T('contact:consulter_memoire')."\n".$memoire;
 		}
 		else{
@@ -395,9 +404,16 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	$envoyer_mail($mail, $posteur['sujet'], $texte_final , '', "X-Originating-IP: ".$GLOBALS['ip']);
 
 	// Maintenant que tout a été envoyé ou enregistré, s'il y avait des PJ il faut supprimer les fichiers
-	if ($pj_enregistrees_nom != null) {
-		foreach ($pj_enregistrees_nom as $cle => $nom_pj) {
-			unlink($repertoire_temp_pj.$nom_pj);
+	if ($pj_enregistrees_nomfichier != null) {
+		foreach ($pj_enregistrees_nomfichier as $cle => $nom_pj) {		
+			/* Avant de supprimer le fichier demandé, on vérifie qu’il
+			 * est bien situé dans le répertoire temporaire. */
+			$repertoire_temp_pj_complet = realpath(getcwd() . DIRECTORY_SEPARATOR . $repertoire_temp_pj);
+			$nom_pj_complet = realpath($repertoire_temp_pj_complet . DIRECTORY_SEPARATOR . $nom_pj);
+
+			if($nom_pj_complet !== false && strpos($nom_pj_complet, $repertoire_temp_pj_complet) === 0) {
+				unlink($repertoire_temp_pj.$nom_pj);
+			}
 		}
 	}
 

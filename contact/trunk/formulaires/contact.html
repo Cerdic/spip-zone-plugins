@@ -121,7 +121,7 @@
 								<:contact:form_pj_fichier_ajoute:>
 								[<img src="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette}|image_reduire{32}|extraire_attribut{src})" [title="(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})"] />]
 								[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]
-								<input type="hidden" name="pj_enregistrees_nom&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]"/>
+								<input type="hidden" name="pj_enregistrees_nomfichier&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{nom})]"/>
 								<input type="hidden" name="pj_enregistrees_mime&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{mime})]"/>
 								<input type="hidden" name="pj_enregistrees_extension&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{extension})]"/>
 								<input type="hidden" name="pj_enregistrees_vignette&#91;#CLE&#93;" value="[(#ENV*{erreurs}|table_valeur{infos_pj}|table_valeur{#CLE}|table_valeur{vignette})]"/>
