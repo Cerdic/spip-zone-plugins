@@ -1,0 +1,18 @@
+<paquet
+	prefix="shortcodes"
+	categorie="outil"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/shortcodes-32.png"
+	documentation=""
+>
+
+	<nom>Shortcodes</nom>
+
+	<auteur lien='http://nursit.com'>Cédric</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="pre_propre" inclure="shortcodes_fonctions.php" />
+
+</paquet>
