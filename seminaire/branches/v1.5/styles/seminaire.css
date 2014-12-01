@@ -1,11 +1,6 @@
-[(#REM)
-Gère l'affichage du calendrier hebdomadaire, le pliage/depliage des séminaires et le style des listes de séminaire
-]
-#CACHE{3600*100,cache-client}
-#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
-#HTTP_HEADER{Vary: Accept-Encoding}
+/* Gère l'affichage du calendrier hebdomadaire, le pliage/depliage des séminaires et le style des listes de séminaire */
 
-.pagination a.creer {float:#GET{left};}
+.pagination a.creer {float:left;}
 /* vevent présentation du modele des événements*/
 li.item div.vevent h3 {margin:0;font-size:1.1em;}
 li.item div.vevent p {margin:2px 0 0;}
@@ -120,7 +115,7 @@ la partie graphique du calendrier
 .jour_encours{/*aujourd'hui*/
 	background:#B1C3D9;
 	font-weight:bold;
-	border: 1px solid #black;
+	border: 1px solid black;
 	color: #000;
 	}
 
@@ -255,7 +250,7 @@ a.ical img:active{
 	font-size:1em;
 	margin:0;
 	width: 96%;
-	border: 1px solid #GET{claire};
+	border: 1px solid #666;
 	padding: 0px;
 }
 
