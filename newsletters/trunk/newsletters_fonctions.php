@@ -102,7 +102,7 @@ function afficher_titre_patron($patron){
  * @return string
  */
 function newsletters_inline_base64src($texte, $type="text/html"){
-	return "data:$type;base64,".base64_encode($texte);
+	return "data:$type;charset=".$GLOBALS['meta']['charset'].";base64,".base64_encode($texte);
 }
 
 /**
