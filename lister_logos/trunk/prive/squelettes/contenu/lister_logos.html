@@ -1,7 +1,7 @@
 [(#REM)
     On liste les tables principales qui ne sont pas des objets éditoriaux
 ][
-(#SET{exclus,#LISTE{spip_jobs,spip_menus,spip_menus_entrees,spip_types_documents,spip_documents}})]
+(#SET{exclus,#LISTE{spip_jobs,spip_menus,spip_menus_entrees,spip_types_documents,spip_documents,spip_forum,spip_messages,spip_paquets,spip_plugins}})]
 
 [(#REM)
 on liste les types de logos des objets principaux de SPIP en prenant en compte les cas spéciaux
@@ -47,12 +47,11 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
                 <th><:medias:logo:></th>
                 <th><:medias:infos:></th>
                 <th><:medias:descriptif:></th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
         <BOUCLE_ls2 (DATA){source glob, #GET{regex}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})]
-            <tr>
+            <tr id="[(#GET{pathinfo/filename})]">
                 <td class="id">
                     <strong><a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">[(#VALEUR|logo_infos{3})]</a></strong>
                 </td>
@@ -77,7 +76,6 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
                 <td class="descriptif">
                     [<strong>(#VALEUR|logo_etat)</strong>]
                 </td>
-                <td></td>
             </tr>
         </BOUCLE_ls2>
         </tbody>
