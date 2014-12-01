@@ -25,7 +25,7 @@ function facteur_recuperer_fond($flux){
 		&& (isset($GLOBALS['meta']['facteur_adresse_envoi']) && $GLOBALS['meta']['facteur_adresse_envoi'] == 'oui')
 		&& (isset($GLOBALS['meta']['facteur_adresse_envoi_email']) && strlen($GLOBALS['meta']['facteur_adresse_envoi_email']) > 0)){
 		$ajout = '<p class="notice">'._T('facteur:message_identite_email').'</p>';
-		$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_email_webmaster.*>)(.*<label),Uims","\\1".$ajout."\\2",$flux['data'],1);
+		$flux['data']['texte'] = preg_replace(",(<li [^>]*class=[\"']editer editer_email_webmaster.*>)(.*<label),Uims","\\1".$ajout."\\2",$flux['data']['texte'],1);
 	}
 	return $flux;
 }
