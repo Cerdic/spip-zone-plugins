@@ -31,3 +31,31 @@ Valeurs par defaut :
 .lister_logos #contenu .formulaire_editer_logo {
     margin-top: 0;
 }
+.lister_logos #contenu .galerie table td .constante_logo {
+    display: block;
+    height: 7px;
+    margin: -0.5em 0 0.5em;
+    overflow: hidden;
+    padding: 0;
+}
+.lister_logos #contenu .galerie table td .constante_logo div {
+    background-color: transparent;
+    display: block;
+    float: left;
+    height: 7px;
+    margin-right: 8%;
+    width: 25%;
+}
+.lister_logos #contenu .galerie table td .constante_logo div:last-child {
+	margin-right: 0;
+}
+.lister_logos #contenu .galerie table td .constante_logo .logo_max_size_ko,
+.lister_logos #contenu .galerie table td .constante_logo .logo_max_height_ko,
+.lister_logos #contenu .galerie table td .constante_logo .logo_max_width_ko {
+	background-color: #ffd324; /* même couleur que .notice */
+}
+.lister_logos #contenu .galerie table td .constante_logo .logo_max_size_ok,
+.lister_logos #contenu .galerie table td .constante_logo .logo_max_height_ok,
+.lister_logos #contenu .galerie table td .constante_logo .logo_max_width_ok {
+	background-color: #c6d880; /* même couleur que .success */
+}

@@ -54,4 +54,5 @@ function logo_etat($fichier)
     }
 
 }
+
 ?>
