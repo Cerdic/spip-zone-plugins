@@ -54,6 +54,7 @@ function mailsubscribers_compte_inscrits($liste){
 
 /**
  * Trouver une fonction de synchronisation pour une liste donnee
+ * mailsubscribers_synchro_list_xxxx
  * @param $liste
  * @return mixed|string
  */
@@ -250,7 +251,13 @@ function mailsubscribers_supprimer_identifiant_liste($liste) {
 	return true;
 }
 
-
+/**
+ * Lance la synchro avec une liste en appelant la fonction
+ * mailsubscribers_synchro_list_xxxx pour la liste des abonnes
+ * puis la fonction de synchronisation
+ *
+ * @param $liste
+ */
 function mailsubscribers_do_synchro_list($liste){
 	if ($f = mailsubscribers_trouver_fonction_synchro($liste)){
 		$abonnes = $f();
@@ -302,8 +309,10 @@ function mailsubscribers_synchro_list_newsletter_6forum(){
  *   liste avec laquelle on synchronise les abonnes
  * @param array $abonnes
  *   chaque abonne est un tableau avec l'entree 'email' et les entrees optionnelles 'nom' et 'prenom'
+ * @param bool $addonly
+ *   pour ajouter uniquement les nouveaux abonnes, et ne desabonner personne
  */
-function mailsubscribers_synchronise_liste($liste,$abonnes){
+function mailsubscribers_synchronise_liste($liste, $abonnes, $addonly = false){
 	$listes = array($liste);
 
 	// desactiver toutes les notifications pendant cette operation
@@ -331,8 +340,8 @@ function mailsubscribers_synchronise_liste($liste,$abonnes){
 		if (isset($abonnes_emails[$sub['email']])){
 			unset($abonnes_emails[$sub['email']]);
 		}
-		// il n'est plus dans les abonnes on l'enleve
-		else {
+		// il n'est plus dans les abonnes on l'enleve sauf si flag $addonly==true
+		elseif(!$addonly) {
 			//echo "unsubscribe ".$sub['email']."<br />";
 			$unsubscribe($sub['email'],array('listes'=>$listes));
 		}

@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'legend_listes_diffusion' => 'Listes de diffusion',
 	'legend_listes_automatiques' => 'Listes de diffusion automatiques',
+	'info_nouvelle_liste' => 'Nouvelle liste',
 
 	'info_liste_synchronisee_automatiquement' => 'Cette liste est automatiquement synchronisée.',
 

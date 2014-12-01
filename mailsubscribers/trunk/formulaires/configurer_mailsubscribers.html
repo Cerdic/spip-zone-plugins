@@ -39,11 +39,12 @@
 					<legend><:mailsubscriberscfg:legend_listes_diffusion:></legend>
 					#SET{tableau,#ARRAY{category,newsletter}|mailsubscribers_listes}
 					<BOUCLE_listes(POUR){tableau #GET{tableau}|array_merge{#ARRAY{new1,#LISTE,new2,#LISTE}}}>
-						#SET{index,#COMPTEUR_BOUCLE|moins{1}}
-						<h3 class="legend">#ENV*{lists/#GET{index}/titre,#VALEUR{titre}}</h3>
+					#SET{index,#COMPTEUR_BOUCLE|moins{1}}
+					<div class="liste-diffusion [ (#ENV*{lists/#GET{index}/id,#VALEUR{id}}|sinon{new})]">
+						[<h3 class="legend">(#ENV*{lists/#GET{index}/titre,#VALEUR{titre}}|sinon{#ENV*{lists/#GET{index}/id,#VALEUR{id}}}|sinon{<:mailsubscriberscfg:info_nouvelle_liste:>})</h3>]
 						[<p class="explication">(#ENV*{lists/#GET{index}/id}|sinon{'-'}|mailsubscribers_compte_inscrits|singulier_ou_pluriel{mailsubscriber:info_1_mailsubscriber,mailsubscriber:info_nb_mailsubscribers}
 							|concat{'. ',#ENV*{lists/#GET{index}/id}|sinon{'-'}|mailsubscribers_trouver_fonction_synchro|?{<:mailsubscriberscfg:info_liste_synchronisee_automatiquement:>}}|ltrim{'.'}|trim)</p>]
-						<ul class="liste-diffusion">
+						<ul class="liste-diffusion-saisies">
 							#SET{name,id}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/lists/#GET{index}/#GET{name}}}
 							<li class="editer editer_lists_[(#GET{index})]_#GET{name}[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 								<label for="lists_[(#GET{index})]_#GET{name}">[(#GET{fl}|concat{':label_list_',#GET{name}}|_T)]</label>[
@@ -88,6 +89,7 @@
 								</div>
 							</li>
 						</ul>
+					</div>
 					</BOUCLE_listes>
 				</fieldset>
 			</li>
@@ -120,11 +122,17 @@
 </div>
 <style type="text/css">
 h3.legend {margin-top: 1.5em;margin-bottom: 0}
-.formulaire_spip ul.liste-diffusion {border-bottom: 1px solid #eee;padding-top: 1em !important;padding-bottom: 1em !important;margin-left: 125px}
-ul.liste-diffusion .editer {padding-top: 2px;padding-bottom: 2px;}
-ul.liste-diffusion .editer .choix.left {float: left}
-ul.liste-diffusion .editer .choix.right {float: right}
-ul.liste-diffusion .choix_close { margin-left:1em;}
-ul.liste-diffusion .choix_close label { margin-left:0;}
-ul.liste-diffusion .explication {clear: both}
+.formulaire_spip ul.liste-diffusion-saisies {border-bottom: 1px solid #eee;padding-top: 1em !important;padding-bottom: 1em !important;margin-left: 125px}
+.liste-diffusion.new {opacity: 0.7;}
+.liste-diffusion-saisies .editer {padding-top: 2px;padding-bottom: 2px;}
+.liste-diffusion-saisies .editer .choix.left {float: left}
+.liste-diffusion-saisies .editer .choix.right {float: right}
+.liste-diffusion-saisies .choix_close { margin-left:1em;}
+.liste-diffusion-saisies .choix_close label { margin-left:0;}
+.liste-diffusion-saisies .explication {clear: both}
 </style>
+<script type="text/javascript">
+jQuery(function(){
+	jQuery('.liste-diffusion.new input').bind('focus',function(){jQuery(this).closest('.liste-diffusion.new').removeClass('new')});
+})
+</script>
