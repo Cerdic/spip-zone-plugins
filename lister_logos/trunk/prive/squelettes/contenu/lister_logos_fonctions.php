@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 
 include_spip('inc/chercher_logo');
 include_spip('base/objets');
+include_spip('base/abstract_sql');
 
 /**
  * Récupérer les infos à partir du fichier de logo
@@ -17,7 +18,8 @@ include_spip('base/objets');
  *         - `$index = 0` : retourne `$fichier` ;
  *         - `$index = 1` : le type de logo de l'objet. cf. art, rub, mot, etc.
  *         - `$index = 2` : l'état du logo. cf. `on` pour normal, `off` pour survol.
- *         - `$index = 3` : l'extension du fichier.
+ *         - `$index = 3` : l'id de l'objet.
+ *         - `$index = 4` : l'extension du fichier.
  * @return array|string
  *         Si l'index est `null`, on retournera le résultat que `preg_match()`, soit un tableau.
  *         Si l'index est une valeur numérique (<4), on retourne la valeur du tableau correspondant à l'index.
