@@ -41,11 +41,13 @@ function genie_imap_feedback_dist($t){
                                                 $l = trim($l);
                                                 if ( preg_match("/^Status:/i", $l) ){
                                                     $tmp = explode(":",$l);
-                                                    $return_status_code = intval(str_replace('.', '', $tmp[1]));
+                                                    $return_status_code = trim(str_replace('.', '', $tmp[1]));
+                                                    continue;
                                                 }
-                                                if ( preg_match("/^Original-Recipient: rfc822;/i", $l) ){
+                                                else if ( preg_match("/^Original-Recipient: rfc822;/i", $l) ){
                                                     $tmp = explode(";",$l);
-                                                    $original_recipient = $tmp[1];
+                                                    $original_recipient = trim($tmp[1]);
+                                                    continue;
                                                 }
                                             }
                                         }
@@ -54,11 +56,10 @@ function genie_imap_feedback_dist($t){
                                                 if ($return_status_code[0] == 4 AND $row['statut']!=='fail'){
                                                         $event = 'reject';
                                                 }
-                                                elseif ($return_status_code[0] == 5 AND $row['statut']!=='fail'){
+                                                else if ($return_status_code[0] == 5 AND $row['statut']!=='fail'){
                                                         $event = 'hard_bounce';
                                                 }
                                                 if ($event) {
-                                                        #var_dump("$event : ".$email->to_email);
                                                         $feedback($event,$original_recipient,$tracking_id);
                                                 }
                                         }
