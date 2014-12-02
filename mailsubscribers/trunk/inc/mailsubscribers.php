@@ -309,11 +309,16 @@ function mailsubscribers_synchro_list_newsletter_6forum(){
  *   liste avec laquelle on synchronise les abonnes
  * @param array $abonnes
  *   chaque abonne est un tableau avec l'entree 'email' et les entrees optionnelles 'nom' et 'prenom'
- * @param bool $addonly
- *   pour ajouter uniquement les nouveaux abonnes, et ne desabonner personne
+ * @param array $options
+ *   bool addonly : pour ajouter uniquement les nouveaux abonnes, et ne desabonner personne
+ *   bool graceful : pour ne pas reabonner ceux qui se sont desabonnes manuellement
  */
-function mailsubscribers_synchronise_liste($liste, $abonnes, $addonly = false){
+function mailsubscribers_synchronise_liste($liste, $abonnes, $options = array()){
 	$listes = array($liste);
+	if (is_bool($options)){
+		$options = array('addonly'=>$options);
+	}
+	$options = array_merge(array('addonly'=>false,'graceful'=>false),$options);
 
 	// desactiver toutes les notifications pendant cette operation
 	// on ne veut pas envoyer de mail a ceux qu'on ajoute/retire de la liste
@@ -341,7 +346,7 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $addonly = false){
 			unset($abonnes_emails[$sub['email']]);
 		}
 		// il n'est plus dans les abonnes on l'enleve sauf si flag $addonly==true
-		elseif(!$addonly) {
+		elseif(!$options['addonly']) {
 			//echo "unsubscribe ".$sub['email']."<br />";
 			$unsubscribe($sub['email'],array('listes'=>$listes));
 		}
@@ -357,6 +362,7 @@ function mailsubscribers_synchronise_liste($liste, $abonnes, $addonly = false){
 			'nom' => trim($nom),
 			'listes' => $listes,
 			'force' => true,
+			'graceful' => $options['graceful'],
 		));
 	}
 
