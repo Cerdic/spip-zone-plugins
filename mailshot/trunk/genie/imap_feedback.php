@@ -16,12 +16,12 @@ function genie_imap_feedback_dist($t){
         $password = "";
         $hostname = "{imap.gmail.com:993/imap/ssl}INBOX";        
 
-        $return_path_email = lire_config("facteur_adresse_envoi_email");
+        $return_path_email = lire_config("facteur_smtp_sender");
+        $feedback = charger_fonction("feedback","newsletter");
         
-        $inbox = @imap_open($hostname, $username, $password, OP_READONLY);
-        
+        $inbox = imap_open($hostname, $username, $password);
         if ($inbox){
-                spip_log("Récupération des bounces SMTP sur $username pour $return_path_email");
+                spip_log("Récupération des bounce sur $username pour $return_path_email", _LOG_INFO_IMPORTANTE);
                 $emails = imap_search($inbox,'UNSEEN TO "'.$return_path_email.'"');
                 
                 // toutes les campagnes envoyees depuis moins de 10jours (au dela on poll plus les stats)
@@ -65,7 +65,7 @@ function genie_imap_feedback_dist($t){
                                 }
                         }
                 }
-                @imap_close($inbox);
+                imap_close($inbox);
         } else {
             spip_log("Impossible de se connecter au serveur : ".imap_last_error(), _LOG_INFO_IMPORTANTE);
         }
