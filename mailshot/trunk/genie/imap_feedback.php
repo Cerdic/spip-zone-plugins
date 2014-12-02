@@ -8,19 +8,20 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-function genie_mailjet_feedback_dist($t){
+function genie_imap_feedback_dist($t){
 	include_spip('inc/mailshot');
 	include_spip('inc/config');
 	
-        $username = "rootmebounce@gmail.com";
-        $password = "d5f1ec8ac786109b5564ab4007ec078b";
+        $username = "@gmail.com";
+        $password = "";
         $hostname = "{imap.gmail.com:993/imap/ssl}INBOX";        
 
         $return_path_email = lire_config("facteur_adresse_envoi_email");
         
-        $inbox = imap_open($hostname, $username, $password, OP_READONLY);
+        $inbox = @imap_open($hostname, $username, $password, OP_READONLY);
         
         if ($inbox){
+                spip_log("Récupération des bounces SMTP sur $username pour $return_path_email");
                 $emails = imap_search($inbox,'UNSEEN TO "'.$return_path_email.'"');
                 
                 // toutes les campagnes envoyees depuis moins de 10jours (au dela on poll plus les stats)
@@ -39,10 +40,12 @@ function genie_mailjet_feedback_dist($t){
                                             foreach($message_lines as $l) {
                                                 $l = trim($l);
                                                 if ( preg_match("/^Status:/i", $l) ){
-                                                    $return_status_code = intval(str_replace('.', '', explode(":",$l)[1]));
+                                                    $tmp = explode(":",$l);
+                                                    $return_status_code = intval(str_replace('.', '', $tmp[1]));
                                                 }
                                                 if ( preg_match("/^Original-Recipient: rfc822;/i", $l) ){
-                                                    $original_recipient = explode(";",$l)[1];
+                                                    $tmp = explode(";",$l);
+                                                    $original_recipient = $tmp[1];
                                                 }
                                             }
                                         }
@@ -62,7 +65,9 @@ function genie_mailjet_feedback_dist($t){
                                 }
                         }
                 }
-                imap_close($inbox);
+                @imap_close($inbox);
+        } else {
+            spip_log("Impossible de se connecter au serveur : ".imap_last_error(), _LOG_INFO_IMPORTANTE);
         }
 	return 0;
 }
