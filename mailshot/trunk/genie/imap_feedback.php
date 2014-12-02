@@ -12,8 +12,8 @@ function genie_mailjet_feedback_dist($t){
 	include_spip('inc/mailshot');
 	include_spip('inc/config');
 	
-        $username = "";
-        $password = "";
+        $username = "rootmebounce@gmail.com";
+        $password = "d5f1ec8ac786109b5564ab4007ec078b";
         $hostname = "{imap.gmail.com:993/imap/ssl}INBOX";        
 
         $return_path_email = lire_config("facteur_adresse_envoi_email");
@@ -48,10 +48,10 @@ function genie_mailjet_feedback_dist($t){
                                         }
                                         if ($row = sql_fetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($campagne['id_mailshot'])." AND email=".sql_quote($original_recipient))){
                                                 $event = "";
-                                                if ($return_status_code[1] == 4 AND $row['statut']!=='fail'){
+                                                if ($return_status_code[0] == 4 AND $row['statut']!=='fail'){
                                                         $event = 'reject';
                                                 }
-                                                elseif ($return_status_code[1] == 5 AND $row['statut']!=='fail'){
+                                                elseif ($return_status_code[0] == 5 AND $row['statut']!=='fail'){
                                                         $event = 'hard_bounce';
                                                 }
                                                 if ($event) {
