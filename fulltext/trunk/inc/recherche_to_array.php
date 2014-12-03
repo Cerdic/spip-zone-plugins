@@ -193,9 +193,24 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
 						$from .= $join;
 					}
-					// cas simple : $cle_arrivee dans la table
+					/**
+					 * cas simple : $cle_arrivee dans la table
+					 * 
+					 * Ce cas pourrait exister par exemple si on activait une jointure de recherche sur les évènements (du plugin agenda) avec la table spip_articles.
+					 * Il suffirait d'ajouter la ligne suivante dans le pipeline "declarer_tables_objets_sql" dans le fichier base/agenda_evenements :
+					 * $tables['spip_evenements']['rechercher_jointures']['article'] = array('titre' => 8, 'texte' => 5);
+					 */
 					elseif (isset($desc_depart['field'][$cle_arrivee])){
-						//$s = sql_select("$cle_depart, $cle_arrivee", $desc_depart['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+						$join = "
+							LEFT JOIN (
+							SELECT lien$i.$cle_depart,$subscore AS score
+							FROM ".$desc_depart['table_sql']." as lien$i
+							JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+							WHERE $subscore > 0
+							ORDER BY score DESC LIMIT 100
+							) AS o$i ON o$i.$cle_depart=t.$cle_depart";
+						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+						$from .= $join;
 					}
 					// sinon cherchons une table de liaison
 					// cas recherche principale article, objet lie document : passer par spip_documents_liens
