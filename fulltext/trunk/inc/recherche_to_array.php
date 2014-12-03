@@ -153,9 +153,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		// On ajoute la premiere cle FULLTEXT de chaque jointure
 		$from = array_pop($requete['FROM']);
 
-		if (isset($jointures[$table])
-			
-			) {
+		if (isset($jointures[$table])) {
 			include_spip('action/editer_liens');
 			$trouver_table = charger_fonction('trouver_table','base');
 			$cle_depart = id_table_objet($table);
@@ -163,7 +161,6 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			$desc_depart = $trouver_table($table_depart,$serveur);
 			$depart_associable = objet_associable($table);
 			$i = 0;
-
 			foreach ($jointures[$table] as $table_liee => $champs) {
 				$i++;
 				spip_log($pe,'recherche');
@@ -176,9 +173,25 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 					$cle_arrivee =  id_table_objet($table_liee);
 					$table_arrivee = table_objet($table_liee,$serveur);
 					$desc_arrivee = $trouver_table($table_arrivee,$serveur);
-					// cas simple : $cle_depart dans la table_liee
+					/**
+					 * cas simple : $cle_depart dans la table_liee
+					 * 
+					 * Ce cas pourrait exister par exemple si on activait une jointure de recherche sur les articles avec la table spip_evenements du plugin agenda.
+					 * Il suffirait d'ajouter la ligne suivante dans le pipeline "declarer_tables_objets_sql" dans le fichier base/agenda_evenements :
+					 * $tables['spip_articles']['rechercher_jointures']['evenement'] = array('titre' => 8, 'descriptif' => 5, 'lieu' => 5, 'adresse' => 3);
+					 *
+					 */ 
 					if (isset($desc_arrivee['field'][$cle_depart])){
-						//$s = sql_select("$cle_depart, $cle_arrivee", $desc_arrivee['table_sql'], sql_in($cle_arrivee, array_keys($ids_trouves)), '','','','',$serveur);
+						$join = "
+							LEFT JOIN (
+							SELECT lien$i.$cle_depart,$subscore AS score
+							FROM ".$desc_depart['table_sql']." as lien$i
+							JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$cle_depart=lien$i.$cle_depart
+							WHERE $subscore > 0
+							ORDER BY score DESC LIMIT 100
+							) AS o$i ON o$i.$cle_depart=t.$cle_depart";
+						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+						$from .= $join;
 					}
 					// cas simple : $cle_arrivee dans la table
 					elseif (isset($desc_depart['field'][$cle_arrivee])){
