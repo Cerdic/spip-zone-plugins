@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
 
+    'dossiers_taille_total' => 'Poids total des répertoires&nbsp;:',
+
     // I
     'info_dossiers' => 'Dossiers',
     'info_1_dossier' => 'Un dossier',

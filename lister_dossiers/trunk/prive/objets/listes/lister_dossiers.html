@@ -1,5 +1,7 @@
 <B_dossiers>
 <div class="liste dossiers">
+[<h2><:lister_dossiers:dossiers_taille_total:>(#EVAL{_DIR_RACINE}|dossiers_taille|taille_en_octets)</h2>]
+<div class="nettoyeur"> </div>
 	<ul>
 	<BOUCLE_dossiers (DATA) {source table, (#EVAL{_DIR_RACINE}|lister_dossiers)} {par cle}>
 		<B_sous_dossiers>
