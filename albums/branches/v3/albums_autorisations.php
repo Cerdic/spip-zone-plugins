@@ -258,20 +258,25 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 	$admin_complet = ($qui['statut'] == '0minirezo' AND !$qui['restreint']) ?
 		true : false;
 
-	// album lié à une rubrique wiki/ouverte ou un de ses article et utilisé une seule fois (plugin autorité)
+	// plugin autorité
+	// album utilisé une seule fois et situé dans un secteur wiki/ouvert.
+	// on vérifie que l'objet auquel il est lié possède un champ `id_secteur`, et qu'on a le droit de publier dedans.
 	$album_wiki = false;
-	if (defined('_DIR_PLUGIN_AUTORITE') AND _DIR_PLUGIN_AUTORITE){
+	if (defined('_DIR_PLUGIN_AUTORITE')){
 		if (
+			// album utilisé une seule fois...
 			is_array($liens_objets)
 			AND count($liens_objets) == 1
+			// ...et lié à un objet...
 			AND $objet = $liens_objets[0]['objet']
 			AND $id_objet = $liens_objets[0]['id_objet']
-			AND in_array($objet,array('article','rubrique'))
+			// ...qui possède un champ `id_secteur`
+			AND is_array($infos_objet = lister_tables_objets_sql(table_objet_sql($objet)))
+			AND isset($infos_objet['field']['id_secteur'])
+			AND $id_secteur = sql_getfetsel('id_secteur',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet))
 		) {
-			$id_secteur = sql_getfetsel('id_secteur',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet));
-			// on cherche à savoir la rubrique est wiki/ouverte.
-			// comme autorité ne fournit pas de fonction générique pour ça,
-			// on reprend une partie du code de l'autorisation 'rubrique_publierdans'.
+			// on cherche à savoir si le secteur est wiki/ouvert.
+			// faute de fonction générique, on reprend une partie du code de l'autorisation 'rubrique_publierdans'.
 			// cf. inc/autoriser.php L291 à 317
 			if (
 				(

@@ -167,7 +167,8 @@ function formulaires_ajouter_album_traiter_dist($objet='', $id_objet=0, $retour=
 		set_request('statut','publie');
 		$traiter_editer_album = charger_fonction('traiter','formulaires/editer_album');
 		$res_editer_album = $traiter_editer_album('new',$retour,$objet.'|'.$id_objet,$lier_trad);
-		$res = array_merge($res, $res_editer_album);
+		if (is_array($res_editer_album))
+			$res = array_merge($res, $res_editer_album);
 		if (
 			isset($res['message_ok']) AND $res['message_ok']
 			AND $id_album = $res['id_album']
