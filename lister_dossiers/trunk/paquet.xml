@@ -1,0 +1,19 @@
+<paquet
+	prefix="lister_dossiers"
+	categorie="multimedia"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[2.1.0;3.0.*]"
+	logo="prive/themes/spip/images/lister_dossiers-64.png"
+	documentation=""
+>
+	<nom>Lister les dossiers</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="lister_dossiers_autorisations.php" />
+	<menu nom="lister_dossiers" titre="lister_dossiers:titre_lister_dossiers" parent="menu_edition" icone="images/lister_dossiers-16.png" />
+
+</paquet>

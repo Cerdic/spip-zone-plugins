@@ -1,0 +1,38 @@
+<plugin>
+	<nom><multi>[fr]Lister les dossiers</multi></nom>
+	<icon>prive/themes/spip/images/lister_dossiers-32.png</icon>
+	<auteur>Teddy Payet</auteur>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<description><multi>
+	[fr]Ce plugin va lister les répertoires présents sur votre site au même niveau que SPIP.
+	</multi></description>
+	<lien></lien> <!-- URI de documentation -->
+	<fonctions>lister_dossiers_fonctions.php</fonctions>
+	<prefix>lister_dossiers</prefix>
+
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>lister_dossiers_autorisations.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="Iterateurs" version="[1.0.1;]" />
+	<necessite id="saisies" version="[1.14.0;]" />
+
+	<categorie>outil</categorie>
+
+	<bouton id='lister_dossiers' parent='statistiques_visites'>
+		<icone>prive/themes/spip/images/lister_dossiers-32.png</icone>
+		<titre>lister_dossiers:titre_lister_dossiers</titre>
+		<url>lister_dossiers</url>
+	</bouton>
+
+	<!-- Boutons pour plugin Bandeau -->
+	<bouton id='lister_dossiers_bando' parent='bando_administration'>
+		<icone>prive/themes/spip/images/lister_dossiers-16.png</icone>
+		<titre>lister_dossiers:titre_lister_dossiers</titre>
+		<url>lister_dossiers</url>
+	</bouton>
+
+</plugin>
