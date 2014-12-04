@@ -9,6 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
     'ajouter_fiche_site_rapide' => 'Ajouter rapidement un site',
+    'ajouter_projets_rapide' => 'Ajouter des projets',
+    'ajouter_projets_rapide_explication' => 'Cette page vous permet d\'ajouter rapidement des projets en base de données, à partir de leur url en ligne. Le site de votre projet doit être accessible en ligne car le formulaire récupérera le &lt;title&gt; de la page d\'accueil comme nom de projet.',
     'auteur_identifie_informations' => 'Vos informations',
     'auteur_identifie_profil' => 'Votre profil',
 
@@ -72,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'label_stats_general' => 'Statistiques générales',
     'label_total' => 'Total',
     'label_validation' => 'Validation',
+    'liste_url_projets_explication' => 'Veuillez saisir ci-dessous la liste des urls de vos projets à ajouter. Une url par ligne.',
+    'liste_url_projets_label' => 'L\'url de projets en ligne',
 
     // M
     'menu_organisations' => 'Organisations',

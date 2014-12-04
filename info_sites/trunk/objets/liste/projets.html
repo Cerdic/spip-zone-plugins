@@ -1,7 +1,8 @@
 [(#SET{defaut_tri,#ARRAY{
 	date_publication,-1,
 	date_debut,-1,
-	nom,1, 
+	nom,1,
+	url_site,1,
 	id_projet,1,
 	statut,1,
 	points,-1
@@ -15,6 +16,7 @@
 		<tr class='first_row'>
 			<th class='organisation' scope='col'><:contacts:label_organisation:></th>
 			<th class='nom' scope='col'>[(#TRI{nom,<:projet:label_nom:>,ajax})]</th>
+            <th class='url_site' scope='col'>[(#TRI{url_site,<:projet:label_url_site:>,ajax})]</th>
             <th class='date' scope='col'>[(#TRI{date_publication,<:date:>,ajax})]</th>
             <th class='date' scope='col'>[(#TRI{date_debut,<:projet:label_date_debut:>,ajax})]</th>
             <th class='id' scope='col'>[(#TRI{id_projet,<:info_numero_abbreviation:>,ajax})]</th>
@@ -28,6 +30,9 @@
 				<span class="organisation"><a href="[(#URL_ORGANISATION)]">#NOM</a></span></BOUCLE_organisation>
 			</td>
 			<td class='nom principale'>[(#LOGO_PROJET|image_reduire{20,26})]<a href="[(#ID_PROJET|generer_url_entite{projet})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJET">[(#RANG). ]#NOM</a></td>
+            <td class='url_site secondaire'>[(#URL_SITE|oui)
+            	<a href="#URL_SITE">#URL_SITE</a>
+            ]</td>
             <td class='date secondaire'>[(#DATE_PUBLICATION|affdate_jourcourt)]</td>
             <td class='date secondaire'>[(#DATE_DEBUT|affdate_jourcourt|sinon{-})]</td>
             <td class='id'>[(#AUTORISER{modifier,projet,#ID_PROJET}|?{
