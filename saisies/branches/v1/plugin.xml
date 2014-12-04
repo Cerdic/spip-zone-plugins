@@ -3,7 +3,7 @@
 	<slogan>Ecrire facilement des champs de formulaires</slogan>
     <auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
     <licence>&#169; 2009-2013 GNU/GPL</licence>
-    <version>1.42.5</version>
+    <version>1.42.6</version>
     <etat>stable</etat>
     <categorie>outil</categorie>
 
@@ -58,7 +58,7 @@
 		<inclure>saisies_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<utilise id="verifier" />
 	<utilise id="spip_bonux" />
 	<traduire gestionnaire="salvatore" module="saisies" reference="fr" />
