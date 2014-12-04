@@ -1,0 +1,19 @@
+<paquet
+	prefix="timezone"
+	categorie="date"
+	version="0.1.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="mae-32.png"
+>
+
+	<nom>Timezone</nom>
+	<auteur mail="kent1@arscenic.info">kent1</auteur>
+
+	<copyright>2014</copyright>
+
+	<licence>GNU/GPL v3</licence>
+
+	<pipeline nom="formulaire_fond" inclure="timezone_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="timezone_pipelines.php" />
+</paquet>
