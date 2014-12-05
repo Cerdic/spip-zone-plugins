@@ -24,7 +24,6 @@
 	<traduire module="agenda" reference="fr" gestionnaire="salvatore" />
 	<traduire module="configureragenda" reference="fr" gestionnaire="salvatore" />
 	<traduire module="migreragenda" reference="fr" gestionnaire="salvatore" />
-	<traduire module="agenda" reference="fr" gestionnaire="salvatore" />
 	
 	<pipeline nom="autoriser" inclure="agenda_autoriser.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/agenda_evenements.php" />
