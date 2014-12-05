@@ -140,7 +140,7 @@ function notifications_notifications_destinataires($flux){
 
 	// forum valide ou prive : prevenir les autres contributeurs du thread ou ceux qui ont déjà répondu à l'article
 	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
-		OR ($quoi=='forumvalide' AND ($GLOBALS['notifications']['thread_forum'] or $GLOBALS['notifications']['forum']))
+		OR ($quoi=='forumvalide' AND ($GLOBALS['notifications']['thread_forum'] OR $GLOBALS['notifications']['forum'] OR $GLOBALS['notifications']['forum_article']))
 	){
 
 		$id_forum = $flux['args']['id'];
