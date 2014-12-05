@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.5.2"
 	etat="test"
-	compatibilite="[3.0.2;3.0.*]"
+	compatibilite="[3.0.2;3.1.*]"
 	logo="img/bootstrap-32.png"
 	documentation="http://addyosmani.github.io/jquery-ui-bootstrap/"
 >
