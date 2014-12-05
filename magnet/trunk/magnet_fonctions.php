@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function critere_magnet_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	if ($boucle->type_requete=='articles'){
-		$boucle->where[] = array($crit->not?"'='":"'<>'","'magnet'","0");
+		$boucle->having[] = array($crit->not?"'='":"'<>'","'magnet'","0");
 	}
 }
 
