@@ -26,6 +26,7 @@ function mailsubscribers_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_mailsubscribers'] = array(
 		'type' => 'mailsubscriber',
+		'page'=>'',
 		'principale' => "oui",
 		'field'=> array(
 			"id_mailsubscriber"   => "bigint(21) NOT NULL",
