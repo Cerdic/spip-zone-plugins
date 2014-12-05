@@ -261,15 +261,18 @@ function mailsubscribers_supprimer_identifiant_liste($liste) {
 function mailsubscribers_do_synchro_list($liste){
 	if ($f = mailsubscribers_trouver_fonction_synchro($liste)){
 		$abonnes = $f();
-		if (!is_array($abonnes)
-		  OR (count($abonnes) AND (!$r = reset($abonnes) OR !isset($r['email'])))
-		  ){
-			spip_log("Synchronise liste $liste : abonnes mal formes en retour de la fonction $f","mailsubscribers"._LOG_ERREUR);
-			return;
+		if ($abonnes
+		  AND is_array($abonnes)
+			AND count($abonnes)
+			AND $r = reset($abonnes)
+			AND isset($r['email'])) {
+			$n = count($abonnes);
+			spip_log("Synchronise liste $liste avec $n abonnes (fonction $f)","mailsubscribers");
+			mailsubscribers_synchronise_liste($liste,$abonnes);
 		}
-		$n = count($abonnes);
-		spip_log("Synchronise liste $liste avec $n abonnes (fonction $f)","mailsubscribers");
-		mailsubscribers_synchronise_liste($liste,$abonnes);
+		else {
+			spip_log("Synchronise liste $liste : abonnes mal formes en retour de la fonction $f","mailsubscribers"._LOG_ERREUR);
+		}
 	}
 }
 
