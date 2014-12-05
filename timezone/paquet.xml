@@ -4,7 +4,7 @@
 	version="0.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
-	logo="mae-32.png"
+	logo="prive/themes/spip/images/timezone-64.png"
 >
 
 	<nom>Timezone</nom>
