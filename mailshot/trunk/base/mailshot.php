@@ -26,6 +26,7 @@ function mailshot_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_mailshots'] = array(
 		'editable' => false,  // pas d'edition
+		'page'=>'',
 		'principale' => "oui",  // auto-increment
 		'field'=> array(
 			"id_mailshot"   => "bigint(21) NOT NULL",
