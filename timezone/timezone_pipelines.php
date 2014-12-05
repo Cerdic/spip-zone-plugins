@@ -1,6 +1,6 @@
 <?php
 /**
- * Utilisations de pipelines par MAE
+ * Utilisations de pipelines pour Timezone
  *
  * @plugin	 Timezone
  * @copyright  2014
