@@ -261,8 +261,7 @@ function mailsubscribers_supprimer_identifiant_liste($liste) {
 function mailsubscribers_do_synchro_list($liste){
 	if ($f = mailsubscribers_trouver_fonction_synchro($liste)){
 		$abonnes = $f();
-		if ($abonnes
-		  AND is_array($abonnes)
+		if (is_array($abonnes)
 			AND (!count($abonnes) OR ($r = reset($abonnes) AND isset($r['email'])))
 			){
 			$n = count($abonnes);
