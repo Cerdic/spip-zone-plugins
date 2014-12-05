@@ -168,19 +168,6 @@ function notifications_notifications_destinataires($flux){
 					$flux['data'][] = $r['email'];
 			}
 
-			/*
-			// 3. Tous les auteurs des messages qui precedent (desactive egalement)
-			// (possibilite exclusive de la possibilite precedente)
-			// TODO: est-ce utile, par rapport au thread ?
-			else if (defined('_SUIVI_FORUMS_REPONSES')
-			AND _SUIVI_FORUMS_REPONSES) {
-				$id_parent = $id_forum;
-				while ($r = spip_fetch_array(spip_query("SELECT email_auteur, id_parent FROM spip_forum WHERE id_forum=$id_parent AND statut='publie'"))) {
-					$tous[] = $r['email_auteur'];
-					$id_parent = $r['id_parent'];
-				}
-			}
-			*/
 		}
 	}
 
