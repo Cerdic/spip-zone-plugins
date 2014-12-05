@@ -4,7 +4,7 @@
  *
  * @plugin     Timezone
  * @copyright  2014
- * @author     Yannick Lepetit
+ * @author     kent1
  * @licence    GNU/GPL v3
  * @package    SPIP\Timezone\Options
  */
