@@ -263,9 +263,8 @@ function mailsubscribers_do_synchro_list($liste){
 		$abonnes = $f();
 		if ($abonnes
 		  AND is_array($abonnes)
-			AND count($abonnes)
-			AND $r = reset($abonnes)
-			AND isset($r['email'])) {
+			AND (!count($abonnes) OR ($r = reset($abonnes) AND isset($r['email'])))
+			){
 			$n = count($abonnes);
 			spip_log("Synchronise liste $liste avec $n abonnes (fonction $f)","mailsubscribers");
 			mailsubscribers_synchronise_liste($liste,$abonnes);
