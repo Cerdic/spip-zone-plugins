@@ -64,6 +64,8 @@ function magnet_set_order($objet, $id_objet, $offset, $pile=''){
  * @param string $pile
  */
 function magnet_set_status($objet, $id_objet, $status, $pile=''){
+	if (!defined('_MAGNET_MAX_ITEMS')) define('_MAGNET_MAX_ITEMS',20);
+
 	$meta_magnet = "magnet_" .($pile?$pile."_":""). table_objet($objet);
 	$magnets = (isset($GLOBALS['meta'][$meta_magnet])?$GLOBALS['meta'][$meta_magnet]:'0');
 	$magnets = explode(',',$magnets);
@@ -82,8 +84,8 @@ function magnet_set_status($objet, $id_objet, $status, $pile=''){
 	if (!count($magnets))
 		$magnets[] = "0";
 
-	if (count($magnets)>20)
-		$magnets = array_slice($magnets,0,20);
+	if (count($magnets)>_MAGNET_MAX_ITEMS)
+		$magnets = array_slice($magnets,0,_MAGNET_MAX_ITEMS);
 
 	$magnets = implode(",",$magnets);
 
