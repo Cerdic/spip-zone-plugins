@@ -3,7 +3,7 @@
 	categorie="navigation"
 	version="1.2.0"
 	etat="stable"
-	compatibilite="[2.0.10;3.0.*]"
+	compatibilite="[2.0.10;3.1.*]"
 	logo="prive/themes/spip/images/world_link-32.png"
 	documentation="http://contrib.spip.net/Menu-de-langues-sous-forme-de-liens"
 	>
