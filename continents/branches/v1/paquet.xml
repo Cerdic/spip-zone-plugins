@@ -1,9 +1,9 @@
 <paquet
 	prefix="continents"
 	categorie="outil"
-	version="1.0.1"
+	version="1.0.2"
 	etat="stable"
-	compatibilite="[3.0.10;3.0.*]"
+	compatibilite="[3.0.10;3.1.*]"
 	logo="prive/themes/spip/images/continents-64.png"
 	documentation=""
 	schema="1.0.0" 
