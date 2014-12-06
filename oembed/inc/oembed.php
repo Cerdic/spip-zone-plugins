@@ -129,6 +129,21 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	$data_url = parametre_url($data_url,'maxheight',$maxheight,'&');
 	$data_url = parametre_url($data_url,'format',$format,'&');
 
+	// pre-traitement du provider si besoin
+	$endpoint = explode("//",$provider['endpoint']);
+	$endpoint = explode("/",$endpoint[1]);
+	$endpoint = reset($endpoint);
+	$endpoint = preg_replace(",\W+,","_",$endpoint);
+	if ($oembed_endpoint_pretraite = charger_fonction("pretraite_$endpoint",'oembed/input',true)){
+		$a = func_get_args();
+		$args = array('url'=>array_shift($a));
+		if (count($a)) $args['maxwidth'] = array_shift($a);
+		if (count($a)) $args['maxheight'] = array_shift($a);
+		if (count($a)) $args['format'] = array_shift($a);
+		$data_url = $oembed_endpoint_pretraite($data_url,$args);
+	}
+
+
 	if (isset($cache[$data_url]))
 		return $cache[$data_url];
 

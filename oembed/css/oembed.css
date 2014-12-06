@@ -13,7 +13,13 @@
 .oe-imdb-title img {float:left;margin-right: 10px;margin-bottom:10px;}
 
 /* Oembed generique */
-.oembed.oe-rich {display: block;background: #f8f8f8;padding: 10px;border: 1px solid #eee;margin: 1em 0;text-align: left}
+.oembed_rich {max-width:100%;}
+.oembed_rich .rwd-rich-container {position: relative;}
+.oembed_rich .rwd-rich-container iframe {position: absolute;top:0;left: 0;width: 100%;height: 100%;}
+.oembed_rich .oembed.oe-rich {display: block;background: #f8f8f8;padding: 5px;border: 1px solid #eee;text-align: left}
+.oembed_rich .oe-rich+.spip_doc_titre {margin-top: 0.5em;}
+.oembed_rich .spip_doc_titre+.oembed-source {display: none;}
+
 .oembed.oe-link.oe-rich .oe-html {display: block;}
 .oe-rich > blockquote {font-style: normal;}
 

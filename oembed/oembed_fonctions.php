@@ -82,7 +82,10 @@ function oembed_force_video_autoplay($html){
 	if ($e = extraire_balise($html,'iframe')
 	  AND $src = extraire_attribut($e,'src')){
 
-		$src_autoplay = parametre_url($src,"autoplay","1");
+		if (strpos($src,"soundcloud")!==false)
+			$src_autoplay = parametre_url($src,"auto_play","1");
+		else
+			$src_autoplay = parametre_url($src,"autoplay","1");
 		$html = str_replace($src,$src_autoplay,$html);
 	}
 
