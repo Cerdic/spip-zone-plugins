@@ -59,8 +59,8 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oembed_soundcloud .oe-rich {max-width:none !important;}
 .oembed_soundcloud .oe-play-button:before {background:#FF4B00;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;border-color:transparent}
 .oembed_soundcloud .oe-play-button:hover:before{background-color: #DD2826;}
-@media (min-width:480px){
-	.oembed_soundcloud .spip_doc_titre {position:absolute;top:0.5em;left:90px;width:auto;right:90px;text-align:left;}
+@media (min-width:420px){
+	.oembed_soundcloud .spip_doc_titre {position:absolute;top:0.5em;left:90px;width:auto;right:120px;text-align:left;}
 	.oembed_soundcloud .oe-play-button:before,
 	.oembed_soundcloud .oe-play-button:after {left:40px;}
 	.oembed_soundcloud .rwd-rich-container {background-position:top right !important;background-size:contain !important;}
