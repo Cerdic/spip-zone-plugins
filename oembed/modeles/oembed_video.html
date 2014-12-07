@@ -1,10 +1,13 @@
-<div class="oembed oe-video clearfix[ (#ENV{align})]" style="max-width:#ENV{data/width}px;">
-	<div class="rwd-video-container[(#ENV{data/thumbnail_url}|oui)oe-play-button]"
-	     style="width:100%;height:0;padding-bottom:[(#ENV{data/height}|div{#ENV{data/width}}|mult{100}|round{2})]%;[background:url('(#ENV{data/thumbnail_url})') no-repeat center;background-size:cover;]"
-			 [(#ENV{data/thumbnail_url}|oui)
-	     onclick="if (jQuery(this).is('.oe-play-button')){jQuery(this).removeClass('oe-play-button').append(decodeURIComponent('[(#ENV*{data/html}|oembed_force_video_autoplay|rawurlencode|texte_script)]'));}"
+#SET{thumbnail,#ENV{data/thumbnail_url}|sinon{#ENV{data/image}}}
+#SET{async,#GET{thumbnail}|et{#ENV*{data/html}|match{'<iframe'}}|oui}
+<div class="oembed oe-video[(#GET{async}|oui)async] clearfix[ (#ENV{align})]" style="max-width:#ENV{data/width}px;">
+	<div class="rwd-video-container[(#GET{async}|oui)oe-play-button]"
+	     style="width:100%;height:0;padding-bottom:[(#ENV{data/height}|div{#ENV{data/width}}|mult{100}|round{2})]%;[background-image:url('(#GET{thumbnail})');background-repeat:no-repeat;background-position:center;background-size:cover;]"
+			 [(#GET{async}|oui)
+	     onclick="if (jQuery(this).is('.oe-play-button')){jQuery(this).removeClass('oe-play-button').addClass('loading').append(decodeURIComponent('[(#ENV*{data/html}|oembed_force_video_autoplay|rawurlencode|texte_script)]'));}"
 	     ]>
-	     [(#ENV{data/thumbnail_url}|non) [(#ENV*{data/html}|sinon{#ENV{url}})] ]
+	     [(#GET{async}|non) [(#ENV*{data/html}|sinon{#ENV{url}})] ]
 	</div>
+	<style>.oe-video .loading {background-image:url("#CHEMIN_IMAGE{searching.gif}")!important;background-size:auto !important;}</style>
 </div>
 [<div class="spip_doc_titre" style="max-width:#ENV{data/width}px;"><a href="#ENV*{url}">(#ENV*{data/title})</a>[<br /><i>par <a href="#ENV*{data/author_url}">(#ENV*{data/author_name})</a></i>]</div>]

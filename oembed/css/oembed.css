@@ -9,13 +9,28 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oe-link-block {overflow: hidden;}
 .oe-link-block .link_logo {float: right;margin:0;margin-bottom: 10px;margin-left: 10px;border: 5px solid #ddd;}
 
-.oembed_rich {max-width:100%;}
+.oembed .loading {background-color:#eee;}
+.oembed_rich {max-width:100%;position:relative;}
+.oembed_rich .oe-rich {max-width:none !important;}
 .oembed_rich .rwd-rich-container {position: relative;}
-.oembed_rich .rwd-rich-container iframe {position: absolute;top:0;left: 0;width: 100%;height: 100%;}
+.oembed_rich .rwd-rich-container iframe {position: absolute;top:0;left: 0;width: 100%;height: 100%;z-index:2;}
 .oembed_rich .rwd-rich-container>:last-child {margin-bottom:0;}
 .oembed_rich .oembed.oe-rich {display: block;background: #f8f8f8;padding: 5px;border: 1px solid #eee;text-align: left}
 .oembed_rich .oe-rich+.spip_doc_titre {margin-top: 0.5em;}
 .oembed_rich .spip_doc_titre+.oembed-source {display: none;}
+.oe-rich.async .rwd-rich-container {
+	-webkit-transition: height .4s linear;
+     -moz-transition: height .4s linear;
+       -o-transition: height .4s linear;
+          transition: height .4s linear;
+}
+.oe-rich.async .rwd-rich-container.oe-play-button {height:80px !important;}
+@media (min-width:480px){
+	.oembed_rich .async+.spip_doc_titre {position:absolute;top:0.5em;left:90px;width:auto;right:90px;text-align:left;}
+	.oembed_rich .oe-play-button:before,
+	.oembed_rich .oe-play-button:after {left:40px;}
+	.oembed_rich .oe-play-button {background-position:top right !important;background-size:contain !important;}
+}
 
 .oembed.oe-link.oe-rich .oe-html {display: block;}
 .oe-rich > .rwd-rich-container >blockquote {font-style: normal;}
@@ -30,9 +45,10 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 
 /* Play button */
 .oe-play-button {position: relative;cursor: pointer;}
-.oe-play-button:before {content:"";position: absolute;display: block;left: 50%;top: 50%;background: #000;border: 1px solid #fff;width: 60px;height: 60px;margin-left: -30px;margin-top: -30px;z-index:10;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;}
-.oe-play-button:after {content:"";position: absolute;display: block;left: 50%;top: 50%;border-left:20px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left: -7px;margin-top: -10px;z-index:11;}
-.oe-play-button:hover:before{background-color: #DD2826;}
+.oe-play-button:before {content:"";position: absolute;display: block;left: 50%;top: 50%;background: #000;border: 4px solid #ddd;width: 68px;height: 68px;margin-left: -34px;margin-top: -34px;z-index:10;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+.oe-play-button:after {content:"";position: absolute;display: block;left: 50%;top: 50%;border-left:20px solid #ddd;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left: -7px;margin-top: -10px;z-index:11;}
+.oe-play-button:hover:before{background-color: #DD2826;border-color:#fff;}
+.oe-play-button:hover:after{border-left-color:#fff;}
 
 /* Cas particuliers */
 /* Storify */
@@ -55,14 +71,5 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oe-imdb-title img {float:left;margin-right: 10px;margin-bottom:10px;}
 
 /* Soundcloud */
-.oembed_soundcloud {position:relative;}
-.oembed_soundcloud .oe-rich {max-width:none !important;}
-.oembed_soundcloud .oe-play-button:before {background:#FF4B00;-moz-border-radius: 50%;-webkit-border-radius: 50%;border-radius: 50%;border-color:transparent}
-.oembed_soundcloud .oe-play-button:hover:before{background-color: #DD2826;}
-@media (min-width:420px){
-	.oembed_soundcloud .spip_doc_titre {position:absolute;top:0.5em;left:90px;width:auto;right:120px;text-align:left;}
-	.oembed_soundcloud .oe-play-button:before,
-	.oembed_soundcloud .oe-play-button:after {left:40px;}
-	.oembed_soundcloud .rwd-rich-container {background-position:top right !important;background-size:contain !important;}
-	.oembed_soundcloud iframe {z-index:2;}
-}
+.oembed_soundcloud .oe-play-button:before {background:#FF4B00;border-color:#eee;}
+.oembed_soundcloud .oe-play-button:hover:before{background-color: #DD2826;border-color:#fff;}
