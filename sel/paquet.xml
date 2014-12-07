@@ -8,7 +8,7 @@
 	schema="0.1"
 	documentation="http://contrib.spip.net/SEL-systeme-d-echange-local"
 >      
-<nom>SEL (Système déchange local)</nom>
+<nom>SEL (Système d'échange local)</nom>
  <!-- Gestion des chats dans SPIP -->
 <auteur lien="http://valerie.journet.free.fr">[Valérie Journet-Texier->http://valerie.journet.free.fr]</auteur>
 <auteur lien="http://perline.org/">[Perline->http://perline.org/]</auteur>
