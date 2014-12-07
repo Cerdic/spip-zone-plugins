@@ -9,13 +9,15 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oe-link-block {overflow: hidden;}
 .oe-link-block .link_logo {float: right;margin:0;margin-bottom: 10px;margin-left: 10px;border: 5px solid #ddd;}
 
-.oembed .loading {background-color:#eee;}
+.spip_documents .oembed {
+	display: block;background: #f8f8f8;padding: 5px;border: 1px solid #eee;
+}
 .oembed_rich {max-width:100%;position:relative;}
 .oembed_rich .oe-rich {max-width:none !important;}
 .oembed_rich .rwd-rich-container {position: relative;}
 .oembed_rich .rwd-rich-container iframe {position: absolute;top:0;left: 0;width: 100%;height: 100%;z-index:2;}
 .oembed_rich .rwd-rich-container>:last-child {margin-bottom:0;}
-.oembed_rich .oembed.oe-rich {display: block;background: #f8f8f8;padding: 5px;border: 1px solid #eee;text-align: left}
+.oembed_rich .oembed.oe-rich {display: block;text-align: left}
 .oembed_rich .oe-rich+.spip_doc_titre {margin-top: 0.5em;}
 .oembed_rich .spip_doc_titre+.oembed-source {display: none;}
 .oe-rich.async .rwd-rich-container {
