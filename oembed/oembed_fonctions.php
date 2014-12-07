@@ -82,11 +82,15 @@ function oembed_force_video_autoplay($html){
 	if ($e = extraire_balise($html,'iframe')
 	  AND $src = extraire_attribut($e,'src')){
 
+		$src_amp = parametre_url($src,"dummy",null);
 		if (strpos($src,"soundcloud")!==false)
-			$src_autoplay = parametre_url($src,"auto_play","1");
+			$src_autoplay = parametre_url($src,"auto_play","1","&");
 		else
-			$src_autoplay = parametre_url($src,"autoplay","1");
-		$html = str_replace($src,$src_autoplay,$html);
+			$src_autoplay = parametre_url($src,"autoplay","1","&");
+		if (strpos($html,$src_amp))
+			$html = str_replace($src_amp,$src_autoplay,$html);
+		else
+			$html = str_replace($src,$src_autoplay,$html);
 	}
 
 	return $html;

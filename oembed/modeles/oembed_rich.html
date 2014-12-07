@@ -1,7 +1,8 @@
 <div class="oembed oe-rich clearfix[ (#ENV{align})]" style="max-width:#ENV{data/width}px;">
-	#SET{async,#ENV{data/thumbnail_url}|et{#ENV*{data/html}|match{'<iframe'}}|oui}
+	#SET{thumbnail,#ENV{data/thumbnail_url}|sinon{#ENV{data/image}}}
+	#SET{async,#GET{thumbnail}|et{#ENV*{data/html}|match{'<iframe'}}|oui}
 	<div class="rwd-rich-container[(#GET{async}|oui)oe-play-button]"
-	     style="width:100%;[height:(#ENV{data/height})px;][background:url('(#ENV{data/thumbnail_url})') no-repeat center;background-size:cover;]"
+	     style="width:100%;[height:(#ENV{data/height})px;][background:url('(#GET{thumbnail})') no-repeat center;background-size:cover;]"
 			 [(#GET{async}|oui)
 	     onclick="if (jQuery(this).is('.oe-play-button')){jQuery(this).removeClass('oe-play-button').append(decodeURIComponent('[(#ENV*{data/html}|oembed_force_video_autoplay|rawurlencode|texte_script)]'));}"
 	     ]>
