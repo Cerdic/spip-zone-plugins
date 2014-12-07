@@ -143,7 +143,7 @@ function balise_TESTURL_LISTE_URL($p){
 	
 		if(!isset($url_visite[$url_site]))
 		{
-			if(preg_match('#^(art|doc|rub|aut)([0-9]*)$#',$url_site,$matches))
+			if(preg_match('#^(art|article|aut|auteur|doc|document|rub|rubrique)([0-9]*)$#',$url_site,$matches))
 			{
 				$code=testurl_verifier_url_ecrire($matches[1],$matches[2]);
 				
@@ -199,17 +199,26 @@ function balise_TESTURL_LISTE_URL($p){
 
 
 function filtre_testurl_transforme_en_url($url){
-if(preg_match('#^(art|doc|rub|aut)([0-9]*)$#',$url,$matches))
+if(preg_match('#^(art|article|aut|auteur|doc|document|rub|rubrique)([0-9]*)$#',$url,$matches))
 	{
 		switch($matches[1]){
-			case 'rub':
-				$url=generer_url_ecrire('rubrique','id_rubrique='.$matches[2]);
+			case 'aut':
+				$url=generer_url_ecrire('auteur','id_auteur='.$matches[2]);
+			break;
+			case 'auteur':
+				$url=generer_url_ecrire('auteur','id_auteur='.$matches[2]);
 			break;
 			case 'doc':
 				$url=generer_url_ecrire('document_edit','id_document='.$matches[2]);
 			break;
-			case 'aut':
-				$url=generer_url_ecrire('auteur','id_auteur='.$matches[2]);
+			case 'document':
+				$url=generer_url_ecrire('document_edit','id_document='.$matches[2]);
+			break;
+			case 'rub':
+				$url=generer_url_ecrire('rubrique','id_rubrique='.$matches[2]);
+			break;
+			case 'rubrique':
+				$url=generer_url_ecrire('rubrique','id_rubrique='.$matches[2]);
 			break;
 			case 'default':
 				$url=generer_url_ecrire('article','id_article='.$matches[2]);
@@ -241,19 +250,36 @@ function testurl_verifier_url_ecrire($objet,$id_objet){
 		if($statut!='publie')
 			return _T("testurl:erreur_article_introuvable",array('id'=>$fichier));
 	break;
-	case 'rub':
-		$statut=sql_getfetsel('statut','spip_rubriques','id_rubrique='.$id_objet);
+	case 'article':
+		$statut=sql_getfetsel('statut','spip_articles','id_article='.$id_objet);
 		if($statut!='publie')
-			return _T("testurl:erreur_rubrique_introuvable",array('id'=>$fichier));
+			return _T("testurl:erreur_article_introuvable",array('id'=>$fichier));
 	break;
-	
+	case 'aut';
+		// TODO
+	break;
+	case 'auteur';
+		// TODO
+	break;
 	case 'doc';
 		$fichier=sql_getfetsel('fichier','spip_documents','id_document='.$id_objet);
 		if(!file_exists(_DIR_IMG.$fichier))
 			return _T("testurl:erreur_document_introuvable",array('fichier'=>$fichier));
 	break;
-	case 'aut';
-		// TODO
+	case 'document';
+		$fichier=sql_getfetsel('fichier','spip_documents','id_document='.$id_objet);
+		if(!file_exists(_DIR_IMG.$fichier))
+			return _T("testurl:erreur_document_introuvable",array('fichier'=>$fichier));
+	break;
+	case 'rub':
+		$statut=sql_getfetsel('statut','spip_rubriques','id_rubrique='.$id_objet);
+		if($statut!='publie')
+			return _T("testurl:erreur_rubrique_introuvable",array('id'=>$fichier));
+	break;
+	case 'rubrique':
+		$statut=sql_getfetsel('statut','spip_rubriques','id_rubrique='.$id_objet);
+		if($statut!='publie')
+			return _T("testurl:erreur_rubrique_introuvable",array('id'=>$fichier));
 	break;
 	case 'default';
 		// TODO

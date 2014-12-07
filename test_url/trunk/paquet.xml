@@ -1,7 +1,7 @@
 <paquet
 	prefix="testurl"
 	categorie="maintenance"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/test-ok_24.png"
