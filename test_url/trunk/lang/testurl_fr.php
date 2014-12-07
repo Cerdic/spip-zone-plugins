@@ -23,13 +23,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//E
 	'erreur_article_introuvable'  => 'L\'article @id@ n\'est pas publié',
+	'erreur_auteur_introuvable'  => 'L\'auteur @id@ n\'a rien publié',
 	'erreur_cause_passerelle_serveur' => 'Erreur &agrave; cause de la passerelle du serveur !',
 	'erreur_document_introuvable' => 'Le fichier @fichier@ n\'est plus présent sur le serveur',
 	'erreur_interne_serveur' => 'Erreur interne au serveur !',
 	'erreur_requete_http' => 'Erreur dans la requ&ecirc;te HTTP !',
 	'erreur_rubrique_introuvable' => 'La rubrique @id@ ne contient pas d\'objet publié',
 
-	
+
 
 	//L
 	'les_sites' => 'Les sites',

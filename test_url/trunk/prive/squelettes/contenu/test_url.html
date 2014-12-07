@@ -79,12 +79,12 @@
 #BOITE_FERMER
 
 
-    
 
-    
+
+
 #BOITE_OUVRIR
 <h3><:testurl:liens_rubriques:></h3>
-   
+
 <BOUCLE_test_rubrique(CONDITION){si #ENV{test}|=={rubrique}}>
 	<:testurl:tester_des_urls:>
 	<ul class="liste_objet">
@@ -120,27 +120,27 @@
 		</BOUCLE_parcours_rub>
 	</ul>
 	</div>
-	
+
 		<ul class="action">
 		[(#SET{param,''})]
 		[(#ENV{branche}|oui) #SET{param,&branche%5B%5D=#ENV{branche}|implode{'|'}} ]
 		<li><a href="#URL_ECRIRE{test_url,test=rubrique#GET{param}}" class="bouton vert"><:testurl:tester_les_url_des:> <:info_rubriques_02:></a></li>
 	</ul>
-	
+
 	</B_parcours_rub>
 	<:testurl:aucun_lien:>
 	<//B_parcours_rub>
 <//B_test_rubrique>
 
 
- #BOITE_FERMER   
+ #BOITE_FERMER
 
 
 #BOITE_OUVRIR
 <h3><:testurl:les_sites:></h3>
 
 
-   
+
 <BOUCLE_test_site(CONDITION){si #ENV{test}|=={site}}>
 	<:testurl:tester_des_urls:>
 	<ul class="liste_objet">
@@ -177,7 +177,7 @@
 		</BOUCLE_parcours_site>
 	</ul>
 	</div>
-	
+
 	<ul class="action">
 	[(#SET{param,''})]
 	[(#ENV{branche}|oui) #SET{param,&branche%5B%5D=#ENV{branche}|implode{'|'}} ]
@@ -186,10 +186,6 @@
 	</B_parcours_site>
 	<:testurl:aucun_site_trouve:>
 	<//B_parcours_site>
-	
+
 <//B_test_site>
 #BOITE_FERMER
-    
-	
-
-
