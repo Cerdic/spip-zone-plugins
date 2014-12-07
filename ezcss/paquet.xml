@@ -1,14 +1,14 @@
 <paquet
 	prefix="ezcss"
 	categorie="navigation"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="img/logo.jpg"
 	documentation="http://contrib.spip.net/?article3538"
 >
 	<nom>ezcss</nom>
-	<auteur lien="http://www.ez-css.org/">Thierry Koblenz et port&eacute; pour SPIP par Gilles Klein</auteur>
+	<auteur lien="http://www.ez-css.org/">Thierry Koblenz et porté pour SPIP par Gilles Klein</auteur>
 	<licence>MSD/MIT</licence>
 	
 	<pipeline nom="insert_head_css" inclure="ezcss_pipelines.php" />

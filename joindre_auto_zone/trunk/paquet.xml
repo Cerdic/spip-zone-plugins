@@ -1,7 +1,7 @@
 <paquet
 	prefix="jaz"
 	categorie="divers"
-	version="2.0.0"
+	version="2.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/jaz-48.png"
@@ -11,7 +11,7 @@
 
 	<auteur>Cyril MARION - Ateliers CYM</auteur>
 
-	<licence>&copy;2012 GPL v3</licence>
+	<licence>2012 GPL v3</licence>
 
 	<pipeline nom="post_insertion" inclure="jaz_pipelines.php" />
 

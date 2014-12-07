@@ -1,7 +1,7 @@
 <paquet
     prefix="babbi"
     categorie="navigation"
-    version="3.0.0"
+    version="3.0.1"
     etat="stable"
     compatibilite="[1.9.2;3.0.*)"
     logo="prive/themes/spip/images/logo_menu_50.png"
@@ -9,7 +9,7 @@
 >       
 	
     <nom>Menu babbibel</nom>
-    <!-- Un menu d&eacute;roulant configurable et compatible -->
+    <!-- Un menu déroulant configurable et compatible -->
 
     <auteur>babbibel</auteur>
 

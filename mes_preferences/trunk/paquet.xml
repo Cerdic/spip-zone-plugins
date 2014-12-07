@@ -1,14 +1,14 @@
 <paquet
 	prefix="mes_preferences"
 	categorie="theme"
-	version="0.1.2"
+	version="0.1.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/mes_preferences-32.png"
 	documentation=""
 >
 
-	<nom>Mes Pr&eacute;f&eacute;rences</nom>
+	<nom>Mes Préférences</nom>
 
 	<auteur>Arnaud Bérard (Mist. GraphX)</auteur>
 

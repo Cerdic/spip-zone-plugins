@@ -1,14 +1,14 @@
 <paquet
 	prefix="cameras"
 	categorie="divers"
-	version="0.1.7"
+	version="0.1.8"
 	etat="experimental"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/camera-128.png"
 	schema="0.6.1"
 	documentation="https://red.rebellyon.info/projects/carto/wiki"
 >	
-	<nom>Cam&eacute;ras</nom>
+	<nom>Caméras</nom>
 	<!-- Ajout d'un objet camera dans SPIP -->
 	<!-- bonne année 2013!!  -->
 	
@@ -23,22 +23,22 @@
 	
 	<pipeline nom="autoriser" inclure="cameras_autorisations.php" /> 
 	
-	<!-- Ajoute l'objet camera dans la liste des objets proposs à la publication -->
+	<!-- Ajoute l'objet camera dans la liste des objets proposés à la publication -->
 	<pipeline nom="accueil_encours" inclure="cameras_pipelines.php" />
 	
 	<!-- Actions à effectuer après ajout ou modification d'une caméra -->
 	<pipeline nom="post_edition" inclure="cameras_pipelines.php" />
 	<pipeline nom="post_insertion" inclure="cameras_pipelines.php" />
-	<!-- modifier ou complter le contenu des listes pr&eacute;sentant les enfants d'un objet dans l'espace priv -->
+	<!-- modifier ou compléter le contenu des listes présentant les enfants d'un objet dans l'espace privé -->
 	<pipeline nom="affiche_enfants" inclure="cameras_pipelines.php" />
-	<!-- affiche du contenu au centre de la page de l'espace priv -->
+	<!-- affiche du contenu au centre de la page de l'espace privé -->
 	<pipeline nom="affiche_milieu" inclure="cameras_pipelines.php" />
 	<!-- Ajoute la liste des cameras associées à un auteur (sur la page auteur) -->
 	<pipeline nom="affiche_auteurs_interventions" inclure="cameras_pipelines.php" /> 
 	
-	<!-- insrer du code dans le head de l'espace priv -->
+	<!-- insérer du code dans le head de l'espace privé -->
 	<pipeline nom="header_prive" inclure="cameras_pipelines.php" />
-	<!-- insrer du code dans le head de l'espace public -->
+	<!-- insérer du code dans le head de l'espace public -->
 	<pipeline nom="insert_head" inclure="cameras_pipelines.php" />
 	
 	

@@ -1,7 +1,7 @@
 <paquet
 	prefix="mosaique"
 	categorie="multimedia"
-	version="0.3.3"
+	version="0.3.4"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/mosaique-64.png"
@@ -9,7 +9,7 @@
 	schema="0.0.1"
 >
 
-	<nom>Mosa&iuml;que</nom>
+	<nom>Mosaïque</nom>
 
 	<auteur>Thom</auteur>
 	<licence>GNU/GPL</licence>
