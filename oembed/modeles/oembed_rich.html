@@ -4,8 +4,9 @@
 	<div class="rwd-rich-container[(#GET{async}|oui)oe-play-button]"
 	     style="width:100%;[height:(#ENV{data/height})px;][background:url('(#GET{thumbnail})') no-repeat center;background-size:cover;]"
 			 [(#GET{async}|oui)
-	     onclick="if (jQuery(this).is('.oe-play-button')){jQuery(this).removeClass('oe-play-button').addClass('loading').append(decodeURIComponent('[(#ENV*{data/html}|oembed_force_video_autoplay|rawurlencode|texte_script)]'));}"
+	     onclick="if (jQuery(this).is('.oe-play-button')){jQuery(this).removeClass('oe-play-button').addClass('loading').html(decodeURIComponent('[(#ENV*{data/html}|oembed_force_video_autoplay|rawurlencode|texte_script)]'));}"
 	     ]>
+			 [(#GET{async}|oui) <button onclick="jQuery(this).parent().trigger('click');">Play</button>]
 	     [(#GET{async}|non) [(#ENV*{data/html}|sinon{#ENV{url}})] ]
 	</div>
 	<style>.oe-rich .loading {background-image:url("#CHEMIN_IMAGE{searching.gif}")!important;background-size:auto !important;}</style>
