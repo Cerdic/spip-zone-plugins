@@ -24,6 +24,7 @@ include_spip('mailsubscribers_fonctions');
  *   liste d'utilisateurs, chacun decrit par un array dans le meme format que newsletter/subscriber
  */
 function newsletter_subscribers_dist($listes = array(),$options = array()){
+	static $count = null;
 
 	$select = "email,nom,listes,lang,'on' AS status,jeton";
 	$where = array('statut='.sql_quote('valide'));
@@ -32,6 +33,31 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 	// si pas de liste precisee : liste newsletter par defaut (newsletter::newsletter)
 	if (!$listes OR !is_array($listes)){
 		$listes = array(mailsubscribers_normaliser_nom_liste());
+	}
+
+	// si simple comptage d'une seule liste, faisons plus rapidement pour eviter les regexp sur une grosse base
+	// on en profite pour tout compter pour ne le faire qu'une fois
+	if (isset($options['count']) AND $options['count'] AND count($listes)==1){
+		if (is_null($count)
+			AND !_request('var_mode')
+		  AND isset($GLOBALS['meta']['newsletter_subscribers_count'])
+		  AND $c = unserialize($GLOBALS['meta']['newsletter_subscribers_count']))
+			$count = $c;
+		if (is_null($count)){
+			$rows = sql_allfetsel("listes,count(id_mailsubscriber) as n","spip_mailsubscribers",$where,"listes");
+			foreach($rows as $row){
+				$ls = explode(",",$row["listes"]);
+				$ls = array_filter($ls);
+				$ls = array_unique($ls);
+				foreach($ls as $l){
+					if (!isset($count[$l])) $count[$l] = 0;
+					$count[$l] += $row['n'];
+				}
+			}
+			ecrire_meta("newsletter_subscribers_count",serialize($count));
+		}
+		$liste = reset($listes);
+		return (isset($count[$liste])?$count[$liste]:0);
 	}
 
 	$sous_where = array();
@@ -44,7 +70,7 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 		$where[] = $sous_where;
 	}
 
-	// si simple comptage
+	// si simple comptage de plusieurs listes, on arrive ici
 	if (isset($options['count']) AND $options['count'])
 		return sql_countsel("spip_mailsubscribers",$where);
 

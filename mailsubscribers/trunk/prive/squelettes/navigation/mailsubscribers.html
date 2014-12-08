@@ -5,8 +5,7 @@
 		<li class="item[(#ENV{liste}|trim|non)on]">[(#SELF|parametre_url{liste,' '}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{liste}|trim|non})]</li>
 	<BOUCLE_listes(POUR){tableau #REM|mailsubscribers_listes}>
 		<li class="item[(#ENV{liste}|=={#CLE}|oui)on]">[(#SELF|parametre_url{liste,#CLE}|lien_ou_expose{#VALEUR{titre},#ENV{liste}|=={#CLE}})]
-		[(#SET{listes,[(^|,)(#CLE)($|,)]})]
-		<BOUCLE_cpt(MAILSUBSCRIBERS){listes==#GET{listes}}{tout} />([(#TOTAL_BOUCLE)])<//B_cpt>
+		([(#CLE|mailsubscribers_compte_inscrits)])
 		</li>
 	</BOUCLE_listes>
 	</ul>

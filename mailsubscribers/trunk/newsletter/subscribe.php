@@ -157,6 +157,7 @@ function newsletter_subscribe_dist($email,$options = array()){
 		autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber'],false);
 		autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
 	}
+	effacer_meta("newsletter_subscribers_count");
 
 	return true;
 }

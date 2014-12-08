@@ -83,6 +83,7 @@ function newsletter_unsubscribe_dist($email,$options = array()){
 			autoriser_exception("instituer","mailsubscriber",$row['id_mailsubscriber'],false);
 		}
 	}
+	effacer_meta("newsletter_subscribers_count");
 
 	return true;
 }
