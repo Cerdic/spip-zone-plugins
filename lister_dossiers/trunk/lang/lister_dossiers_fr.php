@@ -27,6 +27,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // P
     'pas_de_dossiers' => 'Il n\'y a pas de dossiers.',
 
+    // S
+    'sous_dossiers_afficher' => 'Afficher les sous-dossiers',
+    'sous_dossiers_masquer' => 'Masquer les sous-dossiers',
+
     // T
     'titre_lister_dossiers' => 'Les dossiers',
     'titre_page' => 'Les dossiers',

@@ -54,3 +54,20 @@ Valeurs par defaut :
 .lister_dossiers #contenu .liste.dossiers > ul > li ul li {
     margin-bottom: 0.15em;
 }
+.lister_dossiers #contenu .liste.dossiers .boutons {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    overflow: hidden;
+}
+.lister_dossiers #contenu .liste.dossiers .boutons .bouton {
+    display: block;
+    float: right;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    font-weight: bold;
+    background-color: #GET{claire};
+    color: [#(#GET{claire}|replace{"#",""}|couleur_saturation{1}|couleur_extreme)];
+    border: 1px solid #GET{foncee};
+}

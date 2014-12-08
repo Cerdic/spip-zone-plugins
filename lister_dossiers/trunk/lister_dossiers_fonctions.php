@@ -20,7 +20,6 @@ function lister_dossiers($racine = _DIR_RACINE)
 			$repertoires[$value] = lister_dossiers($racine . DIRECTORY_SEPARATOR . $value);
 		}
 	}
-
 	return $repertoires;
 }
 
