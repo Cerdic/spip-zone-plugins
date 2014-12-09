@@ -272,8 +272,19 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 			AND $id_objet = $liens_objets[0]['id_objet']
 			// ...qui possède un champ `id_secteur`
 			AND is_array($infos_objet = lister_tables_objets_sql(table_objet_sql($objet)))
-			AND isset($infos_objet['field']['id_secteur'])
-			AND $id_secteur = sql_getfetsel('id_secteur',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet))
+			AND
+			(
+				(
+				isset($infos_objet['field']['id_secteur'])
+				AND $id_secteur = sql_getfetsel('id_secteur',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet))
+				)
+				OR
+				(
+				isset($infos_objet['field']['id_rubrique'])
+				AND $id_rubrique = sql_getfetsel('id_rubrique',table_objet_sql($objet),id_table_objet($objet).'='.intval($id_objet))
+				AND $id_secteur = sql_getfetsel('id_secteur',table_objet_sql('rubrique'),'id_rubrique='.intval($id_rubrique))
+				)
+			)
 		) {
 			// on cherche à savoir si le secteur est wiki/ouvert.
 			// faute de fonction générique, on reprend une partie du code de l'autorisation 'rubrique_publierdans'.

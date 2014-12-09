@@ -77,7 +77,7 @@
 			<:album:bouton_dissocier:>,
 			#URL_ACTION_AUTEUR{dissocier_album,#ID_ALBUM/#OBJET/#ID_OBJET,#GET{self}|ancre_url{albums}},
 			'ajax dissocier reveal','','',
-			[(function(){jQuery("#album(#ID_ALBUM)").animateRemove(ajaxReload("liste_albums"));return true;})()]})]
+			[(function(){jQuery("#album(#ID_ALBUM)").animateRemove();return true;})()]})]
 		]
 		[(#AUTORISER{modifier,album,#ID_ALBUM}|oui)
 		<a href="#" class="bouton remplir" role="button" tabindex="0"><:medias:bouton_ajouter_document:></a>
