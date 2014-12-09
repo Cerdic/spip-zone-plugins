@@ -56,7 +56,7 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 			}
 			ecrire_meta("newsletter_subscribers_count",serialize($count));
 		}
-		$liste = reset($listes);
+		$liste = mailsubscribers_normaliser_nom_liste(reset($listes));
 		return (isset($count[$liste])?$count[$liste]:0);
 	}
 
