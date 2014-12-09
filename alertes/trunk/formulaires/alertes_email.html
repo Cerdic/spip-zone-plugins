@@ -5,13 +5,9 @@
 
 [(#REM) Compatibilité Accès restreint : proposer les rubriques restreintes auxquelles l'auteur a accès]
 <BOUCLE_si_acces_restreint(CONDITION){si #PLUGIN{accesrestreint}}>
-<BOUCLE_zones(spip_zones_liens){id_objet=#SESSION{id_auteur}}{objet=auteur}>
-	#SET{rubriques_restreintes,#ARRAY}
-	<BOUCLE_rubriques_zones(spip_zones_liens){id_zone=#ID_ZONE}{objet=rubrique}>
-		#SET{rubriques_restreintes, #GET{rubriques_restreintes}|push{#ID_OBJET}}
-	</BOUCLE_rubriques_zones>
-</BOUCLE_zones>
+	#SET{rubriques_restreintes,#ENV{rubriques_restreintes}}
 </BOUCLE_si_acces_restreint>
+<//B_si_acces_restreint>
 
 <div class="formulaire_spip formulaire_alertes_email">
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]

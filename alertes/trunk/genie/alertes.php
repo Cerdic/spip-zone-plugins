@@ -9,7 +9,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function genie_alertes_dist($time) {
-	spip_log('Lacement du cron', 'alertes'._LOG_ERREUR);
+	spip_log('Lancement du cron', 'alertes'._LOG_ERREUR);
 	include_spip('base/abstract_sql');
 	$now = date('Y-m-d H:i:s');
 	//Récupération de la configuration
@@ -22,7 +22,7 @@ function genie_alertes_dist($time) {
 		$acces_restreint = false;
 	}
 	$limit = "0, ".intval($a['nb_mails']);
-	$nb_max = sql_countsel("id_alerte_cron", "spip_alertes_cron","date_pour_envoi <= '".$now."'"); //Nombres total d'alerte à traité, donc de mail à envoyer.
+	$nb_max = sql_countsel("spip_alertes_cron","date_pour_envoi <= '".$now."'"); //Nombres total d'alerte à traité, donc de mail à envoyer.
 	//Si on a plus d'alertes prevues que d'email autorisé à envoyer, il faudra poursuivre la tâche.
 	if($nb_max > intval($a['nb_mails'])){
 		$time = - intval($a['nb_mails']); //Si j'ai bien compris, temps en seconde avant de relancer la tâche non-terminée.

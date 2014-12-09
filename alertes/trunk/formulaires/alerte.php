@@ -43,14 +43,14 @@ function formulaires_alerte_charger_dist($objet, $id_objet){
 		break;
 		
 		//On veut s'abonner à une rubrique ou un secteur (qui est une rubrique) : verifions son secteur et sa propre éligibilité
-		case "rubrique":
+		case "rubrique":			
 			//Premierement, voyons si la rubrique est autoriser d'office
 			if( in_array($id_objet, to_array($a['rubriques'])) ){
 				$valeur['objet_autoriser'] = 'oui';
 			}else{
 				if($a['secteurs']){
 					//Recuperation et test sur le secteur
-					if ($secteur = sql_select('id_secteur', 'spip_rubriques', 'id_rubrique = '.intval($id_objet))) {
+					if ($secteurs = sql_select('id_secteur', 'spip_rubriques', 'id_rubrique = '.intval($id_objet))) {
 						while ($row = sql_fetch($secteurs)) {
 							//On compare à la configuration saisie
 							if( in_array($row['id_secteur'],to_array($a['secteurs'])) ){
@@ -64,10 +64,34 @@ function formulaires_alerte_charger_dist($objet, $id_objet){
 			}
 		break;
 		
+		//Au cas où appel direct #FORMULAIRE_ALERTE{secteur,XX}
+		case "secteur":
+				if($a['secteurs']){
+					//Recuperation et test sur le secteur
+					if ($secteurs = sql_select('id_secteur', 'spip_rubriques', 'id_rubrique = '.intval($id_objet))) {
+						while ($row = sql_fetch($secteurs)) {
+							//On compare à la configuration saisie
+							if( in_array($row['id_secteur'],to_array($a['secteurs'])) ){
+								$valeur['objet_autoriser'] = 'oui';
+							}else{
+								$valeur['objet_autoriser'] = 'non';
+							}
+						}
+					}					
+				}else{
+					$valeur['objet_autoriser'] = 'non';
+				}
+		break;
+		
+		
 		//On veut s'abonner à un auteur : vérifions qu'il est dans la liste autorisée.
 		case "auteur":
-			if($aut = sql_select('id_auteur', 'spip_auteurs', 'id_auteur = '.intval($id_objet))) {
-				$valeur['objet_autoriser'] = 'oui';
+			if($a['auteurs']){
+				if( in_array($id_objet, to_array($a['auteurs'])) ){
+					$valeur['objet_autoriser'] = 'oui';
+				}else{
+					$valeur['objet_autoriser'] = 'non';
+				}
 			}else{
 				$valeur['objet_autoriser'] = 'non';
 			}

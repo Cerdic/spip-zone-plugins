@@ -12,6 +12,21 @@ function formulaires_alertes_email_charger_dist($id_auteur){
 	$id_auteur = intval($id_auteur);
 	//Récuperation de la configuration de base
 	$a = @unserialize($GLOBALS['meta']['config_alertes']);
+	//A-t-on Accès restreint ?
+	$ar = filtre_info_plugin_dist('accesrestreint','est_actif');
+	if($ar == true){
+		$zones_restreintes = array();
+		if($sql_zones = sql_select("id_zone","spip_zones_liens","objet = 'auteur' AND id_objet = ".intval($id_auteur))){
+			while ($zone = sql_fetch($sql_zones)) {
+				if($sql_z = sql_select("id_objet","spip_zones_liens","objet = 'rubrique' AND id_zone = ".intval($zone['id_zone']))){
+					while ($z = sql_fetch($sql_z)) {
+						$zones_restreintes[] = $z['id_objet']; 
+					}
+				}
+			}			
+		}
+		$valeurs['rubriques_restreintes'] = $zones_restreintes;
+	}
 	if(is_array($a)){
 		//Récuperation des abonnements au mots
 		if($a['groupes']){

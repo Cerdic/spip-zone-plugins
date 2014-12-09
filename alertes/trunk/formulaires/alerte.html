@@ -2,6 +2,7 @@
 	Formulaire permettant de s'abonner à une alerte sur un objet
 ]
 [(#REM) Formulaire que si les alertes sont actives et si l'objet est autorisé à l'abonnement]
+
 <BOUCLE_autorise(CONDITION){si #CONFIG{config_alertes/activer_alertes}|=={oui}|et{#ENV{objet_autoriser}|=={oui}}}>
 <div class="formulaire_alerte ajax">
 [(#ENV**{editable}|oui)
