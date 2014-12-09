@@ -34,7 +34,7 @@ function action_oembed_nettoyer_iframes_dist(){
 
 		foreach($champs as $champ){
 			$primary = id_table_objet($table);
-			$res = sql_select("$primary,$champ", $table, "$champ LIKE '%iframe%'");
+			$res = sql_select("$primary,$champ", $table, "$champ LIKE '%iframe%' OR $champ LIKE '%object%'");
 			while ($row = sql_fetch($res)){
 				$pre = "$primary=".$row[$primary].":$champ:";
 
@@ -121,6 +121,64 @@ function action_oembed_nettoyer_iframes_dist(){
 					if ($texte!==$row[$champ]){
 						echo "$pre Corrige $champ <br />";
 						if ($simu) {
+							objet_modifier($objet,$row[$primary],array($champ=>$texte));
+						}
+						//sql_updateq($champ, array($champ => $texte), "$primary=" . intval($row[$primary]));
+					}
+				}
+				$objects = extraire_balises($texte, "object");
+				if (count($objects)){
+					foreach ($objects as $object){
+						$url = "";
+						$embed = extraire_balise($object, "embed");
+						$src = extraire_attribut($embed, "src");
+						if (strncmp($src, "//", 2)==0)
+							$src = "http:" . $src;
+						if (strpos($embed, "youtube")!==false){
+							if (strpos($src, "/v/")!==false){
+								$url = str_replace("?", "&", $src);
+								$url = str_replace("/embed/", "/watch?v=", $url);
+								echo "$pre Youtube $url<br />";
+							}
+							if (!$url){
+								var_dump($row);
+								var_dump($object);
+								die('youtube inconnue');
+							}
+						} elseif (strpos($embed, "dailymotion")!==false) {
+							if (strpos($src, "/swf/video/")!==false){
+								$url = str_replace("/swf/video/", "/video/", $src);
+								$url = explode("?",$url);
+								$url = reset($url);
+								#var_dump($url);
+								echo "$pre DailyMotion $url<br />";
+							}
+							elseif (strpos($src, "/swf/")!==false){
+								$url = str_replace("/swf/", "/video/", $src);
+								$url = explode("?",$url);
+								$url = reset($url);
+								#var_dump($url);
+								echo "$pre DailyMotion $url<br />";
+							}
+							if (!$url){
+								var_dump($row);
+								var_dump($object);
+								die('dailymotion inconnue');
+							}
+						} else {
+							echo "$pre object inconnue : ".entites_html($object)."<br />";
+						}
+						if ($url){
+							$texte = str_replace($object, "\n" . $url . "\n", $texte);
+							if (preg_match(",<center>\s*" . preg_quote($url, ",") . ".*</center>,Uims", $texte, $m)){
+								$texte = str_replace($m[0], "\n" . $url . "\n", $texte);
+							}
+							$texte = preg_replace(",\s+" . preg_quote($url, ",") . "\s+,ims", "\n" . $url . "\n", $texte);
+						}
+					}
+					if ($texte!==$row[$champ]){
+						echo "$pre Corrige $champ <br />";
+						if (!$simu) {
 							objet_modifier($objet,$row[$primary],array($champ=>$texte));
 						}
 						//sql_updateq($champ, array($champ => $texte), "$primary=" . intval($row[$primary]));
