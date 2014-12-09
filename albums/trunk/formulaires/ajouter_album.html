@@ -28,7 +28,7 @@
 				<span class="creer"><:album:onglet_ajouter_creer:></span> | <span class="choisir"><a href="#"><:album:onglet_ajouter_choisir:></a></span>
 			</h5>
 
-			<p class="explication"><:album:label_onglet_ajouter_creer:></p>
+			<p class="explication"><strong><:album:label_onglet_ajouter_creer:></strong></p>
 			<p class="explication"><:album:explication_onglet_ajouter_creer:></p>
 
 			<ul>
@@ -71,7 +71,7 @@
 				<span class="creer"><a href="#"><:album:onglet_ajouter_creer:></a></span> | <span class="choisir"><:album:onglet_ajouter_choisir:></span>
 			</h5>
 
-			<p class="explication"><:album:label_onglet_ajouter_choisir:></p>
+			<p class="explication"><strong><:album:label_onglet_ajouter_choisir:></strong></p>
 			<p class="explication"><:album:explication_onglet_ajouter_choisir:></p>
 
 			<ul>
@@ -80,17 +80,18 @@
 					<label for="#GET{name}"><:album:label_album_numero:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text identifiants" value="#ENV*{#GET{name},#GET{defaut}}" id="ids_albums_associer_#GET{id_unique}" />
-					<input class='submit' type="button" name="parcourir_albums" value="<:medias:bouton_parcourir:>" 
+					<input class="submit file" type="button" name="parcourir_albums" value="<:medias:bouton_parcourir:>" 
 						onclick="jQuery.modalboxload('#URL_ECRIRE{popin-choisir_album,var_zajax=contenu&selectfunc=albumselect#GET{id_unique}}&objet=#ENV{objet_associer}&id_objet=#ENV{id_objet_associer}',{autoResize: true});"
 						/>
 				</li>
 			</ul>
+
 			<script type="text/javascript">/*<!\[CDATA\[*/
 			function albumselect#GET{id_unique}(id){jQuery.modalboxclose();jQuery("#ids_albums_associer_#GET{id_unique}").attr('value',id).focus();jQuery('#formulaire_ajouter_album_[(#GET{id_unique}) ]input\[name=choisir_album\]').get(0).click();}
 			/*\]\]>*/</script>
 
 			<p class='boutons'[ style="direction: (#LANG_DIR|=={ltr}|?{rtl,ltr})"]>
-				<input class='submit' type='submit' name='choisir_album' value='<:bouton_enregistrer:>' />
+				<input class="submit" type="submit" name="choisir_album" value="<:bouton_enregistrer:>" />
 			</p>
 
 		</div><!-- #choisir-album -->
@@ -105,10 +106,12 @@ jQuery(document).ready(function($) {
 		var choisir = $("#choisir-album-[(#GET{id_unique})]");
 		var menu_creer = $("#formulaire_ajouter_album_[(#GET{id_unique}) ].menu .creer");
 		var menu_choisir = $("#formulaire_ajouter_album_[(#GET{id_unique}) ].menu .choisir");
+		var bouton = $("#formulaire_ajouter_album_[(#GET{id_unique}) ]input[name='choisir_album']");
 		menu_creer.click(function() {
 			if (creer.is(':hidden')) {
 				creer.slideDown(function(){$(this).find("input#titre").focus()});
 				choisir.slideUp();
+				bouton.attr("value","<:bouton_enregistrer:>");
 				return false;
 			}
 		});
@@ -116,6 +119,7 @@ jQuery(document).ready(function($) {
 			if (choisir.is(':hidden')) {
 				creer.slideUp()
 				choisir.slideDown(function(){$(this).find("input#ids_albums_associer_#GET{id_unique}").focus()});
+				bouton.attr("value","<:bouton_valider:>");
 				return false;
 			}
 		});
