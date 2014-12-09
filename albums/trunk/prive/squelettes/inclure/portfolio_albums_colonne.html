@@ -25,7 +25,7 @@
 <div class="liste-albums lies">
 
 	<BOUCLE_liste_albums_lies(ALBUMS){objet}{id_objet}{par #ENV{par,date}, titre}>
-	[(#INCLURE{fond=prive/squelettes/inclure/album_colonne, id_album, objet, id_objet, ajax=#VAL{album}|concat{#ID_ALBUM}})]
+	[(#INCLURE{fond=prive/squelettes/inclure/album_colonne, id_album, objet, id_objet})]
 	</BOUCLE_liste_albums_lies>
 
 </div><!-- .liste_albums.lies -->
