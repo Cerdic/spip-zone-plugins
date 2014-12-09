@@ -92,6 +92,11 @@ function magnet_pre_boucle(&$boucle){
 			if ($magnet){
 				$_list = "implode(',',array_reverse(array_map('intval',explode(',',isset(\$GLOBALS['meta']['$meta_magnet'])?\$GLOBALS['meta']['$meta_magnet']:'0'))))";
 				$boucle->select[] = "FIELD($_id,\".$_list.\") as magnet";
+				if (count($boucle->default_order) AND !count($boucle->order)){
+					while(count($boucle->default_order)){
+						$boucle->order[] = array_shift($boucle->default_order);
+					}
+				}
 				array_unshift($boucle->order, "'magnet DESC'");
 			}
 		}
