@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_dossiers"
 	categorie="multimedia"
-	version="0.2.0"
+	version="0.3.0"
 	etat="dev"
 	compatibilite="[2.1.0;3.0.*]"
 	logo="prive/themes/spip/images/lister_dossiers-64.png"

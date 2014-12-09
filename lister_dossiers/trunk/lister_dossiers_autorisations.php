@@ -18,6 +18,4 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function lister_dossiers_autoriser(){}
 
 
-
-
 ?>
