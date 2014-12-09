@@ -106,8 +106,69 @@ function image_responsive($texte, $taille=120, $lazy=0, $vertical=0) {
 		else return $texte;
 	}
 	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"'.$taille.'",'.$lazy.','.$vertical.');'), $texte);
+}
+
+function background_responsive($src, $taille=120, $lazy) {
+	if (preg_match("/^<img /i", $src)) {
+		$src = extraire_attribut($src, "src");
+	}
+	
+		
+	$tailles = explode("/", $taille);
+	if (count($tailles) > 1) $taille_defaut = $tailles[0];
+	else $taille_defaut = $taille;
+	
+//	$img = $img[0];
+	$type_urls = lire_meta("type_urls");
+	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
+		$htactif = true;
+	}
+	$src = preg_replace(",\?[0-9]*$,", "", $src);
+		
+	if (file_exists($src)) {
+		$l = largeur($src);
+		$h = hauteur($src);
+	
+		
+		//$img = inserer_attribut($img, "src", $src);
+		$ins = "data-src='$src'";
+		$ins .= " data-responsive='background'";
+		
+
+		if ($l < $taille_defaut) $taille_defaut = $l;
+		$v = "";
+		
+		
+		if ($htactif) {
+			$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $src);
+		}
+		else {
+			$src = "index.php?action=image_responsive&amp;img=$src&amp;taille=$taille_defaut$v";
+		}
+		
+		
+		if ($taille_defaut == 0) $src = "rien.gif";
+		if ($lazy == 1) $ins .= " data-lazy='lazy'";
+
+		$ins .= " data-l='$l'";
+		$ins .= " data-h='$h'";
+		$ins .= " class='$class'";
+		
+		if (count($tailles) > 1) {
+			sort($tailles);
+			include_spip("inc/json");
+			
+			$ins .= " data-tailles='".addslashes(json_encode($tailles)) ."'";
+		}
+		
+		$ins .= " style='background-image:url($src)'";
+		
+		return $ins;
+	}
+	
 
 }
+
 
 function image_proportions($img, $largeur=16, $hauteur=9, $align="center") {
 	
