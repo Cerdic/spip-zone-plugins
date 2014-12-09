@@ -1,0 +1,10 @@
+<div class="box simple info type_site[ type_site_(#CONFIG{info_spip/type_site})]">
+	<div class="inner">
+		<div class="hd ">
+			<h3>[(#CHEMIN{[(#VAL{'prive/themes/spip/images/type_site_'}|concat{[(#CONFIG**{info_spip/type_site})],'-24.png'})]}|balise_img|image_reduire{20,20}|inserer_attribut{class,cadre-icone})]
+			[(#CONFIG{info_spip/type_site}|?{[(#VAL{'info_spip:type_site_'}|concat{[(#CONFIG{info_spip/type_site})],'_envir'}|_T)], <:info_spip:environnement_non_configure:>})]</h3>
+			<div class="nettoyeur"></div>
+		<!--/hd-->
+		</div>
+	</div>
+</div>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="info_spip"
 	categorie="outil"
-	version="0.8.4"
+	version="0.9.0"
 	etat="test"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/info_spip-64.png"
@@ -14,6 +14,7 @@
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="autoriser" inclure="info_spip_autorisations.php" />
+	<pipeline nom="affiche_gauche" inclure="info_spip_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.0;]" />

@@ -47,4 +47,18 @@ function lister_extensions_php ()
     return array();
 }
 
+function sgbd_character_set_name()
+{
+    include_spip('base/abstract_sql');
+    $character_set = sql_fetsel('default_character_set_name', 'information_schema.SCHEMATA', 'schema_name=' . sql_quote($GLOBALS['db_ok']['db']));
+    return (isset($character_set['default_character_set_name'])) ? $character_set['default_character_set_name'] : false;
+}
+
+function sgbd_collation_name()
+{
+    include_spip('base/abstract_sql');
+    $collation = sql_fetsel('default_collation_name', 'information_schema.SCHEMATA', 'schema_name=' . sql_quote($GLOBALS['db_ok']['db']));
+    return (isset($collation['default_collation_name'])) ? $collation['default_collation_name'] : false;
+}
+
 ?>

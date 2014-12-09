@@ -1,9 +1,9 @@
 [(#REM)
-<template><:info_spip:nom_liste_plugins:></template>
+<template><:info_spip:liste_plugins_nom:></template>
 ]
-<!-- <:info_spip:nom_liste_plugins:> -->
+<!-- <:info_spip:liste_plugins_nom:> -->
 <div class="fieldset plugins_fieldset">
-    <h3 class="legend titrem"><:info_spip:label_plugins_fieldset:></h3>
+    <h3 class="legend titrem"><:info_spip:plugins_fieldset_label:></h3>
 </div>
 [(#REM) Le nom des fichiers un peu arbitraire, les fichiers plugin.xml sont toujours d'actualité en SPIP 3… ]
 [(#SPIP_VERSION|intval|=={2}|oui)#INCLURE{fond=prive/objets/liste/info_plugins,env}]

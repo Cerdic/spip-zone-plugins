@@ -9,5 +9,5 @@
     C'est au webmestre qu'appartiendra la décision de surcharger ce fichier pour afficher ce qu'il désire.
 
 ] [(#SET{bdd,[(#CHEMIN{config/connect.php}|file_get_contents|match{"spip_connect_db\((.*)\);"}|explode{","})]})] [(#SET{bdd_host,#GET{bdd}|table_valeur{0}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_port,#GET{bdd}|table_valeur{1}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_nom,#GET{bdd}|table_valeur{4}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_type,#GET{bdd}|table_valeur{5}|explode{"'"}|table_valeur{1}})] [(#SET{bdd_prefixe,#GET{bdd}|table_valeur{6}|explode{"'"}|table_valeur{1}})]
-<sgbd serveur="#GET{bdd_host}" port="#GET{bdd_port}" nom="#GET{bdd_nom}" type="#GET{bdd_type}" prefixe="#GET{bdd_prefixe}" version="#EVAL{sql_version()}" />
+<sgbd serveur="#GET{bdd_host}" port="#GET{bdd_port}" nom="#GET{bdd_nom}" type="#GET{bdd_type}" prefixe="#GET{bdd_prefixe}" version="#EVAL{sql_version()}" charset="[(#VAL|sgbd_character_set_name)]" collation="[(#VAL|sgbd_collation_name)]" />
 </B_secu>

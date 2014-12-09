@@ -1,29 +1,29 @@
 [(#REM)
-<template><:info_spip:nom_applicatif:></template>
+<template><:info_spip:applicatif_nom:></template>
 ]
 
 <!-- Information applicative -->
 <div class="fieldset applicatif_fieldset">
-    <h3 class="legend titrem"><:info_spip:label_applicatif_fieldset:></h3>
+    <h3 class="legend titrem"><:info_spip:applicatif_fieldset_label:></h3>
 </div>
 
 <div class="champ contenu_applicatif_path">
-    <div class="label visible"><:info_spip:label_applicatif_path:></div>#SET{applicatif_path,#EVAL{$_SERVER['SCRIPT_FILENAME']}}
+    <div class="label visible"><:info_spip:applicatif_path_label:></div>#SET{applicatif_path,#EVAL{$_SERVER['SCRIPT_FILENAME']}}
     <div dir='#LANG_DIR' class='applicatif_path span'>[(#GET{applicatif_path}|replace{'ecrire/index.php',''})]</div>
 </div>
 
 <div class="champ contenu_applicatif_port">
-    <div class="label visible"><:info_spip:label_applicatif_port:></div>
+    <div class="label visible"><:info_spip:applicatif_port_label:></div>
     <div dir='#LANG_DIR' class='applicatif_port span'>#EVAL{$_SERVER['SERVER_PORT']}</div>
 </div>
 
 <div class="champ contenu_applicatif_logiciel">
-    <div class="label visible"><:info_spip:label_applicatif_logiciel:></div>
+    <div class="label visible"><:info_spip:applicatif_logiciel_label:></div>
     <div dir='#LANG_DIR' class='applicatif_logiciel span'>#EVAL{$_SERVER['SERVER_SOFTWARE']}</div>
 </div>
 
 <div class="champ contenu_applicatif_nom">
-    <div class="label visible"><:info_spip:label_applicatif_nom:></div>
+    <div class="label visible"><:info_spip:applicatif_nom_label:></div>
     <div dir='#LANG_DIR' class='applicatif_nom span'>#EVAL{$_SERVER['SERVER_NAME']}</div>
 </div>
 

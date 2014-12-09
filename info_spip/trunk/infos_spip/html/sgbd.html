@@ -1,9 +1,9 @@
 [(#REM)
-<template><:info_spip:nom_sgbd:></template>
+<template><:info_spip:sgbd_nom:></template>
 ]
 <BOUCLE_espace_prive (CONDITION) {si (#ENV**{exec}|=={'info_config'}|oui)}>
 </BOUCLE_espace_prive>
-<!-- <:info_spip:nom_sgbd:> -->
+<!-- <:info_spip:sgbd_nom:> -->
 [(#REM)
     Le code ci-dessous est une méthode "barbare" mais efficace pour soustraire toutes les infos du fichier config/connect.php.
     Le soucis c'est que ça peut ne pas être sécuritaire car on affiche le mot de passe de la bdd.
@@ -25,37 +25,47 @@
     [(#SET{bdd_auth,#GET{bdd}|table_valeur{7}|explode{"'"}|table_valeur{1}})]
 ]
 <div class="fieldset sgbd_fieldset">
-    <h3 class="legend titrem"><:info_spip:label_sgbd_fieldset:></h3>
+    <h3 class="legend titrem"><:info_spip:sgbd_fieldset_label:></h3>
 </div>
 
 <div class="champ contenu_sgbd_serveur">
-    <div class="label visible"><:info_spip:label_sgbd_serveur:></div>
+    <div class="label visible"><:info_spip:sgbd_serveur_label:></div>
     <div dir='#LANG_DIR' class='sgbd_nom span'>#GET{bdd_host}</div>
 </div>
 
 <div class="champ contenu_sgbd_port">
-    <div class="label visible"><:info_spip:label_sgbd_port:></div>
+    <div class="label visible"><:info_spip:sgbd_port_label:></div>
     <div dir='#LANG_DIR' class='sgbd_nom span'>#GET{bdd_port}</div>
 </div>
 
 <div class="champ contenu_sgbd_type">
-    <div class="label visible"><:info_spip:label_sgbd_type:></div>
+    <div class="label visible"><:info_spip:sgbd_type_label:></div>
     <div dir='#LANG_DIR' class='sgbd_type span'>#GET{bdd_type}</div>
 </div>
 
 <div class="champ contenu_sgbd_version">
-    <div class="label visible"><:info_spip:label_sgbd_version:></div>
+    <div class="label visible"><:info_spip:sgbd_version_label:></div>
     <div dir='#LANG_DIR' class='sgbd_version span'>#EVAL{sql_version()}</div>
 </div>
 
 <div class="champ contenu_sgbd_nom">
-    <div class="label visible"><:info_spip:label_sgbd_nom:></div>
+    <div class="label visible"><:info_spip:sgbd_nom_label:></div>
     <div dir='#LANG_DIR' class='sgbd_nom span'>#GET{bdd_nom}</div>
 </div>
 
 <div class="champ contenu_sgbd_prefixe">
-    <div class="label visible"><:info_spip:label_sgbd_prefixe:></div>
+    <div class="label visible"><:info_spip:sgbd_prefixe_label:></div>
     <div dir='#LANG_DIR' class='sgbd_prefixe span'>#GET{bdd_prefixe}</div>
+</div>
+
+<div class="champ contenu_sgbd_charset">
+    <div class="label visible"><:info_spip:sgbd_charset_label:></div>
+    <div dir='#LANG_DIR' class='sgbd_charset span'>[(#VAL|sgbd_character_set_name)]</div>
+</div>
+
+<div class="champ contenu_sgbd_collation">
+    <div class="label visible"><:info_spip:sgbd_collation_label:></div>
+    <div dir='#LANG_DIR' class='sgbd_collation span'>[(#VAL|sgbd_collation_name)]</div>
 </div>
 
 </B_espace_prive>

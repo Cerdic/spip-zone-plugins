@@ -13,4 +13,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
 
+function info_spip_affiche_gauche($flux)
+{
+	if ($flux['args']['exec'] == 'accueil') {
+		$flux['data'] = recuperer_fond('prive/squelettes/inclure/info_spip', array(), array('ajax' => false) ) . $flux['data'];
+	}
+
+	return $flux;
+}
 ?>

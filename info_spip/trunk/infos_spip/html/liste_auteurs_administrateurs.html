@@ -1,9 +1,9 @@
 [(#REM)
-<template><:info_spip:nom_liste_auteurs_administrateurs:></template>
+<template><:info_spip:liste_auteurs_administrateurs_nom:></template>
 ]
 
 <B_administrateur>
-<!-- <:info_spip:nom_liste_auteurs_administrateurs:> -->
+<!-- <:info_spip:liste_auteurs_administrateurs_nom:> -->
 <div class="fieldset administrateurs_fieldset">
     <h3 class="legend titrem">[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:info_spip:info_1_administrateur:>,<:info_spip:info_nb_administrateurs:>})]</h3>
 </div>
@@ -12,10 +12,10 @@
     <table class="spip liste">
         <thead>
             <tr>
-                <th class="id secondaire"><:info_spip:label_auteur_id:></th>
-                <th class="login secondaire"><:info_spip:label_auteur_login:></th>
-                <th class="email secondaire"><:info_spip:label_auteur_email:></th>
-                <th class="nom principal"><:info_spip:label_auteur_nom:></th>
+                <th class="id secondaire"><:info_spip:auteur_id_label:></th>
+                <th class="login secondaire"><:info_spip:auteur_login_label:></th>
+                <th class="email secondaire"><:info_spip:auteur_email_label:></th>
+                <th class="nom principal"><:info_spip:auteur_nom_label:></th>
             </tr>
         </thead>
         <tbody>

@@ -11,44 +11,44 @@
 
 		<fieldset>
 			<h3 class="legend">
-				<:info_spip:label_fiche_site:>
+				<:info_spip:fiche_site_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{selection, type_site,
-					label=<:info_spip:label_type_site:>,
-					datas=#ARRAY{dev,<:info_spip:type_site_dev:>,prep,<:info_spip:type_site_prep:>,prod,<:info_spip:type_site_prod:>,rec,<:info_spip:type_site_rec:>},
-					defaut='prod',
-					explication=<:info_spip:explication_type_site:>})]
+					label=<:info_spip:type_site_label:>,
+					datas=#ARRAY{01local,<:info_spip:type_site_01local:>,02dev,<:info_spip:type_site_02dev:>,03inte,<:info_spip:type_site_03inte:>,04test,<:info_spip:type_site_04test:>,05rec,<:info_spip:type_site_05rec:>,06prep,<:info_spip:type_site_06prep:>,07prod,<:info_spip:type_site_07prod:>},
+					defaut='07prod',
+					explication=<:info_spip:type_site_explication:>})]
 
 				[(#SET{modules,#ARRAY})]
-				<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:nom_'}|concat{#VALEUR}|_T)]})]
+				<BOUCLE_module_info (DATA) {source table, (#VAL{'html'}|lister_noisettes_info_spip)}>[(#SET{nom,[(#VAL{'info_spip:'}|concat{#VALEUR,'_nom'}|_T)]})]
 					[(#SET{modules,#GET{modules}|array_merge{#ARRAY{#VALEUR,#GET{nom}}}})]
 				</BOUCLE_module_info>
 				[(#SAISIE{checkbox, modules,
-					label=<:info_spip:label_liste_modules:>,
-					explication=<:info_spip:explication_liste_modules:>,
+					label=<:info_spip:liste_modules_label:>,
+					explication=<:info_spip:liste_modules_explication:>,
 					datas=#GET{modules}})]
 			</ul>
 		</fieldset>
 
 		<fieldset>
 			<h3 class="legend">
-				<:info_spip:label_webservice_fieldset:>
+				<:info_spip:webservice_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{radio, actif,
-					label=<:info_spip:label_actif:>,
+					label=<:info_spip:actif_label:>,
 					datas=#ARRAY{oui,<:info_spip:oui:>,non,<:info_spip:non:>},
-					explication=<:info_spip:explication_actif:>})]
+					explication=<:info_spip:actif_explication:>})]
 
 				[(#SAISIE{input, cle,
-					label=<:info_spip:label_cle:>,
-					explication=<:info_spip:explication_cle:>})]
+					label=<:info_spip:cle_label:>,
+					explication=<:info_spip:cle_explication:>})]
 
 				[(#SAISIE{input, uuid,
 					label='',
 					type='button',
-					valeur=<:info_spip:label_uuid_generer:>})]
+					valeur=<:info_spip:uuid_generer_label:>})]
 
 			</ul>
 		</fieldset>
