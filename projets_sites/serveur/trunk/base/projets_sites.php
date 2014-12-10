@@ -27,14 +27,14 @@ function projets_sites_declarer_tables_interfaces($interfaces)
 {
     $interfaces['table_des_tables']['projets_sites'] = 'projets_sites';
 
-    $interfaces['table_des_traitements']['PERIMETRE_ACCES'][]= _TRAITEMENT_RACCOURCIS;
-    $interfaces['table_des_traitements']['STATISTIQUES'][]= _TRAITEMENT_RACCOURCIS;
-    $interfaces['table_des_traitements']['MOTEUR_RECHERCHE'][]= _TRAITEMENT_RACCOURCIS;
-    $interfaces['table_des_traitements']['AUTRES_OUTILS'][]= _TRAITEMENT_RACCOURCIS;
-    $interfaces['table_des_traitements']['REMARQUES'][]= _TRAITEMENT_RACCOURCIS;
-    $interfaces['table_des_traitements']['LOGICIEL_PLUGINS'][]= _TRAITEMENT_RACCOURCIS;
-    $interfaces['table_des_traitements']['AUTEURS_ADMIN'][]= _TRAITEMENT_RACCOURCIS;
-    $interfaces['table_des_traitements']['AUTEURS_WEBMESTRES'][]= _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['PERIMETRE_ACCES'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['STATISTIQUES'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['MOTEUR_RECHERCHE'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['AUTRES_OUTILS'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['REMARQUES'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['LOGICIEL_PLUGINS'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['AUTEURS_ADMIN'][] = _TRAITEMENT_RACCOURCIS;
+    $interfaces['table_des_traitements']['AUTEURS_WEBMESTRES'][] = _TRAITEMENT_RACCOURCIS;
 
     $interfaces['exceptions_des_jointures']['id_projets_site'] = array('spip_projets_sites_liens', 'id_projets_site');
 
@@ -62,7 +62,7 @@ function projets_sites_declarer_tables_objets_sql($tables)
             "id_projets_site"    => "bigint(21) NOT NULL",
             "titre"              => "text DEFAULT '' NOT NULL",
             "descriptif"         => "text DEFAULT '' NOT NULL",
-            "type_site"          => "varchar(4) NOT NULL DEFAULT ''",
+            "type_site"          => "varchar(7) NOT NULL DEFAULT '05rec'",
             "uniqid"             => "varchar(255) NOT NULL DEFAULT ''",
             "webservice"         => "text DEFAULT '' NOT NULL",
             "logiciel_nom"       => "varchar(25) NOT NULL DEFAULT ''",
