@@ -111,19 +111,22 @@ function action_oembed_nettoyer_iframes_dist(){
 							echo "$pre iframe inconnue : ".entites_html($iframe)."<br />";
 						}
 						if ($url){
-							$texte = str_replace($iframe, "\n" . $url . "\n", $texte);
+							$texte = str_replace($iframe, "\n\n" . $url . "\n\n", $texte);
 							if (preg_match(",<center>\s*" . preg_quote($url, ",") . ".*</center>,Uims", $texte, $m)){
-								$texte = str_replace($m[0], "\n" . $url . "\n", $texte);
+								$texte = str_replace($m[0], "\n\n" . $url . "\n\n", $texte);
 							}
-							$texte = preg_replace(",\s+" . preg_quote($url, ",") . "\s+,ims", "\n" . $url . "\n", $texte);
+							$texte = preg_replace(",\s+" . preg_quote($url, ",") . "\s+,ims", "\n\n" . $url . "\n\n", $texte);
 						}
 					}
 					if ($texte!==$row[$champ]){
 						echo "$pre Corrige $champ <br />";
-						if ($simu) {
+						if (!$simu) {
+							echo "$pre Corrige $champ <br />";
 							objet_modifier($objet,$row[$primary],array($champ=>$texte));
 						}
-						//sql_updateq($champ, array($champ => $texte), "$primary=" . intval($row[$primary]));
+						else {
+							echo "SIMU : $pre Corrige $champ <br />";
+						}
 					}
 				}
 				$objects = extraire_balises($texte, "object");
@@ -169,19 +172,21 @@ function action_oembed_nettoyer_iframes_dist(){
 							echo "$pre object inconnue : ".entites_html($object)."<br />";
 						}
 						if ($url){
-							$texte = str_replace($object, "\n" . $url . "\n", $texte);
+							$texte = str_replace($iframe, "\n\n" . $url . "\n\n", $texte);
 							if (preg_match(",<center>\s*" . preg_quote($url, ",") . ".*</center>,Uims", $texte, $m)){
-								$texte = str_replace($m[0], "\n" . $url . "\n", $texte);
+								$texte = str_replace($m[0], "\n\n" . $url . "\n\n", $texte);
 							}
-							$texte = preg_replace(",\s+" . preg_quote($url, ",") . "\s+,ims", "\n" . $url . "\n", $texte);
+							$texte = preg_replace(",\s+" . preg_quote($url, ",") . "\s+,ims", "\n\n" . $url . "\n\n", $texte);
 						}
 					}
 					if ($texte!==$row[$champ]){
-						echo "$pre Corrige $champ <br />";
 						if (!$simu) {
+							echo "$pre Corrige $champ <br />";
 							objet_modifier($objet,$row[$primary],array($champ=>$texte));
 						}
-						//sql_updateq($champ, array($champ => $texte), "$primary=" . intval($row[$primary]));
+						else {
+							echo "SIMU : $pre Corrige $champ <br />";
+						}
 					}
 				}
 			}
