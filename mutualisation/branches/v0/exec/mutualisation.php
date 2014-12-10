@@ -24,9 +24,10 @@ function exec_mutualisation_dist() {
 	$version_spip = intval($GLOBALS['spip_version_branche']) ;
 
 
-	$url_stats = "ecrire/?exec=statistiques_visites";
-	$url_compresseur = "ecrire/?exec=config_fonctions#configurer-compresseur";
-	$url_admin_plugin = "ecrire/?exec=admin_plugin";
+	$url_stats = 'ecrire/?exec=statistiques_visites';
+	$url_compresseur = 'ecrire/?exec=config_fonctions#configurer-compresseur';
+	$url_admin_plugin = 'ecrire/?exec=admin_plugin';
+	$url_admin_vider = 'ecrire/?exec=admin_vider';
 
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
 		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
@@ -135,8 +136,8 @@ function exec_mutualisation_dist() {
 			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$credential$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a><br />
-				<a href='${url}ecrire/?exec=admin_plugin'>plugins</a><br />
-				<a href='${url}ecrire/?exec=admin_vider'>cache</a></td>
+				<a href='${url}$url_admin_plugin'>plugins</a><br />
+				<a href='${url}$url_admin_vider'>cache</a></td>
 			<td><div id='IMG$nsite' class='taille loading'></div></td>
 			<td><div id='local$nsite' class='taille loading'></div></td>
 			<td><div id='cache$nsite' class='taille loading'></div></td>
