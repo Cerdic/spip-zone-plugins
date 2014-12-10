@@ -24,9 +24,10 @@ function exec_mutualisation_dist() {
 	$version_spip = intval($GLOBALS['spip_version_branche']) ;
 
 
-	$url_stats = "ecrire/?exec=stats_visites";
-	$url_compresseur = "ecrire/?exec=configurer_avancees#formulaire_configurer_compresseur";
-	$url_admin_plugin = "ecrire/?exec=admin_plugin";
+	$url_stats = 'ecrire/?exec=stats_visites';
+	$url_compresseur = 'ecrire/?exec=configurer_avancees#formulaire_configurer_compresseur';
+	$url_admin_plugin = 'ecrire/?exec=admin_plugin';
+	$url_admin_vider = 'ecrire/?exec=admin_vider';
 
 	if (!file_exists(_DIR_IMG.'mutualiser.png'))
 		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
