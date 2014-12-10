@@ -85,13 +85,13 @@ function charger_url_background_responsive(this_img) {
 		var dim_l= parseInt(this_img.width());
 		var dim_h = parseInt(this_img.height());
 		
-		if ( (dim_l/dim_h) > (l>h) ) { /* fenetre plus large que l'image */
+		if ( (dim_l/dim_h) > (l/h) ) { /* fenetre plus large que l'image */
 			dim = dim_l;
 		} else {
 			dim = dim_h *l / h;
+			var pourcent = "auto 100%";
 		}
-		
-		
+				
 		var tailles = this_img.attr("data-tailles");
 							
 		if (tailles) {
