@@ -11,11 +11,17 @@
 				|parametre_url{objet,[(#VALEUR{type})]}
 				|icone_horizontale{ [(#VALEUR{texte_objets}|_T)], [(#VALEUR{icone_objet})] })]
 			<B_saisies>
-			<ul class='saisies_objet'>
+			<div class='liste'>
+			<ul class='liste-items saisies_objet'>
 			<BOUCLE_saisies(DATA){source tableau, #CLE|iextras_champs_extras_definis}>
-				<li><small>[(#CHEMIN_IMAGE{saisies_#VALEUR{saisie}}|balise_img{#VALEUR{saisie}}) ][<strong>(#VAL{saisies:saisie_#VALEUR{saisie}_titre}|_T)</strong>][ : (#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/texte}|couper{30}})]</small></li>
+				<li class='item'>
+					<small>[(#CHEMIN_IMAGE{saisies_#VALEUR{saisie}}|balise_img{#VALEUR{saisie}}) ]
+					[<strong>(#VAL{saisies:saisie_#VALEUR{saisie}_titre}|_T)</strong>][ :
+					 (#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/texte}|couper{30}})]</small>
+				</li>
 			</BOUCLE_saisies>
 			</ul>
+			</div>
 			</B_saisies>
 		</td>
 	[(#GET{compteur}|alterner{'','</tr>'})]
