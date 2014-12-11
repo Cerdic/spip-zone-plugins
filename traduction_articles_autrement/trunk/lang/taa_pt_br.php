@@ -7,7 +7,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'affichage_liste_compacte_desactive' => 'Desativar a exibição compacta das listas de matérias',
+
 	// C
+	'cfg_limiter_secteur' => 'Não exibir a barra de idioma no setor:',
+	'cfg_utiliser_langues' => 'Usar os seguintes idiomas:',
 	'changer_langue' => 'Alterar o idioma da matéria',
 
 	// F
@@ -24,13 +29,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'options' => 'Alterar as opções de idioma',
+	'oui' => 'Sim',
 
 	// R
 	'rang' => 'Classificar',
 
 	// T
 	'titre_plugin' => 'Tradução das matérias diferentemente',
-	'traductions' => 'Traduções', # MODIF
+	'traductions' => 'Traduções',
 
 	// V
 	'voir_traductions' => 'Ver os detalhes das traduções'
