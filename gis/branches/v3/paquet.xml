@@ -1,7 +1,7 @@
 <paquet
 	prefix="gis"
 	categorie="divers"
-	version="3.4.4"
+	version="3.4.5"
 	schema="2.0.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
@@ -15,7 +15,7 @@
 	<auteur>b_b</auteur>
 	<auteur>kent1</auteur>
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
-	<copyright>2011</copyright>
+	<copyright>2014</copyright>
 	<licence>GPL v3</licence>
 	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
 
@@ -24,7 +24,7 @@
 
 	<utilise nom="selecteurgenerique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.19.0;]" />
-	<lib nom="mxn-gis-2.4.8" lien="http://contrib.spip.net/IMG/zip/mxn-gis-2.4.8.zip" />
+	<lib nom="mxn-gis-2.4.11" lien="http://contrib.spip.net/IMG/zip/mxn-gis-2.4.11.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"
