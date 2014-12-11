@@ -223,7 +223,6 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 			$erreurs = array_merge($erreurs, $vraies_erreurs);
 		} else {
 			$erreurs = array();
-			$erreurs['message_erreur'] = ''; // on ne veut pas du message_erreur automatique
 		}
 	} else {
 		$erreurs['message_erreur'] = ''; // on ne veut pas du message_erreur automatique
