@@ -54,10 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_prives' => 'Privé forums',
 	'forums_public' => 'Publieke forums',
 	'forums_public_a_noter' => 'Let op: bij een gemodeeerd forum ontvangen alleen de auteurs die mogen goedkeuren een noticifatie bij een nieuw bericht; anderen ontvangen pas een bericht na goedkeuring.',
-	'forums_public_article' => '<strong>Reactie op een artikel</strong>: personen die via de publieke site op een artikel reageren, ontvangen een notificatie (zinvol bij een "plat" forum).',
+	'forums_public_article' => '<strong>Reactie op een artikel</strong>: personen die via de publieke site op een artikel reageren, ontvangen een notificatie (zinvol bij een "plat" forum).', # MODIF
 	'forums_public_auteurs' => '<strong>Auteurs</strong>: auteurs ontvangen notificaties van publieke forumberichten onder hun artikel.',
 	'forums_public_moderateur' => 'Geef hieronder het e-mailadres van de moderator van de publieke forums (of meerdere, gescheiden door een komma).',
-	'forums_public_thread' => '<strong>Draad van een discussie</strong>: deelnemers aan dezelfde publieke discussie ontvangen notificaties.',
+	'forums_public_thread' => '<strong>Draad van een discussie</strong>: deelnemers aan dezelfde publieke discussie ontvangen notificaties.', # MODIF
 
 	// I
 	'info_lien_publier_commentaire' => 'Dit commentaar plaatsen',

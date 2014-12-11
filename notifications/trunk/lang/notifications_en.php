@@ -54,10 +54,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_prives' => 'Forums in private area',
 	'forums_public' => 'Public forums',
 	'forums_public_a_noter' => 'Note: if forums are awaiting validation from moderators before publication, only authors with rights to validate forums get notified when the comment is posted ; other recipients get notified only when moderators validate the comment.',
-	'forums_public_article' => '<strong>Reply to an article</strong>: persons who have publicly replied to an article will receive forum notifications for that article (useful for «flat»  forums).',
+	'forums_public_article' => '<strong>Reply to an article</strong>: persons who have publicly replied to an article will receive forum notifications for that article (useful for «flat»  forums).', # MODIF
 	'forums_public_auteurs' => '<strong>Authors</strong>: Authors get notified when new comments are posted to their article(s) on the public area.',
 	'forums_public_moderateur' => 'Please indicate the moderator’s email address for public forums, (comma-separated in case of multiple addresses).',
-	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread.',
+	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread.', # MODIF
 
 	// I
 	'info_lien_publier_commentaire' => 'Publish this comment online',
