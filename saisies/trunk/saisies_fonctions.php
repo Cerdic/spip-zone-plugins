@@ -22,11 +22,13 @@ function saisie_traitement_vue($valeur,$env){
 	if (!function_exists('propre'))
 		include_spip('inc/texte');
 
+	$valeur = trim($valeur);
+
 	// si traitement est renseigne, alors le champ est deja mis en forme
 	// (saisies)
 	// sinon on fait une mise en forme smart
-	if (!isset($env['traitements'])){
-		if (in_array($env['type_saisie'],array('textarea'))){
+	if ($valeur and !isset($env['traitements'])) {
+		if (in_array($env['type_saisie'], array('textarea'))) {
 			$valeur = propre($valeur);
 		}
 		else {
@@ -34,7 +36,7 @@ function saisie_traitement_vue($valeur,$env){
 		}
 	}
 
-	return trim($valeur);
+	return $valeur;
 }
 
 /**
