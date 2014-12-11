@@ -479,7 +479,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		unset($erreurs_test['positionner']);
 		if ($erreurs_test){
 			// Là aussi on désinfecte à la main
-			if (is_array($env2["saisie_modifiee_$nom"]['options']))
+			if (isset($env2["saisie_modifiee_$nom"]['options']) and is_array($env2["saisie_modifiee_$nom"]['options']))
 				spip_desinfecte($env2["saisie_modifiee_$nom"]['options']);
 		}
 		else{
