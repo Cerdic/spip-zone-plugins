@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_texte' => 'Texto',
 	'champ_ville' => 'Cidade',
 	'configuration_barre_forum' => 'Exibir a barra de ferramentas tipográficas nos fóruns.',
-	'configuration_barre_impossible' => 'Outro plugin está bloqueando o uso do porta-caneta no espaó público - as configurações abaixo não terão nenhum efeito.',
+	'configuration_barre_impossible' => 'Outro plugin está bloqueando o uso do porta-caneta no espaço público - as configurações abaixo não terão nenhum efeito.',
 	'configuration_barre_oui' => 'Exibir a barra de ferramentas tipográficas completa.',
 	'configuration_champs_message' => 'Configuração do porta-caneta',
 	'configuration_champs_message_explication' => 'Configuração da barra de ferramentas tipográficas associada ao texto da mensagem.',
@@ -59,9 +59,68 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_nb_max' => 'Número máximo de anexos',
 	'configuration_regle_liste_explication' => 'Escolha uma regra de cálculo da lista de potenciais destinatários e o método de seleção proposto aos visitantes.',
 	'configuration_texteinfolettre' => 'Texto boletim',
+	'configuration_texteinfolettre_explication' => 'Escreva o texto associado à caixa de seleção boletim',
+	'consulter_memoire' => 'Esta mensagem está registrada no seu site:',
+	'courriel_de' => 'De',
+
+	// D
+	'deplacement_possible' => 'Deslocação vertical por arrastar-soltar',
+	'description_menu_contact' => 'Opção do menu para a página do formulário de contato',
+	'description_page-contact' => 'Acessível via <i>spip.php?page=contact</i>, esta página opcional permite disponibilizar um formulário de contato (considere incluir um link nos seus menus).',
+
+	// F
+	'form_destinataire' => 'Escolha um destinatário',
+	'form_destinataires' => 'Escolha os destinatários',
+	'form_pj_ajouter_pluriel' => 'Incluir anexos',
+	'form_pj_ajouter_singulier' => 'Incluir um anexo',
+	'form_pj_fichier_ajoute' => 'O arquivo foi anexado corretamente:',
+	'form_pj_importer' => 'Importar um arquivo',
+	'form_pj_previsu_pluriel' => 'Anexos',
+	'form_pj_previsu_singulier' => 'Anexo',
+	'form_pj_supprimer' => 'Excluir',
+	'form_pj_titre' => 'Título do arquivo',
+	'forum_attention_nbre_caracteres' => '<b>Atenção!</b> a sua mensagem deve possuir pelo menos @nbre_caract@ caracteres.',
+
+	// H
+	'horodatage' => 'Formulário enviado em: @horodatage@.',
+
+	// I
+	'inforigine' => 'Informação transmitida pelo formulário:',
+	'informez_moi' => 'Aceito receber por e-mail informações enviadas pela sua organização.',
+	'infos_collecte' => 'Informações coletadas',
+	'infos_supplementaires' => 'Informações adicionais',
 
 	// M
-	'modele_nom_formulaire' => 'um formulário de contato' # MODIF
+	'madame' => 'Srª',
+	'mademoiselle' => 'Srtª',
+	'message_erreur_robot' => 'Você é um robô. Feio robô.',
+	'message_erreur_transmission' => 'Ocorreu um erro de transmissão; por favor, tente novamente.',
+	'message_redemander_pass' => 'O seu endereço de e-mail "@email@" já está registrado em consequência de uma mensagem de contato. Para validar a sua conta, solicite a <a href="@url_pass@">alteração da senha</a> e identifique-se uma primeira vez.',
+	'modele_label_auteur' => 'Pré-selecionar um autor (facultativo)?',
+	'modele_nom_formulaire' => 'o formulário de contato avançado',
+	'monsieur' => 'Sr.',
+	'msg_messagerie' => 'Mensageria de contato',
+
+	// N
+	'noisette_label_afficher_titre_noisette' => 'Mostrar um título?',
+	'noisette_label_niveau_titre' => 'Escolha o nível do título',
+	'noisette_label_titre_noisette' => 'Título:',
+	'noisette_label_titre_noisette_perso' => 'Se título personalizado:',
+	'noisette_titre_perso' => 'Título Personalizado',
+
+	// P
+	'par_qui' => 'Por: ',
+	'preselection' => 'Desmarcar todos os ítens da lista de destinatários',
+
+	// S
+	'sauv_message' => 'Salvar as mensagens de contato',
+	'sauv_message_explication' => 'Permite gravar as mensagens de contatos e exibí-las numa mensageria dedicada.',
+	'sauv_message_ok' => 'Gravar as mensagens de contatos',
+	'succes' => 'Obrigado, sua mensagem foi enviada corretamente.<br />Responderemos o mais breve possível.<br />A equipe de @equipe_site@',
+
+	// T
+	'titre' => 'Formulário de contato',
+	'titre_court' => 'Contato'
 );
 
 ?>
