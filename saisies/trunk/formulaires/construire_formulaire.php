@@ -43,17 +43,13 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	$contexte['fond_generer'] = 'formulaires/inc-generer_saisies_configurables';
 	
 	// On cherche jquery UI pour savoir si on pourra glisser-déplacer
-	// SPIP 3 - jquery_ui
-	if (find_in_path('javascript/ui/jquery.ui.sortable.js') and find_in_path('javascript/ui/jquery.ui.draggable.js')){
+	// SPIP 3.1 - jquery_ui
+	if (find_in_path('javascript/ui/sortable.js') and find_in_path('javascript/ui/draggable.js')){
 		$contexte['_chemin_ui'] = 'javascript/ui/';
 	}
-	// plugin jquery_ui >= 1.8
-	elseif (find_in_path('javascript/jquery-ui/ui/jquery.ui.sortable.js') and find_in_path('javascript/jquery-ui/ui/jquery.ui.draggable.js')){
-		$contexte['_chemin_ui'] = 'javascript/jquery-ui/ui/';
-	}
-	// plugin jquery_ui < 1.8
-	elseif (find_in_path('javascript/jquery-ui-1.8.16/ui/jquery.ui.sortable.js') and find_in_path('javascript/jquery-ui-1.8.16/ui/jquery.ui.draggable.js')){
-		$contexte['_chemin_ui'] = 'javascript/jquery-ui-1.8.16/ui/';
+	// SPIP 3 - jquery_ui
+	elseif (find_in_path('javascript/ui/jquery.ui.sortable.js') and find_in_path('javascript/ui/jquery.ui.draggable.js')){
+		$contexte['_chemin_ui'] = 'javascript/ui/jquery.ui.';
 	}
 	else{
 		$contexte['_chemin_ui'] = false;

@@ -109,10 +109,10 @@
 				});
 				
 			[(#ENV{erreurs}|non|et{#ENV{_chemin_ui}})
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.core.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.widget.js}", function(){
-				$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.mouse.js}", function(){
-					$.getScript("#CHEMIN{#ENV{_chemin_ui}jquery.ui.sortable.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}core.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}widget.js}", function(){
+				$.getScript("#CHEMIN{#ENV{_chemin_ui}mouse.js}", function(){
+					$.getScript("#CHEMIN{#ENV{_chemin_ui}sortable.js}", function(){
 						if ($.fn.sortable) {
 							jQuery( "#deplacable, #deplacable ul" ).sortable({
 								revert: true,
