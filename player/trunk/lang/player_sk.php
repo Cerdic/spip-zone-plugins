@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_player_mp3' => 'Výber poslucháča',
 	'label_player_mp3_dewplayer' => 'Dew player',
 	'label_player_mp3_eraplayer' => 'Erational player',
+	'label_player_mp3_mejs' => 'Multimediálny prehrávač',
 	'label_player_mp3_neoplayer' => 'Prehrávač Neolao',
 	'label_player_mp3_pixplayer' => 'Jeden pixel z prehrávača',
 	'label_playeralpha' => 'Priehľadnosť farby prehrávača: ',
