@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remove_from' => 'Odstrániť z môjho výberu',
 
 	// S
-	'ses_favoris' => 'Jeho/jej obľúbené položky',
+	'ses_favoris' => 'Obľúbené položky',
 
 	// V
 	'vos_favoris' => 'Vaše obľúbené' # Utile pour modifier le titre de l'inclusion
