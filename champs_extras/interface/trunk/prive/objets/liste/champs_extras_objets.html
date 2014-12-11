@@ -1,17 +1,25 @@
-
 <B_objets>
-<div class='liste champs_extras_objets'>
-	<ul class='liste-items'>
+<div class='champs_extras_objets'>
+	<table>
 <BOUCLE_objets(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
-	[(#CLE|is_string|oui)
-		<li class='item  [(#COMPTEUR_BOUCLE|alterner{unit,lastUnit})] size1of2'>
-			[(#SET{nb,[(#CLE|compter_champs_extras)]})]
+<BOUCLE_cond(CONDITION){si #CLE|is_string}>
+	#SET{compteur,#GET{compteur,0}|plus{1}}
+	[(#GET{compteur}|alterner{'<tr>',''})]
+		<td>
 			[(#ENV{lien,#SELF}
 				|parametre_url{objet,[(#VALEUR{type})]}
-				|icone_horizontale{ [(#VALEUR{texte_objets}|_T)][ (#GET{nb}|oui)<small>- [(#GET{nb}|singulier_ou_pluriel{iextras:nb_element,iextras:nb_elements})]</small>], [(#VALEUR{icone_objet})] })]
-		</li>
-	]
+				|icone_horizontale{ [(#VALEUR{texte_objets}|_T)], [(#VALEUR{icone_objet})] })]
+			<B_saisies>
+			<ul class='saisies_objet'>
+			<BOUCLE_saisies(DATA){source tableau, #CLE|iextras_champs_extras_definis}>
+				<li><small>[(#CHEMIN_IMAGE{saisies_#VALEUR{saisie}}|balise_img{#VALEUR{saisie}}) ][<strong>(#VAL{saisies:saisie_#VALEUR{saisie}_titre}|_T)</strong>][ : (#VALEUR{options/label}|sinon{#VALEUR{options/label_case}}|sinon{#VALEUR{options/texte}|couper{30}})]</small></li>
+			</BOUCLE_saisies>
+			</ul>
+			</B_saisies>
+		</td>
+	[(#GET{compteur}|alterner{'','</tr>'})]
+</BOUCLE_cond>
 </BOUCLE_objets>
-	</ul>
+	</table>
 </div>
 </B_objets>
