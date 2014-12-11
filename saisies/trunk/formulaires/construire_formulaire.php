@@ -58,7 +58,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	else{
 		$contexte['_chemin_ui'] = false;
 	}
-var_dump($contexte);
+
 	return $contexte;
 }
 
