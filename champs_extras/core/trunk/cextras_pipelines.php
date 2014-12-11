@@ -201,6 +201,11 @@ function cextras_afficher_contenu_objet($flux){
 			// Dans ce cas, certains traitements peuvent être effectués 2 fois !
 			$saisies_traitees = saisies_lister_avec_traitements($saisies_sql);
 			unset($saisies_sql);
+
+			// Fournir $connect et $Pile[0] au traitement si besoin (l'evil eval)
+			$connect = '';
+			$Pile = array(0 => (isset($flux['args']['contexte']) ? $flux['args']['contexte'] : array()));
+
 			foreach ($saisies_traitees as $saisie) {
 				$traitement = $saisie['options']['traitements'];
 				$traitement = defined($traitement) ? constant($traitement) : $traitement;
