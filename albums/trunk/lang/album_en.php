@@ -29,7 +29,6 @@ You can create autonomous albums from this page and from the toolbar, or create 
 
 	// E
 	'erreur_deplacement' => 'Treatment could not be performed',
-	'explication_album_numero' => 'One or several numbers comma-separated',
 	'explication_deplacer_documents' => '<strong>Experimental</strong> : it is possible to drag and drop documents between albums.
 		If you are authorized, when hovering a document, the cursor will change to indicate an action is possible.
 		Once the documents have been moved, a form will appear at the bottom of the list to save the changes.',
@@ -91,8 +90,8 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'label_modele_tri_media' => 'Document type',
 	'label_modele_tri_titre' => 'Title',
 	'label_modele_trier' => 'Sort by :',
-	'label_onglet_ajouter_choisir' => 'Associate existing albums',
-	'label_onglet_ajouter_creer' => 'Create and associate an album',
+	'label_onglet_ajouter_choisir' => 'Associate existing albums', # MODIF
+	'label_onglet_ajouter_creer' => 'Create and associate an album', # MODIF
 	'label_titre' => 'Title',
 	'label_utiliser_titre_defaut' => 'Title of a new album',
 
@@ -108,7 +107,7 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'message_vider' => 'Remove all the documents ?',
 
 	// O
-	'onglet_ajouter_choisir' => 'Choose album(s)',
+	'onglet_ajouter_choisir' => 'Choose album(s)', # MODIF
 	'onglet_ajouter_creer' => 'New album',
 	'onglet_configurer_options' => 'Options',
 	'onglet_configurer_outils' => 'Tools',

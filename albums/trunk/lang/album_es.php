@@ -28,7 +28,6 @@ Se puede crear álbumes independientes en esta página, o crear álbumes asociad
 
 	// E
 	'erreur_deplacement' => 'El tratamiento no se ha podido efectuar',
-	'explication_album_numero' => 'Números separados por comas',
 	'explication_deplacer_documents' => '<strong>Experimental</strong> : es posible mover documentos entre álbumes haciendo un arrastrar y soltar.
 Si tienes los derechos necesarios, el cursor cambia a su informe general que la acción es posible.
 Una vez que se hicieron los viajes, un formulario aparece en la parte inferior de la lista para guardar los cambios.', # RELIRE
@@ -90,8 +89,8 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'label_modele_tri_media' => 'Tipo de documento',
 	'label_modele_tri_titre' => 'Titulo',
 	'label_modele_trier' => 'Ordenar por :',
-	'label_onglet_ajouter_choisir' => 'Asociar álbumes existentes', # RELIRE
-	'label_onglet_ajouter_creer' => 'Crear y asociar un álbum', # RELIRE
+	'label_onglet_ajouter_choisir' => 'Asociar álbumes existentes', # MODIF
+	'label_onglet_ajouter_creer' => 'Crear y asociar un álbum', # MODIF
 	'label_titre' => 'Título',
 	'label_utiliser_titre_defaut' => 'Título de un nuevo álbum',
 
@@ -107,7 +106,7 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'message_vider' => '¿ Retirar todos los documentos ?', # MODIF
 
 	// O
-	'onglet_ajouter_choisir' => 'Elijar álbumes', # RELIRE
+	'onglet_ajouter_choisir' => 'Elijar álbumes', # MODIF
 	'onglet_ajouter_creer' => 'Nuevo álbum',
 	'onglet_configurer_options' => 'Opciones',
 	'onglet_configurer_outils' => 'Herramientas',
