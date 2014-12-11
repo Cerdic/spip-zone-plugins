@@ -14,10 +14,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_statut_defaut' => 'Status padrão de uma reserva',
 
 	// R
-	'reservation_evenement_titre' => 'Reservas dos eventos', # RELIRE
+	'reservation_evenement_titre' => 'Reservas dos eventos',
 
 	// T
-	'titre_page_configurer_reservation_evenement' => 'Configuração de reservas dos eventos' # RELIRE
+	'titre_page_configurer_reservation_evenement' => 'Configuração de reservas dos eventos'
 );
 
 ?>
