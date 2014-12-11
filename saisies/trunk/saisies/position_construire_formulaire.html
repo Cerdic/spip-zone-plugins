@@ -25,7 +25,7 @@
 			<:saisies:construire_position_fin_formulaire:>
 		]
 		[(#GET{parent}|oui)
-			#SET{groupe,#GET{tab_par_nom}|table_valeur{#GET{parent}}}
+			#SET{groupe,#GET{tab_par_nom/#GET{parent}}}
 			#SET{groupe,#GET{groupe/options/label}|sinon{#GET{groupe/options/nom}}|couper{60}}
 			<:saisies:construire_position_fin_groupe{groupe=#GET{groupe}}:>
 		]
