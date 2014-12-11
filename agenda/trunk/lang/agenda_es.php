@@ -25,6 +25,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Eliminar',
 
 	// C
+	'cal_par_jour' => 'día',
+	'cal_par_mois' => 'mes',
+	'cal_par_semaine' => 'semana',
 	'confirm_suppression_inscription' => '¿Desea realmente eliminar esta inscripción?',
 	'confirm_suppression_inscription_toutes' => '¿Desea realmente eliminar todas las inscripciones?',
 	'connexion_necessaire_pour_inscription' => 'Gracias por conectarse para poder inscribirse a este evento.',
@@ -56,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'evenement_descriptif' => 'Descripción',
 	'evenement_horaire' => 'Todo el día',
 	'evenement_lieu' => 'Lugar',
+	'evenement_participant_email_mention' => 'Para quedar en contact, indique su dirección mail. No sera publicada en el sitio.',
 	'evenement_repetitions' => 'Repeticiones',
 	'evenement_titre' => 'Título',
 	'evenements' => 'Eventos',
@@ -84,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_inscrits' => '@nb@ inscritos',
 	'info_nb_mois' => '@nb@ meses',
 	'info_nb_places' => '@nb@ plazas',
+	'info_nb_reponses' => '@nb@ respuestas',
 	'info_nombre_evenements' => '@nb@ eventos',
 	'info_nouvel_evenement' => 'Nuevo evento',
 	'info_reponse_inscription_non' => 'no',
@@ -93,6 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reponses_inscriptions' => 'Respuestas:',
 	'info_un_evenement' => '1 evento',
 	'info_un_inscrit' => 'Un inscrito',
+	'info_une_reponse' => 'Una respuesta',
 	'inscrits' => 'Inscripciones',
 
 	// L
@@ -101,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_periode_saison' => 'Estación',
 	'label_places' => 'Limitar el número de lugares',
 	'label_reponse_jyparticipe' => 'Asistiré',
-	'label_reponse_jyparticipe_pas' => 'No asistiré', # MODIF
+	'label_reponse_jyparticipe_pas' => 'No asistiré',
 	'label_reponse_jyparticipe_peutetre' => 'Tal vez asista',
 	'label_vous_inscrire' => 'Su participación',
 	'lien_desinscrire' => 'Eliminar',
