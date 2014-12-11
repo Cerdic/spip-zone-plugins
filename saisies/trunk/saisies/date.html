@@ -49,14 +49,14 @@
 
 [(#INCLURE{fond=saisies/input,
 	env,
-	nom=#ENV{nom}[(#ENV{horaire}|?{&#91;date&#93;})],
+	nom=#ENV{nom}[(#ENV{horaire}|?{\[date\]})],
 	valeur=#GET{date},
 	type=#HTML5|?{date,text},
 	class=[(#ENV{class}) ]date})]
 [(#ENV{horaire}|oui)
 [(#INCLURE{fond=saisies/input,
 	env,
-	nom=#ENV{nom}&#91;heure&#93;,
+	nom=#ENV{nom}\[heure\],
 	valeur=#GET{heure},
 	size=4,
 	maxlength=5,
