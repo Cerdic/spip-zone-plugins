@@ -1,4 +1,4 @@
-<traduction module="fulltext" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/fulltext/lang/" reference="fr">
+<traduction module="fulltext" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/fulltext/trunk/lang/" reference="fr">
 	<langue code="ar" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ar" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
@@ -53,7 +53,7 @@
 	</langue>
 	<langue code="ro" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=ro" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=sk" total="92" traduits="91" relire="0" modifs="1" nouveaux="0" pourcent="98.91">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=sk" total="92" traduits="92" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=tr" total="92" traduits="30" relire="0" modifs="20" nouveaux="42" pourcent="32.61">
