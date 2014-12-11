@@ -30,7 +30,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_deplacement' => 'De aanpassing kon niet worden uitgevoerd',
-	'explication_album_numero' => 'Een of meer identificaties, gescheiden door een komma',
 	'explication_deplacer_documents' => '<strong>Experimenteel</strong>: documenten kunnen tussen albums worden uitgewisseld door klikken en schuiven.
 		Als je voldoende rechten hebt, verandert de cursor boven een object om deze mogelijkheid aan te geven.
 		Wanneer de verschuiving is voltooid verschijnt onder de lijst een formulier om de wijzigingen te registreren.',
@@ -92,8 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_tri_media' => 'Soort document',
 	'label_modele_tri_titre' => 'Titel',
 	'label_modele_trier' => 'Sorteren op:',
-	'label_onglet_ajouter_choisir' => 'Bestaande albums koppelen',
-	'label_onglet_ajouter_creer' => 'Een album maken en koppelen',
+	'label_onglet_ajouter_choisir' => 'Bestaande albums koppelen', # MODIF
+	'label_onglet_ajouter_creer' => 'Een album maken en koppelen', # MODIF
 	'label_titre' => 'Titel',
 	'label_utiliser_titre_defaut' => 'Titel van een nieuw album',
 
@@ -106,10 +105,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_id_album_ajoute' => 'Album nr @id_album@ werd toegevoegd.',
 	'message_nb_albums_ajoutes' => '@nb@ albums zijn toegevoegd.',
 	'message_supprimer' => 'Definitief verwijderen?',
+	'message_vider' => 'Alle documenten weghalen?',
 
 	// O
-	'onglet_ajouter_choisir' => 'Album(s) kiezen',
+	'onglet_ajouter_choisir' => 'Album(s) kiezen', # MODIF
 	'onglet_ajouter_creer' => 'Nieuw album',
+	'onglet_configurer_options' => 'Opties',
 	'onglet_configurer_outils' => 'Tools',
 
 	// T
