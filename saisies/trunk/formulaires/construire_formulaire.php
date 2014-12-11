@@ -58,7 +58,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	else{
 		$contexte['_chemin_ui'] = false;
 	}
-	
+var_dump($contexte);
 	return $contexte;
 }
 
@@ -212,7 +212,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 			$vraies_erreurs = array_merge($vraies_erreurs, saisies_verifier($verif_options[$type_verif]['saisies']));
 		}
 	}
-	
+
 	// On insère chaque saisie des options de verification
 	if ($verif_options){
 		foreach ($verif_options as $saisie_verif){
@@ -221,14 +221,18 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 	}
 	$erreurs['configurer_'.$nom] = $formulaire_config;
 	$erreurs['positionner'] = '#configurer_'.$nom;
-	
+
 	if ($enregistrer_saisie) {
-		if ($vraies_erreurs)
+		if ($vraies_erreurs) {
 			$erreurs = array_merge($erreurs, $vraies_erreurs);
-		else
+		} else {
 			$erreurs = array();
+			$erreurs['message_erreur'] = ''; // on ne veut pas du message_erreur automatique
+		}
+	} else {
+		$erreurs['message_erreur'] = ''; // on ne veut pas du message_erreur automatique
 	}
-	
+
 	return $erreurs;
 }
 
