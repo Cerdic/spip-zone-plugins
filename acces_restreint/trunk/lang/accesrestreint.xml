@@ -45,7 +45,7 @@
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=pt_br" total="62" traduits="42" relire="0" modifs="2" nouveaux="18" pourcent="67.74">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=pt_br" total="62" traduits="62" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="ro" url="http://trad.spip.net/tradlang_module/accesrestreint?lang_cible=ro" total="62" traduits="38" relire="0" modifs="2" nouveaux="22" pourcent="61.29">
