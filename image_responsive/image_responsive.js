@@ -77,13 +77,21 @@ function charger_url_image_responsive(this_img) {
 
 function charger_url_background_responsive(this_img) {
 	var dPR = window.devicePixelRatio;
-		var src = this_img.attr("data-src");
-		var l = this_img.attr("data-l");
-		var h = this_img.attr("data-h");
 		vertical = false;
 
 		var dim_l= parseInt(this_img.width());
 		var dim_h = parseInt(this_img.height());
+
+		if (dim_l > dim_h) {
+			var src = this_img.attr("data-italien-src");
+			var l = this_img.attr("data-italien-l");
+			var h = this_img.attr("data-italien-h");
+		} else {
+			var src = this_img.attr("data-portrait-src");
+			var l = this_img.attr("data-portrait-l");
+			var h = this_img.attr("data-portrait-h");
+		}
+
 		
 		if ( (dim_l/dim_h) > (l/h) ) { /* fenetre plus large que l'image */
 			dim = dim_l;

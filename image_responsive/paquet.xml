@@ -1,7 +1,7 @@
 <paquet
 	prefix="image_responsive"
 	categorie="outil"
-	version="2.4.1"
+	version="2.5.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 >	

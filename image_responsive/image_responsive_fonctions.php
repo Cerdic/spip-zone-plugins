@@ -131,7 +131,40 @@ function background_responsive($src, $taille=120, $lazy) {
 	
 		
 		//$img = inserer_attribut($img, "src", $src);
-		$ins = "data-src='$src'";
+		
+		if ($l > $h) {
+			$ins = "data-italien-src='$src'";
+			$ins .= " data-italien-l='$l'";
+			$ins .= " data-italien-h='$h'";
+			
+			$srcp = image_reduire($src, 0, 2400);
+			$srcp = image_proportions($srcp, 3, 4);
+			$srcp = extraire_attribut($srcp, "src");
+			$lp = largeur($srcp);
+			$hp = hauteur($srcp);
+			
+			$ins .= "data-portrait-src='$srcp'";
+			$ins .= " data-portrait-l='$lp'";
+			$ins .= " data-portrait-h='$hp'";
+		
+		} else {
+			$ins = "data-portrait-src='$src'";
+			$ins .= " data-portrait-l='$l'";
+			$ins .= " data-portrait-h='$h'";
+
+
+			$srcp = image_reduire($src, 2400, 0);
+			$srcp = image_proportions($srcp, 4, 3);
+			$srcp = extraire_attribut($srcp, "src");
+			$lp = largeur($srcp);
+			$hp = hauteur($srcp);
+			
+			$ins .= " data-italien-src='$srcp'";
+			$ins .= " data-italien-l='$lp'";
+			$ins .= " data-italien-h='$hp'";
+		}
+
+
 		$ins .= " data-responsive='background'";
 		
 
@@ -150,8 +183,6 @@ function background_responsive($src, $taille=120, $lazy) {
 		if ($taille_defaut == 0) $src = "rien.gif";
 		if ($lazy == 1) $ins .= " data-lazy='lazy'";
 
-		$ins .= " data-l='$l'";
-		$ins .= " data-h='$h'";
 		$ins .= " class='$class'";
 		
 		if (count($tailles) > 1) {
