@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'Kompas SPIPu zoskupuje všetky "oficiálne" stránky galaxie SPIPu. Pri každej stránke uvádza jej logo, názov, slogan a jej opis. Pokojne ju môžete použiť na vlastných stránkach na nasmerovanie svojich návštevníkov do galaxie SPIPu.',
 	'descriptif_site_spip_blog' => 'Keďže SPIP je kolektívny projekt, SPIP-BLOG.net  sústreďuje technické poznámky, staršie verzie, nálady, chyby, rôzne oznamy, atď. Takto odráža komunitu okolo SPIPu: na prvom mieste a predovšetkým ľahkosťou. énormément de tendresse.',
-	'descriptif_site_spip_contrib' => 'Kolektívna stránka SPIP-CONTRIB.net poskytuje všetky externé príspevky: zásuvné moduly, skripty, filtre, šablóny, dokumentáciu, tipy a triky, atď., ktoré vytvorila komunita okolo SPIPu (v podobe odkazov na sťahovanie) pre používateľov SPIPu. V diskusných fórach nájdete hypertextové odkazy vývojárov pre používateľov.', # MODIF
+	'descriptif_site_spip_contrib' => 'Kolektívna stránka contrib.spip poskytuje všetky externé príspevky: zásuvné moduly, skripty, filtre, šablóny, dokumentáciu, tipy a triky, atď., ktoré vytvorila komunita okolo SPIPu (v podobe odkazov na sťahovanie) pre používateľov SPIPu. V diskusných fórach nájdete hypertextové odkazy vývojárov pre používateľov.',
 	'descriptif_site_spip_core' => 'Stránka CORE.SPIP.org sústreďuje históriu zmien kódu SPIPu, riadenie lístkov umožňujúcich nahlasovanie chýb i posielanie návrhov na vylepšenie a je miestom na sťahovanie jednotlivých verzií SPIPu.',
 	'descriptif_site_spip_demo' => 'DEMO.SPIP.org je testovacia stránka, ktorá sa nanovo nastavuje každú noc, každému umožňuje otestovať najnovšiu stabilnú verziu SPIPu (s výberom funkcie redaktora alebo administrátora) jedným klikom a bez inštalácie.',
 	'descriptif_site_spip_doc' => 'CODE.SPIP.org je priestor pre dokumentáciu programu SPIP pre jeho aplikácie, zdrojový kód a jeho niektoré technické funkcie.',
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_irc' => 'Komunita okolo SPIPu, ktorá nikdy nespí, založila kanál IRC (chat na internete v reálnom čase) otvorený pre všetkých: http://webchat.freenode.net/?channels=#spip',
 	'descriptif_site_spip_mag' => 'Opis stránky SPIP Mag’',
 	'descriptif_site_spip_net' => 'Stránka SPIP.net, ktorá je určená pre používateľov a webmasterov, je oficiálne odporúčaná všetkým tým, ktorí si chcú nainštalovať SPIP, rozumejú jazyku cyklov, filtrov a tagov, pre tých, ktorí programujú a používajú šablóny. Je tu terminologický slovník (resp. glosár), návody, tipy, históriu verzií a sťahovaciu zónu. SPIP.net je preložený do vyše dvadsiatich jazykov.',
-	'descriptif_site_spip_party' => 'Tráviť čas s klávesnicou a obrazovkou kódovaním SPIPu je dobré. Stretnúť sa s vývojármi a používateľmi naživo, ako s ľuďmi z mäsa a kostí, pri koláčiku a ovocnom džúse (alebo pri inom nápoji) je oveľa lepšie. SPIP-PARTY.net je stránka, na ktorej je zoznam všetkých takýchto párty: minulých (správy, fotky) a budúce (kalendár, program udalostí).', # MODIF
+	'descriptif_site_spip_party' => 'Tráviť čas s klávesnicou a obrazovkou kódovaním SPIPu je dobré. Stretnúť sa s vývojármi a používateľmi naživo, ako s ľuďmi z mäsa a kostí, pri koláčiku a ovocnom džúse (alebo pri inom nápoji) je oveľa lepšie. SPIP-PARTY.net je stránka, na ktorej je zoznam všetkých takýchto párty: minulých (správy, fotky) i budúcich (kalendár, program udalostí).',
 	'descriptif_site_spip_plugin' => 'Cieľom PLUGINS.SPIP.net je vytvoriť úplný priečinok doplnkových modulov  pre SPIP (zásuvné moduly, šablóny, farebné motívy). Ku každému modulu je uvedený: opis, autor, licencia, úroveň kompatibility s verziou SPIPu, naposledy vykonané zmeny, stav prekladov, štatistika používania, odkazy na dokumentáciu a stiahnutie.',
 	'descriptif_site_spip_programmer' => 'Skôr určená pre vývojárov alebo webmasterov, ktorí už vedia programovať v PHP, SQL, HTML, CSS a JavaScripte,  poskytuje množstvo funkcií (aplikácie API, nadmerné zaťaženie servera, prepojenia, atď.) SPIPu s mnohými príkladmi použitia kódu. Stránka ponúka používateľom možnosť stiahnuť si celý jej obsah vo formáte pdf so slobodnou licenciou cc-by-sa. PROGRAMMER.SPIP.org je dostupná vo francúzštine, v angličtine a v španielčine.',
 	'descriptif_site_spip_sedna' => 'SEDNA.SPIP.org je agregátor RSS všetkých noviniek galaxie SPIPu. Najnovšie informácie z viac ako 70 stránok, ktoré sa točia okolo SPIPu a na ktorých sa dá ľahko vyhľadávať.',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_extension' => 'Príspevky',
 	'nom_groupe_spip_reference' => 'Dokumentácia',
 	'nom_site_spip_blog' => 'Blog o SPIPe',
-	'nom_site_spip_contrib' => 'SPIP-Contrib', # MODIF
+	'nom_site_spip_contrib' => 'contrib.spip',
 	'nom_site_spip_core' => 'Jadro SPIPu',
 	'nom_site_spip_demo' => 'Demo stránka so SPIPom',
 	'nom_site_spip_doc' => 'Kód SPIPu',
