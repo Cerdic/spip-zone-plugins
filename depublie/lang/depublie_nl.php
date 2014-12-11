@@ -10,8 +10,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_titre_parametrages' => 'Parameters voor depublicatie',
 	'configurer_duree_publication' => 'Geef een publicatieduur aan als de status in gepubliceerd verandert, laat anders leeg.',
-	'configurer_rubrique_depublie' => 'Het weergeven van het depublicatie-formulier vereist de identificatie van een of meerdere hoofd- en subrubrieken, gescheiden door een komma.', # MODIF
-	'configurer_statut_depublie' => 'Kies de tot te wijzen statut bij depublicatie', # MODIF
+	'configurer_rubrique_depublie' => 'Het weergeven van het depublicatie-formulier vereist de identificatie van een of meerdere hoofd- en subrubrieken, gescheiden door een komma.',
+	'configurer_statut_depublie' => 'Kies de bij depublicatie toe te wijzen status',
+
+	// E
+	'erreur_date_superieure' => 'De datum van depublicatie moet verder in de toekomst liggen dan de publicatiedatum',
+
+	// I
+	'icone_configurer_depublie' => 'Depublicaties configureren',
 
 	// L
 	'label_jour' => 'Dagen',
@@ -21,6 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_rubrique_depublie' => 'Identificatie van subrubriek(en)',
 	'label_secteur_depublie' => 'Identificatie van hoofdrubriek(en)',
 	'label_statut_depublie' => 'Status',
+
+	// S
+	'statut_futur' => 'Status',
 
 	// T
 	'texte_date_depublication' => 'Datum van depublicatie:',
