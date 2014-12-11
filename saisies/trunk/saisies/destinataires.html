@@ -1,6 +1,6 @@
 	#SET{type_choix, #ENV{type_choix,tous}}
 #SET{choix_destinataires, #ENV*{choix_destinataires,#ARRAY}}
-#SET{erreurs,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
+#SET{erreurs,#ENV**{erreurs/#ENV{nom}}}
 <BOUCLE_choix(CONDITION){si #GET{choix_destinataires}|count|<{2}|ou{#GET{type_choix}|=={tous}}}>
 <li class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
 	#ENV*{inserer_debut}

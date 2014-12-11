@@ -8,7 +8,7 @@
 [(#GET{erreurs_fieldset}|oui)
 	#SET{plie, ''}
 ]
-#SET{erreur_ici,#ENV**{erreurs}|table_valeur{#ENV{nom}}}
+#SET{erreur_ici,#ENV**{erreurs/#ENV{nom}}}
 
 <li class="fieldset[ fieldset_(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})][ (#GET{pliable})[ (#GET{plie})]]"[ data-id="(#ENV{id_saisie})"]> 
 	#ENV*{inserer_debut}

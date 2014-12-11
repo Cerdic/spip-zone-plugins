@@ -23,8 +23,8 @@
 
 [(#REM) Si la valeur est un tableau, on considère que c'est date et heure dans un format déjà reconnu (j/m/a ou SQL) ]
 [(#GET{valeur}|is_array|oui)
-	#SET{date, #GET{valeur}|table_valeur{date}}
-	#SET{heure, #GET{valeur}|table_valeur{heure}}
+	#SET{date, #GET{valeur/date}}
+	#SET{heure, #GET{valeur/heure}}
 ]
 
 [(#REM) Si la valeur est une chaîne, on regarde si SQL ]

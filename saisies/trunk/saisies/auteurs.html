@@ -35,7 +35,7 @@
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
 	<BOUCLE_auteurs(AUTEURS){statut ?}{statut != 5poubelle}{webmestre ?}{par #ENV{tri,#ARRAY{num nom, nom}}|is_array|?{#ENV{tri,#ARRAY{num nom, nom}}|implode{','},#ENV{tri,#ARRAY{num nom, nom}}}}{tout}>
-		#SET{image_statut, #GET{bonhomme_statut}|table_valeur{#STATUT}}
+		#SET{image_statut, #GET{bonhomme_statut/#STATUT}}
 		[(#ENV{multiple}|oui)
 		<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"][(#GET{image_statut}|oui)[style="background:url((#CHEMIN{prive/images/#GET{image_statut}})) no-repeat left; padding-left: 20px;"]]>#NOM</option>]
 		[(#ENV{multiple}|non)
