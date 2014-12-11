@@ -28,12 +28,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cookie_1' => 'Mémoriser l’état des blocs',
 	'label_unique_1' => 'Un seul bloc ouvert sur la page',
 
-	// P
-	'pp_blocs_bloc' => 'Insérer un bloc replié',
-	'pp_blocs_visible' => 'Insérer un bloc déplié',
-	'pp_un_titre' => 'Un titre',
-	'pp_votre_texte' => 'Placez votre texte ici',
-
 	// T
 	'titre_page_configurer_blocsdepliables' => 'Blocs dépliables'
 );
