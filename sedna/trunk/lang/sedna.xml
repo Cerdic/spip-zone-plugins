@@ -58,7 +58,8 @@
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=pt" total="24" traduits="22" relire="0" modifs="2" nouveaux="0" pourcent="91.67">
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=pt_br" total="24" traduits="22" relire="0" modifs="2" nouveaux="0" pourcent="91.67">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=pt_br" total="24" traduits="24" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="ro" url="http://trad.spip.net/tradlang_module/sedna?lang_cible=ro" total="24" traduits="22" relire="0" modifs="2" nouveaux="0" pourcent="91.67">
 	</langue>
