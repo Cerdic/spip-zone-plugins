@@ -109,9 +109,11 @@ function image_responsive($texte, $taille=120, $lazy=0, $vertical=0) {
 }
 
 function background_responsive($src, $taille=120, $lazy) {
+
 	if (preg_match("/^<img /i", $src)) {
 		$src = extraire_attribut($src, "src");
 	}
+
 	
 		
 	$tailles = explode("/", $taille);
@@ -126,6 +128,9 @@ function background_responsive($src, $taille=120, $lazy) {
 	$src = preg_replace(",\?[0-9]*$,", "", $src);
 		
 	if (file_exists($src)) {
+		include_spip("filtres/images_transforme");
+
+
 		$l = largeur($src);
 		$h = hauteur($src);
 	
