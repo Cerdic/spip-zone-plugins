@@ -1,7 +1,7 @@
 <paquet
 	prefix="compositions"
 	categorie="outil"
-	version="3.3.10"
+	version="3.3.11"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/composition-32.png"
@@ -35,5 +35,5 @@
 	
 	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
 
-	<menu nom="compositions" titre="compositions:compositions" parent="menu_configuration" icone="images/composition-16.png" action="configurer_compositions" />
+	<menu nom="compositions" titre="compositions:compositions" parent="menu_squelette" icone="images/composition-16.png" action="compositions" />
 </paquet>
