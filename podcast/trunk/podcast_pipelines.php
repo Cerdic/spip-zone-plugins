@@ -16,9 +16,10 @@ function podcast_editer_contenu_objet($flux){
 	$type_form = $flux['args']['type'];
 	$id_document = $flux['args']['id'];
 	if(in_array($type_form,array('document'))){
-		if(preg_match(",<li [^>]*class=[\"']editer_credits.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
-			$ajouts .= recuperer_fond('inclure/formulaire_document_saisies',array('id_document'=>$id_document));
-			$flux['data'] = preg_replace(",($regs[1]),Uims","\\1".$ajouts,$flux['data']);
+		if(preg_match(",<li [^>]*class=[\"'](?:editer )?editer_credits.*>(.*)<\/li>,Uims",$flux['data'],$regs)){
+			$ajouts = recuperer_fond('inclure/formulaire_document_saisies',array('id_document'=>$id_document));
+			$p = strpos($flux['data'],$regs[0])+strlen($regs[0]);
+			$flux['data'] = substr_replace($flux['data'],$ajouts,$p,0);
 		}
 	}
 	return $flux;
