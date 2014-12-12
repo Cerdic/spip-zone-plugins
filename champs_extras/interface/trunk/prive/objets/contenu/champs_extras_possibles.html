@@ -21,7 +21,7 @@
 				<BOUCLE_saisies(DATA){source tableau, #VALEUR}>
 					<li class='item[(#TOTAL_BOUCLE|=={1}|oui)solo]'>
 						<span title="[(#VALEUR|attribut_html)]">
-							[(#CLE)]
+							[(#CHEMIN_IMAGE{saisies_textarea}|balise_img{'<:saisies:saisie_textarea_titre:>'}) ][(#CLE)]
 						</span>
 						[(#BOUTON_ACTION{
 							[(#CHEMIN_IMAGE{formulaire-enregistrer-16}|image_reduire{12}) ]<:iextras:action_associer:>,
