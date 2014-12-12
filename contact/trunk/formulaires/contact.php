@@ -61,26 +61,25 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	$champs_possibles = contact_infos_supplementaires();
 	$champs_mini_config = array('mail', 'sujet', 'texte');
 
-		$champs_choisis = lire_config('contact/champs',$champs_mini_config);
+	$champs_choisis = lire_config('contact/champs',$champs_mini_config);
 
-		// On envoie un tableau contenant tous les champs choisis et leur titre
-		// DANS L'ORDRE de ce qu'on a récupéré de CFG
-		$champs_choisis = array_flip($champs_choisis);
-		foreach ($champs_choisis as $cle => $valeur){
-			$champs_choisis[$cle] = $champs_possibles[$cle];
-		}
-		$valeurs['_champs'] = $champs_choisis;
-		// Mais aussi tous les champs un par un
-		$valeurs = array_merge(
-			$valeurs,
-			array_map(
-				create_function('', 'return "";'),
-				$champs_choisis
-			)
-		);
+	// On envoie un tableau contenant tous les champs choisis et leur titre
+	// DANS L'ORDRE de ce qu'on a récupéré de CFG
+	$champs_choisis = array_flip($champs_choisis);
+	foreach ($champs_choisis as $cle => $valeur){
+		$champs_choisis[$cle] = $champs_possibles[$cle];
+	}
+	$valeurs['_champs'] = $champs_choisis;
+	// Mais aussi tous les champs un par un
+	$valeurs = array_merge(
+		$valeurs,
+		array_map(
+			create_function('', 'return "";'),
+			$champs_choisis
+		)
+	);
 
-
-		$valeurs['_obligatoires'] = $champs_obligatoires = lire_config('contact/obligatoires',$champs_mini_config);
+	$valeurs['_obligatoires'] = $champs_obligatoires = lire_config('contact/obligatoires',$champs_mini_config);
 
 	// Infos sur l'ajout de pièces jointes ou non
 	$autoriser_pj = (lire_config('contact/autoriser_pj') == 'true');
@@ -99,6 +98,8 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	$valeurs['pj_cle_enregistrees'] = array();
 	$valeurs['pj_mime_enregistrees'] = array();
 
+	if((!$valeurs['mail'] || $valeurs['mail'] == '') && isset($GLOBALS['visiteur_session']['email']))
+		$valeurs['mail'] = $GLOBALS['visiteur_session']['email'];
 	return $valeurs;
 }
 
