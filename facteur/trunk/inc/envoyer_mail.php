@@ -128,12 +128,22 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// c'est un format standard dans l'envoi de mail
 	// les passer au format array pour phpMailer
 	// mais ne pas casser si on a deja un array en entree
-	// si aucun destinataire du courriel on renvoie false (eviter les warning PHP)
+	// si pas destinataire du courriel on renvoie false (eviter les warning PHP : ligne 464 de phpmailer-php5/class.phpmailer.php
+	// suppression des adresses de courriels invalides, si aucune valide, renvoyer false (eviter un warning PHP : ligne 464 de phpmailer-php5/class.phpmailer.php)
 	if (is_array($destinataire))
 		$destinataire = implode(", ",$destinataire);
 
-	if(strlen($destinataire) > 0)
+	if(strlen($destinataire) > 0){
 		$destinataire = array_map('trim',explode(",",$destinataire));
+		foreach ($destinataire as $key => $value) {
+			if(!email_valide($value))
+				unset($destinataire[$key]);
+		}
+		if(count($destinataire) == 0) {
+			spip_log("Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
+			return false;
+		}
+	}
 	else {
 		spip_log("Aucune adresse email de destination valable pour l'envoi du courriel.", 'mail.' . _LOG_ERREUR);
 		return false;
