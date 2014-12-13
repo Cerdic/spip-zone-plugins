@@ -9,9 +9,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'ajouter_traduction' => 'Incluir uma tradução',
+	'avis_rubrique_source' => 'Primeiro, você precisa traduzir todas as seções antecedentes',
 
 	// R
-	'rubrique_reference' => '(seção de referência)'
+	'rubrique_reference' => '(seção de referência)',
+
+	// T
+	'trad_delier_rubrique' => 'Não vincular mais esta seção às suas traduções'
 );
 
 ?>
