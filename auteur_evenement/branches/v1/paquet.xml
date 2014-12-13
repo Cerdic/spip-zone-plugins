@@ -2,7 +2,7 @@
 	prefix="auteur_evenement"
 	categorie="date"
 	version="1.0.2"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.0.8;3.1.*]"
 	logo="prive/themes/spip/images/auteur_evenement-64.png"
 >
