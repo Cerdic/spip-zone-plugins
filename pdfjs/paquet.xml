@@ -1,8 +1,8 @@
 <paquet
 	prefix="pdfjs"
 	categorie="multimedia"
-	version="0.3.2"
-	etat="test"
+	version="0.4.0"
+	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="prive/themes/spip/images/pdfjs-32.png"
 	documentation="http://contrib.spip.net/?article4078"
