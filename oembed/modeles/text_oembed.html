@@ -1,3 +1,17 @@
 <BOUCLE_tous (DOCUMENTS types_documents) {id_document=#ID} {tout}
->[(#FICHIER|contenu_document{#ENV{charset,auto}})]
+>[(#SET{html,[(#FICHIER|contenu_document{#ENV{charset,auto}})]})]
+[(#SET{data,[(#ARRAY{
+type,[(#ARRAY{image,photo,video,video,audio,rich,sound,rich,file,rich}|table_valeur{#MEDIA})],
+html,[(#GET{html})],
+width,[(#GET{html}|extraire_attribut{width})],
+height,[(#GET{html}|extraire_attribut{height})],
+title,[(#TITRE)],
+media,[(#MEDIA)],
+author_name,[(#CREDITS)],
+thumbnail_url,[(#LOGO_DOCUMENT|extraire_attribut{src})]})]})
+]
+<div class='spip_documents spip_documents_center ressource oembed[ oembed_(#GET{data}|table_valeur{type})][ oembed_(#GET{data}|table_valeur{media}|replace{sound,audio})][ oembed_(#GET{data}|table_valeur{provider_name}|strtolower|replace{'\W','_'})]'>
+	[(#INCLURE{fond=modeles/oembed_[(#GET{data}|table_valeur{type,link})],data=#GET{data},url=#OEMBED,align})]
+	[<div class="spip_doc_titre oembed-source">(#OEMBED|echappe_retour)</div>]
+</div>
 </BOUCLE_tous>
