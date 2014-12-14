@@ -1,6 +1,8 @@
 [(#CONFIG{zotspip/page_biblio}|oui)
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:zotspip:titre_page_biblio:></strong></p>
+[(#ENV{masquer_fil}|non)
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:zotspip:titre_page_biblio:></strong></p>
+]
 
 #SET{selection,#ARRAY{}}
 [(#ENV{auteur}|oui)#SET{selection,#GET{selection}|push{#ENV{auteur}}}]
