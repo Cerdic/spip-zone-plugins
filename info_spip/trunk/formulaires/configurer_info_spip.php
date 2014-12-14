@@ -40,10 +40,11 @@ function formulaires_configurer_info_spip_traiter_dist ()
 {
     $res = array();
 
-    $res['cle'] = _request('cle');
-    $res['actif'] = _request('actif');
     $res['type_site'] = _request('type_site');
     $res['modules'] = _request('modules');
+    $res['bo_url'] = _request('bo_url');
+    $res['actif'] = _request('actif');
+    $res['cle'] = _request('cle');
 
     if (ecrire_meta('info_spip', @serialize($res), 'non')) {
         $res['message_erreur'] = _T('info_spip:enregistrement_ko');

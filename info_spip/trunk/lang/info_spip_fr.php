@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // A
     'actif_explication' => 'Permettre à un site externe de consulter la page <em>example.org/?page=info_config&cle=ZKHDKNDKQBN</em> équivalent à votre page <em>?exec=info_config</em>. <br/> Il ne faudra pas oublier de renseigner la clé d\'identification si vous activez ce service.',
-    'actif_label' => 'Activer la consultation externe',
+    'actif_label' => 'Activer la consultation externe&nbsp;:',
     'administrateurs_fieldset_label' => 'Administrateur(s)',
     'apache_modules_label' => 'Modules Apache&nbsp;:',
     'apache_modules_nom' => 'Modules d\'Apache',
@@ -24,13 +24,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'auteur_login_label' => 'Login',
     'auteur_nom_label' => 'Nom',
 
+    // B
+    'bo_url_label' => 'URL du Back Office&nbsp;:',
+
     // C
     'cfg_exemple' => 'Exemple',
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
     'charset_label' => 'Jeu de caractères&nbsp;:',
     'cle_explication' => 'Clé permettant de sécuriser l\'utilisation de la page affichant la configuration du site. Sans cette clé, la page ne s\'affichera pas.',
-    'cle_label' => 'Clé d\'identification',
+    'cle_label' => 'Clé d\'identification&nbsp;:',
 
     // D
     'date_creation_label' => 'Date d\'installation&nbsp;:',
@@ -67,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'liste_auteurs_administrateurs_nom' => 'Liste des administrateurs',
     'liste_auteurs_webmestre_nom' => 'Liste des webmestres',
     'liste_modules_explication' => 'Les éléments ci-dessous sont les modules complémentaires qui peuvent être insérés sur les différentes pages <em>info_config</em>',
-    'liste_modules_label' => 'Liste des modules',
+    'liste_modules_label' => 'Liste des modules&nbsp;:',
     'liste_plugins_nom' => 'Liste des plugins',
     'logiciel_label' => 'Logiciel&nbsp;:',
 
