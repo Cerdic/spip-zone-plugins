@@ -86,23 +86,23 @@ function oembed_renseigner_document_distant($flux) {
 	// on tente de récupérer les données oembed
 	if ($data = oembed_recuperer_data($flux['source'])){
 		// si on a recupere une URL c'est direct un doc distant
-		if (isset($data['url'])) {
+		if (isset($data['url'])
+			AND $data['type']!=='rich'
 			// on recupere les infos du document distant
-			if ($doc = recuperer_infos_distantes($data['url'])) {
-				unset($doc['body']);
-				$doc['distant'] = 'oui';
-				$doc['mode'] = 'document';
-				$doc['fichier'] = set_spip_doc($data['url']);
-				// et on complète par les infos oembed
-				$doc['oembed'] = $flux['source'];
-				$doc['titre'] = $data['title'];
-				$doc['credits'] = $data['author_name'];
-				if (isset($data['media']))
-					$doc['media'] = $data['media'];
-				elseif (isset($medias[$data['type']]))
-					$doc['media'] = $medias[$data['type']];
-				return $doc;
-			}
+			AND $doc = recuperer_infos_distantes($data['url'])) {
+			unset($doc['body']);
+			$doc['distant'] = 'oui';
+			$doc['mode'] = 'document';
+			$doc['fichier'] = set_spip_doc($data['url']);
+			// et on complète par les infos oembed
+			$doc['oembed'] = $flux['source'];
+			$doc['titre'] = $data['title'];
+			$doc['credits'] = $data['author_name'];
+			if (isset($data['media']))
+				$doc['media'] = $data['media'];
+			elseif (isset($medias[$data['type']]))
+				$doc['media'] = $medias[$data['type']];
+			return $doc;
 		}
 		elseif(isset($data['html']) OR $data['type']=='link'){
 			if ($data['type']=='link')
