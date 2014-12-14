@@ -109,7 +109,13 @@ function oembed_renseigner_document_distant($flux) {
 				$data['html'] = '<a href="' . $flux['source'] . '">' . sinon($data['title'],$flux['source']) . '</a>';
 			// créer une copie locale du contenu html
 			// cf recuperer_infos_distantes()
-			$doc['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($flux['source'], 'html');
+			// generer un nom de fichier unique : on l'index sur l'id du prochain document + uniqid
+			$id = sql_getfetsel("id_document","spip_documents","","","id_document DESC","0,1");
+			include_spip("inc/acces");
+			$id = "id$id-".creer_uniqid();
+			$id = substr(md5($id),0,7);
+			$doc['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($flux['source'], "html");
+			$doc['fichier'] = preg_replace(",\.html$,i","-$id.html",$doc['fichier']);
 			ecrire_fichier($doc['fichier'], $data['html']);
 			// set_spip_doc() pour récupérer le chemin du fichier relatif a _DIR_IMG
 			$doc['fichier'] = set_spip_doc($doc['fichier']);
