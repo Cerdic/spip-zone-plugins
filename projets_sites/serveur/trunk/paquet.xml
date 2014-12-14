@@ -1,7 +1,7 @@
 <paquet
 	prefix="projets_sites"
 	categorie="divers"
-	version="1.7.0"
+	version="1.7.1"
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/projets_sites-64.png"
@@ -25,6 +25,7 @@
 
 	<pipeline nom="taches_generales_cron" inclure="projets_sites_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="projets_sites_pipelines.php" />
+	<pipeline nom="header_prive" inclure="projets_sites_pipelines.php" />
 	<pipeline nom="optimiser_base_disparus" inclure="projets_sites_pipelines.php" />
 
 	<menu nom="projets_sites" titre="projets_site:titre_projets_sites" parent="menu_edition" icone="images/projets_site-16.png" action="projets_sites" />

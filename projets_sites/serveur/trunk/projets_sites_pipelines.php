@@ -84,6 +84,9 @@ function projets_sites_optimiser_base_disparus($flux)
  */
 function projets_sites_header_prive($flux)
 {
+    $flux .= '<script type="application/javascript" src="'
+    . _DIR_PLUGIN_PROJETS_SITES
+    . 'javascript/projets_sites_prive.js"></script>';
     return $flux;
 }
 
