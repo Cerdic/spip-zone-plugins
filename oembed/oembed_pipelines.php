@@ -80,7 +80,7 @@ function oembed_recuperer_fond($flux){
  * @return array
  */
 function oembed_renseigner_document_distant($flux) {
-	$medias = array('photo' => 'image','video' => 'video');
+	$medias = array('photo' => 'image','video' => 'video', 'sound'=>'audio');
 	include_spip('inc/config');
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
@@ -143,24 +143,27 @@ function oembed_post_edition($flux) {
 		$id_document = $flux['args']['id_objet'];
 		if ($data = oembed_recuperer_data($flux['data']['oembed'])){
 			// vignette disponible ? la recupérer et l'associer au document
-			if ($data['thumbnail_url']) {
-				spip_log('ajout de la vignette'.$data['thumbnail_url'].' pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
+			if (
+			     (isset($data['thumbnail_url']) AND $v=$data['thumbnail_url'])
+			  OR (isset($data['image']) AND $v=$data['image'])
+			) {
+				spip_log('ajout de la vignette '.$v.' pour '.$flux['data']['oembed'],'oembed.'._LOG_DEBUG);
 				// cf formulaires_illustrer_document_traiter_dist()
 				$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 				$files = false;
-				if (preg_match(",^\w+://,",$data['thumbnail_url'])){
+				if (preg_match(",^(\w+:)?//,",$v)){
 					$files = array(
 						array(
-							'name' => basename($data['thumbnail_url']),
-							'tmp_name' => $data['thumbnail_url'],
+							'name' => basename($v),
+							'tmp_name' => $v,
 							'distant' => true,
 						)
 					);
 				}
-				elseif (file_exists($data['thumbnail_url'])) {
+				elseif (file_exists($v)) {
 					$files = array(array(
-						'name' => basename($data['thumbnail_url']),
-						'tmp_name' => $data['thumbnail_url']
+						'name' => basename($v),
+						'tmp_name' => $v
 					));
 				}
 				if ($files
