@@ -15,6 +15,9 @@ function oembed_input_posttraite_soundcloud_rich_dist($data){
 	if (!isset($data['thumbnail_url'])){
 		$data['thumbnail_url'] = find_in_path("oembed/input/vignettes/soundcloud.png");
 	}
+	else {
+		$data['thumbnail_url'] = preg_replace(',^http://,Uims','https://',$data['thumbnail_url']);
+	}
 
 	return $data;
 }
