@@ -1,5 +1,7 @@
 [<span class="oembed oe-photo[ (#ENV{align})]">
-	<a href="#ENV{url}" class="spip_out spip_url">
+	<a href="#ENV{url}" rel="external">
 		(#ENV{data}|table_valeur{url}|sinon{#ENV{data}|table_valeur{thumbnail_url}}|balise_img{#ENV{data}|table_valeur{title}})
 	</a>
 </span>]
+[<div class="spip_doc_titre" style="max-width:#ENV{data/width}px;"><a href="#ENV*{url}">(#ENV*{data/title})</a>[
+<br /><i>par(#ENV*{data/author_name}|oui)[(#ENV*{data/author_url}|lien_ou_expose{#ENV*{data/author_name},#ENV*{data/author_url}|non})]</i>]</div>]

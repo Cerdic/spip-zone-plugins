@@ -14,6 +14,10 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 }
 .spip_documents span.oembed {display:inline-block;}
 
+/* Photo */
+.oembed_photo .oembed-source {display: none;}
+
+/* Rich */
 .oembed_rich {max-width:100%;position:relative;}
 .oembed_rich .oe-rich {max-width:none !important;}
 .oembed_rich .rwd-rich-container {position: relative;}
