@@ -3,7 +3,7 @@
 	<slogan>Une aide &#224; l'insertion des mod&#232;les dans vos textes</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.1</version>
+	<version>0.5.2</version>
 	<etat>stable</etat>
 	<description>
 		Ce plugin fournit une aide &#224; l'insertion des mod&#232;les dans vos textes &#224; travers des formulaires de saisies. Ces formulaires sont accessibles dans la colonne de droite ou via un bouton dans le porte-plume.
@@ -29,6 +29,7 @@
 	<necessite id="saisies" version="[1.25.4;]" />
 	<necessite id="verifier" version="[0.1.1;]" />
 	<necessite id="yaml" version="[1.4.1;]" />
+	<necessite id="mediabox" />
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>modalbox_insert_head</action>
