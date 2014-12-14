@@ -29,31 +29,32 @@
 ][(#SET{disabled,[(#ENV{id_projets_site}|=={oui}|?{'',#GET{disabled}})]})]
 		<ul>
 			[(#SAISIE{input, titre, obligatoire=oui,
-				label=<:projets_site:label_titre:>,
+				label=<:projets_site:titre_label:>,
 				size=255,
 				maxlength=255,
 				disable=[(#GET{disabled})]})]
 
 			[(#SAISIE{selection, type_site, obligatoire=oui,
-				label=<:projets_site:label_type_site:>,
-				datas=[(#ARRAY{prod,<:projets_site:type_site_prod:>,rec,<:projets_site:type_site_rec:>,dev,<:projets_site:type_site_dev:>,prep,<:projets_site:type_site_prep:>})],disable=[(#GET{disabled})]})]
+				label=<:projets_site:type_site_label:>,
+				datas=#ARRAY{01local,<:projets_site:type_site_01local:>,02dev,<:projets_site:type_site_02dev:>,03inte,<:projets_site:type_site_03inte:>,04test,<:projets_site:type_site_04test:>,05rec,<:projets_site:type_site_05rec:>,06prep,<:projets_site:type_site_06prep:>,07prod,<:projets_site:type_site_07prod:>},
+				defaut='07prod',disable=[(#GET{disabled})]})]
 
 			[(#SAISIE{input, uniqid,
-				label=<:projets_site:label_uniqid:>,
-				explication=<:projets_site:explication_uniqid:>,
+				label=<:projets_site:uniqid_label:>,
+				explication=<:projets_site:uniqid_explication:>,
 				size=255,
 				maxlength=255})]
 
 			[(#SAISIE{input, webservice,
-				label=<:projets_site:label_webservice:>,
-				explication=<:projets_site:explication_webservice:>})]
+				label=<:projets_site:webservice_label:>,
+				explication=<:projets_site:webservice_explication:>})]
 
 			[(#SAISIE{date, date_creation,
-				label=<:projets_site:label_date_creation:>,
+				label=<:projets_site:date_creation_label:>,
 				disable=[(#GET{disabled})]})]
 
 			[(#SAISIE{textarea, descriptif,
-				label=<:projets_site:label_descriptif:>,
+				label=<:projets_site:descriptif_label:>,
 				li_class='haut',
 				inserer_barre='edition',
 				rows=10,
@@ -64,22 +65,22 @@
 <!-- Front Office -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_fo_fieldset:>
+				<:projets_site:fo_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, fo_url,
-					label=<:projets_site:label_fo_url:>,
+					label=<:projets_site:fo_url_label:>,
 					size=255,
 					maxlength=255,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, fo_login,
-					label=<:projets_site:label_fo_login:>,
+					label=<:projets_site:fo_login_label:>,
 					size=25,
 					maxlength=25})]
 
 				[(#SAISIE{input, fo_password,
-					label=<:projets_site:label_fo_password:>,
+					label=<:projets_site:fo_password_label:>,
 					size=25,
 					maxlength=25})]
 
@@ -89,21 +90,21 @@
 <!-- Back office -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_bo_fieldset:>
+				<:projets_site:bo_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, bo_url,
-					label=<:projets_site:label_bo_url:>,
+					label=<:projets_site:bo_url_label:>,
 					size=255,
 					maxlength=255})]
 
 				[(#SAISIE{input, bo_login,
-					label=<:projets_site:label_bo_login:>,
+					label=<:projets_site:bo_login_label:>,
 					size=25,
 					maxlength=25})]
 
 				[(#SAISIE{input, bo_password,
-					label=<:projets_site:label_bo_password:>,
+					label=<:projets_site:bo_password_label:>,
 					size=25,
 					maxlength=25})]
 
@@ -113,32 +114,36 @@
 <!-- Logiciel -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_logiciel_fieldset:>
+				<:projets_site:logiciel_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, logiciel_nom, obligatoire=oui,
-					label=<:projets_site:label_logiciel_nom:>,
+					label=<:projets_site:logiciel_nom_label:>,
 					size=25,maxlength=25,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, logiciel_version, obligatoire=oui,
-					label=<:projets_site:label_logiciel_version:>,
+					label=<:projets_site:logiciel_version_label:>,
 					size=25,
 					maxlength=25,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, logiciel_revision,
-					label=<:projets_site:label_logiciel_revision:>,
+					label=<:projets_site:logiciel_revision_label:>,
 					size=25,
 					maxlength=25,
 					disable=[(#GET{disabled})]})]
 
-				[(#SAISIE{explication,explication_logiciel_plugins,
-					inserer_debut=<:projets_site:explication_logiciel_plugins_titre:>,
-					texte=<:projets_site:explication_logiciel_plugins:>})]
+				[(#SAISIE{input, logiciel_charset,
+					label=<:projets_site:logiciel_charset_label:>,
+					disable=[(#GET{disabled})]})]
+
+				[(#SAISIE{explication,logiciel_plugins_explication,
+					inserer_debut=<:projets_site:logiciel_plugins_titre_explication:>,
+					texte=<:projets_site:logiciel_plugins_explication:>})]
 
 				[(#SAISIE{textarea, logiciel_plugins,
-					label=<:projets_site:label_logiciel_plugins:>,
+					label=<:projets_site:logiciel_plugins_label:>,
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
@@ -148,20 +153,20 @@
 <!-- Les auteurs -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_auteurs_fieldset:>
+				<:projets_site:auteurs_fieldset_label:>
 			</h3>
 			<ul>
-				[(#SAISIE{explication, explication_auteurs,
-					inserer_debut=<:projets_site:explication_auteurs_titre:>,
-					texte=<:projets_site:explication_auteurs:>})]
+				[(#SAISIE{explication, auteurs_explication,
+					inserer_debut=<:projets_site:auteurs_titre_explication:>,
+					texte=<:projets_site:auteurs_explication:>})]
 
 				[(#SAISIE{textarea, auteurs_admin,
-					label=<:projets_site:label_auteurs_admin:>,
+					label=<:projets_site:auteurs_admin_label:>,
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{textarea, auteurs_webmestres,
-					label=<:projets_site:label_auteurs_webmestres:>,
+					label=<:projets_site:auteurs_webmestres_label:>,
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
@@ -171,34 +176,34 @@
 <!-- applicatif -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_serveur_fieldset:>
+				<:projets_site:serveur_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, serveur_nom,
-					label=<:projets_site:label_serveur_nom:>,
+					label=<:projets_site:serveur_nom_label:>,
 					size=255,
 					maxlength=255,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, serveur_port,
-					label=<:projets_site:label_serveur_port:>,
+					label=<:projets_site:serveur_port_label:>,
 					size=4,
 					maxlength=4,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, serveur_path,
-					label=<:projets_site:label_serveur_path:>,
+					label=<:projets_site:serveur_path_label:>,
 					size=255,
 					maxlength=255,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{textarea, serveur_logiciel,
-					label=<:projets_site:label_serveur_logiciel:>,
+					label=<:projets_site:serveur_logiciel_label:>,
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, serveur_surveillance,
-					label=<:projets_site:label_serveur_surveillance:>,
+					label=<:projets_site:serveur_surveillance_label:>,
 					size=255,
 					maxlength=255})]
 
@@ -208,11 +213,11 @@
 <!-- Apache -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_apache_fieldset:>
+				<:projets_site:apache_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{textarea, apache_modules,
-					label=<:projets_site:label_apache_modules:>,
+					label=<:projets_site:apache_modules_label:>,
 					rows=6,
 					disable=[(#GET{disabled})]})]
 
@@ -222,24 +227,28 @@
 <!-- PHP -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_php_fieldset:>
+				<:projets_site:php_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, php_version,
-					label=<:projets_site:label_php_version:>,
+					label=<:projets_site:php_version_label:>,
 					size=25,
 					maxlength=25,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, php_memory,
-					label=<:projets_site:label_php_memory:>,
+					label=<:projets_site:php_memory_label:>,
 					size=10,
 					maxlength=10,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{textarea, php_extensions,
-					label=<:projets_site:label_php_extensions:>,
+					label=<:projets_site:php_extensions_label:>,
 					rows=6,
+					disable=[(#GET{disabled})]})]
+
+				[(#SAISIE{input, php_timezone,
+					label=<:projets_site:php_timezone_label:>,
 					disable=[(#GET{disabled})]})]
 
 			</ul>
@@ -248,22 +257,22 @@
 <!-- versioning -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_versioning_fieldset:>
+				<:projets_site:versioning_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, versioning_type,
-					label=<:projets_site:label_versioning_type:>,
+					label=<:projets_site:versioning_type_label:>,
 					size=255,
 					maxlength=255,
-					explication=<:projets_site:explication_versioning_type:>})]
+					explication=<:projets_site:versioning_type_explication:>})]
 
 				[(#SAISIE{input, versioning_path,
-					label=<:projets_site:label_versioning_path:>,
+					label=<:projets_site:versioning_path_label:>,
 					size=255,
 					maxlength=255})]
 
 				[(#SAISIE{input, versioning_trac,
-					label=<:projets_site:label_versioning_trac:>,
+					label=<:projets_site:versioning_trac_label:>,
 					size=255,
 					maxlength=255})]
 			</ul>
@@ -272,32 +281,32 @@
 <!-- SAS -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_sas_fieldset:>
+				<:projets_site:sas_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, sas_protocole,
-					label=<:projets_site:label_sas_protocole:>,
+					label=<:projets_site:sas_protocole_label:>,
 					size=255,
 					maxlength=255,
-					explication=<:projets_site:explication_sas_protocole:>})]
+					explication=<:projets_site:sas_protocole_explication:>})]
 
 				[(#SAISIE{input, sas_serveur,
-					label=<:projets_site:label_sas_serveur:>,
+					label=<:projets_site:sas_serveur_label:>,
 					size=255,
 					maxlength=255})]
 
 				[(#SAISIE{input, sas_port,
-					label=<:projets_site:label_sas_port:>,
+					label=<:projets_site:sas_port_label:>,
 					size=5,
 					maxlength=5})]
 
 				[(#SAISIE{input, sas_login,
-					label=<:projets_site:label_sas_login:>,
+					label=<:projets_site:sas_login_label:>,
 					size=25,
 					maxlength=25})]
 
 				[(#SAISIE{input, sas_password,
-					label=<:projets_site:label_sas_password:>,
+					label=<:projets_site:sas_password_label:>,
 					size=25,
 					maxlength=25})]
 			</ul>
@@ -306,53 +315,61 @@
 <!-- SGBD -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_sgbd_fieldset:>
+				<:projets_site:sgbd_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, sgbd_type,
-					label=<:projets_site:label_sgbd_type:>,
-					explication=<:projets_site:explication_sgbd_type:>,
+					label=<:projets_site:sgbd_type_label:>,
+					explication=<:projets_site:sgbd_type_explication:>,
 					size=25,
 					maxlength=25,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, sgbd_version,
-					label=<:projets_site:label_sgbd_version:>,
+					label=<:projets_site:sgbd_version_label:>,
 					size=50,
 					maxlength=50,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, sgbd_serveur,
-					label=<:projets_site:label_sgbd_serveur:>,
+					label=<:projets_site:sgbd_serveur_label:>,
 					size=255,
 					maxlength=255,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, sgbd_port,
-					label=<:projets_site:label_sgbd_port:>,
+					label=<:projets_site:sgbd_port_label:>,
 					size=5,
 					maxlength=5,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, sgbd_nom,
-					label=<:projets_site:label_sgbd_nom:>,
+					label=<:projets_site:sgbd_nom_label:>,
 					size=50,
 					maxlength=50,
 					disable=[(#GET{disabled})]})]
 
 				[(#SAISIE{input, sgbd_prefixe,
-					label=<:projets_site:label_sgbd_prefixe:>,
+					label=<:projets_site:sgbd_prefixe_label:>,
 					size=25,
 					maxlength=25,
 					disable=[(#GET{disabled})]})]
 
+				[(#SAISIE{input, sgbd_charset,
+					label=<:projets_site:sgbd_charset_label:>,
+					disable=[(#GET{disabled})]})]
+
+				[(#SAISIE{input, sgbd_collation,
+					label=<:projets_site:sgbd_collation_label:>,
+					disable=[(#GET{disabled})]})]
+
 				[(#SAISIE{input, sgbd_login,
-					label=<:projets_site:label_sgbd_login:>,
+					label=<:projets_site:sgbd_login_label:>,
 					size=25,
 					maxlength=25})]
 
 				[(#SAISIE{input, sgbd_password,
-					label=<:projets_site:label_sgbd_password:>,
+					label=<:projets_site:sgbd_password_label:>,
 					size=25,
 					maxlength=25})]
 
@@ -362,34 +379,34 @@
 <!-- autres champs -->
 		<fieldset>
 			<h3 class="legend">
-				<:projets_site:label_autres_fieldset:>
+				<:projets_site:autres_fieldset_label:>
 			</h3>
 			<ul>
 				[(#SAISIE{input, sso,
-					label=<:projets_site:label_sso:>,
+					label=<:projets_site:sso_label:>,
 					size=25,
 					maxlength=25})]
 
 				[(#SAISIE{textarea, perimetre_acces,
-					label=<:projets_site:label_perimetre_acces:>,
+					label=<:projets_site:perimetre_acces_label:>,
 					li_class=haut, class=inserer_barre_edition, rows=6})]
 
 				[(#SAISIE{textarea, statistiques,
-					label=<:projets_site:label_statistiques:>,
+					label=<:projets_site:statistiques_label:>,
 					li_class=haut, class=inserer_barre_edition, rows=6})]
 
 				[(#SAISIE{textarea, moteur_recherche,
-					label=<:projets_site:label_moteur_recherche:>,
-					explication=<:projets_site:explication_moteur_recherche:>,
+					label=<:projets_site:moteur_recherche_label:>,
+					explication=<:projets_site:moteur_recherche_explication:>,
 					li_class=haut, class=inserer_barre_edition, rows=6})]
 
 				[(#SAISIE{textarea, autres_outils,
-					label=<:projets_site:label_autres_outils:>,
+					label=<:projets_site:autres_outils_label:>,
 					li_class=haut, class=inserer_barre_edition, rows=6})]
 
 				[(#SAISIE{textarea, remarques,
-					label=<:projets_site:label_remarques:>,
-					explication=<:projets_site:explication_remarques:>,
+					label=<:projets_site:remarques_label:>,
+					explication=<:projets_site:remarques_explication:>,
 					li_class=haut, class=inserer_barre_edition, rows=6})]
 
 			</ul>

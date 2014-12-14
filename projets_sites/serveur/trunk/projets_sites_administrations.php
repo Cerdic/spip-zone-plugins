@@ -107,6 +107,30 @@ function projets_sites_upgrade($nom_meta_base_version, $version_cible)
         array('projets_sites_maj140'),
     );
 
+    /*
+     * On ajoute :
+     * - logiciel_charset ;
+     * - sgbd_charset ;
+     * - sgbd_collation ;
+     * - php_timezone ;
+     * Et on change les couples login/password pour suivre ce qui se fait dans spip_auteurs.
+    **/
+    $maj['1.5.0'] = array(
+        array('sql_alter', "TABLE spip_projets_sites ADD logiciel_charset varchar(25) NOT NULL DEFAULT '' AFTER logiciel_plugins"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sgbd_charset tinytext NOT NULL DEFAULT '' AFTER sgbd_prefixe"),
+        array('sql_alter', "TABLE spip_projets_sites ADD sgbd_collation tinytext NOT NULL DEFAULT '' AFTER sgbd_prefixe"),
+        array('sql_alter', "TABLE spip_projets_sites ADD php_timezone tinytext NOT NULL DEFAULT '' AFTER php_extensions"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE fo_login fo_login varchar(255) NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE fo_password fo_password tinytext NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE bo_login bo_login varchar(255) NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE bo_password bo_password tinytext NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE sas_login sas_login varchar(255) NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE sas_password sas_password tinytext NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE sgbd_login sgbd_login varchar(255) NOT NULL DEFAULT ''"),
+        array('sql_alter', "TABLE spip_projets_sites CHANGE sgbd_password sgbd_password tinytext NOT NULL DEFAULT ''"),
+        array('projets_sites_maj150'),
+    );
+
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -140,37 +164,101 @@ function projets_sites_maj140() {
         foreach ($projets_sites as $key => $projets_site) {
             switch ($projets_site['type_site']) {
                 case 'prod':
-                    sql_updateq('spip_projets_sites', array('type_site' => '07prop'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '07prod'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case 'prep':
-                    sql_updateq('spip_projets_sites', array('type_site' => '06prep'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '06prep'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case 'rec':
-                    sql_updateq('spip_projets_sites', array('type_site' => '05rec'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '05rec'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case 'dev':
-                    sql_updateq('spip_projets_sites', array('type_site' => '02dev'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '02dev'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case '07pr':
-                    sql_updateq('spip_projets_sites', array('type_site' => '07prop'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '07prod'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case '06pr':
-                    sql_updateq('spip_projets_sites', array('type_site' => '06prep'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '06prep'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case '05re':
-                    sql_updateq('spip_projets_sites', array('type_site' => '05rec'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '05rec'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case '04te':
-                    sql_updateq('spip_projets_sites', array('type_site' => '04test'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '04test'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case '03in':
-                    sql_updateq('spip_projets_sites', array('type_site' => '03inte'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '03inte'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case '02de':
-                    sql_updateq('spip_projets_sites', array('type_site' => 'O2dev'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => 'O2dev'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 case '01lo':
-                    sql_updateq('spip_projets_sites', array('type_site' => '01local'), 'id_projets_site=' . $projets_site['id_projets_site']);
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '01local'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+function projets_sites_maj150() {
+    $projets_sites = sql_allfetsel('id_projets_site,type_site', 'spip_projets_sites');
+
+    if (is_array($projets_sites) and count($projets_sites) > 0) {
+        foreach ($projets_sites as $key => $projets_site) {
+            switch ($projets_site['type_site']) {
+                case '07prop':
+                    sql_updateq(
+                        'spip_projets_sites',
+                        array('type_site' => '07prod'),
+                        'id_projets_site=' . $projets_site['id_projets_site']
+                    );
                     break;
                 default:
                     break;

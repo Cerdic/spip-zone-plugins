@@ -44,6 +44,7 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '')
                     $valeurs['logiciel_nom'] = $xml[$key]['nom'];
                     $valeurs['logiciel_version'] = $xml[$key]['version'];
                     $valeurs['logiciel_revision'] = $xml[$key]['revision'];
+                    $valeurs['logiciel_charset'] = $xml[$key]['charset'];
                     break;
                 case 'date_creation':
                     $valeurs['date_creation'] = $xml[$key]['value'];
@@ -51,8 +52,21 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '')
                 case 'fo':
                     $valeurs['fo_url'] = $xml[$key]['url'];
                     break;
+                case 'bo':
+                    $valeurs['bo_url'] = $xml[$key]['url'];
+                    break;
                 case 'type_site':
                     $valeurs['type_site'] = $xml[$key]['value'];
+                    // Au cas où InfoSPIP n'est pas à jour sur le site cible.
+                    if ($xml[$key]['value'] == 'prod') {
+                        $valeurs['type_site'] = '07prod';
+                    } elseif ($xml[$key]['value'] == 'prep') {
+                        $valeurs['type_site'] = '06prep';
+                    } elseif ($xml[$key]['value'] == 'rec') {
+                        $valeurs['type_site'] = '05rec';
+                    } elseif ($xml[$key]['value'] == 'dev') {
+                        $valeurs['type_site'] = '02dev';
+                    }
                     break;
                 case 'applicatif':
                     $valeurs['serveur_nom'] = $xml[$key]['nom'];
@@ -73,6 +87,7 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '')
                     $valeurs['php_extensions'] = implode(', ', $valeurs['php_extensions']);
                     $valeurs['php_version'] = $xml[$key]['version'];
                     $valeurs['php_memory'] = $xml[$key]['memory'];
+                    $valeurs['php_timezone'] = $xml[$key]['timezone'];
                     break;
                 case 'administrateurs':
                     foreach ($xml[$key][0] as $key => $value) {
@@ -106,6 +121,8 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '')
                     $valeurs['sgbd_type'] = $xml[$key]['type'];
                     $valeurs['sgbd_prefixe'] = $xml[$key]['prefixe'];
                     $valeurs['sgbd_version'] = $xml[$key]['version'];
+                    $valeurs['sgbd_charset'] = $xml[$key]['charset'];
+                    $valeurs['sgbd_collation'] = $xml[$key]['collation'];
                     break;
                 default:
                     # code...
@@ -114,7 +131,6 @@ function inc_analyser_webservice_dist($url, $login = '', $password = '')
         }
     }
     ksort($valeurs);
-
     return $valeurs;
 }
 
