@@ -4,7 +4,9 @@
 #SET{total,0}
 #SET{auteurs,#ENV{auteurs,#AERES_MEMBRES}}
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblio}">Publications</a> &gt; <strong class="on">[(#CONFIG{aeres/titre_biblio_unite,Bibliographie de l'unité}|couper{80})]</strong></p>
+[(#ENV{masquer_fil}|non)
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblio}">Publications</a> &gt; <strong class="on">[(#CONFIG{aeres/titre_biblio_unite,Bibliographie de l'unité}|couper{80})]</strong></p>
+]	
 
 <h1 class="h1">[(#CONFIG{aeres/titre_biblio_unite,Bibliographie de l'unité})] ([(#ENV{debut,#CONFIG{aeres/debut}})]-[(#ENV{fin,#CONFIG{aeres/fin}})])</h1>
 

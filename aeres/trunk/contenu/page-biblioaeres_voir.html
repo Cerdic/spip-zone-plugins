@@ -2,7 +2,9 @@
 #SET{debut,#ENV{debut,#CONFIG{aeres/debut}}}
 #SET{fin,#ENV{fin,#CONFIG{aeres/fin}}}
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblioaeres}">Bibliographie AERES</a> &gt; <strong class="on">Voir la bibliographie</strong></p>
+[(#ENV{masquer_fil}|non)
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblioaeres}">Bibliographie AERES</a> &gt; <strong class="on">Voir la bibliographie</strong></p>
+]
 
 <h1 class="h1">[(#ENV{auteur,Tous les auteurs})] ([(#GET{debut})]-[(#GET{fin})])</h1>
 
