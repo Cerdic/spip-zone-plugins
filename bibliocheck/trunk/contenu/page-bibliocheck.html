@@ -1,7 +1,9 @@
 #CACHE{0}
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblio}"><:zotspip:titre_page_biblio:></a> &gt; <strong class="on"><:bibliocheck:verifier_biblio:></strong></p>
-
+[(#ENV{masquer_fil}|non)
+	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{biblio}"><:zotspip:titre_page_biblio:></a> &gt; <strong class="on"><:bibliocheck:verifier_biblio:></strong></p>
+]
+	
 #SET{selection,#ARRAY{}}
 [(#ENV{auteur}|oui)#SET{selection,#GET{selection}|push{#ENV{auteur}}}]
 [(#ENV{annee}|oui)#SET{selection,#GET{selection}|push{#ENV{annee}}}]
