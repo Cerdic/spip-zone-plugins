@@ -76,7 +76,7 @@ figure.oe-image-block figcaption {background:#eee;padding: 10px;text-align: left
 .oe-imdb-title img {float:left;margin-right: 10px;margin-bottom:10px;}
 
 /* Soundcloud */
-.oembed_soundcloud .oe-play-button button {background:#FF4B00;}
-.oembed_soundcloud .oe-play-button button:before {border-color:#eee;}
-.oembed_soundcloud .oe-play-button:hover button{background-color: #DD2826;}
-.oembed_soundcloud .oe-play-button:hover button:before{border-color:#fff;}
+.oembed_audio .oe-play-button button {background:#FF4B00;}
+.oembed_audio .oe-play-button button:before {border-color:#eee;}
+.oembed_audio .oe-play-button:hover button{background-color: #DD2826;}
+.oembed_audio .oe-play-button:hover button:before{border-color:#fff;}
