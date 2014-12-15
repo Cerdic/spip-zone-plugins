@@ -167,7 +167,7 @@ function mailshot_initialiser_destinataires($shoot){
 		spip_log("mailshot_initialiser_destinataires #".$shoot['id_mailshot']." : $nbd/".$shoot['total'],"mailshot");
 
 		// sinon reprendre l'insertion
-		$nb_lot = 100;
+		$nb_lot = 2500;
 		$current = $nbd;
 		$listes = explode(',',$shoot['listes']);
 		$now = date('Y-m-d H:i:s');
