@@ -29,11 +29,12 @@
 					explication=<:info_spip:liste_modules_explication:>,
 					datas=#GET{modules}})]
 
+				#SET{bo_url,#EVAL{$_SERVER['HTTP_REFERER']}|explode{'?'}|table_valeur{0}}
 				[(#SAISIE{input, bo_url,
 					label=<:info_spip:bo_url_label:>,
 					size=255,
 					maxlength=255,
-					defaut=[(#EVAL{$_SERVER\['HTTP_REFERER'\]}|explode{'?'}|table_valeur{0})]})]
+					defaut=#GET{bo_url}})]
 
 			</ul>
 		</fieldset>
