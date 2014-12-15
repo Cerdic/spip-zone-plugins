@@ -17,6 +17,10 @@ On affiche les informations équivalentes au plugin "Sites pour projets" avec qu
 		<nom>autoriser</nom>
 		<inclure>info_spip_autorisations.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>info_spip_pipelines.php</inclure>
+	</pipeline>
 
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.0;]" />
