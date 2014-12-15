@@ -174,7 +174,7 @@ function mailshot_initialiser_destinataires($shoot){
 		$subscribers = charger_fonction("subscribers","newsletter");
 		do {
 			if (time()>_MAILSHOT_MAX_TIME) return;
-			$limit = "$current,".($current+$nb_lot);
+			$limit = "$current,$nb_lot";
 			$dests = $subscribers($listes,array('limit'=>$limit));
 
 			if (count($dests)){
