@@ -59,6 +59,7 @@ function diogene_editer_contenu_objet($flux){
 	$args = $flux['args'];
 	$type = $args['type'];
 	$pipeline = pipeline('diogene_objets', array());
+	spip_log('editer','test.'._LOG_ERREUR);
 	if (in_array($type,array_keys($pipeline))){
 		$langues_dispos = explode(',',$GLOBALS['meta']['langues_multilingue']);
 		
@@ -158,6 +159,7 @@ function diogene_editer_contenu_objet($flux){
 			 * - Si on trouve un fichier javascript/$type.js ($type étant le type d'objet : article, rubrique...), on le charge en amont
 			 * - Si on trouve un fichier javascript/$diogene['type'].js ($diogene['type'] étant l'identifiant du diogene), on le charge en amont
 			 */
+			 spip_log($type,'test.'._LOG_ERREUR);
 			if (preg_match(",<div [^>]*class=[\"'][^>]*formulaire_editer_($type),Uims",$flux['data'],$regs)){
 				$args['champs_ajoutes'] = $diogene['champs_ajoutes'];
 				$args['diogene_identifiant'] = $diogene['type'];
@@ -165,15 +167,16 @@ function diogene_editer_contenu_objet($flux){
 				if($js = find_in_path('javascript/'.$type.'.js'))
 					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
 				elseif($js = find_in_path('javascript/'.$type.'.js.html')){
-					$js = produire_fond_statique('javascript/'.$type.'.js.html',array('type'=>$type));
+					$js = produire_fond_statique('javascript/'.$type.'.js',array('type_objet'=>$type));
 					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
 				}
 				elseif($js = find_in_path('javascript/'.$diogene['type'].'.js'))
 					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
 				elseif($js = find_in_path('javascript/'.$diogene['type'].'.js.html')){
-					$js = produire_fond_statique('javascript/'.$diogene['type'].'.js.html',array('type'=>$diogene['type']));
+					$js = produire_fond_statique('javascript/'.$diogene['type'].'.js',array('type_objet'=>$diogene['type']));
 					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
 				}
+				spip_log($ajouts,'test.'._LOG_ERREUR);
 				$flux['data'] = preg_replace(",(<div [^>]*class=[\"'][^>]*formulaire_editer_$type),Uims",$ajouts."\\1",$flux['data'],1);
 			}
 			/**
@@ -264,6 +267,8 @@ function diogene_editer_contenu_objet($flux){
 			if(($champs_sup = unserialize($diogene['champs_ajoutes'])) && is_array($champs_sup) && in_array('logo',$champs_sup) && !preg_match(',<form.*enctype=.*>,Uims',$flux['data'],$regs)){
 				$flux['data'] = preg_replace(',<(form.*[^>])>,Uims','<\\1 enctype=\'multipart/form-data\'>',$flux['data'],1);
 			}
+		}else{
+			spip_log('pas de diogene','test.'._LOG_ERREUR);
 		}
 	}
 	return $flux;
