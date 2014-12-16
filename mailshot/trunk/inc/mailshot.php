@@ -74,16 +74,19 @@ function mailshot_update_meta_processing($force = false){
 /**
  * Envoyer une serie de mails
  * @param int $nb_max
+ * @param int $offset
+ *   pour ne pas commencer au debut de la liste (utile pour les processus paralleles)
  * @return int
  *   nombre de mails envoyes
  */
-function mailshot_envoyer_lot($nb_max=5){
+function mailshot_envoyer_lot($nb_max=5,$offset=0){
 	$nb_restant = $nb_max;
 	$now = $_SERVER['REQUEST_TIME'];
 	if (!$now) $now=time();
-	define('_MAILSHOT_MAX_TIME',$now+20); // 15s maxi
+	define('_MAILSHOT_MAX_TIME',$now+25); // 25s maxi
 	define('_MAILSHOT_MAX_TRY',5); // 5 essais maxis par destinataires
 
+	$offset = intval($offset);
 	// on traite au maximum 2 serie d'envois dans un appel
 	$shot = sql_allfetsel("*","spip_mailshots","statut=".sql_quote('processing'),'','id_mailshot','0,2');
 	foreach($shot as $shoot){
@@ -94,7 +97,7 @@ function mailshot_envoyer_lot($nb_max=5){
 		if (time()>_MAILSHOT_MAX_TIME) return $nb_restant;
 
 		// chercher les N prochains destinataires
-		$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"0,$nb_max");
+		$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"$offset,$nb_max");
 		if (count($dests)){
 			$options = array('tracking_id'=>"mailshot".intval($shoot['id_mailshot']));
 			$subscriber = charger_fonction("subscriber","newsletter");
@@ -128,10 +131,10 @@ function mailshot_envoyer_lot($nb_max=5){
 			}
 			// si $nb_max non nul verifier qu'il n'y a plus de dests sur cette envoi pour maj le statut juste en dessous
 			if ($nb_max)
-				$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"0,$nb_max");
+				$dests = sql_allfetsel("*","spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('todo'),'','try',"$offset,$nb_max");
 		}
 
-		if ($nb_max AND !count($dests)){
+		if ($nb_max AND !count($dests) AND $offset==0){
 			// plus de destinataires ? on a fini, on met a jour compteur et statut
 			$sent = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('sent'));
 			$failed = sql_countsel("spip_mailshots_destinataires","id_mailshot=".intval($shoot['id_mailshot'])." AND statut=".sql_quote('fail'));
