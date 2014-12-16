@@ -18,7 +18,11 @@ function action_mailshot_boost_send($arg=null){
 	include_spip('inc/headers');
 	http_status(204); // No Content
 	header("Connection: close");
+	flush();
+	ob_flush();
+	ob_end_flush();
 
+	spip_log("BOOST $arg","mailshot");
 	list($id_mailshot,$nb,$offset) = explode("-",$arg);
 	$next = sql_fetsel("id_mailshot","spip_mailshots","statut=".sql_quote('processing'),'','id_mailshot','0,1');
 	if ($next['id_mailshot']==$id_mailshot){

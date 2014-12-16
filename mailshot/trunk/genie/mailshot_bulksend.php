@@ -67,7 +67,7 @@ function genie_mailshot_bulksend_dist($t){
 					while($nb_process){
 						$offset = $nb_process * $decalage;
 						$arg = $next['id_mailshot']."-$nb-".$offset;
-						$url = generer_action_auteur("mailshot_boost_send",$arg,"",false,0);
+						$url = generer_action_auteur("mailshot_boost_send",$arg,"",true,0);
 						mailshot_call_url_async($url);
 						$nb_process--;
 					}
