@@ -53,8 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_accueil_encours' => 'Signaler les commandes actives sur la page d’accueil ?',
 	'explication_choix_statuts_actifs' => 'Statut(s) correspondant(s) aux commandes actives',
 	'explication_statuts_actifs' => 'Selon leur statut, certaines commandes peuvent requérir votre attention. Il s’agit des commandes « actives », nécessitant une action de votre part. Vous pouvez les faire apparaître dans la liste des éléments en attente de validation sur la page d’accueil.',
-	'explications_notifications_statuts' => 'Notification lors du changement d’état',
-	'explications_notifications_statuts_aucune' => 'Aucune notification lors du changement d’état',
+	'explications_notifications_statuts' => 'État(s) déclenchant l\'envoi d\'une notification :',
+	'explications_notifications_statuts_aucune' => 'Les notifications sont désactivées',
 
 	// F
 	'facture_date' => 'Date : <span>@date@</span>',
