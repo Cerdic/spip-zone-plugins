@@ -97,7 +97,7 @@ if (!test_espace_prive() AND (defined('_DIOGENE_MODIFIER_PUBLIC') ? _DIOGENE_MOD
  * @return string $url 
  * 		L'URL de la page que l'on souhaite
  */
-function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=true){
+function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=true,$forcer_ecrire='non'){
 	include_spip('inc/urls');
 	
 	$id_table_objet = id_table_objet($objet) ? id_table_objet($objet) : 'id_article';
@@ -130,9 +130,10 @@ function generer_url_publier($id=null,$objet='article',$id_secteur=0,$forcer=tru
 		$objets[] = 'page';
 	}
 	
-	$type_objet = sql_getfetsel('type','spip_diogenes','id_secteur='.intval($id_secteur).' AND '.sql_in("objet",$objets));
+	if($forcer_ecrire == 'prive')
+		$type_objet = sql_getfetsel('type','spip_diogenes','id_secteur='.intval($id_secteur).' AND '.sql_in("objet",$objets));
 
-	if($type_objet){
+	if(isset($type_objet) && $type_objet){
 		$page_publier = defined('_PAGE_PUBLIER') ? _PAGE_PUBLIER : 'publier';
 		$url = generer_url_public($page_publier,'type_objet='.$type_objet,'',true);
 		if(is_numeric($id))
