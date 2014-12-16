@@ -164,8 +164,16 @@ function diogene_editer_contenu_objet($flux){
 				$ajouts = pipeline('diogene_avant_formulaire',array('args'=>$args,'data'=>''));
 				if($js = find_in_path('javascript/'.$type.'.js'))
 					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
+				elseif($js = find_in_path('javascript/'.$type.'.js.html')){
+					$js = produire_fond_statique('javascript/'.$type.'.js.html',array('type'=>$type));
+					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
+				}
 				elseif($js = find_in_path('javascript/'.$diogene['type'].'.js'))
 					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
+				elseif($js = find_in_path('javascript/'.$diogene['type'].'.js.html')){
+					$js = produire_fond_statique('javascript/'.$diogene['type'].'.js.html',array('type'=>$diogene['type']));
+					$ajouts .= "<script type='text/javascript' src='$js'></script>\n";
+				}
 				$flux['data'] = preg_replace(",(<div [^>]*class=[\"'][^>]*formulaire_editer_$type),Uims",$ajouts."\\1",$flux['data'],1);
 			}
 			/**
