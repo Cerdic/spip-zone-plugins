@@ -15,20 +15,20 @@
  * or the documentation provided.
  */
 [(#CONFIG{cookiebar/message_txt}|?{
-    [(#SET{message,#CONFIG{cookiebar/message_txt}|propre|addslashes})],
-    [(#SET{message,<:cookiebar:message_message|addslashes:>})]
+    [(#SET{message,#CONFIG{cookiebar/message_txt}|typo|texte_script})],
+    [(#SET{message,<:cookiebar:message_message|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/accept_txt}|?{
-    [(#SET{accepttext,#CONFIG{cookiebar/accept_txt}|propre|addslashes})],
-    [(#SET{accepttext,<:cookiebar:message_accepttext|addslashes:>})]
+    [(#SET{accepttext,#CONFIG{cookiebar/accept_txt}|typo|texte_script})],
+    [(#SET{accepttext,<:cookiebar:message_accepttext|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/decline_txt}|?{
-    [(#SET{declinetext,#CONFIG{cookiebar/decline_txt}|propre|addslashes})],
-    [(#SET{declinetext,<:cookiebar:message_declinetext|addslashes:>})]
+    [(#SET{declinetext,#CONFIG{cookiebar/decline_txt}|typo|texte_script})],
+    [(#SET{declinetext,<:cookiebar:message_declinetext|texte_script:>})]
 })]
 [(#CONFIG{cookiebar/policy_txt}|?{
-    [(#SET{policytext,#CONFIG{cookiebar/policy_txt}|propre|addslashes})],
-    [(#SET{policytext,<:cookiebar:message_policytext|addslashes:>})]
+    [(#SET{policytext,#CONFIG{cookiebar/policy_txt}|typo|texte_script})],
+    [(#SET{policytext,<:cookiebar:message_policytext|texte_script:>})]
 })]
     
       
