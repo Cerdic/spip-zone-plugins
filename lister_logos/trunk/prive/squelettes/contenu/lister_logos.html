@@ -18,7 +18,7 @@ on liste les types de logos des objets principaux de SPIP en prenant en compte l
             <label for="champ_logo"><:lister_logos:objets_label:></label>
             <select name="logo" id="champ_logo" class="form-control">
                 <BOUCLE_objets (DATA) {source table, #GET{tables_principales}} {par valeur}>
-                <option value="[(#VALEUR)]"[ (#ENV{logo}|=={#VALEUR}|oui)selected="selected"]>[(#VAL|lister_tables_objets_sql|table_valeur{#VALEUR/texte_objets}|_T)]</option></BOUCLE_objets>
+                <option value="[(#VALEUR)]"[ (#ENV{logo}|=={#VALEUR}|oui)selected="selected"]>[(#VAL|lister_tables_objets_sql|table_valeur{#VALEUR/texte_objets}|_T|sinon{#VALEUR})]</option></BOUCLE_objets>
             </select>
         </li>
         </B_objets>
