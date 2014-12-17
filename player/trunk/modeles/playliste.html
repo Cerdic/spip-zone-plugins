@@ -1,55 +1,69 @@
 [<!--(#REM)
 
-	Modele pour <doc> modifie pour le plugin Lecteur Flash pour MP3
-	http://spip-zone.info/spip.php?article18
-	
+	Modele pour <playliste> qui utilise MediaElement.js
+
 	afficher une playliste
 	
-	CP-20090831: memo:
-	Pour transmettre un parametre au modele :
-	Ex: a partir d'un squelette 
-	[(#MODELE{playliste}{trierpar=fichier})]
+	Ex: a partir d'un squelette
+	[(#MODELE{playliste}{par=fichier})]
 	permet de forcer l'ordre des elements dans la liste
-	trie'e par le nom du fichier mp3.
+	triee par le nom du fichier mp3.
 	Pratique si vos noms de fichiers commencent par 
 	un chiffre ;-)
 	
-	
--->]#SET{trierpar,#ENV{trierpar,1}}
-<style type="text/css">#INCLURE{css/playliste.css}</style>
+-->]#SET{id_first,0}#SET{playlist_id,playlist}
 <B_doc>
-#ANCRE_PAGINATION
-<div class="radiobox">
-<div class="controles">
-<!--
-<li onclick="player_prev()"><</li>
-//-->
-<div id="scroller_container">
-<div id="scroller">
-<div id="now_playing">  </div>
-</div>
-</div>
+	<div class="liste documents play-liste">
+		[<h2>(#ENV{titre,Playlist})</h2>]
+		<dl class='spip_documents spip_documents_playlist[ (#ENV{class})] spip_lien_ok'>
+			[(#INCLURE**{fond=players/mejs/player,id_document=#GET{id_first},player=mejs,largeur=1000,playlist=[#(#GET{playlist_id})]})]
+			<dd class="mejs-playlist">
+				<ul class="liste-items" id="#GET{playlist_id}">
+				<BOUCLE_doc (DOCUMENTS)
+					{id_article ?}
+					{id_album ?}
+					{id_objet ?}{objet ?}
+					{media=audio}
+					{extension=mp3}
+					{tri #ENV{par,num titre}}{par titre}{!par date}{0,100}>[(#GET{id_first}|non)#SET{id_first,#ID_DOCUMENT}]
+					#SET{titre,#TITRE|sinon{#FICHIER|player_joli_titre|couper{30}}}
+					<li class="item short track"
+						data-url="[(#FICHIER|attribut_html)]"
+						title="[(#GET{titre}|attribut_html)]"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|player_joli_titre|couper{30})]})]</a><span class="sep"> - </span><small>([(#EXTENSION)][ - (#TAILLE|taille_en_octets)])</small></li>
+				</BOUCLE_doc>
+				</ul>
+			</dd>
+		</dl>
+	</div>
 
-<span onclick="player_prev()"> <img src="#CHEMIN{players/controls/start-16.png}" alt="precedant"/></span>
-<span onclick="player_next()"> <img src="#CHEMIN{players/controls/end-16.png}" alt="suivant"/></span>
-<span onclick="player_play(0)"><img src="#CHEMIN{players/controls/play-16.png}" alt="play"/></span>
-<span onclick="player_stop()"><img src="#CHEMIN{players/controls/stop-16.png}" alt="stop"/></span>
-<!--
-<li onclick="player_next()">></li>
-//-->
-</div>
-
-<div id="scrollbar">
-<div id="loading"></div>
-<div id="position"></div>
-</div>
-
-<ul class="playliste">
-<BOUCLE_doc (DOCUMENTS) {id_article ?} {extension==mp3} {fichier==(mp3$)} {par #GET{trierpar}} {!par date}{pagination 15}{0,100}>
-<li class="play_"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|player_joli_titre|couper{30})]})]</a></li>
-</BOUCLE_doc>
-</ul>
-[<div class="playliste_pagination">(#PAGINATION)</div>]
-</div>
-<script type="text/javascript" src="#CHEMIN{javascript/jscroller.js}"></script>
+	<link href="#CHEMIN{players/mejs/mejs-feature-playlist.css}" rel="stylesheet" />
+	<script>
+		jQuery.getScript("#CHEMIN{players/mejs/mejs-feature-playlist.js}",function(){
+			jQuery(function(){
+				$('audio.mejs-playlist').each(function(){
+					var t = this.player;
+					t.options.features = ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'playlist', 'current', 'progress', 'duration', 'volume'];
+					t.controls.html('');
+					var feature;
+					for (var featureIndex in t.options.features) {
+						feature = t.options.features[featureIndex];
+						if (t['build' + feature]) {
+							try {
+								t['build' + feature](t, t.controls, t.layers, t.media);
+							} catch (e) {
+								// TODO: report control error
+								//throw e;
+							}
+						}
+					}
+					t.container.trigger('controlsready');
+					// reset all layers and controls
+					t.setPlayerSize(t.width, t.height);
+					t.setControlsSize();
+				});
+			})
+		});
+	</script>
 </B_doc>
+
+<style type="text/css">#INCLURE{css/playliste.css}</style>
