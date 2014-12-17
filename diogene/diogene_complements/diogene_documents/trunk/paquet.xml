@@ -1,7 +1,7 @@
 <paquet
 	prefix="diogene_documents"
 	categorie="edition"
-	version="1.0.1"
+	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="images/diogene-128.png"
