@@ -1,7 +1,7 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="1.2.3"
+	version="1.2.4"
 	etat="dev"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/commande.png"
@@ -43,6 +43,6 @@
 
 	<pipeline nom="autoriser" inclure="commandes_autorisations.php" />
 
-	<menu nom="commandes" titre="commandes:nom_bouton_plugin" parent="menu_edition" icone="images/commande-16.png" action="commandes" />
+	<menu nom="commandes" titre="commandes:nom_bouton_plugin" parent="menu_activite" icone="images/commande-16.png" action="commandes" />
 	<menu nom="configurer_commandes" titre="commandes:commandes_titre" parent="menu_configuration" icone="images/commande-16.png" /> 
 </paquet>
