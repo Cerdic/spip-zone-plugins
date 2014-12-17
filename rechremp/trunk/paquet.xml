@@ -4,7 +4,7 @@
 	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="images/rechremp-32.png"
+	logo="prive/themes/spip/images/rechremp-32.png"
 	documentation="http://contrib.spip.net/3941"
 >
 
@@ -15,6 +15,8 @@
 	<auteur lien="http://www.ouhpla.net">JLuc</auteur>
 
 	<licence>GNU/GLP</licence>
+
+	<pipeline nom="autoriser" inclure="rechremp_autorisations.php" />
 
 	<menu nom="rechremp" titre="rechremp:titre_rechremp" parent="menu_administration" icone="images/rechremp-16.png" />
 </paquet>

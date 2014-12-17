@@ -20,15 +20,16 @@ function formulaires_rechercher_remplacer_charger_dist(){
 function formulaires_rechercher_remplacer_verifier_dist(){
 	$erreurs = array();
 
-	if(!_request('search'))
+	if(!_request('search')) {
 		$erreurs['search'] = _T('info_obligatoire');
-
-	else
-		if(!_request('remplacer'))
+	} else {
+		if(!_request('remplacer')) {
 			// recherche a blanc pour voir/confirmer le remplacement
 			$erreurs['search_results'] =
 				"<input type='hidden' name='replace_check_table[dummy]' value='yes' />"
 				. rechremp_search_and_replace(_request('search'),'',false,_request('replace_yes')?"replace_check_table":null);
+		}
+	}
 
 	return $erreurs;
 }
@@ -38,16 +39,15 @@ function formulaires_rechercher_remplacer_traiter_dist(){
 	$res = array();
 
 	// remplacer si demande
-	if (_request('remplacer')
-	  AND _request('replace_yes')){
+	if (_request('remplacer') and _request('replace_yes')) {
 		$check_replace = _request('replace_check_table');
 		$res['message_ok'] =
 			"<h3>"._T("rechremp:resultat_remplacement")."<small>&#171;&nbsp;".entites_html(_request('search'))."&nbsp;&#187;</small></h3>"
 		. rechremp_search_and_replace(_request('search'),_request('replace'),true,$check_replace);
-	}
-	else
+	} else {
 		// sinon simple recherche, mais normalement on arrive pas la
 		$res['message_ok'] = rechremp_search_and_replace(_request('search'));
+	}
 
 	return $res;
 }
@@ -66,17 +66,18 @@ function rechremp_search_and_replace($search,$replace=null,$do_replace=false,$ch
 	foreach($liste as $table => $desc){
 		if (!in_array($table,$tables_exclues)){
 			$champs = array();
-			if (isset($desc['champs_editables']) AND $desc['champs_editables'])
+			if (isset($desc['champs_editables']) AND $desc['champs_editables']) {
 				$champs = $desc['champs_editables'];
-			elseif(isset($desc['champs_versionnes']))
+			} elseif(isset($desc['champs_versionnes'])) {
 				$champs = $desc['champs_versionnes'];
+			}
 
 			// trouver les champs de la vrai table
 			$desc = $trouver_table($table);
 			// pas touche au champ extra serialize
-			$champs = array_diff($champs,$champs_exclus);
+			$champs = array_diff($champs, $champs_exclus);
 			// que les champs qui existent
-			$champs = array_intersect($champs,array_keys($desc['field']));
+			$champs = array_intersect($champs, array_keys($desc['field']));
 			// et qui sont en texte
 			foreach($champs as $c){
 				if (!preg_match(",text|varchar,",$desc['field'][$c]))
