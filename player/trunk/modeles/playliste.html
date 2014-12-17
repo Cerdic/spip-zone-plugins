@@ -20,6 +20,7 @@
 			<dd class="mejs-playlist">
 				<ul class="liste-items" id="#GET{playlist_id}">
 				<BOUCLE_doc (DOCUMENTS)
+					{id_document ?}
 					{id_article ?}
 					{id_album ?}
 					{id_objet ?}{objet ?}
@@ -29,14 +30,15 @@
 					#SET{titre,#TITRE|sinon{#FICHIER|player_joli_titre|couper{30}}}
 					<li class="item short track"
 						data-url="[(#FICHIER|attribut_html)]"
-						title="[(#GET{titre}|attribut_html)]"><a href="#FICHIER" rel="enclosure">[(#TITRE|sinon{[(#FICHIER|player_joli_titre|couper{30})]})]</a><span class="sep"> - </span><small>([(#EXTENSION)][ - (#TAILLE|taille_en_octets)])</small></li>
+						title="[(#GET{titre}|attribut_html)]"><span class="entry-title">[(#TITRE|sinon{[(#FICHIER|player_joli_titre|couper{30})]})]</span><span class="sep"> - </span><small>([(#EXTENSION)][ - (#TAILLE|taille_en_octets)])</small></li>
 				</BOUCLE_doc>
 				</ul>
 			</dd>
 		</dl>
 	</div>
 
-	<link href="#CHEMIN{players/mejs/mejs-feature-playlist.css}" rel="stylesheet" />
+	[<style>(#INCLURE{#CHEMIN{players/mejs/mejs-feature-playlist.css}|url_absolue_css})</style>]
+	[<style>(#INCLURE{#CHEMIN{css/playliste.css}|url_absolue_css})</style>]
 	<script>
 		jQuery.getScript("#CHEMIN{players/mejs/mejs-feature-playlist.js}",function(){
 			jQuery(function(){
@@ -65,5 +67,3 @@
 		});
 	</script>
 </B_doc>
-
-<style type="text/css">#INCLURE{css/playliste.css}</style>
