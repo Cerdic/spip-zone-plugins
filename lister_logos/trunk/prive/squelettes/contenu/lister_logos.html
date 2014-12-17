@@ -50,13 +50,13 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
             </tr>
         </thead>
         <tbody>
-        <BOUCLE_ls2 (DATA){source glob, #GET{regex}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})]
+        <BOUCLE_ls2 (DATA){source glob, #GET{regex}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#ENV{logo,spip_articles}|id_table_objet|sql_getfetsel{[(#ENV{logo,spip_articles})],[(#ENV{logo,spip_articles}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|?{0,1})]})]
             <tr id="[(#GET{pathinfo/filename})]">
                 <td class="id">
-                    <strong><a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">[(#VALEUR|logo_infos{3})]</a></strong>
+                    <strong>[(#GET{brise}|non)<a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">][(#VALEUR|logo_infos{3})][(#GET{brise}|non)</a>]</strong>
                 </td>
                 <td class='statut'>
-                    [(#ENV{logo,spip_articles}|id_table_objet|sql_getfetsel{[(#ENV{logo,spip_articles})],[(#ENV{logo,spip_articles}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|non)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:lister_logos:objet_supprime:>' />]
+                    [(#GET{brise,0}|oui)<img src='#CHEMIN_IMAGE{document-manquant-24.png}' width='24' height='24' alt='<:lister_logos:objet_supprime:>' />]
                 </td>
                 <td class="logo">
                     <a href="[(#VALEUR)]"[ title='(#GET{pathinfo/basename}|attribut_html)'][ type="(#VALEUR|getimagesize|table_valeur{mime})"]>[(#VALEUR|balise_img|image_reduire{250,100}|inserer_attribut{alt,#VALEUR}|inserer_attribut{class,spip_logos})]</a>
