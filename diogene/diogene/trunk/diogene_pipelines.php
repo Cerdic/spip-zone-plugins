@@ -59,7 +59,6 @@ function diogene_editer_contenu_objet($flux){
 	$args = $flux['args'];
 	$type = $args['type'];
 	$pipeline = pipeline('diogene_objets', array());
-	spip_log('editer','test.'._LOG_ERREUR);
 	if (in_array($type,array_keys($pipeline))){
 		$langues_dispos = explode(',',$GLOBALS['meta']['langues_multilingue']);
 		
