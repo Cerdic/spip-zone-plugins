@@ -39,7 +39,7 @@
 			</ul>
 
 			<!-- Meta tags -->
-			<fieldset>
+			<fieldset class="meta_tags">
 				<legend>[(#CHEMIN{img_pack/meta_tags-24.png}|balise_img)] <:seo:meta_tags:></legend>
 				<ul>
 					<!-- descriptions and others -->
@@ -317,7 +317,7 @@
 				</ul>
 			</fieldset>
 			<!-- Google Analytics -->
-			<fieldset>
+			<fieldset class="meta_google_analytics">
 				<legend>[(#CHEMIN{img_pack/google_analytics-24.png}|balise_img)] <:seo:google_analytics:></legend>
 				<ul>
 					#SET{name,analytics/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
