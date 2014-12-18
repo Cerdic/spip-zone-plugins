@@ -11,6 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'cfg_exemple' => 'Exemple',
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
+    'controle_max_height_explication' => 'Les logos ne doivent pas faire plus de @nb@ pixels de hauteur. Cette valeur a été configurée par le webmestre du site. Veuillez réduire leur hauteur le cas échéant, s\'il vous plaît.',
+    'controle_max_size_explication' => 'Les logos ne doivent pas peser plus de @nb@ octets. Cette valeur a été configurée par le webmestre du site. Veuillez réduire le poids de ces logos le cas échéant, s\'il vous plaît.',
+    'controle_max_width_explication' => 'Les logos ne doivent pas faire plus de @nb@ pixels de largeur. Cette valeur a été configurée par le webmestre du site. Veuillez réduire leur largeur le cas échéant, s\'il vous plaît.',
+    'controle_max_height' => 'Trop hauts',
+    'controle_max_size' => 'Trop lourds',
+    'controle_max_width' => 'Trop larges',
 
     // I
     'info_logos' => 'Logos',
@@ -19,7 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // L
     'lister_logos_titre' => 'Lister les logos',
-    'logo_normal' => 'Logo normal',
+    'logo_off' => 'Logo de survol',
+    'logo_on' => 'Logo normal',
 
     // O
     'objet_supprime' => 'Objet supprimé&nbsp;?',
