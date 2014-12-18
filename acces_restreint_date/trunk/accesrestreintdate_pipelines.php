@@ -37,11 +37,11 @@ function accesrestreintdate_accesrestreint_liste_objets_exclus($flux){
 			$GLOBALS['accesrestreint_zones_autorisees']
 			and $id_auteur == $GLOBALS['visiteur_session']['id_auteur']
 		) {
-			$where[] = sql_in('zo.id_zone', $GLOBALS['accesrestreint_zones_autorisees'], 'NOT');
+			$where[] = sql_in('id_zone', $GLOBALS['accesrestreint_zones_autorisees'], 'NOT');
 		}
 		// Sinon on calcule les zones d'un auteur, lorsqu'il y en a un
 		elseif ($id_auteur) {
-			$where[] = sql_in('zo.id_zone', accesrestreint_liste_zones_autorisees('', $id_auteur), 'NOT');
+			$where[] = sql_in('id_zone', accesrestreint_liste_zones_autorisees('', $id_auteur), 'NOT');
 		}
 		
 		// On cherche les configs de date, qui ne sont PAS pour des zones autorisées
