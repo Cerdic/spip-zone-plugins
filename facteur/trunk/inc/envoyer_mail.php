@@ -157,10 +157,13 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$from = $GLOBALS['meta']["email_envoi"];
 		if (empty($from) OR !email_valide($from)) {
 			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.", 'mail.' . _LOG_ERREUR);
-			$from = $destinataire;
+			if(is_array($destinataire) && count($destinataire) > 0)
+				$from = $destinataire[0];
+			else
+				$from = $destinataire;
 		}
-	} 
-
+	}
+	spip_log($from,'test.'._LOG_ERREUR);
 	// "Marie Toto <Marie@toto.com>"
 	if (preg_match(",^([^<>\"]*)<([^<>\"]+)>$,i",$from,$m)){
 		$nom_envoyeur = trim($m[1]);
