@@ -1,0 +1,88 @@
+<div class="formulaire_spip formulaire_editer formulaire_[(#ENV{form})] formulaire_#ENV{form}-#ENV{_objet}-#ENV{_id_objet}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d"action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<B_zones_dates>
+		<div class="liste-objets liste-objets-lies zones_dates">
+			<table class="spip liste">
+				<thead>
+					<tr class="first_row">
+						<th class="principale" scope="col'"><:accesrestreintdate:restriction:></th>
+						<th class="supprimer" scope="col'"><:lien_supprimer|ucfirst:></th>
+					</tr>
+				</thead>
+				<tbody>
+					<BOUCLE_zones_dates(ZONES_DATES){objet=#ENV{_objet}}{id_objet=#ENV{_id_objet}}{!par periode}{!par duree}>
+					<tr>
+						<td class="duree principale">
+							[(#VAL{accesrestreintdate:champ_quand_choix_}|concat{#QUAND}|_T)]
+							[(#VAL{accesrestreintdate:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}})]
+							<br/>
+							↓
+							<br/>
+							#INFO_TITRE{zone,#ID_ZONE}
+						</td>
+						<td class="supprimer">
+							<button class="button link delete" name="supprimer[#ID_ZONES_DATE]" value="X">
+								<img src="#CHEMIN_IMAGE{supprimer-12.png}" width="12" height="12" alt="X" />
+								<:lien_supprimer|ucfirst:>
+							</button>
+						</td>
+					</tr>
+					</BOUCLE_zones_dates>
+				</tbody>
+			</table>
+		</div>
+		</B_zones_dates>
+		
+		<ul>
+			#SET{name,quand}#SET{obli,obligatoire}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:accesrestreintdate:champ_quand_label:></label>[
+				<span class="erreur_message">(#GET{erreurs})</span>
+				]<select name="#GET{name}" id="#GET{name}">
+					<option value="avant"><:accesrestreintdate:champ_quand_choix_avant:></option>
+					<option value="apres"><:accesrestreintdate:champ_quand_choix_apres:></option>
+				</select>
+			</li>
+			#SET{name,duree}#SET{obli,obligatoire}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:accesrestreintdate:champ_duree_label:></label>[
+				<span class="erreur_message">(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}"[(#HTML5|et{#GET{obli}})required="required"]/>
+			</li>
+			#SET{name,periode}#SET{obli,obligatoire}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:accesrestreintdate:champ_periode_label:></label>[
+				<span class="erreur_message">(#GET{erreurs})</span>
+				]<select name="#GET{name}" id="#GET{name}">
+					<option value="jours"><:accesrestreintdate:champ_periode_choix_jours:></option>
+					<option value="mois"><:accesrestreintdate:champ_periode_choix_mois:></option>
+				</select>
+			</li>
+			#SET{name,id_zone}#SET{obli,obligatoire}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}"><:accesrestreintdate:champ_id_zone_label:></label>[
+				<span class="erreur_message">(#GET{erreurs})</span>
+				]<B_zones><select name="#GET{name}" id="#GET{name}">
+				<BOUCLE_zones(ZONES){par num titre, titre}>
+					<option value="#ID_ZONE">#TITRE</option>
+				</BOUCLE_zones>
+				</select>
+				</B_zones>
+			</li>
+		</ul>
+		
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:bouton_ajouter:>" />
+		</p>
+	</div></form>
+</div>
