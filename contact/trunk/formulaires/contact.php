@@ -257,7 +257,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 				if( ($champ=='mail') OR ($champ=='sujet') OR ($champ=='texte') ){
 					$posteur[$champ] = $reponse_champ;
 				}else{
-					$infos .= "\n".$champs_possibles[$champ]." : ".$reponse_champ;
+					$infos .= "\n\n".$champs_possibles[$champ]." : ".$reponse_champ;
 				}
 			}
 		}
@@ -285,7 +285,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 
 	$texte = $horodatage.$par.$inforigine.$infos."\n\n".$posteur['texte'];
 	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
-	$texte .= "\n\n "._T('envoi_via_le_site')." ".$nom_site." ( ".$GLOBALS['meta']['adresse_site']."/ ) \n";
+	$texte .= "\n\n "._T('envoi_via_le_site')." ".$nom_site." (".$GLOBALS['meta']['adresse_site']."/) \n";
 
 	// Texte a envoyer par mail, sans raccourcis SPIP
 	// On évite de couper les urls 
@@ -400,6 +400,13 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		);
 	}
 	$texte_final['repondre_a'] = $posteur['mail'];
+	
+	$posteur['texte_final'] = $texte_final;
+	
+	$posteur = pipeline('contact_pre_envoi',$posteur);
+	
+	$texte_final = $posteur['texte_final'];
+	unset($posteur['texte_final']);
 
 	$envoyer_mail = charger_fonction('envoyer_mail','inc');
 	$envoyer_mail($mail, $posteur['sujet'], $texte_final , '', "X-Originating-IP: ".$GLOBALS['ip']);
