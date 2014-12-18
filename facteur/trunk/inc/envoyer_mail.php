@@ -163,7 +163,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 				$from = $destinataire;
 		}
 	}
-	spip_log($from,'test.'._LOG_ERREUR);
+
 	// "Marie Toto <Marie@toto.com>"
 	if (preg_match(",^([^<>\"]*)<([^<>\"]+)>$,i",$from,$m)){
 		$nom_envoyeur = trim($m[1]);
