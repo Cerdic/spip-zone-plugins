@@ -75,7 +75,7 @@ function createNGrams($string, $ng_number=300, $ng_max_chars=4) {
 	$string = mb_substr($string, 0, 5000, "utf-8");
 	
 	// Attention: il faut traiter les chaines en utf-8 !!!
-    //iterate over each word, each character, all possible n-grams
+	//iterate over each word, each character, all possible n-grams
 	$word = " ". $string . " ";
 	$length = mb_strlen($word, "utf-8");
 	for ($pos=0; $pos < $length; $pos++){ //start position within word
@@ -84,60 +84,59 @@ function createNGrams($string, $ng_number=300, $ng_max_chars=4) {
 			 $array_ngram[] = mb_substr($word, $pos, $chars, "utf-8");
 		 }
 	 }
-    //count-> value(frequency, int)... key(ngram, string)
-    $ng_frequency = array_count_values($array_ngram);
-    //sort array by value(frequency) desc
-    arsort($ng_frequency);
-    //use only top frequent ngrams
-    $most_frequent = array_slice($ng_frequency, 0, $ng_number);
-    foreach ($most_frequent as $ng => $number_frequencey){
-        $sub_ng[] = $ng;
-    }
-    
-    return $sub_ng;
-}
-function compareNGrams($sub_ng, $lm_ng, $max_delta = 140000) {
-    foreach ($lm_ng as $lm_basename => $language) {
-        $delta = 0;
-        //compare each ngram of input text to current lm-array
-        foreach ($sub_ng as $key => $existing_ngram){
-            //match
-            if(in_array($existing_ngram, $language)) {
-                $delta += abs($key - array_search($existing_ngram, $language));
-            //no match
-            } else {
-                $delta += 400;
-            }
-            //abort: this language already differs too much
-            if ($delta > $max_delta) {
-                break;
-             }
-        } // End comparison with current language
-        //include only non-aborted languages in result array
-        if ($delta < ($max_delta - 400)) {
-            $result[$lm_basename] = $delta;
-        }
-    } //End comparison all languages
-    if(!isset($result)) {
-      $result = '';
-    } else {
-        asort($result);
-    }
-    return $result;
+	//count-> value(frequency, int)... key(ngram, string)
+	$ng_frequency = array_count_values($array_ngram);
+	//sort array by value(frequency) desc
+	arsort($ng_frequency);
+	//use only top frequent ngrams
+	$most_frequent = array_slice($ng_frequency, 0, $ng_number);
+	foreach ($most_frequent as $ng => $number_frequencey) {
+		$sub_ng[] = $ng;
+	}
+
+	return $sub_ng;
 }
 
+function compareNGrams($sub_ng, $lm_ng, $max_delta = 140000) {
+	foreach ($lm_ng as $lm_basename => $language) {
+		$delta = 0;
+		//compare each ngram of input text to current lm-array
+		foreach ($sub_ng as $key => $existing_ngram){
+			//match
+			if(in_array($existing_ngram, $language)) {
+				$delta += abs($key - array_search($existing_ngram, $language));
+				//no match
+			} else {
+				$delta += 400;
+			}
+			//abort: this language already differs too much
+			if ($delta > $max_delta) {
+				break;
+			}
+		} // End comparison with current language
+		//include only non-aborted languages in result array
+		if ($delta < ($max_delta - 400)) {
+			$result[$lm_basename] = $delta;
+		}
+	} //End comparison all languages
+	if(!isset($result)) {
+		$result = '';
+	} else {
+		asort($result);
+	}
+	return $result;
+}
 
 function tester_plage_utf($texte, $plage) {
-	
-	$total = mb_strlen($texte, "UTF-8");
-	
+
+	$total = mb_strlen($texte,"UTF-8");
+
 	$test = mb_strlen(
 				preg_replace("/".$plage."/ui", "", $texte),
 				"UTF-8"
 			);
 //	echo "<h4>".($test / $total)."<h4> ";
 	return ($test / $total);
-	
 }
 
 function detecter_plages_utf($texte) {
@@ -195,7 +194,8 @@ function _detecter_langue($texte) {
 
 	$possibles = detecter_plages_utf($texte);
 	
-	if (!$possibles) return;
+	if (!$possibles)
+		return;
 	else if (!is_array($possibles)) {
 		return $possibles;
 	} else {
@@ -205,9 +205,9 @@ function _detecter_langue($texte) {
 		}
 	}
 	
-    $sub_ng = createNGrams($texte);
+	$sub_ng = createNGrams($texte);
 
-    $result_array = compareNGrams($sub_ng, $ngrams, 140000);
+	$result_array = compareNGrams($sub_ng, $ngrams, 140000);
 	
 //	print_r($result_array);
 	
@@ -219,8 +219,5 @@ function _detecter_langue($texte) {
 	}
 	return $resultat;
 }
-
-
-
 
 ?>
