@@ -13,7 +13,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if(!defined('_DIR_LIB_IMGAREASELECT'))
-	define('_DIR_LIB_IMGAREASELECT',_DIR_RACINE.'lib/jquery.imgareaselect-0.9.8/');
+	define('_DIR_LIB_IMGAREASELECT',_DIR_RACINE.'lib/jquery.imgareaselect-0.9.10/');
 
 if(!defined('_IMG_GD_QUALITE') && test_espace_prive()){
 	include_spip('inc/config');
