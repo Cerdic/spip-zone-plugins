@@ -143,6 +143,7 @@
 	  playlist_tracks:{},
     // PLAYLIST WINDOW
     buildplaylistfeature: function(player, controls, layers, media) {
+	    var t = this;
       var getTrackName = function(trackUrl) {
         var trackUrlParts = trackUrl.split("/");
         if (trackUrlParts.length > 0) {
@@ -157,29 +158,54 @@
       this.playlist_tracks = $(player.options.playlistSelector).find('.track[data-url]');
       //$(media).children('source').each(function(index, element) { // doesn't work in Opera 12.12
 	    this.playlist_tracks.each(function(index, element) {
-	      if (!$.trim($(this).attr('title'))){
-		      $(this).attr('title',getTrackName($(this).attr('data-url')));
+		    var me = $(this);
+	      if (!$.trim(me.attr('title'))){
+		      me.attr('title',getTrackName(me.attr('data-url')));
 	      }
-		    $(this).attr('data-index',index);
+		    me.attr('data-index',index);
+		    $('<div class="mejs-controls"><div class="mejs-button mejs-playpause-button mejs-play" >' +
+							'<button type="button" aria-controls="' + t.id + '" title="' + t.options.playpauseText + '" aria-label="' + t.options.playpauseText + '"></button>' +
+						'</div></div>')
+          .prependTo(me)
+          // play track from playlist when clicking the button
+			    .click(function(e){
+				    e.preventDefault();
+				    var track = $(this).closest('.track');
+				    if (!track.hasClass('current')) {
+		          track.addClass('played');
+		          player.playTrack(track);
+		        }
+				    else {
+							if (media.paused) {
+								media.play();
+								track.addClass('playing').removeClass('paused');
+								$('.mejs-play',this).addClass('mejs-pause').removeClass('mejs-play');
+							} else {
+								media.pause();
+								track.addClass('paused').removeClass('playing');
+								$('.mejs-pause',this).addClass('mejs-play').removeClass('mejs-pause');
+							}
+				    }
+				    return false;
+			    });
+
+		    $(this).prepend();
       });
 
       // set the first track as current
-	    this.playlist_tracks.eq(0).addClass('current played').siblings().removeClass('current');
-      // play track from playlist when clicking it
-	    this.playlist_tracks.click(function(e) {
-        if (!$(this).hasClass('current')) {
-          $(this).addClass('played');
-          player.playTrack($(this));
-        }
-        else {
-          player.play();
-        }
-      });
+	    t.playlist_tracks.eq(0).addClass('current played').siblings().removeClass('current');
 
       // when current track ends - play the next one
       media.addEventListener('ended', function(e) {
         player.playNextTrack();
       }, false);
+	    media.addEventListener('play',function(e) {
+		    t.playlist_tracks.filter('.current').find('.mejs-play').addClass('mejs-pause').removeClass('mejs-play');
+      }, false);
+      media.addEventListener('pause',function(e) {
+	      t.playlist_tracks.filter('.current').find('.mejs-pause').addClass('mejs-play').removeClass('mejs-pause');
+      }, false);
+
     },
     playNextTrack: function() {
       var t = this;
@@ -237,7 +263,10 @@
       t.setSrc(track.attr('data-url'));
       t.load();
       t.play();
-      track.addClass('current').siblings().removeClass('current');
+      track.addClass('current playing').siblings().removeClass('current').removeClass('playing').removeClass('paused');
+	    t.playlist_tracks.find('.mejs-pause').addClass('mejs-play').removeClass('mejs-pause');
+	    $('.mejs-play',track).addClass('mejs-pause').removeClass('mejs-play');
+
     },
     playTrackURL: function(url) {
       var t = this;

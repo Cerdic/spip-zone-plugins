@@ -60,4 +60,25 @@ dd.mejs-playlist {
 	background: #fff;
   font-weight: bold;
 }
+.track {
+	position: relative;
+}
+.track .mejs-button {
+	float:left;
+	margin-right: 10px;
+	background: #666;
+	border-radius:50%;
+	width: 24px;
+	height: 24px;
+}
+.current .mejs-button {
+	background: #000;
+}
+.track .mejs-button button {
+	margin:4px;
+}
+.track .mejs-button.mejs-play button {
+	margin-left:5px;
+}
+
 /*End: Playlist*/
