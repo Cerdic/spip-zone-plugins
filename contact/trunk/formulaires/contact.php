@@ -131,11 +131,11 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 		}
 	}
 
-	if(!(strlen(_request('sujet'))>3))
+	if(!(strlen(_request('sujet'))>2))
 		$erreurs['sujet'] = _T('forum:forum_attention_trois_caracteres');
 
 	$texte_min = !defined('_TEXTE_MIN')?10:_TEXTE_MIN;
-	if(!(strlen(_request('texte'))>$texte_min) && !$erreurs['texte'])
+	if(!(strlen(_request('texte'))>=$texte_min) && !$erreurs['texte'])
 		$erreurs['texte'] = _T('contact:forum_attention_nbre_caracteres',array('nbre_caract'=>$texte_min));
 
 	if ($nobot=_request('nobot'))
