@@ -11,12 +11,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'cfg_exemple' => 'Exemple',
     'cfg_exemple_explication' => 'Explication de cet exemple',
     'cfg_titre_parametrages' => 'Paramétrages',
-    'controle_max_height_explication' => 'Les logos ne doivent pas faire plus de @nb@ pixels de hauteur. Cette valeur a été configurée par le webmestre du site. Veuillez réduire leur hauteur le cas échéant, s\'il vous plaît.',
-    'controle_max_size_explication' => 'Les logos ne doivent pas peser plus de @nb@ ko. Cette valeur a été configurée par le webmestre du site. Veuillez réduire le poids de ces logos le cas échéant, s\'il vous plaît.',
-    'controle_max_width_explication' => 'Les logos ne doivent pas faire plus de @nb@ pixels de largeur. Cette valeur a été configurée par le webmestre du site. Veuillez réduire leur largeur le cas échéant, s\'il vous plaît.',
     'controle_max_height' => 'Trop hauts',
+    'controle_max_height_explication' => 'Les logos ne doivent pas faire plus de @nb@ pixels de hauteur. Cette valeur a été configurée par le webmestre du site. Veuillez réduire leur hauteur le cas échéant, s\'il vous plaît.',
     'controle_max_size' => 'Trop lourds',
+    'controle_max_size_explication' => 'Les logos ne doivent pas peser plus de @nb@ ko. Cette valeur a été configurée par le webmestre du site. Veuillez réduire le poids de ces logos le cas échéant, s\'il vous plaît.',
     'controle_max_width' => 'Trop larges',
+    'controle_max_width_explication' => 'Les logos ne doivent pas faire plus de @nb@ pixels de largeur. Cette valeur a été configurée par le webmestre du site. Veuillez réduire leur largeur le cas échéant, s\'il vous plaît.',
 
     // I
     'info_logos' => 'Logos',
