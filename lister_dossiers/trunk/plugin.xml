@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Lister les dossiers</multi></nom>
 	<icon>prive/themes/spip/images/lister_dossiers-32.png</icon>
 	<auteur>Teddy Payet</auteur>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<etat>dev</etat>
 	<description><multi>
 	[fr]Ce plugin va lister les répertoires présents sur votre site au même niveau que SPIP.

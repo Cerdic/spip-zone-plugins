@@ -11,7 +11,7 @@
 	<ul>
 	<BOUCLE_dossiers (DATA) {source table, (#EVAL{_DIR_RACINE}|lister_dossiers)} {par cle}>
 		<B_sous_dossiers>
-		<li><a href="#CLE" class="repertoire" title="#CLE [((#CLE|dossiers_taille|taille_en_octets|sinon{0 octet}))]">[(#CLE|explode{"/"}|array_pop)]</a> [<span class="compteur">((#TOTAL_BOUCLE))</span>]
+		<li><a href="[(#CLE|replace{'\\','/'})]" class="repertoire" title="[(#CLE|replace{'\\','/'})] [((#CLE|dossiers_taille|taille_en_octets|sinon{0 octet}))]">[(#CLE|replace{'\\','/'}|explode{"/"}|array_pop)]</a> [<span class="compteur">((#TOTAL_BOUCLE))</span>]
 			<ul>
 			<BOUCLE_sous_dossiers (DATA) {source table, #VALEUR} {par cle} {si #VALEUR|is_array} {si #VALEUR|count|>{0}} {si #ENV{sous_dossiers,non}|=={oui}}>
 					<BOUCLE_sous_sous_dossiers (BOUCLE_sous_dossiers)>
@@ -20,7 +20,7 @@
 			</ul>
 		</li>
 		</B_sous_dossiers>
-		<li><a href="#CLE" class="repertoire" title="#CLE [((#CLE|dossiers_taille|taille_en_octets|sinon{0 octet}))]">[(#CLE|explode{"/"}|array_pop)]</a></li>
+		<li><a href="[(#CLE|replace{'\\','/'})]" class="repertoire" title="[(#CLE|replace{'\\','/'})] [((#CLE|dossiers_taille|taille_en_octets|sinon{0 octet}))]">[(#CLE|replace{'\\','/'}|explode{"/"}|array_pop)]</a></li>
 		<//B_sous_dossiers>
 	</BOUCLE_dossiers>
 	</ul>
