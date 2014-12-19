@@ -16,7 +16,14 @@
 	<div class="liste documents play-liste">
 		[<h2>(#ENV{titre,Playlist})</h2>]
 		<dl class='spip_documents spip_documents_playlist[ (#ENV{class})] spip_lien_ok'>
-			[(#INCLURE**{fond=players/mejs/player,id_document=#GET{id_first},player=mejs,largeur=1000,playlist=[#(#GET{playlist_id})]})]
+			[(#INCLURE**{fond=players/mejs/player,
+				id_document=#GET{id_first},
+				player=mejs,
+				largeur=1000,
+				playlist=[#(#GET{playlist_id})],
+			  features=#LISTE{'playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'playlist', 'current', 'progress', 'duration', 'volume'},
+			  plugins=#ARRAY{playlist,#CHEMIN{players/mejs/mejs-feature-playlist.js}|timestamp},
+			})]
 			<dd class="mejs-playlist">
 				<ul class="liste-items" id="#GET{playlist_id}">
 				<BOUCLE_doc (DOCUMENTS)
@@ -36,34 +43,6 @@
 			</dd>
 		</dl>
 	</div>
-
 	[<style>(#INCLURE{#CHEMIN{players/mejs/mejs-feature-playlist.css}|url_absolue_css})</style>]
 	[<style>(#INCLURE{#CHEMIN{css/playliste.css}|url_absolue_css})</style>]
-	<script>
-		jQuery.getScript("#CHEMIN{players/mejs/mejs-feature-playlist.js}",function(){
-			jQuery(function(){
-				$('audio.mejs-playlist').each(function(){
-					var t = this.player;
-					t.options.features = ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'playlist', 'current', 'progress', 'duration', 'volume'];
-					t.controls.html('');
-					var feature;
-					for (var featureIndex in t.options.features) {
-						feature = t.options.features[featureIndex];
-						if (t['build' + feature]) {
-							try {
-								t['build' + feature](t, t.controls, t.layers, t.media);
-							} catch (e) {
-								// TODO: report control error
-								//throw e;
-							}
-						}
-					}
-					t.container.trigger('controlsready');
-					// reset all layers and controls
-					t.setPlayerSize(t.width, t.height);
-					t.setControlsSize();
-				});
-			})
-		});
-	</script>
 </B_doc>

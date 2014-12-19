@@ -1,24 +1,55 @@
 var mejsloader;
+var mejsplugins={};
 (function(){
 	var mejs_counter = 0;
 	function mejs_init(){
 		(function($) {
-			jQuery("audio.mejs,video.mejs").each(function(){
+			function jsondecode(s){
+				if (s && s.length)
+					eval("s="+s+";");
+				else
+					s = {};
+				return s;
+			}
+			jQuery("audio.mejs,video.mejs").not('.done').each(function(){
+				jQuery(this).addClass('done');
 				//console.log(this);
 				mejs_counter++;
 				var id = "mejs-" + (jQuery(this).attr('data-id')) + "-" + mejs_counter;
 				var autoplay = jQuery(this).attr('autoplay');
 				jQuery(this).attr('id',id);
-				var options = jQuery(this).attr('data-mejsoptions');
-				if (options)
-					eval("options="+options+";");
-				else
-					options = {};
-				new MediaElementPlayer('#'+id,jQuery.extend(options,{
-					"success": function(media) {
-						if (autoplay) media.play();
+				var options = jsondecode(jQuery(this).attr('data-mejsoptions'));
+				var plugins = jsondecode(jQuery(this).attr('data-mejsplugins'));
+				function runthisplayer(){
+					var run = true;
+					for(var p in plugins){
+						//console.log(p);
+						//console.log(mejsplugins[p]);
+						// load this plugin
+						if (typeof mejsplugins[p]=="undefined"){
+							//console.log("Load Plugin "+p);
+							run = false;
+							mejsplugins[p] = false;
+							jQuery.getScript(plugins[p],function(){mejsplugins[p] = true;runthisplayer();});
+						}
+						// this plugin is loading
+						else if(mejsplugins[p]==false){
+							//console.log("Plugin "+p+" loading...");
+							run = false;
+						}
+						else {
+							//console.log("Plugin "+p+" loaded");
+						}
 					}
-				}));
+					if (run) {
+						new MediaElementPlayer('#'+id,jQuery.extend(options,{
+							"success": function(media) {
+								if (autoplay) media.play();
+							}
+						}));
+					}
+				}
+				runthisplayer();
 			})
 		})(jQuery);
 	}
