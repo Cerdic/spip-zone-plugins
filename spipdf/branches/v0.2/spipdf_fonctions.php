@@ -208,11 +208,7 @@ function traite_balise_page($html){
 		if (!empty($matches[1])){
 			$balise_page = $matches[1];
 			$pattern = '/(.*)="(.*)"/iUms';
-			function getBalise($matches){
-				$matches[2] = str_replace('mm', '', $matches[2]);
-				$GLOBALS['valeurs_page'][trim($matches[1])] = trim($matches[2]);
-			}
-
+            getBalise($matches);
 			$balise_page = preg_replace_callback($pattern, 'getBalise', $balise_page);
 
 			// supprimer <page> et </page>
@@ -225,6 +221,12 @@ function traite_balise_page($html){
 		return $html;
 	}
 
+}
+
+//On sort cette fonction de la fonction traite_balise_page
+function getBalise($matches){
+	$matches[2] = str_replace('mm', '', $matches[2]);
+	$GLOBALS['valeurs_page'][trim($matches[1])] = trim($matches[2]);
 }
 
 
