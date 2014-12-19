@@ -1,7 +1,7 @@
 <paquet
 	prefix="contact"
 	categorie="communication"
-	version="0.13.0"
+	version="0.14.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/contact-32.png"
@@ -24,6 +24,7 @@
 	<pipeline nom="contact_infos_supplementaires" action="" />
 	<pipeline nom="ieconfig_metas" inclure="contact_ieconfig_metas.php" />
 	<pipeline nom="formulaire_verifier" inclure="contact_pipelines.php" />
+	<pipeline nom="nospam_lister_formulaires" inclure="contact_pipelines.php" />
 	<pipeline nom="contact_pre_envoi" action="" />
 
 	<utilise nom="facteur" />

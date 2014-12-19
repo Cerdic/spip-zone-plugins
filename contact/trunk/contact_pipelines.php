@@ -10,9 +10,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function contact_jqueryui_plugins($plugins){
 	if(test_espace_prive()){
-		$plugins[] = "jquery.ui.core";
-		$plugins[] = "jquery.ui.widget";
-		$plugins[] = "jquery.ui.mouse";
 		$plugins[] = "jquery.ui.sortable";
 	}
 	return $plugins;
@@ -49,9 +46,22 @@ function contact_formulaire_verifier($flux){
 				$flux['data'] = array(
 									'message_erreur' => _T('contact:message_redemander_pass',array('email'=>$email,'url_pass'=>generer_url_public('spip_pass')))
 								);
-			}		
+			}
 		}
 	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline nospam_lister_formulaires (Plugin nospam)
+ * 
+ * Déclare le formulaire de contact comme utilisant le plugin nospam
+ * 
+ * @param array $flux
+ * @return array
+ */
+function contact_nospam_lister_formulaires($flux){
+	$flux[] = 'contact';
 	return $flux;
 }
 ?>
