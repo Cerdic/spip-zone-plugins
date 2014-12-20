@@ -3,10 +3,10 @@
 	<icon>feedburner-64.png</icon>
 	<auteur>[Tetue->http://spip.tetue.net]</auteur>
 	<licence>GPL - (c) 2008</licence>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<etat>stable</etat>
 	<description>
-	Utilisez [FeedBurner->http://www.feedburner.com] sur votre site ! Proposez &agrave; vos internautes de {{s'abonner par mail et/ou flux RSS}}, &agrave; leur choix, simplement, pour recevoir les derniers articles du site, proprement.
+	Proposez &agrave; vos internautes de {{s'abonner par mail et/ou flux RSS}}, &agrave; leur choix, simplement, pour recevoir les derniers articles du site, proprement, grace &agrave; [FeedBurner->http://www.feedburner.com].
 	</description>
 	<lien>http://contrib.spip.net/Plugin-FeedBurner</lien>
 	<prefix>feedburner</prefix>

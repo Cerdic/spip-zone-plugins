@@ -2,13 +2,13 @@
 <form action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=#ENV{_feedId}', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
 	<ul>
 		<li>
-            <label for="email"><:form_pet_votre_email:></label>
-            <input type="text" class="text" name="email" id="email" value="#ENV{email}" />
+            <label for="email"><:feedburner:form_label:></label>
+            <input type="email" class="text" name="email" id="email" placeholder="<:feedburner:form_placeholder:>" value="#ENV{email}" />
             <input type="hidden" name="uri" value="#ENV{_feedId}" />
             <input type="hidden" name="title" value="#NOM_SITE_SPIP" />
             [<input type="hidden" name="loc" value="(#ENV{lang})_[(#ENV{lang}|strtoupper)]" />]
     	</li>
 	</ul>
-    <p class="boutons"><input type="submit" class="submit" value="OK" /></p>
+    <p class="boutons"><input type="submit" class="submit" value="<:feedburner:form_button:>" /></p>
 </form>
 </div><!--.formulaire_spip.formulaire_feedburner-->

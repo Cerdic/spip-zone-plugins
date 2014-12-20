@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
-	'feedburner_description' => 'Utilisez [FeedBurner->http://www.feedburner.com] sur votre site ! Proposez à vos internautes de {{s\'abonner par mail et/ou flux RSS}}, à leur choix, simplement, pour recevoir les derniers articles du site, proprement.',
-	'feedburner_slogan' => 'Utilisez FeedBurner sur votre site',
+	'feedburner_description' => 'Proposez à vos internautes de {{s\'abonner par mail et/ou flux RSS}}, à leur choix, simplement, pour recevoir les derniers articles du site, proprement, grâce à [FeedBurner->http://www.feedburner.com].',
+	'feedburner_slogan' => 'Recevoir les nouveaux articles par mail ou RSS',
 );
 ?>

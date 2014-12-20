@@ -1,7 +1,7 @@
 <paquet
 	prefix="feedburner"
 	categorie="communication"
-	version="1.0.0"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="feedburner-64.png"
@@ -9,7 +9,7 @@
 >	
 
 	<nom>FeedBurner</nom>
-	<!-- Utilisez [FeedBurner->http -->
+	<!-- Utilisez FeedBurner sur votre site -->
 
 	<auteur lien="http://spip.tetue.net">Tetue</auteur>
 	
