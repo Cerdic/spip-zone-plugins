@@ -1,0 +1,7 @@
+<composition>
+	<nom>rubrique forum</nom>
+	<description> forum à la phpBB</description>
+	<icon></icon>
+	<branche type="article" composition="forum" />
+	<branche type="rubrique" composition="forum" />
+</composition>

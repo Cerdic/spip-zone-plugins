@@ -1,0 +1,107 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+[<link rel="canonical" href="(#URL_PAGE{agenda}|url_absolue)" />]
+<INCLURE{fond=inclure/head} />
+[(#REM) Lien vers le flux RSS des articles la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body class="pas_surlignable page_rubrique">
+<div class="page">
+
+	<INCLURE{fond=inclure/header} />
+	<INCLURE{fond=inclure/nav,env} />
+	
+	<p class="arbo"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+
+	
+	<div class="main">
+		[(#REM) Contenu principal : forum ]
+		<div class="wrapper">
+		
+		<div class="content" id="content">
+		
+			<div id="menuzforumart">[(#TITRE|couper{80})]</strong>
+			</div>
+
+			
+			<table style="border:2px solid #006699;text-align: left; width: 100%;background:white" border="0" cellpadding="3" cellspacing="1" >
+				<TR style="background-color:#006699">
+					<TH   style="text-align:center;" colSpan=2><div class="titreTableau">Rubriques</div></TH>
+					<TH   style="text-align:center;" width=80px><div class="titreTableau">Sujets</div></TH>
+					<TH   style="text-align:center;" width=80px><div class="titreTableau">Messages</div></TH>
+					<TH   style="text-align:center;" width=150px><div class="titreTableau">Derniers  Messages</div></TH>
+				</TR>
+				<!--Traitement des articles de la rubrique principale
+				Ces articles sont écris par l'informatique, comme si c'était des annonces , des règlements ou des post-it-->
+					
+				
+				<BOUCLE_sousRub(RUBRIQUES){id_parent}{par titre}>
+					<tr style="background-color:#d1d7dc"><td colSpan=5><div class=titre2Tableau>[(#TITRE|supprimer_numero)]</div></td></tr>	
+					<BOUCLE_artSousRub(ARTICLES){id_rubrique}{par titre}>
+					<tr style="background-color:#efefef">
+						<td  style="text-align:center;vertical-align=middle;width:40px;"><img src="#CHEMIN{img/forum_icone2.jpg}"></td>
+						<td>
+							<div class="titreLigne"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></div>
+							#DESCRIPTIF</td>
+						<td  style="text-align:center;vertical-align=middle;">
+							<BOUCLE_nbSujet(FORUMS){id_article}{doublons}></BOUCLE_nbSujet>
+							#TOTAL_BOUCLE
+							<//B_nbSujet></td>
+						<td  style="text-align:center;vertical-align=middle;">
+							<BOUCLE_nbMessage(FORUMS){id_article}{plat}{doublons}></BOUCLE_nbMessage>
+							#TOTAL_BOUCLE
+							<//B_nbMessage></td>
+						<td  style="text-align:center;vertical-align=middle;">
+							<BOUCLE_dernier_message(FORUMS){id_article}{plat}{par date}{inverse}{0,1}>
+								<BOUCLE_parent(FORUMS){id_enfant}>
+								<a href="[(#URL_PAGE{forum/article-discussion}|parametre_url{id_forum,[(#ID_FORUM)]})][#(#_dernier_message:ID_FORUM)]">
+								</BOUCLE_parent>
+								
+									[(#NOM)]<br>
+									[(#DATE|affdate{'d/m/Y'})] [(#DATE|affdate{'H:i:s'})]
+								</a>
+							</BOUCLE_dernier_message></td>
+					</tr>			
+					</BOUCLE_artSousRub>
+				</BOUCLE_sousRub>
+
+			</table>
+				
+
+
+
+			
+			
+			
+					
+		</div><!--.content-->
+		</div><!--.wrapper-->
+	
+		<div class="aside">
+	
+			
+
+			#FORMULAIRE_RECHERCHE
+		</div><!--.aside-->
+	</div><!--.main-->
+
+	<INCLURE{fond=inclure/footer,self=#SELF} />
+
+</div><!--.page-->
+</body>
+</html>
+</BOUCLE_principale>
+
+

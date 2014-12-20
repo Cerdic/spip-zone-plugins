@@ -1,0 +1,163 @@
+/*body */
+/*{ */
+	 /*margin:0;*/
+	 /*padding:0;*/
+	 /*text-align:center;*/
+	 /*font-size: 11px;*/
+	 /*font-family: verdana, lucida, arial, helvetica, sans-serif;*/
+	 /*text-align:left;	 */
+	 /*background: #eaeaea;	*/
+/*}*/
+
+/*.miseenpage{margin:0 auto;width:800px;}*/
+/*.miseenpagepetite{margin:0 auto;width:355px;}*//*utilisé pour le mode ecriture du forum*/
+/*.page { text-align:left;}*/
+
+
+/*.nettoyage {*/
+/*clear:both;*/
+/*}*/
+
+h1, h2, h3, h4{font-family:'Trebuchet MS',Verdana,Sans-Serif}
+a, a:link,a:visited {text-decoration: none; border:none;}
+a:hover {text-decoration:underline}
+a img, :link img,:hover img, :visited img{border:none}
+
+/*li {list-style-type:none;margin:0;padding:0;}*/
+/*ul {list-style-type:none;margin:0;padding:0;}*/
+
+
+ul ul {margin-left:70px}/*reglage du decalage entre THREAD pere et fils*/
+ul ul ul ul{margin-left:0px}/*ceci evite des escalier de thread a l'infini - blocage au 3eme niveau de reponse*/
+
+table a, table a:link,table a:visited{color:#657a8c;}
+table a:hover{color:#ff8000;text-decoration:underline!important}
+
+
+
+
+#menuzforumart{
+	margin:10px 0 ;
+	padding:10px;
+    color: #006699;
+    font-size: 12px;
+    font-weight: bold;
+	border: 2px solid #006699;
+	background:#D1D7DC;
+	}
+#menuzforumart a {color: #006699;}
+/*-------------
+FILARIANNE
+----------------*/
+.filarianne {margin:10px 0 0 0;font-size:12px;color:#000}
+.filarianne a{color:#ff8000;}
+
+/*-------------
+ARTICLE
+----------------*/
+.surtitreArticle {font-size:12px;text-transform:uppercase;color:#006699}
+.titreArticle {font-size:20px;color:#006699}
+.sourtitreArticle {font-size:12px;text-transform:uppercase;color:#006699}
+.descriptifArticle {font-size:12px;color:black;}
+.chapoArticle {font-size:11px;color:black;font-weight:bold;}
+.texteArticle {margin:10px 0 0 0;font-size:14px;color:black;}
+
+
+/*-------------
+IDEE
+----------------*/
+table th {color:white;font-size:12px;}
+.idee {border:1px solid #657a8c;padding:20px;}
+.ideeTitre {margin:0;font-size:20px;font-weight:bold;color:#657a8c;}
+.ideeDetails {margin:0 0 10px 0;font-size:12px;color:#657a8c;text-transform:uppercase;}
+.ideeReagir {margin:10px 0 0 0;text-align:center}
+
+.titreTableau {font-size:14px;color:#ffffff;}
+
+.titre2Tableau {margin:5px;font-size:12px;font-weight:bold;color:#006699;text-transform:uppercase;}
+
+.titreLigne {font-size:13px;color:#657a8c;}
+.titreLigne a {color:#657a8c;font-weight:bold;}
+
+/*-------------
+LOGO
+----------------*/
+.logo {
+	margin:15px 0;
+	text-align:center;
+}
+.logoAuteur {
+	margin:15px 20px 0 0;
+	float:left;
+	text-align:center;
+}
+
+/*----------
+MISE EN FORME B
+Utilisé dans : TEMPLATE 1 > middle_right (zone de contenu principale)
+----------*/
+.miseEnFormeB{
+	line-height:15px;
+	font-size:13px;
+	text-align:left;
+	}
+	.miseEnFormeB h1{
+		margin:15px 0 15px 0;
+		font-size:30px;
+		line-height:30px;
+		font-weight:normal;
+		font-variant:small-caps;
+		
+		font-family:georgia;color:#d10075;/*color:#7fa202;*/
+		}
+	.miseEnFormeB h3{
+		margin:0 0 15px 0px;
+		font-size:18px;
+		font-weight:normal;
+		line-height:25px;
+		
+		font-family:georgia;color:#89aa1f;
+		}	
+	.miseEnFormeB p{
+		margin:0 0 15px 0;
+		}
+	.miseEnFormeB strong{color:#000;}
+	.miseEnFormeB ul{margin:0 0 15px 0;padding:0 0 0 0;}
+	.miseEnFormeB ul ul{margin:0 0 15px 0;padding:0px;}
+	.miseEnFormeB ul ul ul{margin:0 0 0 0;padding:0px;}
+	
+	
+	.miseEnFormeB li:first-child{}
+	.miseEnFormeB li{
+		margin:0px 0 0 15px;
+		padding:0 0 0 15px;
+		line-height:15px;
+		background: url(./img-forumArt/puce_1.png) top left no-repeat;
+		}
+		.miseEnFormeB li li{
+			margin:0px 0 0 15px;
+			padding:0 0 0 15px;
+			background: url(./img-forumArt/puce_2.png) top left no-repeat;;
+			}
+			.miseEnFormeB li li li{
+				margin:0 0 0 0;
+				padding:0 0 0 15px;
+				background: url(./img-forumArt/puce_3.png) top left no-repeat;
+				}
+
+/*-------------
+FORUM
+----------------*/
+fieldset{border:2px solid #006699;background:#fff;}
+legend{
+		margin:0 0 15px 0px;
+		font-size:18px;
+		font-weight:normal;
+		line-height:25px;
+		
+		font-family:georgia;color:#006699;
+	}
+label{
+	font-size:16px;
+	font-family:georgia;color:#89aa1f;
+	}
