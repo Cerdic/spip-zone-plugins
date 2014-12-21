@@ -197,7 +197,7 @@
 
       // when current track ends - play the next one
       media.addEventListener('ended', function(e) {
-        player.playNextTrack();
+	      t.playNextTrack();
       }, false);
 	    media.addEventListener('play',function(e) {
 		    t.playlist_tracks.filter('.current').find('.mejs-play').addClass('mejs-pause').removeClass('mejs-play');
@@ -262,7 +262,7 @@
       t.pause();
       t.setSrc(track.attr('data-url'));
       t.load();
-      t.play();
+      setTimeout(function(){t.media.play();},10);
       track.addClass('current playing').siblings().removeClass('current').removeClass('playing').removeClass('paused');
 	    t.playlist_tracks.find('.mejs-pause').addClass('mejs-play').removeClass('mejs-pause');
 	    $('.mejs-play',track).addClass('mejs-pause').removeClass('mejs-play');
