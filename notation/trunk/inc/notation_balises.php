@@ -18,10 +18,11 @@ function notation_en_etoile($nb, $id, $clicable=false,$microdatas=false){
 	$needjs = "";
 	$max_note = notation_get_nb_notes();
 	$nb = round($nb);
-	if($microdatas){
-		$ret .= '<meta itemprop="ratingCount" class="best" content="'.$max_note.'" />';
-		$ret .= '<meta itemprop="worstRating" class="worst" content="0" />';
-		$ret .= '<meta itemprop="ratingValue" content="'.$nb.'" />';
+	if($microdatas){            
+            // TODO : $res .= '<meta itemprop="ratingCount" class="best" content="'.$row['nombre_votes'].'" />'; (?)
+            $ret .= '<meta itemprop="bestRating" class="best" content="'.$max_note.'" />';
+            $ret .= '<meta itemprop="worstRating" class="worst" content="0" />';
+            $ret .= '<meta itemprop="ratingValue" content="'.$nb.'" />';
 	}
 	if ($clicable OR !_NOTATION_AFFICHAGE_RAPIDE){
 		$needjs = " notation_note_on_load";
