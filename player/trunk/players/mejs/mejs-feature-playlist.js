@@ -206,6 +206,21 @@
 	      t.playlist_tracks.filter('.current').find('.mejs-pause').addClass('mejs-play').removeClass('mejs-pause');
       }, false);
 
+	    // add key features for prev/next track
+	    player.options.keyActions.push({
+	  						keys: [34], // PageDown
+	  						action: function(player, media) {
+								  t.playNextTrack();
+	  						}
+	  				});
+	    player.options.keyActions.push({
+	  						keys: [33], // PageUp
+	  						action: function(player, media) {
+								  t.playPrevTrack();
+	  						}
+	  				});
+
+
     },
     playNextTrack: function() {
       var t = this;
