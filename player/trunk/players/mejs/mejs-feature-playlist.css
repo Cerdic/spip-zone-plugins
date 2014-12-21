@@ -50,35 +50,56 @@ dd.mejs-playlist {
 .mejs-playlist ul {
 	margin:0;
 }
-.mejs-playlist li {
-  cursor: pointer;
+.mejs-playlist .track,
+.mejs-playlist .short.track {
+	cursor: pointer;
+	position: relative;
+	padding-left: 26px;
 }
-.mejs-playlist li:hover {
+.mejs-playlist .track:hover {
   background: #eee;
 }
-.mejs-playlist li.current {
+.mejs-playlist .track.current {
 	background: #fff;
   font-weight: bold;
-}
-.track {
-	position: relative;
 }
 .track .mejs-button {
 	float:left;
 	margin-right: 10px;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	z-index: 2;
+}
+.track .mejs-button button {
+	margin: 4px;
+}
+.track .mejs-button button:before {
+	content:"";
+	display: block;
+	position: absolute;
+	top:-4px;
+	left: -4px;
 	background: #666;
 	border-radius:50%;
 	width: 24px;
 	height: 24px;
+	z-index: -1;
 }
-.current .mejs-button {
+.track:hover .mejs-button button:before,
+.track .mejs-button button:focus:before {
+	background: #333;
+}
+
+.current .mejs-button button:before,
+.current .mejs-button button:focus:before {
 	background: #000;
-}
-.track .mejs-button button {
-	margin:4px;
 }
 .track .mejs-button.mejs-play button {
 	margin-left:5px;
+}
+.track .mejs-button.mejs-play button:before {
+	left:-5px;
 }
 
 /*End: Playlist*/
