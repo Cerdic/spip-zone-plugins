@@ -186,6 +186,7 @@
 								$('.mejs-pause',this).addClass('mejs-play').removeClass('mejs-pause');
 							}
 				    }
+				    $(this).find('button').focus();
 				    return false;
 			    });
 
