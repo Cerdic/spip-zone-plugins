@@ -11,7 +11,7 @@
 	Pratique si vos noms de fichiers commencent par 
 	un chiffre ;-)
 	
--->]#SET{id_first,0}#SET{playlist_id,playlist}
+-->]#SET{id_first,0}[(#SET{playlist_id,[p(#ENV**|concat{uniqid}|md5|substr{0,8})]})]
 <B_doc>
 	<div class="liste documents play-liste">
 		[<h2>(#ENV{titre,Playlist})</h2>]
@@ -24,8 +24,8 @@
 			  features=#LISTE{'playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'playlist', 'current', 'progress', 'duration', 'volume'},
 			  plugins=#ARRAY{playlist,#CHEMIN{players/mejs/mejs-feature-playlist.js}|timestamp},
 			})]
-			<dd class="mejs-playlist">
-				<ul class="liste-items" id="#GET{playlist_id}">
+			<dd class="mejs-playlist" id="#GET{playlist_id}">
+				<ul class="liste-items">
 				<BOUCLE_doc (DOCUMENTS)
 					{id_document ?}
 					{id_article ?}
