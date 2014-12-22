@@ -28,11 +28,11 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
             // Utiliser un tableau large => 4 plutôt que 4 => large
             // On est donc plus logique
             if (is_numeric($value)) {
-                $class .= $key.'-'.$value.' ';
+                $class .= $key.'-'.$value;
             }
             // Ancienne écriture, au cas ou
             else {
-                $class .= $value.'-'.$key.' ';
+                $class .= $value.'-'.$key;
             }
         }
         return $class;
