@@ -1,21 +1,16 @@
 /*!
- * jQuery.ScrollTo
+ * jQuery.scrollTo
  * Copyright (c) 2007-2014 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
  * Licensed under MIT
  * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
  * @projectDescription Easy element scrolling using jQuery.
  * @author Ariel Flesler
- * @version 1.4.11
+ * @version 1.4.14
  */
+;(function (define) {
+	'use strict';
 
-;(function(plugin) {
-    // AMD Support
-    if (typeof define === 'function' && define.amd) {
-        define(['jquery'], plugin);
-    } else {
-        plugin(jQuery);
-    }
-}(function($) {
+	define(['jquery'], function ($) {
 
 	var $scrollTo = $.scrollTo = function( target, duration, settings ) {
 		return $(window).scrollTo( target, duration, settings );
@@ -23,7 +18,7 @@
 
 	$scrollTo.defaults = {
 		axis:'xy',
-		duration: parseFloat($.fn.jquery) >= 1.3 ? 0 : 1,
+			duration: 0,
 		limit:true
 	};
 
@@ -92,8 +87,8 @@
 						// We are done
 						break;
 					}
-					// Relative selector, no break!
-					targ = $(targ,this);
+						// Relative/Absolute selector, no break!
+						targ = win ? $(targ) : $(targ, this);
 					if (!targ.length) return;
 				case 'object':
 					// DOMElement / jQuery
@@ -155,8 +150,7 @@
 				$elem.animate( attr, duration, settings.easing, callback && function() {
 					callback.call(this, targ, settings);
 				});
-			};
-
+				}
 		}).end();
 	};
 
@@ -173,14 +167,21 @@
 			html = elem.ownerDocument.documentElement,
 			body = elem.ownerDocument.body;
 
-		return Math.max( html[scroll], body[scroll] )
-			 - Math.min( html[size]  , body[size]   );
+			return Math.max( html[scroll], body[scroll] ) - Math.min( html[size]  , body[size]   );
 	};
 
 	function both( val ) {
-		return $.isFunction(val) || typeof val == 'object' ? val : { top:val, left:val };
-	};
+			return $.isFunction(val) || $.isPlainObject(val) ? val : { top:val, left:val };
+		}
 
     // AMD requirement
     return $scrollTo;
+	})
+}(typeof define === 'function' && define.amd ? define : function (deps, factory) {
+	if (typeof module !== 'undefined' && module.exports) {
+		// Node
+		module.exports = factory(require('jquery'));
+	} else {
+		factory(jQuery);
+	}
 }));

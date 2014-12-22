@@ -1,29 +1,19 @@
 /*!
- * jQuery.LocalScroll
- * Copyright (c) 2007-2013 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
- * Dual licensed under MIT and GPL.
+ * jQuery.localScroll
+ * Copyright (c) 2007-2014 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+ * Licensed under MIT
  * http://flesler.blogspot.com/2007/10/jquerylocalscroll-10.html
  * @author Ariel Flesler
- * @version 1.2.8
- *
- * @id jQuery.fn.localScroll
- * @param {Object} settings Hash of settings, it is passed in to jQuery.ScrollTo, none is required.
- * @return {jQuery} Returns the same jQuery object, for chaining.
- *
- * @example $('ul.links').localScroll();
- *
- * @example $('ul.links').localScroll({ filter:'.animated', duration:400, axis:'x' });
- *
- * @example $.localScroll({ target:'#pane', axis:'xy', queue:true, event:'mouseover' });
- *
- * Notes:
- *	- The plugin requires jQuery.ScrollTo.
- *	- The hash of settings, is passed to jQuery.ScrollTo, so the settings are valid for that plugin as well.
- *	- jQuery.localScroll can be used if the desired links, are all over the document, it accepts the same settings.
- *  - If the setting 'lazy' is set to true, then the binding will still work for later added anchors.
-  *	- If onBefore returns false, the event is ignored.
+ * @version 1.3.5
  */
-;(function( $ ){
+ ;(function(plugin) {
+    // AMD Support
+    if (typeof define === 'function' && define.amd) {
+        define(['jquery'], plugin);
+    } else {
+        plugin(jQuery);
+    }
+}(function($) {
 	var URI = location.href.replace(/#.*/,''); // local url without hash
 
 	var $localScroll = $.localScroll = function( settings ){
@@ -31,15 +21,14 @@
 	};
 
 	// Many of these defaults, belong to jQuery.ScrollTo, check it's demo for an example of each option.
-	// @see http://flesler.demos.com/jquery/scrollTo/
+	// @see http://demos.flesler.com/jquery/scrollTo/
 	// The defaults are public and can be overriden.
 	$localScroll.defaults = {
 		duration:1000, // How long to animate.
 		axis:'y', // Which of top and left should be modified.
 		event:'click', // On which event to react.
 		stop:true, // Avoid queuing animations 
-		target: window, // What to scroll (selector or element). The whole window by default.
-		reset: true // Used by $.localScroll.hash. If true, elements' scroll is resetted before actual scrolling
+		target: window // What to scroll (selector or element). The whole window by default.
 		/*
 		lock:false, // ignore events if already animating
 		lazy:false, // if true, links can be added later, and will still work.
@@ -48,33 +37,20 @@
 		*/
 	};
 
-	// If the URL contains a hash, it will scroll to the pointed element
-	$localScroll.hash = function( settings ){
-		if( location.hash ){
+	$.fn.localScroll = function(settings) {
 			settings = $.extend( {}, $localScroll.defaults, settings );
-			settings.hash = false; // can't be true
 			
-			if( settings.reset ){
-				var d = settings.duration;
-				delete settings.duration;
-				$(settings.target).scrollTo( 0, settings );
-				settings.duration = d;
-			}
+		if (settings.hash && location.hash) {
+			if (settings.target) window.scrollTo(0, 0);
 			scroll( 0, location, settings );
 		}
-	};
-
-	$.fn.localScroll = function( settings ){
-		settings = $.extend( {}, $localScroll.defaults, settings );
 
 		return settings.lazy ?
 			// use event delegation, more links can be added later.		
-			this.bind( settings.event, function( e ){
-				// Could use closest(), but that would leave out jQuery -1.3.x
-				var a = $([e.target, e.target.parentNode]).filter(filter)[0];
-				// if a valid link was clicked
-				if( a )
-					scroll( e, a, settings ); // do scroll.
+			this.on(settings.event, 'a,area', function(e) {
+				if (filter.call(this)) {
+					scroll(e, this, settings); 
+				}
 			}) :
 			// bind concretely, to each matching link
 			this.find('a,area')
@@ -87,6 +63,9 @@
 			return !!this.href && !!this.hash && this.href.replace(this.hash,'') == URI && (!settings.filter || $(this).is( settings.filter ));
 		};
 	};
+
+	// Not needed anymore, kept for backwards compatibility
+	$localScroll.hash = function() {};
 
 	function scroll( e, link, settings ){
 		var id = link.hash.slice(1),
@@ -108,7 +87,7 @@
 			$target._scrollable().stop(true); // remove all its animations
 
 		if( settings.hash ){
-			var attr = elem.id == id ? 'id' : 'name',
+			var attr = elem.id === id ? 'id' : 'name',
 				$a = $('<a> </a>').attr(attr, id).css({
 					position:'absolute',
 					top: $(window).scrollTop(),
@@ -117,7 +96,7 @@
 
 			elem[attr] = '';
 			$('body').prepend($a);
-			location = link.hash;
+			location.hash = link.hash;
 			$a.remove();
 			elem[attr] = id;
 		}
@@ -127,4 +106,7 @@
 			.trigger('notify.serialScroll',[elem]); // notify serialScroll about this change
 	};
 
-})( jQuery );
+	// AMD requirement
+	return $localScroll;
+
+}));
