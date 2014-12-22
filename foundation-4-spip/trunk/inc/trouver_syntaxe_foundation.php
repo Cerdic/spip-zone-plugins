@@ -32,6 +32,8 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
             }
             // Ancienne écriture, au cas ou
             else {
+                include_spip('inc/utils');
+                erreur_squelette(_T('foundation:syntaxe_deprecie'));
                 $class .= $value.'-'.$key;
             }
         }

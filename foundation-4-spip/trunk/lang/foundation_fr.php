@@ -20,5 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'version' => 'Version de foundation',
     'version_explication' => "Choisir la version de foundation à utiliser dans l'espace public.",
     'icons' => 'Utiliser les icones Foundation ?',
-    'icons_explication' => 'Ajouter les CSS pour les <a href="http://zurb.com/playground/foundation-icon-fonts-3" title="foundation icon">icones foundation</a>.'
+    'icons_explication' => 'Ajouter les CSS pour les <a href="http://zurb.com/playground/foundation-icon-fonts-3" title="foundation icon">icones foundation</a>.',
+    'syntaxe_deprecie' => 'La syntaxe #ARRAY{nombre, type} est dépréciée au profit de #ARRAY{type, nombre} et sera supprimée dans les futurs versions de foundation'
 );
