@@ -51,7 +51,7 @@
 	env,
 	nom=#ENV{nom}[(#ENV{horaire}|?{\[date\]})],
 	valeur=#GET{date},
-	type=#HTML5|?{date,text},
+	type=text,
 	class=[(#ENV{class}) ]date})]
 [(#ENV{horaire}|oui)
 [(#INCLURE{fond=saisies/input,
