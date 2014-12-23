@@ -16,9 +16,10 @@
 
 ]
 #SET{editable,  #ENV{editable}|!={non}|et{#AUTORISER{modifier,album,#ID_ALBUM}}|?{1}}
-<B_documents>
 <div class="documents-album colonne liste_items[ (#GET{editable}|oui)editable]" id="documents-album#ID_ALBUM">
-	<BOUCLE_documents(DOCUMENTS documents_liens types_documents){id_album}{!par media,id_document,extension,date}{tout}>
+	<B_documents_album>
+	#ANCRE_PAGINATION
+	<BOUCLE_documents_album(DOCUMENTS documents_liens types_documents){id_album}{!par media,id_document,extension,date}{tout}{pagination #ENV{pagination_documents,10} album#ID_ALBUM}>
 	<div class="item[ (#GET{editable}|oui)editable][ (#DISTANT|=={oui}|oui)distant][ (#TITRE|non)sans-titre]"
 		id="document[(#ID_DOCUMENT)]-album[(#ID_ALBUM)]" data-id_document="#ID_DOCUMENT">
 
@@ -60,6 +61,7 @@
 		</BOUCLE_album_editable>
 
 	</div><!-- .item -->
-	</BOUCLE_documents>
+	</BOUCLE_documents_album>
+	[<div class='pagination'>(#PAGINATION{prive})</div>]
+	</B_documents_album>
 </div><!-- .documents-album.liste-items -->
-</B_documents>
