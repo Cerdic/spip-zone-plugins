@@ -55,8 +55,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_accueil_encours' => 'Indicate the active orders on the homepage ?',
 	'explication_choix_statuts_actifs' => 'Status corresponding to active orders',
 	'explication_statuts_actifs' => 'According to their status, some orders may require your attention. They are « active » orders, which need an action on your part. You can display them on the homepage, in the list of the items awaiting evaluation.',
-	'explications_notifications_statuts' => 'Notification in case of status change',
-	'explications_notifications_statuts_aucune' => 'No notification in case of status change',
+	'explications_notifications_statuts' => 'Notification in case of status change', # MODIF
+	'explications_notifications_statuts_aucune' => 'No notification in case of status change', # MODIF
 
 	// F
 	'facture_date' => 'Date: <span>@date@</span>',
