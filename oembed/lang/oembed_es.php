@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_ajout_provider' => 'Error al añadir el proveedor.',
 	'erreur_scheme_doublon' => 'Este esquema ya existe en la lista.',
 	'explication_scheme' => 'utilice * como comodín',
-	'explication_upload_url' => 'Indique simplemente la URL de la página que contiene el documento para los sitios @hosts@',
+	'explication_upload_url' => 'Indique simplemente la URL de la página que contiene el documento para los sitios @hosts@', # MODIF
 
 	// I
 	'info_1_provider' => '1 proveedor',

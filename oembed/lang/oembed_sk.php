@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_ajout_provider' => 'Chyba pri pridávaní poskytovateľa.',
 	'erreur_scheme_doublon' => 'Táto schéma sa už v zozname nachádza.',
 	'explication_scheme' => 'ako zástupný znak použite *',
-	'explication_upload_url' => 'Jednoducho zadajte internetovú adresu stránky, na ktorej je dokument pre stránky @hosts@',
+	'explication_upload_url' => 'Jednoducho zadajte internetovú adresu stránky, na ktorej je dokument pre stránky @hosts@', # MODIF
 
 	// I
 	'info_1_provider' => '1 poskytovateľ',
