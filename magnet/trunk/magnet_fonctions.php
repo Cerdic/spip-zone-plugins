@@ -18,6 +18,22 @@ function critere_magnet_dist($idb, &$boucles, $crit) {
 }
 
 /**
+ * Critere {magnet_pile nomdelapile}
+ * permet de selectionner une pile nommee plutot que la pile par defaut
+ * @param string $idb
+ * @param array $boucles
+ * @param Object $crit
+ */
+function critere_magnet_pile_dist($idb, &$boucles, $crit) {
+	$boucle = &$boucles[$idb];
+	if (isset($crit->param[0][0])
+	  AND $crit->param[0][0]->type=="texte"
+		AND ($pile = $crit->param[0][0]->texte)){
+		$boucle->modificateur['magnet_pile'] = $pile;
+	}
+}
+
+/**
  * Critere {ignore_magnet} permet de desactiver la magnetisation des articles
  * qui retrouvent leur ordre naturel
  * @param string $idb
@@ -38,9 +54,12 @@ function critere_ignore_magnet_dist($idb, &$boucles, $crit) {
  * @return object
  */
 function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
+	$_pile_arg = '';
 	if (($_pile = interprete_argument_balise(1,$p))===NULL)
-		$_pile = '';
-	$_pile_arg = ($_pile?",$_pile":"");
+		$_pile = "''";
+	else {
+		$_pile_arg = ",".addslashes($_pile);
+	}
 
 	$_id = champ_sql('id_article', $p);
 	$_objet = "\'article\'";
@@ -53,7 +72,7 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
 		AND	include_spip(\'inc/autoriser\')
 		AND autoriser(\'administrermagnet\',$_objet,\$id)
 		AND include_spip(\'magnet_fonctions\')) {
-			echo \"<div class=\'boutons spip-admin actions magnets pile-$_pile\'>\"
+			echo \"<div class=\'boutons spip-admin actions magnets pile-'.$_pile.'\'>\"
 			. magnet_html_boutons_admin($_objet,\$id,\'admin-magnet\'$_pile_arg)
 			. \"<style>.bouton_action_post.spip-admin-boutons{display:none;}</style></div>\";
 		}
@@ -74,7 +93,7 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
 function magnet_pre_boucle(&$boucle){
 	if (!isset($boucle->modificateur['ignore_magnet'])){
 		if ($boucle->type_requete=='articles'){
-			$pile = '';
+			$pile = (isset($boucle->modificateur['magnet_pile'])?$boucle->modificateur['magnet_pile']:'');
 			$meta_magnet = "magnet_" .($pile?$pile."_":""). $boucle->type_requete;
 			$_id = $boucle->id_table . "." . $boucle->primary;
 			$magnet = true;
@@ -121,9 +140,9 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 	if (!function_exists('bouton_action'))
 		include_spip('inc/filtres');
 
-	$pile = ($pile?"-$pile":"");
-	$magnet_rang = magnet_rang($objet, $id_objet);
-	$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-".($magnet_rang?"off":"on").$pile,self());
+	$pile_arg = ($pile?"-$pile":"");
+	$magnet_rang = magnet_rang($objet, $id_objet, $pile);
+	$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-".($magnet_rang?"off":"on").$pile_arg,self());
 	$balise_img = chercher_filtre("balise_img");
 	$bclass = $class . " magnet ";
 	if ($magnet_rang) {
@@ -131,11 +150,11 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 		$label = "<i></i>($magnet_rang) <span>Enlever</span>";
 		$boutons = bouton_action($label,$ur_action,$bclass);
 		if ($magnet_rang>1){
-			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up".$pile,self());
+			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up".$pile_arg,self());
 			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'','monter') . $boutons;
 		}
 		if ($magnet_rang<magnet_count($objet)){
-			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down".$pile,self());
+			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down".$pile_arg,self());
 			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'','descendre') . $boutons;
 		}
 	}
@@ -143,6 +162,10 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 		$bclass .= "demagnetized";
 		$label = "<i></i><span>Aimanter</span>";
 		$boutons = bouton_action($label,$ur_action,$bclass);
+	}
+
+	if ($pile){
+		$boutons = "<strong>"._T("magnets_pile:".strtolower($pile))."</strong> " . $boutons;
 	}
 
 	if (!$done){
@@ -163,7 +186,7 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 .admin-magnet.magnet span {visibility: hidden;}
 .admin-magnet.magnet:hover span {visibility: visible;}
 .spip-admin.magnets {text-align:right;}
-.spip-admin.magnets .bouton_action_post {display:inline-block;}
+.spip-admin.magnets .bouton_action_post {display:inline-block;vertical-align:middle;}
 .spip-admin.magnets .bouton_action_post button {display:block;}
 .hentry {position:relative;}
 ul .hentry .spip-admin.magnets {position:absolute;right:0;bottom:0;visibility: hidden;margin: 0}
