@@ -22,7 +22,7 @@
 				largeur=1000,
 				playlist=[#(#GET{playlist_id})],
 			  features=#LISTE{'playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'shuffle', 'playlist', 'current', 'progress', 'duration', 'volume'},
-			  plugins=#ARRAY{playlist,#CHEMIN{players/mejs/mejs-feature-playlist.js}|timestamp},
+			  plugins=#ARRAY{playlist,#CHEMIN{players/mejs/mejs-feature-playlist.min.js}|timestamp},
 			})]
 			<dd class="mejs-playlist" id="#GET{playlist_id}">
 				<ul class="liste-items">
