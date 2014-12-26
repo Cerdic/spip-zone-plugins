@@ -4,13 +4,6 @@ var mejsplugins={};
 	var mejs_counter = 0;
 	function mejs_init(){
 		(function($) {
-			function jsondecode(s){
-				if (s && s.length)
-					eval("s="+s+";");
-				else
-					s = {};
-				return s;
-			}
 			jQuery("audio.mejs,video.mejs").not('.done').each(function(){
 				jQuery(this).addClass('done');
 				//console.log(this);
@@ -18,8 +11,8 @@ var mejsplugins={};
 				var id = "mejs-" + (jQuery(this).attr('data-id')) + "-" + mejs_counter;
 				var autoplay = jQuery(this).attr('autoplay');
 				jQuery(this).attr('id',id);
-				var options = jsondecode(jQuery(this).attr('data-mejsoptions'));
-				var plugins = jsondecode(jQuery(this).attr('data-mejsplugins'));
+				var options = jQuery.parseJSON(jQuery(this).attr('data-mejsoptions'));
+				var plugins = jQuery.parseJSON(jQuery(this).attr('data-mejsplugins'));
 				function runthisplayer(){
 					var run = true;
 					for(var p in plugins){
