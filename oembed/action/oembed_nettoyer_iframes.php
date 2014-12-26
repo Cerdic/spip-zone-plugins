@@ -140,7 +140,7 @@ function action_oembed_nettoyer_iframes_dist(){
 						if (strpos($embed, "youtube")!==false){
 							if (strpos($src, "/v/")!==false){
 								$url = str_replace("?", "&", $src);
-								$url = str_replace("/embed/", "/watch?v=", $url);
+								$url = str_replace("/v/", "/watch?v=", $url);
 								echo "$pre Youtube $url<br />";
 							}
 							if (!$url){
@@ -168,11 +168,16 @@ function action_oembed_nettoyer_iframes_dist(){
 								var_dump($object);
 								die('dailymotion inconnue');
 							}
-						} else {
+						}
+						elseif(preg_match(",^https?://,",$u=trim(strip_tags($object)))) {
+							$url = $u;
+							echo "$pre Nettoyage Object url $url<br />";
+						}
+						else {
 							echo "$pre object inconnue : ".entites_html($object)."<br />";
 						}
 						if ($url){
-							$texte = str_replace($iframe, "\n\n" . $url . "\n\n", $texte);
+							$texte = str_replace($object, "\n\n" . $url . "\n\n", $texte);
 							if (preg_match(",<center>\s*" . preg_quote($url, ",") . ".*</center>,Uims", $texte, $m)){
 								$texte = str_replace($m[0], "\n\n" . $url . "\n\n", $texte);
 							}
