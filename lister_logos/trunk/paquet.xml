@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_logos"
 	categorie="multimedia"
-	version="2.0.0"
+	version="2.1.0"
 	etat="dev"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/lister_logos-64.png"
