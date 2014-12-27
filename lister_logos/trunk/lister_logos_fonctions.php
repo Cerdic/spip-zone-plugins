@@ -141,11 +141,7 @@ function lister_logos_fichiers ($table = null, $mode = null, $constante = null, 
                         $r
                     )
                 ) {
-                    // On fait une requête sql pour savoir si ce logo a toujours un objet référencé en bdd.
-                    $requete = sql_fetsel('*', $table, id_table_objet($table) . "=" . $r[2]);
-                    if ($requete) {
-                        $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
-                    }
+                    $docs_fichiers_on[] = preg_replace("/\/\//", "/", $fichier);
                 }
                 if (
                     preg_match(
@@ -158,10 +154,7 @@ function lister_logos_fichiers ($table = null, $mode = null, $constante = null, 
                         $r
                     )
                 ) {
-                    $requete = sql_fetsel('*', $table, id_table_objet($table) . "=" . $r[2]);
-                    if ($requete) {
-                        $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
-                    }
+                    $docs_fichiers_off[] = preg_replace("/\/\//", "/", $fichier);
                 }
             }
         }
