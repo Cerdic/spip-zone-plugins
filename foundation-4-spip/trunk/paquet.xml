@@ -24,7 +24,7 @@
     <menu nom="foundation_titre" titre="foundation:foundation_titre" parent="menu_configuration" icone="images/foundation-16.png" action="configurer_foundation" />
 
     <!-- Les plugins indispensable -->
-    <necessite nom="saisies" compatibilite="[1.31;[" />
-    <necessite nom="yaml" compatibilite="[1.5.1;[" />
+    <necessite nom="saisies" compatibilite="[2.0.3;[" />
+    <necessite nom="yaml" compatibilite="[1.5.2;[" />
 
 </paquet>
