@@ -112,13 +112,13 @@ function lister_logos_fichiers ($table = null, $mode = null, $constante = null, 
     $docs_fichiers_off  = array();
 
     // On va chercher toutes les tables principales connues de SPIP
-    foreach ($tables_objets as $table) {
+    foreach ($tables_objets as $table_objet) {
         // On cherche son type d'objet.
         // Il y a aussi dans ces objets la référence à `article`,
         // `rubrique` et `auteur`
         // Grâce à la fonction `id_table_objet()`, on retrouve le nom de la clé primaire de l'objet.
         // `type_du_logo()` retourne le type de logo tel que `art` depuis le nom de la clé primaire de l'objet
-        $type_du_logo = type_du_logo(id_table_objet($table));
+        $type_du_logo = type_du_logo(id_table_objet($table_objet));
 
         // On va chercher dans IMG/$type_du_logo(on|off)*.*
         // On fait un foreach pour ne pas avoir de

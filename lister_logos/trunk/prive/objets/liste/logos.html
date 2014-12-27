@@ -19,7 +19,7 @@ On scanne objet par objet les logos contenus dans le répertoire IMG/
             </tr>
         </thead>
         <tbody>
-        <BOUCLE_ls2 (DATA){source table, #ENV{logo,spip_articles}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#ENV{logo,spip_articles}|id_table_objet|sql_getfetsel{[(#ENV{logo,spip_articles})],[(#ENV{logo,spip_articles}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|?{0,1})]})]
+        <BOUCLE_ls2 (DATA) {source table, #ENV{logo,spip_articles}|lister_logos_fichiers{#ENV{etat,''},#ENV{controle,''}}} {pagination 5 #ENV{logo,spip_articles}}>[(#SET{pathinfo,[(#VALEUR|pathinfo)]})][(#SET{brise,[(#ENV{logo,spip_articles}|id_table_objet|sql_getfetsel{[(#ENV{logo,spip_articles})],[(#ENV{logo,spip_articles}|id_table_objet|concat{'=',[(#VALEUR|logo_infos{3}|sql_quote)]})]}|?{0,1})]})]
             <tr id="[(#GET{pathinfo/filename})]">
                 <td class="id">
                     <strong>[(#GET{brise}|non)<a href="[(#VALEUR|logo_infos{3}|generer_url_entite{[(#ENV{logo,spip_articles}|table_objet)]})]">][(#VALEUR|logo_infos{3})][(#GET{brise}|non)</a>]</strong>
