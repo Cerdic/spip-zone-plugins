@@ -21,8 +21,8 @@
 	<pipeline nom="formulaire_traiter" inclure="edition_directe_pipelines.php" />		
 	<pipeline nom="edition_directe_controle" action="" />	
 
-	<necessite nom="saisies" compatibilite="[1.30.0;[" />	
-	<utilise nom="medias" compatibilite="[2.7.27;[" />	
+	<necessite nom="saisies" compatibilite="[2.0.3;[" />	
+	<utilise nom="medias" compatibilite="[2.7.59;[" />	
 	<menu nom="configurer_edition_directe" titre="edir:titre_plugin" parent="menu_configuration" icone="images/edir-16.png"/>	
 
 </paquet>
