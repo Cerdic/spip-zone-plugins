@@ -3,7 +3,7 @@
 	categorie="outil"
 	version="0.6.0"
 	etat="test"
-	compatibilite="[3.0.0;["
+	compatibilite="[3.0.0;3.1.*]"
 	logo="magnet-32.png"
 	documentation="http://contrib.spip.net/magnet"
 >
