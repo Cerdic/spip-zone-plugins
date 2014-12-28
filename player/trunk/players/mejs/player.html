@@ -15,6 +15,7 @@
 	</div><span style="display: none;">
 	[<script>/*<!\[CDATA\[*/var mejspath = '[(#CHEMIN{#GET{lib}/mediaelement-and-player.min.js}|timestamp)]';
 	(#INCLURE{#CHEMIN{javascript/mejs_init.js}|?{javascript/mejs_init.js,players/mejs/mejs-init.min.js}}|compacte{js})/*\]\]>*/</script>]
-	[<style>(#INCLURE{#CHEMIN{#GET{lib}/mediaelementplayer.min.css}|url_absolue_css})</style>]</span>
+	[<style>(#INCLURE{#CHEMIN{#GET{lib}/mediaelementplayer.min.css}|url_absolue_css})</style>]
+	[(#ENV{skin}|oui)[<style>(#INCLURE{#CHEMIN{css/mejs-skin-#ENV{skin}.css}|sinon{#CHEMIN{#GET{lib}/mejs-skins.css}}|url_absolue_css})</style>]]</span>
 </dt>
 </BOUCLE_doc>
