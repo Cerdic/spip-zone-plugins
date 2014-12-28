@@ -19,8 +19,8 @@
 	<pipeline nom="autoriser" inclure="inc/gestionml_autoriser.php" />
 	<pipeline nom="ieconfig_metas" inclure="gestionml_ieconfig_metas.php" />
 
-	<necessite nom="saisies" compatibilite="[1.9.0;[" />
-	<necessite nom="YAML" compatibilite="[1.5;[" />
+	<necessite nom="saisies" compatibilite="[2.0.3;[" />
+	<necessite nom="YAML" compatibilite="[1.5.2;[" />
 
 	<menu nom="gestionml1" titre="gestionml:titre_menu_gerer" parent="bando_edition" icone="images/gestionml-16.png" action="gestionml" />
 	<menu nom="gestionml" titre="gestionml:titre_menu_configurer" parent="bando_configuration" icone="images/gestionml-16.png" action="configurer_gestionml" />
