@@ -29,11 +29,11 @@
 	<pipeline nom="ieconfig_metas" inclure="compositions_ieconfig.php" />
 	<pipeline nom="compositions_declarer_heritage"  inclure="compositions_pipeline.php" />
 
-	<utilise nom="Z" compatibilite="[1.7.10;[" />
-	<utilise nom="Zcore" compatibilite="[2.0.0;[" />
-	<utilise nom="Zpip" compatibilite="[2.0.0;[" />
+	<utilise nom="Z" compatibilite="[1.7.28;[" />
+	<utilise nom="Zcore" compatibilite="[2.4.3;[" />
+	<utilise nom="Zpip" compatibilite="[2.0.8;[" />
 	
-	<necessite nom="spip_bonux" compatibilite="[3.0.0;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.7;[" />
 
 	<menu nom="compositions" titre="compositions:compositions" parent="menu_squelette" icone="images/composition-16.png" action="compositions" />
 </paquet>
