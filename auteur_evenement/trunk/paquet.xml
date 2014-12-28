@@ -13,7 +13,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="agenda" compatibilite="[3.11.8;]" /> 
+	<necessite nom="agenda" compatibilite="[3.14.5;]" /> 
 	
 	<pipeline nom="affiche_milieu" inclure="auteur_evenement_pipelines.php" /> 
 	<pipeline nom="affiche_auteurs_interventions" inclure="auteur_evenement_pipelines.php" /> 
