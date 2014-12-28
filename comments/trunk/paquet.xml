@@ -21,10 +21,10 @@
 	<chemin path="feed/" />
 
 	<necessite nom="forum" compatibilite="[1.8.12;]" />
-	<utilise nom="notifications" compatibilite="[3.3.3;]" />
+	<utilise nom="notifications" compatibilite="[2.2.1;]" />
 
-	<utilise nom='Zpip' compatibilite="[2.0.8;]" />
-	<utilise nom='Z' compatibilite="[1.7.28;]" />
+	<utilise nom='Zpip' compatibilite="[2.0.2-dev;]" />
+	<utilise nom='Z' compatibilite="[1.7.14;]" />
     
 	<pipeline nom="autoriser" inclure="comments_fonctions.php" />
 	<pipeline nom="insert_head_css" inclure="comments_fonctions.php" />

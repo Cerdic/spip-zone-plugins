@@ -24,6 +24,6 @@
 	<pipeline nom="revisions_chercher_label" inclure="cextras_pipelines.php" />
 
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
-	<utilise nom="verifier" compatibilite="[1.0.5;]" />
+	<utilise nom="verifier" compatibilite="[0.1.12;]" />
 
 </paquet>

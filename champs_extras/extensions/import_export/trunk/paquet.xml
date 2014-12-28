@@ -21,5 +21,5 @@
 	<necessite nom="iextras" compatibilite="[3.1.2;[" />
 	<necessite nom="saisies" compatibilite="[2.0.3;[" />
 
-	<utilise nom="cextras" compatibilite="[3.4.1;[" />
+	<utilise nom="cextras" compatibilite="[2.0.0;[" />
 </paquet>
