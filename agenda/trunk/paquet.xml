@@ -39,9 +39,9 @@
 	<pipeline nom="quete_calendrier_prive" inclure="agenda_pipelines.php" />
 	<pipeline nom="revisions_chercher_label" inclure="agenda_pipelines.php" />
 
-	<utilise nom="Fulltext" compatibilite="[0.6.6;[" />
+	<utilise nom="Fulltext" compatibilite="[1.0.2;[" />
 	<utilise nom="mots" compatibilite="[2.4.6;[" />
-	<necessite nom="calendriermini" compatibilite="[2.0.0;[" />
+	<necessite nom="calendriermini" compatibilite="[2.3.7;[" />
 
 	<menu nom="evenements" titre="agenda:evenements" parent="menu_edition" icone="images/evenement-16.png" />
 	<menu nom="evenement_creer" titre="agenda:creer_evenement" parent="outils_rapides" action="evenement_edit" icone="images/evenement-new-16.png" />
