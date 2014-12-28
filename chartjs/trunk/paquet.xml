@@ -12,7 +12,7 @@
   <auteur lien="http://www.erational.org">erational (mise en plugin)</auteur>
   <licence>MIT license</licence>
   
-  <necessite nom="saisies" compatibilite="[1.25.11;]" />
+  <necessite nom="saisies" compatibilite="[2.0.3;]" />
   
   <pipeline nom="insert_head_css" inclure="chartjs_pipelines.php" />
   <pipeline nom="insert_head" inclure="chartjs_pipelines.php" />
