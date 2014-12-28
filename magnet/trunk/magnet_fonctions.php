@@ -151,11 +151,11 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 		$boutons = bouton_action($label,$ur_action,$bclass);
 		if ($magnet_rang>1){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up".$pile_arg,self());
-			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'','monter') . $boutons;
+			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'','monter') . $boutons;
 		}
 		if ($magnet_rang<magnet_count($objet)){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down".$pile_arg,self());
-			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'','descendre') . $boutons;
+			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'','descendre') . $boutons;
 		}
 	}
 	else {
@@ -170,31 +170,10 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 
 	if (!$done){
 		$done = true;
-		$img_on = _DIR_PLUGIN_MAGNET . "spt-magnets.png";
-		$styles = <<<css
-<style>
-.bouton_action_post.spip-admin-boutons,.bouton_action_post.spip-admin-boutons div {display:inline;}
-.spip-admin-boutons button {border: none;background: none;padding: 0;color:inherit;}
-.admin-magnet button {min-height:32px;position: relative;}
-.admin-magnet.magnet button i {display:inline-block;width:32px;}
-.admin-magnet.magnet button i:after {content:"";display:block;position:absolute;left:0;top:50%;margin-top:-16px;width:32px;height:32px;background:url($img_on) no-repeat left 0px;}
-.admin-magnet.magnet-up,.spip-admin-boutons.magnet-down {padding-left: 0;padding-right: 0;}
-.admin-magnet.magnet.magnetized button {}
-.admin-magnet.magnet.magnetized:hover button i:after {background-position:left -32px;}
-.admin-magnet.magnet.demagnetized button i:after {background-position:left -96px;}
-.admin-magnet.magnet.demagnetized:hover button i:after {background-position:left 0;}
-.admin-magnet.magnet span {visibility: hidden;}
-.admin-magnet.magnet:hover span {visibility: visible;}
-.spip-admin.magnets {text-align:right;}
-.spip-admin.magnets .bouton_action_post {display:inline-block;vertical-align:middle;}
-.spip-admin.magnets .bouton_action_post button {display:block;}
-.hentry {position:relative;}
-ul .hentry .spip-admin.magnets {position:absolute;right:0;bottom:0;visibility: hidden;margin: 0}
-.hentry:hover .spip-admin.magnets {visibility: visible}
-</style>
-css;
-
-		$boutons .= $styles;
+		$css_file = find_in_path("css/magnet-admin.css");
+		$css = spip_file_get_contents($css_file);
+		$css = urls_absolues_css($css,$css_file);
+		$boutons .= "<style>$css</style>";
 	}
 
 
