@@ -20,10 +20,10 @@
 	<pipeline nom="autoriser" inclure="inc/iextras_autoriser.php" />
 	<pipeline nom="formulaire_verifier" inclure="inc/iextras.php" />
 
-	<necessite nom="cextras" compatibilite="[3.0.4;]" />
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
-	<necessite nom="verifier" compatibilite="[0.1.12;]" />
-	<necessite nom="yaml" compatibilite="[1.5.0;]" />
+	<necessite nom="cextras" compatibilite="[3.4.1;]" />
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="verifier" compatibilite="[1.0.5;]" />
+	<necessite nom="yaml" compatibilite="[1.5.2;]" />
 
 	<menu nom="champs_extras" titre="iextras:champs_extras" parent="menu_configuration" icone="images/iextras-16.png" />
 

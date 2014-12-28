@@ -12,7 +12,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="cextras" compatibilite="[3.0.5;[" />
+	<necessite nom="cextras" compatibilite="[3.4.1;[" />
 
 	<pipeline nom="declarer_champs_extras" inclure="base/titrecourt.php" />
 </paquet>
