@@ -1,0 +1,52 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire' id="formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+        <B_p>
+        <div class="nettoyeur"></div>
+        <div class="liste-objets pays">
+        #ANCRE_PAGINATION
+            [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{pays:info_1_pays,pays:info_nb_pays}})</strong></caption>]
+        <table class="spip" width="100%">
+            <thead>
+            <tr class="row_first">
+                <th><:pays:label_id_pays:></th>
+                <th><:pays:label_code:></th>
+                <th><:pays:label_nom:></th>
+                <th><:continents:continent_titre:></th> 
+                <th><:livraison_zone:titre_livraison_zone:></th>                     
+            </tr>
+            </thead>
+            <tbody>
+            <BOUCLE_p(PAYS){id_continent ?}{id_livraison_zone ?}{par nom}{pagination 20}>
+            <tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+                <td>#ID_PAYS</td>
+                <td>#CODE</td>
+                <td>#NOM</td>
+                <td>#INFO_NOM{continent,#ID_CONTINENT}</td> 
+                <td>#SET{id_livraison_zone,''}
+                    [(#ENV{_id_livraison_zone}|table_valeur{#ID_PAYS}|?{
+                        #SET{id_livraison_zone,#ENV{_id_livraison_zone}|table_valeur{#ID_PAYS}},
+                        #SET{id_livraison_zone,#ID_LIVRAISON_ZONE}
+                    })]
+                    <INCLURE{fond=formulaires/inc-pays2zone_zones,env,id_pays,id_livraison_zone=#GET{id_livraison_zone}}/>
+                </td>                     
+            </tr>
+            </BOUCLE_p>
+            </tbody>
+        </table>
+        [<p class='pagination'>(#PAGINATION{prive})</p>]
+        </div>
+        </B_p>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+            <input type='submit' class='submit' name="effacer" value='<:livraison:bouton_enlever_selection:>' />			    
+		    <input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		    </p>
+	</div></form>
+
+</div>
