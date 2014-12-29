@@ -37,8 +37,8 @@
 	</pipeline> 	  
     <options>squirrel_chimp_options.php</options>
     <fonctions>squirrel_chimp_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[2.0.15;3.0.99]" />
-	<necessite id="spip_bonux" version="[2.2.17;]" />	
+	<necessite id="SPIP" version="[2.0.15;3.1.99]" />
+	<necessite id="spip_bonux" version="[2.3.3;]" />	
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="squirrelchimp" reference="fr" />
 </plugin>
