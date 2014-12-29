@@ -16,6 +16,6 @@
 
 	<pipeline nom="insert_head_css" inclure="apropos_pipeline.php" />
 	<pipeline nom="insert_head" action="insert_head" inclure="apropos_pipeline.php" />
-	<necessite nom="svp" compatibilite="[0.72.1;[" />
-	<necessite nom="svpstats" compatibilite="[0.1.0;[" />
+	<necessite nom="svp" compatibilite="[0.78.11;[" />
+	<necessite nom="svpstats" compatibilite="[0.2.0;[" />
 </paquet>
