@@ -1,12 +1,12 @@
 <paquet
 	prefix="shop_livraisons"
 	categorie="communication"
-	version="1.1.3"
-	etat="dev"
+	version="1.2.0"
+	etat="test"
 	compatibilite="[3.0.10;3.1.*]"
 	logo="prive/themes/spip/images/shop_livraisons-64.png"
 	documentation=""
-	schema="1.1.5" 
+	schema="1.2.0" 
 >
 	<nom>Shop Livraisons</nom>
 
@@ -14,12 +14,14 @@
 
 	<licence>GNU/GPL</licence>
 	
-	<necessite nom="saisies" compatibilite="[1.21.0;]" />
-	<necessite nom="shop" compatibilite="[1.2.2;]" />	
-	<necessite nom="shop_prix" compatibilite="[1.4.3;]" />		
-	<necessite nom="pays" compatibilite="[2.1.1;]" />
-	<necessite nom="continents" compatibilite="[1.0.1;]" />
-	<necessite nom="cextras" compatibilite="[3.2.4;]" />	
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="shop" compatibilite="[1.4.2;]" />	
+	
+	<necessite nom="pays" compatibilite="[3.0.10;]" />
+	<necessite nom="continents" compatibilite="[1.0.2;]" />
+	<necessite nom="cextras" compatibilite="[3.4.1;]" />	
+	
+	<utilise nom="prix_objets" compatibilite="[1.6.7;]" />	
 	
 	<pipeline nom="autoriser" inclure="shop_livraisons_autorisations.php" /> 
 

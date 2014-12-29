@@ -114,7 +114,7 @@ function mesure_par_tranche($mesure,$valeurs,$quantite,$livraison_zone){
 function shop_livraisons_formulaire_traiter($flux){
     
     // Installer des champs extras après la configuration prix
-    if ($flux['args']['form'] == 'configurer_shop_prix') {
+    if ($flux['args']['form'] == 'configurer_shop_livraison' ) {
 
     /*Installation de champs via le plugin champs extras*/
     include_spip('inc/cextras');

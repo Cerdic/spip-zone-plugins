@@ -29,18 +29,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return void
 **/
 function shop_livraisons_upgrade($nom_meta_base_version, $version_cible) {
+	include_spip('inc/config');
 	$maj = array();
+	
+	/*preremplir les objets prix en compte par ce plugin si prix objets l'a déjà défini*/
+	$config_livraison=lire_config('shop_livraison',array());	
+	if(!isset($config_livraison['objets_livraison'])){
+		$config_objets_prix=lire_config('prix_objets/objets_prix','');
+		$config_livraison['objets_livraison']=$config_objets_prix?$config_objets_prix:'';		
+	}
+	
 
     /*Installation des tables et champs aditionnels*/
 	$maj['create'] = array(array('maj_tables', array('spip_livraison_montants', 'spip_livraison_zones','spip_pays')));
 	$maj['1.0.1'] = array(array('maj_tables', array('spip_pays')));
-    
+	$maj['1.2.0'] = array( array('ecrire_config', 'shop_livraison', $config_livraison));
+
     /*Installation de champs via le plugin champs extras*/
     include_spip('inc/cextras');
     include_spip('base/shop_livraisons');
     if(function_exists(cextras_api_upgrade)){
         cextras_api_upgrade(shop_livraisons_declarer_champs_extras(), $maj['create']);   
         cextras_api_upgrade(shop_livraisons_declarer_champs_extras(), $maj['1.1.5']);
+        cextras_api_upgrade(shop_livraisons_declarer_champs_extras(), $maj['1.2.0']);		
     }
     
     
