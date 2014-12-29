@@ -11,7 +11,7 @@
 	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
     <credit lien="http://fr.wikipedia.org/wiki/Fichier:Garamond_type_fi-ligature_2.jpg">Wikipédia</credit>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	<utilise nom="forum" />
+	<utilise nom="forum" compatibilite="[1.8.12;]" />
 	<pipeline nom="declarer_tables_interfaces" inclure="titres_typographies_pipelines.php"/>
 </paquet>
 
