@@ -20,12 +20,15 @@
 </BOUCLE_defaut>
 
 [(#VAL{geo_devise}|spip_setcookie{#GET{devise_default},#VAL|time|plus{3660*24*365},/}|oui)]
+
+[(#REM)Les objets spip disponibles]
 <BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
     [(#VALEUR{page}|is_string|oui)
         [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{page},#VALEUR{texte_objets}|_T}}})]
     ]
 </BOUCLE_objets_liste>
 [(#SET{objets,#GET{objets}|array_merge{#ARRAY{document,#VAL{medias:info_documents}|_T}}})]
+
 <div class="formulaire_spip formulaire_#FORM">
 
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
