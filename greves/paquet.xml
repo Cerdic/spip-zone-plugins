@@ -21,9 +21,9 @@
 	<pipeline nom="autoriser" inclure="greves_autorisations.php" />
 	<pipeline nom="styliser" inclure="greves_pipelines.php" />
 
-	<necessite nom="saisies" />
+	<necessite nom="saisies" compatibilite="[1.42.6;]"/>
 
-	<utilise nom="Z" />
+	<utilise nom="Z" compatibilite="[1.0.0;]"/>
 
 	<menu nom="greves" titre="greves:greves" parent="bando_edition" action="greves"  icone='images/greves-16.png'  />
 </paquet>

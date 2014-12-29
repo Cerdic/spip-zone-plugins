@@ -38,9 +38,9 @@
         <inclure>greves_autorisations.php</inclure>
 	</pipeline>
 
-	<necessite id='saisies' />
-	<necessite id="spip_bonux" />
-	<utilise id="Z" />
+	<necessite id='saisies' version="[1.42.6;]"/>
+	<necessite id="spip_bonux"version="[2.3.3;]" />
+	<utilise id="Z" version="[1.0.0;]"/>
 	<options>greves_options.php</options>
 	<pipeline>
 		<nom>styliser</nom>
