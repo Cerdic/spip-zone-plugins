@@ -15,7 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[1.28.2;]" /> 
+	<necessite nom="saisies" compatibilite="[2.0.3;]" /> 
 
 	<pipeline nom="autoriser" inclure="selection_objet_autorisations.php" /> 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/selection_objet.php" /> 
