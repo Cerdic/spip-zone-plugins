@@ -15,7 +15,7 @@
 	<copyright>2012-2014</copyright>
 	<licence>GPL v3</licence>
     
-	<necessite nom="saisies" compatibilite="[1.19.0;]" />
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
   
 	<pipeline nom="declarer_tables_interfaces" inclure="base/malettre.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/malettre.php" />
