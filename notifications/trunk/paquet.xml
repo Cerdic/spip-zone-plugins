@@ -23,7 +23,7 @@
 
 	<pipeline nom="notifications" inclure="notifications_pipelines.php" action="go" />
 
-	<utilise nom="forum" />
-	<necessite nom="facteur" compatibilite="[2.4.2;]"/>
+	<utilise nom="forum" compatibilite="[1.8.12;]"/>
+	<necessite nom="facteur" compatibilite="[3.0.19;]"/>
 
 </paquet>
