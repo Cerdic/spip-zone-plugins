@@ -29,7 +29,7 @@
 	<pipeline nom="autoriser" inclure="pages_autorisations.php" />
 	<pipeline nom="pre_boucle" inclure="pages_pipelines.php" />
 
-	<utilise nom="polyhier" />
+	<utilise nom="polyhier" compatibilite="[2.0.1;]" /> 
 
 	<menu nom="pages" titre="pages:pages_uniques" parent="menu_edition" icone="images/page-16.png" />
 	<menu nom="page_creer" titre="pages:creer_page" parent="outils_rapides" icone="images/page-new-16.png" action="article_edit" parametres="new=oui&amp;modele=page&amp;id_rubrique=-1" />
