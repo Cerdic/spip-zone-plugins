@@ -17,7 +17,7 @@
 	<copyright>2009-2014</copyright>
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 	<pipeline nom="insert_head_css" inclure="mll_pipelines.php" />
-	<necessite nom="spip_bonux" compatibilite="[3.0.0-dev;[" />
+	<necessite nom="spip_bonux" compatibilite="[3.0.7;]" />
 	<utilise nom="tradrub" compatibilite="[2.1.1;[" />
 	<menu nom="config_mll" titre="mll:cfg_titre_mll" parent="menu_squelette" icone="images/world_link-16.png" action="configurer_mll"/>
 </paquet>

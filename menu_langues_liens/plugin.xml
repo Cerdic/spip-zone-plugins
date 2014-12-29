@@ -34,7 +34,7 @@ Icon by [FatCow->http://www.fatcow.com/free-icons]
 		<inclure>mll_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;3.0.99]" />
-	<necessite id='spip_bonux' version='[1.9.1;]' src="http://files.spip.org/spip-zone/spip-bonux.zip" />
+	<necessite id='spip_bonux' version='[2.3.3;]' src="http://files.spip.org/spip-zone/spip-bonux.zip" />
 	<utilise id='tradrub' version='[2.1.1;]' src="http://files.spip.org/spip-zone/tradrub_dev.zip" />
 	<utilise id='cfg' version='[1.3.6;]' src="http://files.spip.org/spip-zone/cfg.zip" />
 	<categorie>navigation</categorie>
