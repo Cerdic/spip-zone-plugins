@@ -23,9 +23,9 @@ On affiche les informations équivalentes au plugin "Sites pour projets" avec qu
 	</pipeline>
 
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
-	<necessite id="spip_bonux" version="[2.3.3;]" />
+	<necessite id="spip_bonux" version="[2.2.0;]" />
 	<necessite id="Iterateurs" version="[1.0.1;]" />
-	<necessite id="saisies" version="[1.42.6;]" />
+	<necessite id="saisies" version="[1.14.0;]" />
 
 	<categorie>outil</categorie>
 
