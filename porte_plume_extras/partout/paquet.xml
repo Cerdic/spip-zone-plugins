@@ -19,6 +19,6 @@
 
 	<pipeline nom="header_prive" action="insert_head_prive" inclure="ppp_pipelines.php" />
 
-	<necessite nom="porte_plume" compatibilite="[1.6.4;[" />
-	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="porte_plume" compatibilite="[1.11.5;[" />
+	<necessite nom="saisies" compatibilite="[2.0.3;[" />
 </paquet>
