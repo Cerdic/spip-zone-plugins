@@ -20,5 +20,5 @@
 	<pipeline nom="formulaire_traiter" inclure="squirrel_chimp_lists_pipelines.php" /> 
 
 		
-	<necessite nom="squirrel_chimp" compatibilite="[2.0.0;[" />	
+	<necessite nom="squirrel_chimp" compatibilite="[2.0.4;[" />	
 </paquet>
