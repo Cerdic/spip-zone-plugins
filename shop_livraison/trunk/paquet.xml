@@ -1,0 +1,33 @@
+<paquet
+	prefix="shop_livraisons"
+	categorie="communication"
+	version="1.1.3"
+	etat="dev"
+	compatibilite="[3.0.10;3.1.*]"
+	logo="prive/themes/spip/images/shop_livraisons-64.png"
+	documentation=""
+	schema="1.1.5" 
+>
+	<nom>Shop Livraisons</nom>
+
+	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+	
+	<necessite nom="saisies" compatibilite="[1.21.0;]" />
+	<necessite nom="shop" compatibilite="[1.2.2;]" />	
+	<necessite nom="shop_prix" compatibilite="[1.4.3;]" />		
+	<necessite nom="pays" compatibilite="[2.1.1;]" />
+	<necessite nom="continents" compatibilite="[1.0.1;]" />
+	<necessite nom="cextras" compatibilite="[3.2.4;]" />	
+	
+	<pipeline nom="autoriser" inclure="shop_livraisons_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/shop_livraisons.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/shop_livraisons.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/shop_livraisons.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/shop_livraisons.php" />
+	
+	<pipeline nom="post_insertion" inclure="shop_livraisons_pipelines.php" />	
+	<pipeline nom="formulaire_traiter" inclure="shop_livraisons_pipelines.php" />		
+</paquet>

@@ -1,0 +1,29 @@
+<BOUCLE_livraison_montant(LIVRAISON_MONTANTS){id_livraison_montant}>
+
+<div class="champ contenu_id_livraison_zone[ (#ID_LIVRAISON_ZONE*|strlen|?{'',vide})]">
+	<label><:livraison_zone:titre_livraison_zone:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_livraison_zone} id_livraison_zone'><a href="#URL_ECRIRE{livraison_zone,id_livraison_zone=#ID_LIVRAISON_ZONE}">#INFO_TITRE{livraison_zone,#ID_LIVRAISON_ZONE}</a></span>
+</div>
+
+[<div class="champ contenu_montant[ (#MONTANT*|strlen|?{'',vide})]">
+	<label><:livraison_montant:label_montant:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{montant} montant'>(#MONTANT)</span>
+</div>]
+#SET{unite_defaut,#VAL|unite_defaut}
+#SET{mesure_defaut,#VAL|mesure_defaut}
+[<div class="champ contenu_mesure_min[ (#MESURE_MIN*|strlen|?{'',vide})]">
+	<label>[(#VAL{livraison_montant:label_mesure_min[_(#GET{mesure_defaut})]}|_T)] : </label>
+	<span dir='#LANG_DIR' class='#EDIT{mesure_min} mesure_min'>(#MESURE_MIN)[ (#GET{unite_defaut})]</span>
+</div>]
+
+[<div class="champ contenu_mesure_max[ (#MESURE_MAX*|strlen|?{'',vide})]">
+	<label>[(#VAL{livraison_montant:label_mesure_max[_(#GET{mesure_defaut})]}|_T)]: </label>
+	<span dir='#LANG_DIR' class='#EDIT{mesure_max} mesure_max'>(#MESURE_MAX)[ (#GET{unite_defaut})]</span>
+</div>]
+
+[<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
+	<label><:livraison_montant:label_maj:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{maj} maj'>(#MAJ)</span>
+</div>]
+
+</BOUCLE_livraison_montant>

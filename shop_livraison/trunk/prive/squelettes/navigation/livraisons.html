@@ -1,0 +1,16 @@
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{shop_livraisons-32.png}|balise_img{'','cadre-icone'})]
+    
+,'simple personnel'})]
+<h3 style="text-align:center;"><:livraison:titre_livraisons:></h3>
+
+
+<ol class="shortcut">
+    <li><a href="#URL_ECRIRE{livraison_zones}"class="cellule-h"><img src="[(#CHEMIN_IMAGE{livraison_zone-16.png})]"/> 
+     <:livraison_zone:titre_livraison_zones:></a></li>
+    <li><a href="[(#URL_ECRIRE{livraison_zone_edit}|parametre_url{new,oui})]"class="cellule-h"><img src=" [(#CHEMIN_IMAGE{livraison_zone-new-16.png})]"/> 
+     <:livraison_zone:icone_creer_livraison_zone:></a></li>     
+</ol>
+
+[(#PIPELINE{shop_affiche_gauche_shortcuts})]
+#BOITE_FERMER

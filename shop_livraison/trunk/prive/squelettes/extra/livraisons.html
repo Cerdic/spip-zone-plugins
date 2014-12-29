@@ -1,0 +1,14 @@
+<div id
+<INCLURE{fond=prive/squelettes/inclure/continents,env}/>
+
+<script type="text/javascript">
+$(function(){
+    $('li.continent a').click(function() {
+        var id_continent = parametre_url($(this).attr('href'),'id_continent');
+        $("#formulaire_pays_zone").ajaxReload({args:{id_continent:id_continent,debut__p:""},history:true});
+         return false;
+    });
+});
+</script>
+
+
