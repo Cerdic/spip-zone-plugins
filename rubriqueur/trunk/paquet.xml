@@ -18,6 +18,6 @@
 
     <pipeline nom="autoriser" inclure="rubriqueur_autorisations.php"/>
 
-    <necessite nom="saisies" compatibilite="[1.40.10;[" />
+    <necessite nom="saisies" compatibilite="[2.0.3;[" />
     
 </paquet>
