@@ -42,5 +42,5 @@
 	<menu nom="configurer_jeux" titre="jeux:configuration_jeux" parent="menu_configuration" icone="images/jeu-16.png" />
 	<menu nom="jeux_resultats" titre="jeux:resultats_jeux" parent="menu_activite" icone="images/jeu-laurier-16.png" />
     
-    <necessite nom="saisies" />
+    <necessite nom="saisies" compatibilite="[2.0.3;]" />
 </paquet>
