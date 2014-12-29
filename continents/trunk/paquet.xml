@@ -20,7 +20,7 @@
 
 	<licence>GNU/GPL</licence>
 	
-	<necessite nom="pays" compatibilite="[2.1.1;]" />
+	<necessite nom="pays" compatibilite="[3.0.10;]" />
 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/continents.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/continents.php" />		
