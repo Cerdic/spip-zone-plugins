@@ -39,7 +39,7 @@
 	<pipeline nom="quete_calendrier_prive" inclure="agenda_pipelines.php" />
 	<pipeline nom="revisions_chercher_label" inclure="agenda_pipelines.php" />
 
-	<utilise nom="Fulltext" compatibilite="[1.0.2;[" />
+	<utilise nom="Fulltext" compatibilite="[1.0.0;[" />
 	<utilise nom="mots" compatibilite="[2.4.6;[" />
 	<necessite nom="calendriermini" compatibilite="[2.3.7;[" />
 
