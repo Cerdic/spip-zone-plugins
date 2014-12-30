@@ -13,6 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 	
     
 function shop_livraisons_post_insertion($flux){
+	include_spip('inc/config');
     // Après insertion d'une commande "encours" et s'il y a un panier en cours
     if (
         $flux['args']['table'] == 'spip_commandes'
@@ -35,15 +36,26 @@ function shop_livraisons_post_insertion($flux){
             
             //On regarde si on une unité s'applique
             if(isset($row['unite'])){
-                //On établit les donées de l'objet auquel un prix est attaché
-                $objet_prix=sql_fetsel('objet,id_objet','spip_prix_objets','id_prix_objet='.$data['id_objet']);
-                 //On  constitue les données de cet objet
-                $e = trouver_objet_exec($objet_prix['objet']);
-                $table=table_objet_sql($objet_prix['objet']);
-                $id_table_objet=$e['id_table_objet'];  
-                 //On réupère la mesure pour l'objet 
-                $id_objet[]=$objet_prix['id_objet'];        
-                $mesure[]=sql_getfetsel('mesure',$table,$id_table_objet.'='.$objet_prix['id_objet'])*$data['quantite'];
+            	//Si le plugin prix_objets est activé
+            	if(test_plugin_actif('prix_objets')){
+            		//On chercher l'objet attaché au prix
+                	$objet_prix=sql_fetsel('objet,id_objet','spip_prix_objets','id_prix_objet='.$data['id_objet']);
+					$objet=$objet_prix['objet'];
+					$id_objet=$objet_prix['id_objet'];
+            	}
+				//Sinon on prend les donnés de l'objet depuis le détail de la commande
+				else{
+					$objet=$data['objet'];
+					$id_objet=$data['id_objet'];
+				}
+                
+                 //On constitue les données de cet objet
+                $e = trouver_objet_exec($objet);
+                $table=table_objet_sql($objet);
+                $id_table_objet=$e['id_table_objet']; 
+				 
+                 //On récupère la mesure pour l'objet       
+                $mesure[]=sql_getfetsel('mesure',$table,$id_table_objet.'='.$id_objet)*$data['quantite'];
             }
         }
         
@@ -56,7 +68,7 @@ function shop_livraisons_post_insertion($flux){
                         );
         
         
-        //On regarde si on une unité s'applique
+        //On regarde si on a une unité qui s'applique
         if(count($mesure)==0){
             $montant=sql_fetsel('montant,id_livraison_montant','spip_livraison_montants','id_livraison_zone='.$row['id_livraison_zone']);  
             }//Sinon on vérifie si une tranche de mesure s'applique pour la mesure en question pour l'enregistrer
@@ -69,15 +81,13 @@ function shop_livraisons_post_insertion($flux){
                 return $flux;
                 }
             }
-          
-        
-        if(!$prix_unitaire_ht=$montant['montant']){
-            include_spip('inc/config');
-            $prix_unitaire_ht=lire_config('shop_livraison/montant_defaut');
-            }
+		
+		//Le prix unitaire         
+        $prix_unitaire_ht=isset($montant['montant'])?$montant['montant']:lire_config('shop_livraison/montant_defaut');
+
             
-        $valeurs['id_objet']=$montant['id_livraison_montant'];
-        $valeurs['prix_unitaire_ht']=$montant['montant'];    
+        $valeurs['id_objet']=isset($montant['id_livraison_montant'])?$montant['id_livraison_montant']:0;
+        $valeurs['prix_unitaire_ht']=$prix_unitaire_ht;    
         sql_insertq('spip_commandes_details', $valeurs);
     }
 

@@ -59,7 +59,7 @@ function mesure_unite($unite=""){
 }
 
 
-if(!function_exists('devise_defaut_prix')){
+if(!test_plugin_actif('prix_objets')){
 	function devise_defaut_prix($prix='',$traduire=true){
 
     if($_COOKIE['spip_devise'])$devise_defaut=$_COOKIE['spip_devise'];
