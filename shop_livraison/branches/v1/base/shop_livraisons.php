@@ -103,21 +103,22 @@ function shop_livraisons_declarer_tables_principales($tables_principales){
 
 function shop_livraisons_declarer_champs_extras($champs = array()) {
 
-    //Les objets choisis dans shop_prix    
+    //Les objets actives  
     include_spip('inc/config');
     include_spip('shop_livraisons_fonctions');    
-    include_spip('shop_prix_fonctions');
-    
-    $objets_prix=lire_config('shop_prix/objets_prix',array());
-    $unite_defaut=lire_config('shop_livraison/unite_defaut',array()); 
+
+    $config=lire_config('shop_livraison',array());
+    $objets_livraison=isset($config['objets_livraison'])?$config['objets_livraison']:array();
+	if(!$objets_livraison){
+		$objets_livraison=lire_config('prix_objets/objets_prix',array());
+	}
+    $unite_defaut=isset($config['unite_defaut'])?$config['unite_defaut']:array();
     $mesure_defaut=mesure_defaut(); 
 
-    
 
     /*Pour chaque objet prix on active le champ mesure*/
-    foreach($objets_prix AS $objet){
-        $restriction=array();
-        if($objet=='article')$restriction=rubrique_prix();
+    foreach($objets_livraison AS $objet){
+
 
        $champs[table_objet_sql($objet)]['mesure'] = array(
           'saisie' => 'input',//Type du champ (voir plugin Saisies)
@@ -128,7 +129,6 @@ function shop_livraisons_declarer_champs_extras($champs = array()) {
                 'sql' => "text NOT NULL DEFAULT ''",
                 'versionner' => true,                                 
                 'restrictions'=>array(
-                    'rubrique' => implode(':',$restriction), 
                     'voir' => array('auteur' => ''),//Tout le monde peut voir
                     'modifier' => array('auteur' => 'admin'),//Seuls les administrateurs peuvent modifier
                     )

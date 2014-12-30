@@ -1,0 +1,57 @@
+[(#AUTORISER{voir,livraison_zone,#ID_LIVRAISON_ZONE}|sinon_interdire_acces)]
+<BOUCLE_livraison_zone(LIVRAISON_ZONES){id_livraison_zone}{si #ENV{exec}|=={livraison_zone}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,livraison_zone,#ID_LIVRAISON_ZONE})
+		[(#ID_LIVRAISON_ZONE|afficher_qui_edite{livraison_zone}|non)
+			[(#URL_ECRIRE{livraison_zone_edit,id_livraison_zone=#ID_LIVRAISON_ZONE}|icone_verticale{<:livraison_zone:icone_modifier_livraison_zone:>,livraison_zone,edit,right ajax preload})]
+		]
+		[(#ID_LIVRAISON_ZONE|afficher_qui_edite{livraison_zone}|oui)
+			[(#URL_ECRIRE{livraison_zone_edit,id_livraison_zone=#ID_LIVRAISON_ZONE}|icone_verticale{#ID_LIVRAISON_ZONE|afficher_qui_edite{livraison_zone},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{livraison_zone-24.png}|balise_img{livraison_zone,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{livraison_zone,#ID_LIVRAISON_ZONE}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/livraison_zone,id=#ID_LIVRAISON_ZONE,id_livraison_zone=#ID_LIVRAISON_ZONE,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+
+[(#AUTORISER{creer,livraison_montant})
+    [(#URL_ECRIRE{livraison_montant_edit,new=oui&id_livraison_zone=#ID_LIVRAISON_ZONE}|parametre_url{&redirect,#SELF}|icone_verticale{<:livraison_montant:texte_ajouter_livraison_montant:>,livraison_montant,new,right})]
+]
+
+[(#REM) Les montants attachés]
+<INCLURE{fond=prive/objets/liste/livraison_montants, par=montant, env, ajax, sinon=<:livraison_montant:info_aucun_livraison_montant:>}>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,livraison_zone,id,#ID_LIVRAISON_ZONE},data,'<div class="nettoyeur"></div>'}}
+
+
+
+#BOITE_FERMER
+
+[(#REM) Les pays attachés avec son formulaire]
+[(#BOITE_OUVRIR{ <h2><:livraison_zone:titre_pays_zones:></h2>[(#CHEMIN_IMAGE{pays-24.png}|balise_img{pays,cadre-icone})]
+
+,simple fiche_objet})]
+    
+    <div class="ajax">
+        #FORMULAIRE_PAYS_ZONE
+    </div>
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
+]
+</BOUCLE_livraison_zone>
+[(#ENV**{exec}|=={livraison_zone_edit}|?{#INCLURE{fond=prive/squelettes/contenu/livraison_zone_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_livraison_zone>

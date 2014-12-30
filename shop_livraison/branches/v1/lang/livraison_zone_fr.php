@@ -1,8 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/shop_livraison/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -10,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_livraison_zone' => 'Ajouter cette zone de livraison',
 
 	// E
-    'eliminer_livraison_zone' => 'Eliminer cette zone de livraison',	
+	'eliminer_livraison_zone' => 'Eliminer cette zone de livraison',
 	'explication_unite' => 'Surcharge la valeur définit par défaut, à changer uniquement si vous devez définir une unité différent pour cette zone',
 
 	// I
@@ -28,7 +27,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_unite' => 'Unité',
 
 	// R
-
 	'retirer_tous_liens_livraison_zones' => 'Retirer toutes les zones de livraison',
 
 	// T
@@ -40,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_livraison_zones' => 'Zones de livraison',
 	'titre_livraison_zones_rubrique' => 'Zones de livraison de la rubrique',
 	'titre_logo_livraison_zone' => 'Logo de cette zone de livraison',
-	'titre_pays_zones' => 'Les pays de cette zone de livraison',	
+	'titre_pays_zones' => 'Les pays de cette zone de livraison'
 );
 
 ?>

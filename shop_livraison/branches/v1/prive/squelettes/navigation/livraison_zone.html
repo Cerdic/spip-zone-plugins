@@ -1,0 +1,37 @@
+<B_livraison_zone>
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{livraisons-zone-32.png}|balise_img{'','cadre-icone'})]
+    
+,'simple personnel'})]
+<BOUCLE_livraison_zone(LIVRAISON_ZONES){id_livraison_zone}>
+<div class='infos'>
+[(#SET{texte_objet,<:livraison_zone:titre_livraison_zone:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_LIVRAISON_ZONE</p></div>
+
+</div>
+</BOUCLE_livraison_zone>
+[(#PIPELINE{shop_affiche_gauche_shortcuts})]
+#BOITE_FERMER
+</B_livraison_zone>
+
+[(#BOITE_OUVRIR{
+    [(#CHEMIN_IMAGE{shop_livraisons-32.png}|balise_img{'','cadre-icone'})]
+    
+,'simple personnel'})]
+<h3 style="text-align:center;"><:livraison:titre_livraisons:></h3>
+
+
+<ol class="shortcut">
+    <li><a href="[(#URL_ECRIRE{livraison_montant_edit}|parametre_url{new,oui}|parametre_url{id_livraison_zone,#ENV{id_livraison_zone}})]"class="cellule-h">
+        <img src=" [(#CHEMIN_IMAGE{livraison_montant-new-16.png})]"/> 
+        <:livraison_montant:icone_creer_livraison_montant:></a>
+     </li> 
+    <li><a href="#URL_ECRIRE{livraison_zones}"class="cellule-h"><img src="[(#CHEMIN_IMAGE{livraison_zone-16.png})]"/> 
+     <:livraison_zone:titre_livraison_zones:></a></li>
+    <li><a href="[(#URL_ECRIRE{livraison_zone_edit}|parametre_url{new,oui})]"class="cellule-h"><img src=" [(#CHEMIN_IMAGE{livraison_zone-new-16.png})]"/> 
+     <:livraison_zone:icone_creer_livraison_zone:></a></li> 
+         
+</ol>
+
+[(#PIPELINE{shop_affiche_gauche_shortcuts})]
+#BOITE_FERMER

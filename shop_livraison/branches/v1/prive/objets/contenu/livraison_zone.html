@@ -1,0 +1,23 @@
+<BOUCLE_livraison_zone(LIVRAISON_ZONES){id_livraison_zone}>
+
+[<div class="champ contenu_nom[ (#NOM*|strlen|?{'',vide})]">
+	<label><:livraison_zone:label_nom:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{nom} nom'>(#NOM)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:livraison_zone:label_descriptif:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_unite[ (#UNITE*|strlen|?{'',vide})]">
+	<label><:livraison_zone:label_unite:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{unite} unite'>(#UNITE)</span>
+</div>]
+
+[<div class="champ contenu_maj[ (#MAJ*|strlen|?{'',vide})]">
+	<label><:livraison_zone:label_maj:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{maj} maj'>(#MAJ)</span>
+</div>]
+
+</BOUCLE_livraison_zone>

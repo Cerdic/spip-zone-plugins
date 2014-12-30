@@ -1,0 +1,37 @@
+#SET{self,#SELF|parametre_url{debut_continents,#EVAL{_request('debut_continents')}}}
+<B_continents>
+[(#BOITE_OUVRIR{[<:continents:continents_titre:>(#CHEMIN_IMAGE{continents-24.png}|balise_img{'',cadre-icone})],simple})]
+[(#REM) Les continents]
+<ul class='liste_items'>
+<BOUCLE_continents(CONTINENTS){par num nom, nom}>
+<li class='item[ (#EXPOSE)] continent'>
+    #SET{var,#ID_CONTINENT}
+    [(#EXPOSE|oui)#SET{var,''}]
+    <a class="ajax" href="[(#GET{self}|parametre_url{id_continent,[(#GET{var})]})]">#NOM</a>
+    [(#ENV{id_livraison_zone}|oui)<a class="ajax" href="[(#URL_ACTION_AUTEUR{gestion_zones,ajouter_pays_continent-#ENV{id_livraison_zone}-#ID_CONTINENT,[(#SELF|parametre_url{action_ok,ok})]})]" title="<:livraison:titre_ajouter_pays_continent:>"><img src="[(#CHEMIN_IMAGE{ajouter-16.png})]" alt="plus"/></a>]
+</li>
+    <B_pays>
+    <li>
+        <ul style="padding-left:10px">
+       <BOUCLE_pays(PAYS){id_continent}{id_continent=#ENV{id_continent}}{si #ENV{id_livraison_zone}|oui}>
+        <li class='item[ (#EXPOSE)] pays'>
+        #NOM <a class="ajax" href="[(#URL_ACTION_AUTEUR{gestion_zones,ajouter_pays-#ENV{id_livraison_zone}-#ID_PAYS,[(#SELF|parametre_url{action_ok,ok})]})]" title="<:livraison:titre_ajouter_pays:>"><img src="[(#CHEMIN_IMAGE{ajouter-16.png})]" alt="plus"/></a>
+    </li>
+       </BOUCLE_pays>
+       </ul>
+    </li>
+    </B_pays>
+    
+     <//B_pays>
+</BOUCLE_continents>
+</ul>
+#BOITE_FERMER
+</B_continents>
+
+[(#ENV{action_ok}|oui)
+<script type="text/javascript">
+$(function(){
+        var id_continent = '#ENV{id_objet}';
+        $("#formulaire_pays_zone").ajaxReload({args:{id_continent:id_continent,debut__p:""},history:true});
+});
+</script>]

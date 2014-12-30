@@ -1,3 +1,13 @@
+[(#REM)Les objets spip disponibles]
+#SET{objets,#ARRAY}
+<BOUCLE_objets_liste(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
+    [(#VALEUR{page}|is_string|oui)
+        [(#SET{objets,#GET{objets}|array_merge{#ARRAY{#VALEUR{page},#VALEUR{texte_objets}|_T}}})]
+    ]
+</BOUCLE_objets_liste>
+[(#SET{objets,#GET{objets}|array_merge{#ARRAY{document,#VAL{medias:info_documents}|_T}}})]
+
+
 <div class="formulaire_spip formulaire_configurer formulaire_#FORM">
 
 	<h3 class="titrem"><:livraison:cfg_titre_parametrages:></h3>
@@ -10,6 +20,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul>
+			  [(#SAISIE{checkbox,objets_livraison,
+                    datas=#GET{objets},
+                    label=<:livraison:label_selection_objets_livraison:>}
+                    )]
 		    
             [(#SAISIE{input,montant_defaut,
                 label=<:livraison:label_montant_defaut:>,
