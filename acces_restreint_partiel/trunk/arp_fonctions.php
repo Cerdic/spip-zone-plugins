@@ -28,7 +28,7 @@ lance les filtres adéquats en fonction des mots-clé présents dans l'article
 function arp_filtrage($texte, $connect, $pile){
 	$id_rubrique = $pile['id_rubrique'];
 	$id_article = $pile['id_article'];
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	if (isset($GLOBALS['auteur_session']['id_auteur'])) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	$change = false;
 //echo "<br>id_auteur=$id_auteur";
 	if (accesrestreint_article_restreint($id_article, $id_auteur)) // TODO: enlever le ! après test
