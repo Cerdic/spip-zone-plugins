@@ -61,6 +61,10 @@
 			<td colspan="6" class="descriptif"><:prix:label_total_ht:></td>
 			<td class="montant">[(#PRIX_HT)]</td>
 		</tr>
+		<tr class="prix_total taxe">
+			<td colspan="6" class="descriptif"><:commandes:label_taxe:></td>
+			<td class="montant">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
+		</tr>
 		<tr class="prix_total ttc">
 			<td colspan="6" class="descriptif"><:prix:label_total_ttc:></td>
 			<td class="montant">[(#PRIX)]</td>
