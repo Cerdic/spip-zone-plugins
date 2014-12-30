@@ -30,6 +30,7 @@ function arp_pre_boucle(&$boucle){
 //include_once '/home/spip3/public_html/krumo/class.krumo.php';
 
 	switch ($boucle->type_requete){
+		case 'forums':
 		case 'hierarchie':
 		case 'articles':
 		//case 'breves':
@@ -40,7 +41,7 @@ function arp_pre_boucle(&$boucle){
 			$boucle->modificateur['tout_voir'] = true;
 
 			// le plugin AccesRestreint a t'il ajouté des conditions dans le where ?
-			// C'est le cas où AccesRestrient est appelé avant arp.
+			// C'est le cas où AccesRestreint est appelé avant arp.
 			//---------------------------------------------------
 			foreach($boucle->where as $key => $where)
 			{
