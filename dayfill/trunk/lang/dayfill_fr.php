@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_profil_operateur'      => "Saisie en continu à partir des fiches papier",
 	'explication_profil_ticketteur'     => "Saisie d'activités liées à un grand nombre de projets et clients, plusieurs fois par jour",
 	'explication_quel_projet'           => "Sélectionnez un des projets actifs du client sélectionné",
-	'explication_quelle_organisation'   => "Sélectionez le client pour qui l'activité a été effectuée",
+	'explication_quelle_organisation'   => "Sélectionnez le client pour qui l'activité a été effectuée",
 	'explication_type_activite'         => "Sélectionner le type qui correspond le mieux à cette activité",
 
 	// I
