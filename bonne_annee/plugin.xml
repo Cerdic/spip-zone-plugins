@@ -12,5 +12,5 @@ _ Ajouter <code>#INCLURE{fond=bonne_annee}</code> dans vos pages.
 	<prefix>bonne_annee</prefix>
 	<icon>bonne_annee.png</icon>
 	<lien>http://contrib.spip.net/Plugin-Bonne-annee</lien>
-	<necessite id="spip" version="[2.0.0;3.0.99]" />
+	<necessite id="spip" version="[2.0.0;3.1.99]" />
 </plugin>
