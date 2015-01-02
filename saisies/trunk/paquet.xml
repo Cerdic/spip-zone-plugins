@@ -24,6 +24,6 @@
 	<pipeline nom="formulaire_verifier" inclure="saisies_pipelines.php" />
 	<pipeline nom="styliser" inclure="saisies_pipelines.php" />
 
-	<utilise nom="verifier" />
-	<utilise nom="spip_bonux" />
+	<utilise nom="verifier" compatibilite="[0.1.10;]" />
+	<utilise nom="spip_bonux" compatibilite="[3.0.0;]" />
 </paquet>
