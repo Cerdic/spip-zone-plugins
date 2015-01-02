@@ -10,5 +10,6 @@
 	<prefix>microcache</prefix>
 	<options>microcache_options.php</options>
 	<necessite id="SPIP" version="[2.0.0;)" />
+	<necessite id="memoization" />
 </plugin>
 
