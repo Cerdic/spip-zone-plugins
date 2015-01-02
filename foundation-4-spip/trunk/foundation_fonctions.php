@@ -40,7 +40,7 @@ function balise_COLONNES_dist($p) {
   if (!$type) $type = "'large'";
 
   // On calcule la syntaxe
-  $p->code = "trouver_syntaxe_foundation($nombre_colonnes, $type).' columns'";
+  $p->code = "trouver_syntaxe_foundation($nombre_colonnes, $type).'columns'";
   $p->interdire_scripts = false;
   return $p;
 }

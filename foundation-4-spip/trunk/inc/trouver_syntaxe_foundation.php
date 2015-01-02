@@ -28,13 +28,13 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
             // Utiliser un tableau large => 4 plutôt que 4 => large
             // On est donc plus logique
             if (is_numeric($value)) {
-                $class .= $key.'-'.$value;
+                $class .= $key.'-'.$value.' ';
             }
             // Ancienne écriture, au cas ou
             else {
                 include_spip('inc/utils');
                 erreur_squelette(_T('foundation:syntaxe_deprecie'));
-                $class .= $value.'-'.$key;
+                $class .= $value.'-'.$key.' ';
             }
         }
         return $class;
@@ -42,17 +42,17 @@ function trouver_syntaxe_foundation($nombre_colonnes, $type) {
     else {
         // Si on est dans une vesion numérique de foundation, on retourne la syntaxe
         if (in_array($config['variante'], $colnum))
-            return $type.'-'.$nombre_colonnes;
+            return $type.'-'.$nombre_colonnes.' ';
         // Sinon, on démarrer le moteur de conversion de nombre, et on renvoie la bonne class
         elseif (in_array($config['variante'], $colettr)) {
 
             // Dans le cas ou un tableau est passé, c'est la colonne la plus large du tableau qui sera utilisée
             if (is_array($nombre_colonnes)) {
                 $nombre_colonnes = array_keys($nombre_colonnes);
-                return toWords(max($nombre_colonnes));
+                return toWords(max($nombre_colonnes)).' ';
             }
             else
-                return toWords($nombre_colonnes);
+                return toWords($nombre_colonnes).' ';
         }
     }
 }
