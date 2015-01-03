@@ -35,6 +35,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *	id of job
  */
 function queue_add_job($function, $description, $arguments = array(), $file = '', $no_duplicate = false, $time=0, $priority=0){
+	if(defined(_JOB_QUEUE_SYNCHRONOUS)) {
+		execute_job('Now', $file, $function, $arguments, $description);
+		return 0;
+	} else {
 	include_spip('base/abstract_sql');
 
 	// cas pourri de ecrire/action/editer_site avec l'option reload=oui
@@ -88,7 +92,7 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 	}
 
 	return $id_job;
-
+	}
 }
 
 /**
@@ -100,9 +104,9 @@ function queue_add_job($function, $description, $arguments = array(), $file = ''
 function queue_purger(){
 	include_spip('base/abstract_sql');
 	sql_delete('spip_jobs');
-  sql_delete("spip_jobs_liens","id_job NOT IN (".sql_get_select("id_job","spip_jobs").")");
-  include_spip('inc/genie');
-  genie_queue_watch_dist();
+	sql_delete("spip_jobs_liens","id_job NOT IN (".sql_get_select("id_job","spip_jobs").")");
+	include_spip('inc/genie');
+	genie_queue_watch_dist();
 }
 
 /**
@@ -168,14 +172,14 @@ function queue_unlink_job($id_job){
 
 /**
  * Start a job described by array $row
- * @param array $row
+ * @param $row array
  *	describe the job, with field of table spip_jobs
  * @return mixed
  *	return the result of job
  */
 function queue_start_job($row){
 
-// deserialiser les arguments
+	// deserialiser les arguments
 	$args = unserialize($row['args']);
 	if ($args===false){
 		spip_log('arguments job errones '.var_export($row,true),'queue');
@@ -183,7 +187,28 @@ function queue_start_job($row){
 	}
 
 	$fonction = $row['fonction'];
-	if (strlen($inclure = trim($row['inclure']))){
+	$id_job = $row['id_job'];
+	$inclure = $row['inclure'];
+	$descriptif = $row['descriptif'];
+	return execute_job($id_job, $inclure, $fonction, $args, $descriptif);
+}
+
+/**
+ * Execute a job from all the information
+ * @param $id_job string
+ *  the job id
+ * @param $inclure string
+ *  a file to be included to be able to invoke the job
+ * @param $fonction string
+ *  the name of the function containing the job code
+ * @param $args array
+ *  the paramaters array to be passed to the function
+ * @param $descriptif string
+ *  a description of the job
+ * @return void
+ */
+function execute_job($id_job, $inclure, $fonction, $args, $descriptif){
+	if (strlen($inclure = trim($inclure))){
 		if (substr($inclure,-1)=='/'){ // c'est un chemin pour charger_fonction
 			$f = charger_fonction($fonction,rtrim($inclure,'/'),false);
 			if ($f)
@@ -193,12 +218,14 @@ function queue_start_job($row){
 			include_spip($inclure);
 	}
 
+	$formatted_args = implode(',', $args);
+
 	if (!function_exists($fonction)){
-		spip_log("fonction $fonction ($inclure) inexistante ".var_export($row,true),'queue');
+		spip_log("fonction $fonction ($inclure) inexistante $formatted_args", 'queue');
 		return false;
 	}
 
-	spip_log("queue [".$row['id_job']."]: $fonction() start", 'queue');
+	spip_log("queue [$id_job]: $fonction() [$descriptif] [$formatted_args] start", 'queue');
 	switch (count($args)) {
 		case 0:	$res = $fonction(); break;
 		case 1:	$res = $fonction($args[0]); break;
@@ -215,9 +242,8 @@ function queue_start_job($row){
 			# plus lent mais completement generique
 			$res = call_user_func_array($fonction, $args);
 	}
-	spip_log("queue [".$row['id_job']."]: $fonction() end", 'queue');
+	spip_log("queue [$id_job]: $fonction() [$descriptif] end", 'queue');
 	return $res;
-
 }
 
 /**

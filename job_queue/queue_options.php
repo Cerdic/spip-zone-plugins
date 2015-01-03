@@ -10,6 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 #define('_JQ_MAX_JOBS_EXECUTE',200); // pour personaliser le nombre de jobs traitables a chaque hit
 #define('_JQ_MAX_JOBS_TIME_TO_EXECUTE',15); // pour personaliser le temps d'excution dispo a chaque hit
+#define('_JOB_QUEUE_SYNCHRONOUS', true); // pour rendre l'execution des jobs synchrones (les jobs sont executés immediatement au lieu de passer par la queue)
 
 @define('_CRON_DELAI_GOURMAND',0);
 @define('_CRON_DELAI',0);
