@@ -14,7 +14,7 @@ define('_DEBUG_BLOCK_QUEUE',true);
 include_spip('inc/genie');
 genie_queue_watch_dist();
 ?>
-<h1>Job Queue</h1>
+<h1><:queue:job_queue:></h1>
 <B_jobs>
 	[(#GRAND_TOTAL|singulier_ou_pluriel{queue:one_job_in_queue,queue:nb_jobs_in_queue})] / #SET{nb,#REM|queue_sleep_time_to_next_job}<:queue:next_job_in_nb_sec{nb=#GET{nb}}:>
 	[<p class="pagination">(#PAGINATION)</p>]
