@@ -20,7 +20,7 @@
 	<pipeline nom="formulaire_traiter" inclure="squirrel_chimp_campaigns_pipelines.php" /> 
 	<pipeline nom="pre_edition" inclure="squirrel_chimp_campaigns_pipelines.php" /> 
 	
-	<necessite nom="squirrel_chimp" compatibilite="[2.0.0;[" />	
-	<necessite nom="squirrel_chimp_lists" compatibilite="[2.0.0;[" />	
-	<necessite nom="saisies" compatibilite="[1.25.13;[" />	
+	<necessite nom="squirrel_chimp" compatibilite="[2.0.4;[" />	
+	<necessite nom="squirrel_chimp_lists" compatibilite="[2.0.7;[" />	
+	<necessite nom="saisies" compatibilite="[2.0.3;[" />	
 </paquet>
