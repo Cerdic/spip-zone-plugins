@@ -26,7 +26,9 @@
 #SET{scalesteps,null}      [(#ENV{scalesteps}|oui) #SET{scalesteps,#ENV{scalesteps}|trim}]
 #SET{scalestepwidth,null}  [(#ENV{scalestepwidth}|oui) #SET{scalestepwidth,#ENV{scalestepwidth}|trim}]
 #SET{scalestartvalue,null} [(#ENV{scalestartvalue}|oui) #SET{scalestartvalue,#ENV{scalestartvalue}|trim}]
-  
+#SET{bezierCurve,true}     [(#ENV{bezierCurve}|oui) #SET{bezierCurve,#ENV{bezierCurve}|trim}]
+#SET{datasetFill,true}     [(#ENV{datasetFill}|oui) #SET{datasetFill,#ENV{datasetFill}|trim}]
+
 [(#REM) traitement]
 #SET{title,#GET{title}|replace{" ",""}}   
 #SET{data,#GET{data}|replace{" ",""}|explode{","}} 
@@ -91,20 +93,22 @@
 [(#GET{type}|match{'Line|Radar|Bar'}|oui) [(#SET{dataJs,#GET{dataJs}|concat{']};'}})] ]
 [(#GET{type}|match{'Line|Radar|Bar'}|non) [(#SET{dataJs,#GET{dataJs}|concat{'];'}})] ]
 
-
-
 <div class="spip-chart-wrap [spip-chart-align-(#GET{align})] [(#GET{class})]" 
      style="max-width:100%;width:[(#GET{width}|!={null}|?{#GET{width},#GET{canvaswidth}px})];height:[(#GET{height}|!={null}|?{#GET{height},#GET{canvasheight}px})];"><canvas id="#GET{title}" height="#GET{canvasheight}" width="#GET{canvaswidth}" class="spip-chart-canvas"></canvas></div>
 <script>
 var [(#GET{title})]Ops = { 	animation: #GET{animation},
-[(#GET{type}|match{'Line|Radar|Bar|PolarArea'}|oui)   
+[(#GET{type}|match{'Line|Radar|Bar|PolarArea'}|oui)
      scaleFontSize:#GET{scalefontsize},
      scaleFontColor:"#GET{scalefontcolor}",
      scaleOverride:#GET{scaleoverride},
      scaleSteps:#GET{scalesteps}, 
      scaleStepWidth:#GET{scalestepwidth},
      scaleStartValue:#GET{scalestartvalue},
-]}; 
+][(#GET{type}|=={'Line'}|oui)
+     bezierCurve:#GET{bezierCurve},
+][(#GET{type}|match{'Line|Radar'}|oui)
+     datasetFill:#GET{datasetFill}
+]};
 
 var [(#GET{title})]Data = #GET{dataJs};
 [(#GET{type}|match{'Pie|Doughnut|Line|Radar|Bar|PolarArea'}|oui) 
