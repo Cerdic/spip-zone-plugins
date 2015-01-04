@@ -218,7 +218,7 @@ function execute_job($id_job, $inclure, $fonction, $args, $descriptif){
 			include_spip($inclure);
 	}
 
-	$formatted_args = implode(',', $args);
+	$formatted_args = var_export($args, true);
 
 	if (!function_exists($fonction)){
 		spip_log("fonction $fonction ($inclure) inexistante $formatted_args", 'queue');
