@@ -49,7 +49,11 @@ function formulaires_rubriqueur_traiter_dist() {
 	foreach( $rubriques as $rubrique ) {
 		rubriqueur_creer_rubrique_nommee($rubrique, $rubrique_racine, _RUBRIQUEUR_SEPARATEUR);
 	}
-	return array(
+  // mettre à jour les status, id_secteur et profondeur
+  include_spip('inc/rubriques');
+  calculer_rubriques();
+  propager_les_secteurs();
+  return array(
 		'message_ok' => _T('rubriqueur:rubriques_creees'),
 		'editable'   => false,
 	);
