@@ -1,7 +1,7 @@
 <paquet
 	prefix="chartjs"
 	categorie="multimedia"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	compatibilite="[3.0.17;3.1.*]"
 	logo="prive/themes/spip/images/chartjs-64.png"

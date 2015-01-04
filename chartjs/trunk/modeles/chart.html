@@ -26,6 +26,7 @@
 #SET{scalesteps,null}      [(#ENV{scalesteps}|oui) #SET{scalesteps,#ENV{scalesteps}|trim}]
 #SET{scalestepwidth,null}  [(#ENV{scalestepwidth}|oui) #SET{scalestepwidth,#ENV{scalestepwidth}|trim}]
 #SET{scalestartvalue,null} [(#ENV{scalestartvalue}|oui) #SET{scalestartvalue,#ENV{scalestartvalue}|trim}]
+#SET{scaleLabelUnit,''}  [(#ENV{scaleLabelUnit}|oui) #SET{scaleLabelUnit,#ENV{scaleLabelUnit}|trim}]
 #SET{bezierCurve,true}     [(#ENV{bezierCurve}|oui) #SET{bezierCurve,#ENV{bezierCurve}|trim}]
 #SET{datasetFill,true}     [(#ENV{datasetFill}|oui) #SET{datasetFill,#ENV{datasetFill}|trim}]
 
@@ -101,13 +102,15 @@ var [(#GET{title})]Ops = { 	animation: #GET{animation},
      scaleFontSize:#GET{scalefontsize},
      scaleFontColor:"#GET{scalefontcolor}",
      scaleOverride:#GET{scaleoverride},
-     scaleSteps:#GET{scalesteps}, 
+     scaleSteps:#GET{scalesteps},
      scaleStepWidth:#GET{scalestepwidth},
      scaleStartValue:#GET{scalestartvalue},
 ][(#GET{type}|=={'Line'}|oui)
      bezierCurve:#GET{bezierCurve},
 ][(#GET{type}|match{'Line|Radar'}|oui)
-     datasetFill:#GET{datasetFill}
+     datasetFill:#GET{datasetFill},
+][(#GET{type}|match{'Line|Bar'}|oui)
+     scaleLabel:"<%=value%>[ (#GET{scaleLabelUnit})]",
 ]};
 
 var [(#GET{title})]Data = #GET{dataJs};
