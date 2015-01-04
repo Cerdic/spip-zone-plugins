@@ -33,7 +33,7 @@
 #SET{title,#GET{title}|replace{" ",""}}   
 #SET{data,#GET{data}|replace{" ",""}|explode{","}} 
 #SET{datasets,#GET{datasets}|replace{" ",""}|explode{"next"}}
-#SET{colors,#GET{colors}|replace{" ",""}|explode{","}}
+#SET{colors,#VAL{'/[-,]/'}|preg_split{#GET{colors}|replace{" ",""}}}
 #SET{labels,#GET{labels}|replace{"&#039;","'"}|html_entity_decode|addslashes|explode{","}|}
 
 #SET{dataJs,''}   
