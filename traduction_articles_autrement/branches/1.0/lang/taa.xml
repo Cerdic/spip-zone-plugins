@@ -26,7 +26,7 @@
 		<traducteur nom="beatnick" lien="http://trad.spip.net/auteur/beatnick" />
 		<traducteur nom="Cerf" lien="http://trad.spip.net/auteur/cerf" />
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/taa?lang_cible=pt_br" total="14" traduits="9" relire="0" modifs="1" nouveaux="4" pourcent="64.29">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/taa?lang_cible=pt_br" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/taa?lang_cible=sk" total="14" traduits="14" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
