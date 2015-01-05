@@ -61,7 +61,7 @@ function action_definir_contact_post($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);
 	include_spip('action/editer_contact');
-	return contact_inserer(array(
+	return contact_inserer(null, array(
 		'id_auteur' => $id_auteur,
 		'nom' => $nom,
 	));
@@ -79,7 +79,7 @@ function action_definir_organisation_post($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);
 	include_spip('action/editer_organisation');
-	return organisation_inserer(array(
+	return organisation_inserer(null, array(
 		'id_auteur' => $id_auteur,
 		'nom' => $nom,
 	));

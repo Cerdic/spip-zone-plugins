@@ -320,10 +320,15 @@ function contacts_declarer_url_objets($array){
  */
 function contacts_optimiser_base_disparus($flux){
 
+spip_log('*****************', 'opt');
+spip_log($flux, 'opt');
+
 	// supprimer un contact associé à un auteur disparu si demandé dans la configuration
 	include_spip('inc/config');
 	if (CONTACTS_SUPPRESSIONS_RECIPROQUES_AVEC_AUTEURS) {
 		$n = 0;
+
+spip_log('define OK', 'opt');
 
 		# supprimer les contacts dont les auteurs ont disparu
 		$res = sql_select(
@@ -337,8 +342,13 @@ function contacts_optimiser_base_disparus($flux){
 			)
 		);
 
+spip_log('auteurs disparus', 'opt');
+spip_log($res, 'opt');
+
 		while ($row = sql_fetch($res)) {
 			$id_contact = $row['id_contact'];
+spip_log('auteurs disparus', 'opt');
+spip_log($id_contact, 'opt');
 			sql_delete("spip_contacts_liens", "id_contact=" . sql_quote($id_contact));
 			sql_delete("spip_contacts", "id_contact=" . sql_quote($id_contact));
 			sql_delete("spip_organisations_contacts", "id_contact=" . sql_quote($id_contact));
@@ -356,9 +366,11 @@ function contacts_optimiser_base_disparus($flux){
 				"organisations.id_auteur > 0"
 			)
 		);
-
+spip_log('contacts disparus', 'opt');
+spip_log($res, 'opt');
 		while ($row = sql_fetch($res)) {
 			$id_organisation = $row['id_organisation'];
+spip_log($id_organisation, 'opt');
 			sql_delete("spip_organisations_liens", "id_organisation=" . sql_quote($id_organisation));
 			sql_delete("spip_organisations", "id_organisation=" . sql_quote($id_organisation));
 			sql_delete("spip_organisations_contacts", "id_organisation=" . sql_quote($id_organisation));
@@ -367,6 +379,7 @@ function contacts_optimiser_base_disparus($flux){
 
 		$flux['data'] += $n;
 	}
+spip_log($flux, 'opt');
 
 	return $flux;
 }
