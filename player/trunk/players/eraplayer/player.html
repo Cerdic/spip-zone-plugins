@@ -1,10 +1,1 @@
-#SET{url,#ENV{url_document,''}}
-<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>#SET{url,#URL_DOCUMENT}</BOUCLE_doc>[
-<dt class='spip_doc_titre player #ENV{player}'[ style='width:(#ENV{my_width,120})px;height:[(#ENV{height,20})]px']>
-<object id="audioplayer[(#ID_DOCUMENT|sinon{#GET{url}|md5|substr{0,8}})]" type="application/x-shockwave-flash" data="#CHEMIN{players/eraplayer/player.swf}" height="[(#ENV{height,20})]" width="[(#ENV{my_width,120})]">
-	<param name="wmode" value="transparent" />
-	<param name="movie" value="#CHEMIN{players/eraplayer/player.swf}" />
-	<param name="FlashVars" value="mp3=#GET{url}" />
-	<span><a href='(#GET{url})'>#GET{url}</a></span>
-</object></dt>
-]
+<INCLURE{fond=players/mejs/player,env,skin=eraplayer,largeur=24} />
