@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+	type_site,1,
+	date_creation,-1,
+	id_projets_site,1,
+	points,-1
+}})]<B_liste_projets_sites>
+#ANCRE_PAGINATION
+<div class="liste-objets projets_sites">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_site:info_1_projets_site,projets_site:info_nb_projets_sites}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'><:projets_site:titre_label:></th>
+			<th class='webservice' scope='col'>[(#TRI{webservice,<:projets_site:webservice_label:>,ajax})]</th>
+			<th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:type_site_label:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_projets_site,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_projets_sites (PROJETS_SITES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num type_site},#GET{defaut_tri}} {pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{projets_site-16.png}|balise_img)]</td>
+			<td class='titre'>[(#LOGO_PROJETS_SITE|image_reduire{12,12})]<a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]">#TITRE</a></td>
+			<td class='webservice'>[(#WEBSERVICE|?{
+			<a href="[(#WEBSERVICE)]">[(#WEBSERVICE)]</a>,
+			-
+			})]</td>
+			<td class='type_site principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ][(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)]</a></td>
+			<td class='date secondaire'>[(#DATE_CREATION|affdate{d/m/Y})]</td>
+			<td class='id'>[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|?{
+				<a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE})]">#ID_PROJETS_SITE</a>,
+				#ID_PROJETS_SITE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_projets_sites>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_projets_sites>[
+<div class="liste-objets projets_sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_projets_sites>
