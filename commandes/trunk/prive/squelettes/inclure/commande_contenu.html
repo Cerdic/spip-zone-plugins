@@ -8,69 +8,67 @@
 ]
 <BOUCLE_commande(COMMANDES){id_commande}{statut?}>
 <B_details>
-<div class="liste-objets">
-<table class="liste contenu-commande">
+<table class="spip bordereau">
 	<thead>
-		<tr class="first">
-			<th scope="col" class="logo"></th>
-			<th scope="col" class="objet"><:commandes:label_objet:></th>
-			<th scope="col" class="description"><:commandes:designation:></th>
-			<th scope="col" class="prix_unitaire"><abbr title="<:commandes:label_prix_unitaire:> <:commandes:abbr_hors_taxe:>"><:commandes:abbr_prix_unitaire:></abbr></th>
-			<th scope="col" class="quantite"><abbr title="<:commandes:label_quantite:>"><:commandes:abbr_quantite:></abbr></th>
-			<th scope="col" class="taxe"><:commandes:label_taxe:></th>
-			<th scope="col" class="montant"><:commandes:montant:> <:commandes:abbr_toutes_taxes_comprises:></th>
+		<tr>
+			<th class="logo"></th>
+			<th class="objet"><:commandes:label_objet:></th>
+			<th class="description"><:commandes:designation:></th>
+			<th class="quantite"><abbr title="<:commandes:label_quantite|attribut_html:>"><:commandes:abbr_quantite:></abbr></th>
+			<th class="prix ht"><abbr title="<:commandes:label_prix_unitaire|attribut_html:>"><:commandes:abbr_prix_unitaire:></abbr></th>
+			<th class="taxe"><:commandes:label_taxe:></th>
+			<th class="prix ttc"><abbr title="<:commandes:label_montant_ttc|attribut_html:>"><:commandes:label_prix:></abbr></th>
 		</tr>
 	</thead>
 	<tbody>
 		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{!par objet}{par id_commandes_detail}>
-		#SET{objet_spip, #OBJET|in_array{#REM|lister_tables_objets_surnoms|array_keys}|et{#ID_OBJET|>{0}}|?{oui}}
-		#SET{objet_base, #OBJET|table_objet_sql|sql_countsel{#OBJET|id_table_objet|concat{=,#ID_OBJET}}}
+		#SET{is_objet_spip, #OBJET|in_array{#REM|lister_tables_objets_surnoms|array_keys}|et{#ID_OBJET|>{0}}|?{oui}}
+		#SET{is_objet_base, #OBJET|table_objet_sql|sql_countsel{#OBJET|id_table_objet|concat{=,#ID_OBJET}}}
 		#SET{url_objet,#INFO_URL{#OBJET,#ID_OBJET}}
 		#SET{taxe_unitaire,#PRIX*|moins{#PRIX_HT*}|div{#QUANTITE*}|round{2}}
 		<tr class="detail[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo">
-				[(#GET{objet_spip}|oui)
-				[(#GET{objet_base}|oui)<a href="[(#GET{url_objet})]">]
+				[(#GET{is_objet_spip}|oui)
+				[(#GET{is_objet_base}|oui)<a href="[(#GET{url_objet})]">]
 					[(#INCLURE{fond=prive/squelettes/inclure/logo_objet_commande, objet, id_objet})]
-				[(#GET{objet_base}|oui)</a>]
+				[(#GET{is_objet_base}|oui)</a>]
 				]
 			</td>
 			<td class="objet">
-				[(#GET{objet_spip}|oui)
-				[(#GET{objet_base}|oui)<a href="[(#GET{url_objet})]">]
+				[(#GET{is_objet_spip}|oui)
+				[(#GET{is_objet_base}|oui)<a href="[(#GET{url_objet})]">]
 					[(#OBJET|objet_info{texte_objet}|_T)][ <:info_numero_abbreviation:>(#ID_OBJET)]
-				[(#GET{objet_base}|oui)</a>]
+				[(#GET{is_objet_base}|oui)</a>]
 				]
 			</td>
 			<td class="description #EDIT{descriptif}">
 				[(#DESCRIPTIF*|typo|supprimer_numero|sinon{#VAL{commandes:info_sans_descriptif}|_T|wrap{<span class='null'>}})]
 			</td>
-			<td class="prix_unitaire #EDIT{prix_unitaire_ht}[ (#PRIX_UNITAIRE_HT*|floatval|=={0.0}|oui)null]">[(#PRIX_UNITAIRE_HT*|round{2}|prix_formater)]</td>
 			<td class="quantite #EDIT{quantite}[ (#QUANTITE*|>{0}|non)null]">[(#QUANTITE)]</td>
-			<td class="taxe #EDIT{taxe}[ (#TAXE*|floatval|>{0.0}|non)null]">[(#TAXE*|mult{100})%]</td>
-			<td class="montant">[[(#TAXE*|floatval|>{0.0}|oui)<abbr title="[(#QUANTITE*|>{1}|?{
-				[= \((#PRIX_UNITAIRE_HT*|round{2}) + #GET{taxe_unitaire}\) &times; #QUANTITE*],
-				[= (#PRIX_UNITAIRE_HT*|round{2}) + #GET{taxe_unitaire}]
+			<td class="prix ht #EDIT{prix_unitaire_ht}[ (#PRIX_UNITAIRE_HT*|floatval|=={0.0}|oui)null]">[(#PRIX_UNITAIRE_HT*|round{2}|prix_formater)]</td>
+			<td class="taxe #EDIT{taxe}[ (#TAXE*|floatval|>{0.0}|non)null]">[(#TAXE*|mult{100}|number_format{1})&nbsp;%]</td>
+			<td class="prix ttc">[[(#TAXE*|floatval|>{0.0}|oui)<abbr title="[(#QUANTITE*|>{1}|?{
+				[= [(#QUANTITE*)] &times; \( (#PRIX_UNITAIRE_HT*|prix_formater) + [(#GET{taxe_unitaire}|prix_formater)] \)],
+				[= (#PRIX_UNITAIRE_HT*|prix_formater) + [(#GET{taxe_unitaire}|prix_formater)]]
 			}|attribut_html)]">](#PRIX)[(#TAXE*|floatval|>{0.0}|oui)</abbr>]]</td>
 		</tr>
 		</BOUCLE_details>
 	</tbody>
 	<tfoot>
-		<tr class="prix_total ht">
-			<td colspan="6" class="descriptif"><:prix:label_total_ht:></td>
-			<td class="montant">[(#PRIX_HT)]</td>
+		<tr class="total_ht">
+			<td colspan="6" class="description"><:prix:label_total_ht:></td>
+			<td class="prix ht">[(#PRIX_HT)]</td>
 		</tr>
-		<tr class="prix_total taxe">
-			<td colspan="6" class="descriptif"><:commandes:label_taxe:></td>
-			<td class="montant">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
+		<tr class="total_taxe">
+			<td colspan="6" class="description"><:commandes:label_taxe:></td>
+			<td class="prix taxe">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
 		</tr>
-		<tr class="prix_total ttc">
-			<td colspan="6" class="descriptif"><:prix:label_total_ttc:></td>
-			<td class="montant">[(#PRIX)]</td>
+		<tr class="total_ttc">
+			<td colspan="6" class="description"><:prix:label_total_ttc:></td>
+			<td class="prix ttc">[(#PRIX)]</td>
 		</tr>
 	</tfoot>
 </table>
-</div>
 </B_details>
 <div class="error"><:commandes:info_commande_vide:></div>
 <//B_details>
