@@ -52,8 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'etat' => 'Stav',
-	'explications_notifications_statuts' => 'Oznamy pri zmene stavu',
-	'explications_notifications_statuts_aucune' => 'Žiaden oznam pri zmene stavu',
+	'explications_notifications_statuts' => 'Oznamy pri zmene stavu', # MODIF
+	'explications_notifications_statuts_aucune' => 'Žiaden oznam pri zmene stavu', # MODIF
 
 	// F
 	'facture_date' => 'Dátum: <span>@date@</span>',

@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'abbr_hors_taxe' => 'exc. VAT', # RELIRE
-	'abbr_prix_unitaire' => 'Price', # RELIRE
-	'abbr_quantite' => 'Qty', # RELIRE
-	'abbr_toutes_taxes_comprises' => 'inc. VAT', # RELIRE
+	'abbr_hors_taxe' => 'exc. VAT',
+	'abbr_prix_unitaire' => 'Price',
+	'abbr_quantite' => 'Qty',
+	'abbr_toutes_taxes_comprises' => 'inc. VAT',
 	'action_facture' => 'Invoice',
 	'action_modifier' => 'Modify',
 	'action_supprimer' => 'Delete',
@@ -54,9 +54,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'etat' => 'Status',
 	'explication_accueil_encours' => 'Indicate the active orders on the homepage ?',
 	'explication_choix_statuts_actifs' => 'Status corresponding to active orders',
-	'explication_statuts_actifs' => 'According to their status, some orders may require your attention. They are « active » orders, which need an action on your part. You can display them on the homepage, in the list of the items awaiting evaluation.', # RELIRE
-	'explications_notifications_statuts' => 'Notification in case of status change',
-	'explications_notifications_statuts_aucune' => 'No notification in case of status change',
+	'explication_statuts_actifs' => 'According to their status, some orders may require your attention. They are « active » orders, which need an action on your part. You can display them on the homepage, in the list of the items awaiting evaluation.',
+	'explications_notifications_statuts' => 'Notification in case of status change', # MODIF
+	'explications_notifications_statuts_aucune' => 'No notification in case of status change', # MODIF
 
 	// F
 	'facture_date' => 'Date: <span>@date@</span>',
@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_objets' => 'Objects',
 	'label_passee_le' => 'Ordered on',
 	'label_payee_le' => 'paid on the',
-	'label_prix_unitaire' => 'Price', # RELIRE
+	'label_prix_unitaire' => 'Price',
 	'label_quantite' => 'Quantity',
 	'label_recherche' => 'Search',
 	'label_statuts_actifs' => 'Status',
@@ -189,6 +189,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_informations_client' => 'Client',
 	'titre_logo_commande' => 'Logo',
 	'titre_statuts_actifs_parametres' => 'Active orders',
+	'type_adresse_facturation' => 'Invoice',
+	'type_adresse_livraison' => 'Delivery',
 
 	// U
 	'une_commande_de' => 'An order of: ',

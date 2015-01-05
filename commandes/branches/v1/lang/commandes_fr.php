@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_accueil_encours' => 'Signaler les commandes actives sur la page d’accueil ?',
 	'explication_choix_statuts_actifs' => 'Statut(s) correspondant(s) aux commandes actives',
 	'explication_statuts_actifs' => 'Selon leur statut, certaines commandes peuvent requérir votre attention. Il s’agit des commandes « actives », nécessitant une action de votre part. Vous pouvez les faire apparaître dans la liste des éléments en attente de validation sur la page d’accueil.',
-	'explications_notifications_statuts' => 'État(s) déclenchant l\'envoi d\'une notification :',
+	'explications_notifications_statuts' => 'État(s) déclenchant l’envoi d’une notification :',
 	'explications_notifications_statuts_aucune' => 'Les notifications sont désactivées',
 
 	// F
@@ -107,7 +107,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_objets' => 'Objets',
 	'label_passee_le' => 'passée le',
 	'label_payee_le' => 'payée le',
-	'label_prix_unitaire' => 'Prix unitaire',
+	'label_prix_unitaire' => 'Prix unitaire HT',
+	'label_prix' => 'Prix',
+	'label_montant_ttc' => 'Montant TTC',
 	'label_quantite' => 'Quantité',
 	'label_recherche' => 'Rechercher',
 	'label_statuts_actifs' => 'Statuts',
