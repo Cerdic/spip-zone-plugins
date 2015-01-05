@@ -25,6 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_facture' => 'Date facture',
 	'date_payement' => 'Date payement',
 	'delais_validite' => 'Délais de validité',
+	'duree_validite' => "Durée de validité",
+	'duree_realisation' => "Délais de réalisation",
 
 	// E
 	'editer_facturation_titre' => 'Editer une facture',
