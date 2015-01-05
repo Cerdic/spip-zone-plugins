@@ -5,7 +5,27 @@ include_spip('inc/config');
 include_spip('configurer/pipelines');
 include_spip('contact_fonctions');
 
-function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
+/**
+ * Chargement du formulaire de contact
+ * 
+ * @param $id_auteur string|array
+ * 		Le ou les id_auteur transmis au formulaire (Voir la configuration du plugin)
+ * @param $tracer string
+ * 		cf : http://contrib.spip.net/Le-formulaire-de-contact-evolue#tracabilite
+ * @param $options array
+ * 		Un tableau d'options permettant de surcharger certaines options de configuration?
+ * 		Pour l'instant ne concerne que le type de choix de destinataires dont la valeur peut être :
+ * 			- tous
+ * 			- tous_et
+ * 			- tous_ou
+ * 			- un
+ * 			- un_et
+ * 			- un_ou
+ * 			- plusieurs
+ * 			- plusieurs_et
+ * 			- plusieurs_ou
+ */
+function formulaires_contact_charger_dist($id_auteur='',$tracer='',$options=array()){
 	$valeurs = array();
 
 	$valeurs['destinataire'] = array();
@@ -17,7 +37,7 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 
 	// tableau des type_choix necessitant la prise en compte de $id_auteur
 	$t_c = array('tous_et', 'tous_ou', 'un_et', 'un_ou', 'plusieurs_et', 'plusieurs_ou');
-	$valeurs['type_choix'] = $type_choix = lire_config('contact/type_choix');
+	$valeurs['type_choix'] = $type_choix = (isset($options['type_choix'])) ? $options['type_choix'] : lire_config('contact/type_choix');
 	if( in_array($type_choix,$t_c) ){
 		if(!is_array($id_auteur)){
 			$id_auteur = explode(',',$id_auteur);
@@ -103,7 +123,27 @@ function formulaires_contact_charger_dist($id_auteur='',$tracer=''){
 	return $valeurs;
 }
 
-function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
+/**
+ * Vérification du formulaire de contact
+ * 
+ * @param $id_auteur string|array
+ * 		Le ou les id_auteur transmis au formulaire (Voir la configuration du plugin)
+ * @param $tracer string
+ * 		cf : http://contrib.spip.net/Le-formulaire-de-contact-evolue#tracabilite
+ * @param $options array
+ * 		Un tableau d'options permettant de surcharger certaines options de configuration?
+ * 		Pour l'instant ne concerne que le type de choix de destinataires dont la valeur peut être :
+ * 			- tous
+ * 			- tous_et
+ * 			- tous_ou
+ * 			- un
+ * 			- un_et
+ * 			- un_ou
+ * 			- plusieurs
+ * 			- plusieurs_et
+ * 			- plusieurs_ou
+ */
+function formulaires_contact_verifier_dist($id_auteur='',$tracer='',$options=array()){
 	$erreurs = array();
 	include_spip('inc/filtres');
 	include_spip('inc/documents');
@@ -225,7 +265,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	return $erreurs;
 }
 
-function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
+function formulaires_contact_traiter_dist($id_auteur='',$tracer='',$options=array()){
 
 	include_spip('base/abstract_sql');
 	include_spip('inc/texte');
@@ -274,8 +314,7 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		}else{
 			$inforigine= 'info trace non comprise';
 		}
-			$inforigine= _T('contact:inforigine')."\n".$inforigine."\n\n";
-
+		$inforigine= _T('contact:inforigine')."\n".$inforigine."\n\n";
 	}
 
 	// horodatons
