@@ -22,7 +22,7 @@
 		|form_hidden)]
 		<B_titre>
 		<div class="form-group">
-		<label for="champ_titre"><:projets_site:label_titre:></label>
+		<label for="champ_titre"><:projets_site:titre_label:></label>
 		<select name="titre" id="champ_titre" class="form-control">
 			<option value=""></option>
 			<BOUCLE_titre (DATA) {source table, #GET{titre}} {par valeur}>
@@ -32,7 +32,7 @@
 		</B_titre>
 		<B_type_site>
 		<div class="form-group">
-		<label for="champ_type_site"><:projets_site:label_type_site:></label>
+		<label for="champ_type_site"><:projets_site:type_site_label:></label>
 		<select name="type_site" id="champ_type_site" class="form-control">
 			<option value=""></option>
 			<BOUCLE_type_site (DATA) {source table, #GET{type_site}} {par valeur}>
@@ -42,7 +42,7 @@
 		</B_type_site>
 		<B_logiciel_nom>
 		<div class="form-group">
-		<label for="champ_logiciel_nom"><:projets_site:label_logiciel_nom:></label>
+		<label for="champ_logiciel_nom"><:projets_site:logiciel_nom_label:></label>
 		<select name="logiciel_nom" id="champ_logiciel_nom" class="form-control">
 			<option value=""></option>
 			<BOUCLE_logiciel_nom (DATA) {source table, #GET{logiciel_nom}} {par valeur}>
@@ -52,7 +52,7 @@
 		</B_logiciel_nom>
 		<B_logiciel_version>
 		<div class="form-group">
-		<label for="champ_logiciel_version"><:projets_site:label_logiciel_version:></label>
+		<label for="champ_logiciel_version"><:projets_site:logiciel_version_label:></label>
 		<select name="logiciel_version" id="champ_logiciel_version" class="form-control">
 			<option value=""></option>
 			<BOUCLE_logiciel_version (DATA) {source table, #GET{logiciel_version}} {par valeur}>
@@ -62,7 +62,7 @@
 		</B_logiciel_version>
 		<B_fo_url>
 		<div class="form-group">
-		<label for="champ_fo_url"><:projets_site:label_fo_url:></label>
+		<label for="champ_fo_url"><:projets_site:fo_url_label:></label>
 		<select name="fo_url" id="champ_fo_url" class="form-control">
 			<option value=""></option>
 			<BOUCLE_fo_url (DATA) {source table, #GET{fo_url}} {par valeur}>
@@ -72,7 +72,7 @@
 		</B_fo_url>
 		<B_id_projets_site>
 		<div class="form-group">
-		<label for="champ_id_projets_site"><:projets_site:label_id_projets_site:></label>
+		<label for="champ_id_projets_site"><:projets_site:id_projets_site_label:></label>
 		<input type="text" name="id_projets_site" list="list_id_projets_site" id="champ_id_projets_site" class="form-control"value="[(#ENV{id_projets_site,''})]" />
 		<datalist id="list_id_projets_site">
 			<BOUCLE_id_projets_site (DATA) {source table, #GET{id_projets_site}} {par valeur}>
