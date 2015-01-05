@@ -27,6 +27,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function commandes_lister_statuts($statut=false){
 
 	// retourne les statuts déclarés dans declarer_tables_objets_sql
+	if (!function_exists('objet_info'))
+		include_spip('inc/filtres');
 	$statuts =  array_map('_T',objet_info('commande','statut_textes_instituer'));
 
 	if ($statut and $nom = $statuts[$statut])
