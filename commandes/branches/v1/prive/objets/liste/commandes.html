@@ -13,7 +13,7 @@
 <div class='nettoyeur'></div>
 #ANCRE_PAGINATION
 [(#ENV{titre_dehors}|oui)[<h2>(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{commande}})</h2>]]
-<div class="liste-objets commandes">
+<div class="liste-objets liste-commandes">
 	[(#ENV{cacher_tri}|non)
 	<div class='pagination tri'>
 		[(#TRI{'>',#CHEMIN_IMAGE{tri-asc-16.png}|balise_img{<:par_tri_croissant:>}})][
