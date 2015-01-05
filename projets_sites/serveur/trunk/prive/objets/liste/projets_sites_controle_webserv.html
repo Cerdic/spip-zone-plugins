@@ -1,5 +1,8 @@
 [(#SET{defaut_tri,#ARRAY{
 	titre,1,
+	webservice,1,
+	fo_url,1,
+	bo_url,1,
 	type_site,1,
 	date_creation,-1,
 	id_projets_site,1,
@@ -12,8 +15,10 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='picto' scope='col'></th>
-			<th class='titre' scope='col'><:projets_site:titre_label:></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:projets_site:titre_label:>,ajax})]</th>
 			<th class='webservice' scope='col'>[(#TRI{webservice,<:projets_site:webservice_label:>,ajax})]</th>
+			<th class='fo_url' scope='col'>[(#TRI{fo_url,<:projets_site:fo_url_label:>,ajax})]</th>
+			<th class='bo_url' scope='col'>[(#TRI{bo_url,<:projets_site:bo_url_label:>,ajax})]</th>
 			<th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:type_site_label:>,ajax})]</th>
 			<th class='date' scope='col'>[(#TRI{date_creation,<:date:>,ajax})]</th>
 			<th class='id' scope='col'>[(#TRI{id_projets_site,<:info_numero_abbreviation:>,ajax})]</th>
@@ -24,13 +29,21 @@
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projets_site-16.png}|balise_img)]</td>
 			<td class='titre'>[(#LOGO_PROJETS_SITE|image_reduire{12,12})]<a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]">#TITRE</a></td>
-			<td class='webservice'>[(#WEBSERVICE|?{
-			<a href="[(#WEBSERVICE)]">[(#WEBSERVICE)]</a>,
+			<td class='webservice secondaire'>[(#WEBSERVICE|?{
+			<a href="[(#WEBSERVICE)]" title="[(#WEBSERVICE)]">[(#WEBSERVICE|replace{'\.','.<wbr/>'})]</a>,
 			-
 			})]</td>
-			<td class='type_site principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ][(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)]</a></td>
+			<td class='fo_url secondaire'>[(#FO_URL|?{
+			<a href="[(#FO_URL)]" title="[(#FO_URL)]">[(#FO_URL|replace{'\.','.<wbr/>'})]</a>,
+			-
+			})]</td>
+			<td class='bo_url secondaire'>[(#BO_URL|?{
+			<a href="[(#BO_URL)]" title="[(#BO_URL)]">[(#BO_URL|replace{'\.','.<wbr/>'})]</a>,
+			-
+			})]</td>
+			<td class='type_site secondaire'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ][(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)]</a></td>
 			<td class='date secondaire'>[(#DATE_CREATION|affdate{d/m/Y})]</td>
-			<td class='id'>[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|?{
+			<td class='id secondaire'>[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|?{
 				<a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE})]">#ID_PROJETS_SITE</a>,
 				#ID_PROJETS_SITE
 			})]</td>
