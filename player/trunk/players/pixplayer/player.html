@@ -1,13 +1,1 @@
-#SET{url,#ENV{url_document,''}}
-<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>#SET{url,#URL_DOCUMENT}</BOUCLE_doc>[
-
-<!--(#REM) Pour voir les options de configuration : http://wpaudioplayer.com/standalone/ -->
-
-][<dt class='spip_doc_titre player #ENV{player}'[ style='width:(#ENV{my_width,290})px;height:24px']>
-<p id="audioplayer_[(#ID_DOCUMENT|sinon{#GET{url}|md5|substr{0,8}})][_(#ID_DOCUMENT|pixplayer_id)]"><span><a href='(#GET{url})' title='[(#TITRE|attribut_html)]'>#GET{url}</a></span></p>
-]<span style="display: none"><script type="text/javascript">/*<![CDATA[*/
-if(typeof(AudioPlayer) == "undefined"){AudioPlayer = function(){};
-jQuery.getScript("[(#CHEMIN{players/pixplayer/audio-player.js})]",function(){
-	AudioPlayer.setup("[(#CHEMIN{players/pixplayer/player.swf})]", {width: #ENV{my_width,290}});
-	jQuery(function(){jQuery('dt.pixplayer').find('p').each(function(){AudioPlayer.embed($(this).attr('id'), {soundFile: $('a',this).attr('href'),titles: $('a',this).attr('title')});});});
-});}/*]]>*/</script></span></dt>
+<INCLURE{fond=players/mejs/player,env,skin=pixplayer,largeur=290,features=#LISTE{'volume', 'current', 'progress', 'duration', 'playpause'}} />
