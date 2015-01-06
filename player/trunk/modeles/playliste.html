@@ -37,7 +37,16 @@
 					#SET{titre,#TITRE|sinon{#FICHIER|player_joli_titre|couper{30}}}
 					<li class="item short track"
 						data-url="[(#FICHIER|attribut_html)]"
-						title="[(#GET{titre}|attribut_html)]"><span class="entry-title">[(#TITRE|sinon{[(#FICHIER|player_joli_titre|couper{30})]})]</span><span class="sep"> - </span><small>([(#EXTENSION)][ - (#TAILLE|taille_en_octets)])</small></li>
+						title="[(#GET{titre}|attribut_html)]">
+						<article class="entry document spip_doc[ (#EXTENSION|attribut_html)]">
+							<strong class="h3-like entry-title">[(#TITRE|sinon{#FICHIER|basename|couper{80}})]</strong>
+							<a href="#URL_DOCUMENT" rel="download" class="download" type="#MIME_TYPE" title="<:bouton_telecharger:> [(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]" ><:bouton_telecharger:></a>
+							<p class="publication">[<time pubdate="pubdate" datetime="[(#DATE|date_iso)]"><i class="icon-calendar"></i> (#DATE|affdate_jourcourt)</time>]
+							<span class="type"><span class="sep"> - </span>[(#TYPE_DOCUMENT)]</span><span class="poids"><span class="sep"> - </span>[(#TAILLE|taille_en_octets)]</span>
+							</p>
+							[<div class="#EDIT{descriptif} introduction entry-content">(#DESCRIPTIF)</div>]
+						</article>
+					</li>
 				</BOUCLE_doc>
 				</ul>
 			</dd>

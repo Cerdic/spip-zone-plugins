@@ -56,11 +56,20 @@ dd.mejs-playlist {
 	position: relative;
 	padding-left: 26px;
 }
+.mejs-playlist .track .entry {
+	display: block;padding-left: 34px;
+}
+.mejs-playlist .track .publication {display: none}
+.mejs-playlist .track .entry-content {display: block;margin-bottom: 0}
+.mejs-playlist .track .entry-content :last-child {margin-bottom: 0}
+
 .mejs-playlist .track:hover {
   background: #eee;
 }
 .mejs-playlist .track.current {
 	background: #fff;
+}
+.mejs-playlist .track.current .entry-title {
   font-weight: bold;
 }
 .track .mejs-button {
