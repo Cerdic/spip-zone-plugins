@@ -37,6 +37,11 @@ var mejsplugins={};
 					if (run) {
 						new MediaElementPlayer('#'+id,jQuery.extend(options,{
 							"success": function(media) {
+								jQuery(media).closest('.mejs-inner').addClass('paused');
+								media.addEventListener('play',function() {jQuery(media).closest('.mejs-inner').removeClass('paused').addClass('playing');}, false);
+								media.addEventListener('playing',function() {jQuery(media).closest('.mejs-inner').removeClass('paused').addClass('playing');}, false);
+								media.addEventListener('pause',function() {jQuery(media).closest('.mejs-inner').removeClass('playing').addClass('paused');}, false);
+								media.addEventListener('paused',function() {jQuery(media).closest('.mejs-inner').removeClass('playing').addClass('paused');}, false);
 								if (autoplay) media.play();
 							}
 						}));
