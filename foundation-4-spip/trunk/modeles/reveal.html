@@ -1,0 +1,24 @@
+[(#REM)
+ Modèle pour créer facilement des boites modale Reveal (http://foundation.zurb.com/docs/components/reveal.html)
+
+ Paramètre:
+
+ page = la page à appeler.
+ zajax = l'id var_zajax
+ titre = le titre du lien
+ class = la class du lien
+ ajax = si on passe ajax à non, on peux utiliser content
+ content = contenu de la reveal
+]
+<a [href="(#URL_PAGE{#ENV{page}}|parametre_url{var_zajax,#ENV{zajax, content}})"]
+   [class="(#ENV{class})"]
+   data-reveal-id="reveal-#ENV{page}"
+   [(#ENV{ajax, oui}|oui)data-reveal-ajax="true"]>
+  #ENV{titre}
+</a>
+
+<div id="reveal-#ENV{page}" class="reveal-modal" data-reveal>
+  [(#ENV{ajax}|non)
+  #ENV{content}
+  ]
+</div>
