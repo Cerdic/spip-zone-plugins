@@ -29,13 +29,14 @@ function inc_ics_to_array($u) {
 			if (isset($v->$champ)
 			  AND $w = &$v->$champ
 			  AND $date = $table_valeur($w, "value")) {
-				$w['str'] = sprintf('%04d-%02d-%02d %02d:%02d:%02d',
+				$w['str'] = date('Y-m-d H:i:s', strtotime(sprintf("%04d-%02d-%02dT%02d:%02d:%02d%s",
 					$date['year'],
 					$date['month'],
 					$date['day'],
 					$date['hour'],
 					$date['min'],
-					$date['sec']
+					$date['sec'],
+					$date['tz']))
 				);
 			}
 		}
