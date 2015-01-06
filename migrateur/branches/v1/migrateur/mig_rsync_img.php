@@ -2,12 +2,30 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 /**
  * Synchroniser le répertoire IMG de destination avec la source
 **/
 function migrateur_mig_rsync_img() {
-	$source     = MIGRATEUR_SOURCE_DIR  . 'IMG/';
-	$dest       = MIGRATEUR_DESTINATION_DIR . 'IMG';
-	exec("rsync -a --delete --stats $source $dest", $output, $err);
-	migrateur_log(implode("\n", $output));
+	$source = migrateur_source();
+	$dest   = migrateur_destination();
+
+	$dir_source = $source->dir  . 'IMG/';
+	$dir_dest   = $dest->dir . 'IMG';
+
+	$cmd = $dest->commande('rsync');
+	if ($cmd) {
+		$cmd = "$cmd -a --delete --stats";
+
+		// source et destination sur serveurs différents
+		if ($ssh = $source->ssh) {
+			$dir_source = $source->ssh->obtenir_rysnc_parametres() . $dir_source;
+		}
+
+		$cmd = "$cmd $dir_source $dir_dest 2>&1";
+		#migrateur_log($cmd);
+		exec($cmd, $output, $err);
+		migrateur_log(implode("\n", $output));
+
+	}
 }

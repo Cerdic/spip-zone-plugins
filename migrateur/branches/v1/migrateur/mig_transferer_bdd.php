@@ -97,39 +97,16 @@ function migrateur_supprimer_toutes_tables_sql() {
 /**
  * Copier le contenu de l'ancienne bdd dans la nouvelle (qui doit être au préalable vidée)
 **/
-function migrateur_copier_la_bdd() {
+function migrateur_copier_la_bdd($source_sql = '') {
 
-	$dest       = MIGRATEUR_DESTINATION_DIR . 'tmp/dump/';
-	$source_sql = MIGRATEUR_NOM_EXPORT_SQL;
-
-	$user = MIGRATEUR_DESTINATION_SQL_USER;
-	$pass = MIGRATEUR_DESTINATION_SQL_PASS;
-	$bdd  = MIGRATEUR_DESTINATION_SQL_BDD;
-
+	$dest = migrateur_destination();
+	$sauvegarde = $dest->dir . 'tmp/dump/' . ($source_sql ? $source_sql : MIGRATEUR_NOM_EXPORT_SQL);
 
 	migrateur_log("Copie de la BDD par MySQL");
-	//$mysql_cmd = "mysql --user=$user --password=$pass --default_character_set=utf8 $bdd < $dest$source_sql";
-	$mysql_cmd = "mysql --user=$user --password=$pass $bdd < $dest$source_sql";
+	//$mysql_cmd = "mysql --user={$dest->sql->user} --password={$dest->sql->pass} --default_character_set=utf8 {$dest->sql->bdd} < $sauvegarde";
+	$mysql_cmd = "mysql --user={$dest->sql->user} --password={$dest->sql->pass} {$dest->sql->bdd} < $sauvegarde";
 
 	exec($mysql_cmd);
 }
 
 
-
-/*
- * Vieux tests ou tentatives
- *
-
-	# migrateur_log("Passer_webmestre");
-	// on tente de passer webmestre
-	#sql_alter("TABLE spip_auteurs ADD COLUMN webmestre varchar(3) DEFAULT 'non' NOT NULL AFTER statut");
-	#migration_concurrences_webmestre();
-
-
-	// Connecter l'auteur en cours
-	migrateur_log("Reconnecter l'auteur en cours : " . $GLOBALS['visiteur_session']['id_auteur']);
-	include_spip('inc/auth');
-	$auteur = $GLOBALS['visiteur_session'];
-	auth_loger($auteur);
-
-*/

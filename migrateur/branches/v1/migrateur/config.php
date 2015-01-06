@@ -24,21 +24,29 @@ $GLOBALS['MIGRATEUR_ETAPES'] = array(
 );
 */
 
-// Configuration
-// -------------
 
-// origine
-define('MIGRATEUR_SOURCE_DIR', '/sites/mon_domaine.net/html/');
+// Configuration
+// =============
+
+// Origine
+// -------
+define('MIGRATEUR_SOURCE_DIR', '/sites/mon_domaine.fr/html/');
 
 // SQL source
 define('MIGRATEUR_SOURCE_SQL_USER', 'user_prod');
 define('MIGRATEUR_SOURCE_SQL_PASS', '*******');
-define('MIGRATEUR_SOURCE_SQL_BDD', 'dn_prod');
+define('MIGRATEUR_SOURCE_SQL_BDD', 'db_prod');
+
+// Source via SSH (serveur source ailleurs que serveur dev, accès par clé SSH)
+# define('MIGRATEUR_SOURCE_SSH_SERVER', 'dev.domain.tld');
+# define('MIGRATEUR_SOURCE_SSH_USER',   'username_ssh');
+# define('MIGRATEUR_SOURCE_SSH_PORT',   22);
 
 
 
-// destination
-define('MIGRATEUR_DESTINATION_DIR', '/sites/mon_domaine.net/sd/dev/html/');
+// Destination
+// -----------
+define('MIGRATEUR_DESTINATION_DIR', '/sites/mon_domaine.fr/sd/dev/html/');
 
 // SQL destination
 define('MIGRATEUR_DESTINATION_SQL_USER', 'user_dev');
