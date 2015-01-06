@@ -9,7 +9,7 @@
 			 [(#GET{async}|oui) <button onclick="jQuery(this).parent().trigger('click');">Play</button>]
 	     [(#GET{async}|non) [(#ENV*{data/html}|sinon{#ENV{url}})] ]
 	</div>
-	<style>.oe-video .loading {background-image:url("#CHEMIN_IMAGE{searching.gif}")!important;background-size:auto !important;}</style>
+	<style><!--/**/.oe-video .loading {background-image:url("#CHEMIN_IMAGE{searching.gif}")!important;background-size:auto !important;}/**/--></style>
 </div>
 [<div class="spip_doc_titre" style="max-width:#ENV{data/width}px;"><a href="#ENV*{url}">(#ENV*{data/title})</a>[
 <br /><i>par <a href="#ENV*{data/author_url}">(#ENV*{data/author_name})</a></i>]</div>]
