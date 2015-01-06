@@ -35,6 +35,8 @@ function dossiers_taille ($racine = _DIR_RACINE)
         include_spip('exec/admin_vider');
     } elseif ($spip_version == 3.0) {
         include_spip('action/calculer_taille_cache');
+    } elseif ($spip_version == 3.1) {
+        include_spip('action/calculer_taille_cache');
     }
     return calculer_taille_dossier($racine);
 }

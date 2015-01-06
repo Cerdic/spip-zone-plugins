@@ -51,6 +51,10 @@ Valeurs par defaut :
 .lister_dossiers #contenu .liste.dossiers > ul > li > .repertoire {
     font-weight: bold;
 }
+.lister_dossiers #contenu .liste.dossiers > ul > li .repertoire.vide {
+    font-style: italic;
+    color: [#(#GET{foncee}|replace{"#",""}|couleur_eclaircir{0.25})];
+}
 .lister_dossiers #contenu .liste.dossiers > ul > li ul li {
     margin-bottom: 0.15em;
 }
