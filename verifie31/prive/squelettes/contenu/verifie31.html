@@ -21,10 +21,21 @@
            
            si besoin, ecrire un vrai filtre pour tester les bornes
      ]
-     [(#PLUGIN{#CLE,compatibilite}|match{;3.1}|oui) <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
-     [(#PLUGIN{#CLE,compatibilite}|match{;3.1}|non) <span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
+     [(#PLUGIN{#CLE,compatibilite}|match{3.1}|oui) <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
+     [(#PLUGIN{#CLE,compatibilite}|match{3.1}|non) <span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
            #SET{incompatible,#GET{incompatible}|plus{1}}
      ]
+     
+    
+     <BOUCLE_plugins_current(PLUGINS){prefixe=#PLUGIN{#CLE,prefix}}{si #PLUGIN{#CLE,compatibilite}|match{3.1}|non}>
+     
+     [(#BRANCHES_SPIP|strpos{3.1}|>{-1}|oui)                
+            <p style="margin-top:1em;">
+              <:verifie31:plugin_compat31_maj:>
+              <a href="#URL_ECRIRE{admin_plugin}"><:verifie31:plugin_compat31_maj_gestion:></a>
+            </p>
+     ]
+     </BOUCLE_plugins_current>
   </td>
 </tr>
 </BOUCLE_plugins_actifs>
@@ -34,3 +45,4 @@
 
 
 <p><:verifie31:bilan{total=#GET{total_plugin},total_notok=#GET{incompatible}}:></p>
+
