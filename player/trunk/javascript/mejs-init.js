@@ -1,5 +1,6 @@
 var mejsloader;
 var mejsplugins={};
+var mejscss={};
 (function(){
 	var mejs_counter = 0;
 	function mejs_init(){
@@ -13,8 +14,20 @@ var mejsplugins={};
 				jQuery(this).attr('id',id);
 				var options = jQuery.parseJSON(jQuery(this).attr('data-mejsoptions'));
 				var plugins = jQuery.parseJSON(jQuery(this).attr('data-mejsplugins'));
+				var css = jQuery.parseJSON(jQuery(this).attr('data-mejscss'));
 				function runthisplayer(){
 					var run = true;
+					//console.log(css);
+					for(var c in css){
+						if (typeof mejscss[css[c]]=="undefined"){
+							mejscss[css[c]] = true;
+							var stylesheet = document.createElement('link');
+							stylesheet.href = css[c];
+							stylesheet.rel = 'stylesheet';
+							stylesheet.type = 'text/css';
+							document.getElementsByTagName('head')[0].appendChild(stylesheet);
+						}
+					}
 					for(var p in plugins){
 						//console.log(p);
 						//console.log(mejsplugins[p]);
@@ -37,11 +50,14 @@ var mejsplugins={};
 					if (run) {
 						new MediaElementPlayer('#'+id,jQuery.extend(options,{
 							"success": function(media) {
-								jQuery(media).closest('.mejs-inner').addClass('paused');
-								media.addEventListener('play',function() {jQuery(media).closest('.mejs-inner').removeClass('paused').addClass('playing');}, false);
-								media.addEventListener('playing',function() {jQuery(media).closest('.mejs-inner').removeClass('paused').addClass('playing');}, false);
-								media.addEventListener('pause',function() {jQuery(media).closest('.mejs-inner').removeClass('playing').addClass('paused');}, false);
-								media.addEventListener('paused',function() {jQuery(media).closest('.mejs-inner').removeClass('playing').addClass('paused');}, false);
+								function togglePlayingState(){
+									jQuery(media).closest('.mejs-inner').removeClass(media.paused?'playing':'paused').addClass(media.paused?'paused':'playing');
+								}
+								togglePlayingState();
+								media.addEventListener('play',togglePlayingState, false);
+								media.addEventListener('playing',togglePlayingState, false);
+								media.addEventListener('pause',togglePlayingState, false);
+								media.addEventListener('paused',togglePlayingState, false);
 								if (autoplay) media.play();
 							}
 						}));
