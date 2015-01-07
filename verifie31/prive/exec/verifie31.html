@@ -1,0 +1,36 @@
+
+<h1><:verifie31:liste_plugins:></h1>
+
+#SET{incompatible,0}
+#SET{total_plugin,0}
+
+<B_plugins_actifs><table class="spip">
+<tr>
+  <th><:verifie31:plugin_nom:></th>
+  <th><:verifie31:plugin_borne:></th>
+  <th><:verifie31:plugin_compat31:></th>
+</tr>
+
+<BOUCLE_plugins_actifs(DATA){source plugins}>
+<tr>
+  <td>[(#PLUGIN{#CLE,nom})]</td>
+  <td>[(#PLUGIN{#CLE,compatibilite})]</td>
+  <td>
+     [(#REM)
+           la verification est sommaire avec une regex sur les bornes
+           
+           si besoin, ecrire un vrai filtre pour tester les bornes
+     ]
+     [(#PLUGIN{#CLE,compatibilite}|match{;3.1}|oui) <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
+     [(#PLUGIN{#CLE,compatibilite}|match{;3.1}|non) <span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
+           #SET{incompatible,#GET{incompatible}|plus{1}}
+     ]
+  </td>
+</tr>
+</BOUCLE_plugins_actifs>
+</table>
+#SET{total_plugin,#TOTAL_BOUCLE}
+</B_plugins_actifs>
+
+
+<p><:verifie31:bilan{total=#GET{total_plugin},total_notok=#GET{incompatible}}:></p>
