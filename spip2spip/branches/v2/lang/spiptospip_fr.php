@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
 'install_spip2spip_2' => 'Ajout des flux backends',
 'install_spip2spip_groupe_mot' => 'Cr&eacute;ation du groupe de mots cl&eacute;s - spip2spip -',
-'install_spip2spip_4' => 'groupe spip2spip pour d&eacute;signer les articles et rubriques a synchroniser.',
+'install_spip2spip_4' => 'groupe spip2spip pour d&eacute;signer les articles et rubriques à synchroniser.',
 'install_spip2spip_5' => '{{mode d&#039;emploi:}}
 -* attribuez les mots cl&eacute;s de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
 -* attribuez les mots cl&eacute;s de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip sur cette th&eacute;matique',
