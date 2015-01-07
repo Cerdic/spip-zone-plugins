@@ -91,7 +91,8 @@ function balise_BOUTONS_ADMIN_MAGNET_dist($p) {
  * @return mixed
  */
 function magnet_pre_boucle(&$boucle){
-	if (!isset($boucle->modificateur['ignore_magnet'])){
+	if (!isset($boucle->modificateur['ignore_magnet'])
+	  AND (!test_espace_prive() OR isset($boucle->modificateur['criteres']['magnet']) OR isset($boucle->modificateur['criteres']['magnet_pile']))){
 		if ($boucle->type_requete=='articles'){
 			$pile = (isset($boucle->modificateur['magnet_pile'])?$boucle->modificateur['magnet_pile']:'');
 			$meta_magnet = "magnet_" .($pile?$pile."_":""). $boucle->type_requete;
