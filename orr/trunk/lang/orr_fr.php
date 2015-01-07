@@ -113,6 +113,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'retirer_lien_orr_ressource' => 'Retirer cette ressource',
 	'retirer_tous_liens_orr_ressources' => 'Retirer toutes les ressources',
 	'reservation_enregistree' => 'La réservation est enregistrée',
+    'ressources' => 'Ressources',
     'ressource_obligatoire' => 'Il faut sélectionner au moins une ressource !',
     'ressource_active' => 'La ressource sélectionnée :',
     'reserver' => 'Réserver',
