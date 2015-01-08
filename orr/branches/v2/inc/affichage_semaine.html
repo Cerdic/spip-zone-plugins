@@ -12,7 +12,7 @@
 	<table id="tableau_semaine">
 		<caption>[(#GET{jeudi}|affdate_mois_annee|ucfirst)]</caption>
 		<thead>
-			<th>Ressources</th>
+			<th><:orr:ressources:></th>
 			<BOUCLE_tete(DATA){liste lundi,mardi,mercredi,jeudi,vendredi,samedi,dimanche}>
 				<th[ (#VALEUR|=={jeudi}|oui) id="jour4th"]>[(#GET{jourj}|orr_joursemaine{#VALEUR,nom})] [(#GET{jourj}|orr_joursemaine{#VALEUR,jour})]</th>
 			</BOUCLE_tete>

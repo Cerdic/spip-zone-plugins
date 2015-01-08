@@ -15,7 +15,7 @@
 				#ID_ORR_RESSOURCE,
 				[(#GET{recup_ressource}|=={#ID_ORR_RESSOURCE}|oui)#ENV{id_reservation}]
 		}|?{
-			disabled="disabled" style="color: red;"
+			disabled="disabled" class="desactive"
 			,
 			[(#ID_ORR_RESSOURCE|=={#GET{recup_ressource}}|oui) selected="selected"]
 		})]
