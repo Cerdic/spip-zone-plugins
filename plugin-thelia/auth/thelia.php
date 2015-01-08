@@ -130,8 +130,11 @@ spip_log("thelia0");
 */
 function creer_auteur_thelia($auteur) {
 
+    if (empty($auteur))
+        return array();
+
 	//Empecher un doublon
-	if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['login']) . " AND source='thelia'")) {
+	if (isset($auteur['login']) && $result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['login']) . " AND source='thelia'")) {
 	      spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien",'theliaob');
 	      return $result;
 	}
@@ -142,7 +145,7 @@ function creer_auteur_thelia($auteur) {
 	ob_end_clean();	
 
 	//Empecher un doublon
-	if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['client']->email) . " AND source='thelia'")) {
+	if (isset($auteur['client']) &&  $result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['client']->email) . " AND source='thelia'")) {
 	      spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien",'theliaob');
 	      return $result;
 	}
