@@ -3,46 +3,38 @@
 
 #SET{incompatible,0}
 #SET{total_plugin,0}
-
-<B_plugins_actifs><table class="spip">
+#SET{vspip,3.1.0}
+<B_plugins_current> 
+<table class="spip">
 <tr>
   <th><:verifie31:plugin_nom:></th>
   <th><:verifie31:plugin_borne:></th>
   <th><:verifie31:plugin_compat31:></th>
 </tr>
-
-<BOUCLE_plugins_actifs(DATA){source plugins}>
+<BOUCLE_plugins_current(PAQUETS plugins){tout}{par multi nom, paquets.prefixe}{!par constante, actif}{id_depot=0}{constante !=_DIR_PLUGINS_DIST}{actif=oui}>
 <tr>
-  <td>[(#PLUGIN{#CLE,nom})]</td>
-  <td>[(#PLUGIN{#CLE,compatibilite})]</td>
+  <td>#NOM</td>
+  <td>#COMPATIBILITE_SPIP</td>
   <td>
-     [(#REM)
-           la verification est sommaire avec une regex sur les bornes
-           
-           si besoin, ecrire un vrai filtre pour tester les bornes
-     ]
-     [(#PLUGIN{#CLE,compatibilite}|match{3.1|3.\*}|oui) <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
-     [(#PLUGIN{#CLE,compatibilite}|match{3.1|3.\*}|non) <span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
-           #SET{incompatible,#GET{incompatible}|plus{1}}
-     ]
-     
-    
-     <BOUCLE_plugins_current(PLUGINS){prefixe=#PLUGIN{#CLE,prefix}}{si #PLUGIN{#CLE,compatibilite}|match{3.1|3.\*}|non}>
-     
-     [(#BRANCHES_SPIP|strpos{3.1}|>{-1}|oui)                
-            <p style="margin-top:1em;">
+      [(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui)  <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
+      [(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non)  
+          <span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
+          #SET{incompatible,#GET{incompatible}|plus{1}}
+      ]
+      
+      [(#REM) si pas compatible, on regarde si le plugin du depot l'est]
+      <BOUCLE_plugins_current_item(PLUGINS){prefixe}{si #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|non}>
+      [(#COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}|oui) 
+      <p style="margin-top:1em;">
               <:verifie31:plugin_compat31_maj:>
               <a href="#URL_ECRIRE{admin_plugin}"><:verifie31:plugin_compat31_maj_gestion:></a>
-            </p>
-     ]
-     </BOUCLE_plugins_current>
+      </p>]
+      </BOUCLE_plugins_current_item>
   </td>
-</tr>
-</BOUCLE_plugins_actifs>
+</tr> 
+</BOUCLE_plugins_current>
 </table>
 #SET{total_plugin,#TOTAL_BOUCLE}
-</B_plugins_actifs>
-
+</B_plugins_current>
 
 <p><:verifie31:bilan{total=#GET{total_plugin},total_notok=#GET{incompatible}}:></p>
-

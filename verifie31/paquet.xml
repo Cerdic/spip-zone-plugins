@@ -1,8 +1,8 @@
 <paquet
 	prefix="verifie31"
 	categorie="maintenance"
-	version="0.2.1"
-	etat="dev"
+	version="1.0.0"
+	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/verifie31-64.png"
 	documentation="http://contrib.spip.net/4601"
