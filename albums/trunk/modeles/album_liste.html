@@ -2,8 +2,10 @@
 
 	Variante du modèle «album» : vue sous forme de liste.
 
-	Par défaut, l'affichage est volontairement minimaliste : seuls sont affichés les titres ou nom de fichier.
-	Pour afficher des éléments supplémentaires, utiliser les paramètres indiqués ci-dessous.
+	Par défaut, l'affichage est volontairement minimaliste .
+	Les paramètres permettent d'afficher des éléments supplémentaires (titre, descriptif, informations sur les fichiers),
+	de changer la position et le contenu de la légende, de changer la pagination, le tri, etc.
+	Voir la liste complète des paramètres plus bas, et consulter le fichier `albums_options.php` pour voir les constantes de personnalisation.
 
 	Comme on ne peut pas prendre en compte tous les cas de figure avec une seule boucle (pour rétro compatibilité v1),
 	on a recours à 2 squelettes :
@@ -11,11 +13,12 @@
 	- le squelette inclus est le squelette de l'album à proprement parler.
 
 	Utilisation :
-	- Dans un squelette : #MODELE{album_liste, id_album=X}
-	- Dans le texte d'un objet : <albumX|liste>
-	pour rétro compatibilité :
-	- <album|liste|id=1,2,3,N>
-	- <album|liste|id_article=X>
+	- Dans un squelette : #MODELE{album_liste, id_album=X}        docs de l'album n°X
+	                      #MODELE{album_liste, id_article=X}      docs de l'article n°X
+	                      #MODELE{album_liste, id='X,Y,Z,N'}      docs identifiés
+	- Dans un texte     : <albumX|liste>
+	                      <album|liste|id_article=X>
+	                      <album|liste|id=X,Y,Z,N>
 
 ][(#REM)
 
@@ -25,28 +28,38 @@
 ][(#REM)
 
 	Paramètres :
-		id_album          identifiant d'un album.
-		titre             «oui» pour afficher le titre de l'album.
-		                  n'importe quelle chaîne pour un titre personnalisé.
-		                  défaut: ''
-		balise_titre      balise dans laquelle encapsuler le titre, sans les chevrons.
-		                  ex: «h3», «strong»...
-		                  défaut: ''
-		descriptif        «oui» pour afficher le descriptif de l'album.
-		                  défaut: ''
-		metas             liste des infos complémentaires à afficher, séparées par un caractère non alphanumérique (virgule, tiret...)
-		                  extension | taille | dimensions
-		                  «oui» pour tout afficher
+		id_album          Identifiant d'un album.
+		titre             Pour afficher le titre de l'album ou un titre personnalisé
+		                  valeurs : «oui» ou «true» pour le titre de l'album.
+		                            n'importe quelle autre chaîne pour un titre personnalisé.
+		                  défaut  : ''
+		balise_titre      Balise dans laquelle encapsuler le titre, sans les chevrons.
+		                  ex.     : «h3», «strong»...
+		                  défaut  : _ALBUMS_BALISE_TITRE_VIGNETTES > _ALBUMS_BALISE_TITRE > strong
+		descriptif        Pour afficher le descriptif de l'album
+		                  valeurs : n'importe quelle chaîne (oui, true...)
+		                  défaut  : ''
+		metas             Liste des infos complémentaires à afficher, séparées par un caractère non alphanumérique (virgule, tiret...)
+		                  valeurs : extension | taille | dimensions
+		                            «oui» ou «true» pour tout afficher
 		                  defaut: ''
-		par               tri des documents.
-		                  id_document | titre | fichier | media | mode | extension | taille
-		                  défaut: media, fichier, titre
-		align             alignement du bloc conteneur (.album)
-		                  left | right | center
-		                  défaut: ''
-		classe            classe(s) css supplémentaire(s) du bloc conteneur (.album)
+		par               Tri des documents.
+		                  valeurs : id_document | titre | fichier | media | mode | extension | taille
+		                  défaut  : media, fichier, titre
+		align             Alignement du bloc conteneur (.album)
+		                  valeurs : left | right | center
+		                  défaut  : ''
+		classe            Classe(s) CSS supplémentaire(s) du bloc conteneur (.album)
+		pagination        Pagination pour le nombre de documents affichés.
+		                  défaut  : _ALBUMS_PAGINATION_VIGNETTES > _ALBUMS_PAGINATION > 20
+		pagination_type   Type de pagination
+		                  valeurs : page | precedent_suivant | page_precedent_suivant
+		                  défaut  : page
+		position_legende  Emplacement de la légende (titre & descriptif) : en haut ou en bas de la liste.
+		                  valeurs : top | bottom
+		                  défaut  : bottom
 
-		Pour rétro compatibilité avec les versions 1 et 2 :
+		Dépréciés, pour rétro compatibilité avec les versions antérieures :
 		id                sélection prédéfinie de documents, séparés par une virgule.
 		id_article        identifiant d'un article pour sélectionner ses documents.
 		balise_titraille  = balise_titre
@@ -57,16 +70,19 @@
 
 (#REM) 1. «id_album» présent dans l'environnement
 
-]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_docs></BOUCLE_album>[
+]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}
+>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_docs></BOUCLE_album>[
 
 (#REM) 2. «id_article» donné explicitement
 
-]<BOUCLE_article(DOCUMENTS){id_article=#ENV{args/id_article}}{par #ENV{par,media},titre}{tout}{media?}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
+]<BOUCLE_article(DOCUMENTS){id_article=#ENV{args/id_article}}{par #ENV{par,media},titre}{tout}{media?}
+>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
 
 (#REM) 3. «id» donné explicitement
 
-]<BOUCLE_id(DOCUMENTS){id_document IN (#ENV{args/id}|explode{','})}{par #ENV{par,media},titre}{tout}>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_id><//B_article><//B_album>[
+]<BOUCLE_id(DOCUMENTS){id_document IN (#ENV{args/id}|explode{','})}{par #ENV{par,media},titre}{tout}
+>#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_id><//B_article><//B_album>[
 
 (#REM) squelette de l'album
 
-][(#INCLURE{fond=modeles/inc-album_liste, ids_documents=#GET{ids_documents}, env})]
+][(#INCLURE{fond=modeles/inc-album_liste, ids_documents=#GET{ids_documents}, env, ajax})]

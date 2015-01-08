@@ -10,37 +10,41 @@
 
 ][(#REM)
 
-	Paramètres (*obligatoire):
+	Paramètres (*obligatoire) : 
 		*ids_documents    identifiant des documents
 		*env              environnement issu du squelette appelant
+		+ ceux de modeles/album_liste.html
 
 ][
-(#SET{titre_album,#ENV{titre}|=={oui}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}})][
-(#SET{descriptif_album,#ENV{descriptif}|?{#INFO_DESCRIPTIF{album,#ID_ALBUM}}})
+(#SET{titre_album,        #ENV{titre}|in_array{#LISTE{oui,true}}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}})][
+(#SET{descriptif_album,   #ENV{descriptif}|?{#INFO_DESCRIPTIF{album,#ID_ALBUM}}})][
+(#SET{pagination,         #ENV{pagination}|intval|sinon{#EVAL{_ALBUMS_PAGINATION_LISTE}|intval}|sinon{#EVAL{_ALBUMS_PAGINATION}|intval}|sinon{20}})][
+(#SET{balise_titre,       #ENV*{balise_titre}|sinon{#ENV*{balise_titraille}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE_LISTE}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE}}|sinon{strong}|trim|replace{^<|>$}})][
+(#SET{position_legende,   #ENV{position_legende}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE_LISTE}}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE}}|trim})][
+(#SET{position_legende,   #GET{position_legende}|in_array{#LISTE{top,bottom}}|?{#GET{position_legende},bottom}})][
+(#SET{caption,            #GET{titre_album}|?{#GET{titre_album}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre_album">'}}}
+                          |concat{#GET{#GET{descriptif_album}}|?{#GET{descriptif_album}|wrap{<div class="descriptif_album">}}}
+                          |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption ',#GET{position_legende},'">'}}}|trim)
 ]<B_documents_album>
 <div class="album liste[ (#ENV{align})][ (#ENV{classe})]">
-    [(#GET{titre_album}|ou{#GET{descriptif_album}}|oui)
-	<div class="caption">
-		[<div class="titre_album">(#GET{titre_album}|wrap{[<(#ENV*{balise_titre,#ENV*{balise_titraille}}|replace{^<}|replace{>$})>]})</div>]
-		[<div class="descriptif_album">(#GET{descriptif_album})</div>]
-	</div>
-	]
+	#ANCRE_PAGINATION
+	[(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
 	<ul class="spip">
-		<BOUCLE_documents_album(DOCUMENTS){id_document IN #ENV{ids_documents}}{tout}>[
-		(#SET{extension, #EXTENSION|strtoupper|wrap{<abbr>}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}|attribut_html}|inserer_attribut{class,extension}})][
-		(#SET{taille, #TAILLE|taille_en_octets|wrap{<span>}|inserer_attribut{class,taille}})][
-		(#SET{dimensions, #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span>}|inserer_attribut{class,dimensions}}})][
-		(#SET{metas, #VAL{'/\[\W\]/'}|preg_split{#ENV{metas,#ENV{infos}}|=={oui}|?{extension-taille-dimensions,#ENV*{metas,#ENV*{infos}}}}})][
-		(#SET{titre_document,#TITRE|sinon{#FICHIER|basename}})][
-		(#SET{titre_document_long,#GET{titre_document}|concat{' - ',#TYPE_DOCUMENT,' - ',#TAILLE|taille_en_octets}})]<li>
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #ENV{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album_liste_}|concat{#ENV{id}}}>[
+		(#SET{extension,           #EXTENSION|strtoupper|wrap{<abbr>}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}|attribut_html}|inserer_attribut{class,extension}})][
+		(#SET{taille,              #TAILLE|taille_en_octets|wrap{<span>}|inserer_attribut{class,taille}})][
+		(#SET{dimensions,          #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span>}|inserer_attribut{class,dimensions}}})][
+		(#SET{metas,               #VAL{'/\[\W\]/'}|preg_split{#ENV{metas,#ENV{infos}}|in_array{#LISTE{oui,true}}|?{extension-taille-dimensions,#ENV*{metas,#ENV*{infos}}}}})][
+		(#SET{titre_document,      #TITRE|sinon{#FICHIER|basename}})][
+		(#SET{titre_document_long, #GET{titre_document}|concat{' - ',#TYPE_DOCUMENT,' - ',#TAILLE|taille_en_octets}})]<li>
 			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]" title="[(#GET{titre_document_long}|attribut_html)]">
-				[<strong class="titre_album[ (#TITRE|non)fichier]">(#GET{titre_document})</strong>]
-				<B_infos>(<BOUCLE_infos(DATA){source table, #GET{metas}}{'<span class="sep"> - </span>'}{si #GET{metas}}>[
-					(#REM)][(#GET{#VALEUR})][
-				(#REM)]</BOUCLE_infos>)</B_infos>
+				[<strong class="titre_album[ (#TITRE|non)fichier]">(#GET{titre_document})</strong>] [
+				(#REM)]<B_metas>(<BOUCLE_metas(DATA){source table, #GET{metas}}{'<span class="sep"> - </span>'}{si #GET{metas}}>[(#GET{#VALEUR})]</BOUCLE_metas>)</B_metas>
 			</a>
 		</li>
 		</BOUCLE_documents_album>
 	</ul>
+	[<div class='pagination'>(#PAGINATION{#ENV{pagination_type,page}})</div>]
+	[(#GET{position_legende}|=={bottom}|oui)[(#GET{caption})]]
 </div><!-- .album.vignette -->
 </B_documents_album>

@@ -95,3 +95,8 @@ parametres:
       nom: 'label'
       label_case: <:album:label_modele_labels_images:>
       valeur_oui: 'oui'
+  -
+    saisie: 'input'
+    options:
+      nom: 'pagination'
+      label: <:album:label_modele_pagination:>

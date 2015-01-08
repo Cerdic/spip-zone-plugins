@@ -77,3 +77,8 @@ parametres:
         extension: <:album:label_modele_meta_extension:>
         taille: <:album:label_modele_meta_taille:>
         dimensions: <:album:label_modele_meta_dimensions:>
+  -
+    saisie: 'input'
+    options:
+      nom: 'pagination'
+      label: <:album:label_modele_pagination:>
