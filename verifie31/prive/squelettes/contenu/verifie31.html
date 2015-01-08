@@ -27,7 +27,7 @@
      ]
      
     
-     <BOUCLE_plugins_current(PLUGINS){prefixe=#PLUGIN{#CLE,prefix}}{si #PLUGIN{#CLE,compatibilite}|match{3.1}|non}>
+     <BOUCLE_plugins_current(PLUGINS){prefixe=#PLUGIN{#CLE,prefix}}{si #PLUGIN{#CLE,compatibilite}|match{3.1|3.*}|non}>
      
      [(#BRANCHES_SPIP|strpos{3.1}|>{-1}|oui)                
             <p style="margin-top:1em;">
