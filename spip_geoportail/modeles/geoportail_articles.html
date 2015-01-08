@@ -69,4 +69,4 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	]
 }
 </script>
-[(#MODELE{geoportail}{id_geoportail=#ENV{id_geoportail,0}}{overview=1}{searchtools}{measuretools}{zone}{mode}{lon}{lat}{zoom}{min_zoom}{layerctrl}{toolbox}{infobox}{carto}{ortho}{width}{height})]
+[(#MODELE{geoportail}{id_geoportail=#ENV{id_geoportail,0}}{overview=[(#ENV{overview,1})]}{searchtools}{measuretools}{zone}{mode}{lon}{lat}{zoom}{min_zoom}{layerctrl}{toolbox}{infobox}{carto}{ortho}{width}{height})]

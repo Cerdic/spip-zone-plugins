@@ -1088,7 +1088,8 @@ var spipGeoportail = jQuery.geoportail =
 				// Mini
 				case 'mini': box.info = box.tools = box.layer = '0';				
 				default: 
-					map.addGeoportalLayers(); 
+					try { map.addGeoportalLayers(); }
+					catch(e) {};
 					// Affichage des des couches ORTHO et CARTO
 					for (i = 0; i < map.getMap().layers.length; i++) 
 					{	var lyr = map.getMap().layers[i];
