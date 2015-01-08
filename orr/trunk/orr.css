@@ -25,6 +25,7 @@
 .orr_stylo { float:left; }
 h1.box_resa { background-color: #DDD; }
 .formulaire_reserv li label { font-weight: bold; }
+.formulaire_reserv li select option.desactive {color: #c30;font-style:italic;}
 
 /* commun semaine/mois */    
 #tableau_mois, #tableau_semaine { text-align: center; vertical-align:top; border-collapse: collapse; width: 100%; }
