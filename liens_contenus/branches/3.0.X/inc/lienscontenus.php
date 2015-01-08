@@ -554,4 +554,4 @@ function lienscontenus_verification_rubrique()
   spip_log('lienscontenus_verification_rubrique');
   lienscontenus_verification_article_page();
 }
-?>
+

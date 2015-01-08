@@ -64,4 +64,4 @@ function lienscontenus_taches_generales_cron($taches_generales) {
 	$taches_generales['lienscontenus_queue_process'] = 60; // toutes les minutes
     return $taches_generales;
 }
-?>
+
