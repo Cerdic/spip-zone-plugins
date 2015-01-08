@@ -44,29 +44,6 @@
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_biblio_unite})</span>]
 			<input type="text" name="titre_biblio_unite" class="text" value="#ENV*{titre_biblio_unite}" id="titre_biblio_unite" />
 		</li>
-		<li class="editer_membres[(#ENV**{erreurs}|table_valeur{membres}|oui)erreur]">
-			<label>Membres de l'unité</label>
-			<p class="explication">Liste des auteurs à prendre en compte dans la bibliographie générale.</p>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{format_docs})</span>]
-			<div style="float:left; width:49%; text-align:center; height:100%;">
-				<strong>Non-membres</strong>
-				<select multiple id="non_membres" name="non_membres[]" style="height:250px;" class="select">
-					<BOUCLE_non_membres(POUR){tableau #ENV{non_membres}}>
-					<option value="#VALEUR">#VALEUR</option>
-					</BOUCLE_non_membres>
-				</select>
-				<a href="#" id="ajouter_membre">Ajouter &gt;&gt;</a>
-			</div>
-			<div style="float:right; width:49%; text-align:center; height:100%;">
-				<strong>Membres</strong>
-				<select multiple id="membres" name="membres[]" style="height:250px;" class="select">
-					<BOUCLE_membres(POUR){tableau #ENV{membres}}>
-					<option value="#VALEUR">#VALEUR</option>
-					</BOUCLE_membres>
-				</select>
-				<a href="#" id="retirer_membre">&lt;&lt; Retirer</a>
-			 </div> 
-		</li>
 		<li class="fieldset">
 			<fieldset>
 				<h3 class="legend">Qui peut vérifier les références (via la page ‘biblioaeres’) ?</h3>
@@ -229,17 +206,3 @@
 		</p>
 	</div></form>
 </div>
-<script type="text/javascript">// <![CDATA[
-$(document).ready(function(){
-	$('#ajouter_membre').click(function() {
-		return !$('#non_membres option:selected').remove().appendTo('#membres');
-	});
-	$('#retirer_membre').click(function() {
-		return !$('#membres option:selected').remove().appendTo('#non_membres');
-	});
-	$('#valider_cfg_aeres').click(function() {
-		$('#membres *').attr('selected','selected');
-		$('#non_membres *').attr('selected','selected');
-	});
-});
- //]]></script>

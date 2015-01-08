@@ -23,20 +23,6 @@ function formulaires_configurer_aeres_charger_dist(){
 			'autorisation_stats_auteurs' => ''
 		);
 	
-	// Liste des membres
-	if (isset($valeurs['membres']))
-		$membres = explode(';',$valeurs['membres']);
-	else
-		$membres = array();
-	include_spip('base/abstract_sql');
-	$zcreators = sql_allfetsel('auteur','spip_zcreators','','auteur','auteur');
-	foreach ($zcreators as $cle => $zcreator) // remise a plat du tableau
-		$zcreators[$cle] = $zcreator['auteur'];
-	$non_membres = array_diff($zcreators,$membres);
-	
-	$valeurs['membres'] = aeres_tri_alpha($membres);
-	$valeurs['non_membres'] = aeres_tri_alpha($non_membres);
-	
 	return $valeurs;
 }
 
@@ -51,59 +37,30 @@ function formulaires_configurer_aeres_verifier_dist(){
 
 
 function formulaires_configurer_aeres_traiter_dist(){
-	$membres = _request('membres');
-	if (count($membres)) aeres_tri_alpha($membres);
-	else $membres = array();
-	set_request('membres',$membres); // On retransmet le tableau correctement trié
-	$non_membres = _request('non_membres');
-	if (count($non_membres)) aeres_tri_alpha($non_membres);
-	else $non_membres = array();
-	set_request('non_membres',$non_membres);
-	$config = array(
-		'debut' => _request('debut'),
-		'fin' => _request('fin'),
-		'csl' => _request('csl'),
-		'conference_actes' => _request('conference_actes'),
-		'titre_biblio_unite' => _request('titre_biblio_unite'),
-		'membres' => implode(";", $membres),
-		'autorisation_verif_type' => _request('autorisation_verif_type'),
-		'autorisation_verif_statuts' => _request('autorisation_verif_statuts'),
-		'autorisation_verif_auteurs' => _request('autorisation_verif_auteurs'),
-		'autorisation_biblio_unite_type' => _request('autorisation_biblio_unite_type'),
-		'autorisation_biblio_unite_statuts' => _request('autorisation_biblio_unite_statuts'),
-		'autorisation_biblio_unite_auteurs' => _request('autorisation_biblio_unite_auteurs'),
-		'autorisation_stats_type' => _request('autorisation_stats_type'),
-		'autorisation_stats_statuts' => _request('autorisation_stats_statuts'),
-		'autorisation_stats_auteurs' => _request('autorisation_stats_auteurs')
-	);
+	if (isset($GLOBALS['meta']['aeres']))
+		$config = unserialize($GLOBALS['meta']['aeres']);
+	else
+		$config = array();
+	
+	$config['debut'] = _request('debut');
+	$config['fin'] = _request('fin');
+	$config['csl'] = _request('csl');
+	$config['conference_actes'] = _request('conference_actes');
+	$config['titre_biblio_unite'] = _request('titre_biblio_unite');
+	$config['autorisation_verif_type'] = _request('autorisation_verif_type');
+	$config['autorisation_verif_statuts'] = _request('autorisation_verif_statuts');
+	$config['autorisation_verif_auteurs'] = _request('autorisation_verif_auteurs');
+	$config['autorisation_biblio_unite_type'] = _request('autorisation_biblio_unite_type');
+	$config['autorisation_biblio_unite_statuts'] = _request('autorisation_biblio_unite_statuts');
+	$config['autorisation_biblio_unite_auteurs'] = _request('autorisation_biblio_unite_auteurs');
+	$config['autorisation_stats_type'] = _request('autorisation_stats_type');
+	$config['autorisation_stats_statuts'] = _request('autorisation_stats_statuts');
+	$config['autorisation_stats_auteurs'] = _request('autorisation_stats_auteurs');
+
 	include_spip('inc/meta');
 	ecrire_meta('aeres',serialize($config));
 	
 	return array('message_ok'=>_T('config_info_enregistree'));
-}
-
-// Source: http://www.memorandom.fr/php/trier-la-colonne-dun-tableau-sans-prendre-en-compte-la-casse-et-les-accents/
-
-function aeres_sans_accent($chaine) {
-        if (version_compare(PHP_VERSION, '5.2.3', '>='))
-            $str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8", false);
-        else
-            $str = htmlentities($chaine, ENT_NOQUOTES, "UTF-8");
- 
-        // NB : On ne peut pas utiliser strtr qui fonctionne mal avec utf8.
-        $str = preg_replace('#\&([A-za-z])(?:acute|cedil|circ|grave|ring|tilde|uml)\;#', '\1', $str);
- 
-        return $str;
-	};
-
-function aeres_tri_alpha($data) {
-	//On supprime les accents
-	$array_sans_accent = array_map(aeres_sans_accent , $data);
-	//On met en minuscule
-	$array_lowercase = array_map('strtolower', $array_sans_accent);
-	// Ajoute $data en tant que dernier paramètre, pour trier par la clé commune
-	array_multisort($array_lowercase, SORT_ASC, $data);
-	return $data;
 }
 
 ?>
