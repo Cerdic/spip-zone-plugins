@@ -21,8 +21,8 @@
            
            si besoin, ecrire un vrai filtre pour tester les bornes
      ]
-     [(#PLUGIN{#CLE,compatibilite}|match{3.1}|oui) <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
-     [(#PLUGIN{#CLE,compatibilite}|match{3.1}|non) <span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
+     [(#PLUGIN{#CLE,compatibilite}|match{3.1|3.*}|oui) <span style="color:#090;"><:verifie31:plugin_compat31_ok:></span>]
+     [(#PLUGIN{#CLE,compatibilite}|match{3.1|3.*}|non) <span style="color:#900;"><:verifie31:plugin_compat31_notok:></span>
            #SET{incompatible,#GET{incompatible}|plus{1}}
      ]
      

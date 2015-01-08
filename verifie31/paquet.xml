@@ -1,7 +1,7 @@
 <paquet
 	prefix="verifie31"
 	categorie="maintenance"
-	version="0.2.0"
+	version="0.2.1"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/verifie31-64.png"
