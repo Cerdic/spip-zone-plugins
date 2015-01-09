@@ -13,6 +13,8 @@ include_spip('inc/meta');
  */
 function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
 {
+	spip_log('Install/upgrade du plugin', 'liens_contenus');
+	
 	// le prefixe est passe des majuscules aux minuscules :
 	if (isset($GLOBALS['meta']['lienscontenus_base_version']) AND !isset($GLOBALS['meta'][$nom_meta_base_version]))
 	$GLOBALS['meta'][$nom_meta_base_version] = $GLOBALS['meta']['lienscontenus_base_version'];
@@ -23,8 +25,15 @@ function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
 		array('maj_tables', array('spip_liens_contenus','spip_liens_contenus_todo')),
 	);
 	
+	// TODO : Déclarer les versions
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	
+	// TODO : Voir si c'est la bonne façon de faire
+	include_spip('inc/lienscontenus');
+	lienscontenus_initialiser();
+
 	
 	/*
 	$current_version = 0.0;
