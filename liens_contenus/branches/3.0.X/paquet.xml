@@ -2,8 +2,9 @@
 	prefix="lienscontenus"
 	categorie="navigation"
 	version="0.29.0"
+	schema="1.0.0"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[3.0.0;["
 	logo="images/liens_contenus.png"
 	documentation="http://contrib.spip.net/Liens-entre-contenus" >
 
