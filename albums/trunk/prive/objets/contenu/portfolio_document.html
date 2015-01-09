@@ -11,7 +11,7 @@
 (#REM) Documents des albums
 
 ][(#ENV{objet}|=={album}|oui)
-[(#INCLURE{fond=prive/squelettes/inclure/documents_album, env, id_album=#ENV{id_objet}, ajax=#VAL{documents-album}|concat{#ENV{id_objet}}})<br>]
+[(#INCLURE{fond=prive/squelettes/inclure/documents_album, env, id_album=#ENV{id_objet}, ajax=#VAL{documents-album}|concat{#ENV{id_objet}}, pagination_documents=30})<br>]
 <script type="text/javascript">/*<!\[CDATA\[*/
 var multifile='[(#CHEMIN{javascript/jquery.multifile.js}|texte_script)]';
 [(#INCLURE{javascript/medias_edit.js}|compacte{js})]

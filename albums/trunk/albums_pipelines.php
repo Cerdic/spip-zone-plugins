@@ -66,7 +66,7 @@ function albums_afficher_complement_objet($flux) {
 		AND ($type=$e['type']) == 'album'
 		AND !autoriser('joindredocument',$type,$id)
 	) {
-		$texte .= recuperer_fond('prive/squelettes/inclure/documents_album', array('id_album' => $id));
+		$texte .= recuperer_fond('prive/squelettes/inclure/documents_album', array('id_album' => $id, 'pagination_documents'=>30));
 	}
 
 	if ($texte) {
