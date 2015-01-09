@@ -20,8 +20,7 @@ function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
 	$maj = array();
 	
 	$maj['create'] = array(
-		array('maj_tables', array('spip_liens_contenus')),
-		array('maj_tables', array('spip_liens_contenus_todo')),
+		array('maj_tables', array('spip_liens_contenus','spip_liens_contenus_todo')),
 	);
 	
 	include_spip('base/upgrade');
