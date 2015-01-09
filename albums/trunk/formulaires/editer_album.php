@@ -165,7 +165,7 @@ function formulaires_editer_album_traiter_dist($id_album='new', $retour='', $ass
 	// Rechargement ajax en cas d'édition rapide sur place
 	if (!$res['redirect']){
 		$id_album = $res['id_album'];
-		$js = "if (window.jQuery) jQuery(function(){ajaxReload('albums');});";
+		$js = "if (window.jQuery) jQuery(function(){ajaxReload('liste_albums');});";
 		$js = "<script type='text/javascript'>$js</script>";
 		if (isset($res['message_erreur']))
 			$res['message_erreur'].= $js;
