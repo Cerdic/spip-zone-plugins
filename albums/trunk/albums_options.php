@@ -31,7 +31,7 @@ if (!defined('_ALBUMS_POSITION_LEGENDE_VIGNETTES'))    define('_ALBUMS_POSITION_
 if (!defined('_ALBUMS_POSITION_LEGENDE_LISTE'))        define('_ALBUMS_POSITION_LEGENDE_LISTE','');
 
 // [vignettes] Dimension maximale des vignettes : nombre
-if (!defined('_ALBUMS_TAILLE_PREVIEW'))                define('_ALBUMS_TAILLE_PREVIEW',120);
+if (!defined('_ALBUMS_TAILLE_PREVIEW'))                define('_ALBUMS_TAILLE_PREVIEW',150);
 
 // [vignettes] Recadrer ou non les vignettes
 if (!defined('_ALBUMS_RECADRER'))                      define('_ALBUMS_RECADRER',false);

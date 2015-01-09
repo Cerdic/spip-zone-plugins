@@ -1,0 +1,6 @@
+/* ----------------------------------------------
+   albums_bootstrap.css : compatibilité bootstrap
+   ---------------------------------------------- */
+.album:not(.center)             { margin-left:0; margin-right:0; }
+.album .thumbnails,
+.album .thumbnail               { padding-left:0; padding-right:0; }

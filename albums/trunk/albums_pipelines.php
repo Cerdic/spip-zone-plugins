@@ -293,9 +293,25 @@ function albums_insert_head_css($flux) {
 
 	if (!defined('_ALBUMS_INSERT_HEAD_CSS') OR !_ALBUMS_INSERT_HEAD_CSS){
 		include_spip("inc/config");
+		if (!function_exists('liste_plugin_actifs')) include_spip('inc/plugin');
 		$cfg = (defined('_ALBUMS_INSERT_HEAD_CSS')?_ALBUMS_INSERT_HEAD_CSS:lire_config("albums/insert_head_css",1));
 		if ($cfg){
+
+			// feuille de style minimale de base
 			$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums.css').'" type="text/css" />';
+
+			// fix selon les plugins
+			$plugins_actifs = liste_plugin_actifs();
+
+			// compatibilité avec bootstrap
+			if (isset($plugins_actifs['BOOTSTRAP'])) {
+				$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums_bootstrap.css').'" type="text/css" />';
+			}
+
+			// compatibilité avec foundation
+			if (isset($plugins_actifs['FOUNDATION'])) {
+				$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums_foundation.css').'" type="text/css" />';
+			}
 		}
 	}
 
