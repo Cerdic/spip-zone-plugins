@@ -1,11 +1,11 @@
-#SET{url,#ENV{url_document,''}}
-<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>
-#SET{largeur,#ENV{largeur, #LARGEUR|?{#LARGEUR,400}}|max{120}}
+#SET{url,#ENV{url_document,''}}#SET{id_document,''}#SET{largeur,0}
+<BOUCLE_doc (DOCUMENTS) {id_document}{tout}>#SET{url,#FICHIER}#SET{id_document,#ID_DOCUMENT}#SET{largeur,#ENV{largeur,#LARGEUR}</BOUCLE_doc>
+#SET{largeur,#ENV{largeur, #GET{largeur}|?{#GET{largeur},400}}|max{120}}
 <dt class='spip_doc_titre player #ENV{player}'>
 	<div class="mejs-audio-wrapper audio-wrapper"[ style='width:(#GET{largeur})px;max-width:100%;margin:0 auto;']>
-		<audio class="mejs mejs-#ID_DOCUMENT [ mejs-(#ENV{skin})][(#ENV{playlist}|oui)mejs-playlist]"
-		       data-id="[(#VAL{mejs-#ID_DOCUMENT}|concat{#ENV{skin}}|md5)]"
-		       src="#FICHIER"
+		<audio class="mejs[ mejs-(#GET{id_document})][ mejs-(#ENV{skin})][(#ENV{playlist}|oui)mejs-playlist]"
+		       data-id="[(#VAL{mejs-#GET{id_document}}|concat{'-',#GET{url},'-',#ENV{skin},}|md5)]"
+		       src="#GET{url}"
 		       type="#MIME_TYPE"
 		       data-mejsoptions='{"alwaysShowControls": true[,"loop":(#ENV{loop}|?{true,false})],"audioWidth":"100%"[,"audioHeight":"(#ENV{hauteur})"][,"startVolume":"(#ENV{volume})"][,"playlistSelector":"(#ENV{playlist})"]<B_feat>,"features":[<BOUCLE_feat(POUR){tableau #ENV{features}}{','}>"#VALEUR"</BOUCLE_feat>]</B_feat>}'
 		       [data-mejsplugins='(#ENV{plugins}|json_encode)']
@@ -17,4 +17,4 @@
 	(#INCLURE{javascript/mejs-init.min.js}|compacte{js})/*\]\]>*/</script>]
 	[(#ENV{skin}|oui)[<style>(#INCLURE{#CHEMIN{css/mejs-skin-#ENV{skin}.css}|sinon{#CHEMIN{lib/mejs/mejs-skins.css}}|url_absolue_css})</style>]]</span>
 </dt>
-</BOUCLE_doc>
+
