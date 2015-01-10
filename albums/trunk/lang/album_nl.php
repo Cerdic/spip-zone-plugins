@@ -33,6 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_deplacer_documents' => '<strong>Experimenteel</strong>: documenten kunnen tussen albums worden uitgewisseld door klikken en schuiven.
 		Als je voldoende rechten hebt, verandert de cursor boven een object om deze mogelijkheid aan te geven.
 		Wanneer de verschuiving is voltooid verschijnt onder de lijst een formulier om de wijzigingen te registreren.',
+	'explication_onglet_ajouter_choisir' => 'Vermeld hun nummer, gescheiden door een komma, of klik op « Doorbladeren » om ze handmatig te selecteren.',
+	'explication_onglet_ajouter_creer' => 'Titel en omschrijving zijn optioneel. Je kunt direct documenten toevoegen, of pas wanneer het album is aangemaakt.',
 
 	// F
 	'filtre_extensions' => 'Extensies',
@@ -82,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_metas' => 'Informatie over dit document:',
 	'label_modele_nom_liste' => 'een album (lijst)',
 	'label_modele_nom_vignettes' => 'een album (iconen)',
-	'label_modele_parcourir_albums' => 'Door de albums gaan',
+	'label_modele_parcourir_albums' => 'Albums doorbladeren',
 	'label_modele_placeholder_dimension' => 'Grootte in px, zonder eenheid',
 	'label_modele_recadrer_images' => 'Afbeeldingen herkadreren',
 	'label_modele_titre_perso' => 'Aangepaste titel',
@@ -91,8 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_tri_media' => 'Soort document',
 	'label_modele_tri_titre' => 'Titel',
 	'label_modele_trier' => 'Sorteren op:',
-	'label_onglet_ajouter_choisir' => 'Bestaande albums koppelen', # MODIF
-	'label_onglet_ajouter_creer' => 'Een album maken en koppelen', # MODIF
+	'label_onglet_ajouter_choisir' => 'Een of meer bestaande albums koppelen.',
+	'label_onglet_ajouter_creer' => 'Een album maken en koppelen',
 	'label_titre' => 'Titel',
 	'label_utiliser_titre_defaut' => 'Titel van een nieuw album',
 
@@ -108,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_vider' => 'Alle documenten weghalen?',
 
 	// O
-	'onglet_ajouter_choisir' => 'Album(s) kiezen', # MODIF
+	'onglet_ajouter_choisir' => 'Een album kiezen',
 	'onglet_ajouter_creer' => 'Nieuw album',
 	'onglet_configurer_options' => 'Opties',
 	'onglet_configurer_outils' => 'Tools',
