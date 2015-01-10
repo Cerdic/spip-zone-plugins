@@ -48,7 +48,7 @@ function lecteur_multimedia_init(){
 				function (e){
 					e.preventDefault();
 					player_play(i);
-					jQuery("#bouton_play").attr('src', player_data.dir+'skins/blogo/pause.png');
+					jQuery("#bouton_play").attr('src', player_data.image_pause);
 				}
 			);
 
@@ -58,7 +58,7 @@ function lecteur_multimedia_init(){
 				jQuery(this).parent().click(
 					function (e){
 						player_play(i);
-						jQuery("#bouton_play").attr('src', player_data.dir+'skins/blogo/pause.png');
+						jQuery("#bouton_play").attr('src', player_data.image_pause);
 					}
 				);
 
@@ -121,14 +121,14 @@ function lecteur_multimedia_init(){
 	jQuery('#bouton_play').click(function (e){
 		//console.log(isPlaying);
 		if (!isPlaying){
-			jQuery(this).attr('src', player_data.dir+'skins/blogo/pause.png');
+			jQuery(this).attr('src', player_data.image_pause);
 			if (live_track=='stop'){
 				player_play(0);
 			} else {
 				player_togglePause();
 			}
 		} else {
-			jQuery(this).attr('src', player_data.dir+'skins/blogo/play.png');
+			jQuery(this).attr('src', player_data.image_play);
 			player_togglePause();
 		}
 	});
@@ -177,7 +177,7 @@ function lecteur_multimedia_init(){
 
 function player_play(i){
 	player_stop();
-	jQuery("#bouton_play").attr('src', player_data.dir+'skins/blogo/pause.png');
+	jQuery("#bouton_play").attr('src', player_data.image_pause);
 
 	track_index = i;
 	live_track = i;
@@ -363,7 +363,7 @@ function player_togglePause(){
 }
 
 function reset_boutons(){
-	jQuery("#bouton_play").attr('src', player_data.dir+'skins/blogo/play.png');
+	jQuery("#bouton_play").attr('src', player_data.image_play);
 	jQuery(".position").html("0'00''");
 	jQuery("#position,#loading").width(0);
 }
