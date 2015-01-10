@@ -13,11 +13,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_rubrique_depublie' => 'Het weergeven van het depublicatie-formulier vereist de identificatie van een of meerdere hoofd- en subrubrieken, gescheiden door een komma.',
 	'configurer_statut_depublie' => 'Kies de bij depublicatie toe te wijzen status',
 
+	// D
+	'date_depublie' => 'Wijzigt op',
+
 	// E
 	'erreur_date_superieure' => 'De datum van depublicatie moet verder in de toekomst liggen dan de publicatiedatum',
 
 	// I
 	'icone_configurer_depublie' => 'Depublicaties configureren',
+	'icone_voir_depublie' => 'Lijst van depublicaties',
+	'info_1_objet' => 'Een object',
+	'info_nb_objets' => '@nb@ objecten',
+	'info_objet' => 'Object',
 
 	// L
 	'label_jour' => 'Dagen',
@@ -34,7 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_date_depublication' => 'Datum van depublicatie:',
 	'texte_date_depublication_nonaffichee' => 'De datum van depublicatie niet gebruiken',
-	'titre_page_configurer_depublies' => 'Depublicaties configureren'
+	'titre_page_configurer_depublies' => 'Depublicaties configureren',
+	'titre_page_depublies_objets' => 'De objecten die van status gaan veranderen'
 );
 
 ?>
