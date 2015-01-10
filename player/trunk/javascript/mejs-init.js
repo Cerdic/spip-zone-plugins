@@ -10,25 +10,26 @@ var mejscss={};
 				//console.log(this);
 				mejs_counter++;
 				var id = "mejs-" + (jQuery(this).attr('data-id')) + "-" + mejs_counter;
-				var autoplay = jQuery(this).attr('autoplay');
 				jQuery(this).attr('id',id);
-				var options = jQuery.parseJSON(jQuery(this).attr('data-mejsoptions'));
-				var plugins = jQuery.parseJSON(jQuery(this).attr('data-mejsplugins'));
-				var css = jQuery.parseJSON(jQuery(this).attr('data-mejscss'));
+				var autoplay = jQuery(this).attr('autoplay');
+				var opt = {options:{},plugins:{},css:[]}, i,v;
+				for (i in opt){
+					if (v = jQuery(this).attr('data-mejs'+i)) opt[i] = jQuery.parseJSON(v);
+				}
 				function runthisplayer(){
 					var run = true;
 					//console.log(css);
-					for(var c in css){
-						if (typeof mejscss[css[c]]=="undefined"){
-							mejscss[css[c]] = true;
+					for(var c in opt.css){
+						if (typeof mejscss[opt.css[c]]=="undefined"){
+							mejscss[opt.css[c]] = true;
 							var stylesheet = document.createElement('link');
-							stylesheet.href = css[c];
+							stylesheet.href = opt.css[c];
 							stylesheet.rel = 'stylesheet';
 							stylesheet.type = 'text/css';
 							document.getElementsByTagName('head')[0].appendChild(stylesheet);
 						}
 					}
-					for(var p in plugins){
+					for(var p in opt.plugins){
 						//console.log(p);
 						//console.log(mejsplugins[p]);
 						// load this plugin
@@ -36,7 +37,7 @@ var mejscss={};
 							//console.log("Load Plugin "+p);
 							run = false;
 							mejsplugins[p] = false;
-							jQuery.getScript(plugins[p],function(){mejsplugins[p] = true;runthisplayer();});
+							jQuery.getScript(opt.plugins[p],function(){mejsplugins[p] = true;runthisplayer();});
 						}
 						// this plugin is loading
 						else if(mejsplugins[p]==false){
@@ -48,7 +49,7 @@ var mejscss={};
 						}
 					}
 					if (run) {
-						new MediaElementPlayer('#'+id,jQuery.extend(options,{
+						new MediaElementPlayer('#'+id,jQuery.extend(opt.options,{
 							"success": function(media) {
 								function togglePlayingState(){
 									jQuery(media).closest('.mejs-inner').removeClass(media.paused?'playing':'paused').addClass(media.paused?'paused':'playing');

@@ -1,7 +1,7 @@
 <paquet
 	prefix="player"
 	categorie="multimedia"
-	version="2.6.1"
+	version="2.6.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/player-32.png"
@@ -24,5 +24,8 @@
 	<pipeline nom="header_prive" action="insert_head"/>
 	<pipeline nom="affichage_final" inclure="player_fonctions.php" />
 
-	<menu nom="configurer_player" titre="player:player_nom" parent="menu_configuration" icone="images/player-16.png" />
+	<menu nom="configurer_player" titre="player:player_nom" parent="menu_squelette" icone="images/player-16.png" />
+
+	<utilise nom="medias" compatibilite="[;]" />
+
 </paquet>
