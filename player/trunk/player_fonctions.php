@@ -32,7 +32,6 @@ function player_insert_head_css($flux){
 		'<script type="text/javascript">/*<![CDATA[*/' . "\n"
 		. 'player_data={'
 		// sert uniquement en fallback player sur les enclosure, si flash<8
-	  . 'player_url:"' . find_in_path('players/eraplayer/player.swf') . '",'
 	  . 'key_espace_stop:true,'
 	  . 'image_play:"'.find_in_path('players/controls/play-16.png').'",'
 		. 'image_pause:"'.find_in_path('players/controls/pause-16.png').'",'
@@ -124,11 +123,13 @@ function player_post_propre($texte) {
 		if (isset($cfg['insertion_auto'])
 			AND in_array('player_end',$cfg['insertion_auto'])){
 
-			preg_match_all(",<a(\s[^>]*href=['\"]?(http://[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>,Uims",$texte,$matches,PREG_SET_ORDER);
+			preg_match_all(",<a(\s[^>]*href=['\"]?(http://[a-zA-Z0-9\s()\/\:\._%\?+'=~-]*\.($reg_formats))['\"]?[^>]*)>(.*)</a>,Uims",$texte,$matches,PREG_SET_ORDER);
 			if (count($matches)){
 				foreach ($matches as $m){
 					$url = $m[2];
-					$texte .= recuperer_fond("modeles/player",array('url_document'=>$url,'titre'=>player_joli_titre($url)));
+					$titre = $m[4];
+					$titre = ((!strlen(textebrut($titre)) OR tester_url_absolue($titre))?player_joli_titre($url):$titre);
+					$texte .= recuperer_fond("modeles/player",array('url_document'=>$url,'titre'=>$titre));
 				}
 			}
 		}
