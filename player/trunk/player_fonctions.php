@@ -14,10 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function player_call_js() {
 	include_spip('inc/filtres');
-	$flux = "\n"
-		. '<script type="text/javascript" src="'.timestamp(find_in_path('javascript/soundmanager/soundmanager2.js')).'"></script>'
-		. '<script type="text/javascript" src="'.timestamp(find_in_path('javascript/player_enclosure.js')).'"></script>'."\n"
-		;
+	lire_fichier(find_in_path("javascript/mejs-enclosure.min.js"),$enclosure);
+	lire_fichier(find_in_path("javascript/mejs-init.min.js"),$init);
+	$mejspath = timestamp(find_in_path("lib/mejs/mediaelement-and-player.min.js"));
+	$flux = '<script type="text/javascript">/*<![CDATA[*/'
+		. "var mejspath='$mejspath';\n$enclosure\n$init\n"
+		. "/*]]>*/</script>\n";
+
 	return $flux;
 }
 
@@ -28,22 +31,8 @@ function player_call_js() {
  * @return string
  */
 function player_insert_head_css($flux){
-	$flux =
-		'<script type="text/javascript">/*<![CDATA[*/' . "\n"
-		. 'player_data={'
-		// sert uniquement en fallback player sur les enclosure, si flash<8
-	  . 'key_espace_stop:true,'
-	  . 'image_play:"'.find_in_path('players/controls/play-16.png').'",'
-		. 'image_pause:"'.find_in_path('players/controls/pause-16.png').'",'
-		. 'soundManager_url:"'.find_in_path('javascript/soundmanager/soundmanager2.swf').'",'
-		. 'soundManager_nullURL:"'.find_in_path('javascript/soundmanager/null.mp3').'",'
-		. 'dir:"' . _DIR_PLUGIN_PLAYER . '"'
-	  . '};'
-		. "/*]]>*/</script>\n"
-		. $flux;
-
-	lire_fichier(direction_css(find_in_path('css/player.css')),$css);
-	$flux .= "\n".'<style type="text/css">'.$css.'</style>';
+	$css = timestamp(find_in_path('css/player.css'));
+	$flux .= "\n".'<link href="'.$css.'" rel="stylesheet" />';
 
 	return $flux;
 }
