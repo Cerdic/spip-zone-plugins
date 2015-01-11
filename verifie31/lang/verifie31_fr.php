@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
    'plugin_compat31' => 'Compatible SPIP 3.1',
    'plugin_compat31_ok' => 'OK',
    'plugin_compat31_notok' => 'Le plugin actuellement installé est signalé comme incompatible ou à vérifier',
-   'plugin_compat31_maj' => 'La dernière version du plugin sur la zone est compatible, Veuillez mettre votre plugin à jour.',
+   'plugin_compat31_maj' => 'La dernière version du plugin sur la zone est compatible, veuillez mettre votre plugin à jour.',
    'plugin_compat31_maj_gestion' => 'Gestion des plugins',
 
 );
