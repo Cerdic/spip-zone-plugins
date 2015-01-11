@@ -13,7 +13,8 @@
 <a [href="(#URL_PAGE{#ENV{page}}|parametre_url{var_zajax,#ENV{zajax, content}})"]
    [class="(#ENV{class})"]
    data-reveal-id="reveal-#ENV{page}"
-   [(#ENV{ajax, oui}|oui)data-reveal-ajax="true"]>
+   [(#ENV{ajax, oui}|oui)data-reveal-ajax="true"]
+   [title="(#ENV{titre}|attribut_html)"]>
   #ENV{titre}
 </a>
 
