@@ -2,7 +2,7 @@
 	<nom>Gravatar</nom>
 	<auteur>Thomas Beaumanoir, [Clever Age->http://www.clever-age.com], Fil et Cedric</auteur>
 	<icon>images/gravatar-64.png</icon>
-	<version>1.5.2</version>
+	<version>1.5.3</version>
 	<etat>stable</etat>
 	<slogan>
 		<multi>
@@ -54,6 +54,6 @@ _ Configures a default image, and image size.
 		<url>configurer_gravatar</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<categorie>communication</categorie>
 </plugin>
