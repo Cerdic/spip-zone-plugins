@@ -3,22 +3,23 @@
 
  Paramètre:
 
- page = la page à appeler.
+ href = la page à appeler.
+ data-id = Identifiant unique pour la boite reveal
  zajax = l'id var_zajax
  titre = le titre du lien
  class = la class du lien
  ajax = si on passe ajax à non, on peux utiliser content
  content = contenu de la reveal
 ]
-[<a [href="(#URL_PAGE{#ENV{page}}|parametre_url{var_zajax,#ENV{zajax, content}})"]
+[<a [href="(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})"]
    [class="(#ENV{class})"]
-   [data-reveal-id="reveal-(#ENV{page})"]
+   [data-reveal-id="reveal-(#ENV{data-id})"]
    [(#ENV{ajax, oui}|oui)data-reveal-ajax="true"]
    [title="(#ENV{titre}|attribut_html)"]>
   (#ENV{titre})
 </a>]
 
-<div id="reveal-#ENV{page}" class="reveal-modal" data-reveal>
+<div id="reveal-#ENV{data-id}" class="reveal-modal" data-reveal>
   [(#ENV{ajax}|non)
     #ENV{content}
   ]
