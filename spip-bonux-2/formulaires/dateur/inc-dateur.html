@@ -21,7 +21,7 @@ jQuery.dpText = {
 jQuery(function()
 {
 	jQuery('input.date').datePicker({startDate:'#ENV{startDate,'01/01/1900'}'[,endDate:'(#ENV{endDate})']}).dpSetPosition(jQuery.dpConst.POS_TOP, jQuery.dpConst.POS_RIGHT);
-	jQuery("input.heure").timePicker();
+	jQuery("input.heure").timePicker({step:#ENV{heure_pas,30}});
 });
 --></script>
 <style type="text/css">
