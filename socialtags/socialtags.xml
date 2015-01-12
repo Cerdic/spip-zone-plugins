@@ -154,13 +154,6 @@
 <!-- G -->
 
 <item>
-<title>Gmiix</title>
-<author>gmiix</author>
-<link>http://www.gmiix.com/edit_actu.php?ext=1&amp;url=%u&amp;title=%t</link>
-<description>Digg-like, news</description>
-</item>
-
-<item>
 <title>Google +1</title>
 <author>googleplus</author>
 <link>https://plusone.google.com/_/+1/confirm?url=%u&amp</link>
@@ -174,12 +167,7 @@
 </item>
 
 <!-- H -->
-<item>
-<title>Health ranker</title>
-<author>healthranker</author>
-<link>http://healthranker.com/submit.php?url=%u&amp;title=%t</link>
-<description>Digg-like, health santé, en-us</description>
-</item>
+
 
 <!-- I -->
 <item>
@@ -198,20 +186,8 @@
 <description>Portail, communauté, fr</description>
 </item>
 
-<item>
-<title>JoOok</title>
-<author>joook</author>
-<link>http://www.joook.net/submit.php?url=%u</link>
-<description>Digg-like, humour, fr</description>
-</item>
 
 <!-- L -->
-<item>
-<title>Les Humains Associés</title>
-<author>humainsassocies</author>
-<link>http://www.humains-associes.org/humanews/submit.php?url=%u</link>
-<description>Digg-like, fr</description>
-</item>
 
 <item>
 <title>linkaGoGo</title>
@@ -254,13 +230,6 @@
 <link>http://www.mister-wong.com/addurl/?bm_url=%u&amp;bm_description=%t</link>
 </item>
 
-<!--
-<item>
-<title>Mixx</title>
-<author>mixx</author>
-<link>http://www.mixx.com/submit?page_url=%u</link>
-<description>Digg-like, news, en-us</description>
-</item> -->
 
 <item>
 <title>MySpace</title>
