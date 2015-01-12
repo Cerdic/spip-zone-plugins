@@ -148,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sexe' => 'Civilité',
 	'label_societe' => 'Société / Association',
 	'label_statut' => 'Statut',
+	'label_supprimer_logo' => 'Supprimer le logo actuel',
 	'label_surnom' => 'Surnom',
 	'label_telephone' => 'Téléphone :',
 	'label_travail' => 'professionnel',

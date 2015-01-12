@@ -522,6 +522,37 @@ function inscription3_formulaire_traiter($flux){
 					"<p>" . _T('inscription3:pass_rappel_login_email', array('email' => $row['email'],'login'=>$row['login']));break;
 		}
 	}
+	/**
+	 * Prise en charge du logo dans le formulaire d'édition d'auteur
+	 */
+	if($flux['args']['form'] == 'editer_auteur'){
+		if(isset($_FILES['logo']) && ($_FILES['logo']['error'] == 0)){
+			$id_auteur = $flux['data']['id_auteur'];
+			if(intval($id_auteur) > 0){
+				$chercher_logo = charger_fonction('chercher_logo', 'inc');
+				
+				// supprimer l'ancien logo s'il existe
+				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) spip_unlink($on[0]);
+	
+				// ajouter le nouveau
+				include_spip('action/iconifier');
+				action_spip_image_ajouter_dist(
+					type_du_logo('id_auteur').'on'.$id_auteur, false, false
+				);
+				// indiquer qu'on doit recalculer les images
+				$GLOBALS['var_images'] = true;
+			}
+		}
+		else if(_request('supprimer_logo') && _request('supprimer_logo') == 'on'){
+			$id_auteur = $flux['data']['id_auteur'];
+			if(intval($id_auteur) > 0){
+				$chercher_logo = charger_fonction('chercher_logo', 'inc');
+				
+				// supprimer l'ancien logo s'il existe
+				if ($on = $chercher_logo($id_auteur, 'id_auteur', 'on')) spip_unlink($on[0]);
+			}
+		}
+	}
 	if ($flux['args']['form']=='inscription'){
 		if(!function_exists('lire_config'))
 			include_spip('inc/config');
@@ -681,6 +712,7 @@ function inscription3_formulaire_traiter($flux){
 
 				// ajouter le nouveau
 				include_spip('action/iconifier');
+				spip_log(type_du_logo('id_auteur').'on'.$user['id_auteur'],'test_logo.'._LOG_ERREUR);
 				action_spip_image_ajouter_dist(
 					type_du_logo('id_auteur').'on'.$user['id_auteur'], false, false
 				);
@@ -847,6 +879,11 @@ function inscription3_editer_contenu_objet($flux){
 				$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_cextra_creation.*<\/li>),Uims","",$flux['data'],1);
 				$inserer_saisie .= "<input type='hidden' name='creation' value='".$flux['args']['contexte']['creation']."' />\n";
 			}
+		}
+		if(!test_espace_prive() && $config['logo_fiche_mod'] == 'on'){
+			$flux['data'] = preg_replace(',<(form.*[^>])>,Uims','<\\1 enctype=\'multipart/form-data\'>',$flux['data'],1);
+			$saisie_logo = recuperer_fond('formulaires/inscription_logo',$flux['args']['contexte']);
+			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras inscription_logo">'.$saisie_logo.'</ul>'."\n".'$1', $flux['data']);
 		}
 		if(in_array('url_site',$champs_vires) && in_array('nom_site',$champs_vires))
 			$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer_liens.*<\/li>),Uims","",$flux['data'],1);

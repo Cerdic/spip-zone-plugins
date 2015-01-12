@@ -1,0 +1,11 @@
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<li class="editer_logo">
+	<label for="logo"><:inscription3:label_logo_auteur:></label>
+	<input type="file" name="logo" id="logo_auteur" />
+	[(#LOGO_AUTEUR|oui)
+	<div class="choix">
+		<input type="checkbox" name="supprimer_logo" id="supprimer_logo" />
+		<label for="supprimer_logo"><:inscription3:label_supprimer_logo:></label>
+	</div>]
+</li>
+</BOUCLE_auteur>
