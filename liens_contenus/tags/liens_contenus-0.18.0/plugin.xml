@@ -1,0 +1,40 @@
+<plugin>
+	<nom>Liens inter-contenus</nom>
+	<slogan>Emp&#234;cher la suppression d'un objet si d’autres pointent vers lui</slogan>
+	<auteur>Nicolas Hoizey</auteur>
+	<licence>&#169; 2007 GNU/GPL</licence>
+	<version>0.18.0</version>
+	<version_base>0.2</version_base>
+	<install>base/lienscontenus_upgrade.php</install>
+	<etat>dev</etat>
+	<description>
+Ce plugin permet d'identifier les liens d&#233;finis entre les contenus au sein de leurs &#233;l&#233;ments textuels, et donc notamment d'{{&#233;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&#232;ve, d'un site, d'un document ou m&#234;me d'un mod&#232;le, vers lesquels pointent d'autres contenus.
+
+Reste &#224; faire :
+-* Etendre le contr&#244;le de depublication aux actions dans les listes
+-* Proposer une option de configuration pour interdire la suppression d'objets li&#233;s depuis des objets en ligne ou juste alerter
+-* Initialisation progressive en cron pour les gros sites
+-* R&#233;f&#233;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&#233;dric ?)
+	</description>
+   <chemin dir='' />
+	<prefix>lienscontenus</prefix>
+	<options>lienscontenus_options.php</options>
+	<fonctions>lienscontenus_fonctions.php</fonctions>
+	<pipeline>
+		<nom>post_edition</nom>
+		<action>post_edition</action>
+		<inclure>lienscontenus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<action>affiche_droite</action>
+		<inclure>lienscontenus_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>lienscontenus_pipelines.php</inclure>
+	</pipeline>
+	<categorie>navigation</categorie>
+   <necessite id='SPIP' version='[1.9.2;1.9.2]' />
+</plugin>

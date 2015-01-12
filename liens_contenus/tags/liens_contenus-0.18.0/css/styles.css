@@ -1,0 +1,44 @@
+.liens_contenus {
+    list-style-type: none;
+}
+
+.liens_contenus .rubrique {
+    list-style-image: url(../images/rubrique-12.gif);
+}
+
+.liens_contenus .article {
+    list-style-image: url(../images/article-12.gif);
+}
+
+.liens_contenus .breve {
+    list-style-image: url(../images/breve-12.gif);
+}
+
+.liens_contenus .syndic {
+    list-style-image: url(../images/syndic-12.gif);
+}
+
+.liens_contenus .document {
+    list-style-image: url(../images/document-12.gif);
+}
+
+.liens_contenus .auteur {
+    list-style-image: url(../images/auteur-12.gif);
+}
+
+.liens_contenus .mot {
+    list-style-image: url(../images/mot-12.gif);
+}
+
+.liens_contenus .modele {
+    list-style-image: url(../images/modele-12.gif);
+}
+
+.liens_contenus .form {
+    list-style-image: url(../images/form-12.gif);
+}
+
+.liens_contenus .ko a, .liens_contenus .ko a:active, .liens_contenus .ko a:visited {
+	color: red;
+	text-decoration: line-through;
+}
