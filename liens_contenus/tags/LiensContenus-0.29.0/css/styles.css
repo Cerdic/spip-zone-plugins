@@ -1,0 +1,80 @@
+.liens_contenus {
+    list-style-type: none;
+}
+
+.liens_contenus li {
+  margin-top: 5px;
+}
+
+.liens_contenus .rubrique {
+    list-style-image: url(../images/rubrique-12.gif);
+}
+
+.liens_contenus .article {
+    list-style-image: url(../images/article-12.gif);
+}
+
+.liens_contenus .breve {
+    list-style-image: url(../images/breve-12.gif);
+}
+
+.liens_contenus .syndic {
+    list-style-image: url(../images/syndic-12.gif);
+}
+
+.liens_contenus .document {
+    list-style-image: url(../images/document-12.gif);
+}
+
+.liens_contenus .auteur {
+    list-style-image: url(../images/auteur-12.gif);
+}
+
+.liens_contenus .mot {
+    list-style-image: url(../images/mot-12.gif);
+}
+
+.liens_contenus .modele {
+    list-style-image: url(../images/modele-12.gif);
+}
+
+.liens_contenus .form {
+    list-style-image: url(../images/form-12.gif);
+}
+
+.liens_contenus a {
+  padding-left: 12px;
+}
+
+.liens_contenus .ko {
+	color: red;
+  /*text-decoration: line-through;*/
+}
+
+.liens_contenus .poubelle {
+  background: url(../images/statut-poubelle.gif) no-repeat left 3px;
+}
+
+.liens_contenus .prepa {
+  background: url(../images/statut-prepa.gif) no-repeat left 3px;
+}
+
+.liens_contenus .prop {
+  background: url(../images/statut-prop.gif) no-repeat left 3px;
+}
+
+.liens_contenus .publie {
+  background: url(../images/statut-publie.gif) no-repeat left 3px;
+}
+
+.liens_contenus .refuse {
+  background: url(../images/statut-refuse.gif) no-repeat left 3px;
+}
+
+div.alerte {
+	margin: 0 0 1em 0;
+	padding: 5px 5px 5px 25px;
+	background: red url(../images/alerte.png) no-repeat 5px 5px;
+	color: white;
+	font-weight: bold;
+}
