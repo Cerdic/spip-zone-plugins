@@ -26,6 +26,6 @@
 
 	<menu nom="configurer_player" titre="player:player_nom" parent="menu_squelette" icone="images/player-16.png" />
 
-	<utilise nom="medias" compatibilite="[;]" />
+	<utilise nom="medias" compatibilite="[2.7.27;]" />
 
 </paquet>
