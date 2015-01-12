@@ -202,13 +202,15 @@ function lienscontenus_verification()
   return $data;
 }
 
-function lienscontenus_verification_articles()
+function lienscontenus_verification_article()
 {
+  spip_log('lienscontenus_verification_article');
   $data = lienscontenus_verification();
   $script = <<<EOS
         <script language="javascript" type="text/javascript">
-        $(document).ready(function() {
-            var estPublie = $('ul.instituer_article.instituer > li > ul > li.publie.selected').size() == 1;
+	$(document).ready(function() {
+            var statutActuel = $('select[name=statut] option:selected').val();
+            var estPublie = statutActuel == 'publie';
             var estLie = $('#liens_contenus_contenants > li > a.publie').size() > 0;
             var estLiantOk = $('#liens_contenus_contenus > li > a.ok.publie').size() > 0;
             var estLiantOkNonPublie = $('#liens_contenus_contenus > li > a.ok:not(.publie)').size() > 0;
@@ -218,37 +220,31 @@ function lienscontenus_verification_articles()
             }
             if (estPublie && estLiantKo) {
               $('div.fiche_objet').prepend('<div class="alerte">' + messageAlertePublieContenantKo + '</div>');
-            }
-            // ETAPE 1 : Alerte en cas de dépublication d'un article vers lequel pointent des contenus publies
-            if (estPublie && estLie) {
-              $('ul.instituer_article.instituer > li > ul > li:not(.selected) > a').each(function(){
-                this.onclick = null; // this plutot que $(this), pas tous les jours facile
-                $(this).bind('click', function(event){
-                  if (confirm(messageConfirmationDepublication)) {
-                    // changement confirme
-                    $(this).unbind('click');
-                    $(this).trigger('click');
-                  } else {
-                    return false;
-                  }
-                });
-              });
-            }
-            // ETAPE 2 : Alerte en cas de publication d'un article qui pointe vers des contenus non publies
-            if (!estPublie && estLiantOk) {
-              $('ul.instituer_article.instituer > li > ul > li.publie > a').each(function(){
-                this.onclick = null; // this plutot que $(this), pas tous les jours facile
-                $(this).bind('click', function(event){
-                  if (confirm(messageConfirmationPublication)) {
-                    // changement confirme
-                    $(this).unbind('click');
-                    $(this).trigger('click');
-                  } else {
-                    return false;
-                  }
-                });
-              });
-            }
+	    }
+	    $('select[name=statut]').bind("change", function() { 
+              // Prévenir le double affichage de message en cas de cancel
+	      var statutNouveau = $('select[name=statut] option:selected').val();
+              if ( statutNouveau == statutActuel ) {
+                return true;
+              }
+              /* Ancien ETAPE 1 : Alerte en cas de dépublication d'un article vers lequel pointent des contenus publies */
+              if (estPublie && estLie) {
+                if (!confirm(messageConfirmationDepublication)) {
+                  // DONE : change le tit icône aussi
+                  $('select[name=statut]').val(statutActuel);
+                  $('select[name=statut]').trigger('change');
+                }
+	      }
+              /* Ancien ETAPE 2 : Alerte en cas de publication d'un article qui pointe vers des contenus non publies */
+              if (!estPublie && estLiantOK) {
+                if (!confirm(messageConfirmationPublication)) {
+                  // DONE : change le tit icône aussi
+		  $('select[name=statut]').val(statutActuel);
+                  $('select[name=statut]').trigger('change');
+                }
+              }
+
+            });
             // ETAPE 3 : Gestion des changements de statut de l'article
             // on ajoute une classe specifique aux liens de suppression des docs
             $('div[id^=legender-]').each(function() {
@@ -294,8 +290,9 @@ EOS;
   return $data;
 }
 
-function lienscontenus_verification_articles_edit()
+function lienscontenus_verification_article_edit()
 {
+  spip_log('lienscontenus_verification_article');
   // TODO : Quand on met a jour le doc, comment relancer cela ?
   // TODO : Y a t'il parfois de l'AjaxSqueeze pour la suppression de doc ?
   $data = lienscontenus_verification();
@@ -346,8 +343,9 @@ EOS;
   return $data;
 }
 
-function lienscontenus_verification_breves_edit()
+function lienscontenus_verification_breve_edit()
 {
+  spiplog('lienscontenus_verification_breve_edit');
   $data = lienscontenus_verification();
   $script = <<<EOS
         <script language="javascript" type="text/javascript">
@@ -381,8 +379,9 @@ EOS;
   return $data;
 }
 
-function lienscontenus_verification_sites()
+function lienscontenus_verification_site()
 {
+  spip_log('lienscontenus_verification_site');
   $data = lienscontenus_verification();
   $script = <<<EOS
         <script language="javascript" type="text/javascript">
@@ -418,6 +417,7 @@ EOS;
 
 function lienscontenus_verification_auteur_infos()
 {
+  spip_log('lienscontenus_verification_auteur_infos');
   $data = lienscontenus_verification();
   $script = <<<EOS
         <script language="javascript" type="text/javascript">
@@ -452,6 +452,7 @@ EOS;
 
 function lienscontenus_verification_mots_tous()
 {
+  spip_log('lienscontenus_verification_mots_tous');
   // TODO : A finir...
   $data = lienscontenus_verification();
   $script = <<<EOS
@@ -514,8 +515,9 @@ EOS;
   return $data;
 }
 
-function lienscontenus_verification_articles_page()
+function lienscontenus_verification_article_page()
 {
+  spip_log('lienscontenus_verification_article_page');
   // TODO : A finir...
   $data = lienscontenus_verification();
   $script = <<<EOS
@@ -547,8 +549,9 @@ EOS;
   return $data;
 }
 
-function lienscontenus_verification_naviguer()
+function lienscontenus_verification_rubrique()
 {
-  lienscontenus_verification_articles_page();
+  spip_log('lienscontenus_verification_rubrique');
+  lienscontenus_verification_article_page();
 }
-?>
+

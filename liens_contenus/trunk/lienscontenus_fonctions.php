@@ -4,8 +4,8 @@ function lienscontenus_generer_url($type_objet, $id_objet)
 {
   // TODO : Ajouter les autres
 	$liste_urls = array(
-    'rubrique' => array('naviguer', 'id_rubrique'),
-    'article' => array('articles', 'id_article'),
+    'rubrique' => array('rubrique', 'id_rubrique'),
+    'article' => array('article', 'id_article'),
     'breve' => array('breves_voir', 'id_breve'),
     'syndic' => array('sites', 'id_syndic'),
     'mot' => array('mots_edit', 'id_mot'),
@@ -101,4 +101,4 @@ function lienscontenus_presentation_lien($type_objet, $id_objet)
   }
       
 }
-?>
+

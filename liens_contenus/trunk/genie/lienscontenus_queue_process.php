@@ -7,4 +7,4 @@ function genie_lienscontenus_queue_process_dist($t, $verbose = 'no') {
 	}
 	return 1;
 }
-?>
+

@@ -8,8 +8,8 @@ function lienscontenus_pre_edition($flux)
 	}
 
 	$id_objet = $flux['args']['id_objet'];
-    $type_objet = $flux['args']['type'];
-    $data = $flux['data'];
+	$type_objet = $flux['args']['type'];
+	$data = $flux['data'];
 
     // Traitement des redirections
 	if ($type_objet == 'article' && substr($data['chapo'], 0, 1) == '=') {
@@ -22,24 +22,25 @@ function lienscontenus_pre_edition($flux)
 	return $flux;
 }
 
-function lienscontenus_affiche_droite($flux)
+function lienscontenus_affiche_gauche($flux)
 {
 	if (!isset($flux['args']['exec'])) {
 		return $flux;
+		
 	}
 
 	$exec = $flux['args']['exec'];
-
- 	// TODO : Ajouter les autres
+	
+	// TODO : Ajouter les autres
 	$liste_pages_unitaires = array(
-    'naviguer' => array('rubrique', 'id_rubrique'),
-    'articles' => array('article', 'id_article'),
-    'breves_voir' => array('breve', 'id_breve'),
-    'breves_edit' => array('breve', 'id_breve'),
-    'sites' => array('syndic', 'id_syndic'),
-    'mots_edit' => array('mot', 'id_mot'),
-    'auteur_infos' => array('auteur', 'id_auteur'),
-    'forms_edit' => array('form', 'id_form')
+          'rubrique' => array('rubrique', 'id_rubrique'),
+          'article' => array('article', 'id_article'),
+          'breves_voir' => array('breve', 'id_breve'),
+          'breves_edit' => array('breve', 'id_breve'),
+          'sites' => array('syndic', 'id_syndic'),
+          'mots_edit' => array('mot', 'id_mot'),
+          'auteur_infos' => array('auteur', 'id_auteur'),
+          'forms_edit' => array('form', 'id_form')
 	);
 	if (isset($liste_pages_unitaires[$exec])) {
 		$type = $liste_pages_unitaires[$exec];
@@ -63,4 +64,4 @@ function lienscontenus_taches_generales_cron($taches_generales) {
 	$taches_generales['lienscontenus_queue_process'] = 60; // toutes les minutes
     return $taches_generales;
 }
-?>
+

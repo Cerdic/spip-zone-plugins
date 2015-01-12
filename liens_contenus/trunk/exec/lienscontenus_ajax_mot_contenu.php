@@ -10,4 +10,4 @@ function exec_lienscontenus_ajax_mot_contenu()
   echo '<'.'?xml version="1.0" encoding="utf-8" ?>'."\n".$retour;
   exit;
 }
-?>
+

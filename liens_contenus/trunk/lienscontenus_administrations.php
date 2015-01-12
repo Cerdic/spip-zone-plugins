@@ -1,10 +1,41 @@
 <?php
+
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
+/**
+ * Installation/maj des tables lienscontenus
+ *
+ * @param string $nom_meta_base_version
+ * @param string $version_cible
+ */
 function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
 {
+	spip_log('Install/upgrade du plugin', 'liens_contenus');
+	
+	// le prefixe est passe des majuscules aux minuscules :
+	if (isset($GLOBALS['meta']['lienscontenus_base_version']) AND !isset($GLOBALS['meta'][$nom_meta_base_version]))
+	$GLOBALS['meta'][$nom_meta_base_version] = $GLOBALS['meta']['lienscontenus_base_version'];
+
+	$maj = array();
+	
+	$maj['create'] = array(
+		array('maj_tables', array('spip_liens_contenus','spip_liens_contenus_todo')),
+	);
+	
+	// TODO : Déclarer les versions
+	
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	
+	// TODO : Voir si c'est la bonne façon de faire
+	include_spip('inc/lienscontenus');
+	lienscontenus_initialiser();
+
+	
+	/*
 	$current_version = 0.0;
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 	|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version]) != $version_cible)) {
@@ -43,13 +74,19 @@ function lienscontenus_upgrade($nom_meta_base_version, $version_cible)
           ecrire_meta($nom_meta_base_version, $current_version='0.4', 'non');
         }
 	}
+	*/
 }
 
-function lienscontenus_vider_tables($nom_meta_base_version)
-{
-  spip_log('Suppression des tables du plugin', 'liens_contenus');
+/**
+ * Desinstallation/suppression des tables lienscontenus
+ *
+ * @param string $nom_meta_base_version
+ */
+function lienscontenus_vider_tables($nom_meta_base_version) {
+	spip_log('Suppression des tables du plugin', 'liens_contenus');
 	sql_drop_table("spip_liens_contenus");
-    sql_drop_table("spip_liens_contenus_todo");
+	sql_drop_table("spip_liens_contenus_todo");
 	effacer_meta($nom_meta_base_version);
+	// Effacer la config
+	effacer_meta('lienscontenus');
 }
-?>
