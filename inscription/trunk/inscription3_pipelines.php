@@ -302,7 +302,7 @@ function inscription3_formulaire_charger($flux){
 /**
  * Insertion dans le pipeline formulaire_verifier (SPIP)
  *
- * Vérifie des valeurs spécifiques dans le formulaire d'inscription
+ * Vérifie des valeurs spécifiques dans le formulaire d'inscription et d'édition d'auteur (pour le logo)
  *
  * @pipeline formulaire_verifier
  * @param array $flux
@@ -334,6 +334,7 @@ function inscription3_formulaire_verifier($flux){
 			}
 		}
 	}
+
 	if (in_array($flux['args']['form'],array('editer_auteur','inscription'))){
 		/**
 		 * On inclue inscription3_fonctions pour prendre en compte la surcharge de
@@ -346,6 +347,63 @@ function inscription3_formulaire_verifier($flux){
 		$config_i3 = lire_config('inscription3',array());
 		if($erreurs['message_erreur'] == NULL)
 			unset($erreurs['message_erreur']);
+		
+		/**
+		 * Vérifier le logo
+		 */
+		if(isset($_FILES['logo']) && ($_FILES['logo']['error'] == 0)){
+			$f =_DIR_LOGOS . $arg . '.tmp';
+			include_spip('inc/documents');
+			if ($erreur = check_upload_error($source['error'],"",f))
+				$erreurs['logo'] = $erreur;
+			else
+				$source = deplacer_fichier_upload($_FILES['logo']['tmp_name'], $f);
+			
+			if ($source AND $f) {
+				global $formats_logos;
+				$size = @getimagesize($f);
+				$type = !$size ? '': ($size[2] > 3 ? '' : $formats_logos[$size[2]-1]);
+				if ($type) {
+					$poids = filesize($f);
+	
+					if (_LOGO_MAX_SIZE > 0
+					AND $poids > _LOGO_MAX_SIZE*1024) {
+						spip_unlink ($f);
+						$erreur = _T('info_logo_max_poids',
+											array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
+											'actuel' => taille_en_octets($poids)));
+					}
+		
+					elseif (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
+					AND ($size[0] > _LOGO_MAX_WIDTH
+					OR $size[1] > _LOGO_MAX_HEIGHT)) {
+						spip_unlink ($f);
+						$erreur = _T('info_logo_max_poids',
+											array(
+											'maxi' =>
+												_T('info_largeur_vignette',
+													array('largeur_vignette' => _LOGO_MAX_WIDTH,
+													'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
+											'actuel' =>
+												_T('info_largeur_vignette',
+													array('largeur_vignette' => $size[0],
+													'hauteur_vignette' => $size[1]))
+											));
+					}
+					spip_unlink ($f);
+				}
+				else {
+					spip_unlink ($f);
+					$erreur = _T('info_logo_format_interdit',
+											array('formats' => join(', ', $formats_logos)));
+				}
+			}
+
+			if ($erreur){
+				$erreurs['logo'] = $erreur;
+			}
+		}
+
 		/**
 		 * Vérification des champs obligatoires
 		 * En fonction de ceux présents dans le formulaire
@@ -712,7 +770,6 @@ function inscription3_formulaire_traiter($flux){
 
 				// ajouter le nouveau
 				include_spip('action/iconifier');
-				spip_log(type_du_logo('id_auteur').'on'.$user['id_auteur'],'test_logo.'._LOG_ERREUR);
 				action_spip_image_ajouter_dist(
 					type_du_logo('id_auteur').'on'.$user['id_auteur'], false, false
 				);
