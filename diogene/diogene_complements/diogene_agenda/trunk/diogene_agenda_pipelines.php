@@ -177,9 +177,14 @@ function diogene_agenda_diogene_traiter($flux){
 			 * On fait attention à donner un statut existant au statut
 			 */
 			$statuts = array_keys(objet_info('evenement','statut_titres'));
-			if(!in_array(_request('statut'),$statuts)){
-				$statut_article = _request('statut');
+			$statut_article = _request('statut') ? _request('statut') : sql_getfetsel('statut','spip_articles','id_article='.intval($id_article));
+			$statut_post = _request('statut');
+
+			if(!in_array($statut_article,$statuts)){
 				set_request('statut',$statuts[0]);
+			}
+			else{
+				set_request('statut',$statut_article);
 			}
 
 			if(intval(_request('id_evenement')) > 0)
@@ -193,8 +198,8 @@ function diogene_agenda_diogene_traiter($flux){
 			/**
 			 * On remet le statut et le titre de l'article dans l'environnement du $_POST
 			 */
-			if($statut_article)
-				set_request('statut',$statut_article);
+			
+			set_request('statut',$statut_post);
 			if($titre_article)
 				set_request('titre',$titre_article);
 		}
