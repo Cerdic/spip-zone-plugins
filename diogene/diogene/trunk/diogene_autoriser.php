@@ -178,9 +178,10 @@ if(!function_exists('autoriser_rubrique_publierdans')){
 		$id_secteur = sql_getfetsel('id_secteur','spip_rubriques','id_rubrique='.intval($id));
 		if($id == 0)
 			$id_secteur=0;
-	
+
 		$statut_diogene = sql_getfetsel('statut_auteur_publier','spip_diogenes','id_secteur='.intval($id_secteur));
 		$statut = $statut_diogene ? $statut_diogene : '0minirezo';
+		
 		return ($qui['statut'] AND $id
 			AND ($qui['statut'] <= $statut)) OR autoriser_rubrique_publierdans_dist($faire, $type, $id, $qui, $opt);
 	}
@@ -205,26 +206,31 @@ if(!function_exists('autoriser_rubrique_publierdans')){
  */
 if(!function_exists('autoriser_article_modifier')){
 	function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
-		$r = sql_fetsel("id_secteur,id_rubrique,statut", "spip_articles", "id_article=".sql_quote($id));
-		
+		$r = sql_fetsel("id_secteur,id_rubrique,statut", "spip_articles", "id_article=".intval($id));
 		if(!$r)
 			return false;
-		
-		if (!function_exists('auteurs_article'))
-			include_spip('inc/auth'); // pour auteurs_article si espace public
 			
 		return
+			in_array($qui['statut'], array('0minirezo')) OR
 			(
 				(autoriser('publierdans', 'rubrique', $r['id_rubrique'], $qui, $opt)
-				AND auteurs_article($id, "id_auteur=".$qui['id_auteur']))
+				AND auteurs_article($id, "id_auteur=".intval($qui['id_auteur'])))
 				OR (
 					(!isset($opt['statut']) OR $opt['statut']!=='publie')
 					AND in_array($qui['statut'], array('0minirezo', '1comite'))
 					AND in_array($r['statut'], array('prop','prepa', 'publie'))
 					AND auteurs_article($id, "id_auteur=".$qui['id_auteur'])
 				)
-			)
-			OR in_array($qui['statut'], array('0minirezo'));
+			);
+	}
+}
+
+if(!function_exists('autoriser_article_instituer')){
+	function autoriser_article_instituer($faire, $type, $id, $qui, $opt) {
+		$statut = sql_getfetsel('statut','spip_articles','id_article='.intval($id));
+		if(isset($opt['statut']) && $opt['statut'] == $statut)
+			return true;
+		return autoriser_article_modifier($faire, $type, $id, $qui, $opt);
 	}
 }
 /**
