@@ -27,5 +27,5 @@
 	<menu nom="configurer_multilangue" titre="multilang:configuration_multilang" parent="menu_configuration" icone="images/multilang-16.png" />
 	
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
-	<utilise nom="crayons" compatibilite="[1.13.0;] />
+	<utilise nom="crayons" compatibilite="[1.13.0;]" />
 </paquet>
