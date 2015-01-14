@@ -740,9 +740,9 @@ function diogene_diogene_verifier($flux){
 		 */
 		include_spip('inc/date_gestion');
 		if(!$flux['args']['erreurs']['date'] && ($date = _request('date_orig')))
-			$date_orig = verifier_corriger_date_saisie('orig', 'oui', $flux['args']['erreurs']);
+			$date_orig = verifier_corriger_date_saisie('orig', 'oui', $flux['data']);
 		if(!$flux['args']['erreurs']['date_redac'] && ($date = _request('date_redac_orig')))
-			$date_redac_orig = verifier_corriger_date_saisie('redac_orig', 'oui', $flux['args']['erreurs']);
+			$date_redac_orig = verifier_corriger_date_saisie('redac_orig', 'oui', $flux['data']);
 	}
 	if(!$flux['args']['erreurs']['forums'] && ($forums = _request('forums')) && !in_array($forums,array('pos','pri','abo','non')))
 		$flux['data']['forums'] = _T('diogene:erreur_forums');
