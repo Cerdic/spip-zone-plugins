@@ -144,6 +144,7 @@ function traiter_paiement_paybox_dist($args, $retours){
 		}
 	}
 //fin
+	$retours['traitements']['paiement_paybox'] = true;
 	return $retours;
 }
 

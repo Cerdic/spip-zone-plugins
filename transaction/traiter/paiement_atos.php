@@ -142,6 +142,7 @@ function traiter_paiement_atos_dist($args, $retours){
 		}
 	}
 //fin
+	$retours['traitements']['paiement_atos'] = true;
 	return $retours;
 }
 

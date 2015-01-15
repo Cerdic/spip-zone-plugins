@@ -147,6 +147,7 @@ function traiter_paiement_paypal_dist($args, $retours){
 		}
 	}
 //fin
+	$retours['traitements']['paiement_paypal'] = true;
 	return $retours;
 }
 

@@ -160,6 +160,7 @@ function traiter_paiement_cmcic_dist($args, $retours){
 		}
 	}
 //fin
+	$retours['traitements']['paiement_cmcic'] = true;
 	return $retours;
 }
 

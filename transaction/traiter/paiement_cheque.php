@@ -30,6 +30,7 @@ function traiter_paiement_cheque_dist($args, $retours){
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
 	
+	$retours['traitements']['paiement_cheque'] = true;
 	return $retours;
 }
 

@@ -31,6 +31,7 @@ function traiter_paiement_virement_dist($args, $retours){
 	// Le formulaire a été validé, on le masque
 	$retours['editable'] = false;
 	
+	$retours['traitements']['paiement_virement'] = true;
 	return $retours;
 }
 
