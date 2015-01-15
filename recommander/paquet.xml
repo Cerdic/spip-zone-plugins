@@ -1,7 +1,7 @@
 <paquet
 	prefix="recommander"
 	categorie="communication"
-	version="1.0.7"
+	version="1.0.8"
 	etat="stable"
 	compatibilite="[2.0.12;3.1.*]"
 	logo="images/recommander_logo.png"
