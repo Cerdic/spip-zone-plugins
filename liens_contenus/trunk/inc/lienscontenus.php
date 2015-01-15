@@ -196,6 +196,7 @@ function lienscontenus_verification()
         'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
         'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
         'var messageAlertePublieContenantKo="'._T('lienscontenus:alerte_publie_contenant_ko').'";' .
+        'var messageAlerteNonPublieMaisLie="'._T('lienscontenus:alerte_non_publie_mais_lie').'";' .
         'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
         '</script>';
     $data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
@@ -220,6 +221,9 @@ function lienscontenus_verification_article()
                 }
                 if (estPublie && estLiantKo) {
                     $('div.fiche_objet').prepend('<div class="alerte">' + messageAlertePublieContenantKo + '</div>');
+                }
+                if (estLie && !estPublie ) {
+                    $('div.fiche_objet').prepend('<div class="alerte">' + messageAlerteNonPublieMaisLie + '</div>');
                 }
                 $('select[name=statut]').bind("change", function() { 
                     // Prévenir le double affichage de message en cas de cancel
