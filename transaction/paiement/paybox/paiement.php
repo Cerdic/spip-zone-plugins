@@ -24,6 +24,35 @@
 /*************************************************************************************/
 ?>
 <?php
+	function footprint($params_paybox, $total, $transaction, $porteur, $time) {
+		$msg =
+			"PBX_SITE=".$params_paybox['site'].
+			"&PBX_RANG=".$params_paybox['rang'].
+			"&PBX_IDENTIFIANT=".$params_paybox['id'].
+			"&PBX_TOTAL=$total".
+			"&PBX_DEVISE=978".
+ 			"&PBX_CMD=$transaction".
+			"&PBX_PORTEUR=$porteur".
+			"&PBX_RETOUR=Mt:Mt:M;Ref:R;Auto:A;Erreur:E".
+			(isset($params_paybox['retour_ok'])
+				? "&PBX_EFFECTUE=".urlencode($params_paybox['retour_ok'])
+				: '').
+			(isset($params_paybox['retour_ko'])
+				? "&PBX_REFUSE=".urlencode($params_paybox['retour_ko'])
+				: '').
+			(isset($params_paybox['retour_ok'])
+				? "&PBX_ANNULE=".urlencode($params_paybox['retour_ko'])
+				: '').
+			"&PBX_HASH=SHA512".
+			"&PBX_TIME=$time";
+
+
+		$cle_bin = pack("H*", $params_paybox['cle']);
+		$hmac = strtoupper(hash_hmac('SHA512', $msg, $cle_bin));
+
+		return $hmac;
+	}
+
 	//Charger SPIP
 	if (!defined('_ECRIRE_INC_VERSION')) {
 		// recherche du loader SPIP.
@@ -46,26 +75,31 @@
 	}
 
 	//CONFIGURATION DU PAIEMENT PAYBOX
-	$mode = '1';
-	$site = 'SITE';
-	$rang = 'RANG';
-	$id = 'IDENTIFIANT';
-	$devise = '978';
-	$serveur = $GLOBALS['meta']['adresse_site']."/cgi-bin/modulev2.cgi";
+	$params_paybox = false;
+	if (isset($GLOBALS['PARAMS_PAYBOX'])) {
+		$params_paybox = $GLOBALS['PARAMS_PAYBOX'];
+	} else {
+		$params_paybox = array(
+			'site' => '1999888',
+			'rang' => '32',
+			'id' => '2',
+			'cle' => '0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF',
+			'serveur' => 'https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi',
+			//'retour_ok' => $GLOBALS['meta']['adresse_site']."/?page=transaction_merci",
+			//'retour_ko' => $GLOBALS['meta']['adresse_site']."/?page=transaction_regret",
+		);
+	}
 	//FIN CONFIGURATION DU PAIEMENT PAYBOX
-	    	
-	$lang = $_SESSION['langue_paybox'];
-	$retourok = $GLOBALS['meta']['adresse_site']."/?page=transaction_merci";
-	$retourko = $GLOBALS['meta']['adresse_site']."/?page=transaction_regret";
-	
+
 	session_start();
 
-	$total = $_SESSION['total'];
-
-	$total *= 100;
-
+	$lang = $_SESSION['langue_paybox'];
+	$total = intval($_SESSION['total']) * 100;
 	$transaction = urlencode($_SESSION['ref']);
+	$porteur = $_SESSION['porteur'];
+	$time = date("c");
 
+	$hmac = footprint($params_paybox, $total, $transaction, $porteur, $time);
 ?>
 
 <html>
@@ -79,29 +113,29 @@
 </head>
 <body onload="document.getElementById('formpaybox').submit();">
 
-
 <table align="center">
-
   <tr>
-
     <td>
-	
-	<form action="<?php echo $serveur; ?>" id="formpaybox" method="post">
- 		<input type="hidden" name="PBX_MODE" value="<?php echo $mode; ?>"> 
- 		<input type="hidden" name="PBX_SITE" value="<?php echo $site; ?>"> 
- 		<input type="hidden" name="PBX_RANG" value="<?php echo $rang; ?>"> 
- 		<input type="hidden" name="PBX_IDENTIFIANT" value="<?php echo $id; ?>"> 
- 		<input type="hidden" name="PBX_TOTAL" value="<?php echo $total; ?>">
- 		<input type="hidden" name="PBX_DEVISE" value="<?php echo $devise; ?>"> 
- 		<input type="hidden" name="PBX_PORTEUR" value=""> 
- 		<input type="hidden" name="PBX_REFUSE" value="<?php echo $retourko; ?>"> 
- 		<input type="hidden" name="PBX_ANNULE" value="<?php echo $retourko; ?>"> 
- 		<input type="hidden" name="PBX_CMD" value="<?php echo $transaction; ?>"> 
- 		<input type="hidden" name="PBX_RETOUR" value="montant:M;ref:R;auto:A;trans:T;erreur:E"> 
- 		<input type="hidden" name="PBX_EFFECTUE" value="<?php echo $retourok; ?>"> 
- 		
- 		
- 		
+	<form action="<?php echo $params_paybox['serveur']; ?>" id="formpaybox" method="post" />
+ 		<input type="hidden" name="PBX_SITE" value="<?php echo $params_paybox['site']; ?>" />
+ 		<input type="hidden" name="PBX_RANG" value="<?php echo $params_paybox['rang']; ?>" />
+ 		<input type="hidden" name="PBX_IDENTIFIANT" value="<?php echo $params_paybox['id']; ?>" />
+ 		<input type="hidden" name="PBX_TOTAL" value="<?php echo $total; ?>" />
+ 		<input type="hidden" name="PBX_DEVISE" value="978" />
+ 		<input type="hidden" name="PBX_CMD" value="<?php echo $transaction; ?>" />
+ 		<input type="hidden" name="PBX_PORTEUR" value="<?php echo $porteur; ?>" />
+ 		<input type="hidden" name="PBX_RETOUR" value="Mt:Mt:M;Ref:R;Auto:A;Erreur:E">
+		<?php if (isset($params_paybox['retour_ok'])) { ?>
+ 		<input type="hidden" name="PBX_EFFECTUE" value="<?php echo urlencode($params_paybox['retour_ok']); ?>" />
+		<?php } ?>
+		<?php if (isset($params_paybox['retour_ko'])) { ?>
+ 		<input type="hidden" name="PBX_REFUSE" value="<?php echo urlencode($params_paybox['retour_ko']); ?>" />
+ 		<input type="hidden" name="PBX_ANNULE" value="<?php echo urlencode($params_paybox['retour_ko']); ?>" />
+		<?php } ?>
+ 		<input type="hidden" name="PBX_HASH" value="SHA512" />
+ 		<input type="hidden" name="PBX_TIME" value="<?php echo $time; ?>" />
+ 		<input type="hidden" name="PBX_HMAC" value="<?php echo $hmac; ?>" />
+
 		<input type="image" src="<?php echo ($GLOBALS['meta']['adresse_site'].'/'.find_in_path("paiement/paybox/logo.jpg")); ?>" />
 	</form>
 	

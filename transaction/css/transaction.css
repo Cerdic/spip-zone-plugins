@@ -5,6 +5,6 @@
 .paypal { color: #000; font-weight: normal; font-size: 12px; background: url('../paiement/paypal/logo.png') no-repeat top left; }
 .transaction_info { font-size: 0.6em; }
 .transaction_erreur { color: red; }
-a.valider { background: url(../images/button.png) no-repeat; display: block; color: green; font-weight: bold; height: 35px; line-height: 32px; margin-bottom: 14px; text-decoration: none; }
+a.valider { background: url(../images/button.png) no-repeat; display: block; color: green; font-weight: bold; height: 35px; line-height: 32px; margin-bottom: 14px; text-decoration: none; font-size: smaller; }
 a:hover.valider { color: #0066CC; }
 a.valider span { background: transparent url(../images/paiement_cb.png) 0 2px no-repeat; text-indent: 73px; display: block; }
