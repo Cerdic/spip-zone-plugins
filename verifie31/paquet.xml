@@ -2,7 +2,7 @@
 	prefix="verifie31"
 	categorie="maintenance"
 	version="1.0.0"
-	etat="test"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/verifie31-64.png"
 	documentation="http://contrib.spip.net/4601"
