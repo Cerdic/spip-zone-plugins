@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'alerte_non_publie_mais_lie' => 'Attention, ce contenu n’est pas publié, mais des contenus publiés y font référence !',
 	'alerte_publie_contenant' => 'Attention, ce contenu est publié, mais contient des liens vers des contenus qui ne le sont pas !',
 	'alerte_publie_contenant_ko' => 'Attention, ce contenu est publié, mais contient des liens vers des contenus qui n’existent pas !',
-	'alerte_non_publie_mais_lie' => 'Attention, ce contenu n\'est pas publié, mais des contenus publiés y font référence !',
 	'aucun_objets_avec_lien_depuis_courant' => 'Ce contenu ne contient aucun lien vers un autre contenu.',
 	'aucun_objets_avec_lien_vers_courant' => 'Aucun autre contenu ne contient de lien vers celui-ci.',
 
