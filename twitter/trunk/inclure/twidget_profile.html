@@ -21,6 +21,7 @@ new TWTR.Widget({
 	interval: [(#ENV{interval,#CONFIG{twidget/interval,30000}}|intval)],
 	width: [(#ENV{width,#CONFIG{twidget/width,250}}|intval)],
 	height: [(#ENV{height,#CONFIG{twidget/height,300}}|intval)],
+	footer: '[(#ENV{footer,#CONFIG{twidget/footer,Rejoignez nous}}|texte_script)]',
 	theme: {
 		shell: {
 			background: '[(#ENV{shell_background,#CONFIG{twidget/shell_background,#8ec1da}}|texte_script)]',

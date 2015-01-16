@@ -88,6 +88,7 @@ Entrez ci-dessous les clés d\'identification et enregistrez (<a href="http://co
 	'label_interval' => "Intervalle de temps après lequel la page tweeter est rechargée",
 	'label_subject' => "Sujet de la fenêtre tweete",
 	'label_title' => "Titre de la fenêtre",
+	'label_footer' => "Texte du footer",
 	'label_width' => "Largeur de la fenêtre",
 	'label_height' => "Hauteur de la fenêtre",
 	'label_shell_background' => "Couleur de fond de la fenêtre tweeter",

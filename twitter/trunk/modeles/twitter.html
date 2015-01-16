@@ -1,0 +1,5 @@
+[(#ENV{user}|oui)
+<INCLURE{fond=inclure/twidget_profile,env,subject=#ENV{user}} />
+][(#ENV{user}|non)
+<INCLURE{fond=inclure/twidget_search,env,subject=#ENV{search}} />
+]

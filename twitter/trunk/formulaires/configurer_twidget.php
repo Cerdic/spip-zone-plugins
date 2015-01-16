@@ -17,74 +17,27 @@ include_spip('inc/filtres');
 function formulaires_configurer_twidget_charger_dist() {
 	$config = unserialize($GLOBALS['meta']['twidget']);
 
-	if ($config['search'])
-		$valeurs['search'] = $config['search'];
-	else
-		$valeurs['search'] = "#spip";
+	$valeurs = array(
+		'search' => "#spip",
+		'interval' => "30000",
+		'title' => "Du nouveau sur Twitter",
+		'subject' => "SPIP",
+		'width' => "250",
+		'height' => "300",
+		'shell_background' => "#8ec1da",
+		'shell_color' => "#ffffff",
+		'tweets_background' => "#ffffff",
+		'tweets_color' => "#444444",
+		'tweets_link' => "#1986b5",
+		'rpp' => "4",
+		'user' => "spip",
+		'footer' => "Rejoignez nous",
+	);
 
-	if ($config['interval'])
-		$valeurs['interval'] = $config['interval'];
-	else
-		$valeurs['interval'] = "30000";
-
-	if ($config['title'])
-		$valeurs['title'] = $config['title'];
-	else
-		$valeurs['title'] = "Du nouveau sur Twitter";
-
-	if ($config['subject'])
-		$valeurs['subject'] = $config['subject'];
-	else
-		$valeurs['subject'] = "SPIP";
-
-	if ($config['width'])
-		$valeurs['width'] = $config['width'];
-	else
-		$valeurs['width'] = "250";
-
-	if ($config['height'])
-		$valeurs['height'] = $config['height'];
-	else
-		$valeurs['height'] = "300";
-
-	if ($config['shell_background'])
-		$valeurs['shell_background'] = $config['shell_background'];
-	else
-		$valeurs['shell_background'] = "#8ec1da";
-
-	if ($config['shell_color'])
-		$valeurs['shell_color'] = $config['shell_color'];
-	else
-		$valeurs['shell_color'] = "#ffffff";
-
-	if ($config['tweets_background'])
-		$valeurs['tweets_background'] = $config['tweets_background'];
-	else
-		$valeurs['tweets_background'] = "#ffffff";
-
-
-	if ($config['tweets_color'])
-		$valeurs['tweets_color'] = $config['tweets_color'];
-	else
-		$valeurs['tweets_color'] = "#444444";
-
-
-	if ($config['tweets_link'])
-		$valeurs['tweets_link'] = $config['tweets_link'];
-	else
-		$valeurs['tweets_link'] = "#1986b5";
-
-	if ($config['rpp'])
-		$valeurs['rpp'] = $config['rpp'];
-	else
-		$valeurs['rpp'] = "4";
-
-
-	if ($config['user'])
-		$valeurs['user'] = $config['user'];
-	else
-		$valeurs['user'] = "spip";
-
+	foreach($valeurs as $k=>$v){
+		if (isset($config[$k]))
+			$valeurs[$k] = $config[$k];
+	}
 
 	// formulaire configurable ou non ?
 	include_spip("inc/twitter");
