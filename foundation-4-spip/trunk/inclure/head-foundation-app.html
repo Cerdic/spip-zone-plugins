@@ -6,6 +6,16 @@
 
 [(#REM) Foundation JS ]
 [(#CONFIG{foundation/javascript}|oui)
+
 [<script src="(#CHEMIN{bower_components/foundation/js/foundation.min.js})"></script>]
-[<script src="(#CHEMIN{js/app.js})"></script>]
+
+[(#REM) Rustine pour charger app.js automatiquement ]
+[<script type="text/javascript">
+  $.ajax({
+    type: "GET",
+    url: "(#CHEMIN{js/app.js}|texte_script)",
+    dataType: "script",
+    cache: true
+  });
+</script>]
 ]
