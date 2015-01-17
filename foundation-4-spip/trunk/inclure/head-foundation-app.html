@@ -11,11 +11,13 @@
 
 [(#REM) Rustine pour charger app.js automatiquement ]
 [<script type="text/javascript">
-  $.ajax({
-    type: "GET",
-    url: "(#CHEMIN{js/app.js}|texte_script)",
-    dataType: "script",
-    cache: true
+  $(function () {
+    $.ajax({
+      type: "GET",
+      url: "(#CHEMIN{js/app.js}|texte_script)",
+      dataType: "script",
+      cache: true
+    });
   });
 </script>]
 ]
