@@ -31,15 +31,13 @@
 		<p><input type="submit"  class="submit" value="<:paniers:action_ajouter:>" /></p></div>
 	</form>
 <br class="nettoyeur"/>
-
-
 </div>
 </B_selection>		
-[(#ENV{message_ok}|oui)
- <script type="text/javascript">
- 
- $(function(){
- ajaxReload('mon_panier');
-});
+	[(#ENV{message_ok}|oui)
+	 <script type="text/javascript">
+	 
+	 $(function(){
+	 ajaxReload('mon_panier');
+	});
 </script>   
 ]
