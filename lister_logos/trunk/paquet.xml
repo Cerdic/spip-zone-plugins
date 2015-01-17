@@ -1,11 +1,11 @@
 <paquet
 	prefix="lister_logos"
 	categorie="multimedia"
-	version="2.1.0"
+	version="2.1.1"
 	etat="dev"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/lister_logos-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4600"
 >
 	<nom>Lister les logos</nom>
 
