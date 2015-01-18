@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 							serveur de base de données.<br /><br />
 							Ces sauvegardes contiennent les commandes permettant d’<strong>effacer</strong> les tables de votre base SPIP et de les <strong>remplacer</strong> par les
 							données archivées. Les données <strong>plus récentes</strong> que celles de la sauvegarde seront donc <strong>PERDUES</strong> !',
-	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format MySQL qui sera stocké dans le répertoire tmp/dump/. La fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>. Le préfixe des tables est conservé.',
+	'help_sauvegarde_1' => 'Cette option vous permet de sauvegarder la structure et le contenu de la base dans un fichier au format MySQL qui sera stocké dans le répertoire tmp/dump/. Le fichier se nomme <em>@prefixe@_aaaammjj_hhmmss.</em>. Le préfixe des tables est conservé.',
 	'help_sauvegarde_2' => 'La sauvegarde automatique est activée (fréquence en jours : @frequence@).',
 
 	// I
