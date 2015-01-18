@@ -99,7 +99,21 @@ function afficher_dates() {
 // puis recuperer date serveur
 // donc reafficher dates pour calcul
 $(function () {
-	setInterval("afficher_dates()", 1000);
+	var calculDateInterval;
+	function triggerCalculDateInterval(){
+		calculDateInterval = setInterval(function(){
+			afficher_dates();
+		}, 1000)
+	}
+
+	triggerCalculDateInterval();
+	$(document).on('visibilitychange', function(){
+		if(document.hidden) {
+			clearInterval(calculDateInterval);
+		} else {
+			triggerCalculDateInterval();
+		}
+	});
 
 	if ($.cookie('dateoffset') == null) {
 		var date_now = Math.floor((new Date()).getTime() / 1000);
