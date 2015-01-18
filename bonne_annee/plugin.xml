@@ -2,7 +2,7 @@
 	<nom>Bonne ann&#233;e</nom>
 	<slogan>Souhaiter la bonne ann&#233;e sur votre site</slogan>
 	<auteur>Phil</auteur>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<etat>stable</etat>
 	<description>
 Affiche tous les ans, durant le mois de janvier, un message souhaitant une bonne ann&#233;e.

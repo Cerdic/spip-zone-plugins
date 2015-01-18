@@ -3,7 +3,7 @@
 	<slogan>Dans votre site SPIP : fini le temps des images statiques, place aux Images actives !</slogan>
 	<auteur>Johan Pustoch</auteur>
 	<licence>GPL 3</licence>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<etat>test</etat>
 	<description>
 	Ce plugin fournit un mod&#232;le de document doc_image_active pour afficher une Image Active dans un contenu SPIP

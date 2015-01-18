@@ -1,7 +1,7 @@
 <paquet
 	prefix="squirrel_chimp"
 	categorie="communication"
-	version="2.0.4"
+	version="2.0.5"
 	etat="test"
 	compatibilite="[2.0.15;3.1.*]"
 	logo="prive/themes/spip/images/logo_slc_24.png"

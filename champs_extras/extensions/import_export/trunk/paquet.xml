@@ -1,7 +1,7 @@
 <paquet
 	prefix="ie_extras"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="experimental"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/ieextras-64.png"
