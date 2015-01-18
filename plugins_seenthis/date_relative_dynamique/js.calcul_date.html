@@ -1,6 +1,5 @@
 [(#HTTP_HEADER{Content-type: text/javascript[; charset=(#CHARSET)]})]
 
-
 var chaines_lang = {
 	'date_il_y_a': '<:date_il_y_a:>',
 	'date_une_seconde': '<:date_une_seconde:>',
@@ -20,9 +19,30 @@ var chaines_lang = {
 	'date_mois': '<:date_mois:>'
 };
 
+
 function _T(chaine, nom_val, val) {
 	return chaines_lang[chaine].replace("@" + nom_val + "@", val);
 }
+
+/**
+ * Intervalles pour formatter la date
+ * [0]: intervalle valide en desous de cette valeur
+ * [1]: facteur par lequel il faut diviser le nombre de secondes pour l'affichage
+ * [2]: clé pour la traduction
+ */
+var intervalleFormattageDates = [
+	[2, 1, 'date_une_seconde'],
+	[60, 1, 'date_secondes'],
+	[120, 60, 'date_une_minute'],
+	[3600, 60, 'date_minutes'],
+	[7200, 3600, 'date_une_heure'],
+	[86400, 3600, 'date_heures'],
+	[172800, -1, 'date_hier'],
+	[1209600, 604800, 'date_une_semaine'],
+	[2419200, 604800,'date_semaines'],
+	[4838400, 2419200, 'date_un_mois'],
+	[31449600, 2419200, 'date_mois']
+];
 
 
 function afficher_dates() {
@@ -42,53 +62,28 @@ function afficher_dates() {
 		// l'age affichee depend du client
 		var age = date_now - date;
 
-		if (age < 1) age = false;
-		else if (age < 2) age = _T("date_il_y_a", "delai", age + " " + _T("date_une_seconde"));
-		else if (age < 60) age = _T("date_il_y_a", "delai", age + " " + _T("date_secondes"));
-		else {
-			// passer en minutes
-			var age_min = Math.floor(age / 60);
-			if (age_min < 2) age = _T("date_il_y_a", "delai", age_min + " " + _T("date_une_minute"));
-			else if (age_min < 60) age = _T("date_il_y_a", "delai", age_min + " " + _T("date_minutes"));
-			else {
-				// passer en heures
-				var age_heure = Math.floor(age / (60 * 60));
-				if (age_heure < 2) age = _T("date_il_y_a", "delai", age_heure + " " + _T("date_une_heure"));
-				else if (age_heure < 24) age = _T("date_il_y_a", "delai", age_heure + " " + _T("date_heures"));
-
-				else {
-					// passer en jours
-					var age_jour = Math.floor(age / (60 * 60 * 24));
-					if (age_jour < 2) age = _T("date_hier");
-					else if (age_jour < 8) age = _T("date_il_y_a", "delai", age_jour + " " + _T("date_jours"));
-
-					else {
-						// passer en semaines
-						var age_sem = Math.floor(age / (60 * 60 * 24 * 7));
-						if (age_sem < 2) age = _T("date_il_y_a", "delai", age_sem + " " + _T("date_une_semaine"));
-						else if (age_sem < 4) age = _T("date_il_y_a", "delai", age_sem + " " + _T("date_semaines"));
-
-						else {
-							// passer en mois
-							var age_mois = Math.floor(age / (60 * 60 * 24 * 28));
-							if (age_mois < 1) age_mois = 1;
-							if (age_mois < 2) age = _T("date_il_y_a", "delai", age_mois + " " + _T("date_un_mois"));
-							else if (age_mois < 13) age = _T("date_il_y_a", "delai", age_mois + " " + _T("date_mois"));
-
-							else {
-								// passer en mois
-								var age_annee = Math.floor(age / (60 * 60 * 24 * 364));
-								if (age_annee < 1) age_annee = 1;
-								//if (age_annee < 2) age = "last year";
-								//else age = age_annee + " years ago";
-
-								age = false;
-							}
-						}
-					}
+		if(age < 1) {
+			// date dans le futur :-(
+			age = false;
+		} else {
+			var intervalle = null;
+			// on parcourt les intervalles jusqu'à en trouver
+			for (var i = 0; i < intervalleFormattageDates.length; i++) {
+				var intervalle_courant = intervalleFormattageDates[i];
+				if (age < intervalle_courant[0]) {
+					intervalle = intervalle_courant;
+					break;
 				}
-
-
+			}
+			if (intervalle) {
+				if (intervalle[1] == -1) {
+					// formattage simplifié
+					age = _T(intervalle[2])
+				} else {
+					age = _T("date_il_y_a", "delai", Math.max(1, Math.floor(age/ intervalle[1])) + " " + _T(intervalle[2]));
+				}
+			} else {
+				age = false;
 			}
 		}
 
