@@ -47,10 +47,11 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 	 *
 	 * Le nom_scientifique est le nom en latin. Il est unique pour un rang taxonomique donné.
 	 * Le rang taxonomique est une valeur parmi règne, phylum, classe, ordre, famille et genre.
-	 * Le nom_commun est le nom vulgaire, si possible normalisé par une commission officielle. Il peut coincider ou
+	 * Le nom_commun est le nom vulgaire, si possible normalisé par une commission officielle. Il peut coincider ou pas
 	 * avec le nom vernaculaire.
 	 * L'auteur est une information composée d'un ou plusieurs noms complétés par une date (Linneus, 1798).
 	 * tsn est l'identifiant numérique unique du taxon dans la base taxonomique ITIS.
+	 * tsn_parent permet de créer l'arborescence taxonomique du règne conformément à l'organisation de la base ITIS
 	 */
 	$tables['spip_taxons'] = array(
 		'type' => 'taxon',
@@ -81,7 +82,5 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 
 	return $tables;
 }
-
-
 
 ?>

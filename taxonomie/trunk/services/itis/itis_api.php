@@ -15,8 +15,7 @@ if (!defined('_TAXONOMIE_ITIS_URL_BASE_REQUETE'))
 	define('_TAXONOMIE_ITIS_URL_BASE_REQUETE', 'http://www.itis.gov/ITISWebService/');
 if (!defined('_TAXONOMIE_ITIS_URL_CITATION'))
 	/**
-	 * Préfixe des URL du service web de ITIS.
-	 * Le service fournit des données au format XML ou JSON
+	 * URL à fournir dans la citation du service ITIS.
 	 */
 	define('_TAXONOMIE_ITIS_URL_CITATION', 'http://www.itis.gov');
 if (!defined('_TAXONOMIE_ITIS_LANGUE_DEFAUT'))
@@ -140,9 +139,16 @@ $itis_webservice = array(
 
 
 /**
+ * Recherche un taxon dans la base ITIS par son nom commun ou scientifique
+ * et retourne son identifiant unique nommé tsn.
  *
- * @param $nom_commun
- * @return array
+ * @param string	$api
+ * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs 'commonname' ou 'scientificname'
+ * @param string	$recherche
+ * 		Nom à rechercher
+ *
+ * @return int
+ * 		Identifiant unique (tsn) dans la base ITIS ou 0 si la recherche échoue
  */
 function itis_search_tsn($api, $recherche) {
 	global $itis_webservice;
@@ -177,10 +183,26 @@ function itis_search_tsn($api, $recherche) {
 
 
 /**
- * @param $api
- * @param $tsn
+ * Renvoie les informations demandées sur un taxon désigné par son identifiant unique (tsn).
+ *
+ * @param string	$api
+ * 		Type d'information demandé. Prend les valeurs
+ *      - 'scientificname' : le nom scientifique du taxon
+ *      - 'kingdomname' : le règne du taxon
+ *      - 'parent' : le taxon parent dont son tsn
+ *      - 'rankname' : le rang taxonomique du taxon
+ *      - 'author' : le ou les auteurs du taxon
+ * 		- 'coremetadata' : les métadonnées (???)
+ * 		- 'experts' : les experts du taxon
+ * 		- 'commonnames' : le ou les noms communs
+ * 		- 'othersources' : les sources d'information sur le taxon
+ * 		- 'hierarchyfull' : la hiérarchie complète jusqu'au taxon
+ * 		- 'hierarchydown' : la hiérarchie ???
+ * @param int		$tsn
+ * 		Identifiant unique du taxon dans la base ITIS (tsn)
  *
  * @return array
+ * 		Le tableau renvoyé est caractéristique du type d'information demandé.
  */
 function itis_get_information($api, $tsn) {
 	global $itis_webservice;

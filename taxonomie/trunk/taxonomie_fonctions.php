@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string	$regne
  * 		Nom scientifique du règne en lettres minuscules (animalia, plantae, fungi)
  * @param string	$rang
- * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fournit en anglais et
+ * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais et
  * 		correspond à : phylum, class, order, family, genus.
  * @param array		$langues
  * 		Tableau des codes (au sens SPIP) des langues à charger pour les noms communs des taxons
