@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
                                     Na obnovenie databázy treba použiť rozhranie  <strong>phpmyadmin</strong> vášho
              databázového servera.
 Tieto databázy obsahujú príkazy na <strong>vymazanie</strong> tabuliek vašej databázy v SPIPe a ich <strong>nahradenie</ strong> údajmi z archívu. <strong>Novšie údaje </strong> ako tie v databáze by sa preto mohli <strong>STRATIŤ!</ strong>',
-	'help_sauvegarde_1' => 'Táto možnosť vám umožňuje zálohovať štruktúru obsahu databázy do súboru vo formáte SQL, ktorý bude uložený v priečinku tmp/dump/. Súbor sa bude volať <em>@prefixe@_aaaammjj_hhmmss.</em>. Predpona tabuliek bude zachovaná.',
+	'help_sauvegarde_1' => 'Táto možnosť vám umožňuje zálohovať štruktúru obsahu databázy do súboru vo formáte SQL, ktorý bude uložený v priečinku tmp/dump/. Súbor sa bude volať <em>@prefixe@_aaaammjj_hhmmss.</em>. Predpona tabuliek bude zachovaná.', # MODIF
 	'help_sauvegarde_2' => 'Automatické zálohovanie je aktivované(frekvencia v dňoch: @frequence@).',
 
 	// I

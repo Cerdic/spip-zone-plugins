@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'help_restauration' => '<strong>¡¡¡Atención!!!</strong> estas copias de seguridad no están <strong>en formato de las de SPIP</strong> y no pueden utilizarse con la herramienta de restauración de la base de SPIP.<br /><br />
 							Para toda restauración es necesario utilizar la interfaz <strong>phpmyadmin</strong> de su servidor de base de datos.<br /><br />
 							Estas copias de seguridad contienen comandos que permiten <strong>borrar</strong> las tablas de su base SPIP y <strong>sustituirlas</strong> por los datos archivados. ¡Los datos <strong>más recientes</strong> que los de la copia de seguridad <strong>SE PERDERÁN</strong>!',
-	'help_sauvegarde_1' => 'Esta opción le permite obtener una copia de seguridad de la estructura y del contenido de la base en un fichero en formato MySQL que se almacenará en el directorio tmp/dump/. El archivo se denomina <em>@prefixe@_aaaammjj_hhmmss.</em>. El prefijo de las tablas se conserva.',
+	'help_sauvegarde_1' => 'Esta opción le permite obtener una copia de seguridad de la estructura y del contenido de la base en un fichero en formato MySQL que se almacenará en el directorio tmp/dump/. El archivo se denomina <em>@prefixe@_aaaammjj_hhmmss.</em>. El prefijo de las tablas se conserva.', # MODIF
 	'help_sauvegarde_2' => 'La copia de seguridad automática está activada (frecuencia en días: @frequence@).',
 
 	// I

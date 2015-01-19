@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Sie können nicht mit dem SPIP-Backupsystem genutzt werden.<br /><br />
 Sie müssen für die Wiederherstellung das Interface ihres Servers verwenden. In PHPMyAdmin klicken Sie unter dem Reiter <strong>"SQL"</strong> sie auf die Schaltfläche <strong>"Datei wählen"</strong> suchen die gewünschte Sicherung aus. Falls erforderlich markieren sie die Option "gzip").br /><br />
 Die Backupdateien <strong>xxxx.gz</strong> bzw. <strong>xxx.sql</strong> enthalten Befehle im SQL-Format, mit denen die vorhandenen SPIP-Tabellen <strong>gelöscht</strong> und durch die Backupdaten <strong>ersetzt</strong> werden. Neuere Daten als die im Backup vorhandenen <strong>gehen bei der Widerherstellung verloren</strong>!',
-	'help_sauvegarde_1' => 'Diese Option ermöglicht Ihnen, Struktur und Inhalt der Datenbank im SQL-Format im Verzeichnis tmp/dump/ zu speichern. Diese Datei wird <em>@prefixe@_aaaammjj_hhmmss.</em> benannt. Die Tabellenpräfixe werden beibehalten.',
+	'help_sauvegarde_1' => 'Diese Option ermöglicht Ihnen, Struktur und Inhalt der Datenbank im SQL-Format im Verzeichnis tmp/dump/ zu speichern. Diese Datei wird <em>@prefixe@_aaaammjj_hhmmss.</em> benannt. Die Tabellenpräfixe werden beibehalten.', # MODIF
 	'help_sauvegarde_2' => 'Automatische Backups sind aktiviert. Sie werden alle @frequence@) Tage angelegt.',
 
 	// I

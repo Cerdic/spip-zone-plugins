@@ -38,7 +38,7 @@ For restoration, you must use the <strong>phpmyadmin</strong> interface of your 
 
 The backups contain an SQL formatted file with the commands used to <strong>delete</strong> the existing SPIP tables and to <strong>replace</strong> them with archived data. Any data <strong>more recent</strong> than those in the backup will therefore be <strong>LOST</strong>!',
 	'help_sauvegarde_1' => 'This option allows you to save the structure and content of the database in a MySQL format file that will be stored in the folder tmp/dump/. The file is named
-<em>@prefixe@_yyyymmdd_hhmmss.</em>. The table prefix is retained.',
+<em>@prefixe@_yyyymmdd_hhmmss.</em>. The table prefix is retained.', # MODIF
 	'help_sauvegarde_2' => 'Automatic backup is enabled (frequency in days: @frequence@).',
 
 	// I
