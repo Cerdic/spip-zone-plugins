@@ -59,15 +59,24 @@
 		$deep = 2;
 		$lanceur ='ecrire/inc_version.php';
 		$include = '../../'.$lanceur;
+                $trouve = false;
 		while (!defined('_ECRIRE_INC_VERSION') && $deep++ < 6) { 
 			// attention a pas descendre trop loin tout de meme ! 
 			// plugins/zone/stable/nom/version/tests/ maximum cherche
 			$include = '../' . $include;
 			if (file_exists($include)) {
+                                $trouve = true;
 				chdir(dirname(dirname($include)));
 				require $lanceur;
 			}
-		}	
+		}
+                // dernière chance, on se sert du DOCUMENT_ROOT
+                // permet justement d'utiliser un lien symbolique
+                $include = $_SERVER['DOCUMENT_ROOT'].'/ecrire/inc_version.php';
+                if ($trouve == false && file_exists($include)) {
+                    chdir(dirname(dirname($include)));
+                    require $lanceur;
+                }
 	}
 	if (!defined('_ECRIRE_INC_VERSION')) {
 		die("<strong>Echec :</strong> SPIP ne peut pas etre demarre.<br />
