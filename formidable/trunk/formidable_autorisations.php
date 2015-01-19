@@ -81,20 +81,24 @@ function formidable_autoriser(){}
 **/
 function autoriser_formulaire_editer_dist($faire, $type, $id, $qui, $opt){
 	$auteurs = lire_config('formidable/analyse/auteur');
-
+        
 	/* administrateur ? */
-	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and (!$qui['restreint']))
+	if (isset($qui['statut']) and $qui['statut'] <= '0minirezo' and (count($qui['restreint']) == 0))
 		return true;
 
 	/* Test des autorisations par auteur */
 	if ($auteurs == 'on') {
 		return formidable_autoriser_par_auteur($id);
-	} else {
-		/* dans un else car la config 'auteurs' doit primer sur l'admin restreint */
-		if ($GLOBALS['formulaires']['autoriser_admin_restreint'])
-			return true;
-		else
-			return false;
+	}
+        
+        /* Test des autorisations pour un admin restreint */
+        if (count($qui['restreint'])) {
+            $autoriser_admin_restreint = isset($GLOBALS['autoriser_admin_restreint']) 
+                    ? $GLOBALS['autoriser_admin_restreint'] 
+                        : lire_config('formidable/analyse/autoriser_admin_restreint') == 'on' 
+                            ? true 
+                            : false;
+            return $autoriser_admin_restreint;
 	}
 }
 

@@ -26,10 +26,6 @@ if (isset($GLOBALS['formulaires']['passwd']) == false) {
 	);
 }
 
-if (isset($GLOBALS['formulaires']['autoriser_admin_restreint']) == false) {
-	$GLOBALS['formulaires']['autoriser_admin_restreint'] = false;
-}
-
 if (!function_exists('array_fill_keys')) {
     /**
      * Remplit un tableau avec des valeurs, en spécifiant les clés
