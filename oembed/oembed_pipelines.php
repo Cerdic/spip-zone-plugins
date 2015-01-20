@@ -213,6 +213,9 @@ function oembed_pre_propre($texte) {
 				if (!isset($replace[$match[0]])
 				  AND preg_match(',\bauto\b,', extraire_attribut($match[2], 'class'))
 				  AND !is_null($emb = oembed_embarquer_lien($match[2]))) {
+					if ($wrap_embed_html = charger_fonction("wrap_embed_html","inc",true)){
+						$emb = $wrap_embed_html($match[2],$emb);
+					}
 					$replace[$match[0]] = $match[1] . echappe_html("<html>$emb</html>") . $match[3];
 				}
 			}
