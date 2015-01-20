@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'analyse_une_reponse_total' => 'Une personne a répondu à ce formulaire.',
 	'analyse_zero_reponse_total' => 'Aucune personne n’a répondu à ce formulaire.',
 	'aucun_traitement' => 'Aucun traitement',
-        'autoriser_admin_restreint' => 'Autoriser les administrateurs restreints à créer et modifier les formulaires',
-        'autoriser_admin_restreint_explication' => 'Par défaut, seuls les administrateurs ont accès à la création et modification des formulaires',
+	'autoriser_admin_restreint' => 'Autoriser les administrateurs restreints à créer et modifier les formulaires',
+	'autoriser_admin_restreint_explication' => 'Par défaut, seuls les administrateurs ont accès à la création et modification des formulaires',
 
 	// B
 	'bouton_formulaires' => 'Formulaires',
