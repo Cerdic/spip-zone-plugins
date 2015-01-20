@@ -31,7 +31,7 @@
 [<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})]">]
 	#ANCRE_PAGINATION
 	[(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
-	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#PLUGIN{foundation}|oui)class='small-block-grid-4']>
+	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#CONFIG{foundation/variante}|intval|>={4}|?{class='small-block-grid-2 medium-block-grid-3 large-block-grid-4',class='block-grid 4-up mobile-two-up'})]>
 		<BOUCLE_documents_album(DOCUMENTS){id_document IN #ENV{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#ENV{id}}}>[
 		(#SET{src,#MEDIA|=={image}|?{
 			#GET{recadrer}|?{
