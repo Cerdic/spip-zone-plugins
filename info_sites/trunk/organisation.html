@@ -1,0 +1,8 @@
+<?php if ($auteur_session) { ?>
+<BOUCLE_principale (ORGANISATIONS) {id_organisation} {tout}>
+<INCLURE{fond=structure,env,type-page=organisation,composition=#COMPOSITION} />
+</BOUCLE_principale>
+<?php } else { ?>
+[(#SET{url, [(#ENV{url}|?{#ENV{url},#SELF})]})]
+<INCLURE{fond=structure,env,type-page=login,composition=login,url=#GET{url}} />
+<?php } ?>
