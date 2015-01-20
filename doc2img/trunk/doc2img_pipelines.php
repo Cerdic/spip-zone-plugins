@@ -18,25 +18,25 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		Le contexte du pipeline modifié
  */
 function doc2img_post_edition($flux) {
-    $id_document = $flux['args']['id_objet'];
+	$id_document = $flux['args']['id_objet'];
 
-    if (in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))
-            && (sql_countsel("spip_documents as L1 LEFT JOIN spip_documents_liens as L2 ON L1.id_document=L2.id_document","L2.id_objet=".intval($flux['args']['id_objet']).' AND L2.objet="document" AND L1.mode="doc2img"') == 0)
-            && (lire_config('doc2img/conversion_auto') == "on")){
-            	$infos_doc = sql_fetsel('extension,mode,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
-            	$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
-				if($infos_doc['extension'] == 'tif'){
-					$infos_doc['extension'] = 'tiff';
-				}
-            	if(($infos_doc['mode'] != 'vignette')
-            		&& ($infos_doc['distant'] == 'non')
-            		&& in_array($infos_doc['extension'],$types_autorises)){
-        				include_spip('action/facd_ajouter_conversion');
+	if (in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))
+		&& (sql_countsel("spip_documents as L1 LEFT JOIN spip_documents_liens as L2 ON L1.id_document=L2.id_document","L2.id_objet=".intval($flux['args']['id_objet']).' AND L2.objet="document" AND L1.mode="doc2img"') == 0)
+		&& (lire_config('doc2img/conversion_auto') == "on")){
+			$infos_doc = sql_fetsel('extension,mode,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
+			$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
+			if($infos_doc['extension'] == 'tif'){
+				$infos_doc['extension'] = 'tiff';
+			}
+			if(($infos_doc['mode'] != 'vignette')
+				&& ($infos_doc['distant'] == 'non')
+				&& in_array($infos_doc['extension'],$types_autorises)){
+					include_spip('action/facd_ajouter_conversion');
 						facd_ajouter_conversion_file($id_document,'doc2img_convertir',null,null,'doc2img');
 						$conversion_directe = charger_fonction('facd_convertir_direct','inc');
 						$conversion_directe();
-            	}
-    }
+			}
+	}
 	if($flux['args']['operation'] == 'supprimer_document'){
 		$v = sql_select("*","spip_documents as L1 LEFT JOIN spip_documents_liens as L2 ON L1.id_document=L2.id_document","L2.id_objet=".intval($flux['args']['id_objet']).' AND L2.objet="document" AND L1.mode="doc2img"');
 		include_spip('action/dissocier_document');
