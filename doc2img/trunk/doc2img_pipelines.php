@@ -19,10 +19,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function doc2img_post_edition($flux) {
 	$id_document = $flux['args']['id_objet'];
-
-	if (in_array($flux['args']['operation'], array('ajouter_document','document_copier_local'))
-		&& (sql_countsel("spip_documents as L1 LEFT JOIN spip_documents_liens as L2 ON L1.id_document=L2.id_document","L2.id_objet=".intval($flux['args']['id_objet']).' AND L2.objet="document" AND L1.mode="doc2img"') == 0)
+	spip_log($flux,'testlogo.'._LOG_ERREUR);
+	if ((in_array($flux['args']['action'], array('ajouter_document','document_copier_local')) || (in_array($flux['args']['action'], array('modifier')) && isset($flux['data']['fichier'])))
+		&& ($flux['args']['doc2img_ok'] != 'ok')
 		&& (lire_config('doc2img/conversion_auto') == "on")){
+			$flux['args']['doc2img_ok'] = 'ok';
 			$infos_doc = sql_fetsel('extension,mode,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
 			$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
 			if($infos_doc['extension'] == 'tif'){
