@@ -151,6 +151,7 @@ function composants_head($type) {
               $r .= file_get_contents($file);
           }
           else {
+          	utiliser_langue_visiteur();
             $r .= recuperer_fond($filepath, array('X-Spip-Cache' => 0))."\r";
           }
           $done[] = $class; 
@@ -159,8 +160,10 @@ function composants_head($type) {
         if (strtolower($type) == 'css') {
         	$filepath = 'composants/'.$class.'/'.$class.'_instances.css';
         	$file = find_in_path($filepath.'.html');
-        	if ($file)
+        	if ($file) {
+        		utiliser_langue_visiteur();
        			$r .= recuperer_fond($filepath, array('nic' => $nic, 'X-Spip-Cache' => 0))."\r";
+        	}
         }
       }
       // on fait la liste des librairies javascripts a inclure (declarees dans chaque composant, dans moncomposant_balises.php,

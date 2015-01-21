@@ -117,5 +117,8 @@ function detecte_langue($langues, $url_encours) {
 					}
 			}
 	}
+	else {
+		utiliser_langue_visiteur();
+	}
 }
 ?>

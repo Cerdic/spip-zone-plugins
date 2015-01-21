@@ -106,6 +106,5 @@ On exclut les rubriques ayant un mot-clé qui commence par "_".
 	</div>[(#REM) fin rubriques]
   [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_rubriques>
-
 [(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/rubnav/inc-rubnav_recherche}{recherche}{lang}>]
 [(#ID_MOT|?{' '})<INCLURE{fond=composants/rubnav/inc-rubnav_mot}{id_mot}{lang}>]
