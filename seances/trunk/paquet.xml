@@ -31,5 +31,5 @@
 	<pipeline nom="affiche_gauche" inclure="seances_pipelines.php" />
 	<pipeline nom="autoriser" inclure="seances_autoriser.php" />
 	<pipeline nom="header_prive_css" inclure="seances_pipelines.php" />
-	<pipeline nom="optimiser_base_disparus" inclure="seances_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="genie/seances_nettoyer_base.php" />
 </paquet>
