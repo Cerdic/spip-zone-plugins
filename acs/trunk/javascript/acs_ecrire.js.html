@@ -75,11 +75,7 @@ function acs_ecrire_init(ajax) {
         }
       }
     );
-
-[(#ENV{jquery_version}|=={1}|?{
-   [(#INCLURE{javascript/acs_dragdrop.js})],
-   [(#INCLURE{javascript/acs_dragdrop_for_older_jquery.js})]
-})]
+    [(#INCLURE{javascript/acs_dragdrop.js})]
   }
   else { [(#REM) on ajax load]
     [(#REM) Donne leur fonction onclick aux plieurs (générique)]

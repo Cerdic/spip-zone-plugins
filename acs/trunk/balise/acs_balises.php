@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 include_spip('inc/composant/composants_liste');
@@ -55,13 +55,6 @@ function balise_PINCEAU($p) {
   $nic = interprete_argument_balise(2,$p);
   $nic = $nic ? $nic : "'0'";
   $p->code = 'calculer_balise_pinceau('.$composant.', '.$nic.')';
-  $p->statut = 'php';
-  $p->interdire_scripts = false;
-  return $p;
-}
-
-function balise_ACS_DERNIERE_MODIF($p) {
-  $p->code = '$GLOBALS["meta"]["acsDerniereModif"]';
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p;
@@ -188,14 +181,6 @@ function composants_head($type) {
     }
   }
   return $libs.$r;
-}
-/* usage avec les groupes acs ou pour droits sur le site public */
-function balise_ACS_AUTORISE($p) {
-  $rs = interprete_argument_balise(1,$p);
-  $p->code = 'acs_autorise('.$rs.')';
-  $p->statut = 'php';
-  $p->interdire_scripts = false;
-  return $p;
 }
 
 /* Overide de la balise CACHE : permet de passer un paramètre à la balise SPIP

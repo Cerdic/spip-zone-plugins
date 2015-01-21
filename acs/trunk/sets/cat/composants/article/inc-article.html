@@ -24,7 +24,7 @@ id_article: id de l'article
     <h1 class="#EDIT{titre} titre tsize">[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''}) ][(#TITRE|supprimer_numero)]</h1>
     [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE|safehtml)</p>]
     #FIN_SURLIGNE
-    <br class="nettoyeur" />
+    <div class="nettoyeur" ></div>
   </div>
 
   <div class="article">
@@ -43,7 +43,7 @@ id_article: id de l'article
     INACTIF quand le composant Diapo est utilisé. Dans ce cas, le composant Diapo DOIT 
     être inséré dans la page (soit dans le squelette, soit directement dans l'article ou la rubrique) pour 
     que les documents associés soient visibles.
-  ][(#VAR{acsDiapoUse}|!={oui}|?{" "})[(#INCLURE{fond=inc-documents}{id_article}{env})]]
+  ][(#VAR{acsDiapoUse}|!={oui}|?{" "})[(#INCLURE{fond=inclure/documents}{id_article}{env})]]
 
   [(#VAR{acsArticleStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div class="stats nsize">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
   [(#REM)
@@ -57,7 +57,7 @@ fin div article
 Petition : la petition ayant une PAGINATION il faut absolument lui passer SELF
 
 ][(#PETITION|?{' '})<INCLURE{fond=inc-petition}{env=#ENV}{id_article}{self=#SELF}>]
-<br class="nettoyeur" />
+<div class="nettoyeur" ></div>
 [(#REM)
 
 Forum de l'article
@@ -67,7 +67,7 @@ Forum de l'article
   <a href="#forum" name="forum" id="forum"></a><span class="nav nsize" style="float: #LANG_RIGHT"><a href="#URL_ARTICLE&ouvrir=oui#forum" id="forum_lire_tous"><small><:lire_tous_les_messages:></small></a></span>
   <INCLURE{fond=composants/forums/forum}{id_article}{ouvrir=#OUVRIR}{debut_forums}{statut=prive}{env}{self}{ajax}>
 ][(#STATUT|=={publie}|?{' ', ''})
-  [(#PLUGIN{notation}|?{' '})<div class="notation nsize">#FORMULAIRE_NOTATION</div><br class="nettoyeur" />]
+  [(#PLUGIN{notation}|?{' '})<div class="notation nsize">#FORMULAIRE_NOTATION</div><div class="nettoyeur" ></div>]
   [(#PLUGIN{recommander}|?{' '})#RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}]
   [<a id="forum_repondre" class="repondreaufil nsize" href="spip.php?page=forum&amp;id_article=#ID_ARTICLE"><:form_pet_message_commentaire:></a><br/>(#FORMULAIRE_FORUM)]
   <INCLURE{fond=composants/forums/forum}{ajax}{id_article}{ouvrir=#OUVRIR}{debut_forums}>

@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -89,7 +89,7 @@ function acs_get_from_active_plugin($plugin, $variable = false) {
 
   return false;
 }
-
+/*
 // Vérifie que l'utilisateur connecté est un admin ACS autorisé, ou le(s) webmestre(s) si ACS n'est pas encore configuré
 // ou qu'il dispose des droits requis (_acs, _adm, _aut, ou _ide)
 function acs_autorise($requested_statut='_acs') {
@@ -115,17 +115,20 @@ function acs_autorise($requested_statut='_acs') {
 	// Si l'utilisateur n'est pas admin, pas la peine d'aller plus loin
 	if ($GLOBALS['auteur_session']['statut'] != "0minirezo")
 		return false;
+
 	// Cet admin est-il aussi admin ACS ?
 	$id_admin = $GLOBALS['auteur_session']['id_auteur'];
-  if (isset($GLOBALS['meta']['ACS_ADMINS']) && $GLOBALS['meta']['ACS_ADMINS'] != '')
+  if (isset($GLOBALS['meta']['ACS_ADMINS']) && $GLOBALS['meta']['ACS_ADMINS'] != '') {
     return in_array($id_admin, explode(',', $GLOBALS['meta']['ACS_ADMINS']) );
-  elseif (defined(_ID_WEBMESTRES)) // Si le plugin Autorité est installé, les webmestres sont autorisés à configurer ACS
+  }
+  elseif (defined(_ID_WEBMESTRES)) { // Si le plugin Autorité est installé, les webmestres sont autorisés à configurer ACS
     return in_array($id_admin, explode(':', _ID_WEBMESTRES) );
+  }
   else  // A défaut, le créateur ET administrateur du site (auteur n°1) est toujours autorisé à configurer ACS
     return ($id_admin == 1);
   return false;
 }
-
+*/
 /**
  * Makes directory, returns TRUE if exists or made
  *
@@ -161,12 +164,13 @@ function meta_recursive($src, $meta) {
 	return $val;
 }
 /**
- * Journalise les actions du plugin ACS si _ACS_LOG vaut "true" dans acs_options.php
- * @param : texte à journaliser
+ * Journalise les actions du plugin ACS si _ACS_LOG est supérieur à 0 dans acs_options.php
+ * @param txt: texte à journaliser
  */
-function acs_log($txt) {
-	if (_ACS_LOG === true)
-		spip_log($txt, 'acs');
+function acs_log($txt, $gravite = _LOG_HS) {
+	if (_ACS_LOG >_LOG_HS) {
+		spip_log($txt, 'acs', _LOG_FILTRE_GRAVITE);
+	}
 }
 /**
  * Retourne un objet ou un tableau sous forme de tableau affichable en html

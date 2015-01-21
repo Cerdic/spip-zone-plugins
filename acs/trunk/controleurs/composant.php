@@ -35,13 +35,13 @@ function controleurs_composant_dist($regs) {
   
   $css_class = _request('class'); /* classe du crayon */
   $matches = array();
-  if (preg_match('/\bid_article-(\d+)\b/', $css_class, &$matches) > 0)
+  if (preg_match('/\bid_article-(\d+)\b/', $css_class, $matches) > 0)
     $contexte['id_article'] = $matches[1];
-  elseif (preg_match('/\bid_rubrique-(\d+)\b/', $css_class, &$matches) > 0)
+  elseif (preg_match('/\bid_rubrique-(\d+)\b/', $css_class, $matches) > 0)
     $contexte['id_rubrique'] = $matches[1];
-  elseif (preg_match('/\bid_mot-(\d+)\b/', $css_class, &$matches) > 0)
+  elseif (preg_match('/\bid_mot-(\d+)\b/', $css_class, $matches) > 0)
     $contexte['id_mot'] = $matches[1];
-  elseif (preg_match('/\bid_groupe-(\d+)\b/', $css_class, &$matches) > 0)
+  elseif (preg_match('/\bid_groupe-(\d+)\b/', $css_class, $matches) > 0)
     $contexte['id_groupe'] = $matches[1];
 
   $html = '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.

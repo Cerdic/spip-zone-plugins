@@ -1,0 +1,10 @@
+[(#CACHE{0})][(#AUTORISER{configurer,_acs}|sinon_interdire_acces)]
+<br />
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{acs_32x32.gif}|balise_img{'ACS',cadre-icone})],'info'})]
+<div>
+  <:acs:acsdernieremodif:><br />
+  [(#VAL{"Y-m-d H:i:s"}|date{#CONFIG{acsDerniereModif}})]
+  <hr />
+  <:version:> ACS #ACS_VERSION (#ACS_RELEASE)
+</div>
+#BOITE_FERMER

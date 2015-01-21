@@ -18,7 +18,7 @@ Wrap (encapsulate) widgets for preview or Ajax call
 #INSERT_HEAD
 <!-- /insert head  -->
 [(#REM) Global ACS generated stylesheet]
-<link rel="stylesheet" href="spip.php?page=cat.css[&v=(#ACS_DERNIERE_MODIF)]" type="text/css" media="projection, screen, tv" />
+<link rel="stylesheet" href="spip.php?page=cat.css[&v=(#CONFIG{acsDerniereModif})]" type="text/css" media="projection, screen, tv" />
 <?php // Widget's style is not included yet in above css if just activated
 $fond ='#ENV{c}.css';
 if (find_in_path($fond.'.html')) {

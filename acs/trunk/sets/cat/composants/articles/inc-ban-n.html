@@ -9,7 +9,7 @@ pour la langue en cours,
   [(#ANCRE_PAGINATION)]
   <span class="nav nsize" style="float:right"><i><:articles:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={note}|?{<:acs:articles_classes_par_note_ponderee:></i> (<a href="#URL" class="ajax"><:acs:articles_classes_par_popularite:></a>),<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL&amp;classement=note" class="ajax"><:acs:articles_classes_par_note_ponderee:></a>)})],<:acs:articles_classes_par_note_ponderee:></i>})]</span>
   [<p class="pagination">(#PAGINATION)</p>]
-  <br class="nettoyeur" />
+  <div class="nettoyeur" ></div>
   <div class="liste-articles">
     <ul>
     <BOUCLE_articles(ARTICLES) {notation} {par (#CLASSEMENT|=={note}|?{moyenne_ponderee,popularite})}{inverse} {doublons} {pagination #VAR{acsArticlesPagination,10}} {lang=#LANG}>

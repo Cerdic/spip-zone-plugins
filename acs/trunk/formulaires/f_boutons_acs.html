@@ -1,0 +1,8 @@
+[(#REM) Boutons ajoutés pour les administrateurs ACS]
+  <a href="[(#CHEMIN{ecrire}|parametre_url{exec,acs}|parametre_url{onglet,pages}|parametre_url{detail,2})]<?php
+$sk = basename($GLOBALS['page']['source']);
+$sk = explode('.', $sk);
+$sk = $sk[0];
+echo '&amp;pg='.$sk; ?>" class="spip-admin-boutons" id="acs_voir_page"><:page:></a>
+
+  <a href="[(#SELF|parametre_url{var_mode,inclure})]" class="spip-admin-boutons" id="var_mode_i"><:inclusions:></a>

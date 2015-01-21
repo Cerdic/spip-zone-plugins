@@ -2,8 +2,8 @@
   <!-- Nom du composant -->
   <nom>Encart</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.6</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
+  <version>0.8.7</version>
   <necessite id='acs' version='[0.8.0;]' />
   <group>content</group>
 
@@ -86,5 +86,10 @@
   <variable>
     <nom>NbLettres</nom>
     <type>text</type>
+  </variable>
+  <variable>
+    <nom>LogoTailleMax</nom>
+    <type>text</type>
+    <valeur>100</valeur>
   </variable>
 </composant>

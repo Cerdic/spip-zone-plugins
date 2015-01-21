@@ -1,0 +1,6 @@
+[(#AUTORISER{configurer,_acs}|sinon_interdire_acces)]
+[(#AUTORISER{sauvegarder}|sinon_interdire_acces)]
+<h1 class="grostitre"><:acs:restore:></h1>
+<div class="ajax">
+  [(#FORMULAIRE_F_RESTAURER_ACS|sinon{<br />#VAL{<i><:fichier_introuvable{fichier="formulaires/f_restaurer_acs"}:></i>}|inserer_attribut{class,error}})]
+</div>

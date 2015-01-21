@@ -2,7 +2,7 @@
 <div class="version"><BOUCLE_rev(versions){id_article}{id_version}>
   <a href="#URL_ARTICLE" title="<:acs:articles_latest:>"><:article:></a>
   <a href="ecrire/?exec=articles_edit&id_article=#ID_ARTICLE&id_version=#ID_VERSION" title="<:ecrire:bouton_modifier:> v#ID_VERSION[ (#TITRE_VERSION)][, (#DATE|date_relative)][, (#ID_AUTEUR|affiche_auteur_diff)]" class="actif"><:ecrire:version:> #ID_VERSION</a>
-  <br class="nettoyeur" />
+  <div class="nettoyeur" ></div>
 </BOUCLE_rev>  
 </div>
 <div class="entete">
@@ -12,7 +12,7 @@
   <h1 class="#EDIT{titre} titre tsize">[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''}) ]#TITRE</h1>
   [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE|safehtml)</p>]
   #FIN_SURLIGNE
-  <br class="nettoyeur" />
+  <div class="nettoyeur" ></div>
 </div>
 
 <div class="article">

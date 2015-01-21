@@ -3,7 +3,7 @@
 <BOUCLE_encart(ARTICLES) {par date} {inverse} {doublons} {titre_mot=#GET{acsEncartKeyword}} {0,#VAR{#EVAL{'acsEncart'.'#NIC'.'Nb'},3}}{lang ?}>
 <div class="cEncartClass cEncart#NIC">
   <div class="entete">
-    [<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE|left)</a>]
+    [<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE|left|image_reduire{#VAR{#EVAL{'acsEncart'.'#NIC'.'LogoTailleMax'},100}})</a>]
     [<p class="surtitre stsize">(#SURTITRE)</p>]
     <h1 class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></h1>
     [<p class="soustitre stsize">(#SOUSTITRE)</p>]

@@ -5,7 +5,7 @@
          (Plugin Spip)
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2012
+Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt
 
   Ce squelette definit les styles de l'espace prive pour ACS
@@ -27,10 +27,16 @@ dans la feuille de style du modèle, qui est chargée.
 ]body.acs {
   background: #ffffff;
 }
-
+[(#REM) override de la largeur "large" de SPIP 3
+].acs #page div.largeur {
+  width: 100%;
+}
 .acs table { margin: 0; padding: 0; border-collapse: collapse; border-spacing:0; border: 1px;}
-.acs table th,.acs table td,.acs table caption {padding:0; background:none}
+.acs table caption, .acs table th,.acs table tr, .acs table td {padding:0; background:none;}
 .acs table.centered {margin: 0 auto; text-align:center}
+[(#REM) override des coloriages de lignes de tables
+].acs tbody tr:nth-child(even) td, .acs tbody tr.even td, .acs tbody tr:nth-child(even) th, .acs tbody tr.even th {background-color:transparent;}
+
 .acs img { margin: 0; padding: 0; border: none;}
 .acs hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{foncee};}
 
@@ -267,7 +273,7 @@ fieldset.apercu {
   line-height: 28px;
   border-radius: 5px 5px 0 0;
 }
-.widgets_filter_bar a.over {
+.widgets_filter_bar a.survol {
   background: none;
   border: 1px inset #GET{foncee};
 }

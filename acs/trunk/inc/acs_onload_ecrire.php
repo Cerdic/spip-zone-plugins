@@ -10,6 +10,7 @@
  * acs_onload_ecrire est appellé au chargement de l'espace ecrire.
  * les fonctions définies ici sont disponibles dans tout l'espace ecrire
  */
+include_spip('inc/autoriser');
 
 // Contrôle l'accès aux pages de configuration, dont celles déclarées dans $GLOBALS['ACS_ACCES'] (acs_options)
 // et celles déclarées dans $GLOBALS['meta']['ACS_CADENASSE'] (inc/acs_adm)
@@ -52,7 +53,7 @@ function acs_acces($page) {
           acs_exit();
       }
     }
-    if (in_array($page, $enfer) && (!acs_autorise()))
+    if (in_array($page, $enfer) && (!autoriser('acs', 'pages')))
       acs_exit();
   }
 }

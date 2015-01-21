@@ -3,20 +3,13 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 #
 /**
  * A filepicker
  */
-if (isset($GLOBALS['meta']['ACS_ADMINS']))
-  $ok = in_array($GLOBALS['auteur_session']['id_auteur'], explode(',', $GLOBALS['meta']['ACS_ADMINS']));
-elseif ($GLOBALS['auteur_session']['id_auteur'] == 1)
-  $ok = true;
-else
-  $ok = false;
-
-if (($GLOBALS['auteur_session']['statut'] != '0minirezo') || !$ok) {
+if (!autoriser('acs', 'filepicker')) {
   echo _T('avis_non_acces_page');
   exit;
 }
@@ -55,7 +48,7 @@ else {
 }
 
 echo '<html><head><title>'._T('choix_image').'</title>
-<link rel="stylesheet" type="text/css" href="?page=style_prive" />
+<link rel="stylesheet" type="text/css" href="?page=style_prive.css" />
 <link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ACS.'inc/picker/filepicker.css" />
 </head><body>
 <script 	language="JavaScript">
@@ -71,8 +64,7 @@ function aconfirmer(msg, href) {
 
 // boutonImg and add image
 include_spip('inc/presentation');
-$joindre = charger_fonction('joindre', 'inc');
-$ret .= debut_cadre_relief("image-24.gif", true, "creer.gif", _T('bouton_ajouter_image').aide("ins_img"));
+$ret .= debut_cadre_relief("image-24.gif", true, "creer.gif", _T('medias:bouton_ajouter_image').aide("ins_img"));
 $ret.= '<form method="post" action="" enctype="multipart/form-data" class="form_upload">';
 $ret.= '<input type="hidden" name="file" value="'.$file.'">';
 $ret.= '<input type="hidden" name="dir" value="'.$dir.'">';
@@ -80,8 +72,8 @@ $ret.= "<input name='fichier' type='file' class='forml spip_xx-small' size='15' 
 . "\n\t\t<div align='$spip_lang_right'><input name='sousaction1' type='submit' value='"
 . _T('bouton_telecharger')."' class='fondo' /></div>";
 $ret.= '</form>';
-$ret .= fin_cadre_relief(true);
-echo '<table width="100%" style="position: fixed; background: #dfdfdf"><tr><td width="80%"><div align="center"><img id="selection" src="'.$dir.'/'.$file.'" title="Sélection" class="selection" alt="" /></div></td><td><div align="right" style="width:220px; margin-right: 10px;">'.$ret.'</div></td></tr></table><div style="height: 7.18em; min-height: 112px"></div>';
+$ret .= fin_cadre_relief();
+echo '<table style="background: #dfdfdf"><tr><td width="80%"><div align="center"><img id="selection" src="'.$dir.'/'.$file.'" title="Sélection" class="selection" alt="" /></div></td><td><div align="right" style="margin-right: 10px;">'.$ret.'</div></td></tr></table>';
 
 // Show gallery
 if ($d = @opendir($dir)) {
@@ -93,7 +85,7 @@ if ($d = @opendir($dir)) {
       $hash = md5(serialize($action_effacer.$GLOBALS['auteur_session']['hash_env']));
       $txt_effacer = htmlentities(_T('acs:effacer_image', array("image" => $dir.'/'.$file)));
       $onclick = "aconfirmer('".$txt_effacer."','".url_filepicker($dir, $file, '&del=true')."&hash=$hash"."')";
-			echo '<table class="cadre"><tr><td colspan="2" style="text-align: center"><img src="'.$dir.'/'.$file.'" title="'.$file.'" class="boutonImg" onclick="P.select(\''.$file.'\')" onmouseover="P.preview(\''.$dir.'/'.$file.'\')" onmouseout="P.preview(\'\')" /></td></tr><tr><td class="bandeau">'.$s.'</td><td><a onclick="'.$onclick.'" title="'.$txt_effacer.'"><img src="'._DIR_PLUGIN_ACS.'images/supprimer.gif" alt="x" /></a></td></tr></table>';
+			echo '<table class="cadre" style="width: auto"><tr><td colspan="2" style="text-align: center"><img src="'.$dir.'/'.$file.'" title="'.$file.'" class="boutonImg" onclick="P.select(\''.$file.'\')" onmouseover="P.preview(\''.$dir.'/'.$file.'\')" onmouseout="P.preview(\'\')" /></td></tr><tr><td class="bandeau">'.$s.'</td><td><a onclick="'.$onclick.'" title="'.$txt_effacer.'"><img src="'._DIR_PLUGIN_ACS.'images/supprimer.gif" alt="x" /></a></td></tr></table>';
 		}
 	}
 	closedir($d);

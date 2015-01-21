@@ -10,7 +10,7 @@ pour la langue en cours.
   [(#ANCRE_PAGINATION)]
   <span class="nav nsize" style="float:right"><i><:articles:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={note}|?{<:acs:articles_classes_par_note_ponderee:></i> (<a href="#URL"><:acs:articles_classes_par_popularite:></a>),<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL&amp;classement=note"><:acs:articles_classes_par_note_ponderee:></a>)})],<:acs:articles_classes_par_note_ponderee:></i>})]</span>
   [<p class="pagination">(#PAGINATION)</p>]
-  <br class="nettoyeur" />
+  <div class="nettoyeur" ></div>
   <div class="liste-articles">
     <ul>
     #SET{stat,#DEMOCRATIE_STATUT}

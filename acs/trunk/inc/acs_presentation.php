@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 
@@ -17,10 +17,6 @@ function acs_commencer_page($titre = "", $rubrique = "configuration", $sous_rubr
   $commencer_page = charger_fonction('commencer_page', 'inc');
   $r = $commencer_page($titre, $rubrique, $sous_rubrique);
   return $r;
-}
-
-function acs_gros_titre($gros_titre) {
-  return gros_titre($gros_titre, '', false);
 }
 
 // Retourne une boite info ACS standardisée

@@ -3,7 +3,7 @@
            (Plugin Spip)
       http://acs.geomaticien.org
 
-  Copyright Daniel FAIVRE, 2007-2012
+  Copyright Daniel FAIVRE, 2007-2015
   Copyleft: licence GPL - Cf. LICENCES.txt
 
 Draw widget select controls on start and refresh (they works even without javascript !)
@@ -22,18 +22,15 @@ Draw widget select controls on start and refresh (they works even without javasc
       }
     }
   );
-[(#REM)
-
-Add widgets box filter on mouse enter into filter buttons
-]
+[(#REM) Add widgets box filter on mouse enter into filter buttons]
   jQuery(".widgets_filter_bar").show();
-  jQuery(".acs_box_composants a.grclbl:first").addClass("over");
+  jQuery(".acs_box_composants a.grclbl:first").addClass("survol");
   jQuery(".acs_box_composants a.grclbl").each(function(i,btn) {
     var g = jQuery(btn).attr("name");
     g = g.replace(/gr_(.*)/, "$1");
     jQuery(btn).mouseenter(function(e) {
-      jQuery(".acs_box_composants a.grclbl").removeClass("over");
-      jQuery(btn).addClass("over");
+      jQuery(".acs_box_composants a.grclbl").removeClass("survol");
+      jQuery(btn).addClass("survol");
       jQuery(".acs_box_composants ul.grclist").not(".gr_"+g).hide();
       if (g=="all")
         jQuery(".acs_box_composants ul.grclist").show();
@@ -41,5 +38,25 @@ Add widgets box filter on mouse enter into filter buttons
         jQuery(".acs_box_composants ul.gr_"+g).show();
     });
   });
+}
+[(#REM)
+- Si Ajax est disponible, cette fonction l'utilise pour envoyer la requete.
+- Si le premier argument n'est pas une url, ce doit etre un formulaire.
+- Le deuxieme argument doit etre l'ID d'un noeud qu'on animera pendant Ajax.
+- Le troisieme, optionnel, est la fonction traitant la reponse.
+- La fonction par defaut affecte le noeud ci-dessus avec la reponse Ajax.
+- En cas de formulaire, AjaxSqueeze retourne False pour empecher son envoi
+- Le cas True ne devrait pas se produire car le cookie spip_accepte_ajax
+- a du anticiper la situation.
+- Toutefois il y toujours un coup de retard dans la pose d'un cookie:
+- eviter de se loger avec redirection vers un telle page
+- cf grenier
 
+FONCTION SUPPRIMÉE DE SPIP (layer.js), reprise ici pour compat avant upgrade
+]
+function AjaxSqueeze(trig, id, callback, event) {
+  var target = jQuery('#'+id);
+  // position du demandeur dans le DOM (le donner direct serait mieux)
+  if (!target.size()) {return true;}
+  return !AjaxSqueezeNode(trig, target, callback, event);
 }

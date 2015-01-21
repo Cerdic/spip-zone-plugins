@@ -64,7 +64,6 @@ To use some components from an ACS set in your own SPIP templates, you need to f
   'lien_retirer_admin' => 'Retire from admins',
   'locked_pages' => 'Protected pages',
   'set' => 'Set',
-  'squelette' => 'Skeleton(s)',
   'voir_pages_composants' => 'Components pages',
   'voir_pages_preview_composants' => 'Preview pages',
   'voir_onglet_vars' => 'Variables pane.',
@@ -72,10 +71,11 @@ To use some components from an ACS set in your own SPIP templates, you need to f
   'spip_admin_form_style' => 'SPIP admin form style',
   'cache-spip_on' => 'Disable SPIP cache',
   'cache-spip_off' => 'SPIP cache disabled',
-  'save' => 'Save',
-  'restore' => 'Restore',
+  'save' => 'Save ACS config',
+  'restore' => 'Restore ACS config',
+  'restored' => 'Archive @file@ restored.',
 
-  'acsDerniereModif' => 'Updated',
+  'acsdernieremodif' => 'Updated',
 
   'dev_infos' => 'Developper infos',
   'composant_non_utilise' => 'Unused component.',

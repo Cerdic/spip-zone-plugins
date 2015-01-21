@@ -3,7 +3,7 @@
 	<div class="cRubnav bsize">
     [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
 		<ul>
-			<BOUCLE_rubriques1(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group1}{doublons groups}>
+			<BOUCLE_rubriques1(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group1}{doublons groups}{doublons _mots}{lang}>
 				<li class="menu-item">
 					<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE"[ class="(#EXPOSE)"] title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]"><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>
           <B_sous_rubriques1>
@@ -27,7 +27,7 @@
     [(#GET{titre_la}|?{'',' '})
       [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
     ]<ul>
-      <BOUCLE_rubriques2(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group2}{doublons groups}>
+      <BOUCLE_rubriques2(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group2}{doublons groups}{lang}>
         [(#SET{AFILLES, ""})]<BOUCLE_test_sousrub2(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub2>
   				<li class="menu-item">
           <a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" class="[(#EXPOSE) ][(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})]" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]"><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>
@@ -56,7 +56,7 @@
     [(#GET{titre_la}|?{'',' '})
       [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]
     ]<ul>
-      <BOUCLE_rubriques3(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group3}{doublons groups}>
+      <BOUCLE_rubriques3(RUBRIQUES) {racine} {par num titre, titre}{titre_mot=_Group3}{doublons groups}{lang}>
         [(#SET{AFILLES,""})]<BOUCLE_test_sousrub3(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub3>
           <li class="menu-item">
           <a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" class="[(#EXPOSE) ][(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})]"  title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]"><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>
@@ -85,7 +85,7 @@
     [(#GET{titre_la}|?{'',' '})
       [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
     ]<ul>
-			<BOUCLE_rubriques(RUBRIQUES){tout}{racine}{par num titre, titre}{doublons groups}{doublons _mots}>
+			<BOUCLE_rubriques(RUBRIQUES){tout}{racine}{par num titre, titre}{doublons groups}{doublons _mots}{lang}>
         [(#SET{AFILLES, ""})]<BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub>
 				<li class="menu-item[ (#EXPOSE)]"><a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]" class="[(#EXPOSE) ][(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})]"><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>
           <B_sous_rubriques>

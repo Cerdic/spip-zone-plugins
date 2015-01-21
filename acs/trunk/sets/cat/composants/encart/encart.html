@@ -1,4 +1,4 @@
-[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Use'}}|=={oui}|?{' '})
+[(#CACHE{0})][(#VAR{#EVAL{'acsEncart'.'#NIC'.'Use'}}|=={oui}|?{' '})
 <div class="#PINCEAU{encart,#NIC}">
   [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|=={articles}|?{' '})
     [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/encart/inc-encart_articles-democratie}{nic}{lang}>][(#REM) Encart si composant democratie activé]

@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -69,10 +69,6 @@ class AdminComposant {
 		$this->nom = $c['nom'][0];
 		$this->version = $c['version'][0];
 		$this->group = $c['group'][0];
-
-		// Les versions 1.9.2 de SPIP ne définissaient pas cette fonction introduite en 1.9.3dev puis en 2.0.0
-		if (!is_callable('spip_xml_match_nodes'))
-			include_spip('inc/backport_1.9.2');
 
 		// Lit les dépendances (necessite)
 		if (spip_xml_match_nodes(',^necessite,',$c,$needs)){

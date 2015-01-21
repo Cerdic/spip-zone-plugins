@@ -19,7 +19,7 @@ function composants($c) {
 	include_spip('inc/composant/composants_liste');
 	$cl = composants_liste();	
 	if ($cl[$c->class]['over'])
-		$over = '<img src="'._DIR_PLUGIN_ACS.'images/over.gif" alt="over" title="'._T('acs:squelette').' '.$GLOBALS['meta']['acsSqueletteOverACS'].'" />';
+		$over = '<img src="'._DIR_PLUGIN_ACS.'images/over.gif" alt="over" title="'._T('ecrire:icone_squelette').' '.$GLOBALS['meta']['acsSqueletteOverACS'].'" />';
 
 	$nom = $c->T('nom');
 	if ($nom == $c->class.' nom') $nom = ucfirst($c->class);

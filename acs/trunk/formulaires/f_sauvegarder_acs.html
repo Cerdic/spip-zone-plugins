@@ -1,0 +1,22 @@
+<div class='formulaire_spip formulaire_configurer formulaire_#FORM-#ENV{id,nouveau}' id='formulaire_#FORM'>
+  <h3 class='titrem'>[(#CHEMIN_IMAGE{base-backup-24.png}|balise_img{'',cadre-icone})]<:acs:save:></h3>
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  [(#ENV{editable})<form action="#ENV{action}#formulaire_configurer_#FORM" method="post"><div>[(#REM) 
+declaration des hidden qui declencheront le service du formulaire
+parametre : url d'action ][(#ACTION_FORMULAIRE{#ENV{action}})]
+    <p class='explication'><:acs:sauvegarde:></p>
+    <ul>#SET{name,nom_sauvegarde}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,obligatoire}
+      <li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+        <label for="#GET{name}"><:dump:label_nom_fichier_sauvegarde:></label>
+        [<span class='erreur_message'>(#GET{erreurs})</span>]
+        <input type='text' class='text' name='#GET{name}' id='#GET{name}' value="#ENV{#GET{name}}" />
+      </li>
+    </ul>
+    <p class='boutons'><input class='submit' type="submit" name="ok" value="<:acs:save:>"/></p>
+  </div></form>]
+</div>
+[<div class="choix">
+  (#INCLURE{fond=formulaires/f_inc-lister-sauvegardes_acs,env,name='',ajax,id=sauvegarde_acs,titre=<:dump:sauvegardes_existantes:>,download=#AUTORISER{webmestre}}
+  |sinon{<:dump:info_aucune_sauvegarde_trouvee:>})
+</div>]

@@ -1,0 +1,40 @@
+[(#CACHE{0})][(#REM)
+
+Choix du jeu de composants ACS actif
+
+]<div class='formulaire_spip formulaire_configurer formulaire_#FORM-#ENV{id,nouveau}' id='formulaire_#FORM'>
+  <h3 class='titrem'>[(#CHEMIN_IMAGE{composant-24.gif}|balise_img{'',cadre-icone})]<:acs:composants:></h3>
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+  <form action="#ENV{action}#formulaire_configurer_#FORM" method="post">[(#REM) 
+declaration des hidden qui declencheront le service du formulaire
+parametre : url d'action ][(#ACTION_FORMULAIRE{#ENV{action}})]
+  <B_set>
+  <table class='spip liste'>
+    <thead>
+      <tr class="first_row">
+        <th></th>
+        <th><:acs:set:></th>
+        <th>description (todo)</th>
+      </tr>
+    </thead>
+    <BOUCLE_set(POUR){tableau #ENV|list_sets}>
+      <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+        <td><input type='radio' name="acsSet" value="#VALEUR{set}" id="set_#COMPTEUR_BOUCLE"
+                  [(#VAR{acsSet}|=={#VALEUR{set}}|oui)checked="checked"]>
+        </td>
+        <td>
+          <label for="set_#COMPTEUR_BOUCLE" title="#VALEUR{set}">#VALEUR{set}</label>
+        </td>
+        <td>
+        </td>
+      </tr>
+    </BOUCLE_set>
+  </table>
+  </B_set>
+  <label for="acsSqueletteOverACS" title="acsSqueletteOverACS"  class="label"><:icone_squelette:></label>
+  <input type="text" id="acsSqueletteOverACS" name="acsSqueletteOverACS" class="text" value="#VAR{acsSqueletteOverACS}" />
+  <br /><br />
+  <p class='boutons'><input class='submit' type="submit" name="ok" value="<:bouton_valider:>"/></p>
+  </form>
+</div>

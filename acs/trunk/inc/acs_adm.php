@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 include_spip('inc/acs_groups');
@@ -14,17 +14,6 @@ include_spip('inc/acs_version');
  */
 
 function acs_adm() {
-  if (isset($_POST['changer_set']) && ($_POST['changer_set'] == 'oui')) {
-    if (
-        ($GLOBALS['meta']['acsSet'] != $_POST['acsSet']) ||
-        ($GLOBALS['meta']['acsSqueletteOverACS'] != $_POST['acsSqueletteOverACS'])
-      ) {
-      ecrire_meta('acsSet', $_POST['acsSet']);
-      ecrire_meta('acsSqueletteOverACS', $_POST['acsSqueletteOverACS']);
-      $GLOBALS['dossier_squelettes'] = (isset($GLOBALS['meta']['acsSqueletteOverACS']) ? $GLOBALS['meta']['acsSqueletteOverACS'].':' : '')._DIR_PLUGIN_ACS.'sets/'.$_POST['acsSet'];
-      ecrire_metas();
-    }
-  }  
   if (isset($_POST['changer_groupes']) && ($_POST['changer_groupes'] == 'oui')) {
     acs_groups_update($_POST['acsGroups']);
   }
@@ -48,11 +37,6 @@ print_r(unserialize($GLOBALS['meta']['ACS_CADENASSE']));
 */
 
 
-  // Sauvegarde/restauration
-  $acs_sr = charger_fonction('acs_sr', 'inc');
-  $res = ajax_action_greffe("acs_sr", 0, $acs_sr());
-  $r.= '<br />'.acs_box(_T('acs:save').' / '._T('acs:restore'), $res, _DIR_PLUGIN_ACS.'images/sr.png');  
-  
   // Bloc des admins
   $editer_acs_admins = charger_fonction('acs_editer_admins', 'inc');
   $groups = acs_groups();
@@ -103,7 +87,7 @@ function acs_set() {
   $r = '<form name="acs_set" action="?exec=acs" method="post">'.
         '<input type="hidden" name="onglet" value="adm"><input type="hidden" name="changer_set" value="oui">';
   $r .= '<table width="100%"><tr><td>'.ctlInput('acsSet', _T('acs:set'), select_set());
-  $r .= '</td><td>'.ctlInput('acsSqueletteOverACS', _T('acs:squelette'), '<input type="text" name="acsSqueletteOverACS" value="'.$GLOBALS['meta']['acsSqueletteOverACS'].'" class="forml" />').'</td></tr></table>';
+  $r .= '</td><td>'.ctlInput('acsSqueletteOverACS', _T('ecrire:icone_squelette'), '<input type="text" name="acsSqueletteOverACS" value="'.$GLOBALS['meta']['acsSqueletteOverACS'].'" class="forml" />').'</td></tr></table>';
 
   $r .= '<div style="text-align:'.$GLOBALS['spip_lang_right'].';"><input type="submit" name="'._T('bouton_valider').
   '" value="'._T('bouton_valider').'" class="fondo" /></div></form>';
@@ -114,35 +98,6 @@ function ctlInput($nom, $txt, $content) {
   return '<table width="100%"><tr><td style="width: 10%; text-align:'.$GLOBALS['spip_lang_right'].'"><label for "'.$nom.'" title="'.$nom.'"  class="label">'.$txt.'</label></td><td>'.$content.'</td></tr></table>';
 }
 
-/**
- * Retourne un sélecteur de squelette,
- */
-function select_set() {
-  $r = '<select name="acsSet" class="forml">';
-  foreach(list_sets() as $sq)
-    $r .= '<option name="'.$sq.'" value="'.$sq.'"'.(($sq == $GLOBALS['meta']['acsSet']) ? ' selected': '').'>'.$sq.'</option>';
-  $r .= '</select>';
-  return $r;
-}
 
-/**
- * Lit la liste des jeux de composants
- */
-function list_sets(){
-  $squelettes = array();
-  if ($d = @opendir(_DIR_PLUGIN_ACS.'sets')) {
-    while (false !== ($file = @readdir($d))) {
-      if ($file != "." && $file != ".." && substr($file, 0, 1) != '.' && @is_dir(_DIR_PLUGIN_ACS.'sets/'.$file)) {
-        $squelettes[] = $file;
-      }
-    }
-    closedir($d);
-    sort($squelettes);
-    return $squelettes;
-  }
-  else {
-    return 'Impossible d\'ouvrir le jeu de composants "'._DIR_PLUGIN_ACS.'sets"';
-  }
-}
 
 ?>

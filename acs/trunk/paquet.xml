@@ -1,20 +1,29 @@
 <paquet
 	prefix="acs"
 	categorie="edition"
-	version="3.0.0"
+	version="3.0.1"
 	etat="dev"
-	compatibilite="[1.9.3;3.0.*]"
+	compatibilite="[3.0.17;*]"
 	logo="images/acs_32x32.gif"
 	documentation="http://acs.geomaticien.org">
-	<nom>ACS</nom>	
+	<nom>ACS</nom>
 	<auteur mail="contact@geomaticien.com" lien="http://acs.geomaticien.org">Daniel FAIVRE</auteur>
 	<copyright>Daniel FAIVRE</copyright>
 	<licence>GNU/GPL</licence>
 
-	<menu nom="configurer_acs" titre="acs:acs" parent="menu_configuration" icone="images/acs_16x16.gif" />
+	<necessite nom="jqueryui" compatibilite="[1.8.5;]" />
+	<necessite nom="palette" compatibilite="[3.0.6;]" />
+  
+  <utilise nom="tradrub" compatibilite="[3.1.2;]" />
+  
 	<menu nom="acs" titre="acs:acs_description" parent="menu_squelette" icone="images/acs_16x16.gif" />
-	<pipeline nom="autoriser" inclure="inc/acs_autoriser.php" />
+	<menu nom="sauvegarder_acs" titre="acs:save" parent="menu_administration" icone="images/acs_16x16.gif" />
+	<menu nom="restaurer_acs" titre="acs:restore" parent="menu_administration" icone="images/acs_16x16.gif" />
+	<menu nom="configurer_acs" titre="acs:acs" parent="menu_configuration" icone="images/acs_16x16.gif" />
+	
+	<pipeline nom="autoriser" inclure="inc/acs_pipeline_autoriser.php" />
 	<pipeline nom="header_prive" inclure="inc/acs_pipeline_ecrire.php" />
 	<pipeline nom="insert_head" inclure="inc/acs_pipeline_public.php" />
+	<pipeline nom="jqueryui_plugins" inclure="inc/acs_pipeline_jqueryui_plugins.php" />
 
 </paquet>

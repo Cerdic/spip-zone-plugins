@@ -1,12 +1,12 @@
 
              Assistant de Configuration du Site
 
-Version : 0.8.7
+Version : 3.0.0
 
 Documentation : http:// acs.geomaticien.org
 Licence: cf LICENCES.txt
 ________________________________________________________________________________
-Dernière mise à jour de ce document le: 06-04-2012
+Dernière mise à jour de ce document le: 25-05-2012
 Par: Daniel FAIVRE
 ________________________________________________________________________________
 

@@ -26,7 +26,7 @@ Fonctionnement: la première boucle affiche les documents paginés par groupes d
     <BOUCLE_dp(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu==#GET{vu}}{doublons diapos}><a style="display:none" [(#PLUGIN{mediabox}|?{" "}) class="diapo" rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] href="#URL_DOCUMENT" type="#MIME_TYPE" title="[(#TITRE|supprimer_numero|coupe{18,"..."}) ]"></a>
     </BOUCLE_dp>
   </B_doc>
-  <br class="nettoyeur" />[(#REM)
+  <div class="nettoyeur" ></div>[(#REM)
   
     Liste des autres documents joints (d'après squelettes-dist/inc-documents.html)
     Indispensable car sinon ces documents ne sont listés nulle part.
@@ -45,7 +45,7 @@ Fonctionnement: la première boucle affiche les documents paginés par groupes d
       </BOUCLE_documents_joints>
     </ul>
     </div>
-  <br class="nettoyeur" />
+  <div class="nettoyeur" ></div>
   </B_documents_joints>
   </div>
 </div>

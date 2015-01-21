@@ -68,7 +68,6 @@ Ce sont des <i>"noisettes"</i>, c\'est à dire des squelettes de blocs fonctionn
   'set_help' => 'Le set est un jeu de squelettes Spip basés sur des composants ACS.
 <br /><br />
 Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>). Pour utiliser des composants ACS dans d\'autres squelettes que ceux du modèles ACS actif, vous devez y indiquer le dossier de vos squelettes pour qu\'ils surchargent ceux du modèle actif.',
-  'squelette' => 'Squelette(s)',
   'voir_pages_composants' => 'Pages des composants',
   'voir_pages_composants_help' => 'Affiche les pages des composants dans l\'onglet "Pages" (squelette <i>un_composant</i>.html).',
   'voir_pages_preview_composants' => 'Pages de pr&eacute;visualisation',
@@ -82,10 +81,11 @@ Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses com
   'cache-spip_on' => 'D&eacute;sactiver le cache de SPIP',
   'cache-spip_off' => 'Cache SPIP d&eacute;sactiv&eacute;',
   'cache-spip_help' => 'Le cache de SPIP permet au serveur de répondre rapidement, mais il est souvent n&eacute;c&eacute;ssaire de le désactiver lors du développement du site pour pouvoir voir les changements.',
-  'save' => 'Sauvegarder',
-  'restore' => 'Restaurer',
+  'save' => 'Sauvegarder la configuration ACS',
+  'restore' => 'Restaurer la configuration ACS',
+  'restored' => 'L\'archive @file@ a été restaurée.',
 
-  'acsDerniereModif' => 'Mis &agrave; jour le',
+  'acsdernieremodif' => 'Mis &agrave; jour le',
 
   'dev_infos' => 'Infos d&eacute;veloppeur',
   'si_composant_actif' => 'Si le composant est utilis&eacute;',

@@ -11,7 +11,7 @@ lang: langue des articles et rubriques listés.
 <div class="liste-articles">
   <span class="nav nsize"><:articles:> [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={popularite}|?{<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL_RUBRIQUE#pagination_articles" class="ajax"><:acs:articles_classes_par_date:></a>),<:acs:articles_classes_par_date:></i> (<a href="#URL_RUBRIQUE&amp;classement=popularite#pagination_articles" class="ajax"><:acs:articles_classes_par_popularite:></a>)})],<:acs:articles_classes_par_date:></i>})]</span>
   [<span class="pagination">(#PAGINATION)</span>]
-  <br class="nettoyeur" />
+  <div class="nettoyeur" ></div>
   <ul>
   <BOUCLE_articles(ARTICLES){id_mot}{par (#CLASSEMENT|=={popularite}|?{popularite,date})}{inverse}{pagination #VAR{acsArticlesPagination,10}} {lang=#LANG}>
     <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{masquer_rubrique=oui}>
