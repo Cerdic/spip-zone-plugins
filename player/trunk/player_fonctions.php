@@ -118,7 +118,11 @@ function player_post_propre($texte) {
 					$url = $m[2];
 					$titre = $m[4];
 					$titre = ((!strlen(textebrut($titre)) OR tester_url_absolue($titre))?player_joli_titre($url):$titre);
-					$texte .= recuperer_fond("modeles/player",array('url_document'=>$url,'titre'=>$titre));
+					$emb = recuperer_fond("modeles/player",array('url_document'=>$url,'titre'=>$titre));
+					if ($wrap_embed_html = charger_fonction("wrap_embed_html","inc",true)){
+						$emb = $wrap_embed_html(' ',$emb);
+					}
+					$texte .= $emb;
 				}
 			}
 		}
