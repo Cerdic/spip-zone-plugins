@@ -3,7 +3,7 @@
 	<slogan>Module de paiement pour Formidable</slogan>
 	<auteur>Arnault Pachot, Emmanuel Nurit</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.4</version>
+	<version>0.4.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>Champs additionnels de paiement en ligne pour le plugin Formidable

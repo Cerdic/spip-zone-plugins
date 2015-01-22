@@ -24,13 +24,14 @@
 /*************************************************************************************/
 ?>
 <?php
-	function footprint($params_paybox, $total, $transaction, $porteur, $time) {
+	function footprint($params_paybox, $lang, $total, $transaction, $porteur, $time) {
 		$msg =
 			"PBX_SITE=".$params_paybox['site'].
 			"&PBX_RANG=".$params_paybox['rang'].
 			"&PBX_IDENTIFIANT=".$params_paybox['id'].
 			"&PBX_TOTAL=$total".
 			"&PBX_DEVISE=978".
+                        "&PBX_LANGUE=$lang" .
  			"&PBX_CMD=$transaction".
 			"&PBX_PORTEUR=$porteur".
 			"&PBX_RETOUR=Mt:Mt:M;Ref:R;Auto:A;Erreur:E".
@@ -102,13 +103,19 @@
 
 	session_start();
 
-	$lang = $_SESSION['langue_paybox'];
+        $lang = 'GBR';
+        if (isset($_SESSION['lang'])) {
+            switch ($_SESSION['lang']) {
+                case 'en' : $lang = 'GBR'; break;
+                case 'fr' : $lang = 'FRA';
+            }
+        }
 	$total = intval($_SESSION['total']) * 100;
 	$transaction = urlencode($_SESSION['ref']);
 	$porteur = $_SESSION['porteur'];
 	$time = date("c");
 
-	$hmac = footprint($params_paybox, $total, $transaction, $porteur, $time);
+	$hmac = footprint($params_paybox, $lang, $total, $transaction, $porteur, $time);
 ?>
 
 <html>
@@ -131,6 +138,7 @@
  		<input type="hidden" name="PBX_IDENTIFIANT" value="<?php echo $params_paybox['id']; ?>" />
  		<input type="hidden" name="PBX_TOTAL" value="<?php echo $total; ?>" />
  		<input type="hidden" name="PBX_DEVISE" value="978" />
+ 		<input type="hidden" name="PBX_LANGUE" value="<?php echo $lang; ?>" />
  		<input type="hidden" name="PBX_CMD" value="<?php echo $transaction; ?>" />
  		<input type="hidden" name="PBX_PORTEUR" value="<?php echo $porteur; ?>" />
  		<input type="hidden" name="PBX_RETOUR" value="Mt:Mt:M;Ref:R;Auto:A;Erreur:E">
