@@ -354,7 +354,7 @@ function inscription3_formulaire_verifier($flux){
 		if(isset($_FILES['logo']) && ($_FILES['logo']['error'] == 0)){
 			$f =_DIR_LOGOS . $arg . '.tmp';
 			include_spip('inc/documents');
-			if ($erreur = check_upload_error($source['error'],"",f))
+			if ($erreur = check_upload_error($_FILES['logo']['error'],"",$f))
 				$erreurs['logo'] = $erreur;
 			else
 				$source = deplacer_fichier_upload($_FILES['logo']['tmp_name'], $f);
@@ -594,8 +594,9 @@ function inscription3_formulaire_traiter($flux){
 	
 				// ajouter le nouveau
 				include_spip('action/iconifier');
+				
 				action_spip_image_ajouter_dist(
-					type_du_logo('id_auteur').'on'.$id_auteur, false, false
+					type_du_logo('id_auteur').'on'.$id_auteur, true, $_FILES['logo']
 				);
 				// indiquer qu'on doit recalculer les images
 				$GLOBALS['var_images'] = true;
