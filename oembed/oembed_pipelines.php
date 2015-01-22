@@ -174,7 +174,7 @@ function oembed_post_edition($flux) {
 				}
 				if ($files
 					AND $ajoute = action_ajouter_documents_dist('new',$files,'',0,'vignette')
-				  AND is_int(reset($ajoute))){
+				  AND intval(reset($ajoute))){
 					$id_vignette = reset($ajoute);
 					include_spip('action/editer_document');
 					document_modifier($id_document,array("id_vignette" => $id_vignette));
