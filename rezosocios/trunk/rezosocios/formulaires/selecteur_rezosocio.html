@@ -1,0 +1,7 @@
+<B_data>
+<select[ name='(#ENV{name})'][ id='(#ENV{id})']>
+<BOUCLE_data(DATA){source table,#ENV**{types_rezosocios}}{par cle}>
+<option value='#CLE'[(#ENV{#ENV{name},''}|=={#CLE}|oui)selected='selected']>[(#VALEUR)]</option>
+</BOUCLE_data>
+</select>
+</B_data>

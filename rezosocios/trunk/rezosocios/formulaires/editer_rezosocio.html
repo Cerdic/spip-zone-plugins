@@ -1,0 +1,38 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_rezosocio,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_rezosocio' value='#ENV{id_rezosocio}' />
+		<ul>
+			<li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:info_titre:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" placeholder="<:rezosocios:texte_nouveau_rezosocio:>" />
+			</li>
+			<li class="editer editer_groupe_mot obligatoire[ (#ENV**{erreurs}|table_valeur{type_rezo}|oui)erreur]">
+				<label for="type_rezo"><:rezosocios:info_type_rezosocios:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{type_rezo})</span>
+				][(#INCLURE{fond=formulaires/selecteur_rezosocio, types_rezosocios=#ENV{_types_rezosocios}, name=type_rezo, type_rezo=#ENV{type_rezo},id=type_rezo})]
+			</li>
+			<li class="editer editer_nom_compte obligatoire[ (#ENV**{erreurs}|table_valeur{nom_compte}|oui)erreur]">
+				<label for="url_site"><:rezosocios:info_nom_compte:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_compte})</span>
+				]<input type='text' class='text' name='nom_compte' id='nom_compte' value="[(#ENV**{nom_compte})]" />
+			</li>
+			<li class="editer editer_lang obligatoire[ (#ENV**{erreurs}|table_valeur{lang}|oui)erreur]">
+				<label for="changer_lang"><:rezosocios:info_langue:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang})</span>]
+				[<span class="input">
+					<select name="changer_lang" id="changer_lang">(#INCLURE{fond=formulaires/inc-options-langues,name=changer_lang,default=#ENV**{changer_lang,#ENV{lang}}})</select>
+				</span>]
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
+</div>

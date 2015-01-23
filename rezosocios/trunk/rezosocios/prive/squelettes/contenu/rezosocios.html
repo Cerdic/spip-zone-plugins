@@ -1,0 +1,9 @@
+<h1 class="grostitre"><:rezosocios:titre_page_rezosocios_page:></h1>
+
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/rezosocios,statut=#GET{statuts},par=date,nb=30,env,ajax}>
+
+[(#AUTORISER{creer,rezosocio})
+	[(#URL_ECRIRE{rezosocio_edit,new=oui}|icone_verticale{<:rezosocios:icone_creation_rezosocio:>,rezosocio,new,right})]
+]

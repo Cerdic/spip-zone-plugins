@@ -1,0 +1,39 @@
+[(#REM)
+
+	Modèle d'insertion du bloc twitter "timeline" :
+	https://twitter.com/settings/widgets/new
+	https://dev.twitter.com/web/embedded-timelines#customization
+	
+	Paramètres du modèle :
+	
+	-* Paramètres de recherche de comptes de reseau social (SPIP)
+	-** id_rezosocio int : identifiant numérique du réseau social
+	-** id_article int : identifiant numérique de l'article où est lié le réseau social
+	-** id_auteur int : identifiant numérique de l'auteur à qui est lié le réseau social
+	-** id_rubrique int : identifiant numérique de la rubrique à qui est lié le réseau social
+	-** objet string : type de l'objet à qui sont liés les réseaux sociaux
+	-** id_objet int : identifiant numérique de l'objet à qui est lié le réseau social
+	
+	-* Paramètres liés à la customisation de la boite
+	-** width int : largeur de la box
+	-** height int : hauteur de la box
+	-** widget-id : int : préconfiguration de la boite (cf https://twitter.com/settings/widgets/new)
+	-** theme string light|dark : thème graphique 
+	-** link-color code  hexadecimal d'une couleur : modifier la couleur des liens
+	-** chrome string : controle l'affichage du layout, peut prendre une ou plusieurs valeurs parmis les suivantes : noheader, nofooter, noborders, noscrollbar, transparent
+	-** tweet-limit int : limiter le nombre de tweets affichés dans la timeline
+	-** related string : utilisateurs en relation (séparés par des virgules)
+	-** aria-polite string polite|assertive : réglages ARIA
+	-** show-replies string true|false : affiche ou non les réponses
+	
+]
+
+<BOUCLE_rezostwitter(REZOSOCIOS){id_rezosocio?}{id_article?}{id_auteur?}{id_rubrique?}{objet?}{id_objet?}{type_rezo=twitter}>
+[(#SET{name_twitter, #NOM_COMPTE})]
+[(#SET{lang,[(#ENV{lang})_[(#ENV{lang}|strtoupper)]]})]
+
+<a class="twitter-timeline" width="#ENV{width,100%}" height="#ENV{height,275}" href="https://twitter.com/#GET{name_twitter}"[ data-link-color="(#ENV{link-color})"][ data-chrome="(#ENV{chrome})"][ data-show-replies="(#ENV{show-replies}|in_array{#LISTE{true,false}}|?{#ENV{show-replies}})"][ data-related="(#ENV{related})"][ data-tweet-limit="(#ENV{tweet-limit}|is_numeric|?{#ENV{tweet-limit}})"][ data-theme="(#ENV{theme}|in_array{#LISTE{light,dark}}|?{#ENV{theme}})"] data-widget-id="407475350688378880"[ data-aria-polite="(#ENV{aria-polite})"] data-screen-name="[(#GET{name_twitter})]" lang="#ENV{lang}"><:rezosocios:titre_tweetsde{name=#GET{name_twitter}}:></a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</BOUCLE_rezostwitter>
+#FILTRE{trim}

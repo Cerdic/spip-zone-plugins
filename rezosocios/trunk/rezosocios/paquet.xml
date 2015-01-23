@@ -1,0 +1,23 @@
+<paquet
+	prefix="rezosocios"
+	categorie="edition"
+	version="0.2.0"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	schema="0.2.0"
+	logo="prive/themes/spip/images/rezosocios-64.png"
+>
+
+	<nom>Réseaux sociaux</nom>
+
+	<auteur lien="http://www.kent1.info/">kent1</auteur>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/rezosocios.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/rezosocios.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/rezosocios.php" />
+	<pipeline nom="affiche_milieu" inclure="rezosocios_pipelines.php" />
+	<pipeline nom="autoriser" inclure="rezosocios_autoriser.php" />
+	
+	<menu nom="rezosocios" titre="rezosocios:icone_rezosocios" parent="menu_edition" icone="images/rezosocio-16.png" action="rezosocios" />
+	<menu nom="rezosocio_creer" titre="rezosocios:icone_creation_rezosocio" parent="outils_rapides" icone="images/rezosocio-new-16.png" action="rezosocio_edit" parametres="new=oui" />
+</paquet>

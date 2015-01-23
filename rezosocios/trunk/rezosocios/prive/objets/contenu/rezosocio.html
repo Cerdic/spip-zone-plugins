@@ -1,0 +1,18 @@
+<BOUCLE_afficher_contenu(REZOSOCIOS){id_rezosocio = #ENV{id}}{tout}>
+<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+<div class='label'><:info_titre:></div>
+<div dir='#LANG_DIR' class='#EDIT{titre} nom_site'>#TITRE</div>
+</div>
+<div class="champ contenu_type_rezo[ (#TYPE_REZO*|strlen|?{'',vide})]">
+<div class='label'><:rezosocios:info_type_rezosocios:></div>
+<div dir='#LANG_DIR' class='#EDIT{type_rezo} type_rezo'>[(#CHEMIN{prive/themes/spip/images/[(#TYPE_REZO|strtolower|concat{-32.png})]}|balise_img|image_reduire{32,32}) ]#TYPE_REZO</div>
+</div>
+<div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
+<div class='label'><:info_langue:></div>
+<div dir='#LANG_DIR' class='#EDIT{lang} lang'>[(#LANG|traduire_nom_langue)]</div>
+</div>
+<div class="champ contenu_url_site[ (#NOM_COMPTE*|strlen|?{'',vide})]">
+<div class='label'><:rezosocios:info_nom_compte:></div>
+<div dir='#LANG_DIR' class='#EDIT{nom_compte} nom_compte'>#NOM_COMPTE</div>
+</div>
+</BOUCLE_afficher_contenu>

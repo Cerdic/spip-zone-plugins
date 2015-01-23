@@ -1,0 +1,39 @@
+[(#REM)
+
+	Modèle d'insertion du bloc facebook "like" (https://developers.facebook.com/docs/plugins/like-box-for-pages?locale=fr_FR)
+	
+	Paramètres du modèle :
+	
+	-* Paramètres de recherche de comptes de reseau social (SPIP)
+	-** id_rezosocio int : identifiant numérique du réseau social
+	-** id_article int : identifiant numérique de l'article où est lié le réseau social
+	-** id_auteur int : identifiant numérique de l'auteur à qui est lié le réseau social
+	-** id_rubrique int : identifiant numérique de la rubrique à qui est lié le réseau social
+	-** objet string : type de l'objet à qui sont liés les réseaux sociaux
+	-** id_objet int : identifiant numérique de l'objet à qui est lié le réseau social
+	
+	-* Paramètres liés à la customisation de la boite
+	-** width int : largeur de la box
+	-** height int : hauteur de la box
+	-** colorscheme string light|dark, défaut light : thème graphique de la box
+	-** show-faces string true|false, défaut false : affiche-t-on les avatars de personnes qui likent la page
+	-** header string true|false, défaut false : affiche-t-on les avatars de personnes qui likent la page
+	-** stream string true|false, défaut false : affiche-t-on le stream des publications
+	-** show-border string true|false, défaut false : affiche-t-on une bordure autour de la boite
+]
+
+<BOUCLE_rezosfb(REZOSOCIOS){id_rezosocio?}{id_article?}{id_auteur?}{id_rubrique?}{objet?}{id_objet?}{type_rezo=facebook}>
+[(#SET{name_facebook, #NOM_COMPTE})]
+[(#SET{lang,[(#ENV{lang})_[(#ENV{lang}|strtoupper)]]})]
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "//connect.facebook.net/[(#GET{lang})]/sdk.js#xfbml=1&appId=443630329075852&version=v2.0";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-like-box" data-href="http://www.facebook.com/#GET{name_facebook}"[ data-width="(#ENV{width}|is_numeric|?{#ENV{width},''})][ data-height="(#ENV{height}|is_numeric|?{#ENV{height},''})] data-colorscheme="[(#ENV{colorscheme}|in_array{#LISTE{light,dark}}|?{#ENV{colorscheme},light})]" data-show-faces="[(#ENV{show-faces}|in_array{#LISTE{true,false}}|?{#ENV{show-faces},false})]" data-header="[(#ENV{header,false}|in_array{#LISTE{true,false}}|?{#ENV{header},false})]" data-stream="[(#ENV{stream,false}|in_array{#LISTE{true,false}}|?{#ENV{stream},false})]" data-show-border="[(#ENV{show-border,false}|in_array{#LISTE{true,false}}|?{#ENV{show-border},false})]" lang="#ENV{lang}"></div>
+</BOUCLE_rezosfb>
+#FILTRE{trim}

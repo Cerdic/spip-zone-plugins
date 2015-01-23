@@ -1,0 +1,43 @@
+[(#SET{defaut_tri,#ARRAY{
+	type_rezo,1,
+	num titre,1,
+	titre,1,
+	id_rezosocio,1,
+	points,-1
+}})
+]
+#SET{selection,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<input type="hidden" name="debutrezosociol" value='#ENV{debutrezosociol,#EVAL{_request("debutrezosociol");}}' />
+<B_liste_rezosocio>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies rezosocios">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{rezosocios:rezosocio_un,rezosocios:rezosocio_nb}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='type_rezo' scope='col'>[(#TRI{type_rezo,<:rezosocios:info_type_rezosocios:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_rezosocio(REZOSOCIOS){id_rezosocio IN #GET{selection}}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par multi titre}{pagination #ENV{nb,10} rezosociol}{tout}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_REZOSOCIO|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='picto'>[(#VAL|puce_statut{rezosocio,#ID_REZOSOCIO})]</td>
+			<td class='titre principale'>[(#LOGO_REZOSOCIO|image_reduire{20,20})]<a href="[(#ID_REZOSOCIO|generer_url_entite{rezosocio})]"
+																																						title="<:info_numero_abbreviation|attribut_html:> #ID_REZOSOCIO">[(#RANG). ]#TITRE</a></td>
+			<td class='type_rezo secondaire'>#TYPE_REZO</td>
+			<td class='action'><button type="submit" class="button link delete" name="supprimer_lien[rezosocio-#ID_REZOSOCIO-#OBJET-#ID_OBJET]" value="X"><:rezosocios:info_retirer_rezosocio:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+		</tr>
+	</BOUCLE_liste_rezosocio>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button type="submit" class="button link" name="supprimer_lien#EVAL{chr(91)}rezosocio-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:rezosocios:info_retirer_rezosocios:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_rezosocio>
+<div class="liste-objets liste-objets-lies rezosocios caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:rezosocios:rezosocio_aucun:>}) ]</strong>
+</div>
+<//B_liste_rezosocio>
