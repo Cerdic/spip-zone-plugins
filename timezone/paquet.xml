@@ -5,6 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/timezone-64.png"
+  documentation="http://contrib.spip.net/Timezone-4591"
 >
 
 	<nom>Timezone</nom>
