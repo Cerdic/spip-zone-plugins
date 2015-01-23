@@ -35,7 +35,13 @@
     <nom>Fond</nom>
     <type>color</type>
   </variable>
-
+  <variable>
+    <nom>Label</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
 	<variable>
     <nom>Shadow</nom>
     <type>color</type>

@@ -11,7 +11,7 @@ Paramètres:
 id_article: id de l'article
 
 ][(#ENV{id_version}|?{" "})
-    [<div class="cArticle">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]
+    [<div class="cArticle" dir="#LANG_DIR">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]
   ]
 <BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>
   <div class="cArticle">[(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})

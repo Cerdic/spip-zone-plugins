@@ -10,15 +10,6 @@
   [(#MODELE{c_css_border-radius}{r=15px})]
 
 ]#SET{arrondi,#VAR{acs#ENV{c}#ENV{nic}#ENV{var},#ENV{r,5px}}}[
-  border-radius: (#GET{arrondi});][
-  -moz-border-radius: (#GET{arrondi});][
-  -webkit-border-radius: (#GET{arrondi});][
-  -khtml-border-radius: (#GET{arrondi});][(#ENV{sauf}|match{(bottom|top)}|?{" "})
-  border-radius-[(#ENV{sauf})]left: 0;
-  border-radius-[(#ENV{sauf})]right: 0;
-  -moz-border-radius-[(#ENV{sauf})]left: 0;
-  -moz-border-radius-[(#ENV{sauf})]right: 0;
-  -webkit-border-radius-[(#ENV{sauf})]left: 0;
-  -webkit-border-radius-[(#ENV{sauf})]right: 0;
-  -khtml-border-radius-[(#ENV{sauf})]left: 0;
-  -khtml-border-radius-[(#ENV{sauf})]right: 0;]
+  border-radius: (#GET{arrondi});][(#ENV{sauf}|match{(bottom|top)}|?{" "})
+  border-[(#ENV{sauf})]-left-radius: 0;
+  border-[(#ENV{sauf})]-right-radius: 0;]

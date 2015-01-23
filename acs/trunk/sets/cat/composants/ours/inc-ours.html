@@ -1,10 +1,9 @@
 [(#CACHE{86400})]<fieldset class="ours nsize">
   <BOUCLE_rubrique(RUBRIQUES){tous} {racine} {titre_mot=_Ours} {0,1}><legend class="screen_only"> &nbsp; <a href="?rubrique#ID_RUBRIQUE"[ title="(#DESCRIPTIF|textebrut)"]>[(#TITRE|supprimer_numero)]</a> &nbsp; </legend></BOUCLE_rubrique>
-  <div align="center">
-  [(#VAR{acsOursLienCopyright,oui}|=={oui}|?{' '})<span><a class="spip_out" title="<:acs:ours_home:>" href="#URL_SITE_SPIP">&copy; #NOM_SITE_SPIP</a></span> | ][(#VAR{acsOursLienRSS,oui}|=={oui}|?{' '})<span class="screen_only">[<a href="#URL_PAGE{backend}" title="<:syndiquer_site:>"><img src="(#CHEMIN{feed.png}|url_absolue)" alt="<:icone_suivi_activite:>" width="16" height="16" class="format_png" /></a>]&nbsp;<a href="#URL_PAGE{backend}" title="<:syndiquer_site:>">RSS&nbsp;2.0</a></span> | ][(#VAR{acsOursLienResume,oui}|=={oui}|?{' '})<span class="screen_only"><a title="<:acs:ours_text_tooltip:>" href="oo/"><:acs:ours_text:></a></span> | ][(#VAR{acsDemocratieUse}|=={oui}|?{' '})<span class="screen_only"><a href="?page=prop" title="<:acs:democratie_gouvernance:>"><:acs:ours_proposes:></a></span> | ]
-#SET{statut,#EVAL{$GLOBALS['auteur_session']['statut']}}
-[(#VAR{acsOursLienRefus,oui}|=={oui}|?{' '})
-  [(#GET{statut}|?{' '})<span class="screen_only"><a title="<:acs:ours_refus:>" href="?page=refus"><:acs:ours_refus:></a></span> | ]
-][(#VAR{acsOursLienSPIP,oui}|=={oui}|?{' '})<span class="screen_only"><a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a></span> | ][(#VAR{acsOursLienACS,oui}|=={oui}|?{' '})<span class="screen_only"><a title="<:acs:ours_acs_powered_tip:> ([(#ACS_VERSION)])"  href="http://acs.geomaticien.org"><img src="[(#CHEMIN{images/acs_32x32.gif})]" alt="ACS powered" /></a></span>]
+  <div align="center">[
+  (#VAR{acsOursLienCopyright,oui}|=={oui}|?{' '})<span><a class="spip_out" title="<:acs:ours_home:>" href="#URL_SITE_SPIP">&copy; #NOM_SITE_SPIP</a></span> | ][
+  (#VAR{acsOursLienRSS,oui}|=={oui}|?{' '})<span class="screen_only">[<a href="#URL_PAGE{backend}" title="<:syndiquer_site:>"><img src="(#CHEMIN{feed.png}|url_absolue)" alt="<:icone_suivi_activite:>" width="16" height="16" class="format_png" /></a>]&nbsp;<a href="#URL_PAGE{backend}" title="<:syndiquer_site:>">RSS&nbsp;2.0</a></span> | ][
+  (#VAR{acsOursLienSPIP,oui}|=={oui}|?{' '})<span class="screen_only"><a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a></span> | ][
+  (#VAR{acsOursLienACS,oui}|=={oui}|?{' '})<span class="screen_only"><a title="<:acs:ours_acs_powered_tip:> ([(#ACS_VERSION)])"  href="http://acs.geomaticien.org"><img src="[(#CHEMIN{images/acs_32x32.gif})]" alt="ACS powered" /></a></span>]
   </div>
 </fieldset>

@@ -13,8 +13,7 @@ page: détermine la boucle SPIP à charger si les variables précédentes sont v
 ]<div class="[id_article-(#ID_ARTICLE) ]#PINCEAU{articles}">[
 (#ID_ARTICLE|?{' '})[(#INCLURE{fond=composants/article/article}{env}{self}{id_article})#SET{ok,oui}]][
 (#ID_MOT|?{' '})[(#INCLURE{fond=composants/articles/boucle-articles_mot}{env}{self})#SET{ok,oui}]][
-(#ENV{page}|=={sommaire}|?{' '})[(#INCLURE{fond=composants/articles/boucle-une}{env}{self}{debut_articles})#SET{ok,oui}]][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ][
-(#ENV{page}|=={resume}|?{' '})[(#INCLURE{fond=composants/articles/boucle-resume}{env}{self}{debut_articles})#SET{ok,oui}]][
+(#ENV{page}|=={sommaire}|?{' '})[(#INCLURE{fond=composants/articles/boucle-une}{env}{self}{ajax}{debut_articles})#SET{ok,oui}]][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ][
 (#ENV{page}|=={recherche}|?{' '})[(#INCLURE{fond=composants/articles/boucle-articles_recherche}{env}{self})#SET{ok,oui}]][
 (#ENV{page}|=={plan}|?{' '})[(#INCLURE{fond=composants/plan/plan}{env}{self})#SET{ok,oui}]][
 (#ENV{page}|=={auteur}|?{' '})[(#INCLURE{fond=composants/auteur/auteur}{env}{self})#SET{ok,oui}]][

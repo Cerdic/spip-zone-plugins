@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 include_spip('inc/acs_presentation');
@@ -146,7 +146,7 @@ class ctlLargeurBord extends Controle {
     if ($this->param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label></td>';
     if (!in_array($largeur, array('', '0', 'thin', '1px', '2px', '3px', '4px', '5px')))
       $option = '<option value="'.$largeur.'"  title="'.$largeur.' ('.$GLOBALS['meta'][substr($largeur, 1)].')" selected>=</option>';
-    $r .= '<td><select name="'.$this->var.'_'.$this->wid.'" title="'._T('acs:bordlargeur').' '.$this->var.'" class="forml" style="width: auto">'.
+    $r .= '<td><select id="'.$this->var.'" name="'.$this->var.'_'.$this->wid.'" title="'._T('acs:bordlargeur').' '.$this->var.'" class="forml" style="width: auto">'.
       '<option value=""'.($largeur=="" ? ' selected' : '').' title="'._T('acs:parent').'"></option>'.
       $option.
       '<option value="0"'.($largeur=="0" ? ' selected' : '').' title="0">0</option>'.
@@ -179,7 +179,7 @@ class ctlStyleBord extends Controle {
     if ($this->param['label'] != 'non') $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label></td>';
     if (!in_array($style, array('', 'none', 'solid', 'dashed', 'dotted', 'double', 'groove', 'ridge', 'inset', 'outset')))
       $option = '<option value="'.$style.'"  title="'.$style.' ('.$GLOBALS['meta'][substr($style, 1)].')" selected>=</option>';
-    $r .= '<td><select name="'.$this->var.'_'.$this->wid.'" title="'._T('acs:bordstyle').' '.$this->var.'" class="forml" style="width: auto">'.
+    $r .= '<td><select id="'.$this->var.'" name="'.$this->var.'_'.$this->wid.'" title="'._T('acs:bordstyle').' '.$this->var.'" class="forml" style="width: auto">'.
       '<option value=""'.($style=="" ? ' selected' : '').' title="'._T('acs:parent').'"></option>'.
       $option.
       '<option value="none"'.($style=="none" ? ' selected' : '').' title="'._T('acs:none').'">none</option>'.

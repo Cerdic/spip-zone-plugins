@@ -92,4 +92,11 @@
     <type>text</type>
     <valeur>100</valeur>
   </variable>
+  <variable>
+    <nom>Date</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
 </composant>

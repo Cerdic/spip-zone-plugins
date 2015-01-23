@@ -1,9 +1,9 @@
 <paquet
 	prefix="acs"
 	categorie="edition"
-	version="3.0.1"
+	version="3.0.2"
 	etat="dev"
-	compatibilite="[3.0.17;*]"
+	compatibilite="[3.0.17;3.*]"
 	logo="images/acs_32x32.gif"
 	documentation="http://acs.geomaticien.org">
 	<nom>ACS</nom>
@@ -11,8 +11,8 @@
 	<copyright>Daniel FAIVRE</copyright>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="jqueryui" compatibilite="[1.8.5;]" />
-	<necessite nom="palette" compatibilite="[3.0.6;]" />
+	<utilise nom="jqueryui" compatibilite="[1.8.21;]" />
+	<utilise nom="palette" compatibilite="[3.0.6;]" />
   
   <utilise nom="tradrub" compatibilite="[3.1.2;]" />
   

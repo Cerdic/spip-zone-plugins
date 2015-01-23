@@ -39,20 +39,6 @@
     <valeur>oui</valeur>
   </variable>
   <variable>
-    <nom>LienResume</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>oui</valeur>
-  </variable>
-  <variable>
-    <nom>LienRefus</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>oui</valeur>
-  </variable>
-  <variable>
     <nom>LienACS</nom>
     <type>choix</type>
     <option>oui</option>

@@ -11,5 +11,5 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Les pages articles avec les mots-clés _ide, _aut, _adm, et _acs sont à accès restreint aux visiteurs enregistrés, membres, admin, et admins ACS.
 Access to pages of articles tagged with keywords _ide, _aut, _adm and _acs is restricted to registered members, authors, administrators, and ACS admins.
 
-]<B_acces_restreint><BOUCLE_acces_restreint(ARTICLES){id_article}{statut==[publie|propose|refuse]}{titre_mot==(_ide|_aut|_adm|_acs)}>[(#ACS_AUTORISE{#TITRE_MOT}|?{'',' '})[(#INCLURE{fond=redirect}{url_redirect=#URL_PAGE{login}}{url=#SELF})]]</BOUCLE_acces_restreint></B_acces_restreint>
+]<B_acces_restreint><BOUCLE_acces_restreint(ARTICLES){id_article}{titre_mot==(_ide|_aut|_adm|_acs)}>[(#ACS_AUTORISE{#TITRE_MOT}|?{'',' '})[(#INCLURE{fond=redirect}{url_redirect=#URL_PAGE{login}}{url=#SELF})]]</BOUCLE_acces_restreint></B_acces_restreint>
 [(#INCLURE{fond=composants/article/test-style-page}{id_article}{env}{self}{ouvrir}{debut_doc}{debut_forums}{debut_breves})]<//B_acces_restreint>

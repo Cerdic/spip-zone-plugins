@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Ours',
 'description' => 'Website informations.',
 'info' => 'If a rubric has the keyword _Ours, a link to these rubric is displayed.',
-'help' => 'A rubric with keyword _Ours is used to group your editor\'s informations.<br />Link to refused articles make publics eitorial choices.<br />Ours display also a link to proposed articles when "Democratie" component is used.',
+'help' => 'A rubric with keyword _Ours is used to group your editor\'s informations.',
 
 'Text' => 'Text',
 'Link' => 'Links',
@@ -16,7 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'liens' => 'Displayed links : ',
 'LienCopyright' => 'Copyright',
 'LienResume' => 'Text abstract',
-'LienRefus' => 'Refused texts',
 'LienACS' => 'ACS',
 'LienSPIP' => 'SPIP',
 'LienRSS' => 'RSS',

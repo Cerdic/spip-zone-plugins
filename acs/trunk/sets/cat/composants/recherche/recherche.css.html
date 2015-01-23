@@ -30,7 +30,7 @@
 }
 
 .cRecherche .formulaire_recherche label {
-  display: block;
+  display: [(#VAR{acsRechercheLabel}!={non}|?{block,none})];
   [background: (#VAR{acsRechercheTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsRechercheTitreFondImage}})") repeat top left];]
   color: #VAR{acsFondText,#00008f};
   text-align: center;

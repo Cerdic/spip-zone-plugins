@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -22,7 +22,7 @@ function action_crayons_composant_store_dist() {
 	  
   // Dernière sécurité :Accès réservé aux admins ACS
   // Last security: access restricted to ACS admins 
-  if (!in_array($GLOBALS['auteur_session']['id_auteur'], explode(',', $GLOBALS['meta']['ACS_ADMINS']))) {
+  if (!autoriser('acs', 'crayons_composant_store')) {
     echo api_crayons_var2js(array('$erreur' => _T('avis_operation_impossible')));
     exit;
   }

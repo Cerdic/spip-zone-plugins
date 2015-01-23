@@ -1,11 +1,18 @@
-Suivi des principales révisions - Version ACS actuelle : 3.0.0
+Suivi des principales révisions - Version ACS actuelle : 3.0.2
 
+- suppression du set de composants "dist".
+- suppression du composant "démocratie" et de ses dépendances (sera remplacé par un plugin indépendant).
+- suppression de la page "articles proposés".
+- modification du comportement de la fonction coupe() du jeu de composants Cat (valeur négative au lieu de 0 pour ne rien couper)
+- mise à jour du modèle c_css_border-radius (la syntaxe CSS a changé)
+- remise en service des pinceaux
+- améliorations diverses sur les composants Encart, Recherche, Rubnav ...
 
 ACS version 3.0.1
 - nouvelle version optimisée pour SPIP 3. Abandon de la compatibilité avec SPIP 1.9.n, et création d'une branche v2 pour les SPIP 1.9 et 2.
 - création d'un fichier paquet.xml pour SPIP 3.
-- suppression de la fonction acs_autorise() et de la balise #ACS_AUTORISE, remplacée par un appel à l'API autoriser de SPIP.
 - les fonctions sauvegarder/restaurer les paramètres d'ACS sont maintenant intégrées au menu "maintenance" et permettent le téléchargement des sauvegardes.
 - balise #ACS_DERNIERE_MODIF supprimée (#CONFIG{acsDerniereModif} fait le job)
+- suppression de la fonction acs_autorise() et de la balise #ACS_AUTORISE, remplacée par un appel à l'API autoriser de SPIP.
 _______________________________________
 ACS versions antérieures : voir le Changelog d'ACS pour version SPIP < 3.0.0

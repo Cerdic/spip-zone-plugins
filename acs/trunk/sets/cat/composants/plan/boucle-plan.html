@@ -9,16 +9,14 @@ Boucle plan d'une rubrique id_rubrique, ou des rubriques associées au mot-clé 
     <a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|right|image_reduire{#VAR{acsPlanLogoMax,50},#VAR{acsPlanLogoMax,50}})</a>][
     <a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="tsize">(#TITRE|supprimer_numero)</a>]
   </h1>]
-  [(#VAR{acsDemocratieUse}|=={oui}|?{' '})<INCLURE{fond=composants/plan/inc-bp-d}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
-  [(#VAR{acsDemocratieUse}|!={oui}|?{' '})<INCLURE{fond=composants/plan/inc-bp-n}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
+  <INCLURE{fond=composants/plan/inc-bp-n}{id_rubrique}{lang}{mode}>
   <B_rubriques>
     <ul class="plan-rubriques">
     <BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre, titre}>
       <li class="plan-rubrique">
       [<a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|left|image_reduire{#VAR{acsPlanLogoMax,50},#VAR{acsPlanLogoMax,50}})</a>]
       [<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="stsize">(#TITRE|supprimer_numero)</a>  &nbsp;]
-      [(#VAR{acsDemocratieUse}|=={oui}|?{' '}) <INCLURE{fond=composants/plan/inc-bp-d}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie activé]
-      [(#VAR{acsDemocratieUse}|!={oui}|?{' '}) <INCLURE{fond=composants/plan/inc-bp-n}{id_rubrique}{lang}{mode}>][(#REM) Si composant democratie inactif]
+      <INCLURE{fond=composants/plan/inc-bp-n}{id_rubrique}{lang}{mode}>
       <BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
       </li>
     </BOUCLE_rubriques>

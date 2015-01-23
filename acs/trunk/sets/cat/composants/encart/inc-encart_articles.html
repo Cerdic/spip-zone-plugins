@@ -4,16 +4,16 @@
 <div class="cEncartClass cEncart#NIC">
   <div class="entete">
     [<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE|left|image_reduire{#VAR{#EVAL{'acsEncart'.'#NIC'.'LogoTailleMax'},100}})</a>]
-    [<p class="surtitre stsize">(#SURTITRE)</p>]
-    <h1 class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></h1>
-    [<p class="soustitre stsize">(#SOUSTITRE)</p>]
+    [<p class=""#EDIT{surtitre} stsize">(#SURTITRE)</p>]
+    <h1 class=""#EDIT{titre} tsize"><a href="#URL_ARTICLE">#TITRE</a></h1>
+    [<p class=""#EDIT{soustitre} stsize">(#SOUSTITRE)</p>]
 
     [(#REM) Inclure le modele des liens de traductions ]
     #MODELE{article_traductions}
   </div>[(#REM) fin entete ]
-  [<div class="chapo">(#CHAPO|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</div>#SET{done,oui}]
+  [<div class=""#EDIT{chapo}">(#CHAPO|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</div>#SET{done,oui}]
   [(#GET{done}|!={oui}|?{' '})
-    [<div class="texte">(#TEXTE|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</div>
+    [<div class=""#EDIT{texte}">(#TEXTE|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</div>
   ]][<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]<div class="nav nsize">[(#DATE_REDAC|?{[(#DATE_REDAC|nom_jour) ][(#DATE_REDAC|affdate)], [(#DATE|nom_jour) ][(#DATE|affdate)]})][, <:par_auteur:> (#LESAUTEURS)]</div>
 </div>
 [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]

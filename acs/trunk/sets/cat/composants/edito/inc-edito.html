@@ -16,11 +16,11 @@
       [(#ENV{edito_debut,0}|>={#GET{edito_total}|moins{1}}|?{' '})<img src="#ACS_CHEMIN{edito/droit_off.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" />]
       [(#ENV{edito_debut,0}|plus{1})]/#GET{edito_total}
       </span>
-      [<p class="surtitre stsize">(#SURTITRE)</p>]
-      <p class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></p>
-      [<p class="soustitre stsize">(#SOUSTITRE)</p>]
+      [<p class="#EDIT{surtitre} stsize">(#SURTITRE)</p>]
+      <p class="#EDIT{titre} tsize"><a href="#URL_ARTICLE">#TITRE</a></p>
+      [<p class="#EDIT{soustitre} stsize">(#SOUSTITRE)</p>]
       <small class="infos_article nsize">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
-      [<br /><div class="chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
+      [<br /><div class="#EDIT{chapo}">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
       [<span class="texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</span><br />]
       <BOUCLE_mot(MOTS) {id_article} {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT"><img src="#ACS_CHEMIN{triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
     </BOUCLE_edito>

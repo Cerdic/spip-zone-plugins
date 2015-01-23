@@ -1,4 +1,5 @@
-[(#CACHE{0})][(#SET{guilang,[(#LANG_DIR|=={rtl}|?{_rtl})]})]<BOUCLE_rubriques_(RUBRIQUES) {titre_mot==(^[_].*)} {doublons _mots}></BOUCLE_rubriques_>[(#REM) On exclut les rubriques ayant un mot-clé qui commence par "_".
+[(#CACHE{0})][(#SET{guilang,[(#LANG_DIR|=={rtl}|?{_rtl})]})]<BOUCLE_rubriques_(RUBRIQUES) {tout} {titre_mot==(^[_].*)} {doublons _mots}></BOUCLE_rubriques_>[(#REM)
+On exclut les rubriques ayant un mot-clé qui commence par "_".
 ]<B_rubriques1>
 	<div class="cRubnav bsize">
     [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>[(#SET{titre_la,oui})]]

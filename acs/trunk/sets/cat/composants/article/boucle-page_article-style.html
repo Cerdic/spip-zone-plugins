@@ -5,7 +5,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2012
+Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page article de style défini par le descriptif d'un mot-clef associé à l'article:
@@ -14,4 +14,4 @@ si le champ descriptif du mot-clé du groupe de mot-clés #VAR{acsArticlesStyleP
 
 Article page styled according to a keyword
 
-][(#SET{id_groupe_style_article,#VAR{acsArticleStylePage}})]#SET{_rp,<nic-page=([0-9]*)>}<BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}><BOUCLE_style(MOTS){id_article}{id_groupe=#GET{id_groupe_style_article}}{0,1}>[(#SET{nic,[(#DESCRIPTIF|match{#GET{_rp},Uims,1})]})]</BOUCLE_style>[(#INCLURE{fond=composants/article/page-article}{self}{env}{id_article}{titre=#TITRE}{surtitre=#SURTITRE}{soustitre=#SOUSTITRE}{descriptif=#DESCRIPTIF}{nic=#GET{nic,2100}})]</BOUCLE_article>
+][(#SET{id_groupe_style_article,#VAR{acsArticleStylePage}})]#SET{_rp,<nic-page=([0-9]*)>}<BOUCLE_article(ARTICLES){id_article}><BOUCLE_style(MOTS){id_article}{id_groupe=#GET{id_groupe_style_article}}{0,1}>[(#SET{nic,[(#DESCRIPTIF|match{#GET{_rp},Uims,1})]})]</BOUCLE_style>[(#INCLURE{fond=composants/article/page-article}{self}{env}{id_article}{titre=#TITRE}{surtitre=#SURTITRE}{soustitre=#SOUSTITRE}{descriptif=#DESCRIPTIF}{nic=#GET{nic,2100}})]</BOUCLE_article>

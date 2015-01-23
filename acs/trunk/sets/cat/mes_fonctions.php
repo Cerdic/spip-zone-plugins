@@ -5,7 +5,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2012
+Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 */
 
@@ -21,7 +21,7 @@ function sans_guillemets($texte) {
 }
 
 function coupe($texte, $taille=50, $suite) {
-	if ($taille == 0)
+	if ($taille < 0)
 		return $texte;
 	$texte = textebrut($texte); // filtre spip qui supprime les tags HTML
 	$texte = couper($texte, $taille);
