@@ -272,7 +272,7 @@ function filtres_prix_formater($prix){
     $config=lire_config('prix_objets');
     $devises=isset($config['devises'])?$config['devises']:array();
     
-    //Si il y a un cookie 'geo_devise' et qu'il figure parmis les devises diponibles on le prend
+    //Si il y a un cookie 'geo_devise' et qu'il figure parmis les devises disponibles on le prend
     if(isset($_COOKIE['geo_devise']) AND in_array($_COOKIE['geo_devise'],$devises))$devise=$_COOKIE['geo_devise'];
     // Sinon on regarde si il ya une devise defaut valable
     elseif($config['devise_default'] AND in_array($config['devise_default'] ,$devises))$devise=$config['devise_default'];
