@@ -54,7 +54,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'date'               => 'datetime not null default "0000-00-00 00:00:00"',
 			'date_paiement'      => 'datetime not null default "0000-00-00 00:00:00"',
 			'date_envoi'         => 'datetime not null default "0000-00-00 00:00:00"',
-			'maj'                => 'timestamp'
+			'maj'                => 'timestamp',
+			'mode'      	     => 'varchar(25) not null default ""' // mode de paiement
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_commande",
@@ -63,7 +64,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 		),
 		'date'                       => "date",
 		'titre'                      => "reference AS titre, '' AS lang",
-		'champs_editables'           => array('id_auteur', 'date_paiement', 'date_envoi'),
+		'champs_editables'           => array('id_auteur', 'date_paiement', 'date_envoi','mode'),
 		'champs_versionnes'          => array('id_auteur', 'date_paiement', 'date_envoi'),
 		'rechercher_champs'          => array('reference' => 8, 'id_commande' => 8),
 		'rechercher_jointures'       => array(

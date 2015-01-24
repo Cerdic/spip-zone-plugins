@@ -190,6 +190,7 @@ function commandes_bank_traiter_reglement($flux){
 
 		$statut_commande = $commande['statut'];
 		$montant_regle = $transaction['montant_regle'];
+		$transaction_mode = $transaction['mode'];
 		$statut_nouveau = 'paye';
 
 		$fonction_prix = charger_fonction('prix', 'inc/');
@@ -202,10 +203,10 @@ function commandes_bank_traiter_reglement($flux){
 		}
 
 		if ($statut_nouveau !== $statut_commande){
-			spip_log("commandes_bank_traiter_reglement marquer la commande #$id_commande statut=$statut_nouveau",'commandes');
+			spip_log("commandes_bank_traiter_reglement marquer la commande #$id_commande statut=$statut_nouveau mode=$transaction_mode",'commandes');
 			//on met a jour la commande
 			include_spip("action/editer_commande");
-			commande_modifier($id_commande,array('statut'=>$statut_nouveau));
+			commande_modifier($id_commande,array('statut'=>$statut_nouveau,'mode'=>$transaction_mode));
 		}
 	}
 
@@ -224,15 +225,17 @@ function commandes_trig_bank_reglement_en_attente($flux){
 	if ($id_transaction = $flux['args']['id_transaction']
 	  AND $transaction = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))
 		AND $id_commande = $transaction['id_commande']
-		AND $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'id_commande='.intval($id_commande))){
+		AND $commande = sql_fetsel('id_commande, statut, id_auteur, mode', 'spip_commandes', 'id_commande='.intval($id_commande))){
 
 		$statut_commande = $commande['statut'];
+		$transaction_mode = $transaction['mode'];
+		$commande_mode = $commande['mode'];
 		$statut_nouveau = 'attente';
-		if ($statut_nouveau !== $statut_commande){
-			spip_log("commandes_trig_bank_reglement_en_attente marquer la commande #$id_commande statut=$statut_nouveau",'commandes');
+		if ($statut_nouveau !== $statut_commande OR $transaction_mode !==$commande_mode){
+			spip_log("commandes_trig_bank_reglement_en_attente marquer la commande #$id_commande statut=$statut_nouveau mode=$transaction_mode",'commandes');
 			//on met a jour la commande
 			include_spip("action/editer_commande");
-			commande_modifier($id_commande,array('statut'=>$statut_nouveau));
+			commande_modifier($id_commande,array('statut'=>$statut_nouveau,'mode'=>$transaction_mode));
 		}
 	}
 
@@ -255,6 +258,7 @@ function commandes_trig_bank_reglement_en_echec($flux){
 		AND $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'id_commande='.intval($id_commande))){
 
 		$statut_commande = $commande['statut'];
+		$transaction_mode = $transaction['mode'];
 		$statut_nouveau = $statut_commande;
 
 		// on ne passe la commande en erreur que si le reglement a effectivement echoue,
@@ -266,7 +270,7 @@ function commandes_trig_bank_reglement_en_echec($flux){
 			spip_log("commandes_trig_bank_reglement_en_attente marquer la commande #$id_commande statut=$statut_nouveau",'commandes');
 			//on met a jour la commande
 			include_spip("action/editer_commande");
-			commande_modifier($id_commande,array('statut'=>$statut_nouveau));
+			commande_modifier($id_commande,array('statut'=>$statut_nouveau,'mode'=>$transaction_mode));
 		}
 	}
 

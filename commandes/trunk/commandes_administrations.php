@@ -63,6 +63,9 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
     $maj['0.3']  = array(
            'ecrire_config','commandes',array('duree_vie'=>3600)
         );  
+    $maj['0.4']  = array(
+           array('maj_tables', array('spip_commandes'))
+        ); 
 
     include_spip('base/upgrade');
     maj_plugin($nom_meta_base_version, $version_cible, $maj);

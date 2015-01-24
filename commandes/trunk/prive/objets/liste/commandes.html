@@ -41,7 +41,7 @@
 		</thead>
 		<tbody>
 		<BOUCLE_liste_commandes(COMMANDES)
-			{id_auteur?}{id_commande?}{where?}{statut?}{annee?}{mois?}
+			{id_auteur?}{id_commande?}{where?}{statut?}{annee?}{mois?}{mode?}
 			{tri #ENV{order,date},#GET{defaut_tri}}
 			{pagination #ENV{nb,20}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#STATUT)]">
