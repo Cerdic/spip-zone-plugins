@@ -79,7 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"subscribe_texte_email_1" => "We have taken into account your signing up for our newsletter with the email address @email@.",
 	"subscribe_deja_texte" => "The email address @email@ is already in our mailing list",
 	"subscribe_texte_email_2" => "Thank you for the interest you have shown in @nom_site_spip@.",
-	"subscribe_texte_email_3" => "In case of error, or if you change your mind, you can unsubcribe at any time using the following link :
+	"subscribe_texte_email_3" => "In case of error, or if you change your mind, you can unsubscribe at any time using the following link :
 @url_unsubscribe@",
 
 	// U
@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"titre_export_mailsubscribers_all" => "Export all addresses",
 	"titre_import_mailsubscribers" => "Import Addresses",
 	"titre_listes_de_diffusion" => "Mailing Lists",
+	'titre_bonjour' => 'Hi',
 
 
 	"texte_statut_pas_encore_inscrit" => "not registered",

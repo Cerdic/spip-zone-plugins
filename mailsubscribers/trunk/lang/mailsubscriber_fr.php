@@ -104,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_export_mailsubscribers_all' => 'Exporter toutes les adresses',
 	'titre_import_mailsubscribers' => 'Importer des adresses',
 	'titre_listes_de_diffusion' => 'Listes de diffusion',
+	'titre_bonjour' => 'Bonjour',
 
 
 	'texte_statut_pas_encore_inscrit' => 'pas inscrit',
