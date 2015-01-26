@@ -6,6 +6,9 @@
 		<label><:commandes:date_maj_label:> :</label>
 		<span dir='#LANG_DIR'>(#MAJ|affdate)[ à (#MAJ|affdate{'H:i'})]</span>
 	</div>]
+	
+	[(#REM) mode de règlement choisi ]
+	[<div class="champ"><label><:commandes:label_filtre_paiement:> : </label><span dir='#LANG_DIR'>(#MODE)</span></div>]
 
 	[(#REM) Contenu détaillé de la commande ]
 	<INCLURE{fond=prive/squelettes/inclure/commande_contenu, id_commande}>
