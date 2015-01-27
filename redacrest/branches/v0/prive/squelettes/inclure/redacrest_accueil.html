@@ -1,0 +1,16 @@
+[(#SET{rubriques,#ARRAY})]
+<BOUCLE_principal (AUTEURS) {id_auteur} {tout}>
+    <BOUCLE_rub_rest (spip_auteurs_rubriques) {id_auteur}>[(#SET{rubriques,[(#GET{rubriques}|push{#ID_RUBRIQUE})]})] </BOUCLE_rub_rest>
+    <B_rubriques>
+        <div class="cadre cadre-r">
+            [(#CHEMIN{'prive/images/fiche-perso-24.gif'}|balise_img{'','cadre-icone'})]
+            <div class="titrem impliable">Vos rubriques</div>
+            <div class="cadre_padding">
+            <BOUCLE_rubriques (RUBRIQUES) {id_rubrique IN #GET{rubriques}}>
+                [(#CHEMIN{'prive/images/rubrique-12.gif'}|balise_img)]
+                <a href="[(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique,#ID_RUBRIQUE})]">[(#TITRE)]</a><br/></BOUCLE_rubriques>
+                <div class="nettoyeur"></div>
+            </div>
+        </div>
+    </B_rubriques>
+</BOUCLE_principal>

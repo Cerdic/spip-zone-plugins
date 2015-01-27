@@ -1,0 +1,26 @@
+<plugin>
+    <nom>Rédacteurs Restreints</nom>
+    <slogan>Restreindre vos auteurs.</slogan>
+    <auteur>Teddy Payet</auteur>
+    <licence>GPL</licence>
+    <version>0.2.0</version>
+    <etat>dev</etat>
+    <description>
+    Ce plugin va permettre de désactiver les boutons de création d'article dans les rubriques en dehors de la restriction d'un rédacteur.
+    </description>
+    <prefix>redacrest</prefix>
+    <icon>prive/themes/spip/images/redacrest-24.gif</icon>
+    <fonctions>redacrest_fonctions.php</fonctions>
+    <categorie>outil</categorie>
+
+    <pipeline>
+        <nom>autoriser</nom>
+        <inclure>redacrest_autoriser.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>affiche_gauche</nom>
+        <inclure>redacrest_pipelines.php</inclure>
+    </pipeline>
+    <necessite id="SPIP" version="[2.1.10;2.1.99]" />
+    <necessite id="autorite" version="[0.10.0;]" />
+</plugin>

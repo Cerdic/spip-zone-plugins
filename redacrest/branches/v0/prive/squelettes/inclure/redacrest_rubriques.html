@@ -1,0 +1,17 @@
+[(#SET{auteurs,#ARRAY})]
+<BOUCLE_principale (RUBRIQUES) {id_rubrique}>
+    <BOUCLE_redacrestr (spip_auteurs_rubriques) {id_rubrique}>[(#SET{auteurs,[(#GET{auteurs}|push{#ID_AUTEUR})]})] </BOUCLE_redacrestr>
+    
+    <B_auteurs>
+        <div class="cadre cadre-r">
+            [(#CHEMIN{'prive/images/fiche-perso-24.gif'}|balise_img{'','cadre-icone'})]
+            <div class="titrem impliable">Les rédacteurs restreints</div>
+            <div class="cadre_padding">
+                <BOUCLE_auteurs (AUTEURS) {id_auteur IN #GET{auteurs}} {statut=='1comite'}>
+                [(#CHEMIN{'prive/images/redac-12.gif'}|balise_img)]
+                <a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">[(#NOM)]</a></BOUCLE_auteurs>
+                <div class="nettoyeur"></div>
+            </div>
+        </div>
+    </B_auteurs>
+</BOUCLE_principale>
