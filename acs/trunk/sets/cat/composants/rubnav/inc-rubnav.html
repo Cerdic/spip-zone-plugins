@@ -82,28 +82,37 @@ On exclut les rubriques ayant un mot-clé qui commence par "_".
 </B_rubriques3>
 
 <B_rubriques>
-	<div class="cRubnav bsize">
-    [(#GET{titre_la}|?{'',' '})
+	<div class="cRubnav bsize">[(#GET{titre_la}|?{'',' '})
       [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<div class="bloc-title"><a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a></div>]
-    ]<ul>
-			<BOUCLE_rubriques(RUBRIQUES){tout}{racine}{par num titre, titre}{doublons groups}{doublons _mots}{lang}>
-        [(#SET{AFILLES, ""})]<BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub>
-				<li class="menu-item[ (#EXPOSE)]"><a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]" class="[(#EXPOSE) ][(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})]"><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>
-          <B_sous_rubriques>
-						<ul[ class="(#EXPOSE|?{'',#GET{HIDDEN}})"]>
-							<BOUCLE_sous_rubriques(RUBRIQUES){tout}{id_parent}{par num titre,titre}{doublons _mots}><BOUCLE_test_expose(RUBRIQUES){id_enfant}>[(#EXPOSE{' '})]</BOUCLE_test_expose>[(#SET{AFILLES,""})]<BOUCLE_test_soussousrub(RUBRIQUES){tout}{id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_soussousrub>
-							<li class="menu-item[ (#EXPOSE)]"><a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" class="[(#EXPOSE) ][(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})]" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]"><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re></li>
-              </B_test_expose>[(#SET{HIDDEN,hidden})]
-              [(#SET{AFILLES, ""})]<BOUCLE_test_soussousrubjs(RUBRIQUES){tout}{id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_soussousrubjs>
-              <li class="menu-item"><a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]"[ class="(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})"]><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a><BOUCLE_rehidden(BOUCLE_sous_rubriques)></BOUCLE_rehidden></li>
-              <//B_test_expose>
-							</BOUCLE_sous_rubriques>
-            </ul>
-					</B_sous_rubriques>
-				</li>
-			</BOUCLE_rubriques>
-		</ul>
-	</div>[(#REM) fin rubriques]
+    ]<ul><BOUCLE_rubriques(RUBRIQUES){tout}{racine}{par num titre, titre}{doublons groups}{doublons _mots}{lang}>[(#SET{AFILLES, ""})][(#REM)
+      On teste si la rubrique a des filles
+      ]<BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_sousrub>
+      <li class="menu-item[ (#EXPOSE)]"><a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]" class="[(#EXPOSE) ][(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})]"><span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>
+        <B_sous_rubriques><ul[ class="(#EXPOSE|?{'',#GET{HIDDEN}})"]>[(#REM)
+          Sous-rubriques
+          ]<BOUCLE_sous_rubriques(RUBRIQUES){tout}{id_parent}{par num titre,titre}{doublons _mots}>[(#REM)
+            expose ?
+            ]<BOUCLE_test_expose(RUBRIQUES){id_enfant}>[(#EXPOSE{' '})]</BOUCLE_test_expose>[(#SET{AFILLES,""})][(#REM)
+              y'a t-il des sous-sous-rubriques ?
+              ]<BOUCLE_test_soussousrub(RUBRIQUES){tout}{id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_soussousrub>[(#REM)
+            une sous-rubrique
+          ]<li class="menu-item[ (#EXPOSE)]">[(#REM)
+              Titre de rubrique
+              ]<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" class="[(#EXPOSE) ][(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})]" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]">[(#REM)
+              ]<span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>[(#REM)
+              Boucle recursive
+              ]<BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>[(#REM)
+            ]</li></B_test_expose>[(#SET{HIDDEN,hidden})][(#SET{AFILLES, ""})]<BOUCLE_test_soussousrubjs(RUBRIQUES){tout}{id_parent}{0,1}>[(#SET{AFILLES,oui})]</BOUCLE_test_soussousrubjs>
+          <li class="menu-item">[(#REM)
+              Titre de rubrique
+              ]<a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]"[ class="(#GET{AFILLES}|?{menu-item-haschilds[(#EXPOSE)]})"]>[(#REM)
+              ]<span class="titrerub">[(#TITRE|supprimer_numero|couper{80})]</span></a>[(#REM)
+            Boucle recursive
+            ]<BOUCLE_rehidden(BOUCLE_sous_rubriques)></BOUCLE_rehidden></li><//B_test_expose></BOUCLE_sous_rubriques>
+        </ul></B_sous_rubriques>
+      </li></BOUCLE_rubriques>
+    </ul>
+  </div>[(#REM) fin rubriques]
   [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_rubriques>
 

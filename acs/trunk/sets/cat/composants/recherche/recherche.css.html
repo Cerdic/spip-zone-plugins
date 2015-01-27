@@ -19,14 +19,15 @@
   padding: 0;
 }
 
-.cRecherche .formulaire_recherche #recherche {
-  [border-width: (#VAR{acsRechercheInputBord/Width});]
-  [border-style: (#VAR{acsRechercheInputBord/Style});]
-  [border-color: (#VAR{acsRechercheInputBord/Color});]
-  color: #VAR{acsFondText,#00008f};
-  [background: (#VAR{acsRechercheInput});]
+.cRecherche .formulaire_recherche #recherche {[
+  border-width: (#VAR{acsRechercheInputBord/Width});][
+  border-style: (#VAR{acsRechercheInputBord/Style});][
+  border-color: (#VAR{acsRechercheInputBord/Color});]
+  color: #VAR{acsFondText,#00008f};[
+  background: (#VAR{acsRechercheInput});]
   margin: 4px;
-  width: 100%;
+  width: 95%; // fallback pour vieux browsers qui savent pas calc ! ;-) 
+  width: calc(100% - 30px); // provisoire, on peut recuperer la taille plus marges du bouton submit 
 }
 
 .cRecherche .formulaire_recherche label {
@@ -43,12 +44,9 @@
 [(#REM) submit]
 .cRecherche .formulaire_recherche input.submit {
   margin:3px;
-  padding: 2px;
-  border: thin solid #VAR{acsRechercheFond, transparent};
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -khtml-border-radius: 4px;
+  padding: 3px;
+  border: thin solid #VAR{acsRechercheFond, transparent};[
+  (#MODELE{c_css_border-radius}{c=Recherche}{var=BordRond})]
 }
 .cRecherche .formulaire_recherche input.submit:hover {
   [background: (#VAR{acsRechercheTitreFond});][

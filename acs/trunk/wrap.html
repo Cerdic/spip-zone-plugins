@@ -34,7 +34,7 @@ if (find_in_path($fond.'.html')) {
 }
 ?>
 </head>
-<body[ style="background: (#VAR{ACS_PREVIEW_BACKGROUND});"]>
+<body[ class="(#CONFIG{acsSet})"][ style="background: (#VAR{ACS_PREVIEW_BACKGROUND});"]>
 <?php
 // Use preview if exist, or component itself if not.
 $p = find_in_path($_GET['c'].'_preview.html');

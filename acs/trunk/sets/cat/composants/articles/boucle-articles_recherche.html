@@ -4,18 +4,18 @@ Articles trouves
  
 ]<B_articles>#ANCRE_PAGINATION
 [<div class="cArticle">
-  <form id="tri" action="#SELF" method="get" name="tri">
+  <form id="tri_resultats" action="#SELF" method="get" name="tri_resultats">
     <div class="article bsize"><:resultats_recherche:> <b>&#171;(#RECHERCHE)&#187;</b>, <:tries_par:>
       <input type="hidden" name="page" value="recherche" />
       <input type="hidden" name="recherche" value="#RECHERCHE" />
-      <select class="" name="tri" onchange="submit(); " class="spip_bouton">
-        <option value="points"[(#TRI|=={points}|?{' selected="selected" class="selected"'})] /><:pertinence:></option>
+      <select name="classement" onchange="submit(); " class="spip_bouton">
+        <option value="points"[(#CLASSEMENT|=={points}|?{' selected="selected" class="selected"'})] ><:pertinence:></option>
 [(#CONFIG{activer_statistiques}|=={oui}|?{" "})
-        <option value="popularite"[(#TRI|=={popularite}|?{' selected="selected" class="selected"'})] /><:popularite:></option>
-        <option value="visites"[(#TRI|=={visites}|?{' selected="selected" class="selected"'})] /><:nb_de_visites:></option>
+        <option value="popularite"[(#CLASSEMENT|=={popularite}|?{' selected="selected" class="selected"'})] ><:popularite:></option>
+        <option value="visites"[(#CLASSEMENT|=={visites}|?{' selected="selected" class="selected"'})] ><:nb_de_visites:></option>
 ]
-        <option value="date_redac"[(#TRI|=={date_redac}|?{' selected="selected" class="selected"'})] /><:date_de_redaction:></option>
-        <option value="date"[(#TRI|=={date}|?{' selected="selected" class="selected"'})] /><:date_de_publication:></option>
+        <option value="date_redac"[(#CLASSEMENT|=={date_redac}|?{' selected="selected" class="selected"'})] ><:date_de_redaction:></option>
+        <option value="date"[(#CLASSEMENT|=={date}|?{' selected="selected" class="selected"'})] ><:date_de_publication:></option>
       </select>
       <input type="checkbox" name="ordre" [(#ORDRE|=={on}|?{'checked '})]onchange="submit();">[(#ORDRE|?{&uarr;,&darr;})] </input>
       <noscript><input type="submit" value="<:trier:>" class="spip_bouton" /></noscript>
@@ -25,7 +25,7 @@ Articles trouves
 <div class="liste-articles">
   [<p class="pagination">(#PAGINATION)</p>]
   <ul>
-    <BOUCLE_articles(ARTICLES) {recherche} {statut=publie} {par (#TRI|?{#TRI,points})} {inverse (#ORDRE|?{0,1})} {pagination #VAR{acsArticlesPagination,10}} {lang}>
+    <BOUCLE_articles(ARTICLES) {recherche} {statut=publie} {par (#CLASSEMENT|?{#CLASSEMENT,points})} {inverse (#ORDRE|?{0,1})} {pagination #VAR{acsArticlesPagination,10}} {lang}>
       <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{coupe=#VAR{acsArticlesNbLettres,200}}>
     </BOUCLE_articles>
   </ul>

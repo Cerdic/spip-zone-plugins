@@ -26,9 +26,10 @@ body.cat {
   margin : 0;
   padding: 0;
   font-size: #VAR{acsFondFontSize, 0.88em};
-  font-family: [(#VAR{acsFondFont,Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'}),][ (#VAR{acsFondFontFamily,sans-serif})];
-  [background: (#VAR{acsFondColor})[ url('(#ACS_CHEMIN{trame/#VAR{acsFondImage}})') repeat];]
-  [color: (#VAR{acsFondText});]
+  font-family: [(#VAR{acsFondFont,Verdana, 'Trebuchet MS', Arial, 'Lucida Sans'}),][ (#VAR{acsFondFontFamily,sans-serif})];[
+  background-color: (#VAR{acsFondColor});][
+  background-image: url("(#ACS_CHEMIN{trame/#VAR{acsFondImage}})");][
+  color: (#VAR{acsFondText});]
 }
 
 [a:link, a:visited {text-decoration: none; color: (#VAR{acsFondLink});}]
@@ -96,6 +97,7 @@ nsize : petits elements de navigation
   margin: 0;
   padding: 0;
   padding-left: 2px;
+  padding-right: 2px;
 }
 #traductions .lang {
   background: #dfdfdf;

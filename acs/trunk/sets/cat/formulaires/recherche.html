@@ -7,6 +7,6 @@ Pompe sur spip dist 2.1.2 puis modifé pour ACS (pb du bouton submit moche)
 	[(#ENV{action}|form_hidden)]
 	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
 	<label for="recherche"><:info_rechercher_02:></label>
-	<table><tr><td width="100%"><input type="text" class="text" size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" /></td><td>&nbsp;</td><td><input type="image" class="submit" src="#ACS_CHEMIN{recherche/#VAR{acsRechercheButton}}" title="<:info_rechercher:>" /></td></tr></table>
+	<table><tr><td><input type="text" class="text" size="10" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>" onfocus="this.value='';})]" accesskey="4" /></td><td>&nbsp;</td><td><input type="image" class="submit" src="#ACS_CHEMIN{recherche/#VAR{acsRechercheButton}}" title="<:info_rechercher:>" /></td></tr></table>
 </div></form>
 </div>

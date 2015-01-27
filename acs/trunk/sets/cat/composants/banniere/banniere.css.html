@@ -31,11 +31,12 @@
 
 #banniere a.nom_site {
   position: relative;
-  font-size: 40px;
+  font-size: #VAR{acsBanniereFontSize,40px};
   [color: (#VAR{acsBanniereTextColor});]
 }
 [#banniere a.nom_site:hover {
   color: (#VAR{acsBanniereTextColorOver});
+  text-shadow: 0px 0px 8px #fff;
 }]
 #banniere .extralink {
   margin-top: -#VAR{acsBanniereHauteur,60px};

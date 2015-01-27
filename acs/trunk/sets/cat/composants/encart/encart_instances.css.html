@@ -1,4 +1,5 @@
 [(#CACHE{0})]
+
 .cEncart#NIC {[
   background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Fond'}});][
   border-width: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Width'}});][
@@ -9,11 +10,10 @@
 }
 .cEncart#NIC .entete {
   [background-color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}});][
-  background-image: url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}}})") repeat top left;][
+  background-image: url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}}})");][
   border-bottom: 1px solid (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});][
   (#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|!={rubriques}|?{' '})[(#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{sauf=bottom})]]
 }
 [.cEncartClass .entete_rub .soulignement {
   height: (#VAR{#EVAL{'acsEncart'.'#NIC'.'SouligneRubHeight'}});
  }]
-]

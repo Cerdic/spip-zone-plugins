@@ -16,6 +16,7 @@ Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site publi
 
 'Bord' => 'Bord sup&eacute;rieur',
 'LogoTailleMax' => 'Taille maxi du logo',
+'LogoAlign' => _T('acs:align'),
 
 'Dates' => 'Dates',
 'Aut' => 'Auteurs',

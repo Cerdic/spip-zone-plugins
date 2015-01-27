@@ -2,8 +2,8 @@
   <!-- Nom du composant -->
   <nom>Fond</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.6</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
+  <version>0.8.7</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -19,6 +19,13 @@
     <nom>Favicon</nom>
     <type>img</type>
 		<chemin>favicon</chemin>
+  </variable>
+  <variable>
+    <nom>Traductions</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
   </variable>
   <variable>
     <nom>Color</nom>

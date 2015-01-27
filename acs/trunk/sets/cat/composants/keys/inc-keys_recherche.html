@@ -9,7 +9,7 @@ Mots-cles trouves
     [<div class="pagination">(#PAGINATION)</div>]
   </div>
   <ul class="bsize">
-    <BOUCLE_mots(MOTS) {recherche} {par points}{inverse (#ORDRE|?{0,1})}{type!==(_.*)} {titre!==(_.*)} {pagination #VAR{acsKeysNb,10}}>
+    <BOUCLE_mots(MOTS) {recherche} {par points}{inverse (#ORDRE|?{0,1})}{type!==(^_.*)} {titre!==(^_.*)} {pagination #VAR{acsKeysNb,10}}>
     <li class="menu-item"><a href="#URL_MOT"><span class="motcle">#TITRE</span></a></li>
     </BOUCLE_mots>
   </ul>

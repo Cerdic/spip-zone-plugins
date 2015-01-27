@@ -30,7 +30,7 @@ interface ICEdit {
 class AdminComposant {
 	/**
 	 * Constructeur
-	 * Instancie (au besoin) un objet CEdit à l'éxécution
+	 * Instancie (au besoin) un objet CEdit à l'exécution
 	 * pour en adopter les méthodes implémentées.
 	 * @param $class classe du composant
 	 * @param $nic numero d'instance du composant
@@ -50,7 +50,7 @@ class AdminComposant {
 		$this->errors = array();
 		$this->vars = array();
 		$this->cvars = array(); // Variables issues d'un autre composant
-		$this->necessite = array(); // Dependances du composant
+		$this->necessite = array(); // Dependances du composant (plugins et composants)
 		$this->nb_widgets = 0; // Nb de variables de type widget
 		$this->rootDir = find_in_path('composants/'.$class);// Dossier racine du composant
 		$this->icon = $this->rootDir.'/images/'.$class.'_icon.gif';
@@ -70,12 +70,13 @@ class AdminComposant {
 		$this->version = $c['version'][0];
 		$this->group = $c['group'][0];
 
-		// Lit les dépendances (necessite)
+		// Lit les dépendances (plugins: necessite, composants: necessite_composant)
 		if (spip_xml_match_nodes(',^necessite,',$c,$needs)){
-		foreach(array_keys($c) as $tag){
-			list($tag,$att) = spip_xml_decompose_tag($tag);
-			if ($att) $this->necessite[] = $att;
+			foreach(array_keys($c) as $tag){
+				list($tag,$att) = spip_xml_decompose_tag($tag);
+				if ($att) $this->necessite[($att['set'] ? 'composant':'plugin')][] = $att;
 			}
+			krsort($this->necessite); // on met les plugins avant les composants
 		}
 
 		if (is_array($c['param'])) {

@@ -2,9 +2,11 @@
   <!-- Nom du composant -->
   <nom>Plan</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.8</version>
-  <necessite id='acs' version='[0.8.8;]' />
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
+  <version>0.8.9</version>
+  <necessite nom='acs' compatibilite='[0.8.8;]' />
+  <necessite_composant set='cat' nom='articles' compatibilite='[0.8.9;]' />
+
   <group>content</group>
 
   <param>

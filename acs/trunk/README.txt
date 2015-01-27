@@ -1,12 +1,12 @@
 
              Assistant de Configuration du Site
 
-Version : 3.0.0
+Version : 3.0.3
 
 Documentation : http:// acs.geomaticien.org
 Licence: cf LICENCES.txt
 ________________________________________________________________________________
-Dernière mise à jour de ce document le: 25-05-2012
+Dernière mise à jour de ce document le: 25-01-2015
 Par: Daniel FAIVRE
 ________________________________________________________________________________
 
@@ -43,10 +43,3 @@ mais les composants ACS y deviennent ainsi insérables sous la forme d'inclusins
 ou du modèle composant (issu de Cat). Exemples :
 <INCLURE{fond=composants/audio/audio}{parametre1=truc}>
 [(#MODELE{composant}{c=composants/audio/audio}{parametre1=truc})]
-________________________________________________________________________________
-
-Version mini des plugins compatibles optionnels (apportent des fonctionnalités ou du confort en plus) :
-
-crayons : svn > 38974
-cfg : 1.12.3
-palette : 1.3.1 (svn > 40258)

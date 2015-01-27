@@ -102,7 +102,11 @@
     <nom>TextColorOver</nom>
     <type>color</type>
   </variable>
-  
+  <variable>
+    <nom>FontSize</nom>
+    <type>text</type>
+    <valeur>0.88em</valeur>
+  </variable>
   <variable>
     <nom>FontFamily</nom>
     <type>fontFamily</type>

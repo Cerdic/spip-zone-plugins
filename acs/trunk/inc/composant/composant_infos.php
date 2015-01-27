@@ -3,11 +3,13 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
  * Retourne les composants et les pages du squelette qui utilisent l'instance $nic du composant $c
+ * @param string $c : classe de composant
+ * @param int $nic : numero d'instance
  */
 function composant_infos($c, $nic) {
   include_spip('inc/composant/composants_liste');
@@ -62,26 +64,39 @@ function composant_infos($c, $nic) {
   	$r.= '<hr />'.$l;
 
 	$traductions = cGetTraductions($c,'composants/'.$c.'/lang',';.*[.]php$;iS');
-  $r .= '<hr /><table width="100%"><tr><td colspan="2" class="onlinehelp centre">'.ucfirst(_T('spip:afficher_trad')).'</td></tr>';
-  $r .= (count($traductions[0]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:public').' </td><td>'.liens_traductions($c, $traductions[0]).'</td></tr>' : '');
-  $r .= (count($traductions[1]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:ecrire').' </td><td>'.liens_traductions($c, $traductions[1], 'ecrire').'</td></tr>' : '');
+  $r .= '<hr /><table width="100%"><tr><td colspan="3" class="onlinehelp centre">'.ucfirst(_T('spip:afficher_trad')).'</td></tr>';
+  $r .= (count($traductions[0]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:public').' </td><td>&nbsp;</td><td>'.liens_traductions($c, $traductions[0]).'</td></tr>' : '');
+  $r .= (count($traductions[1]) ? '<tr><td style="width:10%; vertical-align: top;" align="'.$GLOBALS['spip_lang_right'].'"> '._T('acs:ecrire').' </td><td>&nbsp;</td><td>'.liens_traductions($c, $traductions[1], 'ecrire').'</td></tr>' : '');
   $r .= '</table>';
   
   // On crée une instance :
   $composant = new AdminComposant($c);
-  // On récupère les dépendances :
-		$r .= '<hr /><div>'._T('acs:require', array('class' => $composant->class, 'version' => $composant->version)).' :<br />';
-		foreach($composant->necessite as $nec) {
-			$get_version = $nec['id'].'_version';
+		$r .= '<hr /><div>'.
+			_T('acs:require',
+				array(
+					'class' => $composant->nom,
+					'version' => $composant->version)
+			).' :<br />';
+		// On récupère les dépendances dans un tableau ordonné 
+		// avec les  plugins requis d'abord, puis les composants :
+		foreach($composant->necessite['plugin'] as $nec) {
+			$npr = $nec['nom'];
+			$vr = $nec['compatibilite'];
+			// Compatibilite avec anciennes versions
+			if (isset($nec['id'])) {
+				$npr = $nec['id'];
+				$vr = $nec['version'];
+			}
+			$get_version = $npr.'_version';
 			if (is_callable($get_version)) // la fonction existe pour spip et pour acs
 				$current_version = $get_version();
 			elseif ($f = chercher_filtre('info_plugin')) { // pour les plugins sans fonction plugin_version()
 				if (is_callable($f))
-					$current_version = $f($nec['id'],'version');
+					$current_version = $f($npr,'version');
 			}
 			if (!$current_version)
 				$current_version = '?';
-			$version = substr($nec['version'], 1, -1);
+			$version = substr($vr, 1, -1);
 			$version = explode(';',$version);
 			$min_version = $version[0];
 			$max_version = $version[1];
@@ -91,14 +106,40 @@ function composant_infos($c, $nic) {
 			else {
 				$class = '';
 			}
-			$necessite .= '<li><span class="'.$class.'">'.$nec['id'].' >= '.$min_version.'</span> : <b>'.$current_version.'</b></li>';
+			$necessite .= '<li><span class="'.$class.'">'.
+				_T('plugin_necessite_plugin',
+				 array(
+				 		'plugin' => '<b>'.$npr.'</b>',
+						'version' => $min_version
+				)).'</span>  (<b>'.$current_version.'</b>)</li>';
+		}
+		foreach($composant->necessite['composant'] as $nec) {
+			$nset = $rec['set'];
+			$ncr = $nec['nom'];
+			$vr = $nec['compatibilite'];
+			$cr = new AdminComposant($ncr);
+			$current_version = $cr->version;
+			if (!$current_version)
+				$current_version = '?';
+			$version = substr($vr, 1, -1);
+			$version = explode(';',$version);
+			$min_version = $version[0];
+			$max_version = $version[1];
+			if (version_compare($min_version, $current_version, '>')) {
+				$class = 'alert';
+			}
+			else {
+				$class = '';
+			}
+			$necessite .= '<li><span class="'.$class.'">'.
+					_T('acs:composant').' '.$ncr.' '.$min_version.
+					'</span>  (<b>'.$current_version.'</b>)</li>';
 		}
 		if ($necessite) {
 			$r .= '<ul style="list-style-type: disc;list-style-position: inside;">'.$necessite.'</ul>';
 		}
 		$r .= '</div>';
 
-  
   return $r;
 }
 
@@ -210,6 +251,7 @@ function cGetPages($c, $nic, $chemin='') {
 /**
  * Composant - Méthode cGetTraductions: retourne un tableau des traductions d'un composant
  * Non inclus comme méthode d'objet composant pour permettre usage sans création d'objet composant
+ * @param string $c : classe de composant
  */
 function cGetTraductions($c) {
   $r[0] = cGetFiles($c, 'composants/'.$c.'/lang', $ext='php', strlen($c)+1);

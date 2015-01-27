@@ -10,15 +10,19 @@ Variables:
 Paramètres:
 id_article: id de l'article
 
-][(#ENV{id_version}|?{" "})
+]<div class="[id_article-(#ID_ARTICLE) ]#PINCEAU{article}">[(#ENV{id_version}|?{" "})
     [<div class="cArticle" dir="#LANG_DIR">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]
   ]
 <BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>
   <div class="cArticle">[(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})
     [(#LOGO_ARTICLE|right|image_reduire{#VAR{acsArticleLogoTailleMax,100}})]
   ][(#ENV{id_version}|?{""," "})
-  <div class="entete">
-    [(#MODELE{article_traductions})]
+  <div class="entete">    
+    <span class="infos_article nav nsize">[
+      (#MODELE{article_traductions})][
+      (#VAR{acsArticleDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})][
+      (#VAR{acsArticleAut}|=={oui}|?{' '})[(#AUTEURS)]][ &mdash; <em>(#TAGS|afficher_tags)</em>]
+    </span>
     #DEBUT_SURLIGNE
     [<p class="#EDIT{surtitre} surtitre stsize">(#SURTITRE|safehtml)</p>]
     <h1 class="#EDIT{titre} titre tsize">[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''}) ][(#TITRE|supprimer_numero)]</h1>
@@ -73,3 +77,4 @@ Forum de l'article
   <INCLURE{fond=composants/forums/forum}{ajax}{id_article}{ouvrir=#OUVRIR}{debut_forums}>
 ]</div>
 </BOUCLE_article>
+</div>

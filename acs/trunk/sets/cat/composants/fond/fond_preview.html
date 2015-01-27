@@ -1,6 +1,7 @@
- <div class="cat" style="padding: 5px">
-   &nbsp; Favicon: <img src='#ACS_CHEMIN{favicon/#VAR{acsFondFavicon,favicon.ico}}' border='0' align="top" />
-  <a href="#" style="float: #LANG_RIGHT; margin-right: 5px;" class="nsize">navigation</a>
+<div class="cat" style="padding: 5px">
+  &nbsp; Favicon: <img src='#ACS_CHEMIN{favicon/#VAR{acsFondFavicon,favicon.ico}}' border='0' align="top" />
+  [(#VAR{acsFondTraductions}|!=={'non'}|?{' ',''}) [(#INCLURE{fond=composants/fond/entete_traductions}{lang=#LANG})]]
+  <a href="#" style="float: #LANG_RIGHT; margin-right: 5px;margin-top:1.5em" class="nsize">navigation</a>
   <hr />
   <table>
     <tr>

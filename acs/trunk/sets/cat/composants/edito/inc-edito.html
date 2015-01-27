@@ -3,12 +3,12 @@
 #SET{edito_total,#TOTAL_BOUCLE}
 <//B_decompte_edito>
 <B_edito>
-<fieldset class="edito">
+<fieldset class="cEdito">
   [(#VAR{acsEditoLegend}|=={oui}|?{' '}) <legend>&nbsp;<:acs:edito_edito:>&nbsp;</legend>]
   [(#ENV{debut_articles}|?{'',' '})]
     <BOUCLE_edito(ARTICLES) {par date}{inverse}{titre_mot=#GET{acsEditoKeyword}}{#ENV{edito_debut,0},1}{lang=#LANG}>
       [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|left||image_reduire{100,100})</a>]
-      <span class="navigation nsize"[ style="border-color:#(#GET{couleur})"]>
+      <span class="navigation nsize screen_only"[ style="border-color:#(#GET{couleur})"]>
       <img src="#ACS_CHEMIN{edito/pause.gif}" title="<:acs:edito_pause:>" alt="||" />
       [(#ENV{edito_debut,0}|>{0}|?{' '})<a id="edito_precedent" href="?edito_debut=[(#EVAL{#ENV{edito_debut,0}-1})]" class="ajax"><img src="#ACS_CHEMIN{edito/gauche.gif}" title="<:acs:edito_precedent:>" alt="&larr;" /></a>]
       [(#ENV{edito_debut,0}|=={0}|?{' '})<img src="#ACS_CHEMIN{edito/gauche_off.gif}" title="<:acs:edito_precedent:>" alt="&larr;" />]
@@ -16,13 +16,14 @@
       [(#ENV{edito_debut,0}|>={#GET{edito_total}|moins{1}}|?{' '})<img src="#ACS_CHEMIN{edito/droit_off.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" />]
       [(#ENV{edito_debut,0}|plus{1})]/#GET{edito_total}
       </span>
-      [<p class="#EDIT{surtitre} stsize">(#SURTITRE)</p>]
-      <p class="#EDIT{titre} tsize"><a href="#URL_ARTICLE">#TITRE</a></p>
-      [<p class="#EDIT{soustitre} stsize">(#SOUSTITRE)</p>]
+      [<p class="#EDIT{surtitre} surtitre stsize">(#SURTITRE)</p>]
+      <p class="#EDIT{titre} titre tsize"><a href="#URL_ARTICLE">#TITRE</a></p>
+      [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE)</p>]
       <small class="infos_article nsize">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
-      [<br /><div class="#EDIT{chapo}">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
-      [<span class="texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</span><br />]
-      <BOUCLE_mot(MOTS) {id_article} {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT"><img src="#ACS_CHEMIN{triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
+      [<br /><div class="#EDIT{chapo} chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
+      [<div class="#EDIT{texte} texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div><br />]
+      <BOUCLE_mot(MOTS) {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT" class="screen_only"><img src="#ACS_CHEMIN{triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
     </BOUCLE_edito>
 </fieldset>
+[(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
 </B_edito>

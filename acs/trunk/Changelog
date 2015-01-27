@@ -1,5 +1,10 @@
-Suivi des principales révisions - Version ACS actuelle : 3.0.2
+Suivi des principales révisions - Version ACS actuelle : 3.0.3
+- améliorations diverses de quelques composants : Encart, Edito, Recherche, Article, Articles, Keys, ...
+- class "screen_only" aux composants de navigation.
+- modernisation de composant_infos()
+- creation d'un composant identite (du site)
 
+ACS version 3.0.2
 - suppression du set de composants "dist".
 - suppression du composant "démocratie" et de ses dépendances (sera remplacé par un plugin indépendant).
 - suppression de la page "articles proposés".

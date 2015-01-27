@@ -1,0 +1,16 @@
+[(#CACHE{0})][(#REM)
+  Affiche les traductions disponibles sur le site.
+
+  Note : le lien <a rel="alternate" hreflang="xx" ...> indique qu'il
+  s'agit d'une traduction (version alternative dans la langue xx)
+
+  On peut enlever l'affichage de la langue en cours en ajoutant {lang!=#LANG} à la boucle traductions
+  
+]<B_langues><div id="traductions">
+<BOUCLE_langues(ARTICLES){fusion lang}{par lang}>[(#TOTAL_BOUCLE|>{1}|?{' '})
+  <span lang="#LANG" xml:lang="#LANG" dir="#LANG_DIR" class="lang_button">[
+    (#ENV{lang}|=={#LANG}|?{'',<a href="[(#REM|sinon{spip.php?action=converser}|parametre_url{var_lang,#LANG})]&amp;redirect=[(#SELF|urlencode)]" rel="alternate" hreflang="#LANG"[ title="(#TITRE|texte_backend)"]>})
+      ]<img src="#EVAL{_DIR_ACS}lang/flags/[(#LANG)].gif" alt="[(#LANG)]"[ title="(#LANG|traduire_nom_langue)"][ class="(#ENV{lang}|=={#LANG}|?{selected_lang,lang})"] />[
+    (#ENV{lang}|=={#LANG}|?{'',</a>})]</span>]
+</BOUCLE_langues>
+</div></B_langues>

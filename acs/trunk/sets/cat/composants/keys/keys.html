@@ -11,5 +11,5 @@ Les mots-cles qui commencent par un "_" ou dont le groupe commence par un "_" ne
     [(#ID_ARTICLE|=={''}|?{' '}) <INCLURE{fond=composants/keys/inc-keys_rub}{ajax}{lang}{id_rubrique}>]
     [(#ID_ARTICLE|!={''}|?{' '}) <INCLURE{fond=composants/keys/inc-keys_art}{ajax}{lang}{id_article}>]
   ][(#ID_MOT|!={''}|?{' '})<INCLURE{fond=composants/keys/inc-keygroup}{ajax}{lang}{id_mot}{type}>]
-][(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/keys/inc-keys_recherche}{recherche}{ajax}{lang}]
+][(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/keys/inc-keys_recherche}{recherche}{env}{ajax}{lang}]
 </div>

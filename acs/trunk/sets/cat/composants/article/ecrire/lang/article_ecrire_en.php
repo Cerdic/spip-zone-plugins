@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'Bord' => 'Border top',
 'LogoTailleMax' => 'Max logo size',
+'LogoAlign' => _T('acs:align'),
 
 'Dates' => 'Dates',
 'Aut' => 'Authors',

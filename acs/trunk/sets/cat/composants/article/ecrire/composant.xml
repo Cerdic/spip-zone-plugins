@@ -73,6 +73,13 @@
     <valeur>100</valeur>
   </variable>
   <variable>
+    <nom>LogoAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>right</option>
+    <valeur>right</valeur>
+  </variable>
+  <variable>
     <nom>StylePage</nom>
     <type>KeyGroup</type>
   </variable>

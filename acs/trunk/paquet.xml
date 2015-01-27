@@ -1,7 +1,7 @@
 <paquet
 	prefix="acs"
 	categorie="edition"
-	version="3.0.2"
+	version="3.0.3"
 	etat="dev"
 	compatibilite="[3.0.17;3.*]"
 	logo="images/acs_32x32.gif"
@@ -13,9 +13,7 @@
 
 	<utilise nom="jqueryui" compatibilite="[1.8.21;]" />
 	<utilise nom="palette" compatibilite="[3.0.6;]" />
-  
-  <utilise nom="tradrub" compatibilite="[3.1.2;]" />
-  
+
 	<menu nom="acs" titre="acs:acs_description" parent="menu_squelette" icone="images/acs_16x16.gif" />
 	<menu nom="sauvegarder_acs" titre="acs:save" parent="menu_administration" icone="images/acs_16x16.gif" />
 	<menu nom="restaurer_acs" titre="acs:restore" parent="menu_administration" icone="images/acs_16x16.gif" />

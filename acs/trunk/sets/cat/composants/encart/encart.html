@@ -1,8 +1,8 @@
 [(#CACHE{0})][(#VAR{#EVAL{'acsEncart'.'#NIC'.'Use'}}|=={oui}|?{' '})
-<div class="#PINCEAU{encart,#NIC}">
+<div class="screen_only #PINCEAU{encart,#NIC}">
   [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|=={articles}|?{' '})
-    <INCLURE{fond=composants/encart/inc-encart_articles}{nic}{lang}>
+    <INCLURE{fond=composants/encart/inc-encart_articles}{env}{ajax}{nic}{lang}>
   ][(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|=={rubriques}|?{' '})
-    <INCLURE{fond=composants/encart/inc-encart_rubriques}{nic}{lang}>
+    <INCLURE{fond=composants/encart/inc-encart_rubriques}{env}{ajax}{nic}{lang}>
   ]
 </div>]

@@ -1,7 +1,7 @@
 #CACHE{0}
 [(#REM) Edito
 
-].edito {
+].cEdito {
   [border-width: (#VAR{acsEditoBord/Width});]
   [border-style: (#VAR{acsEditoBord/Style});]
   [border-color: (#VAR{acsEditoBord/Color});]
@@ -14,7 +14,7 @@
   filter: progid:DXImageTransform.Microsoft.dropShadow(color=#VAR{acsEditoShadow}, offX=#VAR{acsEditoShadowSize,5}, offY=#VAR{acsEditoShadowSize,5}, positive=true);]  
 }
 
-.edito legend{
+.cEdito legend{
   margin-left: 10px;
   [border-width: (#VAR{acsEditoLegendBord/Width});]
   [border-style: (#VAR{acsEditoLegendBord/Style});]
@@ -26,42 +26,45 @@
   font-weight: bold;
 }
 
-.edito .titre, .edito .surtitre, .edito .soustitre {
+.cEdito .titre, .cEdito .surtitre, .cEdito .soustitre {
   border: 0;
 }
 
-.edito .titre, .edito .surtitre, .edito .soustitre, .edito .chapo, .edito .texte {
+.cEdito .titre, .cEdito .surtitre, .cEdito .soustitre, .cEdito .chapo, .cEdito .texte {
   padding: 0;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-.edito .chapo {
-  text-align: justify;
+.cEdito .titre {
+  font-size: 2em;
   font-weight: bold;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  text-align: center;
 }
 
-.edito .texte {
+.cEdito .chapo {
+  font-weight: bold;
+}
+
+.cEdito .chapo, .cEdito .texte {
   text-align: justify;
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
-.edito .infos_article {
+.cEdito .infos_article {
   margin: 0;
   margin-left: 5px;
   margin-right: 5px;
   [float: (#VAR{acsEditoAlignInfosArticle}|=={right}|?{#LANG_RIGHT,#LANG_LEFT});]
 }
 
-.edito .spip_logos {
+.cEdito .spip_logos {
   float: #LANG_LEFT;
   margin: 5px;
 }
 
-.edito .navigation {
+.cEdito .navigation {
   float: #LANG_RIGHT;
   border-width: thin;
   [border-style: (#VAR{acsEditoBord/Style});]

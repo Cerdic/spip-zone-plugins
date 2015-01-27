@@ -1,6 +1,7 @@
 [(#CACHE{0})][(#REM)
 
-Menu de navigation mots-cles : les autres mots cles du meme groupe
+Menu de navigation mots-cles : les autres mots cles du meme groupe, 
+qui ne commencent pas par "_" (mots techniques masqués)
 
 ]<B_mots_freres>#ANCRE_PAGINATION
 <div class="cKeys">
@@ -9,7 +10,7 @@ Menu de navigation mots-cles : les autres mots cles du meme groupe
     [<div class="pagination">(#PAGINATION)</div>]
   </div>
   <ul class="bsize">
-  <BOUCLE_mots_freres(MOTS) {type} {!id_mot}{par titre} {pagination #VAR{acsKeysNb,10}}>
+  <BOUCLE_mots_freres(MOTS) {type} {!id_mot}{par titre} {titre!==(_.*)} {pagination #VAR{acsKeysNb,10}}>
     <li class="menu-item"><div class="motcle"><a href="#URL_MOT"[ class="(#EXPOSE)"]>#TITRE</a></div></li>
   </BOUCLE_mots_freres>
   </ul>
