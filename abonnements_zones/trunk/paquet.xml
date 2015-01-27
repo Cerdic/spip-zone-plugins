@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="abozones.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4608"
 >
 	<nom>Abonnements à des zones restreintes</nom>
 	
