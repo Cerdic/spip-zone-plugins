@@ -7,7 +7,7 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<fieldset>
+		<fieldset id="fieldset_destinataires">
 			<legend><:contact:configuration_destinataires:></legend>
 			<ul class="decaler">
 				<li class="editer editer_choix_destinataires haut pleine_largeur">
@@ -81,7 +81,7 @@
 		#SET{champs_possibles, #VAL{rien}|contact_infos_supplementaires}
 		#SET{champs_choisis, #CONFIG{contact/champs,#ARRAY}|array_flip}
 		#SET{champs,#GET{champs_choisis}|array_merge{#GET{champs_possibles}}}
-		<fieldset>
+		<fieldset id="fieldset_collecte">
 			<legend><:contact:infos_collecte:></legend>
 			<ol id="editer_champs" class="numeroter">
 				<BOUCLE_champs(POUR){tableau #GET{champs}}>
@@ -108,7 +108,7 @@
 			</ol>
 		</fieldset>
 	[(#PLUGIN{porte_plume,version}|oui)
-		<fieldset>
+		<fieldset id="fieldset_porte_plume">
 			<legend><:contact:configuration_champs_message:></legend>
 			[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]
 			<ul>
@@ -134,7 +134,7 @@
 			</ul>
 		</fieldset>
 	]
-		<fieldset>
+		<fieldset id="fieldset_pj">
 			<legend><:contact:configuration_pj:></legend>
 			<ul>
 				<li class="editer editer_autoriser_pj">
@@ -160,7 +160,7 @@
 			</ul>
 		</fieldset>
 
-		<fieldset>
+		<fieldset id="fieldset_civilite">
 			<legend><:contact:champ_civilite:></legend>
 			<ul>
 				<li class="editer editer_champ_civi_mademoiselle">
@@ -173,7 +173,7 @@
 			</ul>
 		</fieldset>
 
-		<fieldset>
+		<fieldset id="fieldset_sauvegarde">
 			<legend><:contact:sauv_message:></legend>
 			<ul>
 				<li class="editer editer_sauvegarder_contacts">
@@ -186,8 +186,7 @@
 			</ul>
 		</fieldset>
 
-
-		<fieldset>
+		<fieldset id="fieldset_intro">
 			<legend><:contact:configuration_intro:></legend>
 			<ul>
 				<li class="editer editer_texte pleine_largeur">
@@ -197,7 +196,7 @@
 			</ul>
 		</fieldset>
 
-		<fieldset>
+		<fieldset id="fieldset_infolettre">
 			<legend><:contact:configuration_texteinfolettre:></legend>
 			<ul>
 				<li class="editer editer_texteinfolettre pleine_largeur">
@@ -211,7 +210,7 @@
 			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
 		</div>
 	</div></form>
-	[ (#BOUTON_ACTION{<:contact:bouton_effacer:>,#URL_ACTION_AUTEUR{effacer_configuration,'contact',#SELF},ajax,<:contact:alerte_effacement:>})]
+	[(#BOUTON_ACTION{<:contact:bouton_effacer:>,#URL_ACTION_AUTEUR{effacer_configuration,'contact',#SELF},ajax,<:contact:alerte_effacement:>})]
 </div>
 
 <script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
