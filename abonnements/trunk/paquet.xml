@@ -6,7 +6,7 @@
 	etat="stable"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/abonnements-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4607"
 >
 	<nom>Abonnements</nom>
 	
