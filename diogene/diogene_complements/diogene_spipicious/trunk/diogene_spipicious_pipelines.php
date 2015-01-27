@@ -17,8 +17,8 @@ function diogene_spipicious_diogene_ajouter_saisies($flux){
 		$flux['args']['contexte']['objet'] = $objet;
 		$flux['args']['contexte']['id_objet'] = $id_objet;
 		include_spip('inc/autoriser');
-    	if(autoriser('tagger_spipicious',$objet,$id_objet)){
-	    	if(intval($id_objet)){
+		if(autoriser('tagger_spipicious',$objet,$id_objet)){
+			if(intval($id_objet)){
 				$tags = sql_select("mots.id_mot, mots.titre","spip_spipicious as spipicious LEFT join spip_mots as mots USING(id_mot)","spipicious.id_auteur=".intval($GLOBALS['visiteur_session']['id_auteur'])." AND spipicious.id_objet=".intval($id_objet)." AND spipicious.objet=".sql_quote($objet));
 				while($tag = sql_fetch($tags)){
 					$tag_uniques[$tag['id_mot']] = $tag['titre'];
@@ -26,10 +26,10 @@ function diogene_spipicious_diogene_ajouter_saisies($flux){
 				if(is_array($tag_uniques))
 					$flux['args']['contexte']['diogene_spipicious_removal_tags'] = $tag_uniques;
 			}
-    		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_spipicious',$flux['args']['contexte']);
+			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_medias_spipicious',$flux['args']['contexte']);
 		}
 	}
-    return $flux;
+	return $flux;
 }
 
 /**
@@ -48,8 +48,8 @@ function diogene_spipicious_diogene_traiter($flux){
 		$id_table_objet = id_table_objet($type);
 
 		include_spip('inc/autoriser');
-    	if(!autoriser('tagger_spipicious',$type,$id_objet)){
-    		return $flux;
+		if(!autoriser('tagger_spipicious',$type,$id_objet)){
+			return $flux;
 		}
 
 		include_spip('inc/invalideur');
