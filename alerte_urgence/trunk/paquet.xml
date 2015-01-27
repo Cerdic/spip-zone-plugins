@@ -1,11 +1,11 @@
 <paquet
 	prefix="alerte_urgence"
 	categorie="edition"
-	version="2.0.2"
-	etat="test"
+	version="2.1.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="alerte_urgence.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4606"
 	schema="1.0.0" 
 >
 	<nom>Alerte d'urgence</nom>
