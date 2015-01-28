@@ -41,4 +41,49 @@ if (!function_exists('autoriser_rubrique_creerarticledans')) {
         return autoriser_rubrique_creerarticledans_dist($faire, $type, $id, $qui, $opt);
     }
 }
+
+if (!function_exists('autoriser_rubrique_creerbrevedans')) {
+    function autoriser_rubrique_creerbrevedans($faire, $type, $id, $qui, $opt)
+    {
+        include_spip('base/abstract_sql');
+        include_spip('inc/rubriques');
+        // On stocke l'autorisation d'origine pour l'étendre
+        $autoriser_dist = autoriser_rubrique_creerbrevedans_dist($faire, $type, $id, $qui, $opt);
+        if (is_array($qui['restreint']) and count($qui['restreint']) > 0 and in_array($qui['statut'], array('1comite')) and $type == 'rubrique' and $autoriser_dist === true) {
+            $branche = array();
+            foreach ($qui['restreint'] as $rubrique) {
+                $branche = array_merge($branche, explode(',', calcul_branche_in($rubrique)));
+            }
+            if (in_array($id, $branche)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return $autoriser_dist;
+    }
+}
+
+if (!function_exists('autoriser_rubrique_creersitedans')) {
+    function autoriser_rubrique_creersitedans($faire, $type, $id, $qui, $opt)
+    {
+        include_spip('base/abstract_sql');
+        include_spip('inc/rubriques');
+        // On stocke l'autorisation d'origine pour l'étendre
+        $autoriser_dist = autoriser_rubrique_creersitedans_dist($faire, $type, $id, $qui, $opt);
+        if (is_array($qui['restreint']) and count($qui['restreint']) > 0 and in_array($qui['statut'], array('1comite')) and $type == 'rubrique' and $autoriser_dist === true) {
+            $branche = array();
+            foreach ($qui['restreint'] as $rubrique) {
+                $branche = array_merge($branche, explode(',', calcul_branche_in($rubrique)));
+            }
+            if (in_array($id, $branche)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return $autoriser_dist;
+    }
+}
+
 ?>
