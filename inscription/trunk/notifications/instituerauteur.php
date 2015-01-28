@@ -47,28 +47,15 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 		else{
 			/**
 			 * Dans le cas d'une validation, on envoit le pass
-			 * On fait tout en php pour ne pas avoir de traces du pass dans les logs
 			 * On regénère le mot de passe également
 			 */
-			$envoyer_mail = charger_fonction('envoyer_mail','inc');
-			$adresse_site = $GLOBALS['meta']["adresse_site"];
-			$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
-			
-			$user = sql_fetsel('*','spip_auteurs','id_auteur='.intval($id_auteur));
 			include_spip('inc/acces');
 			$pass = creer_pass_aleatoire(8, $id_auteur);
 			include_spip('action/editer_auteur');
 			instituer_auteur($id_auteur, array('pass'=>$pass));
-
-			$texte = "[$nom_site_spip] "._T('form_forum_identifiants')."\n\n"
-					._T('form_forum_message_auto')."\n\n"
-					. _T('form_forum_bonjour', array('nom'=>$user['nom']))."\n\n"
-					. _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip,
-					'adresse_site' => $adresse_site . '/',
-					'adresse_login' => generer_url_public('login'))) . "\n\n- "
-					. _T('form_forum_login')." " . $user['login'] . "\n- "
-					. _T('form_forum_pass'). " " . $pass . "\n\n";
-					
+			
+			$modele = "notifications/auteur_valide";
+			$fonction_user = 'auteur_pass';
 			$modele_admin = "notifications/auteur_valide_admin";
 		}
 	}
@@ -84,7 +71,10 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 				'data'=>$destinataires)
 		);
 		if($modele){
-			$texte = email_notification_objet($id_auteur,"auteur",$modele);
+			if($fonction_user == 'auteur_pass')
+				$texte = email_notification_objet($id_auteur,"auteur",$modele);
+			else
+				$texte = email_notification_objet($id_auteur,$modele,$pass);
 		}
 		notifications_envoyer_mails($destinataires, $texte);
 	}
@@ -105,4 +95,9 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 	}
 }
 
+function email_notification_auteur_pass($id_auteur, $modele,$pass) {
+	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
+
+	return recuperer_fond($modele,array('id_auteur'=>$id_auteur),array('pass',$pass));
+}
 ?>

@@ -21,8 +21,8 @@ function notifications_i3_inscriptionauteur($quoi, $id_auteur, $options) {
 	include_spip('inc/texte');
 	include_spip('inscription3_mes_fonctions');
 
-	$modele = "";
-	
+	$modele = false;
+
 	/**
 	 * Si l'ancien statut est 8aconfirmer
 	 * - on notifie la validation s'il n'est pas mis à la poubelle
@@ -30,7 +30,7 @@ function notifications_i3_inscriptionauteur($quoi, $id_auteur, $options) {
 	 * 
 	 * S'il est validé, on lui recrée un pass que l'on met dans le mail avec son login
 	 */
-	if ($options['statut'] == '8aconfirmer') {
+	if (isset($options['statut']) && $options['statut'] == '8aconfirmer') {
 		$modele = "notifications/auteur_inscription_confirmer";
 		$modele_admin = "notifications/auteur_inscription_confirmer_admin";
 	}
