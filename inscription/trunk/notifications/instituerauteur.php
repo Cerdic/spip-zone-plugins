@@ -53,7 +53,7 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 			$pass = creer_pass_aleatoire(8, $id_auteur);
 			include_spip('action/editer_auteur');
 			instituer_auteur($id_auteur, array('pass'=>$pass));
-			
+
 			$modele = "notifications/auteur_valide";
 			$fonction_user = 'auteur_pass';
 			$modele_admin = "notifications/auteur_valide_admin";
@@ -72,9 +72,9 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 		);
 		if($modele){
 			if($fonction_user == 'auteur_pass')
-				$texte = email_notification_objet($id_auteur,"auteur",$modele);
+				$texte = email_notification_auteur_pass($id_auteur,$modele,$pass);
 			else
-				$texte = email_notification_objet($id_auteur,$modele,$pass);
+				$texte = email_notification_objet($id_auteur,"auteur",$modele);
 		}
 		notifications_envoyer_mails($destinataires, $texte);
 	}
@@ -95,9 +95,8 @@ function notifications_instituerauteur($quoi, $id_auteur, $options) {
 	}
 }
 
-function email_notification_auteur_pass($id_auteur, $modele,$pass) {
+function email_notification_auteur_pass($id_auteur,$modele,$pass) {
 	$envoyer_mail = charger_fonction('envoyer_mail','inc'); // pour nettoyer_titre_email
-
-	return recuperer_fond($modele,array('id_auteur'=>$id_auteur),array('pass',$pass));
+	return recuperer_fond($modele,array('id_auteur'=>$id_auteur,'pass'=>$pass));
 }
 ?>
