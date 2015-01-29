@@ -79,7 +79,6 @@ var mejsloader;
 	if (!mejsloader.gs){
 		mejsloader.gs = jQuery.getScript(mejspath,function(){
 			mejsloader.gs = true;
-			mejsloader.init(); // init immediate des premiers players dans la page
 			jQuery(mejsloader.init); // init exhaustive de tous les players
 			onAjaxLoad(mejsloader.init); // init lors d'un load ajax
 		});
