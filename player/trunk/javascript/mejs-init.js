@@ -2,7 +2,7 @@ var mejsloader;
 (function(){
 	var L=mejsloader;
 	if (typeof L == "undefined")
-		L = {gs:null,plug:{},css:{},init:null,c:0,cssload:null};
+		mejsloader = L = {gs:null,plug:{},css:{},init:null,c:0,cssload:null};
 	if (!L.init){
 		L.cssload = function (f){
 			if (typeof L.css[f]=="undefined"){
