@@ -1,19 +1,19 @@
-<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+<BOUCLE_secteurs(RUBRIQUES) {racine} {par num titre} {par titre}>
 <div class="plan-secteur">
-    <B_sites>
-      <ul>
-          <li>
-          <h1 class="plan-secteur">[(#LOGO_RUBRIQUE|left|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})][<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE|supprimer_numero)</a>]</h1></li>
-          <ul>
-          <BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+  <B_sites>
+    <ul>
+      <li>
+        <h1 class="plan-secteur">[(#LOGO_RUBRIQUE|left|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})][<a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>(#TITRE|supprimer_numero)</a>]</h1></li>
+        <ul><BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
           <li class="menu-item">
           <a href="?site#ID_SYNDIC" [title="(#DESCRIPTIF|textebrut|entites_html|coupe{80,...})"]>#NOM_SITE</a>
           <a href="#URL_SITE" target="_new" title="<:acces_direct:>: #URL_SITE" class="spip_out"><img src="#CHEMIN{composants/articles/images/goto.gif}" alt="&uaArr;"  title="<:acces_direct:>: #URL_SITE" /></a>
-          <i>[(#DESCRIPTIF|couper{150})]</i>
-          </li>
-          </BOUCLE_sites>
-          </ul>
-      </ul>
-    </B_sites>
+          <i>[(#DESCRIPTIF|image_reduire{#VAR{acsFondImgMax,600}}
+                        |coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})]</i>
+          </li></BOUCLE_sites>
+        </ul>
+      </li>
+    </ul>
+  </B_sites>
 </div>
 </BOUCLE_secteurs>

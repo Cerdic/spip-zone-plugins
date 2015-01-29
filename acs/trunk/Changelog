@@ -1,4 +1,17 @@
-Suivi des principales révisions - Version ACS actuelle : 3.0.3
+Suivi des principales révisions - Version ACS actuelle : 3.0.4
+
+- passage du plugin en test.
+- validation HTML 5 (pas finie)
+- suppression des anciennes actions (dossier action) devenues inutiles avec SPIP 3.
+- suppression de quelques vieux overrides pour anciennes versions de SPIP et de ses plugins.
+- limitation de la taille maxi des images dans les mises en page (composants Fond, Article, Edito, Sites, ...)
+- suppression du système complexe de droits ACS. Désormais le droit webmestre suffit.
+- creation des fichiers de langue paquet-acs_fr et paquet-acs_en
+- 3 nouveaux drapeaux de langues : he, jp, it.
+- configuration en SPIP 3 désormais complète.
+- améliorations de composants.
+
+ACS version 3.0.3
 - améliorations diverses de quelques composants : Encart, Edito, Recherche, Article, Articles, Keys, ...
 - class "screen_only" aux composants de navigation.
 - modernisation de composant_infos()

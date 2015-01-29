@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">[(#REM)
 
              ACS
@@ -13,34 +13,35 @@ Entete de page - page header
 
 ]<head>
   <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-  <meta name="generator" content="ACS #ACS_VERSION[ ((#ACS_RELEASE))] - SPIP #SPIP_VERSION" />
-  <meta name="rating" content="General" />
-  <meta name="category" content="Document" />
-  <meta name="page-topic" content="Document" />
-  <meta name="distribution" content="Global" />
-  <meta name="audience" content="General" />
-  [<title>(#ENV**{title}|textebrut)</title>]
-  <meta name="robots" content="#ENV{mrobots,#ENV{calendrier_mois}|=={""}|?{all,none}}" />
-  [<meta name="expires" content="(#ENV{mexpires,3600})" />]
-  [<meta name="description" content="(#ENV{mdescription,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
-  [<meta name="keywords" lang="#LANG" content="(#ENV{mkeywords,<:acs:fond_meta_keywords:>})" />]
   [<meta name="author" content="(#ENV{mauthor,<:acs:fond_meta_author:>})" />]
+  [<meta name="description" content="(#ENV{mdescription,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
+  <meta name="generator" content="ACS #PLUGIN{acs,version}[ ((#PLUGIN{acs,release}))] - SPIP #SPIP_VERSION" />
+  [<meta name="keywords" lang="#LANG" content="(#ENV{mkeywords,<:acs:fond_meta_keywords:>})" />]
+  <meta name="robots" content="#ENV{mrobots,#ENV{calendrier_mois}|=={""}|?{all,none}}" />
+  
+[(#REM) metas commentées - pb validation html 5
+  [<meta name="expires" content="(#ENV{mexpires,3600})" />]
   [<meta name="copyright" content="(#ENV{mcopyright,<:acs:fond_meta_copyright:>})" />]
   [<meta name="abstract" content="(#ENV{mabstract,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
   <meta name="organization" content="#NOM_SITE_SPIP" />
   [<meta name="location" content="(#ENV{mlocation,<:acs:fond_meta_location:>})" />]
-  <meta name="DC.Type" content="Document" />
-  <meta name="DC.Format" content="text/html" />
-  <meta name="DC.Identifier" content="#URL_SITE_SPIP" />
-  <meta name="DC.Language" content="#LANG" />
-  <meta name="DC.Coverage" content="<:acs:fond_meta_dc_coverage:> #NOM_SITE_SPIP" />
-  [<meta name="DC.Creator" content="(#ENV{mauthor,<:acs:fond_meta_author:>})" />]
-  [<meta name="DC.Date" content="(#ENV{mdate, #DATE})" />]
-  [<meta name="DC.Contributor" content="(#ENV{mcontributor,#NOM_SITE_SPIP})" />]
-  [<meta name="DC.Publisher" content="(#ENV{mpublisher,#NOM_SITE_SPIP})" />]
-  [<meta name="DC.Subject" content="(#ENV{msubject,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
+  <link rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />[(#REM) DC metas ]
+  <meta name="dc.type" content="Document" />
+  <meta name="dc.format" content="text/html" />
+  <meta name="dc.identifier" content="#URL_SITE_SPIP" />
+  <meta name="dc.language" content="#LANG" />
+  <meta name="dc.coverage" content="<:acs:fond_meta_dc_coverage:> #NOM_SITE_SPIP" />
+  [<meta name="dc.creator" content="(#ENV{mauthor,<:acs:fond_meta_author:>})" />]
+  [<meta name="dc.date" content="(#ENV{mdate, #DATE})" />]
+  [<meta name="dc.contributor" content="(#ENV{mcontributor,#NOM_SITE_SPIP})" />]
+  [<meta name="dc.publisher" content="(#ENV{mpublisher,#NOM_SITE_SPIP})" />]
+  [<meta name="dc.subject" content="(#ENV{msubject,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
+]
+
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <link rel="schema.DC" href="#URL_SITE_SPIP/dc" />[(#REM) DC metas ]
+
+  [<title>(#ENV**{title}|textebrut)</title>]
+  
   [(#REM) Lien vers l'icone destinee a la barre de bookmarks
   ][<link rel="shortcut icon" type="image/x-icon" href="(#ACS_CHEMIN{favicon/#VAR{acsFondFavicon,favicon.ico}})" />]
   [(#REM) Lien vers le flux RSS du site

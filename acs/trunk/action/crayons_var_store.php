@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -15,7 +15,6 @@ function action_crayons_var_store_dist() {
   include_spip('inc/crayons');
   // Inclusion de l'action crayons_store du plugin crayons, comme librairie
   include_spip('action/crayons_store');
-  include_spip('action/crayons_api');
   // Inclusion de la definition de la vue d'une variable
   include_spip('inc/acs_vars');
   include_spip('inc/texte'); // pour fonction couper() utilisee dans acs_vars
@@ -25,9 +24,9 @@ function action_crayons_var_store_dist() {
 	  
   // Dernière sécurité :Accès réservé aux admins ACS
   // Last security: access restricted to ACS admins 
-  if (!in_array($GLOBALS['auteur_session']['id_auteur'], explode(',', $GLOBALS['meta']['ACS_ADMINS']))) {
-    echo api_crayons_var2js(array('$erreur' => _U('avis_operation_impossible')));
-    exit;
+  if (!autoriser('acs', 'crayons_var_store')) {
+  	echo crayons_var2js(array('$erreur' => _T('avis_operation_impossible')));
+  	exit;
   }
 
 	$wid = $_POST['crayons'][0];
@@ -47,7 +46,7 @@ function action_crayons_var_store_dist() {
 	$oldval = $_POST['oldval_'.$wid];
 	// est-ce que la variable a ete modifiée entre-temps ?
 	if ($oldval != $GLOBALS['meta'][$var]) {
-    echo api_crayons_var2js(array('$erreur' => _U('crayons:modifie_par_ailleurs')));
+    echo crayons_var2js(array('$erreur' => _U('crayons:modifie_par_ailleurs')));
     exit;
   }
   $type = $_POST['type_'.$wid];
@@ -72,7 +71,7 @@ function action_crayons_var_store_dist() {
 	// Retourne la vue - Return vue 
 	$return['$erreur'] = NULL;
   $return[$wid] = affiche_variable($type, $var);
-	echo api_crayons_var2js($return);
+	echo crayons_var2js($return);
 	exit;
 }
 

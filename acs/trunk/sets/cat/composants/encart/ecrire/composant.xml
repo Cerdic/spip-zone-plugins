@@ -19,7 +19,10 @@
     <nom>Nom</nom>
     <type>text</type>
   </variable>
-
+  <variable>
+    <nom>Key</nom>
+    <type>key</type>
+  </variable>
   <variable>
     <nom>TitreFond</nom>
     <type>color</type>
@@ -30,6 +33,11 @@
     <chemin>trame</chemin>
     <label>non</label>
   </variable>
+  <variable>
+    <nom>TitreSize</nom>
+    <type>text</type>
+  </variable>
+  
   <variable>
     <nom>Fond</nom>
     <type>color</type>
@@ -73,10 +81,6 @@
   <variable>
     <nom>SouligneRubHeight</nom>
     <type>LargeurBord</type>
-  </variable>
-  <variable>
-    <nom>Key</nom>
-    <type>key</type>
   </variable>
   <variable>
     <nom>Nb</nom>

@@ -13,7 +13,7 @@ Home page
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
 (#SET{mdescription,[(#NOM_SITE_SPIP|textebrut) - ]<:acs:fond_meta_page_sommaire:>})][
-(#SET{mkeywords,<:acs:fond_meta_keywords:>,<:acs:fond_sommaire:>})
-]<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+(#SET{mkeywords,#DESCRIPTIF_SITE_SPIP|askeywords})]
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords,<:acs:fond_meta_keywords:>}}{mdescription=#GET{mdescription}}>
 <INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2000}{page=sommaire}>
 <INCLURE{fond=composants/fond/pied}{self=#SELF}>

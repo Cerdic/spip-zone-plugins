@@ -36,7 +36,7 @@ id_article: id de l'article
   [<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
   
   [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-  [<div class="#EDIT{texte} texte">(#TEXTE)</div>
+  [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#VAR{acsFondImgMax,600}})</div>
   [<div class="notes"><h2><:info_notes:></h2>(#NOTES|safehtml)</div>]
   #FIN_SURLIGNE][
   <div class="#EDIT{ps}">#DEBUT_SURLIGNE(#PS|safehtml)#FIN_SURLIGNE</div>]

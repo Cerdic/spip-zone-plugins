@@ -1,10 +1,20 @@
 [(#CACHE{0})][(#AUTORISER{configurer,_acs}|sinon_interdire_acces)]
 <br />
 [(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{acs_32x32.gif}|balise_img{'ACS',cadre-icone})],'info'})]
-<div>
-  <:acs:acsdernieremodif:><br />
-  [(#VAL{"Y-m-d H:i:s"}|date{#CONFIG{acsDerniereModif}})]
+  [<h4 class="titrem">(#PLUGIN{acs}|oui) #EVAL{'_T("paquet-acs:acs_slogan")'}</h4>]
+  [<div>(#EVAL{'_T("paquet-acs:acs_description")'})</div>]
   <hr />
-  <:version:> ACS #ACS_VERSION (#ACS_RELEASE)
-</div>
+  <:version:> ACS #PLUGIN{acs,version}[(#PLUGIN{acs,release}|?{ <i>([(#PLUGIN{acs,release})])</i>,<span class="alert" title="No SVN revision">*</span>})]
+  <br />
+  <a href="http://acs.geomaticien.org" target="_new"><:acs:documentation:>[&nbsp;&nbsp;&nbsp;<img src="(#CHEMIN{images/acs_32x32_help.gif})" alt=" ?" style="vertical-align: middle"/>]</a>
+  <hr />
+  <:acs:acsdernieremodif:>
+  <br />
+  [(#VAL{"Y-m-d H:i:s"}|date{#CONFIG{acsDerniereModif}})<br/>]
+  #SET{cache_inhib,#CONFIG{cache_inhib}|sinon{0}|>{#REM|time}|oui}
+  [<strong (#GET{cache_inhib}|?{><:info_cache_desactive:>,class="alert"><:acs:info_cache_spip_on:>})]</strong>
+  <br />
+  <:svp:info_nb_plugins{nb=}:><br />
+  [crayons (#PLUGIN{crayons,version})]<br />
+  [palette (#PLUGIN{palette,version})]<br />
 #BOITE_FERMER

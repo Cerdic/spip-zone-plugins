@@ -1,4 +1,4 @@
-[(#SET{acsEditoKeyword,<:acs:edito_keyword:>})]
+[(#SET{acsEditoKeyword,#VAR{#EVAL{'acsEdito'.'#NIC'.'Key/Key'},<:acs:edito_keyword:>}})]
 <BOUCLE_decompte_edito(ARTICLES){titre_mot=#GET{acsEditoKeyword}}{lang=#LANG}></BOUCLE_decompte_edito>
 #SET{edito_total,#TOTAL_BOUCLE}
 <//B_decompte_edito>
@@ -21,7 +21,7 @@
       [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE)</p>]
       <small class="infos_article nsize">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
       [<br /><div class="#EDIT{chapo} chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
-      [<div class="#EDIT{texte} texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div><br />]
+      [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#VAR{acsFondImgMax,600}}|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div><br />]
       <BOUCLE_mot(MOTS) {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT" class="screen_only"><img src="#ACS_CHEMIN{triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
     </BOUCLE_edito>
 </fieldset>

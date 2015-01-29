@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_crayons_composant_store_dist() {
   include_spip('inc/crayons');
-  include_spip('action/crayons_api');
 
   acs_log('ACS: action/crayons_composant_store by '.$GLOBALS['auteur_session']['id_auteur']);
 	lang_select($GLOBALS['auteur_session']['lang']);
@@ -23,7 +22,7 @@ function action_crayons_composant_store_dist() {
   // Dernière sécurité :Accès réservé aux admins ACS
   // Last security: access restricted to ACS admins 
   if (!autoriser('acs', 'crayons_composant_store')) {
-    echo api_crayons_var2js(array('$erreur' => _T('avis_operation_impossible')));
+    echo crayons_var2js(array('$erreur' => _T('avis_operation_impossible')));
     exit;
   }
 
@@ -35,7 +34,7 @@ function action_crayons_composant_store_dist() {
 	// Retourne la vue - Return vue 
 	$return['$erreur'] = '';
   $return[$wid] = vues_dist('composant', $c, $_POST['nic'], array('var_mode'=>'recalcul'));
-	echo api_crayons_var2js($return);
+	echo crayons_var2js($return);
 	exit;
 }
 

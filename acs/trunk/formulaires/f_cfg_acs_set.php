@@ -32,11 +32,11 @@ function list_sets(){
  * @return array
  */
 function formulaires_f_cfg_acs_set_traiter_dist() {
-	if (
+		//refuser_traiter_formulaire_ajax(); // a debugguer because pb reset.css
+		if (
 			($GLOBALS['meta']['acsSet'] != _request('acsSet')) ||
 			($GLOBALS['meta']['acsSqueletteOverACS'] != _request('acsSqueletteOverACS'))
 	) {
-		//refuser_traiter_formulaire_ajax(); // a debugguer because pb reset.css
 		ecrire_meta('acsSet', _request('acsSet'));
 		ecrire_meta('acsSqueletteOverACS', _request('acsSqueletteOverACS'));
 		$GLOBALS['dossier_squelettes'] = (isset($GLOBALS['meta']['acsSqueletteOverACS']) ? $GLOBALS['meta']['acsSqueletteOverACS'].':' : '')._DIR_PLUGIN_ACS.'sets/'._request('acsSet');

@@ -3,7 +3,7 @@
   <nom>Fond</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>0.8.7</version>
+  <version>0.8.9</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -52,6 +52,11 @@
     <type>img</type>
     <chemin>trame</chemin>
     <label>non</label>
+  </variable>
+  <variable>
+    <nom>ImgMax</nom>
+    <type>text</type>
+    <valeur>400</valeur>
   </variable>
 
   <variable>

@@ -14,6 +14,12 @@
   border-bottom: 1px solid (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});][
   (#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|!={rubriques}|?{' '})[(#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{sauf=bottom})]]
 }
+.cEncart#NIC .entete .spip_logos {
+  float:#VAR{acsArticleLogoAlign,left};
+}
+[.cEncart#NIC .entete .titre {
+  font-size: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreSize'}});
+}]
 [.cEncartClass .entete_rub .soulignement {
   height: (#VAR{#EVAL{'acsEncart'.'#NIC'.'SouligneRubHeight'}});
  }]

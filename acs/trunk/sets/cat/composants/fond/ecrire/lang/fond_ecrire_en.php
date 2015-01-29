@@ -33,6 +33,8 @@ Size for little navigation links set the size of pagination, notes, post-scriptu
 'Color' => 'Background',
 'NavSize' => 'Size for little navigation links',
 'BlocSize' => 'Size for blocks',
+'ImgMax' => 'Max size for images',
+'ImgMaxHelp' => 'Limit images size.',
 
 'TitleSize' => 'Title size',
 'STSize' => 'Subtitle size',

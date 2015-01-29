@@ -49,17 +49,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'err_fichier_absent' => 'File @file@ not found',
   'err_fichier_ecrire' => 'Unable to write in &quot;@file@&quot;',
   'err_cache' => 'Unable to read or write ACS cache',
-
-  'onglet_adm_description' => 'Configuration',
-  'onglet_adm_info' => 'ACS components set and templates choice, administration, backup / restore.',
-  'onglet_adm_help' => '<b>Set</b>:<br />A set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the set and/or its components. If more than one is needed, separator is ":"  between paths.
-<br />
-To use some components from an ACS set in your own SPIP templates, you need to fill in this field with your SPIP templates directory.
-<br />
-<br />
-<b>ACS administrators</b>:<br />ACS administrators only are authorized to configure the website. Configuration pages are no more accessible to other administrators.<br /><br /><b>ACS access control</b>:<br />You can lock access to other spip "ecrire" area pages: creat a new group, look for the exec=dosomething parameter in the page-to-control url, add "something" in the "ACS administrated" list (separated by comma), validate, and add the page-to-control administrator(s).<br /><br /><b>Display all variables</b>:<br /> All variables display created components variables, whenever components are used or not.<br /><br /><b>Display component\'s pages</b>:<br />Display component\'s pages in "Pages" pane.',
-
+  'info_cache_spip_on' => 'SPIP cache on.',
+  
   'admins' => 'Administrators',
+  'admins_help' => 'ACS allowed only to webmasters.',
+  
   'groupes' => 'Groups',
   'lien_retirer_admin' => 'Retire from admins',
   'locked_pages' => 'Protected pages',

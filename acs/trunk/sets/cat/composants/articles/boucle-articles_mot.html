@@ -6,11 +6,10 @@ ayant le mot-clef id_mot, pour la langue en cours
 Paramètres:
 id_mot
 
-Si le texte du mot-clé COMMENCE par le modèle composant, alors les articles et
-rubriques associés au mot-clé NE sont PAS affichés.
- 
+Si le texte du mot-clé COMMENCE par le modèle composant ou par "_" (mots techniques masqués),
+alors les articles associés au mot-clé NE sont PAS affichés.
 ]<B_mot>
-<BOUCLE_mot(MOTS){id_mot}>
+<BOUCLE_mot(MOTS){id_mot}{titre!==(_.*)}>
   <div class="cArticle">
     <div class="entete">
       [(#LOGO_MOT|right|image_reduire{200,200})]
@@ -24,3 +23,5 @@ rubriques associés au mot-clé NE sont PAS affichés.
   [(#TEXTE*|match{^<composant.*>}|?{""," "})<INCLURE{fond=composants/articles/inc-bam}{ajax}{env}{id_mot}>]
 </BOUCLE_mot>
 </B_mot>
+<:ecrire:info_aucun_article:>
+<//B_mot>

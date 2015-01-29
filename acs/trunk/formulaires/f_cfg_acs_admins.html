@@ -1,0 +1,12 @@
+[(#CACHE{0})][(#REM)
+
+Administrateurs d'ACS (webmestres)
+
+Utilise la liste d'auteurs SPIP native (prive/objets/liste/auteurs)
+
+]<div class='formulaire_spip formulaire_configurer formulaire_#FORM-#ENV{id,nouveau}' id='formulaire_configurer_#FORM'>
+  <h3 class='titrem'>[(#CHEMIN_IMAGE{cadenas-24.gif}|balise_img{'',cadre-icone})]<:acs:admins:> <:acs:acs:></h3>
+  <br />
+  <p><:acs:admins_help:></p>
+  [(#INCLURE{fond=prive/objets/liste/auteurs,where="webmestre='oui'",titre=<:acs:admins:>,nb=10,env,ajax})]
+</div>

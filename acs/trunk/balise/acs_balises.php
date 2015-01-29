@@ -42,7 +42,10 @@ function balise_ACS_RELEASE($p) {
 }
 function calcule_balise_acs_release() {
 	include_spip('inc/acs_version');
-	return acs_release();
+	$r = acs_release(); // fonction SPIP version_svn_courante(_DIR_ACS) retourne 0 si bug ou niet
+	if ($r != 0)
+		return $r;
+	return '';
 }
 
 function calculer_balise_pinceau($composant, $nic) {

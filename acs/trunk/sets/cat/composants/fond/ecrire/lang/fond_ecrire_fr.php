@@ -33,6 +33,8 @@ La taille des petits liens de navigation s\'applique aux paginations, aux notes,
 'ImageHelp' => 'Image de fond pour toutes les pages du site. Il faut définir une couleur par défaut pour que l\'image de fond soit prise en compte.',
 'NavSize' => 'Taille des petits liens de navigation',
 'BlocSize' => 'Taille des blocs',
+'ImgMax' => 'Taille max des images',
+'ImgMaxHelp' => 'Limite la taille des images.',
 
 'TitleSize' => 'Taille de titre',
 'STSize' => 'Taille de sous-titre',

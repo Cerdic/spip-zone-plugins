@@ -52,15 +52,10 @@ Ce sont des <i>"noisettes"</i>, c\'est à dire des squelettes de blocs fonctionn
   'err_fichier_absent' => 'Fichier @file@ introuvable',
   'err_fichier_ecrire' => 'Impossible d\'&eacute;crire dans &quot;@file@&quot;',
   'err_cache' => 'Impossible de lire ou d\'&eacute;crire dans le cache ACS',
-
-  'onglet_adm_description' => 'Configuration d\'ACS',
-  'onglet_adm_info' => 'Choix du jeu de composants et de squelettes, gestion des droits, sauvegarder / restaurer.',
-  'onglet_adm_help' => '',
+  'info_cache_spip_on' => 'Cache SPIP actif.',
 
   'admins' => 'Administrateurs',
-  'admins_help' => 'Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.
-  <br /><br />
-  ACS permet de verrouiller l\'acc&egrave;s à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le param&egrave;tre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez ses administrateurs.',
+  'admins_help' => 'ACS.est r&eacute;servr&eacute; aux webmestres.',
   'groupes' => 'Groupes',
   'lien_retirer_admin' => 'Retirer des admins',
   'locked_pages' => 'Pages protégées',
@@ -78,9 +73,6 @@ Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses com
   'preview_background_help' => 'Permet de choisir une couleur de fond différente de la couleur du fond de page pour la prévisualisation des composants.',
   'spip_admin_form_style' => 'Style du formulaire admin de SPIP',
   'spip_admin_form_style_help' => 'Le formulaire admin de SPIP, visible quand le cookie de correspondance est activé, peut parfois g&ecirc;ner. On peut définir ici des propriétés de style css pour le positionner au mieux. Exemple : right: 100px',
-  'cache-spip_on' => 'D&eacute;sactiver le cache de SPIP',
-  'cache-spip_off' => 'Cache SPIP d&eacute;sactiv&eacute;',
-  'cache-spip_help' => 'Le cache de SPIP permet au serveur de répondre rapidement, mais il est souvent n&eacute;c&eacute;ssaire de le désactiver lors du développement du site pour pouvoir voir les changements.',
   'save' => 'Sauvegarder la configuration ACS',
   'restore' => 'Restaurer la configuration ACS',
   'restored' => 'L\'archive @file@ a été restaurée.',

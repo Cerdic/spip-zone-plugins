@@ -3,8 +3,18 @@
   <nom>Sites</nom>
 
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
   <version>0.8.8</version>
   <necessite id='acs' version='[0.8.8;]' />
   <group>content</group>
+
+  <necessite_composant set='cat' nom='articles' compatibilite='[0.8.9;]' />
+  <necessite id='acs' version='[0.8.8;]' />
+
+  <variable>
+    <nom>NbLettres</nom>
+    <type>text</type>
+    <valeur>200</valeur>
+  </variable>
+  
 </composant>

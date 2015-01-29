@@ -1,6 +1,12 @@
 [(#AUTORISER{configurer,_acs}|sinon_interdire_acces)]
 <h1 class='grostitre'><:acs:acs:></h1>
 
-<div class="ajax">
-  [(#FORMULAIRE_F_CFG_ACS_SET|sinon{<br />#VAL{<i><:fichier_introuvable{fichier="formulaires/f_cfg_acs_set"}:></i>}|inserer_attribut{class,error}})]
-</div>
+[<div class="ajax">
+  (#FORMULAIRE_F_CFG_ACS_SET|sinon{<br />#VAL{<i><:fichier_introuvable{fichier="formulaires/f_cfg_acs_set"}:></i>}|inserer_attribut{class,error}})
+</div>]
+[<div class="ajax">
+  (#FORMULAIRE_F_CFG_ACS_CONFIG|sinon{<br />#VAL{<i><:fichier_introuvable{fichier="formulaires/f_cfg_acs_config"}:></i>}|inserer_attribut{class,error}})
+</div>]
+[<div class="ajax">
+  (#FORMULAIRE_F_CFG_ACS_ADMINS|sinon{<br />#VAL{<i><:fichier_introuvable{fichier="formulaires/f_cfg_acs_admins"}:></i>}|inserer_attribut{class,error}})
+</div>]

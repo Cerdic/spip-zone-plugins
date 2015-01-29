@@ -66,23 +66,6 @@ print_r(unserialize($GLOBALS['meta']['ACS_CADENASSE']));
   return $r;
 }
 
-function acs_adm_gauche() {
-  return acs_info_box(
-    _T('acs:adm'),
-    _T('acs:onglet_adm_description').'<br /><br />',
-    false,
-    _T('acs:onglet_adm_info'),
-    _DIR_PLUGIN_ACS."images/cadenas-24.gif",
-    false
-  );
-}
-
-function acs_adm_droite() {
-  $acs_config = charger_fonction('acs_config', 'inc');
-  $r = acs_box(_T('acs:acs'), ajax_action_greffe("acs_config", 0, $acs_config()), _DIR_PLUGIN_ACS."images/acs_32x32.gif");
-  return $r;
-}
-
 function acs_set() {
   $r = '<form name="acs_set" action="?exec=acs" method="post">'.
         '<input type="hidden" name="onglet" value="adm"><input type="hidden" name="changer_set" value="oui">';
