@@ -1,0 +1,94 @@
+#CACHE{0} 
+#SET{url_plugin,#EVAL{_DIR_PLUGIN_SPIPCATCHAT}}
+#SET{refresh,#CONFIG{spipcatchat/refresh}}
+[(#CONFIG{spipcatchat/refresh}||non)#SET{refresh,2000}]
+<!-- Liste des variables des couleurs des thèmes -->
+[(#CONFIG{spipcatchat/fond_color}||non) #SET{fond_color,ffffff}]
+[(#CONFIG{spipcatchat/fond_color}||oui) #SET{fond_color,#CONFIG{spipcatchat/fond_color}}]
+[(#CONFIG{spipcatchat/corner}||non) #SET{corner,oui}]
+[(#CONFIG{spipcatchat/corner}|=={o}|oui) #SET{corner,oui}]
+[(#CONFIG{spipcatchat/corner}|=={n}|oui) #SET{corner,non}]
+[(#CONFIG{spipcatchat/smoke}||non) #SET{smoke,oui}]
+[(#CONFIG{spipcatchat/smoke}|=={o}|oui) #SET{smoke,oui}]
+[(#CONFIG{spipcatchat/smoke}|=={n}|oui) #SET{smoke,non}]
+[(#CONFIG{spipcatchat/catchat_theme_colorThumbs}|non) #SET{color_primaire,ffa500} #SET{color_secondaire,fcf2d8} ]
+[(#CONFIG{spipcatchat/catchat_theme_colorThumbs}|=={false}|oui) 
+[(#CONFIG{spipcatchat/catchat_theme_color}||non) #SET{color_primaire,ffa500} #SET{color_secondaire,fcf2d8}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={orange}|oui) #SET{color_primaire,ffa500} #SET{color_secondaire,fcf2d8}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={bleu}|oui) #SET{color_primaire,0078ae} #SET{color_secondaire,e5f1f6}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={noir}|oui) #SET{color_primaire,0a0a0a} #SET{color_secondaire,e5e5e5}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={brun}|oui) #SET{color_primaire,5f391b} #SET{color_secondaire,efebe8}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={jaune}|oui) #SET{color_primaire,ffc73d} #SET{color_secondaire,fff3d8}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={rose}|oui) #SET{color_primaire,ff0000} #SET{color_secondaire,ffe5e5}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={vert}|oui) #SET{color_primaire,198c19} #SET{color_secondaire,e5f2e5}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={pourpre}|oui) #SET{color_primaire,9437ff} #SET{color_secondaire,f4ebff}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={gris}|oui) #SET{color_primaire,797979} #SET{color_secondaire,d6d6d6}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={rouge}|oui) #SET{color_primaire,fe2e2e} #SET{color_secondaire,f78181}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={lavande}|oui) #SET{color_primaire,cc66ff} #SET{color_secondaire,f8e0f7}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={blanc}|oui) #SET{color_primaire,000000} #SET{color_secondaire,""}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={vert_aubergine}|oui) #SET{color_primaire,333300} #SET{color_secondaire,cccc99}]
+[(#CONFIG{spipcatchat/catchat_theme_color}|=={bleu_ciel}|oui) #SET{color_primaire,0080ff} #SET{color_secondaire,66ccff}]]
+[(#CONFIG{spipcatchat/catchat_theme_colorThumbs}|=={true}|oui) 
+#SET{color_secondaire,#CONFIG{spipcatchat/catchat_theme_colorsecondaire}}
+#SET{color_primaire,#CONFIG{spipcatchat/catchat_theme_colorprimaire}}
+#SET{icones,#CONFIG{spipcatchat/catchat_theme_coloricone}}
+#SET{perso,oui}
+]
+<!-- fin de liste des variables -->
+<style type="text/css"><INCLURE{fond=css/spipcatchat_theme.css}{perso=#GET{perso}}{back=#GET{fond_color}}{icones=#GET{icones}}{rounded_corner=#GET{corner}}{smoke=#GET{smoke}}{color_primaire=#GET{color_primaire}}{color_secondaire=#GET{color_secondaire}}></style>
+<div align="left" style="padding-left:5%;padding-right:5%;padding-top:10%">
+<!-- le messages d'avertissement javascript désactivé -->
+<div id="spipcatchatnoscript" class="spipcatchat_alert"><noscript><:spipcatchat:noscript:></noscript></div>
+<!-- fin - le messages d'avertissement javascript désactivé -->
+<script type="text/javascript">(function(){document.getElementById('spipcatchatnoscript').style.display='none';})();</script>
+<!-- Début de la boucle auteur de session -->
+	<BOUCLE_AUTEUR_CHAT (AUTEURS) {id_auteur=#SESSION{id_auteur}}{tout}>		
+	<!-- les messages qui permettent d'avertir les utilisateurs -->
+		<div id="spipcatchatmembreajout" class="spipcatchat_alert"><:spipcatchat:formulaire_error_users:> <!-- Message ajout utilisateur champ vide -->
+		</div>
+		<div id="spipcatchatsalonprive" align="center"> <!-- Message salon privé -->
+		<p><img src="[(#CHEMIN{images/catchat.png})]" width="160px" title="<:spipcatchat:title_copy:>"/></p>
+		<div class="spipcatchat_alert"><:spipcatchat:no_welcom:>
+		<div  class="SpipCatChatTux-loading-indicator" alt="patientez..."></div><:spipcatchat:chargement:>...</div>
+		</div> <!-- fin message salon privé -->
+		<div class="spipcatchat_alert" id="spipcatchatinfodel" style="display:none;padding:5%"> <!-- Message confirmation suppression du salon -->
+		<:spipcatchat:trash_confirm:>
+		<br/>
+		<div align="right">
+		<input id="submit" type="submit" class="spipcatchatcancel" title="" onclick="document.getElementById('spipcatchatinfodel').style.display='none';document.getElementById('spipcatchatcontainer').style.display='block'" value="" />
+		<input id="submit" type="submit"  class="spipcatchatok" title="<:spipcatchat:title_trash_salon:>" onclick="spipcatchattrash('[(#URL_PAGE)]',['(#GET{url_plugin})'],'<:spipcatchat:trash_bad:>','[(#CHARSET)]'); return false;" value=""/>
+		</div>
+		</div>
+		<!-- Fin des messages -->
+		<!-- Salon de chat visible, selection des Salons de chat (invisible), ajout d'utilisateurs (invisible) -->
+		[(#ENV{logad}||non)
+			[(#ENV{chat}||oui)
+			<script type="text/javascript">
+				function spipcatchatrestartstatut(){ function resettimer(){getOnlineUsers('[(#ENV{salon})]',['(#ID_AUTEUR)'],['(#GET{url_plugin})'],SpipCatChatLang,['(#URL_PAGE)'],'[(#CHARSET)]');}
+				setTimeout(function(){resettimer()},6000);setTimeout(function(){resettimer()},12000);} 
+				var SpipCatChatLang=new Array("<:spipcatchat:catchat_message:>");
+				spipcatchatShowChat(['(#GET{url_plugin})'],['(#ID_AUTEUR)'],'[(#ENV{salon})]',['(#URL_PAGE)'],SpipCatChatLang,['(#NOM|sinon{#LOGIN})'],'[(#CHARSET)]','[(#GET{refresh})]');
+			</script>
+				<div id="spipcatchatselectsalon">
+					<INCLURE{fond=modeles/spipcatchat_chat}{id_auteur=#ID_AUTEUR}{salon=#ENV{salon}}{refresh=#GET{refresh}}{url_plugin=#GET{url_plugin}}>
+				</div>
+			]]
+		<!-- Selection des Salons de chat visible, salon de chat (invisible), ajout d'utilisateurs (invisible) -->
+		[(#ENV{logad}||non)
+			[(#ENV{chat}||non)
+				<script type="text/javascript">
+					var SpipCatSelectlang=new Array ("<:spipcatchat:select_option:>","<:spipcatchat:title_public:>","<:spipcatchat:title_prive_invite:>","<:spipcatchat:title_prive:>");
+					spipcatchatShowSalon(['(#GET{url_plugin})'],SpipCatSelectlang,'[(#CHARSET)]','[(#ID_AUTEUR)]');
+				</script>
+				<INCLURE{fond=modeles/spipcatchat_select_salon}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
+			]]
+		<!-- Ajout d'utilisateurs visible, salon de chat (invisible), selection des Salons de chat (invisible) -->
+		[(#ENV{chat}||non)	
+			[(#ENV{logad}||oui)
+				<INCLURE{fond=modeles/spipcatchat_addusers}{id_auteur=#ID_AUTEUR}{salon=#ENV{add}}{url_plugin=#GET{url_plugin}}>	
+			]]
+	</BOUCLE_AUTEUR_CHAT>
+<!--fin de la boucle session -->
+				<INCLURE{fond=modeles/spipcatchat_login}{url_plugin=#GET{url_plugin}}><!-- Pas de session, alors nous proposons le fomulaire de login public -->
+<//B_AUTEUR_CHAT>
+</div>
