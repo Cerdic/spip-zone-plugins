@@ -1,0 +1,8 @@
+[(#SET{menu_lister,#LISTE{lister_config,lister_exec,lister_objets,lister_plugins,lister_extensions_php}})]
+<div class="navigation">
+    <ul class="liste_items sous_navigation">
+        <BOUCLE_menu_lister (DATA) {source table, #GET{menu_lister}} {par valeur}>
+        <li class="item[ (#ENV{exec}|=={#VALEUR}|oui)on execfound]"><a href="[(#URL_ECRIRE{#VALEUR})]" class="bando2_#VALEUR">[(#VAL{lister_config:titre_}|concat{#VALEUR}|_T)]</a></li>
+        </BOUCLE_menu_lister>
+    </ul>
+</div>
