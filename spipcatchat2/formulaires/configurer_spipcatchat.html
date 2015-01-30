@@ -1,0 +1,157 @@
+<div class="ariaformprop" aria-relevant="additions" aria-atomic="true" aria-live="polite" >
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+<h3 class="titrem"><:spipcatchat:config_catchat:></h3>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,spipcatchat}
+		<fieldset>
+			<legend><:spipcatchat:public:></legend>
+			<ul>
+				#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},100%}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,catchat_theme_colorThumbs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,false}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,true}
+						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,catchat_theme_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect(POUR){tableau #LISTE{orange, bleu, noir, brun, jaune, rose, vert, pourpre, gris, rouge, lavande, bleu_ciel, blanc, vert_aubergine}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect>
+					</select>
+				</li>				
+				#SET{name,catchat_theme_colorprimaire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:spipcatchat:label_primaire:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},ffa500}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,catchat_theme_colorsecondaire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}"><:spipcatchat:label_secondaire:></label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},fcf2d8}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				
+						#SET{name,catchat_theme_coloricone}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect1(POUR){tableau #LISTE{noir,bleu,gris,jaune,brun,orange,pourpre,rose,rouge,vert}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect1>
+					</select>
+				</li>
+				#SET{name,refresh}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect2(POUR){tableau #LISTE{1000,2000,3000,4000,5000,6000,7000,8000}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect2>
+					</select>
+				</li>
+				#SET{name,fond_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+				</li>
+				#SET{name,smoke}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,oui}
+						<option value="o"[(#ENV{#GET{name}}|=={o}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,non}
+						<option value="n"[(#ENV{#GET{name}}|=={n}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+				#SET{name,corner}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						#SET{val,oui}
+						<option value="o" [(#ENV{#GET{name}}|=={o}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+						#SET{val,non}
+						<option value="n" [(#ENV{#GET{name}}|=={n}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
+					</select>
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+		<legend><:spipcatchat:public:></legend>
+		<ul>
+		#SET{name,refreshprive}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect3(POUR){tableau #LISTE{1000,2000,3000,4000,5000,6000,7000,8000}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect3>
+					</select>
+				</li>
+				</ul>
+		</fieldset>	
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
+</div>
+<script type="text/javascript">
+function CheckThumb(t){
+	if(t=='true'){
+		$("select#catchat_theme_color").val('false');
+		$(".editer_catchat_theme_color").hide('slow');
+		$(".editer_catchat_theme_colorprimaire").show('slow');
+		$(".editer_catchat_theme_colorsecondaire").show('slow');
+		$(".editer_catchat_theme_coloricone").show('slow');
+	}else{
+		$(".editer_catchat_theme_color").show('slow');
+		$(".editer_catchat_theme_colorprimaire").hide('slow');
+		$(".editer_catchat_theme_colorsecondaire").hide('slow');
+		$(".editer_catchat_theme_coloricone").hide('slow');
+	}
+	return false;
+}
+function CheckNav(t){
+	if(t=='false')
+		$(".editer_directionNavHide").hide('slow');
+	else
+		$(".editer_directionNavHide").show('slow');
+	return false;
+}
+function spipcatchat_forminit(){
+	CheckThumb($("select#catchat_theme_colorThumbs option:selected").val());
+	CheckNav($("select#directionNav option:selected").val());
+	$('select#catchat_theme_colorThumbs').change(function() { CheckThumb($("select#catchat_theme_colorThumbs option:selected").val()); });
+	$('select#directionNav').change(function() { CheckNav($("select#directionNav option:selected").val()); });
+}
+jQuery(document).ready(spipcatchat_forminit);
+onAjaxLoad(spipcatchat_forminit);
+</script>
