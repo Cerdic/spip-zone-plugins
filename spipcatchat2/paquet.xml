@@ -1,0 +1,42 @@
+<paquet
+	prefix="SpipCatChat"
+	categorie="communication"
+	version="1.0.7"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="images/spipcatchat-64.png"
+	documentation="http://www.spip-contrib.net/SpipCatChat-2"
+>
+	<nom>SpipCatChat</nom>
+	<!-- Système de communication instantanée -->
+	<auteur>Claude Codden</auteur>
+	<copyright>2014-2015</copyright>
+	<licence>GNU GPL</licence>
+	<credit lien="http://www.blane-est.net/ehma/">Traduction anglaise : Ehma</credit>
+	<credit lien="http://commons.wikimedia.org/wiki/File:SpipCatChat.png?uselang=fr">Theme : Codden.C sous licence CC BY-NC-SA-4.0</credit>
+	<traduire module="spipcatchat" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-spipcatchat" reference="fr" gestionnaire="salvatore" />
+	<pipeline 
+		nom="jqueryui_plugins" 
+		inclure="spipcatchat_pipelines.php" 
+	/>
+	<pipeline 
+		nom="insert_head" 
+		inclure="spipcatchat_pipelines.php" 
+	/>
+	<pipeline 
+		nom="insert_head_css" 
+		inclure="spipcatchat_pipelines.php" 
+	/>
+	<pipeline
+	 	nom="header_prive"
+		inclure="spipcatchat_pipelines.php"
+	/>
+	<menu
+		nom="spipcatchat"
+		titre="spipcatchat:catchat_label"
+		parent="menu_publication"
+		icone="images/spipcatchat-16.png"
+		action="?exec=spipcatchat" 
+	/>
+</paquet>
