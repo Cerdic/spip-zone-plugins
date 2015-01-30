@@ -1,5 +1,4 @@
-<div class="formulaire_spip formulaire_config formulaire_#FORM" xmlns="http://www.w3.org/1999/html">
-
+<div class="formulaire_spip formulaire_config formulaire_#FORM">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -92,8 +91,7 @@
 								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 									<label for="[(#GET{name}|cfgname_to_id)]"><:seo:meta_description:></label>[
 									<span class='erreur_message'>(#GET{erreurs})</span>
-									]<textarea name="[(#GET{name}|cfgname_to_inputname)]" class="textarea" id="[(#GET{name}|cfgname_to_id)]">
-#ENV*{#GET{name},#GET{defaut}}</textarea>
+									]<textarea name="[(#GET{name}|cfgname_to_inputname)]" class="textarea" id="[(#GET{name}|cfgname_to_id)]">#ENV*{#GET{name},#GET{defaut}}</textarea>
 								</li>
 								#SET{name,meta_tags/tag/keywords}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs/#GET{name}}}
 								<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -222,31 +220,31 @@
 					<!-- Urls Canoniques -->
 					#SET{name,canonical_url/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:canonical_url_activate:></label>
-							</div>
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]
+						#SET{val_non,no}
+						#SET{val,yes}
+						<div class="choix">[
+							(#REM) Valeur envoyee si case non cochee]
+							<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+							<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:canonical_url_activate:></label>
+						</div>
 					</li>
 
-					<!-- Google Webmatser Tools -->
+					<!-- Google Webmaster Tools -->
 					#SET{name,webmaster_tools/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_webmaster_tools_activate:></label>
-							</div>
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]
+						#SET{val_non,no}
+						#SET{val,yes}
+						<div class="choix">[
+							(#REM) Valeur envoyee si case non cochee]
+							<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+							<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_webmaster_tools_activate:></label>
+						</div>
 					</li>
 					<li	class="fieldset suite">
 						<fieldset>
@@ -261,19 +259,19 @@
 						</fieldset>
 					</li>
 
-					<!-- Bing Webmatser Tools -->
+					<!-- Bing Webmaster Tools -->
 					#SET{name,bing/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:bing_webmaster_activate:></label>
-							</div>
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]
+						#SET{val_non,no}
+						#SET{val,yes}
+						<div class="choix">[
+							(#REM) Valeur envoyee si case non cochee]
+							<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+							<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:bing_webmaster_activate:></label>
+						</div>
 					</li>
 					<li	class="fieldset suite">
 						<fieldset>
@@ -291,16 +289,16 @@
 					<!-- Alexa -->
 					#SET{name,alexa/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:alexa_activate:></label>
-							</div>
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]
+						#SET{val_non,no}
+						#SET{val,yes}
+						<div class="choix">[
+							(#REM) Valeur envoyee si case non cochee]
+							<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+							<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:alexa_activate:></label>
+						</div>
 					</li>
 					<li	class="fieldset suite">
 						<fieldset>
@@ -322,16 +320,16 @@
 				<ul>
 					#SET{name,analytics/activate}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
-							<span class='erreur_message'>(#GET{erreurs})</span>
-							]
-							#SET{val_non,no}
-							#SET{val,yes}
-							<div class="choix">[
-								(#REM) Valeur envoyee si case non cochee]
-								<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
-								<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
-								<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_analytics_activate:></label>
-							</div>
+						<span class='erreur_message'>(#GET{erreurs})</span>
+						]
+						#SET{val_non,no}
+						#SET{val,yes}
+						<div class="choix">[
+							(#REM) Valeur envoyee si case non cochee]
+							<input type="hidden" name="[(#GET{name}|cfgname_to_inputname)]" value="#GET{val_non}" />
+							<input type="checkbox" name="[(#GET{name}|cfgname_to_inputname)]" class="checkbox" id="[(#GET{name}|cfgname_to_id)]_#GET{val}" value="#GET{val}"[(#GET{val}|=={#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
+							<label for="[(#GET{name}|cfgname_to_id)]_#GET{val}"><:seo:google_analytics_activate:></label>
+						</div>
 					</li>
 					<li	class="fieldset suite">
 						<fieldset>
