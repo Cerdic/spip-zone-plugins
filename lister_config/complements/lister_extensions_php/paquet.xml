@@ -1,0 +1,21 @@
+<paquet
+	prefix="lister_extensions_php"
+	categorie="outil"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/lister_extensions_php-32.png"
+	documentation="http://contrib.spip.net/Lister-les-pages-de-configuration"
+	>
+
+	<nom>Lister les extensions PHP chargées</nom>
+	<!-- Ce plugin permet de lister sur une page tous les fichiers exec de SPIP -->
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+
+	<pipeline nom="listermenu" inclure="lister_extensions_php_pipelines.php" />
+
+</paquet>

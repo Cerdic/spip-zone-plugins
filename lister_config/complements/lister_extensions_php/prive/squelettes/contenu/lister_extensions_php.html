@@ -1,0 +1,24 @@
+[(#AUTORISER{configurer}|sinon_interdire_acces)]
+
+<h1><:lister_extensions_php:titre_lister_extensions_php:></h1>
+
+<B_extensions>
+<div class="liste block">
+	[<h3 class="titrem">(#GRAND_TOTAL|singulier_ou_pluriel{lister_extensions_php:info_1_extension_php,lister_extensions_php:info_nb_extensions_php})</h3>]
+	<ul class="liste-items">
+		<BOUCLE_extensions (DATA) {source table, (#REM|get_loaded_extensions)} {par valeur}>
+		<li id="#VALEUR" class="item"><a href="[(#SELF|parametre_url{extension,#VALEUR})##VALEUR]">#VALEUR</a>
+			<B_fonctions_extensions>
+			<div class="liste block">
+			<ul class="spip">
+				<BOUCLE_fonctions_extensions (DATA) {source table, (#ENV{extension}|get_extension_funcs)} {si #ENV{extension}|=={#VALEUR}} {par valeur}>
+				<li><a href="http://php.net/manual-lookup.php?pattern=#VALEUR" class="spip_out" target="_blank">#VALEUR</a></li></BOUCLE_fonctions_extensions>
+			</ul>
+			</div>
+			</B_fonctions_extensions>
+			[(#ENV{extension}|=={#VALEUR}|oui) <ul class="spip"><li><a href="http://php.net/manual-lookup.php?pattern=#VALEUR" target="_blank"><:lister_extensions_php:extensions_php_pas_fonctions:></a></li></ul>]
+			<//B_fonctions_extensions>
+		</li></BOUCLE_extensions>
+	</ul>
+</div>
+</B_extensions>
