@@ -1,0 +1,56 @@
+ ____________________________________________________________________________________________
+ ********************************************************************************************
+ * 				SpipCatChat2 Salon de Chat pour Spip               							*
+ *                                                                         					*
+ *  Copyright (c) 2014 - 2015                                              					*
+ *  Auteur original: Codden Claude			                               					*
+ *  Traduction anglais: Codden Emmanuel									                    *
+ *                                                                         					*
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     					*
+ *  Pour plus de details voir le fichier GPL.txt. 					   			     		*
+ *  Logo SpipCatChat : 																		*
+ *  https://commons.wikimedia.org/wiki/File%3ASpipCatChat.png								*
+ *  Emoticons : CC0 Public Domain 															*
+ *  http://creativecommons.org/publicdomain/zero/1.0/deed.fr                                *
+ *	Documentation : Spip-Contrib															*
+ *	http://contrib.spip.net/SpipCatChat-2													*
+ *																							*
+ ********************************************************************************************
+ ____________________________________________________________________________________________
+ ******************************* Picture : VECTOR LOADING ***********************************
+ *							Wikimedia Foundation Developers									*
+ * This work is free software; you can redistribute it and/or modify it under the terms of	*
+ * the GNU General Public License as published by the Free Software Foundation; version 2. 	*
+ * This work is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 	*
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.*
+ * See the version 2 of the GNU General Public License for more details.					*	
+ * http://commons.wikimedia.org/wiki/File:Vector_Loading.svg								*
+ ********************************************************************************************
+ _____________________________________________________________________________________________
+ ************************************* jQuery ************************************************
+ *																							 *
+ *	projets jQuery sont publiés sous les termes de la licence MIT .							 *
+ *																							 *											
+ *	La licence MIT est simple et facile à comprendre et il met presque pas de restrictions   *
+ *																							 *
+ *	sur ce que vous pouvez faire avec un projet jQuery.										 *
+ *																							 *
+ *	Vous êtes libre d'utiliser n'importe quel projet jQuery dans tout autre projet			 * 
+ *																							 *
+ *	(même des projets commerciaux) tant que l'en-tête du droit d'auteur est laissée intacte. * 
+ *																							 *	
+ *	https://jquery.org/license/																 *
+ *																							 *
+ *********************************************************************************************
+ _____________________________________________________________________________________________
+ ************************************* jQuery UI *********************************************
+ *																							 *
+ * jQuery UI Autocomplete 1.8.21															 *
+ *																							 *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)									 *
+ * Dual licensed under the MIT or GPL Version 2 licenses.									 *
+ * http://jquery.org/license																 *
+ *																							 *
+ * http://docs.jquery.com/UI/Autocomplete#theming											 *
+ *																							 *
+ *********************************************************************************************
