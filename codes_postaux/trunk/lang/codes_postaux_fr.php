@@ -34,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'relier_avec_communes' => 'Relier les codes postaux aux communes (Plugin COG)',
 
+'telechargement_erreur' => 'Problème dans le téléchargement du fichier',
+'telechargement_ok' => 'Le ou les fichier(s) @objet@ a bien été téléchargé, vous pouvez procéder à son importation.',
 'telecharger_les_cp' => 'Télécharger les codes postaux',
 'telecharger_integrer_cp' => 'Télécharger et intégrer les codes postaux',
 

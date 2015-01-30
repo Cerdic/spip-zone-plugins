@@ -67,9 +67,9 @@ if(isset($tab_objet[$objet]['nom_fichier'])){
 
 $retour['editable']=true;
 if(count($tab_fichier_telecharger)==count($tab_fichier)){
-	$retour['message_ok'] = 'Le ou les fichier(s) '.$objet.' a bien été télécharger, vous pouvez procéder à son importation.';
+	$retour['message_ok'] = _T('code_postal:telechargement_ok', array('objet' => $objet));
 } else {
-	$retour['message_erreur'] = 'Problème dans le téléchargement du fichier';
+	$retour['message_erreur'] = _T('code_postal:telechargement_erreur');
 }
 return $retour;
 
