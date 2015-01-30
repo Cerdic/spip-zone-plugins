@@ -1,7 +1,7 @@
 <paquet
 	prefix="lister_config"
 	categorie="outil"
-	version="0.14.2"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lister_config-32.png"
@@ -17,8 +17,6 @@
 
 	<menu nom="lister_config" titre="lister_config:titre_lister_config" parent="menu_configuration" icone="images/lister_config-16.png" />
 
-	<onglet nom="lister_config" titre="lister_config:titre_lister_config" parent="lister_config" action="lister_config" />
-	<onglet nom="lister_exec" titre="lister_config:titre_lister_exec" parent="lister_config" action="lister_exec" />
-	<onglet nom="lister_plugins" titre="lister_config:titre_lister_plugins" parent="lister_config" action="lister_plugins" />
+	<pipeline nom="listermenu" inclure="lister_config_pipelines.php" action=""/>
 
 </paquet>
