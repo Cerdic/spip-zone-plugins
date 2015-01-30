@@ -1,0 +1,29 @@
+<div class="box info">
+<b class="top">
+<b class="tl"></b>
+<b class="tr"></b>
+</b>
+<div class="inner" >
+<div class="hd "><:spipcatchat:info_en_ligne:></div>
+<div class="bd" id="users" style="height:400px;overflow-y: auto;"><:spipcatchat:catchat_chargement:>
+</div>
+</div>
+<b class="bottom">
+</div>
+<div class="formulaire_spip">
+<img id="spipcatchatpatientez" align="right" style="display:none" src="[(#CHEMIN{prive/images/searching.gif})]">
+<div id="catchatprivestatut">
+<ul >
+<li class="editer">
+<label for="SpipCatChatStatus"><:spipcatchat:info_statut:></label><br/>
+<select name="status" id="SpipCatChatStatus" title="<:spipcatchat:title_status:>" >
+	<option title="<:spipcatchat:status_absent:>" value="1"><:spipcatchat:status_absent:></option>
+	<option title="<:spipcatchat:status_occupe:>" value="2"><:spipcatchat:status_occupe:></option>
+	<option title="<:spipcatchat:status_ligne:>" value="3" selected><:spipcatchat:status_ligne:></option>
+
+</select>
+</li>
+</ul>
+<p class="boutons"><input class="submit" title="<:spipcatchat:title_status:>" type="submit" onclick="SpipCatChatsetStatus(document.getElementById('SpipCatChatStatus').value,'[(#ID_AUTEUR)]',['(#ENV{url_plugin})']);spipcatchatrestartstatut();" value="Envoyer"></p>
+</div>
+</div>
