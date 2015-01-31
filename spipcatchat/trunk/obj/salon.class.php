@@ -136,7 +136,7 @@ class salon
 			}	
 		}
 	private function Set_del()
-		{//---------------Supprésion du menu dans le tableau-----------------//
+		{//---------------Suppréssion du menu dans le tableau-----------------//
 			if(in_array($this->_id,$this->id_balise))
 			{
 					$this->_NodeTexte[array_search($this->_id,$this->id_balise)]='';
@@ -219,11 +219,6 @@ class salon
 		$this->_data=$data;
 			return $this->$methodSet();		
 		}
-		else
-		{
-			echo '<script>alert(\'La Methode n est pas valide\n methode: balise, texte, tableau, upg, \');</script>';
-		}
-		
 	}
 //---------------------------------HYDRATE-------------------------------------//
 	private function hydrate()
@@ -253,8 +248,7 @@ class salon
 					
 					} 				 	
 				}
-			}
-			else { return false; }					
+			}					
 		}
 }
 ?>
