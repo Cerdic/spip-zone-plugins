@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spipcatchat-64.png"
-	documentation="http://www.spip-contrib.net/SpipCatChat-2"
+	documentation="http://www.spip-contrib.net/4599"
 >
 	<nom>SpipCatChat</nom>
 	<!-- Système de communication instantanée -->
