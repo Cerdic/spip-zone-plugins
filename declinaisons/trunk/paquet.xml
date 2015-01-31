@@ -1,7 +1,7 @@
 <paquet
 	prefix="declinaisons"
 	categorie="communication"
-	version="1.0.7"
+	version="1.0.8"
 	etat="dev"
 	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/declinaisons-64.png"

@@ -10,7 +10,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Paramétrages',
-	'choisir_declinaison' => 'Choisissez une déclinaison pour ce prix',    
+	'choisir_declinaison' => 'Choisissez une déclinaison pour ce prix', 
+	'choix_produit' => 'Choisissez un produit', 	   
 
 	// I
 	'icone_creer_declinaison' => 'Créer une déclinaison',
@@ -21,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_declinaisons_auteur' => 'Les déclinaisons de cet auteur',
 	'info_nb_declinaisons' => '@nb@ déclinaisons',
 	'info_nb_prix' => '@nb@ prix attachés',
+	
 	// L
 	'label_descriptif' => 'Descriptif',
 	'label_id_parent' => 'Déclinaison parente',

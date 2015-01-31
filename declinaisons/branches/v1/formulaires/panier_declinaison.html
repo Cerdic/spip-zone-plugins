@@ -10,7 +10,7 @@
                 <li>
 					[(#TOTAL_BOUCLE|>{1}|oui)
 					   <select name="id_prix_objet">#SET{plusieurs,oui}
-					   <option value=""><:shop:choix_produit:></option>
+					   <option value=""><:declinaison:choix_produit:></option>
 					   ]
 						<BOUCLE_selection(POUR){tableau #ENV{declinaisons}}>
 						[(#TOTAL_BOUCLE|>{1}|?{
