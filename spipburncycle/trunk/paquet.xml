@@ -12,8 +12,7 @@
 	<auteur>Claude Codden</auteur>
 	<copyright>2014-2015</copyright>
 	<licence>GNU GPL</licence>
-	<credit lien="http://www.blane-est.net/ehma/">Traduction anglaise : Ehma</credit>
-	<credit lien="http://commons.wikimedia.org/wiki/File:SpipCatChat.png?uselang=fr">Theme : Codden.C sous licence CC BY-NC-SA-4.0</credit>
+	<credit lien="http://commons.wikimedia.org/wiki/File:Spip_Burn_Cycle.png?uselang=fr">Theme : Codden.C sous licence CC BY-NC-SA-4.0</credit>
 	<traduire module="burncycle" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-burncycle" reference="fr" gestionnaire="salvatore" />
 	<pipeline 
