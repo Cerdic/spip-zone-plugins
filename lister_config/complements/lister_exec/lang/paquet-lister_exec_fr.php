@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
+	// L
 	'lister_exec_description' => 'Ce plugin permet de lister sur une page tous les fichiers exec de SPIP et de ses plugins.',
 	'lister_exec_nom' => 'Lister les pages ?exec=xxx',
 	'lister_exec_slogan' => 'Les exécuteurs.'

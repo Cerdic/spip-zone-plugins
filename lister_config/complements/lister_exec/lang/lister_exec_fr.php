@@ -13,7 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'intertitre_exec_contenu' => 'Selon squelettes/contenu/*.html',
 
 	// T
-	'titre_lister_exec' => 'La liste des pages ?exec=xxx',
+    'titre_lister_exec' => 'Les pages ?exec=xxx',
+	'titre_page' => 'La liste des pages ?exec=xxx',
 
 );
 

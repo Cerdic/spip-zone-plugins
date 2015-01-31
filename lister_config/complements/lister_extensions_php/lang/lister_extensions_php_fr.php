@@ -14,7 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_nb_extensions_php' => '@nb@ extensions PHP',
 
 	// T
-    'titre_lister_extensions_php' => 'La liste des extensions PHP chargées',
+    'titre_lister_extensions_php' => 'Les extensions PHP chargées',
+    'titre_page' => 'La liste des extensions PHP chargées',
 
 );
 
