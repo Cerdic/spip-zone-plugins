@@ -1,0 +1,32 @@
+<paquet
+	prefix="lienscontenus"
+	categorie="navigation"
+	version="0.30.1"
+	schema="0.4"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="images/liens_contenus.png"
+	documentation="http://contrib.spip.net/Liens-entre-contenus" >
+
+	<nom>Liens entre contenus</nom>
+	<!-- Empecher la suppression d'un objet si d'autres pointent vers lui -->
+
+	<auteur>Nicolas Hoizey</auteur>
+	<auteur lien="http://www.maat.me/">Maat</auteur>
+	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL 3.0</licence>
+
+	<credit lien="http://www.fatcow.com/free-icons">Icône issu de la collection Farm-Fresh Web Icons de FatCow</credit>
+
+	<traduire module="lienscontenus" reference="fr" gestionnaire="salvatore" />
+        
+	<pipeline nom="declarer_tables_interfaces" inclure="base/lienscontenus.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/lienscontenus.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/lienscontenus.php" />
+ 
+	<pipeline nom="pre_edition" inclure="lienscontenus_pipelines.php" />
+	<pipeline nom="affiche_gauche" action="affiche_gauche" inclure="lienscontenus_pipelines.php" />
+	<pipeline nom="header_prive" action="header_prive" inclure="lienscontenus_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="lienscontenus_pipelines.php" />
+
+</paquet>
