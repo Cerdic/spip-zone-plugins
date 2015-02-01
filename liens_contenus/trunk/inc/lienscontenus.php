@@ -178,6 +178,7 @@ function lienscontenus_initialiser()
 
 function lienscontenus_boite_liste($type_objet, $id_objet)
 {
+    include_spip('inc/presentation');
     $data = "\n";
     $data .= debut_cadre_relief('../'._DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', true);
     include_spip('public/assembler');
