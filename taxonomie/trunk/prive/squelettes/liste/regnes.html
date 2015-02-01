@@ -32,9 +32,9 @@ Les parametres d'environnement specifiques sont :
 						|image_reduire{20,26}
 						|inserer_attribut{alt, logo})]
 				</td>
-				<td class="titre principale">
+				<td class="titre principale nom_scientifique">
 					<a[ href="(#ID_TAXON|generer_url_entite{taxon})""]>
-						[(#NOM_SCIENTIFIQUE|ucfirst)]
+						[(#NOM_SCIENTIFIQUE)]
 					</a>
 				</td>
 				<td class="titre" scope="col">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}})]</td>

@@ -26,10 +26,10 @@
 	<BOUCLE_liste_taxons(TAXONS){regne?}{rang?}{where?}{recherche?}{tri #ENV{par,nom_scientifique},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="picto">[(#CHEMIN_IMAGE{taxon-16.png}|balise_img)]</td>
-			<td class="titre principale">[(#LOGO_TAXON|image_reduire{20,26})]<a href="[(#ID_TAXON|generer_url_entite{taxon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_TAXON">[(#NOM_SCIENTIFIQUE|ucfirst)]</a></td>
+			<td class="titre principale nom_scientifique">[(#LOGO_TAXON|image_reduire{20,26})]<a href="[(#ID_TAXON|generer_url_entite{taxon})]" title="<:info_numero_abbreviation|attribut_html:> #ID_TAXON">[(#NOM_SCIENTIFIQUE)]</a></td>
 			<td class="nom">[(#NOM_COMMUN|extraire_multi{#LANG, #ARRAY{lang_defaut, aucune}})]</td>
 			<td class="rang">[(#VAL{taxonomie:rang_}|concat{#RANG}|_T)]</td>
-			<td class="regne">[(#REGNE|ucfirst)]</td>
+			<td class="regne nom_scientifique">[(#REGNE)]</td>
 			<td class="numero">#TSN</td>
 			<td class="id">[(#AUTORISER{modifier,taxon,#ID_TAXON}|?{
 				<a href="[(#URL_ECRIRE{taxon_edit,id_taxon=#ID_TAXON})]">#ID_TAXON</a>,

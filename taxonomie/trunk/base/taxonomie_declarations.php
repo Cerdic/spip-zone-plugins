@@ -58,15 +58,16 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 		'principale' => "oui",
 		'field'=> array(
 			"id_taxon"			=> "bigint(21) NOT NULL",
-			"nom_scientifique"	=> "VARCHAR(35) DEFAULT '' NOT NULL",
-			"rang"				=> "VARCHAR(15) DEFAULT '' NOT NULL",
-			"regne"				=> "VARCHAR(10) DEFAULT '' NOT NULL",
+			"nom_scientifique"	=> "varchar(35) DEFAULT '' NOT NULL",
+			"rang"				=> "varchar(15) DEFAULT '' NOT NULL",
+			"regne"				=> "varchar(10) DEFAULT '' NOT NULL",
 			"nom_commun"		=> "text DEFAULT '' NOT NULL",
-			"auteur"			=> "VARCHAR(100) DEFAULT '' NOT NULL",
+			"auteur"			=> "varchar(100) DEFAULT '' NOT NULL",
 			"descriptif"		=> "text DEFAULT '' NOT NULL",
 			"tsn"				=> "bigint(21) NOT NULL",
 			"tsn_parent"		=> "bigint(21) NOT NULL",
 			"sources"			=> "text DEFAULT '' NOT NULL",
+			"statut"			=> "varchar(8) DEFAULT '0' NOT NULL",
 			"maj"				=> "TIMESTAMP"
 		),
 		'key' => array(

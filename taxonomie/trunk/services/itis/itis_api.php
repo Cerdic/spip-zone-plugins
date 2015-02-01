@@ -415,6 +415,9 @@ function itis_list_vernaculars($language_code) {
 	return $vernaculars;
 }
 
+/**
+ * @return string
+ */
 function itis_citation() {
 	$link = '<a href="' . _TAXONOMIE_ITIS_URL_CITATION . '">' . _TAXONOMIE_ITIS_URL_CITATION . '</a>';
 	return _T('taxonomie:citation_itis', array('url' => $link));
