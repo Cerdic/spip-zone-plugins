@@ -28,6 +28,9 @@ function mailshot_taches_generales_cron($taches_generales){
 	if ($config['mailer']=="mailjet")
 		$taches_generales['mailjet_feedback'] = 3400;
 
+        if ( isset($GLOBALS["imap_feedback_username"]) && isset($GLOBALS["imap_feedback_password"]) && $GLOBALS["imap_feedback_hostname"])
+                $taches_generales['imap_feedback'] = 3400;
+        
 	return $taches_generales;
 }
 
