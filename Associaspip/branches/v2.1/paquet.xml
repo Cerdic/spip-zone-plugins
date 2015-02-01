@@ -1,7 +1,7 @@
 <paquet
 	prefix="association"
 	categorie="divers"
-	version="2.1.17"
+	version="2.1.18"
 	etat="stable"
 	compatibilite="[2.1.8;3.0.*]"
 	logo="img_pack/annonce.gif"
@@ -28,5 +28,5 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/association.php" />
 	<pipeline nom="post_edition" inclure="inc/post_edition.php" />
 
-	<utilise nom="agenda" compatibilite="[3.0.1;3.12.99]" />
+	<utilise nom="agenda" compatibilite="[3.0.1;3.99.99]" />
 </paquet>
