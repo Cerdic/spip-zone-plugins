@@ -54,8 +54,9 @@
 				<BOUCLE_aut_ext2(DATA){source tableau, #GET{donnees_auteur}|unserialize}>
 				#SET{valeurs_extras,#GET{valeurs_extras}|push{#VALEUR|sinon{-}}}
 				</BOUCLE_aut_ext2>
-				[(#GET{champs_extras}|count|>{0}|oui)#SET{valeurs_extras,#ARRAY{0,'-'}]
-				<//B_aut_ext2>				
+				<BOUCLE_cextra(DATA){source tableau,#GET{champs_extras}}{si #GET{valeurs_extras}|count|=={0}}>
+					#SET{valeurs_extras,#GET{valeurs_extras}|push{-}}
+				</BOUCLE_cextra>			
 			<//B_participants>
 			<tr>
 				<td>
