@@ -1,54 +1,54 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.spip.net/tradlang_module/prix_objets?lang_cible=en
+// ** ne pas modifier le fichier **
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP nommé  genere le NOW()
-// langue / language = fr
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-// A
-'ajouter' => 'Add',
-'ajouter_prix' => 'Add a price',
 
+	// A
+	'ajouter' => 'Add',
+	'ajouter_prix' => 'Add a price',
 
-// c
-'choisir' => "Select",
-'choix_devises' => "Select a devise",
-'choix_devise' => "Devise",
-'choix_prix' => "The products price",
+	// C
+	'choisir' => 'Select',
+	'choix_devise' => 'Devise',
+	'choix_devises' => 'Select a devise',
+	'choix_prix' => 'The products price',
 
-//D
-'devises_choisis' => "Selected devises",
-'devise_default' => "Default Devise",
+	// D
+	'devise_default' => 'Default Devise',
+	'devises_choisis' => 'Selected devises',
 
-//H
-'htva' => "ex VAT",
+	// H
+	'htva' => 'ex VAT',
 
-//I
-'infos_generales' => "General Informations",
-'infos_produits' => "Information Products",
-'info_prix' => "Price",
+	// I
+	'info_prix' => 'Price',
+	'infos_generales' => 'General Informations',
+	'infos_produits' => 'Information Products',
 
+	// L
+	'label_selection_objet_prix' => 'Add a price on the following objects :',
 
-// p
-'prix_choisis' => "Selected Price",
-'prix_ht' => "Price, ex VAT",
-'prix_devises' => "Price",
-'prix_ttc' => "Price,inc VAT",
+	// P
+	'prix_choisis' => 'Selected Price',
+	'prix_devises' => 'Price',
+	'prix_ht' => 'Price, ex VAT',
+	'prix_ttc' => 'Price,inc VAT',
 
-//R
-'rubrique_prix' => "Sections where prices will be diplayeds",
+	// R
+	'rubrique_prix' => 'Sections where prices will be diplayeds',
 
-//L
-'label_selection_objet_prix'=>'Add a price on the following objects :',
-
-// t
-'taxes' => "Taxes",
-'taxes_defaut' => "Default Taxe",
-'taxes_inclus' => "Taxe included int the price?",
-'taxes_surcharge' => "Apply a different rate (in%)",
-'titre_prix_objets' => "Price",
-'titre_page_configurer_prix_objets_objets' => "Configure Price Objects",
-'ttc' => "inc VAT",
-
-
+	// T
+	'taxes' => 'Taxes',
+	'taxes_defaut' => 'Default Taxe',
+	'taxes_inclus' => 'Taxe included int the price?',
+	'taxes_surcharge' => 'Apply a different rate (in%)',
+	'titre_page_configurer_prix_objets_objets' => 'Configure Price Objects',
+	'titre_prix_objets' => 'Price',
+	'ttc' => 'inc VAT'
 );
+
 ?>
