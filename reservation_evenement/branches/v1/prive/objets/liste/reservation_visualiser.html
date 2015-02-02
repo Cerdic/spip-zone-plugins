@@ -42,13 +42,10 @@
 			</tr>
 		</thead>
 		<tbody>
-	<BOUCLE_evt(RESERVATIONS_DETAILS){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{par id_reservation}{pagination #ENV{nb,10}}>
-		#SET{id_auteur,''}
-		<BOUCLE_res(RESERVATIONS){id_reservation}{tout}>
-		#SET{nom,#NOM} #SET{email,#EMAIL**} #SET{id_auteur,#ID_AUTEUR} #SET{reference,#REFERENCE} #SET{donnees_auteur,#DONNEES_AUTEUR}
-		</BOUCLE_res>
-			#SET{descriptif,#DESCRIPTIF**} #SET{valeurs_extras,#ARRAY}
-			<BOUCLE_participants(AUTEURS){id_auteur=#GET{id_auteur}}{id_auteur!=0}{tout}>
+	<BOUCLE_evt(RESERVATIONS_DETAILS reservations){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}{par #ENV{tri,date}}{inverse #ENV{sens_tri,1}}>
+		#SET{nom,#NOM} #SET{email,#EMAIL**}  #SET{donnees_auteur,#DONNEES_AUTEUR}
+		 #SET{valeurs_extras,#ARRAY}
+			<BOUCLE_participants(AUTEURS){id_auteur}{id_auteur!=0}{tout}>
 				#SET{nom,#NOM} #SET{email,#EMAIL**}
 				<BOUCLE_aut_ext(DATA){source tableau, #GET{champs_extras}}>
 				#SET{valeurs_extras,#GET{valeurs_extras}|push{#ID_AUTEUR|generer_info_entite{auteur,#VALEUR}|sinon{-}}}
@@ -57,10 +54,13 @@
 				<BOUCLE_aut_ext2(DATA){source tableau, #GET{donnees_auteur}|unserialize}>
 				#SET{valeurs_extras,#GET{valeurs_extras}|push{#VALEUR|sinon{-}}}
 				</BOUCLE_aut_ext2>
+				<BOUCLE_cextra(DATA){source tableau,#GET{champs_extras}}{si #GET{valeurs_extras}|count|=={0}}>
+					#SET{valeurs_extras,#GET{valeurs_extras}|push{-}}
+				</BOUCLE_cextra>			
 			<//B_participants>
 			<tr>
 				<td>
-					#GET{reference}
+					#REFERENCE
 				</td>
 				<td>
 					#GET{descriptif}
@@ -69,7 +69,7 @@
 					#STATUT
 				</td>	
 				<td>
-					#MAJ
+					#DATE
 				</td>
 				<td>
 					#GET{nom}
@@ -78,7 +78,7 @@
 					#GET{email}
 				</td>
 				<BOUCLE_champs_extras2(DATA){source tableau,#GET{valeurs_extras}}>
-				<td>#VALEUR</td>
+				<td>[(#VALEUR)]</td>
 				</BOUCLE_champs_extras2>
 				<td>
 					#QUANTITE
