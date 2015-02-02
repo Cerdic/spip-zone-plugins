@@ -1,8 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/declinaisons/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
@@ -10,34 +10,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_titre_parametrages' => 'Paramétrages',
-	'choisir_declinaison' => 'Choisissez une déclinaison pour ce prix', 
-	'choix_produit' => 'Choisissez un produit', 	   
+	'choisir_declinaison' => 'Choisissez une déclinaison pour ce prix',
+	'choix_produit' => 'Choisissez un produit',
+
+	// D
+	'declinaisons_titre' => 'Déclinaisons Produit',
 
 	// I
 	'icone_creer_declinaison' => 'Créer une déclinaison',
 	'icone_modifier_declinaison' => 'Modifier cette déclinaison',
 	'info_1_declinaison' => 'Une déclinaison',
-	'info_1_prix' => 'Un prix attaché',    
+	'info_1_prix' => 'Un prix attaché',
 	'info_aucun_declinaison' => 'Aucune déclinaison',
 	'info_declinaisons_auteur' => 'Les déclinaisons de cet auteur',
 	'info_nb_declinaisons' => '@nb@ déclinaisons',
 	'info_nb_prix' => '@nb@ prix attachés',
-	
+
 	// L
 	'label_descriptif' => 'Descriptif',
 	'label_id_parent' => 'Déclinaison parente',
 	'label_titre' => 'Titre',
 
-
-	// R
+	// P
 	'produits' => 'Produits',
 
 	// R
 	'retirer_lien_declinaison' => 'Retirer cette déclinaison',
 	'retirer_tous_liens_declinaisons' => 'Retirer toutes les déclinaisons',
-	
-	// S
-	'declinaisons_titre' => 'Déclinaisons Produit',
 
 	// T
 	'texte_ajouter_declinaison' => 'Ajouter une déclinaison',
@@ -48,8 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_declinaisons_rubrique' => 'Déclinaisons de la rubrique',
 	'titre_langue_declinaison' => 'Langue de cette déclinaison',
 	'titre_logo_declinaison' => 'Logo de cette déclinaison',
-	'titre_page_configurer_declinaisons' => 'Configuration Déclinaisons',
-
+	'titre_page_configurer_declinaisons' => 'Configuration Déclinaisons'
 );
 
 ?>
