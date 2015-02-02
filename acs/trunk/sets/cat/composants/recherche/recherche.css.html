@@ -26,8 +26,8 @@
   color: #VAR{acsFondText,#00008f};[
   background: (#VAR{acsRechercheInput});]
   margin: 4px;
-  width: 95%; // fallback pour vieux browsers qui savent pas calc ! ;-) 
-  width: calc(100% - 30px); // provisoire, on peut recuperer la taille plus marges du bouton submit 
+  width: 70%; // fallback pour vieux browsers qui savent pas calc ! ;-) 
+  width: calc(100% - 46px); // la taille plus marges du bouton submit
 }
 
 .cRecherche .formulaire_recherche label {
@@ -43,6 +43,7 @@
 
 [(#REM) submit]
 .cRecherche .formulaire_recherche input.submit {
+  vertical-align: middle;
   margin:3px;
   padding: 3px;
   border: thin solid #VAR{acsRechercheFond, transparent};[

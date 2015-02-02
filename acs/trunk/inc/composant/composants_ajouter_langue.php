@@ -3,8 +3,10 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2012
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 require_once _DIR_ACS.'inc/composant/composants_liste.php';
 
@@ -74,18 +76,18 @@ function acs_langue($lang) {
   // Lang file is build with components lang files
   if (_DIR_RESTREINT != '') {
     if (_request('action') == 'crayons_html') { // On ajoute les traductions pour les crayons
-      acs_addLang('lang/acs_variables_'.$lang);
+      acs_addLang('lang/acs-variables_'.$lang);
       composants_ajouter_langue('ecrire');
     }
-  	acs_addLang('lang/acs_upload_'.$lang);
+  	acs_addLang('lang/acs-upload_'.$lang);
     // Ajoute les fichiers de langue des composants (partie publique)
   	composants_ajouter_langue();
   }
   else {
   	// Traductions de l'espace ecrire d'ACS
-  	acs_addLang('lang/acs_ecrire_'.$lang);
+  	acs_addLang('lang/acs-ecrire_'.$lang);
   	// Traductions génériques inclues dans ACS
-    acs_addLang('lang/acs_variables_'.$lang);
+    acs_addLang('lang/acs-variables_'.$lang);
     // Traductions des composants
     composants_ajouter_langue('ecrire');
   }

@@ -1,12 +1,13 @@
 <BOUCLE_site(SYNDICATION){id_syndic}{unique}>
-  [(#LOGO_SITE|left)]
-  <h1 class="#EDIT{nom_site} titre" style="clear:both;"><a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">#NOM_SITE</a></h1>
-  [<p class="#EDIT{url_site} soustitre"><a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">(#URL_SITE)</a></p>]
-  [<div class="texte #EDIT{descriptif}">(#DESCRIPTIF|justifier)</div>]
-  [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
-  
+  <div class="entete">[(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})
+    [(#LOGO_SITE|image_reduire{#VAR{acsArticleLogoTailleMax,150}})]
+  ]
+    <h1 class="#EDIT{nom_site} titre" style="clear:both;"><a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">#NOM_SITE</a></h1>
+    [<p class="#EDIT{url_site} soustitre"><a href="#URL_SITE" title="[(#DESCRIPTIF|textebrut)]" class="spip_out" target="_new">(#URL_SITE)</a></p>]
+  </div>
+  [<div class="texte #EDIT{descriptif}">(#DESCRIPTIF)</div>][
+  <div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]  
   <INCLURE{fond=composants/articles/boucle-articles_site}{ajax}{env}{self}{id_syndic}>
-  <hr />
   [(#REM) Forum du site TODO : le refaire fonctionner, et décommenter ça !!! (spip va chercher une table syndics) grr ...]
-  [<a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="nav" style="float: #LANG_RIGHT"><a href="#SELF&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=inc-forum}{env=#ENV}{id_syndic}{ouvrir=#OUVRIR}{debut_forums}>]
+  [<hr /><a href="#forum" name="forum" id="forum"></a><h2 class="forum-repondre"><span class="nav" style="float: #LANG_RIGHT"><a href="#SELF&ouvrir=oui"><small><:lire_tous_les_messages:></small></a></span><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:><small><i>(<:repondre_article_notice:>)</i></small></a><INCLURE{fond=inc-forum}{env=#ENV}{id_syndic}{ouvrir=#OUVRIR}{debut_forums}>]
 </BOUCLE_site>

@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/acs_load_vars');
 
 /**
@@ -15,6 +17,9 @@ include_spip('inc/acs_load_vars');
  */
 function acs_restaurer($fichier) {
 	$file = _DIR_DUMP.'acs/'.basename($fichier); // securite
+	if (!is_file($file)) { // Ultime securite
+		return array('message_erreur' => _T('acs:err_fichier_absent', array('file' => joli_repertoire($file))));
+	}
 	$admins = $GLOBALS['meta']['ACS_ADMINS'];
 	acs_reset_vars();
 	ecrire_meta('ACS_ADMINS', $admins);

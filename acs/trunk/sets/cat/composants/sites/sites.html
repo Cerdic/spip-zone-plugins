@@ -3,7 +3,7 @@
 Liste des sites syndiqués ou affichage d'un site
 
 ]
-<div class=#PINCEAU{sites}>[
-(#ID_SYNDIC|!={''}|?{' '})<INCLURE{fond=composants/sites/inc-site}{id_syndic}>][
-(#ID_SYNDIC|=={''}|?{' '})<INCLURE{fond=composants/sites/inc-sites}>]
+<div class="#PINCEAU{sites}">[
+(#ID_SYNDIC|!={''}|?{' '})<INCLURE{fond=composants/sites/inc-site}{id_syndic}{env}>][
+(#ID_SYNDIC|=={''}|?{' '})<INCLURE{fond=composants/sites/inc-sites}{env}>]
 </div>

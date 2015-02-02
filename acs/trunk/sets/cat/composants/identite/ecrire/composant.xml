@@ -3,7 +3,7 @@
   <nom>Identite</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>0.9.0</version>
+  <version>1.0.0</version>
   <necessite id='acs' version='[0.8.9;]' />
   <group>content</group>
 
@@ -28,6 +28,18 @@
     <type>img</type>
     <chemin>trame</chemin>
     <label>non</label>
+  </variable>
+  <variable>
+    <nom>TitreSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>TitreLink</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreLinkHover</nom>
+    <type>color</type>
   </variable>
   <variable>
     <nom>Fond</nom>

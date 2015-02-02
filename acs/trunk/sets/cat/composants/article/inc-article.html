@@ -14,10 +14,8 @@ id_article: id de l'article
     [<div class="cArticle" dir="#LANG_DIR">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]
   ]
 <BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>
-  <div class="cArticle">[(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})
-    [(#LOGO_ARTICLE|right|image_reduire{#VAR{acsArticleLogoTailleMax,100}})]
-  ][(#ENV{id_version}|?{""," "})
-  <div class="entete">    
+  <div class="cArticle">[(#ENV{id_version}|?{""," "})
+  <div class="entete">
     <span class="infos_article nav nsize">[
       (#MODELE{article_traductions})][
       (#VAR{acsArticleDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})][
@@ -28,7 +26,7 @@ id_article: id de l'article
     <h1 class="#EDIT{titre} titre tsize">[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''}) ][(#TITRE|supprimer_numero)]</h1>
     [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE|safehtml)</p>]
     #FIN_SURLIGNE
-    <div class="nettoyeur" ></div>
+    <div class="nettoyeur" ></div>[(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})[(#LOGO_ARTICLE|image_reduire{#VAR{acsArticleLogoTailleMax,100}})]]
   </div>
 
   <div class="article">

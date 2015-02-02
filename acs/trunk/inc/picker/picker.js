@@ -11,7 +11,7 @@ function TFilePicker() {
 
 function TFPopup(field, file, dir, root_directory) {
 	this.field = field;
-	var w = 350, h = 380,
+	var w = 800, h = 380,
 	move = screen ? ',left=' + ((screen.width - w) >> 1) + ',top=' + ((screen.height - h) >> 1) : '',
   o_fileWindow = window.open(root_directory + '?action=filepickerwrapper&file='+file+'&dir='+dir,null,"help=no,status=no,scrollbars=yes,resizable=no" + move + ",width=" + w + ",height=" + h + ",dependent=yes",true);
 	o_fileWindow.opener = window;

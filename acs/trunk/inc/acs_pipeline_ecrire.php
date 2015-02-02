@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Permet d'afficher l'interface d'admin d'ACS dans toutes les langues disponibles pour spip.
 //$GLOBALS['meta']['langues_proposees'] = $GLOBALS['meta']['langues_multilingue'];
 

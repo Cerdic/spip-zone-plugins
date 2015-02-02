@@ -7,6 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/acs_sauvegarder');
 
 /**

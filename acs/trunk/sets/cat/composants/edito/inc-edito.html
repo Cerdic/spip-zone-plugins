@@ -1,28 +1,30 @@
-[(#SET{acsEditoKeyword,#VAR{#EVAL{'acsEdito'.'#NIC'.'Key/Key'},<:acs:edito_keyword:>}})]
-<BOUCLE_decompte_edito(ARTICLES){titre_mot=#GET{acsEditoKeyword}}{lang=#LANG}></BOUCLE_decompte_edito>
-#SET{edito_total,#TOTAL_BOUCLE}
-<//B_decompte_edito>
+[(#CACHE{1800})][(#REM)
+
+Noisette appelee en ajax : à mettre en cache (30 minutes).
+
+][(#SET{acsEditoKeyword,#VAR{#EVAL{'acsEdito'.'#NIC'.'Key/Key'},<:acs:edito_keyword:>}})]
+<BOUCLE_decompte_edito(ARTICLES){titre_mot=#GET{acsEditoKeyword}}{lang=#LANG}></BOUCLE_decompte_edito>#SET{edito_total,#TOTAL_BOUCLE}<//B_decompte_edito>
 <B_edito>
 <fieldset class="cEdito">
   [(#VAR{acsEditoLegend}|=={oui}|?{' '}) <legend>&nbsp;<:acs:edito_edito:>&nbsp;</legend>]
   [(#ENV{debut_articles}|?{'',' '})]
     <BOUCLE_edito(ARTICLES) {par date}{inverse}{titre_mot=#GET{acsEditoKeyword}}{#ENV{edito_debut,0},1}{lang=#LANG}>
-      [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|left||image_reduire{100,100})</a>]
-      <span class="navigation nsize screen_only"[ style="border-color:#(#GET{couleur})"]>
-      <img src="#ACS_CHEMIN{edito/pause.gif}" title="<:acs:edito_pause:>" alt="||" />
-      [(#ENV{edito_debut,0}|>{0}|?{' '})<a id="edito_precedent" href="?edito_debut=[(#EVAL{#ENV{edito_debut,0}-1})]" class="ajax"><img src="#ACS_CHEMIN{edito/gauche.gif}" title="<:acs:edito_precedent:>" alt="&larr;" /></a>]
-      [(#ENV{edito_debut,0}|=={0}|?{' '})<img src="#ACS_CHEMIN{edito/gauche_off.gif}" title="<:acs:edito_precedent:>" alt="&larr;" />]
-      [(#ENV{edito_debut,0}|<{#GET{edito_total}|moins{1}}|?{' '})<a id="edito_suivant" href="?edito_debut=#EVAL{#ENV{edito_debut,0}+1}" class="ajax"><img src="#ACS_CHEMIN{edito/droit.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" /></a>]
-      [(#ENV{edito_debut,0}|>={#GET{edito_total}|moins{1}}|?{' '})<img src="#ACS_CHEMIN{edito/droit_off.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" />]
-      [(#ENV{edito_debut,0}|plus{1})]/#GET{edito_total}
-      </span>
+      [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|left||image_reduire{100,100})</a>][(#GET{edito_total}|>{1}|oui)
+      <span class="navigation nsize screen_only"><img id="btnPause_Edito" src="#ACS_CHEMIN{edito/pause.gif}" title="<:acs:edito_pause:>" alt="||" />[
+      (#ENV{edito_debut,0}|>{0}|?{' '})<a id="edito_precedent" href="?edito_debut=[(#EVAL{#ENV{edito_debut,0}-1})]" class="ajax"><img src="#ACS_CHEMIN{edito/gauche.gif}" title="<:acs:edito_precedent:>" alt="&larr;" /></a>][
+      (#ENV{edito_debut,0}|=={0}|?{' '})<img src="#ACS_CHEMIN{edito/gauche_off.gif}" title="<:acs:edito_precedent:>" alt="&larr;" />][
+      (#ENV{edito_debut,0}|<{#GET{edito_total}|moins{1}}|?{' '})<a id="edito_suivant" href="?edito_debut=#EVAL{#ENV{edito_debut,0}+1}" class="ajax"><img src="#ACS_CHEMIN{edito/droit.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" /></a>][
+      (#ENV{edito_debut,0}|>={#GET{edito_total}|moins{1}}|?{' '})<img src="#ACS_CHEMIN{edito/droit_off.gif}" title="<:acs:edito_suivant:>" alt="&rarr;" />][
+      (#ENV{edito_debut,0}|plus{1})]/#GET{edito_total}
+      </span>]
+      #SET{afficher_titres,^[_].*}[(#REM) : on masque la titraille si le titre commence par "_"][(#TITRE|match{#GET{afficher_titres}}|non) 
       [<p class="#EDIT{surtitre} surtitre stsize">(#SURTITRE)</p>]
       <p class="#EDIT{titre} titre tsize"><a href="#URL_ARTICLE">#TITRE</a></p>
-      [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE)</p>]
-      <small class="infos_article nsize">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
-      [<br /><div class="#EDIT{chapo} chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
-      [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#VAR{acsFondImgMax,600}}|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div><br />]
-      <BOUCLE_mot(MOTS) {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT" class="screen_only"><img src="#ACS_CHEMIN{triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
+      [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE)</p>]]
+      [(#VAR{acsEditoAlignInfosArticle}!={non}|oui)<small class="infos_article nsize">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>]
+      [<div class="#EDIT{chapo} chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
+      [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#VAR{acsFondImgMax,600}}|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
+      [(#VAR{acsEditoLienPrecedents}!={non}|oui)[(#INCLURE{fond=composants/edito/inc-edito_lien_page_mot}{titre=#GET{acsEditoKeyword}})]]
     </BOUCLE_edito>
 </fieldset>
 [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]

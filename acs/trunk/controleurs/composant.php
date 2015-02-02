@@ -1,4 +1,13 @@
 <?php
+#              ACS
+#          (Plugin Spip)
+#     http://acs.geomaticien.org
+#
+# Copyright Daniel FAIVRE, 2007-2015
+# Copyleft: licence GPL - Cf. LICENCES.txt
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Réaffiche le composant à crayonner, avec son éditeur
  * Le crayon peut passer un id d'article, de rubrique, de mot-clé, ou de groupe 

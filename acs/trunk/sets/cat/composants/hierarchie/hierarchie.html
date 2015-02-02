@@ -6,8 +6,7 @@ Hierarchie des pages (arborescence)
 (#ENV{page}|!={sommaire}|?{<a href="#URL_SITE_SPIP/"><:accueil_site:></a>,<:accueil_site:>})][
 (#ID_ARTICLE|!={''}|?{' '})[(#INCLURE{fond=composants/hierarchie/inc-hierarchie_article}{env}{self})]][
 (#ID_RUBRIQUE|!={''}|?{' '})[(#INCLURE{fond=composants/hierarchie/inc-hierarchie_rubrique}{env}{self})]][
-(#ID_AUTEUR|!={''}|?{' '})[(#INCLURE{fond=composants/hierarchie/inc-hierarchie-auteur}{env}{self})]][
-(#ID_MOT|!={''}|?{' '})[(#INCLURE{fond=composants/hierarchie/inc-hierarchie-mot}{env}{self})]][
-(#ENV{page}|=={recherche}|?{&gt; <:info_rechercher:>[ &gt; (#RECHERCHE)],[(#ENV{page}|?{' '})[
-(#ENV{page}|!={sommaire}|?{' '}) &gt; #EVAL{_T("acs:fond_meta_page_".#ENV{page})}]]})
+(#ID_AUTEUR|!={''}|?{' '})[(#INCLURE{fond=composants/hierarchie/inc-hierarchie_auteur}{env}{self})]][
+(#ID_MOT|!={''}|?{' '})[(#INCLURE{fond=composants/hierarchie/inc-hierarchie_mot}{env}{self})]][
+(#ENV{page}|=={recherche}|?{[&gt; <:info_rechercher:> &gt; (#RECHERCHE)]})
 ]</span>

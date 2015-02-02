@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2012
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Affiche une liste contextuelle des composants - Onglet composants
  * avec un filtrage par groupes de composants

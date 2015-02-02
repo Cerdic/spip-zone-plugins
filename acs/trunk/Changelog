@@ -1,5 +1,11 @@
-Suivi des principales révisions - Version ACS actuelle : 3.0.4
+Suivi des principales révisions - Version ACS actuelle : 3.0.5
 
+- separation des modeles ACS et des modeles du set Cat
+- securisation de tout le php inclus.
+- variables de couleurs de texte et de lien pour certains titres de composants (Articles, Encart, Identite), héritées par Rubrique, Sites, ...
+- nombreuses petites améliorations de composants.
+
+ACS version 3.0.4
 - passage du plugin en test.
 - validation HTML 5 (pas finie)
 - suppression des anciennes actions (dossier action) devenues inutiles avec SPIP 3.

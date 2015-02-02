@@ -7,6 +7,7 @@
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/acs_restaurer');
 
 /**
@@ -35,6 +36,7 @@ function formulaires_f_restaurer_acs_verifier_dist(){
  */
 function formulaires_f_restaurer_acs_traiter_dist(){
 	$fichier = _request('fichier');
+	// On refait des tests secu dans la fonction acs_restaurer(), pas ici. 
 	return acs_restaurer($fichier);
 }
 ?>

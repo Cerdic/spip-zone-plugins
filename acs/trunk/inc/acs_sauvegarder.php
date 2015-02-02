@@ -5,6 +5,9 @@
 #
 # Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Retourne le nom par défaut du fichier de sauvegarde
  * @return string filename

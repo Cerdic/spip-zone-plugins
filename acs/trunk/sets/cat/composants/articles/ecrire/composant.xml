@@ -3,9 +3,9 @@
   <nom>Articles</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>0.8.9</version>
+  <version>1.0.0</version>
 	<necessite id='acs' version='[0.8.8;]' />
-  <necessite_composant set='cat' nom='articles' compatibilite='[0.8.9;]' />
+  <necessite_composant set='cat' nom='fond' compatibilite='[0.8.9;]' />
 
   <group>content</group>
 
@@ -25,9 +25,49 @@
     <label>non</label>
   </variable>
   <variable>
+    <nom>TitreSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>TitreText</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreLink</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreLinkHover</nom>
+    <type>color</type>
+  </variable>
+
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
+  <variable>
+    <nom>BordRond</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>ShadowBlur</nom>
+    <type>text</type>
+  </variable>
+
   <variable>
     <nom>MargeBas</nom>
     <type>text</type>

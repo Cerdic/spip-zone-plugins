@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2008
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Retourne une traduction du composant $c
  */

@@ -1,2 +1,2 @@
-<BOUCLE_rub(RUBRIQUES){id_rubrique}><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[(#ID_SYNDIC|!={''}|?{' '})<a href="#URL_RUBRIQUE">][ &gt; (#TITRE|supprimer_numero|couper{80})][(#ID_SYNDIC|!={''}|?{' '})</a>]
-[(#ID_SYNDIC|!={''}|?{' '})<INCLURE{fond=composants/hierarchie/inc-hierarchie_site}{env}{self}>]</BOUCLE_rub>
+[(#CACHE{0})]<BOUCLE_rub(RUBRIQUES){id_rubrique}><BOUCLE_ariane(HIERARCHIE){id_rubrique}>[ &gt; <a href="#URL_RUBRIQUE">(#TITRE|supprimer_numero|couper{80})</a>]</BOUCLE_ariane>
+[(#ID_SYNDIC|!={''}|?{' '})[(#INCLURE{fond=composants/hierarchie/inc-hierarchie_site}{env}{self}{titre=#TITRE}{url=#URL_RUBRIQUE})]]</BOUCLE_rub>

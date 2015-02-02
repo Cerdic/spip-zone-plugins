@@ -4,7 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 /* Mots qui ne doivent pas être inclus dans le tag meta keywords. Le ? est précédé d'un \, car il s'agit d'un caractère spécial dans les expressions régulières */
-'meta_not_keywords' => 'une,un,les,le,la,du,des,de,mon,mes,ma,par,pour,ton,tes,ta,son,ses,sa,et,ou,à,au,d\',l\',\?',
+'meta_not_keywords' => 'une,un,les,le,la,du,des,de,mon,mes,ma,par,pour,ton,tes,ta,son,ses,sa,et,ou,à,au,\?,\*,\+,\-',
 
 /* meta tags (dépend du jeu de composants associés - depend on associated compônents set) */
 'meta_keywords' => 'ACS,assistant,configuration,site,spip,cms',

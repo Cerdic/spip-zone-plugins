@@ -3,14 +3,14 @@
   <nom>Recherche</nom>
 
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.8</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
+  <version>1.0.0</version>
   <necessite id='acs' version='[0.8.8;]' />
   <group>nav</group>
 
   <param>
     <nom>preview</nom>
-    <valeur>68</valeur>
+    <valeur>100</valeur>
   </param>
 
   <variable>

@@ -1,34 +1,46 @@
 [(#CACHE{0})][(#REM)
 
 Listes d'articles et extraits introductifs
-Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
+Styles héritables, utilisés par les pages sommaire, recherche, resume, plan, sites ...
 
-].liste-articles li {
-  border-top: #VAR{acsArticlesBord/Width,thin}[ (#VAR{acsArticlesBord/Style,dotted})][ (#VAR{acsArticlesBord/Color,#VAR{acsOngletsBord/Color}})];
-  [margin-bottom: (#VAR{acsArticlesMargeBas})px;]
-  margin-right: 1px;
+].liste-articles li {[
+  margin-bottom: (#VAR{acsArticlesMargeBas})px;][
+  background : (#VAR{acsArticlesFond});][
+  border-width: (#VAR{acsArticlesBord/Width});][
+  border-style: (#VAR{acsArticlesBord/Style});][
+  border-color: (#VAR{acsArticlesBord/Color});][
+  (#MODELE{c_css_border-radius}{c=Articles})][
+  (#MODELE{c_css_shadow}{c=Articles})]
 }
-
 .liste-articles .entete, .plan-secteur h1 {
   [background-color: (#VAR{acsArticlesTitreFond});]
   [background: url('(#ACS_CHEMIN{trame/#VAR{acsArticlesTitreFondImage}})') repeat top left;]
  }
-
 .liste-articles .entete {
   clear: both;
   float: #LANG_LEFT;
   text-align: #LANG_LEFT;
   width: 100%;
 }
-
+.liste-articles .entete .titres {
+  padding: 2px;[
+  color: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreText'}});]
+}[
+.liste-articles .entete a:link, .liste-articles .entete a:visited {
+  color: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreLink'}});
+}][
+.liste-articles .entete a:hover {
+  color: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreLinkHover'}});
+}][
+.liste-articles .entete .titre {
+  font-size: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreSize'}});
+}]
 * html .liste-articles .entete { /* IE */
   margin-right: 3px;
   position: relative;
   z-index: 2;
 }
-
 .liste-articles li p { margin: 0; padding: 0; padding-left: 5px; }
-
 .liste-articles .nav {
   float: #LANG_RIGHT;
 }
@@ -37,24 +49,21 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
   padding-right: 5px;
   font-weight: bold;
 }
-
 .liste-articles li .titre {
   font-weight: bold;
 }
-
 .liste-articles li .spip_logos {
-  float: #LANG_LEFT;
+  float: #LANG_RIGHT;
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 2px;
 }
-
 .liste-articles li .enclosures {
   float: #LANG_RIGHT;
   text-align: #LANG_RIGHT;
   max-width: 60%;
-  margin: 0; }
-
+  margin: 0;
+}
 .liste-articles li .texte, .liste-articles li .extrait {
   padding: 0.1em;
   padding-left: 5px;
@@ -62,18 +71,12 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
   margin-top: 2px;
   margin-bottom: 0.1em;
   text-align: justify;
-  display: inline-block;  /* IE */
 }
-
 .liste-articles .infos_article, .liste-articles .nav, .liste-articles .pagination {
   margin: 0;
   margin-left: 5px;
   margin-right: 5px;
 }
-
 .liste-articles .infos_article, .liste-articles .nav {
   float: #LANG_RIGHT;
-}
-.liste-articles .pagination {
-  float: #LANG_LEFT;
 }

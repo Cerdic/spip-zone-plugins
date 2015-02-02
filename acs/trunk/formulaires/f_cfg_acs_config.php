@@ -6,6 +6,9 @@
 # Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 #
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Traitement post du formulaire formulaires/f_cfg_acs_config.html
  * @return array

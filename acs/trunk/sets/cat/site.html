@@ -5,14 +5,19 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2009
+Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page site - affiche un site de l'annuaire de liens geres par SPIP et ses articles syndiques
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]<BOUCLE_site(SYNDICATION) {id_syndic} {unique}>
-<BOUCLE_lang(RUBRIQUES){id_rubrique}>[(#SET{lang,#LANG})][(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". 
-]<INCLURE{fond=composants/fond/entete}{self}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{id_syndic}>
+]<BOUCLE_site(SYNDICATION) {id_syndic} {unique}>[
+(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
+(#SET{mtitre,[(#NOM_SITE|textebrut) - ]<:site:>})][
+(#SET{mdescription,[(#DESCRIPTIF|coupe{500,...}|textebrut)]})][
+(#SET{mkeywords,#DESCRIPTIF|coupe{200,...}|askeywords})
+]<BOUCLE_lang(RUBRIQUES){id_rubrique}>[(#SET{lang,#LANG})][
+(#REM) Les sites n'ont pas de "lang" a proprement parler ; on se base donc sur la langue de la rubrique qui les contient. Les articles syndiques, eux, ont une "lang". 
+]<INCLURE{fond=composants/fond/entete}{self}{title=#GET{mtitre}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{id_syndic}>
 <INCLURE{fond=composants/cadre/cadre}{self}{env}{nic=2130}{id_syndic}{id_rubrique}>
 <INCLURE{fond=composants/fond/pied}{self}{id_syndic}>
 </BOUCLE_lang>

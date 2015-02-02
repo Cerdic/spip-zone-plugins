@@ -10,6 +10,6 @@
   [(#MODELE{c_css_border-radius}{r=15px})]
 
 ]#SET{arrondi,#VAR{acs#ENV{c}#ENV{nic}#ENV{var},#ENV{r,5px}}}[
-  border-radius: (#GET{arrondi});][(#ENV{sauf}|match{(bottom|top)}|?{" "})
-  border-[(#ENV{sauf})]-left-radius: 0;
-  border-[(#ENV{sauf})]-right-radius: 0;]
+  border-radius: (#GET{arrondi});][(#ENV{sauf}|match{(bottom|top)}|?{" "})[
+  border-(#ENV{sauf})-left-radius: 0;][
+  border-(#ENV{sauf})-right-radius: 0;]]

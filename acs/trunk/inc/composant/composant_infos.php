@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Retourne les composants et les pages du squelette qui utilisent l'instance $nic du composant $c
  * @param string $c : classe de composant

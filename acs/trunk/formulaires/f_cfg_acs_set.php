@@ -6,17 +6,20 @@
 # Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Lit la liste des jeux de composants ACS
  * @return array
  */
 function list_sets(){
 	$squelettes = array();
+	$plugin = 'acs';
 	$dir_sets = _DIR_PLUGIN_ACS.'sets';
 	if ($d = @opendir($dir_sets)) {
 		while (false !== ($file = @readdir($d))) {
 			if ($file != "." && $file != ".." && substr($file, 0, 1) != '.' && @is_dir($dir_sets.'/'.$file)) {
-				$squelettes[] = array('set' => $file);
+				$squelettes[] = array('plugin' => $plugin, 'set' => $file);
 			}
 		}
 		closedir($d);

@@ -14,6 +14,7 @@ parametre : url d'action ][(#ACTION_FORMULAIRE{#ENV{action}})]
     <thead>
       <tr class="first_row">
         <th></th>
+        <th><:svp:titre_plugin:></th>
         <th><:acs:set:></th>
         <th>description (todo)</th>
       </tr>
@@ -22,6 +23,8 @@ parametre : url d'action ][(#ACTION_FORMULAIRE{#ENV{action}})]
       <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
         <td><input type='radio' name="acsSet" value="#VALEUR{set}" id="set_#COMPTEUR_BOUCLE"
                   [(#VAR{acsSet}|=={#VALEUR{set}}|oui)checked="checked"]>
+        </td>
+        <td>#VALEUR{plugin}
         </td>
         <td>
           <label for="set_#COMPTEUR_BOUCLE" title="#VALEUR{set}">#VALEUR{set}</label>

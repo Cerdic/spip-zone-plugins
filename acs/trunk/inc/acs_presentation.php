@@ -11,6 +11,8 @@
 // Simplifie le suivi des versions de spip, et assure la compatibilité depuis 1.9.2
 // au niveau de l'affichage de l'espace ecrire
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/presentation');
 
 function acs_commencer_page($titre = "", $rubrique = "configuration", $sous_rubrique = "acs") {

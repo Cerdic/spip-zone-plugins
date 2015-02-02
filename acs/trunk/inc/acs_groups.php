@@ -3,8 +3,10 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Retourne un tableau des groupes d'admins

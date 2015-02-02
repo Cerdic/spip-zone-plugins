@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2009
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function controleurs_source_dist($regs) {
   global $spip_lang;
   

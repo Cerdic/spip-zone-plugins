@@ -9,9 +9,10 @@
 
 #banniere .logo {
   position: absolute;
-  border: 0;
+  border: 0;[
+  margin: (#VAR{acsBanniereMarge});][
+  (#VAR{acsBanniereLogoAlign,left}|=={left}|?{left: 0,right: 0});]
   top: 0;
-  [(#VAR{acsBanniereLogoAlign,left}|=={left}|?{left: 0,right: 0});]
 }
 
 #banniere .bantab {

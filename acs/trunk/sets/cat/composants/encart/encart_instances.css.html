@@ -16,8 +16,17 @@
 }
 .cEncart#NIC .entete .spip_logos {
   float:#VAR{acsArticleLogoAlign,left};
-}
-[.cEncart#NIC .entete .titre {
+}[
+.cEncart#NIC .entete .surtitre, .cEncart#NIC .entete .titre, .cEncart#NIC .entete .soustitre {
+  color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreText'}});
+}][
+.cEncart#NIC .entete a:link, .cEncart#NIC .entete a:visited {
+  color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreLink'}});
+}][
+.cEncart#NIC .entete a:hover {
+  color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreLinkHover'}});
+}][
+.cEncart#NIC .entete .titre {
   font-size: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreSize'}});
 }]
 [.cEncartClass .entete_rub .soulignement {

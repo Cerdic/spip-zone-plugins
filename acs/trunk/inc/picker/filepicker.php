@@ -6,6 +6,9 @@
 # Copyright Daniel FAIVRE, 2007-2015
 # Copyleft: licence GPL - Cf. LICENCES.txt
 #
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * A filepicker
  */
@@ -50,7 +53,7 @@ else {
 echo '<html><head><title>'._T('choix_image').'</title>
 <link rel="stylesheet" type="text/css" href="?page=style_prive.css" />
 <link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ACS.'inc/picker/filepicker.css" />
-</head><body>
+</head><body class="filepicker">
 <script 	language="JavaScript">
 var P = opener.TFP;
 P.draw(window, document);

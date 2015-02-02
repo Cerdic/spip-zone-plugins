@@ -3,8 +3,8 @@
   <nom>Banniere</nom>
 
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.8</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
+  <version>1.0.0</version>
   <necessite id='acs' version='[0.8.8;]' />
   <group>nav</group>
 
@@ -80,6 +80,7 @@
     <type>text</type>
     <valeur>60px</valeur>
   </variable>
+
   <variable>
     <nom>Logo</nom>
     <type>choix</type>
@@ -94,6 +95,11 @@
     <option>right</option>
     <valeur>left</valeur>
   </variable>
+  <variable>
+    <nom>Marge</nom>
+    <type>text</type>
+  </variable>
+
   <variable>
     <nom>TextColor</nom>
     <type>color</type>
