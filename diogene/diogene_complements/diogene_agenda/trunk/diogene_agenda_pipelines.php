@@ -241,6 +241,10 @@ function diogene_agenda_diogene_champs_pre_edition($array){
 }
 
 function diogene_agenda_insert_head_css($flux){
+	$css_theme = find_in_path('css/jquery.ui.theme.css');
+	$flux .= '<link rel="stylesheet" href="'.direction_css($css_theme).'" type="text/css" media="all" />';
+	$css_datepicker = find_in_path('css/jquery.ui.datepicker.css');
+	$flux .= '<link rel="stylesheet" href="'.direction_css($css_datepicker).'" type="text/css" media="all" />';
 	$flux .= '<link rel="stylesheet" href="'.direction_css(find_in_path('css/diogene_agenda.css')).'" type="text/css" media="all" />';
 	return $flux;
 }
