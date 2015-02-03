@@ -1,0 +1,35 @@
+<h1><:lister_fonctions:titre_page_fonctions_utilisateur:></h1>
+[(#SET{prefixe,#ARRAY})]
+<B_fonctions>
+<div class="liste-objets fonctions">
+    [<h3>(#ENV{titre})</h3>]
+
+    <table class="spip liste">
+        [<caption><strong class="caption">[(#ENV{prefixe,''})&nbsp;: ](#GRAND_TOTAL|singulier_ou_pluriel{lister_fonctions:une_fonction,lister_fonctions:des_fonctions})</strong></caption>]
+        <thead>
+            <tr class="first_row">
+                <th class="fonction principale"><:lister_fonctions:info_fonction:></th>
+                <th class="filename secondaire"><:lister_fonctions:info_filename:></th>
+                <th class="surcharge secondaire"><:lister_fonctions:info_surchargeable:></th>
+            </tr>
+        </thead>
+        <tbody>
+        <BOUCLE_fonctions (DATA) {source table, (#ENV{prefixe,''}|lister_fonctions)}>[(#SET{prefixe,[(#GET{prefixe}|push{#CLE})]})]
+            <BOUCLE_prefixe (DATA) {source table, #VALEUR} {si #VALEUR|is_array}>
+            #INCLURE{fond=prive/squelettes/inclure/fonction_info_ligne,fonction=#VALEUR,class='',prefixe=(#_fonctions:CLE|unique)}
+            </BOUCLE_prefixe>
+            </B_prefixe>
+            #INCLURE{fond=prive/squelettes/inclure/fonction_info_ligne,fonction=#VALEUR,class='',prefixe=(#ENV{prefixe,''}|unique),env}
+            <//B_prefixe>
+        </BOUCLE_fonctions>
+        </tbody>
+    </table>
+</div>
+    <B_prefixes>
+    <ul>
+    <BOUCLE_prefixes (DATA) {source table, (#GET{prefixe}|array_unique)}>
+    <li>#VALEUR</li></BOUCLE_prefixes>
+    </ul>
+    </B_prefixes>
+</B_fonctions>
+

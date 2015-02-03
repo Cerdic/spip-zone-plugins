@@ -1,0 +1,8 @@
+[<tr class="prefixe">
+    <td colspan="3"><h3>(#ENV{prefixe})</h3></td>
+</tr>]
+<tr class="[(#ENV{class})]">
+    <td class="fonction principale">[(#ENV{fonction}|replace{'_','_<wbr/>'})] [(#ENV{fonction}|fonction_fichier|match{'/plugins/'}|non)<a href="http://code.spip.net/@#ENV{fonction}" target="_blank" class="aide">[(#CHEMIN_IMAGE{aide-16.png}|balise_img|inserer_attribut{title,<:titre_image_aide:>})]</a>]</td>
+    <td class="filename secondaire">[(#ENV{fonction}|fonction_fichier|replace{(/|_),$1<wbr/>})]</td>
+    <td class="surcharge secondaire">[(#ENV{fonction}|match{(_dist)$}|?{[(#CHEMIN_IMAGE{ok-16.png}|balise_img)],[(#CHEMIN_IMAGE{supprimer-8.png}|balise_img)]})]</td>
+</tr>
