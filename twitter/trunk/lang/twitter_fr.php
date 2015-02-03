@@ -85,7 +85,7 @@ Entrez ci-dessous les clés d\'identification et enregistrez (<a href="http://co
 	'explication_profil_widget' => "Configuration Nécessaire à l'utilisation du widget profil ",
 
 	'label_search' => "Recherche. Terme recherché, l'usage de tweeter implique souvent de précéder le terme par un # ",
-	'label_interval' => "Intervalle de temps après lequel la page tweeter est rechargée",
+	'label_interval' => "Delai entre le défilement de chaque tweet (ms)",
 	'label_subject' => "Sujet de la fenêtre tweete",
 	'label_title' => "Titre de la fenêtre",
 	'label_footer' => "Texte du footer",
