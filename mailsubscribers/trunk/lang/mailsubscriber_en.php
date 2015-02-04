@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"confirmsubscribe_titre_email" => "Confirmation of subscription to the Newsletter",
 	'confirmsubscribe_invite_texte_email_1' => '@invite_email_from@ invite you to subscribe to Newsletter from @nom_site_spip@ with the email @email@.',
 	"confirmsubscribe_texte_email_1" => "You asked to subscribe to the newsletter @nom_site_spip@ with the address @email@.",
-	"confirmsubscribe_texte_email_2" => " To confirm your subscription , thank you click on the following link: 
+	"confirmsubscribe_texte_email_2" => "To confirm your subscription, click on the following link:
 @url_confirmsubscribe@",
 	"confirmsubscribe_texte_email_3" => "If there is a mistake from our side or if you have changed your mind , you can safely ignore this mail: this request will automatically be canceled.",
 	'confirmsubscribe_invite_texte_email_3' => 'If this is a mistake from our side, you can safely ignore this mail: this invitation will be automaticily canceled.',
@@ -31,19 +31,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_to_email' => 'People\'s email to invite to subscribe to newsletter (several address separated by comma. 5 maximum emails)',
 
 	// I
-	"icone_creer_mailsubscriber" => "Add a subscribtion",
-	"icone_modifier_mailsubscriber" => "Edit this subscribtion",
+	"icone_creer_mailsubscriber" => "Add a subscriber",
+	"icone_modifier_mailsubscriber" => "Edit this subscriber",
 	'info_email_limite_nombre' => 'Invitation limited to 5 people.',
-	"info_1_mailsubscriber" => "1 subscribed user",
-	"info_aucun_mailsubscriber" => "No subscribers",
-	"info_nb_mailsubscribers" => "@nb@ subscribed users",
+	"info_1_mailsubscriber" => "1 subscriber",
+	"info_aucun_mailsubscriber" => "No subscriber",
+	"info_nb_mailsubscribers" => "@nb@ subscribers",
 	"info_1_adresse_a_importer" => "1 address to import",
 	"info_nb_adresses_a_importer" => "@nb@ addresses to import",
 	'info_email_obligatoire' => 'Email is mandatory.',
   'info_emails_invalide' => "One email of the list is not correct.",
-	"info_statut_prepa" => "not registered",
-	"info_statut_prop" => "Waiting",
-	"info_statut_valide" => "registered",
+	"info_statut_prepa" => "not subscribed",
+	"info_statut_prop" => "waiting",
+	"info_statut_valide" => "subscribed",
 	"info_statut_refuse" => "suspended",
 	"info_statut_poubelle" => "trash",
 
@@ -67,16 +67,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	"mailsubscribers_tous" => "All",
-	"mailsubscribers_valide" => "Registered",
-	"mailsubscribers_prepa" => "Not Registered",
-	"mailsubscribers_prop" => "To be confirmed",
-	"mailsubscribers_refuse" => "Unsubscribed",
+	"mailsubscribers_valide" => "Subscribed",
+	"mailsubscribers_prepa" => "Not Subscribed",
+	"mailsubscribers_prop" => "Waiting",
+	"mailsubscribers_refuse" => "Suspended",
 	"mailsubscribers_poubelle" => "Removed",
 
 	// S
 	"subscribe_sujet_email" => "[@nom_site_spip@] Subscribe to our Newsletter",
 	"subscribe_titre_email" => "Subscribe to Newsletter",
-	"subscribe_texte_email_1" => "We have taken into account your signing up for our newsletter with the email address @email@.",
+	"subscribe_texte_email_1" => "We have recorded your subscription to our newsletter with the email @email@.",
 	"subscribe_deja_texte" => "The email address @email@ is already in our mailing list",
 	"subscribe_texte_email_2" => "Thank you for the interest you have shown in @nom_site_spip@.",
 	"subscribe_texte_email_3" => "In case of error, or if you change your mind, you can unsubscribe at any time using the following link :
@@ -89,20 +89,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"unsubscribe_texte_email_1" => "The email address @email@ has been removed from our mailing list.",
 	"unsubscribe_deja_texte" => "The email address @email@ is not in our mailing list.",
 	"unsubscribe_texte_email_2" => "We hope to see you soon on @nom_site_spip@.",
-	"unsubscribe_texte_email_3" => "In case of error, or if you change your mind, you can re-enroll at any time using the following link :
+	"unsubscribe_texte_email_3" => "In case of error, or if you change your mind, you can re-subscribe at any time using the following link :
 @url_subscribe@",
 
 	// T
-	"texte_ajouter_mailsubscriber" => "Add subscribes to the newsletter",
+	"texte_ajouter_mailsubscriber" => "Add subscriber to the newsletter",
 	"texte_avertissement_import" => "A <tt>status column</tt> is supplied, the data will be imported as is , overwriting those that may already exist for some email.",
 	"texte_changer_statut_mailsubscriber" => "This user is subscribed to the newsletter :",
-	"titre_langue_mailsubscriber" => "Language of the registrant",
-	"titre_logo_mailsubscriber" => "Logo of the registrant",
-	"titre_mailsubscriber" => "Registered to the newsletter",
-	"titre_mailsubscribers" => "Registered to shipments by email",
-	"titre_export_mailsubscribers" => "Export registered",
-	"titre_export_mailsubscribers_all" => "Export all addresses",
-	"titre_import_mailsubscribers" => "Import Addresses",
+	"titre_langue_mailsubscriber" => "Language of the subcriber",
+	"titre_logo_mailsubscriber" => "Logo of the subcriber",
+	"titre_mailsubscriber" => "Email Subscriber",
+	"titre_mailsubscribers" => "Email Subscribers",
+	"titre_export_mailsubscribers" => "Export subcribers",
+	"titre_export_mailsubscribers_all" => "Export all emails",
+	"titre_import_mailsubscribers" => "Import emails",
 	"titre_listes_de_diffusion" => "Mailing Lists",
 	'titre_bonjour' => 'Hi',
 
