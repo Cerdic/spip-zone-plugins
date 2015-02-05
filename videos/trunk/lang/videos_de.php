@@ -10,15 +10,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_description_doc' => 'Dokumentation',
 	'cfg_description_titre' => 'Konfiguration des Video(s) Plugins',
+	'cfg_explication_afficher_commandes' => 'Bedienelemente des players anzeigen? (pay, pause, etc.)',
+	'cfg_explication_afficher_suggestions' => 'Am Ende eines Videos werden von Youtube  Videos anderer Youtuber vorgeschlagen. Sollen diese Vorschläge angezeigt werden?',
 	'cfg_explication_hauteur' => 'Standardhöhe für Videos. Diese Option kann im Aufruf des Modells überschrieben werden.',
 	'cfg_explication_largeur' => 'Standardbreite für Videos. Diese Option kann im Aufruf des Modells überschrieben werden.',
 	'cfg_explication_liste_definition' => 'Videos in dl/dt/dd einbetten, wie es  SPIP beim doc Modell macht.',
+	'cfg_explication_mode_confidentialite' => 'Eine URL outube-nocookie anstelle der Youtube Standard URl verwenden?',
 	'cfg_explication_responsive' => 'Höhe und Breite des Videos variabel machen: Lässt sich besser in eine veränderbare Website einbetten.',
 	'cfg_explication_titre_descriptif' => 'Titel und Beschreibung des Videos anzeigen. Diese Option kann im Aufruf des Modells überschrieben werden.',
 	'cfg_explication_wmode' => 'Modus für Flash-Objekte festelgen (fallback Flowplayer, iFrames Dailymotion, Youtube, Vimeo).',
+	'cfg_label_afficher_commandes' => 'Bedienelemente des Players',
+	'cfg_label_afficher_suggestions' => 'Viedeovorschläge',
 	'cfg_label_hauteur' => 'Standardhöhe',
 	'cfg_label_largeur' => 'Standardbreite',
 	'cfg_label_liste_definition' => 'Definitionsliste  (HTML)',
+	'cfg_label_mode_confidentialite' => 'Verbesserte Privatsphäre',
 	'cfg_label_responsive' => 'Skalierbare Größe',
 	'cfg_label_titre_descriptif' => 'Titel und Beschreibung',
 	'cfg_label_wmode' => 'Standard Wmode',
@@ -27,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_configurations_html5' => 'Einstellungen HTML5 / Alternativen',
 	'cfg_titre_configurations_vimeo' => 'Viméo Einstellungen',
 	'cfg_titre_configurations_youtube' => 'Youtube Einstellungen',
-	'confirmation_ajout' => 'Das Video "@type@:@titre@" ist hinzugefügt worden &lt;video@id_document@&gt;', # MODIF
+	'confirmation_ajout' => 'Das Video "@titre@" ist hinzugefügt worden. &lt;video@id_document@&gt;',
 
 	// E
 	'erreur_adresse_invalide' => 'Ungültige URL. Wenn Sie ein MP4-Video importieren wollen müssen sie das Dokument anfügen Formular von SPIP nutzen',
