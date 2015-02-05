@@ -1,8 +1,9 @@
 <traduction module="saisies" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/saisies/trunk/lang/" reference="fr">
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=ca" total="162" traduits="85" relire="0" modifs="9" nouveaux="68" pourcent="52.47">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="162" traduits="142" relire="0" modifs="3" nouveaux="17" pourcent="87.65">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=de" total="162" traduits="145" relire="0" modifs="3" nouveaux="14" pourcent="89.51">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/saisies?lang_cible=en" total="162" traduits="162" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
