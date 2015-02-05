@@ -67,6 +67,7 @@ function formulaires_editer_mailsubscriber_traiter_dist($id_mailsubscriber='new'
 	if (!intval($id_mailsubscriber)
 		AND $id = sql_getfetsel('id_mailsubscriber','spip_mailsubscribers',"email=".sql_quote(mailsubscribers_obfusquer_email(_request('email')))))
 		$id_mailsubscriber = $id;
+	effacer_meta("newsletter_subscribers_count");
 	return formulaires_editer_objet_traiter('mailsubscriber',$id_mailsubscriber,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 
