@@ -8,6 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'configurer_entrees_masquees_explication' => 'Wählen sie die Eingabefelder, die sie beim Anlegen eines Menus <strong>nicht</strong> anzeigen wollen.',
+	'configurer_titre' => 'Konfiguration der Eingabefelder des Plugins Menus',
 	'confirmer_supprimer_entree' => 'Wollen sie diesen Eintrag wirklich löschen?',
 
 	// D
@@ -72,6 +74,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_prive' => 'Titel für den Redaktionszugang',
 	'entree_traduction_articles_rubriques' => 'Wenn möglich Artikel der Rubrik in der Sprache des Kontext anzeigen ("oui" eintragen wenn gewünscht)',
 	'entree_traduction_objet' => 'Übersetzung von Artikeln in Abhängigkeit vom Sprachkontext auswählen (für diese EInstellung "trad" eintragen)',
+	'entree_tri' => 'Kriterium für die Sortierung von Rubriken ("titre" zur alphabetischen Sortierung, "num titre" zur Sortierung nach der Titelnummer, ein " !" voranstellen um die Reihenfolge umzudrehen)',
+	'entree_tri_articles' => 'Kriterium für die Sortierung von Artikeln ("titre" zur alphabetischen Sortierung, "num titre" zur Sortierung nach der Titelnummer, ein " !" voranstellen um die Reihenfolge umzudrehen)',
 	'entree_type_objet' => 'Objekttyp',
 	'entree_url' => 'Adresse',
 	'entree_url_public' => 'Zieladresse nach der Anmeldung',
