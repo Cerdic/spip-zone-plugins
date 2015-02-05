@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'absence_cle_primaire' => 'Kein Primärschlüssel vorhanden!',
 	'activation_barre_impossible' => 'Ein anderes Plugin verhindert den Einsatz des Federhalters im öffentlichen Bereich.',
 	'annuler' => 'Abbrechen',
 
@@ -24,10 +25,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Alles bearbeiten',
 	'effets' => 'Effekte',
 	'explication_exec_autorise' => 'Zur Bearbeitung zugelassene Seiten
-  (?exec=...) : (exec-Skripte mit Komma trennen).', # MODIF
-	'explication_introduction_article' => 'Die Einleitung eines Artikels zeigt das Feld "Beschreibung" an. Sollte es leer sein, werden die ersten  600 Zeichen des Artikels aus den Feldern "Kopf" und "Text" angezeigt.', # MODIF
+  (?exec=...) : (exec-Skripte mit Komma trennen).',
+	'explication_introduction_article' => 'Die Einleitung eines Artikels zeigt das Feld "Beschreibung" an. Sollte es leer sein, werden die ersten  600 Zeichen des Artikels aus den Feldern "Kopf" und "Text" angezeigt.',
 	'explication_reduire_logo' => 'Logo verkleinern wenn es größer als x Pixel ist.
-Beispiel: 100. (0 = niemals)', # MODIF
+Beispiel: 100. (0 = niemals)',
 
 	// I
 	'info_experimental' => 'Expérimentell',
@@ -47,6 +48,7 @@ Beispiel: 100. (0 = niemals)', # MODIF
 	'label_reduire_logo' => 'Logos verkleinern',
 	'label_upload_document' => 'Hinzufügen von Dokumenten durch Ziehen/Ablegen auf den Stift article.texte erlauben.',
 	'label_yellow_fade' => 'Ausblenden',
+	'legend_controleur_fichier_remplacer' => 'Ersetze das Dokument "@extension@"',
 	'legend_controleur_hyperlien' => 'Hyperlink',
 	'legend_controleur_logo' => 'Logoe wählen:',
 	'legend_controleur_logo_remplacer' => 'Dieses Logo ersetzen',
