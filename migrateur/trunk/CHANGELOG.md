@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+
+Version 2.6
+-----------
+
+- prise en compte de login-path pour exporter la base de données, si renseigné.
+  Pour cela, utiliser la constante MIGRATEUR_SOURCE_SQL_LOGIN_PATH.
+
 Version 2.5
 -----------
 

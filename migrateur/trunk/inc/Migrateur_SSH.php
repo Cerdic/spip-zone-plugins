@@ -133,6 +133,7 @@ class Migrateur_SSH {
 		if (!$ssh_cmd) {
 			return $commands[$command] = '';
 		}
+
 		#exec("$ssh_cmd which $command", $output, $err); # which n'est pas toujours dans les acces directs de /bin/
 		exec("$ssh_cmd /usr/bin/which $command", $output, $err); # on suppose which toujours dans usr/bin/
 		if (!$err and count($output) and $cmd = trim($output[0])) {

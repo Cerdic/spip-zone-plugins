@@ -27,17 +27,32 @@ function migrateur_mig_exporter_bdd() {
 			migrateur_log("Exécution de mysqldump distant…");
 			$gzip   = $ssh->obtenir_chemin_commande_serveur('gzip');
 			$gunzip = $dest->obtenir_commande_serveur('gunzip');
+
 			if ($gzip and $gunzip) {
-				migrateur_log("Gzip présent : utilisation de compression");
-				$run = "$connexion \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd} | $gzip\" > $sauvegarde.gz 2>&1";
+				migrateur_log("Récupération avec compression gz");
+				$compression = "| $gzip";
+				$_sauvegarde = "$sauvegarde.gz";
 			} else {
-				$run = "$connexion \"$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd}\" > $sauvegarde 2>&1";
+				migrateur_log("Récupération sans compression");
+				$compression = "";
+				$_sauvegarde = "$sauvegarde";
 			}
+
+			if ($source->sql->login_path) {
+				migrateur_log("Connexion avec login-path : {$source->sql->login_path}");
+				$identifiants = "--login-path={$source->sql->login_path}";
+			} else {
+				migrateur_log("Connexion avec user (et mot de passe) : {$source->sql->user}");
+				$identifiants = "-u {$source->sql->user} --password={$source->sql->pass}";
+			}
+
+			$run = "$connexion \"$cmd $identifiants {$source->sql->bdd} $compression\" > $_sauvegarde 2>&1";
+
 			#migrateur_log($run);
 			exec($run, $output, $err);
 
 			if (!$err and $gzip and $gunzip) {
-				exec("$gunzip $sauvegarde.gz", $goutput, $gerr);
+				exec("$gunzip $_sauvegarde", $goutput, $gerr);
 				if ($gerr) {
 					migrateur_log("! Erreurs de décompression : $gerr");
 				} else {
@@ -72,7 +87,17 @@ function migrateur_mig_exporter_bdd() {
 		$cmd = $source->commande('mysqldump');
 		if ($cmd) {
 			migrateur_log("Exécution de mysqldump…");
-			exec("$cmd -u {$source->sql->user} --password={$source->sql->pass} {$source->sql->bdd} > $sauvegarde 2>&1", $output, $err);
+
+			if ($source->sql->login_path) {
+				migrateur_log("Connexion avec login-path : {$source->sql->login_path}");
+				$identifiants = "--login-path={$source->sql->login_path}";
+			} else {
+				migrateur_log("Connexion avec user (et mot de passe) : {$source->sql->user}");
+				$identifiants = "-u {$source->sql->user} --password={$source->sql->pass}";
+			}
+
+			exec("$cmd $identifiants {$source->sql->bdd} > $sauvegarde 2>&1", $output, $err);
+
 			if ($err) {
 				migrateur_log("! Erreurs survenues : $err");
 				if ($output) migrateur_log( implode("\n", $output) );
