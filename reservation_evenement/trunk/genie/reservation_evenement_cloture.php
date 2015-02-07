@@ -36,7 +36,7 @@ function genie_reservation_evenement_cloture_dist ($t) {
 			set_request('envoi_separe_actif','oui'); //Nécessaire pour permettre l'envoi du mail
 			objet_instituer('reservations_detail',$data['id_reservations_detail'],array('statut'=>'cloture'));
 			$id_evenement[]	= $data['id_evenement'];	
-			spip_log("date fin:$date_fin",'teste');		
+	
 		}
 	};
 	

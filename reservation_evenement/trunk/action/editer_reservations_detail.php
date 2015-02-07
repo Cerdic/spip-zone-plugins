@@ -222,7 +222,6 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 	// Notifications si en mode différé et ne pas déclencher par le changement de statut de la réservation
 	
 	if($envoi_separe_actif!='non'){
-			
 		//Déterminer la langue pour les notifications	
 		if(!$lang=sql_getfetsel('lang','spip_reservations','id_reservation='.$id_reservation)) $lang=lire_config('langue_site');				
 
@@ -248,14 +247,21 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 					$options['expediteur'] = $config['expediteur_'.$config['expediteur']];
 		
 				// Envoyer au vendeur et au client
-				if ($s!='cloture') //Pour le moment pas d'envoi à l'administrateur, prévoir un seul mail pour tout l'événement.
+				//Pour le moment pas d'envoi à l'administrateur, prévoir un seul mail pour tout l'événement.
+				if ($s!='cloture') {
+					spip_log('envoi mail differe vendeur email:'.$options['email'].', statut:'.$s ,'reservation_evenement'.LOG_INFO);	
 					$notifications('reservation_vendeur', $id_reservation, $options);
+				}
+					
 				if($config['client']){
-					//$row['email']=trim($row['email']);
+					
 						if(intval($id_auteur) AND $id_auteur>0)$options['email']=sql_getfetsel('email','spip_auteurs','id_auteur='.$id_auteur);
 						else $options['email']=$email;
 						
+					spip_log('envoi mail differe client email:'.$email.', statut:'.$s ,'reservation_evenement'._LOG_INFO);	
+											
 					$notifications('reservation_client', $id_reservation, $options);
+					
 					}
 				}
 			}		
