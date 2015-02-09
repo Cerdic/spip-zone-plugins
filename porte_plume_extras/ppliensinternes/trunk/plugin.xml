@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Liens internes pour Porte Plume</nom>
+	<slogan>Un bouton pour faire des liens vers des articles SPIP</slogan>
+	<auteur>Jacques Pyrat, Benjamin Grapeloux, avec le soutien du BRGM</auteur>
+	<licence>GPL</licence>
+	<lien></lien>
+	<version>1.0.0</version>
+	<etat>stable</etat>
+   <description>
+	Faire un lien vers un objet SPIP en les listant.
+	</description>
+	<prefix>ppliensinternes</prefix>
+	<pipeline>
+		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>ppliensinternes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_lien_classe_vers_icone</nom>
+		<inclure>ppliensinternes_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="spip" version="[2.1.19;3.0.99]" />
+	<necessite id="porte_plume" />
+	<categorie>edition</categorie>
+</plugin>
