@@ -1,0 +1,8 @@
+<BOUCLE_Article(ARTICLES){id_article IN #CONFIG*{cornertease/article}|picker_selected{article}}>
+	<h1 class="cornertease_titre #EDIT{titre}">#TITRE</h1>
+	[<p class="spip_documents spip_documents_left">
+		<img src="(#LOGO_ARTICLE_NORMAL|image_passe_partout{60,60}|image_recadre{60,60,center}|extraire_attribut{src})" alt="" width="60" height="60" />
+	</p>]
+	[<div class="cornertease_descriptif #EDIT{introduction}">(#INTRODUCTION)</div>]
+	<a href="#URL_ARTICLE" title="En savoir plus sur: [(#TITRE|textebrut|attribut_html)]">En savoir plus...</a></p>
+</BOUCLE_Article>

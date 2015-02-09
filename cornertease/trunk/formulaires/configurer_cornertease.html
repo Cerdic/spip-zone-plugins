@@ -1,0 +1,39 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:cornertease:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			[(#SAISIE{selecteur_article, article,
+				label=<:cornertease:cfg_article:>,
+				explication=<:cornertease:cfg_article_explication:>})]
+			[(#SAISIE{radio,mode_affichage,
+				label=<:cornertease:cfg_mode_affichage:>,
+				datas=#ARRAY{
+					each,<:cornertease:cfg_mode_affichage_each:>,
+					first,<:cornertease:cfg_mode_affichage_first:>,
+					allways,<:cornertease:cfg_mode_affichage_allways:>,
+					never,<:cornertease:cfg_mode_affichage_never:>,
+				},
+				defaut=never,
+				cacher_option_intro=oui}
+			)]
+			[(#SAISIE{input,duree,
+				label=<:cornertease:cfg_duree:>,
+				size=2,
+				defaut=7,
+				explication=<:cornertease:cfg_duree_explication:>}
+			)]
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="cornertease" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

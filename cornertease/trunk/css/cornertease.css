@@ -1,0 +1,44 @@
+@charset "utf-8";
+/* CSS Document */
+
+#cornertease_conteneur{
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:54px;
+	height:54px;
+	cursor: pointer;
+	box-shadow: -2px 2px 12px #aaa;
+	z-index:1;
+	overflow:hidden;
+	padding:5px;
+}
+
+#cornertease_conteneur.cornertease_closed{
+	box-shadow: none;
+	background:url(../img/coindepage.png) bottom left no-repeat;
+}
+
+#cornertease_conteneur.cornertease_open{
+	background:white;
+	border-left:1px solid #aaa;
+	border-bottom:1px solid #aaa;
+	border-top:none;
+	border-right:none;
+}
+
+#cornertease_article{
+	display:none;
+	background:white;
+}
+
+#cornertease_repli{
+	background:url(../img/replier.png) bottom left no-repeat; 
+	width:48px;
+	height:48px;
+	display:none;
+	position:absolute;
+	bottom:0px;
+	left:0px;
+}
+.cornertease_clear{clear:both;}
