@@ -1,0 +1,48 @@
+[(#SET{defaut_tri,#ARRAY{
+	multi url,1,
+	date,-1, 
+	id_linkcheck,1
+}})
+]
+#SET{selection,#ENV**{selection,#ENV{objet_source,linkcheck}|lister_objets_lies{#ENV{objet},#ENV{id_objet},'*'}}}
+
+#SET{debut,#ENV{debutlinl,#EVAL{_request("debutlinl");}}}
+<B_liste_linkchecks>
+[(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
+a mis a jour la valeur avec la page reelle]
+#SET{debut,#ENV{debutlinl,#EVAL{_request("debutlinl");}}}
+
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies linkchecks">
+	#SET{nb_liens,#GRAND_TOTAL|concat{' '}|concat{ #GRAND_TOTAL|singulier_ou_pluriel{linkcheck:info_1_linkcheck,linkcheck:info_nb_linkchecks}}}
+<table class='spip liste'>
+	
+[<caption><strong class="caption">(#ENV*{titre, #GET{nb_liens}})</strong></caption>]
+	<thead>
+		[<tr><td colspan="5"><p class='pagination'>(#GET{p})</p></td></tr>]
+		<tr class='first_row'>
+		<th class="id" scope='col'><:linkcheck:id:></th>
+		<th scope='col'><:linkcheck:url:></th>
+		<th scope='col'><:linkcheck:utilise:></th>
+		<th scope='col'><:linkcheck:etat:></th>
+		<th class='date' scope='col'><:linkcheck:maj:></th>
+		</tr>
+	</thead>
+
+	<tbody>
+	<BOUCLE_liste_linkchecks(LINKCHECKS){id_linkcheck IN #GET{selection}}
+		{tri #ENV{par,multi url},#GET{defaut_tri}}{pagination #ENV{nb,10} linl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#URL**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_LINKCHECK|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<INCLURE{fond=prive/objets/liste/linkcheck_detail,id_linkcheck,ajax,env}>
+
+		</tr>
+	</BOUCLE_liste_linkchecks>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_linkchecks>
+<div class="liste-objets liste-objets-lies LINKCHECKS caption-wrap">
+	<strong class="caption">[(#ENV*{titre,<:linkcheck:info_aucun_linkcheck:>})]</strong>
+</div>
+<//B_liste_linkchecks>
