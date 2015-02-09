@@ -1,0 +1,29 @@
+<BOUCLE_Link(LINKCHECKS){id_linkcheck}>
+	<tr id="#ID_LINKCHECK" class="ajax">
+		<td>
+			#ID_LINKCHECK
+		</td>
+		<td>
+			[(#URL|linkcheck_en_url{#DISTANT}|inserer_attribut{target,_blank})]
+		</td>
+		<td>
+			<B_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)
+			<a href='#' onclick="jQuery(this).next().show();$(this).hide();return false;">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{medias:une_utilisation,medias:des_utilisations})]</a><div style='display: none;'>
+			]
+			<BOUCLE_liens(linkchecks_liens){id_linkcheck}{'<br />'}>
+			[(#OBJET|objet_icone{16})] [(#ID_OBJET|lien_objet{#OBJET})] 
+			
+			</BOUCLE_liens>
+			[(#TOTAL_BOUCLE|>{1}|oui)</div>]
+			</B_liens>
+		</td>
+		<td>
+			[(#VAL{linkcheck:etat_}|concat{#ETAT}|_T)]
+		</td>
+		<td>
+			<a href="#URL_ACTION_AUTEUR{linkcheck_test,#ID_LINKCHECK,#SELF}" class="ajax">[(#MAJ|date_interface)]</a>
+		</td>
+	</tr>
+</BOUCLE_Link>
