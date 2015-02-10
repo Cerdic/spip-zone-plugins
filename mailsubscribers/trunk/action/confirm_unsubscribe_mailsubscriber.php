@@ -21,7 +21,7 @@ function action_confirm_unsubscribe_mailsubscriber_dist($email=null){
 		$email = $securiser_action();
 		$email = explode("-",$email);
 		$arg = array_pop($email);
-		$email = implode("-",$email);
+		$email = rawurldecode(implode("-",$email));
 
 		$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email));
 		if (!$row
