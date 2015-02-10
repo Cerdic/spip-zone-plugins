@@ -16,7 +16,9 @@
     [(#SET{policytext,<:cookiechoices:message_policytext|texte_script:>})]
 })]
 
-document.addEventListener('DOMContentLoaded', function(event) {
+var methodToAddEvent =  window.attachEvent || document.addEventListener;
+var eventToBind = window.attachEvent ? 'onload' : 'DOMContentLoaded';
+methodToAddEvent(eventToBind, function(event) {
       [(#CONFIG{cookiechoices/position}|match{popin}|?{cookieChoices.showCookieConsentDialog,cookieChoices.showCookieConsentBar})](
                                          "[(#GET{message}|replace{"&#8217;","'"})]", 
                                          "[(#GET{closetext}|replace{"&#8217;","'"})]", 
