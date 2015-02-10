@@ -53,7 +53,7 @@
 \[(\#VAL{prive/objets/contenu/#TYPE-enfants}|trouver_fond|oui)
 	\[(\#SET{enfants,\[(\#INCLURE{fond=prive/objets/contenu/#TYPE-enfants,#ID_OBJET,env})\]})\]
 \]
-\[(\#PIPELINE{affiche_enfants,\[(\#ARRAY{args,\#ARRAY{exec,#TYPE,objet,#TYPE,id_objet,\##MID_OBJET},data,\#GET{enfants}})\]})\]
+\[(\#PIPELINE{affiche_enfants,\[(\#ARRAY{args,\#ARRAY{exec,#TYPE,#ID_OBJET,\##MID_OBJET,objet,#TYPE,id_objet,\##MID_OBJET},data,\#GET{enfants}})\]})\]
 
 \[(\#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\\[CDATA\\\[*/reloadExecPage('\#ENV{exec}','\#navigation,\#chemin,\#extra');/*\\\]\\\]>*/</script>

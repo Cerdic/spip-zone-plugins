@@ -3,6 +3,12 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.0.12 le 10 02 2015
+--------------------
+
+* Ne pas ajouter une saisie sur un formulaire d'édition d'objet éditorial
+  si le champ n'est pas déclaré éditable, même si un type de saisie est déclaré pour ce champ.
+
 2.0.11 le 15 11 2014
 --------------------
 
