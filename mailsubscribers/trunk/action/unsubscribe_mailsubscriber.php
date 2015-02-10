@@ -57,7 +57,8 @@ function action_unsubscribe_mailsubscriber_dist($email=null, $double_optin=true)
 		if ($double_optin){
 			include_spip("inc/filtres");
 			$titre = _T('mailsubscriber:unsubscribe_texte_confirmer_email_1',array('email'=>$row['email']));
-			$titre .= "<br /><br />".bouton_action(_T('newsletter:bouton_unsubscribe'),generer_action_auteur('confirm_unsubscribe_mailsubscriber',rawurlencode($email)."-$arg"));
+			// on utilise mailsubscriber_base64url_encode pour eviter d'avoir un + dans l'URL ce qui est ingerable
+			$titre .= "<br /><br />".bouton_action(_T('newsletter:bouton_unsubscribe'),generer_action_auteur('confirm_unsubscribe_mailsubscriber',mailsubscriber_base64url_encode($email)."-$arg"));
 		}
 		else {
 			autoriser_exception("modifier","mailsubscriber",$row['id_mailsubscriber']);
@@ -75,4 +76,8 @@ function action_unsubscribe_mailsubscriber_dist($email=null, $double_optin=true)
 	include_spip('inc/minipres');
 	echo minipres($titre,"","",true);
 
+}
+
+function mailsubscriber_base64url_encode($data) {
+  return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }

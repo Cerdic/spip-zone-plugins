@@ -21,7 +21,7 @@ function action_confirm_unsubscribe_mailsubscriber_dist($email=null){
 		$email = $securiser_action();
 		$email = explode("-",$email);
 		$arg = array_pop($email);
-		$email = rawurldecode(implode("-",$email));
+		$email = mailsubscriber_base64url_decode(implode("-",$email));
 
 		$row = sql_fetsel('id_mailsubscriber,email,jeton,lang,statut','spip_mailsubscribers','email='.sql_quote($email));
 		if (!$row
@@ -39,4 +39,8 @@ function action_confirm_unsubscribe_mailsubscriber_dist($email=null){
 	// il suffit de rejouer subscribe en forcant le simple-optin
 	$unsubscribe_mailsubscriber = charger_fonction("unsubscribe_mailsubscriber","action");
 	$unsubscribe_mailsubscriber ($email,false);
+}
+
+function mailsubscriber_base64url_decode($data) {
+  return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
 }
