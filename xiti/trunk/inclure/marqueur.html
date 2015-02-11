@@ -1,45 +1,86 @@
-[(#REM) On récupére le nom de la rubrique et sa hierarchie]
-<BOUCLE_marqueur_nom_rub(RUBRIQUES){id_rubrique}>
-	[(#SET{titre, [(#TITRE|xiti_nettoyeur)]})]
-	<BOUCLE_hierarchie_rub(HIERARCHIE){tout}>
-		[(#SET{titre_chapitre, [(#TITRE|xiti_nettoyeur)]})]
-	</BOUCLE_hierarchie_rub>
-</BOUCLE_marqueur_nom_rub>
+[(#SET{xtpage, ''})]
 
-[(#REM) On récupére le nom de l'article et sa hierarchie]
-<BOUCLE_marqueur_nom_art(ARTICLES){id_article}>
-	[(#SET{titre, [(#TITRE|xiti_nettoyeur)]})]
-	<BOUCLE_hierarchie_art(HIERARCHIE){id_article}>
-		[(#SET{titre_chapitre, [(#TITRE|xiti_nettoyeur)]::[(#GET{titre})]})]
-	</BOUCLE_hierarchie_art>
-</BOUCLE_marqueur_nom_art>
+[(#REM) boucle artourub détermine si article ou rubrique ]
+<BOUCLE_artourub(ARTICLES){id_article}>
+	[(#REM) boucle artnonlatin détermine si le titre est dans une langue -spéciale- car les filtres sont différents ]
+	<BOUCLE_artnonlatin(CONDITION){si #LANG|in_array{#LISTE{ar,bg,el,fa,hi,he,hy,ja,ko,mk,mm,mn,ru,vi,tg,th,uk,zh}}}>
+		[(#REM) placer un libelle de page pour les rapports Xiti]
+		<BOUCLE_chemin_art(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_article}>
+			[(#SET{titre_art, [(#GET{titre_art})::][(#TITRE|xiti_caracteres|xiti_nonlatin|couper{50,''}|textebrut)]})]
+		</BOUCLE_chemin_art>
+		[(#SET{titre_art, [(#GET{titre_art})::][(#TITRE|xiti_caracteres|xiti_nonlatin|couper{50,''}|textebrut)]})]
+	</BOUCLE_artnonlatin>
+	</B_artnonlatin>
+	[(#REM) placer un libelle de page pour les rapports Xiti]
+	<BOUCLE_chemin_art2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_article}>
+		[(#SET{titre_art, [(#GET{titre_art})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+	</BOUCLE_chemin_art2>
+	[(#SET{titre_art, [(#GET{titre_art})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+	<//B_artnonlatin>
+</BOUCLE_artourub>
 
-[(#REM) Si xtpage est a oui la hierarchie de la page pour permettre de créer un chapitre rubrique::article, 
-		à l'inverse la variable corresponds au titre des pages]
-[(#CONFIG{xiti/xtpage_xiti}|=={oui}|oui) [(#SET{titre,#GET{titre_chapitre}})]]
+	<BOUCLE_rubchemin(RUBRIQUES){id_rubrique}>
+	[(#REM) boucle rubnonlatin même utilité que artnonlatin ci-dessus]
+	<BOUCLE_rubnonlatin(CONDITION){si #LANG|in_array{#LISTE{ar,bg,el,fa,hi,he,hy,ja,ko,mk,mm,mn,ru,vi,tg,th,uk,zh}}}>
+		[(#REM) placer un libelle de page pour les rapports Xiti]
+		<BOUCLE_chemin(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_rubrique}>
+			[(#SET{titre_rub, [(#GET{titre_rub})::][(#TITRE|xiti_caracteres|xiti_nonlatin|couper{50,''}|textebrut)]})]
+		</BOUCLE_chemin>
+		[(#SET{titre_rub, [(#GET{titre_rub})::][(#TITRE|xiti_caracteres|xiti_nonlatin|couper{50,''}|textebrut)]})]
+	</BOUCLE_rubnonlatin>
+	</B_rubnonlatin>
+		[(#REM) placer un libelle de page pour les rapports Xiti]
+		<BOUCLE_chemin2(HIERARCHIE){si #CONFIG{xiti/xtpage_xiti}|=={oui}}{id_rubrique}>
+			[(#SET{titre_rub, [(#GET{titre_rub})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+		</BOUCLE_chemin2>
+		[(#SET{titre_rub, [(#GET{titre_rub})::][(#TITRE|xiti_caracteres|xiti|couper{50,''}|textebrut)]})]
+	</BOUCLE_rubchemin>
+	<//B_rubnonlatin>
+<//B_artourub>
 
-[(#REM) Si la page n'a pas de titre on affiche l'url de la page ???]
-[(#GET{titre}|=={''}|oui) [(#SET{titre,[(#URL_PAGE|xiti_nettoyeur)]})]]
+[(#ENV{page}|=={recherche}|oui)
+	[(#SET{xtpage, page_recherche_[(#RECHERCHE|xiti_caracteres|xiti)]})]
+]
+[(#GET{titre_rub}|et{#GET{xtpage}|=={''}}|oui)
+	[(#SET{xtpage, [(#GET{titre_rub})]})]
+]
+[(#GET{titre_art}|et{#GET{xtpage}|=={''}}|oui)
+	[(#SET{xtpage, [(#GET{titre_art})]})]
+]
+[(#GET{xtpage}|=={''}|oui)
+	[(#SET{xtpage, [page_(#ENV{page,accueil})][_(#LANG)]})]
+]
 
 [(#REM) On verifie si Xiti est activé et on affiche le marqueur]
 [(#CONFIG{xiti/activer_xiti}|oui)
 	<div id="xiti-tag">
+		<script type="text/javascript" src="[(#CHEMIN{javascript/xtclicks.js}|url_absolue)]"></script>
+		<script type="text/javascript" src="[(#CHEMIN{javascript/xtcore.js}|url_absolue)]"></script>
 		<script type="text/javascript">
-			<!--
-			xtnv = #CONFIG{xiti/xtnv_xiti};        //parent.document or top.document or document         
-			xtsd = "http://logd#CONFIG{xiti/xtsd_xiti}"; 		// Sous domaine Xiti ex: http://logp4
-			xtsite = "#CONFIG{xiti/xtsite_xiti}";  // ID client
-			xtn2 = "#CONFIG{xiti/xtn2_xiti}";        // level 2 site 
-			xtpage = "#GET{titre}";        //page name (with the use of :: to create chapters)
-			xtdi = "#CONFIG{xiti/xtdi_xiti}";        //implication degree
-			xtdmc = ".[(#URL_SITE_SPIP|replace{http:\/\/,})]";
-			//-->
+			// Si le plugin cookiebar est installé
+			var cookie = window.jQuery.cookieBar ? jQuery.cookieBar('cookies') : false;
+			if(cookie) {
+				<!--
+				xtnv = #CONFIG{xiti/xtnv_xiti};        //parent.document or top.document or document         
+				xtsd = "http://logd#CONFIG{xiti/xtsd_xiti}";        // Sous domaine Xiti ex: http://logp4
+				xtsite = "#CONFIG{xiti/xtsite_xiti}";  // ID client
+				xtn2 = "#CONFIG{xiti/xtn2_xiti}";        // level 2 site 
+				xtpage = "#GET{xtpage}";        //page name (with the use of :: to create chapters)
+				xtdi = "#CONFIG{xiti/xtdi_xiti}";        //implication degree
+				xt_multc = "";
+				xt_an = "";
+				xt_ac = "";
+				xtdmc = "[(#URL_SITE_SPIP|xiti_xtdmc)]";
+				xtprm = "&amp;xtcode=UTF-8"; 
+				xtergo = "" //0 to deactivate ClickZone
+				//-->
+			}
 		</script>
-		<script type='text/javascript' src='[(#CHEMIN{javascript/xtclicks.js})]'></script>
-		<script type='text/javascript' src='[(#CHEMIN{javascript/xtcore.js})]'></script>
-		<noscript>
-			<div id='xiti-tag-noscript'>
-				<img width='1' height='1' src='http://logd#CONFIG{xiti/xtsd_xiti}.xiti.com/hit.xiti?s=#CONFIG{xiti/xtsite_xiti}&amp;s2=#CONFIG{xiti/xtn2_xiti}&amp;p=#GET{titre}&amp;di=&amp;' alt='XiTi' />
-			</div>
-		</noscript>
 	</div>]
+
+	<noscript>
+		<div id='xiti-tag-noscript'>
+			<img width='1' height='1' src='http://logd#CONFIG{xiti/xtsd_xiti}.xiti.com/hit.xiti?s=#CONFIG{xiti/xtsite_xiti}&amp;s2=#CONFIG{xiti/xtn2_xiti}&amp;p=#GET{xtpage}&amp;di=&amp;' alt='XiTi' />
+		</div>
+	</noscript>
+#FILTRE{trim}

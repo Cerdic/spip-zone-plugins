@@ -5,7 +5,7 @@
  *
  * @plugin     Xiti
  * @copyright  2014
- * @author     Vincent
+ * @author     France diplomatie - Vincent
  * @licence    GNU/GPL
  * @package    SPIP\Xiti\administrations
  */
