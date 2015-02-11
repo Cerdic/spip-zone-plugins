@@ -3,7 +3,7 @@
 		[<h3 class="legend">(#ENV{documents_legende,<:diogene_documents:legende_documents:>})</h3>]
 		<ul>
 			<BOUCLE_documents(DOCUMENTS){id_article}{tout}>
-			<li class="editer editer_document_#ID_DOCUMENT">
+			<li class="editer editer_document editer_document_#ID_DOCUMENT">
 				<div class="logo_document">
 				#LOGO_DOCUMENT
 				</div>
@@ -29,7 +29,7 @@
 					<li class="editer editer_supprimer_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{supprimer_#ID_DOCUMENT}|oui)erreur]">
 						<div class="choix">
 							<input type="checkbox" name="supprimer_#ID_DOCUMENT" id="supprimer_#ID_DOCUMENT"[(#ENV{supprimer_#ID_DOCUMENT}|oui)checked="checked"] />
-							<label for="supprimer_#ID_DOCUMENT"><:lien_supprimer:></label>
+							<label for="supprimer_#ID_DOCUMENT"><:diogene_documents:lien_supprimer_document:></label>
 						</div>
 					</li>
 				</ul>

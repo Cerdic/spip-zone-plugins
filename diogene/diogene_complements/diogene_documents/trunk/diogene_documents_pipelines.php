@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * 
- * © 2014 - Distribue sous licence GNU/GPL
+ * © 2014-2015 - Distribue sous licence GNU/GPL
  *
  * Utilisation des pipelines par Diogene Documents
  *
@@ -32,6 +32,8 @@ function diogene_documents_diogene_ajouter_saisies($flux){
 		else
 			$flux['args']['contexte']['champs_documents'] = array();
 
+		$flux['args']['contexte']['nombre_documents'] = isset($flux['args']['options_complements']['nombre_documents']) ? $flux['args']['options_complements']['nombre_documents'] : 0;
+
 		if(intval($id_objet) > 0){
 			$documents_objet = sql_allfetsel('*','spip_documents as docs LEFT JOIN spip_documents_liens as liens on docs.id_document = liens.id_document','liens.objet='.sql_quote($objet).' AND liens.id_objet='.intval($id_objet));
 			foreach($documents_objet as $doc){
@@ -42,24 +44,11 @@ function diogene_documents_diogene_ajouter_saisies($flux){
 				}
 			}
 		}
-		$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_documents',$flux['args']['contexte']);
-	}
-	return $flux;
-}
 
-/**
- * Insertion dans le pipeline diogene_verifier (Diogene)
- * 
- * Vérification des formulaires qui sont modifiés par Diogene
- * 
- * @param array $flux Le contexte du pipeline
- * @return array $flux le contexte modifié passé aux suivants
- */
-function diogene_documents_diogene_verifier($flux){
-	$id_diogene = _request('id_diogene');
-	if(intval($id_diogene)){
-		$options_complements = unserialize(sql_getfetsel("options_complements","spip_diogenes","id_diogene=".intval($id_diogene)));
-		$erreurs = $flux['args']['erreurs'];
+		if(isset($flux['args']['options_complements']['documents_un_par_un']) && $flux['args']['options_complements']['documents_un_par_un'] == 'on' && intval($flux['args']['options_complements']['nombre_documents']) >= 1)
+			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_documents_un_par_un',$flux['args']['contexte']);
+		else
+			$flux['data'] .= recuperer_fond('formulaires/diogene_ajouter_documents',$flux['args']['contexte']);
 	}
 	return $flux;
 }
@@ -83,14 +72,27 @@ function diogene_documents_diogene_traiter($flux){
 			include_spip('formulaires/joindre_document');
 			$ajouter_documents = charger_fonction('ajouter_documents', 'action');
 			$mode = joindre_determiner_mode('auto','new',$objet);
-			$files = joindre_trouver_fichier_envoye();
-			if(is_array($files))
+			$files = diogene_document_joindre_trouver_fichier_envoye(array($post['fichier_upload']));
+			if(is_array($files)){
 				$nouveaux_doc = $ajouter_documents('new',$files,$objet,$id_objet,$mode);
+				foreach($files as $i => $file){
+					$infos_doc = array();
+					if($file['titre'])
+						$infos_doc['titre'] = $file['titre'];
+					if($file['descriptif'])
+						$infos_doc['descriptif'] = $file['descriptif'];
+					if($file['credits'])
+						$infos_doc['credits'] = $file['credits'];
+					if(count($infos_doc) > 0){
+						$test = sql_updateq('spip_documents',$infos_doc,'id_document='.$nouveaux_doc[$i]);
+					}
+				}
+			}
 		}
 		
 		if(intval($id_objet) > 0){
 			include_spip('action/editer_document');
-			$documents_objet = sql_allfetsel('*','spip_documents as docs LEFT JOIN spip_documents_liens as liens on docs.id_document = liens.id_document','liens.objet='.sql_quote($objet).' AND liens.id_objet='.intval($id_objet));
+			$documents_objet = sql_allfetsel('id_document','spip_documents_liens','objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
 			if(_request('titre'))
 				$ancien_titre = _request('titre');
 			if(_request('credits'))
@@ -106,12 +108,12 @@ function diogene_documents_diogene_traiter($flux){
 					$infos_doc = array();
 					foreach(array('titre','credits','descriptif') as $champ){
 						if(_request($champ.'_'.$id_document)){
-							set_request($champ,_request($champ.'_'.$id_document));
-							$infos_doc[$champ] = _request($champ.'_'.$id_document);
+							$valeur_champ = _request($champ.'_'.$id_document);
+							set_request($champ,$valeur_champ);
+							$infos_doc[$champ] = $valeur_champ;
 						}
-						else{
+						else
 							set_request($champ,'');
-						}
 					}
 					$err = document_modifier($id_document, $infos_doc);
 				}
@@ -127,6 +129,51 @@ function diogene_documents_diogene_traiter($flux){
 	return $flux;
 }
 
+function diogene_document_joindre_trouver_fichier_envoye($post){
+	if (is_array($post)){
+		$i = 1;
+		include_spip('action/ajouter_documents');
+		foreach ($post as $file) {
+			if (is_array($file['name'])){
+				while (count($file['name'])){
+						$test=array(
+							'error'=>array_shift($file['error']),
+							'name'=>array_shift($file['name']),
+							'tmp_name'=>array_shift($file['tmp_name']),
+							'type'=>array_shift($file['type']),
+							);
+						if (!($test['error'] == 4)){
+							if (is_string($err = joindre_upload_error($test['error'])))
+								return $err; // un erreur upload
+							if (!is_array(verifier_upload_autorise($test['name'])))
+								return _T('medias:erreur_upload_type_interdit',array('nom'=>$test['name']));
+							if(_request('titre_document'.$i))
+								$test['titre'] = _request('titre_document'.$i);
+							if(_request('descriptif_document'.$i))
+								$test['descriptif'] = _request('descriptif_document'.$i);
+							if(_request('credits_document'.$i))
+								$test['credits'] = _request('credits_document'.$i);
+							$files[]=$test;
+						}
+						$i++;
+				}
+			}
+			else {
+				//UPLOAD_ERR_NO_FILE
+				if (!($file['error'] == 4)){
+					if (is_string($err = joindre_upload_error($file['error'])))
+						return $err; // un erreur upload
+					if (!is_array(verifier_upload_autorise($file['name'])))
+						return _T('medias:erreur_upload_type_interdit',array('nom'=>$file['name']));
+					$files[]=$file;
+				}
+			}
+		}
+		if (!count($files))
+			return _T('medias:erreur_indiquez_un_fichier');
+	}
+	return $files;
+}
 /**
  * Insertion dans le pipeline diogene_objets (Diogene)
  * 
@@ -164,7 +211,10 @@ function diogene_documents_diogene_champs_texte($flux){
 /**
  * Insertion dans le pipeline diogene_champs_pre_edition (Diogene)
  * 
- * Ajoute la prise en compte des champs insérés dans le diogène
+ * Ajoute la prise en compte des champs insérés dans le diogène :
+ * - champs_documents : tableau de champs associés aux documents dans l'interface de saisie
+ * - nombre_documents : nombre maximal de documents pouvant être lié
+ * - documents_un_par_un : affichera dans le formulaire autant de bouton parcourir que de documents possibles
  * 
  * @param array $array
  * @return array
@@ -172,6 +222,7 @@ function diogene_documents_diogene_champs_texte($flux){
 function diogene_documents_diogene_champs_pre_edition($array){
 	$array[] = 'champs_documents';
 	$array[] = 'nombre_documents';
+	$array[] = 'documents_un_par_un';
 	return $array;
 }
 

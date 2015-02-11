@@ -1,0 +1,78 @@
+<li class="documents_fieldset documents fieldset">#SET{documents,0}
+	<fieldset>
+		[<h3 class="legend">(#ENV{documents_legende,<:diogene_documents:legende_documents:>})</h3>]
+		<ul>
+			<B_documents>
+			<li class="editer editer_documents">
+				<label><:diogene_documents:label_editer_documents_articles:></label>
+				<ul>
+				<BOUCLE_documents(DOCUMENTS){id_article}{tout}>#SET{documents,#GET{documents}|plus{1}}
+				<li class="editer editer_document editer_document_#ID_DOCUMENT">
+					<ul>
+						<div class="logo_document">
+						#LOGO_DOCUMENT
+						</div>
+						[(#VAL{titre}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+						<li class="editer editer_titre_fichier editer_titre_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{titre_#ID_DOCUMENT}|oui)erreur]">
+							<label for="titre_#ID_DOCUMENT">[(#ENV{mode}|=={document}|?{<:medias:entree_titre_document:>,<:medias:entree_titre_image:>})]</label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+							]<input type='text' class='text' name='titre_#ID_DOCUMENT' id='titre_#ID_DOCUMENT' value="[(#ENV**{titre_#ID_DOCUMENT,''})]" />
+						</li>]
+						[(#VAL{descriptif}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+						<li class="editer editer_descriptif_fichier editer_descriptif_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{descriptif_#ID_DOCUMENT}|oui)erreur]">
+							<label for="descriptif_#ID_DOCUMENT"><:info_description:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif_#ID_DOCUMENT})</span>
+							]<textarea name='descriptif_#ID_DOCUMENT' id='descriptif_#ID_DOCUMENT'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif_#ID_DOCUMENT,''})]</textarea>
+						</li>]
+						[(#VAL{credits}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+						<li class="editer editer_credits_fichier editer_credits_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{credits_#ID_DOCUMENT}|oui)erreur]">
+							<label for="credits_#ID_DOCUMENT"><:medias:label_credits:></label>[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits_#ID_DOCUMENT})</span>
+							]<input type='text' class='text' name='credits_#ID_DOCUMENT' id='credits_#ID_DOCUMENT' value="[(#ENV**{credits_#ID_DOCUMENT,''})]" />
+						</li>]
+						<li class="editer editer_supprimer_fichier editer_supprimer_#ID_DOCUMENT[ (#ENV**{erreurs}|table_valeur{supprimer_#ID_DOCUMENT}|oui)erreur]">
+							<div class="choix">
+								<input type="checkbox" name="supprimer_#ID_DOCUMENT" id="supprimer_#ID_DOCUMENT"[(#ENV{supprimer_#ID_DOCUMENT}|oui)checked="checked"] />
+								<label for="supprimer_#ID_DOCUMENT"><:diogene_documents:lien_supprimer_document:></label>
+							</div>
+						</li>
+					</ul>
+				</li>
+				</BOUCLE_documents>
+				</ul>
+			</li>
+			</B_documents>
+			#SET{nombre,#ENV{nombre_documents}|moins{#GET{documents}}}
+			<li class='editer editer_fichier_upload[ (#ENV**{erreurs}|table_valeur{fichier_upload}|oui)erreur]'>
+				<label><:diogene_documents:label_ajouter_nouveaux_documents:></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{fichier_upload})</span>
+				]
+				<BOUCLE_data(DATA){liste 1,2,3,4,5,6,7,8,9,10}{0,#GET{nombre,#ENV{nombre_documents}}}>
+				<ul class="editer editer_document_upload">
+					<li class="editer editer_fichier">
+						<input class='file' type="file" name="fichier_upload[]" value='#ENV{fichier_upload}' id="fichier_upload#COMPTEUR_BOUCLE" size='11' />
+					</li>
+					[(#VAL{titre}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+					<li class="editer editer_titre_fichier editer_titre_#COMPTEUR_BOUCLE[ (#ENV**{erreurs}|table_valeur{titre_document#COMPTEUR_BOUCLE}|oui)erreur]">
+						<label for="titre_document#COMPTEUR_BOUCLE">[(#ENV{mode}|=={document}|?{<:medias:entree_titre_document:>,<:medias:entree_titre_image:>})]</label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+						]<input type='text' class='text' name='titre_document#COMPTEUR_BOUCLE' id='titre_document#COMPTEUR_BOUCLE' value="[(#ENV**{titre_document#COMPTEUR_BOUCLE,''})]" />
+					</li>]
+					[(#VAL{descriptif}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+					<li class="editer editer_descriptif_fichier editer_descriptif_#COMPTEUR_BOUCLE[ (#ENV**{erreurs}|table_valeur{descriptif_document#COMPTEUR_BOUCLE}|oui)erreur]">
+						<label for="descriptif_document#COMPTEUR_BOUCLE"><:info_description:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif_#ID_DOCUMENT})</span>
+						]<textarea name='descriptif_document#COMPTEUR_BOUCLE' id='descriptif_document#COMPTEUR_BOUCLE'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif_document#COMPTEUR_BOUCLE,''})]</textarea>
+					</li>]
+					[(#VAL{credits}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
+					<li class="editer editer_credits_fichier editer_credits_#COMPTEUR_BOUCLE[ (#ENV**{erreurs}|table_valeur{credits_document#COMPTEUR_BOUCLE}|oui)erreur]">
+						<label for="credits_document#COMPTEUR_BOUCLE"><:medias:label_credits:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits_#ID_DOCUMENT})</span>
+						]<input type='text' class='text' name='credits_document#COMPTEUR_BOUCLE' id='credits_document#COMPTEUR_BOUCLE' value="[(#ENV**{credits_document#COMPTEUR_BOUCLE,''})]" />
+					</li>]
+				</ul>
+				</BOUCLE_data>
+			</li>
+		</ul>
+	</fieldset>
+</li>
