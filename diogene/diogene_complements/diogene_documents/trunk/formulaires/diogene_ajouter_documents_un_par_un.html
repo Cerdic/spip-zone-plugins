@@ -55,19 +55,19 @@
 					[(#VAL{titre}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
 					<li class="editer editer_titre_fichier editer_titre_#COMPTEUR_BOUCLE[ (#ENV**{erreurs}|table_valeur{titre_document#COMPTEUR_BOUCLE}|oui)erreur]">
 						<label for="titre_document#COMPTEUR_BOUCLE">[(#ENV{mode}|=={document}|?{<:medias:entree_titre_document:>,<:medias:entree_titre_image:>})]</label>[
-						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_document#COMPTEUR_BOUCLE})</span>
 						]<input type='text' class='text' name='titre_document#COMPTEUR_BOUCLE' id='titre_document#COMPTEUR_BOUCLE' value="[(#ENV**{titre_document#COMPTEUR_BOUCLE,''})]" />
 					</li>]
 					[(#VAL{descriptif}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
 					<li class="editer editer_descriptif_fichier editer_descriptif_#COMPTEUR_BOUCLE[ (#ENV**{erreurs}|table_valeur{descriptif_document#COMPTEUR_BOUCLE}|oui)erreur]">
 						<label for="descriptif_document#COMPTEUR_BOUCLE"><:info_description:></label>[
-						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif_#ID_DOCUMENT})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif_document#COMPTEUR_BOUCLE})</span>
 						]<textarea name='descriptif_document#COMPTEUR_BOUCLE' id='descriptif_document#COMPTEUR_BOUCLE'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif_document#COMPTEUR_BOUCLE,''})]</textarea>
 					</li>]
 					[(#VAL{credits}|in_array{#ENV{champs_documents,#ARRAY}}|oui)
 					<li class="editer editer_credits_fichier editer_credits_#COMPTEUR_BOUCLE[ (#ENV**{erreurs}|table_valeur{credits_document#COMPTEUR_BOUCLE}|oui)erreur]">
 						<label for="credits_document#COMPTEUR_BOUCLE"><:medias:label_credits:></label>[
-						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits_#ID_DOCUMENT})</span>
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{credits_document#COMPTEUR_BOUCLE})</span>
 						]<input type='text' class='text' name='credits_document#COMPTEUR_BOUCLE' id='credits_document#COMPTEUR_BOUCLE' value="[(#ENV**{credits_document#COMPTEUR_BOUCLE,''})]" />
 					</li>]
 				</ul>
