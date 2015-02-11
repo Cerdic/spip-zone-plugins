@@ -3,8 +3,8 @@
   <nom>Encart</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>1.0.0</version>
-  <necessite id='acs' version='[0.8.0;]' />
+  <version>1.1.0</version>
+  <necessite id='acs' version='[3.0.0;]' />
   <group>content</group>
 
   <param>
@@ -49,6 +49,10 @@
     <nom>TitreLinkHover</nom>
     <type>color</type>
   </variable>
+  <variable>
+    <nom>TitreBord</nom>
+    <type>bord</type>
+  </variable>
 
   <variable>
     <nom>Fond</nom>
@@ -81,6 +85,7 @@
     <type>choix</type>
     <option>articles</option>
     <option>rubriques</option>
+    <option>documents</option>
     <value>articles</value>
   </variable>
   <variable>
@@ -109,10 +114,25 @@
     <valeur>100</valeur>
   </variable>
   <variable>
+    <nom>LogoMarge</nom>
+    <type>text</type>
+  </variable>
+  <variable>
     <nom>Date</nom>
     <type>choix</type>
     <option>oui</option>
     <option>non</option>
     <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>Pagination</nom>
+    <type>choix</type>
+    <option>spip</option>
+    <option>boutons</option>
+    <valeur>spip</valeur>
+  </variable>
+  <variable>
+    <nom>Delai</nom>
+    <type>text</type>
   </variable>
 </composant>

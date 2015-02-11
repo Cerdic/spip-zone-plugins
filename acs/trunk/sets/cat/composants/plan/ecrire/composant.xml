@@ -3,7 +3,7 @@
   <nom>Plan</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>0.8.9</version>
+  <version>1.0.0</version>
   <necessite nom='acs' compatibilite='[0.8.8;]' />
   <necessite_composant set='cat' nom='articles' compatibilite='[0.8.9;]' />
 

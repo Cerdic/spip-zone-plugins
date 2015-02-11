@@ -1,4 +1,3 @@
-[(#CACHE{0})][
-(#ID_RUBRIQUE|?{' '})[(#INCLURE{fond=composants/plan/boucle-plan}{env}{self}{id_rubrique})#SET{ok,oui}]][
-(#ID_MOT|?{' '})[(#INCLURE{fond=composants/plan/boucle-plan}{env}{self}{id_mot})#SET{ok,oui}]][
-(#GET{ok}|!={oui}|?{' '})[(#INCLURE{fond=composants/plan/boucle-plan_site}{env}{self})]]
+[(#CACHE{0})][(#ID_RUBRIQUE|oui)[(#INCLURE{fond=composants/plan/boucle-plan}{env}{self}{id_rubrique})]#SET{ok,oui}][
+(#ID_MOT|oui)[(#INCLURE{fond=composants/plan/boucle-plan}{env}{self}{id_mot})]#SET{ok,oui}][
+(#GET{ok}|!={oui}|oui)[(#INCLURE{fond=composants/plan/boucle-plan_site}{env}{self})]]

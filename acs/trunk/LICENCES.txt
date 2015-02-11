@@ -1,6 +1,6 @@
 ACS est sous la même licence GNU/GPL que spip.
 
-Copyright 2007-2012 Daniel FAIVRE
+Copyright 2007-2015 Daniel FAIVRE
 
 http://acs.geomaticien.org
 

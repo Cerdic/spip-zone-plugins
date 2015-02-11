@@ -3,13 +3,11 @@
 Boucle plan d'une rubrique id_rubrique, ou des rubriques associées au mot-clé id_mot
 
 ]<BOUCLE_secteurs(RUBRIQUES){id_rubrique ?}{id_mot ?}{par num titre, titre}>
-<div class="cPlan">
-  [(#ENV{masquer_titre_rubrique}!={oui}|?{' '})
-  <h1>[
-    <a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|right|image_reduire{#VAR{acsPlanLogoMax,50},#VAR{acsPlanLogoMax,50}})</a>][
+<div class="cPlan">[(#ENV{masquer_titre_rubrique}!={oui}|?{' '})
+  <h1>[<a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|right|image_reduire{#VAR{acsPlanLogoMax,50},#VAR{acsPlanLogoMax,50}})</a>][
     <a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="tsize">(#TITRE|supprimer_numero)</a>]
-  </h1>]
-  <INCLURE{fond=composants/plan/inc-bp-n}{id_rubrique}{lang}{mode}>
+  </h1>][
+  (#INCLURE{fond=composants/plan/inc-bp-n}{id_rubrique}{mode}{lang ?})]
   <B_rubriques>
     <ul class="plan-rubriques">
     <BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre, titre}>

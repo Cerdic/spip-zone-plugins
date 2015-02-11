@@ -161,28 +161,6 @@ function composants_head($type) {
        			$r .= recuperer_fond($filepath, array('nic' => $nic, 'X-Spip-Cache' => 0))."\r";
         }
       }
-      // on fait la liste des librairies javascripts a inclure (declarees dans chaque composant, dans moncomposant_balises.php,
-      // sous la forme d'une fonction moncomposant_jslib() qui retourne un tableau des librairies js a inclure pour ce composant)
-      if(strtolower($type) == 'javascript') {
-        if (is_callable($class.'_jslib')) {
-        	$c_jslibs = $class.'_jslib';
-        	foreach($c_jslibs() as $lib) {
-        		$jslibs[$lib] = true;
-        	}
-        }
-      }
-    }
-    // on recupere les librairies js requises pour tous les composants, une seule fois chacune
-    foreach($jslibs as $jslib => $ok) {
-      $file = find_in_path($jslib.'.html');
-      if (!$file) {
-        $file = find_in_path($jslib);
-        if ($file)
-          $libs .= file_get_contents($file)."\r";
-      }
-      else {
-        $libs .= recuperer_fond($jslib, array('X-Spip-Cache' => 0))."\r";
-      }
     }
   }
   return $libs.$r;

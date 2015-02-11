@@ -75,6 +75,12 @@ function lecture_composants_liste($set) {
     }
   }
   ksort($cl);
+  // on met le composant "fond" en premier pour permettre son override par d'autres composants
+  if (array_key_exists('fond',$cl)){
+  	$fond = $cl['fond'];
+  	unset($cl['fond']);
+  	$cl = array_merge(array('fond' => $fond), $cl);
+  }
 	acs_log('lecture_composants_liste("'.$set.'")');
   return $cl;
 }
