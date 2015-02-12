@@ -1,14 +1,4 @@
 [(#REM) 
-	Stocker les traductions eventuelles de l'article en cours
-]
-<BOUCLE_article(ARTICLES){id_article}>
-#SET{ListeTraductions, #ARRAY{}}
-<BOUCLE_TraductionArticleCourant(ARTICLES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
-	#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_ARTICLE}}
-</BOUCLE_TraductionArticleCourant>
-</BOUCLE_article>
-
-[(#REM) 
 	Stocker les traductions eventuelles de la rubrique en cours si le plugin Tradrub est installe (permet l'utilisation du
 	critere traduction sur les rubriques)
 ]
@@ -20,6 +10,16 @@
 		</BOUCLE_TraductionRubriqueCourante>
 	</BOUCLE_rubrique>
 </BOUCLE_tradrub>
+
+[(#REM) 
+	Stocker les traductions eventuelles de l'article en cours
+]
+<BOUCLE_article(ARTICLES){id_article}>
+#SET{ListeTraductions, #ARRAY{}}
+<BOUCLE_TraductionArticleCourant(ARTICLES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
+	#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_ARTICLE}}
+</BOUCLE_TraductionArticleCourant>
+</BOUCLE_article>
 
 [(#REM) 
 	Y-a-t'il plus d'une langue reellement utilisee dans le site (moins les langues "invisibles") ?
