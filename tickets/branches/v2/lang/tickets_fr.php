@@ -119,6 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_jalon' => 'Tickets par jalon',
 	'classement_projet' => 'Tickets par projet',
 	'classement_termine' => 'Tickets terminés',
+	'classement_tous' => 'Tous les tickets',
 	'classement_type' => 'Tickets par type',
 	'classement_version' => 'Tickets par version',
 	'commentaire' => 'commentaire',

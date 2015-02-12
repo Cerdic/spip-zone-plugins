@@ -120,6 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_composant' => 'Tickets by component',
 	'classement_jalon' => 'Bug reports by milestone',
 	'classement_projet' => 'Tickets by project',
+	'classement_tous' => 'All the tickets',
 	'classement_termine' => 'Closed bug reports',
 	'classement_type' => 'Bug reports by type',
 	'classement_version' => 'Tickets by version',
