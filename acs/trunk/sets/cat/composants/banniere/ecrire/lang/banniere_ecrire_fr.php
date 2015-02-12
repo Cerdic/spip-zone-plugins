@@ -19,10 +19,5 @@ Un lien vers une page particuli&egrave;re peut être affich&eacute; en option da
 'LogoAlign' => _T('acs:align'),
 'TextColor'=>'Couleur texte',
 'TextColorOver'=>'Au survol',
-'extra' => 'Lien extra',
-'ExtraLink' => 'URL',
-'ExtraLabel' => 'Texte',
-'ExtraImg' => 'Image',
-'ExtraTop' => 'Top',
 );
 ?>

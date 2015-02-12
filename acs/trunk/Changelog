@@ -1,8 +1,12 @@
-Suivi des principales révisions - Version ACS actuelle : 3.0.6
+Suivi des principales révisions - Version ACS actuelle : 3.0.7
 
+- gestion simplifiee des inclusions speciales des composants (headers, css, js, ...)
+- Cat: suppression du "lien extra" du compsoant banniere, avantageusement remplacé par n'importe quel composant du set au choix.
+
+ACS version 3.0.6
 - simplification de l'intégration des librairies javascripts de composants.
 - lecture de la liste des composants : si un composant "fond" existe on le met en premier dans la liste pour permettre son override
-- Cat : composant "Encart" étendu aux documents et animable façon diaporama.
+- Cat : composant "Encart" étendu aux documents et animable façon diaporama, 
 
 ACS version 3.0.5
 - separation des modeles ACS et des modeles du set Cat

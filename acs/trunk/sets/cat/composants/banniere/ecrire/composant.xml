@@ -4,7 +4,7 @@
 
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
   <necessite id='acs' version='[0.8.8;]' />
   <group>nav</group>
 
@@ -121,23 +121,5 @@
   <variable>
     <nom>Font</nom>
     <type>text</type>
-  </variable>
-  
-  <variable>
-  	<nom>ExtraLink</nom>
-  	<type>text</type>
-  </variable>
-  <variable>
-  	<nom>ExtraLabel</nom>
-  	<type>text</type>
-  </variable>
-  <variable>
-  	<nom>ExtraImg</nom>
-  	<type>img</type>
-		<chemin>banniere/extra</chemin>
-  </variable>
-  <variable>
-  	<nom>ExtraTop</nom>
-  	<type>text</type>
   </variable>
 </composant>

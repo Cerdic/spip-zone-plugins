@@ -119,29 +119,44 @@ function balise_VAR($p) {
 }
 
 /**
- * Retourne les css ou les javascripts des composants
+ * Retourne headers, css ou javascripts de tous les composants
  */
-function balise_HEADER_COMPOSANTS($p) {
+function balise_COMPOSANTS_CODE($p) {
   $typeh = interprete_argument_balise(1,$p);
   $typeh = substr($typeh, 1, strlen($typeh)-2);
-  $p->code = 'composants_head("'.$typeh.'")';
+  $p->code = 'composants_code("'.$typeh.'")';
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p; 
 }
 
-// Retourne les css ou javascripts des composants, concaténés
-function composants_head($type) {
+/**
+ * Retourne headers, css ou javascripts de tous les composants actifs du set,
+ * concaténés.
+ * @param string $type : css, javascript
+ * @return string
+ */
+function composants_code($type) {
+	// le retour de composants_liste() est statique,  mis en cache,
+	// et tient compte de l'override éventuel.
   if (is_array(composants_liste())) {
-    // composants_liste() est statique,  mise en cache,
-    // et tient compte de l'override éventuel
     $done = array();
-    $jslibs = array();
     foreach (composants_liste() as $class=>$cp) {
     	foreach($cp['instances'] as $nic=>$c) {
     		if ($c['on'] != 'oui') continue;
     		if (!in_array($class, $done)) {
-          $filepath = 'composants/'.$class.'/'.((strtolower($type) == 'css') ? $class.'.css': "$type/$class.js");
+    			$type = strtolower($type);
+    			switch ($type) {
+    				case 'css' :
+    					$f = $class.'.css';
+    					break;
+    				case 'javascript':
+    					$f = "javascript/$class.js";
+    					break;
+    				default:
+    					$f = $class.'_'.$type;
+    			}
+          $filepath = 'composants/'.$class.'/'.$f;
           $file = find_in_path($filepath.'.html');
           if (!$file) {
             $file = find_in_path($filepath);
@@ -163,7 +178,7 @@ function composants_head($type) {
       }
     }
   }
-  return $libs.$r;
+  return $r;
 }
 
 /* Overide de la balise CACHE : permet de passer un paramètre à la balise SPIP

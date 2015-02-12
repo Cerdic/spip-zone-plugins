@@ -3,6 +3,9 @@ Les sous-dossiers cat et dist utilisent la règle "contrôle strict"  :
 « nul ne peut intervenir sur les fichiers de cette branche sans avoir au préalable envoyé 
 un patch au format diff -pu aux responsables de la branche, et reçu de l'un d'eux un "OK" formel. »
 
+Certains fichiers html sont "compacts" afin d'éviter que le html généré ne contionne des espaces indésirables
+perturbant l'affichage de certaines balises html sur certains browsers (IE).
+
 Commit d'autres modèles ACS:
 Tout administrateur d'une rubrique de documentation d'un modèle ACS sur le site http://acs.geomaticien.org peut
 committer les changements du modèle qu'il administre dans son sous-dossier au nom de ce modèle.

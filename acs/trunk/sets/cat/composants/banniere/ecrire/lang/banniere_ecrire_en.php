@@ -19,10 +19,5 @@ You can add an extra link somewhere in the banner.',
 'LogoAlign' => _T('acs:align'),
 'TextColor'=>'Text color',
 'TextColorOver'=>'Over',
-'extra' => 'Extra link',
-'ExtraLink' => 'URL',
-'ExtraLabel' => 'Text',
-'ExtraImg' => 'Image',
-'ExtraTop' => 'Top',
 );
 ?>
