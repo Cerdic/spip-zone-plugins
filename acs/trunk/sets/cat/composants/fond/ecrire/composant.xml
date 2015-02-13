@@ -3,7 +3,7 @@
   <nom>Fond</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>0.8.9</version>
+  <version>1.0.0</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -15,6 +15,11 @@
     <valeur>no</valeur>
   </param>
 
+  <variable>
+    <nom>BodyStyle</nom>
+    <type>text</type>
+    <valeur>min-width: 800px</valeur>
+  </variable>
   <variable>
     <nom>Favicon</nom>
     <type>img</type>

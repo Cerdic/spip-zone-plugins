@@ -1,5 +1,12 @@
-Suivi des principales révisions - Version ACS actuelle : 3.0.7
+Suivi des principales révisions - Version ACS actuelle : 3.0.8
 
+- cat: nouveau composant google_translate.
+- cat: suppression du composant "Edito", avantageusement remplacé par "Encart", bien plus polyvalent.
+- cat: fondu sur les changements d'encarts animes.
+- cat: nouveau composant "tipafriend" (nécessite le plugin "tip a friend").
+- cat: nouvelle propriété du composant Fond pour modifier des propriétés CSS du tag body.
+
+ACS version 3.0.7
 - gestion simplifiee des inclusions speciales des composants (headers, css, js, ...)
 - Cat: suppression du "lien extra" du compsoant banniere, avantageusement remplacé par n'importe quel composant du set au choix.
 

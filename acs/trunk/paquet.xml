@@ -1,7 +1,7 @@
 <paquet
 	prefix="acs"
 	categorie="edition"
-	version="3.0.7"
+	version="3.0.8"
 	etat="test"
 	compatibilite="[3.0.17;3.*.*]"
 	logo="images/acs_32x32.gif"

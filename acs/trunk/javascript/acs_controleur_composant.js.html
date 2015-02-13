@@ -1,4 +1,4 @@
-[(#REM)
+[(#HTTP_HEADER{'Content-Type: text/javascript'})][(#REM)
                ACS
            (Plugin Spip)
       http://acs.geomaticien.org
@@ -10,11 +10,10 @@
 
   Active les controleurs de composants sur la partie publique du site et gere les drag/drop de composants
 
-]#HTTP_HEADER{'Content-Type: text/javascript'}
-[(#INCLURE{fond=javascript/acs_lib.js})]
+][(#INCLURE{fond=javascript/acs_lib.js})]
 
 
-function init_controleur_composant() {/*test*/
+function init_controleur_composant() { /*test*/
   [(#INCLURE{javascript/acs_dragdrop.js})]
   jQuery(".edit_composant").each(
   	function(i, composant) {

@@ -1,11 +1,8 @@
-[(#REM)
+[(#CACHE{0})][(#REM)
 
   Charge les javascripts du composant Fond
-  (Chaque composant ACS utilise son propre flux insert_head pour ses scripts)
 
-]#CACHE{7*24*3600,cache-client}
-#HTTP_HEADER{'Content-Type: text/javascript'}
-
+]
 /* ACS-Cat override for swap_couche() dist, configurable from component Fond */
 function swap_couche(couche, rtl, dir, no_swap) {
   var layer;

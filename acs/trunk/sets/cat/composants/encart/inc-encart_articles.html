@@ -11,13 +11,13 @@ NbLettres = -2 : ne pas couper le texte et afficher le texte même si l'article 
 [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Pagination'}}|=={spip}|oui)[<span class="pagination nav nsize">(#PAGINATION)</span>]<div class="nettoyeur" ></div>]
 <BOUCLE_encart(ARTICLES) {par num titre} {par date} {inverse}{titre_mot=#GET{acsEncartKeyword}} {pagination #VAR{#EVAL{'acsEncart'.'#NIC'.'Nb'},3} #GET{id_pagination}}{lang ?}>
   <div class="cEncartClass cEncart#NIC[ cEncartTimer(#VAR{#EVAL{'acsEncart'.'#NIC'.'Delai'}})]">[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Pagination'}}|=={boutons}|oui)[(#GET{encart_total}|>{1}|oui)
-    <div class="pagination nav nsize screen_only"><img class="btnEncartPause" src="#ACS_CHEMIN{encart/pause.gif}" title="<:acs:encart_pause:>" alt="||" /><a class="ajax btnEncartDebut" href="?debut#GET{id_pagination}=0#pagination#GET{id_pagination}" style="display:none"><img src="#ACS_CHEMIN{encart/debut.gif}" title="<:acs:encart_debut:>" alt="&laquo;" /></a>[
-    (#GET{encart_debut}|>{0}|?{' '})<a class="ajax btnEncartPrecedent" href="?debut#GET{id_pagination}=[(#EVAL{#GET{encart_debut}-1})]#pagination#GET{id_pagination}"><img src="#ACS_CHEMIN{encart/gauche.gif}" title="<:acs:encart_precedent:>" alt="&larr;" /></a>][
+    <span class="pagination nav nsize screen_only"><img class="btnEncartPause" src="#ACS_CHEMIN{encart/pause.gif}" title="<:acs:encart_pause:>" alt="||" /><a class="ajax btnEncartDebut" href="[(#SELF|parametre_url{debut#GET{id_pagination},0})]" style="display:none"><img src="#ACS_CHEMIN{encart/debut.gif}" title="<:acs:encart_debut:>" alt="&laquo;" /></a>[
+    (#GET{encart_debut}|>{0}|?{' '})<a class="ajax btnEncartPrecedent" href="[(#SELF|parametre_url{debut#GET{id_pagination},#EVAL{#GET{encart_debut}-1}})]"><img src="#ACS_CHEMIN{encart/gauche.gif}" title="<:acs:encart_precedent:>" alt="&larr;" /></a>][
     (#GET{encart_debut}|=={0}|?{' '})<img src="#ACS_CHEMIN{encart/gauche_off.gif}" title="<:acs:encart_precedent:>" alt="&larr;" />][
-    (#GET{encart_debut}|<{#GET{encart_total}|moins{1}}|?{' '})<a class="ajax btnEncartSuivant" href="?debut#GET{id_pagination}=#EVAL{#GET{encart_debut}+1}#pagination#GET{id_pagination}"><img src="#ACS_CHEMIN{encart/droit.gif}" title="<:acs:encart_suivant:>" alt="&rarr;" /></a>][
+    (#GET{encart_debut}|<{#GET{encart_total}|moins{1}}|?{' '})<a class="ajax btnEncartSuivant" href="[(#SELF|parametre_url{debut#GET{id_pagination},#EVAL{#GET{encart_debut}+1}})]"><img src="#ACS_CHEMIN{encart/droit.gif}" title="<:acs:encart_suivant:>" alt="&rarr;" /></a>][
     (#GET{encart_debut}|>={#GET{encart_total}|moins{1}}|?{' '})<img src="#ACS_CHEMIN{encart/droit_off.gif}" title="<:acs:encart_suivant:>" alt="&rarr;" />][
-    (#GET{encart_debut}|plus{1})]/#GET{encart_total}
-    </div>]]
+    (#GET{encart_debut}|plus{1})]/<a class="ajax btnEncartFin" href="[(#SELF|parametre_url{debut#GET{id_pagination},#GET{encart_total}|moins{1}})]">#GET{encart_total}</a>
+    </span>]]
     <div class="contenu">
 	    <div class="entete">
 	      [<a href="#URL_ARTICLE">(#LOGO_ARTICLE_RUBRIQUE|image_reduire{#VAR{#EVAL{'acsEncart'.'#NIC'.'LogoTailleMax'},100}})</a>]
