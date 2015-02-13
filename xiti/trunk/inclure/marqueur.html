@@ -39,7 +39,7 @@
 <//B_artourub>
 
 [(#ENV{page}|=={recherche}|oui)
-	[(#SET{xtpage, page_recherche_[(#RECHERCHE|xiti_caracteres|xiti)]})]
+	[(#SET{xtpage, page_recherche[::(#RECHERCHE|xiti_caracteres|xiti)]})]
 ]
 [(#GET{titre_rub}|et{#GET{xtpage}|=={''}}|oui)
 	[(#SET{xtpage, [(#GET{titre_rub})]})]
