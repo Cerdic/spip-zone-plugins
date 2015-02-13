@@ -67,6 +67,15 @@ function diogene_documents_diogene_traiter($flux){
 		$id_objet = $flux['args']['id_objet'];
 		
 		$post = isset($_FILES) ? $_FILES : $GLOBALS['HTTP_POST_FILES'];
+		
+		if(_request('titre'))
+			$ancien_titre = _request('titre');
+		if(_request('credits'))
+			$ancien_credits = _request('credits');
+		if(_request('descriptif'))
+			$ancien_descriptif = _request('descriptif');
+		
+		$nouveaux_doc = array();
 		if (is_array($post)){
 			include_spip('inc/joindre_document');
 			include_spip('formulaires/joindre_document');
@@ -77,15 +86,16 @@ function diogene_documents_diogene_traiter($flux){
 				$nouveaux_doc = $ajouter_documents('new',$files,$objet,$id_objet,$mode);
 				foreach($files as $i => $file){
 					$infos_doc = array();
-					if($file['titre'])
-						$infos_doc['titre'] = $file['titre'];
-					if($file['descriptif'])
-						$infos_doc['descriptif'] = $file['descriptif'];
-					if($file['credits'])
-						$infos_doc['credits'] = $file['credits'];
-					if(count($infos_doc) > 0){
-						$test = sql_updateq('spip_documents',$infos_doc,'id_document='.$nouveaux_doc[$i]);
+					foreach(array('titre','credits','descriptif') as $champ){
+						if(isset($file[$champ])){
+							set_request($champ,$file[$champ]);
+							$infos_doc[$champ] = $file[$champ];
+						}
+						else
+							set_request($champ,'');
 					}
+					
+					document_modifier($nouveaux_doc[$i],$infos_doc);
 				}
 			}
 		}
@@ -93,38 +103,34 @@ function diogene_documents_diogene_traiter($flux){
 		if(intval($id_objet) > 0){
 			include_spip('action/editer_document');
 			$documents_objet = sql_allfetsel('id_document','spip_documents_liens','objet='.sql_quote($objet).' AND id_objet='.intval($id_objet));
-			if(_request('titre'))
-				$ancien_titre = _request('titre');
-			if(_request('credits'))
-				$ancien_credits = _request('credits');
-			if(_request('descriptif'))
-				$ancien_descriptif = _request('descriptif');
 			foreach($documents_objet as $doc){
-				$id_document = $doc['id_document'];
-				if(_request('supprimer_'.$id_document)){
-					include_spip('action/dissocier_document');
-					$suppression = supprimer_lien_document($id_document, $objet, $id_objet, true);
-				}else{
-					$infos_doc = array();
-					foreach(array('titre','credits','descriptif') as $champ){
-						if(_request($champ.'_'.$id_document)){
-							$valeur_champ = _request($champ.'_'.$id_document);
-							set_request($champ,$valeur_champ);
-							$infos_doc[$champ] = $valeur_champ;
+				if(!in_array($doc['id_document'],$nouveaux_doc)){
+					$id_document = $doc['id_document'];
+					if(_request('supprimer_'.$id_document)){
+						include_spip('action/dissocier_document');
+						$suppression = supprimer_lien_document($id_document, $objet, $id_objet, true);
+					}else{
+						$infos_doc = array();
+						foreach(array('titre','credits','descriptif') as $champ){
+							if(_request($champ.'_'.$id_document)){
+								$valeur_champ = _request($champ.'_'.$id_document);
+								set_request($champ,$valeur_champ);
+								$infos_doc[$champ] = $valeur_champ;
+							}
+							else
+								set_request($champ,'');
 						}
-						else
-							set_request($champ,'');
+						$err = document_modifier($id_document, $infos_doc);
 					}
-					$err = document_modifier($id_document, $infos_doc);
 				}
 			}
-			if(isset($ancien_titre))
-				set_request('titre',$ancien_titre);
-			if(isset($ancien_credits))
-				set_request('credits',$ancien_credits);
-			if(isset($ancien_descriptif))
-				set_request('descriptif',$ancien_descriptif);
 		}
+		if(isset($ancien_titre))
+			set_request('titre',$ancien_titre);
+		if(isset($ancien_credits))
+			set_request('credits',$ancien_credits);
+		if(isset($ancien_descriptif))
+			set_request('descriptif',$ancien_descriptif);
 	}
 	return $flux;
 }
