@@ -1,12 +1,13 @@
-#CACHE{0}
-
+[(#CACHE{0})]
 #banniere {
   width: 100%;
   height: #VAR{acsBanniereHauteur,60px};
+  line-height: #VAR{acsBanniereHauteur,60px};
   [background: (#VAR{acsBanniereFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsBanniereFondImage}})")][ (#VAR{acsBanniereFondImageRepeatX}|=={non}|?{[(#VAR{acsBanniereFondImageRepeatY}|=={non}|?{"no-repeat","repeat-y"})],[(#VAR{acsBanniereFondImageRepeatY}|=={non}|?{"repeat-x","repeat"})]})][ (#VAR{acsBanniereFondAlign, center})][ (#VAR{acsBanniereFondVerticalAlign, middle})];]
   font-family: [(#VAR{acsBanniereFont}), ]#VAR{acsBanniereFontFamily};
+  text-align: #VAR{acsBanniereAlign,center};
+  [(#VAR{acsBanniereLogo}|=={oui}|oui)padding-#VAR{acsBanniereLogoAlign}: [(#LOGO_SITE|largeur)px];]
 }
-
 #banniere .logo {
   position: absolute;
   border: 0;[
@@ -14,35 +15,16 @@
   (#VAR{acsBanniereLogoAlign,left}|=={left}|?{left: 0,right: 0});]
   top: 0;
 }
-
-#banniere .bantab {
-  height:100%;
-  width: 100%;
-}
-
-#banniere .bantd {
-  text-align: #VAR{acsBanniereAlign,center};
-  vertical-align: #VAR{acsBanniereValign};
-}
-
-#banniere .banimg {
-  position: relative;
-  border: 0;
-}
-
 #banniere a.nom_site {
   position: relative;
   z-index: 9;
   font-size: #VAR{acsBanniereFontSize,40px};
-  [color: (#VAR{acsBanniereTextColor});]
+  line-height:normal;
+  vertical-align: #VAR{acsBanniereValign};[
+  color: (#VAR{acsBanniereTextColor});][
+  text-shadow: 0px 0px 8px (#VAR{acsBanniereTextColorOver});]
 }
 [#banniere a.nom_site:hover {
-  color: (#VAR{acsBanniereTextColorOver});
-  text-shadow: 0px 0px 8px #fff;
+  color: (#VAR{acsBanniereTextColorOver});[
+  text-shadow: 0px 0px 8px (#VAR{acsBanniereTextColor});]
 }]
-#banniere .extralink {
-  margin-top: -#VAR{acsBanniereHauteur,60px};
-  padding-top: #VAR{acsBanniereExtraTop,5px};
-  margin-right: 5px;
-  float: right;
-}
