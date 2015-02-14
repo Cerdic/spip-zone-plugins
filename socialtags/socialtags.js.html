@@ -41,7 +41,7 @@
 				.replace(/%u_site/g, esc(this.u_site))
 			)
 			.attr('title', this.n)[
-			(#CONFIG{socialtags/wopen, 'non'}|=={oui}?{.attr('onclick','window.open(this.href, "_blank", "toolbar=no, location=no, scrollbars=no, resizable=yes,screenX=50,left=50,screenY=50,top=50, width=550, height=450");return false;')})
+	(#CONFIG{socialtags/wopen, 'non'}|=={oui}?{.attr('onclick','window.open(this.href, "_blank", "screenX=50,left=50,screenY=50,top=50, width=550, height=450,toolbar=no, location=no,resizable=yes, scrollbars=yes");return false;')})
 			].wrap('<li><\/li>')
 			.parent().appendTo(ul);
 		}});
