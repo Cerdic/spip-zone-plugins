@@ -1,0 +1,21 @@
+[(#REM)
+	Démo du framework ecommerce sous SPIP : Paiement / explications.
+	Étape 4 : Fin / explication.
+	Message de succès ou d'erreur.
+]
+<h2>Étape 4 : message de succès ou d'erreur</h2>
+
+<p>
+	Selon le mode choisi pour le paiement, on peut être redirigé sur la page de son choix suite au succès ou à l'échec de celui-ci, par défaut <code>spip.php?page=bank_retour_ok</code> ou <code>spip.php?page=bank_retour_echec</code>.
+	<br>Dans cette démo on affiche juste un message relatif au paiement : soit celui enregistré avec la transaction, soit un message générique. Il s'agit de chaînes de langues surchargeables du plugin «&nbsp;Banque & paiement&nbsp;».
+</p>
+
+</p>
+	Dans l'URL de retour sont insérés automatiquement quelques paramètres : l'identifiant, le hash et le type de la transaction. Ça nous permet de faire une boucle <code>&lt;BOUCLE_transaction(TRANSACTIONS){id_transaction}{transaction_hash}&gt;</code>. Parmi les balises disponibles, notons celles qui pourront nous servir ici : <code>\#REGLEE (oui|non)</code> permet de savoir si la transation a été payée, <code>\#FINIE (0|1)</code> indique si la transaction est finie, <code>\#MESSAGE</code> renvoie un message d'info relatif au règlement de la transaction, et <code>\#STATUT (commande|ok|echec)</code> donne le statut.
+</p>
+
+<h3>Remarques complémentaires</h3>
+
+<p>
+	Pour découvrir toutes les options d'ecommerce avec SPIP, consultez l'article <a href="http://contrib.spip.net/Inventaire-des-outils-SPIP-pour-du-e-commerce">Inventaire des outils SPIP pour du e-commerce </a>.
+</p>

@@ -1,0 +1,30 @@
+<paquet
+	prefix="democommerce"
+	categorie="outil"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.17;3.0.*]"
+	logo="prive/themes/spip/images/democommerce-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<!--
+		Paquet genere le 2015-02-10 20:19:28
+	-->
+
+	<nom>Démonstration du framework ecommerce</nom>
+
+	<auteur lien='blog.bravecassine.com/papier'>tcharlss</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="commandes" compatibilite="[1.0.0;]" />
+	<necessite nom="paniers" compatibilite="[1.0.0;]" />
+	<necessite nom="panier2commande" compatibilite="[0.1.6;]" />
+	<necessite nom="prix" compatibilite="[0.1.8;]" />
+	<utilise nom="bank" compatibilite="[2.0.0;]" />
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/democommerce.php" /> 
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/democommerce.php" />
+
+</paquet>

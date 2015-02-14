@@ -1,0 +1,44 @@
+[(#REM)
+	Démo du framework ecommerce sous SPIP : Paiement / explications.
+]
+<BOUCLE_commande(COMMANDES){id_auteur=#SESSION{id_auteur}}{0,1}{!par date}{statut=encours}>#SET{id_commande,#ID_COMMANDE}<BOUCLE_transaction(TRANSACTIONS){id_commande}>#SET{id_transaction,#ID_TRANSACTION}</BOUCLE_transaction></BOUCLE_commande>
+
+<h2>Étape 3 : paiement de la commande</h2>
+
+<p>
+	Une commande « en cours » [<a href='[(#URL_ECRIRE{commande,id_commande=#GET{id_commande}})]'>n° (#GET{id_commande})</a>] a été créée après validation du panier, il reste à procéder à son règlement.
+</p>
+
+<p>
+	La page est encapsulée dans une boucle qui récupère la commande en cours du visiteur : <code>&lt;BOUCLE_commande(COMMANDES){id_auteur=\#SESSION{id_auteur}}{statut=encours}&gt;</code>. En théorie, il ne peut y avoir qu'une commande en cours par auteur, mais pour être sûr on peut ajouter les critères <code>{0,1}{!par date}</code>.
+	<br>Pour afficher le contenu de la commande, vous pouvez inclure le squelette <code>inclure/commande.html</code>, ou vous inspirer de <code>prive/squelettes/inclure/commande_contenu.html</code> qui comporte plus d'informations (taxes, etc.).
+</p>
+
+<p>
+	Pour afficher les options de paiement, 2 formulaires sont disponibles en fonction du type de paiement que l'on souhaite : acte &rarr; <code>\#FORMULAIRE_PAYER_ACTE</code>, abonnement &rarr; <code>\#FORMULAIRE_PAYER_ABONNEMENT</code>. Il faut bien sûr qu'au moins un mode paiement soit <a href='[(#URL_ECRIRE{configurer_bank})]'>configuré</a>. Le 1er paramètre est le prix TTC, le 2ème est un tableau d'options contenant à minima le prix HT, l'identifiant de la commande et celui de l'auteur. On peut également préciser les URLs de retour en cas de succès ou d'échec du paiement, par défaut il s'agit de <code>spip.php?page=bank_retour_ok</code> et <code>spip.php?page=bank_retour_echec</code>. La liste complète des options est indiquée dans le code, voir en ligne : <a href='https://github.com/nursit/bank/blob/master/formulaires/payer_acte.php'>payer_acte.php</a>.
+</p>
+
+<p>
+<code class='multi'>\#FORMULAIRE_PAYER_ACTE{
+	\#PRIX*,
+	\#ARRAY{
+		montant_ht,\#PRIX_HT*,
+		id_commande,\#ID_COMMANDE,
+		id_auteur,\#ID_AUTEUR
+	}
+}</code>
+</p>
+
+<p>
+	Dès que le formulaire est affiché, une transaction liée à la commande est créée. Vous pouvez vérifier sa présence dans l'espace privé sur <a href="[(#URL_ECRIRE{transactions})]">la page des transactions</a> ou directement sur <a href='[(#URL_ECRIRE{commande,id_commande=#GET{id_commande}})]'>la fiche de la commande</a> (les commandes et les transactions se trouvent dans le menu «&nbsp;Activité&nbsp;»). Tant que le paiement n'a pas été confirmé, la transaction a le statut «&nbsp;commande&nbsp;», et le champ <code>montant_regle</code> est vide.
+</p>
+
+<p>
+	Une fois le paiement effectué ou simulé, selon le mode de paiement, il y a 2 possibilités pour la suite :
+	<br>&rarr; Si le mode de paiement permet de connaître l'issue du paiement automatiquement (carte bancaire, etc.), on sera redirigé vers une des 2 pages de succès ou d'échec. La transaction et la commande seront mises à jour automatiquement.
+	<br>&rarr; Dans le cas contraire (paiement par chèque, virement bancaire, etc.), on reste sur la page. Il faudra indiquer manuellement quand le paiement sera reçu.
+</p>
+
+<p>
+	Lors de vos développements, vous pouvez créer des transactions factices au moyen de <code>\#FORMULAIRE_DEMO_CREER_TRANSACTION</code>.
+</p>
