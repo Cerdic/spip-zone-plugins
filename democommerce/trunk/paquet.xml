@@ -1,7 +1,7 @@
 <paquet
 	prefix="democommerce"
 	categorie="outil"
-	version="1.0.0"
+	version="1.0.1"
 	etat="test"
 	compatibilite="[3.0.17;3.0.*]"
 	logo="prive/themes/spip/images/democommerce-64.png"
@@ -18,9 +18,9 @@
 
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="commandes" compatibilite="[1.0.0;]" />
+	<necessite nom="commandes" compatibilite="[1.2.6;]" />
 	<necessite nom="paniers" compatibilite="[1.0.0;]" />
-	<necessite nom="panier2commande" compatibilite="[0.1.6;]" />
+	<necessite nom="panier2commande" compatibilite="[0.1.5;]" />
 	<necessite nom="prix" compatibilite="[0.1.8;]" />
 	<utilise nom="bank" compatibilite="[2.0.0;]" />
 

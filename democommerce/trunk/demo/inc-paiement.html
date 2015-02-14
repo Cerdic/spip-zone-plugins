@@ -8,15 +8,15 @@
 <p class='note'>Cette page récapitule la commande en cours et permet d'effectuer le paiement ou d'annuler la commande.</p>
 
 <BOUCLE_commande(COMMANDES){id_auteur=#SESSION{id_auteur}}{statut=encours}{0,1}{!par date}>
-<div class='etiquette top'>&lt;BOUCLE_x(COMMANDES){...}&gt;</div>
+<div class='etiquette top'>&lt;BOUCLE_commande(COMMANDES){...}&gt;</div>
 <div class='outline large'>
 
 <div class='titre titre-commande'>Commande n° #ID_COMMANDE</div>
 
 [(#REM) Récapitulatif de la commande ]
 [<div class='recap-commande'>
-	<div class='note'>Récapitulatif.</div>
-	<div class='etiquette top'>\#INCLURE &rarr; inclure/commande</div>
+	<div class='note'><:commandes:recapitulatif:></div>
+	<div class='etiquette top'>\#INCLURE{fond=inclure/commande}{...}</div>
 	<div class='outline'>
 		(#INCLURE{fond=inclure/commande,id_commande})
 	</div>
@@ -25,7 +25,7 @@
 [(#REM) Formulaire pour payer ]
 [<div class='payer'>
 	<div class='note'>Paiement.</div>
-	<div class='etiquette top'>\#FORMULAIRE_PAYER_ACTE</div>
+	<div class='etiquette top'>\#FORMULAIRE_PAYER_ACTE{...}</div>
 	<div class='outline'>
 		(#FORMULAIRE_PAYER_ACTE{
 			#PRIX*,
