@@ -1,18 +1,18 @@
 [(#REM) 
-	Démo du framework ecommerce sous SPIP : squelette général.
+	Tutoriel pour implémenter le framework ecommerce sous SPIP : squelette général.
 	Le «vrai» contenu se trouve dans inc-produits.html, inc-panier.html et inc-paiement.html.
 ]
 #SET{etapes,#ARRAY{preambule,Préambule,produits,"1. Produits",panier,"2. Panier",paiement,"3. Paiement",retour,"4. Retour"}}
 #SET{etape,#ENV{etape}|in_array{#GET{etapes}|array_keys}|?{#ENV{etape},preambule}}
-#SET{url_propre,#URL_PAGE{demo/democommerce}}
+#SET{url_propre,#URL_PAGE{demo/tutocommerce}}
 <!DOCTYPE html>
 <html lang="#LANG">
 <head>
 	<meta charset="#CHARSET">
-	<title>Démonstration du framework ecommerce SPIP</title>
+	<title>Tuto-commerce SPIP</title>
 	[<link rel="stylesheet" href="(#CHEMIN{css/reset.css}|direction_css)" type="text/css" />]
 	[<link rel="stylesheet" href="(#CHEMIN{css/typo.css}|direction_css)" type="text/css" />]
-	[<link rel="stylesheet" href="(#PRODUIRE{fond=demo/css/style-democommerce.css}|direction_css)" type="text/css" />]
+	[<link rel="stylesheet" href="(#PRODUIRE{fond=demo/css/style-tutocommerce.css}|direction_css)" type="text/css" />]
 	#INSERT_HEAD_CSS
 	#INSERT_HEAD
 	<!-- script annotations -->
@@ -43,7 +43,7 @@
 		[(#INCLURE{fond=demo/inc-#GET{etape}, env})]
 
 		[(#REM) option pour cacher les annotations ]
-		<a id='annotations' href='\#'>Cacher/Afficher les annotations</a>
+		<a id='annotations' href='\#'>Cacher / Afficher les annotations</a>
 
 	</div><!-- .page -->
 

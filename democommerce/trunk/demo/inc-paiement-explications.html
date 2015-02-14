@@ -1,5 +1,6 @@
 [(#REM)
-	Démo du framework ecommerce sous SPIP : Paiement / explications.
+	Tutoriel pour implémenter le framework ecommerce sous SPIP.
+	Étape 3 : Paiement > explications.
 ]
 <BOUCLE_commande(COMMANDES){id_auteur=#SESSION{id_auteur}}{0,1}{!par date}{statut=encours}>#SET{id_commande,#ID_COMMANDE}<BOUCLE_transaction(TRANSACTIONS){id_commande}>#SET{id_transaction,#ID_TRANSACTION}</BOUCLE_transaction></BOUCLE_commande>
 

@@ -1,9 +1,9 @@
 [(#REM)
-	Démo du framework ecommerce pour SPIP
+	Tutoriel pour implémenter le framework ecommerce pour SPIP.
 	Étape 4 : Fin.
 	Message de succès ou d'erreur.
 ]
-#SET{url_propre,#URL_PAGE{demo/democommerce}}
+#SET{url_propre,#URL_PAGE{demo/tutocommerce}}
 
 <p class='note'>Page de retour en cas [(#ENV{paiement}|?{#ENV{paiement}|=={succes}|?{"de succès","d'échec"},"de succès ou d'échec"})] du paiement.</p>
 

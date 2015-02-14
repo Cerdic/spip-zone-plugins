@@ -2,11 +2,11 @@
 /**
  * Déclarations relatives à la base de données
  *
- * @plugin     Démonstration du framework ecommerce
+ * @plugin     Tuto-commerce
  * @copyright  2015
  * @author     tcharlss
  * @licence    GNU/GPL
- * @package    SPIP\Democommerce\Pipelines
+ * @package    SPIP\Tuto-commerce\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return array
  *     Déclarations d'interface pour le compilateur
  */
-function democommerce_declarer_tables_interfaces($interfaces) {
+function tutocommerce_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['produits_demos'] = 'produits_demos';
 
@@ -38,7 +38,7 @@ function democommerce_declarer_tables_interfaces($interfaces) {
  * @return array
  *     Description complétée des tables
  */
-function democommerce_declarer_tables_objets_sql($tables) {
+function tutocommerce_declarer_tables_objets_sql($tables) {
 
 	$tables['spip_produits_demos'] = array(
 		'type'               => 'produitdemo',

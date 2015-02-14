@@ -1,9 +1,9 @@
 [(#REM)
-	Démo du framework ecommerce pour SPIP
+	Tutoriel pour implémenter le framework ecommerce pour SPIP.
 	Étape 0 : Préambule.
 	Présentation du framework et test de la présence des trucs nécessaire pour faire marcher la démo.
 ]
-#SET{url_propre,#URL_PAGE{demo/democommerce}}
+#SET{url_propre,#URL_PAGE{demo/tutocommerce}}
 #SET{bank_on,#PLUGIN{bank}}
 #SET{simulation_on,#EVAL{_SIMU_BANK_ALLOWED}|=={true}|?{1,''}}
 #SET{prestas_acte,#CONFIG{bank_paiement/presta}|array_filter|array_keys}

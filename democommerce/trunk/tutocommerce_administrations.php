@@ -1,19 +1,19 @@
 <?php
 /**
- * Fichier gérant l'installation et désinstallation du plugin Démonstration du framework ecommerce
+ * Fichier gérant l'installation et désinstallation du plugin Tuto-commerce
  *
- * @plugin     Démonstration du framework ecommerce
+ * @plugin     Tuto-commerce
  * @copyright  2015
  * @author     tcharlss
  * @licence    GNU/GPL
- * @package    SPIP\Democommerce\Installation
+ * @package    SPIP\Tuto-commerce\Installation
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Fonction d'installation et de mise à jour du plugin Démonstration du framework ecommerce.
+ * Fonction d'installation et de mise à jour du plugin Tuto-commerce.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function democommerce_upgrade($nom_meta_base_version, $version_cible) {
+function tutocommerce_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
 	$maj['create'] = array(
@@ -35,13 +35,13 @@ function democommerce_upgrade($nom_meta_base_version, $version_cible) {
 
 
 /**
- * Fonction de désinstallation du plugin Démonstration du framework ecommerce.
+ * Fonction de désinstallation du plugin Tuto-commerce.
  *
  * @param string $nom_meta_base_version
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
-function democommerce_vider_tables($nom_meta_base_version) {
+function tutocommerce_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_produits_demos");
 
