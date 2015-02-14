@@ -13,8 +13,18 @@
 	[<link rel="stylesheet" href="(#CHEMIN{css/reset.css}|direction_css)" type="text/css" />]
 	[<link rel="stylesheet" href="(#CHEMIN{css/typo.css}|direction_css)" type="text/css" />]
 	[<link rel="stylesheet" href="(#PRODUIRE{fond=demo/css/style-democommerce.css}|direction_css)" type="text/css" />]
-	#INSERT_HEAD
 	#INSERT_HEAD_CSS
+	#INSERT_HEAD
+	<!-- script annotations -->
+	<script>
+		$( document ).ready(function() {
+			$( "#annotations" ).click(function() {
+				$( ".note" ).toggle("fast");
+				$( ".etiquette" ).toggle("fast");
+				$( ".outline" ).toggleClass("off");
+			});
+		});
+	</script>
 </head>
 <body class='#GET{etape}'>
 
@@ -32,8 +42,10 @@
 		[(#REM) Contenu de la page ]
 		[(#INCLURE{fond=demo/inc-#GET{etape}, env})]
 
-	</div><!-- .page -->
+		[(#REM) option pour cacher les annotations ]
+		<a id='annotations' href='\#'>Cacher/Afficher les annotations</a>
 
+	</div><!-- .page -->
 
 	[(#REM) Explications relatives à la page ]
 	[<div class='explications'>

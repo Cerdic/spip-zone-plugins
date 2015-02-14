@@ -52,10 +52,12 @@ p                  { margin-bottom: 1rem; }
 }
 
 /* divers */
+#annotations       { position: absolute; top: 0; left: 4rem; padding: 0 .66rem; background-color: green;  font-size: .9rem; color: #D0E7D0; text-decoration: none; }
+#annotations:hover { color: white; }
 img                { vertical-align: middle; }
 ul li              { list-style: none; padding: 0; }
-.outline           { /*padding: 2px;*/ border: 1px dashed #73C273; border-radius: 2px; }
-.outline.large     { padding: .5rem; }
+.outline:not(.off) { /*padding: 2px;*/ border: 1px dashed #73C273; border-radius: 2px; }
+.outline.large:not(.off) { padding: .5rem; }
 .etiquette         { position: relative; display: inline-block; padding: 0 .4rem; background: green; font-size: .7rem; font-family: Monospace; color: white; border-radius: 2px; }
 .etiquette:after   { border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; border-color: rgba(0, 128, 0, 0); border-width: 5px; }
 .etiquette.top:after { top: 100%; left: 25%;  border-top-color: #008000; margin-left: -5px; }
