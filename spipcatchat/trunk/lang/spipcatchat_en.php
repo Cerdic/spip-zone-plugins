@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'trash_confirm' => 'Do you really want to delete this room ? Warning ! Suppressing will be done when the room will be empty',
 
 /*--S--*/
-'salon_discution' => 'Chat Room',
+'salon_discussion' => 'Chat Room',
 'select_option' => 'Room list', 
 'success_ajout_salon' => 'Room added. It appears now in the room list',
 'status_absent'=>'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Off line',
