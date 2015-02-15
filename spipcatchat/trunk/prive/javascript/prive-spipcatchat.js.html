@@ -19,7 +19,7 @@ function spipcatchatmessage()
 	setTimeout(function(){$("#spipcatchatvide").css("display","none")},1E3); // Le message est de nouveau caché
   else if(timer) // Si le message n'est pas vide et que la varible TIMER est égale à TRUE -> batteries de teste 
   		{
-	  		$("#spipcatchattimer").css("display","block"); // Message d'erreur -> affichage message: temporisation
+	  		$("#spipcatchattimer").css("display","block"); // Message d'erreur -> affichage message: temporisation 
 	  		$("#spipcatchatcompt").html(t); // Initier le compte à rebours avec la variable T et premier affichage.
 	  		var a=setInterval(function(){t--;if(t<0){t=0;}$("#spipcatchatcompt").html(t)},800); // Contenu de la variable A -> fonction : On incrémente de -1 la variable T toutes les 800 millisecondes et on affiche et si elle est inférieure à zero la variable T prend la valeur 0.
 	  		setTimeout( // Retour à la normale après X millisecondes de la variable CATCHATREFRESH
