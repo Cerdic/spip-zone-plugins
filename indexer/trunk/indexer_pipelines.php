@@ -12,7 +12,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function indexer_post_edition($flux){
 	include_spip('base/connect_sql'); // pour être sûr d'avoir objet_type()
-	
+
+	$objet = $id_objet = false;
+
 	// On trouve le type de l'objet
 	if (isset($flux['args']['type'])){
 		$objet = $flux['args']['type'];
@@ -24,7 +26,7 @@ function indexer_post_edition($flux){
 	if (isset($flux['args']['id_objet'])){
 		$id_objet = $flux['args']['id_objet'];
 	}
-	
+
 	// Si on a ce qu'il faut, on continue
 	if ($objet and $id_objet){
 		include_spip('inc/indexer');
