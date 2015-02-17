@@ -15,7 +15,7 @@ function action_editer_rezosocio_dist($arg=null)
 	$id_rezosocio = intval($arg);
 
 	if (!$id_rezosocio) {
-		$id_rezosocio = rezosocio_inserer($id_groupe);
+		$id_rezosocio = rezosocio_inserer();
 	}
 
 	// Enregistre l'envoi dans la BD
@@ -25,11 +25,11 @@ function action_editer_rezosocio_dist($arg=null)
 }
 
 /**
- * Insertion d'un rezosocio dans un groupe
+ * Insertion d'un rezosocio
  * @param int $id_groupe
  * @return int
  */
-function rezosocio_inserer($id_groupe) {
+function rezosocio_inserer() {
 
 	$champs = array();
 	
