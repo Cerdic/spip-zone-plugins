@@ -101,34 +101,20 @@ function rezosocio_modifier($id_rezosocio, $set=null) {
  * @return void
  */
 function rezosocio_instituer($id_rezosocio, $c){
-	$row = sql_fetsel("statut, date", "spip_rezosocios", "id_rezosocio=".intval($id_rezosocio));
+	$row = sql_fetsel("date", "spip_rezosocios", "id_rezosocio=".intval($id_rezosocio));
 
-	$statut_ancien = $statut = $row['statut'];
 	$date_ancienne = $date = $row['date'];
 	
 	$champs = array();
 	
 	$d = isset($c['date'])?$c['date']:null;
-	$s = isset($c['statut'])?$c['statut']:$statut;
 
-	if ($s != $statut OR ($d AND $d != $date)) {
-		if (autoriser('creer', 'rezosocio'))
-			$statut = $champs['statut'] = $s;
-		else if (autoriser('modifier', 'rezosocio', $id_rezosocio) AND $s != 'publie')
-			$statut = $champs['statut'] = $s;
-
-		// En cas de publication, fixer la date a "maintenant"
-		// sauf si $c commande autre chose
-		// ou si l'article est deja date dans le futur
-		// En cas de proposition d'un article (mais pas depublication), idem
-		if ($champs['statut'] == 'publie'
-		 OR ($champs['statut'] == 'prop' AND ($d OR !in_array($statut_ancien, array('publie', 'prop'))))
-		) {
-			if ($d OR strtotime($d=$date)>time())
-				$champs['date'] = $date = $d;
-			else
-				$champs['date'] = $date = date('Y-m-d H:i:s');
-		}
+	if ($d AND $d != $date) {
+		
+		if ($d OR strtotime($d=$date)>time())
+			$champs['date'] = $date = $d;
+		else
+			$champs['date'] = $date = date('Y-m-d H:i:s');
 	}
 
 	// Envoyer aux plugins
