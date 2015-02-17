@@ -78,6 +78,37 @@
     <label>non</label>
   </variable>
   <variable>
+    <nom>FondImageRepeatX</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>FondImageRepeatY</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
+    <nom>FondAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <valeur>left</valeur>
+  </variable>
+  <variable>
+    <nom>FondVerticalAlign</nom>
+    <type>choix</type>
+    <option>top</option>
+    <option>middle</option>    
+    <option>bottom</option>
+    <valeur>top</valeur>
+  </variable>
+
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>

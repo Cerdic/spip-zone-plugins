@@ -4,7 +4,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2012
+Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Encapsule un composant pour prévisualisation ou appel Ajax
@@ -34,7 +34,7 @@ if (find_in_path($fond.'.html')) {
 }
 ?>
 </head>
-<body[ class="(#CONFIG{acsSet})"][ style="background: (#VAR{ACS_PREVIEW_BACKGROUND});"]>
+<body[ class="(#CONFIG{acsSet})"] style="width: auto;min-width: 20px;[ background: (#VAR{ACS_PREVIEW_BACKGROUND});]">
 <?php
 // Use preview if exist, or component itself if not.
 $p = find_in_path($_GET['c'].'_preview.html');

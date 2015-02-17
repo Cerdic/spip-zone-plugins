@@ -4,6 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pause' => 'Pause',
+'play' => 'Jouer',
 'suivant' => 'Suivant',
 'precedent' => 'Pr&eacute;c&eacute;dent',
 );

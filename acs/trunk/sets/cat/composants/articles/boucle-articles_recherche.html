@@ -5,9 +5,9 @@ Articles trouves
 ]<B_articles>#ANCRE_PAGINATION
 [<div class="cArticle">
   <form id="tri_resultats" action="#SELF" method="get" name="tri_resultats">
-    <div class="article bsize"><:resultats_recherche:> <b>&#171;(#RECHERCHE)&#187;</b>, <:tries_par:>
+    <div class="article bsize"><:resultats_recherche:> <b>&#171;(#ENV{recherche})&#187;</b>, <:tries_par:>
       <input type="hidden" name="page" value="recherche" />
-      <input type="hidden" name="recherche" value="#RECHERCHE" />
+      <input type="hidden" name="recherche" value="[(#RECHERCHE|entites_html)]" />
       <select name="classement" onchange="submit(); " class="spip_bouton">
         <option value="points"[(#CLASSEMENT|=={points}|?{' selected="selected" class="selected"'})] ><:pertinence:></option>
 [(#CONFIG{activer_statistiques}|=={oui}|?{" "})
@@ -22,7 +22,7 @@ Articles trouves
     </div>
   </form>
 </div>]
-<div class="liste-articles">
+<div class="liste-articles surlignable">
   [<p class="pagination">(#PAGINATION)</p>]
   <ul>
     <BOUCLE_articles(ARTICLES) {recherche} {statut=publie} {par (#CLASSEMENT|?{#CLASSEMENT,points})} {inverse (#ORDRE|?{0,1})} {pagination #VAR{acsArticlesPagination,10}} {lang}>
@@ -31,5 +31,5 @@ Articles trouves
   </ul>
 </div>
 </B_articles>
-    <p><:aucun_article:></p>
+    <p><:ecrire:info_aucun_article:></p>
 <//B_articles>

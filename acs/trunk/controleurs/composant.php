@@ -39,20 +39,26 @@ function controleurs_composant_dist($regs) {
 	$contexte = array(
     'c' => 'composants/'.$c,
     'nic' => $id,
-    'lang' => $GLOBALS['spip_lang']
+    'lang' => (_request('lang') ? _request('lang') : $GLOBALS['spip_lang'])
   );
   
   $css_class = _request('class'); /* classe du crayon */
+  $ctxhtml = '';
+  $contextes = array(
+		'id_article'=>'/\bid_article-(\d+)\b/',
+		'id_rubrique' => '/\bid_rubrique-(\d+)\b/',
+		'id_mot' => '/\bid_mot-(\d+)\b/',
+		'id_groupe' => '/\bid_groupe-(\d+)\b/',
+		'recherche' => '/\brecherche-(\w+)\b/',
+		'page' => '/\bpage-(\w+)\b/'
+  );
   $matches = array();
-  if (preg_match('/\bid_article-(\d+)\b/', $css_class, $matches) > 0)
-    $contexte['id_article'] = $matches[1];
-  elseif (preg_match('/\bid_rubrique-(\d+)\b/', $css_class, $matches) > 0)
-    $contexte['id_rubrique'] = $matches[1];
-  elseif (preg_match('/\bid_mot-(\d+)\b/', $css_class, $matches) > 0)
-    $contexte['id_mot'] = $matches[1];
-  elseif (preg_match('/\bid_groupe-(\d+)\b/', $css_class, $matches) > 0)
-    $contexte['id_groupe'] = $matches[1];
-
+  foreach($contextes as $c=>$re) {
+  	if (preg_match($re, $css_class, $matches) > 0) {
+  		$contexte[$c] = $matches[1];
+  		$ctxhtml .= '<input type="hidden" name="'.$c.'" value="'.$contexte[$c].'" />';
+  	}
+  }
   $html = '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
     '<div id="'."composant-$class-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.98; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
       recuperer_fond('vues/composant', $contexte).
@@ -67,7 +73,7 @@ function controleurs_composant_dist($regs) {
         '<input type="hidden" class="crayon-id" name="crayons[]" value="'.$crayon->key.'" />'."\n".
         '<input type="hidden" name="name_'.$crayon->key.'" value="'.$crayon->name.'" />'."\n".
         '<input type="hidden" name="md5_'.$crayon->key.'" value="'.$crayon->md5.'" />'."\n".
-      	'<input type="hidden" name="var_mode" value="recalcul" />'.
+      	$ctxhtml.
         $composant->edit('controleur').
         crayons_boutons().
       '</form>',

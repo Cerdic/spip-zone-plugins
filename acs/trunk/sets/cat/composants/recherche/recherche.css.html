@@ -25,7 +25,8 @@
   border-color: (#VAR{acsRechercheInputBord/Color});]
   color: #VAR{acsFondText,#00008f};[
   background: (#VAR{acsRechercheInput});]
-  margin: 4px;
+  margin: 2px;
+  vertical-align: middle;
   width: 70%; // fallback pour vieux browsers qui savent pas calc ! ;-) 
   width: calc(100% - 58px); // la taille plus marges du bouton submit
 }
@@ -44,7 +45,7 @@
 [(#REM) submit]
 .cRecherche .formulaire_recherche input.submit {
   vertical-align: middle;
-  margin:3px;
+  margin:2px;
   padding: 3px;
   border: thin solid #VAR{acsRechercheFond, transparent};[
   (#MODELE{c_css_border-radius}{c=Recherche}{var=BordRond})]

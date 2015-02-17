@@ -2,7 +2,11 @@
 
 ***** Mise en page d'un article *****
 
-].cArticle .entete, .cArticle .article {
+][.cArticle {
+  position: relative;
+  border: (#VAR{acsArticleBord/Width})[ (#VAR{acsArticleBord/Style})][ (#VAR{acsArticleBord/Color})];
+}]
+.cArticle .entete, .cArticle .article {
   padding-left: 5px;
   padding-right: 5px;
   margin-bottom: 5px;
@@ -10,9 +14,7 @@
 .cArticle .entete {
   [background-color: (#VAR{acsArticleTitreFond});]
   [background: url('(#ACS_CHEMIN{trame/#VAR{acsArticleTitreFondImage}})') repeat top left;]
-  border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
-  border-left: 0;
-  border-right:0;
+  border-bottom: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
 }
 .cArticle .entete p {
   margin :0;
@@ -21,9 +23,11 @@
   font-weight: bold;
 }
 .cArticle .entete .nav {
-  float: #LANG_RIGHT;
+  position: absolute;
+  #LANG_RIGHT: 5px;
 }
 .cArticle .entete .spip_logos {
+  margin-top: #VAR{acsFondTitleSize,1em};
   float: #VAR{acsArticleLogoAlign,right};
 }
 .cArticle .texte, .cArticle .chapo {

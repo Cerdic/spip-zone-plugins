@@ -5,9 +5,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Cadre',
 'description' => 'Cadre et conteneur pour d\'autres composants.',
-'help' => 'Cadre permet de définir des propriétés pour un cadre et d\'y glisser d\'autres composants.',
+'help' => 'Cadre permet de définir des propri&eacute;t&eacute;s pour un cadre et d\'y glisser d\'autres composants.',
 
-'marge' => 'Marge sur le bord',
+'FondImage' => 'Arri&egrave;re-plan',
+'FondImageRepeatX' => 'R&eacute;peter l\'image de fond en X',
+'FondImageRepeatY' => 'R&eacute;peter l\'image de fond en Y',
+'FondAlign' => _T('acs:align'),
+'FondVerticalAlign' => _T('acs:valign'),
 'Orientation' => 'Orientation',
 'OrientationVertical' => 'verticale',
 'OrientationHorizontal' => 'horizontale',

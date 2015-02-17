@@ -1,10 +1,17 @@
-[(#CACHE{0})][(#SET{texte_article_demo,Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent.})]
-
-<div style="text-align: center; margin: 2px; margin-bottom:0;"><span style="border: 1px solid #b8afaf; border-bottom: 0; background: #f8ffff; color:#00008f;  padding-left: 5px; padding-right: 5px; font-style: italic; font-size: 0.71em; -moz-border-radius-topleft: 20px; -moz-border-radius-topright: 10px;"><:articles:> : <small>#VAR{acsArticlesPagination,10}</small></span></div>
+[(#CACHE{0})][
+(#SET{texte,Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent. Felix qui potuit rerum cognoscere causas: si vis bellum para bellum. Si vis pacem para pacem. Bis repetita placent.})][
+(#SET{auteurs,toto})][
+(#SET{date,2010-09-18 19:49:52})][
+(#SET{date_redac,1789-09-18 20:00:00})][
+(#SET{date_modif,2008-02-08 19:49:53})][
+(#SET{nb,#VAR{acsArticlesPagination,2}})]
+<div style="text-align: center; margin: 5px; margin-bottom:0;"><span style="border: 1px solid #b8afaf; border-bottom: 0; background: #f8ffff; color:#00008f;  padding-left: 5px; padding-right: 5px; font-style: italic; font-size: 0.71em;"><:articles:> : <small>#VAR{acsArticlesPagination,10}</small></span></div>
 <div class="cat">
-  <div class="liste-articles">
+  <div class="liste-articles" style="padding:5px">
     <ul>
-      <INCLURE{fond=composants/articles/li-article}{titre=Titre}{id_article}{id_rubrique}{soustitre=Sous-titre}{surtitre=Surtitre}{texte=#GET{texte_article_demo}}{auteurs=toto}{date=2010-09-18 19:49:52}{date_redac=1789-09-18 20:00:00}{date_modif=2008-02-08 19:49:53}{urla=#URL_ARTICLE}>
+      <BOUCLE_articles(DATA){enum 1, #GET{nb}}>
+      <INCLURE{fond=composants/articles/li-article}{titre=Titre}{id_article}{id_rubrique}{soustitre=Sous-titre}{surtitre=Surtitre}{texte=#GET{texte}}{auteurs=#GET{auteurs}}{date=#GET{date}}{date_redac=1789-09-18 20:00:00}{date_modif=2008-02-08 19:49:53}{urla=#URL_ARTICLE}>
+      </BOUCLE_articles>
     </ul>
   </div>
 </div>

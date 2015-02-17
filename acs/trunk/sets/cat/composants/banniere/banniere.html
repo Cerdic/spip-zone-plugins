@@ -12,6 +12,6 @@
 	<span id="nom_site_spip" class="logo">#NOM_SITE_SPIP</span>
 	})]
 	</a>][
-(#VAR{acsBanniereImage}|=={''}|?{' '})<a href="#URL_SITE_SPIP" class="nom_site">&nbsp;#NOM_SITE_SPIP&nbsp;</a>][
-(#VAR{acsBanniereImage}|!={''}|?{' '})<a href="#URL_SITE_SPIP" class="nom_site"><img class="banimg" src="[(#ACS_CHEMIN{banniere/#VAR{acsBanniereImage}})]" title="#NOM_SITE_SPIP" onmouseover="this.src='spip.php?action=wrap&amp;cadre=#CHEMIN{composants/banniere/bnr/banner.php}&amp;exclut=#VAR{acsBanniereImage}';" onmouseout="this.src='[(#ACS_CHEMIN{banniere/#VAR{acsBanniereImage}})]';" alt="#NOM_SITE_SPIP" /></a>]
+(#VAR{acsBanniereImage}|=={''}|?{' '})<a href="#URL_SITE_SPIP" class="nom_site" title="<:sommaire:>">#NOM_SITE_SPIP</a>][
+(#VAR{acsBanniereImage}|!={''}|?{' '})<a href="#URL_SITE_SPIP" class="nom_site" title="<:sommaire:>"><img class="banimg" src="[(#ACS_CHEMIN{banniere/#VAR{acsBanniereImage}})]" title="#NOM_SITE_SPIP" onmouseover="this.src='spip.php?action=wrap&amp;cadre=#CHEMIN{composants/banniere/bnr/banner.php}&amp;exclut=#VAR{acsBanniereImage}';" onmouseout="this.src='[(#ACS_CHEMIN{banniere/#VAR{acsBanniereImage}})]';" alt="#NOM_SITE_SPIP" /></a>]
 </div>

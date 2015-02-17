@@ -8,7 +8,7 @@ div.cRubnav {
   [background: (#VAR{acsRubnavFond});]
   position: static;[
   z-index: (#GET{z-index}|plus{1});][
-  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond}{sauf=bottom})][
+  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond})][
   (#MODELE{c_css_shadow}{c=Rubnav})]
 }
 
@@ -25,9 +25,15 @@ div.cRubnav {
   border-top: 1px solid (#VAR{acsRubnavSep});]
   position: relative;
   text-align: #LANG_LEFT;
-  padding-#LANG_LEFT: 5px;
   padding-bottom: 1px;
 }
+.cRubnav li.menu-item:first-child, .cRubnav li.menu-item a:first-child {
+  border: 0;[
+  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond}{sauf=bottom})]
+}
+[.cRubnav li.menu-item:last-child, .cRubnav li.menu-item a:last-child {
+  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond}{sauf=top})
+}]
 .cRubnav .menu-item  a.menu-item-haschilds {
   background-position: center[ (#LANG_RIGHT|=={left}|?{left,right})];  
   background-repeat: no-repeat;
@@ -44,8 +50,15 @@ div.cRubnav {
   display: block;
   width: 100%;
 }
-
-.cRubnav .menu-item a .titrerub{
+.cRubnav ul {
+  padding-#LANG_LEFT: 2px;
+}
+.cRubnav ul:first-child {
+  padding: 0;
+}
+.cRubnav .menu-item a .titrerub {
+  display: block;
+  padding-#LANG_LEFT: 3px;
   padding-#LANG_RIGHT: 10px;
 }
 
@@ -88,7 +101,7 @@ div.cRubnav {
   [border-color: (#VAR{acsRubnavBord/Color});][
   z-index: (#GET{z-index});][
   (#MODELE{c_css_shadow}{c=Rubnav})][
-  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond}{sauf=top})]
+  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond})]
 }
 .cRubnav .menu-item:hover>ul.hidden {
   display: block;

@@ -14,7 +14,9 @@
   padding-left: (#VAR{#EVAL{'acsCadre'.'#NIC'.'PaddingLeft'}});][
   padding-right: (#VAR{#EVAL{'acsCadre'.'#NIC'.'PaddingRight'}});][
   background: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Fond'}});][
-  background-image: url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsCadre'.'#NIC'.'FondImage'}}})");][
+  background-image: url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsCadre'.'#NIC'.'FondImage'}}})");
+  background-repeat: [(#VAR{#EVAL{'acsCadre'.'#NIC'.'FondImageRepeatX'}}|=={non}|?{[(#VAR{#EVAL{'acsCadre'.'#NIC'.'FondImageRepeatY'}}|=={non}|?{"no-repeat","repeat-y"})],[(#VAR{#EVAL{'acsCadre'.'#NIC'.'FondImageRepeatY'}}|=={non}|?{"repeat-x","repeat"})]})];
+  background-position: [(#VAR{#EVAL{'acsCadre'.'#NIC'.'FondAlign'},'center'})][ (#VAR{acsBanniereFondVerticalAlign, middle})];]][
   border: #VAR{#EVAL{'acsCadre'.'#NIC'.'Bord/Width'},thin}[ (#VAR{#EVAL{'acsCadre'.'#NIC'.'Bord/Style'},solid}) ](#VAR{#EVAL{'acsCadre'.'#NIC'.'Bord/Color'}});][
   color: (#VAR{#EVAL{'acsCadre'.'#NIC'.'Text'}});][
   (#MODELE{c_css_border-radius}{c=Cadre}{nic=#NIC}{var=BordRond})][

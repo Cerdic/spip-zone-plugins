@@ -1,19 +1,18 @@
 [(#CACHE{0})]
-
-.cEncart#NIC {[
-  position: relative;
-  background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Fond'}});][
+.cEncart#NIC {
+  position: relative;[
+  background-color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Fond'}});][
   border-width: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Width'}});][
   border-style: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Style'}});][
   border-color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});][
-  (#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC})][
+  (#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{var=BordRond})][
   (#MODELE{c_css_shadow}{c=Encart}{nic=#NIC})]
 }
 .cEncart#NIC .entete {
   [background-color: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}});][
   background-image: url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}}})");][
   border-bottom: #VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Width'}} #VAR{#EVAL{'acsEncart'.'#NIC'.'TitreBord/Style'}} (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreBord/Color'}});][
-  (#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|!={rubriques}|?{' '})[(#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{sauf=bottom})]]
+  (#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|!={rubriques}|?{' '})[(#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{var=BordRond}{sauf=bottom})]]
 }
 .cEncart#NIC .entete .spip_logos {
   float: #VAR{acsArticleLogoAlign,left};

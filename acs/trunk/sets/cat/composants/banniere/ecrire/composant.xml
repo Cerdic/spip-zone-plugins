@@ -4,7 +4,7 @@
 
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>1.1.0</version>
+  <version>1.1.1</version>
   <necessite id='acs' version='[0.8.8;]' />
   <group>nav</group>
 
@@ -13,47 +13,6 @@
     <valeur>160</valeur>
   </param>
 
-  <variable>
-    <nom>Fond</nom>
-    <type>color</type>
-  </variable>
-  <variable>
-    <nom>FondImage</nom>
-    <type>img</type>
-    <chemin>trame</chemin>
-    <label>non</label>
-  </variable>
-  <variable>
-    <nom>FondImageRepeatX</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>oui</valeur>
-  </variable>
-  <variable>
-    <nom>FondImageRepeatY</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>non</valeur>
-  </variable>
-  <variable>
-    <nom>FondAlign</nom>
-    <type>choix</type>
-    <option>left</option>
-    <option>center</option>
-    <option>right</option>
-    <valeur>left</valeur>
-  </variable>
-  <variable>
-    <nom>FondVerticalAlign</nom>
-    <type>choix</type>
-    <option>top</option>
-    <option>middle</option>    
-    <option>bottom</option>
-    <valeur>top</valeur>
-  </variable>
-  
   <variable>
     <nom>Image</nom>
     <type>img</type>

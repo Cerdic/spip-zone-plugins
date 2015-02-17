@@ -4,7 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Encart',
-'description' => 'Blocks of last published articles or of last published articles in section(s) with selected keyword.',
+'description' => 'Blocks of last published documents, articles or categories published with selected keyword.',
 
 'Type' => 'Type',
 'TypeArticles' => 'articles',

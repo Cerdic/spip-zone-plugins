@@ -43,7 +43,14 @@ dans la feuille de style du modèle, qui est chargée.
 .alert{
   color: red;
 }
-
+.alert_box {
+  display: block;
+  background: #efefff;
+  border: 1px solid darkred;
+  border-radius: 5px;
+  box-shadow: 2px 2px 8px #dfdfdf;
+  padding: 5px;
+}
 [(#REM) Mise en page en colonnes - ne PAS mettre margin/padding là-dedans ! ]
 .acs_colonnes {
   display: block;
@@ -535,19 +542,4 @@ img.bouton_edit_composant:hover {
 [(#REM) Position de l'image signalant un chargement en ajax 
 ].image_loading {
   position: absolute;
-}
-[(#REM) Style du selecteur d'admins
-].acs_editer_admins .highlight.off {
-  display :inline;
-  background: none;
-  font-weight: normal;
-  padding-left: 2px;
-  padding-right: 2px;
-}
-.acs_editer_admins a.highlight {
-  background: #GET{claire};
-  font-weight: bold;
-}
-.acs_editer_admins a.highlight.off:hover {
-  background: #GET{claire};
 }

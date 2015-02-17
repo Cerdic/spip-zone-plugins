@@ -5,7 +5,7 @@ jQuery(document).ready(
 			jQuery(".cRubnav li.menu-item:not(.on),.cNavKeyRub li.menu-item").hover(function(){
 			  jQuery("ul.hidden", this).hide().filter(":first").show("fast");
 			},function(){
-				jQuery("ul.hidden", this).hide("fast");
+				jQuery("ul.hidden", this).stop(true,true).hide();
 			});
 		}
 		_setHover();

@@ -60,13 +60,33 @@ abstract class Controle {
  */
 class ctlColor extends Controle {
   public function draw() {
-    if (substr($this->value, 0, 4) == "=acs")
+  	include_spip('plugins-dist/filtres_images/filtres/couleurs');
+    if (substr($this->value, 0, 4) == "=acs") {
       $color = meta_recursive($GLOBALS['meta'], substr($this->value, 1));
-    if (!$color)
-      $color = meta_recursive($GLOBALS['meta'], substr($this->value, 1).'/Color'); // Cas des variables de type "Bord", par exemple
-    else
-      $color = meta_recursive($GLOBALS['meta'], $this->var);
-    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$this->var.'" name="'.$this->var.'_'.$this->wid.'" size="16" value="'.$this->value.'" style="background: '.$color.'"></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    	if (!$color)
+    		$color = meta_recursive($GLOBALS['meta'], substr($this->value, 1).'/Color'); // Cas des variables de type "Bord", par exemple
+  	}
+   	else
+    	$color = meta_recursive($GLOBALS['meta'], $this->var);
+   	$text_color = '000';
+   	if (strlen($color) > 0) {
+   		$color = substr($color,1);
+   		if (strlen($color) == 3) {
+   			$r = substr($color,0,1);
+   			$v = substr($color,1,1);
+   			$b = substr($color,2,1);
+   			$color = "$r$r$v$v$b$b";
+   		}
+    	if ($color != '' && function_exists('couleur_inverser')) 
+    		$text_color = couleur_inverser(substr($color,1));
+    }
+    $color = '#'.$color;
+    $text_color = '#'.$text_color;
+    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;'.
+      '<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>'.
+      '<td><input type="text" class="palette" id="'.$this->var.'" name="'.$this->var.'_'.$this->wid.'" size="16" value="'.$this->value.'" style="background: '.
+      $color.';color: '.$text_color.'"></td>'.($this->help ? '<td>&nbsp;</td>'.
+      '<td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
     if ($this->help)
       $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;

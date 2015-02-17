@@ -6,15 +6,14 @@ puis par date du plus récent au plus ancien.
 
 ][(#SET{acsEncartKeyword,#VAR{#EVAL{'acsEncart'.'#NIC'.'Key/Key'},_Encart}})][(#SET{id_pagination,encart#NIC})][(#SET{encart_debut,#ENV{#EVAL{'debut'.'encart'.'#NIC'},0}})]
 <BOUCLE_decompte_encart(DOCUMENTS){titre_mot=#GET{acsEncartKeyword}}></BOUCLE_decompte_encart>#SET{encart_total,#TOTAL_BOUCLE}<//B_decompte_encart>
-<B_encart>[(#ANCRE_PAGINATION)][(#VAR{#EVAL{'acsEncart'.'#NIC'.'Pagination'}}|=={spip}|oui)[<span class="pagination nav nsize">(#PAGINATION)</span>]<div class="nettoyeur" ></div>]
+<B_encart>[(#ANCRE_PAGINATION)][(#VAR{#EVAL{'acsEncart'.'#NIC'.'Pagination'}}|=={spip}|oui)[<span class="pagination nav nsize screen_only">(#PAGINATION)</span>]<div class="nettoyeur" ></div>]
 <BOUCLE_encart(DOCUMENTS){par num titre}{par date}{inverse}{doublons}{titre_mot=#GET{acsEncartKeyword}}{pagination #VAR{#EVAL{'acsEncart'.'#NIC'.'Nb'},3} #GET{id_pagination}}>
-  <div class="cEncartClass cEncart#NIC[ cEncartTimer(#VAR{#EVAL{'acsEncart'.'#NIC'.'Delai'}})]">[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Pagination'}}|=={boutons}|oui)[(#GET{encart_total}|>{1}|oui)
-    <span class="pagination nav nsize screen_only"><img class="btnEncartPause" src="#ACS_CHEMIN{encart/pause.gif}" title="<:acs:encart_pause:>" alt="||" /><a class="ajax btnEncartDebut" href="[(#SELF|parametre_url{debut#GET{id_pagination},0})]" style="display:none"><img src="#ACS_CHEMIN{encart/debut.gif}" title="<:acs:encart_debut:>" alt="&laquo;" /></a>[
-    (#GET{encart_debut}|>{0}|?{' '})<a class="ajax btnEncartPrecedent" href="[(#SELF|parametre_url{debut#GET{id_pagination},#EVAL{#GET{encart_debut}-1}})]"><img src="#ACS_CHEMIN{encart/gauche.gif}" title="<:acs:encart_precedent:>" alt="&larr;" /></a>][
+  <div class="cEncartClass cEncart#NIC[ cEncartTimer(#VAR{#EVAL{'acsEncart'.'#NIC'.'Delai'}})]">[(#VAR{#EVAL{'acsEncart'.'#NIC'.'Pagination'}}|=={boutons}|oui)[(#GET{encart_total}|>{1}|oui)<span class="pagination nav nsize screen_only hidden"><img class="btnEncartPlay hidden" src="#ACS_CHEMIN{encart/play.gif}" title="<:acs:encart_play:>" alt=">" /><img class="btnEncartPause hidden" src="#ACS_CHEMIN{encart/pause.gif}" title="<:acs:encart_pause:>" alt="||" /><a class="ajax nohistory btnEncartDebut" href="[(#SELF|parametre_url{debut#GET{id_pagination},0})]" style="display:none"><img src="#ACS_CHEMIN{encart/debut.gif}" title="<:acs:encart_debut:>" alt="&laquo;" /></a>[
+    (#GET{encart_debut}|>{0}|?{' '})<a class="ajax nohistory btnEncartPrecedent" href="[(#SELF|parametre_url{debut#GET{id_pagination},#EVAL{#GET{encart_debut}-1}})]"><img src="#ACS_CHEMIN{encart/gauche.gif}" title="<:acs:encart_precedent:>" alt="&larr;" /></a>][
     (#GET{encart_debut}|=={0}|?{' '})<img src="#ACS_CHEMIN{encart/gauche_off.gif}" title="<:acs:encart_precedent:>" alt="&larr;" />][
-    (#GET{encart_debut}|<{#GET{encart_total}|moins{1}}|?{' '})<a class="ajax btnEncartSuivant" href="[(#SELF|parametre_url{debut#GET{id_pagination},#EVAL{#GET{encart_debut}+1}})]"><img src="#ACS_CHEMIN{encart/droit.gif}" title="<:acs:encart_suivant:>" alt="&rarr;" /></a>][
+    (#GET{encart_debut}|<{#GET{encart_total}|moins{1}}|?{' '})<a class="ajax nohistory btnEncartSuivant" href="[(#SELF|parametre_url{debut#GET{id_pagination},#EVAL{#GET{encart_debut}+1}})]"><img src="#ACS_CHEMIN{encart/droit.gif}" title="<:acs:encart_suivant:>" alt="&rarr;" /></a>][
     (#GET{encart_debut}|>={#GET{encart_total}|moins{1}}|?{' '})<img src="#ACS_CHEMIN{encart/droit_off.gif}" title="<:acs:encart_suivant:>" alt="&rarr;" />][
-    (#GET{encart_debut}|plus{1})]/<a class="ajax btnEncartFin" href="[(#SELF|parametre_url{debut#GET{id_pagination},#GET{encart_total}|moins{1}})]">#GET{encart_total}</a>
+    (#GET{encart_debut}|plus{1})]/<a class="ajax nohistory btnEncartFin" href="[(#SELF|parametre_url{debut#GET{id_pagination},#GET{encart_total}|moins{1}})]">#GET{encart_total}</a>
     </span>]]
     <div class="contenu">
 	    <div class="entete">[<div class="nav nsize">(#VAR{#EVAL{'acsEncart'.'#NIC'.'Date'}}|!={non}|?{" "})[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#CREDITS)]</div>][

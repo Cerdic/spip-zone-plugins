@@ -5,20 +5,17 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2012
+Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 ---------------------------------------------
  *  Feuille de style pour modèles ACS   *
 ---------------------------------------------
 
-Définit certaines propriétés par défaut
-puis agrège les CSS de tous les composants utilisés.
+Agrège les CSS de tous les composants utilisés,
+en commençant par le composant "Fond" s'il existe.
 
-]
-h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em;}
-ul, ol, li { margin: 0; padding: 0; }
-ul { list-style: none; }
-div, img, table, form { margin: 0; padding: 0; border-width: 0; border-style: none; }
-table {border-collapse: collapse;}
-[(#COMPOSANTS_CODE{css})]
+Ce fichier ne doit pas etre modifie. Override : si un fichier du même nom existe
+dans le dossier des squelettes personnalises, il remplace ce fichier.
+
+][(#COMPOSANTS_CODE{css})]

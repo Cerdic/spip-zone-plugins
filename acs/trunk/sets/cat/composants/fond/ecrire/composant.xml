@@ -3,7 +3,7 @@
   <nom>Fond</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>

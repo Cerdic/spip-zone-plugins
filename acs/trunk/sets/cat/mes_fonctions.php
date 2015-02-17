@@ -8,7 +8,10 @@
 Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 */
-
+define('_SURLIGNE_RECHERCHE_REFERERS',true);
+if (isset($_REQUEST['recherche'])) {
+	$_GET['var_recherche'] = $_REQUEST['recherche'];
+}
 
 $GLOBALS['ouvre_ref'] = '';
 $GLOBALS['ferme_ref'] = '';

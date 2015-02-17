@@ -4,7 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Encart',
-'description' => 'Encart des derniers articles publiés avec le mot-clef choisi ou des derniers articles des rubriques ayant le mot-clef choisi.',
+'description' => 'Encart des n derniers documents, articles, ou rubriques publiés avec le mot-clef choisi.',
 
 'Type' => 'Type',
 'TypeArticles' => 'articles',

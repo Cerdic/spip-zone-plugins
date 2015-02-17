@@ -1,12 +1,10 @@
 [(#CACHE{0})]
 #banniere {
-  width: 100%;
   height: #VAR{acsBanniereHauteur,60px};
   line-height: #VAR{acsBanniereHauteur,60px};
-  [background: (#VAR{acsBanniereFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsBanniereFondImage}})")][ (#VAR{acsBanniereFondImageRepeatX}|=={non}|?{[(#VAR{acsBanniereFondImageRepeatY}|=={non}|?{"no-repeat","repeat-y"})],[(#VAR{acsBanniereFondImageRepeatY}|=={non}|?{"repeat-x","repeat"})]})][ (#VAR{acsBanniereFondAlign, center})][ (#VAR{acsBanniereFondVerticalAlign, middle})];]
   font-family: [(#VAR{acsBanniereFont}), ]#VAR{acsBanniereFontFamily};
   text-align: #VAR{acsBanniereAlign,center};
-  [(#VAR{acsBanniereLogo}|=={oui}|oui)padding-#VAR{acsBanniereLogoAlign}: [(#LOGO_SITE|largeur)px];]
+  [(#VAR{acsBanniereLogo}|=={oui}|oui)padding: [(#LOGO_SITE|largeur|plus{#VAR{acsBanniereMarge,0}}|plus{#VAR{acsBanniereMarge,0}})px]; padding-top:0;padding-bottom:0]
 }
 #banniere .logo {
   position: absolute;
