@@ -2,6 +2,9 @@
 	<langue code="ar" url="http://trad.spip.net/tradlang_module/coordonnees?lang_cible=ar" total="110" traduits="25" relire="0" modifs="1" nouveaux="84" pourcent="22.73">
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 	</langue>
+	<langue code="de" url="http://trad.spip.net/tradlang_module/coordonnees?lang_cible=de" total="110" traduits="110" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/coordonnees?lang_cible=en" total="110" traduits="81" relire="0" modifs="0" nouveaux="29" pourcent="73.64">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
