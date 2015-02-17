@@ -5,5 +5,6 @@ include_once _DIR_PLUGIN_ADMINER."index.php";
 require_once 'adminer.php';
 chdir (_ROOT_RACINE."ecrire/");
 
+/* On insere la css inline car adminer injecte une url relative a ecrire/ qui est en 404 */
 ?>
 [<style type="text/css">(#INCLURE{adminer.css}|compacte{css})</style>]
