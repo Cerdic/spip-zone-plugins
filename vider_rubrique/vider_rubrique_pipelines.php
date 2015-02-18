@@ -37,6 +37,8 @@ function vider_rubrique_boite_infos($flux){
 }
 
 function vider_rubrique_jqueryui_plugins($plugins){
-	$plugins[] = "jquery.ui.dialog";
+	if (test_espace_prive()){
+		$plugins[] = "jquery.ui.dialog";
+	}
 	return $plugins;
 }
