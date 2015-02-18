@@ -13,8 +13,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return mixed
  */
 function cookiebar_insert_head_css($flux){
-  $flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path("css/jquery.cookiebar.css").'" />';
-  return $flux;
+
+	if(defined('_COOKIEBAR_CSS_NON'))
+		return $flux;
+
+	$flux .= '<link rel="stylesheet" type="text/css" href="'.find_in_path("css/jquery.cookiebar.css").'" />';
+		return $flux;
 }
 
 /**
@@ -24,16 +28,16 @@ function cookiebar_insert_head_css($flux){
  * @return mixed
  */
 function cookiebar_insert_head($flux){
-  //$js_cookiebar = parametre_url(generer_url_public('jquery.cookiebar.js'), 'lang', $lang);
-  include_spip('inc/filtres'); 
-  if (!$lang) $lang = $GLOBALS["spip_lang"];
-  $js_cookiebar = produire_fond_statique("jquery.cookiebar.js", array("lang"=>$lang));
+	//$js_cookiebar = parametre_url(generer_url_public('jquery.cookiebar.js'), 'lang', $lang);
+	include_spip('inc/filtres'); 
+	if (!$lang) $lang = $GLOBALS["spip_lang"];
+	$js_cookiebar = produire_fond_statique("jquery.cookiebar.js", array("lang"=>$lang));
 
-  $flux .= 
-           "<script type='text/javascript' src='$js_cookiebar'></script>\n"
-         . "<script type='text/javascript' src='".find_in_path('js/jquery.cookiebar.call.js')."'></script>";
-  
-  return $flux;
+	$flux .= 
+		"<script type='text/javascript' src='$js_cookiebar'></script>\n"
+		. "<script type='text/javascript' src='".find_in_path('js/jquery.cookiebar.call.js')."'></script>";
+
+	return $flux;
 }
 
 ?>
