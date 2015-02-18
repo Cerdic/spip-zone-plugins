@@ -28,20 +28,27 @@
         ]]]
     </BOUCLE_projets_rss>
 
-    [(#SET{projets_id,[(#GET{projets_id}|array_unique|array_filter)]})]
-    [(#SET{projets_id,[(#GET{projets_id}|count|=={0}|?{0,[(#GET{projets_id}|join{","})]})]})]
-    [(#SET{where,projets.id_projet IN \(#GET{projets_id}\)})]
-    <INCLURE{fond=objets/liste/projets,where=#GET{where},ajax,env} />
-
-    [(#PLUGIN{RSS_COMMITS}|oui)
-        [(#SET{projets_id_rss,[(#GET{projets_id_rss}|array_unique|array_filter)]})]
-        [(#SET{projets_id_rss,[(#GET{projets_id_rss}|count|=={0}|?{0,[(#GET{projets_id_rss}|join{","})]})]})]
-        [(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
-        [(#SET{where,commits.id_projet IN \(#GET{projets_id_rss}\)})]
-        <INCLURE{fond=objets/liste/commits,where=#GET{where},ajax,env} />]
-        [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
-        [(#SET{where,IN \(#GET{projets_id_rss}\)})]
-        <INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{projets_id_rss}, force=0, ajax, env} />]
+    [(#REM)
+        Si on n'a pas d'identifiant pour les projets, pas la peine d'aller plus loin
+    ][(#GET{projets_id}|count|=={0}|non)
+        [(#SET{projets_id,[(#GET{projets_id}|array_unique|array_filter)]})]
+        [(#SET{projets_id,[(#GET{projets_id}|count|=={0}|?{0,[(#GET{projets_id}|join{","})]})]})]
+        [(#SET{where,projets.id_projet IN \(#GET{projets_id}\)})]
+        <INCLURE{fond=objets/liste/projets,where=#GET{where},ajax,env} />
+    ]
+    [(#REM)
+        Si on n'a pas d'identifiant pour les rss de projets, pas la peine d'aller plus loin
+    ][(#GET{projets_id_rss}|count|=={0}|non)
+        [(#PLUGIN{RSS_COMMITS}|oui)
+            [(#SET{projets_id_rss,[(#GET{projets_id_rss}|array_unique|array_filter)]})]
+            [(#SET{projets_id_rss,[(#GET{projets_id_rss}|count|=={0}|?{0,[(#GET{projets_id_rss}|join{","})]})]})]
+                [(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
+                [(#SET{where,commits.id_projet IN \(#GET{projets_id_rss}\)})]
+                <INCLURE{fond=objets/liste/commits,where=#GET{where},ajax,env} />]
+                [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
+                [(#SET{where,IN \(#GET{projets_id_rss}\)})]
+                <INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{projets_id_rss}, force=0, ajax, env} />]
+        ]
     ]
     [(#SET{where,''})]
     </B_projets_lies>
