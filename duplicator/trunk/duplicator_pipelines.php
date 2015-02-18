@@ -30,6 +30,8 @@ function duplicator_boite_infos($flux){
 }
 
 function duplicator_jqueryui_plugins($plugins){
-	$plugins[] = "jquery.ui.dialog";
+	if (test_espace_prive()){
+		$plugins[] = "jquery.ui.dialog";
+	}
 	return $plugins;
 }
