@@ -53,8 +53,8 @@
 [(#PLUGIN{RSS_COMMITS}|oui)
 	[(#SET{id_projet,[(#VERSIONING_RSS|?{#ID_PROJET,#ID_PROJET_PARENT})]})]
 	[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
-	<INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{id_projet}, par=date_creation, env, ajax} />][(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
-	<INCLURE{fond=objets/liste/commits, id_projet=#GET{id_projet}, par=date_creation, env, ajax} />]
+	<INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{id_projet}, force=0, par=date_creation, env, ajax} />][(#CONFIG{'rss_commits/import_auto','non'}|=={'oui'}|oui)
+	<INCLURE{fond=objets/liste/commits, id_projet=#GET{id_projet}, force=0, par=date_creation, env, ajax} />]
 	<div class="clearfix"></div>
 ]
 

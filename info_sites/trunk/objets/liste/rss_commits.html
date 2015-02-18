@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_rss_commits (DATA) {source table, (#ENV{id_projet,''}|lister_rss_commits)} {auteur=#GET{auteur,''}} {descriptif ?} {texte ?} {pagination 10} {datacache 2400} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}} {env}>
+	<BOUCLE_rss_commits (DATA) {source table, (#ENV{id_projet,''}|lister_rss_commits{#ENV{force}})} {auteur=#GET{auteur,''}} {descriptif ?} {texte ?} {pagination 10} {datacache 2400} {tri #ENV{par,date_creation},#GET{defaut_tri}} {par #ENV{par,date_creation}} {pagination #ENV{nb,10}} {env}>
 		<tr class="commit">
 			<td><span class="titre"><i class="fa fa-angle-double-right"></i> #TITRE</span></td>
 			<td><abbr title="#DATE_CREATION">[(#DATE_CREATION|affdate)]</abbr></td>

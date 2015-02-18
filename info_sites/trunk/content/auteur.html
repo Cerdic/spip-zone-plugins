@@ -43,7 +43,7 @@
 		[(#SET{email,[(#EMAIL|explode{'@'}|table_valeur{0})]})]
 		<INCLURE{fond=objets/liste/commits,where=commits.auteur LIKE '%#GET{email}%',ajax} />]
 		[(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
-		<INCLURE{fond=objets/liste/rss_commits, par=date_creation,auteur=^#GET{email}, env, ajax, sinon=<:commit:info_aucun_commit:>}>]
+		<INCLURE{fond=objets/liste/rss_commits, force=0, par=date_creation, auteur=^#GET{email}, env, ajax, sinon=<:commit:info_aucun_commit:>}>]
 	]
 		<INCLURE{fond=liste/articles-auteur,id_auteur,env,ajax} />
 

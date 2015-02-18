@@ -41,7 +41,7 @@
         <INCLURE{fond=objets/liste/commits,where=#GET{where},ajax,env} />]
         [(#CONFIG{'rss_commits/import_auto','non'}|=={'non'}|oui)
         [(#SET{where,IN \(#GET{projets_id_rss}\)})]
-        <INCLURE{fond=objets/liste/rss_commits,id_projet=#GET{projets_id_rss},ajax,env} />]
+        <INCLURE{fond=objets/liste/rss_commits, id_projet=#GET{projets_id_rss}, force=0, ajax, env} />]
     ]
     [(#SET{where,''})]
     </B_projets_lies>
