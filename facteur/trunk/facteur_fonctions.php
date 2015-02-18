@@ -283,7 +283,10 @@ function facteur_addstyle($matches) {
  * @return string
  */
 function facteur_nl2br_si_pas_autobr($texte){
-	return (_AUTOBR?$texte:nl2br($texte));
+	if (_AUTOBR) return $texte;
+	include_spip("inc/filtres");
+	$texte = post_autobr($texte);
+	return $texte;
 }
 
 /**
