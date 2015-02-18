@@ -74,11 +74,13 @@ function rss_commits_afficher_complement_objet($flux)
     if (in_array($e['type'], array('projet'))
         and $import_auto == 'non') {
         $id_projet = $e['id'];
-        $flux['data'] .= recuperer_fond('prive/objets/liste/rss_commits',
+        $flux['data'] .= recuperer_fond(
+            'prive/objets/liste/rss_commits',
             array(
-                'sinon'=>_T('commit:aucun_commit_projet'),
-                'id_projet'=>$id_projet,
-                'par'=>'date_creation'
+                'sinon' => _T('commit:aucun_commit_projet'),
+                'id_projet'=> $id_projet,
+                'force' => false,
+                'par' => 'date_creation'
             )
         );
     }
@@ -124,8 +126,8 @@ function rss_commits_boite_infos($flux)
     // 'args' => 'type' => le type d'objet
     // 'args' => 'id' => l'id de l'objet
 
-    if ($flux['args']['type']=='projet'
-        and $id_projet = $flux['args']['id']){
+    if ($flux['args']['type'] == 'projet'
+        and $id_projet = $flux['args']['id']) {
         $flux['data'] .= recuperer_fond(
             'prive/objets/infos/projet_commits',
             array(
@@ -160,25 +162,28 @@ function rss_commits_header_prive($flux)
  */
 function rss_commits_afficher_fiche_objet($flux)
 {
-    $import_auto = lire_config('rss_config/import_auto','non');
-    if (in_array($type = $flux['args']['type'],array('projet'))) {
+    $import_auto = lire_config('rss_config/import_auto', 'non');
+    if (in_array($type = $flux['args']['type'], array('projet'))) {
         $id = $flux['args']['id'];
         $table = table_objet($type);
         $id_table_objet = id_table_objet($type);
         if ($import_auto == 'non') {
-            $flux['data'] .= recuperer_fond('prive/objets/liste/rss_commits',
+            $flux['data'] .= recuperer_fond(
+                'prive/objets/liste/rss_commits',
                 array(
-                    'sinon'=>_T('commit:aucun_commit_projet'),
-                    'id_projet'=>$id,
-                    'par'=>'date_creation'
+                    'sinon' => _T('commit:aucun_commit_projet'),
+                    'id_projet' => $id,
+                    'force' => false,
+                    'par' => 'date_creation'
                 )
             );
         }
-        $flux['data'] .= recuperer_fond('prive/objets/liste/commits',
+        $flux['data'] .= recuperer_fond(
+            'prive/objets/liste/commits',
             array(
-                'sinon'=>_T('commit:aucun_commit_projet'),
-                'id_projet'=>$id,
-                'par'=>'date_creation'
+                'sinon' => _T('commit:aucun_commit_projet'),
+                'id_projet' => $id,
+                'par' => 'date_creation'
             )
         );
     }
