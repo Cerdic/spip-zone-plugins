@@ -2,10 +2,10 @@
 <B_organisations>
 <div class="liste resultats organisations">
 	#ANCRE_PAGINATION
-	<h2 class="h2"><:organisation:titre_organisations:> (#GRAND_TOTAL)</h2>
+	<h2 class="h2"><:contacts:titre_organisations:> (#GRAND_TOTAL)</h2>
 	<ul class="liste-items">
 		<BOUCLE_organisations(ORGANISATIONS) {recherche} {!par points} {pagination 5}>
-		<li class="item"><a href="#URL_ORGANISATION">#TITRE</a></li>
+		<li class="item"><a href="#URL_ORGANISATION">#NOM</a></li>
 		</BOUCLE_organisations>
 	</ul>
 	[<div class="pagination">(#PAGINATION)</div>]
