@@ -1,7 +1,7 @@
 <paquet
   prefix="compteurgraphique"
   categorie="statistique"
-  version="0.5.5"
+  version="0.5.6"
   etat="stable"
   compatibilite="[3.0.0;3.0.*]"
   logo="prive/themes/spip/images/CompteurGraphique.gif"
