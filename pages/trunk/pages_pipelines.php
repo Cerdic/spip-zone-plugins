@@ -317,15 +317,17 @@ function pages_pre_boucle($boucle){
 
 		// On cherche les critères id_rubrique, id_article ou page
 		foreach($boucle->criteres as $_critere){
-			if ($_critere->op == 'page') { // {page} ou {page?}
+			if ($_critere->op == 'page' AND !$_critere->not) { // {page} ou {page?} mais pas {!page}
 				// On considère qu'on cherche toujours des pages uniques donc on force le filtre id_rubrique=-1
 				$boucle_articles = false;
 				$critere_page = true;
 				break;
 			}
 			elseif ($_critere->param[0][0]->texte == 'page') { // {page=x}
-				if (($_critere->op == '=')
-				AND ($_critere->param[1][0]->texte == '')) {
+				if (
+					($_critere->op == '=') AND ($_critere->param[1][0]->texte == '')
+				  OR $_critere->not
+				  ) {
 					// On veut exclure explicitement les pages
 					break;
 				}
