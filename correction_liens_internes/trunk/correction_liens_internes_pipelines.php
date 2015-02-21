@@ -13,7 +13,25 @@ function correction_liens_internes_pre_edition($flux){
     }
     return $flux;
 }
-
+function correction_liens_internes_correction_url_public($mauvaise_url,$composants_url){
+	// Pour le cas où on a copié-collé une URL depuis espace public.
+	$ancre = isset($composants_url['fragment']) ? '#' . $composants_url['fragment'] : '';	
+	list($fond, $contexte) = urls_decoder_url($mauvaise_url);
+	if(
+		($objet = isset($contexte['type']) ? $contexte['type'] : $fond) && 
+		($id_objet = $contexte[id_table_objet($objet)])
+	);
+        else {
+            // on tente de reconnaitre les formats simples...
+            parse_str($composants_url["query"], $composants_url);
+            if (($objet = $composants_url[_SPIP_PAGE]) && ($id_objet = $composants_url[id_table_objet($objet)]));
+            else {
+                list($composants_url, $objet) = nettoyer_url_page(str_replace(url_de_base(), '', $mauvaise_url), $composants_url);
+                $id_objet = $composants_url[id_table_objet($objet)];
+            }
+	}
+	return array($objet,$id_objet,$ancre);
+}
 function correction_liens_internes_correction($texte){
     // pas de liens, on s'en va...
     if(strpos($texte, '->') === false) return $texte;
@@ -38,27 +56,18 @@ function correction_liens_internes_correction($texte){
     foreach($match as $lien){
         $mauvais_raccourci = $lien[0];
         $mauvaise_url = $lien[1];
-        $composants_url =  parse_url($mauvaise_url);
-    $ancre = isset($composants_url['fragment']) ? '#' . $composants_url['fragment'] : '';
-        list($fond, $contexte) = urls_decoder_url($mauvaise_url);
-        if(($objet = isset($contexte['type']) ? $contexte['type'] : $fond) && ($id_objet = $contexte[id_table_objet($objet)]));
-        else {
-            // on tente de reconnaitre les formats simples...
-            parse_str($composants_url["query"], $composants_url);
-            if (($objet = $composants_url[_SPIP_PAGE]) && ($id_objet = $composants_url[id_table_objet($objet)]));
-            else {
-                list($composants_url, $objet) = nettoyer_url_page(str_replace(url_de_base(), '', $mauvaise_url), $composants_url);
-                $id_objet = $composants_url[id_table_objet($objet)];
-            }
-        }
-        if($objet && $id_objet){
-            if(isset($racc[$objet])) $objet = $racc[$objet];
-            $bonne_url  = $objet . $id_objet . $ancre;
-            $bon_raccourci = str_replace($mauvaise_url, $bonne_url, $mauvais_raccourci);
-            $texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
-            spip_log(self() . (_request('self')?' / '._request('self'):'') // pour crayons notamment...
-                . " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _LOG_AVERTISSEMENT);
-        }
+        $composants_url =  parse_url($mauvaise_url);	
+	list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_public($mauvaise_url,$composants_url);
+	if($objet && $id_objet){
+		if(isset($racc[$objet])){
+			$objet = $racc[$objet];
+		}
+		$bonne_url  = $objet . $id_objet . $ancre;
+		$bon_raccourci = str_replace($mauvaise_url, $bonne_url, $mauvais_raccourci);
+		$texte = str_replace($mauvais_raccourci, $bon_raccourci, $texte);
+		spip_log(self() . (_request('self')?' / '._request('self'):'')  //pour crayons notamment...
+			. " : $mauvais_raccourci => $bon_raccourci", 'liens_internes.' . _log_avertissement);
+	}
     }
     return $texte;
 }
