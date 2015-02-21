@@ -16,6 +16,12 @@
 								<label for="prevenir_auteurs_articles"><:notifications:article_prive_auteurs:></label>
 							</div>
 						</li>
+						<li class="editer editer_pas_prevenir_publieur">
+							<div class="choix">
+								<input type="checkbox" name="pas_prevenir_publieur"[(#ENV{pas_prevenir_publieur}|=={on}|oui)checked="checked"] id="pas_prevenir_publieur" class="checkbox" />
+								<label for="pas_prevenir_publieur"><:notifications:article_prive_publieur:></label>
+							</div>
+						</li>
 						<li class="editer editer_prevenir_admins_restreints">
 							<div class="choix">
 								<input type="checkbox" name="prevenir_admins_restreints"[(#ENV{prevenir_admins_restreints}|=={on}|oui)checked="checked"] id="prevenir_admins_restreints" class="checkbox" />

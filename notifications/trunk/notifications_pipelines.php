@@ -137,7 +137,13 @@ function notifications_notifications_destinataires($flux){
 		}
 
 	}
-
+	//publication d'article : ne pas prévenir l'auteur s'il est le validateur
+	if ($quoi == "instituerarticle" and $GLOBALS['notifications']['pas_prevenir_publieur']){
+		$publieur_email=$GLOBALS["visiteur_session"]["email"];
+		if(($key = array_search($publieur_email,$flux['data'])) !== false){
+			unset($flux['data'][$key]);
+		}	
+	}
 	// forum valide ou prive : prevenir les autres contributeurs du thread ou ceux qui ont déjà répondu à l'article
 	if (($quoi=='forumprive' AND $GLOBALS['notifications']['thread_forum_prive'])
 		OR ($quoi=='forumvalide' AND ($GLOBALS['notifications']['thread_forum'] OR $GLOBALS['notifications']['forum'] OR $GLOBALS['notifications']['forum_article']))
