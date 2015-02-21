@@ -145,7 +145,7 @@ $itis_webservice = array(
  * @param string	$api
  * 		Recherche par nom commun ou par nom scientifique. Prend les valeurs 'commonname' ou 'scientificname'
  * @param string	$recherche
- * 		Nom à rechercher
+ * 		Nom à rechercher précisément. Seul le taxon dont le nom coincidera exactement sera retourné.
  *
  * @return int
  * 		Identifiant unique (tsn) dans la base ITIS ou 0 si la recherche échoue
@@ -157,7 +157,7 @@ function itis_search_tsn($api, $recherche) {
 	// Normaliser la recherche: trim et mise en lettres minuscules
 	$recherche = strtolower(trim($recherche));
 
-	// Construire l'URL de la function de recherche par nom vernaculaire
+	// Construire l'URL de la fonction de recherche
 	$url = itis_api2url('json', 'search', $api, rawurlencode($recherche));
 
 	// Acquisition des données spécifiées par l'url
@@ -168,6 +168,8 @@ function itis_search_tsn($api, $recherche) {
 	$api = $itis_webservice['search'][$api];
 	if (isset($data[$api['list']])
 	AND $data[$api['list']]) {
+		// La recherche peut renvoyer plusieurs taxons. On considère que le "bon" taxon
+		// correspond à celui ont le nom est exactement celui recherché.
 		foreach ($data[$api['list']] as $_data) {
 			if ($_data
 			AND (strcasecmp($_data[$api['index']], $recherche) == 0)) {
@@ -215,7 +217,7 @@ function itis_get_information($api, $tsn) {
 	include_spip('inc/taxonomer');
 	$data = url2json_data($url);
 
-	// On vérifier que le tableau est complet sinon on retourne un tableau vide
+	// On vérifie que le tableau est complet sinon on retourne un tableau vide
 	$api = $itis_webservice['get'][$api];
 	if ($api['multiple']) {
 		if (isset($data[$api['list']][0])
@@ -235,7 +237,10 @@ function itis_get_information($api, $tsn) {
 
 
 /**
- * @param $tsn
+ * Renvoie l'ensemble des informations sur un taxon désigné par son identifiant unique (tsn).
+ *
+ * @param int	$tsn
+ * 		Identifiant unique du taxon dans la base ITIS (tsn)
  *
  * @return array
  */
@@ -271,9 +276,17 @@ function itis_get_record($tsn) {
 
 
 /**
- * @param $kingdom
- * @param $upto
- * @param $sha_file
+ * Lecture du fichier hiérarchique ITIS des taxons d'un règne.
+ *
+ * @param string	$kingdom
+ * 		Nom scientifique du règne en lettres minuscules (animalia, plantae, fungi)
+ * @param string	$upto
+ * 		Rang taxonomique minimal jusqu'où charger le règne. Ce rang est fourni en anglais et
+ * 		correspond à : phylum (pour le règne animalia) ou division (pour les règnes fungi et plantae),
+ * 		class, order, family, genus.
+ * @param int		$sha_file
+ *		Sha calculé à partir du fichier de taxons correspondant au règne choisi. Le sha est retourné
+ * 		par la fonction afin d'être stocké par le plugin.
  *
  * @return array
  */
@@ -281,14 +294,17 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 	$hierarchy = array();
 	$sha_file = false;
 
+	include_spip('inc/taxonomer');
 	static $group_ids = array(
 		'kingdom' => 1,
-		'phylum' => 2,
 		'class' => 3,
 		'order' => 4,
 		'family' => 5,
 		'genus' => 6,
 		'specie' => 7);
+	$rang_phylum = $kingdom==_TAXONOMIE_REGNE_ANIMAL ? 'phylum': 'division';
+	$group_ids[$rang_phylum] = 2;
+	asort($group_ids);
 
 	if (array_key_exists($upto, $group_ids)) {
 		// Construire la regexp qui permet de limiter la hiérarchie comme demandée
@@ -351,7 +367,11 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 
 
 /**
- * @param $language_code
+ * Lit le fichier des noms communs (tout règne confondu) d'une langue donnée et renvoie un tableau
+ * de tous ces noms indexés par leur TSN.
+ *
+ * @param string	$language_code
+ * @param int		$sha_file
  *
  * @return array
  */

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Ce fichier contient l'ensemble fonctions implémentant l'API du plugin Taxonomie.
+ *
+ * @package SPIP\TAXONOMIE\API
+ */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -161,9 +166,9 @@ function taxonomie_informer_ascendance($id_taxon, $tsn_parent=null, $ordre='desc
 
 
 /**
- * Fourniture des sources d'information ayant permises de compléter le taxon.
- * La référence ITIS n'est pas répétée dans le champ sources de chaque taxon car elle est à la base de chaque règne.
- * Elle est donc insérée par la fonction elle-même.
+ * Fourniture des sources d'information ayant permis de compléter le taxon.
+ * La référence ITIS n'est pas répétée dans le champ sources de chaque taxon car elle est
+ * à la base de chaque règne. Elle est donc insérée par la fonction elle-même.
  *
  * @api
  * @filtre
@@ -205,9 +210,9 @@ function taxonomie_informer_sources($id_taxon, $sources_specifiques=null) {
 	return $sources;
 }
 
-function taxonomie_informer($recherche) {
+function taxonomie_informer($recherche, $section='') {
 	include_spip('services/wikipedia/wikipedia_api');
-	return wikipedia_get($recherche);
+	return wikipedia_get($recherche, $section);
 }
 
 ?>
