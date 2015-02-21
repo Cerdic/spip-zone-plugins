@@ -11,6 +11,11 @@
  ajax = si on passe ajax à non, on peux utiliser content
  content = contenu de la reveal
 ]
+
+[(#CONFIG{foundation/javascript}|non)
+  <:foundation:erreur_js{squelette=#SQUELETTE}|erreur_squelette:>
+]
+
 [<a [href="(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})"]
    [class="(#ENV{class})"]
    [data-reveal-id="reveal-(#ENV{data-id})"]
