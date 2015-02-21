@@ -13,6 +13,19 @@ function correction_liens_internes_pre_edition($flux){
     }
     return $flux;
 }
+function correction_liens_internes_correction_url_prive($mauvaise_url,$composants_url){
+	// Pour le cas où on a copié-collé une URL depuis espace public.
+	$ancre = $composants_url["fragment"];
+	$args =array();
+	parse_str($composants_url["query"],$args);
+	$exec = str_replace("_edit","",$args["exec"]); #prendre en compte les _edit
+	if (array_key_exists("id_".$exec,$args)){
+		$objet=$exec;
+		$id_objet = $args["id_".$objet];
+	}	
+	return array($objet,$id_objet,$ancre);
+}
+
 function correction_liens_internes_correction_url_public($mauvaise_url,$composants_url){
 	// Pour le cas où on a copié-collé une URL depuis espace public.
 	$ancre = isset($composants_url['fragment']) ? '#' . $composants_url['fragment'] : '';	
@@ -57,7 +70,15 @@ function correction_liens_internes_correction($texte){
         $mauvais_raccourci = $lien[0];
         $mauvaise_url = $lien[1];
         $composants_url =  parse_url($mauvaise_url);	
-	list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_public($mauvaise_url,$composants_url);
+
+	// Url copiée depuis le privé ou depuis le public?
+	if (strrpos($composants_url['path'],_DIR_RESTREINT_ABS)!=False){
+		list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_prive($mauvaise_url,$composants_url);
+
+	}
+	else{
+		list ($objet, $id_objet,$ancre) = correction_liens_internes_correction_url_public($mauvaise_url,$composants_url);
+	}
 	if($objet && $id_objet){
 		if(isset($racc[$objet])){
 			$objet = $racc[$objet];
