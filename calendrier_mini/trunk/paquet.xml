@@ -1,12 +1,12 @@
 <paquet
 	prefix="calendriermini"
 	categorie="date"
-	version="2.3.7"
-	etat="test"
+	version="2.3.8"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="minical-32.png"
 	documentation="http://contrib.spip.net/Calendrier-Mini-2-0"
->	
+>
 
 	<nom>Mini Calendrier</nom>
 	<!-- Permet l'utilisation d'une balise #CALENDRIER_MINI -->
