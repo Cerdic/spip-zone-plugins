@@ -32,7 +32,7 @@ function balise_CALENDRIER_MINI_stat($args, $filtres) {
  * #CALENDRIER_MINI{#ENV{date},date,#SELF}
  * #CALENDRIER_MINI{#ENV{date},date,#SELF,#URL_PAGE{calendrier_mini.json}}
  *
- * Quand l'url json est explicitée dans les arguments, la collecte automatisée de id_rubrique, id_article et id_mot est desactivée
+ * Quand l'url json est explicitee dans les arguments, la collecte automatisee de id_rubrique, id_article et id_mot est desactivee
  * car dans ce cas il suffit simplement de les expliciter sur l'url json pour les prendre en compte
  *
  * @param string $date
