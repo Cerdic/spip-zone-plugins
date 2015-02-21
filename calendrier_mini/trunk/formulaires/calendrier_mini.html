@@ -18,12 +18,12 @@
 			#SET{start,#ENV{date}|affdate{Y-m-01}|strtotime}
 			#SET{end,#VAL{Y-m-01}|date{#GET{start}|plus{2764800}}|strtotime}
 			[(#SET{url,#INCLURE{fond=#GET{urljson}|parametre_url{page},
-					    id_rubrique=#GET{urljson}|parametre_url{id_rubrique},
-					    id_article=#GET{urljson}|parametre_url{id_articlee},
-					    id_mot=#GET{urljson}|parametre_url{id_mot},
-					    lang=#GET{urljson}|parametre_url{lang},
-					    start=#GET{start},
-					    end=#GET{end}}})]
+						id_rubrique=#GET{urljson}|parametre_url{id_rubrique},
+						id_article=#GET{urljson}|parametre_url{id_articlee},
+						id_mot=#GET{urljson}|parametre_url{id_mot},
+						lang=#GET{urljson}|parametre_url{lang},
+						start=#GET{start},
+						end=#GET{end}}})]
 			<strong>[(#ENV{date}|affdate_mois_annee)]&nbsp;:</strong>
 			<B_alt>
 			<ul class="liste-items">
