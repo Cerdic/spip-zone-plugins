@@ -5,28 +5,29 @@
 //	    où rep1, rep2,... le nom des sous-répertoires
 // Param dir : répertoire à explorer
 
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
+
 echo dirliste($_GET['dir']);
 
 function dirliste($path)
 {
-	$liste = "" ;
-	$size = 0 ;
+	$liste = "";
+	$size = 0;
 
 	// Trailing slash
 	if (substr($path, -1, 1) !== DIRECTORY_SEPARATOR) {
-	   $path .= DIRECTORY_SEPARATOR;
+		$path .= DIRECTORY_SEPARATOR;
 	}
 
-   if (!is_dir($path)) {
+	if (!is_dir($path))
 		return -1;
-	}
 
 	$handle=opendir($path) ;
 	while (($file = readdir($handle)) !== false) {
 		// Skip pointers
-		if ($file == '.' || $file == '..') {
+		if ($file == '.' || $file == '..')
 			continue;
-		}
 
 		if (is_dir($path.$file)) {
 			$liste .= '##'.$file;
@@ -39,7 +40,6 @@ function dirliste($path)
 	closedir($handle) ;
 
 	return round($size/1024/1024,2).$liste;
-
 }
 
 ?>
