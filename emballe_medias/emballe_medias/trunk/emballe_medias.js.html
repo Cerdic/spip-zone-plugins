@@ -2,15 +2,9 @@
 #HTTP_HEADER{Content-Type: text/javascript;}
 
 [(#INCLURE{javascript/jquery.shiftcheckbox.js}|appliquer_filtre{minifier,js})]
-[(#INCLURE{javascript/jfu_spip_fonctions.js}|appliquer_filtre{minifier,js})]
 
 //*** jQuery File Upload ***//
-[(#INCLURE{javascript/tmpl.min.js}|appliquer_filtre{minifier,js})]
-[(#INCLURE{javascript/load-image.min.js}|appliquer_filtre{minifier,js})]
-[(#INCLURE{javascript/jquery_file_upload/js/jquery.iframe-transport.js}|appliquer_filtre{minifier,js})]
-[(#INCLURE{javascript/jquery_file_upload/js/jquery.fileupload.js}|appliquer_filtre{minifier,js})]
 [(#INCLURE{javascript/jquery.fileupload-emballe_medias.js}|appliquer_filtre{minifier,js})]
-[(#INCLURE{fond=jfu_locales.js,lang=#ENV{lang}}|appliquer_filtre{minifier,js})]
 
 //*** SWFUPLOAD ***//
 [(#INCLURE{[(#VAL{[(#EVAL{_DIR_LIB_SWFUPLOAD})swfupload.js]})]}|appliquer_filtre{minifier,js})]
