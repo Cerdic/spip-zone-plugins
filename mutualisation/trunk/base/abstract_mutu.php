@@ -1,5 +1,8 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
+
 /*
  * Sauvegarder la connexion apres le spip_connect_db
  */ 
@@ -27,7 +30,5 @@ function mutu_close(){
 	$f = _INSTALL_SERVER_DB . '_close';
 	$f($GLOBALS['connexions'][_INSTALL_SERVER_DB]['link']);
 }
-
-
 
 ?>
