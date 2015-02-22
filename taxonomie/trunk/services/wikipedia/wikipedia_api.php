@@ -12,7 +12,7 @@ if (!defined('_TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE'))
 	 * Préfixe des URL du service web de WIKIPEDIA.
 	 * Le service fournit des données au format XML ou JSON
 	 */
-	define('_TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE', 'http://%langue%.wikipedia.org/w/api.php');
+	define('_TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE', 'http://%langue%.wikipedia.org/w/api.php?');
 if (!defined('_TAXONOMIE_WIKIPEDIA_URL_CITATION'))
 	/**
 	 * Préfixe des URL du service web de ITIS.
@@ -46,7 +46,17 @@ function wikipedia_get($recherche, $section='') {
 	$data = url2json_data($url);
 
 	// Récupération de la section demandée. Si vide on renvoie tout le texte
-
+	if (isset($data['batchcomplete'])
+	AND isset($data['query']['pages'])) {
+		$reponses = $data['query']['pages'];
+		$page = reset($reponses);
+		$id = key($reponses);
+		if (($id > 0)
+		AND !isset($page['missing'])
+		AND isset($page['revisions'][0]['*'])) {
+			$information = $page['revisions'][0]['*'];
+		}
+	}
 
 	return $information;
 }
@@ -64,7 +74,7 @@ function wikipedia_api2url($format, $action, $langue, $recherche) {
 
 	// Construire l'URL de l'api sollicitée
 	$url = str_replace('%langue%', $langue, _TAXONOMIE_WIKIPEDIA_URL_BASE_REQUETE)
-		. '&action=' . $action
+		. 'action=' . $action
 		. '&prop=revisions&rvprop=content&continue=&redirects=1'
 		. '&format=' . $format
 		. '&titles=' . rawurlencode(ucfirst($recherche));
