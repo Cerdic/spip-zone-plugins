@@ -13,8 +13,9 @@ function pp_latex_porte_plume_barre_pre_charger($barres) {
 	$barre->ajouterApres('grpCaracteres', array(
 					"id" => "sepLatex",
 					"separator" => "---------------",
-					"display"   => $visible,
-		));
+					"display"   => true,
+	));
+
 	$barre->ajouterApres('sepLatex', array(
 		"id"          => 'grpEquation',
 		"name"        => _T('pp_latex:barre_equations'),
@@ -22,7 +23,7 @@ function pp_latex_porte_plume_barre_pre_charger($barres) {
 		"dropMenu"    => ma_barre(),
 		"display"     => true
 	 ));
-	//	print_r($GLOBALS['meta']['adresse_site']);exit;
+
 	return $barres;
 }
 
