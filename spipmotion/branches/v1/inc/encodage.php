@@ -408,19 +408,9 @@ function encodage($source,$doc_attente){
 					if(version_compare($ffmpeg_version,'1.1.0','<')){
 						$infos_sup_normal .= ' -profile baseline -vpre ipod640';
 					}else{
-						$infos_sup_normal .= ' -profile:v baseline -vpre ipod640';
+						$infos_sup_normal .= ' -profile:v baseline -preset slow';
 					}
-						
 				}
-			}
-			/**
-			 * Encodage pour PSP
-			 * http://rob.opendot.cl/index.php/useful-stuff/psp-video-guide/
-			 */
-			else if($format == 'psp'){
-				$infos_sup_normal .= ' -vpre main';
-				$infos_sup_normal .= ' -level 21';
-				$infos_sup_normal .= ' -refs 2';
 			}
 			$infos_sup_normal .= " -aspect $width_finale:$height_finale";
 			if($format)
