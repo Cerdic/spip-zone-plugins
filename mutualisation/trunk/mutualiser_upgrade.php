@@ -8,16 +8,15 @@ function mutualiser_upgrade() {
 
 	// verif securite
 	if (_request('secret')
-	!= md5(
-	$GLOBALS['meta']['version_installee'].'-'.$GLOBALS['meta']['popularite_total']
-	)) {
+		!= md5(
+			$GLOBALS['meta']['version_installee'].'-'.$GLOBALS['meta']['popularite_total']
+		)) {
 		include_spip('inc/headers');
 		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS);
 		exit;
 	}
 
-	if ($GLOBALS['spip_version_base']
-	== str_replace(',','.',$GLOBALS['meta']['version_installee'])) {
+	if ($GLOBALS['spip_version_base'] == str_replace(',','.',$GLOBALS['meta']['version_installee'])) {
 		include_spip('inc/headers');
 		redirige_par_entete($GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS);
 		exit;

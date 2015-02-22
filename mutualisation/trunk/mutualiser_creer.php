@@ -168,7 +168,7 @@ function mutu_etape_creer_base($e, $options){
 	if ($options['creer_base']) {
 
 		if (defined('_INSTALL_SERVER_DB')
-		AND defined('_INSTALL_NAME_DB')) {
+			AND defined('_INSTALL_NAME_DB')) {
 
 			if (defined('_INSTALL_USER_DB_ROOT')) {
 				$link = mutu_connect_db(_INSTALL_HOST_DB, 0,  _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT, '', _INSTALL_SERVER_DB);
@@ -227,7 +227,6 @@ function mutu_etape_creer_base($e, $options){
 							// requete differente entre pg et mysql...
 							$req = $err = array();
 							switch (strtolower(_INSTALL_SERVER_DB)){
-
 								case 'pg':
 									// d'abord creer l'utilisateur
 									$req[] = "CREATE USER " . _INSTALL_USER_DB . " WITH PASSWORD '" . _INSTALL_PASS_DB . "'";
@@ -240,10 +239,10 @@ function mutu_etape_creer_base($e, $options){
 
 								case 'mysql':
 								default:
-								// creer user
-								$req[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
-								$err[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY 'xxx'";
-								// affecter a sa base
+									// creer user
+									$req[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY '" . _INSTALL_PASS_DB . "'";
+									$err[] = "CREATE user '" . _INSTALL_USER_DB. "'@'" . _INSTALL_HOST_DB_LOCALNAME . "' IDENTIFIED BY 'xxx'";
+									// affecter a sa base
 									$req[] = "GRANT " . _PRIVILEGES_MYSQL_USER_BASE . " ON "
 										. _INSTALL_NAME_DB.".* TO '"
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
@@ -253,7 +252,6 @@ function mutu_etape_creer_base($e, $options){
 										. _INSTALL_USER_DB."'@'"._INSTALL_HOST_DB_LOCALNAME
 										. "' IDENTIFIED BY 'xxx'";
 									break;
-
 							}
 							foreach ($req as $n=>$sql){
 								if (!sql_query($sql, _INSTALL_SERVER_DB)) {
@@ -300,7 +298,6 @@ function mutu_etape_creer_base($e, $options){
 						);
 						exit;
 					}
-
 				}
 				else {
 					echo mutu_minipres(
@@ -394,9 +391,8 @@ function mutu_etape_creer_repertoires($e, $options){
 				);
 			}
 			exit;
-
 		} elseif (
-			   !is_dir($e._NOM_PERMANENTS_INACCESSIBLES)
+			!is_dir($e._NOM_PERMANENTS_INACCESSIBLES)
 			|| !is_dir($e._NOM_PERMANENTS_ACCESSIBLES)
 			|| !is_dir($e._NOM_TEMPORAIRES_INACCESSIBLES)
 			|| !is_dir($e._NOM_TEMPORAIRES_ACCESSIBLES)
@@ -413,11 +409,9 @@ function mutu_etape_creer_repertoires($e, $options){
 				" id='mutu'"
 			);
 			exit;
-
 		}
-
-		} else {
-			echo mutu_minipres(
+	} else {
+		echo mutu_minipres(
 			_T('mutu:install_repertoire_noexist', array('repertoire' => '<tt>'.joli_repertoire($e).'</tt>')),
 			"<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n".
 			'<h3>'
@@ -432,7 +426,6 @@ function mutu_etape_creer_repertoires($e, $options){
 			" id='mutu'"
 		);
 		exit;
-
 	}
 }
 

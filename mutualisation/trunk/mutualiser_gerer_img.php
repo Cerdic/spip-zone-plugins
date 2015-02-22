@@ -46,18 +46,16 @@ RewriteRule .* $racine/$dir\$0 [L]
 	if (strpos($htaccess, $bloc) === false)
 		$htaccess .= $bloc;
 
-
 	return ($htaccess === $source
-		OR ecrire_fichier($url._ACCESS_FILE_NAME, $htaccess)
-		);
+				OR ecrire_fichier($url._ACCESS_FILE_NAME, $htaccess));
 }
 
 
-/*
- * 
+/**
  * Transformer les liens
  * sites/nom_site/(IMG|local).* en (IMG|local).*
  * 
+ * @param string $flux
  */
 function mutualisation_traiter_url_img_courtes($flux) {
 	// IMG

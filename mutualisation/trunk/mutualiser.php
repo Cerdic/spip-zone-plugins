@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2013                                             *
+ *  Copyright (c) 2001-2013                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -11,7 +11,6 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 // Demarrer un site dans le sous-repertoire des sites
 // Options :
@@ -43,7 +42,6 @@ function demarrer_site($site = '', $options = array()) {
 	// definir une constante qui contient l'adresse du repertoire du site mutualise
 	// peut servir dans les fichiers mes_options des sites inclus
 	// par exemple avec  $GLOBALS['dossier_squelettes'] = _DIR_SITE . 'squelettes:' . _DIR_SITE . 'cheznous:dist';
-
 	define('_DIR_SITE', _DIR_RACINE . $GLOBALS['mutualisation_dir'] .'/' . $site . '/');
 
 	if ($options['cookie_prefix'])
@@ -58,17 +56,14 @@ function demarrer_site($site = '', $options = array()) {
 	 * 
 	 * Il faut lancer la creation de mutualisation
 	 */
-	 if  ($a_installer = (!is_dir(_DIR_SITE) 
-	 	OR !(defined('_DIR_CONNECT')?
+	if($a_installer = (!is_dir(_DIR_SITE) OR !(defined('_DIR_CONNECT')?
 			(defined('_FILE_CONNECT_INS')?
-				   file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.php'):
-				   file_exists(_DIR_CONNECT . 'connect.php')):
+				file_exists(_DIR_CONNECT . _FILE_CONNECT_INS . '.php'):
+				file_exists(_DIR_CONNECT . 'connect.php')):
 			(defined('_FILE_CONNECT_INS')?
-				   file_exists(_DIR_SITE . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php'):
-				   file_exists(_DIR_SITE . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php'))
-			)
-			       ))
-	{	
+				file_exists(_DIR_SITE . _NOM_PERMANENTS_INACCESSIBLES . _FILE_CONNECT_INS . '.php'):
+				file_exists(_DIR_SITE . _NOM_PERMANENTS_INACCESSIBLES . 'connect.php'))
+			))){
 		/*
 		 * - Recuperer les identifiants manquants
 		 * 
@@ -125,12 +120,11 @@ function demarrer_site($site = '', $options = array()) {
 					define(_FILE_CONNECT,'');
 				}
 			}
-		/*
+		/**
 		 * > Cas de creation d'utilisateur de la base SQL
 		 * (nom et pass non attribuees par un panel)
 		 */		
 		} elseif ($options['creer_user_base']) {
-		
 			// nom d'utilisateur et mot de passe
 			define('_INSTALL_USER_DB', _INSTALL_NAME_DB);
 			define('_INSTALL_PASS_DB',
@@ -175,7 +169,7 @@ function demarrer_site($site = '', $options = array()) {
 	 */
 	define('_SPIP_PATH',
 		_DIR_SITE . ':' .
-		_DIR_RACINE .':' . 
+		_DIR_RACINE .':' .
 		_DIR_RACINE .'squelettes-dist/:' .
 		_DIR_RACINE .'prive/:' .
 		_DIR_RESTREINT);
@@ -183,7 +177,7 @@ function demarrer_site($site = '', $options = array()) {
 	if (is_dir(_DIR_SITE.'squelettes'))
 		$GLOBALS['dossier_squelettes'] = $options['repertoire'].'/' . $site . '/squelettes';
 
-	if (is_readable($f = _DIR_SITE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php')) 
+	if (is_readable($f = _DIR_SITE._NOM_PERMANENTS_INACCESSIBLES._NOM_CONFIG.'.php'))
 		include($f); // attention cet include n'est pas en globals
 
 	$init = function_exists('spip_initialisation_core') 
@@ -194,12 +188,12 @@ function demarrer_site($site = '', $options = array()) {
 		(_DIR_SITE . _NOM_PERMANENTS_ACCESSIBLES),
 		(_DIR_SITE . _NOM_TEMPORAIRES_INACCESSIBLES),
 		(_DIR_SITE . _NOM_TEMPORAIRES_ACCESSIBLES)
-	);	
+	);
 
 	/*
 	 *Traiter l'exec=mutualisation
 	 */
-	mutualisation_traiter_exec($site) ;
+	mutualisation_traiter_exec($site);
 
 	/*
 	 * Gestion des url d'images courtes
@@ -246,25 +240,29 @@ function mutualisation_traiter_exec($site) {
 			mutualiser_upgradeplugins();
 		}
 		if (_request('renouvelle_alea') == 'yo') {
-		    include_spip('inc/headers');
-		    http_status(204); // No Content
-		    header("Connection: close");
-		    include_spip('inc/acces');
-		    renouvelle_alea();
-		    die;
+			include_spip('inc/headers');
+			http_status(204); // No Content
+			header("Connection: close");
+			include_spip('inc/acces');
+			renouvelle_alea();
+			die;
 		}
 	}
 }
 
-// transformer les sites/truc/IMG/rtf/chose.rtf en /IMG/...
+/**
+ * Transformer les sites/truc/IMG/rtf/chose.rtf en /IMG/...
+ * 
+ * @param string $flux
+ * 		L'URL à réécrire
+ */
 function mutualisation_url_img_courtes($flux) {
 	if (strpos($flux, _DIR_IMG)
 		OR strpos($flux, _DIR_VAR)) {
 		require_once dirname(__FILE__).'/mutualiser_gerer_img.php';
 		return mutualisation_traiter_url_img_courtes($flux);
 	}
-	else
-		return $flux;
+	return $flux;
 }
 
 /**
@@ -280,6 +278,9 @@ function mutualisation_url_img_courtes($flux) {
  * (cf. http://dev.mysql.com/doc/refman/5.0/fr/user-names.html)
  * - Les noms de bases de données MySQL peuvent avoir jusqu'à 64 caractères
  * (cf. http://dev.mysql.com/doc/refman/5.0/fr/legal-names.html)
+ * 
+ * @param string $site
+ * 		Le nom du site
  */
 function prefixe_mutualisation($site) {
 	static $prefix = array();
