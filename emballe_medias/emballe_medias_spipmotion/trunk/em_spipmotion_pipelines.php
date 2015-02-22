@@ -5,7 +5,7 @@
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  *
- * © 2009/2013 - Distribue sous licence GNU/GPL
+ * © 2009/2015 - Distribue sous licence GNU/GPL
  *
  * Insertion dans les pipelines
  **/
@@ -24,9 +24,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function em_spipmotion_diogene_avant_formulaire($flux){
 	if(!test_espace_prive() && isset($flux['args']['type']) && ($flux['args']['type'] == 'article')){
-    	$flux['data'] .= recuperer_fond('prive/em_spipmotion_avant_formulaire', $flux['args']);
+		$flux['data'] .= recuperer_fond('prive/em_spipmotion_avant_formulaire', $flux['args']);
 	}
-    return $flux;
+	return $flux;
 }
 
 /**
