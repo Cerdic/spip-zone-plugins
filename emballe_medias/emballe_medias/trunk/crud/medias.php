@@ -6,7 +6,7 @@
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * b_b (http://http://www.weblog.eliaz.fr)
  *
- * © 2008/2012 - Distribue sous licence GNU/GPL
+ * © 2008/2015 - Distribue sous licence GNU/GPL
  *
  **/
 
@@ -31,17 +31,18 @@ include_spip('action/editer_article');
  */
 function crud_medias_create_dist($dummy,$set=null){
 	$tmp_name = $set['document']['tmp_name'];
-	if(!file_exists($tmp_name)){
+	if(!file_exists($tmp_name))
 		$e = _L('document inexistant');
-	}else{
+	else{
 		$crud = charger_fonction('crud','action');
 		if(($id_auteur= intval($GLOBALS['visiteur_session']['id_auteur']))>0){
 			$type = $set['em_type'] ? $set['em_type'] : 'normal';
 		
 			$titre_sans_extension = explode('.',basename($tmp_name));
-			if(count($titre_sans_extension > 1))
+			if(count($titre_sans_extension > 1)){
 				array_pop($titre_sans_extension);
 				$titre_doc = str_replace('_',' ',implode(' ',$titre_sans_extension));
+			}
 		
 			// si l'option de config "chercher_article" est active
 			if (lire_config('emballe_medias/fichiers/chercher_article','off') == 'on')
@@ -81,9 +82,8 @@ function crud_medias_create_dist($dummy,$set=null){
 					if($set[$champ])
 						$c[$champ] = $set[$champ];
 				}
-				if($set['statut'] && in_array($set['statut'],array('prepa','publie'))){
+				if($set['statut'] && in_array($set['statut'],array('prepa','publie')))
 					$statut = $set['statut'];
-				}
 				if((lire_config('diogene/statuts/article_statut_defaut','prop') != 'prop') OR isset($statut)){
 					$c['date'] = date("Y-m-d H:i:s");
 					$c['statut'] = $statut ? $statut : lire_config('diogene/statuts/article_statut_defaut');
@@ -91,9 +91,9 @@ function crud_medias_create_dist($dummy,$set=null){
 				}
 				
 				$res = $crud('create','article','',$c);
-				if(is_numeric($res['result']['id'])){
+				if(is_numeric($res['result']['id']))
 					$id_article = $res['result']['id'];
-				}else{
+				else{
 					spip_unlink($tmp_name);
 					$e = _L('Impossible de créer l article');
 				}
@@ -196,13 +196,11 @@ function crud_medias_create_dist($dummy,$set=null){
 						)
 					);
 					$id = $id_article;
-				}else{
+				}else
 					$e = 'Impossible de créer le document';
-				}
 			}
-		}else{
+		}else
 			$e = _L('identification obligatoire');	
-		}
 	}
 	return array('success'=>$e?false:true,'message'=>$e?$e:$ok,'result'=>array('id'=>$id));
 }
