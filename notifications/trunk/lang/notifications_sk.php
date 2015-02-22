@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alt_logo_conf' => 'Logo zásuvného modulu Oznamy',
 	'article_prive' => 'Publikovanie článkov',
 	'article_prive_admins_restreints' => '<strong>Administrátori:</strong> administrátori s obmedzeniami dostávajú oznamy pri odoslaní článkov do ich rubriky',
-	'article_prive_auteurs' => '<strong>Autori:</strong> autori dostávajú oznamy pri odoslaní svojich článkov na schválenie, pri ich publikovaní alebo odstránení',
+	'article_prive_auteurs' => '<strong>Autori:</strong> autori dostávajú oznamy pri odoslaní svojich článkov na schválenie, pri ich publikovaní alebo odstránení', # MODIF
 	'article_propose_detail' => 'Článok "@titre@" bol odoslaný na publikovanie
 	z(o)',
 	'article_propose_sujet' => '[@nom_site_spip@] Odoslaný: @titre@',

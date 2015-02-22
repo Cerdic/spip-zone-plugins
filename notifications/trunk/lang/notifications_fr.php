@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_prive' => 'Publication d’articles',
 	'article_prive_admins_restreints' => '<strong>Administrateurs</strong> : Les administrateurs restreints reçoivent les notifications lors de proposition d’articles dans leur rubrique',
 	'article_prive_auteurs' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications lors de la proposition, publication ou suppression de leur(s) article(s)',
-	'article_prive_publieur' => 'Si l\'un des auteurs est celui qui publie l\'article, ne pas le prévenir.',
+	'article_prive_publieur' => 'Si l’un des auteurs est celui qui publie l’article, ne pas le prévenir.',
 	'article_propose_detail' => 'L’article "@titre@" est proposé à la publication
 	depuis',
 	'article_propose_sujet' => '[@nom_site_spip@] Propose : @titre@',
