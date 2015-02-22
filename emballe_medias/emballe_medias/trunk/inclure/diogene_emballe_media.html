@@ -132,11 +132,19 @@
 	[(#REM)
 		On peut finalement afficher les choses en fonction des SET et GET précedents
 	]
-	[(#GET{erreur}|=={non}|oui)
-		[(#ENV{id_article}|intval|>{0}|et{#GET{id_article}|>{0}}|oui)
+	<BOUCLE_erreur_non(CONDITION){si #GET{erreur}|=={non}|oui}>
+		<BOUCLE_article(ARTICLES){id_article=#GET{id_article}}{statut?}>
 			<div class="emballe_media_unique">
 				<INCLURE{fond=inclure/diogene_emballe_media_description,id_article=#GET{id_article},id_diogene=#_diogene:ID_DIOGENE,ajax} />
-	
+				<B_doc>
+				<div id="em_upload_fichier"[ class="diogene_(#GET{id_diogene})"]>
+					<BOUCLE_doc(DOCUMENTS){id_article}{par id_document}{inverse}{tout}>
+					<div class="ajax">
+						[(#FORMULAIRE_EM_SUPPRIMER_MEDIA{#ID_DOCUMENT,#EM_TYPE,article,#ID_ARTICLE,#ENV{redirect}})]
+					</div>
+					</BOUCLE_doc>
+				</div>
+				</B_doc>
 				<INCLURE{fond=inclure/diogene_emballe_media_bloc_upload_unique,id_article=#GET{id_article},file_types=#GET{file_types},types=#GET{types},type=#GET{type},afficher_doc_trad=#GET{afficher_doc_trad},id_diogene=#GET{id_diogene},id_rubrique=#GET{id_rubrique},
 					id_parent=#GET{id_rubrique},
 					id_objet=#GET{id_article},
@@ -146,14 +154,7 @@
 					file_queue_limite=#GET{file_queue_limite},
 					nb_files_count=#GET{nb_files_count},
 					doc_uploaded=#GET{doc_uploaded}} />
-	
-				#INCLURE{fond=inc-media_uploaded,
-						id_objet=#GET{id_article},
-						objet=article,
-						em_type=#GET{type},
-						id_diogene=#GET{id_diogene},
-						ajax,
-						env}
+				<//B_doc>
 				[<div id="formulaire_diogene">
 					(#INCLURE{fond=inclure/emballe_media_formulaire_article,
 						id_article=#GET{id_article},
@@ -164,7 +165,7 @@
 						env})
 				</div>]
 			</div>
-		]
+		</BOUCLE_article>
 		[(#ENV{id_article}|intval|>{0}|et{#GET{id_article}|>{0}}|non)
 			[(#GET{autoriser_creer}|=={oui}|oui)
 			<div class="emballe_media_unique">
@@ -217,7 +218,7 @@
 
 			<INCLURE{fond=inclure/vues/emballe_medias_edition_attente,id_diogene=#_diogene:ID_DIOGENE,env,ajax}>
 		]
-	]
+	</BOUCLE_erreur_non>
 	[(#GET{erreur}|=={oui}|oui)
 		[(#BOITE_OUVRIR{'',error})]
 		[(#VAL{emballe_medias:[(#GET{erreur_message})]}|_T)]
