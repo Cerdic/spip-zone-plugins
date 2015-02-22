@@ -31,6 +31,10 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 	$retour = false;
 	$meta_regne = array();
 
+
+	// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
+
+
 	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
 	include_spip('services/itis/itis_api');
 	$taxons = itis_read_hierarchy($regne, $rang, $meta_regne['sha']);
@@ -73,6 +77,7 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 /**
  * Suppression de tous les taxons d'un règne donné de la base de données.
  * La meta concernant les informations de chargement du règne est aussi effacée.
+ * Les modifications manuelles effectuées sur les taxons du règne sont perdues!
  *
  * @api
  * @filtre
@@ -104,6 +109,9 @@ function taxonomie_vider_regne($regne) {
  *
  * @param string	$regne
  * 		Nom scientifique du règne en lettres minuscules (animalia, plantae, fungi)
+ * @param array		$meta_regne
+ * 		Meta propre au règne, créée lors du chargement de celui-ci et retournée si le règne
+ * 		existe
  *
  * @return bool
  */
@@ -113,7 +121,7 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
 
 	$retour = sql_countsel('spip_taxons', 'regne=' . sql_quote($regne));
 	if ($retour) {
-		// Supprimer la meta propre au règne.
+		// Récupérer la meta propre au règne afin de la retourner.
 		include_spip('inc/config');
 		$meta_regne = lire_config("taxonomie_$regne");
 		$existe = true;

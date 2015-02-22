@@ -17,6 +17,7 @@
 	<pipeline nom="autoriser" inclure="taxonomie_autorisations.php" />
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/taxonomie_declarations.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/taxonomie_declarations.php" />
+	<pipeline nom="pre_edition" inclure="taxonomie_pipelines.php" />
 
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
 

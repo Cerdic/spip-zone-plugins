@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'rang_kingdom' => 'règne',
 	'rang_division' => 'division',
-	'rang_phylum' => 'embranchement',
+	'rang_phylum' => 'phylum',
 	'rang_class' => 'classe',
 	'rang_order' => 'ordre',
 	'rang_family' => 'famille',

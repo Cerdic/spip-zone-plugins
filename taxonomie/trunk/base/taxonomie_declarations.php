@@ -67,7 +67,7 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 			"tsn"				=> "bigint(21) NOT NULL",
 			"tsn_parent"		=> "bigint(21) NOT NULL",
 			"sources"			=> "text DEFAULT '' NOT NULL",
-			"statut"			=> "varchar(8) DEFAULT '0' NOT NULL",
+			"edite"				=> "varchar(3) DEFAULT 'non' NOT NULL",
 			"maj"				=> "TIMESTAMP"
 		),
 		'key' => array(
