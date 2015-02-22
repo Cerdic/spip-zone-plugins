@@ -6,7 +6,7 @@
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
  * b_b (http://http://www.weblog.eliaz.fr)
  *
- * © 2008/2014 - Distribue sous licence GNU/GPL
+ * © 2008/2015 - Distribue sous licence GNU/GPL
  *
  * Insertions dans les pipelines de SPIP et d'autres plugins
  *
@@ -209,7 +209,7 @@ function emballe_medias_jquery_plugins($plugins){
 }
 
 /**
- * Insertion dans le pipeline jqueryui_forcer (plugin jQueryUI)
+ * Insertion dans le pipeline jqueryui_plugins (plugin jQueryUI)
  * 
  * On ajoute le chargement des js pour les tabs
  * 
