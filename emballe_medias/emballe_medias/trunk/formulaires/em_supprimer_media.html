@@ -23,15 +23,12 @@
 			});
 			onAjaxLoad(cacher_infos_document_#ID_DOCUMENT);
 		</script>
-		<ul>
-			<li class="fieldset" id="formulaire_supprimer_document_#ID_DOCUMENT">
-				<fieldset>
 			[(#FICHIER|get_spip_doc|file_exists|oui)
 				[(#MIME_TYPE|match{video/}|ou{[(#EXTENSION|match{mp4})]}|oui)#SET{em_type,video}]
 				[(#MIME_TYPE|match{audio/}|oui)#SET{em_type,audio}]
 				[(#EXTENSION|match{gif|png|jpg}|oui)#SET{em_type,image}]
 				[(#GET{em_type}|non)#SET{em_type,normal}]
-					<legend><:emballe_medias:previsu_document:></legend>
+					<h3><:emballe_medias:previsu_document:></h3>
 					<ul>
 						<li class="previsu_document #GET{type}">
 							[(#CHEMIN{prive/inc-previsu_doc_#GET{em_type}_#EXTENSION.html}|oui)
@@ -41,8 +38,7 @@
 							<INCLURE{fond=prive/inc-previsu_doc_#GET{em_type},em_type=#GET{em_type},id_document,id_objet,objet,ajax}>
 							]
 						</li>
-					</ul>
-			]
+					</ul>]
 			[(#FICHIER|get_spip_doc|file_exists|non)
 				#SET{fichier,#FICHIER|basename}
 				<p class="reponse_formulaire reponse_formulaire_erreur"><:emballe_medias:erreur_document_disparu{fichier=#GET{fichier}}:></p>
@@ -95,12 +91,8 @@
 						<div id="em_doc_trad">
 							[(#BOUTON_ACTION{<:emballe_medias:bouton_recuperer_document:>,#URL_ACTION_AUTEUR{diogene_recup_doc_trad,#GET{id_article}}})]
 						</div>]
-					</div>
-				]
+					</div>]
 			]
-			</fieldset>
-			</li>
-		</ul>
 		</BOUCLE_documents_en_cours>
 		[(#ENV{editable}|oui)
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_bouton})</p>]
