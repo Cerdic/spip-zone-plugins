@@ -1,44 +1,36 @@
 <?php
-header( 'charset:UTF-8' );
+header('charset:UTF-8');
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
+if (!defined("_ECRIRE_INC_VERSION"))
+	return;
 
 function exec_mutualisation_dist() {
-	global $auteur_session;
 	$ustart = memory_get_peak_usage(true);
-	$timestart=microtime(true);
+	$timestart = microtime(true);
 	$memory_limit = strtolower(ini_get('memory_limit'));
-	
+
 	include_spip('inc/minipres');
 	include_spip('inc/filtres');
 
 	// pas admin ? passe ton chemin
-	if ( ($auteur_session['statut'] != '0minirezo') and ( $_SERVER["REMOTE_ADDR"]!='127.0.0.1'))
+	if (($GLOBALS['visiteur_session']['statut'] != '0minirezo') and ($_SERVER["REMOTE_ADDR"] != '127.0.0.1'))
 		die('pas admin !');
 
-	$lister_sites = charger_fonction('lister_sites','mutualisation');
+	$lister_sites = charger_fonction('lister_sites', 'mutualisation');
 	$sites = $lister_sites();
 
-	$branche_nom = "spip-" . $GLOBALS['spip_version_branche'] ;
-	$version_spip = intval($GLOBALS['spip_version_branche']) ;
-
+	$branche_nom = "spip-" . $GLOBALS['spip_version_branche'];
+	$version_spip = intval($GLOBALS['spip_version_branche']);
 
 	$url_stats = 'ecrire/?exec=stats_visites';
 	$url_compresseur = 'ecrire/?exec=configurer_avancees#formulaire_configurer_compresseur';
 	$url_admin_plugin = 'ecrire/?exec=admin_plugin';
 	$url_admin_vider = 'ecrire/?exec=admin_vider';
 
-	if (!file_exists(_DIR_IMG.'mutualiser.png'))
-		@copy(find_in_path('mutualiser.png'), _DIR_IMG.'mutualiser.png');
+	if (!file_exists(_DIR_IMG . 'mutualiser.png'))
+		@copy(find_in_path('mutualiser.png'), _DIR_IMG . 'mutualiser.png');
 
-	$titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>(' . _T('version') . ' ' . $GLOBALS['spip_version_base'].')</em>');
-
-	$page .= '<script type="text/javascript">
-	//<![CDATA[
-	var tableau_sites = new Array();
-	//]]>
-	</script>';
+	$titre .= _L(count($sites) . ' ' . 'sites mutualis&#233;s <em>(' . _T('version') . ' ' . $GLOBALS['spip_version_base'] . ')</em>');
 
 	//$page .= "<div id='trace'></div>" ;
 	$page .= "<table style='clear:both;'>
@@ -81,11 +73,9 @@ function exec_mutualisation_dist() {
 	$liste_plug_compat = $liste_plug_compat[0];
 
 	foreach ($sites as $v) {
-		$nom_site=$stats=$plugins=$erreur=$version_installee="";
+		$nom_site = $stats = $plugins = $erreur = $version_installee = "";
 
-		if (lire_fichier_securise(_DIR_RACINE.$GLOBALS['mutualisation_dir'].'/'.$v.'/tmp/meta_cache.php', $meta)
-		AND is_array($meta = @unserialize($meta))
-		AND $url = $meta['adresse_site']) {
+		if (lire_fichier_securise(_DIR_RACINE . $GLOBALS['mutualisation_dir'] . '/' . $v . '/tmp/meta_cache.php', $meta) AND is_array($meta = @unserialize($meta)) AND $url = $meta['adresse_site']) {
 			$url .= '/';
 			$nom_site = sinon(importer_charset($meta['nom_site'], $meta['charset']), $v);
 			$stats = intval($meta['popularite_total']);
@@ -110,34 +100,32 @@ function exec_mutualisation_dist() {
 			// va intercepter (pas terrible ?)
 			$erreur = test_upgrade_site($meta);
 			$adminplugin = adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base);
-			$version_installee = ' <em><small>'.$meta['version_installee'].'</small></em>';
-		}
-		else {
-			$url = 'http://'.$v.'/';
+			$version_installee = ' <em><small>' . $meta['version_installee'] . '</small></em>';
+		} else {
+			$url = 'http://' . $v . '/';
 			$erreur = ' <em><small><span class="erreur">Erreur&nbsp;!</span></small></em>';
 			$plugins = '-';
 		}
 
 		$compression = '';
-		if ($meta['auto_compress_css']=='oui')
+		if ($meta['auto_compress_css'] == 'oui')
 			$compression .= 'CSS';
-		if ($meta['auto_compress_js']=='oui')
-			$compression .= ($compression!='') ? '+JS':'JS';
-		if ($meta['auto_compress_http']=='oui') 
-			$compression .= ($compression!='') ? '+HTTP':'HTTP';
-		if ($compression=='')
+		if ($meta['auto_compress_js'] == 'oui')
+			$compression .= ($compression != '') ? '+JS' : 'JS';
+		if ($meta['auto_compress_http'] == 'oui')
+			$compression .= ($compression != '') ? '+HTTP' : 'HTTP';
+		if ($compression == '')
 			$compression = _L('Activer');
 		$page .= '<script type="text/javascript">
 		//<![CDATA[
-		tableau_sites.push(["../../'.$GLOBALS['mutualisation_dir'].'/'.$v.'"]);
+		tableau_sites.push(["../../' . $GLOBALS['mutualisation_dir'] . '/' . $v . '"]);
 		//]]>
 		</script>
 		';
 
-		$page .= "<tr class='tr". $nsite % 2 ."'"
-			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
+		$page .= "<tr class='tr" . $nsite % 2 . "'" . " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)' id='$alias[$v]'>\n
 			<td style='text-align:right;'><img src='${url}favicon.ico' style='float:left;' />$v$erreur$version_installee</td>\n
-			<td><a href='${url}'>".typo($nom_site)."</a></td>\n
+			<td><a href='${url}'>" . typo($nom_site) . "</a></td>\n
 			<td><a href='${url}ecrire/'>ecrire</a><br />
 				<a href='${url}$url_admin_plugin'>plugins</a><br />
 				<a href='${url}$url_admin_vider'>cache</a></td>
@@ -147,7 +135,7 @@ function exec_mutualisation_dist() {
 			<td style='text-align:right;'><a href='${url}$url_stats'>${stats}</a></td>\n
 			<td>$adminplugin<a href='${url}$url_admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>\n
 			<td><a href='${url}$url_compresseur'>$compression</a></td>\n
-			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>\n
+			<td style='text-align:right;'>" . date_creation_repertoire_site($v) . "</td>\n
 			</tr>\n";
 		$nsite++;
 	}
@@ -157,17 +145,16 @@ function exec_mutualisation_dist() {
 	// Ça sera calculé une seule fois pour toute et réutilisé dans la fonction plus loin.
 	$list_dist = array();
 	// correspond à plugins-dist/nom_plugin/paquet.xml
-	if (glob(_DIR_PLUGINS_DIST . '*/paquet.xml',GLOB_NOSORT)) {
+	if (glob(_DIR_PLUGINS_DIST . '*/paquet.xml', GLOB_NOSORT)) {
 		foreach (glob(_DIR_PLUGINS_DIST . '*/paquet.xml',GLOB_NOSORT) as $value) {
-			if (preg_match('/prefix="([^"]*)"/i', file_get_contents($value), $r)){
-					$list_dist[] = strtolower(trim($r[1]));
-				}
+			if (preg_match('/prefix="([^"]*)"/i', file_get_contents($value), $r)) {
+				$list_dist[] = strtolower(trim($r[1]));
+			}
 		}
 	}
 
-
 	if ($lsplugs) {
-		$nombre_plugins = count($lsplugs) ;
+		$nombre_plugins = count($lsplugs);
 		$page .= "<br /><br /><table style='clear:both;'>
 	<thead>\n
 		<tr>
@@ -179,34 +166,18 @@ function exec_mutualisation_dist() {
 		</tr>\n
 	</thead>
 	<tbody>";
-		foreach ($lsplugs as $plugin => $c){
-			$plnum[count($c)] .= "<tr>\n<td>".count($c)."</td>\n<td>$plugin</td>\n"
-				."<td>" . pluginDist($list_dist,$plugin) ."</td>\n<td>".$versionplug[$plugin]."</td>\n<td>".join(', ', ancre_site($c)).'</td>' . "\n" .'</tr>'. "\n";
+		foreach ($lsplugs as $plugin => $c) {
+			$plnum[count($c)] .= "<tr>\n<td>" . count($c) . "</td>\n<td>$plugin</td>\n" . "<td>" . pluginDist($list_dist, $plugin) . "</td>\n<td>" . $versionplug[$plugin] . "</td>\n<td>" . join(', ', ancre_site($c)) . '</td>' . "\n" . '</tr>' . "\n";
 		}
 		krsort($plnum);
 		$page .= join('', $plnum);
 		$page .= "</tbody>\n</table>\n";
 
-
-		$inutile = array();
-		$extract = array();
-		$list = array();
+		$inutile = $extract = $list = array();
 		// On crée une variable ici qui regardera les particularités des fichiers xml d'un plugin.
 		// Si à l'avenir on change de terminologie de fichier xml, il suffira de l'ajouter dans un nouvel array()
-		$cfg = array(
-			array(
-			'fn' => 'paquet.xml',
-			'pre' => '/prefix="([^"]*)"/i',
-			'ver' => '/version="([^"]*)"/i',
-			),
-			array(
-			'fn' => 'plugin.xml',
-			'pre' => ',<prefix>([^<]+),ims',
-			'ver' => ',<version>([^<]+),ims',
-			),
-		);
+		$cfg = array( array('fn' => 'paquet.xml', 'pre' => '/prefix="([^"]*)"/i', 'ver' => '/version="([^"]*)"/i', ), array('fn' => 'plugin.xml', 'pre' => ',<prefix>([^<]+),ims', 'ver' => ',<version>([^<]+),ims', ), );
 
-		
 		$ustart_glob = memory_get_peak_usage(true);
 
 		// Ici on est en SPIP 3.
@@ -214,104 +185,94 @@ function exec_mutualisation_dist() {
 		// Ca peut aller jusqu'a 3 sous-répertoires.
 		// On garde l'ancien principe d'un sous-répertoire pour ne pas casser la compat.
 
-		// Utiliser la classe si elle existe (PHP 5.3+)			
-			$dir = _DIR_PLUGINS;
+		// Utiliser la classe si elle existe (PHP 5.3+)
+		$dir = _DIR_PLUGINS;
 		if (class_exists('FilesystemIterator') AND is_dir(_DIR_PLUGINS)) {
 			$dir_it = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
 			$it = new RecursiveIteratorIterator($dir_it, RecursiveIteratorIterator::SELF_FIRST);
 
-			foreach($it as $path => $fo) {
-	
-			  if ( !$fo->isDir() ) {
-			    continue;
-			  }
-	
-			  $path .= '/';
-	
-			  foreach ($cfg as $k => $v) {
-			    if ( file_exists($path . $v['fn']) ) {
-			      $res = processConfig($cfg[$k], $lsplugs, $path);
-			      if (false !== $res) {
-			      	$inutile[] = $res;
-			      }
-			      break;
-			    }
-			  }
+			foreach ($it as $path => $fo) {
+				if (!$fo -> isDir()) {
+					continue;
+				}
+
+				$path .= '/';
+
+				foreach ($cfg as $k => $v) {
+					if (file_exists($path . $v['fn'])) {
+						$res = processConfig($cfg[$k], $lsplugs, $path);
+						if (false !== $res) {
+							$inutile[] = $res;
+						}
+						break;
+					}
+				}
 			}
-		}
-		else {
+		} else {
 			// Pour php < 5.3
 			// correspond à plugins/nom_plugin/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			if (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml', GLOB_BRACE)) {
 				foreach (glob(_DIR_PLUGINS . '*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
 					$list[] = $value;
 				}
 			}
 			// correspond à plugins/auto/nom_plugin/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			if (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml', GLOB_BRACE)) {
 				foreach (glob(_DIR_PLUGINS . '*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
 					$list[] = $value;
 				}
 			}
 			// correspond à plugins/auto/nom_plugin/x.y.z/fichier.xml
-			if (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE)) {
+			if (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml', GLOB_BRACE)) {
 				foreach (glob(_DIR_PLUGINS . '*/*/*/{paquet,plugin}.xml',GLOB_BRACE) as $value) {
 					$list[] = $value;
 				}
 			}
-	
-	
+
 			// Ici on va prendre les chemins d'extrusion uniquement, sans distinction du fichier xml
 			foreach ($list as $value) {
-				$extract[] = str_replace(array('plugin.xml','paquet.xml'), '', $value);
+				$extract[] = str_replace(array('plugin.xml', 'paquet.xml'), '', $value);
 			}
 			// On dédoublonne
 			$extract = array_unique($extract);
 			foreach ($extract as $url) {
 				// Et on refait une recherche pour paquet.xml d'abord
-				if(glob($url . 'paquet.xml', GLOB_NOSORT)) {
-					$result = glob($url . 'paquet.xml', GLOB_NOSORT);		
-					$result = $result[0] ;
+				if (glob($url . 'paquet.xml', GLOB_NOSORT)) {
+					$result = glob($url . 'paquet.xml', GLOB_NOSORT);
+					$result = $result[0];
 					// dans paquet.xml on cherche la valeur de l'attribut prefix
-					if (preg_match('/prefix="([^"]*)"/i', file_get_contents($result), $r) 
-						AND !$lsplugs[strtolower(trim($r[1]))]){
-							preg_match('/version="([^"]*)"/i', file_get_contents($result), $n);
-							$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
+					if (preg_match('/prefix="([^"]*)"/i', file_get_contents($result), $r) AND !$lsplugs[strtolower(trim($r[1]))]) {
+						preg_match('/version="([^"]*)"/i', file_get_contents($result), $n);
+						$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
 					}
-	
-				} else { // Si pas de paquet.xml, on cherche plugin.xml
-					$result = glob($url . 'plugin.xml', GLOB_NOSORT);		
-					$result = $result[0] ;
+
+				} else {// Si pas de paquet.xml, on cherche plugin.xml
+					$result = glob($url . 'plugin.xml', GLOB_NOSORT);
+					$result = $result[0];
 					// là, on reprend l'ancien code. On cherche la valeur de la balise prefix
-					if (preg_match(',<prefix>([^<]+),ims', file_get_contents($result), $r)
-						AND !$lsplugs[strtolower(trim($r[1]))]){
-							preg_match(',<version>([^<]+),ims', file_get_contents($result), $n);
-							$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
+					if (preg_match(',<prefix>([^<]+),ims', file_get_contents($result), $r) AND !$lsplugs[strtolower(trim($r[1]))]) {
+						preg_match(',<version>([^<]+),ims', file_get_contents($result), $n);
+						$inutile[] = trim($r[1]) . ' (' . $n[1] . ')';
 					}
 				}
 			}
 		}
 
 		$uend_glob = memory_get_peak_usage(true);
-			
-
 		$inutile = array_map('mb_strtolower', $inutile);
 		sort($inutile);
 
-
 		if ($inutile) {
-			$nombre_plugins_inutiles =count($inutile) ;
-			$page .= "<div class='inutilises'>\n<p><strong>"._L('Plugins inutilis&#233;s :')."</strong> ".join(', ', $inutile).".<br />";
+			$nombre_plugins_inutiles = count($inutile);
+			$page .= "<div class='inutilises'>\n<p><strong>" . _L('Plugins inutilis&#233;s :') . "</strong> " . join(', ', $inutile) . ".<br />";
 			$page .= "<em>Soit " . $nombre_plugins_inutiles . _L(' plugins inutilis&#233;s') . ".</em></p>\n</div>";
 		}
 	}
 
-	$page .= '<div style="text-align:center;"><img src="'
-		. find_in_path('mutualisation/mutualiser.png')
-		. '" alt="" /></div>';
+	$page .= '<div style="text-align:center;"><img src="' . find_in_path('mutualisation/mutualiser.png') . '" alt="" /></div>';
 
 	$page = minipres($titre, $page);
-	
+
 	$page = str_replace('</head>', '
 		<link rel="stylesheet" type="text/css" href="../mutualisation/mutualisation.css" />
 		<script src="../prive/javascript/jquery.js" type="text/javascript"></script>
@@ -322,60 +283,58 @@ function exec_mutualisation_dist() {
 
 	$uend = memory_get_peak_usage(true);
 	$udiff = $uend - $ustart;
-	$udiff_glob = $uend_glob - $ustart_glob ;
-	$timeend=microtime(true);
-	$time=$timeend-$timestart;
+	$udiff_glob = $uend_glob - $ustart_glob;
+	$timeend = microtime(true);
+	$time = $timeend - $timestart;
 	$page_load_time = number_format($time, 3);
 
 	// On génère le contenu de notre toolbar.
 	$debug_toolbar = "<div class='toolbar'>\n";
 
 	$debug_toolbar .= "<div class='toolbar-block'>\n";
-	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>\n" ;
-	$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-php_info'></i></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info'>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>SPIP</b> <span>" . $GLOBALS['spip_version_branche'] . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>PHP</b> <span>" . phpversion() . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire allouée</b> <span>" . $memory_limit . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Serveur</b> <span>" . $_SERVER["SERVER_SOFTWARE"] . "</span></div>\n";
-	$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "</div></div>\n";
 
 	$debug_toolbar .= "<div class='toolbar-block'>\n";
-	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>". ($nombre_plugins_inutiles + $nombre_plugins) ." plugins</span></div>\n" ;
-	$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-plugins'></i><span>" . ($nombre_plugins_inutiles + $nombre_plugins) . " plugins</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info'>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Utilisés</b> <span>" . $nombre_plugins . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Inutilisés</b> <span>" . $nombre_plugins_inutiles . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Total</b> <span>" . ($nombre_plugins_inutiles + $nombre_plugins) . "</span></div>\n";
-	$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "</div></div>\n";
 
 	$debug_toolbar .= "<div class='toolbar-block'>\n";
-	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>". memoryUsage($udiff) . "</span></div>\n" ;
-	$debug_toolbar .= "<div class='toolbar-info'>\n" ;
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-memory'></i> <span>" . memoryUsage($udiff) . "</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info'>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Mémoire :</b></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Au début</b> <span>" . memoryUsage($ustart) . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>À la fin</b> <span>" . memoryUsage($uend) . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Différence</b> <span>" . memoryUsage($udiff) . "</span></div>\n";
-	$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "</div></div>\n";
 
 	$debug_toolbar .= "<div class='toolbar-block'>\n";
-	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>". $page_load_time . " s</span></div>\n" ;
-	$debug_toolbar .= "<div class='toolbar-info'>" ;
+	$debug_toolbar .= "<div class='toolbar-icon'><i class='icon-time'></i> <span>" . $page_load_time . " s</span></div>\n";
+	$debug_toolbar .= "<div class='toolbar-info'>";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Début du script</b> <span>" . date("H:i:s", $timestart) . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Fin du script</b> <span>" . date("H:i:s", $timeend) . "</span></div>\n";
 	$debug_toolbar .= "<div class='toolbar-info-element'><b>Temps d'exécution</b> <span>" . $page_load_time . " s</span></div>\n";
-	$debug_toolbar .= "</div></div>\n" ;
+	$debug_toolbar .= "</div></div>\n";
 
-	$debug_toolbar .= "</div>\n" ;
+	$debug_toolbar .= "</div>\n";
 
 	$page = str_replace('</body>', $debug_toolbar . "\n </body>", $page);
 
 	echo $page;
 }
 
-
 function test_upgrade_site($meta) {
-	if ($GLOBALS['spip_version_base']
-	!= str_replace(',','.',$meta['version_installee'])) {
-		$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
+	if ($GLOBALS['spip_version_base'] != str_replace(',', '.', $meta['version_installee'])) {
+		$secret = $meta['version_installee'] . '-' . $meta['popularite_total'];
 		$secret = md5($secret);
 		return <<<EOF
 <form action='$meta[adresse_site]/ecrire/index.php?exec=mutualisation' method='post' class='upgrade' target='_blank'>
@@ -395,12 +354,10 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base) {
 		$plugins = array_keys($cfg);
 		ksort($plugins);
 		foreach ($plugins as $plugin) {
-			$vplugin_base = $meta[strtolower($plugin).'_base_version'];
+			$vplugin_base = $meta[strtolower($plugin) . '_base_version'];
 			$nouvelle_version_plugin_base = $liste_plug_compat_base[$liste_plug_compat[$plugin]['dir_type']][$liste_plug_compat[$plugin]['dir']]['version_base'];
-			if ($cfg[$plugin]['version'] != $liste_plug_compat[$plugin]['version']
-			AND !is_null($liste_plug_compat[$plugin]['version'])
-			AND ($vplugin_base != $nouvelle_version_plugin_base) ) {
-				$secret = $meta['version_installee'].'-'.$meta['popularite_total'];
+			if ($cfg[$plugin]['version'] != $liste_plug_compat[$plugin]['version'] AND !is_null($liste_plug_compat[$plugin]['version']) AND ($vplugin_base != $nouvelle_version_plugin_base)) {
+				$secret = $meta['version_installee'] . '-' . $meta['popularite_total'];
 				$secret = md5($secret);
 				$vplugin = $vplugin_base . '&rarr;' . $nouvelle_version_plugin_base;
 				return <<<EOF
@@ -415,46 +372,49 @@ function adminplugin_site($meta, $liste_plug_compat, $liste_plug_compat_base) {
 EOF;
 			}
 		}
-	} 
+	}
 	return '';
 }
 
-
-function date_creation_repertoire_site ($v) {
-	return (date("d/M/y", @filectime('../'.$GLOBALS['mutualisation_dir'].'/'.$v."/config/connect.php"))) ;	
+function date_creation_repertoire_site($v) {
+	return (date("d/M/y", @filectime('../' . $GLOBALS['mutualisation_dir'] . '/' . $v . "/config/connect.php")));
 }
 
-// lister les sites qui ont des sites/xx/config/connect.php
-// avec 'connect.php' ne changeant pas de nom
+
+/**
+ * lister les sites qui ont des sites/xx/config/connect.php
+ * avec 'connect.php' ne changeant pas de nom
+ */
 function mutualisation_lister_sites_dist() {
 	$sites = array();
-	foreach(glob('../'.$GLOBALS['mutualisation_dir'].'/*/config/connect.php') as $s) {
-		$sites[] = preg_replace(',^\.\./'.$GLOBALS['mutualisation_dir'].'/(.*)/config/connect.php,', '\1', $s);
+	foreach (glob('../'.$GLOBALS['mutualisation_dir'].'/*/config/connect.php') as $s) {
+		$sites[] = preg_replace(',^\.\./' . $GLOBALS['mutualisation_dir'] . '/(.*)/config/connect.php,', '\1', $s);
 	}
 	sort($sites);
 	return $sites;
 }
-
-/* autre exemple pour ceux qui mettent tous leurs fichiers de connexion
+/**
+ * autre exemple pour ceux qui mettent tous leurs fichiers de connexion
  * dans /config/connect/xx.php
  * fonction a mettre dans mes_options.php ou dans mutualisations/lister_sites.php
  */
+ 
 /*
-function mutualisation_lister_sites() {
-	$sites = array();
-	if (is_dir(_DIR_CONNECT)) {
-		if ($dh = @opendir(_DIR_CONNECT)) {
-			while (($file = readdir($dh)) !== false) {
-				if (substr($file,-4)=='.php') {
-					$sites[] = substr($file,0,-4);
-				}
-			}
-		}
-	}
-	sort($sites);
-	return $sites;
-}
-*/
+ function mutualisation_lister_sites() {
+ $sites = array();
+ if (is_dir(_DIR_CONNECT)) {
+ if ($dh = @opendir(_DIR_CONNECT)) {
+ while (($file = readdir($dh)) !== false) {
+ if (substr($file,-4)=='.php') {
+ $sites[] = substr($file,0,-4);
+ }
+ }
+ }
+ }
+ sort($sites);
+ return $sites;
+ }
+ */
 
 // faire une ancre vers le tableau des sites en haut de page
 function ancre_site($c) {
@@ -465,39 +425,37 @@ function ancre_site($c) {
 }
 
 function memoryUsage($bytes) {
-        $bytes = (int) $bytes;
+	$bytes = (int)$bytes;
 
-        if ($bytes > 1024*1024) {
-            return round($bytes/1024/1024, 2).' MB';
-        } elseif ($bytes > 1024) {
-            return round($bytes/1024, 2).' KB';
-        }
+	if ($bytes > 1024 * 1024)
+		return round($bytes / 1024 / 1024, 2) . ' MB';
+	else if ($bytes > 1024)
+		return round($bytes / 1024, 2) . ' KB';
 
-        return $bytes . ' B';
+	return $bytes . ' B';
 }
 
 function pluginDist($array, $plugin) {
 
 	$p = "-";
-	if (in_array($plugin, $array)) $p = "Oui";
+	if (in_array($plugin, $array))
+		$p = "Oui";
 	return $p;
 }
 
-/* Petite fonction qui va automatiser la recherche de paquet.xml ou plugin.xml 
+/**
+ * Petite fonction qui va automatiser la recherche de paquet.xml ou plugin.xml
  * quelque soit la profondeur dans l'arborescence
  */
 function processConfig(&$cfg, &$lsplugs, $path) {
-
 	// echo "<!-- Process: " . $path . $cfg['fn'] . "--> \n";
-
 	$data = file_get_contents($path . $cfg['fn']);
 
-	if ( 1 === preg_match($cfg['pre'], $data, $r) AND !$lsplugs[strtolower(trim($r[1]))] ) {
+	if (1 === preg_match($cfg['pre'], $data, $r) AND !$lsplugs[strtolower(trim($r[1]))]) {
 		preg_match($cfg['ver'], $data, $n);
 		return trim($r[1]) . ' (' . $n[1] . ')';
 	}
 
 	return false;
 }
-
 ?>
