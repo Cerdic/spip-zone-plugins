@@ -101,13 +101,11 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 		 */
 		if(!is_array(_request('diogene_gerer_auteurs'))){
 			foreach($auteurs_liste as $auteur){
-				if(($auteur == $GLOBALS['visiteur_session']['id_auteur']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')){
-					/**
-					 * On ne peut pas s'enlever soit même des auteurs si l'on n'est pas admin
-					 */
-				}
-				else {
-					$suppr = auteur_dissocier($auteur,array($type=>$id_objet));
+				/**
+				 * On ne peut pas s'enlever soit même des auteurs si l'on n'est pas admin
+				 */
+				if($auteur != $GLOBALS['visiteur_session']['id_auteur'] || $GLOBALS['visiteur_session']['statut'] == '0minirezo'){
+					 $suppr = auteur_dissocier($auteur,array($type=>$id_objet));
 					suivre_invalideur("id='id_auteur/$auteur'",true);
 				}
 			}
@@ -121,7 +119,7 @@ function diogene_gerer_auteurs_diogene_traiter($flux){
 			}
 			foreach($auteurs_liste as $id_auteur){
 				if(!in_array($id_auteur,_request('diogene_gerer_auteurs'))){
-					if(!($id_auteur == $GLOBALS['visiteur_session']['id_auteur']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')){
+					if($id_auteur != $GLOBALS['visiteur_session']['id_auteur'] || $GLOBALS['visiteur_session']['statut'] == '0minirezo'){
 						$suppr = auteur_dissocier($id_auteur,array($type=>$id_objet));
 						suivre_invalideur("id='id_auteur/$id_auteur'",true);
 					}
