@@ -260,7 +260,7 @@ function tdm_generer_table_des_matieres($intertitres) {
 	// generer un code HTML 
 	$code = "";
 	foreach ($intertitres as $url=>$titre) {
-		$code .= "<li><a href='#$url'>$titre</a></li>\n";
+		$code .= "<li><a href='#$url'>".supprimer_tags(propre($titre))."</a></li>\n";
 	}
 
 	// code HTML de la table des matieres
