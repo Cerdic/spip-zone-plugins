@@ -1,7 +1,7 @@
 <paquet
 	prefix="tablematieres"
 	categorie="edition"
-	version="2.2.4"
+	version="2.3.0"
 	etat="stable"
 	logo="images/table_matieres-64.png"
 	compatibilite="[2.0.0;3.0.*]"
