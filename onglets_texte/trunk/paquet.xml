@@ -1,0 +1,17 @@
+<paquet
+	prefix="onglets_texte"
+	categorie="edition"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/onglets_texte.png"
+	documentation="http://contrib.spip.net/?rubrique445"
+>
+	<nom>Onglets dans le texte</nom>
+	<auteur>[Pi R->http://contrib.spip.net/?auteur214]</auteur>
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="insert_head" action="insert_head" inclure="fb_modeles_pipelines.php" />
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="nuage_fonctions.php" />
+
+</paquet>
