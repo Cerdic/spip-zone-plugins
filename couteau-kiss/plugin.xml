@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[en]KISS Knife[fr]Couteau KISS[ca]El Ganivet KISS[nl]Het KISS Mes[gl]A navalla KISS[es]La Navaja KISS[de]KISS Taschenmesser[br]Ar Gontell KISS[pt_br]Canivete KISS[ast]La Navaya KISS[gl]A navalla KISS[it]Coltellino KISS</multi></nom>
 	<icon>images/pocket-knife-32.png</icon>
-	<version>1.1.9</version>
+	<version>1.2.0</version>
 	<auteur>&#169; 2010 - C&eacute;dric MORIN</auteur>
 	<licence>GPL</licence>
 	<etat>stable</etat>

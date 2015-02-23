@@ -20,7 +20,8 @@
 					<li class="editer_dossier_squelettes obligatoire[ (#ENV**{erreurs}|table_valeur{dossier_squelettes}|oui)erreur]">
 						<label for="nom"><:ck:label_dossier_squelettes:></label>[
 						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{dossier_squelettes})</span>
-						]<input type='text' class='text' name='dossier_squelettes' id='dossier_squelettes' value="#ENV{dossier_squelettes}" />
+						][<tt>(#ENV{_dossier_squelettes_sav,''}):</tt>]
+						<input type='text' class='text' name='dossier_squelettes' id='dossier_squelettes' value="#ENV{dossier_squelettes}" />
 						<p class="explication"><:ck:explication_dossier_squelettes:></p>
 					</li>
 					<li class="editer_options_typo[ (#ENV**{erreurs}|table_valeur{options_typo}|oui)erreur]">

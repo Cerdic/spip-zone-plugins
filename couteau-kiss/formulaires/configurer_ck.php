@@ -19,6 +19,10 @@ function ck_recupere_dossier_squelette($d,$raw=false){
 	$squelettes = explode(':',$squelettes);
 	$squelettes = array_map('ck_rtrim_dir',$squelettes);
 	$squelettes = array_diff($squelettes,array('squelettes',''));
+	$squelettes = array_unique($squelettes);
+	if (isset($GLOBALS['dossier_squelettes_sav'])){
+		$squelettes = array_diff($squelettes,explode(":",$GLOBALS['dossier_squelettes_sav']));
+	}
 	if ($raw)
 		return implode(':',$squelettes);
 	array_push($squelettes, 'squelettes');
@@ -75,9 +79,16 @@ function ck_verifier_options($init = false){
  */
 function ck_produire_code($c=null){
 	$code = "";
+	// backuper un eventuel dossier_squelettes en dur pour ne pas le doublonner dans la config
+	$code .= "if (isset(\$GLOBALS['dossier_squelettes'])) \$GLOBALS['dossier_squelettes_sav']=\$GLOBALS['dossier_squelettes'];\n";
 	if ($d = _request('dossier_squelettes',$c)){
 		$d = ck_recupere_dossier_squelette($d,true);
-		$code .= ck_code_globale('dossier_squelettes',"'".addslashes($d)."'");
+		// ne pas ecraser la globale avec une valeur vide, ca ne sert a rien
+		// de plus on concatene
+		if ($d){
+			$value = addslashes($d);
+			$code .= "\$GLOBALS['dossier_squelettes'] = (isset(\$GLOBALS['dossier_squelettes'])?rtrim(\$GLOBALS['dossier_squelettes'],':').':':'').'$value';\n";
+		}
 	}
 
 	// pas la peine en SPIP 3 : c'est pas defaut
@@ -152,6 +163,7 @@ function ck_produire_code($c=null){
 function formulaires_configurer_ck_charger_dist(){
 	ck_verifier_options();
 	$valeurs = array(
+		'_dossier_squelettes_sav' => isset($GLOBALS['dossier_squelettes_sav'])?$GLOBALS['dossier_squelettes_sav']:'',
 		'dossier_squelettes' => ck_recupere_dossier_squelette($GLOBALS['dossier_squelettes']),
 		'supprimer_numero' => preg_match(",supprimer_numero,",reset($GLOBALS['table_des_traitements']['TITRE']))?1:0,
 		'toujours_paragrapher' => $GLOBALS['toujours_paragrapher']?1:0,
