@@ -110,7 +110,7 @@
 	[(#PLUGIN{porte_plume,version}|oui)
 		<fieldset id="fieldset_porte_plume">
 			<legend><:contact:configuration_champs_message:></legend>
-			[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]
+			[<p class="attention">(#VAL{PORTE_PLUME_PUBLIC}|defined|et{#EVAL{PORTE_PLUME_PUBLIC}|non}|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]
 			<ul>
 				<li class="editer editer_barre">
 					<label><:contact:configuration_champs_message_explication:></label>
