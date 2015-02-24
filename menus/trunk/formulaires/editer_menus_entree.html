@@ -25,7 +25,7 @@
 </div>
 
 <script type="text/javascript">
-	$(function(){
+	(function($){
 		$('.entree .actions').hide();
 		$('.entree .ligne')
 			.hover(
@@ -36,5 +36,5 @@
 					$(this).find('.actions').hide();
 				}
 			);
-	});
+	})(jQuery);
 </script>
