@@ -231,5 +231,20 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center") {
 }
 
 
+function image_responsive_affiche_milieu($flux, $effacer=false) {
+
+	$exec = $flux["args"]["exec"];
+	
+	
+	if ($exec == "admin_vider") {
+		$retour = recuperer_fond("squelettes/admin_vider_responsive");
+
+		$flux["data"] .= $retour;
+	}
+
+	return $flux;
+}
+
+
 
 ?>
