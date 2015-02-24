@@ -119,10 +119,14 @@ function autoriser_associermots($faire,$type,$id,$qui,$opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
  */
-function autoriser_groupemots_afficherselecteurmots($faire,$type,$id,$qui,$opt){
+function autoriser_groupemots_afficherselecteurmots($faire, $type, $id, $qui, $opt){
 
 	static $groupes = array();
-	
+
+	if (!autoriser_groupemots_afficherselecteurmots_dist($faire, $type, $id, $qui, $opt)) {
+		return false;
+	}
+
 	$objet    = $opt['objet'];
 	$id_objet = $opt['id_objet'];
 
