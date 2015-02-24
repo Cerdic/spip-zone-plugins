@@ -3,7 +3,7 @@
 	<slogan>Joli formulaire de recherche</slogan>
 	<auteur>Fil, Sarah</auteur>
 	<licence>Copyleft</licence>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 	<prefix>recherche</prefix>
 	<etat>stable</etat>
 	<description>Ce plugin remplace le formulaire de recherche de Spip par de jolie bo&#238;te de saisie</description>
@@ -14,6 +14,6 @@
 		<inclure>recherche_public.php</inclure>
 		<action>insert_head</action>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
