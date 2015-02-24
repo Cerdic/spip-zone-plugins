@@ -8,6 +8,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_envoyer' => 'Send',
+	'bouton_envoyer_maintenant' => 'Send maintenant',
+	'bouton_ne_pas_bloguer' => 'Don\'t send anything',
+	'bouton_preferer_compte' => 'Use this account (default)',
 
 	// C
 	'choisir' => 'choose',
@@ -18,7 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'elements_signaler' => 'Elements to report to the public flow',
 	'erreur_verifier_configuration' => 'An error occures, please check the configuration.',
-	'explication_twitter_api_oauth' => 'The oAuth API of Twitter requires to create an application <a href="http://dev.twitter.com/apps/new">on their website (http://dev.twitter.com/apps/new)</a>. Create this application, enter the provided data, save the configuration and then a link below will enable you to link a twitter account to this site.',
+	'explication_twitter_api_oauth' => 'Create a Twitter Application <a href="http://dev.twitter.com/apps/new">in developper area (http://dev.twitter.com/apps/new)</a>.
+Enter the provided data and save the configuration (<a href="http://contrib.spip.net/4394">Plus d\'aide</a>).',
+	'erreur_connexion_compte' => 'Unable to connect with @account@ account.',
+	'erreur_envoi_desactive' => 'Tweet sending is de-activated due to <tt>_TEST_MICROBLOG_SERVICE</tt> constant',
+	'erreur_config_pour_widget' => 'Configure Twitter Application and add an account to use Widgets.',
+	'erreur_config_pour_tweeter' => 'Configure the plugin to send a message.',
 
 	// I
 	'invite' => 'Prompt',
@@ -28,15 +36,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_associer_compte_twitter' => 'Link your twitter account to this site',
-	'label_dissocier_compte_twitter' => '<a href="@url_assoc@">Dissociate the twitter account currently used</a> (<a href="@url_compte@">@nom@</a>)',
+	'label_aucun_compte_twitter' => 'Aucun compte Twitter enregistré.',
+	'label_dissocier_compte_twitter' => 'Delete this account',
 	'label_status' => 'What\'s new ?',
 	'label_twitter_consumer_key' => 'API key of the Twitter API',
 	'label_twitter_consumer_secret' => 'API secret of the Twitter API',
+	'label_microblog'=> 'Edit the message',
 	'label_username' => 'User name',
+	'legend_api_twitter' => 'Twitter Application',
+	'legend_comptes_twitter' => 'Twitter Accounts',
 	'lien_documentation' => 'View documentation',
+	'longueur_maxi_status' => 'Your message can\'t be longer than 140 chars',
+
+	// M
+	'message_envoye'=> 'Tweet:',
 
 	// P
-	'presentation_spipo' => 'the SPIP\'s community site',
 	'presentation_laconica' => 'the public site of the laconi.ca software',
 
 	// N
@@ -46,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'poster_forums' => 'Posted forums',
+	'publier_forums' => 'Published forums',
 	'proposer_articles' => 'Proposed articles',
 	'propose' => 'proposed',
 	'publier_articles' => 'Published articles',
@@ -56,7 +72,42 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'publier_articles_attente' => 'Stagger the publication in the time (minutes)',
 
 	// S
-	'service' => 'Service'
+	'service' => 'Service',
+
+	// T
+	'titre_microblog' => 'Twitter',
+	'titre_configurer_microblog' => 'Twitter Configuration',
+	'titre_configurer_twitter_app' => 'Application &amp; Accounts',
+
+
+	'explication_commun_widgets' => "Needed configuration for using Widgets, common for profile and search widgets.",
+	'explication_recherche_widget' => "Configuration of search widget",
+	'explication_profil_widget' => "Configuration of profile widget",
+
+	'label_search' => "Search. Searched words or hashtags (words starting with an #)",
+	'label_interval' => "Delay between each tweet display (ms)",
+	'label_subject' => "Widget's subtitle",
+	'label_title' => "Widget's Title",
+	'label_footer' => "Footer text",
+	'label_width' => "Widget width",
+	'label_height' => "Widget height",
+	'label_shell_background' => "Widget background-color",
+	'label_shell_color' => "Text color",
+	'label_tweets_background' => "Tweet background color",
+	'label_tweets_color' => "Tweet text color",
+	'label_tweets_link' => "Links color",
+	'label_rpp' => "Number of results",
+	'label_user' => "Tweeter User (without the @ prefix)",
+
+	'legend_commun_widgets' => "Common configuration",
+	'legend_recherche_widget' => "Search Widget",
+	'legend_profil_widget' => "Profile Widget",
+
+
+	// T
+	'titre_configurer_widget' => "Twitter Widgets",
+	'titre_twidget' => "Twidget",
+
 
 );
 
