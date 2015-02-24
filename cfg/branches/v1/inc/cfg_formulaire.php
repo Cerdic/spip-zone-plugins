@@ -588,9 +588,14 @@ class cfg_formulaire{
 					$contexte['id'] = $this->param['nom'];
 				}
 			}
-						
+
 			$val = $this->val ? array_merge($contexte, $this->val) : $contexte;
-	
+
+			// si un fichier de fonctions existe, le charger
+			if (file_exists($this->fond_compile . '_fonctions.php')) {
+				include_spip(substr($this->fond_compile, strlen(_DIR_RACINE)) . '_fonctions');
+			}
+
 			// si on est dans l'espace prive, $this->path_vue est
 			// de la forme ../plugins/mon_plugin/fonds/toto, d'ou le replace
 			$this->fond_compile = recuperer_fond(
