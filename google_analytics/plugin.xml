@@ -2,7 +2,7 @@
 	<nom>Google Analytics</nom>
 	<slogan>Utiliser le service Google Analytics</slogan>
 	<auteur>Phil</auteur>
-	<version>0.4.6</version>
+	<version>0.4.7</version>
 	<etat>stable</etat>
 	<licence>GNU/GPL</licence>
 	<description>
@@ -22,7 +22,7 @@
 	</pipeline>
 	
 	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
-	<necessite id="cfg" />
+	<necessite id="spip_bonux" />
 	
 	<categorie>statistique</categorie>
 </plugin>
