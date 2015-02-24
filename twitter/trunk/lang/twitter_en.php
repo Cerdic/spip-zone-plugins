@@ -97,7 +97,7 @@ Enter the provided data and save the configuration (<a href="http://contrib.spip
 	'label_tweets_color' => "Tweet text color",
 	'label_tweets_link' => "Links color",
 	'label_rpp' => "Number of results",
-	'label_user' => "Tweeter User (without the @ prefix)",
+	'label_user' => "Twitter User (without the @ prefix)",
 
 	'legend_commun_widgets' => "Common configuration",
 	'legend_recherche_widget' => "Search Widget",
