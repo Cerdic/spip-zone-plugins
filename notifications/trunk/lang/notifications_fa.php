@@ -10,10 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alt_logo_conf' => 'لوگوي پلاگين اطلاعيه‌ها',
 	'article_prive' => 'نشر مقاله‌ها',
-	'article_prive_admins_restreints' => '<strong>ادمين‌ها </strong> : ادمين‌ها وقتي مقاله‌ها داخل بخش‌ آن‌ها پيشنهاد شود با خبر خواهند شد',
+	'article_prive_admins_restreints' => '<strong>ادمين‌ها </strong> : ادمين‌ها وقتي مقاله‌ها داخل بخش‌ آن‌ها پيشنهاد شود با خبر خواهند شد', # MODIF
 	'article_prive_auteurs' => '<strong>نويسندگان</strong> :نويسندگان هنگام نشر مقاله‌ (ها) با خبر مي‌شوند', # MODIF
 	'article_propose_detail' => 'مقاله "@titre@" براي نشر پيشنهاد شده',
-	'article_propose_sujet' => '[@nom_site_spip@] پيشنهاد شده: @titre@',
+	'article_propose_sujet' => '[@nom_site_spip@] پيشنهاد شده: @titre@', # MODIF
 	'article_propose_titre' => 'مقاله پيشنهادي
 	---------------',
 	'article_propose_url' => 'دعوت مي‌شويد كه در فرم پيوست مشورت و نظر خود را اعلام كنيد. اين فرم در اين شناني در دسترس است: ',

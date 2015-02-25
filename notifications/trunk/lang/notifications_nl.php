@@ -10,10 +10,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alt_logo_conf' => 'Logo van plugin Notifications',
 	'article_prive' => 'Publicatie van artikelen',
-	'article_prive_admins_restreints' => '<strong>Beheerders</strong>: Beperkte beheerders ontvangen notificaties bij voorstellen voor publicatie in hun rubriek',
+	'article_prive_admins_restreints' => '<strong>Beheerders</strong>: Beperkte beheerders ontvangen notificaties bij voorstellen voor publicatie in hun rubriek', # MODIF
 	'article_prive_auteurs' => '<strong>Auteurs</strong>: Auteurs ontvangen notificaties bij het voorstellen, publiceren of verwijderen van hun artikel(en)', # MODIF
 	'article_propose_detail' => 'Artikel "@titre@" is ter publicatie voorgesteld sinds',
-	'article_propose_sujet' => '[@nom_site_spip@] Stelt voor: @titre@',
+	'article_propose_sujet' => '[@nom_site_spip@] Stelt voor: @titre@', # MODIF
 	'article_propose_titre' => 'Voorgesteld artikel
 	------------------',
 	'article_propose_url' => 'Je wordt voorgesteld het te bekijken en je mening te geven

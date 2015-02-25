@@ -10,11 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alt_logo_conf' => 'Logo del plugin Notificaciones',
 	'article_prive' => 'Publicación de artículos',
-	'article_prive_admins_restreints' => '<strong>Administradores</strong>: Los administradores -limitados- reciben notificaciones cuando llegan propuestas de artículos a su sección',
+	'article_prive_admins_restreints' => '<strong>Administradores</strong>: Los administradores -limitados- reciben notificaciones cuando llegan propuestas de artículos a su sección', # MODIF
 	'article_prive_auteurs' => '<strong>Autores</strong>: los autores reciben notificaciones cuando su(s) artículo(s) son propuestos, publicados o eliminados', # MODIF
 	'article_propose_detail' => 'El artículo "@titre@" ha sido propuesto para publicación
 	desde',
-	'article_propose_sujet' => '[@nom_site_spip@] Propone: @titre@',
+	'article_propose_sujet' => '[@nom_site_spip@] Propone: @titre@', # MODIF
 	'article_propose_titre' => 'Artículo propuesto
 	---------------',
 	'article_propose_url' => 'Le invitamos a consultarlo y a dar su opinión en el foro asociado. El mismo está disponible en la dirección:',

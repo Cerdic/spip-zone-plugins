@@ -10,11 +10,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alt_logo_conf' => 'Logo zásuvného modulu Oznamy',
 	'article_prive' => 'Publikovanie článkov',
-	'article_prive_admins_restreints' => '<strong>Administrátori:</strong> administrátori s obmedzeniami dostávajú oznamy pri odoslaní článkov do ich rubriky',
+	'article_prive_admins_restreints' => '<strong>Administrátori:</strong> administrátori s obmedzeniami dostávajú oznamy pri odoslaní článkov do ich rubriky', # MODIF
 	'article_prive_auteurs' => '<strong>Autori:</strong> autori dostávajú oznamy pri odoslaní svojich článkov na schválenie, pri ich publikovaní alebo odstránení', # MODIF
 	'article_propose_detail' => 'Článok "@titre@" bol odoslaný na publikovanie
 	z(o)',
-	'article_propose_sujet' => '[@nom_site_spip@] Odoslaný: @titre@',
+	'article_propose_sujet' => '[@nom_site_spip@] Odoslaný: @titre@', # MODIF
 	'article_propose_titre' => 'Článok bol odoslaný
 	---------------',
 	'article_propose_url' => 'Pozvali vás, aby ste si prečítali tento článok a svoj názor naň napísali do diskusného fóra, ktoré je k nemu pripojené. Článok nájdete na adrese:',
