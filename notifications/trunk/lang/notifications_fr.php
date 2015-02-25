@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_prive_publieur' => 'Si l’un des auteurs est celui qui publie l’article, ne pas le prévenir.',
 	'article_propose_detail' => 'L’article "@titre@" est proposé à la publication
 	depuis',
-	'article_propose_sujet' => '[@nom_site_spip@] Propose : @titre@',
+	'article_propose_sujet' => '[@nom_site_spip@] Proposé : @titre@',
 	'article_propose_titre' => 'Article proposé
 	---------------',
 	'article_propose_url' => 'Vous êtes invité à venir le consulter et à donner votre opinion
