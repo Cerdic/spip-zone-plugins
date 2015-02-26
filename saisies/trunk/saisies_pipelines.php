@@ -85,7 +85,7 @@ function saisies_formulaire_charger($flux){
 	}
 
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
-	include_spip('inc/saisies')
+	include_spip('inc/saisies');
 	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
 
 	if ($saisies) {
