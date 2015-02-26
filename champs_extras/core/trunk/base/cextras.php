@@ -46,7 +46,7 @@ function cextras_declarer_tables_objets_sql($tables){
 	$saisies_tables = pipeline('declarer_champs_extras', array());
 	foreach ($saisies_tables as $table => $saisies) {
 		if (isset($tables[$table])) {
-			$saisies = saisies_lister_avec_sql($saisies);
+			$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 			foreach ($saisies as $saisie) {
 				$nom = $saisie['options']['nom'];
 				if (!isset($tables[$table]['field'][$nom])) {
@@ -119,7 +119,7 @@ function cextras_declarer_tables_interfaces($interfaces){
 	}
 
 	foreach ($saisies_tables as $table=>$saisies) {
-		$saisies = saisies_lister_avec_sql($saisies);
+		$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 		$saisies = saisies_lister_avec_traitements($saisies);
 
 		foreach ($saisies as $saisie) {

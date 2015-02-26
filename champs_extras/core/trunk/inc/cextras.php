@@ -55,6 +55,27 @@ function cextras_objets_valides(){
 
 
 
+/*
+ * Liste les saisies ayant une definition SQL
+ *
+ * S'assurer de l'absence de clé, qui fait croire à saisies que le tableau est déjà à plat
+ * alors que ce n'est pas forcément encore le cas (ie: il peut y avoir des fieldset à prendre
+ * en compte).
+ * 
+ * @param Array $saisies liste de saisies
+ * @return array Liste de ces saisies triees par nom ayant une option sql définie
+ */
+function champs_extras_saisies_lister_avec_sql($saisies) {
+	if (!function_exists('saisies_lister_avec_sql')) {
+		include_spip('inc/saisies');
+	}
+
+	return saisies_lister_avec_sql(array_values($saisies));
+}
+
+
+
+
 /**
  * Liste les saisies ayant des traitements
  *
@@ -92,10 +113,10 @@ function champs_extras_creer($table, $saisies) {
 	if (!is_array($saisies) OR !count($saisies)) {
 		return false;
 	}
-	
+
 	// uniquement les saisies décrivant SQL
-	include_spip('inc/saisies');
-	$saisies = saisies_lister_avec_sql($saisies);
+	$saisies = champs_extras_saisies_lister_avec_sql($saisies);
+
 	if (!$saisies) {
 		return false;
 	}
@@ -137,9 +158,8 @@ function champs_extras_supprimer($table, $saisies) {
 	if (!is_array($saisies) OR !count($saisies)) {
 		return false;
 	}
-	
-	include_spip('inc/saisies');
-	$saisies = saisies_lister_avec_sql($saisies);
+
+	$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 
 	if (!$saisies) {
 		return false;

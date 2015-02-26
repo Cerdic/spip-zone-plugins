@@ -87,7 +87,7 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
  *     Saisies complétées des drapeaux d'édition
 **/
 function champs_extras_ajouter_drapeau_edition($saisies) {
-	$saisies_sql = saisies_lister_avec_sql($saisies);
+	$saisies_sql = champs_extras_saisies_lister_avec_sql($saisies);
 	foreach ($saisies_sql as $saisie) {
 		$nom = $saisie['options']['nom'];
 		$saisies[] = array(
@@ -157,7 +157,7 @@ function cextras_pre_edition($flux){
 		// au cas où un malin voudrait en envoyer plus que le formulaire ne demande
 		$saisies = champs_extras_autorisation('modifier', objet_type($table), $saisies, $flux['args']);
 
-		$saisies = saisies_lister_avec_sql($saisies);
+		$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 		foreach ($saisies as $saisie) {
 			$nom = $saisie['options']['nom'];
 			if (_request('cextra_' .  $nom)) {
@@ -191,7 +191,7 @@ function cextras_afficher_contenu_objet($flux){
 	include_spip('inc/cextras');
 	if ($saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
 		// ajouter au contexte les noms et valeurs des champs extras
-		$saisies_sql = saisies_lister_avec_sql($saisies);
+		$saisies_sql = champs_extras_saisies_lister_avec_sql($saisies);
 		$valeurs = sql_fetsel(array_keys($saisies_sql), $table, id_table_objet($table) . '=' . sql_quote($flux['args']['id_objet']));
 		if (!$valeurs) {
 			$valeurs = array();
@@ -262,7 +262,7 @@ function cextras_formulaire_verifier($flux){
 			'contexte' => array()))); // nous ne connaissons pas le contexte dans ce pipeline
 
 		// restreindre les vérifications aux saisies enregistrables
-		$saisies = saisies_lister_avec_sql($saisies);
+		$saisies = champs_extras_saisies_lister_avec_sql($saisies);
 
 		$verifier = charger_fonction('verifier', 'inc', true);
 
