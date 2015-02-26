@@ -54,8 +54,7 @@ function cextras_objets_valides(){
 
 
 
-
-/*
+/**
  * Liste les saisies ayant une definition SQL
  *
  * S'assurer de l'absence de clé, qui fait croire à saisies que le tableau est déjà à plat
@@ -72,7 +71,6 @@ function champs_extras_saisies_lister_avec_sql($saisies) {
 
 	return saisies_lister_avec_sql(array_values($saisies));
 }
-
 
 
 
