@@ -44,6 +44,7 @@ include_spip('inc/saisies_afficher');
  * Cherche la description des saisies d'un formulaire CVT dont on donne le nom
  *
  * @param string $form Nom du formulaire dont on cherche les saisies
+ * @param array $args Tableau d'arguments du formulaire
  * @return array Retourne les saisies du formulaire sinon false
  */
 function saisies_chercher_formulaire($form, $args){
@@ -141,7 +142,7 @@ function saisies_generer_nom($formulaire, $type_saisie){
  * pour toutes les saisies donnees qui n'en ont pas 
  *
  * @param Array $saisies Tableau de saisies
- * @param Bool $regenerer_id Régénère un nouvel identifiant pour toutes les saisies ?
+ * @param Bool $regenerer Régénère un nouvel identifiant pour toutes les saisies ?
  * @return Array Tableau de saisies complété des identifiants
  */
 function saisies_identifier($saisies, $regenerer = false) {
@@ -160,7 +161,7 @@ function saisies_identifier($saisies, $regenerer = false) {
  * (et pour ses sous saisies éventuels)
  *
  * @param Array $saisie Tableau d'une saisie
- * @param Bool $regenerer_id Régénère un nouvel identifiant pour la saisie ?
+ * @param Bool $regenerer Régénère un nouvel identifiant pour la saisie ?
  * @return Array Tableau de la saisie complété de l'identifiant
 **/
 function saisie_identifier($saisie, $regenerer = false) {
@@ -252,7 +253,7 @@ function saisies_verifier($formulaire, $saisies_masquees_nulles=true){
 
 /**
  * Applatie une description tabulaire
- * @param string $tab, le tableau à aplatir
+ * @param string $tab Le tableau à aplatir
  * @return $nouveau_tab
  */
 function saisies_aplatir_tableau($tab){
@@ -271,7 +272,7 @@ function saisies_aplatir_tableau($tab){
 
 /**
  * Applatie une description chaînée, en supprimant les sous-groupes.
- * @param string $chaine, la chaîne à aplatir
+ * @param string $chaine La chaîne à aplatir
  * @return $chaine
  */
 function saisies_aplatir_chaine($chaine){
@@ -287,6 +288,7 @@ function saisies_aplatir_chaine($chaine){
  * - si la ligne est égale à /*, alors on fini le sous-tableau
  * 
  * @param string $chaine Une chaine à transformer
+ * @param string $seperateur Séparateur utilisé
  * @return array Retourne un tableau PHP
  */
 function saisies_chaine2tableau($chaine, $separateur="\n"){
@@ -349,6 +351,9 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
  * - chaque ligne est générée avec la forme cle|valeur
  * - si une entrée du tableau est elle même un tableau, on met une ligne de la forme *clef
  * - pour marquer que l'on quitte un sous-tableau, on met une ligne commencant par /*, sauf si on bascule dans un autre sous-tableau.
+ *
+ * @param array $tableau Tableau à transformer
+ * @param string Texte représentant les données du tableau
  */
 function saisies_tableau2chaine($tableau){
 	if ($tableau and is_array($tableau)){
@@ -387,27 +392,20 @@ function saisies_tableau2chaine($tableau){
 
 
 /**
- * Passe une valeur en tableau d'élements si ce n'en est pas une
- *
- * entrée :
- * cle|valeur
- * cle|valeur
- *
- * Sinon :
- * valeur,valeur
+ * Transforme une valeur en tableau d'élements si ce n'est pas déjà le cas
  *
  * @param mixed $valeur
  * @return array Tableau de valeurs
 **/
-function saisies_valeur2tableau($valeur, $sinon_separateur="") {
+function saisies_valeur2tableau($valeur) {
 	if (is_array($valeur)) {
 		return $valeur;
 	}
-	
+
 	if (!strlen($valeur)) {
 		return array();
 	}
-	
+
 	$t = saisies_chaine2tableau($valeur);
 	if (count($t) > 1) {
 		return $t;
@@ -418,20 +416,24 @@ function saisies_valeur2tableau($valeur, $sinon_separateur="") {
 	if (isset($t[0])) {
 		$t = saisies_chaine2tableau($t[0], ',');
 	}
-	
+
 	return $t;
 }
 
 
 
-
-/*
+/**
  * Génère une page d'aide listant toutes les saisies et leurs options
+ *
+ * Retourne le résultat du squelette `inclure/saisies_aide` auquel
+ * on a transmis toutes les saisies connues.
+ * 
+ * @return string Code HTML
  */
 function saisies_generer_aide(){
 	// On a déjà la liste par saisie
 	$saisies = saisies_lister_disponibles();
-	
+
 	// On construit une liste par options
 	$options = array();
 	foreach ($saisies as $type_saisie=>$saisie){
@@ -448,7 +450,7 @@ function saisies_generer_aide(){
 		$saisies[$type_saisie]['options'] = $options_saisie;
 	}
 	ksort($options);
-	
+
 	return recuperer_fond(
 		'inclure/saisies_aide',
 		array(

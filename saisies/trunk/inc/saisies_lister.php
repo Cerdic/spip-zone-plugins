@@ -134,6 +134,7 @@ function saisies_lister_par_type($contenu) {
  * une liste des noms des champs du formulaire.
  *
  * @param array $contenu Le contenu d'un formulaire
+ * @param bool $avec_conteneur Indique si on renvoie aussi les saisies ayant des enfants, comme les fieldset
  * @return array Un tableau listant les noms des champs
  */
 function saisies_lister_champs($contenu, $avec_conteneur=true){
@@ -217,6 +218,10 @@ function saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneu
 
 /**
  * Compare deux saisies et indique si elles sont égales ou pas
+ *
+ * @param array $a Une description de saisie
+ * @param array $b Une autre description de saisie
+ * @return int Retourne 0 si les saisies sont identiques, 1 sinon.
  */
 function saisies_comparer_rappel($a, $b){
 	if ($a === $b) return 0;
