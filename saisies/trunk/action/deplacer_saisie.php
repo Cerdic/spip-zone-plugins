@@ -1,10 +1,21 @@
 <?php
 
+/**
+ * Gestion de l'action déplacer saisie.
+ *
+ * @package SPIP\Saisies\Action
+ */
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Action de déplacement de saisies dans le constructeur de formulaires
+ *
+ * @return void
+**/
 function action_deplacer_saisie_dist() {
 	include_spip('inc/session');
-	
+
 	$session 	 = _request('session');
 	$identifiant = _request('saisie');
 	$ou          = _request('ou');
@@ -35,4 +46,3 @@ function action_deplacer_saisie_dist() {
 	$formulaire_actuel = session_set($session, $formulaire_actuel);
 }
 
-?>

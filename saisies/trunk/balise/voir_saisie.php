@@ -1,15 +1,24 @@
 <?php
 
+/**
+ * Déclaration de la balise `#VOIR_SAISIE`
+ *
+ * @package SPIP\Saisies\Balises
+**/
+
+
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/* 
- * #VOIR_SAISIE{type,nom} : champs obligatoires
+/**
+ * Compile la balise `#VOIR_SAISIE` qui retourne le code HTML de la vue d'une saisie indiquée
+ *
+ * Cette balise incluera le squelette `saisies-vues/_base.html` et lui-même `saisies-vues/{type}.html`
  * 
- * collecte des arguments en fonctions du parametre "nom"
- * ajoute des arguments
- * appelle #INCLURE avec les arguments collectes en plus
+ * @syntaxe `#VOIR_SAISIE{type,nom[,option=valeur,...]}`
  * 
+ * @param Champ $p
+ * @return Champ
  */
 function balise_VOIR_SAISIE_dist ($p) {
 
@@ -33,7 +42,5 @@ function balise_VOIR_SAISIE_dist ($p) {
 		return balise_INCLURE($p);
 	else
 		return balise_INCLURE_dist($p);	
-		
-}
 
-?>
+}

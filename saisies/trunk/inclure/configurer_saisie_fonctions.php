@@ -35,4 +35,3 @@ function construire_configuration_saisie($saisie, $avec_nom='non'){
 	return $configuration_saisie;
 }
 
-?>

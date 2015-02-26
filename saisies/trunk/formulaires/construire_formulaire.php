@@ -532,4 +532,3 @@ function saisie_option_contenu_vide($var) {
 	}
 	return true;
 }
-?>

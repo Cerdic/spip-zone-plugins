@@ -1,8 +1,20 @@
 <?php
 
+/**
+ * Utilisation des pipelines
+ *
+ * @package SPIP\Saisies\Pipelines
+**/
+
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Ajoute les scripts JS et CSS de saisies dans l'espace privé
+ *
+ * @param string $flux 
+ * @return string
+**/
 function saisies_header_prive($flux){
 	$js = find_in_path('javascript/saisies.js');
 	$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
@@ -13,6 +25,15 @@ function saisies_header_prive($flux){
 	return $flux;
 }
 
+/**
+ * Ajoute les scripts JS et CSS de saisies dans l'espace public
+ *
+ * Ajoute également de quoi gérer le datepicker de la saisie date si
+ * celle-ci est utilisée dans la page.
+ * 
+ * @param string $flux 
+ * @return string
+**/
 function saisies_affichage_final($flux){
 	if (($p = strpos($flux,"<!--!inserer_saisie_editer-->"))!==false){
 		// On insère la CSS devant le premier <link> trouvé
@@ -46,11 +67,17 @@ function saisies_affichage_final($flux){
 	return $flux;
 }
 
-// Déclaration des pipelines
-function saisies_saisies_autonomes($flux) { return $flux; }
-function saisies_formulaire_saisies($flux) { return $flux; }
 
-// Déclarer automatiquement les champs d'un CVT si on les trouve dans un tableau de saisies et s'ils ne sont pas déjà déclarés
+/**
+ * Déclarer automatiquement les champs d'un formulaire CVT qui déclare des saisies
+ *
+ * Recherche une fonction `formulaires_XX_saisies_dist` et l'utilise si elle
+ * est présente. Cette fonction doit retourner une liste de saisies dont on se
+ * sert alors pour calculer les champs utilisés dans le formulaire.
+ * 
+ * @param array $flux 
+ * @return array
+**/
 function saisies_formulaire_charger($flux){
 	// Si le flux data est inexistant, on quitte : Le CVT d'origine a décidé de ne pas continuer
 	if (!is_array($flux['data'])){
@@ -58,9 +85,10 @@ function saisies_formulaire_charger($flux){
 	}
 
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
-	if (include_spip('inc/saisies')
-		and $saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'])
-	){
+	include_spip('inc/saisies')
+	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
+
+	if ($saisies) {
 		// On ajoute au contexte les champs à déclarer
 		$contexte = saisies_lister_valeurs_defaut($saisies);
 		$flux['data'] = array_merge($contexte, $flux['data']);
@@ -71,7 +99,19 @@ function saisies_formulaire_charger($flux){
 	return $flux;
 }
 
-// Aiguiller CVT vers un squelette propre à Saisies lorsqu'on a déclaré des saisies et qu'il n'y a pas déjà un HTML
+/**
+ * Aiguiller CVT vers un squelette propre à Saisies lorsqu'on a déclaré des saisies et qu'il n'y a pas déjà un HTML
+ *
+ * Dans le cadre d'un formulaire CVT demandé, si ce formulaire a déclaré des saisies, et
+ * qu'il n'y a pas de squelette spécifique pour afficher le HTML du formulaire,
+ * alors on utilise le formulaire générique intégré au plugin saisie, qui calculera le HTML
+ * à partir de la déclaration des saisies indiquées.
+ * 
+ * @see saisies_formulaire_charger()
+ * 
+ * @param array $flux
+ * @return array
+**/
 function saisies_styliser($flux){
 	// Si on cherche un squelette de formulaire
 	if (strncmp($flux['args']['fond'],'formulaires/',12)==0
@@ -89,10 +129,25 @@ function saisies_styliser($flux){
 	return $flux;
 }
 
-// Ajouter les vérifications déclarées dans la fonction "saisies" du CVT
+/**
+ * Ajouter les vérifications déclarées dans la fonction "saisies" du CVT
+ *
+ * Si un formulaire CVT a déclaré des saisies, on utilise sa déclaration
+ * pour effectuer les vérifications du formulaire.
+ *
+ * @see saisies_formulaire_charger()
+ * @uses saisies_verifier()
+ * 
+ * @param array $flux
+ *     Liste des erreurs du formulaire
+ * @return array
+ *     iste des erreurs
+ */
 function saisies_formulaire_verifier($flux){
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
-	if (include_spip('inc/saisies') and $saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'])){
+	include_spip('inc/saisies');
+	$saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args']);
+	if ($saisies) {
 		// On ajoute au contexte les champs à déclarer
 		$erreurs = saisies_verifier($saisies);
 		if ($erreurs and !isset($erreurs['message_erreur']))
@@ -100,8 +155,7 @@ function saisies_formulaire_verifier($flux){
 		$flux['data'] = array_merge($erreurs, $flux['data']);
 	}
 
-
 	return $flux;
 }
 
-?>
+

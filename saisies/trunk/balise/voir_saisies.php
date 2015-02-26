@@ -1,8 +1,31 @@
 <?php 
+/**
+ * Déclaration de la balise `#VOIR_SAISIES`
+ *
+ * @package SPIP\Saisies\Balises
+**/
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Compile la balise `#VOIR_SAISIES` qui retourne le code HTML des vues de formulaire,
+ * à partir du tableau des saisies transmises
+ *
+ * La balise accepte 1 paramètre qui est une liste de descriptions de saisies
+ * dont on veut générer le HTML affichant les vues du formulaires
+ *
+ * Cette balise est un raccourcis :
+ * - `#VOIR_SAISIES{#TABLEAU_DE_SAISIES}` est équivalent à
+ * - `#INCLURE{fond=inclure/voir_saisies,env,saisies=#TABLEAU_DE_SAISIES}`
+ * 
+ * @syntaxe `#VOIR_SAISIE{#TABLEAU_DE_SAISIES}`
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complété du code à générer
+**/
 function balise_VOIR_SAISIES_dist($p){
 
 	// On recupere les arguments : les tableaux decrivant ce qu'on veut generer + les reponses
@@ -26,5 +49,3 @@ function balise_VOIR_SAISIES_dist($p){
 		return balise_INCLURE_dist($p);	
 
 }
-
-?>

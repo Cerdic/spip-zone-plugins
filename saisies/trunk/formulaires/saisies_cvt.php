@@ -38,4 +38,3 @@ function formulaires_saisies_cvt_saisies_dist(){
 	);
 }
 
-?>

@@ -425,5 +425,3 @@ function saisies_verifier_afficher_si($saisies, $env=NULL) {
 	}
 	return $saisies;
 }
-
-?>

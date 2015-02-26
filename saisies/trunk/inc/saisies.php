@@ -3,7 +3,7 @@
 /**
  * Gestion de l'affichage des saisies
  *
- * @return SPIP\Saisies\Saisies
+ * @package SPIP\Saisies\Saisies
 **/
 
 // Sécurité
@@ -40,7 +40,7 @@ include_spip('inc/saisies_manipuler');
 // Les outils pour afficher les saisies et leur vue
 include_spip('inc/saisies_afficher');
 
-/*
+/**
  * Cherche la description des saisies d'un formulaire CVT dont on donne le nom
  *
  * @param string $form Nom du formulaire dont on cherche les saisies
@@ -68,7 +68,7 @@ function saisies_chercher_formulaire($form, $args){
 	}
 }
 
-/*
+/**
  * Cherche une saisie par son id, son nom ou son chemin et renvoie soit la saisie, soit son chemin
  *
  * @param array $saisies Un tableau décrivant les saisies
@@ -136,7 +136,7 @@ function saisies_generer_nom($formulaire, $type_saisie){
 	return $type_saisie.'_'.$compteur;
 }
 
-/*
+/**
  * Crée un identifiant Unique
  * pour toutes les saisies donnees qui n'en ont pas 
  *
@@ -175,7 +175,7 @@ function saisie_identifier($saisie, $regenerer = false) {
 	return $saisie;
 }
 
-/*
+/**
  * Vérifier tout un formulaire tel que décrit avec les Saisies
  *
  * @param array $formulaire Le contenu d'un formulaire décrit dans un tableau de Saisies
@@ -458,7 +458,7 @@ function saisies_generer_aide(){
 	);
 }
 
-/*
+/**
  * Le tableau de saisies a-t-il une option afficher_si ?
  *
  * @param array $saisies Un tableau de saisies
@@ -476,7 +476,7 @@ function saisies_afficher_si($saisies) {
 }
 
 
-/*
+/**
  * Le tableau de saisies a-t-il une option afficher_si_remplissage ?
  *
  * @param array $saisies Un tableau de saisies
@@ -491,4 +491,4 @@ function saisies_afficher_si_remplissage($saisies) {
 	}
 	return false;
 }
-?>
+

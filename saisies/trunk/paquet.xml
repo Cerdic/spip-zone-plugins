@@ -1,7 +1,7 @@
 <paquet
 	prefix="saisies"
 	categorie="outil"
-	version="2.0.5"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/logo_saisie_48.png"
@@ -18,8 +18,8 @@
 
 	<pipeline nom="header_prive" inclure="saisies_pipelines.php" />
 	<pipeline nom="affichage_final" inclure="saisies_pipelines.php" />
-	<pipeline nom="saisies_autonomes" inclure="saisies_pipelines.php" />
-	<pipeline nom="formulaire_saisies" inclure="saisies_pipelines.php" />
+	<pipeline nom="saisies_autonomes" action="" />
+	<pipeline nom="formulaire_saisies" action="" />
 	<pipeline nom="formulaire_charger" inclure="saisies_pipelines.php" />
 	<pipeline nom="formulaire_verifier" inclure="saisies_pipelines.php" />
 	<pipeline nom="styliser" inclure="saisies_pipelines.php" />

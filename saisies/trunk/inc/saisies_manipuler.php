@@ -85,7 +85,7 @@ function saisies_inserer($saisies, $saisie, $chemin=array()){
 	return $saisies;
 }
 
-/*
+/**
  * Duplique une saisie (ou groupe de saisies)
  * en placant la copie à la suite de la saisie d'origine.
  * Modifie automatiquement les identifiants des saisies
@@ -115,7 +115,7 @@ function saisies_dupliquer($saisies, $id_ou_nom_ou_chemin){
 	return $saisies;
 }
 
-/*
+/**
  * Déplace une saisie existante autre part
  *
  * @param array $saisies Un tableau décrivant les saisies
@@ -174,7 +174,7 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou){
 	return $saisies;
 }
 
-/*
+/**
  * Modifie une saisie
  *
  * @param array $saisies Un tableau décrivant les saisies
@@ -277,7 +277,7 @@ function saisies_transformer_noms_auto($formulaire, $saisies){
 	return $saisies;
 }
 
-/*
+/**
  * Insère du HTML au début ou à la fin d'une saisie
  *
  * @param array $saisie La description d'une seule saisie
@@ -299,5 +299,3 @@ function saisies_inserer_html($saisie, $insertion, $ou='fin'){
 	
 	return $saisie;
 }
-
-?>

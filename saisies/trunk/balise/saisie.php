@@ -1,29 +1,61 @@
 <?php
 
+/**
+ * Déclaration de la classe `Pile` et de la balise `#SAISIE`
+ *
+ * @package SPIP\Saisies\Balises
+**/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour ne pas interferer avec d'eventuelles futures fonctions du core
-// on met le tout dans un namespace ; les fonctions sont autonomes.
+// on met le tout dans une classe ; les fonctions sont autonomes.
 
+/**
+ * Conteneur pour modifier les arguments d'une balise SPIP (de classe Champ) à compiler
+ *
+ * @note
+ *     Ces fonctions visent à modifier l'AST (Arbre de Syntaxe Abstraite) issues
+ *     de l'analyse du squelette. Très utile pour créer des balises qui
+ *     transmettent des arguments supplémentaires automatiquement, à des balises
+ *     déjà existantes.
+ *     Voir un exemple d'utilisation dans `balise_SAISIE_dist()`.
+ * 
+ * @note
+ *     Les arguments sont stockés sont dans l'entree 0 de la propriété `param`
+ *     dans l'objet Champ (représenté par `$p`), donc dans `$p->param[0]`.
+ * 
+ *     `param[0][0]` vaut toujours '' (ou presque ?)
+ *
+ * @see balise_SAISIE_dist() Pour un exemple d'utilisation
+**/
 class Pile {
 
 
-	// les arguments sont dans l'entree 0 du tableau param.
-	// param[0][0] vaut toujours '' (ou presque ?)
+	/**
+	 * Récupère un argument de balise
+	 * 
+	 * @param int $pos
+	 * @param Champ $p
+	 * @return mixed|null Élément de l'AST représentant l'argument s'il existe
+	**/
 	static function recuperer_argument_balise($pos, $p) {
 		if (!isset($p->param[0])) {
 			return null;
 		}
 		if (!isset($p->param[0][$pos])) {
 			return null;
-		}	
+		}
 		return $p->param[0][$pos];
 	}
-	
-	
-	
-	// les arguments sont dans l'entree 0 du tableau param.
-	// param[0][0] vaut toujours '' (ou presque ?)
+
+	/**
+	 * Supprime un argument de balise
+	 *
+	 * @param int $pos
+	 * @param Champ $p
+	 * @return Champ
+	**/
 	static function supprimer_argument_balise($pos, $p) {
 		if (!isset($p->param[0])) {
 			return null;
@@ -37,23 +69,37 @@ class Pile {
 			$debut = array_slice($p->param[0], 0, $pos);
 			$fin   = array_slice($p->param[0], $pos+1);
 			$p->param[0] = array_merge($debut, $fin);
-		}		
+		}
 		return $p;
-	}	
-	
-	
-	
+	}
+
+
+	/**
+	 * Retourne un argument de balise, et le supprime de la liste des arguments
+	 *
+	 * @uses Pile\recuperer_argument_balise()
+	 * @uses Pile\supprimer_argument_balise()
+	 * 
+	 * @param int $pos
+	 * @param Champ $p
+	 * @return mixed|null Élément de l'AST représentant l'argument s'il existe
+	**/
 	static function recuperer_et_supprimer_argument_balise($pos, &$p) {
 		$arg = Pile::recuperer_argument_balise($pos, $p);
 		$p   = Pile::supprimer_argument_balise($pos, $p);
 		return $arg;
 	}
-	
-	
-	
-	
-	// les arguments sont dans l'entree 0 du tableau param.
-	// param[0][0] vaut toujours '' (ou presque ?)
+
+
+	/**
+	 * Ajoute un argument de balise
+	 *
+	 * Empile l'argument à la suite des arguments déjà existants pour la balise
+	 * 
+	 * @param mixed $element Élément de l'AST représentant l'argument à ajouter
+	 * @param Champ $p
+	 * @return Champ
+	**/
 	static function ajouter_argument_balise($element, $p) {
 		if (isset($p->param[0][0])) {
 			$zero = array_shift($p->param[0]);
@@ -67,12 +113,26 @@ class Pile {
 		}
 		return $p;
 	}
-	
-	
-	
-	// creer_argument_balise(nom) = {nom}
-	// creer_argument_balise(nom, 'coucou') = {nom=coucou}
-	// creer_argument_balise(nom, $balise) = {nom=#BALISE}
+
+
+	/**
+	 * Crée l'élément de l'AST représentant un argument de balise.
+	 *
+	 * @example
+	 *     ```
+	 *     $nom = Pile::creer_argument_balise(nom);           // {nom}
+	 *     $nom = Pile::creer_argument_balise(nom, 'coucou'); // {nom=coucou}
+	 *     
+	 *     $balise = Pile::creer_balise('BALISE');
+	 *     $nom = Pile::creer_argument_balise(nom, $balise);  // {nom=#BALISE}
+	 *     ```
+	 * 
+	 * @param string $nom
+	 *     Nom de l'argument
+	 * @param string|object $valeur
+	 *     Valeur de l'argument. Peut être une chaîne de caractère ou un autre élément d'AST
+	 * @return array
+	**/
 	static function creer_argument_balise($nom, $valeur = null) {
 		include_spip('public/interfaces');
 		$s = new Texte;
@@ -91,7 +151,7 @@ class Pile {
 			$res = array($s);
 		} 
 		// {nom=coucou}
-		elseif (is_string($valeur)) {			
+		elseif (is_string($valeur)) {
 			$s->texte .= "=$valeur";
 			$res = array($s);
 		}
@@ -103,9 +163,21 @@ class Pile {
 
 		return $res;
 	}
-	
-	
-	
+
+
+	/**
+	 * Crée et ajoute un argument à une balise
+	 *
+	 * @uses Pile\creer_argument_balise()
+	 * @uses Pile\ajouter_argument_balise()
+	 * 
+	 * @param Champ $p
+	 * @param string $nom
+	 *     Nom de l'argument
+	 * @param string|object $valeur
+	 *     Valeur de l'argument. Peut être une chaîne de caractère ou un autre élément d'AST
+	 * @return Champ
+	**/
 	static function creer_et_ajouter_argument_balise($p, $nom, $valeur = null) {
 		$new = Pile::creer_argument_balise($nom, $valeur); 
 		return Pile::ajouter_argument_balise($new, $p);
@@ -113,8 +185,23 @@ class Pile {
 
 
 
-	// creer une balise
-	static function creer_balise($nom, $opt) {
+	/**
+	 * Crée l'AST d'une balise
+	 *
+	 * @example
+	 *     ```
+	 *     // Crée : #ENV*{titre}
+	 *     $titre = Pile::recuperer_argument_balise(1, $p); // $titre, 1er argument de la balise actuelle 
+	 *     $env = Pile::creer_balise('ENV', array('param' => array($titre), 'etoile' => '*'));
+	 *     ```
+	 * 
+	 * @param string $nom
+	 *     Nom de la balise
+	 * @param array $opt
+	 *     Options (remplira les propriétés correspondantes de l'objet Champ)
+	 * @return Champ
+	**/
+	static function creer_balise($nom, $opt = array()) {
 		include_spip('public/interfaces');
 		$b = new Champ;
 		$b->nom_champ = strtoupper($nom);
@@ -136,17 +223,24 @@ class Pile {
 
 
 
-/* 
- * #saisie{type,nom} : champs obligatoires
+/**
+ * Compile la balise `#SAISIE` qui retourne le code HTML de la saisie de formulaire indiquée.
+ *
+ * Cette balise incluera le squelette `saisies/_base.html` et lui-même `saisies/{type}.html`
+ *
+ * La balise `#SAISIE` est un raccourci pour une écriture plus compliquée de la balise `#INCLURE`.
+ * La balise calcule une série de paramètre récupérer et à transmettre à `#INCLURE`,
+ * en fonction des valeurs des 2 premiers paramètres transmis.
  * 
- * collecte des arguments en fonctions du parametre "nom"
- * ajoute des arguments
- * appelle #INCLURE avec les arguments collectes en plus
- * 
- * il faudrait en faire une balise dynamique (?)
- * pour avoir un code plus propre
- * mais je n'ai pas reussi a trouver comment recuperer "valeur=#ENV{$nom}"
- * 
+ * Les autres arguments sont transmis tels quels à la balise `#INCLURE`.
+ *
+ * Ainsi `#SAISIE{input,nom,label=Nom,...}` exécutera l'équivalent de
+ * `#INCLURE{nom=nom,valeur=#ENV{nom},type_saisie=input,erreurs,fond=saisies/_base,label=Nom,...}`
+ *
+ * @syntaxe `#SAISIE{type,nom[,option=xx,...]}`
+ *
+ * @param Champ $p
+ * @return Champ
  */
 function balise_SAISIE_dist ($p) {
 
@@ -167,14 +261,10 @@ function balise_SAISIE_dist ($p) {
 
 	// on appelle la balise #INCLURE
 	// avec les arguments ajoutes
-	if(function_exists('balise_INCLURE'))
+	if (function_exists('balise_INCLURE'))
 		return balise_INCLURE($p);
 	else
 		return balise_INCLURE_dist($p);	
-		
 }
 
 
-
-
-?>

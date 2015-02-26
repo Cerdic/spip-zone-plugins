@@ -1,9 +1,15 @@
 <?php
 
+/**
+ * Gestion de listes des saisies
+ *
+ * @return SPIP\Saisies\Listes
+**/
+
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-/*
+/**
  * Prend la description complète du contenu d'un formulaire et retourne
  * les saisies "à plat" classées par identifiant unique.
  *
@@ -31,7 +37,7 @@ function saisies_lister_par_identifiant($contenu, $avec_conteneur=true){
 	return $saisies;
 }
 
-/*
+/**
  * Prend la description complète du contenu d'un formulaire et retourne
  * les saisies "à plat" classées par nom.
  *
@@ -58,7 +64,7 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
 	return $saisies;
 }
 
-/*
+/**
  * Liste les saisies ayant une option X
  * # saisies_lister_avec_option('sql', $saisies);
  *  
@@ -85,7 +91,7 @@ function saisies_lister_avec_option($option, $saisies, $tri = 'nom') {
 	return $saisies_option;
 }
 
-/*
+/**
  * Liste les saisies ayant une definition SQL
  *
  * @param Array $saisies liste de saisies
@@ -96,7 +102,7 @@ function saisies_lister_avec_sql($saisies, $tri = 'nom') {
 	return saisies_lister_avec_option('sql', $saisies, $tri);
 }
 
-/*
+/**
  * Prend la description complète du contenu d'un formulaire et retourne
  * les saisies "à plat" classées par type de saisie.
  * $saisie['input']['input_1'] = $saisie
@@ -123,7 +129,7 @@ function saisies_lister_par_type($contenu) {
 	return $saisies;
 }
 
-/*
+/**
  * Prend la description complète du contenu d'un formulaire et retourne
  * une liste des noms des champs du formulaire.
  *
@@ -135,7 +141,7 @@ function saisies_lister_champs($contenu, $avec_conteneur=true){
 	return array_keys($saisies);
 }
 
-/*
+/**
  * A utiliser dans une fonction charger d'un formulaire CVT,
  * cette fonction renvoie le tableau de contexte correspondant
  * de la forme $contexte['nom_champ'] = ''
@@ -152,7 +158,7 @@ function saisies_charger_champs($contenu) {
 	return $champs;
 }
 
-/*
+/**
  * Prend la description complète du contenu d'un formulaire et retourne
  * une liste des valeurs par défaut des champs du formulaire.
  *
@@ -176,7 +182,7 @@ function saisies_lister_valeurs_defaut($contenu){
 	return $defauts;
 }
 
-/*
+/**
  * Compare deux tableaux de saisies pour connaitre les différences
  * @param array $saisies_anciennes Un tableau décrivant des saisies
  * @param array $saisies_nouvelles Un autre tableau décrivant des saisies
@@ -209,7 +215,7 @@ function saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneu
 	);
 }
 
-/*
+/**
  * Compare deux saisies et indique si elles sont égales ou pas
  */
 function saisies_comparer_rappel($a, $b){
@@ -217,7 +223,7 @@ function saisies_comparer_rappel($a, $b){
 	else return 1;
 }
 
-/*
+/**
  * Compare deux tableaux de saisies pour connaitre les différences
  * en s'appuyant sur les identifiants de saisies
  *
@@ -231,7 +237,7 @@ function saisies_comparer_par_identifiant($saisies_anciennes, $saisies_nouvelles
 	return saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneur, $tri = 'identifiant');
 }
 
-/*
+/**
  * Liste toutes les saisies configurables (ayant une description)
  *
  * @return array Un tableau listant des saisies et leurs options
@@ -262,7 +268,7 @@ function saisies_lister_disponibles(){
 	return $saisies;
 }
 
-/*
+/**
  * Lister les saisies existantes ayant une définition SQL 
  *
  * @return array Un tableau listant des saisies et leurs options
@@ -278,7 +284,7 @@ function saisies_lister_disponibles_sql() {
 	return $saisies;
 }
 
-/*
+/**
  * Charger les informations contenues dans le YAML d'une saisie
  *
  * @param string $type_saisie Le type de la saisie
@@ -302,7 +308,7 @@ function saisies_charger_infos($type_saisie){
 	return $saisie;
 }
 
-/*
+/**
  * Quelles sont les saisies qui se débrouillent toutes seules, sans le _base commun
  *
  * @return array Retourne un tableau contenant les types de saisies qui ne doivent pas utiliser le _base.html commun
@@ -321,4 +327,3 @@ function saisies_autonomes(){
 	return $saisies_autonomes;
 }
 
-?>

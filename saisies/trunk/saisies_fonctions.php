@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Déclaration de fonctions pour les squelettes
+ *
+ * @package SPIP\Saisies\Fonctions
+**/
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/saisies');
@@ -41,19 +47,27 @@ function saisie_traitement_vue($valeur,$env){
 
 /**
  * Passer un nom en une valeur compatible avec une classe css
- * toto => toto,
- * toto/truc => toto_truc,
- * toto[truc] => toto_truc,
+ * 
+ * - toto => toto,
+ * - toto/truc => toto_truc,
+ * - toto[truc] => toto_truc
+ *
+ * @param string $nom
+ * return string
 **/
 function saisie_nom2classe($nom) {
 	return str_replace(array('/', '[', ']', '&#91;', '&#93;'), array('_', '_', '', '_', ''), $nom);
 }
 
 /**
- * Passer un nom en une valeur compatible avec un name de formulaire
- * toto => toto,
- * toto/truc => toto[truc],
- * toto[truc] => toto[truc],
+ * Passer un nom en une valeur compatible avec un `name` de formulaire
+ * 
+ * - toto => toto,
+ * - toto/truc => toto[truc],
+ * - toto[truc] => toto[truc]
+ *
+ * @param string $nom
+ * return string
 **/
 function saisie_nom2name($nom) {
 	if (false === strpos($nom, '/')) {
@@ -66,13 +80,17 @@ function saisie_nom2name($nom) {
 }
 
 /**
- * Balise beurk #GLOBALS{debut_intertitre}
- * qui retourne la globale PHP du même nom si elle existe
+ * Compile la balise `#GLOBALS{xxx}` qui retourne la valeur d'une vilaine variable globale de même nom si elle existe
  *
- * @param array $p
- * 		Pile au niveau de la balise
- * @return array
- * 		Pile complétée du code php de la balise.
+ * @example
+ *     ```
+ *     #GLOBALS{debut_intertitre}
+ *     ```
+ * 
+ * @param Champ $p
+ *     Pile au niveau de la balise
+ * @return Champ
+ *     Pile complétée du code php de la balise.
 **/
 function balise_GLOBALS_dist($p) {
 	if (function_exists('balise_ENV'))
@@ -131,4 +149,3 @@ function picker_selected_par_objet($selected) {
 
 	return $liste;
 }
-?>
