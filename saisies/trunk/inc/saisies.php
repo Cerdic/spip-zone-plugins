@@ -353,7 +353,7 @@ function saisies_chaine2tableau($chaine, $separateur="\n"){
  * - pour marquer que l'on quitte un sous-tableau, on met une ligne commencant par /*, sauf si on bascule dans un autre sous-tableau.
  *
  * @param array $tableau Tableau à transformer
- * @param string Texte représentant les données du tableau
+ * @return string Texte représentant les données du tableau
  */
 function saisies_tableau2chaine($tableau){
 	if ($tableau and is_array($tableau)){
