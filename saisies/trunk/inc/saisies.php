@@ -288,7 +288,7 @@ function saisies_aplatir_chaine($chaine){
  * - si la ligne est égale à /*, alors on fini le sous-tableau
  * 
  * @param string $chaine Une chaine à transformer
- * @param string $seperateur Séparateur utilisé
+ * @param string $separateur Séparateur utilisé
  * @return array Retourne un tableau PHP
  */
 function saisies_chaine2tableau($chaine, $separateur="\n"){
