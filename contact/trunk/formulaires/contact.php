@@ -197,8 +197,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer='',$options=arr
 			if (($nom_pj != null) && ($pj_fichiers['error'][$cle] == 0)) {
 				//On vérifie qu'un fichier ne porte pas déjà le même nom, sinon on lui donne un nom aléatoire + nom original
 				if (file_exists($repertoire_temp_pj.$nom_pj))
-					$nom_pj = $nom_pj.'_'.rand();
-
+					$nom_pj = rand().’_’.$nom_pj ;
 				//déplacement du fichier vers le dossier de réception temporaire
 				if (move_uploaded_file($pj_fichiers['tmp_name'][$cle], $repertoire_temp_pj.$nom_pj)) {
 					$infos_pj[$cle]['message'] = 'ajout fichier';
