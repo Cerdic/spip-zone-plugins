@@ -148,20 +148,20 @@ function magnet_html_boutons_admin($objet, $id_objet, $class="", $pile=''){
 	$bclass = $class . " magnet ";
 	if ($magnet_rang) {
 		$bclass .= "magnetized";
-		$label = "<i></i>($magnet_rang) <span>Enlever</span>";
+		$label = "<i></i>($magnet_rang) <span>"._T('magnet:label_demagnetize')."</span>";
 		$boutons = bouton_action($label,$ur_action,$bclass);
 		if ($magnet_rang>1){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."up".$pile_arg,self());
-			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'','monter') . $boutons;
+			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-up-24.png","monter"),$ur_action, $class ." magnet-up",'',_T('magnet:label_up')) . $boutons;
 		}
 		if ($magnet_rang<magnet_count($objet)){
 			$ur_action = generer_action_auteur("magnetize",$objet."-".$id_objet."-"."down".$pile_arg,self());
-			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'','descendre') . $boutons;
+			$boutons = bouton_action($balise_img(_DIR_PLUGIN_MAGNET."img/magnet-down-24.png","descendre"),$ur_action, $class ." magnet-down",'',_T('magnet:label_down')) . $boutons;
 		}
 	}
 	else {
 		$bclass .= "demagnetized";
-		$label = "<i></i><span>Aimanter</span>";
+		$label = "<i></i><span>"._T('magnet:label_magnetize')."</span>";
 		$boutons = bouton_action($label,$ur_action,$bclass);
 	}
 

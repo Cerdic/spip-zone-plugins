@@ -1,7 +1,7 @@
 <paquet
 	prefix="magnet"
 	categorie="outil"
-	version="0.6.2"
+	version="0.6.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="magnet-32.png"
