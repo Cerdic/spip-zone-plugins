@@ -9,7 +9,7 @@ Ils sont néanmoins affichés dans l'agenda.
   <div class="liste-articles">[<span class="pagination screen_only">Derniers textes publiés : (#PAGINATION)</span>][(#ENV{debut_articles}|?{'',' '})]
       <ul>
         <BOUCLE_articles(ARTICLES) {par date}{inverse}{titre==(^[^_].*$)} {pagination #VAR{acsArticlesPagination,10}} {age_relatif>=0} {lang=#LANG}>
-          <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{coupe=#VAR{acsArticlesNbLettres,200}}>
+          <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{coupe=#VAR{acsArticlesNbLettres,200}}{aff_rubrique=#VAR{acsArticlesRubrique,oui}}>
         </BOUCLE_articles>
       </ul>
   </div>

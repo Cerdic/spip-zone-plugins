@@ -17,8 +17,8 @@ Un article dans une liste d'articles
       <span class="infos_article nav nsize">
       [(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
       [(#VAR{acsArticlesAut}|=={oui}|?{' '})[(#AUTEURS)]][ &mdash; <em>(#TAGS|afficher_tags)</em>]
-      <BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '})[(#VAR{acsArticlesDates}|=={oui}|?{ - })]<i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero|coupe{80,...})]</a></i>]</BOUCLE_Rubb2>
-        </span>  
+      [(#ENV{aff_rubrique}|!={non}|oui)<INCLURE{fond=composants/articles/inc-li-article-rub}{id_rubrique}>]
+      </span>
       [<p class="surtitre stsize">(#SURTITRE|coupe{80,...})</p>]
       <h3 class="titre tsize"><a href="#URLA">[(#TITRE|supprimer_numero)]</a></h3>
       [<p class="soustitre stsize">(#SOUSTITRE|coupe{80,...})</p>]

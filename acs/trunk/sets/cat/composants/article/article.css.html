@@ -2,33 +2,30 @@
 
 ***** Mise en page d'un article *****
 
-][.cArticle {
+][(#SET{marge,5px})][
+.cArticle {
   position: relative;
   border: (#VAR{acsArticleBord/Width})[ (#VAR{acsArticleBord/Style})][ (#VAR{acsArticleBord/Color})];
 }]
-.cArticle .entete, .cArticle .article {
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-bottom: 5px;
-}
-.cArticle .entete {
-  [background-color: (#VAR{acsArticleTitreFond});]
-  [background: url('(#ACS_CHEMIN{trame/#VAR{acsArticleTitreFondImage}})') repeat top left;]
-  border-bottom: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
+.cArticle .entete {[
+  background-color: (#VAR{acsArticleTitreFond});][
+  background: url('(#ACS_CHEMIN{trame/#VAR{acsArticleTitreFondImage}})') repeat top left;][
+  border-bottom: (#VAR{acsArticleBord/Width,thin})[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];]
+  padding: #GET{marge};
+  padding-top: 0;
 }
 .cArticle .entete p {
-  margin :0;
+  margin:0;
 }
-.cArticle .titre {
-  font-weight: bold;
-}
-.cArticle .entete .nav {
-  position: absolute;
-  #LANG_RIGHT: 5px;
+[.cArticle .titre, .cArticle .surtitre, .cArticle .soustitre {
+  text-align: (#VAR{acsArticleTitreAlign});
+}]
+.cArticle .entete .infos_article {
+  float: #LANG_RIGHT;
+  margin-#LANG_LEFT: #GET{marge};
 }
 .cArticle .entete .spip_logos {
-  margin-top: #VAR{acsFondTitleSize,1em};
-  float: #VAR{acsArticleLogoAlign,right};
+  float: #VAR{acsArticleLogoAlign,#LANG_RIGHT};
 }
 .cArticle .texte, .cArticle .chapo {
   text-align: justify;
@@ -36,9 +33,14 @@
 .cArticle .chapo {
   font-weight: bold;
 }
+.cArticle .article {
+  padding-left: #GET{marge};
+  padding-right: #GET{marge};
+  margin-bottom: #GET{marge};
+}
 ].cArticle .sommaire {
   float:  #LANG_RIGHT;
-  margin: 5px;
+  margin: #GET{marge};
   border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
 }
 .cArticle .titresommaire {
@@ -58,8 +60,8 @@
 .cArticle .version a {
   float: left;
   display: block;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: #GET{marge};
+  padding-right: #GET{marge};
   border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
   border-bottom: 0;
 }
@@ -71,14 +73,6 @@
   font-weight: bold;
 }
 ].cArticle #forum_lire_tous, #forum_repondre {
-  margin-left: 5px;
-  margin-right: 5px;
-}[(#PLUGIN{recommander}|?{' '})
-#recommander {
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: #GET{marge};
+  margin-right: #GET{marge};
 }
-#recommander h2.menu-titre {
-  cursor: pointer;
-}
-]

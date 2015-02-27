@@ -6,11 +6,11 @@ Affiche le plan de la rubrique si celle-ci ne contient aucun article.
 
 ]<B_articles>#ANCRE_PAGINATION
 <div class="liste-articles">
-  <span class="nav nsize screen_only"><i><:articles_rubrique:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={popularite}|?{<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL_RUBRIQUE#pagination_articles" class="ajax"><:acs:articles_classes_par_date:></a>),<:acs:articles_classes_par_date:></i> (<a href="#URL_RUBRIQUE&amp;classement=popularite#pagination_articles" class="ajax"><:acs:articles_classes_par_popularite:></a>)})],<:acs:articles_classes_par_date:></i>})]</span>
+  <span class="nav nsize screen_only"><i><:articles_rubrique:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#CONFIG{activer_statistiques}|=={oui}|et{#VAR{acsArticlesPopularite}|!={non}}|?{[(#CLASSEMENT|=={popularite}|?{<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL_RUBRIQUE#pagination_articles" class="ajax"><:acs:articles_classes_par_date:></a>),<:acs:articles_classes_par_date:></i> (<a href="#URL_RUBRIQUE&amp;classement=popularite#pagination_articles" class="ajax"><:acs:articles_classes_par_popularite:></a>)})],<:acs:articles_classes_par_date:></i>})]</span>
   [<span class="pagination screen_only">(#PAGINATION)</span>]
   <div class="nettoyeur" ></div>
-  <ul><BOUCLE_articles(ARTICLES) {id_rubrique} {par (#CLASSEMENT|=={popularite}|?{popularite,date})}{inverse} {pagination #VAR{acsArticlesPagination,10} artrub} {lang=#LANG}>
-    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{masquer_rubrique=oui}{urla=#URL_ARTICLE}>
+  <ul><BOUCLE_articles(ARTICLES) {id_rubrique} {statut=publie} {par (#CLASSEMENT|=={popularite}|?{popularite,date})}{inverse} {pagination #VAR{acsArticlesPagination,10} artrub} {lang=#LANG}>
+    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{aff_rubrique=non}{urla=#URL_ARTICLE}>
   </BOUCLE_articles>
   </ul>
 </div>

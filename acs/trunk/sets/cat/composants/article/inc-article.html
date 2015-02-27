@@ -11,25 +11,22 @@ Paramètres:
 id_article: id de l'article
 
 ]<div class="[id_article-(#ID_ARTICLE) ]#PINCEAU{article}">[
-(#ENV{id_version}|?{" "})[<div class="cArticle" dir="#LANG_DIR">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]]
+(#ENV{id_version}|oui)[<div class="cArticle" dir="#LANG_DIR">(#INCLURE{fond=composants/article/inc-article_diff}{id_version=#ENV{id_version}}{objet=article}{id_article=#ENV{id_article}})</div>]]
 <BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>
   <div class="cArticle">[(#ENV{id_version}|?{""," "})
-  <div class="entete">[(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})[(#LOGO_ARTICLE|image_reduire{#VAR{acsArticleLogoTailleMax,100}})]]  
+  <div class="entete">
     <span class="infos_article nav nsize">[
       (#MODELE{article_traductions})][
       (#VAR{acsArticleDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})][
-      (#VAR{acsArticleAut}|=={oui}|?{' '})[(#AUTEURS)]][ &mdash; <em>(#TAGS|afficher_tags)</em>]
-    </span>
-    #DEBUT_SURLIGNE
+      (#VAR{acsArticleAut}|=={oui}|oui)[(#AUTEURS)]][ &mdash; <em>(#TAGS|afficher_tags)</em>]
+    </span>#DEBUT_SURLIGNE
     [<p class="#EDIT{surtitre} surtitre stsize">(#SURTITRE|safehtml)</p>]
     <h1 class="#EDIT{titre} titre tsize">[(#STATUT|=={refuse}|?{'<a href="" class="refus">Article refusé</a>', ''}) ][(#TITRE|supprimer_numero)]</h1>
-    [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE|safehtml)</p>]
-    #FIN_SURLIGNE
+    [<p class="#EDIT{soustitre} soustitre stsize">(#SOUSTITRE|safehtml)</p>]#FIN_SURLIGNE
+    [(#VAR{acsArticleLogoTailleMax}|is_numeric|?{" "})[(#LOGO_ARTICLE|image_reduire{#VAR{acsArticleLogoTailleMax,100}})]]
   </div>
-  <div class="article">
-  #DEBUT_SURLIGNE
-  [<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
-  
+  <div class="article">#DEBUT_SURLIGNE
+  [<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{#VAR{acsFondImgMax,600}})</div>]
   [<p class="lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
   [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{#VAR{acsFondImgMax,600}})</div>
   [<div class="notes"><h2><:info_notes:></h2>(#NOTES|safehtml)</div>]
@@ -44,7 +41,7 @@ id_article: id de l'article
     que les documents associés soient visibles.
   ][(#VAR{acsDiapoUse}|!={oui}|?{" "})[(#INCLURE{fond=inclure/documents}{id_article}{env})]]
 
-  [(#VAR{acsArticleStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div class="stats nsize">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
+  [(#VAR{acsArticleStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|oui) <div class="stats nsize">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
   [(#REM)
   
 fin div article

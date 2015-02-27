@@ -10,7 +10,7 @@ Articles trouves
       <input type="hidden" name="recherche" value="[(#RECHERCHE|entites_html)]" />
       <select name="classement" onchange="submit(); " class="spip_bouton">
         <option value="points"[(#CLASSEMENT|=={points}|?{' selected="selected" class="selected"'})] ><:pertinence:></option>
-[(#CONFIG{activer_statistiques}|=={oui}|?{" "})
+[(#CONFIG{activer_statistiques}|=={oui}|et{#VAR{acsArticlesPopularite}|!={non}}|oui)
         <option value="popularite"[(#CLASSEMENT|=={popularite}|?{' selected="selected" class="selected"'})] ><:popularite:></option>
         <option value="visites"[(#CLASSEMENT|=={visites}|?{' selected="selected" class="selected"'})] ><:nb_de_visites:></option>
 ]

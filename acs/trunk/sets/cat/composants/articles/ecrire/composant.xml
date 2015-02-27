@@ -3,7 +3,7 @@
   <nom>Articles</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 	<necessite id='acs' version='[0.8.8;]' />
   <necessite_composant set='cat' nom='fond' compatibilite='[0.8.9;]' />
   <necessite_composant set='cat' nom='plan' compatibilite='[0.8.9;]' />
@@ -49,6 +49,13 @@
 
   <variable>
     <nom>Popularite</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>Rubrique</nom>
     <type>choix</type>
     <option>oui</option>
     <option>non</option>

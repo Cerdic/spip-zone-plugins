@@ -2,9 +2,11 @@
   <!-- Nom du composant -->
   <nom>Rubrique</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2012 - licence GPL</auteur>
-  <version>0.8.8</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
+  <version>1.0.0</version>
   <necessite id='acs' version='[0.8.8;]' />
+  <necessite_composant set='cat' nom='articles' compatibilite='[1.0.4;]' />
+
   <group>content</group>
 
   <param>

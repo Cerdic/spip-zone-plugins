@@ -29,6 +29,14 @@
     <label>non</label>
   </variable>
   <variable>
+    <nom>TitreAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <valeur>left</valeur>
+  </variable>
+
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>

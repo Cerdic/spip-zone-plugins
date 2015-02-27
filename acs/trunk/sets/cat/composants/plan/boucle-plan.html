@@ -2,7 +2,7 @@
 
 Boucle plan d'une rubrique id_rubrique, ou des rubriques associées au mot-clé id_mot
 
-]<BOUCLE_secteurs(RUBRIQUES){id_rubrique ?}{id_mot ?}{par num titre, titre}>
+]<BOUCLE_rub(RUBRIQUES){id_rubrique ?}{id_mot ?}{par num titre, titre}>test
 <div class="cPlan">[(#ENV{masquer_titre_rubrique}!={oui}|?{' '})
   <h1>[<a href="#URL_RUBRIQUE">(#LOGO_RUBRIQUE|right|image_reduire{#VAR{acsPlanLogoMax,50},#VAR{acsPlanLogoMax,50}})</a>][
     <a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="tsize">(#TITRE|supprimer_numero)</a>]
@@ -22,4 +22,5 @@ Boucle plan d'une rubrique id_rubrique, ou des rubriques associées au mot-clé 
   </B_rubriques>
 </div>
 <div class="nettoyeur" ></div>
-</BOUCLE_secteurs>
+</BOUCLE_rub>
+<//BOUCLE_rub>
