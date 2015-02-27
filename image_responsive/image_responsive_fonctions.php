@@ -35,28 +35,45 @@ function image_responsive_header_prive($flux) {
 }
 
 
-function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
+function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0) {
+	$taille_defaut = -1;
+
+	if ($taille == -1) {
+		$taille_defaut = 120;
+		$taille = "";	
+	}
+
+	if (preg_match(",^0$|^0\/,", $taille)) {
+		$taille_defaut = 0;
+		$taille = preg_replace(",^0$|^0\/,", "", $taille);
+	}
+
+
 	$tailles = explode("/", $taille);
-	if (count($tailles) > 1) $taille_defaut = $tailles[0];
-	else $taille_defaut = $taille;
+	
+	if ($taille_defaut < 0) {
+		if (count($tailles) > 0) $taille_defaut = $tailles[0];
+		else $taille_defaut = $taille;
+	}
+
 	
 //	$img = $img[0];
 	$type_urls = lire_meta("type_urls");
 	if (preg_match(",^(arbo|libres|html|propres|propres2)$,", $type_urls)) {	
 		$htactif = true;
 	}
-	$src = extraire_attribut($img, "src");
-	$src = preg_replace(",\?[0-9]*$,", "", $src);
-	if (file_exists($src)) {
-		$l = largeur($src);
-		$h = hauteur($src);
+	$source = extraire_attribut($img, "src");
+	$source = preg_replace(",\?[0-9]*$,", "", $source);
+	if (file_exists($source)) {
+		$l = largeur($source);
+		$h = hauteur($source);
 
 		$img = vider_attribut($img, "width");
 		$img = vider_attribut($img, "height");
 		$img = vider_attribut($img, "style");
 	
 		//$img = inserer_attribut($img, "src", $src);
-		$img = inserer_attribut($img, "data-src", $src);
+		$img = inserer_attribut($img, "data-src", $source);
 		$classe = "image_responsive";
 		
 		if ($vertical == 1) {
@@ -69,10 +86,10 @@ function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 		}
 		
 		if ($htactif) {
-			$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $src);
+			$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $source);
 		}
 		else {
-			$src = "index.php?action=image_responsive&amp;img=$src&amp;taille=$taille_defaut$v";
+			$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v";
 		}
 		
 		if ($taille_defaut == 0) $src = "rien.gif";
@@ -80,33 +97,68 @@ function _image_responsive($img, $taille=120, $lazy=0, $vertical = 0) {
 		$img = inserer_attribut($img, "data-l", $l);
 		$img = inserer_attribut($img, "data-h", $h);
 		
-		if (count($tailles) > 1) {
+		
+		// Gérer les tailles autorisées
+		if (count($tailles) > 0) {
 			sort($tailles);
 			include_spip("inc/json");
 			
 			$img = inserer_attribut($img, "data-tailles", addslashes(json_encode($tailles)));
+
+
+			// Fabriquer automatiquement un srcset s'il n'y a qu'une seule taille d'image (pour 1x et 2x)
+			if (count($tailles) == 1 && $vertical != 1 && $lazy != 1) { // Pas de srcset sur les images alignées verticalement ou lazy
+					$t = $tailles[0];
+					if ($t != 0 && $t <= $l) {
+					
+						if ($htactif) {
+							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t.$1", $source)." 1x";
+							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t-2.$1", $source)." 2x";
+						}
+						else {
+							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t 1x";
+							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t&amp;dpr=2 2x";
+						}
+					}
+			}
+
+
 		}
 
+		// Gérer le srcset
 
 		$img = inserer_attribut($img, "src", $src);
+		
 		$img = inserer_attribut($img, "class", $classe);
+		if ($srcset) {
+			$srcset = join($srcset, ",");				
+			$img = inserer_attribut($img, "srcset", $srcset);
+		}
+		
+		
 		
 		if ($vertical == 0) {
 			$r = (($h/$l)*100);
-			$img = "<span style='padding:0;padding-bottom:$r%' class='conteneur_image_responsive_h'>$img</span>";
+			$img = "<picture style='padding:0;padding-bottom:$r%' class='conteneur_image_responsive_h'>$img</picture>";
 		
 		}
 	}
 	return $img;
 }
 
-function image_responsive($texte, $taille=120, $lazy=0, $vertical=0) {
+
+
+
+function image_responsive($texte, $taille=-1, $lazy=0, $vertical=0) {
 	if (!preg_match("/^<img /i", $texte)) {
 		if (strlen($texte) < 256 && file_exists($texte)) $texte = "<img src='$texte'>";
 		else return $texte;
 	}
 	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"'.$taille.'",'.$lazy.','.$vertical.');'), $texte);
 }
+
+
+
 
 function background_responsive($src, $taille=120, $lazy=0) {
 
