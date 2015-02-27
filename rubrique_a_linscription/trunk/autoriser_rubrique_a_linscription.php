@@ -1,5 +1,13 @@
 <?php
 function rubrique_a_linscription_autoriser(){}
+
+// Selon la config, autoriser ou pas l'inscription direct d'administrateur. Attention ca suppose qu'on utilise pas de formulaire d'inscription autre que ceux qui font des admins restreints, sinon ca devient dangereux
+function autoriser_0minirezo_inscrireauteur($faire, $quoi, $id, $qui, $opt){
+	spip_log("sncf",$id);
+	$rubrique_a_linscription_statut = lire_config("rubrique_a_linscription/statut");
+	return $rubrique_a_linscription_statut==$quoi;
+}
+
 function autoriser_rubrique_a_linscription($faire, $type, $id, $qui,  $opt){
 	if ($faire	== 'configurer'){
 		include_spip('inc/autoriser');
