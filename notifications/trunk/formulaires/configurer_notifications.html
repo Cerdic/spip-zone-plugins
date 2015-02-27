@@ -66,6 +66,23 @@
 							<input type="text" name="moderateurs_forum" value="[(#ENV{moderateurs_forum}|entites_html)]" id="moderateurs_forum" class="text" />
 							<p class="explication"><:notifications:forums_public_a_noter:></p>
 						</li>
+						<li class="editer editer_forums_admins_restreints">
+							<div class="choix">
+								<input type="checkbox" name="forums_admins_restreints"[(#ENV{forums_admins_restreints}|=={on}|oui)checked="checked"] id="forums_admins_restreints" class="checkbox" />
+								<label for="forums_admins_restreints"><:notifications:forums_admins_restreints:></label>
+							</div>
+						</li>
+						<li class='editer editer_forums_limiter_rubriques'>
+							<label for="limiter_rubriques"><:notifications:forums_limiter_rubriques_label:></label>
+							<p class="explication"><:notifications:forums_limiter_rubriques_explication:></p>
+							<input type="text" name="forums_limiter_rubriques" value="[(#ENV{forums_limiter_rubriques}|entites_html)]" id="forums_limiter_rubriques" class="text" />
+						</li>
+						<li class="editer editer_forums_public_liste">
+							<div class="choix">
+							<label for="forums_public_liste"><:notifications:forums_public_liste:></label>
+							<input type="text" name="forums_liste" value="[(#ENV{forums_liste}|entites_html)]" id="forums_liste" class="text" />
+							</div>
+						</li>
 					</ul>
 				</fieldset>
 			</li>
