@@ -77,8 +77,8 @@ class Pile {
 	/**
 	 * Retourne un argument de balise, et le supprime de la liste des arguments
 	 *
-	 * @uses Pile\recuperer_argument_balise()
-	 * @uses Pile\supprimer_argument_balise()
+	 * @uses self::recuperer_argument_balise()
+	 * @uses self::supprimer_argument_balise()
 	 * 
 	 * @param int $pos
 	 * @param Champ $p
@@ -168,8 +168,8 @@ class Pile {
 	/**
 	 * Crée et ajoute un argument à une balise
 	 *
-	 * @uses Pile\creer_argument_balise()
-	 * @uses Pile\ajouter_argument_balise()
+	 * @uses self::creer_argument_balise()
+	 * @uses self::ajouter_argument_balise()
 	 * 
 	 * @param Champ $p
 	 * @param string $nom
@@ -239,10 +239,14 @@ class Pile {
  *
  * @syntaxe `#SAISIE{type,nom[,option=xx,...]}`
  *
+ * @uses Pile::recuperer_et_supprimer_argument_balise()
+ * @uses Pile::creer_balise()
+ * @uses Pile::creer_et_ajouter_argument_balise()
+ *
  * @param Champ $p
  * @return Champ
  */
-function balise_SAISIE_dist ($p) {
+function balise_SAISIE_dist($p) {
 
 	// on recupere les parametres sans les traduire en code d'execution php
 	$type_saisie = Pile::recuperer_et_supprimer_argument_balise(1, $p); // $type
