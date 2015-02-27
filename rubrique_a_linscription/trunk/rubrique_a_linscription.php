@@ -50,11 +50,20 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 		//Modification du statut temporaire
 		sql_updateq('spip_auteurs',array('prefs'=>$meta['statut']),'id_auteur='.$id_auteur); 
 
-		
+
+		// Utilise comme rubrique mere celle qui est passé explicitement au formulaire ou celle de la config ?
+
+		$reqtest = sql_select('id_rubrique','spip_rubriques',"id_rubrique=".$flux["args"]["args"][0]);
+		if ($reqtest){
+			$id_parent =  $flux["args"]["args"][0];
+		}		
+		else {
+			$flux = $meta["id_parent"];
+		}
 		// Création de la rubrique
 		include_spip('inc/rubriques');
 		$titre_rubrique = _T('rubrique_a_linscription:titre_rubrique',array('nom'=>$nom_inscription));
-		$id_rubrique = creer_rubrique_nommee($titre_rubrique, $meta['id_parent']);
+		$id_rubrique = creer_rubrique_nommee($titre_rubrique, $id_parent);
 		
 		
 		sql_insertq('spip_auteurs_liens', array(

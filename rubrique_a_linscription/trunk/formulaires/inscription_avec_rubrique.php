@@ -12,16 +12,23 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip("formulaires/inscription");
-function formulaires_inscription_avec_rubrique_charger_dist($mode='', $id=0) {
+include_spip("inc/config");
+function formulaires_inscription_avec_rubrique_charger_dist($id_rubrique=-1) {
+	$mode = lire_config("rubrique_a_linscription/statut");
+	$id = 0;
 	return formulaires_inscription_charger_dist($mode,$id);
 }
 
 // Si inscriptions pas autorisees, retourner une chaine d'avertissement
-function formulaires_inscription_avec_rubrique_verifier_dist($mode='', $id=0) {
+function formulaires_inscription_avec_rubrique_verifier_dist($id_rubrique=-1) {
+	$mode = lire_config("rubrique_a_linscription/statut");
+	$id = 0;
 	return formulaires_inscription_verifier_dist($mode,$id);
 }
 
-function formulaires_inscription_avec_rubrique_traiter_dist($mode='', $id=0) {
+function formulaires_inscription_avec_rubrique_traiter_dist($id_rubrique=-1) {
+	$mode = lire_config("rubrique_a_linscription/statut");
+	$id = 0;
 	return formulaires_inscription_traiter_dist($mode,$id);
 }
 
