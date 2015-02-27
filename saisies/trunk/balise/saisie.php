@@ -77,8 +77,8 @@ class Pile {
 	/**
 	 * Retourne un argument de balise, et le supprime de la liste des arguments
 	 *
-	 * @uses self::recuperer_argument_balise()
-	 * @uses self::supprimer_argument_balise()
+	 * @uses Pile::recuperer_argument_balise()
+	 * @uses Pile::supprimer_argument_balise()
 	 * 
 	 * @param int $pos
 	 * @param Champ $p
@@ -168,8 +168,8 @@ class Pile {
 	/**
 	 * Crée et ajoute un argument à une balise
 	 *
-	 * @uses self::creer_argument_balise()
-	 * @uses self::ajouter_argument_balise()
+	 * @uses Pile::creer_argument_balise()
+	 * @uses Pile::ajouter_argument_balise()
 	 * 
 	 * @param Champ $p
 	 * @param string $nom
@@ -205,10 +205,8 @@ class Pile {
 		include_spip('public/interfaces');
 		$b = new Champ;
 		$b->nom_champ = strtoupper($nom);
-		$vars = get_class_vars('Champ'); // property_exists($b, $o); est en php 5
 		foreach ($opt as $o=>$val) {
-			#if (property_exists($b,$o)) {
-			if (array_key_exists($o, $vars)) {
+			if (property_exists($b,$o)) {
 				if ($o == 'param') {
 					array_unshift($val, '');
 					$b->$o = array($val);
