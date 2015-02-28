@@ -71,7 +71,8 @@ function taxonomie_declarer_tables_objets_sql($tables) {
 			"maj"				=> "TIMESTAMP"
 		),
 		'key' => array(
-			"PRIMARY KEY"        => "id_taxon",
+			"PRIMARY KEY"		=> "id_taxon",
+			"KEY tsn"			=> "tsn",
 		),
 		'titre' => "nom_scientifique AS titre, '' AS lang",
 
