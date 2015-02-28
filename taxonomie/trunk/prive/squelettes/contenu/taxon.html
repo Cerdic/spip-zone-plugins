@@ -39,7 +39,7 @@
 [(#VAL{taxon-enfants}|trouver_fond{prive/objets/contenu/}|oui)
 	[(#SET{enfants, [(#INCLURE{fond=prive/objets/contenu/taxon-enfants, id_taxon, env})]})]
 ]
-[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{objet, taxon, id_objet, #ID_TAXON}, data, #GET{enfants}})]})]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec, taxon, objet, taxon, id_objet, #ID_TAXON}, data, #GET{enfants}})]})]
 
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
