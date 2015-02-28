@@ -5,13 +5,13 @@
 
     <!-- Auteur du plugin -->
     <auteur>[Ma&#239;eul Rouquette->http://www.maieul.net] sur une id&#233;e de Jean-No&#235;l Moreau</auteur>
-    <version>0.8.1</version>
+    <version>0.8.2</version>
     <version_base>0.3</version_base>
   
     <etat>stable</etat>
     <lien>http://contrib.spip.net/Rubrique-a-l-inscription</lien>
 
-    <description> Si le formulaire d'inscription est pass&#233; avec l'argument 0minirezo (<code>#FORMULAIRE_INSCRIPTION{0minirezo}</code>), une rubrique est automatiquement cr&#233;&#233;e, o&#249; l'auteur est admin restreint.</description>
+    <description>Création automatique de rubrique à l'inscription d'un auteur. Éventuellement avec administration restreinte.</description>
     <icon>rubrique_a_linscription.png</icon>
     <prefix>rubrique_a_linscription</prefix>
 	<inscription>base/rubrique_a_linscription.php</inscription>
