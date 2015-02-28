@@ -121,4 +121,18 @@ function lister_rangs($exclure_regne=true, $exclure_espece=true, $regne=_TAXONOM
 	return $rangs;
 }
 
+
+function preserver_taxons($regne, $edite) {
+	$taxons = array();
+
+	$select = array('tsn', 'nom_commun', 'descriptif');
+	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote($edite));
+	$retour = sql_allfetsel($select, 'spip_taxons', $where);
+	if ($retour) {
+		$taxons = array_map('reset', $retour);
+	}
+
+	return $taxons;
+}
+
 ?>

@@ -31,9 +31,11 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 	$retour = false;
 	$meta_regne = array();
 
+	// todo : ne faut-il pas tester la valeur du regne ?
 
 	// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
-
+	include_spip('inc/taxonomer');
+	$taxons_edites = preserver_taxons($regne, 'oui');
 
 	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
 	include_spip('services/itis/itis_api');
@@ -57,6 +59,13 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 				}
 				$meta_regne['langues'][$_langue]['compteur'] = $nb_traductions;
 			}
+		}
+
+		// Réinjection des taxons modifiés manuellement
+		// -- descriptif: remplacement
+		// -- nom commun: merge en considérant que la mise à jour manuelle est prioritaire
+		if ($taxons_edites) {
+
 		}
 
 		// Insertion dans la base de données
