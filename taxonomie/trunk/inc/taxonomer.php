@@ -122,17 +122,52 @@ function lister_rangs($exclure_regne=true, $exclure_espece=true, $regne=_TAXONOM
 }
 
 
-function preserver_taxons($regne, $edite) {
+function preserver_taxons_edites($regne) {
 	$taxons = array();
 
 	$select = array('tsn', 'nom_commun', 'descriptif');
-	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote($edite));
-	$retour = sql_allfetsel($select, 'spip_taxons', $where);
-	if ($retour) {
-		$taxons = array_map('reset', $retour);
-	}
+	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote('oui'));
+	$taxons = sql_allfetsel($select, 'spip_taxons', $where);
 
 	return $taxons;
+}
+
+
+function merger_multi($nom_charge, $nom_edite, $priorite_edition=true) {
+	$source = array();
+	$destination = array();
+	$nom_merge = '';
+
+	// Suivant la priorite entre édition et chargement automatique on positionne la source
+	// (priorite plus faible) et la destination (priorité plus haute)
+	$nom_source = $nom_charge;
+	$nom_destination = $nom_edite;
+	if (!$priorite_edition) {
+		$nom_source = $nom_edite;
+		$nom_destination = $nom_charge;
+	}
+
+	// On extrait les noms par langue
+	if (preg_match(_EXTRAIRE_MULTI, $nom_source, $match))
+		$source = extraire_trads($match[1]);
+	if (preg_match(_EXTRAIRE_MULTI, $nom_destination, $match))
+		$destination = extraire_trads($match[1]);
+
+	// On complète la destination avec les noms de la source dont la langue n'est pas
+	// présente dans la destination
+	foreach ($source as $_lang => $_nom) {
+		if (!array_key_exists($_lang, $destination)) {
+			$destination[$_lang] = $_nom;
+		}
+	}
+
+	// On construit le nom mergé à partir de la destination
+	foreach ($destination as $_lang => $_nom) {
+		$nom_merge .= '[' . $_lang . ']' . $_nom;
+	}
+	$nom_merge = '<multi>' . $nom_merge . '</multi>';
+
+	return $nom_merge;
 }
 
 ?>

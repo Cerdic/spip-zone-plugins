@@ -323,7 +323,11 @@ function itis_read_hierarchy($kingdom, $upto, &$sha_file) {
 				}
 				// Scan du fichier ligne par ligne
 				foreach ($lines as $_line) {
-					$taxon = array('regne' => $kingdom, 'nom_commun' => '');
+					$taxon = array(
+						'regne' => $kingdom,
+						'nom_commun' => '',
+						'descriptif' => '',
+						'edite' => 'non');
 					if (preg_match($regexp, $_line, $match)) {
 						// Initialisation du taxon
 						$taxon['rang'] = strtolower($match[1]);

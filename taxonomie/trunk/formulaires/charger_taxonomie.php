@@ -76,18 +76,13 @@ function formulaires_charger_taxonomie_traiter() {
 		}
 	}
 	else {
-		if ($regne_existe) {
-			// Vider le règne avant de le recharger
-			$ok = taxonomie_vider_regne($regne);
-			if (!$ok)
-				$item = 'taxonomie:erreur_vider_regne';
-		}
-		if ($ok) {
-			$langues = _request('langues_regne');
-			$rang_feuille = _request('rang_feuille');
-			$ok = taxonomie_charger_regne($regne, $rang_feuille, $langues);
-			$item = $ok ? 'taxonomie:succes_charger_regne' : 'taxonomie:erreur_charger_regne';
-		}
+		// La fonction de chargement du règne lance un vidage préalable si le règne
+		// demandé est déjà chargé. Un mécanisme de sauvegarde interne permet aussi de
+		// restituer les modifications manuelles des taxons
+		$langues = _request('langues_regne');
+		$rang_feuille = _request('rang_feuille');
+		$ok = taxonomie_charger_regne($regne, $rang_feuille, $langues);
+		$item = $ok ? 'taxonomie:succes_charger_regne' : 'taxonomie:erreur_charger_regne';
 	}
 
 	$message = $ok ? 'message_ok' : 'message_erreur';

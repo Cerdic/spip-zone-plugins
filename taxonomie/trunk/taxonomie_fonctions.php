@@ -29,15 +29,22 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 	$retour = false;
-	$meta_regne = array();
+	$taxons_edites = array();
 
 	// todo : ne faut-il pas tester la valeur du regne ?
 
-	// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
-	include_spip('inc/taxonomer');
-	$taxons_edites = preserver_taxons($regne, 'oui');
+	$regne_existe = taxonomie_regne_existe($regne, $meta_regne);
+	if ($regne_existe) {
+		// Sauvegarde des taxons ayant été modifiés manuellement suite à leur création automatique.
+		include_spip('inc/taxonomer');
+		$taxons_edites = preserver_taxons_edites($regne);
+
+		// Vider le règne avant de le recharger
+		taxonomie_vider_regne($regne);
+	}
 
 	// Lecture de la hiérarchie des taxons à partir du fichier texte extrait de la base ITIS
+	$meta_regne = array();
 	include_spip('services/itis/itis_api');
 	$taxons = itis_read_hierarchy($regne, $rang, $meta_regne['sha']);
 
@@ -64,8 +71,19 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 		// Réinjection des taxons modifiés manuellement
 		// -- descriptif: remplacement
 		// -- nom commun: merge en considérant que la mise à jour manuelle est prioritaire
+		// -- edite: oui, on conserve bien sur l'indicateur d'édition
 		if ($taxons_edites) {
-
+			foreach ($taxons_edites as $_taxon_edite) {
+				if (($tsn = $_taxon_edite['tsn'])
+				AND (array_key_exists($tsn, $taxons))) {
+					$taxons[$tsn]['descriptif'] = $_taxon_edite['descriptif'];
+					$taxons[$tsn]['nom_commun'] = merger_multi(
+													$taxons[$tsn]['nom_commun'],
+													$_taxon_edite['nom_commun'],
+													true);
+					$taxons[$tsn]['edite'] = 'oui';
+				}
+			}
 		}
 
 		// Insertion dans la base de données
