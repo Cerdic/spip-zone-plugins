@@ -73,18 +73,30 @@ function http_collectionjson_get_index($requete, $reponse) {
 		);
 	}
 
-	$json = json_encode(array(
+	$json = array(
 		'collection' => array(
 			'version' => '1.0',
 			'href' => url_absolue(self()),
 			'links' => $links,
 		),
-	));
+	);
+
+	// On le passe tout ça dans un pipeline avant de retourner la réponse
+	$json = pipeline(
+		'http_collectionjson_get_index_contenu',
+		array(
+			'args' => array(
+				'requete' => $requete,
+				'reponse' => $reponse,
+			),
+			'data' => $json,
+		)
+	);
 
 	$reponse->setStatusCode(200);
 	$reponse->setCharset('utf-8');
 	$reponse->headers->set('Content-Type', 'application/json');
-	$reponse->setContent($json);
+	$reponse->setContent(json_encode($json));
 
 	return $reponse;
 }
