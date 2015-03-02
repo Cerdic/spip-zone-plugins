@@ -43,6 +43,9 @@
 .bg-dark {
   background-color: @bg-dark;
   color: white;
+  #content {
+  	color: @gray-dark;
+  }
 }
 
 .bg-bright {
@@ -59,7 +62,7 @@ html, body {
 	background-color: @bg-success;
 }
 .page {
-	background-color: @bg-success;
+	background-color: @bg-dark;
 }
 h1 {
 	small {
@@ -561,14 +564,15 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 			ul {
 				margin-bottom: 2em;
 				> li {
-					font-size: 1.25em;
+					font-size: 1em;
+					line-height: 1em;
 					&:hover {
-						background-color: @gray-dark;
+						background-color: @black;
 					}
 					a {
-						color: @gray-light;
+						color: @white;
 						&.active {
-							color: @black;
+							color: @gray;
 						}
 						&:hover {
 							color: @white;
@@ -577,10 +581,7 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 						&.active {
 						}
 						i {
-							height: 45px;
-							margin: -15px 10px -15px -15px;
-							width: 55px;
-							padding: 15px;
+							width: 1.25em;
 							text-align: center;
 						}
 					}
@@ -712,7 +713,7 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 }
 
 #footer {
-	background-color: @bg-success;
+	background-color: @black;
 	color: @white;
 	text-align: left;
 	padding-top: 2em;
@@ -829,9 +830,9 @@ button {
 
 // page de connexion au back office
 .page_login {
-	background-color: @bg-success;
+	background-color: @bg-dark;
 	body {
-		background-color: @bg-success;
+		background-color: @bg-dark;
 	}
 	#content {
 		.cartouche {
