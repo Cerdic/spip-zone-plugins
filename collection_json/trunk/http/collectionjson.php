@@ -146,11 +146,93 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 			$reponse->headers->set('Content-Type', 'application/json');
 			$reponse->setContent($json);
 		}
-		// Si on ne trouve rien c'est que ça n'existe pas
+		// Si on ne trouve rien on essaie de s'appuyer sur l'API objet
 		else{
-			// On utilise la fonction d'erreur générique pour renvoyer dans le bon format
-			$fonction_erreur = charger_fonction('erreur', "http/$format/");
-			$reponse = $fonction_erreur(404, $requete, $reponse);
+
+			include_spip('base/abstract_sql');
+			include_spip('base/objets');
+
+			// Si la collection demandée ne correspond pas à une table
+			// d'objet on arrête tout
+			if ( ! in_array(table_objet_sql($collection),
+							array_keys(lister_tables_objets_sql()))) {
+				// On utilise la fonction d'erreur générique pour
+				// renvoyer dans le bon format
+				$fonction_erreur = charger_fonction('erreur', "http/$format/");
+				return $fonction_erreur(404, $requete, $reponse);
+			}
+
+			$links = array();
+
+			$pagination = 10;
+			$offset = $contexte['offset'] ?: 0;
+			$nb_objets = sql_countsel(table_objet_sql($collection));
+
+			// On ajoute des liens de pagination
+			if ($offset > 0) {
+				$offset_precedant = max(0, $offset-$pagination);
+				$links[] = array(
+					'rel' => 'prev',
+					'prompt' => _T('public:page_precedente'),
+					'href' => url_absolue(
+						parametre_url(self(), 'offset', $offset_precedant)),
+				);
+			}
+			if (($offset + $pagination) < $nb_objets) {
+				$offset_suivant = $offset + $pagination;
+				$links[] = array(
+					'rel' => 'prev',
+					'prompt' => _T('public:page_suivante'),
+					'href' => url_absolue(
+						parametre_url(self(), 'offset', $offset_suivant)),
+				);
+			}
+
+			$table_collection = table_objet_sql($collection);
+			$description = lister_tables_objets_sql($table_collection);
+			$objets = sql_allfetsel('*', $table_collection,'','','',"$offset,$pagination");
+
+			$items = array();
+			foreach ($objets as $objet) {
+				$data = array();
+				foreach ($description['champs_editables'] as $champ){
+					$data[] = array(
+						'name' => $champ,
+						'value' => $objet[$champ],
+					);
+				}
+
+				$items[] = array(
+					'href' => url_absolue(parse_url(self(), PHP_URL_PATH) . $objet[id_table_objet($table_collection)]),
+					'data' => $data,
+				);
+			}
+
+			$json = array(
+				'collection' => array(
+					'version' => '1.0',
+					'href' => url_absolue(parse_url(self(), PHP_URL_PATH)),
+					'links' => $links,
+					'items' => $items,
+				),
+			);
+
+			// Et on le passe dans le pipeline
+			$json = pipeline(
+				'http_collectionjson_get_collection_contenu',
+				array(
+					'args' => array(
+						'requete' => $requete,
+						'reponse' => $reponse,
+					),
+					'data' => $json,
+				)
+			);
+
+			$reponse->setStatusCode(200);
+			$reponse->setCharset('utf-8');
+			$reponse->headers->set('Content-Type', 'application/json');
+			$reponse->setContent(json_encode($json));
 		}
 	}
 	
