@@ -53,8 +53,10 @@ function exporter_formulaires_reponses($id_formulaire,$delim=",") {
 		$titres = array(_T('public:date'), _T('formidable:reponses_auteur'), _T('formidable:reponses_ip'));
 		$saisies = saisies_lister_par_nom(unserialize($formulaire['saisies']), false);
 		foreach ($saisies as $nom=>$saisie){
-			$options = $saisie['options'];
-			$titres[] = sinon($options['label_case'], sinon($options['label'], $nom));
+      	if ($saisie['saisie'] != "explication") {    // on exporte tous les champs sauf explications
+    			$options = $saisie['options'];
+    			$titres[] = sinon($options['label_case'], sinon($options['label'], $nom));
+        } 
 		}
 		$reponses_completes[] = $titres;
 		
