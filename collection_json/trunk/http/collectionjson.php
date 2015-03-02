@@ -127,27 +127,9 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 		if ($json = recuperer_fond("http/$format/$collection", $contexte)){
 			// On décode ce qu'on a trouvé
 			$json = json_decode($json, true);
-			// Et on le passe dans un pipeline
-			$json = pipeline(
-				'http_collectionjson_get_collection_contenu',
-				array(
-					'args' => array(
-						'requete' => $requete,
-						'reponse' => $reponse,
-					),
-					'data' => $json,
-				)
-			);
-			// Enfin on le réencode en JSON
-			$json = json_encode($json);
-		
-			$reponse->setStatusCode(200);
-			$reponse->setCharset('utf-8');
-			$reponse->headers->set('Content-Type', 'application/json');
-			$reponse->setContent($json);
 		}
 		// Si on ne trouve rien on essaie de s'appuyer sur l'API objet
-		else{
+		else  {
 
 			include_spip('base/abstract_sql');
 			include_spip('base/objets');
@@ -216,24 +198,26 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 					'items' => $items,
 				),
 			);
-
-			// Et on le passe dans le pipeline
-			$json = pipeline(
-				'http_collectionjson_get_collection_contenu',
-				array(
-					'args' => array(
-						'requete' => $requete,
-						'reponse' => $reponse,
-					),
-					'data' => $json,
-				)
-			);
-
-			$reponse->setStatusCode(200);
-			$reponse->setCharset('utf-8');
-			$reponse->headers->set('Content-Type', 'application/json');
-			$reponse->setContent(json_encode($json));
 		}
+
+		// Et on le passe dans un pipeline
+		$json = pipeline(
+			'http_collectionjson_get_collection_contenu',
+			array(
+				'args' => array(
+					'requete' => $requete,
+					'reponse' => $reponse,
+				),
+				'data' => $json,
+			)
+		);
+		// Enfin on l'encode en JSON
+		$json = json_encode($json);
+
+		$reponse->setStatusCode(200);
+		$reponse->setCharset('utf-8');
+		$reponse->headers->set('Content-Type', 'application/json');
+		$reponse->setContent($json);
 	}
 	
 	return $reponse;
