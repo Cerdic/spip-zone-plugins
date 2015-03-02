@@ -74,6 +74,7 @@ function exporter_formulaires_reponses($id_formulaire,$delim=",") {
 			
 			// Ensuite tous les champs
 			foreach ($saisies as $nom=>$saisie){
+       if ($saisie['saisie'] != "explication") {
 				$valeur = sql_getfetsel(
 					'valeur',
 					'spip_formulaires_reponses_champs',
@@ -94,6 +95,7 @@ function exporter_formulaires_reponses($id_formulaire,$delim=",") {
 						)
 					)
 				);
+       }
 			}
 			
 			// On ajoute la ligne à l'ensemble des réponses
