@@ -1,13 +1,19 @@
+[(#SET{defaut_tri,#ARRAY{
+	num titre,1,
+	titre,1, 
+	id_abonnement,1,
+	points,-1
+}})]
+
+#SET{data,#ARRAY}
+<BOUCLE_abonnements_offres(ABONNEMENTS_OFFRES){tri #ENV{par,num titre},#GET{defaut_tri}}{par titre}{statut?}{recherche?}>
+[(#SET{titre, #TITRE[ (#ENV{afficher_prix}|oui)<span class="prix">\(#PRIX\)</span>]})]
+#SET{data,#GET{data}|plus{#ARRAY{#ID_ABONNEMENTS_OFFRE,#GET{titre}}}}
+</BOUCLE_abonnements_offres>
+
 [(#ENV{multiple}|oui)
-	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+#INCLURE{fond=saisies/checkbox, env, datas=#GET{data}}
 ]
-<select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
-	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
-		<option value="">[(#ENV{option_intro})]</option>]
-	<BOUCLE_abonnements_offres(ABONNEMENTS_OFFRES){par num titre, titre}{statut?}{recherche?}{tout}>
-		[(#ENV{multiple}|oui)
-		<option value="#ID_ABONNEMENTS_OFFRE"[(#ID_ABONNEMENTS_OFFRE|in_array{#ENV{valeur_forcee,#GET{valeur,#ENV{defaut,#ARRAY}}}}|oui) selected="selected"]>#TITRE</option>]
-		[(#ENV{multiple}|non)
-		<option value="#ID_ABONNEMENTS_OFFRE"[(#ID_ABONNEMENTS_OFFRE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#TITRE</option>]
-	</BOUCLE_abonnements_offres>
-</select>
+[(#ENV{multiple}|non)
+#INCLURE{fond=saisies/radio, env, datas=#GET{data}}
+]
