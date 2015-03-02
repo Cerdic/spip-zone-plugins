@@ -50,6 +50,46 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 }
 
 /**
+ * Index général de l'API
+ * http://site/http.api/collectionjson/
+ *
+ * @param Request $requete	: L'objet Request contenant la requête HTTP
+ * @param Response $reponse : L'objet Response qui contiendra la
+ *							  réponse envoyée à l'utilisateur
+ *
+ * @return Response Retourne un objet Response modifié suivant ce
+ *					qu'on a trouvé
+ */
+function http_collectionjson_get_index($requete, $reponse) {
+
+	include_spip('base/objets');
+
+	$links = array();
+	foreach (lister_tables_objets_sql() as $table => $desc) {
+		$links[] = array(
+			'rel' => table_objet($table),
+			'prompt' => _T($desc['texte_objets']),
+			'href' => url_absolue(self()) . table_objet($table) . '/',
+		);
+	}
+
+	$json = json_encode(array(
+		'collection' => array(
+			'version' => '1.0',
+			'href' => url_absolue(self()),
+			'links' => $links,
+		),
+	));
+
+	$reponse->setStatusCode(200);
+	$reponse->setCharset('utf-8');
+	$reponse->headers->set('Content-Type', 'application/json');
+	$reponse->setContent($json);
+
+	return $reponse;
+}
+
+/**
  * GET sur une collection
  * http://site/http.api/collectionjson/patates
  * 
