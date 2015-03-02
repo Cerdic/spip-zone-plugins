@@ -3,21 +3,44 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/formidable');
+include_spip('inc/config');
+
+function formulaires_exporter_formulaire_analyse_charger($id_formulaire=0){	
+	$contexte = array();
+  $contexte['id_formulaire'] = intval($id_formulaire);
+	return $contexte;
+}
+
+function formulaires_exporter_formulaire_analyse_verifier($id_formulaire=0){
+	$erreurs = array();
+	
+	return $erreurs;
+}
+
+function formulaires_exporter_formulaire_analyse_traiter($id_formulaire=0){
+  $retours = array();
+  
+  if (_request('type_export')=='csv')
+            action_exporter_analyse_reponses($id_formulaire);
+  else if (_request('type_export')=='xls')
+            action_exporter_analyse_reponses($id_formulaire,"TAB");
+
+	return $retours;
+}
+
+
 /*
- * Exporter l'analyse des réponses d'un formulaire
- * @param unknown_type $arg
+ * Exporter les analyses d'un formulaire (anciennement action/exporter_analyse_reponses_dist)
+ * @param integer $id_formulaire
  * @return unknown_type
  */
-function action_exporter_analyse_reponses_dist($arg=null) {
-	if (is_null($arg)){
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
-	}
-
+function action_exporter_analyse_reponses($id_formulaire,$delim=",") {
+  
 	// on ne fait des choses seulements si le formulaire existe et qu'il a des enregistrements
 	$ok = false;
 	if (
-		$id_formulaire = intval($arg)
+		$id_formulaire > 0
 		and $formulaire = sql_fetsel('*','spip_formulaires','id_formulaire = '.$id_formulaire)
 		and $reponses = sql_allfetsel('*', 'spip_formulaires_reponses', 'id_formulaire = '.$id_formulaire.' and statut = '.sql_quote('publie'))
 	) {
@@ -99,10 +122,9 @@ function action_exporter_analyse_reponses_dist($arg=null) {
         }
 
 		if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)){
-			$exporter_csv('analyses-formulaire-'.$formulaire['identifiant'], $reponses_completes);
+			$exporter_csv('analyses-formulaire-'.$formulaire['identifiant'], $reponses_completes, $delim);
 			exit();
 		}
 	}
 }
-
 ?>

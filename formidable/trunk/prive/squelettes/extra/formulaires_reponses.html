@@ -3,8 +3,7 @@
 [(#GET{ouvre_boite}|oui)[(#BOITE_OUVRIR{<:formidable:titre_cadre_raccourcis:>,'info'})]]
 
 <BOUCLE_autoriser_1(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
-[(#URL_ACTION_AUTEUR{exporter_formulaires_reponses,#ID_FORMULAIRE}
-	|icone_horizontale{<:formidable:reponses_exporter:>,formulaire,formulaire-reponses-exporter-24,center})]
+#FORMULAIRE_EXPORTER_FORMULAIRE_REPONSES{#ID_FORMULAIRE}
 </BOUCLE_autoriser_1>
 
 <BOUCLE_autoriser_2(CONDITION){si #AUTORISER{editer, formulaires,#ID_FORMULAIRE}}>
