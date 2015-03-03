@@ -35,9 +35,9 @@ function image_responsive_header_prive($flux) {
 }
 
 
-function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0) {
+function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="") {
 	$taille_defaut = -1;
-
+	
 	if ($taille == -1) {
 		$taille_defaut = 120;
 		$taille = "";	
@@ -107,7 +107,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0) {
 
 
 			// Fabriquer automatiquement un srcset s'il n'y a qu'une seule taille d'image (pour 1x et 2x)
-			if (count($tailles) == 1 && $vertical != 1 && $lazy != 1) { // Pas de srcset sur les images alignées verticalement ou lazy
+			if (count($tailles) == 1 && $lazy != 1) { // Pas de srcset sur les images alignées verticalement ou lazy
 					$t = $tailles[0];
 					if ($t != 0 && $t <= $l) {
 					
@@ -121,8 +121,35 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0) {
 						}
 					}
 			}
+			
+			// Fabriquer des <source> s'il y a plus d'une taille associée à des sizes
+			if (count($tailles) > 1 && $lazy != 1) {
+				$medias = explode("/", $medias);
+				if (count($tailles) == count($medias)) {
+					$i = 0;
+					foreach($tailles as $t) {
+						$m = trim($medias[$i]);
+						$i++;
+						
+						
+						if ($htactif) {
+							$set = preg_replace(",\.(jpg|png|gif)$,", "-resp$t.$1", $source)." 1x";
+							$set .= ",".preg_replace(",\.(jpg|png|gif)$,", "-resp$t-2.$1", $source)." 2x";
+						}
+						else {
+							$set = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t 1x";
+							$set .= ","."index.php?action=image_responsive&amp;img=$source&amp;taille=$t&amp;dpr=2 2x";
+						}
+						
+						if (strlen($m) > 0) $insm = " media='$m'";
+						else $insm = "";
+						
+						$sources .= "<source$insm srcset='$set'>";
 
-
+					}
+				
+				}
+			}
 		}
 
 		// Gérer le srcset
@@ -139,7 +166,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0) {
 		
 		if ($vertical == 0) {
 			$r = (($h/$l)*100);
-			$img = "<picture style='padding:0;padding-bottom:$r%' class='conteneur_image_responsive_h'>$img</picture>";
+			$img = "<picture style='padding:0;padding-bottom:$r%' class='conteneur_image_responsive_h'>$sources$img</picture>";
 		
 		}
 	}
@@ -149,12 +176,12 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0) {
 
 
 
-function image_responsive($texte, $taille=-1, $lazy=0, $vertical=0) {
+function image_responsive($texte, $taille=-1, $lazy=0, $vertical=0, $medias='') {
 	if (!preg_match("/^<img /i", $texte)) {
 		if (strlen($texte) < 256 && file_exists($texte)) $texte = "<img src='$texte'>";
 		else return $texte;
 	}
-	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"'.$taille.'",'.$lazy.','.$vertical.');'), $texte);
+	return preg_replace_callback(",(<img\ [^>]*>),", create_function('$matches', 'return _image_responsive($matches[0],"'.$taille.'",'.$lazy.','.$vertical.',"'.$medias.'");'), $texte);
 }
 
 
