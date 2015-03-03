@@ -3,12 +3,16 @@
 	<slogan>Ajoute une option <code>{ajaxload}</code> &#224; la balise <code>#INCLURE</code></slogan>
 	<auteur>Fil, ARNO*</auteur>
 	<licence>&#169; 2009 GNU/GPL</licence>
-	<version>1.2.0</version>
+	<version>1.3.0</version>
 	<etat>stable</etat>
 	<description>
 	Ce plugin ajoute une option <code>{ajaxload}</code> &#224; la balise <code>#INCLURE</code>. La noisette n'est alors pas incluse, mais charg&#233;e dynamiquement en Ajax au chargement de la page.
 
 	Autre m&#233;thode: <code>{ajaxload=html}</code> fabrique une noisette statique (en HTML non dynamique) dans <code>/local/cache-ajaxload</code>, son appel se faisant ainsi hors SPIP. Le cache n'est donc plus g&#233;r&#233; par le <code>#CACHE</code> de SPIP; il est par d&#233;faut de 2 heures, on peut le forcer en ajoutant le crit&#232;re <code>{ttl_ajaxload=60*60*24}</code>.
+	
+	Permet de plus d&rsquo;utiliser l&rsquo;<a href="https://www.varnish-cache.org/docs/3.0/tutorial/esi.html">inclusion ESI de Varnish</a>, en indiquant <code>{ajaxload=esi}</code>.
+	
+	
 
 	Pour g&#233;rer les chargements Ajax &#171;&#224; la main&#187;, on peut r&#233;cup&#233;rer l'URL des noisettes en modifiant le crit&#232;re:
 -- <code>{ajaxload=url}</code> retourne l'URL de la noisette dynamique;

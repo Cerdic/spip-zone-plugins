@@ -76,6 +76,11 @@ function recuperer_fond_ajax() {
 		$ajax = urlencode($ajax);
 		$ret = "spip.php?var_ajax=recuperer&amp;var_ajax_env=$ajax";
 		
+	} else if ($methode == "esi") {
+		$ajax = urlencode($ajax);
+		$ret = "<!--esi <esi:include src='spip.php?var_ajax=recuperer&amp;var_ajax_env=$ajax' />-->";
+		$ret .= "<esi:remove><div class='includestatic'><a href=\"#\" rel=\"spip.php?var_ajax=recuperer&amp;var_ajax_env=$ajax\">$searching</a></div></esi:remove>";
+
 	} else if ($methode == "url_html") {
 		$fichier = sous_repertoire(_DIR_VAR, 'cache-ajaxload').$cle.".html";
 
@@ -152,7 +157,11 @@ function remettre_fond_ajax_static($matches) {
 }
 
 function INCLUREAJAXLOAD_affichemeta($page) {
-	if (strpos($page, "includeajax") > 0 || strpos($page, "includestatic") > 0) {
+
+	if (
+		(strpos($page, "includeajax") > 0 || strpos($page, "includestatic") > 0)
+		&& !strpos($page, "<esi:remove><div class='includestatic'>") > 0
+	) {
 
 		$javascript = '<?php if ($_COOKIE["no_js"] != "no_js" && !_IS_BOT && _request("no_js") != "oui") { ?>
 <script type="text/javascript"><!--
