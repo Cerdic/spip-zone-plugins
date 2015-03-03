@@ -55,7 +55,7 @@
 		
 		url_absolue pour éviter des problèmes en urls arbo
 	]
-	[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#VALEUR}|parametre_url{redirect,#GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}|url_absolue})]" rel="alternate" lang="#VALEUR"[(#GET{format}|=={'abrege'}|oui) title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]"] class="langue_#VALEUR">(#GET{nom_langue}|ucfirst)</a>](#VALEUR|=={#ENV{lang}}|non)][
+	[[[[(#GET{separateur})](#GET{liste}|=={liste}|non)](#COMPTEUR_BOUCLE|>{1}|oui)][<a href="[(#SELF|parametre_url{action,converser}|parametre_url{var_lang,#VALEUR}|parametre_url{redirect,#GET{ListeTraductions}|table_valeur{#VALEUR}|sinon{#SELF}|url_absolue})]" rel="alternate" lang="#VALEUR" hreflang="#VALEUR"[(#GET{format}|=={'abrege'}|oui) title="[(#VALEUR|traduire_nom_langue|ucfirst|attribut_html)]"] class="langue_#VALEUR">(#GET{nom_langue}|ucfirst)</a>](#VALEUR|=={#ENV{lang}}|non)][
 	(#REM)
 	
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
