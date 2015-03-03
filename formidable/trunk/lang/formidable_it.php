@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_wcs' => 'Errore durante l’importazione del modulo W.C.S',
 	'erreur_importer_yaml' => 'Errore durante l’importazione del modulo YAML',
 	'erreur_inexistant' => 'Il modulo non esiste.',
+	'exporter_formulaire_format_label' => 'Formato del file',
 
 	// F
 	'formulaires_aucun' => 'Al momento non è presente alcun modulo.',

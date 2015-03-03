@@ -66,6 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_wcs' => 'Error while importing the W.C.S form',
 	'erreur_importer_yaml' => 'Error while importing the YAML file',
 	'erreur_inexistant' => 'This form doesn’t exist.',
+	'exporter_formulaire_format_label' => 'File format',
 
 	// F
 	'formulaire_anonyme_explication' => 'This form is anonymous; meaning that the user’s identity won’t be recorded.',

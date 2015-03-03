@@ -63,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_wcs' => 'Chyba počas nahrávania formulára W.C.S',
 	'erreur_importer_yaml' => 'Chyba počas nahrávania súboru YAML',
 	'erreur_inexistant' => 'Formulár neexistuje.',
+	'exporter_formulaire_format_label' => 'Formát súboru',
 
 	// F
 	'formulaire_anonyme_explication' => 'Tento formulár je anonymný, tzn., že záznamy o identite používateľov sa neukladajú.',

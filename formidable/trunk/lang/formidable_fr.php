@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_wcs' => 'Erreur durant l’importation du formulaire W.C.S',
 	'erreur_importer_yaml' => 'Erreur durant l’importation du fichier YAML',
 	'erreur_inexistant' => 'Le formulaire n’existe pas.',
-  'exporter_formulaire_format_label' => 'Format du fichier',
+	'exporter_formulaire_format_label' => 'Format du fichier',
 
 	// F
 	'formulaire_anonyme_explication' => 'Ce formulaire est anonyme, c’est à dire que l’identité de l’utilisateur n’est pas enregistrée.',
@@ -133,9 +133,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_anonyme' => 'Anonyme',
 	'reponses_auteur' => 'Utilisateur',
 	'reponses_exporter' => 'Exporter les réponses',
-  'reponses_exporter_format_csv' => 'Tableur .CSV',
-  'reponses_exporter_format_xls' => 'Excel .XLS', 
-  'reponses_exporter_telecharger' => 'Télécharger',  
+	'reponses_exporter_format_csv' => 'Tableur .CSV',
+	'reponses_exporter_format_xls' => 'Excel .XLS',
+	'reponses_exporter_telecharger' => 'Télécharger',
 	'reponses_ip' => 'Adresse IP',
 	'reponses_liste' => 'Liste des réponses',
 	'reponses_liste_prop' => 'Réponses en attente de validation',

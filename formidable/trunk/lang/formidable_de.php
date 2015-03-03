@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_importer_wcs' => 'Fehler beim Importieren des Formulars aus W.C.S',
 	'erreur_importer_yaml' => 'Fehler beim Importieren des Formulars aus YAML',
 	'erreur_inexistant' => 'Formular nicht vorhanden.',
+	'exporter_formulaire_format_label' => 'Format der Datei',
 
 	// F
 	'formulaire_anonyme_explication' => 'Diese Form ist anonym, dh die Identität des Benutzers nicht registriert ist.', # MODIF
