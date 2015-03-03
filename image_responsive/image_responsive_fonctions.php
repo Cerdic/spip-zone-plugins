@@ -112,12 +112,12 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="")
 					if ($t != 0 && $t <= $l) {
 					
 						if ($htactif) {
-							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t.$1", $source)." 1x";
-							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t-2.$1", $source)." 2x";
+							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source)." 1x";
+							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source)." 2x";
 						}
 						else {
-							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t 1x";
-							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t&amp;dpr=2 2x";
+							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v 1x";
+							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v&amp;dpr=2 2x";
 						}
 					}
 			}
@@ -133,12 +133,12 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="")
 						
 						
 						if ($htactif) {
-							$set = preg_replace(",\.(jpg|png|gif)$,", "-resp$t.$1", $source)." 1x";
-							$set .= ",".preg_replace(",\.(jpg|png|gif)$,", "-resp$t-2.$1", $source)." 2x";
+							$set = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source)." 1x";
+							$set .= ",".preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source)." 2x";
 						}
 						else {
-							$set = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t 1x";
-							$set .= ","."index.php?action=image_responsive&amp;img=$source&amp;taille=$t&amp;dpr=2 2x";
+							$set = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v 1x";
+							$set .= ","."index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v&amp;dpr=2 2x";
 						}
 						
 						if (strlen($m) > 0) $insm = " media='$m'";
@@ -167,7 +167,9 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="")
 		if ($vertical == 0) {
 			$r = (($h/$l)*100);
 			$img = "<picture style='padding:0;padding-bottom:$r%' class='conteneur_image_responsive_h'>$sources$img</picture>";
-		
+		} else {
+			$r = (($h/$l)*100);
+			$img = "<picture class='conteneur_image_responsive_v'>$sources$img</picture>";
 		}
 	}
 	return $img;
