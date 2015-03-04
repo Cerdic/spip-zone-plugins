@@ -40,7 +40,7 @@ function http_collectionjson_reponse ($code, $donnees, $reponse) {
 function http_collectionjson_erreur_dist($code, $requete, $reponse){
 
 	$erreur = array('code' => "$code");
-	
+
 	switch ($code){
 		case '401':
 			$erreur['title'] = _T('http:erreur_401_titre');
@@ -57,7 +57,7 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 		default:
 			$erreur = false;
 	}
-	
+
 	// Si on reconnait une erreur on l'encapsule dans une collection avec erreur
 	if ($erreur){
 		include_spip('inc/filtres');
@@ -69,7 +69,7 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 	else{
 		$contenu = '';
 	}
-	
+
 	return http_collectionjson_reponse($code, $contenu, $reponse);
 }
 
@@ -120,7 +120,7 @@ function http_collectionjson_get_index($requete, $reponse) {
 /**
  * GET sur une collection
  * http://site/http.api/collectionjson/patates
- * 
+ *
  * @param Request $requete L'objet Request contenant la requête HTTP
  * @param Response $reponse L'objet Response qui contiendra la réponse envoyée à l'utilisateur
  * @return Response Retourne un objet Response modifié suivant ce qu'on a trouvé
@@ -129,7 +129,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 	$format = $requete->attributes->get('format');
 	$collection = $requete->attributes->get('collection');
 	$contexte = $requete->query->all();
-	
+
 	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
 	// Cette fonction doit donc évidemment renvoyer un objet Response valide
 	if ($fonction_collection = charger_fonction('get_collection', "http/$format/$collection/", true)){
@@ -215,7 +215,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 			);
 		}
 	}
-	
+
 	// Et on passe les valeurs retournées dans un pipeline
 	$retour = pipeline(
 		'http_collectionjson_get_collection_contenu',
@@ -234,7 +234,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 /*
  * GET sur une ressource
  * http://site/http.api/collectionjson/patates/1234
- * 
+ *
  * @param Request $requete L'objet Request contenant la requête HTTP
  * @param Response $reponse L'objet Response qui contiendra la réponse envoyée à l'utilisateur
  * @return Response Retourne un objet Response modifié suivant ce qu'on a trouvé
@@ -242,7 +242,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 function http_collectionjson_get_ressource_dist($requete, $reponse){
 	$format = $requete->attributes->get('format');
 	$collection = $requete->attributes->get('collection');
-	
+
 	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
 	// Cette fonction doit donc évidemment renvoyer un objet Response valide
 	if ($fonction_ressource = charger_fonction('get_ressource', "http/$format/$collection/", true)){
@@ -254,7 +254,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 	// - par un échafaudage générique
 	else{
 		$json = array();
-	
+
 		// S'il existe une fonction dédiée au contenu d'une ressource de cette collection, on l'utilise
 		// Cette fonction ne doit retourner QUE le contenu JSON
 		if ($fonction_ressource_contenu = charger_fonction('get_ressource_contenu', "http/$format/$collection/", true)){
@@ -272,18 +272,18 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 				'ressource' => $ressource,
 			);
 			$contexte = array_merge($requete->query->all(), $requete->attributes->all(), $contexte);
-			
+
 			if ($skel = trim(recuperer_fond("http/$format/$collection-ressource", $contexte))){
 				// On décode ce qu'on a trouvé pour avoir un tableau PHP
 				$json = json_decode($skel, true);
 			}
 		}
-	
+
 		// Si on n'a toujours aucun contenu json, on en échafaude un avec les API d'objets
 		if (empty($json)){
 			$table_collection = table_objet_sql($collection);
 			$objets = lister_tables_objets_sql();
-		
+
 			// Si la collection fait partie des objets SPIP et qu'on trouve la ligne de l'objet en question
 			// On ne montre par défaut que les champs *éditables*
 			if (
@@ -292,12 +292,12 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 				and $objet = sql_fetsel($description['champs_editables'], $table_collection, "$cle = ".intval($ressource))
 			){
 				include_spip('inc/filtres');
-			
+
 				$data = array();
 				foreach ($objet as $champ=>$valeur){
 					$data[] = array('name' => $champ, 'value' => $valeur);
 				}
-			
+
 				$retour = array(
 					'href' => url_absolue(self()),
 					'items' => array(
@@ -351,7 +351,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 function http_collectionjson_post_collection_dist($requete, $reponse){
 	$format = $requete->attributes->get('format');
 	$collection = $requete->attributes->get('collection');
-	
+
 	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
 	// Cette fonction doit donc évidemment renvoyer un objet Response valide
 	if ($fonction_ressource = charger_fonction('post_collection', "http/$format/$collection/", true)){
@@ -363,7 +363,7 @@ function http_collectionjson_post_collection_dist($requete, $reponse){
 		$objet= objet_type($collection);
 		$reponse = http_collectionjson_editer_objet($objet, 'new', $requete->getContent(), $requete, $reponse);
 	}
-	
+
 	return $reponse;
 }
 
@@ -378,7 +378,7 @@ function http_collectionjson_post_collection_dist($requete, $reponse){
 function http_collectionjson_put_ressource_dist($requete, $reponse){
 	$format = $requete->attributes->get('format');
 	$collection = $requete->attributes->get('collection');
-	
+
 	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
 	// Cette fonction doit donc évidemment renvoyer un objet Response valide
 	if ($fonction_ressource = charger_fonction('put_ressource', "http/$format/$collection/", true)){
@@ -391,13 +391,13 @@ function http_collectionjson_put_ressource_dist($requete, $reponse){
 		$objet= objet_type($collection);
 		$reponse = http_collectionjson_editer_objet($objet, $id_objet, $requete->getContent(), $requete, $reponse);
 	}
-	
+
 	return $reponse;
 }
 
 /**
  * Édition générique d'un objet en JSON
- * 
+ *
  * Cette fonction sert à mutualiser le code d'échafaudage entre le POST et le PUT pour créer ou modifier un objet.
  *
  * @param Request $requete
