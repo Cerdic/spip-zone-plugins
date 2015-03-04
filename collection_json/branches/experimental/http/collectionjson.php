@@ -25,7 +25,7 @@ function http_collectionjson_reponse ($code, $donnees, $requete, $reponse) {
 	));
 
 	$reponse->setCharset('utf-8');
-	$reponse->headers->set('Content-Type', 'application/json');
+	$reponse->headers->set('Content-Type', 'application/vnd.collection+json');
 	$reponse->setStatusCode($code);
 	$reponse->setContent($json);
 
