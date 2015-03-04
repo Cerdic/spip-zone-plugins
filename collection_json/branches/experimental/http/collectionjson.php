@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param int $code         : Le code de réponse HTTP
  * @param array $donnees    : les données à retourner dans la réponse
+ * @param Request $requete  : L'objet Request complété
  * @param Response $reponse : Un objet Reponse à compléter avec les
  *                            données passées dans les deux premiers
  *                            arguments.
@@ -15,7 +16,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return Response : Un objet Response complété avec les deux
  *                    premiers arugments
  */
-function http_collectionjson_reponse ($code, $donnees, $reponse) {
+function http_collectionjson_reponse ($code, $donnees, $requete, $reponse) {
 
 	$json = json_encode(array(
 		'collection' => array_merge(array(
@@ -27,6 +28,17 @@ function http_collectionjson_reponse ($code, $donnees, $reponse) {
 	$reponse->headers->set('Content-Type', 'application/json');
 	$reponse->setStatusCode($code);
 	$reponse->setContent($json);
+
+	// On le passe tout ça dans un pipeline avant de retourner la réponse
+	$reponse = pipeline(
+		'http_collectionjson_final',
+		array(
+			'args' => array(
+				'requete' => $requete,
+			),
+			'data' => $reponse,
+		)
+	);
 
 	return $reponse;
 }
@@ -70,7 +82,7 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 		$contenu = '';
 	}
 
-	return http_collectionjson_reponse($code, $contenu, $reponse);
+	return http_collectionjson_reponse($code, $contenu, $requete, $reponse);
 }
 
 /**
@@ -102,19 +114,7 @@ function http_collectionjson_get_index($requete, $reponse) {
 		'links' => $links,
 	);
 
-	// On le passe tout ça dans un pipeline avant de retourner la réponse
-	$json = pipeline(
-		'http_collectionjson_get_index_contenu',
-		array(
-			'args' => array(
-				'requete' => $requete,
-				'reponse' => $reponse,
-			),
-			'data' => $retour,
-		)
-	);
-
-	return http_collectionjson_reponse(200, $retour, $reponse);
+	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
 
 /**
@@ -216,19 +216,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 		}
 	}
 
-	// Et on passe les valeurs retournées dans un pipeline
-	$retour = pipeline(
-		'http_collectionjson_get_collection_contenu',
-		array(
-			'args' => array(
-				'requete' => $requete,
-				'reponse' => $reponse,
-			),
-			'data' => $retour,
-		)
-	);
-
-	return http_collectionjson_reponse(200, $retour, $reponse);
+	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
 
 /*
@@ -325,19 +313,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
         return $fonction_erreur(404, $requete, $reponse);
     }
 
-    // On passe les données dans un pipeline
-    $retour = pipeline(
-        'http_collectionjson_get_ressource_contenu',
-        array(
-            'args' => array(
-                'requete' => $requete,
-                'reponse' => $reponse,
-            ),
-            'data' => $retour,
-        )
-    );
-
-	return http_collectionjson_reponse(200, $retour, $reponse);
+	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
 
 /**
@@ -463,7 +439,7 @@ function http_collectionjson_editer_objet($objet, $id_objet, $contenu, $requete,
 				'code' => 400,
 			);
 		}
-		return http_collectionjson_reponse(400, $donnees_reponse, $reponse);
+		return http_collectionjson_reponse(400, $donnees_reponse, $requete, $reponse);
 	}
 
 	// Sinon on continue le traitement
@@ -504,6 +480,16 @@ function http_collectionjson_editer_objet($objet, $id_objet, $contenu, $requete,
 	$reponse->setCharset('utf-8');
 	$reponse->headers->set('Content-Type', 'application/json');
 	$reponse->setStatusCode($code ?: 200);
+
+    $reponse = pipeline(
+		'http_collectionjson_final',
+		array(
+			'args' => array(
+				'requete' => $requete,
+			),
+			'data' => $reponse,
+		)
+	);
 
 	return $reponse;
 }
