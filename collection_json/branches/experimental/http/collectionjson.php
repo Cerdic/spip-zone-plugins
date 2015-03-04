@@ -405,100 +405,105 @@ function http_collectionjson_put_ressource_dist($requete, $reponse){
  * @return Response
  */
 function http_collectionjson_editer_objet($objet, $id_objet, $contenu, $requete, $reponse){
-	// Si la requête a bien un contenu et qu'on a bien un tableau PHP et qu'on a au moins le bon tableau "data"
-	if (
-		$contenu
-		and $json = json_decode($contenu, true)
-		and is_array($json)
-		and isset($json['collection']['items'][0]['data'])
-		and $data = $json['collection']['items'][0]['data']
-		and is_array($data)
-	){
-		include_spip('inc/filtres');
-		include_spip('base/objets');
-		$cle_objet = id_table_objet($objet);
-		$new = !intval($id_objet);
-	
-		// Pour chaque champ envoyé, on va faire un set_request() de SPIP
-		foreach ($data as $champ){
-			if (isset($champ['name']) and isset($champ['value'])){
-				set_request($champ['name'], $champ['value']);
-			}
-		}
-	
-		// On va chercher la fonction de vérification de cet objet
-		$erreurs = array();
-		if ($fonction_verifier = charger_fonction('verifier', "formulaires/editer_$objet/", true)){
-			$erreurs = $fonction_verifier($id_objet);
-		}
-		// On passe les erreurs dans le pipeline "verifier" (par exemple pour Saisies)
-		$erreurs = pipeline('formulaire_verifier', array(
-			'args' => array(
-				'form' => "editer_$objet",
-				'args' => array($id_objet),
-			),
-			'data' => $erreurs,
-		));
-	
-		// S'il y a des erreurs, on va générer un JSON les listant
-		if ($erreurs){
-			$reponse->setStatusCode(400);
-			$reponse->headers->set('Content-Type', 'application/json');
-			$reponse->setCharset('utf-8');
-			$json_reponse = array(
-				'collection' => array(
-					'version' => '1.0',
-					'href' => url_absolue(self()),
-					'error' => array(
-						'title' => _T('erreur'),
-						'code' => 400,
-					),
-					'errors' => array(),
-				),
-			);
-			foreach ($erreurs as $nom => $erreur){
-				$json_reponse['collection']['errors'][$nom] = array(
-					'title' => $erreur,
-					'code' => 400,
-				);
-			}
-			$reponse->setContent(json_encode($json_reponse));
-		}
-		// Sinon on continue le traitement
-		else{
-			$retours = array();
-			if ($fonction_traiter = charger_fonction('traiter', "formulaires/editer_$objet/", true)){
-				$retours = $fonction_traiter($id_objet);
-			}
-			// On passe dans le pipeline "traiter"
-			$retours = pipeline('formulaire_traiter', array(
-				'args' => array(
-					'form' => "editer_$objet",
-					'args' => array($id_objet),
-				),
-				'data' => $retours,
-			));
-		
-			// Si on a bien modifié l'objet sans erreur
-			if (!$retours['message_erreur'] and $id_objet = $retours[$cle_objet]){
-				// On va cherche la fonction qui génère la vue d'une ressource
-				if ($fonction_ressource = charger_fonction('get_ressource', 'http/collectionjson/', true)){
-					// On ajoute à la requête, l'identitiant de la nouvelle ressource
-					$requete->attributes->set('ressource', $id_objet);
-					$reponse = $fonction_ressource($requete, $reponse);
-				}
-				// Si c'était une création, on renvoie 201
-				if ($new){
-					$reponse->setStatusCode(201);
-				}
-			}
-		}
-	}
-	else{
+
+	// On vérifie que la requête a bien un contenu et qu'on a bien un
+	// tableau PHP et qu'on a au moins le bon tableau "data"
+	// Sinon on retourne une erreur
+	if ( ! ($contenu
+			and $json = json_decode($contenu, true)
+			and is_array($json)
+			and isset($json['collection']['items'][0]['data'])
+			and $data = $json['collection']['items'][0]['data']
+			and is_array($data))) {
+
 		// On utilise la fonction d'erreur générique pour renvoyer dans le bon format
 		$fonction_erreur = charger_fonction('erreur', "http/collectionjson/");
-		$reponse = $fonction_erreur(415, $requete, $reponse);
+		return $fonction_erreur(415, $requete, $reponse);
 	}
-	
+
+	include_spip('inc/filtres');
+	include_spip('base/objets');
+	$cle_objet = id_table_objet($objet);
+	$new = !intval($id_objet);
+
+	// Pour chaque champ envoyé, on va faire un set_request() de SPIP
+	foreach ($data as $champ){
+		if (isset($champ['name']) and isset($champ['value'])){
+			set_request($champ['name'], $champ['value']);
+		}
+	}
+
+	// On va chercher la fonction de vérification de cet objet
+	$erreurs = array();
+	if ($fonction_verifier = charger_fonction('verifier', "formulaires/editer_$objet/", true)){
+		$erreurs = $fonction_verifier($id_objet);
+	}
+	// On passe les erreurs dans le pipeline "verifier" (par exemple pour Saisies)
+	$erreurs = pipeline('formulaire_verifier', array(
+		'args' => array(
+			'form' => "editer_$objet",
+			'args' => array($id_objet),
+		),
+		'data' => $erreurs,
+	));
+
+	// S'il y a des erreurs, on va générer un JSON les listant
+	if ($erreurs){
+		$donnees_reponse = array(
+			'href' => url_absolue(self()),
+			'error' => array(
+				'title' => _T('erreur'),
+				'code' => 400,
+			),
+			'errors' => array(),
+		);
+		foreach ($erreurs as $nom => $erreur){
+			$donnees_reponse['errors'][$nom] = array(
+				'title' => $erreur,
+				'code' => 400,
+			);
+		}
+		return http_collectionjson_reponse(400, $donnees_reponse, $reponse);
+	}
+
+	// Sinon on continue le traitement
+	$retours = array();
+	if ($fonction_traiter = charger_fonction('traiter', "formulaires/editer_$objet/", true)){
+		$retours = $fonction_traiter($id_objet);
+	}
+	// On passe dans le pipeline "traiter"
+	$retours = pipeline('formulaire_traiter', array(
+		'args' => array(
+			'form' => "editer_$objet",
+			'args' => array($id_objet),
+		),
+		'data' => $retours,
+	));
+
+	// S'il y a eu une erreur
+	if (isset($retour['message_erreur']) and $retour['message_erreur']) {
+		// On utilise la fonction d'erreur générique pour renvoyer dans le bon format
+		$fonction_erreur = charger_fonction('erreur', "http/collectionjson/");
+		return $fonction_erreur(404, $requete, $reponse);
+	}
+
+	// Si on a bien modifié l'objet sans erreur
+	if ($id_objet = $retours[$cle_objet]){
+		// On va cherche la fonction qui génère la vue d'une ressource
+		if ($fonction_ressource = charger_fonction('get_ressource', 'http/collectionjson/', true)){
+			// On ajoute à la requête, l'identitiant de la nouvelle ressource
+			$requete->attributes->set('ressource', $id_objet);
+			$reponse = $fonction_ressource($requete, $reponse);
+		}
+		// Si c'était une création, on renvoie 201
+		if ($new){
+			$code = 201;
+		}
+	}
+
+	$reponse->setCharset('utf-8');
+	$reponse->headers->set('Content-Type', 'application/json');
+	$reponse->setStatusCode($code ?: 200);
+
 	return $reponse;
 }
