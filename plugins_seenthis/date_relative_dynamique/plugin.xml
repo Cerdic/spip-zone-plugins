@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Dates relatives dynamiques</nom>
 	<auteur>ARNO* / [Seenthis.net->http://seenthis.net]</auteur>
-	<version>1.3</version>
+	<version>1.4</version>
 	<etat>stable</etat>
 	<licence>GPL</licence>	
 	<description>Ce plugin affiche dynamiquement les dates relatives. Les affichages concernés doivent adopter la syntaxe:
@@ -20,4 +20,3 @@
 	</pipeline>
 	<necessite id="SPIP" version="[2.1.0;)" />
 </plugin>
-
