@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *
  * @param int $code         : Le code de réponse HTTP
  * @param array $donnees    : les données à retourner dans la réponse
- * @param Request $requete  : L'objet Request complété
+ * @param Request $requete  : L'objet Request contenant la requête HTTP
  * @param Response $reponse : Un objet Reponse à compléter avec les
  *                            données passées dans les deux premiers
  *                            arguments.
@@ -77,9 +77,8 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 			'href' => url_absolue(self()),
 			'error' => $erreur,
 		);
-	}
-	else{
-		$contenu = '';
+	} else {
+		$contenu = array();
 	}
 
 	return http_collectionjson_reponse($code, $contenu, $requete, $reponse);
@@ -219,6 +218,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 function http_collectionjson_get_ressource_dist($requete, $reponse){
 	$format = $requete->attributes->get('format');
 	$collection = $requete->attributes->get('collection');
+	$ressource = $requete->attributes->get('ressource');
 
 	// S'il existe une fonction dédiée à ce type de ressource, on
 	// n'utilise que ça. Cette fonction doit renvoyer un tableau à
@@ -234,13 +234,16 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 	// Sinon on essaye de déduire par un échafaudage générique
 	$table_collection = table_objet_sql($collection);
 	$objets = lister_tables_objets_sql();
+	if (isset($objets[$table_collection])) {
+		$description = $objets[$table_collection];
+		$select = implode(', ', array_map('sql_quote', $description['champs_editables']));
+		$where = id_table_objet($table_collection) . "=" . intval($ressource);
+	}
 
 	// Si la collection fait partie des objets SPIP et qu'on trouve la
-	// ligne de l'objet en question.  On ne montre par défaut que les
-	// champs *éditables*. Sinon on renvoie une erreur.
-	if ( ! (isset($objets[$table_collection])
-			and $description = $objets[$table_collection]
-			and $objet = sql_fetsel($description['champs_editables'], $table_collection, "$cle = ".intval($ressource)))) {
+	// ligne de l'objet en question. Sinon on renvoie une erreur.
+	if ( ! ($select
+			and $objet = sql_fetsel($select, $table_collection, $where))) {
 
 		// On utilise la fonction d'erreur générique pour
 		// renvoyer dans le bon format
@@ -250,7 +253,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 
 	include_spip('inc/filtres');
 
-	$data = array();
+	// On ne montre par défaut que les champs *éditables*.
 	foreach ($objet as $champ=>$valeur){
 		$data[] = array('name' => $champ, 'value' => $valeur);
 	}
