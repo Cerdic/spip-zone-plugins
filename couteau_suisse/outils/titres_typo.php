@@ -11,8 +11,8 @@ function titres_typo_pre_typo($texte) {
  // Fonction de remplacement
  // Transforme les intertitres d'un texte en image typo
 function titres_typo_rempl($texte){
-	static $arguments;
-	if(!isset($arguments)) {
+	static $callback;
+	if(!isset($callback)) {
 		$arguments = str_replace(array("'",","),array('','","'),_titres_typo_ARG);
 		include_spip('outils/couleurs');
 		list($couleurs, $html) = couleurs_constantes();
@@ -22,8 +22,9 @@ function titres_typo_rempl($texte){
 				$c = $html[$couleurs[1][$i]];
 			$arguments .= '","couleur='.$c;
 		}
+		$callback = create_function('$match', 'return $match[1].image_typo($match[2],"'.$arguments.'")."}}}";');
 	}
-	return preg_replace_callback(",(\{\{\{\*?)([^*].*?)\}\}\},is", create_function('$match', 'return $match[1].image_typo($match[2],"'.$arguments.'")."}}}";'), $texte);
+	return preg_replace_callback(',(\{\{\{)\*?([^*].*?)\}\}\},is', $callback, $texte);
 }
 
 ?>

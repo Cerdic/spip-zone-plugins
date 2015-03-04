@@ -797,6 +797,45 @@ add_outil( array(
 	'categorie' => 'spip',
 ));
 
+// intertitres typo, outil compatible avec 'sommaire', mais a placer avant... :
+add_variables( array(
+	'nom' => 'i_align',
+	'radio' => array('left' => '_left', 'right' => '_right', 'center' => '_center'),
+	'defaut' => "'left'",
+), array(
+	'nom' => 'i_padding',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+), array(
+	'nom' => 'i_hauteur',
+	'format' => _format_NOMBRE,
+	'defaut' => 0,
+), array(
+	'nom' => 'i_largeur',
+	'format' => _format_NOMBRE,
+	'defaut' => 600,
+), array(
+	'nom' => 'i_taille',
+	'format' => _format_NOMBRE,
+	'defaut' => 16,
+), array(
+	'nom' => 'i_couleur',
+	'format' => _format_CHAINE,
+	'defaut' => "'black'",
+), array(
+	'nom' => 'i_police',
+	'format' => _format_CHAINE,
+	'defaut' => "'dustismo.ttf'",
+));
+add_outil( array(
+	'id' => 'titres_typo',
+	'categorie'   => 'typo-corr',
+	'code:options' => 'define("_titres_typo_ARG", "couleur=%%i_couleur%%,taille=%%i_taille%%,police=%%i_police%%,largeur=%%i_largeur%%,hauteur_ligne=%%i_hauteur%%,padding=%%i_padding%%,align=%%i_align%%");',
+	defined('_SPIP19300')?'pipeline:pre_propre':'pipeline:pre_typo'   => 'titres_typo_pre_typo',
+	'pipelinecode:pre_description_outil' => 'if($id=="titres_typo")
+		$texte=str_replace("@_CS_FONTS@",join(" - ",get_liste_fonts()),$texte);',	
+));
+
 add_variable( array(
 	'nom' => 'balise_decoupe',
 	'format' => _format_NOMBRE,
@@ -889,45 +928,6 @@ add_outil( array(
 	'pipeline:nettoyer_raccourcis_typo' => 'sommaire_nettoyer_raccourcis',
 	'pipeline:pre_description_outil' => 'sommaire_description_outil',
 	'pipeline:pre_propre' => 'sommaire_intertitres',
-));
-
-// intertitres typo, outil compatible avec 'sommaire' :
-add_variables( array(
-	'nom' => 'i_align',
-	'radio' => array('left' => '_left', 'right' => '_right', 'center' => '_center'),
-	'defaut' => "'left'",
-), array(
-	'nom' => 'i_padding',
-	'format' => _format_NOMBRE,
-	'defaut' => 0,
-), array(
-	'nom' => 'i_hauteur',
-	'format' => _format_NOMBRE,
-	'defaut' => 0,
-), array(
-	'nom' => 'i_largeur',
-	'format' => _format_NOMBRE,
-	'defaut' => 600,
-), array(
-	'nom' => 'i_taille',
-	'format' => _format_NOMBRE,
-	'defaut' => 16,
-), array(
-	'nom' => 'i_couleur',
-	'format' => _format_CHAINE,
-	'defaut' => "'black'",
-), array(
-	'nom' => 'i_police',
-	'format' => _format_CHAINE,
-	'defaut' => "'dustismo.ttf'",
-));
-add_outil( array(
-	'id' => 'titres_typo',
-	'categorie'   => 'typo-corr',
-	'code:options' => 'define("_titres_typo_ARG", "couleur=%%i_couleur%%,taille=%%i_taille%%,police=%%i_police%%,largeur=%%i_largeur%%,hauteur_ligne=%%i_hauteur%%,padding=%%i_padding%%,align=%%i_align%%");',
-	defined('_SPIP19300')?'pipeline:pre_propre':'pipeline:pre_typo'   => 'titres_typo_pre_typo',
-	'pipelinecode:pre_description_outil' => 'if($id=="titres_typo")
-		$texte=str_replace("@_CS_FONTS@",join(" - ",get_liste_fonts()),$texte);',	
 ));
 
 //-----------------------------------------------------------------------------//
