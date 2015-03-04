@@ -345,8 +345,8 @@ function http_collectionjson_editer_objet($objet, $id_objet, $contenu, $requete,
 	if ( ! ($contenu
 			and $json = json_decode($contenu, true)
 			and is_array($json)
-			and isset($json['collection']['items'][0]['data'])
-			and $data = $json['collection']['items'][0]['data']
+			and isset($json['template']['data'])
+			and $data = $json['template']['data']
 			and is_array($data))) {
 
 		// On utilise la fonction d'erreur générique pour renvoyer dans le bon format
@@ -427,6 +427,9 @@ function http_collectionjson_editer_objet($objet, $id_objet, $contenu, $requete,
 			// On ajoute à la requête, l'identitiant de la nouvelle ressource
 			$requete->attributes->set('ressource', $id_objet);
 			$retour = $fonction_ressource($requete, $reponse);
+		} else {
+			// TODO s'appuyer sur l'API objet pour faire un truc utile
+			$retour = array();
 		}
 	}
 
