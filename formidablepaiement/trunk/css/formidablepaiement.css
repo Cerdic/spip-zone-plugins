@@ -4,3 +4,4 @@
 .formulaire_paiement .boutons { border: 0;margin: 0;text-align: left;padding:0;}
 .formulaire_paiement .payer_mode .boutons form,
 .formulaire_paiement .payer_mode .boutons form div {display: inline-block;}
+.formulaire_paiement #confirm_order {padding:0;margin:0;}

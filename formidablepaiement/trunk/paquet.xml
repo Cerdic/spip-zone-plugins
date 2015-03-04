@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidablepaiement"
 	categorie="communication"
-	version="1.0.2"
+	version="1.0.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/formidablepaiement-64.png"
@@ -15,6 +15,7 @@
 
 	<licence>GNU/GPL</licence>
 
+	<pipeline nom="formulaire_charger" inclure="formidablepaiement_pipelines.php" />
 	<pipeline nom="formulaire_fond" inclure="formidablepaiement_pipelines.php" />
 	<pipeline nom="bank_traiter_reglement" inclure="formidablepaiement_pipelines.php" />
 	<pipeline nom="affiche_enfants" inclure="formidablepaiement_pipelines.php" />

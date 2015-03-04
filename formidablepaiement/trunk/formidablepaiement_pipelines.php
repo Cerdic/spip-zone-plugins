@@ -12,6 +12,50 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Rediriger vers le checkout apres un paiement qui demande confirmation
+ * (type paypal express)
+ * on saute l'etape de confirmation et on va direct au paiement
+ *
+ * @param $flux
+ * @return mixed
+ */
+function formidablepaiement_formulaire_charger($flux){
+
+	// gerer le retour paiement avec demande de confirmation
+	if (_request('confirm')
+		AND $flux['args']['form']=='formidable'
+	  AND $id = $flux['args']['args'][0]
+		AND isset($_SESSION['id_transaction'])
+	  AND $id_transaction = $_SESSION['id_transaction']
+	  AND $checkout = _request('checkout')
+	  AND $trans = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))){
+
+		// verifier que la transaction en session est bien associee a ce formulaire
+		$id_formulaire = formidable_id_formulaire($id);
+		$parrain = "form{$id_formulaire}:";
+		if (strncmp($trans['parrain'],$parrain,strlen($parrain))==0){
+			// on reaffiche le modele de paiement qui demande confirmation
+			$form = recuperer_fond("modeles/formidablepaiement-transaction",array('id_transaction'=>$id_transaction,'transaction_hash'=>$trans['transaction_hash']));
+			$flux['data'] =
+				"<div class='formulaire_spip formulaire_paiement'>"
+				. $form
+				. "</div>";
+
+			$css = find_in_path("css/formidablepaiement.css");
+			$flux['data'] .= "<style type='text/css'>@import url('".$css."');</style>";
+
+			// Alternative par define ?
+			// on redirige directement vers le paiment (url de checkout)
+			// car on a rien a reafficher
+			#include_spip('inc/headers');
+			#redirige_par_entete($checkout);
+		}
+	}
+	return $flux;
+}
+
+
+/**
  * Mise en forme du formulaire de paiement post-saisie
  *
  * @param array $flux
