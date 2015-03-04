@@ -2,7 +2,7 @@
 	prefix="collectionjson"
 	categorie="outil"
 	version="1.2.0"
-	etat="test"
+	etat="dev"
 	compatibilite="[3.0.0;3.0.*]"
 	logo=""
 >
