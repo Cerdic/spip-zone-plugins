@@ -4,13 +4,41 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
+ * Construire une réponse de l'API collection+JSON
+ *
+ * @param int $code         : Le code de réponse HTTP
+ * @param array $donnees    : les données à retourner dans la réponse
+ * @param Response $reponse : Un objet Reponse à compléter avec les
+ *                            données passées dans les deux premiers
+ *                            arguments.
+ *
+ * @return Response : Un objet Response complété avec les deux
+ *                    premiers arugments
+ */
+function http_collectionjson_reponse ($code, $donnees, $reponse) {
+
+	$json = json_encode(array(
+		'collection' => array_merge(array(
+			'version' => '1.0',
+		), $donnees),
+	));
+
+	$reponse->setCharset('utf-8');
+	$reponse->headers->set('Content-Type', 'application/json');
+	$reponse->setStatusCode($code);
+	$reponse->setContent($json);
+
+	return $reponse;
+}
+
+/**
  * Contenu collection+json d'une erreur
  *
  * @param int $code Le code HTTP de l'erreur à générer
  * @return string Retourne le contenu de l'erreur à renvoyer dans la réponse
  */
 function http_collectionjson_erreur_dist($code, $requete, $reponse){
-	$reponse->setStatusCode($code);
+
 	$erreur = array('code' => "$code");
 	
 	switch ($code){
@@ -33,20 +61,16 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 	// Si on reconnait une erreur on l'encapsule dans une collection avec erreur
 	if ($erreur){
 		include_spip('inc/filtres');
-		$reponse->headers->set('Content-Type', 'application/json');
-		$reponse->setContent(json_encode(array(
-			'collection' => array(
-				'version' => '1.0',
-				'href' => url_absolue(self()),
-				'error' => $erreur,
-			),
-		)));
+		$contenu = array(
+			'href' => url_absolue(self()),
+			'error' => $erreur,
+		);
 	}
 	else{
-		$reponse->setContent('');
+		$contenu = '';
 	}
 	
-	return $reponse;
+	return http_collectionjson_reponse($code, $contenu, $reponse);
 }
 
 /**
@@ -73,12 +97,9 @@ function http_collectionjson_get_index($requete, $reponse) {
 		);
 	}
 
-	$json = array(
-		'collection' => array(
-			'version' => '1.0',
-			'href' => url_absolue(self()),
-			'links' => $links,
-		),
+	$retour = array(
+		'href' => url_absolue(self()),
+		'links' => $links,
 	);
 
 	// On le passe tout ça dans un pipeline avant de retourner la réponse
@@ -89,16 +110,11 @@ function http_collectionjson_get_index($requete, $reponse) {
 				'requete' => $requete,
 				'reponse' => $reponse,
 			),
-			'data' => $json,
+			'data' => $retour,
 		)
 	);
 
-	$reponse->setStatusCode(200);
-	$reponse->setCharset('utf-8');
-	$reponse->headers->set('Content-Type', 'application/json');
-	$reponse->setContent(json_encode($json));
-
-	return $reponse;
+	return http_collectionjson_reponse(200, $retour, $reponse);
 }
 
 /**
@@ -117,7 +133,8 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
 	// Cette fonction doit donc évidemment renvoyer un objet Response valide
 	if ($fonction_collection = charger_fonction('get_collection', "http/$format/$collection/", true)){
-		$reponse = $fonction_collection($requete, $reponse);
+
+		return $fonction_collection($requete, $reponse);
 	}
 	// Sinon on essaye de trouver différentes méthodes pour produire le JSON et en déduire les headers
 	// - pour l'instant seulement par un squelette
@@ -127,6 +144,7 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 		if ($json = recuperer_fond("http/$format/$collection", $contexte)){
 			// On décode ce qu'on a trouvé
 			$json = json_decode($json, true);
+			$retour = $json['collection'];
 		}
 		// Si on ne trouve rien on essaie de s'appuyer sur l'API objet
 		else  {
@@ -190,37 +208,27 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 				);
 			}
 
-			$json = array(
-				'collection' => array(
-					'version' => '1.0',
-					'href' => url_absolue(parse_url(self(), PHP_URL_PATH)),
-					'links' => $links,
-					'items' => $items,
-				),
+			$retour = array(
+				'href' => url_absolue(parse_url(self(), PHP_URL_PATH)),
+				'links' => $links,
+				'items' => $items,
 			);
 		}
-
-		// Et on le passe dans un pipeline
-		$json = pipeline(
-			'http_collectionjson_get_collection_contenu',
-			array(
-				'args' => array(
-					'requete' => $requete,
-					'reponse' => $reponse,
-				),
-				'data' => $json,
-			)
-		);
-		// Enfin on l'encode en JSON
-		$json = json_encode($json);
-
-		$reponse->setStatusCode(200);
-		$reponse->setCharset('utf-8');
-		$reponse->headers->set('Content-Type', 'application/json');
-		$reponse->setContent($json);
 	}
 	
-	return $reponse;
+	// Et on passe les valeurs retournées dans un pipeline
+	$retour = pipeline(
+		'http_collectionjson_get_collection_contenu',
+		array(
+			'args' => array(
+				'requete' => $requete,
+				'reponse' => $reponse,
+			),
+			'data' => $retour,
+		)
+	);
+
+	return http_collectionjson_reponse(200, $retour, $reponse);
 }
 
 /*
@@ -238,7 +246,7 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 	// S'il existe une fonction globale, dédiée à ce type de ressource, qui gère TOUTE la requête, on n'utilise QUE ça
 	// Cette fonction doit donc évidemment renvoyer un objet Response valide
 	if ($fonction_ressource = charger_fonction('get_ressource', "http/$format/$collection/", true)){
-		$reponse = $fonction_ressource($requete, $reponse);
+		return $fonction_ressource($requete, $reponse);
 	}
 	// Sinon on essaye de trouver différentes méthodes pour produire le JSON et en déduire les headers :
 	// - par une fonction dédiée au JSON
@@ -290,57 +298,46 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 					$data[] = array('name' => $champ, 'value' => $valeur);
 				}
 			
-				$json = array(
-					'collection' => array(
-						'version' => '1.0',
-						'href' => url_absolue(self()),
-						'items' => array(
-							array(
-								'href' => url_absolue(self()),
-								'links' => array(
-									array('rel' => 'edit', 'href' => $GLOBALS['meta']['adresse_site']."/http.api/$format/$collection/$ressource"),
-									array('rel' => 'alternate', 'type' => 'text/html', 'href' => url_absolue(generer_url_entite($ressource, objet_type($collection)))),
-								),
-								'data' => $data,
+				$retour = array(
+					'href' => url_absolue(self()),
+					'items' => array(
+						array(
+							'href' => url_absolue(self()),
+							'links' => array(
+								array('rel' => 'edit', 'href' => $GLOBALS['meta']['adresse_site']."/http.api/$format/$collection/$ressource"),
+								array('rel' => 'alternate', 'type' => 'text/html', 'href' => url_absolue(generer_url_entite($ressource, objet_type($collection)))),
 							),
-						)
-					),
+							'data' => $data,
+						),
+					)
 				);
 			}
 		}
-	
-		// On passe le json dans un pipeline
-		$json = pipeline(
-			'http_collectionjson_get_ressource_contenu',
-			array(
-				'args' => array(
-					'requete' => $requete,
-					'reponse' => $reponse,
-				),
-				'data' => $json,
-			)
-		);
-	
-		// Si le json n'est pas vide
-		if (!empty($json)){
-			// On le réencode en vrai JSON
-			$json = json_encode($json);
-		
-			// Et la réponse est ok
-			$reponse->setStatusCode(200);
-			$reponse->setCharset('utf-8');
-			$reponse->headers->set('Content-Type', 'application/json');
-			$reponse->setContent($json);
-		}
-		// Si on ne trouve rien c'est que ça n'existe pas
-		else{
-			// On utilise la fonction d'erreur générique pour renvoyer dans le bon format
-			$fonction_erreur = charger_fonction('erreur', "http/$format/");
-			$reponse = $fonction_erreur(404, $requete, $reponse);
-		}
 	}
-	
-	return $reponse;
+
+    $retour = $retour ?: $json['collection'];
+
+    // Si on n'a toujours rien on abandonne
+    if ( ! $retour) {
+        // On utilise la fonction d'erreur générique pour renvoyer
+        // dans le bon format
+        $fonction_erreur = charger_fonction('erreur', "http/$format/");
+        return $fonction_erreur(404, $requete, $reponse);
+    }
+
+    // On passe les données dans un pipeline
+    $retour = pipeline(
+        'http_collectionjson_get_ressource_contenu',
+        array(
+            'args' => array(
+                'requete' => $requete,
+                'reponse' => $reponse,
+            ),
+            'data' => $retour,
+        )
+    );
+
+	return http_collectionjson_reponse(200, $retour, $reponse);
 }
 
 /**
