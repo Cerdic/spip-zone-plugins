@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Détecter la langue du texte</nom>
 	<auteur>ARNO* / [Seenthis.net->http://seenthis.net]</auteur>
-	<version>1</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
 	<licence>GPL</licence>	
 	<description>

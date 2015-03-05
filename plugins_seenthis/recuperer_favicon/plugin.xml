@@ -7,6 +7,6 @@
 	<prefix>recuperer_favicon</prefix>
 	<fonctions>recuperer_favicon_fonctions.php</fonctions>
 
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;]" />
 </plugin>
 
