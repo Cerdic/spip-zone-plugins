@@ -9,7 +9,7 @@ lang: langue des articles et rubriques listés.
 ]<B_articles>
 #ANCRE_PAGINATION
 <div class="liste-articles">
-  <span class="nav nsize"><:articles:> [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={popularite}|?{<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL_RUBRIQUE#pagination_articles" class="ajax"><:acs:articles_classes_par_date:></a>),<:acs:articles_classes_par_date:></i> (<a href="#URL_RUBRIQUE&amp;classement=popularite#pagination_articles" class="ajax"><:acs:articles_classes_par_popularite:></a>)})],<:acs:articles_classes_par_date:></i>})]</span>
+  <span class="nav nsize"><:articles:> [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={popularite}|?{<:popularite:>:</i> (<a href="#URL_RUBRIQUE#pagination_articles" class="ajax"><:date:></a>),<:date:></i> (<a href="#URL_RUBRIQUE&amp;classement=popularite#pagination_articles" class="ajax"><:popularite:></a>)})],<:date:></i>})]</span>
   [<span class="pagination">(#PAGINATION)</span>]
   <div class="nettoyeur" ></div>
   <ul>

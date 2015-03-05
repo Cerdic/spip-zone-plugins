@@ -56,10 +56,14 @@ function initEncarts() {
 		}
 	);
 }
-
 jQuery(document).ready(
   function() {
   	initEncarts();
     onAjaxLoad(initEncarts);
   }
+);
+jQuery(document).on('unload',
+	function() {
+		jQuery(".cEncartClass").unbind().empty().remove();
+	}
 );

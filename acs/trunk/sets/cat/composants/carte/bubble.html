@@ -18,23 +18,23 @@ limit : nb d'articles ou de rubriques affichés dans l'info-bulle.
   <div class="bulle liste-articles">
   <BOUCLE_mp3(DOCUMENTS){id_rubrique}{mode=document}{extension=mp3}{0,1}{par date}{inverse}>[(#MODELE{doc_player}{id_document}{autostart=yes}{small=y}{nodownload=y}{align=#LANG_RIGHT})]</BOUCLE_mp3>
     [<a href='#URL_RUBRIQUE'>(#LOGO_RUBRIQUE|left|image_reduire{#GET{maxLogo},#GET{maxLogo}})</a>]
-    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_RUBRIQUE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}][(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_RUBRIQUE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>]][(#VAR{#EVAL{'acsCarte'.'#NIC'.'ListArticles'}}|!={non}|?{" "})<INCLURE{fond=composants/carte/bubble_liste_articles}{id_rubrique}>]
+    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_RUBRIQUE" class="nsize"><:suite:></a></i>})</p>#SET{done,oui}][(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_RUBRIQUE" class="nsize"><:suite:></a></i>})</p>]][(#VAR{#EVAL{'acsCarte'.'#NIC'.'ListArticles'}}|!={non}|?{" "})<INCLURE{fond=composants/carte/bubble_liste_articles}{id_rubrique}>]
   </div></BOUCLE_rub>
 <BOUCLE_art(ARTICLES){tous}{id_article}><div class="titre"><a href="#URL_ARTICLE">#TITRE</a></div>[(#VAR{#EVAL{'acsCarte'.'#NIC'.'LastUpdate'}}|!={non}|?{' '})[<div class='date'><small><:dernier_ajout:>: (#DATE_MODIF|affdate)</small></div>]]
   <div class="bulle">
     <BOUCLE_mp3a(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}{par date}{inverse}>[(#MODELE{doc_player}{id_document}{autostart=yes}{downloadlink=no}{align=#LANG_RIGHT})]</BOUCLE_mp3a>
     [<a href='#URL_ARTICLE'>(#LOGO_ARTICLE|left|image_reduire{#GET{maxLogo},#GET{maxLogo}})</a>]
-    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]
-    [(#GET{done}|!={oui}|?{' '})[<p>(#CHAPO|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]]
-    [(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>]]
+    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:suite:></a></i>})</p>#SET{done,oui}]
+    [(#GET{done}|!={oui}|?{' '})[<p>(#CHAPO|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:suite:></a></i>})</p>#SET{done,oui}]]
+    [(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:suite:></a></i>})</p>]]
   </div>
 </BOUCLE_art>
 <BOUCLE_mot(MOTS){tous}{id_mot}><div class="titre"><a href="#URL_MOT">#TITRE</a></div>
   <div class="bulle">
     [<a href='#URL_MOT'>(#LOGO_MOT|left|image_reduire{#GET{maxLogo},#GET{maxLogo}})</a>]
-    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]
-    [(#GET{done}|!={oui}|?{' '})[<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]]
-    [(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>]]
+    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:suite:></a></i>})</p>#SET{done,oui}]
+    [(#GET{done}|!={oui}|?{' '})[<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:suite:></a></i>})</p>#SET{done,oui}]]
+    [(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:suite:></a></i>})</p>]]
     [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ListRubriques'}}|!={non}|?{" "})[(#INCLURE{fond=composants/carte/bubble_liste_rubriques}{id_mot}]]
     [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ListArticles'}}|!={non}|?{" "})[(#INCLURE{fond=composants/carte/bubble_liste_articles}{id_mot}]]
   </div>

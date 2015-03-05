@@ -1,6 +1,6 @@
 [(#CACHE{0})][(#SET{max,50})]<B_articles>
 <div class="plan-articles">
-<BOUCLE_articles(ARTICLES){titre==^[^_].*$}{id_rubrique}{par date}{inverse}{0,#GET{max}}{par titre}{lang ?}>
+<BOUCLE_articles(ARTICLES){id_rubrique}{exclus}{titre!==^_}{!mots.titre==^_}{par date}{inverse}{0,#GET{max}}{par titre}{lang ?}>
 [(#MODE|=={forums}|?{#ACCEPTER_FORUM|!={non}|?{' '}})
 <span class="plan-article">[<img src="(#ACS_CHEMIN{puces/#VAR{acsPlanPuce}})" alt="¤" />]
 <a href="#URL_ARTICLE[(#MODE|=={forums}|?{'&ouvrir=oui#forum'})]" [title="(#INTRODUCTION|textebrut|entites_html)"]>#TITRE</a>

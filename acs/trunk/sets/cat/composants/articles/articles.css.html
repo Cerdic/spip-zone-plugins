@@ -1,6 +1,6 @@
 [(#CACHE{0})][(#REM)
 
-Listes d'articles et extraits introductifs
+Listes d'articles
 Styles héritables, utilisés par les pages sommaire, recherche, resume, plan, sites ...
 
 ].liste-articles ul {
@@ -8,41 +8,15 @@ Styles héritables, utilisés par les pages sommaire, recherche, resume, plan, s
   padding: 0;
   list-style: none;
 }
-.liste-articles li {[
-  margin-bottom: (#VAR{acsArticlesMargeBas})px;][
-  background : (#VAR{acsArticlesFond});][
-  border-width: (#VAR{acsArticlesBord/Width});][
-  border-style: (#VAR{acsArticlesBord/Style});][
-  border-color: (#VAR{acsArticlesBord/Color});][
-  (#MODELE{c_css_border-radius}{c=Articles}{var=BordRond})][
-  (#MODELE{c_css_shadow}{c=Articles})]
-}
-.liste-articles .entete, .plan-secteur h1 {
-  [background-color: (#VAR{acsArticlesTitreFond});]
-  [background: url('(#ACS_CHEMIN{trame/#VAR{acsArticlesTitreFondImage}})') repeat top left;]
- }
 .liste-articles .entete {
   clear: both;
   float: #LANG_LEFT;
   text-align: #LANG_LEFT;
-  width: 100%;[
-  (#MODELE{c_css_border-radius}{c=Articles}{var=BordRond}{sauf=bottom})]
+  width: 100%;
 }
 .liste-articles .entete .titres {
-  padding: 2px;[
-  margin-left: (#VAR{#EVAL{'acsArticles'.'#NIC'.'BordRond'},0});][
-  margin-right: (#VAR{#EVAL{'acsArticles'.'#NIC'.'BordRond'},0});][
-  color: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreText'}});]
-}[
-.liste-articles .entete a:link, .liste-articles .entete a:visited {
-  color: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreLink'}});
-}][
-.liste-articles .entete a:hover {
-  color: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreLinkHover'}});
-}][
-.liste-articles .entete .titre {
-  font-size: (#VAR{#EVAL{'acsArticles'.'#NIC'.'TitreSize'}});
-}]
+  padding: 2px;
+}
 * html .liste-articles .entete { /* IE */
   margin-right: 3px;
   position: relative;
@@ -76,18 +50,19 @@ Styles héritables, utilisés par les pages sommaire, recherche, resume, plan, s
   padding-right: 5px;
   margin-top: 2px;
   margin-bottom: 0.1em;
-  text-align: justify;[
-  margin-left: (#VAR{#EVAL{'acsArticles'.'#NIC'.'BordRond'},0});][
-  margin-right: (#VAR{#EVAL{'acsArticles'.'#NIC'.'BordRond'},0});][
-  (#MODELE{c_css_border-radius}{c=Articles}{var=BordRond}{sauf=top})]
+  text-align: justify;
 }
 .liste-articles .infos_article, .liste-articles .nav, .liste-articles .pagination {
   margin: 0;
   margin-left: 5px;
   margin-right: 5px;
 }
+.liste-articles .pagination {
+  display: inline-block;
+  min-width: 150px;
+}
 .liste-articles .infos_article, .liste-articles .nav {
-  float: #LANG_RIGHT;
+  text-align: center;
 }
 .liste-articles .spip_surligne {
   color: black;

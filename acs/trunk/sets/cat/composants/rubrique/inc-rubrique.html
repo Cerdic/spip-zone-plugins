@@ -10,7 +10,7 @@
   ][<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
   [(#REM) Articles de la rubrique, avec pagination et navigation en Ajax ]
-  <INCLURE{fond=composants/articles/boucle-articles_rubrique}{env}{id_rubrique}{classement}{debut_articles=#ENV{debut_articles}}{rubrique=#TITRE}{ajax}>
+  <INCLURE{fond=composants/articles/boucle-articles_rubrique}{env}{id_rubrique}{classement}{debut_articles=#ENV{debut_articles}}{rubrique=#TITRE}{aff_rubrique=non}{ajax}>
 
   [(#REM) Documents joints a la rubrique ]
   <B_documents_joints>

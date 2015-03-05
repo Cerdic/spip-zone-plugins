@@ -1,9 +1,7 @@
 <composant>
-  <!-- Nom du composant -->
   <nom>Articles</nom>
-  <!-- Auteur du composant -->
+  <version>1.0.5</version>
   <auteur>Daniel FAIVRE &copy; 2008-2015 - licence GPL</auteur>
-  <version>1.0.4</version>
 	<necessite id='acs' version='[0.8.8;]' />
   <necessite_composant set='cat' nom='fond' compatibilite='[0.8.9;]' />
   <necessite_composant set='cat' nom='plan' compatibilite='[0.8.9;]' />
@@ -11,10 +9,22 @@
   <group>content</group>
 
   <param>
+    <nom>instanciable</nom>
+  </param>
+  <param>
     <nom>preview</nom>
     <valeur>250</valeur>
   </param>
-  
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+
+  <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+
   <variable>
     <nom>TitreFond</nom>
     <type>color</type>
@@ -49,6 +59,13 @@
 
   <variable>
     <nom>Popularite</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>DateRedac</nom>
     <type>choix</type>
     <option>oui</option>
     <option>non</option>

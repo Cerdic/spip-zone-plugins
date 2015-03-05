@@ -1,20 +1,22 @@
 [(#CACHE{0})][(#REM)
 
-Listes d'articles (pour sommaire, resume, plan, rubrique, recherche, mot-clé)
+Listes d'articles
+(pour sommaire, resume, plan, rubrique, article, recherche, mot-clé)
 
 On transmet id_article dans la classe du pinceau pour prévisualiser
 l'article id_article avec le pinceau du présent composant.
 
 Paramètres:
-id_article: affiche l'article id_article.
+id_article: affiche les derniers articles de la même rubrique.
 id_mot: affiche le mot-clé id_mot et la liste des articles ayant ce mot-clé si id_article est vide.
+recherche: affiche les articles resutlats d'une recherche.
 page: détermine la boucle SPIP à charger si les variables précédentes sont vides.
 
-]<div class="[id_article-(#ID_ARTICLE) ][id_mot-(#ID_MOT) ][page-(#ENV{page}) ][recherche-(#RECHERCHE|entites_html) ]#PINCEAU{articles}">[
-(#ID_ARTICLE|oui)[(#INCLURE{fond=composants/article/article}{env}{self}{id_article})#SET{ok,oui}]][
+]<div class="[id_article-(#ID_ARTICLE) ][id_mot-(#ID_MOT) ][page-(#ENV{page}) ][recherche-(#RECHERCHE|entites_html) ]#PINCEAU{articles,#NIC}">[
+(#ID_ARTICLE|oui)[(#INCLURE{fond=composants/articles/inc-autres-articles}{env}{self}{ajax}{id_article})#SET{ok,oui}]][
 (#ID_MOT|oui)[(#INCLURE{fond=composants/articles/boucle-articles_mot}{env}{self})#SET{ok,oui}]][
-(#ENV{page}|=={sommaire}|?{' '})[(#INCLURE{fond=composants/articles/boucle-une}{env}{self}{ajax}{debut_articles})#SET{ok,oui}]][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ][
 (#ENV{recherche}|oui)[(#INCLURE{fond=composants/articles/boucle-articles_recherche}{env}{self}{ajax}{debut_articles}{classement}{ordre})#SET{ok,oui}]][
+(#ENV{page}|=={sommaire}|?{' '})[(#INCLURE{fond=composants/articles/boucle-une}{env}{self}{ajax}{debut_articles})#SET{ok,oui}]][
 (#ENV{page}|=={plan}|?{' '})[(#INCLURE{fond=composants/plan/plan}{env}{self})#SET{ok,oui}]][
 (#ENV{page}|=={auteur}|?{' '})[(#INCLURE{fond=composants/auteur/auteur}{env}{self})#SET{ok,oui}]][
 (#ENV{page}|=={forums}|?{' '})[(#INCLURE{fond=composants/articles/boucle-plan}{env}{self}{mode=forums})#SET{ok,oui}]][

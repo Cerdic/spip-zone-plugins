@@ -1,14 +1,14 @@
-[(#CACHE{0})][(#REM)
+[(#CACHE{86400})][(#REM)
              ACS
          (Plugin Spip)
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2012
+Copyright Daniel FAIVRE, 2007-2015
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 La présentation de cette page peut dépendre du choix d'un mot-clé: cliquez <u><a href="?exec=acs&onglet=pages&pg=composants/article/page-article">ici</a></u> pour voir le schéma de la page ou <u><a href="?exec=acs&onglet=composants&composant=cadre&nic=2100">là</a></u> pour modifier son contenu par défaut..
 
 These page design could depend on a keyword: click <u><a href="?exec=acs&onglet=pages&pg=composants/article/page-article">here</a></u> to define page content or .<u><a href="?exec=acs&onglet=composants&composant=cadre&nic=2100">there</a></u> to change its default content.
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticleLock}|=={oui}|?{' '})[(#INCLURE{fond=composants/article/test-acces-page}{env}{self})]][(#VAR{acsArticleLock}|!={oui}|?{' '})[(#INCLURE{fond=composants/article/test-style-page}{id_article}{env}{self})]]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticleLock}|=={oui}|?{' '})[(#INCLURE{fond=composants/article/test-acces-page}{env}{self})]][(#VAR{acsArticleLock}|!={oui}|?{' '})[(#INCLURE{fond=composants/article/test-style-page}{env}{self})]]

@@ -3,23 +3,9 @@
 // ACS component specific - sp&eacute;cifique au composant ACS
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'keyword' => 'Communiques', /* Mot-cl&eacute; pour une rubrique de communiqu&eacute;s */
-
-'classes_par_date' => 'class&eacute;s par <u>date</u>',
-'classes_par_popularite' => 'class&eacute;s par <u>popularit&eacute;</u>',
-'classes_par_note_ponderee' => 'class&eacute;s par <u>votes</u>',
-'lire_la_suite' => 'lire la suite',
-'derniers_textes' => 'Derniers textes publi&eacute;s',
-'redige' => 'r&eacute;dig&eacute; le',
-'publie' => 'publi&eacute; le',
-'maj' => 'mis à jour le',
+'classes_par_note_ponderee' => 'par <u>votes</u>',
 'table' => 'Tableau',
-'sommaire' => 'Sommaire',
-
 'latest' => 'Version actuelle',
-
-'lire_la_suite' => 'lire la suite',
-
 'aucun_article_note' => 'Aucun article not&eacute;'
 );
 ?>

@@ -3,7 +3,13 @@
 On utilise le formulaire SPIP standard de la dist pour faciliter la maintenance
 
 ]<div class="cLogin">
-<div class="bloc-title bsize"><:spip:icone_informations_personnelles:></div>
-[<div class="bsize">(#LOGIN_PUBLIC)</div>]
+	<div class="bloc-title bsize">
+	 [(#ENV{titre,<:spip:icone_informations_personnelles:>})]
+	</div>[
+	(#ENV{titre}|non)#LOGIN_PUBLIC][(#ENV{titre}|oui)#LOGIN_PRIVE[<p>
+      <a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{mode_inscription})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>
+    </p>
+  ]
+]
 </div>
 [(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]

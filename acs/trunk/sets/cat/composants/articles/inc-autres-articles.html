@@ -1,0 +1,9 @@
+[(#CACHE{3600})][(#REM)
+
+Listes d'autres articles de la meme rubrique
+
+Paramètres:
+id_article: affiche les derniers articles de la même rubrique.
+aff_rubrique: affiche le nom de la rubrique si oui
+
+]<BOUCLE_art(ARTICLES){id_article}><INCLURE{fond=composants/articles/boucle-articles_rubrique}{env}{self}{id_rubrique}{aff_rubrique=#VAR{#EVAL{'acsArticles'.'#NIC'.'Rubrique'},non}}></BOUCLE_art>

@@ -10,11 +10,11 @@ Articles trouves
       <input type="hidden" name="recherche" value="[(#RECHERCHE|entites_html)]" />
       <select name="classement" onchange="submit(); " class="spip_bouton">
         <option value="points"[(#CLASSEMENT|=={points}|?{' selected="selected" class="selected"'})] ><:pertinence:></option>
-[(#CONFIG{activer_statistiques}|=={oui}|et{#VAR{acsArticlesPopularite}|!={non}}|oui)
+[(#CONFIG{activer_statistiques}|=={oui}|et{#VAR{#EVAL{'acsArticles'.'#NIC'.'Popularite'}}|!={non}}|oui)
         <option value="popularite"[(#CLASSEMENT|=={popularite}|?{' selected="selected" class="selected"'})] ><:popularite:></option>
         <option value="visites"[(#CLASSEMENT|=={visites}|?{' selected="selected" class="selected"'})] ><:nb_de_visites:></option>
-]
-        <option value="date_redac"[(#CLASSEMENT|=={date_redac}|?{' selected="selected" class="selected"'})] ><:date_de_redaction:></option>
+][(#VAR{#EVAL{'acsArticles'.'#NIC'.'DateRedac'}}|=={oui})
+        <option value="date_redac"[(#CLASSEMENT|=={date_redac}|?{' selected="selected" class="selected"'})] ><:date_de_redaction:></option>]
         <option value="date"[(#CLASSEMENT|=={date}|?{' selected="selected" class="selected"'})] ><:date_de_publication:></option>
       </select>
       <input type="checkbox" name="ordre" [(#ORDRE|=={on}|?{'checked '})]onchange="submit();">[(#ORDRE|?{&uarr;,&darr;})] </input>

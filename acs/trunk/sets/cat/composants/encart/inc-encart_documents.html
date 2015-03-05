@@ -20,7 +20,7 @@ puis par date du plus récent au plus ancien.
 	      <a class="mediabox" href="#URL_DOCUMENT">(#FICHIER|image_reduire{#VAR{#EVAL{'acsEncart'.'#NIC'.'LogoTailleMax'},100}}|inserer_attribut{class,spip_logos})</a>][
 	      <h1 class="#EDIT{titre} titre tsize"><a href="#URL_ARTICLE">(#TITRE)</a></h1>]
 	    </div>[(#REM) fin entete ]
-	    [<div class="#EDIT{descriptif} texte">(#DESRIPTIF|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</div>]
+	    [<div class="#EDIT{descriptif} texte">(#DESRIPTIF|coupe{#VAR{#EVAL{'acsEncart'.'#NIC'.'NbLettres'},300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:suite:></a></i>})</div>]
 	    <div class="nettoyeur"></div>
     </div>
   </div>[(#VAR{acsFondSpacer}|oui)<div class="spacer"></div>]

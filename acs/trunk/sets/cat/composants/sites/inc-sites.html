@@ -27,7 +27,7 @@ style hérité du composant Rubrique et du composant Articles
           </h3>
         </div>
       </div>[(#VAR{acsArticlesLogoTailleMax}|is_numeric|?{" "})[(#LOGO_SITE|image_reduire{#VAR{acsArticleLogoTailleMax,75}})]]
-      [<div class="extrait">(#DESCRIPTIF|coupe{#VAR{acsSitesNbLettres,500},... <small><i><a href="#URL_ARTICLE"><:acs:articles_lire_la_suite:></a></i></small>}
+      [<div class="extrait">(#DESCRIPTIF|coupe{#VAR{acsSitesNbLettres,500},... <small><i><a href="#URL_ARTICLE"><:suite:></a></i></small>}
                                         |image_reduire{#VAR{acsFondImgMax,600}})</div>]
     <li>
   </BOUCLE_sites>

@@ -6,7 +6,7 @@
   <BOUCLE_auteurs(AUTEURS){par nom}{unique} {pagination 10}>
     <li><div class="entete"><div class="titre"><a href="?auteur#ID_AUTEUR">#NOM</a></div></div>
     <div class="nettoyeur" ></div>
-        <div class="extrait">[<a href="?auteur#ID_AUTEUR">(#LOGO_AUTEUR||image_reduire{#VAR{acsArticlesLogoTailleMax,50},#VAR{acsArticlesLogoTailleMax,50}})</a>][(#BIO|textebrut||coupe{500,... <small><i><a href="?auteur#ID_AUTEUR"> (<:acs:articles_lire_la_suite:>)</a></i></small>})]</div>
+        <div class="extrait">[<a href="?auteur#ID_AUTEUR">(#LOGO_AUTEUR||image_reduire{#VAR{acsArticlesLogoTailleMax,50},#VAR{acsArticlesLogoTailleMax,50}})</a>][(#BIO|textebrut||coupe{500,... <small><i><a href="?auteur#ID_AUTEUR"> (<:suite:>)</a></i></small>})]</div>
         <div class="nettoyeur" ></div>
     </li>
   </BOUCLE_auteurs>

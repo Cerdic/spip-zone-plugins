@@ -4,8 +4,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Articles',
-'description' => 'Lists of articles for rubrics, Une, abstract, sitemap, ...',
-'info' => '',
+'description' => 'Lists of articles.',
+'info' => 'Look of articles lists',
 
 'Bord' => 'Border top',
 'MargeBas' => 'Margin bottom',
