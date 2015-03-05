@@ -22,7 +22,7 @@ function socialtags_choix(){
 		$retour[$category] .= "<div class='choix'>
 				<input type='checkbox' id='choix_{$a}' name='tags[]' value='{$a}'{$checked} />
 				<label for='choix_{$a}'>
-					<img src=\"{$image}\" title=\"".texte_script($t)."\" alt=\"\" />
+					<img src=\"{$image}\" title=\"".texte_script($t)."\" alt=\"\" style=\"max-width:16px; height:auto;\" />
 					" . ($checked ? "<strong>$t</strong>" : $t)
 					. ($d ? "&nbsp;<span style='color:$couleur_fonce;font-size:90%'>$d</span>" : "") . "
 				</label>
@@ -31,4 +31,4 @@ function socialtags_choix(){
 	ksort($retour);
 	return implode("<hr />",$retour);
 }
-?>
+

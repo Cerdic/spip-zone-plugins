@@ -1,12 +1,12 @@
 <paquet
 	prefix="socialtags"
 	categorie="communication"
-	version="1.0.7"
+	version="1.0.8"
 	etat="stable"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="prive/themes/spip/images/socialtags-32.png"
 	documentation="http://contrib.spip.net/Social-tags"
->	
+>
 
 	<nom>Social tags</nom>
 	<!-- Activer des boutons de partage de liens sur les réseaux sociaux. -->
