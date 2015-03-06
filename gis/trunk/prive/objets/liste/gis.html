@@ -22,11 +22,11 @@
 	<tbody>
 	<BOUCLE_liste_gis(GIS){id_gis ?}{id_rubrique ?}{id_article ?}{id_breve ?}{id_document ?}{id_mot ?}{id_auteur ?}{id_syndic ?}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_GIS|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class='titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
+			<td class='#EDIT{titre} titre principale'>[(#LOGO_GIS|image_reduire{20,20})]<a href="[(#ID_GIS|generer_url_entite{gis})]"
 				title="<:gis:texte_voir_gis:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
-			<td class='pays'>#PAYS</td>
-			<td class='ville'>#VILLE</td>
-			<td class='id_gis'><a href="[(#ID_GIS|generer_url_entite{gis})]"
+			<td class='#EDIT{pays} pays'>#PAYS</td>
+			<td class='#EDIT{ville} ville'>#VILLE</td>
+			<td class='id_gis'><a href="[(#URL_ECRIRE{gis_edit,id_gis=#ID_GIS})]"
 				title="<:gis:texte_voir_gis:>">#ID_GIS</a></td>
 		</tr>
 	</BOUCLE_liste_gis>
