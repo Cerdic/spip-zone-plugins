@@ -230,12 +230,11 @@ function balise_MEDIA_LIEN_dist($p) {
 	if (isset($p->boucles[$p->id_boucle]))
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$connect = _q($connect);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],$connect)";
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],\$Pile[0]['lien'],$connect)";
 	return $p;
 }
 
-function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,$args,$connect='') {
-	$lien = $args['lien'];
+function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,$args,$lien,$connect='') {
 	$titre_lien = $args['titre_lien'];
 	$titre = $args['titre'];
 	
