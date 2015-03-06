@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/spip_visuels-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/Plugin-Visuels"
 	schema="0.1.0" 
 >
 
