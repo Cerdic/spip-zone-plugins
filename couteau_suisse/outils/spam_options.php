@@ -24,8 +24,15 @@ if ( count($_POST)
 	$spam_mots = cs_lire_data_outil('spam');
 	// test IP compatible avec l'outil 'no_IP'
 	$test = $spam_mots[3]?preg_match($spam_mots[3], $ip_):false;
+	// test sur les mots
 	foreach ($spam_POST_compile as $var) if(!$test)
 		if(cs_test_spam($spam_mots, $_POST[$var], $test)) $_GET['var'] = $var;
+	// fichiers joints
+	define('_spam_MIN', 100); 
+	$test |= isset($_FILES['ajouter_document']['size']) && ($tmp = $_FILES['ajouter_document']['size']) && $tmp<_spam_MIN;
+	$test |= isset($GLOBALS['visiteur_session']['tmp_forum_document']) && ($tmp =$GLOBALS['visiteur_session']['tmp_forum_document']) 
+			&& file_exists($tmp = $tmp.'.bin') && filesize($tmp)<_spam_MIN;
+	// muss es sein ?
 	if($test) $_GET['action'] = "cs_spam";
 	// nettoyage
 	unset($test, $spam_mots, $spam_POST_reg, $spam_POST_compile);
