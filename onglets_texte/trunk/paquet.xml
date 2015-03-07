@@ -11,7 +11,7 @@
 	<auteur>[Pi R->http://contrib.spip.net/?auteur214]</auteur>
 	<licence>GNU/GPL</licence>
 
-	<pipeline nom="insert_head" action="insert_head" inclure="fb_modeles_pipelines.php" />
-	<pipeline nom="insert_head_css" action="insert_head_css" inclure="nuage_fonctions.php" />
+	<pipeline nom="insert_head" action="insert_head" inclure="onglets_texte_pipelines.php" />
+	<pipeline nom="insert_head_css" action="insert_head_css" inclure="onglets_texte_pipelines.php" />
 
 </paquet>
