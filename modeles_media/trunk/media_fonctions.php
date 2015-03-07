@@ -230,11 +230,11 @@ function balise_MEDIA_LIEN_dist($p) {
 	if (isset($p->boucles[$p->id_boucle]))
 		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
 	$connect = _q($connect);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],\$Pile[0]['lien'],$connect)";
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,\$Pile[0]['args'],\$Pile[0]['lien'],\$Pile[0]['lang'],$connect)";
 	return $p;
 }
 
-function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,$args,$lien,$connect='') {
+function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_document,$args,$lien,$lang,$connect='') {
 	$titre_lien = $args['titre_lien'];
 	$titre = $args['titre'];
 	
@@ -257,7 +257,7 @@ function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$url_docume
 	$a = '<a href="'.$l['url'].'"';
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
 	$a .= $l['titre'] ? ' title="'.attribut_html(typo($l['titre'])).'"' : '';
-	$a .= $l['lang'] ? ' hreflang="'.$l['lang'].'"' : '';
+	$a .= ($l['lang'] && $l['lang']!=$lang) ? ' hreflang="'.$l['lang'].'"' : ''; // Seulement si hreflang diffère de la langue en cours
 	$a .= $l['mime'] ? ' type="'.$l['mime'].'"' : '';
 	$a .= '>';
 	return $a.$objet.'</a>';
