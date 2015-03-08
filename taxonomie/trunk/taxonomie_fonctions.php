@@ -159,6 +159,40 @@ function taxonomie_regne_existe($regne, &$meta_regne) {
 
 
 /**
+ * Liste dans un tableau les rangs taxonomiques supportés par le plugin, à savoir:
+ * kingdom, phylum, class, order, family, genus et species.
+ * Les règnes sont exprimés en anglais et écrits en lettres minuscules.
+ * La fonction permet d'exclure de la liste les rangs extrêmes kingdom et specie et de choisir
+ * entre le rang phylum et son synonyme division.
+ *
+ * @param bool $exclure_regne
+ * 		Demande d'exclusion du règne de la liste des rangs
+ * @param bool $exclure_espece
+ * 		Demande d'exclusion de l'espèce de la liste des rangs
+ * @param string	$regne
+ * 		Nom scientifque du règne pour lequel la liste des rangs est demandée.
+ * 		Cet argument permet de remplacer le rang phylum par division qui est son synonyme
+ * 		pour les règnes fongique et végétal
+ *
+ * @return array
+ */
+function taxonomie_lister_rangs($regne=_TAXONOMIE_REGNE_ANIMAL, $liste_base, $exclusions=array()) {
+	include_spip('inc/taxonomer');
+
+	$rangs = explode(':', $liste_base);
+	$rangs = array_diff($rangs, $exclusions);
+
+	if (($regne == _TAXONOMIE_REGNE_FONGIQUE)
+	OR  ($regne == _TAXONOMIE_REGNE_VEGETAL)) {
+		if ($index_cherche = array_search(_TAXONOMIE_RANG_PHYLUM, $rangs))
+			$rangs[$index_cherche] = _TAXONOMIE_RANG_DIVISION;
+	}
+
+	return $rangs;
+}
+
+
+/**
  * Fourniture de l'ascendance taxonomique d'un taxon donné.
  *
  * @api

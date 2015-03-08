@@ -29,7 +29,10 @@ function formulaires_charger_taxonomie_charger() {
 	}
 
 	// Acquérir la liste des rangs taxonomiques exception faite du règne et de l'espèce
-	$rangs = lister_rangs(true, true);
+	$rangs = taxonomie_lister_rangs(
+		_TAXONOMIE_REGNE_ANIMAL,
+		_TAXONOMIE_RANGS_PARENTS_ESPECE,
+		array(_TAXONOMIE_RANG_REGNE));
 	foreach ($rangs as $_rang) {
 		$valeurs['_rangs'][$_rang] = ucfirst(_T("taxonomie:rang_${_rang}"));
 	}

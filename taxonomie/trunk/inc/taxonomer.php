@@ -41,6 +41,8 @@ if (!defined('_TAXONOMIE_RANG_VARIETE'))
 	define('_TAXONOMIE_RANG_VARIETE', 'variety');
 if (!defined('_TAXONOMIE_RANG_SOUS_VARIETE'))
 	define('_TAXONOMIE_RANG_SOUS_VARIETE', 'subvariety');
+if (!defined('_TAXONOMIE_RANG_RACE'))
+	define('_TAXONOMIE_RANG_RACE', 'race');
 if (!defined('_TAXONOMIE_RANG_FORME'))
 	define('_TAXONOMIE_RANG_FORME', 'forma');
 if (!defined('_TAXONOMIE_RANG_SOUS_FORME'))
@@ -60,8 +62,6 @@ if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
 			_TAXONOMIE_RANG_GENRE
 		)));
 // Liste des rangs utilisés de l'espèce à la sous-forme
-// On utilise par défaut les rangs variété et sous-variété des règnes fongique et végétal
-// (race et sous-race pour le règne animal)
 if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
 	define('_TAXONOMIE_RANGS_ESPECE_ET_FILS',
 		implode(':', array(
@@ -69,6 +69,7 @@ if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
 			_TAXONOMIE_RANG_SOUS_ESPECE,
 			_TAXONOMIE_RANG_VARIETE,
 			_TAXONOMIE_RANG_SOUS_VARIETE,
+			_TAXONOMIE_RANG_RACE,
 			_TAXONOMIE_RANG_FORME,
 			_TAXONOMIE_RANG_SOUS_FORME
 		)));
@@ -109,45 +110,6 @@ function url2json_data($url) {
  */
 function lister_regnes() {
 	return explode(':', _TAXONOMIE_LISTE_REGNES);
-}
-
-
-/**
- * Liste dans un tableau les rangs taxonomiques supportés par le plugin, à savoir:
- * kingdom, phylum, class, order, family, genus et species.
- * Les règnes sont exprimés en anglais et écrits en lettres minuscules.
- * La fonction permet d'exclure de la liste les rangs extrêmes kingdom et specie et de choisir
- * entre le rang phylum et son synonyme division.
- *
- * @param bool $exclure_regne
- * 		Demande d'exclusion du règne de la liste des rangs
- * @param bool $exclure_espece
- * 		Demande d'exclusion de l'espèce de la liste des rangs
- * @param string	$regne
- * 		Nom scientifque du règne pour lequel la liste des rangs est demandée.
- * 		Cet argument permet de remplacer le rang phylum par division qui est son synonyme
- * 		pour les règnes fongique et végétal
- *
- * @return array
- */
-function lister_rangs($exclure_regne=true, $exclure_espece=true, $regne=_TAXONOMIE_REGNE_ANIMAL) {
-	$exclusions = array();
-	// todo : revoir complètement la fonction les deux listes de rangs
-
-	$rangs = explode(':', _TAXONOMIE_RANGS);
-	if ($exclure_regne)
-		$exclusions[] = _TAXONOMIE_RANG_REGNE;
-	if ($exclure_espece)
-		$exclusions[] = _TAXONOMIE_RANG_ESPECE;
-	$rangs = array_diff($rangs, $exclusions);
-
-	if (($regne == _TAXONOMIE_REGNE_FONGIQUE)
-	OR  ($regne == _TAXONOMIE_REGNE_VEGETAL)) {
-		if ($index_phylum = array_search(_TAXONOMIE_RANG_PHYLUM, $rangs))
-			$rangs[$index_phylum] = _TAXONOMIE_RANG_DIVISION;
-	}
-
-	return $rangs;
 }
 
 
