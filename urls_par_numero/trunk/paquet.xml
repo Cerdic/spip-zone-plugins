@@ -1,8 +1,8 @@
 <paquet
 	prefix="urls_par_numero"
 	categorie="statistique"
-	version="1.0.0"
-	etat="dev"
+	version="1.0.1"
+	etat="test"
 	compatibilite="[3.0.17;3.0.*]"
 	logo="img/urls_par_numero.png"
 	documentation="http://contrib.spip.net/4625"
@@ -16,6 +16,8 @@
 	<traduire module="paquet-urls_par_numero" reference="fr" />
 	
 	<necessite nom="urls" compatibilite="[1.4.23;1.*.*]" />
+	
+	<pipeline nom="propres_creer_chaine_url" inclure="urls_par_numero_pipelines.php" />
 
 
 </paquet>
