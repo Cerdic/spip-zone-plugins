@@ -145,7 +145,7 @@ $(function() {
 		var date_now = Math.floor((new Date()).getTime() / 1000);
 		$.ajax({
 			type: "POST",
-			url: "[(#VAL{spip.php?action=dateoffset}|url_absolue)]",
+			url: "spip.php?action=dateoffset",
 			data: {
 				time: date_now
 			},
