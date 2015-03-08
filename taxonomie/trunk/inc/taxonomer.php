@@ -34,20 +34,48 @@ if (!defined('_TAXONOMIE_RANG_FAMILLE'))
 if (!defined('_TAXONOMIE_RANG_GENRE'))
 	define('_TAXONOMIE_RANG_GENRE', 'genus');
 if (!defined('_TAXONOMIE_RANG_ESPECE'))
-	define('_TAXONOMIE_RANG_ESPECE', 'specie');
+	define('_TAXONOMIE_RANG_ESPECE', 'species');
+if (!defined('_TAXONOMIE_RANG_SOUS_ESPECE'))
+	define('_TAXONOMIE_RANG_SOUS_ESPECE', 'subspecies');
+if (!defined('_TAXONOMIE_RANG_VARIETE'))
+	define('_TAXONOMIE_RANG_VARIETE', 'variety');
+if (!defined('_TAXONOMIE_RANG_SOUS_VARIETE'))
+	define('_TAXONOMIE_RANG_SOUS_VARIETE', 'subvariety');
+if (!defined('_TAXONOMIE_RANG_FORME'))
+	define('_TAXONOMIE_RANG_FORME', 'forma');
+if (!defined('_TAXONOMIE_RANG_SOUS_FORME'))
+	define('_TAXONOMIE_RANG_SOUS_FORME', 'subforma');
 
-// Pour la liste des rangs on utilise par défaut au niveau 2 le terme phylum
-if (!defined('_TAXONOMIE_LISTE_RANGS'))
-	define('_TAXONOMIE_LISTE_RANGS',
+// Liste des rangs utilisés du règne au genre compris.
+// On utilise par défaut au niveau 2 le terme phylum du règne animal
+// (division pour les autres règnes)
+if (!defined('_TAXONOMIE_RANGS_PARENTS_ESPECE'))
+	define('_TAXONOMIE_RANGS_PARENTS_ESPECE',
 		implode(':', array(
 			_TAXONOMIE_RANG_REGNE,
 			_TAXONOMIE_RANG_PHYLUM,
 			_TAXONOMIE_RANG_CLASSE,
 			_TAXONOMIE_RANG_ORDRE,
 			_TAXONOMIE_RANG_FAMILLE,
-			_TAXONOMIE_RANG_GENRE,
-			_TAXONOMIE_RANG_ESPECE
+			_TAXONOMIE_RANG_GENRE
 		)));
+// Liste des rangs utilisés de l'espèce à la sous-forme
+// On utilise par défaut les rangs variété et sous-variété des règnes fongique et végétal
+// (race et sous-race pour le règne animal)
+if (!defined('_TAXONOMIE_RANGS_ESPECE_ET_FILS'))
+	define('_TAXONOMIE_RANGS_ESPECE_ET_FILS',
+		implode(':', array(
+			_TAXONOMIE_RANG_ESPECE,
+			_TAXONOMIE_RANG_SOUS_ESPECE,
+			_TAXONOMIE_RANG_VARIETE,
+			_TAXONOMIE_RANG_SOUS_VARIETE,
+			_TAXONOMIE_RANG_FORME,
+			_TAXONOMIE_RANG_SOUS_FORME
+		)));
+// Liste complète des rangs utilisés par le plugin
+if (!defined('_TAXONOMIE_RANGS'))
+	define('_TAXONOMIE_RANGS',
+		_TAXONOMIE_RANGS_PARENTS_ESPECE . ':' .	_TAXONOMIE_RANGS_ESPECE_ET_FILS);
 
 
 /**
@@ -86,7 +114,7 @@ function lister_regnes() {
 
 /**
  * Liste dans un tableau les rangs taxonomiques supportés par le plugin, à savoir:
- * kingdom, phylum, class, order, family, genus et specie.
+ * kingdom, phylum, class, order, family, genus et species.
  * Les règnes sont exprimés en anglais et écrits en lettres minuscules.
  * La fonction permet d'exclure de la liste les rangs extrêmes kingdom et specie et de choisir
  * entre le rang phylum et son synonyme division.
@@ -104,8 +132,9 @@ function lister_regnes() {
  */
 function lister_rangs($exclure_regne=true, $exclure_espece=true, $regne=_TAXONOMIE_REGNE_ANIMAL) {
 	$exclusions = array();
+	// todo : revoir complètement la fonction les deux listes de rangs
 
-	$rangs = explode(':', _TAXONOMIE_LISTE_RANGS);
+	$rangs = explode(':', _TAXONOMIE_RANGS);
 	if ($exclure_regne)
 		$exclusions[] = _TAXONOMIE_RANG_REGNE;
 	if ($exclure_espece)
@@ -123,8 +152,6 @@ function lister_rangs($exclure_regne=true, $exclure_espece=true, $regne=_TAXONOM
 
 
 function preserver_taxons_edites($regne) {
-	$taxons = array();
-
 	$select = array('tsn', 'nom_commun', 'descriptif');
 	$where = array('regne=' . sql_quote($regne), 'edite=' . sql_quote('oui'));
 	$taxons = sql_allfetsel($select, 'spip_taxons', $where);
