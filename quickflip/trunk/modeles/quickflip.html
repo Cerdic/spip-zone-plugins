@@ -1,0 +1,43 @@
+#SET{tailleimage,#ENV{largeur,400}}
+
+    <BOUCLE_document (DOCUMENTS) {id_document=#ENV{img1}}>
+	[(#SET{width,[(#FICHIER|image_reduire{#GET{tailleimage}}|extraire_attribut{width} )]} )]
+	[(#SET{height,[(#FICHIER|image_reduire{#GET{tailleimage}}|extraire_attribut{height} )]} )]
+    </BOUCLE_document>
+
+<div class="quickflip-wrapper" style="[width:(#GET{width})px;][height:(#GET{height})px;]">
+
+
+<div class="quickflip-verso">
+    <!-- ibis -->
+    <div class="quickflip-image">
+    <BOUCLE_document2 (DOCUMENTS) {id_document=#ENV{img2}}>
+    [(#FICHIER|image_reduire{#GET{tailleimage}})]
+    </BOUCLE_document2>
+    </div>
+
+    <div class="quickflip-lien">
+        <a href="#" class="quickFlipCta">
+            <img src="#CHEMIN{images/coin.png}" alt="" />
+        </a>
+    </div>
+
+</div>
+
+<div class="quickflip-recto">
+    <!-- papillons -->
+    <div class="quickflip-image">
+    <BOUCLE_document1 (DOCUMENTS) {id_document=#ENV{img1}}>
+    [(#FICHIER|image_reduire{#GET{tailleimage}})]
+    </BOUCLE_document1>
+    </div>
+
+    <div class="quickflip-lien">
+        <a href="#" class="quickFlipCta">
+            <img src="#CHEMIN{images/coin.png}" alt="" />
+        </a>
+    </div>
+
+</div>
+
+</div>

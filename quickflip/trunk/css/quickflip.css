@@ -1,0 +1,16 @@
+.quickflip-wrapper{
+    margin: 10px auto;
+}
+.quickflip-image {
+    position: relative;
+    margin:auto;
+}
+.quickflip-lien {
+    position: absolute;
+    top: 0;
+    right:0;
+}
+.quickflip-image img{
+    width: 100%;
+    height: 100%;
+}
