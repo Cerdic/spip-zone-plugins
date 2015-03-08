@@ -1,0 +1,21 @@
+<paquet
+	prefix="urls_par_numero"
+	categorie="statistique"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.17;3.0.*]"
+	logo="img/urls_par_numero.png"
+	documentation="http://contrib.spip.net/4625"
+>
+
+	<nom>Urls par numéro</nom>
+	<credit lien="http://thenounproject.com/term/calculate/36764/">Logo : Mister Pixel</credit>
+	<licence lien="https://www.gnu.org/licenses/gpl-3.0.html">GPL3</licence>
+	<auteur lien='http://www.maieul.net'>Maïeul Rouquette</auteur>
+	
+	<traduire module="paquet-urls_par_numero" reference="fr" />
+	
+	<necessite nom="urls" compatibilite="[1.4.23;1.*.*]" />
+
+
+</paquet>
