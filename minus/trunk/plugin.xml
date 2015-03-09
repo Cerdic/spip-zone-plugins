@@ -2,7 +2,7 @@
 	<prefix>minus</prefix>
 	<nom>Minus !</nom>
 	<categorie>edition</categorie>
-	<version>2.0.1</version>
+	<version>2.0.2</version>
 	<etat>test</etat>
 	<lien>http://contrib.spip.net/Minus-Eviter-les-titres-en-majuscules</lien>
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
@@ -21,7 +21,7 @@
 	  <nom>formulaire_charger</nom> 
 	  <inclure>minus_pipelines.php</inclure>
 	</pipeline>
-    <utilise nom="agenda" />
+    <utilise id="agenda" />
     <traduire module="minus" gestionnaire="salvatore" reference="fr" />
 
 </plugin>
