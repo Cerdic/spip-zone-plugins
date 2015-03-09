@@ -4,7 +4,7 @@
 	<auteur>Yohann Prigent, Fil</auteur>
 	<prefix>spip_suggest</prefix>
 	<fonctions>suggest_fonctions.php</fonctions>
-	<version>4.0.1</version>
+	<version>4.0.2</version>
 	<etat>stable</etat>
 	<icon>images/spip_suggest-64.png</icon>
 	<description>SPIP Suggest permet d'afficher des suggestions pour le formulaire de recherche "&#224; la Google Suggest". Le plugin n&#233;cessite le programme Myisam_fulltext disponible sous licence GPL.</description>
@@ -19,6 +19,6 @@
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.2;3.0.99]" />
 	<necessite id="Fulltext" version="[0.3;[" />
-	<utilise nom="jqueryui" />
+	<utilise id="jqueryui" />
 	<categorie>navigation</categorie>
 </plugin>
