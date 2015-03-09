@@ -18,17 +18,16 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 
 	if (isset($crit->param[0][0])) {
 		$score = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucles[$idb]->id_parent);
-	} else{
+	} else {
 		$score = "'100%'";
-    }
-    if (isset($crit->param[0][1])){
-        $quoi = calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
-        }
-    else{
-        $quoi = '@$Pile[0]["mots"]';
-    }
+	}
 
-	
+	if (isset($crit->param[0][1])) {
+		$quoi = calculer_liste(array($crit->param[0][1]), array(), $boucles, $boucles[$idb]->id_parent);
+	} else {
+		$quoi = '@$Pile[0]["mots"]';
+	}
+
 	$boucle->hash .= '
 	// {MOTS}
 	$prepare_mots = charger_fonction(\'prepare_mots\', \'inc\');
@@ -36,11 +35,12 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 	';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
-	if (!in_array($t, $boucles[$idb]->select))
-	  $boucle->select[]= $t; # pour postgres, neuneu ici
+	if (!in_array($t, $boucles[$idb]->select)) {
+		$boucle->select[]= $t; # pour postgres, neuneu ici
+	}
 
 	$boucle->where[] = "\n\t\t".'$mots_where';
-	if ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri"){
+	if (isset($crit->param[0][2]) and ($crit->param[0][2]->texte == "tri" or $crit->param[0][2]->texte=="!tri")) {
 		$_table = table_objet($boucle->id_table);
 		$objet_delatable=objet_type($_table);
 		$id_objet = id_table_objet($boucle->id_table);
@@ -61,7 +61,7 @@ function critere_mots_dist($idb, &$boucles, $crit,$id_ou_titre=false) {
 		// Pseudo critère "Si"
 		$boucle->hash .= "\n\tif (!isset(\$si_init)) { \$command['si'] = array(); \$si_init = true; }\n";
 		$boucle->hash .= "\t\$command['si'][] = (count($quoi) > '0');";
-		}
+	}
 }
 
 function critere_mots_selon_id_dist($idb, &$boucles, $crit){
