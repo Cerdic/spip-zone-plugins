@@ -36,7 +36,8 @@ version="1.0"[ encoding="(#CHARSET)"]?>[
       </documents></B_doc>            
      <B_auteurs><auteur><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></auteur></B_auteurs> 
 		 <lang>#LANG</lang>
-		 [<logo>#URL_SITE_SPIP/(#LOGO_ARTICLE||extraire_attribut{src})</logo>]
+     [<logo>#URL_SITE_SPIP/(#LOGO_ARTICLE_NORMAL||extraire_attribut{src})</logo>]
+		 [<logosurvol>#URL_SITE_SPIP/(#LOGO_ARTICLE_SURVOL||extraire_attribut{src})</logosurvol>]
      <BOUCLE_list_mot(MOTS){id_article}{type=- spip2spip -}{0,1}>[<keyword>(#TITRE|supprimer_numero|texte_backend)</keyword>]</BOUCLE_list_mot>
      [(#CONFIG{spip2spip/export_mot_article}|oui)
         [(#GET{which_groupe}|find{-1}|oui)<INCLURE{fond=inclure/spip2spip_mot_article}{id_article} />]

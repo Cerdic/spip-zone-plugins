@@ -252,6 +252,7 @@ function spip2spip_syndiquer($id_site, $mode = 'cron')
                                 }
                                 $_lang = $article['lang'];
                                 $_logo = $article['logo'];
+                                $_logosurvol = $article['logosurvol'];
                                 $_id_rubrique = $target;
                                 $_id_secteur = spip2spip_get_id_secteur($target);
                                 $_statut = $import_statut;
@@ -392,6 +393,21 @@ function spip2spip_syndiquer($id_site, $mode = 'cron')
                                         @rename(
                                             _DIR_RACINE . $logo_local,
                                             _DIR_RACINE . $logo_local_dest
+                                        );
+                                    }
+                                }
+                                // ----------
+                                // ... si logo de survol, tente de l'importer
+                                // ----------
+                                if ($_logosurvol) {
+                                    $logosurvol_local = copie_locale($_logosurvol);
+                                    if ($logosurvol_local) {
+                                        $logosurvol_local_dest = _DIR_IMG
+                                        . "artoff$id_nouvel_article."
+                                        . substr($logosurvol_local, -3);
+                                        @rename(
+                                            _DIR_RACINE . $logosurvol_local,
+                                            _DIR_RACINE . $logosurvol_local_dest
                                         );
                                     }
                                 }
@@ -555,7 +571,7 @@ function analyser_backend_spip2spip($rss){
   include_spip("inc_texte.php"); # pour couper()
     include_spip("inc_filtres.php"); # pour filtrer_entites()
 
-    $xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','trad','date','evenements', 'lang','logo','keyword','mots','licence','documents');
+    $xml_tags = array('surtitre','titre','soustitre','descriptif','chapo','texte','ps','auteur','link','trad','date','evenements', 'lang','logo','logosurvol','keyword','mots','licence','documents');
 
     $syndic_regexp = array(
                 'item'           => ',<item[>[:space:]],i',
@@ -573,13 +589,13 @@ function analyser_backend_spip2spip($rss){
                 'trad'           => ',<trad[^>]*>(.*?)</trad[^>]*>,ims',
                 'date'           => ',<date[^>]*>(.*?)</date[^>]*>,ims',
                 'evenements'     => ',<evenements[^>]*>(.*?)</evenements[^>]*>,ims',
-        'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
-        'logo'           => ',<logo[^>]*>(.*?)</logo[^>]*>,ims',
-        'keyword'        => ',<keyword[^>]*>(.*?)</keyword[^>]*>,ims',
-        'mots'           => ',<mots[^>]*>(.*?)</mots[^>]*>,ims',
-        'licence'        => ',<licence[^>]*>(.*?)</licence[^>]*>,ims',
-        'documents'      => ',<documents[^>]*>(.*?)</documents[^>]*>,ims',
-
+                'lang'           => ',<lang[^>]*>(.*?)</lang[^>]*>,ims',
+                'logo'           => ',<logo[^>]*>(.*?)</logo[^>]*>,ims',
+                'logosurvol'     => ',<logosurvol[^>]*>(.*?)</logosurvol[^>]*>,ims',
+                'keyword'        => ',<keyword[^>]*>(.*?)</keyword[^>]*>,ims',
+                'mots'           => ',<mots[^>]*>(.*?)</mots[^>]*>,ims',
+                'licence'        => ',<licence[^>]*>(.*?)</licence[^>]*>,ims',
+                'documents'      => ',<documents[^>]*>(.*?)</documents[^>]*>,ims',
     );
 
     // documents
