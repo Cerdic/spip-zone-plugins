@@ -1,7 +1,5 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 ff=unix fenc=utf8: */
-
 /**
  * Génération d'article SPIP au format PDF
  *
@@ -14,6 +12,8 @@
  * @license      GPL Gnu Public Licence
  * @version      0.2
  */
+ 
+if (!defined('_ECRIRE_INC_VERSION')) return; 
 
 // Options pour les marges des PDF, valables seulement pour la librairie mPDF
 // définissez vos options par défaut directement dans votre mes_options.php
@@ -159,6 +159,7 @@ function spipdf_remplaceCaption($matches){
 }
 
 function spipdf_nettoyer_html($html, $params_pdf = array()){
+
 	// supprimer les spans autour des images et récupérer le placement
 	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*float:(.*);.*>(.*)<\/span>/iUms';
 	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceSpan' : 'spipdf_remplaceSpan_wfloat', $html);
@@ -170,15 +171,13 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 	// supprimer les dl autour des images et récupérer le placement
 	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*float:(.*);.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
 	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceDt' : 'spipdf_remplaceDt_wfloat', $html);
-
 	// replacer id par name pour les notes
-	$patterns_note = '/<a.*href.*class=\'spip_note\'.*>/iUms';
+	$patterns_note = '/<a[^>]*href[^>]*class=\'spip_note\'[^>]*>/iUms';
 	$html = preg_replace_callback($patterns_note, 'spipdf_remplaceIdParName', $html);
 
-	// float sur les puces graphiques TODO
-	$patterns_puce = '/<a.*href.*class=\'puce\'.*>/iUms';
-	//$html = preg_replace_callback($patterns_puce, 'spipdf_remplaceFloatPuce', $html);
-	//img src="local/cache-vignettes/L8xH11/puce-32883.gif" class="puce" alt="-" style="height: 11px; width: 8px;" height="11" width="8">
+	// float sur les puces graphiques
+	$patterns_puce = '/<img[^>]*class=[\'"]puce[\'"] alt=[\'"]-[\'"][^>]*>/iUms';
+	$html = preg_replace($patterns_puce, '-', $html);
 
 	// supprimer les dl autour des images centrer
 	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
@@ -192,6 +191,10 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 
 	// tableaux centré
 	$html = preg_replace('/<table/iUms', '<table align="center"', $html);
+  
+  // balise cadre 
+  $patterns_cadre = '/<textarea[^>]*class=[\'"]spip_cadre[\'"] [^>]*>(.*)<\/textarea>/iUms';
+	$html = preg_replace($patterns_cadre, '<div class="spip_cadre">$2</div>', $html);
 
 	// gestion des caractères spéciaux et de charset
 	$html = spipdf_first_clean($html);
@@ -209,11 +212,7 @@ function traite_balise_page($html){
 		if (!empty($matches[1])){
 			$balise_page = $matches[1];
 			$pattern = '/(.*)="(.*)"/iUms';
-			function getBalise($matches){
-				$matches[2] = str_replace('mm', '', $matches[2]);
-				$GLOBALS['valeurs_page'][trim($matches[1])] = trim($matches[2]);
-			}
-
+            getBalise($matches);
 			$balise_page = preg_replace_callback($pattern, 'getBalise', $balise_page);
 
 			// supprimer <page> et </page>
@@ -228,10 +227,12 @@ function traite_balise_page($html){
 
 }
 
-// supprimer le puces graphiques (d'après le plugin couteau suisse)
-function spipdf_pre_typo($texte){
-	return preg_replace('/^-\s*(?![-*#])/m', '-* ', $texte);
+//On sort cette fonction de la fonction traite_balise_page
+function getBalise($matches){
+	$matches[2] = str_replace('mm', '', $matches[2]);
+	$GLOBALS['valeurs_page'][trim($matches[1])] = trim($matches[2]);
 }
+
 
 // traitement principal. avec ce pipeline, le PDF est mis en cache et recalculé "normalement"
 function spipdf_html2pdf($html){
@@ -407,4 +408,15 @@ function spipdf_affichage_final($texte){
 	return $texte;
 }
 
+/**
+ * Ne pas permettre d'aller chercher un fond en sous-repertoire dans spipdf.html
+ * @param $fond
+ * @return mixed
+ */
+function spipdf_securise_fond($fond){
+	$fond = str_replace("/","_",$fond);
+	$fond = str_replace("\\","_",$fond);
+
+	return $fond;
+}
 ?>
