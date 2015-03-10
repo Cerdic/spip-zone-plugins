@@ -73,7 +73,7 @@ class SpipSourcesIndexer {
             'last' => array(
                 'sourceClass' => '',
                 'source'      => 0,
-                'part'        => 0,
+                'part'        => array(),
                 'documents'   => 0,
                 'time' => array(
                     'documents'   => 0,
@@ -172,13 +172,13 @@ class SpipSourcesIndexer {
         $parts = new \ArrayIterator($source->getParts(1000));
 
         // on se replace à la dernière part renseignée (cas d'une indexation non terminée)
-        if ($stats['last']['part']) {
-            $parts->seek($stats['last']['part']);
+        if (isset($stats['last']['part'][$skey]) && $stats['last']['part'][$skey] > 0) {
+            $parts->seek($stats['last']['part'][$skey]);
         }
 
         while ($parts->valid()) {
             $part = $parts->current();
-            $stats['last']['part'] = $parts->key();
+            $stats['last']['part'][$skey] = $parts->key();
 
             // on regarde s'il reste du temps AVANT d'indexer les 1000 suivants
             if ($this->isTimeout()) {
