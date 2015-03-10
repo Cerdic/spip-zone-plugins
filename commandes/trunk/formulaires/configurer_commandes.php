@@ -24,7 +24,9 @@ function formulaires_configurer_commandes_saisies_dist(){
 	include_spip('commandes_fonctions');
 	include_spip('inc/puce_statut');
 	$config = lire_config('commandes');
-
+	
+	$saisies = array();
+	
 	$choix_expediteurs = array(
 			'webmaster' => _T('commandes:notifications_expediteur_choix_webmaster'),
 			'administrateur' => _T('commandes:notifications_expediteur_choix_administrateur'),
@@ -39,7 +41,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 	foreach (commandes_lister_statuts() as $k=>$v)
 		$statuts[$k] = http_img_pack(statut_image('commande',$k),'')."&nbsp;".$v;
 
-	return array(
+	$saisies = array(
 		array(
 			'saisie' => 'fieldset',
 			'options' => array(
@@ -58,32 +60,38 @@ function formulaires_configurer_commandes_saisies_dist(){
 				)
 			)
 		),
-		array(
-			'saisie' => 'fieldset',
-			'options' => array(
-				'nom' => 'fieldset_notifications',
-				'label' => _T('commandes:notifications_cfg_titre')
-			),
-			'saisies' => array(
-				array(
-					'saisie' => 'explication',
-					'options' => array(
-						'nom' => 'exp1',
-						'texte' => _T('commandes:notifications_explication')
-					)
-				),
-				array(
-					'saisie' => 'oui_non',
-					'options' => array(
-						'nom' => 'activer',
-						'label' => _T('commandes:notifications_activer_label'),
-						'explication' => _T('commandes:notifications_activer_explication'),
-						'defaut' => $config['activer']
-					)
+	);
+	
+	$notifications = array(
+		'saisie' => 'fieldset',
+		'options' => array(
+			'nom' => 'fieldset_notifications',
+			'label' => _T('commandes:notifications_cfg_titre')
+		),
+		'saisies' => array(
+			array(
+				'saisie' => 'explication',
+				'options' => array(
+					'nom' => 'exp1',
+					'texte' => _T('commandes:notifications_explication')
 				)
+			),
+		),
+	);
+	
+	if (defined('_DIR_PLUGIN_NOTIFAVANCEES')) {
+		$notifications['saisies'][] = array(
+			'saisie' => 'oui_non',
+			'options' => array(
+				'nom' => 'activer',
+				'label' => _T('commandes:notifications_activer_label'),
+				'explication' => _T('commandes:notifications_activer_explication'),
+				'defaut' => $config['activer']
 			)
-		),	
-		array(
+		);
+	
+		$saisies[] = $notifications;
+		$saisies[] = array(
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => 'fieldset_notifications_parametres',
@@ -101,7 +109,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 						'defaut' => $config['quand']
 					)
 				),
-				
+	
 				array(
 					'saisie' => 'selection',
 					'options' => array(
@@ -113,7 +121,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 						'datas' => $choix_expediteurs
 					)
 				),
-				
+	
 				array(
 					'saisie' => 'auteurs',
 					'options' => array(
@@ -186,7 +194,7 @@ function formulaires_configurer_commandes_saisies_dist(){
 						'afficher_si' => '@vendeur@ == "administrateur"',
 					)
 				),
-				
+	
 				array(
 					'saisie' => 'input',
 					'options' => array(
@@ -207,44 +215,50 @@ function formulaires_configurer_commandes_saisies_dist(){
 					)
 				)
 			)
+		);
+	}
+	else {
+		$saisies[] = $notifications;
+	}
+		
+	$saisies[] = array(
+		'saisie' => 'fieldset',
+		'options' => array(
+			'nom' => 'fieldset_statuts_actifs_parametres',
+			'label' => _T('commandes:titre_statuts_actifs_parametres'),
 		),
-		array(
-			'saisie' => 'fieldset',
-			'options' => array(
-				'nom' => 'fieldset_statuts_actifs_parametres',
-				'label' => _T('commandes:titre_statuts_actifs_parametres'),
+		'saisies' => array(
+			array(
+				'saisie' => 'explication',
+				'options' => array(
+					'nom' => 'explication_statuts_actifs',
+					'texte' => _T('commandes:explication_statuts_actifs'),
+				)
 			),
-			'saisies' => array(
-				array(
-					'saisie' => 'explication',
-					'options' => array(
-						'nom' => 'explication_statuts_actifs',
-						'texte' => _T('commandes:explication_statuts_actifs'),
-					)
-				),
-				array(
-					'saisie' => 'oui_non',
-					'options' => array(
-						'nom' => 'accueil_encours',
-						'label' => _T('commandes:notifications_activer_label'),
-						'explication' => _T('commandes:explication_accueil_encours'),
-						'defaut' => $config['accueil_encours'],
-					)
-				),
-				array(
-					'saisie' => 'checkbox',
-					'options' => array(
-						'nom' => 'statuts_actifs',
-						'label' => _T('commandes:label_statuts_actifs'),
-						'datas' => $statuts,
-						'defaut' => $config['statuts_actifs'],
-						'explication' => _T('commandes:explication_choix_statuts_actifs'),
-						'afficher_si' => '@accueil_encours@ == "on"'
-					)
+			array(
+				'saisie' => 'oui_non',
+				'options' => array(
+					'nom' => 'accueil_encours',
+					'label' => _T('commandes:notifications_activer_label'),
+					'explication' => _T('commandes:explication_accueil_encours'),
+					'defaut' => $config['accueil_encours'],
+				)
+			),
+			array(
+				'saisie' => 'checkbox',
+				'options' => array(
+					'nom' => 'statuts_actifs',
+					'label' => _T('commandes:label_statuts_actifs'),
+					'datas' => $statuts,
+					'defaut' => $config['statuts_actifs'],
+					'explication' => _T('commandes:explication_choix_statuts_actifs'),
+					'afficher_si' => '@accueil_encours@ == "on"'
 				)
 			)
 		)
 	);
+	
+	return $saisies;
 }
 
 ?>

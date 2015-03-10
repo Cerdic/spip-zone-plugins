@@ -138,7 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'notifications_expediteur_explication' => 'Choisir l’expéditeur des notifications pour le vendeur et l’acheteur',
 	'notifications_expediteur_label' => 'Expéditeur',
 	'notifications_expediteur_webmaster_label' => 'Choisir un webmestre :',
-	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des commandes : En attente de validation, en cours, envoyée, partiellement payée, payée, retournée, retour partiel. Cette fonctionnalité nécessite le plugin Notifications Avancées.',
+	'notifications_explication' => 'Les notifications permettent d’envoyer des emails suite aux changements de statut des commandes : En attente de validation, en cours, envoyée, partiellement payée, payée, retournée, retour partiel. Cette fonctionnalité nécessite <a href="http://plugins.spip.net/notifavancees.html">le plugin Notifications Avancées</a>.',
 	'notifications_parametres' => 'Paramètres des notifications',
 	'notifications_quand_explication' => 'Quel(s) changement(s) de statut déclenche(nt) l’envoi d’une notification ?',
 	'notifications_quand_label' => 'Déclenchement',
