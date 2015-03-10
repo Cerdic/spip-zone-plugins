@@ -1,5 +1,5 @@
 <paquet
-    prefix="indexer-doc"
+    prefix="indexerdoc"
     categorie="navigation"
     version="0.0.1"
     etat="dev"
@@ -16,7 +16,7 @@
 
     <necessite nom="indexer" compatbilite="[1.1;]" />
 
-    <pipeline nom="indexer_sources" inclure="indexer-doc_pipelines.php" />
+    <pipeline nom="indexer_sources" inclure="indexerdoc_pipelines.php" />
 
     <licence>GNU/GPL</licence>
 

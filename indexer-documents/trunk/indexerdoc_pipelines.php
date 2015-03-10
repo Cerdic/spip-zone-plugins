@@ -8,7 +8,7 @@ $loader = new \Composer\Autoload\ClassLoader();
 // register classes with namespaces
 $loader->add('Indexer', _DIR_PLUGIN_INDEXER . 'lib');
 $loader->add('Sphinx',  _DIR_PLUGIN_INDEXER . 'lib');
-$loader->addPsr4('Spip\\Indexer\\Sources\\',  _DIR_PLUGIN_INDEXER-DOC . 'Sources');
+$loader->addPsr4('Spip\\Indexer\\Sources\\',  _DIR_PLUGIN_INDEXERDOC . 'Sources');
 
 $loader->register();
 
@@ -20,7 +20,7 @@ $loader->register();
  * @param $sources les sources déjà déclarées pour indexer
  * @return Sources Retourne le flux du pipeline complété
  */
-function indexer-doc_indexer_sources($sources) {
+function indexerdoc_indexer_sources($sources) {
 
     if (is_null($sources)){
 		// On crée la liste des sources
