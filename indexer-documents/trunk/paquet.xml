@@ -14,6 +14,10 @@
     <auteur>Fil</auteur>
     <auteur>Azerttyu</auteur>
 
+    <necessite nom="indexer" compatbilite="[1.1;]" />
+
+    <pipeline nom="indexer_sources" inclure="indexer-doc_pipelines.php" />
+
     <licence>GNU/GPL</licence>
 
 </paquet>

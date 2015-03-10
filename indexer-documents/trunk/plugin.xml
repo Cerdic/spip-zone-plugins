@@ -16,6 +16,13 @@
     <prefix>indexer-doc</prefix>
 
     <necessite id="SPIP" version="[2.1.0;3.1.99]" />
+    <necessite id="indexer" version="[1.1;]" />
+
+    <pipeline>
+        <nom>indexer_sources</nom>
+        <inclure>indexer-doc_pipelines.php</inclure>
+    </pipeline>
+
     <categorie>navigation</categorie>
 
     <lien>http://contrib.spip.net/Sphinx-Indexer</lien>
