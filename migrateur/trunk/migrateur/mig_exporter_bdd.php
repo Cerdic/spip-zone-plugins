@@ -41,9 +41,13 @@ function migrateur_mig_exporter_bdd() {
 			if ($source->sql->login_path) {
 				migrateur_log("Connexion avec login-path : {$source->sql->login_path}");
 				$identifiants = "--login-path={$source->sql->login_path}";
-			} else {
+			} elseif ($source->sql->user and $source->sql->pass) {
 				migrateur_log("Connexion avec user (et mot de passe) : {$source->sql->user}");
 				$identifiants = "-u {$source->sql->user} --password={$source->sql->pass}";
+			} else {
+				migrateur_log("/!\ Erreur de configuration : aucun 'login-path' ou couple 'user/password' défini pour se connecter à la base de données.");
+				migrateur_log("/!\ Vérifiez les constantes de configuration.");
+				return;
 			}
 
 			$run = "$connexion \"$cmd $identifiants {$source->sql->bdd} $compression\" > $_sauvegarde 2>&1";
@@ -91,9 +95,13 @@ function migrateur_mig_exporter_bdd() {
 			if ($source->sql->login_path) {
 				migrateur_log("Connexion avec login-path : {$source->sql->login_path}");
 				$identifiants = "--login-path={$source->sql->login_path}";
-			} else {
+			} elseif ($source->sql->user and $source->sql->pass) {
 				migrateur_log("Connexion avec user (et mot de passe) : {$source->sql->user}");
 				$identifiants = "-u {$source->sql->user} --password={$source->sql->pass}";
+			} else {
+				migrateur_log("/!\ Erreur de configuration : aucun 'login-path' ou couple 'user/password' défini pour se connecter à la base de données.");
+				migrateur_log("/!\ Vérifiez les constantes de configuration.");
+				return;
 			}
 
 			exec("$cmd $identifiants {$source->sql->bdd} > $sauvegarde 2>&1", $output, $err);
