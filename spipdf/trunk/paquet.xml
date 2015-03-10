@@ -3,10 +3,9 @@
 	categorie="edition"
 	version="1.0.0"
 	etat="test"
-    compatibilite="[3.0.0;3.0.*]"
+  compatibilite="[3.0.0;3.0.*]"
 	logo="spipdf.png"
-    documentation="http://contrib.spip.net/spiPDF-v0-2-0-generer-des-contenus-sur-mesure-en-PDF"
-	schema="2012072001"
+  documentation="http://contrib.spip.net/3719"
 >	
 
 	<nom>SpiPDF</nom>
@@ -14,8 +13,5 @@
 	<auteur lien="http://www.grafactory.net" mail="yvestanSANSPAM@gmail.com">Yves Tannier</auteur>
 	<licence lien="http://www.gnu.org/licenses/lgpl.html">LGPL</licence>
 
-	<pipeline nom="pre_typo" inclure="spipdf.php" />
-	<pipeline nom="recuperer_fond" inclure="spipdf.php" />
-	<pipeline nom="affichage_final" inclure="spipdf.php" />
-
+	<pipeline nom="affichage_final" inclure="spipdf_fonctions.php" />
 </paquet>
