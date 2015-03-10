@@ -14,7 +14,7 @@ function migrateur_mig_rsync_img() {
 
 	$cmd = $dest->commande('rsync');
 	if ($cmd) {
-		$cmd = "$cmd -a --delete --stats";
+		$cmd = "$cmd -a -O --delete --stats";
 
 		// source et destination sur serveurs différents
 		if ($ssh = $source->ssh) {
