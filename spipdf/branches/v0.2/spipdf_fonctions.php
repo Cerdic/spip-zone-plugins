@@ -1,7 +1,5 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 ff=unix fenc=utf8: */
-
 /**
  * Génération d'article SPIP au format PDF
  *
@@ -14,6 +12,8 @@
  * @license      GPL Gnu Public Licence
  * @version      0.2
  */
+ 
+if (!defined('_ECRIRE_INC_VERSION')) return; 
 
 // Options pour les marges des PDF, valables seulement pour la librairie mPDF
 // définissez vos options par défaut directement dans votre mes_options.php
@@ -191,6 +191,10 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 
 	// tableaux centré
 	$html = preg_replace('/<table/iUms', '<table align="center"', $html);
+  
+  // balise cadre 
+  $patterns_cadre = '/<textarea[^>]*class=[\'"]spip_cadre[\'"] [^>]*>(.*)<\/textarea>/iUms';
+	$html = preg_replace($patterns_cadre, '<div class="spip_cadre">$2</div>', $html);
 
 	// gestion des caractères spéciaux et de charset
 	$html = spipdf_first_clean($html);
