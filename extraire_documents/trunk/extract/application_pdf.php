@@ -21,7 +21,15 @@ function extraire_application_pdf($fichier) {
     $loader->register();
 
     $parser = new \Smalot\PdfParser\Parser();
-    $pdf = $parser->parseFile(_DIR_RACINE.$fichier);
+    //Tenter de lire le pdf
+    try {
+        $pdf = $parser->parseFile(_DIR_RACINE.$fichier);
+    }
+    catch (Exception $e) {
+        //Pour toute exception on s'arrete et on retourne un contenu vide
+        //Les cas de figure sont entre autre les fichiers mal formés ou signés
+        return "";
+    }
 
     // Parcourir les pages et extraire le contenu textuel
     foreach ($pdf->getPages() as $page) {
