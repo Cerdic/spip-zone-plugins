@@ -1,0 +1,22 @@
+<plugin>
+    <nom>Extracteurs Documents</nom>
+    <slogan>Extraire le contenu des documents</slogan>
+
+	<auteur>Fil</auteur>
+	<auteur>Gael Chareyre</auteur>
+	<auteur>Azerttyu</auteur>
+
+    <icon></icon>
+
+    <licence>GNU/GPL</licence>
+    <version>0.0.1</version>
+    <etat>dev</etat>
+    <description>Extraire le contenu des documents </description>
+    <prefix>extrairedoc</prefix>
+
+    <necessite id="SPIP" version="[2.1.0;3.1.99]" />
+
+    <categorie>navigation</categorie>
+
+    <lien></lien>
+</plugin>
