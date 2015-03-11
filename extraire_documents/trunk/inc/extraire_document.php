@@ -40,5 +40,15 @@ function inc_extraire_document($id_document = 0) {
     }
     finfo_close($finfo);
 
-    return array('mime-type' => $mime);
+    //Extraire le contenu selon le mimetype
+    include_spip('extract/'.str_replace('/','_',$mime));
+
+    $contenu = false;
+    if (function_exists($extraire = "extraire_".str_replace('/','_',$mime)))
+        $contenu = $extraire($fichier);
+
+    return array(
+        'mime-type' => $mime,
+        'contenu' => $contenu
+    );
 }
