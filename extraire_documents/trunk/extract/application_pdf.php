@@ -23,6 +23,7 @@ function extraire_application_pdf($fichier) {
     $parser = new \Smalot\PdfParser\Parser();
     //Tenter de lire le pdf
     try {
+        set_time_limit (0);
         $pdf = $parser->parseFile(_DIR_RACINE.$fichier);
     }
     catch (Exception $e) {
