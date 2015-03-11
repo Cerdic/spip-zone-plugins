@@ -27,8 +27,17 @@ function inc_extraire_document($id_document = 0) {
     //Déterminer le format MIME pour définir le bon extracteur
     //Pour PHP < 5.3, il faut installer la PECL http://pecl.php.net/package/Fileinfo
     //Pour PHP >= 5.3, c'est chargé en natif
-    $finfo = finfo_open(FILEINFO_MIME_TYPE); // Demande le mime type
+
+    //Determiner les mime type non standard comme les vnd (docx, ....)
+    //http://fr.wikipedia.org/wiki/Type_MIME
+    $finfo = finfo_open(FILEINFO_MIME_TYPE,_DIR_PLUGIN_EXTRAIREDOC."finfo/magic"); // Demande le mime type
     $mime = finfo_file($finfo, _DIR_RACINE.$fichier);
+
+    //Si on ne reconnait pas le mime type, on teste sur la base par défaut
+    if ($mime == "application/octet-stream") {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE); // Demande le mime type
+        $mime = finfo_file($finfo, _DIR_RACINE.$fichier);
+    }
     finfo_close($finfo);
 
     return array('mime-type' => $mime);
