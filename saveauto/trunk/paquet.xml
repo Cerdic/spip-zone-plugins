@@ -1,9 +1,9 @@
 <paquet
 	prefix="saveauto"
 	categorie="maintenance"
-	version="1.1.7"
+	version="1.2.0"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/saveauto-24.png"
 	schema="0.1.2"
 	documentation="http://contrib.spip.net/Le-plugin-saveauto-sauvegarde"

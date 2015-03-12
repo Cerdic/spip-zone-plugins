@@ -112,11 +112,11 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 					$contenu .= "DROP TABLE IF EXISTS `$_table`;\n"."\n";
 					// requete de creation de la table
 					$query = "SHOW CREATE TABLE $_table";
-					$resCreate = mysql_query($query);
+					$resCreate = sql_query($query);
 					if ($resCreate) {
-						$row = mysql_fetch_array($resCreate);
+						$row = sql_fetch($resCreate);
 						if ($row) {
-							$schema = $row[1].";";
+							$schema = $row["Create Table"].";";
 							$contenu .= "$schema\n"."\n";
 						}
 					}
@@ -125,6 +125,7 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 				if ($donnees) {
 					$contenu .= "# "._T('saveauto:info_sql_donnees_table',array('table'=>$_table))."\n";
 					$resData = sql_select('*',$_table);
+					
 					//peut survenir avec la corruption d'une table, on previent
 					if ($connect_statut == "0minirezo" && (!$resData)) {
 						$erreur .= _T('saveauto:erreur_probleme_donnees_corruption',array('table'=>$_table))."<br />";
@@ -133,22 +134,27 @@ function inc_saveauto_dist($tables=array(), $options=array()) {
 						if (sql_count($resData) > 0) {
 							$sFieldnames = "";
 							if ($insertion_complete) {
-								$num_fields = mysql_num_fields($resData);
-								for($j=0; $j < $num_fields; $j++) {
-									$sFieldnames .= "`".mysql_field_name($resData, $j) ."`";
+								$description_table = sql_showtable($_table);
+								$num_fields = count($description_table["field"]);
+								$j = 0;
+								foreach($description_table["field"] as $champ => $desc){
+									$sFieldnames .= "`" .$champ."`";
 									//on ajoute a la fin une virgule si necessaire
 									if ($j<$num_fields-1) $sFieldnames .= ", ";
+									$j++;
 								}
 								$sFieldnames = "($sFieldnames)";
 							}
 							$sInsert = "INSERT INTO `$_table` $sFieldnames values ";
-
-							while($rowdata = mysql_fetch_row($resData)) {
+							while($rowdata = sql_fetch($resData)) {
+								
 								$lesDonnees = "";
-								for ($mp = 0; $mp < $num_fields; $mp++) {
-									$lesDonnees .= "'" . addslashes($rowdata[$mp]) . "'";
+								$j = 0;
+								foreach ($rowdata as $champ=>$valeur) {
+									$lesDonnees .= "'" . addslashes($valeur) . "'";
 									//on ajoute a la fin une virgule si necessaire
-									if ($mp<$num_fields-1) $lesDonnees .= ", ";
+									if ($j<$num_fields-1) $lesDonnees .= ", ";
+									$j++;
 								}
 								$lesDonnees = "$sInsert($lesDonnees);";
 								$contenu .= "$lesDonnees"."\n";
@@ -233,14 +239,15 @@ function creer_zip($chemin_source, $fichier_final, $dir_dump, $options=array()) 
 function informer_mysql_version() {
    $result = sql_query('SELECT VERSION() AS version');
    if ($result != FALSE && sql_count($result) > 0) {
-      $row = mysql_fetch_array($result);
+      $row = sql_fetch($result);
+	  var_dump($row);
       $match = explode('.', $row['version']);
    }
    else {
       $result = sql_query('SHOW VARIABLES LIKE \'version\'');
       if ($result != FALSE && sql_count($result) > 0) {
-         $row = mysql_fetch_row($result);
-         $match = explode('.', $row[1]);
+         $row = sql_fetch($result);
+         $match = explode('.', $row["Value"]);
       }
    }
 
