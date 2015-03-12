@@ -6,9 +6,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function zotero_url($params) {
 	include_spip('inc/config');
 	if (strpos($params,'?'))
-		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'&key='.lire_config('zotspip/api_key');
+		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'&v=2&key='.lire_config('zotspip/api_key');
 	else
-		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'?key='.lire_config('zotspip/api_key');
+		return 'https://api.zotero.org/'.lire_config('zotspip/type_librairie').'s/'.lire_config('zotspip/id_librairie').'/'.$params.'?v=2&ey='.lire_config('zotspip/api_key');
 }
 
 
