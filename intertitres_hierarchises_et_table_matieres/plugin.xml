@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Intertitres hi&#233;rarchis&#233;s et table des mati&#232;res</nom>
 	<slogan>G&#233;n&#233;rer automatiquement une table des mati&#232;res</slogan>
-	<version>0.9.6</version>
+	<version>0.9.7</version>
 	<prefix>IntertitresTdm</prefix>
 	<etat>test</etat>
 	<auteur>Mortimer, Chtitux, Beurt pour la mise en plugin, Paladin pour les ancres nomm&#233;es</auteur>
@@ -30,5 +30,5 @@
 	</pipeline>
 	<fonctions>intertitres_tdm_fonctions.php</fonctions>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 </plugin>
