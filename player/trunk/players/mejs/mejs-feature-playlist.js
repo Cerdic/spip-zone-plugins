@@ -275,6 +275,7 @@
     },
     playTrack: function(track) {
       var t = this;
+	    t.options.duration=0;
       t.pause();
       t.setSrc(track.attr('data-url'));
       t.load();
