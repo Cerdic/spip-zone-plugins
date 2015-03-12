@@ -71,8 +71,18 @@ function abonnements_post_edition($flux){
 		
 		// S'il le statut est "prepa" c'est une création et on doit changer ça
 		// car pour l'instant SPIP ne permet pas de déclarer le statut par défaut !
-		if ($abonnement['statut'] == 'prepa'){
+		if ($abonnement['statut'] == 'prepa') {
 			$modifs['statut'] = 'actif';
+		}
+		// Si on a mis l'abonnement à la poubelle, on doit enlever les tâches liées
+		elseif ($abonnement['statut'] == 'poubelle') {
+			$liens = objet_trouver_liens(array('job' => '*'), array('abonnement' => $abonnement['id_abonnement']));
+			if ($liens and is_array($liens)){
+				// Et on les supprime toutes !
+				foreach ($liens as $lien){
+					job_queue_remove($lien['id_job']);
+				}
+			}
 		}
 		
 		// S'il y a des modifs à faire on appelle l'API de modif
