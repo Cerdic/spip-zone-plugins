@@ -60,17 +60,20 @@ function formulaires_editer_rezosocio_verifier_dist($id_rezosocio='new', $id_par
 	// verifier qu'un rezosocio du meme groupe n'existe pas avec le meme titre
 	// la comparaison accepte un numero absent ou different
 	// sinon avertir
-	
-	if (sql_countsel("spip_rezosocios", 
+	spip_log($id_rezosocio, 'test.' . _LOG_ERREUR);
+	spip_log(_request('type_rezo'), 'test.' . _LOG_ERREUR);
+
+	if (sql_countsel('spip_rezosocios', 
 					"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero(_request('titre')))."$")
-					." AND id_rezosocio<>".intval($id_rezosocio)))
+					." AND id_rezosocio<>".intval($id_rezosocio)." AND type_rezo=" . _request('type_rezo')))
 		$erreurs['titre'] =
 					_T('rezosocios:avis_doublon_rezosocio_cle')
 					." <input type='hidden' name='confirm_titre_rezosocio' value='1' />";
 	
-	if(sql_countsel("spip_rezosocios",'url_site ='.sql_quote(_request('url_site')))){
-		$erreurs['url_site'] = _T('rezosocios:erreur_url_utilisee');
+	if(sql_countsel('spip_rezosocios', 'nom_compte ='.sql_quote(_request('nom_compte')).' AND type_rezo=' . _request('type_rezo'))){
+		$erreurs['nom_compte'] = _T('rezosocios:erreur_url_utilisee');
 	}
+	spip_log($erreurs, 'test.' . _LOG_ERREUR);
 	return $erreurs;
 }
 
@@ -80,6 +83,8 @@ function formulaires_editer_rezosocio_traiter_dist($id_rezosocio='new', $id_pare
 	set_request('redirect','');
 	$action_editer = charger_fonction("editer_rezosocio",'action');
 	list($id_rezosocio,$err) = $action_editer();
+	spip_log($err, 'test.' . _LOG_ERREUR);
+	spip_log($flux['args']['form'], 'test.' . _LOG_ERREUR);
 	if ($err){
 		$res['message_erreur'] = $err;
 	}
@@ -110,11 +115,12 @@ function formulaires_editer_rezosocio_traiter_dist($id_rezosocio='new', $id_pare
 				include_spip('action/editer_rezosocio');
 				rezosocio_associer($id_rezosocio, array($objet=>$id_objet));
 				if (isset($res['redirect']))
-					$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_rezosocio, '&');
+					$res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_rezosocio, '&');
 			}
 		}
 
 	}
+	spip_log($res, 'test.' . _LOG_ERREUR);
 	return $res;
 }
 

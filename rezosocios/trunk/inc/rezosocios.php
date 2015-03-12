@@ -1,6 +1,5 @@
 <?php
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function rezosocios_liste(){
@@ -14,7 +13,8 @@ function rezosocios_liste(){
 					'flickr' => 'Flickr',
 					'storify' => 'Storify',
 					'linkedin' => 'Linkedin',
-					'weibo' => 'Weibo'
+					'weibo' => 'Weibo',
+					'VK' => 'VK',
 				);
 	
 	return $rezosocios;
