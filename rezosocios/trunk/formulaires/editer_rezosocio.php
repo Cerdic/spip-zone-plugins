@@ -57,12 +57,9 @@ function rezosocios_edit_config($row)
 function formulaires_editer_rezosocio_verifier_dist($id_rezosocio='new', $id_parent=null, $retour='', $associer_objet='', $config_fonc='rezosocios_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('rezosocio',$id_rezosocio,array('titre'));
-	// verifier qu'un rezosocio du meme groupe n'existe pas avec le meme titre
+	// verifier qu'un rezosocio n'existe pas avec le meme titre
 	// la comparaison accepte un numero absent ou different
 	// sinon avertir
-	spip_log($id_rezosocio, 'test.' . _LOG_ERREUR);
-	spip_log(_request('type_rezo'), 'test.' . _LOG_ERREUR);
-
 	if (sql_countsel('spip_rezosocios', 
 					"titre REGEXP ".sql_quote("^([0-9]+[.] )?".preg_quote(supprimer_numero(_request('titre')))."$")
 					." AND id_rezosocio<>".intval($id_rezosocio)." AND type_rezo=" . _request('type_rezo')))
@@ -73,7 +70,7 @@ function formulaires_editer_rezosocio_verifier_dist($id_rezosocio='new', $id_par
 	if(sql_countsel('spip_rezosocios', 'nom_compte ='.sql_quote(_request('nom_compte')).' AND type_rezo=' . _request('type_rezo'))){
 		$erreurs['nom_compte'] = _T('rezosocios:erreur_url_utilisee');
 	}
-	spip_log($erreurs, 'test.' . _LOG_ERREUR);
+
 	return $erreurs;
 }
 
@@ -83,8 +80,7 @@ function formulaires_editer_rezosocio_traiter_dist($id_rezosocio='new', $id_pare
 	set_request('redirect','');
 	$action_editer = charger_fonction("editer_rezosocio",'action');
 	list($id_rezosocio,$err) = $action_editer();
-	spip_log($err, 'test.' . _LOG_ERREUR);
-	spip_log($flux['args']['form'], 'test.' . _LOG_ERREUR);
+
 	if ($err){
 		$res['message_erreur'] = $err;
 	}
@@ -120,7 +116,7 @@ function formulaires_editer_rezosocio_traiter_dist($id_rezosocio='new', $id_pare
 		}
 
 	}
-	spip_log($res, 'test.' . _LOG_ERREUR);
+
 	return $res;
 }
 
