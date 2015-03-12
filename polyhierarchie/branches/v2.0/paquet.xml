@@ -1,9 +1,9 @@
 <paquet
 	prefix="polyhier"
 	categorie="navigation"
-	version="2.0.8"
+	version="2.0.9"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/polyhier-32.png"
 	schema="0.1.0"
 	documentation="http://contrib.spip.net/Polyhierarchie"
