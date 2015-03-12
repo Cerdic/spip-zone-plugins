@@ -3,7 +3,7 @@
 	<prefix>typo_guillemets</prefix>
 	<icon>icon/typo_guillemets.png</icon>
 	
-	<version>1.5.1</version>
+	<version>1.5.2</version>
 	<etat>stable</etat>
 	<categorie>edition</categorie>
 	
@@ -25,5 +25,5 @@
 		<inclure>typo_guillemets_fonctions.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 </plugin>
