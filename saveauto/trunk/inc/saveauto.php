@@ -240,7 +240,6 @@ function informer_mysql_version() {
    $result = sql_query('SELECT VERSION() AS version');
    if ($result != FALSE && sql_count($result) > 0) {
       $row = sql_fetch($result);
-	  var_dump($row);
       $match = explode('.', $row['version']);
    }
    else {
