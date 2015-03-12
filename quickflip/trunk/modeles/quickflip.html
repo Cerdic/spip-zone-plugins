@@ -9,12 +9,21 @@
 
 
 <div class="quickflip-verso">
-    <!-- ibis -->
+
+    <BOUCLE_document2 (DOCUMENTS) {si #ENV{img2}|oui} {id_document=#ENV{img2}}>
     <div class="quickflip-image">
-    <BOUCLE_document2 (DOCUMENTS) {id_document=#ENV{img2}}>
     [(#FICHIER|image_reduire{#GET{tailleimage}})]
-    </BOUCLE_document2>
     </div>
+    </BOUCLE_document2>
+
+    <BOUCLE_document3 (DOCUMENTS) {si #ENV{img2}|non} {id_document=#ENV{img1}}>
+    <div class="quickflip-texte" style="[width:(#GET{width}|moins{4})px;][height:(#GET{height})px;]">
+        [<div class="quickflip-titre">(#TITRE)</div>]
+        [<div class="quickflip-descriptif">(#DESCRIPTIF)</div>]
+        [<div class="quickflip-licence" style="[width:(#GET{width}|moins{4})px;]">(#LICENCE)</div>]
+        [<div class="quickflip-credits" style="[width:(#GET{width}|moins{4})px;]"><span class="quickflip-credits-texte">Crédits : (#CREDITS)</span></div>]
+    </div>
+    </BOUCLE_document3>
 
     <div class="quickflip-lien">
         <a href="#" class="quickFlipCta">
@@ -25,7 +34,6 @@
 </div>
 
 <div class="quickflip-recto">
-    <!-- papillons -->
     <div class="quickflip-image">
     <BOUCLE_document1 (DOCUMENTS) {id_document=#ENV{img1}}>
     [(#FICHIER|image_reduire{#GET{tailleimage}})]
