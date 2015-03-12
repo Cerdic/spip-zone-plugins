@@ -1,9 +1,9 @@
 <paquet
 	prefix="extrairedoc"
 	categorie="navigation"
-	version="0.0.2"
+	version="0.0.3"
 	etat="test"
-	compatibilite="[3.0.1;3.1.*]"
+	compatibilite="[2.1.0;3.1.*]"
 	logo=""
 	documentation=""
 >
