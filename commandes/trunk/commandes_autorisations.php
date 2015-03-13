@@ -89,8 +89,7 @@ function autoriser_commande_supprimer_dist($faire, $type, $id, $qui, $opts) {
 /**
  * Autorisation à supprimer un détail d'une commande
  *
- * - l'auteur de la commande 
- * - admin (mais pas restreint)
+ * - par défaut la même chose que pour modifier la commande
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -100,17 +99,15 @@ function autoriser_commande_supprimer_dist($faire, $type, $id, $qui, $opts) {
  * @return bool          true s'il a le droit, false sinon
 **/ 
 function autoriser_commande_supprimerdetail_dist($faire, $type, $id, $qui, $opts) {
-	return
-		$qui['id_auteur'] == sql_getfetsel('id_auteur', table_objet_sql('commande'), "id_commande=".intval($id))
-		OR ( $qui['statut'] == '0minirezo' AND !$qui['restreint'] );
+	return autoriser('modifier', 'commande', $id, $qui, $opts);
 }
 
 
 /**
  * Autorisation à modifier une commande
  *
- * - l'auteur de la commande
- * - admin (mais pas restreint)
+ * - l'auteur de la commande si celle-ci est encore "encours"
+ * - sinon admin (mais pas restreint)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -120,10 +117,20 @@ function autoriser_commande_supprimerdetail_dist($faire, $type, $id, $qui, $opts
  * @return bool          true s'il a le droit, false sinon
 **/ 
 function autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts) {
-	return
-		$qui['id_auteur'] == sql_getfetsel('id_auteur', 'spip_commandes', 'id_commande = '.sql_quote($id)) OR 
-			( $qui['statut'] == '0minirezo'
-			 AND !$qui['restreint'] );
+	$infos_commande = sql_getfetsel('id_auteur, statut', table_objet_sql('commande'), "id_commande=".intval($id));
+	
+	if (
+		$infos_commande
+		and (
+			($infos_commande['statut'] == 'encours' and $qui['id_auteur'] == $infos_commande['id_auteur'])
+			or
+			($qui['statut'] == '0minirezo' and !$qui['restreint'])
+		)
+	) {
+		return true;
+	}
+	
+	return false;
 }
 
 
@@ -140,7 +147,7 @@ function autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts) {
  * @return bool          true s'il a le droit, false sinon
 **/ 
 function autoriser_commande_dater_dist($faire, $type, $id, $qui, $opts) {
-	return autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts);
+	return autoriser('modifier', 'commande', $id, $qui, $opts);
 }
 
 ?>

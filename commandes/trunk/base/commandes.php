@@ -102,6 +102,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			)
 		),
 		'texte_changer_statut'        => 'commandes:texte_changer_statut_commande',
+		'texte_creer'                 => 'commandes:commande_creer',
 		'texte_objets'                => 'commandes:commandes_titre',
 		'texte_objet'                 => 'commandes:commande_titre',
 		'texte_logo_objet'            => 'commandes:titre_logo_commande',

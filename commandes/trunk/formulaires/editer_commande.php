@@ -27,13 +27,23 @@ include_spip('inc/editer');
  */
 function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 	include_spip('inc/config');
+	// Il est possible de prédéfinir un auteur
+	if (!$id_auteur_defaut = _request('id_auteur')) {
+		$id_auteur_defaut = 0;
+	}
+	// Prégénérer une référence possible
+	if ($fonction_reference = charger_fonction('commandes_reference', 'inc/')) {
+		$reference_defaut = $fonction_reference($id_auteur_defaut);
+	}
+	
 	return array(
 		array(
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'reference',
 				'label' => _T('commandes:reference_label'),
-				'obligatoire' => 'oui'
+				'obligatoire' => 'oui',
+				'defaut' => $reference_defaut,
 			)
 		),
 		array(
@@ -41,7 +51,8 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 			'options' => array(
 				'nom' => 'id_auteur',
 				'label' => _T('commandes:contact_label'),
-				'class' => 'chosen'
+				'class' => 'chosen',
+				'defaut' => $id_auteur_defaut
 			)
 		),
 		array(
@@ -49,7 +60,8 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 			'options' => array(
 				'nom' => 'date',
 				'label' => _T('commandes:date_commande_label'),
-				'horaire' => 'oui'
+				'horaire' => 'oui',
+				'obligatoire' => 'oui',
 			)
 		),
 		array(
@@ -116,7 +128,7 @@ function formulaires_editer_commande_identifier_dist($id_commande='new', $retour
  *     Environnement du formulaire
  */
 function formulaires_editer_commande_charger($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('commande',$id_commande,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$valeurs = formulaires_editer_objet_charger('commande', $id_commande, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 	unset($valeurs['id_commande']); // ?
 	return $valeurs;
 }
@@ -157,7 +169,7 @@ function formulaires_editer_commande_verifier($id_commande='new', $retour='', $l
 		} else {
 			$date = '0000-00-00 00:00:00';
 		}
-		set_request($type_date,$date);
+		set_request($type_date, $date);
 	}
 	return formulaires_editer_objet_verifier('commande', $id_commande, array('reference'));
 }
@@ -185,7 +197,7 @@ function formulaires_editer_commande_verifier($id_commande='new', $retour='', $l
  *     Retours des traitements
  */
 function formulaires_editer_commande_traiter($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('commande',$id_commande,'','',$retour,$config_fonc,$row,$hidden);
+	return formulaires_editer_objet_traiter('commande', $id_commande, '', '', $retour, $config_fonc, $row, $hidden);
 }
 
 
