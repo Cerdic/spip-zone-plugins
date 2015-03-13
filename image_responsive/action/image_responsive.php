@@ -57,7 +57,7 @@ function action_image_responsive() {
 		$expires = 60*60*24*14;
 	
 		if ($xsendfile == 1) {	
-			//$dest = "/var/www/beach-fashion/$dest";
+			$dest = realpath("$dest");
 			//die($dest);
 			header("X-Sendfile: $dest");
 			header("Content-Type: image/".$extension);

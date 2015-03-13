@@ -5,6 +5,7 @@
 
 
 <IfModule xmod_sendfile.c>
+XSendFile on
 RewriteRule (.*)\-resp([0-9]+v?)(\-([0-9\.]+))?\.(jpg|png|gif) index.php?action=image_responsive&img=$1.$5&taille=$2&dpr=$4&xsendfile=1
 </IfModule>
 RewriteRule (.*)\-resp([0-9]+v?)(\-([0-9\.]+))?\.(jpg|png|gif) index.php?action=image_responsive&img=$1.$5&taille=$2&dpr=$4
