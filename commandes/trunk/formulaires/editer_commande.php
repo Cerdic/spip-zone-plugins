@@ -62,6 +62,7 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 				'label' => _T('commandes:date_commande_label'),
 				'horaire' => 'oui',
 				'obligatoire' => 'oui',
+				'defaut' => date('Y-m-d H:i:s'),
 			)
 		),
 		array(
