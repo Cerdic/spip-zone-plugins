@@ -117,7 +117,7 @@ function autoriser_commande_supprimerdetail_dist($faire, $type, $id, $qui, $opts
  * @return bool          true s'il a le droit, false sinon
 **/ 
 function autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts) {
-	$infos_commande = sql_getfetsel('id_auteur, statut', table_objet_sql('commande'), "id_commande=".intval($id));
+	$infos_commande = sql_fetsel('id_auteur, statut', table_objet_sql('commande'), "id_commande=".intval($id));
 	
 	if (
 		$infos_commande
