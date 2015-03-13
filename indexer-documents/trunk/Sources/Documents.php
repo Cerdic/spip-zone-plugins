@@ -40,7 +40,7 @@ class Documents extends SpipDocuments {
 
         return new Document(array(
             'id'           => $this->getObjectId('document', $id),
-            'title'        => supprimer_numero($document['titre']),
+            'title'        => empty($document['titre']) ? $document['fichier'] : supprimer_numero($document['titre']),
             'summary'      => $document['descriptif'],
             'content'      => (!$extraire['contenu']) ? $document['descriptif'] : $extraire['contenu'],
             'date'         => $document['date'],
