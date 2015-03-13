@@ -60,7 +60,7 @@
 				[(#BOUTON_ACTION{#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:lien_supprimer:>}, #URL_ACTION_AUTEUR{supprimer_detail_commande,#ID_COMMANDE/#ID_COMMANDES_DETAIL}, link, <:commandes:confirmer_supprimer_detail:>})]
 				]
 				[(#AUTORISER{modifier,commandes_detail,#ID_COMMANDES_DETAIL}|oui)
-				[<a href="[(#ID_COMMANDES_DETAIL|generer_url_ecrire_entite_edit{commandes_detail})]" title="<:commandes:detail_modifier:>">(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:commandes:detail_modifier:>})</a>]
+				[<a href="[(#ID_COMMANDES_DETAIL|generer_url_ecrire_entite_edit{commandes_detail}|parametre_url{redirect,#ID_COMMANDE|generer_url_entite{commande}})]" title="<:commandes:detail_modifier:>">(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:commandes:detail_modifier:>})</a>]
 				]
 			</td>
 			]
