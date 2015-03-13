@@ -157,6 +157,12 @@ function formulaires_editer_commande_identifier_dist($id_commandes_detail='new',
 function formulaires_editer_commandes_detail_charger($id_commandes_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$valeurs = formulaires_editer_objet_charger('commandes_detail', $id_commandes_detail, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 	unset($valeurs['id_commandes_detail']); // ?
+	
+	// Charger la référence de la commande de ce détail
+	if ($valeurs['id_commande'] > 0) {
+		$valeurs['reference'] = sql_getfetsel('reference', 'spip_commandes', 'id_commande = '.intval($valeurs['id_commande']));
+	}
+	
 	return $valeurs;
 }
 
