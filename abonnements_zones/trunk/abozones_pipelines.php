@@ -25,7 +25,7 @@ function abozones_post_edition($flux){
 	// Lorsqu'un abonnement est créé ou change de statut... et que l'offre est liée à des zones !
 	if (
 		$flux['args']['table'] == 'spip_abonnements'
-		and (($flux['args']['action'] == 'modifier') or ($flux['args']['action'] == 'instituer'))
+		and $flux['args']['action'] == 'instituer'
 		and $id_abonnement = intval($flux['args']['id_objet'])
 		and $abonnement = sql_fetsel('id_abonnements_offre,id_auteur', 'spip_abonnements', 'id_abonnement = '.$id_abonnement)
 		and $id_auteur = $abonnement['id_auteur']
@@ -42,10 +42,11 @@ function abozones_post_edition($flux){
 			$zones[] = $lien['id_zone'];
 		}
 		
-		// Si c'est une activation on ajoute les zones trouvées à l'utilisateur de l'abonnement SANS autorisation
+		// Si c'est une activation (nouveau statut actif, ancien différent)
+		// on ajoute les zones trouvées à l'utilisateur de l'abonnement SANS autorisation
 		if (
-			(($flux['data']['statut'] == 'actif') or !isset($flux['data']['statut']))
-			and !isset($flux['data']['statut_ancien'])						
+			$flux['data']['statut'] == 'actif'
+			and $flux['data']['statut_ancien'] != 'actif'
 		) {
 			autoriser_exception('affecterzones', 'auteur', $id_auteur);
 			zone_lier($zones, 'auteur', $id_auteur);
