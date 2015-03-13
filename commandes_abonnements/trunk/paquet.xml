@@ -1,0 +1,20 @@
+<paquet
+	prefix="commande2abonnement"
+	categorie="divers"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0-dev;3.0.*]"
+	logo="commande2abonnement.png"
+	documentation=""
+>
+	<nom>Commandes d'abonnements</nom>
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<copyright>2015</copyright>
+	<licence>GPL v3</licence>
+
+	<necessite nom="commandes" compatibilite="[1.4.4;]" />
+	<necessite nom="abonnements" compatibilite="[2.2.2;]" />
+	
+	<pipeline nom="post_edition" inclure="commande2abonnement_pipelines.php" />
+</paquet>
