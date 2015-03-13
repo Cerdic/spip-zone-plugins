@@ -13,7 +13,7 @@
 	[(#REM) Contenu détaillé de la commande ]
 	<INCLURE{fond=prive/squelettes/inclure/commande_contenu, id_commande, ajax}>
 	[(#AUTORISER{ajouterdetail, commande, #ID_COMMANDE}|oui)
-		[(#URL_ECRIRE{commandes_detail_edit}|parametre_url{reference,#REFERENCE}|parametre_url{redirect,#ID_COMMANDE|generer_url_entite{commande}}|icone_verticale{<:commandes:detail_ajouter:>, commande-24.png, edit, right})]
+		[(#URL_ECRIRE{commandes_detail_edit}|parametre_url{reference,#REFERENCE}|parametre_url{redirect,#ID_COMMANDE|generer_url_entite{commande}}|icone_verticale{<:commandes:detail_ajouter:>, commandes_detail-24.png, edit, right})]
 		<div class="nettoyeur"></div>
 	]
 
