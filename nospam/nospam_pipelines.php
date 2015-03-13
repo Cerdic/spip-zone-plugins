@@ -19,7 +19,7 @@ if (!defined('_SPAM_ENCRYPT_NAME')) define('_SPAM_ENCRYPT_NAME',false);
 function nospam_lister_formulaires() {
 	if (!isset($GLOBALS['formulaires_no_spam']))
 		$GLOBALS['formulaires_no_spam'] = array();
-	$formulaires = array_merge($GLOBALS['formulaires_no_spam'], array('forum', 'ecrire_auteur', 'signature', 'recommander'));
+	$formulaires = array_merge($GLOBALS['formulaires_no_spam'], array('inscription','forum', 'ecrire_auteur', 'signature', 'recommander'));
 	return pipeline('nospam_lister_formulaires', $formulaires);
 }
 
