@@ -79,13 +79,19 @@ function commande_inserer($id_parent=null, $champs=array()) {
 		if (!$id_auteur = intval($champs['id_auteur'])) {
 			return false; // ? minipress(); ?
 		} 
-
+		
 		// La date de tout de suite
 		$champs['date'] = date('Y-m-d H:i:s');
-
+		
 		// Le statut en cours
 		$champs['statut'] = 'encours';
 
+		// La référence si elle n'est pas déjà donnée
+		if (!isset($champs['reference'])) {
+			$fonction_reference = charger_fonction('commandes_reference', 'inc/');
+			$champs['reference'] = $fonction_reference($champs['id_auteur']);
+		}
+		
 		// Envoyer aux plugins avant insertion
 		$champs = pipeline('pre_insertion',
 			array(

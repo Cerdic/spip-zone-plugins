@@ -43,11 +43,7 @@ function creer_commande_encours(){
 	// Le visiteur en cours
 	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
 
-	// La référence
-	$fonction_reference = charger_fonction('commandes_reference', 'inc/');
-
 	$champs = array(
-		'reference' => $fonction_reference($id_auteur),
 		'id_auteur' => $id_auteur
 	);
 
