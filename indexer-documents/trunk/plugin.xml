@@ -18,6 +18,8 @@
     <necessite id="SPIP" version="[2.1.0;3.1.99]" />
     <necessite id="indexer" version="[1.1;]" />
 
+    <utilise id="extrairedoc" />
+
     <pipeline>
         <nom>indexer_sources</nom>
         <inclure>indexerdoc_pipelines.php</inclure>

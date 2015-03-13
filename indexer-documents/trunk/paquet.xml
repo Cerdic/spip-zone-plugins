@@ -16,6 +16,8 @@
 
     <necessite nom="indexer" compatbilite="[1.1;]" />
 
+    <utilise nom="extrairedoc" />
+
     <pipeline nom="indexer_sources" inclure="indexerdoc_pipelines.php" />
 
     <licence>GNU/GPL</licence>

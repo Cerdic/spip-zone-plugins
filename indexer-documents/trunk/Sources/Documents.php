@@ -30,12 +30,19 @@ class Documents extends SpipDocuments {
 
     public function createDocumentDocument($document) {
         $id = $document['id_document'];
+        $extraire = array('contenu' => false);
+
+        // Extraire le contenu si possible
+        if (defined('_DIR_PLUGIN_EXTRAIREDOC')) {
+            include_spip('inc/extraire_document');
+            $extraire = inc_extraire_document($id);
+        }
 
         return new Document(array(
             'id'           => $this->getObjectId('document', $id),
             'title'        => supprimer_numero($document['titre']),
             'summary'      => $document['descriptif'],
-            'content'      => $document['descriptif'],
+            'content'      => (!$extraire['contenu']) ? $document['descriptif'] : $extraire['contenu'],
             'date'         => $document['date'],
             'uri'          => generer_url_entite_absolue($id, 'document'),
             'properties'   =>
