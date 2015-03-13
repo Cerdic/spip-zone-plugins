@@ -40,6 +40,24 @@ function inc_extraire_document($id_document = 0) {
     }
     finfo_close($finfo);
 
+    //Ne pas traiter si la mémoire est insuffisante
+    //On doit avoir au moins 3 fois la taille du fichier de disponible avant traitement (choix empirique)
+    //http://stackoverflow.com/questions/10208698/checking-memory-limit-in-php
+    $memory_used = memory_get_usage();
+    $memory_limit = ini_get('memory_limit');
+    $file_size = filesize(_DIR_RACINE.$fichier);
+    if (preg_match('/^(\d+)(.)$/', $memory_limit, $matches)) {
+        if ($matches[2] == 'M') {
+            $memory_limit = (int)$matches[1] * 1024 * 1024; // nnnM -> nnn MB
+        } else if ($matches[2] == 'K') {
+            $memory_limit = (int)$matches[1] * 1024; // nnnK -> nnn KB
+        }
+    }
+    $memory_available = $memory_limit-$memory_used-3*$file_size;
+
+    if ($memory_available < 0)
+        return false;
+
     //Extraire le contenu selon le mimetype
     include_spip('extract/'.str_replace('/','_',$mime));
 
