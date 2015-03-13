@@ -133,7 +133,6 @@ function autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts) {
 	return false;
 }
 
-
 /**
  * Autorisation à dater une commande
  *
@@ -148,6 +147,46 @@ function autoriser_commande_modifier_dist($faire, $type, $id, $qui, $opts) {
 **/ 
 function autoriser_commande_dater_dist($faire, $type, $id, $qui, $opts) {
 	return autoriser('modifier', 'commande', $id, $qui, $opts);
+}
+
+/**
+ * Autorisation à modifier un détail de commande
+ *
+ * Pouvoir modifier la commande
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de la commande
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/ 
+function autoriser_commandesdetail_modifier_dist($faire, $type, $id, $qui, $opts) {
+	if ($id_commande = sql_getfetsel('id_commande', 'spip_commandes_details', 'id_commandes_detail = '.intval($id))) {
+		return autoriser('modifier', 'commande', $id_commande, $qui, $opts);
+	}
+	
+	return false;
+}
+
+/**
+ * Autorisation à supprimer un détail de commande
+ *
+ * Pouvoir modifier la commande
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de la commande
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/ 
+function autoriser_commandesdetail_supprimer_dist($faire, $type, $id, $qui, $opts) {
+	if ($id_commande = sql_getfetsel('id_commande', 'spip_commandes_details', 'id_commandes_detail = '.intval($id))) {
+		return autoriser('modifier', 'commande', $id_commande, $qui, $opts);
+	}
+	
+	return false;
 }
 
 ?>

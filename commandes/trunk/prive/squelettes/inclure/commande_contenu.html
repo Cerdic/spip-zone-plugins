@@ -24,7 +24,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<BOUCLE_details(COMMANDES_DETAILS){id_commande}{!par objet}{par id_commandes_detail}>
+		<BOUCLE_details(COMMANDES_DETAILS){tout}{id_commande}{!par objet}{par id_commandes_detail}>
 		#SET{is_objet_spip, #OBJET|in_array{#REM|lister_tables_objets_surnoms|array_keys}|et{#ID_OBJET|>{0}}|?{oui}}
 		#SET{is_objet_base, #OBJET|table_objet_sql|sql_countsel{#OBJET|id_table_objet|concat{=,#ID_OBJET}}}
 		#SET{url_objet,#INFO_URL{#OBJET,#ID_OBJET}}
