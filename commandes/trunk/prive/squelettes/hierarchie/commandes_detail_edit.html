@@ -1,0 +1,6 @@
+<a href="#URL_ECRIRE{commandes}"><:commandes:info_commandes:></a><BOUCLE_detail(COMMANDES_DETAILS){id_commandes_detail}{tout}><span class="sep">
+&gt; </span><a href="[(#ID_COMMANDE|generer_url_entite{commande})]">#INFO_REFERENCE{commande,#ID_COMMANDE}</a><span class="sep">
+&gt; </span><strong class="on"><:commandes:action_modifier:> "[(#DESCRIPTIF*|typo|supprimer_numero)]"</strong></BOUCLE_detail><BOUCLE_ref(COMMANDES){tout}{reference}><span class="sep">
+&gt; </span><a href="[(#ID_COMMANDE|generer_url_entite{commande})]">#REFERENCE</a></BOUCLE_ref><span class="sep">
+&gt; </span><strong class="on"><:commandes:detail_ajouter:></strong>
+<//B_detail>
