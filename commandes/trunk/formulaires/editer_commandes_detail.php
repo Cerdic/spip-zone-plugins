@@ -78,9 +78,6 @@ function formulaires_editer_commandes_detail_saisies($id_commandes_detail='new',
 			),
 			'verifier' => array(
 				'type' => 'decimal',
-				'options' => array(
-					'min' => 0,
-				),
 			),
 		),
 		array(
