@@ -64,13 +64,13 @@ function commandes_declarer_tables_objets_sql($tables) {
 		),
 		'date'                       => "date",
 		'titre'                      => "reference AS titre, '' AS lang",
-		'champs_editables'           => array('id_auteur', 'date_paiement', 'date_envoi','mode'),
-		'champs_versionnes'          => array('id_auteur', 'date_paiement', 'date_envoi'),
+		'champs_editables'           => array('reference', 'id_auteur', 'date_paiement', 'date_envoi','mode'),
+		'champs_versionnes'          => array('reference', 'id_auteur', 'date', 'date_paiement', 'date_envoi'),
 		'rechercher_champs'          => array('reference' => 8, 'id_commande' => 8),
 		'rechercher_jointures'       => array(
-		                                    'auteur' => array('nom' => 1),
-		                                    'commandes_detail' => array('descriptif' => 4)
-		                                    ),
+		    'auteur' => array('nom' => 1),
+		    'commandes_detail' => array('descriptif' => 4)
+        ),
 		'tables_jointures'           => array(),
 		'statut_textes_instituer'    => array(
 			'encours'            => 'commandes:statut_encours',
@@ -110,53 +110,69 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'info_aucun_objet'            => 'commandes:info_aucun_commande',
 		'info_1_objet'                => 'commandes:info_1_commande',
 		'info_nb_objets'              => 'commandes:info_nb_commandes',
-
+	);
+	
+	// Détails d'une commande
+	$tables['spip_commandes_details'] = array(
+		'type' => 'commandes_detail',
+		'principale' => 'oui',
+		'page' => false,
+		'field' => array(
+			'id_commandes_detail'       => 'bigint(21) not null',
+			'id_commande'               => 'bigint(21) not null default 0',
+			'descriptif'                => 'text not null default ""',
+			'quantite'                  => 'int not null default 0',
+			'prix_unitaire_ht'          => 'float not null default 0',
+			'taxe'                      => 'decimal(4,3) not null default 0',
+			'statut'                    => 'varchar(25) not null default ""',
+			'objet'                     => 'varchar(25) not null default ""',
+			'id_objet'                  => 'bigint(21) not null default 0',
+			'maj'                       => 'timestamp'
+		),
+		'key' => array(
+			'PRIMARY KEY'               => 'id_commandes_detail',
+			'KEY id_commande'           => 'id_commande'
+		),
+		'join' => array(
+			'id_commandes_detail'       => 'id_commandes_detail',
+			'id_commande'               => 'id_commande'
+		),
+		'titre'                         => 'descriptif as titre, "" as lang',
+		'champs_editables'              => array('id_commande', 'descriptif', 'quantite', 'prix_unitaire_ht', 'taxe','objet', 'id_objet'),
+		'champs_versionnes'             => array('id_commande', 'descriptif', 'quantite', 'prix_unitaire_ht', 'taxe','objet', 'id_objet'),
+		'rechercher_champs'             => array('descriptif' => 8),
+		'statut'=> array(
+			array(
+				'champ'       => 'statut',
+				'publie'      => 'attente,envoye,retour',
+				'previsu'     => 'attente,envoye,retour',
+				'post_date'   => 'date', 
+				'exception'   => array('statut','tout')
+			)
+		),
+		'statut_textes_instituer'    => array(
+			'attente'            => 'commandes:statut_attente',
+			'envoye'             => 'commandes:statut_envoye',
+			'retour'             => 'commandes:statut_retour',
+		),
+		'statut_images' => array(
+			'attente'            => 'puce-commande-attente.png',
+			'envoye'             => 'puce-commande-envoye.png',
+			'retour'             => 'puce-commande-retour.png',
+		),
+		'texte_ajouter'               => 'commandes:detail_ajouter',
+		'texte_changer_statut'        => 'commandes:texte_changer_statut_commande_detail',
+		'texte_creer'                 => 'commandes:detail_creer',
+		'texte_objets'                => 'commandes:details_titre',
+		'texte_objet'                 => 'commandes:detail_titre',
+		'texte_logo_objet'            => 'commandes:titre_logo_detail',
+		'texte_modifier'              => 'commandes:detail_modifier',
+		'info_aucun_objet'            => 'commandes:info_aucun_detail',
+		'info_1_objet'                => 'commandes:info_1_detail',
+		'info_nb_objets'              => 'commandes:info_nb_details',
 	);
 
 	return $tables;
-}
-
-
-/**
- * Déclaration des tables principales
- *
- * @pipeline declarer_tables_principales
- * @param array $tables_principales
- *     Description des tables
- * @return array
- *     Description complétée des tables
- */
-function commandes_declarer_tables_principales($tables_principales){
-
-	// Table commandes_details
-	$commandes_details = array(
-		'id_commandes_detail'       => 'bigint(21) not null',
-		'id_commande'               => 'bigint(21) not null default 0',
-		'descriptif'                => 'text not null default ""',
-		'quantite'                  => 'int not null default 0',
-		'prix_unitaire_ht'          => 'float not null default 0',
-		'taxe'                      => 'decimal(4,3) not null default 0',
-		'statut'                    => 'varchar(25) not null default ""',
-		'objet'                     => 'varchar(25) not null default ""',
-		'id_objet'                  => 'bigint(21) not null default 0',
-		'maj'                       => 'timestamp'
-	);
-
-	$commandes_details_cles = array(
-		'PRIMARY KEY'               => 'id_commandes_detail',
-		'KEY id_commande'           => 'id_commande'
-	);
-
-	$tables_principales['spip_commandes_details'] = array(
-		'field'                     => &$commandes_details,
-		'key'                       => &$commandes_details_cles,
-		'join'=> array(
-			'id_commandes_detail' => 'id_commandes_detail',
-			'id_commande' => 'id_commande'
-		)
-	);
-
-	return $tables_principales;
 }
 
 

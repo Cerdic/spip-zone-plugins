@@ -16,7 +16,7 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 /**
- * Description des saisies du formulaire d'édition d'une commande
+ * Description des saisies du formulaire d'édition d'un détail de commande
  *
  * @param int|string $id_commande
  *     Identifiant du commande. 'new' pour une nouvelle commande.
@@ -25,16 +25,9 @@ include_spip('inc/editer');
  * @return array
  *     Description des saisies
  */
-function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
-	include_spip('inc/config');
-	// Il est possible de prédéfinir un auteur
-	if (!$id_auteur_defaut = _request('id_auteur')) {
-		$id_auteur_defaut = 0;
-	}
-	// Prégénérer une référence possible
-	if ($fonction_reference = charger_fonction('commandes_reference', 'inc/')) {
-		$reference_defaut = $fonction_reference($id_auteur_defaut);
-	}
+function formulaires_editer_commandes_detail_saisies($id_commandes_detail='new', $retour=''){
+	// Il est possible de prédéfinir la commande en donnant la référence
+	$reference_defaut = _request('reference');
 	
 	return array(
 		array(
@@ -47,39 +40,75 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
 			)
 		),
 		array(
-			'saisie' => 'auteurs',
+			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'id_auteur',
-				'label' => _T('commandes:contact_label'),
-				'class' => 'chosen',
-				'defaut' => $id_auteur_defaut
-			)
-		),
-		array(
-			'saisie' => 'date',
-			'options' => array(
-				'nom' => 'date',
-				'label' => _T('commandes:date_commande_label'),
-				'horaire' => 'oui',
+				'nom' => 'descriptif',
+				'label' => _T('commandes:detail_champ_descriptif_label'),
+				'explication' => _T('commandes:detail_champ_descriptif_explication'),
 				'obligatoire' => 'oui',
-				'defaut' => date('Y-m-d H:i:s'),
 			)
 		),
 		array(
-			'saisie' => 'date',
+			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'date_paiement',
-				'label' => _T('commandes:date_paiement_label'),
-				'horaire' => 'oui'
+				'nom' => 'objet',
+				'label' => _T('commandes:detail_champ_objet_label'),
 			)
 		),
 		array(
-			'saisie' => 'date',
+			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'date_envoi',
-				'label' => _T('commandes:date_envoi_label'),
-				'horaire' => 'oui'
-			)
+				'nom' => 'id_objet',
+				'label' => _T('commandes:detail_champ_id_objet_label'),
+			),
+			'verifier' => array(
+				'type' => 'entier',
+				'options' => array(
+					'min' => 1,
+				),
+			),
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'prix_unitaire_ht',
+				'label' => _T('commandes:detail_champ_prix_unitaire_ht_label'),
+				'obligatoire' => 'oui',
+				'defaut' => 0,
+			),
+			'verifier' => array(
+				'type' => 'decimal',
+				'options' => array(
+					'min' => 0,
+				),
+			),
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'quantite',
+				'label' => _T('commandes:detail_champ_quantite_label'),
+			),
+			'verifier' => array(
+				'type' => 'entier',
+				'options' => array(
+					'min' => 1,
+				),
+			),
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'taxe',
+				'label' => _T('commandes:detail_champ_taxe_label'),
+				'placeholder' => 0.2,
+			),
+			'verifier' => array(
+				'type' => 'decimal',
+				'options' => array(
+					'min' => 0,
+				),
+			),
 		),
 	);
 }
@@ -102,12 +131,12 @@ function formulaires_editer_commande_saisies($id_commande='new', $retour=''){
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_commande_identifier_dist($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return serialize(array(intval($id_commande)));
+function formulaires_editer_commande_identifier_dist($id_commandes_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	return serialize(array(intval($id_commandes_detail)));
 }
 
 /**
- * Chargement du formulaire d'édition d'une commande
+ * Chargement du formulaire d'édition d'un détail de commande
  *
  * Déclarer les champs postés et y intégrer les valeurs par défaut
  *
@@ -128,14 +157,14 @@ function formulaires_editer_commande_identifier_dist($id_commande='new', $retour
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_commande_charger($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$valeurs = formulaires_editer_objet_charger('commande', $id_commande, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
-	unset($valeurs['id_commande']); // ?
+function formulaires_editer_commandes_detail_charger($id_commandes_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$valeurs = formulaires_editer_objet_charger('commandes_detail', $id_commandes_detail, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	unset($valeurs['id_commandes_detail']); // ?
 	return $valeurs;
 }
 
 /**
- * Vérifications du formulaire d'édition d'une commande
+ * Vérifications du formulaire d'édition d'un détail de commande
  *
  * Vérifier les champs postés et signaler d'éventuelles erreurs
  *
@@ -156,38 +185,36 @@ function formulaires_editer_commande_charger($id_commande='new', $retour='', $li
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_commande_verifier($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	// normaliser les champs de dates
-	// chaque saisie $date est un tableau avec une entrée "date" (jour/mois/annee) et une entrée "heure" séparée (heures:minutes)
-	$type_dates = array('date','date_paiement','date_envoi');
-	foreach ($type_dates as $type_date){
-		$date = _request($type_date);
-		if (isset($date['date']) and $date['date']){
-			list($jour, $mois, $annee) = explode('/',$date['date']);
-			list($heures, $minutes) = explode(':',$date['heure']);
-			$date = ($date['date'] ? "$annee-$mois-$jour" : '0000-00-00') ." ". ($date['heure'] ? "$heures:$minutes:00" : '00:00:00');
-			$date = normaliser_date($date);
-		} else {
-			$date = '0000-00-00 00:00:00';
-		}
-		set_request($type_date, $date);
-	}
+function formulaires_editer_commandes_detail_verifier($id_commandes_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	$erreurs = array();
 	
-	$erreurs = formulaires_editer_objet_verifier('commande', $id_commande, array('reference'));
-	
-	// On vérifie qu'il n'y a pas déjà une commande avec la même référence
+	// La référence doit être celle d'une vraie commande existante !
 	if (
 		$reference = _request('reference')
-		and sql_getfetsel('id_commande', 'spip_commandes', 'reference = '.sql_quote($reference))
+		and !$id_commande = sql_getfetsel('id_commande', 'spip_commandes', 'reference = '.sql_quote($reference))
 	) {
-		$erreurs['reference'] = _T('commandes:erreur_reference_existante');
+		$erreurs['reference'] = _T('commandes:erreur_reference_inexistante');
+	}
+	// Si c'est le cas, on remplit le champ id_commande
+	else {
+		set_request('id_commande', $id_commande);
+	}
+	
+	// Si le descriptif est vide ET qu'il y a un objet valide, on remplit le descriptif
+	if (
+		!_request('descriptif')
+		and $objet = _request('objet')
+		and $id_objet = _request('id_objet')
+		and $descriptif = generer_info_entite($id_objet, $objet, 'titre')
+	) {
+		set_request('descriptif', $descriptif);
 	}
 	
 	return $erreurs;
 }
 
 /**
- * Traitement du formulaire d'édition d'une commande
+ * Traitement du formulaire d'édition d'un détail de commande
  *
  * Traiter les champs postés
  *
@@ -208,8 +235,8 @@ function formulaires_editer_commande_verifier($id_commande='new', $retour='', $l
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_commande_traiter($id_commande='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('commande', $id_commande, '', '', $retour, $config_fonc, $row, $hidden);
+function formulaires_editer_commandes_detail_traiter($id_commandes_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+	return formulaires_editer_objet_traiter('commandes_detail', $id_commandes_detail, '', '', $retour, $config_fonc, $row, $hidden);
 }
 
 

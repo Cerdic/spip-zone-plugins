@@ -18,6 +18,9 @@
 			<th class="prix ht"><abbr title="<:commandes:label_prix_unitaire|attribut_html:>"><:commandes:abbr_prix_unitaire:></abbr></th>
 			<th class="taxe"><:commandes:label_taxe:></th>
 			<th class="prix ttc"><abbr title="<:commandes:label_montant_ttc|attribut_html:>"><:commandes:label_prix:></abbr></th>
+			[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+			<th class="actions"><:commandes:label_actions:></th>
+			]
 		</tr>
 	</thead>
 	<tbody>
@@ -51,6 +54,16 @@
 				[= [(#QUANTITE*)] &times; \( (#PRIX_UNITAIRE_HT*|prix_formater) + [(#GET{taxe_unitaire}|prix_formater)] \)],
 				[= (#PRIX_UNITAIRE_HT*|prix_formater) + [(#GET{taxe_unitaire}|prix_formater)]]
 			}|attribut_html)]">](#PRIX)[(#TAXE*|floatval|>{0.0}|oui)</abbr>]]</td>
+			[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+			<td class="actions">
+				[(#AUTORISER{supprimer,commandes_detail,#ID_COMMANDES_DETAIL}|oui)
+				[(#BOUTON_ACTION{#CHEMIN_IMAGE{supprimer-12.png}|balise_img{<:lien_supprimer:>}, #URL_ACTION_AUTEUR{supprimer_detail_commande,#ID_COMMANDE/#ID_COMMANDES_DETAIL}, link, <:commandes:confirmer_supprimer_detail:>})]
+				]
+				[(#AUTORISER{modifier,commandes_detail,#ID_COMMANDES_DETAIL}|oui)
+				[<a href="[(#ID_COMMANDES_DETAIL|generer_url_ecrire_entite_edit{commandes_detail})]" title="<:commandes:detail_modifier:>">(#CHEMIN_IMAGE{edit-16.png}|balise_img{<:commandes:detail_modifier:>})</a>]
+				]
+			</td>
+			]
 		</tr>
 		</BOUCLE_details>
 	</tbody>
@@ -58,14 +71,23 @@
 		<tr class="total_ht">
 			<td colspan="6" class="description"><:prix:label_total_ht:></td>
 			<td class="prix ht">[(#PRIX_HT)]</td>
+			[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+			<td></td>
+			]
 		</tr>
 		<tr class="total_taxe">
 			<td colspan="6" class="description"><:commandes:label_taxe:></td>
 			<td class="prix taxe">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
+			[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+			<td></td>
+			]
 		</tr>
 		<tr class="total_ttc">
 			<td colspan="6" class="description"><:prix:label_total_ttc:></td>
 			<td class="prix ttc">[(#PRIX)]</td>
+			[(#AUTORISER{modifier,commande,#ID_COMMANDE}|oui)
+			<td></td>
+			]
 		</tr>
 	</tfoot>
 </table>
