@@ -12,7 +12,7 @@ function inc_extraire_document($id_document = 0) {
     if ( (!isset($id_document)) || (!is_numeric($id_document)) )
         return false;
 
-    $document =  sql_fetsel("*", "spip_documents", "id_document = ".$id_document);
+    $document =  sql_fetsel("id_document,fichier", "spip_documents", "id_document = ".$id_document);
 
     if (empty($document))
         return false;

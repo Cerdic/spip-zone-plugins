@@ -37,5 +37,9 @@ function extraire_application_pdf($fichier) {
         $contenu .= $page->getText();
     }
 
+    //Libérer les ressources
+    unset($parser);
+    unset($loader);
+
     return $contenu;
 }
