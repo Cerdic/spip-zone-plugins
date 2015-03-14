@@ -17,7 +17,7 @@ function genie_reservation_evenement_cloture_dist ($t) {
 	
 	include_spip('action/editer_objet');
  
- 	//Sélection des détails de réservation concernant d'´événements passé et qui ont action_cloture activé
+ 	//Sélection des détails de réservation d'événements passé  qui ont action_cloture activé
 	$sql=sql_select(
 		'id_reservations_detail,spip_reservations_details.id_evenement,date_fin',
 		'spip_reservations_details,spip_evenements',
@@ -29,14 +29,15 @@ function genie_reservation_evenement_cloture_dist ($t) {
 	
 	$id_evenement=array();	
 	while($data=sql_fetch($sql)){
-		if(!$date_fin=sql_getfetsel('date_fin','spip_evenements','id_evenement_source='.$data['id_evenement'],'','"date fin" DESC','1'))
+		if(!$date_fin=sql_getfetsel('date_fin','spip_evenements','id_evenement_source='.$data['id_evenement'],'','date_fin DESC','1'))
 		$date_fin=$data['date_fin'];
+		spip_log("cron cloture date fin:$date_fin, date:$date",'reservation_evenement');
 		//Déclencher le changement de statut et les actions qui en dépendent
 		if($date_fin<=$date){
+			spip_log('cron évènement cloturé id_evenement:'.$data['id_evenement'].', id_reservations_detail:'.$data['id_reservations_detail'],'reservation_evenement');
 			set_request('envoi_separe_actif','oui'); //Nécessaire pour permettre l'envoi du mail
 			objet_instituer('reservations_detail',$data['id_reservations_detail'],array('statut'=>'cloture'));
-			$id_evenement[]	= $data['id_evenement'];	
-			spip_log("date fin:$date_fin",'teste');		
+			$id_evenement[]	= $data['id_evenement'];		
 		}
 	};
 	

@@ -249,7 +249,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 				// Envoyer au vendeur et au client
 				//Pour le moment pas d'envoi à l'administrateur, prévoir un seul mail pour tout l'événement.
 				if ($s!='cloture') {
-					spip_log('envoi mail differe vendeur email:'.$options['email'].', statut:'.$s ,'reservation_evenement'.LOG_INFO);	
+					spip_log('envoi mail differe vendeur email:'.$email.', statut:'.$s ,'reservation_evenement'.LOG_INFO);	
 					$notifications('reservation_vendeur', $id_reservation, $options);
 				}
 					
@@ -258,7 +258,7 @@ function reservations_detail_instituer($id_reservations_detail, $c, $calcul_rub=
 						if(intval($id_auteur) AND $id_auteur>0)$options['email']=sql_getfetsel('email','spip_auteurs','id_auteur='.$id_auteur);
 						else $options['email']=$email;
 						
-					spip_log('envoi mail differe client email:'.$email.', statut:'.$s ,'reservation_evenement'._LOG_INFO);	
+					spip_log('envoi mail séparé client email:'.$options['email'].', statut:'.$s ,'reservation_evenement'._LOG_INFO);	
 											
 					$notifications('reservation_client', $id_reservation, $options);
 					
