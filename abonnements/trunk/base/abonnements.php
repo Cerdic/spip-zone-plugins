@@ -102,14 +102,14 @@ function abonnements_declarer_tables_objets_sql($tables) {
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
-			'actif'    => 'abonnement:statut_actif',
 			'inactif' => 'abonnement:statut_inactif',
+			'actif'    => 'abonnement:statut_actif',
 			'poubelle' => 'texte_statut_poubelle',
 		),
 		'statut_images' => array(
 			'prepa' => 'puce-preparer-8.png',
-			'actif' => 'puce-publier-8.png',
 			'inactif' => 'puce-refuser-8.png',
+			'actif' => 'puce-publier-8.png',
 			'poubelle' => 'puce-supprimer-8.png',
 		),
 		'statut'=> array(

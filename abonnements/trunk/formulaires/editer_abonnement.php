@@ -58,8 +58,7 @@ function formulaires_editer_abonnement_saisies_dist($id_abonnement='new', $retou
 			),
 		);
 	}
-	// Sinon si c'est une demande de modification, on ne peut modifier que l'échéance
-	// Et uniquement en ajoutant avec durée et période
+	// Sinon si c'est une demande de modification, on ne peut modifier que les dates
 	elseif ($id_abonnement > 0) {
 		$saisies = array(
 			array(
@@ -93,41 +92,6 @@ function formulaires_editer_abonnement_saisies_dist($id_abonnement='new', $retou
 				),
 			),
 		);
-#		$saisies = array(
-#			array(
-#				'saisie' => 'fieldset',
-#				'options' => array(
-#					'nom' => 'date_fin_allonger',
-#					'label' => _T('abonnement:champ_date_fin_allonger_label'),
-#				),
-#				'saisies' => array(
-#					array(
-#						'saisie' => 'input',
-#						'options' => array(
-#							'nom' => 'duree',
-#							'label' => _T('abonnementsoffre:champ_duree_label'),
-#							'defaut' => 0,
-#						),
-#						'verifier' => array(
-#							'type' => 'entier',
-#						),
-#					),
-#					array(
-#						'saisie' => 'selection',
-#						'options' => array(
-#							'nom' => 'periode',
-#							'label' => _T('abonnementsoffre:champ_periode_label'),
-#							'cacher_option_intro' => 'oui',
-#							'datas' => array(
-#								'mois' => _T('abonnementsoffre:champ_periode_choix_mois'),
-#								'jours' => _T('abonnementsoffre:champ_periode_choix_jours'),
-#								'heures' => _T('abonnementsoffre:champ_periode_choix_heures'),
-#							),
-#						),
-#					),
-#				),
-#			),
-#		);
 	}
 	
 	return $saisies;

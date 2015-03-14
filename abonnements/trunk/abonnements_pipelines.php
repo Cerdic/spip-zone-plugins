@@ -41,8 +41,8 @@ function abonnements_optimiser_base_disparus($flux){
 function abonnements_post_edition($flux){
 	// Si on modifie un abonnement
 	if ($flux['args']['table'] == 'spip_abonnements') {
-		$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = '.$flux['args']['id_objet']);
-		$offre = sql_fetsel('*', 'spip_abonnements_offres', 'id_abonnements_offre = '.$abonnement['id_abonnements_offre']);
+		$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = '.intval($flux['args']['id_objet']));
+		$offre = sql_fetsel('*', 'spip_abonnements_offres', 'id_abonnements_offre = '.intval($abonnement['id_abonnements_offre']));
 		
 		$modifs = array();
 		
@@ -66,13 +66,13 @@ function abonnements_post_edition($flux){
 			}
 			
 			// Calcul de la date de fin
-			$modifs['date_fin'] = date('Y-m-d H:i:s', strtotime($abonnement['date_debut'].$ajout));
+			$modifs['date_fin'] = $abonnement['date_fin'] = date('Y-m-d H:i:s', strtotime($abonnement['date_debut'].$ajout));
 		}
 		
 		// S'il le statut est "prepa" c'est une création et on doit changer ça
 		// car pour l'instant SPIP ne permet pas de déclarer le statut par défaut !
 		if ($abonnement['statut'] == 'prepa') {
-			$modifs['statut'] = 'actif';
+			$modifs['statut'] = $abonnement['statut'] = 'actif';
 		}
 		// Si on a mis l'abonnement à la poubelle, on doit enlever les tâches liées
 		elseif ($abonnement['statut'] == 'poubelle') {
@@ -82,6 +82,26 @@ function abonnements_post_edition($flux){
 				foreach ($liens as $lien){
 					job_queue_remove($lien['id_job']);
 				}
+			}
+		}
+		
+		// Seulement si personne n'a modifié le statut manuellement, alors on check les dates pour statufier
+		if (!$flux['data']['statut']) {
+			$jourdhui = date('Y-m-d H:i:s');
+			// Si aujourd'hui est dans les dates, on active
+			if (
+				$abonnement['statut'] == 'inactif'
+				and $jourdhui >= $abonnement['date_debut']
+				and $jourdhui <= $abonnement['date_fin']
+			) {
+				$modifs['statut'] = 'actif';
+			}
+			// Si aujourd'hui est en dehors des dates, on désactive
+			elseif (
+				$abonnement['statut'] == 'actif'
+				and ($jourdhui < $abonnement['date_debut'] or $jourdhui > $abonnement['date_fin'])
+			) {
+				$modifs['statut'] = 'inactif';
 			}
 		}
 		
@@ -95,6 +115,33 @@ function abonnements_post_edition($flux){
 		if (isset($flux['data']['date_fin'])) {
 			include_spip('inc/abonnements');
 			abonnements_programmer_desactivation($flux['args']['id_objet'], $flux['data']['date_fin']);
+		}
+	}
+	// Détection magique du plugin Commandes et d'une commande d'offre d'abonnement
+	elseif (
+		// Si on institue une commande
+		$flux['args']['table'] == 'spip_commandes'
+		and $id_commande = intval($flux['args']['id_objet'])
+		and $flux['args']['action'] == 'instituer'
+		// Et qu'on passe en statut "paye" depuis autre chose
+		and $flux['data']['statut'] == 'paye'
+		and $flux['args']['statut_ancien'] != 'paye'
+		// Et que la commande existe bien
+		and $commande = sql_fetsel('*', 'spip_commandes', 'id_commande = '.$id_commande)
+		// Et que cette commande a un utilisateur correct
+		and ($id_auteur = $commande['id_auteur']) > 0
+		// Et qu'on a des détails dans cette commande
+		and $details = sql_allfetsel('*', 'spip_commandes_details', 'id_commande = '.$id_commande)
+		and is_array($details)
+	) {
+		// On cherche si on a des offres d'abonnements dans les détails de la commande
+		foreach ($details as $detail) {
+			// Si on trouve une offre d'abonnement
+			if ($detail['objet'] = 'abonnements_offre' and ($id_abonnements_offre = $detail['id_objet']) > 0) {
+				// On crée ou renouvelle
+				$action = charger_fonction('creer_ou_renouveler_abonnement', 'action/');
+				$action($id_auteur.'/'.$id_abonnements_offre);
+			}
 		}
 	}
 	
