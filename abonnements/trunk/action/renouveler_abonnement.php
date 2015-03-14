@@ -19,51 +19,14 @@ function action_renouveler_abonnement_dist($arg=null) {
 		$id_abonnement = intval($arg)
 		and autoriser('modifier', 'abonnement', $id_abonnement)
 		and $abonnement = sql_fetsel('id_abonnements_offre, date_debut, date_fin', 'spip_abonnements', 'id_abonnement = '.$id_abonnement)
+		and $offre = sql_fetsel('duree, periode', 'spip_abonnements_offres', 'id_abonnements_offre = '.$abonnement['id_abonnements_offre'])
+		and $offre['duree'] > 0
+		and $offre['periode']
 	) {
-	
-		$offre = sql_fetsel('duree, periode', 'spip_abonnements_offres', 'id_abonnements_offre = '.$abonnement['id_abonnements_offre']);
-		
-		// Si l'offre parente A BIEN une durée
-		if (($duree = $offre['duree']) > 0){
-			// De combien doit-on augmenter la date ?
-			switch ($offre['periode']){
-				case 'heures':
-					$ajout = " + ${duree} hours";
-					break;
-				case 'jours':
-					$ajout = " + ${duree} days";
-					break;
-				case 'mois':
-					$ajout = " + ${duree} months";
-					break;
-				default:
-					$ajout = NULL;
-					break;
-			}
-		}
-		
-		$date_depart = $abonnement['date_fin'];
-		if ($date_depart == '0000-00-00 00:00:00'){
-			$date_depart = $abonnement['date_debut'];
-		}
-		
-		// Si la période existe
-		if (isset($ajout)){
-			
-			// Calcul de la date de fin
-			$nouvelle_echeance = date('Y-m-d H:i:s', strtotime($date_depart.$ajout));
-			
-			// On lance la modification
-			include_spip('action/editer_objet');
-			$erreur = objet_modifier('abonnement', $id_abonnement, array('date_fin' => $nouvelle_echeance, 'statut' => 'actif'));
-			
-			return array($id_abonnement, $erreur);
-
-		}
+		$action = charger_fonction('modifier_echeance_abonnement', 'action/');
+		return $action($id_abonnement.'/'.$offre['duree'].'/'.$offre['periode']);
 	}
 	
 	return false;
 }
 
-
-?>

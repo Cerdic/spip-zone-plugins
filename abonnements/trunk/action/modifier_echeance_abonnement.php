@@ -23,9 +23,16 @@ function action_modifier_echeance_abonnement_dist($arg=null) {
 		and autoriser('modifier', 'abonnement', $id_abonnement)
 		and $abonnement = sql_fetsel('date_debut, date_fin', 'spip_abonnements', 'id_abonnement = '.$id_abonnement)
 	) {
+		// Calculons la date de départ du renouvellement
 		$date_depart = $abonnement['date_fin'];
+		// Si la date de fin n'était pas encore défini, on reprend depuis le début
 		if ($date_depart == '0000-00-00 00:00:00'){
 			$date_depart = $abonnement['date_debut'];
+		}
+		// Et si la date de fin était *déjà passée*, alors on renouvelle *à partir d'aujourd'hui* !
+		$jourdhui = date('Y-m-d H:i:s');
+		if ($date_depart < $jourdhui) {
+			$date_depart = $jourdhui;
 		}
 		
 		// De combien doit-on modifier la date
@@ -65,5 +72,3 @@ function action_modifier_echeance_abonnement_dist($arg=null) {
 	return false;
 }
 
-
-?>
