@@ -48,6 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_paiement_label' => 'Date of payment:',
 	'date_paiement_label_court' => 'Payment',
 	'designation' => 'Designation',
+	'detail_champ_prix_unitaire_ht_label' => 'Price', # MODIF
+	'detail_champ_quantite_label' => 'Quantity',
+	'detail_champ_taxe_label' => 'Tax',
 	'details_commande' => 'Details of the order:',
 
 	// E
@@ -105,8 +108,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filtre_tous_statuts' => 'All states',
 	'label_filtre_toutes_dates' => 'All dates',
 	'label_infos' => 'Infos',
-	'label_objet' => 'Object',
-	'label_objets' => 'Objects',
+	'label_objet' => 'Object', # MODIF
+	'label_objets' => 'Objects', # MODIF
 	'label_passee_le' => 'Ordered on',
 	'label_payee_le' => 'paid on the',
 	'label_prix_unitaire' => 'Price', # MODIF

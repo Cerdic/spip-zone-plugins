@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_notifications_commandes' => 'Configurer les notifications',
 	'configurer_titre' => 'Configurer le plugin Commandes',
 	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
-	'confirmer_supprimer_detail' => 'Confirmez-vous la suppression de ce détail de commande ?',
+	'confirmer_supprimer_detail' => 'Confirmez-vous la suppression de ce détail de commande ?',
 	'contact_label' => 'Contact :',
 	'contenu' => 'Contenu',
 
@@ -58,9 +58,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'detail_champ_taxe_label' => 'Taxe',
 	'detail_creer' => 'Créer un détail de commande',
 	'detail_modifier' => 'Modifier ce détail de commande',
-	'details_titre' => 'Détails de commande',
 	'detail_titre' => 'Détail de commande',
 	'details_commande' => 'Détails de commande :',
+	'details_titre' => 'Détails de commande',
 
 	// E
 	'erreur_reference_existante' => 'Une commande avec la même référence existe déjà.',

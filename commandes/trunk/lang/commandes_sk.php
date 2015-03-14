@@ -48,6 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_paiement_label' => 'Dátum platby',
 	'date_paiement_label_court' => 'Platba',
 	'designation' => 'Označenie',
+	'detail_champ_prix_unitaire_ht_label' => 'Jednotková cena', # MODIF
+	'detail_champ_quantite_label' => 'Množstvo',
+	'detail_champ_taxe_label' => 'Daň',
 	'details_commande' => 'Podrobnosti objednávky:',
 
 	// E
@@ -94,8 +97,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filtre_tous_statuts' => 'Všetky stavy',
 	'label_filtre_toutes_dates' => 'Všetky dátumy',
 	'label_infos' => 'Informácie',
-	'label_objet' => 'Objekt',
-	'label_objets' => 'Objekty',
+	'label_objet' => 'Objekt', # MODIF
+	'label_objets' => 'Objekty', # MODIF
 	'label_passee_le' => 'objednané',
 	'label_payee_le' => 'zaplatené',
 	'label_prix_unitaire' => 'Jednotková cena', # MODIF
