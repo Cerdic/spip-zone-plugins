@@ -30,7 +30,7 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
 			else $date=affdate($date_debut,'d/m/Y G:i');
 		}
 		// Les descriptif
-		$set['descriptif']=$evenement['titre'].'  ('.$date.')';
+		$set['descriptif']=supprimer_numero($evenement['titre']).'  ('.$date.')';
 		if(intval($evenement['places']))$set['places']=$evenement['places'];
 		if(intval($quantite[$id_evenement]))$set['quantite']=$quantite[$id_evenement];
 		else $set['quantite']=1; 
@@ -39,11 +39,11 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
 
 		if(!isset($set['prix']) AND !isset($set['prix_ht'])){
 			
-			/*Existence d'un prix via le plugin Shop Prix https://github.com/abelass/prix_objets_objet */
+			/*Existence d'un prix via le plugin Prix  Objets http://plugins.spip.net/prix_objets.html */
 			if($prix_objets=test_plugin_actif('prix_objets')){
 				$fonction_prix = charger_fonction('prix', 'inc/');
 				$fonction_prix_ht = charger_fonction('ht', 'inc/prix');
-				 /*si le plugin déclinaison est active il peut y avoir plusieurs prix par évenement*/
+				 /*si le plugin déclinaison produit (http://plugins.spip.net/declinaisons.html) est active il peut y avoir plusieurs prix par évenement*/
 				if(test_plugin_actif('declinaisons')){  
 					$id_prix=isset($set['id_prix_objet'])?$set['id_prix_objet']:$reservations_details['id_prix_objet'];	
 					$p=sql_fetsel('prix_ht,id_prix_objet,id_declinaison','spip_prix_objets','id_prix_objet='.$id_prix); 
