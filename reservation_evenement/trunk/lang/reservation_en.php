@@ -14,12 +14,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bonjour' => 'Hello',
 
+	// C
+	'cron_label' => 'Automatical closure of an event',
+
 	// D
 	'designation' => 'Description',
 	'details_reservation' => 'Booking details:',
 
 	// E
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
+	'evenement_cloture' => 'Closed Event',
 	'explication_envoi_separe' => 'The modification of the status of a booking item towards
     <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.',
 	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
@@ -36,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_voir_reservations_poubelle' => 'View the Bookings in the dustbin',
 
 	// L
+	'label_action_cloture' => 'Automatical closure:',
 	'label_date' => 'Date:',
 	'label_date_paiement' => 'Payment date:',
 	'label_donnees_auteur' => 'Information author:',
@@ -109,7 +114,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'statuts_complet_explication' => 'The status codes in the reservation details that are taken into consideration an event as complete.',
 	'sujet_une_reservation_accepte' => 'Confirmation of a booking on @nom@',
+	'sujet_une_reservation_cloture' => 'Event closed on @nom@',
 	'sujet_votre_reservation_accepte' => '@nom@: confirmation of your booking',
+	'sujet_votre_reservation_cloture' => '@nom@: event closure',
 
 	// T
 	'texte_ajouter_reservation' => 'Add a booking',
@@ -118,6 +125,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_statut_accepte' => 'accepted',
 	'texte_statut_attente' => 'in waiting list',
 	'texte_statut_attente_paiement' => 'waiting for payment',
+	'texte_statut_cloture' => 'C
+closed',
 	'texte_statut_encours' => 'ongoing',
 	'texte_statut_poubelle' => 'in the dustbin',
 	'texte_statut_refuse' => 'refused',
