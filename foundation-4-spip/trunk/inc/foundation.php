@@ -30,7 +30,7 @@ function foundation_get_js($flux = '') {
   $config = lire_config('foundation');
 
   // Si on est en mode app, on revoie le bon squelette
-  if (_FOUNDATION_APP) {
+  if (FOUNDATION_APP) {
       $flux .= recuperer_fond('inclure/head-foundation-app');
   }
   else {
@@ -62,7 +62,7 @@ function foundation_get_css($flux = '') {
   $config = lire_config('foundation');
 
   // Si on est en mode app, on revoie le bon squelette
-  if (_FOUNDATION_APP) {
+  if (FOUNDATION_APP) {
       $flux .= recuperer_fond('inclure/css/head-foundation-app');
       return $flux;
   }
