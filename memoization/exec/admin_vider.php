@@ -93,7 +93,7 @@ function exec_admin_vider_dist()
 	//
 
 		$m = &$GLOBALS['Memoization'];
-		$info = _L('Le cache des pages est g&#233;r&#233; par la m&#233;thode @type@', array('type' => $m->methode));
+		$info = _T('memoization:methodes_cache', array('type' => $m->methode));
 		if (is_int($n = $m->size())) {
 			if ($n > 0*250*1024)
 				$info2 = _T('taille_cache_octets', array('octets' => taille_en_octets($n)));
@@ -101,8 +101,8 @@ function exec_admin_vider_dist()
 				$info2 = _T('taille_cache_vide');
 		}
 		else
-			$info2 = _L("Taille totale non disponible");
-		$bouton = _L('Invalider le cache');
+			$info2 = _T('memoization:taille_tototale_indisponible');
+		$bouton = _T('memoization:invalider_cache');
 
 		echo debut_cadre_relief("", true, "", _T('taille_repertoire_cache'));
 

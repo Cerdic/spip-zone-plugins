@@ -612,22 +612,22 @@ function menu_entry($ob,$title) {
 function getHeader(){
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	$head = $commencer_page(_L('Serveur memcached'), "configuration", "cache");
+	$head = $commencer_page(_T('memoization:memcached_serveur'), "configuration", "cache");
 
 	$head .= "<br /><br /><br />";
-	$head .= gros_titre(_L('Serveur memcached'),'', false);
+	$head .= gros_titre(),'', false);
 
 	$head .= debut_gauche("",true);
 
 	$head .= debut_boite_info(true);
 
-	$head .= _L('Script memcache.php by <a href="http://livebookmark.net">Harun Yayli</a>');
+	$head .= _T('memoization:memcached_script');
 
 	$head .= fin_boite_info(true);
 
 	$head .= debut_droite("",true);
 
-	$head .= "\n<p>"._L('Donn&#233;es de votre serveur memcached')."</p>";
+	$head .= "\n<p>"._T('memoization:memcached_donnes')."</p>";
 
 
 
