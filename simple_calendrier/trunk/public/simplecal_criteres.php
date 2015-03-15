@@ -115,4 +115,54 @@ function critere_date_like_dist($idb, &$boucles, $crit) {
 	$boucle->where[] = $c;
 }
 
+// {simplecalperiode date_debut, #ENV{periodedebut}, #ENV{periodefin}}
+// Format aaaammjj
+function critere_simplecalperiode_dist($idb, &$boucles, $crit) {
+    $boucle = &$boucles[$idb];
+    $table = $boucle->id_table;
+    $not = $crit->not;
+    
+    $parent = $boucles[$idb]->id_parent;
+    $params = $crit->param;
+    // ---
+    
+    $log = '';
+        
+    
+    // 'date_debut' - inutile...
+    $p0 = $params ? array_shift($params) : "";
+    
+    // aaaammjj
+    $px = $params ? array_shift($params) : "";
+    $pdeb = "\n" . 'sprintf("%08d", ($x = '.calculer_liste($px, array(), $boucles, $parent).') ? $x : date("Ymd"))';
+    
+    // aaaammjj
+    $px = $params ? array_shift($params) : "";
+    $pfin = "\n" . 'sprintf("%08d", ($x = '.calculer_liste($px, array(), $boucles, $parent).') ? $x : date("Ymd"))';
+    
+    // ----
+    
+    $date_debut = $table . ".date_debut";
+    $date_fin = $table . ".date_fin";
+    
+    //    date_debut comprise dans la periode
+    // OU date_fin   comprise dans la periode
+    $c = array("'OR'",
+        array("'AND'",
+            array("'>='", "'DATE_FORMAT($date_debut, \'%Y%m%d\')'", ("$pdeb")),
+            array("'<='", "'DATE_FORMAT($date_debut, \'%Y%m%d\')'", ("$pfin"))
+        ),
+        array("'AND'",
+            array("'>='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("$pdeb")),
+            array("'<='", "'DATE_FORMAT($date_fin, \'%Y%m%d\')'", ("$pfin"))
+        )
+    );
+    
+   
+    // Inversion de la condition ?
+    $c = ($not ? array("'NOT'", $c) : $c);
+        
+    $boucle->where[] = $c;
+}
+
 ?>
