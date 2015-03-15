@@ -9,7 +9,7 @@ $GLOBALS['logo_libelles']['id_gis'] = _T('gis:libelle_logo_gis');
 
 $config = @unserialize($GLOBALS['meta']['gis']);
 
-$GLOBALS['gis_layers'] = array (
+$gis_layers = array (
 	'openstreetmap_mapnik' => array(
 		'nom' => 'OpenStreetMap',
 		'layer' => 'L.tileLayer.provider("OpenStreetMap")'
@@ -159,5 +159,10 @@ $GLOBALS['gis_layers'] = array (
 		'layer' => 'L.tileLayer.provider("CartoDB.DarkMatterNoLabels")'
 	)
 );
+
+if (is_array($GLOBALS['gis_layers']))
+	$GLOBALS['gis_layers'] = array_merge($gis_layers,$GLOBALS['gis_layers']);
+else
+	$GLOBALS['gis_layers'] = $gis_layers;
 
 ?>
