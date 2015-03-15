@@ -67,7 +67,7 @@ function http_collectionjson_get_index($requete, $reponse) {
 
 	$links = array();
 	foreach (lister_tables_objets_sql() as $table => $desc) {
-		if (autoriser('get_collection', objet_type($table))) {
+		if (autoriser('get_collection', table_objet($table))) {
 			$links[] = array(
 				'rel' => table_objet($table),
 				'prompt' => _T($desc['texte_objets']),
