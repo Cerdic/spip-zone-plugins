@@ -63,14 +63,17 @@ function http_collectionjson_erreur_dist($code, $requete, $reponse){
 function http_collectionjson_get_index($requete, $reponse) {
 
 	include_spip('base/objets');
+	include_spip('inc/autoriser');
 
 	$links = array();
 	foreach (lister_tables_objets_sql() as $table => $desc) {
-		$links[] = array(
-			'rel' => table_objet($table),
-			'prompt' => _T($desc['texte_objets']),
-			'href' => url_absolue(self()) . table_objet($table) . '/',
-		);
+		if (autoriser('get_collection', objet_type($table))) {
+			$links[] = array(
+				'rel' => table_objet($table),
+				'prompt' => _T($desc['texte_objets']),
+				'href' => url_absolue(self()) . table_objet($table) . '/',
+			);
+		}
 	}
 
 	$json = array(
