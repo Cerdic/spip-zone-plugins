@@ -150,6 +150,25 @@ function autoriser_commande_dater_dist($faire, $type, $id, $qui, $opts) {
 }
 
 /**
+ * Autorisation à voir la facture liée à une commande
+ *
+ * Celleux qui peuvent voir la commande + que l'URL ne soit pas vide
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de la commande
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+
+ * @return bool          true s'il a le droit, false sinon
+**/ 
+function autoriser_commande_voir_facture_dist($faire, $type, $id, $qui, $opts) {
+	include_spip('inc/filtres');
+	return autoriser('voir', 'commande', $id, $qui, $opts) and !empty(appliquer_filtre($id, 'generer_url_commande_facture'));
+}
+
+
+/**
  * Autorisation à modifier un détail de commande
  *
  * Pouvoir modifier la commande

@@ -53,5 +53,17 @@ function commandes_id_premier_webmestre(){
 		return false;
 }
 
+/**
+ * Générer l'URL correspondant à la facture d'une commande
+ *
+ * @param int $id_commande
+ * 		Identifiant de la commande
+ * @return string
+ * 		Retourne l'URL d'une page contenant la facture, ou rien si on n'en veut pas
+ */
+function filtre_generer_url_commande_facture_dist($id_commande) {
+	return generer_url_public('facture', 'id_commande='.intval($id_commande));
+}
 
-?>
+
+
