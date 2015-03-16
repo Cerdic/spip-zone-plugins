@@ -25,11 +25,16 @@
 #   file we have
 #   Correct the mimetype with the registered ones:
 #     http://technet.microsoft.com/en-us/library/cc179224.aspx
+#   Mime type 64 caractéres
+#     http://www-01.ibm.com/support/docview.wss?uid=swg21416394
 >>>>&26         string          word/           Microsoft Word 2007+
-!:mime application/vnd.openxmlformats-officedocument.wordprocessingml.document
+!:mime application/vnd.openxmlformats-officedocument.wordprocessingml.
+#!:mime application/vnd.openxmlformats-officedocument.wordprocessingml.document
 >>>>&26         string          ppt/            Microsoft PowerPoint 2007+
-!:mime application/vnd.openxmlformats-officedocument.presentationml.presentation
+!:mime application/vnd.openxmlformats-officedocument.presentationml.pr
+#!:mime application/vnd.openxmlformats-officedocument.presentationml.presentation
 >>>>&26         string          xl/             Microsoft Excel 2007+
-!:mime application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+!:mime application/vnd.openxmlformats-officedocument.spreadsheetml.she
+#!:mime application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 >>>>&26         default         x               Microsoft OOXML
 !:strength +10
