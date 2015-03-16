@@ -70,7 +70,17 @@ function charger_url_image_responsive(this_img) {
 				if (vertical) url_img = url_img + "v";
 				if (dPR) url_img = url_img + "&dpr="+dPR;
 			}
-			this_img.attr("src", url_img).height("").width("").removeAttr("data-top");
+			var img = $("<img />").attr('src', url_img)
+				.load(function() {
+					if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+						
+					} else {
+						this_img.attr("src", url_img).height("").width("").removeAttr("data-top");
+					}
+				});
+			
+			
+			
 		}
 
 }
