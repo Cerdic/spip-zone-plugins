@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<nom>Mes fichiers</nom>
+	<slogan>Archiver ses fichiers dump, IMG, squelettes...</slogan>
+	<version>0.2.1</version>
+	<etat>stable</etat>
+	<prefix>mes_fichiers</prefix>
+	<description>
+Ce plugin fabrique un fichier d'archives contenant le dernier dump de sauvegarde de la base, le dossier <code>squelettes/</code>, le dossier <code>IMG/</code> et le fichier <code>mes_options.php</code>
+
+Le fichier d'archives est cr&#233;&#233; dans <code>tmp/</code> et se nomme <code>mes_fichiers_aaaammjj_hhmm.zip</code>.
+
+Pour cr&#233;er ou restaurer une copie compl&#232;te de votre spip:
+
+-* [Sauvegarder->../spip.php?action=mes_fichiers]
+-* [Restaurer->../spip.php?action=decompresser_mes_fichiers]
+-* [T&#233;l&#233;charger->../spip.php?action=telecharger_mes_fichiers]
+
+Remarque: La restauration fonctionne par d&#233;faut sur le fichier d'archives le plus r&#233;cent et s'appuie sur le script spip_loader.php qui doit &#234;tre pr&#233;sent &#224; la racine du site.
+	</description>
+	<lien>http://contrib.spip.net/Mes-fichiers</lien>
+	<auteur>James</auteur>
+	<licence>(c) 2007 GNU/GPL</licence>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<categorie>maintenance</categorie>
+</plugin>
