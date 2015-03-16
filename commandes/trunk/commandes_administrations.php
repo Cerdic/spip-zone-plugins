@@ -56,7 +56,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 			'maj_tables', array('spip_commandes','spip_commandes_details'),
 		),
 		array(
-			'ecrire_config','commandes',$config
+			'ecrire_config', 'commandes', $config
 		),
 	);
 	
@@ -65,12 +65,42 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	);
 	
 	$maj['0.3']  = array(
-		'ecrire_config','commandes',array('duree_vie'=>3600)
+		'ecrire_config','commandes', array('duree_vie'=>3600)
 	);
 	
 	$maj['0.4']  = array(
 		array('sql_alter', 'TABLE spip_commandes ADD mode varchar(25) not null default ""')
-	); 
+	);
+	
+	$maj['0.5.0'] = array(
+		array(
+			'sql_updateq',
+			'spip_commandes_details',
+			array('statut' => 'attente'),
+			array(
+				'statut = ""',
+				'id_commande IN (select id_commande from spip_commandes where statut in ("encours","attente","paye","partiel","erreur"))',
+			),
+		),
+		array(
+			'sql_updateq',
+			'spip_commandes_details',
+			array('statut' => 'envoye'),
+			array(
+				'statut = ""',
+				'id_commande IN (select id_commande from spip_commandes where statut="envoye"',
+			),
+		),
+		array(
+			'sql_updateq',
+			'spip_commandes_details',
+			array('statut' => 'retour'),
+			array(
+				'statut = ""',
+				'id_commande IN (select id_commande from spip_commandes where statut in ("retour","retour_partiel"))',
+			)
+		),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
