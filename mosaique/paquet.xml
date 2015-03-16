@@ -1,7 +1,7 @@
 <paquet
 	prefix="mosaique"
 	categorie="multimedia"
-	version="0.4.0"
+	version="0.5.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/mosaique-64.png"

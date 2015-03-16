@@ -8,9 +8,9 @@ function mosaique_declarer_champs_extras($champs = array()) {
       'options' => array(
             'nom' => 'mosaique',
             'label' => '',
-    	     'sql' => "varchar(1000) NOT NULL DEFAULT ''",
+    	     'sql' => "text NOT NULL DEFAULT ''",
             'defaut' => '',// Valeur par defaut
-            'env' => 'oui',
+            'env' => 'oui'
       ),
   );
 
@@ -21,9 +21,9 @@ function mosaique_declarer_champs_extras($champs = array()) {
       'options' => array(
             'nom' => 'mosaique',
             'label' => '',
-     	    'sql' => "varchar(1000) NOT NULL DEFAULT ''",
+     	    'sql' => "text NOT NULL DEFAULT ''",
             'defaut' => '',// Valeur par defaut
-            'env' => 'oui',
+            'env' => 'oui'
       ),
   );
 
@@ -32,9 +32,9 @@ function mosaique_declarer_champs_extras($champs = array()) {
       'options' => array(
             'nom' => 'mosaique',
             'label' => '',
-    	     'sql' => "varchar(1000) NOT NULL DEFAULT ''",
+    	     'sql' => "text NOT NULL DEFAULT ''",
             'defaut' => '',// Valeur par defaut
-            'env' => 'oui',
+            'env' => 'oui'
       ),
   );
   return $champs;      
