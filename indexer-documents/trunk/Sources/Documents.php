@@ -35,7 +35,7 @@ class Documents extends SpipDocuments {
         // Extraire le contenu si possible
         if (defined('_DIR_PLUGIN_EXTRAIREDOC')) {
             include_spip('inc/extraire_document');
-            $extraire = inc_extraire_document($id);
+            $extraire = inc_extraire_document($document);
         }
 
         return new Document(array(

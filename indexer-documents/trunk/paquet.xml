@@ -1,7 +1,7 @@
 <paquet
     prefix="indexerdoc"
     categorie="navigation"
-    version="0.0.1"
+    version="0.0.2"
     etat="dev"
     compatibilite="[2.1.0;3.1.*]"
     logo=""
@@ -16,7 +16,7 @@
 
     <necessite nom="indexer" compatbilite="[1.1;]" />
 
-    <utilise nom="extrairedoc" />
+    <utilise nom="extrairedoc" compatibilite="[0.0.4;]" />
 
     <pipeline nom="indexer_sources" inclure="indexerdoc_pipelines.php" />
 
