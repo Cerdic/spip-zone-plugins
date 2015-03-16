@@ -9,7 +9,7 @@
     <icon></icon>
 
     <licence>GNU/GPL</licence>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
     <etat>test</etat>
     <description>Extraire le contenu des documents </description>
     <prefix>extrairedoc</prefix>

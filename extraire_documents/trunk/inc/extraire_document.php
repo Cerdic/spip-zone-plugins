@@ -4,17 +4,16 @@
  * Extraire le contenu d'un document donné
  *
  *
- * @param $id_document le document à trairer
+ * @param $document le document à trairer avec au moins un id et un fichier
  * @return Sdata un tableau de donnée, si non traité alors false
  */
-function inc_extraire_document($id_document = 0) {
-
-    if ( (!isset($id_document)) || (!is_numeric($id_document)) )
-        return false;
-
-    $document =  sql_fetsel("id_document,fichier", "spip_documents", "id_document = ".$id_document);
+function inc_extraire_document($document = array()) {
 
     if (empty($document))
+        return false;
+
+    if ( (!isset($document['id_document'])) || (!is_numeric($document['id_document'])) 
+        || (!isset($document['fichier'])) || (!is_numeric($document['fichier'])) )
         return false;
 
     include_spip('inc/distant');
