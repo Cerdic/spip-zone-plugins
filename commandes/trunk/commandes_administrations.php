@@ -88,7 +88,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 			array('statut' => 'envoye'),
 			array(
 				'statut = ""',
-				'id_commande IN (select id_commande from spip_commandes where statut="envoye"',
+				'id_commande IN (select id_commande from spip_commandes where statut="envoye")',
 			),
 		),
 		array(
