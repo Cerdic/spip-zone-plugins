@@ -22,11 +22,11 @@ function charger_url_image_responsive(this_img) {
 			
 			$.each(t, function (index, value) {
 				value = parseInt(value);
-				//console.log(value + " " + dim + " " + changer_w);
+				//console.log(value + " " + d + " " + changer_w);
 				if (changer_w == 1) w_max = value;
-				if (value >= dim) changer_w = 0;
+				if (value > dim) changer_w = 0;
 			});
-			 //console.log ("Wmax: "+w_max);
+			// console.log ("Wmax: "+w_max);
 			if (w_max > 0) dim = w_max;
 		}
 			// console.log ("W: "+dim);
@@ -70,17 +70,7 @@ function charger_url_image_responsive(this_img) {
 				if (vertical) url_img = url_img + "v";
 				if (dPR) url_img = url_img + "&dpr="+dPR;
 			}
-			var img = $("<img />").attr('src', url_img)
-				.load(function() {
-					if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
-						
-					} else {
-						this_img.attr("src", url_img).height("").width("").removeAttr("data-top");
-					}
-				});
-			
-			
-			
+			this_img.attr("src", url_img).height("").width("").removeAttr("data-top");
 		}
 
 }
@@ -121,7 +111,7 @@ function charger_url_background_responsive(this_img) {
 				value = parseInt(value);
 				//console.log(value + " " + d + " " + changer_w);
 				if (changer_w == 1) w_max = value;
-				if (value >= dim) changer_w = 0;
+				if (value > dim) changer_w = 0;
 			});
 			// console.log ("Wmax: "+w_max);
 			if (w_max > 0) dim = w_max;
