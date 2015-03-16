@@ -174,7 +174,8 @@ function exec_admin_tech()
 	//
 
 	if (autoriser('webmestre')) {
-		if (version_compare(spip_sql_version(),'3.23.14','>=')) {
+		$res = spip_mysql_version();
+		if ($res >= '3.23.14') {
 			$res = "\n<p style='text-align: justify;'>".
 				_T('texte_crash_base') .
 				"\n</p>";
