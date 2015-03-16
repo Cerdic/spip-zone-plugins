@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_methode_memcache' => 'Memcache',
 	'option_methode_nocache' => 'Désactivé (nocache)',
 	'option_methode_xcache' => 'XCache',
-	
+
 	// T
 	'taille_tototale_indisponible' => 'Taille totale non disponible'
 );
