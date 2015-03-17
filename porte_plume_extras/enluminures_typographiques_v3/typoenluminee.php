@@ -2,38 +2,40 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*
-  * Ce plugin rajoute des raccourcis typographique et ameliore les possibilites de la barre typographique pour les redacteurs
+  * 
 */
 
-	/*
-	 *    Fonctions de ces filtres :
-	 *     Ils rajoutent quelques racourcis typo a SPIP
-	 *
-	 *     Syntaxe des raccourcis :
-	 *           [/texte/] : aligner le texte a droite
-	 *           [!texte!] : aligner le texte a gauche
-	 *           [|texte|] : centrer le texte
-	 *           [(texte)] : encadrer le texte (occupe toute la largeur de la page, a mettre autour d'un paragraphe)
-	 *           [*texte*] : encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
-	 *           [**texte*] : variante encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
-	 *           <sup>texte</sup> : mettre en exposant le texte selectionne
-	 *           <sub>texte</sub> : mettre en indice le texte selectionne
-	 *
-	 *     Styles pour les encadrements a rajouter dans votre feuille de style :
-	 *            .texteencadre-spip {
-	 *           	background: #FFE;
-	 *           	border-bottom: 2px solid #999999;
-	 *           	border-left: 1px solid #EEEEEE;
-	 *           	border-right: 2px solid #999999;
-	 *           	border-top: 1px solid #EEEEEE;
-	 *           	padding: .25em;
-	 *           }
-	 *           .caractencadre-spip {
-	 *           	border: 1px solid #666;
-	 *           	padding: 0px .5em 0px .5em;
-	 *           }
-	 *
-	*/
+/**
+ * Ce plugin rajoute des raccourcis typographique et ameliore les possibilites de la barre typographique pour les redacteurs
+ * 
+ * 
+ *    Fonctions de ces filtres :
+ *     Ils rajoutent quelques racourcis typo a SPIP
+ *
+ *     Syntaxe des raccourcis :
+ *           [/texte/] : aligner le texte a droite
+ *           [!texte!] : aligner le texte a gauche
+ *           [|texte|] : centrer le texte
+ *           [(texte)] : encadrer le texte (occupe toute la largeur de la page, a mettre autour d'un paragraphe)
+ *           [*texte*] : encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
+ *           [**texte*] : variante encadrer/surligner le texte (une partie a l'interieur d'un paragraphe)
+ *           <sup>texte</sup> : mettre en exposant le texte selectionne
+ *           <sub>texte</sub> : mettre en indice le texte selectionne
+ *
+ *     Styles pour les encadrements a rajouter dans votre feuille de style :
+ *            .texteencadre-spip {
+ *           	background: #FFE;
+ *           	border-bottom: 2px solid #999999;
+ *           	border-left: 1px solid #EEEEEE;
+ *           	border-right: 2px solid #999999;
+ *           	border-top: 1px solid #EEEEEE;
+ *           	padding: .25em;
+ *           }
+ *           .caractencadre-spip {
+ *           	border: 1px solid #666;
+ *           	padding: 0px .5em 0px .5em;
+ *           }
+ */
 
 // Gerer les variables de personnalisation, fonction depreciee sous SPIP 2.0
 // A suivre sur la methode...
@@ -78,9 +80,9 @@ function typoenluminee_pre_propre($texte) {
 			$GLOBALS['debut_intertitre_5'] = lire_config('bte/titraille5open','<strong class="spip titraille5">');
 			$GLOBALS['fin_intertitre_5'] = lire_config('bte/titraille5close','</strong>');
 		}
-	
+
 		tester_variable('toujours_paragrapher', false);
-	
+
 		global $debut_intertitre, $fin_intertitre;
 		global $debut_intertitre_2, $fin_intertitre_2;
 		global $debut_intertitre_3, $fin_intertitre_3;
@@ -130,6 +132,15 @@ function typoenluminee_pre_propre($texte) {
 	return $texte;
 }
 
+/**
+ * Insertion dans le pipeline post_propre (SPIP)
+ * 
+ * Remplacement de caracteres apres le passage de propre
+ * 
+ * @param $texte string
+ * 	Le texte a modifier
+ * @return $texte string
+ */
 function typoenluminee_post_propre($texte) {
 	if(!$texte) return $texte;
 	static $cherche1 = NULL;
@@ -143,7 +154,7 @@ function typoenluminee_post_propre($texte) {
 		$cherche1[] = /* 17 */ 	",\[\|(.*)\|\],Ums";
 		$cherche1[] = /* 19 */ 	",\[\((.*)\)\],Ums";
 		$cherche1[] = /* 21 */ 	"/\[\*\*/S";
-		$cherche1[] = /* 21b */ 	"/\[\*/S";
+		$cherche1[] = /* 21b */ "/\[\*/S";
 		$cherche1[] = /* 22 */	"/\*\]/S";
 	
 		$remplace1[] = /* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>";
@@ -174,7 +185,7 @@ function typoenluminee_pre_typo($texte) {
 	static $local_barre_typo_pas_de_fausses_puces = null;
 	static $chercher_raccourcis;
 	static $remplacer_raccourcis;
-	global $debut_italique, $fin_italique;
+
 	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
 
@@ -189,20 +200,8 @@ function typoenluminee_pre_typo($texte) {
 				$local_barre_typo_pas_de_fausses_puces = (lire_config('bte/puces','Non') == 'Oui')?true:false;
 			}
 		}
-		global $class_spip;
-		tester_variable('debut_italique', "<i$class_spip>");
-		tester_variable('fin_italique', '</i>');
-		
-		$chercher_raccourcis = array(
-			/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
-			/* 10 */	"/(?<![}\d])[}](?![}\d])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
-		);
-	
-		$remplacer_raccourcis = array(
-			/* 9 */ 	$debut_italique,
-			/* 10 */	$fin_italique,
-		);
 	}
+
 	if ($local_barre_typo_pas_de_fausses_puces === true) {
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 	}
@@ -215,7 +214,8 @@ function typoenluminee_pre_typo($texte) {
 	$texte = str_ireplace('(r)','&reg;',$texte);
 	$texte = str_ireplace('(tm)','&trade;',$texte);
 	$texte = str_replace('...','&hellip;',$texte);
-	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
+	
+	global $debut_italique, $fin_italique,$class_spip;
 	/*
 		Cas particulier pour le gras
 		Il ne faut pas traiter la mise en gras ici si le texte contient un tableau
@@ -226,11 +226,29 @@ function typoenluminee_pre_typo($texte) {
 			/* 8 */ 	"/(?<![}])[}][}](?![}])/S" // En gros, verification qu'on n'est pas a l'interieur d'un titre
 		);
 		$remplacer_raccourcisg = array(
-			/* 7 */ 	"<strong class=\"spip\">",
+			/* 7 */ 	"<strong$class_spip>",
 			/* 8 */ 	"</strong>"
 		);
 		$texte = preg_replace($chercher_raccourcisg, $remplacer_raccourcisg, $texte);
 	}
+	
+	
+	/**
+	 * Remplacer les { ... } par <i> </i> tout en faisant attention à ne pas prendre en compte {1{...}1} par exemple
+	 * On passe après les gras pour que la regexp ne matche pas {{ ... }} 
+	 */
+	tester_variable('debut_italique', "<i$class_spip>");
+	tester_variable('fin_italique', '</i>');
+	$chercher_raccourcis = array(
+		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
+		/* 10 */	"/(?<!}\d)[}](?![\d}])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
+	);
+	$remplacer_raccourcis = array(
+		/* 9 */ 	$debut_italique,
+		/* 10 */	$fin_italique,
+	);
+	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
+
 	return $texte;
 }
 
