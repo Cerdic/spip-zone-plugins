@@ -32,7 +32,8 @@
 	</langue>
 	<langue code="hu" url="http://trad.spip.net/tradlang_module/forms?lang_cible=hu" total="177" traduits="1" relire="0" modifs="0" nouveaux="176" pourcent="0.56">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/forms?lang_cible=it" total="177" traduits="177" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/forms?lang_cible=it" total="177" traduits="176" relire="1" modifs="0" nouveaux="0" pourcent="99.44">
+		<traducteur nom="Julia14" lien="http://trad.spip.net/auteur/julia14" />
 	</langue>
 	<langue code="km" url="http://trad.spip.net/tradlang_module/forms?lang_cible=km" total="177" traduits="40" relire="0" modifs="0" nouveaux="137" pourcent="22.60">
 	</langue>
