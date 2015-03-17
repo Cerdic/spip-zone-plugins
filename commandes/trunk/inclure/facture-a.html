@@ -4,43 +4,58 @@
 ]
 <BOUCLE_commande(COMMANDES){id_commande}{tout}>
 <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
-<div id="bloc-a">
+[(#REM) Contact ou Orga ou Utilisateur ]
+<BOUCLE_contact(CONTACTS?){id_auteur}>
+<h4>#NOM #PRENOM</h4> #SET{id_contact,#ID_CONTACT}
+</BOUCLE_contact>
+	<BOUCLE_orga(ORGANISATIONS?){id_auteur}>
+	<h4>#NOM</h4> #SET{id_organisation,#ID_ORGANISATION}
+	</BOUCLE_orga>
+	<h4>#NOM</h4>
+	<//B_orga>
+<//B_contact>
 
-	<BOUCLE_contact(CONTACTS?){id_auteur}>
-		<h4>#NOM #PRENOM</h4>
-	</BOUCLE_contact>
-		<h4>#NOM</h4>
-	<//B_contact>
-
-	[(#REM) On cherche en priorité des adresses pour la commande, et sinon pour l'auteur ]
-	<B_adresses_comande>
-
-	<BOUCLE_adresses_comande(ADRESSES adresses_liens){id_commande}>
-		[(#TYPE|=={facturation}|oui)<h5><:commandes:adresse_facturation:></h5>]
-		[(#TYPE|=={livraison}|oui)<h5><:commandes:adresse_livraison:></h5>]
-		<p class='adresse'>
+[(#REM) On cherche en priorité des adresses pour la commande, sinon contact, sinon orga, sinon utilisateur ]
+<BOUCLE_adresses_comande(ADRESSES adresses_liens){id_commande}>
+[(#TYPE|=={facturation}|oui)<h5><:commandes:adresse_facturation:></h5>]
+[(#TYPE|=={livraison}|oui)<h5><:commandes:adresse_livraison:></h5>]
+<p class="adresse">
+	[(#VOIE)<br />]
+	[(#CODE_POSTAL) ][ (#VILLE)]<br />
+	<BOUCLE_pays(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays>
+</p>
+</BOUCLE_adresses_comande>
+	<BOUCLE_adresse_contact(ADRESSES){id_contact=#GET{id_contact}}{0,1}>
+	<p class="adresse">
+		[(#VOIE)<br />]
+		[(#CODE_POSTAL) ][ (#VILLE)]<br />
+		<BOUCLE_pays_contact(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_contact>
+	</p>
+	</BOUCLE_adresse_contact>
+		<BOUCLE_adresse_orga(ADRESSES){id_organisation=#GET{id_organisation}}{0,1}>
+		<p class="adresse">
 			[(#VOIE)<br />]
 			[(#CODE_POSTAL) ][ (#VILLE)]<br />
-			<BOUCLE_pays(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays>
+			<BOUCLE_pays_orga(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_orga>
 		</p>
-	</BOUCLE_adresses_comande>
-		<BOUCLE_adresses_client(ADRESSES){id_auteur}>
-			<p class='adresse'>
+		</BOUCLE_adresse_orga>
+			<BOUCLE_adresse_auteur(ADRESSES){id_auteur}{0,1}>
+			<p class="adresse">
 				[(#VOIE)<br />]
 				[(#CODE_POSTAL) ][ (#VILLE)]<br />
-				<BOUCLE_pays_client(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_client>
+				<BOUCLE_pays_auteur(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_auteur>
 			</p>
-		</BOUCLE_adresses_client>
-	<//B_adresses_comande>
+			</BOUCLE_adresse_auteur>
+		<//B_adresse_orga>
+	<//B_adresse_contact>
+<//B_adresses_comande>
 
-	<B_telephones>
-	<p class='telephone'>
-	<BOUCLE_telephones(NUMEROS numeros_liens){id_auteur}{'<br />'}>
-	<strong>Tel</strong> #NUMERO
-	</BOUCLE_telephones>
-	</p>
-	</B_telephones>
-
-</div>
+<B_telephones>
+<p class="telephone">
+<BOUCLE_telephones(NUMEROS numeros_liens){id_auteur}{'<br />'}>
+<strong>Tel</strong> #NUMERO
+</BOUCLE_telephones>
+</p>
+</B_telephones>
 </BOUCLE_auteur>
 </BOUCLE_commande>

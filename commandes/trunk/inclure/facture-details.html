@@ -4,7 +4,6 @@
 	- totaux
 ]
 <BOUCLE_commande(COMMANDES){id_commande}>
-<div id="bloc-details">
 <B_liste>
 <table>
 	<thead>
@@ -22,18 +21,18 @@
          <td class="def"><:prix:label_taxes:></td>
          <td class="prix">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
       </tr>		
-      <tr class='total'>
+      <tr class="total">
          <td class="def"><:prix:label_total_ttc:></td>
          <td class="prix">[(#PRIX)]</td>
       </tr>		
 	</tfoot>
 	<tbody>
-<BOUCLE_liste(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
+	<BOUCLE_liste(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
 	<tr>
 		<td class="descriptif">[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times; </strong>][(#DESCRIPTIF*|typo|supprimer_numero)]</td>
 		<td class="prix_ht">[(#PRIX_HT)]</td>
 	</tr>
-</BOUCLE_liste>
+	</BOUCLE_liste>
 	</tbody>
 </table>
 </B_liste>
@@ -48,11 +47,10 @@
 		<td class="def"><:prix:label_taxes:></td>
 		<td class="prix">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
 	</tr>		
-	<tr class='total'>
+	<tr class="total">
 		<td class="def"><:prix:label_total_ttc:></td>
 		<td class="prix">[(#PRIX)]</td>
 	</tr>		
 </table>
 <//B_liste>
-</div>
 </BOUCLE_commande>

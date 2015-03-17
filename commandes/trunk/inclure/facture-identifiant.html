@@ -4,9 +4,7 @@
 	- date
 ]
 <BOUCLE_id_facture(COMMANDES){id_commande}>
-<div id="bloc-identifiant">
-	[(#SET{date, [(#DATE|affdate)] })]
-	<h2><:commandes:facture_num{num=#REFERENCE}:></h2>
-	<h3><:commandes:facture_date{date=#GET{date}}:></h3>
-</div>
+[(#SET{date, [(#DATE|affdate)] })]
+<h2><:commandes:facture_num{num=#REFERENCE}:></h2>
+<h3><:commandes:facture_date{date=#GET{date}}:></h3>
 </BOUCLE_id_facture>

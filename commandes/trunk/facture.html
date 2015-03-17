@@ -1,3 +1,3 @@
-[(#AUTORISER{voir,commande,#ID_COMMANDE})
-	[(#INCLURE{fond=inclure/facture,env})]
-]
+[(#AUTORISER{voir_facture,commande,#ID_COMMANDE}|sinon_interdire_acces)]
+
+[(#INCLURE{fond=inclure/facture,env})]
