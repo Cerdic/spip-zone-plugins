@@ -241,7 +241,7 @@ function typoenluminee_pre_typo($texte) {
 	tester_variable('fin_italique', '</i>');
 	$chercher_raccourcis = array(
 		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
-		/* 10 */	"/(?<!}\d)[}](?![\d}])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
+		/* 10 */	"/(?<![}\d])[}](?![\d}])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
 	);
 	$remplacer_raccourcis = array(
 		/* 9 */ 	$debut_italique,
