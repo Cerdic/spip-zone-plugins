@@ -23,6 +23,9 @@
 	<langue code="it" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="80" traduits="3" relire="0" modifs="51" nouveaux="26" pourcent="3.75">
 		<traducteur nom="marydeli" lien="http://trad.spip.net/auteur/marydeli" />
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=oc_ni_mis" total="80" traduits="47" relire="0" modifs="0" nouveaux="33" pourcent="58.75">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=sk" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
