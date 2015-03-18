@@ -101,7 +101,7 @@ function mailsubscribers_optimiser_base_disparus($flux){
  * @return array
  */
 function mailsubscribers_formulaire_charger($flux){
-	if ($flux['args']['form']=="inscription"){
+	if (in_array($flux['args']['form'],array("inscription","forum"))){
 		// ici on ne lit pas la config pour aller plus vite (pas grave si on a ajoute le champ sans l'utiliser)
 		$flux['data']['mailsubscriber_optin'] = '';
 	}
@@ -109,7 +109,7 @@ function mailsubscribers_formulaire_charger($flux){
 }
 
 /**
- * Ajout de la coche d'optin sur le formulaire inscription
+ * Ajout de la coche d'optin sur le formulaire inscription et forum
  *
  * @param array $flux
  * @return array
@@ -124,11 +124,49 @@ function mailsubscribers_formulaire_fond($flux){
 			}
 		}
 	}
+	if ($flux['args']['form']=="forum"){
+		include_spip('inc/config');
+		if (lire_config("mailsubscribers/proposer_comment_optin",0)){
+			$show = true;
+			// si l'utilisateur est connu et deja abonne on propose pas la coche
+			if ( (isset($GLOBALS['visiteur_session']['email']) AND $email = $GLOBALS['visiteur_session']['email'])
+			  OR (isset($GLOBALS['visiteur_session']['session_email']) AND $email = $GLOBALS['visiteur_session']['session_email'])){
+				$newsletter_subscriber = charger_fonction('subscriber','newsletter');
+				$infos = $newsletter_subscriber($email);
+				if ($infos AND $infos['status']=="on"){
+					$show = false;
+				}
+			}
+
+			if ($show AND ($p = strpos($flux['data'],"</ul>"))!==false){
+				$input = recuperer_fond("formulaires/inc-optin-subscribe",$flux['args']['contexte']);
+				$flux['data'] = substr_replace($flux['data'],$input,$p,0);
+			}
+		}
+	}
 	return $flux;
 }
 
 /**
- * Ajout de la coche d'optin sur le formulaire inscription
+ * Reinjecter mailsubscriber_optin dans la previsu forum si besoin
+ * @param $flux
+ * @return mixed
+ */
+function mailsubscribers_formulaire_verifier($flux){
+	if ($flux['args']['form']=="forum"
+	  AND _request('mailsubscriber_optin')
+	  AND isset($flux['data']['previsu'])){
+
+		// reinjecter l'optin dans la previsu
+		if ($p = strpos($flux['data']['previsu'],"<input")){
+			$flux['data']['previsu'] = substr_replace($flux['data']['previsu'],"<input type='hidden' name='mailsubscriber_optin' value='oui' />",$p,0);
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Traitement de la coche d'optin sur le formulaire inscription et forum
  *
  * @param array $flux
  * @return array
@@ -147,6 +185,30 @@ function mailsubscribers_formulaire_traiter($flux){
 				// inscrire le nom et email
 				$newsletter_subscribe = charger_fonction('subscribe','newsletter');
 				$newsletter_subscribe($row['email'],array('nom'=>$row['nom']));
+			}
+		}
+	}
+	if ($flux['args']['form']=="forum"
+	  AND _request('mailsubscriber_optin')
+	  AND (isset($GLOBALS['visiteur_session']['email']) OR isset($GLOBALS['visiteur_session']['session_email']))){
+		// si on a poste l'optin et on a un email en session
+
+		// verifier quand meme que la config autorise cet optin, et que l'inscription s'est bien faite)
+		include_spip('inc/config');
+		if (lire_config("mailsubscribers/proposer_comment_optin",0)){
+			$email = $nom = "";
+			if (isset($GLOBALS['visiteur_session']['email']))
+				$email = $GLOBALS['visiteur_session']['email'];
+			elseif (isset($GLOBALS['visiteur_session']['session_email']))
+				$email = $GLOBALS['visiteur_session']['session_email'];
+			if (isset($GLOBALS['visiteur_session']['nom']))
+				$nom = $GLOBALS['visiteur_session']['nom'];
+			elseif (isset($GLOBALS['visiteur_session']['session_nom']))
+				$nom = $GLOBALS['visiteur_session']['session_nom'];
+			if ($email){
+				// inscrire le nom et email
+				$newsletter_subscribe = charger_fonction('subscribe','newsletter');
+				$newsletter_subscribe($email,array('nom'=>$nom));
 			}
 		}
 	}

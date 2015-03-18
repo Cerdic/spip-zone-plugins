@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_status_delete_explication' => 'This mailing list and it\'s subscribers will be deleted',
 
 	'label_proposer_signup_optin_1'=> 'Propose subscription during inscription to website',
+	'label_proposer_comment_optin_1'=> 'Propose subscription in comment form',
 
 	'label_listes_auto_auteurs' => 'List of <b>@statut@</b>',
 

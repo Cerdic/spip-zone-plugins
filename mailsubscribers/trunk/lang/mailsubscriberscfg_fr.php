@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_status_delete_explication' => 'Cette liste de diffusion et ses abonnés seront supprimés',
 
 	'label_proposer_signup_optin_1'=> 'Proposer l\'inscription à la Newsletter lors de l\'inscription au site',
+	'label_proposer_comment_optin_1'=> 'Proposer l\'inscription à la Newsletter quand l\'utilisateur rédige un commentaire',
 
 	'label_listes_auto_auteurs' => 'Liste des <b>@statut@</b>',
 

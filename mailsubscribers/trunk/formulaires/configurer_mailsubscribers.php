@@ -13,6 +13,7 @@ include_spip("inc/cvt_configurer");
 function formulaires_configurer_mailsubscribers_charger_dist(){
 	$valeurs = array(
 		'proposer_signup_optin' => lire_config('mailsubscribers/proposer_signup_optin',0),
+		'proposer_comment_optin' => lire_config('mailsubscribers/proposer_comment_optin',0),
 		'double_optin' => lire_config('mailsubscribers/double_optin',1),
 		'lists' => lire_config('mailsubscribers/lists',array()),
 		'listes_auto_auteurs' => lire_config('mailsubscribers/listes_auto_auteurs',array()),
