@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'facture_date' => 'تاريخ : <span>@date@</span>',
-	'facture_num' => 'فاكتور شماره‌ي <span>@num@</span>',
+	'facture_num' => 'فاكتور شماره‌ي <span>@num@</span>', # MODIF
 
 	// I
 	'info_toutes_commandes' => 'تمام سفارش‌ها',

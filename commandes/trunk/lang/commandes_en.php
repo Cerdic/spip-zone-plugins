@@ -63,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'facture_date' => 'Date: <span>@date@</span>',
-	'facture_num' => 'Invoice n° <span>@num@</span>',
+	'facture_num' => 'Invoice n° <span>@num@</span>', # MODIF
 	'facture_titre' => 'Invoice',
 
 	// I
