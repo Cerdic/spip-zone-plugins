@@ -17,8 +17,8 @@
 
 [(#REM) On cherche en priorité des adresses pour la commande, sinon contact, sinon orga, sinon utilisateur ]
 <BOUCLE_adresses_comande(ADRESSES adresses_liens){id_commande}>
-[(#TYPE|=={facturation}|oui)<h5><:commandes:adresse_facturation:></h5>]
-[(#TYPE|=={livraison}|oui)<h5><:commandes:adresse_livraison:></h5>]
+[(#TYPE|=={facturation}|oui)<h5><:commandes:type_adresse_facturation:></h5>]
+[(#TYPE|=={livraison}|oui)<h5><:commandes:type_adresse_livraison:></h5>]
 <p class="adresse">
 	[(#VOIE)<br />]
 	[(#CODE_POSTAL) ][ (#VILLE)]<br />
