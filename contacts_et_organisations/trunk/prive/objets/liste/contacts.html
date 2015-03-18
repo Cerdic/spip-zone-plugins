@@ -74,6 +74,15 @@
 		</tr>
 	</BOUCLE_liste_contacts>
 	</tbody>
+	[(#AUTORISER{exporter,contacts,'','',#ARRAY{id_annuaire,#ENV{id_annuaire}}}|oui)
+	<tfoot>
+		<tr>
+			<th colspan="100">
+				<a href="#URL_ACTION_AUTEUR{exporter_contacts,#ENV{id_annuaire}}"><:contacts:exporter_contacts:></a>
+			</th>
+		</tr>
+	</tfoot>
+	]
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>

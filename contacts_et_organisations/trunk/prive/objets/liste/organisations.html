@@ -74,6 +74,15 @@
 		</tr>
 	</BOUCLE_liste_orga>
 	</tbody>
+	[(#AUTORISER{exporter,organisations,'','',#ARRAY{id_annuaire,#ENV{id_annuaire}}}|oui)
+	<tfoot>
+		<tr>
+			<th colspan="100">
+				<a href="#URL_ACTION_AUTEUR{exporter_organisations,#ENV{id_annuaire}}"><:contacts:exporter_organisations:></a>
+			</th>
+		</tr>
+	</tfoot>
+	]
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>

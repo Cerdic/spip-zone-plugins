@@ -127,6 +127,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 	'explications_page_organisations' => 'Page en cours de développement. <br /><br />Actions envisagées :<ul>
 	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://contrib.spip.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'exporter_contacts' => 'Télécharger ces contacts en tableur',
+	'exporter_organisations' => 'Télécharger ces organisations en tableur',
 
 	// I
 	'info_contacts_organisation' => 'Contacts de l’organisation',

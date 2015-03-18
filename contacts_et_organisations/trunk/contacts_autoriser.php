@@ -61,6 +61,22 @@ function autoriser_organisation_supprimer_dist($faire, $type, $id, $qui, $opt){
 }
 
 /**
+ * Autorisation d'exporter des organisations en tableur
+ *
+ * Qui peut configurer
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_organisation_exporter_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('configurer');
+}
+
+/**
  * Autorisation de modifier un contact
  *
  * Seuls les admins et l'auteur lié s'il existe peuvent modifier le contact
@@ -100,6 +116,22 @@ function autoriser_contact_supprimer_dist($faire, $type, $id, $qui, $opt){
 			and $id_auteur > 0
 			and $id_auteur == $qui['id_auteur']
 		);
+}
+
+/**
+ * Autorisation d'exporter des contacts en tableur
+ *
+ * Qui peut configurer
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opt   Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_contact_exporter_dist($faire, $type, $id, $qui, $opt){
+	return autoriser('configurer');
 }
 
 /**
