@@ -215,7 +215,7 @@ function typoenluminee_pre_typo($texte) {
 	$texte = str_ireplace('(tm)','&trade;',$texte);
 	$texte = str_replace('...','&hellip;',$texte);
 	
-	global $debut_italique, $fin_italique,$class_spip;
+	global $class_spip;
 	/*
 		Cas particulier pour le gras
 		Il ne faut pas traiter la mise en gras ici si le texte contient un tableau
@@ -231,23 +231,6 @@ function typoenluminee_pre_typo($texte) {
 		);
 		$texte = preg_replace($chercher_raccourcisg, $remplacer_raccourcisg, $texte);
 	}
-	
-	
-	/**
-	 * Remplacer les { ... } par <i> </i> tout en faisant attention à ne pas prendre en compte {1{...}1} par exemple
-	 * On passe après les gras pour que la regexp ne matche pas {{ ... }} 
-	 */
-	tester_variable('debut_italique', "<i$class_spip>");
-	tester_variable('fin_italique', '</i>');
-	$chercher_raccourcis = array(
-		/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
-		/* 10 */	"/(?<![}\d])[}](?![\d}])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
-	);
-	$remplacer_raccourcis = array(
-		/* 9 */ 	$debut_italique,
-		/* 10 */	$fin_italique,
-	);
-	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
 	return $texte;
 }
