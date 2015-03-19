@@ -11,11 +11,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'activer_mots_cles' => 'Ativà la gestioun per mot clau',
 	'admin_complets' => 'Lu aministratour coumplet',
 	'admin_restreints' => 'Aministratour restrech ?',
+	'admin_tous' => 'Tou lu aministratour (embé lu restrech)',
 	'administrateur' => 'aministratour',
 	'admins' => 'Lu aministratour',
 	'admins_redacs' => 'Aministratour e Redactour',
 	'admins_rubriques' => 'lu aministratour assouciat a dei rùbrica an :',
+	'attention_version' => 'Mèfi, si pòu que la vouòstra versioun de SPIP noun founcioune embé li chausida seguenti :',
 	'auteur_message_advitam' => 'L’autour dóu message, ad vitam',
+	'auteur_modifie_article' => '<strong>Autour moudifica article</strong> : cada redatour pòu moudificà lu article publicat que sìgue l’autour.
+	<br />
+	<i>N.B. : aquela oupcioun  s’aplica finda ai visitaire registrat, se soun autour e se una interfaça especifica es prevista.</i>',
 
 	// C
 	'config_auteurs' => 'Counfiguracioun dei autour',
@@ -29,11 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'droits_des_auteurs' => 'Drech dei autour',
 	'droits_des_redacteurs' => 'Drech dei redatour',
 	'droits_idem_admins' => 'lu meme drech que toui lu aministratour',
+	'droits_limites' => 'dei drech limitat en aqueli rùbrica',
 
 	// E
+	'effacer_base_qui' => 'Qu pòu <strong>escassà</strong> la basa de dounada dóu sit ?',
 	'espace_publieur' => 'Espaci pùblicou dubert',
 	'espace_wiki' => 'Espaci wiki',
 	'espace_wiki_mots_cles' => 'Espaci wiki per mot clau',
+	'espace_wiki_mots_cles_detail' => 'Chausissès aquì souta lu mot clau qu’ativeron lou mòdou wiki, es a dire editable per toui da l’espaci pùblicou (a coundicioun d’avé una interfaça, per isemple lu creioun)',
 
 	// F
 	'forums_qui' => '<strong>Fòrou :</strong> qu pòu moudificà lou countengut dei fòrou :',
@@ -66,6 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacs' => 'ai redatour dóu sit',
 	'redacteur' => 'redatour',
 	'refus_1' => '<p>Basta lu webmestre dóu sit',
+	'reglage_autorisations' => 'Reglage dei autourisacioun',
 
 	// S
 	'sauvegarde_qui' => 'Qu pòu efetuà dei <strong>sauvagarda</strong> ?',
