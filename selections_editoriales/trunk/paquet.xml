@@ -1,6 +1,6 @@
 <paquet
 	prefix="selections_editoriales"
-	categorie="divers"
+	categorie="navigation"
 	version="1.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
