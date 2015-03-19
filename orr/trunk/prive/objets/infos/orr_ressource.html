@@ -2,5 +2,14 @@
 <div class='infos'>
 	[(#SET{texte_objet,<:orr:titre_orr_ressource:>})]
 	<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ORR_RESSOURCE</p></div>
+
+	[(#AUTORISER{supprimer,orr_ressource,#ID_ORR_RESSOURCE}|oui)
+		[(#URL_ACTION_AUTEUR{supprimer_orr_ressource,#ID_ORR_RESSOURCE,#URL_ECRIRE{orr_ressources}}
+			|icone_horizontale{
+				<:orr_ressource:texte_supprimer_ressource:>,
+				orr_ressource,del,'',
+				onclick="return confirm('<:orr_ressource:texte_supprimer_ressource_confirmation|attribut_html:>');"
+		})]
+	]
 </div>
 </BOUCLE_orr_ressource>
