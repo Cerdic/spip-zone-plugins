@@ -48,18 +48,21 @@ function panier2commande_post_insertion($flux){
 					$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
 				else
 					$taxe = 0;
-				sql_insertq(
-					'spip_commandes_details',
-					array(
+				// création du détail de la commande
+				include_spip('action/editer_objet');
+				if ($id_commandes_detail = objet_inserer('commandes_detail')) {
+					$set = array(
 						'id_commande' => $id_commande,
 						'objet' => $emplette['objet'],
 						'id_objet' => $emplette['id_objet'],
 						'descriptif' => generer_info_entite($emplette['id_objet'], $emplette['objet'], 'titre', '*'),
 						'quantite' => $emplette['quantite'],
 						'prix_unitaire_ht' => $prix_ht,
-						'taxe' => $taxe
-					)
-				);
+						'taxe' => $taxe,
+						'statut' => 'attente'
+					);
+					objet_modifier('commandes_detail', $id_commandes_detail, $set);
+				}
 			}
 		}
 	}
