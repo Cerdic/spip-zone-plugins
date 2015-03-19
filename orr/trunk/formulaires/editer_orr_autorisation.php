@@ -2,20 +2,26 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_editer_orr_autorisation_charger_dist($id_autorisation="",$redirect="",$associer_objet=""){
-	if ($id_autorisation != '' AND $id_autorisation != 'oui')
-		$row = sql_fetsel("*", "spip_orr_autorisations", "id_orr_autorisation=$id_autorisation");
-	$Tdroits = explode('-', $row["orr_autorisation_valeur"]);
+
+	if ($id_autorisation != '' AND $id_autorisation != 'oui' and intval($id_autorisation)) {
+		$row = sql_fetsel("*", "spip_orr_autorisations", "id_orr_autorisation=" .intval($id_autorisation));
+	} else {
+		$row = array();
+	}
+
+	$Tdroits = explode('-', isset($row["orr_autorisation_valeur"]) ? $row["orr_autorisation_valeur"] : "");
+
     $valeurs = array(
-        "orr_type"  	=> $row["orr_type_objet"],
+        "orr_type"  	=> !empty($row["orr_type_objet"]) ? $row["orr_type_objet"] : '',
         "orr_droit"		=> $Tdroits,
 // à priori ces 3 là ne servent pas à grand chose ici: les selects ne sont pas présents lors du chargement du form   
-        "orr_statut"	=> $row["orr_statut"] != '' ? $row["orr_statut"] : "",
-        "orr_grappe"	=> $row["id_grappe"] ? $row["id_grappe"] : "",
-        "orr_auteur"	=> $row["id_auteur"] ? $row["id_auteur"] : "",
+        "orr_statut"	=> !empty($row["orr_statut"]) ? $row["orr_statut"] : "",
+        "orr_grappe"	=> !empty($row["id_grappe"]) ? $row["id_grappe"] : "",
+        "orr_auteur"	=> !empty($row["id_auteur"]) ? $row["id_auteur"] : "",
 // stockage des valeurs enregistrées si edition d'une autorisation existante pour la transmission ajax        
-        "val_statut"	=> $row["orr_statut"] != '' ? $row["orr_statut"] : "",
-        "val_auteur"	=> $row["id_auteur"] ? $row["id_auteur"] : "",
-        "val_grappe"	=> $row["id_grappe"] ? $row["id_grappe"] : "",
+        "val_statut"	=> !empty($row["orr_statut"]) ? $row["orr_statut"] : "",
+        "val_auteur"	=> !empty($row["id_auteur"]) ? $row["id_auteur"] : "",
+        "val_grappe"	=> !empty($row["id_grappe"]) ? $row["id_grappe"] : "",
     );
 return $valeurs;
 }
