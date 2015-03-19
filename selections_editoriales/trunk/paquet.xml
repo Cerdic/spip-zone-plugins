@@ -10,7 +10,8 @@
 >
 	<nom>Sélections éditoriales</nom>
 	
-	<auteur lien='http://www.ldd.net'>Les Développements Durables</auteur>
+	<auteur lien="http://www.ldd.net">Les Développements Durables</auteur>
+	<credit lien="http://www.beaumont63.fr">Mairie de Beaumont (Puy-de-Dôme)</credit>
 	<licence>GNU/GPL v3</licence>
 	
 	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
