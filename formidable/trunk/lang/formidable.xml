@@ -1,6 +1,7 @@
 <traduction module="formidable" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/formidable/trunk/lang/" reference="fr">
 	<langue code="de" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=de" total="189" traduits="98" relire="0" modifs="4" nouveaux="87" pourcent="51.85">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
+		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="189" traduits="166" relire="1" modifs="0" nouveaux="22" pourcent="87.83">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
