@@ -9,12 +9,18 @@ function valeur_champs_extra($nom_champ,$id_resa){
 }
 
 function orr_premierjourcalendrier($date){
+	if (!$date) {
+		return "";
+	}
 	list($annee,$mois,$jour) = explode('-',$date);
     $numero_premier_jour = date("N",mktime(0,0,0,$mois,1,intval($annee)));
     return date("Y-m-d",mktime(0,0,0,$mois,1-$numero_premier_jour+1,intval($annee)));
 }
 
 function orr_plusunjour($date){
+	if (!$date) {
+		return "";
+	}
 	list($annee,$mois,$jour) = explode('-',$date);
     return date("Y-m-d",mktime(0,0,0,$mois,$jour+1,intval($annee)));
 }
@@ -29,6 +35,9 @@ function orr_plusunjour($date){
  * 		si nom le jour de la semaine
  **/
 function orr_joursemaine($date, $jourvoulu, $format){
+	if (!$date) {
+		return "";
+	}
 	list($annee, $mois, $jour) = explode('-', $date);
 	switch ($format) {
 		case "jour":
@@ -64,12 +73,13 @@ function orr_joursemaine($date, $jourvoulu, $format){
 			$date = date($format_mktime, mktime(0,0,0,$mois,$jour+3, intval($annee)));
 			break;
 	}
-	if ($format == "nom")
+	if ($format == "nom") {
 		$date = orr_traduction_jour($date);
-		
+	}
+
 	return $date;
 };
-		
+
 /**
  * fonction de traduction entre numéro du jour et nom du jour
  * */
@@ -83,6 +93,7 @@ function orr_joursemaine($date, $jourvoulu, $format){
  * et si nécessaire pour cohérence avec celles d'une résa en cours
  */
 function orr_compare_date($date_debut, $date_fin, $idressource, $idresa){
+	$retour = 0;
 	include_spip('base/abstract_sql');
 	if ($idresa > 0){
 		if ($result = sql_select(
@@ -164,7 +175,7 @@ function orr_compare_date($date_debut, $date_fin, $idressource, $idresa){
 function orr_nom_champs_extra($nom_table){
 	include_spip("inc/config");
 	$Tchamps = array();
-	$Ttout = lire_config("champs_extras_".$nom_table);
+	$Ttout = lire_config("champs_extras_".$nom_table, array());
 	foreach ($Ttout as $champ)
 		$Tchamps[] = $champ['options']['nom'];
 	return $Tchamps;
@@ -175,6 +186,7 @@ function orr_nom_champs_extra($nom_table){
  * tranformation d'une date j/m/y h:m:s en date sql
  */
 function orr_date_sql($date_entree){
+	if (!$date_entree) { return ''; }
     list($date,$heures)           = explode(' ' , $date_entree);
     list($jour,$mois,$annee)      = explode('/' , $date);
 //    list($heure,$minute,$seconde) = explode(':' , $heures);
