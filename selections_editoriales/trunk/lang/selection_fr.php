@@ -1,8 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/selections_editoriales/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -16,11 +15,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_limite_explication' => 'Nombre maximum de contenus dans la sélection.',
 	'champ_limite_label' => 'Limite',
 	'champ_titre_label' => 'Titre',
-	
+
 	// E
-	'erreur_identifiant_existant' => 'Cet identifiant est déjà utilisé par la sélection « @selection@ ».',
+	'erreur_identifiant_existant' => 'Cet identifiant est déjà utilisé par la sélection « @selection@ ».',
 	'erreur_limite_entier' => 'La limite doit être un nombre entier positif.',
-	
+
 	// I
 	'icone_creer_selection' => 'Créer une sélection éditoriale',
 	'icone_modifier_selection' => 'Modifier cette sélection éditoriale',
@@ -44,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_selections' => 'Sélections éditoriales',
 	'titre_selections_autonomes' => 'Sélections éditoriales autonomes',
 	'titre_selections_objets' => 'Sélections éditoriales liées à des contenus',
-	'titre_selections_rubrique' => 'Sélections éditoriales de la rubrique',
+	'titre_selections_rubrique' => 'Sélections éditoriales de la rubrique'
 );
 
 ?>
