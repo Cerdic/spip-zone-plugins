@@ -1,9 +1,9 @@
 <paquet
 	prefix="mediaboxavectexte"
 	categorie="multimedia"
-	version="0.0.2"
+	version="1.0.0"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.17;3.0.*]"
 	logo="prive/themes/spip/images/mediabox-32.png"
 >
 
