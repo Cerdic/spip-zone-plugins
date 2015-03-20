@@ -282,16 +282,14 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (!($length=strlen($texte)) OR $taille <= 0) return '';
 	$offset = 400 + 2*$taille;
 
-	// supprimer un lien [toto<-] qui provoque une fausse ouverture de tag
-	$texte = preg_replace('/[[][^[\]<>]*(<-)[^[\]<>]*[]]/S', '', $texte);
-
 	while ($offset<$length
 		AND strlen(preg_replace(",<[^>]+>,Uims","",substr($texte,0,$offset)))<$taille)
 		$offset = 2*$offset;
 	if (	$offset<$length
-			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
+			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==false){
 		$p_tag_fermant = strpos($texte,'>',$offset);
-		if ($p_tag_fermant<$p_tag_ouvrant)
+		if ($p_tag_fermant<$p_tag_ouvrant
+		AND $p_tag_fermant !== false)
 			$offset = $p_tag_fermant+1; // prolonger la coupe jusqu'au tag fermant suivant eventuel
 	}
 	$texte = substr($texte, 0, $offset); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
@@ -306,6 +304,9 @@ function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 
 	// supprimer les traits, lignes etc
 	$texte = preg_replace("/(^|\r|\n)(-[-#\*]*|_ )/", "\r", $texte);
+
+	// supprimer les liens [toto<-]
+	$texte = preg_replace('/[[][^[\]<>]*(<-)[^[\]<>]*[]]/S', '', $texte);
 
 	// supprimer les tags
 	$texte = supprimer_tags($texte);
