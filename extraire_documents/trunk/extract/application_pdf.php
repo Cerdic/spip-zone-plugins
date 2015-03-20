@@ -33,8 +33,14 @@ function extraire_application_pdf($fichier) {
     }
 
     // Parcourir les pages et extraire le contenu textuel
-    foreach ($pdf->getPages() as $page) {
-        $contenu .= $page->getText();
+    try {
+        foreach ($pdf->getPages() as $page) {
+            $contenu .= $page->getText();
+        }
+    }
+    catch (Exception $e) {
+        //si on ne peut extraire le texte on passe à la page suivante
+        $contenu .= "";
     }
 
     //Libérer les ressources
