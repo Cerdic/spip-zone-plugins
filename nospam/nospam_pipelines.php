@@ -173,6 +173,7 @@ function nospam_formulaire_charger($flux) {
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
 
 		if (_SPAM_ENCRYPT_NAME){
+			$flux['data']['_hidden'] .= "<input type='hidden' name='_encrypt' value='1' />";
 			// recuperer les autosave encryptes si possible
 			if (is_array($flux['data'])
 			  AND isset($flux['data']['_autosave_id'])
@@ -221,7 +222,7 @@ function nospam_formulaire_verifier($flux) {
 		// si oui on les decrypte puis on relance la verif complete
 		// attention, du coup verifier() est appele 2 fois dans ce cas (peut poser probleme ?)
 		// donc on repasse ici une deuxieme fois, et il ne faut pas relancer le decryptage
-		if (_SPAM_ENCRYPT_NAME AND !$deja){
+		if (_request('_encrypt') AND !$deja){
 			$deja = true;
 			$re_verifier = false;
 			foreach($_POST as $k=>$v){
@@ -244,8 +245,14 @@ function nospam_formulaire_verifier($flux) {
 				return $flux;
 			}
 		}
+		// si l'encrypt a ete active depuis l'affichage initial de ce form, on rebalance l'erreur technique
+		// pour reforcer un POST
+		if (_SPAM_ENCRYPT_NAME AND !_request('_encrypt')){
+			spip_log('SPAM_ENCRYPT_NAME active mais _encrypt manquant','nospam');
+			$flux['data']['message_erreur'] = _T('nospam:erreur_jeton');
+		}
 		// le jeton prend en compte l'heure et l'ip de l'internaute
-		if (_request('nobot') // trop facile !
+		elseif (_request('nobot') // trop facile !
 			OR _request('email_nobot')
 			OR (!verifier_jeton($jeton, $form))
 		) {
