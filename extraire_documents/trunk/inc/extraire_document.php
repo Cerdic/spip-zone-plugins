@@ -9,11 +9,13 @@
  */
 function inc_extraire_document($document = array()) {
 
-    if (empty($document))
+    if ( (!isset($document['id_document'])) || (!is_numeric($document['id_document'])) )
         return false;
 
-    if ( (!isset($document['id_document'])) || (!is_numeric($document['id_document'])) 
-        || (!isset($document['fichier'])) || (!is_numeric($document['fichier'])) )
+    if ( (!isset($document['fichier'])) || (!is_numeric($document['fichier'])) )
+        $document =  sql_fetsel("id_document,fichier", "spip_documents", "id_document = ".$document['id_document']);
+
+    if (empty($document))
         return false;
 
     include_spip('inc/distant');
