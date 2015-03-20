@@ -1,9 +1,10 @@
 <paquet
 	prefix="image_responsive"
 	categorie="outil"
-	version="4.8.1"
+	version="4.8.2"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
+	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-image-responsive"	
 >	
 
 	<nom>Filtre image_responsive</nom>
