@@ -81,7 +81,8 @@ function compositions_lister_disponibles($type, $informer=true){
 		$type_match = $type;
 	}
 	else {
-		$type_match = "[a-z0-9]+";
+		// _ pour le cas des groupe_mots
+		$type_match = "[a-z0-9_]+";
 	}
 
 	// rechercher les skel du type article-truc.html
