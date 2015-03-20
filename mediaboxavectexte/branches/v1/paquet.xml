@@ -1,0 +1,19 @@
+<paquet
+	prefix="mediaboxavectexte"
+	categorie="multimedia"
+	version="0.0.2"
+	etat="test"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/mediabox-32.png"
+>
+
+	<nom>MEDIABOX AVEC TEXTE</nom>
+	<!-- ce plugin surcharge le plugin-dist/mediabox pour afficher titre et description de l'image dans l'agrandissement -->
+
+	<auteur>chankalan</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+	
+	<necessite nom="mediabox" compatibilite="[0.8.5;[" />
+
+</paquet>
