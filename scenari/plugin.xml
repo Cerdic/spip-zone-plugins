@@ -2,7 +2,7 @@
 	<nom>Scenari</nom>
 	<auteur>[Gr&#233;gory Pascal->http://contrib.spip.net/ngombe]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<etat>test</etat>
 	<prefix>scenari</prefix>
    <categorie>edition</categorie>

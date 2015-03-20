@@ -8,7 +8,7 @@
 	 */
 
 	function scenari_insert_projet($texte){
-		while (eregi("scenari@([0-9a-zA-Z]+)@", $texte, $projetscenari)) { 
+		while (preg_match("/scenari@([0-9a-zA-Z]+)@/i", $texte, $projetscenari)) { 
 			$motif="scenari@".$projetscenari['1']."@";
 			$lien=find_in_path(_DIR_IMG."scenari/".$projetscenari['1']);
 			if(!empty($lien))
