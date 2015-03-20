@@ -8,7 +8,7 @@
 <article class="entry contenu hentry">
 	<strong class="entry-title"><a href="#URL" rel="bookmark">[(#LOGO_SELECTIONS_CONTENU|image_reduire{#ENV{largeur_logo,-1},#ENV{hauteur_logo,-1}}|responsive_logo)]<span class="#EDIT{titre}">#TITRE</span></a></strong>
 	[(#ENV{coupe}|oui)
-	[<div class="#EDIT{texte} texte entry-content">(#TEXTE|couper{#ENV{coupe}, #ENV{suite, "&nbsp;(...)"}})</div>]
+	[<div class="#EDIT{descriptif} descriptif entry-content">(#DESCRIPTIF|couper{#ENV{coupe}, #ENV{suite, "&nbsp;(...)"}})</div>]
 	]
 	[(#ENV{coupe}|non)
 	<div class="#EDIT{descriptif} descriptif entry-content">#DESCRIPTIF</div>
