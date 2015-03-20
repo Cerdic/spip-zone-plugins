@@ -20,7 +20,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=fr" total="80" traduits="80" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="80" traduits="12" relire="29" modifs="13" nouveaux="26" pourcent="15.00">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/autorite?lang_cible=it" total="80" traduits="55" relire="25" modifs="0" nouveaux="0" pourcent="68.75">
 		<traducteur nom="Julia14" lien="http://trad.spip.net/auteur/julia14" />
 		<traducteur nom="marydeli" lien="http://trad.spip.net/auteur/marydeli" />
 	</langue>
