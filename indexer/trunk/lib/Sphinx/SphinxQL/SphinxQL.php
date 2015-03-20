@@ -36,7 +36,7 @@ class SphinxQL {
 		spip_log($query, 'sphinx');
 
 		//Avant de laisser tomber, on retente un coup (se prémunir d'un timeout idiot suite à un long traitement)
-		if (!$this->sql) {
+		if ($this->sql->connect_errno) {
 		    $this->sql->close();
 		    $this->connect();
 		}
