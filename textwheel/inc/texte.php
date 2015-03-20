@@ -281,6 +281,10 @@ function echappe_retour_modeles($letexte, $interdire_scripts=false){
 function couper($texte, $taille=50, $suite = '&nbsp;(...)') {
 	if (!($length=strlen($texte)) OR $taille <= 0) return '';
 	$offset = 400 + 2*$taille;
+
+	// supprimer un lien [toto<-] qui provoque une fausse ouverture de tag
+	$texte = preg_replace('/[[][^[\]<>]*(<-)[^[\]<>]*[]]/S', '', $texte);
+
 	while ($offset<$length
 		AND strlen(preg_replace(",<[^>]+>,Uims","",substr($texte,0,$offset)))<$taille)
 		$offset = 2*$offset;
