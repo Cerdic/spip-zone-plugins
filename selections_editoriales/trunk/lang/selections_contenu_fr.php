@@ -1,8 +1,7 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/selections_editoriales/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -39,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_selections_contenu' => 'Logo de ce contenu sélectionné',
 	'titre_selections_contenu' => 'Contenu sélectionné',
 	'titre_selections_contenus' => 'Contenus sélectionnés',
-	'titre_selections_contenus_rubrique' => 'Contenus sélectionnés de la rubrique',
+	'titre_selections_contenus_rubrique' => 'Contenus sélectionnés de la rubrique'
 );
 
 ?>
