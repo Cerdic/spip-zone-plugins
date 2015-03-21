@@ -81,9 +81,60 @@ function nospam_verifier_formulaire_forum_dist($flux){
 		}
 
 
-		if (isset($flux['data']['texte']))
+		// si il y a une erreur, pas de previsu, on reste bloque a la premiere etape
+		if (isset($flux['data']['texte'])){
 			unset($flux['data']['previsu']);
+		}
+		// sinon, si on est au moment du post final (confirmation apres previsu)
+		// on calcule la "popuparlite de post"
+		elseif(!isset($flux['data']['previsu'])) {
+			$now = $_SERVER['REQUEST_TIME'];
+			// calculer la "popularite" des POST forums et forums avec liens
+			if (!isset($GLOBALS['meta']['nospam_pop_forum_post'])) $GLOBALS['meta']['nospam_pop_forum_post'] = 0;
+			if (!isset($GLOBALS['meta']['nospam_pop_forum_postwlink'])) $GLOBALS['meta']['nospam_pop_forum_postwlink'] = 0;
+			if (!isset($GLOBALS['meta']['nospam_pop_date'])) $GLOBALS['meta']['nospam_pop_date'] = date('Y-m-d H:i:s',$now);
+
+			$duree = max($now-strtotime($GLOBALS['meta']['nospam_pop_date']),1);
+			list($a,$b) = nospam_popularite_constantes($duree);
+			spip_log("Pop forum : $duree, $a, $b","nospam");
+			// decrementer
+			if ($duree>3600){
+				$GLOBALS['meta']['nospam_pop_date'] = date('Y-m-d H:i:s',$now);
+				$GLOBALS['meta']['nospam_pop_forum_post'] = round(floatval($GLOBALS['meta']['nospam_pop_forum_post'])*$a,2);
+				$GLOBALS['meta']['nospam_pop_forum_postwlink'] = round(floatval($GLOBALS['meta']['nospam_pop_forum_postwlink'])*$a,2);
+				spip_log("Pop Decremente : ".$GLOBALS['meta']['nospam_pop_forum_post'].", ".$GLOBALS['meta']['nospam_pop_forum_postwlink'],"nospam");
+			}
+			// incrementer
+			$GLOBALS['meta']['nospam_pop_forum_post']=round(floatval($GLOBALS['meta']['nospam_pop_forum_post'])+$b,2);
+			if (isset($infos['liens']) AND count($infos['liens'])){
+				$GLOBALS['meta']['nospam_pop_forum_postwlink']=round(floatval($GLOBALS['meta']['nospam_pop_forum_postwlink'])+$b,2);
+			}
+			ecrire_meta("nospam_pop_forum_post",$GLOBALS['meta']['nospam_pop_forum_post']);
+			ecrire_meta("nospam_pop_forum_postwlink",$GLOBALS['meta']['nospam_pop_forum_postwlink']);
+			ecrire_meta("nospam_pop_date",$GLOBALS['meta']['nospam_pop_date']);
+			spip_log("Pop Incremente : ".$GLOBALS['meta']['nospam_pop_forum_post'].", ".$GLOBALS['meta']['nospam_pop_forum_postwlink'],"nospam");
+		}
 	}
 
 	return $flux;
+}
+
+//
+// Popularite, modele logarithmique
+//
+function nospam_popularite_constantes($duree){
+	// duree de demi-vie d'une visite dans le calcul de la popularite (en jours)
+	$demivie = 0.5;
+	// periode de reference en jours
+	$periode = 1;
+	// $a est le coefficient d'amortissement depuis la derniere mesure
+	$a = pow(2, - $duree / ($demivie * 24 * 3600));
+	// $b est la constante multiplicative permettant d'avoir
+	// une visite par jour (periode de reference) = un point de popularite
+	// (en regime stationnaire)
+	// or, magie des maths, ca vaut log(2) * duree journee/demi-vie
+	// si la demi-vie n'est pas trop proche de la seconde ;)
+	$b = log(2) * $periode / $demivie;
+
+	return array($a,$b);
 }
