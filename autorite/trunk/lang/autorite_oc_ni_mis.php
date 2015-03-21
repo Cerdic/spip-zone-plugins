@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admins' => 'Lu aministratour',
 	'admins_redacs' => 'Aministratour e Redactour',
 	'admins_rubriques' => 'lu aministratour assouciat a dei rùbrica an :',
+	'attention_crayons' => '<small><strong>Mèfi.</strong> Lu reglage aquì souta pouòdon founciounà que s’utilisès un plugin que proupause una interfaça d’edicioun (couma <a href="http://contrib.spip.net/Les-Crayons">lu Creioun</a> per isemple).</small>',
 	'attention_version' => 'Mèfi, si pòu que la vouòstra versioun de SPIP noun founcioune embé li chausida seguenti :',
 	'auteur_message_advitam' => 'L’autour dóu message, ad vitam',
 	'auteur_modifie_article' => '<strong>Autour moudifica article</strong> : cada redatour pòu moudificà lu article publicat que sìgue l’autour.
@@ -50,11 +51,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_menu_config' => 'Autourità',
 	'info_gere_rubriques' => 'Gerà li rùbrica seguenti :',
 	'info_gere_rubriques_2' => 'Geri li rùbrica seguenti :',
+	'interdire_admin' => 'Entacàs li casa aquì souta da prouhibì ai aministratour da creà ',
 
 	// M
 	'mots_cles_qui' => '<strong>Mot clau :</strong> qu pòu creà e edità lu mot clau :',
 
 	// N
+	'non_webmestres' => 'Aqueu reglage noun s’aplica ai webmestre.',
+	'note_rubriques' => '(Noutàs que basta lu aministratour pouòdon creà dei rùbrica, e, per lu aministratour restrech, acò pòu si faire que en li siéu rùbrica.)',
 	'nouvelles_rubriques' => 'de rùbrica nouveli  a la raïs dóu sit',
 
 	// O
@@ -74,6 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redacs' => 'ai redatour dóu sit',
 	'redacteur' => 'redatour',
 	'refus_1' => '<p>Basta lu webmestre dóu sit',
+	'refus_2' => 'soun autourisat da moudificà aquelu parametre.</p>
+<p>Per n’en saupre de mai, veire <a href="http://contrib.spip.net/Autorite">la doucumentacioun</a>.</p>',
 	'reglage_autorisations' => 'Reglage dei autourisacioun',
 
 	// S
