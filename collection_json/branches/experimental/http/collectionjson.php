@@ -138,6 +138,15 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 		return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 	}
 
+	// Allons chercher un squelette de base qui génère le JSON de la
+	// collection demandée. Le squelette prend en contexte les
+	// paramètres du GET uniquement
+	if ($json = recuperer_fond("http/$format/$collection", $contexte)){
+		// On décode ce qu'on a trouvé
+		$json = json_decode($json, true);
+		return http_collectionjson_reponse(200, $json, $requete, $reponse);
+	}
+
 	// Sinon on essaie de s'appuyer sur l'API objet
 	include_spip('base/abstract_sql');
 	include_spip('base/objets');
