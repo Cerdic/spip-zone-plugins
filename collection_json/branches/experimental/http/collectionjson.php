@@ -29,17 +29,6 @@ function http_collectionjson_reponse ($code, $donnees, $requete, $reponse) {
 	$reponse->setStatusCode($code);
 	$reponse->setContent($json);
 
-	// On le passe tout ça dans un pipeline avant de retourner la réponse
-	$reponse = pipeline(
-		'http_collectionjson_final',
-		array(
-			'args' => array(
-				'requete' => $requete,
-			),
-			'data' => $reponse,
-		)
-	);
-
 	return $reponse;
 }
 
