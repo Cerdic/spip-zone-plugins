@@ -72,5 +72,3 @@ function inc_reservation_enregistrer_dist($id='',$id_article='',$id_auteur='',$c
 	suivre_invalideur("id='reservations_detail/$id_reservations_detail'");	
 	return array('message_ok'=>$message,'editable'=>false);
 }
-
-?>

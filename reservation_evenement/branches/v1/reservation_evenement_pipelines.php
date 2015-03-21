@@ -133,11 +133,25 @@ function reservation_evenement_formulaire_traiter($flux){
 function reservation_evenement_recuperer_fond($flux){
     $fond=$flux['args']['fond'];
 	$contexte=$flux['data']['contexte'];
-	$fonds=array('formulaires/editer_article','formulaires/editer_evenement');
+	$fonds=array('formulaires/editer_article'=>'article','formulaires/editer_evenement'=>'evenement');
 	//Ajouter le champ action_cloture
-    if (in_array($fond,$fonds)){
-        $action_cloture='<ul>'.recuperer_fond('formulaires/inc-action_cloture',$contexte).'</ul>';
-        $flux['data']['texte'] = str_replace('<!--extra-->',$action_cloture. '<!--extra-->',$flux['data']['texte']);
+    if (isset($fonds[$fond])){
+		include_spip('inc/config');
+		include_spip('formulaires/selecteur/generique_fonctions');
+		include_spip('inc/reservation_evenements');		
+		$config=lire_config('reservation_evenement',array());
+		$type=$fonds[$fond];
+		$rubrique_reservation=isset($config['rubrique_reservation'])?picker_selected($config['rubrique_reservation'],'rubrique'):'';
+		$id=_request('id_'.$type);
+
+		$zone=rubrique_reservation($id,$type,$rubrique_reservation);
+		
+		$cron=isset($config['cron'])?$config['cron']:'';
+		
+		if($cron AND $zone){
+	        $action_cloture='<ul>'.recuperer_fond('formulaires/inc-action_cloture',$contexte).'</ul>';
+	        $flux['data']['texte'] = str_replace('<!--extra-->',$action_cloture. '<!--extra-->',$flux['data']['texte']);
+		}
     }   
     return $flux;
 }
@@ -149,16 +163,31 @@ function reservation_evenement_afficher_contenu_objet($flux){
 	
 	
 	if (in_array($type,$types)) {
-		$etats=array(
-			1=>_T('item:oui'),
-			2=>_T('item:non'),
-			3=>_T('reservation:evenement_cloture')
-		);
+		include_spip('inc/config');
+		include_spip('formulaires/selecteur/generique_fonctions');
+		include_spip('inc/reservation_evenements');		
+		$config=lire_config('reservation_evenement',array());
+		$rubrique_reservation=isset($config['rubrique_reservation'])?picker_selected($config['rubrique_reservation'],'rubrique'):'';
+		$id=_request('id_'.$type);
+
+		$zone=rubrique_reservation($id,$type,$rubrique_reservation);
 		
-		$action_cloture=sql_getfetsel('action_cloture','spip_'.$type.'s','id_'.$type.'='.$type=$flux['args']['id_objet']);
-		if($action_cloture!=0)$contexte['cloture_etat']=$etats[$action_cloture];
-		$action_cloture = recuperer_fond('prive/objets/contenu/inc-action_cloture',$contexte);
-		$flux['data'] .= "\n".$action_cloture;
+		$cron=isset($config['cron'])?$config['cron']:'';
+		if($cron AND $zone){
+						$etats=array(
+				1=>_T('item:oui'),
+				2=>_T('item:non'),
+				3=>_T('reservation:evenement_cloture')
+			);
+			
+			
+			$action_cloture=sql_getfetsel('action_cloture','spip_'.$type.'s','id_'.$type.'='.$type=$flux['args']['id_objet']);
+			if($action_cloture!=0)$contexte['cloture_etat']=$etats[$action_cloture];
+			$action_cloture = recuperer_fond('prive/objets/contenu/inc-action_cloture',$contexte);
+			$flux['data'] .= "\n".$action_cloture;
+				
+		}		
+
 	}
 	return $flux;
 }
