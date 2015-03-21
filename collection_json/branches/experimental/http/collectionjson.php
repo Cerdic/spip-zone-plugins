@@ -236,20 +236,35 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
  * @return Response Retourne un objet Response modifié suivant ce qu'on a trouvé
  */
 function http_collectionjson_get_ressource_dist($requete, $reponse){
+	include_spip('base/objets');
+
 	$format = $requete->attributes->get('format');
 	$collection = $requete->attributes->get('collection');
 	$ressource = $requete->attributes->get('ressource');
 
+	// On essaie de remplir avec un squelette
+	if (find_in_path("http/$format/$collection-ressource.html")) {
+
+		$contexte = array_merge(
+			$requete->query->all(),
+			$requete->attributes->all(),
+			array(
+				id_table_objet($collection) => $ressource,
+				'ressource' => $ressource,
+			));
+
+		$json = recuperer_fond("http/$format/$collection-ressource", $contexte);
+		$retour = json_decode($json, true);
+	}
 	// S'il existe une fonction dédiée à ce type de ressource, on
 	// n'utilise que ça. Cette fonction doit renvoyer un tableau à
 	// mettre dans la réponse
-	if ($fonction_ressource = charger_fonction('get_ressource', "http/$format/$collection/", true)){
+	else if ($fonction_ressource = charger_fonction('get_ressource', "http/$format/$collection/", true)){
 
 		$retour = $fonction_ressource($requete, $reponse);
 	}
 	// Sinon on essaye de déduire par un échafaudage générique
 	else {
-		include_spip('base/objets');
 
 		$table_collection = table_objet_sql($collection);
 		$objets = lister_tables_objets_sql();
