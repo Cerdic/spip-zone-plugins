@@ -113,6 +113,18 @@ function http_collectionjson_get_index($requete, $reponse) {
 		'links' => $links,
 	);
 
+	// On le passe tout ça dans un pipeline avant de retourner la réponse
+	$retour = pipeline(
+		'http_collectionjson_get_index_contenu',
+		array(
+			'args' => array(
+				'requete' => $requete,
+				'reponse' => $reponse,
+			),
+			'data' => $retour,
+		)
+	);
+
 	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
 
@@ -211,6 +223,18 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 		);
 	}
 
+	// On le passe tout ça dans un pipeline avant de retourner la réponse
+	$retour = pipeline(
+		'http_collectionjson_get_collection_contenu',
+		array(
+			'args' => array(
+				'requete' => $requete,
+				'reponse' => $reponse,
+			),
+			'data' => $retour,
+		)
+	);
+
 	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
 
@@ -278,6 +302,18 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 			)
 		);
 	}
+
+	// On le passe tout ça dans un pipeline avant de retourner la réponse
+	$retour = pipeline(
+		'http_collectionjson_get_ressource_contenu',
+		array(
+			'args' => array(
+				'requete' => $requete,
+				'reponse' => $reponse,
+			),
+			'data' => $retour,
+		)
+	);
 
 	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
