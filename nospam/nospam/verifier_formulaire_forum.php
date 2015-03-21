@@ -85,9 +85,9 @@ function nospam_verifier_formulaire_forum_dist($flux){
 		if (isset($flux['data']['texte'])){
 			unset($flux['data']['previsu']);
 		}
-		// sinon, si on est au moment du post final (confirmation apres previsu)
+		// sinon, si on est au moment du post final (confirmation apres previsu => pas de previsu ni d'erreur)
 		// on calcule la "popuparlite de post"
-		elseif(!isset($flux['data']['previsu'])) {
+		elseif(!count($flux['data'])) {
 			$now = $_SERVER['REQUEST_TIME'];
 			// calculer la "popularite" des POST forums et forums avec liens
 			if (!isset($GLOBALS['meta']['nospam_pop_forum_post'])) $GLOBALS['meta']['nospam_pop_forum_post'] = 0;
@@ -98,7 +98,7 @@ function nospam_verifier_formulaire_forum_dist($flux){
 			list($a,$b) = nospam_popularite_constantes($duree);
 			spip_log("Pop forum : $duree, $a, $b","nospam");
 			// decrementer
-			if ($duree>3600){
+			if ($duree>1800){
 				$GLOBALS['meta']['nospam_pop_date'] = date('Y-m-d H:i:s',$now);
 				$GLOBALS['meta']['nospam_pop_forum_post'] = round(floatval($GLOBALS['meta']['nospam_pop_forum_post'])*$a,2);
 				$GLOBALS['meta']['nospam_pop_forum_postwlink'] = round(floatval($GLOBALS['meta']['nospam_pop_forum_postwlink'])*$a,2);
