@@ -129,89 +129,87 @@ function http_collectionjson_get_collection_dist($requete, $reponse){
 	$collection = $requete->attributes->get('collection');
 	$contexte = $requete->query->all();
 
-	// S'il existe une fonction dédiée à ce type de ressource, on
-	// n'utilise que ça. Cette fonction doit renvoyer un tableau à
-	// mettre dans la réponse
-	if ($fonction_collection = charger_fonction('get_collection', "http/$format/$collection/", true)){
-
-		$retour = $fonction_collection($requete, $reponse);
-		return http_collectionjson_reponse(200, $retour, $requete, $reponse);
-	}
-
 	// Allons chercher un squelette de base qui génère le JSON de la
 	// collection demandée. Le squelette prend en contexte les
 	// paramètres du GET uniquement
 	if ($json = recuperer_fond("http/$format/$collection", $contexte)){
 		// On décode ce qu'on a trouvé
-		$json = json_decode($json, true);
-		return http_collectionjson_reponse(200, $json, $requete, $reponse);
+		$retour = json_decode($json, true);
 	}
+	// S'il existe une fonction dédiée à ce type de ressource, on
+	// n'utilise que ça. Cette fonction doit renvoyer un tableau à
+	// mettre dans la réponse
+	else if ($fonction_collection = charger_fonction('get_collection', "http/$format/$collection/", true)){
 
+		$retour = $fonction_collection($requete, $reponse);
+	}
 	// Sinon on essaie de s'appuyer sur l'API objet
-	include_spip('base/abstract_sql');
-	include_spip('base/objets');
+	else {
+		include_spip('base/abstract_sql');
+		include_spip('base/objets');
 
-	// Si la collection demandée ne correspond pas à une table
-	// d'objet on arrête tout
-	if ( ! in_array(table_objet_sql($collection),
-					array_keys(lister_tables_objets_sql()))) {
-		// On utilise la fonction d'erreur générique pour
-		// renvoyer dans le bon format
-		$fonction_erreur = charger_fonction('erreur', "http/$format/");
-		return $fonction_erreur(404, $requete, $reponse);
-	}
+		// Si la collection demandée ne correspond pas à une table
+		// d'objet on arrête tout
+		if ( ! in_array(table_objet_sql($collection),
+						array_keys(lister_tables_objets_sql()))) {
+			// On utilise la fonction d'erreur générique pour
+			// renvoyer dans le bon format
+			$fonction_erreur = charger_fonction('erreur', "http/$format/");
+			return $fonction_erreur(404, $requete, $reponse);
+		}
 
-	$links = array();
+		$links = array();
 
-	$pagination = 10;
-	$offset = $contexte['offset'] ?: 0;
-	$nb_objets = sql_countsel(table_objet_sql($collection));
+		$pagination = 10;
+		$offset = $contexte['offset'] ?: 0;
+		$nb_objets = sql_countsel(table_objet_sql($collection));
 
-	// On ajoute des liens de pagination
-	if ($offset > 0) {
-		$offset_precedant = max(0, $offset-$pagination);
-		$links[] = array(
-			'rel' => 'prev',
-			'prompt' => _T('public:page_precedente'),
-			'href' => url_absolue(
-				parametre_url(self(), 'offset', $offset_precedant)),
-		);
-	}
-	if (($offset + $pagination) < $nb_objets) {
-		$offset_suivant = $offset + $pagination;
-		$links[] = array(
-			'rel' => 'prev',
-			'prompt' => _T('public:page_suivante'),
-			'href' => url_absolue(
-				parametre_url(self(), 'offset', $offset_suivant)),
-		);
-	}
-
-	$table_collection = table_objet_sql($collection);
-	$description = lister_tables_objets_sql($table_collection);
-	$objets = sql_allfetsel('*', $table_collection,'','','',"$offset,$pagination");
-
-	$items = array();
-	foreach ($objets as $objet) {
-		$data = array();
-		foreach ($description['champs_editables'] as $champ){
-			$data[] = array(
-				'name' => $champ,
-				'value' => $objet[$champ],
+		// On ajoute des liens de pagination
+		if ($offset > 0) {
+			$offset_precedant = max(0, $offset-$pagination);
+			$links[] = array(
+				'rel' => 'prev',
+				'prompt' => _T('public:page_precedente'),
+				'href' => url_absolue(
+					parametre_url(self(), 'offset', $offset_precedant)),
+			);
+		}
+		if (($offset + $pagination) < $nb_objets) {
+			$offset_suivant = $offset + $pagination;
+			$links[] = array(
+				'rel' => 'prev',
+				'prompt' => _T('public:page_suivante'),
+				'href' => url_absolue(
+					parametre_url(self(), 'offset', $offset_suivant)),
 			);
 		}
 
-		$items[] = array(
-			'href' => url_absolue(parse_url(self(), PHP_URL_PATH) . $objet[id_table_objet($table_collection)]),
-			'data' => $data,
+		$table_collection = table_objet_sql($collection);
+		$description = lister_tables_objets_sql($table_collection);
+		$objets = sql_allfetsel('*', $table_collection,'','','',"$offset,$pagination");
+
+		$items = array();
+		foreach ($objets as $objet) {
+			$data = array();
+			foreach ($description['champs_editables'] as $champ){
+				$data[] = array(
+					'name' => $champ,
+					'value' => $objet[$champ],
+				);
+			}
+
+			$items[] = array(
+				'href' => url_absolue(parse_url(self(), PHP_URL_PATH) . $objet[id_table_objet($table_collection)]),
+				'data' => $data,
+			);
+		}
+
+		$retour = array(
+			'href' => url_absolue(parse_url(self(), PHP_URL_PATH)),
+			'links' => $links,
+			'items' => $items,
 		);
 	}
-
-	$retour = array(
-		'href' => url_absolue(parse_url(self(), PHP_URL_PATH)),
-		'links' => $links,
-		'items' => $items,
-	);
 
 	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
@@ -235,51 +233,51 @@ function http_collectionjson_get_ressource_dist($requete, $reponse){
 	if ($fonction_ressource = charger_fonction('get_ressource', "http/$format/$collection/", true)){
 
 		$retour = $fonction_ressource($requete, $reponse);
-		return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 	}
-
-	include_spip('base/objets');
-
 	// Sinon on essaye de déduire par un échafaudage générique
-	$table_collection = table_objet_sql($collection);
-	$objets = lister_tables_objets_sql();
-	if (isset($objets[$table_collection])) {
-		$description = $objets[$table_collection];
-		$select = implode(', ', array_map('sql_quote', $description['champs_editables']));
-		$where = id_table_objet($table_collection) . "=" . intval($ressource);
-	}
+	else {
+		include_spip('base/objets');
 
-	// Si la collection fait partie des objets SPIP et qu'on trouve la
-	// ligne de l'objet en question. Sinon on renvoie une erreur.
-	if ( ! ($select
-			and $objet = sql_fetsel($select, $table_collection, $where))) {
+		$table_collection = table_objet_sql($collection);
+		$objets = lister_tables_objets_sql();
+		if (isset($objets[$table_collection])) {
+			$description = $objets[$table_collection];
+			$select = implode(', ', array_map('sql_quote', $description['champs_editables']));
+			$where = id_table_objet($table_collection) . "=" . intval($ressource);
+		}
 
-		// On utilise la fonction d'erreur générique pour
-		// renvoyer dans le bon format
-		$fonction_erreur = charger_fonction('erreur', "http/$format/");
-		return $fonction_erreur(404, $requete, $reponse);
-	}
+		// Si la collection fait partie des objets SPIP et qu'on trouve la
+		// ligne de l'objet en question. Sinon on renvoie une erreur.
+		if ( ! ($select
+				and $objet = sql_fetsel($select, $table_collection, $where))) {
 
-	include_spip('inc/filtres');
+			// On utilise la fonction d'erreur générique pour
+			// renvoyer dans le bon format
+			$fonction_erreur = charger_fonction('erreur', "http/$format/");
+			return $fonction_erreur(404, $requete, $reponse);
+		}
 
-	// On ne montre par défaut que les champs *éditables*.
-	foreach ($objet as $champ=>$valeur){
-		$data[] = array('name' => $champ, 'value' => $valeur);
-	}
+		include_spip('inc/filtres');
 
-	$retour = array(
-		'href' => url_absolue(self()),
-		'items' => array(
-			array(
-				'href' => url_absolue(self()),
-				'links' => array(
-					array('rel' => 'edit', 'href' => $GLOBALS['meta']['adresse_site']."/http.api/$format/$collection/$ressource"),
-					array('rel' => 'alternate', 'type' => 'text/html', 'href' => url_absolue(generer_url_entite($ressource, objet_type($collection)))),
+		// On ne montre par défaut que les champs *éditables*.
+		foreach ($objet as $champ=>$valeur){
+			$data[] = array('name' => $champ, 'value' => $valeur);
+		}
+
+		$retour = array(
+			'href' => url_absolue(self()),
+			'items' => array(
+				array(
+					'href' => url_absolue(self()),
+					'links' => array(
+						array('rel' => 'edit', 'href' => $GLOBALS['meta']['adresse_site']."/http.api/$format/$collection/$ressource"),
+						array('rel' => 'alternate', 'type' => 'text/html', 'href' => url_absolue(generer_url_entite($ressource, objet_type($collection)))),
+					),
+					'data' => $data,
 				),
-				'data' => $data,
-			),
-		)
-	);
+			)
+		);
+	}
 
 	return http_collectionjson_reponse(200, $retour, $requete, $reponse);
 }
