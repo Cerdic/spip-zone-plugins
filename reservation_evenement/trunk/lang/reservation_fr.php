@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choix_precis' => 'Choix précis',
 	'cron_explication' => 'Pour tout événement ayant activé la clôture automatique. Quand l’événement de la résérvation est passé, la réservation sera automatiquement clôturée par le système. Si "clôturé" est choisis sous "Déclenchement", un email de clôture sera alors envoyé. Videz le cache afin que cela soit bien activé. ',
+	'cron_fieldset' => 'Clôture automatique',	
 	'cron_label' => 'Clôturer automatiquement une réservation',
 
 	// D
@@ -125,6 +126,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_enregistre' => 'Votre Inscription a bien été enregistré. Vous recevrez un email de confirmation. Si aucun mail ne vous est parvenu, verifiez dans votre dossier spam.',
 	'reservation_numero' => 'Réservation :',
 	'reservation_reference_numero' => 'Référence n° ',
+	'rubrique_reservation_label' => 'Définir une/des zones pour l\'application de ce plugin',
+	'rubrique_reservation_explication' => 'Limite par example l\'affichage de certains champs extras à cette/ces zone/s',		
 
 	// S
 	'simple' => 'Simple',
