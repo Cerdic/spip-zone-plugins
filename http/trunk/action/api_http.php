@@ -130,6 +130,17 @@ function action_api_http_dist(){
 		}
 	}
 	
+	// On le passe tout ça dans un pipeline avant de retourner la réponse
+	$reponse = pipeline(
+		'http_final',
+		array(
+			'args' => array(
+				'requete' => $requete,
+			),
+			'data' => $reponse,
+		)
+	);
+
 	//  Enfin, s'il n'y a pas eu d'exit en amont, on envoie la réponse
 	$reponse->prepare($requete);
 	$reponse->send();
