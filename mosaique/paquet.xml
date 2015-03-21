@@ -1,12 +1,12 @@
 <paquet
 	prefix="mosaique"
 	categorie="multimedia"
-	version="0.5.0"
+	version="0.5.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/mosaique-64.png"
 	documentation="http://contrib.spip.net/4232"
-	schema="0.0.1"
+	schema="0.0.2"
 >
 
 	<nom>Mosaïque</nom>
