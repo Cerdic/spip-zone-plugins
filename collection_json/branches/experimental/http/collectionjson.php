@@ -20,7 +20,7 @@ function http_collectionjson_reponse ($code, $donnees, $requete, $reponse) {
 
 	$json = json_encode(array(
 		'collection' => array_merge(array(
-			'version' => '1.0',
+			'version' => '1.1',
 		), $donnees),
 	));
 
