@@ -22,28 +22,43 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
 		
 		$config=lire_config('reservation_evenement/rubrique_reservation');
 		$rubrique_reservation=picker_selected($config,'rubrique');
-		$zone=rubrique_reservation('','article',$rubrique_reservation,array('tableau'=>'oui'));
-		if($zone)$id_article=$zone;		
+		$zone=rubrique_reservation(
+			'',
+			'evenement',
+			$rubrique_reservation,
+			array(
+				'tableau'=>'oui',
+				'where'=>'e.date_fin>NOW() AND e.inscription=1 AND e.statut="publie"',
+				'select'=>'*',
+				'resultat'=>'par_id')
+				);
+				
 	}
+
+	if(!is_array($zone)){
+		$where=array('date_fin>NOW() AND inscription=1 AND statut="publie"');
+		if($id){
+			if(!is_array($id))array_push($where,'id_evenement='.intval($id));
+			elseif(is_array($id))array_push($where,'id_evenement IN ('.implode(',',$id).')');
+		}
+		if($id_article){
+			if(!is_array($id_article)) array_push($where,'id_article='.intval($id_article));   
+			elseif(is_array($id_article))array_push($where,'id_article IN ('.implode(',',$id_article).')');
+		}
 	
-	$where=array('date_fin>NOW() AND inscription=1 AND statut="publie"');
-	if($id){
-		if(!is_array($id))array_push($where,'id_evenement='.intval($id));
-		elseif(is_array($id))array_push($where,'id_evenement IN ('.implode(',',$id).')');
+		$sql = sql_select('*','spip_evenements',$where,'','date_debut,date_fin');
+	
+		$evenements=array();
+		$articles=array();
+		while ($row=sql_fetch($sql)){
+			$evenements[$row['id_evenement']]=$row;
+			$articles[]=$row['id_article'];
+		}		
 	}
-	if($id_article){
-		if(!is_array($id_article)) array_push($where,'id_article='.intval($id_article));   
-		elseif(is_array($id_article))array_push($where,'id_article IN ('.implode(',',$id_article).')');
+	else{
+		$evenements=$zone;
 	}
 
-	$sql = sql_select('*','spip_evenements',$where,'','date_debut,date_fin');
-
-	$evenements=array();
-	$articles=array();
-	while ($row=sql_fetch($sql)){
-		$evenements[$row['id_evenement']]=$row;
-		$articles[]=$row['id_article'];
-	}
 	
 
 	$valeurs = array('evenements'=>$evenements,'articles'=>$evenements,'lang'=>$GLOBALS['spip_lang']);
