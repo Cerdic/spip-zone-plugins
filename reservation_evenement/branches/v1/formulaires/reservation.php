@@ -13,27 +13,52 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_reservation_charger_dist($id='',$id_article=''){
-
-	// si pas d'evenement ou d'inscription, on echoue silencieusement
+	include_spip('inc/config');
+	include_spip('formulaires/selecteur/generique_fonctions');
 	
-	$where=array('date_fin>NOW() AND inscription=1 AND statut="publie"');
-	if($id){
-		if(!is_array($id))array_push($where,'id_evenement='.intval($id));
-		elseif(is_array($id))array_push($where,'id_evenement IN ('.implode(',',$id).')');
-	}
-	if($id_article){
-		if(!is_array($id_article)) array_push($where,'id_article='.intval($id_article));   
-		elseif(is_array($id_article))array_push($where,'id_article IN '.implode(',',$id_article).')');
+	//Si l'affichage n'est pas déjà définie on établit si une zone s'applique
+	if(!$id_article AND !$id){
+		include_spip('inc/reservation_evenements');
+		
+		$config=lire_config('reservation_evenement/rubrique_reservation');
+		$rubrique_reservation=picker_selected($config,'rubrique');
+		$zone=rubrique_reservation(
+			'',
+			'evenement',
+			$rubrique_reservation,
+			array(
+				'tableau'=>'oui',
+				'where'=>'e.date_fin>NOW() AND e.inscription=1 AND e.statut="publie"',
+				'select'=>'*',
+				'resultat'=>'par_id')
+				);
+				
 	}
 
-	$sql = sql_select('*','spip_evenements',$where,'','date_debut,date_fin');
-
-	$evenements=array();
-	$articles=array();
-	while ($row=sql_fetch($sql)){
-		$evenements[$row['id_evenement']]=$row;
-		$articles[]=$row['id_article'];
+	if(!is_array($zone)){
+		$where=array('date_fin>NOW() AND inscription=1 AND statut="publie"');
+		if($id){
+			if(!is_array($id))array_push($where,'id_evenement='.intval($id));
+			elseif(is_array($id))array_push($where,'id_evenement IN ('.implode(',',$id).')');
+		}
+		if($id_article){
+			if(!is_array($id_article)) array_push($where,'id_article='.intval($id_article));   
+			elseif(is_array($id_article))array_push($where,'id_article IN ('.implode(',',$id_article).')');
+		}
+	
+		$sql = sql_select('*','spip_evenements',$where,'','date_debut,date_fin');
+	
+		$evenements=array();
+		$articles=array();
+		while ($row=sql_fetch($sql)){
+			$evenements[$row['id_evenement']]=$row;
+			$articles[]=$row['id_article'];
+		}		
 	}
+	else{
+		$evenements=$zone;
+	}
+
 	
 
 	$valeurs = array('evenements'=>$evenements,'articles'=>$evenements,'lang'=>$GLOBALS['spip_lang']);
