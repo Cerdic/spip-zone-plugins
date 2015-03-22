@@ -559,4 +559,127 @@ function albums_compagnon_messages($flux) {
 }
 
 
+/**
+ * Utilisation du pipeline album_boutons_actions
+ *
+ * Renvoie une liste des boutons d'actions des albums.
+ * Ils sont affichés dans les listes d'albums (footer), ou sur la fiche d'un album (boîte infos latérale).
+ * Cette liste est un tableau associatif, donc les plugins peuvent ajouter les leurs mais également modifier certaines entrées (voir note).
+ * 
+ * @note
+ * `$flux['data']` est un tableau associatif de la forme `identifiant de l'action => code HTML du bouton`.
+ * Les identifiants sont à priori des verbes : «vider», «supprimer», «giboliner», etc.
+ * Ça permet, en plus de compléter la liste, d'avoir la main sur des entrées précises.
+ * ````
+ * array(
+ *     'dissocier' => 'code HTML'
+ *     'vider'     => 'code HTML'
+ * )
+ * ````
+ *
+ * @pipeline album_boutons_actions
+ * @param array $flux
+ *     Données du pipeline
+ *     $flux['data']                array     tableau associatif des boutons
+ *     $flux['args']['id_album']    int       identifiant de l'album
+ *                  ['position']    string    endroit où sont affichés les boutons : footer | boite_infos
+ *                  ['objet']       string    type d'objet pour un album associé
+ *                  ['id_objet']    int       identifiant de l'objet
+ * @return array
+ *     Données du pipeline
+**/
+function albums_album_boutons_actions($flux){
+
+	if (!function_exists('bouton_action')) include_spip('inc/filtres');
+	if (!function_exists('generer_action_auteur')) include_spip('inc/actions');
+	if (!function_exists('autoriser')) include_spip('inc/autoriser');
+
+	$data = (is_array($flux['data']) AND count($flux['data'])) ? $flux['data'] : array();
+	$id_album = intval($flux['args']['id_album']);
+	$position = (isset($flux['args']['position']) AND in_array($flux['args']['position'],array('footer','boite_infos'))) ? $flux['args']['position'] : null;
+	$objet    = (isset($flux['args']['objet'])) ? $flux['args']['objet'] : '';
+	$id_objet = (isset($flux['args']['id_objet']) AND intval($flux['args']['id_objet'])) ? $flux['args']['id_objet'] : '';
+	$liaison  = ($objet AND $id_objet) ? true : false;
+
+	// liste de tous les boutons possibles
+	// `positions` indique les positions où ils peuvent apparaître (footer ou boite_infos)
+	// `liaison`   indique qu'il faut afficher le bouton uniquement en cas de liaison (on a $objet et $id_objet)
+	// `html`      code html du bouton
+	$boutons = array(
+		'dissocier' => array(
+			'positions' => array('footer'),
+			'liaison'   => true,
+			'autoriser' => autoriser('dissocier','album',$id_album,'',array('objet'=>$objet,'id_objet'=>$id_objet)),
+			'html'      => bouton_action(
+				_T('album:bouton_dissocier'),
+				generer_action_auteur('dissocier_album',$id_album.'/'.$objet.'/'.$id_objet,self()),
+				'ajax dissocier',
+				'',
+				_T('album:bouton_dissocier_explication'),
+				'(function(){jQuery("#album$id_album").animateRemove();return true;})()'
+			)
+		),
+		'supprimer' => array(
+			'positions' => array('footer','boite_infos'),
+			'liaison'   => false,
+			'autoriser' => autoriser('supprimer','album',$id_album),
+			'html'      => bouton_action(
+				_T('album:bouton_supprimer'),
+				generer_action_auteur('supprimer_album',$id_album,self()),
+				'ajax supprimer',
+				_T('album:message_supprimer'),
+				_T('album:bouton_supprimer_explication'),
+				'(function(){jQuery("#album$id_album").animateRemove();return true;})()'
+			)
+		),
+		'vider' => array(
+			'positions' => array('footer','boite_infos'),
+			'liaison'   => false,
+			'autoriser' => autoriser('vider','album',$id_album),
+			'html'      => bouton_action(
+				_T('album:bouton_vider'),
+				generer_action_auteur('dissocier_album',"$id_album/$objet/$id_objet",self()),
+				'ajax vider',
+				'',
+				_T('album:bouton_vider_explication')
+			)
+		),
+		/*'transvaser' => array(
+			'positions' => array('footer'),
+			'liaison'   => true,
+			'autoriser' => (autoriser('transvaser','album',$id_album,'',array('objet'=>$objet,'id_objet'=>$id_objet))) ? true : false,
+			'html'      => bouton_action(
+				_T('album:bouton_transvaser'),
+				generer_action_auteur('transvaser_album',"$id_album/$objet/$id_objet/false/true",self()),
+				'ajax transvaser',
+				'',
+				_T('album:bouton_transvaser_explication'),
+				'(function(){ajaxReload("documents");return true;})()'
+			)
+		),*/
+		'remplir' => array(
+			'positions' => array('footer'),
+			'liaison' => '',
+			'autoriser' => autoriser('modifier','album',$id_album),
+			'html' => '<a href="#" class="bouton remplir" role="button" tabindex="0">'._T('medias:bouton_ajouter_document').'</a>'
+		),
+	);
+
+	// liste des boutons affichés en fonction des autorisations et du contexte
+	$boutons_affiches = array();
+	foreach (array_keys($boutons) as $k) {
+		if (
+			is_null($position) ? !$position : in_array($position,$boutons[$k]['positions'])
+			AND $boutons[$k]['liaison'] ? $boutons[$k]['liaison'] === $liaison : !$boutons[$k]['liaison']
+			AND $boutons[$k]['autoriser'] === true
+		)
+			$boutons_affiches[$k] = $boutons[$k]['html'];
+	}
+
+	$data = array_merge($data,$boutons_affiches);
+	$flux['data'] = $data;
+
+	return $flux;
+}
+
 ?>

@@ -12,6 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_valider_deplacer_documents' => 'Enregistrer les changements',
 	'bouton_vider' => 'Vider',
+	'bouton_transvaser' => 'Transvaser',
+	'bouton_dissocier_explication' => 'Détacher l’album de l’objet',
+	'bouton_supprimer_explication' => 'Supprimer définitivement l’album',
+	'bouton_vider_explication' => 'Vider l’album de ses documents',
+	'bouton_transvaser_explication' => 'Sortir les documents de l’album et les attacher à l’objet',
 
 	// C
 	'c_albumotheque_filtres' => 'Les filtres latéraux permettent d’activer certains critères
@@ -80,12 +85,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_meta_dimensions' => 'Dimensions',
 	'label_modele_meta_extension' => 'Extension',
 	'label_modele_meta_taille' => 'Taille',
-	'label_modele_metas' => 'Informations sur le document :',
+	'label_modele_metas' => 'Informations sur le document',
 	'label_modele_nom_liste' => 'un album (liste)',
 	'label_modele_nom_vignettes' => 'un album (vignettes)',
+	'label_modele_pagination' => 'Pagination',
 	'label_modele_parcourir_albums' => 'Parcourir les albums',
 	'label_modele_placeholder_dimension' => 'Taille en px, sans l’unité',
 	'label_modele_recadrer_images' => 'Recadrer les images',
+	'label_modele_titre' => 'Afficher le titre',
 	'label_modele_titre_perso' => 'Titre personnalisé',
 	'label_modele_tri_date' => 'Date',
 	'label_modele_tri_id' => 'N° du document',
@@ -105,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_balise_inseree_succes' => 'La balise a été insérée dans le texte',
 	'message_id_album_ajoute' => 'L’album N° @id_album@ a été ajouté.',
 	'message_nb_albums_ajoutes' => '@nb@ albums ont été ajoutés.',
-	'message_supprimer' => 'Supprimer définitivement ?',
+	'message_supprimer' => 'Supprimer définitivement ? cette action est irréversible.',
 	'message_vider' => 'Retirer tous les documents ?',
 
 	// O

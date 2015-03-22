@@ -33,6 +33,7 @@
 	<pipeline nom="formulaire_fond" inclure="albums_pipelines.php" />
 	<pipeline nom="formulaire_traiter" inclure="albums_pipelines.php" />
 	<pipeline nom="compagnon_messages" inclure="albums_pipelines.php" />
+	<pipeline nom="album_boutons_actions" inclure="albums_pipelines.php" />
 
 	<necessite nom="medias" compatibilite="[2.7.27;]" />
 	<utilise nom="saisies" compatibilite="[1.40.0;]" />
