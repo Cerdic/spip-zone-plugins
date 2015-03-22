@@ -16,8 +16,6 @@ function responsive($matches) {
   // On inclu les filtres, au cas ou
   include_spip('inc/filtres');
 
-  var_dump($matches);
-
   // On revoie la bonne structure html d'iframe.
   return wrap($matches[0], '<div class="flex-video'.$vimeo.'">');;
 }
