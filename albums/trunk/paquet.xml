@@ -1,9 +1,9 @@
 <paquet
 	prefix="albums"
 	categorie="multimedia"
-	version="3.2.12"
+	version="3.3.0"
 	schema="1.0.0"
-	etat="dev"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/albums-128.png"
 	documentation="http://contrib.spip.net/Albums-3"
@@ -12,7 +12,7 @@
 	<!-- Gestion de groupes de documents sous forme d'albums -->
 
 	<auteur lien="http://spip.tetue.net">Tetue</auteur>
-	<auteur lien="http://razack.wordpress.com">Charles Razack</auteur>
+	<auteur lien="http://bravecassine.com">Charles Razack</auteur>
 	<licence>GPL</licence>
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/albums.php" />
@@ -36,9 +36,9 @@
 	<pipeline nom="album_boutons_actions" inclure="albums_pipelines.php" />
 
 	<necessite nom="medias" compatibilite="[2.7.27;]" />
-	<utilise nom="saisies" compatibilite="[1.40.0;]" />
-	<utilise nom="yaml" compatibilite="[1.5.1;]" />
-	<utilise nom="verifier" compatibilite="[1.0.0;]" />
+	<necessite nom="saisies" compatibilite="[1.40.0;]" />
+	<necessite nom="yaml" compatibilite="[1.5.1;]" />
+	<necessite nom="verifier" compatibilite="[1.0.0;]" />
 
 	<menu nom="albums" titre="album:titre_albums" parent="menu_edition" icone="images/album-16.png" />
 	<menu nom="album_creer" titre="album:icone_creer_album" parent="outils_rapides" icone="images/album-add-16.png" action="album_edit" parametres="new=oui" />
