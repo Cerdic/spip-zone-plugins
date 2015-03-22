@@ -20,8 +20,11 @@ function rubrique_reservation($id,$objet,$rubrique_reservation=''){
 			$i=sql_getfetsel('id_article','spip_articles','id_article='.$id.' AND id_rubrique IN ('.implode(',',$rubrique_reservation).')');
 		}
 		elseif($objet=='evenement'){
-			$i=sql_getfetsel('e.id_evenement','spip_evenements AS e INNER JOIN spip_articles AS a ON e.id_article=a.id_article','e.id_evenement_source=0 AND a.statut="publie" AND e.id_evenementt='.$id.' AND a.id_rubrique IN ('.implode(',',$rubrique_reservation).')');
+			$i=sql_getfetsel('e.id_evenement','spip_evenements AS e INNER JOIN spip_articles AS a ON e.id_article=a.id_article','e.id_evenement_source=0 AND a.statut="publie" AND e.id_evenement='.$id.' AND a.id_rubrique IN ('.implode(',',$rubrique_reservation).')');
 		}
+		elseif($objet=='rubrique'){
+			$i=sql_getfetsel('id_rubrique','spip_rubriques','id_rubrique='.$id.' AND id_rubrique IN ('.implode(',',$rubrique_reservation).')');
+		}		
 		if($i)return true; //Objet se trouve dans la zone
 		else return false;//Objet ne se trouve pas dans la zone
 	}
