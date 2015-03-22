@@ -16,17 +16,17 @@
 		+ ceux de modeles/album_liste.html
 
 ][
-(#SET{titre_album,        #ENV{titre}|in_array{#LISTE{oui,true}}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}})][
-(#SET{descriptif_album,   #ENV{descriptif}|?{#INFO_DESCRIPTIF{album,#ID_ALBUM}}})][
-(#SET{pagination,         #ENV{pagination}|intval|sinon{#EVAL{_ALBUMS_PAGINATION_LISTE}|intval}|sinon{#EVAL{_ALBUMS_PAGINATION}|intval}|sinon{20}})][
-(#SET{balise_titre,       #ENV*{balise_titre}|sinon{#ENV*{balise_titraille}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE_LISTE}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE}}|sinon{strong}|trim|replace{^<|>$}})][
-(#SET{position_legende,   #ENV{position_legende}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE_LISTE}}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE}}|trim})][
-(#SET{position_legende,   #GET{position_legende}|in_array{#LISTE{top,bottom}}|?{#GET{position_legende},bottom}})][
-(#SET{caption,            #GET{titre_album}|?{#GET{titre_album}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre_album">'}}}
-                          |concat{#GET{#GET{descriptif_album}}|?{#GET{descriptif_album}|wrap{<div class="descriptif_album">}}}
-                          |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption ',#GET{position_legende},'">'}}}|trim)][
-(#SET{metas,              #LISTE{metas,infos}|array_intersect{#ENV{args}|array_keys}|count|?{#ENV{metas,#ENV{infos}},#EVAL{_ALBUMS_LISTE_METAS}}})][
-(#SET{metas,              #VAL{'/\[\W\]/'}|preg_split{#GET{metas}|in_array{#LISTE{oui,true}}|?{extension-taille-dimensions,#GET{metas}}}})
+(#SET{titre_album,      #ENV{titre}|in_array{#LISTE{oui,true}}|?{#INFO_TITRE{album,#ID_ALBUM},#ENV{titre}}})][
+(#SET{descriptif_album, #ENV{descriptif}|?{#INFO_DESCRIPTIF{album,#ID_ALBUM}}})][
+(#SET{pagination,       #ENV{pagination}|intval|sinon{#EVAL{_ALBUMS_PAGINATION_LISTE}|intval}|sinon{#EVAL{_ALBUMS_PAGINATION}|intval}|sinon{20}})][
+(#SET{balise_titre,     #ENV*{balise_titre}|sinon{#ENV*{balise_titraille}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE_LISTE}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE}}|sinon{strong}|trim|replace{^<|>$}})][
+(#SET{position_legende, #ENV{position_legende}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE_LISTE}}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE}}|trim})][
+(#SET{position_legende, #GET{position_legende}|in_array{#LISTE{top,bottom}}|?{#GET{position_legende},bottom}})][
+(#SET{caption,          #GET{titre_album}|?{#GET{titre_album}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre_album">'}}}
+                        |concat{#GET{#GET{descriptif_album}}|?{#GET{descriptif_album}|wrap{<div class="descriptif_album">}}}
+                        |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption ',#GET{position_legende},'">'}}}|trim)][
+(#SET{metas,            #LISTE{metas,infos}|array_intersect{#ENV{args,#ARRAY}|array_keys}|count|?{#ENV{metas,#ENV{infos}},#EVAL{_ALBUMS_LISTE_METAS}}})][
+(#SET{metas,            #VAL{'/\[\W\]/'}|preg_split{#GET{metas}|in_array{#LISTE{oui,true}}|?{extension-taille-dimensions,#GET{metas}}}})
 ]<B_documents_album>
 <div class="album liste[ (#ENV{align})][ (#ENV{classe})]">
 	#ANCRE_PAGINATION
