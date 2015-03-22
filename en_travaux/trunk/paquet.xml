@@ -1,7 +1,7 @@
 <paquet
 	prefix="entravaux"
 	categorie="maintenance"
-	version="3.1.17"
+	version="3.1.18"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/entravaux-32.png"
