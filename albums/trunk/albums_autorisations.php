@@ -323,7 +323,7 @@ function autoriser_album_modifier_dist($faire, $type, $id, $qui, $opts) {
 /**
  * Autorisation à supprimer définitivement un album.
  *
- * Il faut qu'il soit vide et inutilisé, + non publié si on est pas admin complet
+ * Il faut qu'il soit vide et inutilisé, et avoir le droit de le modifier ou être admin complet
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -413,7 +413,7 @@ function autoriser_album_associer_dist($faire, $type, $id, $qui, $opts) {
  * @param  array  $qui   Description de l'auteur demandant l'autorisation
  * @param  array  $opts  Options de cette autorisation
  *                       Doit contenir les clés `objet` et `id_objet`
- *                       pour rensigner le type et l'identifiant de l'objet
+ *                       pour renseigner le type et l'identifiant de l'objet
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_album_dissocier_dist($faire, $type, $id, $qui, $opts) {
@@ -504,10 +504,54 @@ function autoriser_deplacerdocumentsalbums_dist($faire, $type, $id, $qui, $opts)
  * @return bool          true s'il a le droit, false sinon
 **/
 function autoriser_album_vider_dist($faire, $type, $id, $qui, $opts) {
+
 	include_spip('action/editer_liens');
 	$rempli = count(objet_trouver_liens(array('document'=>'*'),array('album'=>$id)))>0;
 	$admin = $qui['statut']=='0minirezo' AND !$qui['restreint'];
 	$autoriser = ($admin AND $rempli) ? true : false;
+
+	return $autoriser;
+}
+
+
+/**
+ * Autorisation de transvaser les documents d'un album
+ *
+ * Il faut que l'album soit lié à l'objet et 
+ * avoir le droit de modifier l'album et d'ajouter des documents ou être admin complet.
+ *
+ * @param  string $faire Action demandée
+ * @param  string $type  Type d'objet sur lequel appliquer l'action
+ * @param  int    $id    Identifiant de l'objet
+ * @param  array  $qui   Description de l'auteur demandant l'autorisation
+ * @param  array  $opts  Options de cette autorisation
+ *                       Doit contenir les clés `objet` et `id_objet`
+ *                       pour renseigner le type et l'identifiant de l'objet
+ * @return bool          true s'il a le droit, false sinon
+**/
+function autoriser_album_transvaser_dist($faire, $type, $id, $qui, $opts) {
+
+	include_spip('action/editer_liens');
+	$objet = $opts['objet'];
+	$id_objet = $opts['id_objet'];
+	$liaison = (count(objet_trouver_liens(array('album'=>$id),array($objet=>$id_objet)))>0) ? true : false;
+	$autoriser_modifier = autoriser('modifier','album',$id);
+	$autoriser_joindredocument = autoriser('joindredocument',$objet,$id_objet);
+	$admin = $qui['statut']=='0minirezo' AND !$qui['restreint'];
+
+	$autoriser = (
+		$liaison
+		AND
+		(
+			(
+			$autoriser_modifier
+			AND $autoriser_joindredocument
+			)
+			OR
+			$admin
+		)
+	) ? true : false;
+
 	return $autoriser;
 }
 

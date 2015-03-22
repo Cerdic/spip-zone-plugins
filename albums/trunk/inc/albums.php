@@ -79,6 +79,7 @@ function vider_albums($ids_albums, $supprimer_docs_orphelins=false) {
 
 	include_spip('inc/autoriser');
 	include_spip('action/editer_liens');
+
 	foreach($ids_albums as $id_album) {
 		if (
 			$id_album = intval($id_album)
@@ -100,6 +101,92 @@ function vider_albums($ids_albums, $supprimer_docs_orphelins=false) {
 	}
 
 	return array('succes'=>$succes, 'erreurs'=>$erreurs);
+}
+
+
+/**
+ * Transvaser les documents entre un album et un objet éditorial auquel il est associé
+ *
+ * @note
+ * On ne fait que modifier des liens existants au lieu de dissocier puis réassocier
+ * les documents au moyen des fonctions de Médias (`dissocier_document` et `associer_document`)
+ *
+ * @param int|string $id_album
+ *     Identifiant de l'album
+ *     0 pour créer un nouvel album vide, dans le cas d'un remplissage
+ * @param string $objet
+ *     Type d'objet
+ * @param int $id_objet
+ *     Identifiant de l'objet
+ * @param bool $remplir
+ *     Définit le sens du transvasement (on remplit l'album ou on le vide)
+ *     true  : portfolio -> album
+ *     false : album     -> portfolio
+ * @param bool $supprimer
+ *     true : supprimer l'album dans le cas d'un vidage
+ * @return int|bool
+ *     nb de liens changés si ok,
+ *     false en cas d'erreur
+ */
+function transvaser_album($id_album, $objet, $id_objet, $remplir=true, $supprimer=false) {
+
+	include_spip('inc/autoriser');
+	include_spip('action/editer_liens');
+	include_spip('action/editer_objet');
+
+	$echec = null;
+	$nb_maj = 0;
+
+	// au besoin, on crée d'abord un album et on l'associe à l'objet
+	if (
+		!intval($id_album)
+		AND $remplir === true
+	) {
+		$id_album = objet_inserer('album');
+		objet_associer(array('album'=>$id_album),array($objet=>$id_objet));
+	}
+
+	if (autoriser('transvaser','album',$id_album,'',array('objet'=>$objet,'id_objet'=>$id_objet))){
+
+		$objet_source = ($remplir === true) ? $objet : 'album';
+		$id_objet_source = ($remplir === true) ? $id_objet : $id_album;
+		$objet_destination = ($remplir === true) ? 'album' : $objet;
+		$id_objet_destination = ($remplir === true) ? $id_album : $id_objet;
+
+		// changer les liens existants
+		// on ne peut pas changer objet et id_objet avec objet_qualifier_liens, donc on fait ça à la main
+		if (
+			$liens_docs = objet_trouver_liens(array('document'=>'*'),array($objet_source=>$id_objet_source))
+			AND is_array($liens_docs)
+		){
+			foreach ($liens_docs as $lien){
+				$qualif = array('objet'=>$objet_destination,'id_objet'=>$id_objet_destination);
+				$where = 'id_document='.intval($lien['id_document']).' AND objet='.sql_quote($objet_source).' AND id_objet='.intval($id_objet_source);
+				$res = sql_updateq('spip_documents_liens',$qualif,$where);
+				if ($res===false)
+					$echec = true;
+				else
+					$nb_maj++;
+			}
+		}
+		// en cas de vidage, dissocier l'album
+		// puis éventuellement le supprimer
+		if (
+			$remplir === false
+			AND $echec !== false
+		){
+			objet_dissocier(array('album'=>$id_album),array($objet=>$id_objet));
+			if (
+				$supprimer === true
+				AND autoriser('supprimer','album',$id_album)
+			) {
+				supprimer_albums($id_album);
+			}
+		}
+	} else {
+		$echec = true;
+	}
+	return ($echec?false:$nb_maj);
 }
 
 
