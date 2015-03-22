@@ -13,8 +13,18 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_reservation_charger_dist($id='',$id_article=''){
-
-	// si pas d'evenement ou d'inscription, on echoue silencieusement
+	include_spip('inc/config');
+	include_spip('formulaires/selecteur/generique_fonctions');
+	
+	//Si l'affichage n'est pas déjà définie on établit si une zone s'applique
+	if(!$id_article AND !$id){
+		include_spip('inc/reservation_evenements');
+		
+		$config=lire_config('reservation_evenement/rubrique_reservation');
+		$rubrique_reservation=picker_selected($config,'rubrique');
+		$zone=rubrique_reservation('','article',$rubrique_reservation,array('tableau'=>'oui'));
+		if($zone)$id_article=$zone;		
+	}
 	
 	$where=array('date_fin>NOW() AND inscription=1 AND statut="publie"');
 	if($id){
@@ -23,7 +33,7 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
 	}
 	if($id_article){
 		if(!is_array($id_article)) array_push($where,'id_article='.intval($id_article));   
-		elseif(is_array($id_article))array_push($where,'id_article IN '.implode(',',$id_article).')');
+		elseif(is_array($id_article))array_push($where,'id_article IN ('.implode(',',$id_article).')');
 	}
 
 	$sql = sql_select('*','spip_evenements',$where,'','date_debut,date_fin');

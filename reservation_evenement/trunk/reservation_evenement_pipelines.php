@@ -26,17 +26,14 @@ function reservation_evenement_affiche_gauche($flux) {
 		include_spip('inc/config');
 		include_spip('formulaires/selecteur/generique_fonctions');
 		include_spip('inc/reservation_evenements');		
-		$config=lire_config('reservation_evenement/rubrique_reservation');
 		
+		$config=lire_config('reservation_evenement/rubrique_reservation');
 		$contexte = array();
 		$contexte['id_article'] = intval($flux['args']['id_article']) ? $flux['args']['id_article'] : '';
 		$contexte['id_rubrique'] = intval($flux['args']['id_rubrique']) ? $flux['args']['id_rubrique'] : '';
 		$contexte['id_evenement'] = intval($flux['args']['id_evenement']) ? $flux['args']['id_evenement'] : '';		
 		$id=$contexte['id_'.$exec];
-		
-
 		$rubrique_reservation=picker_selected($config,'rubrique');
-
 		$zone=rubrique_reservation($id,$exec,$rubrique_reservation);
 		
 		//Si l'objet se trouve dans la zone Reservation Evènement, on affiche
@@ -146,14 +143,15 @@ function reservation_evenement_formulaire_traiter($flux){
 
 function reservation_evenement_recuperer_fond($flux){
     $fond=$flux['args']['fond'];
+	
 	$contexte=$flux['data']['contexte'];
 	$fonds=array(
-		'formulaires/editer_article'=>'article','
-		formulaires/editer_evenement'=>'evenement'
+		'formulaires/editer_article'=>'article',
+		'formulaires/editer_evenement'=>'evenement'
 		);
-		
 	//Ajouter le champ action_cloture
     if (isset($fonds[$fond])){
+    	
 		include_spip('inc/config');
 		include_spip('formulaires/selecteur/generique_fonctions');
 		include_spip('inc/reservation_evenements');		
@@ -164,12 +162,11 @@ function reservation_evenement_recuperer_fond($flux){
 		$id=_request('id_'.$type);
 		$zone=rubrique_reservation($id,$type,$rubrique_reservation);
 		$cron=isset($config['cron'])?$config['cron']:'';
-		
 		//Si cron activé et l'objet se trouve dans la zone Reservation Evènement, on affiche
 		if($cron AND $zone){
 	        $action_cloture='<ul>'.recuperer_fond('formulaires/inc-action_cloture',$contexte).'</ul>';
 	        $flux['data']['texte'] = str_replace('<!--extra-->',$action_cloture. '<!--extra-->',$flux['data']['texte']);
-		}
+	        }
     }   
     return $flux;
 }
