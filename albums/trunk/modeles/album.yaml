@@ -90,6 +90,13 @@ parametres:
       label_case: <:album:label_modele_recadrer_images:>
       valeur_oui: 'oui'
   -
+    saisie: 'input'
+    options:
+      nom: 'ratio'
+      label: <:album:label_modele_ratio:>
+      placeholder: <:album:label_modele_ratio_placeholder:>
+      afficher_si: '@recadrer@=="oui"'
+  -
     saisie: 'case'
     options:
       nom: 'label'

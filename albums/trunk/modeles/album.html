@@ -7,38 +7,39 @@
 	Par défaut, l'affichage est volontairement minimaliste et les vignettes sont retaillées en hauteur.
 	Les paramètres permettent d'afficher des éléments supplémentaires (titre, descriptif, labels), de retailler et recadrer les vignettes,
 	de changer la position et le contenu de la légende, de changer la pagination, le tri, etc.
-	Voir la liste complète des paramètres plus bas, et consulter le fichier `albums_options.php` pour voir les constantes de personnalisation.
-
-	Comme on ne peut pas prendre en compte tous les cas de figure avec une seule boucle (pour rétro compatibilité v1), on a recours à 2 squelettes :
-	- ce squelette sert juste à sélectionner les documents correspondants aux critères demandés (id_album, id ou id_article).
-	- le squelette inclus est l'album à proprement parler.
+	Des constantes de personnalisation permettent de définir des paramètres par défaut,
+	consulter le fichier `albums_options.php` pour la liste complète.
 
 	Utilisation :
-	- Dans un squelette : #MODELE{album, id_album=X}        docs de l'album n°X
-	                      #MODELE{album, id_article=X}      docs de l'article n°X
-	                      #MODELE{album, id='X,Y,Z,N'}      docs identifiés
-	- Dans un texte     : <albumX>
-	                      <album|id_article=X>
-	                      <album|id=X,Y,Z,N>
+	- Dans un squelette : #MODELE{album, id_album=x}      docs de l'album n°x
+	                      #MODELE{album, id_article=x}    docs de l'article n°x
+	                      #MODELE{album, id=x-y-z-N}    docs identifiés
+	- Dans un texte :     <albumX>
+	                      <album|id_article=x>
+	                      <album|id=x,y,z,N>
 
-][(#REM)
-
-	Utilise :
-		modeles/inc-album.html
+	Notes techniques diverses :
+	- Le squelette a l'air bien chevelu, mais à la base, le markup d'un album est hyper simple (cf. lien plus haut).
+	Comme il faut prendre en compte tous les paramètres possibles, assurer la rétrocompatibilité,
+	et gérer les petites incohérences des modèles, ça donne un truc bien dense.
+	- Attention, dans la v1 le paramètre `id` sert à sélectionner des documents,
+	mais #ENV{id} peut renvoyer l'identifiant d'un album avec <albumx>.
+	Si on peut décomposer #ENV{id} en tableau, on considère qu'il s'agit du premier cas. 
+    
 
 ][(#REM)
 
 	Paramètres :
 		id_album          Identifiant d'un album.
 		titre             Pour afficher le titre de l'album ou un titre personnalisé
-		                  valeurs : «oui» ou «true» pour le titre de l'album.
+		                  valeurs : «oui» ou «true» pour le "vrai" titre de l'album.
 		                            n'importe quelle autre chaîne pour un titre personnalisé.
 		                  défaut  : ''
 		balise_titre      Balise dans laquelle encapsuler le titre, sans les chevrons.
 		                  ex.     : «h3», «strong»...
 		                  défaut  : _ALBUMS_BALISE_TITRE_VIGNETTES > _ALBUMS_BALISE_TITRE > strong
 		descriptif        Pour afficher le descriptif de l'album
-		                  valeurs : n'importe quelle chaîne (oui, true...)
+		                  valeurs : «oui» ou «true»
 		                  défaut  : ''
 		label             Pour afficher le label de chaque document
 		                  valeurs : n'importe quelle chaîne (oui, true...)
@@ -51,6 +52,9 @@
 		recadrer          Pour recadrer les images (filtre image_passe_partout + image_recadre).
 		                  valeurs : n'importe quelle chaîne (oui, true...)
 		                  défaut  : _ALBUMS_RECADRER > ''
+		ratio             Ratio utilisé pour recadrer
+		                  valeurs : 16/9, 2:21, 4-3 etc.
+		                  défaut  : 1
 		par               Tri des documents.
 		                  valeurs : id_document | titre | fichier | media | mode | extension | taille
 		                  défaut  : media, fichier, titre
@@ -68,28 +72,74 @@
 		                  défaut  : bottom
 
 		Dépréciés, pour rétro compatibilité avec les versions antérieures :
-		id                sélection prédéfinie de documents, séparés par une virgule.
+		id                sélection prédéfinie de documents, séparés par un caractère non alphanumérique.
 		id_article        identifiant d'un article pour sélectionner ses documents.
 		balise_titraille  = balise_titre
 		media             pour restreindre à un type de document
 
-]#SET{ids_documents,#ARRAY}[
+][(#SET{titre_album,    #ENV{titre}|in_array{#LISTE{oui,true}}|?{#INFO_TITRE{album,#ENV{id_album}},#ENV{titre}|trim}})][
+(#SET{descriptif_album, #ENV{descriptif}|in_array{#LISTE{oui,true}}|?{#INFO_DESCRIPTIF{album,#ENV{id_album}}}})][
+(#SET{pagination,       #ENV{pagination}|intval|sinon{#EVAL{_ALBUMS_PAGINATION_VIGNETTES}|intval}|sinon{#EVAL{_ALBUMS_PAGINATION}|intval}|sinon{20}})][
+(#SET{balise_titre,     #ENV*{balise_titre}|sinon{#ENV*{balise_titraille}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE_VIGNETTES}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE}}|sinon{strong}|trim|replace{^<|>$}})][
+(#SET{position_legende, #ENV{position_legende}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE_VIGNETTES}}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE}}|trim})][
+(#SET{position_legende, #GET{position_legende}|in_array{#LISTE{top,bottom}}|?{#GET{position_legende},bottom}})][
+(#SET{caption,          #GET{titre_album}|?{#GET{titre_album}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre_album">'}}}
+                        |concat{#GET{#GET{descriptif_album}}|?{#GET{descriptif_album}|wrap{<div class="descriptif_album">}}}
+                        |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption ',#GET{position_legende},'">'}}}|trim)][
+(#SET{taille_preview,   #CONFIG{taille_preview}|intval|sinon{#EVAL{_ALBUMS_TAILLE_PREVIEW}|intval}|sinon{150}})][
+(#SET{recadrer,         #ENV{recadrer}|?{true,#EVAL{_ALBUMS_RECADRER}}})][
+(#SET{ids_documents,    #ARRAY})][
+(#SET{source_docs,      #ENV{id_album}|intval|?{album,
+                        #VAL{/\W/}|preg_split{#ENV*{id}}|array_filter|count|>{1}?{id,
+                        #ENV{id_article}|intval|?{article}}}})][
 
-(#REM) 1. «id_album» présent dans l'environnement
 
-]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}
+(#REM) 1. ID DOCUMENTS
+
+
+][
+(#REM) «id_album»
+]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}{si #GET{source_docs}|=={album}}
 >#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_docs></BOUCLE_album>[
-
-(#REM) 2. «id_article» donné explicitement
-
-]<BOUCLE_article(DOCUMENTS){id_article=#ENV{args/id_article}}{par #ENV{par,media},titre}{tout}{media?}
+(#REM) sinon «id_article»
+]<BOUCLE_article(DOCUMENTS){id_article}{par #ENV{par,media},titre}{tout}{media?}{si #GET{source_docs}|=={article}}
 >#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
+(#REM) sinon «id»
+]<BOUCLE_id(CONDITION){si #GET{source_docs}|=={id}}
+>#SET{ids_documents,#VAL{/\W/}|preg_split{#ENV*{id}}}</BOUCLE_id>[
 
-(#REM) 3. «id» donné explicitement
 
-]<BOUCLE_id(DOCUMENTS){id_document IN (#ENV{args/id}|explode{','})}{par #ENV{par,media},titre}{tout}
->#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_id><//B_article><//B_album>[
+(#REM) 2. ALBUM
 
-(#REM) squelette de l'album
 
-][(#INCLURE{fond=modeles/inc-album, ids_documents=#GET{ids_documents}, env, ajax})]
+]<B_documents_album>
+[<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})]">]
+	#ANCRE_PAGINATION
+	[(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
+	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#CONFIG{foundation/variante}|intval|>={4}|?{class='small-block-grid-2 medium-block-grid-3 large-block-grid-4',class='block-grid 4-up mobile-two-up'})]>
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#VAL|uniqid}}>[
+		(#SET{titre_document,      #TITRE|sinon{#FICHIER|basename}})][
+		(#SET{titre_document_long, #GET{titre_document}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}})][
+		(#SET{ratio,               #VAL{/\W/}|preg_split{#ENV*{ratio,#GET{recadrer}|?{1}}}})][
+		(#SET{ratio,               #GET{ratio}|count|>{1}|?{#GET{ratio/0}|div{#GET{ratio/1}},#GET{ratio/0}}|floatval})][
+		(#SET{ratio,               #GET{ratio}|sinon{#LARGEUR|div{#HAUTEUR}}|floatval})][
+		(#SET{largeur,             #ENV{largeur}|sinon{#ENV{hauteur}|mult{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
+		(#SET{hauteur,             #ENV{hauteur,#GET{largeur}|div{#GET{ratio}}}|intval})][
+		(#SET{src,                 #MEDIA|=={image}|?{
+			#GET{recadrer}|?{
+				#FICHIER|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur},center},
+				#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}},
+			#LOGO_DOCUMENT{icone}}
+		|extraire_attribut{src}})]
+		<li[ (#PLUGIN{bootstrap}|oui)class='thumbnail']>
+			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION)][ (#PLUGIN{foundation}|oui)th]" title="[(#GET{titre_document_long}|attribut_html)]" role="button" aria-label="Vignette">
+				[(#GET{src}|balise_img{#GET{titre_document_long},vignette}|inserer_attribut{aria-hidden,true})]
+			</a>
+			[(#ENV{label}|oui)[<span class="label">(#GET{titre_document})</span>]]
+		</li>
+		</BOUCLE_documents_album>
+	</ul>
+	[<div class='pagination'>(#PAGINATION{#ENV{pagination_type,page}})</div>]
+	[(#GET{position_legende}|=={bottom}|oui)[(#GET{caption})]]
+[</(#HTML5|?{figure,div})>]<!-- .album.vignettes -->
+</B_documents_album>

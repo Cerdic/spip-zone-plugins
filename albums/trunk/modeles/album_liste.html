@@ -5,20 +5,16 @@
 	Par défaut, l'affichage est volontairement minimaliste .
 	Les paramètres permettent d'afficher des éléments supplémentaires (titre, descriptif, informations sur les fichiers),
 	de changer la position et le contenu de la légende, de changer la pagination, le tri, etc.
-	Voir la liste complète des paramètres plus bas, et consulter le fichier `albums_options.php` pour voir les constantes de personnalisation.
-
-	Comme on ne peut pas prendre en compte tous les cas de figure avec une seule boucle (pour rétro compatibilité v1),
-	on a recours à 2 squelettes :
-	- ce squelette sert juste à sélectionner les documents correspondants aux critères demandés (id_album, id ou id_article).
-	- le squelette inclus est le squelette de l'album à proprement parler.
+	Des constantes de personnalisation permettent de définir des paramètres par défaut,
+	consulter le fichier `albums_options.php` pour la liste complète.
 
 	Utilisation :
-	- Dans un squelette : #MODELE{album_liste, id_album=X}        docs de l'album n°X
-	                      #MODELE{album_liste, id_article=X}      docs de l'article n°X
-	                      #MODELE{album_liste, id='X,Y,Z,N'}      docs identifiés
-	- Dans un texte     : <albumX|liste>
-	                      <album|liste|id_article=X>
-	                      <album|liste|id=X,Y,Z,N>
+	- Dans un squelette : #MODELE{album_liste, id_album=x}      docs de l'album n°x
+	                      #MODELE{album_liste, id_article=x}    docs de l'article n°x
+	                      #MODELE{album_liste, id=x-y-z-N}    docs identifiés
+	- Dans un texte :     <albumX|liste>
+	                      <album|liste|id_article=x>
+	                      <album|liste|id=x,y,z,N>
 
 ][(#REM)
 
@@ -37,7 +33,7 @@
 		                  ex.     : «h3», «strong»...
 		                  défaut  : _ALBUMS_BALISE_TITRE_VIGNETTES > _ALBUMS_BALISE_TITRE > strong
 		descriptif        Pour afficher le descriptif de l'album
-		                  valeurs : n'importe quelle chaîne (oui, true...)
+		                  valeurs : valeurs : «oui» ou «true»
 		                  défaut  : ''
 		metas             Liste des infos complémentaires à afficher, séparées par un caractère non alphanumérique (virgule, tiret...)
 		                  valeurs : extension | taille | dimensions
@@ -66,23 +62,60 @@
 		infos             = metas
 		media             pour restreindre à un type de document
 
-]#SET{ids_documents,#ARRAY}[
+][(#SET{titre_album,    #ENV{titre}|in_array{#LISTE{oui,true}}|?{#INFO_TITRE{album,#ENV{id_album}},#ENV{titre}}})][
+(#SET{descriptif_album, #ENV{descriptif}|?{#INFO_DESCRIPTIF{album,#ENV{id_album}}}})][
+(#SET{pagination,       #ENV{pagination}|intval|sinon{#EVAL{_ALBUMS_PAGINATION_LISTE}|intval}|sinon{#EVAL{_ALBUMS_PAGINATION}|intval}|sinon{20}})][
+(#SET{balise_titre,     #ENV*{balise_titre}|sinon{#ENV*{balise_titraille}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE_LISTE}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE}}|sinon{strong}|trim|replace{^<|>$}})][
+(#SET{position_legende, #ENV{position_legende}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE_LISTE}}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE}}|trim})][
+(#SET{position_legende, #GET{position_legende}|in_array{#LISTE{top,bottom}}|?{#GET{position_legende},bottom}})][
+(#SET{caption,          #GET{titre_album}|?{#GET{titre_album}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre_album">'}}}
+                        |concat{#GET{#GET{descriptif_album}}|?{#GET{descriptif_album}|wrap{<div class="descriptif_album">}}}
+                        |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption ',#GET{position_legende},'">'}}}|trim)][
+(#SET{metas,            #LISTE{metas,infos}|array_intersect{#ENV{args,#ARRAY}|array_keys}|count|?{#ENV{metas,#ENV{infos}},#EVAL{_ALBUMS_LISTE_METAS}}})][
+(#SET{metas,            #VAL{'/\[\W\]/'}|preg_split{#GET{metas}|in_array{#LISTE{oui,true}}|?{extension-taille-dimensions,#GET{metas}}}})][
+(#SET{ids_documents,    #ARRAY})][
+(#SET{source_docs,      #ENV{id_album}|intval|?{album,
+                        #VAL{/\W/}|preg_split{#ENV*{id}}|array_filter|count|>{1}?{id,
+                        #ENV{id_article}|intval|?{article}}}})][
 
-(#REM) 1. «id_album» présent dans l'environnement
 
-]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}
+(#REM) 1. ID DOCUMENTS
+
+
+][
+(#REM) «id_album»
+]<BOUCLE_album(ALBUMS){id_album}><BOUCLE_docs(DOCUMENTS){id_album}{par #ENV{par,media},titre}{tout}{media?}{si #GET{source_docs}|=={album}}
 >#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_docs></BOUCLE_album>[
-
-(#REM) 2. «id_article» donné explicitement
-
-]<BOUCLE_article(DOCUMENTS){id_article=#ENV{args/id_article}}{par #ENV{par,media},titre}{tout}{media?}
+(#REM) sinon «id_article»
+]<BOUCLE_article(DOCUMENTS){id_article}{par #ENV{par,media},titre}{tout}{media?}{si #GET{source_docs}|=={article}}
 >#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_article>[
+(#REM) sinon «id»
+]<BOUCLE_id(CONDITION){si #GET{source_docs}|=={id}}
+>#SET{ids_documents,#VAL{/\W/}|preg_split{#ENV{id}}}</BOUCLE_id>[
 
-(#REM) 3. «id» donné explicitement
 
-]<BOUCLE_id(DOCUMENTS){id_document IN (#ENV{args/id}|explode{','})}{par #ENV{par,media},titre}{tout}
->#SET{ids_documents,#GET{ids_documents}|push{#ID_DOCUMENT}}</BOUCLE_id><//B_article><//B_album>[
+(#REM) 2. ALBUM
 
-(#REM) squelette de l'album
 
-][(#INCLURE{fond=modeles/inc-album_liste, ids_documents=#GET{ids_documents}, env, ajax})]
+]<B_documents_album>
+<div class="album liste[ (#ENV{align})][ (#ENV{classe})]">
+	#ANCRE_PAGINATION
+	[(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
+	<ul class="spip">
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#VAL|uniqid}}>[
+		(#SET{extension,           #EXTENSION|strtoupper|wrap{<abbr class="extension">}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}}})][
+		(#SET{taille,              #TAILLE|taille_en_octets|wrap{<span class="taille">}})][
+		(#SET{dimensions,          #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span class="dimensions">}}})][
+		(#SET{titre_document,      #TITRE|sinon{#FICHIER|basename}})][
+		(#SET{titre_document_long, #GET{titre_document}|concat{' - ',#TYPE_DOCUMENT,' - ',#TAILLE|taille_en_octets}})]<li>
+			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="spip_doc[ (#EXTENSION|attribut_html)]" title="[(#GET{titre_document_long}|attribut_html)]">
+				[<span class="titre_album[ (#TITRE|non)fichier]">(#GET{titre_document})</span>] [
+				(#REM)]<B_metas>(<BOUCLE_metas(DATA){source table, #GET{metas}}{' <span class="sep">-</span> '}{si #GET{metas}}>[(#GET{#VALEUR})]</BOUCLE_metas>)</B_metas>
+			</a>
+		</li>
+		</BOUCLE_documents_album>
+	</ul>
+	[<div class='pagination'>(#PAGINATION{#ENV{pagination_type,page}})</div>]
+	[(#GET{position_legende}|=={bottom}|oui)[(#GET{caption})]]
+</div><!-- .album.vignette -->
+</B_documents_album>
