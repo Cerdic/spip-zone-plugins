@@ -77,12 +77,13 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'label_modele_meta_dimensions' => 'Dimensiones',
 	'label_modele_meta_extension' => 'Extensión',
 	'label_modele_meta_taille' => 'Tamaño',
-	'label_modele_metas' => 'Información del documento :', # RELIRE
+	'label_modele_metas' => 'Información del documento :', # MODIF
 	'label_modele_nom_liste' => 'álbum (lista)',
 	'label_modele_nom_vignettes' => 'álbum (miniaturas)',
 	'label_modele_parcourir_albums' => 'Hojear los álbumes',
 	'label_modele_placeholder_dimension' => 'Tamaño, sin unidad', # RELIRE
 	'label_modele_recadrer_images' => 'Recortar imágenes', # RELIRE
+	'label_modele_titre' => 'Título personalizado', # MODIF
 	'label_modele_titre_perso' => 'Título personalizado',
 	'label_modele_tri_date' => 'Fecha', # RELIRE
 	'label_modele_tri_id' => 'Número del documento',
@@ -102,7 +103,7 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'message_balise_inseree_succes' => 'La etiqueta se ha insertado en el texto',
 	'message_id_album_ajoute' => 'El álbum número @id_album@ ha sido añadido.',
 	'message_nb_albums_ajoutes' => 'Se han añadido @nb@ álbumes.',
-	'message_supprimer' => '¿ Suprimir permanentemente ?', # RELIRE
+	'message_supprimer' => '¿ Suprimir permanentemente ?', # MODIF
 	'message_vider' => '¿ Retirar todos los documentos ?', # MODIF
 
 	// O

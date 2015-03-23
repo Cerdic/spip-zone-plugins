@@ -81,12 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_modele_meta_dimensions' => 'Afmetingen',
 	'label_modele_meta_extension' => 'Extensie',
 	'label_modele_meta_taille' => 'Grootte',
-	'label_modele_metas' => 'Informatie over dit document:',
+	'label_modele_metas' => 'Informatie over dit document:', # MODIF
 	'label_modele_nom_liste' => 'een album (lijst)',
 	'label_modele_nom_vignettes' => 'een album (iconen)',
 	'label_modele_parcourir_albums' => 'Albums doorbladeren',
 	'label_modele_placeholder_dimension' => 'Grootte in px, zonder eenheid',
 	'label_modele_recadrer_images' => 'Afbeeldingen herkadreren',
+	'label_modele_titre' => 'Aangepaste titel', # MODIF
 	'label_modele_titre_perso' => 'Aangepaste titel',
 	'label_modele_tri_date' => 'Datum',
 	'label_modele_tri_id' => 'Documentnummer',
@@ -106,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_balise_inseree_succes' => 'Het baken is in de tekst opgenomen',
 	'message_id_album_ajoute' => 'Album nr @id_album@ werd toegevoegd.',
 	'message_nb_albums_ajoutes' => '@nb@ albums zijn toegevoegd.',
-	'message_supprimer' => 'Definitief verwijderen?',
+	'message_supprimer' => 'Definitief verwijderen?', # MODIF
 	'message_vider' => 'Alle documenten weghalen?',
 
 	// O

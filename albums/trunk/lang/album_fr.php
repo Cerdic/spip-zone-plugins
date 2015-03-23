@@ -8,15 +8,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_associer' => 'Ajouter cet album',
 	'bouton_dissocier' => 'Détacher',
+	'bouton_dissocier_explication' => 'Détacher l’album de l’objet',
 	'bouton_editer_texte_album' => 'Editer le texte',
 	'bouton_supprimer' => 'Supprimer',
+	'bouton_supprimer_explication' => 'Supprimer définitivement l’album',
+	'bouton_transvaser' => 'Transvaser',
+	'bouton_transvaser_explication' => 'Sortir les documents de l’album et les attacher à l’objet',
 	'bouton_valider_deplacer_documents' => 'Enregistrer les changements',
 	'bouton_vider' => 'Vider',
-	'bouton_transvaser' => 'Transvaser',
-	'bouton_dissocier_explication' => 'Détacher l’album de l’objet',
-	'bouton_supprimer_explication' => 'Supprimer définitivement l’album',
 	'bouton_vider_explication' => 'Vider l’album de ses documents',
-	'bouton_transvaser_explication' => 'Sortir les documents de l’album et les attacher à l’objet',
 
 	// C
 	'c_albumotheque_filtres' => 'Les filtres latéraux permettent d’activer certains critères

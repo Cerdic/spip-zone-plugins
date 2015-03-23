@@ -78,12 +78,13 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'label_modele_meta_dimensions' => 'Dimensions',
 	'label_modele_meta_extension' => 'Extension',
 	'label_modele_meta_taille' => 'Size',
-	'label_modele_metas' => 'File info:',
+	'label_modele_metas' => 'File info:', # MODIF
 	'label_modele_nom_liste' => 'an album (list)',
 	'label_modele_nom_vignettes' => 'an album (thumbnails)',
 	'label_modele_parcourir_albums' => 'Browse albums',
 	'label_modele_placeholder_dimension' => 'Size in pixels, without unity',
 	'label_modele_recadrer_images' => 'Crop images',
+	'label_modele_titre' => 'Custom title', # MODIF
 	'label_modele_titre_perso' => 'Custom title',
 	'label_modele_tri_date' => 'Date',
 	'label_modele_tri_id' => 'Document number',
@@ -103,7 +104,7 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'message_balise_inseree_succes' => 'The tag was inserted in the text',
 	'message_id_album_ajoute' => 'The album @id_album@ has been added.',
 	'message_nb_albums_ajoutes' => '@nb@ albums have been added.',
-	'message_supprimer' => 'Delete permanently ?',
+	'message_supprimer' => 'Delete permanently ?', # MODIF
 	'message_vider' => 'Remove all the documents ?',
 
 	// O
