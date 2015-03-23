@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2014 - Distribué sous licence GNU/GPL
+ * 2008-2015 - Distribué sous licence GNU/GPL
  * 
  * Récupération de metadonnés d'un fichier audio ou vidéo
  */
@@ -65,7 +65,7 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 	else if(in_array($extension,array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse'])
 		exec(escapeshellcmd("qt-faststart $fichier $fichier_tmp"),$retour,$retour_int);
 
-	if(file_exists($fichier_tmp."_tmp"))
+	if(file_exists($fichier_tmp))
 		rename($fichier_tmp,$fichier);
 
 	/**
