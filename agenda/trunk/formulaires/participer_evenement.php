@@ -116,7 +116,10 @@ function formulaires_participer_evenement_traiter_dist($id_evenement){
     	$message = _T('erreur_email_deja_existant');
     else
         $message = _T('agenda:absence_prise_en_compte');
-
+	
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='evenement/$id_evenement'");
+	
 	return array('message_ok'=>$message,'editable'=>$editable);
 }
 
