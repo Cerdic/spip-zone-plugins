@@ -126,7 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_enregistre' => 'Votre Inscription a bien été enregistré. Vous recevrez un email de confirmation. Si aucun mail ne vous est parvenu, verifiez dans votre dossier spam.',
 	'reservation_numero' => 'Réservation :',
 	'reservation_reference_numero' => 'Référence n° ',
-	'rubrique_reservation_explication' => 'Permet de restreindre l\'application de ce plugin au/x zone/s définie/s',
+	'rubrique_reservation_explication' => 'Permet de restreindre l’application de ce plugin au/x zone/s définie/s',
 	'rubrique_reservation_label' => 'Définir une/des zones pour l’application de ce plugin',
 
 	// S
