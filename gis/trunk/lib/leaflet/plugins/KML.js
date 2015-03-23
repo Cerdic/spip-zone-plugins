@@ -92,9 +92,7 @@ L.Util.extend(L.KML, {
 		var style = {};
 		var sl = xml.getElementsByTagName('Style');
 
-		//for (var i = 0; i < sl.length; i++) {
-		var attributes = {color: true, width: true, Icon: true, href: true,
-						  hotSpot: true};
+		var attributes = { color: true, width: true, Icon: true, href: true, hotSpot: true };
 
 		function _parse(xml) {
 			var options = {};
@@ -397,11 +395,13 @@ L.KMLIcon = L.Icon.extend({
 			this.style.width = i.width + 'px';
 			this.style.height = i.height + 'px';
 
-			if (this.anchorType.x === 'UNITS_FRACTION' || this.anchorType.x === 'fraction') {
+			if (this.anchorType.x === 'fraction' && this.anchorType.y === 'fraction') {
 				img.style.marginLeft = (-this.anchor.x * i.width) + 'px';
-			}
-			if (this.anchorType.y === 'UNITS_FRACTION' || this.anchorType.x === 'fraction') {
 				img.style.marginTop  = (-(1 - this.anchor.y) * i.height) + 'px';
+			}
+			if (this.anchorType.x === 'pixels' && this.anchorType.y === 'pixels') {
+				img.style.marginLeft = (-this.anchor.x) + 'px';
+				img.style.marginTop  = (this.anchor.y - i.height + 1) + 'px';
 			}
 			this.style.display = '';
 		};
