@@ -22,11 +22,11 @@ function charger_url_image_responsive(this_img) {
 			
 			$.each(t, function (index, value) {
 				value = parseInt(value);
-				//console.log(value + " " + d + " " + changer_w);
+				//console.log(value + " " + dim + " " + changer_w);
 				if (changer_w == 1) w_max = value;
-				if (value > dim) changer_w = 0;
+				if (value >= dim) changer_w = 0;
 			});
-			// console.log ("Wmax: "+w_max);
+			 //console.log ("Wmax: "+w_max);
 			if (w_max > 0) dim = w_max;
 		}
 			// console.log ("W: "+dim);
@@ -111,7 +111,7 @@ function charger_url_background_responsive(this_img) {
 				value = parseInt(value);
 				//console.log(value + " " + d + " " + changer_w);
 				if (changer_w == 1) w_max = value;
-				if (value > dim) changer_w = 0;
+				if (value >= dim) changer_w = 0;
 			});
 			// console.log ("Wmax: "+w_max);
 			if (w_max > 0) dim = w_max;
