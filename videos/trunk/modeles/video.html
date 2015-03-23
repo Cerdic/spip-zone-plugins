@@ -31,7 +31,7 @@
 })]
 [(#SET{toutesExtensions, [(#GET{lesExtensions}|array_merge{#GET{lesExtensionsHtml5}})]})]
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}{extension IN #GET{toutesExtensions}}{tout}>
-#SET{poster,#LOGO_DOCUMENT}
+[(#SET{poster,[(#LOGO_DOCUMENT|fichier)]})]
 #SET{titre_video,#TITRE}
 
 [(#REM)
