@@ -40,7 +40,7 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 		}
 	}
 
-	$maj['create'] = array(array('maj_tables', array('spip_reservations', 'spip_reservations_details')));
+	$maj['create'] = array(array('maj_tables', array('spip_reservations', 'spip_reservations_details','spip_articles','spip_evenements')));
 	$maj['1.1.0'] = array(
 	   array('sql_alter','TABLE spip_reservations_details CHANGE prix_unitaire_ht prix_ht float NOT NULL DEFAULT 0'),
        array('maj_tables', array('spip_reservations_details'))
@@ -48,7 +48,7 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.2.0'] = array( array('maj_tables', array('spip_reservations_details'))); 
 	$maj['1.3.1'] = array( array('maj_tables', array('spip_reservations')));
 	$maj['1.3.3'] = array( array('ecrire_config', 'reservation_evenement', $config)  );	 
-	$maj['1.4.0'] = array(array('maj_tables', array('spip_articles','spip_evenements')));	
+	$maj['1.4.1'] = array(array('maj_tables', array('spip_articles','spip_evenements')));	
 		
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

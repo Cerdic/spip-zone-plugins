@@ -158,6 +158,7 @@ function reservation_evenement_recuperer_fond($flux){
 		$config=lire_config('reservation_evenement',array());
 		
 		$type=$fonds[$fond];
+		echo($type);
 		$rubrique_reservation=isset($config['rubrique_reservation'])?picker_selected($config['rubrique_reservation'],'rubrique'):'';
 		$id=_request('id_'.$type);
 		$zone=rubrique_reservation($id,$type,$rubrique_reservation);
