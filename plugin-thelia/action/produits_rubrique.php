@@ -1,4 +1,8 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+
 function produits_rubrique_update($id_rubrique){
 	//supprimer les enregistrements de cet rubrique
 	$query = "DELETE FROM spip_produits_rubriques WHERE id_rubrique=" . _q($id_rubrique);

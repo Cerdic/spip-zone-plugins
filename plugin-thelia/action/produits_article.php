@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function produits_article_update($id_article){
 	//supprimer les enregistrements de cet article
 	$query = "DELETE FROM spip_produits_articles WHERE id_article=" . _q($id_article);
