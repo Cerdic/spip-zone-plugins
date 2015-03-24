@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_thelia"
 	categorie="divers"
-	version="1.5.1"
+	version="1.5.2"
 	etat="stable"
 	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/logo_thelia.png"
@@ -20,7 +20,10 @@
 	<pipeline nom="insert_head" action="insert_head" inclure="spip_thelia_fonctions.php" />
 	<pipeline nom="affiche_milieu" action="affiche_milieu" inclure="spip_thelia_fonctions.php" />
 	<pipeline nom="post_typo" action="supprimer_balises_thelia" inclure="spip_thelia_fonctions.php" />
-	
+
+	<pipeline nom="thelia_authentifie" action="" />
+	<pipeline nom="thelia_pre_appeler_moteur" action="" />
+
 	<menu nom="configurer_spip_thelia" titre="spipthelia:configurer_spipthelia" parent="menu_configuration" icone="images/logo_thelia_16.png"/>
 	<menu nom="spip_thelia_catalogue" titre="spipthelia:configurer_spipthelia" parent="menu_edition" icone="images/logo_thelia_16.png" />
 </paquet>

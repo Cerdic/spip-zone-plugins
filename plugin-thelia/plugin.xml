@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Interface Th&#233;lia</nom>
- 	<version>1.5.1</version>
+ 	<version>1.5.2</version>
 	<prefix>spip_thelia</prefix>
  	<auteur>Arnault Pachot, Gilles Vincent, Claude Chadoutaud, Aur&#233;lien Dumas</auteur>
 	<slogan>Interfacer SPIP avec le logiciel de vente en ligne Th&#233;lia</slogan>
@@ -44,6 +44,14 @@
 		<nom>post_typo</nom>
   		<action>supprimer_balises_thelia</action>
   		<inclure>spip_thelia_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>thelia_authentifie</nom>
+		<action></action>
+	</pipeline>
+	<pipeline>
+		<nom>thelia_pre_appeler_moteur</nom>
+		<action></action>
 	</pipeline>
 
 	<install>base/spip_thelia_upgrade.php</install>

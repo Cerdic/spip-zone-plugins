@@ -19,15 +19,14 @@ function spip_thelia_supprimer_balises_thelia($texte){
 }
 
 function spip_thelia_demarrer_session_thelia(){
-	global $page;
 
 	//sauvegarde des variables qui vont etre modifiees pour thelia
-	$sav_page = $page;
-	$sav_session_navig_lang = $_SESSION['navig']->lang;
+	$GLOBALS['sav_page'] = $GLOBALS['page'];
+	$GLOBALS['sav_session_navig_lang'] = $_SESSION['navig']->lang;
 
 	//conflit sur la variable $page. 
-	$page = new stdclass;
-	$page = "";
+	$GLOBALS['page'] = new stdclass;
+	$GLOBALS['page'] = "";
 
 	include_once(_DIR_RACINE . _RACINE_THELIA . "/classes/Navigation.class.php");
 
@@ -53,8 +52,8 @@ function spip_thelia_header_prive($flux){
 
 
 	//on restaure les variables session et request modifiees pour les plugins suivants sur affichage final
-	$page = $sav_page;
-	$_SESSION['navig']->lang = $sav_session_navig_lang;
+	$GLOBALS['page'] = $GLOBALS['sav_page'];
+	$_SESSION['navig']->lang = $GLOBALS['sav_session_navig_lang'];
 
 	if (!file_exists(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php") && ($_REQUEST['exec']!=""))
 		echo("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
@@ -80,6 +79,9 @@ function spip_thelia_appeler_moteur_thelia($texte){
 	//si pas de boucle ou de balise thelia ou pas d'action thelia dans la page on sort	
 	if (((strpos($texte, "THELIA-")===FALSE) && (strpos($texte, "<THELIA")==FALSE)) && !count(preg_grep("#thelia.*#", $keys_request)))
 		return $texte;
+
+	pipeline('thelia_pre_appeler_moteur', array());
+
 
 	//convertion utf-8 vers ISO des variables $_REQUEST
 	if (lire_config("spip_thelia/encodage_spip_thelia_post", "non")=="oui"){
@@ -160,16 +162,15 @@ function spip_thelia_appeler_moteur_thelia($texte){
 			break;
 	}
 
-	global $page, $res, $id_rubrique;
 
 	//sauvegarde des variables qui vont etre modifiees pour thelia
-	$sav_page = $page;
+	$sav_page = $GLOBALS['page'];
 	$sav_session_navig_lang = $_SESSION['navig']->lang;
 
 	//conflit sur la variable $page. 
 
-	$page = new stdclass;
-	$page = "";
+	$GLOBALS['page'] = new stdclass;
+	$GLOBALS['page'] = "";
 
 	include_once(_RACINE_THELIA . "classes/Navigation.class.php");
 
@@ -208,18 +209,20 @@ function spip_thelia_appeler_moteur_thelia($texte){
 		$_REQUEST['article'] = $_REQUEST['thelia_article'];
 
 	//on prepare le flux e envoyer au moteur thelia
-	$res = $texte;
-	$res = str_replace("THELIA-", "#", $res);
+	global $res;
+	$GLOBALS['res'] = $texte;
+	$GLOBALS['res'] = str_replace("THELIA-", "#", $GLOBALS['res']);
 
 	//avant d'envoyer a thelia, on convertie en iso pour thelia
-	if (lire_config("spip_thelia/encodage_spip_thelia", "non")=="oui")
-		$res = unicode2charset(charset2unicode($res, 'utf-8'), 'iso-8859-1');
+	if (lire_config("spip_thelia/encodage_spip_thelia", "non")=="oui"){
+		$GLOBALS['res'] = unicode2charset(charset2unicode($res, 'utf-8'), 'iso-8859-1');
+	}
 
 	//on bloque la sortie vers le navigateur le temps d'y faire quelques substitutions	
 	ob_start();
 
 	//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de thelia
-	include_once(_RACINE_THELIA . "fonctions/moteur.php");
+	include_once(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php");
 
 	//Connexion à SPIP à la création du compte Thelia
 	if ($_REQUEST['page']=='nouveau' || $_REQUEST['page_thelia']=='nouveau' || $_REQUEST['action']=='transport' || $_REQUEST['action']=='paiement' || !$_REQUEST['page']){
@@ -248,7 +251,7 @@ function spip_thelia_appeler_moteur_thelia($texte){
 		$texte = unicode2charset(charset2unicode($texte, 'iso-8859-1'), 'utf-8');
 
 	//on restaure les variables session et request modifiees pour les plugins suivants sur affichage final
-	$page = $sav_page;
+	$GLOBALS['page'] = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 
 	//restauration des variables $_REQUEST en utf-8 pour SPIP
