@@ -4,13 +4,13 @@
 	</nom>
 	<slogan>Recherche avanc&#233;e sous SPIP</slogan>
 	<!-- Auteur du plugin -->
-	<auteur>	
+	<auteur>
 		Jean-Marc Viglino (ign.fr)
 	</auteur>
 	<auteur>
 		Jean-Philippe Guihard
 	</auteur>
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<icon>recherche.png</icon>
 	<etat>stable</etat>
 	<licence>GNU/GPL</licence>

@@ -1,13 +1,13 @@
 <?php
 /*
  *  Plugin SPIP recherche_avancee
- *  
+ *
  *  @author Jean-Marc Viglino (ign.fr)
  *  @author Jean-Philippe Guihard
- *  
+ *
  *  Copyright (c) 2007-2012
  *  Logiciel distribue sous licence GNU/GPL.
- *  
+ *
  *   +----------------------------------+
  *    Filtres :    google_like
  *   +----------------------------------+
@@ -15,11 +15,11 @@
  *	  http://www.spip-contrib.net/Google-Like
  *   +-------------------------------------+
  *   Mis a jour le 04 octobre 2010 : Jean-Philippe Guihard
- *   
+ *
  *   +-------------------------------------+
  *  - Conversion automatique en texte brut et sans accent
- *	- Affichage des mots entiers seulement 
- *	- Surlignage des mots 
+ *	- Affichage des mots entiers seulement
+ *	- Surlignage des mots
  *	- Affichage d'un resume si on ne trouve rien
 */
 
@@ -32,12 +32,12 @@ function recherche_avancee_google_like($string, $resume='')
 	$badguy = array("^", "/", "\\", "$", "@", "*");
 	$rech = str_replace($badguy,"",$rech);
 	// en avant
-	$query = rtrim(str_replace("+", " ", $rech));  
+	$query = rtrim(str_replace("+", " ", $rech));
 	$qt = explode(" ", $query);
 	$num = count ($qt);
 	// $cc = ceil(55 / $num);
 	$cc=55;
-	for ($i = 0; $i < $num; $i++) 
+	for ($i = 0; $i < $num; $i++)
 	{	//$tab[$i] = preg_split("/($qt[$i])/i",$string,2, PREG_SPLIT_DELIM_CAPTURE);
 		$tab[$i] = preg_split("/\b($qt[$i])/i",$string,2, PREG_SPLIT_DELIM_CAPTURE);
 		if(count($tab[$i])>1)

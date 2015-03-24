@@ -1,11 +1,11 @@
 <!-- version du 04 octobre 2010, 23h36, Jean-Philippe Guihard  -->
-[(#REM) 
+[(#REM)
 	Plugin SPIP recherche_avancee
-	
+
 	@author Jean-Marc Viglino (ign.fr)
 	@author Jean-Philippe Guihard
-	
-	Copyright (c) 2007-2012
+
+	Copyright (c) 2007-2015
 	Logiciel distribue sous licence GNU/GPL.
 
 	Page de recherche avancee
@@ -24,12 +24,12 @@
 
 	[(#REM) Entete de la page + titre du site ]
 	<INCLURE{fond=inc-entete}>
-	
+
 	[(#REM) Contenu principal : Resultats de la recherche ]
 	<div id="conteneur">
 	<div id="contenu" class="pas_surlignable">
-	
-		<!-- /-/-/-/-/-/-/-/-/-/- copier a partir d'ici dans votre squelette nomme recherche.html pour personaliser le design de votre page /-/-/-/-/-/-/-/-/-/-  -->		
+
+		<!-- /-/-/-/-/-/-/-/-/-/- copier a partir d'ici dans votre squelette nomme recherche.html pour personaliser le design de votre page /-/-/-/-/-/-/-/-/-/-  -->
 		[(#REM) Fil d'Ariane ]
 	<div id="hierarchie"><a href="#URL_SITE_SPIP/" title="Retour &agrave; la page d'accueil du site"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; (#RECHERCHE)]</div>
 
@@ -72,7 +72,7 @@
 						<div class="rinfo">
 							Dans la rubrique : <BOUCLE_rub(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE" title="Ouvrir la rubrique &laquo;&nbsp;#TITRE&nbsp;&raquo;.">#TITRE</a></BOUCLE_rub>
 							<B_mot>
-							/ mots cl&eacute;s associ&eacute;s : 
+							/ mots cl&eacute;s associ&eacute;s :
 							<BOUCLE_mot(MOTS){id_article}{" - "}>[<a href="#URL_MOT" title="Afficher les articles associ&eacute;s au mot-clef &laquo;&nbsp;#TITRE&nbsp;&raquo;.">(#TITRE)</a>]</BOUCLE_mot>
 							</B_mot>
 							[(#SET{pt,[(#POINTS|mult{#GET{pc}})]})]
@@ -168,25 +168,25 @@
 		</div><!-- fin contenu -->
 
 	</div><!--#conteneur-->
-	
+
 	[(#REM) Menu de navigation laterale ]
 	<div id="navigation">
-	
+
 		[(#REM) Menu de navigation par rubriques ]
 		<INCLURE{fond=inc-rubriques}{id_rubrique}>
-		
+
 		#FORMULAIRE_RECHERCHE
 
     </div><!--#navigation-->
-	
+
 	[(#REM) Menu de navigation laterale ]
 	<div id="extra">
 	&nbsp;
 	</div><!--#extra-->
-	
+
 	[(#REM) Pied de page ]
 	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
-    
+
 </div><!--#page-->
 </body>
 </html>

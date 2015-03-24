@@ -1,7 +1,7 @@
 <!-- version du 04 octobre 2010, 23h36, Jean-Philippe Guihard  -->
 Fichier recherche.html
 Mise à jour pour la version 2.xx de SPIP par reprise du fichier recherche.html de la dist et modif [(#ID_SYNDIC|generer_url_entite{site})]
-correction de la syntaxe html pour être valide 
+correction de la syntaxe html pour être valide
 correction de la syntaxe css pour être valide
 suppression du formalaire de recherche "normal" car présent dans la colonne de droite
 Mise à niveau du code SPIP pour version 2.xx
@@ -9,11 +9,11 @@ Ajout de tag title et alt
 
 Fichier formulaires/recherche.html
 Mise à jour pour la version 2.xx de SPIP par reprise du fichier recherche.html de la dist
-correction de la syntaxe html pour être valide 
+correction de la syntaxe html pour être valide
 Mise à niveau du code SPIP pour version 2.xx
 
 Fichier formulaires/recherche-avancee.html
-correction de la syntaxe html pour être valide 
+correction de la syntaxe html pour être valide
 
 Fichier recherche_avancee_fonctions.php
 correction de la syntaxe php pour être valide XHTML
