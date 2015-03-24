@@ -35,9 +35,9 @@ function auth_thelia_dist($login, $pass, $md5pass = "", $md5next = ""){
 		spip_log("test1, db courante=" . $spip_db,"thelia");
 		$res = " foo ";
 		ob_start();
-		include_once(_RACINE_THELIA . 'fonctions/moteur.php');
+		include_once(_DIR_RACINE . _RACINE_THELIA . 'fonctions/moteur.php');
 		ob_end_clean();
-		//include_once('classes/Client.class.php');
+		//include_once(_DIR_RACINE . _RACINE_THELIA . 'classes/Client.class.php');
 		spip_log("test2","thelia");
 
 
@@ -138,7 +138,7 @@ function creer_auteur_thelia($auteur){
 
 	//charger le support thelia	
 	ob_start();
-	include_once('fonctions/moteur.php');
+	include_once(_DIR_RACINE . _RACINE_THELIA . 'fonctions/moteur.php');
 	ob_end_clean();
 
 	//Empecher un doublon

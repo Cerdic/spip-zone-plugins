@@ -172,7 +172,7 @@ function spip_thelia_appeler_moteur_thelia($texte){
 	$GLOBALS['page'] = new stdclass;
 	$GLOBALS['page'] = "";
 
-	include_once(_RACINE_THELIA . "classes/Navigation.class.php");
+	include_once(_DIR_RACINE . _RACINE_THELIA . "classes/Navigation.class.php");
 
 	@ini_set('arg_separator.output', '&amp;');
 	@ini_set("url_rewriter.tags", "a=href,area=href,frame=src,iframe=src,input=src");
@@ -384,7 +384,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 	$res = unicode2charset(charset2unicode($res, 'utf-8'), 'iso-8859-1');
 	ob_start();
 	chdir('..');
-	include_once(_RACINE_THELIA . "fonctions/moteur.php");
+	include_once(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php");
 	chdir('ecrire');
 	$texte = ob_get_contents();
 	ob_end_clean();
@@ -474,7 +474,7 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 	$res = unicode2charset(charset2unicode($res, 'utf-8'), 'iso-8859-1');
 	ob_start();
 	chdir('..');
-	include_once(_RACINE_THELIA . "fonctions/moteur.php");
+	include_once(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php");
 	chdir('ecrire');
 	$texte = ob_get_contents();
 	ob_end_clean();
