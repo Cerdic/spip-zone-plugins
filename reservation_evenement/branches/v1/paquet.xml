@@ -1,12 +1,12 @@
 <paquet
 	prefix="reservation_evenement"
 	categorie="date"
-	version="1.16.1"
+	version="1.16.2"
 	etat="test"
 	compatibilite="[3.0.16;3.1.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
 	documentation="http://contrib.spip.net/Reservation-d-evenements-4459"
-	schema="1.4.0" 
+	schema="1.4.1" 
 >
 
 	<nom>Réservation Événements</nom>
@@ -34,6 +34,7 @@
 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_evenement.php" /> 
 	<pipeline nom="declarer_tables_interfaces" inclure="base/reservation_evenement.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/reservation_evenement.php" /> 	
 
 	<pipeline nom="affiche_auteurs_interventions" inclure="reservation_evenement_pipelines.php" /> 
 	<pipeline nom="affiche_gauche" inclure="reservation_evenement_pipelines.php" /> 
