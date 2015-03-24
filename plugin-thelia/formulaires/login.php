@@ -270,7 +270,7 @@ function verifier_login($login, $password, $md5pass = "", $md5next = ""){
 		if ($auth = charger_fonction($methode, 'auth')
 			AND $auteur = $auth($login, $password, $md5pass, $md5next)
 		){
-			spip_log("connexion de $login par methode $methode");
+			spip_log("connexion de $login par methode $methode","thelia");
 			$auteur['auth'] = $methode;
 			return $auteur;
 		}

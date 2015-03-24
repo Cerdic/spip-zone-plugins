@@ -22,23 +22,23 @@ function auth_thelia_dist($login, $pass, $md5pass = "", $md5next = ""){
 
 	if (lire_config("spip_thelia/auth_unique_spip_thelia", "non")=="oui"){
 
-		spip_log("thelia2 $login " . ($pass ? "mdp fourni" : "mdp absent") . ($md5pass ? "md5mdp fourni" : "md5mdp absent"));
+		spip_log("thelia2 $login " . ($pass ? "mdp fourni" : "mdp absent") . ($md5pass ? "md5mdp fourni" : "md5mdp absent"),"thelia");
 		if (!file_exists(_RACINE_THELIA . "fonctions/moteur.php")){
-			spip_log("fichier thelia trouve");
+			spip_log("fichier thelia trouve","thelia");
 			return array();
 		}
-		spip_log("thelia1"); //récupérer le nom de la base spip
+		spip_log("thelia1","thelia"); //récupérer le nom de la base spip
 		if ($result = mysql_query("SELECT DATABASE()")){
 			$row = mysql_fetch_row($result);
 			$spip_db = $row[0];
 		}
-		spip_log("test1, db courante=" . $spip_db);
+		spip_log("test1, db courante=" . $spip_db,"thelia");
 		$res = " foo ";
 		ob_start();
 		include_once(_RACINE_THELIA . 'fonctions/moteur.php');
 		ob_end_clean();
 		//include_once('classes/Client.class.php');
-		spip_log("test2");
+		spip_log("test2","thelia");
 
 
 		// Securite
@@ -51,9 +51,9 @@ function auth_thelia_dist($login, $pass, $md5pass = "", $md5next = ""){
 
 		//revenir sur la base spip
 		$resultconnect = mysql_select_db($spip_db);
-		spip_log("spipdb=" . $spip_db . " - " . $resultconnect);
+		spip_log("spipdb=" . $spip_db . " - " . $resultconnect,"thelia");
 		if ($rec){
-			spip_log("thelia $login utilisateur connu");
+			spip_log("thelia $login utilisateur connu","thelia");
 			$_SESSION['navig']->client = $client;
 			$_SESSION['navig']->connecte = 1;
 			modules_fonction("apresconnexion");
@@ -68,7 +68,7 @@ function auth_thelia_dist($login, $pass, $md5pass = "", $md5next = ""){
 				return $data['auteur'];
 			}
 
-			spip_log("thelia2");
+			spip_log("thelia2","thelia");
 			// Recuperer les donnees de l'auteur
 			// Convertir depuis UTF-8 (jeu de caracteres par defaut)
 			include_spip('inc/charsets');
@@ -76,7 +76,7 @@ function auth_thelia_dist($login, $pass, $md5pass = "", $md5next = ""){
 			$email = $login;
 			$bio = '';
 			$resultconnect = mysql_select_db($spip_db);
-			spip_log("thelia2bis-connect=" . $resultconnect);
+			spip_log("thelia2bis-connect=" . $resultconnect,"thelia");
 			$n = sql_insertq('spip_auteurs', array(
 				'source' => 'thelia',
 				'nom' => $nom,
@@ -85,38 +85,38 @@ function auth_thelia_dist($login, $pass, $md5pass = "", $md5next = ""){
 				'bio' => $bio,
 				'statut' => $statut,
 				'pass' => ''), 0);
-			spip_log("thelia3");
-			spip_log("Creation de l'auteur '$nom' depuis thelia dans spip_auteurs id->" . $n);
+			spip_log("thelia3","thelia");
+			spip_log("Creation de l'auteur '$nom' depuis thelia dans spip_auteurs id->" . $n,"thelia");
 
-			spip_log("thelia4");
+			spip_log("thelia4","thelia");
 
 			if ($_SESSION['navig']->urlpageret){
-				spip_log("redirige vers " . $_SESSION['navig']->urlpageret);
+				spip_log("redirige vers " . $_SESSION['navig']->urlpageret,"thelia");
 				redirige($_SESSION['navig']->urlpageret);
 			} else {
-				spip_log("redirige vers index.php");
+				spip_log("redirige vers index.php","thelia");
 				redirige("index.php");
 			}
-			spip_log("test6");
+			spip_log("test6","thelia");
 			if ($n){
 				$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
 				$data = pipeline('thelia_authentifie', array("auteur" => $auteur, "statut" => "nouveau"));
 				return $data['auteur'];
 			}
 
-			spip_log("Creation de l'auteur '$nom' depuis thelia impossible");
+			spip_log("Creation de l'auteur '$nom' depuis thelia impossible","thelia");
 
 
 			return array();
 
 		} else {
 			//utilisateur inconnu
-			spip_log("thelia $login utilisateur inconnu");
+			spip_log("thelia $login utilisateur inconnu","thelia");
 			redirige("connexion.php?errconnex=1");
 			return array();
 		}
 	}
-	spip_log("thelia0");
+	spip_log("thelia0","thelia");
 
 	return array();
 
@@ -132,7 +132,7 @@ function creer_auteur_thelia($auteur){
 
 	//Empecher un doublon
 	if (isset($auteur['login']) && $result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['login']) . " AND source='thelia'")){
-		spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien", 'theliaob');
+		spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien", 'thelia');
 		return $result;
 	}
 
@@ -143,7 +143,7 @@ function creer_auteur_thelia($auteur){
 
 	//Empecher un doublon
 	if (isset($auteur['client']) && $result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['client']->email) . " AND source='thelia'")){
-		spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien", 'theliaob');
+		spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien", 'thelia');
 		return $result;
 	}
 
@@ -157,11 +157,11 @@ function creer_auteur_thelia($auteur){
 
 	//Valeur par défaut
 	if (!$statut = $GLOBALS['thelia_statut_nouvel_auteur']){
-		spip_log('erreur pas de statut defini par defaut', 'theliaob');
+		spip_log('erreur pas de statut defini par defaut', 'thelia');
 		return array();
 	}
 
-	spip_log("enregistrement auteur", 'theliaob');
+	spip_log("enregistrement auteur", 'thelia');
 	// Recuperer les donnees de l'auteur
 	// Convertir depuis UTF-8 (jeu de caracteres par defaut)
 	include_spip('inc/charsets');
@@ -179,7 +179,7 @@ function creer_auteur_thelia($auteur){
 			'statut' => $statut,
 			'pass' => '')
 	);
-	spip_log('Auteur depuis thelia d\'id ' . $n, 'theliaob');
+	spip_log('Auteur depuis thelia d\'id ' . $n, 'thelia');
 
 	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
 }
