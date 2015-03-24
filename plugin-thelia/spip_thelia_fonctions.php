@@ -293,8 +293,8 @@ function remplacement_sortie_thelia($in_thelia){
 	// gerer les 2 formats d'urls : ....php? ou ?page=...&amp;
 	foreach($pages as $p){
 		if (strpos($in_thelia,$p)!==false){
-			$in_thelia = str_replace("adresse.php?action", "adresse.php?thelia_action", $in_thelia);
-			$in_thelia = str_replace("page=adresse&amp;action", "page=adresse&amp;thelia_action", $in_thelia);
+			$in_thelia = str_replace("{$p}.php?action", "{$p}.php?thelia_action", $in_thelia);
+			$in_thelia = str_replace("page={$p}&amp;action", "page={$p}&amp;thelia_action", $in_thelia);
 		}
 	}
 
