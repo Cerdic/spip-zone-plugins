@@ -267,29 +267,38 @@ function spip_thelia_appeler_moteur_thelia($texte){
 }
 
 function remplacement_sortie_thelia($in_thelia){
-	//renommage action en thelia_action. methode provisoire a revoir.
-	$in_thelia = str_replace("adresse.php?action", "adresse.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("cheque.php?action", "cheque.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("commande.php?action", "commande.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("commande_detail.php?action", "commande_detail.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("commande_visualiser.php?action", "commande_visualiser.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("compte_modifier.php?action", "compte_modifier.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("compte_modifiererr.php?action", "compte_modifiererr.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("connexion.php?action", "connexion.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("creercompte.php?action", "creercompte.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("formulerr.php?action", "formulerr.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("imgpop?action", "imgpop?thelia_action", $in_thelia);
-	$in_thelia = str_replace("livraison_adresse.php?action", "livraison_adresse.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("mdpoublie.php?action", "mdpoublie.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("merci.php?action", "merci.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("moncompte.php?action", "moncompte.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("nouveau.php?action", "nouveau.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("panier.php?action", "panier.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("produit.php?action", "produit.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("regret.php?action", "regret.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("virement.php?action", "virement.php?thelia_action", $in_thelia);
-	$in_thelia = str_replace("?fond=", "?page=", $in_thelia);
+	$pages = array(
+		"adresse",
+		"cheque",
+		"commande",
+		"commande_detail",
+		"commande_visualiser",
+		"compte_modifier",
+		"connexion",
+		"creercompte",
+		"formulerr",
+		"imgpop",
+		"livraison_adresse",
+		"mdpoublie",
+		"merci",
+		"moncompte",
+		"nouveau",
+		"panier",
+		"produit",
+		"regret",
+		"virement",
+	);
 
+	// renommage action en thelia_action. methode provisoire a revoir.
+	// gerer les 2 formats d'urls : ....php? ou ?page=...&amp;
+	foreach($pages as $p){
+		if (strpos($in_thelia,$p)!==false){
+			$in_thelia = str_replace("adresse.php?action", "adresse.php?thelia_action", $in_thelia);
+			$in_thelia = str_replace("page=adresse&amp;action", "page=adresse&amp;thelia_action", $in_thelia);
+		}
+	}
+
+	$in_thelia = str_replace("?fond=", "?page=", $in_thelia);
 	return $in_thelia;
 }
 
