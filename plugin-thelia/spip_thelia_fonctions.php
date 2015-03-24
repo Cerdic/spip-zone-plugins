@@ -294,7 +294,7 @@ function remplacement_sortie_thelia($in_thelia){
 	foreach($pages as $p){
 		if (strpos($in_thelia,$p)!==false){
 			$in_thelia = str_replace("{$p}.php?action", "{$p}.php?thelia_action", $in_thelia);
-			$in_thelia = str_replace("page={$p}&amp;action", "page={$p}&amp;thelia_action", $in_thelia);
+			$in_thelia = str_replace("={$p}&amp;action", "={$p}&amp;thelia_action", $in_thelia);
 		}
 	}
 
