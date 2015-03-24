@@ -1,7 +1,7 @@
 <paquet
 	prefix="spip_thelia"
 	categorie="divers"
-	version="1.5.3"
+	version="1.5.4"
 	etat="stable"
 	compatibilite="[1.9.0;3.0.*]"
 	logo="img_pack/logo_thelia.png"
