@@ -29,7 +29,7 @@ function spip_thelia_demarrer_session_thelia(){
 	$page = new stdclass;
 	$page = "";
 
-	include_once("../" . _RACINE_THELIA . "/classes/Navigation.class.php");
+	include_once(_DIR_RACINE . _RACINE_THELIA . "/classes/Navigation.class.php");
 
 	@ini_set('arg_separator.output', '&amp;');
 	@ini_set("url_rewriter.tags", "a=href,area=href,frame=src,iframe=src,input=src");
@@ -56,7 +56,7 @@ function spip_thelia_header_prive($flux){
 	$page = $sav_page;
 	$_SESSION['navig']->lang = $sav_session_navig_lang;
 
-	if (!file_exists("../" . _RACINE_THELIA . "fonctions/moteur.php") && ($_REQUEST['exec']!=""))
+	if (!file_exists(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php") && ($_REQUEST['exec']!=""))
 		echo("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
 	if (!function_exists('lire_config'))
 		echo("erreur : le plugin CFG est n'est pas install&eacute;.");
