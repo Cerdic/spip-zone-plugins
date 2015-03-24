@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'config_auteurs' => 'Counfiguracioun dei autour',
 	'config_auteurs_rubriques' => 'Que tìpou d’autour si pòu <b>assoucià en dei rùbrica</b> ?',
+	'config_auteurs_statut' => 'A la creacioun d’un autour, qual es l’ <b>estatut predefinit</b> ?',
 	'config_plugin_qui' => 'Qu pòu <strong>moudificà la counfiguracioun</strong> dei plugin (ativacioun...) ?',
 	'config_site' => 'Counfiguracioun dóu sit',
 	'config_site_qui' => 'Qu pòu <strong>moudificà la counfiguracioun</strong> dóu sit ?',
@@ -37,6 +38,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'deja_defini' => 'Li autourisacioun seguenti soun jà definidi per autre :',
 	'descriptif_1' => 'Aquela pàgina de counfiguracioun es reservada ai webmestre dóu sit :',
+	'descriptif_2' => '<p>Se auguràs moudificà aquela lista, vourguès edità lou fichié <tt>config/mes_options.php</tt> (magara lou creà) e lì endicà la lista dei identificant dei autour webmèstre, en la fourma seguenta :</p>
+<pre>&lt;?php
+  define(
+    \'_ID_WEBMESTRES\',
+    \'1:5:8\');
+?&gt;</pre>
+<p>A partì de SPIP 2.1, es finda poussible de douna lu drech de webmèstre a un aministratour vìa la pàgina d’édicioun de l’autour.</p>
+<p>A noutà : lu webmèstre definit d’aquela manièra noun an da besoun de prouchedre a l’autentificacioun per FTP dai ouperacioun delicadi (metuda a jou de la basa de dounada, per isemple).</p>
+
+<a href=\'http://contrib.spip.net/Autorite\' class=\'spip_out\'>Cf. doucumentacioun</a>
+',
 	'details_option_auteur' => '<small><br />Per lou moumen, l’oupcioun « autour » founciouna qu’embé lu autour registrat (fòrou soubre abounamen, per isemple). E, se es ativada, lu aministratour dóu sit an finda la capacità d’édità lu fòrou.
 	</small>',
 	'droits_des_auteurs' => 'Drech dei autour',
