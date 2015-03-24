@@ -23,6 +23,7 @@
 
 	<pipeline nom="thelia_authentifie" action="" />
 	<pipeline nom="thelia_pre_appeler_moteur" action="" />
+	<pipeline nom="thelia_pre_session_thelia" action="" />
 
 	<menu nom="configurer_spip_thelia" titre="spipthelia:configurer_spipthelia" parent="menu_configuration" icone="images/logo_thelia_16.png"/>
 	<menu nom="spip_thelia_catalogue" titre="spipthelia:configurer_spipthelia" parent="menu_edition" icone="images/logo_thelia_16.png" />

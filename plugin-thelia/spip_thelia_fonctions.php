@@ -19,6 +19,7 @@ function spip_thelia_supprimer_balises_thelia($texte){
 }
 
 function spip_thelia_demarrer_session_thelia(){
+	pipeline('thelia_pre_session_thelia', array());
 
 	//sauvegarde des variables qui vont etre modifiees pour thelia
 	$GLOBALS['sav_page'] = $GLOBALS['page'];
@@ -80,6 +81,7 @@ function spip_thelia_appeler_moteur_thelia($texte){
 	if (((strpos($texte, "THELIA-")===FALSE) && (strpos($texte, "<THELIA")==FALSE)) && !count(preg_grep("#thelia.*#", $keys_request)))
 		return $texte;
 
+	pipeline('thelia_pre_session_thelia', array());
 	pipeline('thelia_pre_appeler_moteur', array());
 
 

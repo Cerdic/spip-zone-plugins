@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Interface Th&#233;lia</nom>
- 	<version>1.5.3</version>
+ 	<version>1.5.4</version>
 	<prefix>spip_thelia</prefix>
  	<auteur>Arnault Pachot, Gilles Vincent, Claude Chadoutaud, Aur&#233;lien Dumas</auteur>
 	<slogan>Interfacer SPIP avec le logiciel de vente en ligne Th&#233;lia</slogan>
@@ -51,6 +51,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>thelia_pre_appeler_moteur</nom>
+		<action></action>
+	</pipeline>
+	<pipeline>
+		<nom>thelia_pre_session_thelia</nom>
 		<action></action>
 	</pipeline>
 
