@@ -160,9 +160,8 @@ $gis_layers = array (
 	)
 );
 
-if (is_array($GLOBALS['gis_layers']))
+if (isset($GLOBALS['gis_layers']) and is_array($GLOBALS['gis_layers'])) {
 	$GLOBALS['gis_layers'] = array_merge($gis_layers,$GLOBALS['gis_layers']);
-else
+} else {
 	$GLOBALS['gis_layers'] = $gis_layers;
-
-?>
+}
