@@ -17,16 +17,16 @@ var chaines_lang_date_relative_dynamique = {
     'date_un_mois': '<:date_un_mois:>',
     'date_mois': '<:date_mois:>',
 
-    'date_mois_1': '<:date_mois_1:>',
-    'date_mois_2': '<:date_mois_2:>',
-    'date_mois_3': '<:date_mois_3:>',
-    'date_mois_4': '<:date_mois_4:>',
-    'date_mois_5': '<:date_mois_5:>',
-    'date_mois_6': '<:date_mois_6:>',
-    'date_mois_7': '<:date_mois_7:>',
-    'date_mois_8': '<:date_mois_8:>',
-    'date_mois_9': '<:date_mois_9:>',
-    'date_mois_10': '<:date_mois_10:>',
-    'date_mois_11': '<:date_mois_11:>',
-    'date_mois_12': '<:date_mois_12:>'
+	'date_mois_1': '<:date_mois_1|filtrer_entites:>',
+	'date_mois_2': '<:date_mois_2|filtrer_entites:>',
+	'date_mois_3': '<:date_mois_3|filtrer_entites:>',
+	'date_mois_4': '<:date_mois_4|filtrer_entites:>',
+	'date_mois_5': '<:date_mois_5|filtrer_entites:>',
+	'date_mois_6': '<:date_mois_6|filtrer_entites:>',
+	'date_mois_7': '<:date_mois_7|filtrer_entites:>',
+	'date_mois_8': '<:date_mois_8|filtrer_entites:>',
+	'date_mois_9': '<:date_mois_9|filtrer_entites:>',
+	'date_mois_10': '<:date_mois_10|filtrer_entites:>',
+	'date_mois_11': '<:date_mois_11|filtrer_entites:>',
+	'date_mois_12': '<:date_mois_12|filtrer_entites:>'
 };
