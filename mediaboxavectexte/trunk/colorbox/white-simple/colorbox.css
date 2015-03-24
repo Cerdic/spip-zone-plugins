@@ -51,7 +51,7 @@
 
 /* ajout pour mediaboxplus */
 #cboxTitle{display:none;opacity:0;}
-#cboxDatadesc{position:absolute;width:auto;z-index:1;padding:0 1%;text-align:left;top:0;left:0;color:#000;background:url(images/tr.png);overflow:auto;max-height:50%;}
+#cboxDatadesc{position:absolute;width:auto;z-index:1;padding:0 1%;text-align:left;top:0;left:0;color:#000;background:rgba(255, 255, 255, 0.75);overflow:auto;max-height:50%;}
 #cboxDatadesc.transparent{opacity:0;}
 .hidedesc{cursor:pointer;display:block;float:right;margin:4px 0 2px 4px;line-height:.8em;padding:2px;border:2px solid #888;color:#666;font-size:0.8em;font-weight:700;}
 #cboxDatadesc:hover .hidedesc{color:#000;border-color:#000;}
