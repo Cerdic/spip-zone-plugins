@@ -164,7 +164,8 @@ function autoriser_commande_dater_dist($faire, $type, $id, $qui, $opts) {
 **/ 
 function autoriser_commande_voir_facture_dist($faire, $type, $id, $qui, $opts) {
 	include_spip('inc/filtres');
-	return autoriser('voir', 'commande', $id, $qui, $opts) and !empty(filtrer('generer_url_commande_facture', $id));
+	$url_facture = filtrer('generer_url_commande_facture', $id);
+	return autoriser('voir', 'commande', $id, $qui, $opts) and !empty($url_facture);
 }
 
 
