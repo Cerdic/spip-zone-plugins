@@ -31,8 +31,8 @@ function spip_thelia_demarrer_session_thelia(){
 
 	include_once("../" . _RACINE_THELIA . "/classes/Navigation.class.php");
 
-	ini_set('arg_separator.output', '&amp;');
-	ini_set("url_rewriter.tags", "a=href,area=href,frame=src,iframe=src,input=src");
+	@ini_set('arg_separator.output', '&amp;');
+	@ini_set("url_rewriter.tags", "a=href,area=href,frame=src,iframe=src,input=src");
 	session_start();
 }
 
@@ -173,8 +173,8 @@ function spip_thelia_appeler_moteur_thelia($texte){
 
 	include_once(_RACINE_THELIA . "classes/Navigation.class.php");
 
-	ini_set('arg_separator.output', '&amp;');
-	ini_set("url_rewriter.tags", "a=href,area=href,frame=src,iframe=src,input=src");
+	@ini_set('arg_separator.output', '&amp;');
+	@ini_set("url_rewriter.tags", "a=href,area=href,frame=src,iframe=src,input=src");
 	session_start();
 
 	//conflit entre spip et th�lia sur la langue en session.

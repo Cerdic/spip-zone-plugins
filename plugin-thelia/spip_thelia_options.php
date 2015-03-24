@@ -18,7 +18,7 @@ if (!defined('_RACINE_THELIA')){
 $GLOBALS['spip_pipeline']['thelia_authentifie'] .= '';
 
 $thelia_path = ini_get("include_path") . ":" . _RACINE_THELIA;
-ini_set('include_path', $thelia_path);
+@ini_set('include_path', $thelia_path);
 
 include_spip('base/spip_thelia_produits_associes');
 $GLOBALS['liste_des_authentifications']['thelia'] = 'thelia';
