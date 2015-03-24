@@ -16,7 +16,7 @@ function inc_statuts_complet_dist(){
 	return $statuts;
 }
 
-function inc_statut_defaut_dist($statut=''){
+function inc_statuts_defaut_dist($statut=''){
 	if(!$statut OR $statut=='rien'){
 		include_spip('inc/config');
 		if(!$statut=lire_config('reservation_evenement/statut_defaut'))$statut='attente';

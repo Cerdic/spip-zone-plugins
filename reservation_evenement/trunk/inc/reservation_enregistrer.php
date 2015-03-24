@@ -10,7 +10,7 @@ function inc_reservation_enregistrer_dist($id='',$id_article='',$id_auteur='',$c
 	$config=lire_config('reservation_evenement');
 	$statut = $config['statut_defaut']?$config['statut_defaut']:'rien';
 	if($statut=='rien'){
-		$statut_defaut=charger_fonction('defaut','inc/statut');
+		$statut_defaut=charger_fonction('defaut','inc/statuts');
 		$statut=$statut_defaut($statut);
 	} 
 
