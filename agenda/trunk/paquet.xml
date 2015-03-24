@@ -1,7 +1,7 @@
 <paquet
 	prefix="agenda"
 	categorie="date"
-	version="3.14.6"
+	version="3.14.7"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/evenement-32.png"
@@ -17,7 +17,7 @@
 	<auteur lien="http://spip.tetue.net">Tetue</auteur>
 	<auteur lien="http://www.cahri.com">Julien Tessier</auteur>
 
-	<copyright>2006-2014</copyright>
+	<copyright>2006-2015</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
