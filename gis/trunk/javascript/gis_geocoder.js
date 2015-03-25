@@ -99,6 +99,8 @@ L.Geocoder = L.Class.extend({
 			*/
 			if (place.address.city) {
 				return_location.locality = place.address.city;
+			} else if (place.address.town) {
+				return_location.locality = place.address.town;
 			} else if (place.address.village) {
 				return_location.locality = place.address.village;
 			} else if (place.address.county) {
