@@ -2,7 +2,7 @@
 	prefix="piwik"
 	categorie="statistique"
 	version="0.7.0"
-	etat="stable"
+	etat="dev"
 	compatibilite="[2.0.8;3.0.*]"
 	logo="piwik.png"
 	schema="0.1"
