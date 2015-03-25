@@ -97,7 +97,7 @@ function autoriser_selection_voir_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_selection_modifier_dist($faire, $type, $id, $qui, $opt) {
 	$ok = (
 		($qui['statut'] == '0minirezo' and !$qui['restreint'])
-		or ($auteurs = auteurs_objet('selection', intval($id)) and in_array($qui['id_auteur'], $auteurs))
+		or ($auteurs = selections_auteurs_objet('selection', intval($id)) and in_array($qui['id_auteur'], $auteurs))
 	);
 	
 	return $ok;
@@ -249,7 +249,6 @@ function autoriser_selectionscontenu_supprimer_dist($faire, $type, $id, $qui, $o
 	return autoriser('modifier', $type, $id, $qui, $opt);
 }
 
-if (!function_exists('auteurs_objet')) {
 /**
  * Lister les auteurs d'un objet
  *
@@ -258,9 +257,7 @@ if (!function_exists('auteurs_objet')) {
  * @param string $cond='' Condition supplémentaire
  * @return array Retourne une liste d'identifiant d'auteurs
  */
-function auteurs_objet($objet, $id_objet, $cond='') {
+function selections_auteurs_objet($objet, $id_objet, $cond='') {
 	return sql_allfetsel("id_auteur", "spip_auteurs_liens", "objet='$objet' AND id_objet=".sql_quote($id_objet). ($cond ? " AND $cond" : ''));
 }
-}
 
-?>
