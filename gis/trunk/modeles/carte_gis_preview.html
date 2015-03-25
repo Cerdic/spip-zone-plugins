@@ -1,6 +1,6 @@
 <BOUCLE_gis(GIS){objet ?}{id_objet ?}{id_gis ?}{0,1}>
 <div id="map_preview" class="carte_gis" style="width: 100%; height: 150px;"></div>
-
+#SET{autocenter,''}
 <script type="text/javascript">
 /*<![CDATA[*/
 (function($){
@@ -42,7 +42,6 @@
 		</BOUCLE_points>
 			]
 		};
-		#SET{autocenter,''}
 		[(#TOTAL_BOUCLE|>{1}|oui) #SET{autocenter,oui} ]
 		</B_points>
 		<BOUCLE_point(GIS){id_gis}>

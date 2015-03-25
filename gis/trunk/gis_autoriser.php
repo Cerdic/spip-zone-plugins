@@ -15,7 +15,7 @@ function gis_autoriser(){};
  * @param array $opt Des options
  * @return boolean true/false
  */
-function autoriser_gis_iconifier_dist($faire,$quoi){
+function autoriser_gis_iconifier_dist($faire,$quoi,$id,$qui,$opts){
 	return autoriser('modifier','gis',$id,$qui,$opts);
 }
 
