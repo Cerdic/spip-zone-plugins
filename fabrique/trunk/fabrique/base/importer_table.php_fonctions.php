@@ -44,4 +44,3 @@ function fabrique_extraire_les_donnees_table($table, $connect) {
 	);
 }
 
-?>

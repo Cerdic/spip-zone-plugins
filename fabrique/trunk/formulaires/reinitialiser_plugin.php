@@ -38,7 +38,3 @@ function formulaires_reinitialiser_plugin_traiter_dist(){
 	);
 	return $res;
 }
-
-
-
-?>

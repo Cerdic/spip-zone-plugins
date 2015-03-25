@@ -42,4 +42,3 @@ function lister_tables_sql() {
 	return $tables;
 }
 }
-?>

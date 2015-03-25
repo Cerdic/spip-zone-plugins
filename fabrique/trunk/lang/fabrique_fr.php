@@ -416,4 +416,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		le formulaire après avoir renseigné le nom de l\'objet. Cela permet de compléter une partie
 		des chaines de langues, qu\'il vous faudra simplement vérifier.',
 );
-?>

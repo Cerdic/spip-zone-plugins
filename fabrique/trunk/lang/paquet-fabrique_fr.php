@@ -7,4 +7,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Il peut gérer la création d\'objets éditoriaux simples. L\'objectif n\'est pas de faire créer un
 		plugin parfait, mais une base solide, rapide à mettre en place, à éditer ensuite à votre goût.',
 );
-?>

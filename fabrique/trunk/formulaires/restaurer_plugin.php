@@ -340,5 +340,3 @@ function fabrique_migration_v5($data) {
 	}
 	return $data;
 }
-
-?>

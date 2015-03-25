@@ -377,4 +377,3 @@ function fabrique_executer_script($quoi, $data, $contexte = array()) {
 	extract($contexte);
 	eval($script);
 }
-?>

@@ -947,4 +947,3 @@ function fabrique_renseigner_objet($objet) {
 
 	return $objet;
 }
-?>

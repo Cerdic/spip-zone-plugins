@@ -54,5 +54,3 @@ if (!defined('_FABRIQUE_ESPACER')) {
  * @var int */
 	define('_FABRIQUE_ESPACER', 20);
 }
-
-?>

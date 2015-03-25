@@ -93,7 +93,3 @@ function formulaires_fabriquer_peuple_traiter_dist(){
 	);
 	return $res;
 }
-
-
-
-?>

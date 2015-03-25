@@ -119,7 +119,3 @@ function formulaires_fabriquer_squelettes_fabrique_traiter_dist(){
 	);
 	return $res;
 }
-
-
-
-?>

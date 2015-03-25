@@ -1248,5 +1248,3 @@ function fabrique_code_autorisation_defaut($autorisations, $autorisation) {
 function fabrique_type_autorisation($type) {
 	return str_replace('_', '', $type);
 }
-
-?>

@@ -392,6 +392,3 @@ class Futilitaire_Lignes {
 		$this->contenu    = $contenu;
 	}
 }
-
-
-?>
