@@ -1,4 +1,4 @@
-#SET{thelia_url,'../'.#EVAL{_RACINE_THELIA}#CONFIG{spip_thelia/repadmin_spip_thelia,admin}}
+#SET{thelia_url,#EVAL{_DIR_RACINE}#EVAL{_RACINE_THELIA}#CONFIG{spip_thelia/repadmin_spip_thelia,admin}}
 
 [(#GET{thelia_url}|find_in_path|oui)
 <div class="thelia"style="margin-left:-230px;width: 1010px;overflow:auto">

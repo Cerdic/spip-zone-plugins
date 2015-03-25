@@ -11,10 +11,11 @@ function exec_spip_thelia_catalogue_dist(){
 	}
 
 	if (function_exists('lire_config')){
-		$thelia_url = '../' . _RACINE_THELIA . lire_config('spip_thelia/repadmin_spip_thelia', 'admin') . '/';
+		$thelia_url = _DIR_RACINE . _RACINE_THELIA . lire_config('spip_thelia/repadmin_spip_thelia', 'admin') . '/';
 	} else {
-		$thelia_url = '../' . _RACINE_THELIA . _THELIA_ADMIN . '/';
+		$thelia_url = _DIR_RACINE . _RACINE_THELIA . _THELIA_ADMIN . '/';
 	}
+die $thelia_url ;
 
 	if (find_in_path($thelia_url)){
 
