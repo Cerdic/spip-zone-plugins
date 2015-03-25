@@ -79,9 +79,9 @@ L.Geocoder = L.Class.extend({
 			else {
 				place = response;
 			}
-			
+
 			var street_components = [];
-			
+
 			if (place.address.country) {
 				return_location.country = place.address.country;
 			}
@@ -99,8 +99,10 @@ L.Geocoder = L.Class.extend({
 			*/
 			if (place.address.city) {
 				return_location.locality = place.address.city;
-			}else if(place.address.county){
-				street_components.push(place.address.pedestrian);
+			} else if (place.address.village) {
+				return_location.locality = place.address.village;
+			} else if (place.address.county) {
+				street_components.push(place.address.county);
 			}
 			if (place.address.postcode) {
 				return_location.postcode = place.address.postcode;
