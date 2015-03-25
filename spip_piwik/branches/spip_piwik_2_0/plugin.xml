@@ -1,0 +1,33 @@
+<plugin>
+	<nom>Piwik</nom>
+	<slogan>Interfacer Spip et Piwik</slogan>
+	<auteur>jsb, kent1</auteur>
+	<version>0.7.0</version>
+	<licence>GNU/GPL</licence>
+	<etat>stable</etat>
+	<version_base>0.1</version_base>
+	<description>
+		<multi>
+			[fr]Ajoute le script de statistiques Piwik (analyseur de trafic web) sur les pages du site.
+			[en]Adds the Piwik statistics script (web traffic analyzer) on the pages of the site.
+		</multi>
+	</description>
+	<icon>piwik.png</icon>
+	<lien>http://contrib.spip.net/?article2860</lien>
+	<prefix>piwik</prefix>
+	<install>piwik_administrations.php</install>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>piwik_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>piwik_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.8;3.0.99]" />
+	<necessite id='cfg' version='[1.13.0;]' />
+	<necessite id='saisies' version='[1.1;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
+	<categorie>statistique</categorie>
+	<traduire gestionnaire="salvatore" module="piwik" reference="fr" />
+</plugin>

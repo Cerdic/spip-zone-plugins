@@ -1,0 +1,108 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=piwik -->
+#CACHE{0}
+
+<div class="formulaire_spip formulaire_editer formulaire_config">
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{SELF}
+		<ul>
+			[(#SAISIE{input,urlpiwik,
+				label=<:piwik:label_adresse_serveur:>,
+				explication=<:piwik:explication_adresse_serveur:>,
+				obligatoire=oui,
+				size=50
+			})]
+			
+			[(#SAISIE{input,user,
+				label=<:piwik:label_piwik_user:>,
+				obligatoire=oui,
+				size=50
+			})]
+			
+			[(#SAISIE{input,token,
+				label=<:piwik:label_token:>,
+				explication=<:piwik:explication_token:>,
+				obligatoire=oui,
+				size=50
+			})]
+
+			[(#CONFIG{piwik/token}|et{#CONFIG{piwik/user}}|oui)
+				[(#SET{defaut,[(#URL_SITE_SPIP)]})]
+				[(#SAISIE{sites_piwik,idpiwik,
+					label=<:piwik:label_identifiant_site:>,
+					explication=<:piwik:explication_identifiant_site:>,
+					option_intro='-',
+					defaut=#GET{defaut},
+					size=5
+				})]
+				[(#CONFIG{piwik_admin}|=={oui}|oui)
+				<li class="editer editer_creer_site">
+					<label><:piwik:label_creer_site:></label>
+					<p class="explication"><:piwik:explication_creer_site:></p>
+					<a href="[(#URL_ACTION_AUTEUR{piwik_creer_site,test&urlsite=[(#CONFIG{piwik/urlpiwik})]&token=[(#CONFIG{piwik/token})],#SELF})]"><:piwik:action_creer_site:></a>
+					<a href="[(#URL_ACTION_AUTEUR{piwik_recuperer_liste,test,#SELF})]"><:piwik:action_recuperer_liste:></a>
+				</li>]
+				[(#CONFIG{piwik_admin}|=={non}|oui)
+				<li>
+					<label><:piwik:label_recuperer_liste:></label>
+					<p class="explication"><:piwik:explication_recuperer_liste:></p>
+					<a href="[(#URL_ACTION_AUTEUR{piwik_recuperer_liste,test,#SELF})]"><:piwik:action_recuperer_liste:></a>
+				</li>]
+				[(#SAISIE{radio, mode_insertion,
+					label=<:piwik:label_mode_insertion:>,
+					explication=<:piwik:explication_mode_insertion:>,
+					datas=#ARRAY{
+						pipeline,<:piwik:mode_insertion_pipeline:>,
+						balise,<:piwik:mode_insertion_balise:>
+				}})]
+
+				[(#CONFIG{piwik/mode_insertion}|=={balise}|oui)
+
+					[(#SAISIE{statuts_auteurs, restreindre_statut_public,
+						label=<:piwik:label_restreindre_statut_public:>,
+						explication=<:piwik:explication_restreindre_statut_public:>,
+						multiple=oui})]
+
+					[(#SAISIE{auteurs, restreindre_auteurs_public,
+						label=<:piwik:label_restreindre_auteurs_public:>,
+						multiple=oui})]
+
+					[(#SAISIE{input,exclure_ips,
+						label=<:piwik:label_exclure_ips:>,
+						explication=<:piwik:explication_exclure_ips:>,
+						size=50
+					})]
+				]
+
+				[(#SAISIE{case, piwik_prive,
+					label=<:piwik:label_comptabiliser_prive:>
+				})]
+
+				[(#CONFIG{piwik/piwik_prive}|=={on}|oui)
+					[(#SAISIE{statuts_auteurs, restreindre_statut_prive,
+						label=<:piwik:label_restreindre_statut_prive:>,
+						explication=<:piwik:explication_restreindre_statut_prive:>,
+						multiple=oui})]
+
+					[(#SAISIE{auteurs, restreindre_auteurs_prive,
+						label=<:piwik:label_restreindre_auteurs_prive:>,
+						multiple=oui})]
+				]
+
+				[(#SAISIE{oui_non, conformite_cnil,
+					label=<:piwik:label_conformite_cnil:>,
+					explication=<:piwik:explication_conformite_cnil:>
+				})]
+
+			]
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
+		</p>
+	</div></form>
+</div>

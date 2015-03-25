@@ -1,0 +1,27 @@
+<paquet
+	prefix="piwik"
+	categorie="statistique"
+	version="0.7.0"
+	etat="stable"
+	compatibilite="[2.0.8;3.0.*]"
+	logo="piwik.png"
+	schema="0.1"
+	documentation="http://contrib.spip.net/?article2860"
+>	
+
+	<nom>Piwik</nom>
+	<!-- Interfacer Spip et Piwik -->
+
+	<auteur>jsb</auteur>
+	<auteur lien="http://www.kent1.info" mail="kent1@arscenic.info">kent1</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<traduire module="piwik" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head" inclure="piwik_pipelines.php" />
+	<pipeline nom="header_prive" inclure="piwik_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="piwik_pipelines.php" />
+
+	<necessite nom="saisies" compatibilite="[1.1;[" />
+</paquet>
