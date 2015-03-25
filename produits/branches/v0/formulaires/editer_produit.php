@@ -27,7 +27,7 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 		array(
 			'saisie' => 'selecteur_rubrique',
 			'options' => array(
-				'nom' => 'id_parent',
+				'nom' => 'parent',
 				'obligatoire' => 'oui',
 				'label' => _T('produits:produit_champ_rubrique_label'),
 				'defaut' => 'rubrique|'.$id_rubrique
@@ -107,7 +107,7 @@ function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $
 		$id_rubrique = $config['limiter_ident_secteur'][0] ;
 	}
 	$contexte = formulaires_editer_objet_charger('produit', $id_produit, $id_rubrique, 0, $retour, '');
-	$contexte['id_parent'] = 'rubrique|'.($contexte['id_rubrique']?$contexte['id_rubrique']:$id_rubrique);
+	$contexte['parent'] = 'rubrique|'.($contexte['id_rubrique']?$contexte['id_rubrique']:$id_rubrique);
     //Calculer le prix TTC selon le contexte
     $taxe = $contexte['taxe'] ? $contexte['taxe'] : lire_config('produits/taxe', 0);
     $contexte['prix_ttc'] = round($contexte['prix_ht'] * (1+$taxe),lire_config('produits/precision_ttc',2));
@@ -117,6 +117,9 @@ function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $
 }
 
 function formulaires_editer_produit_verifier($id_produit='new', $id_rubrique=0, $retour=''){
+	// id_parent est force en numerique par l'ecran de secu, on post donc un parent et on le reinjecte ici dans id_parent pour compat
+	set_request('id_parent', _request('parent'));
+
 	$erreurs = array();
 	$erreurs = formulaires_editer_objet_verifier('produit', $id_produit);
 	
