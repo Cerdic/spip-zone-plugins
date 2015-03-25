@@ -13,5 +13,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_id_google' => 'Your Google Analytics ID like "UA-12345"',
+	'label_ga_universal' => 'Use <a href="https://support.google.com/analytics/answer/2790010?hl%3Den">Google Analytics Universal</a>',
 );
 ?>
