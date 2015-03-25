@@ -57,8 +57,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'droits_limites' => 'dei drech limitat en aqueli rùbrica',
 
 	// E
+	'effacer_base_option' => '<small><br />L’oupcioun recoumandada es « degun », l’oupcioun estandarda de SPIP es « lu aministratour » (mà sempre embé una verificacioun per FTP).</small>',
 	'effacer_base_qui' => 'Qu pòu <strong>escassà</strong> la basa de dounada dóu sit ?',
 	'espace_publieur' => 'Espaci pùblicou dubert',
+	'espace_publieur_qui' => 'Voulès dubrì la publicacioun — delà dai aministratour :',
 	'espace_wiki' => 'Espaci wiki',
 	'espace_wiki_mots_cles' => 'Espaci wiki per mot clau',
 	'espace_wiki_mots_cles_detail' => 'Chausissès aquì souta lu mot clau qu’ativeron lou mòdou wiki, es a dire editable per toui da l’espaci pùblicou (a coundicioun d’avé una interfaça, per isemple lu creioun)',
@@ -99,6 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'redac_tous' => 'Toui lu redatour',
 	'redacs' => 'ai redatour dóu sit',
 	'redacteur' => 'redatour',
+	'redacteur_lire_stats' => '<strong>Redatour veire estatìstica</strong> : lu redatour pouòdon visualisà li statìstica.',
+	'redacteur_modifie_article' => '<strong>Redatour moudifica proupausat</strong> : cada redatour pòu moudificà un article proupausat a la publicacioun, meme se noun n’en sigue l’autour.',
 	'refus_1' => '<p>Basta lu webmestre dóu sit',
 	'refus_2' => 'soun autourisat da moudificà aquelu parametre.</p>
 <p>Per n’en saupre de mai, veire <a href="http://contrib.spip.net/Autorite">la doucumentacioun</a>.</p>',
@@ -112,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tout_deselectionner' => ' tout deseleciounà',
 
 	// V
+	'valeur_defaut' => '(valour predefinida)',
 	'visiteur' => 'visitaire',
 	'visiteurs_anonymes' => 'lu visitaire anounime pouòdon creà de nouveli pàgina.',
 	'visiteurs_enregistres' => 'ai visitaire registrat',
