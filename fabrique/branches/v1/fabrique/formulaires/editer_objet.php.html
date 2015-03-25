@@ -117,11 +117,10 @@ function formulaires_editer_[(#TYPE)]_charger_dist($#ID_OBJET='new',[ (#GET{id_r
  */
 function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_rubrique_param})] $retour='',[ (#GET{associer_param})] $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 <BOUCLE_si_saisie_date(CONDITION){si #ENV{objet/champs}|champs_saisie_presente{date}}>
-	$erreurs = formulaires_editer_objet_verifier('#TYPE',$#ID_OBJET[, (#GET{obligatoires}|ecrire_tableau_sinon_rien)]);
+	$erreurs = array();
 	$verifier = charger_fonction('verifier', 'inc');
 
-	foreach ([(#ENV{objet/champs}|champs_saisie_presente{date, champ}|ecrire_tableau)] AS $champ)
-	{
+	foreach ([(#ENV{objet/champs}|champs_saisie_presente{date, champ}|ecrire_tableau)] AS $champ){
 		$normaliser = null;
 		if ($erreur = $verifier(_request($champ), 'date', array('normaliser'=>'datetime'), $normaliser)) {
 			$erreurs[$champ] = $erreur;
@@ -133,6 +132,9 @@ function formulaires_editer_[(#TYPE)]_verifier_dist($#ID_OBJET='new',[ (#GET{id_
 			set_request($champ, null);
 		}
 	}
+
+	$erreurs += formulaires_editer_objet_verifier('#TYPE',$#ID_OBJET[, (#GET{obligatoires}|ecrire_tableau_sinon_rien)]);
+
 	return $erreurs;
 </BOUCLE_si_saisie_date>
 	return formulaires_editer_objet_verifier('#TYPE',$#ID_OBJET[, (#GET{obligatoires}|ecrire_tableau_sinon_rien)]);
