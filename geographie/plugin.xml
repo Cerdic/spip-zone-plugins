@@ -1,7 +1,7 @@
 <plugin>
   <nom>Geographie</nom>
   <auteur>Cedric Morin [yterium.net->http://www.yterium.net]</auteur>
-  <version>0.5.0</version>
+  <version>0.5.1</version>
   <version_base>0.4.0</version_base>
   <etat>test</etat>
   <description>Bases g&#233;ographiques Pays, et pour la France : R&#233;gion, d&#233;partement, communes g&#233;olocalis&#233;es</description>
@@ -27,5 +27,5 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/geographie.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />  
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />  
 </plugin>
