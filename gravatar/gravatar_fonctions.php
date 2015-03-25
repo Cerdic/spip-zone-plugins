@@ -1,6 +1,4 @@
 <?php
-define('_TAILLE_MAX_GRAVATAR',80); // taille max des gravatars à récupérer sur le site 
-
 /**
  *
  * Gravatar : Globally Recognized AVATAR
@@ -15,6 +13,13 @@ define('_TAILLE_MAX_GRAVATAR',80); // taille max des gravatars à récupérer su
  **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
+// taille max des gravatars à récupérer sur le site
+if (!defined('_TAILLE_MAX_GRAVATAR')) define('_TAILLE_MAX_GRAVATAR',80);
+
+// le host vers gravatar
+if (!defined('_GRAVATAR_HOST')) define('_GRAVATAR_HOST','http://www.gravatar.com');
+
 
 /**
  * notre fonction de recherche de logo
@@ -193,7 +198,7 @@ function gravatar($email, $default='404') {
 			$nb--;
 			include_spip("inc/distant");
 			if ($gravatar
-			= recuperer_page('http://www.gravatar.com/avatar/'.$md5_email.($default?"?d=$default":"")."&s="._TAILLE_MAX_GRAVATAR) 
+			= recuperer_page(_GRAVATAR_HOST . '/avatar/'.$md5_email.($default?"?d=$default":"")."&s="._TAILLE_MAX_GRAVATAR)
 			) {
 				spip_log('gravatar ok pour '.$email);
 				ecrire_fichier($gravatar_cache, $gravatar);
