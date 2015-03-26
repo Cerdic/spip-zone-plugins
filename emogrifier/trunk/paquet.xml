@@ -1,7 +1,7 @@
 <paquet
 	prefix="emogrifier"
 	categorie="outil"
-	version="1.0.2"
+	version="1.0.3"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	documentation="https://github.com/bystrano/emogrifier"
