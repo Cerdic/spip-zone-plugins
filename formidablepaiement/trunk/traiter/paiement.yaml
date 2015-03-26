@@ -46,6 +46,12 @@ options:
         max: 100
         nb_decimales: 2
   -
+    saisie: 'champ'
+    options:
+      nom: 'champ_auteur'
+      label: '<:formidablepaiement:traiter_paiement_option_champ_auteur:>'
+      env: true
+  -
     saisie: 'textarea'
     options:
       nom: 'message'

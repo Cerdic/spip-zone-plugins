@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_paiement_titre' => 'Paiement',
 	'traiter_paiement_description' => 'Demander un paiement après saisie du formulaire',
 
+	'traiter_paiement_option_champ_auteur' => 'Champ pour l\'adresse email du client',
 	'traiter_paiement_option_champ_montant_label' => 'Champ pour le montant à payer',
 	'traiter_paiement_option_montant_fixe_label' => 'Ou montant fixe',
 	'traiter_paiement_option_montant_fixe_explication' => 'Ce montant pourra aussi être utilisé comme montant par défaut si le champ pour le montant à payer est vide',

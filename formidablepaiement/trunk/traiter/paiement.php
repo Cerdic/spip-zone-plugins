@@ -48,10 +48,15 @@ function traiter_paiement_dist($args, $retours){
 		}
 	}
 
+	if ($options['champ_auteur'] AND $auteur = _request($options['champ_auteur'])){
+		include_spip('inc/filtres');
+		$auteur = email_valide($auteur);
+	}
 	// preparer la transaction
 	$options = array(
 		'montant_ht' => $montant_ht,
 		'id_auteur' => (isset($GLOBALS['visiteur_session']['id_auteur'])?$GLOBALS['visiteur_session']['id_auteur']:0),
+		'auteur' => $auteur,
 		'parrain' => 'form'.$formulaire['id_formulaire'].':'.$formulaire['identifiant'],
 		'tracking_id' => $id_formulaires_reponse,
 	);
