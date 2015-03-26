@@ -16,6 +16,9 @@
 	</langue>
 	<langue code="it" url="http://trad.spip.net/tradlang_module/paquet-autorite?lang_cible=it" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/paquet-autorite?lang_cible=oc_ni_mis" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-autorite?lang_cible=sk" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
