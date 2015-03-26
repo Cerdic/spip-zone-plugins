@@ -1,4 +1,4 @@
-<traduction module="piwik" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip_piwik/spip_piwik_2_0/lang/" reference="fr">
+<traduction module="piwik" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/spip_piwik/branches/spip_piwik_2_0/lang/" reference="fr">
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=ca" total="37" traduits="28" relire="0" modifs="0" nouveaux="9" pourcent="75.68">
 	</langue>
 	<langue code="de" url="http://trad.spip.net/tradlang_module/piwik?lang_cible=de" total="37" traduits="28" relire="0" modifs="0" nouveaux="9" pourcent="75.68">
