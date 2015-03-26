@@ -4,8 +4,8 @@
 	<auteur>Jean-Baptiste Bourgoin</auteur>
 	<auteur>Cedric Morin</auteur>
 	<licence>MIT</licence>
-	<version>1.0.4</version>
-	<etat>dev</etat>
+	<version>1.0.5</version>
+	<etat>stable</etat>
 	<icon>img/lesscss-32.png</icon>
 	<description>
 LESS est une extension de CSS ajoutant les variables, les classes, les op&#233;rations, les imbrications au langage. Facilitant ainsi
