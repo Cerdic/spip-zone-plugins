@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'choix_precis' => 'Choix précis',
+    'complet'=>'Complet',	
 	'cron_explication' => 'Pour tout événement ayant activé la clôture automatique. Quand l’événement de la résérvation est passé, la réservation sera automatiquement clôturée par le système. Si "clôturé" est choisis sous "Déclenchement", un email de clôture sera alors envoyé. Videz le cache afin que cela soit bien activé. ',
 	'cron_fieldset' => 'Clôture automatique',
 	'cron_label' => 'Clôturer automatiquement une réservation',
@@ -42,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_reservations' => '@nb@ réservations',
 	'info_reservations_auteur' => 'Les réservations de cet auteur',
 	'info_voir_reservations_poubelle' => 'Voir les Résevations mises à la poubelle',
+	'inscrire_liste_attente'=>'Choissisez un autre cours ou inscrivez vous dans la liste d\'attente.',
 
 	// L
 	'label_action_cloture' => 'Clôture automatique :',
@@ -50,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_donnees_auteur' => 'Données Auteur :',
 	'label_email' => 'Email :',
 	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
+	'label_inscription' => 'inscription :',
 	'label_id_auteur' => 'Id auteur :',
 	'label_lang' => 'Langue :',
 	'label_maj' => 'maj :',
@@ -114,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'par_reservations' => 'réservations',
 	'periodicite_cron_explication' => 'Periode aprês laquelle le système vérifie si des résérvations doivent être clôturées (min 600 : 10 min)',
 	'periodicite_cron_label' => 'Périodicité du cron en secondes',
+	 'places_disponibles'=>'Places disponibles :',
 
 	// R
 	'reaservation_montant' => 'Montant',

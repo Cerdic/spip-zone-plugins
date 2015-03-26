@@ -1,0 +1,14 @@
+#SET{reservations,''}
+[(#REM)Toutes les résérvations]
+#SET{total,#INCLURE{fond=inclure/compteur_reservations,env}}
+
+[(#REM)Les disponibilités]
+#SET{disponibles,#PLACES|moins{#GET{total}}}
+
+<div class="disponibles[ (#GET{disponibles}|=={1}|oui)imminent][ (#GET{disponibles}|<={0}|oui)complet]">
+    [(#GET{disponibles}|>{0}|?{
+                            <:reservation:places_disponibles:>[ (#GET{disponibles})]
+                            ,
+                            <:reservation:complet:>[ : (#GET{disponibles}|<{0}|?{[(#GET{disponibles}|replace{-,''})] <:reservation:texte_statut_attente:>,<:reservation:inscrire_liste_attente:>})]
+                            })]
+</div>
