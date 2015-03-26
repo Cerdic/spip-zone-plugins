@@ -9,4 +9,7 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=fr" total="19" traduits="19" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/diogene_geo?lang_cible=oc_ni_mis" total="19" traduits="10" relire="0" modifs="0" nouveaux="9" pourcent="52.63">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 </traduction>
