@@ -44,9 +44,9 @@
         #cboxClose{position:absolute; top:5px; right:5px; display:block; background:url(images/controls.png) no-repeat top center; width:38px; height:19px; text-indent:-9999px;}
         #cboxClose:hover{background-position:bottom center;}
 
-/* ajout pour mediaboxplus */
+/* ajout pour mediaboxplustexte */
 #cboxTitle{display:none;opacity:0;}
-#cboxDatadesc{position:absolute;width:50%;z-index:1;padding:0 1%;margin:5px 5px 0;text-align:left;top:0;left:0;color:#000;background:rgba(255, 255, 255, 0.75);overflow:auto;max-height:50%;}
+#cboxDatadesc{position:absolute;width:auto;padding:0 1%;text-align:left;bottom:5px;left:0;color:#fff;background:rgba(0, 0, 0, 0.75);overflow:auto;max-height:40%;}
 #cboxDatadesc.transparent{opacity:0;}
-.hidedesc{cursor:pointer;display:block;float:right;margin:4px 0 2px 4px;line-height:.8em;padding:2px;border:2px solid #888;color:#666;font-size:0.8em;font-weight:700;}
-#cboxDatadesc:hover .hidedesc{color:#000;border-color:#000;}
+.hidedesc{cursor:pointer;display:block;float:right;margin:4px 0 2px 4px;line-height:.8em;padding:0 2px 2px;border:2px solid #888;color:#666;font-size:0.8em;font-weight:700;}
+#cboxDatadesc:hover .hidedesc{color:#fff;border-color:#fff;}

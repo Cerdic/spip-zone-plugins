@@ -3,7 +3,7 @@
     The following rules are the styles that are consistant between themes.
     Avoid changing this area to maintain compatability with future versions of ColorBox.
 */
-#colorbox {-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
+#colorbox, #cboxLoadedContent {-webkit-box-sizing: content-box;-moz-box-sizing: content-box;box-sizing: content-box;}
 #colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:4999; overflow:hidden;}
 #cboxOverlay{position:fixed; width:100%; height:100%;}
 #cboxMiddleLeft, #cboxBottomLeft{clear:left;}
@@ -28,21 +28,24 @@
         #cboxLoadedContent{background:#000; padding:1px;}
         #cboxLoadingGraphic{background:url(images/loading.gif) center center no-repeat;}
         #cboxLoadingOverlay{background:#000;}
-        #cboxTitle{display:none;opacity:0;}
-        #cboxDatadesc{position:absolute;width:auto;z-index:1;padding:0 1%;text-align:left;top:0;left:0;color:#000;background:rgba(255, 255, 255, 0.75);overflow:auto;max-height:50%;}
-        #cboxDatadesc.transparent{opacity:0;}
-        .hidedesc{cursor:pointer;display:block;float:right;margin:4px 0 2px 4px;line-height:.8em;padding:2px;border:2px solid #888;color:#666;font-size:0.8em;font-weight:700;}
-        #cboxDatadesc:hover .hidedesc{color:#000;border-color:#000;}
+        #cboxTitle{position:absolute; top:-22px; left:0; color:#000;}
         #cboxCurrent{position:absolute; top:-22px; right:205px; text-indent:-9999px;}
         #cboxSlideshow, #cboxPrevious, #cboxNext, #cboxClose{text-indent:-9999px; width:20px; height:20px; position:absolute; top:-20px; background:url(images/controls.png) 0 0 no-repeat;}
         #cboxPrevious{background-position:0px 0px; right:44px;}
-        #cboxPrevious.hover{background-position:0px -25px;}
+        #cboxPrevious:hover{background-position:0px -25px;}
         #cboxNext{background-position:-25px 0px; right:22px;}
-        #cboxNext.hover{background-position:-25px -25px;}
+        #cboxNext:hover{background-position:-25px -25px;}
         #cboxClose{background-position:-50px 0px; right:0;}
-        #cboxClose.hover{background-position:-50px -25px;}
+        #cboxClose:hover{background-position:-50px -25px;}
         .cboxSlideshow_on #cboxPrevious, .cboxSlideshow_off #cboxPrevious{right:66px;}
         .cboxSlideshow_on #cboxSlideshow{background-position:-100px 0px; right:44px;}
-        .cboxSlideshow_on #cboxSlideshow.hover{background-position:-100px -25px;}
+        .cboxSlideshow_on #cboxSlideshow:hover{background-position:-100px -25px;}
         .cboxSlideshow_off #cboxSlideshow{background-position:-75px 0px; right:44px;}
-        .cboxSlideshow_off #cboxSlideshow.hover{background-position:-75px -25px;}
+        .cboxSlideshow_off #cboxSlideshow:hover{background-position:-75px -25px;}
+
+/* ajout pour mediaboxplustexte */
+#cboxTitle{display:none;opacity:0;}
+#cboxDatadesc{position:absolute;width:auto;z-index:1;padding:0 1%;text-align:left;bottom:0;left:0;color:#000;background:rgba(255, 255, 255, 0.75);overflow:auto;max-height:30%;}
+#cboxDatadesc.transparent{opacity:0;}
+.hidedesc{cursor:pointer;display:block;float:right;margin:4px 0 2px 4px;line-height:.8em;padding:0 2px 2px;border:2px solid #888;color:#666;font-size:0.8em;font-weight:700;}
+#cboxDatadesc:hover .hidedesc{color:#000;border-color:#000;}
