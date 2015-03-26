@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attention_crayons' => '<small><strong>Mèfi.</strong> Lu reglage aquì souta pouòdon founciounà que s’utilisès un plugin que proupause una interfaça d’edicioun (couma <a href="http://contrib.spip.net/Les-Crayons">lu Creioun</a> per isemple).</small>',
 	'attention_version' => 'Mèfi, si pòu que la vouòstra versioun de SPIP noun founcioune embé li chausida seguenti :',
 	'auteur_message_advitam' => 'L’autour dóu message, ad vitam',
+	'auteur_message_heure' => 'L’autour dóu message, d’una oura',
 	'auteur_modifie_article' => '<strong>Autour moudifica article</strong> : cada redatour pòu moudificà lu article publicat que sìgue l’autour.
 	<br />
 	<i>N.B. : aquela oupcioun  s’aplica finda ai visitaire registrat, se soun autour e se una interfaça especifica es prevista.</i>',
@@ -37,6 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deja_defini' => 'Li autourisacioun seguenti soun jà definidi per autre :',
+	'deja_defini_suite' => 'Lou plugin « Autourità » noun pòu moudificà quauqu’unu dei reglage aquì souta. Si pòu qu’aquelu noun founciounon.
+	<br />Da reglà aqueu proublema, devès verificà se lou vouòstre fichié <tt>mes_options.php</tt> (o un autre plugin atiéu) a définit aqueli foucioun.',
 	'descriptif_1' => 'Aquela pàgina de counfiguracioun es reservada ai webmestre dóu sit :',
 	'descriptif_2' => '<p>Se auguràs moudificà aquela lista, vourguès edità lou fichié <tt>config/mes_options.php</tt> (magara lou creà) e lì endicà la lista dei identificant dei autour webmèstre, en la fourma seguenta :</p>
 <pre>&lt;?php
@@ -60,10 +63,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'effacer_base_option' => '<small><br />L’oupcioun recoumandada es « degun », l’oupcioun estandarda de SPIP es « lu aministratour » (mà sempre embé una verificacioun per FTP).</small>',
 	'effacer_base_qui' => 'Qu pòu <strong>escassà</strong> la basa de dounada dóu sit ?',
 	'espace_publieur' => 'Espaci pùblicou dubert',
+	'espace_publieur_detail' => 'Chausissès aquì souta un setour da tratà couma un espaci de publicacioun duberti per lu redatour e / o visitaire registrat (lì auguèsse una interfaça, per isemple lu creioun e un fourmulari da soumetre l’article) :',
 	'espace_publieur_qui' => 'Voulès dubrì la publicacioun — delà dai aministratour :',
 	'espace_wiki' => 'Espaci wiki',
+	'espace_wiki_detail' => 'Chausissès aquì souta un setour da tratà couma un wiki, editable da toui despì l’espaci pùblicou (lì auguèsse una interfaça, per isemple lu creioun) :',
 	'espace_wiki_mots_cles' => 'Espaci wiki per mot clau',
-	'espace_wiki_mots_cles_detail' => 'Chausissès aquì souta lu mot clau qu’ativeron lou mòdou wiki, es a dire editable per toui da l’espaci pùblicou (a coundicioun d’avé una interfaça, per isemple lu creioun)',
+	'espace_wiki_mots_cles_detail' => 'Chausissès aquì souta lu mot clau qu’ativeron lou mòdou wiki, editable da toui per l’espaci pùblicou (lì auguèsse una interfaça, per isemple lu creioun)',
 	'espace_wiki_mots_cles_qui' => 'Voulès dubrì aqueu wiki delà dai aministratour :',
 	'espace_wiki_qui' => 'Voulès dubrì aqueu wiki — delà dai aministratour :',
 
@@ -84,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'non_webmestres' => 'Aqueu reglage noun s’aplica ai webmestre.',
 	'note_rubriques' => '(Noutàs que basta lu aministratour pouòdon creà dei rùbrica, e, per lu aministratour restrech, acò pòu si faire que en li siéu rùbrica.)',
 	'nouvelles_rubriques' => 'de rùbrica nouveli  a la raïs dóu sit',
+	'nouvelles_sous_rubriques' => 'de nouveli souta-rùbrica en l’arbouressença.',
 
 	// O
 	'ouvrir_redacs' => 'Durbì ai redatour dóu sit :',
