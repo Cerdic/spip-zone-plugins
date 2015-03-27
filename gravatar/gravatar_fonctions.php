@@ -20,6 +20,11 @@ if (!defined('_TAILLE_MAX_GRAVATAR')) define('_TAILLE_MAX_GRAVATAR',80);
 // le host vers gravatar
 if (!defined('_GRAVATAR_HOST')) define('_GRAVATAR_HOST','http://www.gravatar.com');
 
+// les caches
+if (!defined('_GRAVATAR_CACHE_DELAY_REFRESH')) define('_GRAVATAR_CACHE_DELAY_REFRESH',3600*24); // 24h pour checker un existant
+if (!defined('_GRAVATAR_CACHE_DELAY_CHECK_NEW')) define('_GRAVATAR_CACHE_DELAY_CHECK_NEW',3600*8); // 8h pour re-checker un user sans gravatar
+if (!defined('_GRAVATAR_CACHE_FALLBACK_COEFF')) define('_GRAVATAR_CACHE_FALLBACK_COEFF',10); // x10 si on utilise identicon etc.
+
 
 /**
  * notre fonction de recherche de logo
@@ -181,19 +186,30 @@ function gravatar($email, $default='404') {
 	$gravatar_id .= ($default=='404'?"":"-$default");
 	$gravatar_cache = $tmp.$gravatar_id.'.jpg';
 
+	if (!defined('_GRAVATAR_CACHE_DELAY_REFRESH')) define('_GRAVATAR_CACHE_DELAY_REFRESH',3600*24); // 24h pour checker un existant
+	if (!defined('_GRAVATAR_CACHE_DELAY_CHECK_NEW')) define('_GRAVATAR_CACHE_DELAY_CHECK_NEW',3600*8); // 8h pour re-checker un user sans gravatar
+	if (!defined('_GRAVATAR_CACHE_FALLBACK_COEFF')) define('_GRAVATAR_CACHE_FALLBACK_COEFF',10); // x10 si on utilise identicon etc.
+
 	// inutile de rafraichir souvent les identicon etc qui ne changent en principe pas
-	$coeff_delai = ($default=='404' ? 1:10);
+	$coeff_delai = ($default=='404' ? 1:_GRAVATAR_CACHE_FALLBACK_COEFF);
+	$duree = 0;
 	if ((!file_exists($gravatar_cache)
 	OR (
-		(time()-3600*24*$coeff_delai > filemtime($gravatar_cache))
+		(($duree = $_SERVER['REQUEST_TIME'] - filemtime($gravatar_cache)) > _GRAVATAR_CACHE_DELAY_REFRESH*$coeff_delai)
 		AND $nb > 0
 	  ))
 	) {
+		if ($duree){
+			spip_log("Actualiser gravatar anciennete $duree s (cache maxi "._GRAVATAR_CACHE_DELAY_REFRESH*$coeff_delai."s)","gravatar");
+		}
 		lire_fichier($tmp.'vides.txt', $vides);
 		$vides = @unserialize($vides);
 		if ((!isset($vides[$gravatar_id])
-		OR time()-$vides[$gravatar_id] > 3600*8*$coeff_delai
+		OR ($duree = time()-$vides[$gravatar_id]) > _GRAVATAR_CACHE_DELAY_CHECK_NEW*$coeff_delai
 		) AND $max-- > 0) {
+			if ($duree){
+				spip_log("Actualiser gravatar vide $duree s (cache maxi "._GRAVATAR_CACHE_DELAY_CHECK_NEW*$coeff_delai."s)","gravatar");
+			}
 
 			$nb--;
 			include_spip("inc/distant");
