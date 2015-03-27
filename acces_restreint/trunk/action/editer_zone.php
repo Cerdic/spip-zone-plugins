@@ -85,11 +85,21 @@ function zone_inserer() {
  * @return string|bool
  */
 function zone_modifier ($id_zone, $set=null) {
-
 	include_spip('inc/modifier');
+	
+	// Cherchons les vrais champs déclarés
+	$trouver_table = charger_fonction('trouver_table','base');
+	$desc = $trouver_table('spip_zones');
+	if (isset($desc['champs_editables']) AND is_array($desc['champs_editables'])) {
+		$white = $desc['champs_editables'];
+	}
+	else {
+		$white = array('titre', 'descriptif','publique', 'privee');
+	}
+	
 	$c = collecter_requests(
 		// white list
-		array('titre', 'descriptif','publique', 'privee'),
+		$white,
 		// black list
 		array(),
 		// donnees eventuellement fournies
