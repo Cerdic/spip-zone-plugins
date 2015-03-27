@@ -34,6 +34,7 @@ function recherche_autorisation($idressource,$statut_connecte,$autorisation,$id_
             "auto.orr_type_objet AS type",
             "auto.orr_statut AS statut",
             "auto.id_auteur AS id_auteur",
+            "auto.id_grappe AS id_grappe",
             "auto.orr_autorisation_valeur AS valeur"),
         array(
             "spip_orr_autorisations AS auto",
@@ -72,6 +73,7 @@ function recherche_autorisation($idressource,$statut_connecte,$autorisation,$id_
                     "spip_grappes AS grappe",
                     "spip_grappes_liens AS lien"),
                 array(
+                    "grappe.id_grappe = " . intval($r['id_grappe']),
                     "grappe.id_grappe = lien.id_grappe",
                     "lien.objet = 'auteur'"));
 
