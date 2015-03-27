@@ -31,7 +31,7 @@ $gis_layers = array (
 		'layer' => 'L.Google("ROADMAP")'
 	),
 	'google_satellite' => array(
-		'nom' => 'Google Satelitte',
+		'nom' => 'Google Satellite',
 		'layer' => 'L.Google("SATELLITE")'
 	),
 	'google_terrain' => array(
