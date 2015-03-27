@@ -6,6 +6,7 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type="hidden" name="id_zone" value="#ENV{id_zone}" />
 	  <ul>
 	    <li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
 	    	<label for="titre"><:accesrestreint:titre_zones_acces:></label>[
