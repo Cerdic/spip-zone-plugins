@@ -4,7 +4,7 @@
 	version="1.0.2"
 	etat="test"
 	compatibilite="[3.0.17;3.0.*]"
-	logo="prive/themes/spip/images/mediabox-32.png"
+	logo="prive/themes/spip/images/mediaboxavectexte-32.png"
 >
 
 	<nom>MEDIABOX AVEC TEXTE</nom>
