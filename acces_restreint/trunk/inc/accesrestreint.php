@@ -196,14 +196,16 @@ function accesrestreint_liste_contenu_zone_auteur($id_zone) {
  * @return array
  */
 function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL, $quelquesoit_visibilite = false) {
+	include_spip('inc/session');
+	$id_visiteur = session_get('id_auteur');
 	// cache static
 	static $liste_rub_exclues = array();
 	static $liste_rub_inclues = array();
 	if ($quelquesoit_visibilite) { $publique = 'tout'; }
 
-	// Si pas d'auteur, on prend le visiteur en cours si connecté
-	if (is_null($id_auteur) AND isset($GLOBALS['visiteur_session']['id_auteur'])) {
-		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+	// Si pas d'auteur, on prend le visiteur en cours (si pas connecté ce sera null)
+	if (is_null($id_auteur)) {
+		$id_auteur = $id_visiteur;
 	}
 	
 	if (!isset($liste_rub_exclues[$id_auteur][$publique]) or !is_array($liste_rub_exclues[$id_auteur][$publique])) {
@@ -223,7 +225,7 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 		include_spip('base/abstract_sql');
 		if (
 			$GLOBALS['accesrestreint_zones_autorisees']
-			and $id_auteur==$GLOBALS['visiteur_session']['id_auteur']
+			and $id_auteur == $id_visiteur
 		) {
 			$where[] = sql_in('zr.id_zone',$GLOBALS['accesrestreint_zones_autorisees'],'NOT');
 		}
@@ -272,7 +274,7 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL,
 			include_spip('base/abstract_sql');
 			if (
 				$GLOBALS['accesrestreint_zones_autorisees']
-				and $id_auteur==$GLOBALS['visiteur_session']['id_auteur']
+				and $id_auteur == $id_visiteur
 			){
 				$where[] = sql_in('zr.id_zone', $GLOBALS['accesrestreint_zones_autorisees']);
 			}
@@ -357,6 +359,8 @@ function accesrestreint_liste_contenu_zone_objets($objet, $id_zone_ou_where){
  * 		Retourne la liste des identifiants de l'objet choisi
  */
 function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=NULL){
+	include_spip('inc/session');
+	$id_visiteur = session_get('id_auteur');
 	// Cache statique
 	static $liste_objets_exclus = array();
 	static $liste_objets_inclus = array();
@@ -369,8 +373,8 @@ function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=
 	}
 	
 	// Si pas d'auteur, on prend le visiteur en cours si connecté
-	if (is_null($id_auteur) AND isset($GLOBALS['visiteur_session']['id_auteur'])) {
-		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
+	if (is_null($id_auteur)) {
+		$id_auteur = $id_visiteur;
 	}
 	
 	// On ne cherche que si ce n'est pas déjà défini
@@ -398,7 +402,7 @@ function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=
 		// Si le visiteur en cours a des zones, on y a accès rapidement
 		if (
 			$GLOBALS['accesrestreint_zones_autorisees']
-			and $id_auteur == $GLOBALS['visiteur_session']['id_auteur']
+			and $id_auteur == $id_visiteur
 		) {
 			$where[] = sql_in('zo.id_zone', $GLOBALS['accesrestreint_zones_autorisees'], 'NOT');
 		}
@@ -450,7 +454,7 @@ function accesrestreint_liste_objets_exclus($objets, $publique=true, $id_auteur=
 			// Calcul des objets dans des zones autorisees
 			if (
 				$GLOBALS['accesrestreint_zones_autorisees']
-				and $id_auteur == $GLOBALS['visiteur_session']['id_auteur']
+				and $id_auteur == $id_visiteur
 			){
 				$where[] = sql_in('zo.id_zone', $GLOBALS['accesrestreint_zones_autorisees']);
 			}
