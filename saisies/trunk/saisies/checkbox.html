@@ -55,7 +55,10 @@
     <input name="#ENV{nom}\[choix_alternatif\]" id="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]" />
     <label for="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]">
          [(#ENV{choix_alternatif_label, <:saisies:option_choix_alternatif_label_defaut:>})]
-    </label>
+    </label
+    [<p class="explication">
+      (#ENV{choix_alternatif_explication})
+    </p>]>
 </div>
 ]
 </B_checkbox>
