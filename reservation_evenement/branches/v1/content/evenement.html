@@ -1,0 +1,43 @@
+<BOUCLE_content(EVENEMENTS){id_evenement}>
+[(#SET{annee,#DATE_DEBUT|annee})][(#SET{mois,#DATE_DEBUT|nom_mois})][(#SET{jour,#DATE_DEBUT|jour})]
+    #SET{prix,''} 
+    <BOUCLE_prix(PRIX_OBJETS?){id_objet=#ID_EVENEMENT}{objet=evenement}{0,1}>
+     #SET{prix,#PRIX}
+    </BOUCLE_prix>
+        [(#REM) ou à l'article]
+        <BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
+        #SET{prix,#PRIX}
+        </BOUCLE_prix_article>
+         [(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix du champs prix l'article]
+            <BOUCLE_art_present(ARTICLES){id_article=#GET{id_article}}{si #GET{prix}|>{0}|non}>
+                #SET{prix,#PRIX}
+            </BOUCLE_art_present>
+                  [(#REM) sinon on prend le prix du champs prix de l'événement]  
+                   #SET{prix,#PRIX|appliquer_filtre{prix_formater}}                        
+            <//B_art_present>
+         <//B_prix_article>                           
+    <//B_prix> 
+<article class="entry evenement vevent id_#ID_EVENEMENT" id="evenement_#ID_EVENEMENT" itemscope itemtype="http://schema.org/Event">
+    <header class="cartouche">
+        [(#LOGO_EVENEMENT|image_reduire{200,200})]
+        <h1><span class="#EDIT{titre}">#TITRE</span></h1>
+		<meta itemprop="startDate" content="[(#DATE_DEBUT|date_iso)]" />
+		<meta itemprop="endDate" content="[(#DATE_FIN|date_iso)]" />
+		[<p class="info-publi"><time><i class="icon-calendar"></i> (#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE*,'hcal'})</time></p>]
+    </header>
+   #SET{intro,''}<BOUCLE_art(ARTICLES){id_article}>#SET{intro,#INTRODUCTION}</BOUCLE_art>
+	[(#SET{intro,[<div class="introduction #EDIT{descriptif}" itemprop="description">(#DESCRIPTIF|sinon{#GET{intro}})</div>]})]
+
+	[(#GET{intro}|ou{#LIEU}|ou{#ADRESSE}|ou{#GET{prix}}|ou{#PLACES|>{0}}|oui)
+	<div class="main">
+		#GET{intro}
+		[<div class="location" itemprop="location"><div class="lieu #EDIT{lieu}">
+			<div><strong><:agenda:evenement_lieu:></strong></div>
+			<div>(#LIEU)</div>
+			[<div class="adresse #EDIT{adresse}">(#ADRESSE)</div>]</div>]
+			[<div class><:reservation:label_prix:> (#GET{prix})</div>]
+			[(#PLACES|>{0}|oui)<INCLURE{fond=inclure/places_disponibles,id_evenement,places,statut=#VAL|statuts_complet}/>]		
+	</div>]
+	
+</article>
+</BOUCLE_content>

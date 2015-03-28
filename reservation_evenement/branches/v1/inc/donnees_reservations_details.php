@@ -61,18 +61,34 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
 					$set['id_prix_objet']=$p['id_prix_objet'];	
 				}			 
 			}
-			/*Sinon un prix attaché 'a l'évenement*/
-			elseif(intval($evenement['prix'])){
-				$fonction_prix = charger_fonction('prix', 'inc/');
-				$fonction_prix_ht = charger_fonction('ht', 'inc/prix');  
-				$prix_ht = $fonction_prix_ht('evenement', $id_evenement); 
-				$prix = $fonction_prix('evenement',$id_evenement);
-				$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
-				$set['prix_ht']=$prix_ht; 
-				$set['taxe']=$taxe;						 
-			}
+			/*Sinon si il y un prix attaché à l'évenement*/
+			elseif(intval($evenement['prix']) OR intval($evenement['prix_ht']))
+				$set=etablir_prix($id_evenement,'evenement',$evenement,$set);	 
+			elseif($article=sql_fetsel('*','spip_articles','id_article='.$evenement['id_article']))
+				$set=etablir_prix($evenement['id_article'],'article',$article,$set);
 		}
 	}
-
 	return $set;
+}
+
+function etablir_prix($id,$objet,$datas,$set){
+	spip_log($datas,'teste');
+	if($fonction_prix = charger_fonction('prix', 'inc/',true)){
+		$prix = $fonction_prix($objet,$id);
+	}
+	else $prix=$datas['prix']; 
+	
+	if($fonction_prix_ht = charger_fonction('ht', 'inc/prix',true)){
+		$prix_ht = $fonction_prix_ht($objet, $id); 
+	}
+	elseif(intval($datas['prix_ht'])) $prix_ht =$datas['prix_ht'];
+	
+	if($prix_ht){
+		$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+		$set['prix_ht']=$prix_ht; 
+		$set['taxe']=$taxe;	
+	}
+	else $set['prix']=$prix; 
+	
+	return	$set;
 }
