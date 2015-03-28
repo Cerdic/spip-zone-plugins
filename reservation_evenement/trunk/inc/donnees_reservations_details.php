@@ -61,18 +61,25 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
 					$set['id_prix_objet']=$p['id_prix_objet'];	
 				}			 
 			}
-			/*Sinon un prix attaché 'a l'évenement*/
+			/*Sinon si il y un prix attaché à l'évenement*/
 			elseif(intval($evenement['prix'])){
-				$fonction_prix = charger_fonction('prix', 'inc/');
-				$fonction_prix_ht = charger_fonction('ht', 'inc/prix');  
-				$prix_ht = $fonction_prix_ht('evenement', $id_evenement); 
-				$prix = $fonction_prix('evenement',$id_evenement);
-				$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
-				$set['prix_ht']=$prix_ht; 
-				$set['taxe']=$taxe;						 
+				if($fonction_prix = charger_fonction('prix', 'inc/',true)){
+					$prix = $fonction_prix('evenement',$id_evenement);
+				}
+				else $prix=$evenement['prix']; 
+				
+				if($fonction_prix_ht = charger_fonction('ht', 'inc/prix',true)){
+					$prix_ht = $fonction_prix_ht('evenement', $id_evenement); 
+				}  
+				
+				if($prix_ht){
+					$taxe = round(($prix - $prix_ht) / $prix_ht, 3);
+					$set['prix_ht']=$prix_ht; 
+					$set['taxe']=$taxe;	
+				}
+				else $set['prix']=$prix; 					 
 			}
 		}
 	}
-
 	return $set;
 }
