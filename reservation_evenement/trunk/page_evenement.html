@@ -35,17 +35,17 @@
 			<INCLURE{fond=inclure/navsub, id_rubrique} />
 			#FORMULAIRE_RECHERCHE
 	
-			[(#REM) Articles dans la meme rubrique ]
-			<B_articles_rubrique>
+			[(#REM) Evenements du même article]
+			<B_evenements_article>
 			<div class="menu">
-				<h2><:meme_rubrique:></h2>
+				<h2><:agenda:info_evenement:></h2>
 				<ul>
-					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {!par date} {0,10}>
-					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>#TITRE</a></li>
-					</BOUCLE_articles_rubrique>
+					<BOUCLE_evenements_article(EVENEMENTS) {id_article} {!par date} {0,10}>
+					<li><a href="#URL_EVENEMENT"[ class="(#EXPOSE)"]>#TITRE</a></li>
+					</BOUCLE_evenements_article>
 				</ul>
 			</div>
-			</B_articles_rubrique>
+			</B_evenements_article>
 	
 			[(#REM) Menu de navigation mots-cles ]
 			#MODELE{article_mots}
