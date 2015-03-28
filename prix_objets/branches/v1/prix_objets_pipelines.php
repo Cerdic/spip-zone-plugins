@@ -14,7 +14,7 @@ function prix_objets_affiche_milieu($flux){
         if ($type=='article') {
         $id_article = $flux['args']['id_article'];
 	   $rubriques_produits=rubrique_prix($id_article);
-		if($rubriques_produits AND $id_article){
+		if(($rubriques_produits AND $id_article) OR (!$rubriques_produits)){
 			$contexte = array('id_objet'=>$id_article,'objet'=>'article');
 			$contenu .= recuperer_fond('prive/objets/editer/prix', $contexte,array('ajax'=>true));
             if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))

@@ -1,7 +1,7 @@
 <paquet
 	prefix="prix_objets"
 	categorie="edition"
-	version="1.6.7"
+	version="1.6.8"
 	etat="dev"
 	compatibilite="[3.0.5;3.1.*]"
 	logo=""
