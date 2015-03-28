@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'prix_choisis' => 'Prix choisi',
-	'prix_devises' => 'Prix',
+	'prixs' => 'Prix',
 	'prix_ht' => 'Prix HT',
 	'prix_ttc' => 'Prix TTC',
 
