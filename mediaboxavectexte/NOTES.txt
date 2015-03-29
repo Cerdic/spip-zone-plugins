@@ -1,0 +1,5 @@
+Il y a deux versions du plugin pour suivre les versions de la colorbox.
+SPIP 3.0.* et SPIP 3.1.* ont besoin que les deux versions du plugin soit dans une version identique, sinon SPIP 3.0.* comprend à la fois que la v1 est obsolète et que la v2 est uniquement pour SPIP 3.1.*
+Il devait y avoir la v1.0 pour SPIP 3.0 et la v2.0 pour SPIP 3.1, mais du coup il y a deux versions avec le même numéro de version : 2.0.2
+S'il y a une autre possibilité il faudrait changer ça.
+Les zips sont bien nommés mediaboxavectexte_v1 et mediaboxavectexte_v2, ce qui est trompeur mais il faut bien faire une différence quelque part...
