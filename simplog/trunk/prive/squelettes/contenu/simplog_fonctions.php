@@ -23,7 +23,8 @@ function simplog_phraser_ligne($contenu) {
 	foreach ($contenu as $_ligne) {
 		if ($l = trim($_ligne) AND $l != '[-- rotate --]') {
 			preg_match(_SIMPLOG_LIGNE, $_ligne, $matches);
-			if (!$matches[1]) {
+			if (!isset($matches[1])
+			OR !$matches[1]) {
 				// Ce n'est pas une nouvelle ligne mais la suite du texte de la ligne en cours
 				$tableau[count($tableau)-1]['texte'] .= "\n" . trim($_ligne);
 			}
