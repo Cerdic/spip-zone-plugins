@@ -46,7 +46,6 @@ function inc_reservation_enregistrer_dist($id='',$id_article='',$id_auteur='',$c
 			$id_auteur=$res['id_auteur'];
 			sql_updateq('spip_auteurs',array('statut'=>'6forum'),'id_auteur='.$id_auteur);
 		}
-	
 		$set['reference']=$fonction_reference($id_auteur);
 	}
 	elseif(!intval($id_auteur)){

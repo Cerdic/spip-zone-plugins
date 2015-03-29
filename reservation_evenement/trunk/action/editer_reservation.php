@@ -168,7 +168,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
 		
 		// Pour l'enregistrement
 		$set['id_evenement']=$id_evenement;
-		
+
 		// Eviter l'envoi d'une notification pour chaque détail   
 		set_request('envoi_separe_actif','non');			
 

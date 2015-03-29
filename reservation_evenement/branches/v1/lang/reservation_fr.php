@@ -156,7 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_envoi_separe' => 'Mode Envoi Séparé activé',
 	'titre_reservation' => 'Réservation',
 	'titre_reservations' => 'Réservations',
-	'total' => 'Total',	
+	'total' => 'Total',
 
 	// U
 	'une_reservation_de' => 'Une réservation de : ',

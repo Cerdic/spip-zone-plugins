@@ -2,7 +2,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return; 
 
 function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
-
+			
 	if(count($set)>0){
 		include_spip('inc/filtres');
 		$reservations_details=sql_fetsel('*','spip_reservations_details','id_reservations_detail='.$id_reservations_detail);
@@ -32,9 +32,9 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
 		// Les descriptif
 		$set['descriptif']=supprimer_numero($evenement['titre']).'  ('.$date.')';
 		if(intval($evenement['places']))$set['places']=$evenement['places'];
-		if(intval($quantite[$id_evenement]))$set['quantite']=$quantite[$id_evenement];
-		else $set['quantite']=1; 
-		
+		$set['quantite']=_request('quantite');
+		if(is_array($set['quantite']))$set['quantite']=$set['quantite'][$id_evenement];
+
 		// Si le prix n'est pas fournit, on essaye de le trouver
 
 		if(!isset($set['prix']) AND !isset($set['prix_ht'])){
@@ -72,7 +72,6 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
 }
 
 function etablir_prix($id,$objet,$datas,$set){
-	spip_log($datas,'teste');
 	if($fonction_prix = charger_fonction('prix', 'inc/',true)){
 		$prix = $fonction_prix($objet,$id);
 	}

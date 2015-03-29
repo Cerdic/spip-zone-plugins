@@ -91,6 +91,7 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
 	$valeurs['new_pass2']=_request('new_pass2');  
 	$valeurs['new_login']=_request('new_login');       
 	$valeurs['statut'] = 'encours'; 
+	$valeurs['quantite'] = _request('quantite')?_request('quantite'):1; 
 	   
 	//les champs extras auteur
 	include_spip('cextras_pipelines');
@@ -104,10 +105,10 @@ function formulaires_reservation_charger_dist($id='',$id_article=''){
 
 		}
 	}
-	
-   
+	  
 	$valeurs['_hidden'].='<input type="hidden" name="statut" value="'.$valeurs['statut'].'"/>'; 
 	$valeurs['_hidden'].='<input type="hidden" name="lang" value="'.$valeurs['lang'].'"/>';    
+	$valeurs['_hidden'].='<input type="hidden" name="quantite" value="'.$valeurs['quantite'].'"/>';    
 
 
 	return $valeurs;
