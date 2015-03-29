@@ -1,9 +1,9 @@
 <paquet
 	prefix="bouspip"
 	categorie="navigation"
-	version="1.4.1"
+	version="1.4.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="images/boussole/boussole-spip.png"
 	documentation="http://contrib.spip.net/Boussole"
 >	
