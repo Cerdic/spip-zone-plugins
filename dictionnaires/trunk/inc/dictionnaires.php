@@ -119,7 +119,7 @@ function dictionnaires_lister_definitions($purger=false){
 						$definition['termes']
 					)
 				)
-				.')(?=([^\w]|\s|&nbsp;|$))}s'.($definition['casse']?'':'i');
+				.')(?=([^\w]|\s|&nbsp;|$))}su'.($definition['casse']?'':'i');
 			
 			// Et voilà
 			$definitions_actives[$cle] = $definition;
