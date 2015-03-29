@@ -2,7 +2,6 @@
 
 <h1 class="grostitre"><:simplog:logs:></h1>
 
-
 [(#SET{defaut_tri, #ARRAY{
 	index, -1,
 	gravite, 1,
@@ -24,7 +23,12 @@
 		]
 		</div>
 		<table class="spip liste">
-			[<caption><strong class="caption">(#ENV{fic}|oui)<:simplog:fichier{fichier=#ENV{fic}}:></strong></caption>]
+			[<caption>
+				<strong class="caption">
+					(#ENV{fic}|oui)<:simplog:fichier{fichier=#ENV{fic}}:>
+					[(#BOUTON_ACTION{<:bouton_telecharger:>, #URL_ACTION_AUTEUR{telecharger_log,#ENV{fic}}, '', '', ''})]
+				</strong>
+			</caption>]
 			<thead>
 				<tr class="first_row">
 					<th class="date secondaire" scope="col">[(#TRI{index, <:simplog:colonne_date:>, ajax})]</th>
