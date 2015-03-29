@@ -28,7 +28,7 @@
 				]
 				<div class="choix">
 					<input type="radio" value="#GET{infos}" id="boussole_#GET{alias}" class="radio" name="boussole" [(#ENV{boussole, spip:spip}|=={#GET{infos}}|oui) checked="checked"] />
-					<label for="boussole_#GET{alias}">[(#GET{nom}|sinon{#GET{alias}})]</label>
+					<label for="boussole_#GET{alias}">[(#GET{nom}|sinon{#GET{alias}})][ \(<:boussole:colonne_serveur|strtolower:> (#GET{serveur})\)]</label>
 				</div>
 		</BOUCLE_autres_boussoles>
 			</li>
