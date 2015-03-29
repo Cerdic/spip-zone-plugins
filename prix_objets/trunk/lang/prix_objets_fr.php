@@ -34,8 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_selection_objet_prix' => 'Ajouter un prix aux objets suivants :',
 
 	// P
-	'prix_choisis' => 'Prix choisi',
 	'prix' => 'Prix',
+	'prix_choisis' => 'Prix choisi',
 	'prix_ht' => 'Prix HT',
 	'prix_ttc' => 'Prix TTC',
 

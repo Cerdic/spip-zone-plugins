@@ -33,8 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_selection_objet_prix' => 'Add a price on the following objects :',
 
 	// P
+	'prix' => 'Price',
 	'prix_choisis' => 'Selected Price',
-	'prix_devises' => 'Price',
 	'prix_ht' => 'Price, ex VAT',
 	'prix_ttc' => 'Price,inc VAT',
 
