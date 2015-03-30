@@ -25,12 +25,10 @@
 			<div class="error"><:fulltext:table_non_reconnue:></div>
 		]
 	]
+	[<div class="warning">(#GET{table}|verifier_conversion)</div>]
 
 	#SET{regexp,^[a-z_0-9]+$}
 	<BOUCLE_siok(CONDITION){si #GET{engine}|=={''}|ou{#GET{engine}|strtolower|!={myisam}}|non}>
-		[(#ENV{regenerer}|=={#GET{table}}|ou{#ENV{regenerer}|=={tous}}|oui)
-			[(#GET{table}|fulltext_regenerer_index)]
-		]
 		[(#ENV{reinitialise}|=={#GET{table}}|ou{#ENV{reinitialise}|=={tous}}|oui)
 			[(#REM|fulltext_reinitialiser_document)]
 		]
@@ -79,5 +77,4 @@
 	[(#BOUTON_ACTION{<:fulltext:convertir_toutes:>,[(#URL_ACTION_AUTEUR{fulltext_convert_myisam,all,#URL_ECRIRE{fulltext}})]})]
 ]
 
-[(#REM|verifier_conversion)]
 #BOITE_FERMER

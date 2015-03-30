@@ -4,7 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/rechercher');
 
-function verifier_conversion() {
+function verifier_conversion($table) {
 	$charset = strtolower(str_replace('-', '', $GLOBALS['meta']['charset']));
 	$necessite_conversion = false;
 
@@ -17,7 +17,7 @@ function verifier_conversion() {
 	if ($charset_table != '' AND $charset != $charset_table) {
 		$modif = (substr($charset, 0, 3) == 'iso' ? 'convert_utf8' : 'convert_sql_utf8');
 		$url = generer_url_ecrire($modif);
-		echo "<p>" . _T('fulltext:incoherence_charset') . "<strong><a href='$url'>" . _T('fulltext:convertir_utf8') . "</a></strong></p>\n";
+		echo _T('fulltext:incoherence_charset') . "<strong><a href='$url'>" . _T('fulltext:convertir_utf8') . "</a></strong>";
 	}
 }
 
