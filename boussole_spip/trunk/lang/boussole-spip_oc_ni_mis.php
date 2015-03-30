@@ -23,7 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_net' => 'Per lu utilisaire e lu webmèstre, SPIP.net es lou sit ouficial racoumandat en toui aquelu que vouòlon instalà un sit embé SPIP, n’en capì lou lengage dei blouca, balisa e filtre, escriéure e utilisà les esquelètrou. presenta gloussari, tutorial, consèu, isòrica dei versioun e espaci de telecargamen. SPIP.net es traduch en mai de vint lenga.',
 	'descriptif_site_spip_party' => 'Passà lou siéu tems tra una tastiera e un ecran per codà de SPIP : es ben. Si rescouòntra tra desfouloupaire e utilisaire en la vida ver, si meme, autour d’un pastissoun e d’un jus de frùcha (o autri bevanda...) : es pu ben dau bouòn. SPIP-PARTY.net es lou sit que fa lou chensimen de touti aqueli rescouòntra : passadi (rendiconte, fotò) e da venì (calendari, agènda).',
 	'descriptif_site_spip_plugin' => 'PLUGINS.SPIP.net vòu estre l’anuari coumplet dei mòdulou coumplementari per SPIP (plugin, esquelètrou, tèma). Soun presentat per cada mòdulou : descritiéu, autour, lichença, nivèu de coumpatibilità per versioun de SPIP, darrieri moudificacioun apourtadi, estat dei traducioun, estatìstica d’utilisacioun, estac de doucumentacioun e de telecargamen.',
+	'descriptif_site_spip_programmer' => 'Mai destinat ai desfouloupaire o webmèstre que àugon jà dei counouissença en PHP, SQL, HTML, CSS et JavaScript, PROGRAMMER.SPIP.net presenta la plupart dei founciounalità (APIs, soubrescrich, pipeline,...) de SPIP embé touplen d’isemple de code. Lou sit ofra en telecargamen l’integralità dóu siéu countegut au fourmat pdf souta lichença lìbera cc-by-sa. PROGRAMMER.SPIP.net es counsultable en francès, inglès e espagnòu.',
 	'descriptif_site_spip_sedna' => 'SEDNA.SPIP.net es l’agregatour RSS per touta l’atualità de la galassìa SPIP. Li darrièri infourmacioun de mai de 70 sit gravitant autour de SPIP soun aisatamen counsultable.',
+	'descriptif_site_spip_trad' => 'L’espaci dei tradutour aculhe toui aquelu que vouòlon ajustà la coumunità dei utilisaire de SPIP en participant au travai de traducioun de SPIP èu-meme e dei siéu diversi countribucioun.',
+	'descriptif_site_spip_user' => 'SPIP@REZO.net es la lista d’entradjuda tra lu utilisaire de SPIP. Li arquivi d’aquesta lista soun counsultable soubre http://archives.rezo.net/archives/spip.mbox/ o, souta la fourma de blog soubre http://blog.gmane.org/gmane.comp.web.spip.user.',
 	'descriptif_site_spip_zine' => 'Descricioun dóu sit SPIPZine',
 
 	// N
@@ -64,9 +67,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_groupe_spip_decouverte' => 'A la descuberta de SPIP',
 	'slogan_groupe_spip_extension' => 'Estencioun e countribucioun a SPIP',
 	'slogan_groupe_spip_reference' => 'Referença SPIP',
+	'slogan_site_spip_blog' => 'Dóu lougiciau lìberou e de la tendressa',
 	'slogan_site_spip_contrib' => 'L’espaci dei countribucioun a SPIP',
 	'slogan_site_spip_core' => 'L’espaci de desfouloupamen dei versioun de SPIP',
+	'slogan_site_spip_demo' => 'Prouvà la darrièra versioun stable de SPIP',
 	'slogan_site_spip_doc' => 'La doucumentacioun dóu code de SPIP',
+	'slogan_site_spip_edgard' => 'Un còu de bot e vaga !',
 	'slogan_site_spip_forum' => 'Lou fòrou dei utilisaire de SPIP',
 	'slogan_site_spip_herbier' => 'Una selecioun dei sit remarcable en SPIP',
 	'slogan_site_spip_irc' => 'Venès charà soubre lou chat de SPIP',
@@ -75,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_programmer' => 'La doucumentacioun dei desfouloupaire SPIP',
 	'slogan_site_spip_sedna' => 'Lou flus RSS de la galassìa SPIP',
 	'slogan_site_spip_user' => 'La lista d’entrajuda dei utilisaire de SPIP',
+	'slogan_site_spip_video' => 'La mediatèca de SPIP',
 	'slogan_site_spip_zone' => 'L’espaci de desfouloupamen dei countribucioun a SPIP'
 );
 
