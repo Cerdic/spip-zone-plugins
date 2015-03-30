@@ -5,7 +5,6 @@
 		<a href="contrib.spip.net">http://contrib.spip.net/Fulltext</a>
 	</p>
 	
-	<p><a href='[(#SELF|parametre_url{regenerer,tous})]'><:fulltext:regenerer_tous:></a></p>
+	[(#BOUTON_ACTION{<:fulltext:regenerer_tous:>,[(#URL_ACTION_AUTEUR{fulltext_regenerer_index,all,#URL_ECRIRE{fulltext}})]})]
 
-	Insérer un bouton action pour regénérer tout ici 
-#BOITE_FERMER
+	#BOITE_FERMER
