@@ -27,13 +27,13 @@ function inc_donnees_reservations_details_dist($id_reservations_detail,$set) {
 		}
 		else{
 			if(affdate($date_debut,'G:i')=='0:00')$date=affdate($date_debut,'d/m/Y');
-			else $date=affdate($date_debut,'d/m/Y G:i');
+			else $datte=affdate($date_debut,'d/m/Y G:i');
 		}
 		// Les descriptif
 		$set['descriptif']=supprimer_numero($evenement['titre']).'  ('.$date.')';
 		if(intval($evenement['places']))$set['places']=$evenement['places'];
 		$set['quantite']=_request('quantite');
-		if(is_array($set['quantite']))$set['quantite']=$set['quantite'][$id_evenement];
+		if(is_array($set['quantite']) and isset($set['quantite'][$id_evenement]))$set['quantite']=$set['quantite'][$id_evenement];
 
 		// Si le prix n'est pas fournit, on essaye de le trouver
 
