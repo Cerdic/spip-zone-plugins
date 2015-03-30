@@ -9,6 +9,7 @@ function fulltext_declarer_tables_objets_sql($tables){
 	$tables['spip_documents']['field']['extrait'] = "VARCHAR(3) NOT NULL default 'non'";
 	$tables['spip_documents']['rechercher_champs']['contenu'] = 1;
 
+	var_dump($tables['spip_documents']['field']);
 	return $tables;
 }
 
