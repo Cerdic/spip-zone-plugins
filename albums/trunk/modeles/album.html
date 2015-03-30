@@ -22,9 +22,9 @@
 	- Le squelette a l'air bien chevelu, mais à la base, le markup d'un album est hyper simple (cf. lien plus haut).
 	Comme il faut prendre en compte tous les paramètres possibles, assurer la rétrocompatibilité,
 	et gérer les petites incohérences des modèles, ça donne un truc bien dense.
-	- Attention, dans la v1 le paramètre `id` sert à sélectionner des documents,
-	mais #ENV{id} peut renvoyer l'identifiant d'un album avec <albumx>.
-	Si on peut décomposer #ENV{id} en tableau, on considère qu'il s'agit du premier cas. 
+	- Attention, `id` et `id_article` sont utilisés comme paramètres dans la v1
+	mais en SPIP 3, ils peuvent se retrouver automatiquement dans l'environnement.
+	- Les vieux documents (issus d'avant SPIP 1.9) peuvent avoir un champ `media` vide.
     
 
 ][(#REM)
@@ -118,24 +118,26 @@
 	[(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
 	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#CONFIG{foundation/variante}|intval|>={4}|?{class='small-block-grid-2 medium-block-grid-3 large-block-grid-4',class='block-grid 4-up mobile-two-up'})]>
 		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#VAL|uniqid}}>[
-		(#SET{titre_document,      #TITRE|sinon{#FICHIER|basename}})][
-		(#SET{titre_document_long, #GET{titre_document}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}})][
-		(#SET{ratio,               #VAL{/\W/}|preg_split{#ENV*{ratio,#GET{recadrer}|?{1}}}})][
-		(#SET{ratio,               #GET{ratio}|count|>{1}|?{#GET{ratio/0}|div{#GET{ratio/1}},#GET{ratio/0}}|floatval})][
-		(#SET{ratio,               #GET{ratio}|sinon{#LARGEUR|div{#HAUTEUR}}|floatval})][
-		(#SET{largeur,             #ENV{largeur}|sinon{#ENV{hauteur}|mult{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
-		(#SET{hauteur,             #ENV{hauteur,#GET{largeur}|div{#GET{ratio}}}|intval})][
-		(#SET{src,                 #MEDIA|=={image}|?{
-			#GET{recadrer}|?{
-				#FICHIER|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur},center},
-				#FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}},
-			#LOGO_DOCUMENT{icone}}
-		|extraire_attribut{src}})]
+		(#SET{titre_doc,      #TITRE|sinon{#FICHIER|basename}})][
+		(#SET{titre_doc_long, #GET{titre_doc}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}})][
+		(#SET{ratio,          #VAL{/\W/}|preg_split{#ENV*{ratio,#GET{recadrer}|?{1}}}})][
+		(#SET{ratio,          #GET{ratio}|count|>{1}|?{#GET{ratio/0}|div{#GET{ratio/1}},#GET{ratio/0}}|floatval})][
+		(#SET{ratio,          #GET{ratio}|sinon{#LARGEUR|div{#HAUTEUR}}|floatval})][
+		(#SET{largeur,        #ENV{largeur}|sinon{#ENV{hauteur}|mult{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
+		(#SET{hauteur,        #ENV{hauteur,#GET{largeur}|div{#GET{ratio}}}|intval})][
+		(#SET{extension,      #EXTENSION|sinon{#FICHIER|pathinfo|table_valeur{extension}})][
+		(#SET{media,          #MEDIA|sinon{#VAL{media_defaut}|sql_getfetsel{'spip_types_documents',#VAL{extension=}|concat{#GET{extension}|sql_quote}}}})][
+		(#SET{src,            #GET{media}|=={image}|?{
+		                        #GET{recadrer}|?{
+		                          #FICHIER|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur},center},
+		                          #FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}},
+		                        #LOGO_DOCUMENT{icone}}
+		                      |extraire_attribut{src}})]
 		<li[ (#PLUGIN{bootstrap}|oui)class='thumbnail']>
-			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION)][ (#PLUGIN{foundation}|oui)th]" title="[(#GET{titre_document_long}|attribut_html)]" role="button" aria-label="Vignette">
-				[(#GET{src}|balise_img{#GET{titre_document_long},vignette}|inserer_attribut{aria-hidden,true})]
+			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION)][ (#PLUGIN{foundation}|oui)th]" title="[(#GET{titre_doc_long}|attribut_html)]" role="button" aria-label="Vignette">
+				[(#GET{src}|balise_img{#GET{titre_doc_long},vignette}|inserer_attribut{aria-hidden,true})]
 			</a>
-			[(#ENV{label}|oui)[<span class="label">(#GET{titre_document})</span>]]
+			[(#ENV{label}|oui)[<span class="label">(#GET{titre_doc})</span>]]
 		</li>
 		</BOUCLE_documents_album>
 	</ul>

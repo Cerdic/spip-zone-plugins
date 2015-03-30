@@ -11,7 +11,7 @@
 
 ]
 #SET{extensions,#ARRAY}
-<BOUCLE_data(documents_liens documents){objet=album}{fusion extension}{extension != #ENV{extension}}>#SET{extensions,#GET{extensions}|push{#EXTENSION}}</BOUCLE_data>
+<BOUCLE_data(documents_liens documents){objet=album}{fusion extension}{documents.extension != #ENV{extension}}{documents.extension != ''}>#SET{extensions,#GET{extensions}|push{#EXTENSION}}</BOUCLE_data>
 <B_extensions>
 
 <strong class='titre-liste'><:album:filtre_extensions:></strong>

@@ -13,7 +13,7 @@
 <strong class='titre-liste'><:album:filtre_medias:></strong>
 
 <ul class='liste-items medias'>
-	<BOUCLE_medias_albums(documents_liens documents){objet=album}{fusion media}>
+	<BOUCLE_medias_albums(documents_liens documents){objet=album}{fusion media}{media != ''}>
 	#SET{actif, #ENV{media}|=={#MEDIA}|?{1,''}}
 	#SET{param, #GET{actif}|?{'',#MEDIA}}
 	<li class='item[ (#GET{actif}|?{on})]'>
