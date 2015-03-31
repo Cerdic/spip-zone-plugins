@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'enregistrer_pdf' => 'Registrà au fourmat PDF',
+	'extrait_de' => 'Estrach dóu',
 
 	// P
 	'post_scriptum' => 'Post-Escrich : '
