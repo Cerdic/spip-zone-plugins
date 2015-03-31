@@ -85,29 +85,58 @@ function expression_recherche($recherche, $options) {
 		return $expression[$key];
 
 	$u = $GLOBALS['meta']['pcre_u'];
+	if ($u AND strpos($options['preg_flags'],$u)===false)
+		$options['preg_flags'] .= $u;
 	include_spip('inc/charsets');
-	$recherche = trim(translitteration($recherche));
+	$recherche = trim($recherche);
 
 	// retirer les + de +truc et les * de truc*
 	$recherche = preg_replace(",(^|\s)\+(\w),Uims","$1$2",$recherche);
 	$recherche = preg_replace(",(\w)\*($|\s),Uims","$1$2",$recherche);
 
+	$is_preg = false;
+	if (substr($recherche,0,1)=='/' AND substr($recherche,-1,1)=='/'){
+		// c'est une preg
+		$recherche_trans = translitteration($recherche);
+		$preg = $recherche_trans.$options['preg_flags'];
+		$is_preg = true;
+	}
+	else{
 	// s'il y a plusieurs mots il faut les chercher tous : oblige REGEXP
-	$recherche = preg_replace(',\s+,'.$u, '|', $recherche);
+		// sauf ceux de moins de 4 lettres (on supprime ainsi 'le', 'les', 'un',
+		// 'une', 'des' ...)
+		if (preg_match(",\s+,".$u, $recherche)){
+			$is_preg = true;
+			$recherche_inter = '|';
+			$recherche_mots = explode(' ', $recherche);
+			$min_long = defined('_RECHERCHE_MIN_CAR') ? _RECHERCHE_MIN_CAR : 4;
+			foreach ($recherche_mots as $mot) {
+				if (strlen($mot) >= $min_long) {
+					$recherche_inter .= $mot.' ';
+				}
+			}
+			// mais on cherche quand même l'expression complète, même si elle
+			// comporte des mots de moins de quatre lettres
+			$recherche = rtrim($recherche.preg_replace(',\s+,'.$u, '|', $recherche_inter), '|');
+			$recherche_trans = translitteration($recherche);
+		}
 
-	$preg = '/'.str_replace('/', '\\/', $recherche).'/' . $options['preg_flags'];
+		$preg = '/'.str_replace('/', '\\/', $recherche_trans).'/' . $options['preg_flags'];
+	}
+
 	// Si la chaine est inactive, on va utiliser LIKE pour aller plus vite
 	// ou si l'expression reguliere est invalide
-	if (preg_quote($recherche, '/') == $recherche
+	if (!$is_preg
 	OR (@preg_match($preg,'')===FALSE) ) {
 		$methode = 'LIKE';
 		$u = $GLOBALS['meta']['pcre_u'];
-		// eviter les parentheses qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
+		// eviter les parentheses et autres caractères qui interferent avec pcre par la suite (dans le preg_match_all) s'il y a des reponses
 		$recherche = str_replace(
-			array('(',')','?','[', ']'),
-			array('\(','\)','[?]', '\[', '\]'),
+			array('(',')','?','[', ']', '+', '*', '/'),
+			array('\(','\)','[?]', '\[', '\]', '\+', '\*', '\/'),
 			$recherche);
-		$recherche_mod = $recherche;
+		$recherche_trans = translitteration($recherche);
+		$recherche_mod = $recherche_trans;
 		
 		// echapper les % et _
 		$q = str_replace(array('%','_'), array('\%', '\_'), trim($recherche));
@@ -135,7 +164,32 @@ function expression_recherche($recherche, $options) {
 
 	} else {
 		$methode = 'REGEXP';
-		$q = sql_quote($recherche);
+		$q = sql_quote(trim($recherche, '/'));
+	}
+
+	// tous les caracteres transliterables de $q sont remplaces par un joker
+	// permet de matcher en SQL meme si on est sensible aux accents (SQLite)
+	$q_t = $q;
+	for($i = 0;$i<spip_strlen($q);$i++){
+		$char = spip_substr($q,$i,1);
+		if (!is_ascii($char)
+		  AND $char_t = translitteration($char)
+		  AND $char_t !== $char){
+			$q_t = str_replace($char,$is_preg?".":"_", $q_t);
+		}
+	}
+
+	$q = $q_t;
+
+	// fix : SQLite 3 est sensible aux accents, on jokerise les caracteres
+	// les plus frequents qui peuvent etre accentues
+	// (oui c'est tres dicustable...)
+	if (isset($GLOBALS['connexions'][$options['serveur']?$options['serveur']:0]['type'])
+	  AND strncmp($GLOBALS['connexions'][$options['serveur']?$options['serveur']:0]['type'],'sqlite',6)==0){
+		$q_t = strtr($q,"aeuioc",$is_preg?"......":"______");
+		// si il reste au moins un char significatif...
+		if (preg_match(",[^'%_.],",$q_t))
+			$q = $q_t;
 	}
 
 	return $expression[$key] = array($methode, $q, $preg);
@@ -211,6 +265,7 @@ function recherche_en_base($recherche='', $tables=NULL, $options=array(), $serve
 			array_merge($options, array('table' => $table, 'champs' => $champs))
 		);
 		##var_dump($results[$table]);
+
 
 		spip_log("recherche $table ($recherche) : ".count($results[$table])." resultats ".spip_timer('rech'),'recherche');
 
