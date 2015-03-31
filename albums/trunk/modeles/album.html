@@ -77,15 +77,19 @@
 		balise_titraille  = balise_titre
 		media             pour restreindre à un type de document
 
-][(#SET{titre_album,    #ENV{titre}|in_array{#LISTE{oui,true}}|?{#INFO_TITRE{album,#ENV{id_album}},#ENV{titre}|trim}})][
-(#SET{descriptif_album, #ENV{descriptif}|in_array{#LISTE{oui,true}}|?{#INFO_DESCRIPTIF{album,#ENV{id_album}}}})][
+][(#SET{has_titre,      #ENV{titre}|in_array{#LISTE{oui,true}}})][
+(#SET{titre,            #GET{has_titre}|?{#INFO_TITRE{album,#ENV{id_album}},#ENV{titre}|trim}})][
+(#SET{has_descriptif,   #ENV{descriptif}|in_array{#LISTE{oui,true}}})][
+(#SET{descriptif,       #GET{has_descriptif}|?{#INFO_DESCRIPTIF{album,#ENV{id_album}}}})][
 (#SET{pagination,       #ENV{pagination}|intval|sinon{#EVAL{_ALBUMS_PAGINATION_VIGNETTES}|intval}|sinon{#EVAL{_ALBUMS_PAGINATION}|intval}|sinon{20}})][
 (#SET{balise_titre,     #ENV*{balise_titre}|sinon{#ENV*{balise_titraille}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE_VIGNETTES}}|sinon{#EVAL{_ALBUMS_BALISE_TITRE}}|sinon{strong}|trim|replace{^<|>$}})][
 (#SET{position_legende, #ENV{position_legende}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE_VIGNETTES}}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE}}|trim})][
 (#SET{position_legende, #GET{position_legende}|in_array{#LISTE{top,bottom}}|?{#GET{position_legende},bottom}})][
-(#SET{caption,          #GET{titre_album}|?{#GET{titre_album}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre_album">'}}}
-                        |concat{#GET{#GET{descriptif_album}}|?{#GET{descriptif_album}|wrap{<div class="descriptif_album">}}}
-                        |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption ',#GET{position_legende},'">'}}}|trim)][
+(#SET{caption,          #GET{has_titre}|ou{#GET{has_descriptif}}|?{
+                        #GET{has_titre}|?{#GET{titre}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre-album">'}}}
+                        |concat{#GET{has_descriptif}|?{#GET{descriptif}|wrap{<div class="descriptif-album">}}}
+                        |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption-album ',#GET{position_legende},'">'}}}
+                        |trim})][
 (#SET{taille_preview,   #CONFIG{taille_preview}|intval|sinon{#EVAL{_ALBUMS_TAILLE_PREVIEW}|intval}|sinon{150}})][
 (#SET{recadrer,         #ENV{recadrer}|?{true,#EVAL{_ALBUMS_RECADRER}}})][
 (#SET{ids_documents,    #ARRAY})][
@@ -114,8 +118,8 @@
 
 ]<B_documents_album>
 [<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})]">]
-	#ANCRE_PAGINATION
-	[(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
+	#ANCRE_PAGINATION[
+	(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
 	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#CONFIG{foundation/variante}|intval|>={4}|?{class='small-block-grid-2 medium-block-grid-3 large-block-grid-4',class='block-grid 4-up mobile-two-up'})]>
 		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#VAL|uniqid}}>[
 		(#SET{titre_doc,      #TITRE|sinon{#FICHIER|basename}})][
@@ -125,7 +129,7 @@
 		(#SET{ratio,          #GET{ratio}|sinon{#LARGEUR|div{#HAUTEUR}}|floatval})][
 		(#SET{largeur,        #ENV{largeur}|sinon{#ENV{hauteur}|mult{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
 		(#SET{hauteur,        #ENV{hauteur,#GET{largeur}|div{#GET{ratio}}}|intval})][
-		(#SET{extension,      #EXTENSION|sinon{#FICHIER|pathinfo|table_valeur{extension}})][
+		(#SET{extension,      #EXTENSION|sinon{#FICHIER|pathinfo|table_valeur{extension}}})][
 		(#SET{media,          #MEDIA|sinon{#VAL{media_defaut}|sql_getfetsel{'spip_types_documents',#VAL{extension=}|concat{#GET{extension}|sql_quote}}}})][
 		(#SET{src,            #GET{media}|=={image}|?{
 		                        #GET{recadrer}|?{
@@ -136,12 +140,12 @@
 		<li[ (#PLUGIN{bootstrap}|oui)class='thumbnail']>
 			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION)][ (#PLUGIN{foundation}|oui)th]" title="[(#GET{titre_doc_long}|attribut_html)]" role="button" aria-label="Vignette">
 				[(#GET{src}|balise_img{#GET{titre_doc_long},vignette}|inserer_attribut{aria-hidden,true})]
-			</a>
-			[(#ENV{label}|oui)[<span class="label">(#GET{titre_doc})</span>]]
+			</a>[
+			(#ENV{label}|oui)[<span class="label">(#GET{titre_doc})</span>]]
 		</li>
 		</BOUCLE_documents_album>
-	</ul>
-	[<div class='pagination'>(#PAGINATION{#ENV{pagination_type,page}})</div>]
-	[(#GET{position_legende}|=={bottom}|oui)[(#GET{caption})]]
+	</ul>[
+	<div class='pagination'>(#PAGINATION{#ENV{pagination_type,page}})</div>][
+	(#GET{position_legende}|=={bottom}|oui)[(#GET{caption})]]
 [</(#HTML5|?{figure,div})>]<!-- .album.vignettes -->
 </B_documents_album>

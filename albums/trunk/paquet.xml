@@ -1,7 +1,7 @@
 <paquet
 	prefix="albums"
 	categorie="multimedia"
-	version="3.3.2"
+	version="3.3.3"
 	schema="1.0.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
