@@ -20,11 +20,12 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 	// options par defaut
 	$options = array_merge(
 		array(
-		'score' => true,
-		'champs' => false,
-		'toutvoir' => false,
-		'matches' => false,
-		'jointures' => false
+			'score' => true,
+			'champs' => false,
+			'toutvoir' => false,
+			'matches' => false,
+			'jointures' => false,
+			'table' => 'article'
 		),
 		$options
 	);
@@ -42,12 +43,12 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		"HAVING"=>array()
 	);
 
-	$table = sinon($options['table'], 'article');
+	$table = $options['table'];
 	if ($options['champs'])
 		$champs = $options['champs'];
 	else {
 		$l = liste_des_champs();
-		$champs = $l['article'];
+		$champs = $l[$table];
 	}
 	$serveur = $options['serveur'];
 
@@ -72,7 +73,6 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		$_id_table = reset($_id_table);
 	}
 	
-	$table_origine = table_objet_sql($table);
 	$requete['SELECT'][] = "t.".$_id_table;
 	$a = array();
 	// Recherche fulltext
@@ -87,7 +87,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		}
 	}
 	if ($a) $requete['WHERE'][] = join(" OR ", $a);
-	$requete['FROM'][] = $table_origine.' AS t';
+	$requete['FROM'][] = table_objet_sql($table).' AS t';
 
 	/**
 	 * FULLTEXT
