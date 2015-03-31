@@ -86,9 +86,9 @@
 (#SET{position_legende, #ENV{position_legende}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE_VIGNETTES}}|sinon{#EVAL{_ALBUMS_POSITION_LEGENDE}}|trim})][
 (#SET{position_legende, #GET{position_legende}|in_array{#LISTE{top,bottom}}|?{#GET{position_legende},bottom}})][
 (#SET{caption,          #GET{has_titre}|ou{#GET{has_descriptif}}|?{
-                        #GET{has_titre}|?{#GET{titre}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="titre-album">'}}}
-                        |concat{#GET{has_descriptif}|?{#GET{descriptif}|wrap{<div class="descriptif-album">}}}
-                        |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="caption-album ',#GET{position_legende},'">'}}}
+                        #GET{has_titre}|?{#GET{titre}|wrap{#VAL{'<'}|concat{#GET{balise_titre},' class="album-titre">'}}}
+                        |concat{#GET{has_descriptif}|?{#GET{descriptif}|wrap{<div class="album-descriptif">}}}
+                        |wrap{#VAL{'<'}|concat{#HTML5|?{figcaption,div},' class="album-caption ',#GET{position_legende},'">'}}}
                         |trim})][
 (#SET{taille_preview,   #CONFIG{taille_preview}|intval|sinon{#EVAL{_ALBUMS_TAILLE_PREVIEW}|intval}|sinon{150}})][
 (#SET{recadrer,         #ENV{recadrer}|?{true,#EVAL{_ALBUMS_RECADRER}}})][

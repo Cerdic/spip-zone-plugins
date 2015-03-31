@@ -2,7 +2,7 @@
    albums.css : style minimal pour les albums
    ------------------------------------------ */
 .album                          { margin-bottom: 1.5em; }
-.caption-album.bottom           { text-align: center; }
+.album-caption.bottom           { text-align: center; }
 /* vignettes */
 .album.vignettes li             { display: inline-block; margin: 0 10px 10px 0; text-align: center; }
 .album.vignettes ul li:last-child { margin-right: 0; }
