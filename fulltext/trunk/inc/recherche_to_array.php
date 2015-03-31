@@ -256,7 +256,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 		// si on define(_FULLTEXT_WHERE_$table,'date>"2000")
 		// cette contrainte est ajoutee ici:)
 		$requete['WHERE'] = $full_text_where;
-		$requete['WHERE'] = array();
+
 		if (defined('_FULLTEXT_WHERE_'.$table))
 			$requete['WHERE'][] = constant('_FULLTEXT_WHERE_'.$table);
 		else
