@@ -161,91 +161,94 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			$depart_associable = objet_associable($table);
 			$i = 0;
 			foreach ($jointures[$table] as $table_liee => $champs) {
-				$i++;
-				spip_log($pe,'recherche');
-				if ($mkeys = fulltext_keys($table_liee, 'obj'.$i, $serveur)) {
-					$_id_join = id_table_objet($table_liee);
-					$table_join = table_objet($table_liee);
+				if ($table_liee!==$table){
 
-					$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
-					// on peut definir une fonction de recherche jointe pour regler les cas particuliers
-					$cle_arrivee =  id_table_objet($table_liee);
-					$table_arrivee = table_objet($table_liee,$serveur);
-					$desc_arrivee = $trouver_table($table_arrivee,$serveur);
-					/**
-					 * cas simple : $cle_depart dans la table_liee
-					 * 
-					 * Ce cas pourrait exister par exemple si on activait une jointure de recherche sur les articles avec la table spip_evenements du plugin agenda.
-					 * Il suffirait d'ajouter la ligne suivante dans le pipeline "declarer_tables_objets_sql" dans le fichier base/agenda_evenements :
-					 * $tables['spip_articles']['rechercher_jointures']['evenement'] = array('titre' => 8, 'descriptif' => 5, 'lieu' => 5, 'adresse' => 3);
-					 *
-					 */ 
-					if (isset($desc_arrivee['field'][$cle_depart])){
-						$join = "
+					$i++;
+					spip_log($pe,'recherche');
+					if ($mkeys = fulltext_keys($table_liee, 'obj'.$i, $serveur)) {
+						$_id_join = id_table_objet($table_liee);
+						$table_join = table_objet($table_liee);
+
+						$subscore = "MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ? ' IN BOOLEAN MODE':'').")";
+						// on peut definir une fonction de recherche jointe pour regler les cas particuliers
+						$cle_arrivee =  id_table_objet($table_liee);
+						$table_arrivee = table_objet($table_liee,$serveur);
+						$desc_arrivee = $trouver_table($table_arrivee,$serveur);
+						/**
+						 * cas simple : $cle_depart dans la table_liee
+						 *
+						 * Ce cas pourrait exister par exemple si on activait une jointure de recherche sur les articles avec la table spip_evenements du plugin agenda.
+						 * Il suffirait d'ajouter la ligne suivante dans le pipeline "declarer_tables_objets_sql" dans le fichier base/agenda_evenements :
+						 * $tables['spip_articles']['rechercher_jointures']['evenement'] = array('titre' => 8, 'descriptif' => 5, 'lieu' => 5, 'adresse' => 3);
+						 *
+						 */
+						if (isset($desc_arrivee['field'][$cle_depart])){
+							$join = "
+								LEFT JOIN (
+								SELECT lien$i.$cle_depart,$subscore AS score
+								FROM ".$desc_depart['table_sql']." as lien$i
+								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$cle_depart=lien$i.$cle_depart
+								WHERE $subscore > 0
+								ORDER BY score DESC LIMIT 100
+								) AS o$i ON o$i.$cle_depart=t.$cle_depart";
+							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+							$from .= $join;
+						}
+						/**
+						 * cas simple : $cle_arrivee dans la table
+						 *
+						 * Ce cas pourrait exister par exemple si on activait une jointure de recherche sur les évènements (du plugin agenda) avec la table spip_articles.
+						 * Il suffirait d'ajouter la ligne suivante dans le pipeline "declarer_tables_objets_sql" dans le fichier base/agenda_evenements :
+						 * $tables['spip_evenements']['rechercher_jointures']['article'] = array('titre' => 8, 'texte' => 5);
+						 */
+						elseif (isset($desc_depart['field'][$cle_arrivee])){
+							$join = "
+								LEFT JOIN (
+								SELECT lien$i.$cle_depart,$subscore AS score
+								FROM ".$desc_depart['table_sql']." as lien$i
+								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+								WHERE $subscore > 0
+								ORDER BY score DESC LIMIT 100
+								) AS o$i ON o$i.$cle_depart=t.$cle_depart";
+							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+							$from .= $join;
+						}
+						// sinon cherchons une table de liaison
+						// cas recherche principale article, objet lie document : passer par spip_documents_liens
+						elseif ($l = objet_associable($table_liee)){
+							list($primary, $table_liens) = $l;
+							$join = "
 							LEFT JOIN (
-							SELECT lien$i.$cle_depart,$subscore AS score
-							FROM ".$desc_depart['table_sql']." as lien$i
-							JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$cle_depart=lien$i.$cle_depart
-							WHERE $subscore > 0
-							ORDER BY score DESC LIMIT 100
-							) AS o$i ON o$i.$cle_depart=t.$cle_depart";
-						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
-						$from .= $join;
-					}
-					/**
-					 * cas simple : $cle_arrivee dans la table
-					 * 
-					 * Ce cas pourrait exister par exemple si on activait une jointure de recherche sur les évènements (du plugin agenda) avec la table spip_articles.
-					 * Il suffirait d'ajouter la ligne suivante dans le pipeline "declarer_tables_objets_sql" dans le fichier base/agenda_evenements :
-					 * $tables['spip_evenements']['rechercher_jointures']['article'] = array('titre' => 8, 'texte' => 5);
-					 */
-					elseif (isset($desc_depart['field'][$cle_arrivee])){
-						$join = "
-							LEFT JOIN (
-							SELECT lien$i.$cle_depart,$subscore AS score
-							FROM ".$desc_depart['table_sql']." as lien$i
-							JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
-							WHERE $subscore > 0
-							ORDER BY score DESC LIMIT 100
-							) AS o$i ON o$i.$cle_depart=t.$cle_depart";
-						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
-						$from .= $join;
-					}
-					// sinon cherchons une table de liaison
-					// cas recherche principale article, objet lie document : passer par spip_documents_liens
-					elseif ($l = objet_associable($table_liee)){
-						list($primary, $table_liens) = $l;
-						$join = "
-						LEFT JOIN (
-							SELECT lien$i.id_objet,$subscore AS score
-							FROM $table_liens as lien$i
-							JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
-							AND lien$i.objet='$table'
-							WHERE $subscore > 0
-							ORDER BY score DESC LIMIT 100
-							) AS o$i ON o$i.id_objet=t.$_id_table";
-						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
-						$from .= $join;
-					}
-					// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
-					elseif ($l = $depart_associable){
-						list($primary, $table_liens) = $l;
-						$join = "
-							LEFT JOIN (
-							SELECT lien$i.id_objet,$subscore AS score
-							FROM $table_liens as lien$i
-							JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
-									AND lien$i.objet='$table'
-									WHERE $subscore > 0
-									ORDER BY score DESC LIMIT 100
-							) AS o$i ON o$i.id_objet=t.$_id_table";
-						$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
-						$from .= $join;
+								SELECT lien$i.id_objet,$subscore AS score
+								FROM $table_liens as lien$i
+								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+								AND lien$i.objet='$table'
+								WHERE $subscore > 0
+								ORDER BY score DESC LIMIT 100
+								) AS o$i ON o$i.id_objet=t.$_id_table";
+							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+							$from .= $join;
+						}
+						// cas recherche principale auteur, objet lie article: passer par spip_auteurs_liens
+						elseif ($l = $depart_associable){
+							list($primary, $table_liens) = $l;
+							$join = "
+								LEFT JOIN (
+								SELECT lien$i.id_objet,$subscore AS score
+								FROM $table_liens as lien$i
+								JOIN ".$desc_arrivee['table_sql']." as obj$i ON obj$i.$_id_join=lien$i.$_id_join
+										AND lien$i.objet='$table'
+										WHERE $subscore > 0
+										ORDER BY score DESC LIMIT 100
+								) AS o$i ON o$i.id_objet=t.$_id_table";
+							$score[] = "IF(SUM(o".$i.".score) IS NULL,0,SUM(o".$i.".score))";
+							$from .= $join;
+						}
 					}
 				}
 			}
 		}
-		
+
 		$requete['FROM'][] = $from;
 		$score = join(' + ', $score).' AS score';
 		spip_log($score, 'recherche');
