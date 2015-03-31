@@ -15,7 +15,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gis_info_titre' => 'Titre dóu pounch',
 
 	// L
+	'label_geo_cacher' => 'En mancança, escoundre la carta',
 	'label_geo_forcer_existant' => 'Fourçà la selecioun d’un pounch',
+	'label_recherche' => 'Afichà un camp de recercà souta la carta.',
 	'latitude' => 'Latituda',
 	'longitude' => 'Loungituda',
 
