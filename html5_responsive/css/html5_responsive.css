@@ -1,5 +1,7 @@
 html { 
     -ms-content-zooming: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
 }
 img { 
 	border: 0;

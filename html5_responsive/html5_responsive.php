@@ -9,6 +9,8 @@ function html5_responsive_insert_head($flux) {
 				.$flux;
 	$flux .= "
 <script type='text/javascript' src='".find_in_path("javascript/liens-standalone.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/fastclick.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/fastclick-activ.js")."'></script>
 <!--[if lt IE 9]>
 <script type='text/javascript' src='".find_in_path("javascript/html5shiv.js")."'></script>
 <script type='text/javascript' src='".find_in_path("javascript/css3-mediaqueries.js")."'></script>
