@@ -1,35 +1,32 @@
 #BOITE_OUVRIR{'','simple commandes navigation'}
 
 [(#REM) filtrer les modes de reglement ]
-[(#REM) au moins une commande a le mode complété]
-#SET{is_mode_paiement,false}<BOUCLE_is_mode_paiement(COMMANDES){mode!=""}{0,1}>#SET{is_mode_paiement,true}</BOUCLE_is_mode_paiement>
-<BOUCLE_condition_mode_paiement(CONDITION){si #GET{is_mode_paiement}|=={true}|oui}>		
-	<div class="liste mode_paiements">
-		<h4><:commandes:label_filtre_paiement:></h4>
-		<ul class='liste-items'>
-	
-			#SET{actif, #ENV{mode}|=={''}|?{'oui',''}}
-			[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{mode,''}|lien_ou_expose{
-				<:commandes:label_filtre_tous_mode_paiements:>,
-				#GET{actif},
-				'ajax', '', '',
-				[(#VAL{onclick="ajaxReload('commandes',\{args:\{mode:''\}\})"})]
-			})</li>]
-	
-			[(#REM) mode_paiement ]
-			<BOUCLE_mode_paiement(COMMANDES){tout}{fusion mode}>
-			#SET{actif, #ENV{mode}|=={#MODE}|?{'oui',''}}
-			[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{mode,#MODE}|lien_ou_expose{
-				[(#LISTER_VALEURS{mode})],
-				#GET{actif},
-				'ajax', '', '',
-				[(#VAL{onclick="ajaxReload('commandes',\{args:\{mode:'#MODE'\}\})"})]
-			})</li>]	
-			</BOUCLE_mode_paiement>
-			
-		</ul>
-	</div>
-</BOUCLE_condition_mode_paiement>
+<B_mode_paiement>
+<div class="liste mode_paiements">
+	<h4><:commandes:label_filtre_paiement:></h4>
+	<ul class='liste-items'>
+
+		#SET{actif, #ENV{mode}|=={''}|?{'oui',''}}
+		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{mode,''}|lien_ou_expose{
+			<:commandes:label_filtre_tous_mode_paiements:>,
+			#GET{actif},
+			'ajax', '', '',
+			[(#VAL{onclick="ajaxReload('commandes',\{args:\{mode:''\}\})"})]
+		})</li>]
+
+		<BOUCLE_mode_paiement(COMMANDES){tout}{fusion mode}{mode!=""}>
+		#SET{actif, #ENV{mode}|=={#MODE}|?{'oui',''}}
+		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{mode,#MODE}|lien_ou_expose{
+			[(#MODE|appliquer_filtre{bank_titre_type_paiement})][(#PLUGIN{bank}|oui) <small>\(#MODE\)</small>],
+			#GET{actif},
+			'ajax', '', '',
+			[(#VAL{onclick="ajaxReload('commandes',\{args:\{mode:'#MODE'\}\})"})]
+		})</li>]
+		</BOUCLE_mode_paiement>
+
+	</ul>
+</div>
+</B_mode_paiement>
 
 [(#REM) filtrer les statuts ]
 <div class="liste statuts">
@@ -55,7 +52,7 @@
 			[(#VAL{onclick="ajaxReload('commandes',\{args:\{statut:'#STATUT'\}\})"})]
 		})</li>]
 		</BOUCLE_statuts>
-		
+
 	</ul>
 </div>
 
