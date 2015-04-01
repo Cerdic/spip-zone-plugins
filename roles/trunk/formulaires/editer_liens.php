@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2012                                                *
+ *  Copyright (c) 2001-2014                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -88,7 +88,8 @@ function formulaires_editer_liens_charger_dist($a,$b,$c,$editable=true){
 		return false;
 	
 	// L'éditabilité :) est définie par un test permanent (par exemple "associermots") ET le 4ème argument
-	$editable = ($editable and autoriser('associer'.$table_source, $objet, $id_objet));
+	include_spip('inc/autoriser');
+	$editable = ($editable and autoriser('associer'.$table_source, $objet, $id_objet) and autoriser('modifier',$objet,$id_objet));
 	
 	if (!$editable AND !count(objet_trouver_liens(array($objet_lien=>'*'),array(($objet_lien==$objet_source?$objet:$objet_source)=>'*'))))
 		return false;
@@ -167,12 +168,16 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 	if (_request('tout_voir'))
 		set_request('recherche','');
 
-
+	include_spip('inc/autoriser');
 	if (autoriser('modifier',$objet,$id_objet)) {
 		// annuler les suppressions du coup d'avant !
 		if (_request('annuler_oups')
 			AND $oups = _request('_oups')
 			AND $oups = unserialize($oups)){
+			if ($oups_objets = charger_fonction("editer_liens_oups_{$table_source}_{$objet}_{$objet_lien}","action",true)){
+				$oups_objets($oups);
+			}
+			else {
 			$objet_source = objet_type($table_source);
 			include_spip('action/editer_liens');
 			foreach($oups as $oup) {
@@ -180,6 +185,7 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 					objet_associer(array($objet_source=>$oup[$objet_source]), array($objet=>$oup[$objet]),$oup);
 				else
 					objet_associer(array($objet=>$oup[$objet]), array($objet_source=>$oup[$objet_source]),$oup);
+			}
 			}
 			# oups ne persiste que pour la derniere action, si suppression
 			set_request('_oups');
@@ -203,8 +209,13 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 		}
 
 		if ($supprimer){
+			if ($supprimer_objets = charger_fonction("editer_liens_supprimer_{$table_source}_{$objet}_{$objet_lien}","action",true)){
+				$oups = $supprimer_objets($supprimer);
+			}
+			else {
 			include_spip('action/editer_liens');
 			$oups = array();
+
 			foreach($supprimer as $k=>$v) {
 				if ($lien = lien_verifier_action($k,$v)){
 					$lien = explode("-", $lien);
@@ -221,10 +232,15 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 					}
 				}
 			}
+			}
 			set_request('_oups',$oups?serialize($oups):null);
 		}
 		
 		if ($ajouter){
+			if ($ajouter_objets = charger_fonction("editer_liens_ajouter_{$table_source}_{$objet}_{$objet_lien}","action",true)){
+				$ajout_ok = $ajouter_objets($ajouter);
+			}
+			else {
 			$ajout_ok = false;
 			include_spip('action/editer_liens');
 			foreach($ajouter as $k=>$v){
@@ -240,6 +256,7 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 					set_request('id_lien_ajoute',$ids);
 				}
 			}
+			}
 			# oups ne persiste que pour la derniere action, si suppression
 			# une suppression suivie d'un ajout dans le meme hit est un remplacement
 			# non annulable !
@@ -251,6 +268,7 @@ function formulaires_editer_liens_traiter_dist($a,$b,$c,$editable=true){
 	
 	return $res;
 }
+
 
 /**
  * Retrouver l'action de liaision demandée
