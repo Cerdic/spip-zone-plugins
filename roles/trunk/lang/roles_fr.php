@@ -6,6 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'choisir_role' => 'Choisir…',
+	'saisir_role' => 'Indiquer un rôle…',
+	'saisir_valeur' => 'Valeur',
 
 	// R
 	'roles_titre' => 'Rôles',

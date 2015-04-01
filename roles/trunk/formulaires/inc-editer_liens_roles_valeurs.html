@@ -1,0 +1,19 @@
+#SET{exclus,#ENV{id}|roles_presents_sur_id{#ENV{objet_source},#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}
+<input type="text"
+       class="text"
+       name="qualifier_lien\[#ENV{cle}\]\[#ENV{_roles/colonne}\]"
+       placeholder="<:roles:saisir_role|attribut_html:>"
+       value=""
+       list="choix-roles-#ENV{cle}"
+			 style="width: 49%" />
+<datalist id="choix-roles-#ENV{cle}">
+	<BOUCLE_roles(DATA){source table,#ENV{objet_source}|roles_connus_en_base{#ENV{objet},#ENV{_objet_lien}}}{valeur !IN #GET{exclus}}>
+		<option value="#VALEUR" />
+	</BOUCLE_roles>
+</datalist>
+<input type="text"
+       class="text"
+       name="qualifier_lien\[#ENV{cle}\]\[valeur\]"
+       placeholder="<:roles:saisir_valeur|attribut_html:>"
+       value=""
+       style="width: 49%" />

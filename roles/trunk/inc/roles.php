@@ -318,3 +318,43 @@ function roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien) 
 	);
 }
 
+
+/**
+ * Lister des rôles connus en base pour une liaion, pour un objet source
+ *
+ * On retourne cette liste dans le datalist de saisie libre role.
+ *
+ * @param string $objet_source Objet dont on veut récupérer la liste des identifiants
+ * @param string $objet        Objet sur lequel est liée la source
+ * @param string $objet_lien   Objet dont on utilise la table de liaison (c'est forcément soit $objet_source, soit $objet)
+ * @return array|bool
+ *     - Tableau de roles : tableau de description des roles,
+ *     - false si pas de role déclarés
+ */
+function roles_connus_en_base($objet_source, $objet, $objet_lien){
+	static $done = array();
+
+	// stocker le résultat
+	$hash = "$objet_source-$objet-$objet_lien";
+	if (isset($done[$hash])) {
+		return $done[$hash];
+	}
+
+	if (!$lien = objet_associable($objet_lien)){
+		return $done[$hash] = false;
+	}
+
+	// pas de roles sur ces objets, on sort
+	$roles = roles_presents($objet_lien, ($objet_lien==$objet) ? $objet_source : $objet);
+	if (!$roles) {
+		return $done[$hash] = false;
+	}
+
+	list($primary,$l) = $lien;
+	$colone_role = $roles['colonne'];
+
+	$all = sql_allfetsel("DISTINCT $colone_role",$l,"objet=".sql_quote(($objet_source==$objet_lien)?$objet:$objet_source));
+	$done[$hash] = array_map("reset",$all);
+
+	return $done[$hash];
+}
