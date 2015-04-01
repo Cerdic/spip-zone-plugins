@@ -52,3 +52,23 @@
 .quickflip-credits-texte {
 	margin-right: 10px;
 }
+
+/* css spécifiques au modèle quickflip-logoart */
+
+.quickflip-logoart:hover{
+    opacity: 0.8;
+}
+.quickflip-lienart{
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+    text-align: center;
+}
+.quickflip-lienart a{
+    color: white !important;
+    font-size: 18px;
+    padding-left: 15px;
+}

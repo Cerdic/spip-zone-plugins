@@ -1,0 +1,58 @@
+#SET{tailleimage,#ENV{largeur,400}}
+
+
+    <BOUCLE_largeur(ARTICLES){id_article=#ENV{article}}>
+	[(#SET{width,[(#LOGO_ARTICLE|image_reduire{#GET{tailleimage}}|extraire_attribut{width} )]} )]
+	[(#SET{height,[(#LOGO_ARTICLE|image_reduire{#GET{tailleimage}}|extraire_attribut{height} )]} )]
+    </BOUCLE_largeur>
+
+<div class="quickflip-wrapper quickflip-logoart" style="[width:(#GET{width})px;][height:(#GET{height})px;]">
+
+
+<div class="quickflip-verso">
+
+
+    <BOUCLE_verso(ARTICLES){id_article=#ENV{article}}>
+    <div class="quickflip-texte" style="[width:(#GET{width}|moins{4})px;][height:(#GET{height})px;]">
+        [<div class="quickflip-titre">(#TITRE)</div>]
+        [<div class="quickflip-descriptif">(#DESCRIPTIF)</div>]
+    </div>
+
+      <div class="quickflip-lienart">
+          <a href="#URL_ARTICLE">
+              #TITRE
+          </a>
+      </div>
+    </BOUCLE_verso>
+
+    <div class="quickflip-lien">
+        <a href="#" class="quickFlipCta">
+            <img src="#CHEMIN{images/coin.png}" alt="" />
+        </a>
+    </div>
+
+
+</div>
+
+<div class="quickflip-recto">
+
+    <div class="quickflip-image">
+        <BOUCLE_recto(ARTICLES){id_article=#ENV{article}}>
+            [(#LOGO_ARTICLE||image_reduire{#GET{width},0})]
+
+            <div class="quickflip-lienart">
+                <a href="#URL_ARTICLE">
+                    #TITRE
+                </a>
+            </div>
+        </BOUCLE_recto>
+    </div>
+
+    <div class="quickflip-lien">
+        <a href="#" class="quickFlipCta">
+            <img src="#CHEMIN{images/coin.png}" alt="" />
+        </a>
+    </div>
+</div>
+
+</div>
