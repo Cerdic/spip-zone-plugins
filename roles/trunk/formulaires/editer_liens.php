@@ -223,7 +223,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $editable = true){
 						$lien = explode("-", $lien);
 						list($objet_source, $ids, $objet_lie, $idl, $role) = $lien;
 						// appliquer une condition sur le rôle si défini ('*' pour tous les roles)
-						$cond = $role ? array('role' => $role) : array();
+						$cond = (!is_null($role) ? array('role' => $role) : array());
 						if ($objet_lien==$objet_source){
 							$oups = array_merge($oups, objet_trouver_liens(array($objet_source => $ids), array($objet_lie => $idl), $cond));
 							objet_dissocier(array($objet_source => $ids), array($objet_lie => $idl), $cond);

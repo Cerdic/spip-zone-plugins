@@ -168,10 +168,10 @@ function roles_creer_condition_role($objet_source, $objet, $cond, $tous_si_absen
 	list($role_defaut, $colonne_role) = roles_trouver_dans_qualif($objet_source, $objet);
 
 	// chercher d'eventuels rôles transmis
-	$role = isset($cond['role']) ? $cond['role'] : ($tous_si_absent ? '' : $role_defaut);
+	$role = (isset($cond['role']) ? $cond['role'] : ($tous_si_absent ? '*' : $role_defaut));
 	unset($cond['role']); // cette condition est particuliere...
 
-	if ($colonne_role and $role) {
+	if ($colonne_role) {
 		// on ajoute la condition du role aux autres conditions.
 		if ($role != '*') {
 			$cond[] = "$colonne_role=" .sql_quote($role);
@@ -277,7 +277,7 @@ function roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien) 
 	static $done = array();
 
 	// stocker le résultat
-	$hash = md5($objet_source . $objet . $id_objet . $objet_lien);
+	$hash = "$objet_source-$objet-$id_objet-$objet_lien";
 	if (isset($done[$hash])) {
 		return $done[$hash];
 	}
@@ -317,3 +317,4 @@ function roles_presents_liaisons($objet_source, $objet, $id_objet, $objet_lien) 
 		'ids' => $ids
 	);
 }
+
