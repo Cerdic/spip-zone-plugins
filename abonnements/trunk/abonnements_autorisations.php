@@ -46,10 +46,10 @@ function autoriser_abonnementsoffre_supprimer_dist($faire, $type, $id, $qui, $op
 function autoriser_associerabonnementsoffres_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
+
+
 // -----------------
 // Objet abonnements
-
-
 
 
 // creer
@@ -71,5 +71,3 @@ function autoriser_abonnement_modifier_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_abonnement_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
 }
-
-?>

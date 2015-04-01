@@ -9,6 +9,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * Si l'utilisateur n'a rien de cette offre, on crée un nouvel abonnement.
  * Si l'utilisateur a toujours ou avait précédemment un abonnement de cette offre, on le renouvelle.
  * 
+ * On s'assure d'avoir les droits pendant les modifs
+ * car ce n'est pas un humain avec des droits qui déclanche ça explicitement
+ * 
  * @param string|null $arg
  * 		L'argument doit contenir "id_auteur/id_abonnements_offre".
  * @return mixed
@@ -35,14 +38,20 @@ function action_creer_ou_renouveler_abonnement_dist($arg=null) {
 			'date_fin desc',
 			'0,1'
 		))) {
+			autoriser_exception('modifier', 'abonnement', $id_abonnement, true);
 			// On le renouvelle !
 			$renouveler = charger_fonction('renouveler_abonnement', 'action/');
-			return $renouveler($id_abonnement);
+			$retour = $renouveler($id_abonnement);
+			autoriser_exception('modifier', 'abonnement', $id_abonnement, false);
+			return $retour;
 		}
 		// Sinon on en crée un nouveau
 		else {
 			include_spip('action/editer_objet');
+			autoriser_exception('creer', 'abonnement', '', true);
 			if ($id_abonnement = objet_inserer('abonnement')) {
+				autoriser_exception('creer', 'abonnement', '', false);
+				autoriser_exception('modifier', 'abonnement', $id_abonnement, true);
 				$erreur = objet_modifier(
 					'abonnement', $id_abonnement,
 					array(
@@ -50,6 +59,7 @@ function action_creer_ou_renouveler_abonnement_dist($arg=null) {
 						'id_abonnements_offre' => $id_abonnements_offre,
 					)
 				);
+				autoriser_exception('modifier', 'abonnement', $id_abonnement, false);
 				return array($id_abonnement, $erreur);
 			}
 		}
