@@ -2,7 +2,7 @@
 <B_roles>
 <select class="selection_roles chosen" name="definir_roles\[#ENV{cle}\]\[\]" title="<:roles:selectionner_roles|attribut_html:>"
 	multiple="multiple" data-placeholder="<:roles:choisir_role|attribut_html:>">
-<BOUCLE_roles(DATA){source table,#ENV{roles/roles/choix}}{valeur !IN #GET{exclus}}>
+<BOUCLE_roles(DATA){source table,#ENV{_roles/roles/choix}}{valeur !IN #GET{exclus}}>
 	<option value="#VALEUR"[ (#VALEUR|in_any{#ENV{definir_roles/#ENV{cle}}})selected='selected']>
 		[(#VALEUR|role{#ENV{table_source}})]
 	</option>

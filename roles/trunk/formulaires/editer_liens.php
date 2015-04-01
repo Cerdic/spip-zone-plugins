@@ -117,11 +117,11 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $editable = true){
 		'objet_source' => $objet_source,
 		'table_source' => $table_source,
 		'recherche' => '',
-		'roles' => $roles, # description des roles
 		'visible' => 0,
 		'ajouter_lien' => '',
 		'supprimer_lien' => '',
 		'definir_roles' => '',
+		'_roles' => $roles, # description des roles
 		'_oups' => _request('_oups'),
 		'editable' => $editable,
 	);
