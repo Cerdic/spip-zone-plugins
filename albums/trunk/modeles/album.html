@@ -25,7 +25,7 @@
 	- Attention, `id` et `id_article` sont utilisés comme paramètres dans la v1
 	mais en SPIP 3, ils peuvent se retrouver automatiquement dans l'environnement.
 	- Les vieux documents (issus d'avant SPIP 1.9) peuvent avoir un champ `media` vide.
-    
+
 
 ][(#REM)
 
@@ -130,7 +130,8 @@
 		(#SET{largeur,        #ENV{largeur}|sinon{#ENV{hauteur}|mult{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
 		(#SET{hauteur,        #ENV{hauteur,#GET{largeur}|div{#GET{ratio}}}|intval})][
 		(#SET{extension,      #EXTENSION|sinon{#FICHIER|pathinfo|table_valeur{extension}}})][
-		(#SET{media,          #MEDIA|sinon{#VAL{media_defaut}|sql_getfetsel{'spip_types_documents',#VAL{extension=}|concat{#GET{extension}|sql_quote}}}})][
+		(#SET{media_defaut,   #VAL{media_defaut}|sql_getfetsel{'spip_types_documents',#VAL{extension=}|concat{#GET{extension}|sql_quote}}})][
+		(#SET{media,          #MEDIA|in_array{#LISTE{image,audio,video,file,document}}|?{#MEDIA,#GET{media_defaut}}})][
 		(#SET{src,            #GET{media}|=={image}|?{
 		                        #GET{recadrer}|?{
 		                          #FICHIER|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur},center},
