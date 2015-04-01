@@ -120,7 +120,7 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $editable = true){
 		'visible' => 0,
 		'ajouter_lien' => '',
 		'supprimer_lien' => '',
-		'definir_roles' => '',
+		'qualifier_lien' => '',
 		'_roles' => $roles, # description des roles
 		'_oups' => _request('_oups'),
 		'editable' => $editable,
@@ -135,7 +135,7 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $editable = true){
  * Les formulaires peuvent poster dans quatre variables
  * - ajouter_lien et supprimer_lien
  * - remplacer_lien
- * - definir_roles
+ * - qualifier_lien
  *
  * Les deux premières peuvent être de trois formes différentes :
  * ajouter_lien[]="objet1-id1-objet2-id2"
@@ -148,8 +148,10 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $editable = true){
  * remplacer_lien[objet1-id1-objet2-id2]="objet3-id3-objet2-id2"
  * ou objet1-id1 est celui qu'on enleve et objet3-id3 celui qu'on ajoute
  *
- * definir_roles doit être de la forme, et sert en complément de ajouter_lien
- * definir_roles[objet1-id1-objet2-id2] = array("role", "autre_role")
+ * qualifier_lien doit être de la forme, et sert en complément de ajouter_lien
+ * qualifier_lien[objet1-id1-objet2-id2][role] = array("role1", "autre_role")
+ * qualifier_lien[objet1-id1-objet2-id2][valeur] = array("truc", "chose")
+ * produira 2 liens chacun avec array("role"=>"role1","valeur"=>"truc") et array("role"=>"autre_role","valeur"=>"chose")
  *
  * @param string $a
  * @param string|int $b
@@ -246,11 +248,11 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $editable = true){
 					if ($lien = lien_verifier_action($k, $v)){
 						$ajout_ok = true;
 						list($objet1, $ids, $objet2, $idl) = explode("-", $lien);
-						$roles = lien_retrouver_roles_postes($lien);
+						$qualifs = lien_retrouver_qualif($objet_lien, $lien);
 						if ($objet_lien==$objet1){
-							lien_ajouter_liaison($objet1, $ids, $objet2, $idl, $roles);
+							lien_ajouter_liaisons($objet1, $ids, $objet2, $idl, $qualifs);
 						} else {
-							lien_ajouter_liaison($objet2, $idl, $objet1, $ids, $roles);
+							lien_ajouter_liaisons($objet2, $idl, $objet1, $ids, $qualifs);
 						}
 						set_request('id_lien_ajoute', $ids);
 					}
@@ -306,36 +308,76 @@ function lien_verifier_action($k, $v){
 
 
 /**
- * Retrouve le ou les roles postés avec une liaison demandée
+ * Retrouve le ou les qualificatifs postés avec une liaison demandée
  *
  * @internal
- * @param string $lien Action du lien
- * @return array          Liste des rôles. Tableau vide s'il n'y en a pas.
+ * @param string $objet_lien
+ *    objet qui porte le lien
+ * @param string $lien
+ *   Action du lien
+ * @return array
+ *   Liste des qualifs pour chaque lien. Tableau vide s'il n'y en a pas.
  **/
-function lien_retrouver_roles_postes($lien){
+function lien_retrouver_qualif($objet_lien, $lien){
 	// un role est défini dans la liaison
 	$defs = explode('-', $lien);
-	list(, , , , $role) = $defs;
-	if ($role) return array($role);
+	list($objet1, , $objet2, , $role) = $defs;
+	if ($objet_lien==$objet1){
+		$colonne_role = roles_colonne($objet1, $objet2);
+	}
+	else {
+		$colonne_role = roles_colonne($objet2, $objet1);
+	}
+
+	// cas ou le role est defini en 5e argument de l'action sur le lien (suppression, ajout rapide sans autre attribut)
+	if ($role) {
+		return array(
+			// un seul lien avec ce role
+			array($colonne_role=>$role)
+		);
+	}
 
 	// retrouver les rôles postés pour cette liaison, s'il y en a.
-	$roles = _request('definir_roles');
-	if (!$roles OR !is_array($roles)){
+	$qualifier_lien = _request('qualifier_lien');
+	if (!$qualifier_lien OR !is_array($qualifier_lien)){
 		return array();
 	}
 
 	// pas avec l'action complete (incluant le role)
-	if (!isset($roles[$lien]) OR !$roles = $roles[$lien]){
+	$qualif = array();
+	if ((!isset($qualifier_lien[$lien]) OR !$qualif = $qualifier_lien[$lien])
+	  AND count($defs)==5){
 		// on tente avec l'action sans le role
 		array_pop($defs);
 		$lien = implode('-', $defs);
-		if (!isset($roles[$lien]) OR !$roles = $roles[$lien]){
-			$roles = array();
+		if (!isset($qualifier_lien[$lien]) OR !$qualif = $qualifier_lien[$lien]){
+			$qualif = array();
 		}
 	}
 
-	// pas de rôle vide
-	return array_filter($roles);
+	// $qualif de la forme array(role=>array(...),valeur=>array(...),....)
+	// on le reforme en array(array(role=>..,valeur=>..,..),array(role=>..,valeur=>..,..),...)
+	$qualifs = array();
+	while (count($qualif)){
+		$q = array();
+		foreach($qualif as $att=>$values){
+			if (is_array($values)){
+				$q[$att] = array_shift($qualif[$att]);
+				if (!count($qualif[$att])){
+					unset($qualif[$att]);
+				}
+			}
+			else {
+				$q[$att] = $values;
+				unset($qualif[$att]);
+			}
+		}
+		// pas de rôle vide
+		if (!$colonne_role OR !isset($q[$colonne_role]) OR $q[$colonne_role])
+			$qualifs[] = $q;
+	}
+
+	return $qualifs;
 }
 
 /**
@@ -349,18 +391,18 @@ function lien_retrouver_roles_postes($lien){
  * @param array|string $ids Identifiants pour l'objet source
  * @param string $objet_lien Objet à lier
  * @param array|string $idl Identifiants pour l'objet lié
+ * @param array $qualifs
  * @return void
  **/
-function lien_ajouter_liaison($objet_source, $ids, $objet_lien, $idl, $roles){
+function lien_ajouter_liaisons($objet_source, $ids, $objet_lien, $idl, $qualifs){
 
 	// retrouver la colonne de roles s'il y en a a lier
-	if ($roles and $colonne_role = roles_colonne($objet_source, $objet_lien)){
-		foreach ($roles as $role){
-			objet_associer(array($objet_source => $ids), array($objet_lien => $idl), array($colonne_role => $role));
+	if (is_array($qualifs) and count($qualifs)){
+		foreach ($qualifs as $qualif){
+			objet_associer(array($objet_source => $ids), array($objet_lien => $idl), $qualif);
 		}
 	} else {
 		objet_associer(array($objet_source => $ids), array($objet_lien => $idl));
 	}
 }
 
-?>
