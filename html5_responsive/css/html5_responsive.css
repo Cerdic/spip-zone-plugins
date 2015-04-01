@@ -3,6 +3,9 @@ html {
     -ms-touch-action: manipulation;
     touch-action: manipulation;
 }
+label > * { 
+	pointer-events: none; /* pour fastclick sur IOS */
+}
 img { 
 	border: 0;
 	-ms-interpolation-mode: bicubic; 
