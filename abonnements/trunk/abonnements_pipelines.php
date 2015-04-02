@@ -66,10 +66,26 @@ function abonnements_post_edition($flux){
 			}
 			
 			// Calcul de la date de fin
-			$modifs['date_fin'] = $abonnement['date_fin'] = date('Y-m-d H:i:s', strtotime($abonnement['date_debut'].$ajout));
+			$modifs['date_fin'] = date('Y-m-d H:i:s', strtotime($abonnement['date_debut'].$ajout));
+			
+			$modifs = pipeline(
+				'abonnement_initialisation_dates',
+				array(
+					'args' => array('abonnement' => $abonnement, 'offre' => $offre),
+					'data' => $modifs
+				)
+			);
+			
+			// Si les dates ont été changées, on change le tableau de l'abonnement pour le test de statut qui suivra
+			if (isset($modifs['date_debut'])) {
+				$abonnement['date_debut'] = $modifs['date_debut'];
+			}
+			if (isset($modifs['date_fin'])) {
+				$abonnement['date_fin'] = $modifs['date_fin'];
+			}
 		}
 		
-		// S'il le statut est "prepa" c'est une création et on doit changer ça
+		// Si le statut est "prepa" c'est une création et on doit changer ça
 		// car pour l'instant SPIP ne permet pas de déclarer le statut par défaut !
 		if ($abonnement['statut'] == 'prepa') {
 			$modifs['statut'] = $abonnement['statut'] = 'actif';
