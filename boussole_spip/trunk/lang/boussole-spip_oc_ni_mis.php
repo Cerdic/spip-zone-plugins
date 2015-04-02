@@ -31,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif_site_spip_user' => 'SPIP@REZO.net es la lista d’entradjuda tra lu utilisaire de SPIP. Li arquivi d’aquesta lista soun counsultable soubre http://archives.rezo.net/archives/spip.mbox/ o, souta la fourma de blog soubre http://blog.gmane.org/gmane.comp.web.spip.user.',
 	'descriptif_site_spip_video' => 'Lou sit MEDIAS.SPIP es un pounch d’intrada per la difusioun dei video  realisadi per o autour de SPIP. Cada utilisaire de SPIP pòu apourtà la siéu countribucioun en proupausant de suport video nouvèu per dei tutorial, dei counferença, dei fourmacioun... Lou soulet coustregnimen es de coumpartì dei video lìberi de drech per fin que cadun pouòsque li counsultà e li utilisà liberamen.',
 	'descriptif_site_spip_zine' => 'Descricioun dóu sit SPIPZine',
+	'descriptif_site_spip_zone' => 'Espaci de desfouloupamen rejut da una charta, ZONE.SPIP.org douna achès au versioning de touti li countribucioun coumplementari de SPIP (plugin, esquelètrou, tèma, moudel, óutis,...).',
 
 	// N
 	'nom_boussole_spip' => 'Boussola SPIP',
@@ -82,11 +83,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slogan_site_spip_irc' => 'Venès charà soubre lou chat de SPIP',
 	'slogan_site_spip_mag' => 'La gaseta de SPIP',
 	'slogan_site_spip_net' => 'La doucumentacioun ouficiala e telecargamen de SPIP',
+	'slogan_site_spip_party' => 'L’agènda dei apéro e autri rescouòntre SPIP',
 	'slogan_site_spip_plugin' => 'L’anuari dei plugin SPIP',
 	'slogan_site_spip_programmer' => 'La doucumentacioun dei desfouloupaire SPIP',
 	'slogan_site_spip_sedna' => 'Lou flus RSS de la galassìa SPIP',
+	'slogan_site_spip_test' => 'Prouvà l’instalacioun e la metuda en obra d’un sit SPIP',
+	'slogan_site_spip_trad' => 'L’espaci dei tradutour de SPIP e de li siéu countribucioun',
+	'slogan_site_spip_twit' => 'Lou microblog de la coumunità SPIP',
 	'slogan_site_spip_user' => 'La lista d’entrajuda dei utilisaire de SPIP',
 	'slogan_site_spip_video' => 'La mediatèca de SPIP',
+	'slogan_site_spip_zine' => 'Lou webzine soubre e autour de SPIP',
 	'slogan_site_spip_zone' => 'L’espaci de desfouloupamen dei countribucioun a SPIP'
 );
 
