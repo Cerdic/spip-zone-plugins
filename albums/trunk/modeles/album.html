@@ -121,7 +121,7 @@
 	#ANCRE_PAGINATION[
 	(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
 	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#CONFIG{foundation/variante}|intval|>={4}|?{class='small-block-grid-2 medium-block-grid-3 large-block-grid-4',class='block-grid 4-up mobile-two-up'})]>
-		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#VAL|uniqid}}>[
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#ENV{id_album,x}}}>[
 		(#SET{titre_doc,      #TITRE|sinon{#FICHIER|basename}})][
 		(#SET{titre_doc_long, #GET{titre_doc}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}})][
 		(#SET{ratio,          #VAL{/\W/}|preg_split{#ENV*{ratio,#GET{recadrer}|?{1}}}})][
