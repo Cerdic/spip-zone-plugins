@@ -17,11 +17,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return Bolean/array   array si $options['tableau']=oui
  */
 function rubrique_reservation($id='',$objet,$rubrique_reservation='',$options=array()){
+	include_spip('inc/rubriques');		
 	//On récupère la config si pas passé comme variable
 	if(!$rubrique_reservation){
 		include_spip('inc/config');
-		include_spip('formulaires/selecteur/generique_fonctions');
-		include_spip('inc/rubriques');		
+		include_spip('formulaires/selecteur/generique_fonctions');	
 		$config=lire_config('reservation_evenement/',array());
 		$rubrique_reservation=isset($config['rubrique_reservation'])?picker_selected($config['rubrique_reservation'],'rubrique'):'';
 	}
