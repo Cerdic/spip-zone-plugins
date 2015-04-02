@@ -64,7 +64,7 @@ function accesrestreint_rubrique_restreinte($id_rubrique, $id_auteur=null){
  * @param int $id_auteur
  * @return bool
  */
-function accesrestreint_acces_zone($id_zone,$id_auteur=null){
+function accesrestreint_acces_zone($id_zone, $id_auteur=null){
 	include_spip('inc/session');
 	static $liste_zones = array();
 	$id_visiteur = session_get('id_auteur');
@@ -78,11 +78,14 @@ function accesrestreint_acces_zone($id_zone,$id_auteur=null){
 			$GLOBALS['accesrestreint_zones_autorisees']
 			and ($id_auteur == $id_visiteur)
 		) {
-			$liste_zones[$id_auteur] = explode(',',$GLOBALS['accesrestreint_zones_autorisees']);
+			$liste_zones[$id_auteur] = explode(',', $GLOBALS['accesrestreint_zones_autorisees']);
 		}
 		elseif (!is_null($id_auteur)) {
 			include_spip('inc/accesrestreint');
-			$liste_zones[$id_auteur] = explode(',',accesrestreint_liste_zones_autorisees('',$id_auteur));
+			$liste_zones[$id_auteur] = explode(',', accesrestreint_liste_zones_autorisees('', $id_auteur));
+		}
+		else {
+			$liste_zones[$id_auteur] = array();
 		}
 	}
 	
