@@ -228,6 +228,12 @@ function accesrestreint_afficher_document(Accesrestreint_document $Document) {
 
 	// document décrit dans la table spip_documents ?
 	if ($doc = $Document->get_spip_document()) {
+		// On passe les infos précises du document à afficher dans un pipeline
+		$doc = pipeline('accesrestreint_afficher_document', array(
+			'args' => array('document' => $Document),
+			'data' => $doc,
+		));
+		
 		// pour les images ne pas passer en attachment
 		// sinon, lorsqu'on pointe directement sur leur adresse,
 		// le navigateur les downloade au lieu de les afficher

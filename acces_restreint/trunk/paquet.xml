@@ -1,7 +1,7 @@
 <paquet
 	prefix="accesrestreint"
 	categorie="auteur"
-	version="3.12.7"
+	version="3.12.8"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/zone-32.png"
@@ -37,6 +37,8 @@
 	<pipeline nom="accesrestreint_repertoires_toujours_autorises" action="" />
 	<!-- Avant d'analyser si un fichier demandé doit être envoyé au navigateur -->
 	<pipeline nom="accesrestreint_pre_vue_document" action="" />
+	<!-- Après avoir analysé le doc, et juste avant son affichage -->
+	<pipeline nom="accesrestreint_afficher_document" action="" />
 
 	<menu nom="zones" titre="accesrestreint:icone_menu_config" parent="menu_publication" icone="images/zone-16.png" />
 
