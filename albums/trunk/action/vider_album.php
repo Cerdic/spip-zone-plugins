@@ -26,7 +26,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - les images en mode Image : `I/image`
  * - les images en mode document : `D/image`
  * - les documents non image en mode document : 'D/document'
- * 
+ *
  * Cf. fonction `dissocier_document` dans `action/dissocier_document.php`.
  *
  * @example
@@ -53,9 +53,8 @@ function action_vider_album_dist($arg=null){
 		$arg = $securiser_action();
 	}
 
-	list($id_album, $supprimer_orphelins, $supprimer_album) = preg_split('/\W/', $arg);
+	list($id_album, $supprimer_orphelins) = preg_split('/\W/', $arg);
 	$supprimer_orphelins = ($supprimer_orphelins=='orphelins') ? true : false;
-	$supprimer_album = ($supprimer_album=='supprimer') ? true : false;
 
 	if ($id_album = intval($id_album)) {
 		include_spip('inc/albums');

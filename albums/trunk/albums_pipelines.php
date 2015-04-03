@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Ajout de contenu aux fiches des objets.
- * 
+ *
  * - Albums liés aux objets activés dans la configuration du plugin
  * - Documents liés aux albums en cas d'absence du portfolio (cf. note)
  *
@@ -196,7 +196,7 @@ function albums_affiche_gauche($flux){
  * Une fois l'objet inséré en base, il faut rétablir ces liaisons
  * avec le vrai identifiant de l'objet.
  * cf. plugin Médias.
- * 
+ *
  * @pipeline post_insertion
  *
  * @param  array $flux Données du pipeline
@@ -404,7 +404,7 @@ function albums_optimiser_base_disparus($flux){
  * - Formulaire de configuration des documents :
  *   insérer un message d'avertissement après le titre
  *   au cas où l'ajout des documents aux albums est désactivé.
- * 
+ *
  * @pipeline formulaire_fond
  *
  * @param  array $flux Données du pipeline
@@ -514,7 +514,7 @@ function albums_formulaire_traiter($flux){
  * Compléter ou modifier la liste des messages des compagnons.
  *
  * - Page «albums» : présentation succinte des albums & explication des filtres latéraux.
- * 
+ *
  * @pipeline compagnon_messages
  *
  * @param  array $flux Données du pipeline
@@ -565,7 +565,7 @@ function albums_compagnon_messages($flux) {
  * Renvoie une liste des boutons d'actions des albums.
  * Ils sont affichés dans les listes d'albums (footer), ou sur la fiche d'un album (boîte infos latérale).
  * Cette liste est un tableau associatif, donc les plugins peuvent ajouter les leurs mais également modifier certaines entrées (voir note).
- * 
+ *
  * @note
  * `$flux['data']` est un tableau associatif de la forme `identifiant de l'action => code HTML du bouton`.
  * Les identifiants sont à priori des verbes : «vider», «supprimer», «giboliner», etc.
@@ -638,7 +638,7 @@ function albums_album_boutons_actions($flux){
 			'autoriser' => autoriser('vider','album',$id_album),
 			'html'      => bouton_action(
 				_T('album:bouton_vider'),
-				generer_action_auteur('dissocier_album',"$id_album/$objet/$id_objet",self()),
+				generer_action_auteur('vider_album',"$id_album",self()),
 				'ajax vider',
 				'',
 				_T('album:bouton_vider_explication')
