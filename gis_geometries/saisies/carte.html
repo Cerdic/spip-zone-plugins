@@ -46,17 +46,7 @@ var form_map,
 var geocoder;]
 
 (function($){
-	var champ_lat = $('#champ_#ENV{champ_lat,lat}'),
-		champ_lon = $('#champ_#ENV{champ_lon,lon}'),
-		champ_zoom = $('#champ_#ENV{champ_zoom,zoom}'),
-		champ_adresse = $('#champ_#ENV{champ_adresse,adresse}'),
-		champ_code_postal = $('##ENV{champ_code_postal,code_postal}'),
-		champ_ville = $('#champ_#ENV{champ_ville,ville}'),
-		champ_departement = $('#champ_#ENV{champ_departement,departement}'),
-		champ_region = $('#champ_#ENV{champ_region,region}'),
-		champ_pays = $('#champ_#ENV{champ_pays,pays}'),
-		champ_code_pays = $('#champ_#ENV{champ_code_pays,code_pays}'),
-		marker;
+	var marker;
 	
 	var maj_inputs = function(map,data,action) {
 		[(#GET{geocoder}|oui)
