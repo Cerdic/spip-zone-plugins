@@ -53,7 +53,7 @@
 		                  valeurs : n'importe quelle chaîne (oui, true...)
 		                  défaut  : _ALBUMS_RECADRER > ''
 		ratio             Ratio utilisé pour recadrer
-		                  valeurs : 16/9, 2:21, 4-3 etc.
+		                  valeurs : 16/9, 2.21:1, 4-3 etc.
 		                  défaut  : 1
 		par               Tri des documents.
 		                  valeurs : id_document | titre | fichier | media | mode | extension | taille
@@ -124,11 +124,11 @@
 		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#ENV{id_album,x}}}>[
 		(#SET{titre_doc,      #TITRE|sinon{#FICHIER|basename}})][
 		(#SET{titre_doc_long, #GET{titre_doc}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}})][
-		(#SET{ratio,          #VAL{/\W/}|preg_split{#ENV*{ratio,#GET{recadrer}|?{1}}}})][
-		(#SET{ratio,          #GET{ratio}|count|>{1}|?{#GET{ratio/0}|div{#GET{ratio/1}},#GET{ratio/0}}|floatval})][
+		(#SET{ratio,          #GET{recadrer}|?{#VAL{/\[-:\/\]/}|preg_split{#ENV*{ratio,1}}}})][
+		(#SET{ratio,          #GET{ratio}|count|>{1}|?{#GET{ratio/1}|div{#GET{ratio/0}},#GET{ratio/0}}|floatval})][
 		(#SET{ratio,          #GET{ratio}|sinon{#LARGEUR|div{#HAUTEUR}}|floatval})][
-		(#SET{largeur,        #ENV{largeur}|sinon{#ENV{hauteur}|mult{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
-		(#SET{hauteur,        #ENV{hauteur,#GET{largeur}|div{#GET{ratio}}}|intval})][
+		(#SET{largeur,        #ENV{largeur}|sinon{#ENV{hauteur}|div{#GET{ratio}}}|sinon{#GET{taille_preview}}|intval})][
+		(#SET{hauteur,        #ENV{hauteur,#GET{largeur}|mult{#GET{ratio}}}|intval})][
 		(#SET{extension,      #EXTENSION|sinon{#FICHIER|pathinfo|table_valeur{extension}}})][
 		(#SET{media_defaut,   #VAL{media_defaut}|sql_getfetsel{'spip_types_documents',#VAL{extension=}|concat{#GET{extension}|sql_quote}}})][
 		(#SET{media,          #MEDIA|in_array{#LISTE{image,audio,video,file,document}}|?{#MEDIA,#GET{media_defaut}}})][
