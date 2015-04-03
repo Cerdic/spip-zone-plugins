@@ -43,7 +43,7 @@ var geocoder;]
 
 (function($){
 	var marker;
-
+	
 	var maj_inputs = function(map,data,action) {
 		[(#GET{geocoder}|oui)
 		if (action != 'geocoding') {
@@ -55,7 +55,7 @@ var geocoder;]
 		$('#champ_#ENV{champ_zoom,zoom}').val(zoom);
 		if(action == 'click'){
 			$('#champ_#ENV{champ_lat,lat}').val(data.lat);
-			$('#champ_#ENV{champ_lon,lon}').val(data.lng); 
+			$('#champ_#ENV{champ_lon,lon}').val(data.lng);
 			annuler_geocoder = 1;
 			form_map.panTo(data);
 			marker.setLatLng(data);
@@ -76,7 +76,7 @@ var geocoder;]
 		if (!marker._map)
 			form_map.addLayer(marker);
 	}
-
+	
 	[(#GET{geocoder}|oui)
 	function geocode(query) {
 		if(! query.error){
@@ -84,7 +84,7 @@ var geocoder;]
 			$('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode);
 			$('#champ_#ENV{champ_ville,ville}').val(query.locality);
 			$('#champ_#ENV{champ_departement,departement}').val(query.departement);
-			$('#champ_#ENV{champ_region,region}').val(query.region); 
+			$('#champ_#ENV{champ_region,region}').val(query.region);
 			$('#champ_#ENV{champ_pays,pays}').val(query.country);
 			$('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);
 			maj_inputs(form_map,query,'geocoding');
@@ -107,6 +107,7 @@ var geocoder;]
 				callback(e.target);
 			});
 		}
+		
 		form_map.attributionControl.setPrefix('');
 		
 		marker = new L.Marker(new L.LatLng(#ENV{lat,0}, #ENV{lon,0}), {draggable: true});
