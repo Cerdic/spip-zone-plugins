@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_obligatoire_xiti' => 'Variables fixes et obligatoires',
 	'legend_explication_obligatoire_xiti' => ' ',
 	'legend_recommande_xiti' => 'Variables optionnelles dépendant de chaque page auditée (utilisation fortement recommandée)',
+	'legend_recommande_xiti_campagne' => 'Variable optionnelle utilisé pour les campagnes emailings',
 	'legend_explication_recommande_xiti' => ' ',
 	'legend_activer_xiti' => 'Choix d\'activer Xiti',
 	'legend_explication_activer_xiti' => ' ',
@@ -35,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_xtn2_explication_xiti' => 'Identifiant numérique du niveau 2 dans lequel il faut ranger la page auditée. Les niveaux 2 sont à créer via votre interface.',
 	'item_xtdi_xiti' => 'variable xtdi',
 	'item_xtdi_explication_xiti' => 'degré d\'implication. La valeur par défaut est 0 ou vide. Cette variable accepte les valeurs 1, 2, 3, 4 et 5 pour les pages ayant une implication non nulle.',
+	'item_xtor_xiti' => 'variable xtor',
+	'item_xtor_explication_xiti' => 'La variable xtor doit contenir au minimum un préfixe indiquant le type de campagne, ainsi qu\'un identifiant de campagne.',
 
 	// T
 	'texte_xiti' => '<p>Activer Xiti, puis renseigner le formulaire de configuration du plugin</p> 

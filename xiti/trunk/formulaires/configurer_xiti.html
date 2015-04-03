@@ -109,6 +109,25 @@
 					</ul>
 			</fieldset>
 			</li>
+
+			<li class="fieldset" [(#ENV{activer_xiti}|=={oui}|non)style="display:none;"]>
+				<fieldset>
+					<legend><:xiti:legend_recommande_xiti_campagne:></legend>
+					<p class="explication"><:xiti:legend_explication_recommande_xiti:></p>
+					<ul>
+						#SET{name,xtor_xiti}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+							<label><:xiti:item_xtor_xiti:></label>[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]<p class="explication"><:xiti:item_xtor_explication_xiti:></p>
+							<div class="choix">
+								<input type="text" name="#GET{name}" id="#GET{name}_oui" value="#ENV{#GET{name}}" size="50" placeholder="0"
+								 />
+							</div>
+						</li>
+					</ul>
+			</fieldset>
+			</li>
 	</ul>
 
 	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
