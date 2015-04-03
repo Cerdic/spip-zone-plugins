@@ -62,7 +62,7 @@
 			if(cookie) {
 				<!--
 				xtnv = #CONFIG{xiti/xtnv_xiti};        //parent.document or top.document or document         
-				xtsd = "http://logd#CONFIG{xiti/xtsd_xiti}";        // Sous domaine Xiti ex: http://logp4
+				xtsd = "http://#CONFIG{xiti/xtsd_xiti}";        // Sous domaine Xiti ex: http://logp4
 				xtsite = "#CONFIG{xiti/xtsite_xiti}";  // ID client
 				xtn2 = "#CONFIG{xiti/xtn2_xiti}";        // level 2 site 
 				xtpage = "#GET{xtpage}";        //page name (with the use of :: to create chapters)
@@ -80,7 +80,7 @@
 
 	<noscript>
 		<div id='xiti-tag-noscript'>
-			<img width='1' height='1' src='http://logd#CONFIG{xiti/xtsd_xiti}.xiti.com/hit.xiti?s=#CONFIG{xiti/xtsite_xiti}&amp;s2=#CONFIG{xiti/xtn2_xiti}&amp;p=#GET{xtpage}&amp;di=&amp;' alt='XiTi' />
+			<img width='1' height='1' src='http://#CONFIG{xiti/xtsd_xiti}.xiti.com/hit.xiti?s=#CONFIG{xiti/xtsite_xiti}&amp;s2=#CONFIG{xiti/xtn2_xiti}&amp;p=#GET{xtpage}&amp;di=&amp;' alt='XiTi' />
 		</div>
 	</noscript>
 #FILTRE{trim}
