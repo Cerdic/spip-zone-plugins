@@ -172,14 +172,8 @@ var geocoder;]
 					"id":"#ENV{id_gis,oui}",
 					"properties": {
 						"title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
-						"description":[(#ENV{descriptif,''}|json_encode)][,(#LOGO_GIS|oui)
-						[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{32,32}|image_recadre{32,32}})]
-						#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
-						#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
-						["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-						"icon_size": \[#GET{icon_w},#GET{icon_h}\],
-						"icon_anchor": \[[(#GET{icon_w}|div{2})],[(#GET{icon_h})]\],
-						"popup_anchor": \[1,[-(#GET{icon_h}|div{1.2})]\]]
+						"description":[(#ENV{descriptif,''}|json_encode)][
+						(#LOGO_GIS|gis_icon_properties)]
 					}
 				}]
 		}
@@ -200,6 +194,17 @@ var geocoder;]
 					});
 				} else if (feature.geometry.type == 'Point') {
 					marker = layer;
+					if (feature.properties && feature.properties.icon){
+						layer.setIcon(new L.Icon({
+							iconUrl: feature.properties.icon,
+							iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+							iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
+							popupAnchor: new L.Point( feature.properties.popup_anchor\[0\], feature.properties.popup_anchor\[1\] )
+						}));
+					}
+					if (feature.properties && feature.properties.title){
+						layer.bindPopup(feature.properties.title);
+					}
 					// rendre le marker draggable
 					layer.options.draggable = true;
 					// surveiller les changements sur le point
