@@ -54,28 +54,31 @@
 [(#REM) On verifie si Xiti est activé et on affiche le marqueur]
 [(#CONFIG{xiti/activer_xiti}|oui)
 	<div id="xiti-tag">
-		<script type="text/javascript" src="[(#CHEMIN{javascript/xtclicks.js}|url_absolue)]"></script>
-		<script type="text/javascript" src="[(#CHEMIN{javascript/xtcore.js}|url_absolue)]"></script>
 		<script type="text/javascript">
 			// Si le plugin cookiebar est installé
 			var cookie = window.jQuery.cookieBar ? jQuery.cookieBar('cookies') : false;
 			if(cookie) {
 				<!--
-				xtnv = #CONFIG{xiti/xtnv_xiti};        //parent.document or top.document or document         
-				xtsd = "http://#CONFIG{xiti/xtsd_xiti}";        // Sous domaine Xiti ex: http://logp4
-				xtsite = "#CONFIG{xiti/xtsite_xiti}";  // ID client
-				xtn2 = "#CONFIG{xiti/xtn2_xiti}";        // level 2 site 
+				xtnv = #CONFIG{xiti/xtnv_xiti};        //parent.document or top.document or document        
+				xtsd = "http://#CONFIG{xiti/xtsd_xiti}";
+				xtsite = "#CONFIG{xiti/xtsite_xiti}";
+				xtn2 = "#CONFIG{xiti/xtn2_xiti}";        // level 2 site ID
 				xtpage = "#GET{xtpage}";        //page name (with the use of :: to create chapters)
 				xtdi = "#CONFIG{xiti/xtdi_xiti}";        //implication degree
-				xt_multc = "";
-				xt_an = "";
-				xt_ac = "";
+				xt_multc = "";                   //all the xi indicators (like "&x1=...&x2=....&x3=...")
+				xt_an = "";        //user ID
+				xt_ac = "";        //category ID
 				xtdmc = "[(#URL_SITE_SPIP|xiti_xtdmc)]";
 				xtprm = "&amp;xtcode=UTF-8"; 
 				xtergo = "" //0 to deactivate ClickZone
+				//do not modify below
+				if (window.xtparam!=null){window.xtparam+="&ac="+xt_ac+"&an="+xt_an+xt_multc;}
+				else{window.xtparam="&ac="+xt_ac+"&an="+xt_an+xt_multc;};
 				//-->
 			}
 		</script>
+		<script type="text/javascript" src="[(#CHEMIN{javascript/xtclicks.js}|url_absolue)]"></script>
+		<script type="text/javascript" src="[(#CHEMIN{javascript/xtcore.js}|url_absolue)]"></script>
 	</div>]
 
 	<noscript>
