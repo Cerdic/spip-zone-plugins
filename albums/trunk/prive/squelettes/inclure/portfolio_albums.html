@@ -29,7 +29,7 @@
 
 <div class="liste-albums lies">
 
-	<BOUCLE_albums_lies(ALBUMS){objet}{id_objet}{par #ENV{par,date}, titre}{statut == #ENV{statut,.*}}{pagination #ENV{nb,10}}>
+	<BOUCLE_albums_lies(ALBUMS){objet}{id_objet}{!par date}{statut == #ENV{statut,.*}}{pagination #ENV{nb,10}}>
 	[(#INCLURE{fond=prive/squelettes/inclure/album, id_album, objet, id_objet})]
 	</BOUCLE_albums_lies>
 

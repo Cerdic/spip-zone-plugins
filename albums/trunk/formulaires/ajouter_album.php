@@ -173,7 +173,7 @@ function formulaires_ajouter_album_traiter_dist($objet='', $id_objet=0, $retour=
 			isset($res['message_ok']) AND $res['message_ok']
 			AND $id_album = $res['id_album']
 		){
-			$res['message_ok'] = _T('album:message_id_album_ajoute',array('id_album'=>$id_album));
+			$res['message_ok'] = _T('album:message_id_album_ajoute',array('id_album'=>$id_album,'url'=>ancre_url(self(),'album'.$id_album)));
 			$res['message_ok'] .= js_ajouter_albums($id_album);
 			// r.a.z des champs
 			foreach(array('titre','descriptif','refdoc_joindre') as $champ) set_request($champ,'');
@@ -185,7 +185,14 @@ function formulaires_ajouter_album_traiter_dist($objet='', $id_objet=0, $retour=
 		$ids = explode(',',$ids);
 		include_spip('action/editer_liens');
 		if ($nb=objet_associer(array('album'=>$ids), array($objet=>$id_objet))) {
-			$res['message_ok'] = singulier_ou_pluriel($nb,'album:message_1_album_ajoute','album:message_nb_albums_ajoutes');
+			// singulier_ou_pluriel ne semble pas aimer les chaines avec parametres
+			if ($nb == 1) {
+				$id_album=intval($ids[0]);
+				$message = _T('album:message_id_album_ajoute',array('id_album'=>$id_album,'url'=>ancre_url(self(),'album'.$id_album)));
+			} elseif ($nb > 1) {
+				$message = _T('album:message_nb_albums_ajoutes');
+			}
+			$res['message_ok'] = $message;
 			$res['message_ok'] .= js_ajouter_albums($ids);
 			// r.a.z du champ
 			set_request('ids_albums_associer','');
@@ -201,15 +208,14 @@ function formulaires_ajouter_album_traiter_dist($objet='', $id_objet=0, $retour=
 }
 
 /**
- * Fonction privée mutualisée retournant le js pour recharger les blocs adéquats
- * 
+ * Fonction privée retournant le js pour recharger les blocs adéquats
+ *
  * @param string|array $ids identifiants des albums ajoutés
  * @return string message js
  */
 function js_ajouter_albums($ids=array()){
 	if (!intval($ids)) return;
 	if (!is_array($ids)) $ids = array($ids);
-
 	foreach($ids as $id) $divs[] = "#album${id}";
 	$divs = implode(',',$divs);
 	$callback = "jQuery('${divs}').animateAppend();";

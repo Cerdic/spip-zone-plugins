@@ -26,7 +26,7 @@
 	num titre,1,
 	points,-1
 }}
-#SET{exclus,#ENV{exclus}|is_array|?{#ENV{exclus}|implode{','},#ENV{exclus}}}
+#SET{exclus,#ENV{exclus}|is_array|?{#ENV{exclus},#ENV*{exclus}|explode{','}}}
 <B_liste_albums>
 #ANCRE_PAGINATION
 <div class="liste-albums choisir liste-objets">

@@ -112,7 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_album_non_editable' => 'Cet album n’est pas éditable : il est utilisé par un ou pusieurs objets que vous ne pouvez pas modifier.',
 	'message_avertissement_cfg_documents' => 'Attention ! L’ajout de documents aux albums est désactivé. L’activation est nécessaire au bon fonctionnement des albums.',
 	'message_balise_inseree_succes' => 'La balise a été insérée dans le texte',
-	'message_id_album_ajoute' => 'L’album N° @id_album@ a été ajouté.',
+	'message_id_album_ajoute' => 'L’album <a href="@url@">N° @id_album@</a> a été ajouté.',
 	'message_nb_albums_ajoutes' => '@nb@ albums ont été ajoutés.',
 	'message_supprimer' => 'Supprimer définitivement ? cette action est irréversible.',
 	'message_vider' => 'Retirer tous les documents ?',
