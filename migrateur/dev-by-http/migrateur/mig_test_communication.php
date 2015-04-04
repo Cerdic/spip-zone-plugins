@@ -4,11 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Test d'envoi en stream
+ * Test de la communication entre le serveur source et ce site.
  *
- * S'active pour le moment avec ?exec=migrateur&stream=1
+ * S'il y a un retour OK, c'est que le cryptage / décryptage
+ * s'est bien déroulé des 2 côtés.
 **/
-function migrateur_02_test_communication() {
+function migrateur_mig_test_communication() {
 
 	$client = migrateur_client();
 	$reponse = $client->action('Test');

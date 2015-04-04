@@ -4,11 +4,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Test d'envoi en stream
+ * Test des l'affichage des logs locaux en stream js
  *
- * S'active pour le moment avec ?exec=migrateur&stream=1
+ * S'active avec ?exec=migrateur&stream=1
 **/
-function migrateur_01_test_stream() {
+function migrateur_mig_test_stream_logs() {
 	migrateur_log("Entrée dans la fonction de test stream.");
 	migrateur_log("Delay 1 seconde.");
 	sleep(1);

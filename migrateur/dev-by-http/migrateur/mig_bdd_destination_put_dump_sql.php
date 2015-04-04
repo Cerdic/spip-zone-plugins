@@ -25,7 +25,7 @@ define('_DIRECT_CRON_FORCE', true);
 /**
  * Transfert des données SQL sur la base de données destination
 **/
-function migrateur_mig_bdd_destination_put_dump() {
+function migrateur_mig_bdd_destination_put_dump_sql() {
 
 	// récupérer les plugins de migration
 	$migrateurs = migrateur_obtenir_plugins_actifs('migrateur');

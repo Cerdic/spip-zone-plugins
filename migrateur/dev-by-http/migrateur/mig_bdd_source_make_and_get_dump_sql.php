@@ -5,9 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Récupère la base de données source
- *
 **/
-function migrateur_03_get_database() {
+function migrateur_mig_bdd_source_make_and_get_dump_sql() {
 
 	$client = migrateur_client();
 	$reponse = $client->action('DumpDatabase');
