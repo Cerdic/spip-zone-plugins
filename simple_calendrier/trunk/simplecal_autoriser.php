@@ -129,8 +129,9 @@ function autoriser_evenement_editermots_dist($faire,$quoi,$id,$qui,$opts){
 // cf. inc/documents.php : afficher_documents_colonne
 // ET UTILISE UNIQUEMENT POUR LES REDACTEURS...
 function autoriser_evenement_joindredocument($faire, $type, $id, $qui, $opt) {
-	$whos = simplecal_profils_autorises_a_creer();
-	return in_array($qui['statut'], $whos);
+    $conf_ok = in_array(table_objet_sql($type),explode(',',lire_config('documents_objets', '')));
+    $statut_ok = in_array($qui['statut'], simplecal_profils_autorises_a_creer());
+	return $conf_ok and $statut_ok;
 }
 
 // Pour la suppression du LOGO : 
