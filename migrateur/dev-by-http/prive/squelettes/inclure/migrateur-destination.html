@@ -1,0 +1,172 @@
+
+[(#SET{liste,[(#VAL**|migrateur_etapes)]})]
+#SET{ok,#CONFIG{migrateur/type}|=={destination}}
+
+
+<B_migration_liste>
+<div id='etapes_migration'>
+	<h3>Étapes de migration</h3>
+<div class='liste'>
+<ul class='liste-items'>
+<BOUCLE_migration_liste(POUR){tableau #GET{liste}}{si #GET{ok}}>
+	<li class='item[ (#VAL|migrateur_derniere_etape|=={#COMPTEUR_BOUCLE}|oui)on]' id="migrateur_etape_#COMPTEUR_BOUCLE">
+	<a
+		data-id="migrateur_etape_#COMPTEUR_BOUCLE"
+		href='[(#URL_ACTION_AUTEUR{migrateur,#CLE}|parametre_url{redirect,[(#SELF|parametre_url{nb,#COMPTEUR_BOUCLE})]})]'>
+		<strong>#COMPTEUR_BOUCLE</strong> <span>#VALEUR</span>
+	</a>.
+	</li>
+</BOUCLE_migration_liste>
+</ul>
+</div>
+</div>
+</B_migration_liste>
+
+[(#VAL{Logs de l'action en cours}|boite_ouvrir{simple,'',logs_now})]
+<pre></pre>
+#BOITE_FERMER
+
+[(#EVAL{_DIR_TMP . '/migrateur/etape.log'}|file_exists|oui)
+[[(#VAL{Logs de la dernière étape exécutée}|boite_ouvrir{simple,'',logs_last})]
+<pre>
+(#EVAL{_DIR_TMP . '/migrateur/etape.log'}|file_get_contents)
+</pre>
+#BOITE_FERMER
+]]
+
+<style type='text/css'>
+.migration_next.right {float:right; margin-top:-35px;}
+#etapes_migration { margin-top:3em; }
+#etapes_migration a strong { font-size:1.2em; margin-right:1em; margin-left:.5em; }
+#etapes_migration .liste-items .item.actif { background-color: #fce201; }
+#etape_effectuee strong { font-size:1.2em; margin-right:1em; }
+
+div.notice > p:last-child { margin-bottom:0; }
+
+#logs_last, #logs_now {margin-top:3em; overflow:visible;}
+#logs_last pre code, #logs_now pre code { color:#A37247; }
+#logs_last pre em, #logs_now pre em { color:#1490CB; font-style:normal; }
+#logs_now { display:none; }
+#logs_now.actif .inner .hd { background-color: #fce201; }
+
+.logo_navigation.loading img {
+	animation-iteration-count:infinite;
+	animation-timing-function:linear;
+	animation-name:fade;
+	animation-duration:2s;
+}
+
+@keyframes fade { 
+    0%   { opacity:1; filter: grayscale(0); }
+    50%  { opacity:0.5; filter: grayscale(20%);}
+    100% { opacity:1; filter: grayscale(0); }
+}
+</style>
+
+
+<script type='text/javascript'>
+;(function($){
+$(document).ready(function() {
+	$('#contenu a, #navigation #next_migration a').click(function() {
+		$('#navigation .logo_navigation').attr('aria-busy','true').addClass('loading');
+
+		$this = $('#' + $(this).data('id'));
+		$this.siblings().removeClass('on');
+		$this.addClass('actif');
+
+		[(#REM)
+			// Si stream demandé (stream=1 dans l'url)
+			// on fait un appel ajax en passant stream=1 à l'action en plus.
+			// Celle ci retournera alors progressivement le texte.
+			// http://stackoverflow.com/questions/7740646/jquery-ajax-read-the-stream-incrementally
+		]
+		[(#ENV{stream}|oui)
+			$("#logs_last").hide();
+			$("#logs_now").addClass('actif').show();
+			$log = $("#logs_now pre");
+			$log.empty();
+
+			url = $this.find('a').attr('href');
+			url = parametre_url(url, 'stream', 1);
+
+			titre = $this.find('span').text().trim();
+
+			$.migrateur_close = function($me) {
+				$('#navigation .logo_navigation').attr('aria-busy','false').removeClass('loading');
+				$("#logs_now").removeClass('actif');
+				$me.removeClass('actif');
+				$me.addClass('on');
+
+				if ($me.next().length) {
+					$n = $me.next().find('a');
+					show = 'suivant';
+				} else {
+					$n = $('#migrateur_etape_1').find('a');
+					show = 'recommencer';
+				}
+
+				$("#next_migration a")
+					.attr('href',    $n.attr('href'))
+					.attr('data-id', $n.data('id'))
+					.data('id',      $n.data('id'))
+					.find('strong').text( $n.find("strong").text().trim() ).end()
+					.find('span')  .text( $n.find("span").text().trim() );
+
+				if (show == 'suivant') {
+					$("#next_migration a .recommencer").addClass('none');
+					$("#next_migration a .suivant").removeClass('none');
+					$("#next_migration").parents('.box').find('.hd h3').text("<:migrateur:etape_suivante:>");
+				} else {
+					$("#next_migration a .suivant").addClass('none');
+					$("#next_migration a .recommencer").removeClass('none');
+					$("#next_migration").parents('.box').find('.hd h3').text("<:migrateur:recommencer_etapes:>");
+				}
+
+				nb = $me.index() + 1;
+				url = window.location.href;
+				url = parametre_url(url, 'nb', nb);
+				$.spip.pushHistoryState(url, '');
+			}
+
+			var last_response_len = false;
+			// Attention, la surchage spip de .ajax n'entre pas dans le onprogress...
+			// on utilise le jquery.ajax original.
+			$.spip.intercepted.ajax(url, {
+				xhrFields: {
+					onprogress: function(e) {
+						var this_response, response = e.currentTarget.response;
+						if (last_response_len === false) {
+							this_response = response;
+							last_response_len = response.length;
+						} else {
+							this_response = response.substring(last_response_len);
+							last_response_len = response.length;
+						}
+
+						$log.append(this_response);
+					}
+				}
+			})
+			.done(function(data) {
+				$log.append("\nJS: Action terminée...\n");
+				//console.log('Complete response = ' + data);
+				$.migrateur_close($this);
+			})
+			.fail(function(data) {
+				$log.append("\nJS: Action en erreur...\n");
+				$log.append(data);
+				$('#navigation .logo_navigation').attr('aria-busy','false').removeClass('loading');
+				$("#logs_now").removeClass('actif');
+				if ($this.parent().is('li')) {
+					$this.parent().removeClass('actif');
+				}
+			});
+
+			$log.append("JS: Action demandée : <em>" + titre + "</em>\n\n");
+
+			return false;
+		]
+	});
+});
+})(jQuery);
+</script>

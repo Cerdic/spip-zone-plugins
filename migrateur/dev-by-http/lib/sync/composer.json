@@ -1,0 +1,20 @@
+{
+    "name": "outlandish/sync",
+	"description":"Sync directory contents over HTTP using PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tamlyn Rhodes",
+            "email": "tamlyn@tamlyn.org"
+        }
+    ],
+    "require": {
+		"php":">=5.3.0",
+	    "ext-curl":"*"
+    },
+	"autoload":{
+		"psr-0":{
+			"Outlandish":"src/"
+		}
+	}
+}

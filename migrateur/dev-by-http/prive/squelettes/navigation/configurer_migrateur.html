@@ -1,0 +1,21 @@
+
+<div class="logo_navigation">
+<a href="#URL_ECRIRE{migrateur}">
+	<img src="[(#CHEMIN_IMAGE{migrateur-128.png})]" alt="Logo migrateur" />
+</a>
+<h1><:migrateur:migrateur_titre_court:></h1>
+</div>
+
+#BOITE_OUVRIR{'',simple}
+<div id='goto_migration'>
+<a href='[(#URL_ECRIRE{migrateur})]'>
+	[(#CHEMIN_IMAGE{migration_suivante.png}|image_reduire{16})]
+	<:migrateur:migrateur_page:>
+</a>
+</div>
+#BOITE_FERMER
+
+<style type='text/css'>
+.logo_navigation {text-align:center;}
+#goto_migration img { vertical-align:middle; }
+</style>
