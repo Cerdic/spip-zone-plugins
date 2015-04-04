@@ -102,7 +102,7 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'message_album_non_editable' => 'This album cannot be edited : it’s in use by one or several objects that you can’t edit.',
 	'message_avertissement_cfg_documents' => 'Warning! Adding documents to albums is not enabled. This is a necessary option for the albums to work properly.',
 	'message_balise_inseree_succes' => 'The tag was inserted in the text',
-	'message_id_album_ajoute' => 'The album @id_album@ has been added.',
+	'message_id_album_ajoute' => 'The album @id_album@ has been added.', # MODIF
 	'message_nb_albums_ajoutes' => '@nb@ albums have been added.',
 	'message_supprimer' => 'Delete permanently ?', # MODIF
 	'message_vider' => 'Remove all the documents ?',

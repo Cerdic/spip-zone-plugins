@@ -101,7 +101,7 @@ Una vez que se hicieron los viajes, un formulario aparece en la parte inferior d
 	'message_album_non_editable' => 'No se puede editar este álbum : es utilizada por los objetos que no se pueden cambiar.', # RELIRE
 	'message_avertissement_cfg_documents' => 'Cuidado! Adición de documentos a los álbumes está desactivado. La activación es necesaria para el buen funcionamiento de los álbumes.', # RELIRE
 	'message_balise_inseree_succes' => 'La etiqueta se ha insertado en el texto',
-	'message_id_album_ajoute' => 'El álbum número @id_album@ ha sido añadido.',
+	'message_id_album_ajoute' => 'El álbum número @id_album@ ha sido añadido.', # MODIF
 	'message_nb_albums_ajoutes' => 'Se han añadido @nb@ álbumes.',
 	'message_supprimer' => '¿ Suprimir permanentemente ?', # MODIF
 	'message_vider' => '¿ Retirar todos los documentos ?', # MODIF
