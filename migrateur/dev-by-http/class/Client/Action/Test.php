@@ -13,7 +13,7 @@ class Test extends ActionBase {
 			$texte = "Message envoyé le " . date("Y-m-d H:i:s");
 		}
 
-		return array('Test', $texte, 'json');
+		return $this->client->ask('Test', $texte, 'json');
 	}
 
 }

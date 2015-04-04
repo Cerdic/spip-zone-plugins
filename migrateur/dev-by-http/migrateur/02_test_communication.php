@@ -11,7 +11,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function migrateur_02_test_communication() {
 
 	$client = migrateur_client();
-	#$reponse = $client->ask('test', "Message envoyé le " . date("Y-m-d H:i:s"));
 	$reponse = $client->action('Test');
 
 	if ($reponse) {
