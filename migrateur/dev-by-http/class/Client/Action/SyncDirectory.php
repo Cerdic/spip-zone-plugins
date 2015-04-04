@@ -71,8 +71,8 @@ class SyncDirectory extends ActionBase {
 	private function delete($files) {
 		if (count($files)) {
 			$this->log("Suppression de " . count($files) . " fichier(s)");
-			foreach ($files as $file) {
-				unlink($this->path . $files);
+			foreach ($files as $filePath => $info) {
+				unlink($this->path . DIRECTORY_SEPARATOR . $filePath);
 			}
 		}
 	}
