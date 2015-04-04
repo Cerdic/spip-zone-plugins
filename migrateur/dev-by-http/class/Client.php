@@ -41,6 +41,7 @@ class Client {
 		$act->setLogger($this->logger);
 		$act->setParent($this);
 		$act->setDestination(migrateur_infos());
+
 		return $act->run($args);
 	}
 
@@ -76,6 +77,7 @@ class Client {
 		if (!is_array($reponse)) {
 			$this->log("Type de réponse erroné");
 			var_dump($reponse);
+			#print_r($reponse);
 			return false;
 		}
 
@@ -179,7 +181,13 @@ class Client {
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $json);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
-		list($headers, $body) = explode("\r\n\r\n", curl_exec($curl), 2);
+		$response = curl_exec($curl);
+
+		$header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+		$headers = substr($response, 0, $header_size);
+		$body = substr($response, $header_size);
+		unset($response);
+
 		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		if ($code != 200) {
 			throw new \RuntimeException('HTTP error: '.$code);
@@ -231,8 +239,10 @@ class Client {
 
 		$this->log("Demande du fichier <em>$file</em>");
 
-		if (!stream_filter_register('crypteur.decrypt', '\SPIP\Migrateur\Crypteur\DecryptFilter')) {
-			return "Filtre de decryptage introuvable";
+		if (!in_array('crypteur.decrypt', stream_get_filters())) {
+			if (!stream_filter_register('crypteur.decrypt', '\SPIP\Migrateur\Crypteur\DecryptFilter')) {
+				return "Filtre de decryptage introuvable";
+			}
 		}
 
 		spip_timer('fichier');

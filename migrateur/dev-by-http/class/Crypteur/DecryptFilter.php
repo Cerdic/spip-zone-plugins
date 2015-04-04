@@ -31,6 +31,8 @@ class DecryptFilter extends \php_user_filter
 			$this->buffer .= $bucket->data;
 			$this->bufferlen += $bucket->datalen;
 			$consumed += $bucket->datalen;
+			// hack pour closing…
+			$this->last_bucket = $bucket;
 
 			if ($this->bufferlen < self::LEN) {
 				return PSFS_FEED_ME;
@@ -43,9 +45,6 @@ class DecryptFilter extends \php_user_filter
 			$bucket->data = $this->params['crypteur']->decrypt_binary($message);
 
 			stream_bucket_append($out, $bucket);
-
-			// hack pour closing…
-			$this->last_bucket = $bucket;
 		}
 
 		if ($closing and $this->bufferlen) {

@@ -20,8 +20,10 @@ class GetFile extends ActionBase {
 			return "Fichier non lisible";
 		}
 
-		if (!stream_filter_register('crypteur.encrypt', '\SPIP\Migrateur\Crypteur\EncryptFilter')) {
-			return "Filtre de cryptage introuvable";
+		if (!in_array('crypteur.encrypt', stream_get_filters())) {
+			if (!stream_filter_register('crypteur.encrypt', '\SPIP\Migrateur\Crypteur\EncryptFilter')) {
+				return "Filtre de cryptage introuvable";
+			}
 		}
 
 		//output file with generic binary mime type

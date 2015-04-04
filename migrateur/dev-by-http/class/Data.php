@@ -80,7 +80,7 @@ Class Data {
 	 *     Nom de la commande
 	 * @return string Code pour lancer la commande
 	**/
-	function commande($command) {
+	public function commande($command) {
 		return $this->obtenir_commande_serveur($command);
 	}
 
@@ -100,7 +100,7 @@ Class Data {
 	 * @return string
 	 *     Chemin de la commande
 	**/
-	function obtenir_commande_serveur($command) {
+	public function obtenir_commande_serveur($command) {
 		static $commands = array();
 		if (array_key_exists($command, $commands)) {
 			return $commands[$command];
@@ -116,6 +116,41 @@ Class Data {
 		return $commands[$command] = '';
 	}
 
+
+
+
+	/**
+	 * Retourne la liste des fichiers d'un répertoire donné
+	 *
+	 * @link https://github.com/outlandishideas/sync/
+	 * 
+	 * @param $path string
+	 * @return array
+	 */
+	public function getFileList($path) {
+		if (!$path or !is_string($path) or (strpos($path, '..') !== false)) {
+			migrateur_log("Path erroné");
+			return array();
+		}
+
+		$path = rtrim($path, '/') . DIRECTORY_SEPARATOR;
+		$path = $this->dir . DIRECTORY_SEPARATOR . $path;
+
+		$iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path,
+				\FilesystemIterator::CURRENT_AS_FILEINFO |
+				\FilesystemIterator::SKIP_DOTS
+		));
+
+
+		$pathPrefixLength = strlen($path);
+		$files = array();
+		foreach ($iterator as $fileInfo) {
+			$fullPath = str_replace(DIRECTORY_SEPARATOR, '/', substr($fileInfo->getRealPath(), $pathPrefixLength));
+			$files[$fullPath] = array($fileInfo->getSize(), $fileInfo->getMTime());
+		}
+
+		return $files;
+	}
 
 
 	/**
