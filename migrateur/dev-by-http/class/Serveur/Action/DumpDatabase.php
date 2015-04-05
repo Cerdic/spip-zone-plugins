@@ -9,6 +9,9 @@ class DumpDatabase extends ActionBase {
 
 	/** Doit-on gziper le dump si la commande est disponible sur le serveur ? */
 	private $gzip_si_possible = true;
+	
+	/** Doit-on utiliser mysqldump si disponible sur le serveur ? */
+	private $mysqldump_si_possible = true;
 
 
 	public function run($data = null) {
@@ -16,6 +19,10 @@ class DumpDatabase extends ActionBase {
 
 		if (isset($data['gzip_si_possible'])) {
 			$this->gzigzip_si_possible = (bool)$data['gzip_si_possible']; 
+		}
+	
+		if (isset($data['mysqldump_si_possible'])) {
+			$this->mysqldump_si_possible = (bool)$data['mysqldump_si_possible']; 
 		}
 
 		spip_timer('dump database');
@@ -65,7 +72,11 @@ class DumpDatabase extends ActionBase {
 		@unlink("$sauvegarde.gz");
 
 		// mysqldump de préférences
-		$cmd = $this->source->commande('mysqldump');
+		$cmd = '';
+		if ($this->mysqldump_si_possible) {
+			$cmd = $this->source->commande('mysqldump');
+		}
+
 		if ($cmd) {
 		#if (false) {
 			return $this->makeMysqlDump($sauvegarde);
