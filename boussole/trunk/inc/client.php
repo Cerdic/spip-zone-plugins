@@ -84,9 +84,11 @@ function boussole_ajouter($boussole, $serveur='spip') {
 	// - par la configuration de l'affichage si la boussole existe deja
 	foreach ($infos['sites'] as $_cle => $_info) {
 		// -- On recherche l'id_syndic en construisant deux urls possibles : l'une avec / l'autre sans
+		// -- si le site n'existe pas on force l'Id_syndic à 0 car ce peut-être une raz, le site ayant été supprimé
 		$urls = array();
 		$urls[] = $_info['url_site'];
 		$urls[] = (substr($_info['url_site'], -1, 1) == '/') ? substr($_info['url_site'], 0, -1) : $_info['url_site'] . '/';
+		$infos['sites'][$_cle]['id_syndic'] = 0;
 		if ($id_syndic = sql_getfetsel('id_syndic', 'spip_syndic', sql_in('url_site', $urls)))
 			$infos['sites'][$_cle]['id_syndic'] = intval($id_syndic);
 		// -- On recherche une configuration d'affichage (si elle existe)
