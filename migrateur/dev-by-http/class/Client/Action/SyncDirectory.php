@@ -71,7 +71,7 @@ class SyncDirectory extends ActionBase {
 	**/
 	private function delete($files) {
 		if (count($files)) {
-			$this->log("Suppression de " . count($files) . " fichier(s)");
+			$this->log_run("Suppression de " . count($files) . " fichier(s)");
 			foreach ($files as $filePath => $info) {
 				unlink($this->path . DIRECTORY_SEPARATOR . $filePath);
 			}
@@ -91,7 +91,7 @@ class SyncDirectory extends ActionBase {
 	**/
 	private function download($files) {
 		if (count($files)) {
-			$this->log("Téléchargement de " . count($files) . " fichier(s)");
+			$this->log_run("Téléchargement de " . count($files) . " fichier(s)");
 
 			$nb = $size = 0;
 			$slice = array();
@@ -167,7 +167,7 @@ class SyncDirectory extends ActionBase {
 	 *    - false si erreur.
 	**/
 	private function getHash($files) {
-		$this->log("Demande de hash pour " . count($files) . " fichiers");
+		$this->log_run("Demande de hash pour " . count($files) . " fichiers");
 		$data = array(
 			'directory' => $this->directory,
 			'files' => $files
