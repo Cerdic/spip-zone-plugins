@@ -3,7 +3,7 @@
  * Ce fichier contient l'action `client_synchroniser_site` utilisée par un site client pour
  * synchroniser les données d'un site référencé avec celles du même site appartenant à une boussole donnée.
  *
- * @package SPIP\BOUSSOLE\Serveur\Action
+ * @package SPIP\BOUSSOLE\Client\Action
  */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -16,8 +16,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * l'alias de la boussole.
  * Les données synchronisées sont :
  *
- * - l'alias de la boussole
- * - l'id du site référencé
+ * - le nom du site
+ * - le descriptif du site
  *
  * @return void
  */

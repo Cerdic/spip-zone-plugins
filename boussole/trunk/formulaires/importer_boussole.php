@@ -31,10 +31,14 @@ function formulaires_importer_boussole_traiter_dist(){
 	$forcer_statut_publie = _request('importer_statut_publie') ? true : false;
 	$boussole = _request('boussole');
 
+	// Actualiser la boussole avant l'importation.
+	// En effet, si des modifications sauvages ont été faites sur la base de données il se peut
+	// que l'id_syndic soit encore présent dans spip_boussoles alors que le site a disparu de spip_syndic.
+    include_spip('inc/client');
+    boussole_actualiser_boussoles(array($boussole));
 	// Importer les sites de la boussole
 	$nb_sites = importer_sites_boussole($boussole, $id_parent, $langue_site, $forcer_statut_publie);
 	// Actualiser la boussole (en fait uniquement les id_syndic) maintenant que les sites référencés sont créés.
-	include_spip('inc/client');
 	boussole_actualiser_boussoles(array($boussole));
 
 	if (!$nb_sites)
