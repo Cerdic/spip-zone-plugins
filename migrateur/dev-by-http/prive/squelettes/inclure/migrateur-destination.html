@@ -44,6 +44,7 @@
 div.notice > p:last-child { margin-bottom:0; }
 
 #logs_last, #logs_now {margin-top:3em; overflow:visible;}
+#logs_last pre, #logs_now pre { height: 500px; overflow-y: scroll; }
 #logs_last pre code, #logs_now pre code { color:#A37247; }
 #logs_last pre em, #logs_now pre em { color:#1490CB; font-style:normal; }
 #logs_now { display:none; }
@@ -144,6 +145,9 @@ $(document).ready(function() {
 						}
 
 						$log.append(this_response);
+						if ($log.length) {
+							$log.scrollTop($log\[0\].scrollHeight - $log.height());
+						}
 					}
 				}
 			})
@@ -151,6 +155,9 @@ $(document).ready(function() {
 				$log.append("\nJS: Action terminée...\n");
 				//console.log('Complete response = ' + data);
 				$.migrateur_close($this);
+				if ($log.length) {
+					$log.scrollTop($log\[0\].scrollHeight - $log.height());
+				}
 			})
 			.fail(function(data) {
 				$log.append("\nJS: Action en erreur...\n");

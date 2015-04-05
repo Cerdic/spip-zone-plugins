@@ -18,6 +18,7 @@ form.supprimer { float:right; }
 form.supprimer button { color:#D91210; }
 #boite_logs.actif .inner .hd { background-color: #FFBB42; }
 
+#logs { height: 500px; overflow-y: scroll; }
 #logs code { color:#A37247; }
 #logs em { color:#1490CB; font-style:normal; }
 </style>
@@ -31,15 +32,22 @@ $(document).ready(function() {
 		$("#boite_logs").addClass('actif');
 
 		$.migrateur_loop = setInterval(function(){
-			url = $("#logs").data('get-log');
+			$logs = $("#logs");
+			url = $logs.data('get-log');
 
 			//$.spip.intercepted.ajax(url)
 			$.get(url)
 				.done(function(data) {
-					$('#logs').append(data);
+					$logs.append(data);
+					if ($logs.length) {
+						$logs.scrollTop($logs\[0\].scrollHeight - $logs.height());
+					}
 				})
 				.fail(function(data) {
-					$('#logs').append(data);
+					$logs.append(data);
+					if ($logs.length) {
+						$logs.scrollTop($logs\[0\].scrollHeight - $logs.height());
+					}
 				});
 		}, 1000);
 	});

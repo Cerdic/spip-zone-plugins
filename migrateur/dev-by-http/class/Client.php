@@ -237,11 +237,12 @@ class Client {
 			)
 		);
 
-		$this->log("Demande du fichier <em>$file</em>");
+		$this->log("Téléchargement de <em>$file</em>");
 
 		if (!in_array('crypteur.decrypt', stream_get_filters())) {
 			if (!stream_filter_register('crypteur.decrypt', '\SPIP\Migrateur\Crypteur\DecryptFilter')) {
-				return "Filtre de decryptage introuvable";
+				$this->log("Filtre de decryptage introuvable");
+				return false;
 			}
 		}
 
@@ -250,7 +251,8 @@ class Client {
 
 		$fp = @fopen($this->url_source, 'rb', false, $context);
 		if (!$fp) {
-			return "Serveur source indisponible.";
+			$this->log("Serveur source indisponible.");
+			return false;
 		}
 		stream_filter_append($fp, 'crypteur.decrypt', STREAM_FILTER_READ, array('crypteur' => $this->crypteur));
 		file_put_contents($chemin, $fp);
@@ -259,7 +261,7 @@ class Client {
 		include_spip('inc/filtres');
 		$taille = filesize($chemin);
 		$to = taille_en_octets($taille);
-		$this->log("Téléchargement de $to en $t");
+		$this->log("  | $to en $t");
 
 		return array(
 			'message' => array(
