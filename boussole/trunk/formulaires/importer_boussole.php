@@ -74,9 +74,6 @@ function importer_sites_boussole($boussole, $id_parent, $langue_site=true, $forc
 		if ($sites) {
 			include_spip('action/editer_site');
 			include_spip('inc/filtres');
-			include_spip('plugins/installer');
-			include_spip('action/editer_logo');
-			include_spip('inc/distant');
 			foreach($sites as $_site) {
 				// Nouveau site : il faut le créer préalablement dans la rubrique choisie
 				$id_syndic = !$_site['id_syndic']  ? site_inserer($id_parent) : $_site['id_syndic'];
@@ -95,15 +92,8 @@ function importer_sites_boussole($boussole, $id_parent, $langue_site=true, $forc
 					if (!$erreur) {
 						if ($_site['logo_objet']) {
 							// Mise à jour du logo du site normal ("on").
-							// Il faut tenir compte de la version de SPIP car l'API a changé à partir de SPIP 3.1
-							if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.*', '<=')) {
-								$iconifier = charger_fonction('iconifier_site', 'inc');
-								$iconifier($id_syndic, 'on', $_site['logo_objet']);
-							}
-							else {
-								$fichier = _DIR_RACINE . copie_locale($_site['logo_objet'], 'force');
-								logo_modifier('site', $id_syndic, 'on', $fichier);
-							}
+                            $iconifier = charger_fonction('iconifier_site', 'inc');
+						    $iconifier($id_syndic, 'on', $_site['logo_objet']);
 						}
 
 						$nb_sites ++;
