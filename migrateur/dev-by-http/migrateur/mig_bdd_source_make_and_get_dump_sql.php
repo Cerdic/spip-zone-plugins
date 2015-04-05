@@ -49,7 +49,7 @@ function migrateur_mig_bdd_source_make_and_get_dump_sql() {
 function migrateur_get_database_decompresser($chemin) {
 	migrateur_log("Décompression du dump");
 	$futur = substr($chemin, 0, -3);
-	unlink($futur); 
+	@unlink($futur); 
 
 	$destination = migrateur_infos();
 	$gunzip = $destination->obtenir_commande_serveur('gunzip');
