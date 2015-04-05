@@ -9,17 +9,27 @@ class SyncDirectory extends ActionBase {
 
 	private $directory = ''; // IMG
 	private $path = '';      // chemin/vers/IMG
+	private $test = false;
 
 
 	public function run($data = null) {
 
-		$this->directory = $data;
+		if (is_array($data)) {
+			$data += array(
+				'repertoire' => '',
+				'test' => false
+			);
+			$this->directory = $data['repertoire'];
+			$this->test = $data['test'];
+		} else {
+			$this->directory = $data;
+		}
 
 		if (!$this->directory) {
 			return "Aucun répertoire indiqué.";
 		}
 
-		$this->log_run("Sync Répertoire <em>$this->directory</em>");
+		$this->log_run("Sync Répertoire <em>$this->directory</em>" . ($this->test ? " [Test]" : ""));
 
 		// calcul du chemin complet 
 		$path = rtrim($this->directory, '/') . DIRECTORY_SEPARATOR;
@@ -57,8 +67,11 @@ class SyncDirectory extends ActionBase {
 		$this->log("- " . count($files['deleted']) . " à supprimer");
 		$this->log("Estimation des transferts : " . $reponse['message']['data']['downloadSize']);
 
-		$this->delete($files['deleted']);
-		$this->download($files['new'] + $files['updated']);
+		// en mode test, on ne fait pas de modifications.
+		if (!$this->test) {
+			$this->delete($files['deleted']);
+			$this->download($files['new'] + $files['updated']);
+		}
 
 		return $reponse;
 	}

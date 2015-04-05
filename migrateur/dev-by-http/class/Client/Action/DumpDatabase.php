@@ -9,7 +9,12 @@ class DumpDatabase extends ActionBase {
 	public function run($data = null) {
 		// si on ne peut pas gunzip, l'indiquer au serveur
 		$gunzip = $this->destination->obtenir_commande_serveur('gunzip');
-		$data = array(
+
+		if (!is_array($data)) {
+			$data = array();
+		}
+
+		$data += array(
 			'gzip_si_possible' => (bool)$gunzip,
 			'mysqldump_si_possible' => true,
 		);
