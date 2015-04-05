@@ -55,6 +55,10 @@ function action_migrateur_dist() {
 
 	if (function_exists($func)) {
 
+		// Les calculs peuvent être très long. On augmente le timeout
+		@set_time_limit(0);
+
+
 		// gestion des timeout pour certaines fonctions, à la manière des mises à jour de SPIP.
 		if (!defined('_UPGRADE_TIME_OUT')) {
 			define('_UPGRADE_TIME_OUT', 20);

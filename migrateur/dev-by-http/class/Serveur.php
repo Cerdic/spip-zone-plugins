@@ -53,6 +53,9 @@ class Serveur {
 		$act->setSource(migrateur_infos());
 		$act->setLogger($this->logger);
 
+		// Certains calculs peuvent être très long. On augmente le timeout
+		@set_time_limit(0);
+
 		// Note: certaines actions retournent directement du contenu (ie: GetFile)
 		//      et quittent (exit) sans retourner de message
 		$message = $act->run($data);
