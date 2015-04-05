@@ -75,14 +75,22 @@ function action_migrateur_dist() {
 
 		spip_timer($func);
 		$nb = parametre_url(_request('redirect'), 'nb');
+
+		$description = $GLOBALS['MIGRATEUR_ETAPES'][$arg];
+
+		$data = null;
+		if (is_array($description)) {
+			list($description, $data) = $description;
+		}
+
 		if ($nb) {
 			migrateur_log("-----| Étape n°$nb");
-			migrateur_log("     | <em>" . $GLOBALS['MIGRATEUR_ETAPES'][$arg] . "</em>");
+			migrateur_log("     | <em>" . $description . "</em>");
 		} else {
-			migrateur_log("-----> " . $GLOBALS['MIGRATEUR_ETAPES'][$arg]);
+			migrateur_log("-----> " . $description);
 		}
 		migrateur_log("     | Exécution de $func()\n");
-		$func();
+		$func($data);
 		$t = spip_timer($func);
 		migrateur_log("");
 		migrateur_log("-----| Fin de $func(), en $t");

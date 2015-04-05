@@ -21,6 +21,7 @@ ensuite au SPIP de destination dont la BDD vient d'être écrasée !),
 dans un nouveau format.
 
 
+
 ## Installation
 
 Ce plugin doit être présent, actif et configuré sur les 2 sites.
@@ -49,10 +50,15 @@ en indiquant les différentes actions souhaitées.
 
 ## Configuration
 
-La configuration se passe en 2 parties.
-- d'une part il faut indiquer l'ensemble des configurations (chemins, nom d'utilisateurs
-  et mots de passe) nécessaires pour les sites source et destination
-- d'autre part il faut indiquer la liste des étapes de migration à réaliser.
+La configuration se passe en 3 parties :
+
+- d'une part, il faut aller dans l'interface de configuration du migrateur
+  sur le site source afin de générer des clés de cryptage et d'authentification.
+- il faut ensuite aller dans l'interface de configuration du migrateur
+  sur le site destination afin de renseigner les clés précédemment calculées,
+  et d'indiquer aussi l'URL du site source
+- d'autre part il faut indiquer la liste des étapes de migration à réaliser,
+  dans le fichier `migrateur/config.php` donc.
 
 
 ## Étapes de migration
@@ -61,8 +67,23 @@ Les étapes de migration sont définies par un tableau global `MIGRATEUR_ETAPES`
 du fichier de configuration.
 
 Il est composé de couples où
+
 - la clé identifie l'étape de migration
-- la valeur décrit (texte) cette étape de façon synthétique.
+- la valeur peut être :
+  - un texte : description de cette étape de façon synthétique.
+  - un tableau : texte, X ; où texte est la description, et X est transmis
+    en premier paramètre de l'étape de migration.
+
+On peut ainsi renseigner par exemple donc une action de synchronisation
+de répertoires `IMG` soit avec l'action `mig_sync_img` soit avec `mig_sync`
+en transmettant le répertoire désiré (le X donc) :
+
+	```
+	$GLOBALS['MIGRATEUR_ETAPES'] = array(
+		'mig_sync_img' => 'Synchroniser le répertoire IMG',
+		'mig_sync'     => array('Synchroniser le répertoire IMG', 'IMG'),
+	);
+	```
 
 Dans l'espace privé, la liste des étapes définies seront alors affichées
 sur la page du migrateur (exec=migrateur). Il sera possible de lancer n'importe
@@ -106,26 +127,27 @@ Vous pouvez utiliser les constantes à disposition pour vous aider dans vos
  
 ### Étapes fournies avec le migrateur
 
-00_rien
+mig_test_rien
 : Ne fait rien !
 
-mig_test
+mig_test_communication
 : Teste le bon dialogue entre le site destination et le site source
 
 mig_sync_img
 : Synchronise le répertoire IMG source avec le répertoire IMG destination.
   Cela supprimera aussi sur le site de destination les fichiers de IMG éventuellement en trop.
 
-mig_bdd_source_make_dump
-: Crée un export de la base de données source, sur le site source (dans tmp/dump).
-  Cela n'affecte pas la base de données de destination.
+mig_sync
+: Synchronise un répertoire indiqué (nécessite de transmettre l'option)
 
-mig_bdd_source_get_dump
-: Télécharge le dernier export fait sur le site source, dans site destination (dans tmp/dump)
+mig_bdd_source_make_and_get_dump
+: Crée un export de la base de données source, sur le site source (dans tmp/dump)
+  puis le télécharge et le décompresse éventuellement.
   Cela n'affecte pas la base de données de destination.
 
 mig_bdd_destination_put_dump
 : Copie le dernier export réalisé dans la base de données de destination (dans tmp/dump).
+
   Attention, une fois cela fait, vous n'aurez plus accès au migrateur
   aussitôt. Vous devrez vous reconnecter, et peut être effectuer des mises
   à jour de base de données de SPIP si vos versions de SPIP sont différentes

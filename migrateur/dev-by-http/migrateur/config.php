@@ -19,6 +19,7 @@ $GLOBALS['MIGRATEUR_ETAPES'] = array(
 	'mig_test_communication' => "Tester la communication avec le serveur source",
 
 	'mig_sync_img'                  => 'Synchroniser le répertoire IMG',
+	#'mig_sync'                     => array('Synchroniser le répertoire IMG', 'IMG'),
 	'mig_bdd_source_make_and_get_dump_sql' => 'Crée et récupère un dump SQL de la base de données source'
 	#'mig_bdd_source_make_dump'      => 'Crée un dump SQL de la base de données source (sur le site source dans tmp/dump)',
 	#'mig_bdd_source_get_dump'       => 'Copie le dernier dump SQL du site source (sur ce site dans tmp/dump)',

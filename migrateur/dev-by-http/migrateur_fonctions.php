@@ -16,7 +16,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 **/
 function migrateur_etapes() {
 	include_spip('migrateur/config');
-	return $GLOBALS['MIGRATEUR_ETAPES'] ? $GLOBALS['MIGRATEUR_ETAPES'] : array();
+	$etapes = $GLOBALS['MIGRATEUR_ETAPES'] ? $GLOBALS['MIGRATEUR_ETAPES'] : array();
+	foreach ($etapes as $k => $etape) {
+		if (is_array($etape)) {
+			$etapes[$k] = reset($etape);
+		}
+	}
+	return $etapes;
 }
 
 
