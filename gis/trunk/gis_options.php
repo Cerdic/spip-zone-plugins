@@ -58,6 +58,10 @@ $gis_layers = array (
 		'nom' => 'Thunderforest Outdoors',
 		'layer' => 'L.tileLayer.provider("Thunderforest.Outdoors")'
 	),
+	'opentopomap' => array(
+		'nom' => 'OpenTopoMap',
+		'layer' => 'L.tileLayer.provider("OpenTopoMap")'
+	),
 	'openmapsurfer' => array(
 		'nom' => 'OpenMapSurfer',
 		'layer' => 'L.tileLayer.provider("OpenMapSurfer")'
