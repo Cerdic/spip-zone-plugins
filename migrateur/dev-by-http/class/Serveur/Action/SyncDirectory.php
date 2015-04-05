@@ -64,6 +64,7 @@ class SyncDirectory extends ActionBase {
 
 		return array(
 			'directory' => $directory,
+			'downloadSize' => taille_en_octets($totalSize),
 			'files' => array(
 				'new' => $newFiles,
 				'updated' => $updatedFiles,

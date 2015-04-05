@@ -55,6 +55,7 @@ class SyncDirectory extends ActionBase {
 		$this->log("- " . count($files['new']) . " nouveaux fichiers");
 		$this->log("- " . count($files['updated']) . " à mettre à jour");
 		$this->log("- " . count($files['deleted']) . " à supprimer");
+		$this->log("Estimation des transferts : " . $reponse['message']['data']['downloadSize']);
 
 		$this->delete($files['deleted']);
 		$this->download($files['new'] + $files['updated']);
