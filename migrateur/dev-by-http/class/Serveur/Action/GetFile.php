@@ -12,7 +12,7 @@ class GetFile extends ActionBase {
 			return "Format du fichier erroné";
 		}
 
-		$this->log_run("Get File `$file`");
+		$this->log_run("Get File <code>$file</code>");
 
 		$basedir = $this->source->dir;
 

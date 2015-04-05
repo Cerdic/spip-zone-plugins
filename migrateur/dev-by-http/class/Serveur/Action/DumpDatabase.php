@@ -31,7 +31,8 @@ class DumpDatabase extends ActionBase {
 		$to = taille_en_octets($taille);
 		$file = substr($chemin, strlen($this->source->dir . DIRECTORY_SEPARATOR));
 
-		$this->log("Dump dans <em>$file</em> ($to) en $t");
+		$this->log("Dump dans <em>$file</em>");
+		$this->log("  | $to en $t");
 
 		return array(
 			'fichier' => substr($chemin, strlen(rtrim(realpath(_DIR_RACINE), '/') . '/')),

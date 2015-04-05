@@ -237,7 +237,7 @@ class Client {
 			)
 		);
 
-		$this->log("Téléchargement de <em>$file</em>");
+		$this->log("Téléchargement de <code>$file</code>");
 
 		if (!in_array('crypteur.decrypt', stream_get_filters())) {
 			if (!stream_filter_register('crypteur.decrypt', '\SPIP\Migrateur\Crypteur\DecryptFilter')) {

@@ -30,6 +30,7 @@ $(document).ready(function() {
 		$("#logs_play").hide();
 		$("#logs_stop").show();
 		$("#boite_logs").addClass('actif');
+		$("#logs").empty();
 
 		$.migrateur_loop = setInterval(function(){
 			$logs = $("#logs");
@@ -38,9 +39,20 @@ $(document).ready(function() {
 			//$.spip.intercepted.ajax(url)
 			$.get(url)
 				.done(function(data) {
-					$logs.append(data);
-					if ($logs.length) {
-						$logs.scrollTop($logs\[0\].scrollHeight - $logs.height());
+					if (data.length) {
+						// on ne conserve que l'heure et minutes dans les logs js
+						var texte = data.split("\n");
+						$.each(texte, function(i, line) {
+							var heure = line.substring(11, 16);
+							var log = line.substring(26);
+							texte[i] = heure + log;
+						});
+						data = texte.join("\n");
+
+						$logs.append(data);
+						if ($logs.length) {
+							$logs.scrollTop($logs\[0\].scrollHeight - $logs.height());
+						}
 					}
 				})
 				.fail(function(data) {
