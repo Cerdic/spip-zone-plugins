@@ -34,9 +34,8 @@ function formulaires_importer_boussole_traiter_dist(){
 	// Importer les sites de la boussole
 	$nb_sites = importer_sites_boussole($boussole, $id_parent, $langue_site, $forcer_statut_publie);
 	// Actualiser la boussole (en fait uniquement les id_syndic) maintenant que les sites référencés sont créés.
-	// On utilise la fonction qui actualise toutes les boussoles même si ce n'est pas nécessaire pour les autres boussoles.
 	include_spip('inc/client');
-	boussole_actualiser_boussoles();
+	boussole_actualiser_boussoles(array($boussole));
 
 	if (!$nb_sites)
 		$retour['message_erreur'] = _T('boussole:message_nok_0_site_importe', array('boussole' => boussole_traduire($boussole, 'nom_boussole')));

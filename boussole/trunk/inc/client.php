@@ -9,20 +9,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /**
- * Mise à jour en base de données de toutes les boussoles installées sur le site client.
+ * Mise à jour en base de données d'une liste ou de toutes les boussoles installées sur le site client.
  *
- * La fonction appelle, pour toutes les boussoles installées dans la base de données du site client,
+ * La fonction appelle, pour toutes les boussoles identifiées dans la base de données du site client,
  * l'api d'ajout/actualisation d'une boussole.
  *
  * @api
  * @uses boussole_ajouter()
  *
+ * @param array	$boussoles
+ * 		Tableau des alias des boussoles à actualiser ou tableau vide pour toutes les boussoles
+ *
  * @return void
  */
-function boussole_actualiser_boussoles() {
+function boussole_actualiser_boussoles($boussoles=array()) {
 
-	// Recherche des metas commençant par "boussole_infos" pour connaitre la liste des boussoles ajoutées par le client
-	$boussoles_ajoutees = sql_allfetsel('valeur', 'spip_meta', array('nom LIKE ' . sql_quote('boussole_infos%')));
+	if (!$boussoles) {
+		// On doit actualiser toutes les balises
+		// -> Recherche des metas commençant par "boussole_infos" pour connaitre la liste des boussoles ajoutées par le client
+		$boussoles_ajoutees = sql_allfetsel('valeur', 'spip_meta', array('nom LIKE ' . sql_quote('boussole_infos%')));
+	}
+	else {
+		$metas =array();
+		foreach($boussoles as $_alias) {
+			$metas[] = 'boussole_infos_' . $_alias;
+		}
+		$boussoles_ajoutees = sql_allfetsel('valeur', 'spip_meta', sql_in('nom', $metas));
+	}
+
+	// Traitement des boussoles identifiées
 	if ($boussoles_ajoutees) {
 		$infos = array_map('unserialize', array_map('reset', $boussoles_ajoutees));
 		foreach($infos as $_infos) {
