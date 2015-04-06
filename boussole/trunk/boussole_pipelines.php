@@ -67,28 +67,30 @@ function boussole_affiche_gauche($flux){
  */
 function boussole_post_edition($flux){
 
-    $table = $flux['args']['table'];
-   	$id = intval($flux['args']['id_objet']);
-   	$action = $flux['args']['action'];
+    if (isset($flux['args']['table'])) {
+        $table = $flux['args']['table'];
+       	$id = intval($flux['args']['id_objet']);
+       	$action = $flux['args']['action'];
 
-   	if (($table == 'spip_syndic')
-   	AND ($id)
-    AND ($action == 'instituer')) {
-   		if (($flux['args']['statut_ancien'] == 'refuse')
-		OR ($flux['data']['statut'] == 'refuse')) {
-            // Il faut détecter si le site appartient à une boussole en se basant sur l'url uniquement
-            $urls = array();
-            $url_site = sql_getfetsel('url_site', 'spip_syndic', 'id_syndic=' . sql_quote($id));
-            $urls[] = $url_site;
-          	$urls[] = (substr($url_site, -1, 1) == '/') ? substr($url_site, 0, -1) : $url_site . '/';
-       		if ($id_site = sql_getfetsel('id_site', 'spip_boussoles', sql_in('url_site', $urls))) {
-                // Le site appartient bien à une boussole et son id dans la boussole est id_site.
-                // Il suffit maintenant de mettre à jour son id_syndic en fonction du type de changement de statut
-                $id_maj = ($flux['args']['statut_ancien'] == 'refuse') ? $id : 0;
-                sql_updateq('spip_boussoles',	array('id_syndic' => $id_maj), 'id_site='. sql_quote($id_site));
-            }
-   		}
-   	}
+       	if (($table == 'spip_syndic')
+       	AND ($id)
+        AND ($action == 'instituer')) {
+       		if (($flux['args']['statut_ancien'] == 'refuse')
+    		OR ($flux['data']['statut'] == 'refuse')) {
+                // Il faut détecter si le site appartient à une boussole en se basant sur l'url uniquement
+                $urls = array();
+                $url_site = sql_getfetsel('url_site', 'spip_syndic', 'id_syndic=' . sql_quote($id));
+                $urls[] = $url_site;
+              	$urls[] = (substr($url_site, -1, 1) == '/') ? substr($url_site, 0, -1) : $url_site . '/';
+           		if ($id_site = sql_getfetsel('id_site', 'spip_boussoles', sql_in('url_site', $urls))) {
+                    // Le site appartient bien à une boussole et son id dans la boussole est id_site.
+                    // Il suffit maintenant de mettre à jour son id_syndic en fonction du type de changement de statut
+                    $id_maj = ($flux['args']['statut_ancien'] == 'refuse') ? $id : 0;
+                    sql_updateq('spip_boussoles',	array('id_syndic' => $id_maj), 'id_site='. sql_quote($id_site));
+                }
+       		}
+       	}
+    }
 
 	return $flux;
 }
