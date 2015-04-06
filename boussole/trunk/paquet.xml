@@ -1,7 +1,7 @@
 <paquet
 	prefix="boussole"
 	categorie="navigation"
-	version="2.5.23"
+	version="2.6.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="boussole_logo-64.png"
@@ -21,6 +21,7 @@
 	<pipeline nom="declarer_tables_principales" inclure="base/boussole_declarer.php" />
 	<pipeline nom="affiche_milieu" inclure="boussole_pipelines.php" />
 	<pipeline nom="affiche_gauche" inclure="boussole_pipelines.php" />
+	<pipeline nom="post_edition" inclure="boussole_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="genie/boussole_taches_generales_cron.php" />
 
 	<necessite nom="sites" compatibilite="[1.7.6;[" />

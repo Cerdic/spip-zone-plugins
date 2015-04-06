@@ -104,7 +104,7 @@ function boussole_ajouter($boussole, $serveur='spip') {
 		$urls[] = $_info['url_site'];
 		$urls[] = (substr($_info['url_site'], -1, 1) == '/') ? substr($_info['url_site'], 0, -1) : $_info['url_site'] . '/';
 		$infos['sites'][$_cle]['id_syndic'] = 0;
-		if ($id_syndic = sql_getfetsel('id_syndic', 'spip_syndic', sql_in('url_site', $urls)))
+		if ($id_syndic = sql_getfetsel('id_syndic', 'spip_syndic', array(sql_in('url_site', $urls), 'statut<>' . sql_quote('refuse'))))
 			$infos['sites'][$_cle]['id_syndic'] = intval($id_syndic);
 		// -- On recherche une configuration d'affichage (si elle existe)
 		$where = array('aka_boussole=' .sql_quote($infos['boussole']['alias']),
