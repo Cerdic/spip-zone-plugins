@@ -597,7 +597,7 @@ function XMLObjectToArray($object){
 			foreach($vars['@attributes'] as $k => $v)
 			$xml_array[$key][$k] = $v;
 		if($object->hasChildren()){
-			$xml_array[$key][] = ObjectToArray(
+			$xml_array[$key][] = XMLObjectToArray(
 				$object->current());
 		}
 		else{
