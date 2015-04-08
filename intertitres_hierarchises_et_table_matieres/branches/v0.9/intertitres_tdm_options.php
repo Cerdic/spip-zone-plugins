@@ -269,7 +269,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	// si tableseule on ne renvoit que la table, sinon, on renvoie tout
 	if ($tableseule) {
 		return $table;
-
+	}
 	return $texte;
 }
 
