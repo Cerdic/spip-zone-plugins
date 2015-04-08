@@ -1,6 +1,5 @@
-[
+[(#REM)
 
-(#REM) Affiche la table des matières de l'article passé en id
-
+	Affiche la table des matières de l'article passé en id
 
 ]<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{statut==.}>[(#TEXTE*|nettoie_des_modeles|propre|table_des_matieres{tables_seule,#URL_ARTICLE})]</BOUCLE_Article>
