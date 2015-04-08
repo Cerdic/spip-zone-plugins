@@ -211,7 +211,7 @@ function gravatar($email, $default='404') {
 
 				$nb--;
 				include_spip("inc/distant");
-				spip_timer('grvatar');
+				spip_timer('gravatar');
 				if ($gravatar
 					= recuperer_page(_GRAVATAR_HOST . '/avatar/' . $md5_email . ($default ? "?d=$default" : "") . "&s=" . _TAILLE_MAX_GRAVATAR)
 				){
