@@ -1,0 +1,34 @@
+<plugin>
+	<nom>Intertitres hi&#233;rarchis&#233;s et table des mati&#232;res</nom>
+	<slogan>G&#233;n&#233;rer automatiquement une table des mati&#232;res</slogan>
+	<version>0.9.8</version>
+	<prefix>IntertitresTdm</prefix>
+	<etat>test</etat>
+	<auteur>Mortimer, Chtitux, Beurt pour la mise en plugin, Paladin pour les ancres nomm&#233;es</auteur>
+	<description>
+	Ce plugin rajoute des raccourcis typographiques pour g&#233;rer des niveaux d'intertitres, num&#233;rot&#233;s ou non, dans Spip (Ce plugin peut r&#233;utiliser les intertitres des enluminures typographiques). Il permet aussi d&#39;ajouter dans l&#39;article, une table des mati&#232;res qui liste les intertitres contenus dans l'article gr&#226;ce &#224; un mod&#232;le. D'autres mod&#232;les permettent de se r&#233;f&#233;rer &#224; une sous-partie d'un article dans un autre article (en citant le titre, extrait ou rien).
+	</description>
+	<icon>itdm-64.png</icon>
+	<licence>GNU/GPL v2</licence>
+	<lien>http://contrib.spip.net/Des-intertitres-hierarchises-et-des-outils-pour-les</lien>
+	<options>intertitres_tdm_options.php</options>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_propre</nom>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
+	</pipeline>
+	<fonctions>intertitres_tdm_fonctions.php</fonctions>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
+</plugin>

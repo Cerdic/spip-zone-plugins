@@ -1,0 +1,28 @@
+[(#REM) 
+
+	Affiche un renvoi vers une ancre de l'article passé en id
+
+]
+<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{statut==.}>
+	[(#SET{intertitre,
+		[(#TEXTE*|nettoie_des_modeles|propre
+			|extrait_un_titre{#ENV{partie}})]
+		})]
+	[(#GET{intertitre}
+		|?{'',#SET{intertitre,#TITRE}}
+		)]
+	[(#SET{extrait,
+		[(#TEXTE*|nettoie_des_modeles|propre|textebrut
+			|extrait_de_texte{#ENV{debut,0},#ENV{taille,20}})]
+		})]
+</BOUCLE_Article>
+</B_Article>
+	[(#SET{intertitre,"renvoi"})]
+<//B_Article>
+#SET{crochet,"["}
+[
+(#REM) Le renvoi est rédigé
+]
+[(#GET{crochet}
+	|concat{[(#GET{intertitre}|trim)],[|(#GET{extrait})(...)],"->",#ENV{id},"#",#ENV{partie},"]"}
+	|propre)]

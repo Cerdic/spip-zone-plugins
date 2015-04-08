@@ -1,0 +1,25 @@
+[(#REM)
+
+	Affiche un extrait d'une partie du texte d'un article
+
+]
+<BOUCLE_Article(ARTICLES){id_article=#ENV{id}}{statut==.}>
+	[(#SET{intertitre,
+		[(#TEXTE*|nettoie_des_modeles|propre
+			|extrait_un_titre{#ENV{partie}})]
+		})]
+	[(#SET{extrait,
+		[(#TEXTE*|nettoie_des_modeles|propre
+			|extrait_partie{#ENV{partie},#ENV{debut,0},#ENV{taille,20}})]
+		})]
+</BOUCLE_Article>
+#SET{quote,"<quote>"}
+#SET{pasdebut,""}
+[(#ENV{debut}|?{#SET{pasdebut,"(...) "}})]
+[
+(#REM) L'extrait est encadré par des quotes et contient l'intertitre
+]
+[(#GET{quote}
+	|concat{"{{{",#GET{intertitre},"}}}",#GET{pasdebut},#GET{extrait},"(...)</quote>"}
+	|propre)]
+
