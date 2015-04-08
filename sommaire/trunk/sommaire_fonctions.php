@@ -113,10 +113,10 @@ function sommaire_propre($texte, $connect, $env){
 	$texte = propre($texte,$connect,$env);
 	if (
 		!isset($GLOBALS['meta']['sommaire_automatique'])
-	  OR $GLOBALS['meta']['sommaire_automatique']=="on"
-	  OR ($GLOBALS['meta']['sommaire_automatique']=="ondemand" AND
-		 (strpos($texte,"<sommaire>")!==false OR strpos($texte,"[sommaire]")!==false))
-    ){
+		OR $GLOBALS['meta']['sommaire_automatique']=="on"
+		OR ($GLOBALS['meta']['sommaire_automatique']=="ondemand" AND
+		(strpos($texte,"<sommaire>")!==false OR strpos($texte,"[sommaire]")!==false))
+	){
 		$texte = sommaire_post_propre($texte);
 	}
 	return $texte;
@@ -195,7 +195,7 @@ function sommaire_post_propre($texte, $ajoute=true, $sommaire_seul=false){
 	if (strpos($texte, '<h')!==false)
 		$texte = sommaire_filtre_texte_echappe($texte,'sommaire_filtre','html|code|cadre|frame|script|acronym|cite',array($ajoute,$sommaire_seul));
 	elseif ($sommaire_seul)
-                return '';
+		return '';
 	return $texte;
 }
 
