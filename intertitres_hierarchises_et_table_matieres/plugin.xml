@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Intertitres hi&#233;rarchis&#233;s et table des mati&#232;res</nom>
 	<slogan>G&#233;n&#233;rer automatiquement une table des mati&#232;res</slogan>
-	<version>0.9.7</version>
+	<version>0.9.8</version>
 	<prefix>IntertitresTdm</prefix>
 	<etat>test</etat>
 	<auteur>Mortimer, Chtitux, Beurt pour la mise en plugin, Paladin pour les ancres nomm&#233;es</auteur>
@@ -14,19 +14,19 @@
 	<options>intertitres_tdm_options.php</options>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>intertitres_tdm_fonctions_headers.php</inclure>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>intertitres_tdm_fonctions_headers.php</inclure>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>pre_propre</nom>
-		<inclure>intertitres_tdm_fonctions_typo.php</inclure>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>post_propre</nom>
-		<inclure>intertitres_tdm_fonctions_typo.php</inclure>
+		<inclure>intertitres_tdm_pipelines.php</inclure>
 	</pipeline>
 	<fonctions>intertitres_tdm_fonctions.php</fonctions>
 	<categorie>edition</categorie>
