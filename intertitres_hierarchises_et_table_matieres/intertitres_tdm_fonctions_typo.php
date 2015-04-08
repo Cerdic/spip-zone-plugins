@@ -21,4 +21,3 @@ function IntertitresTdm_post_propre($texte) {
 	$new_texte = IntertitresTdm_table_des_matieres($texte);
 	return $new_texte;
 }
-?>

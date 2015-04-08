@@ -6,7 +6,7 @@
  *    Date : 19 décembre 2006
  *    Auteur :  Bertrand Marne (extraction à sciencesnat point org)
  *   +-------------------------------------+
- *    Fonctions de ces filtres :
+ *   Fonctions de ces filtres :
  *   Ces filtres extraient des infos des articles comme:
  *   Les titres de parties, les mots en emphase ou les URL
  *   Il sert à faire ressortir les éléments sémantiques (taggés
@@ -97,4 +97,3 @@ function nettoie_des_modeles ($texte) {
 function table_des_matieres ($texte,$tdm,$url) {
 	return IntertitresTdm_table_des_matieres($texte,$tdm,$url);
 }
-?>

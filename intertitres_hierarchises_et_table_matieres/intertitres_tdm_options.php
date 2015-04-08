@@ -16,7 +16,7 @@
  *
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
- * http://www.spip-contrib.net/article.php3?id_article=627
+ * http://contrib.spip.net/Generation-automatique-de
  *
  * Petites modifications de Bertrand Marne (mise en plugin)
  * - prise en compte des dièses:
@@ -45,13 +45,10 @@
  * avec les modèles accompagnant le plugin (extrait, ...)
  * 
  */
-// $LastChangedBy$
-// $LastChangedDate$
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article="") {
-	global $debut_intertitre, $fin_intertitre;
 	static $pass = 0;
 	$pass++;
 
@@ -81,7 +78,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	}
 	
 	// on cherche les noms de section commençant par des * et #
-	$my_debut_intertitre=trim($GLOBALS['debut_intertitre']); //astuce des trim trouvée là : http://www.spip-contrib.net/Generation-automatique-de#forum383092
+	$my_debut_intertitre=trim($GLOBALS['debut_intertitre']); //astuce des trim trouvée là : http://contrib.spip.net/Generation-automatique-de#forum383092
 	$my_fin_intertitre=trim($GLOBALS['fin_intertitre']);
 
 	// pour que les différents niveaux d'intertitres soient gérés quand on repasse sur le texte dans le cadre d'un filtre avec tableseule
@@ -147,7 +144,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 			);
 			$ref=$tsmatches[2];
 		}
-		//IntertitresTdm_log ('ref: '.$ref);
+		//spip_log('ref: '.$ref,'itdm');
 		
 		if(strlen($level) == 1) {
 		
@@ -221,11 +218,6 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		$mdebut_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_debut_intertitre);
 		$mfin_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_fin_intertitre);
 		
-		//on remplace le titre dans le texte
-		//$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
-		//$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='$ancre' name='$ancre'></a><a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
-		
-		
 		/**
 		 * Remplacer la première occurence. 
 		 * Permet d'avoir plusieurs inter-titres au contenu identique.
@@ -234,7 +226,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		
 		if ($ancre && $search && (($pos = strpos($texte, $search)) !== false))
 		{
-			//IntertitresTdm_log ('search: '.$search.' pos: '.$pos);
+			//spip_log ('search: '.$search.' pos: '.$pos,'itdm');
 			
 			$len_search = strlen ($search);
 			$s = substr ($texte, 0, $pos);
@@ -251,9 +243,9 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		}
 	}
 
-   //on finit la table
+	//on finit la table
 	for ($i=0; $i < $lastlevel; $i++) {
-		$table .= "</li>\n</ul>";		
+		$table .= "</li>\n</ul>";
 	}
 
 	//on remplace les raccourcis par les numéros des sections.
@@ -284,6 +276,7 @@ if (!defined('_ANCHOR_LEN_MAX')) define('_ANCHOR_LEN_MAX', 35);
  * Réalisé à la première passe
  * (ce script est appelé par les balises #TEXTE du squelette)
  * Aux passages suivants, donne l'ancre calculée à la première passe.
+ * 
  * @author Christian Paulus
  * @param int $pass num du passe (de l'appel du script)
  * @param int $pos position du titre dans le document
@@ -351,7 +344,7 @@ function IntertitresTdm_composer_ancre ($titre, $pass, $pos)
 			if (strlen($ancre) >= _ANCHOR_LEN_MAX) { break; }
 		}
 		$ancre = rtrim($ancre, '-');
-		
+
 		/**
 		 * Si inter-titre vide (c'est possible ?) baptiser 'ancre'
 		 */
@@ -369,8 +362,4 @@ function IntertitresTdm_composer_ancre ($titre, $pass, $pos)
 	$ancres_locales[$pos] = $ancre_calcule;
 
 	return ($ancre_calcule);
-}
-
-function IntertitresTdm_log ($msg) {
-	spip_log ($msg, 'itdm');
 }
