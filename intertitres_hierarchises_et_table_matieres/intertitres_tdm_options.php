@@ -48,6 +48,8 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article="") {
 	global $debut_intertitre, $fin_intertitre;
 	static $pass = 0;
@@ -97,9 +99,6 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 					$texte,
 					$matches
 	);
-	
-	//error_log ( 'debut_intertitre: '.$GLOBALS['debut_intertitre']);
-	//error_log ( 'fin_intertitre: '.$fin_intertitre);
 	
 	$table = '';
 

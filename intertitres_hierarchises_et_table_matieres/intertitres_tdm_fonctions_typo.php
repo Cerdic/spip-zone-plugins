@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // fonction qui convertit les intertitres d'enluminures type {ß{titre}ß}
 // ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
 // {1{ sera converti en {{{* qui équivaut à {{{
@@ -14,8 +17,8 @@ function IntertitresTdm_pre_propre($texte) {
 }
 
 function IntertitresTdm_post_propre($texte) {
-  //le second paramètre est vide, c'est à dire qu'on n'affiche pas la table seule.
- $new_texte = IntertitresTdm_table_des_matieres($texte);
- return $new_texte;
+	//le second paramètre est vide, c'est à dire qu'on n'affiche pas la table seule.
+	$new_texte = IntertitresTdm_table_des_matieres($texte);
+	return $new_texte;
 }
 ?>

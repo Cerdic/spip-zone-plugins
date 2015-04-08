@@ -16,6 +16,9 @@
  * Pour toute suggestion, remarque, proposition d'ajout
  * reportez-vous au forum de l'article :
 */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function extrait_titres($texte) {
 	preg_match_all("/\{\{\{(.*?)\}\}\}/",$texte,$matches);
 	$key = key($matches[1]);
