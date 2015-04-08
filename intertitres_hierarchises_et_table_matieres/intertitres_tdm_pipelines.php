@@ -2,10 +2,15 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// fonction qui convertit les intertitres d'enluminures type {ß{titre}ß}
-// ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
-// {1{ sera converti en {{{* qui équivaut à {{{
-// {2{ sera converti en {{{**, etc.
+/**
+ * Fonction qui convertit les intertitres d'enluminures type {ß{titre}ß}
+ * ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
+ * {1{ sera converti en {{{* qui équivaut à {{{
+ * {2{ sera converti en {{{**, etc.
+ * 
+ * @param $texte string
+ * @return string
+ */
 function IntertitresTdm_pre_propre($texte) {
 	$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\\2\})/",
 				create_function (

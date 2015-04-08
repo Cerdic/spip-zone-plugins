@@ -206,7 +206,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		$cite[$ref] = $numeros;
 		//$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave;  	&laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
 		$table .= "<li><a href=\"$url_article#$ancre\" title=\""
-			. _T('IntertitresTdm:aller_directement_a_', array('titre'=>attribut_html($titre)))
+			. _T('itdm:aller_directement_a_', array('titre'=>attribut_html($titre)))
 			. "\">$titre_lien</a>"
 			;
 		
