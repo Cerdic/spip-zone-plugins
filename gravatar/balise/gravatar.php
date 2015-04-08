@@ -19,7 +19,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * balise #GRAVATAR
+ * balise #GRAVATAR{email[,size[,defaut]]}
+ *   size : taille en px
+ *   defaut : image par defaut en l'absence de gravatar
  *
  * @param  Object $p  Arbre syntaxique utilise par le compilo
  * @return Object     Arbre retourne apres traitement

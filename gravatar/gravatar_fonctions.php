@@ -150,7 +150,7 @@ function gravatar_verifier_index($tmp) {
  * @staticvar int         $nb       le nombre max d'anciens
  * @staticvar int         $max      le nombre max de nouveaux
  * @param     string      $email    le mail qui va servir pour calculer le gravatar
- * @param     int         $default  code de la page
+ * @param     int|string  $default  gravatar par defaut : 404 ou identicon/monsterid/wavatar
  * @return    null|string           le chemin du fichier gravatar, s'il existe
  */
 function gravatar($email, $default='404') {
@@ -160,14 +160,6 @@ function gravatar($email, $default='404') {
 	// eviter une requete quand on peut
 	if (!strlen($email) OR !email_valide($email))
 		return '';
-
-	// si on demande un defaut identicon/monsterid/wavatar
-	// faire d'abord une requete avec 404, cela permet de partager le cache
-	// pour ceux qui ont vraiment un gravatar
-	if ($default!=='404'){
-		if ($gravatar_cache = gravatar($email))
-			return $gravatar_cache;
-	}
 
 	$tmp = sous_repertoire(_DIR_VAR, 'cache-gravatar');
 	$lock_file = $tmp."gravatar.lock";
@@ -191,6 +183,8 @@ function gravatar($email, $default='404') {
 	// inutile de rafraichir souvent les identicon etc qui ne changent en principe pas
 	$coeff_delai = ($default=='404' ? 1:_GRAVATAR_CACHE_FALLBACK_COEFF);
 	$duree = 0;
+
+	
 	if (!file_exists($lock_file) OR $_SERVER['REQUEST_TIME']-filemtime($lock_file)>_GRAVATAR_CACHE_DELAY_LOCK){
 
 		if ((!file_exists($gravatar_cache)
