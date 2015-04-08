@@ -161,15 +161,15 @@ function spipdf_remplaceCaption($matches){
 function spipdf_nettoyer_html($html, $params_pdf = array()){
 
 	// supprimer les spans autour des images et récupérer le placement
-	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*float:(.*);.*>(.*)<\/span>/iUms';
+	$patterns_float = '/<span class=\'spip_document_[0-9]+ spip_documents.*float:(.*);.*>(.*)<\/span>/iUms';
 	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceSpan' : 'spipdf_remplaceSpan_wfloat', $html);
 
 	// supprimer les spans autour des images
-	$patterns_float = '/<span class=\'spip_document_.*spip_documents.*>(.*)<\/span>/iUms';
+	$patterns_float = '/<span class=\'spip_document_[0-9]+ spip_documents.*>(.*)<\/span>/iUms';
 	$html = preg_replace_callback($patterns_float, 'spipdf_remplaceSpanCenter', $html);
 
 	// supprimer les dl autour des images et récupérer le placement
-	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*float:(.*);.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
+	$patterns_float = '/<dl class=\'spip_document_[0-9]+ spip_documents.*float:(.*);.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
 	$html = preg_replace_callback($patterns_float, !empty($params_pdf['float']) ? 'spipdf_remplaceDt' : 'spipdf_remplaceDt_wfloat', $html);
 	// replacer id par name pour les notes
 	$patterns_note = '/<a[^>]*href[^>]*class=\'spip_note\'[^>]*>/iUms';
@@ -180,7 +180,7 @@ function spipdf_nettoyer_html($html, $params_pdf = array()){
 	$html = preg_replace($patterns_puce, '-', $html);
 
 	// supprimer les dl autour des images centrer
-	$patterns_float = '/<dl class=\'spip_document_.*spip_documents.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
+	$patterns_float = '/<dl class=\'spip_document_[0-9]+ spip_documents.*<dt>(.*)<\/dt>.*<\/dl>/iUms';
 	$html = preg_replace_callback($patterns_float, 'spipdf_remplaceDtCenter', $html);
 
 	// remplacer les captions
