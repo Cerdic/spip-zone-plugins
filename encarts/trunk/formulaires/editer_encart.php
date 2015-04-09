@@ -15,6 +15,35 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 /**
+ * Définir les saisies à afficher pour le formulaire
+ * @return array
+ *     Liste des saisies
+ */
+function formulaires_editer_encart_saisies_dist($id_encart='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden='') {
+	$saisies = array(
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'titre',
+				'label' => _T('encart:label_titre'),
+				'defaut' => ''
+			)
+		),
+		array(
+			'saisie' => 'textarea',
+			'options' => array(
+				'nom' => 'texte',
+				'label' => _T('encart:label_texte'),
+				'defaut' => '',
+				'rows' => 5
+			)
+		)
+	);
+	return $saisies;
+}
+
+
+/**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
  *
  * @param int|string $id_encart
