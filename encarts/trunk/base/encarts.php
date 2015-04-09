@@ -55,7 +55,7 @@ function encarts_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, '' AS lang",
 		'date' => "date",
-		'champs_editables'  => array(),
+		'champs_editables'  => array('titre','texte'),
 		'champs_versionnes' => array(),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array('spip_encarts_liens'),
