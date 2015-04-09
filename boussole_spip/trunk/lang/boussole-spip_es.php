@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'descriptif_boussole_spip' => 'La brújula SPIP reagrupa el conjunto de sitios «oficiales» de la galaxia SPIP. Define para cada sitio su logotipo, su nombre, su eslogan y su descripción. No dude pues en utilizar sus propios sitios para dirigir a sus visitantes a la galaxia SPIP.',
 	'descriptif_site_spip_blog' => 'Porque SPIP es un proyecto colaborativo, SPIP-BLOG.net concentra apuntes técnicos, risas de uno mismo, humores, trolls, anuncios diversos... He aquí el reflejo de la comunidad SPIP: ante todo, mucha ternura. ',
-	'descriptif_site_spip_contrib' => 'Sitio colaborativo, SPIP-CONTRIB.net pone a disposición el conjunto de las contribuciones externas: plugins, scripts, filtros, esqueletos, documentaciones, consejos y trucos... servidos a la comunidad (enlaces de descarga) por los usuarios de SPIP. Sus foros garantizan el vínculo entre desarrolladores y usuarios. ', # MODIF
+	'descriptif_site_spip_contrib' => 'Sitio colaborativo, SPIP-CONTRIB.net pone a disposición el conjunto de las contribuciones externas: plugins, scripts, filtros, esqueletos, documentaciones, consejos y trucos... servidos a la comunidad (enlaces de descarga) por los usuarios de SPIP. Sus foros garantizan el vínculo entre desarrolladores y usuarios. ',
 	'descriptif_site_spip_core' => 'El sitio CORE.SPIP.org reúne el historial de modificaciones del código de SPIP, una gestión de tickets que permite reportar errores de software (bugs) y proponer sugerencias de mejora, así como un espacio de descarga de las versiones de SPIP.',
 	'descriptif_site_spip_demo' => 'Sitio de testeo reiniciado cada noche, DEMO.SPIP.net permite a todo el mundo probar SPIP en su última versión estable (con, según elección, el estatus de redactor o administrador), en un click y sin tener que instalarla.',
 	'descriptif_site_spip_doc' => 'CODE.SPIP.net es un espacio de documentación del software SPIP para sus API, su código fuente, y ciertas de sus funciones técnicas.',
@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_groupe_spip_extension' => 'Contribuciones',
 	'nom_groupe_spip_reference' => 'Documentación',
 	'nom_site_spip_blog' => 'SPIP Blog',
-	'nom_site_spip_contrib' => 'SPIP-Contrib', # MODIF
+	'nom_site_spip_contrib' => 'SPIP-Contrib',
 	'nom_site_spip_core' => 'SPIP Core',
 	'nom_site_spip_demo' => 'SPIP Demo',
 	'nom_site_spip_doc' => 'SPIP Código',
