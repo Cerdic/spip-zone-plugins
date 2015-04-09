@@ -291,7 +291,7 @@ function gravatar($email, $default='404') {
 		if ($dt>10000){
 			$nb = 0;
 			@touch($lock_file);
-			spip_log("gravatar.com trop long a repondre, on lock $lock_file", "gravatar");
+			spip_log("gravatar.com trop long a repondre ($dt), on lock $lock_file", "gravatar");
 		}
 		// si on a pas eu de reponse mais qu'un cache existe le prolonger pour eviter de rechecker tout le temps
 		if ($gravatar===$gravatar_cache){
