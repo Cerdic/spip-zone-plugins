@@ -14,33 +14,38 @@
 				<p class="explication"><:gravatar:explication_image_defaut:></p>
 				<div class="choix">
 					<input type="radio" name="image_defaut" class="radio" value="404" id="image_defaut_404"[ (#ENV{image_defaut,'404'}|=={404}|oui)checked="checked"]/>
-					<span class="demo">[(#CHEMIN{rien.gif}|gravatar_balise_img)]</span>
+					<span class="demo">[(#GRAVATAR{email@example.org,#ENV**{taille},#CHEMIN{rien.gif}})]</span>
 					<label for="image_defaut_404"><:gravatar:label_image_defaut_404:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="image_defaut" class="radio" value="images/gravatar.png" id="image_defaut_png"[ (#ENV{image_defaut,'404'}|=={images/gravatar.png}|oui)checked="checked"]/>
-					<span class="demo">[(#CHEMIN{images/gravatar.png}|gravatar_balise_img)]</span>
+					<span class="demo">[(#GRAVATAR{email@example.org,#ENV**{taille},#CHEMIN{images/gravatar.png}})]</span>
 					<label for="image_defaut_png"><:gravatar:label_image_defaut_png:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="image_defaut" class="radio" value="0" id="image_defaut_gravatar"[ (#ENV{image_defaut,'404'}|=={0}|oui)checked="checked"]/>
-					<span class="demo">[(#VAL{email@example.org}|gravatar{'0'}|gravatar_balise_img)]</span>
+					<span class="demo">[(#GRAVATAR{email@example.org,#ENV**{taille},0})]</span>
 					<label for="image_defaut_gravatar"><:gravatar:label_image_defaut_gravatar:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="image_defaut" class="radio" value="identicon" id="image_defaut_identicon"[ (#ENV{image_defaut,'404'}|=={identicon}|oui)checked="checked"]/>
-					<span class="demo">[(#VAL{email@example.org}|gravatar{identicon}|gravatar_balise_img)]</span>
+					<span class="demo">[(#GRAVATAR{email@example.org,#ENV**{taille},identicon})]</span>
 					<label for="image_defaut_identicon"><:gravatar:label_image_defaut_identicon:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="image_defaut" class="radio" value="monsterid" id="image_defaut_monsterid"[ (#ENV{image_defaut,'404'}|=={monsterid}|oui)checked="checked"]/>
-					<span class="demo">[(#VAL{email@example.org}|gravatar{monsterid}|gravatar_balise_img)]</span>
+					<span class="demo">[(#GRAVATAR{email@example.org,#ENV**{taille},monsterid})]</span>
 					<label for="image_defaut_monsterid"><:gravatar:label_image_defaut_monsterid:></label>
 				</div>
 				<div class="choix">
 					<input type="radio" name="image_defaut" class="radio" value="wavatar" id="image_defaut_wavatar"[ (#ENV{image_defaut,'404'}|=={wavatar}|oui)checked="checked"]/>
-					<span class="demo">[(#VAL{email@example.org}|gravatar{wavatar}|gravatar_balise_img)]</span>
+					<span class="demo">[(#GRAVATAR{email@example.org,#ENV**{taille},wavatar})]</span>
 					<label for="image_defaut_wavatar"><:gravatar:label_image_defaut_wavatar:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" name="image_defaut" class="radio" value="retro" id="image_defaut_retro"[ (#ENV{image_defaut,'404'}|=={retro}|oui)checked="checked"]/>
+					<span class="demo">[(#GRAVATAR{email@example.org,#ENV**{taille},retro})]</span>
+					<label for="image_defaut_retro"><:gravatar:label_image_defaut_retro:></label>
 				</div>
 	    </li>
 	    <li class="editer_taille [ (#ENV**{erreurs}|table_valeur{taille}|oui)erreur]">
@@ -56,5 +61,5 @@
 </div>
 <style type="text/css">
 .formulaire_#FORM .editer_image_defaut .choix {margin:5px 0;}
-.formulaire_#FORM .editer_image_defaut .choix span img {width:32px;height:32px;}
+.formulaire_#FORM .editer_image_defaut .choix .demo img {vertical-align: middle;border:1px solid #ddd;}
 </style>

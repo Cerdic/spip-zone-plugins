@@ -34,7 +34,7 @@ function balise_GRAVATAR($p) {
 	$_default = interprete_argument_balise(3,$p);
 	if (!$_default) $_default = "''";
 
-	$p->code = "inserer_attribut(filtrer('image_reduire',sinon(gravatar($_email),$_default), (\$s=$_size) ?\$s: 80), 'alt', '')";
+	$p->code = "inserer_attribut(filtrer('image_graver',filtrer('image_reduire',gravatar($_email,$_default), (\$s=$_size) ?\$s: 80)), 'alt', '')";
 	return $p;
 
 }
