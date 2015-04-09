@@ -124,7 +124,8 @@ function formulaires_editer_encart_charger_dist($id_encart='new', $retour='', $a
  *     Tableau des erreurs
  */
 function formulaires_editer_encart_verifier_dist($id_encart='new', $retour='', $associer_objet='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_verifier('encart',$id_encart);
+	$erreurs = formulaires_editer_objet_verifier('encart',$id_encart);
+	return $erreurs;
 }
 
 /**
