@@ -17,7 +17,7 @@
 
 <div class="champ contenu_prix">
 	<label><:abonnementsoffre:champ_prix_label:> : </label>
-	<span dir='#LANG_DIR' class='#EDIT{prix} prix'>[(#PRIX|=={0}|?{<:abonnementsoffre:champ_prix_0:>,#PRIX €})]</span>
+	<span dir='#LANG_DIR' class='#EDIT{prix} prix'>[(#PRIX*|=={0}|?{<:abonnementsoffre:champ_prix_0:>,#PRIX})]</span>
 </div>
 
 </BOUCLE_abonnements_offre>

@@ -31,7 +31,7 @@
 			<td class="statut">[(#STATUT|puce_statut{abonnements_offre,#ID_ABONNEMENTS_OFFRE})]</td> 
 			<td class="titre principale">[(#LOGO_ABONNEMENTS_OFFRE|image_reduire{20,26})]<a href="[(#ID_ABONNEMENTS_OFFRE|generer_url_entite{abonnements_offre})]" title="<:info_numero_abbreviation|attribut_html:> #ID_ABONNEMENTS_OFFRE">[(#RANG). ]#TITRE</a></td>
 			<td class="duree secondaire">[(#DUREE|=={0}|?{<:abonnementsoffre:champ_duree_0:>,#VAL{abonnementsoffre:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}}})]</td>
-			<td class="prix">[(#PRIX|=={0}|?{<:abonnementsoffre:champ_prix_0:>,#PRIX €})]</td>
+			<td class="prix">[(#PRIX*|=={0}|?{<:abonnementsoffre:champ_prix_0:>,#PRIX})]</td>
 			<td class="abonnements"><BOUCLE_abonnements(ABONNEMENTS){id_abonnements_offre}/>#TOTAL_BOUCLE<//B_abonnements></td>
 			<td class="id">[(#AUTORISER{modifier,abonnements_offre,#ID_ABONNEMENTS_OFFRE}|?{
 				<a href="[(#URL_ECRIRE{abonnements_offre_edit,id_abonnements_offre=#ID_ABONNEMENTS_OFFRE})]">#ID_ABONNEMENTS_OFFRE</a>,
