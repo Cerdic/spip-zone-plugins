@@ -150,9 +150,10 @@ function gravatar_verifier_index($tmp) {
  * @staticvar int         $max      le nombre max de nouveaux
  * @param     string      $email    le mail qui va servir pour calculer le gravatar
  * @param     int|string  $default  gravatar par defaut : 404 ou identicon/monsterid/wavatar
+ * @param     bool        $force    forcer la recuperation synchrone
  * @return    null|string           le chemin du fichier gravatar, s'il existe
  */
-function gravatar($email, $default='404') {
+function gravatar($email, $default='404', $force=false) {
 	static $nb=5; // ne pas en charger plus de 5 anciens par tour
 	static $max=10; // et en tout etat de cause pas plus de 10 nouveaux
 
@@ -230,7 +231,15 @@ function gravatar($email, $default='404') {
 			if ($duree_vide<_GRAVATAR_CACHE_DELAY_CHECK_NEW OR $nb--<=0){
 				return $gravatar;
 			}
-			spip_log("Actualiser gravatar vide $duree_vide s (cache maxi " . _GRAVATAR_CACHE_DELAY_CHECK_NEW . "s)", "gravatar");
+			// un actualise un gravatar vide que si c'est celui du visiteur identifie
+			if ($force
+			  OR (isset($GLOBALS['visiteur_session']['email']) AND $GLOBALS['visiteur_session']['email']===$email)
+			  OR (isset($GLOBALS['visiteur_session']['session_email']) AND $GLOBALS['visiteur_session']['session_email']===$email) ){
+				spip_log("Actualiser gravatar vide $duree_vide s (cache maxi " . _GRAVATAR_CACHE_DELAY_CHECK_NEW . "s)", "gravatar");
+			}
+			else {
+				return $gravatar;
+			}
 		}
 		else {
 			spip_log("Recherche nouveau gravatar", "gravatar");
@@ -292,6 +301,9 @@ function gravatar($email, $default='404') {
 			$nb = 0;
 			@touch($lock_file);
 			spip_log("gravatar.com trop long a repondre ($dt), on lock $lock_file", "gravatar");
+		}
+		else {
+			spip_log('gravatar vide pour ' . $email,"gravatar");
 		}
 		// si on a pas eu de reponse mais qu'un cache existe le prolonger pour eviter de rechecker tout le temps
 		if ($gravatar===$gravatar_cache){
