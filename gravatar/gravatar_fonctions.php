@@ -219,7 +219,7 @@ function gravatar($email, $default='404', $force=false) {
 		if ($duree<_GRAVATAR_CACHE_DELAY_REFRESH OR $nb--<=0){
 			return $gravatar;
 		}
-		spip_log("Actualiser gravatar existant anciennete $duree s (cache maxi " . _GRAVATAR_CACHE_DELAY_REFRESH . "s)", "gravatar");
+		spip_log("Actualiser gravatar existant $email anciennete $duree s (cache maxi " . _GRAVATAR_CACHE_DELAY_REFRESH . "s)", "gravatar");
 	}
 	// si c'est un email sans gravatar connu (deja verifie), on ne reverifie pas que passe un delai suffisant
 	else {
@@ -235,14 +235,14 @@ function gravatar($email, $default='404', $force=false) {
 			if ($force
 			  OR (isset($GLOBALS['visiteur_session']['email']) AND $GLOBALS['visiteur_session']['email']===$email)
 			  OR (isset($GLOBALS['visiteur_session']['session_email']) AND $GLOBALS['visiteur_session']['session_email']===$email) ){
-				spip_log("Actualiser gravatar vide $duree_vide s (cache maxi " . _GRAVATAR_CACHE_DELAY_CHECK_NEW . "s)", "gravatar");
+				spip_log("Actualiser gravatar vide $email $duree_vide s (cache maxi " . _GRAVATAR_CACHE_DELAY_CHECK_NEW . "s)", "gravatar");
 			}
 			else {
 				return $gravatar;
 			}
 		}
 		else {
-			spip_log("Recherche nouveau gravatar", "gravatar");
+			spip_log("Recherche nouveau gravatar $email", "gravatar");
 		}
 	}
 
@@ -300,7 +300,7 @@ function gravatar($email, $default='404', $force=false) {
 		if ($dt>10000){
 			$nb = 0;
 			@touch($lock_file);
-			spip_log("gravatar.com trop long a repondre ($dt), on lock $lock_file", "gravatar");
+			spip_log("gravatar.com trop long a repondre pour $email ($dt), on lock $lock_file", "gravatar");
 		}
 		else {
 			spip_log('gravatar vide pour ' . $email,"gravatar");
