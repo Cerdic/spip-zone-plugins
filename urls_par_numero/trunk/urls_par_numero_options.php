@@ -17,7 +17,7 @@ function urls_propres($i, $entite, $args='', $ancre=''){
 	else{
 		$url = urls_propres_dist($i, $entite, $args='', $ancre='');
 		// Supprimer les tirets des urls purement numériques (SPIP 3.1 et >)
-		if ($entite=="article"){//pas de - autour des numéros d'article
+		if ($entite=="article" and is_string($url)){//pas de - autour des numéros d'article
 			$url = str_replace("-","",$url);
 			}
 	}
