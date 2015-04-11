@@ -228,7 +228,9 @@ s.parentNode.insertBefore(cr, s);
 EOH;
 
 	if ($mode == 'head') {
-		return $page = $page . $incJS . $incCSS; //js inline avant les css, sinon ca bloque le chargement
+		//js inline avant les css, sinon ca bloque le chargement
+		$page = $page . $incJS . $incCSS;
+		return $page; 
 	}
 
 	$pos_head = strpos($page, '</head>');
