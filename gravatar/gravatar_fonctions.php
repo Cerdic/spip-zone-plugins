@@ -194,6 +194,7 @@ function gravatar($email, $default='404', $force=false) {
 
 	$gravatar_id .= ($gravatar_default=='404'?"":"-$gravatar_default");
 	$gravatar_cache = $tmp.$gravatar_id.'.jpg';
+	$gravatar_vide = $tmp.$gravatar_id.'.vide';
 
 	$gravatar = "";
 	// On verifie si le gravatar existe en controlant la taille du fichier
@@ -213,21 +214,27 @@ function gravatar($email, $default='404', $force=false) {
 	}
 
 	// si on a un cache valide, on l'utilise
-	$vides = false;
 	if ($gravatar==$gravatar_cache){
 		$duree = $_SERVER['REQUEST_TIME']-filemtime($gravatar_cache);
 		if ($duree<_GRAVATAR_CACHE_DELAY_REFRESH OR $nb--<=0){
 			return $gravatar;
 		}
 		spip_log("Actualiser gravatar existant $email anciennete $duree s (cache maxi " . _GRAVATAR_CACHE_DELAY_REFRESH . "s)", "gravatar");
+		@touch($gravatar_cache); // un touch pour eviter une autre mise a jour concurrente
 	}
 	// si c'est un email sans gravatar connu (deja verifie), on ne reverifie pas que passe un delai suffisant
 	else {
+		// si un fichier vides.txt existe encore, le transformer en touch unitaires
 		lire_fichier($tmp . 'vides.txt', $vides);
-		$vides = @unserialize($vides);
-		if ($vides===false) $vides = array();
-		if (isset($vides[$gravatar_id])){
-			$duree_vide = $_SERVER['REQUEST_TIME']-$vides[$gravatar_id];
+		if ($vides AND $vides = @unserialize($vides)){
+			foreach($vides as $id=>$t){
+				@touch($tmp.$id.".vide",$t);
+			}
+			@unlink($tmp . 'vides.txt');
+		}
+
+		if (file_exists($gravatar_vide)){
+			$duree_vide = $_SERVER['REQUEST_TIME']-filemtime($gravatar_vide);
 			if ($duree_vide<_GRAVATAR_CACHE_DELAY_CHECK_NEW OR $nb--<=0){
 				return $gravatar;
 			}
@@ -236,6 +243,7 @@ function gravatar($email, $default='404', $force=false) {
 			  OR (isset($GLOBALS['visiteur_session']['email']) AND $GLOBALS['visiteur_session']['email']===$email)
 			  OR (isset($GLOBALS['visiteur_session']['session_email']) AND $GLOBALS['visiteur_session']['session_email']===$email) ){
 				spip_log("Actualiser gravatar vide $email $duree_vide s (cache maxi " . _GRAVATAR_CACHE_DELAY_CHECK_NEW . "s)", "gravatar");
+				@touch($gravatar_vide); // un touch pour eviter une autre mise a jour concurrente
 			}
 			else {
 				return $gravatar;
@@ -287,9 +295,13 @@ function gravatar($email, $default='404', $force=false) {
 				image_imagejpg($img, $gravatar_cache);
 			}
 		}
-		if (is_array($vides) AND isset($vides[$gravatar_id])){
-			unset($vides[$gravatar_id]);
-			ecrire_fichier($tmp . 'vides.txt', serialize($vides));
+		else {
+			if (file_exists($gravatar_cache . '.png')){
+				@unlink($gravatar_cache . '.png');
+			}
+		}
+		if (file_exists($gravatar_vide)){
+			@unlink($gravatar_vide);
 		}
 
 		if ($gravatar!==$gravatar_cache){
@@ -312,8 +324,7 @@ function gravatar($email, $default='404', $force=false) {
 			@touch($gravatar_cache);
 		}
 		else {
-			$vides[$gravatar_id] = time();
-			ecrire_fichier($tmp . 'vides.txt', serialize($vides));
+			@touch($gravatar_vide);
 		}
 	}
 
