@@ -261,7 +261,9 @@ function gravatar($email, $default='404', $force=false) {
 		. "&s=" . _TAILLE_MAX_GRAVATAR;
 
 	// recuperation OK ?
+	$GLOBALS['inc_distant_allow_fopen'] = false; // pas de fallback sur fopen si on est bloque par gravatar.com
 	$gravatar_bin = recuperer_page($url_gravatar);
+	unset($GLOBALS['inc_distant_allow_fopen']);
 	$dt = spip_timer('gravatar', true);
 	if ($gravatar_bin){
 		spip_log('recuperer gravatar OK pour ' . $email,"gravatar");
