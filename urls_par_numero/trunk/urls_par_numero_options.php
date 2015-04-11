@@ -4,7 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function urls_propres($i, $entite, $args='', $ancre=''){
 	include_spip("urls/propres");
+	
 	if ($entite=='' and is_numeric($i)){
+		// pour que urls_decoder_url fonctionne correctement
 		$url = array(
 		   array('id_article'=>$i),
 		   'article',
@@ -18,7 +20,6 @@ function urls_propres($i, $entite, $args='', $ancre=''){
 		if ($entite=="article"){//pas de - autour des numéros d'article
 			$url = str_replace("-","",$url);
 			}
-		// pour que urls_decoder_url fonctionne correctement
 	}
 	return $url;
 	}
