@@ -61,7 +61,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	$language = array_shift($params);
 	
 	if ($language=='spip') $language = PLUGIN_COLORATION_CODE_COLORIEUR_SPIP;
-	
+	if ($language=='bibtex' and _COLORATION_BIBTEX_COMME_BIBLATEX == 1) $language = 'biblatex';
 	include_spip('inc/spip_geshi');
 	//
 	// Create a GeSHi object
