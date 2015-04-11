@@ -1,0 +1,19 @@
+<paquet
+	prefix="arraycolumn"
+	categorie="outil"
+	version="1.0.1"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/arraycolumn-64.png"
+	documentation="http://php.net/manual/en/function.array-column.php"
+>
+
+	<nom>array_column pour SPIP</nom>
+
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+
+
+
+</paquet>
