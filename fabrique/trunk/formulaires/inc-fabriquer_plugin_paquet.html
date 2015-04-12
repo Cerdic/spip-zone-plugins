@@ -7,6 +7,7 @@
 <h3><a href="#description"><:fabrique:legend_description:></a></h3>
 <div>
 	<ul>
+	[(#SAISIE{input, paquet/prefixe, label=<:fabrique:label_prefixe:>, obligatoire=oui})]
 	[(#SAISIE{input, paquet/nom, label=<:fabrique:label_nom:>, obligatoire=oui})]
 	[(#SAISIE{input, paquet/slogan, label=<:fabrique:label_slogan:>})]
 	[(#SAISIE{textarea, paquet/description, label=<:fabrique:label_description:>, rows=4})]
@@ -24,7 +25,6 @@
 <h3><a href="#paquet"><:fabrique:legend_paquet:></a></h3>
 <div>
 	<ul>
-	[(#SAISIE{input, paquet/prefixe, label=<:fabrique:label_prefixe:>, obligatoire=oui})]
 	[(#SAISIE{input, paquet/version, label=<:fabrique:label_version:>, obligatoire=oui})]
 	[(#SAISIE{input, paquet/auteur, label=<:fabrique:label_auteur:>})]
 	[(#SAISIE{input, paquet/auteur_lien, label=<:fabrique:label_auteur_lien:>})]
