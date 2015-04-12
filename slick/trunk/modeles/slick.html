@@ -1,0 +1,24 @@
+[(#REM) Modèle slick ]
+
+#SET{largeur, #ENV{largeur, 960}}
+#SET{hauteur, #ENV{hauteur, 320}}
+
+#SET{nombre, #ENV{nombre, 10}}
+
+<B_documents_slide>
+  <div id="slick">
+    <BOUCLE_documents_slide(DOCUMENTS)
+      {media=image}
+      {largeur >= #GET{largeur}}
+      {hauteur >= #GET{hauteur}}
+      {par hasard}
+      {0,#GET{nombre}}>
+      [<div>
+        (#FICHIER
+        |image_passe_partout{#GET{largeur},#GET{hauteur}}
+        |image_recadre{#GET{largeur},#GET{hauteur}})
+      </div>]
+    </BOUCLE_documents_slide>
+  </div>
+</B_documents_slide>
+<//B_documents_slide>

@@ -1,0 +1,24 @@
+<paquet
+    prefix="slick"
+    categorie="multimedia"
+    version="1.0.1"
+    etat="dev"
+    compatibilite="[3.0.16;3.1.*]"
+    logo="prive/themes/spip/images/slick-64.png"
+    schema="1.0"
+    documentation=""
+    >
+  <nom>Slick</nom>
+
+  <auteur lien='http://www.vertige.org'>Vertige (Didier)</auteur>
+
+  <licence>GNU/GPL</licence>
+
+  <necessite nom="saisies" compatibilite="[2.0.3;]" />
+
+  <pipeline nom="insert_head_css" inclure="slick_pipelines.php" />
+  <pipeline nom="insert_head" inclure="slick_pipelines.php" />
+
+  <menu nom="configurer_slick" titre="slick:slick_titre" parent="menu_squelette"  icone="images/slick-16.png" />
+
+</paquet>
