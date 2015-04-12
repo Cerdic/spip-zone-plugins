@@ -33,7 +33,7 @@ do
     echo "    Login / pwd : $SQL_USER $SQL_PWD"
 
     ############################################# 
-    # backup ... tofo : sauvegarder que les tables et pas toute la base
+    # backup ... todo : sauvegarder que les tables et pas toute la base
     ############################################# 
     mkdir ${DIR}/sites_backup
     mysqldump -u${SQL_USER} -p${SQL_PWD} $BASE >$i/tmp/${BASE}.sql 
