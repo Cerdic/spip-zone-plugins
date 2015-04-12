@@ -1,0 +1,16 @@
+<paquet
+	prefix="selecteur-rubriques-trialpha"
+	categorie="edition"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.17;3.0.*]"
+	logo="img/selecteur-rubrique-trialpha.png"
+	documentation="http://contrib.spip.net/4654"
+>
+
+	<nom>Sélecteur de rubriques avec tri alphabétique</nom>
+	<credit lien="https://thenounproject.com/term/list-alphabetic/120495/">Logo : Thomas Helbig</credit>
+	<licence lien="https://www.gnu.org/licenses/gpl-3.0.html">GPL3</licence>
+	<auteur lien='http://www.maieul.net'>Maïeul Rouquette</auteur>
+
+</paquet>
