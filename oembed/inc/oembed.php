@@ -52,7 +52,7 @@ function oembed_lister_providers(){
 		'http://kinomap.com/*'                    => 'http://www.kinomap.com/oembed',
 		'http://photobucket.com/albums/*'         => 'http://photobucket.com/oembed/',
 		'http://photobucket.com/groups/*'         => 'http://photobucket.com/oembed/',
-		'http://smugmug.com/*/*'                  => 'http://api.smugmug.com/services/oembed/',
+		'http://*.smugmug.com/*'                  => 'http://api.smugmug.com/services/oembed/',
 		'http://meetup.com/*'                     => 'http://api.meetup.com/oembed',
 		'http://meetup.ps/*'                      => 'http://api.meetup.com/oembed',
 		'http://*.wordpress.com/*'                => 'http://public-api.wordpress.com/oembed/1.0/',
