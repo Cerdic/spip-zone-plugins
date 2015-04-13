@@ -32,6 +32,10 @@
 		<traducteur nom="mpossoz" lien="http://trad.spip.net/auteur/mpossoz" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/menus?lang_cible=pt_br" total="145" traduits="145" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="placido" lien="http://trad.spip.net/auteur/placido" />
+		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/menus?lang_cible=ru" total="145" traduits="46" relire="0" modifs="1" nouveaux="98" pourcent="31.72">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
