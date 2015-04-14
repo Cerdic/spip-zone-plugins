@@ -1,7 +1,7 @@
 <paquet
 	prefix="archive"
 	categorie="date"
-	version="1.1.0"
+	version="1.1.1"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/archive-32.png"
@@ -15,7 +15,7 @@
 	<auteur lien="http://km.azerttyu.net">Camille Lafitte</auteur>
 	<auteur lien="http://www.kent1.info">kent1</auteur>
 
-	<copyright>2008-2014</copyright>
+	<copyright>2008-2015</copyright>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 

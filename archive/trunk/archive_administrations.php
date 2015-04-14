@@ -25,7 +25,7 @@ function archive_upgrade($nom_meta_base_version,$version_cible){
 	);
 	
 	$maj['0.3.0'] = array(
-			array('maj_archives')
+		array('maj_archives')
 	);
 
 	include_spip('base/upgrade');
@@ -57,6 +57,8 @@ function maj_archives(){
 			$id_article = $archive['id_article'];
 			$modifs = array('statut' => 'archive');
 			$modif = article_modifier($id_article,$modifs);
+			if (time() >= _TIME_OUT)
+				return;
 		}
 	}
 	sql_updateq('spip_articles',array('statut'=>'archive'),'statut="archi"');
