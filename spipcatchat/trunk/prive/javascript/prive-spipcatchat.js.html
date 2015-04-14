@@ -106,7 +106,7 @@ document.getElementById("message")&&(getOnlineUsers(n,r,i,s,o),statusStart=windo
 
 function getOnlineUsers(e,t,n,r,i)
 {
-	$.getJSON(n+"phpscripts/get-prive-online.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+	$.getJSON(n+"phpscripts/get-prive-online.php", // Pour ne pas interférer avec le chat public les scripts sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
 	{auteur:t,salon:e},
 	function(e)
 	{
@@ -115,11 +115,11 @@ function getOnlineUsers(e,t,n,r,i)
 		for(s in e.list)
 		"busy"==e.list[s].status?(texte="Occupé(e) [X]",
 		i="inactive",
-		t==e.list[s].id&&$("#SpipCatChatStatus option[value=2]").attr("selected","selected")):"inactive"==e.list[s].status?(texte=" Absent(e) [-] ",
+		t==e.list[s].id&&$("#deux").attr("selected","selected")):"inactive"==e.list[s].status?(texte=" Absent(e) [-] ",
 		i="neutral",
-		t==e.list[s].id&&$("#SpipCatChatStatus option[value=1]").attr("selected","selected")):(texte="En ligne [&radic;]",
+		t==e.list[s].id&&$("#un").attr("selected","selected")):(texte="En ligne [&radic;]",
 		i="active",
-		t==e.list[s].id&&$("#SpipCatChatStatus option[value=3]").attr("selected","selected")),
+		t==e.list[s].id&&$("#trois").attr("selected","selected")),
 		r+='<span title="'+texte+'"><img src="'+n+"/images/status-"+i+'.png" /> '+e.list[s].login+"</span><br/>";$("#users").html(r)
 	}
 	// else window.location=urlpage // C'est ici que l'on se fait éjecter si l'on n'a pas d'autorisation pour le chat, mais pour l'instant cette fonction n'a plus de raison car il n'y a pas de salon privé dans l'espace du même nom
