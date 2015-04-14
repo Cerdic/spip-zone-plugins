@@ -88,6 +88,9 @@
 	]
 </div>
 <script type="text/javascript">
+	$('#date_debut').on('change', function(){
+		$('#date_fin').val($(this).val());
+	});
 	var repetitions_done = false;
 	jQuery(document).bind('datePickerLoaded',function(){
 		if (!repetitions_done){
