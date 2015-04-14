@@ -355,14 +355,14 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 			else
 				$bouton = bouton_block_depliable($titre, false, "produitsarticle");
 		}
-		$out .= debut_cadre_enfonce("../" . _DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
+		$out .= debut_cadre_enfonce(_DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
 
 	} else {
 		if (_request('edit') || _request('neweven'))
 			$bouton = bouton_block_visible("produitsarticle") . $titre;
 		else
 			$bouton = bouton_block_invisible("produitsarticle") . $titre;
-		$out .= debut_cadre_enfonce("../" . _DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
+		$out .= debut_cadre_enfonce(_DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
 
 		//
 		// Afficher les produits associes
@@ -394,9 +394,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script){
 	//avant d'envoyer a thelia, on convertie en iso pour thelia
 	$res = unicode2charset(charset2unicode($res, 'utf-8'), 'iso-8859-1');
 	ob_start();
-	chdir('..');
 	include_once(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php");
-	chdir('ecrire');
 	$texte = ob_get_contents();
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
@@ -445,14 +443,14 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 			else
 				$bouton = bouton_block_depliable($titre, false, "produitsrubrique");
 		}
-		$out .= debut_cadre_enfonce("../" . _DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
+		$out .= debut_cadre_enfonce(_DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
 
 	} else {
 		if (_request('edit') || _request('neweven'))
 			$bouton = bouton_block_visible("produitsrubrique") . $titre;
 		else
 			$bouton = bouton_block_invisible("produitsrubrique") . $titre;
-		$out .= debut_cadre_enfonce("../" . _DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
+		$out .= debut_cadre_enfonce(_DIR_PLUGIN_SPIP_THELIA . "/img_pack/logo_thelia_petit.png", true, "", $bouton);
 
 		//
 		// Afficher les produits associes
@@ -484,9 +482,7 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script){
 	//avant d'envoyer a thelia, on convertie en iso pour thelia
 	$res = unicode2charset(charset2unicode($res, 'utf-8'), 'iso-8859-1');
 	ob_start();
-	chdir('..');
 	include_once(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php");
-	chdir('ecrire');
 	$texte = ob_get_contents();
 	ob_end_clean();
 	$texte = remplacement_sortie_thelia($texte);
@@ -535,7 +531,8 @@ function afficher_produits_objet($type, $id){
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
 	$t = afficher_liste($largeurs, $table, $styles);
-	if ($spip_display!=4)
+	$tranches = '';
+	if ($GLOBALS['spip_display']!=4)
 		$t = $tranches
 			. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 			. "<thead><tr><th>&nbsp;</th><th>" . _T('spipthelia:nom_du_produit') . "</th><th>" . _T('spipthelia:prix') . "</th></tr></head><tbody>"
@@ -585,7 +582,8 @@ function afficher_rubriques_objet($type, $id){
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial1');
 
 	$t = afficher_liste($largeurs, $table, $styles);
-	if ($spip_display!=4)
+	$tranches = '';
+	if ($GLOBALS['spip_display']!=4)
 		$t = $tranches
 			. "<table width='100%' cellpadding='3' cellspacing='0' border='0'>"
 			. "<thead><tr><th>&nbsp;</th><th>" . _T('spipthelia:nom_de_la_rubrique') . "</th></tr></head><tbody>"
