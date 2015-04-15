@@ -274,12 +274,16 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 
 	// Si on a des traitements
 	if (is_array($traitements) and !empty($traitements)){
+		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
+		if ($formulaire['message_retour']){
+			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
+		}
 		$maxiter = 5;
 		do {
 			foreach ($traitements as $type_traitement => $options){
 				// si traitement deja appele, ne pas le relancer
 				if (!isset($retours['traitements'][$type_traitement])){
-				  if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true)){
+					if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true)){
 						$retours = $appliquer_traitement(
 							array(
 								'formulaire' => $formulaire,
@@ -305,11 +309,6 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 			$erreur_texte = "Impossible de traiter correctement le formulaire $id\n"
 				. "Traitements attendus :".implode(',',array_keys($traitements))."\n"
 				. "Traitements realises :".implode(',',array_keys($retours['traitements']))."\n";
-		}
-
-		// Si on a personnalisé le message de retour, c'est lui qui est affiché uniquement
-		if ($formulaire['message_retour']){
-			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
 		}
 	}
 	else {
