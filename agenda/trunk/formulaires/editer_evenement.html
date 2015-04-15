@@ -88,8 +88,9 @@
 	]
 </div>
 <script type="text/javascript">
-	$('#date_debut').on('change', function(){
-		$('#date_fin').val($(this).val());
+	jQuery('#date_debut').on('change', function(){
+		if (jQuery(this).val() > jQuery('#date_fin').val())
+			jQuery('#date_fin').val(jQuery(this).val());
 	});
 	var repetitions_done = false;
 	jQuery(document).bind('datePickerLoaded',function(){
