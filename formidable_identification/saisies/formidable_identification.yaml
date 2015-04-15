@@ -1,0 +1,104 @@
+
+titre: '<:formidable_identification:saisie_formidable_identification_titre:>'
+description: '<:formidable_identification:saisie_formidable_identification_explication:>'
+icone: 'images/saisies_case.png'
+options:
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'description'
+      label: '<:saisies:option_groupe_description:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label'
+          label: '<:saisies:option_label_label:>'
+          explication: '<:saisies:option_label_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'label_case'
+          label: '<:saisies:option_label_case_label:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication'
+          label: '<:saisies:option_explication_label:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'utilisation'
+      label: '<:saisies:option_groupe_utilisation:>'
+    saisies:
+      -
+        saisie: 'input'
+        options:
+          nom: 'label_formulaire_identification_email'
+          label: '<:formidable_identification:option_label_formulaire_identification_email:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication_formulaire_identification_email'
+          label: '<:formidable_identification:option_explication_formulaire_identification_email:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
+      -
+        saisie: 'oui_non'
+        options:
+          nom: 'formulaire_identification_afficher_nom'
+          label: '<:formidable_identification:option_afficher_nom:>'
+          explication: '<:formidable_identification:option_afficher_nom_explication:>'
+      -
+        saisie: 'input'
+        options:
+          nom: 'label_formulaire_identification_nom'
+          label: '<:formidable_identification:option_label_formulaire_identification_nom:>'
+          explication: '<:formidable_identification:option_label_explication:>'
+          size: 50
+      -
+        saisie: 'input'
+        options:
+          nom: 'explication_formulaire_identification_nom'
+          label: '<:formidable_identification:option_explication_formulaire_identification_nom:>'
+          explication: '<:saisies:option_explication_explication:>'
+          size: 50
+  -
+    saisie: 'fieldset'
+    options:
+      nom: 'affichage'
+      label: '<:saisies:option_groupe_affichage:>'
+    saisies:
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si'
+          label: '<:saisies:option_afficher_si_label:>'
+          explication: '<:saisies:option_afficher_si_explication:>'
+          rows: 5
+      -
+        saisie: 'textarea'
+        options:
+          nom: 'afficher_si_remplissage'
+          label: '<:saisies:option_afficher_si_remplissage_label:>'
+          explication: '<:saisies:option_afficher_si_remplissage_explication:>'
+          rows: 5
+      -
+        saisie: 'input'
+        options:
+          nom: 'attention'
+          label: '<:saisies:option_attention_label:>'
+          explication: '<:saisies:option_attention_explication:>'
+          size: 50
+defaut:
+  options:
+    label: '<:formidable_identification:formulaire_identification_label_case:>'
+    label_formulaire_identification_nom: '<:formidable_identification:label_formulaire_identification_nom:>'
+    label_formulaire_identification_email: '<:formidable_identification:label_formulaire_identification_email:>'
+    # champs extras (definition du champ sql)
+    sql: "varchar(3) DEFAULT '' NOT NULL"

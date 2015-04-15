@@ -1,0 +1,52 @@
+#SET{valeur_formidable_identification,#VAL{formidable_identification}|_request|sinon{#ENV{valeur_formidable_identification_forcee,#ENV{valeur_formidable_identification}}|is_null|?{#ENV{defaut_formidable_identification},#ENV{valeur_formidable_identification_forcee,#ENV{valeur_formidable_identification}}}}}
+[(#SESSION{id_auteur}|>{0}|oui)
+	#SET{readonly_session,oui}
+	#SET{valeur_formidable_identification,on}
+	#SET{disable,disabled}
+]
+[(#AUTORISER{inscrireauteur,6forum,0}|oui)
+<div class="choix">
+	[(#ENV{disable}|non)<input type="hidden" name="formidable_identification" value="#ENV{valeur_non,''}" />]
+	<input type="checkbox" name="formidable_identification" class="checkbox" id="champ_formidable_identification"[ (#GET{valeur_formidable_identification}|=={on}|oui)checked="checked"] value="on" [ disabled="(#GET{disable,#ENV{disable}})"][ readonly="(#ENV{readonly})"][ (#ENV*{attributs})]/>
+	[<label for="champ_formidable_identification"[(#GET{valeur_formidable_identification}|=={on}|oui)class="on"]>(#ENV*{label_case})</label>]
+</div>
+[(#GET{valeur_formidable_identification}|=={on}|et{#GET{readonly_session}|=={oui}}|oui)
+<div class="important">#SET{url,#URL_LOGOUT{#SELF}}
+	<:formidable_identification:message_deja_identifie{url=#GET{url}}:>
+</div>]
+[(#GET{valeur_formidable_identification}|=={on}|et{#GET{readonly_session}|=={oui}}|non)
+<ul class="formulaire_identification_infos" style="display:none;">
+	[(#ENV{formulaire_identification_afficher_nom}|=={oui}|oui)
+		[(#SAISIE{input,formulaire_identification_nom,type=text,
+			label=#ENV{label_formulaire_identification_nom},
+			explication=#ENV{explication_formulaire_identification_nom},
+			valeur=#VAL{formulaire_identification_nom}|_request})]
+	]
+	[(#SAISIE{input,formulaire_identification_email,type=text,
+		label=#ENV{label_formulaire_identification_email},
+		explication=#ENV{explication_formulaire_identification_email},
+		valeur_forcee=#VAL{formulaire_identification_email}|_request})]
+</ul>]
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		if(jQuery('#champ_formidable_identification').is(':checked')){
+			jQuery('.formulaire_identification_infos').show();
+		}else{
+			jQuery('.formulaire_identification_infos').hide();
+		}
+		jQuery('#champ_formidable_identification').on('change',function(){
+			if(jQuery('#champ_formidable_identification').is(':checked')){
+				jQuery('.formulaire_identification_infos').slideDown();
+			}else{
+				jQuery('.formulaire_identification_infos').slideUp();
+			}
+		});
+	});
+</script>]
+[(#AUTORISER{inscrireauteur,6forum,0}|non)
+[(#REM|test_espace_prive|oui)
+	<div class="erreur_message">
+		<:formidable_identification:message_erreur_inscription_desactivee:>
+	</div>
+]
+]
