@@ -5,6 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	//A
 	'api_errorcode' => 'Infos de retour de MailChimp. Codes retournés:',
+	'api_error' => 'Une erreur est survenue, votre inscription n\'a pas été prise en compte',
 
 	//C
 	'config_erreur' => 'Erreur Les paramêtres d\'accès à Mailchimp ne sont pas renseignés, l\'administrateur du site peut le faire à cette adresse : <a href="ecrire/?exec=configurer_mailchimp">configuration MailChimp</a>',

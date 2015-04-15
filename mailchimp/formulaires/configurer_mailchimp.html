@@ -5,7 +5,7 @@
 			<legend><:mailchimp:configurer_legend:></legend>
 			<ul>
 				<li class="mailchimp_apikey[ (#ENV**{erreurs}|table_valeur{apikey}|oui)erreur]">
-					<label ><:mailchimp:configurer_apikey:></label>
+					<label for="apiKey"><:mailchimp:configurer_apikey:></label>
 					[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{apiKey})</span>
 					]<input type="text" class="text" name="apiKey" id="apiKey" [ value="(#ENV{apiKey})"] />
@@ -13,7 +13,7 @@
 				</li>
 
 				<li class="mailchimp_listId[ (#ENV**{erreurs}|table_valeur{listId}|oui)erreur]">
-					<label for="font-family"><:mailchimp:configurer_listid:></label>[
+					<label for="listId"><:mailchimp:configurer_listid:></label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{listId})</span>
 					]<input type="text" class="text" name="listId" id="listId" [ value="(#ENV{listId})"] />
 					<p class="explication"><:mailchimp:configurer_listid_explication:></p>
