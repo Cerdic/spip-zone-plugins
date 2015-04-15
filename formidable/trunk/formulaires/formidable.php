@@ -21,7 +21,7 @@ function formidable_id_formulaire($id){
 	if (isset($id_formulaires[$id]))
 		return $id_formulaires[$id];
 
-    if (is_numeric($id))
+	if (is_numeric($id))
 		$where = 'id_formulaire = ' . intval($id);
 	elseif (is_string($id))
 		$where = 'identifiant = ' . sql_quote($id);
@@ -284,9 +284,9 @@ function formulaires_formidable_traiter($id, $valeurs = array(), $id_formulaires
 							array(
 								'formulaire' => $formulaire,
 								'options' => $options,
-						        'id_formulaire' => $id_formulaire,
-						        'valeurs' => $valeurs,
-						        'id_formulaires_reponse' => $id_formulaires_reponse,
+								'id_formulaire' => $id_formulaire,
+								'valeurs' => $valeurs,
+								'id_formulaires_reponse' => $id_formulaires_reponse,
 							),
 							$retours
 						);
