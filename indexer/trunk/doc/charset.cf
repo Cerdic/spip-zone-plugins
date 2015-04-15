@@ -1,12 +1,13 @@
 <?php
+/*
 #
 # definition du charset, charset_table etc
 #
-# utiliser dans la définition d'un index :
-#  <?php echo _CHARSET_INDEXATION_FR; ?>
-#
-# http://sphinxsearch.com/wiki/doku.php?id=charset_tables
+ utiliser dans la définition d'un index :
+  <?php echo _CHARSET_INDEXATION_FR; ?>
 
+ http://sphinxsearch.com/wiki/doku.php?id=charset_tables
+*/
 $ranges = array(
 
 '0..9, A..Z->a..z, a..z',
