@@ -13,7 +13,7 @@ function traiter_enregistrement_dist($args, $retours){
 	$saisies = saisies_lister_par_nom($saisies);
 
 	// La personne a-t-elle un compte ?
-	$id_auteur = isset($GLOBALS['visiteur_session']) ? ($GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
+	$id_auteur = isset($GLOBALS['visiteur_session']) ? (isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : 0) : 0;
 
 	// traitement de l'anonymisation
 	if ($options['anonymiser'] == 'on'){
