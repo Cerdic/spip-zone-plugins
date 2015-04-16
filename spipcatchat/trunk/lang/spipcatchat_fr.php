@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'catchat_label' => 'SpipCatChat',
 
 /*--L--*/
-
+'label_admin' => 'Salon administrateur',
 'label_catchat_theme_color' => 'Couleur du thème',
 'label_catchat_theme_coloricone' => 'Couleur des icones',
 'label_catchat_theme_colorThumbs' => 'Thème',
