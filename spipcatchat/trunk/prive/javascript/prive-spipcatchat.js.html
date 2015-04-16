@@ -57,7 +57,30 @@ $.ajax({
 	success:function(e)
 		{ // Après l'exécution du script on lance la fonction STARTCHAT
 			startchat(catchatrefresh,catchatrefreshstatut,idSalon,idAuteur,URLplugin,langShowChat,charset);
-			$("#spipcatchatselectsalon").css("display","block");
+		}
+	})
+}
+
+function spipcatchatShowChatAdmin(admin)
+{ // Cette fonction permet d'initialiser le chat dans le bon environnement. En assignant les valeurs utiles au déroulement du chat, le time-code, les autorisations, les statuts etc... dans des variables de sessions.
+
+$.ajax({
+	url:URLplugin+"phpscripts/get-prive-autorisation.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
+	type:"POST",
+	data:"id_auteur="+idAuteur+"&id_salon="+idSalon+"&nom="+nom+"&url="+URLplugin+"&char="+charset+"&admin="+admin,
+	success:function(e)
+		{ 
+			if(e==1)
+			{
+				$('#libre').css('display','none');
+				$('#occuper').css('display','block');
+			}
+			if(e==0){
+				$('#libre').css('display','block');
+				$('#occuper').css('display','none');
+			}
+				$('#public').removeAttr('checked');
+				$('#prive').removeAttr('checked');
 		}
 	})
 }
@@ -109,8 +132,7 @@ function getOnlineUsers(e,t,n,r,i)
 	{auteur:t,salon:e},
 	function(e)
 	{
-	if(1==e.autorisation)
-	{ var r="",i,s;
+	 var r="",i,s;
 		for(s in e.list)
 		"busy"==e.list[s].status?(texte="Occupé(e) [X]",
 		i="inactive",
@@ -120,8 +142,6 @@ function getOnlineUsers(e,t,n,r,i)
 		i="active",
 		t==e.list[s].id&&$("#trois").attr("selected","selected")),
 		r+='<span title="'+texte+'"><img src="'+n+"/images/status-"+i+'.png" /> '+e.list[s].login+"</span><br/>";$("#users").html(r)
-	}
-	// else window.location=urlpage // C'est ici que l'on se fait éjecter si l'on n'a pas d'autorisation pour le chat, mais pour l'instant cette fonction n'a plus de raison car il n'y a pas de salon privé dans l'espace du même nom
 	}
   )
 }
