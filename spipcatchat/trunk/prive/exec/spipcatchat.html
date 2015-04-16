@@ -4,7 +4,13 @@
 <INCLURE{fond=prive/javascript/prive-spipcatchat.js}{url_plugin=#GET{url_plugin}}{id_auteur=#ID_AUTEUR}{nom=#NOM|sinon{#LOGIN}}>
 </script>   
     <INCLURE{fond=prive/squelettes/contenu/prive-spipcatchat}{id_auteur=#ID_AUTEUR}>
-    <!--#navigation-->
+    <!--#navigation--> 
+    [(#CONFIG{spipcatchat/admin}|=={oui}|oui) [(#SESSION{statut}|=={0minirezo}|oui)
+    <INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-selecteur-ominizero}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
+    ]]
+     [(#CONFIG{spipcatchat/admin}|=={oui}|oui) [(#SESSION{statut}|=={webmestre}|oui)
+    <INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-selecteur-ominizero}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
+    ]]
     <INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-statut}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>  
     <!--/#navigation-->
     <!--#extra-->
