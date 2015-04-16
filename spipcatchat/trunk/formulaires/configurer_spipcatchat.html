@@ -115,6 +115,18 @@
 					</select>
 				</li>
 				</ul>
+		<ul>
+		#SET{name,admin}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect4(POUR){tableau #LISTE{non,oui}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect4>
+					</select>
+				</li>
+				</ul>
 		</fieldset>	
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
