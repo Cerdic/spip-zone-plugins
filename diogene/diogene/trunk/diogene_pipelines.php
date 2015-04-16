@@ -817,7 +817,7 @@ function diogene_diogene_traiter($flux){
 		$_FILES = $GLOBALS['HTTP_POST_FILES'];
 
 	if (is_array($_FILES) && isset($_FILES['logo_on'])){
-		include_spip('formulaire/editer_logo');
+		include_spip('formulaires/editer_logo');
 
 		$objet = $flux['args']['type'];
 		$_id_objet = id_table_objet($objet);
