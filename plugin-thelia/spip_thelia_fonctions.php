@@ -205,7 +205,8 @@ function spip_thelia_appeler_moteur_thelia($texte){
 
 	//reaffectation des variables de thelia qui ont etees renommees dans les squelettes pour eviter les conflits avec spip
 	$_REQUEST['action'] = $_REQUEST['thelia_action'];
-	$_REQUEST['page'] = $_REQUEST['page_thelia'];
+	// il faut peupler la globale $page pour que le pagination thelia fonctionne
+	$GLOBALS['page'] = $_REQUEST['page'] = $_REQUEST['page_thelia'];
 
 	if (isset($_REQUEST['thelia_article']))
 		$_REQUEST['article'] = $_REQUEST['thelia_article'];

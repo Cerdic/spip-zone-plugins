@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Interface Th&#233;lia</nom>
- 	<version>1.5.8</version>
+ 	<version>1.5.9</version>
 	<prefix>spip_thelia</prefix>
  	<auteur>Arnault Pachot, Gilles Vincent, Claude Chadoutaud, Aur&#233;lien Dumas</auteur>
 	<slogan>Interfacer SPIP avec le logiciel de vente en ligne Th&#233;lia</slogan>
