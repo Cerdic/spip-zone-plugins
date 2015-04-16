@@ -1,0 +1,32 @@
+<paquet
+	prefix="lim"
+	categorie="maintenance"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/lim-64.png"
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2015-03-09 17:30:45
+	-->
+
+	<nom>Lim</nom>
+
+	<auteur lien='http://www.akilia.net'>Pierre Miquel</auteur>
+	<credit>Logo : LeChat</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="saisies"  compatibilite="[1.24.0;[" />
+	<utilise nom="mots"  compatibilite="[2.4.12;[" />
+
+	<pipeline nom="autoriser" inclure="lim_autorisations.php" />
+	<pipeline nom="afficher_config_objet" inclure="lim_pipelines.php" />
+
+	<onglet nom="configurer_lim" titre="lim:onglet_lim" parent="configurer_lim"  icone="images/lim-24.png" />
+	<onglet nom="configurer_lim_logos" titre="lim:onglet_lim_logo" parent="configurer_lim"  icone="images/image-lim-24.png" />
+	<onglet nom="configurer_lim_rubriques" titre="lim:onglet_lim_rubriques" parent="configurer_lim"  icone="images/rubrique-lim-24.png" />
+
+</paquet>

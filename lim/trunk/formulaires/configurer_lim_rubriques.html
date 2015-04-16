@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><img src="#CHEMIN_IMAGE{rubrique-24.png}" class="cadre-icone" /><:lim:cfg_titre_restriction_par_rubrique:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend>Articles</legend>
+					[(#INCLURE{fond=formulaires/inc-choisir-rubriques,name=article}{article=#ENV{article}}{juste_secteur=non})]
+				</fieldset>
+			</li>
+		</ul>
+		[(#CONFIG{activer_breves}|!={non}|oui)
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend>Brèves</legend>
+					[(#INCLURE{fond=formulaires/inc-choisir-rubriques,name=breve}{breve=#ENV{breve}}{juste_secteur=oui})]
+				</fieldset>
+			</li>
+		</ul>
+		]
+		[(#CONFIG{activer_sites}|!={non}|oui)
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<legend>Sites</legend>
+					[(#INCLURE{fond=formulaires/inc-choisir-rubriques,name=site}{site=#ENV{site}}{juste_secteur=non})]
+				</fieldset>
+			</li>
+		</ul>
+		]
+		<input type="hidden" name="_meta_casier" value="lim_rubriques" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

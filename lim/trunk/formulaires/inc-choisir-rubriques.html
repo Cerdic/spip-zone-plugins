@@ -1,0 +1,41 @@
+<B_rubriques>
+<p class='lim_info'><:lim:label_desactiver_article_par_rubrique:>'[(#EVAL{#NAME}|objet_info{texte_creer}|_T)]'.<br>
+Note : les rubriques marquées d'un <img src='#CHEMIN_IMAGE{del-24.png}' /> contiennent déjà des [(#EVAL{#NAME}|objet_info{icone_objet}|_T|textebrut)s].</p>
+
+<ul class='creneaux'>
+<BOUCLE_rubriques(RUBRIQUES){racine}{par num titre,titre}{tout}>
+	<li class='li_long secteur'>
+	<div class='choix secteur[(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked]'>
+			<input type='checkbox' name='#NAME\[\]' value='#ID_RUBRIQUE' id='[(#NAME|concat{_rub#ID_RUBRIQUE})]' [(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked='checked'][(#ID_RUBRIQUE|verifier_presence_objets{#NAME}|oui)disabled='disabled']/>
+		<label for='[(#NAME|concat{_rub#ID_RUBRIQUE})]'>#TITRE[(#ID_RUBRIQUE|verifier_presence_objets{#NAME}|oui)<img class='forbidden' src='#CHEMIN_IMAGE{del-20.png}' />]</label>
+	</div>
+	<B_enfants>
+	<ul>
+	<BOUCLE_enfants(RUBRIQUES){id_parent}{par num titre,titre}{tout}{si #JUSTE_SECTEUR|!={oui}}>
+	<li class='li_long'>
+		<div class='choix[(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked]'>
+			<input type='checkbox' name='#NAME\[\]' value='#ID_RUBRIQUE' id='[(#NAME|concat{_rub#ID_RUBRIQUE})]' [(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked='checked'][(#ID_RUBRIQUE|verifier_presence_objets{#NAME}|oui)disabled='disabled']/>
+			<label for='[(#NAME|concat{_rub#ID_RUBRIQUE})]'>#TITRE[(#ID_RUBRIQUE|verifier_presence_objets{#NAME}|oui)<img class='forbidden' src='#CHEMIN_IMAGE{del-20.png}' />]</label>
+		</div><BOUCLE_rec(BOUCLE_enfants)/>
+	</li>
+	</BOUCLE_enfants>
+	</ul>
+	</B_enfants>
+</li>
+</BOUCLE_rubriques>
+</ul>
+</B_rubriques>
+
+<script type="text/javascript">/*<![CDATA[*/
+jQuery("input:checkbox").change(function(){
+	if (jQuery(this).is(":checked")) {
+		jQuery.each( jQuery(this).parent().next().find('input:checkbox:not(:disabled)'), function(index,item) {
+			jQuery(item).prop('checked',true);
+		});
+	} else {
+		jQuery.each( jQuery(this).parent().next().find('input:checkbox'), function(index,item) {
+			jQuery(item).prop('checked',false);
+		});
+	}
+});
+/*]]>*/</script>

@@ -1,0 +1,9 @@
+<BOUCLE_objets(POUR){tableau #REM|lister_tables_objets_sql}{cle !IN #ENV{exclus,''}}>[(#VALEUR{editable}|oui)
+#SET{id,#ENV{name}|replace{\W,'_'}|concat{'_',#CLE}}
+<div class='choix choix_#CLE'>
+	<input type="checkbox"  id="#GET{id}" name="#ENV{name}\[\]" value="#CLE"[(#ENV{selected}|=={all}|ou{#CLE|in_any{#ENV{selected}}})checked="checked"][(#CONFIG{activer_logos}|=={non}|oui)disabled='disabled'][(#CLE|verifier_presence_logo|oui)disabled='disabled'] />
+	<label for="#GET{id}">[(#VALEUR{texte_objets}|_T)][(#CLE|verifier_presence_logo|oui)<img class='forbidden' src='#CHEMIN_IMAGE{del-20.png}' />]</label>
+	[(#CLE|=={spip_syndic}|oui)<a class='aide popin' target='_blank' href='#URL_ECRIRE{info_lim_logo_site,var_lang=#LANG}'>[(#CHEMIN_IMAGE{aide-16.png}|balise_img|inserer_attribut{title,<:titre_image_aide:>}|inserer_attribut{class, info_logo_site})]</a>]
+</div>
+]</BOUCLE_objets>
+<input type="hidden" name="#ENV{name}[]" value="" />

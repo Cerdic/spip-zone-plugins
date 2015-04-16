@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><img src="#CHEMIN_IMAGE{forum-24.png}" class="cadre-icone" /><:lim:cfg_titre_forums_publics:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#CONFIG{forums_publics}|=={non}|oui)
+	#BOITE_OUVRIR{'Explication','info'}
+	<p>Dans la page <a href="./?exec=configurer_forum">Configurer Forum</a>, vous avez désactivé l'utilisation des forums publics.</p>
+	<p>L'option ci-dessous vous permet en plus de <b>désactiver l'affichage du bloc "Forum" de toutes les pages Article</b>, sans considération pour les options avancées (pas d'affichage au cas par cas).</p>
+	#BOITE_FERMER
+	]
+	[(#CONFIG{forums_publics}|=={non}|non)
+	#BOITE_OUVRIR{'Prérequis','info'}
+	<p>Pour que l'option ci-dessous soit activable, vous devez vous rendre sur la page <a href="./?exec=configurer_forum">Configurer Forum</a>, et désactiver l'utilisation des forums publics.</p>
+	#BOITE_FERMER
+	#SET{disable,disabled}
+	]
+	
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<ul>
+			[(#SAISIE{oui_non_ligne, forums_publics,label=<:lim:label_forums_publics:>, li_class=long_label,disable=#GET{disable}})]
+		</ul>
+
+		<input type="hidden" name="_meta_casier" value="lim" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
