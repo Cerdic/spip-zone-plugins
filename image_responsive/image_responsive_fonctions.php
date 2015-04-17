@@ -300,6 +300,36 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center") {
 	$r_img = $h_img / $l_img;	
 	$r = $hauteur / $largeur;	
 	
+	// Si align est "focus", on va aller chercher le «point d'intérêt» de l'image 
+	// avec la fonction centre_image du plugin «centre_image»
+	if ($align == "focus" && function_exists(centre_image)) {
+		if ($r_img > $r) {
+			$dy = centre_image_y($img);
+			$h_dest = $l_img * $r;
+			$h_centre = $h_img * $dy;
+			$top = round($h_centre - ($h_dest/2));
+			
+			if ($top < 0) $top = 0;
+			if ($top + $h_dest > $h_img ) $top = $h_img - $h_dest;
+			
+			//echo "Vertical $dy - $l_img x $h_img - $h_dest - $h_centre $top";
+			$align = "top=$top";
+			
+			
+		} else {
+			$dx = centre_image_x($img);
+			$l_dest = $h_img / $r;
+			$l_centre = $l_img * $dx;
+			$left = round($l_centre - ($l_dest/2));
+			
+			if ($left < 0) $left = 0;
+			if ($left + $l_dest > $l_img ) $left = $l_img - $l_dest;
+
+			//echo "Large $dx - $l_img x $h_img - $l_dest - $l_centre $left";
+			$align = "left=$left";
+		}
+	}
+	
 	if ($r_img < $r) {
 		include_spip("filtres/images_transforme");
 		$img = image_recadre($img, $h_img/$r, $h_img, $align);
