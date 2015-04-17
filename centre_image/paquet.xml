@@ -9,7 +9,7 @@
 	<nom>Centre image</nom>
 	<!-- Filtres de transformation d'image et de couleurs -->
 
-	<auteur>ARNO*</auteur>
+	<auteur>ARNO*, Greg Schoppe</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
 </paquet>
