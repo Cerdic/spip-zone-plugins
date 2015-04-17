@@ -190,7 +190,7 @@ class Client {
 
 		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		if ($code != 200) {
-			throw new \RuntimeException('HTTP error: '.$code);
+			throw new \RuntimeException('HTTP error: ' . $code . " // " . curl_error($curl));
 		}
 
 		if (stripos($headers, 'Content-type: application/json') !== false) {
