@@ -24,7 +24,7 @@
 
 <B_filtres>
 <h4>Filtres:</h4>
-<BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année,stars,Aucune etoile}}>[
+<BOUCLE_filtres(DATA){source tableau, #ARRAY{auteur,Aucun auteur,tag,Aucun tag,annee,Aucune année,stars,Aucune etoile,objet,Aucun objet}}>[
 (#ENV{#CLE}|oui)
 	<div>
 		<a class="btn btn-mini" href="[(#SELF|parametre_url{#CLE,''})]"><i class="icon-remove"></i> [(#ENV{#CLE}|=={-}|?{#VALEUR,#ENV{#CLE}})]</a>
@@ -64,12 +64,14 @@
 	{filter #ENV{annee},  'YEAR(date) = @valeur' }
 	{filter #ENV{tag},    'IN(properties.tags, @valeurs)',    'LENGTH(properties.tags) = 0'}
 	{filter #ENV{auteur}, 'IN(properties.authors, @valeurs)', 'LENGTH(properties.authors) = 0'}
+	{filter #ENV{objet}, 'IN(properties.objet, @valeurs)', 'LENGTH(properties.objet) = 0'}
 
 	{par #GET{tri}}{inverse #GET{sens_tri}}
 
 	{facet auteur, properties.authors ORDER BY COUNT(*) DESC}
 	{facet tag,    properties.tags ORDER BY COUNT(*) DESC}
 	{facet annee, YEAR(date) ORDER BY date DESC}
+	{facet objet,    properties.objet ORDER BY COUNT(*) DESC}
 
 	{pagination 10}
 >
