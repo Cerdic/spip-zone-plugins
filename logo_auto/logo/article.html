@@ -1,16 +1,32 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logos}
+
+[(#REM) recuperer le logo d'article de facon classique]
 #SET{logo,#ENV*{logo_article}}
+
+[(#REM) s'il n'existe pas, chercher une image associee a l'article ;
+
+  On teste "arton" pour respecter l'ordre des priorités suivant :
+  * logo d'article
+  * image liée à l'article
+  * logo de rubrique
+
+]
 <BOUCLE_doc(DOCUMENTS)
-  {si (#GET{logo}|non)}
+  {si (#GET{logo}|match{arton}|non)}
   {id_article}
   {extension IN jpg, gif, png}
   {par date}
   {0,1}
 >
-#SET{logo,#LOGO_DOCUMENT}
+#SET{logo,#FICHIER}
 </BOUCLE_doc>
- 
+
+[(#REM) traiter/recadrer l'image ]
 [(#GET{logo}
-    |image_passe_partout{100,100}
-    |image_recadre{100,100,center}
-    |inserer_attribut{class,'spip_logos'}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center}
+    |inserer_attribut{class,#GET{class}}
 )]
