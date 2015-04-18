@@ -10,7 +10,6 @@ function greves_styliser($flux){
 		){	
 			$flux['data'] 				= 	str_replace('.html','',find_in_path('greve.html'));
 			$flux['args']['fond']		= 	'greve';
-			var_dump($flux);
 		}
 	}
 	return $flux;	
