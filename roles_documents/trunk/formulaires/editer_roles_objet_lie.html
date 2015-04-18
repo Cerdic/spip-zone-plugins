@@ -1,0 +1,4 @@
+<form action="#ENV{action}" method="post">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	[(#INCLURE{fond=formulaires/inc-editer_liens_actions_roles,env,id=#ENV{id_objet_source},cle=#ENV{objet_source}-#ENV{id_objet_source}-#ENV{objet}-#ENV{id_objet},libelle=<:roles_documents:bouton_modifier_roles:>})]
+</form>

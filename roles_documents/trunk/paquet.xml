@@ -1,0 +1,25 @@
+<paquet
+	prefix="roles_documents"
+	categorie="edition"
+	version="0.1.0"
+	etat="experimental"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/roles_documents-48.png"
+	documentation=""
+	schema="1.0.0" 
+>
+
+	<nom>Rôles de documents</nom>
+
+	<auteur>tcharlss</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<necessite nom="roles" compatibilite="[1.0.0;]" />
+	<necessite nom="medias" compatibilite="[2.7.27;]" />
+
+	<pipeline nom="document_desc_actions" inclure="roles_documents_pipelines.php" />
+	<pipeline nom="lister_roles_documents" inclure="coordonnees_pipelines.php" action=""/>
+	<pipeline nom="declarer_tables_objets_sql"  inclure="base/roles_documents.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/roles_documents.php" />
+</paquet>
