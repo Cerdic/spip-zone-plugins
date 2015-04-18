@@ -2,7 +2,7 @@
 	<form action="#ENV{action}" method="post"><div class="spip roles roles-documents">
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<B_roles>[<strong>(#TOTAL_BOUCLE|singulier_ou_pluriel{roles:role_titre,roles:roles_titre})</strong> : ]
-		<BOUCLE_roles(documents_liens){id_document=#ENV{id_objet_source}}{objet}{id_objet}{par role}{role!=''}{", "}>[(#ROLE|role{documents})]</BOUCLE_roles>
+		<BOUCLE_roles(documents_liens){id_document=#ENV{id_objet_source}}{objet}{id_objet}{par role}{role!=''}{", "}>[(#ROLE|role{#ENV{objet_source}|table_objet})]</BOUCLE_roles>
 		[(#ENV{editable}|oui)
 		[(#INCLURE{fond=formulaires/inc-editer_liens_actions_roles,env,id=#ENV{id_objet_source},cle=#ENV{objet_source}-#ENV{id_objet_source}-#ENV{objet}-#ENV{id_objet},libelle=<:roles_documents:bouton_modifier_roles:>})]
 		]
