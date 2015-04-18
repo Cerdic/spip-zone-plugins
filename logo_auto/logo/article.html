@@ -24,6 +24,15 @@
 #SET{logo,#FICHIER}
 </BOUCLE_doc>
 
+<BOUCLE_art(ARTICLES)
+{si (#GET{logo}|non)}>
+<BOUCLE_rub(RUBRIQUES)
+  {id_rubrique}
+>
+#SET{logo,#LOGO_RUBRIQUE}
+</BOUCLE_rub>
+</BOUCLE_art>
+
 [(#REM) traiter/recadrer l'image ]
 [(#GET{logo}
     |image_passe_partout{#GET{largeur},#GET{hauteur}}
