@@ -1,4 +1,6 @@
-<form action="#ENV{action}" method="post">
-	#ACTION_FORMULAIRE{#ENV{action}}
-	[(#INCLURE{fond=formulaires/inc-editer_liens_actions_roles,env,id=#ENV{id_objet_source},cle=#ENV{objet_source}-#ENV{id_objet_source}-#ENV{objet}-#ENV{id_objet},libelle=<:roles_documents:bouton_modifier_roles:>})]
-</form>
+<div class="formulaire_spip formulaire_editer_roles_objet_lie">
+	<form action="#ENV{action}" method="post"><div class="spip roles roles-documents">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#INCLURE{fond=formulaires/inc-editer_liens_actions_roles,env,id=#ENV{id_objet_source},cle=#ENV{objet_source}-#ENV{id_objet_source}-#ENV{objet}-#ENV{id_objet},libelle=<:roles_documents:bouton_modifier_roles:>})]
+	</div></form>
+</div>

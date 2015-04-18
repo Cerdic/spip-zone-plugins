@@ -2,5 +2,6 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-.liste_items.documents .item { overflow: visible; }
-.liste_items.documents .item .actions { text-align: #ENV{left}; }
+.liste_items.documents .item { overflow: visible; } /* fix : dropdown visible */
+.liste_items.documents .item .actions { text-align: #ENV{left}; } /* fix : alignemement texte */
+.formulaire_editer_roles_objet_lie { margin: 0; background: transparent; border: 0 none; } /* fix : annuler le style par défaut pour le formulaire */
