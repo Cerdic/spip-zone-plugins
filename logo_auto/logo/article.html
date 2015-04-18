@@ -35,6 +35,7 @@
 
 [(#REM) traiter/recadrer l'image ]
 [(#GET{logo}
+    |sinon{#LOGO_SITE_SPIP}
     |image_passe_partout{#GET{largeur},#GET{hauteur}}
     |image_recadre{#GET{largeur},#GET{hauteur},center}
     |inserer_attribut{class,#GET{class}}
