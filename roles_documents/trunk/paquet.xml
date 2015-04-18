@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles_documents"
 	categorie="edition"
-	version="0.1.2"
+	version="0.1.3"
 	etat="experimental"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/roles_documents-48.png"
@@ -11,8 +11,8 @@
 
 	<nom>Rôles de documents</nom>
 
-	<auteur>Tcharlss</auteur>
-	<auteur>Rastapopoulos</auteur>
+	<auteur lien="http://contrib.spip.net/tcharlss">Tcharlss</auteur>
+	<auteur lien="http://contrib.spip.net/RastaPopoulos">RastaPopoulos</auteur>
 
 	<licence>GNU/GPL</licence>
 
