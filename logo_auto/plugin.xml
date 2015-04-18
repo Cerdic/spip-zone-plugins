@@ -1,0 +1,23 @@
+<plugin>
+<nom>Logos d'articles automatiques</nom>
+<prefix>logo_auto</prefix>
+<icon>icon/logo_auto.png</icon>
+
+<version>0.0.1</version>
+<etat>dev</etat>
+<categorie>multimedia</categorie>
+
+<slogan>Logos d'articles automatiques</slogan>
+<description>Plus besoin d’associer laborieusement des logos aux articles quand ils sont générés de façon automatique !</description>
+<lien>http://romy.tetue.net/521</lien>
+<auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
+
+<fonctions>logo_auto_fonctions.php</fonctions>
+
+<pipeline>
+	<nom>declarer_tables_interfaces</nom>
+	<inclure>logo_auto_fonctions.php</inclure>
+</pipeline>
+
+<necessite id="SPIP" version="[2.0.0;3.1.*]">
+</plugin>

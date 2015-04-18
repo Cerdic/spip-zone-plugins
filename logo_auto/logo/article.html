@@ -1,0 +1,16 @@
+#SET{logo,#ENV*{logo_article}}
+<BOUCLE_doc(DOCUMENTS)
+  {si (#GET{logo}|non)}
+  {id_article}
+  {extension IN jpg, gif, png}
+  {par date}
+  {0,1}
+>
+#SET{logo,#LOGO_DOCUMENT}
+</BOUCLE_doc>
+ 
+[(#GET{logo}
+    |image_passe_partout{100,100}
+    |image_recadre{100,100,center}
+    |inserer_attribut{class,'spip_logos'}
+)]
