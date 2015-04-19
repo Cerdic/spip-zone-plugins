@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	- <b>Contenus par rubriques</b> : Choisir les rubriques où désactiver l\'édition d\'articles, brèves et sites référencés.',
 	'lim_nom' => 'Lim : Less is More',
-	'lim_slogan' => 'Alléger l\'espace privé de bloc et bouton inutiles dans votre projet',
+	'lim_slogan' => 'Alléger l\'espace privé de blocs et boutons inutiles dans votre projet',
 );
 
 ?>
