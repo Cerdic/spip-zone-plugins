@@ -4,38 +4,29 @@
 #SET{class,spip_logos}
 
 [(#REM) recuperer le logo d'article de facon classique]
-#SET{logo,#ENV*{logo_article}}
+#SET{logo,#ENV*{logo_rubrique}}
 
 [(#REM) s'il n'existe pas, chercher une image associee a l'article ;
 
-  On teste "arton" pour respecter l'ordre des priorités suivant :
-  * logo d'article
-  * image liée à l'article
+  On teste "rubon" pour respecter l'ordre des priorités suivant :
   * logo de rubrique
+  * image liée à la rubrique
+  * logo du site SPIP
 
 ]
 
 <BOUCLE_doc(DOCUMENTS)
-  {si (#GET{logo}|match{arton}|non)}
-  {id_article}
-  {extension IN jpg, gif, png}
+  {si (#GET{logo}|match{rubon}|non)}
+  {id_rubrique}
   {par date}
   {0,1}
 >
 #SET{logo,#FICHIER}
 </BOUCLE_doc>
 
-<BOUCLE_art(ARTICLES)
-{si (#GET{logo}|non)}{id_article}>
-<BOUCLE_rub(RUBRIQUES)
-  {id_rubrique}
->
-#SET{logo,#LOGO_RUBRIQUE}
-</BOUCLE_rub>
-</BOUCLE_art>
-
 [(#REM) traiter/recadrer l'image ]
 [(#GET{logo}
+    |sinon{#LOGO_SITE_SPIP}
     |image_passe_partout{#GET{largeur},#GET{hauteur}}
     |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
     |inserer_attribut{class,#GET{class}}
