@@ -3,12 +3,12 @@
 <prefix>logo_auto</prefix>
 <icon>icon/logo_auto.png</icon>
 
-<version>0.2.0</version>
+<version>0.2.1</version>
 <etat>dev</etat>
 <categorie>multimedia</categorie>
 
 <slogan>Logos d'articles automatiques</slogan>
-<description>Plus besoin d’associer laborieusement des logos aux articles quand ils sont générés de façon automatique !</description>
+<description>Des logos partout, tout le temps. Plus besoin d’associer des logos aux articles quand ils sont générés de façon automatique !</description>
 <lien>http://romy.tetue.net/521</lien>
 <auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
 

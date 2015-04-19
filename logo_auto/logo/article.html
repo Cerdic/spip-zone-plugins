@@ -3,17 +3,19 @@
 #SET{hauteur,#GET{largeur}}
 #SET{class,spip_logos}
 
-[(#REM) recuperer le logo d'article de facon classique]
-#SET{logo,#ENV*{logo_article}}
+[(#REM)
 
-[(#REM) s'il n'existe pas, chercher une image associee a l'article ;
-
-  On teste "arton" pour respecter l'ordre des priorités suivant :
-  * logo d'article
-  * image liée à l'article
-  * logo de rubrique
+  1. logo contribué de l'article
+  2. image liée à l'article
+  3. logo de la rubrique 
 
 ]
+
+[(#REM) 1. recuperer le logo d'article de facon classique ]
+#SET{logo,#ENV*{logo_article}}
+
+[(#REM) 2. s'il n'existe pas, chercher une image associee a l'article ;
+On teste "arton" pour respecter l'ordre des priorités ]
 
 <BOUCLE_doc(DOCUMENTS)
   {si (#GET{logo}|match{arton}|non)}
@@ -26,12 +28,13 @@
 </BOUCLE_doc>
 
 <BOUCLE_art(ARTICLES)
-{si (#GET{logo}|non)}{id_article}>
-<BOUCLE_rub(RUBRIQUES)
-  {id_rubrique}
->
-#SET{logo,#LOGO_RUBRIQUE}
-</BOUCLE_rub>
+  {si (#GET{logo}|non)}
+  {id_article}>
+  <BOUCLE_rub(RUBRIQUES)
+    {id_rubrique}
+  >
+  #SET{logo,#LOGO_RUBRIQUE}
+  </BOUCLE_rub>
 </BOUCLE_art>
 
 [(#REM) traiter/recadrer l'image ]
