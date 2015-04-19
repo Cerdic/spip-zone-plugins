@@ -13,9 +13,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 	
 
 /**
- * Surcharge de l'action instituer standard d'un objet en incluant des traitements prealables pour une relecture :
- * - pour une ouverture, on ecrase le statut a ouverte car il est automatiquement mis a prepa par defaut
- * - pour une cloture, date et revision de cloture
+ * Surcharge de l'action modifier sur un taxon:
+ * - positionner l'indicateur d'édition à oui afin que le taxon soit préservé lors d'un éventuel
+ * rechargement du règne
  *
  * @param array $flux
  * @return array

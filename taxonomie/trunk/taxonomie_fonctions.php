@@ -51,22 +51,33 @@ function taxonomie_charger_regne($regne, $rang, $langues=array('fr')) {
 	// Ajout des noms communs extraits de la base ITIS dans la langue demandée
 	if ($taxons) {
 		$meta_regne['compteur'] = count($taxons);
+        $traductions = array();
 		foreach ($langues as $_cle => $_langue) {
-			$prefixe = ($_cle == count($langues)-1) ? '<multi>' : '';
-			$suffixe = ($_cle == count($langues)-1) ? '</multi>' : '';
 			$noms = itis_read_vernaculars($_langue, $sha_langue);
 			if ($noms) {
 				$meta_regne['langues'][$_langue]['sha'] = $sha_langue;
 				$nb_traductions = 0;
 				foreach ($noms as $_tsn => $_nom) {
 					if (array_key_exists($_tsn, $taxons)) {
-						$taxons[$_tsn]['nom_commun'] = $prefixe . $taxons[$_tsn]['nom_commun'] . $_nom . $suffixe;
+                        // On ajoute les traductions qui ont de la forme [xx]texte
+                        // On sauvegarde le tsn concerné afin de clore les traductions
+                        // avec les balises multi et d'optimiser ainsi les traitements
+                        // sachant qu'il y a très peu de traductions comparées aux taxons
+						$taxons[$_tsn]['nom_commun'] .= $_nom;
 						$nb_traductions += 1;
+                        $traductions[$_tsn] = $_tsn;
 					}
 				}
 				$meta_regne['langues'][$_langue]['compteur'] = $nb_traductions;
 			}
 		}
+
+        // Clore les traductions avec les balises multi
+        if ($traductions) {
+            foreach ($traductions as $_tsn) {
+                $taxons[$_tsn]['nom_commun'] =  '<multi>' . $taxons[$_tsn]['nom_commun'] . '</multi>';
+            }
+        }
 
 		// Réinjection des taxons modifiés manuellement
 		// -- descriptif: remplacement
