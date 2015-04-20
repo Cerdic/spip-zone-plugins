@@ -3,12 +3,12 @@
 	<prefix>noie</prefix>
 	<icon>icon.gif</icon>
 	
-	<version>1.4.0</version>
+	<version>1.5.0</version>
 	<etat>stable</etat>
 	<categorie>performance</categorie>
 	
 	<slogan>Changez de navigateur pour mieux voir le Web !</slogan>
-	<description>Affichez un gentil message aux internautes surfant avec Internet Explorer afin de les pr&#233;venir qu'ils ne visitent pas le site dans les meilleures conditions.</description>
+	<description>Affichez un gentil message aux internautes surfant avec un vieil Internet Explorer afin de les pr&#233;venir qu'ils ne visitent pas le site dans les meilleures conditions.</description>
 	<lien>http://contrib.spip.net/Changez-de-navigateur</lien>
 	<auteur>Fil, [Tetue->http://spip.tetue.net] - 2009</auteur>
 	<licence>GPL</licence>
@@ -18,5 +18,5 @@
 		<inclure>insere_campagne.php</inclure>
 	</pipeline>
 	<traduire gestionnaire="salvatore" module="noie" reference="fr" />
-	<necessite id='SPIP' version='[1.9.0;3.0.99]' />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 </plugin>
