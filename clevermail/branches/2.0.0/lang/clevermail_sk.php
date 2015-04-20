@@ -1,6 +1,6 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// extrait automatiquement de http://trad.spip.org/tradlang_module/clevermail?lang_cible=sk
+// extrait automatiquement de http://trad.spip.net/tradlang_module/clevermail?lang_cible=sk
 // ** ne pas modifier le fichier **
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -86,9 +86,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_inscription' => 'Potvrdenie prihlásenia odoslané e-mailom',
 	'confirmation_inscription_multiple' => 'Potvrdenie prihlásenia na odoberanie viacerých materiálov odoslané e-mailom',
 	'confirmation_votre_desinscription' => 'Potvrdenie vášho odhlásenia',
-	'confirmation_votre_desinscription_text' => 'Dobrý deň,
+	'confirmation_votre_desinscription_text' => '
+Dobrý deň,
 
-Svoje odhlásenie, prosím, potvrďte kliknutím 
+svoje odhlásenie, prosím, potvrďte kliknutím 
 na tento odkaz:
 
  @@URL_CONFIRMATION@@
@@ -97,25 +98,24 @@ na tento odkaz:
 ',
 	'confirmation_votre_inscription' => 'Potvrdenie registrácie',
 	'confirmation_votre_inscription_multiple' => 'Potvrdenie registrácie',
-	'confirmation_votre_inscription_text' => 'Dobrý deň,
+	'confirmation_votre_inscription_text' => '
+Dobrý deň,
 
-na potvrdenie svojej registrácie na odoberanie informačného materiálu @@NOM_COMPLET@@ au format @@FORMAT_INSCRIPTION@@, veuillez cliquer sur ce lien :
+na potvrdenie svojej registrácie na odoberanie informačného materiálu @@NOM_COMPLET@@ vo formáte @@FORMAT_INSCRIPTION@@, prosím, kliknite na tento odkaz:
 
  @@URL_CONFIRMATION@@
-(=vo formáte... ,prosím kliknite na tento odkaz)
 
 Ďakujeme
 ',
 	'confirmation_votre_inscription_text_multiple' => 'Dobrý deň,
 
-na potvrdenie svojej registrácie na odoberanie týchto informačných materiálov:
+na potvrdenie svojej registrácie na odoberanie týchto informačných materiálov
 
  @@NOM_COMPLET@@ 
 
-veuillez cliquer sur ce lien :
+prosím, kliknite na tento odkaz:
 
  @@URL_CONFIRMATION@@
-(= prosím, kliknite na tento odkaz)
 
 Ďakujeme
 ',
@@ -125,11 +125,9 @@ veuillez cliquer sur ce lien :
 
 túto správu ste dostali ako moderátor materiálu @@NOM_LETTRE@@.
 
-Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce lien :
+Na potvrdenie registrácie na odoberanie tohto materiálu pre e-mailovú adresu @mail@, prosím, kliknite na tento odkaz:
 
- @@URL_CONFIRMATION@@
-
-= (Na potvrdenie registrácie na odoberanie tohto materiálu, prosím kliknite na uvedený odkaz.)
+ @@URL_CONFIRMATION@@.
 
 Ďakujeme',
 	'cree' => 'Vytvorený',
@@ -139,14 +137,14 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'creer_nouveau_message' => 'Vytvoriť novú správu',
 
 	// D
-	'deja_inscrit' => 'Ak ste sa zaregistrovali na odoberanie informačného materiálu "@lst_name@". Váš spôsob registrácie bol aktualizovaný.',
+	'deja_inscrit' => 'Zaregistrovali ste sa na odoberanie informačného materiálu "@lst_name@". Váš spôsob registrácie bol aktualizovaný.',
 	'deja_validee' => 'Táto operácia už bola potvrdená. Je mi to ľúto.',
 	'demande_transmise' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bude skontrolovaná tak skoro, ako to bude možné.',
 	'desabonner' => 'Odhlásiť z odoberania',
 	'desabonner2' => 'odhlásiť z odoberania',
 	'desabonner_abonnes' => 'Odhlásiť vybraných abonentov z odoberania',
 	'desabonner_confirmer' => 'Určite chcete odhlásiť tohto človeka z odoberania materiálov?',
-	'description' => 'Popis',
+	'description' => 'Opis',
 	'desinscription_confirmation_debut' => 'Odhlásiť sa z odoberania materiálu',
 	'desinscription_confirmation_fin' => 'sa vyžaduje. Dostanete správu so žiadosťou o potvrdenie.',
 	'desinscription_validee' => 'Vaše odhlásenie z odoberania materiálu "@lst_name@" bolo potvrdené. Do skorého videnia.',
@@ -165,6 +163,7 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'erreur' => 'Chyba',
 	'erreur_contenu_vide' => 'Novú správu nemožno vytvoriť kvôli nedostatku obsahu.',
 	'et_ou_saisir_des_adresses' => '...a/lebo zadať adresy.',
+	'exporter' => 'Exportovať zoznam abonentov',
 
 	// F
 	'front_clevermail_action_validation' => 'Potvrdenie operácie',
@@ -176,7 +175,7 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'infolettres' => 'Informačné materiály',
 	'informations' => 'Informácie',
 	'inscription_deja_abonne_autre_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali iným spôsobom, nastala zmena.',
-	'inscription_deja_abonne_meme_mode' => 'Ak ste sa na odoberanie materiálu "@lst_name@" zaregistrovali rovnakým spôsobom.',
+	'inscription_deja_abonne_meme_mode' => 'Na odoberanie materiálu "@lst_name@" ste sa zaregistrovali rovnakým spôsobom. Oceňujeme však vaše zanietenie.',
 	'inscription_encours' => 'Vaša žiadosť o registráciu na odoberanie materiálu @nom_lettre@ sa kontroluje. Ďakujeme vám za trpezlivosť.',
 	'inscription_mok' => 'Vaša žiadosť o registráciu na odoberanie materiálu "@lst_name@" bola odoslaná moderátorovi. O jeho rozhodnutí vás budeme informovať.',
 	'inscription_nok' => 'Na odoberanie tohto informačného materiálu nie je povolená registrácia',
@@ -202,7 +201,7 @@ Pour valider l\'inscription de @mail@ à cette lettre, veuillez cliquer sur ce l
 	'liste_messages' => 'Správy',
 
 	// M
-	'mail_info_desinscription_corps' => 'Varovanie odoslané cez zásuvný modul CleverMail zo stránky @nom_site@ (@url_site@):
+	'mail_info_desinscription_corps' => 'Upozornenie odoslané cez zásuvný modul CleverMail zo stránky @nom_site@ (@url_site@):
 
 Odhlásenie @sub_email@ z odoberania materiálu "@lst_name@"',
 	'mail_info_inscription_corps' => 'Varovanie odoslané cez zásuvný modul CleverMail zo stránky @nom_site@ (@url_site@):
@@ -215,11 +214,9 @@ na potvrdenie svojej registrácie na odoberanie týchto informačných materiál
 
  @@NOM_COMPLET@@
 
-veuillez cliquer sur ce lien :
+= prosím, kliknite na tento odkaz:
 
  @@URL_CONFIRMATION@@
-
-(= prosím, kliknite na tento odkaz.)
 
 Ďakujeme',
 	'maj_inscription' => 'údaje o registrácii boli aktualizované',
@@ -240,7 +237,7 @@ veuillez cliquer sur ce lien :
 	'messages_queue_envoye' => 'odoslaných správ: @nb@',
 	'mod_closed' => 'Uzavretý',
 	'mod_email' => 'E-mail',
-	'mod_explication' => 'Nižšie sú popísané rôzne režimy spravovania.',
+	'mod_explication' => 'Nižšie sú opísané rôzne režimy spravovania.',
 	'mod_explication_closed' => 'Uzavretý: nikto sa nemôže zaregistrovať',
 	'mod_explication_email' => 'E-mail: po overení e-mailu sa môže zaregistrovať každý',
 	'mod_explication_mod' => 'Moderovaný: registráciu musí potvrdiť moderátor',
