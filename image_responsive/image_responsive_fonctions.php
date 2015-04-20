@@ -103,6 +103,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			$i = 0;
 			foreach($proportions as $prop) {
 				$i++;
+				$prop = trim ($prop);
 				if (preg_match(",^([0-9\.]+)(x([0-9\.]*))?(x([a-z]*))?(x([0-9\.]*))?$,", $prop, $regs)) {
 					$p[$i]["l"] = $regs[1];
 					$p[$i]["h"] = $regs[3];
@@ -110,6 +111,10 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 					$p[$i]["z"] = $regs[7];
 				}
 			}
+		}
+		if (count($p) == 1) {
+			$source = image_proportions($source_tmp, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
+			$source = extraire_attribut($source_tmp,"src");
 		}
 		
 		
@@ -136,6 +141,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 						}
 					}
 			}
+
 			
 			// Fabriquer des <source> s'il y a plus d'une taille associée à des sizes
 			if (count($tailles) > 1 && $lazy != 1) {
@@ -150,9 +156,6 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 						
 						if (count($p[$i]) > 1) {
 							$source_tmp = image_proportions($source_tmp, $p[$i]["l"], $p[$i]["h"], $p[$i]["f"], $p[$i]["z"]);
-							$source_tmp = extraire_attribut($source_tmp,"src");
-						} else if (count($p) == 1) {
-							$source_tmp = image_proportions($source_tmp, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
 							$source_tmp = extraire_attribut($source_tmp,"src");
 						}
 
