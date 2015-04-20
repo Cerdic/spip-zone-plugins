@@ -165,6 +165,10 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="")
 			$img = inserer_attribut($img, "srcset", $srcset);
 		}
 		
+		if ($sources) {
+			$sources = "<!--[if IE 9]><video style='display: none;'><![endif]-->$sources<!--[if IE 9]></video><![endif]-->";
+		}
+		
 		
 		if ($vertical == 0) {
 			$r = (($h/$l)*100);
