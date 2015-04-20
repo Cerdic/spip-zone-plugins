@@ -109,12 +109,15 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 					$p[$i]["h"] = $regs[3];
 					$p[$i]["f"] = $regs[5];
 					$p[$i]["z"] = $regs[7];
+					
+					if (!$regs[5]) $p[$i]["f"] = "center";
+					if (!$regs[7]) $p[$i]["z"] = 1;
 				}
 			}
 		}
 		if (count($p) == 1) {
-			$source = image_proportions($source_tmp, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
-			$source = extraire_attribut($source_tmp,"src");
+			$source = image_proportions($source, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
+			$source = extraire_attribut($source,"src");
 		}
 		
 		
@@ -154,9 +157,12 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 						
 						$source_tmp = $source;
 						
-						if (count($p[$i]) > 1) {
+						if (count($p) > 1 && count($p[$i]) > 1) {
 							$source_tmp = image_proportions($source_tmp, $p[$i]["l"], $p[$i]["h"], $p[$i]["f"], $p[$i]["z"]);
 							$source_tmp = extraire_attribut($source_tmp,"src");
+							
+							$pad_bot_styles[$m] = "padding-bottom:" .(($p[$i]["h"]/$p[$i]["l"])*100)."%!important";
+							
 						}
 
 						if ($htactif) {
@@ -199,17 +205,31 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			$sources = "<!--[if IE 9]><video style='display: none;'><![endif]-->$sources<!--[if IE 9]></video><![endif]-->";
 		}
 		
+
+		if ($pad_bot_styles) {
+			foreach($pad_bot_styles as $m=>$pad) {
+				$style = "##classe##{".$pad."}";
+				if ($m) $style = "\n@media $m {".$style."}";
+				$styles .= $style;
+			}
+			$styles = "<style>$styles</style>";
+			$nom_class = "class".md5($styles);
+			$styles = str_replace("##classe##", "picture.".$nom_class, $styles);
+			// pour affichage dans la classe de picture
+			$nom_class = " ".$nom_class; 
+		}
 		
 		if ($vertical == 0) {
 			if (count($p) == 1) $r = ($p[1]["h"]/$p[1]["l"]) * 100;
 			else if (count($p) == 0) $r = (($h/$l)*100);
 			
 			if ($r) $aff_r = "padding-bottom:$r%";
-			$img = "<picture style='padding:0;$aff_r' class='conteneur_image_responsive_h'>$sources$img</picture>";
+			$img = "<picture style='padding:0;$aff_r' class='conteneur_image_responsive_h$nom_class'>$sources$img</picture>";
 		} else {
 			$r = (($h/$l)*100);
-			$img = "<picture class='conteneur_image_responsive_v'>$sources$img</picture>";
+			$img = "<picture class='conteneur_image_responsive_v$nom_class'>$sources$img</picture>";
 		}
+		$img = $img.$styles;
 	}
 	
 	return $img;
