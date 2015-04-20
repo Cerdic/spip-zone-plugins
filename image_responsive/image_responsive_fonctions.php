@@ -143,10 +143,15 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="")
 							$set .= ","."index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v&amp;dpr=2 2x";
 						}
 						
-						if (strlen($m) > 0) $insm = " media='$m'";
-						else $insm = "";
+						if (strlen($m) > 0) {
+							$insm = " media='$m'";
+							$sources .= "<source$insm srcset='$set'>";
+						}
+						else {
+							$src = "rien.gif";
+							$srcset[] = $set;
+						}
 						
-						$sources .= "<source$insm srcset='$set'>";
 
 					}
 				
