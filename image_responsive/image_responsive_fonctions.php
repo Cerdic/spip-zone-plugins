@@ -289,10 +289,12 @@ function background_responsive($src, $taille=120, $lazy=0) {
 }
 
 
-function image_proportions($img, $largeur=16, $hauteur=9, $align="center") {
+function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom=1) {
+	$mode = $align;
 	
 	
 	if (!$img OR $hauteur == 0 OR $largeur == 0) return;
+	
 	
 	$l_img = largeur ($img);
 	$h_img = hauteur($img);
@@ -302,42 +304,53 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center") {
 	$r_img = $h_img / $l_img;	
 	$r = $hauteur / $largeur;	
 	
+	if ($r_img < $r) {
+		$l_dest = $h_img/$r;
+		$h_dest = $h_img;
+	} else if ($r_img > $r) {
+		$l_dest = $l_img;
+		$h_dest = $l_img*$r;
+	}
+	
+	
 	// Si align est "focus", on va aller chercher le «point d'intérêt» de l'image 
 	// avec la fonction centre_image du plugin «centre_image»
 	if ($align == "focus" && function_exists(centre_image)) {
+		$dx = centre_image_x($img);
+		$dy = centre_image_y($img);
+
 		if ($r_img > $r) {
-			$dy = centre_image_y($img);
-			$h_dest = $l_img * $r;
-			$h_centre = $h_img * $dy;
-			$top = round($h_centre - ($h_dest/2));
-			
-			if ($top < 0) $top = 0;
-			if ($top + $h_dest > $h_img ) $top = $h_img - $h_dest;
-			
-			//echo "Vertical $dy - $l_img x $h_img - $h_dest - $h_centre $top";
-			$align = "top=$top";
-			
-			
+			$h_dest = round(($l_img * $r)/$zoom);
+			$l_dest = round($l_img/$zoom);
 		} else {
-			$dx = centre_image_x($img);
-			$l_dest = $h_img / $r;
+			$h_dest = round($h_img/$zoom);
+			$l_dest = round(($h_img / $r)/$zoom);
+		}
+			$h_centre = $h_img * $dy;
+			$l_centre = $l_img * $dx;
+			$top = round($h_centre - ($h_dest/2));
 			$l_centre = $l_img * $dx;
 			$left = round($l_centre - ($l_dest/2));
 			
+			if ($top < 0) $top = 0;
+			if ($top + $h_dest > $h_img ) $top = $h_img - $h_dest;
 			if ($left < 0) $left = 0;
 			if ($left + $l_dest > $l_img ) $left = $l_img - $l_dest;
-
-			//echo "Large $dx - $l_img x $h_img - $l_dest - $l_centre $left";
-			$align = "left=$left";
-		}
+			
+			//echo "$dy - $l_img x $h_img - $h_dest x $l_dest - $h_centre x $l_centre - $top x $left"; 
+			$align = "top=$top, left=$left";
 	}
+
+	include_spip("filtres/images_transforme");
+	$img = image_recadre($img, $l_dest, $h_dest, $align);
 	
-	if ($r_img < $r) {
-		include_spip("filtres/images_transforme");
-		$img = image_recadre($img, $h_img/$r, $h_img, $align);
-	} else if ($r_img > $r) {
-		include_spip("filtres/images_transforme");
-		$img = image_recadre($img, $l_img, $l_img*$r, $align);
+	// Second passage si $zoom (on verra plus tard si c'est intéressant de le traiter en amont)
+	if ($zoom > 1 && $mode != "focus") {
+		$l_img = largeur ($img)/2;
+		$h_img = hauteur($img)/2;
+		
+		$img = image_recadre($img, $l_img, $h_img);
+		
 	}
 	
 	return $img;
