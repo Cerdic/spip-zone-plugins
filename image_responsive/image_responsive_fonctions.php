@@ -293,11 +293,19 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 	$mode = $align;
 	
 	
-	if (!$img OR $hauteur == 0 OR $largeur == 0) return;
+	if (!$img) return;
+	
 	
 	
 	$l_img = largeur ($img);
 	$h_img = hauteur($img);
+
+	if ($largeur == 0 OR $hauteur == 0) {
+		$largeur = $l_img;
+		$hauteur = $h_img;
+		
+	}
+
 	
 	if ($l_img == 0 OR $h_img == 0) return $img;
 	
