@@ -13,10 +13,11 @@ function image_responsive_insert_head($flux) {
 		$htactif = 1;
 	}
 	
-	$flux .= "<script>htactif=$htactif;</script>";
+	$flux .= "<script>htactif=$htactif;document.createElement('picture');</script>";
 	$flux .= "
-<script type='text/javascript' src='".find_in_path("jquery.smartresize.js")."'></script>
-<script type='text/javascript' src='".find_in_path("image_responsive.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/jquery.smartresize.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/image_responsive.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/picturefill.js")."'></script>
 		";
 	
 	return $flux;
@@ -24,11 +25,12 @@ function image_responsive_insert_head($flux) {
 
 function image_responsive_header_prive($flux) {
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("image_responsive.css")."'>\n";
-	$flux .= "<script>htactif=false;</script>";
+	$flux .= "<script>htactif=false;document.createElement('picture');</script>";
 
 	$flux .= "
-<script type='text/javascript' src='".find_in_path("jquery.smartresize.js")."'></script>
-<script type='text/javascript' src='".find_in_path("image_responsive.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/jquery.smartresize.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/image_responsive.js")."'></script>
+<script type='text/javascript' src='".find_in_path("javascript/picturefill.js")."'></script>
 		";
 
 	return $flux;
@@ -153,6 +155,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="")
 		}
 
 		// Gérer le srcset
+		if ($sources || $srcset) $classe .= " avec_picturefill";
 
 		$img = inserer_attribut($img, "src", $src);
 		
@@ -161,7 +164,6 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="")
 			$srcset = join($srcset, ",");				
 			$img = inserer_attribut($img, "srcset", $srcset);
 		}
-		
 		
 		
 		if ($vertical == 0) {

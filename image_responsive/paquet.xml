@@ -1,7 +1,7 @@
 <paquet
 	prefix="image_responsive"
 	categorie="outil"
-	version="5.0.0"
+	version="5.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	documentation="http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-spip-image-responsive"	
@@ -11,6 +11,7 @@
 
 	<auteur>ARNO*</auteur>
 	<licence lien="http://www.gnu.org/licenses/gpl-2.0.html">GPL</licence>
+	<licence lien="http://scottjehl.github.io/picturefill">Inclus PictureFill</licence>
 
 
 	<pipeline nom="insert_head_css" action="insert_head_css" />

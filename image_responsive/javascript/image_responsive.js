@@ -197,7 +197,7 @@ function charger_image_responsive () {
 	});
 	
 	// Remplacer les URL non lazy
-	$(".image_responsive:not('.lazy')").each(function() {
+	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").each(function() {
 		charger_url_image_responsive($(this));
 	});
 	charger_image_lazy();
