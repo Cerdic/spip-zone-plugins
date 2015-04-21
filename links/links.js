@@ -31,7 +31,7 @@ function targetDocs() {
 	if (typeof links_doc != "undefined") {
 		var extensions = links_doc.split(',');
 		for(var i = 0; i < extensions.length; i++){
-			jQuery("(a|area)[href$='"+extensions[i]+"']")
+			jQuery("a[href$='"+extensions[i]+"']").add("area[href$='"+extensions[i]+"']")
 			  .attr('target',where)
 				.attr('rel','blank')
 				.addClass('blank')
