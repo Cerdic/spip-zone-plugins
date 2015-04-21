@@ -1,10 +1,11 @@
 <paquet
 	prefix="medoc"
 	categorie="edition"
-	version="0.2.0"
-	etat="dev"
+	version="2.0.0"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="icon/medoc.png"
+	documentation="http://contrib.spip.net/medoc"
 >
 
 	<nom>Mod&#232;le &lt;doc&gt; unifi&eacute;</nom>
