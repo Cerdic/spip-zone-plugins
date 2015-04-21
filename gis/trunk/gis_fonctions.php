@@ -418,8 +418,11 @@ function gis_icon_properties($img=''){
 		$props .= "\n\"popup_anchor\": ". json_encode(array(1,-$h/1.2));
 	}
 	
-	if ($shadow = find_in_path('images/marker_defaut_shadow.png'))
+	if ($shadow = find_in_path('images/marker_defaut_shadow.png')) {
 		$props .= ",\n\"shadow\": ". json_encode(url_absolue($shadow));
+		list($h,$w) = taille_image($shadow);
+		$props .= ",\n\"shadow_size\": ". json_encode(array($w,$h));
+	}
 	
 	return $props;
 }
