@@ -31,7 +31,7 @@ function links_insert_head($flux) {
 		$flux .= '
 <!-- Liens explicites -->
 <script type="text/javascript">var js_nouvelle_fenetre=\''._T('links:js_nouvelle_fenetre').'\';'.$variables_links.'</script>
-<script src="'.find_in_path('links.js').'" type="text/javascript"></script>
+<script id="spip_liens_explicites" src="'.find_in_path('links.js').'" type="text/javascript"></script>
 <!-- // Liens explicites -->';
 	}
 	return $flux;
