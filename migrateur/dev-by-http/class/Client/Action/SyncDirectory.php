@@ -49,28 +49,55 @@ class SyncDirectory extends ActionBase {
 
 		$data = array(
 			'directory' => $this->directory,
-			'files' => $localFiles,
 		);
 
 		spip_timer('list');
-		$reponse = $this->client->ask('SyncDirectory', $data, 'json');
+		$this->log("Demande de la liste des fichiers");
+		$reponse = $this->client->ask('ListFiles', $data, 'json');
 		$t = spip_timer('list');
 
 		if (empty($reponse['message']['data']['files'])) {
 			return $reponse;
 		}
 
-		$files = $reponse['message']['data']['files'];
-		$this->log("Réception de la liste des fichiers ($t)");
-		$this->log("- " . count($files['new']) . " nouveaux fichiers");
-		$this->log("- " . count($files['updated']) . " à mettre à jour");
-		$this->log("- " . count($files['deleted']) . " à supprimer");
-		$this->log("Estimation des transferts : " . $reponse['message']['data']['downloadSize']);
+		$distantFiles = $reponse['message']['data']['files'];
+		$this->log("Réception de la liste de " . count($distantFiles) . " fichiers ($t)");
+		$this->log("Calcul des différences");
+
+
+		// calcul des différences !
+		spip_timer('diff');
+		$newFiles = $updatedFiles = $deletedFiles = array();
+		$totalSize = 0;
+
+		//compare local and remote file list to get updated files
+		foreach ($distantFiles as $filePath => $info) {
+			if (empty($localFiles[$filePath])) {
+				$newFiles[$filePath] = $info;
+				$totalSize += $info[0];
+			} elseif ($localFiles[$filePath] != $info) {
+				$updatedFiles[$filePath] = $info;
+				$totalSize += $info[0];
+			}
+			unset($localFiles[$filePath]);
+		}
+
+		// logiquement, ce qui reste, c'est les fichiers supprimés
+		$deletedFiles = $localFiles;
+
+		$t = spip_timer('diff');
+		$this->log("- " . count($newFiles) . " nouveaux fichiers");
+		$this->log("- " . count($updatedFiles) . " à mettre à jour");
+		$this->log("- " . count($deletedFiles) . " à supprimer");
+
+		include_spip('inc/filtres');
+		$this->log("Estimation des transferts : " . ($totalSize ? taille_en_octets($totalSize) : "Rien à faire ! "));
+
 
 		// en mode test, on ne fait pas de modifications.
 		if (!$this->test) {
-			$this->delete($files['deleted']);
-			$this->download($files['new'] + $files['updated']);
+			$this->delete($deletedFiles);
+			$this->download($newFiles + $updatedFiles);
 		}
 
 		return $reponse;
