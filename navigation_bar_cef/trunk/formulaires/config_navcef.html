@@ -1,0 +1,43 @@
+#CACHE{0}
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_configurer:> -->
+<!-- nom=navcef -->
+
+<div class="formulaire_spip formulaire_configurer_navcef">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}">
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				<li class="fieldset">
+					<fieldset>
+						<h3 class="legend">Réglages par défaut</h3>
+						<ul>
+							[(#SAISIE{radio,site_search,
+								label=Recherche,
+								datas=#ARRAY{
+									true,Dans le site,
+									false,Sites de l'Église Catholique,
+								},
+								defaut=false}
+							)]
+							[(#SAISIE{radio,share_links,
+								label=Liens sociaux,
+								datas=#ARRAY{
+									true,Afficher les liens sociaux,
+									false,Masquer les liens sociaux,
+								},
+								defaut=true}
+							)]
+						</ul>
+					</fieldset>
+				</li>
+			</ul>
+			<p class="boutons">
+				<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
+				<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+			</p>
+		</div>
+	</form>
+</div>

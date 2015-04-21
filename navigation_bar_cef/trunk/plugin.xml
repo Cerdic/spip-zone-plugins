@@ -1,0 +1,32 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Barre de navigation intersites nationaux CEF
+	</nom>
+	<auteur><!-- Auteur du plugin -->
+[Pyrat.net->http://www.pyrat.net/]
+
+&#169; 2010 - Distribu&#233; sous licence GNU/GPL
+	</auteur>
+	<lien>[Documentation->http://mutualisationspip.cef.fr/Barre-de-navigation-intersites-nationaux-CEF.html]</lien>
+	<version>1.0.1</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+Rajoute une barre de navigation pour la galaxie de sites CEF.
+	</description>
+	<prefix> 
+	nav_cef
+	</prefix>
+	<icon>
+	img_pack/nav_cef.png
+	</icon>
+	<fonctions>nav_cef_fonctions.php</fonctions>
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>nav_cef_pipelines.php</inclure>
+	</pipeline>
+	<categorie>public</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+</plugin>
