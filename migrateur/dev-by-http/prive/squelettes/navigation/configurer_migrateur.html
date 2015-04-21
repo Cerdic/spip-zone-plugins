@@ -15,7 +15,36 @@
 </div>
 #BOITE_FERMER
 
+
+
+<div id="dependances_php" class='liste'>
+	<h4>Dépendances nécessaires</h4>
+	<ul class='liste-items'>
+		<BOUCLE_functions(DATA){source tableau,#ARRAY{
+			Curl,#LISTE{curl_init},
+			MCrypt,#LISTE{mcrypt_create_iv},
+			OpenSSL,#LISTE{openssl_get_cipher_methods,openssl_encrypt},
+		}}>
+		#SET{ok,1}
+		<BOUCLE_func(DATA){source tableau,#VALEUR}>
+			[(#VALEUR|function_exists|non)#SET{ok,0}]
+		</BOUCLE_func>
+
+		<li class="item[ (#GET{ok}|?{item_ok,item_erreur})]">
+			[(#GET{ok}|?{
+				[(#CHEMIN_IMAGE{ok-16.png}|balise_img{OK})],
+				[(#CHEMIN_IMAGE{erreur-16.png}|balise_img{Erreur})],
+			})]
+			#CLE
+		</li>
+		</BOUCLE_functions>
+
+	</ul>
+</div>
+
 <style type='text/css'>
 .logo_navigation {text-align:center;}
 #goto_migration img { vertical-align:middle; }
+#dependances_php .item_erreur { background-color:#FFE4DE; }
+#dependances_php .item img { margin-right:.5em; margin-left:.5em; vertical-align:middle; }
 </style>
