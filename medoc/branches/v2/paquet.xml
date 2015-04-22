@@ -1,8 +1,8 @@
 <paquet
 	prefix="medoc"
 	categorie="edition"
-	version="2.0.1"
-	etat="dev"
+	version="2.0.2"
+	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="icon/medoc.png"
 	documentation="http://contrib.spip.net/medoc"

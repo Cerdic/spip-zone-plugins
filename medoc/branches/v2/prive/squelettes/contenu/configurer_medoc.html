@@ -5,8 +5,8 @@
 #navigation { display: none; }
 #contenu,
 #contenu table { width: 100%; }
-#contenu table td { padding: 10px; }
-#contenu table thead td.b { font-weight: bold; font-size: 110%; }
+#contenu table td { padding: 10px; vertical-align: top; }
+#contenu table thead td b { font-size: 110%; }
 #contenu table tr.first { border-top: 1px solid; }
 .text-right { text-align: right; }
 </style>
@@ -15,21 +15,37 @@
 <p>Exemples aléatoires des différents rendus du modèle &lt;doc&gt; unifié. Recharchez la page pour changer d'exemples.</p>
 
 <table>
-<thead><tr><td class="text-right">Styntaxe&nbsp;:</td><td class="b">&lt;doc&gt;</td><td class="b">&lt;doc|img&gt;</td><td class="b">&lt;doc|emb&gt;</td></tr></thead>
+<thead>
+	<tr>
+		<td class="text-right">Styntaxe&nbsp;:</td>
+		<td>
+			<b>&lt;doc&gt;</b>
+			<br>vignette cliquable
+		</td>
+		<td>
+			<b>&lt;doc|img&gt;</b>
+			<br>image seule, pleine largeur
+		</td>
+		<td>
+			<b>&lt;doc|emb&gt;</b>
+			<br>incrustation, avec légende
+		</td>
+	</tr>
+</thead>
 
 <BOUCLE_images_mode_image(DOCUMENTS){extension IN jpg,gif,png}{descriptif=''}{titre=''}{largeur<500} {mode=image} {par hasard}{0,2}>
 <tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
 	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images en&nbsp;mode image</td>
 	<td>
-		&lt;doc#ID_DOCUMENT&gt;
+		&lt;doc#ID_DOCUMENT&gt;<br>
 		#MODELE{doc}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|img&gt;
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
 		#MODELE{doc_img}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|emb&gt;
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
 		#MODELE{doc_emb}
 	</td>
 <tr>
@@ -39,15 +55,15 @@
 <tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
 	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images en&nbsp;mode document</td>
 	<td>
-		&lt;doc#ID_DOCUMENT&gt;
+		&lt;doc#ID_DOCUMENT&gt;<br>
 		#MODELE{doc}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|img&gt;
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
 		#MODELE{doc_img}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|emb&gt;
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
 		#MODELE{doc_emb}
 	</td>
 <tr>
@@ -57,15 +73,15 @@
 <tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
 	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images avec&nbsp;descriptif en&nbsp;mode image</td>
 	<td>
-		&lt;doc#ID_DOCUMENT&gt;
+		&lt;doc#ID_DOCUMENT&gt;<br>
 		#MODELE{doc}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|img&gt;
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
 		#MODELE{doc_img}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|emb&gt;
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
 		#MODELE{doc_emb}
 	</td>
 <tr>
@@ -75,15 +91,15 @@
 <tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
 	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Images avec&nbsp;descriptif en&nbsp;mode document</td>
 	<td>
-		&lt;doc#ID_DOCUMENT&gt;
+		&lt;doc#ID_DOCUMENT&gt;<br>
 		#MODELE{doc}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|img&gt;
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
 		#MODELE{doc_img}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|emb&gt;
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
 		#MODELE{doc_emb}
 	</td>
 <tr>
@@ -93,15 +109,15 @@
 <tr[(#COMPTEUR_BOUCLE|=={1}|oui) class="first"]>
 	<td rowspan="#COMPTEUR_BOUCLE" class="text-right[(#COMPTEUR_BOUCLE|>{1}|oui) hidden]">Autres types&nbsp;de documents</td>
 	<td>
-		&lt;doc#ID_DOCUMENT&gt;
+		&lt;doc#ID_DOCUMENT&gt;<br>
 		#MODELE{doc}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|img&gt;
+		&lt;doc#ID_DOCUMENT|img&gt;<br>
 		#MODELE{doc_img}
 	</td>
 	<td>
-		&lt;doc#ID_DOCUMENT|emb&gt;
+		&lt;doc#ID_DOCUMENT|emb&gt;<br>
 		#MODELE{doc_emb}
 	</td>
 <tr>
