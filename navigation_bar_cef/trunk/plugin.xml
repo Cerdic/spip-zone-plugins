@@ -8,7 +8,7 @@
 &#169; 2010 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<lien>[Documentation->http://mutualisationspip.cef.fr/Barre-de-navigation-intersites-nationaux-CEF.html]</lien>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>
 	stable
 	</etat>
@@ -28,5 +28,5 @@ Rajoute une barre de navigation pour la galaxie de sites CEF.
 		<inclure>nav_cef_pipelines.php</inclure>
 	</pipeline>
 	<categorie>public</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;3.1.99]" />
 </plugin>
