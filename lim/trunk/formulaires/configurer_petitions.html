@@ -5,7 +5,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-	[(#REM|verifier_presence_petitions|oui)
+	[(#REM|lim_verifier_presence_petitions|oui)
 		#BOITE_OUVRIR{'','notice'}
 		<p>Vous avez des pétitions. Si vous désactivez l'affichage du bloc pétitions, vous pourrez plus les gérer.</p>
 		#BOITE_FERMER
