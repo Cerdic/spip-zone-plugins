@@ -5,7 +5,7 @@
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/arraycolumn-64.png"
-	documentation="http://php.net/manual/en/function.array-column.php"
+	documentation="http://contrib.spip.net/Array_column-pour-SPIP"
 >
 
 	<nom>array_column pour SPIP</nom>
