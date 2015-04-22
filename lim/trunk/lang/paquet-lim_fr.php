@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	- <b>Logos</b> : si vous utiliser les logos, vous pourrez alors désactiver leur affichage au cas par cas (articles, auteurs, mots-clés, etc.),
 
 	- <b>Contenus par rubriques</b> : Choisir les rubriques où désactiver l\'édition d\'articles, brèves et sites référencés.',
-	'lim_nom' => 'Lim : Less is More',
+	'lim_nom' => 'Lim',
 	'lim_slogan' => 'Alléger l\'espace privé de blocs et boutons inutiles dans votre projet',
 );
 
