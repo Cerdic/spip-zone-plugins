@@ -15,9 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /**
  * Fonction d'appel pour le pipeline
  * @pipeline autoriser */
-function lim_autoriser(){
-	return $qui['statut'] == '0minirezo';
-}
+function lim_autoriser(){}
 
 
 /**************************************************************/
