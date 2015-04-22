@@ -150,7 +150,7 @@ function qcm_analyse_le_qcm(&$qcms, $qcm, $indexQCM, $isQRM) {
 function qcm_les_points($phrase, $points, $veto=false) {
 	if (!jeux_config('points') || $veto || $points===false) return $phrase;
     $pointsHTML = '<span class="jeux_points"> ('.$points. _T('jeux:point'.(abs($points)>1?'s':'')).')</span>';
-  	if (preg_match(',( ?: *)$,', $phrase, $regs)) 
+ 	if (preg_match(',((?:\xc2\xa0| )?: *)$,', $phrase, $regs)) 
 		$phrase = substr_replace($phrase, $pointsHTML, strlen($phrase)-strlen($regs[1]), 0);
 	  else $phrase .= $pointsHTML;
 	return $phrase;  

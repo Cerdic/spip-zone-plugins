@@ -1,7 +1,7 @@
 <paquet
 	prefix="jeux"
 	categorie="divers"
-	version="3.3.1"
+	version="3.3.2"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/jeux-48.png"
