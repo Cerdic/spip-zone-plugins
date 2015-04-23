@@ -87,8 +87,27 @@ function geoportail_lire_exif($img, $type) //, &$lon, &$lat)
 	{	$lon = $lat = null;
 		// Lecture des informations EXIF
 		$date = 0;
-		$exif = @exif_read_data($img, 0, true);
-		if($exif) {
+		$exif = @exif_read_data($img, 'FILE', true);
+		if($exif) 
+		{	// BUG readexif : decalage bug/EXIF.UndefinedTag:0xA500
+			if ($exif['EXIF']['UndefinedTag:0xA500'] && !is_array($exif['EXIF']['UndefinedTag:0xA500'])) 
+			{	$tag = implode('/',$exif['GPS']['GPSLatitude'])
+						.'/'.implode('/',$exif['GPS']['GPSLongitude'])
+						.'/'.$exif['GPS']['GPSAltitude']
+						.'/'.implode('/',$exif['GPS']['GPSTimeStamp']);
+				$tag = explode('/',$tag);
+				$exif['GPS']['GPSLatitude'] = array($tag[3].'/'.$tag[4],$tag[5].'/'.$tag[6],$tag[7].'/'.$tag[8]);
+				$exif['GPS']['GPSLongitude'] = array($tag[9].'/'.$tag[10],$tag[11].'/'.$tag[12],$tag[13].'/'.$tag[14]);
+			}
+			/* Test exif data
+			foreach ($exif as $key => $section) 
+			{	foreach ($section as $name => $val) 
+				{	if (is_array($val)) echo "$key.$name: ".implode(' ',$val)."<br />\n";
+					else echo "$key.$name: $val<br />\n";
+				}
+			}
+			*/
+
 			// Coordonnees GPS
 			$value = $exif['GPS']['GPSLongitude'];
 			if ($value) eval("\$lon = ".$value[0]." + ".$value[1]."/60 + ".$value[2]."/3600;"); 
