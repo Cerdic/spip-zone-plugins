@@ -70,12 +70,12 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 				}
 				break;
 			case 'admin':
-				if ($qui['statut'] != '0minirezo' AND !$qui['restreint']) {
+				if ($qui['statut'] != '0minirezo') {
 					return false;
 				}
 				break;
 			case 'admin_complet':
-				if ($qui['statut'] != '0minirezo' || ($qui['statut'] = '0minirezo' AND $qui['restreint'])){
+				if ($qui['statut'] != '0minirezo' || ($qui['statut'] == '0minirezo' AND $qui['restreint'])){
 					return false;
 				}
 				break;
