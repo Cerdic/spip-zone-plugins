@@ -68,7 +68,19 @@ function spip_thelia_insert_head($flux){
 	return $flux;
 }
 
-
+/**
+ * Appeler le moteur Thelia sur affichage_final pour faire un rendu des boucles et balises THELIA
+ *
+ * Il est aussi possible d'appeler cette fonction dans un squelette qui utilise des boucles THELIA pour mettre le resultat en cache SPIP
+ * si on sait qu'il ne depend pas de la session utilisateur (pour afficher un lien vers une rubrique de la boutique ou autre)
+ *
+ * #FILTRE{spip_thelia_appeler_moteur_thelia}
+ *
+ * La fonction peut donc etre appelee plusieurs fois dans un meme hit
+ *
+ * @param string $texte
+ * @return string
+ */
 function spip_thelia_appeler_moteur_thelia($texte){
 
 	include_spip("inc/utils");
@@ -174,7 +186,7 @@ function spip_thelia_appeler_moteur_thelia($texte){
 	ob_start();
 
 	//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de thelia
-	include_once(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php");
+	include(_DIR_RACINE . _RACINE_THELIA . "fonctions/moteur.php");
 
 	//Connexion à SPIP à la création du compte Thelia
 	if ($_REQUEST['page']=='nouveau' || $_REQUEST['page_thelia']=='nouveau' || $_REQUEST['action']=='transport' || $_REQUEST['action']=='paiement' || !$_REQUEST['page']){
