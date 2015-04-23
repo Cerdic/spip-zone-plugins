@@ -95,75 +95,24 @@ function spip_thelia_appeler_moteur_thelia($texte){
 	}
 	//parsonnalisation des variables thelia
 	switch ($_REQUEST['page']) {
-		case 'merci' :
-			$securise = 0;
-			$pageret = 0;
-			$reset = 1;
-			break;
-		case 'panier' :
-			$securise = 0;
-			$pageret = 1;
-			break;
-		case 'adresse' :
-			$securise = 1;
-			$pageret = 1;
-			break;
-		case 'cheque' :
-			$securise = 1;
-			$pageret = 1;
-			$reset = 1;
-			break;
-		case 'commande' :
-			$securise = 1;
-			$pageret = 1;
-			$panier = 1;
-			$transport = 1;
-			break;
-		case 'commande_detail' :
-			$securise = 1;
-			break;
-		case 'commande_visualiser' :
-			$securise = 1;
-			break;
-		case 'compte_modifier' :
-			$formulaire = 1;
-			$securise = 1;
-			$obligetelfixe = 1;
-			break;
-		case 'compte_modifiererr' :
-			$formulaire = 1;
-			$securise = 1;
-			$obligetelfixe = 1;
-			break;
-		case 'connexion' :
-			$pageret = 0;
-			break;
-		case 'livraison_adresse' :
-			$securise = 1;
-			break;
-		case 'livraison_modifier' :
-			$securise = 1;
-			break;
-		case 'moncompte' :
-			$pageret = 1;
-			$securise = 1;
-			break;
-		case 'nouveau' :
-			$securise = 1;
-			break;
-		case 'regret' :
-			$pageret = 1;
-			break;
-		case 'virement' :
-			$securise = 1;
-			$pageret = 1;
-			$reset = 1;
-			break;
-		case 'formulerr' :
-			set_request('errform', '1');
-			break;
+		case 'merci' : $securise = 0; $pageret = 0; $reset = 1; break;
+		case 'panier' : $securise = 0; $pageret = 1; break;
+		case 'adresse' : $securise = 1; $pageret = 1; break;
+		case 'cheque' : $securise = 1; $pageret = 1; $reset = 1; break;
+		case 'commande' : $securise = 1; $pageret = 1; $panier = 1; $transport = 1; break;
+		case 'commande_detail' : $securise = 1; break;
+		case 'commande_visualiser' : $securise = 1; break;
+		case 'compte_modifier' : $formulaire = 1; $securise = 1; $obligetelfixe = 1; break;
+		case 'compte_modifiererr' : $formulaire = 1; $securise = 1; $obligetelfixe = 1; break;
+		case 'connexion' : $pageret = 0; break;
+		case 'livraison_adresse' : $securise = 1; break;
+		case 'livraison_modifier' : $securise = 1; break;
+		case 'moncompte' : $pageret = 1; $securise = 1; break;
+		case 'nouveau' : $securise = 1; break;
+		case 'regret' : $pageret = 1; break;
+		case 'virement' : $securise = 1; $pageret = 1; $reset = 1; break;
+		case 'formulerr' : set_request('errform', '1'); break;
 	}
-
 
 	//sauvegarde des variables qui vont etre modifiees pour thelia
 	$sav_page = $GLOBALS['page'];
