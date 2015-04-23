@@ -145,6 +145,7 @@ function iextras_formulaire_verifier($flux) {
 								'datas' => array(
 									'' => _T('iextras:radio_restrictions_auteur_aucune'),
 									'admin' => _T('iextras:radio_restrictions_auteur_admin'),
+									'admin_complet' => _T('iextras:radio_restrictions_auteur_admin_complet'),
 									'webmestre' => _T('iextras:radio_restrictions_auteur_webmestre'),
 								)
 							)

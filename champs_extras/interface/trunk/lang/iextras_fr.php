@@ -110,7 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		« révisions » est actif et que l’objet éditorial du champ extra est lui-même versionné',
 
 	// R
-	'radio_restrictions_auteur_admin' => 'Seulement les administrateurs',
+	'radio_restrictions_auteur_admin' => 'Seulement les administrateurs (même restreints)',
+	'radio_restrictions_auteur_admin_complet' => 'Seulement les administrateurs complets',
 	'radio_restrictions_auteur_aucune' => 'Tout le monde peut',
 	'radio_restrictions_auteur_webmestre' => 'Seulement les webmestres',
 	'radio_traitements_aucun' => 'Aucun',
