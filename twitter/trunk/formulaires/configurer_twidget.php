@@ -28,7 +28,7 @@ function formulaires_configurer_twidget_charger_dist() {
 		'shell_color' => "#ffffff",
 		'tweets_background' => "#ffffff",
 		'tweets_color' => "#444444",
-		'tweets_link' => "#1986b5",
+		'tweets_links' => "#1986b5",
 		'rpp' => "4",
 		'user' => "spip",
 		'footer' => "Rejoignez nous",
