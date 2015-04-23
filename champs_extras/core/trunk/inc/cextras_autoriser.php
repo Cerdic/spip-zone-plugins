@@ -56,7 +56,7 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 	// tester si des options d'autorisations sont definies pour cette saisie
 	// et les appliquer.
 	// peut être 'voir' ou 'modifier'
-		// dedans peut être par type d'auteur 'webmestre', 'admin'
+		// dedans peut être par type d'auteur 'webmestre' (sur verification d'autorisation webmestre), 'admin', 'admin_complet'
 	// peut être par secteur parent.
 	// peut être par branche parente.
 	// peut être par groupe parent.
@@ -71,6 +71,11 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 				break;
 			case 'admin':
 				if ($qui['statut'] != '0minirezo' AND !$qui['restreint']) {
+					return false;
+				}
+				break;
+			case 'admin_complet':
+				if ($qui['statut'] != '0minirezo' || ($qui['statut'] = '0minirezo' AND $qui['restreint'])){
 					return false;
 				}
 				break;
