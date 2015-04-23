@@ -11,7 +11,7 @@ function titrecourt_declarer_champs_extras($champs = array()){
 			'defaut' => '',// Valeur par défaut
 			'restrictions'=>array(	'voir' 		=> array('auteur'=>''),//Tout le monde peut voir
 									'modifier'	=> array('auteur'=>'webmestre'))),//Seul les webmestre peuvent modifier
-        'verifier' => array());
+		'verifier' => array());
 
 	return $champs;	
 }
