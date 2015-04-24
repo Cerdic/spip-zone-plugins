@@ -7,7 +7,8 @@
 
   1. logo contribué de la breve
   2. image liée à la breve
-  3. logo de la rubrique 
+  3. logo par défaut des breves
+  4. logo de la rubrique 
 
 ]
 
@@ -27,6 +28,10 @@ On teste "breveon" pour respecter l'ordre des priorités ]
 #SET{logo,#FICHIER}
 [(#ID_BREVE|document_vu{breve,#ID_DOCUMENT})]
 </BOUCLE_doc>
+
+[(#GET{logo}|non)
+  [(#SET{logo,[<img src="(#CHEMIN{logo/breve.jpg})">]})]
+]
 
 <BOUCLE_breves(BREVES)
   {si (#GET{logo}|non)}

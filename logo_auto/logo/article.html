@@ -7,7 +7,8 @@
 
   1. logo contribué de l'article
   2. image liée à l'article
-  3. logo de la rubrique 
+  3. logo par défaut des articles
+  4. logo de la rubrique 
 
 ]
 
@@ -27,6 +28,10 @@ On teste "arton" pour respecter l'ordre des priorités ]
 #SET{logo,#FICHIER}
 [(#ID_ARTICLE|document_vu{article,#ID_DOCUMENT})]
 </BOUCLE_doc>
+
+[(#GET{logo}|non)
+  [(#SET{logo,[<img src="(#CHEMIN{logo/article.jpg})">]})]
+]
 
 <BOUCLE_art(ARTICLES)
   {si (#GET{logo}|non)}
