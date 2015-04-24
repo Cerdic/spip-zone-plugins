@@ -15,10 +15,14 @@ function logo_auto_declarer_tables_interfaces($interfaces) {
 	return $interfaces;
 }
 
+function traiter_logo_rubrique($logo_rubrique, $id_rubrique) {
+	return trim(recuperer_fond('logo/rubrique', array('logo_rubrique' => $logo_rubrique, 'id_rubrique' => $id_rubrique)));
+}
+
 function traiter_logo_article($logo_article, $id_article) {	
 	return trim(recuperer_fond('logo/article', array('logo_article' => $logo_article, 'id_article' => $id_article)));
 }
 
-function traiter_logo_rubrique($logo_rubrique, $id_rubrique) {
-	return trim(recuperer_fond('logo/rubrique', array('logo_rubrique' => $logo_rubrique, 'id_rubrique' => $id_rubrique)));
+function traiter_logo_breve($logo_breve, $id_breve) {	
+	return trim(recuperer_fond('logo/breve', array('logo_breve' => $logo_breve, 'id_breve' => $id_breve)));
 }

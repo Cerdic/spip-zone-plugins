@@ -23,11 +23,11 @@
 				</div>		
 			</td>
 			<td>
-				<BOUCLE_logos(ARTICLES){id_rubrique}{0,12}>
+				<BOUCLE_logos(BREVES){id_rubrique}{0,12}>
 				<div class="logo_auto left text-left">
-					<a href="#URL_SITE_SPIP/ecrire/?exec=article&amp;id_article=#ID_ARTICLE"[ title="(#TITRE|attribut_html)"]>
-						#LOGO_ARTICLE
-						<small>#ID_ARTICLE | [(#TITRE|couper{80})]</small>
+					<a href="#URL_SITE_SPIP/ecrire/?exec=breve&amp;id_breve=#ID_BREVE"[ title="(#TITRE|attribut_html)"]>
+						<INCLURE{fond=logo/breve}{id_breve}> [(#REM) TODO : remplacer par #LOGO_BREVE ]
+						<small>#ID_BREVE | [(#TITRE|couper{80})]</small>
 					</a>
 				</div>
 				</BOUCLE_logos>

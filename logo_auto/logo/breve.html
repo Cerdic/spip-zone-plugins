@@ -1,0 +1,46 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logos}
+
+[(#REM)
+
+  1. logo contribué de la breve
+  2. image liée à la breve
+  3. logo de la rubrique 
+
+]
+
+[(#REM) 1. recuperer le logo de la breve de facon classique ]
+#SET{logo,#ENV*{logo_breve}}
+
+[(#REM) 2. s'il n'existe pas, chercher une image associee a la breve ;
+On teste "breveon" pour respecter l'ordre des priorités ]
+
+<BOUCLE_doc(DOCUMENTS)
+  {si (#GET{logo}|match{breveon}|non)}
+  {id_breve}
+  {extension IN jpg, gif, png}
+  {par date}
+  {0,1}
+>
+#SET{logo,#FICHIER}
+[(#ID_BREVE|document_vu{breve,#ID_DOCUMENT})]
+</BOUCLE_doc>
+
+<BOUCLE_breves(BREVES)
+  {si (#GET{logo}|non)}
+  {id_breve}>
+  <BOUCLE_rub(RUBRIQUES)
+    {id_rubrique}
+  >
+  #SET{logo,#LOGO_RUBRIQUE}
+  </BOUCLE_rub>
+</BOUCLE_breves>
+
+[(#REM) traiter/recadrer le logo ]
+[(#GET{logo}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
+    |inserer_attribut{class,#GET{class}}
+)]
