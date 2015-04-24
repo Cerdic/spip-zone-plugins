@@ -1,0 +1,27 @@
+
+<!doctype html>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="none">
+<INCLURE{fond=inclure/head}>
+[<link rel="stylesheet" href="(#CHEMIN{demo/logo_auto.css})" type="text/css" media="all">]
+</head>
+
+<body>
+	<INCLURE{fond=inclure/header}>
+	<INCLURE{fond=demo/nav}>
+	<center>
+		<div class="logo_auto">
+			<a href="#URL_SITE_SPIP/ecrire/?exec=configurer_identite">
+				<INCLURE{fond=logo/site_spip}>
+				<small>Logo du site</small>
+			</a>
+		</div>
+		<div class="logo_auto">
+			<INCLURE{fond=logo/spip}> [(#REM) TODO : à remplacer par #LOGO_SPIP ]
+			<small>Logo de SPIP</small>
+		</div>
+	</center>
+</body>
+</html>

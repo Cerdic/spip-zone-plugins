@@ -1,0 +1,26 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logos}
+
+[(#REM)
+
+  1. logo contribué du site SPIP
+  2. logo de SPIP
+
+]
+
+[(#REM) 1. recuperer le logo du site SPIP de facon classique ]
+#SET{logo,#ENV*{logo_site_spip}}
+
+[(#REM) 2. s'il n'existe pas, afficher le logo de SPIP ]
+[(#GET{logo}|non)
+  #SET{logo,#CHEMIN{spip.png}}
+]
+
+[(#REM) traiter/recadrer le logo ]
+[(#GET{logo}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
+    |inserer_attribut{class,#GET{class}}
+)]

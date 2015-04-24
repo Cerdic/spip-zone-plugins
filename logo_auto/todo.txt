@@ -2,5 +2,10 @@
 = pour logos automatiques
 
 - brancher la balise #LOGO_BREVE sur le modele logo/breve.html
+- brancher la balise #LOGO_SITE_SPIP sur le modele logo/site_spip.html 
+- créer une balise #LOGO_SPIP pour afficher le logo de SPIP :)
 - créer la balise pour les logos d'articles syndiqués ?
 - remplacer le lien en dur apercite.fr / tester un plugin de génération de vignettes d’écran
+
+= TODO pour SPIP
+- disposer d’un logo de SPIP (toujours PNG à la racine), plus grand
