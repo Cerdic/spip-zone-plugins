@@ -30,7 +30,7 @@ On teste "arton" pour respecter l'ordre des priorités ]
 </BOUCLE_doc>
 
 [(#GET{logo}|non)
-  [(#SET{logo,[<img src="(#CHEMIN{logo/article.jpg})">]})]
+  #SET{logo,#CHEMIN{logo/article.png}}
 ]
 
 <BOUCLE_art(ARTICLES)
