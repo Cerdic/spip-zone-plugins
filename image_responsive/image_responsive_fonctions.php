@@ -72,6 +72,31 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		$img = vider_attribut($img, "width");
 		$img = vider_attribut($img, "height");
 		$img = vider_attribut($img, "style");
+
+
+		// Récupérer les proportions et éventuellement recadrer
+		$proportions = explode("/", $proportions);
+		if (count($proportions) > 0) {
+			$i = 0;
+			foreach($proportions as $prop) {
+				$i++;
+				$prop = trim ($prop);
+				if (preg_match(",^([0-9\.]+)(x([0-9\.]*))?(x([a-z]*))?(x([0-9\.]*))?$,", $prop, $regs)) {
+					$p[$i]["l"] = $regs[1];
+					$p[$i]["h"] = $regs[3];
+					$p[$i]["f"] = $regs[5];
+					$p[$i]["z"] = $regs[7];
+					
+					if (!$regs[5]) $p[$i]["f"] = "center";
+					if (!$regs[7]) $p[$i]["z"] = 1;
+				}
+			}
+		}
+		if (count($p) == 1) {
+			$source = image_proportions($source, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
+			$source = extraire_attribut($source,"src");
+		}
+
 	
 		//$img = inserer_attribut($img, "src", $src);
 		$img = inserer_attribut($img, "data-src", $source);
@@ -97,29 +122,6 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		if ($lazy == 1) $classe .= " lazy";
 		$img = inserer_attribut($img, "data-l", $l);
 		$img = inserer_attribut($img, "data-h", $h);
-		
-		$proportions = explode("/", $proportions);
-		if (count($proportions) > 0) {
-			$i = 0;
-			foreach($proportions as $prop) {
-				$i++;
-				$prop = trim ($prop);
-				if (preg_match(",^([0-9\.]+)(x([0-9\.]*))?(x([a-z]*))?(x([0-9\.]*))?$,", $prop, $regs)) {
-					$p[$i]["l"] = $regs[1];
-					$p[$i]["h"] = $regs[3];
-					$p[$i]["f"] = $regs[5];
-					$p[$i]["z"] = $regs[7];
-					
-					if (!$regs[5]) $p[$i]["f"] = "center";
-					if (!$regs[7]) $p[$i]["z"] = 1;
-				}
-			}
-		}
-		if (count($p) == 1) {
-			$source = image_proportions($source, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
-			$source = extraire_attribut($source,"src");
-		}
-		
 		
 		// Gérer les tailles autorisées
 		if (count($tailles) > 0) {
