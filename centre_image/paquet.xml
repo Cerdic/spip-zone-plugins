@@ -13,7 +13,7 @@
 
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
-	<necessite nom="medias" compatibilite="[2.7.27;[" />
+	<necessite nom="medias" compatibilite="[2.10.12;[" />
 	<pipeline nom="header_prive" action="header_prive" />
 	<pipeline nom="jqueryui_plugins" action="jqueryui_plugins" />
 
