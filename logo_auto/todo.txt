@@ -1,0 +1,7 @@
+= TODO
+= pour logos automatiques
+
+- permettre la surcharge par ajout d’une image par défaut dans le répertoire /logo ?
+- brancher la balise #LOGO_BREVE sur le modele logo/breve.html
+- créer la balise pour les logos d'articles syndiqués ?
+- remplacer le lien en dur apercite.fr / tester un plugin de génération de vignettes d’écran
