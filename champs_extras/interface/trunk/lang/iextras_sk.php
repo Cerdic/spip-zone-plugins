@@ -110,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_versionner' => 'Vytváranie verzií sa použije, iba ak je aktivovaný zásuvný modul "Opravy" ak sa vytvárajú verzie a ak sa verzie vytvárajú aj z ďal­šie­ho redakčného objektu',
 
 	// R
-	'radio_restrictions_auteur_admin' => 'Iba administrátori',
+	'radio_restrictions_auteur_admin' => 'Iba administrátori', # MODIF
 	'radio_restrictions_auteur_aucune' => 'Každý môže',
 	'radio_restrictions_auteur_webmestre' => 'Iba webmasteri',
 	'radio_traitements_aucun' => 'Žiadne',

@@ -111,7 +111,7 @@ The default coefficient applied to the extras fields is 2. To give you an idea, 
 	'precisions_pour_versionner' => 'The versioning would be apply only if the plugin "revisions" is active and that the editorial object of the extra fields itself is versioned.',
 
 	// R
-	'radio_restrictions_auteur_admin' => 'Only the administrators',
+	'radio_restrictions_auteur_admin' => 'Only the administrators', # MODIF
 	'radio_restrictions_auteur_aucune' => 'Everyone can',
 	'radio_restrictions_auteur_webmestre' => 'Only the webmasters',
 	'radio_traitements_aucun' => 'None',

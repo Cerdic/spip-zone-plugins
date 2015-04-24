@@ -100,7 +100,7 @@ El coeficiente aplicado sobre los campos extras es 2 por defecto. Para que se ha
 	'precisions_pour_versionner' => 'El versionado se aplicará únicamente si el plugin «revisiones» está activo y si el objeto editorial del campo está en sí mismo versionado',
 
 	// R
-	'radio_restrictions_auteur_admin' => 'Solamente los administradores',
+	'radio_restrictions_auteur_admin' => 'Solamente los administradores', # MODIF
 	'radio_restrictions_auteur_aucune' => 'Todo el mundo puede',
 	'radio_restrictions_auteur_webmestre' => 'Solamente los webmasters',
 	'radio_traitements_aucun' => 'Ninguno',
