@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+// On surcharge un peut le CSS pour garder l'espace privé uniforme
+.dropzone {
+    background: transparent;
+    border:none;
+    &.dz-drag-hover {
+        border: none;
+        border-style: none;
+    }
+}

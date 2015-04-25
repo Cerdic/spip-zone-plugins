@@ -28,6 +28,9 @@ function uploadhtml5_insert_head_css($flux) {
 function uploadhtml5_header_prive($flux) {
     $flux .= '<link rel="stylesheet" href="'.find_in_path('lib/dropzone/dropzone.css').'" type="text/css" media="screen" />';
 
+    $flux .= '<link rel="stylesheet" href="'.find_in_path('prive/css/dropzone_prive.css').'" type="text/css" media="screen" />';
+
+
     return $flux;
 }
 
