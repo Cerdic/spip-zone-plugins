@@ -1,12 +1,14 @@
 <div class="ariaformprop" aria-relevant="additions" aria-atomic="true" aria-live="polite" >
  <div class="formulaire_spip" >     
-<h3 class="titrem"><:spipcatchat:salon_discussion:></h3>
-<div id="text" style="height:500px;overflow-y: auto;"><p align="center"><:spipcatchat:index_attent:></p></div>
-<p class="boutons" style="padding:3%" >
-<input type="text" id="message" class="text" style="margin-bottom:1%" value="" autocomplete="off">
-<input class="submit" title="<:spipcatchat:title_valid_message:>" type="submit" onclick="spipcatchatmessage();" value="Envoyer">
-</p>
-</div>
+  <h3 class="titrem"><:spipcatchat:salon_discussion:></h3>
+   <div id="text" style="height:500px;overflow-y: auto;">
+	 <p align="center"><:spipcatchat:index_attent:></p>
+   </div>
+    <p class="boutons" style="padding:3%" >
+      <input type="text" id="message" class="text" style="margin-bottom:1%" value="" autocomplete="off">
+      <input class="submit" title="<:spipcatchat:title_valid_message:>" type="submit" onclick="spipcatchatmessage();" value="Envoyer">
+    </p>
+ </div>
 </div>
 <!-- Media audio-->
 <audio style="display:none" id="soundGet">
@@ -16,4 +18,8 @@
 <audio style="display:none" id="soundPost">
 	<source src="#CHEMIN{images/post-sound.ogg}" type="audio/ogg" />
 	<source src="#CHEMIN{images/post-sound.mp3}" type="audio/mp3" />
+</audio>
+<audio style="display:none" id="switch">
+	<source src="#CHEMIN{images/buc.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/buc.mp3}" type="audio/mp3" />
 </audio>

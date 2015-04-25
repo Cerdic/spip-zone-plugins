@@ -6,7 +6,6 @@ var nom=encodeURIComponent('#ENV{nom}');
 var langShowChat = new Array("<:spipcatchat:catchat_message:>");
 var catchatrefresh=[(#CONFIG{spipcatchat/refreshprive}||non)2000][(#CONFIG{spipcatchat/refreshprive}||oui)#CONFIG{spipcatchat/refreshprive}];
 var catchatrefreshstatut=125000;
-var idSalon=0;
 var scrollBar = false;
 var nombreMessage;
 // -------------------------------------------------------------------------------------------------// 
@@ -53,34 +52,40 @@ function spipcatchatShowChat()
 $.ajax({
 	url:URLplugin+"phpscripts/get-prive-autorisation.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
 	type:"POST",
-	data:"id_auteur="+idAuteur+"&id_salon="+idSalon+"&nom="+nom+"&url="+URLplugin+"&char="+charset,
+	data:"id_auteur="+idAuteur+"&nom="+nom+"&url="+URLplugin+"&char="+charset,
 	success:function(e)
 		{ // Après l'exécution du script on lance la fonction STARTCHAT
-			startchat(catchatrefresh,catchatrefreshstatut,idSalon,idAuteur,URLplugin,langShowChat,charset);
+			startchat(catchatrefresh,catchatrefreshstatut,idAuteur,URLplugin,langShowChat,charset);
 		}
 	})
 }
 
 function spipcatchatShowChatAdmin(admin)
 { // Cette fonction permet d'initialiser le chat dans le bon environnement. En assignant les valeurs utiles au déroulement du chat, le time-code, les autorisations, les statuts etc... dans des variables de sessions.
-
+spipcatchatrestartstatut();
 $.ajax({
 	url:URLplugin+"phpscripts/get-prive-autorisation.php", // Pour ne pas interférer avec le chat public les script sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
 	type:"POST",
-	data:"id_auteur="+idAuteur+"&id_salon="+idSalon+"&nom="+nom+"&url="+URLplugin+"&char="+charset+"&admin="+admin,
+	data:"id_auteur="+idAuteur+"&nom="+nom+"&url="+URLplugin+"&char="+charset+"&admin="+admin,
 	success:function(e)
 		{ 
 			if(e==1)
 			{
 				$('#libre').css('display','none');
 				$('#occuper').css('display','block');
+				$('#public').css('display','none');
+				$('#prive').css('display','block');
 			}
 			if(e==0){
 				$('#libre').css('display','block');
 				$('#occuper').css('display','none');
+				$('#public').css('display','block');
+				$('#prive').css('display','none');
 			}
-				$('#public').removeAttr('checked');
-				$('#prive').removeAttr('checked');
+			$('#salonadmin').css('display','none');
+			$('#salonadminpatientez').css('display','block');
+			$('#switch').trigger("play");
+			setTimeout(function(){ $('#salonadmin').css('display','block');$('#salonadminpatientez').css('display','none');},6e3);
 		}
 	})
 }
@@ -121,19 +126,19 @@ function spipcatchatsetmessage(e,t,n,r)
   })
 }
 
-function startchat(e,t,n,r,i,s,o)
+function startchat(e,t,r,i,s,o)
 { // Cette fonction permet de démarrer les deux autres fonctions des statuts des auteurs et le retour des messages à des intervalles programmés par les variables -> T&E 
-document.getElementById("message")&&(getOnlineUsers(n,r,i,s,o),statusStart=window.setInterval(function(){getOnlineUsers(n,r,i,s,o)},t),window.setInterval(function(){getMessages(e,r,i,s,o)},e),$("#message").focus())
+document.getElementById("message")&&(getOnlineUsers(r,i,s,o),statusStart=window.setInterval(function(){getOnlineUsers(r,i,s,o)},t),window.setInterval(function(){getMessages(e,r,i,s,o)},e),$("#message").focus())
 }
 
-function getOnlineUsers(e,t,n,r,i)
+function getOnlineUsers(t,n,r,i)
 {
 	$.getJSON(n+"phpscripts/get-prive-online.php", // Pour ne pas interférer avec le chat public les scripts sont différent mais globalement les contenus sont les mêmes à part le nom des variables de sessions. 
-	{auteur:t,salon:e},
+	{auteur:t},
 	function(e)
 	{
 	 var r="",i,s;
-		for(s in e.list)
+		for(s in e.list){
 		"busy"==e.list[s].status?(texte="Occupé(e) [X]",
 		i="inactive",
 		t==e.list[s].id&&$("#deux").attr("selected","selected")):"inactive"==e.list[s].status?(texte=" Absent(e) [-] ",
@@ -142,8 +147,10 @@ function getOnlineUsers(e,t,n,r,i)
 		i="active",
 		t==e.list[s].id&&$("#trois").attr("selected","selected")),
 		r+='<span title="'+texte+'"><img src="'+n+"/images/status-"+i+'.png" /> '+e.list[s].login+"</span><br/>";$("#users").html(r)
+		}		
 	}
   )
+  
 }
 
 function SpipCatChatsetStatus(e,t,n)
@@ -173,7 +180,7 @@ function rmResponse()
 
 function spipcatchatrestartstatut()
 { // Cette fonction permet de forcer l'actualisation du statut avant les deux minutes en deux passes
-setTimeout(function(){getOnlineUsers("0",idAuteur,URLplugin,langShowChat,charset)},6e3);
-setTimeout(function(){getOnlineUsers("0",idAuteur,URLplugin,langShowChat,charset)},12e3);
+setTimeout(function(){getOnlineUsers(idAuteur,URLplugin,langShowChat,charset)},6e3);
+setTimeout(function(){getOnlineUsers(idAuteur,URLplugin,langShowChat,charset)},12e3);
 }
 spipcatchatShowChat();

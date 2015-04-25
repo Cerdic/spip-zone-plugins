@@ -1,14 +1,18 @@
 <div class="formulaire_spip">
-<img id="spipcatchatpatientez" align="right" style="display:none" src="[(#CHEMIN{prive/images/searching.gif})]">
-<div id="catchatprivestatut">
-<ul >
-<li class="editer">
-<input id="public" type="radio" name="admin" onclick="spipcatchatShowChatAdmin('0');spipcatchatrestartstatut();">&nbsp;<:spipcatchat:title_public:>
-<img id="libre" style="float:right" src="#CHEMIN{images/unlock-user-26.png}">
-<br/>
-<input id="prive" type="radio" name="admin" onclick="spipcatchatShowChatAdmin('1');spipcatchatrestartstatut();">&nbsp;<:spipcatchat:title_prive:>
-<img id="occuper" style="float:right;display:none" src="#CHEMIN{images/lock-26.png}">
-</li>
-</ul>
-</div>
+ <ul >
+  <li class="editer">
+	  <div id="salonadminpatientez" style="display:none" > 
+		<:spipcatchat:catchat_chargement:>
+	  <img  align="right" src="[(#CHEMIN{prive/images/searching.gif})]">
+	  </div>
+   <div id="salonadmin">
+    <div  style="float:right;">
+     <img id="occuper" style="display:none;position:absolute;margin-left:-20px;" onclick="spipcatchatShowChatAdmin('0');" src="#CHEMIN{images/lock-26.png}">
+     <img id="libre" style="position:absolute;margin-left:-20px;" onclick="spipcatchatShowChatAdmin('1');" src="#CHEMIN{images/unlock-user-26.png}">
+    </div>
+     <span id="public" style="cursor:pointer" onclick="spipcatchatShowChatAdmin('1');">&nbsp;<:spipcatchat:title_public:></span>
+     <span id="prive" style="cursor:pointer;display:none" onclick="spipcatchatShowChatAdmin('0');">&nbsp;<:spipcatchat:title_prive:></span>
+    </div>
+  </li>
+ </ul>
 </div>
