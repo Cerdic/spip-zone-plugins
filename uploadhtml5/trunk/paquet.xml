@@ -43,4 +43,6 @@
 
 	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
+  <pipeline nom="header_prive" inclure="uploadhtml5_pipelines.php" />
+  <pipeline nom="afficher_complement_objet" inclure="uploadhtml5_pipelines.php" />
 </paquet>

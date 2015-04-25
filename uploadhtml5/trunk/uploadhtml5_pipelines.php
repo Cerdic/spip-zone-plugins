@@ -24,3 +24,16 @@ function uploadhtml5_insert_head_css($flux) {
 
     return $flux;
 }
+
+function uploadhtml5_header_prive($flux) {
+    $flux .= '<link rel="stylesheet" href="'.find_in_path('lib/dropzone/dropzone.css').'" type="text/css" media="screen" />';
+
+    return $flux;
+}
+
+function uploadhtml5_afficher_complement_objet($flux) {
+
+    $flux['data'] .= recuperer_fond('prive/squelettes/inclure/uploadhtml5', $flux['args']);
+
+    return $flux;
+}
