@@ -23,6 +23,10 @@
      #CONFIG{uploadhtml5/max_file},
      null})],
 
+     success: function(file, response) {
+       ajaxReload("documents");
+     },
+
      // Traduire dropzone
      dictDefaultMessage: "<:uploadhtml5:drop_ici:>",
      dictFallbackMessage: "<:uploadhtml5:drop_no_support:>",
