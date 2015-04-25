@@ -9,6 +9,3 @@
 
 Lire aussi :
 http://contrib.spip.net/logos-automatiques?var_mode=preview
-
-= TODO pour SPIP
-- disposer d’un logo de SPIP (toujours PNG à la racine), plus grand
