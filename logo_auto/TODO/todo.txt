@@ -4,7 +4,6 @@
 - brancher la balise #LOGO_BREVE sur le modele logo/breve.html
 - brancher la balise #LOGO_DOCUMENT sur le modele logo/document.html
 - brancher la balise #LOGO_AUTEUR sur le modele logo/auteur.html en faisant attention à Gravatar, qui surcharge cette balise !
-- brancher la balise #LOGO_SITE_SPIP sur le modele logo/site_spip.html
 - créer la balise pour les logos d'articles syndiqués ?
 - remplacer le lien en dur apercite.fr / tester un plugin de génération de vignettes d’écran
 

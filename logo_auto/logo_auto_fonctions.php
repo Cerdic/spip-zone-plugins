@@ -5,6 +5,10 @@ function balise_LOGO_SPIP($p) {
 	return $p;
 }
 
+function traiter_logo_site_spip($logo_site_spip) {	
+	return trim(recuperer_fond('logo/site_spip', array('logo_site_spip' => $logo_site_spip)));
+}
+
 function document_vu($id_objet,$objet,$id_document){
 	include_spip('action/editer_liens');
         $objets_lies=array($objet=>$id_objet);

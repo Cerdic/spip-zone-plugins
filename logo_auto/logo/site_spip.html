@@ -10,13 +10,7 @@
 
 ]
 
-[(#REM) 1. recuperer le logo du site SPIP de facon classique ]
-#SET{logo,#ENV*{logo_site_spip}}
-
-[(#REM) 2. s'il n'existe pas, afficher le logo de SPIP ]
-[(#GET{logo}|non)
-  #SET{logo,#CHEMIN{spip.png}}
-]
+#SET{logo,#ENV*{logo_site_spip}|sinon{#LOGO_SPIP}}}
 
 [(#REM) traiter/recadrer le logo ]
 [(#GET{logo}
