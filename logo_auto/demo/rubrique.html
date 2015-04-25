@@ -9,9 +9,12 @@
 
 <body>
 	<INCLURE{fond=demo/nav}>
+	&#35;LOGO_RUBRIQUE
+	<hr>
+	
 	<BOUCLE_logos(RUBRIQUES){par profondeur}>
 	<div class="logo_auto left text-left">
-		<a href="#URL_RUBRIQUE"[ title="(#TITRE|attribut_html)"]>
+		<a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}"[ title="(#TITRE|attribut_html)"]>
 			#LOGO_RUBRIQUE
 			<small>#ID_RUBRIQUE | [(#TITRE|couper{80})]</small>
 		</a>

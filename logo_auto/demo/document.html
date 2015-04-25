@@ -9,9 +9,12 @@
 
 <body>
 	<INCLURE{fond=demo/nav}>
+	&lt;INCLURE{fond=logo/document}{id_document}> en attendant &#35;LOGO_DOCUMENT
+	<hr>
+
 	<BOUCLE_logos(DOCUMENTS){par hasard}{0,50}>
 	<div class="logo_auto left text-left">
-		<a href="#URL_SITE_SPIP/ecrire/?exec=document&amp;id_document=#ID_DOCUMENT"[ title="(#FICHIER|basename|attribut_html)"]>
+		<a href="#URL_ECRIRE{document_edit,id_document=#ID_DOCUMENT}"[ title="(#FICHIER|basename|attribut_html)"]>
 			<INCLURE{fond=logo/document}{id_document}>
 			<small>[(#EXTENSION|strtoupper)] | [(#FICHIER|basename)]</small>
 		</a>

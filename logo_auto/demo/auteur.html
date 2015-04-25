@@ -9,9 +9,12 @@
 
 <body>
 	<INCLURE{fond=demo/nav}>
+	&lt;INCLURE{fond=logo/auteur}{id_auteur}> en attendant &#35;LOGO_AUTEUR
+	<hr>
+	
 	<BOUCLE_logos(AUTEURS){par hasard}{0,50}>
 	<div class="logo_auto left text-left">
-		<a href="#URL_SITE_SPIP/ecrire/?exec=auteur&amp;id_auteur=#ID_AUTEUR"[ title="(#NOM|attribut_html)"]>
+		<a href="#URL_ECRIRE{auteur,id_auteur=#ID_AUTEUR}"[ title="(#NOM|attribut_html)"]>
 			<INCLURE{fond=logo/auteur}{id_auteur}>
 			<small>#ID_AUTEUR | [(#NOM|couper{80})]</small>
 		</a>

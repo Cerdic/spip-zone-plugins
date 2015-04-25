@@ -9,12 +9,15 @@
 
 <body>
 	<INCLURE{fond=demo/nav}>
+	&lt;INCLURE{fond=logo/breve}{id_breve}> en attendant &#35;LOGO_BREVE
+	<hr>
+	
 	<table>
 		<BOUCLE_rubriques(RUBRIQUES){par hasard}{0,12}>
 		<tr>
 			<td class="id text-right">
 				<div class="logo_auto left text-left">
-					<a href="#URL_SITE_SPIP/ecrire/?exec=rubrique&amp;id_rubrique=#ID_RUBRIQUE"[ title="(#TITRE|attribut_html)"]>
+					<a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}"[ title="(#TITRE|attribut_html)"]>
 						#LOGO_RUBRIQUE
 						<small>#ID_RUBRIQUE | [(#TITRE|couper{80})]</small>
 					</a>
@@ -23,7 +26,7 @@
 			<td>
 				<BOUCLE_logos(BREVES){id_rubrique}{0,12}>
 				<div class="logo_auto left text-left">
-					<a href="#URL_SITE_SPIP/ecrire/?exec=breve&amp;id_breve=#ID_BREVE"[ title="(#TITRE|attribut_html)"]>
+					<a href="#URL_ECRIRE{breve,id_breve=#ID_BREVE}"[ title="(#TITRE|attribut_html)"]>
 						<INCLURE{fond=logo/breve}{id_breve}> [(#REM) TODO : remplacer par #LOGO_BREVE ]
 						<small>#ID_BREVE | [(#TITRE|couper{80})]</small>
 					</a>
