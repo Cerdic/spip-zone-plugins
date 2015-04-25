@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -9,10 +8,9 @@
 </head>
 
 <body>
-	<INCLURE{fond=inclure/header}>
 	<INCLURE{fond=demo/nav}>
 	<table>
-		<BOUCLE_rubriques(RUBRIQUES) {par id_rubrique}{0,12}>
+		<BOUCLE_rubriques(RUBRIQUES){par hasard}{0,12}>
 		<tr>
 			<td class="id text-right">
 				<div class="logo_auto left text-left">

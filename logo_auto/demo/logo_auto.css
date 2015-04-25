@@ -1,4 +1,12 @@
-div.logo_auto { width: 150px; height: 170px; overflow: hidden; margin: 10px; font-size: 90%; }
+body { text-align: left; font-size: 80%; }
+
+.header { padding: 10px; background: #333; }
+.header,
+.header * { color: #EEE; }
+.header ul,
+.header li { margin: 0; }
+
+div.logo_auto { width: 150px; height: 170px; overflow: hidden; margin: 10px; }
 div.logo_auto img { float: none; display: block; margin: 0; }
 div.logo_auto small { display: block; white-space: nowrap; }
 

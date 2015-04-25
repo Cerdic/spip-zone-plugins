@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
@@ -9,9 +8,8 @@
 </head>
 
 <body>
-	<INCLURE{fond=inclure/header}>
 	<INCLURE{fond=demo/nav}>
-	<BOUCLE_logos(RUBRIQUES){par id_rubrique}>
+	<BOUCLE_logos(RUBRIQUES){par profondeur}>
 	<div class="logo_auto left text-left">
 		<a href="#URL_RUBRIQUE"[ title="(#TITRE|attribut_html)"]>
 			#LOGO_RUBRIQUE
