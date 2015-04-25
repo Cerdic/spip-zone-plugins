@@ -1,0 +1,39 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logos}
+
+[(#REM)
+
+  1. logo contribué de l'auteur
+  2. gravatar de l'auteur
+  4. logo par défaut des auteurs
+
+]
+
+[(#REM) 1. recuperer le logo de l'auteur de facon classique ]
+#SET{logo,#ENV*{logo_auteur}}
+
+[(#REM) 2. s'il n'existe pas… ]
+
+<BOUCLE_aut(AUTEURS)
+  {id_auteur}
+  {si (#GET{logo}|match{auton}|non)}
+>
+[(#PLUGIN{gravatar}|oui)
+[(#SET{logo,
+	#MODELE{gravatar}
+})]
+]
+</BOUCLE_aut>
+
+[(#GET{logo}|non)
+  #SET{logo,#CHEMIN{logo/auteur.png}}
+]
+
+[(#REM) traiter/recadrer le logo ]
+[(#GET{logo}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
+    |inserer_attribut{class,#GET{class}}
+)]

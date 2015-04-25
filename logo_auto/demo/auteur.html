@@ -1,0 +1,22 @@
+<!doctype html>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="robots" content="none">
+<INCLURE{fond=inclure/head}>
+[<link rel="stylesheet" href="(#CHEMIN{demo/logo_auto.css})" type="text/css" media="all">]
+</head>
+
+<body>
+	<INCLURE{fond=inclure/header}>
+	<INCLURE{fond=demo/nav}>
+	<BOUCLE_logos(AUTEURS)>
+	<div class="logo_auto left text-left">
+		<a href="#URL_SITE_SPIP/ecrire/?exec=auteur&amp;id_auteur=#ID_AUTEUR"[ title="(#NOM|attribut_html)"]>
+			<INCLURE{fond=logo/auteur}{id_auteur}>
+			<small>#ID_AUTEUR | [(#NOM|couper{80})]</small>
+		</a>
+	</div>
+	</BOUCLE_logos>
+</body>
+</html>
