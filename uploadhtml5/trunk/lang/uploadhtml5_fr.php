@@ -16,7 +16,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page_configurer_uploadhtml5' => 'Configuration du formulaire d\'upload html5',
 
-    // Message de la dropzone
+
+    // M
+    'max_file_size' => 'Taille maximum des fichiers',
+    'explication_max_file_size' => "Taille maximum des fichiers (en MB). Il est conseillé d'utiliser la valeur du serveur",
+    'max_file' => 'Nombre maximum de fichier',
+    'explication_max_file' => 'Nombre de maximum de fichiers qui peuvent être uploadé simultanément (0 pour ne pas limiter).',
+
+    // Message de la dropzone_prive
     'drop_ici' => 'Déposez vos fichier ici ou cliquez sur ce cadre',
     'drop_no_support' => 'Votre navigateur ne supporte pas le Drag and Drop',
     'drop_fallbacktext' => "Merci d'utiliser ce formulaire à la place",
