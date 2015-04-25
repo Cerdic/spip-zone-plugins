@@ -92,6 +92,10 @@ if (!function_exists('autoriser_rubrique_creersitedans')) {
 	function autoriser_rubrique_creersitedans($faire, $type, $id, $qui, $opt) {
 		$quelles_rubriques = lire_config('lim_rubriques/site');
 		is_null($quelles_rubriques) ? $lim_rub = true : $lim_rub = !in_array($id,$quelles_rubriques);
+
+		// exception : la page exec=sites accessible depuis le menu "Edition -> Sites référencés"
+		if (_request('exec') == 'sites') $lim_rub = true;
+		
 		return
 			$id
 			AND $lim_rub

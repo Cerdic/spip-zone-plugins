@@ -1,0 +1,16 @@
+Plugin LIM pour SPIP
+Ce plugin allège l'interface privée
+-----------------------------------
+
+
+1.0.2 le 25 04 2015
+--------------------
+
+* Gestion des contenus par rubrique
+  exception pour la page exec=sites accessible depuis le menu "Edition -> Sites référencés"
+  SPIP renvoi $id=1 pour cette page (???).
+
+
+1.0.0 le 20 04 2015
+-------------------
+* Premier jet du plugin
