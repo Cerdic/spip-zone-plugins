@@ -2,7 +2,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-function formulaires_uploadhtml5_saisies_dist($id_objet, $objet='article') {
+function formulaires_uploadhtml5_saisies_dist($objet, $id_objet) {
     $saisies = array(
         array(
             'saisie' => 'input',
@@ -18,7 +18,7 @@ function formulaires_uploadhtml5_saisies_dist($id_objet, $objet='article') {
     return $saisies;
 }
 
-function formulaires_uploadhtml5_charger_dist($id_objet, $objet='article') {
+function formulaires_uploadhtml5_charger_dist($objet, $id_objet) {
     // Contexte du formulaire.
     $contexte = array(
         '' => '',
@@ -36,13 +36,13 @@ function formulaires_uploadhtml5_charger_dist($id_objet, $objet='article') {
  *   }
  *   Pensez à utiliser _T('info_obligatoire'); pour les éléments obligatoire.
  */
-function formulaires_uploadhtml5_verifier_dist($id_objet, $objet='article') {
+function formulaires_uploadhtml5_verifier_dist($objet, $id_objet) {
     $erreurs = array();
 
     return $erreurs;
 }
 
-function formulaires_uploadhtml5_traiter_dist($id_objet, $objet='article') {
+function formulaires_uploadhtml5_traiter_dist($objet, $id_objet) {
 
     // upload de la dropzone
     uploader_document($_FILES, $objet, $id_objet);
