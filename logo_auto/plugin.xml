@@ -1,5 +1,5 @@
 <plugin>
-<nom>Logos d'articles automatiques</nom>
+<nom>Logos automatiques</nom>
 <prefix>logo_auto</prefix>
 <icon>icon/logo_auto.png</icon>
 
@@ -7,9 +7,9 @@
 <etat>dev</etat>
 <categorie>multimedia</categorie>
 
-<slogan>Logos d'articles automatiques</slogan>
-<description>Des logos partout, tout le temps. Plus besoin d’associer des logos aux articles quand ils sont générés de façon automatique !</description>
-<lien>http://romy.tetue.net/521</lien>
+<slogan>Des logos partout, tout le temps</slogan>
+<description>Plus besoin d'ajouter des logos quand ils sont générés de façon automatique !</description>
+<lien>http://contrib.spip.net/Logos-automatiques?var_mode=preview</lien>
 <auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
 <licence>GPL</licence>
 
