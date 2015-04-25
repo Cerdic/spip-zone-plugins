@@ -20,25 +20,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $id_document Dans le cas ou l'on veux remplacer un document.
  * @access public
  */
-function uploader_document($files, $objet, $id_objet, $id_document='new') {
-    // On va créer le tableau des documents.
-    $docs = array();
-    foreach ($files as $doc) {
-        // pas de fichier vide
-        if (!empty($doc['name']))
-            $docs[] = $doc;
-    }
+if (!function_exists('uploader_document')) {
+    function uploader_document($files, $objet, $id_objet, $id_document='new') {
+        // On va créer le tableau des documents.
+        $docs = array();
+        foreach ($files as $doc) {
+            // pas de fichier vide
+            if (!empty($doc['name']))
+                $docs[] = $doc;
+        }
 
-    // On fait un test au cas ou
-    if (!empty($docs)) {
-        // On ajoute les documents a un objet SPIP.
-        $ajouter_documents = charger_fonction('ajouter_documents','action');
-        $ajouter_documents(
-            $id_document,
-            $docs,
-            $objet, // Article, rubrique, autre objet
-            $id_objet,
-            'document'
-        );
+        // On fait un test au cas ou
+        if (!empty($docs)) {
+            // On ajoute les documents a un objet SPIP.
+            $ajouter_documents = charger_fonction('ajouter_documents','action');
+            $ajouter_documents(
+                $id_document,
+                $docs,
+                $objet, // Article, rubrique, autre objet
+                $id_objet,
+                'document'
+            );
+        }
     }
 }
