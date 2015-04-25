@@ -3,11 +3,11 @@
 <prefix>logo_auto</prefix>
 <icon>icon/logo_auto.png</icon>
 
-<version>0.4.2</version>
+<version>0.5.0</version>
 <etat>dev</etat>
 <categorie>multimedia</categorie>
 
-<slogan>Des logos partout, tout le temps</slogan>
+<slogan>Des logos partout, systématiquement</slogan>
 <description>Plus besoin d'ajouter des logos quand ils sont générés de façon automatique !</description>
 <lien>http://contrib.spip.net/Logos-automatiques?var_mode=preview</lien>
 <auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
