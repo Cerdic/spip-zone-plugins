@@ -9,7 +9,8 @@ Ce plugin allège l'interface privée
 * Gestion des contenus par rubrique
   exception pour la page exec=sites accessible depuis le menu "Edition -> Sites référencés"
   SPIP renvoi $id=1 pour cette page (???).
-
+* Gestion du header silencieux
+	éviter une notice PHP si il est déjà déclaré ailleurs
 
 1.0.0 le 20 04 2015
 -------------------
