@@ -1,5 +1,10 @@
 <?php
 
+function balise_LOGO_SPIP($p) {
+	$p->code="filtrer('balise_img', find_in_path('spip.png'), _T('le_alt'), 'spip_logo')";
+	return $p;
+}
+
 function document_vu($id_objet,$objet,$id_document){
 	include_spip('action/editer_liens');
         $objets_lies=array($objet=>$id_objet);
