@@ -17,3 +17,10 @@ function uploadhtml5_jquery_plugins($scripts) {
 
     return $scripts;
 }
+
+function uploadhtml5_insert_head_css($flux) {
+
+    $flux .= '<link rel="stylesheet" href="'.find_in_path('lib/dropzone/dropzone.css').'" type="text/css" media="screen" />';
+
+    return $flux;
+}
