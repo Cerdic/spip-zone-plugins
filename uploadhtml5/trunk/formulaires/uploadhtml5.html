@@ -1,0 +1,38 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+  [<p class="reponse_formulaire reponse_formulaire_erreur">
+  (#ENV*{message_erreur})
+  </p>]
+  [<p class="reponse_formulaire reponse_formulaire_ok">
+    (#ENV*{message_ok})
+  </p>]
+
+  [(#EDITABLE|oui)
+  <form action="#ENV{action}" method="post" class="dropzone" id="dropzonespip">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <div class="fallback">
+      <input name="file" type="file" multiple />
+    </div>
+  </form>
+
+  <script type="text/javascript">
+   Dropzone.options.dropzonespip = {
+
+     maxFilesize: #CONFIG{uploadhtml5/max_file_size},
+     maxFiles: [(#CONFIG{uploadhtml5/max_file}|>{0}|?{
+     #CONFIG{uploadhtml5/max_file},
+     null})],
+
+     // Traduire dropzone
+     dictDefaultMessage: "<:uploadhtml5:drop_ici:>",
+     dictFallbackMessage: "<:uploadhtml5:drop_no_support:>",
+     dictFallbackText: "<:uploadhtml5:drop_fallbacktext:>",
+     dictInvalidFileType: "<:uploadhtml5:drop_fichier_invalide:>",
+     dictFileTooBig: "<:uploadhtml5:drop_fichier_trop_gros:>",
+     dictCancelUpload: "<:uploadhtml5:drop_annuler:>",
+     dictCancelUploadConfirmation: "<:uploadhtml5:drop_annuler_confirm:>",
+     dictMaxFilesExceeded: "<:uploadhtml5:drop_max_file:>"
+   }
+  </script>
+  ]
+</div>
