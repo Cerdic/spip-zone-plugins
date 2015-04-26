@@ -45,3 +45,22 @@ function uploadhtml5_afficher_complement_objet($flux) {
 
     return $flux;
 }
+
+function uploadhtml5_affiche_gauche($flux) {
+
+    if ($en_cours = trouver_objet_exec($flux['args']['exec'])
+        AND $en_cours['edition']!==false // page edition uniquement
+        AND $type = $en_cours['type']
+        AND $id_table_objet = $en_cours['id_table_objet']
+        // id non defini sur les formulaires de nouveaux objets
+        AND (isset($flux['args'][$id_table_objet]) and $id = intval($flux['args'][$id_table_objet])
+            // et justement dans ce cas, on met un identifiant negatif
+            OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
+      AND autoriser('joindredocument',$type,$id)) {
+
+            $flux['data'] .= recuperer_fond('prive/squelettes/inclure/uploadhtml5', array('type' => $type, 'id' => $id));
+
+        }
+
+    return $flux;
+}

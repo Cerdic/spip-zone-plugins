@@ -20,29 +20,11 @@
 
 	<licence>GNU/GPL</licence>
 
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[1.21.0;]" />
-		<utilise nom="saisies" compatibilite="[1.21.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="uploadhtml5_autorisations.php" />
-		<pipeline nom="insert_head" inclure="uploadhtml5_pipelines.php" />
-		* declarer un pipeline
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (à éviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration
-		<menu nom="uploadhtml5" titre="uploadhtml5:uploadhtml5_titre" parent="menu_edition"  icone="images/uploadhtml5-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ...
-		<onglet nom="uploadhtml5" titre="uploadhtml5:uploadhtml5_titre" parent="configuration" icone="images/uploadhtml5-24.png" />
-	-->
-
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
 
 	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="header_prive" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="afficher_complement_objet" inclure="uploadhtml5_pipelines.php" />
+  <pipeline nom="affiche_gauche" inclure="uploadhtml5_pipelines.php" />
 </paquet>
