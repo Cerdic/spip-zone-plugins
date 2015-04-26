@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_#FORM">
 
   [<p class="reponse_formulaire reponse_formulaire_erreur">
-    (#ENV*{message_erreur})
+  (#ENV*{message_erreur})
   </p>]
   [<p class="reponse_formulaire reponse_formulaire_ok">
     (#ENV*{message_ok})
@@ -16,28 +16,32 @@
   </form>
 
   <script type="text/javascript">
-   Dropzone.options.dropzonespip = {
+     var options = {
 
-     maxFilesize: #CONFIG{uploadhtml5/max_file_size},
-     maxFiles: [(#CONFIG{uploadhtml5/max_file}|>{0}|?{
-     #CONFIG{uploadhtml5/max_file},
-     null})],
+       maxFilesize: #CONFIG{uploadhtml5/max_file_size},
+       maxFiles: [(#CONFIG{uploadhtml5/max_file}|>{0}|?{
+         #CONFIG{uploadhtml5/max_file},
+         null})],
 
-     [(#REM|test_espace_prive|oui)
-     success: function(file, response) {
-       ajaxReload("documents");
-     },]
+       [(#REM|test_espace_prive|oui)
+           success: function(file, response) {
+             ajaxReload("documents");
+           },
+       ]
 
-     // Traduire dropzone
-     dictDefaultMessage: "<:uploadhtml5:drop_ici:>",
-     dictFallbackMessage: "<:uploadhtml5:drop_no_support:>",
-     dictFallbackText: "<:uploadhtml5:drop_fallbacktext:>",
-     dictInvalidFileType: "<:uploadhtml5:drop_fichier_invalide:>",
-     dictFileTooBig: "<:uploadhtml5:drop_fichier_trop_gros:>",
-     dictCancelUpload: "<:uploadhtml5:drop_annuler:>",
-     dictCancelUploadConfirmation: "<:uploadhtml5:drop_annuler_confirm:>",
-     dictMaxFilesExceeded: "<:uploadhtml5:drop_max_file:>"
-   }
+       // Traduire dropzone
+       dictDefaultMessage: "<:uploadhtml5:drop_ici:>",
+       dictFallbackMessage: "<:uploadhtml5:drop_no_support:>",
+       dictFallbackText: "<:uploadhtml5:drop_fallbacktext:>",
+       dictInvalidFileType: "<:uploadhtml5:drop_fichier_invalide:>",
+       dictFileTooBig: "<:uploadhtml5:drop_fichier_trop_gros:>",
+       dictCancelUpload: "<:uploadhtml5:drop_annuler:>",
+       dictCancelUploadConfirmation: "<:uploadhtml5:drop_annuler_confirm:>",
+       dictMaxFilesExceeded: "<:uploadhtml5:drop_max_file:>"
+     };
+
+   $("#dropzonespip").dropzone(options);
+
   </script>
   ]
 </div>
