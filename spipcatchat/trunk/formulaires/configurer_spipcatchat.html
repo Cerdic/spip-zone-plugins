@@ -1,25 +1,34 @@
 <div class="ariaformprop" aria-relevant="additions" aria-atomic="true" aria-live="polite" >
 <div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
-<h3 class="titrem"><:spipcatchat:config_catchat:></h3>
+<h3 align="center" class="titrem" style="font-size:1.5em">
+	<div width="24" style="background:url('#CHEMIN{images/spipcatchat-64.png}') no-repeat;height:64px">
+		<img src="#CHEMIN{prive/themes/spip/images/cfg-32.png}" style="margin-left:-270px;position:absolute;bottom:0px;">
+	<br/>
+	<:spipcatchat:config_catchat:>
+	</div>
+</h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		#SET{fl,spipcatchat}
+		<div class="formulaire_spip" style="padding:4%"><:spipcatchat:info_configuration:></div>
 		<fieldset>
 			<legend><:spipcatchat:public:></legend>
 			<ul>
 				#SET{name,width}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				<p class="explication"><:spipcatchat:explication_largeur:></p>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},100%}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				#SET{name,catchat_theme_colorThumbs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					<p class="explication"><:spipcatchat:explication_theme:></p>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,false}
@@ -29,7 +38,7 @@
 					</select>
 				</li>
 				#SET{name,catchat_theme_color}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]" >
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
@@ -40,32 +49,49 @@
 				</li>				
 				#SET{name,catchat_theme_colorprimaire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}"><:spipcatchat:label_primaire:></label>[
+					<label for="#GET{name}"><:spipcatchat:label_primaire:></label>
+					<p class="explication"><:spipcatchat:explication_color_primaire:></p>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},ffa500}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				#SET{name,catchat_theme_colorsecondaire}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}"><:spipcatchat:label_secondaire:></label>[
+					<label for="#GET{name}"><:spipcatchat:label_secondaire:></label>
+					<p class="explication"><:spipcatchat:explication_color_secondaire:></p>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},fcf2d8}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				
 						#SET{name,catchat_theme_coloricone}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					<p class="explication"><:spipcatchat:explication_color_icon:></p>
+					[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
 						<BOUCLE_options_effect1(POUR){tableau #LISTE{noir,bleu,gris,jaune,brun,orange,pourpre,rose,rouge,vert}}>
 							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
 						</BOUCLE_options_effect1>
 					</select>
+					<center>
+					[(#CONFIG{spipcatchat/catchat_theme_coloricone}||oui)#SET{pack,#ENV{#GET{name}}}]
+					[(#CONFIG{spipcatchat/catchat_theme_coloricone}||non)#SET{pack,orange}]
+					<legend>
+					<img src="#CHEMIN{images/theme/#GET{pack}/aide-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#GET{pack}/cancel-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#GET{pack}/moins-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#GET{pack}/ok-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#GET{pack}/plus-26.png}">&nbsp;
+					<img src="#CHEMIN{images/theme/#GET{pack}/trash-26.png}">&nbsp;
+					</legend>
+					</center>
 				</li>
 				#SET{name,refresh}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select name="#GET{name}" class="select" id="#GET{name}">
+					]<p class="explication"><:spipcatchat:explication_refesh_pub:></p>
+					 <select name="#GET{name}" class="select" id="#GET{name}">
 						<BOUCLE_options_effect2(POUR){tableau #LISTE{1000,2000,3000,4000,5000,6000,7000,8000}}>
 							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
 						</BOUCLE_options_effect2>
@@ -75,13 +101,15 @@
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+					]<p class="explication"><:spipcatchat:explication_color_fond:></p>
+					<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},ffffff}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 				</li>
 				#SET{name,smoke}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select name="#GET{name}" class="select" id="#GET{name}">
+					]<p class="explication"><:spipcatchat:explication_smoke:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,oui}
 						<option value="o"[(#ENV{#GET{name}}|=={o}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
 						#SET{val,non}
@@ -92,7 +120,8 @@
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select name="#GET{name}" class="select" id="#GET{name}">
+					]<p class="explication"><:spipcatchat:explication_corner:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,oui}
 						<option value="o" [(#ENV{#GET{name}}|=={o}|oui)selected="selected"]>[(#GET{fl}|concat{':label_',#GET{val}}|_T)]</option>
 						#SET{val,non}
@@ -102,13 +131,14 @@
 			</ul>
 		</fieldset>
 		<fieldset>
-		<legend><:spipcatchat:public:></legend>
+		<legend><:spipcatchat:prive:></legend>
 		<ul>
 		#SET{name,refreshprive}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select name="#GET{name}" class="select" id="#GET{name}">
+					]<p class="explication"><:spipcatchat:explication_refesh_prive:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
 						<BOUCLE_options_effect3(POUR){tableau #LISTE{1000,2000,3000,4000,5000,6000,7000,8000}}>
 							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
 						</BOUCLE_options_effect3>
@@ -120,7 +150,8 @@
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select name="#GET{name}" class="select" id="#GET{name}">
+					]<p class="explication"><:spipcatchat:explication_admin:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
 						<BOUCLE_options_effect4(POUR){tableau #LISTE{non,oui}}>
 							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
 						</BOUCLE_options_effect4>
@@ -128,6 +159,7 @@
 				</li>
 				</ul>
 		</fieldset>	
+		[<p><:spipcatchat:catchat_label:> ver : (#PLUGIN{SPIPCATCHAT,version}) <:spipcatchat:copy:> #PLUGIN{SPIPCATCHAT,compatibilite}</p>]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
