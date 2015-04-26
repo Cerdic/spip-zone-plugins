@@ -1,19 +1,21 @@
 <paquet
 	prefix="SpipCatChat"
 	categorie="communication"
-	version="1.1.1"
-	etat="test"
+	version="1.1.2"
+	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spipcatchat-64.png"
 	documentation="http://contrib.spip.net/SpipCatChat-2"
+	demonstration="http://belgologie.be/spip.php?page=spipcatchat"
+	developpement="http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat"
 >
 	<nom>SpipCatChat</nom>
 	<!-- Système de communication instantanée -->
 	<auteur lien="http://www.nic-nac.org">Claude Codden</auteur>
-	<copyright>2014-2015</copyright>
-	<licence>GNU GPL</licence>
 	<credit lien="http://www.blane-est.net/ehma/">Traduction anglaise : Ehma</credit>
 	<credit lien="http://www.nic-nac.org">Theme : Codden.C sous licence CC BY-NC-SA-4.0</credit>
+	<copyright>2014-2015</copyright>
+	<licence>GNU/GPL</licence>
 	<traduire module="spipcatchat" reference="fr" gestionnaire="salvatore" />
 	<traduire module="paquet-spipcatchat" reference="fr" gestionnaire="salvatore" />
 	<pipeline 
