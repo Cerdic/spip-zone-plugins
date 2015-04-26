@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'catchat_chargement' => 'Loading...',
 'copy' => 'Developed for Spip',
-'config_catchat' => 'Configuration de SipCatChat',
+'config_catchat' => 'Configuration de SpipCatChat',
 
 /*--E--*/
 'error_ajout_salon' => 'Sorry a chat room allready with the same name',

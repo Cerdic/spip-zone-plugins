@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'catchat_chargement' => 'Chargement...',
 'copy' => 'Développé pour Spip',
-'config_catchat' => 'Configuration de SipCatChat',
+'config_catchat' => 'Configuration de SpipCatChat',
 /*--E--*/
 'error_ajout_salon' => 'désolé, mais le nom du salon existe déjà',
 'explication_largeur' => 'Choisissez en pixel ou en pourcentage, la largeur par défaut pour l\'intégration du salon de discussion dans votre site.',
