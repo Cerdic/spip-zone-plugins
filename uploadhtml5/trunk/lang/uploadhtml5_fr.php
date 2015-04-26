@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
     // M
     'max_file_size' => 'Taille maximum des fichiers',
-    'explication_max_file_size' => "Taille maximum des fichiers (en MB). Il est conseillé d'utiliser la valeur du serveur",
+    'explication_max_file_size' => "Taille maximum des fichiers (en MB). Il est conseillé d'utiliser la valeur du serveur.",
     'max_file' => 'Nombre maximum de fichier',
     'explication_max_file' => 'Nombre de maximum de fichiers qui peuvent être uploadé simultanément (0 pour ne pas limiter).',
 
