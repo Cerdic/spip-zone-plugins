@@ -23,16 +23,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'config_catchat' => 'Configuration de SipCatChat',
 /*--E--*/
 'error_ajout_salon' => 'désolé, mais le nom du salon existe déjà',
-
+'explication_largeur' => 'Choisissez en pixel ou en pourcentage, la largeur par défaut pour l\'intégration du salon de discussion dans votre site.',
+'explication_theme' => 'Vous pouvez choisir ici d\'appliquer un thème préétabli ou de composer votre propre style en harmonie avec votre site.',
+'explication_color_primaire' => 'Choisissez la couleur dominante pour votre thème sans le diéser <b>EX : (<font color="red">#</font>FFA500)</b> ou placez un "<font color="red">0</font>" pour un effet de transparence.',
+'explication_color_secondaire' => 'Choisissez la couleur secondaire pour votre thème sans le diéser <b>EX : (<font color="red">#</font>FFA500)</b> ou placez un "<font color="red">0</font>" pour un effet de transparence.',
+'explication_color_icon' => 'Harmonisez le pack d\'icônes avec votre site.',
+'explication_refesh_pub' => 'Réglez ici le taux de rafraîchissement des messages des salons publics en rapport avec la vélocité de votre serveur web',
+'explication_refesh_prive' => 'Réglez ici le taux de rafraîchissement des messages du salon privé en rapport avec la vélocité de votre serveur web',
+'explication_admin' => 'Voulez-vous activer le salon réserver aux administrateurs de ce site ?',
+'explication_color_fond' => 'Choisissez la couleur du fond du salon de disscussion sans le diéser <b>EX : (<font color="red">#</font>FFA500)</b> ou placez un "<font color="red">X</font>" pour un effet de transparence.',
+'explication_smoke' => 'Voulez-vous activer l\'option de "ombre portée" du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
+'explication_corner' => 'Voulez-vous activer les coins arrondis du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
 /*--I--*/
 'info_en_ligne' => 'Rédacteurs en ligne :',
 'info_statut' => 'Changer de statut : ',
+'info_configuration' => 'Système de communication instantanée développé pour Spip.<br/> Pour plus d\'information sur la configuration et l\'installation voir la documentation sur <a href="http://contrib.spip.net/Plugin-SpipCatChat">Contribution Spip</a> et pour l\'utilisation voir <a href="http://contrib.spip.net/IMG/pdf/guide_de_l_utilisateur.pdf">le guide de  l\'utilisateur</a>.<br/><br/>Contact : <a href="mailto:claude.codden@nic-nac.org">Claude Codden</a><br/>Développement : <a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat/trunk">SPIP Zone</a>',
 'index_attent' => 'Chargement du chat en cours...',
 
 /*--F--*/
 
 'formulaire_addusers' => 'Formulaire d\'ajout de membres',
-'formulaire_error_users' => 'Veuillez sélectionner le nom du membre à ajouter au salon',
+'formulaire_error_users' => 'Veuillez sélectionner le nom du membre à ajouter au salon', 
 'formulaire_log' => 'Indiquez votre pseudo et mot de passe afin de vous connecter au chat',
 'formulaire_nouveau_salon' => 'ou entrez le nom du nouveau salon',
 'formulaire_recherche_users' => 'Indiquez ici le nom d\'un membre à ajouté au salon',
@@ -43,22 +54,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'catchat_label' => 'SpipCatChat',
 
 /*--L--*/
-'label_admin' => 'Salon administrateur',
+'label_admin' => 'Salon des administrateurs de l\'espace privé',
 'label_catchat_theme_color' => 'Couleur du thème',
-'label_catchat_theme_coloricone' => 'Couleur des icones',
-'label_catchat_theme_colorThumbs' => 'Thème',
-'label_corner' => 'Coin arrondi',
-'label_fond_color' => 'Couleur de fond',
+'label_catchat_theme_coloricone' => 'Couleur du packs des icônes du salon',
+'label_catchat_theme_colorThumbs' => 'Thème du salon automatique ou préétabli',
+'label_corner' => 'Activer les coins arrondis (border-radius CSS3)',
+'label_fond_color' => 'Couleur de fond de cadre des messages',
 'label_non' => 'Non',
 'label_oui' => 'Oui',
-'label_primaire' => 'Couleur dominante',
-'label_refresh' => 'Rafraîchissement',
-'label_refreshprive' => 'Rafraîchissement',
+'label_primaire' => 'Couleur prédominante du salon',
+'label_refresh' => 'Taux de rafraîchissement du salon public',
+'label_refreshprive' => 'Taux de rafraîchissement du salon privé',
 'label_false' => 'Automatique et préétabli',
-'label_secondaire' => 'Couleur secondaire',
-'label_smoke' => 'Ombrage',
+'label_secondaire' => 'La couleur secondaire du salon',
+'label_smoke' => 'L\'ombrage des bordures du cadre du salon (box-shadow CSS3)',
 'label_true' => 'Manuel et personnalisé',
-'label_width' => 'Largeur',
+'label_width' => 'La largeur du salon public',
 
 
 /*--N--*/
@@ -73,6 +84,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'placeholder_salon' => 'nouveau salon',
 'prive' =>'Configuration de l\'espace privé',
 'public' => 'Configuration de l\'espace public',
+
+/*--R--*/
+
+'recup_chat' => 'Récuperation de l\'historique',
 
 /*--T--*/
 
