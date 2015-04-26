@@ -36,7 +36,12 @@ function uploadhtml5_header_prive($flux) {
 
 function uploadhtml5_afficher_complement_objet($flux) {
 
-    $flux['data'] .= recuperer_fond('prive/squelettes/inclure/uploadhtml5', $flux['args']);
+    if ($type=$flux['args']['type']
+        and $id=intval($flux['args']['id'])
+        and (autoriser('joindredocument',$type,$id))) {
+
+        $flux['data'] .= recuperer_fond('prive/squelettes/inclure/uploadhtml5', $flux['args']);
+    }
 
     return $flux;
 }
