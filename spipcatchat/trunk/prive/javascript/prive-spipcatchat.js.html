@@ -8,6 +8,7 @@ var catchatrefresh=[(#CONFIG{spipcatchat/refreshprive}||non)2000][(#CONFIG{spipc
 var catchatrefreshstatut=125000;
 var scrollBar = false;
 var nombreMessage;
+var emosta = 'status';
 // -------------------------------------------------------------------------------------------------// 
 function spipcatchatmessage()
 {	// l'utilisation de cette fonction a pour but d'afficher les messages d'erreur et d'éviter les appels inutiles au script PHP pour les motifs suivant
@@ -75,12 +76,14 @@ $.ajax({
 				$('#occuper').css('display','block');
 				$('#public').css('display','none');
 				$('#prive').css('display','block');
+				 emosta = 'admin';
 			}
 			if(e==0){
 				$('#libre').css('display','block');
 				$('#occuper').css('display','none');
 				$('#public').css('display','block');
 				$('#prive').css('display','none');
+				 emosta = 'status';
 			}
 			$('#salonadmin').css('display','none');
 			$('#salonadminpatientez').css('display','block');
@@ -146,7 +149,7 @@ function getOnlineUsers(t,n,r,i)
 		t==e.list[s].id&&$("#un").attr("selected","selected")):(texte="En ligne [&radic;]",
 		i="active",
 		t==e.list[s].id&&$("#trois").attr("selected","selected")),
-		r+='<span title="'+texte+'"><img src="'+n+"/images/status-"+i+'.png" /> '+e.list[s].login+"</span><br/>";$("#users").html(r)
+		r+='<span title="'+emosta+" - "+texte+'"><img src="'+n+"/images/"+emosta+"-"+i+'.png" /> '+e.list[s].login+"</span><br/>";$("#users").html(r)
 		}		
 	}
   )
