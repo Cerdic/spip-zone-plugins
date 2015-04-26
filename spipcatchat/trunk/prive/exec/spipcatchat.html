@@ -14,6 +14,12 @@
     <INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-statut}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>  
     <!--/#navigation-->
     <!--#extra-->
+    [(#SESSION{statut}|=={webmestre}|oui)
+    <INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-config}{url_plugin=#GET{url_plugin}}>
+    ]
+    [(#SESSION{statut}|=={0minirezo}|oui)
+    <INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-config}{url_plugin=#GET{url_plugin}}>
+    ]
     <INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-statut-erreur}{id_auteur=#ID_AUTEUR}>
     <!--/#extra-->
  </BOUCLE_AUTEUR_SESSION>
