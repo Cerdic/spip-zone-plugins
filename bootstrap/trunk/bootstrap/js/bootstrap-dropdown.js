@@ -165,7 +165,7 @@
     .on('click.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
     // bug on https://github.com/twbs/bootstrap/commit/b9bd82b49656e320b623cc3e2c0363c1ffb9e9ad
     // solved by https://github.com/twbs/bootstrap/commit/40b7a909a63eef53053de4595079ac1a06118cc5#commitcomment-2758651
-    .on('click.dropdown.data-api', '.dropdown-menu', function (e) { e.stopPropagation() })
+    .on('click.dropdown.data-api', '.dropdown-menu a', function (e) { e.stopPropagation() })
     .on('click.dropdown.data-api'  , toggle, Dropdown.prototype.toggle)
     .on('keydown.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
 
