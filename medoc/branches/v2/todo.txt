@@ -1,0 +1,6 @@
+= TODO
+= pour Medoc
+
+- Corriger les raccourcis proposés dans l’espace privé, pour ne plus proposer que <doc> (ni <img> ni <emb>), dans la v2, comme dans la v1 (cf : http://zone.spip.org/trac/spip-zone/changeset/56122/ )
+
+- Ajuster la taille de « petite image » : mettre un lien aux images qui sont plus petites que, disons, 0,25 x la constante qui défini la taille des vignettes par défaut
