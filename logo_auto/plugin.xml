@@ -8,7 +8,11 @@
 <categorie>multimedia</categorie>
 
 <slogan>Des logos partout, systématiquement</slogan>
-<description>Plus besoin d'ajouter des logos quand ils sont générés de façon automatique !</description>
+<description>ATTENTION, CE PLUGIN EST COURS DE DEVELOPPEMENT ! Selon le moment, il peut être bien sympa ou totalement inutilisable.
+
+	Le but de ce plugin est d’afficher des logos à tout coup, pour chaque objet SPIP. Chaque logo est généré de façon automatique, en faisant feu de tout bois : à partir des images associées à l’objet, ou de son parent, ou d’un visuel par défaut. Ces logos sont dimensionnés de façon homogène pour être prêts à l’emploi. Enfin, ce mécanisme sera paramétrable et surchargeable.
+
+</description>
 <lien>http://contrib.spip.net/logos-automatiques?var_mode=preview</lien>
 <auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
 <licence>GPL</licence>
