@@ -1,13 +1,7 @@
-[(#REM) reglages des variables ]
-#SET{largeur,150}
-#SET{hauteur,#GET{largeur}}
-#SET{class,spip_logos}
-
 [(#REM)
 
   1. logo contribué de l'article
   2. image liée à l'article
-  3. logo de la rubrique 
 
 ]
 
@@ -27,15 +21,5 @@ On teste "arton" pour respecter l'ordre des priorités ]
 #SET{logo,#FICHIER}
 </BOUCLE_doc>
 
-<BOUCLE_art(ARTICLES)
-  {si (#GET{logo}|non)}
-  {id_article}>
-  <BOUCLE_rub(RUBRIQUES)
-    {id_rubrique}
-  >
-  #SET{logo,#LOGO_RUBRIQUE}
-  </BOUCLE_rub>
-</BOUCLE_art>
-
-[(#REM) Retourner l'image ]
-[(#GET{logo})]
+[(#REM) Retourner l'image avec la class spip_logos, elle sera réduite au besoin dans le squelette ]
+[(#GET{logo}|image_passe_partout{2222,2222}|inserer_attribut{class,spip_logos})]

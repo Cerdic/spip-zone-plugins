@@ -1,14 +1,8 @@
-[(#REM) reglages des variables ]
-#SET{largeur,150}
-#SET{hauteur,#GET{largeur}}
-#SET{class,spip_logos}
-
 [(#REM)
 
   1. logo contribué de la rubrique
   2. image liée à la rubrique
   3. logo de la rubrique parente
-  4. logo du site SPIP 
 
 ]
 
@@ -27,5 +21,6 @@ On teste "rubon" pour respecter l'ordre des priorités ]
 #SET{logo,#FICHIER}
 </BOUCLE_doc>
 
-[(#REM) retourner l'image ]
-[(#GET{logo})]
+
+[(#REM) Retourner l'image avec la class spip_logos, elle sera réduite au besoin dans le squelette ]
+[(#GET{logo}|image_passe_partout{2222,2222}|inserer_attribut{class,spip_logos})]
