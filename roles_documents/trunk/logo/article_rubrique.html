@@ -1,0 +1,36 @@
+[(#REM)
+
+  1. logo contribué de l'article
+  2. image liée à l'article
+
+]
+
+[(#REM) 1. recuperer le logo d'article de facon classique ]
+#SET{logo,#ENV*{logo_article}}
+
+[(#REM) 2. s'il n'existe pas, chercher une image associee a l'article ;
+On teste "arton" pour respecter l'ordre des priorités ]
+
+<BOUCLE_doc(DOCUMENTS)
+  {si (#GET{logo}|match{arton}|non)}
+  {id_article}
+  {extension IN jpg, gif, png}
+  {role=logo}
+  {0,1}
+>
+#SET{logo,#FICHIER}
+</BOUCLE_doc>
+
+<BOUCLE_art(ARTICLES)
+  {si (#GET{logo}|non)}
+  {id_article}>
+  <BOUCLE_rub(RUBRIQUES)
+    {id_rubrique}
+  >
+  #SET{logo,#LOGO_RUBRIQUE}
+  </BOUCLE_rub>
+</BOUCLE_art>
+
+
+[(#REM) Retourner l'image avec la class spip_logos, elle sera réduite au besoin dans le squelette ]
+[(#GET{logo}|image_passe_partout{2222,2222}|inserer_attribut{class,spip_logos})]
