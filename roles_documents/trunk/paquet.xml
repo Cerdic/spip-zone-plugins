@@ -13,6 +13,9 @@
 
 	<auteur lien="http://contrib.spip.net/tcharlss">Tcharlss</auteur>
 	<auteur lien="http://contrib.spip.net/RastaPopoulos">RastaPopoulos</auteur>
+	<auteur lien="http://spip.tetue.net">tetue</auteur>
+	<auteur>Fil</auteur>
+	
 
 	<licence>GNU/GPL</licence>
 
@@ -23,4 +26,6 @@
 	<pipeline nom="lister_roles_documents" inclure="roles_documents_pipelines.php" action=""/>
 	<pipeline nom="declarer_tables_objets_sql"  inclure="base/roles_documents.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/roles_documents.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="roles_documents_fonctions.php" />
+
 </paquet>
