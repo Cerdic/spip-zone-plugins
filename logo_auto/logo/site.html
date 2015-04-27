@@ -1,0 +1,37 @@
+[(#REM) reglages des variables ]
+#SET{largeur,150}
+#SET{hauteur,#GET{largeur}}
+#SET{class,spip_logo}
+
+[(#REM)
+
+  1. logo contribué du site
+  2. apercite du site
+  3. logo par défaut des sites
+
+]
+
+[(#REM) 1. recuperer le logo du site de facon classique ]
+#SET{logo,#ENV*{logo_site}}
+
+[(#REM) 2. s'il n'existe pas… ]
+
+<BOUCLE_sites(SITES)
+  {si (#GET{logo}|non)}
+  {id_syndic}
+>
+[(#SET{logo,
+  [<img src="(#VAL{http://www.apercite.fr/api/apercite/240x180/oui/oui/#URL_SITE}|copie_locale{modif})">]
+})]
+</BOUCLE_sites>
+
+[(#GET{logo}|non)
+  #SET{logo,#CHEMIN{logo/site.png}}
+]
+
+[(#REM) traiter/recadrer le logo ]
+[(#GET{logo}
+    |image_passe_partout{#GET{largeur},#GET{hauteur}}
+    |image_recadre{#GET{largeur},#GET{hauteur},center,transparent}
+    |inserer_attribut{class,#GET{class}}
+)]

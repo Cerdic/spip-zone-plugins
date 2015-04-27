@@ -5,7 +5,7 @@
 - brancher la balise #LOGO_DOCUMENT sur le modele logo/document.html
 - brancher la balise #LOGO_AUTEUR sur le modele logo/auteur.html en faisant attention à Gravatar, qui surcharge cette balise !
 - créer la balise pour les logos d'articles syndiqués ?
-- remplacer le lien en dur apercite.fr / tester un plugin de génération de vignettes d’écran
+- remplacer le lien en dur apercite.fr => tester un plugin de génération de vignettes d’écran
 
 Lire aussi :
 http://contrib.spip.net/logos-automatiques?var_mode=preview

@@ -27,3 +27,7 @@ function traiter_logo_article($logo_article, $id_article) {
 function traiter_logo_breve($logo_breve, $id_breve) {	
 	return trim(recuperer_fond('logo/breve', array('logo_breve' => $logo_breve, 'id_breve' => $id_breve)));
 }
+
+function traiter_logo_site($logo_site, $id_syndic) {	
+	return trim(recuperer_fond('logo/site', array('logo_site' => $logo_site, 'id_syndic' => $id_syndic)));
+}
