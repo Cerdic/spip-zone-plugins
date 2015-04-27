@@ -123,7 +123,7 @@
 	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#CONFIG{foundation/variante}|intval|>={4}|?{class='small-block-grid-2 medium-block-grid-3 large-block-grid-4',class='block-grid 4-up mobile-two-up'})]>
 		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#ENV{id_album,x}}}>[
 		(#SET{titre_doc,      #TITRE|sinon{#FICHIER|basename}})][
-		(#SET{titre_doc_long, #GET{titre_doc}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}})][
+		(#SET{titre_doc_long, #EVAL{_ALBUMS_TITRE_COURT}|?{#GET{titre_doc},#GET{titre_doc}|concat{' - ',#TYPE_DOCUMENT,' - ',#VAL{#TAILLE|taille_en_octets},#MEDIA|=={image}|?{#VAL{' - '}|concat{#LARGEUR,'&times;',#HAUTEUR,' px'}}}}})][
 		(#SET{ratio,          #GET{recadrer}|?{#VAL{/\[-:\/\]/}|preg_split{#ENV*{ratio,1}}}})][
 		(#SET{ratio,          #GET{ratio}|count|>{1}|?{#GET{ratio/1}|div{#GET{ratio/0}},#GET{ratio/0}}|floatval})][
 		(#SET{ratio,          #GET{ratio}|sinon{#LARGEUR|div{#HAUTEUR}}|floatval})][

@@ -36,6 +36,9 @@ if (!defined('_ALBUMS_TAILLE_PREVIEW'))                define('_ALBUMS_TAILLE_PR
 // [vignettes] Recadrer ou non les vignettes
 if (!defined('_ALBUMS_RECADRER'))                      define('_ALBUMS_RECADRER',false);
 
+// [vignettes] Titre long ou court
+if (!defined('_ALBUMS_TITRE_COURT'))                   define('_ALBUMS_TITRE_COURT',false);
+
 // [liste] Informations affichées pour chaque fichier, séparées par un tiret `-` : 'extension-taille-dimensions'
 if (!defined('_ALBUMS_LISTE_METAS'))                   define('_ALBUMS_LISTE_METAS','');
 
