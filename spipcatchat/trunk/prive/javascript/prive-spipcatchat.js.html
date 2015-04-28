@@ -10,6 +10,12 @@ var scrollBar = false;
 var nombreMessage;
 var emosta = 'status';
 // -------------------------------------------------------------------------------------------------// 
+
+function spipcatchatemoticon(emoticon)
+{
+	$('#message').val($('#message').val()+''+emoticon);	
+}
+
 function spipcatchatmessage()
 {	// l'utilisation de cette fonction a pour but d'afficher les messages d'erreur et d'éviter les appels inutiles au script PHP pour les motifs suivant
  t=[(#CONFIG{spipcatchat/refreshprive}|div{1000})];
