@@ -3,7 +3,7 @@
     categorie="outil"
     version="0.2.0"
     etat="test"
-    compatibilite="[3.0.0;3.0.*]"
+    compatibilite="[3.0.0;3.1.*]"
     logo="imgs/tyto_alba.png"
     >
     <nom>Raccourci~‹dame› blanche</nom>
