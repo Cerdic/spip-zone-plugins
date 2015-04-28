@@ -53,6 +53,9 @@
 	</langue>
 	<langue code="oc_lnc" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=oc_lnc" total="51" traduits="14" relire="0" modifs="0" nouveaux="37" pourcent="27.45">
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=oc_ni_mis" total="51" traduits="27" relire="0" modifs="0" nouveaux="24" pourcent="52.94">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/crayons?lang_cible=pt_br" total="51" traduits="14" relire="0" modifs="2" nouveaux="35" pourcent="27.45">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
