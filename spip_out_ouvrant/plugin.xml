@@ -2,7 +2,7 @@
 	<nom>Liens spip_out ouvrants</nom>
 	<slogan>Ouvrir les liens externes dans une nouvelle fen&#234;tre</slogan>
 	<auteur>ARNO*</auteur>
-	<version>1.0.0</version>
+	<version>1.2.0</version>
 	<etat>stable</etat>
 	<description>
 		Pour transformer les liens <code>spip_out</code> en liens ouvrants sur une nouvelle fen&#234;tre (oui, c'est horrible). Ne modifie pas le code source g&#233;n&#233;r&#233;, qui reste {compliant}.
@@ -16,7 +16,7 @@
 		<inclure>spip_out_ouvrants_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.*]" />
 	<categorie>navigation</categorie>
 </plugin>
 
