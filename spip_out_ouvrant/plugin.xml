@@ -16,7 +16,7 @@
 		<inclure>spip_out_ouvrants_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;3.1.*]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
 
