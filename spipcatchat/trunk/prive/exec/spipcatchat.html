@@ -3,7 +3,7 @@
 	<script type="text/javascript">
 		<INCLURE{fond=prive/javascript/prive-spipcatchat.js}{url_plugin=#GET{url_plugin}}{id_auteur=#ID_AUTEUR}{nom=#NOM|sinon{#LOGIN}}>
 	</script>   
-	    	<INCLURE{fond=prive/squelettes/contenu/prive-spipcatchat}{id_auteur=#ID_AUTEUR}>
+	    	<INCLURE{fond=prive/squelettes/contenu/prive-spipcatchat}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
 	    <!--#navigation--> 
 	    [(#CONFIG{spipcatchat/admin}|=={oui}|oui) [(#SESSION{statut}|=={0minirezo}|oui)
 	   		<INCLURE{fond=prive/squelettes/navigation/prive-spipcatchat-selecteur-ominizero}{id_auteur=#ID_AUTEUR}{url_plugin=#GET{url_plugin}}>
@@ -16,5 +16,6 @@
 	    <!--#extra-->
 	    	<INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-config}{url_plugin=#GET{url_plugin}}>
 			<INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-statut-erreur}{id_auteur=#ID_AUTEUR}>
+			</INCLURE{fond=prive/squelettes/extra/prive-spipcatchat-statut-erreur}{id_auteur=#ID_AUTEUR}>
 	    <!--/#extra-->
  </BOUCLE_AUTEUR_SESSION>
