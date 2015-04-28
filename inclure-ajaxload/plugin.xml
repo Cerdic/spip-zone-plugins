@@ -3,7 +3,7 @@
 	<slogan>Ajoute une option <code>{ajaxload}</code> &#224; la balise <code>#INCLURE</code></slogan>
 	<auteur>Fil, ARNO*</auteur>
 	<licence>&#169; 2009 GNU/GPL</licence>
-	<version>1.3.0</version>
+	<version>1.3.1</version>
 	<etat>stable</etat>
 	<description>
 	Ce plugin ajoute une option <code>{ajaxload}</code> &#224; la balise <code>#INCLURE</code>. La noisette n'est alors pas incluse, mais charg&#233;e dynamiquement en Ajax au chargement de la page.
@@ -28,6 +28,6 @@
 		<nom>insert_head</nom>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.1.0;3.1.*]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<categorie>outil</categorie>
 </plugin>
