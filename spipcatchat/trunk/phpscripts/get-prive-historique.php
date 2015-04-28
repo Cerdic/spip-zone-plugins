@@ -4,9 +4,8 @@ $fichiercatchat='../db_catchat/'.$_SESSION['spipcatchatprivecode'].'/'.$_SESSION
 $count=false; 
 $i = 1; $prev = 0; 
 $text[] = '		*****  '.$_GET['nomsite']. '  ***** ';
-$text[] = '_________________________________________________________________________________________';
+$text[] = "\n";
 $text[] = $_GET['desc'];
-$text[] = '_________________________________________________________________________________________';
 $text[] = "\n";
 	if(false!=($data_base=fopen($fichiercatchat,'r')))
 	{while (!feof($data_base)) {
@@ -37,12 +36,9 @@ if(!$count)
 	$text['messages'] .= '			************************************';
 	$text['messages'] .="\n"; 
 	}
-$text[] = '_________________________________________________________________________________________';
-$text[] = "\n";
+$text[] = '________________________________________________________________________';
 $text[]=' *** '.$_GET['url'].' ***';
-$text[] = '_________________________________________________________________________________________';
-$text[] = "\n";
-header('Content-Type: text/plain; charset=utf-8 application/force-download');
+header('Content-Type: application/msword; charset=utf-8 application/force-download');
 header('Content-Disposition: attachment; filename="historique.txt"');
 echo implode("\n",$text);// affichage
 ?>
