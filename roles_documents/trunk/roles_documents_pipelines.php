@@ -56,11 +56,5 @@ function roles_documents_document_desc_actions($flux) {
 	return $flux;
 }
 
-/**
- * Déclaration du pipeline qui liste les rôles des documents
- */
-function roles_documents_lister_roles_documents($flux) {
-	return $flux;
-}
 
 ?>

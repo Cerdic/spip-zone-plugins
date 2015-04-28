@@ -18,13 +18,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function roles_documents_declarer_tables_objets_sql($tables){
 
-	// la liste des roles peut être complétée via un pipeline
-	$roles_documents = pipeline('lister_roles_documents', array(
+	// par défaut 2 rôles 'logo' et 'logo de survol'
+	$roles_documents = array(
 		'logo'  => 'roles_documents:role_logo',
 		'logo_survol'  => 'roles_documents:role_logo_survol',
-	));
-	// pour l'instant tous les rôles sont affichés pour tous les cas
-	$choix = is_array($roles_documents) ? array_keys($roles_documents) : array();
+	);
+	// ces 2 rôles sont affichés dans tous les cas
+	$choix = array_keys($roles_documents);
 
 	array_set_merge($tables, 'spip_documents', array(
 		"roles_colonne" => "role",

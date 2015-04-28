@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles_documents"
 	categorie="edition"
-	version="0.1.3"
+	version="0.1.4"
 	etat="experimental"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/roles_documents-48.png"
@@ -15,17 +15,15 @@
 	<auteur lien="http://contrib.spip.net/RastaPopoulos">RastaPopoulos</auteur>
 	<auteur lien="http://spip.tetue.net">tetue</auteur>
 	<auteur>Fil</auteur>
-	
 
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="roles" compatibilite="[1.5.1;]" />
 	<necessite nom="medias" compatibilite="[2.7.27;]" />
 
-	<pipeline nom="document_desc_actions" inclure="roles_documents_pipelines.php" />
-	<pipeline nom="lister_roles_documents" inclure="roles_documents_pipelines.php" action=""/>
 	<pipeline nom="declarer_tables_objets_sql"  inclure="base/roles_documents.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/roles_documents.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="roles_documents_fonctions.php" />
+	<pipeline nom="document_desc_actions" inclure="roles_documents_pipelines.php" />
 
 </paquet>
