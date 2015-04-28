@@ -22,5 +22,5 @@
 	</pipeline>
 	
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.*]" />
 </plugin>
