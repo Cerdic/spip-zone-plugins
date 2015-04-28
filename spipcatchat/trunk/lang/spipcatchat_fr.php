@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_smoke' => 'Voulez-vous activer l\'option de "ombre portée" du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
 'explication_corner' => 'Voulez-vous activer les coins arrondis du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
 /*--I--*/
-'info_en_ligne' => 'Rédacteurs en ligne :',
+'info_en_ligne' => 'En ligne :',
 'info_statut' => 'Changer de statut : ',
 'info_configuration' => 'Système de communication instantanée développé pour Spip.<br/> Pour plus d\'information sur la configuration et l\'installation voir la documentation sur <a href="http://contrib.spip.net/Plugin-SpipCatChat">Contribution Spip</a> et pour l\'utilisation voir <a href="http://contrib.spip.net/IMG/pdf/guide_de_l_utilisateur.pdf">le guide de  l\'utilisateur</a>.<br/><br/>Contact : <a href="mailto:claude.codden@nic-nac.org">Claude Codden</a><br/>Développement : <a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/spipcatchat/trunk">SPIP Zone</a>',
 'index_attent' => 'Chargement du chat en cours...',
