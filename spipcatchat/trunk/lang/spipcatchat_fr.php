@@ -30,10 +30,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_color_icon' => 'Harmonisez le pack d\'icônes avec votre site.',
 'explication_refesh_pub' => 'Réglez ici le taux de rafraîchissement des messages des salons publics en rapport avec la vélocité de votre serveur web',
 'explication_refesh_prive' => 'Réglez ici le taux de rafraîchissement des messages du salon privé en rapport avec la vélocité de votre serveur web',
-'explication_admin' => 'Voulez-vous activer le salon réserver aux administrateurs de ce site ?',
+'explication_admin' => 'Voulez-vous activer le salon réserver aux administrateurs de l\'espace privé ?',
 'explication_color_fond' => 'Choisissez la couleur du fond du salon de disscussion sans le diéser <b>EX : (<font color="red">#</font>FFA500)</b> ou placez un "<font color="red">X</font>" pour un effet de transparence.',
 'explication_smoke' => 'Voulez-vous activer l\'option de "ombre portée" du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
 'explication_corner' => 'Voulez-vous activer les coins arrondis du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
+'explication_emoticon' => 'Voulez-vous activer la barre d\'insertion des émoticons dans le salon de l\'espace privé ?',
+'explication_historique' => 'Voulez-vous activer l\'option de récupération de l\'historique des discussions du menu des utilisateurs du salon privé ?',
 /*--I--*/
 'info_en_ligne' => 'En ligne :',
 'info_statut' => 'Changer de statut : ',
@@ -54,12 +56,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'catchat_label' => 'SpipCatChat',
 
 /*--L--*/
-'label_admin' => 'Salon des administrateurs de l\'espace privé',
+'label_admin' => 'Salon des administrateurs',
 'label_catchat_theme_color' => 'Couleur du thème',
 'label_catchat_theme_coloricone' => 'Couleur du packs des icônes du salon',
 'label_catchat_theme_colorThumbs' => 'Thème du salon automatique ou préétabli',
 'label_corner' => 'Activer les coins arrondis (border-radius CSS3)',
 'label_fond_color' => 'Couleur de fond de cadre des messages',
+'label_emoticon' => 'Afficher la barre des émoticons',
+'label_historique' => 'Activer la récupération de l\'historique',
 'label_non' => 'Non',
 'label_oui' => 'Oui',
 'label_primaire' => 'Couleur prédominante du salon',
@@ -70,7 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_smoke' => 'L\'ombrage des bordures du cadre du salon (box-shadow CSS3)',
 'label_true' => 'Manuel et personnalisé',
 'label_width' => 'La largeur du salon public',
-
 
 /*--N--*/
 'no_file' => 'Pas de fichier ',
