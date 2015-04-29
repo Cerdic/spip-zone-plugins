@@ -8,8 +8,8 @@
 			<a class="bando2_admin_plugin" href="?exec=configurer_spipcatchat"><:spipcatchat:config_catchat:></a>
 		</li>]
 		<!-- Menu Historique du salon -->
-		<li class="item">
-				<a class="bando2_articles" href='#ENV{url_plugin}phpscripts/get-prive-historique.php?nomsite=[(#NOM_SITE_SPIP||texte_script)]&url=[(#URL_SITE_SPIP ||texte_script)]&desc=[(#DESCRIPTIF_SITE_SPIP|attribut_html|texte_script)]'><:spipcatchat:recup_chat:></a>
-		</li>
+		[<li class="item">(#CONFIG{spipcatchat/historique}|=={oui}|oui)
+			<a class="bando2_articles" href='#ENV{url_plugin}phpscripts/get-prive-historique.php?nomsite=[(#NOM_SITE_SPIP||texte_script)]&url=[(#URL_SITE_SPIP ||texte_script)]&desc=[(#DESCRIPTIF_SITE_SPIP|attribut_html|texte_script)]'><:spipcatchat:recup_chat:></a>
+		</li>]
 	</ul>
 </div>
