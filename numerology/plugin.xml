@@ -8,6 +8,7 @@
 <categorie>outil</categorie>
 
 <slogan>Transformer du texte en nombres</slogan>
+<lien>http://zone.spip.org/trac/spip-zone/browser/_plugins_/numerology/todo.txt</lien>
 <auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
 
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
