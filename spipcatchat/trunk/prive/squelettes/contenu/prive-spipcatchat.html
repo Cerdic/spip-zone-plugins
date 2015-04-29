@@ -4,9 +4,14 @@
    <div id="text" style="height:500px;overflow-y: auto;">
 	 <p align="center"><:spipcatchat:index_attent:></p>
    </div>
-   <INCLURE{fond=prive/squelettes/contenu/prive-spipcatchat-emoticon}{url_plugin=#ENV{url_plugin}}>
+	   <!-- La barre des émoticons -->
+	   [(#CONFIG{spipcatchat/emoticon}|=={oui}|oui)
+	    <INCLURE{fond=prive/squelettes/contenu/prive-spipcatchat-emoticon}{url_plugin=#ENV{url_plugin}}>
+	    ]
     <p class="boutons" style="padding:3%" >
+	   <!-- Le champ d'édition des messages -->
       <input type="text" id="message" class="text" style="margin-bottom:1%" value="" autocomplete="off">
+      <!-- Le bouton d'envoi -->
       <input class="submit" title="<:spipcatchat:title_valid_message:>" type="submit" onclick="spipcatchatmessage();" value="Envoyer">
     </p>
  </div>
