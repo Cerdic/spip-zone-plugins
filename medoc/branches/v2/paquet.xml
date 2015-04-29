@@ -4,7 +4,7 @@
 	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
-	logo="icon/medoc.png"
+	logo="medoc.png"
 	documentation="http://contrib.spip.net/medoc"
 >
 
