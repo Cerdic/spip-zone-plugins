@@ -8,10 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
-	'mode_debug' => 'Režim ladenia',
+	'mode_debug' => 'Debug Modus',
+	'mode_inclure' => 'Include Modus',
+	'mode_profile' => 'Profil-Modus',
+	'mode_traduction' => 'Übersetzungsmodus',
 
 	// T
-	'titre_outils_rapides' => 'Création' # MODIF
+	'titre_debug' => 'Debug',
+	'titre_outils_rapides' => 'Neu'
 );
 
 ?>
