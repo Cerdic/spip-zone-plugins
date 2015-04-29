@@ -1,0 +1,14 @@
+<plugin>
+<nom>Numérologie</nom>
+<prefix>numerology</prefix>
+<icon>numerology.png</icon>
+
+<version>0.0.1</version>
+<etat>experimental</etat>
+<categorie>outil</categorie>
+
+<slogan>Transformer du texte en nombres</slogan>
+<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
+
+<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+</plugin>

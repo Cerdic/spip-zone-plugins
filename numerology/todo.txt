@@ -1,0 +1,48 @@
+= TODO
+= pour Numerology
+
+But : transformer du texte en nombres
+
+La numérologie est une pseudo-science qui repose sur la transformation de texte en nombres, par l’association de chaque lettre à un chiffre.
+
+== Filtres
+
+Ce plugin met à disposition ces filtres de transformation, à appliquer sur un texte :
+
+|num
+transforme en une série de chiffres
+« ceci est une phrase »
+= 3539512355789115
+
+|num_chiffre
+réduit à un seul chiffre
+« ceci est une phrase »
+= 3539 512 355 789115
+= 3+5+3+9 5+1+2 3+5+5 7+8+9+1+1+5
+= 20 8 13 31
+= 2 8 4 4
+= 10 8
+= 1 8
+= 9
+
+|num_hexa
+transforme en une valeur hexadécimale
+« ceci est une phrase »
+= 3539512355789115
+= 3+5+3 9+5 1+2+3 5+5+7 8+9 1+1+5
+= 11 14 6 17 17 7
+= 1+1 1+4 6 1+7 1+7 7
+= 256897
+(ou n'importe quel autre opération qui aboutisse à une valeur hexadécimale)
+
+== À quoi ça sert ?
+
+- à rien, mais c’est rigolo :)
+- à faire de la numérologie, pardi !
+- à associer une valeur hexadécimale à un texte, pour s’amuser avec les couleurs…
+
+== Évolution
+
+Évolution à prévoir, dans les prochaines versions : internationaliser ! en traitant des autres alphabets…
+
+Ce plugin doit rester simple : se borner à transformer en chiffres. Point. C'est un petite briquette qui n'a que vocation à servir à d'autres (squelettes, plugins, etc.).
