@@ -156,13 +156,40 @@
 					</select>
 				</li>
 				</ul>
+				<ul>
+		#SET{name,emoticon}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_emoticon:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect5(POUR){tableau #LISTE{non,oui}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect5>
+					</select>
+				</li>
+				</ul>
+				<ul>
+		#SET{name,historique}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_historique:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect6(POUR){tableau #LISTE{non,oui}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect6>
+					</select>
+				</li>
+				</ul>
 		</fieldset>	
 		[<p><:spipcatchat:catchat_label:> ver : (#PLUGIN{SPIPCATCHAT,version}) <:spipcatchat:copy:> #PLUGIN{SPIPCATCHAT,compatibilite}</p>]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'>&nbsp;</span>
 			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-	</div></form>
+	</div>
+</form>
 </div>
 </div>
 <script type="text/javascript">
