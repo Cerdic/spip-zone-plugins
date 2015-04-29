@@ -1,0 +1,22 @@
+<paquet
+	prefix="accesrestreintip"
+	categorie="auteur"
+	version="1.0.0"
+	schema="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="accesrestreintip.png"
+	documentation=""
+>
+	<nom>Accès restreint par IP</nom>
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GNU/GPL v3</licence>
+	
+	<pipeline nom="declarer_tables_objets_sql" inclure="accesrestreintip_pipelines.php" /> 
+	<pipeline nom="editer_contenu_objet" inclure="accesrestreintip_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="accesrestreintip_pipelines.php" />
+	<pipeline nom="accesrestreint_liste_zones_autorisees" inclure="accesrestreintip_pipelines.php" />
+	
+	<necessite nom="accesrestreint" compatibilite="[3.12.4;]" />
+</paquet>
