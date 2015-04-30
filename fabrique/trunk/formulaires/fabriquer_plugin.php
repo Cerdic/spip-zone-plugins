@@ -54,7 +54,7 @@ function formulaires_fabriquer_plugin_charger_dist() {
 		session_set(FABRIQUE_ID, $contexte);
 		$fabrique = array();
 	}
-	
+
 	// ça merge que la profondeur 1, c'est surtout la 2 qui interesse
 	#$contexte = array_merge($contexte, $fabrique);
 	foreach ($contexte as $c=>$v) {

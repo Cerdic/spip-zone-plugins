@@ -92,9 +92,14 @@ function fabrique_action_modification_formulaire($f_action, $data) {
 			$i = current(array_keys($valeur_action));
 			// on supprime l'element i de l'objet et des images.
 			$images = session_get(FABRIQUE_ID_IMAGES);
-			unset($data  ['objets'][$i]);
-			unset($images['objets'][$i]);
-			array_values($data  ['objets']);
+			unset($data['objets'][$i]);
+			// supprimer les images des objets devenus inexistants
+			foreach ($images['objets'] as $i => $im) {
+				if (!isset($data['objets'][$i])) {
+					unset($images['objets'][$i]);
+				}
+			}
+			array_values($data['objets']);
 			array_values($images['objets']);
 			session_set(FABRIQUE_ID, $data);
 			session_set(FABRIQUE_ID_IMAGES, $images);
