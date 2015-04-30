@@ -3,6 +3,15 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+2.0.16 le 30 04 2015
+--------------------
+
+* Correction du traitement des images des objets éditoriaux lors de la
+  suppression d'un objet éditorial dans la fabrique (et certainement
+  d'autres problèmes au passage lors de la suppession d'un objet).
+  Les logos ne devraient plus se mélanger les pinceaux lorsqu'on en ajoute
+  ou supprime.
+
 2.0.12 le 10 02 2015
 --------------------
 

@@ -93,14 +93,16 @@ function fabrique_action_modification_formulaire($f_action, $data) {
 			// on supprime l'element i de l'objet et des images.
 			$images = session_get(FABRIQUE_ID_IMAGES);
 			unset($data['objets'][$i]);
-			// supprimer les images des objets devenus inexistants
+			unset($images['objets'][$i]);
+			// + supprimer les images des objets devenus inexistants
+			//   si cela n'avait pas été fait (ancien bug).
 			foreach ($images['objets'] as $i => $im) {
 				if (!isset($data['objets'][$i])) {
 					unset($images['objets'][$i]);
 				}
 			}
-			array_values($data['objets']);
-			array_values($images['objets']);
+			$data['objets']   = array_values($data['objets']);
+			$images['objets'] = array_values($images['objets']);
 			session_set(FABRIQUE_ID, $data);
 			session_set(FABRIQUE_ID_IMAGES, $images);
 			// on supprime l'accordion ouvert (sinon il se reouvre sur l'onglet suppression).
@@ -137,7 +139,7 @@ function fabrique_action_modification_formulaire($f_action, $data) {
 				if (count($i) == 2) {
 					unset ($images[$type][ $i[0] ][ $i[1] ]); // paquet/logo/0
 				} elseif (count($i) == 3) {
-					unset ($images[$type][ $i[0] ][ $i[1] ][ $i[2] ]); // obje/x/logo/0
+					unset ($images[$type][ $i[0] ][ $i[1] ][ $i[2] ]); // objet/x/logo/0
 				}
 			}
 			session_set(FABRIQUE_ID_IMAGES, $images);
