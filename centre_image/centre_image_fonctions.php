@@ -12,14 +12,12 @@ function centre_image($fichier) {
 	if ($spip_centre_image["$fichier"]) return $spip_centre_image["$fichier"];
 
 	if (file_exists($fichier)) {
-
+			
+		$md5 = $fichier;
 		if (_DIR_RACINE == "../") {
-			$fichier = preg_replace(",^\.\.\/,", "", $fichier);
+			$md5 = preg_replace(",^\.\.\/,", "", $md5);
 		}
-
-
-
-		$md5 = md5($fichier);
+		$md5 = md5($md5);
 		$l1 = substr($md5, 0, 1 );
 		$l2 = substr($md5, 1, 1);
 
