@@ -81,11 +81,29 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			foreach($proportions as $prop) {
 				$i++;
 				$prop = trim ($prop);
-				if (preg_match(",^([0-9\.]+)(x([0-9\.]*))?(x([a-z]*))?(x([0-9\.]*))?$,", $prop, $regs)) {
+				$regs_l = false;
+				$regs_h = false;
+				if (preg_match(",^([0-9\.]+\%?)(x([0-9\.]+\%?))?(x([a-z]*))?(x([0-9\.]*))?$,", $prop, $regs)) {
+				
+					if ($regs[1] == "0") $regs[1] = $l;
+					if ($regs[3] == "0") $regs[3] = $h;
+				
 					$p[$i]["l"] = $regs[1];
 					$p[$i]["h"] = $regs[3];
 					$p[$i]["f"] = $regs[5];
 					$p[$i]["z"] = $regs[7];
+
+					// Gérer les dimensions en pourcentages
+					preg_match(",([0-9\.]+)\%$,", $regs[1],$regs_l);
+					preg_match(",([0-9\.]+)\%$,", $regs[3],$regs_h);
+					
+					if ($regs_l[1]>0 OR $regs_h[1]>0) {
+						if ($regs_l[1] > 0) $p[$i]["l"] = $l * $regs_l[1] / 100;
+						else $p[$i]["l"] = $l;
+						if ($regs_h[1] > 0) $p[$i]["h"] = $h * $regs_h[1] / 100;
+						else $p[$i]["h"] = $h;
+					}
+
 					
 					if (!$regs[5]) $p[$i]["f"] = "center";
 					if (!$regs[7]) $p[$i]["z"] = 1;
@@ -351,7 +369,6 @@ function background_responsive($src, $taille=120, $lazy=0) {
 
 function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom=1) {
 	$mode = $align;
-	
 	
 	if (!$img) return;
 	
