@@ -47,6 +47,7 @@ function tw_faq($t) {
 
 	// Initialisation des variables propres à l'ensemble des faqs du bloc
 	$faqs = array();
+    $types_info = array();
 	$index_faq = 0;
 	$index_qr = 0;
 	$index_ligne = 0;
