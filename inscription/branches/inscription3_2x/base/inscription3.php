@@ -67,7 +67,7 @@ function inscription3_declarer_champs_extras($champs = array()){
 							'label' => 'inscription3:label_'.$cle, // chaine de langue 'prefix:cle'
 							'saisie_externe' => true,
 							'type' => 'input', // type de saisie
-							'saisie_parametres' => (!test_espace_prive() && ($GLOBALS['visiteur_session']['statut'] != '0minirezo') && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'),
+							'saisie_parametres' => (!test_espace_prive() && (isset($GLOBALS['visiteur_session']['statut']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')) && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'),
 							'sql' => "text NOT NULL", // declaration sql
 							'obligatoire' => ($config[$cle.'_obligatoire'] == 'on') ? true : false
 						);
@@ -81,7 +81,7 @@ function inscription3_declarer_champs_extras($champs = array()){
 							'label' => 'inscription3:label_'.$cle, // chaine de langue 'prefix:cle'
 							'saisie_externe' => true,
 							'type' => 'input', // type de saisie
-							'saisie_parametres' => (!test_espace_prive() && ($GLOBALS['visiteur_session']['statut'] != '0minirezo') && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'),
+							'saisie_parametres' => (!test_espace_prive() && (isset($GLOBALS['visiteur_session']['statut']) && ($GLOBALS['visiteur_session']['statut'] != '0minirezo')) && ($config[$cle.'_fiche_mod'] != 'on')) ? array('readonly'=>'oui','size'=>'30') : array('size'=>'30'),
 							'sql' => "text NOT NULL", // declaration sql
 							'obligatoire' => ($config[$cle.'_obligatoire'] == 'on') ? true : false
 						));
