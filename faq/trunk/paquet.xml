@@ -1,11 +1,11 @@
 <paquet
 	prefix="faq"
 	categorie="edition"
-	version="3.0.3"
+	version="3.0.4"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="faq_logo-128.png"
-	documentation="http://contrib.spip.net/Definitions-et-FAQ"
+	documentation="http://contrib.spip.net/Definitions-et-FAQ-version-3"
 >
 
 	<nom>D&#233;finitions et FAQ</nom>
