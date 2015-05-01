@@ -33,9 +33,13 @@ $(document).keypress
 			<!-- Bouton Submit Cancel-->
 			<div id="submit" class="spipcatchatcancel" onclick="session();return false; "  title="<:spipcatchat:title_fin_session:>"></div>
 			<!-- Label Copy -->
+			[(#CONFIG{spipcatchat/spicatchat_label}|=={non}|oui)
 			<img src="[(#CHEMIN{images/catchat.png})]" class="logochat" title="<:spipcatchat:title_copy:>"/><:spipcatchat:catchat_label:>
+			]
 </fieldset>
 </form>
+[(#CONFIG{spipcatchat/spicatchat_label}|=={non}|oui)
 <div style="float:right;"><:spipcatchat:copy:></div>
+]
 </div> <!-- fin container -->
 </div>
