@@ -48,8 +48,9 @@ select: function(event, ui){$('#selectUser').val(ui.item.id); },
 			</div>
 			<div id="proposition"></div>
 			<!-- Label Copy -->
-			<img src="[(#CHEMIN{images/catchat.png})]" class="logochat" title="<:spipcatchat:title_copy:>"/>
-			<:spipcatchat:catchat_label:>
+			[(#CONFIG{spipcatchat/spicatchat_label}|=={non}|oui)
+			<img src="[(#CHEMIN{images/catchat.png})]" class="logochat" title="<:spipcatchat:title_copy:>"/><:spipcatchat:catchat_label:>
+			]
 </fieldset>
 </div> <!-- fin container -->
 </div>
