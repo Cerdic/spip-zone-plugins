@@ -1,3 +1,8 @@
+function spipcatchatemoticonpublic(emoticon)
+{
+	$('#message').val($('#message').val()+''+emoticon);	
+}
+
 function session() {
     $(location).attr('href', 'spip.php')
 }
