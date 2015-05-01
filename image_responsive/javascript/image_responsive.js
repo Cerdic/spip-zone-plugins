@@ -12,6 +12,9 @@ function charger_url_image_responsive(this_img) {
 			var dim= parseInt(this_img.width());
 		}
 		
+		var forcer_zoom = this_img.parents("[data-zoom-responsive]").attr("data-zoom-responsive");
+		if (forcer_zoom) dim = dim * forcer_zoom;
+		
 		var tailles = this_img.attr("data-tailles");
 					
 		
