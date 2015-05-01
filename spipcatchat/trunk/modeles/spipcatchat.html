@@ -47,7 +47,7 @@
 		<div id="spipcatchatmembreajout" class="spipcatchat_alert"><:spipcatchat:formulaire_error_users:> <!-- Message ajout utilisateur champ vide -->
 		</div>
 		<div id="spipcatchatsalonprive" align="center"> <!-- Message salon privé -->
-		<p><img src="[(#CHEMIN{images/catchat.png})]" width="160px" title="<:spipcatchat:title_copy:>"/></p>
+		<p>[(#CONFIG{spipcatchat/spicatchat_label}|=={non}|oui)<img src="[(#CHEMIN{images/catchat.png})]" width="160px" title="<:spipcatchat:title_copy:>"/>]</p>
 		<div class="spipcatchat_alert"><:spipcatchat:no_welcom:>
 		<div  class="SpipCatChatTux-loading-indicator" alt="patientez..."></div><:spipcatchat:chargement:>...</div>
 		</div> <!-- fin message salon privé -->
