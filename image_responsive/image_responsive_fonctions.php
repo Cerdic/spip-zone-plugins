@@ -227,6 +227,9 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		
 
 		if ($pad_bot_styles) {
+			
+			ksort($pad_bot_styles);
+			
 			foreach($pad_bot_styles as $m=>$pad) {
 				$style = "##classe##{".$pad."}";
 				if ($m) $style = "\n@media $m {".$style."}";
