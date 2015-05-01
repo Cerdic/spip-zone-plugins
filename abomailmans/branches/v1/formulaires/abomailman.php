@@ -13,8 +13,8 @@ function formulaires_abomailman_charger_dist($id_abomailman = ""){
 	$valeurs = array();
 
 	// Si le visiteur est logue au site on utilise ses informations de connexion par défaut
-	$valeurs['email'] = _request('email') ? _request('email') : $visiteur_session['email'];
-	$valeurs['nom'] = _request('nom') ? _request('nom') : $visiteur_session['nom'];
+	$valeurs['email'] = _request('email') ? _request('email') : (isset($visiteur_session['email']) ? $visiteur_session['email'] : '');
+	$valeurs['nom'] = _request('nom') ? _request('nom') : (isset($visiteur_session['nom']) ? $visiteur_session['nom'] : '');
 
 	//si id_abomailman est renseigne, on envoie qu'une liste
 	if(intval($id_abomailman)){
