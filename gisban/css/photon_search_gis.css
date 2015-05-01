@@ -1,0 +1,44 @@
+/* Style input */
+.carte_gis input[type="text"], .carte_gis input[type="search"], .carte_gis textarea {
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+    color: rgba(0, 0, 0, 0.75);
+    display: block;
+    font-family: inherit;
+    padding: 7px;
+    border-radius:4px;
+}
+.carte-gis input, .carte-gis textarea {
+    color: rgba(0, 0, 0, 0.75);
+}
+
+/* Set parameters on controls (geocoder and reverse)*/
+.carte-gis .ol-photon-geocoder {
+    left: calc(50% - 200px);
+    top: 0.5em;
+}
+.carte-gis .ol-photon-reverse-geocoder {
+    background: none repeat scroll 0 0 white;
+    bottom: 0.5em;
+    left: calc(50% - 200px);
+    padding: 10px;
+    text-align: center;
+    width: 400px;
+    }
+
+.photon-autocomplete li {
+    text-align: left;
+}
+
+.photon-autocomplete li.on {
+    background-color: #2980B9;
+    cursor: pointer;
+}
+
+.photon-autocomplete li .type {
+    font-weight: 400;
+    float: right;
+    font-size: 0.8em;
+}

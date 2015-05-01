@@ -1,0 +1,13 @@
+syntax: glob
+*.orig
+*.bak
+*.BAK
+*.tmp
+*.TMP
+*.swp
+*.old
+*.pyc
+*.DS_Store
+
+syntax: regexp
+.*~$

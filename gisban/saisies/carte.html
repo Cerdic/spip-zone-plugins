@@ -1,0 +1,247 @@
+[(#REM)
+
+    Saisie carte
+
+    Parametres optionnels:
+
+    - lat = 48.3                    latitude du centre de la carte
+    - lon = -4.7                    longitude du centre de la carte
+    - zoom = 5                      zoom de la carte
+    - sw_lat = lat - 10°            latitude du sud-ouest de la bounding box
+    - sw_lon = lon - 10°            longitude du sud-ouest de la bounding box
+    - ne_lat = lat + 10°            latitude du nord-est de la bounding box
+    - ne_lon = lon + 10°            longitude du nord-est de la bounding box
+    - largeur = 100%
+    - hauteur = 350px
+
+]
+
+[(#SET{init_lat,#ENV{lat,#CONFIG{gis/lat,0}}})]
+[(#SET{init_lon,#ENV{lon,#CONFIG{gis/lon,0}}})]
+[(#SET{init_zoom,#ENV{zoom,#CONFIG{gis/zoom,0}}})]
+[(#REM) On utilise la bounding box seulement si le centre n'a pas été donné et si les quatre valeurs de la bounding box sont renseignées
+        Les valeurs par defaut sont "centre +/- 10°", ce qui est naze, mais c'est un cas normalement impossible
+]
+[(#ENV{lat}|ou{#ENV{lon}}|non|et{#ENV{sw_lat}}|et{#ENV{sw_lon}}|et{#ENV{ne_lat}}|et{#ENV{ne_lon}})
+    #SET{utiliser_bb, oui}
+    #SET{init_sw_lat,#ENV{sw_lat,#GET{lat}|moins{10}}}
+    #SET{init_sw_lon,#ENV{sw_lon,#GET{lon}|moins{10}}}
+    #SET{init_ne_lat,#ENV{ne_lat,#GET{lat}|plus{10}}}
+    #SET{init_ne_lon,#ENV{ne_lon,#GET{lon}|plus{10}}}
+]
+
+<li class="pleine_largeur editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]"[ data-id="(#ENV{id_saisie})"]>
+#ENV*{inserer_debut}
+<div id="map_[(#ENV{nom})]" name="formMap" class="formMap" style="width: #ENV{largeur,100%}; height: #ENV{hauteur,350px}"></div>
+<script type="text/javascript">
+/*<![CDATA[*/
+var form_map,
+    annuler_geocoder = 0;
+[(#ENV{recherche}|!={non}|oui|et{#CONFIG{gis/geocoder}|oui})
+[(#SET{geocoder,oui})]
+var geocoder;]
+
+(function($){
+    var marker;
+
+    var maj_inputs = function(map,data,action) {
+        [(#GET{geocoder}|oui)
+        if (action != 'geocoding') {
+            var f = geocoder.geocode(data);
+        }]
+        var zoom = map.getZoom();
+        if(data.lng <= -180) data.lng = data.lng+360
+        else if(data.lng > 180) data.lng = data.lng-360;
+        $('#champ_#ENV{champ_zoom,zoom}').val(zoom);
+        if(action == 'click'){
+            $('#champ_#ENV{champ_lat,lat}').val(data.lat);
+            $('#champ_#ENV{champ_lon,lon}').val(data.lng);
+            annuler_geocoder = 1;
+            form_map.panTo(data);
+            marker.setLatLng(data);
+        }
+        else if(annuler_geocoder != 1){
+            if(data.point == 'undefined'){
+                $('#champ_#ENV{champ_lat,lat}').val(data.lat);
+                $('#champ_#ENV{champ_lon,lon}').val(data.lng);
+                form_map.panTo(data);
+                marker.setLatLng(data);
+            }else{
+                $('#champ_#ENV{champ_lat,lat}').val(data.point.lat);
+                $('#champ_#ENV{champ_lon,lon}').val(data.point.lng);
+                form_map.panTo(data.point);
+                marker.setLatLng(data.point);
+            }
+        }
+        if (!marker._map)
+            form_map.addLayer(marker);
+    }
+
+    [(#GET{geocoder}|oui)
+    function geocode(query) {
+        if(! query.error){
+            $('#champ_#ENV{champ_adresse,adresse}').val(query.street);
+            $('#champ_#ENV{champ_code_postal,code_postal}').val(query.postcode);
+            $('#champ_#ENV{champ_ville,ville}').val(query.locality);
+            $('#champ_#ENV{champ_departement,departement}').val(query.departement);
+            $('#champ_#ENV{champ_region,region}').val(query.region);
+            $('#champ_#ENV{champ_pays,pays}').val(query.country);
+            $('#champ_#ENV{champ_code_pays,code_pays}').val(query.country_code);
+            maj_inputs(form_map,query,'geocoding');
+        }else{
+            alert('<:gis:erreur_geocoder:> '+query.search);
+        }
+    }]
+
+    var init_map = function(callback) {
+        // creer la carte
+        var map_container = 'map_[(#ENV{nom})]';
+        form_map = new L.Map(map_container);
+
+        // affecter sur l'objet du DOM
+        jQuery("#"+map_container).get(0).map=form_map;
+
+        // appeler l'éventuelle fonction de callback
+        if (callback && typeof(callback) === "function") {
+            form_map.on('load',function(e){
+                callback(e.target);
+            });
+        }
+
+        form_map.attributionControl.setPrefix('');
+
+        marker = new L.Marker(new L.LatLng(#ENV{lat,0}, #ENV{lon,0}), {draggable: true});
+
+        //default layer
+        #SET{layer_defaut,#REM|gis_layer_defaut} #SET{layers,#EVAL{$GLOBALS['gis_layers']}}
+        var [(#GET{layer_defaut})] = [new (#GET{layers}|table_valeur{#GET{layer_defaut}/layer})];
+        form_map.addLayer([(#GET{layer_defaut})]);
+
+        <B_layers>
+        var layers_control = new L.Control.Layers();
+        layers_control.addBaseLayer([(#GET{layer_defaut})],["(#GET{layers}|table_valeur{#GET{layer_defaut}/nom})"]);
+        <BOUCLE_layers(DATA){source table, #GET{layers}}{si #ENV{control_type,#ENV{controle_type}}|!={non}|et{#ENV{no_control,#ENV{aucun_controle}}|!={oui}}|et{#CONFIG{gis/layers,#ARRAY}|count|>{1}|oui}|oui}>[
+        (#CLE|!={#GET{layer_defaut}}|oui|et{#CLE|in_array{#CONFIG{gis/layers,#ARRAY}}|oui}|oui)
+        layers_control.addBaseLayer([new (#VALEUR|table_valeur{layer})],"[(#VALEUR|table_valeur{nom})]");]
+        </BOUCLE_layers>
+        form_map.addControl(layers_control);
+        // ajouter l'objet du controle de layers à la carte pour permettre d'y accéder depuis le callback
+        form_map.layersControl = layers_control;
+        // classe noajax sur le layer_control pour éviter l'ajout de hidden par SPIP
+        $(layers_control._form).addClass('noajax');
+        </B_layers>
+
+        [(#GET{utiliser_bb}|non)
+        form_map.setView(new L.LatLng([(#GET{init_lat})], [(#GET{init_lon})]), [(#GET{init_zoom})]);
+        ]
+        [(#GET{utiliser_bb}|oui)
+        form_map.fitBounds(
+            new L.LatLngBounds(
+                new L.LatLng([(#GET{init_sw_lat})], [(#GET{init_sw_lon})]),
+                new L.LatLng([(#GET{init_ne_lat})], [(#GET{init_ne_lon})])
+            )
+        );
+        // mettre à jour les champs de latitude et longitude quand la carte est chargée
+        // a voir si on le fait dans tous les cas, pas seulement pour la boundingbox, comme pour le zoom
+        form_map.on('load', function(e) {
+            $('#champ_#ENV{champ_lat,lat}').val(e.latlng.lat);
+            $('#champ_#ENV{champ_lon,lon}').val(e.latlng.lon);
+        });
+        ]
+
+        [(#GET{geocoder}|oui)
+        geocoder = new L.Geocoder(geocode,{acceptLanguage:'#ENV{lang}'});]
+
+        [(#REM) Ici on utilise #ENV{lat} et #ENV{lon}, et pas les valeurs
+                d'initialisation #GET{init_lat} et #GET{init_lon} qui sont toujours remplies]
+        [(#ENV{lat}|et{#ENV{lon}}|oui)
+        var data = {
+            "type": "FeatureCollection",
+            "features": \[
+                {"type": "Feature",
+                    "geometry": {"type": "Point", "coordinates": \[#ENV{lon}, #ENV{lat}\]},
+                    "id":"#ENV{id_gis,oui}",
+                    "properties": {
+                        "title":[(#ENV{titre,''}|supprimer_numero|json_encode)],
+                        "description":[(#ENV{descriptif,''}|json_encode)][
+                        (#LOGO_GIS|gis_icon_properties)]
+                    }
+                }\]
+        }
+
+        var geojson = new L.geoJson('', {
+            onEachFeature: function (feature, layer) {
+                marker = layer;
+                layer.options.draggable = true;
+                if (feature.properties && feature.properties.icon){
+                    layer.setIcon(new L.Icon({
+                        iconUrl: feature.properties.icon,
+                        iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+                        iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
+                        popupAnchor: new L.Point( feature.properties.popup_anchor\[0\], feature.properties.popup_anchor\[1\] )
+                    }));
+                }
+                if (feature.properties && feature.properties.title){
+                    layer.bindPopup(feature.properties.title);
+                }
+            }
+        }).addTo(form_map);
+        geojson.addData(data);]
+
+        // mettre a jour les coordonnees quand on clique la carte
+        form_map.on('click', function(e) {
+            annuler_geocoder = 0;
+            maj_inputs(form_map,e.latlng,'click');
+        });
+
+        marker.on("dragend", function(e){
+            maj_inputs(form_map,e.target._latlng,'click');
+        });
+
+        // mettre à jour le zoom quand on le modifie
+        form_map.on('zoomend', function(e) {
+            $('#champ_#ENV{champ_zoom,zoom}').val(e.target._zoom);
+        });
+
+        [(#GET{geocoder}|oui)
+        // geocoder si clic...
+        $('a##ENV{nom}_rechercher_geocodage').css("cursor","pointer").click(function(){
+            var address = $("#champ_#ENV{nom}_geocoder").val();
+            annuler_geocoder = 0;
+            geocoder.geocode(address);
+        });
+
+        // ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
+        $('#champ_#ENV{nom}_geocoder').keypress(function(e){
+            if (e.which == 13) {
+                $('a##ENV{nom}_rechercher_geocodage').trigger("click");
+                return false;
+            }
+        });]
+
+        [(#ENV{id_gis}|non|ou{#ENV{id_gis}|=={oui}}|et{#CONFIG{gis/geolocaliser_user_html5}|=={on}}|oui)
+        form_map.locate({setView: true, maxZoom: [(#GET{init_zoom})]});]
+
+    };
+
+    $(function(){
+        jQuery.getScript('[(#PRODUIRE{fond=javascript/gis.js}|compacte)]',function(){
+            if (typeof(callback_form_map) === "function") {
+                init_map(callback_form_map);
+            } else {
+                init_map();
+            }
+        });
+    });
+
+})(jQuery);
+/*]]>*/
+</script>
+#ENV*{inserer_fin}
+</li>
+[(#GET{geocoder}|oui)
+<li class="rechercher_adresse editer_[(#ENV{nom})]">
+    <label for="champ_#ENV{nom}_geocoder"><:gis:label_rechercher_address:></label>
+    <input type="text" class="text" name="champ_#ENV{nom}_geocoder" id="champ_#ENV{nom}_geocoder" value="" />
+    <a id="#ENV{nom}_rechercher_geocodage"><:info_rechercher:></a>
+</li>]

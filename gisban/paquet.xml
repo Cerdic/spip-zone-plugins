@@ -1,0 +1,27 @@
+<paquet
+    prefix="gisban"
+    categorie="divers"
+    version="0.0.1"
+    etat="test"
+    compatibilite="[3.0.0;3.1.*]"
+    logo="images/gis.png"
+>
+
+    <nom>GIS BAN</nom>
+
+    <auteur>Laurent Vergerolle</auteur>
+    <auteur>IPEOS I-Solutions</auteur>
+    <credit lien="http://www.ipeos.com/">IPEOS I-Solutions</credit>
+    <credit lien="http://leafletjs.com/">Leaflet</credit>
+    <credit lien="https://github.com/komoot/leaflet.photon">leaflet.photon</credit>
+    <copyright>2015</copyright>
+    <licence>GPL v3</licence>
+    <credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
+
+    <necessite nom="gis" compatibilite="[4.26.10;]" />
+    <necessite nom="saisies" compatibilite="[2.0.3;]" />
+
+    <pipeline nom="header_prive" inclure="gisban_pipelines.php" />
+    <pipeline nom="insert_head_css" inclure="gisban_pipelines.php" />
+
+</paquet>
