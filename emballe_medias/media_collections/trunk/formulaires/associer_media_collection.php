@@ -32,7 +32,7 @@ function formulaires_associer_media_collection_charger_dist($id_objet){
 	/**
 	 * As t on au moins une collection à laquelle on peut ajouter ce medias
 	 */
-	if(isset($GLOBALS['visiteur_session']))
+	if(isset($GLOBALS['visiteur_session']) && isset($GLOBALS['visiteur_session']['id_auteur']))
 		$id_collection = sql_getfetsel('id_collection','spip_collections as collection LEFT JOIN spip_auteurs_liens as lien ON collection.id_collection = lien.id_objet AND lien.objet="collection"','collection.statut = "publie" AND lien.id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 	if(!$id_collection){
 		$valeurs['editable'] = false;
