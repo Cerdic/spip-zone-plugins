@@ -35,7 +35,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'explication_smoke' => 'Voulez-vous activer l\'option de "ombre portée" du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
 'explication_corner' => 'Voulez-vous activer les coins arrondis du salon ?<br/><font color="red">Attention incompatible avec les anciens navigateurs !</font>',
 'explication_emoticon' => 'Voulez-vous activer la barre d\'insertion des émoticons dans le salon de l\'espace privé ?',
+'explication_emoticon_public' => 'Voulez-vous activer la barre d\'insertion des émoticons dans le salon de l\'espace public ?',
 'explication_historique' => 'Voulez-vous activer l\'option de récupération de l\'historique des discussions du menu des utilisateurs du salon privé ?',
+'explication_label' => 'ne pas faire référence à Spip et SpipCatchat dans l\'espace public du site',
 /*--I--*/
 'info_en_ligne' => 'En ligne :',
 'info_statut' => 'Changer de statut : ',
@@ -63,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_corner' => 'Activer les coins arrondis (border-radius CSS3)',
 'label_fond_color' => 'Couleur de fond de cadre des messages',
 'label_emoticon' => 'Afficher la barre des émoticons',
+'label_emoticon_public' => 'Afficher la barre des émoticons',
 'label_historique' => 'Activer la récupération de l\'historique',
 'label_non' => 'Non',
 'label_oui' => 'Oui',
@@ -72,6 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_false' => 'Automatique et préétabli',
 'label_secondaire' => 'La couleur secondaire du salon',
 'label_smoke' => 'L\'ombrage des bordures du cadre du salon (box-shadow CSS3)',
+'label_spicatchat_label' => 'Cacher les labels',
 'label_true' => 'Manuel et personnalisé',
 'label_width' => 'La largeur du salon public',
 
