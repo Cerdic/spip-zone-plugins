@@ -127,6 +127,32 @@
 					</select>
 				</li>
 			</ul>
+			<ul>
+		#SET{name,emoticon_public}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_emoticon_public:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect7(POUR){tableau #LISTE{non,oui}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect7>
+					</select>
+				</li>
+				</ul>
+		<ul>
+		#SET{name,spicatchat_label}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]<p class="explication"><:spipcatchat:explication_label:></p>
+					<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect8(POUR){tableau #LISTE{non,oui}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect8>
+					</select>
+				</li>
+				</ul>
 		</fieldset>
 		<fieldset>
 		<legend><:spipcatchat:prive:></legend>
