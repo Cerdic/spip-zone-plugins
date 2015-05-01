@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'outil_inserer_titre' => 'Insérer un titre pour la FAQ',
 
 	// T
-	'titre_page_configurer' => 'Configurer le plugin Questions-Réponses',
+	'titre_page_configurer' => 'Configurer le plugin FAQ',
 	'titre_form_configurer' => 'Affichages des FAQ',
 );
 
