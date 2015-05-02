@@ -8,14 +8,9 @@
 	documentation=""
 	schema="1.0.0"
 >
-	<!--
-		Paquet généré le 2014-12-30 12:08:16
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
 
 	<nom>Formulaire upload html5</nom>
 
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='http://p.henix.be'>Phenix</auteur>
 
 	<licence>GNU/GPL</licence>
