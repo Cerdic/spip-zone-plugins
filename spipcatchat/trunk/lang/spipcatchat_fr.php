@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'catchat_chargement' => 'Chargement...',
 'copy' => 'Développé pour Spip',
-'commun' => 'Paramètre en commun',
+'commun' => 'Paramètres en commun',
 'config_catchat' => 'Configuration de SpipCatChat',
 /*--E--*/
 'error_ajout_salon' => 'désolé, mais le nom du salon existe déjà',

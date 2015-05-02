@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'catchat_chargement' => 'Loading...',
 'copy' => 'Developed for Spip',
-'commun' => 'Paramètre en commun',
+'commun' => 'Paramètres en commun',
 'config_catchat' => 'Configuration de SpipCatChat',
 
 /*--E--*/
