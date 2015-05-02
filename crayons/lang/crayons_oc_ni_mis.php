@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'absence_cle_primaire' => 'Mìnga de clau primari !',
 	'annuler' => 'Anulà',
 
 	// B
@@ -15,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deja_modifie' => 'Jà moudificat',
+	'donnees_mal_formatees' => 'Dounada mau fourmatadi',
 
 	// E
 	'editer' => 'Edità',
@@ -26,7 +28,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_experimental' => 'Esperimental',
 
 	// L
+	'label_activer_barre_typo' => 'Ativà la barra tipougràfica en lu creioun ?',
+	'label_activer_crayons_prive' => 'Ativà creioun per la partida privada.',
+	'label_barre_typo' => 'Barra tipougràfica',
 	'label_effets' => 'Chausida dei efet',
+	'label_espaceprive' => 'Creioun en lou privat ?',
 	'label_exec_autorise' => 'Pàgina autourisadi',
 	'label_filet' => 'Ret',
 	'label_message' => 'Outenì un message',
