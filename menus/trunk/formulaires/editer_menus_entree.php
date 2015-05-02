@@ -141,7 +141,6 @@ function formulaires_editer_menus_entree_traiter($id_menu,$id_menus_entree='new'
 	// Si on demande à déplacer une entrée -------------------------------------
 
 	if ($params = _request('deplacer_entree')){
-		//debug($params);
 		preg_match('/^([\d]+)-(bas|haut)$/', $params, $params);
 		array_shift($params);
 		list($id_menus_entree, $sens) = $params;
