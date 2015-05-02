@@ -1,7 +1,7 @@
 <paquet
 	prefix="SpipCatChat"
 	categorie="communication"
-	version="1.3.2"
+	version="1.3.3"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/spipcatchat-64.png"
@@ -14,6 +14,7 @@
 	<auteur lien="http://www.nic-nac.org">Claude Codden</auteur>
 	<credit lien="http://www.blane-est.net/ehma/">Traduction anglaise : Ehma</credit>
 	<credit lien="http://www.nic-nac.org">Theme : Codden.C sous licence CC BY-NC-SA-4.0</credit>
+	<credit >Emoticons: The Full Monty Copyright (C) 2001-Infinity, Oscar Gruno et Andy Fedosjeenko</credit>
 	<copyright>2014-2015</copyright>
 	<licence>GNU/GPL</licence>
 	<traduire module="spipcatchat" reference="fr" gestionnaire="salvatore" />
