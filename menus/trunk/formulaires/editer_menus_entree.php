@@ -33,6 +33,16 @@ function formulaires_editer_menus_entree_charger($id_menu,$id_menus_entree='new'
 	// On sait toujours si on est sur un menu déjà créé ou pas
 	$valeurs['_hidden'] .= '<input type="hidden" name="id_menu" value="'.$id_menu.'" />';
 
+	// les valeurs retournées par _verifier
+	$valeurs['entrees'] = '';
+	$valeurs['id_menus_entree'] = '';
+	$valeurs['type'] = '';
+	$valeurs['type_entree'] = '';
+	if( $type_entree = _request('type_entree') ) {
+		$valeurs['infos_' . $type_entree] = '';
+	}
+
+
 	return $valeurs;
 }
 
@@ -45,20 +55,20 @@ function formulaires_editer_menus_entree_verifier($id_menu,$id_menus_entree='new
 		// S'il n'y a pas encore de type d'entree de choisi
 		if (!($type_entree = _request('type_entree'))){
 			include_spip('inc/config');
-			$erreurs['id_menu_nouvelle_entree'] = $id_menu;
+			set_request('id_menu_nouvelle_entree', $id_menu);
 			// On charge les différents types d'entrées disponibles
 			$masque = array_flip(lire_config('menus/entrees_masquees', array()));
-			$erreurs['entrees'] = array_diff_key(menus_lister_disponibles(), $masque);
+			set_request('entrees', array_diff_key(menus_lister_disponibles(), $masque));
 			if (_request('suivant'))
-				$erreurs['type'] = _T('menus:erreur_type_menu');
+				$erreur['type'] = _T('menus:erreur_type_menu');
 		}
 		// Si on a choisi un type d'entree
 		else{
-			$erreurs['id_menu_nouvelle_entree'] = $id_menu;
-			$erreurs['type_entree'] = $type_entree;
+			set_request('id_menu_nouvelle_entree', $id_menu);
+			set_request('type_entree', $type_entree);
 			// On charge les infos du type choisi
 			$entrees = menus_lister_disponibles();
-			$erreurs['infos_'.$type_entree] = $entrees[$type_entree];
+			set_request('infos_'.$type_entree, $entrees[$type_entree]);
 		}
 	}
 
@@ -75,11 +85,11 @@ function formulaires_editer_menus_entree_verifier($id_menu,$id_menus_entree='new
 		$parametres = unserialize($entree['parametres']);
 
 		$erreurs = array_merge($erreurs, $parametres);
-		$erreurs['id_menus_entree'] = $id_menus_entree;
-		$erreurs['type_entree'] = $type_entree;
+		set_request('id_menus_entree', $id_menus_entree);
+		set_request('type_entree', $type_entree);
 		// On charge les infos du type choisi
 		$entrees = menus_lister_disponibles();
-		$erreurs['infos_'.$type_entree] = $entrees[$type_entree];
+		set_request('infos_'.$type_entree, $entrees[$type_entree]);
 	}
 
 	// Si on valide une entree pour un menu ------------------------------------
@@ -94,11 +104,11 @@ function formulaires_editer_menus_entree_verifier($id_menu,$id_menus_entree='new
 			if ($parametre['obligatoire']){
 				if (!$parametres_envoyes[$nom]){
 					if ($id_menu)
-						$erreurs['id_menu_nouvelle_entree'] = $id_menu;
+						set_request('id_menu_nouvelle_entree', $id_menu);
 					if ($id_menus_entree)
-						$erreurs['id_menus_entree'] = $id_menus_entree;
-					$erreurs['type_entree'] = $type_entree;
-					$erreurs['infos_'.$type_entree] = $infos;
+						set_request('id_menus_entree', $id_menus_entree);
+					set_request('type_entree', $type_entree);
+					set_request('infos_'.$type_entree, $infos);
 					$erreurs['parametres'][$nom] = _T('info_obligatoire');
 				}
 			}
@@ -115,6 +125,7 @@ function formulaires_editer_menus_entree_traiter($id_menu,$id_menus_entree='new'
 
 	if (($id_menu = intval(_request('id_menu_nouvelle_entree')) or $id_menus_entree = intval(_request('id_menus_entree'))) and _request('enregistrer')){
 		$res = formulaires_editer_objet_traiter('menus_entree', $id_menus_entree, 0, 0, '', '', '', '');
+		set_request('id_menu_nouvelle_entree', '');
 		if (!$res['id_menus_entree'])
 			$retours['message_erreur'] = _T('menus:erreur_mise_a_jour');
 	}
@@ -130,6 +141,7 @@ function formulaires_editer_menus_entree_traiter($id_menu,$id_menus_entree='new'
 	// Si on demande à déplacer une entrée -------------------------------------
 
 	if ($params = _request('deplacer_entree')){
+		//debug($params);
 		preg_match('/^([\d]+)-(bas|haut)$/', $params, $params);
 		array_shift($params);
 		list($id_menus_entree, $sens) = $params;

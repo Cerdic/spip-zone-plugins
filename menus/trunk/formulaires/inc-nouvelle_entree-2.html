@@ -1,6 +1,6 @@
 
-#SET{type_entree, (#ENV{erreurs}|table_valeur{type_entree})}
-#SET{infos, (#ENV{erreurs}|table_valeur{infos_#GET{type_entree}})}
+#SET{type_entree, (#ENV{type_entree})}
+#SET{infos, (#ENV{infos_#GET{type_entree}})}
 <fieldset>
 <legend class="legend">
 	[(#ENV{id_menus_entree}|non)

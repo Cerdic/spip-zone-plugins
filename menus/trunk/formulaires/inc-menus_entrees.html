@@ -2,7 +2,7 @@
 <ul id="menu-#ENV{id_menu}" class="menus_entrees">
 	<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
 	<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}))"]>
-		<BOUCLE_test_modifier(CONDITION){si #ENV{erreurs}|table_valeur{id_menus_entree}|=={#ID_MENUS_ENTREE}|non}>
+		<BOUCLE_test_modifier(CONDITION){si #ENV{id_menus_entree}|=={#ID_MENUS_ENTREE}|non}>
 		<div class="ligne">
 			<div class="description arial2">
 				#SET{supprimer_seulement,non}
@@ -20,25 +20,25 @@
 				</BOUCLE_sous_menu_test>
 				[(#GET{supprimer_seulement}|=={non}|oui)
 				[(#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{refuser_sous_menu}|non)
-				<button name="demander_sous_menu" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_ajouter_sous_menu:>">
+				<button type="submit" name="demander_sous_menu" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_ajouter_sous_menu:>">
 					[<img height="24" width="24" src="(#CHEMIN{images/menus-24.png})" alt="" />]
 				</button>
 				]]
 				<//B_sous_menu_test>
 				[(#GET{supprimer_seulement}|=={non}|oui)
-				<button name="modifier_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_modifier_entree:>">
+				<button type="submit" name="modifier_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_modifier_entree:>">
 					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_modifier.png})" alt="" />]
 				</button>]
-				<button name="supprimer_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_supprimer_entree:>"
+				<button type="submit" name="supprimer_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_supprimer_entree:>"
                 		onclick="return confirm('<:menus:confirmer_supprimer_entree:>')">
 					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_supprimer.png})" alt="" />]
 				</button>
 				[(#GET{supprimer_seulement}|=={non}|oui)
-				<button name="deplacer_entree" value="#ID_MENUS_ENTREE-bas" title="<:menus:formulaire_deplacer_bas:>">
+				<button type="submit" name="deplacer_entree" value="#ID_MENUS_ENTREE-bas" title="<:menus:formulaire_deplacer_bas:>">
 					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_bas.png})" alt="" />]
 				</button>]
 				[(#GET{supprimer_seulement}|=={non}|oui)
-				<button name="deplacer_entree" value="#ID_MENUS_ENTREE-haut" title="<:menus:formulaire_deplacer_haut:>">
+				<button type="submit" name="deplacer_entree" value="#ID_MENUS_ENTREE-haut" title="<:menus:formulaire_deplacer_haut:>">
 					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_haut.png})" alt="" />]
 				</button>]
 			</div>
@@ -56,9 +56,9 @@
 	#SET{rang_suivant,(#RANG|plus{1})}
 	</BOUCLE_entrees>
 	<li class="editer_entree fieldset">
-		#SET{id_menu_nouvelle_entree, (#ENV{erreurs}|table_valeur{id_menu_nouvelle_entree})}
-		#SET{type_entree, (#ENV{erreurs}|table_valeur{type_entree})}
-
+		#SET{id_menu_nouvelle_entree, (#ENV{id_menu_nouvelle_entree})}
+		#SET{type_entree, (#ENV{type_entree})}
+		
 		<BOUCLE_pas_demande_entree(CONDITION){si #GET{id_menu_nouvelle_entree}|=={#ENV{id_menu}}|non}>
 			<div class="boutons">
 			[(#ENV{sous_menu}|non)<span class="image_loading"></span>]

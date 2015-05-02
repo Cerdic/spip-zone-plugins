@@ -1,9 +1,9 @@
 
 <ul>
-	<li class="editer pleine_largeur editer_type[(#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
+	<li class="editer pleine_largeur editer_type[(#ENV{type}|oui)erreur]">
 		<label><:menus:entree_choisir:></label>
-		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{type})</span>]
-		<BOUCLE_types_entrees(POUR){tableau #ENV{erreurs}|table_valeur{entrees}}{par rang}>
+		[<span class='erreur_message'>(#ENV{type})</span>]
+		<BOUCLE_types_entrees(POUR){tableau #ENV{entrees}}{par rang}>
 		<div class="choix menu_#CLE" id="choix_menu_#CLE" style="padding:3px;border-bottom:1px solid #eee;">
 			[(#VALEUR|table_valeur{icone}|image_reduire{24})]
 			<input type="radio" class="radio" name="type_entree" id="#CLE" value="#CLE" style="vertical-align:top;" />
