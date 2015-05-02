@@ -209,6 +209,30 @@
 				</li>
 				</ul>
 		</fieldset>	
+		<fieldset>
+		<legend><:spipcatchat:commun:></legend>
+		<ul>
+		#SET{name,theme_emoticons}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<select name="#GET{name}" class="select" id="#GET{name}">
+						<BOUCLE_options_effect9(POUR){tableau #LISTE{classic,full-monty,basic,moderne}}>
+							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
+						</BOUCLE_options_effect9>
+					</select>
+					<center>
+					[(#CONFIG{spipcatchat/theme_emoticons}||oui)#SET{pack_emoticons,#ENV{#GET{name}}}]
+					[(#CONFIG{spipcatchat/theme_emoticons}||non)#SET{pack_emoticons,classic}]
+					[(#CHEMIN{images/emoticons/#GET{pack_emoticons}/etiquette.png}||oui)
+					<img src="#CHEMIN{images/emoticons/#GET{pack_emoticons}/etiquette.png}" style="width:380px;"/>
+					]
+					</center>
+				</li>
+				</ul>
+		<ul>
+		</fieldset>
 		[<p><:spipcatchat:catchat_label:> ver : (#PLUGIN{SPIPCATCHAT,version}) <:spipcatchat:copy:> #PLUGIN{SPIPCATCHAT,compatibilite}</p>]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
