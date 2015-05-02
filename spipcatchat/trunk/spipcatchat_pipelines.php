@@ -10,8 +10,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
  
 // Insertion du jQuery pour l'autocomplétion de SpipCatChat
-function spipcatchat_jqueryui_plugins($scripts){
- 	
+function spipcatchat_jqueryui_plugins($scripts){ 	
 	$scripts[] = "jquery.ui.autocomplete";
     return $scripts;
 }
@@ -41,4 +40,5 @@ function spipcatchat_insert_head_css($flux){
 function autoriser_spipcatchat_menu_dist($faire, $type, $id, $qui, $opt){
     return true;
 }
+
 ?>
