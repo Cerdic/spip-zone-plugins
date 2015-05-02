@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation_modifier_modules' => 'Noun sias autourisat da tradurre lu mòdulou de lenga.',
 	'erreur_autoriser_profil' => 'Noun sias autourisat da moudificà aqueu proufiéu.',
 	'erreur_choisir_lang_cible' => 'Chausissès una lenga bressai de traducioun.',
+	'erreur_choisir_lang_orig' => 'Chausissès una lenga d’ourìgine que serverà de basa da la traducioun.',
 	'erreur_choisir_module' => 'Chausissès un mòdulou da tradurre.',
 	'erreur_code_langue_existant' => 'Aquela varianta de lenga esistà jà per aquestou mòdulou',
 	'erreur_code_langue_invalide' => 'Aqueu code de lenga es invalid',
@@ -76,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_upload_choisir_une' => 'Devès au màncou validà una moudificacioun',
 	'erreur_variable_manquante' => 'La partida de la cadena seguenta noun déu estre moudificada :',
 	'erreur_variable_manquantes' => 'Li @nb@ partida de la cadena seguenti noun devon estre moudificadi :',
+	'explication_export_fichier_original' => 'Lou fichié seguent es lou fichié de lenga en la siéu lenga d’ourìgine.<br />Dèu servì de basa de traducioun.',
 	'explication_langue_cible' => 'La lenga devers li quali traduhès.',
 
 	// F
@@ -125,6 +127,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_langue_origine' => 'La lenga d’orìgine :',
 	'items_modif' => 'Item moudificat :',
 	'items_new' => 'Item nouvèu :',
+	'items_relire' => 'Item da relegì :',
+
+	// J
+	'job_creation_revisions_modules' => 'Creacioun dei revisioun d’ourìgine dóu mòdulou "@module@"',
 
 	// L
 	'label_fichier_langue' => 'Fichié de lenga da metre en ligna',
@@ -156,7 +162,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_check_none' => 'Destacà tout',
 	'lien_editer_chaine' => 'Moudificà',
 	'lien_editer_tous' => 'Edità touti li cadena noun traduchi',
-	'lien_export' => 'Espourtà autoumaticamen lou fichié atual.',
+	'lien_export' => 'Espourtà automaticamen lou fichié atual.',
 	'lien_profil_auteur' => 'Lou vouòstre prouféu',
 	'lien_profil_autre' => 'Lou siéu prouféu',
 	'lien_recharger_page' => 'Recargà la pàgina.',
@@ -177,6 +183,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu_info_interface' => 'Aficha un estac menant vers l’interfaça de traducioun',
 	'menu_titre_interface' => 'Interfaça de traducioun',
 	'message_afficher_vos_modules' => 'Afichà lu mòdulou :',
+	'message_changement_lang_orig' => 'La lenga d’ourìgine de traducioun chausida ("@lang_orig@") es pas proun traducha, es remplaçada da la lenga "@lang_nouvelle@".',
+	'message_changement_lang_orig_inexistante' => 'La lenga d’ourìgine de traducioun chausida ("@lang_orig@") noun esista, es remplaçada da la lenga "@lang_nouvelle@".',
 	'message_module_updated' => 'Lou mòdulou de lenga "@module@" es estat metut a jou.',
 	'message_suppression_module_ok' => 'Lou mòdulou @module@ es estat suprimat.',
 	'message_suppression_module_trads_ok' => 'Lou mòdulou @module@ es estat suprimat. @nb@ item de traducioun que lì apartenon soun finda estat suprimat.',
@@ -196,6 +204,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'str_status_modif' => 'Moudificat',
 	'str_status_new' => 'Nouvèu',
+	'str_status_relire' => 'Da relegì',
 	'str_status_traduit' => 'Traduch',
 
 	// T
@@ -205,6 +214,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_interface' => 'Interfaça de traducioun : ',
 	'texte_interface2' => 'Interfaça de traducioun',
 	'texte_langue' => 'Lenga :',
+	'texte_langue_origine' => 'la lenga d’ourìgine que vi serverà de moudel (privilegiàs la lenga maire se lou pousquès) ;',
+	'texte_langues_differentes' => 'La lenga bressai e la lenga ourìgine si devon estre diferenti.',
 	'texte_modifier' => 'Moudificà',
 	'texte_module' => 'lou mòdulou de lenga da tradurre ;',
 	'texte_module_traduire' => 'Lou mòdulou da tradurre :',
@@ -225,9 +236,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_date' => 'Data',
 	'th_items_modifs' => 'Item mudificat',
 	'th_items_new' => 'Item nouvèu',
+	'th_items_relire' => 'Item da relegì',
 	'th_items_traduits' => 'Item traduch',
 	'th_langue' => 'Lenga',
 	'th_langue_mere' => 'Lenga maire',
+	'th_langue_origine' => 'Tèstou de la lenga d’ourìgine',
 	'th_langue_voulue' => 'Traducioun en "@lang@"',
 	'th_module' => 'Mòdulou',
 	'th_status' => 'Estatut',
