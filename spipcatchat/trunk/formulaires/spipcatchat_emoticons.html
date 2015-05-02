@@ -1,19 +1,39 @@
-			<img onclick="spipcatchatemoticonpublic(':cat:');" src="#CHEMIN{images/emoticons/catchat.png}" alt="SpipCatChat" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':troublant:');" src="#CHEMIN{images/emoticons/huh.png}" alt="troublant" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':bigrire:');" src="#CHEMIN{images/emoticons/bigrire.png}" alt="Grand Rire" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':vampire:');" src="#CHEMIN{images/emoticons/vampir.png}" alt="Vampir" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':bizard:');" src="#CHEMIN{images/emoticons/bizzard.png}" alt="Bizard" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':rougir:');" src="#CHEMIN{images/emoticons/rougir.png}" alt="Rougir" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':pleurer:');" src="#CHEMIN{images/emoticons/pleure.png}" alt="Pleure" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':sourire:');" src="#CHEMIN{images/emoticons/smile.png}" alt="Sourire" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':heureux:');" src="#CHEMIN{images/emoticons/heureux.png}" alt="Heureux" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':oeil:');" src="#CHEMIN{images/emoticons/clindoeil.png}" alt="Clin d\'oeil" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':langue:');" src="#CHEMIN{images/emoticons/langue.png}" alt="Tire la langue" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':rire:');" src="#CHEMIN{images/emoticons/rire.png}" alt="Rire" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':surpris:');" src="#CHEMIN{images/emoticons/surpris.png}" alt="Surpris" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':triste:');" src="#CHEMIN{images/emoticons/triste.png}" alt="Triste" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':furieux:');" src="#CHEMIN{images/emoticons/furieux.png}" alt="Colere" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':neutre:');" src="#CHEMIN{images/emoticons/neutre.png}" alt="Neutre" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':sadique:');" src="#CHEMIN{images/emoticons/sadic.png}" alt="Sadic" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':bof:');" src="#CHEMIN{images/emoticons/bof.png}" alt="Bof" style="cursor: wait;width:20px;"/> 
-			<img onclick="spipcatchatemoticonpublic(':spip:');" src="#CHEMIN{images/emoticons/spip.png}" alt="Spip" style="cursor: wait;width:20px;"/> 
+
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/catchat.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':cat:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/catchat.png}" alt="SpipCatChat" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/huh.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':troublant:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/huh.png}" alt="troublant" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/bigrire.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':bigrire:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/bigrire.png}" alt="Grand Rire" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/vampir.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':vampire:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/vampir.png}" alt="Vampir" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/bizzard.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':bizzard:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/bizzard.png}" alt="Bizard" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/rougir.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':rougir:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/rougir.png}" alt="Rougir" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/pleure.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':pleurer:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/pleure.png}" alt="Pleure" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/smile.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':sourire:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/smile.png}" alt="Sourire" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/heureux.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':heureux:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/heureux.png}" alt="Heureux" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/clindoeil.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':oeil:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/clindoeil.png}" alt="Clin d\'oeil" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/langue.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':langue:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/langue.png}" alt="Tire la langue" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/rire.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':rire:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/rire.png}" alt="Rire" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/surpris.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':surpris:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/surpris.png}" alt="Surpris" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/triste.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':triste:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/triste.png}" alt="Triste" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/furieux.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':furieux:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/furieux.png}" alt="Colere" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/neutre.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':neutre:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/neutre.png}" alt="Neutre" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/sadic.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':sadique:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/sadic.png}" alt="Sadic" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/bof.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':bof:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/bof.png}" alt="Bof" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/alien.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':alien:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/alien.png}" alt="Alien" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/ange.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':ange:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/ange.png}" alt="Ange" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/ermm.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':ermm:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/ermm.png}" alt="ermm" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/face.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':face:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/face.png}" alt="Face" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/getlost.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':getlost:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/getlost.png}" alt="getlost" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/happy.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':happy:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/happy.png}" alt="happy" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/cool.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':cool:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/cool.png}" alt="Cool" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/heart.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':heart:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/heart.png}" alt="heart" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/kissing.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':kissing:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/kissing.png}" alt="kissing" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/ninja.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':ninja:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/ninja.png}" alt="ninja" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/pinch.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':pinch:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/pinch.png}" alt="pinch" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/sick.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':sick:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/sick.png}" alt="sick" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/sideways.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':sideways:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/sideways.png}" alt="sideways" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/silly.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':silly:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/silly.png}" alt="silly" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/sleeping.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':sleeping:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/sleeping.png}" alt="sleeping" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/unsure.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':unsure:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/unsure.png}" alt="unsure" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/w00t.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':w00t:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/w00t.png}" alt="w00t" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/whistling.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':whistling:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/whistling.png}" alt="whistling" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/wub.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':wub:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/wub.png}" alt="wub" style="cursor: wait;width:20px;"/> ]
+			[(#CHEMIN{images/emoticons/#ENV{emoticon}/spip.png}|oui)<img onclick="spipcatchatemoticon#ENV{fonction}(':spip:');" src="#CHEMIN{images/emoticons/#ENV{emoticon}/spip.png}" alt="Spip" style="cursor: wait;width:20px;"/> ]			
