@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'catchat_chargement' => 'Chargement...',
 'copy' => 'Développé pour Spip',
+'commun' => 'Paramètre en commun',
 'config_catchat' => 'Configuration de SpipCatChat',
 /*--E--*/
 'error_ajout_salon' => 'désolé, mais le nom du salon existe déjà',
@@ -75,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_false' => 'Automatique et préétabli',
 'label_secondaire' => 'La couleur secondaire du salon',
 'label_smoke' => 'L\'ombrage des bordures du cadre du salon (box-shadow CSS3)',
+'label_theme_emoticons' => 'Choisissez le thème des émoticons',
 'label_spicatchat_label' => 'Cacher les labels',
 'label_true' => 'Manuel et personnalisé',
 'label_width' => 'La largeur du salon public',
