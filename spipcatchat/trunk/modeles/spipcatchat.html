@@ -1,4 +1,6 @@
 #CACHE{0} 
+[(#CONFIG{spipcatchat/theme_emoticons}|oui) #SET{theme_emo,#CONFIG{spipcatchat/theme_emoticons}}]
+[(#CONFIG{spipcatchat/theme_emoticons}|non) #SET{theme_emo,classic}]
 #SET{url_plugin,#EVAL{_DIR_PLUGIN_SPIPCATCHAT}}
 #SET{refresh,#CONFIG{spipcatchat/refresh}}
 [(#CONFIG{spipcatchat/refresh}||non)#SET{refresh,2000}]
@@ -34,6 +36,7 @@
 #SET{icones,#CONFIG{spipcatchat/catchat_theme_coloricone}}
 #SET{perso,oui}
 ]
+
 <!-- fin de liste des variables -->
 <style type="text/css"><INCLURE{fond=css/spipcatchat_theme.css}{perso=#GET{perso}}{back=#GET{fond_color}}{icones=#GET{icones}}{rounded_corner=#GET{corner}}{smoke=#GET{smoke}}{color_primaire=#GET{color_primaire}}{color_secondaire=#GET{color_secondaire}}></style>
 <div align="left" style="padding-left:5%;padding-right:5%;padding-top:10%">
@@ -67,10 +70,10 @@
 				function spipcatchatrestartstatut(){ function resettimer(){getOnlineUsers('[(#ENV{salon})]',['(#ID_AUTEUR)'],['(#GET{url_plugin})'],SpipCatChatLang,['(#URL_PAGE)'],'[(#CHARSET)]');}
 				setTimeout(function(){resettimer()},6000);setTimeout(function(){resettimer()},12000);} 
 				var SpipCatChatLang=new Array("<:spipcatchat:catchat_message:>");
-				spipcatchatShowChat(['(#GET{url_plugin})'],['(#ID_AUTEUR)'],'[(#ENV{salon})]',['(#URL_PAGE)'],SpipCatChatLang,['(#NOM|sinon{#LOGIN})'],'[(#CHARSET)]','[(#GET{refresh})]');
+				spipcatchatShowChat(['(#GET{url_plugin})'],['(#ID_AUTEUR)'],'[(#ENV{salon})]',['(#URL_PAGE)'],SpipCatChatLang,['(#NOM|sinon{#LOGIN})'],'[(#CHARSET)]','[(#GET{refresh})]','[(#GET{theme_emo})]');
 			</script>
 				<div id="spipcatchatselectsalon">
-					<INCLURE{fond=modeles/spipcatchat_chat}{id_auteur=#ID_AUTEUR}{salon=#ENV{salon}}{refresh=#GET{refresh}}{url_plugin=#GET{url_plugin}}>
+					<INCLURE{fond=modeles/spipcatchat_chat}{id_auteur=#ID_AUTEUR}{salon=#ENV{salon}}{refresh=#GET{refresh}}{url_plugin=#GET{url_plugin}}{theme_emo=#GET{theme_emo}}>
 				</div>
 			]]
 		<!-- Selection des Salons de chat visible, salon de chat (invisible), ajout d'utilisateurs (invisible) -->
