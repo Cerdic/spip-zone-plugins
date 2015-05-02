@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'catchat_chargement' => 'Loading...',
 'copy' => 'Developed for Spip',
+'commun' => 'Paramètre en commun',
 'config_catchat' => 'Configuration de SpipCatChat',
 
 /*--E--*/
@@ -76,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_secondaire' => 'La couleur secondaire du salon',
 'label_smoke' => 'L\'ombrage des bordures du cadre du salon (box-shadow CSS3)',
 'label_spicatchat_label' => 'Cacher les labels',
+'label_theme_emoticons' => 'Choisissez le thème des émoticons',
 'label_true' => 'Manuel et personnalisé',
 'label_width' => 'La largeur du salon public',
 
