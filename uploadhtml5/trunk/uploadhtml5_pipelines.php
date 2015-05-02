@@ -34,33 +34,22 @@ function uploadhtml5_header_prive($flux) {
     return $flux;
 }
 
-function uploadhtml5_afficher_complement_objet($flux) {
+function uploadhtml5_formulaire_fond($flux) {
 
-    if ($type=$flux['args']['type']
-        and $id=intval($flux['args']['id'])
-        and (autoriser('joindredocument',$type,$id))) {
+    if ($flux['args']['form'] == 'joindre_document') {
 
-        $flux['data'] .= recuperer_fond('prive/squelettes/inclure/uploadhtml5', $flux['args']);
+        // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
+        $uploadhtml5 = recuperer_fond(
+            'prive/squelettes/inclure/uploadhtml5',
+            array(
+                'type' => $flux['args']['contexte']['objet'],
+                'id' => $flux['args']['contexte']['id_objet']
+            )
+        );
+
+        // Injecter uloadhtml5 au dessus du formulaire joindre_document.
+        $flux['data'] = $uploadhtml5.$flux['data'];
     }
-
-    return $flux;
-}
-
-function uploadhtml5_affiche_gauche($flux) {
-
-    if ($en_cours = trouver_objet_exec($flux['args']['exec'])
-        AND $en_cours['edition']!==false // page edition uniquement
-        AND $type = $en_cours['type']
-        AND $id_table_objet = $en_cours['id_table_objet']
-        // id non defini sur les formulaires de nouveaux objets
-        AND (isset($flux['args'][$id_table_objet]) and $id = intval($flux['args'][$id_table_objet])
-            // et justement dans ce cas, on met un identifiant negatif
-            OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
-      AND autoriser('joindredocument',$type,$id)) {
-
-            $flux['data'] .= recuperer_fond('prive/squelettes/inclure/uploadhtml5', array('type' => $type, 'id' => $id));
-
-        }
 
     return $flux;
 }

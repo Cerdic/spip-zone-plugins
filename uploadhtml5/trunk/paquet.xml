@@ -1,7 +1,7 @@
 <paquet
 	prefix="uploadhtml5"
 	categorie="multimedia"
-	version="1.0.2"
+	version="1.1.0"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/uploadhtml5-64.png"
@@ -25,6 +25,5 @@
 	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="header_prive" inclure="uploadhtml5_pipelines.php" />
-  <pipeline nom="afficher_complement_objet" inclure="uploadhtml5_pipelines.php" />
-  <pipeline nom="affiche_gauche" inclure="uploadhtml5_pipelines.php" />
+  <pipeline nom="formulaire_fond" inclure="uploadhtml5_pipelines.php" />
 </paquet>
