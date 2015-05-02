@@ -55,7 +55,7 @@ $(document).keypress(function(a)
 	<table class="post_message">
 	 <tr>
 		<td>
-			[(#CONFIG{spipcatchat/emoticon_public}|=={oui}|oui) #FORMULAIRE_SPIPCATCHAT_EMOTICONS]
+			[(#CONFIG{spipcatchat/emoticon_public}|=={oui}|oui) [<div style="max-width:80% ">(#FORMULAIRE_SPIPCATCHAT_EMOTICONS{#ENV{theme_emo},public})</div>]]
 			<input type="text" id="message" maxlength="255" autocomplete="off" /> <!-- champ message -->
 			<input type="submit"  onclick="spipcatchatmessage(); return false;" value="" id="ok" title="<:spipcatchat:title_valid_message:>" />	<!-- bouton submit message -->	
 		<!-- Les messages d'alert du chat -->
@@ -88,4 +88,8 @@ $(document).keypress(function(a)
 <audio style="display:none" id="soundPost">
 	<source src="#CHEMIN{images/post-sound.ogg}" type="audio/ogg" />
 	<source src="#CHEMIN{images/post-sound.mp3}" type="audio/mp3" />
+</audio>
+<audio style="display:none" id="emoticon">
+	<source src="#CHEMIN{images/emoticon.ogg}" type="audio/ogg" />
+	<source src="#CHEMIN{images/emoticon.mp3}" type="audio/mp3" />
 </audio>
