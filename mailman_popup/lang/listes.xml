@@ -63,6 +63,9 @@
 	</langue>
 	<langue code="oc_ni_la" url="http://trad.spip.net/tradlang_module/listes?lang_cible=oc_ni_la" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/listes?lang_cible=oc_ni_mis" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 	<langue code="pl" url="http://trad.spip.net/tradlang_module/listes?lang_cible=pl" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
 	<langue code="pt" url="http://trad.spip.net/tradlang_module/listes?lang_cible=pt" total="15" traduits="15" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
