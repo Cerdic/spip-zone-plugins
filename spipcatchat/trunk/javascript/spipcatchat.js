@@ -1,10 +1,12 @@
 function spipcatchatemoticonpublic(emoticon)
 {
 	$('#message').val($('#message').val()+''+emoticon);	
+	$('#emoticon').trigger("play");
 }
 
 function session() {
     $(location).attr('href', 'spip.php')
+    
 }
 function spipcatchatrestartmenu(e, t) {
     $('#selectUser').val(e);
@@ -35,13 +37,13 @@ function spipcatchatrest(e) {
         } else $('#BoxUsers').css('display', 'none')
     })
 }
-function spipcatchatShowChat(e, t, n, r, i, s, o, u) {
+function spipcatchatShowChat(e, t, n, r, i, s, o, u, pack) {
     $.ajax({
         url: e + 'phpscripts/get-autorisation.php',
         type: 'POST',
         data: 'id_auteur=' + t + '&id_salon=' + n + '&nom=' + encodeURIComponent(s) + '&url=' + encodeURIComponent(e) + '&char=' + encodeURIComponent(o),
         success: function (s) {
-            '1' == s || '4' == s ? (startchat(u, '125000', n, t, e, i, r, o), $('#spipcatchatselectsalon').css('display', 'block'))  : '2' == s ? (startchat(u, '125000', n, t, e, i, r, o), $('#pepoletrash').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : '3' == s ? (startchat(u, '125000', n, t, e, i, r, o), $('#pepoletrash').css('display', 'block'), $('#pepoleadd').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : ($('#spipcatchatsalonprive').css('display', 'block'), setTimeout(function () {
+            '1' == s || '4' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack), $('#spipcatchatselectsalon').css('display', 'block'))  : '2' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack), $('#pepoletrash').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : '3' == s ? (startchat(u, '125000', n, t, e, i, r, o, pack), $('#pepoletrash').css('display', 'block'), $('#pepoleadd').css('display', 'block'), $('#spipcatchatselectsalon').css('display', 'block'))  : ($('#spipcatchatsalonprive').css('display', 'block'), setTimeout(function () {
                 window.location = r
             }, 7000))
         }
@@ -113,7 +115,7 @@ function spipcatchataddsalon(e, t, n) {
 function spipcatchathelp(e) {
     window.open(e + '/doc/Guide de l utilisateur.pdf', '_blank')
 }
-function getMessages(e, t, n, r, i) {
+function getMessages(e, t, n, r, i, pack) { 
     $.getJSON(n + 'phpscripts/get-message.php', {
         auteur: t,
         ref: e / 1000,
@@ -122,7 +124,7 @@ function getMessages(e, t, n, r, i) {
     }, function (e) {
         var t = $('#text');
         $('#spipcatchatannonce').html('<span class="spipcatchatinfo"><b>' + e.annonce + '</b></span>');
-        $('#text').html(spipcatchattypo(e.messages, n));
+        $('#text').html(spipcatchattypo(e.messages, n, pack.trim()));
         1 != scrollBar && (t[0].scrollTop = t[0].scrollHeight, scrollBar = !0);
         void 0 !== t && t[0].childNodes.length > nombreMessage && (t[0].scrollTop = t[0].scrollHeight, $('#soundGet').trigger('play'));
         void 0 !== t && (nombreMessage = t[0].childNodes.length)
@@ -146,11 +148,11 @@ function spipcatchatsetmessage(e, t, n, r) {
         }
     })
 }
-function startchat(e, t, n, r, i, s, o, u) {
+function startchat(e, t, n, r, i, s, o, u, pack) {
     document.getElementById('message') && (getOnlineUsers(n, r, i, s, o, u), statusStart = window.setInterval(function () {
         getOnlineUsers(n, r, i, s, o, u)
     }, t), window.setInterval(function () {
-        getMessages(e, r, i, s, u)
+        getMessages(e, r, i, s, u, pack)
     }, e), $('#message').focus())
 }
 function getOnlineUsers(e, t, n, r, i, s) {
