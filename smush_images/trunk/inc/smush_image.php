@@ -1,4 +1,5 @@
 <?php
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_smush_image_dist($im){
@@ -93,7 +94,7 @@ function image_smush($im) {
 		 */
 		if ($format == 'PNG') {
 			$nq = substr($im,0,-4).'-nq8.png';
-			exec('pngnq '.$im.' && optipng -o5 '.$nq.' -out '.$dest,$out);
+			exec('pngnq -f '.$im.' && optipng -o5 '.$nq.' -out '.$dest,$out);
 			if(file_exists($nq))
 				spip_unlink($nq);
 		}
@@ -122,7 +123,7 @@ function image_smush($im) {
 		 * Si la taille du résultat est supérieure à l'original,
 		 * on retourne l'original en supprimant le fichier temporaire créé
 		 */
-		if(filesize($dest) > filesize($im)){
+		if(!file_exists($dest) || (filesize($dest) > filesize($im))){
 			spip_unlink($dest);
 			$dest = $im;
 		}
