@@ -67,9 +67,9 @@
 					[
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]<select name="#GET{name}" class="select" id="#GET{name}">
-						<BOUCLE_options_effect1(POUR){tableau #LISTE{noir,bleu,gris,jaune,brun,orange,pourpre,rose,rouge,vert}}>
-							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
-						</BOUCLE_options_effect1>
+					  <BOUCLE_REPERTOIRE_THEMES(php:DirectoryIterator){args #EVAL{_DIR_PLUGIN_SPIPCATCHAT}/images/theme/}{valeur!==\.}>
+						 <option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"] style="text-transform:capitalize">#VALEUR</option>
+					  </BOUCLE_REPERTOIRE_THEMES>
 					</select>
 					<center>
 					[(#CONFIG{spipcatchat/catchat_theme_coloricone}||oui)#SET{pack,#ENV{#GET{name}}}]
@@ -218,9 +218,9 @@
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
 					<select name="#GET{name}" class="select" id="#GET{name}">
-						<BOUCLE_options_effect9(POUR){tableau #LISTE{classic,full-monty,basic,moderne,maniac,blue-fluide,noir,vert,bleu,rouge}}>
-							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"] style="text-transform:capitalize">#VALEUR</option>
-						</BOUCLE_options_effect9>
+						 <BOUCLE_REPERTOIRE_EMOTICONS(php:DirectoryIterator){args #EVAL{_DIR_PLUGIN_SPIPCATCHAT}/images/emoticons/}{valeur!==\.}>
+						 <option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"] style="text-transform:capitalize">#VALEUR</option>
+						 </BOUCLE_REPERTOIRE_EMOTICONS>
 					</select>
 					<center>
 					[(#CONFIG{spipcatchat/theme_emoticons}||oui)#SET{pack_emoticons,#ENV{#GET{name}}}]
