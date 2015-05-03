@@ -50,7 +50,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_image_documents' => 'Image e doucumen',
 	'legend_site_public' => 'Sit pùblicou',
 
+	// M
+	'message_ok' => 'Lu vouòstre reglage soun estat pihat en conte e registrat en lou fichié <tt>@file@</tt>. Ahura, soun aplicat.',
+
 	// T
+	'texte_boite_info' => 'Esta pàgina vi permete de counfigurà facilamen lu reglage escoundut de SPIP.
+
+Se fourçàs d’unu reglage en lou vouòstre fichié <tt>config/mes_options.php</tt>, aquestou fourmulari serà sensa efet soubre aquestu.
+
+Coura serès acabat embé la counfiguracioun dóu vouòstre sit, pourès, se lou voulès, coupià-coulà lou countengut dóu fichié <tt>tmp/ck_options.php</tt> en <tt>config/mes_options.php</tt> denant de desinstalà aquestou plugin que vi farà pu da besoun.',
 	'titre_page_couteau' => 'Coutèu KISS'
 );
 
