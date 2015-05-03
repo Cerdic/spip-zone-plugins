@@ -218,7 +218,7 @@
 					<span class='erreur_message'>(#GET{erreurs})</span>
 					]
 					<select name="#GET{name}" class="select" id="#GET{name}">
-						<BOUCLE_options_effect9(POUR){tableau #LISTE{classic,full-monty,basic,moderne}}>
+						<BOUCLE_options_effect9(POUR){tableau #LISTE{classic,full-monty,basic,moderne,maniac}}>
 							<option value="#VALEUR"[(#ENV{#GET{name}}|=={#VALEUR}|oui)selected="selected"]>#VALEUR</option>
 						</BOUCLE_options_effect9>
 					</select>
