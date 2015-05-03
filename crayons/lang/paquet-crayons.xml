@@ -19,6 +19,9 @@
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Suske" lien="http://trad.spip.net/auteur/suske" />
 	</langue>
+	<langue code="oc_ni_mis" url="http://trad.spip.net/tradlang_module/paquet-crayons?lang_cible=oc_ni_mis" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="sylvain" lien="http://trad.spip.net/auteur/sylvain" />
+	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-crayons?lang_cible=ru" total="3" traduits="3" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Serge Markitanenko" lien="http://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
