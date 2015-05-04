@@ -69,10 +69,18 @@ function determine_source_lien_objet($a, $b, $c){
  * @param string $a
  * @param string|int $b
  * @param int|string $c
- * @param bool $editable
+ * @param array $options
+ *   bool $editable
+ *
  * @return array
  */
-function formulaires_editer_liens_charger_dist($a, $b, $c, $editable = true){
+function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()){
+
+	// compat avec ancienne signature ou le 4eme argument est $editable
+	if (!is_array($options)){
+		$options['editable'] = $options;
+	}
+	$editable = $options['editable'];
 
 	list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
 	if (!$table_source OR !$objet OR !$objet_lien OR !$id_objet)
@@ -126,6 +134,9 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $editable = true){
 		'editable' => $editable,
 	);
 
+	// les options non definies dans $valeurs sont passees telles quelles au formulaire html
+	$valeurs = array_merge($options,$valeurs);
+
 	return $valeurs;
 }
 
@@ -156,10 +167,18 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $editable = true){
  * @param string $a
  * @param string|int $b
  * @param int|string $c
- * @param bool $editable
+ * @param array $options
+ *   bool $editable
+ *
  * @return array
  */
-function formulaires_editer_liens_traiter_dist($a, $b, $c, $editable = true){
+function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()){
+	// compat avec ancienne signature ou le 4eme argument est $editable
+	if (!is_array($options)){
+		$options['editable'] = $options;
+	}
+	$editable = $options['editable'];
+
 	$res = array('editable' => $editable ? true : false);
 	list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
 	if (!$table_source OR !$objet OR !$objet_lien)
