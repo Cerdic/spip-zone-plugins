@@ -1,7 +1,7 @@
 <paquet
     prefix="gisban"
     categorie="divers"
-    version="0.0.1"
+    version="0.0.2"
     etat="test"
     compatibilite="[3.0.0;3.1.*]"
     logo="images/gis.png"
@@ -23,5 +23,6 @@
 
     <pipeline nom="header_prive" inclure="gisban_pipelines.php" />
     <pipeline nom="insert_head_css" inclure="gisban_pipelines.php" />
+    <pipeline nom="recuperer_fond" inclure="gisban_pipelines.php" />
 
 </paquet>
