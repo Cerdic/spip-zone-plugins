@@ -1,7 +1,7 @@
 <paquet
 	prefix="mll"
 	categorie="navigation"
-	version="1.2.3"
+	version="1.2.4"
 	etat="stable"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="prive/themes/spip/images/world_link-32.png"
