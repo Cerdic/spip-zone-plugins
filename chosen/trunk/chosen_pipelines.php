@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Chosen
- * (c) 2012 Marcillaud Matthieu
+ * (c) 2015 Marcillaud Matthieu, kent1
  * Licence GNU/GPL
  */
 
@@ -18,8 +18,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 **/
 function chosen_jquery_plugins($flux) {
 	include_spip('inc/config');
-	$config = lire_config('chosen',array());
-	if (test_espace_prive() || (isset($config['active']) and $config['active']=='oui')) {
+	$config = lire_config('chosen/active','non');
+	if (test_espace_prive() || $config =='oui') {
 		$flux[] = 'lib/chosen/chosen.jquery.js'; # lib originale
 		$flux[] = 'javascript/spip_chosen.js';   # chargements SPIP automatiques
 	}
