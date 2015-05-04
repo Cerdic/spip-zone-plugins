@@ -1,7 +1,7 @@
 <paquet
 	prefix="chosen"
 	categorie="navigation"
-	version="1.5.2"
+	version="1.6.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/chosen-64.png"
@@ -11,6 +11,7 @@
 	<nom>Chosen</nom>
 
 	<auteur>Marcillaud Matthieu</auteur>
+	<auteur lien="http://www.kent1.info">kent1</auteur>
 
 	<credit lien="http://iconblock.com/">IconBlock (logo)</credit>
 	<credit lien="http://harvesthq.github.com/chosen/">Patrick Filler (Chosen)</credit>
