@@ -99,7 +99,7 @@ function chosen_insert_head($flux) {
 	$config = lire_config('chosen',array());
 	if (isset($config['active']) and $config['active']=='oui') {
 		$flux .= '<script type="text/javascript">/* <![CDATA[ */
-			var selecteur_chosen = "' . trim($config['selecteur_commun']) . '";
+			var selecteur_chosen = "' . trim(isset($config['selecteur_commun']) ? $config['selecteur_commun'] : '') . '";
 			var langue_chosen = {
 				placeholder_text_single : "'.texte_script(_T('chosen:lang_select_an_option')).'",
 				placeholder_text_multiple : "'.texte_script(_T('chosen:lang_select_some_option')).'",

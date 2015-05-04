@@ -45,10 +45,10 @@ jQuery(document).ready(function(){
 
 	/* lance Chosen sur les .chosen */
 	spip_chosen = function() {
-		var selecteur = ((typeof(selecteur_chosen) != 'undefined') && selecteur_chosen.length) ? selecteur_chosen+',' : '';
-		var elts = $(selecteur +" select.chosen");
-		var options = (typeof(options_chosen) == 'object') ? $.extend(options_chosen, ((typeof(langue_chosen) == 'object') ? langue_chosen : {})) : ((typeof(langue_chosen) == 'object') ? langue_chosen : {});
-		var extended_options = (typeof(chosen_create_option) == 'object') ? chosen_create_option : {};
+		var selecteur = ((typeof(selecteur_chosen) != 'undefined') && selecteur_chosen.length) ? selecteur_chosen+',' : '',
+			elts = $(selecteur +" select.chosen").not('.formulaire_instituer select.statut'),
+			options = (typeof(options_chosen) == 'object') ? $.extend(options_chosen, ((typeof(langue_chosen) == 'object') ? langue_chosen : {})) : ((typeof(langue_chosen) == 'object') ? langue_chosen : {}),
+			extended_options = (typeof(chosen_create_option) == 'object') ? chosen_create_option : {};
 		$.extend(extended_options, options);
 		elts.not(".chosen-create-option,.chosen-allow_single_deselect").chosen(options);
 		elts.filter(".chosen-allow_single_deselect").chosen($.extend({allow_single_deselect: true}, options));
