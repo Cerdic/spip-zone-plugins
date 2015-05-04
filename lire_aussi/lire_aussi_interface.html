@@ -50,7 +50,7 @@
 
 [(#EVAL{autoriser('modifier','article', #ID_ARTICLE)==1}|?{" ",""})
 
-	<form onsubmit="valeur=Math.floor($('#ajouter_lire').attr('value')); if (valeur > 0 && valeur != #ID_ARTICLE){ $('#pave_lire_aussi').load('?exec=lire_aussi_interface&id_article=#ENV{id_article}&id_lire=#ID_LIRE&ajouter_lire='+valeur); }; return false;" action="index.php" method="get">
+	<form onsubmit="valeur=Math.floor($('#ajouter_lire').val()); if (valeur > 0 && valeur != #ID_ARTICLE){ $('#pave_lire_aussi').load('?exec=lire_aussi_interface&id_article=#ENV{id_article}&id_lire=#ID_LIRE&ajouter_lire='+valeur); }; return false;" action="index.php" method="get">
 	Lire aussi l'article numéro : 
 	<input type="hidden" name="exec" value="articles">
 	<input type="hidden" name="id_article" value="#ID_ARTICLE">
