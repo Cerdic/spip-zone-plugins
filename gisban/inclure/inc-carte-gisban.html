@@ -1,0 +1,56 @@
+[(#SET{id,#ENV{id_carte_gis,#ENV{id_map,#ENV{id,1}}}})]
+<script type="text/javascript">/*<!\[CDATA\[*/
+// ajoute le formulaire de recherche sur la carte en surchargeant l'instanciation
+jQgisloader.done(function(){
+    jQuery(function(){
+
+        function HandlerGis[(#GET{id})](geojson) {
+            console.debug(geojson);
+        };
+
+        // Format result in the search input autocomplete
+        var formatResultGis[(#GET{id})] = function(feature, el) {
+            var title = L.DomUtil.create('strong', '', el),
+            detailsContainer = L.DomUtil.create('small', '', el),
+            details = [];
+            title.innerHTML = feature.properties.label || feature.properties.name;
+            var types = {
+                housenumber: 'numéro',
+                street: 'rue',
+                locality: 'lieu-dit',
+                hamlet: 'hameau',
+                village: 'village',
+                city: 'ville',
+                commune: 'commune'
+            };
+            if (types[feature.properties.type]) {
+                L.DomUtil.create('span', 'type', title).innerHTML = types[feature.properties.type];
+            }
+            if (feature.properties.city && feature.properties.city !== feature.properties.name) {
+                details.push(feature.properties.city);
+            }
+            if (feature.properties.context) {
+                details.push(feature.properties.context);
+            }
+            detailsContainer.innerHTML = details.join(', ');
+        };
+
+        // Supprime la carte de base pour charger la nouvelle
+        map[(#GET{id})].remove();
+
+        options_gisban = map[(#GET{id})].options;
+        options_gisban['photonControl'] = true;
+        options_gisban['photonControlOptions'] = {
+            url:'http://api-adresse.data.gouv.fr/search/?',
+            resultsHandler: HandlerGis[(#GET{id})],
+            placeholder: 'Ex. Imm Amiral 97122...',
+            position: 'topright',
+            noResultLabel: '<:gisban:aucun_resultat:>',
+            formatResult: formatResultGis[(#GET{id})]
+        }
+
+        map_ban[(#GET{id})] =  new L.Map.Gis('map[(#GET{id})]', options_gisban);
+    });
+});
+/*\]\]>*/
+</script>
