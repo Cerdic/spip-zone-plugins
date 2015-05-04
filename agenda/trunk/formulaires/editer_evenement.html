@@ -88,9 +88,16 @@
 	]
 </div>
 <script type="text/javascript">
+	// Si changement de date_début, on change date_fin uniquement si inférieure à date_début
 	jQuery('#date_debut').on('change', function(){
-		if (jQuery(this).val() > jQuery('#date_fin').val())
+		var debut_date 	= jQuery('#date_debut').datepicker("getDate");
+		var debut_stamp = debut_date.getTime();
+		var fin_stamp   = jQuery('#date_fin').datepicker("getDate").getTime();
+		
+		if (debut_stamp > fin_stamp) {
 			jQuery('#date_fin').val(jQuery(this).val());
+			jQuery('#date_fin').datepicker( "option", "minDate", new Date(debut_date));
+		}
 	});
 	var repetitions_done = false;
 	jQuery(document).bind('datePickerLoaded',function(){
