@@ -65,6 +65,8 @@ function formulaires_editer_reservation_charger_dist($id_reservation='new', $ret
 		$fonction_reference = charger_fonction('reservation_reference', 'inc/');
 		$valeurs['reference']=$fonction_reference();  	
 	}
+	
+	$valeurs['quantite'] = _request('quantite')?_request('quantite') : 1; 
     
     //les champs extras auteur
     include_spip('cextras_pipelines');
@@ -79,6 +81,8 @@ function formulaires_editer_reservation_charger_dist($id_reservation='new', $ret
         }
     }
 
+	$valeurs['_hidden'].='<input type="hidden" name="quantite" value="'.$valeurs['quantite'].'"/>';  
+		
 	return $valeurs;
 }
 
