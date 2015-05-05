@@ -80,6 +80,23 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
 		}
 	}
 
+    //les champs extras auteur
+    include_spip('cextras_pipelines');
+    $valeurs_extras=array();
+    
+
+    if(function_exists('champs_extras_objet')){
+        //Charger les définitions pour la création des formulaires
+        $champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
+        
+        if(is_array($champs_extras_auteurs)){
+            foreach( $champs_extras_auteurs as $value){
+                $valeurs_extras[$value['options']['label']]=_request($value['options']['nom']); 
+            }
+        }
+        
+        $champs['donnees_auteur']=serialize( $valeurs_extras);
+    }
 
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
@@ -143,7 +160,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
 			}
 		}
 	 }
-	// Si on n'est pas dans le cas d'une création, on récupère les détails attachées ' la réservation
+	// Si on n'est pas dans le cas d'une création, on récupère les détails attachées à la réservation
 	if(!is_array($evenements) OR (is_array($evenements) AND count($evenements)==0)){
 			
 		$evenements=array();

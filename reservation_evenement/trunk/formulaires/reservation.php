@@ -173,7 +173,7 @@ function formulaires_reservation_verifier_dist($id='',$id_article=''){
 	
 	if(function_exists('champs_extras_objet')){
 		include_spip('inc/saisies');
-		//Charger les définitions pour la création des formulaires
+		//Charger les définitions 
 		$champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
 		$erreurs=array_merge($erreurs,saisies_verifier($champs_extras_auteurs));
 	}
