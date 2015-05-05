@@ -53,6 +53,8 @@ function formulaires_editer_almanach_verifier_dist($id_almanach='new', $retour='
 * Importation d'un événement dans la base
 **/
 function importation_evenement($objet_evenement,$id_almanach){
+	#on recupère les données de décalage
+		$decalage = _request('decalage');
 	#on recupere les infos de l'evenement dans des variables
 	    $attendee = $objet_evenement->getProperty( "attendee" ); #nom de l'attendee
 	    $lieu = $objet_evenement->getProperty("location");#récupération du lieu
@@ -71,9 +73,10 @@ function importation_evenement($objet_evenement,$id_almanach){
 	    $dtstart_array = $objet_evenement->getProperty("dtstart", 1, TRUE); 
 	    	$dtstart = $dtstart_array["value"];
    			$startDate = "{$dtstart["year"]}-{$dtstart["month"]}-{$dtstart["day"]}";
-   			$startTime = '';#on initialise le temps de début
+   			$startTime = '';#on initialise l'heure' de début
+   			$heure_debut = $dtstart["hour"]+$decalage;
     		if (!in_array("DATE", $dtstart_array["params"])) {
-       			 $startTime = " {$dtstart["hour"]}:{$dtstart["min"]}:{$dtstart["sec"]}";
+       			 $startTime = " $heure_debut:{$dtstart["min"]}:{$dtstart["sec"]}";
     			}
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_debut = $startDate.$startTime;
@@ -81,9 +84,10 @@ function importation_evenement($objet_evenement,$id_almanach){
   		$dtend_array = $objet_evenement->getProperty("dtend", 1, TRUE);
    			$dtend = $dtend_array["value"];
     		$endDate = "{$dtend["year"]}-{$dtend["month"]}-{$dtend["day"]}";
-    		$endTime = '';#on initialise le temps de fin
+    		$endTime = '';#on initialise l'heure' de fin
+   			$heure_fin = $dtend["hour"]+$decalage;
     		if (!in_array("DATE", $dtend_array["params"])) {
-       			$endTime = " {$dtend["hour"]}:{$dtend["min"]}:{$dtend["sec"]}";
+       			$endTime = " $heure_fin:{$dtend["min"]}:{$dtend["sec"]}";
     			}
     		#on fait une variable qui contient le résultat des deux précédentes actions
     		$date_fin = $endDate.$endTime;
@@ -124,12 +128,13 @@ echo "ajout résa";
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+	#on recupère les données de décalage
+		// $decalage = _request('decalage');
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
 	#on associe le mot à l'almanach
 	$id_mot = _request('id_mot');
-	if (_request('resa_auto')=='oui')
-	$resa_auto=1;
+	if (_request('resa_auto')=='oui') $resa_auto=1;
 	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_almanach,'objet'=>'almanach'));
 	sql_insertq("spip_almanachs",array('resa_auto'=>$resa_auto));
 	echo $resa_auto;
@@ -163,6 +168,7 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	} else {importation_evenement($comp,$id_almanach);};//l'evenement n'est pas dans la bdd, on va l'y mettre
  }
 
+ 	// $chargement['decalage']=$decalage;
 	return $chargement;
 }
 

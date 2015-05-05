@@ -17,6 +17,8 @@ function toggle(className, obj) {
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
+#SET{tableau_decalage,#ARRAY{-24,-24h,-23,-23h,-22,-22h,-21,-21h,-20,-20h,-19,-19h,-18,-18h,-17,-17h,-16,-16h,-15,-15h,-14,-14h,-13,-13h,-12,-12h,-11,-11h,-10,-10h,-9,-9h,-8,-8h,-7,-7h,-6,-6h,-5,-5h,-4,-4h,-3,-3h,-2,-2h,-1,-1h,0,'aucun decalage',1,+1h,2,+2h,3,+3h,4,+4h,5,+5h,6,+6h,7,+7h,8,+8h,9,+9h,10,+10h,11,+11h,12,+12h,13,+13h,14,+14h,15,+15h,16,+16h,17,+17h,18,+18h,19,+19h,20,+20h,21,+21h,22,+22h,23,+23h,24,+24h}}
+
 [(#REM) on définit un tableau vide, on rajoute dynamiquement les ensembles clé-valeur sortis de la boucle sur le groupe de mot-clés Type. On l'utilise ensuite pour la selection des mots clés par une saisie. on fait la même chose pour les ressources]
 #SET{tableau_type_evenement, #ARRAY}
 
@@ -66,6 +68,11 @@ function toggle(className, obj) {
 				datas=#GET{tableau_type_evenement}	
 			})]
 
+			[(#SAISIE{selection,decalage,
+				label=Décalage,
+				explication= Vous pouvez tenter un décalage global des horaires s'ils n'apparaissent pas à la bonne heure.,
+				datas=#GET{tableau_decalage}
+			})]
 			[(#PLUGIN{orr}|oui)
 			<li class="editer_resa_auto">
 				<div class="choix">

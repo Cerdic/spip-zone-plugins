@@ -32,9 +32,13 @@ function import_ics_upgrade($nom_meta_base_version, $version_cible) {
 	);
 
 	$maj['1.0.1'] = array(
-		array('sql_alter',"TABLE spip_almanachs ADD id_ressource bigint(21) NOT NULL DEFAULT '0'"),
+		array('maj_tables', array('spip_almanachs')),
 	);
-	
+
+	$maj['1.0.2'] = array(
+		array('maj_tables', array('spip_almanachs')),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -51,6 +55,9 @@ function import_ics_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_almanachs");
 	sql_drop_table("spip_almanachs_liens");
+
+	sql_alter("TABLE spip_evenements DROP COLUMN uid");
+	sql_alter("TABLE spip_evenements DROP COLUMN sequence");
 
 	# Nettoyer les versionnages et forums
 	sql_delete("spip_versions",              sql_in("objet", array('almanach')));
