@@ -158,7 +158,10 @@ function charger_url_background_responsive(this_img) {
 				if (vertical) url_img = url_img + "v";
 				if (dPR) url_img = url_img + "&dpr="+dPR;
 			}
-			this_img.css("background-image", "url("+url_img+")");
+			if (this_img.attr("data-background-actif") != url_img) {
+				this_img.attr("data-background-actif", url_img);
+				this_img.css("background-image", "url("+url_img+")");
+			}
 		}
 
 }
