@@ -4,8 +4,10 @@
 	#ANCRE_PAGINATION
 	<h2 class="h2"><:projet:titre_projets:> (#GRAND_TOTAL)</h2>
 	<ul class="liste-items">
-		<BOUCLE_projets(PROJETS) {recherche} {!par points} {pagination 5}>
-		<li class="item"><a href="#URL_PROJET">#NOM</a></li>
+		<BOUCLE_projets(PROJETS) {recherche} {statut ?} {!par points} {pagination 5}>
+		<li class="item"><a href="#URL_PROJET"><strong>#NOM</strong></a>
+			<span class="text-muted">[<br/>(#VAL{'projet:texte_statut_'}|concat{#STATUT**}|_T)][<span class="sep"> / </span><small><a href="#URL_SITE" class="spip_out">(#URL_SITE)</a></small>]</span>
+		</li>
 		</BOUCLE_projets>
 	</ul>
 	[<div class="pagination">(#PAGINATION)</div>]
