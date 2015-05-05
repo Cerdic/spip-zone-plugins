@@ -23,6 +23,7 @@ function genie_twitter_dist($last) {
 	// il faut surveiller les articles publies
 	// $last est la date de la dernier occurence du cron, si vaut zero on ne fait rien
 	if ($GLOBALS['meta']["post_dates"]=='non'
+	and $cfg['evt_publierarticles']
 	AND $cfg['evt_publierarticlesfutur']=='publication'
 	AND $last){
 		include_spip('inc/abstract_sql');
@@ -58,6 +59,7 @@ function genie_twitter_dist($last) {
 function twitter_taches_generales_cron($taches_generales){
 	if ($GLOBALS['meta']["post_dates"]=='non'
 		AND	$cfg = @unserialize($GLOBALS['meta']['microblog'])
+		and $cfg['evt_publierarticles']
 		AND $cfg['evt_publierarticlesfutur']=='publication'){
 		// surveiller toutes les heures les publications post-dates
 		$taches_generales['twitter'] = 3600;
