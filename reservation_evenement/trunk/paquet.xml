@@ -6,7 +6,7 @@
 	compatibilite="[3.0.16;3.1.*]"
 	logo="prive/themes/spip/images/reservation_evenement-64.png"
 	documentation="http://contrib.spip.net/Reservation-d-evenements-4459"
-	schema="1.4.1" 
+	schema="1.4.2" 
 >
 
 	<nom>Réservation Événements</nom>
