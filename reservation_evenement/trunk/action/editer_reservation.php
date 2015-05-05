@@ -91,7 +91,7 @@ function reservation_instituer($id_reservation, $c, $calcul_rub=true) {
         
         if(is_array($champs_extras_auteurs)){
             foreach( $champs_extras_auteurs as $value){
-                $valeurs_extras[$value['options']['label']]=_request($value['options']['nom']); 
+                $valeurs_extras[$value['options']['nom']]=_request($value['options']['nom']); 
             }
         }
         
