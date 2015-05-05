@@ -5,7 +5,9 @@
 	<h2 class="h2"><:projets_site:titre_projets_sites:> (#GRAND_TOTAL)</h2>
 	<ul class="liste-items">
 		<BOUCLE_projets_sites(PROJETS_SITES) {recherche} {!par points} {pagination 5}>
-		<li class="item"><a href="#URL_PROJETS_SITE">#TITRE</a></li>
+		<li class="item"><a href="#URL_PROJETS_SITE"><strong>#TITRE</strong></a>
+		<span class="text-muted">[<br/>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)][<span class="sep"> / </span><small><a href="#FO_URL" class="spip_out">(#FO_URL)</a></small>]</span>
+		</li>
 		</BOUCLE_projets_sites>
 	</ul>
 	[<div class="pagination">(#PAGINATION)</div>]

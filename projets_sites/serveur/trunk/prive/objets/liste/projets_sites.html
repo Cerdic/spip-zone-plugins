@@ -22,7 +22,7 @@
 	<BOUCLE_liste_projets_sites (PROJETS_SITES) {id_mot?} {id_auteur?} {where?} {recherche?} {tri #ENV{par,num type_site},#GET{defaut_tri}} {pagination #ENV{nb,10}}>
 		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
 			<td class='picto'>[(#CHEMIN_IMAGE{projets_site-16.png}|balise_img)]</td>
-			[(#REM) Comme la table spip_projets a déjà une table de liens, SPIP n'arrive pas à faire la jointure avec spip_projets_sites_liens pour avoir cette requête :
+			[(#REM) Comme la table spip_projets a dÃ©jÃ  une table de liens, SPIP n'arrive pas Ã  faire la jointure avec spip_projets_sites_liens pour avoir cette requÃªte :
 			"SELECT projets.nom, projets.id_projet FROM spip_projets AS `projets` INNER JOIN spip_projets_sites_liens AS L1 ON ( L1.id_objet = projets.id_projet AND L1.objet='projet') WHERE (L1.id_projets_site = 1) AND (L1.objet = 'projet')".
 			De ce fait, on doit forcer la jointure :]
 			<td class='titre'>[(#LOGO_PROJETS_SITE|image_reduire{12,12})]<a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]">#TITRE</a></td>
