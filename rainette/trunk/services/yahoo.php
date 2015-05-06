@@ -30,21 +30,6 @@ function yahoo_service2url($lieu, $mode) {
 }
 
 
-/**
- * Renvoie le système d'unité utilisé pour acquérir les données du service
- *
- * @return string
- */
-function yahoo_service2unite() {
-	include_spip('inc/config');
-
-	// Identification du système d'unité
-	$unite = lire_config('rainette/yahoo/unite', 'm');
-
-	return $unite;
-}
-
-
 function yahoo_service2reload_time($mode) {
 
 	static $reload = array('conditions' => 3600, 'previsions' => 7200);

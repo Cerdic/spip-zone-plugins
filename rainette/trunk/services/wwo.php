@@ -10,7 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_RAINETTE_WWO_URL_BASE'))
-	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/free/v1/weather.ashx');
+	define('_RAINETTE_WWO_URL_BASE', 'http://api.worldweatheronline.com/free/v2/weather.ashx');
 if (!defined('_RAINETTE_WWO_JOURS_PREVISIONS'))
 	define('_RAINETTE_WWO_JOURS_PREVISIONS', 5);
 if (!defined('_RAINETTE_WWO_SUFFIXE_METRIQUE'))
@@ -65,21 +65,6 @@ function wwo_service2url($lieu, $mode) {
 	return $url;
 }
 
-
-/**
- * Renvoie le système d'unité utilisé pour acquérir les données du service
- *
- * @return string
- */
-function wwo_service2unite() {
-	include_spip('inc/config');
-
-	// Identification du système d'unité
-	$unite = lire_config('rainette/wwo/unite', 'm');
-
-	return $unite;
-}
-
 /**
  * @param string $mode
  * @return int
@@ -104,6 +89,7 @@ function wwo_url2flux($url) {
 
 	return $flux;
 }
+
 
 /**
  * lire le xml fournit par le service meteo et en extraire les infos interessantes

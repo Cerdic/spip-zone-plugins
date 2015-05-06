@@ -89,21 +89,6 @@ function owm_service2url($lieu, $mode) {
 
 
 /**
- * Renvoie le système d'unité utilisé pour acquérir les données du service
- *
- * @return string
- */
-function owm_service2unite() {
-	include_spip('inc/config');
-
-	// Identification du système d'unité
-	$unite = lire_config('rainette/owm/unite', 'm');
-
-	return $unite;
-}
-
-
-/**
  * @param $mode
  * @return int
  */
