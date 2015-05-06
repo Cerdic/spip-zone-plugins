@@ -4,7 +4,7 @@
 	<table class="spip liste">
 		<caption><strong class="caption"><:langonet:titre_bloc_langues_generees:></strong></caption>
 		<tbody>
-<BOUCLE_liste_fichiers_lang(DATA) {source table, #VAL|langonet_lister_fichiers_lang}{where?}{recherche?}{par cle}{pagination #ENV{pas, 5}}>
+<BOUCLE_liste_fichiers_lang(DATA) {source table, #VAL|langonet_lister_fichiers_lang}{where?}{par cle}{pagination #ENV{pas, 5}}>
 			[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{lang, telecharger}})]
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class="titre principale">#CLE</td>

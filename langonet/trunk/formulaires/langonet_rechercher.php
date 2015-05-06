@@ -21,7 +21,8 @@ function formulaires_langonet_rechercher_charger($type) {
 	else {
 		$modules_choisis = array();
 		foreach (_request('modules') as $_valeurs) {
-			$modules_choisis[] = reset(explode(':', $_valeurs));
+			$m = explode(':', $_valeurs);
+			$modules_choisis[] = reset($m);
 		}
 	}
 

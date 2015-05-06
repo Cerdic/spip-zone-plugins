@@ -4,7 +4,7 @@
 	<table class="spip liste">
 		[<caption><strong class="caption">(#VAL{langonet:titre_bloc_logs_}|concat{#ENV{verification}}|_T)</strong></caption>]
 		<tbody>
-<BOUCLE_liste_fichiers_log(DATA) {source table, #ENV{verification}|langonet_lister_fichiers_log}{where?}{recherche?}{par cle}{pagination #ENV{pas, 5}}>
+<BOUCLE_liste_fichiers_log(DATA) {source table, #ENV{verification}|langonet_lister_fichiers_log}{where?}{par cle}{pagination #ENV{pas, 5}}>
 			[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{log, telecharger}})]
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class="titre principale">#CLE</td>

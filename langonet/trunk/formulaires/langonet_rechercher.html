@@ -78,18 +78,18 @@
 //<![CDATA[
 	(function($){
 		jQuery("#select_tous_#ENV{type}").click(function(){
-			jQuery("input.module_#ENV{type}").attr("checked",true);
+			jQuery("input.module_#ENV{type}").prop("checked",true);
 			return false;
 		});
 		jQuery("#select_aucun_#ENV{type}").click(function(){
-			$("input.module_#ENV{type}").attr("checked",false);
+			$("input.module_#ENV{type}").prop("checked",false);
 			return false;
 		});
 		jQuery("#select_spip_#ENV{type}").click(function(){
-			jQuery("input.module_#ENV{type}").attr("checked",false);
-			jQuery("#module_ecrire_#ENV{type}").attr("checked",true);
-			jQuery("#module_public_#ENV{type}").attr("checked",true);
-			jQuery("#module_spip_#ENV{type}").attr("checked",true);
+			jQuery("input.module_#ENV{type}").prop("checked",false);
+			jQuery("#module_ecrire_#ENV{type}").prop("checked",true);
+			jQuery("#module_public_#ENV{type}").prop("checked",true);
+			jQuery("#module_spip_#ENV{type}").prop("checked",true);
 			return false;
 		});
 	})(jQuery);
