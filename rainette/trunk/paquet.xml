@@ -3,8 +3,9 @@
 	categorie="divers"
 	version="2.1.13"
 	etat="test"
-	compatibilite="[3.0.11;3.0.*]"
+	compatibilite="[3.0.11;3.1.*]"
 	logo="rainette-64.png"
+	demonstration="demo/rainette"
 	documentation="http://contrib.spip.net/article3133"
 	developpement="http://zone.spip.org/trac/spip-zone/query?component=plugins%2Frainette&amp;group=type&amp;col=id&amp;col=summary&amp;col=owner&amp;col=type&amp;col=status&amp;col=priority&amp;col=severity&amp;report=2&amp;order=priority"
 >
