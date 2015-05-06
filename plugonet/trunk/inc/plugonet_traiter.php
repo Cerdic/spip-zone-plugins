@@ -544,9 +544,9 @@ function plugin2balise_implicite($D, $balise, $nom) {
 	return array("cat $contenu >> $std", "svn rm $contenu");
 }
 
-// Passer les lettres accentuees en entites XML
 function plugin2balise_description($descriptions, $prefixe, $dir) {
-	include_spip('inc/langonet_generer_fichier');
+
+	$ecrire = charger_fonction('ecrire_fichier_langue', 'inc');
 
 	$dirl = $dir . '/lang';
 	if (!is_dir($dirl)) 
@@ -555,8 +555,8 @@ function plugin2balise_description($descriptions, $prefixe, $dir) {
 	$files = array();
 	foreach($descriptions as $_lang => $_couples) {
 		$module = "paquet-" . strtolower($prefixe);
-		$producteur = "\n// Fichier produit par PlugOnet";
-		$fichier_lang = ecrire_fichier_langue_php($dirl, $_lang, $module, $_couples, $producteur);
+		$producteur = "// Fichier produit par PlugOnet";
+		$fichier_lang = $ecrire($dirl, $_lang, $module, $_couples, $producteur);
 		if ($fichier_lang) 
 			$files[]= substr($fichier_lang, strlen($dir)+1);
 	}
@@ -626,10 +626,26 @@ function plugin2balise_migration($commandes, $plugin_xml) {
 
 // --------------------- FONCTIONS UTILITAIRES -----------------------------------
 //
+// - Conversion d'un texte en utf-8
 // - extraction des multi d'une balise
 // - extraction des tableaux description et slogan a partir de la balise description
 // - extraction des bornes d'un intervalle de compatibilite
 // - formatage d'un attribut de balise
+
+
+
+/**
+ * Conversion d'un texte en utf-8
+ *
+ * @param string	$sujet
+ * @return string
+ */
+function convertir_en_utf($sujet) {
+	if (!$sujet OR !is_string($sujet)) return;
+	include_spip('inc/charsets');
+
+	return unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $sujet), ENT_NOQUOTES, 'utf-8'));
+}
 
 // Expanse les multi en un tableau de textes complets, un par langue
 function traiter_multi($texte) {
@@ -649,7 +665,6 @@ function traiter_multi($texte) {
 }
 
 function extraire_descriptions($nom, $description, $slogan, $prefixe) {
-	include_spip('inc/langonet_utils');
 	include_spip('inc/texte');
 
 	$langs = array();
@@ -660,7 +675,7 @@ function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 		foreach ($noms as $lang => $_descr) {
 			if (!$lang)
 				$lang = 'fr';
-			$langs[$lang][strtolower($prefixe) . '_nom'] = entite2utf(trim($_descr));
+			$langs[$lang][strtolower($prefixe) . '_nom'] = convertir_en_utf(trim($_descr));
 		}
 	}
 	
@@ -669,7 +684,7 @@ function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 		foreach (traiter_multi($slogan) as $lang => $_descr) {
 			if (!$lang)
 				$lang = 'fr';
-			$langs[$lang][strtolower($prefixe) . '_slogan'] = entite2utf(trim($_descr));
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = convertir_en_utf(trim($_descr));
 		}
 	}
 	
@@ -678,7 +693,7 @@ function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 	foreach (traiter_multi($description) as $lang => $_descr) {
 		if (!$lang)
 			$lang = 'fr';
-		$texte = entite2utf(trim($_descr));
+		$texte = convertir_en_utf(trim($_descr));
 		$langs[$lang][strtolower($prefixe) . '_description'] = $texte;
 		if (!$slogan)
 			if (preg_match(',^\s*(.+)[.!?:\r\n\f],Um', $texte, $matches))

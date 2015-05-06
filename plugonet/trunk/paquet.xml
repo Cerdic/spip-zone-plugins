@@ -1,7 +1,7 @@
 <paquet
 	prefix="plugonet"
 	categorie="outil"
-	version="1.0.1"
+	version="1.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="plugonet-64.png"
@@ -16,9 +16,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="autoriser" inclure="inc/plugonet_autoriser.php" />
-
-	<necessite nom="langonet" compatibilite="[0.6.3;[" />
+	<pipeline nom="autoriser" inclure="plugonet_autorisations.php" />
 
 	<menu nom="plugonet" titre="plugonet:bouton_plugonet" parent="menu_developpement" icone="images/plugonet-16.png" action="plugonet" parametres="operation=generer" />
 	<spip compatibilite="[3.0.0;3.0.*]">
