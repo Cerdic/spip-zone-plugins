@@ -128,16 +128,12 @@ echo "ajout résa";
  */
 function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$chargement = formulaires_editer_objet_traiter('almanach',$id_almanach,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	#on recupère les données de décalage
-		// $decalage = _request('decalage');
 	#on recupère l'id de l'almanach dont on aura besoin plus tard
 	$id_almanach = $chargement['id_almanach'];
 	#on associe le mot à l'almanach
 	$id_mot = _request('id_mot');
-	if (_request('resa_auto')=='oui') $resa_auto=1;
+	// if (_request('resa_auto')=='oui') $resa_auto=1;
 	sql_insertq("spip_mots_liens",array('id_mot'=>$id_mot,'id_objet'=>$id_almanach,'objet'=>'almanach'));
-	sql_insertq("spip_almanachs",array('resa_auto'=>$resa_auto));
-	echo $resa_auto;
 	#configuration nécessaire à la récupération
 	$config = array("unique_id"=>"","url"=>_request("url"));
 	$cal = new vcalendar($config);
@@ -168,7 +164,6 @@ function formulaires_editer_almanach_traiter_dist($id_almanach='new', $retour=''
 	} else {importation_evenement($comp,$id_almanach);};//l'evenement n'est pas dans la bdd, on va l'y mettre
  }
 
- 	// $chargement['decalage']=$decalage;
 	return $chargement;
 }
 
