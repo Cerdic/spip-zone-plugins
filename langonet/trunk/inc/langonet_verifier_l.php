@@ -3,7 +3,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_LANGONET_PATTERN_FONCTION_L'))
-	define("_LANGONET_PATTERN_FONCTION_L", "#\b_L\s*[(]\s*(['\"])([^\\1]+)\\1[^)]*\)#Uims");
+	define("_LANGONET_PATTERN_FONCTION_L", "#\b_L\s*[(]\s*([\"'])((?:\\\\\\1|[^\\1])+)\\1[^)]*\)#Uims");
 if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
 	define('_LANGONET_PATTERN_FICHIERS_L', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 
