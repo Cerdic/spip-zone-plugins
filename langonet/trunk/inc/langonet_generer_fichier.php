@@ -142,7 +142,7 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
 		$texte = isset($GLOBALS[$var_cible][$_item]) ? $GLOBALS[$var_cible][$_item] : '';
 		if ($texte) {
 			if ($mode == 'inutile')
-				$item_obsolete = in_array($_item, $inutiles);
+				$item_obsolete = array_key_exists($_item, $inutiles);
 		}
 		else {
 			if ($mode == 'valeur')
