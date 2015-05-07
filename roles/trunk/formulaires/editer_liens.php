@@ -78,8 +78,11 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()){
 
 	// compat avec ancienne signature ou le 4eme argument est $editable
 	if (!is_array($options)){
-		$options['editable'] = $options;
+		$options = array('editable' => $options);
+	} elseif (!isset($options['editable'])) {
+		$options['editable'] = true;
 	}
+
 	$editable = $options['editable'];
 
 	list($table_source, $objet, $id_objet, $objet_lien) = determine_source_lien_objet($a, $b, $c);
@@ -175,8 +178,11 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()){
 function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()){
 	// compat avec ancienne signature ou le 4eme argument est $editable
 	if (!is_array($options)){
-		$options['editable'] = $options;
+		$options = array('editable' => $options);
+	} elseif (!isset($options['editable'])) {
+		$options['editable'] = true;
 	}
+
 	$editable = $options['editable'];
 
 	$res = array('editable' => $editable ? true : false);
