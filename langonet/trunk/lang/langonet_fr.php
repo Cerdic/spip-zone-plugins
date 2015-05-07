@@ -38,6 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_bloc_logs_definition' => 'Cliquez sur un lien ci-dessous pour télécharger le dernier fichier de logs de vérification des définitions manquantes d\'un fichier de langue.',
 	'info_bloc_logs_fonction_l' => 'Cliquez sur un lien ci-dessous pour télécharger le dernier fichier de logs de vérification des utilisations de _L() dans une arborescence donnée.',
 	'info_bloc_logs_utilisation' => 'Cliquez sur un lien ci-dessous pour télécharger le dernier fichier de logs de vérification des définitions obsolètes d\'un fichier de langue.',
+	'info_chaine_incomplete' => ' !!! détection incomplète, la chaine est tronquée. Vérifier le libellé exact !!!',
 	'info_chemin_langue' => 'Dossier dans lequel est installé le fichier de langue (exemple : <em>plugins/rainette/lang/</em>, ou <em>ecrire/lang/</em>)',
 	'info_fichier_liste' => 'Choisissez le fichier de langue dont vous voulez afficher les items, parmi ceux présents dans le site.',
 	'info_fichier_source' => 'Choisissez le fichier de langue qui servira de référence pour générer le fichier cible.',

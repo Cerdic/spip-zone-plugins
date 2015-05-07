@@ -3,7 +3,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 if (!defined('_LANGONET_SIGNATURE'))
-	define('_LANGONET_SIGNATURE', "// Ceci est un fichier langue de SPIP -- This is a SPIP language file");
+	define('_LANGONET_SIGNATURE', "// This is a SPIP language file  --  Ceci est un fichier langue de SPIP");
 
 if (!defined('_LANGONET_TAG_DEFINITION_L'))
 	define('_LANGONET_TAG_DEFINITION_L', '<LANGONET_DEFINITION_L>');
@@ -136,6 +136,18 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
 	// On boucle sur la liste exacte des items cible pour affiner leur contenu suivant le type
 	// d'opération en cours.
 	foreach ($items_source as $_item => $_valeur) {
+		// Traitement du cas non détecté par la regexp fonction_l suivant : _L('le cas qui m\'ennuie').
+		// Das ce cas la chaine _L détectée s'arrête au \.
+		// De fait l'insertion de 'item' => 'le cas qui m\', dans le fichier provoque une erreur car cela
+		// echappe la quote.
+		// Pour pallier si on détecte le \ en fin de chaine on le retire et on ajoute un commentaire comme quoi
+		// la chaine trouvée est incomplète.
+		$valeur_incomplete = false;
+		if (substr($_valeur, -1) === '\\') {
+			$_valeur = substr($_valeur, 0, strlen($_valeur)-1);
+			$valeur_incomplete = true;
+		}
+
 		// Si l'item existe dans le fichier cible existant on vérifie si il n'est pas obsolète dans le cas où
 		// le mode est 'inutile' (opération verifier_utilisation)
 		$item_obsolete = false;
@@ -145,17 +157,28 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
 				$item_obsolete = array_key_exists($_item, $inutiles);
 		}
 		else {
-			if ($mode == 'valeur')
+			if ($mode == 'valeur') {
 				$texte = _LANGONET_TAG_NOUVEAU . $_valeur;
-			else if ($mode == 'vide')
+			}
+			else if ($mode == 'vide') {
 				$texte = _LANGONET_TAG_NOUVEAU;
-			else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur))
-				$texte = array(_LANGONET_TAG_DEFINITION_L, preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur), $mode);
-			else if ($mode !== 'oublie')
+			}
+			else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur)) {
+				$texte = array(
+					_LANGONET_TAG_DEFINITION_L,
+					preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur),
+					$mode,
+					$valeur_incomplete ? _T('langonet:info_chaine_incomplete') : '');
+			}
+			else if ($mode !== 'oublie') {
 				$texte = _LANGONET_TAG_NOUVEAU . $_item;
-			else if (preg_match('/^[a-z]+$/i', $_item))
+			}
+			else if (preg_match('/^[a-z]+$/i', $_item)) {
 				$texte = $_item;
-			else $texte = _LANGONET_TAG_DEFINITION_MANQUANTE;
+			}
+			else {
+				$texte = _LANGONET_TAG_DEFINITION_MANQUANTE;
+			}
 		}
 
 		// Passage en utf8 et stockage du texte de l'item cible pour traitement ultérieur lors de l'écriture du fichier
@@ -196,8 +219,9 @@ function produire_fichier_langue($langue, $module, $items, $producteur='') {
 			if ($_traduction[2] == 'inutile')
 				$contenu[]= "/*\t" . $_traduction[0] ."\n\t'$_item' => '$t',*/";
 			else {
-				$com = !$_traduction[0] ? '' : ("/*\t". $_traduction[0] ." */\n");
-				$contenu[]= "$com\t'$_item' => '$t',";
+				$prefixe = !$_traduction[0] ? '' : ("/*\t". $_traduction[0] ." */\n");
+				$suffixe = !$_traduction[3] ? '' : (" #". $_traduction[3]);
+				$contenu[]= "${prefixe}\t'${_item}' => '${t}',${suffixe}";
 			}
 		}
 		else {
