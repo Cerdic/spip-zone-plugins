@@ -2,8 +2,10 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+if (!defined('_LANGONET_SIGNATURE_SPIP'))
+	define('_LANGONET_SIGNATURE_SPIP', "// This is a SPIP language file  --  Ceci est un fichier langue de SPIP");
 if (!defined('_LANGONET_SIGNATURE'))
-	define('_LANGONET_SIGNATURE', "// This is a SPIP language file  --  Ceci est un fichier langue de SPIP");
+	define('_LANGONET_SIGNATURE', "// Produit automatiquement par le plugin LangOnet à partir de la langue source");
 
 if (!defined('_LANGONET_TAG_DEFINITION_L'))
 	define('_LANGONET_TAG_DEFINITION_L', '<LANGONET_DEFINITION_L>');
@@ -55,21 +57,24 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	}
 
 	// Récupérer le bandeau d'origine si il existe.
-	// Le bandeau est composé des lignes qui précèdent la signature habituelle
+	// Le bandeau est composé des lignes de commentaires avant le code
 	$bandeau = '';
 	if (file_exists($fichier_source)) {
 		if ($tableau = file($fichier_source)) {
 			array_shift($tableau); // saute < ? php
 			$signature_trouvee = false;
 			foreach($tableau as $_ligne) {
-				$bandeau .= $_ligne;
-				if (strpos($_ligne, _LANGONET_SIGNATURE) !== false) {
-					$signature_trouvee = true;
-					break;
+				$_ligne = ltrim($_ligne);
+				if ($_ligne) {
+					if ((substr($_ligne, 0, 2) === '//')
+					OR (substr($_ligne, 0, 1) === '#')) {
+						$bandeau .= $_ligne;
+					}
+					else {
+						break;
+					}
 				}
 			}
-			if (!$signature_trouvee)
-				$bandeau = '';
 		}
 	}
 
@@ -92,9 +97,9 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 		$dossier_cible = sous_repertoire($dossier_cible, "verification");
 		$dossier_cible = sous_repertoire($dossier_cible, $dossier_corrections[$mode]);
 	}
-	else
+	else {
 		$dossier_cible = sous_repertoire($dossier_cible, "generation");
-	$bandeau .= "// Produit automatiquement par le plugin LangOnet à partir de la langue source $langue_source";
+	}
 	$ok = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau);
 
 	if (!$ok) {
@@ -202,10 +207,10 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
  * @param $langue
  * @param $module
  * @param $items
- * @param string $producteur
+ * @param string $bandeau
  * @return string
  */
-function produire_fichier_langue($langue, $module, $items, $producteur='') {
+function produire_fichier_langue($langue, $module, $items, $bandeau='') {
 	ksort($items);
 	$initiale = '';
 	$contenu = array();
@@ -231,11 +236,14 @@ function produire_fichier_langue($langue, $module, $items, $producteur='') {
 			$contenu[]= "\t'$_item' => '$t'," . ($c>0 ? ' ' . _LANGONET_TAG_NOUVEAU : '');
 		}
 	}
-	if (!strpos($producteur, _LANGONET_SIGNATURE)) 
-		$producteur = "\n" . _LANGONET_SIGNATURE . "\n" . preg_replace(",\\n[/#]*,", "\n/// ", $producteur);
+
+	if (strpos($bandeau, _LANGONET_SIGNATURE_SPIP) === false) {
+		$bandeau = "\n" . _LANGONET_SIGNATURE_SPIP . "\n" . preg_replace(",\\n[/#]*,", "\n/// ", $bandeau);
+	}
 
 	return '<'. "?php\n" .
-$producteur . '
+$bandeau . '
+// Fichier produit par LangOnet à partir de la langue source' . $langue_source . '
 // Module: ' . $module . '
 // Langue: ' . $langue . '
 // Date: ' . date('d-m-Y H:i:s') . '
@@ -259,12 +267,12 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
  * @param $langue
  * @param $module
  * @param $items
- * @param string $producteur
+ * @param string $bandeau
  * @return bool|string
  */
-function ecrire_fichier_langue_php($dir, $langue, $module, $items, $producteur='') {
+function ecrire_fichier_langue_php($dir, $langue, $module, $items, $bandeau='') {
 	$nom_fichier = $dir . $module . "_" . $langue   . '.php';
-	$contenu = produire_fichier_langue($langue, $module, $items, $producteur);
+	$contenu = produire_fichier_langue($langue, $module, $items, $bandeau);
 
 	return ecrire_fichier($nom_fichier, $contenu) ? $nom_fichier : false;
 }
