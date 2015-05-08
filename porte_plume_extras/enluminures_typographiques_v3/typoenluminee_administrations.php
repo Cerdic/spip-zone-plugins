@@ -44,4 +44,13 @@ function maj_titres_enlumines(){
 	}
 }
 
-?>
+
+/**
+ * Desinstallation
+ *
+ * @param string $nom_meta_base_version
+ */
+function typoenluminee_vider_tables($nom_meta_base_version) {
+	include_spip('inc/meta');
+	effacer_meta($nom_meta_base_version);
+}
