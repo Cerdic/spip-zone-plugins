@@ -15,38 +15,31 @@
 				<td[ (#ENV{pertinence}|=={peut_etre}|oui)colspan="2"] class="raccourci">
 					[<strong>(#CLE)</strong>]
 				</td>
-		<BOUCLE_test_pertinence(CONDITION){si #ENV{pertinence}|=={non}|oui}>
+			[(#ENV{pertinence}|=={non}|oui)
 				<td class="traduction">
-					[<span class="guillemet">&#10078;</span>
-						(#VALEUR|table_valeur{0})
-					<span class="guillemet">&#10077;</span>]
-					[<div class="commentaire">(#VALEUR|table_valeur{1})</div>]
+					[(#VALEUR)]
 				</td>
-		</BOUCLE_test_pertinence>
+			]
 			</tr>
-		</B_test_pertinence>
+	<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
+		#SET{fichier, #CLE}
+		<B_lignes>
+			<tr class="row_even">
+				<td class="fichier" colspan="2">[(#GET{fichier})]</td>
 			</tr>
-
-			<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
-				#SET{fichier, #CLE}
-				<B_lignes>
-					<tr class="row_even">
-						<td class="fichier" colspan="2">[(#GET{fichier})]</td>
-					</tr>
-				<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
-					#SET{ligne, #CLE}
-					<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
-					<tr class="row_even">
-						<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
-						<td class="occurrence">
-							[(#VALEUR|table_valeur{0}
-								|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{4}, #GET{fichier}, 8})]
-						</td>
-					</tr>
-					</BOUCLE_occurrences>
-				</BOUCLE_lignes>
-			</BOUCLE_fichiers>
-		<//B_test_pertinence>
+		<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
+			#SET{ligne, #CLE}
+			<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
+			<tr class="row_even">
+				<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
+				<td class="occurrence">
+					[(#VALEUR|table_valeur{0}
+						|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{4}, #GET{fichier}, 8})]
+				</td>
+			</tr>
+			</BOUCLE_occurrences>
+		</BOUCLE_lignes>
+	</BOUCLE_fichiers>
 </BOUCLE_liste_items>
 		</tbody>
 	</table>

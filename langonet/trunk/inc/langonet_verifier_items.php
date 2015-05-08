@@ -320,6 +320,24 @@ function extraire_arguments($raccourci_regexp) {
 	return array($raccourci_regexp, $arguments);
 }
 
+function calculer_commentaire_utilisation($occurrences) {
+	$commentaire = '<span>' . _T('langonet:info_utilises_non_module_nok') . '</span>';
+	if ($occurrences) {
+		$commentaire .= '<ul>';
+		foreach ($occurrences as $_cle => $_valeur) {
+			foreach ($_valeur as $_ligne => $_occurence) {
+				$commentaire .=
+					'<li>' .
+					$_cle .
+					' - L' . $_ligne .
+					' - ' . strtolower(_T('langonet:label_module')) . ' : ' . $_occurence[0][1] .
+					'</li>';
+			}
+		}
+		$commentaire .= '</ul>';
+	}
+	return $commentaire;
+}
 
 /**
  * Détection des items de langue obsolètes d'un module.
@@ -349,7 +367,10 @@ function reperer_items_inutiles($module, $utilises, $items) {
 		// Pour cela la valeur de chaque index du tableau $utilises['items'] est l'item complet.
 		$index_variable = '';
 		if (!in_array($item, $utilises['items'])) {
-			// L'item est soit non utilise, soit utilise dans un contexte variable
+			// L'item est soit
+			// - non utilisé avec le module adéquat
+			// - utilisé avec un autre module
+			// - utilise dans un contexte variable
 			foreach($utilises['raccourcis'] as $_cle => $_valeur) {
 				if ($utilises['suffixes'][$_cle]) {
 					if (substr($_raccourci, 0, strlen($_valeur)) == $_valeur) {
@@ -359,9 +380,14 @@ function reperer_items_inutiles($module, $utilises, $items) {
 				}
 			}
 			if (!$index_variable) {
-				// L'item est vraiment non utilise.
 				// On stocke la traduction afin de l'afficher dans les résultats.
-				$item_non[$_raccourci] = $_traduction;
+				$item_non[$_raccourci][] = $_traduction;
+				// L'item est vraiment non utilise ou utilise avec un module différent que celui en cours
+				// de vérification ce qui peut révéler une erreur.
+				// Dans ce cas, on ajoute un commentaire sur cette utilisation pour que l'auteur vérifie.
+				if (array_key_exists($_raccourci, $utilises['occurrences'])) {
+					$item_non[$_raccourci][] = calculer_commentaire_utilisation($utilises['occurrences'][$_raccourci]);
+				}
 			} else {
 				// L'item est utilise dans un contexte variable
 				$item_peut_etre[$_raccourci] = $utilises['occurrences'][$index_variable];
@@ -405,10 +431,12 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 
 	$item_non_mais = $item_non_mais_nok = $item_non = $definition_non_mais_nok = $item_md5 = $fichier_non = array();
 	foreach ($utilises['items'] as $_cle => $_valeur) {
-		if (!isset($items[$_valeur])) {
+		$module_utilise = $utilises['modules'][$_cle];
+		// Il faut absolument tester l'item complet soit module:raccourci car sinon
+		// on pourrait accepter un raccourci identique d'un autre module.
+		if (!isset($items[$_cle]) OR ($module_utilise != $module)) {
 			if (!$utilises['suffixes'][$_cle]) {
-				$mod = $utilises['modules'][$_cle];
-				if ($mod == $module) {
+				if ($module_utilise == $module) {
 					// Item indefini alors que le module est explicite, c'est une erreur
 					$item_non[] = $_valeur;
 					$fichier_non[$_cle] = $utilises['occurrences'][$_cle];
@@ -417,20 +445,22 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 					// defini dans le fichier en cours de verification n'est pas forcement une erreur.
 					// On l'identifie donc a part
 					$ok = false;
-					if (array_key_exists($_valeur, $tous_lang)) {
-						foreach ($tous_lang[$_valeur] as $m) {
-						  if (!$m[1]) continue;
-						  if ($ok = ($mod ? ($m[1] == $mod) : (($m[1]=='spip') OR ($m[1]=='ecrire') OR ($m[1]=='public')))) {
-									break;
+					if (array_key_exists($_cle, $tous_lang)) {
+						foreach ($tous_lang[$_cle] as $_item_tous_lang) {
+							// $_item_tous_lang[1] contient toujours le nom du module exact à savoir
+							// pour le core spip, public ou ecrire
+							if (!$_item_tous_lang[1]) continue;
+							if ($ok = ($module_utilise ? ($_item_tous_lang[1] == $module_utilise) : (($_item_tous_lang[1]=='spip') OR ($_item_tous_lang[1]=='ecrire') OR ($_item_tous_lang[1]=='public')))) {
+								break;
 							}
 						}
 					}
 					if ($ok) {
-						$definition_non_mais[$_valeur] = array_map('array_shift', $tous_lang[$_valeur]);
+						// On a reconnu un item de langue mais on ne sait pas si c'est bien licite pour ce module
+						$definition_non_mais[$_cle] = array_map('array_shift', $tous_lang[$_cle]);
 						$item_non_mais[] = $_valeur;
 						$fichier_non_mais[$_cle] = $utilises['occurrences'][$_cle];
 					} else {
-						$tous = $utilises['occurrences'][$_cle];
 						// Si pas normalise, c'est une auto-definition
 						// Si l'index est deja pris pour un autre texte
 						// (32 caracteres initiaux communs)
@@ -442,7 +472,7 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 							}
 							$item_md5[$_cle] = $_valeur;
 						}
-						$fichier_non_mais_nok[$_cle] = $tous;
+						$fichier_non_mais_nok[$_cle] = $utilises['occurrences'][$_cle];;
 						$item_non_mais_nok[] = $_cle;
 					}
 				}
@@ -472,17 +502,17 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 	}
 
 	return array(
-		   'item_non' => $item_non,
-		   'item_non_mais' => $item_non_mais,
-		   'item_non_mais_nok' => $item_non_mais_nok,
-		   'fichier_non' => $fichier_non,
-		   'fichier_non_mais' => $fichier_non_mais,
-		   'fichier_non_mais_nok' => $fichier_non_mais_nok,
-		   'definition_non_mais' => $definition_non_mais,
-		   'definition_non_mais_nok' => $definition_non_mais_nok,
-		   'item_peut_etre' => $item_peut_etre,
-		   'fichier_peut_etre' => $fichier_peut_etre,
-		   'item_md5' => $item_md5,
+			'occurrences_non' => $fichier_non,
+			'occurrences_non_mais' => $fichier_non_mais,
+			'occurrences_non_mais_nok' => $fichier_non_mais_nok,
+			'occurrences_peut_etre' => $fichier_peut_etre,
+			'item_non' => $item_non,
+			'item_non_mais' => $item_non_mais,
+			'item_non_mais_nok' => $item_non_mais_nok,
+			'item_peut_etre' => $item_peut_etre,
+			'definition_non_mais' => $definition_non_mais,
+			'definition_non_mais_nok' => $definition_non_mais_nok,
+			'item_md5' => $item_md5,
 	       );
 }
 

@@ -50,13 +50,13 @@ function formulaires_langonet_verifier_item_traiter() {
 		if ($verification == 'definition') {
 			$extra = array();
 			foreach ($items_a_corriger as $_item) {
-				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
-				$extra[$index] = @$resultats['item_md5'][$_item];
+//				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
+//				$extra[$index] = @$resultats['item_md5'][$_item];
  			}
 			$mode = 'oublie';
 		}
 		else {
-			$extra = $resultats['occurrences_non'];
+			$extra = $items_a_corriger;
 			$mode = 'inutile';
 		}
 
@@ -76,11 +76,15 @@ function formulaires_langonet_verifier_item_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
+		// Résultats communs aux deux vérifications
 		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
 		$retour['message_ok']['resultats']['module'] = $resultats['module'];
 		$retour['message_ok']['resultats']['ou_fichier'] = $resultats['ou_fichier'];
 		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['occurrences_non'];
 		$retour['message_ok']['resultats']['occurrences_peut_etre'] = $resultats['occurrences_peut_etre'];
+		// Uniquement pour la vérification des définitions
+		$retour['message_ok']['resultats']['occurrences_non_mais'] = isset($resultats['occurrences_non_mais']) ? $resultats['occurrences_non_mais'] : array();
+		$retour['message_ok']['resultats']['occurrences_non_mais_nok'] = isset($resultats['occurrences_non_mais_nok']) ? $resultats['occurrences_non_mais_nok'] : array();
 	}
 	$retour['editable'] = true;
 	return $retour;
