@@ -1,4 +1,16 @@
 <?php
+/**
+ * Les fonctions du plugin Activités du jour
+ *
+ * @plugin     Activités du jour
+ * @copyright  2015
+ * @author     Teddy Payet
+ * @licence    GNU/GPL
+ * @package    SPIP\Actijour\Fonctions
+ */
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 
 /*---------------------------------------------------------------------------*\
  recense les sessions tmp/visites/ --> visites en attente de traitement

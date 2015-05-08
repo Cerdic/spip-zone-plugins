@@ -13,14 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activite_du_jour' => 'Activit&eacute; du jour',
 'afficher_stats_art' => 'Afficher stats de l\'Article',
 'article_inexistant' => ':: <i>Article inexistant</i> ::',
-'articles_crees_modifies' => 'Articles cr&eacute;&eacute;s/modifi&eacute;s', ## 1.55
-'articles_modifies_crees_jour' => 'Articles modifi&eacute;s et/ou cr&eacute;&eacute;s le @jour@', ## 1.55
+'articles_crees_modifies' => 'Articles cr&eacute;&eacute;s/modifi&eacute;s',
+'articles_modifies_crees_jour' => 'Articles modifi&eacute;s et/ou cr&eacute;&eacute;s le @jour@',
 'aucun' => '&nbsp;Aucun&nbsp;',
-'aucun_article_cree' => 'Aucun article cr&eacute;&eacute;/modifi&eacute; ce jour', ## 1.55
+'aucun_article_cree' => 'Aucun article cr&eacute;&eacute;/modifi&eacute; ce jour',
 'aucun_article_visite' => 'Aucun Article visit&eacute; &agrave; cette heure',
 'aucun_auteur_en_ligne' => 'Ici, personne ne bouge depuis 15 mn !<br />&Agrave; part toi !',
 'aucune_moment' => 'Aucune pour l\'instant !',
-'auteurs_connections' => 'Connect&eacute;s du jour*', ## 1.55
+'auteurs_connections' => 'Connect&eacute;s du jour*',
 'auteurs_en_ligne' => 'y\'a pas 15 mn, &eacute;taient en ligne :',
 
 // B
@@ -50,11 +50,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date_jour_maxi_vis' => 'Le @date_max@ : @visites_max@ vis.',
-'date_maj' => 'Date M&agrave;J', ## 1.55
-'date_publication_dpt' => 'Date publication : ', ## 1.55
-'date_redaction_dpt' => 'R&eacute;dac ant&eacute;rieure : ', ## 1.55
-'date_serveur_mysql' => 'Date serveur MySQL', ## 1.55
-'date_serveur_php' => 'Date serveur PHP', ## 1.55
+'date_maj' => 'Date M&agrave;J',
+'date_publication_dpt' => 'Date publication : ',
+'date_redaction_dpt' => 'R&eacute;dac ant&eacute;rieure : ',
+'date_serveur_mysql' => 'Date serveur MySQL',
+'date_serveur_php' => 'Date serveur PHP',
 'depuis_date_visites_pg' => 'Depuis @heure@ @date@, @nb_visite@ Visites 
 							sur @nb_articles@ articles 
 							(voir Pr&eacute;visions).', 
@@ -72,13 +72,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entete_tableau_mois' => '<i><b>Pour info ... en chiffres !</b></i><br />Les visites sur @nb_mois@ mois.',
 
 // F
-'forums' => 'Forums', ## 1.55
+'forums' => 'Forums',
 
 // G
 'global_vis_hier' => 'Hier : <b>@global_jour@</b>',
 'global_vis_jour' => 'Jour : <b>@global_jour@</b>',
 'global_vis_global' => 'Global : <b>@global_stats@</b>',
-'graph_article_dpt' => 'Graph de l\'article : ', ## 1.55
+'graph_article_dpt' => 'Graph de l\'article : ',
 'graph_trimestre' => 'Graph du trimestre :',
 'grosse_journee_' => 'Grosse journ&eacute;e ...',
 
@@ -94,20 +94,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 							D - Maximum visites (1 jour) de la p&eacute;riode.<br />
 							E - Total visites de l\'article.',
 'info_dernieres_connections' => '*Les @nb_aut@ derni&egrave;res connexions 
-								parmis les Admins et R&eacute;dacs du site', ## m 1.55
+								parmis les Admins et R&eacute;dacs du site',
 'info_page_actijour_prev' => 'Visites et nombre d\'articles non encore trait&eacute;s
 								par SPIP dans la BDD',
 
 // J
 'jour' => 'Jour',
-'jour_affiche_dpt' => 'Jour affich&eacute; :', ## 1.55
+'jour_affiche_dpt' => 'Jour affich&eacute; :',
 
 // L
 'liens_entrants_jour' => 'Liens entrants du jour',
 
 // M
-'message' => '&nbsp;message&nbsp;', ## m 1.55
-'messages' => '&nbsp;messages&nbsp;', ## 1.55
+'message' => '&nbsp;message&nbsp;',
+'messages' => '&nbsp;messages&nbsp;',
 'mise_a_jour' => 'Mise &agrave; jour',
 'mois_pipe' => 'Mois |',
 'moyenne_c' => 'Moy.',
@@ -121,15 +121,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // O
 'onglet_actijour_hier' => 'Hier', 
-'onglet_actijour_pg' => 'Ce jour', ## m 1.55
+'onglet_actijour_pg' => 'Ce jour',
 'onglet_actijour_prev' => 'Pr&eacute;visions', 
 'onglet_actijour_top' => 'TopTen', 
 'onglet_actijour_conf' => 'Config', 
-'onglet_actijour_connect' => 'Connect&eacute;s', ## 1.55
-'onglet_connect_0minirezo' => 'Administrateurs', ## 1.55
-'onglet_connect_1comite' => 'R&eacute;dacteurs', ## 1.55
-'onglet_connect_6forum' => 'Visiteurs', ## 1.55
-'onglet_connect_tous' => 'Tous', ## 1.55
+'onglet_actijour_connect' => 'Connect&eacute;s',
+'onglet_connect_0minirezo' => 'Administrateurs',
+'onglet_connect_1comite' => 'R&eacute;dacteurs',
+'onglet_connect_6forum' => 'Visiteurs',
+'onglet_connect_tous' => 'Tous',
 
 // P
 'pages_article_vues' => 'Pages \'Article\' Vues',
@@ -140,13 +140,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_phpinfo' => 'Page phpinfo',
 'pied_tableau_mois' => '* ne tient pas compte de la journ&eacute;e en cours.',
 'popularite' => 'Popul.',
-'popup_date_debut_stats' => 'Stat. depuis le @date_deb_fr@', ## 1.55
-'popup_date_edit_art' => 'Art. Edit&eacute; le @date_edit@', ## 1.55
-'popup_date_redac_art' => '&nbsp;- Redac. le @date_redac@', ## 1.55
+'popup_date_debut_stats' => 'Stat. depuis le @date_deb_fr@',
+'popup_date_edit_art' => 'Art. Edit&eacute; le @date_edit@',
+'popup_date_redac_art' => '&nbsp;- Redac. le @date_redac@',
 
 //R
-'repartition_visites_secteurs' => 'Visites par Secteurs/rubriques du jour 
-												(pages articles vues)', 
+'repartition_visites_secteurs' => 'Visites par Secteurs/rubriques du jour (pages articles vues)', 
 
 // S
 's' => 's',
@@ -161,22 +160,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'telechargements_dpt' => 'T&eacute;l&eacute;chargements :',
-'text_bouton_afficher' => 'Afficher', ## 1.55
+'text_bouton_afficher' => 'Afficher',
 'title_vers_page_graph' => 'Vers page stats graphique SPIP',
 'title_vers_popup_graph' => 'Stat graphique en Popup',
-'titre_actijour' => 'Activit&eacute;<br />du jour', ## m 1.55
+'titre_actijour' => 'Activit&eacute; du jour',
 'titre_article' => 'Titre article',
 'top_ten_article_8_j' => 'TopTen articles sur 8 jours',
 'top_ten_article_30_j' => 'TopTen articles sur 30 jours',
 'top_ten_article_gen' => 'TopTen Articles g&eacute;n&eacute;ral',
 'total_visites' => 'TT Vis.',
-'tous_date_connections' => 'Derni&egrave;re connexion des "Auteurs"', ## 1.55
+'tous_date_connections' => 'Derni&egrave;re connexion des "Auteurs"',
 
 // V
 'visites_jour' => 'v. jour', // faire court
 'visites' => 'Visites',
 'voir' => 'voir',
-'voir_details' => 'Voir d&eacute;tails', ## 1.55
+'voir_details' => 'Voir d&eacute;tails',
 'voir_plugin' => 'Voir page : ', 
 'voir_suivi_forums' => 'Voir page Suivi Forums',
 'voir_suivi_petitions' => 'Voir page Suivi P&eacute;titions',
