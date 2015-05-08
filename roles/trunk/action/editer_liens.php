@@ -3,7 +3,7 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2014                                                *
+ *  Copyright (c) 2001-2015                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -25,7 +25,7 @@
  * et l'unicité est alors assurée sur le quatuor (id_x, objet, id_objet, role)
  * et la clé primaire adaptée en conséquence.
  *
- * @package SPIP\Liens\API
+ * @package SPIP\Core\Liens\API
  */
  
 if (!defined('_ECRIRE_INC_VERSION')) return;
@@ -409,7 +409,6 @@ function lien_insert($objet_source,$primary,$table_lien,$id,$objets,$qualif) {
 						pipeline('post_edition_lien',
 							array(
 								'args' => $args,
-								#'data' => $insertions # [todo] POUR la 3.1
 								'data' => $id_objet
 							)
 						);
@@ -537,14 +536,6 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets,$cond=null){
 				);
 				$args['id_objet'] = $id_o;
 
-				/* [TODO] pour SPIP 3.1
-				// Envoyer aux plugins
-				$l = pipeline('pre_edition_lien',
-					array(
-						'args' => $args,
-						'data' => $l
-					)
-				);*/
 				if ($id_o=intval($l['id_objet'])) {
 					$where = lien_where($primary, $l[$primary], $l['objet'], $id_o, $cond);
 					$e = sql_delete($table_lien, $where);
@@ -569,14 +560,6 @@ function lien_delete($objet_source,$primary,$table_lien,$id,$objets,$cond=null){
 							'data' => $id_o
 						)
 					);
-					/* [TODO] Pour SPIP 3.1
-					// Envoyer aux plugins
-					pipeline('post_edition_lien',
-						array(
-							'args' => $args,
-							'data' => $l
-						)
-					);*/
 				}
 			}
 		}
@@ -725,15 +708,6 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 			);
 			$args['id_objet'] = $id_objet;
 
-			/* [TODO] pour la 3.1
-			// Envoyer aux plugins
-			$qualif = pipeline('pre_edition_lien',
-				array(
-					'args' => $args,
-					'data' => $qualif,
-				)
-			);*/
-
 			$where = lien_where($primary, $id, $objet, $id_objet, $cond);
 			$e = sql_updateq($table_lien,$qualif,$where);
 
@@ -745,7 +719,6 @@ function lien_set($objet_source,$primary,$table_lien,$id,$objets,$qualif){
 				pipeline('post_edition_lien',
 					array(
 						'args' => $args,
-						#'data' => $qualif, # [TODO] POUR la 3.1
 						'data' => $id_objet
 					)
 				);
