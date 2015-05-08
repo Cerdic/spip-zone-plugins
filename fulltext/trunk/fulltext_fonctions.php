@@ -68,7 +68,9 @@ function fulltext_recherche_naturelle_fr($recherche, $strict = true){
 	foreach ($recherche as $k => $r){
 		if (strlen($r)>=3 AND substr($r,0,1)!=='"' AND substr($r,-1)!='"'){
 			$r = rtrim($r, "sxSX");
-			$recherche[$k] = ($strict ? "+" : "") . $r . "*";
+			// +the* est conserve dans la requete alors que the est supprime car stopwords
+			// on contourne en mettant the* sans le + quand le mot est plus petit ou = 4 a
+			$recherche[$k] = (($strict AND strlen($r)>=4) ? "+" : "") . $r . "*";
 		}
 	}
 
