@@ -1,10 +1,5 @@
-
-
-Surcharge les fichiers du core 3.0.x suivants :
-
-  * prive/formulaires/editer_liens.php
-  * ecrire/action/editer_liens.php
-
-  Cf. http://thread.gmane.org/gmane.comp.web.spip.devel/63059
+Cf.
+- http://thread.gmane.org/gmane.comp.web.spip.devel/63059
+- https://core.spip.net/projects/spip/repository/revisions/22075
 
 
