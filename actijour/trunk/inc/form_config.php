@@ -36,29 +36,29 @@ function formulaire_configuration_acjr() {
 		. "<input type='hidden' name='version_plug' value='".$GLOBALS['actijour_plug_version']."' />\n";
 		
 		
-	$aff.= debut_cadre_trait_couleur('',true,'',_T('acjr:configuration_commune'))
+	$aff.= debut_cadre_trait_couleur('',true,'',_T('actijour:configuration_commune'))
 		. "<table width='100%' cellpadding='2' cellspacing='0' border='0' class='table_conf'>"
-		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_art')."</td>"
+		. "<tr><td class='col_info'>"._T('actijour:conf_nbl_art')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='text' name='nbl_art' value='".$GLOBALS['actijour']['nbl_art']."' size='4' class='fondl' />"
 		. "</td></tr>"
-		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_aut')."</td>"
+		. "<tr><td class='col_info'>"._T('actijour:conf_nbl_aut')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='text' name='nbl_aut' value='".$GLOBALS['actijour']['nbl_aut']."' size='4' class='fondl' />"
 		. "</td></tr>"
-		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_mensuel')."</td>"
+		. "<tr><td class='col_info'>"._T('actijour:conf_nbl_mensuel')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='text' name='nbl_mensuel' value='".$GLOBALS['actijour']['nbl_mensuel']."' size='4' class='fondl' />"
 		. "</td></tr>"
-		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_topsem')."</td>"
+		. "<tr><td class='col_info'>"._T('actijour:conf_nbl_topsem')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='text' name='nbl_topsem' value='".$GLOBALS['actijour']['nbl_topsem']."' size='4' class='fondl' />"
 		. "</td></tr>"
-		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_topmois')."</td>"
+		. "<tr><td class='col_info'>"._T('actijour:conf_nbl_topmois')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='text' name='nbl_topmois' value='".$GLOBALS['actijour']['nbl_topmois']."' size='4' class='fondl' />"
 		. "</td></tr>"
-		. "<tr><td class='col_info'>"._T('acjr:conf_nbl_topgen')."</td>"
+		. "<tr><td class='col_info'>"._T('actijour:conf_nbl_topgen')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='text' name='nbl_topgen' value='".$GLOBALS['actijour']['nbl_topgen']."' size='4' class='fondl' />"
 		. "</td></tr>"
@@ -68,9 +68,9 @@ function formulaire_configuration_acjr() {
 	$_ordon_pg_m = $GLOBALS['actijour']['admin-'.$connect_id_auteur]['ordon_pg_m'];
 	$ordon_pg_m = ($_ordon_pg_m)?$_ordon_pg_m:'1,2,3,4';
 
-	$aff.= debut_cadre_trait_couleur('',true,'',_T('acjr:configuration_perso', array('nom'=>$nom)))
+	$aff.= debut_cadre_trait_couleur('',true,'',_T('actijour:configuration_perso', array('nom'=>$nom)))
 		. "<table width='100%' cellpadding='2' cellspacing='0' border='0' class='table_conf'>"
-		. "<tr><td class='col_info'>"._T('acjr:conf_ordon_milieu')."</td>"
+		. "<tr><td class='col_info'>"._T('actijour:conf_ordon_milieu')."</td>"
 		. "<td class='col_val'>"
 		. "<input type='hidden' name='id_admin' value='$connect_id_auteur' />"
 		. "<input type='text' name='ordon_pg_m' value='".$ordon_pg_m."' size='8' class='fondl' />"

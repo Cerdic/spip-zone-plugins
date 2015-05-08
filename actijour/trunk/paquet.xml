@@ -1,0 +1,21 @@
+<paquet
+	prefix="actijour"
+	categorie="statistique"
+	version="3.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/activ_jour.gif"
+	documentation="http://contrib.spip.net/Activite-du-jour"
+>	
+
+	<nom>ACTIvité du JOUR</nom>
+	<!-- Activité du jour et de la veille -->
+
+	<auteur mail="scoty@koakidi.com">Scoty</auteur>
+	<auteur mail="ordilibre@yahoo.fr">Ordi Libre</auteur>
+	<auteur>Teddy Payet</auteur>
+
+	<pipeline nom="header_prive" inclure="actijour_pipelines.php" />
+
+	<menu nom="actijour" titre="actijour:activite_du_jour" parent="menu_activite" icone="images/activ_jour-16.png" action="actijour_pg" />
+</paquet>

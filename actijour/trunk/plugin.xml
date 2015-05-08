@@ -25,11 +25,11 @@
 	</pipeline>
 	<bouton id="actijour_pg20" parent="statistiques_visites">
 		<icone>img_pack/activ_jour.gif</icone>
-		<titre>acjr:activite_du_jour</titre>
+		<titre>actijour:activite_du_jour</titre>
 		<url>actijour_pg</url>
 	</bouton>
 	<bouton id="actijour21" parent="bando_reactions">
-		<titre>acjr:activite_du_jour</titre>
+		<titre>actijour:activite_du_jour</titre>
 		<icone>img_pack/activ_jour-16.png</icone>
 		<url>actijour_pg</url>
 	</bouton>

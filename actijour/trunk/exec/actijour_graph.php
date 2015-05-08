@@ -84,11 +84,11 @@ http_no_cache();
 include_spip('inc/commencer_page');
 # + echo sur fonction :
 
-# Ajout pour empêcher un problème d'affichage avec Spip 2.0
+# Ajout pour empï¿½cher un problï¿½me d'affichage avec Spip 2.0
 echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>";
 #####################################
 
- echo init_entete(_T('acjr:graph_article_dpt').$id_article,'');
+ echo init_entete(_T('actijour:graph_article_dpt').$id_article,'');
 
 
 ##
@@ -233,11 +233,11 @@ echo "<div style='margin:5px;'>"; // (marge) ferme en fin de page !
 #### add. actijour 
 #    les dates : periode et edition article
 	$date_deb_fr=date('d/m/Y', $date_debut);
-		echo "<div class='verdana2'>"._T('acjr:popup_date_debut_stats',array('date_deb_fr'=>$date_deb_fr));
+		echo "<div class='verdana2'>"._T('actijour:popup_date_debut_stats',array('date_deb_fr'=>$date_deb_fr));
 		if ($id_article) {
-			echo "...&nbsp;("._T('acjr:popup_date_edit_art',array('date_edit'=>$date_edit));
+			echo "...&nbsp;("._T('actijour:popup_date_edit_art',array('date_edit'=>$date_edit));
 			if ($date_redac>0) { 
-				echo _T('acjr:popup_date_redac_art',array('date_redac'=>$date_redac));
+				echo _T('actijour:popup_date_redac_art',array('date_redac'=>$date_redac));
 			}
 			echo ")";
 		}

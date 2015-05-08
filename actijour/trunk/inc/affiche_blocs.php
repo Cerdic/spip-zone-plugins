@@ -35,42 +35,42 @@ function bloc_stats_generales(
 	$aff='';
 	
 	$aff.= debut_cadre_relief("statistiques-24.gif",true)
-		. "<span class='verdana3 bold'>"._T('acjr:nombre_visites_')."</span>\n"
+		. "<span class='verdana3 bold'>"._T('actijour:nombre_visites_')."</span>\n"
 		. "<br /><span class='verdana2'>".$date_globaljour."</span>"
 		. "<div class='cell_info alter-fond'>"
-		. _T('acjr:global_vis_jour', array('global_jour'=>$global_jour.$prev))
+		. _T('actijour:global_vis_jour', array('global_jour'=>$global_jour.$prev))
 		. "</div>\n"
 		. "<div class='cell_info'>"
-		. _T('acjr:global_vis_global', array('global_stats'=>$global_stats))
+		. _T('actijour:global_vis_global', array('global_stats'=>$global_stats))
 		. "</div>\n";
 	
 	$aff.= "<div style='margin-top:8px;'>\n"
-		. "<span class='verdana3 bold'>"._T('acjr:stats_actives_')."</span>\n"
+		. "<span class='verdana3 bold'>"._T('actijour:stats_actives_')."</span>\n"
 		. "<div class='cell_info'>\n"
-		. _T('acjr:depuis_le_prim_jour', array('prim_jour_stats'=>$prim_jour_stats))."<br />\n"
-		. _T('acjr:soit_nbre_jours', array('nb_jours_stats' => $nb_jours_stats))."<br />\n"
-		. _T('acjr:soit_moyenne_par_jour', array('moy_global_stats' => $moy_global_stats))."\n"
+		. _T('actijour:depuis_le_prim_jour', array('prim_jour_stats'=>$prim_jour_stats))."<br />\n"
+		. _T('actijour:soit_nbre_jours', array('nb_jours_stats' => $nb_jours_stats))."<br />\n"
+		. _T('actijour:soit_moyenne_par_jour', array('moy_global_stats' => $moy_global_stats))."\n"
 		. "</div>\n"
 		. "</div>\n";
 		
 	$aff.= "<div style='margin-top:8px;'>\n"
-		. "<span class='verdana3 bold'>"._T('acjr:pages_article_vues')."</span><br />\n"
+		. "<span class='verdana3 bold'>"._T('actijour:pages_article_vues')."</span><br />\n"
 		. "<div class='cell_info alter-fond'>\n"
-		. _T('acjr:pages_art_cumul_jour', array('cumul_vis_art_jour' => $cumul_vis_art_jour))."<br />\n"
-		. _T('acjr:pages_art_moyenne_jour', array('moy_pages_jour' => $moy_pages_jour))."<br />\n"
+		. _T('actijour:pages_art_cumul_jour', array('cumul_vis_art_jour' => $cumul_vis_art_jour))."<br />\n"
+		. _T('actijour:pages_art_moyenne_jour', array('moy_pages_jour' => $moy_pages_jour))."<br />\n"
 		. "</div>\n";
 	
 	$aff.= "<div class='cell_info'>\n"
-		. _T('acjr:pages_global_cumul_jour', array('global_pages_stats' => $global_pages_stats))."<br />\n"
-		. _T('acjr:pages_global_moyenne_jour', array('moy_pag_vis' => $moy_pag_vis))."<br />\n"
+		. _T('actijour:pages_global_cumul_jour', array('global_pages_stats' => $global_pages_stats))."<br />\n"
+		. _T('actijour:pages_global_moyenne_jour', array('moy_pag_vis' => $moy_pag_vis))."<br />\n"
 		. "</div>\n"
 		. "</div>\n";
 	
 	$aff.= "<div style='margin-top:8px;'>\n"
-		. "<span class='verdana3 bold'>"._T('acjr:grosse_journee_')."</span>\n"
+		. "<span class='verdana3 bold'>"._T('actijour:grosse_journee_')."</span>\n"
 		. "<div class='cell_info'>\n"
 		. http_img_pack('puce-verte-breve.gif','ico','','')."&nbsp;"
-		. _T('acjr:date_jour_maxi_vis', array('date_max' => $date_max, 'visites_max' => $visites_max))
+		. _T('actijour:date_jour_maxi_vis', array('date_max' => $date_max, 'visites_max' => $visites_max))
 		. "</div>\n"
 		. "</div>\n";
 	$aff.= fin_cadre_relief(true);
@@ -100,7 +100,7 @@ function auteurs_visite_jour() {
 	$aff.= debut_cadre_relief("annonce.gif",true);
 	
 	$aff.="<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n"
-		. "<tr><td colspan='2' class='cart_titre verdana3 bold'>"._T('acjr:auteurs_connections')
+		. "<tr><td colspan='2' class='cart_titre verdana3 bold'>"._T('actijour:auteurs_connections')
 		. "</td></tr>";
 	
 	while ($row = sql_fetch($q)) {
@@ -122,7 +122,7 @@ function auteurs_visite_jour() {
     }
     $aff.= "</table>\n\n";
 
-	$aff.= "\n<br /><div class='verdana1'>"._T('acjr:info_dernieres_connections',array('nb_aut'=>$nb_auteurs))."</div>\n";
+	$aff.= "\n<br /><div class='verdana1'>"._T('actijour:info_dernieres_connections',array('nb_aut'=>$nb_auteurs))."</div>\n";
 	
 	$aff.= fin_cadre_relief(true);
 	
@@ -179,7 +179,7 @@ function tous_auteurs_date_passage() {
 	
 	$aff.=debut_onglet();
 	foreach($lst_statut as $statut) {
-		$aff.= onglet(_T('acjr:onglet_connect_'.$statut),
+		$aff.= onglet(_T('actijour:onglet_connect_'.$statut),
 			generer_url_ecrire($script,'st='.($statut=='tous'?'':$statut)),
 			$statut,
 			($p_st==$statut?$statut:''),'');
@@ -192,7 +192,7 @@ function tous_auteurs_date_passage() {
 	$aff.= debut_cadre_relief("annonce.gif",true);
 	
 	$aff.="<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n"
-		. "<tr><td colspan='3' class='verdana3 bold'>"._T('acjr:tous_date_connections')
+		. "<tr><td colspan='3' class='verdana3 bold'>"._T('actijour:tous_date_connections')
 		. "</td></tr>";
     # Tranches
 	$aff.="<tr><td colspan='3' class='verdana3 bold'>";
@@ -246,17 +246,17 @@ function nbr_auteurs_enligne() {
 			);
 	
 	if(sql_count($q)) {
-		$aff.= _T("acjr:auteurs_en_ligne")."<br />\n";
+		$aff.= _T("actijour:auteurs_en_ligne")."<br />\n";
 		While($r=sql_fetch($q)) {
-			if($r['statut'] == '0minirezo') { $stat=_T('acjr:abrv_administrateur'); }
-			elseif ($r['statut']=='1comite') { $stat=_T('acjr:abrv_redacteur'); }
-			elseif ($r['statut']=='6forum') { $stat=_T('acjr:abrv_visiteur'); }
+			if($r['statut'] == '0minirezo') { $stat=_T('actijour:abrv_administrateur'); }
+			elseif ($r['statut']=='1comite') { $stat=_T('actijour:abrv_redacteur'); }
+			elseif ($r['statut']=='6forum') { $stat=_T('actijour:abrv_visiteur'); }
 			$aff.= $r['nb']." $stat<br />\n";
 		}
 	
 	}
 	else {
-		$aff.= _T("acjr:aucun_auteur_en_ligne")."\n";
+		$aff.= _T("actijour:aucun_auteur_en_ligne")."\n";
 	}
 	$aff.= fin_cadre_relief(true);
 	
@@ -295,7 +295,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 	if($date_jour == date('Y-m-d', mktime(0, 0, 0, date("m"), date("d"), date("Y")))) {
 		$aff.= "<div class='bouton_maj'>\n"
 			. "<a href='".generer_url_ecrire("actijour_pg")."'>"
-			. http_img_pack('puce-blanche.gif','ico','',_T('acjr:mise_a_jour'))."</a>\n"
+			. http_img_pack('puce-blanche.gif','ico','',_T('actijour:mise_a_jour'))."</a>\n"
 			. "</div>\n";
 	}
 	
@@ -306,7 +306,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 		$date_maj_art = date('d/m/y',mktime(0,0,0,$tbdate[1],$tbdate[2],$tbdate[0]));
 	}
 	$aff.= "<div class='verdana3'>"
-		. _T('acjr:entete_tableau_art_jour', array(
+		. _T('actijour:entete_tableau_art_jour', array(
 						'nb_art_visites_jour'=>$nb_art_visites_jour, 
 						'aff_date_now'=> ' - '.$date_maj_art))
 		. "</div>\n";
@@ -326,11 +326,11 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 		// tableau
 		$aff.= "<table align='center' border='0' cellpadding='1' cellspacing='1' width='100%'>\n"
 			. "<tr bgcolor='$couleur_foncee' class='head_tbl'>\n"
-			. "<td width='7%'>"._T('acjr:numero_court')."</td>\n"
-			. "<td width='65%'>"._T('acjr:titre_article')."</td>\n"
-			. "<td width=9%>"._T('acjr:visites_jour')."</td>\n"
-			. "<td width=11%>"._T('acjr:total_visites')."</td>\n"
-			. "<td width=8%>"._T('acjr:popularite')."</td>\n"
+			. "<td width='7%'>"._T('actijour:numero_court')."</td>\n"
+			. "<td width='65%'>"._T('actijour:titre_article')."</td>\n"
+			. "<td width=9%>"._T('actijour:visites_jour')."</td>\n"
+			. "<td width=11%>"._T('actijour:total_visites')."</td>\n"
+			. "<td width=8%>"._T('actijour:popularite')."</td>\n"
 			. "</tr>\n";
 
 		// corps du tableau
@@ -368,7 +368,7 @@ function liste_articles_jour($date_jour,$nb_art_visites_jour,$date_maj_art,$prev
 	// aucun articles
 	else {
 		$aff.= "<div align='center' class='iconeoff bold' style='clear:both;'>"
-			. _T('acjr:aucun_article_visite')."</div><br />\n";
+			. _T('actijour:aucun_article_visite')."</div><br />\n";
 	}
 	$aff.= visites_pre_traitement($prev_visites);
 	$aff.= fin_cadre_relief(true);
@@ -426,13 +426,13 @@ function articles_visites_semaine($nbj='8') {
 	#
 	$aff = debut_cadre_relief("cal-semaine.gif",true);
 	# prepa tableau
-	$aff.= "<span class='verdana3 bold'>"._T('acjr:huit_derniers_jours')."</span>\n"
+	$aff.= "<span class='verdana3 bold'>"._T('actijour:huit_derniers_jours')."</span>\n"
 		. "<table width='100%' border='0' cellpadding='1' cellspacing='0'>\n"
 		. "<tr><td><div class='cell_huit_t' style='background-color:$couleur_foncee;'>"
-		. _T('acjr:jour')."</div>\n"
-		. "<div class='cell_huit_m'>"._T('acjr:nombre_art')."</div>\n"
+		. _T('actijour:jour')."</div>\n"
+		. "<div class='cell_huit_m'>"._T('actijour:nombre_art')."</div>\n"
 		. "<div class='cell_huit_p' style='background-color:$couleur_claire;'>"
-		. _T('acjr:visites')."</div>\n</td>";
+		. _T('actijour:visites')."</div>\n</td>";
 	
 	# les colonnes
 	$add=0;
@@ -452,7 +452,7 @@ function articles_visites_semaine($nbj='8') {
 	$aff.= "<td>"
 		. "<div class='cell_huit_t'>&nbsp;</div>"
 		. "<div class='cell_huit_m' style='background-color:$couleur_claire;'>"
-		. _T('acjr:moyenne_c')
+		. _T('actijour:moyenne_c')
 		. "<div class='cell_huit_p' style='background-color:$couleur_claire;'>".$moysem."</div>"
 		. "</td></tr></table>";
 
@@ -472,7 +472,7 @@ function tableau_visites_rubriques($date) {
 	
 	$aff='';
 	$aff.= debut_cadre_relief('rubrique-24.gif',true);
-	$aff.= "<div class='cart_titre_bold verdana3'>"._T('acjr:repartition_visites_secteurs')."</div>";
+	$aff.= "<div class='cart_titre_bold verdana3'>"._T('actijour:repartition_visites_secteurs')."</div>";
 	
 	if($tab_rubart) {
 		// add visites
@@ -538,7 +538,7 @@ function liste_referers_jour($jour) {
 					LIMIT $limit");
 	
 	$aff = debut_cadre_trait_couleur("referers-24.gif",true)
-		. "<div class='cart_titre verdana3 bold'>"._T('acjr:liens_entrants_jour')."</div>"
+		. "<div class='cart_titre verdana3 bold'>"._T('actijour:liens_entrants_jour')."</div>"
 		. aff_referers($q, $limit,'')
 		. "<div style='clear:both;'></div>"
 		. fin_cadre_trait_couleur(true);
@@ -577,11 +577,11 @@ function visites_mensuelles_chiffres($global_jour) {
 		
 	//le tableau a jauges horizontales
 	$aff.= debut_cadre_relief("",true)
-		. "<span class='arial2'>"._T('acjr:entete_tableau_mois',array('nb_mois'=>$nb_mois))."\n</span>"
+		. "<span class='arial2'>"._T('actijour:entete_tableau_mois',array('nb_mois'=>$nb_mois))."\n</span>"
 		. "<table width='100%' cellpadding='2' cellspacing='0' border='0' class='arial2'>\n"
-		. "<tr><td align='left'>"._T('acjr:mois_pipe')
-		. "</td><td width='50%'>"._T('acjr:moyenne_mois')."</td>\n"
-		. "<td><b>"._T('acjr:visites')."</b></td></tr>";
+		. "<tr><td align='left'>"._T('actijour:mois_pipe')
+		. "</td><td width='50%'>"._T('actijour:moyenne_mois')."</td>\n"
+		. "<td><b>"._T('actijour:visites')."</b></td></tr>";
 
 	$ra=sql_select($requete);		
 	while ($row = sql_fetch($ra)) {
@@ -634,7 +634,7 @@ function visites_mensuelles_chiffres($global_jour) {
 		
 	}	
 	$aff.= "<tr><td colspan='3'><span class='verdana1'>"
-		. _T('acjr:pied_tableau_mois')."</span></td></tr>\n"
+		. _T('actijour:pied_tableau_mois')."</span></td></tr>\n"
 		. "</table></span>\n";
 	$aff.= fin_cadre_relief(true);
 	
@@ -663,7 +663,7 @@ function visites_pre_traitement($prev_visites) {
 		$date_f = date('d/m/Y',$temps[0]);
 		
 		$aff.= "<div align='center' class='iconeoff verdana2 bold' style='clear:both;'>\n"
-			. _T('acjr:depuis_date_visites_pg',
+			. _T('actijour:depuis_date_visites_pg',
 					array(
 						'heure'=>$heure_f,
 						'date'=>$date_f==date('d/m/Y')?'':'('.$date_f.')',
@@ -704,7 +704,7 @@ function topten_articles_periode($periode) {
 	
 	$aff.= debut_cadre_relief("article-24.gif",true)
 	. "<table align='center' border='0' cellpadding='2' cellspacing='1' width='100%'>\n"
-	. "<tr><td colspan='5' class='cart_titre_bold verdana3'>"._T('acjr:top_ten_article_'.$periode.'_j')
+	. "<tr><td colspan='5' class='cart_titre_bold verdana3'>"._T('actijour:top_ten_article_'.$periode.'_j')
 	. "</td></tr>";
 	
 	$aff.="<tr class='legend_topten'><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>\n";
@@ -751,7 +751,7 @@ function topten_articles_global() {
 	
 	$aff.= debut_cadre_relief("article-24.gif",true)
 	. "<table align='center' border='0' cellpadding='2' cellspacing='1' width='100%'>\n"
-	. "<tr><td colspan='5' class='cart_titre_bold verdana3'>"._T('acjr:top_ten_article_gen')
+	. "<tr><td colspan='5' class='cart_titre_bold verdana3'>"._T('actijour:top_ten_article_gen')
 	. "</td></tr>";
 	
 	$aff.="<tr class='legend_topten'><td>A</td><td>B</td><td>E</td></tr>";
@@ -791,10 +791,10 @@ function signatures_petitions_jour($date) {
 	$aff = debut_cadre_relief("",true)
 		. "<div class='bouton_droite icone36'>\n"
 		. "<a href='".generer_url_ecrire("controle_petition")."' title='"
-		. _T('acjr:voir_suivi_petitions')."'>\n"
+		. _T('actijour:voir_suivi_petitions')."'>\n"
 		. http_img_pack('suivi-petition-24.gif','ico','','')."</a>\n"
 		. "</div>\n\n"
-		. "<br /><span class='arial2 bold'>"._T('acjr:signatures_petitions')."</span>\n"
+		. "<br /><span class='arial2 bold'>"._T('actijour:signatures_petitions')."</span>\n"
 		. "<div style='clear:both;'></div>\n"
 		. "<ol class='verdana1' style='padding-left:30px;'>\n";
 	
@@ -806,7 +806,7 @@ function signatures_petitions_jour($date) {
 		}
 	}
 	else {
-		$aff.="<li value='0'>"._T('acjr:aucune_moment')."</li>";
+		$aff.="<li value='0'>"._T('actijour:aucune_moment')."</li>";
 	}
 	$aff.="</ol>\n";
 	$aff.= fin_cadre_relief(true);
@@ -848,16 +848,16 @@ function articles_creer_modifer_jour($date_jour,$aff_det=false) {
 		# tableau de page actijour_art
 		
 		$aff.= debut_cadre_relief("",true)
-			. "<div class='cell_huit_p'>"._T('acjr:articles_modifies_crees_jour',array('jour'=>$jour))."</div>";
+			. "<div class='cell_huit_p'>"._T('actijour:articles_modifies_crees_jour',array('jour'=>$jour))."</div>";
 		
 		if($nb_art) {
 			$ifond = 0;
 			
 			$aff.= "<table align='center' border='0' cellpadding='2' cellspacing='0' width='100%'>\n"
 			. "<tr bgcolor='$couleur_foncee' class='head_tbl'>\n"
-			. "<td width='7%'>"._T('acjr:numero_court')."</td>\n"
-			. "<td width='50%'>"._T('acjr:titre_article')."</td>\n"
-			. "<td width=25%>"._T('acjr:date_maj')."</td>\n"
+			. "<td width='7%'>"._T('actijour:numero_court')."</td>\n"
+			. "<td width='50%'>"._T('actijour:titre_article')."</td>\n"
+			. "<td width=25%>"._T('actijour:date_maj')."</td>\n"
 			. "</tr>\n";
 			
 			while($r=sql_fetch($q)) {
@@ -881,15 +881,15 @@ function articles_creer_modifer_jour($date_jour,$aff_det=false) {
 				. "</tr>\n"
 				. "<tr bgcolor='$couleur'><td colspan='3'>"
 				. "<div align='right' class='verdana1'>"
-						._T('acjr:date_publication_dpt').$r['f_date']."<br />"
-						._T('acjr:date_redaction_dpt').$r['f_date_redac']."</div>\n"
+						._T('actijour:date_publication_dpt').$r['f_date']."<br />"
+						._T('actijour:date_redaction_dpt').$r['f_date_redac']."</div>\n"
 				. "</tr>\n"
 				;
   			}
             $aff.="</table>";
 		}
 		else {
-			$aff.=_T('acjr:aucun_article_cree');
+			$aff.=_T('actijour:aucun_article_cree');
 		}
 		$aff.=fin_cadre_relief(true);
  	}
@@ -900,15 +900,15 @@ function articles_creer_modifer_jour($date_jour,$aff_det=false) {
 
 		$aff.= debut_cadre_relief('',true);
 		$aff.= "<div class='bouton_droite icone36'>\n"
-				. "<a href='".$url."' title='"._T('acjr:voir_details')."'>\n"
+				. "<a href='".$url."' title='"._T('actijour:voir_details')."'>\n"
 				. $icone."</a>\n"
 				. "</div>\n";
-		$aff.="<span class='arial2 bold'>"._T('acjr:articles_crees_modifies')."</span><br />";
+		$aff.="<span class='arial2 bold'>"._T('actijour:articles_crees_modifies')."</span><br />";
 		#
 		if($nb_art) {
 			$aff.= http_img_pack(_DIR_IMG_ACJR."mini_art.png",'ico','','')."&nbsp;".$nb_art;
 		}
-		else { $aff.= _T('acjr:aucun'); }
+		else { $aff.= _T('actijour:aucun'); }
 		
 		$aff.="<div class='nettoyeur'></div>";
 		$aff.= fin_cadre_relief(true);
@@ -945,18 +945,18 @@ function activite_forum_site($nbr_post_jour) {
 	$aff= debut_cadre_relief('',true);
 	$aff.= "<div class='bouton_droite icone36'>\n"
 		. "<a href='".$url."' title='"
-		. ($plugin ? _T('acjr:voir_plugin').$plugin : _T('acjr:voir_suivi_forums'))."'>\n"
+		. ($plugin ? _T('actijour:voir_plugin').$plugin : _T('actijour:voir_suivi_forums'))."'>\n"
 		. $icone."</a>\n"
 		. "</div>\n"
-		. "<span class='bold'>"._T('acjr:forums')."</span><br />"
+		. "<span class='bold'>"._T('actijour:forums')."</span><br />"
 		;
 				
 	// nbr posts du jour sur vos forum
 	if($nbr_post_jour) { $aff.= $nbr_post_jour."&nbsp;"; }
-	else { $aff.= _T('acjr:aucun'); }
+	else { $aff.= _T('actijour:aucun'); }
 	
-	if($nbr_post_jour>1) { $aff.= _T('acjr:messages'); }
-	else { $aff.= _T('acjr:message'); }
+	if($nbr_post_jour>1) { $aff.= _T('actijour:messages'); }
+	else { $aff.= _T('actijour:message'); }
 	
 	$aff.="<div class='nettoyeur'></div>";
 	$aff.= fin_cadre_relief(true);
@@ -984,13 +984,13 @@ function telechargement_dw2_jour($date) {
 		
 		$aff.= debut_cadre_relief('',true);
 		$aff.= "<div class='bouton_droite icone36'>\n"
-				. "<a href='".$url."' title='"._T('acjr:voir_plugin').$plugin."'>\n"
+				. "<a href='".$url."' title='"._T('actijour:voir_plugin').$plugin."'>\n"
 				. $icone."</a>\n"
 				. "</div>\n";
-		$aff.="<span class='arial2 bold'>"._T('acjr:telechargements_dpt')."</span><br />";
+		$aff.="<span class='arial2 bold'>"._T('actijour:telechargements_dpt')."</span><br />";
 		#
 		if($r['tot']) { $aff.= $r['tot']; }
-		else { $aff.= _T('acjr:aucun'); }
+		else { $aff.= _T('actijour:aucun'); }
 		
 		$aff.="<div class='nettoyeur'></div>";
 		$aff.= fin_cadre_relief(true);
@@ -1010,13 +1010,13 @@ function formulaire_periode($date_jour,$retour,$prim_an_stats) {
 	$aff=debut_boite_info(true)
 		. "<form action ='".generer_url_ecrire($retour)."' method='post'>"
 		. "<div style='padding:3px;' align='center' ><b>"
-		. _T('acjr:jour_affiche_dpt')."</b><br /><br />"
+		. _T('actijour:jour_affiche_dpt')."</b><br /><br />"
 		
 		. afficher_jour($date[2], "name='jour' size='1' class='fondl' ", true)
 		. afficher_mois($date[1], "name='mois' size='1' class='fondl' ", true)."<br /><br />"
 		. acjr_afficher_annee($date[0], "name='annee' size='1' class='fondl' ",$prim_an_stats)."<br /><br />"
 
-		. "<input type='submit' class='fondo' value='". _T('acjr:text_bouton_afficher')."' />"
+		. "<input type='submit' class='fondo' value='". _T('actijour:text_bouton_afficher')."' />"
 		. "</div>"
 		. "</form>"
 		. fin_boite_info(true);

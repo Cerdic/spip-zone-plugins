@@ -38,12 +38,12 @@ include_spip('inc/affiche_blocs');
 # affichage
 #
 $commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('acjr:titre_actijour'), "suivi", "actijour_pg");
+echo $commencer_page(_T('actijour:titre_actijour'), "suivi", "actijour_pg");
 echo "<a name='haut_page'></a>";
 
 
 
-# Vérifier si Admin principal du site
+# Vï¿½rifier si Admin principal du site
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();

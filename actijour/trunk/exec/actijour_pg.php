@@ -97,12 +97,12 @@ include_spip('inc/affiche_blocs');
 # affichage
 #
 $commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('acjr:titre_actijour'), "suivi", "actijour_pg");
+echo $commencer_page(_T('actijour:titre_actijour'), "suivi", "actijour_pg");
 echo "<a name='haut_page'></a>";
 
 
 
-# Vérifier si Admin principal du site
+# Vï¿½rifier si Admin principal du site
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();
@@ -131,11 +131,11 @@ Elements de stats generales : visites, pages, global, moyenne gen.
 ouvrir popup stats-spip d'un article choisi ( par son num spip )
 \*---------------------------------------------------------------------------*/
 	echo debut_cadre_couleur(_DIR_IMG_ACJR."activ_jour.gif", true);
-	echo "\n<span class='verdana3 bold'>"._T('acjr:afficher_stats_art')."</span>\n"
+	echo "\n<span class='verdana3 bold'>"._T('actijour:afficher_stats_art')."</span>\n"
 	. "<form action='".generer_url_ecrire("actijour_graph")."' method='post' id='graph' onsubmit=\"actijourpop('graph');\">\n"
-	. _T('acjr:numero_')
+	. _T('actijour:numero_')
 	. "<input type='text' name='id_article' size='4' maxlength='10' class='fondl'>&nbsp;&nbsp;\n"
-	. "<input type='submit' value='"._T('acjr:voir')."' class='fondo'>\n"
+	. "<input type='submit' value='"._T('actijour:voir')."' class='fondo'>\n"
 	. "</form>\n";
 	echo fin_cadre_couleur(true);
 
@@ -148,9 +148,9 @@ ouvrir popup du bargraph-spip : visites du trimestre
 		"<a href=\"".generer_url_ecrire("actijour_graph")."\" target=\"graph_article\" 
 		onclick=\"javascript:window.open(this.href, 'graph_article', 
 		'width=530,height=450,menubar=no,scrollbars=yes'); return false;\" 
-		title=\""._T('acjr:bargraph_trimestre_popup')."\">\n".
+		title=\""._T('actijour:bargraph_trimestre_popup')."\">\n".
 		http_img_pack('cal-mois.gif','ico','','')."\n</a>\n</div>\n";
-	echo "<span class='verdana3'>"._T('acjr:graph_trimestre')."</span>";
+	echo "<span class='verdana3'>"._T('actijour:graph_trimestre')."</span>";
 	echo fin_cadre_couleur(true);
 
 
@@ -170,7 +170,7 @@ Modif 05/05/08 .. -> les connectes du jour !
 // Listage des Pages Rubrique
 # plus de reference : arret de spip_visites_temp
 
-// Listage des Pages Brèves
+// Listage des Pages Brï¿½ves
 # plus de reference : arret de spip_visites_temp
 
 
@@ -213,7 +213,7 @@ atteindre page php info
 \*---------------------------------------------------------------------------*/
 	echo "<p class='space_10'></p>";
 	echo debut_boite_info(true);
-		echo "\n<a href='".generer_url_ecrire("info")."'>"._T('acjr:page_phpinfo')."</a>\n";
+		echo "\n<a href='".generer_url_ecrire("info")."'>"._T('actijour:page_phpinfo')."</a>\n";
 	echo fin_boite_info(true);
 
 

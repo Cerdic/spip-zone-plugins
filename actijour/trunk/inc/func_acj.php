@@ -101,12 +101,12 @@ function entete_page() {
 	$aff.= "<div style='float:left; margin-right:5px; min-height:55px;'>" 
 		. "<img src='"._DIR_IMG_ACJR."acjr_48.gif' alt='acjr' />"
 		. "</div>";
-	$aff.= gros_titre(_T('acjr:titre_actijour'),'',false);
+	$aff.= gros_titre(_T('actijour:titre_actijour'),'',false);
 	$aff.= "<div style='clear:both;'></div>"
 		. "<div class='cell_info verdana2'>"
-		. "<img src='"._DIR_IMG_ACJR."icon_php.png' align='absmiddle' title='"._T('acjr:date_serveur_php')."' />\n"
+		. "<img src='"._DIR_IMG_ACJR."icon_php.png' align='absmiddle' title='"._T('actijour:date_serveur_php')."' />\n"
 		. date('d/m/Y H:i')."<br />"
-		. "<img src='"._DIR_IMG_ACJR."icon_mysql.png' align='absmiddle' title='"._T('acjr:date_serveur_mysql')."' />\n"
+		. "<img src='"._DIR_IMG_ACJR."icon_mysql.png' align='absmiddle' title='"._T('actijour:date_serveur_mysql')."' />\n"
 		. $datetime_sql
 		. "</div>"
 		. "<p class='space_10'></p>";
@@ -117,7 +117,7 @@ function entete_page() {
 # bouton retour haut de page
 function bouton_retour_haut() {
 	return $aff= "<div style='float:right; margin-top:6px;' class='icone36' title='"
-				. _T('acjr:haut_page')."'>\n"
+				. _T('actijour:haut_page')."'>\n"
 				. "<a href='#haut_page'>"
 				. "<img src='"._DIR_IMG_PACK."spip_out.gif' border='0' align='absmiddle' />\n"
 				. "</a></div>"
@@ -136,7 +136,7 @@ function onglets_actijour($actif) {
 				);
 	$res='';
 	foreach($pages as $exec => $icone) {
-		$res.= onglet(_T('acjr:onglet_'.$exec),generer_url_ecrire($exec), $exec,($actif==$exec?$exec:''),$icone);
+		$res.= onglet(_T('actijour:onglet_'.$exec),generer_url_ecrire($exec), $exec,($actif==$exec?$exec:''),$icone);
 	}
 	$aff=debut_onglet().$res.fin_onglet()."<p class='space_20'></p>";
 	return $aff;
@@ -146,7 +146,7 @@ function onglets_actijour($actif) {
 function signature_plugin() {
 	$aff="<p class='space_10'></p>"
 		. debut_boite_info(true)
-		. _T('acjr:signature_plugin',array('version'=>$GLOBALS['actijour_plug_version']))."\n"
+		. _T('actijour:signature_plugin',array('version'=>$GLOBALS['actijour_plug_version']))."\n"
 		. fin_boite_info(true);
 	return $aff;
 }
@@ -202,14 +202,14 @@ function affiche_lien_graph($id_article, $titre, $statut, $type='actijour') {
 		onclick=\"javascript:window.open(this.href, 'graph_article', 
 		'width=530,height=450,menubar=no,scrollbars=yes,resizable=yes'); 
 		if(neo.window.focus){neo.window.focus();} return false; \" 
-		title=\""._T('acjr:title_vers_popup_graph')."\">".supprimer_numero(typo($titre))."</a>";
+		title=\""._T('actijour:title_vers_popup_graph')."\">".supprimer_numero(typo($titre))."</a>";
 
 		$graph_std =
 		"<a href ='".generer_url_ecrire("statistiques_visites", "id_article=".$id_article)."' 
-		title='"._T('acjr:title_vers_page_graph')."'>$id_article</a>";
+		title='"._T('actijour:title_vers_page_graph')."'>$id_article</a>";
 	}
 	else if ($etat == '') {
-		$graph_pop = _T('acjr:article_inexistant');
+		$graph_pop = _T('actijour:article_inexistant');
 		$graph_std = $id_article;
 	}
 	else {

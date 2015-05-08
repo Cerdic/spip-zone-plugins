@@ -38,12 +38,12 @@ include_spip("inc/actijour_init");
 # affichage
 #
 $commencer_page = charger_fonction('commencer_page', 'inc');
-echo $commencer_page(_T('acjr:titre_actijour'), "suivi", "actijour_pg");
+echo $commencer_page(_T('actijour:titre_actijour'), "suivi", "actijour_pg");
 echo "<a name='haut_page'></a>";
 
 
 
-# Vérifier si Admin principal du site
+# Vï¿½rifier si Admin principal du site
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
 	echo fin_gauche(), fin_page();
@@ -57,7 +57,7 @@ echo debut_gauche("", true);
 	
 	echo "<p class='space_10'></p>";
 	echo debut_boite_info(true);
-	echo _T('acjr:info_page_actijour_prev');
+	echo _T('actijour:info_page_actijour_prev');
 	echo fin_boite_info(true);
 
 /*---------------------------------------------------------------------------*\
@@ -110,7 +110,7 @@ echo "articles :<br /><pre>"; print_r($temps); echo "</pre>";
 		
 		// nombre de visites 
 		$aff.= "<div align='center' class='iconeoff verdana2 bold' style='clear:both;'>\n"
-			. _T('acjr:depuis_date_visites_prev',
+			. _T('actijour:depuis_date_visites_prev',
 					array(
 					'heure'=>$heure_f,
 					'date'=>$date_f==date('d/m/Y')?'':'('.$date_f.')',
@@ -122,9 +122,9 @@ echo "articles :<br /><pre>"; print_r($temps); echo "</pre>";
 		// tableau
 		$aff.= "<table align='center' border='0' cellpadding='1' cellspacing='1' width='100%'>\n"
 			. "<tr bgcolor='$couleur_foncee' class='head_tbl'>\n"
-			. "<td width='8%'>"._T('acjr:numero_court')."</td>\n"
-			. "<td width='82%'>"._T('acjr:titre_article')."</td>\n"
-			. "<td width=10%>"._T('acjr:visites_jour')."</td>\n"
+			. "<td width='8%'>"._T('actijour:numero_court')."</td>\n"
+			. "<td width='82%'>"._T('actijour:titre_article')."</td>\n"
+			. "<td width=10%>"._T('actijour:visites_jour')."</td>\n"
 			. "</tr>\n";
 		
 		$ifond = 0;
@@ -154,7 +154,7 @@ echo "articles :<br /><pre>"; print_r($temps); echo "</pre>";
 	else {
 		$aff.= "<p class='space_10'></p>"
 			. "<div align='center' class='iconeoff bold verdana3' style='clear:both;'>"
-			. _T('acjr:aucun_article_visite')."</div><br />\n";
+			. _T('actijour:aucun_article_visite')."</div><br />\n";
 	}
 	$aff.= fin_cadre_relief(true);
 	
