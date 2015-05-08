@@ -12,7 +12,7 @@
 /**
  * Gestion du formulaire d'édition de liens
  *
- * @package SPIP\Formulaires
+ * @package SPIP\Core\Formulaires
  **/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -69,8 +69,9 @@ function determine_source_lien_objet($a, $b, $c){
  * @param string $a
  * @param string|int $b
  * @param int|string $c
- * @param array $options
- *   bool $editable
+ * @param array|bool $options
+ *    - Si array, tableau d'options
+ *    - Si bool : valeur de l'option 'editable' uniquement
  *
  * @return array
  */
@@ -170,8 +171,9 @@ function formulaires_editer_liens_charger_dist($a, $b, $c, $options = array()){
  * @param string $a
  * @param string|int $b
  * @param int|string $c
- * @param array $options
- *   bool $editable
+ * @param array|bool $options
+ *    - Si array, tableau d'options
+ *    - Si bool : valeur de l'option 'editable' uniquement
  *
  * @return array
  */
@@ -207,7 +209,7 @@ function formulaires_editer_liens_traiter_dist($a, $b, $c, $options = array()){
 			else {
 				$objet_source = objet_type($table_source);
 				include_spip('action/editer_liens');
-				foreach ($oups as $oup){
+				foreach ($oups as $oup) {
 					if ($objet_lien==$objet_source)
 						objet_associer(array($objet_source => $oup[$objet_source]), array($objet => $oup[$objet]), $oup);
 					else
