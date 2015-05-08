@@ -1,4 +1,4 @@
-<BOUCLE_ticket_contenu(TICKETS){id_ticket}{tout}>
+<BOUCLE_ticket_contenu(TICKETS){id_ticket}{tout}{si #PLUGIN{Z}|et{#CONFIG{tickets/general/desactiver_public,off}|!={on}}|oui}>
 #INCLURE{fond=breadcrumb/ticket,env,ajax}
 [(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
 [(#SET{autoriser_commenter,oui})]]
