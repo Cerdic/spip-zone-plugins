@@ -3027,6 +3027,7 @@ DHTMLGoodies.Chess.prototype = {
 		board.className = 'ChessBoardInner' + this.squareSize;
 		board.style.width = (this.squareSize*8) + 'px';
 		board.style.height = (this.squareSize*8) + 'px';
+		board.style.border = 'none';
 		this.divBoard = board;
 		this.divBoard.onselectstart = function(){ return false; }
 		this.__addEventEl(this.divBoard);
