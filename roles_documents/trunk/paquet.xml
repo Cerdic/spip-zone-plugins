@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles_documents"
 	categorie="edition"
-	version="0.1.4"
+	version="0.1.5"
 	etat="experimental"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/roles_documents-48.png"
@@ -25,5 +25,6 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/roles_documents.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="roles_documents_fonctions.php" />
 	<pipeline nom="document_desc_actions" inclure="roles_documents_pipelines.php" />
+	<pipeline nom="post_edition_lien" inclure="roles_documents_pipelines.php" />
 
 </paquet>

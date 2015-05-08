@@ -4,6 +4,7 @@
 
 - **Déclarations** : Dans les déclarations, il faudrait pouvoir dire qu'un rôle DOIT être unique pour un même contenu, ou inversement qu'un autre rôle peut être multiple et quand on l'assigne à un autre document : ça l'enlève alors du précédent (pour le cas où le rôle doit être unique).
 En conséquence, dans l'interface, il faudrait prendre en compte ces limitations. Par ex. rendre impossible l'attribution d'un même rôle à plusieurs documents (cas des logos).
+À noter : en ajoutant des rôles à un type d'objet, il faut prendre en compte les rôles portant sur tous les objets et qui ont la clé '*', et faire un merge.
 
 - **Interface** : Rendre les rôles attribués plus visibles. Le rôle doit prendre la primeur sur le titre. Quand c'est le logo, ça devrait alors placer l'image dans dans un sous-titre "Logo", comme il y a "illustration" et "portfolio" (qui disparaitront ). Ça donnerait 3 listes de documents : Logo / Documents insérés / Documents joints . Après sélection d'un rôle, recharger tout le bloc des documents.
 
