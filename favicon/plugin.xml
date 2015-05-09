@@ -3,14 +3,14 @@
 <prefix>favicon</prefix>
 <icon>favicon.png</icon>
 
-<version>1.0.1</version>
+<version>1.0.2</version>
 <etat>stable</etat>
 <categorie>multimedia</categorie>
 
 <slogan>Favicon et touch icon du site</slogan>
 <description>
 	Génération automatique, à partir de votre logo de site, de favicon et touch icon pour les différents navigateurs et terminaux.
-	Pour que ce soit esthétiquement réussi, votre logo de site doit être carré, de 150 pixels de côté minimum.
+	Pour que ce soit esthétiquement réussi, votre logo de site doit être carré, de 150 pixels de côté minimum. Sinon, déposer une image nommée « favicon.png » à la racine du dossier « squelettes ».
 </description>
 <auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
 
