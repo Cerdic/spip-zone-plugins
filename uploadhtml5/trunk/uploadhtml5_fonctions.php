@@ -44,6 +44,15 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
     }
 }
 
+/**
+ * Uploader un logo sur un objet en spip 3.0/3.1
+ *
+ * @param mixed $objet
+ * @param mixed $id_objet
+ * @param mixed $fichier
+ * @access public
+ * @return mixed
+ */
 function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
 
     include_spip('action/editer_logo');
