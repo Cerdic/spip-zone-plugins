@@ -114,7 +114,7 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 		$resultats = reperer_items_manquants($module, $utilises, $GLOBALS[$var_langue], $fichiers_langue);
 	}
 	elseif ($GLOBALS[$var_langue]) {
-		$resultats = reperer_items_inutiles($module, $utilises, $GLOBALS[$var_langue]);
+		$resultats = reperer_items_inutiles($utilises, $module, $GLOBALS[$var_langue]);
 	}
 
 	// Compléments de la structure de résultats
@@ -198,7 +198,7 @@ function identifier_type_fichier($fichier) {
  * Memorise selon une structure prédéfinie chaque occurrence d'utilisation d'un item.
  * Cette fonction analyse au passage si l'item est dynamique ou pas (_T avec $ ou concatenation).
  *
- * @param array		$utilises
+ * @param array		$utilisations
  * 		Tableau des occurrences d'utilisation des items de langues construit à chaque appel
  * 		de la fonction.
  * @param array		$occurrence
@@ -223,7 +223,7 @@ function identifier_type_fichier($fichier) {
  * @return array
  * 		Le tableau des occurrences mis à jour avec l'occurrence passée en argument
  */
-function memoriser_occurrence($utilises, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
+function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
 	include_spip('inc/langonet_utils');
 
 	if (!isset($occurrence[3]))
@@ -277,21 +277,22 @@ function memoriser_occurrence($utilises, $occurrence, $fichier, $no_ligne, $lign
 	}
 
 	// TODO : vérifier si avec les traitements précédents extraire_argument est encore nécessaire
-	list($item, ) = extraire_arguments($raccourci_regexp);
-	list($raccourci_unique, ) = calculer_raccourci_unique($raccourci_regexp, $utilises['raccourcis']);
+	list($raccourci, ) = extraire_arguments($raccourci_regexp);
+	list($raccourci_unique, ) = calculer_raccourci_unique($raccourci_regexp, $utilisations['raccourcis']);
 	// TODO : si un raccourci est identique dans deux modules différents on va écraser l'index existant
 
 	$occurrence[] = $ligne;
 
-	$utilises['raccourcis'][$raccourci_unique] = $item;
-	$utilises['modules'][$raccourci_unique] = $module;
-	$utilises['items'][$raccourci_unique] = ($module ? "$module:$item" : $item);
-	$utilises['occurrences'][$raccourci_unique][$fichier][$no_ligne][] = $occurrence;
-	$utilises['suffixes'][$raccourci_unique] = $raccourci_partiellement_variable;
-	$utilises['variables'][$raccourci_unique] = $raccourci_totalement_variable;
-	$utilises['debug'][] = $occurrence;
+	$item = ($module ? "$module:$raccourci_unique" : $raccourci_unique);
+	$utilisations['raccourcis'][$item] = $raccourci;
+	$utilisations['modules'][$item] = $module;
+	$utilisations['items'][$item] = ($module ? "$module:$raccourci" : $raccourci);
+	$utilisations['occurrences'][$item][$fichier][$no_ligne][] = $occurrence;
+	$utilisations['suffixes'][$item] = $raccourci_partiellement_variable;
+	$utilisations['variables'][$item] = $raccourci_totalement_variable;
+	$utilisations['debug'][] = $occurrence;
 
-	return $utilises;
+	return $utilisations;
 }
 
 
@@ -343,11 +344,11 @@ function calculer_commentaire_utilisation($occurrences) {
  * Détection des items de langue obsolètes d'un module.
  * Cette fonction renvoie un tableau composé des items obsolètes et des items potentiellement obsolètes.
  *
+ * @param array		$utilisations
+ * 		Tableau des occurrences d'utilisation d'items de langue dans le code de l'arborescence choisie.
  * @param string	$module
  * 		Nom du module de langue en cours de vérification.
- * @param array		$utilises
- * 		Tableau des occurrences d'utilisation d'items de langue dans le code de l'arborescence choisie.
- * @param array		$items
+ * @param array		$items_module
  * 		Liste des items de langues contenus dans le module de langue en cours de vérification. L'index est
  * 		le raccourci, la valeur la traduction brute.
  *
@@ -356,47 +357,59 @@ function calculer_commentaire_utilisation($occurrences) {
  * 		à deux index :
  *
  * 		- 'occurrences_non' : liste des items obsolètes;
+ * 		- 'occurrences_non_mais' : liste des items a priori obsolètes pour le module vérifié mais utilisés avec un autre module;
  * 		- 'occurrences_peut-etre' : liste des items potentiellement obsolètes (contexte d'utilisation dynamique).
  */
-function reperer_items_inutiles($module, $utilises, $items) {
-	$item_non = $item_peut_etre = array();
-	foreach ($items as $_raccourci => $_traduction) {
-		$item = "$module:$_raccourci";
+function reperer_items_inutiles($utilisations, $module, $items_module) {
+	$item_non = $item_non_mais = $item_peut_etre = array();
+
+	// On boucle sur la liste des items de langue ($items_module) du module en cours de vérification ($module).
+	// On teste chaque item pour trouver une utilisation
+	foreach ($items_module as $_raccourci => $_traduction) {
 		// Il faut absolument tester l'item complet soit module:raccourci car sinon
-		// on pourrait accepter un raccourci identique d'un autre module.
-		// Pour cela la valeur de chaque index du tableau $utilises['items'] est l'item complet.
+		// on pourrait accepter comme ok un raccourci identique utilisé avec un autre module.
+		// Pour cela la valeur de chaque index des sous-tableaux $utilisations est l'item complet
+		// (module:raccourci).
+		$item = "$module:$_raccourci";
 		$index_variable = '';
-		if (!in_array($item, $utilises['items'])) {
+		if (!in_array($item, $utilisations['items'])) {
 			// L'item est soit
-			// - non utilisé avec le module adéquat
-			// - utilisé avec un autre module
-			// - utilise dans un contexte variable
-			foreach($utilises['raccourcis'] as $_cle => $_valeur) {
-				if ($utilises['suffixes'][$_cle]) {
+			// 1- non utilisé avec le module en cours de vérification
+			// 2- non utilisé avec le module en cours de vérification mais utilisé avec un autre module
+			// 3- utilise dans un contexte variable
+
+			// On cherche si l'item est détectable dans un contexte variable
+			foreach($utilisations['raccourcis'] as $_cle => $_valeur) {
+				if ($utilisations['suffixes'][$_cle]) {
 					if (substr($_raccourci, 0, strlen($_valeur)) == $_valeur) {
 						$index_variable = $_cle;
 						break;
 					}
 				}
 			}
+
 			if (!$index_variable) {
-				// On stocke la traduction afin de l'afficher dans les résultats.
-				$item_non[$_raccourci][] = $_traduction;
-				// L'item est vraiment non utilise ou utilise avec un module différent que celui en cours
-				// de vérification ce qui peut révéler une erreur.
-				// Dans ce cas, on ajoute un commentaire sur cette utilisation pour que l'auteur vérifie.
-				if (array_key_exists($_raccourci, $utilises['occurrences'])) {
-					$item_non[$_raccourci][] = calculer_commentaire_utilisation($utilises['occurrences'][$_raccourci]);
+				if ($items_suspects = array_keys($utilisations['raccourcis'], $_raccourci)) {
+					// Cas 2- : l'item est utilise avec un module différent que celui en cours
+					// de vérification ce qui peut révéler une erreur.
+					// On renvoie les occurrences en cause pour affichage complet.
+					$item_non_mais[$_raccourci][] = $_traduction;
+					$item_non_mais[$_raccourci][] = array_intersect_key($utilisations['occurrences'], array_flip($items_suspects));
+				} else {
+					// Cas 1- : on renvoie uniquement la traduction afin de l'afficher dans les résultats.
+					$item_non[$_raccourci][] = $_traduction;
 				}
 			} else {
-				// L'item est utilise dans un contexte variable
-				$item_peut_etre[$_raccourci] = $utilises['occurrences'][$index_variable];
+				// Cas 3- : l'item est utilise dans un contexte variable, on renvoie l'occurrence complète
+				$item_peut_etre[$_raccourci] = $utilisations['occurrences'][$index_variable];
 			}
 		}
 	}
+
 	return array(
-		   'occurrences_non' => $item_non,
-		   'occurrences_peut_etre' => $item_peut_etre,
+			'occurrences_non' => $item_non,
+			'occurrences_non_mais' => $item_non_mais,
+			'occurrences_peut_etre' => $item_peut_etre,
 	       );
 }
 
@@ -433,7 +446,7 @@ function reperer_items_manquants($module, $utilises, $items=array(), $fichiers_l
 	foreach ($utilises['items'] as $_cle => $_valeur) {
 		$module_utilise = $utilises['modules'][$_cle];
 		// Il faut absolument tester l'item complet soit module:raccourci car sinon
-		// on pourrait accepter un raccourci identique d'un autre module.
+		// on pourrait vérifier un raccourci identique d'un autre module.
 		if (!isset($items[$_cle]) OR ($module_utilise != $module)) {
 			if (!$utilises['suffixes'][$_cle]) {
 				if ($module_utilise == $module) {
