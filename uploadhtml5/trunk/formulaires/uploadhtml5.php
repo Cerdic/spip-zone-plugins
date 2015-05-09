@@ -21,7 +21,7 @@ function formulaires_uploadhtml5_saisies_dist($objet, $id_objet) {
 function formulaires_uploadhtml5_traiter_dist($objet, $id_objet) {
 
     // upload de la dropzone
-    uploadhtml5_uploader_document($_FILES, $objet, $id_objet);
+    uploadhtml5_uploader_document($objet, $id_objet, $_FILES);
 
     // Donnée de retour.
     return array(
