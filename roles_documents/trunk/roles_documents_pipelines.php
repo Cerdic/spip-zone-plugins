@@ -58,7 +58,7 @@ function roles_documents_document_desc_actions($flux) {
 
 
 /**
- * Synchroniser le champ "vu" des liens de documents recevant des roles.
+ * Synchroniser le champ "vu" lors de la création d'un nouveau lien de document portant un rôle.
  *
  * @pipeline post_edition_liens
  *
@@ -71,22 +71,60 @@ function roles_documents_post_edition_lien($flux) {
 		$flux['args']['action'] == 'insert'             // il s'agit d'une création de lien
 		and $flux['args']['objet_source'] == 'document' // on a affaire à un document
 		and isset($flux['args']['role'])
-		and $role = $flux['args']['role']               // et il y a un role donné
+		and $role = $flux['args']['role']
+		and strlen($role)                               // et il y a un role donné
 		and isset($flux['args']['colonne_role'])
 		and $colonne_role = $flux['args']['colonne_role']
 		and $id_document = intval($flux['args']['id_objet_source'])
 		and $objet = $flux['args']['objet']
 		and $id_objet = intval($flux['args']['id_objet'])
+		and $vu = sql_getfetsel('vu', 'spip_documents_liens', 'id_document=' .$id_document .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND '.$colonne_role.'=\'\'')
 	){
-	
-		// il y a forcément déjà un lien existant sans rôle
-		// on récupère son vu, et on qualifie le nouveau lien avec
-		if ($vu = sql_getfetsel('vu', 'spip_documents_liens', 'id_document=' .$id_document .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND '.$colonne_role.'=\'\'')) {
-
-			include_spip('action/editer_liens');
-			objet_qualifier_liens(array('document'=>$id_document), array($objet=>$id_objet), array($colonne_role=>$role, 'vu'=>$vu));
-		}
+		include_spip('action/editer_liens');
+		objet_qualifier_liens(array('document'=>$id_document), array($objet=>$id_objet), array($colonne_role=>$role, 'vu'=>$vu));
 	}
+
+	return $flux;
+}
+
+
+/**
+ * Après la modif d'un objet, synchroniser le vu de tous les document liés ayant un rôle avec celui du lien de base (sans rôle)
+ *
+ * @pipeline post_edition
+ *
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function roles_documents_post_edition($flux) {
+
+		if (
+			$flux['args']['action'] == 'modifier'           // on modifie un objet
+			and $flux['args']['table'] !== 'spip_documents' // mais pas un document
+			and $objet = $flux['args']['type']
+			and $id_objet = intval($flux['args']['id_objet'])
+		){
+
+			// on regarde s'il y a des documents liés à l'objet modifié
+			include_spip('inc/editer_liens');
+			if (count($liens = objet_trouver_liens(array('document'=>'*'),array($objet=>$id_objet)))) {
+				foreach ($liens as $l) {
+					// on récupère le champ "vu" du lien sans rôle (= lien de base)
+					$vu = sql_getfetsel(
+						'vu',
+						'spip_documents_liens',
+						'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role = \'\''
+					);
+					var_dump($vu);
+					// on met à jour tous les liens avec rôle
+					sql_updateq(
+						'spip_documents_liens',
+						array('vu'=>$vu),
+						'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role != \'\''
+					);
+				}
+			}
+		}
 
 	return $flux;
 }
