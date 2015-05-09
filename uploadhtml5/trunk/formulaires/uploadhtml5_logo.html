@@ -1,0 +1,49 @@
+<div class="formulaire_spip formulaire_#FORM">
+
+  [<p class="reponse_formulaire reponse_formulaire_erreur">
+    (#ENV*{message_erreur})
+  </p>]
+  [<p class="reponse_formulaire reponse_formulaire_ok">
+    (#ENV*{message_ok})
+  </p>]
+
+  [(#EDITABLE|oui)
+  <form action="#ENV{action}" method="post" class="dropzone" id="dropzonespip_logo">
+    #ACTION_FORMULAIRE{#ENV{action}}
+    <div class="fallback">
+      #GENERER_SAISIES{#ENV{_saisies}}
+    </div>
+  </form>
+
+  <script type="text/javascript">
+     var options = {
+       paramName: 'file_logo',
+       maxFilesize: #CONFIG{uploadhtml5/max_file_size},
+       // Pour les logos, on ne veux qu'un seul fichier
+       maxFiles: 1,
+
+       [(#REM|test_espace_prive|oui)
+           success: function(file, response) {
+             ajaxReload("navigation");
+           },
+       ]
+
+       // Traduire dropzone
+       dictDefaultMessage: "<:uploadhtml5:drop_ici:>",
+       dictFallbackMessage: "<:uploadhtml5:drop_no_support:>",
+       dictFallbackText: "<:uploadhtml5:drop_fallbacktext:>",
+       dictInvalidFileType: "<:uploadhtml5:drop_fichier_invalide:>",
+       dictFileTooBig: "<:uploadhtml5:drop_fichier_trop_gros:>",
+       dictCancelUpload: "<:uploadhtml5:drop_annuler:>",
+       dictCancelUploadConfirmation: "<:uploadhtml5:drop_annuler_confirm:>",
+       dictMaxFilesExceeded: "<:uploadhtml5:drop_max_file:>"
+     };
+
+   // Désactivé la découverte automatique de dropzone
+   Dropzone.autoDiscover = false;
+
+   $("#dropzonespip_logo").dropzone(options);
+
+  </script>
+  ]
+</div>
