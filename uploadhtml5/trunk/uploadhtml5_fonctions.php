@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @access public
  */
 
-function uploadhtml5_uploader_document($files, $objet, $id_objet, $id_document='new') {
+function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='new') {
     // On va créer le tableau des documents.
     $docs = array();
     foreach ($files as $doc) {
