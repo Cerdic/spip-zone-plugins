@@ -15,32 +15,37 @@
  * @return void
  */
 function update_donnees_auteurs() {
-	$sql = sql_select('id_reservation,donnees_auteur', 'spip_reservations', 'id_auteur = 0');
 	
-	    //les champs extras auteur
+	//les champs extras auteur
     include_spip('cextras_pipelines');
-
+	
+	//les remplacements
     if(function_exists('champs_extras_objet')){
-		$search = array();
-		$replace = array ();		
+		$label_nom = array ();		
         $champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
 		
         foreach($champs_extras_auteurs as $value){
-        	$search[] = $value['options']['label'];
-        	$replace[] = $value['options']['nom'];			
+        	$label_nom[$value['options']['label']] = $value['options']['nom'];
         }
 		
     }
-	
+	// Rechercher les reservations avec des champs donnes_auteurs et remplace les index si nécessaire
+	$sql = sql_select('id_reservation,donnees_auteur', 'spip_reservations', 'id_auteur = 0');	
 	while($data = sql_fetch($sql)) {
-		$count = '';
-		if (isset($data['donnees_auteur'])) {
-			$data['donnees_auteur'] = str_replace ($search ,$replace , $data['donnees_auteur'] , $count);
+
+		$donnees_auteur = unserialize($data['donnees_auteur']);
+		$update = FALSE;
+		
+		foreach($label_nom as $label => $nom) {
+			if (isset($donnees_auteur[$label])) {
+				$donnees_auteur[$nom] = $donnees_auteur[$label];
+				unset($donnees_auteur[$label]);
+				$update = TRUE;
+			}
 		}
 		
-		if ($count>0) {
-			spip_log($data,'teste');
-			sql_updateq( 'spip_reservations',array('donnees_auteur' => $data['donnees_auteur']), 'id_reservation='.$data['id_reservation']);
+		if ($update>0) {
+			sql_updateq('spip_reservations',array('donnees_auteur' => serialize($donnees_auteur)), 'id_reservation='.$data['id_reservation']);
 		}
 		
 	}
