@@ -12,6 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+    'label_charger_public' => "Script dans l'espace public",
+    'case_charger_public' => "Charger les scripts sur dans l'espace publique",
 
 	// T
 	'titre_page_configurer_uploadhtml5' => 'Configuration du formulaire d\'upload html5',
