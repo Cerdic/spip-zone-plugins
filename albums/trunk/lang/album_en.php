@@ -10,10 +10,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// B
 	'bouton_associer' => 'Add this album', # ou alors : link associate ?
 	'bouton_dissocier' => 'Remove',
+	'bouton_dissocier_explication' => 'Dissociate album from object',
 	'bouton_editer_texte_album' => 'Edit text',
 	'bouton_supprimer' => 'Delete',
+	'bouton_supprimer_explication' => 'Delete permanently album',
+	'bouton_transvaser' => 'Transfer',
+	'bouton_transvaser_explication' => 'Extract documents from the album and associate them to the object.',
 	'bouton_valider_deplacer_documents' => 'Save changes',
 	'bouton_vider' => 'Empty',
+	'bouton_vider_explication' => 'Empty album from its documents',
 
 	// C
 	'c_albumotheque_filtres' => 'Lateral filters let you active certain criteria
@@ -32,6 +37,8 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'explication_deplacer_documents' => '<strong>Experimental</strong> : it is possible to drag and drop documents between albums.
 		If you are authorized, when hovering a document, the cursor will change to indicate an action is possible.
 		Once the documents have been moved, a form will appear at the bottom of the list to save the changes.',
+	'explication_onglet_ajouter_choisir' => 'Indicate their number separated by commas or click on "browse" to choose them manually.',
+	'explication_onglet_ajouter_creer' => 'Title and description are optionals. You can add documents now or later when the album is created.',
 
 	// F
 	'filtre_extensions' => 'File extensions',
@@ -78,21 +85,24 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'label_modele_meta_dimensions' => 'Dimensions',
 	'label_modele_meta_extension' => 'Extension',
 	'label_modele_meta_taille' => 'Size',
-	'label_modele_metas' => 'File info:', # MODIF
+	'label_modele_metas' => 'Document information',
 	'label_modele_nom_liste' => 'an album (list)',
 	'label_modele_nom_vignettes' => 'an album (thumbnails)',
+	'label_modele_pagination' => 'Pagination',
 	'label_modele_parcourir_albums' => 'Browse albums',
 	'label_modele_placeholder_dimension' => 'Size in pixels, without unity',
+	'label_modele_ratio' => 'Ratio of re-shaped pictures',
+	'label_modele_ratio_placeholder' => '16/9, 2.21:1, 4-3 etc.',
 	'label_modele_recadrer_images' => 'Crop images',
-	'label_modele_titre' => 'Custom title', # MODIF
+	'label_modele_titre' => 'Display title',
 	'label_modele_titre_perso' => 'Custom title',
 	'label_modele_tri_date' => 'Date',
 	'label_modele_tri_id' => 'Document number',
 	'label_modele_tri_media' => 'Document type',
 	'label_modele_tri_titre' => 'Title',
 	'label_modele_trier' => 'Sort by :',
-	'label_onglet_ajouter_choisir' => 'Associate existing albums', # MODIF
-	'label_onglet_ajouter_creer' => 'Create and associate an album', # MODIF
+	'label_onglet_ajouter_choisir' => 'Associate one or several existing albums.',
+	'label_onglet_ajouter_creer' => 'Create and associate a new album.',
 	'label_titre' => 'Title',
 	'label_utiliser_titre_defaut' => 'Title of a new album',
 
@@ -102,13 +112,13 @@ You can create autonomous albums from this page and from the toolbar, or create 
 	'message_album_non_editable' => 'This album cannot be edited : it’s in use by one or several objects that you can’t edit.',
 	'message_avertissement_cfg_documents' => 'Warning! Adding documents to albums is not enabled. This is a necessary option for the albums to work properly.',
 	'message_balise_inseree_succes' => 'The tag was inserted in the text',
-	'message_id_album_ajoute' => 'The album @id_album@ has been added.', # MODIF
+	'message_id_album_ajoute' => 'The album <a href="@url@">N° @id_album@</a> has been added.',
 	'message_nb_albums_ajoutes' => '@nb@ albums have been added.',
-	'message_supprimer' => 'Delete permanently ?', # MODIF
+	'message_supprimer' => 'Delete permanently? This action cannot be reversed.',
 	'message_vider' => 'Remove all the documents ?',
 
 	// O
-	'onglet_ajouter_choisir' => 'Choose album(s)', # MODIF
+	'onglet_ajouter_choisir' => 'Choose album(s)',
 	'onglet_ajouter_creer' => 'New album',
 	'onglet_configurer_options' => 'Options',
 	'onglet_configurer_outils' => 'Tools',

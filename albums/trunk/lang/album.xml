@@ -1,8 +1,9 @@
 <traduction module="album" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/albums/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="107" traduits="90" relire="0" modifs="7" nouveaux="10" pourcent="84.11">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/album?lang_cible=en" total="107" traduits="107" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 		<traducteur nom="SuperYMS" lien="http://trad.spip.net/auteur/superyms" />
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
