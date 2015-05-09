@@ -43,14 +43,18 @@ function uploadhtml5_header_prive($flux) {
 
 function uploadhtml5_formulaire_fond($flux) {
 
+    // Simplification de variable
+    $objet = $flux['args']['contexte']['objet'];
+    $id_objet = $flux['args']['contexte']['id_objet'];
+
     if ($flux['args']['form'] == 'joindre_document') {
 
         // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
         $uploadhtml5 = recuperer_fond(
             'prive/squelettes/inclure/uploadhtml5',
             array(
-                'type' => $flux['args']['contexte']['objet'],
-                'id' => $flux['args']['contexte']['id_objet']
+                'type' => $objet,
+                'id' => $id_objet
             )
         );
 
@@ -59,17 +63,17 @@ function uploadhtml5_formulaire_fond($flux) {
     }
 
     if ($flux['args']['form'] == 'editer_logo') {
-        // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
-        $uploadhtml5 = recuperer_fond(
-            'prive/squelettes/inclure/uploadhtml5_logo',
-            array(
-                'type' => $flux['args']['contexte']['objet'],
-                'id' => $flux['args']['contexte']['id_objet']
-            )
-        );
 
         // Injecter uloadhtml5 au dessus du formulaire joindre_document.
         $flux['data'] = $uploadhtml5.$flux['data'];
+            // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
+            $uploadhtml5 = recuperer_fond(
+                'prive/squelettes/inclure/uploadhtml5_logo',
+                array(
+                    'type' => $objet,
+                    'id' => $id_objet
+                )
+            );
     }
 
     return $flux;
