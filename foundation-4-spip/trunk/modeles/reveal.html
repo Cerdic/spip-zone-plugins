@@ -25,7 +25,7 @@
    [data-reveal-id="reveal-(#ENV{data-id})"]
    [(#ENV{ajax, oui}|oui)data-reveal-ajax="true"]
    [title="(#ENV{titre}|attribut_html)"]>
-  (#ENV{titre})
+  (#ENV*{titre})
 </a>]
 
 <div id="reveal-#ENV{data-id}" class="reveal-modal" data-reveal>
