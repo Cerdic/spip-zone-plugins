@@ -58,12 +58,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// N
 	'note_test_configuration' => 'Un e-mail serà mandat a l’adressa de spedissioun definida (o aquela dóu webmèstre).',
 
+	// P
+	'personnaliser' => 'Persounalisà aquestu reglage',
+
 	// T
 	'tester' => 'Prouvà',
 	'tester_la_configuration' => 'Prouvà la counfiguracioun',
 
 	// U
 	'utiliser_mail' => 'Utilisà la founcioun mail de PHP',
+	'utiliser_reglages_site' => 'Utilisà lu reglage dóu sit SPIP : lou noum afichat serà lou noum dóu sit SPIP et l’adressa e-mail serà aquela dóu webmèstre',
 	'utiliser_smtp' => 'Utilisà SMTP',
 
 	// V
