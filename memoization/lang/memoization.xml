@@ -1,5 +1,6 @@
 <traduction module="memoization" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/memoization/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/memoization?lang_cible=en" total="25" traduits="19" relire="0" modifs="0" nouveaux="6" pourcent="76.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/memoization?lang_cible=en" total="25" traduits="25" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="es" url="http://trad.spip.net/tradlang_module/memoization?lang_cible=es" total="25" traduits="19" relire="0" modifs="0" nouveaux="6" pourcent="76.00">
