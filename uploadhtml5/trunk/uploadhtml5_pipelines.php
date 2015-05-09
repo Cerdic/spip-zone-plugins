@@ -23,6 +23,7 @@ function uploadhtml5_jquery_plugins($scripts) {
 }
 
 function uploadhtml5_insert_head_css($flux) {
+    $config = lire_config('uploadhtml5');
     if (
         (isset($config['charger_public']) and $config['charger_public']) // Si on doit charger dans l'espace publique
         or test_espace_prive() // Ou que l'on est dans l'espace privé
