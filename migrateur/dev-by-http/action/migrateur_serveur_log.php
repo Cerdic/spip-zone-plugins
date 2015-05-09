@@ -39,6 +39,7 @@ function action_migrateur_serveur_log_dist() {
 	}
 
 	if ($arg == 'get_last') {
+		sous_repertoire(_DIR_TMP . '/migrateur/');
 		$file = _DIR_TMP . '/migrateur/serveur.log';
 		if (!file_exists($file)) {
 			file_put_contents($file, "");
