@@ -1,0 +1,42 @@
+<B_lecture_wsdl2>
+<table class="spip echecspv" >
+    <thead>
+       
+    </thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetPVs?saison=#ENV{saison}&ref=#ENV{ref}}>
+    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Ronde}{EquipeBlancRef=#ENV{equipe}}>
+ 
+     <tr>
+<th>Ronde [(#VALEUR{Ronde})]</th>
+<th>[(#VALEUR{PVDate}|affdate)]</th>
+<th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
+<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}</th>
+<th>à #VALEUR{Lieu}</th>
+</tr>
+ 
+<BOUCLE_joueurs(DATA){enum 1,16}>
+
+[(#_donnees2:VALEUR|echec_ligne_tableau{#VALEUR})]
+</BOUCLE_joueurs>
+ 
+    </BOUCLE_donnees2>
+   
+    <BOUCLE_noir(DATA){source table, #VALEUR**}{par Ronde}{EquipeNoirRef=#ENV{equipe}}>
+ 
+     <tr>
+<th>Ronde [(#VALEUR{Ronde})]</th>
+<th>[(#VALEUR{PVDate}|affdate)]</th>
+<th>#VALEUR{Lieu}</th>
+<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}</th>
+<th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
+</tr>
+ 
+<BOUCLE_joueurs_noir(DATA){enum 1,16}>
+[(#_noir:VALEUR|echec_ligne_tableau{#VALEUR})]
+</BOUCLE_joueurs_noir>
+ 
+    </BOUCLE_noir>
+   
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>

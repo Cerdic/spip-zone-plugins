@@ -1,0 +1,26 @@
+<B_lecture_wsdl2>
+<table class="spip">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Catégorie</th>
+            <th>Elo</th>
+        </tr>
+    </thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetJoueurs?Ref=#ENV{Ref}}>
+<B_donnees2>
+    <BOUCLE_donnees2(DATA){source table,#VALEUR}{!par Elo}{pagination #ENV{pagination,40}}>
+    <tr>
+        <td>#VALEUR{Nom}</td>
+        <td>#VALEUR{Prenom}</td>
+        <td>#VALEUR{Cat}</td>
+        <td>#VALEUR{Elo}</td>
+	
+    </tr>	
+    </BOUCLE_donnees2>
+	<div class='pagination'></tr>#PAGINATION{page_precedent_suivant}</div>		
+   </B_donnees2>
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>

@@ -1,0 +1,46 @@
+<paquet
+	prefix="ffedata"
+	categorie="divers"
+	version="0.1.0"
+	etat="dev"
+	compatibilite="[2.1.0;3.1.*]"
+	logo="prive/themes/spip/images/ffedata-64.png"
+	documentation="http://ressources.jack31.org/"
+	schema="1.0.0" 
+>
+	<!--
+		Paquet généré le 2015-05-09 16:04:00
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>Data FFE</nom>
+	<!-- Récupérer les infos du webservice de la FF Echecs -->
+
+	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur>Jacques</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="ffedata_autorisations.php" />
+		<pipeline nom="insert_head" inclure="ffedata_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (à éviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="ffedata" titre="ffedata:ffedata_titre" parent="menu_edition"  icone="images/ffedata-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="ffedata" titre="ffedata:ffedata_titre" parent="configuration" icone="images/ffedata-24.png" />
+	-->
+
+
+
+
+</paquet>

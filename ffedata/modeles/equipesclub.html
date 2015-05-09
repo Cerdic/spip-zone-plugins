@@ -1,0 +1,32 @@
+<B_lecture_wsdl2>
+<table class="spip">
+    <thead>
+        <tr>
+         
+			<th>Nom</th>
+            <th>Groupe</th>
+            <th>Division</th>
+			<th>Compétition</th>
+			<th>Lien site FFE</th>
+			<th>Place</th>
+        </tr>
+    </thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetEquipesDuClub?Saison=#ENV{saison}&Ref=#ENV{Ref}}>
+
+    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par GroupeId}{pagination 30}>
+    <tr>
+      
+		<td>#VALEUR{EquipeNom}</td>
+        <td>#VALEUR{GroupeNom} &nbsp;</td>
+        <td>#VALEUR{DivisionNom}</td>
+		<td>#VALEUR{CompetitionNom}</td>
+		<td><a href="http://echecs.asso.fr/Equipes.aspx?Groupe=#VALEUR{GroupeId}">#VALEUR{GroupeNom}</a></td>
+		<td>#VALEUR{Place}</td>
+    </tr>#PAGINATION	
+    </BOUCLE_donnees2>
+	
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>
+
+<a href="http://www.siteduzero.com">Site du Zéro</a>
