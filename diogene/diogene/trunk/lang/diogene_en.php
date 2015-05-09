@@ -76,13 +76,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type' => 'ID',
 
 	// L
-	'label_cacher_heure' => 'Do not show the time for dates', # MODIF
+	'label_cacher_heure' => 'Do not show the time for dates',
+	'label_cacher_heure_case' => 'Do not show time on dates',
 	'label_cextras_enleves' => 'Extra fields to hide',
 	'label_champs_ajoutes' => 'Fields to add',
 	'label_champs_caches' => 'Fields to hide',
 	'label_change_statut_normal' => 'Change the status of your article',
 	'label_change_statut_normal_site' => 'Change the status of this website',
 	'label_description' => 'Description',
+	'label_explications_logo' => 'Logo explanations',
 	'label_limiter_rubriques' => 'Limit to sections',
 	'label_limiter_secteur' => 'Limit to the root section',
 	'label_logo_site' => 'Website’s logo',
@@ -93,7 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_rubrique_par_defaut' => 'Publish by default in section',
 	'label_statut_auteur' => 'Minimal status of the authors',
 	'label_statut_auteur_publier' => 'Minimal status of the authors who can definetely publish',
-	'label_workflow_simplifie' => 'Simplified management of publication workflow', # MODIF
+	'label_workflow_simplifie' => 'Simplified management of publication workflow',
 	'legende_champs_diogene' => 'Fields of the form',
 	'legende_selecteur_statut' => 'Status',
 	'legende_statuts_diogene' => 'Statuses',
