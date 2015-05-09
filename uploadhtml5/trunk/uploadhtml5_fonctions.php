@@ -75,3 +75,17 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
         return true;
 
 }
+
+/**
+ * Convertir les formats de logo accepté en mime_type
+ *
+ * @access public
+ */
+function mine_type_logos() {
+    global $formats_logos;
+
+    $mine_type_logos = sql_allfetsel('mime_type', 'spip_types_documents', sql_in('extension', $formats_logos));
+    $mine_type_logos = array_column($mine_type_logos, 'mime_type');
+
+    return implode(',', $mine_type_logos);
+}

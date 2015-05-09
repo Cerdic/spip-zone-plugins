@@ -16,6 +16,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="arraycolumn" compatibilite="[1.0.1;]" />
 
 	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
