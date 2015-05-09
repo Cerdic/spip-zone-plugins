@@ -62,6 +62,7 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
 function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
 
     // Autorisation de mettre un logo?
+    include_spip('inc/autoriser');
     if (!autoriser('iconifier',$objet,$id_objet))
         return false;
 
