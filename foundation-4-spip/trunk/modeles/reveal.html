@@ -16,7 +16,11 @@
   <:foundation:erreur_js{squelette=#SQUELETTE}|erreur_squelette:>
 ]
 
-[<a [href="(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})"]
+[(#ENV{href}|oui)
+  [(#SET{href, [(#ENV{href}|parametre_url{var_zajax,#ENV{zajax, content}})]})]
+]
+
+[<a [href="(#GET{href})"]
    [class="(#ENV{class})"]
    [data-reveal-id="reveal-(#ENV{data-id})"]
    [(#ENV{ajax, oui}|oui)data-reveal-ajax="true"]
