@@ -11,7 +11,7 @@
 [(#REM) 2. s'il n'existe pas, chercher une image associee a l'article ;
 On teste "arton" pour respecter l'ordre des priorités ]
 
-<BOUCLE_doc((DOCUMENTS documents_liens)
+<BOUCLE_doc(DOCUMENTS documents_liens)
   {si (#GET{logo}|match{arton}|non)}
   {id_article}
   {extension IN jpg, gif, png}
