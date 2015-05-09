@@ -64,8 +64,9 @@ function uploadhtml5_formulaire_fond($flux) {
 
     if ($flux['args']['form'] == 'editer_logo') {
 
-        // Injecter uloadhtml5 au dessus du formulaire joindre_document.
-        $flux['data'] = $uploadhtml5.$flux['data'];
+        $chercher_logo = charger_fonction('chercher_logo','inc');
+        if (!$chercher_logo($id_objet, id_table_objet($objet))) {
+
             // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
             $uploadhtml5 = recuperer_fond(
                 'prive/squelettes/inclure/uploadhtml5_logo',
@@ -74,6 +75,10 @@ function uploadhtml5_formulaire_fond($flux) {
                     'id' => $id_objet
                 )
             );
+
+            // Injecter uloadhtml5 au dessus du formulaire joindre_document.
+            $flux['data'] = $uploadhtml5.$flux['data'];
+        }
     }
 
     return $flux;
