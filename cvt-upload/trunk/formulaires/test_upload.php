@@ -8,7 +8,7 @@ function formulaires_test_upload_charger(){
 	$contexte = array(
 		'tromperie' => '',
 		'seul' => '',
-		'plusieurs' => array()
+		'plusieurs' => array(),
 	);
 	
 	return $contexte;

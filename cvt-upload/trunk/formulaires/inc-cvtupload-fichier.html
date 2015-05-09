@@ -1,0 +1,6 @@
+<span class="fichier_precedent">
+	<input type="hidden" name="cvtupload_fichiers_precedents[(#ENV{crochets})]" value="#ENV{infos_encodees}" />
+	[(#ENV{extension}|in_array{#LISTE{jpg,png,gif}}|?{#ENV{tmp_name},#ENV{vignette}}|image_reduire{48})]
+	#ENV{name}
+	<button type="submit" class="submit" name="cvtupload_supprimer_fichier[(#ENV{crochets})]">Supprimer</button>
+</span>
