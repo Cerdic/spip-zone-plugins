@@ -1,9 +1,9 @@
 <paquet
 	prefix="moderation"
 	categorie="communication"
-	version="2.0.1"
+	version="2.0.2"
 	etat="test"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/moderation.png"
 	documentation="http://contrib.spip.net/Moderation-Moderee"
 	schema="1.0.0"
