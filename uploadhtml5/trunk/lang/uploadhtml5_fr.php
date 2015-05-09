@@ -33,5 +33,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'drop_fichier_trop_gros' => 'Votre fichier est trop volumineux',
     'drop_annuler' => 'Envoie annulé',
     'drop_annuler_confirm' => 'Annuler cette envoie ?',
-    'drop_max_file' => 'Nombre maximum de fichier atteind'
+    'drop_max_file' => 'Nombre maximum de fichier atteind',
+
+    // Message pour la drop_zone des logo
+    'logo_drop_ici' => 'Déposez votre logo ici ou cliquez sur ce cadre'
 );
