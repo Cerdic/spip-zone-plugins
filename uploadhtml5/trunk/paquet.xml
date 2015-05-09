@@ -1,7 +1,7 @@
 <paquet
 	prefix="uploadhtml5"
 	categorie="multimedia"
-	version="1.2.2"
+	version="1.2.3"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/uploadhtml5-64.png"
