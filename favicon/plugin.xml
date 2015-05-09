@@ -1,0 +1,23 @@
+<plugin>
+<nom>Favicon</nom>
+<prefix>favicon</prefix>
+<icon>favicon.png</icon>
+
+<version>1.0.0</version>
+<etat>stable</etat>
+<categorie>multimedia</categorie>
+
+<slogan>Favicon et touch icon du site</slogan>
+<description>
+	Génération automatique, à partir de votre logo de site, de favicon et touch icon pour les différents navigateurs et terminaux.
+	Pour que ce soit esthétiquement réussi, votre logo de site doit être carré, de 150 pixels de côté minimum.
+</description>
+<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
+
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>favicon_pipelines.php</inclure>
+</pipeline>
+
+<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+</plugin>
