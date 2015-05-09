@@ -115,7 +115,6 @@ function roles_documents_post_edition($flux) {
 						'spip_documents_liens',
 						'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role = \'\''
 					);
-					var_dump($vu);
 					// on met à jour tous les liens avec rôle
 					sql_updateq(
 						'spip_documents_liens',
