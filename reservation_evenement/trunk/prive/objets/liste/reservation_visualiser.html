@@ -34,7 +34,7 @@
 					<:reservation:label_email:>
 				</th>
 				<BOUCLE_champs_extras(DATA){source tableau,#GET{champs_extras}}>
-				<th>[(#VALEUR|chercher_label|extraire_multi)]</th>
+				<th>[(#VALEUR|chercher_label{#GET{extras}}|extraire_multi)]</th>
 				</BOUCLE_champs_extras> 
 				<th>
 					<:reservations_detail:label_quantite:>
@@ -43,7 +43,7 @@
 		</thead>
 		<tbody>
 	<BOUCLE_evt(RESERVATIONS_DETAILS reservations){id_evenement IN #GET{id_evenement}}{statut ?IN #ENV{statut,#ENV{statut2}|explode{-}}}{pagination #ENV{nb,10}}{par #ENV{tri,date}}{inverse #ENV{sens_tri,1}}>
-		#SET{nom,#NOM} #SET{email,#EMAIL**}  #SET{donnees_auteur,#DONNEES_AUTEUR}
+		#SET{nom,#NOM} #SET{email,#EMAIL**}
 		 #SET{valeurs_extras,#ARRAY}
 			<BOUCLE_participants(AUTEURS){id_auteur}{id_auteur!=0}{tout}>
 				#SET{nom,#NOM} #SET{email,#EMAIL**}
@@ -52,10 +52,8 @@
 				</BOUCLE_aut_ext>
 			</BOUCLE_participants>
 				<BOUCLE_aut_ext2(DATA){source tableau, #GET{champs_extras}}>
-				
-				#SET{valeurs_extras,#GET{valeurs_extras}|push{#DONNEES_AUTEUR|table_valeur{#VALEUR}|sinon{#DONNEES_AUTEUR|table_valeur{#VALEUR}}|sinon{#DONNEES_AUTEUR|table_valeur{#VALEUR}|chercher_label{#GET{champs_extras}}|sinon{-}}}
+				#SET{valeurs_extras,#GET{valeurs_extras}|push{#DONNEES_AUTEUR|unserialize|table_valeur{#VALEUR}|sinon{-}}}
 				</BOUCLE_aut_ext2>
-			
 			<//B_participants>
 			<tr>
 				<td>

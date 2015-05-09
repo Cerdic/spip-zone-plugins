@@ -44,7 +44,7 @@ function update_donnees_auteurs() {
 			}
 		}
 		
-		if ($update>0) {
+		if ($update) {
 			sql_updateq('spip_reservations',array('donnees_auteur' => serialize($donnees_auteur)), 'id_reservation='.$data['id_reservation']);
 		}
 		

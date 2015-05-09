@@ -44,21 +44,30 @@ function statuts_complet(){
 	return $statuts;
 }
 
-function chercher_label($label, $champ_extra='') {
-	
-	if(!$champ_extra)	{
+/**
+ * Cherche le label d'un champ extra
+ *
+ * @pipeline affiche_auteurs_interventions
+ * @param  array $flux Données du pipeline
+ * @return array       Données du pipeline
+ */
+function chercher_label($nom, $champs_extras='') {
+	$label = $nom;
+		
+	if(!$champs_extras)	{
 		//les champs extras auteur
 	    include_spip('cextras_pipelines');
 	    
 	    if(function_exists('champs_extras_objet')){
 	        //Charger les définitions pour la création des formulaires
-	        $champ_extra=champs_extras_objet(table_objet_sql('auteur'));
+	        $champs_extras=champs_extras_objet(table_objet_sql('auteur'));
 	    }				
 	}
 
-	foreach($champ_extra as $value) {
-		
-		if(isset($value['options']['nom']) and $value['options']['nom'] == $label)$label=$value['options']['label'];
+	foreach($champs_extras as $value) {
+		if(isset($value['options']['nom']) and $value['options']['nom'] == $nom) {
+			$label=$value['options']['label'];
+		}
 	}
 
 	return $label;
