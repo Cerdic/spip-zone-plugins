@@ -1,5 +1,5 @@
 <plugin>
-	<version>4.0.3</version>
+	<version>4.0.5</version>
 	<nom>Nuage</nom>
 	<slogan>Afficher les mots-cl&#233;s en faisant varier la taille de la police</slogan>
 	<prefix>nuage</prefix>
@@ -26,6 +26,6 @@
 		<inclure>nuage_fonctions.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.99]" />
 	<necessite id="spip_bonux" version="[2.0;]" />
 </plugin>

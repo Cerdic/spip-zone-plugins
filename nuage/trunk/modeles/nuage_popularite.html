@@ -13,8 +13,9 @@
 <BOUCLE_tags(MOTS){id_groupe==^((#ENV{id_groupe,.*}))$} {id_groupe!==^((#ENV{notid,-1}))$} {par num titre,titre}>[
   (#REM) définir les mot exposés
   ]#SET{expose,''}
+  
   <BOUCLE_expose(ARTICLES){id_article}{id_mot}{0,1}>[
-      (#SET{expose,' '})
+      (#SET{expose,' '}) 
   ]</BOUCLE_expose>[
   (#ENV{id_mot}|=={#ID_MOT}|oui)
       #SET{expose,' '}
@@ -24,6 +25,7 @@
 	]</BOUCLE_popularite>[
 
 	(#GET{pop}|>{0}|oui)
+	
 	<li[(#GET{expose}|oui) class="expose"]>
 		<span class="frequence">[(#GET{pop})/#GET{max}]</span>
 		<a rel="tag" href="#URL_MOT" class="nuage[(#GET{pop}|nuage_note{#GET{max},10})] [(#GET{expose}|oui) on]">#TITRE</a>
