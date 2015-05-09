@@ -30,6 +30,8 @@
 
 <div id="reveal-#ENV{data-id}" class="reveal-modal" data-reveal>
   [(#ENV{ajax}|non)
-    #ENV**{content}
+    [(#ENV**{content})
+      <a class="close-reveal-modal">&#215;</a>
+    ]
   ]
 </div>
