@@ -4,3 +4,6 @@
 - pouvoir surcharger par un fichier graphique à la racine du site, carré de 150x150px
 - tcharlss suggère un formulaire d’upload dédié dans l’espace privé
 - erational suggère une page démo dans l’espace privé pour toutes les voir
+
+Voir aussi :
+https://github.com/audreyr/favicon-cheat-sheet
