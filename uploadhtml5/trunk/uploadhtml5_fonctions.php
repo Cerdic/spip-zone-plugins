@@ -45,7 +45,7 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
             $docs,
             $objet, // Article, rubrique, autre objet
             $id_objet,
-            'document'
+            'auto'
         );
     }
 }
