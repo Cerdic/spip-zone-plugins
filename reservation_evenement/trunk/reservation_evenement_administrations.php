@@ -48,8 +48,12 @@ function reservation_evenement_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['1.2.0'] = array( array('maj_tables', array('spip_reservations_details'))); 
 	$maj['1.3.1'] = array( array('maj_tables', array('spip_reservations')));
 	$maj['1.3.3'] = array( array('ecrire_config', 'reservation_evenement', $config)  );	 
-	$maj['1.4.1'] = array(array('maj_tables', array('spip_articles','spip_evenements')));	
-    $maj['1.4.2'] = array(array('sql_alter','TABLE spip_reservations_details CHANGE quantite quantite int(11) NOT NULL DEFAULT 1'));   
+	$maj['1.4.1'] = array(array('maj_tables', array('spip_articles','spip_evenements')));
+	include_spip('inc/reservation_evenement_administrations');
+    $maj['1.4.2'] = array(
+    	array('sql_alter','TABLE spip_reservations_details CHANGE quantite quantite int(11) NOT NULL DEFAULT 1'),
+		array('update_donnees_auteurs')
+		);   
 		
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
