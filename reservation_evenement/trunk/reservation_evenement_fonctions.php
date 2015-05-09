@@ -46,10 +46,11 @@ function statuts_complet(){
 
 /**
  * Cherche le label d'un champ extra
- *
- * @pipeline affiche_auteurs_interventions
- * @param  array $flux Données du pipeline
- * @return array       Données du pipeline
+ * 
+ * @param  string $nom Le nom du champ.
+ * @param  array $champs_extras Les champs extras.
+ * 
+ * @return string Le label.
  */
 function chercher_label($nom, $champs_extras='') {
 	$label = $nom;
@@ -63,7 +64,7 @@ function chercher_label($nom, $champs_extras='') {
 	        $champs_extras=champs_extras_objet(table_objet_sql('auteur'));
 	    }				
 	}
-
+	
 	foreach($champs_extras as $value) {
 		if(isset($value['options']['nom']) and $value['options']['nom'] == $nom) {
 			$label=$value['options']['label'];
