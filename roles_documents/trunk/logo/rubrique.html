@@ -12,7 +12,7 @@
 [(#REM) 2. s'il n'existe pas, chercher une image associee a la rubrique ;
 On teste "rubon" pour respecter l'ordre des priorités ]
 
-<BOUCLE_doc(DOCUMENTS)
+<BOUCLE_doc(DOCUMENTS documents_liens)
   {si (#GET{logo}|match{rubon}|non)}
   {id_rubrique}
   {role=logo}
