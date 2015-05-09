@@ -43,3 +43,34 @@ function statuts_complet(){
 	$statuts=$statuts_complets();
 	return $statuts;
 }
+
+/**
+ * Cherche le label d'un champ extra
+ * 
+ * @param  string $nom Le nom du champ.
+ * @param  array $champs_extras Les champs extras.
+ * 
+ * @return string Le label.
+ */
+function chercher_label($nom, $champs_extras='') {
+	$label = $nom;
+		
+	if(!$champs_extras)	{
+		//les champs extras auteur
+	    include_spip('cextras_pipelines');
+	    
+	    if(function_exists('champs_extras_objet')){
+	        //Charger les définitions pour la création des formulaires
+	        $champs_extras=champs_extras_objet(table_objet_sql('auteur'));
+	    }				
+	}
+	
+	foreach($champs_extras as $value) {
+		if(isset($value['options']['nom']) and $value['options']['nom'] == $nom) {
+			$label=$value['options']['label'];
+		}
+	}
+
+	return $label;
+	
+}

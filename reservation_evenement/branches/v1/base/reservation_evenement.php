@@ -3,10 +3,10 @@
  * Déclarations relatives à la base de données
  *
  * @plugin     Réservation Événements
- * @copyright  2013
+ * @copyright  2013 -
  * @author     Rainer Müller
  * @licence    GNU/GPL
- * @package    SPIP\Reservation_evenement\Pipelines
+ * @package    SPIP\Promotions\Pipelines
  */
 
 if (!defined('_ECRIRE_INC_VERSION'))
@@ -129,7 +129,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
 			"id_reservation" => "bigint(21) NOT NULL DEFAULT '0'",
 			"id_evenement" => "bigint(21) NOT NULL DEFAULT '0'",
 			"descriptif" => "text NOT NULL",
-			"quantite" => "int(11) NOT NULL DEFAULT '0'",
+			"quantite" => "int(11) NOT NULL DEFAULT '1'",
 			"prix_ht" => "float NOT NULL DEFAULT '0'",
 			"prix" => "float NOT NULL DEFAULT '0'",
 			"taxe" => "decimal(4,3) NOT NULL DEFAULT '0.000'",

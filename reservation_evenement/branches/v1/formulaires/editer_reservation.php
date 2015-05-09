@@ -65,6 +65,27 @@ function formulaires_editer_reservation_charger_dist($id_reservation='new', $ret
 		$fonction_reference = charger_fonction('reservation_reference', 'inc/');
 		$valeurs['reference']=$fonction_reference();  	
 	}
+	
+	$valeurs['quantite'] = _request('quantite')?_request('quantite') : 1; 
+    
+    //les champs extras auteur
+    include_spip('cextras_pipelines');
+    
+    if(function_exists('champs_extras_objet')){
+        //Charger les définitions pour la création des formulaires
+
+        $valeurs['champs_extras_auteurs']=champs_extras_objet(table_objet_sql('auteur'));
+        foreach($valeurs['champs_extras_auteurs'] as $key =>$value){
+        	$donnees_auteur = unserialize($valeurs['donnees_auteur']); 
+			
+            $valeurs[$value['options']['nom']]=isset($donnees_auteur[$value['options']['nom']])?$donnees_auteur[$value['options']['nom']]:$donnees_auteur[$value['options']['label']];
+            $valeurs['champs_extras_auteurs'][$key]['options']['label']=extraire_multi($value['options']['label']);    
+
+        }
+    }
+
+	$valeurs['_hidden'].='<input type="hidden" name="quantite" value="'.$valeurs['quantite'].'"/>';  
+		
 	return $valeurs;
 }
 
@@ -93,8 +114,11 @@ function formulaires_editer_reservation_charger_dist($id_reservation='new', $ret
 function formulaires_editer_reservation_verifier_dist($id_reservation='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
 	$email=_request('email');
 	$obligatoire=array('reference');
-	
-	if(!_request('id_auteur') AND (_request('nom') OR $email)) $obligatoire=array_merge($obligatoire,array('nom','email'));
+	$enregistrer_compte = TRUE;
+	if(!_request('id_auteur') AND (_request('nom') OR $email)) {
+	    $obligatoire = Array_merge($obligatoire,array('nom','email'));
+        $enregistrer_compte=FALSE;
+    }
 	else $obligatoire=array_merge($obligatoire,array('id_auteur'));	
 		
 	$erreurs=formulaires_editer_objet_verifier('reservation',$id_reservation,$obligatoire);
@@ -121,6 +145,18 @@ function formulaires_editer_reservation_verifier_dist($id_reservation='new', $re
 		set_request($champ, $normaliser);
 	}
 	else set_request($champ,'0000-00-00 00:00:00');
+    
+    if(!$enregistrer_compte){
+                //les champs extras auteur
+        include_spip('cextras_pipelines');
+        
+        if(function_exists('champs_extras_objet')){
+            include_spip('inc/saisies');
+            //Charger les définitions 
+            $champs_extras_auteurs=champs_extras_objet(table_objet_sql('auteur'));
+            $erreurs = array_merge($erreurs, saisies_verifier($champs_extras_auteurs));
+            }
+    }
 	return $erreurs;
 
 }
