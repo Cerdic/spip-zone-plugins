@@ -22,6 +22,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 
 function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='new') {
+
+    // tester l'autorisation d'ajout de document
+    include_spip('inc/autoriser');
+    if (!autoriser('joindredocument',$objet,$id_objet))
+        return false;
+
     // On va créer le tableau des documents.
     $docs = array();
     foreach ($files as $doc) {
@@ -54,6 +60,10 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
  * @return mixed
  */
 function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
+
+    // Autorisation de mettre un logo?
+    if (!autoriser('iconifier',$objet,$id_objet))
+        return false;
 
     include_spip('action/editer_logo');
     // Version SPIP 3.1 de cette fonction:
