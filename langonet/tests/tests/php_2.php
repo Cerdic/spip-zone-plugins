@@ -18,7 +18,8 @@ function langonet_tester_2() {
 	// VERIFICATION DEFINITION : Avertissements
 	// -- Les items suivants sont utilises dans un contexte complexe. Ce sont des items de Langonet ou pas
 	$message = _T("verification:defini_html_partiel_{$suite6['numero']}", array('param1' => $param1, 'param2' => $param2));
-	$message = _T('langotests:obsolete_4');
+	$message = _T('langotests:obsolete_4'); $message2 = _T('langonet:obsolete_4'); $message3 = _T('langonet:obsolete_4') . ' - ';
+	$message = _T('langonet:obsolete_4');
 
 	// VERIFICATION _L() : Erreurs
 	$essai = _L("TEST 7 _L()");

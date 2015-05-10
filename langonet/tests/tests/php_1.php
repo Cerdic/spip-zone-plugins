@@ -46,5 +46,10 @@ function langonet_tester_1() {
 	$essai = _L  ("TEST 7 _L()");
 	$essai = _L		("Test 7 _L()");
 	$essai = _L("T1234567890123456789012345678901abcdef");
+	$essai = _L('Test _L() avec l\'apostrophe échappée');
+
+	// VERIFICATION UTILISATION : erreur non mais
+	$message = _T('langotests:obsolete_4');
+
 }
 ?>
