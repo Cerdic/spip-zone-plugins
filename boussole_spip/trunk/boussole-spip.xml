@@ -12,7 +12,7 @@
 		<site alias="plugin" src="http://plugins.spip.net/" actif="oui" />
 		<site alias="contrib" src="http://contrib.spip.net/" actif="oui" />
 		<site alias="trad" src="http://trad.spip.net/" actif="oui" />
-		<site alias="core" src="http://core.spip.org/" actif="oui" />
+		<site alias="core" src="http://core.spip.net/" actif="oui" />
 		<site alias="zone" src="http://zone.spip.org/" actif="oui" />
 	</groupe>
 
