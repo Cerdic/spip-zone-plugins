@@ -1,8 +1,8 @@
 <paquet
 	prefix="cvtupload"
 	categorie="outil"
-	version="1.0.0"
-	etat="experimental"
+	version="1.0.1"
+	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 >	
 

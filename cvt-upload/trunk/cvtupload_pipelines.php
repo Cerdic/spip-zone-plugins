@@ -13,7 +13,7 @@ if (!defined('_CVTUPLOAD_AGE_MAX')) {
  * Nombre maximum de fichiers dans le dossier temporaire
  **/
 if (!defined('_CVTUPLOAD_MAX_FILES')) {
-	define('_CVTUPLOAD_MAX_FILES', 2);
+	define('_CVTUPLOAD_MAX_FILES', 200);
 }
 
 function cvtupload_chercher_fichiers($form, $args){
