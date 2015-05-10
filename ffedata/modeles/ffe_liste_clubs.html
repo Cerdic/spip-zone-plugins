@@ -5,16 +5,16 @@
             <th>Nom</th>
             <th>Commune</th>
             <th>Président</th>
-            <th>page club sur site FFE</th>
+            <th>Correspondant</th>
         </tr>
     </thead>
 <BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Clubs.asmx/GetClubs?Ref=#ENV{Ref}}>
     <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Commune}{pagination 30}>
     <tr>
-        <td>#VALEUR{Nom}</td>
+        <td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{NrFFE}"#VALEUR{ClubId}>#VALEUR{Nom}</a></td>
         <td>#VALEUR{Commune}</td>
         <td>[(#VAL{<a href="mailto:[(#VALEUR{PdtEmail})]">[(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}mailcrypt)]</td>
-		<td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{NrFFE}">#VALEUR{ClubId}</a></td>
+		<td>[(#VAL{<a href="mailto:[(#VALEUR{CorrEmail})]">[(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
     </tr>#PAGINATION	
     </BOUCLE_donnees2>
 	

@@ -1,0 +1,10 @@
+Développer les modèles :
+
+ffe_joueurs :
+autres classement que le elo lent ? Blitz ? Rapide ?
+
+ffe_joueur :
+à faire, fiche sur le joueur. Evolution classement(s) ?
+
+ffe_liste_clubs :
+Ajouter le site du club ?
