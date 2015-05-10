@@ -6,6 +6,7 @@
 	<icon>images/logo_xiti.gif</icon>
 	<auteur> [Olivier CARETTE->mailto:webmaster@phpasso.fr] _ [Site Internet->http://www.phpasso.fr]</auteur>
 	<description>Plugin permettant d'inclure une balise #XITI{page} dans un squelette pour voir mettre en place le système de comptabilisation des visites.</description>
+	<lien>http://contrib.spip.net/XiTi-pour-SPIP-2</lien>
 	<necessite id='spip' version='[2.0.9;2.1.99]' />
 	<install>base/xiti_installer.php</install>
 	<bouton id='xiti' parent='configuration'>
