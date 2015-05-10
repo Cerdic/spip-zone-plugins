@@ -9,7 +9,8 @@
 	<nom>CVT Upload</nom>
 	<!-- Fournit des outils pour aider à charger des fichiers proprement depuis un formulaire CVT -->
 
-	<auteur>RastaPopoulos</auteur>
+	<auteur lien="http://rastapopoulos.artizanal.info">RastaPopoulos</auteur>
+	<auteur>Tofulm</auteur>
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
