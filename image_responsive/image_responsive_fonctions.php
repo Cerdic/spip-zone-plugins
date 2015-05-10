@@ -1,6 +1,7 @@
 <?php
 
 function image_responsive_insert_head_css($flux) {
+
 	$flux .= "\n<link rel='stylesheet' type='text/css' media='all' href='".find_in_path("image_responsive.css")."'>\n";
 
 	return $flux;
@@ -128,12 +129,16 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			$v = "";
 			if ($l < $taille_defaut) $taille_defaut = $l;
 		}
-		
-		if ($htactif) {
-			$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $source);
-		}
-		else {
-			$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v";
+
+		if(_IMAGE_RESPONSIVE_CALCULER) {
+			$src = retour_image_responsive($img, $taille_defaut, 1, 0, "file");
+		} else {
+			if ($htactif) {
+				$src = preg_replace(",\.(jpg|png|gif)$,", "-resp$taille_defaut$v.$1", $source);
+			}
+			else {
+				$src = "index.php?action=image_responsive&amp;img=$source&amp;taille=$taille_defaut$v";
+			}
 		}
 		
 		if ($taille_defaut == 0) $src = "rien.gif";
@@ -154,22 +159,27 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 					$t = $tailles[0];
 					if ($t != 0 && $t <= $l) {
 					
-						if ($htactif) {
-							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source)." 1x";
-							$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source)." 2x";
-						}
-						else {
-							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v 1x";
-							$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v&amp;dpr=2 2x";
+						if(_IMAGE_RESPONSIVE_CALCULER) {
+							$srcset[] = retour_image_responsive($source, "$t$v", 1, 0, "file")." 1x";
+							$srcset[] = retour_image_responsive($source, "$t$v", 2, 0, "file")." 2x";
+						} else {
+							if ($htactif) {
+								$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source)." 1x";
+								$srcset[] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source)." 2x";
+							}
+							else {
+								$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v 1x";
+								$srcset[] = "index.php?action=image_responsive&amp;img=$source&amp;taille=$t$v&amp;dpr=2 2x";
+							}
 						}
 					}
 			}
 
 			
 			// Fabriquer des <source> s'il y a plus d'une taille associée à des sizes
-			if (count($tailles) > 1 && $lazy != 1) {
+			if (count($tailles) > 1) {
 				$medias = explode("/", $medias);
-				if (count($tailles) == count($medias)) {
+				if (count($tailles) == count($medias) && $lazy != 1) {
 					$i = 0;
 					foreach($tailles as $t) {
 						$m = trim($medias[$i]);
@@ -185,13 +195,18 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 							
 						}
 
-						if ($htactif) {
-							$set = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp)." 1x";
-							$set .= ",".preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp)." 2x";
-						}
-						else {
-							$set = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v 1x";
-							$set .= ","."index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2 2x";
+						if(_IMAGE_RESPONSIVE_CALCULER) {
+							$set = retour_image_responsive($source_tmp, "$t$v", 1, 0, "file")." 1x";
+							$set .= ",".retour_image_responsive($source_tmp, "$t$v", 2, 0, "file"). "2x";
+						} else {
+							if ($htactif) {
+								$set = preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v.$1", $source_tmp)." 1x";
+								$set .= ",".preg_replace(",\.(jpg|png|gif)$,", "-resp$t$v-2.$1", $source_tmp)." 2x";
+							}
+							else {
+								$set = "index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v 1x";
+								$set .= ","."index.php?action=image_responsive&amp;img=$source_tmp&amp;taille=$t$v&amp;dpr=2 2x";
+							}
 						}
 						
 						if (strlen($m) > 0) {
@@ -205,13 +220,26 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 						
 
 					}
-				
+				} else if(_IMAGE_RESPONSIVE_CALCULER) {
+					// Tailles déterminées, pas de @media
+					// dans le cas où l'on force précalcule
+					foreach($tailles as $t) {
+						if ($t > $l) $t = $l;
+						$autorisees[$t][1] = retour_image_responsive($source, "$t$v", 1, 0, "file");
+						$autorisees[$t][2] = retour_image_responsive($source, "$t$v", 2, 0, "file");
+					}
 				}
 			}
 		}
 
 		// Gérer le srcset
 		if ($sources || $srcset) $classe .= " avec_picturefill";
+		
+		if ($autorisees) {
+			$autorisees = json_encode($autorisees);
+			$img = inserer_attribut($img, "data-autorisees", $autorisees);
+			
+		}
 
 		$img = inserer_attribut($img, "src", $src);
 		

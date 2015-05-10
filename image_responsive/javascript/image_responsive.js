@@ -16,7 +16,6 @@ function charger_url_image_responsive(this_img) {
 		if (forcer_zoom) dim = dim * forcer_zoom;
 		
 		var tailles = this_img.attr("data-tailles");
-					
 		
 		if (tailles) {
 			var w_max = 0;
@@ -35,6 +34,11 @@ function charger_url_image_responsive(this_img) {
 			// console.log ("W: "+dim);
 
 			// console.log ("L: "+l);
+			
+		var autorisees = this_img.attr("data-autorisees");					
+		if (autorisees) {
+			autorisees = $.parseJSON(autorisees.replace(/\\"/g, '"'));		
+		}
 
 
 		// Si l'image est trop petite, c'est pas la peine de demander trop grand…
@@ -48,31 +52,40 @@ function charger_url_image_responsive(this_img) {
 
 			//console.log ("Wapres: "+dim);
 		
+				
 		if (dim == 0) {
 		
 		} else {
 		
-			if(dPR && dPR > 1) {
-				// si l'image d'origine n'est pas nettement plus grande que l'image demandée, 
-				// ne pas passer dPR, sinon on récupère image de même taille mais trop compressée
-				if (vertical && h < 1.5*dim) dPR = false;
-				else if (l < 1.5*dim) dPR = false;
-			} else {
-				dPR = false;
-			}
-			
-			if (htactif) {
-				racine = src.substr(0, src.length-4);
-				terminaison = src.substr(src.length-3, 3);
-				var url_img = racine+"-resp"+dim;
-				if (vertical) url_img = url_img + "v";
-				if (dPR) url_img = url_img + "-"+dPR;
-				url_img = url_img + "."+terminaison;
-			} else {
-				var url_img = "index.php?action=image_responsive&img="+src+"&taille="+dim;
-				if (vertical) url_img = url_img + "v";
-				if (dPR) url_img = url_img + "&dpr="+dPR;
-			}
+		
+		
+				if(dPR && dPR > 1) {
+					// si l'image d'origine n'est pas nettement plus grande que l'image demandée, 
+					// ne pas passer dPR, sinon on récupère image de même taille mais trop compressée
+					if (vertical && h < 1.5*dim) dPR = false;
+					else if (l < 1.5*dim) dPR = false;
+				} else {
+					dPR = false;
+				}
+								
+				if (autorisees && autorisees[dim]) {
+					if (dPR < 1.5) url_img = autorisees[dim][1];
+					else url_img = autorisees[dim][2];
+				}
+				else {				
+					if (htactif) {
+						racine = src.substr(0, src.length-4);
+						terminaison = src.substr(src.length-3, 3);
+						var url_img = racine+"-resp"+dim;
+						if (vertical) url_img = url_img + "v";
+						if (dPR) url_img = url_img + "-"+dPR;
+						url_img = url_img + "."+terminaison;
+					} else {
+						var url_img = "index.php?action=image_responsive&img="+src+"&taille="+dim;
+						if (vertical) url_img = url_img + "v";
+						if (dPR) url_img = url_img + "&dpr="+dPR;
+					}
+				}
 			this_img.attr("src", url_img).height("").width("").removeAttr("data-top");
 		}
 
