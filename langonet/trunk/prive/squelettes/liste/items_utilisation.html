@@ -46,12 +46,13 @@
 					<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
 					<tr class="row_even">
 						<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
+						<td class="colonne">[C(#VALEUR|table_valeur{4}|plus{1})]</td>
 					[(#ENV{pertinence}|=={non_mais}|oui)
 						<td class="module">[(#VALEUR|table_valeur{1})]</td>
 					]
 						<td class="occurrence">
 							[(#VALEUR|table_valeur{0}
-								|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{4}, #GET{fichier}, 8})]
+								|langonet_cadrer_expression{#VALEUR|table_valeur{4}, #VALEUR|table_valeur{5}, #GET{fichier}, 8})]
 						</td>
 					</tr>
 					</BOUCLE_occurrences>

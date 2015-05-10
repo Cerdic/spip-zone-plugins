@@ -152,10 +152,16 @@ function collecter_occurrences($fichiers) {
 				$regexps = $GLOBALS['langonet_regexp'][$type_fichier];
 				foreach ($contenu as $_no_ligne => $_ligne) {
 					foreach ($regexps as $_regexp) {
-						if (preg_match_all($_regexp, $_ligne, $occurrences, PREG_SET_ORDER))
-							foreach ($occurrences as $_occurrence) {
-								$utilises = memoriser_occurrence($utilises, $_occurrence, $_fichier, $_no_ligne, $_ligne, $_regexp);
+						if (preg_match_all($_regexp, $_ligne, $matches, PREG_OFFSET_CAPTURE)) {
+							foreach ($matches[0] as $_cle => $_expression) {
+								$occurrence[0] = $_expression[0];
+								$occurrence[1] = $matches[1][$_cle][0];
+								$occurrence[2] = $matches[2][$_cle][0];
+								$occurrence[3] = isset($matches[3]) ? $matches[3][$_cle][0] : '';
+								$occurrence[4] = $_expression[1];
+								$utilises = memoriser_occurrence($utilises, $occurrence, $_fichier, $_no_ligne, $_ligne, $_regexp);
 							}
+						}
 					}
 				}
 			}
@@ -226,9 +232,7 @@ function identifier_type_fichier($fichier) {
 function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
 	include_spip('inc/langonet_utils');
 
-	if (!isset($occurrence[3]))
-		$occurrence[3] = '';
-	list($expression, $module, $raccourci_regexp, $suite) = $occurrence;
+	list($expression, $module, $raccourci_regexp, $suite, $no_colonne) = $occurrence;
 	$suite = trim($suite);
 
 	$raccourci_partiellement_variable = false;
