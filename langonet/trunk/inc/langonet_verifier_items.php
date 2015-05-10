@@ -321,24 +321,6 @@ function extraire_arguments($raccourci_regexp) {
 	return array($raccourci_regexp, $arguments);
 }
 
-function calculer_commentaire_utilisation($occurrences) {
-	$commentaire = '<span>' . _T('langonet:info_utilises_non_module_nok') . '</span>';
-	if ($occurrences) {
-		$commentaire .= '<ul>';
-		foreach ($occurrences as $_cle => $_valeur) {
-			foreach ($_valeur as $_ligne => $_occurence) {
-				$commentaire .=
-					'<li>' .
-					$_cle .
-					' - L' . $_ligne .
-					' - ' . strtolower(_T('langonet:label_module')) . ' : ' . $_occurence[0][1] .
-					'</li>';
-			}
-		}
-		$commentaire .= '</ul>';
-	}
-	return $commentaire;
-}
 
 /**
  * Détection des items de langue obsolètes d'un module.
@@ -392,9 +374,25 @@ function reperer_items_inutiles($utilisations, $module, $items_module) {
 				if ($items_suspects = array_keys($utilisations['raccourcis'], $_raccourci)) {
 					// Cas 2- : l'item est utilise avec un module différent que celui en cours
 					// de vérification ce qui peut révéler une erreur.
-					// On renvoie les occurrences en cause pour affichage complet.
-					$item_non_mais[$_raccourci][] = $_traduction;
-					$item_non_mais[$_raccourci][] = array_intersect_key($utilisations['occurrences'], array_flip($items_suspects));
+					// On renvoie les occurrences en cause pour affichage complet en reconstruisant le
+					// tableau afin qu'il soit de même format que celui des items peut_etre.
+					$occurrences_suspectes = array_intersect_key($utilisations['occurrences'], array_flip($items_suspects));
+					foreach ($occurrences_suspectes as $_occurrences) {
+						foreach ($_occurrences as $_fichier => $_ligne) {
+							foreach ($_ligne as $_no_ligne => $_occurrence) {
+								if (!isset($item_non_mais[$_raccourci][$_fichier])) {
+									// Première occurrence dans ce fichier
+									$item_non_mais[$_raccourci][$_fichier] = $_ligne;
+								} elseif (!isset($item_non_mais[$_raccourci][$_fichier][$_no_ligne])) {
+									// Cette ligne n'a pas encore d'occurrence
+									$item_non_mais[$_raccourci][$_fichier][$_no_ligne] = $_occurrence;
+								} else {
+									// Cette ligne avait déjà une occurrence
+									$item_non_mais[$_raccourci][$_fichier][$_no_ligne] = array_merge($item_non_mais[$_raccourci][$_fichier][$_no_ligne], $_occurrence);
+								}
+							}
+						}
+					}
 				} else {
 					// Cas 1- : on renvoie uniquement la traduction afin de l'afficher dans les résultats.
 					$item_non[$_raccourci][] = $_traduction;
@@ -405,7 +403,7 @@ function reperer_items_inutiles($utilisations, $module, $items_module) {
 			}
 		}
 	}
-
+$a=1;
 	return array(
 			'occurrences_non' => $item_non,
 			'occurrences_non_mais' => $item_non_mais,

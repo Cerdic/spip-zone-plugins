@@ -1,5 +1,16 @@
 <B_liste_items>
+	<hr>
 	[(#VAL{langonet:info_utilises_}|concat{#ENV{pertinence}}|_T{#ARRAY{module, #ENV{module}}})]
+	[(#ENV{pertinence}|=={non}|oui)
+		[<br /><br />
+		<p>
+			(#ENV*{corrections/explication})
+			[(#BOUTON_ACTION{
+				<:langonet:bouton_corriger:>,
+				#URL_ACTION_AUTEUR{langonet_telecharger, #ENV{corrections/fichier}},
+				'', '', ''})]
+		</p>]
+	]
 <div class="liste-objets items_langue">
 	<table class="spip liste">
 		<caption[ class="(#ENV{pertinence}|=={non}|?{error,notice})"]>
@@ -12,32 +23,32 @@
 		<tbody>
 <BOUCLE_liste_items(DATA) {source table, #ENV{items}}{where?}{par cle}>
 			<tr class="trouve row_odd">
-				<td[ (#ENV{pertinence}|=={peut_etre}|oui)colspan="2"] class="raccourci">
+				<td class="raccourci"[ colspan="(#ENV{colspan})"]>
 					[<strong>(#CLE)</strong>]
 				</td>
-		<BOUCLE_test_pertinence(CONDITION){si #ENV{pertinence}|=={non}|oui}>
+			[(#ENV{pertinence}|=={non}|oui)
 				<td class="traduction">
 					[<span class="guillemet">&#10078;</span>
 						(#VALEUR|table_valeur{0})
 					<span class="guillemet">&#10077;</span>]
-					[<div class="commentaire">(#VALEUR|table_valeur{1})</div>]
 				</td>
-		</BOUCLE_test_pertinence>
-			</tr>
-		</B_test_pertinence>
+			]
 			</tr>
 
 			<BOUCLE_fichiers(DATA) {source table, #VALEUR}{par cle}>
 				#SET{fichier, #CLE}
 				<B_lignes>
 					<tr class="row_even">
-						<td class="fichier" colspan="2">[(#GET{fichier})]</td>
+						<td class="fichier"[ colspan="(#ENV{colspan})"]>[(#GET{fichier})]</td>
 					</tr>
 				<BOUCLE_lignes(DATA) {source table, #VALEUR}{par cle}>
 					#SET{ligne, #CLE}
 					<BOUCLE_occurrences(DATA) {source table, #VALEUR}{par cle}>
 					<tr class="row_even">
 						<td class="ligne">[L(#GET{ligne}|plus{1})]</td>
+					[(#ENV{pertinence}|=={non_mais}|oui)
+						<td class="module">[(#VALEUR|table_valeur{1})]</td>
+					]
 						<td class="occurrence">
 							[(#VALEUR|table_valeur{0}
 								|langonet_cadrer_expression{#CLE, #VALEUR|table_valeur{4}, #GET{fichier}, 8})]
@@ -46,7 +57,6 @@
 					</BOUCLE_occurrences>
 				</BOUCLE_lignes>
 			</BOUCLE_fichiers>
-		<//B_test_pertinence>
 </BOUCLE_liste_items>
 		</tbody>
 	</table>

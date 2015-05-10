@@ -126,12 +126,6 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $ca
 		include_spip('public/parametrer'); // inclure les fichiers fonctions
 		$coloriser = chercher_filtre('coloration_code_color');
 
-		// On encadre l'expression par des points avant et après sauf si on a déjà atteint le bout
-		// -- On détermine au préalable si le filtre de coloration_code va être appliqué ou pas pour éviter dans
-		//    ce cas de mettre les points de suspension typo
-		$suspension = ($coloriser ? '...' : '&#8230;');
-		$affiche = ($debut > 0 ? $suspension : '') . trim($affiche) . ($index_fin < strlen($ligne)-1 ? $suspension : '');
-
 		if ($coloriser) {
 			// Traitement de la coloration de l'extrait.
 			// C'est la fonction de coloration qui s'occupe des entites html
@@ -142,6 +136,13 @@ function langonet_cadrer_expression($expression, $colonne, $ligne, $fichier, $ca
 		else {
 			$affiche = '<code>' . htmlspecialchars($affiche) . '</code>';
 		}
+
+		// On encadre l'expression par des points avant et après sauf si on a déjà atteint le bout
+		// On fait ce traitement après le htmlspecialchars pour éviter que les points de suspension
+		// ne soient traduits en entité html. Par contre la détection du besoin de suspension s'est
+		// faite avant sur la chaine native.
+		$suspension = '&#8230;';
+		$affiche = ($debut > 0 ? $suspension : '') . trim($affiche) . ($index_fin < strlen($ligne)-1 ? $suspension : '');
 	}
 
 	return $affiche;
