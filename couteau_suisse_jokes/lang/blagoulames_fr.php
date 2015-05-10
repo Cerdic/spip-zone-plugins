@@ -34,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'la_meuh_nom' => "La meuh",
 	'la_meuh_description' => "C'est renversant !",
 	
-	
+	// poney bolivien
+	'poney_nom' => 'Poney bolivien',
+	'poney_description' => '',
 );
 ?>
