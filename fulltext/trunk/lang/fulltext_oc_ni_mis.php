@@ -66,7 +66,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'il_faut_myisam' => 'cau MyISAM',
 	'incoherence_charset' => 'Una incouerença tra lou charset dóu vouòstre sit e aqueu dei taula de la vouòstra basa de dounada pòu faussà li recercà embé dei caracter achentuat :',
 	'index_regenere' => 'ìndice de la taula regenerat',
+	'index_reinitialise' => 'Lu doucumen en errour soun estat reinicialisat',
+	'index_reinitialise_ptg' => 'Lu doucumen proutegiat soun toui estat reinicialisat',
+	'index_reinitialise_totalement' => 'Lu doucument soun toui estat reinicialisat',
 	'index_supprime' => 'ìndice suprimat',
+	'indiquer_chemin_bin' => 'Endicà lou camin devers lou binaire que trata l’indessacioun dei',
+	'indiquer_options_bin' => 'Endicà li oupcioun per l’indessacioun dei',
+	'infos' => 'Infourmacioun',
+	'infos_documents_proteges' => 'Trouverès aquì la lista dei doucumen proutegiat e dounca noun-indessat da Fulltext',
+	'infos_fulltext_document' => 'Pourès chausì aquì que tìpou de doucumen soun indessat da Fulltext e counfigurà lu binaire utilisat e li siéu oupcioun.',
 
 	// L
 	'logo' => 'Lògou',
@@ -89,6 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'premier_soit' => 'SÌA',
 
 	// R
+	'reinitialise_index_doc' => 'Reinicialisà l’indessacioun dei doucumen en errour',
 	'reserve_webmestres' => 'Pàgina reservada ai webmèstre',
 
 	// S
@@ -96,6 +105,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'supprimer' => 'Suprimà',
 
 	// T
+	'table_convertie' => 'taula counvertida en MyISAM',
+	'table_format' => 'Aquela taula es au fourmat',
+	'table_non_reconnue' => 'taula noun recounouissuda',
 	'titre_page_fulltext_index' => 'Counfiguracioun des ìndice de recercà',
 
 	// U
