@@ -106,7 +106,6 @@ function roles_documents_post_edition($flux) {
 		include_spip('action/editer_liens');
 		
 		// on regarde s'il y a des documents liés à l'objet modifié
-		include_spip('inc/editer_liens');
 		if (count($liens = objet_trouver_liens(array('document'=>'*'),array($objet=>$id_objet)))) {
 			foreach ($liens as $l) {
 				// on récupère le champ "vu" du lien sans rôle (= lien de base)
