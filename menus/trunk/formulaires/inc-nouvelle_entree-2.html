@@ -16,7 +16,7 @@
 	<li class="editer editer_texte[ (#GET{erreurs}|oui)erreur]">
 		<label for="#CLE">[(#VALEUR|table_valeur{label})] [(#VALEUR|table_valeur{obligatoire}|non)&#91;<:menus:formulaire_facultatif:>&#93;]</label>
 		[<span class='erreur_message'>(#GET{erreurs})</span>]
-		<input type="text" class="text[ (#VALEUR|table_valeur{class})]" name="parametres[#CLE]" value="[(#ENV{parametres}|table_valeur{#CLE}|sinon{#ENV{erreurs}|table_valeur{#CLE}}|entites_html)]" />
+		<input type="text" class="text[ (#VALEUR|table_valeur{class})]" name="parametres[#CLE]" value="[(#ENV{parametres}|table_valeur{#CLE}|sinon{#ENV{donnees}|table_valeur{#CLE}}|entites_html)]" />
 	</li>
 	</BOUCLE_parametres>
 </ul>
@@ -32,7 +32,7 @@
 		<input type="hidden" name="id_menus_entree" value="#ENV{id_menus_entree}" />
 	]
 	<input type="hidden" name="type_entree" value="#GET{type_entree}" />
-	<input type="submit" class="submit link" value="<:bouton_annuler:>" />
+	<input type="submit" class="submit link" name="annuler" value="<:bouton_annuler:>" />
 	<input type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 </p>
 </fieldset>

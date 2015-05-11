@@ -35,6 +35,7 @@ function formulaires_editer_menus_entree_charger($id_menu,$id_menus_entree='new'
 
 	// les valeurs retournées par _verifier
 	$valeurs['entrees'] = '';
+	$valeurs['donnees'] = '';
 	$valeurs['id_menus_entree'] = '';
 	$valeurs['type'] = '';
 	$valeurs['type_entree'] = '';
@@ -84,7 +85,7 @@ function formulaires_editer_menus_entree_verifier($id_menu,$id_menus_entree='new
 		$type_entree = $entree['type_entree'];
 		$parametres = unserialize($entree['parametres']);
 
-		$erreurs = array_merge($erreurs, $parametres);
+		set_request('donnees', $parametres);
 		set_request('id_menus_entree', $id_menus_entree);
 		set_request('type_entree', $type_entree);
 		// On charge les infos du type choisi
@@ -126,6 +127,7 @@ function formulaires_editer_menus_entree_traiter($id_menu,$id_menus_entree='new'
 	if (($id_menu = intval(_request('id_menu_nouvelle_entree')) or $id_menus_entree = intval(_request('id_menus_entree'))) and _request('enregistrer')){
 		$res = formulaires_editer_objet_traiter('menus_entree', $id_menus_entree, 0, 0, '', '', '', '');
 		set_request('id_menu_nouvelle_entree', '');
+		set_request('id_menus_entree', '');
 		if (!$res['id_menus_entree'])
 			$retours['message_erreur'] = _T('menus:erreur_mise_a_jour');
 	}
@@ -255,6 +257,12 @@ function formulaires_editer_menus_entree_traiter($id_menu,$id_menus_entree='new'
 		if ($ok and !$sous_menu) $retours['redirect'] = generer_url_ecrire('menus_tous');
 	}
 
+	// Bouton annuler ---------------------------------------------------------
+	
+	if(_request('annuler')){
+		set_request('id_menus_entree', '');
+	}
+	
 	$retours['editable'] = true;
 
 	return $retours;
