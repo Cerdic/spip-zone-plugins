@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles_documents"
 	categorie="edition"
-	version="0.1.6"
+	version="0.1.7"
 	etat="experimental"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/roles_documents-48.png"

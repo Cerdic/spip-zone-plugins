@@ -97,36 +97,33 @@ function roles_documents_post_edition_lien($flux) {
  * @return array       Données du pipeline
  */
 function roles_documents_post_edition($flux) {
-
-		if (
-			$flux['args']['action'] == 'modifier'           // on modifie un objet
-			and $flux['args']['table'] !== 'spip_documents' // mais pas un document
-			and $objet = $flux['args']['type']
-			and $id_objet = intval($flux['args']['id_objet'])
-		){
-
-			// on regarde s'il y a des documents liés à l'objet modifié
-			include_spip('inc/editer_liens');
-			if (count($liens = objet_trouver_liens(array('document'=>'*'),array($objet=>$id_objet)))) {
-				foreach ($liens as $l) {
-					// on récupère le champ "vu" du lien sans rôle (= lien de base)
-					$vu = sql_getfetsel(
-						'vu',
-						'spip_documents_liens',
-						'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role = \'\''
-					);
-					// on met à jour tous les liens avec rôle
-					sql_updateq(
-						'spip_documents_liens',
-						array('vu'=>$vu),
-						'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role != \'\''
-					);
-				}
+	if (
+		$flux['args']['action'] == 'modifier'           // on modifie un objet
+		and $flux['args']['table'] !== 'spip_documents' // mais pas un document
+		and $objet = $flux['args']['type']
+		and $id_objet = intval($flux['args']['id_objet'])
+	){
+		include_spip('action/editer_liens');
+		
+		// on regarde s'il y a des documents liés à l'objet modifié
+		include_spip('inc/editer_liens');
+		if (count($liens = objet_trouver_liens(array('document'=>'*'),array($objet=>$id_objet)))) {
+			foreach ($liens as $l) {
+				// on récupère le champ "vu" du lien sans rôle (= lien de base)
+				$vu = sql_getfetsel(
+					'vu',
+					'spip_documents_liens',
+					'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role = \'\''
+				);
+				// on met à jour tous les liens avec rôle
+				sql_updateq(
+					'spip_documents_liens',
+					array('vu'=>$vu),
+					'id_document=' .$l['id_document'] .' AND objet='.sql_quote($objet) .' AND id_objet='.$id_objet .' AND role != \'\''
+				);
 			}
 		}
+	}
 
 	return $flux;
 }
-
-
-?>
