@@ -10,17 +10,15 @@ function fulltext_liste_creer_index($arg=null){
 	list($table,$nom) = explode("/",$arg);
 
 	$ok = $erreur = "";
-	if (autoriser('webmestre')){
 
-		$tables = fulltext_liste_des_tables();
-		if ($table AND isset($tables[$table]) AND isset($tables[$table]['index_prop'][$nom])){
-			list($ok,$erreur) = fulltext_creer_index($table,$nom,$tables[$table]['index_prop'][$nom]);
-		}
-		elseif($table=="all"){
-			foreach($tables as $table=>$desc){
-				foreach($desc['index_prop'] as $nom=>$champs){
-					fulltext_creer_index($table,$nom,$champs);
-				}
+	$tables = fulltext_liste_des_tables();
+	if ($table AND isset($tables[$table]) AND isset($tables[$table]['index_prop'][$nom])){
+		list($ok,$erreur) = fulltext_creer_index($table,$nom,$tables[$table]['index_prop'][$nom]);
+	}
+	elseif($table=="all"){
+		foreach($tables as $table=>$desc){
+			foreach($desc['index_prop'] as $nom=>$champs){
+				fulltext_creer_index($table,$nom,$champs);
 			}
 		}
 	}

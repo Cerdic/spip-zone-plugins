@@ -11,8 +11,10 @@ function action_fulltext_creer_index_dist($arg=null){
 		$arg = $securiser_action();
 	}
 
-	include_spip('inc/fulltext_creer_index');
-	fulltext_liste_creer_index($arg);
+	if (autoriser('webmestre')){
+		include_spip('inc/fulltext_creer_index');
+		fulltext_liste_creer_index($arg);
+	}
 	
 	$GLOBALS['redirect'] = _request('redirect');
 	if ($ok) $GLOBALS['redirect'] = parametre_url($GLOBALS['redirect'],"ok",$ok);
