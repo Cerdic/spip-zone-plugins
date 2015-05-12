@@ -1,7 +1,7 @@
 <paquet
 	prefix="fonctions_images"
 	categorie="multimedia"
-	version="0.6.9"
+	version="0.6.10"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/fonctions_images_48.png"

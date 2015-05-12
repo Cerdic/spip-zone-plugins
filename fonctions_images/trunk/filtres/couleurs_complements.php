@@ -1,6 +1,7 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('filtres/images_lib');
 
 /*
  * http://www.paris-beyrouth.org/Une-palette-de-couleurs
