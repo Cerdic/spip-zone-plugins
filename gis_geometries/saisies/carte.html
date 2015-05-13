@@ -249,6 +249,7 @@ var geocoder;]
 		};
 		var drawControl = new L.Control.Draw(drawOptions);
 		form_map.addControl(drawControl);
+		form_map.drawControl = drawControl;
 		form_map.on('draw:created', function(e) {
 			var type = e.layerType,
 				layer = e.layer;
