@@ -141,6 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_modif' => 'Item moudificat :',
 	'items_new' => 'Item nouvèu :',
 	'items_relire' => 'Item da relegì :',
+	'items_total_nb' => 'Noumbre toutal d’item :',
 
 	// J
 	'job_creation_revisions_modules' => 'Creacioun dei revisioun d’ourìgine dóu mòdulou "@module@"',
