@@ -1,0 +1,47 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_projets_site,1,
+	titre,1,
+	type_site,-1,
+	logiciel_nom,1,
+	logiciel_version,1,
+	fo_url,1,
+	points,-1
+}})]
+<B_liste_projets_sites>
+#ANCRE_PAGINATION
+<div class="liste-objets projets_sites">
+<table class='table table-striped table-bordered'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{projets_site:info_1_projets_site,projets_site:info_nb_projets_sites}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='projets' scope='col'><:projet:titre_projets:></th>
+			<th class='titre principale' scope='col'>[(#TRI{titre,<:projets_site:titre_label:>,ajax})]</th>
+            <th class='type_site' scope='col'>[(#TRI{type_site,<:projets_site:type_site_label:>,ajax})]</th>
+            <th class='logiciel_nom' scope='col'>[(#TRI{logiciel_nom,<:projets_site:logiciel_nom_label:>,ajax})]</th>
+            <th class='logiciel_version' scope='col'>[(#TRI{logiciel_version,<:projets_site:logiciel_version_label:>,ajax})]</th>
+            <th class='fo_url' scope='col'>[(#TRI{fo_url,<:projets_site:fo_url_label:>,ajax})]</th>
+            <th class='id' scope='col'>[(#TRI{id_projets_site,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_projets_sites(PROJETS_SITES) {id_projets_site?} {id_projet?} {type_site ?} {logiciel_nom ?} {logiciel_version ?} {fo_url ?} {id_mot?} {where?} {statut?} {recherche?} {tri #ENV{par,type_site},#GET{defaut_tri}}{!par type_site}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class="projets"><BOUCLE_liste_projets (spip_projets_sites_liens) {id_projets_site} {objet='projet'} {par id_objet}{', '}><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#INFO_TITRE{#OBJET,#ID_OBJET})]</a></BOUCLE_liste_projets></td>
+			<td class='titre principale'><a href="[(#ID_PROJETS_SITE|generer_url_entite{projets_site})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PROJETS_SITE">[(#RANG). ]#TITRE</a></td>
+            <td class='type_site'>[(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_abbr'}|_T)]</td>
+            <td class='logiciel_nom'>[(#LOGICIEL_NOM)]</td>
+            <td class='logiciel_version'>[(#LOGICIEL_VERSION)]</td>
+            <td class='fo_url' scope='col'>[<a href="#FO_URL">(#FO_URL)</a>]</td>
+            <td class='id'>[(#AUTORISER{modifier,projets_site,#ID_PROJETS_SITE}|?{
+				<a href="[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton modifier" rel="nofollow" target="_blank" onclick="if \(jQuery.modalbox\) {jQuery.modalbox\('[(#URL_ECRIRE{projets_site_edit,id_projets_site=#ID_PROJETS_SITE}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]'\);return false;}" title="<:info_sites:icone_modifier_projets_site|attribut_html:>">#ID_PROJETS_SITE</a>,
+				#ID_PROJETS_SITE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_projets_sites>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_projets_sites>[
+<div class="liste-objets projets_sites caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_projets_sites>

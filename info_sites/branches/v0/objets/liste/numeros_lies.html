@@ -1,0 +1,23 @@
+#SET{id_numero_exclu, #ENV{coordonnee}|=={numero}|?{#ENV{id_coordonnee}}}
+<B_liste_numeros>
+#ANCRE_PAGINATION
+<div class="liste-objets numeros coordonnees lies">
+    [<h5>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{coordonnees:info_1_email,coordonnees:info_nb_emails}})</h5>]
+    <BOUCLE_liste_numeros (numeros_liens) {id_numero != #GET{id_numero_exclu}} {objet} {id_objet} {pagination #ENV{nb,10}}>
+    <BOUCLE_numero (NUMEROS){id_numero}>
+    <div class="champ contenu_numero">
+        <div class='label visible type'>
+            [(#TYPE|logo_type_numero) ][(#TYPE|coordonnees_lister_types_numeros)]
+        </div>
+        <div class='span numero'>
+            [<div class="#EDIT{numero}">(#NUMERO)</div>]
+        </div>
+    </div>
+    </BOUCLE_numero>
+    </BOUCLE_liste_numeros>
+
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_numeros>[
+<div class="liste-objets coordonnees numeros caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_numeros>

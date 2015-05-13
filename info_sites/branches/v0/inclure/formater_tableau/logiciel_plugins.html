@@ -1,0 +1,24 @@
+[(#SET{plugin_statut_class,[(#ARRAY{dist,info,actif,success,inactif,warning})]})]
+<B_plugins>
+<table class="table spip liste">
+    <caption><strong>[(#TOTAL_BOUCLE|singulier_ou_pluriel{projets_site:info_1_plugin,projets_site:info_nb_plugins})]</caption>
+    <thead>
+        <tr>
+            <th class="principale prefixe"><:projets_site:prefixe_label:></th>
+            <th class="secondaire version"><:projets_site:version_label:></th>
+            <th class="principale titre"><:projets_site:titre_label:></th>
+            <th class="secondaire statut"><:projets_site:statut_label:></th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_plugins (DATA) {source table, (#ENV{array})} {si (#ENV{array}|is_array)} {par valeur}><B_plugin>
+        <tr><BOUCLE_plugin (DATA) {source table, #VALEUR}>
+            <td class="[(#GET{plugin_statut_class}|table_valeur{#VALEUR|trim})]">[(#VALEUR|trim)]</td></BOUCLE_plugin>
+        </tr>
+    </B_plugin>
+    </BOUCLE_plugins>
+    </tbody>
+</table><!-- /.table spip liste -->
+</B_plugins>
+    [(#ENV{array})]
+<//B_plugins>

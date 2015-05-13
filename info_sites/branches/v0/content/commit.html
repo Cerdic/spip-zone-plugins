@@ -1,0 +1,19 @@
+
+<BOUCLE_commit (COMMITS) {id_commit} {tous}>
+[(#BOITE_OUVRIR{[
+
+    <h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h1>
+],simple fiche_objet})]
+
+[(#LOGO_COMMIT|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})
+<div class="clearfix"></div>]
+
+<div id="wysiwyg">
+    <INCLURE{fond=prive/objets/contenu/commit,id=#ID_COMMIT,id_commit=#ID_COMMIT,ajax=wysiwyg} />
+</div>
+<div class="clearfix"></div>
+
+#BOITE_FERMER
+
+</BOUCLE_commit>
+<//B_commit>

@@ -1,0 +1,35 @@
+<section>
+	<header class="cartouche hide">
+		<h1>#NOM_SITE_SPIP</h1>
+	</header>
+
+	[<div class="main">
+		<div id="descriptif_site_spip">(#DESCRIPTIF_SITE_SPIP)</div>
+	</div>]
+
+    [(#REM) les infos de l'auteur authentifié]
+    <h4><:info_sites:auteur_identifie_profil:></h4>
+    <INCLURE{fond=prive/objets/contenu/auteur,id=#SESSION{'id_auteur'},env} />
+
+    <div class="clearfix"></div>
+
+    <BOUCLE_autresobjets (spip_auteurs_liens) {id_auteur=#SESSION{'id_auteur'}} {objet !IN article} {fusion objet} {par objet}>
+        #SET{ids_objet,#ARRAY}
+        <BOUCLE_where (spip_auteurs_liens) {objet} {id_auteur}>
+        [(#SET{ids_objet,[(#GET{ids_objet}|push{#ID_OBJET})]})]
+        </BOUCLE_where>
+        [(#SET{where,[(#OBJET|table_objet)].[(#OBJET|id_table_objet)] IN \([(#GET{ids_objet}|implode{','})]\)})]
+        </B_where>
+        #SET{table,#OBJET|table_objet}
+        [(#SET{titre,[#OBJET:info_(#GET{table})_liees_auteur]})]
+        [(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_auteur}})]
+        <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_auteur,where=#GET{where,''},ajax,env} />
+        <div class="clearfix"></div>
+    </BOUCLE_autresobjets>
+
+[(#PLUGIN{RSS_COMMITS}|oui)
+    [(#SESSION{'email'}|oui)
+    [(#SET{email,[(#SESSION{'email'}|explode{'@'}|table_valeur{0})]})]
+    <INCLURE{fond=prive/objets/liste/commits,titre=<:commit:vos_commits:>,where=commits.auteur LIKE '%#GET{email}%',par=date_creation,sinon=<:commit:aucun_commit_auteur_identifie:>,ajax} />]
+]
+</section>

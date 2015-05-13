@@ -1,0 +1,6 @@
+<ul class="breadcrumb">
+	<li><a href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+	<li><a href="#URL_PAGE{'organisations'}"><:info_sites:menu_organisations:></a></li>
+	<BOUCLE_organisation (ORGANISATIONS) {id_organisation} {tout}>
+	[<li class="active"><span>(#NOM|sinon{<:info_sans_titre:>})</span></li>]</BOUCLE_organisation>
+</ul>

@@ -1,0 +1,11 @@
+[(#AUTORISER{voir,projets_site,#ID_PROJETS_SITE}|sinon_interdire_acces)]
+<BOUCLE_projets_site (PROJETS_SITES){id_projets_site}>
+[(#BOITE_OUVRIR{[
+    <h2>[(#RANG). ](#TITRE|?{#TITRE,<:info_sans_titre:>})</h2>
+],simple fiche_objet})]
+
+[<div class="coloration_code cadre">
+<pre class="xml">(#WEBSERVICE*|url_webservice_xml{#FO_LOGIN, #FO_PASSWORD}|echapper_tags)</pre>
+</div>]
+[(#BOITE_FERMER)]
+</BOUCLE_projets_site>

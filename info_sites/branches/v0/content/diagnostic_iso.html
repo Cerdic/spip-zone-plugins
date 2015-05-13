@@ -1,0 +1,55 @@
+<BOUCLE_principal (PROJETS) {id_projet}>
+[(#BOITE_OUVRIR{[
+
+    <h1>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h1>
+],simple fiche_objet})]
+
+[(#REM)
+    On identifie les éléments qui doivent être formatés en tableau
+]
+[(#SET{formater_tableau,#LISTE{logiciel_plugins,auteurs_admin,auteurs_webmestres}})]
+
+[(#REM)
+    On instancie le tableau avec les valeurs de la première colonne
+]
+[(#SET{tableau,#LISTE{#ARRAY{id_projets_site,<:projets_site:id_projets_site_label:>, titre,<:projets_site:titre_label:>, descriptif,<:projets_site:descriptif_label:>, type_site,<:projets_site:type_site_label:>, uniqid,<:projets_site:uniqid_label:>, webservice,<:projets_site:webservice_label:>, logiciel_nom,<:projets_site:logiciel_nom_label:>, logiciel_version,<:projets_site:logiciel_version_label:>, logiciel_revision,<:projets_site:logiciel_revision_label:>, logiciel_plugins,<:projets_site:logiciel_plugins_label:>, auteurs_admin,<:projets_site:auteurs_admin_label:>, auteurs_webmestres,<:projets_site:auteurs_webmestres_label:>, fo_url,<:projets_site:fo_url_label:>, fo_login,<:projets_site:fo_login_label:>, fo_password,<:projets_site:fo_password_label:>, bo_url,<:projets_site:bo_url_label:>, bo_login,<:projets_site:bo_login_label:>, bo_password,<:projets_site:bo_password_label:>, serveur_nom,<:projets_site:serveur_nom_label:>, serveur_port,<:projets_site:serveur_port_label:>, serveur_path,<:projets_site:serveur_path_label:>, serveur_logiciel,<:projets_site:serveur_logiciel_label:>, serveur_surveillance,<:projets_site:serveur_surveillance_label:>, versioning_path,<:projets_site:versioning_path_label:>, versioning_trac,<:projets_site:versioning_trac_label:>, versioning_type,<:projets_site:versioning_type_label:>, sas_serveur,<:projets_site:sas_serveur_label:>, sas_protocole,<:projets_site:sas_protocole_label:>, sas_login,<:projets_site:sas_login_label:>, sas_password,<:projets_site:sas_password_label:>, sgbd_type,<:projets_site:sgbd_type_label:>, sgbd_version,<:projets_site:sgbd_version_label:>, sgbd_serveur,<:projets_site:sgbd_serveur_label:>, sgbd_port,<:projets_site:sgbd_port_label:>, sgbd_nom,<:projets_site:sgbd_nom_label:>, sgbd_prefixe,<:projets_site:sgbd_prefixe_label:>, sgbd_login,<:projets_site:sgbd_login_label:>, sgbd_password,<:projets_site:sgbd_password_label:>, apache_modules,<:projets_site:apache_modules_label:>, php_version,<:projets_site:php_version_label:>, php_memory,<:projets_site:php_memory_label:>, php_extensions,<:projets_site:php_extensions_label:>, sso,<:projets_site:sso_label:>, perimetre_acces,<:projets_site:perimetre_acces_label:>, statistiques,<:projets_site:statistiques_label:>, moteur_recherche,<:projets_site:moteur_recherche_label:>, autres_outils,<:projets_site:autres_outils_label:>, remarques,<:projets_site:remarques_label:>, date_creation,<:projets_site:date_creation_label:>, maj,<:projets_site:maj_label:>}}})]
+
+[(#REM)
+    On alimente le tableau maintenant avec les valeurs de chaque site lié au projet.
+]
+<BOUCLE_site (PROJETS_SITES) {id_projet} {!par type_site}>
+[(#SET{tableau,[(#GET{tableau}|push{[(#ARRAY{id_projets_site,[(#ID_PROJETS_SITE|sinon{-})],titre,[(#TITRE|sinon{-})],descriptif,[(#DESCRIPTIF|sinon{-})],type_site,[(#TYPE_SITE|sinon{-})],uniqid,[(#UNIQID|sinon{-})],webservice,[(#WEBSERVICE|sinon{-})],logiciel_nom,[(#LOGICIEL_NOM|sinon{-})],logiciel_version,[(#LOGICIEL_VERSION|sinon{-})],logiciel_revision,[(#LOGICIEL_REVISION|sinon{-})],logiciel_plugins,[(#LOGICIEL_PLUGINS**|formater_tableau|sinon{-})],auteurs_admin,[(#AUTEURS_ADMIN**|formater_tableau|sinon{-})],auteurs_webmestres,[(#AUTEURS_WEBMESTRES**|formater_tableau|sinon{-})],fo_url,[(#FO_URL|sinon{-})],fo_login,[(#FO_LOGIN|sinon{-})],fo_password,[(#FO_PASSWORD|sinon{-})],bo_url,[(#BO_URL|sinon{-})],bo_login,[(#BO_LOGIN|sinon{-})],bo_password,[(#BO_PASSWORD|sinon{-})],serveur_nom,[(#SERVEUR_NOM|sinon{-})],serveur_port,[(#SERVEUR_PORT|sinon{-})],serveur_path,[(#SERVEUR_PATH|sinon{-})],serveur_logiciel,[(#SERVEUR_LOGICIEL|sinon{-})],serveur_surveillance,[(#SERVEUR_SURVEILLANCE|sinon{-})],versioning_path,[(#VERSIONING_PATH|sinon{-})],versioning_trac,[(#VERSIONING_TRAC|sinon{-})],versioning_type,[(#VERSIONING_TYPE|sinon{-})],sas_serveur,[(#SAS_SERVEUR|sinon{-})],sas_protocole,[(#SAS_PROTOCOLE|sinon{-})],sas_login,[(#SAS_LOGIN|sinon{-})],sas_password,[(#SAS_PASSWORD|sinon{-})],sgbd_type,[(#SGBD_TYPE|sinon{-})],sgbd_version,[(#SGBD_VERSION|sinon{-})],sgbd_serveur,[(#SGBD_SERVEUR|sinon{-})],sgbd_port,[(#SGBD_PORT|sinon{-})],sgbd_nom,[(#SGBD_NOM|sinon{-})],sgbd_prefixe,[(#SGBD_PREFIXE|sinon{-})],sgbd_login,[(#SGBD_LOGIN|sinon{-})],sgbd_password,[(#SGBD_PASSWORD|sinon{-})],apache_modules,[(#APACHE_MODULES|sinon{-})],php_version,[(#PHP_VERSION|sinon{-})],php_memory,[(#PHP_MEMORY|sinon{-})],php_extensions,[(#PHP_EXTENSIONS|sinon{-})],sso,[(#SSO|sinon{-})],perimetre_acces,[(#PERIMETRE_ACCES|sinon{-})],statistiques,[(#STATISTIQUES|sinon{-})],moteur_recherche,[(#MOTEUR_RECHERCHE|sinon{-})],autres_outils,[(#AUTRES_OUTILS|sinon{-})],remarques,[(#REMARQUES|sinon{-})],date_creation,[(#DATE_CREATION|sinon{-})],maj,[(#MAJ|sinon{-})]})]})]})]
+</BOUCLE_site>
+[(#REM)
+    On regarde maintenant combien d'éléments comporte notre tableau.
+    On aura ainsi l'index de notre <table>.
+]
+[(#SET{compteur,[(#GET{tableau}|count|moins{1})]})]
+<B_tableau>
+<table class="table table-striped">
+[(#REM)
+    Cette boucle DATA liste les champs qu'on désire afficher.
+    Ces champs correspondent à l'index à appeler de chaque array de #GET{tableau}
+]
+    <BOUCLE_tableau (DATA) {liste id_projets_site, titre, descriptif, type_site, uniqid, webservice, logiciel_nom, logiciel_version, logiciel_revision, logiciel_plugins, auteurs_admin, auteurs_webmestres, fo_url, fo_login, fo_password, bo_url, bo_login, bo_password, serveur_nom, serveur_port, serveur_path, serveur_logiciel, serveur_surveillance, versioning_path, versioning_trac, versioning_type, sas_serveur, sas_protocole, sas_login, sas_password, sgbd_type, sgbd_version, sgbd_serveur, sgbd_port, sgbd_nom, sgbd_prefixe, sgbd_login, sgbd_password, apache_modules, php_version, php_memory, php_extensions, sso, perimetre_acces, statistiques, moteur_recherche, autres_outils, remarques, date_creation, maj}>
+    <tr class="#VALEUR data">
+        <BOUCLE_cellule (DATA) {enum 0,#GET{compteur}}>
+        <td>
+        [(#VALEUR|=={0}|oui)<strong>]
+        [(#REM)
+            Si on est sur logiciel_plugins et auteurs_*, on reformate le code.
+            Sinon, on affiche la valeur
+        ][(#VAL{#_tableau:VALEUR}|in_array{#GET{formater_tableau}}|oui)
+            [(#INCLURE{fond=inclure/formater_tableau/#_tableau:VALEUR, array=[(#GET{tableau/#VALEUR/#_tableau:VALEUR})]})]
+        ][(#VAL{#_tableau:VALEUR}|in_array{#GET{formater_tableau}}|non)
+            [(#GET{tableau/#VALEUR/#_tableau:VALEUR})]
+        [(#VALEUR|=={0}|oui)</strong>]
+        ]</td></BOUCLE_cellule>
+    </tr>
+    </BOUCLE_tableau>
+</table>
+</B_tableau>
+
+
+#BOITE_FERMER
+</BOUCLE_principal>
