@@ -8,19 +8,24 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return string Retourne une liste de <script> et de <link> à insérer dans le <head> de la page
  */
 function selecteurgenerique_verifier_js($flux){
+
+	$prepjs = "";
+	$prepcss = "ui/";
 	include_spip('inc/plugin');
-	if(spip_version_compare($spip_version_branche,"3.1.0",'<'))
-		$prep = "jquery.ui.";
+	if(spip_version_compare($GLOBALS['spip_version_branche'],"3.0.*",'<=')) {
+		$prepjs = "jquery.ui.";
+		$prepcss = "jquery.ui.";
+		}
 	$contenu = "";
 		/**
-		 * On a besoin de '.$prep.'autocomplete.js et de ses dépendances
+		 * On a besoin de '.$prepjs.'autocomplete.js et de ses dépendances
 		 */
-		if(strpos($flux,''.$prep.'autocomplete.js')===FALSE){
+		if(strpos($flux,''.$prepjs.'autocomplete.js')===FALSE){
 			/**
 			 * ui.core.js
 			 */
-			if(strpos($flux,''.$prep.'core.js')===FALSE){
-				$ui = find_in_path('prive/javascript/ui/'.$prep.'core.js');
+			if(strpos($flux,''.$prepjs.'core.js')===FALSE){
+				$ui = find_in_path('prive/javascript/ui/'.$prepjs.'core.js');
 				$contenu .= "
 <script type='text/javascript' src='$ui'></script>
 ";
@@ -28,8 +33,8 @@ function selecteurgenerique_verifier_js($flux){
 			/**
 			 * ui.widget.js
 			 */
-			if(strpos($flux,''.$prep.'widget.js')===FALSE){
-				$widget = find_in_path('prive/javascript/ui/'.$prep.'widget.js');
+			if(strpos($flux,''.$prepjs.'widget.js')===FALSE){
+				$widget = find_in_path('prive/javascript/ui/'.$prepjs.'widget.js');
 				$contenu .= "
 <script type='text/javascript' src='$widget'></script>
 ";
@@ -37,27 +42,27 @@ function selecteurgenerique_verifier_js($flux){
 			/**
 			 * ui.position.js
 			 */
-			if(strpos($flux,''.$prep.'position.js')===FALSE){
-				$position = find_in_path('prive/javascript/ui/'.$prep.'position.js');
+			if(strpos($flux,''.$prepjs.'position.js')===FALSE){
+				$position = find_in_path('prive/javascript/ui/'.$prepjs.'position.js');
 				$contenu .= "
 <script type='text/javascript' src='$position'></script>
 ";
 			/**
 			 * Finalement on insère l'autocompleteur
 			 */
-			$autocompleter = find_in_path('prive/javascript/ui/'.$prep.'autocomplete.js');
+			$autocompleter = find_in_path('prive/javascript/ui/'.$prepjs.'autocomplete.js');
 			
 			$contenu .= "
 <script type='text/javascript' src='$autocompleter'></script>
 ";
 
 			/**
-			 * '.$prep.'autocomplete.html
+			 * jquery.ui.autocomplete.html
 			 * Ajoute la prise en compte de code html dans le sélecteur et l'interprète
 			 * Par exemple des images / icones
 			 */
-			if(strpos($flux,''.$prep.'autocomplete.html')===FALSE){
-				$autocompleter_html = find_in_path('javascript/autocomplete.html.js');
+			if(strpos($flux,'jquery.ui.autocomplete.html')===FALSE){
+				$autocompleter_html = find_in_path('javascript/jquery.ui.autocomplete.html.js');
 				$contenu .= $autocompleter_html ? "
 <script type='text/javascript' src='$autocompleter_html'></script>
 " : '';
@@ -77,12 +82,12 @@ function selecteurgenerique_verifier_js($flux){
 	/**
 	 * On intègre la CSS qui va bien également et ses dépendances
 	 */
-	if(strpos($flux,''.$prep.'autocomplete.css')===FALSE){
+	if(strpos($flux,''.$prepcss.'autocomplete.css')===FALSE){
 		/**
 		 * ui.core.css
 		 */
-		if(strpos($flux,''.$prep.'core.css')===FALSE){
-			$ui_css = find_in_path('css/'.$prep.'core.css');
+		if(strpos($flux,''.$prepcss.'core.css')===FALSE){
+			$ui_css = find_in_path('css/'.$prepcss.'core.css');
 			$contenu .= "
 <link rel='stylesheet' href='$ui_css' type='text/css' media='all' />
 ";
@@ -90,8 +95,8 @@ function selecteurgenerique_verifier_js($flux){
 		/**
 		 * ui.autocomplete.css
 		 */
-		if(strpos($flux,''.$prep.'autocomplete.css')===FALSE){
-			$autocomplete_css = find_in_path('css/'.$prep.'autocomplete.css');
+		if(strpos($flux,''.$prepcss.'autocomplete.css')===FALSE){
+			$autocomplete_css = find_in_path('css/'.$prepcss.'autocomplete.css');
 			$contenu .= "
 <link rel='stylesheet' href='$autocomplete_css' type='text/css' media='all' />
 ";
@@ -100,8 +105,8 @@ function selecteurgenerique_verifier_js($flux){
 		/**
 		 * ui.theme.css
 		 */
-		if(strpos($flux,''.$prep.'theme.css')===FALSE){
-			$theme_css = find_in_path('css/'.$prep.'theme.css');
+		if(strpos($flux,''.$prepcss.'theme.css')===FALSE){
+			$theme_css = find_in_path('css/'.$prepcss.'theme.css');
 			$contenu .= "
 <link rel='stylesheet' href='$theme_css' type='text/css' media='all' />
 ";
