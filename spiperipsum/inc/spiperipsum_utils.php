@@ -112,7 +112,7 @@ function code2charset($code_langue) {
 		default:
 			$charset = 'iso-8859-1'; break;
 	}
-	return $charset;
+	return 'utf-8';
 }
 
 function lecture2code($lecture) {
@@ -407,7 +407,7 @@ function charger_lectures($langue, $jour) {
 			// Determination de la sous-chaine url correspondant a la date (vide si jour courant)
 			$url_date = ($jour == _SPIPERIPSUM_JOUR_DEFAUT) ? '' : date2url_date($date);
 			// Url de base de tous les flux
-			$url_base = 'http://feed.evangelizo.org/reader.php?lang=' . $code_langue . '&date=' . date('Ymd', strtotime($date));
+			$url_base = 'http://feed.evangelizo.org/v2/reader.php?lang=' . $code_langue . '&date=' . date('Ymd', strtotime($date));
 
 			// traitement des différentes versions de la date
 			$tableau['date'] = flux2date($url_base, $charset, $date);
