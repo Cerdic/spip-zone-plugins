@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_boite_jqueryui' => 'Counfiguracioun de jQuery UI',
 	'cfg_lbl_plugins' => 'Plugin',
+	'cfg_lbl_themes' => 'Tèma',
 	'cfg_no_css' => 'noun cargà lu CSS da jQuery-UI',
 	'cfg_titre_jqueryui' => 'jQuery UI',
 	'cfg_val_effects_blind' => 'Efet blind',
