@@ -99,9 +99,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'reinitialise_index_doc' => 'Reinicialisà l’indessacioun dei doucumen en errour',
 	'reserve_webmestres' => 'Pàgina reservada ai webmèstre',
+	'retour_configuration_fulltext' => 'Retour a la counfiguracioun de Fulltext',
 
 	// S
 	'soit' => 'SÌA',
+	'statistiques_indexation' => 'Estatistica d’indessacioun dei doucumen :',
 	'supprimer' => 'Suprimà',
 
 	// T
