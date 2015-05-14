@@ -4,8 +4,11 @@
  * Le plugin qui lave plus SPIP que SPIP
  * (c) 2008 Mathieu Marcillaud, Cedric Morin, Tetue
  * Licence GPL
- * 
+ *
  */
+
+// On inclu une bonne fois pour toutes array_column
+include_spip('lib/array_column/array_column');
 
 if (_request('var_mode')=='preview'
   AND $cle = _request('var_relecture')){
@@ -52,17 +55,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 if (!function_exists('_T_ou_typo')) {
 function _T_ou_typo($valeur, $mode_typo='toujours') {
-	
+
 	// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
 	if (is_string($valeur) and !intval($valeur)){
 		// Si la chaine est du type <:truc:> on passe à _T()
-		if (preg_match('/^\<:(.*?):\>$/', $valeur, $match)) 
+		if (preg_match('/^\<:(.*?):\>$/', $valeur, $match))
 			$valeur = _T($match[1]);
 		// Sinon on la passe a typo()
 		else {
 			if (!in_array($mode_typo, array('toujours', 'multi', 'jamais')))
 				$mode_typo = 'toujours';
-			
+
 			if ($mode_typo == 'toujours' or ($mode_typo == 'multi' and strpos($valeur, '<multi>') !== false)){
 				include_spip('inc/texte');
 				$valeur = typo($valeur);
@@ -135,11 +138,11 @@ if (!function_exists('array_replace_recursive')){
 		$array = $args[0];
 		if (!is_array($array))
 			return $array;
-		
+
 		for ($i = 1; $i < count($args); $i++)
 			if (is_array($args[$i]))
 				$array = recurse($array, $args[$i]);
-		
+
 		return $array;
 	}
 }
@@ -253,4 +256,3 @@ function text_truncate($text, $length = 100, $options = array()) {
     return $truncate;
 }
 }
-
