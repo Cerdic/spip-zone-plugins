@@ -1,0 +1,52 @@
+#SET{tous_statuts, #ENV{statuts}|array_keys}
+
+#SET{date_debut, #ENV{date_debut}|date_picker_to_date}
+#SET{date_fin, #ENV{date_fin}|date_picker_to_date}
+
+[(#REM) construire la requete qui va chercher les articles publiés entre deux dates optionnelles ]
+#SET{where, ''}
+[(#GET{date_debut}|oui) #SET{where, #GET{where}|concat{'date > "'#GET{date_debut}'"'}} ]
+[(#GET{date_debut}|oui|et{#GET{date_fin}|oui}) #SET{where, #GET{where}|concat{' AND '}}]
+[(#GET{date_fin}|oui) #SET{where, #GET{where}|concat{'date < "'#GET{date_fin}'"'}} ]
+
+<BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {par num titre}{!par date} {tout}>
+
+<h3>#TITRE**</h3>
+<B_articles_racine>
+	<ul class="spip">
+		<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par num titre}{!par date} {tout}
+		   {statut IN #GET{tous_statuts}}{where #GET{where}}>
+		<li>
+			<input type="checkbox" name="articles[]" class="checkbox" checked="checked" value="#ID_ARTICLE" />
+			[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] #TITRE**
+			<br><small>[(#DATE|affdate)]</small>
+		</li>
+		</BOUCLE_articles_racine>
+	</ul>
+</B_articles_racine>
+
+<B_rubriques>
+	<ul class="spip">
+		<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par date} {tout}>
+		<li>
+			<strong>#TITRE**</strong>
+			<B_articles>
+				<ul class="spip">
+					<BOUCLE_articles(ARTICLES) {id_rubrique} {par num titre}{!par date} {tout}
+						{statut IN #GET{tous_statuts}}{where #GET{where}}>
+					<li>
+						<input type="checkbox" name="articles[]" class="checkbox" checked="checked" value="#ID_ARTICLE" />
+						[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] #TITRE**
+						<br><small>[(#DATE|affdate)]</small>
+					</li>
+					</BOUCLE_articles>
+				</ul>
+			</B_articles>
+
+			<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+		</li>
+		</BOUCLE_rubriques>
+	</ul>
+</B_rubriques>
+
+</BOUCLE_rubrique>

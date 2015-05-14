@@ -1,0 +1,43 @@
+<div class="formulaire_spip formulaire_editer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method='post' action='#ENV{action}'>
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		[(#SAISIE{selecteur_rubrique, rubrique, label=<:statut_articles:champ_rubrique:>})]
+		[(#SAISIE{date, date_fin, label=<:statut_articles:champ_date_fin:>})]
+		[(#SAISIE{date, date_debut, label=<:statut_articles:champ_date_debut:>})]
+		[(#SAISIE{hidden, recherche, valeur=1})]
+
+		<p class='boutons'>
+			<span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:info_rechercher:>'/>
+		</p>
+
+		<BOUCLE_preview(CONDITION){si #ENV{recherche}|oui}>
+
+				<h1><:articles:></h1>
+			#SET{id_rubrique, #ENV{rubrique}|picker_selected{rubrique}|table_valeur{0}}
+
+			[(#REM) rubrique chsoisie ? critère id_rubrique]
+			<BOUCLE_rubrique(RUBRIQUES){si #GET{id_rubrique}|oui} {id_rubrique=#GET{id_rubrique}} {tout}>
+				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,date_debut,date_fin,statuts=#ENV{statuts}}>
+			</BOUCLE_rubrique>
+
+			[(#REM) aucun rubrique chsoisie ? critère racine ]
+			<BOUCLE_racine(RUBRIQUES){si #GET{id_rubrique}|non} {racine} {par num titre}{!par date} {tout}>
+				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,date_debut,date_fin,statuts=#ENV{statuts}}>
+			</BOUCLE_racine>
+			
+			[(#SAISIE{selection, statut, label=<:statut_articles:champ_nouveau_statut:>, datas=#ENV{statuts}, obligatoire=oui})]
+
+			<p class='boutons'>
+				<span class='image_loading'>&nbsp;</span><input name="confirmer" type='submit' class='submit' value='<:statut_articles:bouton_changer:>'/>
+			</p>
+					
+		</BOUCLE_preview>
+
+	</div>
+	</form>
+</div>

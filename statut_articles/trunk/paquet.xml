@@ -1,0 +1,20 @@
+<paquet
+	prefix="statut_articles"
+	categorie="edition"
+	version="1.0.0"
+	etat="stable"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/statut_articles-64.png"
+	documentation=""
+>
+	<nom>Statut articles</nom>
+
+	<auteur>nicod_</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="statut_articles_autorisations.php" />
+
+    <menu nom="changer_statut_articles" titre="statut_articles:menu_changer_statuts" parent="menu_publication" icone="images/statut_articles-16.png" action="changer_statut_articles" />
+
+</paquet>
