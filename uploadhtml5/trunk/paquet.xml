@@ -1,7 +1,7 @@
 <paquet
 	prefix="uploadhtml5"
 	categorie="multimedia"
-	version="1.2.3"
+	version="1.2.4"
 	etat="dev"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/uploadhtml5-64.png"
@@ -16,7 +16,7 @@
 	<licence>GNU/GPL</licence>
 
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
-	<necessite nom="arraycolumn" compatibilite="[1.0.1;]" />
+	<necessite nom="spip_bonux" compatibilite="[3.2.0;]" />
 
 	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
