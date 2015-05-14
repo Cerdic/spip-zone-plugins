@@ -15,7 +15,7 @@ function action_api_evangile_dist(){
 		// formater correctement la date
 		$date = date('Y-m-d',$date);
 		include_spip("inc/filtres");
-		include_spip("inc/spiperipsum_utils");
+		include_spip("services/evangelizo");
 		$nom_fichier = charger_lectures($lang, $date);
 		lire_fichier($nom_fichier,$res);
 		$res = unserialize($res);
