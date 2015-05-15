@@ -6,7 +6,7 @@ function langonet_tester_1() {
 	// Commenter ou decommenter les lignes suivantes pour tester les differents cas de verification
 	// VERIFICATION DEFINITION : Erreurs
 	// -- Les items suivants, utilises comme des items du module Langonet, ne sont pas definis dans verification_fr.php
-	$essai = _T('verification:test_item_non_defini_1');
+	$essai = _T('verification:test_item_non_defini_1') . ' --- ' . _T('verification:test_item_non_defini_1');
 	$essai = _T("verification:test_item_non_defini_2");
 	$essai = _T("verification:test_item_non_defini_2", array('param1'=>$param1));
 
@@ -34,6 +34,7 @@ function langonet_tester_1() {
 	$essai = _T("verification:defini_html_partiel_".$suite3);
 	$essai = _T("verification:defini_html_partiel_$suite4");
 	$essai = _T("verification:defini_html_partiel_${suite5}");
+	$essai = _T('langonet:defini_paquet_1');
 
 	// VERIFICATION _L() : Avertissements
 	$essai = _L('Test 1 _L() de langonet');
