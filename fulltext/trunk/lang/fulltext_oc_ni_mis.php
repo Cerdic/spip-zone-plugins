@@ -75,18 +75,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos' => 'Infourmacioun',
 	'infos_documents_proteges' => 'Trouverès aquì la lista dei doucumen proutegiat e dounca noun-indessat da Fulltext',
 	'infos_fulltext_document' => 'Pourès chausì aquì que tìpou de doucumen soun indessat da Fulltext e counfigurà lu binaire utilisat e li siéu oupcioun.',
+	'intervalle_cron' => 'Intervàlou de tems tra doui passage de CRON (en secounda).',
 
 	// L
+	'liste_tables_connues' => 'Vequi la lista dei taula counouissudi de la recerca. Lì poudès ajustà dei elemen FULLTEXT, vèire la doucumentacioun a l’adressa',
 	'logo' => 'Lògou',
 
 	// M
 	'mais_pas' => 'mà NOUN',
+	'message_ok_configuration' => 'Registramen de li vouòstri preferença acabat',
+	'message_ok_update_configuration' => 'Metuda a jou de li vouòstri preferença acabada',
 
 	// N
 	'nb_err' => 'En errour d’indessacioun',
 	'nb_index' => 'Indessat',
 	'nb_non_index' => 'Noun-indessat',
 	'nb_ptg' => 'Proutegiat (noun-indessat)',
+	'necessite_version_php' => 'Nechessita au màncou PHP 5.2, couma pura l’oupcioun -enable-zip.',
+	'nombre_caracteres' => 'Noumbre de caracter indessat (despì lou coumençamen dóu doucumen).',
+	'nombre_documents' => 'Noumbre de doucumen da tratà per iteracioun de CRON',
 
 	// O
 	'ou_bien' => 'o ben',
@@ -96,12 +103,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_index' => 'Mìnga indès FULLTEXT',
 	'premier_soit' => 'SÌA',
 
+	// Q
+	'que_des_exemples' => 'Nota : li adressa de binaire e oupcioun proupausadi aquì despì lou prencìpi soun ren que dei isemple.',
+
 	// R
+	'regenerer_tous' => 'Regenerà toui lu ìndice FULLTEXT',
 	'reinitialise_index_doc' => 'Reinicialisà l’indessacioun dei doucumen en errour',
+	'reinitialise_index_ptg' => 'Reinicialisà l’indessacioun dei doucumen proutegiat',
+	'reinitialise_totalement_doc' => 'Reinicialisà l’indessacioun de toui lu doucumen',
 	'reserve_webmestres' => 'Pàgina reservada ai webmèstre',
 	'retour_configuration_fulltext' => 'Retour a la counfiguracioun de Fulltext',
+	'retourne' => 'Revira lu tèstou que countenon',
 
 	// S
+	'sequence_exacte' => 'Esatamen la sequènsa de mot',
 	'soit' => 'SÌA',
 	'statistiques_indexation' => 'Estatistica d’indessacioun dei doucumen :',
 	'supprimer' => 'Suprimà',
@@ -110,6 +125,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_convertie' => 'taula counvertida en MyISAM',
 	'table_format' => 'Aquela taula es au fourmat',
 	'table_non_reconnue' => 'taula noun recounouissuda',
+	'textes_premier' => 'mà presenta en premié lu tèstou que countenon',
 	'titre_page_fulltext_index' => 'Counfiguracioun des ìndice de recercà',
 
 	// U
