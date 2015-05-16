@@ -19,7 +19,6 @@
 		<li>
 			<input type="checkbox" name="articles[]" class="checkbox" checked="checked" value="#ID_ARTICLE" />
 			[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] #TITRE**
-			<br><small>[(#DATE|affdate)]</small>
 		</li>
 		</BOUCLE_articles_racine>
 	</ul>
@@ -37,7 +36,6 @@
 					<li>
 						<input type="checkbox" name="articles[]" class="checkbox" checked="checked" value="#ID_ARTICLE" />
 						[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] #TITRE**
-						<br><small>[(#DATE|affdate)]</small>
 					</li>
 					</BOUCLE_articles>
 				</ul>

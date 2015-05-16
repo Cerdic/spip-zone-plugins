@@ -16,8 +16,8 @@
 		</p>
 
 		<BOUCLE_preview(CONDITION){si #ENV{recherche}|oui}>
-
-				<h1><:articles:></h1>
+		<div class="statut_articles-liste">
+			<h1><:articles:></h1>
 			#SET{id_rubrique, #ENV{rubrique}|picker_selected{rubrique}|table_valeur{0}}
 
 			[(#REM) rubrique chsoisie ? critère id_rubrique]
@@ -35,7 +35,7 @@
 			<p class='boutons'>
 				<span class='image_loading'>&nbsp;</span><input name="confirmer" type='submit' class='submit' value='<:statut_articles:bouton_changer:>'/>
 			</p>
-					
+		</div>
 		</BOUCLE_preview>
 
 	</div>
