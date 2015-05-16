@@ -11,8 +11,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'champ_rubrique' => 'Les articles de la rubrique :',
 	'champ_nouveau_statut' => 'Choisir le nouveau statut',
-	'champ_date_debut' => 'Publié après : (inclus)',
-	'champ_date_fin' => 'Publié avant : (inclus)',
+	'champ_date_debut' => 'Publiés après : (inclus)',
+	'champ_date_fin' => 'Publiés avant : (inclus)',
 
 	// M
 	'menu_changer_statuts' => 'Statuts d\'articles',
