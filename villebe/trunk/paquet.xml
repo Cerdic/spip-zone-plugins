@@ -1,0 +1,22 @@
+<paquet
+	prefix="villebe"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/villebe-64.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<nom>Villes de belgique</nom>
+	<!-- Toutes les villes de Belgique -->
+
+	<auteur lien='http://p.henix.be'>Phenix</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/villebe.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/villebe.php" />
+
+</paquet>

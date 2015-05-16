@@ -1,0 +1,20 @@
+<BOUCLE_test_multiple(CONDITION){si #ENV{multiple}|=={on}|oui}>
+	[(#SET{valeur,[(#ENV*{valeur}|is_array|?{[(#ENV*{valeur})],[(#ENV*{valeur}|explode{','})]})]})]
+	<B_villes_belges_selectionnes>
+	<ul>
+	<BOUCLE_villes_belges_selectionnes(VILLES_BELGES){id_villes_belge IN #GET*{valeur}}
+		{par num nom, nom}{tout}>
+		<li class="choix">#NOM (#CODE_POSTAL #PROVINCE)</li>
+	</BOUCLE_villes_belges_selectionnes>
+	</ul>
+	</B_villes_belges_selectionnes>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_villes_belges_selectionnes>
+</BOUCLE_test_multiple>
+	<BOUCLE_villes_belge_selectionne(VILLES_BELGES){id_villes_belge=#ENV{valeur}}
+		{par num nom, nom}{tout}>
+		<p>#NOM (#CODE_POSTAL #PROVINCE)</p>
+	</BOUCLE_villes_belge_selectionne>
+   	[(#ENV*{sans_reponse}|propre)]
+	<//B_villes_belge_selectionne>
+<//B_test_multiple>
