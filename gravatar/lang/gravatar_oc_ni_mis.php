@@ -8,10 +8,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
+	'cfg_descr_gravatar' => 'Counfiguràs la representacioun dei gravatar',
 	'cfg_titre_gravatar' => 'Gravatar',
 
 	// E
 	'explication_image_defaut' => 'Per aquelu que noun an d’avatar, utilisà :',
+
+	// G
+	'gravatar_info' => 'Per afichà lou vouòstre avatar aquì, registras lou denant soubre <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (facil e gràtis).',
+	'gravatar_info_forum' => 'Per afichà lou vouòstre avatar embé lou vouòstre message, registras lou denant soubre <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (facil e gràtis) e noun oublidès d’endicà la vouòstra adressa e-mail aquì.',
 
 	// L
 	'label_image_defaut' => 'Image predefinida',
