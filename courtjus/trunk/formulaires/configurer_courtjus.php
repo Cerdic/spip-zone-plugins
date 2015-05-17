@@ -17,7 +17,7 @@ function formulaires_configurer_courtjus_saisies_dist() {
             'options' => array(
                 'nom' => 'objet_exclu',
                 'label' => _T('courtjus:courtjus_objet'),
-                'exclus' => court_jus_rubrique_exclus()
+                'exclus' => courtjus_rubrique_exclus()
             )
         )
     );
@@ -27,7 +27,7 @@ function formulaires_configurer_courtjus_saisies_dist() {
 }
 
 
-function court_jus_rubrique_exclus() {
+function courtjus_rubrique_exclus() {
     // On va cherché les différent objets intaller sur SPIP
     $objets = lister_tables_objets_sql();
 
