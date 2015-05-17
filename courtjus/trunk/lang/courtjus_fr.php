@@ -13,7 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_courtjus' => 'Court-jus',
-    'courtjus_objet_exclu' => 'Choisir les objets qui ne seront <strong>PAS</strong> court-cuircuité.'
+    'courtjus_objet_exclu' => 'Choisir les objets qui ne seront <strong>PAS</strong> court-cuircuité.',
+    'explication_squelette_par_rubrique' => 'Rediriger si la rubrique possède un squelette spécifique ? (rurbique=2.html/rubrique-2.html)',
+    'label_squelette_par_rubrique' => 'Squelette par rubrique'
 );
 
 ?>

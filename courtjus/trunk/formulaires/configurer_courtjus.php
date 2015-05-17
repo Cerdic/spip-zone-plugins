@@ -19,13 +19,29 @@ function formulaires_configurer_courtjus_saisies_dist() {
                 'label' => _T('courtjus:courtjus_objet_exclu'),
                 'exclus' => courtjus_rubrique_exclus()
             )
+        ),
+        array(
+            'saisie' => 'oui_non',
+            'options' => array(
+                'nom' => 'squelette_par_rubrique',
+                'label' => _T('courtjus:label_squelette_par_rubrique'),
+                'explication' => _T('courtjus:explication_squelette_par_rubrique')
+            )
         )
     );
 
     return $saisies;
 }
 
-
+/**
+ * Renvoyer la config dans le formulaire
+ *
+ * @access public
+ * @return mixed
+ */
+function formulaires_configurer_courtjus_charger_dist() {
+    return lire_config('courtjus');
+}
 function courtjus_rubrique_exclus() {
     // On va cherché les différent objets intaller sur SPIP
     $objets = lister_tables_objets_sql();
