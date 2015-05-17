@@ -44,6 +44,8 @@ function balise_URL_RUBRIQUE_dist($p) {
  */
 function courtjus_calculer_rubrique($id_rubrique) {
 
+
+
     // On récupère l'éventuel objet de redirection
     $objet = courtjus_trouver_objet($id_rubrique);
     if ($objet)
@@ -95,8 +97,11 @@ function courtjus_trouver_objet_rubrique() {
     $objet_in_rubrique = array();
     foreach($objets as $table => $data) {
         // Si on trouve "id_rubrique" dans la liste des champs, on garde
-        // On exclue la table des rubriques de SPIP
-        if (array_key_exists('id_rubrique', $data['field']) and $table != table_objet_sql('rubrique')) {
+        // On exclue la table des rubriques de SPIP automatiquement
+        // On exclu aussi éléments marqué comme exclu dans la config
+        if (array_key_exists('id_rubrique', $data['field'])
+            and $table != table_objet_sql('rubrique')
+            and !in_array($table, lire_config('courtjus/objet_exclu'))) {
             // On garde le champ qui fait office de titre pour l'objet dans le tableau afin de pouvoir faire un classement par num titre.
             $objet_in_rubrique[] = array($table, $data['titre']);
         }
