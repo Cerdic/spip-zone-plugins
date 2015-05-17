@@ -1,20 +1,14 @@
 <?php
-/*
- * Plugin xxx
- * (c) 2009 cedric
- * Distribue sous licence GPL
- *
- */
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 define('_BOUTON_MODE_IMAGE', true);
 
-include_spip('inc/documents'); // pour la fonction affiche_raccourci_doc
-function medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,$hauteur,$mode,$vu,$media=null){
+function filtre_medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,$hauteur,$mode,$vu,$media=null){
 	$raccourci = '';
 	$doc = 'doc';
-
+	include_spip('inc/documents'); // pour la fonction affiche_raccourci_doc
+	
 	if ($mode=='image' AND (strlen($descriptif.$titre) == 0))
 		$doc = 'img';
 
@@ -37,6 +31,5 @@ function medias_raccourcis_doc($id_document,$titre,$descriptif,$inclus,$largeur,
 	}
 	return "<div class='raccourcis'>".$raccourci."</div>";
 }
-
 
 ?>
