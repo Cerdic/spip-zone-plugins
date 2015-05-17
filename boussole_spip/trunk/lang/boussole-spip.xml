@@ -1,8 +1,9 @@
 <traduction module="boussole-spip" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/boussole_spip/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en" total="82" traduits="81" relire="0" modifs="1" nouveaux="0" pourcent="98.78">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=en" total="82" traduits="82" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Eric Lupinacci" lien="http://trad.spip.net/auteur/_eric_" />
 		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
 	<langue code="eo" url="http://trad.spip.net/tradlang_module/boussole-spip?lang_cible=eo" total="82" traduits="53" relire="0" modifs="3" nouveaux="26" pourcent="64.63">
