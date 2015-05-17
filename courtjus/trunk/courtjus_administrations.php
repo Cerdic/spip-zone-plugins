@@ -33,7 +33,7 @@ function courtjus_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 /*
-*   Désintaller foundation.
+*   Désintaller de courtjus.
 */
 function courtjus_vider_tables($nom_meta_base_version) {
     // Supprimer les méta, ou oublie pas celle de la base.
