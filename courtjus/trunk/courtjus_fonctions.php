@@ -177,6 +177,7 @@ function courtjus_trouver_objet($id_rubrique) {
             $match = null;
             // On cherche le num titre dans le titre de l'objet
             preg_match('#^[0-9]*\.#', $objet_rubrique['titre'], $match);
+
             // On créer le tableau contenant les données de l'objet
             $objets_in_rubrique[] = array(
                 'id_objet' => $objet_rubrique[$champs_id],
@@ -201,7 +202,7 @@ function courtjus_trouver_objet($id_rubrique) {
         return generer_url_entite($objets_in_rubrique[0]['id_objet'], $objets_in_rubrique[0]['objet']);
     }
     // S'il y plusieurs objets dans la rubrique et que le mode "par num titre" est activé, on regiride sur le num titre le plus petit.
-    elseif ($nb_objet > 1) {
+    elseif ($nb_objet > 1 and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0) {
         // On créer un tableau avec uniquement les num titre
         $minmax = array_column($objets_in_rubrique, 'num_titre');
 
@@ -216,8 +217,6 @@ function courtjus_trouver_objet($id_rubrique) {
 
 }
 
-
-
 /**
  * Renvoie tout les enfants direct d'une rubrique
  *
@@ -227,10 +226,18 @@ function courtjus_trouver_objet($id_rubrique) {
  */
 function courtjus_quete_enfant($id_rubrique) {
     // On récupère tous les enfants direct.
-    $enfants = sql_allfetsel('id_rubrique', table_objet_sql('rubrique'), 'id_parent='.intval($id_rubrique));
+    $enfants = sql_allfetsel('id_rubrique, titre', table_objet_sql('rubrique'), 'id_parent='.intval($id_rubrique));
+
+    // On va chercher un éventuel num_titre dans les titre
+    foreach ($enfants as $index => $enfant) {
+        $match = null;
+        if (preg_match('#^[0-9]*\.#', $enfant['titre'], $match)) {
+            $enfants[$index]['num_titre'] = intval($match[0]);
+        }
+    }
 
     // On simplifie le tableau pour n'avoir que des id
-    $enfants = array_column($enfants, 'id_rubrique');
-
+    $enfants = array_column($enfants, 'id_rubrique', 'num_titre');
+    ksort($enfants);
     return $enfants;
 }
