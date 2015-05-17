@@ -39,6 +39,7 @@
 		<onglet nom="courtjus" titre="courtjus:courtjus_titre" parent="configuration" icone="images/courtjus-24.png" />
 	-->
 
+  <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<necessite nom="arraycolumn" compatibilite="[1.0.0;]" />
     <necessite nom="saisies" compatibilite="[2.0.3;[" />
