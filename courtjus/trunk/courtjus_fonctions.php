@@ -205,7 +205,7 @@ function courtjus_trouver_objet($id_rubrique) {
         // On créer un tableau avec uniquement les num titre
         $minmax = array_column($objets_in_rubrique, 'num_titre');
 
-        // On va filtrer ce tableau pour n'avoir que des nombre à tester
+        // On va filtrer ce tableau pour n'avoir que des nombres à tester
         $minmax = array_filter($minmax, 'is_numeric');
 
         // On recherche l'index dans le tableau minmax
