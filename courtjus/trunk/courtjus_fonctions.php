@@ -176,8 +176,6 @@ function courtjus_trouver_objet($id_rubrique) {
     }
     // S'il y plusieurs objets dans la rubrique et que le mode "par num titre" est activé, on regiride sur le num titre le plus petit.
     elseif ($nb_objet > 1) {
-        // On va aller chercher array_column
-        include_spip('array_column/src/array_column');
         // On créer un tableau avec uniquement les num titre
         $minmax = array_column($objets_in_rubrique, 'num_titre');
 
