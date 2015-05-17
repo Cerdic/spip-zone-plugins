@@ -13,7 +13,7 @@
 </ul>
 </B_arborescences>
 
-#SET{colspan, #ARRAY{non, 3, non_mais, 4, peut_etre, 3, oui_mais}}
+#SET{colspan, #ARRAY{non, 3, non_mais, 4, peut_etre, 3, oui_mais, 3}}
 <BOUCLE_pertinences(DATA) {liste non, non_mais, peut_etre, oui_mais}{par cle}>
 	[(#INCLURE{fond=prive/squelettes/liste/items_definition,
 		items=#ENV{resultats/occurrences_#VALEUR},
@@ -21,6 +21,5 @@
 		corrections=#ENV{corrections},
 		pertinence=#VALEUR,
 		colspan=#GET{colspan}|table_valeur{#VALEUR},
-		module=#ENV{resultats/module},
-		env})]
+		module=#ENV{resultats/module}})]
 </BOUCLE_pertinences>

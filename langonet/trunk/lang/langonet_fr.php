@@ -22,10 +22,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_telecharger_fichier_log' => 'Télécharger le log du @date@',
 
 	// C
-	'complement_definis_non_mais_cas2' => 'Le raccourci est bien défini dans le module @module@. L\'utilisation d\'un autre module est probalement une erreur.',
-	'complement_definis_non_mais_cas2_1' => 'Néanmoins, le raccourci est aussi défini dans le module @module@ utilisé dans l\'occurrence.',
-	'complement_definis_non_mais_cas2_2' => 'En outre, le raccourci n\'est pas défini dans le module @module@ utilisé dans l\'occurrence.',
-	'complement_definis_non_mais_cas2_3' => 'Par contre, il n\'a pas été possible de vérifier la définition du raccourci dans le module @module@ utilisé dans l\'occurrence celui-ci n\'étant pas présent sur le site.',
+	'complement_definis_non_mais_cas2' => 'Le raccourci est bien défini dans le module «<code>@module@</code>». L\'utilisation d\'un autre module est probalement une erreur.',
+	'complement_definis_non_mais_cas2_1' => 'Néanmoins, le raccourci est aussi défini dans le module «<code>@module_utilise@</code>» utilisé dans l\'occurrence.',
+	'complement_definis_non_mais_cas2_2' => 'En outre, le raccourci n\'est pas défini dans le module «<code>@module_utilise@</code>» utilisé dans l\'occurrence.',
+	'complement_definis_non_mais_cas2_3' => 'Par contre, il n\'a pas été possible de vérifier la définition du raccourci dans le module «<code>@module_utilise@</code>» utilisé dans l\'occurrence car celui-ci n\'est pas présent sur le site.',
+	'complement_definis_non_mais_cas4' => 'Le raccourci n\'est défini ni dans le module «<code>@module@</code>» en cours de vérification ni dans le module «<code>@module_utilise@</code>» utilisé dans l\'occurrence.',
+	'complement_definis_non_mais_cas4_1' => 'Néanmoins, il n\'a pas été possible de vérifier la définition du raccourci dans le module «<code>@module_utilise@</code>» car celui-ci n\'est pas présent sur le site.',
+	'complement_definis_peut_etre_cas5' => 'Le raccourci est totalement variable.',
+	'complement_definis_peut_etre_cas6' => 'Le raccourci est partiellement variable.',
+	'complement_definis_peut_etre_cas6_1' => 'Aucun item du module «<code>@module@</code>» ne s\'en rapproche.',
+	'complement_definis_peut_etre_cas6_2' => 'L\'item «@item@» du module «<code>@module@</code>» est potentiellement compatible.',
 
 	// E
 	'entete_log_avertissement_nonmais' => 'AVERTISSEMENT : items n\'appartenant pas au module',

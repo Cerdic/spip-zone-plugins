@@ -111,10 +111,10 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 		// Les chaines definies sont dans les fichiers definis par la RegExp ci-dessous
 		// Autrement dit les fichiers francais du repertoire lang/ sont la reference
 		$fichiers_langue = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
-		$resultats = reperer_items_manquants($utilises, $module, $GLOBALS[$var_langue], $fichiers_langue);
+		$resultats = reperer_items_non_definis($utilises, $module, $GLOBALS[$var_langue], $fichiers_langue);
 	}
 	elseif ($GLOBALS[$var_langue]) {
-		$resultats = reperer_items_inutiles($utilises, $module, $GLOBALS[$var_langue]);
+		$resultats = reperer_items_non_utilises($utilises, $module, $GLOBALS[$var_langue]);
 	}
 
 	// Compléments de la structure de résultats
@@ -214,7 +214,8 @@ function identifier_type_fichier($fichier) {
  * 		- 0 : le texte de l'expression matchant le pattern
  * 		- 1 : le module de langue (peut être vide)
  * 		- 2 : le raccourci de l'item de langue
- * 		- 3 : suite du texte ???
+ * 		- 3 : suite du texte du raccourci (dénote une occurrence partiellement ou totalement variable)
+ * 		- 4 : numéro de colonne de l'occurrence
  *
  * @param string 	$fichier
  * 		Fichier dont est issu l'occurrence en cours de mémorisation.
@@ -351,7 +352,7 @@ function extraire_arguments($raccourci_regexp) {
  * 		- 'occurrences_non_mais' : liste des items a priori obsolètes pour le module vérifié mais utilisés avec un autre module;
  * 		- 'occurrences_peut-etre' : liste des items potentiellement obsolètes (contexte d'utilisation dynamique).
  */
-function reperer_items_inutiles($utilisations, $module, $items_module) {
+function reperer_items_non_utilises($utilisations, $module, $items_module) {
 	$item_non = $item_non_mais = $item_peut_etre = array();
 
 	// On boucle sur la liste des items de langue ($items_module) du module en cours de vérification ($module).
@@ -438,7 +439,7 @@ $a=1;
  *
  * @return array
  */
-function reperer_items_manquants($utilisations, $module, $items_module=array(), $fichiers_langue=array()) {
+function reperer_items_non_definis($utilisations, $module, $items_module=array(), $fichiers_langue=array()) {
 
 	// Constitution du tableau de tous les items de langue fr disponibles sur le site et stockage de la liste
 	// des modules scannés
@@ -497,6 +498,7 @@ function reperer_items_manquants($utilisations, $module, $items_module=array(), 
 						}
 					}
 
+					$options = array('module' => $module, 'module_utilise' => $module_utilise);
 					if ($raccourci_dans_module) {
 						// Cas 2 : le raccourci est dans le module en cours de vérification.
 						// On donne la priorité au module en cours de vérification. Si le raccourci fait
@@ -505,16 +507,18 @@ function reperer_items_manquants($utilisations, $module, $items_module=array(), 
 						// Néanmoins, si le raccourci est aussi présent dans le module utilisé par l'occurrence
 						// en cours de vérification on le précise car cela diminue la probabilité d'une erreur.
 						$item_non_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
-						$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas2');
+						$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas2', $options);
 						$complement[$_raccourci][1] =
 							$raccourci_dans_module_utilise ?
-							_T('langonet:complement_definis_non_mais_cas2_1') :
-							($module_utilise_verifiable ? _T('langonet:complement_definis_non_mais_cas2_2') : _T('langonet:complement_definis_non_mais_cas2_3'));
+							_T('langonet:complement_definis_non_mais_cas2_1', $options) :
+							($module_utilise_verifiable ?
+								_T('langonet:complement_definis_non_mais_cas2_2', $options) :
+								_T('langonet:complement_definis_non_mais_cas2_3', $options));
 					} else {
 						if ($raccourci_dans_module_utilise) {
 							// Cas 3 : le raccourci est bien dans le module utilisé mais pas dans le module en cours
 							// de vérification. Il y a de grande chance que ce soit ok mais on le notifie
-							$item_oui_mais[] = $utilisations['occurrences'][$_cle];
+							$item_oui_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
 						} else {
 							// Cas 4 : le raccourci n'est ni dans le module en cours de vérification, ni dans le
 							// module de l'occurrence de vérification. Il est donc non défini mais on ne sait pas
@@ -524,6 +528,7 @@ function reperer_items_manquants($utilisations, $module, $items_module=array(), 
 							// Si l'index est deja pris pour un autre texte
 							// (32 caracteres initiaux communs)
 							// forcer un suffixe md5
+							// TODO : a priori ce code devrait être obsolete
 							$md5 = $_raccourci;
 							if (!preg_match(',^\w+$,', $_raccourci)) {
 								if (isset($tous_lang[$_raccourci])
@@ -531,32 +536,36 @@ function reperer_items_manquants($utilisations, $module, $items_module=array(), 
 									$md5 .= '_' . md5($_raccourci);
 								}
 							}
+							if ($md5 != $_raccourci) var_dump("$md5 - ${_raccourci}");
 							$item_non_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
-							$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas4');
-							$complement[$_raccourci][1] = $module_utilise_verifiable ? '' : _T('langonet:complement_definis_non_mais_cas4_1');
+							$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas4', $options);
+							$complement[$_raccourci][1] = $module_utilise_verifiable ? '' : _T('langonet:complement_definis_non_mais_cas4_1', $options);
 						}
 					}
 				}
-			}
-			else {
-				// L'item est defini dynamiquement (i.e. a l'execution),
-				// il ne peut etre trouve dans un fichier de langue.
-				// On regarde s'il existe des items ressemblants.
-				$item_trouve = false;
-				foreach($items_module as $_item => $_traduction) {
-					if (substr($_item, 0, strlen($_raccourci)) == $_raccourci) {
-						$item_trouve = true;
-						$item_peut_etre[] = $_raccourci;
-						$fichier_peut_etre[$_item] = is_array($utilisations['occurrences'][$_cle]) ? $utilisations['occurrences'][$_cle] : array();
+			} else {
+				if ($utilisations['variables'][$_cle]) {
+					// Cas 5 : le raccourci est totalement variable, il n'est pas possible de trouver un
+					// raccourci rapprochant dans le module en cours de vérification
+					$raccourci_variable = ltrim($_raccourci, '\'".\\');
+					$item_peut_etre[$raccourci_variable] = $utilisations['occurrences'][$_cle];
+					$complement[$raccourci_variable][0] = _T('langonet:complement_definis_peut_etre_cas5');
+				} else {
+					// Cas 6 : le raccourci est partiellement variable
+					// => on cherche un item du module en cours de vérification qui pourrait en approcher
+					//    (commence par le raccourci).
+					$item_approchant = '';
+					foreach($items_module as $_item => $_traduction) {
+						if (substr($_item, 0, strlen($_raccourci)) == $_raccourci) {
+							$item_approchant = $_item;
+						}
 					}
-				}
-				// Si on a pas trouve d'item pouvant correspondre c'est peut-etre que
-				// cet item est en fait une variable ou une expression.
-				// On ajoute ces cas aussi aux incertains (pas essentiel)
-				if (!$item_trouve) {
-					$_item = ltrim($_raccourci, '\'".\\');
-					$item_peut_etre[] = $_item;
-					$fichier_peut_etre[$_item] = is_array($utilisations['occurrences'][$_cle]) ? $utilisations['occurrences'][$_cle] : array();
+					$item_peut_etre[$_raccourci] = $utilisations['occurrences'][$_cle];
+					$complement[$_raccourci][0] = _T('langonet:complement_definis_peut_etre_cas6');
+					$complement[$_raccourci][1] =
+						($item_approchant == '') ?
+						_T('langonet:complement_definis_peut_etre_cas6_1', array('module' => $module)) :
+						_T('langonet:complement_definis_peut_etre_cas6_2', array('module' => $module, 'item' => $item_approchant));
 				}
 			}
 		}
@@ -565,7 +574,6 @@ function reperer_items_manquants($utilisations, $module, $items_module=array(), 
 	return array(
 			'occurrences_non' => $item_non,
 			'occurrences_non_mais' => $item_non_mais,
-			'occurrences_non_mais_nok' => $item_non_mais_nok,
 			'occurrences_oui_mais' => $item_oui_mais,
 			'occurrences_peut_etre' => $item_peut_etre,
 			'complements' => $complement,
