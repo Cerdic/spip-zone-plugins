@@ -135,6 +135,9 @@ function courtjus_trouver_objet_rubrique() {
  */
 function courtjus_trouver_objet($id_rubrique) {
 
+    // Aller chercher les filtres
+    include_spip('inc/flitres');
+
     // On récupère le configuration du plugin
     $config = lire_config('courtjus');
 
@@ -170,18 +173,14 @@ function courtjus_trouver_objet($id_rubrique) {
 
         // On bouble sur les objets a l'intérique de la rubrique.
         foreach ($objets_rubrique as $objet_rubrique) {
-            // Match va contenir le résulat de la recherche de num titre dans le titre
-            $match = null;
-            // On cherche le num titre dans le titre de l'objet
-            preg_match('#^[0-9]*\.#', $objet_rubrique['titre'], $match);
+
+            $num_titre = recuperer_numero($objet_rubrique['titre']);
 
             // On créer le tableau contenant les données de l'objet
             $objets_in_rubrique[] = array(
                 'id_objet' => $objet_rubrique[$champs_id],
                 'objet' => $objet,
-                // Gros Hack, on utilise intval pour avoir une valeur numérique utilisable
-                // Comme le . final est considéré comme une virgule, on fini avec une valeur entière.
-                'num_titre' => intval($match[0])
+                'num_titre' => $num_titre
             );
         }
     }
@@ -205,6 +204,9 @@ function courtjus_trouver_objet($id_rubrique) {
 
         // On créer un tableau avec uniquement les num titre
         $minmax = array_column($objets_in_rubrique, 'num_titre');
+
+        // On va filtrer ce tableau pour n'avoir que des nombre à tester
+        $minmax = array_filter($minmax, 'is_numeric');
 
         // On recherche l'index dans le tableau minmax
         $index = array_search(min($minmax), $minmax);
