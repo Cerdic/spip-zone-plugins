@@ -40,8 +40,17 @@ function formulaires_configurer_courtjus_saisies_dist() {
  * @return mixed
  */
 function formulaires_configurer_courtjus_charger_dist() {
-    return lire_config('courtjus');
+
+    // Temportaire.
+    // On évite que le formulaire de configuration ne casse parce que lire_config renvoie null
+    // A terme il faut remplire les méta à l'installation du plugin
+    if (lire_config('courtjus'))
+        return lire_config('courtjus');
+    else
+        return array();
 }
+
+
 function courtjus_rubrique_exclus() {
     // On va cherché les différent objets intaller sur SPIP
     $objets = lister_tables_objets_sql();
