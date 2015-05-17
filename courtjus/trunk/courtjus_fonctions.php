@@ -60,7 +60,7 @@ function courtjus_calculer_rubrique($id_rubrique) {
     if ($objet)
         return $objet;
     // Sinon, on cherche les enfant de la rubrique et on cherche un objet dedans
-    else {
+    elseif(lire_config('courtjus/rubrique_enfant')) {
         // On chercher parmit les enfants de la rubrique
         $objet = courtjus_trouver_objet_enfant($id_rubrique);
 

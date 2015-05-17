@@ -17,5 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'explication_squelette_par_rubrique' => 'Rediriger si la rubrique possède un squelette spécifique ? (rurbique=2.html/rubrique-2.html)',
     'label_squelette_par_rubrique' => 'Squelette par rubrique',
     'label_num_titre' => 'Article numéroté',
-    'explication_num_titre' => "Rediriger sur l'article avec le plus petit num titre"
+    'explication_num_titre' => "Rediriger sur l'article avec le plus petit num titre",
+    'chercher_rubrique_enfant' => 'Chercher dans les rubriques enfants ?',
+    'explication_chercher_rubrique_enfant' => 'Permettre de chercher dans les sous-rubriques pour trouver un objet ?'
 );

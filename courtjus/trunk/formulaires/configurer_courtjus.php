@@ -23,6 +23,14 @@ function formulaires_configurer_courtjus_saisies_dist() {
         array(
             'saisie' => 'oui_non',
             'options' => array(
+                'nom' => 'rubrique_enfant',
+                'label' => _T('courtjus:chercher_rubrique_enfant'),
+                'explication' => _T('courtjus:explication_chercher_rubrique_enfant'),
+            )
+        ),
+        array(
+            'saisie' => 'oui_non',
+            'options' => array(
                 'nom' => 'squelette_par_rubrique',
                 'label' => _T('courtjus:label_squelette_par_rubrique'),
                 'explication' => _T('courtjus:explication_squelette_par_rubrique')
