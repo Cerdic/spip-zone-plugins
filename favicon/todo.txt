@@ -1,6 +1,7 @@
 = TODO
 = pour favicon
 
+- b_b suggère de supprimer le squelette apple-touch-icon.png fourni par le plugin filtres images une fois que le plugin favicon sera stabilisé http://zone.spip.org/trac/spip-zone/browser/_core_/plugins/filtres_images/apple-touch-icon.png.html (à voir s'il est plus intéressant d'utiliser du php dans le squelette comme le fait celui de filtres images)
 - tcharlss suggère un formulaire d’upload dédié dans l’espace privé
 - erational suggère une page démo dans l’espace privé pour toutes les voir
 - RealET suggère de pouvoir surcharger avec les fichiers graphiques générés par un générateur en ligne, de type http://realfavicongenerator.net
