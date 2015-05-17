@@ -13,8 +13,12 @@
 	</langue>
 	<langue code="ru" url="http://trad.spip.net/tradlang_module/paquet-multilang?lang_cible=ru" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="nazar" lien="http://trad.spip.net/auteur/nazar" />
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/paquet-multilang?lang_cible=sk" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
+	</langue>
+	<langue code="uk" url="http://trad.spip.net/tradlang_module/paquet-multilang?lang_cible=uk" total="2" traduits="2" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 	</langue>
 </traduction>
