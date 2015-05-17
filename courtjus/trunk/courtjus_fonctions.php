@@ -44,8 +44,24 @@ function balise_URL_RUBRIQUE_dist($p) {
  */
 function courtjus_calculer_rubrique($id_rubrique) {
 
+    $par_rubrique = lire_config('courtjus/squelette_par_rubrique');
+    // Si on n'intervient pas sur les squelettes par rubrique
+    if (empty($par_rubrique)) {
+        // Si on trouve une squelette spécifique à cette rubrique, et que l'option est activé, on renvoie l'URL rubrique
+        // Cela ne gère pas pour les sous-rubrique cependant
+        if (find_in_path('rubrique='.$id_rubrique.'.html')
+        or find_in_path('rubrique-'.$id_rubrique.'.html'))
+            return generer_url_entite($id_rubrique, 'rubrique');
 
-
+        // Pour gérer les fichiers rubrique-X parent, on va tester chaque parent
+        include_spip('public/quete');
+        $parent = quete_parent($id_rubrique);
+        do {
+            if (find_in_path('rubrique-'.$parent.'.html'))
+                return generer_url_entite($id_rubrique, 'rubrique');
+        }
+        while ( ($parent = quete_parent($parent)) > 0);
+    }
     // On récupère l'éventuel objet de redirection
     $objet = courtjus_trouver_objet($id_rubrique);
     if ($objet)
@@ -100,8 +116,8 @@ function courtjus_trouver_objet_rubrique() {
         // On exclue la table des rubriques de SPIP automatiquement
         // On exclu aussi éléments marqué comme exclu dans la config
         if (array_key_exists('id_rubrique', $data['field'])
-            and $table != table_objet_sql('rubrique')
-            and !in_array($table, lire_config('courtjus/objet_exclu'))) {
+        and $table != table_objet_sql('rubrique')
+        and !in_array($table, lire_config('courtjus/objet_exclu'))) {
             // On garde le champ qui fait office de titre pour l'objet dans le tableau afin de pouvoir faire un classement par num titre.
             $objet_in_rubrique[] = array($table, $data['titre']);
         }
