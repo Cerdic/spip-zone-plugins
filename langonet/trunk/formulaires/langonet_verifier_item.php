@@ -47,21 +47,10 @@ function formulaires_langonet_verifier_item_traiter() {
 	$items_a_corriger = $resultats['occurrences_non'];
 	if ($items_a_corriger) {
 		$encodage = 'utf8';
-		if ($verification == 'definition') {
-			$extra = $items_a_corriger;
-			foreach ($items_a_corriger as $_item) {
-//				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
-//				$extra[$index] = @$resultats['item_md5'][$_item];
- 			}
-			$mode = 'oublie';
-		}
-		else {
-			$extra = $items_a_corriger;
-			$mode = 'inutile';
-		}
+		$mode = ($verification == 'definition') ? 'oublie' : 'inutile';
 
 		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
-		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
+		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $items_a_corriger);
 		if ($corrections['fichier']) {
 			$retour['message_ok']['corrections']['fichier'] = $corrections['fichier'];
 			$retour['message_ok']['corrections']['explication'] = _T("langonet:message_ok_corrections_${verification}",

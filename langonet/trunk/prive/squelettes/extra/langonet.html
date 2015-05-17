@@ -1,19 +1,24 @@
 [(#REM) <!-- Fichiers produits par certaines operations de langonet --> ]
 [(#ENV{operation, verifier_item}|=={verifier_item}|oui)
-<INCLURE{fond=prive/squelettes/liste/fichiers_log,
+<INCLURE{fond=prive/squelettes/liste/fichiers_lang,
 	verification=definition,
+	titre=<:langonet:titre_bloc_langues_corrigees_definis_non:>,
 	env} />
-<INCLURE{fond=prive/squelettes/liste/fichiers_log,
+<INCLURE{fond=prive/squelettes/liste/fichiers_lang,
 	verification=utilisation,
+	titre=<:langonet:titre_bloc_langues_corrigees_utilises_non:>,
 	env} />
 ]
 
 [(#ENV{operation, verifier_item}|=={verifier_l}|oui)
-<INCLURE{fond=prive/squelettes/liste/fichiers_log,
+<INCLURE{fond=prive/squelettes/liste/fichiers_lang,
 	verification=fonction_l,
+	titre=<:langonet:titre_bloc_langues_corrigees_fonction_l:>,
 	env} />
 ]
 
 [(#ENV{operation, verifier_item}|=={generer}|oui)
-<INCLURE{fond=prive/squelettes/liste/fichiers_lang, env} />
+<INCLURE{fond=prive/squelettes/liste/fichiers_lang,
+	titre=<:langonet:titre_bloc_langues_generees:>,
+	env} />
 ]

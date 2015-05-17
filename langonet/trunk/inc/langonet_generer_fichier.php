@@ -91,20 +91,20 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 
 	// Ecriture du fichier de langue à partir de la liste des items cible
 	$dossier_cible = sous_repertoire(_DIR_TMP,"langonet");
-	if (in_array($mode, $dossier_corrections)) {
+	if (isset($dossier_corrections[$mode])) {
 		$dossier_cible = sous_repertoire($dossier_cible, "verification");
 		$dossier_cible = sous_repertoire($dossier_cible, $dossier_corrections[$mode]);
 	}
 	else {
 		$dossier_cible = sous_repertoire($dossier_cible, "generation");
 	}
-	$ok = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau);
+	$fichier_langue = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau);
 
-	if (!$ok) {
+	if (!$fichier_langue) {
 		$resultats['erreur'] = _T('langonet:message_nok_ecriture_fichier', array('langue' => $langue_cible, 'module' => $module));
 	}
 	else {
-		$resultats['fichier'] = $ok;
+		$resultats['fichier'] = $fichier_langue;
 	}
 
 	return $resultats;
