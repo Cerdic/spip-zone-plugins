@@ -18,27 +18,6 @@
 	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='http://p.henix.be'>Phenix</auteur>
 
-	<licence>GNU/GPL</licence>
-
-	<!--
-		Exemple de commandes
-		* dependances
-		<necessite nom="saisies" compatibilite="[1.21.0;]" />
-		<utilise nom="saisies" compatibilite="[1.21.0;]" />
-		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
-		* pipelines
-		<pipeline nom="autoriser" inclure="courtjus_autorisations.php" />
-		<pipeline nom="insert_head" inclure="courtjus_pipelines.php" />
-		* declarer un pipeline
-		<pipeline nom="mon_pipeline" action="" />
-		* parents de menus de SPIP :
-				menu_accueil (A eviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration
-		<menu nom="courtjus" titre="courtjus:courtjus_titre" parent="menu_edition"  icone="images/courtjus-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ...
-		<onglet nom="courtjus" titre="courtjus:courtjus_titre" parent="configuration" icone="images/courtjus-24.png" />
-	-->
-
   <licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
 
 	<necessite nom="arraycolumn" compatibilite="[1.0.0;]" />
