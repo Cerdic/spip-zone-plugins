@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_page_configurer_courtjus' => 'Court-jus',
-    'courtjus_objet' => 'Objet à courtcircuité'
+    'courtjus_objet_exclu' => 'Choisir les objets qui ne seront <strong>PAS</strong> court-cuircuité.'
 );
 
 ?>

@@ -16,12 +16,11 @@ function formulaires_configurer_courtjus_saisies_dist() {
             'saisie' => 'choisir_objets',
             'options' => array(
                 'nom' => 'objet_exclu',
-                'label' => _T('courtjus:courtjus_objet'),
+                'label' => _T('courtjus:courtjus_objet_exclu'),
                 'exclus' => courtjus_rubrique_exclus()
             )
         )
     );
-
 
     return $saisies;
 }
