@@ -18,6 +18,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 include_spip('array_column/src/array_column');
 
+/**
+ * Créer la balise #URL_RUBRIQUE et y affecter les fonctions du courtjus
+ *
+ * @param mixed $p
+ * @access public
+ * @return mixed
+ */
 function balise_URL_RUBRIQUE_dist($p) {
     $id_rubrique = interprete_argument_balise(1,$p);
     if (!$id_rubrique) $id_rubrique = champ_sql('id_rubrique', $p);
@@ -28,6 +35,13 @@ function balise_URL_RUBRIQUE_dist($p) {
     return $p;
 }
 
+/**
+ * Calculer l'url de la rubrique
+ *
+ * @param mixed $id_rubrique
+ * @access public
+ * @return mixed
+ */
 function courtjus_calculer_rubrique($id_rubrique) {
 
     // On récupère l'éventuel objet de redirection
@@ -43,22 +57,38 @@ function courtjus_calculer_rubrique($id_rubrique) {
     return generer_url_entite($id_rubrique, 'rubrique');
 }
 
+/**
+ * Fonction récurcive de recherche dans les sous-rubriques
+ *
+ * @param mixed $id_rubrique
+ * @access public
+ * @return mixed
+ */
 function courtjus_trouver_objet_enfant($id_rubrique) {
 
+    // Chercher les enfants de la rubrique
     $enfants = courtjus_quete_enfant($id_rubrique);
 
     // On cherche un éventuel objet dans les premiers enfants
     while (list($key,$enfant) = each($enfants) and !$objet) {
         $objet = courtjus_trouver_objet($enfant);
+
+        // S'il n'y a pas d'objet au premier niveau on lance la récurcivité pour trouver continuer de descendre dans la hiérachie.
         if (!$objet) {
             $objet = courtjus_trouver_objet_enfant($enfant);
         }
     }
-
+    // On renvoie l'url
     return $objet;
 }
 
 
+/**
+ * Renvoie le tableau des objets qui possède un id_rubrique. (sans la table spip_rubrique)
+ *
+ * @access public
+ * @return mixed
+ */
 function courtjus_trouver_objet_rubrique() {
     // On va cherché les différent objets intaller sur SPIP
     $objets = lister_tables_objets_sql();
@@ -69,7 +99,7 @@ function courtjus_trouver_objet_rubrique() {
         // Si on trouve "id_rubrique" dans la liste des champs, on garde
         // On exclue la table des rubriques de SPIP
         if (array_key_exists('id_rubrique', $data['field']) and $table != table_objet_sql('rubrique')) {
-            // On garde le titre dans le tableau afin de pouvoir faire un classement par num titre.
+            // On garde le champ qui fait office de titre pour l'objet dans le tableau afin de pouvoir faire un classement par num titre.
             $objet_in_rubrique[] = array($table, $data['titre']);
         }
     }
@@ -77,28 +107,45 @@ function courtjus_trouver_objet_rubrique() {
     return $objet_in_rubrique;
 }
 
+/**
+ * Fonction qui traite les objet d'une rubrique et renvoie l'url du court-cuircuit.
+ *
+ * @param mixed $id_rubrique
+ * @access public
+ * @return mixed
+ */
 function courtjus_trouver_objet($id_rubrique) {
     // On va compter le nombre d'objet présent dans la rubrique
     $tables = courtjus_trouver_objet_rubrique();
 
     // on va compter le nombre d'objet qu'il y a dans la rubrique.
     $objets_in_rubrique = array();
+
+    // On boucle sur tout les table qui pourrait être ratacher à une rubrique
     foreach ($tables as $table) {
         // Simplification des variables. On a besoin du titre pour trouver le num titre
         list($table, $titre) = $table;
+        // L'objet
         $objet = table_objet($table);
+        // l'identifiant de l'objet
         $champs_id = id_table_objet($table);
+
+        // Les champs qui seront utilisé pour la requête.
         $champs = array(
             $champs_id,
             $titre
         );
 
+        // Le where
         $where = array(
             'id_rubrique='.intval($id_rubrique),
             'statut='.sql_quote('publie')
         );
+
+        // On récupère les objets de la rubrique.
         $objets_rubrique = sql_allfetsel($champs, $table, $where);
 
+        // On bouble sur les objets a l'intérique de la rubrique.
         foreach ($objets_rubrique as $objet_rubrique) {
             // Match va contenir le résulat de la recherche de num titre dans le titre
             $match = null;
@@ -146,6 +193,14 @@ function courtjus_trouver_objet($id_rubrique) {
 }
 
 
+
+/**
+ * Renvoie tout les enfants direct d'une rubrique
+ *
+ * @param mixed $id_rubrique
+ * @access public
+ * @return mixed
+ */
 function courtjus_quete_enfant($id_rubrique) {
     // On récupère tous les enfants direct.
     $enfants = sql_allfetsel('id_rubrique', table_objet_sql('rubrique'), 'id_parent='.intval($id_rubrique));
