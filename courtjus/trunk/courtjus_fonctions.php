@@ -167,6 +167,11 @@ function courtjus_trouver_objet($id_rubrique) {
             'statut='.sql_quote('publie')
         );
 
+        // Est-ce qu'il faut prendre en compte la langue ?
+        include_spip('formulaires/configurer_multilinguisme');
+        if (table_supporte_trad($table))
+            $where[] = 'lang='.sql_quote($GLOBALS['spip_lang']);
+
         // On récupère les objets de la rubrique.
         $objets_rubrique = sql_allfetsel($champs, $table, $where);
 
