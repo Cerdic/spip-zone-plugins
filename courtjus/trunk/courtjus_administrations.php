@@ -21,8 +21,11 @@ function courtjus_upgrade($nom_meta_base_version, $version_cible) {
 
     // Tableau de la configuration par défaut
     $maj['create'] = array(
-            array('ecrire_meta', 'courtjus', serialize($config_default))
-        );
+        array('ecrire_meta', 'courtjus', serialize($config_default))
+    );
+    $maj['1.0.1'] =array(
+        array('ecrire_meta', 'courtjus', serialize($config_default))
+    );
 
     // Maj du plugin.
     include_spip('base/upgrade');
