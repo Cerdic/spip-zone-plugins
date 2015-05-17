@@ -41,5 +41,5 @@
 
 
 	<necessite nom="arraycolumn" compatibilite="[1.0.0;]" />
-        <necessite nom="saisies" compatibilite="[1.21.0;]" />
+    <necessite nom="saisies" compatibilite="[2.0.3;[" />
 </paquet>
