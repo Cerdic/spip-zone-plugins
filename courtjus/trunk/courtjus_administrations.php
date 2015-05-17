@@ -37,5 +37,6 @@ function courtjus_upgrade($nom_meta_base_version, $version_cible) {
 */
 function courtjus_vider_tables($nom_meta_base_version) {
     // Supprimer les méta, ou oublie pas celle de la base.
+    effacer_meta('courtjus_base_version');
     effacer_meta('courtjus');
 }
