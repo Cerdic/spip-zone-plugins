@@ -11,6 +11,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
+/**
+ * On inclut array_column pour les version PHP < 5.5
+ * Le test d'existance de fonction est fait dans le fichier
+ */
+include_spip('array_column/src/array_column');
+
 function balise_URL_RUBRIQUE_dist($p) {
     $id_rubrique = interprete_argument_balise(1,$p);
     if (!$id_rubrique) $id_rubrique = champ_sql('id_rubrique', $p);
@@ -144,7 +151,6 @@ function courtjus_quete_enfant($id_rubrique) {
     $enfants = sql_allfetsel('id_rubrique', table_objet_sql('rubrique'), 'id_parent='.intval($id_rubrique));
 
     // On simplifie le tableau pour n'avoir que des id
-    include_spip('array_column/src/array_column');
     $enfants = array_column($enfants, 'id_rubrique');
 
     return $enfants;
