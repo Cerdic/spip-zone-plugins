@@ -1,8 +1,8 @@
 <?php
 /**
- * Fonction d'upgrade/installation du plugin foundation-4-spip
+ * Fonction d'upgrade/installation du plugin
  *
- * @plugin     foundation-4-spip
+ * @plugin     courtjus
  * @copyright  2013
  * @author     Phenix
  * @licence    GNU/GPL
