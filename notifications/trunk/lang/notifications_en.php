@@ -10,10 +10,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'alt_logo_conf' => 'Notifications plugin logo',
 	'article_prive' => 'Articles publishing',
-	'article_prive_admins_restreints' => '<strong>Administrators</strong>: Administrators get notified when article(s) is(are) proposed in their section', # MODIF
-	'article_prive_auteurs' => '<strong>Authors</strong>: Authors get notified when their article(s) is(are) proposed, published or deleted.', # MODIF
+	'article_prive_admins_restreints' => '<strong>Restricted Administrators</strong>: Restricted Administrators get notified when article(s) is(are) proposed in their section.
+For General Administrators see
+ <a href="?exec=configurer_interactions#suivi_edito_non">default tool of SPIP</a>.',
+	'article_prive_auteurs' => '<strong>Authors</strong>: Authors get notified when their article(s) is(are) proposed, published or deleted.',
+	'article_prive_publieur' => 'If one of the authors is the one publishing the article he will not be notified.',
 	'article_propose_detail' => 'The article "@titre@" is submitted for publication.',
-	'article_propose_sujet' => '[@nom_site_spip@] Submitted: @titre@', # MODIF
+	'article_propose_sujet' => '[@nom_site_spip@] Submitted: @titre@',
 	'article_propose_titre' => 'Article submitted
 	---------------',
 	'article_propose_url' => 'You are invited to review it and to give your opinion
@@ -51,15 +54,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_prives_auteur' => '<strong>Authors</strong>: Authors get notified when comments are posted to their article(s) or comment(s) on the private area.',
 	'forum_prives_moderateur' => 'Please indicate the moderator’s email address for private forums, (comma-separated in case of multiple addresses).',
 	'forum_prives_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (private) thread.',
+	'forums_admins_restreints' => '<strong>Administrators</strong> : 
+Restricted administrators get notified when new posts are published in the sector.',
 	'forums_limiter_rubriques_explication' => 'Specify the identifiers of each section where you want to activate the notifications, separated with a comma. example: "11,26"',
 	'forums_limiter_rubriques_label' => 'Limit to these sections:',
 	'forums_prives' => 'Forums in private area',
 	'forums_public' => 'Public forums',
 	'forums_public_a_noter' => 'Note: if forums are awaiting validation from moderators before publication, only authors with rights to validate forums get notified when the comment is posted ; other recipients get notified only when moderators validate the comment.',
-	'forums_public_article' => '<strong>Reply to an article</strong>: persons who have publicly replied to an article will receive forum notifications for that article (useful for «flat»  forums).', # MODIF
+	'forums_public_article' => '<strong>Reply to an article</strong>: persons who have publicly replied to an article will receive forum notifications for that article (useful for «flat»  forums). Posts tagged as deleted or spam will be excluded.',
 	'forums_public_auteurs' => '<strong>Authors</strong>: Authors get notified when new comments are posted to their article(s) on the public area.',
+	'forums_public_liste' => '<strong>additional adress: </strong> an email adress which will receive the posts publicly published  (or several separated by commas), useful for example for non-moderated forums.',
 	'forums_public_moderateur' => 'Please indicate the moderator’s email address for public forums, (comma-separated in case of multiple addresses).',
-	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread.', # MODIF
+	'forums_public_thread' => '<strong>Forum thread</strong>: Posters to the same thread get notified when a new comment is posted to the (public) thread. Posts tagged as deleted or spam are excluded.',
 
 	// I
 	'info_lien_publier_commentaire' => 'Publish this comment online',
