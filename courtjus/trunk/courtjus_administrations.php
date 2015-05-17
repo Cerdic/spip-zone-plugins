@@ -2,7 +2,7 @@
 /**
  * Fonction d'upgrade/installation du plugin
  *
- * @plugin     courtjus
+ * @plugin     Court-Jus
  * @copyright  2013
  * @author     Phenix
  * @licence    GNU/GPL
@@ -33,8 +33,8 @@ function courtjus_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 /*
-*   Désintaller de courtjus.
-*/
+ *   Désintaller courtjus.
+ */
 function courtjus_vider_tables($nom_meta_base_version) {
     // Supprimer les méta, ou oublie pas celle de la base.
     effacer_meta('courtjus_base_version');
