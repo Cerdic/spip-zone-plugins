@@ -9,12 +9,12 @@
 >
 	<!--
 		Paquet genere le 2014-05-22 18:47:49
-		(Vous pouvez bien entendu supprimer ces commentaires) 
+		(Vous pouvez bien entendu supprimer ces commentaires)
 	-->
 
 	<nom>Court-jus</nom>
 
-	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='http://p.henix.be'>Phenix</auteur>
 
 	<licence>GNU/GPL</licence>
@@ -28,17 +28,18 @@
 		* pipelines
 		<pipeline nom="autoriser" inclure="courtjus_autorisations.php" />
 		<pipeline nom="insert_head" inclure="courtjus_pipelines.php" />
-		* declarer un pipeline 
+		* declarer un pipeline
 		<pipeline nom="mon_pipeline" action="" />
 		* parents de menus de SPIP :
 				menu_accueil (A eviter), menu_edition, menu_publication,
-				menu_activite, menu_squelette, menu_administration, menu_configuration 
+				menu_activite, menu_squelette, menu_administration, menu_configuration
 		<menu nom="courtjus" titre="courtjus:courtjus_titre" parent="menu_edition"  icone="images/courtjus-16.png" />
-		* parents d'onglets... configuration, plugins, statistiques, ... 
+		* parents d'onglets... configuration, plugins, statistiques, ...
 		<onglet nom="courtjus" titre="courtjus:courtjus_titre" parent="configuration" icone="images/courtjus-24.png" />
 	-->
 
 
+	<necessite nom="arrayculumn" compatibilite="[1.0.0;]" />
 
 
 </paquet>
