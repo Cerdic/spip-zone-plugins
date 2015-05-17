@@ -15,36 +15,36 @@ function balise_URL_RUBRIQUE_dist($p) {
     $id_rubrique = interprete_argument_balise(1,$p);
     if (!$id_rubrique) $id_rubrique = champ_sql('id_rubrique', $p);
 
-    $code = "court_jus_calculer_rubrique($id_rubrique)";
+    $code = "courtjus_calculer_rubrique($id_rubrique)";
     $p->code = $code;
     $p->interdire_scripts = false;
     return $p;
 }
 
-function court_jus_calculer_rubrique($id_rubrique) {
+function courtjus_calculer_rubrique($id_rubrique) {
 
     // On récupère l'éventuel objet de redirection
-    $objet = court_jus_trouver_objet($id_rubrique);
+    $objet = courtjus_trouver_objet($id_rubrique);
     if ($objet)
         return $objet;
     // Sinon, on cherche les enfant de la rubrique et on cherche un objet dedans
     else {
-        $objet = court_jus_trouver_objet_enfant($id_rubrique);
+        $objet = courtjus_trouver_objet_enfant($id_rubrique);
         return $objet;
     }
 
     return generer_url_entite($id_rubrique, 'rubrique');
 }
 
-function court_jus_trouver_objet_enfant($id_rubrique) {
+function courtjus_trouver_objet_enfant($id_rubrique) {
 
     $enfants = courtjus_quete_enfant($id_rubrique);
 
     // On cherche un éventuel objet dans les premiers enfants
     while (list($key,$enfant) = each($enfants) and !$objet) {
-        $objet = court_jus_trouver_objet($enfant);
+        $objet = courtjus_trouver_objet($enfant);
         if (!$objet) {
-            $objet = court_jus_trouver_objet_enfant($enfant);
+            $objet = courtjus_trouver_objet_enfant($enfant);
         }
     }
 
@@ -52,7 +52,7 @@ function court_jus_trouver_objet_enfant($id_rubrique) {
 }
 
 
-function court_jus_trouver_objet_rubrique() {
+function courtjus_trouver_objet_rubrique() {
     // On va cherché les différent objets intaller sur SPIP
     $objets = lister_tables_objets_sql();
 
@@ -70,9 +70,9 @@ function court_jus_trouver_objet_rubrique() {
     return $objet_in_rubrique;
 }
 
-function court_jus_trouver_objet($id_rubrique) {
+function courtjus_trouver_objet($id_rubrique) {
     // On va compter le nombre d'objet présent dans la rubrique
-    $tables = court_jus_trouver_objet_rubrique();
+    $tables = courtjus_trouver_objet_rubrique();
 
     // on va compter le nombre d'objet qu'il y a dans la rubrique.
     $objets_in_rubrique = array();
@@ -137,6 +137,7 @@ function court_jus_trouver_objet($id_rubrique) {
     // Sinon, si le mot "plus récent"" est activé on redirige sur l'article le plus récente.
 
 }
+
 
 function courtjus_quete_enfant($id_rubrique) {
     // On récupère tous les enfants direct.
