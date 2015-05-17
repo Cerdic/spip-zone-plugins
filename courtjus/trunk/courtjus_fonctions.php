@@ -227,14 +227,16 @@ function courtjus_trouver_objet($id_rubrique) {
  * @return mixed
  */
 function courtjus_quete_enfant($id_rubrique) {
+
+    include_spip('inc/filtres');
+
     // On récupère tous les enfants direct.
     $enfants = sql_allfetsel('id_rubrique, titre', table_objet_sql('rubrique'), 'id_parent='.intval($id_rubrique));
 
     // On va chercher un éventuel num_titre dans les titre
     foreach ($enfants as $index => $enfant) {
-        $match = null;
-        if (preg_match('#^[0-9]*\.#', $enfant['titre'], $match)) {
-            $enfants[$index]['num_titre'] = intval($match[0]);
+        if ($num_titre = recuperer_numero($enfant['titre'])) {
+            $enfants[$index]['num_titre'] = $num_titre;
         }
     }
 
