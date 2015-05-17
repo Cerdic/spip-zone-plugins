@@ -175,7 +175,7 @@ function courtjus_trouver_objet($id_rubrique) {
         // On récupère les objets de la rubrique.
         $objets_rubrique = sql_allfetsel($champs, $table, $where);
 
-        // On bouble sur les objets a l'intérique de la rubrique.
+        // On boucle sur les objets à l'intérique de la rubrique.
         foreach ($objets_rubrique as $objet_rubrique) {
 
             $num_titre = recuperer_numero($objet_rubrique['titre']);
