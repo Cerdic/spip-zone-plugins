@@ -48,7 +48,7 @@ function formulaires_langonet_verifier_item_traiter() {
 	if ($items_a_corriger) {
 		$encodage = 'utf8';
 		if ($verification == 'definition') {
-			$extra = array();
+			$extra = $items_a_corriger;
 			foreach ($items_a_corriger as $_item) {
 //				$index = preg_match('/^(.*)[{].*[}]$/', $_item, $m) ? $m[1] : $_item;
 //				$extra[$index] = @$resultats['item_md5'][$_item];
@@ -64,7 +64,7 @@ function formulaires_langonet_verifier_item_traiter() {
 		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $extra);
 		if ($corrections['fichier']) {
 			$retour['message_ok']['corrections']['fichier'] = $corrections['fichier'];
-			$retour['message_ok']['corrections']['explication'] = _T('langonet:message_ok_corrections_utilisation',
+			$retour['message_ok']['corrections']['explication'] = _T("langonet:message_ok_corrections_${verification}",
 														array('fichier' => $corrections['fichier']));
 		}
 		else
@@ -81,10 +81,11 @@ function formulaires_langonet_verifier_item_traiter() {
 		$retour['message_ok']['resultats']['module'] = $resultats['module'];
 		$retour['message_ok']['resultats']['ou_fichier'] = $resultats['ou_fichier'];
 		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['occurrences_non'];
+		$retour['message_ok']['resultats']['occurrences_non_mais'] = $resultats['occurrences_non_mais'];
 		$retour['message_ok']['resultats']['occurrences_peut_etre'] = $resultats['occurrences_peut_etre'];
 		// Uniquement pour la vérification des définitions
-		$retour['message_ok']['resultats']['occurrences_non_mais'] = isset($resultats['occurrences_non_mais']) ? $resultats['occurrences_non_mais'] : array();
-		$retour['message_ok']['resultats']['occurrences_non_mais_nok'] = isset($resultats['occurrences_non_mais_nok']) ? $resultats['occurrences_non_mais_nok'] : array();
+		$retour['message_ok']['resultats']['occurrences_oui_mais'] = isset($resultats['occurrences_oui_mais']) ? $resultats['occurrences_oui_mais'] : array();
+		$retour['message_ok']['resultats']['complements'] = isset($resultats['complements']) ? $resultats['complements'] : array();
 	}
 	$retour['editable'] = true;
 	return $retour;

@@ -3,7 +3,7 @@
 #SET{arborescence, #ENV{resultats/ou_fichier}}
 <p>
 	[(#GET{arborescence}|count
-		|singulier_ou_pluriel{langonet:info_verification_definition_arbo_1, langonet:info_verification_definition_arbo_n})]
+		|singulier_ou_pluriel{langonet:info_verification_definition_arbo_1, langonet:info_verification_definition_arbo_n, nb, #ARRAY{module, #ENV{resultats/module}}})]
 </p>
 <B_arborescences>
 <ul class="liste arborescence">
@@ -13,18 +13,14 @@
 </ul>
 </B_arborescences>
 
-[<p>
-	(#ENV*{corrections/explication})
-	[(#BOUTON_ACTION{
-		<:langonet:bouton_corriger:>,
-		#URL_ACTION_AUTEUR{langonet_telecharger, #ENV{corrections/fichier}},
-		'', '', ''})]
-</p>]
-
-<BOUCLE_pertinences(DATA) {liste non, non_mais, non_mais_nok, peut_etre}{par cle}>
-	#INCLURE{fond=prive/squelettes/liste/items_definition,
+#SET{colspan, #ARRAY{non, 3, non_mais, 4, peut_etre, 3, oui_mais}}
+<BOUCLE_pertinences(DATA) {liste non, non_mais, peut_etre, oui_mais}{par cle}>
+	[(#INCLURE{fond=prive/squelettes/liste/items_definition,
 		items=#ENV{resultats/occurrences_#VALEUR},
+		complements=#ENV{resultats/complements},
+		corrections=#ENV{corrections},
 		pertinence=#VALEUR,
+		colspan=#GET{colspan}|table_valeur{#VALEUR},
 		module=#ENV{resultats/module},
-		env}
+		env})]
 </BOUCLE_pertinences>
