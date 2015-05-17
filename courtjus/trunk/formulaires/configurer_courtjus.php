@@ -2,6 +2,12 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Création du formulaire de configuration avec saisie
+ *
+ * @access public
+ * @return mixed
+ */
 function formulaires_configurer_courtjus_saisies_dist() {
 
     // Saisie de base
@@ -9,7 +15,7 @@ function formulaires_configurer_courtjus_saisies_dist() {
         array(
             'saisie' => 'choisir_objets',
             'options' => array(
-                'nom' => 'objet',
+                'nom' => 'objet_exclu',
                 'label' => _T('courtjus:courtjus_objet'),
                 'exclus' => court_jus_rubrique_exclus()
             )
@@ -19,6 +25,7 @@ function formulaires_configurer_courtjus_saisies_dist() {
 
     return $saisies;
 }
+
 
 function court_jus_rubrique_exclus() {
     // On va cherché les différent objets intaller sur SPIP
