@@ -2,7 +2,7 @@
 	prefix="courtjus"
 	categorie="navigation"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.16;3.1.*]"
 	logo="prive/themes/spip/images/courtjus-64.png"
   schema="1.0.1"
