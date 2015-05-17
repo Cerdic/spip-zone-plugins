@@ -134,6 +134,10 @@ function courtjus_trouver_objet_rubrique() {
  * @return mixed
  */
 function courtjus_trouver_objet($id_rubrique) {
+
+    // On récupère le configuration du plugin
+    $config = lire_config('courtjus');
+
     // On va compter le nombre d'objet présent dans la rubrique
     $tables = courtjus_trouver_objet_rubrique();
 
@@ -195,7 +199,10 @@ function courtjus_trouver_objet($id_rubrique) {
         return generer_url_entite($objets_in_rubrique[0]['id_objet'], $objets_in_rubrique[0]['objet']);
     }
     // S'il y plusieurs objets dans la rubrique et que le mode "par num titre" est activé, on regiride sur le num titre le plus petit.
-    elseif ($nb_objet > 1 and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0) {
+    elseif ($nb_objet > 1
+      and array_sum(array_column($objets_in_rubrique, 'num_titre')) > 0
+      and $config['num_titre'] == 'on') {
+
         // On créer un tableau avec uniquement les num titre
         $minmax = array_column($objets_in_rubrique, 'num_titre');
 

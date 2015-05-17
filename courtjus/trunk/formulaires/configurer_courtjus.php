@@ -27,6 +27,14 @@ function formulaires_configurer_courtjus_saisies_dist() {
                 'label' => _T('courtjus:label_squelette_par_rubrique'),
                 'explication' => _T('courtjus:explication_squelette_par_rubrique')
             )
+        ),
+        array(
+            'saisie' => 'oui_non',
+            'options' => array(
+                'nom' => 'num_titre',
+                'label' => _T('courtjus:label_num_titre'),
+                'explication' => _T('courtjus:explication_num_titre')
+            )
         )
     );
 
