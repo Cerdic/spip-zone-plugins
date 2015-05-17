@@ -11,13 +11,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-/**
- * On inclut array_column pour les version PHP < 5.5
- * Le test d'existance de fonction est fait dans le fichier
- */
-include_spip('array_column/src/array_column');
-
 /**
  * Créer la balise #URL_RUBRIQUE et y affecter les fonctions du courtjus
  *

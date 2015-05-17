@@ -39,7 +39,6 @@
 	-->
 
 
-	<necessite nom="arrayculumn" compatibilite="[1.0.0;]" />
-
-
+	<necessite nom="arraycolumn" compatibilite="[1.0.0;]" />
+        <necessite nom="saisies" compatibilite="[1.21.0;]" />
 </paquet>
