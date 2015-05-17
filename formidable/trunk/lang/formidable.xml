@@ -3,8 +3,9 @@
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="189" traduits="166" relire="1" modifs="0" nouveaux="22" pourcent="87.83">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/formidable?lang_cible=en" total="189" traduits="177" relire="0" modifs="0" nouveaux="12" pourcent="93.65">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Paolo" lien="http://trad.spip.net/auteur/paolo" />
 		<traducteur nom="twelf" lien="http://trad.spip.net/auteur/twelf" />

@@ -8,7 +8,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'activer_pages_explication' => 'By default, public pages of the forms are not allowed',
+	'activer_pages_label' => 'Allow creation of public pages for the forms.',
+	'admin_reponses_auteur' => 'Allow forms author to modify the answers',
+	'admin_reponses_auteur_explication' => 'Only administrators can normally modify the answers filled in a form (to the bin, published, proposed to evaluation). This option allows the author of a form to modify the status (with the risk to alterate potentiall statistics)
+',
 	'analyse_avec_reponse' => 'Non-empty answers',
+	'analyse_exclure_champs_explication' => 'Insert the name of the fields to exclude, separated by <code>|</code>. Do not insert <code>@</code>.
+
+',
 	'analyse_exclure_champs_label' => 'Fields to exclude',
 	'analyse_exporter' => 'Export analysis',
 	'analyse_longueur_moyenne' => 'Average number in words length',
@@ -124,12 +132,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponses_anonyme' => 'Anonymous',
 	'reponses_auteur' => 'User',
 	'reponses_exporter' => 'Export the answers',
+	'reponses_exporter_format_csv' => 'Spreadsheet.CSV',
+	'reponses_exporter_format_xls' => 'Excel .XLS',
+	'reponses_exporter_telecharger' => 'Download',
 	'reponses_ip' => 'IP address',
 	'reponses_liste' => 'Answers list',
 	'reponses_liste_prop' => 'Answers pending for validation',
 	'reponses_liste_publie' => 'All validated answers',
 	'reponses_nb' => '@nb@ answers',
 	'reponses_supprimer' => 'Delete all the answers to this form',
+	'reponses_supprimer_confirmation' => 'Are you sure you want to delete all answers to this form?',
 	'reponses_voir_detail' => 'See the answer',
 	'retour_aucun_traitement' => 'Your reply was accepted. But as the function of the form has not yet been configured, nothing was done with your data!',
 
@@ -155,6 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_email_message_ok' => 'Your message has been successfully sent by email.',
 	'traiter_email_option_activer_accuse_label' => 'Acknowledgement of receipt',
 	'traiter_email_option_activer_accuse_label_case' => 'Also send an email to the sender with a confirmation message.',
+	'traiter_email_option_courriel_envoyeur_accuse_label' => 'Email of the acknowledgement of receipt',
 	'traiter_email_option_destinataires_explication' => 'Choose the field that corresponds to the message recipients.',
 	'traiter_email_option_destinataires_label' => 'Recipients',
 	'traiter_email_option_destinataires_plus_explication' => 'A list of addresses separated by commas.',
@@ -177,7 +190,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traiter_enregistrement_erreur_base' => 'An error occurred while writing to the database',
 	'traiter_enregistrement_erreur_deja_repondu' => 'You have already filled in this form.',
 	'traiter_enregistrement_erreur_edition_reponse_inexistante' => 'The answer to edit can not be found.',
-	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved', # RELIRE
+	'traiter_enregistrement_message_ok' => 'Thanks. Your answers have been correctly saved',
 	'traiter_enregistrement_option_anonymiser_explication' => 'Results anonymous (don’t keep any tracks of user who have answered).',
 	'traiter_enregistrement_option_anonymiser_label' => 'Anonymize form',
 	'traiter_enregistrement_option_anonymiser_variable_explication' => 'What system variable used to calculate a single value for each author without revealing his identity.',
