@@ -49,10 +49,8 @@ function courtjus_calculer_rubrique($id_rubrique) {
     if ($objet)
         return $objet;
     // Sinon, on cherche les enfant de la rubrique et on cherche un objet dedans
-    else {
-        $objet = courtjus_trouver_objet_enfant($id_rubrique);
-        return $objet;
-    }
+    else
+        return courtjus_trouver_objet_enfant($id_rubrique);
 
     return generer_url_entite($id_rubrique, 'rubrique');
 }
