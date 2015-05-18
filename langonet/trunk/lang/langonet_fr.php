@@ -33,16 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'complement_definis_peut_etre_cas6_1' => 'Aucun item du module «<code>@module@</code>» ne s\'en rapproche.',
 	'complement_definis_peut_etre_cas6_2' => 'L\'item «@item@» du module «<code>@module@</code>» est potentiellement compatible.',
 
-	// E
-	'entete_log_avertissement_nonmais' => 'AVERTISSEMENT : items n\'appartenant pas au module',
-	'entete_log_avertissement_peutetre_definition' => 'AVERTISSEMENT : items peut-être non définis',
-	'entete_log_avertissement_peutetre_utilisation' => 'AVERTISSEMENT : items peut-être non utilisés',
-	'entete_log_date_creation' => 'Fichier généré le @log_date_jour@ à @log_date_heure@.',
-	'entete_log_erreur_definition' => 'ERREUR : items du module non définis',
-	'entete_log_erreur_definition_nonmais' => 'ERREUR : items d\'autres modules non définis',
-	'entete_log_erreur_fonction_l' => 'ERREUR : cas d\'utilisation de la fonction _L()',
-	'entete_log_erreur_utilisation' => 'ERREUR : items non utilisés',
-
 	// I
 	'info_affichage' => 'Choisissez d\'afficher le texte produit ou brut de la traduction.',
 	'info_arborescence_scannee' => 'Choisissez le répertoire de base dont l\'arborescence sera scannée',

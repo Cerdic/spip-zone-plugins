@@ -44,12 +44,12 @@ function calculer_raccourci_brut($occurrence) {
 	$raccourci = strtolower(translitteration($raccourci));
 	$raccourci = trim(preg_replace('/\W+/', ' ', $raccourci));
 	$raccourci = preg_replace('/\b(\w+)\W+\1/', '\1', $raccourci);
-	if (strlen($raccourci) > 32) {
+	if (strlen($raccourci) > 48) {
 	  // trop long: abandonner les petits mots
 		$raccourci = preg_replace('/\b\w{1,3}\W/', '', $raccourci);
-		if (strlen($raccourci) > 32) {
+		if (strlen($raccourci) > 48) {
 			// tant pis mais couper proprement si possible
-			$raccourci = substr($raccourci, 0, 32);
+			$raccourci = substr($raccourci, 0, 48);
 			if ($n = strrpos($raccourci,' ') OR ($n = strrpos($raccourci,'_')))
 				$raccourci = substr($raccourci, 0, $n);
 		}
