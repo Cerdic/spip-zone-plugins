@@ -101,6 +101,11 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 			)
 		),
 	);
+	
+	// Ajouter une table de liens pour les commandes
+	$maj['0.6.0'] = array(
+		array('maj_tables', array('spip_commandes_liens')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

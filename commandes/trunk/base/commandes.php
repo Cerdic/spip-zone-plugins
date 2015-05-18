@@ -175,6 +175,28 @@ function commandes_declarer_tables_objets_sql($tables) {
 	return $tables;
 }
 
+/**
+ * Déclaration de la table de liaison
+ **/
+function commandes_declarer_tables_auxiliaires($tables_auxiliaires) {
+	$spip_commandes_liens = array(
+			"id_commande"         => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"            => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"               => "VARCHAR (50) DEFAULT '' NOT NULL"
+	);
+
+	$spip_commandes_liens_key = array(
+			"PRIMARY KEY"         => "id_commande,id_objet,objet",
+			"KEY id_commande"     => "id_commande"
+	);
+
+	$tables_auxiliaires['spip_commandes_liens'] = array(
+		'field' => &$spip_commandes_liens,
+		'key' => &$spip_commandes_liens_key
+	);
+
+	return $tables_auxiliaires;
+}
 
 /**
  * Définir la jointure `commande_auteur` qui n'est pas sur `spip_commandes_auteurs`
@@ -194,7 +216,3 @@ function inc_rechercher_joints_commande_auteur_dist($table, $table_liee, $ids, $
 	$s = sql_select("id_commande, id_auteur", "spip_commandes", sql_in("id_auteur", $ids), '','','','',$serveur);
 	return array("id_commande", "id_auteur", $s);
 }
-
-
-
-?>
