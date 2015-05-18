@@ -19,8 +19,11 @@ function reservation_inserer($id_parent=null, $set=null) {
 			'data' => $champs
 		)
 	);
-
+	
 	$id = sql_insertq($table_sql, $champs);
+	
+	// On pas l'id dans la session	
+	session_set('id_reservation', $id);
 
 	if ($id){
 		pipeline('post_insertion',
