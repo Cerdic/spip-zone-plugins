@@ -22,6 +22,7 @@
 	<necessite nom="verifier" compatibilite="[1.0.0;]" /> 
 	<necessite nom="yaml" compatibilite="[1.5.0;]" />
 	<necessite nom="facteur" compatibilite="[3.0.1;]" />
+	<utilise nom="commandes" compatibilite="[1.5.0;]" />
 
 	<pipeline nom="autoriser" inclure="abonnements_autorisations.php" /> 
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/abonnements.php" /> 

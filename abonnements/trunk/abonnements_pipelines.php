@@ -156,7 +156,21 @@ function abonnements_post_edition($flux){
 			if ($detail['objet'] = 'abonnements_offre' and ($id_abonnements_offre = $detail['id_objet']) > 0) {
 				// On crée ou renouvelle
 				$action = charger_fonction('creer_ou_renouveler_abonnement', 'action/');
-				$action($id_auteur.'/'.$id_abonnements_offre);
+				$retour = $action($id_auteur.'/'.$id_abonnements_offre);
+				
+				// Si on a un retour correct avec un abonnement
+				if (
+					is_array($retour)
+					and $id_abonnement = intval(reset($retour))
+					and $id_abonnement > 0
+				) {
+					// On lie cet abonnement avec la commande qui l'a généré
+					include_spip('action/editer_liens');
+					objet_associer(
+						array('commande' => $id_commande),
+						array('abonnement' => $id_abonnement)
+					);
+				}
 			}
 		}
 	}
