@@ -177,6 +177,10 @@ function commandes_declarer_tables_objets_sql($tables) {
 
 /**
  * Déclaration de la table de liaison
+ * 
+ * @pipeline declarer_tables_auxiliaires
+ * @param array $tables_auxiliaires Taableau contenant les tables auxiliaires
+ * @return array Retourne le tableau des tables auxiliaires possiblement modifié
  **/
 function commandes_declarer_tables_auxiliaires($tables_auxiliaires) {
 	$spip_commandes_liens = array(
