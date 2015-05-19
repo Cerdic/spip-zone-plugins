@@ -28,7 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'avis_site_introuvable' => 'Site introuvable',
 
     // B
-    'bo_fieldset_label' => 'Back office&nbsp;:',
+    'bo_fieldset_label' => 'Back office',
     'bo_login_label' => 'Identifiant du Back Office&nbsp;:',
     'bo_password_label' => 'Mot de passe du Back Office&nbsp;:',
     'bo_url_label' => 'Url du Back Office&nbsp;:',
