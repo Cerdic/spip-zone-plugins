@@ -10,7 +10,7 @@ class SphinxQL {
 	private $port;
 	private $sql; // objet MySQLi
 
-	public function __construct($host = '127.0.0.1', $port = 19306) {
+	public function __construct($host = '127.0.0.1', $port = 9306) {
 		$this->host = $host;
 		$this->port = $port;
 		$this->connect();
