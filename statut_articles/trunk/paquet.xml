@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/statut_articles-64.png"
-	documentation="http://contrib.spip.net/Statuts-d-articles-4673"
+	documentation="http://contrib.spip.net/4673"
 >
 	<nom>Statut articles</nom>
 
