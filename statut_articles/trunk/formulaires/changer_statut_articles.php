@@ -37,6 +37,7 @@ function formulaires_changer_statut_articles_verifier_dist() {
 
 function formulaires_changer_statut_articles_traiter_dist() {
 	include_spip('action/editer_article');
+	include_spip('inc/invalideur');
 	$retour = array();
 
 	if (_request('confirmer')) {
@@ -45,6 +46,8 @@ function formulaires_changer_statut_articles_traiter_dist() {
 		foreach ($id_articles as $id_article) {
 			$data = array('statut' => _request('statut'));
 			article_instituer($id_article, $data);
+			// invalider le cache
+			suivre_invalideur("id='article/$id_article'");
 		}
 
 		$retour['message_ok'] = _T('statut_articles:statut_articles_modifies');
