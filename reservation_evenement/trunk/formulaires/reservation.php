@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION"))
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-function formulaires_reservation_charger_dist($id = '', $id_article = '') {
+function formulaires_reservation_charger_dist($id = '', $id_article = '', $retour='') {
 	include_spip('inc/config');
 	include_spip('formulaires/selecteur/generique_fonctions');
 
@@ -106,7 +106,7 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '') {
 	return $valeurs;
 }
 
-function formulaires_reservation_verifier_dist($id = '', $id_article = '') {
+function formulaires_reservation_verifier_dist($id = '', $id_article = '', $retour='') {
 	$erreurs = array();
 	$email = _request('email');
 	$id_auteur = '';
@@ -184,12 +184,20 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '') {
 	return $erreurs;
 }
 
-function formulaires_reservation_traiter_dist($id = '', $id_article = '') {
+function formulaires_reservation_traiter_dist($id = '', $id_article = '', $retour='') {
+	if ($retour) {
+		refuser_traiter_formulaire_ajax();
+	}
 	$enregistrer = charger_fonction('reservation_enregistrer', 'inc');
 	if (isset($GLOBALS['visiteur_session']['id_auteur']) and $GLOBALS['visiteur_session']['id_auteur'] > 0) {
 		$id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
 	}
 
-	return $enregistrer($id, $id_article, $id_auteur);
+	$retours = $enregistrer($id, $id_article, $id_auteur);
+	
+	// Si on demande une redirection
+	if ($retour) $retours['redirect'] = $retour;
+
+	return $retours;
 }
 ?>
