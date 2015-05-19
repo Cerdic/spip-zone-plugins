@@ -15,6 +15,11 @@
 
 </div>
 
+
+<div class="block">
+    <INCLURE{fond=objets/liste/organisations, id_contact=#ID_CONTACT, ajax=wysiwyg} />
+</div>
+
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
     <script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>

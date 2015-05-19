@@ -18,6 +18,29 @@
 	titre=<:contacts:info_organisations_filles:>,
 	ajax}>
 
+<div class="block">
+    <INCLURE{fond=objets/liste/contacts,organisation,id_organisation,ajax,env} />
+</div>
+<div class="clearfix"></div>
+
+<div class="block">
+    <INCLURE{fond=objets/liste/projets,organisation,id_organisation,ajax,env} />
+</div>
+<div class="clearfix"></div>
+
+<B_autresobjets>
+<div class="block">
+    <BOUCLE_autresobjets (spip_organisations_liens) {id_organisation} {fusion objet}{par objet}>
+        #SET{table,#OBJET|table_objet}
+        [(#SET{titre,[#OBJET:info_(#GET{table})_liees_organisation]})]
+        [(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},organisations_lies}})]
+        <INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_organisation,ajax,env} />
+    </BOUCLE_autresobjets>
+</div>
+<div class="clearfix"></div>
+</B_autresobjets>
+
+
 #BOITE_FERMER
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{type-page}','#navigation,#chemin');/*\]\]>*/</script>

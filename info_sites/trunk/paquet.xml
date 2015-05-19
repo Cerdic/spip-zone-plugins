@@ -1,7 +1,7 @@
 <paquet
     prefix="info_sites"
     categorie="outil"
-    version="0.13.1"
+    version="1.0.0"
     etat="dev"
     compatibilite="[3.0.8;3.0.*]"
     logo="prive/themes/spip/images/info_sites-64.png"
@@ -11,6 +11,7 @@
     <nom>Info Sites</nom>
 
     <auteur>Teddy Payet</auteur>
+    <auteur>Jeremy Scherrer</auteur>
 
     <licence>GNU/GPL</licence>
 
