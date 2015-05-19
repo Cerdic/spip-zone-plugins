@@ -1,5 +1,5 @@
 <ul class="identifiants">
-    [(#SESSION{id_auteur}|non)
+    [(#SESSION{id_auteur}|>{0}|non)
     <li class="login">
     	#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
     	[(#SET{titre_login,<:lien_connecter:>})]
@@ -15,7 +15,7 @@
     #GENERER_SAISIES{#ENV{champs_extras_auteurs}}
     
        <!--extra_connection1-->
-    [(#SESSION{id_auteur}|non)
+    [(#SESSION{id_auteur}|>{0}|non)
        
     <li>
         [(#SAISIE{checkbox,enregistrer,class=enregistrer,label=<:reservation:label_enregistrer:>,datas=#ARRAY{1,<:reservation:ok:>}})]
