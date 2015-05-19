@@ -3,7 +3,6 @@ if (!defined('_ECRIRE_INC_VERSION'))
 	return;
 
 function reservation_inserer($id_parent = null, $set = null) {
-	include_spip('inc/session');
 	$table_sql = table_objet_sql('reservation');
 	$champs = array();
 	$champs['statut'] = 'encours';
@@ -19,9 +18,6 @@ function reservation_inserer($id_parent = null, $set = null) {
 	));
 
 	$id = sql_insertq($table_sql, $champs);
-
-	// On pas l'id dans la session
-	session_set('id_reservation', $id);
 
 	if ($id) {
 		pipeline('post_insertion', array(
