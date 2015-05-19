@@ -1,8 +1,7 @@
 <BOUCLE_projets_site (PROJETS_SITES) {id_projets_site} {tous}>
 [(#AUTORISER{voir,projets_site,#ID_PROJETS_SITE}|sinon_interdire_acces)]
 [(#BOITE_OUVRIR{[
-
-	<h2>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h2>
+	<h1 class="titre">[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h1>
 ],simple fiche_objet})]
 
 [(#LOGO_PROJETS_SITE|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})

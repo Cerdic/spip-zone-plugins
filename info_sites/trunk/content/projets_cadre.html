@@ -1,8 +1,6 @@
-
 <BOUCLE_projet (PROJETS_CADRES) {id_projets_cadre} {tous}>
 [(#BOITE_OUVRIR{[
-
-	<h2 class="titre">[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h2>
+	<h1 class="titre">[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})</h1>
 ],simple fiche_objet})]
 
 [(#LOGO_PROJETS_CADRE|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})

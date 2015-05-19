@@ -100,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'stats_nb_versions' => 'Nombre de versions',
 
     // T
+    'titre_informations_annexes' => 'Informations annexes',
     'titre_logiciel_plugins_maj' => 'Mise à jour des plugins',
     'titre_logiciel_plugins_maj_meme_branche' => 'Mise à jour des plugins sur la même branche',
     'titre_page_configurer_info_sites' => 'Configurer le plugin Info Sites',
