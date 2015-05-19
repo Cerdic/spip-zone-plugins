@@ -9,7 +9,7 @@
 	&#224; afficher dans le calendrier et publi&#233;es de la messagerie de l'espace priv&#233;
 	d'un site dans sa partie publique.
 	</description>
-	<icon>images/annonce_publique-64.png</icon>
+	<icon>prive/themes/spip/images/annonce_publique-64.png</icon>
 	<prefix>AP</prefix>
 	<fonctions>ap_fonctions.php</fonctions>
 	<options>ap_options.php</options>
