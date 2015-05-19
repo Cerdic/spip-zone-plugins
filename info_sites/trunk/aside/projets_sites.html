@@ -1,0 +1,8 @@
+<div class="dropdown boutons">
+<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAction" data-toggle="dropdown"><:info_sites:btn_label_actions:> <span class="caret"></span></button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownAction">
+	[(#AUTORISER{creer,projets_site})
+	    <li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_ECRIRE{projets_site_edit,new=oui}|parametre_url{redirect,#URL_SITE_SPIP/#SELF})]" class="bouton creer" rel="nofollow" target="_blank" onclick="if (jQuery.modalbox) {jQuery.modalbox('[(#URL_ECRIRE{projets_site_edit}|parametre_url{new,'oui'}|parametre_url{redirect,#URL_SITE_SPIP/#SELF}|parametre_url{var_zajax,contenu})]');return false;}"><i class="fa fa-plus-circle"></i> <:projets_site:icone_creer_projets_site:></a></li>
+		<li class="action" role="presentation"><a role="menuitem" tabindex="-1" href="[(#URL_PAGE{ajouter_fiche_site})]" class="bouton creer" rel="nofollow"><i class="fa fa-plus-circle"></i> <:info_sites:icone_creer_fiche_siste:></a></li>
+	]</ul>
+</div>

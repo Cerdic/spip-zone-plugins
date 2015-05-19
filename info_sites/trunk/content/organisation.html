@@ -2,7 +2,7 @@
 <BOUCLE_organisation (ORGANISATIONS) {id_organisation} {tous}>
 [(#BOITE_OUVRIR{[
 
-	<h2>[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h2>
+	<h2 class="titre">[(#RANG). ](#NOM|sinon{<:info_sans_titre:>})</h2>
 ],simple fiche_objet})]
 
 [(#LOGO_ORGANISATION|image_reduire{600,0}|vider_attribut{style}|vider_attribut{width}|vider_attribut{height}|inserer_attribut{'class','img-responsive'})

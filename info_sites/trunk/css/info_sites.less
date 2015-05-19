@@ -75,7 +75,7 @@ a{
 
 .container-fluid,
 .container{
-	max-width: 1350px;
+	padding: 0 35px;
 }
 
 h1 {
@@ -84,7 +84,7 @@ h1 {
 	}
 }
 
-.grostitre{
+.titre{
 	margin-top:0;
 }
 
@@ -92,7 +92,7 @@ h1 {
 	margin-bottom: 1em;
 }
 .breadcrumb {
-	margin: 12px 0;
+	margin: 12px 0 20px;
 }
 .icone {
 	&.s24 {
@@ -798,10 +798,24 @@ input{
 		padding-top: 1em;
 		padding-bottom: 1px;
 		margin-bottom: 1em;
+
 		&.vide {
 			visibility: hidden;
 			display: none;
 		}
+
+		&:first-child{
+			border:0;
+		}
+
+		&.contenu_statut{
+			.statut{
+				img{
+					margin-bottom: 6px;
+				}
+			}
+		}
+
 		.label {
 			color: black;
 			display: block;
@@ -813,11 +827,12 @@ input{
 			overflow: hidden;
 			text-align: left;
 			white-space: normal;
-			width: 25%;
+			width: 19%;
 			word-wrap: break-word;
+			padding-left: 0;
 		}
 		.span {
-			width: 70%;
+			width: 80%;
 			float: right;
 			text-align: left;
 			display: block;
@@ -986,6 +1001,20 @@ button {
 		}
 	}
 }
+
+
+
+.dropdown-menu{
+	padding:0;
+	box-shadow:0 !important;
+
+	> li{
+	 	> a{
+			padding:7px 12px;
+		}
+	}
+}
+
 
 @media (max-width: 767px) {
 	#aside {

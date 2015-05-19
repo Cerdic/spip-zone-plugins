@@ -11,19 +11,23 @@
 
 			<div class="row">
 
-				<INCLURE{fond=aside/#ENV{type-page},env} />
+				<INCLURE{fond=navigation/dist} />
 				
 				<div class="content col-md-12" id="content">
 
 					<INCLURE{fond=breadcrumb/#ENV{type-page},env} />
 
 					<div class="row">
-						<div class="col-md-9">
+						<div class="contenu col-md-10">
 							<INCLURE{fond=content/#ENV{type-page},env} />
+
+							<div id="extra">
+								<INCLURE{fond=extra/#ENV{type-page},env} />
+							</div>
 						</div>
 
-						<div class="col-md-3" id="extra">
-							<INCLURE{fond=extra/#ENV{type-page},env} />
+						<div class="col-md-2" id="aside">
+							<INCLURE{fond=aside/#ENV{type-page},env} />
 						</div>
 					</div>
 
@@ -34,7 +38,7 @@
 	</div>
 
 	<div id="footer" class="footer">
-			<INCLURE{fond=footer/#ENV{type-page},env} />
+		<INCLURE{fond=footer/#ENV{type-page},env} />
 	</div>
 
 </body>
