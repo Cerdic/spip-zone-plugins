@@ -1,5 +1,27 @@
 @import "css/variables.less";
 
+html{
+	position:relative;
+	min-height: 100%;
+	background-color: @bg-violet;
+}
+
+body{
+	margin-bottom:60px;
+	background-color: @bg-violet;
+}
+
+a, button, input, textarea, select, option{
+	outline:0 !important;
+	box-shadow:0 !important;
+}
+
+a[rel*=home]{
+	text-decoration:none !important;
+}
+
+
+// couleurs de fond
 .bg-primary {
   background-color: @bg-primary;
   color: white;
@@ -58,25 +80,12 @@
   color: @gray-light;
 }
 
-html{
-	position:relative;
-	min-height: 100%;
-	background-color: @bg-violet;
-}
-
-body{
-	margin-bottom:60px;
-	background-color: @bg-violet;
-}
-
-a{
-	outline:0 !important;
-}
 
 .container-fluid,
 .container{
 	padding: 0 35px;
 }
+
 
 h1 {
 	small {
@@ -84,16 +93,26 @@ h1 {
 	}
 }
 
-.titre{
+h1.titre{
 	margin-top:0;
+	font-size: 2.3em;
+}
+
+.contenu h2{
+	font-size: 1.7em;
 }
 
 .block {
 	margin-bottom: 1em;
 }
+
+
+
 .breadcrumb {
+	display: none;
 	margin: 12px 0 20px;
 }
+
 .icone {
 	&.s24 {
 		&.right {
@@ -127,18 +146,23 @@ h1 {
 	overflow: hidden;
 }
 
+
+// TABLEAUX
 table {
 	margin-bottom: 20px;
 	max-width: 100%;
 	width: 100%;
 	border: 1px solid #ddd;
+
 	+ .pagination {
 		margin-top: 0;
 	}
+
 	> caption {
 		padding-top: 0.5em;
 		padding-bottom: 0.5em;
 	}
+
 	> caption + thead, > thead:first-child {
 		> tr {
 			&:first-child {
@@ -147,6 +171,7 @@ table {
 			}
 		}
 	}
+
 	> thead {
 		> tr {
 			> th, > td {
@@ -157,6 +182,7 @@ table {
 		> td {
 			&.bg-warning {
 				background-color: @bg-warning !important;
+
 				table {
 					color: @black;
 				}
@@ -168,6 +194,7 @@ table {
 .liste-objets {
 	margin-top: 1em;
 	border-top: 1px solid @gray-third;
+
 	&.projets_sites {
 		&.caption-wrap {
 			padding-top: 0.5em;
@@ -181,12 +208,14 @@ table {
 		ul {
 			padding-left: 0;
 			list-style: none;
+
 			li {
 				padding-left: 50px;
 				position: relative;
 				border-top: 1px solid @gray-second;
 				padding-top: 1em;
 				margin-bottom: 1em;
+
 				.spip_logos {
 					position: absolute;
 					left: 0;
@@ -194,6 +223,7 @@ table {
 			}
 		}
 	}
+
 	&.resultats {
 		background-color: @bg-bright;
 		border: 1px solid @gray-third;
@@ -207,6 +237,7 @@ table {
 		}
 	}
 }
+
 
 // --------
 // Les boutons de bootstrap
@@ -291,26 +322,20 @@ table {
     border-color: darken(@bg-primary, 5%); // #196fa5;
 }
 .btn-success {
-    color: white;
-    background-color: @bg-success; // @bg-success;
-    border-color: darken(@bg-success, 5%); // #1f9978;
+
     .badge {
         color: @bg-success; // @bg-success;
         background-color: white;
     }
 }
-.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active,
+.open >.btn-success.dropdown-toggle {
     color: white;
-    background-color: darken(@bg-success, 10%); //#1a8468;
-    border-color: darken(@bg-success, 17%); //#146650;
 }
 .btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
     background-image: none;
 }
-.btn-success.disabled, .btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .btn-success[disabled], .btn-success[disabled]:hover, .btn-success[disabled]:focus, .btn-success[disabled]:active, .btn-success[disabled].active, fieldset[disabled] .btn-success, fieldset[disabled] .btn-success:hover, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:active, fieldset[disabled] .btn-success.active {
-    background-color: @bg-success;
-    border-color: darken(@bg-success, 5%); // #1f9978;
-}
+
 .btn-info {
     color: white;
     background-color: @bg-info;
@@ -422,6 +447,19 @@ table {
             margin-top: 5px;
         }
 }
+
+button {
+	&.link {
+		background: none repeat scroll 0 0 transparent;
+		border: 0 none;
+		color: @gray-dark;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
 input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"].btn-block {
     width: 100%;
 }
@@ -450,54 +488,67 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	border-collapse: collapse;
 	width: 100%;
 	overflow: hidden;
+
 	.boutons_action {
 		list-style: none;
 		padding-left: 0;
 		margin-bottom: 1em;
 		overflow: hidden;
 		width: 100%;
+
 		.action {
 			display: inline-block;
 			float: left;
 			width: 100%;
 			padding: 15px 5%;
 			font-size: 1.125em;
+
 			&:nth-child(odd) {
 			}
+
 			.bouton {
 				color: @white;
 				display: block;
 				padding: 15px 12.75%;
 				margin: -15px -12.5%;
 				background-color: @bg-info;
+
 				&:hover {
 					background-color: darken(@bg-info, 10%);
 					text-decoration: none;
 				}
+
 				&.creer {
 					background-color: @bg-info;
 					color: @white;
+
 					&:hover {
 						background-color: darken(@bg-info, 10%);
 					}
 				}
+
 				&.modifier {
 					background-color: @bg-success;
 					color: @white;
+
 					&:hover {
 						background-color: darken(@bg-success, 10%);
 					}
 				}
+
 				&.supprimer {
 					background-color: @bg-danger;
 					color: @white;
+
 					&:hover {
 						background-color: darken(@bg-danger, 10%);
 					}
 				}
+
 				&.editer_liens {
 					background-color: @bg-primary-light;
 					color: @white;
+
 					&:hover {
 						background-color: darken(@bg-primary-light, 10%);
 					}
@@ -515,10 +566,24 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
 	}
 }
 
-// éléments de formulaires
-input{
-	box-shadow:0;;
+// --------
+// Eléments de formulaires
+// --------
+.form-control:focus,
+input, textarea, select{
+	-webkit-box-shadow:0;
+	-moz-box-shadow:0;
+	box-shadow:0;
 }
+
+textarea{
+	resize:vertical
+}
+
+input[type="radio"], input[type="checkbox"]{
+	margin-top: 1px;
+}
+
 
 // --------
 // Les grands blocs de pages
@@ -543,6 +608,7 @@ input{
 			padding-right:0;
 		}
 	}
+
 	.form-search {
 		margin-top: 1em;
 		padding-top: 1em;
@@ -567,17 +633,30 @@ input{
 
 	}
 }
+
+
+#content {
+	padding-top: 20px;
+	background-color: @white;
+	overflow: hidden;
+}
+
+
 #extra {
 	padding-bottom: 1em;
+
 	.block {
 		.champ:first-child {
 			margin-top: 1em;
 		}
+
 		&.liste {
 			margin-top: 1em;
 		}
 	}
 }
+
+
 
 #menu {
 	background: @bg-dark;
@@ -626,126 +705,22 @@ input{
 }
 
 
-#content {
-	background-color: @white;
-	overflow: hidden;
-}
+#aside{
+	.filtre{
+		margin-top: 20px;
+	}
 
-// On va styler tous les formulaires d'édition d'un objet.
-.formulaire_spip {
-	padding: 0.5em;
-	background-color: @gray-lighter;
-	overflow: hidden;
-	.titrem {
-		display: none;
-		visibility: hidden;
-	}
-	ul {
-		padding-left: 0;
-		list-style: none;
-		li {
-			overflow: hidden;
-			padding-bottom: 0.5em;
-			margin-bottom: 1em;
-			&.erreur {
-				.erreur_message {
-					font-weight: bold;
-					color: @bg-danger;
-					text-align: right;
-					display: none;
-				}
-				input, select {
-					border: 1px solid @bg-danger;
-				}
-			}
-			label {
-				width: 25%;
-				margin-right: 3%;
-				float: left;
-				text-align: right;
-				word-break:normal;
-				font-weight: normal;
-			}
-			&.obligatoire {
-				label {
-					font-weight: bold;
-				}
-			}
-			input, .edition, .explication, select, textarea {
-				width: 72%;
-				float: right;
-				margin-top: 0.3em;
-			}
-			.edition {
-				textarea {
-					width: 100%;
-				}
-			}
-			.explication {
-				margin-top: 0;
-				+ .choix {
-					margin-left: 28%;
-				}
-				+ input, .edition, .explication, select, textarea {
-					margin-top: 0;
-				}
-			}
-			.choix {
-				float: left;
-				margin-right: 1em;
-				overflow: hidden;
-				width: auto;
-				label {
-					width: auto;
-					margin-right: 0.5em;
-				}
-				input {
-					width: auto;
-				}
-			}
-			&.saisie_date {
-				position: relative;
-				.explication {
-					clear: right;
-				}
-				input {
-					width: 72%;
-					clear: right;
-				}
-				.ui-datepicker-trigger {
-					float: right;
-					position: absolute;
-					margin-left: 0;
-					right: 5px;
-					bottom: 10px;
-				}
-			}
-		}
-	}
-	.reponse_formulaire {
-		padding: 0.5em;
-		&.reponse_formulaire_ok {
-			background-color: @bg-success;
-			color: @white;
-		}
-		&.reponse_formulaire_erreur {
-			background-color: @bg-warning;
-			color: @white;
-		}
-	}
-	p.boutons {
-		width: 72%;
-		float: right;
-		input {
+	.sommaire{
+		margin-top: 20px;
+
+		ul{
+			padding-left: 14px;
+			margin-bottom: 0;
 		}
 	}
 }
 
-.cadre-formulaire-editer {
-	.formulaire_spip {
-		&:extend{.formulaire_spip};
-	}
-}
+
 
 #footer {
 	color: @white;
@@ -765,7 +740,6 @@ input{
 	}
 
 	.menu_rubriques {
-
 		h2 {
 			display: none;
 		}
@@ -791,13 +765,150 @@ input{
 	}
 }
 
-// On style les inclures prive/objets/contenu/xxxx.html
+
+// --------
+// Formulaires d'édition d'un objet.
+// --------
+.formulaire_spip {
+	padding: 15px;
+	background-color: @gray-lighter;
+	overflow: hidden;
+
+	.titrem {
+		display: none;
+		visibility: hidden;
+	}
+
+	ul {
+		padding-left: 0;
+		list-style: none;
+
+		li {
+			overflow: hidden;
+			padding-bottom: 0.5em;
+			margin-bottom: 1em;
+
+			&.erreur {
+				.erreur_message {
+					font-weight: bold;
+					color: @bg-danger;
+					text-align: right;
+					display: none;
+				}
+				input, select {
+					border: 1px solid @bg-danger;
+				}
+			}
+
+			label {
+				width: 20%;
+				margin-right: 2%;
+				margin-bottom: 0;
+				float: left;
+				text-align: right;
+				word-break:normal;
+				font-weight: normal;
+			}
+
+			&.obligatoire {
+				label {
+					font-weight: bold;
+				}
+			}
+
+			input, .edition, .explication, select, textarea {
+				width: 76%;
+				float: right;
+			}
+
+			.edition {
+				textarea {
+					width: 100%;
+				}
+			}
+
+			.explication {
+				margin-top: 0;
+
+				+ .choix {
+					margin-left: 28%;
+				}
+				+ input, .edition, .explication, select, textarea {
+					margin-top: 0;
+				}
+			}
+
+			.choix {
+				float: left;
+				margin-right: 1em;
+				overflow: hidden;
+				width: auto;
+
+				label {
+					width: auto;
+					margin-right: 0.5em;
+				}
+				input {
+					width: auto;
+				}
+			}
+
+			&.saisie_date {
+				position: relative;
+
+				.explication {
+					clear: right;
+				}
+				input {
+					width: 72%;
+					clear: right;
+				}
+
+				.ui-datepicker-trigger {
+					float: right;
+					position: absolute;
+					margin-left: 0;
+					right: 5px;
+					bottom: 10px;
+				}
+			}
+		}
+	}
+
+	.reponse_formulaire {
+		padding: 0.5em;
+
+		&.reponse_formulaire_ok {
+			background-color: @bg-success;
+			color: @white;
+		}
+
+		&.reponse_formulaire_erreur {
+			background-color: @bg-warning;
+			color: @white;
+		}
+	}
+
+	p.boutons {
+		float: right;
+	}
+}
+
+.cadre-formulaire-editer {
+	.formulaire_spip {
+		&:extend{.formulaire_spip};
+	}
+}
+
+
+
+// --------
+// Inclures prive/objets/contenu/xxxx.html
+// --------
 	.champ {
 		overflow: hidden;
 		border-top: 1px solid @gray-lighter;
-		padding-top: 1em;
-		padding-bottom: 1px;
-		margin-bottom: 1em;
+		padding: 10px 0;
 
 		&.vide {
 			visibility: hidden;
@@ -827,19 +938,22 @@ input{
 			overflow: hidden;
 			text-align: left;
 			white-space: normal;
-			width: 19%;
+			width: 14%;
 			word-wrap: break-word;
 			padding-left: 0;
 		}
 		.span {
-			width: 80%;
+			width: 85%;
 			float: right;
 			text-align: left;
 			display: block;
 		}
 	}
 
+
+// --------
 // formulaire de liens dans le front
+// --------
 .formulaire_editer_liens, .formulaire_editer_liens_simples {
 	margin: 1em 0;
 	display: block;
@@ -847,6 +961,7 @@ input{
 	position: relative;
 	padding: 0.5em;
 	border: 1px solid @brand-primary;
+
 	.over {
 		height: 1%;
 		left: -3000em;
@@ -857,8 +972,10 @@ input{
 		right: 5px;
 		top: 5px;
 	}
+
 	.selecteur {
 		display: block;
+
 		h3.titrem {
 			background-color: @brand-primary;
 			margin: 0 -0.5em 0.5em;
@@ -875,23 +992,20 @@ input{
 		}
 	}
 }
-button {
-	&.link {
-		background: none repeat scroll 0 0 transparent;
-		border: 0 none;
-		color: @gray-dark;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-}
 
+
+
+
+// --------
 // page de connexion au back office
+// --------
 .page_login {
 	background-color: @bg-dark;
+
 	body {
 		background-color: @bg-dark;
 	}
+
 	#content {
 		.cartouche {
 			h1 {
@@ -906,25 +1020,30 @@ button {
 			text-align: right;
 		}
 	}
+
 	.container {
 		margin-top: 2em;
 		padding-top: 2em;
 		padding-bottom: 2em;
 		background-color: @white;
+
 		> .row {
 			position: relative;
+
 			header {
 				text-align: right;
 				margin-bottom: 1em;
+
 				h1 {
 					overflow: hidden;
 					margin-top: 0;
-					margin-bottom: 1em;
+
 					small {
 						display: block;
 					}
 				}
 			}
+
 			div.col-md-6 {
 				background-color: @white;
 				padding-top: 2em;
@@ -933,6 +1052,45 @@ button {
 		}
 	}
 }
+
+
+
+
+// --------
+// Page formulaire_login
+// --------
+.page_login{
+
+	.container{
+		padding:20px;
+	}
+
+	h1{
+		float: left;
+	}
+
+	#formulaire_menu_lang{
+		background-color: transparent;
+	}
+
+	fieldset{
+		margin:0 auto;
+		width:30%;
+
+		input[type=text],
+		input[type=password]{
+			display: block;
+			width:100%;
+		}
+
+		input[type=checkbox]{
+			float: left;
+			margin-right: 10px;
+		}
+	}
+
+}
+
 .formulaire_login {
 	#formulaire_login {
 		width: auto;
@@ -971,6 +1129,7 @@ button {
 				height: auto;
 				box-sizing: border-box;
 				position: relative;
+
 				&.password, &[type='password'] {
 					&:before {
 						content: "hello";
@@ -979,6 +1138,7 @@ button {
 						background-color: gray;
 					}
 				}
+
 				&[type='checkbox'] {
 					text-align: left;
 					width: auto;
@@ -987,12 +1147,14 @@ button {
 
 				}
 			}
+
 			.details {
 				width: 55%;
 				float: right;
 				display: block;
 				padding: 5px 0;
 			}
+
 			#pass_securise {
 				position: absolute;
 				top: 10px;
@@ -1004,6 +1166,11 @@ button {
 
 
 
+
+
+// --------
+// Bouton d'action contenant un menu déroulant
+// --------
 .dropdown-menu{
 	padding:0;
 	box-shadow:0 !important;
@@ -1016,6 +1183,10 @@ button {
 }
 
 
+
+// --------
+// Media Queries
+// --------
 @media (max-width: 767px) {
 	#aside {
 		.menu {

@@ -8,7 +8,7 @@
 			$('#content').css({
 				height: $('#aside').height()
 			});
-		};
+		}
 
 		// On active les tooltips pour la sidebar.
 		$('#aside a').tooltip({
@@ -17,7 +17,7 @@
 		});
 
 		$('[type=submit]').each(function(event) {
-			$(this).addClass('btn btn-default');
+			$(this).addClass('btn btn-success');
 		});
 
 		$('#content .icone.s24 a').each(function(event) {
@@ -31,13 +31,13 @@
 		var rows = $(".page_diagnostic_iso #content table tr.data");
 		rows.each(function() {
 			var cells = $(this).find('td');
-			console.log(cells);
+			
 			for (var i = 1; i < cells.length; i++) {
 				if (cells.eq(1).html() != cells.eq(i).html()) {
 					cells.eq(1).addClass('bg-warning');
 					cells.eq(i).addClass('bg-warning');
-				};
-			};
+				}
+			}
 			$(this).find("table tr td").each(function() {
 				$(this).removeClass('bg-warning');
 			});
@@ -55,7 +55,7 @@
 				fiche.addClass('hidden').removeClass('visible');
 				target.addClass('ferme').removeClass('ouvert');
 				target.find('i').addClass('fa-angle-double-right').removeClass('fa-angle-double-down');
-			};
+			}
 		});
 
 	    // $('.page_projets_site #wysiwyg .champ.fieldset').each(function () {

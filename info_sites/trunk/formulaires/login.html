@@ -19,28 +19,33 @@
 	<fieldset>
 		<legend><:form_forum_identifiants:></legend>
 		[<span id="spip_logo_auteur">(#ENV*{_logo,''})</span>]
-		<ul>
-			<li class="editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur text-danger]">
+
+			<div class="form-group editer editer_login obligatoire[(#ENV**{erreurs}|table_valeur{var_login}|oui)erreur text-danger]">
+		
 				[<span class="erreur_message bg-danger">(#ENV**{erreurs}|table_valeur{var_login})</span>
 				]<label for="var_login"><:login_login2:></label>
 				<input type='text' class='text form-group' name='var_login' id='var_login' value="[(#ENV**{var_login})]" size='40'[(#HTML5) required='required' autofocus='autofocus'] autocapitalize="off" autocorrect="off" />
-			</li>
-			<li class="editer editer_password obligatoire[(#ENV**{erreurs}|table_valeur{password}|oui)erreur text-danger]">
+			</div>
+
+			<div class="form-group editer editer_password obligatoire[(#ENV**{erreurs}|table_valeur{password}|oui)erreur text-danger]">
 				[<span class="erreur_message bg-danger">(#ENV**{erreurs}|table_valeur{password})</span>
 				]<label for="password"><:login_pass2:></label>
 				<input type='password' class='text password form-group' name='password' id='password' value="" size='40' autocapitalize="off" autocorrect="off" />
-				<p class='details'><a href="[(#URL_PAGE{spip_pass}|parametre_url{lang,#LANG})]" id='spip_pass'><:login_motpasseoublie:></a></p>
-			</li>
+				<p class='details text-right'><a href="[(#URL_PAGE{spip_pass}|parametre_url{lang,#LANG})]" id='spip_pass'><:login_motpasseoublie:></a></p>
+			</div>
+
 			[(#ENV{rester_connecte})
-			<li class="editer editer_session">
+			<div class="form-group editer editer_session">
 				<div class='choix'>
 					<input type="checkbox" class="checkbox" name="session_remember" id="session_remember" value="oui" [(#ENV**{cnx}|?{' '})checked="checked"] onchange="jQuery(this).addClass('modifie');" />
 					<label class='nofx' for="session_remember"><:login_rester_identifie:></label>
 				</div>
-			</li>]
-		</ul>
+			</div>]
+
+			<input type="submit" class="submit pull-right" value="<:bouton_valider|attribut_html:>" />
+
 	</fieldset>
-	<p class="boutons"><input type="submit" class="submit" value="<:bouton_valider|attribut_html:>" /></p>
+
 	</form>
 	]
 	[(#REM) en cas d'absence de cookie, on represente le formulaire alternatif ]

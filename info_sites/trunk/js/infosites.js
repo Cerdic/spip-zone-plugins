@@ -1,3 +1,17 @@
-// Si des <h2> n'ayant pas la classe "titre" existent dans la div.contenu dans #content :
-// append div.sommaire <ul> à #aside
-// pour chaque <h2> trouvé : append <li><a href="#(attribut id du <h2>)">texte du <h2></a></li>
+// on ajoute les titres de section au sommaire du aside pour faire des liens vers les sections
+
+$(document).ready(function(){
+	if( $('.contenu .legend').length > 0 )
+	{
+		if( $('#aside .dropdown.boutons').length > 0 ){
+			$('<div class="sommaire"><ul></ul></div>').insertAfter($('#aside .dropdown.boutons'));
+		}
+		else{
+			$('#aside').append('<div class="sommaire"><ul></ul></div>');
+		}
+
+		$('.contenu .legend').each(function(){
+			$('#aside .sommaire ul').append('<li><a href="#'+ $(this).attr('id') +'">'+ $(this).text() +'</a></li>');
+		});
+	}
+});
