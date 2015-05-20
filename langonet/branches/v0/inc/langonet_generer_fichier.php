@@ -51,7 +51,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 			include($cible);
 		}
 	}
-
+    $resultats = array('source' =>$source);
 	$source = langonet_generer_couples($module, $var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
 
 	$dir = sous_repertoire(_DIR_TMP,"langonet");

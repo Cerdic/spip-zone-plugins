@@ -325,7 +325,9 @@ function formater_resultats($verification, $resultats, $corrections,$ou_fichier)
 		// On cree un fichier de script capable de modifier les fichiers de l'arbo specifiee
 		//  Il porte le meme nom que le log avec l'extension .sh
 		$script = substr($log_fichier, 0, strlen($log_fichier)-4) . '.sh';
-		if ($contenu = creer_script($resultats, $verification)) {
+        $source = str_replace(_DIR_RACINE, '', $corrections['source']);
+        $new = str_replace(_DIR_RACINE, '',  $corrections['fichier']);
+		if ($contenu = creer_script($resultats, $verification, $new, $source)) {
 			if (!ecrire_fichier($script, $contenu)) {
 				$retour['message_erreur'] .= _T('langonet:message_nok_fichier_script');
 				spip_log("echec de creation du fichier $script", "langonet");
@@ -527,7 +529,7 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
  * @param string $verification 
  * @return boolean
  */
-function creer_script($resultats, $verification) {
+function creer_script($resultats, $verification, $new, $source) {
 	$ou = join(' ',$resultats['ou_fichier']);
 	$prefixe = ($resultats['module'] == 'spip' 
 				OR $resultats['module'] == 'ecrire' 
@@ -539,7 +541,7 @@ function creer_script($resultats, $verification) {
 	// Pour chaque item on construit le sed
 	// et on collecte au passage les fichiers qui le contiennent
 	if (is_array($all)) foreach ($all as $index => $val) {
-		foreach($val as $f => $l) $files[$f]= str_replace(_DIR_RACINE . $ou, '', $f);
+		foreach($val as $f => $l) $files[$f]= str_replace(_DIR_RACINE, '', $f);
 		$fichier = key($val);	
 		$val = array_shift($val); // premier fichier
 		$val = array_shift($val); // premiere ligne du dit
@@ -583,16 +585,25 @@ function creer_script($resultats, $verification) {
 	// "truc_x" doit etre traite avant "truc"
 	arsort($sed);
 	// Creer le texte du script
-	$in = _L('executer ce script dans ');
-	$out = _L("Si correct, rappeler ce script avec 'mv' comme argument pour modifier les fichiers.");
-	return "echo \"$in $ou\"\n" .
-		'if [ "$*" == "mv" ]; then comm=mv; else comm=diff; fi' .
+	$m1 = _L('Executer ce script a la racine de SPIP');
+	$m2 = _L('Liste des fichiers');
+	$m3 = _L('Rappatriez la nouvelle version de @file@', array('file' => $source));
+	$m4 = _L("Si correct, rappeler ce script avec au moins 1 argument pour modifier ces fichiers et @fichier@.", array('fichier' => $source));
+	return 
+		"if [ -n \"$*\" ]; then comm=mv" .
+        "\nelse comm=diff; echo \"$m1\"" .
+        "\nfi" .
+        "\necho \"$m2\"\n" .
 		"\nfor i in " .
 		join(" ", $files) .
 		"\ndo\necho \$i\nr=\$(basename \$i)\nsed \"\n" .
 		join("\n", array_keys($sed)) .
 		"\n\" \$i > /tmp/\$r\n\$comm /tmp/\$r \$i\ndone\n" .
-		"\nif [ \"$*\" != 'mv' ]; then echo; echo \"$out\"; fi";
+		"\nif [ -z \"$*\" ]" .
+        "\nthen echo; echo \"$m4\"" .
+        "\nelif [ -f $new ]\n" .
+        "then cp $new $source; echo $source\n" .
+        "else echo \"$m3\"\nfi\n";
 }
 
 // Calcul du representant canonique d'une chmine de langue (_L ou <: :>)
