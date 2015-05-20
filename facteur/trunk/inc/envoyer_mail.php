@@ -45,16 +45,16 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// si $corps est un tableau -> fonctionnalites etendues
 	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
 	if (is_array($corps)) {
-		$message_html	= $corps['html'];
-		$message_texte	= nettoyer_caracteres_mail($corps['texte']);
-		$pieces_jointes	= $corps['pieces_jointes'];
-		$nom_envoyeur = $corps['nom_envoyeur'];
-		$from = (isset($corps['from'])?$corps['from']:$from);
-		$cc = $corps['cc'];
-		$bcc = $corps['bcc'];
-		$repondre_a = $corps['repondre_a'];
-		$adresse_erreur = $corps['adresse_erreur'];
-		$headers = (isset($corps['headers'])?$corps['headers']:$headers);
+		$message_html   = $corps['html'];
+		$message_texte  = nettoyer_caracteres_mail($corps['texte']);
+		$pieces_jointes = isset($corps['pieces_jointes']) ? $corps['pieces_jointes'] : array();
+		$nom_envoyeur   = isset($corps['nom_envoyeur']) ? $corps['nom_envoyeur'] : "";
+		$from = isset($corps['from']) ? $corps['from']: $from;
+		$cc   = isset($corps['cc']) ? $corps['cc'] : "";
+		$bcc  = isset($corps['bcc']) ? $corps['bcc'] : "";
+		$repondre_a = isset($corps['repondre_a']) ? $corps['repondre_a'] : "";
+		$adresse_erreur = isset($corps['adresse_erreur']) ? $corps['adresse_erreur'] : "";
+		$headers = isset($corps['headers']) ? $corps['headers'] : $headers;
 		if (is_string($headers)){
 			$headers = array_map('trim',explode("\n",$headers));
 			$headers = array_filter($headers);

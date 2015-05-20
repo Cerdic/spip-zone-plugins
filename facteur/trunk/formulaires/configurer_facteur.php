@@ -9,24 +9,25 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_configurer_facteur_charger_dist(){
+	include_spip('inc/config');
 	$valeurs = array(
-		'facteur_adresse_envoi' => $GLOBALS['meta']['facteur_adresse_envoi'],
-		'facteur_adresse_envoi_nom' => $GLOBALS['meta']['facteur_adresse_envoi_nom'],
-		'facteur_adresse_envoi_email' => $GLOBALS['meta']['facteur_adresse_envoi_email'],
-		'facteur_smtp' => $GLOBALS['meta']['facteur_smtp'],
-		'facteur_smtp_host' => $GLOBALS['meta']['facteur_smtp_host'],
-		'facteur_smtp_port' => $GLOBALS['meta']['facteur_smtp_port']?$GLOBALS['meta']['facteur_smtp_port']:'25',
-		'facteur_smtp_auth' => $GLOBALS['meta']['facteur_smtp_auth'],
-		'facteur_smtp_username' => $GLOBALS['meta']['facteur_smtp_username'],
-		'facteur_smtp_password' => $GLOBALS['meta']['facteur_smtp_password'],
-		'facteur_smtp_secure' => $GLOBALS['meta']['facteur_smtp_secure'],
-		'facteur_smtp_sender' => $GLOBALS['meta']['facteur_smtp_sender'],
-		'facteur_filtre_images' => $GLOBALS['meta']['facteur_filtre_images'],
-		'facteur_filtre_iso_8859' => $GLOBALS['meta']['facteur_filtre_iso_8859'],
-		'_enable_smtp_secure' => (intval(phpversion()) == 5)?' ':'',
-		'facteur_cc' => $GLOBALS['meta']['facteur_cc'],
-		'facteur_bcc' => $GLOBALS['meta']['facteur_bcc'],
-	'tester' => '',
+		'facteur_adresse_envoi'       => lire_config('facteur_adresse_envoi'),
+		'facteur_adresse_envoi_nom'   => lire_config('facteur_adresse_envoi_nom'),
+		'facteur_adresse_envoi_email' => lire_config('facteur_adresse_envoi_email'),
+		'facteur_smtp'                => lire_config('facteur_smtp'),
+		'facteur_smtp_host'           => lire_config('facteur_smtp_host'),
+		'facteur_smtp_port'           => lire_config('facteur_smtp_port', 25),
+		'facteur_smtp_auth'           => lire_config('facteur_smtp_auth'),
+		'facteur_smtp_username'       => lire_config('facteur_smtp_username'),
+		'facteur_smtp_password'       => lire_config('facteur_smtp_host'),
+		'facteur_smtp_secure'         => lire_config('facteur_smtp_password'),
+		'facteur_smtp_sender'         => lire_config('facteur_smtp_sender'),
+		'facteur_filtre_images'       => lire_config('facteur_filtre_images'),
+		'facteur_filtre_iso_8859'     => lire_config('facteur_filtre_iso_8859'),
+		'facteur_cc'                  => lire_config('facteur_cc'),
+		'facteur_bcc'                 => lire_config('facteur_bcc'),
+		'_enable_smtp_secure'         => (intval(phpversion()) == 5)?' ':'',
+		'tester'                      => '',
 	);
 
 	return $valeurs;
@@ -52,7 +53,7 @@ function formulaires_configurer_facteur_verifier_dist(){
 			}
 			else {
 				if (gethostbyaddr($h)==$h)
-					$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');				
+					$erreurs['facteur_smtp_host'] = _T('facteur:erreur_invalid_host');
 			}
 		}
 		if (!($p=_request('facteur_smtp_port')))
