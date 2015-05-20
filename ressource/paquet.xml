@@ -4,7 +4,7 @@
 	version="0.3.0"
 	etat="dev"
 	compatibilite="[2.1.14;3.1.*]"
-	logo="images/ressource-32.png"
+	logo=""
 	documentation="http://contrib.spip.net/Ressource"
 >
 	<nom>Ressource</nom>
