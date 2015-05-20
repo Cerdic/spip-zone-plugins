@@ -38,7 +38,7 @@ function accesrestreint_article_restreint($id_article, $id_auteur=null){
 		@in_array($article['id_rubrique'],
 			accesrestreint_liste_rubriques_exclues(!test_espace_prive(), $id_auteur)
 		)
-		or @in_array($id_article, accesrestreint_liste_objets_exclus('article', !test_espace_prive(), $id_parent));
+		or @in_array($id_article, accesrestreint_liste_objets_exclus('article', !test_espace_prive(), $id_auteur));
 }
 
 
