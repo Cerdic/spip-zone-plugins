@@ -134,16 +134,17 @@ class Facteur extends PHPMailer {
 			$this->ConvertirUtf8VersIso8859();
 
 	}
-	
-	/*
+
+	/**
 	 * Transforme du HTML en texte brut, mais proprement
 	 * utilise le filtre facteur_mail_html2text
 	 * @uses facteur_mail_html2text()
 	 *
 	 * @param string $html Le HTML à transformer
+	 * @param bool $advanced Inutilisé
 	 * @return string Retourne un texte brut formaté correctement
 	 */
-	function html2text($html){
+	function html2text($html, $advanced = false){
 		return facteur_mail_html2text($html);
 	}
 	
@@ -295,7 +296,8 @@ class Facteur extends PHPMailer {
 		}
 		return $retour;
 	}
-	public function AddAttachment($path, $name = '', $encoding = 'base64', $type = 'application/octet-stream') {
+
+	public function addAttachment($path, $name = '', $encoding = 'base64', $type = '', $disposition = 'attachment') {
 		ob_start();
 		$retour = parent::AddAttachment($path, $name, $encoding, $type);
 		$error = ob_get_contents();
@@ -305,6 +307,7 @@ class Facteur extends PHPMailer {
 		}
 		return $retour;
 	}
+
 	public function AddReplyTo($address, $name = '') {
 		ob_start();
 		$retour = parent::AddReplyTo($address, $name);
