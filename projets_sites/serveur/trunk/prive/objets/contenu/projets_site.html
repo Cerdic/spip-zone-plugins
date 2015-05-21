@@ -237,7 +237,7 @@
 	</div>]
 
 <!-- PHP -->
-<div class="champ fieldset[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|non) vide]"><h2 id="php_fieldset_label" class="[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|non)legend ]php_fieldset"><:projets_site:php_fieldset_label:></h2></div>
+<div class="champ fieldset[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|non) vide]"><h2 id="php_fieldset_label" class="[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|strlen|non)legend ]php_fieldset"><:projets_site:php_fieldset_label:></h2></div>
 	[<div class="champ contenu_php_version[ (#PHP_VERSION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:php_version_label:></div>
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{php_version})]] php_version'>(#PHP_VERSION)</div>
