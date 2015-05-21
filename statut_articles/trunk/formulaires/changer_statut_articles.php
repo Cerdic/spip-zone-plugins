@@ -50,6 +50,11 @@ function formulaires_changer_statut_articles_traiter_dist() {
 			suivre_invalideur("id='article/$id_article'");
 		}
 
+		// recalculer les secteurs et les statuts des rubriques et des articles
+		include_spip('inc/rubriques');
+		calculer_rubriques();
+		propager_les_secteurs();
+		
 		$retour['message_ok'] = _T('statut_articles:statut_articles_modifies');
 	}
 	else {
