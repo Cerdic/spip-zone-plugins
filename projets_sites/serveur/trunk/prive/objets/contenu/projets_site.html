@@ -3,7 +3,7 @@
 
 	[<div class="champ contenu_type_site[ (#TYPE_SITE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:type_site_label:></div>
-		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{type_site})]] type_site'>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)</div>
+		<div dir='#LANG_DIR' class='span[(#WEBSERVICE|non)[(#EDIT{type_site})]] type_site'>(#VAL{projets_site:type_site_}|concat{#TYPE_SITE,'_court'}|_T)</div>
 	</div>]
 
 [(#AUTORISER{voir,projetssitesecurite,#ID_PROJETS_SITE}|oui)
@@ -19,7 +19,7 @@
 ]
 	[<div class="champ contenu_date_creation[ (#DATE_CREATION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:date_creation_label:></div>
-		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{date_creation})]] date_creation'>(#DATE_CREATION|affdate)</div>
+		<div dir='#LANG_DIR' class='span[(#WEBSERVICE|non)[(#EDIT{date_creation})]] date_creation'>(#DATE_CREATION|affdate)</div>
 	</div>]
 
 	[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
@@ -28,7 +28,7 @@
 	</div>]
 
 <!-- Front office -->
-<div class="champ fieldset[(#FO_URL*|ou{#FO_LOGIN*}|ou{#FO_PASSWORD*}|non) vide]"><h2 id="fo_fieldset_label" class="[(#FO_URL*|ou{#FO_LOGIN*}|ou{#FO_PASSWORD*}|non)legend] fo_fieldset"><:projets_site:fo_fieldset_label:></h2></div>
+<div class="champ fieldset[(#FO_URL*|ou{#FO_LOGIN*}|ou{#FO_PASSWORD*}|non) vide]"><h2 id="fo_fieldset_label" class="[(#FO_URL*|ou{#FO_LOGIN*}|ou{#FO_PASSWORD*}|oui)legend ]fo_fieldset"><:projets_site:fo_fieldset_label:></h2></div>
 
 	[<div class="champ contenu_fo_url[ (#FO_URL*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:fo_url_label:></div>
@@ -46,7 +46,7 @@
 	</div>]
 
 <!-- Back office -->
-<div class="champ fieldset[(#BO_URL*|ou{#BO_LOGIN*}|ou{#BO_PASSWORD*}|non) vide]"><h2 id="bo_fieldset_label" class="[(#BO_URL*|ou{#BO_LOGIN*}|ou{#BO_PASSWORD*}|non) legend] bo_fieldset"><:projets_site:bo_fieldset_label:></h2></div>
+<div class="champ fieldset[(#BO_URL*|ou{#BO_LOGIN*}|ou{#BO_PASSWORD*}|non) vide]"><h2 id="bo_fieldset_label" class="[(#BO_URL*|ou{#BO_LOGIN*}|ou{#BO_PASSWORD*}|oui)legend ]bo_fieldset"><:projets_site:bo_fieldset_label:></h2></div>
 
 	[<div class="champ contenu_bo_url[ (#BO_URL*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:bo_url_label:></div>
@@ -64,7 +64,7 @@
 	</div>]
 
 <!-- Logiciel/CMS -->
-<div class="champ fieldset [(#LOGICIEL_NOM*|ou{#LOGICIEL_VERSION*}|ou{#LOGICIEL_REVISION*}|ou{#LOGICIEL_CHARSET*}|non) vide]"><h2 id="logiciel_fieldset_label" class="[(#LOGICIEL_NOM*|ou{#LOGICIEL_VERSION*}|ou{#LOGICIEL_REVISION*}|ou{#LOGICIEL_CHARSET*}|non) legend] logiciel_fieldset"><:projets_site:logiciel_fieldset_label:></h2></div>
+<div class="champ fieldset [(#LOGICIEL_NOM*|ou{#LOGICIEL_VERSION*}|ou{#LOGICIEL_REVISION*}|ou{#LOGICIEL_CHARSET*}|non) vide]"><h2 id="logiciel_fieldset_label" class="[(#LOGICIEL_NOM*|ou{#LOGICIEL_VERSION*}|ou{#LOGICIEL_REVISION*}|ou{#LOGICIEL_CHARSET*}|oui)legend ]logiciel_fieldset"><:projets_site:logiciel_fieldset_label:></h2></div>
 
 	[<div class="champ contenu_logiciel_nom[ (#LOGICIEL_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:logiciel_nom_label:></div>
@@ -125,7 +125,7 @@
 	</div>]
 <//B_plugins>
 
-<div class="champ fieldset[(#AUTEURS_ADMIN*|ou{#AUTEURS_WEBMESTRES*}|non) vide]"><h2 id="auteurs_fieldset_label" class="[(#AUTEURS_ADMIN*|ou{#AUTEURS_WEBMESTRES*}|non)legend ]auteurs_fieldset"><:projets_site:auteurs_fieldset_label:></h2></div>
+<div class="champ fieldset[(#AUTEURS_ADMIN*|ou{#AUTEURS_WEBMESTRES*}|non) vide]"><h2 id="auteurs_fieldset_label" class="[(#AUTEURS_ADMIN*|ou{#AUTEURS_WEBMESTRES*}|oui)legend ]auteurs_fieldset"><:projets_site:auteurs_fieldset_label:></h2></div>
 
 [(#REM)
 	On va afficher la liste des admins en tableaux si on respecte "id|login|email|nom".
@@ -202,7 +202,7 @@
 <//B_webmestres>
 
 <!-- Serveur  -->
-<div class="champ fieldset[(#SERVEUR_NOM*|ou{#SERVEUR_PORT*}|ou{#SERVEUR_PATH*}|ou{#SERVEUR_LOGICIEL*}|ou{#SERVEUR_SURVEILLANCE*}|non) vide]"><h2 id="serveur_fieldset_label" class="[(#SERVEUR_NOM*|ou{#SERVEUR_PORT*}|ou{#SERVEUR_PATH*}|ou{#SERVEUR_LOGICIEL*}|ou{#SERVEUR_SURVEILLANCE*}|non)legend ]serveur_fieldset"><:projets_site:serveur_fieldset_label:></h2></div>
+<div class="champ fieldset[(#SERVEUR_NOM*|ou{#SERVEUR_PORT*}|ou{#SERVEUR_PATH*}|ou{#SERVEUR_LOGICIEL*}|ou{#SERVEUR_SURVEILLANCE*}|non) vide]"><h2 id="serveur_fieldset_label" class="[(#SERVEUR_NOM*|ou{#SERVEUR_PORT*}|ou{#SERVEUR_PATH*}|ou{#SERVEUR_LOGICIEL*}|ou{#SERVEUR_SURVEILLANCE*}|oui)legend ]serveur_fieldset"><:projets_site:serveur_fieldset_label:></h2></div>
 
 	[<div class="champ contenu_serveur_nom[ (#SERVEUR_NOM*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:serveur_nom_label:></div>
@@ -237,7 +237,7 @@
 	</div>]
 
 <!-- PHP -->
-<div class="champ fieldset[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|non) vide]"><h2 id="php_fieldset_label" class="[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|strlen|non)legend ]php_fieldset"><:projets_site:php_fieldset_label:></h2></div>
+<div class="champ fieldset[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|non) vide]"><h2 id="php_fieldset_label" class="[(#PHP_VERSION*|ou{#PHP_MEMORY*}|ou{#PHP_EXTENSIONS*}|ou{#PHP_TIMEZONE*}|strlen|oui)legend ]php_fieldset"><:projets_site:php_fieldset_label:></h2></div>
 	[<div class="champ contenu_php_version[ (#PHP_VERSION*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:php_version_label:></div>
 		<div dir='#LANG_DIR' class='span [(#WEBSERVICE|non)[(#EDIT{php_version})]] php_version'>(#PHP_VERSION)</div>
@@ -259,7 +259,7 @@
 	</div>]
 
 <!-- Gestion de versions -->
-<div class="champ fieldset[(#VERSIONING_TYPE*|ou{#VERSIONING_PATH*}|ou{#VERSIONING_TRAC*}|non) vide]"><h2 id="versioning_fieldset_label" class="[(#VERSIONING_TYPE*|ou{#VERSIONING_PATH*}|ou{#VERSIONING_TRAC*}|non)legend ]versioning_fieldset"><:projets_site:versioning_fieldset_label:></h2></div>
+<div class="champ fieldset[(#VERSIONING_TYPE*|ou{#VERSIONING_PATH*}|ou{#VERSIONING_TRAC*}|non) vide]"><h2 id="versioning_fieldset_label" class="[(#VERSIONING_TYPE*|ou{#VERSIONING_PATH*}|ou{#VERSIONING_TRAC*}|oui)legend ]versioning_fieldset"><:projets_site:versioning_fieldset_label:></h2></div>
 
 	[<div class="champ contenu_versioning_type[ (#VERSIONING_TYPE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:versioning_type_label:></div>
@@ -277,7 +277,7 @@
 	</div>]
 
 <!-- SAS -->
-<div class="champ fieldset[(#SAS_PROTOCOLE*|ou{#SAS_SERVEUR*}|ou{#SAS_PORT*}|ou{#SAS_LOGIN*}|ou{#SAS_PASSWORD*}|non) vide]"><h2 id="sas_fieldset_label" class="[(#SAS_PROTOCOLE*|ou{#SAS_SERVEUR*}|ou{#SAS_PORT*}|ou{#SAS_LOGIN*}|ou{#SAS_PASSWORD*}|non)legend ]sas_fieldset"><:projets_site:sas_fieldset_label:></h2></div>
+<div class="champ fieldset[(#SAS_PROTOCOLE*|ou{#SAS_SERVEUR*}|ou{#SAS_PORT*}|ou{#SAS_LOGIN*}|ou{#SAS_PASSWORD*}|non) vide]"><h2 id="sas_fieldset_label" class="[(#SAS_PROTOCOLE*|ou{#SAS_SERVEUR*}|ou{#SAS_PORT*}|ou{#SAS_LOGIN*}|ou{#SAS_PASSWORD*}|oui)legend ]sas_fieldset"><:projets_site:sas_fieldset_label:></h2></div>
 
 	[<div class="champ contenu_sas_protocole[ (#SAS_PROTOCOLE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:sas_protocole_label:></div>
@@ -306,7 +306,7 @@
 	</div>]
 ]
 <!-- SGBD -->
-<div class="champ fieldset[(#SGBD_TYPE*|ou{#SGBD_VERSION*}|ou{#SGBD_SERVEUR*}|ou{#SGBD_PORT*}|ou{#SGBD_NOM*}|ou{#SGBD_PREFIXE*}|ou{#SGBD_CHARSET*}|ou{#SGBD_COLLATION*}|ou{#SGBD_LOGIN*}|ou{#SGBD_PASSWORD*}|non) vide]"><h2 id="sgbd_fieldset_label" class="[(#SGBD_TYPE*|ou{#SGBD_VERSION*}|ou{#SGBD_SERVEUR*}|ou{#SGBD_PORT*}|ou{#SGBD_NOM*}|ou{#SGBD_PREFIXE*}|ou{#SGBD_CHARSET*}|ou{#SGBD_COLLATION*}|ou{#SGBD_LOGIN*}|ou{#SGBD_PASSWORD*}|non)legend ]sgbd_fieldset"><:projets_site:sgbd_fieldset_label:></h2></div>
+<div class="champ fieldset[(#SGBD_TYPE*|ou{#SGBD_VERSION*}|ou{#SGBD_SERVEUR*}|ou{#SGBD_PORT*}|ou{#SGBD_NOM*}|ou{#SGBD_PREFIXE*}|ou{#SGBD_CHARSET*}|ou{#SGBD_COLLATION*}|ou{#SGBD_LOGIN*}|ou{#SGBD_PASSWORD*}|non) vide]"><h2 id="sgbd_fieldset_label" class="[(#SGBD_TYPE*|ou{#SGBD_VERSION*}|ou{#SGBD_SERVEUR*}|ou{#SGBD_PORT*}|ou{#SGBD_NOM*}|ou{#SGBD_PREFIXE*}|ou{#SGBD_CHARSET*}|ou{#SGBD_COLLATION*}|ou{#SGBD_LOGIN*}|ou{#SGBD_PASSWORD*}|oui)legend ]sgbd_fieldset"><:projets_site:sgbd_fieldset_label:></h2></div>
 
 	[<div class="champ contenu_sgbd_type[ (#SGBD_TYPE*|strlen|?{'',vide})]">
 		<div class="label visible"><:projets_site:sgbd_type_label:></div>
@@ -361,7 +361,7 @@
 	</div>]
 ]
 <!-- Autres -->
-<div class="champ fieldset[(#SSO*|ou{#PERIMETRE_ACCES*}|ou{#STATISTIQUES*}|ou{#MOTEUR_RECHERCHE*}|ou{#AUTRES_OUTILS*}|ou{#REMARQUES*}|non) vide]"><h2 id="autres_fieldset_label" class="[(#SSO*|ou{#PERIMETRE_ACCES*}|ou{#STATISTIQUES*}|ou{#MOTEUR_RECHERCHE*}|ou{#AUTRES_OUTILS*}|ou{#REMARQUES*}|non)legend ]autres_fieldset"><:projets_site:autres_fieldset_label:></h2></div>
+<div class="champ fieldset[(#SSO*|ou{#PERIMETRE_ACCES*}|ou{#STATISTIQUES*}|ou{#MOTEUR_RECHERCHE*}|ou{#AUTRES_OUTILS*}|ou{#REMARQUES*}|non) vide]"><h2 id="autres_fieldset_label" class="[(#SSO*|ou{#PERIMETRE_ACCES*}|ou{#STATISTIQUES*}|ou{#MOTEUR_RECHERCHE*}|ou{#AUTRES_OUTILS*}|ou{#REMARQUES*}|oui)legend ]autres_fieldset"><:projets_site:autres_fieldset_label:></h2></div>
 
 [<div class="champ contenu_sso[ (#SSO*|strlen|?{'',vide})]">
 	<div class="label visible"><:projets_site:sso_label:></div>
