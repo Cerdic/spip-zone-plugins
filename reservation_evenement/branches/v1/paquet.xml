@@ -1,54 +1,52 @@
 <paquet
-	prefix="reservation_evenement"
-	categorie="date"
-	version="1.18.0"
-	etat="test"
-	compatibilite="[3.0.16;3.1.*]"
-	logo="prive/themes/spip/images/reservation_evenement-64.png"
-	documentation="http://contrib.spip.net/Reservation-d-evenements-4459"
-	schema="1.4.2" 
+prefix="reservation_evenement"
+categorie="date"
+version="1.18.1"
+etat="test"
+compatibilite="[3.0.16;3.1.*]"
+logo="prive/themes/spip/images/reservation_evenement-64.png"
+documentation="http://contrib.spip.net/Reservation-d-evenements-4459"
+schema="1.4.2"
 >
 
-	<nom>Réservation Événements</nom>
+  <nom>Réservation Événements</nom>
+  <auteur lien='http://websimple.be'>Rainer Müller</auteur>
+  <licence>GNU/GPL</licence>
+  <necessite nom="saisies" compatibilite="[2.0.3;]" />
+  <necessite nom="yaml" compatibilite="[1.5.2;]" />
+  <necessite nom="verifier" compatibilite="[1.0.5;]" />
+  <necessite nom="agenda" compatibilite="[3.14.5;]" />
+  <necessite nom="nospam" compatibilite="[1.5.7;]" />
+  <necessite nom="facteur" compatibilite="[3.0.19;]" />
+  <necessite nom="spip_bonux" compatibilite="[3.0.7;]" />
+
+  <utilise nom="prix_objets" compatibilite="[1.6.5;]" />
+  <utilise nom="declinaisons" compatibilite="[1.0.3;]" />
+  <utilise nom="notifications_archive" compatibilite="[1.1.3;]" />
+
+  <!-- Déclaration de pipelines -->
+  <pipeline nom="reservation_compteur_action" action='' />
+  <pipeline nom="reservation_evenement_donnees_details" action='' />
+
+  <!-- Apelle les pipelines -->
+
+  <pipeline nom="autoriser" inclure="reservation_evenement_autorisations.php" />
+
+  <pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_evenement.php" />
+  <pipeline nom="declarer_tables_interfaces" inclure="base/reservation_evenement.php" />
+  <pipeline nom="declarer_tables_principales" inclure="base/reservation_evenement.php" />
+
+  <pipeline nom="affiche_auteurs_interventions" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="affiche_gauche" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="affiche_milieu" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="afficher_contenu_objet" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="notifications_archive" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="taches_generales_cron" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="formulaire_charger" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="formulaire_traiter" inclure="reservation_evenement_pipelines.php" />
+  <pipeline nom="recuperer_fond" inclure="reservation_evenement_pipelines.php" />
 
 
-	<auteur lien='http://websimple.be'>Rainer Müller</auteur>
-
-	<licence>GNU/GPL</licence>
-
-
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
-	<necessite nom="yaml" compatibilite="[1.5.2;]" />	
-	<necessite nom="verifier" compatibilite="[1.0.5;]" />	
-	<necessite nom="agenda" compatibilite="[3.14.5;]" />
-	<necessite nom="nospam" compatibilite="[1.5.7;]" />			
-	<necessite nom="facteur" compatibilite="[3.0.19;]" />
-	<necessite nom="spip_bonux" compatibilite="[3.0.7;]" />	
-	
-	<utilise nom="prix_objets" compatibilite="[1.6.5;]" />
-	<utilise nom="declinaisons" compatibilite="[1.0.3;]" />
-	<utilise nom="notifications_archive" compatibilite="[1.1.3;]" />
-
-
-	<pipeline nom="autoriser" inclure="reservation_evenement_autorisations.php" /> 
-
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/reservation_evenement.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/reservation_evenement.php" /> 
-	<pipeline nom="declarer_tables_principales" inclure="base/reservation_evenement.php" /> 	
-
-	<pipeline nom="affiche_auteurs_interventions" inclure="reservation_evenement_pipelines.php" /> 
-	<pipeline nom="affiche_gauche" inclure="reservation_evenement_pipelines.php" /> 
-	<pipeline nom="affiche_milieu" inclure="reservation_evenement_pipelines.php" /> 
-	<pipeline nom="afficher_contenu_objet" inclure="reservation_evenement_pipelines.php" /> 		
-	<pipeline nom="notifications_archive" inclure="reservation_evenement_pipelines.php" />
-	<pipeline nom="taches_generales_cron" inclure="reservation_evenement_pipelines.php" />
-	<pipeline nom="formulaire_charger" inclure="reservation_evenement_pipelines.php" />	
-	<pipeline nom="formulaire_traiter" inclure="reservation_evenement_pipelines.php" />		
-	<pipeline nom="recuperer_fond" inclure="reservation_evenement_pipelines.php" />
-	
-	
-	<pipeline nom="reservation_evenement_donnees_details" action='' /> 		
-
-	<menu nom="reservations" titre="reservation:titre_reservations" parent="menu_edition" icone="images/reservation-16.png" action="reservations" /> 
-	<menu nom="reservation_creer" titre="reservation:icone_creer_reservation" parent="outils_rapides" icone="images/reservation-new-16.png" action="reservation_edit" parametres="new=oui" /> 
+  <menu nom="reservations" titre="reservation:titre_reservations" parent="menu_edition" icone="images/reservation-16.png" action="reservations" />
+  <menu nom="reservation_creer" titre="reservation:icone_creer_reservation" parent="outils_rapides" icone="images/reservation-new-16.png" action="reservation_edit" parametres="new=oui" />
 </paquet>
