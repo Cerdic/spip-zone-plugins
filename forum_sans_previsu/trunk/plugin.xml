@@ -1,0 +1,20 @@
+<plugin>
+    <nom>Forum sans prévisualisation</nom>
+
+    <categorie>communication</categorie>
+    <auteur>Communauté SPIP</auteur>
+    <version>0.1.0</version>
+  
+    <prefix>forum_sans_previsu</prefix>
+    <etat>test</etat>
+
+    <slogan>Postez rapidement!</slogan>
+    <description>Ce plugin permet de poster un forum sans passer par l'étape prévisualisation.</description>
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>forum_sans_previsu_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<utilise id="forum" />
+</plugin>
