@@ -66,7 +66,6 @@ function oembed_lister_providers(){
 		'http://*.imgur.com/*'                    => 'http://api.imgur.com/oembed',
 		'http://*.onf.ca/*'                       => 'http://www.onf.ca/remote/services/oembed/',
 
-
 		#'http://yfrog.ru|com.tr|it|fr|co.il|co.uk|com.pl|pl|eu|us)/*'         =>   'http://yfrog.com/api/oembed',
 		#'https://gist.github.com/*' => 'http://github.com/api/oembed?format=json'
 	);
@@ -109,7 +108,7 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 	$provider = oembed_verifier_provider($url);
 
 	if ((!$provider)
-	  AND (($detecter_lien != 'non') OR lire_config('oembed/detecter_lien','non')=='oui')) {
+		AND (($detecter_lien != 'non') OR lire_config('oembed/detecter_lien','non')=='oui')) {
 		$provider = oembed_detecter_lien($url);
 	}
 
@@ -143,7 +142,6 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		$data_url = $oembed_endpoint_pretraite($data_url,$args);
 	}
 
-
 	if (isset($cache[$data_url]))
 		return $cache[$data_url];
 
@@ -167,7 +165,6 @@ function oembed_recuperer_data($url, $maxwidth = null, $maxheight = null, $forma
 		//if ($format == 'xml')
 		//	$cache[$data_url] = false;
 	}
-
 
 	// si une fonction de post-traitement est fourni pour ce provider+type, l'utiliser
 	if ($cache[$data_url]){
@@ -240,7 +237,7 @@ function oembed_detecter_lien($url) {
 				break;
 			}
 		}
-		
+
 		if ($tagfound && preg_match_all('/<link([^<>]+)>/i', $head, $links)) {
 			foreach ($links[0] as $link) {
 				$type = extraire_attribut($link,'type');
@@ -276,12 +273,12 @@ function oembed_embarquer_lien($lien){
 	$url = extraire_attribut($lien, 'href');
 	$texte = null;
 	if ($url
-	  AND (
+		AND (
 			oembed_verifier_provider($url)
-		  OR (lire_config('oembed/detecter_lien','non')=='oui'))
-	  ){
+			OR (lire_config('oembed/detecter_lien','non')=='oui'))
+		){
 		if (is_null($base))
-		    $base = url_de_base();
+			$base = url_de_base();
 		// on embarque jamais un lien de soi meme car c'est une mise en abime qui donne le tourni
 		// (et peut provoquer une boucle infinie de requetes http)
 		if (strncmp($url,$base,strlen($base))!=0){
