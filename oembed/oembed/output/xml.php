@@ -53,10 +53,10 @@ function oembed_assocToXML($theArray, $tabCount = 2){
 	foreach ($theArray as $tag => $val){
 		if (!is_array($val)){
 			$theXML .= PHP_EOL
-			           .$tabSpace
-			           .'<'.$tag.'>'.
-			           texte_backend($val)
-			           .'</'.$tag.'>';
+						.$tabSpace
+						.'<'.$tag.'>'.
+						texte_backend($val)
+						.'</'.$tag.'>';
 		} else {
 			$tabCount++;
 			$theXML .= PHP_EOL.$tabSpace.'<'.$tag.'>'.assocToXML($val, $tabCount+1);
