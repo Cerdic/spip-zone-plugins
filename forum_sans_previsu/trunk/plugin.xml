@@ -3,7 +3,7 @@
 
     <categorie>communication</categorie>
     <auteur>Communauté SPIP</auteur>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
   
     <prefix>forum_sans_previsu</prefix>
     <etat>test</etat>
@@ -15,6 +15,6 @@
 		<inclure>forum_sans_previsu_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<utilise id="forum" />
 </plugin>
