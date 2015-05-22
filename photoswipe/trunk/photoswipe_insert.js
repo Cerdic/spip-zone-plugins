@@ -4,9 +4,10 @@ function photoshow() {
     var a = photoshow_identify(this),
         index = 0;
 
+console.log(JSON.stringify( photoshow.gallery ));
     // gallery ? il y a un glitch
-    if (photoshow.gallery) {
-        $('img.photoshow')
+    if (photoswipe.gallery) {
+        $('img[data-photo-src]')
             .each(function (i, e) {
                 var b = photoshow_identify(e);
                 gallery.push(b);
@@ -15,6 +16,8 @@ function photoshow() {
     } else {
         gallery.push(a);
     }
+
+    if (photoswipe.debug) { console.log(JSON.stringify(gallery)); }
 
     photoshow_gallery(gallery, index);
     return false;
