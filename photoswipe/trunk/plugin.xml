@@ -22,5 +22,12 @@
         <nom>insert_head</nom>
         <inclure>photoswipe_pipelines.php</inclure>
     </pipeline>
+
+        <pipeline>
+                <nom>post_propre</nom>
+                <action>post_propre</action>
+                <inclure>photoswipe_pipelines.php</inclure>
+        </pipeline>
+
     <categorie>multimedia</categorie>
 </plugin>
