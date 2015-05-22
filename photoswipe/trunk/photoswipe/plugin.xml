@@ -1,0 +1,26 @@
+<plugin>
+    <nom>
+        <multi>
+            [fr]PhotoSwipe
+        </multi>
+    </nom>
+    <auteur>
+        [PhotoSwipe->http://photoswipe.com/]
+        <multi>[fr]Mis en plugin pour SPIP par [Fil->http://zzz.rezo.net] et Baroug
+        </multi>
+    </auteur>
+    <version>0.0.1</version>
+    <icon>prive/themes/spip/images/photoswipe-32.png</icon>
+    <etat>dev</etat>
+    <description>Syteme de Zoom de photos</description>
+    <lien>http://photoswipe.com/</lien>
+    <prefix>photoswipe</prefix>
+    <necessite id="SPIP" version="[2.1.0;]" />
+
+    <fonctions>photoswipe_pipelines.php</fonctions>
+    <pipeline>
+        <nom>insert_head</nom>
+        <inclure>photoswipe_pipelines.php</inclure>
+    </pipeline>
+    <categorie>multimedia</categorie>
+</plugin>
