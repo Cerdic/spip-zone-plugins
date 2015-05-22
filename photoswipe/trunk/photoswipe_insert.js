@@ -17,6 +17,7 @@ function photoshow() {
     }
 
     photoshow_gallery(gallery, index);
+    return false;
 }
 
 function photoshow_identify(me) {
