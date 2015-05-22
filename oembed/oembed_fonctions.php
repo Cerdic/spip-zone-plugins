@@ -9,13 +9,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // renvoyer un mim_type text/oembed pour les videos oembed
 function mime_type_oembed($id_document) {
-    if(!($id_document = intval($id_document)))
-    	return '';
-    $mime_type = sql_getfetsel('mime_type', 'spip_types_documents',
-    	"extension IN (SELECT extension FROM spip_documents where id_document=$id_document)");
-    if ($mime_type == 'text/html' AND sql_getfetsel('oembed', 'spip_documents',"id_document=$id_document"))
-    	$mime_type = 'text/oembed';
-    return $mime_type;
+	if(!($id_document = intval($id_document)))
+		return '';
+	$mime_type = sql_getfetsel('mime_type', 'spip_types_documents',
+		"extension IN (SELECT extension FROM spip_documents where id_document=$id_document)");
+	if ($mime_type == 'text/html' AND sql_getfetsel('oembed', 'spip_documents',"id_document=$id_document"))
+		$mime_type = 'text/oembed';
+	return $mime_type;
 }
 
 // balise #MIME_TYPE pour oembed
@@ -28,12 +28,12 @@ function balise_MIME_TYPE_dist($p) {
 	if($key == 'extension'){
 		$p->code = champ_sql('mime_type', $p);
 	}else{
-	    /* explorer la pile memoire pour atteindre le 'vrai' champ */
-	    $id_document = champ_sql('id_document', $p);
-	    /* le code php qui sera execute */
-	    $p->code = "mime_type_oembed(".$id_document.")";
+		/* explorer la pile memoire pour atteindre le 'vrai' champ */
+		$id_document = champ_sql('id_document', $p);
+		/* le code php qui sera execute */
+		$p->code = "mime_type_oembed(".$id_document.")";
 	}
-    return $p;
+	return $p;
 }
 
 /**
@@ -80,7 +80,7 @@ function oembed($url, $maxwidth=0, $maxheight=0){
 function oembed_force_video_autoplay($html){
 
 	if ($e = extraire_balise($html,'iframe')
-	  AND $src = extraire_attribut($e,'src')){
+		AND $src = extraire_attribut($e,'src')){
 
 		$src_amp = parametre_url($src,"dummy",null);
 		if (strpos($src,"soundcloud")!==false)
@@ -92,7 +92,6 @@ function oembed_force_video_autoplay($html){
 		else
 			$html = str_replace($src,$src_autoplay,$html);
 	}
-
 	return $html;
 }
 
