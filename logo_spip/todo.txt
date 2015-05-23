@@ -1,5 +1,4 @@
 = TODO
 = pour logo_SPIP
 
-- modèle assorti pour pouvoir utiliser le logo de SPIP dans le texte d’un article
-- et pourquoi pas balise d’url vers le site officiel : #URL_SPIP
+- pourquoi pas une balise d’url vers le site officiel : #URL_SPIP ? cf. : https://core.spip.net/issues/2185

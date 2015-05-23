@@ -3,12 +3,12 @@
 <prefix>logo_spip</prefix>
 <icon>spip.png</icon>
 
-<version>1.0.1</version>
+<version>1.1.0</version>
 <etat>stable</etat>
 <categorie>multimedia</categorie>
 
-<slogan>Balise pour afficher le logo de SPIP</slogan>
-<description>Affichez facilement le logo de SPIP dans vos squelettes avec la balise #LOGO_SPIP</description>
+<slogan>Affichez facilement le logo de SPIP</slogan>
+<description>Affichez facilement le logo de SPIP dans vos articles avec &lt;spip|&gt; et dans vos squelettes avec <code>#LOGO_SPIP</code> ou <code>#MODELE{spip}</code></description>
 <auteur>[tetue->http://spip.tetue.net]- 2015</auteur>
 <licence>GPL</licence>
 
