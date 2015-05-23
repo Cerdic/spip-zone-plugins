@@ -19,11 +19,6 @@
 
 <fonctions>logo_auto_fonctions.php</fonctions>
 
-<pipeline>
-	<nom>declarer_tables_interfaces</nom>
-	<inclure>logo_auto_fonctions.php</inclure>
-</pipeline>
-
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
 <necessite id="logo_spip" version="[;]" />
 </plugin>
