@@ -1,6 +1,10 @@
 <?php
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+if (!defined('_SPIPERIPSUM_FORCER_CHARGEMENT'))
+	define('_SPIPERIPSUM_FORCER_CHARGEMENT', false);
+
 // Langue par defaut si non supportee par le site serveur
 if (!defined('_SPIPERIPSUM_LANGUE_DEFAUT'))
 	define('_SPIPERIPSUM_LANGUE_DEFAUT','en');
