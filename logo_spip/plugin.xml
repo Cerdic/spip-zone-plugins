@@ -4,11 +4,11 @@
 <icon>icon/logo_spip.png</icon>
 
 <version>1.0.0</version>
-<etat>dev</etat>
+<etat>stable</etat>
 <categorie>multimedia</categorie>
 
 <slogan>Balise pour afficher le logo de SPIP</slogan>
-<description>ATTENTION, CE PLUGIN EST COURS DE DEVELOPPEMENT ! Selon le moment, il peut être bien sympa ou totalement inutilisable.</description>
+<description>Affichez facilement le logo de SPIP dans vos squelettes avec la balise #LOGO_SPIP</description>
 <auteur>[tetue->http://spip.tetue.net]- 2015</auteur>
 <licence>GPL</licence>
 

@@ -1,7 +1,6 @@
 = TODO
 = pour logo_SPIP
 
-- balise d’affichage du logo de SPIP : #LOGO_SPIP cf. ticket https://core.spip.net/issues/2185
-- avec fichier plus gros cf. https://core.spip.net/issues/3431
+- logo de SPIP plus gros cf. https://core.spip.net/issues/3431
 - et modèle assorti pour pouvoir l’utiliser dans le texte d’un article
 - et pourquoi pas balise d’url vers le site officiel : #URL_SPIP
