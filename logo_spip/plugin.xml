@@ -1,0 +1,18 @@
+<plugin>
+<nom>Logo SPIP</nom>
+<prefix>logo_spip</prefix>
+<icon>icon/logo_spip.png</icon>
+
+<version>1.0.0</version>
+<etat>dev</etat>
+<categorie>multimedia</categorie>
+
+<slogan>Balise pour afficher le logo de SPIP</slogan>
+<description>ATTENTION, CE PLUGIN EST COURS DE DEVELOPPEMENT ! Selon le moment, il peut être bien sympa ou totalement inutilisable.</description>
+<auteur>[tetue->http://spip.tetue.net]- 2015</auteur>
+<licence>GPL</licence>
+
+<fonctions>logo_spip_fonctions.php</fonctions>
+
+<necessite id="SPIP" version="[2.0.0;3.1.99]" />
+</plugin>
