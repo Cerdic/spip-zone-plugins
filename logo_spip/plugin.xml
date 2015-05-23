@@ -1,9 +1,9 @@
 <plugin>
 <nom>Logo SPIP</nom>
 <prefix>logo_spip</prefix>
-<icon>icon/logo_spip.png</icon>
+<icon>spip.png</icon>
 
-<version>1.0.0</version>
+<version>1.0.1</version>
 <etat>stable</etat>
 <categorie>multimedia</categorie>
 
