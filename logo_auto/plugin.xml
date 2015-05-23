@@ -4,11 +4,11 @@
 <icon>icon/logo_auto.png</icon>
 
 <version>0.7.1</version>
-<etat>dev</etat>
+<etat>experimental</etat>
 <categorie>multimedia</categorie>
 
 <slogan>Des logos partout, systématiquement</slogan>
-<description>ATTENTION, CE PLUGIN EST COURS DE DEVELOPPEMENT ! Selon le moment, il peut être bien sympa ou totalement inutilisable.
+<description>ATTENTION : ce plugin est une {{contribution expérimentale}} qui ne débouchera pas nécessairement sur un plugin utilisable ! Selon le moment, il peut être bien sympa ou totalement inutilisable.
 
 	Le but de ce plugin est d’afficher des logos à tout coup, pour chaque objet SPIP. Chaque logo est généré de façon automatique, en faisant feu de tout bois : à partir des images associées à l’objet, ou de son parent, ou d’un visuel par défaut. Ces logos sont dimensionnés de façon homogène pour être prêts à l’emploi. Enfin, ce mécanisme sera paramétrable et surchargeable.
 

@@ -1,5 +1,7 @@
 = TODO
-= pour logos automatiques
+= pour logos_auto
+
+tetue, en pleine expérimentation, hésite encore sur la logique de l’automatisme…
 
 - brancher la balise #LOGO_BREVE sur le modele logo/breve.html
 - brancher la balise #LOGO_DOCUMENT sur le modele logo/document.html
