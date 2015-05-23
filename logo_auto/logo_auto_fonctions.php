@@ -1,10 +1,5 @@
 <?php
 
-function balise_LOGO_SPIP($p) {
-	$p->code="filtrer('balise_img', find_in_path('spip.png'), 'SPIP', 'spip_logo')";
-	return $p;
-}
-
 function traiter_logo_site_spip($logo_site_spip) {	
 	return trim(recuperer_fond('logo/site_spip', array('logo_site_spip' => $logo_site_spip)));
 }
