@@ -1,0 +1,37 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:seminaire:cfg_titre_parametrages:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div>
+			<ul>
+				[(#SAISIE{input, prodid,
+					label=<:seminaire:label_prodid:>,
+					explication=<:seminaire:explication_prodid:>,
+					obligatoire=oui})]
+				[(#SAISIE{groupe_mots,groupe_mot_type,
+					label=<:seminaire:label_groupe_mot_type:>,
+					explication=<:seminaire:explication_groupe_mot_type:>,
+					table_liaison=evenements,
+					obligatoire=oui})]
+				[(#SAISIE{groupe_mots,groupe_mot_categorie,
+					label=<:seminaire:label_groupe_mot_categorie:>,
+					explication=<:seminaire:explication_groupe_mot_categorie:>,
+					table_liaison=articles,
+					obligatoire=oui})]
+				[(#SAISIE{input, mail_attendee,
+					label=<:seminaire:label_mail_attendee:>,
+					explication=<:seminaire:explication_mail_attendee:>,
+				})]
+				[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+				<!--extra-->
+			</ul>
+			<input type="hidden" name="_meta_casier" value="seminaire" />
+			<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+		</div>
+	</form>
+</div>
