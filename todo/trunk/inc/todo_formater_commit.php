@@ -10,11 +10,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @param string $valeur
  * 		Le numéro du commit sous la forme z11111 ou c22222 ou une chaine quelconque
+ * @param string &$info
+ *		L'information typée mise à jour avec la valeur formatée pour la Zone ou le Core
+ * 		ou la valeur d'entrée..
  *
- * @return string
- * 		La valeur formatée pour la Zone ou le Core ou la valeur d'entrée.
+ * @return void
+ *
  */
-function inc_todo_formater_commit_dist($valeur) {
+function inc_todo_formater_commit_dist($valeur, &$info) {
 	$commit = $valeur;
 
 	if (preg_match('#^(z|c)([0-9]+)$#Uis', $valeur, $m)) {
@@ -25,7 +28,7 @@ function inc_todo_formater_commit_dist($valeur) {
 		$commit = '<a class="spip_out" rel="external" href="' . $href . '">' . $m[2] . '</a>';
 	}
 
-	return $commit;
+	$info .= !$info ? $commit : ', ' . $commit;
 }
 
 ?>

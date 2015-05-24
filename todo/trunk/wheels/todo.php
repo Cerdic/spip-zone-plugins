@@ -108,13 +108,20 @@ function tw_todo($t) {
 						else {
 							// -- les informations typées
 							if ($formater = charger_fonction("todo_formater_${type}", 'inc', true)) {
-								if ($type == 'commit')
-									$infos[$type] .= (!isset($infos[$type])) ? $formater($valeur) : ', ' . $formater($valeur);
-								else
-									$infos[$type] = $formater($valeur);
+								// Si il existe une fonction de formatage, on considère que celle-ci s'occupe
+								// à la fois du format et aussi de la présentation si plusieurs informations
+								// du même type sont à afficher (cas du commit qui affiche les différents
+								// commits de la façon suivante : z123, z455, c21000)
+								if (!isset($infos[$type])) {
+									$infos[$type] = '';
+								}
+								$formater($valeur, $infos[$type]);
 							}
-							else
+							else {
+								// Si il n'existe pas de fonction on ne présume pas de la présentation et
+								// on considère donc que l'information typée est unique.
 								$infos[$type] = $valeur;
+							}
 							if (!in_array($type, $types_info[$index_todo]))
 								$types_info[$index_todo][] = $type;
 						}
