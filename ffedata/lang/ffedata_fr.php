@@ -5,6 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	
+	// E
+	'evolution_elo'=> 'Evolution du classement',
+	
 	// F
 	'ffedata_titre' => 'Data FFE',
 
