@@ -14,7 +14,7 @@
 			<th>CompetitionNom</th>
         </tr>
     </thead>
-<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetEquipesDuClub?Saison=(#CONFIG{ffedata/saison,2015})&Ref=(#CONFIG{ffedata/Ref,2569})}>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetEquipesDuClub?Saison=(#CONFIG{ffedata/saison,2015})&Ref=(#CONFIG{ffedata/club,2569})}>
     <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par GroupeId}{pagination 30}>
     <tr>
         <td>#VALEUR{EquipeId}</td>
