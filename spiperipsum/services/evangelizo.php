@@ -202,13 +202,17 @@ function flux2fete($url_base, $charset) {
 		else {
 			// -- nom
 			$balises_a = extraire_balises($page, 'a');
-			$titre = preg_replace(',</?a\b.*>,UimsS', '', $balises_a[0]);
-			$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
+			if (isset($balise_a[0])) {
+				$titre = preg_replace(',</?a\b.*>,UimsS', '', $balises_a[0]);
+				$tableau['titre'] = page2page_propre(importer_charset($titre, $charset), $charset, false);
 
-			// -- url
-			$attribut = extraire_attribut($balises_a, 'onclick');
-			preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
-			$tableau['url'] = $url_texte[1];
+				// -- url
+				$attribut = extraire_attribut($balises_a, 'onclick');
+				if (isset($attribut[0])) {
+					preg_match(';window.open\(\'(.[^\s,\']+);i', $attribut[0], $url_texte);
+					$tableau['url'] = $url_texte[1];
+				}
+			}
 		}
 	}
 
@@ -244,6 +248,40 @@ function flux2date($url_base, $charset, $date) {
 
 
 // ------------------------- FONCTIONS DE BASE DES ELEMENTS RECURRENTS ----------------------------- //
+
+
+/**
+ * @param      $lecture
+ * @param      $url_base
+ * @param      $charset
+ * @param bool $lettrine
+ *
+ * @return array
+ */
+function flux2lecture($lecture, $url_base, $charset, $lettrine=false) {
+	$tableau = array();
+
+	// -- Titre court de l'evangile : on extrait la reference du verset uniquement
+	//    Ce titre court est de la forme "Lc 11,25-23"
+	$no_tag = true;
+	$url = $url_base . '&type=reading_st&content=' . lecture2code($lecture);
+	$tableau['verset'] = flux2element($url, $charset, $no_tag);
+
+	// -- Titre long de l'evangile : on extrait le titre uniquement sans le verset
+	//    Ce titre long est de la forme "bla bla 11,25-23."
+	$url = $url_base . '&type=reading_lt&content=' . lecture2code($lecture);
+	$tableau['titre'] = flux2element($url, $charset, $no_tag);
+
+	// -- Texte de la lecture
+	//    On decoupe le texte en 3 parties : le texte proprement dit, sa reference de traduction et un credit
+    $no_tag = false;
+	$url = $url_base . '&type=reading&content=' . lecture2code($lecture);
+	$textes = flux2texte($url, $charset, $lettrine);
+	$tableau = array_merge($tableau, $textes);
+
+	return $tableau;
+}
+
 
 /**
  * @param      $url
@@ -306,39 +344,6 @@ function flux2texte($url, $charset, $lettrine=false) {
 
 	}
 	return $texte;
-}
-
-
-/**
- * @param      $lecture
- * @param      $url_base
- * @param      $charset
- * @param bool $lettrine
- *
- * @return array
- */
-function flux2lecture($lecture, $url_base, $charset, $lettrine=false) {
-	$tableau = array();
-
-	// -- Titre court de l'evangile : on extrait la reference du verset uniquement
-	//    Ce titre court est de la forme "Lc 11,25-23"
-	$no_tag = true;
-	$url = $url_base . '&type=reading_st&content=' . lecture2code($lecture);
-	$tableau['verset'] = flux2element($url, $charset, $no_tag);
-
-	// -- Titre long de l'evangile : on extrait le titre uniquement sans le verset
-	//    Ce titre long est de la forme "bla bla 11,25-23."
-	$url = $url_base . '&type=reading_lt&content=' . lecture2code($lecture);
-	$tableau['titre'] = flux2element($url, $charset, $no_tag);
-
-	// -- Texte de la lecture
-	//    On decoupe le texte en 3 parties : le texte proprement dit, sa reference de traduction et un credit
-    $no_tag = false;
-	$url = $url_base . '&type=reading&content=' . lecture2code($lecture);
-	$textes = flux2texte($url, $charset, $lettrine);
-	$tableau = array_merge($tableau, $textes);
-
-	return $tableau;
 }
 
 
