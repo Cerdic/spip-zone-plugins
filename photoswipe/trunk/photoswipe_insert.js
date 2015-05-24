@@ -21,7 +21,7 @@ function photoshow() {
     }
 
     photoshow_gallery(imgs, index);
-    return false;
+    return false; // interdire l'action d'un <a> englobant
 }
 
 function photoshow_identify(me) {
