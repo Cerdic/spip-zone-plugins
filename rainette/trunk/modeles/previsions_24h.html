@@ -14,29 +14,29 @@
 		<div class="resume">[(#ENV{#ENV{periode}/resume}|rainette_afficher_resume)]</div>
 		<div class="t_reelle">
 			[[(#ENV{periode}|=={0}|?{<:rainette:temperature_max|ucfirst:>, <:rainette:nuit|ucfirst:>})]
-			&nbsp;(#ENV{#ENV{periode}/temperature_max}|rainette_afficher_unite{temperature})<br/>]
+			&nbsp;(#ENV{#ENV{periode}/temperature_max}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})<br/>]
 			[<:rainette:temperature_min|ucfirst:>
-			&nbsp;(#ENV{#ENV{periode}/temperature_min}|rainette_afficher_unite{temperature})<br/>]
+			&nbsp;(#ENV{#ENV{periode}/temperature_min}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})<br/>]
 		</div>
 		<div class="details">
 			<ul>
 				[<li>
 					<span><:rainette:vent|ucfirst:></span><br />
-					(#ENV{#ENV{periode}/vitesse_vent}|rainette_afficher_unite{vitesse})
+					(#ENV{#ENV{periode}/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{service, weather}})
 				</li>]
 				[<li>
 					<span><:rainette:precipitation|ucfirst:></span><br />
-					(#ENV{#ENV{periode}/precipitation}|rainette_afficher_unite{precipitation})
+					(#ENV{#ENV{periode}/precipitation}|rainette_afficher_unite{precipitation, -1, #ENV{service, weather}})
 				</li>
 				#SET{pluie, oui}]
 				[(#GET{pluie}|non)
 				[<li>
 					<span><:rainette:risque_precipitation|ucfirst:></span><br />
-					(#ENV{#ENV{periode}/risque_precipitation}|rainette_afficher_unite{pourcentage})
+					(#ENV{#ENV{periode}/risque_precipitation}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})
 				</li>]]
 				[<li>
 					<span><:rainette:humidite|ucfirst:></span><br />
-					(#ENV{#ENV{periode}/humidite}|rainette_afficher_unite{pourcentage})
+					(#ENV{#ENV{periode}/humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})
 				</li>]
 			</ul>
 		</div>

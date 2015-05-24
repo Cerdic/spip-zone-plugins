@@ -17,11 +17,11 @@
 			[<:rainette:longitude|ucfirst:>&nbsp;(#RAINETTE_INFOS{
 													#ENV{ville, FRXX0076},
 													longitude,
-													#ENV{service, weather}}|rainette_afficher_unite{angle})]
+													#ENV{service, weather}}|rainette_afficher_unite{angle, -1, #ENV{service, weather}})]
 			[, <:rainette:latitude:>&nbsp;(#RAINETTE_INFOS{
 											#ENV{ville, FRXX0076},
 											latitude,
-											#ENV{service, weather}}|rainette_afficher_unite{angle})]
+											#ENV{service, weather}}|rainette_afficher_unite{angle, -1, #ENV{service, weather}})]
 		</small>
 	</p>
 </div>

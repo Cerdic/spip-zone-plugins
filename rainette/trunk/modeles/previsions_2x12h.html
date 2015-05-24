@@ -31,23 +31,23 @@
 				<div class="icone">[(#ENV{#GET{gauche}/icone}|rainette_afficher_icone{grand}|image_reduire{95})]</div>
 				<div class="t_reelle">
 					[(#ENV{periode}|=={0}|?{<:rainette:temperature_max:>, <:rainette:temperature_min:>}|ucfirst)<br/>]
-					<span>[(#ENV{#GET{gauche}/temperature_max}|rainette_afficher_unite{temperature})]</span><br/>
+					<span>[(#ENV{#GET{gauche}/temperature_max}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})]</span><br/>
 					[(#ENV{#GET{gauche}/resume}|rainette_afficher_resume)]
 				</div>
 				<div class="details">
 					<ul>
 						<li>
 							<span><:rainette:vent|ucfirst:></span>
-							[(#ENV{#GET{gauche}/vitesse_vent}|rainette_afficher_unite{vitesse})]
+							[(#ENV{#GET{gauche}/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{service, weather}})]
 							[ - (#ENV{#GET{gauche}/direction_vent}|rainette_afficher_direction)]
 						</li>
 						<li>
 							<span><:rainette:humidite|ucfirst:></span>
-							[(#ENV{#GET{gauche}/humidite}|rainette_afficher_unite{pourcentage})]
+							[(#ENV{#GET{gauche}/humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
 						</li>
 						<li>
 							<span><:rainette:risque_precipitation|ucfirst:></span>
-							[(#ENV{#GET{gauche}/risque_precipitation}|rainette_afficher_unite{pourcentage})]
+							[(#ENV{#GET{gauche}/risque_precipitation}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
 						</li>
 						<li>
 							<span>[(#ENV{periode}|=={0}|?{<:rainette:lever_soleil:>, <:rainette:coucher_soleil:>}|ucfirst)]</span>
@@ -65,23 +65,23 @@
 				<div class="icone">[(#ENV{#GET{droite}/icone}|rainette_afficher_icone{grand}|image_reduire{95})]</div>
 				<div class="t_reelle">
 					[(#ENV{periode}|=={0}|?{<:rainette:temperature_min:>, <:rainette:temperature_max:>}|ucfirst)<br/>]
-					<span>[(#ENV{#GET{droite}/temperature_max}|rainette_afficher_unite{temperature})]</span><br/>
+					<span>[(#ENV{#GET{droite}/temperature_max}|rainette_afficher_unite{temperature, -1, #ENV{service, weather}})]</span><br/>
 					[(#ENV{#GET{droite}/resume}|rainette_afficher_resume)]
 				</div>
 				<div class="details">
 					<ul>
 						<li>
 							<span><:rainette:vent|ucfirst:></span>
-							[(#ENV{#GET{droite}/vitesse_vent}|rainette_afficher_unite{vitesse})]
+							[(#ENV{#GET{droite}/vitesse_vent}|rainette_afficher_unite{vitesse, -1, #ENV{service, weather}})]
 							[ - (#ENV{#GET{droite}/direction_vent}|rainette_afficher_direction)]
 						</li>
 						<li>
 							<span><:rainette:humidite|ucfirst:></span>
-							[(#ENV{#GET{droite}/humidite}|rainette_afficher_unite{pourcentage})]
+							[(#ENV{#GET{droite}/humidite}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
 						</li>
 						<li>
 							<span><:rainette:risque_precipitation|ucfirst:></span>
-							[(#ENV{#GET{droite}/risque_precipitation}|rainette_afficher_unite{pourcentage})]
+							[(#ENV{#GET{droite}/risque_precipitation}|rainette_afficher_unite{pourcentage, -1, #ENV{service, weather}})]
 						</li>
 						<li>
 							<span>[(#ENV{periode}|=={0}|?{<:rainette:coucher_soleil:>, <:rainette:lever_soleil:>}|ucfirst)]</span>

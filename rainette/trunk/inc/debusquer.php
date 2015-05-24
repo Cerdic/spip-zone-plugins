@@ -112,7 +112,7 @@ function rainette_dbg_comparer_services($mode='conditions', $jeu=array()) {
 }
 
 
-function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php) {
+function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php, $service='weather') {
 	static $types_unite = array();
 	$texte = '';
 
@@ -144,7 +144,7 @@ function rainette_dbg_afficher_donnee($donnee, $valeur, $type_php) {
 		}
 	}
 	else {
-			$texte = $type_donnee ? rainette_afficher_unite($valeur, $type_donnee) : $valeur;
+			$texte = $type_donnee ? rainette_afficher_unite($valeur, $type_donnee, -1, $service) : $valeur;
 	}
 	$texte .= "<br /><em>${type_php}</em>";
 

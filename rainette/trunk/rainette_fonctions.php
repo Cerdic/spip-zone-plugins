@@ -171,7 +171,7 @@ function rainette_afficher_tendance($tendance_en, $methode='texte', $chemin='', 
  *
  * @return string	La chaine calculée ou le texte désignant une valeur indéterminée
  */
-function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1) {
+function rainette_afficher_unite($valeur, $type_valeur='', $precision=-1, $service='weather') {
 
 	static $precision_defaut = array(
 						'temperature' => 0,
