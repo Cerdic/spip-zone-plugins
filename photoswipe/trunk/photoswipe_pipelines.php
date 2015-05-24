@@ -3,7 +3,7 @@
 function photoswipe_insert_head_css($flux) {
 
 	return $flux . "<style type='text/css'>
-	img[data-photo-src] { cursor: zoom-in; }
+	img[data-photo] { cursor: zoom-in; }
 	</style>
 	";
 }
@@ -23,9 +23,9 @@ photoswipe = {
 $(function() {
     photoswipe_init();
     if (!!$.fn.on) {
-      $(document).on("click", "img[data-photo-src]", photoshow);
+      $(document).on("click", "img[data-photo]", photoshow);
     } else if (!!$.fn.live) {
-      $("img[data-photo-src]").live("click", photoshow);
+      $("img[data-photo]").live("click", photoshow);
     }
 });
 </script>
@@ -40,7 +40,7 @@ function photoswipe_post_propre($texte) {
 function filtre_photoswipe_preparer($texte) {
 	foreach (extraire_balises($texte, 'img') as $img) {
 		if ($src = extraire_attribut($img, 'src')
-		AND !extraire_attribut($img, 'data-photosrc')
+		AND !extraire_attribut($img, 'data-photo')
 		) {
 			$l = largeur($img);
 			$h = hauteur($img);
@@ -51,7 +51,7 @@ function filtre_photoswipe_preparer($texte) {
 	// `$tag = str_replace($src,$surcharge['src'],$tag);`
 
 				$photo_src = str_replace('.', '__.__', $src);
-				$img2 = inserer_attribut($img, 'data-photo-src', $photo_src);
+				$img2 = inserer_attribut($img, 'data-photo', $photo_src);
 				$img2 = inserer_attribut($img2, 'data-photo-w', $l);
 				$img2 = inserer_attribut($img2, 'data-photo-h', $h);
 				$texte = str_replace($img, $img2, $texte);

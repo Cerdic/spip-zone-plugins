@@ -6,7 +6,7 @@ function photoshow() {
 
     // gallery ? il y a un glitch
     if (photoswipe.gallery) {
-        $('img[data-photo-src]')
+        $('img[data-photo]')
             .each(function (i, e) {
                 var b = photoshow_identify(e);
                 imgs.push(b);
@@ -25,7 +25,7 @@ function photoshow() {
 }
 
 function photoshow_identify(me) {
-    var photosrc = $(me).attr('data-photo-src');
+    var photosrc = $(me).attr('data-photo');
 
     if (photosrc) {
         a = {
