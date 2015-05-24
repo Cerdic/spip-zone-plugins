@@ -1,25 +1,26 @@
 function photoshow() {
-    var gallery = [],
+    var imgs = [],
         g = [];
     var a = photoshow_identify(this),
         index = 0;
 
-console.log(JSON.stringify( photoshow.gallery ));
     // gallery ? il y a un glitch
     if (photoswipe.gallery) {
         $('img[data-photo-src]')
             .each(function (i, e) {
                 var b = photoshow_identify(e);
-                gallery.push(b);
+                imgs.push(b);
                 if (b.src == a.src) index = i;
             });
     } else {
-        gallery.push(a);
+        imgs.push(a);
     }
 
-    if (photoswipe.debug) { console.log(JSON.stringify(gallery)); }
+    if (photoswipe.debug) {
+        console.log(JSON.stringify(imgs));
+    }
 
-    photoshow_gallery(gallery, index);
+    photoshow_gallery(imgs, index);
     return false;
 }
 
@@ -52,7 +53,7 @@ function photoshow_gallery(items, index) {
     var options = {
         // optionName: 'option value'
         // for example:
-        index: index, // start at first slide,
+        index: index, // start slide,
         shareEl: false, // no "share on pinterest!"
         fullscreenEl: false,
         addCaptionHTMLFn: function (item, captionEl, isFake) {
@@ -68,10 +69,30 @@ function photoshow_gallery(items, index) {
             captionEl.children[0].innerHTML = item.title;
             return true;
         },
+        getThumbBoundsFn: function (index) {
+            var sel = 'img[data-photo-src="' + items[index].src.replace(/\"/, '\\\\\"') + '"]';
+
+            // find thumbnail element
+            var thumbnail = document.querySelectorAll(sel)[0];
+
+            // get window scroll Y
+            var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+            // optionally get horizontal scroll
+
+            // get position of element relative to viewport
+            var rect = thumbnail.getBoundingClientRect();
+
+            // w = width
+            return {
+                x: rect.left,
+                y: rect.top + pageYScroll,
+                w: rect.width
+            };
+        }
     };
 
     // Initializes and opens PhotoSwipe
-    var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+    gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
     gallery.init();
 }
 

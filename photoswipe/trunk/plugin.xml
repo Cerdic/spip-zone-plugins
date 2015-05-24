@@ -9,9 +9,9 @@
         <multi>[fr]Mis en plugin pour SPIP par [Fil->http://zzz.rezo.net] et Baroug
         </multi>
     </auteur>
-    <version>0.0.1</version>
+    <version>0.1.0</version>
     <icon>prive/themes/spip/images/photoswipe-32.png</icon>
-    <etat>dev</etat>
+    <etat>test</etat>
     <description>Syteme de Zoom de photos</description>
     <lien>http://photoswipe.com/</lien>
     <prefix>photoswipe</prefix>
