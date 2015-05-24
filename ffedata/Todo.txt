@@ -1,10 +1,13 @@
 Développer les modèles :
-
 ffe_joueurs :
 autres classement que le elo lent ? Blitz ? Rapide ?
-
 ffe_joueur :
 à faire, fiche sur le joueur. Evolution classement(s) ?
-
 ffe_liste_clubs :
 Ajouter le site du club ?
+
+Partie back-end à développer :
+Le modèles ffe_equipe_clubs_codes est particulièrement indigeste pour le public. Il est utile pour récupérer les clefs pour afficher les modèles affichant les PV des matches ffe_equipes_pv par exemple.
+
+Barre d'outil d'édition:
+ajouter un bouton pour insérer les modèles courants ?

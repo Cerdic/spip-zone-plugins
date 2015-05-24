@@ -1,0 +1,35 @@
+<B_lecture_wsdl2>
+<table class="spip">
+    <thead>
+        <tr>
+            <th>EquipeId</th>
+			<th>Nom</th>
+            <th>Numéro</th>
+			<th>ClubId</th>
+			<th>GroupeId</th>
+            <th>GroupeNom</th>
+            <th>DivisionId</th>
+			<th>DivisionNom</th>
+			<th>CompetitionId</th>
+			<th>CompetitionNom</th>
+        </tr>
+    </thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetEquipesDuClub?Saison=(#CONFIG{ffedata/saison,2015})&Ref=(#CONFIG{ffedata/Ref,2569})}>
+    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par GroupeId}{pagination 30}>
+    <tr>
+        <td>#VALEUR{EquipeId}</td>
+		<td>#VALEUR{EquipeNom}</td>
+        <td>#VALEUR{EquipeNr}</td>
+		<td>#VALEUR{ClubId}</td>
+		<td>#VALEUR{GroupeId}</td>
+        <td>#VALEUR{GroupeNom} &nbsp;</td>
+        <td>#VALEUR{DivisionId}</td>
+		<td>#VALEUR{DivisionNom}</td>
+		<td>#VALEUR{CompetitionId}</td>
+		<td>#VALEUR{CompetitionNom}</td>
+    </tr>#PAGINATION	
+    </BOUCLE_donnees2>
+	
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>

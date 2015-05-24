@@ -10,13 +10,22 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul>
-			[(#SAISIE{input, exemple,
-				label=<:ffedata:cfg_exemple:>,
-				explication=<:ffedata:cfg_exemple_explication:>})]
+			[(#SAISIE{input, saison,
+				label=<:ffedata:ffedata_saison:>,
+				explication=<:ffedata:ffedata_saison_explication:>})]
+			[(#SAISIE{input, Ref,
+				label=<:ffedata:ffedata_club:>,
+				explication=<:ffedata:ffedata_club_explication:>})]
 		</ul>
 
+		
 		<input type="hidden" name="_meta_casier" value="ffedata" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
 	</div>
 	</form>
+
 </div>
+	<div class='ajax'>
+	<h3 class="titrem"><:ffedata:codes_equipes_club:></h3>
+	<INCLURE{fond=prive/squelettes/inclure/ffe_equipe_clubs_codes}
+	</div>

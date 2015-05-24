@@ -9,9 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ffedata_titre' => 'Data FFE',
 
 	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
+	'ffedata_saison' => 'Saison',
+	'ffedata_saison_explication' => 'Saison demandée : pour la saison 2014-2015 saisir 2015',
 	'cfg_titre_parametrages' => 'Paramétrages',
+	
+	'ffedata_club'=> 'Club',
+	'ffedata_club_explication' => 'Le numéro du club dans la base FFE',
 
 	// T
 	'titre_page_configurer_ffedata' => 'configure Data FFE',
