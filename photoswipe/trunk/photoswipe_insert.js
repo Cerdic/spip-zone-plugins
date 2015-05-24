@@ -29,6 +29,7 @@ function photoshow_identify(me) {
 
     if (photosrc) {
         a = {
+            thumbnail: me,
             src: photosrc.replace(/__\.__/g, '.'),
             w: parseInt($(me).attr('data-photo-w')),
             h: parseInt($(me).attr('data-photo-h')),
@@ -36,6 +37,7 @@ function photoshow_identify(me) {
         };
     } else {
         a = {
+            thumbnail: me,
             src: me.src,
             w: parseInt(me.naturalWidth),
             h: parseInt(me.naturalHeight),
@@ -70,10 +72,8 @@ function photoshow_gallery(items, index) {
             return true;
         },
         getThumbBoundsFn: function (index) {
-            var sel = 'img[data-photo-src="' + items[index].src.replace(/\"/, '\\\\\"') + '"]';
-
             // find thumbnail element
-            var thumbnail = document.querySelectorAll(sel)[0];
+            var thumbnail = items[index].thumbnail;
 
             // get window scroll Y
             var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
