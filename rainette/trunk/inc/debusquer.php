@@ -47,7 +47,8 @@ function rainette_dbg_afficher_cache($lieu, $mode='previsions', $service='weathe
 
 			// On ajoute le lieu, le mode et le service au contexte fourni au modele
 			if ($mode == 'previsions') {
-				// Pour les prévisions les informations communes sont stockées dans un index supplémentaire en fin de tableau
+				// Pour les prévisions les informations communes sont stockées dans un index
+				// supplémentaire en fin de tableau
 				$index = count($tableau)-1;
 				$tableau[$index]['lieu'] = $lieu;
 				$tableau[$index]['mode'] = $mode;

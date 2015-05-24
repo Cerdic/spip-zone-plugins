@@ -1,7 +1,7 @@
 <paquet
 	prefix="rainette"
 	categorie="divers"
-	version="2.1.14"
+	version="2.1.15"
 	etat="test"
 	compatibilite="[3.0.11;3.1.*]"
 	logo="rainette-64.png"

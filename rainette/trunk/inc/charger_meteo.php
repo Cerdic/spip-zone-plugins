@@ -41,13 +41,32 @@ function inc_charger_meteo_dist($lieu, $mode='previsions', $service='weather') {
 	$cacher = "${service}_service2cache";
 	$cache = $cacher($lieu, $mode);
 
-	// Déterminer la période de renouvèlement du cache
+	// Déterminer la période de renouvellement du cache
 	$reloader = "${service}_service2reload_time";
 	$reload_time = ($mode == 'previsions') ? $reloader('previsions') : $reloader('conditions');
 
+	// Déterminer le système d'unité utilisé dans le cache et celui requis par la config.
+	// Si ces système d'unité diffèrent il faut renouveler le cache sinon on affichera des données
+	// fausses avec une unité correcte et ce jusqu'à la prochaine échéance du cache.
+	if (file_exists($cache) AND ($mode != 'infos')) {
+		include_spip('inc/config');
+		$unite_config = lire_config("rainette/${service}/unite", 'm');
+		$unite_cache = '';
+
+		lire_fichier($cache, $contenu);
+		$tableau = unserialize($contenu);
+		if ($mode == 'previsions') {
+			$index = count($tableau)-1;
+			$unite_cache = isset($tableau[$index]['config']['unite']) ? $tableau[$index]['config']['unite'] : 'm';
+		} else {
+			$unite_cache = isset($tableau['config']['unite']) ? $tableau['config']['unite'] : 'm';
+		}
+	}
+
 	// Mise à jour du cache avec les nouvelles données météo si besoin
 	if (!file_exists($cache)
-	OR (($mode != 'infos') AND (!filemtime($cache) OR (time()-filemtime($cache)>$reload_time)))) {
+	OR (($mode != 'infos') AND (!filemtime($cache) OR (time()-filemtime($cache)>$reload_time)))
+	OR (($mode != 'infos') AND ($unite_config != $unite_cache))) {
 		// Construire l'url de la requête
 		$urler = "${service}_service2url";
 		$url = $urler($lieu, $mode);
