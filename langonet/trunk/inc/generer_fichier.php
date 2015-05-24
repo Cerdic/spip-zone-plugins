@@ -30,7 +30,7 @@ if (!defined('_LANGONET_TAG_MODIFIE'))
  * @param array $oublis_inutiles [optional]
  * @return 
  */
-function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='valeur', $encodage='utf8', $oublis_inutiles=array()) {
+function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='valeur', $encodage='utf8', $oublis_inutiles=array()) {
 
 	// Modes correspondant à des corrections
 	static $dossier_corrections = array('oublie' => 'definition', 'inutile' => 'utilisation', 'fonction_l' => 'fonction_l');
@@ -98,7 +98,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	else {
 		$dossier_cible = sous_repertoire($dossier_cible, "generation");
 	}
-	$fichier_langue = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau);
+	$fichier_langue = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau, $langue_source);
 
 	if (!$fichier_langue) {
 		$resultats['erreur'] = _T('langonet:message_nok_ecriture_fichier', array('langue' => $langue_cible, 'module' => $module));
@@ -120,7 +120,6 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
  * @return array
  */
 function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
-	include_spip('inc/langonet_utils');
 
 	// On distingue 3 cas de génération d'un fichier de langue cible :
 	// 1- une génération d'une langue cible à partir d'une langue source (opération generer). Dans ce cas, aucun
@@ -154,7 +153,7 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
 			else if ($mode == 'vide') {
 				$texte = _LANGONET_TAG_NOUVEAU;
 			}
-			else if (($mode == 'fonction_l') OR (($mode == 'oublie') AND $_valeur)) {
+			else if (($mode == 'fonction_l')) {
 				$texte = array(
 					_LANGONET_TAG_DEFINITION_L,
 					preg_replace("/'[$](\w+)'/", '\'@\1@\'', $_valeur),
@@ -186,6 +185,26 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
 
 
 /**
+ * Ecriture d'un fichier de langue à partir de la liste de ces couples (item, traduction)
+ * et de son bandeau d'information
+ * Cette fonction est aussi utilisée par PlugOnet
+ *
+ * @param $dir
+ * @param $langue
+ * @param $module
+ * @param $items
+ * @param string $bandeau
+ * @return bool|string
+ */
+function ecrire_fichier_langue_php($dir, $langue, $module, $items, $bandeau, $langue_source) {
+	$nom_fichier = $dir . $module . "_" . $langue   . '.php';
+	$contenu = produire_fichier_langue($langue, $module, $items, $bandeau, $langue_source);
+
+	return ecrire_fichier($nom_fichier, $contenu) ? $nom_fichier : false;
+}
+
+
+/**
  * Produit un fichier de langue a partir d'un tableau (index => trad)
  * Si la traduction n'est pas une chaine mais un tableau, on inclut un commentaire
  *
@@ -195,7 +214,7 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
  * @param string $bandeau
  * @return string
  */
-function produire_fichier_langue($langue, $module, $items, $bandeau='') {
+function produire_fichier_langue($langue, $module, $items, $bandeau, $langue_source) {
 	ksort($items);
 	$initiale = '';
 	$contenu = array();
@@ -228,7 +247,7 @@ function produire_fichier_langue($langue, $module, $items, $bandeau='') {
 
 	return '<'. "?php\n" .
 $bandeau . '
-// Fichier produit par LangOnet à partir de la langue source' . $langue_source . '
+// Fichier produit par LangOnet à partir de la langue source ' . $langue_source . '
 // Module: ' . $module . '
 // Langue: ' . $langue . '
 // Date: ' . date('d-m-Y H:i:s') . '
@@ -244,21 +263,29 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 
 
 /**
- * Ecriture d'un fichier de langue à partir de la liste de ces couples (item, traduction)
- * et de son bandeau d'information
- * Cette fonction est aussi utilisée par PlugOnet
+ * Conversion d'un texte en utf-8
  *
- * @param $dir
- * @param $langue
- * @param $module
- * @param $items
- * @param string $bandeau
- * @return bool|string
+ * @param string	$texte
+ * 		Texte à convertir en UTF-8
+ *
+ * @return string
+ * 		Texte traduit en UTF-8 ou chaine vide
+ *
  */
-function ecrire_fichier_langue_php($dir, $langue, $module, $items, $bandeau='') {
-	$nom_fichier = $dir . $module . "_" . $langue   . '.php';
-	$contenu = produire_fichier_langue($langue, $module, $items, $bandeau);
+function entite2utf($texte) {
+	$texte_utf8 = '';
 
-	return ecrire_fichier($nom_fichier, $contenu) ? $nom_fichier : false;
+	if ($texte AND is_string($texte)) {
+		include_spip('inc/charsets');
+		$texte_utf8 = unicode_to_utf_8(
+			html_entity_decode(
+				preg_replace('/&([lg]t;)/S', '&amp;\1', $texte),
+				ENT_NOQUOTES,
+				'utf-8')
+		);
+	}
+
+	return $texte_utf8;
 }
+
 ?>

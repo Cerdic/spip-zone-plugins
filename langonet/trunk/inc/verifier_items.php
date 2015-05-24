@@ -76,7 +76,7 @@ $GLOBALS['langonet_regexp'] = array(
  * @param string 	$verification	type de verification à effectuer
  * @return array
  */
-function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verification) {
+function inc_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verification) {
 
 	// On constitue la liste des fichiers pouvant être susceptibles de contenir des items de langue.
 	// Pour cela on boucle sur chacune des arborescences choisies.
@@ -92,7 +92,6 @@ function inc_langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers,
 	// On collecte l'ensemble des occurrences d'utilisation d'items de langue dans la liste des fichiers
 	// précédemment constituée.
 	$utilises = collecter_occurrences($fichiers);
-	exporter_tableau($utilises['debug'], array('expression', 'module', 'raccourci', 'suffixe', 'ligne'));
 
 	// On charge le fichier de langue à vérifier qui doit exister dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
@@ -231,7 +230,7 @@ function identifier_type_fichier($fichier) {
  * 		Le tableau des occurrences mis à jour avec l'occurrence passée en argument
  */
 function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
-	include_spip('inc/langonet_utils');
+	include_spip('inc/outiller');
 
 	list($expression, $module, $raccourci_regexp, $suite, $no_colonne) = $occurrence;
 	$suite = trim($suite);
@@ -526,7 +525,7 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 
 							// Si pas normalise, c'est une auto-definition
 							// Si l'index est deja pris pour un autre texte
-							// (32 caracteres initiaux communs)
+							// (48 caracteres initiaux communs)
 							// forcer un suffixe md5
 							// TODO : a priori ce code devrait être obsolete
 							$md5 = $_raccourci;

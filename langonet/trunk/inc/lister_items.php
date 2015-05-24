@@ -16,7 +16,7 @@ if (!defined('_LANGONET_PATTERN_ETAT_ITEM'))
  * 		Chemin vers le fichier de langue à vérifier
  * @return array
  */
-function inc_langonet_lister_items($module, $langue, $ou_langue) {
+function inc_lister_items($module, $langue, $ou_langue) {
 
 	// Initialisation du tableau des resultats
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
@@ -40,7 +40,7 @@ function inc_langonet_lister_items($module, $langue, $ou_langue) {
 		// Recherche du gestionnaire de traduction TradLang par l'existence du rapport XML.
 		// Si le module est traduit avec ce gestionnaire, on peut identifier les états de traduction
 		// de chaque item. On peut aussi identifier la langue de référence
-		include_spip('inc/langonet_utils');
+		include_spip('inc/outiller');
 		list($est_langue_reference, $utilise_tradlang) = verifier_reference_tradlang($module, $langue, $ou_langue);
 
 		// Créer le tableau des items NEW et MODIF si le module est sous TradLang

@@ -22,7 +22,7 @@ function formulaires_langonet_verifier_l_traiter() {
 	$ou_fichier = _request('dossier_scan');
 
 	// Lancement de la vérification fonction_l
-	$langonet_verifier_items = charger_fonction('langonet_verifier_l','inc');
+	$langonet_verifier_items = charger_fonction('verifier_l','inc');
 	$resultats = $langonet_verifier_items($ou_fichier);
 
 	// Creation du fichier de langue corrigé avec les items construits pour chaque cas d'utilisation de
@@ -36,10 +36,10 @@ function formulaires_langonet_verifier_l_traiter() {
 		// On cherche donc un répertoire lang/ dans lequel il existe des fichiers de langue et on essaye de
 		// déterminer le module à corriger ainsi que la langue de référence.
 		// Si aucun module n'est trouvé on choisit le module "indefini" et la langue de référence "fr".
-		include_spip('inc/langonet_utils');
+		include_spip('inc/outiller');
 		list($module, $langue, $ou_langue) = trouver_module_langue($ou_fichier);
 
-		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
+		$langonet_corriger = charger_fonction('generer_fichier','inc');
 		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $resultats["items_a_corriger"]);
 		if ($corrections['fichier']) {
 			$retour['message_ok']['corrections']['fichier'] = $corrections['fichier'];

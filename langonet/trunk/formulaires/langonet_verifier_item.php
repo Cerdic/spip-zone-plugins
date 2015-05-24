@@ -39,7 +39,7 @@ function formulaires_langonet_verifier_item_traiter() {
 	$ou_langue = $retour_select_langue[3];
 
 	// Lancement de la vérification utilisation ou définition
-	$langonet_verifier_items = charger_fonction('langonet_verifier_items','inc');
+	$langonet_verifier_items = charger_fonction('verifier_items','inc');
 	$resultats = $langonet_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verification);
 
 	// Creation du fichier de langue corrigé avec les items detectes comme
@@ -49,7 +49,7 @@ function formulaires_langonet_verifier_item_traiter() {
 		$encodage = 'utf8';
 		$mode = ($verification == 'definition') ? 'oublie' : 'inutile';
 
-		$langonet_corriger = charger_fonction('langonet_generer_fichier','inc');
+		$langonet_corriger = charger_fonction('generer_fichier','inc');
 		$corrections = $langonet_corriger($module, $langue, $ou_langue, $langue, $mode, $encodage, $items_a_corriger);
 		if ($corrections['fichier']) {
 			$retour['message_ok']['corrections']['fichier'] = $corrections['fichier'];

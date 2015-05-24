@@ -77,12 +77,12 @@ function formulaires_langonet_rechercher_traiter($type) {
 	}
 	else
 		$modules = _request('modules');
-	$langonet_rechercher = charger_fonction('langonet_rechercher_'.$type,'inc');
+	$langonet_rechercher = charger_fonction('rechercher_'.$type,'inc');
 
 	// Verification et formatage des resultats de la recherche
 	$retour = array();
 	$resultats = $langonet_rechercher($pattern, $correspondance, $modules);
-	if ($resultats['erreur']) {
+	if (isset($resultats['erreur'])) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {

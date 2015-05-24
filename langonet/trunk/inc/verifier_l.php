@@ -29,7 +29,7 @@ if (!defined('_LANGONET_PATTERN_FICHIERS_L'))
  * 		Si une erreur se produit lors du deroulement de la fonction, le tableau resultat contient le libelle
  * 		de l'erreur dans l'index 'erreur'; sinon, cet index n'existe pas.
  */
-function inc_langonet_verifier_l($ou_fichier) {
+function inc_verifier_l($ou_fichier) {
 
 	// Initialisation du tableau des resultats
 	// Si une erreur se produit lors du déroulement de la fonction, le tableau contient le libellé
@@ -42,7 +42,7 @@ function inc_langonet_verifier_l($ou_fichier) {
 
 	// Chercher, pour chaque fichier collecté, le pattern de la fonction _L()
 	if ($fichiers) {
-		include_spip('inc/langonet_utils');
+		include_spip('inc/outiller');
 
 		$occurrences = array();
 		$nb_occurrences = 0;

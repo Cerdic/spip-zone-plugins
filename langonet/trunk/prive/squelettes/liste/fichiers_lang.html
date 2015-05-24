@@ -6,7 +6,7 @@
 			<strong class="caption">#ENV{titre}</strong>
 		</caption>
 		<tbody>
-<BOUCLE_liste_fichiers_lang(DATA) {source table, #VAL|langonet_lister_fichiers_lang}{where?}{par cle}{pagination #ENV{pas, 5}}>
+<BOUCLE_liste_fichiers_lang(DATA) {source table, #ENV{verification}|langonet_lister_fichiers_lang}{where?}{par cle}{pagination #ENV{pas, 5}}>
 			[(#SET{bulle, #VALEUR|langonet_creer_bulle_fichier{lang, telecharger}})]
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd, row_even})]">
 				<td class="titre principale">#CLE</td>

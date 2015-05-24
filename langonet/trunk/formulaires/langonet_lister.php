@@ -35,12 +35,12 @@ function formulaires_langonet_lister_traiter() {
 	$ou_langue = $retour_select_langue[3];
 
 	// Chargement de la fonction d'affichage
-	$langonet_lister_items = charger_fonction('langonet_lister_items','inc');
+	$langonet_lister_items = charger_fonction('lister_items','inc');
 
 	// Recuperation des items du fichier et formatage des resultats pour affichage
 	$retour = array();
 	$resultats = $langonet_lister_items($module, $langue, $ou_langue);
-	if ($resultats['erreur']) {
+	if (isset($resultats['erreur'])) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {

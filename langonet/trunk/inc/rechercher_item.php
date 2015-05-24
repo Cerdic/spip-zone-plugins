@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		tableau des modules où effectuer la recherche
  * @return array
  */
-function inc_langonet_rechercher_item($pattern, $correspondance, $modules) {
+function inc_rechercher_item($pattern, $correspondance, $modules) {
 
 	// Initialisation du tableau des resultats
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle

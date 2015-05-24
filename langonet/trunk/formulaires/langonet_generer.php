@@ -36,9 +36,9 @@ function formulaires_langonet_generer_traiter() {
 	$mode = _request('mode');
 
 	// Generation du fichier toujours en UTF-8 aujourd'hui
-	$langonet_generer = charger_fonction('langonet_generer_fichier','inc');
+	$langonet_generer = charger_fonction('generer_fichier','inc');
 	$resultats = $langonet_generer($module, $langue_source, $ou_langue, $langue_cible, $mode, 'utf8');
-	if ($resultats['erreur']) {
+	if (isset($resultats['erreur'])) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
