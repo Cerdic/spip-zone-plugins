@@ -1,7 +1,5 @@
 var clip = null;
 
-;(function($){
-
 $(function(){
 	var copypaste_init = function(){
 		$('.copypaste').each(function(){
@@ -25,19 +23,20 @@ $(function(){
 		
 		$('.cadre_download a.copypaste_link').each(function() {
 			var code = $(this).parent('.cadre_download').prev('.cadre'),me = this;
-			var content_data = code.attr('data-clipboard-text'),
-				width = $(this).width(),height = $(this).height();
+			var content_data = code.attr('data-clipboard-text');
 			if(!content_data && $(this).parent().find('a').eq(0)){
-				$.get($(this).parent().find('a').eq(0).attr('href'),function(data) {
-					$(me).parent().append('<div style="display:none" class="data-clipboard-hidden">'+data+'</div>');
-				});
+				if($(this).parent().find('a').eq(0).attr('href')){
+					$.get($(this).parent().find('a').eq(0).attr('href'),function(data) {
+						$(me).parent().append('<div style="display:none" class="data-clipboard-hidden">'+data+'</div>');
+					});
+				}
 			}else{
 				$(me).attr('data-clipboard-text',content_data);
 			}
 		});
 		ZeroClipboard.destroy();
-		var clip = new ZeroClipboard( $('.copypaste_link') );
-
+		
+		clip = new ZeroClipboard( $('.copypaste_link') );
 		clip.on('ready', function(event) {
 			$('.copypaste_copied').html(locale.zeroclipboard.link_title_copy)
 				.attr('title',locale.zeroclipboard.link_title_copy)
@@ -67,4 +66,3 @@ $(function(){
 	}
 	copypaste_init();
 });
-})(jQuery);
