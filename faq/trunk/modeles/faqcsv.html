@@ -40,23 +40,17 @@
 			est rempli par la valeur correspondante
 	
 
-	Le plugin commence par une boucle étrange dont le seul but est de vérifier la présence
-	des itérateurs (cette astuce ne fonctione que s'il y a au moins un admin !)
-
 
 ]#SET{alea, #EVAL{rand()}}
 #SET{test,truc}
-[(#PLUGIN{Iterateurs}|oui)
-	[(#SET{test,0minirezo})]
-]<BOUCLE_CONDITIONNELLE(AUTEURS){statut=#GET{test}}{0,1}>
-	<B_Colonnes_Lexique>
-		<BOUCLE_Lettres(DATA){source csv, #ENV**{url}}{cle>0}{si #ENV{lexique}|oui}>[
+<B_Colonnes_Lexique>
+	<BOUCLE_Lettres(DATA){source csv, #ENV**{url}}{cle>0}{si #ENV{lexique}|oui}>[
  <a href="[#[id_(#ENV{id})_](#VALEUR{lettre}|trim|utf_8_to_unicode)]" class="spip">(#VALEUR{lettre}|trim|unique{lettre_pagin_#GET{alea}}|utf_8_to_unicode)</a>&nbsp;|
 		]</BOUCLE_Lettres>
 [(#ENV{lexique}|non)
 <dl class="faq">
 ]
-	<BOUCLE_Colonnes_Lexique(DATA){source csv, #ENV**{url}}{cle>0}>
+<BOUCLE_Colonnes_Lexique(DATA){source csv, #ENV**{url}}{cle>0}>
 [
 [(#ENV{lexique}|oui)
 	[[(#COMPTEUR_BOUCLE|>{1}|oui)
@@ -73,8 +67,7 @@
 		[(#VALEUR{dd}|trim|utf_8_to_unicode|propre)]
 		[<div class="exemple_faq">(#VALEUR{[ex_(#ENV{ex})]}|trim|utf_8_to_unicode|propre)</div>]
 	</dd>]
-	</BOUCLE_Colonnes_Lexique>
+</BOUCLE_Colonnes_Lexique>
 </dl>
-	</B_Colonnes_Lexique>
-</BOUCLE_CONDITIONNELLE>
+</B_Colonnes_Lexique>
 #FILTRE{trim}
