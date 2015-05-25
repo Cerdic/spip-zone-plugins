@@ -74,7 +74,8 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 				 * On la récupère donc en lui donnant le statut "MODIF"
 				 */
 				if(in_array($array['id'],$trad_langue_cible_id_attic)){
-					sql_updateq('spip_tradlangs',array('statut'=>'MODIF'),'id='.sql_quote($array['id']).' AND lang='.sql_quote($langue).' AND statut="attic"');
+					$titre = $array['id'].' : '.$array['module'].' - '.$langue;
+					sql_updateq('spip_tradlangs',array('statut'=>'MODIF','titre' => $titre),'id='.sql_quote($array['id']).' AND lang='.sql_quote($langue).' AND statut="attic"');
 					//spip_log('Recuperation de l\'id '.$array['id'].' de la langue "'.$langue.'" qui était dans l\'attic','tradlang.'._LOG_ERREUR);
 					$recuperees++;
 				}else{
