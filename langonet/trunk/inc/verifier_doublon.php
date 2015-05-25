@@ -24,7 +24,10 @@ function inc_verifier_doublon($verification, $modules) {
 	// dans tous les fichiers de langue presents sur le site.
 	$langue = 'fr';
 	$items = array();
+	$traductions = array();
 	$doublons = array();
+	$doublons_traductions = array();
+	$index_doublon = 0;
 	if ($modules) {
 		foreach ($modules as $_module) {
 			// L'index 0 correspond au module, l'index 1 au chemin
@@ -39,9 +42,12 @@ function inc_verifier_doublon($verification, $modules) {
 			// On stocke les items dans des tableaux contenant chacun tous les items recenses
 			foreach ($GLOBALS[$var_source] as $_raccourci => $_traduction) {
 				if ($verification == 'item') {
+					// Vérification des doublons de raccourci
+					// --------------------------------------
+
 					if (isset($items[$_raccourci])) {
 						if (count($items[$_raccourci]) == 1) {
-							// C'est le premier doublon, on insère l'item déjà trouvé
+							// C'est le premier doublon pour ce raccourci, on insère l'item déjà trouvé
 							$doublons[$_raccourci][] = $items[$_raccourci][0];
 						}
 						// C'est un doublon de raccourci: on le stocke dans le tableau des doublons
@@ -49,6 +55,39 @@ function inc_verifier_doublon($verification, $modules) {
 					}
 					// On stocke l'item systématiquement dans le tableau de tous les items parcourus
 					$items[$_raccourci][] = array($fichier_lang, $_traduction);
+				}
+				else {
+					// Vérification des doublons de traduction
+					// ---------------------------------------
+
+					// On nettoie la traduction afin de comparer des chaines approchantes
+					// - on supprime les espaces de debut et de fin
+					// - on remplace des espaces multiples en un espace
+					$traduction_nettoyee = strtolower(trim($_traduction));
+					$traduction_nettoyee = preg_replace('/\s\s+/', ' ', $traduction_nettoyee);
+
+					if (in_array($traduction_nettoyee, $traductions)) {
+						$cles_doublons = array_keys($traductions, $traduction_nettoyee);
+						if (count($cles_doublons) == 1) {
+							// C'est le premier doublon pour cette traduction, on insère l'item déjà trouvé
+							$doublons[$index_doublon][] = $items[$cles_doublons[0]];
+							$doublons_traductions[$index_doublon] = $traduction_nettoyee;
+							// Et on insère l'item en cours qui est le doublon au même index
+							$doublons[$index_doublon][] = array($traduction_nettoyee, $fichier_lang, $_traduction, $_raccourci);
+							// En fin on incrémente l'index des doublons
+							$index_doublon++;
+						}
+						else {
+							// L'item a déjà été détecté comme un doublon, il faut donc retrouver son
+							// index avant d'insérer l'item en cours
+							$i = array_search($traduction_nettoyee, $doublons_traductions);
+							$doublons[$i][] = array($traduction_nettoyee, $fichier_lang, $_traduction, $_raccourci);
+						}
+					}
+					// On stocke l'item systématiquement dans le tableau de tous les items parcourus
+					// ainsi que sa traduction nettoyée dans un tableau synchronisé en index
+					$traductions[] = $traduction_nettoyee;
+					$items[] = array($traduction_nettoyee, $fichier_lang, $_traduction, $_raccourci);
 				}
 			}
 		}

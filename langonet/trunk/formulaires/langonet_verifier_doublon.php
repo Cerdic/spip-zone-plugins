@@ -64,8 +64,8 @@ function formulaires_langonet_verifier_doublon_traiter() {
 
 	// Verification et formatage des resultats de la recherche
 	$retour = array();
-	$langonet_verifier = charger_fonction('verifier_doublon','inc');
-	$resultats = $langonet_verifier($verification, $modules);
+	$verifier_doublon = charger_fonction('verifier_doublon','inc');
+	$resultats = $verifier_doublon($verification, $modules);
 	if (isset($resultats['erreur'])) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
