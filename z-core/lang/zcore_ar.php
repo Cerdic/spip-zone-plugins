@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accueil' => 'Accueil',
-	'adapte_de' => 'adapté de',
+	'accueil' => 'الأساسية',
+	'adapte_de' => 'مقتبس من',
 
 	// C
 	'commentaire' => 'تعليق',
@@ -17,28 +17,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'conception_graphique_par' => 'Habillage visuel ©',
 
 	// D
-	'date_forum' => 'Le @date@ à @heure@',
+	'date_forum' => 'في @date@ الساعة @heure@',
 
 	// I
 	'info_1_commentaire' => 'تعليق واحد',
 	'info_nb_commentaires' => '@nb@ تعليق',
 
 	// L
-	'lire_la_suite' => 'Lire la suite',
-	'lire_la_suite_de' => ' de ',
+	'lire_la_suite' => 'المزيد',
+	'lire_la_suite_de' => ' من ',
 
 	// P
 	'pagination_next' => 'التالي »',
 	'pagination_pages' => 'الصفحات',
 	'pagination_prev' => '« السابق',
-	'personaliser_nav' => 'Personnaliser ce menu',
+	'personaliser_nav' => 'تخصيص القائمة',
 
 	// S
-	'sous_licence' => 'sous Licence',
+	'sous_licence' => 'بموجب رخصة',
 
 	// Z
 	'zapl_loading' => 'قيد التحميل...',
-	'zapl_reload_off' => 'Cliquer ici si la page reste incomplète (ou activer le javascript dans votre navigateur)'
+	'zapl_reload_off' => 'النقر هنا اذا بقيت الصفحة غير مكتملة (او تفعيل جافاسكريبت في المتصفح)'
 );
 
 ?>
