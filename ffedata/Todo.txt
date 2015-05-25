@@ -2,12 +2,14 @@ Développer les modèles :
 ffe_joueurs :
 autres classement que le elo lent ? Blitz ? Rapide ?
 ffe_joueur :
-à faire, fiche sur le joueur. Evolution classement(s) ?
+FAIT fiche sur le joueur.  Avec les évolutions du classement ?
+Possibilité d'intégrer un graphique avec chart-js ?
+http://contrib.spip.net/Chart-js?lang=fr
 ffe_liste_clubs :
 Ajouter le site du club ?
 
 Partie back-end à développer :
-Le modèles ffe_equipe_clubs_codes est particulièrement indigeste pour le public. Il est utile pour récupérer les clefs pour afficher les modèles affichant les PV des matches ffe_equipes_pv par exemple.
+Le modèles ffe_equipe_clubs_codes est particulièrement indigeste pour le public. Il est utile pour récupérer les clefs pour afficher les modèles affichant les PV des matches ffe_equipes_pv par exemple. Voir si possible d'améliorer.
 
 Barre d'outil d'édition:
 ajouter un bouton pour insérer les modèles courants ?

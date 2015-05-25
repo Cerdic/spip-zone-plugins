@@ -42,16 +42,85 @@ function echec_ligne_tableau($vals, $nb) {
     static $liste = array('Blanc', 'Noir', 'Resultat');
  
     $ligne = '';
- 
+	if ($nb % 2 == 0) {
+	$ligne .= '<tr class="row_odd odd">';
+	}
+	else {
+	$ligne .= '<tr class="row_even even">';
+	}
+
     if (isset($vals['Blanc' . $nb])) {
-        $ligne .= '<tr>';
+
         foreach ($liste as $cellule) {
             $v = isset($vals[$cellule . $nb]) ? $vals[$cellule . $nb] : '';
-            $ligne .= '<td>' . $v . '</td>';
+						
+			if ($cellule == 'Resultat') {
+              switch ($v) {
+              case 1:
+                 $result="X-X";
+                 break;
+              case 2:
+                 $result="1-0";
+                 break;
+              case 3:
+                 $result="0-1";
+                 break;
+			  case 5:
+                 $result="1-F";
+                 break;
+              case 15:
+                 $result="A-1";
+                 break;
+			  default:
+				$result="1-F";
+              }
+				$ligne .= '<td style="width:35px;">' . $result . '</td>';   
+			}
+			else {
+				   $ligne .= '<td>' . $v . '</td>';
+			}
         }
-        $ligne .= "<td colspan='3'></td>";
-        $ligne .= "</tr>";
     }
- 
+	else { 
+		foreach ($liste as $cellule) {
+            $v = isset($vals[$cellule . $nb]) ? $vals[$cellule . $nb] : '';
+			if ($cellule == 'Resultat') {
+					$ligne .= '<td> F-1 </td>';
+				}
+				else {
+					$ligne .= '<td>' . $v . '</td>';
+				}
+			}
+		}
+        
+        $ligne .= "</tr>";
     return $ligne;
 }
+
+		
+		    // {va_chercher #TITRE}
+    function critere_va_chercher_dist($idb, &$boucles, $crit) {
+            $boucle = &$boucles[$idb];
+            $table = $boucle->id_table;
+            $not = $crit->not;
+     
+            // chercher quoi ?
+            if (isset($crit->param[0])) {
+                    $quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+            } else {
+                    // rendons obligatoire ce parametre
+                    return (array('zbug_critere_necessite_parametre', array('critere' => $crit->op )));
+            }
+     
+            $c = array("'OR'",
+                    array("'LIKE'", "'$table.titre'", "sql_quote('%' . $quoi . '%')"),
+                    array("'LIKE'", "'$table.texte'", "sql_quote('%' . $quoi . '%')")
+            );
+     
+            // Inversion de la condition ?
+            if ($crit->not) {
+                    $c = array("'NOT'", $c);
+            }
+           
+            $boucle->where[] = $c;
+    }

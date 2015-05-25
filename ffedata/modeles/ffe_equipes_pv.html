@@ -9,12 +9,12 @@
      <tr>
 <th>Ronde [(#VALEUR{Ronde})]</th>
 <th>[(#VALEUR{PVDate}|affdate)]</th>
-<th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
+<th>[(#VALEUR{BlancPts}|strlen)] - [(#VALEUR{NoirPts}|strlen)]</th>
 <th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}</th>
 <th>à #VALEUR{Lieu}</th>
 </tr>
  
-<BOUCLE_joueurs(DATA){enum 1,16}>
+<BOUCLE_joueurs(DATA){enum 1,8}>
 
 [(#_donnees2:VALEUR|echec_ligne_tableau{#VALEUR})]
 </BOUCLE_joueurs>
@@ -26,12 +26,12 @@
      <tr>
 <th>Ronde [(#VALEUR{Ronde})]</th>
 <th>[(#VALEUR{PVDate}|affdate)]</th>
+<th>[(#VALEUR{BlancPts}|strlen)] - [(#VALEUR{NoirPts}|strlen)]</th>
 <th>#VALEUR{Lieu}</th>
-<th>#VALEUR{EquipeBlancNom}-#VALEUR{EquipeNoirNom}</th>
 <th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
 </tr>
  
-<BOUCLE_joueurs_noir(DATA){enum 1,16}>
+<BOUCLE_joueurs_noir(DATA){enum 1,8}>
 [(#_noir:VALEUR|echec_ligne_tableau{#VALEUR})]
 </BOUCLE_joueurs_noir>
  
