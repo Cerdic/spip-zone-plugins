@@ -9,7 +9,8 @@ function formulaires_langonet_rechercher_charger($type) {
 	$info_modules = _T('langonet:info_modules_recherche_'.$type);
 	$label_defaut = _T('langonet:label_defaut_modules_'.$type);
 
-	$modules_fr = langonet_lister_modules('fr');
+	include_spip('inc/outiller');
+	$modules_fr = lister_modules('fr');
 
 	$defaut_modules = _request('defaut_modules');
 	$modules = _request('modules');
@@ -61,7 +62,8 @@ function formulaires_langonet_rechercher_traiter($type) {
 	$correspondance = _request('correspondance');
 
 	if (_request('defaut_modules') == 'oui') {
-		$modules_fr = langonet_lister_modules('fr');
+		include_spip('inc/outiller');
+		$modules_fr = lister_modules('fr');
 		$modules = array();
 		if ($type == 'texte') {
 			$modules = array(
@@ -77,10 +79,10 @@ function formulaires_langonet_rechercher_traiter($type) {
 	}
 	else
 		$modules = _request('modules');
-	$langonet_rechercher = charger_fonction('rechercher_'.$type,'inc');
 
 	// Verification et formatage des resultats de la recherche
 	$retour = array();
+	$langonet_rechercher = charger_fonction('rechercher_'.$type,'inc');
 	$resultats = $langonet_rechercher($pattern, $correspondance, $modules);
 	if (isset($resultats['erreur'])) {
 		$retour['message_erreur'] = $resultats['erreur'];
@@ -92,24 +94,6 @@ function formulaires_langonet_rechercher_traiter($type) {
 	}
 	$retour['editable'] = true;
 	return $retour;
-}
-
-
-function langonet_lister_modules($langue, $exclure_paquet=true) {
-	$liste = array();
-
-	foreach (preg_files(_DIR_RACINE, "/lang/[^/]+_${langue}\.php$") as $_fichier) {
-		// On extrait le module
-		if (preg_match(",/lang/([^/]+)_${langue}\.php$,i", $_fichier, $module)) {
-			// On ajoute le module à la liste : l'index correspond au module et la valeur au dossier
-			if (!$exclure_paquet OR ($exclure_paquet
-			AND (strtolower(substr($module[1], 0, 7)) != 'paquet-'))) {
-				$liste[$module[1]] = dirname($_fichier) . '/';
-			}
-		}
-	}
-
-	return $liste;
 }
 
 ?>

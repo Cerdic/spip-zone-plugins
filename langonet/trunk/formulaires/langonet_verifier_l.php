@@ -27,7 +27,8 @@ function formulaires_langonet_verifier_l_traiter() {
 
 	// Creation du fichier de langue corrigé avec les items construits pour chaque cas d'utilisation de
 	// la fonction _L().
-	if ($resultats['total_occurrences'] > 0) {
+	if (isset($resultats['total_occurrences'])
+	AND ($resultats['total_occurrences'] > 0)) {
 		$encodage = 'utf8';
 		$mode = 'fonction_l';
 

@@ -1,0 +1,90 @@
+<div class="formulaire_spip formulaire[_(#FORM)]" id="formulaire[_(#FORM)]">
+	<h3 class="titrem">
+		[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]
+		<:langonet:titre_form_verifier_doublon:>
+	</h3>
+
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<!-- <br class='bugajaxie' /> -->
+<BOUCLE_editable(CONDITION){si #ENV{editable}}>
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:langonet:info_verifier_doublon:></p>
+		<ul>
+			<li class="editer_verification[(#ENV{erreurs}|table_valeur{verification}|oui) erreur]">
+				<label><:langonet:label_verification:></label>
+				<div class="choix">
+					<input type="radio" value="texte" id="verification_texte" class="radio" name="verification" [(#ENV{verification, texte}|=={texte}|oui) checked="checked"] />
+					<label for="verification_texte"><:langonet:label_verification_texte:></label>
+				</div>
+				<div class="choix">
+					<input type="radio" value="item" id="verification_item" class="radio" name="verification" [(#ENV{verification, texte}|=={item}|oui) checked="checked"] />
+					<label for="verification_item"><:langonet:label_verification_item:></label>
+				</div>
+			</li>
+			<B_modules>
+			<li class="editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
+				<p class="explication"><:langonet:info_modules_recherche_item:></p>
+				<label><:langonet:label_modules:></label>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{modules})</span>]
+				<div class="choix">
+					<input type="checkbox" name="defaut_modules" value="oui" id="defaut_modules_doublon" class="checkbox"[ (#ENV{defaut_modules}|oui)checked="checked"]
+								 onchange="jQuery(this).prop('checked')?jQuery('#liste_modules_doublon').hide('fast'):jQuery('#liste_modules_doublon').show('fast');" />
+					<label for="defaut_modules_doublon"><:langonet:label_defaut_modules_item:></label>
+				</div>
+				<div id="liste_modules_doublon"[(#ENV{defaut_modules}|oui)style="display:none;"]>
+					<ol class="spip">
+			<BOUCLE_modules(DATA){source table, #ENV{_modules}}>
+						<li class="choix">
+							<input type="checkbox" name="modules[]" value="#CLE:#VALEUR" id="[module_(#CLE)_doublon]" class="checkbox module_doublon"[ (#CLE|in_array{#ENV{_modules_choisis}}|oui)checked="checked"] />
+							<label for="[module_(#CLE)_doublon]">#CLE</label>
+						</li>
+			</BOUCLE_modules>
+					</ol>
+					<a href="#" id="select_tous_doublon"><:langonet:bouton_cocher_tout:></a><span class="sep"> | </span>
+					<a href="#" id="select_aucun_doublon"><:langonet:bouton_cocher_aucun:></a><span class="sep"> | </span>
+					<a href="#" id="select_spip_doublon"><:langonet:bouton_cocher_spip:></a>
+				</div>
+			</li>
+			</B_modules>
+		</ul>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:langonet:bouton_verifier:>' />
+		</p>
+	</div></form>
+</BOUCLE_editable>
+</div>
+
+[(#REM) <!-- Affichage des resultats --> ]
+[(#ENV*{message_ok}|oui)
+	<INCLURE{fond=formulaires/inc-resultats_verifier_doublon,
+		verification=#ENV{verification},
+		items=#ENV*{message_ok/doublons},
+		total=#ENV*{message_ok/total}} />
+]
+
+[(#REM) <!-- Gestion des liens tout cocher, tout décocher et cocher les modules SPIP --> ]
+<script type="text/javascript">
+//<![CDATA[
+	(function($){
+		jQuery("#select_tous_doublon").click(function(){
+			jQuery("input.module_doublon").prop("checked",true);
+			return false;
+		});
+		jQuery("#select_aucun_doublon").click(function(){
+			$("input.module_doublon").prop("checked",false);
+			return false;
+		});
+		jQuery("#select_spip_doublon").click(function(){
+			jQuery("input.module_doublon").prop("checked",false);
+			jQuery("#module_ecrire_doublon").prop("checked",true);
+			jQuery("#module_public_doublon").prop("checked",true);
+			jQuery("#module_spip_doublon").prop("checked",true);
+			return false;
+		});
+	})(jQuery);
+//]]>
+</script>
