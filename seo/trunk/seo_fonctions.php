@@ -56,8 +56,8 @@ function seo_interprete_contexte($contexte){
 				$infos[$s]['id_objet'] = $contexte[$primary];
 				$infos[$s]['primary'] = $primary;
 				$infos[$s]['table_sql'] = $t;
+				return $infos[$s];
 			}
-			return $infos[$s];
 		}
 	}
 	return $infos[$s];
@@ -254,7 +254,7 @@ function seo_calculer_meta_tags($contexte=null){
 			$row = sql_fetsel($select, $i['table_sql'], $i['primary']."=" . intval($i['id_objet']));
 			if($row){
 				if (isset($row['titre'])){
-					$tag['title'] = couper(extraire_multi($row['titre'], $contexte['lang']), 64);
+					$tag['title'] = couper(extraire_multi($row['titre'], isset($contexte['lang'] ? $contexte['lang'] : $GLOBALS['spip_lang'])), 64);
 					unset($row['titre']);
 				}
 				if (isset($row['lang']))
