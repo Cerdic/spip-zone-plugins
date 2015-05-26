@@ -39,13 +39,16 @@ function spiperipsum_afficher($langue, $jour, $lecture, $mode) {
 	if (($lecture == _SPIPERIPSUM_LECTURE_DATE_TITRE)
 	OR ($lecture == _SPIPERIPSUM_LECTURE_DATE_ISO)
 	OR ($lecture == _SPIPERIPSUM_LECTURE_DATE_LITURGIQUE)) {
-		$contexte = $tableau['date'];
+		if (isset($tableau['date'])) {
+			$contexte = $tableau['date'];
+		}
 		$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
 		$texte = recuperer_fond("modeles/date", $contexte);
 	}
 	else {
-		if ($tableau[$lecture])
+		if (isset($tableau[$lecture])) {
 			$contexte = $tableau[$lecture];
+		}
 		$contexte = array_merge($contexte, array('lecture' => $lecture, 'mode' => $mode));
 
 		if ($lecture == _SPIPERIPSUM_LECTURE_SAINT)
