@@ -13,16 +13,16 @@
         <li>
             <label for="server_address"><:spiplistescleaner:server_address:></label>
             [<span class='erreur'>(#ENV**{erreurs}|table_valeur{server_address})</span>]
-			
+
             <p class="explications"><:spiplistescleaner:server_address_help:></p>
             <input type="text" name="server_address" id="server_address"
-                value="#ENV{server_address, #CONFIG{server_address}}" 
+                value="#ENV{server_address, #CONFIG{server_address}}"
                 class="text" />
         </li>
         <li>
             <label for="server_type"><:spiplistescleaner:server_type:></label>
             [<span class='erreur'>(#ENV**{erreurs}|table_valeur{server_type})</span>]
-			
+
 			<select name="server_type">
               <option value="pop3" [(#ENV{server_type, #CONFIG{server_type}}|=={pop3}|?{'selected="selected"'})]>pop3</option>
 			  <option value="imap" [(#ENV{server_type, #CONFIG{server_type}}|=={imap}|?{'selected="selected"'})]>imap</option>
@@ -31,7 +31,7 @@
 		<li>
             <label for="server_security"><:spiplistescleaner:server_security:></label>
             [<span class='erreur'>(#ENV**{erreurs}|table_valeur{server_security})</span>]
-			
+
 			<select name="server_security">
               <option value="none" [(#ENV{server_security, #CONFIG{server_security}}|=={none}|?{'selected="selected"'})]>none</option>
 			  <option value="tls" [(#ENV{server_security, #CONFIG{server_security}}|=={tls}|?{'selected="selected"'})]>tls</option>
@@ -41,7 +41,7 @@
 		<li>
             <label for="server_security_option"><:spiplistescleaner:server_security_option:></label>
             [<span class='erreur'>(#ENV**{erreurs}|table_valeur{server_security_option})</span>]
-			
+
 			<select name="server_security_option">
               <option value="validate-cert" [(#ENV{server_security_option, #CONFIG{server_security_option}}|=={validate-cert}|?{'selected="selected"'})]>validate certificate</option>
 			  <option value="novalidate-cert"[(#ENV{server_security_option, #CONFIG{server_security_option}}|=={novalidate-cert}|?{'selected="selected"'})]>no validate certificate</option>
@@ -50,26 +50,26 @@
 		<li>
             <label for="server_username"><:spiplistescleaner:server_username:></label>
             [<span class='erreur'>(#ENV**{erreurs}|table_valeur{server_username})</span>]
-			
+
             <input type="text" name="server_username" id="server_username"
-                value="#ENV{server_username, #CONFIG{server_username}}" 
+                value="#ENV{server_username, #CONFIG{server_username}}"
                 class="text" />
         </li>
 		<li>
             <label for="server_password"><:spiplistescleaner:server_password:></label>
             [<span class='erreur'>(#ENV**{erreurs}|table_valeur{server_password})</span>]
-			
+
             <input type="password" name="server_password" id="server_password"
-                value="#ENV{server_password, #CONFIG{server_password}}" 
+                value="#ENV{server_password, #CONFIG{server_password}}"
                 class="password" />
         </li>
 		<li>
 			<p class="explications"><:spiplistescleaner:server_mailbox_help:></p>
             <label for="server_mailbox"><:spiplistescleaner:server_mailbox:></label>
             [<span class='erreur'>(#ENV**{erreurs}|table_valeur{server_mailbox})</span>]
-			
+
             <input type="text" name="server_mailbox" id="server_mailbox"
-                value="#ENV{server_mailbox, #CONFIG{server_mailbox}}" 
+                value="#ENV{server_mailbox, #CONFIG{server_mailbox}}"
                 class="text" />
         </li>
     </ul>
