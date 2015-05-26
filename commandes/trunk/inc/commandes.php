@@ -33,7 +33,7 @@ function creer_commande_encours(){
 		// Si la commande est toujours "encours" on la supprime de la base
 		if ($statut = sql_getfetsel('statut', 'spip_commandes', 'id_commande = '.$id_commande) and $statut == 'encours'){
 			spip_log("Suppression d'une commande encours ancienne en session : $id_commande");
-			commandes_effacer($id_commande);
+			commandes_supprimer($id_commande);
 		}
 
 		// Dans tous les cas on supprime la valeur de session

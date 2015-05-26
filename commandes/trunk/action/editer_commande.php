@@ -75,11 +75,6 @@ function commande_inserer($id_parent=null, $champs=array()) {
 
 	// On insère seulement s'il y a un auteur correct
 	if (isset($champs['id_auteur']) and $champs['id_auteur'] = intval($champs['id_auteur'])){
-		// Si id_auteur vaut 0 ou n'est pas defini, ne pas creer de commande et envoyer message impossible
-		if (!$id_auteur = intval($champs['id_auteur'])) {
-			return false; // ? minipress(); ?
-		} 
-		
 		// La date de tout de suite
 		$champs['date'] = date('Y-m-d H:i:s');
 		
