@@ -4,9 +4,10 @@
 	<slogan>On range nos medias!</slogan>
 	<icon>prive/themes/spip/images/medias_nettoyage-64.png</icon>
 	<prefix>medias_nettoyage</prefix>
-	<version>0.8.7</version>
+	<version>0.10.4</version>
 	<etat>stable</etat>
 	<categorie>outil</categorie>
+    <lien>http://contrib.spip.net/Nettoyer-la-mediatheque</lien>
 
 	<auteur>Venfu</auteur>
 	<auteur>Teddy Payet</auteur>
@@ -27,7 +28,7 @@
 		<inclure>medias_nettoyage_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<necessite id="Iterateurs" version="[1.0.1;]" />
 	<necessite id="saisies" version="[1.20.0;]" />
 

@@ -1,0 +1,14 @@
+[(#SET{titre,<:medias_nettoyage:medias_nettoyage_nom:>})]
+[(#BOITE_OUVRIR{[(#CHEMIN_IMAGE{medias_nettoyage-24.png}|balise_img{'', cadre-icone}|concat{#GET{titre}})], 'simple','titrem'})]
+<div class="navigation">
+    <ul class="liste-items">
+        <li class="item[(#ENV{exec}|=={medias_tabbord}|oui) on]"><a href="[(#URL_ECRIRE{medias_tabbord})]">[(#CHEMIN_IMAGE{medias_tabbord-16.png}|balise_img{<:medias_nettoyage:onglet_titre_tabbord:>})] <:medias_nettoyage:onglet_titre_tabbord:></a></li>
+        <li class="item[(#ENV{exec}|=={medias_rep_img}|oui) on]"><a href="[(#URL_ECRIRE{medias_rep_img})]">[(#CHEMIN_IMAGE{medias_rep_img-16.png}|balise_img{<:medias_nettoyage:onglet_titre_rep_img:>})] <:medias_nettoyage:onglet_titre_rep_img:></a></li>
+        <li class="item[(#ENV{exec}|=={medias_logos_img}|oui) on]"><a href="[(#URL_ECRIRE{medias_logos_img})]">[(#CHEMIN_IMAGE{medias_logos_img-16.png}|balise_img{<:medias_nettoyage:onglet_titre_logos_img:>})] <:medias_nettoyage:onglet_titre_logos_img:></a></li>
+        <li class="item[(#ENV{exec}|=={medias_rep_orphelins}|oui) on]"><a href="[(#URL_ECRIRE{medias_rep_orphelins})]">[(#CHEMIN_IMAGE{medias_rep_img-16.png}|balise_img{<:medias_nettoyage:onglet_titre_rep_orphelins:>})] <:medias_nettoyage:onglet_titre_rep_orphelins:></a></li>
+    </ul>
+</div>
+<div class="nettoyeur"></div>
+
+[(#BOITE_FERMER)]
+
