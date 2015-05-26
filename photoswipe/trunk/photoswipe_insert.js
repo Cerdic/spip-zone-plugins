@@ -29,21 +29,42 @@ function photoshow_identify(me) {
 
     if (photosrc) {
         a = {
-            thumbnail: me,
             src: photosrc.replace(/__\.__/g, '.'),
             w: parseInt($(me).attr('data-photo-w')),
             h: parseInt($(me).attr('data-photo-h')),
         };
     } else {
         a = {
-            thumbnail: me,
             src: me.src,
             w: parseInt(me.naturalWidth),
             h: parseInt(me.naturalHeight),
         };
     }
-    
-    a.title = $(me).attr('title'); // legende
+
+    a.thumbnail = me;
+
+    // recuperer la legende
+    a.title = "";
+
+    // 1. figure / figcaption
+    var p = $(me).parents('figure').find('figcaption');
+    if (p.length) {
+      a.title = p.html();
+    }
+    // 2. dl/dt (modèle spip…)
+    if (!a.title) {
+      $(me)
+      .parent('dt')
+      .parent('dl')
+      .find('dt.spip_doc_titre, dd.spip_doc_descriptif')
+      .each(function(i,e) {
+        a.title += e.outerHTML; 
+      });
+    }
+    // 3. title
+    if (!a.title) {
+      a.title = $(me).attr('title');
+    }
 
     return a;
 }
