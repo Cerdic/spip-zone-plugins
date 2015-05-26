@@ -98,7 +98,12 @@ function commande_inserer($id_parent=null, $champs=array()) {
 				'data' => $champs
 			)
 		);
-
+		
+		// Si on veut insérer des échéances et que ce n'est pas déjà sérialisé, on sérialise TOUJOURS ce champ
+		if (isset($champs['echeances']) and @unserialize($champs['echeances']) === false) {
+			$champs['echeances'] = serialize($champs['echeances']);
+		}
+		
 		// Insérer l'objet
 		$id_commande = sql_insertq("spip_commandes", $champs);
 
@@ -112,7 +117,7 @@ function commande_inserer($id_parent=null, $champs=array()) {
 				'data' => $champs
 			)
 		);
-
+		
 		// Envoi des notifications par email
 		spip_log("inserer_commande : appel des notifications pour la commande $id_commande",'commandes.'._LOG_INFO);
 		include_spip('inc/commandes');
@@ -152,7 +157,12 @@ function commande_modifier($id_commande, $set=null) {
 		// donnees eventuellement fournies
 		$set
 	);
-
+	
+	// Si on veut insérer des échéances et que ce n'est pas déjà sérialisé, on sérialise TOUJOURS ce champ
+	if (isset($c['echeances']) and @unserialize($c['echeances']) === false) {
+		$c['echeances'] = serialize($c['echeances']);
+	}
+	
 	// Si l'objet est publie, invalider les caches et demander sa reindexation
 	if (objet_test_si_publie('commande',$id_commande)){
 		$invalideur = "id='id_commande/$id_commande'";

@@ -26,7 +26,10 @@ function commandes_declarer_tables_interfaces($interfaces){
 	// 'spip_' dans l'index de $tables_principales
 	$interfaces['table_des_tables']['commandes'] = 'commandes';
 	$interfaces['table_des_tables']['commandes_details'] = 'commandes_details';
-
+	
+	// Toujours désérialiser les échéances
+	$interfaces['table_des_traitements']['ECHEANCES']['commandes'] = 'unserialize(%s)';
+	
 	return $interfaces;
 }
 
@@ -42,7 +45,7 @@ function commandes_declarer_tables_interfaces($interfaces){
  */
 function commandes_declarer_tables_objets_sql($tables) {
 
-	// Table principale SPIP_COMMANDES
+	// Table principale des commandes
 	$tables['spip_commandes'] = array(
 		'type' => 'commande',
 		'principale' => "oui",
@@ -55,7 +58,10 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'date_paiement'      => 'datetime not null default "0000-00-00 00:00:00"',
 			'date_envoi'         => 'datetime not null default "0000-00-00 00:00:00"',
 			'maj'                => 'timestamp',
-			'mode'      	     => 'varchar(25) not null default ""' // mode de paiement
+			'mode'               => 'varchar(25) not null default ""', // mode de paiement
+			'bank_uid'           => 'varchar(55) not null default ""', // mémorisation éventuelle d'un identifiant chez un service bancaire
+			'echeances_type'     => 'varchar(25) not null default ""', // périodicité (ex : mois, annee) ou nombre précis d'échances (ex : 3)
+			'echeances'          => 'text not null default ""', // tableau sérialisé décrivant les échéances
 		),
 		'key' => array(
 			"PRIMARY KEY"        => "id_commande",

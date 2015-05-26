@@ -53,7 +53,7 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 
 	$maj['create'] = array(
 		array(
-			'maj_tables', array('spip_commandes','spip_commandes_details'),
+			'maj_tables', array('spip_commandes','spip_commandes_details', 'spip_commandes_liens'),
 		),
 		array(
 			'ecrire_config', 'commandes', $config
@@ -105,6 +105,11 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 	// Ajouter une table de liens pour les commandes
 	$maj['0.6.0'] = array(
 		array('maj_tables', array('spip_commandes_liens')),
+	);
+	
+	// Ajouter des champs (bank_uid, echeances_type, echeances) pour gérer d'éventuels renouvellements bancaires automatiques
+	$maj['0.7.0'] = array(
+		array('maj_tables', array('spip_commandes')),
 	);
 
 	include_spip('base/upgrade');
