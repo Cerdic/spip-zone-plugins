@@ -3,7 +3,7 @@
 function photoswipe_insert_head_css($flux) {
 
 	return $flux . "<style type='text/css'>
-	img[data-photo] { cursor: zoom-in; }
+	img[data-photo].photoshow { cursor: zoom-in; }
 	</style>
 	";
 }
@@ -23,8 +23,10 @@ photoswipe = {
 $(function() {
     photoswipe_init();
     if (!!$.fn.on) {
+      $(document).on("mouseover", "img[data-photo]", photoshow_hover);
       $(document).on("click", "img[data-photo]", photoshow);
     } else if (!!$.fn.live) {
+      $("img[data-photo]").live("mouseover", photoshow_hover);
       $("img[data-photo]").live("click", photoshow);
     }
 });

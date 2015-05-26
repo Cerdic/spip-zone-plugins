@@ -1,16 +1,27 @@
+function photoshow_hover() {
+    var me = this;
+    var a = photoshow_identify(me);
+    if (a) {
+        $(me).addClass('photoshow');
+    }
+}
 function photoshow() {
     var imgs = [],
         g = [];
     var a = photoshow_identify(this),
         index = 0;
 
+    if (!a) return;
+
     // gallery ? il y a un glitch
     if (photoswipe.gallery) {
         $('img[data-photo]')
             .each(function (i, e) {
                 var b = photoshow_identify(e);
-                imgs.push(b);
-                if (b.src == a.src) index = i;
+                if (b) {
+                    imgs.push(b);
+                    if (b.src == a.src) index = i;
+                }
             });
     } else {
         imgs.push(a);
@@ -66,7 +77,8 @@ function photoshow_identify(me) {
       a.title = $(me).attr('title');
     }
 
-    return a;
+    // on verifie que la taille du fichier grand est superieure a celle du fichier petit
+    if (a.w > $(me).width()) return a;
 }
 
 function photoshow_gallery(items, index) {
