@@ -5,9 +5,9 @@
     [<h5>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{coordonnees:info_1_email,coordonnees:info_nb_emails}})</h5>]
     <BOUCLE_liste_numeros (numeros_liens) {id_numero != #GET{id_numero_exclu}} {objet} {id_objet} {pagination #ENV{nb,10}}>
     <BOUCLE_numero (NUMEROS){id_numero}>
-    <div class="champ contenu_numero">
-        <div class='label visible type'>
-            [(#TYPE|logo_type_numero) ][(#TYPE|coordonnees_lister_types_numeros)]
+    <div class="champ picto contenu_numero">
+        <div class='label visible type [(#TYPE|coordonnees_lister_types_numeros)]'>
+            [(#TYPE|coordonnees_lister_types_numeros)]
         </div>
         <div class='span numero'>
             [<div class="#EDIT{numero}">(#NUMERO)</div>]

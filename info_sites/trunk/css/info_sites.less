@@ -3,12 +3,11 @@
 html{
 	position:relative;
 	min-height: 100%;
-	background-color: @bg-violet;
 }
 
 body{
 	margin-bottom:60px;
-	background-color: @bg-violet;
+	background-color: @bg-site;
 }
 
 a, button, input, textarea, select, option{
@@ -89,7 +88,7 @@ a[rel*=home]{
 
 h1 {
 	small {
-		color: @gray-second;
+		color: @white;
 	}
 }
 
@@ -595,12 +594,11 @@ input[type="radio"], input[type="checkbox"]{
 		padding-left:0;
 
 		h1 {
-			color: @white;
 			margin-top: 10px;
 			font-size:28px;
 
 			a {
-				color: @gray-lighter;
+				color: @bg-dark;
 			}
 		}
 
@@ -617,7 +615,7 @@ input[type="radio"], input[type="checkbox"]{
 			.form-inline {
 				.form-group {
 					&:first-of-type {
-						width: 85%;
+						width: 83%;
 						input {
 							width: 100%;
 							border: 0 none;
@@ -626,6 +624,9 @@ input[type="radio"], input[type="checkbox"]{
 
 					& + .form-group{
 						margin-left: 10px;
+						float: right;
+						width: auto;
+						padding: 0;
 					}
 				}
 			}
@@ -681,6 +682,8 @@ input[type="radio"], input[type="checkbox"]{
 				a {
 					color: @white;
 					line-height: 26px;
+					margin-top: -1px;
+					padding: 10px 18px;
 
 					&:active,
 					&:focus,
@@ -901,6 +904,10 @@ input[type="radio"], input[type="checkbox"]{
 }
 
 
+.fa{
+	margin-right: 3px;
+}
+
 
 // --------
 // Inclures prive/objets/contenu/xxxx.html
@@ -924,6 +931,34 @@ input[type="radio"], input[type="checkbox"]{
 				img{
 					margin-bottom: 6px;
 				}
+			}
+		}
+
+		&.picto{
+			.label:before{
+				display: inline-block;
+				margin-right: 5px;
+				color: @black;
+				font-family: FontAwesome;
+				font-size: 14px;
+			}
+		}
+
+		&.picto.contenu_numero{
+			.label:before{
+				content: "\f095";
+			}
+		}
+
+		&.picto.contenu_email{
+			.label:before{
+				content: "\f003";
+			}
+		}
+
+		&.picto.contenu_adresse{
+			.label:before{
+				content: "\f041";
 			}
 		}
 
@@ -1006,25 +1041,9 @@ input[type="radio"], input[type="checkbox"]{
 		background-color: @bg-dark;
 	}
 
-	#content {
-		.cartouche {
-			h1 {
-				margin: 0 auto;
-				width: 50%;
-			}
-		}
-		.formulaire_menu_lang {
-			width: 50%;
-			float: right;
-			margin: 1em auto;
-			text-align: right;
-		}
-	}
-
 	.container {
 		margin-top: 2em;
-		padding-top: 2em;
-		padding-bottom: 2em;
+		padding:20px;
 		background-color: @white;
 
 		> .row {
@@ -1035,6 +1054,7 @@ input[type="radio"], input[type="checkbox"]{
 				margin-bottom: 1em;
 
 				h1 {
+					float: left;
 					overflow: hidden;
 					margin-top: 0;
 
@@ -1042,129 +1062,54 @@ input[type="radio"], input[type="checkbox"]{
 						display: block;
 					}
 				}
-			}
 
-			div.col-md-6 {
-				background-color: @white;
-				padding-top: 2em;
-				padding-bottom: 2em;
-			}
-		}
-	}
-}
-
-
-
-
-// --------
-// Page formulaire_login
-// --------
-.page_login{
-
-	.container{
-		padding:20px;
-	}
-
-	h1{
-		float: left;
-	}
-
-	#formulaire_menu_lang{
-		background-color: transparent;
-	}
-
-	fieldset{
-		margin:0 auto;
-		width:30%;
-
-		input[type=text],
-		input[type=password]{
-			display: block;
-			width:100%;
-		}
-
-		input[type=checkbox]{
-			float: left;
-			margin-right: 10px;
-		}
-	}
-
-}
-
-.formulaire_login {
-	#formulaire_login {
-		width: auto;
-		margin: 0 auto;
-	}
-	ul {
-		padding-left: 0;
-		margin: 0;
-		list-style: none;
-		li {
-			position: relative;
-			overflow: hidden;
-			label {
-				display: block;
-				float: left;
-				width: 42%;
-				margin-right: 3%;
-				padding: 10px 0;
-				font-weight: normal;
-			}
-			&.obligatoire {
-				label {
-					font-weight: bold;
+				#formulaire_menu_lang{
+					background-color: transparent;
+					padding-right: 0;
 				}
-			}
-			.erreur_message {
-				display: block;
-				padding: 10px;
-			}
-			input {
-				width: 55%;
-				float: right;
-				display: block;
-				padding: 10px;
-				font-size: 1em;
-				height: auto;
-				box-sizing: border-box;
-				position: relative;
 
-				&.password, &[type='password'] {
-					&:before {
-						content: "hello";
+			}
+
+			.formulaire_login {
+
+				fieldset{
+					margin:0 auto;
+					width:30%;
+
+					legend{
+						border-bottom-color:@bg-site;
+					}
+
+					> .form-group{
+						position: relative;
+
+						&:first-child{
+							margin-bottom: 25px;
+						}
+					}
+
+					input[type=text],
+					input[type=password]{
 						display: block;
-						width: auto;
-						background-color: gray;
+						width:100%;
+					}
+
+					input[type=checkbox]{
+						float: left;
+						margin-right: 10px;
+					}
+
+					#pass_securise{
+						position: absolute;
+						right: 0;
+						top: 0;
 					}
 				}
-
-				&[type='checkbox'] {
-					text-align: left;
-					width: auto;
-					float: left;
-					margin: 10px 10px 10px 0;
-
-				}
 			}
 
-			.details {
-				width: 55%;
-				float: right;
-				display: block;
-				padding: 5px 0;
-			}
-
-			#pass_securise {
-				position: absolute;
-				top: 10px;
-				right: 5px;
-			}
 		}
 	}
 }
-
-
 
 
 
@@ -1182,12 +1127,143 @@ input[type="radio"], input[type="checkbox"]{
 	}
 }
 
+#aside{
+	.dropdown{
+		text-align: right;
+	}
+
+	.dropdown-menu{
+		left:auto;
+		right:0;
+	}
+}
+
+// --------
+// Messages d'erreur
+// --------
+.erreur_message{
+	  display: inline-block;
+	  padding: 2px;
+	  margin-bottom: 5px;
+}
 
 
 // --------
 // Media Queries
 // --------
+@media (max-width: 1180px) {
+	.page_projets_sites{
+		.contenu{
+			float: none;
+			width:100%;
+		}
+
+		#aside{
+			position: relative !important;
+			float: none;
+		}
+	}
+}
+
+@media (max-width: 992px) {
+	#aside{
+		position: absolute;
+		top:20px;
+		right:0;
+	}
+
+	#menu {
+		&.menu_pages {
+			ul {
+				> li {
+					a {
+						padding: 10px 12px;
+					}
+				}
+			}
+		}
+	}
+
+	.contenu{
+		h1.titre{
+			width:83%;
+		}
+	}
+}
+
+
+@media (max-width: 805px) {
+	#menu {
+		&.menu_pages {
+			ul {
+				> li {
+					a {
+						padding: 10px 10px;
+					}
+				}
+			}
+		}
+	}
+}
+
 @media (max-width: 767px) {
+	#header{
+		header+div{
+			padding-left: 0;
+
+			.form-search{
+				margin-top: 0;
+
+				>div{
+					margin-bottom: 0;
+				}
+
+				form{
+					.form-group{
+						float: left;
+					}
+				}
+			}
+		}
+
+		.form-search {
+
+			#formulaire_recherche {
+				.form-inline {
+					.form-group {
+						&:first-of-type {
+							width: 83.3333%;
+							padding: 0;
+						}
+						& + .form-group{
+							margin:0;
+							padding: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#menu {
+		&.menu_pages {
+			ul {
+				> li {
+					margin-right: 3%;
+
+					&:last-child{
+						margin-right:0;
+					}
+
+					a {
+						padding: 10px 18px;
+					}
+				}
+			}
+		}
+	}
+
+
 	#aside {
 		.menu {
 			&.menu_pages {
@@ -1205,5 +1281,4 @@ input[type="radio"], input[type="checkbox"]{
 			}
 		}
 	}
-
 }

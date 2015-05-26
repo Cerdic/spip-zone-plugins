@@ -4,10 +4,10 @@ $(document).ready(function(){
 	if( $('.contenu .legend').length > 0 )
 	{
 		if( $('#aside .dropdown.boutons').length > 0 ){
-			$('<div class="sommaire"><ul></ul></div>').insertAfter($('#aside .dropdown.boutons'));
+			$('<div class="sommaire hidden-sm hidden-xs"><ul></ul></div>').insertAfter($('#aside .dropdown.boutons'));
 		}
 		else{
-			$('#aside').append('<div class="sommaire"><ul></ul></div>');
+			$('#aside').append('<div class="sommaire hidden-sm hidden-xs"><ul></ul></div>');
 		}
 
 		$('.contenu .legend').each(function(){

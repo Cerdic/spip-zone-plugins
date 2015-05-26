@@ -1,6 +1,6 @@
 <div id="menu" class="col-md-12 menu menu_pages">
 	<ul class="nav nav-stacked">
-		<BOUCLE_menu (DATA) {source tableau, #CONFIG{"info_sites_menu"}}><li [(#ENV{type-page}|=={#CLE}|oui) class="active"]><a href="#URL_PAGE{#CLE}" [(#ENV{type-page}|=={#CLE}|oui) class="active"]><i class="[(#VALEUR{icone})]"></i> [<span class="hidden-xs hidden-sm">(#VALEUR**{nom}|_T)</span>]</a></li>
+		<BOUCLE_menu (DATA) {source tableau, #CONFIG{"info_sites_menu"}}><li [(#ENV{type-page}|=={#CLE}|oui) class="active"]><a href="#URL_PAGE{#CLE}" [(#ENV{type-page}|=={#CLE}|oui) class="active"]><i class="[(#VALEUR{icone})]"></i> [<span class="hidden-xs">(#VALEUR**{nom}|_T)</span>]</a></li>
 		</BOUCLE_menu>
 	</ul>
 </div>

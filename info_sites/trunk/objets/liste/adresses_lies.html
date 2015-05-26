@@ -5,9 +5,9 @@
     [<h5>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{coordonnees:info_1_adresse,coordonnees:info_nb_adresses}})</h5>]
     <BOUCLE_liste_adresses (adresses_liens) {id_adresse != #GET{id_adresse_exclu}} {objet} {id_objet} {pagination #ENV{nb,10}}>
         <BOUCLE_adresse (ADRESSES) {id_adresse}>
-        <div class="champ contenu_adresse">
+        <div class="champ picto contenu_adresse">
             <div class='label visible type'>
-                [(#TYPE|logo_type_adresse) ][(#TYPE|coordonnees_lister_types_adresses)]
+                [(#TYPE|coordonnees_lister_types_adresses)]
             </div>
             <div class="span adresse">
                 [<div class="#EDIT{voie} voie">(#VOIE)</div>]

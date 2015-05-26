@@ -5,9 +5,9 @@
     [<h5>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{coordonnees:info_1_email,coordonnees:info_nb_emails}})</h5>]
     <BOUCLE_liste_emails (emails_liens) {id_email != #GET{id_email_exclu}} {objet} {id_objet} {pagination #ENV{nb,10}}>
         <BOUCLE_email(EMAILS){id_email}>
-        <div class="champ contenu_email">
-            <div class='label visible type'>
-                [(#TYPE|logo_type_email) ][(#TYPE|coordonnees_lister_types_emails)]
+        <div class="champ picto contenu_email">
+            <div class='label visible type [(#TYPE|coordonnees_lister_types_emails)]'>
+                [(#TYPE|coordonnees_lister_types_emails)]
             </div>
             <div class="span email">
                 [(#TYPE|match{x400}|non)<a href="mailto:#EMAIL">]
