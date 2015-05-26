@@ -33,7 +33,6 @@ function photoshow_identify(me) {
             src: photosrc.replace(/__\.__/g, '.'),
             w: parseInt($(me).attr('data-photo-w')),
             h: parseInt($(me).attr('data-photo-h')),
-            title: $(me).attr('title'), // legende
         };
     } else {
         a = {
@@ -41,9 +40,10 @@ function photoshow_identify(me) {
             src: me.src,
             w: parseInt(me.naturalWidth),
             h: parseInt(me.naturalHeight),
-            title: $(me).attr('title'),
         };
     }
+    
+    a.title = $(me).attr('title'); // legende
 
     return a;
 }
@@ -58,6 +58,7 @@ function photoshow_gallery(items, index) {
         index: index, // start slide,
         shareEl: false, // no "share on pinterest!"
         fullscreenEl: false,
+        loop: false,
         addCaptionHTMLFn: function (item, captionEl, isFake) {
             // item      - slide object
             // captionEl - caption DOM element
