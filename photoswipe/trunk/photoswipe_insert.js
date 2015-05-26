@@ -13,14 +13,16 @@ function photoshow() {
 
     if (!a) return;
 
-    // gallery ? il y a un glitch
+    // gallery
+    var idx = 0;
     if (photoswipe.gallery) {
         $('img[data-photo]')
             .each(function (i, e) {
                 var b = photoshow_identify(e);
                 if (b) {
                     imgs.push(b);
-                    if (b.src == a.src) index = i;
+                    if (b.src == a.src) index = idx;
+                    idx ++;
                 }
             });
     } else {
