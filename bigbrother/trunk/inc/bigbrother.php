@@ -12,7 +12,7 @@ include_spip('base/abstract_sql');
 
 // Met à jour la session et enregistre dans la base
 function bigbrother_enregistrer_la_visite_du_site(){
-	if(($time < ($GLOBALS['visiteur_session']['date_visite'])) OR !($GLOBALS['visiteur_session']['date_visite'])){
+	if(!isset($GLOBALS['visiteur_session']['date_visite']) OR ($time < ($GLOBALS['visiteur_session']['date_visite']))){
 		session_set('date_visite', time());
 		if(isset($GLOBALS['visiteur_session']['id_auteur'])){
 			sql_insertq(
