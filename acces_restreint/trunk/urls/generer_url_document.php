@@ -32,13 +32,13 @@ function urls_generer_url_document_dist($id, $args='', $ancre='', $public=null, 
 
 	if (!autoriser('voir', 'document', $id)) return '';
 
-	$r = sql_fetsel("fichier,distant", "spip_documents", "id_document=".intval($id));
+	$res = sql_fetsel("fichier,distant,extension", "spip_documents", "id_document=".intval($id));
 
-	if (!$r) return '';
+	if (!$res) return '';
 
-	$f = $r['fichier'];
+	$f = $res['fichier'];
 
-	if ($r['distant'] == 'oui') return $f;
+	if ($res['distant'] == 'oui') return $f;
 
 	// Si droit de voir tous les docs, pas seulement celui-ci
 	// il est inutilement couteux de rajouter une protection
@@ -53,8 +53,15 @@ function urls_generer_url_document_dist($id, $args='', $ancre='', $public=null, 
 
 	// renvoyer une url plus ou moins jolie
 	if (isset($GLOBALS['meta']['creer_htaccess']) and $GLOBALS['meta']['creer_htaccess']) {
-		return _DIR_RACINE."docrestreint.api/$id/$cle/$f";
+		$url = url_absolue("docrestreint.api/$id/$cle/$f");
 	} else {
-		return get_spip_doc($f)."?$id/$cle";
+		$url = get_spip_doc($f)."?$id/$cle";
 	}
+	
+	// En absolue afin que les filtres d'image puissent agir sur les documents
+	// dû au paramètre d'URL ou au manque d'extension
+	if(in_array($res['extension'],array('jpg','png','gif'))){
+		$url = url_absolue($url);
+	}
+	return $url;
 }
