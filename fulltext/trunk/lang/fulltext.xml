@@ -62,5 +62,6 @@
 	<langue code="tr" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=tr" total="92" traduits="30" relire="0" modifs="20" nouveaux="42" pourcent="32.61">
 	</langue>
 	<langue code="uk" url="http://trad.spip.net/tradlang_module/fulltext?lang_cible=uk" total="92" traduits="42" relire="0" modifs="20" nouveaux="30" pourcent="45.65">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
 	</langue>
 </traduction>

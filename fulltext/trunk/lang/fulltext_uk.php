@@ -99,7 +99,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'textes_premier' => 'але спершу показує тексти, які містять',
 
 	// U
-	'utiliser_operateurs_logiques' => 'Пошук використовує стандартн их логічн их оператор ів.'
+	'utiliser_operateurs_logiques' => 'Пошук використовує стандартн логічні оператори.'
 );
 
 ?>
