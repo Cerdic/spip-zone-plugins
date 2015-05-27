@@ -1,9 +1,9 @@
 <paquet
 	prefix="fb_modeles"
 	categorie="navigation"
-	version="0.20.1"
+	version="0.20.2"
 	etat="stable"
-	compatibilite="[3.0.0;3.0.*]"
+	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/facebook-icon.png"
 	documentation="http://contrib.spip.net/?article3872"
 >	
