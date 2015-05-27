@@ -14,7 +14,7 @@
 <th>à #VALEUR{Lieu}</th>
 </tr>
  
-<BOUCLE_joueurs(DATA){enum 1,8}>
+<BOUCLE_joueurs(DATA){enum 1,16}>
 
 [(#_donnees2:VALEUR|echec_ligne_tableau{#VALEUR})]
 </BOUCLE_joueurs>
@@ -31,7 +31,7 @@
 <th>#VALEUR{BlancPts} - #VALEUR{NoirPts}</th>
 </tr>
  
-<BOUCLE_joueurs_noir(DATA){enum 1,8}>
+<BOUCLE_joueurs_noir(DATA){enum 1,16}>
 [(#_noir:VALEUR|echec_ligne_tableau{#VALEUR})]
 </BOUCLE_joueurs_noir>
  

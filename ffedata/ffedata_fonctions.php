@@ -56,23 +56,29 @@ function echec_ligne_tableau($vals, $nb) {
 						
 			if ($cellule == 'Resultat') {
               switch ($v) {
-              case 1:
+            case 1:
                  $result="X-X";
-                 break;
-              case 2:
-                 $result="1-0";
-                 break;
-              case 3:
-                 $result="0-1";
-                 break;
-			  case 5:
-                 $result="1-F";
-                 break;
-              case 15:
-                 $result="A-1";
-                 break;
-			  default:
+				break;	
+            case 2:
+				$result="1-0";
+				break;	
+            case 3:
+				$result="0-1";
+				break;	
+			case 4:
+				$result="0-0";
+				break;	;
+			case 5:
 				$result="1-F";
+				break;	
+			case 6:
+				$result="F-1";
+				break;	
+			case 9:
+				$result="F-F";
+				break;				 
+            case 15:
+				$result="A-1";
               }
 				$ligne .= '<td style="width:35px;">' . $result . '</td>';   
 			}
@@ -81,19 +87,7 @@ function echec_ligne_tableau($vals, $nb) {
 			}
         }
     }
-	else { 
-		foreach ($liste as $cellule) {
-            $v = isset($vals[$cellule . $nb]) ? $vals[$cellule . $nb] : '';
-			if ($cellule == 'Resultat') {
-					$ligne .= '<td> F-1 </td>';
-				}
-				else {
-					$ligne .= '<td>' . $v . '</td>';
-				}
-			}
-		}
-        
-        $ligne .= "</tr>";
+	else { }
     return $ligne;
 }
 
