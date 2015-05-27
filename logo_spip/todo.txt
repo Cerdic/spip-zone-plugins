@@ -1,6 +1,6 @@
 = TODO
 = pour logo_spip
 
-- Ajuster la taille du logo dans le modèle selon la constante qui définit la taille des vignettes par défaut ?
+- Par défaut ajuster la taille du logo dans le modèle selon la constante qui définit la taille des vignettes par défaut ?
 - Pourquoi pas une balise d’url vers le site officiel : #URL_SPIP ? cf. : https://core.spip.net/issues/2185
 - Ce plugin peut être éventuellement complété de *quelques* ressources graphiques fanfaronnes, que chaque webmestre utilisera librement :)

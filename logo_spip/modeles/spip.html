@@ -1,1 +1,2 @@
-[<a href="http://spip.net[/(#LANG)]" rel="external" class="external[ (#ENV{align})]">(#LOGO_SPIP|image_reduire{150})</a>]
+#SET{width,#ENV{largeur}|sinon{#ENV{width}}|sinon{150}}
+[<a href="http://spip.net[/(#LANG)]" rel="external" class="external[ (#ENV{align})]">(#LOGO_SPIP|image_reduire{#GET{width}})</a>]
