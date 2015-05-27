@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="medoc.png"
-	documentation="http://contrib.spip.net/medoc"
+	documentation="http://contrib.spip.net/4026"
 >
 
 	<nom>Mod&#232;le &lt;doc&gt; unifi&eacute;</nom>
