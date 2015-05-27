@@ -9,8 +9,8 @@
 
 <slogan>Affichez facilement le logo de SPIP</slogan>
 <description>Affichez facilement le logo de SPIP dans vos articles avec le raccourci &lt;spip|&gt; et dans vos squelettes avec <code>#MODELE{spip}</code> ou <code>#LOGO_SPIP</code>.</description>
-<lien>http://contrib.spip.net/4677?var_mode=preview</lien>
-<auteur>[tetue->http://spip.tetue.net]- 2015</auteur>
+<lien>http://contrib.spip.net/4677</lien>
+<auteur>[tetue->http://spip.tetue.net] - 2015</auteur>
 <licence>GPL</licence>
 
 <fonctions>logo_spip_fonctions.php</fonctions>
