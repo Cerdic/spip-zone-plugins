@@ -53,7 +53,7 @@ function urls_generer_url_document_dist($id, $args='', $ancre='', $public=null, 
 
 	// renvoyer une url plus ou moins jolie
 	if (isset($GLOBALS['meta']['creer_htaccess']) and $GLOBALS['meta']['creer_htaccess']) {
-		$url = url_absolue("docrestreint.api/$id/$cle/$f");
+		$url = url_absolue(_DIR_RACINE."docrestreint.api/$id/$cle/$f");
 	} else {
 		$url = get_spip_doc($f)."?$id/$cle";
 	}
