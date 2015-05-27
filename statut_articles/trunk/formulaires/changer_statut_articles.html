@@ -6,11 +6,12 @@
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
-		[(#SAISIE{selecteur_rubrique, rubrique, label=<:statut_articles:champ_rubrique:>})]
-		[(#SAISIE{date, date_fin, label=<:statut_articles:champ_date_fin:>})]
-		[(#SAISIE{date, date_debut, label=<:statut_articles:champ_date_debut:>})]
+		[(#SAISIE{selecteur_rubrique, filtre_rubrique, label=<:statut_articles:champ_rubrique:>})]
+		[(#SAISIE{date, filtre_date_fin, label=<:statut_articles:champ_date_fin:>})]
+		[(#SAISIE{date, filtre_date_debut, label=<:statut_articles:champ_date_debut:>})]
+		[(#SAISIE{selection, filtre_statut, label=<:statut_articles:champ_statut:>, datas=#ENV{statuts}})]
 		[(#SAISIE{hidden, recherche, valeur=1})]
-
+					
 		<p class='boutons'>
 			<span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:info_rechercher:>'/>
 		</p>
@@ -18,19 +19,19 @@
 		<BOUCLE_preview(CONDITION){si #ENV{recherche}|oui}>
 		<div class="statut_articles-liste">
 			<h1><:articles:></h1>
-			#SET{id_rubrique, #ENV{rubrique}|picker_selected{rubrique}|table_valeur{0}}
+			#SET{id_rubrique, #ENV{filtre_rubrique}|picker_selected{rubrique}|table_valeur{0}}
 
 			[(#REM) rubrique chsoisie ? critère id_rubrique]
 			<BOUCLE_rubrique(RUBRIQUES){si #GET{id_rubrique}|oui} {id_rubrique=#GET{id_rubrique}} {tout}>
-				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,date_debut,date_fin,statuts=#ENV{statuts}}>
+				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,filtre_date_debut,filtre_date_fin,filtre_statut,statuts=#ENV{statuts}}>
 			</BOUCLE_rubrique>
 
 			[(#REM) aucun rubrique chsoisie ? critère racine ]
 			<BOUCLE_racine(RUBRIQUES){si #GET{id_rubrique}|non} {racine} {par num titre}{!par date} {tout}>
-				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,date_debut,date_fin,statuts=#ENV{statuts}}>
+				<INCLURE{fond=formulaires/inc-changer_statut_articles,id_rubrique,filtre_date_debut,filtre_date_fin,filtre_statut,statuts=#ENV{statuts}}>
 			</BOUCLE_racine>
 			
-			[(#SAISIE{selection, statut, label=<:statut_articles:champ_nouveau_statut:>, datas=#ENV{statuts}, obligatoire=oui})]
+			[(#SAISIE{selection, statut_final, label=<:statut_articles:champ_nouveau_statut:>, datas=#ENV{statuts}, obligatoire=oui})]
 
 			<p class='boutons'>
 				<span class='image_loading'>&nbsp;</span><input name="confirmer" type='submit' class='submit' value='<:statut_articles:bouton_changer:>'/>

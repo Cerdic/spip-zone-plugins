@@ -1,7 +1,7 @@
-#SET{tous_statuts, #ENV{statuts}|array_keys}
+#SET{tous_statuts, #ENV{filtre_statut,#ENV{statuts}|array_keys}}
 
-#SET{date_debut, #ENV{date_debut}|date_picker_to_date}
-#SET{date_fin, #ENV{date_fin}|date_picker_to_date}
+#SET{date_debut, #ENV{filtre_date_debut}|date_picker_to_date}
+#SET{date_fin, #ENV{filtre_date_fin}|date_picker_to_date}
 
 [(#REM) construire la requete qui va chercher les articles publiés entre deux dates optionnelles ]
 #SET{where, ''}

@@ -12,14 +12,15 @@ function formulaires_changer_statut_articles_charger_dist() {
 		$statuts[$key] = _T($value);
 	}
 	$valeurs = array(
-		'statuts'    => $statuts,
-		'articles'   => '',
-		'rubrique'   => '',
-		'date_debut' => '',
-		'date_fin'   => '',
-		'statut'     => '',
-		'recherche'  => '',
-		'confirmer'  => '',
+		'statuts'           => $statuts,
+		'articles'          => '',
+		'filtre_rubrique'   => '',
+		'filtre_date_debut' => '',
+		'filtre_date_fin'   => '',
+		'filtre_statut'     => '',
+		'recherche'         => '',
+		'confirmer'         => '',
+		'statut_final'      => '',
 	);
 
 	return $valeurs;
@@ -28,8 +29,8 @@ function formulaires_changer_statut_articles_charger_dist() {
 function formulaires_changer_statut_articles_verifier_dist() {
 	$erreurs = array();
 
-	if (_request('confirmer') && !_request('statut')) {
-		$erreurs['statut'] = _T('champ_obligatoire');
+	if (_request('confirmer') && !_request('statut_final')) {
+		$erreurs['statut_final'] = _T('champ_obligatoire');
 	}
 
 	return $erreurs;
@@ -44,7 +45,7 @@ function formulaires_changer_statut_articles_traiter_dist() {
 		$id_articles = _request('articles');
 		// changer le statut des articles
 		foreach ($id_articles as $id_article) {
-			$data = array('statut' => _request('statut'));
+			$data = array('statut' => _request('statut_final'));
 			article_instituer($id_article, $data);
 			// invalider le cache
 			suivre_invalideur("id='article/$id_article'");

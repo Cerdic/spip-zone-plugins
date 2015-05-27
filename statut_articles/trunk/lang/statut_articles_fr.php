@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_nouveau_statut' => 'Choisir le nouveau statut',
 	'champ_date_debut' => 'Publiés après : (inclus)',
 	'champ_date_fin' => 'Publiés avant : (inclus)',
+	'champ_statut' => 'Ayant le statut :',
 
 	// M
 	'menu_changer_statuts' => 'Statuts d\'articles',
