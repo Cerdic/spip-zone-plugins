@@ -14,7 +14,7 @@ include_spip('base/abstract_sql');
 function bigbrother_enregistrer_la_visite_du_site(){
 	if(($time < ($GLOBALS['visiteur_session']['date_visite'])) OR !($GLOBALS['visiteur_session']['date_visite'])){
 		session_set('date_visite', time());
-		if($GLOBALS['visiteur_session']['id_auteur']){
+		if(isset($GLOBALS['visiteur_session']['id_auteur'])){
 			sql_insertq(
 				"spip_visites_auteurs",
 				array(
@@ -26,8 +26,8 @@ function bigbrother_enregistrer_la_visite_du_site(){
 
 		$journal = charger_fonction('journal','inc');
 
-		$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
-		$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
+		$qui = isset($GLOBALS['visiteur_session']['nom']) ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
+		$qui_ou_ip = isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
 
 		$journal(
 			_T('bigbrother:action_visite',array('qui' => $qui)),
@@ -38,7 +38,6 @@ function bigbrother_enregistrer_la_visite_du_site(){
 
 // Teste s'il faut enregistrer la visite ou pas
 function bigbrother_tester_la_visite_du_site(){
-	global $visiteur_session;
 	/**
 	 * Ne pas prendre en compte les bots
 	 */
@@ -57,7 +56,7 @@ function bigbrother_tester_la_visite_du_site(){
 	if((include_spip('inc/session') and session_get('id_auteur') > 0) OR ($ouvert = (lire_config('bigbrother/enregistrer_connexion_anonyme') == 'oui'))){
 		include_spip('inc/filtres');
 		$time = 0;
-		if($ouvert && !intval($visiteur_session['id_auteur'])){
+		if($ouvert && !isset($GLOBALS['visiteur_session']['id_auteur'])){
 			$time_sql = sql_getfetsel('date','spip_journal','id_auteur='.sql_quote($GLOBALS['ip']));
 			if(is_array(recup_date($time_sql))){
 				list($annee, $mois, $jour, $heures, $minutes, $secondes) = recup_date($time_sql);
@@ -66,11 +65,11 @@ function bigbrother_tester_la_visite_du_site(){
 		}
 
 		// Si la "connexion" n'existe pas on la crée et on enregistre
-		if(!$visiteur_session['date_visite']){
+		if(!isset($GLOBALS['visiteur_session']['date_visite'])){
 			/**
 			 * Cas des crons qui ne gardent pas de cookies donc pas de session
 			 */
-			if($ouvert && !intval($visiteur_session['id_auteur'])){
+			if($ouvert && !isset($GLOBALS['visiteur_session']['id_auteur'])){
 				if($time < (time()-(30*60))){
 					bigbrother_enregistrer_la_visite_du_site();
 				}
@@ -80,12 +79,12 @@ function bigbrother_tester_la_visite_du_site(){
 
 		}
 		// Sinon si la dernière visite est plus vieille que 30min
-		elseif ((time() - $visiteur_session['date_visite']) > (30*60)){
+		elseif (isset($GLOBALS['visiteur_session']['date_visite']) && (time() - $GLOBALS['visiteur_session']['date_visite']) > (30*60)){
 			// On met à jour et en enregistre
 			bigbrother_enregistrer_la_visite_du_site();
 		}
 		// Sinon on ne met que à jour la session
-		elseif((time() - $visiteur_session['date_visite']) > 5){
+		elseif(isset($GLOBALS['visiteur_session']['date_visite']) && (time() - $GLOBALS['visiteur_session']['date_visite']) > 5){
 			session_set('date_visite', time());
 		}
 	}
@@ -165,8 +164,8 @@ function bigbrother_enregistrer_sortie($id_objet,$objet, $id_auteur, $date_debut
 
 	$journal = charger_fonction('journal','inc');
 
-	$qui = $GLOBALS['visiteur_session']['nom'] ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
-	$qui_ou_ip = $GLOBALS['visiteur_session']['id_auteur'] ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
+	$qui = isset($GLOBALS['visiteur_session']['nom']) ? $GLOBALS['visiteur_session']['nom'] : $GLOBALS['ip'];
+	$qui_ou_ip = isset($GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : $GLOBALS['ip'];
 
 	$journal(
 		_T('bigbrother:action_sortie_objet',array('qui' => $qui, 'type' => $objet, 'id' => $id_objet)),
