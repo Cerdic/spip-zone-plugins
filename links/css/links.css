@@ -25,7 +25,7 @@ a.spip_mail:before { content: ''; }
 
 /* Autres services */
 a[href ^="https://"],
-a.lock { padding-right: 13px; background-image: url(img/links/lock.gif); background-repeat:no-repeat; background-position: center left;}
+a.lock { padding-right: 13px; background-image: url(img/links/lock.gif); background-repeat:no-repeat; }
 
 a[href ^="ftp://"],
 a.ftp { padding-right: 13px; background-image: url(img/links/ftp.gif); }
