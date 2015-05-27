@@ -29,6 +29,11 @@ table.tablesorter thead tr .header {
 	padding-right: 18px;
 }
 
+table.tablesorter thead tr .header.ts_disabled{
+	background:none;
+	padding-right:0px;
+	cursor:default;
+}
 /* annulation du survol et fleche enlevee pour les zones non cliquables */
 table.tablesorter thead tr th.none {
 	background-image: none;
