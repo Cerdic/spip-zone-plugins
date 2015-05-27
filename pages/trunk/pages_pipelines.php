@@ -306,7 +306,7 @@ function pages_affiche_hierarchie($flux){
 function pages_pre_boucle($boucle){
 
 	// On ne s'intéresse qu'à la boucle ARTICLES
-	if ($boucle->type_requete == 'articles' and !$boucle->modificateur['tout']) {
+	if ($boucle->type_requete == 'articles' and !empty($boucle->modificateur['tout'])) {
 		// On n'insère le filtre {id_rubriques>0} pour exclure les pages uniques que si aucune des conditions
 		// suivantes n'est vérifiée:
 		// - pas de critère page autre que {page=''}
