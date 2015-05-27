@@ -45,12 +45,12 @@
 					<ul class="choix">
 						<li class="links_external[ (#ENV**{erreurs}|table_valeur{external}|oui)erreur]">
 							<input type="checkbox" class="checkbox" name="external" id="external"[ (#ENV{external}|=={on}|?{'checked="checked"'})] value="on" />
-							<label for="external">Liens externes</label>[
+							<label for="external">liens externes</label>[
 							<span class='erreur'>(#ENV**{erreurs}|table_valeur{external})</span>]
 						</li>
 						<li class="links_download[ (#ENV**{erreurs}|table_valeur{download}|oui)erreur]">
 							<input type="checkbox" class="checkbox" name="download" id="download"[ (#ENV{download}|=={on}|?{'checked="checked"'})] value="on" />
-							<label for="download">Documents &agrave; t&eacute;l&eacute;charger</label>[
+							<label for="download">certains documents&nbsp;:</label>[
 							<span class='erreur'>(#ENV**{erreurs}|table_valeur{download})</span>]
 							<ul>
 								<li class="links_doc_list[ (#ENV**{erreurs}|table_valeur{doc_list}|oui)erreur]">
