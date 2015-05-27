@@ -10,7 +10,7 @@
 <lien>http://contrib.spip.net/?article3706</lien>
 <auteur>[Tetue->http://spip.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
-<version>2.3.9</version>
+<version>2.3.10</version>
 <etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
@@ -36,7 +36,7 @@
 </onglet>
 <categorie>navigation</categorie>
 </plugin>
-<plugin spip="[3.0.0;3.0.99]">
+<plugin spip="[3.0.0;3.1.99]">
 <nom>Liens explicites</nom>
 <slogan>Styles et pictos explicitant les liens du site</slogan>
 <icon>prive/themes/spip/images/links.png</icon>
@@ -48,7 +48,7 @@
 <lien>http://contrib.spip.net/?article3706</lien>
 <auteur>[Tetue->http://spip.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
-<version>2.3.9</version>
+<version>2.3.10</version>
 <etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
