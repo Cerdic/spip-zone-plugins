@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Другой плагин не дайет использовать porte-plume на сайте.',
+	'activation_barre_impossible' => 'Другой плагин не дает использовать porte-plume на сайте.',
 	'annuler' => 'Отмена',
 
 	// B
@@ -24,9 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Редактировать полностью',
 	'effets' => 'Эффекты',
 	'explication_exec_autorise' => 'Страницы, на которых можно редактировать информацию   (?exec=...) : (, разделитель между страницами. * для всех страниц).', # MODIF
-	'explication_introduction_article' => 'Вводная статьи выводит информацию из поля "введение". Если оно пустое, товыводится первые 600 символов текста статьи.', # MODIF
-	'explication_reduire_logo' => 'Уменьшать логотипы если их размер превышает 
-  максимальный размер (в пикселях) Например: 100. (0 = никогда)', # MODIF
+	'explication_introduction_article' => 'Вводная статьи выводит информацию из поля "введение". Если оно пустое, то выводятся первые 600 символов текста статьи.',
+	'explication_reduire_logo' => 'Уменьшать логотипы, если их размер превышает  максимальный размер (в пикселях). Например: 100. (0 = никогда)',
 
 	// I
 	'info_experimental' => 'Экспериментальная опция',
@@ -35,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_activer_barre_typo' => 'Включить панель инструментов для плагина?',
 	'label_activer_crayons_prive' => 'Включить "Карандаш" в админке сайта',
 	'label_barre_typo' => 'Панель инструментов',
-	'label_clickhide' => 'Нажмите вне области редактирования чтобы закрыть экран',
+	'label_clickhide' => 'Нажмите вне области редактирования, чтобы закрыть экран',
 	'label_effets' => 'Выбрать эффект',
 	'label_espaceprive' => 'Использовать "Карандаш" в админке сайта?',
 	'label_exec_autorise' => 'Использовать на страницах',
