@@ -96,10 +96,13 @@ function compositions_lister_disponibles($type, $informer=true){
 		foreach($liste as $s) {
 			$base = preg_replace(',[.]html$,i','',$s);
 			if (preg_match(",$match,ims",basename($s),$regs)
-			  AND ($composition = !$informer
-				OR $composition = compositions_charger_infos($base)))
+				AND ($composition = !$informer
+					OR $composition = compositions_charger_infos($base)))
+			{
+				$regs = array_pad($regs, 4, null);
 				$res[$regs[1]][$regs[3]] = $composition;
-			// retenir les skels qui ont un xml associe
+				// retenir les skels qui ont un xml associe
+			}
 		}
 	}
 	// Pipeline compositions_lister_disponibles
