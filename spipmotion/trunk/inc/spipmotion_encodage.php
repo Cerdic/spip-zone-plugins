@@ -531,10 +531,14 @@ function encodage($source,$options){
 		}
 	}
 
+	/**
+	 * Tenter une reconnexion si plantée (timeout)
+	 */
+	if(!sql_getfetsel('id_document','spip_documents','id_document='.intval($source['id_document']))){
+		sql_connect();
+	}
+
 	if($ret['success'] && file_exists(get_spip_doc($source['fichier']))){
-		if(!sql_getfetsel('id_document','spip_documents','id_document='.intval($source['id_document']))){
-			spip_connect_db('mysql-master','','mediaspip','zjX5uPfP','mu_filmscanece5','mysql', 'spip','');
-		}
 		/**
 		 * Ajout du nouveau document dans la base de donnée de SPIP
 		 * NB : la récupération des infos et du logo est faite automatiquement par
