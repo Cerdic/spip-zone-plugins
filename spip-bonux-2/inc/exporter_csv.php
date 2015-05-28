@@ -38,16 +38,17 @@ function exporter_csv_champ($champ) {
  * @param string $delim
  * @return string
  */
-function exporter_csv_ligne($ligne, $delim = ';', $importer_charset = null) {
+function exporter_csv_ligne($ligne, $delim = ',', $importer_charset = null) {
 	$output = join($delim, array_map('exporter_csv_champ', $ligne))."\r\n";
 	if ($importer_charset){
+		$output = str_replace('’', '\'', $output);
 		$output = unicode2charset(html2unicode(charset2unicode($output)), $importer_charset);
 	}
 	return $output;
 }
 
 
-function inc_exporter_csv_dist($titre, $resource, $delim=';', $entetes = null,$envoyer = true){
+function inc_exporter_csv_dist($titre, $resource, $delim=',', $entetes = null,$envoyer = true){
 
 	$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 	
@@ -57,9 +58,17 @@ function inc_exporter_csv_dist($titre, $resource, $delim=';', $entetes = null,$e
 
 	$charset = $GLOBALS['meta']['charset'];
 	$importer_charset = null;
+	if ($delim == ',')
 		$extension = 'csv';
+	else {
+		$extension = 'xls';
+		# Excel n'accepte pas l'utf-8 ni les entites html... on transcode tout ce qu'on peut
+		#$importer_charset = $charset = 'iso-8859-1';
+	}
 	$filename = "$filename.$extension";
-	$output = "\xEF\xBB\xBF"; // BOM, cf http://stackoverflow.com/questions/4348802/how-can-i-output-a-utf-8-csv-in-php-that-excel-will-read-properly
+	if (lire_meta('charset') === 'utf-8') {
+		$output = "\xEF\xBB\xBF"; // BOM, cf http://stackoverflow.com/questions/4348802/how-can-i-output-a-utf-8-csv-in-php-that-excel-will-read-properly
+	}
 
 	if ($entetes AND is_array($entetes) AND count($entetes))
 		$output = exporter_csv_ligne($entetes,$delim,$importer_charset);
