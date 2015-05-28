@@ -367,6 +367,11 @@ function background_responsive($src, $taille=120, $lazy=0) {
 			$ins .= " data-portrait-src='$srcp'";
 			$ins .= " data-portrait-l='$lp'";
 			$ins .= " data-portrait-h='$hp'";
+			
+			$l_italien = $l;
+			$s_italien = $src;
+			$l_portrait = $lp;
+			$s_portrait = $srcp;
 		
 		} else {
 			$ins = " data-portrait-src='$src'";
@@ -383,8 +388,13 @@ function background_responsive($src, $taille=120, $lazy=0) {
 			$ins .= " data-italien-src='$srcp'";
 			$ins .= " data-italien-l='$lp'";
 			$ins .= " data-italien-h='$hp'";
-		}
 
+			$l_italien = $lp;
+			$s_italien = $srcp;
+			$l_portrait = $l;
+			$s_portrait = $src;
+
+		}
 
 		$ins .= " data-responsive='background'";
 		
@@ -409,11 +419,57 @@ function background_responsive($src, $taille=120, $lazy=0) {
 		if (count($tailles) > 1) {
 			sort($tailles);
 			include_spip("inc/json");
+
+
+			foreach($tailles as $t) {
+
+				$t_italien = min($t, $l_italien);
+				if(_IMAGE_RESPONSIVE_CALCULER) {
+					$fichiers[$t_italien]["i"][1] = retour_image_responsive($s_italien, "$t_italien", 1, 0, "file");
+					$fichiers[$t_italien]["i"][2] = retour_image_responsive($s_italien, "$t_italien", 2, 0, "file");
+				} else {
+					if ($htactif) {
+						$fichiers[$t_italien]["i"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien.$1", $s_italien);
+						$fichiers[$t_italien]["i"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_italien-2.$1", $s_italien);
+					}
+					else {
+						$fichiers[$t_italien]["i"][1] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien";
+						$fichiers[$t_italien]["i"][2] = "index.php?action=image_responsive&amp;img=$s_italien&amp;taille=$t_italien&amp;dpr=2";
+					}
+				}
+
+				$t_portrait = min($t, $l_portrait);
+				if(_IMAGE_RESPONSIVE_CALCULER) {
+					$fichiers[$t_portrait]["p"][1] = retour_image_responsive($s_portrait, "$t_portrait", 1, 0, "file");
+					$fichiers[$t_portrait]["p"][2] = retour_image_responsive($s_portrait, "$t_portrait", 2, 0, "file");
+				} else {
+					if ($htactif) {
+						$fichiers[$t_portrait]["p"][1] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait.$1", $s_portrait);
+						$fichiers[$t_portrait]["p"][2] = preg_replace(",\.(jpg|png|gif)$,", "-resp$t_portrait-2.$1", $s_portrait);
+					}
+					else {
+						$fichiers[$t_portrait]["p"][1] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait";
+						$fichiers[$t_portrait]["p"][2] = "index.php?action=image_responsive&amp;img=$s_portrait&amp;taille=$t_portrait&amp;dpr=2";
+					}
+				}
+
+			}
 			
 			$ins .= " data-tailles='".addslashes(json_encode($tailles)) ."'";
+			$ins .= " data-autorisees='".addslashes(json_encode($fichiers)) ."'";
+			
+			if (_SPIP_LIER_RESSOURCES && $fichiers) {
+				foreach($fichiers as $f) {
+					$links .= "background-image:url(".$f["i"][1].");"
+						."background-image:url(".$f["i"][2].");"
+						."background-image:url(".$f["p"][1].");"
+						."background-image:url(".$f["p"][2].");";
+				}
+			}
+
 		}
 		
-		$ins .= " style='background-image:url($src)'";
+		$ins .= " style='".$links."background-image:url($src)'";
 		
 		return $ins;
 	}
