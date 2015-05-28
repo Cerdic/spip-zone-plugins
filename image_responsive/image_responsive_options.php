@@ -1,6 +1,7 @@
 <?php
 
 if (!defined("_IMAGE_RESPONSIVE_CALCULER")) define("_IMAGE_RESPONSIVE_CALCULER", false);
+if (!defined("_SPIP_LIER_RESSOURCES")) define("_SPIP_LIER_RESSOURCES", false);
 
 
 function _findSharp($intOrig, $intFinal) {

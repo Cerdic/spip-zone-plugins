@@ -64,6 +64,9 @@ function charger_url_image_responsive(this_img) {
 					// ne pas passer dPR, sinon on récupère image de même taille mais trop compressée
 					if (vertical && h < 1.5*dim) dPR = false;
 					else if (l < 1.5*dim) dPR = false;
+					// forcer à 2
+					else dPR = 2;
+					
 				} else {
 					dPR = false;
 				}
