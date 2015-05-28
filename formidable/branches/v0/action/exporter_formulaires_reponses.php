@@ -74,9 +74,9 @@ function action_exporter_formulaires_reponses_dist($arg=null) {
 			// On ajoute la ligne à l'ensemble des réponses
 			$reponses_completes[] = $reponse_complete;
 		}
-		
+		if (_request('format') === 'excel') { $delim=';'; } else { $delim=','; }
 		if ($reponses_completes and $exporter_csv = charger_fonction('exporter_csv', 'inc/', true)){
-			echo $exporter_csv('reponses-formulaire-'.$formulaire['identifiant'], $reponses_completes);
+			echo $exporter_csv('reponses-formulaire-'.$formulaire['identifiant'], $reponses_completes, $delim);
 			exit();
 		}
 	}
