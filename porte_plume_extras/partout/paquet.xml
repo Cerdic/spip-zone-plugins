@@ -1,7 +1,7 @@
 <paquet
 	prefix="ppp"
 	categorie="edition"
-	version="1.0.6"
+	version="1.0.7"
 	etat="test"
 	compatibilite="[2.0.10;3.1.*]"
 	logo="images/configure_toolbars-48.png"

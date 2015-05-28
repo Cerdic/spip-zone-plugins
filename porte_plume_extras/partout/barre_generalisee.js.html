@@ -3,7 +3,7 @@
 $(document).ready(function(){
 	function addbarre(){
 	$('.formulaire_spip').not('.formulaire_spip_compact')
-		.find('[(#CONFIG{ppp/ps_ppp,on}|oui).editer_ps,][(#CONFIG{ppp/descriptif_ppp,on}|oui).editer_descriptif,][(#CONFIG{ppp/chapo_ppp,on}|oui).editer_chapo,][(#CONFIG{ppp/auteurs_quietesvous_ppp,on}|oui).editer_bio]')
+		.find('[(#VAL{[(#CONFIG{ppp/ps_ppp,on}|oui).editer_ps,][(#CONFIG{ppp/descriptif_ppp,on}|oui).editer_descriptif,][(#CONFIG{ppp/chapo_ppp,on}|oui).editer_chapo,][(#CONFIG{ppp/auteurs_quietesvous_ppp,on}|oui).editer_bio]}|trim|trim{","})]')
 		.find('textarea')
 		.barre_outils('edition');
 	[(#CONFIG{ppp/selecteur_ppp}|strlen|>{1}|oui)$('.formulaire_spip').not('.formulaire_spip_compact')
