@@ -136,7 +136,7 @@
 		                        #GET{recadrer}|?{
 		                          #FICHIER|image_passe_partout{#GET{largeur},#GET{hauteur}}|image_recadre{#GET{largeur},#GET{hauteur},center},
 		                          #FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}},
-		                        #LOGO_DOCUMENT{icone}}
+		                        #LOGO_DOCUMENT{#FICHIER}}
 		                      |extraire_attribut{src}})]
 		<li[ (#PLUGIN{bootstrap}|oui)class='thumbnail']>
 			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION)][ (#PLUGIN{foundation}|oui)th]" title="[(#GET{titre_doc_long}|attribut_html)]" role="button" aria-label="Vignette">

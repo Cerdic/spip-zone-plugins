@@ -102,7 +102,7 @@
 	#ANCRE_PAGINATION
 	[(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
 	<ul class="spip">
-		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#VAL|uniqid}}>[
+		<BOUCLE_documents_album(DOCUMENTS){id_document IN #GET{ids_documents}}{tout}{pagination #GET{pagination} #VAL{album}|concat{#ENV{id_album,x}}}>[
 		(#SET{extension,           #EXTENSION|strtoupper|wrap{<abbr class="extension">}|inserer_attribut{title,#VAL{medias:info_document}|_T|concat{' ',#TYPE_DOCUMENT}}})][
 		(#SET{taille,              #TAILLE|taille_en_octets|wrap{<span class="taille">}})][
 		(#SET{dimensions,          #MEDIA|=={image}|?{#LARGEUR|concat{' &times; ',#HAUTEUR,' px'}|wrap{<span class="dimensions">}}})][
