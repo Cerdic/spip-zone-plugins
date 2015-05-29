@@ -261,6 +261,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 		
 
 		$img = inserer_attribut($img, "src", $src);
+		if ($lazy) $img = inserer_attribut($img, "data-src-lazy", $src);
 		
 		$img = inserer_attribut($img, "class", $classe);
 		if ($srcset) {

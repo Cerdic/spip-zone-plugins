@@ -216,7 +216,11 @@ function charger_image_lazy(sTop) {
 	$(".image_responsive.lazy[data-top]").each(function() {
 		this_img = $(this);
 		var h = this_img.attr("data-top");
-		if (h <= limite_bas && h >= limite_haut) charger_url_image_responsive(this_img);
+		if (h <= limite_bas && h >= limite_haut) {
+			charger_url_image_responsive(this_img);
+		} else {// sinon remettre l'image d'origine (rien ou basse def)
+			this_img.attr("src", this_img.attr("data-src-lazy"));
+		}
 	});	
 	$("[data-responsive=background].lazy[data-top]").each(function() {
 		this_img = $(this);
