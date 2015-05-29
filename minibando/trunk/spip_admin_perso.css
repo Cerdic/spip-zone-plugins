@@ -36,3 +36,11 @@ body .spip-admin-float { top: 5px; right: 5px; z-index: 100000; }
 	border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; }
 #minibando li.afficher ul, #minibando li:hover ul { display: table; left: -174px;}
 #minibando li.afficher span, #minibando li:hover span { display: block; position: relative; left: 0; right: 2px; }
+
+/* déclinaison verticale */
+#minibando.vertical { float: right; /* pour alignement avec le bouton de skeleditor */ }
+#minibando.vertical li { float: none;  }
+#minibando.vertical li.minibando_sep { height: 1px; width: 24px; }
+#minibando.vertical > li > span { width: 6px; height: 12px; display: block; background: url(images/arrow-right.png) no-repeat top center;}
+#minibando.vertical li.afficher ul, #minibando.vertical li:hover ul { display: table; left: -207px; top: 0;}
+#minibando.vertical li.afficher span, #minibando.vertical li:hover span { position: absolute; left: -5px; top: 6px; }

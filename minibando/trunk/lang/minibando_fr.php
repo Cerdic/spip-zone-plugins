@@ -4,6 +4,14 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	
+	// C
+	'cfg_titre_minibando' => 'Paramètres',
+	
+	// L
+	'label_disposition' => 'Disposition',
+	'label_disposition_horizontale' => 'Horizontale',
+	'label_disposition_verticale' => 'Verticale',
 
 	// M
 	'mode_debug' => 'Mode debug',
@@ -13,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_debug' => 'Debug',
+	'titre_page_configurer_minibando' => 'Configurer le minibando',
 	'titre_outils_rapides' => 'Création'
 );
 
