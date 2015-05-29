@@ -1,28 +1,26 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/fusion_spip/trunk/lang/
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'base' => 'Site source',
-	'base_desc' => 'La base de données du site source doit être <a href="'.generer_url_ecrire('admin_tech').'">déclarée comme base externe</a>.<br/>
+	'base_desc' => 'La base de données du site source doit être <a href="http:///../ecrire/?exec=admin_tech">déclarée comme base externe</a>.<br/>
 	La base du site source doit être dans la même version que celle du site hôte',
 	'bouton_importer' => 'Démarrer la fusion',
 	'bouton_supprimer' => 'Supprimer la fusion',
 
 	// C
-	'confirme_warning' => 'Confirmer la fusion des bases ?',
+	'confirme_warning' => 'Confirmer la fusion des bases ?',
 
 	// D
-	'dossier_existe_pas' => 'Le répertoire @dossier@ n\'existe pas',
-	'dossier_pas_lisible' => 'Le répertoire @dossier@ n\'est pas accessible en lecture',
-
-	// H
+	'dossier_existe_pas' => 'Le répertoire @dossier@ n’existe pas',
+	'dossier_pas_lisible' => 'Le répertoire @dossier@ n’est pas accessible en lecture',
 
 	// E
-	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version de base de données :
+	'erreur_versions' => 'Le site hôte et le site source ne sont pas dans la même version de base de données :
 		<br/>- hôte est en version @vhote@
 		<br/>- source est en version @vsource@',
 	'erreur_versions_impossible' => 'Impossible de vérifier la version de la base de données importée (table spip_meta)',
@@ -35,12 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_base' => 'Mise à jour de la base de données',
 	'manque_champs_source' => 'Les champs "@diff@" manquent dans la table "@table@" de la base source',
 	'manque_table_source' => 'La table "@table@" est absente dans la base source',
-	'message_import_ok' => 'Fusion terminée<br>Log détaillé : <code>tmp/log/fusion_spip_fusion_spip*.log</code><br><br>Voici un résumé des objets importés :<br>',
-	'message_import_nok' => 'Erreur lors de la fusion',
 	'message_img_dir_nok' => 'Merci de préciser le chemin',
+	'message_import_nok' => 'Erreur lors de la fusion',
+	'message_import_ok' => 'Fusion terminée<br>Log détaillé : <code>tmp/log/fusion_spip_fusion_spip*.log</code><br><br>Voici un résumé des objets importés :<br>',
 	'message_suppression_ok' => 'Objets supprimés',
-
-	// P
 
 	// R
 	'referers' => 'Ne pas traiter les referers (liens entrants)',
@@ -52,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_fusion_spip' => 'Fusion de sites Spip',
-	'titre_fusion_spip_suppression' => 'Suppression',
-
+	'titre_fusion_spip_suppression' => 'Suppression'
 );
 
+?>
