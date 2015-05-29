@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_editer_ttc_label' => 'Editer les produits en TTC',
 	'configurer_precision_ttc_explication' => 'Indiquer la précision d’arrondi après la virgule pour les prix TTC (par défaut 2)',
 	'configurer_precision_ttc_label' => 'Précision sur les prix TTC',
-	'configurer_taxe_defaut_explication' => 'Saisir la taxe par défaut applicable aux produits sous la forme 0.196 pour une TVA à 19,6% par exemple (cette valeur peut être surchargée ensuite pour chaque produit).',
+	'configurer_taxe_defaut_explication' => 'Saisir la taxe par défaut applicable aux produits sous la forme 0.20 pour une TVA à 20% par exemple (cette valeur peut être surchargée ensuite pour chaque produit).',
 	'configurer_taxe_defaut_label' => 'Taxe par défaut',
 	'configurer_titre' => 'Configuration des produits',
 
