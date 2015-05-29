@@ -197,9 +197,13 @@ function polyhier_pre_edition($flux){
  * @return array
  */
 function polyhier_post_edition($flux){
+	if (empty($flux['args']['table'])) {
+		return $flux;
+	}
+
 	$objet = objet_type($flux['args']['table']);
 
-	if (in_array($objet,array('article','rubrique'))
+	if (in_array($objet, array('article', 'rubrique'))
 		AND $flux['args']['action']=='instituer'
 		AND $statut_ancien = $flux['args']['statut_ancien']
 		AND isset($flux['data']['statut'])
