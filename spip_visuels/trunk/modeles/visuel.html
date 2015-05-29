@@ -9,10 +9,8 @@
 [(#SET{le_type,#ENV{type}})]
 
 <BOUCLE_les_articles(VISUELS){id_article=#GET{article}}{type=#GET{le_type}}{si #GET{article}}>
-	[(#SET{le_fichier,[IMG/(#FICHIER)]})]
-	[(#GET{le_fichier}|balise_img)]
+	[(#FICHIER|balise_img)]
 </BOUCLE_les_articles>
 <BOUCLE_les_rubriques(VISUELS){id_rubrique=#GET{rubrique}}{type=#GET{le_type}}{si #GET{rubrique}}>
-	[(#SET{le_fichier,[IMG/(#FICHIER)]})]
-	[(#GET{le_fichier}|balise_img)]
+	[(#FICHIER|balise_img)]
 </BOUCLE_les_rubriques>

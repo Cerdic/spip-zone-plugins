@@ -18,8 +18,11 @@ function spip_visuels_declarer_tables_principales($tables_principales){
 			"PRIMARY KEY"	=> "id_visuel"
 			);
 
-	$tables_principales['spip_visuels']	=
-		array('field' => &$spip_visuels, 'key' => &$spip_visuels_key);
+	$tables_principales['spip_visuels'] = array(
+		'field' => &$spip_visuels,
+		'key' => &$spip_visuels_key,
+		
+	);
 
 	return $tables_principales;
 }
@@ -50,17 +53,20 @@ function spip_visuels_declarer_tables_interfaces($interfaces) {
 
 	$interfaces['table_des_tables']['visuels'] = 'visuels';
 
+	if (!isset($interfaces['tables_jointures']['spip_visuels'])) {
+		$interfaces['tables_jointures']['spip_visuels'] = array();
+	}
+	$interfaces['tables_jointures']['spip_visuels'][] = 'spip_visuels_liens';
+
+	// Avant la 3.1, #FICHIER ne retournait pas par défaut IMG/ lors de l'appel à #FICHIER
+	// en dehors de la boucle DOCUMENTS ( https://core.spip.net/issues/3108 )
+	if (version_compare($GLOBALS['spip_version_branche'], '3.1-alpha', '<')) { 
+		if (!isset($interfaces['table_des_traitements']['FICHIER'])) {
+			$interfaces['table_des_traitements']['FICHIER'] = array();
+		}
+		$interfaces['table_des_traitements']['FICHIER']['visuels'] = 'get_spip_doc(%s)';
+	}
+
 	return $interfaces;
 }
 
-/**
- * Déclaration des objets éditoriaux
- */
-function spip_visuels_declarer_tables_objets_sql($tables) {
-
-	$tables['spip_visuels'] = array(
-		'tables_jointures'  => array('spip_visuels_liens'),
-	);
-
-	return $tables;
-}
