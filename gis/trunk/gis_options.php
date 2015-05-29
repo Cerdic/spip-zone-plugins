@@ -22,6 +22,10 @@ $gis_layers = array (
 		'nom' => 'OpenStreetMap DE',
 		'layer' => 'L.tileLayer.provider("OpenStreetMap.DE")'
 	),
+	'openstreetmap_fr' => array(
+		'nom' => 'OpenStreetMap FR',
+		'layer' => 'L.tileLayer.provider("OpenStreetMap.France")'
+	),
 	'openstreetmap_hot' => array(
 		'nom' => 'OpenStreetMap H.O.T.',
 		'layer' => 'L.tileLayer.provider("OpenStreetMap.HOT")'
