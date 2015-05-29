@@ -119,7 +119,18 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			$source = image_proportions($source, $p[1]["l"], $p[1]["h"], $p[1]["f"], $p[1]["z"]);
 			$source = extraire_attribut($source,"src");
 		}
-
+		
+		$medias = explode("/", $medias);
+		if (count($p) > 1) {
+			$i = 0;
+			foreach($tailles as $t) {
+				$m = trim($medias[$i]);
+				$i++;
+				if (count($p[$i]) > 1) {
+					$pad_bot_styles[$m] = "padding-bottom:" .(($p[$i]["h"]/$p[$i]["l"])*100)."%!important";
+				}
+			}
+		}
 	
 		//$img = inserer_attribut($img, "src", $src);
 		$img = inserer_attribut($img, "data-src", $source);
@@ -158,7 +169,6 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 			$img = inserer_attribut($img, "data-tailles", addslashes(json_encode($tailles)));
 
 			
-			$medias = explode("/", $medias);
 			$i = 0;
 
 			foreach($tailles as $t) {
@@ -211,13 +221,6 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 						$i++;
 						
 						$source_tmp = $source;
-						
-						if (count($p) > 1 && count($p[$i]) > 1) {
-							$pad_bot_styles[$m] = "padding-bottom:" .(($p[$i]["h"]/$p[$i]["l"])*100)."%!important";
-							
-						}
-
-
 						$set =  $fichiers[$t][1]." 1x";
 						$set .=  ",".$fichiers[$t][2]. " 2x";
 
