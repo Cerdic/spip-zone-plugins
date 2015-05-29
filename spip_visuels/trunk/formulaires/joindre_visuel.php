@@ -22,15 +22,18 @@ function formulaires_joindre_visuel_verifier_dist(){
 }
 
 function formulaires_joindre_visuel_traiter_dist($objet,$id_objet){
-	
+
 	$champs = array(
 		'fichier_visuel_upload' => _request('fichier_visuel_upload'),
 		'objet' => $objet,
 		'id_objet' => $id_objet
 	);
 
+	$fichiers = array();
+
 	foreach ($_FILES['fichier_visuel_upload']['name'] as $key => $value) {
 		if ($value) {
+			$fichiers[$key] = array();
 			$fichiers[$key]['name'] = $value;
 		}
 	}
@@ -56,7 +59,7 @@ function formulaires_joindre_visuel_traiter_dist($objet,$id_objet){
 	}
 
 
-	
+	$id_document = array();
 	foreach ($fichiers as $cle => $valeur) {
 		$id_document[$cle] = joindre_le_visuel($objet,$id_objet,$valeur);
 	}
