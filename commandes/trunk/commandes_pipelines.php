@@ -177,36 +177,51 @@ function commandes_types_coordonnees($liste) {
 
 /**
  * Enregistrer le bon reglement d'une commande liee a une transaction du plugin bank
- *
+ * 
+ * @pipeline bank_traiter_reglement
  * @param array $flux
  * @return array mixed
  */
 function commandes_bank_traiter_reglement($flux){
 	// Si on est dans le bon cas d'un paiement de commande et qu'il y a un id_commande et que la commande existe toujours
-	if ($id_transaction = $flux['args']['id_transaction']
-	  AND $transaction = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))
-		AND $id_commande = $transaction['id_commande']
-		AND $commande = sql_fetsel('id_commande, statut, id_auteur', 'spip_commandes', 'id_commande='.intval($id_commande))){
-
+	if (
+		$id_transaction = $flux['args']['id_transaction']
+		and $transaction = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))
+		and $id_commande = $transaction['id_commande']
+		and $commande = sql_fetsel('id_commande, statut, id_auteur, echeances', 'spip_commandes', 'id_commande='.intval($id_commande))
+	){
 		$statut_commande = $commande['statut'];
 		$montant_regle = $transaction['montant_regle'];
 		$transaction_mode = $transaction['mode'];
 		$statut_nouveau = 'paye';
+		
+		// Si la commande n'a pas d'échéance, le montant attendu est celui du prix de la commande
+		if (!$commande['echeances'] or !$echeances = unserialize($commande['echeances'])) {
+			$fonction_prix = charger_fonction('prix', 'inc/');
+			$montant_attendu = $fonction_prix('commande', $id_commande);
+		}
+		// Sinon le montant attendu est celui de la prochaine échéance
+		else {
+			include_spip('inc/commandes_echeances');
+			$montant_attendu = commandes_trouver_prochaine_echeance($id_commande, $echeances);
+		}
+		spip_log("commande #$id_commande attendu:$montant_attendu regle:$montant_regle", 'commandes');
 
-		$fonction_prix = charger_fonction('prix', 'inc/');
-		$prix_commande = $fonction_prix('commande', $id_commande);
-		spip_log("commande #$id_commande prix:$prix_commande regle:$montant_regle",'commandes');
-
-		// Si on a pas assez payé
-		if (floatval($prix_commande)-floatval($montant_regle)>=0.01){
+		// Si le plugin n'était pas déjà en payé et qu'on a pas assez payé
+		// (si le plugin était déjà en payé, ce sont possiblement des renouvellements)
+		if (
+			$statut_commande != 'paye'
+			and (floatval($montant_attendu) - floatval($montant_regle)) >= 0.01
+		){
 			$statut_nouveau = 'partiel';
 		}
-
+		
+		// S'il y a bien un statut à changer
 		if ($statut_nouveau !== $statut_commande){
 			spip_log("commandes_bank_traiter_reglement marquer la commande #$id_commande statut=$statut_nouveau mode=$transaction_mode",'commandes');
-			//on met a jour la commande
+			// On met a jour la commande
 			include_spip("action/editer_commande");
-			commande_modifier($id_commande,array('statut'=>$statut_nouveau,'mode'=>$transaction_mode));
+			commande_modifier($id_commande, array('statut'=>$statut_nouveau, 'mode'=>$transaction_mode));
 		}
 	}
 
@@ -216,7 +231,8 @@ function commandes_bank_traiter_reglement($flux){
 /**
  * Enregistrer le reglement en attente d'une commande liee a une transaction du plugin bank
  * (cas du reglement par cheque par exemple)
- *
+ * 
+ * @pipeline trig_bank_reglement_en_attente
  * @param array $flux
  * @return array mixed
  */
@@ -246,7 +262,8 @@ function commandes_trig_bank_reglement_en_attente($flux){
 /**
  * Enregistrer le reglement en echec d'une commande liee a une transaction du plugin bank
  * (cas du reglement annule ou du refus de carte etc)
- *
+ * 
+ * @pipeline trig_bank_reglement_en_echec
  * @param array $flux
  * @return array mixed
  */
@@ -276,4 +293,154 @@ function commandes_trig_bank_reglement_en_echec($flux){
 
 	return $flux;
 }
-?>
+
+/**
+ * Déclarer les échéances à la banque
+ * 
+ * @pipeline bank_abos_decrire_echeance
+ **/
+function commandes_bank_abos_decrire_echeance($flux) {
+	if (
+		// si on doit bien faire du prélèvement auto
+		$flux['args']['force_auto'] == true
+		// et qu'on a une transaction sous la main
+		and $id_transaction = intval($flux['args']['id_transaction'])
+		// et que cette transaction a un id_commande
+		and $id_commande = intval(sql_getfetsel('id_commande', 'spip_transactions', 'id_transaction = '.$id_transaction))
+		// et que la commande a des informations d'échéances
+		and $commande = sql_fetsel('echeances_type, echeances', 'spip_commandes', 'id_commande = '.$id_commande)
+		and $echeances = unserialize($commande['echeances'])
+		and $echeances_type = $commande['echeances_type']
+		and in_array($echeances_type, array('mois', 'annee'))
+	) {
+		// On définit la périodicité
+		switch($echeances_type) {
+			case 'mois':
+				$flux['freq'] = 'monthly';
+			case 'annee':
+				$flux['freq'] = 'yearly';
+		}
+		
+		// Si c'est une seule valeur toute simple
+		if (!is_array($echeances)) {
+			$echeances = floatval($echeances);
+			$flux['montant'] = $echeances;
+		}
+		// Sinon c'est un peu plus compliqué, et pour l'instant on ne gère que DEUX montants possibles
+		elseif (count($echeances) >= 2) {
+			// Premier montant d'échéances
+			$flux['montant_init'] = $echeances[0]['prix'];
+			$flux['count_init'] = $echeances[0]['nb'];
+			// Deuxième montant d'échéances
+			$flux['montant'] = $echeances[1]['prix'];
+			if (isset($echeances[1]['nb'])) {
+				$flux['count'] = $echeances[1]['nb'];
+			}
+		}
+	}
+	
+	return $flux;
+}
+
+/**
+ * Lier une commande à un identifiant bancaire lorsqu'un prélèvement bancaire est bien validé
+ * 
+ * @pipeline bank_abos_activer_abonnement
+ **/
+function commandes_bank_abos_activer_abonnement($flux){
+	// Si on a une transaction
+	if ($id_transaction = intval($flux['args']['id_transaction'])) {
+		$were = 'id_transaction = '.$id_transaction;
+	}
+	// Sinon on cherche par l'identifiant d'abonnement bancaire
+	elseif ($abo_uid = $flux['args']['abo_uid']) {
+		$where = 'abo_uid = '.sql_quote($abo_uid);
+	}
+	
+	// On gère d'abord les erreurs possibles si on ne trouve pas la bonne transaction
+	if (!$transaction = sql_fetsel('*', 'spip_transactions', $where)) {
+		spip_log("Impossible de trouver la transaction ($id_transaction / $abo_uid).", 'commandes.'._LOG_ERREUR);
+		$flux['data'] = false;
+	}
+	elseif ($transaction['statut'] == 'commande') {
+		spip_log("La transaction ${transaction['id_transaction']} n’a pas été réglée.", 'commandes.'._LOG_ERREUR);
+		$flux['data'] = false;
+	}
+	elseif (strncmp($transaction['statut'], 'echec',5) == 0) {
+		spip_log("La transaction ${transaction['id_transaction']} a echoué.",'commandes.'._LOG_ERREUR);
+		$flux['data'] = false;
+	}
+	// Si on a trouvé ce qu'il faut, on va lier la commande à l'identifiant bancaire
+	elseif ($id_commande = intval($transaction['id_commande'])) {
+		include_spip('action/editer_objet');
+		
+		objet_modifier('commande', $id_commande, array('bank_uid' => $flux['args']['abo_uid']));
+	}
+	
+	return $flux;
+}
+
+/**
+ * Créer la transaction correspondant à la prochaine échéance d'une commande
+ * 
+ * @pipeline bank_abos_preparer_echeance
+ **/
+function commandes_bank_abos_preparer_echeance($flux){
+	// On commence par chercher la commande dont il s'agit
+	// et vérifier qu'elle a des échéances
+	if (
+		strncmp($id,"uid:",4) == 0
+		and $bank_uid = substr($id, 4)
+		and $commande = sql_fetsel('*', 'spip_commandes', 'bank_uid = '.sql_quote($bank_uid))
+		and $id_commande = intval($commande['id_commande'])
+		and $echeances = unserialize($commande['echeances'])
+		and $echeances_type = $commande['echeances_type']
+	){
+		include_spip('inc/commandes_echeances');
+		
+		// Si on a bien trouvé une prochaine échéance
+		if ($montant = commandes_trouver_prochaine_echeance($id_commande, $echeances)) {
+			include_spip('action/editer_objet');
+			
+			// On remet la commande en attente de paiement puisqu'on… attend un paiement !
+			objet_modifier('commande', $id_commande, array('statut' => 'attente'));
+			
+			// On crée la transaction qui testera le vrai paiement
+			$inserer_transaction = charger_fonction('inserer_transaction', 'bank');
+			$options_transaction = array(
+				'id_auteur' => intval($commande['id_auteur']),
+				'champs' => array(
+					'id_commande' => $id_commande,
+				),
+			);
+			$id_transaction = intval($inserer_transaction($montant, $options_transaction));
+			
+			$flux['data'] = $id_transaction;
+		}
+	}
+	
+	return $flux;
+}
+
+/**
+ * Mettre en erreur une commande dont le prélèvement automatique aurait échoué
+ * 
+ * @pipeline bank_abos_resilier
+ **/
+function commandes_bank_abos_resilier($flux){
+	// On commence par chercher la commande dont il s'agit
+	// et vérifier qu'elle a des échéances
+	if (
+		strncmp($id,"uid:",4) == 0
+		and $bank_uid = substr($id, 4)
+		and $commande = sql_fetsel('*', 'spip_commandes', 'bank_uid = '.sql_quote($bank_uid))
+		and $id_commande = intval($commande['id_commande'])
+	) {
+		include_spip('action/editer_objet');
+		
+		// Le prélèvement a échoué explicitement, donc la commande d'origine est en erreur
+		objet_modifier('commande', $id_commande, array('statut' => 'erreur'));
+	}
+	
+	return $flux;
+}

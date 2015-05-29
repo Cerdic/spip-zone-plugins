@@ -1,12 +1,12 @@
 <?php
 /**
- * Fonction du plugin Commandes
+ * Fonctions du plugin Commandes relatives à la référence de commande
  *
  * @plugin     Commandes
  * @copyright  2014
  * @author     Ateliers CYM, Matthieu Marcillaud, Les Développements Durables
  * @licence    GPL 3
- * @package    SPIP\Commandes\Autorisations
+ * @package    SPIP\Commandes\Fonctions
  */
 
 // Sécurité

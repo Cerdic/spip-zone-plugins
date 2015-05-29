@@ -25,6 +25,7 @@
 	<utilise nom="coordonnees" compatibilite="[2.2.2;]" />
 	<utilise nom="notifavancees" compatibilite="[0.2.0;]" />
 	<utilise nom="facteur" compatibilite="[2.0.0;]" />
+	<utilise nom="bank" compatibilite="[3.0.0;]" />
 
 	<pipeline nom="affiche_milieu" inclure="commandes_pipelines.php" />
 	<pipeline nom="accueil_encours" inclure="commandes_pipelines.php" />
@@ -40,6 +41,10 @@
 	<pipeline nom="bank_traiter_reglement" inclure="commandes_pipelines.php" />
 	<pipeline nom="trig_bank_reglement_en_attente" inclure="commandes_pipelines.php" />
 	<pipeline nom="trig_bank_reglement_en_echec" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_decrire_echeance" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_activer_abonnement" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_preparer_echeance" inclure="commandes_pipelines.php" />
+	<pipeline nom="bank_abos_resilier" inclure="commandes_pipelines.php" />
 
 	<pipeline nom="autoriser" inclure="commandes_autorisations.php" />
 
