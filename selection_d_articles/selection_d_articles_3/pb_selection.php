@@ -11,16 +11,16 @@ function pb_selection_interface ( $vars="" ) {
 	
 	if (in_array($exec, explode(' ', _PB_SELECTION_RUBRIQUES_EXEC))) {
 		
-		$id_rubrique = $vars["args"]["id_rubrique"];
-		$id_article = $vars["args"]["id_article"];
+		$id_rubrique = isset($vars["args"]["id_rubrique"]) ? $vars["args"]["id_rubrique"] : 0;
+		$id_article  = isset($vars["args"]["id_article"]) ? $vars["args"]["id_rubrique"] : 0;
 		$data =	$vars["data"];
 	
 		if ($id_rubrique < 1) $id_rubrique=0;
 	
 		$contexte = array('id_rubrique'=>$id_rubrique);
 
-		$ret .= "<div id='pave_selection'>";
-	
+		$ret = "<div id='pave_selection'>";
+
 		$page = evaluer_fond("selection_interface", $contexte);
 		$ret .= $page["texte"];
 
