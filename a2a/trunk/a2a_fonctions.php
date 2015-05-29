@@ -14,10 +14,11 @@ function lister_articles_lies($id_article, $ordre,$type_liaison=null){
 
 function balise_ARTICLES_LIES($p) { 
 	$id_article = champ_sql('id_article', $p);
-	$ordre = 'ASC';
+	$ordre = "'ASC'";
 	$type_liaison=interprete_argument_balise(2,$p);
-	if($inverse = interprete_argument_balise(1,$p))
-		$ordre = 'DESC';
+	if ($inverse = interprete_argument_balise(1,$p)) {
+		$ordre = "'DESC'";
+	}
 	$type_liaison ? $p->code = "lister_articles_lies($id_article, $ordre,$type_liaison)" : $p->code = "lister_articles_lies($id_article, $ordre)";
 	$p->type = 'php';  
 	return $p;
@@ -32,17 +33,20 @@ function lister_articles_liant($id_article,$ordre,$type_liaison=null){
 
 function balise_ARTICLES_LIANT($p) { 
 	$id_article = champ_sql('id_article', $p);
-	$ordre = 'ASC';
+	$ordre = "'ASC'";
 	$type_liaison=interprete_argument_balise(2,$p);
-	if($inverse = interprete_argument_balise(1,$p))
-		$ordre = 'DESC';
+	if ($inverse = interprete_argument_balise(1,$p)) {
+		$ordre = "'DESC'";
+	}
 	$type_liaison ? $p->code = "lister_articles_liant($id_article,$ordre,$type_liaison)" : $p->code = "lister_articles_liant($id_article,$ordre)";
 	$p->type = 'php';  
 	return $p;
 }
+
 function balise_ARTICLES_LIANTS($p){
 	return balise_ARTICLES_LIANT($p);
-	}
+}
+
 function types_liaisons_existent($array){
     // return ' ' si des liaisons existent, sinon retourne ''
     if (empty($array) or $array==array(''=>'')){
@@ -61,6 +65,7 @@ function lister_types_liaisons(){
 	asort($types_liaisons);
 	return $types_liaisons;
 }
+
 function balise_TYPES_LIAISONS($p){
 	$p->code = "lister_types_liaisons()";
 	return $p;	
