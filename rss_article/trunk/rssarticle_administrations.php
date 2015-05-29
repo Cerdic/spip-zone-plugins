@@ -29,21 +29,19 @@ function rssarticle_upgrade(){
 	}
 }
 
-
-	
 function rssarticle_install($action){
-		$version_base = $GLOBALS['rssarticle_base_version'];
-		switch ($action){
-			case 'test':
-				return (isset($GLOBALS['meta']['rssarticle_base_version']) AND ($GLOBALS['meta']['rssarticle_base_version']>=$version_base));
-				break;
-			case 'install':
-				rssarticle_upgrade();
-				break;
-			case 'uninstall':
-				rssarticle_vider_tables();
-				break;
-		}
+	$version_base = $GLOBALS['rssarticle_base_version'];
+	switch ($action){
+		case 'test':
+			return (isset($GLOBALS['meta']['rssarticle_base_version']) AND ($GLOBALS['meta']['rssarticle_base_version']>=$version_base));
+			break;
+		case 'install':
+			rssarticle_upgrade();
+			break;
+		case 'uninstall':
+			rssarticle_vider_tables();
+			break;
+	}
 }
 
 /**
