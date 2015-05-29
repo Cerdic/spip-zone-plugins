@@ -9,66 +9,60 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<ul>
-            <li class="editer">
-              <h3 class="legend"><:rssarticle:statut_article_importe:></h3>
-                        <ul>
-                            <select name="import_statut">
-                                <option value="prop"[(#ENV{import_statut}|=={prop}|?{' selected="selected"'})]><:sites:info_statut_site_3:></option>
-                                <option value="publie"[(#ENV{import_statut}|=={publie}|?{' selected="selected"'})]><:sites:info_statut_site_2:></option>
-                            </select>
-                        </ul>
-                
-            </li>
-            <li class="editer">
-                    <h3 class="legend"><:rssarticle:mode:></h3>
-                        <ul>
-                            <div class="choix">
-                                <input class="radio" type="radio" name="mode" value="auto" [(#ENV{mode}|=={auto}?{checked='checked',''})] id="mode_auto"/>
-                                <label for="mode_auto"><:rssarticle:mode_auto:></label>
-                            </div>
-                            <div class="choix">
-                                <input type="radio" name="mode" value="manuel" [(#ENV{mode}|=={manuel}?{checked='checked',''})] id="mode_manuel"/>
-                                <label for="mode_manuel"><:rssarticle:mode_manuel:></label>
-                            </div>
-                        </ul>                
-            </li>
-            <li class="editer">
-                    <h3 class="legend"><:rssarticle:cron_interval:></h3>
-                    <input type="text" name="cron_interval_value" value="[(#ENV{cron_interval_value}|!={''}|?{#ENV{cron_interval_value},600})]" size="6" class="fondl" id="cron_interval_value"/>
-                    <label for="cron_interval_value"><:rssarticle:cron_interval_timer:></label>
-                
-            </li>
-            <li class="editer">
-                    <h3 class="legend"><:rssarticle:suivi_syndic:></h3>
-                    <ul>
-                        <li class="editer_email_alerte">
-                            <input type="checkbox" name="email_alerte"[ checked="(#ENV{email_alerte}|!={''}|?{'checked'})"] class="fondl" id="email_alerte"/>
-                            <label for="email_alerte"><:rssarticle:email_alerte:></label>
-                        </li>
-                        <li class="editer_email_suivi">
-                            <input type="text" name="email_suivi" value="[(#ENV{email_suivi})]" size="20" class="fondl" id="email_suivi"/>
-                            <label for="email_suivi"><:rssarticle:email_alerte_email:></label>
-                        </li>
-                    </ul>              
-            </li>
-            <li class="editer">
-                 <h3 class="legend"><:rssarticle:copie_logo:></h3>
-                 <input type="checkbox" name="copie_logo"[ checked="(#ENV{copie_logo}|!={''}|?{'checked'})"] class="fondl" id="copie_logo" />
-                 <label for="copie_logo"><:rssarticle:copie_logo:></label>
-                
-            </li>
-            <li class="editer">
-                 <h3 class="legend"><:rssarticle:html2spip:></h3>
-                 <input type="checkbox" name="html2spip"[ checked="(#ENV{html2spip}|!={''}|?{'checked'})"] id="html2spip" />
-                 <label for="html2spip"><:rssarticle:html2spip:></label>
-                
-            </li>
+			<li class="editer">
+				<h3 class="legend"><:rssarticle:statut_article_importe:></h3>
+				<ul>
+					<select name="import_statut">
+						<option value="prop"[(#ENV{import_statut}|=={prop}|?{' selected="selected"'})]><:sites:info_statut_site_3:></option>
+						<option value="publie"[(#ENV{import_statut}|=={publie}|?{' selected="selected"'})]><:sites:info_statut_site_2:></option>
+					</select>
+				</ul>
+			</li>
+			<li class="editer">
+				<h3 class="legend"><:rssarticle:mode:></h3>
+				<ul>
+					<div class="choix">
+						<input class="radio" type="radio" name="mode" value="auto" [(#ENV{mode}|=={auto}?{checked='checked',''})] id="mode_auto"/>
+						<label for="mode_auto"><:rssarticle:mode_auto:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="mode" value="manuel" [(#ENV{mode}|=={manuel}?{checked='checked',''})] id="mode_manuel"/>
+						<label for="mode_manuel"><:rssarticle:mode_manuel:></label>
+					</div>
+				</ul>
+			</li>
+			<li class="editer">
+				<h3 class="legend"><:rssarticle:cron_interval:></h3>
+				<input type="text" name="cron_interval_value" value="[(#ENV{cron_interval_value}|!={''}|?{#ENV{cron_interval_value},600})]" size="6" class="fondl" id="cron_interval_value"/>
+				<label for="cron_interval_value"><:rssarticle:cron_interval_timer:></label>
+			</li>
+			<li class="editer editer_email_alerte">
+				<h3 class="legend"><:rssarticle:suivi_syndic:></h3>
+				<ul>
+					<li class="editer_email_alerte">
+						<input type="checkbox" name="email_alerte"[ checked="(#ENV{email_alerte}|!={''}|?{'checked'})"] class="fondl" id="email_alerte"/>
+						<label for="email_alerte"><:rssarticle:email_alerte:></label>
+					</li>
+					<li class="editer_email_suivi">
+						<input type="text" name="email_suivi" value="[(#ENV{email_suivi})]" size="20" class="fondl" id="email_suivi"/>
+						<label for="email_suivi"><:rssarticle:email_alerte_email:></label>
+					</li>
+				</ul>
+			</li>
+			<li class="editer editer_copie_logo">
+				<h3 class="legend"><:rssarticle:copie_logo:></h3>
+				<input type="checkbox" name="copie_logo"[ checked="(#ENV{copie_logo}|!={''}|?{'checked'})"] class="fondl" id="copie_logo" />
+				<label for="copie_logo"><:rssarticle:copie_logo:></label>
+			</li>
+			<li class="editer editer_html2spip">
+				<h3 class="legend"><:rssarticle:html2spip:></h3>
+				<input type="checkbox" name="html2spip"[ checked="(#ENV{html2spip}|!={''}|?{'checked'})"] id="html2spip" />
+				<label for="html2spip"><:rssarticle:html2spip:></label>
+			</li>
 		</ul>
 
-	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
-			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
-	</div></form>
-	]
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>]
 </div>

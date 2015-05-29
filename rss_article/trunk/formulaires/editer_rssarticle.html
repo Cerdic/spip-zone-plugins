@@ -1,22 +1,21 @@
 
-<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_syndic,nouveau}"> 	
-  
-  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_syndic,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
-  <form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,'obligatoire'}
-                  <li class="editer_rssarticle[ (#ENV**{erreurs}|table_valeur{rssarticle}|oui)erreur]">
-                    <div class="choix" style="margin-left:-130px">
-                      [(#CHEMIN_IMAGE{rssarticle-32.png}|balise_img{RSS})]
-                      <input type='checkbox' class="checkbox" name='rssarticle' value='oui' id='rssarticle'[ (#ENV{rssarticle}|=={oui}|?{'checked="checked"'})] />							
-                      <label for="rssarticle"><:rssarticle:activer_recopie:></label>
-                    </div>
-                        [<span class='rssarticle'>(#ENV*{erreurs}|table_valeur{rssarticle})</span>]
-                  </li>
+			<li class="editer_rssarticle[ (#ENV**{erreurs}|table_valeur{rssarticle}|oui)erreur]">
+				<div class="choix" style="margin-left:-130px">
+					[(#CHEMIN_IMAGE{rssarticle-32.png}|balise_img{RSS})]
+					<input type='checkbox' class="checkbox" name='rssarticle' value='oui' id='rssarticle'[(#ENV{rssarticle}|=={oui}|oui)checked="checked"] />
+					<label for="rssarticle"><:rssarticle:activer_recopie:></label>
+				</div>
+				[<span class='rssarticle'>(#ENV*{erreurs}|table_valeur{rssarticle})</span>]
+			</li>
 		</ul>
-	  [(#ENV{editable}|oui) <p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>]
+		[(#ENV{editable}|oui) <p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>]
 	</div></form>
 </div>

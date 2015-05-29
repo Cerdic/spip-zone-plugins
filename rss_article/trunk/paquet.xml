@@ -10,12 +10,12 @@
 >
 	<nom>Flux RSS en articles</nom>
 	<auteur lien='http://www.erational.org'>erational</auteur>
-  <auteur>LudoRA</auteur>
+	<auteur>LudoRA</auteur>
 	<licence>GNU/GPL v3</licence>
-        <pipeline nom="declarer_tables_principales" inclure="base/rssarticle.php"/>
-        <pipeline nom="declarer_tables_interfaces" inclure="base/rssarticle.php"/>
-        <pipeline nom="declarer_tables_auxiliaires" inclure="base/rssarticle.php"/>
-        <pipeline nom="taches_generales_cron" inclure="rssarticle_pipelines.php"/>
-        <pipeline nom="affiche_milieu" inclure="rssarticle_pipelines.php"/>
+	<pipeline nom="declarer_tables_principales" inclure="base/rssarticle.php"/>
+	<pipeline nom="declarer_tables_interfaces" inclure="base/rssarticle.php"/>
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/rssarticle.php"/>
+	<pipeline nom="taches_generales_cron" inclure="rssarticle_pipelines.php"/>
+	<pipeline nom="affiche_milieu" inclure="rssarticle_pipelines.php"/>
 	<menu nom="configurer_rssarticle" titre="rssarticle:configuration_rssarticle" parent="menu_configuration" icone="images/rssarticle-16.png" />
 </paquet>
