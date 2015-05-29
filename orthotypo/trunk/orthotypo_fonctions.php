@@ -374,7 +374,11 @@ function orthotypo_exposants_echappe_balises_callback($matches) {
 }
 
 function orthotypo_exposants_post_typo($texte){
-	if (!$lang = $GLOBALS['lang_objet']) $lang = $GLOBALS['spip_lang'];
+	if (!empty($GLOBALS['lang_objet'])) {
+		$lang = $GLOBALS['lang_objet'];
+	} else {
+		$lang = $GLOBALS['spip_lang'];
+	}
 	if(function_exists($fonction = 'orthotypo_exposants_'.lang_typo($lang))){
 		// prudence : on protege les balises <a> et <img>
 		if (strpos($texte, '<')!==false)
