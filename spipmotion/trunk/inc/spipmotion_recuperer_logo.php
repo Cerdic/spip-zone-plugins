@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2012 - Distribué sous licence GNU/GPL
+ * 2008-2015 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -73,7 +73,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		$document = $infos;
 		$string_temp = "$fichier-".date("Y-m-dHis");
 	}else{
-		spip_log('Mauvais arguments pour récupérer la vignette','spipmotion');
+		spip_log('Mauvais arguments pour récupérer la vignette','spipmotion.'._LOG_ERREUR);
 		return false;
 	}
 
@@ -86,7 +86,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 		include_spip('inc/filtres_images_mini');
 		include_spip('action/editer_document');
 		$ajouter_documents = charger_fonction('ajouter_documents', 'action');
-		
+
 		$vignette = false;
 		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui')
 			$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion_vignette.sh'; 
@@ -148,14 +148,14 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 								$vignette = get_spip_doc($vignette);
 								$x = $ajouter_documents($vignette_existante,
 												array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
-								    			'', 0, 'vignette');
+												'', 0, 'vignette');
 								$id_vignette = reset($x);
 								if(intval($id_vignette)){
 									$vignette = true;
 									if(!$only_return && ($document['id_vignette'] != $id_vignette))
 										document_modifier($id_document, array('id_vignette'=>$id_vignette));
 								}
-							    return $id_vignette;
+								return $id_vignette;
 							}
 							return false;
 						}
@@ -179,7 +179,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 								$img_finale = extraire_attribut(filtrer('image_rotation',$fichier_temp,90),'src');
 							$x = $ajouter_documents($vignette_existante,
 													array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
-									    			'', 0, 'vignette');
+													'', 0, 'vignette');
 							$id_vignette = reset($x);
 							if(intval($id_vignette)){
 								$vignette = true;
@@ -200,7 +200,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 								$img_finale = extraire_attribut(filtrer('image_rotation',$fichier_temp,90),'src');
 							$x = $ajouter_documents($vignette_existante,
 												array(array('tmp_name'=>$img_finale,'name'=> $img_finale)),
-								    			'', 0, 'vignette');
+												'', 0, 'vignette');
 							$id_vignette = reset($x);
 							if(intval($id_vignette)){
 								$vignette = true;
@@ -212,8 +212,7 @@ function inc_spipmotion_recuperer_logo($id_document,$seconde=1,$fichier=false,$i
 					}
 				}
 			}else
-				return false;	
-			
+				return false;
 		}
 	}else
 		spip_log('Erreur : ce document n a pas de piste video','spipmotion');
