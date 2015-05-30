@@ -419,7 +419,7 @@ function encodage($source,$options){
 				if(spip_version_compare($ffmpeg_version,'0.7.20','<'))
 					$infos_sup_normal .= ' -vpre baseline -vpre ipod640 -bf 0';
 				else
-					$infos_sup_normal .= ' -profile:v baseline -vpre ipod640 -bf 0';	
+					$infos_sup_normal .= ' -profile:v baseline -bf 0';	
 			}
 			/**
 			 * Encodage pour PSP
