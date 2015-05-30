@@ -18,7 +18,7 @@ function photoswipe_insert_head($flux){
 photoswipe = {
   path: "' . find_in_path('lib/photoswipe/'). '/",
   gallery: true, // galerie
-  debug: true, // galerie
+  debug: false, // galerie
 };
 $(function() {
     photoswipe_init();
