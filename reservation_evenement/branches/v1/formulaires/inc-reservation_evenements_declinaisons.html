@@ -1,10 +1,14 @@
 <B_art_or>
 <li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
     [<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_evenement})</div>]
-    <BOUCLE_art_or(DATA){source tableau,#ENV{evenements}}>
+    <BOUCLE_art_or(DATA){source tableau,#ENV{evenements}} {id_evenement_source = 0} {par date_debut}>
         [(#COMPTEUR_BOUCLE|!={1}|oui)</li><li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>]
-        <a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a>                      
-        <strong>([(#DATE_DEBUT|affdate_debut_fin{#DATE_FIN,#HORAIRE})])</strong> 
+        <a href="#URL_EVENEMENT{#ID_EVENEMENT}">#TITRE</a> 
+        #SET{date_fin,#DATE_FIN}
+        <BOUCLE_evenements_lies(EVENEMENTS) {id_evenement_source = #ID_EVENEMENT}{!par date_fin} {0,1}>
+        #SET{date_fin,#DATE_FIN}
+        </BOUCLE_evenements_lies>                    
+        <strong>([(#DATE_DEBUT|affdate_debut_fin{#GET{date_fin},#HORAIRE})])</strong> 
         #SET{titre,#TITRE}
          <B_prix>                                  
                 <BOUCLE_prix(PRIX_OBJETS){id_objet=#ID_EVENEMENT}{objet=evenement}>
