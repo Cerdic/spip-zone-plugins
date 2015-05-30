@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_editer_ttc_label' => 'Upraviť sadzbu výrobkov DPH',
 	'configurer_precision_ttc_explication' => 'Upresniť zaokrúhlenie po desatinnej čiarke pre sadzbu DPH (predvolené 2)',
 	'configurer_precision_ttc_label' => 'Upresnenie sadzby DPH',
-	'configurer_taxe_defaut_explication' => 'Zadajte predvolenú daň na výrobky vo forme 0.196 napríklad pre DPH 19,6 % (túto hodnotu potom môžete pri každom výrobku prepísať).',
+	'configurer_taxe_defaut_explication' => 'Zadajte predvolenú daň na výrobky vo forme 0.196 napríklad pre DPH 19,6 % (túto hodnotu potom môžete pri každom výrobku prepísať).', # MODIF
 	'configurer_taxe_defaut_label' => 'Predvolená daň',
 	'configurer_titre' => 'Nastavenia výrobkov',
 

@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configurer_editer_ttc_label' => 'Edit products in ATI',
 	'configurer_precision_ttc_explication' => 'Indicate the precision rounding decimal places for the price ATI (default 2)',
 	'configurer_precision_ttc_label' => 'Detail about the ATI prices',
-	'configurer_taxe_defaut_explication' => 'Enter the default tax applicable to products such as 0.196 for a 19.6% ATI for example (this value can then be overloaded for each product).',
+	'configurer_taxe_defaut_explication' => 'Enter the default tax applicable to products such as 0.196 for a 19.6% ATI for example (this value can then be overloaded for each product).', # MODIF
 	'configurer_taxe_defaut_label' => 'Default tax',
 	'configurer_titre' => 'Configuration of products',
 
