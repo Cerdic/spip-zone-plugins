@@ -50,8 +50,8 @@ function action_spipmotion_ajouter_file_encodage_tout_post($format=false){
 	}else{
 		$formats = array_merge(lire_config('spipmotion/fichiers_videos_encodage',array()),lire_config('spipmotion/fichiers_audios_encodage',array()));
 	}
-	$fichiers = sql_select('*','spip_documents',sql_in('extension',$formats).' AND mode!="conversion"');
-	while($fichier = sql_fetch($fichiers)){
+	$fichiers = sql_allfetsel('id_document','spip_documents',sql_in('extension',$formats).' AND mode!="conversion"');
+	foreach($fichiers as $fichier){
 		spipmotion_genere_file($fichier['id_document'],$format);
 	}
 	
