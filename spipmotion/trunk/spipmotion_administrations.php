@@ -161,8 +161,8 @@ function spipmotion_install_recuperer_infos(){
  * On fait attention à renommer les deux éléments debut_conversion et fin_conversion
  */
 function spipmotion_peuple_facd(){
-	$res = sql_select("*","spip_spipmotion_attentes");
-	while($row = sql_fetch($res)){
+	$res = sql_allfetsel("*","spip_spipmotion_attentes");
+	foreach($res as $row){
 		$infos = @unserialize($row['infos']);
 		if(is_array($infos)){
 			$infos['debut_conversion'] = $infos['debut_encodage'];
@@ -194,8 +194,8 @@ function spipmotion_peuple_facd(){
 function spipmotion_remove_idorig(){
 	$desc = sql_showtable('spip_documents', true, $connect);
 	if (is_array($desc['field']) && isset($desc['field']['id_orig'])) {
-		$res = sql_select("*","spip_documents","id_orig > 0");
-		while($row = sql_fetch($res)){
+		$res = sql_allfetsel("id_document,id_orig","spip_documents","id_orig > 0");
+		foreach($res as $row){
 			sql_delete('spip_documents_liens','id_document='.intval($row['id_document']).' AND objet!= "document"');
 			sql_insertq('spip_documents_liens',array(
 													'id_document' => $row['id_document'],

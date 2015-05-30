@@ -29,7 +29,7 @@ function metadata_video_dist($file){
 	/**
 	 * Si on ne sait pas récupérer la durée de la vidéo
 	 * On vérifie que l'on a -encoded dans le nom du fichier
-	 * On essaie de trouve le fichier original car c'est une conversion de spipmotion
+	 * On essaie de trouver le fichier original car c'est une conversion de spipmotion
 	 * On récupère si possible la durée de l'original et on relance la récupération du logo
 	 */
 	if(!$metas['duree'] && preg_match('/-encoded/',$file)){

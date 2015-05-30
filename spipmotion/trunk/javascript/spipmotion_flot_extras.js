@@ -9,10 +9,10 @@
  */
 function spipmotion_plot_showtooltip(x, y, contents,id) {
 	id = id ? id : 'tooltip';
-    $('<div id="'+id+'">' + contents + '</div>').css( {
-        top: y + 5,
-        left: x + 5
-    }).appendTo("body").fadeIn(200);
+	$('<div id="'+id+'">' + contents + '</div>').css({
+	    top: y + 5,
+	    left: x + 5
+	}).appendTo("body").fadeIn(200);
 }
 
 /**
