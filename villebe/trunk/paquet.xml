@@ -8,7 +8,7 @@
 	documentation=""
 	schema="1.0.0"
 >
-	<nom>Villes de belgique</nom>
+	<nom>Villes de Belgique</nom>
 	<!-- Toutes les villes de Belgique -->
 
 	<auteur lien='http://p.henix.be'>Phenix</auteur>
