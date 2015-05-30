@@ -1,63 +1,81 @@
 [(#SAISIE{reservations,id_reservation,obligatoire=oui,
-    label=<:reservations_detail:label_reservation:>})]
+label=<:reservations_detail:label_reservation:>})]
 
-[(#SAISIE{articles_evenements,id_evenement,id_article=#ENV{articles},obligatoire=oui,
-    label=<:agenda:info_evenement:>,class=chosen})]
-    
-    
+[(#SAISIE{articles_evenements,id_evenement,id_article=#ENV{articles},obligatoire=oui,evenement_anterieurs=#ENV{evenement_anterieurs},
+label=<:agenda:info_evenement:>,class=chosen})]
+
+[(#SAISIE{oui_non,evenement_anterieurs,
+label=<:reservations_detail:label_evenement_anterieurs:>})]
+
 [(#PLUGIN{prix_objets}|oui)
-    [(#SAISIE{prix_objets, id_prix_objet, obligatoire=oui,
-        option_intro=<:reservations_detail:choisir_prix:>,
-        id_objet=#ENV{id_article},
-        objet=article,        
-        label=<:reservations_detail:label_prix_objet:>})]
-    ]    
-    
+[(#SAISIE{prix_objets, id_prix_objet, obligatoire=oui,
+option_intro=<:reservations_detail:choisir_prix:>,
+id_objet=#ENV{id_article},
+objet=article,
+label=<:reservations_detail:label_prix_objet:>})]
+]
+
 [(#SAISIE{input, prix_ht,
-    label=<:reservations_detail:label_prix_ht:>})]
+label=<:reservations_detail:label_prix_ht:>})]
 
 [(#PLUGIN{prix_objets}|oui)
 <script type="text/javascript">
-  $(function(){ 
+  $(function() {
 
-        var id_reservation=$("select#champ_id_reservation").val();                
-        var id_article='#ENV{id_article}';
-        var id_evenement='#ENV{id_evenement}';        
-        var id_prix_objet=''; 
-        var prix_ht='#ENV{prix_ht}'; 
-                       
-        $("#champ_id_evenement").change(function(event){  
-            $("option:selected", $(this)).each(function(){
-                var id_article=$(this).attr('data-id_article');              
-                var id_evenement=$(this).attr('value');                
-                 ajaxReload('champs_res_det',
-                 {
-                     args:{
-                        id_reservation:id_reservation,                         
-                        id_article:id_article,
-                        id_evenement:id_evenement,
-                        id_prix_objet:id_prix_objet,
-                        prix_ht:prix_ht}
-                 });
-            });
-          });
-        $("#champ_id_prix_objet").change(function(event){ 
-            $("option:selected", $(this)).each(function(){
-                var prix_ht=$(this).attr('data-prix_ht');
-                var id_prix_objet=$(this).attr('value');                
-                 ajaxReload('champs_res_det',
-                 {
-                     args:{
-                        id_reservation:id_reservation,
-                        id_article:id_article,
-                        id_evenement:id_evenement,
-                        id_prix_objet:id_prix_objet,
-                        prix_ht:prix_ht}
-                 });
-            });
-          });
-          
+    var id_reservation = $("select#champ_id_reservation").val();
+    var id_article = '#ENV{id_article}';
+    var id_evenement = '#ENV{id_evenement}';
+    var id_prix_objet = '';
+    var prix_ht = '#ENV{prix_ht}';
+    var evenement_anterieurs = '#ENV{evenement_anterieurs}';
+
+    $("#champ_id_evenement").change(function(event) {
+      $("option:selected", $(this)).each(function() {
+        var id_article = $(this).attr('data-id_article');
+        var id_evenement = $(this).attr('value');
+        ajaxReload('champs_res_det', {
+          args : {
+            id_reservation : id_reservation,
+            id_article : id_article,
+            id_evenement : id_evenement,
+            id_prix_objet : id_prix_objet,
+            prix_ht : prix_ht,
+            evenement_anterieurs : evenement_anterieurs
+          }
         });
+      });
+    });
+    $("#champ_id_prix_objet").change(function(event) {
+      $("option:selected", $(this)).each(function() {
+        var prix_ht = $(this).attr('data-prix_ht');
+        var id_prix_objet = $(this).attr('value');
+        ajaxReload('champs_res_det', {
+          args : {
+            id_reservation : id_reservation,
+            id_article : id_article,
+            id_evenement : id_evenement,
+            id_prix_objet : id_prix_objet,
+            prix_ht : prix_ht,
+            evenement_anterieurs : evenement_anterieurs
+          }
+        });
+      });
+    });
+    $(".editer_evenement_anterieurs input").change(function(event) {
+        var evenement_anterieurs = $(this).attr('value');
+        ajaxReload('champs_res_det', {
+          args : {
+            id_reservation : id_reservation,
+            id_article : id_article,
+            id_evenement : id_evenement,
+            id_prix_objet : id_prix_objet,
+            prix_ht : prix_ht,
+            evenement_anterieurs : evenement_anterieurs
+          }
+        });
+
+    });
+  });
 
 </script>
 ]
