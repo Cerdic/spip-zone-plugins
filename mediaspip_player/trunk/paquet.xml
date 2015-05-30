@@ -1,7 +1,7 @@
 <paquet
 	prefix="mediaspip_player"
 	categorie="multimedia"
-	version="1.5.8"
+	version="1.6.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/html5_player_logo.png"
@@ -29,6 +29,7 @@
 	<pipeline nom="formulaire_traiter" inclure="mediaspip_player_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="mediaspip_player_pipelines.php" />
 	<pipeline nom="medias_documents_visibles" inclure="mediaspip_player_pipelines.php" />
+	<pipeline nom="autoriser" inclure="mediaspip_player_autoriser.php" />
 
 	<necessite nom="medias" compatibilite="[2.7.27;[" />
 	<utilise nom="jqueryui" />
