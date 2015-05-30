@@ -222,5 +222,3 @@ function abonnements_affiche_milieu($flux){
 	
 	return $flux;
 }
- 
-?>

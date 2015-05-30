@@ -29,15 +29,24 @@ function action_creer_ou_renouveler_abonnement_dist($arg=null) {
 		($id_auteur = intval($id_auteur)) > 0
 		and ($id_abonnements_offre = intval($id_abonnements_offre)) > 0
 	) {
-		// Si on trouve un abonnement (le dernier en date)
-		if ($id_abonnement = intval(sql_getfetsel(
-			'id_abonnement',
-			'spip_abonnements',
-			array('id_auteur = '.$id_auteur, 'id_abonnements_offre = '.$id_abonnements_offre, 'statut != "poubelle"'),
-			'',
-			'date_fin desc',
-			'0,1'
-		))) {
+		// On cherche la durée limite pour renouveler un abonnement
+		include_spip('inc/config');
+		$heures_limite = lire_config('abonnements/renouvellement_heures_limite', 48);
+		
+		// Si on trouve un abonnement de cette offre (le dernier en date)
+		// et qu'il n'est pas trop vieux !
+		if (
+			$abonnement = sql_fetsel(
+				'id_abonnement, date_fin',
+				'spip_abonnements',
+				array('id_auteur = '.$id_auteur, 'id_abonnements_offre = '.$id_abonnements_offre, 'statut != "poubelle"'),
+				'',
+				'date_fin desc',
+				'0,1'
+			)
+			and $abonnement['date_fin'] <= date('Y-m-d H:i:s', strtotime('-'.$heures_limite.'hours'))
+			and $id_abonnement = intval($abonnement['id_abonnement'])
+		) {
 			autoriser_exception('modifier', 'abonnement', $id_abonnement, true);
 			// On le renouvelle !
 			$renouveler = charger_fonction('renouveler_abonnement', 'action/');
