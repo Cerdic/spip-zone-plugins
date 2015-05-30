@@ -120,12 +120,12 @@ function spipmotion_post_edition($flux){
 			 * Si nous sommes dans un format vidéo que SPIPmotion peut traiter,
 			 * on lui applique certains traitements :
 			 * -* récupération d'une vignette
-			 * La récupération des infos est faite directement via metadata/video et metadat/audio lors de l'insertion
+			 * La récupération des infos est faite directement via metadata/video et metadata/audio lors de l'insertion
 			 */
 			if(
 				($GLOBALS['meta']['spipmotion_casse'] != 'oui')
 				&& ($infos_doc['mode'] != 'conversion')
-				&& (lire_config('spipmotion/encodage_auto','off') == 'on') 
+				&& (lire_config('spipmotion/encodage_auto','off') == 'on')
 				&& (in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_videos',array())) OR in_array($infos_doc['extension'],lire_config('spipmotion/fichiers_audios',array())))){
 				/**
 				 * On l'ajoute dans la file d'attente d'encodage si nécessaire
