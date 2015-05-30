@@ -9,7 +9,8 @@
  * @package    SPIP\Res\Formulaires
  */
 
-if (!defined('_ECRIRE_INC_VERSION')) return;
+if (!defined('_ECRIRE_INC_VERSION'))
+  return;
 
 include_spip('inc/actions');
 include_spip('inc/editer');
@@ -32,8 +33,8 @@ include_spip('inc/editer');
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_reservations_detail_identifier_dist($id_reservations_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return serialize(array(intval($id_reservations_detail)));
+function formulaires_editer_reservations_detail_identifier_dist($id_reservations_detail = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+  return serialize(array(intval($id_reservations_detail)));
 }
 
 /**
@@ -58,15 +59,23 @@ function formulaires_editer_reservations_detail_identifier_dist($id_reservations
  * @return array
  *     Environnement du formulaire
  */
-function formulaires_editer_reservations_detail_charger_dist($id_reservations_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$date=date('Y-m-d G:i:s');
-	$valeurs = formulaires_editer_objet_charger('reservations_detail',$id_reservations_detail,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
-	if(isset($valeurs['id_evenement']) AND $valeurs['id_evenement']>0)$valeurs['id_article']=sql_getfetsel('id_article','spip_evenements','id_evenement='.$valeurs['id_evenement']);
-	$valeurs['id_reservation']=_request('id_reservation')?_request('id_reservation'):$valeurs['id_reservation'];
-	$sql=sql_select('id_article','spip_evenements','date_fin > '.sql_quote($date));
-	$valeurs['articles']=array();
-	while ($data=sql_fetch($sql))$valeurs['articles'][]=$data['id_article'];
-	return $valeurs;
+function formulaires_editer_reservations_detail_charger_dist($id_reservations_detail = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+  $date = date('Y-m-d G:i:s');
+  $valeurs = formulaires_editer_objet_charger('reservations_detail', $id_reservations_detail, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+  
+  if (isset($valeurs['id_evenement']) AND $valeurs['id_evenement'] > 0)
+    $valeurs['id_article'] = sql_getfetsel('id_article', 'spip_evenements', 'id_evenement=' . $valeurs['id_evenement']);
+  
+  $valeurs['id_reservation'] = _request('id_reservation') ? _request('id_reservation') : $valeurs['id_reservation'];
+  
+  $sql = sql_select('id_article', 'spip_evenements', 'date_fin > ' . sql_quote($date));
+  
+  $valeurs['articles'] = array();
+  $valeurs['evenement_anterieurs'] = _request('evenement_anterieurs');
+  
+  while ($data = sql_fetch($sql))
+    $valeurs['articles'][] = $data['id_article'];
+  return $valeurs;
 }
 
 /**
@@ -91,11 +100,15 @@ function formulaires_editer_reservations_detail_charger_dist($id_reservations_de
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_reservations_detail_verifier_dist($id_reservations_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	$obligatoire=array('id_evenement','id_reservation');
-	if(test_plugin_actif('prix_objets'))$obligatoire=array_merge($obligatoire,array('id_prix_objet'));
-	
-	return formulaires_editer_objet_verifier('reservations_detail',$id_reservations_detail,$obligatoire);
+function formulaires_editer_reservations_detail_verifier_dist($id_reservations_detail = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+  $obligatoire = array(
+    'id_evenement',
+    'id_reservation'
+  );
+  if (test_plugin_actif('prix_objets'))
+    $obligatoire = array_merge($obligatoire, array('id_prix_objet'));
+
+  return formulaires_editer_objet_verifier('reservations_detail', $id_reservations_detail, $obligatoire);
 }
 
 /**
@@ -120,9 +133,7 @@ function formulaires_editer_reservations_detail_verifier_dist($id_reservations_d
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_reservations_detail_traiter_dist($id_reservations_detail='new', $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
-	return formulaires_editer_objet_traiter('reservations_detail',$id_reservations_detail,'',$lier_trad,$retour,$config_fonc,$row,$hidden);
+function formulaires_editer_reservations_detail_traiter_dist($id_reservations_detail = 'new', $retour = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+  return formulaires_editer_objet_traiter('reservations_detail', $id_reservations_detail, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 }
-
-
 ?>
