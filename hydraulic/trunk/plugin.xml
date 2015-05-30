@@ -4,8 +4,8 @@
     [en]Calculator for hydraulic</multi></nom>
     <auteur>David Dorchies, Médéric Dulondel</auteur>
     <licence>GNU/GLP</licence>
-    <version>0.6.3</version>
-    <necessite id="lib:dist" src="https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.0b2_r1012.zip" />
+    <version>0.7.0</version>
+    <necessite id="lib:dist" src="https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.8r1250.zip" />
     <slogan>
         <multi>[fr]Des calculs d'hydraulique sous SPIP !
         [en]Hydraulic calculations on SPIP !</multi>
@@ -33,7 +33,7 @@ Calculation forms available:
     <icon>logo32.png</icon>
     <categorie>divers</categorie>
     <lien>http://sic.g-eau.net/spip.php?rubrique80</lien>
-    <necessite id="SPIP" version="[2.1.0;2.1.99]" />
+    <necessite id="SPIP" version="[2.1.0;3.1.99]" />
     <necessite id="spip_bonux" version="[1.8.7;]" />
     <etat>dev</etat>
     <prefix>hydraulic</prefix>
