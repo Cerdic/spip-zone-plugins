@@ -11,14 +11,14 @@
 <BOUCLE_liste_doublons(DATA) {source table, #ENV{items}}{where?}{par cle}>
 		[(#ENV{verification}|=={item}|oui)
 			<tr class="trouve row_odd">
-				<td colspan="2" class="raccourci">
+				<td colspan="2" class="soustitre">
 					<strong>[(#_liste_doublons:CLE)] \([(#_liste_doublons:VALEUR|count)]\)</strong>
 				</td>
 			</tr>
 		]
 		<BOUCLE_un_doublon(DATA) {source table, #VALEUR}{par cle}>
 			[<tr class="trouve row_odd">
-				<td colspan="3" class="raccourci">
+				<td colspan="3" class="soustitre">
 					<strong>(#VALEUR|table_valeur{2}|unique) \([(#_liste_doublons:VALEUR|count)]\)</strong>
 				</td>
 			</tr>]
