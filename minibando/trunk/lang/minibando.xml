@@ -1,26 +1,26 @@
 <traduction module="minibando" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/minibando/trunk/lang/" reference="fr">
-	<langue code="ar" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=ar" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="ar" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=ar" total="11" traduits="6" relire="0" modifs="0" nouveaux="5" pourcent="54.55">
 		<traducteur nom="George" lien="http://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=de" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=de" total="11" traduits="6" relire="0" modifs="0" nouveaux="5" pourcent="54.55">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=en" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=en" total="11" traduits="6" relire="0" modifs="0" nouveaux="5" pourcent="54.55">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=es" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=es" total="11" traduits="6" relire="0" modifs="0" nouveaux="5" pourcent="54.55">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="eu" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=eu" total="6" traduits="4" relire="0" modifs="1" nouveaux="1" pourcent="66.67">
+	<langue code="eu" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=eu" total="11" traduits="4" relire="0" modifs="1" nouveaux="6" pourcent="36.36">
 		<traducteur nom="otalazt" lien="http://trad.spip.net/auteur/otalazt" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=fa" total="6" traduits="4" relire="0" modifs="1" nouveaux="1" pourcent="66.67">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=fa" total="11" traduits="4" relire="0" modifs="1" nouveaux="6" pourcent="36.36">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=fr" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=fr" total="11" traduits="11" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=sk" total="6" traduits="6" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/minibando?lang_cible=sk" total="11" traduits="6" relire="0" modifs="0" nouveaux="5" pourcent="54.55">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
