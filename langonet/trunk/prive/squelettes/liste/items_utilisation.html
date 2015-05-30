@@ -1,5 +1,4 @@
 <B_liste_items>
-	<hr>
 	[(#VAL{langonet:info_utilises_}|concat{#ENV{pertinence}}|_T{#ARRAY{module, #ENV{module}}})]
 	[(#ENV{pertinence}|=={non}|oui)
 		[<br /><br />

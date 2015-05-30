@@ -70,7 +70,7 @@ function formulaires_langonet_verifier_doublon_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour['message_ok']['resume'] = _T('langonet:message_ok_doublons');
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_verification');
 		$retour['message_ok']['total'] = $resultats['total'];
 		$retour['message_ok']['doublons'] = $resultats['doublons'];
 	}

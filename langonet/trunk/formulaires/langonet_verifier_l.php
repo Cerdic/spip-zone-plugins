@@ -56,7 +56,7 @@ function formulaires_langonet_verifier_l_traiter() {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour['message_ok']['resume'] = _T('langonet:message_ok_fichier_verification');
+		$retour['message_ok']['resume'] = _T('langonet:message_ok_verification');
 		$retour['message_ok']['resultats']['ou_fichier'] = $resultats['ou_fichier'];
 		$retour['message_ok']['resultats']['total_occurrences'] = $resultats['total_occurrences'];
 		$retour['message_ok']['resultats']['occurrences_non'] = $resultats['occurrences_non'];

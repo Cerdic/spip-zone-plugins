@@ -3,10 +3,7 @@
 	<table class="spip liste">
 		<caption>
 			<strong class="caption">
-				[(#TOTAL_BOUCLE|singulier_ou_pluriel{
-									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_1},
-									#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_n},
-									sous_total})]
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{#VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_1}, #VAL{langonet:message_ok_item_trouve_}|concat{#ENV{pertinence}}|concat{_n}, sous_total})]
 			</strong>
 		</caption>
 		<tbody>

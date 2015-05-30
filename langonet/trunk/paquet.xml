@@ -1,7 +1,7 @@
 <paquet
 	prefix="langonet"
 	categorie="outil"
-	version="1.2.2"
+	version="1.2.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="langonet_logo-64.png"
@@ -20,8 +20,8 @@
 
 	<pipeline nom="autoriser" inclure="langonet_autorisations.php" />
 
-	<menu nom="langonet" titre="langonet:bouton_langonet" parent="menu_developpement" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier_item" />
+	<menu nom="langonet" titre="langonet:titre_plugin" parent="menu_developpement" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier_item" />
 	<spip compatibilite="[3.0.0;3.0.*]">
-		<menu nom="langonet" titre="langonet:bouton_langonet" parent="bando_administration" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier_item" />
+		<menu nom="langonet" titre="langonet:titre_plugin" parent="bando_administration" icone="images/langonet-16.png" action="langonet" parametres="operation=verifier_item" />
 	</spip>
 </paquet>
