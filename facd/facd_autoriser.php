@@ -52,7 +52,7 @@ if(!function_exists('autoriser_associerdocuments')){
  */ 
 function autoriser_associerdocuments($faire, $type, $id, $qui, $opt){
 	return autoriser('modifier',$type,$id,$qui,$opt); 
-} 
+}
 }
 
 if(!function_exists('autoriser_dissocierdocuments')){

@@ -25,7 +25,7 @@ function action_facd_traiter_conversion_dist(){
 	$nb_conversions = sql_countsel('spip_facd_conversions', "statut='non'");
 	spip_log("Appel de la fonction de conversion : il y a $nb_conversions document(s) à convertir","facd");
 	$en_cours = sql_fetsel('id_facd_conversion,maj','spip_facd_conversions',"statut='en_cours'");
-	
+
 	/**
 	 * On essaie de voir s'il y a d'autres conversions en cours
 	 */
@@ -34,6 +34,8 @@ function action_facd_traiter_conversion_dist(){
 		/**
 		 * Vérification de l'exisence du document
 		 */
+		$auteur_session = sql_fetsel('*','spip_auteurs','id_auteur='.intval($doc_attente['id_auteur']));
+		$GLOBALS['visiteur_session'] = $auteur_session;
 		$id_document = sql_getfetsel('id_document','spip_documents','id_document='.intval($doc_attente['id_document']));
 		if(intval($id_document) > 0){
 			spip_log("on convertit le doc $id_document","facd");
