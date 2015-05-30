@@ -80,7 +80,7 @@ function photoshow_identify(me) {
     }
 
     // on verifie que la taille du fichier grand est superieure a celle du fichier petit
-    if (a.w > $(me).width()) return a;
+    if (a.w > $(me).width() || a.w > $(window).width() || a.h > $(window).height()) return a;
 }
 
 function photoshow_gallery(items, index) {
