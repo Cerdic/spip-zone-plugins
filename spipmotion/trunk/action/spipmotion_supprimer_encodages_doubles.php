@@ -18,8 +18,8 @@ function action_spipmotion_supprimer_encodages_doubles_dist() {
 		return false;
 	}
 	include_spip('action/dissocier_document');
-	$documents = sql_select('*','spip_documents','mode="conversion" AND fichier LIKE "%-encoded\-%"');
-	while($document = sql_fetch($documents)){
+	$documents = sql_allfetsel('id_document,fichier','spip_documents','mode="conversion" AND fichier LIKE "%-encoded\-%"');
+	foreach($documents as $document){
 		$fichier_original = preg_replace('/\-encoded\-[0-9]?/','-encoded',$document['fichier']);
 		if($fichier_orig_present = sql_getfetsel('fichier','spip_documents','fichier='.sql_quote($fichier_original))){
 			$lien_doc = sql_fetsel('id_objet,objet','spip_documents_liens','id_document='.intval($document['id_document']));
