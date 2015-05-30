@@ -3,4 +3,6 @@
 <p>
 	[(#VAL{langonet:info_doublon_}|concat{#ENV{verification}}|_T)]
 </p>
-[(#INCLURE{fond=prive/squelettes/liste/items_doublon_#ENV{verification}, env})]
+[(#INCLURE{fond=prive/squelettes/liste/items_doublon,
+	verification=#ENV{verification},
+	env})]

@@ -9,12 +9,12 @@
 		</caption>
 		<tbody>
 <BOUCLE_liste_doublons(DATA) {source table, #ENV{items}}{where?}{par cle}>
-			<tr class="trouve row_odd">
-				<td colspan="2" class="raccourci">
-					[<strong>(#CLE) \([(#VALEUR|count)]\)</strong>]
-				</td>
-			</tr>
 		<BOUCLE_definitions(DATA) {source table, #VALEUR}{par cle}>
+			[<tr class="trouve row_odd">
+				<td colspan="2" class="raccourci">
+					<strong>(#_liste_doublons:CLE|unique) \([(#_liste_doublons:VALEUR|count)]\)</strong>
+				</td>
+			</tr>]
 			<tr class="row_even">
 				<td class="fichier">[(#VALEUR|table_valeur{0})]</td>
 				<td class="traduction">[

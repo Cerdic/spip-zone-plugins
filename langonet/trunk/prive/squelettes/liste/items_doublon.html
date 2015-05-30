@@ -1,0 +1,43 @@
+<B_liste_doublons>
+<div class="liste-objets items_langue doublon">
+	<table class="spip liste">
+		<caption class="notice">
+			[(#CHEMIN_IMAGE{warning-24.png}|balise_img{'',cadre-icone})]
+			<strong class="caption">
+				[(#TOTAL_BOUCLE|singulier_ou_pluriel{#VAL{langonet:message_ok_doublon_}|concat{#ENV{verification}}|concat{_1}, #VAL{langonet:message_ok_doublon_}|concat{#ENV{verification}}|concat{_n}})]
+			</strong>
+		</caption>
+		<tbody>
+<BOUCLE_liste_doublons(DATA) {source table, #ENV{items}}{where?}{par cle}>
+		[(#ENV{verification}|=={item}|oui)
+			<tr class="trouve row_odd">
+				<td colspan="2" class="raccourci">
+					<strong>[(#_liste_doublons:CLE)] \([(#_liste_doublons:VALEUR|count)]\)</strong>
+				</td>
+			</tr>
+		]
+		<BOUCLE_un_doublon(DATA) {source table, #VALEUR}{par cle}>
+			[<tr class="trouve row_odd">
+				<td colspan="3" class="raccourci">
+					<strong>(#VALEUR|table_valeur{2}|unique) \([(#_liste_doublons:VALEUR|count)]\)</strong>
+				</td>
+			</tr>]
+			<tr class="row_even">
+				<td class="fichier">[(#VALEUR|table_valeur{0})]</td>
+				[<td class="traduction">(#VALEUR|table_valeur{3})</td>]
+				<td class="traduction">[
+					<span class="guillemet">&#10078;</span>
+					(#VALEUR|table_valeur{1}|htmlspecialchars)
+					<span class="guillemet">&#10077;</span>
+				]</td>
+			</tr>
+		</BOUCLE_un_doublon>
+</BOUCLE_liste_doublons>
+		</tbody>
+	</table>
+</div>
+</B_liste_doublons>
+[#BOITE_OUVRIR{'', success}
+	(#VAL{langonet:message_ok_doublon_}|concat{#ENV{verification}}|concat{_0}|_T)
+#BOITE_FERMER]
+<//B_liste_doublons>
