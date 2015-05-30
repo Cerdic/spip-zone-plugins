@@ -29,7 +29,7 @@ if(!function_exists('autoriser_dissocierdocuments')){
  * @param $opt 
  * @return bool 
  */ 
-function autoriser_dissocierdocuments_dist($faire, $type, $id, $qui, $opt){
+function autoriser_dissocierdocuments($faire, $type, $id, $qui, $opt){
 	if (intval($id)<0 AND $id==-$qui['id_auteur']){
 		return true; 
 	}
