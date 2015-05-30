@@ -36,9 +36,9 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
 		$where = array('date_fin>NOW() AND inscription=1 AND statut="publie"');
 		if ($id) {
 			if (!is_array($id))
-				array_push($where, 'id_evenement=' . intval($id));
+				array_push($where, 'id_evenement_source =' . intval($id));
 			elseif (is_array($id))
-				array_push($where, 'id_evenement IN (' . implode(',', $id) . ')');
+				array_push($where, 'id_evenement_source IN (' . implode(',', $id) . ')');
 		}
 		if ($id_article) {
 			if (!is_array($id_article))
