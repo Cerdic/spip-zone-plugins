@@ -165,7 +165,7 @@ function collecter_occurrences($fichiers) {
 				}
 			}
 			else {
-				spip_log("Ce type de fichier n'est pas scanné : $type_fichier ($fichier)", "langonet");
+				spip_log("Ce type de fichier n'est pas scanné : $type_fichier ($_fichier)", "langonet");
 			}
 		}
 	}
@@ -212,7 +212,7 @@ function identifier_type_fichier($fichier) {
  *
  * 		- 0 : le texte de l'expression matchant le pattern
  * 		- 1 : le module de langue (peut être vide)
- * 		- 2 : le raccourci de l'item de langue
+ * 		- 2 : le raccourci de l'item de langue tel que détecté
  * 		- 3 : suite du texte du raccourci (dénote une occurrence partiellement ou totalement variable)
  * 		- 4 : numéro de colonne de l'occurrence
  *
@@ -232,7 +232,7 @@ function identifier_type_fichier($fichier) {
 function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $ligne, $regexp) {
 	include_spip('inc/outiller');
 
-	list($expression, $module, $raccourci_regexp, $suite, $no_colonne) = $occurrence;
+	list(, $module, $raccourci_regexp, $suite,) = $occurrence;
 	$suite = trim($suite);
 
 	$raccourci_partiellement_variable = false;
@@ -412,7 +412,7 @@ function reperer_items_non_utilises($utilisations, $module, $items_module) {
 			}
 		}
 	}
-$a=1;
+
 	return array(
 			'occurrences_non' => $item_non,
 			'occurrences_non_mais' => $item_non_mais,
@@ -535,7 +535,6 @@ function reperer_items_non_definis($utilisations, $module, $items_module=array()
 									$md5 .= '_' . md5($_raccourci);
 								}
 							}
-							if ($md5 != $_raccourci) var_dump("$md5 - ${_raccourci}");
 							$item_non_mais[$_raccourci] = $utilisations['occurrences'][$_cle];
 							$complement[$_raccourci][0] = _T('langonet:complement_definis_non_mais_cas4', $options);
 							$complement[$_raccourci][1] = $module_utilise_verifiable ? '' : _T('langonet:complement_definis_non_mais_cas4_1', $options);
