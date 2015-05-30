@@ -31,7 +31,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=false,$only_return=false){
 	if((!intval($id_document) && !isset($fichier)) OR ($GLOBALS['meta']['spipmotion_casse'] == 'oui')){
-		spip_log('SPIPMOTION est cassé','spipmotion');
+		spip_log('SPIPMOTION est cassé','spipmotion.'._LOG_ERREUR);
 		return false;
 	}
 
@@ -45,7 +45,9 @@ function inc_spipmotion_recuperer_infos($id_document=false,$fichier=null,$logo=f
 		$extension = $document['extension'];
 	}else{
 		spip_log("SPIPMOTION : recuperation des infos du document $fichier","spipmotion");
-		$extension = strtolower(array_pop(explode('.',basename($fichier))));
+		$extension = explode('.',basename($fichier));
+		$extension = array_pop($extension);
+		$extension = strtolower($extension);
 	}
 
 	$fichier_tmp = $fichier.'_tmp';
