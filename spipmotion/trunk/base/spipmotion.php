@@ -77,7 +77,7 @@ function spipmotion_declarer_tables_interfaces($interfaces){
  * @return array $tables_auxiliaires
  * 		Le tableau des tables auxiliaires complété
  */
-function spipmotion_declarer_tables_auxiliaires($tables_auxiliaires){	
+function spipmotion_declarer_tables_auxiliaires($tables_auxiliaires){
 	$spip_spipmotion_metas = array(
 		"nom" => "VARCHAR (255) NOT NULL",
 		"valeur" => "text DEFAULT ''",
