@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_descriptif' => 'Descriptif :',
-  'label_evenement_anterieurs' => 'Afficher événements antérieurs :',
+	'label_evenement_anterieurs' => 'Afficher événements antérieurs :',
 	'label_prix' => 'Prix :',
 	'label_prix_ht' => 'Prix HT :',
 	'label_prix_objet' => 'Type de prix :',
