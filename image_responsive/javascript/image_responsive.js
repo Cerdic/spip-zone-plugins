@@ -195,10 +195,17 @@ function charger_url_background_responsive(this_img) {
 
 }
 
+function calculer_top_image_responsive() {
+	// Calculer le "top" des images lazy
+	$(".lazy, [data-lazy]").each(function() {
+		_calculer_top_image_responsive($(this));
+	});
+	
+	charger_image_responsive();
+}
 
-function calculer_top_image_responsive(this_img) {
+function _calculer_top_image_responsive(this_img) {
 	var offset = this_img.offset().top;
-	if (scrollT) offset = offset + scrollT;
 	this_img.attr("data-top", offset).addClass("lazy");
 }
 
@@ -208,6 +215,8 @@ var scrollT = false;
 function charger_image_lazy() {
 	if (scrollT) var sTop = scrollT;
 	else var sTop = $(window).scrollTop();
+	
+	console.log(sTop);
 	
 	var hauteur = $(window).height();
 	
@@ -234,10 +243,6 @@ function charger_image_lazy() {
 
 
 function _charger_image_responsive () {
-	// Calculer le "top" des images lazy
-	$(".lazy, [data-lazy]").each(function() {
-		calculer_top_image_responsive($(this));
-	});
 	
 	// Remplacer les URL non lazy
 	$(".image_responsive:not('.lazy'):not('.avec_picturefill')").each(function() {
@@ -250,15 +255,14 @@ function _charger_image_responsive () {
 	});
 
 }
-var timeout_charger_image_responsive;
-$(document).ready(function() {
-	charger_image_responsive();
-});
-// Plus rattrapage:
-$(document).on("ajaxComplete", charger_image_responsive);
 
-$(window).on("load",charger_image_responsive);
-$(window).smartresize(charger_image_responsive);
+$(document).ready(calculer_top_image_responsive);
+$(window).smartresize(calculer_top_image_responsive);
+$(window).on("load",calculer_top_image_responsive);
+$(document).on("ajaxComplete", calculer_top_image_responsive);
+
+
+
 $(window).on("scroll touchmove", charger_image_responsive);
 	
 var didScroll_image_responsive = false
