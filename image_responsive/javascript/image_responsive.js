@@ -216,8 +216,6 @@ function charger_image_lazy() {
 	if (scrollT) var sTop = scrollT;
 	else var sTop = $(window).scrollTop();
 	
-	console.log(sTop);
-	
 	var hauteur = $(window).height();
 	
 	var limite_haut = sTop - hauteur;
