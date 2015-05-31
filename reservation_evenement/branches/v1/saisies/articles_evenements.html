@@ -12,25 +12,25 @@
 <select name="#ENV{nom}[(#ENV{multiple}|?{\[\]})]" id="champ_[(#ENV{nom}|saisie_nom2classe)]"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="#ENV{size,10}"][ disabled="(#ENV{disable})"]>
   [(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
   <option value="">[(#ENV{option_intro})]</option>]
-  <BOUCLE_articles(ARTICLES){par num titre, titre}{id_article ?IN #ENV{id_article}}{id_rubrique ?IN #ENV{id_rubrique}}{statut?}{recherche?}{tout}>
+  <BOUCLE_articles(ARTICLES){id_article ?IN #ENV{id_article}}{id_rubrique ?IN #ENV{id_rubrique}}{statut?}{recherche?}{tout}{par num titre, titre}>
     #SET{evenements_source,#ARRAY}
     <B_evenements>
       <optgroup label="#TITRE">
         #SET{titre,#TITRE}
-        <BOUCLE_evenements(EVENEMENTS){id_article}{date_debut>
-          #GET{date}}{par date_debut}>
+        <BOUCLE_evenements(EVENEMENTS){id_article}{date_fin>#GET{date}}{par date_debut}{inverse #GET{senstri}}>
           #SET{date_fin,#DATE_FIN}
-          <BOUCLE_evenements_lies(EVENEMENTS){id_evenement_source=#ID_EVENEMENT}{!par date_fin}{inverse #ENV{senstri}}{0,1}>
+          <BOUCLE_evenements_lies(EVENEMENTS){id_evenement_source=#ID_EVENEMENT}{!par date_fin}{0,1}>
             #SET{date_fin,#DATE_FIN}
           </BOUCLE_evenements_lies>
-            [(#ID_EVENEMENT_SOURCE|=={0}|oui)
+            [(#ID_EVENEMENT_SOURCE|=={0}|oui|et{#ID_EVENEMENT|in_array{#GET{evenements_source}}|non})
               <INCLURE{fond=saisies/inc_articles_evenements,id_article,id_evenement,id_evenement_source,titre,titre_article=#GET{titre},date_debut,date_fin=#GET{date_fin},env}/>
               #SET{evenements_source,#GET{evenements_source}|push{#ID_EVENEMENT}}
             ]
             [(#ID_EVENEMENT_SOURCE|!={0}|oui|et{#ID_EVENEMENT_SOURCE|in_array{#GET{evenements_source}}|non})
               <INCLURE{fond=saisies/inc_articles_evenements,id_article,id_evenement=#ID_EVENEMENT_SOURCE,id_evenement_source,titre,titre_article=#GET{titre},date_debut=#INFO_DATE_DEBUT{evenement,#ID_EVENEMENT_SOURCE},date_fin=#GET{date_fin},env}/>
-            ]
             #SET{evenements_source,#GET{evenements_source}|push{#ID_EVENEMENT_SOURCE}}
+            ]
+            
           </BOUCLE_evenements>
       </optgroup>
     <B_evenements>
