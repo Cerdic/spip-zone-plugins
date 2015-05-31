@@ -197,21 +197,24 @@ function charger_url_background_responsive(this_img) {
 
 
 function calculer_top_image_responsive(this_img) {
-	this_img.attr("data-top", this_img.offset().top).addClass("lazy");
+	var offset = this_img.offset().top;
+	if (scrollT) offset = offset + scrollT;
+	this_img.attr("data-top", offset).addClass("lazy");
 }
 
-function charger_image_lazy(sTop) {
-	if (typeof(sTop) == 'undefined') var sTop = $(window).scrollTop();
+// valeur du scrollTop que l'on peut forcer par un outil externe (notamment skrollr)
+var scrollT = false;
+
+function charger_image_lazy() {
+	if (scrollT) var sTop = scrollT;
+	else var sTop = $(window).scrollTop();
+	
 	var hauteur = $(window).height();
 	
 	var limite_haut = sTop - hauteur;
 	if (limite_haut < 0) limite_haut = 0;
 	
 	var limite_bas = sTop + 1.5*hauteur;
-
-	
-
-		//console.log(sTop);
 
 	$(".image_responsive.lazy[data-top]").each(function() {
 		this_img = $(this);
@@ -229,7 +232,8 @@ function charger_image_lazy(sTop) {
 	});	
 }
 
-function charger_image_responsive () {
+
+function _charger_image_responsive () {
 	// Calculer le "top" des images lazy
 	$(".lazy, [data-lazy]").each(function() {
 		calculer_top_image_responsive($(this));
@@ -251,17 +255,21 @@ $(document).ready(function() {
 	charger_image_responsive();
 });
 // Plus rattrapage:
-$(document).on("ajaxComplete", function() {
-	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
-});
+$(document).on("ajaxComplete", charger_image_responsive);
 
-$(window).on("load",function() {
-	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
-});
-$(window).smartresize(function() {
-	timeout_charger_image_responsive = setTimeout("charger_image_responsive()",200);
-});
-$(window).on("scroll touchmove", function() {
-	charger_image_lazy();
-});
+$(window).on("load",charger_image_responsive);
+$(window).smartresize(charger_image_responsive);
+$(window).on("scroll touchmove", charger_image_responsive);
 	
+var didScroll_image_responsive = false
+
+function charger_image_responsive() {
+	didScroll_image_responsive = true;
+}
+setInterval(function() {
+    if(didScroll_image_responsive) {
+		didScroll_image_responsive = false;
+		_charger_image_responsive()
+    }
+}, 100);
+
