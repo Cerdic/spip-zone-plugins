@@ -25,7 +25,10 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
 
     // tester l'autorisation d'ajout de document
     include_spip('inc/autoriser');
-    if (!autoriser('joindredocument',$objet,$id_objet))
+    /* S'il n'y a pas d'id_objet, c'est qu'on crée un nouveau
+       document. Les autorisations seront gérées en aval dans
+       ajouter_document. */
+    if ($id_objet AND (!autoriser('joindredocument',$objet,$id_objet)))
         return false;
 
     // On va créer le tableau des documents.
