@@ -30,16 +30,16 @@ function action_doc2img_convert_dist(){
 	$arg = explode('-',$arg);
 	list($id_document, $action) = $arg;
 
-    if ($id_document = intval($id_document)){
+	if ($id_document = intval($id_document)){
 		include_spip('action/facd_ajouter_conversion');
 		facd_ajouter_conversion_file($id_document,'doc2img_convertir',null,$action,'doc2img');
 		$conversion_directe = charger_fonction('facd_convertir_direct','inc');
 		$conversion_directe();
-    	include_spip('inc/invalideur');
-    	suivre_invalideur("id='id_document/$id_document'");
-    }
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_document/$id_document'");
+	}
 
-    if(_request('redirect')){
+	if(_request('redirect')){
 		$GLOBALS['redirect'] = str_replace('&amp;','&',urldecode(_request('redirect')));
 	}
 }

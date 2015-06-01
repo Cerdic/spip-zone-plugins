@@ -19,7 +19,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function doc2img_post_edition($flux) {
 	$id_document = $flux['args']['id_objet'];
-	spip_log($flux,'testlogo.'._LOG_ERREUR);
 	if ((in_array($flux['args']['action'], array('ajouter_document','document_copier_local')) || (in_array($flux['args']['action'], array('modifier')) && isset($flux['data']['fichier'])))
 		&& ($flux['args']['doc2img_ok'] != 'ok')
 		&& (lire_config('doc2img/conversion_auto') == "on")){
@@ -61,7 +60,7 @@ function doc2img_formulaire_charger($flux) {
 	if($flux['args']['form'] == 'configurer_doc2img'){
 		if (!class_exists('Imagick')) {
 			$flux['editable'] = false;
-			$flux['message_erreur'] = _T('doc2img:erreur_class_imagick');	
+			$flux['message_erreur'] = _T('doc2img:erreur_class_imagick');
 		}
 	}
 	return $flux;

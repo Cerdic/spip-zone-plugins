@@ -29,15 +29,15 @@ function doc2img_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_tables', array('spip_documents')),
 		array('doc2img_creer_config')
 	);
-	
+
 	$maj['0.3'] = array(
 		array('doc2img_creer_config')
 	);
-	
+
 	$maj['0.93'] = array(
 		array('doc2img_creer_config')
 	);
-	
+
 	$maj['0.94'] = array(
 		array('maj_tables', array('spip_documents')),
 		array('doc2img_creer_config'),

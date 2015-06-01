@@ -25,9 +25,9 @@
 		[(#FICHIER|image_reduire{#ENV{largeur,640},#ENV{hauteur,0}}|inserer_attribut{alt,#VAL{doc2img:info_alt_image}|_T{#ARRAY{titre,#GET{titre},page,#PAGE}}|attribut_html})]
 		[(#ENV{liens_documents,oui}|!={non}|oui)</a>]
 	</BOUCLE_d2c>
-    [(#ENV{no_desc}|non)[<p>(#GRAND_TOTAL|singulier_ou_pluriel{doc2img:info_desc_page,doc2img:info_desc_pages})</p>]]
-    [(#ENV{download}|=={oui}|ou{#ENV{telecharger}|=={oui}}|oui)<p><a href="[(#URL_ACTION_AUTEUR{acceder_document,#_document:ID_DOCUMENT}|parametre_url{file,#_document:FICHIER**}|parametre_url{cle,[(#VAL{#_document:ID_DOCUMENT}|concat{','}|concat{#_document:FICHIER**}|calculer_cle_action)]})]" class="btn[ (#ENV{class_btn_download})]"><:bouton_download:></a></p>]
-    [(#ENV{no_pagination}|non)[<div class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</div>]]
+	[(#ENV{no_desc}|non)[<p>(#GRAND_TOTAL|singulier_ou_pluriel{doc2img:info_desc_page,doc2img:info_desc_pages})</p>]]
+	[(#ENV{download}|=={oui}|ou{#ENV{telecharger}|=={oui}}|oui)<p><a href="[(#URL_ACTION_AUTEUR{acceder_document,#_document:ID_DOCUMENT}|parametre_url{file,#_document:FICHIER**}|parametre_url{cle,[(#VAL{#_document:ID_DOCUMENT}|concat{','}|concat{#_document:FICHIER**}|calculer_cle_action)]})]" class="btn[ (#ENV{class_btn_download})]"><:bouton_download:></a></p>]
+	[(#ENV{no_pagination}|non)[<div class="pagination">(#PAGINATION{#ENV{type_pagination,page}})</div>]]
 	</div>
 </B_d2c>
 </BOUCLE_document>
