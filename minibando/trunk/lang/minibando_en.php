@@ -7,6 +7,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
+	'cfg_titre_minibando' => 'Settings',
+
+	// L
+	'label_disposition' => 'Layout',
+	'label_disposition_horizontale' => 'Horizontal',
+	'label_disposition_verticale' => 'Vertical',
+
 	// M
 	'mode_debug' => 'Debug mode',
 	'mode_inclure' => 'Inclusion mode',
@@ -15,7 +23,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_debug' => 'Debug',
-	'titre_outils_rapides' => 'Creation'
+	'titre_outils_rapides' => 'Creation',
+	'titre_page_configurer_minibando' => 'Configure the minibando'
 );
 
 ?>
