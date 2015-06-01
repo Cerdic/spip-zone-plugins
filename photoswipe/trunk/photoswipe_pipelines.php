@@ -17,17 +17,18 @@ function photoswipe_insert_head($flux){
 // configuration
 photoswipe = {
   path: "' . find_in_path('lib/photoswipe/'). '/",
+  selector: "img[data-photo],a[type]",
   gallery: true, // galerie
-  debug: false, // galerie
+  debug: true, // debug
 };
 $(function() {
     photoswipe_init();
     if (!!$.fn.on) {
-      $(document).on("mouseover", "img[data-photo]", photoshow_hover);
-      $(document).on("click", "img[data-photo]", photoshow);
+      $(document).on("mouseover", photoswipe.selector, photoshow_hover);
+      $(document).on("click", photoswipe.selector, photoshow);
     } else if (!!$.fn.live) {
-      $("img[data-photo]").live("mouseover", photoshow_hover);
-      $("img[data-photo]").live("click", photoshow);
+      $(photoswipe.selector).live("mouseover", photoshow_hover);
+      $(photoswipe.selector).live("click", photoshow);
     }
 });
 </script>

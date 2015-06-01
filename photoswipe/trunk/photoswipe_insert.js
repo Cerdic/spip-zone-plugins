@@ -16,13 +16,15 @@ function photoshow() {
     // gallery
     var idx = 0;
     if (photoswipe.gallery) {
-        $('img[data-photo]')
+        $(photoswipe.selector)
             .each(function (i, e) {
                 var b = photoshow_identify(e);
                 if (b) {
-                    imgs.push(b);
-                    if (b.src == a.src) index = idx;
-                    idx ++;
+                    if (!a.rel || b.rel == a.rel) {
+                        imgs.push(b);
+                        if (b.src == a.src) index = idx;
+                        idx ++;
+                    }
                 }
             });
     } else {
@@ -38,35 +40,49 @@ function photoshow() {
 }
 
 function photoshow_identify(me) {
-    var photosrc = $(me).attr('data-photo');
+    var me = $(me), a = {};
+    if (me.is('a')) {
+        if (!me.attr('type').match(/image\/(jpeg|gif|png)/)) {
+            return null;
+        }
+        a.src = me.attr('href');
+        a.w = me.attr('data-photo-w');
+        a.h = me.attr('data-photo-h');
+        if (!(a.src && a.w && a.h)) {
+            return;
+        }
+        a.thumbnail = me.find('img');
+        a.rel = me.attr('rel') || a.thumbnail.attr('rel');
+    } else if (me.is('img')) {
+        var photosrc = me.attr('data-photo');
+        a.thumbnail = me;
+        if (photosrc) {
+            a.src = photosrc.replace(/__\.__/g, '.');
+            a.w = parseInt(me.attr('data-photo-w'));
+            a.h = parseInt(me.attr('data-photo-h'));
+        } else {
+            a.src = me.attr('src');
+            a.w = parseInt(me.attr('naturalWidth'));
+            a.h = parseInt(me.attr('naturalHeight'));
+        }
+        a.rel = me.attr('rel');
 
-    if (photosrc) {
-        a = {
-            src: photosrc.replace(/__\.__/g, '.'),
-            w: parseInt($(me).attr('data-photo-w')),
-            h: parseInt($(me).attr('data-photo-h')),
-        };
     } else {
-        a = {
-            src: me.src,
-            w: parseInt(me.naturalWidth),
-            h: parseInt(me.naturalHeight),
-        };
+        // cas non prevu !
+        return;
     }
-
-    a.thumbnail = me;
 
     // recuperer la legende
     a.title = "";
 
     // 1. figure / figcaption
-    var p = $(me).parents('figure').find('figcaption');
+    var p = me.parents('figure').find('figcaption');
     if (p.length) {
       a.title = p.html();
     }
     // 2. dl/dt (modèle spip…)
     if (!a.title) {
-      $(me)
+      me
       .parent('dt')
       .parent('dl')
       .find('dt.spip_doc_titre, dd.spip_doc_descriptif')
@@ -76,11 +92,13 @@ function photoshow_identify(me) {
     }
     // 3. title
     if (!a.title) {
-      a.title = $(me).attr('title');
+      a.title = me.attr('title');
     }
 
     // on verifie que la taille du fichier grand est superieure a celle du fichier petit
-    if (a.w > $(me).width() || a.w > $(window).width() || a.h > $(window).height()) return a;
+    if (a.w > me.width() || a.w > $(window).width() || a.h > $(window).height()) {
+        return a;
+    }
 }
 
 function photoshow_gallery(items, index) {
@@ -109,7 +127,9 @@ function photoshow_gallery(items, index) {
         },
         getThumbBoundsFn: function (index) {
             // find thumbnail element
-            var thumbnail = items[index].thumbnail;
+            var thumbnail = items[index].thumbnail[0];
+console.log(thumbnail);
+            if (!thumbnail) return;
 
             // get window scroll Y
             var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -137,10 +157,10 @@ function photoshow_gallery(items, index) {
 function photoswipe_init() {
 
     $('head')
-        .append('<link rel="stylesheet" href="' + photoswipe.path + 'photoswipe.css"> \r\r<!-- Skin CSS file (styling of UI - buttons, caption, etc.)\r     In the folder of skin CSS file there are also:\r     - .png and .svg icons sprite, \r     - preloader.gif (for browsers that do not support CSS animations) -->\r<link rel="stylesheet" href="' + photoswipe.path + '/default-skin/default-skin.css"> \r\r<!-- Core JS file -->\r<script src="' + photoswipe.path + '/photoswipe.min.js"></script> \r\r<!-- UI JS file -->\r<script src="' + photoswipe.path + '/photoswipe-ui-default.min.js"></script> ');
+        .append('<link rel="stylesheet" href="' + photoswipe.path + 'photoswipe.css"> <link rel="stylesheet" href="' + photoswipe.path + '/default-skin/default-skin.css"> <script src="' + photoswipe.path + '/photoswipe.min.js"></script> <script src="' + photoswipe.path + '/photoswipe-ui-default.min.js"></script> ');
 
     $('<div>')
-        .html('<!-- Root element of PhotoSwipe. Must have class pswp. -->\r<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">\r\r    <!-- Background of PhotoSwipe. \r         It’s a separate element as animating opacity is faster than rgba(). -->\r    <div class="pswp__bg"></div>\r\r    <!-- Slides wrapper with overflow:hidden. -->\r    <div class="pswp__scroll-wrap">\r\r        <!-- Container that holds slides. \r            PhotoSwipe keeps only 3 of them in the DOM to save memory.\r            Don’t modify these 3 pswp__item elements, data is added later on. -->\r        <div class="pswp__container">\r            <div class="pswp__item"></div>\r            <div class="pswp__item"></div>\r            <div class="pswp__item"></div>\r        </div>\r\r        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->\r        <div class="pswp__ui pswp__ui--hidden">\r\r            <div class="pswp__top-bar">\r\r                <!--  Controls are self-explanatory. Order can be changed. -->\r\r                <div class="pswp__counter"></div>\r\r                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>\r\r                <button class="pswp__button pswp__button--share" title="Share"></button>\r\r                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>\r\r                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>\r\r                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->\r                <!-- element will get class pswp__preloader--active when preloader is running -->\r                <div class="pswp__preloader">\r                    <div class="pswp__preloader__icn">\r                      <div class="pswp__preloader__cut">\r                        <div class="pswp__preloader__donut"></div>\r                      </div>\r                    </div>\r                </div>\r            </div>\r\r            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">\r                <div class="pswp__share-tooltip"></div> \r            </div>\r\r            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">\r            </button>\r\r            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">\r            </button>\r\r            <div class="pswp__caption">\r                <div class="pswp__caption__center"></div>\r            </div>\r\r        </div>\r\r    </div>\r\r</div>')
+        .html('<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true"> <div class="pswp__bg"></div> <div class="pswp__scroll-wrap"> <div class="pswp__container"> <div class="pswp__item"></div> <div class="pswp__item"></div> <div class="pswp__item"></div> </div> <div class="pswp__ui pswp__ui--hidden"> <div class="pswp__top-bar"> <div class="pswp__counter"></div> <button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title="Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button> <div class="pswp__preloader"> <div class="pswp__preloader__icn"> <div class="pswp__preloader__cut"> <div class="pswp__preloader__donut"></div> </div> </div> </div> </div> <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"> <div class="pswp__share-tooltip"></div> </div> <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"> </button> <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"> </button> <div class="pswp__caption"> <div class="pswp__caption__center"></div> </div> </div> </div></div>')
         .appendTo('body');
 
 
