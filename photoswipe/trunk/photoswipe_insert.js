@@ -3,6 +3,7 @@ function photoshow_hover() {
     var a = photoshow_identify(me);
     if (a) {
         $(me).addClass('photoshow');
+        $(me).removeClass('cboxElement'); // remove mediabox!
     }
 }
 function photoshow() {
