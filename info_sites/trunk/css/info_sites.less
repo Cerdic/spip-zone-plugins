@@ -15,6 +15,17 @@ a, button, input, textarea, select, option{
 	box-shadow:0 !important;
 }
 
+a{
+	color:@orange;
+
+	&:hover,
+	&:active,
+	&:focus,
+	&:visited{
+		color:darken(@orange, 5%);
+	}
+}
+
 a[rel*=home]{
 	text-decoration:none !important;
 }
@@ -88,7 +99,7 @@ a[rel*=home]{
 
 h1 {
 	small {
-		color: @white;
+		color: @orange;
 	}
 }
 
@@ -184,6 +195,23 @@ table {
 
 				table {
 					color: @black;
+				}
+			}
+
+			&.type_site{
+				span{
+					display: inline-block;
+					width:10px;
+					height: 10px;
+					background: #98DF00;
+					margin-right: 5px;
+
+					&.Rec{
+						background: #29B6D6;
+					}
+					&.Pré-prod{
+						background: orange;
+					}
 				}
 			}
 		}
@@ -321,7 +349,8 @@ table {
     border-color: darken(@bg-primary, 5%); // #196fa5;
 }
 .btn-success {
-
+    background-color: @bg-success;
+    border-color: darken(@bg-success, 5%); // #196fa5;
     .badge {
         color: @bg-success; // @bg-success;
         background-color: white;
@@ -330,6 +359,7 @@ table {
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active,
 .open >.btn-success.dropdown-toggle {
     color: white;
+    background-color: darken(@bg-success, 5%); // #196fa5;
 }
 .btn-success:active, .btn-success.active, .open >.btn-success.dropdown-toggle {
     background-image: none;
@@ -575,6 +605,10 @@ input, textarea, select{
 	box-shadow:0;
 }
 
+input:focus{
+	box-shadow:none !important;
+}
+
 textarea{
 	resize:vertical
 }
@@ -618,7 +652,7 @@ input[type="radio"], input[type="checkbox"]{
 						width: 83%;
 						input {
 							width: 100%;
-							border: 0 none;
+							border: 1px solid #DBDBDB;
 						}
 					}
 
@@ -627,6 +661,17 @@ input[type="radio"], input[type="checkbox"]{
 						float: right;
 						width: auto;
 						padding: 0;
+
+						button{
+							background-color:@bg-bright;
+    						border-color: darken(@bg-bright, 5%);
+
+    						&:hover{
+    							color: @gray-light;
+							    background-color: lighten(@gray-light, 41.5%);
+							    border-color: lighten(@gray-light, 34.5%);
+    						}
+						}
 					}
 				}
 			}
@@ -640,6 +685,8 @@ input[type="radio"], input[type="checkbox"]{
 	padding-top: 20px;
 	background-color: @white;
 	overflow: hidden;
+	border:1px solid @border;
+	border-top: 0;
 }
 
 
@@ -660,7 +707,9 @@ input[type="radio"], input[type="checkbox"]{
 
 
 #menu {
-	background: @bg-dark;
+	background: @orange;
+	border:1px solid @border;
+	border-bottom: 0;
 	padding:0;
 
 	&.menu_pages {
@@ -732,11 +781,10 @@ input[type="radio"], input[type="checkbox"]{
 	background-repeat: no-repeat;
 	background-position: 64% 47%;
 	background-size: auto 70%;
-
 	position:absolute;
 	bottom:0;
 	width:100%;
-	background-color: @bg-dark;
+	background: @orange;
 
 	a {
 		color: @white;
