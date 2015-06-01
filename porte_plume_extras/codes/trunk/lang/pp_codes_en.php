@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_activer_extension_sur' => 'Activate on which toolbars?',
-	'titre_configurer_pp_codes' => 'Configurer the Porte Plume extension for special display codes'
+	'titre_configurer_pp_codes' => 'Configure the Porte Plume extension for special display codes' # RELIRE
 );
 
 ?>
