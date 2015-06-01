@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_prive' => 'Publication d’articles',
 	'article_prive_admins_restreints' => '<strong>Administrateurs restreints</strong> : Les administrateurs restreints reçoivent les notifications lors de proposition d’articles dans leur rubrique. Pour les administrateurs généralistes, voir <a href="?exec=configurer_interactions#suivi_edito_non">l’outil par défaut de SPIP</a>.',
 	'article_prive_auteurs' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications lors de la proposition, publication ou suppression de leur(s) article(s).',
+	'article_prive_auteurs_refus' => '<strong>Auteurs</strong> : les auteurs reçoivent les notifications lors du refus de publications de leur(s) article(s).',
 	'article_prive_publieur' => 'Si l’un des auteurs est celui qui publie l’article, ne pas le prévenir.',
 	'article_propose_detail' => 'L’article "@titre@" est proposé à la publication
 	depuis',
@@ -27,6 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_valide_sujet' => '[@nom_site_spip@] VALIDE : @titre@',
 	'article_valide_titre' => 'Article validé
 	--------------',
+	'article_refuse_detail' => 'L’article "@titre@" vient d’être refusé par @connect_nom@.',
+	'article_refuse_sujet' => '[@nom_site_spip@] REFUSE : @titre@',
+	'article_refuse_titre' => 'Article refusé',
+	'--------------',
 	'article_valide_url' => 'En attendant, il est visible à cette adresse temporaire :',
 
 	// B

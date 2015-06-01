@@ -60,7 +60,7 @@ function notifications_notifications_destinataires($flux){
 	$quoi = $flux['args']['quoi'];
 	$options = $flux['args']['options'];
 
-	// proposition d'article prevenir les admins restreints
+	// proposition d'article prevenir les admins restreints pour le passage de proposé à publié
 	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_admins_restreints']
 		AND $options['statut']=='prop' AND $options['statut_ancien']!='publie' // ligne a commenter si vous voulez prevenir de la publication
 	){
@@ -89,6 +89,50 @@ function notifications_notifications_destinataires($flux){
 				$id_rubrique = $id_parent;
 			}
 			spip_log("Prop article > admin restreint de " . join(',', $hierarchie), 'notifications');
+
+			//les admins de la rub et de ses parents 
+			$result_email = sql_select(
+				"auteurs.email,auteurs.id_auteur,lien.id_objet as id_rubrique",
+				"spip_auteurs AS auteurs JOIN spip_auteurs_liens AS lien ON auteurs.id_auteur=lien.id_auteur ",
+				"lien.objet='rubrique' AND ".sql_in('lien.id_objet',sql_quote($hierarchie))." AND auteurs.statut='0minirezo'");
+
+			while ($qui = sql_fetch($result_email)){
+				spip_log($options['statut'] . " article > admin restreint " . $qui['id_auteur'] . " de la rubrique" . $qui['id_rubrique'] . " prevenu", 'notifications');
+				$flux['data'][] = $qui['email'];
+			}
+		}
+
+	}
+
+	// notification d'article pour le passage de proposé à refusé
+	if ($quoi=='instituerarticle' AND $GLOBALS['notifications']['prevenir_auteurs_articles_refus'] 
+		AND $options['statut']=='refuse' AND in_array($options['statut_ancien'], array('prop','publie')) // ligne a commenter si vous voulez prevenir de la publication
+	){
+
+		$id_article = $flux['args']['id'];
+		include_spip('base/abstract_sql');
+		$t = sql_fetsel("id_rubrique", "spip_articles", "id_article=" . intval($id_article));
+		$id_rubrique = $t['id_rubrique'];
+		if ($GLOBALS['notifications']['limiter_rubriques']){
+			$limites = $GLOBALS['notifications']['limiter_rubriques'];
+			$limiter_rubriques = explode(",",$limites);
+		} else {
+			$limiter_rubriques = array($id_rubrique);
+		}
+
+		if (in_array($id_rubrique,$limiter_rubriques))
+		{
+			while ($id_rubrique){
+				$hierarchie[] = $id_rubrique;
+				$res = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
+				if (!$res){ // rubrique inexistante
+					$id_rubrique = 0;
+					break;
+				}
+				$id_parent = $res['id_parent'];
+				$id_rubrique = $id_parent;
+			}
+			spip_log("Refuse article > admin restreint de " . join(',', $hierarchie), 'notifications');
 
 			//les admins de la rub et de ses parents 
 			$result_email = sql_select(

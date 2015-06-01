@@ -32,6 +32,10 @@ function notifications_instituerarticle_dist($quoi, $id_article, $options) {
 	if ($options['statut'] == 'prop' AND $options['statut_ancien'] != 'publie')
 		$modele = "notifications/article_propose";
 
+	if ($options['statut'] == 'refuse' AND in_array($options['statut_ancien'],array('prop','publie'))) {
+		$modele = "notifications/article_refuse";
+	}
+
 	if ($modele){
 		$destinataires = array();
 		if ($GLOBALS['meta']["suivi_edito"] == "oui")
