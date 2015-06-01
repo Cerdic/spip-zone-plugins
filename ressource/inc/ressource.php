@@ -61,7 +61,9 @@ function inc_ressource_dist($r) {
 		}
 	}
 
-	// 2. constituer les meta-donnees associees a $res[src]
+	// 2. title => titre, description=>descriptif.... (TODO)
+
+	// 3. constituer les meta-donnees associees a $res[src]
 	$meta = ressource_meta($attrs);
 
 	// 4. traiter les parametres d'image / logo / vignette / resize
@@ -133,8 +135,16 @@ function ressource_meta($res) {
 		/* recuperer un album flickr */
 		if (preg_match(',^https?://(www\.)?flickr\.com/.*/sets/(\d+),', $src, $r)) {
 			$meta['album'] = $r[2];
+			if (strlen($class = array_shift(explode(' ', $meta['class'])))
+			AND $f = 'modeles/album_flickr'.'.'.$class
+			AND find_in_path($f.'.html')
+			AND $html = recuperer_fond($f, $meta)) {
+				$meta['embed'] = $html;
+			} else
+			
 			if ($html = recuperer_fond('modeles/album_flickr', $meta)) {
 				$meta['embed'] = $html;
+				unset($meta['title']); // title utilise par l'embed
 			}
 		}
 
