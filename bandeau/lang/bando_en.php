@@ -35,7 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'texte_redirection_adresses_secondaires' => 'The ALIAS addresses are alternative URLs that can also be used for accessing your site.
   These addresses will be automatically redirected to the main address. Enter one address per line',
-	'titre_config_langage' => 'Configurer la langue',
 	'titre_configurer_preferences' => 'Configure your preferences',
 	'titre_identite_site' => 'Site’s identity',
 	'titre_infos_perso' => 'My personal details'
