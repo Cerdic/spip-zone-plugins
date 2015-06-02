@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 0
+	'0' => '--------------',
+
 	// A
 	'alt_logo_conf' => 'Logo du plugin Notifications',
 	'article_prive' => 'Publication d’articles',
@@ -23,15 +26,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_publie_sujet' => '[@nom_site_spip@] PUBLIE : @titre@',
 	'article_publie_titre' => 'Article publié
 	--------------',
+	'article_refuse_detail' => 'L’article "@titre@" vient d’être refusé par @connect_nom@.',
+	'article_refuse_sujet' => '[@nom_site_spip@] REFUSE : @titre@',
+	'article_refuse_titre' => 'Article refusé',
 	'article_valide_date' => 'Sous réserve de changement, cet article sera publié',
 	'article_valide_detail' => 'L’article "@titre@" a été validé par @connect_nom@.',
 	'article_valide_sujet' => '[@nom_site_spip@] VALIDE : @titre@',
 	'article_valide_titre' => 'Article validé
 	--------------',
-	'article_refuse_detail' => 'L’article "@titre@" vient d’être refusé par @connect_nom@.',
-	'article_refuse_sujet' => '[@nom_site_spip@] REFUSE : @titre@',
-	'article_refuse_titre' => 'Article refusé',
-	'--------------',
 	'article_valide_url' => 'En attendant, il est visible à cette adresse temporaire :',
 
 	// B
