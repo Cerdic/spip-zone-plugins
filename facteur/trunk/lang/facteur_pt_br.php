@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_secure_non' => 'náo',
 	'facteur_smtp_secure_ssl' => 'SSL',
 	'facteur_smtp_secure_tls' => 'TLS',
-	'facteur_smtp_sender' => 'Retorno dos errs (opcional)',
+	'facteur_smtp_sender' => 'Retorno dos erros (opcional)',
 	'facteur_smtp_sender_descriptif' => 'Define no cabeçalho da mensagem o endereço de e-mail de retorno dos erros (ou Return-Path) e, quando de um envio pelo método SMTP, define também o endereço do remetente.',
 	'facteur_smtp_username' => 'Nome do usuário:',
 
