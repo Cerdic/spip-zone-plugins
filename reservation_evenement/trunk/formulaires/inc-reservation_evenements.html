@@ -2,19 +2,19 @@
 <li class='editer editer_id_evenement[ (#ENV**{erreurs}|table_valeur{id_evenement}|oui)erreur]'>
     [<div class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_evenement})</div>]
 <BOUCLE_art_or(DATA){source tableau,#ENV{evenements}} {id_evenement_source = 0} {par date_debut}>
-    #SET{prix,#VALEUR{prix}}#VALEUR{prix}
+    #SET{prix,#VALEUR{prix}}
 [(#REM) Si le plugin prix objets est activé on regarde si il y a un prix attaché à l'évenement]
     #SET{prix2,''}
     <BOUCLE_prix(PRIX_OBJETS?){id_objet=#ID_EVENEMENT}{objet=evenement}{0,1}>
-     #SET{prix2,#PRIX**}
+     #SET{prix2,#PRIX}
     </BOUCLE_prix>
         [(#REM) ou à l'article]
         <BOUCLE_prix_article(PRIX_OBJETS?){id_objet=#ID_ARTICLE}{objet=article}{0,1}>
-        #SET{prix2,#PRIX**}
+        #SET{prix2,#PRIX}
         </BOUCLE_prix_article>
          [(#REM) Sinon, si l'événement ne contient pas de prix, on prend le prix du champs prix l'article]
             <BOUCLE_art(ARTICLES){id_article=#VALEUR{id_article}}{si #GET{prix}|=={0}|ou{#GET{prix}|=={0.00}}|oui}>
-                #SET{prix2,#PRIX**}
+                #SET{prix2,#PRIX}
             </BOUCLE_art>
                   [(#REM) sinon on prend le prix du champs prix de l'événement]
                    #SET{prix2,#GET{prix}}
@@ -31,7 +31,7 @@
         <strong>([(#DATE_DEBUT|affdate_debut_fin{#GET{date_fin},#HORAIRE})])</strong>
     [<div class="location" itemprop="location"><span class="lieu">(#LIEU)</span>[<br /><span class="adresse">(#ADRESSE|PtoBR)</span>]</div>]
 	[(#PLACES|>{0}|oui)<INCLURE{fond=inclure/places_disponibles,id_evenement,places,statut=#VAL|statuts_complet}/>]
-  <INCLURE{fond=formulaires/inc-reservation_evenements_champ,id_evenement, prix = #GET{prix2},evenements=#ENV{id_evenement}}/>
+  <INCLURE{fond=formulaires/inc-reservation_evenements_champ,id_evenement, prix=#GET{prix2},evenements=#ENV{id_evenement}}/>
 </BOUCLE_art_or>
 </li>
 </B_art_or>

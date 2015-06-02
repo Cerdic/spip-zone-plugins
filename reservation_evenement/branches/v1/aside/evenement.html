@@ -3,7 +3,7 @@
 <div class="well">
 	<ul class="nav nav-list">
 		<li class="nav-header"><:agenda:evenements:></li>
-		<BOUCLE_evenements_article(EVENEMENTS) {id_article} {!par date} {0,10}>
+		<BOUCLE_evenements_article(EVENEMENTS) {id_article} {!par date} {date_fin>#DATE} {0,10}>
 		<li><a href="#URL_EVENEMENT"[ class="(#EXPOSE)"]>#TITRE</a></li>
 		</BOUCLE_evenements_article>
 	</ul>

@@ -8,7 +8,7 @@
 		descriptif, [[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times;</strong> ](#DESCRIPTIF*|supprimer_numero)],
 		quantite, #QUANTITE,
 		prix, #PRIX*,
-		statut,#STATUT		
+		statut,#STATUT
 	})]})]
 	 [(#SET{total,[(#GET{total}|plus{#PRIX*})]})]
 	</BOUCLE_reservation_details>
@@ -32,7 +32,7 @@
             <tr>
                <th class="description"><:reservation:designation:></th>
                [(#GET{total}|>{0}|oui)<th class="montant"><:reservation:montant:></th>]
-               <th class="statut"><:reservation:label_statut:></th>               
+               <th class="statut"><:reservation:label_statut:></th>
             </tr>
          </thead>
          <tbody>
@@ -42,14 +42,14 @@
                [(#GET{total}|>{0}|oui)<td class="montant">[(#VALEUR|table_valeur{prix}|appliquer_filtre{prix_formater,[(#VALEUR|table_valeur{prix})]})]</td>]
                <td class="statut">
                    [(#VAL{reservation:texte_statut[_(#VALEUR{statut}|trim)]}|_T)]
-                   </td>               
+                   </td>
             </tr>
             </BOUCLE_details>
          </tbody>
-         [<tfoot>
+         [(#GET{total}|>{0}|oui)<tfoot>
             <tr class="total_ttc">
                <td class="descriptif">[(#PLUGIN{prix}|?{<:prix:label_total_ttc:>,<:reservation:total:>})]</td>
-               <td class="montant">(#GET{total}|appliquer_filtre{prix_formater,#GET{total}|})</td>
+               <td class="montant">[(#GET{total}|appliquer_filtre{prix_formater,#GET{total}|})]</td>
             </tr>
          </tfoot>]
       </table>

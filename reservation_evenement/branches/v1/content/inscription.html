@@ -1,0 +1,11 @@
+<article class="entry evenement vevent id_#ID_EVENEMENT" id="evenement_#ID_EVENEMENT" itemscope itemtype="http://schema.org/Event">
+    <header class="cartouche">
+        <h1><:reservation:inscription:></h1>
+    </header>
+  <div class="main">
+    <div class="ajax">
+      #FORMULAIRE_RESERVATION{#ENV{id_evenement},#ENV{id_article},#ENV{retour}}
+    </div>
+#ENV
+  </div>
+</article>

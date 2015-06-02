@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'Cette adresse email est déjà utilisé, veuillez vous connecter ou utliser une autre adresse',
 	'evenement_cloture' => 'Évenement clôturé',
 	'explication_client' => 'Choissisez un client parmis les auteurs ou saisissez les données du client ci-bas',
-	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers 
+	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
@@ -44,6 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_reservations' => '@nb@ réservations',
 	'info_reservations_auteur' => 'Les réservations de cet auteur',
 	'info_voir_reservations_poubelle' => 'Voir les Résevations mises à la poubelle',
+	'inscription' => 'Inscription',
+	'inscrire' => 'S\'inscrire',
 	'inscrire_liste_attente' => 'Choissisez un autre cours ou inscrivez vous dans la liste d’attente.',
 
 	// L
