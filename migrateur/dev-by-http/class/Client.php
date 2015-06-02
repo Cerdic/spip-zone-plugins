@@ -190,6 +190,7 @@ class Client {
 
 		$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 		if ($code != 200) {
+			$this->log("Réponse erronée du serveur. Code d'erreur : $code // " . curl_error($curl));
 			throw new \RuntimeException('HTTP error: ' . $code . " // " . curl_error($curl));
 		}
 
