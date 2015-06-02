@@ -87,6 +87,3 @@ function chats_declarer_tables_interfaces($interfaces) {
 	return $interfaces;
 }
 
-
-
-?>

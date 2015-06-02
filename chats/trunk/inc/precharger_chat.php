@@ -24,6 +24,3 @@ function inc_precharger_traduction_chat_dist($id_chat, $id_rubrique=0, $lier_tra
 	return precharger_traduction_objet('chat', $id_chat, $id_rubrique, $lier_trad, 'nom');
 }
 
-
-
-?>

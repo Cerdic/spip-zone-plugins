@@ -26,5 +26,3 @@ function formulaires_editer_chat_traiter_dist($id_chat='new', $id_rubrique=0, $r
 	return formulaires_editer_objet_traiter('chat',$id_chat,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 }
 
-
-?>

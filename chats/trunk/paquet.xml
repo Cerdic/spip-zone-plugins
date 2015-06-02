@@ -1,20 +1,20 @@
 <paquet
 	prefix="chats"
 	categorie="edition"
-	version="2.0.1"
+	version="2.0.2"
 	etat="stable"
 	compatibilite="[3.0.0-alpha2;["
 	logo="prive/themes/spip/images/chat-128.png"
 	schema="1.6.0"
 	documentation="http://marcimat.magraine.net/?article356"
->	
+>
 
 	<nom>Chats (Plugin d'exemple)</nom>
 	<!-- Gestion des chats dans SPIP -->
 
 	<auteur lien="http://magraine.net/">Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
-		
+
 	<credit lien="http://www.yootheme.com/icons">Logo de YOOtheme</credit>
 
 

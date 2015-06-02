@@ -61,4 +61,3 @@ function chats_affiche_milieu($flux) {
 	return $flux;
 }
 
-?>
