@@ -7,6 +7,7 @@
 
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/config');
 
 function balise_ENREGISTRER_VISITE_AUTEUR($p) {
 	$i_boucle  = $p->nom_boucle ? $p->nom_boucle : $p->id_boucle;
