@@ -1,9 +1,9 @@
 <ul class="identifiants">
     [(#SESSION{id_auteur}|>{0}|non)
     <li class="login">
-    	#SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
-    	[(#SET{titre_login,<:lien_connecter:>})]
-    	<strong class="explication"><:reservation:explication_login{url=#GET{url},titre_login=#GET{titre_login}}:></strong>
+      #SET{url,#URL_PAGE{login}|parametre_url{url,#SELF}}
+      [(#SET{titre_login,<:lien_connecter:>})]
+      <strong class="explication"><:reservation:explication_login{url=#GET{url},titre_login=#GET{titre_login}}:></strong>
     </li>]
     
     [(#SAISIE{input,#ENV{name_nom,nom},label=<:reservation:label_nom:>,obligatoire=oui})]
@@ -13,12 +13,16 @@
     [(#REM)Géneration des champs extras auteurs]
     
     #GENERER_SAISIES{#ENV{champs_extras_auteurs}}
-    
+
        <!--extra_connection1-->
-    [(#SESSION{id_auteur}|>{0}|non)
-       
-    <li>
-        [(#SAISIE{checkbox,enregistrer,class=enregistrer,label=<:reservation:label_enregistrer:>,datas=#ARRAY{1,<:reservation:ok:>}})]
+    [(#SESSION{id_auteur}|>{0}|non|et{#ENV{enregistrement_inscrit}|=={on}|oui})
+    <li class="fieldset">
+        [(#ENV{enregistrement_inscrit_obligatoire}|!={on}|?{
+          [(#SAISIE{checkbox,enregistrer,class=enregistrer,label=<:reservation:label_enregistrer:>,datas=#ARRAY{1,<:reservation:ok:>}})]
+          ,
+          #SET{obligatoire,oui}
+        })]          
+        
         <ul class="block_mp">
             [(#SAISIE{input,#ENV{name_new_login,new_login},label=<:item_login:>,obligatoire=#GET{obligatoire}})] 
             [(#SAISIE{input,#ENV{name_new_pass,new_pass},type="password", label=<:reservation:label_mot_passe:>, obligatoire=#GET{obligatoire},class=password,explication=<:info_plus_cinq_car:>})]           
@@ -28,9 +32,8 @@
     </li>]
 </ul>
       <!--extra_connection2-->
-      
-     <script type="text/javascript">
-    /*<![CDATA[*/
+<BOUCLE_condition(CONDITION){si #ENV{enregistrement_inscrit_obligatoire}|!={on}|oui}>
+     <script type="text/javascript">/*<![CDATA[*/
         jQuery(document).ready(function(){
             if (!$('input[name="enregistrer[]"]').is(':checked')) {
                 $('.block_mp').hide(); 
@@ -39,6 +42,6 @@
         $('input[name="enregistrer[]"]').click(function() {
             $('.block_mp').slideToggle('slow', function() {});
             });
-           
-    /*]]>*/
+            /*]]>*/
     </script>
+</BOUCLE_condition>

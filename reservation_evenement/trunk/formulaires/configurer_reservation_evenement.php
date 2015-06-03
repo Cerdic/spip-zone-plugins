@@ -264,6 +264,33 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
           )
         )
       )
+    ),
+    array(
+      'saisie' => 'fieldset',
+      'options' => array(
+        'nom' => 'fieldset_cron',
+        'label' => _T('reservation:formulaire_public')
+      ),
+      'saisies' => array(
+        array(
+          'saisie' => 'oui_non',
+          'options' => array(
+            'nom' => 'enregistrement_inscrit',
+            'label' => _T('reservation:label_enregistrement_inscrit'),
+            'explication' => _T('reservation:explication_enregistrement_inscrit'),
+            'defaut' => $config['enregistrement_inscrit'],
+          )
+        ),
+        array(
+          'saisie' => 'oui_non',
+          'options' => array(
+            'nom' => 'enregistrement_inscrit_obligatoire',
+            'label' => _T('reservation:label_enregistrement_inscrit_obligatoire'),
+            'defaut' => $config['periodicite_cron'],
+            'afficher_si' => '@enregistrement_inscrit@ == "on"',
+          )
+        )
+      )
     )
   );
 }

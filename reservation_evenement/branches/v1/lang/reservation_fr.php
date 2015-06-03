@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_client' => 'Choissisez un client parmis les auteurs ou saisissez les données du client ci-bas',
 	'explication_envoi_separe' => 'Le changement de statut d’un Détail de Réservation vers
     <div><b>"@statuts@"</b></div> provoquera l’envoi d’une notification !',
+  'explication_enregistrement_inscrit' => 'L\'enregistrer en tant que auteur spip',
 	'explication_envoi_separe_detail' => 'Le changement de statut vers <div><strong>"@statuts@"</strong></div> provoquera l’envoi d’une notification !',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Connectez-vous</a> si vous êtes déjà enregistré sur ce site',
 	'explication_nombre_evenements' => 'Le nombre nécessaire d’événements réservés  pour que la promotion s’applique.',
@@ -45,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reservations_auteur' => 'Les réservations de cet auteur',
 	'info_voir_reservations_poubelle' => 'Voir les Résevations mises à la poubelle',
 	'inscription' => 'Inscription',
-	'inscrire' => 'S\'inscrire',
+	'inscrire' => 'S’inscrire',
 	'inscrire_liste_attente' => 'Choissisez un autre cours ou inscrivez vous dans la liste d’attente.',
 
 	// L
@@ -55,7 +56,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_paiement' => 'Date de paiement :',
 	'label_donnees_auteur' => 'Données Auteur :',
 	'label_email' => 'Email :',
-	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',
+	'label_enregistrement_inscrit' => 'Permettre au visiteur de s\'enregistrer lors d\'une réservation :',
+	'label_enregistrement_inscrit_obligatoire' => 'Rendre l\'enregistrement obligatoire :',
+	'label_enregistrer' => 'Je veux m’enregistrer sur ce site :',	
 	'label_id_auteur' => 'Id auteur :',
 	'label_inscription' => 'inscription :',
 	'label_lang' => 'Langue :',

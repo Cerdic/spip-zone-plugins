@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_email_utilise' => 'This email address is already in use, please log in using this email as login or take another email',
 	'evenement_cloture' => 'Closed Event',
 	'explication_envoi_separe' => 'The modification of the status of a booking item towards
-    <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.',
+    <div><strong>"@statuts@"</strong></div> will trigger the sending of an alert.', # MODIF
 	'explication_envoi_separe_detail' => 'The status modification towards <div><strong>"@statuts@"</strong></div> will trigger the sending of a confirmation email!',
 	'explication_login' => '<a rel="nofollow" class="login_modal" href="@url@" title="@titre_login@">Please log in</a> if you are already registered on this site',
 
