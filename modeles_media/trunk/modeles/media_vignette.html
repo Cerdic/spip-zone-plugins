@@ -7,7 +7,7 @@
 	On utilise la vignette explicitement donné à un document si existante, l'image si c'est une image, sinon l'icône.
 	On est indépendant du mode de l'image et des réglages de génération automatique des vignettes.
 ]
-[(#SET{vignette,#LOGO_DOCUMENT{vignette}|sinon{#FICHIER|media_generer_vignette{#EXTENSION}}|sinon{#LOGO_DOCUMENT{icone}}})]
+[(#SET{vignette,#LOGO_DOCUMENT{vignette}|sinon{#URL_DOCUMENT|media_generer_vignette{#EXTENSION}}|sinon{#LOGO_DOCUMENT{icone}}})]
 [(#SET{img,#MEDIA_IMAGE_RETAILLEE{#GET{'vignette'}}})]
 [(#SET{width,[(#GET{img}|extraire_attribut{width})]})]
 [(#MEDIA_AFFICHER_LEGENDE|oui)
