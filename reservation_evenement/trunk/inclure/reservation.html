@@ -23,7 +23,7 @@
 ]<BOUCLE_test_format_texte(CONDITION){si #ENV{format_envoi}|=={plain}|oui}>[<BOUCLE_details_texte(POUR){tableau #GET{reservation}|table_valeur{details}}>[
 - (#VALEUR|table_valeur{descriptif}|trim|supprimer_tags)] : [(#VALEUR|table_valeur{prix}|appliquer_filtre{prix_formater,[(#VALEUR|table_valeur{prix})]})]</BOUCLE_details_texte>
 
-[<:prix:label_total_ttc:> : #GET{total}|appliquer_filtre{prix_formater,#GET{total}})]
+[<:prix:label_total_ttc:> : #GET{total}|appliquer_filtre{prix_formater})]
 
    </BOUCLE_test_format_texte>
 

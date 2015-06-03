@@ -24,8 +24,6 @@ schema="1.4.2"
   <utilise nom="declinaisons" compatibilite="[1.0.3;]" />
   <utilise nom="notifications_archive" compatibilite="[1.1.3;]" />
 
-
-
   <!-- Déclaration de pipelines -->
   <pipeline nom="reservation_compteur_action" action='' />
   <pipeline nom="reservation_evenement_donnees_details" action='' />
