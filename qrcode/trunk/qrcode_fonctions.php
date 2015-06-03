@@ -25,7 +25,7 @@ function qrcode_hash($texte, $taille, $ecc) {
 function qrcode_getpng($texte, $taille, $ecc) {
 	$filename = _DIR_VAR."cache-qrcode/qrcode-".qrcode_hash($texte, $taille, $ecc).".png";
 	if (! file_exists($filename)) {
-		require_once(find_in_path('lib/phpqrcode/qrlib.php')) ;
+		require_once(find_in_path('lib/phpqrcode.php')) ;
 		$errorCorrectionLevel = 'L' ;
 		if (isset($ecc) && in_array($ecc, array('L','M','Q','H')))
 			$errorCorrectionLevel = $ecc;
