@@ -1,7 +1,7 @@
 <paquet
 	prefix="rezosocios"
 	categorie="edition"
-	version="0.2.0"
+	version="0.3.0"
 	etat="test"
 	compatibilite="[3.0.0;3.0.*]"
 	schema="0.2.0"
@@ -17,7 +17,7 @@
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/rezosocios.php" />
 	<pipeline nom="affiche_milieu" inclure="rezosocios_pipelines.php" />
 	<pipeline nom="autoriser" inclure="rezosocios_autoriser.php" />
-	
+	<pipeline nom="rezosocios_liste" action="" />
 	<menu nom="rezosocios" titre="rezosocios:icone_rezosocios" parent="menu_edition" icone="images/rezosocio-16.png" action="rezosocios" />
 	<menu nom="rezosocio_creer" titre="rezosocios:icone_creation_rezosocio" parent="outils_rapides" icone="images/rezosocio-new-16.png" action="rezosocio_edit" parametres="new=oui" />
 </paquet>

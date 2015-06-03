@@ -5,7 +5,7 @@
 </div>
 <div class="champ contenu_type_rezo[ (#TYPE_REZO*|strlen|?{'',vide})]">
 <div class='label'><:rezosocios:info_type_rezosocios:></div>
-<div dir='#LANG_DIR' class='#EDIT{type_rezo} type_rezo'>[(#CHEMIN{prive/themes/spip/images/[(#TYPE_REZO|strtolower|concat{-32.png})]}|balise_img|image_reduire{32,32}) ]#TYPE_REZO</div>
+<div dir='#LANG_DIR' class='#EDIT{type_rezo} type_rezo'><a href="[(#TYPE_REZO**|rezosocios_url{#NOM_COMPTE})]">[(#TYPE_REZO**|rezosocios_logo|balise_img|image_reduire{32,32}) ]#TYPE_REZO</a></div>
 </div>
 <div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
 <div class='label'><:info_langue:></div>
@@ -13,6 +13,7 @@
 </div>
 <div class="champ contenu_url_site[ (#NOM_COMPTE*|strlen|?{'',vide})]">
 <div class='label'><:rezosocios:info_nom_compte:></div>
-<div dir='#LANG_DIR' class='#EDIT{nom_compte} nom_compte'>#NOM_COMPTE</div>
+<div dir='#LANG_DIR' class='#EDIT{nom_compte} nom_compte'>
+	#NOM_COMPTE </div>
 </div>
 </BOUCLE_afficher_contenu>
