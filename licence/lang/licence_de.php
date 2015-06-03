@@ -14,28 +14,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_licence' => 'Lizenz',
 
 	// D
-	'description_art_libre' => 'Lizenz Freie Kunst', # MODIF
-	'description_cc_by' => 'Creative Commons - Namensnennung', # MODIF
-	'description_cc_by_nc' => 'Creative Commons - Namensnennung, keine kommerzielle Nutzung', # MODIF
-	'description_cc_by_nc_nd' => 'Creative Commons -  Namensnennung, keine kommerzielle Nutzung, keine Bearbeitung', # MODIF
-	'description_cc_by_nc_sa' => 'Creative Commons - Namensnennung, keine kommerzielle Nutzung, Weitergabe unter gleichen Bedingungen', # MODIF
-	'description_cc_by_nd' => 'Creative Commons - Namensnennung, keine Bearbeitung', # MODIF
-	'description_cc_by_sa' => 'Creative Commons - Namensnennung, Weitergabe unter gleichen Bedingungen', # MODIF
+	'description_art_libre' => 'Lizenz Freie Kunst',
+	'description_autre' => 'Andere Lizenz',
+	'description_cc0' => 'Creative Common - Kein Urheberrechtsschutz',
+	'description_cc_by' => 'Creative Commons - Namensnennung',
+	'description_cc_by_nc' => 'Creative Commons - Namensnennung, keine kommerzielle Nutzung',
+	'description_cc_by_nc_nd' => 'Creative Commons -  Namensnennung, keine kommerzielle Nutzung, keine Bearbeitung',
+	'description_cc_by_nc_sa' => 'Creative Commons - Namensnennung, keine kommerzielle Nutzung, Weitergabe unter gleichen Bedingungen',
+	'description_cc_by_nd' => 'Creative Commons - Namensnennung, keine Bearbeitung',
+	'description_cc_by_sa' => 'Creative Commons - Namensnennung, Weitergabe unter gleichen Bedingungen',
 	'description_copyright' => '© Copyright liegt beim Autor des Artikels',
-	'description_gpl' => 'GPL-Lizenz', # MODIF
+	'description_gfdl' => 'GNU Freie Dokumentationslizenz',
+	'description_gpl' => 'GPL-Lizenz',
+	'description_wtfpl' => 'Verfickte mach-was-du-willst Lizenz',
 
 	// L
 	'label_select_licence' => 'Wählen sie eine Lizenz',
-	'lien_art_libre' => 'http://artlibre.org/licence/lal/de', # MODIF
+	'lien_art_libre' => 'http://artlibre.org/licence/lal/de/',
+	'lien_cc0' => 'http://creativecommons.org/publicdomain/zero/1.0/deed.de',
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.de',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.de',
 	'lien_cc_by_nc_nd' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/deed.de',
 	'lien_cc_by_nc_sa' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/deed.de',
 	'lien_cc_by_nd' => 'http://creativecommons.org/licenses/by-nd/3.0/deed.de',
 	'lien_cc_by_sa' => 'http://creativecommons.org/licenses/by-sa/3.0/deed.de',
+	'lien_gfdl' => 'http://www.gnu.org/licenses/fdl.html',
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
+	'lien_whfpl' => 'http://sam.zoy.org/lprab/',
 
 	// N
+	'noisette_cacher_defaut' => 'Nichts anzeigen wenn keine spezielleLizenz angegeben wurde ?',
 	'noisette_hauteur_logo' => 'Maximale Höhe des Logos (in Pixel):',
 	'noisette_largeur_logo' => 'Maximale Breite des Logos (in Pixel):',
 	'noisette_lien' => 'Link zur Breschreibung der Lizenz anzeigen?',
@@ -43,10 +51,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_nom_licence' => 'Bezeichnung der Lizenz anzeigen?',
 
 	// S
-	'sans_licence' => 'ohne Lizenz', # MODIF
+	'sans_licence' => 'keine spezielle Lizenz, es gelten die Regeln des Urheberrechts',
 
 	// T
 	'titre_art_libre' => 'LFK',
+	'titre_autre' => 'andere',
+	'titre_cc0' => 'CC0',
 	'titre_cc_by' => 'CC by',
 	'titre_cc_by_nc' => 'CC by-nc',
 	'titre_cc_by_nc_nd' => 'CC by-nc-nd',
@@ -54,7 +64,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_cc_by_nd' => 'CC by-nd',
 	'titre_cc_by_sa' => 'CC by-sa',
 	'titre_copyright' => 'Copyright',
-	'titre_gpl' => 'GNU GPL' # MODIF
+	'titre_gfdl' => 'GNU FDL',
+	'titre_gpl' => 'GNU GPL',
+	'titre_wtfpl' => 'LPRAB'
 );
 
 ?>

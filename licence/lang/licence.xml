@@ -1,7 +1,7 @@
 <traduction module="licence" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/licence/lang/" reference="fr">
 	<langue code="ca" url="http://trad.spip.net/tradlang_module/licence?lang_cible=ca" total="49" traduits="21" relire="0" modifs="11" nouveaux="17" pourcent="42.86">
 	</langue>
-	<langue code="de" url="http://trad.spip.net/tradlang_module/licence?lang_cible=de" total="49" traduits="26" relire="0" modifs="11" nouveaux="12" pourcent="53.06">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/licence?lang_cible=de" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/licence?lang_cible=en" total="49" traduits="49" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
