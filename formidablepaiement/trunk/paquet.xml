@@ -1,7 +1,7 @@
 <paquet
 	prefix="formidablepaiement"
 	categorie="communication"
-	version="1.0.4"
+	version="1.0.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/formidablepaiement-64.png"
@@ -21,7 +21,7 @@
 	<pipeline nom="affiche_enfants" inclure="formidablepaiement_pipelines.php" />
 	<pipeline nom="affiche_milieu" inclure="formidablepaiement_pipelines.php" />
 
-	<necessite nom="bank" compatibilite="[2.8.3;2.*.*]" />
+	<necessite nom="bank" compatibilite="[2.8.3;3.*.*]" />
 	<necessite nom="formidable" compatibilite="[2.5.11;2.*.*]" />
 
 </paquet>
