@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_email_utilise' => 'Esse email já está cadastrado. Favor conectar-se, ou inserir outro endereço de email',
-	'explication_envoi_separe' => 'A troca de status de Detalhe da Reserva para <div><b>"@statuts@"</b></div> gerará o envio de uma notificação!',
+	'explication_envoi_separe' => 'A troca de status de Detalhe da Reserva para <div><b>"@statuts@"</b></div> gerará o envio de uma notificação!', # MODIF
 	'explication_envoi_separe_detail' => 'A troca do status para <div><strong>"@statuts@"</strong></div> gerará o envio de uma notificação!',
 	'explication_nombre_evenements' => 'O número mínimo de reservas para que a promoção seja disponibilizada.',
 	'explication_nombre_evenements_choix' => 'Se vazio ou 0, este número é igual ao número de @objet_promotion@s escolhidos acima', # RELIRE

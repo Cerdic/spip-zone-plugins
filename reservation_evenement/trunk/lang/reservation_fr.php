@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_reservations_auteur' => 'Les réservations de cet auteur',
 	'info_voir_reservations_poubelle' => 'Voir les Résevations mises à la poubelle',
 	'inscription' => 'Inscription',
-	'inscrire' => 'S\'inscrire',
+	'inscrire' => 'S’inscrire',
 	'inscrire_liste_attente' => 'Choissisez un autre cours ou inscrivez vous dans la liste d’attente.',
 
 	// L
