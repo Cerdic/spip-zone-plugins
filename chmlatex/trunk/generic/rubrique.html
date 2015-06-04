@@ -1,0 +1,25 @@
+
+<B_rubriques>
+<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par num titre}>
+    <B_articles>
+<INCLURE{fond=#ENV{format}/debut_liste}>
+    <BOUCLE_articles(ARTICLES) {id_rubrique=#ENV{id_rubrique}} {par num titre} {doublons} {titre<#TITRE*}>
+<INCLURE{fond=#ENV{format}/article}{id_article}>
+    </BOUCLE_articles>
+<INCLURE{fond=#ENV{format}/fin_liste}>
+</B_articles>
+<INCLURE{fond=#ENV{format}/debut_liste}>
+<INCLURE{fond=#ENV{format}/rubrique,id_rubrique}>
+    <BOUCLE_sous_rubriques(BOUCLE_rubriques)/>
+<INCLURE{fond=#ENV{format}/debut_liste}>
+    <BOUCLE_article_fin(ARTICLES) {id_rubrique} {par num titre} {doublons}>
+<INCLURE{fond=#ENV{format}/article}{id_article}>
+    </BOUCLE_article_fin>
+<INCLURE{fond=#ENV{format}/fin_liste}>
+<INCLURE{fond=#ENV{format}/fin_liste}>
+</BOUCLE_rubriques>
+</B_rubriques>
+<INCLURE{fond=#ENV{format}/debut_liste}>
+<BOUCLE_article_fin2(ARTICLES) {id_rubrique} {par num titre} {doublons}>
+<INCLURE{fond=#ENV{format}/article}{id_article}>
+</BOUCLE_article_fin2>

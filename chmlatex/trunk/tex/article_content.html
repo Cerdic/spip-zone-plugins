@@ -1,0 +1,14 @@
+#HTTP_HEADER{content-type:application/x-latex}
+<BOUCLE_article(ARTICLES){id_article}>
+    <INCLURE{fond=tex/titre_article,
+        id_article,
+        titre=#TITRE*
+    }>
+    \label{art#ID_TRAD}
+
+    [(#CHAPO*|propre_exportdoclatex|filtrer_entites)]
+
+    [(#TEXTE*|propre_exportdoclatex|filtrer_entites)]
+
+    [(#PS*|propre_exportdoclatex|filtrer_entites)]
+</BOUCLE_article>

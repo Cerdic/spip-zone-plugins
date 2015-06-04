@@ -1,0 +1,7 @@
+<BOUCLE_art1(ARTICLES){id_article=#ENV{id_article}}{origine_traduction}{par num titre}>
+    <BOUCLE_art2 (ARTICLES){traduction}{lang=#ENV{lang}}>
+        \input{inclus/article#ID_ARTICLE}
+    </BOUCLE_art2>
+        \input{inclus/article#ID_ARTICLE}
+    <//B_art2>
+</BOUCLE_art1>

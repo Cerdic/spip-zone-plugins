@@ -1,0 +1,22 @@
+ % xelatex -shell-escape
+\documentclass[a4paper,12pt]{book}
+\usepackage{fontspec}
+\usepackage{xunicode}
+\usepackage{polyglossia}
+\usepackage[hidelinks, breaklinks]{hyperref} %
+\usepackage{graphicx}
+\usepackage{xltxtra}
+\usepackage{csquotes}
+\usepackage{longtable}
+\usepackage{framed}
+\usepackage{multirow}
+\usepackage{ulem}
+\usepackage[export]{adjustbox}
+\setmainlanguage{[(#LANG|lang_polyglossia)]}
+\graphicspath{{images/}}
+
+\begin{document}
+
+\input{inclus/premiere}
+
+\tableofcontents

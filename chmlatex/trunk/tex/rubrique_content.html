@@ -1,0 +1,12 @@
+#HTTP_HEADER{content-type:application/x-latex}
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{par titre}>
+
+    <INCLURE{fond=tex/titre_rubrique,
+        id_rubrique,
+        titre=#TITRE*
+    }>
+    \label{rub#ID_RUBRIQUE}
+
+    [(#TEXTE*|propre_exportdoclatex|filtrer_entites)]
+
+</BOUCLE_rubrique>

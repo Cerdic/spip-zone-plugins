@@ -1,0 +1,11 @@
+<BOUCLE_art1(ARTICLES){id_article=#ENV{id_article}}{origine_traduction}{par num titre}>
+-
+  type: article
+    <BOUCLE_art2 (ARTICLES){traduction}{lang=#ENV{lang}}>
+  id: #ID_ARTICLE
+  titre: [(#TITRE|textebrut)]
+    </BOUCLE_art2>
+  id: #ID_ARTICLE
+  titre: [(#TITRE|textebrut)]
+    <//B_art2>
+</BOUCLE_art1>

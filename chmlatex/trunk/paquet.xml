@@ -1,0 +1,23 @@
+<paquet
+    prefix="chmlatex"
+    categorie="edition"
+    version="1.3.4"
+    etat="test"
+    compatibilite="[3.0.0-alpha2;3.0.*]"
+    logo="prive/themes/spip/images/chmlatex-32.png"
+    demonstration="http://sic.g-eau.net"
+>
+
+    <nom>CHM &amp; LaTeX</nom>
+    <auteur>Hicham GARTIT</auteur>
+    <auteur>David DORCHIES</auteur>
+    <licence>GNU/GPL</licence>
+
+    <menu nom="chmlatex" titre="chmlatex:exporter_secteur" icone="images/chmlatex-16.png" parent="menu_publication"/>
+
+    <necessite nom="latexwheel" compatibilite="[1.0.3;["/>
+    <necessite nom="yaml" />
+    <necessite nom="bellespuces" />
+    <necessite nom="saisies" />
+
+</paquet>

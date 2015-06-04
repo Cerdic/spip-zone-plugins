@@ -1,0 +1,22 @@
+[(#HTTP_HEADER{Content-type: text/html; charset=windows-1252})]
+[OPTIONS]
+Contents file=chmlatex.hhc
+Index file=chmlatex.hhk
+Compiled file=chmlatex_#LANG.chm
+Full-text search=Yes
+
+[FILES]
+<BOUCLE_rub_documentation (RUBRIQUES) {id_rubrique=1}><BOUCLE_articles(ARTICLES){id_secteur=1}{origine_traduction}><BOUCLE_articles_langue(ARTICLES){traduction}{lang=#ENV{lang}}>
+article[(#ID_ARTICLE)].html</BOUCLE_articles_langue>
+article[(#ID_ARTICLE)].html<//B_articles_langue></BOUCLE_articles><B_rubriques><BOUCLE_rubriques(RUBRIQUES){id_parent}{par titre}{tout}>
+rubrique[(#ID_RUBRIQUE)].html<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques></BOUCLE_rubriques></B_rubriques></BOUCLE_rub_documentation>
+
+[ALIAS]
+<BOUCLE_art(ARTICLES){id_secteur=1}{origine_traduction}><BOUCLE_art_traduction(ARTICLES) {traduction}{lang=#ENV{lang}}>
+ARTICLE[(#ID_ARTICLE)]=article[(#ID_ARTICLE)].html</BOUCLE_art_traduction>
+ARTICLE[(#ID_ARTICLE)]=article[(#ID_ARTICLE)].html<//B_art_traduction></BOUCLE_art>
+
+[MAP]
+<BOUCLE_art2(ARTICLES){id_secteur=1}{origine_traduction}><BOUCLE_art2_traduction(ARTICLES) {traduction}{lang=#ENV{lang}}>
+#define ARTICLE#ID_ARTICLE #_art2:ID_ARTICLE</BOUCLE_art2_traduction>
+#define ARTICLE#ID_ARTICLE #_art2:ID_ARTICLE<//B_art2_traduction></BOUCLE_art2>

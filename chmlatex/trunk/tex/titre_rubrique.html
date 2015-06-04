@@ -1,0 +1,14 @@
+#SET{tex_titres, #ARRAY{
+    1,part,
+    2,chapter,
+    3,section,
+    4,subsection,
+    5,subsubsection,
+    6,paragraph,
+    7,subparagraph
+}}
+#SET{antislash,'\'}
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+    #SET{profondeur,#PROFONDEUR|plus{#ENV{id_niveau,0}}}
+    #GET{antislash}[(#GET{tex_titres}|table_valeur{#GET{profondeur}})]{[(#ENV*{titre}|supprimer_numero|extraire_multi{#ENV{#LANG}}|supprimer_tags|propre_exportdoclatex)]}
+</BOUCLE_rubrique>

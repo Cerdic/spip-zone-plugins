@@ -1,0 +1,23 @@
+#HTTP_HEADER{content-type:application/x-latex}
+\begin{titlepage}
+\parindent=0pt
+[(#NOM_SITE_SPIP*|propre_exportdoclatex|extraire_multi{#LANG}|supprimer_tags)] \hspace*{\stretch{1}} 
+\vspace*{\stretch{1}}
+\begin{center}
+#LOGO_RUBRIQUE
+\end{center}
+\vspace*{\stretch{1}}
+\hrulefill
+\begin{center}\bfseries\Huge
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{par titre}>
+[(#TITRE*|supprimer_numero|extraire_multi{#LANG}|supprimer_tags|propre_exportdoclatex|filtrer_entites)]
+</BOUCLE_rubrique>
+\end{center}
+\hrulefill
+\vspace*{1cm}
+
+\vspace*{\stretch{2}}
+
+#URL_SITE_SPIP \hfill [(#LANG*|traduire_nom_langue|filtrer_entites)] 
+
+\end{titlepage}

@@ -1,0 +1,39 @@
+
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'>Options de génération de l'export</h3>
+
+
+    [<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
+    [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
+     <BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
+    <form action='[(#ENV{action}|parametre_url{format|num|secteur|lang,''})]' method='post'>
+        #ACTION_FORMULAIRE{#ENV{action}}
+        <label><:chmlatex:format:>&nbsp;:</label>
+        <br />
+        <input id="zip" name="format" type="radio" value="zip"  CHECKED />
+        <label for="zip"><:chmlatex:format_html:></label>
+        <br />
+        <input id="pdf" name="format" type="radio" value="pdf" />
+        <label for="pdf"><:chmlatex:format_latex:></label>
+        <br />
+        <br />
+        [(#SAISIE{selecteur_langue,lang,label=<:chmlatex:langue:>})]
+        <br />
+        <br />
+        [(#SAISIE{secteur,secteur_region,label=<:chmlatex:secteur:>})]
+        <br />
+        <br />
+        <br />
+        <p class='boutons'><span class='image_loading'>&nbsp;</span>
+
+        <input type="submit" name="Valider"value="<:chmlatex:exporter_secteur:>" /> </p>
+
+    </form>
+    </BOUCLE_editable>
+
+
+
+
+</div>
+

@@ -1,0 +1,89 @@
+#CACHE{3600*24*7}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+body {
+   font-family: arial, sans-serif;
+   font-size: 1em;
+   margin: 0px;
+   padding: 0px;
+   border-width: 0px;
+
+}
+.spip-admin-float {display:none;}
+#contenu {
+   margin:0px 10px 0px 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-align: left;
+}
+
+h1 {
+   background-color:#00C0C0;
+   margin: 0px;
+   margin-bottom: 15px;
+   padding: 15px 10px 30px 10px;
+   font-family: "Arial Black", sans-serif;
+   font-weight: bold;
+   text-decoration: underline;
+}
+
+p {
+	margin:0.2em 0em 0.2em 0em;
+}
+.code_download {display:none;}
+ul {
+   margin-left: 30px;
+   margin-bottom: 5px;
+}
+
+ul.docsic
+{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li.li_rubrique 
+{
+	text-align: left;
+	font-weight: bold;
+	background-image: url('#CHEMIN{images/folder16.png}');
+ 	background-repeat: no-repeat;
+ 	background-position: 0 0;
+  	padding-left: 18px;
+	list-style:none;
+}
+li.li_article
+{
+  text-align: left;
+  background-image: url('#CHEMIN{images/document_image_ver16.png}');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  padding-left: 18px;
+  list-style:none;
+}
+
+/*ul.docsic ul {display: none;}*/
+div.description > ul.docsic > li.li_rubrique:hover > ul,
+div.description > ul.docsic > li > ul > li.li_rubrique:hover > ul ,
+div.description > ul.docsic > li > ul > li > ul > li.li_rubrique:hover > ul ,
+div.description > ul.docsic > li > ul > li > ul > li > ul > li.li_rubrique:hover > ul,
+div.description > ul.docsic > li > ul > li > ul > li > ul > li > ul > li.li_rubrique:hover > ul
+{
+	display:block;
+}
+.recherche_chemin {
+  padding-top : 100 px;
+  font-size: 1.2em;
+}
+
+#article_traductions {
+  text-align : right;
+  margin: 0 0 1em;
+}
+[(#REM) <!-- CSS personnalises --> ]
+[(#CHEMIN{chm_perso.html}|oui)
+  <INCLURE{fond=chm_perso}>
+]
