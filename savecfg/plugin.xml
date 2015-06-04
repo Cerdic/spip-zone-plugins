@@ -10,7 +10,7 @@
 	<prefix>savecfg</prefix>
 	<icon>images/savecfg-32.png</icon>
 	<lien>http://contrib.spip.net/SaveCFG</lien>
-	<install>base/savecfg.php</install>
+	<install>savecfg_administrations.php</install>
 	<fonctions>savecfg_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
