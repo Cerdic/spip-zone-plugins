@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_copyright' => '© Copyright liegt beim Autor des Artikels',
 	'description_gfdl' => 'GNU Freie Dokumentationslizenz',
 	'description_gpl' => 'GPL-Lizenz',
-	'description_wtfpl' => 'Verfickte mach-was-du-willst Lizenz',
+	'description_wtfpl' => 'Öffentliche Scheisst-der-Hund-drauf Lizenz',
 
 	// L
 	'label_select_licence' => 'Wählen sie eine Lizenz',
