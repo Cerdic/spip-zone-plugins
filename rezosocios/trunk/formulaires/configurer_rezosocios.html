@@ -11,7 +11,7 @@
 			<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label><:rezosocios:label_activer_rezosocio_objets:></label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
-				]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name}},exclus=spip_rezosocios}
+				]#INCLURE{fond=formulaires/inc-choisir-objets,name=#GET{name},selected=#ENV**{#GET{name},#LISTE{spip_articles,spip_rubriques}},exclus=spip_rezosocios}
 			</li>
 		</ul>
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

@@ -37,9 +37,8 @@ function autoriser_associerrezosocios_dist($faire,$type,$id,$qui,$opt){
 	// jamais de mots sur des mots
 	if ($type=='rezosocio') return false;
 	$droit = substr($qui['statut'],1);
-	spip_log(lire_config('rezosocios/rezosocios_objets', array()),'test.'._LOG_ERREUR);
 	return
-		(in_array(table_objet_sql($type),lire_config('rezosocios/rezosocios_objets', array('spip_articles'))))
+		(in_array(table_objet_sql($type),lire_config('rezosocios/rezosocios_objets', array('spip_articles','spip_rubriques'))))
 		AND (($id>0 AND autoriser('modifier', $type, $id, $qui, $opt))
 			OR (
 				$id<0
