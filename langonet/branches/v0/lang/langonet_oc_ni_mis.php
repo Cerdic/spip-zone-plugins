@@ -44,6 +44,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_lister' => 'Aquela oupcioun vi permete de visualisà lu item d’un fichié de lenga classificat da ordre alfabéticou.',
 	'info_mode' => 'Courrespouònde a la cadena que serà inserit en tems de la creacioun d’un item nouvèu per la lenga bressai.',
 	'info_module' => 'Courrespouònde au prefisse dou fichié de lenga sensa abreviacioun de la lenga (isemple : <em>rainette</em> per lou plugin dau meme noum, o <em>ecrire</em> per SPIP)',
+	'info_pattern_item_cherche' => 'Sesissès una cadena que correspouònde a tout o partida d’una escourcha d’item de lenga. La recerca es toujou insensible a la cassa.',
+	'info_pattern_texte_cherche' => 'Sesissès una cadena que corresponònde a tout o partida d’una traducioun francèsa d’item de lenga. La recerca es toujou insensible a la cassa.',
+	'info_rechercher_item' => 'Aquela oupcioun vi permete de cercà dei item de lenga en toui lu fichié de lenga present soubre lou sit. Da soucì de proudessa, basta lu fichié de lenga francèsa soun escanat.',
+	'info_rechercher_texte' => 'Aquela oupcioun vi permete de cercà dei item de lenga vìa li siéu traducioun francèsa en lu fichié de lenga de SPIP <em>ecrire_fr</em>, <em>public_fr</em> e <em>spip_fr</em>. La fin d’aquesta recerca es da verificà se un tèstou noun esiste jà en SPIP denant de lou creà.',
+	'info_table' => 'Poudès counsultà aquì souta la lista alfabètica dei item de lenga dóu fichié « <em>@langue@</em> » (@total@). Cada bloc aficha lu item que àugon la mema iniciala, l’escourcha en gras e lou tèstou afichat en faça. Soubrevoulàs una iniciala da faire aparèisse la lista que correspouònde.',
 
 	// L
 	'label_arborescence_scannee' => 'Arbouressença da scanà',
@@ -63,6 +68,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_pattern' => 'Cadena da cercà',
 	'label_verification' => 'Tìpou de verificacioun',
 	'label_verification_definition' => 'Detecioun dei definicioun que mancon',
+	'label_verification_fonction_l' => 'Detecioun dei cas d’utilisacioun de la founcioun _L()',
+	'label_verification_utilisation' => 'Detecioun dei definicioun oussoulet',
 	'legende_resultats' => 'Resultat de la verificacioun',
 	'legende_table' => 'Lista dei item dóu fichié de lenga chausit',
 	'legende_trouves' => 'Lista dei item trouvat (@total@)',
@@ -71,7 +78,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_aucun_fichier_log' => 'Mìnga fichié de log dispounible dau telecargamen',
 	'message_nok_aucune_langue_generee' => 'Mìnga fichié de lenga generat dispounible dau telecargamen',
 	'message_nok_champ_obligatoire' => 'Aquestou camp es oubligatori',
+	'message_nok_ecriture_fichier' => 'Lou fichié de lenga « <em>@langue@</em> » dóu mòdulou « <em>@module@</em> » es pas estat creat qu’una errour s’es prouducha dóu tems de la siéu scritura !',
+	'message_nok_fichier_langue' => 'La generacioun a souhit perqué lou fichié de lenga « <em>@langue@</em> » dóu mòdulou « <em>@module@</em> » noun es trouvable en lou repertori « <em>@dossier@</em> » !',
+	'message_nok_fichier_log' => 'Lou fichié de log que countengue lu resultat de la verificacioun noun a pouscut estre creat !',
+	'message_nok_fichier_script' => 'Lou fichié d’escrit que countengue li coumanda de remplaçage dei founcioun _L par _T noun a pouscut estre creat !',
 	'message_nok_item_trouve' => 'Mìnga item de lenga courresponònde a la recerca !',
+	'message_ok_fonction_l_0' => 'Mìnga cas d’utilisacioun de la founcioun _L() es estat detetat en lu fichié PHP dóu repertori « <em>@ou_fichier@</em> ».',
+	'message_ok_item_trouve' => 'La recerca de la cadena @pattern@ s’es degoulada courretamen.',
+	'message_ok_item_trouve_commence_1' => 'L’item de lenga aquì souta coumença da la cadena recercada :',
+	'message_ok_item_trouve_commence_n' => 'Lu @sous_total@ item aquì souta coumençon toui da la cadena recercada :',
+	'message_ok_item_trouve_contient_1' => 'L’item de lenga aquì souta counten da la cadena recercada :',
+	'message_ok_item_trouve_contient_n' => 'Lu @sous_total@ item aquì souta counton toui la cadena recercada :',
 
 	// O
 	'onglet_generer' => 'Generà una lenga',
