@@ -25,8 +25,7 @@
 	<BOUCLE_liste_rezosocio(REZOSOCIOS){id_rezosocio IN #GET{selection}}{where?}{tri #ENV{par,num titre},#GET{defaut_tri}}{par multi titre}{pagination #ENV{nb,10} rezosociol}{tout}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_REZOSOCIO|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='picto'>[(#VAL|puce_statut{rezosocio,#ID_REZOSOCIO})]</td>
-			<td class='titre principale'>[(#LOGO_REZOSOCIO|image_reduire{20,20})]<a href="[(#ID_REZOSOCIO|generer_url_entite{rezosocio})]"
-																																						title="<:info_numero_abbreviation|attribut_html:> #ID_REZOSOCIO">[(#RANG). ]#TITRE</a></td>
+			<td class='titre principale'>[(#LOGO_REZOSOCIO|image_reduire{20,20})]<a href="[(#ID_REZOSOCIO|generer_url_entite{rezosocio})]" title="<:info_numero_abbreviation|attribut_html:> #ID_REZOSOCIO">[(#RANG). ]#TITRE</a></td>
 			<td class='type_rezo secondaire'>#TYPE_REZO</td>
 			<td class='action'><button type="submit" class="button link delete" name="supprimer_lien[rezosocio-#ID_REZOSOCIO-#OBJET-#ID_OBJET]" value="X"><:rezosocios:info_retirer_rezosocio:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
 		</tr>
