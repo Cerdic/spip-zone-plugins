@@ -29,7 +29,7 @@ function formulaires_contact_libre_verifier_dist($adresse, $url='', $sujet=''){
 
 	if (!$sujet=_request('sujet_message'))
 		$erreurs['sujet_message'] = _T("info_obligatoire");
-	elseif(!(strlen($sujet)>3))
+	elseif(!(strlen($sujet)>=3))
 		$erreurs['sujet_message'] = _T('forum_attention_trois_caracteres','',array('force'=>false)) ? _T('forum_attention_trois_caracteres') : _T('forum:forum_attention_trois_caracteres');
 
 	if (!$texte=_request('texte_message'))
