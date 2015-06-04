@@ -18,18 +18,18 @@ include_spip('inc/editer');
 function formulaires_reservation_charger_dist($id = '', $id_article = '', $retour = '') {
   include_spip('inc/config');
   include_spip('formulaires/selecteur/generique_fonctions');
-  
+
   $config = lire_config('reservation_evenement',array());
   $enregistrement_inscrit = isset($config['enregistrement_inscrit']) ? $config['enregistrement_inscrit'] : 'on';
   $enregistrement_inscrit_obligatoire = isset($config['enregistrement_inscrit_obligatoire']) ? $config['enregistrement_inscrit_obligatoire'] : '';
-  
+
   //Si l'affichage n'est pas déjà définie on établit si une zone s'applique
   if (!$id_article AND !$id) {
     include_spip('inc/reservation_evenements');
-    
+
     $rubrique_reservation = isset($config['rubrique_reservation']) ? $config['rubrique_reservation'] : '';
-    if ($rubrique_reservation) {
-      $rubrique_reservation = picker_selected($config, 'rubrique');
+    if (is_array($rubrique_reservation)) {
+      $rubrique_reservation = picker_selected($rubrique_reservation, 'rubrique');
       $zone = rubrique_reservation('', 'evenement', $rubrique_reservation, array(
         'tableau' => 'oui',
         'where' => 'e.date_fin>NOW() AND e.inscription=1 AND e.statut="publie"',
@@ -39,27 +39,28 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
     }
   }
 
+  //Si pas de zone, on établit les événements à afficher
   if (!is_array($zone)) {
     $where = array('date_fin>NOW() AND inscription=1 AND statut="publie"');
+
+    //Si filtrer par événement/s
     if ($id) {
-      $id_evenement_source = sql_getfetsel('id_evenement_source','spip_evenements','id_evenement IN (' . implode(',', $id) . ')');
-      if (!is_array($id)){
-        if ($id_evenement_source == 0)
-          $where[] = 'id_evenement=' . intval($id);
-        else $where[] = 'id_evenement_source=' . intval($id);
-      }
-      elseif (is_array($id)){
-        if ($id_evenement_source == 0)
-          $where[] = 'id_evenement IN (' . implode(',', $id) . ')';
-        else
-          $where[] = 'id_evenement_source IN (' . implode(',', $id) . ')';
-      }
+      if (is_array($id))
+        $id = implode(',', $id);
+
+      $id_evenement_source = sql_getfetsel('id_evenement_source','spip_evenements','id_evenement IN (' . $id . ')');
+
+      if ($id_evenement_source == 0)
+        $where[] = 'id_evenement IN (' . $id . ')';
+      else
+        $where[] = 'id_evenement_source IN (' . $id . ')';
     }
+        //Si filtrer par article/s
     if ($id_article) {
-      if (!is_array($id_article))
-        array_push($where, 'id_article=' . intval($id_article));
-      elseif (is_array($id_article))
-        array_push($where, 'id_article IN (' . implode(',', $id_article) . ')');
+      if (is_array($id_article))
+        $id_article= implode(',', $id_article);
+
+        $where[] = 'id_article IN (' . $id_article . ')';
     }
 
     $sql = sql_select('*', 'spip_evenements', $where, '', 'date_debut,date_fin');
@@ -71,10 +72,12 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
       $articles[] = $row['id_article'];
     }
   }
+  //Sinon on affiche les événements de la zone établit
   else {
     $evenements = $zone;
   }
 
+  // valeurs d'initialisation
   $valeurs = array(
     'evenements' => $evenements,
     'articles' => $evenements,
@@ -85,10 +88,9 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
     $session = $GLOBALS['visiteur_session'];
     $nom = $session['nom'];
     $email = $session['email'];
-
   }
 
-  // valeurs d'initialisation
+
   $valeurs['id_evenement'] = _request('id_evenement') ? (is_array(_request('id_evenement')) ? _request('id_evenement') : array(_request('id_evenement'))) : array();
 
   $valeurs['id_objet_prix'] = _request('id_objet_prix') ? (is_array(_request('id_objet_prix')) ? _request('id_objet_prix') : array(_request('id_objet_prix'))) : array();
@@ -103,7 +105,7 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
   $valeurs['quantite'] = _request('quantite') ? _request('quantite') : 1;
   $valeurs['enregistrement_inscrit'] = $enregistrement_inscrit;
   $valeurs['enregistrement_inscrit_obligatoire'] = $enregistrement_inscrit_obligatoire;
-  
+
   //les champs extras auteur
   include_spip('cextras_pipelines');
 
@@ -119,7 +121,7 @@ function formulaires_reservation_charger_dist($id = '', $id_article = '', $retou
 
   $valeurs['_hidden'] .= '<input type="hidden" name="statut" value="' . $valeurs['statut'] . '"/>';
   $valeurs['_hidden'] .= '<input type="hidden" name="lang" value="' . $valeurs['lang'] . '"/>';
-  if ($enregistrement_inscrit_obligatoire) 
+  if ($enregistrement_inscrit_obligatoire)
     $valeurs['_hidden'] .= '<input type="hidden" name="enregistrer[]" value="1"/>';
 
   return $valeurs;
@@ -134,6 +136,7 @@ function formulaires_reservation_verifier_dist($id = '', $id_article = '', $reto
     $id_auteur = $GLOBALS['visiteur_session']['id_auteur'];
   }
 
+  // Si l'enregistrement est choisi
   if (_request('enregistrer')) {
     include_spip('inc/auth');
     $obligatoires = array(
