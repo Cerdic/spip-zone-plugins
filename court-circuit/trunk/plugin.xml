@@ -3,7 +3,7 @@
 	<prefix>courtcircuit</prefix>
 	<icon>icon/courtcircuit-128.png</icon>
 
-	<version>2.4.1</version>
+	<version>2.4.2</version>
 	<etat>stable</etat>
 	<categorie>outil</categorie>
 	
@@ -31,7 +31,7 @@
 		<nom>ieconfig_metas</nom>
 		<inclure>courtcircuit_ieconfig_metas.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.1.0;3.0.99]' />
+	<necessite id='SPIP' version='[2.1.0;3.1.*]' />
 	<utilise id="Z" />
 	<utilise id="compositions" />
 </plugin>
