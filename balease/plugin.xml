@@ -1,0 +1,19 @@
+<plugin>
+<nom>Balises faciles</nom>
+<prefix>balease</prefix>
+
+<version>0.1.0</version>
+<etat>experimental</etat>
+<categorie>outil</categorie>
+
+<slogan>Balises SPIP faciles</slogan>
+<description>ATTENTION : ce plugin est une {{contribution expérimentale}} qui ne débouchera pas nécessairement sur un plugin utilisable ! Selon le moment, il peut être bien sympa ou totalement inutilisable.
+
+	Le but de ce plugin est de proposer une nomenclature simplifiée des balises SPIP, pour faciliter l'écriture des squelettes avec des balises faciles à retenir.
+
+</description>
+<auteur>[tetue->http://spip.tetue.net], 2015</auteur>
+<licence>GPL</licence>
+
+<necessite id="SPIP" version="[2.1.0;3.1.99]" />
+</plugin>
