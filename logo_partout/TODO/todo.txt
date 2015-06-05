@@ -1,5 +1,5 @@
 = TODO
-= pour logos_auto
+= pour logo_partout
 
 tetue, en pleine expérimentation, hésite encore sur la logique de l’automatisme…
 
@@ -10,4 +10,4 @@ tetue, en pleine expérimentation, hésite encore sur la logique de l’automati
 - remplacer le lien en dur apercite.fr => tester un plugin de génération de vignettes d’écran
 
 Lire aussi :
-http://contrib.spip.net/logos-automatiques?var_mode=preview
+http://contrib.spip.net/4662?var_mode=preview

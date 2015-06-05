@@ -1,7 +1,7 @@
 <plugin>
-<nom>Logos automatiques</nom>
-<prefix>logo_auto</prefix>
-<icon>icon/logo_auto.png</icon>
+<nom>Logos partout</nom>
+<prefix>logo_partout</prefix>
+<icon>icon/logo_partout.png</icon>
 
 <version>0.7.1</version>
 <etat>experimental</etat>
@@ -13,11 +13,11 @@
 	Le but de ce plugin est d’afficher des logos à tout coup, pour chaque objet SPIP. Chaque logo est généré de façon automatique, en faisant feu de tout bois : à partir des images associées à l’objet, ou de son parent, ou d’un visuel par défaut. Ces logos sont dimensionnés de façon homogène pour être prêts à l’emploi. Enfin, ce mécanisme sera paramétrable et surchargeable.
 
 </description>
-<lien>http://contrib.spip.net/logos-automatiques?var_mode=preview</lien>
+<lien>http://contrib.spip.net/4662?var_mode=preview</lien>
 <auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
 <licence>GPL</licence>
 
-<fonctions>logo_auto_fonctions.php</fonctions>
+<fonctions>logo_partout_fonctions.php</fonctions>
 
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
 <necessite id="logo_spip" version="[;]" />

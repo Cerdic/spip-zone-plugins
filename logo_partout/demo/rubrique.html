@@ -4,7 +4,7 @@
 <title>[(#NOM_SITE_SPIP|textebrut)]</title>
 <meta name="robots" content="none">
 <INCLURE{fond=inclure/head}>
-[<link rel="stylesheet" href="(#CHEMIN{demo/logo_auto.css})" type="text/css" media="all">]
+[<link rel="stylesheet" href="(#CHEMIN{demo/logo_partout.css})" type="text/css" media="all">]
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 	<hr>
 	
 	<BOUCLE_logos(RUBRIQUES){par profondeur}>
-	<div class="logo_auto left text-left">
+	<div class="logo_partout left text-left">
 		<a href="#URL_ECRIRE{rubrique,id_rubrique=#ID_RUBRIQUE}"[ title="(#TITRE|attribut_html)"]>
 			#LOGO_RUBRIQUE
 			<small>#ID_RUBRIQUE | [(#TITRE|couper{80})]</small>

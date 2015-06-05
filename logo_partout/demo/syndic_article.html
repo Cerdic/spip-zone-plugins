@@ -4,7 +4,7 @@
 <title>[(#NOM_SITE_SPIP|textebrut)]</title>
 <meta name="robots" content="none">
 <INCLURE{fond=inclure/head}>
-[<link rel="stylesheet" href="(#CHEMIN{demo/logo_auto.css})" type="text/css" media="all">]
+[<link rel="stylesheet" href="(#CHEMIN{demo/logo_partout.css})" type="text/css" media="all">]
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 	<hr>
 
 	<BOUCLE_logos(SYNDIC_ARTICLES){!par date}{0,50}>
-	<div class="logo_auto left">
+	<div class="logo_partout left">
 		<a href="#URL_ARTICLE"[ title="(#TITRE|couper{80}|attribut_html)"]>
 			<INCLURE{fond=logo/syndic_article}{id_syndic_article}>
 			<small>#NOM_SITE</small>

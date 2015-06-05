@@ -4,7 +4,7 @@ function traiter_logo_site_spip($logo_site_spip) {
 	return trim(recuperer_fond('logo/site_spip', array('logo_site_spip' => $logo_site_spip)));
 }
 
-function logo_auto_declarer_tables_interfaces($interfaces) {
+function logo_partout_declarer_tables_interfaces($interfaces) {
 	$interfaces["table_des_traitements"]['LOGO_ARTICLE'][]= 'traiter_logo_article(%s, $Pile[$SP][\'id_article\'])';
 	$interfaces["table_des_traitements"]['LOGO_ARTICLE_RUBRIQUE'][]= 'traiter_logo_article(%s, $Pile[$SP][\'id_article\'])';
 	$interfaces["table_des_traitements"]['LOGO_RUBRIQUE'][]= 'traiter_logo_rubrique(%s, $Pile[$SP][\'id_rubrique\'])';
