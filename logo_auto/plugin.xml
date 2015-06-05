@@ -3,7 +3,7 @@
 <prefix>logo_auto</prefix>
 <icon>icon/logo_auto.png</icon>
 
-<version>0.0.0</version>
+<version>0.7.1</version>
 <etat>experimental</etat>
 <categorie>multimedia</categorie>
 
@@ -17,5 +17,8 @@
 <auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
 <licence>GPL</licence>
 
+<fonctions>logo_auto_fonctions.php</fonctions>
+
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
+<necessite id="logo_spip" version="[;]" />
 </plugin>

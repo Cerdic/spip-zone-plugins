@@ -1,0 +1,13 @@
+= TODO
+= pour logo_auto
+
+tetue, en pleine expérimentation, hésite encore sur la logique de l’automatisme…
+
+- brancher la balise #LOGO_BREVE sur le modele logo/breve.html
+- brancher la balise #LOGO_DOCUMENT sur le modele logo/document.html
+- brancher la balise #LOGO_AUTEUR sur le modele logo/auteur.html en faisant attention à Gravatar, qui surcharge cette balise !
+- créer la balise pour les logos d'articles syndiqués ?
+- remplacer le lien en dur apercite.fr => tester un plugin de génération de vignettes d’écran
+
+Lire aussi :
+http://contrib.spip.net/4662?var_mode=preview
