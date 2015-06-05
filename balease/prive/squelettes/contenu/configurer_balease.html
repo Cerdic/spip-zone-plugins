@@ -12,6 +12,8 @@
 #contenu table tr.first { border-top: 1px solid; }
 .text-right { text-align: right; }
 mark { background-color: orange; }
+.todo { opacity: 1; background-color: yellow; }
+ins { font-weight: bold; color: green; }
 </style>
 
 <h1>Balises SPIP faciles</h1>
@@ -115,8 +117,8 @@ mark { background-color: orange; }
 		</tr>
 		<tr>
 			<td><a href="http://www.spip.net/fr_article910.html">SITES</a></td>
-			<td><mark>&num;ID_SYNDIC</mark><br>est l’identifiant unique du&nbsp;site référencé<br><a href="https://core.spip.net/issues/3463">#3463</a></td>
-			<td><mark>&num;NOM_SITE</mark><br>est le titre du&nbsp;site référencé</td>
+			<td class="todo"><del><mark>&num;ID_SYNDIC</mark></del><br><ins>&num;ID_SITE</ins><br>est l’identifiant unique du&nbsp;site référencé<br><a href="https://core.spip.net/issues/3463">#3463</a></td>
+			<td class="todo"><del><mark>&num;NOM_SITE</mark></del><br><ins>&num;TITRE</ins><br>est le titre du&nbsp;site référencé<br><a href="https://core.spip.net/issues/3464">#3464</a></td>
 			<td>&num;DESCRIPTIF<br>est le descriptif du&nbsp;site référencé</td>
 			<td>Ø</td>
 			<td>Ø</td>
