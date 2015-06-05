@@ -12,7 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @param string $orientation (portrait ou landscape)
  * @access public
  */
-function inc_exporter_pdf_dist($squelette, $contexte, $filename = 'output.pdf', $paper = 'lettre', $orientation = 'portrait') {
+function inc_exporter_pdf_dist($squelette, $contexte, $filename = 'sortie.pdf', $paper = 'A4', $orientation = 'portrait') {
 
   // On inclut la configuration DOMPDF
   include_spip('lib/dompdf/dompdf_config.inc');
