@@ -23,6 +23,7 @@ mark { background-color: orange; }
 			<td>&num;ID_ARTICLE<br>est l’identifiant unique de&nbsp;l’article</td>
 			<td>&num;TITRE<br>est le titre de&nbsp;l’article</td>
 			<td>&num;DESCRIPTIF<br>est le descriptif de&nbsp;l’article</td>
+			<td>&num;TEXTE<br>est le texte de&nbsp;l’article</td>
 			<td>&num;INTRODUCTION<br>affiche le descriptif de&nbsp;l’article, sinon les 600 premiers caractères <mark>du début de&nbsp;l’article (chapeau puis texte)</mark></td>
 			<td>&num;LOGO_ARTICLE<br>affiche le logo de&nbsp;l’article, éventuellement avec la gestion du survol</td>
 			<td>&num;URL_ARTICLE<br>est l’URL de la page de&nbsp;l’article</td>
@@ -34,6 +35,7 @@ mark { background-color: orange; }
 			<td>&num;ID_RUBRIQUE<br>est l’identifiant unique de la&nbsp;rubrique</td>
 			<td>&num;TITRE<br>est le titre de la&nbsp;rubrique</td>
 			<td>&num;DESCRIPTIF<br>est le descriptif de la&nbsp;rubrique</td>
+			<td>&num;TEXTE<br>est le texte de la&nbsp;rubrique</td>
 			<td>&num;INTRODUCTION<br>affiche les 600 premiers caractères du texte</td>
 			<td>&num;LOGO_RUBRIQUE<br>affiche le logo de la&nbsp;rubrique, éventuellement avec la gestion du survol<mark>, sinon celui de la&nbsp;rubrique parente</mark></td>
 			<td>&num;URL_RUBRIQUE<br>est l’URL de la page de la&nbsp;rubrique</td>
@@ -45,6 +47,7 @@ mark { background-color: orange; }
 			<td>&num;ID_BREVE<br>est l’identifiant unique de la&nbsp;brève</td>
 			<td>&num;TITRE<br>est le titre de la&nbsp;brève</td>
 			<td>Ø</td>
+			<td>&num;TEXTE<br>est le texte de la&nbsp;brève</td>
 			<td>&num;INTRODUCTION<br>affiche les 600 premiers caractères du texte</td>
 			<td>&num;LOGO_BREVE<br>affiche le logo de la&nbsp;brève, éventuellement avec la gestion du survol</td>
 			<td>&num;URL_BREVE<br>est l’URL de la page de la&nbsp;brève</td>
@@ -56,6 +59,7 @@ mark { background-color: orange; }
 			<td>&num;ID_AUTEUR<br>est l’identifiant unique de l'auteur</td>
 			<td><mark>&num;NOM</mark><br>est le nom de l'auteur</td>
 			<td>Ø</td>
+			<td><mark>&num;BIO</mark><br>est la biographie de l'auteur</td>
 			<td>Ø</td>
 			<td>&num;LOGO_AUTEUR<br>affiche le logo de l'auteur, éventuellement avec la gestion du survol</td>
 			<td>&num;URL_AUTEUR<br>est l’URL de la page de l'auteur</td>
@@ -63,21 +67,23 @@ mark { background-color: orange; }
 			<td>Ø</td>
 		</tr>
 		<tr>
-			<td><a href="http://www.spip.net/fr_article907.html">FORUMS</a></td>
+			<td><a href="http://www.spip.net/fr_article908.html">FORUMS</a></td>
 			<td>&num;ID_FORUM<br>est l’identifiant unique du&nbsp;message</td>
 			<td>&num;TITRE<br>est le titre du&nbsp;message</td>
 			<td>Ø</td>
+			<td>&num;TEXTE<br>est le texte du&nbsp;message</td>
 			<td>Ø</td>
 			<td>Ø</td>
 			<td>&num;URL_FORUM<br>est l’URL de la page du&nbsp;message</td>
 			<td>&num;DATE<br>est la date de publication du&nbsp;message</td>
-			<td><mark>&num;NOM</mark><br>affiche le nom de l'auteur du&nbsp;message</td>
+			<td><mark>&num;NOM</mark><br>est le nom de l'auteur du&nbsp;message</td>
 		</tr>
 		<tr>
 			<td><a href="http://www.spip.net/fr_article909.html">MOTS</a></td>
 			<td>&num;ID_MOT<br>est l’identifiant unique du&nbsp;mot</td>
 			<td>&num;TITRE<br>est le&nbsp;mot-clé</td>
 			<td>&num;DESCRIPTIF<br>est le descriptif du&nbsp;mot</td>
+			<td>&num;TEXTE<br>est le texte du&nbsp;mot</td>
 			<td>Ø</td>
 			<td>&num;LOGO_MOT<br>affiche le logo du&nbsp;mot</td>
 			<td>&num;URL_MOT<br>est l’URL de la page du&nbsp;mot</td>
@@ -101,6 +107,7 @@ mark { background-color: orange; }
 			<td>&num;TITRE<br>est le titre du document</td>
 			<td>&num;DESCRIPTIF<br>est le descriptif du document</td>
 			<td>Ø</td>
+			<td>Ø</td>
 			<td>&num;LOGO_DOCUMENT<br>affiche le logo (vignette de prévisualisation) du document<mark>, sinon une vignette standard</mark></td>
 			<td>&num;URL_DOCUMENT<br>est l’URL <mark>du fichier multimédia</mark></td>
 			<td>&num;DATE<br>est la date de mise en ligne du document</td>
@@ -112,6 +119,7 @@ mark { background-color: orange; }
 			<td><mark>&num;NOM_SITE</mark><br>est le titre du&nbsp;site référencé</td>
 			<td>&num;DESCRIPTIF<br>est le descriptif du&nbsp;site référencé</td>
 			<td>Ø</td>
+			<td>Ø</td>
 			<td>&num;LOGO_SITE<br>affiche le logo attribué au&nbsp;site référencé</td>
 			<td>&num;URL_SITE<br>est l’URL <mark>du&nbsp;site référencé</mark></td>
 			<td>Ø</td>
@@ -121,6 +129,7 @@ mark { background-color: orange; }
 			<td><a href="http://www.spip.net/fr_article911.html">SYNDIC_ARTICLES</a></td>
 			<td>&num;ID_SYNDIC_ARTICLE<br>est l’identifiant unique de&nbsp;l’article syndiqué</td>
 			<td>&num;TITRE<br>est le titre de&nbsp;l’article syndiqué</td>
+			<td>&num;DESCRIPTIF<br>est le descriptif de&nbsp;l’article syndiqué</td>
 			<td>Ø</td>
 			<td>Ø</td>
 			<td>Ø</td>
