@@ -1,4 +1,13 @@
-#SET{which_groupe,#CONFIG{spip2spip/export_mot_groupe,#ARRAY{0,-1}}}<B_list_mot_courant><mot[(#ENV{type_objet})]s> 
+#SET{aff_mots,non}
+<BOUCLE_list_mot_article(MOTS){id_article ?}{id_groupe IN #GET{which_groupe}}>
+	#SET{aff_mots,oui}
+</BOUCLE_list_mot_article>
+<BOUCLE_list_mot_evenements(MOTS){id_evenement ?}{id_groupe IN #GET{which_groupe}}>
+	#SET{aff_mots,oui}
+</BOUCLE_list_mot_evenements>
+
+#SET{which_groupe,#CONFIG{spip2spip/export_mot_groupe,#ARRAY{0,-1}}}
+[(#GET{aff_mots}|=={oui}|oui)<mot[(#ENV{type_objet})]s>]
      <BOUCLE_list_mot_courant0(MOTS){id_article ?}{id_groupe IN #GET{which_groupe}}><mot[(#ENV{type_objet})]>
             <groupe>[(#TYPE*|texte_backend)]</groupe>
             <titre>[(#TITRE*|texte_backend)]</titre>
@@ -7,4 +16,4 @@
             <groupe>[(#TYPE*|texte_backend)]</groupe>
             <titre>[(#TITRE*|texte_backend)]</titre>
     </mot[(#ENV{type_objet})]></BOUCLE_list_mot_courant1>
-</mot[(#ENV{type_objet})]s></B_list_mot_courant>
+[(#GET{aff_mots}|=={oui}|oui)</mot[(#ENV{type_objet})]s>]

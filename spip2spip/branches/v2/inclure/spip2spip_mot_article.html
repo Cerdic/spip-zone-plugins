@@ -1,5 +1,13 @@
-<B_list_mot_courant><mot[(#ENV{type_objet})]s> 
-     <BOUCLE_list_mot_courant0(MOTS){id_evenement ?}{type!=- spip2spip -}><mot[(#ENV{type_objet})]>
+#SET{aff_mots,non}
+<BOUCLE_list_mot_article(MOTS){id_article ?}{type!=- spip2spip -}>
+	#SET{aff_mots,oui}
+</BOUCLE_list_mot_article>
+<BOUCLE_list_mot_evenements(MOTS){id_evenement ?}{type!=- spip2spip -}>
+	#SET{aff_mots,oui}
+</BOUCLE_list_mot_evenements>
+
+[(#GET{aff_mots}|=={oui}|oui)<mot[(#ENV{type_objet})]s>]
+     <BOUCLE_list_mot_courant0(MOTS){id_article ?}{type!=- spip2spip -}><mot[(#ENV{type_objet})]>
             <groupe>[(#TYPE*|texte_backend)]</groupe>
             <titre>[(#TITRE*|texte_backend)]</titre>
     </mot[(#ENV{type_objet})]></BOUCLE_list_mot_courant0>
@@ -7,4 +15,4 @@
             <groupe>[(#TYPE*|texte_backend)]</groupe>
             <titre>[(#TITRE*|texte_backend)]</titre>
     </mot[(#ENV{type_objet})]></BOUCLE_list_mot_courant1>
-</mot[(#ENV{type_objet})]s></B_list_mot_courant>
+[(#GET{aff_mots}|=={oui}|oui)</mot[(#ENV{type_objet})]s>]
