@@ -13,7 +13,8 @@
 .text-right { text-align: right; }
 mark { background-color: orange; }
 .todo { opacity: 1; background-color: yellow !important; }
-ins { font-weight: bold; color: green; background-color: transparent; }
+ins { background-color: #C5E41C; }
+.quiet { opacity: .7; }
 </style>
 
 <h1>Balises SPIP faciles</h1>
@@ -21,7 +22,7 @@ ins { font-weight: bold; color: green; background-color: transparent; }
 <table>
 	<thead>
 		<tr>
-			<td colspan="10" class="h2">Nomenclature standard souhaitée et son comportement par défaut&nbsp;:</td>
+			<td colspan="10" class="h2">Nomenclature simplifiée souhaitée et son comportement par défaut&nbsp;:</td>
 		</tr>
 		<tr>
 			<td>OBJET</td>
@@ -35,14 +36,14 @@ ins { font-weight: bold; color: green; background-color: transparent; }
 			<td>&num;DATE<br>est la date de publication de&nbsp;l'objet</td>
 			<td>&num;AUTEUR<br>affiche le(s) auteur(s) de&nbsp;l'objet<br><a href="https://core.spip.net/issues/3470">#3470</a></td>
 		</tr>
-		<tr>
+		<tr class="quiet">
 			<td>hors boucle</td>
 			<td>Ø</td>
 			<td>est le titre du&nbsp;site&nbsp;SPIP</td>
 			<td>est le descriptif du&nbsp;site&nbsp;SPIP</td>
 			<td>Ø</td>
 			<td>affiche les 600&nbsp;premiers caractères du&nbsp;site&nbsp;SPIP</td>
-			<td>affiche le logo du&nbsp;site&nbsp;SPIP<br><a href="https://core.spip.net/issues/3465">#3465</a></td>
+			<td>affiche le logo du&nbsp;site&nbsp;SPIP</td>
 			<td>est l'URL du&nbsp;site&nbsp;SPIP</td>
 			<td>est la date courante</td>
 			<td>affiche le(s) auteur(s) du&nbsp;site&nbsp;SPIP</td>
@@ -51,8 +52,10 @@ ins { font-weight: bold; color: green; background-color: transparent; }
 	<tbody>
 		<tr>
 			<td colspan="10">
-				<span class="h2">Nomenclature actuelle, spécifique, et ses comportements&nbsp;:</span>
-				<br>Le tableau ci-dessous reflète la documentation en ligne, sur spip.net. S'il y a des manques, il faut mettre la doc à jour, avant ce tableau.
+				<span class="h2">Nomenclature et comportements actuels et spécifiques&nbsp;:</span>
+				<br>Le tableau ci-dessous reflète la <a href="http://www.spip.net/fr_rubrique143.html">documentation en&nbsp;ligne, sur&nbsp;spip.net</a>. S'il y a des manques, il faut donc mettre la doc en&nbsp;ligne à&nbsp;jour, avant ce&nbsp;tableau.
+				<br>Y sont pointées les <mark>incohérences et exceptions</mark> de nomenclature, qu'elles soient pertinentes et justifiées ou pas, et les <ins>modifications souhaitées</ins>.
+				<br>Voir aussi la liste des <a href="?exec=balease_bdd">balises issues de la base de données</a>.
 			</td>
 		</tr>
 		<tr>
