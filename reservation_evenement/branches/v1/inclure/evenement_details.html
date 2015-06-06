@@ -22,7 +22,7 @@
     <div><strong><:agenda:evenement_lieu:></strong></div>
     <div>(#LIEU)</div>
     [<div class="adresse #EDIT{adresse}">(#ADRESSE)</div>]</div>]
-    [(#GET{prix}|>{0}|oui)<div class><:reservation:label_prix:> #GET{prix}</div>]
+    [(#GET{prix}|>{0}|oui)<div class><:prix_objets:prix:> : #GET{prix}</div>]
     [(#PLACES|>{0}|oui)<INCLURE{fond=inclure/places_disponibles,id_evenement=#ID_OBJET,places,statut=#VAL|statuts_complet}/>]
     <a class="btn btn-small" title="<:reservation:inscrire:>" href="[(#URL_PAGE{inscription}|parametre_url{id_evenement,#ID_OBJET})]"><i class="icon-hand-right"></i> <:reservation:inscrire:></a>
 </aside]

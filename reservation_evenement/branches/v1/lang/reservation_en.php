@@ -107,7 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_client' => 'Client',
 	'reservation_date' => 'Date:',
 	'reservation_de' => 'Booking from',
-	'reservation_enregistre' => 'Your Registration has been saved. You will receive a confirmation email. If not, check your spam folder.',
+	'reservation_enregistre' => 'Your Registration has been saved. You will receive a confirmation email. If not, check your spam folder.', # MODIF
 	'reservation_numero' => 'Booking:',
 	'reservation_reference_numero' => 'Reference Nr ',
 

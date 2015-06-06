@@ -101,7 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reservation_client' => 'Reservant',
 	'reservation_date' => 'Datum:',
 	'reservation_de' => 'Anmeldung von',
-	'reservation_enregistre' => 'Ihre Anmeldung wurde registriert. Sie werden per Mail eine Bestätigung kriegen. Falls Sie keine erhalten, schauen Sie bitten in Ihrem SPAM Folder.',
+	'reservation_enregistre' => 'Ihre Anmeldung wurde registriert. Sie werden per Mail eine Bestätigung kriegen. Falls Sie keine erhalten, schauen Sie bitten in Ihrem SPAM Folder.', # MODIF
 	'reservation_numero' => 'Anmeldung:',
 	'reservation_reference_numero' => 'Referenznummer:',
 
