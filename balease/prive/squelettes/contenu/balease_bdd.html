@@ -4,27 +4,40 @@
 
 <B_tables_princ>
 <div class="lister_tables_principales">
-<h2>Tables principales</h2>
-<table class="table spip">
-    <thead>
-        <tr>
-            <th>Nom de l'objet</th>
-            <th>Appel dans une boucle</th>
-            <th>Les balises</th>
-        </tr>
-    </thead>
-    <tbody>
     <BOUCLE_tables_princ (DATA) {source table, #GET{tables_principales}} {par cle}>
-        <tr>
-            <td>[<strong>(#CLE|objet_info{texte_objets}|_T)</strong>]</td>
-            <td>&lt;BOUCLE_xxx&nbsp;([(#CLE|table_objet|strtoupper)])&gt; <br/>blabla<br/>&lt;/BOUCLE_xxx&gt;</td>
-            <td><B_champs><ul><BOUCLE_champs (DATA) {source table, #VALEUR{field}}>
-            <li>[(#CLE|=={#_tables_princ:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)<strong>][#(#CLE|strtoupper)][(#CLE|=={#_tables_princ:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)</strong>]</li>
-            </BOUCLE_champs></ul></B_champs></td>
-        </tr>
+    <div class="objet principal simple fiche_objet">
+        [(#BOITE_OUVRIR)]
+            <h1 id="[(#CLE|table_objet|attribut_html)]">[(#CLE|objet_info{texte_objets}|_T)]</h1>
+            <strong>Appel dans une boucle&nbsp;:</strong><br/>
+            &lt;BOUCLE_xxx&nbsp;([(#CLE|table_objet|strtoupper)]) {critères}&gt; <br/>blabla<br/>&lt;/BOUCLE_xxx&gt;<br/><br/>
+            <div class="nettoyeur"></div>
+            <B_champs>
+            <table class="spip">
+                <caption>Champs de l'objet</caption>
+                <thead>
+                    <tr>
+                        <th>Balises</th>
+                        <th>Descriptif</th>
+                        <th>Ticket</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <BOUCLE_champs (DATA) {source table, #VALEUR{field}}>
+                    <tr>
+                        <td>[(#CLE|=={#_tables_princ:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)<strong>]
+                        [(#VAL{balease:}|concat{[(#_tables_princ:CLE|table_objet)],'_',[(#CLE)],'_url'}|_T|trim|oui)<a href="[(#VAL{balease:}|concat{[(#_tables_princ:CLE|table_objet)],'_',[(#CLE)],'_url'}|_T)]" target="_blank">][#(#CLE|strtoupper)][(#VAL{balease:}|concat{[(#_tables_princ:CLE|table_objet)],'_',[(#CLE)],'_url'}|_T|trim|oui)</a>]
+                        [(#CLE|=={#_tables_princ:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)</strong>]</td>
+                        <td>[ (#VAL{balease:}|concat{[(#_tables_princ:CLE|table_objet)],'_',[(#CLE)],'_descriptif'}|_T)]</td>
+                        <td>[ (#VAL{balease:}|concat{[(#_tables_princ:CLE|table_objet)],'_',[(#CLE)],'_issue'}|_T)]</td>
+                    </tr>
+                    </BOUCLE_champs>
+                </tbody>
+            </table>
+            </B_champs>
+        [(#BOITE_FERMER)]
+    </div>
+    <div class="nettoyeur"></div>
     </BOUCLE_tables_princ>
-    </tbody>
-</table>
 </div>
 <div class="nettoyeur"></div>
 </B_tables_princ>
@@ -55,3 +68,4 @@
 </div>
 <div class="nettoyeur"></div>
 </B_tables_aux>
+
