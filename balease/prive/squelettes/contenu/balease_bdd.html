@@ -1,0 +1,57 @@
+<h1>Liste des balises issues de la base de données</h1>
+[(#SET{tables_principales, [(#VAL|lister_tables_principales)]})]
+[(#SET{tables_auxiliaires, [(#VAL|lister_tables_auxiliaires)]})]
+
+<B_tables_princ>
+<div class="lister_tables_principales">
+<h2>Tables principales</h2>
+<table class="table spip">
+    <thead>
+        <tr>
+            <th>Nom de l'objet</th>
+            <th>Appel dans une boucle</th>
+            <th>Les balises</th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_tables_princ (DATA) {source table, #GET{tables_principales}} {par cle}>
+        <tr>
+            <td>[<strong>(#CLE|objet_info{texte_objets}|_T)</strong>]</td>
+            <td>&lt;BOUCLE_xxx&nbsp;([(#CLE|table_objet|strtoupper)])&gt; <br/>blabla<br/>&lt;/BOUCLE_xxx&gt;</td>
+            <td><B_champs><ul><BOUCLE_champs (DATA) {source table, #VALEUR{field}}>
+            <li>[(#CLE|=={#_tables_princ:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)<strong>][#(#CLE|strtoupper)][(#CLE|=={#_tables_princ:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)</strong>]</li>
+            </BOUCLE_champs></ul></B_champs></td>
+        </tr>
+    </BOUCLE_tables_princ>
+    </tbody>
+</table>
+</div>
+<div class="nettoyeur"></div>
+</B_tables_princ>
+
+<B_tables_aux>
+<div class="lister_tables_auxiliaires">
+<h2>Tables auxiliaires</h2>
+<table class="table spip">
+    <thead>
+        <tr>
+            <th>Nom de l'objet</th>
+            <th>Appel dans une boucle</th>
+            <th>Les balises</th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_tables_aux (DATA) {source table, #GET{tables_auxiliaires}} {par cle}>
+        <tr>
+            <td>[<strong>(#CLE|objet_info{texte_objets}|_T)</strong>]</td>
+            <td>&lt;BOUCLE_xxx&nbsp;([(#CLE|table_objet|strtoupper)])&gt; <br/>blabla<br/>&lt;/BOUCLE_xxx&gt;</td>
+            <td><B_champs_aux><ul><BOUCLE_champs_aux (DATA) {source table, #VALEUR{field}}>
+            <li>[(#CLE|=={#_tables_aux:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)<strong>][#(#CLE|strtoupper)][(#CLE|=={#_tables_aux:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)</strong>]</li>
+            </BOUCLE_champs_aux></ul></B_champs_aux></td>
+        </tr>
+    </BOUCLE_tables_aux>
+    </tbody>
+</table>
+</div>
+<div class="nettoyeur"></div>
+</B_tables_aux>
