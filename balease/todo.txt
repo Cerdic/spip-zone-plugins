@@ -1,0 +1,14 @@
+= TODO
+= pour balease
+
+Dans un premier temps :
+- lister les balises existantes
+- vérifier leur bon fonctionnement, sinon signaler bug
+- compléter la doc spip.net avec les balises découvertes
+
+Puis :
+- homogénéiser le comportement = étendre les balises communes à tous les objets SPIP
+- homogénéiser la nomenclature
+
+Enfin :
+- proposer une nomenclature simplifiée, facile à retenir

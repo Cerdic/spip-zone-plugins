@@ -6,10 +6,12 @@
 <etat>experimental</etat>
 <categorie>outil</categorie>
 
-<slogan>Balises SPIP faciles</slogan>
-<description>ATTENTION : ce plugin est une {{contribution expérimentale}} qui ne débouchera pas nécessairement sur un plugin utilisable ! Selon le moment, il peut être bien sympa ou totalement inutilisable.
+<slogan>Balises SPIP faciles à retenir</slogan>
+<description>
 
-	Le but de ce plugin est de proposer une nomenclature simplifiée des balises SPIP, pour faciliter l'écriture des squelettes avec des balises faciles à retenir.
+	Le but de ce plugin est de proposer une nomenclature cohérente et simplifiée des balises SPIP les plus communes, pour faciliter l'écriture des squelettes avec des balises faciles à retenir.
+
+	ATTENTION : ce plugin est une {{contribution expérimentale}} qui ne débouchera pas nécessairement sur un plugin utilisable ! Selon le moment, il peut être bien sympa ou totalement inutilisable, comme actuellement. Son intérêt est pour l'instant documentaire.
 
 </description>
 <auteur>[tetue->http://spip.tetue.net], 2015</auteur>
