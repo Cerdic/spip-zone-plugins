@@ -12,8 +12,8 @@
 #contenu table tr.first { border-top: 1px solid; }
 .text-right { text-align: right; }
 mark { background-color: orange; }
-.todo { opacity: 1; background-color: yellow; }
-ins { font-weight: bold; color: green; }
+.todo { opacity: 1; background-color: yellow !important; }
+ins { font-weight: bold; color: green; background-color: transparent; }
 </style>
 
 <h1>Balises SPIP faciles</h1>
@@ -62,7 +62,7 @@ ins { font-weight: bold; color: green; }
 			<td>&num;LOGO_SITE_SPIP<br>affiche le logo du&nbsp;site&nbsp;SPIP<br><a href="https://core.spip.net/issues/3465">#3465</a></td>
 			<td>&num;URL_SITE_SPIP<br>est l'URL du&nbsp;site&nbsp;SPIP</td>
 			<td>Ø</td>
-			<td><mark>&num;EMAIL_WEBMASTER</mark><br>est l’adresse du webmestre</td>
+			<td class="todo"><del><mark>&num;EMAIL_WEBMASTER<br>est l’adresse du webmestre</del><br></mark><ins>&num;LESAUTEURS<br>affiche le nom de(s) auteur(s) du&nbsp;site&nbsp;SPIP</ins><br><a href="https://core.spip.net/issues/3466">#3466</a></td>
 		</tr>
 		<tr>
 			<td><a href="http://www.spip.net/fr_article902.html">ARTICLES</a></td>
@@ -122,7 +122,7 @@ ins { font-weight: bold; color: green; }
 			<td>Ø</td>
 			<td>&num;URL_FORUM<br>est l’URL de la <mark>page où est affiché le&nbsp;message</mark></td>
 			<td>&num;DATE<br>est la date de publication du&nbsp;message</td>
-			<td><mark>&num;NOM</mark><br>est le nom de l'auteur du&nbsp;message</td>
+			<td class="todo"><del><mark>&num;NOM</mark></del><br><ins>&num;LESAUTEURS</ins><br>est le nom de l'auteur du&nbsp;message<br><a href="https://core.spip.net/issues/3466">#3466</a></td>
 		</tr>
 		<tr>
 			<td><a href="http://www.spip.net/fr_article909.html">MOTS</a></td>
