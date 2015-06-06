@@ -3,7 +3,7 @@
     categorie="outil"
     version="1.0.1"
     etat="dev"
-    compatibilite="[3.0.16;3.0.*]"
+    compatibilite="[3.0.0;3.1.*]"
     logo="prive/themes/spip/images/dompdf-64.png"
     documentation="http://dompdf.github.io/"
     >
