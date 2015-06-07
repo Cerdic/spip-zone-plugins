@@ -2,7 +2,7 @@
 	<nom>Splickrbox</nom>
 	<slogan>Afficher des photos &#224; la Flickr</slogan>
 	<auteur>[BoOz->booz@rezo.net], Pierre Andrews (mortimer)</auteur>
-	<version>0.4.5</version>
+	<version>0.4.6</version>
 	<etat>stable</etat>
 	<icon>images/splickrbox-64.png</icon>
 	<description>
@@ -27,6 +27,6 @@
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;3.1.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
