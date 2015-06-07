@@ -3,7 +3,7 @@
 	<slogan>Am&#233;liorations de l'accessibilit&#233; pour les r&#233;dacteurs</slogan>
 	<auteur>Goetsu et [RealET->http://contrib.spip.net/_RealET_]</auteur>
 	<licence>GNU/LGPL (c) 2011</licence>
-	<version>0.8.7</version>
+	<version>0.8.8</version>
 	<etat>stable</etat>
 	<description>Depuis le 29 octobre 2009, les services de communication publique en ligne doivent se mettre en conformit&#233; par rapport au R&#233;f&#233;rentiel G&#233;n&#233;ral d’Accessibilit&#233; pour les Administrations (RGAA) qui demande &#224; ce que les sites web publics soient accessibles au plus grand nombre, notamment les personnes en situations de handicaps.
 
@@ -18,7 +18,7 @@ L’objectif de ce plugin et de sa documentation associ&#233;e n’est pas de pr
 	</pipeline>
 	
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<utilise id="gestdoc" version="[1.1.2;]" />
 	<utilise id="medias" version="[1.5.0;]" />
 	<categorie>navigation</categorie>
