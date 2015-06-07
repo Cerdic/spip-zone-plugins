@@ -58,7 +58,7 @@ class MCacheBackend_memcache extends MCacheBackend {
 		if (!$this->ok) return null;
 
 		// set if not exists
-		memcache_add($this->memcache, _CACHE_NAMESPACE.$key, 0, $ttl);
+		@memcache_add($this->memcache, _CACHE_NAMESPACE.$key, 0, $ttl);
 	
 		if (!isset($value))
 			$value = 1;
