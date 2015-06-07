@@ -53,7 +53,7 @@
             <strong>Appel dans une boucle&nbsp;:</strong><br/>
             &lt;BOUCLE_xxx&nbsp;([(#CLE|table_objet|strtoupper)]) {critères}&gt; <br/>blabla<br/>&lt;/BOUCLE_xxx&gt;<br/><br/>
             <div class="nettoyeur"></div>
-            <B_champs_aux>[(#SET{compteur_balises,[(#GET{compteur_balises}|plus{#TOTAL_BOUCLE})]})]
+            <B_champs_aux>
             <table class="spip">
                 <caption>Champs de l'objet</caption>
                 <thead>
@@ -70,7 +70,7 @@
                         [(#VAL{balease:}|concat{[(#_tables_aux:CLE|table_objet)],'_',[(#CLE)],'_url'}|_T|trim|oui)<a href="[(#VAL{balease:}|concat{[(#_tables_aux:CLE|table_objet)],'_',[(#CLE)],'_url'}|_T)]" target="_blank">][#(#CLE|strtoupper)][(#VAL{balease:}|concat{[(#_tables_aux:CLE|table_objet)],'_',[(#CLE)],'_url'}|_T|trim|oui)</a>]
                         [(#CLE|=={#_tables_aux:VALEUR{key}|table_valeur{'PRIMARY KEY'}}|oui)</strong>]</td>
                         <td>[ (#VAL{balease:}|concat{[(#_tables_aux:CLE|table_objet)],'_',[(#CLE)],'_descriptif'}|_T)]</td>
-                        <td>[ (#VAL{balease:}|concat{[(#_tables_aux:CLE|table_objet)],'_',[(#CLE)],'_issue'}|_T)]</td>[(#VAL{balease:}|concat{[(#_tables_aux:CLE|table_objet)],'_',[(#CLE)],'_url'}|_T|trim|non)[(#SET{sans_documentation,[(#GET{sans_documentation}|push{[(#_tables_aux:CLE|table_objet|concat{' : ',#CLE})]})]})]]
+                        <td>[ (#VAL{balease:}|concat{[(#_tables_aux:CLE|table_objet)],'_',[(#CLE)],'_issue'}|_T)]</td>
                     </tr>
                     </BOUCLE_champs_aux>
                 </tbody>
