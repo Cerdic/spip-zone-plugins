@@ -35,8 +35,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_nombre_evenements' => 'Le nombre nécessaire d’événements réservés  pour que la promotion s’applique.',
 	'explication_nombre_evenements_choix' => 'Si rien ou 0, ce nombre sera égal au nombre d’@objet_promotion@s choisis ci-haut',
 	'explication_objet_promotion' => 'Si définit au niveau article, seront compris tous les évenéments disponible por la réservation de cet article.',
-	
-  'formulaire_public' => 'Formulaire public',
+
+	// F
+	'formulaire_public' => 'Formulaire public',
 
 	// I
 	'icone_cacher' => 'Cacher',
