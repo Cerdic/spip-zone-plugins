@@ -1,9 +1,9 @@
 <plugin>
 <nom>Logos partout</nom>
 <prefix>logo_partout</prefix>
-<icon>icon/logo_partout.png</icon>
+<icon>logo_partout.png</icon>
 
-<version>0.7.1</version>
+<version>0.8.0</version>
 <etat>experimental</etat>
 <categorie>multimedia</categorie>
 
@@ -14,11 +14,9 @@
 
 </description>
 <lien>http://contrib.spip.net/4662?var_mode=preview</lien>
-<auteur>[tetue->http://spip.tetue.net], Fil - 2008-2015</auteur>
+<auteur>[tetue->http://spip.tetue.net], 2015</auteur>
 <licence>GPL</licence>
 
-<fonctions>logo_partout_fonctions.php</fonctions>
-
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
-<necessite id="logo_spip" version="[;]" />
+<necessite id="logo_auto" version="[0.7.2;]" />
 </plugin>
