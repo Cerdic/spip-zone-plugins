@@ -1,8 +1,8 @@
 <object id="o" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
       width="[(#CONFIG{cooliris/largeur}|sinon{"600"})]" height="[(#CONFIG{cooliris/hauteur}|sinon{"450"})]">
-    <param name="movie" value="http://apps.cooliris.com/embed/cooliris.swf" />
+    <param name="movie" value="[(#CHEMIN{swf/cooliris.swf})]" />
     <param name="allowFullScreen" value="true" />
-    <param name="allowScriptAccess" value="always" />
+    <param name="allowScriptAccess" value="never" />
     <param name="flashvars" value="feed=[(#ENV{feed}|?{api://[(#ENV{feed}|replace{&amp;,&}|urlencode)],[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]})]
 [&intro=(#CONFIG{cooliris/intro})]
 [&style=(#CONFIG{cooliris/style})]
@@ -25,7 +25,7 @@
  />
 	<param name="wmode" value="transparent" />
     <embed type="application/x-shockwave-flash"
-      src="http://apps.cooliris.com/embed/cooliris.swf"
+      src="[(#CHEMIN{swf/cooliris.swf})]"
       flashvars="feed=[(#ENV{feed}|?{api://[(#ENV{feed}|replace{&amp;,&}|urlencode)],[(#URL_PAGE{spip_iris}|urlencode)%26id_article%3D#ID_ARTICLE]})]
 [&intro=(#CONFIG{cooliris/intro})]
 [&style=(#CONFIG{cooliris/style})]
@@ -48,7 +48,7 @@
       width="[(#CONFIG{cooliris/largeur}|sinon{"600"})]" 
       height="[(#CONFIG{cooliris/hauteur}|sinon{"450"})]"
       allowFullScreen="true"
-      allowScriptAccess="always"
+      allowScriptAccess="never"
 	  wmode="transparent"
 	  >
     </embed>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="spipiris"
 	categorie="multimedia"
-	version="2.0.0"
+	version="2.1.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="prive/themes/spip/images/cooliris-32.png"
@@ -14,7 +14,7 @@
 	<auteur lien="http://">Phil</auteur>
  
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
-	<copyright>2012-2013</copyright>
+	<copyright>2012-2015</copyright>
 
 	<menu nom="configurer_cooliris" titre="cooliris:configuration_cooliris" parent="menu_configuration" icone="images/cooliris-16.png" />
  
