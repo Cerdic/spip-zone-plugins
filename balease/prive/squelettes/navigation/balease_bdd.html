@@ -1,0 +1,24 @@
+[(#SET{tables_principales, [(#VAL|lister_tables_principales|array_keys)]})]
+[(#SET{tables_auxiliaires, [(#VAL|lister_tables_auxiliaires|array_keys)]})]
+
+[(#BOITE_OUVRIR)]
+<B_sommaire_princ>
+<h3>Tables principales</h3>
+<ul class="menu-items">
+<BOUCLE_sommaire_princ (DATA) {source table, #GET{tables_principales}} {par valeur}>
+<li class="item"><a href="[#(#VALEUR|table_objet)]">[(#VALEUR|objet_info{texte_objets}|_T|sinon{#VALEUR|table_objet|ucfirst})]</a></li>
+</BOUCLE_sommaire_princ>
+</ul>
+</B_sommaire_princ>
+[(#BOITE_FERMER)]
+[(#BOITE_OUVRIR)]
+<B_sommaire_aux>
+<h3>Tables auxiliaires</h3>
+<ul class="menu-items">
+<BOUCLE_sommaire_aux (DATA) {source table, #GET{tables_auxiliaires}} {par valeur}>
+<li class="item"><a href="[#(#VALEUR|table_objet)]">[(#VALEUR|objet_info{texte_objets}|_T|sinon{#VALEUR|table_objet|ucfirst})]</a></li>
+</BOUCLE_sommaire_aux>
+</ul>
+</B_sommaire_aux>
+
+[(#BOITE_FERMER)]
