@@ -1,14 +1,17 @@
 <plugin>
-	<nom>Balise #TITRE_PARENT</nom>
-	<slogan>Afficher le titre de la rubrique parent</slogan>
-	<auteur>James</auteur>
-	<version>1.0.0</version>
+	<nom>Titre de la rubrique parente</nom>
 	<prefix>TitreParent</prefix>
-	<fonctions>titre_parent.php</fonctions>
-	<etat>stable</etat>
 	<icon>titre_parent.png</icon>
+
+	<slogan>Afficher facilement le titre de la rubrique parente</slogan>
+	<description>Affichez le titre de la rubrique parente, sans boucle suppl&#233;mentaire, avec la balise #TITRE_PARENT</description>
 	<lien>http://contrib.spip.net/balise-TITRE-PARENT</lien>
-	<description>Une balise pour afficher le titre de la rubrique parente, sans boucle suppl&#233;mentaire.</description>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<auteur>James</auteur>
+	<version>2.0.0</version>
+	<etat>dev</etat>
+
+	<fonctions>titre_parent_fonctions.php</fonctions>
+
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>outil</categorie>
 </plugin>

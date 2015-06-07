@@ -25,5 +25,3 @@ global $table_des_traitements;
 if (!isset($table_des_traitements['TITRE_PARENT'])) {
 	$table_des_traitements['TITRE_PARENT'] = $table_des_traitements['TITRE'];
 }
-
-?>
