@@ -615,7 +615,7 @@ function getHeader(){
 	$head = $commencer_page(_T('memoization:memcached_serveur'), "configuration", "cache");
 
 	$head .= "<br /><br /><br />";
-	$head .= gros_titre(),'', false);
+	$head .= gros_titre(_T('memoization:memcached_serveur'),'', false);
 
 	$head .= debut_gauche("",true);
 
