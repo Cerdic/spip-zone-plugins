@@ -109,33 +109,12 @@
 <description>Portail, communauté, en-us</description>
 </item>
 
-<item>
-<title>DZone</title>
-<author>dzone</author>
-<link>http://www.dzone.com/links/add.html?url=%u&amp;title=%t</link>
-<description>Digg-like, en-us</description>
-</item>
-
 <!-- F -->
 <item>
 <title>Facebook</title>
 <author>facebook</author>
 <link>http://www.facebook.com/sharer/sharer.php?u=%u&amp;t=%t</link>
 <category>1</category>
-</item>
-
-<item>
-<title>Fark</title>
-<author>fark</author>
-<link>http://cgi.fark.com/cgi/fark/farkit.pl?u=%u&amp;h=%t</link>
-<description>Digg-like, news people sport music video, en-us</description>
-</item>
-
-<item>
-<title>Faves</title>
-<author>faves</author>
-<link>http://faves.com/Authoring.aspx?u=%u&t=%t</link>
-<description>Digg-like, news people technology music video, en-us</description>
 </item>
 
 <item>
@@ -380,13 +359,6 @@
 </item>
 
 <!-- W -->
-<item>
-<title>Wikio</title>
-<author>wikio</author>
-<link>http://www.wikio.fr/sharethis?url=%u&amp;title=%t</link> <!-- En fait wikio a change et ne propose en partage rien de plus qu'un clone de socialtags. Ce qu'il faudrait c'est
-integrer un bouton de vote quand ils auront retablis leur truc -->
-<description>Digg-like, news, en-us fr</description>
-</item>
 
 <!-- Y -->
 <item>
