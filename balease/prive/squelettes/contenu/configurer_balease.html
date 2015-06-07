@@ -17,7 +17,7 @@
 mark { background-color: orange; }
 
 /* todo / doing */
-.todo { opacity: 1; background-color: yellow !important; }
+.todo { opacity: 1; background-color: rgba(255,255,0, 0.5) !important; }
 ins { background-color: yellow; font-weight: bold; }
 
 /* done */
@@ -26,7 +26,7 @@ ins { background-color: yellow; font-weight: bold; }
 .done del { opacity: .2; }
 .done:hover del { opacity: .7; }
 .done del mark { background-color: rgba(255,165,0, 0.5); }
-.done ins { background-color: rgba(255,255,255, 0.5); }
+.done ins { background-color: transparent; }
 
 </style>
 
@@ -35,7 +35,7 @@ ins { background-color: yellow; font-weight: bold; }
 <table class="spip">
 	<thead>
 		<tr>
-			<td colspan="11" class="h2">Nomenclature simplifiée souhaitée et son comportement par défaut&nbsp;:</td>
+			<td colspan="11" class="h2">Nomenclature simplifiée souhaitée dans ce plugin et comportement par défaut&nbsp;:</td>
 		</tr>
 		<tr>
 			<td>OBJET</td>
@@ -45,7 +45,7 @@ ins { background-color: yellow; font-weight: bold; }
 			<td>&num;TEXTE<br>est le texte de&nbsp;l'objet</td>
 			<td class="todo">&num;INTRO<br>affiche les 600&nbsp;premiers caractères de&nbsp;l'objet</td>
 			<td class="todo">&num;LOGO<br>affiche le logo de&nbsp;l'objet<br><a href="https://core.spip.net/issues/3465">#3465</a></td>
-			<td class="todo">&num;URL<br>est l'URL de&nbsp;l'objet,<br>c'est-à-dire de sa page (&num;URL_PAGE : <a href="https://core.spip.net/issues/3469">#3469</a>), sinon l'url spécifique de&nbsp;l'objet<br></td>
+			<td class="todo">&num;URL<br>est l'URL de&nbsp;l'objet,<br>c'est-à-dire de sa page (&num;URL_PAGE&nbsp;: <a href="https://core.spip.net/issues/3469">#3469</a>), sinon l'url spécifique de&nbsp;l'objet<br></td>
 			<td>&num;DATE<br>est la date de publication de&nbsp;l'objet</td>
 			<td class="todo">&num;AUTEUR<br>affiche le(s) auteur(s) de&nbsp;l'objet<br><a href="https://core.spip.net/issues/3470">#3470</a></td>
 			<td>&num;LANG<br>est la langue de l'objet</td>
@@ -67,9 +67,9 @@ ins { background-color: yellow; font-weight: bold; }
 	<tbody>
 		<tr>
 			<td colspan="11">
-				<span class="h2">Nomenclature et comportements actuels et spécifiques&nbsp;:</span>
+				<span class="h2">Nomenclature et comportements, actuels et spécifiques&nbsp;:</span>
 				<br>Le tableau ci-dessous reflète la <a href="http://www.spip.net/fr_rubrique143.html">documentation en&nbsp;ligne, sur&nbsp;spip.net</a>. S'il y a des manques, il faut donc mettre la doc en&nbsp;ligne à&nbsp;jour, avant ce&nbsp;tableau.
-				<br>Y sont pointées les <mark>incohérences et exceptions</mark>, qu'elles soient pertinentes et justifiées ou pas, les <span class="todo">modifications souhaitées</span>, et les <span class="done">apports de ce plugin</span> (à&nbsp;venir).
+				<br>Y sont pointées les <mark>incohérences et exceptions</mark>, qu'elles soient pertinentes et justifiées ou pas, les <span class="todo">modifications souhaitables</span> et les <span class="done">apports de ce plugin</span> (à&nbsp;venir).
 				<br>Voir aussi la liste des <a href="?exec=balease_bdd">balises issues de la base de données</a>.
 			</td>
 		</tr>
@@ -92,7 +92,7 @@ ins { background-color: yellow; font-weight: bold; }
 			<td>&num;TITRE<br>est le titre de&nbsp;l’article</td>
 			<td>&num;DESCRIPTIF<br>est le descriptif de&nbsp;l’article</td>
 			<td>&num;TEXTE<br>est le texte de&nbsp;l’article</td>
-			<td>&num;INTRODUCTION<br>affiche <mark>le descriptif de&nbsp;l’article, sinon</mark> les 600&nbsp;premiers caractères <mark>du début de&nbsp;l’article (chapeau puis texte)</mark></td>
+			<td>&num;INTRODUCTION<br>affiche <mark>le&nbsp;descriptif de&nbsp;l’article, sinon</mark> les 600&nbsp;premiers caractères <mark>du début de&nbsp;l’article (chapeau puis texte)</mark></td>
 			<td>&num;LOGO_ARTICLE<br>affiche le logo de&nbsp;l’article, éventuellement avec la gestion du survol</td>
 			<td>&num;URL_ARTICLE<br>est l’URL de la page de&nbsp;l’article</td>
 			<td>&num;DATE<br>est la date de publication de&nbsp;l’article</td>
@@ -179,14 +179,14 @@ ins { background-color: yellow; font-weight: bold; }
 		</tr>
 		<tr>
 			<td><a href="http://www.spip.net/fr_article1823.html">DOCUMENTS</a></td>
-			<td>&num;ID_DOCUMENT<br>est l’identifiant unique du document</td>
-			<td>&num;TITRE<br>est le titre du document</td>
-			<td>&num;DESCRIPTIF<br>est le descriptif du document</td>
+			<td>&num;ID_DOCUMENT<br>est l’identifiant unique du&nbsp;document</td>
+			<td>&num;TITRE<br>est le titre du&nbsp;document</td>
+			<td>&num;DESCRIPTIF<br>est le descriptif du&nbsp;document</td>
 			<td>Ø</td>
 			<td><mark>Ø</mark><br><a href="https://core.spip.net/issues/3312">#3312</a></td>
-			<td>&num;LOGO_DOCUMENT<br>affiche le logo (vignette de prévisualisation) du document<mark>, sinon une vignette standard</mark></td>
-			<td>&num;URL_DOCUMENT<br>est l’URL <mark>du fichier multimédia</mark></td>
-			<td>&num;DATE<br>est la date de mise en ligne du document</td>
+			<td>&num;LOGO_DOCUMENT<br>affiche le logo (vignette de prévisualisation) du&nbsp;document<mark>, sinon une vignette standard</mark></td>
+			<td>&num;URL_DOCUMENT<br>est l’URL <mark>du fichier multimédia</mark><br><ins>&num;URL_PAGE<br>affiche l’url de la page du&nbsp;document</ins><br><a href="https://core.spip.net/issues/3469">#3469</a></td>
+			<td>&num;DATE<br>est la date de mise en ligne du&nbsp;document</td>
 			<td>Ø</td>
 			<td>Ø</td>
 		</tr>
@@ -198,10 +198,10 @@ ins { background-color: yellow; font-weight: bold; }
 			<td>Ø</td>
 			<td><mark>Ø</mark><br><a href="https://core.spip.net/issues/3312">#3312</a></td>
 			<td>&num;LOGO_SITE<br>affiche le logo attribué au&nbsp;site référencé</td>
-			<td>&num;URL_SITE<br>est l’URL <mark>du&nbsp;site référencé</mark></td>
+			<td>&num;URL_SITE<br>est l’URL <mark>du&nbsp;site référencé</mark><br><ins>&num;URL_PAGE<br>affiche l’url de la page du&nbsp;site référencé</ins><br><a href="https://core.spip.net/issues/3469">#3469</a></td>
 			<td>Ø</td>
 			<td>Ø</td>
-			<td>Ø<br><a href="https://core.spip.net/issues/2017">#2017</a></td>
+			<td>Ø<br><ins>&num;LANG<br>est la langue principale du&nbsp;site référencé</ins><br><a href="https://core.spip.net/issues/2017">#2017</a></td>
 		</tr>
 		<tr>
 			<td><a href="http://www.spip.net/fr_article911.html">SYNDIC_ARTICLES</a></td>
@@ -214,7 +214,7 @@ ins { background-color: yellow; font-weight: bold; }
 			<td>&num;URL_SYNDIC_ARTICLE<br>est l’URL <mark>de&nbsp;l’article syndiqué (sur son site d'origine)</mark></td>
 			<td>&num;DATE<br>est la date de publication de&nbsp;l’article syndiqué</td>
 			<td><del>&num;LESAUTEURS</del><br><ins>&num;AUTEUR</ins><br>affiche le(s) auteur(s) de&nbsp;l’article syndiqué<br><a href="https://core.spip.net/issues/3470">#3470</a></td>
-			<td>Ø</td>
+			<td>Ø<br><ins>&num;LANG<br>est la langue de&nbsp;l’article syndiqué</ins></td>
 		</tr>
 		<tr>
 			<td><a href="http://www.spip.net/fr_article912.html">SIGNATURES</a></td>
