@@ -3,7 +3,7 @@
 	<slogan>Extension changement de langue pour Porte-Plume</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<etat>test</etat>
 	<description>Ajoute un bouton au porte-plume permettant d'indiquer un changement de langue dans le texte.</description>
 	<lien>http://contrib.spip.net/?article3705</lien>
@@ -22,6 +22,6 @@
 		<inclure>pp_chgt_lg_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.3;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.3;3.1.99]" />
 	<necessite id="porte_plume" />
 </plugin>
