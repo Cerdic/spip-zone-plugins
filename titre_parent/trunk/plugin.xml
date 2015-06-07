@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Titre de la rubrique parente</nom>
-	<prefix>TitreParent</prefix>
+	<prefix>titre_parent</prefix>
 	<icon>titre_parent.png</icon>
 
 	<slogan>Afficher facilement le titre de la rubrique parente</slogan>
