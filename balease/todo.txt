@@ -5,10 +5,10 @@ Dans un premier temps :
 - lister les balises existantes
 - vérifier leur bon fonctionnement, sinon signaler bug
 - compléter la doc spip.net avec les balises découvertes
-- rendre compatible la page ?exec=balease_bdd compatible SPIP 2.1
+- rendre la page ?exec=balease_bdd compatible SPIP 2.1 (facultatif)
 
 Puis :
-- homogénéiser le comportement = étendre les balises communes à tous les objets SPIP
+- homogénéiser le comportement = étendre les balises communes, à tous les objets SPIP
 - homogénéiser la nomenclature
 
 Enfin :

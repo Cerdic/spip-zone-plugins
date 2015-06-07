@@ -11,10 +11,23 @@
 #contenu table thead td b { font-size: 110%; }
 #contenu table tr.first { border-top: 1px solid; }
 .text-right { text-align: right; }
-mark { background-color: orange; }
-.todo { opacity: 1; background-color: yellow !important; }
-ins { background-color: #C5E41C; }
 .quiet { opacity: .7; }
+
+/* exceptions */
+mark { background-color: orange; }
+
+/* todo / doing */
+.todo { opacity: 1; background-color: yellow !important; }
+ins { background-color: yellow; font-weight: bold; }
+
+/* done */
+.done { opacity: 1; background-color: #C5E41C !important; }
+.done mark {}
+.done del { opacity: .2; }
+.done:hover del { opacity: .7; }
+.done del mark { background-color: rgba(255,165,0, 0.5); }
+.done ins { background-color: rgba(255,255,255, 0.5); }
+
 </style>
 
 <h1>Balises SPIP faciles</h1>
@@ -26,15 +39,15 @@ ins { background-color: #C5E41C; }
 		</tr>
 		<tr>
 			<td>OBJET</td>
-			<td>&num;ID<br>est l’identifiant unique de&nbsp;l’objet</td>
+			<td class="todo">&num;ID<br>est l’identifiant unique de&nbsp;l’objet</td>
 			<td>&num;TITRE<br>est le nom de&nbsp;l'objet</td>
-			<td>&num;DESC<br>est le descriptif de&nbsp;l'objet</td>
+			<td class="todo">&num;DESC<br>est le descriptif de&nbsp;l'objet</td>
 			<td>&num;TEXTE<br>est le texte de&nbsp;l'objet</td>
-			<td>&num;INTRO<br>affiche les 600&nbsp;premiers caractères de&nbsp;l'objet</td>
-			<td>&num;LOGO<br>affiche le logo de&nbsp;l'objet<br><a href="https://core.spip.net/issues/3465">#3465</a></td>
-			<td>&num;URL<br>est l'URL de&nbsp;l'objet,<br>c'est-à-dire de sa page (&num;URL_PAGE : <a href="https://core.spip.net/issues/3469">#3469</a>), sinon l'url spécifique de&nbsp;l'objet<br></td>
+			<td class="todo">&num;INTRO<br>affiche les 600&nbsp;premiers caractères de&nbsp;l'objet</td>
+			<td class="todo">&num;LOGO<br>affiche le logo de&nbsp;l'objet<br><a href="https://core.spip.net/issues/3465">#3465</a></td>
+			<td class="todo">&num;URL<br>est l'URL de&nbsp;l'objet,<br>c'est-à-dire de sa page (&num;URL_PAGE : <a href="https://core.spip.net/issues/3469">#3469</a>), sinon l'url spécifique de&nbsp;l'objet<br></td>
 			<td>&num;DATE<br>est la date de publication de&nbsp;l'objet</td>
-			<td>&num;AUTEUR<br>affiche le(s) auteur(s) de&nbsp;l'objet<br><a href="https://core.spip.net/issues/3470">#3470</a></td>
+			<td class="todo">&num;AUTEUR<br>affiche le(s) auteur(s) de&nbsp;l'objet<br><a href="https://core.spip.net/issues/3470">#3470</a></td>
 			<td>&num;LANG<br>est la langue de l'objet</td>
 		</tr>
 		<tr class="quiet">
@@ -56,7 +69,7 @@ ins { background-color: #C5E41C; }
 			<td colspan="11">
 				<span class="h2">Nomenclature et comportements actuels et spécifiques&nbsp;:</span>
 				<br>Le tableau ci-dessous reflète la <a href="http://www.spip.net/fr_rubrique143.html">documentation en&nbsp;ligne, sur&nbsp;spip.net</a>. S'il y a des manques, il faut donc mettre la doc en&nbsp;ligne à&nbsp;jour, avant ce&nbsp;tableau.
-				<br>Y sont pointées les <mark>incohérences et exceptions</mark> de nomenclature, qu'elles soient pertinentes et justifiées ou pas, et les <ins>modifications souhaitées</ins>.
+				<br>Y sont pointées les <mark>incohérences et exceptions</mark>, qu'elles soient pertinentes et justifiées ou pas, les <span class="todo">modifications souhaitées</span>, et les <span class="done">apports de ce plugin</span> (à&nbsp;venir).
 				<br>Voir aussi la liste des <a href="?exec=balease_bdd">balises issues de la base de données</a>.
 			</td>
 		</tr>
@@ -213,7 +226,7 @@ ins { background-color: #C5E41C; }
 			<td>Ø</td>
 			<td>Ø</td>
 			<td>&num;DATE<br>est la date de publication du&nbsp;message</td>
-			<td><del><mark>&num;NOM_EMAIL</mark></del><br><ins>&num;AUTEUR</ins><br>affiche l'auteur du&nbsp;message<br><a href="https://core.spip.net/issues/3470">#3470</a></td>
+			<td class="todo"><del><mark>&num;NOM_EMAIL</mark></del><br><ins>&num;AUTEUR</ins><br>affiche l'auteur du&nbsp;message<br><a href="https://core.spip.net/issues/3470">#3470</a></td>
 			<td>Ø</td>
 		</tr>
 	</tbody>
