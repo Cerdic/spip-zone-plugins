@@ -316,6 +316,7 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 				unset($langues_base[$strings_id]);
 			}
 		}
+		spip_unlink($dest);
 	}else if(file_exists($dest = $dir_lang.$fichier_po)){
 		lire_fichier($dest,$contenu_po);
 		preg_match_all(',(\#\, php-format|\#\, fuzzy\, php-format).*msgstr.*\"\n,Uims', $contenu_po,$matches);
@@ -331,6 +332,7 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 			if($str != '')
 				$array_po[$matches[1]] = array('str'=>$str,'statut'=>$statut);
 		}
+
 		$langues_base = sql_allfetsel('id_tradlang,id,str,statut','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($lang));
 		$modifs_po = array();
 		foreach($langues_base as $strings_id => $strings){
@@ -346,6 +348,7 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 				}
 			}
 		}
+		spip_unlink($dest);
 	}
 	$res['editable'] = false;
 	if($count > 1)
