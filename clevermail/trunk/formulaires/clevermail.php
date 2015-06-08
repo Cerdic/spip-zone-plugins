@@ -1,7 +1,7 @@
 <?php
 include_spip('base/abstract_sql');
 function formulaires_clevermail_charger_dist($lst_id_force = 0, $lsr_mode_force = false, $cbox='') {
-	$default = array('lsr_mode' => 0, 'sub_email' => '', 'lst_id_force' => 0, 'lst_ids' => array());
+	$default = array('lsr_mode' => 1, 'sub_email' => '', 'lst_id_force' => 0, 'lst_ids' => array());
 	if ($cbox == 'box') {
 	  $default['cbox'] = $cbox;
 	}

@@ -38,7 +38,7 @@ function clevermail_declarer_tables_objets_sql($tables) {
 			"lst_auto_week_days" => "VARCHAR(13) NOT NULL default '1'", // concatenation numeros des jours, 0 = dimanche
 			"lst_auto_month_day" => "TINYINT(2) NOT NULL default '1'",
 			"lst_auto_subscribers" => "VARCHAR(255) NOT NULL",
-			"lst_auto_subscribers_mode" => "TINYINT(1) NOT NULL default '0'",
+			"lst_auto_subscribers_mode" => "TINYINT(1) NOT NULL default '1'",
 			"lst_auto_subscribers_updated" => "int(11) NOT NULL default '0'"
 		),
 		'key' => array(

@@ -51,6 +51,9 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.9.0'] = array(
 		array('sql_alter',"TABLE spip_cm_lists DROP lst_subject")
     	);
+	$maj['0.9.1'] = array(
+		array('sql_alter',"TABLE spip_cm_lists CHANGE lst_auto_subscribers_mode lst_auto_subscribers_mode TINYINT(1) DEFAULT 1 NOT NULL;")
+    	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
  }

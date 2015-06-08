@@ -2,7 +2,7 @@
 include_spip('base/abstract_sql');
 function formulaires_clevermail_multiple_charger_dist($lst_id = 0, $lsr_mode_force = false) {
 
-	$default = array('editable' => ' ', 'lsr_mode' => 0, 'sub_email' => '', 'lst_ids' => array());
+	$default = array('editable' => ' ', 'lsr_mode' => 1, 'sub_email' => '', 'lst_ids' => array());
 	if ($lsr_mode !== false && in_array($lsr_mode_force, array('texte', 'html'))) {
 		$default['lsr_mode_force'] = $lsr_mode_force;
 	}

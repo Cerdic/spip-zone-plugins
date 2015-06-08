@@ -5,7 +5,7 @@ function formulaires_clevermail_subscriber_new_charger_dist() {
 	$valeurs = array(
 		'cm_file' => '',
 	  'cm_subs' => '',
-	  'cm_mode' => 0,
+	  'cm_mode' => 1,
 	  'cm_lists' => array()
 	);
 

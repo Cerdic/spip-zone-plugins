@@ -58,7 +58,7 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_auto_week_days' => array(1),
 		  'lst_auto_month_day' => 1,
 		  'lst_auto_subscribers' => '',
-		  'lst_auto_subscribers_mode' => 0
+		  'lst_auto_subscribers_mode' => 1
 		);
 	}
 	return $valeurs;

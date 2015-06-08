@@ -314,15 +314,15 @@
           <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
             <label><:clevermail:auto_subscribers_mode:></label>
             [<span class='erreur_message'>(#GET{erreurs})</span>]
-             #SET{value,0}
-             <div class="choix">
-               <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
-               <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte:></label>
-             </div>
              #SET{value,1}
              <div class="choix">
                <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
                <label for="#GET{name}#GET{value}"><:clevermail:choix_version_html:></label>
+             </div>
+             #SET{value,0}
+             <div class="choix">
+               <input type="radio" name="#GET{name}" id="#GET{name}#GET{value}" class="radio" value="#GET{value}"[ (#ENV{#GET{name}}|=={#GET{value}}|oui)checked="checked"] />
+               <label for="#GET{name}#GET{value}"><:clevermail:choix_version_texte:></label>
              </div>
           </li>
         </ul>
