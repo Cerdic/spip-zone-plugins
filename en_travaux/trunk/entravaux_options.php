@@ -68,7 +68,7 @@ if (is_entravaux()){
 			if (!autoriser('travaux')){
 				spip_initialisation_suite();
 				// si on est loge : die() avec travaux
-				if ($GLOBALS['visiteur_session']['id_auteur']){
+				if (isset($GLOBALS['visiteur_session']['id_auteur']) OR $GLOBALS['visiteur_session']['id_auteur']){
 					$travaux = recuperer_fond("inclure/entravaux",array());
 					// fallback : le fond renvoie parfois du vide ...
 					if (!strlen($travaux)){
