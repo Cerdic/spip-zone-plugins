@@ -1,12 +1,27 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function videos_ieconfig_metas($table){
+	$table['videos']['titre'] = _T('paquet-videos:videos_nom');
+    $table['videos']['icone'] = 'prive/themes/spip/images/videos-16.png';
+    $table['videos']['metas_serialize'] = 'videos';
+	return $table;
+}
+
 function videos_insert_head($flux){
 	include_spip('inc/config');
-	$css = find_in_path('theme/css/videos.css');
 	$flux .="
 <!-- Variables de configuration pour le plugin Vidéo(s) -->
 <script type='text/javascript'>var CONFIG_WMODE = '".lire_config('videos/wmode','opaque')."';</script>\n".
+"<!-- // Vidéo(s) -->"."\n";
+	return $flux;
+}
+
+function videos_insert_head_css($flux){
+	include_spip('inc/config');
+	$css = find_in_path('theme/css/videos.css');
+	$flux .="
+<!-- CSS pour le plugin Vidéo(s) -->".
 '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />'.
 "<!-- // Vidéo(s) -->"."\n";
 	return $flux;
@@ -17,20 +32,20 @@ function videos_jquery_plugins($scripts){
 	return $scripts;
 }
 
-function videos_affiche_gauche($flux) {
+function videos_formulaire_fond($flux) {
 
-	include_spip('inc/autoriser');
-		
-	if (in_array($flux['args']['exec'],$GLOBALS['medias_exec_colonne_document'])
-		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
-		AND $type = objet_type($table)
-		AND $id_table_objet = id_table_objet($type)
-		AND ($id = intval($flux['args'][$id_table_objet]) OR $id = 0-$GLOBALS['visiteur_session']['id_auteur'])
-	  AND (autoriser('joindredocument',$type,$id))){
-		$flux['data'] .= recuperer_fond('prive/contenu/videos_affiche_boite',array('objet'=>$type,'id_objet'=>$id));
+    if ($flux['args']['form'] == 'joindre_document') {
+		$videos = recuperer_fond(
+            'prive/contenu/videos_affiche_boite',
+            array(
+                'objet' => $flux['args']['contexte']['objet'],
+                'id_objet' => $flux['args']['contexte']['id_objet']
+            )
+        );
+		// Injecter videos au dessus du formulaire joindre_document.
+        $flux['data'] = $flux['data'].$videos;
 	}
-	
+
 	return $flux;
 }
-
 ?>

@@ -62,17 +62,18 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 
 		include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
 		$Videopian = new Videopian();
+		
 		if($Videopian) {
 			$infosVideo = $Videopian->get($url);
 			$titre = $infosVideo->title;
 			$descriptif = $infosVideo->description;
-		  $nbVignette = abs(count($infosVideo->thumbnails)-1);  // prendre la plus grande vignette       
-      $logoDocument = $infosVideo->thumbnails[$nbVignette]->url;
-      $logoDocument_width = $infosVideo->thumbnails[$nbVignette]->width;
-      $logoDocument_height = $infosVideo->thumbnails[$nbVignette]->height;      
+			$nbVignette = abs(count($infosVideo->thumbnails)-1);  // prendre la plus grande vignette       
+			$logoDocument = $infosVideo->thumbnails[$nbVignette]->url;
+			$logoDocument_width = $infosVideo->thumbnails[$nbVignette]->width;
+			$logoDocument_height = $infosVideo->thumbnails[$nbVignette]->height;      
 		} else {
 			//echo 'Exception reçue : ',  $e->getMessage(), "\n";
-			spip_log("L'ajout automatique du titre et de la description a echoué","Plugin Vidéo(s)");
+			spip_log("L'ajout automatique du titre et de la description a echoué",'Videos');
 		}
 	}
 
@@ -93,39 +94,51 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	if(array_key_exists('taille',$desc['field'])) if($infosVideo) $champs['taille'] = $infosVideo->duration;
 	if(array_key_exists('credits',$desc['field'])) if($infosVideo) $champs['credits'] = $infosVideo->author;
 	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'publie';
-  if(array_key_exists('media',$desc['field'])) $champs['media'] = 'video'; 
+	if(array_key_exists('media',$desc['field'])) $champs['media'] = 'video'; 
 
 	/* Cas de la présence d'une vignette à attacher */
 	if($logoDocument){
+		
 		include_spip('inc/distant');
-		if($fichier = preg_replace("#IMG/#", '', copie_locale($logoDocument))){ // set_spip_doc ne fonctionne pas... Je ne sais pas pourquoi
+		// Dans las d'une mutu apparement le chemin n'est pas correct
+		// on supprime donc tout ce qui peut se trouver avant IMG
+		// http://lumadis.be/regex/test_regex.php?id=2543
+		// Dans le cas d'une mutu sites/spip_site.tld/IMG/
+		// Site spip seul
+		// IMG/
+		
+//var_dump(copie_locale($logoDocument));
+	
+		if($fichier = preg_replace("#[a-z0-9/\._-]*IMG/#i", '', copie_locale($logoDocument))){ 
 			$champsVignette['fichier'] = $fichier;
 			$champsVignette['mode'] = 'vignette';       
-      // champs extra à intégrer ds SPIP 3
-      if(array_key_exists('statut',$desc['field'])) $champsVignette['statut'] = 'publie';
-      if(array_key_exists('media',$desc['field']))  $champsVignette['media'] = 'image';
-       
-			
-			// Recuperer les tailles
-			$champsVignette['taille'] = @intval(filesize($fichier));
-			$size_image = @getimagesize($fichier);
-			$champsVignette['largeur'] = intval($size_image[0]);
-			$champsVignette['hauteur'] = intval($size_image[1]);
-			// $infos['type_image'] = decoder_type_image($size_image[2]);
-      if ($champsVignette['largeur']==0) {              // en cas d'echec, recuperer les infos videopian
-           $champsVignette['largeur'] = $logoDocument_width;
-           $champsVignette['hauteur'] = $logoDocument_height;
-      }
+      
+			// champs extra à intégrer ds SPIP 3
+			if(array_key_exists('statut',$desc['field'])) $champsVignette['statut'] = 'publie';
+			if(array_key_exists('media',$desc['field']))  $champsVignette['media'] = 'image';
+			 
+				  
+				  // Recuperer les tailles
+				  $champsVignette['taille'] = @intval(filesize($fichier));
+				  $size_image = @getimagesize($fichier);
+				  $champsVignette['largeur'] = intval($size_image[0]);
+				  $champsVignette['hauteur'] = intval($size_image[1]);
+				  // $infos['type_image'] = decoder_type_image($size_image[2]);
+			if ($champsVignette['largeur']==0) {              // en cas d'echec, recuperer les infos videopian
+				 $champsVignette['largeur'] = $logoDocument_width;
+				 $champsVignette['hauteur'] = $logoDocument_height;
+			}
      
 			// Ajouter
 			$id_vignette = sql_insertq('spip_documents',$champsVignette);
 			if($id_vignette) $champs['id_vignette'] = $id_vignette;
-		}
-		else{ spip_log("Echec de l'insertion du logo $logoDocument pour la video $document","Plugin Vidéo(s)"); }
+		
+		}else{
+			spip_log("Echec de l'insertion du logo $logoDocument pour la video $document",'Videos'); }
 	}
 	
 	$document = sql_insertq('spip_documents',$champs);
-	if($document){
+	if($document AND $id_objet){
 		$document_lien = sql_insertq(
 			'spip_documents_liens',
 			array(

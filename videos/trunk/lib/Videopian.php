@@ -62,13 +62,14 @@ class Videopian {
     # ================================================================================
     # Specify here the API keys for the services you want to use.
     # You'll need to request one for each.
-
+    
     const VEOH_API_KEY      = '';
     const FLICKR_API_KEY    = '';
     const SEVENLOAD_API_KEY = '';
     const VIDDLER_API_KEY   = '';
     const REVVER_LOGIN      = '';
     const REVVER_PASSWORD   = '';
+
 
 
     # ================================================================================
@@ -106,7 +107,7 @@ class Videopian {
             '#veoh\.com/.*/(?P<id>[^?&]*)/?#i'                         => 'veoh',
             '#viddler\.com/explore/.*/videos/(?P<id>[0-9]*)/?#i'       => 'viddler',
             '#vimeo\.com\/(?P<id>[0-9]*)[\/\?]?#i'                     => 'vimeo',
-            '#youtu\.be\/([a-zA-Z0-9_-]*)[\/\?]?#i'                    => 'youtube',
+            '#youtu\.be\/(?P<id>[a-zA-Z0-9_-]*)[\/\?]?#i'               => 'youtube',
             '#youtube\.[a-z]{0,5}/.*[\?&]?v(?:\/|=)?(?P<id>[^&]*)#i'   => 'youtube'
         );
         // avant (rev 83853) était utilisé ===> '#vimeo\.com\/([0-9]*)#i' => 'vimeo',
@@ -116,13 +117,18 @@ class Videopian {
             if (preg_match($pattern, self::$url, $matches)) {
                 self::$service = $service;
                 self::$id = $matches['id'];
+//var_dump($matches);
             }
         }
     }
 
-    # ======================================================================================================
-    # Check the availability of an URL, throwing an exception if the resource is unavailable for some reason
-    # (a bit tricky but working nontheless)
+    /** checkAvailability
+     * 
+     * Check the availability of an URL, throwing an exception if the resource is unavailable for some reason
+     * (a bit tricky but working nontheless)
+     * 
+     * @param $url
+    */
     private static function checkAvailability($url) {
 
         $headers = @get_headers($url, 1);
@@ -136,19 +142,53 @@ class Videopian {
         return true;
     }
 
+    
+    /**
+     * url_get_contents
+     *
+     * <http://stackoverflow.com/questions/3979802/alternative-to-file-get-contents>
+     *
+     * @param $url
+     * 
+    */
+    private static function url_get_contents($url) {
+        if (function_exists('curl_exec')){ 
+            $conn = curl_init($url);
+            curl_setopt($conn, CURLOPT_SSL_VERIFYPEER, true);
+            curl_setopt($conn, CURLOPT_FRESH_CONNECT,  true);
+            curl_setopt($conn, CURLOPT_RETURNTRANSFER, 1);
+            $url_get_contents_data = (curl_exec($conn));
+            curl_close($conn);
+        }elseif(function_exists('file_get_contents')){
+            $url_get_contents_data = file_get_contents($url);
+        }elseif(function_exists('fopen') && function_exists('stream_get_contents')){
+            $handle = fopen ($url, "r");
+            $url_get_contents_data = stream_get_contents($handle);
+        }else{
+            $url_get_contents_data = false;
+        }
+        
+        return $url_get_contents_data;
+    }
+    
+    
     # ================================================================================
     # Fetch and return the video data
     public static function get($url, $oembed = false, $format = 'xml', $max_width = 640, $max_height = 385) {
 
         self::$url = $url;
         self::$oembed = $oembed;
-        if($format != 'xml' && $format != 'json') throw new Videopian_Exception(Videopian_Exception::WRONG_OEMBED_FORMAT);
-        else self::$format = $format;
+        if($format != 'xml' && $format != 'json')
+            throw new Videopian_Exception(Videopian_Exception::WRONG_OEMBED_FORMAT);
+        else
+            self::$format = $format;
+            
         self::$max_width = $max_width;
         self::$max_height = $max_height;
 
         // Detecting PHP Simple HTML DOM Parser
-        if (class_exists('simple_html_dom')) self::$html_parser = new simple_html_dom();
+        if (class_exists('simple_html_dom'))
+            self::$html_parser = new simple_html_dom();
 
         self::processUrl();
 
@@ -156,14 +196,16 @@ class Videopian {
         self::$video->url = self::$url;
         self::$video->site = self::$service;
         
-        if(null === self::$service) return self::getPageMetadata();
+        if(null === self::$service)
+            return self::getPageMetadata();
 
         $method = sprintf('get%s', ucfirst(self::$service));
+        
         if (!is_callable(array(__CLASS__, $method))) {
             throw new Videopian_Exception(Videopian_Exception::SERVICE_NOT_SUPPORTED);
         }
+        
         return call_user_func(array(__CLASS__, $method));
-
     }
 
     # --------------------------------------------------------------------------------
@@ -224,6 +266,7 @@ class Videopian {
     }
 
 
+    
     public static function getAtom() {
         
         # since there is no API for AtomFilms, we have to parse the (pretty rich) page metadata
@@ -894,7 +937,9 @@ class Videopian {
     }
         
         
-    # --------------------------------------------------------------------------------
+    // -----------------------------------------------------------
+    // A revoir ...
+    // -----------------------------------------------------------
     public static function getVimeo() {
 
         if(self::$oembed) {
@@ -967,86 +1012,108 @@ class Videopian {
     }
         
         
-    # --------------------------------------------------------------------------------
+    /**
+     * getYoutube
+     * 
+    */
     public static function getYoutube() {
         
         if(self::$oembed) {
             $oembed_url = 'http://www.youtube.com/oembed?url='.urlencode(self::$url).'&format='.self::$format;
-            if(self::checkAvailability($oembed_url)) return @file_get_contents($oembed_url);
+            
+            if(self::checkAvailability($oembed_url))
+                return @file_get_contents($oembed_url);
         }
         
-        # XML data URL
-        $file_data = 'http://gdata.youtube.com/feeds/api/videos/'.self::$id;
+        # API KEY
+        include_spip('inc/config');
+        if(!$youtube_api_key = lire_config('videos/youtube_api_key')){
+            throw new Videopian_Exception(Videopian_Exception::API_KEY_NEEDED);
+        }
+        //$file_data = 'http://gdata.youtube.com/feeds/api/videos/'.self::$id;
+        $file_data = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id='.self::$id.'&key='.$youtube_api_key;
+        
         self::checkAvailability($file_data);
-        self::$video->xml_url = $file_data;
+        //self::$video->xml_url = $file_data;
         
-        # XML
-        $xml = new SimpleXMLElement(file_get_contents($file_data));
-        $xml->registerXPathNamespace('a', 'http://www.w3.org/2005/Atom');
-        $xml->registerXPathNamespace('media', 'http://search.yahoo.com/mrss/');
-        $xml->registerXPathNamespace('yt', 'http://gdata.youtube.com/schemas/2007');
+        $json_datas = json_decode(self::url_get_contents($file_data), true);
+        if(!$json_datas)
+            throw new Videopian_Exception(Videopian_Exception::GENERIC_ERROR);
+
+        $video_infos = $json_datas['items'][0]['snippet'];
+
+        $content_details = $json_datas['items'][0]['contentDetails'];
         
-        # Title
-        $title_query = $xml->xpath('/a:entry/a:title');
-        self::$video->title = $title_query ? strval($title_query[0]) : false;
-        
+        #Title
+        self::$video->title = $video_infos['title'] ? strval($video_infos['title']) : false ;
         # Description
-        $description_query = $xml->xpath('/a:entry/a:content');
-        self::$video->description = $description_query ? strval(trim($description_query[0])) : false;
-        
-        # Tags
-        $tags_query = $xml->xpath('/a:entry/media:group/media:keywords');
-        if($tags_query) {
-            $tags = explode(',', strval($tags_query[0]));
-            foreach($tags as $t) self::$video->tags[] = trim($t);
-        }
-        
+        self::$video->description = $video_infos['description'] ? strval($video_infos['description']) : false ;
+
         # Duration
-        $duration_query = $xml->xpath('/a:entry/media:group/yt:duration/@seconds');
-        self::$video->duration = $duration_query ? intval($duration_query[0]) : false;
+        self::$video->duration = $content_details['duration'] ? intval($content_details['duration']) : false ;
         
-        # Author & author URL
-        $author_query = $xml->xpath('/a:entry/a:author/a:name');
-        self::$video->author = $author_query ? strval($author_query[0]) : false;
-        self::$video->author_url = 'http://www.youtube.com/'.self::$video->author;
-        
-        # Publication date
-        $date_published_query = $xml->xpath('/a:entry/a:published');
-        self::$video->date_published = $date_published_query ? new DateTime($date_published_query[0]) : false;
-        
-        # Last update date
-        $date_updated_query = $xml->xpath('/a:entry/a:updated');
-        self::$video->date_updated = $date_updated_query ? new DateTime($date_updated_query[0]) : false;
         
         # Thumbnails
-        $thumbnail_query = $xml->xpath('/a:entry/media:group/media:thumbnail');
-        foreach ($thumbnail_query as $t) {
+        $thumbnails = $video_infos['thumbnails'];
+        
+        foreach ($thumbnails as $t) {
             $thumbnail = new stdClass;
-            $thumbnail_query = $t->attributes();
+            $thumbnail_query = $t;
             $thumbnail->url = strval($thumbnail_query['url']);
             $thumbnail->width = intval($thumbnail_query['width']);
             $thumbnail->height = intval($thumbnail_query['height']);
             self::$video->thumbnails[] = $thumbnail;
         }
         
+        
+        
+        
+        // # Tags
+        // @todo
+        //$tags_query = $xml->xpath('/a:entry/media:group/media:keywords');
+        //if($tags_query) {
+        //    $tags = explode(',', strval($tags_query[0]));
+        //    foreach($tags as $t) self::$video->tags[] = trim($t);
+        //}
+        
+        
+        
+        # Author & author URL: @todo
+        //$author_query = $xml->xpath('/a:entry/a:author/a:name');
+        //self::$video->author = $author_query ? strval($author_query[0]) : false;
+        //self::$video->author_url = 'http://www.youtube.com/'.self::$video->author;
+        
+        # Publication date
+        //$date_published_query = $xml->xpath('/a:entry/a:published');
+        //self::$video->date_published = $date_published_query ? new DateTime($date_published_query[0]) : false;
+        
+        # Last update date
+        //$date_updated_query = $xml->xpath('/a:entry/a:updated');
+        //self::$video->date_updated = $date_updated_query ? new DateTime($date_updated_query[0]) : false;
+        
+       
         # Player URL
-        self::$video->player_url = 'http://www.youtube.com/v/'.self::$id;
+        //self::$video->player_url = 'http://www.youtube.com/v/'.self::$id;
         
         # Files URL
-        self::$video->files = array();
+        // self::$video->files = array();
+        //
+        //$files_data = 'http://www.youtube.com/get_video_info?&video_id='.self::$id;
+        //$files = file_get_contents($files_data);
+        //preg_match('#&token=([^&]*)#', $files, $matches);
+        //$token = $matches[1];
+        //
+        //# FLV file URL
+        //self::$video->files['video/x-flv'] = 'http://www.youtube.com/get_video?video_id='.self::$id.'&t='.$token;
+        //self::$video->files['video/mp4'] = 'http://www.youtube.com/get_video?video_id='.self::$id.'&t='.$token.'&fmt=18';
 
-        $files_data = 'http://www.youtube.com/get_video_info?&video_id='.self::$id;
-        $files = file_get_contents($files_data);
-        preg_match('#&token=([^&]*)#', $files, $matches);
-        $token = $matches[1];
-
-        # FLV file URL
-        self::$video->files['video/x-flv'] = 'http://www.youtube.com/get_video?video_id='.self::$id.'&t='.$token;
-        self::$video->files['video/mp4'] = 'http://www.youtube.com/get_video?video_id='.self::$id.'&t='.$token.'&fmt=18';
-        
+// var_dump(self::$video);       
         return self::$video;
     }
+    
+    // -----------------------------------------------------------
 
+    
     # --------------------------------------------------------------------------------
     public static function generateOEmbed() {
 

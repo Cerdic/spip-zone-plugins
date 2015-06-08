@@ -16,7 +16,11 @@
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
+		
+		
+		<pre><code>
+			[(#CONFIG{videos/}|foreach)]
+		</code></pre>
 	<form method="post" action=#ENV{action}><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="responsive" value="" />
@@ -77,10 +81,23 @@
 					</li>
 				</ul>
 			</li>
-
+			[(#REM) <!-- CFG Youtube -->]
 			<li class="fieldset">
 				<h3 class="legend"><:videos:cfg_titre_configurations_youtube:></h3>
 				<ul>
+					<li>
+						<label for="youtube_api_key"><:videos:cfg_label_youtube_api_key:></label>
+						<p class='explication'><:videos:cfg_explication_youtube_api_key:></p>
+						<input type="text" name="youtube_api_key" id="youtube_api_key" value="#ENV{youtube_api_key}" class="text"/>
+					</li>
+					[(#REM) <!-- En cours : ajout de l'identifiant de chaine a diffuser,
+						pour le skel youtube_channel
+					<li>
+						<label for="youtube_channel"><:videos:cfg_label_youtube_channel:></label>
+						<p class='explication'><:videos:cfg_explication_youtube_channel:></p>
+						<input type="text" name="youtube_channel" id="youtube_channel" value="#ENV{youtube_channel}" class="text"/>
+					</li>
+					-->]
 					<li>
 						<label for="liste_definition"><:videos:cfg_label_mode_confidentialite:></label>
 						<p class='explication'><:videos:cfg_explication_mode_confidentialite:></p>
