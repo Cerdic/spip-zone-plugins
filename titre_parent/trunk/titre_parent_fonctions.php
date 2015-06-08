@@ -8,37 +8,37 @@
 // Ex :  : <BOUCLE_m(MOTS)>[(#ID_GROUPE|titre_groupe)]</BOUCLE_m>
 if(defined('_SPIP19300')) {
 	function filtre_titre_rubrique($id_rubrique, $table='rubriques', $id='id_rubrique') {
-		return cs_titre_id($id_rubrique, $table, $id);
+		return tp_titre_id($id_rubrique, $table, $id);
 	}
 	function filtre_titre_groupe($id_mot, $table='groupes_mots', $id='id_groupe') {
-		return cs_titre_id($id_mot, $table, $id);
+		return tp_titre_id($id_mot, $table, $id);
 	}
 } else {
 	function titre_rubrique($id_rubrique, $table='rubriques', $id='id_rubrique') {
-		return cs_titre_id($id_rubrique, $table, $id);
+		return tp_titre_id($id_rubrique, $table, $id);
 	}
 	function titre_groupe($id_mot, $table='groupes_mots', $id='id_groupe') {
-		return cs_titre_id($id_mot, $table, $id);
+		return tp_titre_id($id_mot, $table, $id);
 	}
 }
 
 // filtre 'titre_id', s'applique aux #ID_OBJET
 // Renvoie le titre trouve dans la $table_parent, la ou $champ_id = $id
-function cs_titre_id($id, $table_parent='rubriques', $champ_id='id_rubrique') {
+function tp_titre_id($id, $table_parent='rubriques', $champ_id='id_rubrique') {
 // spip_log("#TITRE_PARENT SELECTED FROM spip_$table_parent WHERE $champ_id=$id".(!$id?' : requete non executee':''));
 	// retour nul si pas de parent a priori
 	if(!$id) return '';
-	return cs_titre_sql($table_parent, "$champ_id=$id");
+	return tp_titre_sql($table_parent, "$champ_id=$id");
 }
 
 // choix du champ qui correspond a un titre
-function cs_titre_champ($table) {
+function tp_titre_champ($table) {
 	return $table=='auteurs'?'nom':'titre';
 }
 
 // cherche le titre/nom d'un objet en base
-function cs_titre_sql($table, $where) {
-	$titre = cs_titre_champ($table);
+function tp_titre_sql($table, $where) {
+	$titre = tp_titre_champ($table);
 	// Utiliser la bonne requete en fonction de la version de SPIP
 	if(function_exists('sql_getfetsel') && function_exists('table_objet_sql')) {
 		// SPIP 2.0
@@ -74,7 +74,7 @@ function balise_TITRE_PARENT_dist($p) {
 	// id de l'objet a trouver pour retourner son titre
 	$id = champ_sql($id, $p);
 	// le code php a executer
-	$p->code = "cs_titre_id(intval($id), '$table_parent', '$champ_parent')";
+	$p->code = "tp_titre_id(intval($id), '$table_parent', '$champ_parent')";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -89,7 +89,7 @@ function balise_TITRE_GROUPE_dist($p) {
 if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 
 	// recherche de la table associee a l'objet
-	function cs_table_objet($objet) {
+	function tp_table_objet($objet) {
 		switch($objet) {
 			case 'trad': return 'articles';
 			case 'thread': /*case 'forum':*/ return 'forum';
@@ -110,12 +110,12 @@ if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 			// le champ est absent de la base, on peut calculer la balise
 			preg_match(",^TITRE_([A-Z_]+)?$,i", $champ, $regs);
 			$objet = strtolower($regs[1]);
-			$table = cs_table_objet($objet);
+			$table = tp_table_objet($objet);
 			$champ_parent = id_table_objet($table);
 			// id de l'objet a trouver pour retourner son titre
 			$id = ($v = interprete_argument_balise(1,$p))!==NULL ? $v : champ_sql('id_'.$objet, $p);
 			// le code php a executer, avant de le passer aux traitements
-			$p->code = cs_titre_traitements("cs_titre_id(intval($id), '$table', '$champ_parent')", $table);
+			$p->code = tp_titre_traitements("tp_titre_id(intval($id), '$table', '$champ_parent')", $table);
 		} else 
 			// puisque le champ est present dans la base, on le renvoie
 			$p->code = champ_sql($champ, $p);
@@ -124,9 +124,9 @@ if(defined('_SPIP19300') && defined('_PARENTS_ETENDUS')) {
 	}
 
 	// voir la fonction champs_traitements($p) dans : public/refereces.php
-	function cs_titre_traitements($code, $table) {
+	function tp_titre_traitements($code, $table) {
 		global $table_des_traitements;
-		$ps = $table_des_traitements[strtoupper(cs_titre_champ($table))];
+		$ps = $table_des_traitements[strtoupper(tp_titre_champ($table))];
 		if (is_array($ps))
 			$ps = $ps[isset($ps[$table])?$table:0];
 		if (!$ps) return $code;
@@ -147,5 +147,3 @@ if (!isset($table_des_traitements['TITRE_PARENT']))
 	$table_des_traitements['TITRE_PARENT'] = $table_des_traitements['TITRE'];
 if (!isset($table_des_traitements['TITRE_GROUPE']))
 	$table_des_traitements['TITRE_GROUPE'] = $table_des_traitements['TITRE'];
-
-?>
