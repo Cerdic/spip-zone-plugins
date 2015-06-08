@@ -24,7 +24,7 @@ function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$
 					include $dest;
 					
 					/**
-					 * RŽcupŽration des statuts dans le fichier
+					 * Recuperation des statuts dans le fichier
 					 */
 					$contenu=file_get_contents($dest);
 					$contenu = str_replace("\t",'',$contenu);
@@ -142,7 +142,7 @@ function formulaires_tradlang_importer_langue_verifier_1_dist($id_tradlang_modul
 							include $dest;
 							
 							/**
-							 * RŽcupŽration des statuts dans le fichier
+							 * Recuperation des statuts dans le fichier
 							 */
 							$contenu=file_get_contents($dest);
 							$contenu = str_replace("\t",'',$contenu);
@@ -276,7 +276,7 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 		include $dest;
 		
 		/**
-		 * RŽcupŽration des statuts dans le fichier
+		 * Recuperation des statuts dans le fichier
 		 */
 		$contenu=file_get_contents($dest);
 		$contenu = str_replace("\t",'',$contenu);
@@ -348,7 +348,10 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 		}
 	}
 	$res['editable'] = false;
-	$res['message_ok'] = _T('tradlang:message_upload_nb_modifies',array('nb'=>$count));
+	if($count > 1)
+		$res['message_ok'] = _T('tradlang:message_upload_nb_modifies',array('nb'=>$count));
+	else
+		$res['message_ok'] = _T('tradlang:message_upload_nb_modifies',array('nb'=>$count));
 	return $res;
 }
 ?>
