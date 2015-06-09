@@ -6,6 +6,7 @@
 		[(#REM) les hidden qui declencheront le service du formulaire parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action},#FORM}
 			<h3 class="titrem"><:tradlang:titre_form_import_step_2:></h3>
+			<B_modifs>
 			<ul>
 				<li>
 					<a href="#" onclick="jQuery('input.checkbox:not(:checked)').attr('checked', 'checked');return false;" class="btn"><:tradlang:lien_check_all:></a>
@@ -51,9 +52,10 @@
 					<a href="#" onclick="jQuery('input.checkbox:checked').attr('checked',null);return false;" class="btn"><:tradlang:lien_check_none:></a>
 				</li>
 			</ul>
+			</B_modifs>
 			<p class="boutons">
-				 <input type="submit" name="_retour_etape_1" class="submit" value="<:tradlang:bouton_precedent:>" />
-                 <input type="submit" class="submit" value="<:tradlang:bouton_suivant:>" />
+				<input type="submit" name="_retour_etape_1" class="submit" value="<:tradlang:bouton_precedent:>" />
+				<input type="submit" class="submit" value="<:tradlang:bouton_suivant:>" />
 			</p>
          </div></form>
 	</BOUCLE_editable>
