@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Tickets
- * Licence GPL (c) 2008-2013
+ * Licence GPL (c) 2008-2015
  *
  * @package SPIP\Tickets\Pipelines
  */
@@ -31,7 +31,7 @@ function tickets_affiche_gauche($flux) {
 			$ret .= icone_horizontale(_T('tickets:creer_ticket'), generer_url_ecrire('ticket_edit','new=oui'), 'ticket-24.png', 'creer.gif', false);
 			$ret .= boite_fermer();
 		}
-	
+
 		$contexte = array('titre'=>_T('tickets:tous_tickets_ouverts'), 'statut'=>'ouvert', 'bloc'=>'_bloc2');
 		$options = array('ajax'=>true);
 		$page = recuperer_fond('prive/squelettes/inclure/inc_liste_simple', $contexte, $options);
@@ -41,7 +41,6 @@ function tickets_affiche_gauche($flux) {
 	}
 	return $flux;
 }
-
 
 /**
  * Insertion dans le pipeline accueil_informations (SPIP)
@@ -77,7 +76,7 @@ function tickets_accueil_informations($flux){
 		$plus = "";
 		if (!function_exists($afficher_plus))
 			$afficher_plus = 'afficher_plus';
-		
+
 		$plus = $afficher_plus(generer_url_ecrire("tickets",""));
 		$res .= "<h4>$plus"._T('tickets:info_tickets')."</h4>";
 		$res .= "<ul class=\"liste-items\">";
@@ -211,7 +210,6 @@ function tickets_formulaire_verifier($flux){
 	return $flux;
 }
 
-
 /**
  * Insertion dans le pipeline formulaire_traiter (SPIP)
  * Si on est dans un formulaire de forum sur un ticket, on récupère le statut et l'assignation si présents
@@ -273,7 +271,7 @@ function tickets_notifications_destinataires($flux){
 		$auteurs = sql_fetsel('id_auteur,id_assigne','spip_tickets','id_ticket='.intval($id_ticket));
 		if(is_array($auteurs)){
 			foreach($auteurs as $auteur){
-                    $email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
+				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
 			}
 		}
 		/**
@@ -285,17 +283,18 @@ function tickets_notifications_destinataires($flux){
 			$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($forum['id_auteur']));
 			$flux['data'][] = $email;
 		}
-        /** On notifie les personnes référencées dans le ticket via [->autXXX] ou [->autWWW]
-        */
-        $match=array();
-        preg_match_all("#\[(.*)->(aut|auteur)(\d*)\]#U",$flux['args']['options']['forum']['texte'],$match);
-        $auteurs = $match[3];
-        foreach($auteurs as $auteur){
-                if ($auteur!=$flux['args']['options']['forum']['id_auteur']){
-                    $email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
-                    $flux['data'][] = $email;
-                }    
-            }
+		/** 
+		 * On notifie les personnes référencées dans le ticket via [->autXXX] ou [->autWWW]
+		 */
+		$match=array();
+		preg_match_all("#\[(.*)->(aut|auteur)(\d*)\]#U",$flux['args']['options']['forum']['texte'],$match);
+		$auteurs = $match[3];
+		foreach($auteurs as $auteur){
+			if ($auteur!=$flux['args']['options']['forum']['id_auteur']){
+				$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($auteur));
+				$flux['data'][] = $email;
+			}
+		}
 	}
 	return $flux;
 }
@@ -319,4 +318,4 @@ function tickets_revisions_chercher_label($flux){
 	}
 	return $flux;
 }
-?>
+
