@@ -37,10 +37,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this
 
 define('PLUGIN_Name', "pgn4spip");
 define('PATH_Conf', PLUGIN_Name . '/' . PLUGIN_Name . '_conf.php');
-if (!function_exists('ReadCurrentConfiguration')) require _DIR_PLUGINS . PATH_Conf;
+if (!function_exists('ReadCurrentConfiguration')) require _DIR_LIB_PGN4WEB . PATH_Conf;
 
 define('TAG_pgn', "[pP][gG][nN]"); // pgn or PGN
-define('PATH_board', PLUGIN_Name . "/pgn4web/board.html");
+define('PATH_board',_DIR_RACINE . 'lib/pgn4web/board.html');
 define('PATH_live', PLUGIN_Name . "/boardLive.html");
 define('indFullPattern', 0);
 define('indPgnOption', 1);

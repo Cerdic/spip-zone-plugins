@@ -25,8 +25,10 @@
 
 <!-- was <link href="pgn4web/live-compact.css" type="text/css" rel="stylesheet" /> -->
 <style type="text/css">
-@import url("pgn4web/fonts/pgn4web-font-LiberationSans.css");
-@import url("pgn4web/fonts/pgn4web-font-ChessSansPiratf.css");
+<!-- @import url("pgn4web/fonts/pgn4web-font-LiberationSans.css");
+@import url("pgn4web/fonts/pgn4web-font-ChessSansPiratf.css"); -->
+@import url ("#CHEMIN{pgn4web/fonts/pgn4web-font-LiberationSans.css}")
+@import url ("#CHEMIN{pgn4web/fonts/pgn4web-font-ChessSansPiratf.css}")
 
 html,
 body {
@@ -167,9 +169,9 @@ a.variation {
 
 </style>
 
-<link rel="shortcut icon" href="pgn4web/pawn.ico" />
-<script src="pgn4web/pgn4web.js" type="text/javascript"></script>
-<script src="pgn4web/fide-lookup.js" type="text/javascript"></script>
+<link rel="shortcut icon" href="#CHEMIN{pgn4web/pawn.ico}" />
+<script src="#CHEMIN{pgn4web/pgn4web.js}" type="text/javascript"></script>
+<script src="#CHEMIN{pgn4web/fide-lookup.js}" type="text/javascript"></script>
 <script type="text/javascript">
 
 var sexEncodingCharSet = "$0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
@@ -266,7 +268,7 @@ if ((pieceFontRoot = gup("pieceFontRoot")) !== "") {
   if (pieceFontRoot.charAt(pieceFontRoot.length - 1) != "/") { pieceFontRoot += "/"; }
 }
 else
-	pieceFontRoot = "pgn4web/";
+	pieceFontRoot = "('find_in_path(lib/pgn4web/)";
 
 SetImagePath("" + pieceFontRoot + pieceFont + "/" + pieceSize);
 if (pieceFont == "svgchess") {
