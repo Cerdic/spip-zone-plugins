@@ -278,8 +278,8 @@ function tickets_notifications_destinataires($flux){
 		 * On notifie les autres forumeurs du ticket
 		 * GROUP BY id_auteur
 		 */
-		$id_forums = sql_select('*','spip_forum','objet='.sql_quote('ticket').' AND id_objet='.intval($id_ticket).' AND id_forum != '.intval($flux['args']['options']['forum']['id_forum']),array('id_auteur'));
-		while($forum = sql_fetch($id_forums)){
+		$id_forums = sql_allfetsel('id_auteur','spip_forum','objet='.sql_quote('ticket').' AND id_objet='.intval($id_ticket).' AND id_forum != '.intval($flux['args']['options']['forum']['id_forum']),array('id_auteur'));
+		foreach($id_forums as $forum){
 			$email = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($forum['id_auteur']));
 			$flux['data'][] = $email;
 		}
