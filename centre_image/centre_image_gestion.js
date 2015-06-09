@@ -54,5 +54,6 @@ function centre_image_afficher() {
 
 
 (function($){
-$(document).ready(centre_image_afficher);
+	$(document).ready(centre_image_afficher);
+	onAjaxLoad(centre_image_afficher);
 })(jQuery);
