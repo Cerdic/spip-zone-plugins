@@ -81,6 +81,16 @@ function eva_geometrie_install($action){
 		if (!$test_xws) {
 			sql_insertq('spip_types_documents',array('extension' => 'xws','mime_type' => 'application/Xcas','titre' => 'Xcas','inclus' => 'embed','upload' => 'oui'));
 		}
+		//On commence par ajouter l'icone pour le format sb2 = logiciel Scratch
+		if (!@fopen(_DIR_IMG."icones/sb2.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/sb2.png',_DIR_IMG.'icones/sb2.png');}
+		//On poursuit avec l'ajout du format sb2 dans la base de données
+		$test_scratch_req=sql_select('inclus','spip_types_documents',"extension = 'sb2'");
+		$test_scratch_ta=sql_fetch($test_scratch_req);
+		$test_scratch=$test_scratch_ta['inclus'];
+		if (!$test_scratch) {
+			sql_insertq('spip_types_documents',array('extension' => 'sb2','mime_type' => 'application/Scratch','titre' => 'Scratch','inclus' => 'embed','upload' => 'oui'));
+		}
+
 	//Mise à jour avec le nouveau format zirs pour CarMetal
 		//On commence par ajouter l'icone pour le format zirs = copie de zir
 		if (!@fopen(_DIR_IMG."icones/zirs.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/zirs.png',_DIR_IMG.'icones/zirs.png');}
@@ -107,7 +117,10 @@ function eva_geometrie_install($action){
 	$test5_req=sql_select('inclus','spip_types_documents',"extension = 'zirs'");
 	$test5_ta=sql_fetch($test5_req);
 	$test5=$test5_ta['inclus'];
-	if ((!@opendir(_DIR_IMG."icones")) OR (!@fopen(_DIR_IMG."icones/ggb.png", "r")) OR (!@fopen(_DIR_IMG."icones/glb.png", "r")) OR (!@fopen(_DIR_IMG."icones/gxt.png", "r")) OR (!@fopen(_DIR_IMG."icones/zir.png", "r")) OR (!@fopen(_DIR_IMG."icones/zirs.png", "r")) OR !$test OR !$test2 OR !$test3 OR !$test4 OR !$test5) {return false;}
+	$test6_req=sql_select('inclus','spip_types_documents',"extension = 'sb2'");
+	$test6_ta=sql_fetch($test6_req);
+	$test6=$test6_ta['inclus'];
+	if ((!@opendir(_DIR_IMG."icones")) OR (!@fopen(_DIR_IMG."icones/ggb.png", "r")) OR (!@fopen(_DIR_IMG."icones/glb.png", "r")) OR (!@fopen(_DIR_IMG."icones/gxt.png", "r")) OR (!@fopen(_DIR_IMG."icones/zir.png", "r")) OR (!@fopen(_DIR_IMG."icones/zirs.png", "r")) OR !$test OR !$test2 OR !$test3 OR !$test4 OR !$test5 OR !$test6) {return false;}
 	else {return true;}
 	}
 	break;
@@ -119,6 +132,7 @@ function eva_geometrie_install($action){
 	if (!@fopen(_DIR_IMG."icones/gxt.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/gxt.png',_DIR_IMG.'icones/gxt.png');}
 	if (!@fopen(_DIR_IMG."icones/zir.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/zir.png',_DIR_IMG.'icones/zir.png');}
 	if (!@fopen(_DIR_IMG."icones/zirs.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/zirs.png',_DIR_IMG.'icones/zirs.png');}
+	if (!@fopen(_DIR_IMG."icones/sb2.png", "r")) {copy(_DIR_PLUGIN_EVA_GEOMETRIE.'img_pack/sb2.png',_DIR_IMG.'icones/sb2.png');}
 	$test_req=sql_select('inclus','spip_types_documents',"extension = 'ggb'");
 	$test_ta=sql_fetch($test_req);
 	$test=$test_ta['inclus'];
@@ -148,6 +162,12 @@ function eva_geometrie_install($action){
 	$test_zirs=$test_zirs_ta['inclus'];
 	if (!$test_zirs) {
 	sql_insertq('spip_types_documents',array('extension' => 'zirs','mime_type' => 'application/x-carmetal','titre' => 'CarMetal','inclus' => 'embed','upload' => 'oui'));
+	}
+	$test_sb2_req=sql_select('inclus','spip_types_documents',"extension = 'sb2'");
+	$test_sb2_ta=sql_fetch($test_sb2_req);
+	$test_sb2=$test_sb2_ta['inclus'];
+	if (!$test_sb2) {
+	sql_insertq('spip_types_documents',array('extension' => 'sb2','mime_type' => 'application/Scratch','titre' => 'Scratch','inclus' => 'embed','upload' => 'oui'));
 	}
 	ecrire_meta('eva_geometrie_test','1');
 	break;
