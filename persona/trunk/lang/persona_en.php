@@ -8,19 +8,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage' => 'Display', # RELIRE
+	'affichage' => 'Display',
 
 	// C
-	'cacher_login_classique' => 'Hide?', # RELIRE
-	'configurer_titre' => 'Configure Persona', # RELIRE
+	'cacher_login_classique' => 'Hide?',
+	'configurer_titre' => 'Configure Persona',
 
 	// E
 	'explication_cacher_login_classique' => 'If this box is checked, the login form will be hidden by default on the connection page. Only the "Persona" button will be visible. Under this button, a link can unmask the form.',
-	'explication_login' => 'You can sign in with your Persona Id (<a href="http://en.wikipedia.org/wiki/Mozilla_Persona" target="_blank">help</a>)', # RELIRE
+	'explication_login' => 'You can sign in with your Persona Id (<a href="http://en.wikipedia.org/wiki/Mozilla_Persona" target="_blank">help</a>)',
 
 	// F
-	'form_afficher' => 'Display the standard login form', # RELIRE
-	'form_masquer' => 'Hide the standard login form.' # RELIRE
+	'form_afficher' => 'Display the standard login form',
+	'form_masquer' => 'Hide the standard login form.'
 );
 
 ?>
