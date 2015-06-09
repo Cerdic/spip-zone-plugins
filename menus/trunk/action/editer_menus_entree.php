@@ -42,6 +42,8 @@ function action_editer_menus_entree_dist($arg=null) {
  */
 function insert_menus_entree($id_menu) {
 	// Envoyer aux plugins
+	$champs = array();
+	$champs['id_menu'] = $id_menu;
 	$champs = pipeline('pre_insertion',
 		array(
 			'args' => array(
