@@ -21,7 +21,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @access public
  */
 
-function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='new') {
+function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='new', $mode = 'auto') {
 
     // tester l'autorisation d'ajout de document
     include_spip('inc/autoriser');
@@ -48,7 +48,7 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
             $docs,
             $objet, // Article, rubrique, autre objet
             $id_objet,
-            'auto'
+            $mode
         );
     }
 }
