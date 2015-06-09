@@ -498,14 +498,13 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 	if ($largeur == 0 OR $hauteur == 0) {
 		$largeur = $l_img;
 		$hauteur = $h_img;
-		
 	}
 
-	
+
 	if ($l_img == 0 OR $h_img == 0) return $img;
 	
-	$r_img = $h_img / $l_img;	
-	$r = $hauteur / $largeur;	
+	$r_img = $h_img / $l_img;
+	$r = $hauteur / $largeur;
 	
 	if ($r_img < $r) {
 		$l_dest = $h_img/$r;
@@ -514,11 +513,11 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 		$l_dest = $l_img;
 		$h_dest = $l_img*$r;
 	}
-	
-	
+
+
 	// Si align est "focus", on va aller chercher le «point d'intérêt» de l'image 
 	// avec la fonction centre_image du plugin «centre_image»
-	if ($align == "focus" && function_exists(centre_image)) {
+	if ($align == "focus" && function_exists('centre_image')) {
 		$dx = centre_image_x($img);
 		$dy = centre_image_y($img);
 
@@ -575,5 +574,3 @@ function image_responsive_affiche_milieu($flux, $effacer=false) {
 }
 
 
-
-?>
