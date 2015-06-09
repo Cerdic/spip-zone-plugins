@@ -8,10 +8,11 @@
 	<langue code="de" url="http://trad.spip.net/tradlang_module/bando?lang_cible=de" total="26" traduits="21" relire="0" modifs="0" nouveaux="5" pourcent="80.77">
 		<traducteur nom="klaus++" lien="http://trad.spip.net/auteur/klaus" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/bando?lang_cible=en" total="26" traduits="25" relire="0" modifs="0" nouveaux="1" pourcent="96.15">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/bando?lang_cible=en" total="26" traduits="26" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="http://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 		<traducteur nom="Fil" lien="http://trad.spip.net/auteur/fil" />
+		<traducteur nom="jack31" lien="http://trad.spip.net/auteur/jack31" />
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 		<traducteur nom="Mark" lien="http://trad.spip.net/auteur/mark" />
 	</langue>
