@@ -1,0 +1,165 @@
+<!-- 
+/**********************************************************************************
+ * @Subject cfg_pgn4spip.html describes the HTML file of the configuration for CFG
+ * @package pgn4spip: Embed pgn4web Chessboard plugin for SPIP 2.x
+ * @version 2.61.0
+ * @copyright copyright (c) 2012 Matt Chesstale 
+ * @license GNU General Public License version 3
+ * @language HTML, SPIP 2 and CFG 1 configuration
+ * @resource lang\pgn4spip_en.php and lang\pgn4spip_fr.php
+ * @require	 CFG 1.x plugin in SPIP 2.x: http://plugins.spip.net/cfg.html
+ *
+ * @history
+ * 2.61.0: Initial version for SPIP 2.1
+ * @Usage
+	http://localhost/spip/ecrire/?exec=admin_plugin
+	SPIP Configuration > Manage plugins
+
+	Click [x] to activate the plugin.
+	Click to the name "pgn4spip" to get help.
+
+	Click to the CFG icon on the right at the level of the name pgn4spip
+	
+ @ref		pgn4spip_options.php: read the configuration using the SPIP API
+ $valueFromConf = lire_config(PLUGIN_Name . '/cfg_' . $optShort, $valueByDefault);
+ **********************************************************************************/
+-->
+<style type="text/css">
+fieldset
+{
+<!--[if !IE 9]>
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+<![endif]-->
+}
+</style>
+[(#REM) icon = pgn4spip.png]
+[(#SET{logo, <img src='#DOSSIER_SQUELETTE/../pgn4spip.png' width='32' height='32' style="float:#LANG_RIGHT;" />})]
+
+#CACHE{0}
+
+<!-- descriptif=
+#GET{logo}
+<h4>Configure plugin</h4>
+-->
+<!-- titre=pgn4spip -->
+<!-- boite=<:pgn4spip:boxtitle:> -->
+
+<form method="post" action="#SELF">
+<div>[(#ENV{_cfg_}|form_hidden)]
+<fieldset><legend><:pgn4spip:module:></legend>
+<select name="cfg_l"> 
+	<option value="h" [(#CONFIG{pgn4spip/cfg_l, "h"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:horizontal:></option>
+	<option value="v" [(#CONFIG{pgn4spip/cfg_l, "h"}|=={"v"}|?{selected="selected",''})]><:pgn4spip:vertical:></option>
+</select>
+
+<input type="radio" name="cfg_isManual" value="" [checked="(#CONFIG{pgn4spip/cfg_isManual}|=={''}|?{'checked'})"] class="fondl" />
+<:pgn4spip:auto:>
+<input type="radio" name="cfg_isManual" value="manual" [checked="(#CONFIG{pgn4spip/cfg_isManual}|!={''}|?{'checked'})"] class="fondl" />
+<:pgn4spip:manual:><input type="text" name="cfg_height_site" value="[(#CONFIG{pgn4spip/cfg_height_site, 268})]" size="2"><:pgn4spip:pixels:>
+</fieldset>
+<fieldset><legend><:pgn4spip:chessboard:></legend>
+<table cellpadding="0" cellspacing="5">
+<tr><td><:pgn4spip:square:></td>
+	<td><:pgn4spip:white:></td>
+	<td><:pgn4spip:black:></td>
+	<td><div align="center"><:pgn4spip:focus:></div></td>
+	<td><div align="center"><:pgn4spip:border:></div></td>
+	<td><div align="center"><:pgn4spip:background:></div></td>
+</tr>
+<tr><td nowrap="nowrap"><input type="text" name="cfg_ss" value="[(#CONFIG{pgn4spip/cfg_ss, 26})]" size="1"><:pgn4spip:pixels:></td>
+	<td><input type="text" name="cfg_lch" value="[(#CONFIG{pgn4spip/cfg_lch, "F6F6F6"})]" size="5"/></td>
+	<td><input type="text" name="cfg_dch" value="[(#CONFIG{pgn4spip/cfg_dch, "E0E0E0"})]" size="5"/><br /></td>
+	<td><input type="text" name="cfg_hch" value="[(#CONFIG{pgn4spip/cfg_hch, "ABABAB"})]" size="5"/></td>
+	<td><input type="text" name="cfg_bbch" value="[(#CONFIG{pgn4spip/cfg_bbch, "E0E0E0"})]" size="5"/></td>
+	<td><input type="text" name="cfg_bch" value="[(#CONFIG{pgn4spip/cfg_bch, "F6F6F6"})]" size="5"/></td>
+</tr><td nowrap="nowrap"><label><:pgn4spip:piece:></label></td>
+	<td><input type="text" name="cfg_ps" value="[(#CONFIG{pgn4spip/cfg_ps, <:pgn4spip:default:>})]" size="5"></td>
+	<td><label><:pgn4spip:font:></label></td>
+	<td>
+	<select name="cfg_pf"> 
+		<option value="d" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"d"}|?{selected="selected",''})]><:pgn4spip:default:></option>
+		<option value="a" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"a"}|?{selected="selected",''})]><:pgn4spip:alpha:></option>
+		<option value="m" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"m"}|?{selected="selected",''})]><:pgn4spip:merida:></option>
+		<option value="u" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"u"}|?{selected="selected",''})]><:pgn4spip:ucsf:></option>
+		<option value="s" [(#CONFIG{pgn4spip/cfg_pf, "d"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:svgchess:></option>
+	</select>
+	</td>
+<tr>
+</tr>
+</table>
+<:pgn4spip:squareclick:>
+</fieldset>
+<fieldset><legend><:pgn4spip:pgn:></legend>
+<table cellpadding="0" cellspacing="5">
+<tr><td><:pgn4spip:showmoves:></td>
+	<td><div align="center"><:pgn4spip:pgnheader:></div></td>
+	<td><div align="center"><:pgn4spip:pgnmove:></div></td>
+	<td><:pgn4spip:pgncomment:></td>
+	<td><div align="center"><:pgn4spip:pgnfocus:></div></td>
+	<td><div align="center"><:pgn4spip:pgndelay:></div></td>
+</tr>
+<tr><td>
+	<select name="cfg_md"> 
+		<option value="f" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"f"}|?{selected="selected",''})]><:pgn4spip:figurine:></option>
+		<option value="t" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"t"}|?{selected="selected",''})]><:pgn4spip:text:></option>
+		<option value="p" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"p"}|?{selected="selected",''})]><:pgn4spip:puzzle:></option>
+		<option value="h" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden:></option>
+		<option value="l" [(#CONFIG{pgn4spip/cfg_md, "f"}|=={"l"}|?{selected="selected",''})]><:pgn4spip:live:></option>
+	</select>
+	</td>
+	<td><input type="text" name="cfg_fhch" value="[(#CONFIG{pgn4spip/cfg_fhch, "000000"})]" size="5"/></td>
+	<td><input type="text" name="cfg_fmch" value="[(#CONFIG{pgn4spip/cfg_fmch, "000000"})]" size="5"/></td>
+	<td><input type="text" name="cfg_fcch" value="[(#CONFIG{pgn4spip/cfg_fcch, "000080"})]" size="5"/><br /></td>
+	<td><input type="text" name="cfg_hmch" value="[(#CONFIG{pgn4spip/cfg_hmch, "E0E0E0"})]" size="5"/></td>
+	<td><input type="text" name="cfg_d" value="[(#CONFIG{pgn4spip/cfg_d, "3000"})]" size="5"/></td>
+</tr>
+<tr><td><:pgn4spip:ctrlbrowse:></td>
+	<td><div align="center"><:pgn4spip:ctrlarrow:></div></td>
+	<td><div align="center"><:pgn4spip:ctrlbckgrnd:></div></td>
+	<td>
+	<select name="cfg_cd"> 
+		<option value="n" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:newline:></option>
+		<option value="i" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"i"}|?{selected="selected",''})]><:pgn4spip:inline:></option>
+		<option value="h" [(#CONFIG{pgn4spip/cfg_cd, "n"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden2:></option>
+	</select>
+	</td>
+	<td>
+	<select name="cfg_hm"> 
+		<option value="b" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"b"}|?{selected="selected",''})]><:pgn4spip:focusborder:></option>
+		<option value="s" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:focussquare:></option>
+		<option value="n" [(#CONFIG{pgn4spip/cfg_hm, "b"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:none:></option>
+	</select>
+	</td>
+	<td><:pgn4spip:liverate:></td>
+</tr>
+<tr><td>
+	<select name="cfg_bd"> 
+		<option value="c" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"c"}|?{selected="selected",''})]><:pgn4spip:custom:></option>
+		<option value="s" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"s"}|?{selected="selected",''})]><:pgn4spip:standard:></option>
+		<option value="h" [(#CONFIG{pgn4spip/cfg_bd, "c"}|=={"h"}|?{selected="selected",''})]><:pgn4spip:hidden2:></option>
+	</select>
+	</td>
+	<td><input type="text" name="cfg_ctch" value="[(#CONFIG{pgn4spip/cfg_ctch, "696969"})]" size="5"/></td>
+	<td><input type="text" name="cfg_cbch" value="[(#CONFIG{pgn4spip/cfg_cbch, "F0F0F0"})]" size="5"/></td>
+	<td><:pgn4spip:autoplay:></td>
+	<td>
+	<select name="cfg_am"> 
+		<option value="n" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"n"}|?{selected="selected",''})]><:pgn4spip:none:></option>
+		<option value="g" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"g"}|?{selected="selected",''})]><:pgn4spip:game:></option>
+		<option value="l" [(#CONFIG{pgn4spip/cfg_am, "n"}|=={"l"}|?{selected="selected",''})]><:pgn4spip:loop:></option>
+	</select>
+	</td>
+	<td><input type="text" name="cfg_rm" value="[(#CONFIG{pgn4spip/cfg_rm, "1.0"})]" size="5"/></td>
+</tr>
+</table>
+</fieldset>
+<hr />
+<fieldset><:pgn4spip:conflocalpgn:>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:cfg:ok:>" />
+<input type="reset" value="<:cfg:reset:>" />
+<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+</div>
+</form>

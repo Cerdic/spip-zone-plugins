@@ -1,0 +1,65 @@
+http://localhost/spip/plugins/pgn4spip/pgn4web/board.html?help=true
+
+URL parameters
+
+ - pgnText = PGN games to display
+ - pgnEncoded = encoded PGN games to display (used only by the board generator tool)
+ - fenString = FEN position to display
+ - pgnId = id of the parent's textarea containing the PGN games (parent page/frame MUST be in the same domain)
+ - pgnData = URL of the file containing the PGN games (file MUST be in the same domain)
+
+ - refreshMinutes = live broadcast delay (default 0 = live broadcast disabled)
+ - refreshDemo = if set true sets live demo mode (default false)
+
+ - initialGame = first | last | random | a number | a search expression (default first)
+ - initialVariation = a number (default 0)
+ - initialHalfmove = start | end | random | comment | variation | a number (default start)
+
+ - autoplayMode = game (autoplay first game once) | loop (loops through games continuously) | none (default game)
+ - delay = autoplay delay in ms (default 1000)
+
+ - squareSize = size of square (default 28)
+ - pieceSize = size of pieces | default (default selects piece size based on piece size)
+ - pieceFont = alpha | merida | uscf | random | default (default selects piece font based on piece size)
+ - highlightMode = border | square | none (default square)
+ - lightColorHex = light square color hex code, like FF0000 (default EFF4EC)
+ - darkColorHex = dark square color hex code, like FF0000 (default C6CEC3)
+ - highlightColorHex = highlight color hex code, like FF0000 (default DAF4D7)
+ - boardBorderColorHex = board border color hex code, like FF0000 (default 000000)
+ - boardShadowColorHex = board shadow color hex code, like FF0000, 'transparent' for no shadow, 'border' for same color as board border (default transparent)
+
+ - buttonsDisplay = hidden | standard (use browser's standard buttons) | custom (use custom color buttons) (default hidden)
+ - controlBackgroundColorHex = control buttons background color hex code, like FF0000 (default reverts to standard buttons)
+ - controlTextColorHex = control buttons text color hex code, like FF0000 (default 000000)
+
+ - headerDisplay = justified | centered | hidden | live | variations (default hidden)
+ - movesDisplay = figurine | text | puzzle | hidden (default hidden)
+ - textHeight = set height of the textual section, header and/or moves text, might be ignored if frameHeight is set (default 100%)
+ - textWidth = set width of the textual section, header and/or moves text, might be ignored if frameWidth is set (default 100%)
+ - textMargin = set left/right margin width of the  textual section, header and/or moves text (default 0)
+ - commentsDisplay = hidden | inline (same line as moves) | newline (new lines) (default inline)
+ - fontHeaderColorHex = header color hex code, like FF0000 (default 000000)
+ - fontMovesColorHex = moves color hex code, like FF0000 (default 000000)
+ - fontCommentsColorHex = comments color hex code, like FF0000 (default 808080)
+ - fontVariationsColorHex = variations color hex code, like FF0000; if set as 'comments' fontCommentsColorHex is copied (default comments)
+ - highlightMoveColorHex = background color hex code to highlight current move, like FF0000, 'background' for no highlight (default DAF4D7)
+ - fontHeaderSize = header font size (default 16)
+ - fontMovesSize = moves font size (default 16)
+ - fontCommentsSize = comments font size; if set as 'moves' fontMovesSize is copied (default moves)
+ - fontVariationsSize = variations font size; if set as 'comments' fontCommentsSize is copied (default comments)
+
+ - backgroundColorHex = page background color hex code, like FF0000, 'transparent' to use the parent's background color (default FFFFFF)
+ - horizontalLayout = if set true, shows header/moves text at the right of the board, below otherwise (default false)
+ - frameHeight = set height of the overall frame, as a number, as 'board' or as 'page', overriding textHeight (default not set)
+ - frameWidth = set width of the overall frame, as a number, as 'board' or as 'page', overriding textWidth (default not set)
+ - framePadding = padding within the frame (default 0)
+
+ - showHeightWidth = if set true, calculates optimal iframe dimensions (default false)
+ - help = if set true, shows help info (default false)
+
+URL parameters can be shortened: for example squareSize => sq, autoplayMode => am, highlightMoveColorHex => hmch
+Also supplied textual values can be shortened: true => t, false => f
+
+Every color parameter can by assigned also by name (like 'red') or using a proprietary encoding in base 64.
+For instance, the light square color, besides using the lightColorHex parameter can be also assigned using the lightColorName or the lightColorSex parameter.
+The latter is proprietary and used by the board generator tool.

@@ -1,0 +1,18 @@
+1. Click SPIP 3 {{Configuration}} > Site content > 
+scroll down until "{{Attached documents}}". [x] Articles. Click "Save"
+Or double click SPIP 2 {{Configuration}} > scroll down until "{{Attached documents}}"
+[x] Authorise documents attached to articles. Click "Submit"
+
+2. Edit the article. On the left in the margin, click "{{Add}} an image or a {{document}}".
+
+{{Browse}} plugins\pgn4spip\pgn4web\tactics.pgn (132 Kb). Click "{{Upload}}".
+<doc1|center>
+
+3. Use the {same number} of document as suffix in "pgn" model between < & >
+4. You can use the abbreviation of each name: bd = buttonsDisplay; s = (s)tandard
+
+Before
+
+<pgn1|option="movesDisplay=puzzle bd=s">
+
+After
