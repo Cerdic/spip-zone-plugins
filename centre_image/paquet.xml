@@ -1,10 +1,11 @@
 <paquet
 	prefix="centre_image"
 	categorie="multimedia"
-	version="0.5.0"
+	version="0.5.1"
 	etat="dev"
 	compatibilite="[3.0.18;3.1.*]"
->	
+	documentation="http://seenthis.net/messages/362099"
+>
 
 	<nom>Centre image</nom>
 	<!-- Filtres de transformation d'image et de couleurs -->
