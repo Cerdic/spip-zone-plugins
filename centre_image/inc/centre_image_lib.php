@@ -141,7 +141,7 @@ class _centre_image {
         $levels = array();
         for($x=0;$x<$w;$x++) {
             for($y=0;$y<$h;$y++) {
-                $color = imagecolorat($img,$sx+$x,$sy+$y);
+                $color = @imagecolorat($img,$sx+$x,$sy+$y);
                 $grayVal = ($color >> 16) & 0xFF;
                 if(!isset($levels[$grayVal]))$levels[$grayVal]=0;
                 $levels[$grayVal]++;
