@@ -45,8 +45,8 @@ function uploadhtml5_header_prive($flux) {
 function uploadhtml5_formulaire_fond($flux) {
 
     // Simplification de variable
-    $objet = $flux['args']['contexte']['objet'];
-    $id_objet = $flux['args']['contexte']['id_objet'];
+    $objet    = isset($flux['args']['contexte']['objet'])    ? $flux['args']['contexte']['objet'] : '';
+    $id_objet = isset($flux['args']['contexte']['id_objet']) ? $flux['args']['contexte']['id_objet'] : 0;
 
     if ($flux['args']['form'] == 'joindre_document') {
 
@@ -63,7 +63,7 @@ function uploadhtml5_formulaire_fond($flux) {
         $flux['data'] = $uploadhtml5.$flux['data'];
     }
 
-    if ($flux['args']['form'] == 'editer_logo') {
+    elseif ($flux['args']['form'] == 'editer_logo') {
 
         $chercher_logo = charger_fonction('chercher_logo','inc');
         if (!$chercher_logo($id_objet, id_table_objet($objet))) {
