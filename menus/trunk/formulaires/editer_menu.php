@@ -81,10 +81,10 @@ function formulaires_editer_menu_verifier($id_menu, $nouveau){
 	$identifiant = _request('identifiant');
 
 	// On vérifie que l'identifiant est bon
-	if (!isset($erreurs['identifiant']) and !preg_match('/^[\w]+$/', $identifiant))
+	if (empty($erreurs['identifiant']) and !preg_match('/^[\w]+$/', $identifiant))
 		$erreurs['identifiant'] = _T('menus:erreur_identifiant_forme');
 	// On vérifie que l'identifiant n'est pas déjà utilisé
-	if (!isset($erreurs['identifiant'])){
+	if (empty($erreurs['identifiant'])) {
 		$deja = sql_getfetsel(
 			'id_menu',
 			'spip_menus',

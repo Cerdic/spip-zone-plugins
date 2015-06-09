@@ -23,7 +23,7 @@ function action_editer_menu_dist($arg=null) {
 	if ($id_menu > 0) $err = menu_set($id_menu);
 
 	// S'il y a un fichier on tente d'importer son contenu
-	if (isset($_FILES['import'])){
+	if (isset($_FILES['import']) AND $_FILES['import']) {
 		$fichier = $_FILES['import']['tmp_name'];
 		$yaml = '';
 		lire_fichier($fichier, $yaml);
