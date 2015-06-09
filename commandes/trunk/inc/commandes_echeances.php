@@ -87,7 +87,7 @@ function commandes_trouver_prochaine_echeance($id_commande, $echeances=null) {
 			if ($transactions_commande = sql_allfetsel(
 				'id_transaction',
 				'spip_transactions',
-				array('id_commande = '.$id_commande, 'statut = "paye"')
+				array('id_commande = '.$id_commande, 'statut = "ok"')
 			)) {
 				$nb_paiements += count($transactions_commande);
 			}
