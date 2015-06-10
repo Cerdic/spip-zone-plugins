@@ -49,7 +49,8 @@ function cache_signature(&$page) {
 	if (!isset($GLOBALS['meta']['cache_signature'])){
 		include_spip('inc/acces');
 		include_spip('auth/sha256.inc');
-		ecrire_meta('cache_signature', _nano_sha256($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
+		$sigfunc = function_exists('_nano_sha256') ? '_nano_sha256' : 'md5';
+		ecrire_meta('cache_signature', $sigfunc($_SERVER["DOCUMENT_ROOT"] . $_SERVER["SERVER_SIGNATURE"] . creer_uniqid()), 'non');
 	}
 	return crc32($GLOBALS['meta']['cache_signature'].$page['texte']);
 }
