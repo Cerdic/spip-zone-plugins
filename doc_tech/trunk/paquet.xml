@@ -6,7 +6,7 @@
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/doc_tech-32.png"
 	documentation=""
-    developpement="$HeadURL$"
+    developpement="svn://zone.spip.org/spip-zone/_plugins_/doc_tech/trunk"
 >
 	<!--
 		Paquet genere le 2013-11-26 23:35:07
