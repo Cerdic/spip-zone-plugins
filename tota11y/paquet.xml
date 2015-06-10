@@ -1,0 +1,18 @@
+<paquet
+	prefix="tota11y"
+	categorie="theme"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/tota11y-32.png"
+	documentation="http://khan.github.io/tota11y/"
+>
+
+	<nom>tota11y</nom>
+
+	<auteur>cyp</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="jquery_plugins" inclure="tota11y_pipelines.php" />
+
+</paquet>
