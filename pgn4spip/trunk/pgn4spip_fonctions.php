@@ -36,7 +36,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
 
 define('PLUGIN_Name', "pgn4spip");
-define('PATH_Conf', PLUGIN_Name . '/' . PLUGIN_Name . '_conf.php');
+// define('PATH_Conf', PLUGIN_Name . '/' . PLUGIN_Name . '_conf.php');
+define('find_in_path(pgn4spip/pgn4spip_conf.php)', 'pgn4spip_conf.php');
 if (!function_exists('ReadCurrentConfiguration')) require _DIR_LIB_PGN4WEB . PATH_Conf;
 
 define('TAG_pgn', "[pP][gG][nN]"); // pgn or PGN
@@ -117,7 +118,7 @@ function GenHtml($pgnText, $idTxtArea, $isLive, $isNewPgnSource, $pgnSource, $he
 		$pgnId = "pgn4web_" . $idTxtArea;
 		$strHtml .= "<textarea id='" . $pgnId . "' style='display:none;' rows='40' cols='8'>" . $pgnText . "</textarea>\n";
 	}
-	$strHtml .= "<iframe src='" . _DIR_PLUGINS . $pathBoard . "?";
+	$strHtml .= "<iframe src='"  . $pathBoard . "?";
 	$isFirstOption = true;
 	foreach ($optValue as $optShort => $value)
 	{

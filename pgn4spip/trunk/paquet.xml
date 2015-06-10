@@ -1,7 +1,7 @@
 <paquet
 	prefix="pgn4spip"
 	categorie="divers"
-	version="2.61.2"
+	version="2.61.3"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="pgn4spip.png"
