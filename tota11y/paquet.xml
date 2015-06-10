@@ -11,8 +11,9 @@
 	<nom>tota11y</nom>
 
 	<auteur>cyp</auteur>
+	<auteur>kent1</auteur>
 
 	<licence>GNU/GPL</licence>
-	<pipeline nom="jquery_plugins" inclure="tota11y_pipelines.php" />
+	<pipeline nom="affichage_final" inclure="tota11y_pipelines.php" />
 
 </paquet>
