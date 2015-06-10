@@ -3,7 +3,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Fonction d'export PDF
+ * Fonction de génération de PDF.
+ * Contrairement à exporter_pdf, generer_pdf renvoie le PDF à PHP ce qui permet de l'utiliser à d'autre fin.
  *
  * @param mixed $squelette Le squelette à transformer en PDF
  * @param mixed $contexte L'éventuel contexte'
