@@ -13,7 +13,24 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 /**
- * Simplifier la création de cadre avec l'icône PDF dans l'espace priver
+ * Fonction qui va déterminer si c'est un squelette ou du html qui est passé à DOMPDF
+ *
+ * @param mixed $squelette
+ * @access public
+ * @return mixed
+ */
+function dompdf_trouver_html($squelette) {
+    // Si on a passé un squelette
+    if (find_in_path($squelette.'.html'))
+        // On récupère le html du squelette.
+        return recuperer_fond($squelette, $contexte);
+    else
+        // Sinon, on déduit que c'est du html directement passé à la fonction
+        return $squelette;
+}
+
+/**
+ * Simplifier la création de cadre avec l'icône PDF dans l'espace privé
  *
  * @param mixed $url_action
  * @param mixed $titre

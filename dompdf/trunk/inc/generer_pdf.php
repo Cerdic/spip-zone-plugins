@@ -16,12 +16,13 @@ function inc_generer_pdf_dist($squelette, $contexte = array(), $filename = 'sort
 
   // On inclut la configuration DOMPDF
   include_spip('lib/dompdf/dompdf_config.inc');
+  include_spip('dompdf_fonctions');
 
   // On charge DOMPDF
   $dompdf = new DOMPDF();
 
   // On récupère le html du squelette.
-  $html = recuperer_fond($squelette, $contexte);
+  $html = dompdf_trouver_html($squelette);
 
   // On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
   $dompdf->load_html($html);
