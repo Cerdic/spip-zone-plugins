@@ -4,11 +4,11 @@
         id_article,
         titre=#TITRE*
     }>
-    \label{art#ID_TRAD}
+    \label{art[(#ID_TRAD|?{#ID_TRAD,#ID_ARTICLE})]}
 
-    [(#CHAPO*|propre_exportdoclatex|filtrer_entites)]
+    [(#CHAPO*|chmlatex_propre_latex|filtrer_entites)]
 
-    [(#TEXTE*|propre_exportdoclatex|filtrer_entites)]
+    [(#TEXTE*|chmlatex_propre_latex|filtrer_entites)]
 
-    [(#PS*|propre_exportdoclatex|filtrer_entites)]
+    [(#PS*|chmlatex_propre_latex|filtrer_entites)]
 </BOUCLE_article>
