@@ -25,11 +25,9 @@
        acceptedFiles: '[(#REM|mine_type_logos)]',
 
 
-       [(#REM|test_espace_prive|oui)
-           success: function(file, response) {
-             ajaxReload("navigation");
-           },
-       ]
+       [success: function(file, response) {
+         ajaxReload("(#ENV{ajaxReload})");
+       },]
 
        // Traduire dropzone
        dictDefaultMessage: "<:uploadhtml5:logo_drop_ici:>",

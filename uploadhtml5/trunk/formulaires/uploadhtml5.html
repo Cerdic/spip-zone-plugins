@@ -23,11 +23,9 @@
          #CONFIG{uploadhtml5/max_file},
          null})],
 
-       [(#REM|test_espace_prive|oui)
-           success: function(file, response) {
-             ajaxReload("documents");
-           },
-       ]
+       [success: function(file, response) {
+         ajaxReload("(#ENV{ajaxReload})");
+       },]
 
        // Traduire dropzone
        dictDefaultMessage: "<:uploadhtml5:drop_ici:>",
