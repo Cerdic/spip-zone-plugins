@@ -73,18 +73,24 @@ function formulaires_tradlang_importer_langue_charger_dist($id_tradlang_module,$
 				}
 				if(file_exists($dest_po)){
 					lire_fichier($dest_po,$contenu_po);
-					preg_match_all(',(\#\, php-format|\#\, fuzzy\, php-format).*msgstr(.*)\#,Uims', $contenu_po,$matches);
+					preg_match_all(',(\#\, php-format|\#\, fuzzy\, php-format).*msgstr "(.*)\n(\n|\Z),Uims', $contenu_po,$matches);
 					$array_po = array();
 					foreach($matches[0] as $match){
 						$statut = "OK";
-						preg_match(',\#\| msgid \"(.*)\"\n,Uims',$match,$matches);
-						preg_match(',msgstr \"(.*)\n\#,Uims',$match,$matches_str);
+						preg_match(',msgstr \"(.*)\n(\n|\Z),Uims',$match,$matches_str);
 						$str = rtrim(trim($matches_str[1]),'"');
 						$str = trim(str_replace("\"\n\"","\n",$str));
+						preg_match(',\#\| msgid \"(.*)\"\n,Uims',$match,$matches);
+						if(!isset($matches[1]) || $matches[1] == ''){
+							preg_match(',\nmsgid \"(.*)\nmsgstr,Uims',$match,$matches_str_orig);
+							$str_orig = rtrim(trim($matches_str_orig[1]),'"');
+							$str_orig = trim(str_replace("\"\n\"","",$str_orig));
+							$matches[1] = sql_getfetsel('id','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module)." AND str=".sql_quote($str_orig));
+						}
 						if(preg_match(',\#\, fuzzy\, php-format,',$match,$matches_statut))
 							$statut = "MODIF";
 						if($str != '')
-							$array_po[$matches[1]] = array('str'=>$str,'statut'=>$statut);
+							$array_po[$matches[1]] = array('str'=>$str, 'statut'=>$statut);
 					}
 					$modifs = array();
 					$langues_base = sql_allfetsel('id,str,statut','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($lang));
@@ -191,18 +197,24 @@ function formulaires_tradlang_importer_langue_verifier_1_dist($id_tradlang_modul
 						 */
 						else{
 							lire_fichier($dest,$contenu_po);
-							preg_match_all(',(\#\, php-format|\#\, fuzzy\, php-format).*msgstr(.*)\#,Uims', $contenu_po,$matches);
+							preg_match_all(',(\#\, php-format|\#\, fuzzy\, php-format).*msgstr "(.*)\n(\n|\Z),Uims', $contenu_po,$matches);
 							$array_po = array();
 							foreach($matches[0] as $match){
 								$statut = "OK";
-								preg_match(',\#\| msgid \"(.*)\"\n,Uims',$match,$matches);
-								preg_match(',msgstr \"(.*)\n\#,Uims',$match,$matches_str);
+								preg_match(',msgstr \"(.*)\n(\n|\Z),Uims',$match,$matches_str);
 								$str = rtrim(trim($matches_str[1]),'"');
 								$str = trim(str_replace("\"\n\"","\n",$str));
+								preg_match(',\#\| msgid \"(.*)\"\n,Uims',$match,$matches);
+								if(!isset($matches[1]) || $matches[1] == ''){
+									preg_match(',\nmsgid \"(.*)\nmsgstr,Uims',$match,$matches_str_orig);
+									$str_orig = rtrim(trim($matches_str_orig[1]),'"');
+									$str_orig = trim(str_replace("\"\n\"","",$str_orig));
+									$matches[1] = sql_getfetsel('id','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module)." AND str=".sql_quote($str_orig));
+								}
 								if(preg_match(',\#\, fuzzy\, php-format,',$match,$matches_statut))
 									$statut = "MODIF";
 								if($str != '')
-									$array_po[$matches[1]] = array('str'=>$str,'statut'=>$statut);
+									$array_po[$matches[1]] = array('str'=>$str, 'statut'=>$statut);
 							}
 							$langues_base = sql_allfetsel('id,str,statut','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module).' AND lang='.sql_quote($lang));
 							$modifs = array();
@@ -226,7 +238,6 @@ function formulaires_tradlang_importer_langue_verifier_1_dist($id_tradlang_modul
 		if(!count($modifs) && !$erreurs['fichier_langue'])
 			$erreurs['fichier_langue'] = _T('tradlang:erreur_upload_aucune_modif');
 	}
-	spip_log($modifs,'test.'._LOG_ERREUR);
 	return $erreurs;
 }
 
@@ -263,7 +274,6 @@ function formulaires_tradlang_importer_langue_verifier_2_dist($id_tradlang_modul
 		$erreurs['message_erreur'] = "Le fichier temporaire $dest n'a pas été créé";
 	if(!count($modifs))
 		$erreurs['message_erreur'] = _T('tradlang:erreur_upload_choisir_une');
-	spip_log($modifs,'test.'._LOG_ERREUR);
 	return $erreurs;
 }
 
@@ -324,19 +334,24 @@ function formulaires_tradlang_importer_langue_traiter_dist($id_tradlang_module,$
 	}
 	else if(file_exists($dest = $dir_lang.$fichier_po)){
 		lire_fichier($dest,$contenu_po);
-		preg_match_all(',(\#\, php-format|\#\, fuzzy\, php-format).*msgstr(.*)\#,Uims', $contenu_po,$matches);
+		preg_match_all(',(\#\, php-format|\#\, fuzzy\, php-format).*msgstr "(.*)\n(\n|\Z),Uims', $contenu_po,$matches);
 		$array_po = array();
 		foreach($matches[0] as $match){
 			$statut = "OK";
-			preg_match(',\#\| msgid \"(.*)\"\n,Uims',$match,$matches);
-			preg_match(',msgstr \"(.*)\n\#,Uims',$match,$matches_str);
+			preg_match(',msgstr \"(.*)\n(\n|\Z),Uims',$match,$matches_str);
 			$str = rtrim(trim($matches_str[1]),'"');
 			$str = trim(str_replace("\"\n\"","\n",$str));
-			if(preg_match(',\#\, fuzzy\, php-format,',$match,$matches_statut)){
-				$statut = "MODIF";
+			preg_match(',\#\| msgid \"(.*)\"\n,Uims',$match,$matches);
+			if(!isset($matches[1]) || $matches[1] == ''){
+				preg_match(',\nmsgid \"(.*)\nmsgstr,Uims',$match,$matches_str_orig);
+				$str_orig = rtrim(trim($matches_str_orig[1]),'"');
+				$str_orig = trim(str_replace("\"\n\"","",$str_orig));
+				$matches[1] = sql_getfetsel('id','spip_tradlangs','id_tradlang_module='.intval($id_tradlang_module)." AND str=".sql_quote($str_orig));
 			}
+			if(preg_match(',\#\, fuzzy\, php-format,',$match,$matches_statut))
+				$statut = "MODIF";
 			if($str != '')
-				$array_po[$matches[1]] = array('str'=>$str,'statut'=>$statut);
+				$array_po[$matches[1]] = array('str'=>$str, 'statut'=>$statut);
 		}
 
 		$langues_base = sql_allfetsel('id_tradlang,id,str,statut','spip_tradlangs','module='.sql_quote($module).' AND lang='.sql_quote($lang));
