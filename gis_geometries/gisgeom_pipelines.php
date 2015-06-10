@@ -25,6 +25,7 @@ function gisgeom_header_prive($flux){
 
 /**
  * Ajouter les inputs des champs type et geo au formulaire editer_gis
+ * Ajouter le script leaflet draw au script gis.js appelé par les cartes
  *
  * @param $flux
  * @return mixed
