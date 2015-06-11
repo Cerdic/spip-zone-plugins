@@ -53,7 +53,12 @@ if ($lenOpt > LenQuote * 2)
 	}
 }
 if ($lenOpt > 0) $option .= ' '; // Separator with the two last options
-$option .= 'eo=true pd=' . $UrlRoot . $UrlPgn; // eo = extendedoptions; pd = pgnData
-echo pgn4spip_prepropre('[pgn ' . $option . '][/pgn]');
+$option .= 'eo=true'; // eo = extendedoptions
+
+	$pgndata = file_get_contents([(#FICHIER|_q)]);
+	include_spip('inc/charsets');
+	$pgndata = importer_charset($pgndata, is_utf8($pgndata) ? 'utf-8' : 'iso-8859-1');
+
+	echo pgn4spip_prepropre('[pgn ' . $option . ']' . $pgndata . '[/pgn]');
 ?>
 </BOUCLE_pgn>
