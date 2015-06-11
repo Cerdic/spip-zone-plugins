@@ -378,7 +378,7 @@ function formidable_transformer_nom(&$valeur, $cle, $transformation){
 function formidable_generer_saisie_configurable($saisie, $env){
 	// On récupère le nom
 	$nom = $saisie['options']['nom'];
-	$identifiant = $saisie['identifiant'];
+	$identifiant = isset($saisie['identifiant']) ? $saisie['identifiant'] : "";
 	// On cherche si ya un formulaire de config
 	$formulaire_config = isset($env['erreurs']['configurer_'.$nom]) ? $env['erreurs']['configurer_'.$nom] : "";
 	// On ajoute une classe
