@@ -277,6 +277,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_suppression_module_trads_ok' => 'تم حذف الوحدة @module@. تم أيضاً حذف @nb@ بند ترجمة عائد لها.',
 	'message_synchro_base_fichier_ok' => 'تم تزامن الملف وقاعدة البيانات.',
 	'message_synchro_base_fichier_pas_ok' => 'لا يوجد اي تزامن بين الملف وقاعدة البيانات.',
+	'message_upload_nb_modifie' => 'قمت بتعديل @nb@ سلسلة لغة.',
 	'message_upload_nb_modifies' => 'قمت بتعديل  @nb@ سلسلة لغة.',
 	'module_deja_importe' => 'تم جلب الوحدة "@module@" مسبقاً',
 	'moduletitre' => 'الوحدات المتوافرة',
