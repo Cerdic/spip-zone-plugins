@@ -149,5 +149,3 @@ function autoriser_feuillederoute_lire_dist($faire, $type, $id, $qui, $opt){
 
 	return $autorise;
 }
-
-?>

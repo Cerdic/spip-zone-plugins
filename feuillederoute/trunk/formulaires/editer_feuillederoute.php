@@ -27,5 +27,3 @@ function formulaires_editer_feuillederoute_traiter_dist(){
 	ecrire_fichier_securise(_DIR_IMG . 'feuillederoute.php', serialize($contenu));
 	return array('message_ok' => _T('feuillederoute:message_ok'));
 }
-
-?>

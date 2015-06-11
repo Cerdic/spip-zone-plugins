@@ -13,4 +13,3 @@ function feuillederoute_body_prive($flux){
 	return $flux;
 }
 
-?>

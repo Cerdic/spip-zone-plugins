@@ -24,6 +24,3 @@ function feuillederoute_vider_tables($nom_meta_version_base){
 	effacer_meta($nom_meta_version_base);
 	supprimer_fichier(_DIR_IMG . 'feuillederoute.php');
 }
-
-
-?>

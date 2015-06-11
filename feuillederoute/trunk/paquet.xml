@@ -9,13 +9,13 @@ schema="0.0.1"
 documentation="http://contrib.spip.net/Feuille-de-Route"
 	>	
 
-       <nom>Feuille de Route</nom>
-       <!-- Un bouton d'admin pour partager des informations hors publication -->
-	
+	<nom>Feuille de Route</nom>
+	<!-- Un bouton d'admin pour partager des informations hors publication -->
+
 	<auteur>chankalan</auteur>
-	
+
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
-	
+
 	<pipeline nom="formulaire_admin" inclure="feuillederoute_pipelines.php" />
 	<pipeline nom="body_prive" inclure="feuillederoute_pipelines.php" />
 	<pipeline nom="autoriser" inclure="inc/feuillederoute_autoriser.php" />
