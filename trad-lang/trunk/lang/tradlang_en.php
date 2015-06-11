@@ -278,6 +278,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_suppression_module_trads_ok' => 'The module @module@ has been deleted. @nb@ translation items belonging to it were also removed.',
 	'message_synchro_base_fichier_ok' => 'Files and database are in sync.',
 	'message_synchro_base_fichier_pas_ok' => 'Files and database are not sync.',
+	'message_upload_nb_modifie' => 'You have modified @nb@ language string.',
 	'message_upload_nb_modifies' => 'You modified @nb@ language strings.',
 	'module_deja_importe' => 'The module "@module@" has already been imported.',
 	'moduletitre' => 'Modules available',
