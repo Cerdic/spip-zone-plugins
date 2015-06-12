@@ -21,7 +21,7 @@ function inc_exporter_pdf_dist($squelette, $contexte = array(), $filename = 'sor
   // On charge DOMPDF
   $dompdf = new DOMPDF();
 
-  $html = dompdf_trouver_html($squelette);
+  $html = dompdf_trouver_html($squelette, $contexte);
 
   // On lance DOMPDF pour crée le PDF et le renvoyer au navigateur.
   $dompdf->load_html($html);
