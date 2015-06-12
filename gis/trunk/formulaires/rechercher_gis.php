@@ -33,6 +33,7 @@ function formulaires_rechercher_gis_charger_dist($objet='', $id_objet='', $retou
  * @param string $recherche
  */
 function formulaires_rechercher_gis_verifier_dist($objet='', $id_objet='', $retour='', $recherche=''){
+	$erreurs = array();
 	return $erreurs;
 }
 
@@ -45,7 +46,8 @@ function formulaires_rechercher_gis_verifier_dist($objet='', $id_objet='', $reto
  * @param string $recherche
  */
 function formulaires_rechercher_gis_traiter_dist($objet='', $id_objet='', $retour='', $recherche=''){
-	return;
+	$res = array();
+	return $res;
 }
 
 ?>
