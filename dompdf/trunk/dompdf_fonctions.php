@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @access public
  * @return mixed
  */
-function dompdf_trouver_html($squelette) {
+function dompdf_trouver_html($squelette, $contexte=array()) {
     // Si on a passé un squelette
     if (find_in_path($squelette.'.html'))
         // On récupère le html du squelette.
