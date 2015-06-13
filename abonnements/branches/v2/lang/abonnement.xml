@@ -1,0 +1,10 @@
+<traduction module="abonnement" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/abonnements/trunk/lang/" reference="fr">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/abonnement?lang_cible=en" total="39" traduits="39" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Gilles" lien="http://trad.spip.net/auteur/gilles" />
+	</langue>
+	<langue code="es" url="http://trad.spip.net/tradlang_module/abonnement?lang_cible=es" total="39" traduits="39" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="alf" lien="http://trad.spip.net/auteur/alf" />
+	</langue>
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/abonnement?lang_cible=fr" total="39" traduits="39" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	</langue>
+</traduction>

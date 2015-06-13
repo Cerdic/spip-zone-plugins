@@ -1,0 +1,26 @@
+<BOUCLE_abonnement(ABONNEMENTS auteurs){id_abonnement}{statut?}>
+
+[<div class="champ contenu_id_abonnements_offre[ (#ID_ABONNEMENTS_OFFRE*|strlen|?{'',vide})]">
+	<label><:abonnement:champ_id_abonnements_offre_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{id_abonnements_offre} id_abonnements_offre'>(#INFO_TITRE{abonnements_offre,#ID_ABONNEMENTS_OFFRE})</span>
+</div>]
+
+[<div class="champ contenu_id_auteur[ (#ID_AUTEUR*|strlen|?{'',vide})]">
+	<label><:abonnement:champ_id_auteur_label:> : </label>
+	<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]"><span dir='#LANG_DIR' class='#EDIT{id_auteur} id_auteur'>(#NOM)</span></a>
+	[(<a href="mailto:#EMAIL">(#EMAIL)</a>)]
+</div>]
+
+#SET{horaires, #INFO_PERIODE{abonnements_offre, #ID_ABONNEMENTS_OFFRE}|=={heures}|?{' ',''}}
+
+[<div class="champ contenu_date_debut[ (#DATE_DEBUT*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:abonnement:champ_date_debut_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_DEBUT|affdate_heure)], [(#DATE_DEBUT|affdate_jourcourt)]})]})</span>
+</div>]
+
+[<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:abonnement:champ_date_fin_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>(#DATE_FIN|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_FIN|affdate_heure)], [(#DATE_FIN|affdate_jourcourt)]})]})</span>
+</div>]
+
+</BOUCLE_abonnement>

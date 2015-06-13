@@ -1,0 +1,3 @@
+<a href="#URL_ECRIRE{abonnements_offres}"><:abonnementsoffre:titre_abonnementsoffres:></a><BOUCLE_abonnement(ABONNEMENTS){id_abonnement}{statut?}><span class="sep">
+&gt; </span><a href="[(#ID_ABONNEMENTS_OFFRE|generer_url_entite{abonnements_offre})]">#INFO_TITRE{abonnements_offre,#ID_ABONNEMENTS_OFFRE}</a><span class="sep">
+&gt; </span><strong class="on">#INFO_TITRE{auteur,#ID_AUTEUR} [ ((#DATE_DEBUT|affdate_jourcourt))]</strong></BOUCLE_abonnement>

@@ -1,0 +1,46 @@
+<paquet
+	prefix="abonnements"
+	categorie="auteur"
+	version="2.3.4"
+	schema="2.1.0"
+	etat="stable"
+	compatibilite="[3.0.5;3.0.*]"
+	logo="prive/themes/spip/images/abonnements-64.png"
+	documentation="http://contrib.spip.net/4607"
+>
+	<nom>Abonnements</nom>
+	
+	<credit lien="http://contrib.spip.net/BoOz,502">BoOz</credit>
+	<credit lien="http://www.elastick.net">Anne-lise Martenot</credit>
+	<credit lien="http://www.magraine.net/">Matthieu Marcillaud</credit>
+	<credit lien="http://www.cym.net">Ateliers Cym</credit>
+	<credit lien="http://www.latribunedelart.com">La tribune de l'art</credit>
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+
+	<licence>GNU/GPL v3</licence>
+	<necessite nom="saisies" compatibilite="[1.28.1;]" /> 
+	<necessite nom="verifier" compatibilite="[1.0.0;]" /> 
+	<necessite nom="yaml" compatibilite="[1.5.0;]" />
+	<necessite nom="facteur" compatibilite="[3.0.1;]" />
+	<utilise nom="commandes" compatibilite="[1.5.0;]" />
+	
+	<!-- Autorisations générales -->
+	<pipeline nom="autoriser" inclure="abonnements_autorisations.php" />
+	<!-- Modifications de la base -->
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/abonnements.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/abonnements.php" />
+	<pipeline nom="declarer_tables_principales" inclure="base/abonnements.php" />
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/abonnements.php" />
+	<pipeline nom="optimiser_base_disparus" inclure="abonnements_pipelines.php" />
+	<!-- Automatismes liés -->
+	<pipeline nom="post_edition" inclure="abonnements_pipelines.php" />
+	<pipeline nom="taches_generales_cron" inclure="abonnements_pipelines.php" />
+	<!-- Affichages ajoutés -->
+	<pipeline nom="affiche_gauche" inclure="abonnements_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="abonnements_pipelines.php" />
+	<!-- Pipelines ajoutés par ce plugin -->
+	<pipeline nom="abonnement_initialisation_dates" action="" />
+
+	<menu nom="abonnements_offres" titre="abonnementsoffre:titre_abonnementsoffres" parent="menu_publication" icone="images/abonnement-16.png" action="abonnements_offres" /> 
+	<menu nom="abonnements" titre="abonnement:titre_abonnements_suivre" parent="menu_activite" icone="images/abonnement-16.png" action="abonnements" /> 
+</paquet>

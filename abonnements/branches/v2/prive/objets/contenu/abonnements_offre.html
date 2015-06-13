@@ -1,0 +1,23 @@
+<BOUCLE_abonnements_offre(ABONNEMENTS_OFFRES){id_abonnements_offre}{statut?}>
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:abonnementsoffre:champ_titre_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{titre} titre'>(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:abonnementsoffre:champ_descriptif_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>(#DESCRIPTIF)</span>
+</div>]
+
+<div class="champ contenu_duree">
+	<label><:abonnementsoffre:champ_duree_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{duree} duree'>[(#DUREE|=={0}|?{<:abonnementsoffre:champ_duree_0:>,#VAL{abonnementsoffre:champ_periode_nb_}|concat{#PERIODE}|_T{#ARRAY{nb,#DUREE}}})]</span>
+</div>
+
+<div class="champ contenu_prix">
+	<label><:abonnementsoffre:champ_prix_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{prix} prix'>[(#PRIX*|=={0}|?{<:abonnementsoffre:champ_prix_0:>,#PRIX})]</span>
+</div>
+
+</BOUCLE_abonnements_offre>

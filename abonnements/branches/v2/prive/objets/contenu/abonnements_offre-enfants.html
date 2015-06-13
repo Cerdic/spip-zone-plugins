@@ -1,0 +1,21 @@
+<INCLURE{fond=prive/objets/liste/abonnements, env, ajax,
+	id_abonnements_offre=#ENV{id_abonnements_offre},
+	masquer_offre=oui,
+	par=date_fin, date_fin_sens=1,
+	statut=actif,
+	titre_singulier=abonnement:info_1_abonnement_actif,
+	titre_pluriel=abonnement:info_nb_abonnements_actifs,
+	sinon=<:abonnement:info_aucun_abonnement_actif:>} />
+
+[(#AUTORISER{creer,abonnement})
+	[(#URL_ECRIRE{abonnement_edit,new=oui&id_abonnements_offre=#ENV{id_abonnements_offre}}|icone_verticale{<:abonnement:icone_creer_abonnement:>,abonnement,new,right})]
+]
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/abonnements, env, ajax,
+	id_abonnements_offre=#ENV{id_abonnements_offre},
+	masquer_offre=oui,
+	par=date_fin,
+	statut=inactif,
+	titre_singulier=abonnement:info_1_abonnement_inactif,
+	titre_pluriel=abonnement:info_nb_abonnements_inactifs} />
