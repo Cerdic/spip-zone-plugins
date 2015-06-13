@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2014 - Distribué sous licence GNU/GPL
+ * 2008-2015 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -19,7 +19,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * -* ffmpeg;
  * -* ffprobe;
  * -* flvtool++;
- * -* qt-faststart;
  * -* le script spipmotion.sh;
  * -* le script spipmotion_vignette.sh;
  * -* mediainfo;
@@ -77,17 +76,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 					unset($erreurs[$erreur]);
 			}
 		}
-		
-		/**
-		 * Tester qt-faststart
-		 */
-		$chemin_qtfaststart = defined('_CHEMIN_QTFASTSTART') ? _CHEMIN_QTFASTSTART : 'qt-faststart';
-		exec($chemin_qtfaststart,$retour_qt_faststart,$retour_qt_faststart_int);
-		if($retour_qt_faststart_int != 0){
-			ecrire_config('spipmotion_qt-faststart_casse', 'oui');
-			$erreurs[] = 'qt-faststart';
-		}else
-			effacer_config('spipmotion_qt-faststart_casse');
 		
 		/**
 		 * Tester mediainfo

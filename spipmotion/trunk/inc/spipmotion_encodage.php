@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * kent1 (http://www.kent1.info - kent1@arscenic.info)
- * 2008-2014 - Distribué sous licence GNU/GPL
+ * 2008-2015 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -487,7 +487,9 @@ function encodage($source,$options){
 				$rotation = "-filter:v transpose=1";
 				$infos_sup_normal .= " $rotation $metadatas";
 			}
-
+			if($vcodec == '--vcodec libx264'){
+				$infos_sup_normal .= ' -movflags faststart';
+			}
 			if(strlen($infos_sup_normal) > 1)
 				$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 			$encodage = $spipmotion_sh." --force true $audiofreq $video_size --e $chemin $acodec $vcodec $fps $audiobitrate_ffmpeg $audiochannels_ffmpeg $bitrate $infos_sup_normal --s $fichier_temp --fpre $fichier_texte --log $fichier_log";
