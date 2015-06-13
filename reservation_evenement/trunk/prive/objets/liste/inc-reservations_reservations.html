@@ -23,7 +23,13 @@
         <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
             <td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
             <td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
-            <td class='reference principale'>[(#LOGO_RESERVATION|image_reduire{20,26})]<a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">[(#RANG). ]#REFERENCE</a></td> 
+            <td class='reference principale'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">
+              [(#RANG). ]#REFERENCE
+              </a>
+              [(#ID_RESERVATION_SOURCE|>{0}|oui)
+                <br /><img src="[(#CHEMIN_IMAGE{lien-#TYPE_LIEN-16.png}|sinon{#CHEMIN_IMAGE{lien-16.png}})]" alt="[(#ORIGINE_LIEN|concat{:lien_}|concat{#TYPE_LIEN}|_T|sinon{<:reservation:lien_defaut:>})]" title="[(#ORIGINE_LIEN|concat{:lien_}|concat{#TYPE_LIEN}|_T|sinon{<:reservation:lien_defaut:>})]" />
+              ]
+           </td> 
             <td class='auteur'>
                    <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
                     <a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a> -  

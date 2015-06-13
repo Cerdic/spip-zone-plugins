@@ -21,14 +21,9 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
   // La référence
   $fonction_reference = charger_fonction('reservation_reference', 'inc/');
 
-  $set = array(
-    'statut' => $statut,
-    'lang' => _request('lang')
-  );
-
-  //les champs extras auteur
-  include_spip('cextras_pipelines');
-  $valeurs_extras = array();
+  set_request('statut', $statut);
+  $reference = $fonction_reference($id_auteur);
+  set_request('reference', $reference);
 
   if (_request('enregistrer')) {
     include_spip('actions/editer_auteur');
@@ -41,31 +36,45 @@ function inc_reservation_enregistrer_dist($id = '', $id_article = '', $id_auteur
       $auteur = sql_fetsel('*', 'spip_auteurs', 'id_auteur=' . $id_auteur);
       auth_loger($auteur);
     }
-    $set['reference'] = $fonction_reference($id_auteur);
+
   }
-  elseif (!intval($id_auteur)) {
-    $set['nom'] = _request('nom');
-    $set['email'] = _request('email');
-    //$set['donnees_auteur']=serialize( $valeurs_extras);
-  }
-  else {
+  elseif (intval($id_auteur)) {
+    //les champs extras auteur
+    include_spip('cextras_pipelines');
+    $valeurs_extras = array();
+
+    if (!is_array($champs_extras_auteurs) AND function_exists('champs_extras_objet')) {
+      //Charger les définitions pour la création des formulaires
+      $champs_extras_auteurs = champs_extras_objet(table_objet_sql('auteur'));
+    }
+
+    if (is_array($champs_extras_auteurs)) {
+      foreach ($champs_extras_auteurs as $value) {
+        $valeurs_extras[$value['options']['label']] = _request($value['options']['nom']);
+      }
+    }
+
+    set_request('nom', '');
+    set_request('email', '');
+    
     $valeurs = array_merge(array(
       'nom' => _request('nom'),
       'email' => _request('email')
     ), $valeurs_extras);
     sql_updateq('spip_auteurs', $valeurs, 'id_auteur=' . $id_auteur);
   }
-  $set['reference'] = $fonction_reference();
-  $set['id_auteur'] = $id_auteur;
+  
+  set_request('id_auteur',$id_auteur);
 
-  $id_reservation = $action('new', 'reservation', $set);
+  $id_reservation = $action('new', 'reservation');
 
   // On ajoute l'id à la session
-  session_set('id_reservation', $id_reservation);
+  $id_reservation = $id_reservation[0];
+  if (! _request('id_reservation_source')) session_set('id_reservation', $id_reservation);
 
   $message = '<p>' . _T('reservation:reservation_enregistre') . '</p>';
   $message .= '<h3>' . _T('reservation:details_reservation') . '</h3>';
-  $message .= recuperer_fond('inclure/reservation', array('id_reservation' => $id_reservation[0]));
+  $message .= recuperer_fond('inclure/reservation', array('id_reservation' => $id_reservation));
 
   //Ivalider les caches
   include_spip('inc/invalideur');
