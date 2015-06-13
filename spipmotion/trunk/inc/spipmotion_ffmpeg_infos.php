@@ -91,11 +91,9 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			$data['spipmotion_compiler']['versions'] = array();
 
 			$version = trim($matches[$indexs['version']]);
-			preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* on (.*) with gcc (.*)/s', $version, $versions);
+			preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* with gcc (.*)/s', $version, $versions);
 			$data['spipmotion_compiler']['ffmpeg_version'] = $versions[1];
-			$data['spipmotion_compiler']['gcc'] = $versions[3];
-			$data['spipmotion_compiler']['build_date'] = $versions[2];
-			$data['spipmotion_compiler']['build_date_timestamp'] = strtotime($versions[2]);
+			$data['spipmotion_compiler']['gcc'] = $versions[2];
 
 			/**
 			 * Récupération des éléments de configuration
