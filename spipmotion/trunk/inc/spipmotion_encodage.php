@@ -100,7 +100,6 @@ function encodage($source,$options){
 
 	include_spip('inc/config');
 	$spipmotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
-	$ffmpeg_version = $spipmotion_compiler['ffmpeg_version'] ? $spipmotion_compiler['ffmpeg_version'] : '0.7';
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 
 	$extension_attente = $options['format'];
@@ -386,10 +385,7 @@ function encodage($source,$options){
 				$vbitrate = $source['videobitrate'];
 			else{
 				$vbitrate = null;
-				if(spip_version_compare($ffmpeg_version,'1.0.0','<'))
-					$infos_sup_normal .= ' -sameq ';
-				else
-					$infos_sup_normal .= ' -q:v 0 ';
+				$infos_sup_normal .= ' -q:v 0 ';
 			}
 			$bitrate = "--bitrate ".$source['videobitrate'];
 		}else{
@@ -416,10 +412,7 @@ function encodage($source,$options){
 			 * Encodage pour Ipod/Iphone (<= 3G)
 			 */
 			if($format == 'ipod'){
-				if(spip_version_compare($ffmpeg_version,'0.7.20','<'))
-					$infos_sup_normal .= ' -vpre baseline -vpre ipod640 -bf 0';
-				else
-					$infos_sup_normal .= ' -profile:v baseline -bf 0';	
+				$infos_sup_normal .= ' -profile:v baseline -bf 0';	
 			}
 			/**
 			 * Encodage pour PSP
@@ -451,19 +444,11 @@ function encodage($source,$options){
 
 		if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($vcodec == '--vcodec libtheora') OR ($extension_attente == 'webm'))){
 			spip_log('Premiere passe','spipmotion');
-			if (spip_version_compare($ffmpeg_version,'1.0.0','<')){
-				$preset_1 = $preset_quality ? ' -vpre '.$preset_quality.'_firstpass' : '';
-			}else
-				$preset_1 = $preset_quality ? ' -preset '.$preset_quality : '';
+			$preset_1 = $preset_quality ? ' -preset '.$preset_quality : '';
 
 			if($source['rotation'] == '90'){
-				$metadatas = '';
-				if (spip_version_compare($ffmpeg_version,'1.0.0','<')){
-					$rotation = "-vf transpose=1";
-				}else{
-					$metadatas = "-metadata:s:v:0 rotate=0";
-					$rotation = "-filter:v transpose=1";
-				}
+				$metadatas = "-metadata:s:v:0 rotate=0";
+				$rotation = "-filter:v transpose=1";
 				$infos_sup_normal .= "$rotation $metadatas";
 			}
 
@@ -482,11 +467,7 @@ function encodage($source,$options){
 			 */
 			if($retour_int_1 == 0){
 				spip_log('Seconde passe','spipmotion');
-
-				if (spip_version_compare($ffmpeg_version,'0.7.20','<'))
-					$preset_2 = $preset_quality ? " -vpre $preset_quality":'';
-				else
-					$preset_2 = $preset_quality ? " -preset $preset_quality":'';
+				$preset_2 = $preset_quality ? " -preset $preset_quality":'';
 
 				$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $ss_audio $preset_2 $infos_sup_normal $metadatas\"";
 				$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp --log $fichier_log";
@@ -499,19 +480,11 @@ function encodage($source,$options){
 		}else{
 			$metadatas = $metadatas_supp = "";
 			$infos_sup_normal .= " $ss_audio ";
-			if (spip_version_compare($ffmpeg_version,'0.7.0','<'))
-				$infos_sup_normal .= $preset_quality ? " -vpre $preset_quality":'';
-			else
-				$infos_sup_normal .= $preset_quality ? " -preset $preset_quality":'';
+			$infos_sup_normal .= $preset_quality ? " -preset $preset_quality":'';
 
 			if($source['rotation'] == '90'){
-				$metadatas = "";
-				if (spip_version_compare($ffmpeg_version,'1.0.0','<')){
-					$rotation = "-vf transpose=1";
-				}else{
-					$metadatas = "-metadata:s:v:0 rotate=0";
-					$rotation = "-filter:v transpose=1";
-				}
+				$metadatas = "-metadata:s:v:0 rotate=0";
+				$rotation = "-filter:v transpose=1";
 				$infos_sup_normal .= " $rotation $metadatas";
 			}
 
