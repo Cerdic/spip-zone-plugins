@@ -6,23 +6,17 @@
 	<form method="post" action="#ENV{action}">
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
-				<li class="fieldset">
-					<fieldset>
-						<h3 class="legend"><:savecfg:gerer_restauration:></h3>
-						<ul>
-								<li>
-								<select name="fond_id">
-								<option value="none" selected="selected">&nbsp;</option>
-								<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}{par titre}>
-									<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
-								</BOUCLE_savecfg>
-								</select>
-								</li>
-						</ul>
-					</fieldset>
-				</li>
-			</ul>
+			<fieldset>
+				<h3 class="legend"><:savecfg:gerer_restauration:></h3>
+				<div class="editer-groupe">
+					<select name="fond_id">
+					<option value="none" selected="selected">&nbsp;</option>
+					<BOUCLE_savecfg(SAVECFG){fond=#GET{fond}}{par titre}>
+						<option value="#ID_SAVECFG">[(#TITRE|supprimer_tags)]</option>
+					</BOUCLE_savecfg>
+					</select>
+				</div>
+			</fieldset>
 			<p class="boutons">
 				<input type="submit" name="_restaurer_" value="<:savecfg:restaurer:>" />
 				<input type="submit" name="_supprimer_" value="Supprimer" />
