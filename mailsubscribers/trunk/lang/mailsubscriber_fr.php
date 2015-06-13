@@ -18,8 +18,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmsubscribe_texte_email_1' => 'Vous avez demandé à vous inscrire à la Newsletter de @nom_site_spip@ avec l\'adresse email @email@.',
 	'confirmsubscribe_texte_email_2' => 'Pour confirmer votre inscription, merci de cliquer sur le lien suivant :
 @url_confirmsubscribe@',
-	'confirmsubscribe_texte_email_3' => 'Si il s\'agit d\'une erreur de notre part ou si vous avez changé d\'avis, vous pouvez ignorer ce mail&nbsp;: cette demande sera automatiquement annulée.',
-	'confirmsubscribe_invite_texte_email_3' => 'Si il s\'agit d\'une erreur de notre part, vous pouvez ignorer ce mail&nbsp;: cette demande sera automatiquement annulée.',
+	'confirmsubscribe_texte_email_3' => 'S\'il s\'agit d\'une erreur de notre part ou si vous avez changé d\'avis, vous pouvez ignorer ce mail&nbsp;: cette demande sera automatiquement annulée.',
+	'confirmsubscribe_invite_texte_email_3' => 'S\'il s\'agit d\'une erreur de notre part, vous pouvez ignorer ce mail&nbsp;: cette demande sera automatiquement annulée.',
 	'confirmsubscribe_texte_email_envoye' => 'Un email a été envoyé à cette adresse pour confirmation.',
 
 	// D
