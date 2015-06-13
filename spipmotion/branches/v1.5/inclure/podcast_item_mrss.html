@@ -1,0 +1,112 @@
+<BOUCLE_document(DOCUMENTS){id_document}>
+#SET{id_article,''}
+#SET{category_string,' '}
+#SET{url_document,#URL_DOCUMENT|url_absolue}
+#SET{itunes_formats,#ARRAY|push{pdf}|push{m4a}|push{mov}|push{mp3}|push{mp4}}
+<B_article>
+<item>
+	<BOUCLE_article(ARTICLES){id_document}{0,1}>
+	<title>[(#TITRE|texte_backend)]</title>
+	[<link>(#URL_ARTICLE|url_absolue)</link>]
+	[<guid>(#URL_ARTICLE|url_absolue)</guid>]
+	[<comments>(#URL_ARTICLE|url_absolue)#comments</comments>]
+	[<pubDate>(#DATE|affdate{r})</pubDate>]
+	[(#SET{description,[(#_document:DESCRIPTIF|?{[(#_document:DESCRIPTIF|supprimer_tags|filtrer_entites)],[(#TEXTE|?{[(#TEXTE|supprimer_tags|filtrer_entites)],''})]})]})]
+	<BOUCLE_desc(CONDITION){si #GET{description}|strlen}>
+	<description><![CDATA[#GET{description}]]></description></BOUCLE_desc>
+	<BOUCLE_mots(MOTS){id_article}>[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|non)#SET{category_string,#GET{category_string}|concat{#TITRE|texte_backend}|concat{', '}}][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui) #SET{category_string,#GET{category_string}|concat{#TITRE|texte_backend}}]
+	<category><![CDATA[#TITRE]]></category></BOUCLE_mots>
+	[<itunes:keywords>(#GET{category_string}|trim)</itunes:keywords>]
+	[<media:keywords>(#GET{category_string}|trim)</media:keywords>]
+	<BOUCLE_type(CONDITION){si #ENV{type}|=={itunes}|et{#_document:EXTENSION|in_array{#GET{itunes_formats}}|non}}>
+		<BOUCLE_doc_itunes(DOCUMENTS){objet=document}{id_objet=#_document:ID_DOCUMENT}{extension IN #GET{itunes_formats}}{0,1}{tout}>
+		[<enclosure url="(#URL_DOCUMENT|url_absolue)"[ length="(#TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
+		</BOUCLE_doc_itunes>
+		[<enclosure url="(#URL_DOCUMENT|url_absolue)"[ length="(#TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
+		<//B_doc_itunes>
+	</BOUCLE_type>
+	[<enclosure url="(#GET{url_document})"[ length="(#TAILLE)"][ type="(#_document:MIME_TYPE)"] />]
+	<//B_type>
+	#SET{id_article,#ID_ARTICLE}
+	<media:hash algo="md5">[(#FICHIER|md5)]</media:hash>
+	#SET{nb_versions,0}
+	<BOUCLE_compte_version(DOCUMENTS){objet=document}{id_objet=#_document:ID_DOCUMENT}{tout}> </BOUCLE_compte_version>
+	#SET{nb_versions,#GRAND_TOTAL}
+	</B_compte_version>
+
+	<BOUCLE_si_versions(CONDITION){si #GET{nb_versions}|>{0}}>
+	<media:group>
+        <media:content
+			url="[(#GET{url_document})]"[
+			fileSize="(#_document:TAILLE)"][
+			type="(#_document:MIME_TYPE)"][
+			medium="(#_document:HASVIDEO|=={oui}|?{video,[(#_document:HASAUDIO|=={oui}|?{audio,[(#_document:EXTENSION|in_array{#ARRAY|push{png}|push{gif}|push{jpg}}|?{image,document})]})]})"]
+			isDefault="true"
+			expression="full"[
+			bitrate="(#_document:BITRATE|>{0}|?{[(#_document:BITRATE|div{1000})],''})"][
+			framerate="(#_document:FRAMERATE|>{0}|?{#_document:FRAMERATE})"][
+			samplingrate="(#_document:AUDIOSAMPLERATE|>{0}|?{[(#_document:AUDIOSAMPLERATE|div{1000})],''})"][
+			channels="(#_document:AUDIOCHANNELS|>{0}|?{#_document:AUDIOCHANNELS,''})"][
+			duration="(#_document:DUREE|>{0}|?{[(#_document:DUREE|floor)],''})"][
+			width="(#_document:LARGEUR|>{0}|?{#_document:LARGEUR,''})"][
+			height="(#_document:HAUTEUR|>{0}|?{#_document:HAUTEUR,''})"][
+			lang="(#LANG)"]
+         />
+		<BOUCLE_versions(DOCUMENTS){objet=document}{id_objet=#ID_DOCUMENT}{tout}>
+        <media:content
+			url="[(#URL_DOCUMENT|url_absolue)]"[
+			fileSize="(#TAILLE)"][
+			type="(#MIME_TYPE)"][
+			medium="(#HASVIDEO|=={oui}|?{video,[(#HASAUDIO|=={oui}|?{audio,[(#EXTENSION|in_array{#ARRAY|push{png}|push{gif}|push{jpg}}|?{image,document})]})]})"]
+			isDefault="true"
+			expression="full"[
+			bitrate="(#BITRATE|>{0}|?{[(#BITRATE|div{1000})],''})"][
+			framerate="(#FRAMERATE|>{0}|?{#FRAMERATE,''})"][
+			samplingrate="(#AUDIOSAMPLERATE|>{0}|?{[(#AUDIOSAMPLERATE|div{1000})],''})"][
+			channels="(#AUDIOCHANNELS|>{0}|?{#AUDIOCHANNELS})"][
+			duration="(#DUREE|>{0}|?{[(#DUREE|floor)],''})"][
+			width="(#LARGEUR|>{0}|?{#LARGEUR,''})"][
+			height="(#HAUTEUR|>{0}|?{#HAUTEUR,''})"][
+			lang="(#_article:LANG)"]
+		/>
+		</BOUCLE_versions>
+		<BOUCLE_auteurs(AUTEURS){id_article}>
+        <media:credit>#NOM</media:credit>
+		</BOUCLE_auteurs>
+	</media:group>
+	</BOUCLE_si_versions>
+		<media:content
+			url="[(#URL_DOCUMENT|url_absolue)]"[
+			fileSize="(#_document:TAILLE)"][
+			type="(#_document:MIME_TYPE)"][
+			medium="(#_document:HASVIDEO|=={oui}|?{video,[(#_document:HASAUDIO|=={oui}|?{audio,[(#_document:EXTENSION|in_array{#ARRAY|push{png}|push{gif}|push{jpg}}|?{image,document})]})]})"]
+			isDefault="true"
+			expression="full"[
+			bitrate="(#_document:BITRATE|>{0}|?{[(#_document:BITRATE|div{1000})],''})"][
+			framerate="(#_document:FRAMERATE|>{0}|?{#_document:FRAMERATE})"][
+			samplingrate="(#_document:AUDIOSAMPLERATE|>{0}|?{[(#_document:AUDIOSAMPLERATE|div{1000})],''})"][
+			channels="(#_document:AUDIOCHANNELS|>{0}|?{#_document:AUDIOCHANNELS,''})"][
+			duration="(#_document:DUREE|>{0}|?{[(#_document:DUREE|floor)],''})"][
+			width="(#_document:LARGEUR|>{0}|?{#_document:LARGEUR,''})"][
+			height="(#_document:HAUTEUR|>{0}|?{#_document:HAUTEUR,''})"][
+			lang="(#LANG)"]
+         />
+	<//B_si_versions>[
+	<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>][
+	<itunes:duration>(#_document:DUREE|>{0}|?{[(#_document:DUREE|>{3600}|?{[(#VAL{H:i:s}|gmdate{#_document:DUREE|floor})],[(#VAL{i:s}|gmdate{#_document:DUREE|floor})]})]})</itunes:duration>][
+	[<itunes:explicit>(#EXPLICIT)</itunes:explicit>]
+	<media:thumbnail url="(#LOGO_DOCUMENT|extraire_attribut{src}|url_absolue)" />]
+	#MODELE{licence,id_licence=#ID_LICENCE,modele_type=mrss,cacher_defaut=oui}
+	<BOUCLE_point(GIS?){id_article}{0,1}>
+	<media:location[ description="(#TITRE|texte_script)"]>
+		<georss:where>
+			<gml:Point>
+				<gml:pos>#LAT #LON</gml:pos>
+			</gml:Point>
+		</georss:where>
+	</media:location>
+	</BOUCLE_point>
+	</BOUCLE_article>
+</item>
+</B_article>
+</BOUCLE_document>

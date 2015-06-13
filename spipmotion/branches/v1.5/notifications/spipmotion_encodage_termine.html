@@ -1,0 +1,14 @@
+[(#REM)
+
+	Plugin SPIPmotion
+	Squelette de notification d'encodage
+	(c) 2010
+ 	Distribue sous licence GPL
+
+][(#HTTP_HEADER{Content-type: text/plain[; charset=(#CHARSET)]})]
+<BOUCLE_attente(FACD_CONVERSIONS){id_facd_conversion}{tout}><BOUCLE_document(DOCUMENTS){id_document}{tout}>
+[[(#NOM_SITE_SPIP|nettoyer_titre_email|filtrer_entites|trim)]] - <:spipmotion:message_encodage_sujet_termine|nettoyer_titre_email|filtrer_entites|trim:> : ##ID_FACD_CONVERSION
+<:spipmotion:message_encodage_oui{id_document=#ID_DOCUMENT}:>
+</BOUCLE_document>
+</BOUCLE_attente>
+#FILTRE{supprimer_tags|trim}

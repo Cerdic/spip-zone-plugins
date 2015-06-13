@@ -1,0 +1,51 @@
+<B_document>
+<h1 class="h1"><:spipmotion:titre_page_metas_doc{id=#ENV{id_document}}:></h1>
+<BOUCLE_document(DOCUMENTS){si #AUTORISER{modifier,document,#ID_DOCUMENT}|oui}{id_document}{tout}>
+<BOUCLE_tracks(POUR){tableau #METADATAS|unserialize}>
+<h2>[(#CLE|replace{'track type=','Track : '})]</h2>
+<ul class="liste-items">
+<BOUCLE_infos(POUR){tableau #VALEUR}>
+	<BOUCLE_ss_infos(POUR){si #VALEUR|is_array|oui}{tableau #VALEUR}>
+		<BOUCLE_si_cover(POUR){si #CLE|in_array{#LISTE{Cover_description,Cover_type,Cover_MIME}}|oui}{tableau #VALEUR}>
+		#SET{cover_#_ss_infos:CLE,#VALEUR|explode{' / '}}
+		</BOUCLE_si_cover>
+		</B_si_cover>
+		<li class="item"><strong>[(#CLE|replace{'_',' '})]</strong> :
+		<B_ss_ss_infos>
+		<ul class="liste-items">
+			<BOUCLE_ss_ss_infos(POUR){tableau #VALEUR|array_unique}>
+				<BOUCLE_covers(POUR){si #_ss_infos:CLE|=={Cover_Data}|oui}{tableau #VALEUR|explode{' / '}}>
+				<li class="item">
+				[(#GET{cover_Cover_type}|table_valeur{#CLE})][ - (#GET{cover_Cover_description}|table_valeur{#CLE})]<br />
+				<img src="data:[(#GET{cover_Cover_MIME}|table_valeur{#CLE})];base64,#VALEUR" alt="[(#GET{cover_Cover_type}|table_valeur{#CLE}|attribut_html)]" />
+				</li>
+				</BOUCLE_covers>
+				</B_covers>
+				<li class="item">#VALEUR</li>
+				<//B_covers>
+			</BOUCLE_ss_ss_infos>
+		</ul>
+		</B_ss_ss_infos>
+		</li>
+		<//B_si_cover>
+	</BOUCLE_ss_infos>
+	</B_ss_infos>
+		<li class="item"><strong>#CLE</strong> : 
+			[(#VALEUR|typo|nl2br)]</li>
+	<//B_ss_infos>
+</BOUCLE_infos>
+</ul>
+</BOUCLE_tracks>
+</BOUCLE_document>
+</B_document>
+<BOUCLE_document_existe(DOCUMENTS){id_document}>
+#BOITE_OUVRIR{'',error}
+<:spipmotion:erreur_document_interdit:>
+#BOITE_FERMER
+</BOUCLE_document_existe>
+</B_document_existe>
+#BOITE_OUVRIR{'',error}
+<:spipmotion:erreur_document_inexistant:>
+#BOITE_FERMER
+<//B_document_existe>
+<//B_document>
