@@ -8,6 +8,13 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// si on est dans l'espce prive et dans une version recente de SPIP, utiliser la definition du core dans l'espace prive
+if (test_espace_prive()){
+include_once _DIR_RESTREINT."inc/filtres_boites.php";
+}
+
+if (!function_exists('balise_BOITE_OUVRIR_dist')) {
+
 /**
  * #BOITE_OUVRIR{titre[,type]}
  * Racourci pour ouvrir une boite (info, simple, pour noisette ...)
@@ -107,6 +114,6 @@ function boite_fermer(){
 }
 
 
-
+}
 
 ?>
