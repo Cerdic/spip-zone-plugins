@@ -131,11 +131,15 @@ function demarrer_site($site = '', $options = array())
         } elseif ($options['creer_user_base']) {
             // nom d'utilisateur et mot de passe
             define('_INSTALL_USER_DB', _INSTALL_NAME_DB);
-            define('_INSTALL_PASS_DB',
+            /*
+             * _INSTALL_PASS_DB_ROOT : secret du site
+             * $_SERVER['HTTP_HOST'] : un truc variable, mais reutilisable site par site
+             * _INSTALL_USER_DB : un autre truc variable
+             */
+            define(
+                '_INSTALL_PASS_DB',
                 substr(md5(
-                    _INSTALL_PASS_DB_ROOT   # secret du site
-.$_SERVER['HTTP_HOST'] # un truc variable, mais reutilisable site par site
-._INSTALL_USER_DB # un autre truc variable
+                    _INSTALL_PASS_DB_ROOT.$_SERVER['HTTP_HOST']._INSTALL_USER_DB
                 ), 0, 8)
             );
         }
@@ -171,12 +175,14 @@ function demarrer_site($site = '', $options = array())
     /*
      * Tout est pret, on execute la mutualisation.
      */
-    define('_SPIP_PATH',
+    define(
+        '_SPIP_PATH',
         _DIR_SITE.':'.
         _DIR_RACINE.':'.
         _DIR_RACINE.'squelettes-dist/:'.
         _DIR_RACINE.'prive/:'.
-        _DIR_RESTREINT);
+        _DIR_RESTREINT
+    );
 
     if (is_dir(_DIR_SITE.'squelettes')) {
         $GLOBALS['dossier_squelettes'] = $options['repertoire'].'/'.$site.'/squelettes';
@@ -261,7 +267,7 @@ function mutualisation_traiter_exec($site)
  * Transformer les sites/truc/IMG/rtf/chose.rtf en /IMG/...
  *
  * @param string $flux
- * 		L'URL à réécrire
+ *        L'URL à réécrire
  */
 function mutualisation_url_img_courtes($flux)
 {
@@ -290,7 +296,7 @@ function mutualisation_url_img_courtes($flux)
  * (cf. http://dev.mysql.com/doc/refman/5.0/fr/legal-names.html)
  *
  * @param string $site
- * 		Le nom du site
+ *        Le nom du site
  */
 function prefixe_mutualisation($site)
 {

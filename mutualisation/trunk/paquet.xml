@@ -1,18 +1,18 @@
 <paquet
 	prefix="Mutualisation"
 	categorie="maintenance"
-	version="1.2.4"
+	version="1.2.5"
 	etat="stable"
 	compatibilite="[3.0.0;3.0.*]"
 	logo="mutualiser.png"
 	documentation="http://contrib.spip.net/La-mutualisation-facile-modifications-manuelles"
->	
+>
 
 	<nom>Mutualisation facile</nom>
 	<!-- Créer une ferme à Spip -->
 
 	<auteur>Fil</auteur>
-	<auteur mail="teddy.spip@gmail.com">Teddy</auteur>
+	<auteur>Teddy</auteur>
 
 	<copyright>2007-2015</copyright>
 

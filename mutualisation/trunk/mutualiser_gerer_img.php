@@ -79,7 +79,8 @@ function mutualisation_traiter_url_img_courtes($flux)
         return str_replace(
             array(_DIR_VAR, _DIR_IMG),
             array(_URL_VAR, _URL_IMG),
-        $flux);
+            $flux
+        );
     } else {
         return $flux;
     }

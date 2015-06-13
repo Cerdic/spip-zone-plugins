@@ -133,16 +133,13 @@ function mutu_etape_code_activation($e, $options)
                 _T('mutu:install_site'),
                 '<div>'.$menu_langues."<br /></div>\n".
                 "<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n".
-
                 (isset($_REQUEST['code_activation'])
                     ? _T('mutu:install_err')
                     : ''
                 ).
-
                 '<h3>'.
                 ($options['utiliser_panel'] ? _T('mutu:install_code_panel') : _T('mutu:install_code')).
                 '</h3>'.
-
                 "<form method='post' action='".self()."'><div>
 				<input type='password' name='code_activation' size='10' />
 				<input type='submit' value='ok' />"
@@ -171,16 +168,15 @@ function mutu_etape_creer_base($e, $options)
         if (defined('_INSTALL_SERVER_DB')
             and defined('_INSTALL_NAME_DB')) {
             if (defined('_INSTALL_USER_DB_ROOT')) {
-                $link = mutu_connect_db(_INSTALL_HOST_DB, 0,  _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT, '', _INSTALL_SERVER_DB);
+                $link = mutu_connect_db(_INSTALL_HOST_DB, 0, _INSTALL_USER_DB_ROOT, _INSTALL_PASS_DB_ROOT, '', _INSTALL_SERVER_DB);
             } else {
-                $link = mutu_connect_db(_INSTALL_HOST_DB, 0,  _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
+                $link = mutu_connect_db(_INSTALL_HOST_DB, 0, _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
             }
 
             // si la base n'existe pas, on va travailler
 
             if (!sql_selectdb(_INSTALL_NAME_DB, _INSTALL_SERVER_DB)) {
                 if (_request('creerbase') == 'oui') {
-
                     // mode de creation par un ping sur une URL (AlternC)
                     // on le fait en local et en POST, donc pas de trou de secu
                     // curl indispensable pour le https... devrait aller dans inc/distant
@@ -217,7 +213,6 @@ function mutu_etape_creer_base($e, $options)
                          * MYSQL specifique qui aura les droits sur la base
                          */
                         if ($options['creer_user_base']) {
-
                             // le nom de la machine MySQL peut etre different
                             // du nom de la connexion via DNS
                             define('_INSTALL_HOST_DB_LOCALNAME', _INSTALL_HOST_DB);
@@ -257,7 +252,7 @@ function mutu_etape_creer_base($e, $options)
                                 }
                             }
                             mutu_close();
-                            $link = mutu_connect_db(_INSTALL_HOST_DB, '',  _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
+                            $link = mutu_connect_db(_INSTALL_HOST_DB, '', _INSTALL_USER_DB, _INSTALL_PASS_DB, '', _INSTALL_SERVER_DB);
                         }
 
                         // creation ok
@@ -386,8 +381,7 @@ function mutu_etape_creer_repertoires($e, $options)
                 );
             }
             exit;
-        } elseif (
-            !is_dir($e._NOM_PERMANENTS_INACCESSIBLES)
+        } elseif (!is_dir($e._NOM_PERMANENTS_INACCESSIBLES)
             || !is_dir($e._NOM_PERMANENTS_ACCESSIBLES)
             || !is_dir($e._NOM_TEMPORAIRES_INACCESSIBLES)
             || !is_dir($e._NOM_TEMPORAIRES_ACCESSIBLES)
@@ -435,10 +429,11 @@ function mutu_etape_fin($e, $options)
     $GLOBALS['profondeur_url'] = 0;
     echo mutu_minipres(
         _T('mutu:install_rep_bd_ok'),
-
-        "<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n"
-        .'<h3>'.
-            _T('mutu:install_spip_3', array('url' => generer_url_ecrire('install')))
+        "<div><img alt='SPIP' src='"
+        .find_in_path('images/logo-spip.gif')
+        ."' /></div>\n"
+        .'<h3>'
+        ._T('mutu:install_spip_3', array('url' => generer_url_ecrire('install')))
         .'</h3>',
         " id='mutu'"
     );

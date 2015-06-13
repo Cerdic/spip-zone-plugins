@@ -33,14 +33,14 @@ function mutualiser_upgrade()
     $new = $GLOBALS['meta']['version_installee'];
     if ($old == $new
     or $new != $GLOBALS['spip_version_base']) {
-        echo minipres(_T('titre_page_upgrade'),
-            _L('Erreur de mise &#224; jour de @old@ vers @new@',
-                array('old' => $old, 'new' => $new))
+        echo minipres(
+            _T('titre_page_upgrade'),
+            _L('Erreur de mise &#224; jour de @old@ vers @new@', array('old' => $old, 'new' => $new))
         );
     } else {
-        echo minipres(_T('titre_page_upgrade'),
-            _L('La base de donn&#233;es a &#233;t&#233; mise &#224; jour de @old@ vers @new@',
-                array('old' => $old, 'new' => $new))
+        echo minipres(
+            _T('titre_page_upgrade'),
+            _L('La base de donn&#233;es a &#233;t&#233; mise &#224; jour de @old@ vers @new@', array('old' => $old, 'new' => $new))
         );
         // Installer les plugins
         include_spip('inc/plugin');
@@ -52,9 +52,9 @@ function mutualiser_upgrade()
         include_spip('inc/invalideur');
         purger_repertoire(_DIR_TMP);
         ecrire_metas();
-        echo minipres(_T('titre_page_upgrade'),
-            _L('Aller dans <a href="@ecrire@">ecrire/</a>',
-                array('ecrire' => $GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS))
+        echo minipres(
+            _T('titre_page_upgrade'),
+            _L('Aller dans <a href="@ecrire@">ecrire/</a>', array('ecrire' => $GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS))
         );
     }
     exit;
