@@ -38,5 +38,14 @@ function newsletter_content_dist($id){
 		$corps['texte'] = newsletters_html2text($corps['html']);
 	}
 
+	// si on a une version HTML avec un <title> l'utiliser en guise de sujet
+	// permet de surcharger le titre statique en base par un titre dynamique plus complexe
+	if ($corps['html']
+	  AND stripos($corps['html'],"<title")!==false
+	  AND preg_match(",<title[^>]*>(.*)</title>Uims",$corps['html'],$match)){
+		include_spip('inc/filtres');
+		$corps['sujet'] = textebrut($match[1]);
+	}
+
 	return $corps;
 }
