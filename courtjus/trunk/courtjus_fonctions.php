@@ -44,14 +44,14 @@ function courtjus_calculer_rubrique($id_rubrique) {
         // Cela ne gère pas pour les sous-rubrique cependant
         if (find_in_path('rubrique='.$id_rubrique.'.html')
         or find_in_path('rubrique-'.$id_rubrique.'.html'))
-            return generer_url_entite($id_rubrique, 'rubrique');
+            return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
 
         // Pour gérer les fichiers rubrique-X parent, on va tester chaque parent
         include_spip('public/quete');
         $parent = quete_parent($id_rubrique);
         do {
             if (find_in_path('rubrique-'.$parent.'.html'))
-                return generer_url_entite($id_rubrique, 'rubrique');
+                return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
         }
         while ( ($parent = quete_parent($parent)) > 0);
     }
@@ -69,7 +69,7 @@ function courtjus_calculer_rubrique($id_rubrique) {
             return $objet;
     }
 
-    return generer_url_entite($id_rubrique, 'rubrique');
+    return generer_url_entite($id_rubrique, 'rubrique', '', '', true);
 }
 
 /**
@@ -199,7 +199,7 @@ function courtjus_trouver_objet($id_rubrique) {
     }
     // Un seul objet dans la rubrique, on renvoie le tableau
     elseif ($nb_objet == 1) {
-        return generer_url_entite($objets_in_rubrique[0]['id_objet'], $objets_in_rubrique[0]['objet']);
+        return generer_url_entite($objets_in_rubrique[0]['id_objet'], $objets_in_rubrique[0]['objet'], '', '', true);
     }
     // S'il y plusieurs objets dans la rubrique et que le mode "par num titre" est activé, on regiride sur le num titre le plus petit.
     elseif ($nb_objet > 1
@@ -216,7 +216,7 @@ function courtjus_trouver_objet($id_rubrique) {
         $index = array_search(min($minmax), $minmax);
 
         // Créer l'URL de redirection
-        return generer_url_entite($objets_in_rubrique[$index]['id_objet'], $objets_in_rubrique[$index]['objet']);
+        return generer_url_entite($objets_in_rubrique[$index]['id_objet'], $objets_in_rubrique[$index]['objet'], '', '', true);
     }
 
     // Sinon, si le mot "plus récent"" est activé on redirige sur l'article le plus récente.
