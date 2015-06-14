@@ -35,7 +35,13 @@ input.submit {.btn}
 .formulaire_spip .explication {.help-block }
 
 /* Lignes */
-.formulaire_spip >div>ul,.formulaire_spip fieldset>ul,.formulaire_spip .fieldset>ul,.formulaire_spip form>ul,.formulaire_spip form>div>ul {margin-left: 0;list-style: none;.control-group;}
+.formulaire_spip .editer-groupe,
+// et compat legacy
+.formulaire_spip >div>ul,
+.formulaire_spip fieldset>ul,
+.formulaire_spip .fieldset>ul,
+.formulaire_spip form>ul,
+.formulaire_spip form>div>ul {margin-left: 0;list-style: none;.control-group;}
 
 .formulaire_spip .editer { list-style: none;clear: both; margin: 0 -@emLineHeight; padding: @emLineHeight/4 @emLineHeight; }
 
