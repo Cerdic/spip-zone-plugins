@@ -169,6 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_reservation' => 'Réservation',
 	'titre_reservations' => 'Réservations',
 	'total' => 'Total',
+	'type_lien' => 'Lié avec la réservation @reference@',	
 
 	// U
 	'une_reservation_de' => 'Une réservation de : ',

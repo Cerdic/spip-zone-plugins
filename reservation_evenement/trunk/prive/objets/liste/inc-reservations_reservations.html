@@ -3,7 +3,8 @@
     date,-1, 
     id_reservation,1,
     points,-1
-}})]<B_liste_reservations>
+}})]
+#SET{chaine_defaut,reservation:type_lien}<B_liste_reservations>
 #ANCRE_PAGINATION
 <div class="liste-objets reservations">
 <table class='spip liste'>
@@ -26,9 +27,14 @@
             <td class='reference principale'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">
               [(#RANG). ]#REFERENCE
               </a>
+
               [(#ID_RESERVATION_SOURCE|>{0}|oui)
-                <br /><img src="[(#CHEMIN_IMAGE{lien-#TYPE_LIEN-16.png}|sinon{#CHEMIN_IMAGE{lien-16.png}})]" alt="[(#ORIGINE_LIEN|concat{:lien_}|concat{#TYPE_LIEN}|_T|sinon{<:reservation:lien_defaut:>})]" title="[(#ORIGINE_LIEN|concat{:lien_}|concat{#TYPE_LIEN}|_T|sinon{<:reservation:lien_defaut:>})]" />
+                #SET{reference,#INFO_REFERENCE{reservation,#ID_RESERVATION_SOURCE}}
+                #SET{chaine,#ORIGINE_LIEN|concat{:type_lien_#TYPE_LIEN}{reference=#GET{reference}}}
+                [(#SET{chaine_traduite,#GET{chaine}|_T{#ARRAY{reference,#GET{reference}},#ARRAY{force,''}}|sinon{#GET{chaine_defaut}|_T{#ARRAY{reference,#GET{reference}}}}})]
+                  <br /><img src="[(#CHEMIN_IMAGE{lien-#TYPE_LIEN-16.png}|sinon{#CHEMIN_IMAGE{lien-16.png}})]" alt="#GET{chaine_traduite}" title="#GET{chaine_traduite}" />
               ]
+ 
            </td> 
             <td class='auteur'>
                    <BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
