@@ -54,6 +54,7 @@ function abonnements_post_edition($flux){
 		
 		// Si on a mis l'abonnement inactif ou à la poubelle, on doit enlever les tâches liées
 		if (in_array($abonnement['statut'], array('inactif', 'poubelle'))) {
+			include_spip('action/editer_liens');
 			$liens = objet_trouver_liens(array('job' => '*'), array('abonnement' => $abonnement['id_abonnement']));
 			if ($liens and is_array($liens)){
 				// Et on les supprime toutes !
