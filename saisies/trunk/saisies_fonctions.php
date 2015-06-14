@@ -14,6 +14,26 @@ include_spip('balise/saisie');
 include_spip('formulaires/selecteur/generique_fonctions');
 
 /**
+ * A partir de SPIP 3.1
+ * - ul.editer-groupe deviennent des div.editer-groupe
+ * - li.editer devient div.editer
+ * @param $tag
+ *   ul ou li
+ * @return string
+ *   $tag initial ou div
+ */
+function saisie_balise_structure_formulaire($tag){
+	static $is_div=null;
+	if (is_null($is_div)){
+		$version = explode(".",$spip_version_branche);
+		if ($version[0]>3 OR ($version[0]==3 AND $version[1]>0))
+			$is_div = true;
+	}
+	if ($is_div) return "div";
+	return $tag;
+}
+
+/**
  * Traiter la valeur de la vue en fonction du env
  * si un traitement a ete fait en amont (champs extra) ne rien faire
  * si pas de traitement defini (formidable) passer typo ou propre selon le type du champ
