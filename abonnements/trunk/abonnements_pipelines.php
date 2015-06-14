@@ -41,57 +41,19 @@ function abonnements_optimiser_base_disparus($flux){
 function abonnements_post_edition($flux){
 	// Si on modifie un abonnement
 	if ($flux['args']['table'] == 'spip_abonnements') {
+		include_spip('inc/abonnements');
 		$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = '.intval($flux['args']['id_objet']));
 		$offre = sql_fetsel('*', 'spip_abonnements_offres', 'id_abonnements_offre = '.intval($abonnement['id_abonnements_offre']));
+		$jourdhui = date('Y-m-d H:i:s');
 		
-		$modifs = array();
-		
-		// Si l'échéance est VIDE, et que pourtant l'offre parente A BIEN une durée
-		// alors c'est qu'il faut initialiser l'échéance !
-		if ($abonnement['date_fin'] == '0000-00-00 00:00:00' and ($duree = $offre['duree']) > 0){
-			// De combien doit-on augmenter la date
-			switch ($offre['periode']){
-				case 'heures':
-					$ajout = " + ${duree} hours";
-					break;
-				case 'jours':
-					$ajout = " + ${duree} days";
-					break;
-				case 'mois':
-					$ajout = " + ${duree} months";
-					break;
-				default:
-					$ajout ='';
-					break;
-			}
-			
-			// Calcul de la date de fin
-			$modifs['date_fin'] = date('Y-m-d H:i:s', strtotime($abonnement['date_debut'].$ajout));
-			
-			$modifs = pipeline(
-				'abonnement_initialisation_dates',
-				array(
-					'args' => array('abonnement' => $abonnement, 'offre' => $offre),
-					'data' => $modifs
-				)
-			);
-			
-			// Si les dates ont été changées, on change le tableau de l'abonnement pour le test de statut qui suivra
-			if (isset($modifs['date_debut'])) {
-				$abonnement['date_debut'] = $modifs['date_debut'];
-			}
-			if (isset($modifs['date_fin'])) {
-				$abonnement['date_fin'] = $modifs['date_fin'];
-			}
+		// Si la date de fin a été modifiée et qu'elle est dans le future
+		// on reprogramme la désactivation
+		if (isset($flux['data']['date_fin']) and $flux['data']['date_fin'] > $jourdhui) {
+			abonnements_programmer_desactivation($flux['args']['id_objet'], $flux['data']['date_fin']);
 		}
 		
-		// Si le statut est "prepa" c'est une création et on doit changer ça
-		// car pour l'instant SPIP ne permet pas de déclarer le statut par défaut !
-		if ($abonnement['statut'] == 'prepa') {
-			$modifs['statut'] = $abonnement['statut'] = 'actif';
-		}
-		// Si on a mis l'abonnement à la poubelle, on doit enlever les tâches liées
-		elseif ($abonnement['statut'] == 'poubelle') {
+		// Si on a mis l'abonnement inactif ou à la poubelle, on doit enlever les tâches liées
+		if (in_array($abonnement['statut'], array('inactif', 'poubelle'))) {
 			$liens = objet_trouver_liens(array('job' => '*'), array('abonnement' => $abonnement['id_abonnement']));
 			if ($liens and is_array($liens)){
 				// Et on les supprime toutes !
@@ -101,21 +63,37 @@ function abonnements_post_edition($flux){
 			}
 		}
 		
+		$modifs = array();
+		
+		// Si l'échéance est VIDE, et que pourtant l'offre parente A BIEN une durée
+		// alors c'est qu'il faut initialiser les dates !
+		if ($abonnement['date_echeance'] == '0000-00-00 00:00:00' and ($duree = $offre['duree']) > 0) {
+			$modifs = abonnements_initialisation_dates($abonnement, $offre);
+		}
+		
+		// Si les dates doivent être changées, on change le tableau de l'abonnement pour le test de statut qui suivra
+		if (isset($modifs['date_debut'])) {
+			$abonnement['date_debut'] = $modifs['date_debut'];
+		}
+		if (isset($modifs['date_fin'])) {
+			$abonnement['date_fin'] = $modifs['date_fin'];
+		}
+		
 		// Seulement si personne n'a modifié le statut manuellement, alors on check les dates pour statufier
 		if (!$flux['data']['statut']) {
-			$jourdhui = date('Y-m-d H:i:s');
-			// Si aujourd'hui est dans les dates, on active
+			// Si aujourd'hui est entre date_debut et date_echeance, on active
 			if (
 				$abonnement['statut'] == 'inactif'
 				and $jourdhui >= $abonnement['date_debut']
-				and $jourdhui <= $abonnement['date_fin']
+				and $jourdhui <= $abonnement['date_echeance']
 			) {
 				$modifs['statut'] = 'actif';
 			}
-			// Si aujourd'hui est en dehors des dates, on désactive
+			// Si aujourd'hui est en dehors des dates début et FIN, on désactive
+			// on ne teste pas date_echeance car ce sera à un génie de désactiver si trop dépassée
 			elseif (
 				$abonnement['statut'] == 'actif'
-				and ($jourdhui < $abonnement['date_debut'] or $jourdhui > $abonnement['date_fin'])
+				and ($jourdhui < $abonnement['date_debut'] or $jourdhui >= $abonnement['date_fin'])
 			) {
 				$modifs['statut'] = 'inactif';
 			}
@@ -125,12 +103,6 @@ function abonnements_post_edition($flux){
 		if (!empty($modifs)){
 			include_spip('action/editer_objet');
 			objet_modifier('abonnement', $flux['args']['id_objet'], $modifs);
-		}
-		
-		// Si dans les modifications demandées au départ, il y a la date de fin, on reprogramme la désactivation
-		if (isset($flux['data']['date_fin'])) {
-			include_spip('inc/abonnements');
-			abonnements_programmer_desactivation($flux['args']['id_objet'], $flux['data']['date_fin']);
 		}
 	}
 	// Détection magique du plugin Commandes et d'une commande d'offre d'abonnement
@@ -179,9 +151,18 @@ function abonnements_post_edition($flux){
 }
 
 /*
- * Ajout d'une tache CRON pour vérifier toutes les heures si les abonnements actifs ont une tâche de désactivation
+ * Ajout de tâches nécessaires aux abonnements
+ * 
+ * - Une tâche pour vérifier toutes les heures si on a pas trop dépassé des échéances
+ * - Une tâche pour vérifier toutes les heures si les abonnements actifs ont une tâche de désactivation
+ * - Une tâche pour programmer les emails de notification à envoyer
+ * 
+ * @pipeline taches_generales_cron
+ * @param array $taches Liste des génies et leur périodicité
+ * @return array Liste des tâches possiblement modifiées
  */
 function abonnements_taches_generales_cron($taches){
+	$taches['abonnements_verifier_echeances'] = 60 * 60; // toutes les heures
 	$taches['abonnements_verifier_desactivation'] = 60 * 60; // toutes les heures
 	$taches['abonnements_verifier_notifications'] = 24 * 3600; // une fois par jour
 	return $taches;

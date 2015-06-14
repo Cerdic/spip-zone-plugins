@@ -7,6 +7,79 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+/**
+ * Initialiser les dates d'échéance et de fin pour un abonnement créé
+ * 
+ * @pipeline_appel abonnement_initialisation_dates
+ * @param array $abonnement
+ * 		Informations sur l'abonnement à initialiser
+ * @param array $offre
+ * 		Informations sur l'offre de l'abonnement à initialiser
+ * @return array
+ * 		Retourne les modifications de dates initialisées
+ **/
+function abonnements_initialisation_dates($abonnement, $offre){
+	$modifs = array();
+	
+	// De combien doit-on augmenter la date
+	switch ($offre['periode']){
+		case 'heures':
+			$ajout = " + ${duree} hours";
+			break;
+		case 'jours':
+			$ajout = " + ${duree} days";
+			break;
+		case 'mois':
+			$ajout = " + ${duree} months";
+			break;
+		default:
+			$ajout = '';
+			break;
+	}
+	
+	// Par défaut les dates de fin et de la prochaine échéance sont les mêmes
+	$modifs['date_echeance'] = date('Y-m-d H:i:s', strtotime($abonnement['date_debut'].$ajout));
+	$modifs['date_fin'] = $modifs['date_echeance'];
+	
+	// Mais s'il y a le plugin Commandes et Bank et qu'on trouve commande et transaction
+	if (
+		_DIR_PLUGIN_COMMANDES
+		and _DIR_PLUGIN_BANK
+		and include_spip('action/editer_liens')
+		and $lien_commande = objet_trouver_liens(array('commande' => '*'), array('abonnement' => $abonnement['id_abonnement']))
+		and is_array($lien_commande)
+		// On prend juste la première commande qu'on trouve
+		and $id_commande = intval($lien_commande[0]['id_commande'])
+		// On cherche le dernier paiement bien payé pour cette commande
+		and $transaction = sql_fetsel(
+			'*', 'spip_transactions', array('id_commande = '.$id_commande, 'statut = "ok"')
+		)
+	) {
+		// On a trouvé la transaction qui a activé la commande qui a activé l'abonnement
+		// Si on détecte un prélèvement SEPA, on annule la date de fin !
+		if ($refcb = $transaction['refcb'] and strpos($refcb, 'SEPA') === 0) {
+			$modifs['date_fin'] = '0000-00-00 00:00:00';
+		}
+		// Si ya une fin de validité de carte bleue on en déduit une fin d'abonnement !
+		elseif ($validite = $transaction['validite']) {
+			include_spip('inc/bank');
+			list($year, $month) = explode('-', $validite);
+			$modifs['date_fin'] = bank_date_fin_mois($year, $month);
+		}
+	}
+	
+	$modifs = pipeline(
+		'abonnement_initialisation_dates',
+		array(
+			'args' => array('abonnement' => $abonnement, 'offre' => $offre),
+			'data' => $modifs
+		)
+	);
+	
+	return $modifs;
+}
+
+
 /*
  * Programmer la désactivation d'un abonnement lors de sa date de fin
  *
@@ -84,5 +157,3 @@ function abonnements_notifier_echeance($id_abonnement, $nom, $email, $duree, $pe
 		)
 	);
 }
-
-?>
