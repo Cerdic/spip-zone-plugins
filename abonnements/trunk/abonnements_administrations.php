@@ -21,6 +21,12 @@ function abonnements_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_abonnements_offres_notifications'))
 	);
 	
+	// Ajout de la date d'échéance possiblement différente avec la date de fin
+	$maj['2.2.0'] = array(
+		array('maj_tables', array('spip_abonnements')),
+		array('sql_update', 'spip_abonnements', array('date_echeance'=>'date_fin')),
+	);
+	
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

@@ -85,6 +85,7 @@ function abonnements_declarer_tables_objets_sql($tables) {
 			"id_abonnements_offre" => "bigint(21) NOT NULL DEFAULT 0",
 			"id_auteur"          => "bigint(21) NOT NULL DEFAULT 0",
 			"date_debut"         => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+			"date_echeance"      => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"date_fin"           => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"statut"             => "varchar(20)  DEFAULT '0' NOT NULL", 
 			"maj"                => "TIMESTAMP"
@@ -97,8 +98,8 @@ function abonnements_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "'' AS titre, '' AS lang",
 		'date' => "date_debut",
-		'champs_editables'  => array('id_abonnements_offre', 'id_auteur', 'date_debut', 'date_fin'),
-		'champs_versionnes' => array('id_abonnements_offre', 'id_auteur', 'date_debut', 'date_fin'),
+		'champs_editables'  => array('id_abonnements_offre', 'id_auteur', 'date_debut', 'date_echeance', 'date_fin'),
+		'champs_versionnes' => array('id_abonnements_offre', 'id_auteur', 'date_debut', 'date_echeance', 'date_fin'),
 		'rechercher_champs' => array(),
 		'tables_jointures'  => array(),
 		'statut_textes_instituer' => array(
