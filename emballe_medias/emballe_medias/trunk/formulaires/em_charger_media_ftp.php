@@ -227,7 +227,7 @@ function joindre_options_upload_ftp($dir, $mode = 'document',$extensions = null,
 		$f = preg_replace(",^$dir,",'',$f);
 		if (preg_match(",\.([^.]+)$,", $f, $match)) {
 			$ext = strtolower($match[1]);
-			if (!isset($exts[$ext])) {						
+			if (!isset($exts[$ext])) {
 				$ext = corriger_extension($ext);
 				if(is_array($extensions)){
 					if(in_array($ext,$extensions))
@@ -235,7 +235,7 @@ function joindre_options_upload_ftp($dir, $mode = 'document',$extensions = null,
 					else 
 						$exts[$ext] = 'non';
 				}
-				else if (sql_fetsel('extension', 'spip_types_documents', $a = "extension='$ext'" . $inclus))
+				else if (sql_getfetsel('extension', 'spip_types_documents', $a = "extension='$ext'" . $inclus))
 					$exts[$ext] = 'oui';
 				else $exts[$ext] = 'non';
 			}
@@ -245,7 +245,7 @@ function joindre_options_upload_ftp($dir, $mode = 'document',$extensions = null,
 			$lefichier = substr($f, $n+1, strlen($f));
 			$ledossier = substr($f, 0, $n);
 			if ($n === false)
-			  $lefichier = $f;
+				$lefichier = $f;
 			else if(!in_array($ledossier, $dirs) && is_array($newfiles = preg_files($dir.$ledossier))){
 				foreach($newfiles as $newfile){
 					$newfile = preg_replace(",^$dir,",'',$newfile);
@@ -258,7 +258,7 @@ function joindre_options_upload_ftp($dir, $mode = 'document',$extensions = null,
 							break;
 						}
 					}
-					else if (sql_fetsel('extension', 'spip_types_documents', $a = "extension='$ext'" . $inclus)){
+					else if (sql_getfetsel('extension', 'spip_types_documents', $a = "extension='$ext'" . $inclus)){
 						$file_ok = 'oui';
 						break;
 					}
@@ -319,23 +319,23 @@ function joindre_trouver_fichier_envoye(){
 			$upload .= $path;
 	
 		if (!is_dir($upload))
-		  // seul un fichier est demande
-		  return array(
-		  	array (
-		  		'name' => basename($upload),
+			// seul un fichier est demande
+			return array(
+				array (
+					'name' => basename($upload),
 					'tmp_name' => $upload
 				)
 			);
 		else {
-		  // on upload tout un repertoire
-		  $files = array();
-		  foreach (preg_files($upload) as $fichier) {
+			// on upload tout un repertoire
+			$files = array();
+			foreach (preg_files($upload) as $fichier) {
 				$files[]= array (
 					'name' => basename($fichier),
 					'tmp_name' => $fichier
 				);
-		  }
-		  return $files;
+			}
+			return $files;
 		}
 	}
 }
