@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function genie_abonnements_verifier_desactivation_dist($time){
 	include_spip('base/abstract_sql');
-	$jourdhui = date('Y-m-d H:I:s');
+	$jourdhui = date('Y-m-d H:i:s');
 	
 	// On va chercher tous les abonnements actifs + ayant une date de fin future + sans job lié
 	if ($a_changer = sql_allfetsel(

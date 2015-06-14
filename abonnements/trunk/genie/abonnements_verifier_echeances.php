@@ -9,7 +9,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function genie_abonnements_verifier_echeances_dist($time){
 	include_spip('base/abstract_sql');
 	include_spip('inc/config');
-	$jourdhui = date('Y-m-d H:I:s');
+	$jourdhui = date('Y-m-d H:i:s');
 	$heures_max_retard = lire_config('abonnements/echeance_heures_limite', 48); // 48h par défaut
 	$date_max_retard = date('Y-m-d H:i:s', strtotime('-'.$heures_max_retard.'hours'));
 	
