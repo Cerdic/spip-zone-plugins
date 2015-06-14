@@ -9,9 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_abonnement' => 'Ajouter cet abonnement',
 
 	// C
-	'champ_date_debut_label' => 'Début',
-	'champ_date_fin_allonger_label' => 'Vous pouvez modifier la date d’échéance',
-	'champ_date_fin_label' => 'Échéance',
+	'champ_date_debut_label' => 'Début de l’abonnement',
+	'champ_date_echeance_label' => 'Prochaine échéance',
+	'champ_date_fin_allonger_label' => 'Vous pouvez modifier la date de fin',
+	'champ_date_fin_label' => 'Fin de l‘abonnement',
 	'champ_id_abonnements_offre_label' => 'Offre d’abonnement',
 	'champ_id_auteur_label' => 'Utilisateur',
 

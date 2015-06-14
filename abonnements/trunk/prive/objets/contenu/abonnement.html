@@ -18,6 +18,11 @@
 	<span dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_DEBUT|affdate_heure)], [(#DATE_DEBUT|affdate_jourcourt)]})]})</span>
 </div>]
 
+[<div class="champ contenu_date_echeance[ (#DATE_ECHEANCE*|!={0000-00-00 00:00:00}|?{'',vide})]">
+	<label><:abonnement:champ_date_echeance_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{date_echeance} date_echeance'>(#DATE_ECHEANCE|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_ECHEANCE|affdate_heure)], [(#DATE_ECHEANCE|affdate_jourcourt)]})]})</span>
+</div>]
+
 [<div class="champ contenu_date_fin[ (#DATE_FIN*|!={0000-00-00 00:00:00}|?{'',vide})]">
 	<label><:abonnement:champ_date_fin_label:> : </label>
 	<span dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>(#DATE_FIN|!={0000-00-00 00:00:00}|?{[(#GET{horaires}|?{[(#DATE_FIN|affdate_heure)], [(#DATE_FIN|affdate_jourcourt)]})]})</span>

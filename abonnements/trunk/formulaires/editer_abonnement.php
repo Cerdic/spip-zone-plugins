@@ -79,6 +79,21 @@ function formulaires_editer_abonnement_saisies_dist($id_abonnement='new', $retou
 			array(
 				'saisie' => 'date',
 				'options' => array(
+					'nom' => 'date_echeance',
+					'label' => _T('abonnement:champ_date_echeance_label'),
+					'horaire' => 'on',
+					'heure_pas' => 5,
+				),
+				'verifier' => array(
+					'type' => 'date',
+					'options' => array(
+						'normaliser' => 'datetime',
+					),
+				),
+			),
+			array(
+				'saisie' => 'date',
+				'options' => array(
 					'nom' => 'date_fin',
 					'label' => _T('abonnement:champ_date_fin_label'),
 					'horaire' => 'on',
