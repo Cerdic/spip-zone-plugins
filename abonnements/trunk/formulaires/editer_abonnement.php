@@ -151,6 +151,3 @@ function formulaires_editer_abonnement_traiter_dist($id_abonnement='new', $retou
 	
 	return $retours;
 }
-
-
-?>
