@@ -5,6 +5,10 @@ $(function(){
 		$('.copypaste').each(function(){
 			if(!$(this).prev().is('.copypaste_container'))
 				$(this).before('<div class="copypaste_container" style="position:relative"><a title="'+locale.zeroclipboard.link_title_copy+'" class="copypaste_link">'+locale.zeroclipboard.link_title_copy+'</a></div>');
+			if($(this).attr('id'))
+				$(this).prev('.copypaste_container').find('a').attr('data-clipboard-target',$(this).attr('id'));
+			else if($(this).is('input') || $(this).is('textarea'))
+				$(this).prev('.copypaste_container').find('a').attr('data-clipboard-text',$(this).val());
 		});
 		$('.coloration_code .cadre_download').each(function(){
 			/**
@@ -30,13 +34,13 @@ $(function(){
 						$(me).parent().append('<div style="display:none" class="data-clipboard-hidden">'+data+'</div>');
 					});
 				}
-			}else{
+			}else if(!$(me).attr('data-clipboard-text')){
 				$(me).attr('data-clipboard-text',content_data);
 			}
 		});
+
 		ZeroClipboard.destroy();
-		
-		clip = new ZeroClipboard( $('.copypaste_link') );
+		clip = new ZeroClipboard($('.copypaste_link'));
 		clip.on('ready', function(event) {
 			$('.copypaste_copied').html(locale.zeroclipboard.link_title_copy)
 				.attr('title',locale.zeroclipboard.link_title_copy)
