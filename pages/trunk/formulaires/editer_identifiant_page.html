@@ -7,7 +7,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	]
-		<ul>
+		<ul class="editer-groupe">
 			#SET{name,champ_page} #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}} #SET{obli,''}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="champ_#GET{name}"><:pages:label_champ_page:></label>
