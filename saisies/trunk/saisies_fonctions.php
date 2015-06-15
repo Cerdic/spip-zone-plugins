@@ -25,7 +25,7 @@ include_spip('formulaires/selecteur/generique_fonctions');
 function saisie_balise_structure_formulaire($tag){
 	static $is_div=null;
 	if (is_null($is_div)){
-		$version = explode(".",$spip_version_branche);
+		$version = explode(".",$GLOBALS['spip_version_branche']);
 		if ($version[0]>3 OR ($version[0]==3 AND $version[1]>0))
 			$is_div = true;
 	}

@@ -496,17 +496,17 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		$env2['fond_generer'] = 'inclure/generer_saisies';
 		$saisie = saisies_inserer_html(
 			$saisie,
-			'<div class="formulaire_configurer"><ul class="formulaire_configurer-contenus">'
+			'<div class="formulaire_configurer"><'.saisie_balise_structure_formulaire('ul').' class="editer-groupe formulaire_configurer-contenus">'
 			.recuperer_fond(
 				'inclure/generer_saisies',
 				$env2
 			)
-			.'<li class="boutons">
+			.'<'.saisie_balise_structure_formulaire('li').' class="boutons">
 				<input type="hidden" name="enregistrer_saisie" value="'.$nom.'" />
 				<button type="submit" class="submit link" name="enregistrer_saisie" value="">'._T('bouton_annuler').'</button>
 				<input type="submit" class="submit" name="enregistrer" value="'._T('bouton_valider').'" />
-			</li>'
-			.'</ul></div>',
+			</'.saisie_balise_structure_formulaire('li').'>'
+			.'</'.saisie_balise_structure_formulaire('ul').'></div>',
 			'fin'
 		);
 	}

@@ -13,34 +13,34 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
 
-		<ul class="editer-groupe" id="deplacable">
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe" id="deplacable">
 			
-			<li id="reinitialiser" class="actions_formulaire">
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] id="reinitialiser" class="actions_formulaire">
 				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')">
 					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
 					<:saisies:construire_reinitialiser:>
 				</button>
-			</li>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 
 			<BOUCLE_contenu(DATA){source tableau, #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
 				[(#VALEUR**|formidable_generer_saisie_configurable{#ENV**|unserialize})]
 			]
 			</BOUCLE_contenu>
-			<li class="aucun"><em class="attention"><:saisies:construire_aucun_champs:></em></li>
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="aucun"><em class="attention"><:saisies:construire_aucun_champs:></em></[(#VAL{li}|saisie_balise_structure_formulaire)]>
 			<//B_contenu>
 			
 			<B_saisies_disponibles>
-			<li class="editer haut saisies_disponibles" id="attrapable">
+			<[(#VAL{li}|saisie_balise_structure_formulaire)] class="editer haut saisies_disponibles" id="attrapable">
 				<label><:saisies:construire_ajouter_champ:></label>
 				<BOUCLE_saisies_disponibles(DATA){source tableau, #ENV{_saisies_disponibles}}{par cle}>
 				<button type="submit" name="ajouter_saisie" value="#CLE" class="submit ajouter_saisie"[ title="(#DESCRIPTION)"] [style="background-image:url((#ICONE|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}))"]>
 					<span>#TITRE</span>
 				</button>
 				</BOUCLE_saisies_disponibles>
-			</li>
+			</[(#VAL{li}|saisie_balise_structure_formulaire)]>
 			</B_saisies_disponibles>
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
@@ -55,7 +55,7 @@
 	</style>
 	<script type="text/javascript">
 		jQuery(function(){
-			jQuery('.formulaire_construire_formulaire li.configurable')
+			jQuery('.formulaire_construire_formulaire .configurable')
 				.hover(
 					function(){
 						jQuery(this)
@@ -73,7 +73,7 @@
 								.find('> .actions')
 									.hide()
 								.end()
-								.parents('li.configurable').eq('0')
+								.parents('.configurable').eq('0')
 									.mouseover();
 					}
 				)
@@ -101,11 +101,11 @@
 				});
 			
 			// On déplie toujours les fieldsets plés par défaut
-			jQuery('li.fieldset.plie')
+			jQuery('.fieldset.plie')
 				.each(function(){
 					jQuery(this)
 						.removeClass('plie')
-						.find('> fieldset > ul').show();
+						.find('> fieldset > .editer-groupe').show();
 				});
 				
 			[(#ENV{erreurs}|non|et{#ENV{_chemin_ui}})
@@ -114,10 +114,10 @@
 				$.getScript("#CHEMIN{#ENV{_chemin_ui}mouse.js}", function(){
 					$.getScript("#CHEMIN{#ENV{_chemin_ui}sortable.js}", function(){
 						if ($.fn.sortable) {
-							jQuery( "#deplacable, #deplacable ul" ).sortable({
+							jQuery( "#deplacable, #deplacable .editer-groupe" ).sortable({
 								revert: true,
 								containment: '#deplacable',
-								connectWith: "#deplacable, #deplacable ul",
+								connectWith: "#deplacable, #deplacable .editer-groupe",
 								placeholder: "ui-state-highlight",
 								handle: '>.actions .deplacer_saisie',
 								start: function(event, ui) {
@@ -167,7 +167,7 @@
 		function formulaire_configurer_onglets(){
 			var formulaire_configurer = jQuery('.formulaire_configurer');
 			var onglets = jQuery('<ul class="formulaire_configurer-onglets"></ul>');
-			var contenus = formulaire_configurer.find('> ul > li.fieldset');
+			var contenus = formulaire_configurer.find('> .editer-groupe > .fieldset');
 			
 			// On ajoute le conteneur des onglets
 			formulaire_configurer
@@ -203,7 +203,7 @@
 					if (i == 0) onglet.addClass('actif');
 					
 					// S'il y a des erreurs dans cette partie du contenu, on met une classe "erreurs" à l'onglet aussi
-					if (jQuery(this).find('li.erreur').length > 0)
+					if (jQuery(this).find('.editer.erreur').length > 0)
 						onglet.addClass('erreur');
 					
 					// On ajoute l'onglet

@@ -21,13 +21,13 @@
 	width:auto;
 }
 */
-.formulaire_construire_formulaire li.actions_formulaire{
+.formulaire_construire_formulaire .actions_formulaire{
 	margin:0;
 	padding:1em;
 	text-align:center;
 	border:0;
 }
-.formulaire_construire_formulaire li.actions_formulaire img{
+.formulaire_construire_formulaire .actions_formulaire img{
 	vertical-align:middle;
 }
 /*
@@ -45,12 +45,12 @@
 	border-color:#999;
 }
 */
-.formulaire_construire_formulaire li.en_configuration{
+.formulaire_construire_formulaire .en_configuration{
 	border:5px solid #999;
 	border-radius:5px;
 	margin:.5em;
 }
-.formulaire_construire_formulaire li.fieldset.configurable>fieldset>ul {margin-left:30px;}
+.formulaire_construire_formulaire .fieldset.configurable>fieldset>.editer-groupe {margin-left:30px;}
 /*
 .formulaire_construire_formulaire li.fieldset.configurable{
 	padding:0;
@@ -127,16 +127,15 @@
 .formulaire_construire_formulaire .formulaire_configurer .boutons { margin-bottom: -20px; }
 
 .formulaire_configurer-contenus > .fieldset > fieldset:first-child {border-top:0;}
+.formulaire_configurer-contenus > .fieldset > fieldset {padding: 0}
 
-.formulaire_construire_formulaire li.editer,
-.formulaire_construire_formulaire li.explication,
-.formulaire_construire_formulaire li.fieldset {padding-top:30px; position:relative;}
-.formulaire_construire_formulaire li.explication { padding-left:140px; background:transparent; }
-.formulaire_construire_formulaire li.explication > p { margin-left:-130px; }
-.formulaire_construire_formulaire .formulaire_configurer li.fieldset {padding-top:0px;}
-.formulaire_construire_formulaire .formulaire_configurer fieldset fieldset>ul>li.editer:first-child {padding-top:0px;}
+.formulaire_construire_formulaire .editer-groupe>.configurable {padding-top:30px; position:relative;}
+.formulaire_construire_formulaire .editer.explication { padding-left:140px; background:transparent; }
+.formulaire_construire_formulaire .editer.explication > p { margin-left:-130px; }
+.formulaire_construire_formulaire .formulaire_configurer .fieldset {padding-top:0px;}
+.formulaire_construire_formulaire .formulaire_configurer fieldset fieldset>.editer-groupe>.editer:first-child {padding-top:0px;}
 
-.formulaire_construire_formulaire li.hover {background-color:transparent;}
+.formulaire_construire_formulaire .editer.hover {background-color:transparent;}
 
 .formulaire_construire_formulaire .actions{
 	position:absolute;
@@ -159,7 +158,7 @@
 
 
 
-.formulaire_construire_formulaire li.saisies_disponibles {
+.formulaire_construire_formulaire .saisies_disponibles {
 	/*padding:1em;*/
 }
 
