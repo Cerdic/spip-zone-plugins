@@ -139,6 +139,9 @@ function pages_formulaire_verifier($flux){
 	){
 		$erreur = '';
 		$page = _request('champ_page');
+		$page = strtolower($page);
+		$page = preg_replace(",\\s+,","_",$page);
+		set_request('champ_page',$page);
 		$id_page = $flux['args']['args'][0];
 		// champ vide
 		$lang = sql_getfetsel('lang','spip_articles','id_article='.intval($id_page));
