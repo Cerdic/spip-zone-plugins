@@ -11,9 +11,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_lien_abonnement' => 'Add a subscription',
 
 	// C
-	'champ_date_debut_label' => 'Start',
-	'champ_date_fin_allonger_label' => 'You can change the due date',
-	'champ_date_fin_label' => 'Due date',
+	'champ_date_debut_label' => 'Start', # MODIF
+	'champ_date_fin_allonger_label' => 'You can change the due date', # MODIF
+	'champ_date_fin_label' => 'Due date', # MODIF
 	'champ_id_abonnements_offre_label' => 'Subscription offer',
 	'champ_id_auteur_label' => 'User',
 
