@@ -58,7 +58,7 @@ function rubrique_a_linscription_formulaire_traiter($flux){
 			$id_parent =  $flux["args"]["args"][0];
 		}		
 		else {
-			$flux = $meta["id_parent"];
+			$id_parent = $meta["id_parent"];
 		}
 		// Création de la rubrique
 		include_spip('inc/rubriques');
