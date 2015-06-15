@@ -11,13 +11,13 @@
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="id_formulaire" value="#ID_FORMULAIRE" />
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{selection, type_export,
 				label=<:formidable:exporter_formulaire_format_label:>,
 				datas=#GET{type_export},
         defaut=csv,
         cacher_option_intro=oui})]
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		
     
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

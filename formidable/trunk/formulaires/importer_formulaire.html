@@ -9,7 +9,7 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
-		<ul>
+		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
 			[(#SAISIE{selection, type_import,
 				label=<:formidable:importer_formulaire_format_label:>,
 				datas=#ENV{_types_import},
@@ -20,7 +20,7 @@
 				label=<:formidable:importer_formulaire_fichier_label:>,
 				type=file,
 				size=6})]
-		</ul>
+		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->

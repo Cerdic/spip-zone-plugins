@@ -19,13 +19,13 @@
         parametre : url d'action ]
         #ACTION_FORMULAIRE{#ENV{action}}
 
-        <ul>
+        <[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
             #GENERER_SAISIES{#ENV{_saisies}}
-            <li style="display:none;">
+            <[(#VAL{li}|saisie_balise_structure_formulaire)] style="display:none;">
                 <label for="mechantrobot-#ENV{id}"><:antispam_champ_vide:></label>
                 <input type="text" id="mechantrobot-#ENV{id}" name="mechantrobot" value="#ENV{mechantrobot}" />
-            </li>
-        </ul>
+            </[(#VAL{li}|saisie_balise_structure_formulaire)]>
+        </[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 
         [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
         <!--extra-->
