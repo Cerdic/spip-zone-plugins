@@ -61,6 +61,8 @@ function formulaires_editer_menu_charger($id_menu, $nouveau){
 			$contexte['_action'] = array('editer_menu', $id_menu);
 			// On sait toujours si on est sur un menu déjà créé ou pas
 			$contexte['_hidden'] .= '<input type="hidden" name="id_menu" value="'.$id_menu.'" />';
+			// reinjecter nouveau si besoin, sinon la page de l'espace prive ne reaffiche pas le form
+			$contexte['_hidden'] .= "<input type='hidden' name='nouveau' value='".($nouveau?'oui':'')."' />";
 		}
 	}
 	else{

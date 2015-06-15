@@ -8,11 +8,11 @@
 			parametre : url d'action ]
 			#ACTION_FORMULAIRE{#ENV{action}}
 
-			<ul>
+			<ul class="editer-groupe">
 				<li class="fieldset">
 					<fieldset>
 						<h3 class="legend"><:menus:formulaire_partie_identification:></h3>
-						<ul>
+						<ul class="editer-groupe">
 							#SET{obli,'obligatoire'}
 							#SET{name,titre}
 							#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
@@ -64,11 +64,15 @@
 		</div></form>
 		]
 </div>
+[(#REM) quand le formulaire n'est pas nouveau, on masque le bouton pour ne pas confuser avec les second formulaire en
+dessous qui permet d'editer les entrees]
+[(#ENV{nouveau}|non)
 <script type="text/javascript">
-	$(function(){
-		$('.formulaire_#ENV{form}'+' .boutons').hide();
-		$('.formulaire_#ENV{form}'+' input')
-			.change(function(){$('.formulaire_#ENV{form}'+' .boutons').slideDown();})
-			.keydown(function(){$('.formulaire_#ENV{form}'+' .boutons').slideDown();});
-	});
+jQuery(function(){
+	jQuery('.formulaire_#ENV{form}'+' .boutons').hide();
+	jQuery('.formulaire_#ENV{form}'+' input')
+		.change(function(){jQuery('.formulaire_#ENV{form}'+' .boutons').slideDown();})
+		.keydown(function(){jQuery('.formulaire_#ENV{form}'+' .boutons').slideDown();});
+});
 </script>
+]

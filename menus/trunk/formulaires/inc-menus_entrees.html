@@ -1,5 +1,5 @@
 #SET{rang_suivant,1}
-<ul id="menu-#ENV{id_menu}" class="menus_entrees">
+<ul id="menu-#ENV{id_menu}" class="editer-groupe menus_entrees">
 	<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
 	<li class="entree"[ style="background-repeat:no-repeat;background-position:5px 10px;background-image:url((#ENV{types_entrees}|table_valeur{#TYPE_ENTREE}|table_valeur{icone}|image_reduire{24}|extraire_attribut{src}))"]>
 		<BOUCLE_test_modifier(CONDITION){si #ENV{id_menus_entree}|=={#ID_MENUS_ENTREE}|non}>

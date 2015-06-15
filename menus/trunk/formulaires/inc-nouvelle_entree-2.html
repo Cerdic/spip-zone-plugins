@@ -10,7 +10,7 @@
 </legend>
 <div class="explication">[(#GET{infos}|table_valeur{description})]</div>
 <B_parametres>
-<ul>
+<ul class="editer-groupe">
 	<BOUCLE_parametres(POUR){tableau #GET{infos}|table_valeur{parametres}}>
 	#SET{erreurs,(#ENV**{erreurs}|table_valeur{parametres}|table_valeur{#CLE})}
 	<li class="editer editer_texte[ (#GET{erreurs}|oui)erreur]">
