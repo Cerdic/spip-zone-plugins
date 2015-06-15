@@ -49,7 +49,7 @@
 [(#SET{uniqid,#ENV|md5|substr{0,8}})]
 #SET{nolazy,#ENV{nolazy,#GET{controlNavThumbs}|=={'true'}|oui}}
 <B_doc>
-<div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})]'
+<div class='nivoSlider-wrap[ nav-(#GET{controlNavThumbs}|=={'true'}|?{thumb,bullet})] p'
 	[(#GET{resize}|=={oui}|oui)style="[max-width:(#GET{width})px;][max-height:(#GET{height})px]"]>
 	<div id="slider_#GET{uniqid}"
 	     class="nivoSlider"
