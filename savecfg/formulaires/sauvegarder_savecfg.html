@@ -5,14 +5,16 @@
 		<div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			#SET{fond, #SELF|match{(cfg=)(\w+?),2}}
+			<input type="hidden" name="fond" value="[(#ENV{nom})]" />
 			<fieldset>
 				<h3 class="legend"><:savecfg:sauvegarder_savecfg:></h3>
-				<div class="editer-groupe">
-					<input type="hidden" name="fond" value="[(#ENV{nom})]" />
-					<label for="nom"><:savecfg:titre_sauvegarde:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
-					<input type="text" size="10" class="text" name="titre" id="nom" value="" />
-					[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
-				</div>
+				<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+					<[(#VAL{li}|saisie_balise_structure_formulaire)]>
+						<label for="nom"><:savecfg:titre_sauvegarde:>[ (#ENV**{erreurs}|table_valeur{nom}|sinon{ <em><:ecrire:info_obligatoire_02:></em>})]</label>
+						<input type="text" size="10" class="text" name="titre" id="nom" value="" />
+						[<p>(#ENV**{erreurs}|table_valeur{nom})</p>]
+					</[(#VAL{li}|saisie_balise_structure_formulaire)]>
+				</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
 			</fieldset>
 			<p class="boutons">
 				<input type="submit" value="<:savecfg:sauvegarder:>" />
