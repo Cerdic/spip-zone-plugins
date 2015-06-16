@@ -559,5 +559,3 @@ function inc_restreindre_extras_objet_sur_composition_dist($objet, $id_objet, $o
 
 	return false;
 }
-
-?>

@@ -53,4 +53,3 @@ function cextras_declarer_champs_interfaces_apres_les_autres($interface) {
 	include_spip('base/cextras');
 	return cextras_declarer_tables_interfaces($interface);
 }
-?>

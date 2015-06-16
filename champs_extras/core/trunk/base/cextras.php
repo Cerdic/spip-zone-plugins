@@ -141,6 +141,3 @@ function cextras_declarer_tables_interfaces($interfaces){
 	// ajouter les champs au tableau spip
 	return $interfaces;
 }
-
-
-?>

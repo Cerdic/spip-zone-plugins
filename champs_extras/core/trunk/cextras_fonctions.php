@@ -305,7 +305,3 @@ function calculer_balise_LISTER_VALEURS($objet, $colonne, $cles) {
 	// et voici les valeurs !
 	return $vals ? $vals : $cles;
 }
-
-
-
-?>

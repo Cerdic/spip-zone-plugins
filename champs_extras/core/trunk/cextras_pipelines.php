@@ -355,5 +355,3 @@ function cextras_revisions_chercher_label($flux){
 	}
 	return $flux;
 }
-
-?>

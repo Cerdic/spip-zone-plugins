@@ -412,5 +412,3 @@ function extras_champs($table, $connect) {
 		return array();
 	}
 }
-
-?>
