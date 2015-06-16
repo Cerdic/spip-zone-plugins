@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_datas' => 'Liste de valeurs',
 	'label_explication' => 'Explications de la saisie',
 	'label_label' => 'Label de la saisie',
-	'label_li_class' => 'Classes CSS du &lt;li&gt; parent',
+	'label_conteneur_class' => 'Classes CSS du conteneur parent',
 	'label_obligatoire' => 'Champ obligatoire ?',
 	'label_rechercher' => 'Recherche',
 	'label_rechercher_ponderation' => 'Pondération de la recherche',
@@ -91,9 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_explication' => 'Vous pouvez donner plus d’informations concernant la saisie. 
 		Peut être une chaîne de langue « plugin:chaine ».',
 	'precisions_pour_label' => 'Peut être une chaîne de langue « plugin:chaine ».',
-	'precisions_pour_li_class' => 'Ajouter des classes CSS sur le &lt;li&gt; parent,
-		séparées par un espace. Exemple : "haut" pour avoir toute la
-		largeur sur le formulaire',
+	'precisions_pour_conteneur_class' => 'Ajouter des classes CSS sur le conteneur parent,
+		séparées par un espace. Exemple : "pleine_largeur" pour avoir toute la largeur sur le formulaire',
 	'precisions_pour_nouvelle_saisie' => 'Permet de changer le type de saisie utilisée pour ce champ',
 	'precisions_pour_nouvelle_saisie_attention' => 'Attention cependant, un changement de type de saisie perd les options de configuration de la saisie actuelle qui ne sont pas communes avec la nouvelle saisie sélectionnée !',
 	'precisions_pour_rechercher' => 'Inclure ce champ dans le moteur de recherche ?',

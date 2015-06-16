@@ -181,7 +181,7 @@ function iextras_upgrade_to_saisies() {
 				'_objet'      => '',
 				'_table_sql'  => '',
 				'saisie_parametres/class'       => 'class',
-				'saisie_parametres/li_class'    => 'li_class',
+				'saisie_parametres/li_class'    => 'conteneur_class',
 				'saisie_parametres/explication' => 'explication',
 				'saisie_parametres/attention'   => 'attention',
 			) as $old => $new) {
