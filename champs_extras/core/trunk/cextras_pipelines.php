@@ -117,7 +117,6 @@ function champs_extras_ajouter_drapeau_edition($saisies) {
  * @return array      Données du pipeline
 **/ 
 function cextras_editer_contenu_objet($flux){
-	
 	// recuperer les saisies de l'objet en cours
 	$objet = $flux['args']['type'];
 	include_spip('inc/cextras');
@@ -129,7 +128,14 @@ function cextras_editer_contenu_objet($flux){
 		$saisies = champs_extras_ajouter_drapeau_edition($saisies);
 		// ajouter au formulaire
 		$ajout = recuperer_fond('inclure/generer_saisies', array_merge($flux['args']['contexte'], array('saisies'=>$saisies)));
-		$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="champs_extras">'.$ajout.'</ul>'."\n".'$1', $flux['data']);
+		if (!function_exists('spip_version_compare')) {
+			include_spip('plugins/installer');
+		}
+		if (spip_version_compare($GLOBALS['spip_version_branche'], '3.1.0-beta', '>=')) {
+			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<div class="editer-groupe champs_extras">'.$ajout.'</div>'."\n".'$1', $flux['data']);
+		} else {
+			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="editer-groupe champs_extras">'.$ajout.'</ul>'."\n".'$1', $flux['data']);
+		}
 	}
 
 	return $flux;
