@@ -122,6 +122,11 @@ function saisies_generer_html($champ, $env=array()){
 		}
 	}
 
+	// compatibilité li_class > conteneur_class
+	if (!empty($options['li_class'])) {
+		$options['conteneur_class'] = $options['li_class'];
+	}
+
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
 
@@ -171,8 +176,9 @@ function saisies_generer_html($champ, $env=array()){
 	}
 
 	// Si ya des enfants on les remonte dans le contexte
-	if (isset($champ['saisies']) and is_array($champ['saisies']))
+	if (isset($champ['saisies']) and is_array($champ['saisies'])) {
 		$contexte['saisies'] = $champ['saisies'];
+	}
 
 	// On génère la saisie
 	return recuperer_fond(
