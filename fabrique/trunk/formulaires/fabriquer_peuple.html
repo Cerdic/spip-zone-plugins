@@ -8,7 +8,7 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
+		<div class='editer-groupe'>
 			[(#SAISIE{tables_sql, table,
 				label=<:fabrique:label_table_a_exporter:>})]
 
@@ -19,7 +19,7 @@
 			[(#SAISIE{input, table_destination,
 				label=<:fabrique:label_table_destination:>,
 				explication=<:fabrique:label_table_destination_explication:>})]
-		</ul>
+		</div>
 
 		<p class="boutons">
 			<input type='submit' name='reset' class='submit' value='<:fabrique:bouton_exporter:>' />

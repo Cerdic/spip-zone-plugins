@@ -7,12 +7,12 @@
 
 <h3><a href="#description"><:fabrique:legend_pre_construire:></a></h3>
 <div>
-	<ul>
+	<div class='editer-groupe'>
 	[(#SAISIE{tables_sql, objets/#CLE/renseigner_avec_table,
 		label=<:fabrique:label_charger_depuis_table_sql:>,
 		explication=<:fabrique:label_charger_depuis_table_sql_explication:>,
 		attention=<:fabrique:label_charger_depuis_table_sql_attention:>})]
-	</ul>
+	</div>
 	<input type='submit' name='f_action[renseigner_objet][#CLE]' class='submit right action' value='<:fabrique:bouton_renseigner_objet:>' />
 </div>
 
@@ -21,7 +21,7 @@
 
 <h3><a href="#description"><:fabrique:legend_description:></a></h3>
 <div>
-	<ul>
+	<div class='editer-groupe'>
 	[(#SAISIE{input, objets/#CLE/nom,
 		label=<:fabrique:label_nom_pluriel:>,
 		explication=<:fabrique:label_nom_pluriel_explication:>,
@@ -38,7 +38,7 @@
 			masculin,<:fabrique:label_genre_masculin:>,
 			feminin,<:fabrique:label_genre_feminin:>})],
 		defaut=masculin})]
-	</ul>
+	</div>
 </div>
 
 
@@ -46,11 +46,11 @@
 
 <h3><a href="#description"><:fabrique:legend_logo:></a></h3>
 <div>
-	<ul>
+	<div class='editer-groupe'>
 	[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
 	[(#SAISIE{input, objets/#CLE/logo/0,
 		label=<:fabrique:label_logo:>, type=file, valeur=''})]
-	</ul>
+	</div>
 
 	[(#ENV{objets/#CLE/logo/0/fichier}|oui)
 		<div class='center'>
@@ -62,7 +62,7 @@
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_logo_specifiques:></legend>
 		<p class='explication'><:fabrique:legend_logo_specifiques_explication:></p>
-		<ul>
+		<div class='editer-groupe'>
 		<BOUCLE_logos(DATA){liste 32,24,16,12}>
 			[(#REM) valeur vide pour eviter une notice car sinon, la valeur recue est un tableau ]
 			[(#SAISIE{input, objets/#_objet:CLE/logo/#VALEUR, label=<:fabrique:label_logo_taille{taille=#VALEUR}:>, type=file, valeur=''})]
@@ -74,7 +74,7 @@
 			]
 		</BOUCLE_logos>
 		[(#SAISIE{oui_non, objets/#CLE/logo_variantes, label=<:fabrique:label_logo_variantes:>, explication=<:fabrique:label_logo_variantes_explication:>})]
-		</ul>
+		</div>
 	</fieldset>
 
 </div>
@@ -86,13 +86,13 @@
 <h3><a href="#description"><:fabrique:legend_table:></a></h3>
 <div class='sous_parties'>
 
-	<ul>
+	<div class='editer-groupe'>
 	[(#SAISIE{input, objets/#CLE/table,
 		label=<:fabrique:label_table:>,
 		explication=<:fabrique:label_table_explication:>,
 		attention=<:fabrique:label_table_attention:>,
 		obligatoire=oui})]
-	</ul>
+	</div>
 
 	<div class='parties' data-tab='#CLE'>
 		<div class="group" id='objet#CLE-table_options'>
@@ -100,7 +100,7 @@
 			<div>
 				<p class='explication'><:fabrique:explication_tables_hors_normes:></p>
 
-				<ul>
+				<div class='editer-groupe'>
 				[(#SAISIE{input, objets/#CLE/cle_primaire,
 					label=<:fabrique:label_cle_primaire:>,
 					explication=<:fabrique:label_cle_primaire_explication:>,
@@ -115,7 +115,7 @@
 					label=<:fabrique:label_table_type:>,
 					explication=<:fabrique:label_table_type_explication:>,
 					attention=<:fabrique:label_table_type_attention:><br /><:fabrique:champ_auto_rempli:>})]
-				</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -147,7 +147,7 @@
 		<div class="group" id='objet#_objet:CLE-champ#CLE'>
 			<h4><a href="#objet#_objet:CLE-champ#CLE">[#(#CHAMP|strtoupper|sinon{#CLE})]</a></h4>
 			<div>
-				<ul>
+				<div class='editer-groupe'>
 				[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/nom,
 					label=<:fabrique:label_libelle:>,
 					explication=<:fabrique:label_libelle_champ_explication:>,
@@ -182,11 +182,11 @@
 				[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/recherche,
 					label=<:fabrique:label_recherche:>,
 					explication=<:fabrique:label_recherche_explication:>})]
-				</ul>
+				</div>
 
 				<fieldset>
 					<legend class='legend'><:fabrique:legend_saisie:></legend>
-					<ul>
+					<div class='editer-groupe'>
 					[(#SAISIE{input, objets/#_objet:CLE/champs/#CLE/saisie,
 						label=<:fabrique:label_saisie:>,
 						explication=<:fabrique:label_saisie_explication:>,
@@ -199,7 +199,7 @@
 						label=<:fabrique:label_saisie_options:>,
 						explication=<:fabrique:label_saisie_options_explication:>,
 						rows=3, conteneur_class=pleine_largeur})]
-					</ul>
+					</div>
 				</fieldset>
 				
 				<input type='submit' name='f_action[supprimer_champ][#_objet:CLE][#CLE]' class='submit del left action' value='<:fabrique:bouton_supprimer_champ:>' />
@@ -221,18 +221,18 @@
 
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_champs_sql:></legend>
-		<ul>
+		<div class='editer-groupe'>
 		[(#SAISIE{input, objets/#CLE/champ_titre,
 			label=<:fabrique:label_champ_titre:>,
 			explication=<:fabrique:label_champ_titre_explication:>,
 			list=champs_#CLE, defaut=#GET{defaut_titre}, inserer_fin=#GET{datalist_aide}})]
-		</ul>
+		</div>
 	</fieldset>
 
 
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_rubriques:></legend>
-		<ul>
+		<div class='editer-groupe'>
 		[(#SAISIE{checkbox, objets/#CLE/rubriques,
 			label=<:fabrique:label_champ_rubriques:>,
 			explication=<:fabrique:label_champ_rubriques_explication:>,
@@ -240,35 +240,35 @@
 				id_rubrique,<:fabrique:label_champ_id_rubrique:>,
 				id_secteur,<:fabrique:label_champ_id_secteur:>,
 				vue_rubrique,<:fabrique:label_champ_vue_rubrique:>})]})]
-		</ul>
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_langues_et_traductions:></legend>
-		<ul>
+		<div class='editer-groupe'>
 		[(#SAISIE{checkbox, objets/#CLE/langues,
 			label=<:fabrique:label_champ_langues:>,
 			explication=<:fabrique:label_champ_langues_explication:>,
 			datas=[(#ARRAY{
 				lang,<:fabrique:label_champ_lang_et_langue_choisie:>,
 				id_trad,<:fabrique:label_champ_id_trad:>})]})]
-		</ul>
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_date_publication:></legend>
-		<ul>
+		<div class='editer-groupe'>
 		[(#SAISIE{input, objets/#CLE/champ_date,
 			label=<:fabrique:label_champ_date_publication:>,
 			explication=<:fabrique:label_champ_date_publication_explication:>,
 			list=champs_date, defaut=#GET{defaut_date}, inserer_fin=#GET{datalist_aide}})]
-		</ul>
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_statut:></legend>
-		<ul>
+		<div class='editer-groupe'>
 		[(#SAISIE{oui_non, objets/#CLE/statut,
 			label=<:fabrique:label_champ_statut:>,
 			explication=<:fabrique:label_champ_statut_explication:>})]
-		</ul>
+		</div>
 	</fieldset>
 </div>
 
@@ -283,13 +283,13 @@
 		[(#SET{langue_type,#ENV{objets/#CLE/nom_singulier}|trim|fabrique_mb_strtolower|sinon{#GET{objets}|substr{0,-1}}})]
 		[(#SET{langue_mobjets,#GET{langue_objets}|fabrique_mb_strtoupper|ucfirst})]
 		[(#SET{langue_mtype,#GET{langue_type}|fabrique_mb_strtoupper|ucfirst})]
-		
+
 		[(#SET{objets,#ENV{objets/#CLE/table}|trim|replace{^spip_,''}|fabrique_mb_strtolower})]
 		[(#SET{type,#ENV{objets/#CLE/table_type}|trim|fabrique_mb_strtolower})]
 		[(#SET{mobjets,#GET{objets}|fabrique_mb_strtoupper|ucfirst})]
 		[(#SET{mtype,#GET{type}|fabrique_mb_strtoupper|ucfirst})]
 	<B_chaines>
-	<ul>
+	<div class='editer-groupe'>
 	<BOUCLE_chaines(DATA){si #ENV{objets/#CLE/nom}}{liste
 		titre_objets,
 		titre_objet,
@@ -319,7 +319,7 @@
 				type,#GET{langue_type},
 				mtype,[(#GET{langue_type}|ucfirst)]})]})]})]
 	</BOUCLE_chaines>
-	</ul>
+	</div>
 	<div class='clear'>
 		<input type='submit' name='f_action[reinitialiser_chaines][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_chaines:>' />
 	</div>
@@ -338,7 +338,7 @@
 <div class='sous_parties'>
 	<fieldset>[(#SET{o,[(#GET{objets}|sinon{objets})]})]
 		<legend class='legend'><:fabrique:legend_liaisons_objet_liens{objet=#GET{o}}:></legend>
-		<ul>
+		<div class='editer-groupe'>
 		[(#SAISIE{oui_non, objets/#CLE/table_liens,
 			label=<:fabrique:label_table_liens:>})]
 
@@ -347,7 +347,7 @@
 			explication=<:fabrique:label_vue_liens_explication:>,
 			datas=[(#ENV{objets}|fabrique_lister_objets_editoriaux{#ENV{objets/#CLE/vue_liens, #ARRAY}, #LISTE{#TABLE}})],
 			conteneur_class=saisie_choisir_objets})]
-		</ul>
+		</div>
 
 
 		<div class='parties'>
@@ -357,13 +357,13 @@
 					<p class='experimental'><:fabrique:experimental_explication:></p>
 					<p class='explication'><:fabrique:explication_roles:></p>
 
-					<ul>
+					<div class='editer-groupe'>
 						#SET{rows,#ENV{objets/#CLE/roles}|explode{#EVAL{'"\n"'}}|count|max{4}}
 						[(#SAISIE{textarea, objets/#CLE/roles,
 							label=<:fabrique:label_roles:>,
 							explication=<:fabrique:label_roles_explication:>,
 							rows=#GET{rows}, conteneur_class=pleine_largeur})]
-					</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -372,7 +372,7 @@
 
 	<fieldset>
 		<legend class='legend'><:fabrique:legend_liaisons_auteurs_liens:></legend>
-		<ul>
+		<div class='editer-groupe'>
 		[(#SAISIE{oui_non, objets/#CLE/auteurs_liens,
 			label=<:fabrique:label_auteurs_liens:>,
 			explication=<:fabrique:label_auteurs_liens_explication:>})]
@@ -380,7 +380,7 @@
 		[(#SAISIE{oui_non, objets/#CLE/vue_auteurs_liens,
 			label=<:fabrique:label_vue_auteurs_liens:>,
 			explication=<:fabrique:label_vue_auteurs_liens_explication:>})]
-		</ul>
+		</div>
 	</fieldset>
 </div>
 
@@ -391,7 +391,7 @@
 
 <h3><a href="#fichiers_echafaudes"><:fabrique:legend_fichiers_echafaudes:></a></h3>
 <div>
-	<ul>
+	<div class='editer-groupe'>
 		[(#SET{data,[(#ARRAY{
 			prive/squelettes/contenu/objets.html,prive/squelettes/contenu/objets.html,
 			prive/objets/infos/objet.html,prive/\objets/infos/objet.html,
@@ -405,7 +405,7 @@
 			label=<:fabrique:label_fichiers:>,
 			explication=<:fabrique:explication_fichiers_echafaudes:>,
 			datas=#GET{data}})]
-	</ul>
+	</div>
 </div>
 
 
@@ -413,7 +413,7 @@
 <h3><a href="#autorisations"><:fabrique:legend_autorisations:></a></h3>
 <div>
 	<B_autorisations>
-	<ul>
+	<div class='editer-groupe'>
 	<BOUCLE_autorisations(DATA){si #ENV{objets/#CLE/nom}}{liste
 		objet_creer,
 		objet_voir,
@@ -435,7 +435,7 @@
 			webmestre,<:fabrique:autorisation_webmestre:>,
 			jamais,<:fabrique:autorisation_jamais:>})]})]
 	</BOUCLE_autorisations>
-	</ul>
+	</div>
 	<div class='clear'>
 		<input type='submit' name='f_action[reinitialiser_autorisations][#CLE]' class='submit del left action' value='<:fabrique:bouton_reinitialiser_autorisations:>' />
 	</div>
@@ -450,7 +450,7 @@
 
 <h3><a href="#options"><:fabrique:legend_options:></a></h3>
 <div>
-	<ul>
+	<div class='editer-groupe'>
 	[(#REM)
 		Cette saisie possede par defaut les boutons edition et outils rapide
 		mais si on les decoche, et qu'on valide, pour notre cas,
@@ -472,7 +472,7 @@
 		explication=<:fabrique:label_saisies_explication:>,
 		datas=[(#ARRAY{
 			objets,<:fabrique:saisies_objets{saisie=#LOBJET}:>})]})]
-	</ul>
+	</div>
 </div>
 
 

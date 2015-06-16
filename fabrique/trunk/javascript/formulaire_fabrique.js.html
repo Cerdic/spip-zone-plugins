@@ -124,7 +124,7 @@ $(document).ready(function(){
 		/* un peu de coloration syntaxique */
 		$(".colorier textarea").focus(function() {
 			if (!$(this).data('coloriage')) {
-				code = $(this).closest('ul').data('code');
+				code = $(this).closest('div.editer-groupe').data('code');
 				fabrique_coloriage(this, code);
 				$(this).data('coloriage', 1);
 			}

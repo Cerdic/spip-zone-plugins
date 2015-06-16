@@ -13,7 +13,7 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
+	<necessite nom="saisies" compatibilite="[2.4.0;]" />
 
 	<utilise nom="skeleditor" compatibilite="[2.7.9;]" />
 	<utilise nom="coloration_code" compatibilite="[0.7.1;]" />

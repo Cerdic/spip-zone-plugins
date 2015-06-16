@@ -10,7 +10,7 @@
 
 		<fieldset>
 			<legend class='legend'><:fabrique:legend_description:></legend>
-			<ul>
+			<div class='editer-groupe'>
 				[(#SAISIE{checkbox, echappements,
 					label=<:fabrique:label_echappements:>, conteneur_class=pleine_largeur,
 					datas=#ARRAY{
@@ -29,7 +29,7 @@
 
 				[(#SAISIE{textarea, code_squelette,
 					label=<:fabrique:label_code_squelette:>, conteneur_class=pleine_largeur})]
-			</ul>
+			</div>
 		</fieldset>
 		
 		<p class="boutons">
@@ -39,10 +39,10 @@
 		[(#CODE_RESULTAT|oui)
 			<fieldset>
 				<legend class='legend'><:fabrique:legend_resultat:></legend>
-				<ul>
+				<div class='editer-groupe'>
 					[(#SAISIE{textarea, code_resultat,
 						label=<:fabrique:label_code_resultat:>, conteneur_class=pleine_largeur})]
-				</ul>
+				</div>
 			</fieldset>
 		]
 

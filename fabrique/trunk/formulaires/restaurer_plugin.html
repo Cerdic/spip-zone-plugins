@@ -9,15 +9,18 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 
 		<p class='explication'><:fabrique:explication_sauvegarde:></p>
-		[(#SAISIE{input, sauvegarde,
-			label=<:fabrique:label_fichier_sauvegarde:>,
-			explication=<:fabrique:label_fichier_sauvegarde_ordinateur:>,
-			type=file, cols=10})]
-		
-		[(#SAISIE{selection, sauvegarde_locale,
-			label=<:fabrique:label_fichier_sauvegarde:>,
-			explication=<:fabrique:label_fichier_sauvegarde_serveur:>,
-			datas=#ENV{liste_fichiers}})]
+
+		<div class='editer-groupe'>
+			[(#SAISIE{input, sauvegarde,
+				label=<:fabrique:label_fichier_sauvegarde:>,
+				explication=<:fabrique:label_fichier_sauvegarde_ordinateur:>,
+				type=file, cols=10})]
+			
+			[(#SAISIE{selection, sauvegarde_locale,
+				label=<:fabrique:label_fichier_sauvegarde:>,
+				explication=<:fabrique:label_fichier_sauvegarde_serveur:>,
+				datas=#ENV{liste_fichiers}})]
+		</div>
 
 		<p class='notice'><:fabrique:bouton_charger_sauvegarde_attention:></p>
 		<p class="boutons">
