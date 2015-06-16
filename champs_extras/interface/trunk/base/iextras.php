@@ -17,4 +17,3 @@ function iextras_declarer_champs_extras($saisies_tables=array()) {
 	$saisies_tables = array_merge_recursive($saisies_tables, $extras);
 	return $saisies_tables;
 }
-?>

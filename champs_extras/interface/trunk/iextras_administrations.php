@@ -284,7 +284,3 @@ function iextras_upgrade_to_saisies_enum($val) {
 	}
 	return str_replace(',','|',$val);
 }
-
-
-
-?>

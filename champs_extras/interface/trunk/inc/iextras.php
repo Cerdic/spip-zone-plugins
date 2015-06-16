@@ -257,4 +257,3 @@ function iextras_formulaire_verifier($flux) {
 	}
 	return $flux;
 }
-?>

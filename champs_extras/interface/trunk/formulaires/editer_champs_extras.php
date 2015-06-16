@@ -62,6 +62,3 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	$retour['message_ok'] = 'Super !';
 	return $retour;
 }
-
-
-?>

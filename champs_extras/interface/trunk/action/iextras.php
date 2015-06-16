@@ -83,5 +83,3 @@ function action_supprimer_champ_sql($table, $champ) {
 		sql_alter("TABLE $table DROP COLUMN ".$champ);			
 	}
 }
-
-?>
