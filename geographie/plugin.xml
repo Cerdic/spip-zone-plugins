@@ -1,8 +1,8 @@
 <plugin>
   <nom>Geographie</nom>
   <auteur>Cedric Morin [yterium.net->http://www.yterium.net]</auteur>
-  <version>0.5.2</version>
-  <version_base>0.4.1</version_base>
+  <version>0.5.3</version>
+  <version_base>0.4.2</version_base>
   <etat>test</etat>
   <description>Bases g&#233;ographiques Pays, et pour la France : R&#233;gion, d&#233;partement, communes g&#233;olocalis&#233;es</description>
 	<lien>http://contrib.spip.net/Geographie</lien>

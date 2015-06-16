@@ -50,10 +50,10 @@ function geographie_upgrade($nom_meta_base_version,$version_cible){
 			}
 			else return;
 		}
-		elseif (version_compare($current_version,"0.4.1","<")) {
+		elseif (version_compare($current_version,"0.4.2","<")) {
 			// il y avait une coquille dans la description de midi pyrennées.
-			sql_delete('spip_geo_departement', 'nom=' . sql_quote('09'));
-			ecrire_meta($nom_meta_base_version,$current_version="0.4.1",'non');
+			sql_delete('spip_geo_departements', 'nom=' . sql_quote('09'));
+			ecrire_meta($nom_meta_base_version,$current_version="0.4.2",'non');
 		}
 		ecrire_metas();
 	}
