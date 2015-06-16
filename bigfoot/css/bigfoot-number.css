@@ -324,3 +324,8 @@
 .bigfoot-footnote__button__circle {
   display: none;
 }
+
+/* patch temporaire, cf https://github.com/lemonmade/bigfoot/issues/40 */
+.bigfoot-footnote__container { font-size: initial; font-weight: initial; line-height: initial; }
+/* patch pour spip */
+.bigfoot-footnote__container .spip_note_ref { display: none; }
