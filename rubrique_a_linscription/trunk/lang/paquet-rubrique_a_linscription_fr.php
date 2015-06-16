@@ -14,6 +14,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
 	'rubrique_a_linscription_description' => 'Création automatique de rubrique à l\'inscription d\'un auteur. Éventuellement avec administration restreinte.',
-	'rubrique_a_linscription_slogan' => 'Créer une rubrique à l\'inscription d\'un admin',
+	'rubrique_a_linscription_slogan' => 'Créer une rubrique à l\'inscription d\'un auteur',
 );
 ?>
