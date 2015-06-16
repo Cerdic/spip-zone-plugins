@@ -101,8 +101,8 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'statut'=> array(
 			array(
 				'champ'       => 'statut',
-				'publie'      => 'attente,partiel,paye,envoye,retour,retour_partiel',
-				'previsu'     => 'attente,partiel,paye,envoye,retour,retour_partiel',
+				'publie'      => 'encours,attente,partiel,paye,envoye,retour,retour_partiel',
+				'previsu'     => 'encours,attente,partiel,paye,envoye,retour,retour_partiel',
 				'post_date'   => 'date', 
 				'exception'   => array('statut','tout')
 			)
