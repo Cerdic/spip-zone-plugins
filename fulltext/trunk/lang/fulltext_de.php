@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aussi' => 'auch',
 
 	// C
-	'casse_indifferente' => 'Groß- und Kleinschreibung der gesuchten Begriffe spielt keine Rolle.',
+	'casse_indifferente' => 'Groß- und Kleinschreibung der gesuchten Begriffe spielen keine Rolle.',
 	'configurer_egalement_doc' => 'Vous pouvez également configurer l’indexation des documents :', # MODIF
 	'convertir_myisam' => 'Nach MyISAM konvertieren',
 	'convertir_toutes' => 'Alle Tabellen nach MyISAM konvertieren',
