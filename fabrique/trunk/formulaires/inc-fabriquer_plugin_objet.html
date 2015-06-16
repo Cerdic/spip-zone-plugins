@@ -278,7 +278,7 @@
 
 
 <h3><a href="#chaines"><:fabrique:legend_chaines_langues:></a></h3>
-<div class='li_colonne'>
+<div class='en_colonne'>
 		[(#SET{langue_objets,#ENV{objets/#CLE/nom}|trim|fabrique_mb_strtolower})]
 		[(#SET{langue_type,#ENV{objets/#CLE/nom_singulier}|trim|fabrique_mb_strtolower|sinon{#GET{objets}|substr{0,-1}}})]
 		[(#SET{langue_mobjets,#GET{langue_objets}|fabrique_mb_strtoupper|ucfirst})]
