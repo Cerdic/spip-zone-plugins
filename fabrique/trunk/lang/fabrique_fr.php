@@ -299,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_saisie_options' => 'Options de saisie',
 	'label_saisie_options_explication' => 'Options du code de la balise #SAISIE.<br />
 		Exemple pour un textarea :<br />
-		<code>li_class=haut, class=inserer_barre_edition, rows=4</code><br />
+		<code>conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4</code><br />
 		Exemple pour selection / checkbox / radio :<br />
 		<code>datas=[(#ARRAY{cle1,valeur1,cle2,valeur2})]</code>',
 	'label_schema' => 'Schema',

@@ -12,7 +12,7 @@
 			<legend class='legend'><:fabrique:legend_description:></legend>
 			<ul>
 				[(#SAISIE{checkbox, echappements,
-					label=<:fabrique:label_echappements:>, li_class=haut,
+					label=<:fabrique:label_echappements:>, conteneur_class=pleine_largeur,
 					datas=#ARRAY{
 						diese,<:fabrique:echappement_diese:>,
 						crochets,<:fabrique:echappement_crochets:>,
@@ -28,7 +28,7 @@
 					explication=<:fabrique:label_transformer_objet_explication:>})]
 
 				[(#SAISIE{textarea, code_squelette,
-					label=<:fabrique:label_code_squelette:>, li_class=haut})]
+					label=<:fabrique:label_code_squelette:>, conteneur_class=pleine_largeur})]
 			</ul>
 		</fieldset>
 		
@@ -41,7 +41,7 @@
 				<legend class='legend'><:fabrique:legend_resultat:></legend>
 				<ul>
 					[(#SAISIE{textarea, code_resultat,
-						label=<:fabrique:label_code_resultat:>, li_class=haut})]
+						label=<:fabrique:label_code_resultat:>, conteneur_class=pleine_largeur})]
 				</ul>
 			</fieldset>
 		]

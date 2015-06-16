@@ -198,7 +198,7 @@
 					[(#SAISIE{textarea, objets/#_objet:CLE/champs/#CLE/saisie_options,
 						label=<:fabrique:label_saisie_options:>,
 						explication=<:fabrique:label_saisie_options_explication:>,
-						rows=3, li_class=haut})]
+						rows=3, conteneur_class=pleine_largeur})]
 					</ul>
 				</fieldset>
 				
@@ -312,7 +312,7 @@
 	}>
 	[(#SAISIE{input, objets/#_objet:CLE/chaines/#VALEUR,
 		label=[(#VALEUR|cle_de_langue{#ARRAY{objet,#GET{objets},type,#GET{type}}})],
-		li_class=haut,
+		conteneur_class=pleine_largeur,
 		defaut=[(#VAL{fabrique:chaine_#VALEUR[(#_objet:GENRE|=={feminin}|?{_feminin})]}|_T{[(#ARRAY{
 				objets,#GET{langue_objets},
 				mobjets,[(#GET{langue_objets}|ucfirst)],
@@ -346,7 +346,7 @@
 			label=<:fabrique:label_vue_liens:>,
 			explication=<:fabrique:label_vue_liens_explication:>,
 			datas=[(#ENV{objets}|fabrique_lister_objets_editoriaux{#ENV{objets/#CLE/vue_liens, #ARRAY}, #LISTE{#TABLE}})],
-			li_class=saisie_choisir_objets})]
+			conteneur_class=saisie_choisir_objets})]
 		</ul>
 
 
@@ -362,7 +362,7 @@
 						[(#SAISIE{textarea, objets/#CLE/roles,
 							label=<:fabrique:label_roles:>,
 							explication=<:fabrique:label_roles_explication:>,
-							rows=#GET{rows}, li_class=haut})]
+							rows=#GET{rows}, conteneur_class=pleine_largeur})]
 					</ul>
 				</div>
 			</div>

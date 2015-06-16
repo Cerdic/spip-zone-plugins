@@ -91,7 +91,7 @@
 					#SET{rows,#ENV{paquet/inserer/paquet}|explode{#EVAL{'"\n"'}}|count|max{4}}
 					[(#SAISIE{textarea, paquet/inserer/paquet,
 						label=<:fabrique:label_inserer_paquet:>,
-						rows=#GET{rows}, li_class=haut})]
+						rows=#GET{rows}, conteneur_class=pleine_largeur})]
 				</ul>
 			</div>
 		</div>
@@ -105,17 +105,17 @@
 					#SET{rows,#ENV{paquet/inserer/administrations/maj}|explode{#EVAL{'"\n"'}}|count|max{4}}
 					[(#SAISIE{textarea, paquet/inserer/administrations/maj,
 						label=<:fabrique:label_inserer_administrations_maj:>,
-						rows=#GET{rows}, li_class=haut})]
+						rows=#GET{rows}, conteneur_class=pleine_largeur})]
 
 					#SET{rows,#ENV{paquet/inserer/administrations/desinstallation}|explode{#EVAL{'"\n"'}}|count|max{4}}
 					[(#SAISIE{textarea, paquet/inserer/administrations/desinstallation,
 						label=<:fabrique:label_inserer_administrations_desinstallation:>,
-						rows=#GET{rows}, li_class=haut})]
+						rows=#GET{rows}, conteneur_class=pleine_largeur})]
 
 					#SET{rows,#ENV{paquet/inserer/administrations/fin}|explode{#EVAL{'"\n"'}}|count|max{4}}
 					[(#SAISIE{textarea, paquet/inserer/administrations/fin,
 						label=<:fabrique:label_inserer_administrations_fin:>,
-						rows=#GET{rows}, li_class=haut})]
+						rows=#GET{rows}, conteneur_class=pleine_largeur})]
 				</ul>
 			</div>
 		</div>
@@ -128,7 +128,7 @@
 					#SET{rows,#ENV{paquet/inserer/base/tables/fin}|explode{#EVAL{'"\n"'}}|count|max{4}}
 					[(#SAISIE{textarea, paquet/inserer/base/tables/fin,
 						label=<:fabrique:label_inserer_base_tables_fin:>,
-						rows=#GET{rows}, li_class=haut})]
+						rows=#GET{rows}, conteneur_class=pleine_largeur})]
 				</ul>
 			</div>
 		</div>
@@ -158,7 +158,7 @@
 					#SET{rows,#ENV{paquet/scripts/pre_copie}|explode{#EVAL{'"\n"'}}|count|max{4}}
 					[(#SAISIE{textarea, paquet/scripts/pre_copie,
 						label=<:fabrique:label_scripts_pre_copie_explication{destination_ancien_plugin=#DESTINATION_ANCIEN_PLUGIN}:>,
-						rows=#GET{rows}, li_class=haut})]
+						rows=#GET{rows}, conteneur_class=pleine_largeur})]
 				</ul>
 			</div>
 		</div>
@@ -171,7 +171,7 @@
 					#SET{rows,#ENV{paquet/scripts/post_creation}|explode{#EVAL{'"\n"'}}|count|max{4}}
 					[(#SAISIE{textarea, paquet/scripts/post_creation,
 						label=<:fabrique:label_scripts_post_creation_explication{destination_plugin=#DESTINATION_PLUGIN}:>,
-						rows=#GET{rows}, li_class=haut})]
+						rows=#GET{rows}, conteneur_class=pleine_largeur})]
 				</ul>
 			</div>
 		</div>
