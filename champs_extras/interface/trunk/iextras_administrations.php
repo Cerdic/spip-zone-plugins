@@ -34,7 +34,8 @@ function iextras_vider_tables($nom_meta_base_version) {
  *
 **/
 function iextras_upgrade_to_saisies() {
-	$old_extras = $GLOBALS['meta']['iextras'];
+	include_spip('inc/config');
+	$old_extras = lire_config('iextras', '');
 	if (!$old_extras) {
 		// rien a faire
 		return true; 
