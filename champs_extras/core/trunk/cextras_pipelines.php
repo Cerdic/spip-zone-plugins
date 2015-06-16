@@ -128,14 +128,14 @@ function cextras_editer_contenu_objet($flux){
 		$saisies = champs_extras_ajouter_drapeau_edition($saisies);
 		// ajouter au formulaire
 		$ajout = recuperer_fond('inclure/generer_saisies', array_merge($flux['args']['contexte'], array('saisies'=>$saisies)));
-		if (!function_exists('spip_version_compare')) {
-			include_spip('plugins/installer');
-		}
-		if (spip_version_compare($GLOBALS['spip_version_branche'], '3.1.0-beta', '>=')) {
-			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<div class="editer-groupe champs_extras">'.$ajout.'</div>'."\n".'$1', $flux['data']);
-		} else {
-			$flux['data'] = preg_replace('%(<!--extra-->)%is', '<ul class="editer-groupe champs_extras">'.$ajout.'</ul>'."\n".'$1', $flux['data']);
-		}
+
+		// div par défaut en 3.1+, mais avant ul / li
+		$balise = saisie_balise_structure_formulaire('ul');
+		$flux['data'] = preg_replace(
+			'%(<!--extra-->)%is',
+			"<$balise class='editer-groupe champs_extras'>$ajout</$balise>\n" . '$1',
+			$flux['data']
+		);
 	}
 
 	return $flux;
