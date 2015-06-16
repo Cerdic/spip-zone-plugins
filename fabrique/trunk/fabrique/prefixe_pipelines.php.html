@@ -174,7 +174,6 @@ function [(#PREFIXE)]_objet_compte_enfants($flux) {
 	if ($flux['args']['objet']=='rubrique'
 		AND $id_rubrique=intval($flux['args']['id_objet'])) {
 
-		$id_rubrique = $flux['args']['id_rubrique'];
 <BOUCLE_objet_compte_enfants(DATA){source tableau,(#OBJETS|objets_options_presentes{#LISTE{statut_rubrique,id_rubrique}})}>
 		[(#STATUT|oui)
 		// juste les publiés ?
