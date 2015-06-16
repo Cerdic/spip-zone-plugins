@@ -296,7 +296,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 		$code .= 'verifier_saisies_'.$id_form." = function(form){\n";
 				foreach ($saisies as $saisie) {
 					// on utilise comme selecteur l'identifiant de saisie en priorite s'il est connu
-					// parce que li_class = 'tableau[nom][option]' ne fonctionne evidement pas
+					// parce que conteneur_class = 'tableau[nom][option]' ne fonctionne evidement pas
 					// lorsque le name est un tableau
 					if (isset($saisie['options']['afficher_si']) or isset($saisie['options']['afficher_si_remplissage'])) {
 						$i++;

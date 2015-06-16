@@ -160,7 +160,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 				'nom' => "saisie_modifiee_${nom}[verifier][type]",
 				'label' => _T('saisies:construire_verifications_label'),
 				'option_intro' => _T('saisies:construire_verifications_aucune'),
-				'li_class' => 'liste_verifications',
+				'conteneur_class' => 'liste_verifications',
 				'datas' => array()
 			)
 		);
@@ -174,7 +174,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 					'options' => array(
 						'nom' => 'options',
 						'label' => $verif['titre'],
-						'li_class' => "$type_verif options_verifier"
+						'conteneur_class' => "$type_verif options_verifier"
 					),
 					'saisies' => $verif['options']
 				);
@@ -351,18 +351,18 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 		// On modifie enfin
 		$formulaire_actuel = saisies_modifier($formulaire_actuel, $nom, $saisie_modifiee);
 	}
-	
+
 	// Si on demande à réinitialiser
 	if (_request('reinitialiser') == 'oui'){
 		$formulaire_actuel = $formulaire_initial;
 	}
-	
+
 	// On enregistre en session la nouvelle version du formulaire
 	session_set($identifiant, $formulaire_actuel);
-	
+
 	// Le formulaire reste éditable
 	$retours['editable'] = true;
-	
+
 	return $retours;
 }
 
@@ -382,13 +382,18 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	// On cherche si ya un formulaire de config
 	$formulaire_config = isset($env['erreurs']['configurer_'.$nom]) ? $env['erreurs']['configurer_'.$nom] : "";
 	// On ajoute une classe
-	if (!isset($saisie['options']['li_class'])) {
-		$saisie['options']['li_class'] = ''; // initialisation
+	if (!isset($saisie['options']['conteneur_class'])) {
+		$saisie['options']['conteneur_class'] = ''; // initialisation
 	}
-	$saisie['options']['li_class'] .= ' configurable';
+	// Compat ancien nom li_class
+	if (isset($saisie['options']['li_class'])) {
+		$saisie['options']['conteneur_class'] .= " " . $saisie['options']['li_class']; // initialisation
+	}
+	$saisie['options']['conteneur_class'] .= ' configurable';
+
 	// On ajoute l'option "tout_afficher"
 	$saisie['options']['tout_afficher'] = 'oui';
-	
+
 	// On ajoute les boutons d'actions, mais seulement s'il n'y a pas de configuration de lancée
 	if (!$env['erreurs']) {
 		$saisie = saisies_inserer_html(
@@ -405,21 +410,21 @@ function formidable_generer_saisie_configurable($saisie, $env){
 			'debut'
 		);
 	}
-	
+
 	// On ajoute une ancre pour s'y déplacer
 	$saisie = saisies_inserer_html(
 		$saisie,
 		"\n<a id=\"configurer_$nom\"></a>\n",
 		'debut'
 	);
-	
+
 	// Si ya un form de config on l'ajoute à la fin
 	if (is_array($formulaire_config)){
 		// On double l'environnement
 		$env2 = $env;
 		// On ajoute une classe
-		$saisie['options']['li_class'] .= ' en_configuration';
-		
+		$saisie['options']['conteneur_class'] .= ' en_configuration';
+
 		// Si possible on met en readonly
 		$saisie['options']['readonly'] = 'oui';
 		

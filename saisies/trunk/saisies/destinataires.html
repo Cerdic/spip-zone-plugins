@@ -2,7 +2,7 @@
 #SET{choix_destinataires, #ENV*{choix_destinataires,#ARRAY}}
 #SET{erreurs,#ENV**{erreurs/#ENV{nom}}}
 <BOUCLE_choix(CONDITION){si #GET{choix_destinataires}|count|<{2}|ou{#GET{type_choix}|=={tous}}}>
-<li class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
+<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
 	#ENV*{inserer_debut}
 	[<label for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]">(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
 	[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -27,11 +27,11 @@
 	<input [(#ENV{tout_afficher}|!={oui}|?{type="hidden",type="text" readonly="readonly"})] name="#ENV{nom}[]" value="1" />
 	<//B_tous>
 	#ENV*{inserer_fin}
-</li>
+</[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})]>
 </BOUCLE_choix>
 
 [(#SET{valeur,[(#ENV*{valeur}|is_array|?{#ENV*{valeur},[(#ENV*{valeur}|explode{','})]})]})]
-<li class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]">
+<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="editer editer_[(#ENV{nom})][ (#ENV{obligatoire})][ (#GET{erreurs}|oui)erreur][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]">
 
 	#ENV*{inserer_debut}
 	[<label[(#GET{type_choix}|=={un}|ou{#GET{type_choix}|=={un_radio}}|oui)for="champ_[(#ENV{id,#ENV{nom}}|saisie_nom2classe)]"]>(#ENV*{label})[<span class='obligatoire'>(#ENV{obligatoire}|oui)[(#ENV*{info_obligatoire}|is_null|?{<:info_obligatoire_02:>,#ENV*{info_obligatoire}})]</span>]</label>]
@@ -64,5 +64,5 @@
 		]
 	</B_destinataires>
 	#ENV*{inserer_fin}
-</li>
+</[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})]>
 <//B_choix>

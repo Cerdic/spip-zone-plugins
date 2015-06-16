@@ -41,7 +41,7 @@ options:
       -
         saisie: 'input'
         options:
-          nom: 'li_class'
+          nom: 'conteneur_class'
           label: '<:saisies:option_class_label:>'
           size: 50
 defaut:

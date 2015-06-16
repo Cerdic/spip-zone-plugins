@@ -1,4 +1,4 @@
-<li class="editer editer_[(#ENV{nom})][ (#ENV{li_class})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
+<[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})] class="editer editer_[(#ENV{nom})][ (#ENV{conteneur_class,#ENV{li_class}})][ saisie_(#ENV{type_saisie})]" [(#ENV{tout_afficher}|!={oui}|?{style="display:none;"})][ data-id="(#ENV{id_saisie})"]>
 	#ENV*{inserer_debut}
 	[(#ENV{tout_afficher}|!={oui}|oui)
 	<input type="hidden" name="#ENV{nom}" id="champ_[(#ENV{nom}|saisie_nom2classe)]" value="#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}"[ (#ENV*{attributs})] />
@@ -9,4 +9,4 @@
 	]
 	
 	#ENV*{inserer_fin}
-</li>
+</[(#ENV{saisies_base_conteneur,[(#VAL{li}|saisie_balise_structure_formulaire)]})]>
