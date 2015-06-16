@@ -1,6 +1,6 @@
 <B_rubriques>
-<p class='lim_info'><:lim:label_desactiver_article_par_rubrique:>'[(#EVAL{#NAME}|objet_info{texte_creer}|_T)]'.<br>
-Note : les rubriques marquées d'un <img src='#CHEMIN_IMAGE{del-24.png}' /> contiennent déjà des [(#EVAL{#NAME}|objet_info{icone_objet}|_T|textebrut)s].</p>
+<p class='lim_info'><:lim:label_desactiver_article_par_rubrique:>'[(#VAL{#NAME}|objet_info{texte_creer}|_T)]'.<br>
+Note : les rubriques marquées d'un <img src='#CHEMIN_IMAGE{del-24.png}' /> contiennent déjà des [(#VAL{#NAME}|objet_info{icone_objet}|_T|textebrut)s].</p>
 
 <ul class='creneaux'>
 <BOUCLE_rubriques(RUBRIQUES){racine}{par num titre,titre}{tout}>

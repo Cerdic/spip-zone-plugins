@@ -29,8 +29,8 @@ function lim_verifier_presence_logo($type) {
 	if ($type == 'spip_syndic') {
 		$chercher_logo = charger_fonction('chercher_logo','inc');
 		$logo_du_site = $chercher_logo(0,'id_syndic');
-		$prefixe_logo_du_site[] = $logo_du_site[0];
-		$liste_logos = array_diff($liste_logos, $prefixe_logo_du_site);
+		if(!empty($logo_du_site[0]))
+			$liste_logos = array_diff($liste_logos, $logo_du_site[0]);
 	}
 	
 	if (count($liste_logos) > 0) return true;

@@ -10,6 +10,7 @@
 	<p>Dans la page <a href="./?exec=configurer_forum">Configurer Forum</a>, vous avez désactivé l'utilisation des forums publics.</p>
 	<p>L'option ci-dessous vous permet en plus de <b>désactiver l'affichage du bloc "Forum" de toutes les pages Article</b>, sans considération pour les options avancées (pas d'affichage au cas par cas).</p>
 	#BOITE_FERMER
+	#SET{disable,''}
 	]
 	[(#CONFIG{forums_publics}|=={non}|non)
 	#BOITE_OUVRIR{'Prérequis','info'}
