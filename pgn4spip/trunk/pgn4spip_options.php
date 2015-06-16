@@ -13,7 +13,7 @@
 define('PLUGIN_Name', "pgn4spip");
 define('_DIR_LIB_PGN4WEB', _DIR_RACINE . 'lib/pgn4web/');
 
-define('find_in_path(pgn4spip/pgn4spip_conf.php)', 'pgn4spip_conf.php');
+define('PATH_Conf', 'pgn4spip_conf.php');
 if (!function_exists('ReadCurrentConfiguration')) require 'pgn4spip_conf.php';
 
 // Init $optValue with default values of options overriden with the current configuration

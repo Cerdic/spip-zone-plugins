@@ -27,7 +27,7 @@
 <BOUCLE_pgn(DOCUMENTS){id_document=#ENV{id}}{extension==pgn}{tout}>
 <?php
 define('PLUGIN_Name', "pgn4spip");
-define('PATH_Fonctions', PLUGIN_Name . '/' . PLUGIN_Name . '_fonctions.php');
+define('PATH_Fonctions', find_in_path(pgn4spip_fonctions));
 if (!function_exists('pgn4spip_prepropre')) require _DIR_PLUGINS . PATH_Fonctions;
 
 define('QUOTE_HTML', '&quot;'); // '"' in HTML

@@ -36,13 +36,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
 
 define('PLUGIN_Name', "pgn4spip");
-// define('PATH_Conf', PLUGIN_Name . '/' . PLUGIN_Name . '_conf.php');
-define('find_in_path(pgn4spip/pgn4spip_conf.php)', 'pgn4spip_conf.php');
-if (!function_exists('ReadCurrentConfiguration')) require _DIR_LIB_PGN4WEB . PATH_Conf;
+define('PATH_Conf', 'find_in_path(pgn4spip_conf.php)');
+if (!function_exists('ReadCurrentConfiguration')) require _DIR_PLUGIN_PGN4SPIP . PATH_Conf;
 
 define('TAG_pgn', "[pP][gG][nN]"); // pgn or PGN
 define('PATH_board',_DIR_RACINE . 'lib/pgn4web/board.html');
-define('PATH_live', PLUGIN_Name . "/boardLive.html");
+define('PATH_live', _DIR_PLUGIN_PGN4SPIP . 'boardLive.html');
 define('indFullPattern', 0);
 define('indPgnOption', 1);
 define('indPgnGame', 2);
@@ -376,4 +375,3 @@ function NameOptionPrm(&$optName, &$skipPrms, &$pgnPrms)
     'pt'    => 'pgnText'                 // PGN game
                     );
 }
-?>
