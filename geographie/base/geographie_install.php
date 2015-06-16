@@ -20,7 +20,7 @@ function geographie_upgrade($nom_meta_base_version,$version_cible){
 			}
 			else return;
 		}
-		else if ($current_version<0.2){
+		elseif ($current_version<0.2){
 			if (include_spip('base/geographie')){
 				sql_drop_table("spip_geo_pays");
 				creer_base();
@@ -30,7 +30,7 @@ function geographie_upgrade($nom_meta_base_version,$version_cible){
 			}
 			else return;
 		}
-		else if ($current_version<0.3){
+		elseif ($current_version<0.3){
 			if (include_spip('base/arrondissements')){
 				creer_base();
 				echo "Création des arrondissements : <br/>", _DIR_PLUGIN_GEOGRAPHIE.'base/arrondissements.txt<br/>';
@@ -40,7 +40,7 @@ function geographie_upgrade($nom_meta_base_version,$version_cible){
 			}
 			else return;
 		}
-		else if ($current_version<0.4){
+		elseif ($current_version<0.4){
 			if (include_spip('base/geographie')){
 				sql_drop_table("spip_geo_pays");
 				creer_base();
@@ -49,6 +49,11 @@ function geographie_upgrade($nom_meta_base_version,$version_cible){
 				ecrire_meta($nom_meta_base_version,$current_version=0.4,'non');
 			}
 			else return;
+		}
+		elseif (version_compare($current_version,"0.4.1","<")) {
+			// il y avait une coquille dans la description de midi pyrennées.
+			sql_delete('spip_geo_departement', 'nom=' . sql_quote('09'));
+			ecrire_meta($nom_meta_base_version,$current_version="0.4.1",'non');
 		}
 		ecrire_metas();
 	}

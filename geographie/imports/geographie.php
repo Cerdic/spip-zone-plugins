@@ -18,8 +18,9 @@ function imports_geographie_dist(){
 				foreach($departements as $departement=>$communes) {
 					$abbr = reset($communes);
 					$abbr = substr($abbr['insee'],0,3);
-					if (substr($abbr,0,1)=='0')
+					if (substr($abbr,0,1)=='0') {
 						$abbr = substr($abbr,1);
+					}
 					$id_departement = sql_insertq('spip_geo_departements',array('nom'=>unicode2charset(html2unicode($departement)),'abbr'=>$abbr,'id_region'=>$id_region));
 					$tabcom=array();
 					foreach($communes as $commune) {
