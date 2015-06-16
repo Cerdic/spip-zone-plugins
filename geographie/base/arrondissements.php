@@ -31,6 +31,3 @@ function imports_arrondissements_dist(){
 	}
 	echo "$liCpt arrondissements installés.<br/>";
 }
-
-
-?>

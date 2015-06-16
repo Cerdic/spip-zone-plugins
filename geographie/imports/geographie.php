@@ -39,4 +39,3 @@ function imports_geographie_dist(){
 	}
 
 }
-?>

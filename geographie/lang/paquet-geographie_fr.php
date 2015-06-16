@@ -11,4 +11,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'geographie_nom' => 'Géographie',
 	'geographie_slogan' => 'Bases géographies de pays, régions, départements et communes',
 );
-?>

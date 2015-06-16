@@ -246,4 +246,3 @@ $GLOBALS['liste_pays'] = array(
 		array('id_pays'=>'243','code'=>'ZM','nom'=>'<multi>[fr]Zambie[en]Zambia[de]Sambia[es]Zambia[it]Zambia[nl]Zambia[pt]Zâmbia</multi>'),
 		array('id_pays'=>'244','code'=>'ZW','nom'=>'<multi>[fr]Zimbabwe[en]Zimbabwe[de]Simbabwe[es]Zimbabwe[it]Zimbabwe[nl]Zimbabwe[pt]Zimbabwe</multi>'),
 		);
-?>

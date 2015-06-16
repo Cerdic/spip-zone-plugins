@@ -95,5 +95,3 @@ $IMPORT_tables_noerase[]='spip_geo_arrondissements';
 $IMPORT_tables_noerase[]='spip_geo_departements';
 $IMPORT_tables_noerase[]='spip_geo_regions';
 $IMPORT_tables_noerase[]='spip_geo_pays';
-
-?>
