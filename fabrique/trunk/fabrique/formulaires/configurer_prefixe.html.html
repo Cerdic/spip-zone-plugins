@@ -9,11 +9,11 @@
 	<div>
 		\#ACTION_FORMULAIRE{\#ENV{action}}
 <BOUCLE_si_exemples(CONDITION){si #EXEMPLES}>
-		<ul>
+		<div class='editer-groupe'>
 			\[(\#SAISIE{input, exemple,
 				label=\<:#PREFIXE:cfg_exemple:>,
 				explication=\<:#PREFIXE:cfg_exemple_explication:>})\]
-		</ul>
+		</div>
 </BOUCLE_si_exemples>
 		<input type="hidden" name="_meta_casier" value="#PREFIXE" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="\<:bouton_enregistrer:>" /></p>

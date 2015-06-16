@@ -6,7 +6,7 @@
 	<form method='post' action='\#ENV{action}'><div>
 		\#ACTION_FORMULAIRE{\#ENV{action}}
 		<input type='hidden' name='#ID_OBJET' value='\#ENV{#ID_OBJET}' />
-		<ul>[
+		<div class='editer-groupe'>[
 
 (#REM) On essaie de placer le formulaire de rubrique (s'il est demande)
        apres le titre, s'il est saisissable, sinon en 2e position 
@@ -25,14 +25,14 @@
 
 ]<BOUCLE_si_rub(CONDITION){si #GET{rub}}{si (#GET{titre}|et{#ENV{objet/champ_titre}|=={#CHAMP}}|ou{#GET{titre}|non|et{#_saisies:COMPTEUR_BOUCLE|=={1}}})}>
 
-			\[<li class="editer editer_rubrique\[ (\#ENV**{erreurs/id_parent}|oui)erreur\]">
+			\[<div class="editer editer_rubrique\[ (\#ENV**{erreurs/id_parent}|oui)erreur\]">
 					<label for="id_parent">\<:titre_cadre_interieur_rubrique:></label>\[
 					<span class="erreur_message">(\#ENV**{erreurs/id_parent})</span>
 					\]
 					(\#VAL|chercher_rubrique{\#ENV{#ID_OBJET},\#ENV{id_parent},'#TYPE',\#ENV{id_secteur},'',0,form_simple})
-			</li>\]</BOUCLE_si_rub>
+			</div>\]</BOUCLE_si_rub>
 </BOUCLE_saisies>
-		</ul>
+		</div>
 		[(\#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='\<:bouton_enregistrer:>' /></p>
