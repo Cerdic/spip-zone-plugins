@@ -7,7 +7,7 @@ function action_supprimer_chat_dist() {
 	$arg = $securiser_action();
 
 	if (!preg_match(",^(\d+)$,", $arg, $r)) {
-		 spip_log("action_supprimer_chat_dist $arg pas compris");
+		spip_log("action_supprimer_chat_dist $arg pas compris");
 	} else {
 		action_supprimer_chat_post($r[1]);
 	}

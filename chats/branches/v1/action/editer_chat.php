@@ -24,7 +24,7 @@ function insert_chat() {
 	$champs = array(
 		'nom' => _T('chats:item_nouveau_chat')
 	);
-	
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion', array(
 		'args' => array(
@@ -32,7 +32,7 @@ function insert_chat() {
 		),
 		'data' => $champs
 	));
-	
+
 	$id_chat = sql_insertq("spip_chats", $champs);
 	return $id_chat;
 }
