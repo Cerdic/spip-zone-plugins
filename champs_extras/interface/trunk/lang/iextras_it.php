@@ -52,7 +52,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_class' => 'Classi CSS',
 	'label_explication' => 'Istruzioni di inserimento',
 	'label_label' => 'Etichetta di inserimento',
-	'label_li_class' => 'Classi CSS dell’&lt;li&gt; padre',
 	'label_obligatoire' => 'Campo obbligatorio?',
 	'label_rechercher' => 'Ricerca',
 	'label_sql' => 'Definizione SQL',
@@ -74,8 +73,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_explication' => 'Puoi fornire più informazioni riguardanti l’inserimento. 
 		Può essere una stringa di traduzione «plugin:stringa».',
 	'precisions_pour_label' => 'Può essere una stringa di traduzione «plugin:stringa».',
-	'precisions_pour_li_class' => 'Aggiungi delle classi CSS all’elemento &lt;li&gt; padre,
-		separate da uno spazio. Esempio: "haut" per avere tutta la larghezza del form',
 	'precisions_pour_rechercher' => 'Includere questo campo nel motore di ricerca?',
 	'precisions_pour_traitements' => 'Applica automaticamente un trattamento
 		per il segnaposto #NOME_DEL_CAMPO:',

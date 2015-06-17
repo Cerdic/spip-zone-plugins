@@ -55,7 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_datas' => 'Value list',
 	'label_explication' => 'Data entry help',
 	'label_label' => 'Data entry label',
-	'label_li_class' => 'CSS classes of the &lt;li&gt; parent',
 	'label_obligatoire' => 'Compulsory field?',
 	'label_rechercher' => 'Search',
 	'label_rechercher_ponderation' => 'Weight of search',
@@ -93,9 +92,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_explication' => 'You can provide more information about the data field. 
 		May be a "plugin:stringname" idiom..',
 	'precisions_pour_label' => 'May be a "plugin:stringname" idiom.',
-	'precisions_pour_li_class' => 'Add CSS classes for the &lt;li&gt; parent,
-		separated by a space. Example: "haut" to use the whole width
-		of the form',
 	'precisions_pour_nouvelle_saisie' => 'Allow to change the form entry type used for that field',
 	'precisions_pour_nouvelle_saisie_attention' => 'Be careful, a change in input type loses the configuration options of the input which are not common with the new selected entry!',
 	'precisions_pour_rechercher' => 'Include this field in the search engine?',

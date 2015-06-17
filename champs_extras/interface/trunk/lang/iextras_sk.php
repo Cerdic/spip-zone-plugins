@@ -55,7 +55,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_datas' => 'Zoznam hodnôt',
 	'label_explication' => 'Vysvetlivky pre vstup',
 	'label_label' => 'Menovka vstupu',
-	'label_li_class' => 'Triedy CSS &lt;li&gt; nadradeného objektu',
 	'label_obligatoire' => 'Je pole povinné?',
 	'label_rechercher' => 'Vyhľadať',
 	'label_rechercher_ponderation' => 'Dôležitosť vyhľadávania',
@@ -93,9 +92,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_explication' => 'Môžete zadať viac informácií o vstupe 
 		Môže byť jazykový reťazec "plugin:chaine".',
 	'precisions_pour_label' => 'Môže byť jazykový reťazec «plugin:chaine».',
-	'precisions_pour_li_class' => 'Pridajte triedy CSS k nadradenému &lt;li&gt;
-		a oddeľte ich medzerami. Napríklad: "zväčšenie" na zväčšenie
-		šírky celého formulára',
 	'precisions_pour_nouvelle_saisie' => 'Umožňuje zmeniť typ vstupu, ktorý sa použije pre toto pole',
 	'precisions_pour_nouvelle_saisie_attention' => 'Pozor, ak zmeníte typ vstupu, možnosti nastavení aktuálneho vstupu, ktoré sa nepoužívajú pri vybranom vstupe, sa stratia!',
 	'precisions_pour_rechercher' => 'Zaradiť toto pole do vyhľadávača?',
