@@ -114,10 +114,10 @@ $.fn.opencrayon = function(evt, percent) {
 				'h': $(this).height(),
 				'ww': (window.innerWidth ? window.innerWidth : (document.documentElement.clientWidth ? document.documentElement.clientWidth : document.body.offsetWidth)),
 				'wh': (window.innerHeight ? window.innerHeight : (document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.offsetHeight)),
-				'em': $(this).px('fontSize'), // eviter un bug MSIE sur fontSize
+				'em': $(this).css('fontSize'), // Bug de jquery resolu : http://bugs.jquery.com/ticket/760
 				'class': me.className,
 				'color': $(this).css('color'),
-				'font-size': $(this).px('fontSize'),
+				'font-size': $(this).css('fontSize'),
 				'font-family': $(this).css('fontFamily'),
 				'font-weight': $(this).css('fontWeight'),
 				'line-height': $(this).css('lineHeight'),
@@ -166,7 +166,11 @@ $.fn.opencrayon = function(evt, percent) {
 					.addClass('crayon-has')
 					.find('>.crayon-icones')
 						.attr('rel','crayon_'+id_crayon);
-					if ($.browser.msie) $(me).css({'zoom':1});
+					// Detection IE sur sa capacite a gerer zoom :
+					// http://www.sitepoint.com/detect-css3-property-browser-support/
+					if (document.createElement("detect").style.zoom === "") {
+						$(me).css({'zoom':1});
+					}
 					var pos = $(me).offset();
 					$('<div class="crayon-html" id="crayon_'+id_crayon+'"></div>')
 					.css({
