@@ -12,7 +12,6 @@ function formulaires_editer_chat_charger_dist($id_chat='new', $retour=''){
 
 function formulaires_editer_chat_verifier_dist($id_chat='new', $retour=''){
 	$erreurs = formulaires_editer_objet_verifier('chat', $id_chat, array('nom'));
-	var_dump($erreurs);
 	return $erreurs;
 }
 
