@@ -1,5 +1,6 @@
 #CACHE{0}
-[(#SET{id_chat,[(#VAL{id_chat}|_request|sinon{new})]})]
+[(#SET{id_chat,#ENV{id_chat,#ENV{new,oui}}})]
+
 <BOUCLE_si_autorise(CONDITION){si (#AUTORISER{modifier,chat,#GET{id_chat}})}>
 
 	[(#SET{retour, #URL_ECRIRE{chats}})]
@@ -9,7 +10,7 @@
 	</BOUCLE_titre>
 
 	[(#INCLURE{fond=prive/editer/chat,
-		id_chat=#GET{id_chat},
+		new=#GET{id_chat},
 		icone_retour=[(#ENV{retour,#GET{retour}}
 			|icone{<:icone_retour:>, #CHEMIN{images/chat-24.png}, #LANG_LEFT })],
 		titre=#GET{titre}
