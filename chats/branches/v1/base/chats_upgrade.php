@@ -13,10 +13,10 @@ function chats_upgrade($nom_meta_base_version, $version_cible){
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-	if (version_compare($current_version,"1.1","<")){
+	if (version_compare($current_version,"1.1.0","<")){
 		// ajout du champ "robe" et "infos"
 		maj_tables('spip_chats');
-		ecrire_meta($nom_meta_base_version,$current_version="0.2");
+		ecrire_meta($nom_meta_base_version,$current_version="1.1.0");
 	}
 }
 
