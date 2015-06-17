@@ -58,4 +58,3 @@ function revisions_chats($id_chat, $c=false) {
 		),
 		$c);
 }
-?>

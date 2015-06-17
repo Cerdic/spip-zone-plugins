@@ -19,4 +19,3 @@ function action_supprimer_chat_post($id_chat) {
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_chat/$id_chat'");
 }
-?>

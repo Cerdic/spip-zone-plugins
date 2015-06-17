@@ -20,5 +20,3 @@ function autoriser_chat_voir_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_chat_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
-
-?>

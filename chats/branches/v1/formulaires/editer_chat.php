@@ -19,5 +19,3 @@ function formulaires_editer_chat_verifier_dist($id_chat='new', $retour=''){
 function formulaires_editer_chat_traiter_dist($id_chat='new', $retour=''){
 	return formulaires_editer_objet_traiter('chat', $id_chat, '', '', $retour, '');
 }
-
-?>

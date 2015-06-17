@@ -24,5 +24,3 @@ function chats_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_chats");
 	effacer_meta($nom_meta_base_version);
 }
-
-?>
