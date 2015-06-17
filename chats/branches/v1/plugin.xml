@@ -5,7 +5,6 @@
 	<version_base>1.1</version_base>
 	<install>base/chats_upgrade.php</install>
 
-	
 	<etat>stable</etat>
 	<description>
 		Ce plugin est un exemple de cr&eacute;ation
@@ -14,7 +13,7 @@
 	<lien>http://marcimat.magraine.net/?article344</lien>
 	<icon>images/chat-128.png</icon>
 	<prefix>chats</prefix>
-	
+
 	<!--
 		charger inc/presentation 
 		pour la fonction f_boite_infos du pipeline boite_infos
@@ -35,13 +34,13 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/chats.php</inclure>
 	</pipeline>
-	
+
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
 		<inclure>chats_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<!-- facilitons les champs de formulaires -->
 	<necessite id="saisies" version="[1.5.1;]" />

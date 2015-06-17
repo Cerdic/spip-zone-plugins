@@ -7,12 +7,12 @@
 		[(#SET{titre, #NOM})]
 		[(#SET{retour, [(#URL_ECRIRE{chat_voir}|parametre_url{id_chat,#ID_CHAT})]})]
 	</BOUCLE_titre>
-		
+
 	[(#INCLURE{fond=prive/editer/chat,
 		id_chat=#GET{id_chat},
 		icone_retour=[(#ENV{retour,#GET{retour}}
 			|icone{<:icone_retour:>, #CHEMIN{images/chat-24.png}, #LANG_LEFT })],
 		titre=#GET{titre}
 	})]
-	
+
 </BOUCLE_si_autorise>

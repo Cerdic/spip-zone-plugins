@@ -1,5 +1,5 @@
 <div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_chat,nouveau}'>
-	
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
@@ -7,26 +7,27 @@
 	<form method='post' action='#ENV{action}'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type='hidden' name='id_chat' value='#ENV{id_chat}' />
-		<ul>
+		<ul class='editer-groupe'>
 		[(#SAISIE{input, nom,
 			label=<:chats:label_nom:>,
 			obligatoire=oui})]
-			
+
 		[(#SAISIE{input, race,
 			label=<:chats:label_race:>})]
 
 		[(#SAISIE{input, robe,
 			label=<:chats:label_robe:>,
-			size=4})]		
-			
+			size=4})]
+
 		[(#SAISIE{input, annee_naissance,
 			label=<:chats:label_annee_naissance:>,
 			size=4})]
 
 		[(#SAISIE{textarea, infos,
 			label=<:chats:label_infos:>,
-			explication=<:chats:explication_infos:>})]			
+			explication=<:chats:explication_infos:>})]
 		</ul>
+
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
