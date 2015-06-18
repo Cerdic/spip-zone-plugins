@@ -25,9 +25,9 @@
 		[<span class='erreur_message'>(#GET{erreur_ici})</span>]
 		[<p class='explication'>(#ENV*{explication})</p>]
 		[(#ENV{saisies}|is_array|oui)
-		<[(#VAL{ul}|saisie_balise_structure_formulaire)] class="editer-groupe">
+		<[(#ENV{saisies_base_conteneur,[(#VAL{ul}|saisie_balise_structure_formulaire)]})] class="editer-groupe">
 			#INCLURE{fond=#ENV{fond_generer,"inclure/generer_saisies"}, env, saisies=#ENV{saisies}, from_fieldset='on'}
-		</[(#VAL{ul}|saisie_balise_structure_formulaire)]>
+		</[(#ENV{saisies_base_conteneur,[(#VAL{ul}|saisie_balise_structure_formulaire)]})]>
 		]
 	</fieldset>
 	#ENV*{inserer_fin}
