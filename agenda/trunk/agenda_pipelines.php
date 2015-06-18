@@ -113,7 +113,7 @@ function agenda_optimiser_base_disparus($flux){
 	while ($row = sql_fetch($res))
 		sql_updateq("spip_evenements",array('statut'=>'poubelle'),"id_article=".$row['id_article']);
 
-	// Evenements a la pouvelle
+	// Evenements a la poubelle
 	sql_delete("spip_evenements", "statut='poubelle' AND maj < ".$flux['args']['date']);
 
 	include_spip('action/editer_liens');
