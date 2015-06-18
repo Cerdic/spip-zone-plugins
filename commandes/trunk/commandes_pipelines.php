@@ -316,25 +316,25 @@ function commandes_bank_abos_decrire_echeance($flux) {
 		// On définit la périodicité
 		switch($echeances_type) {
 			case 'mois':
-				$flux['freq'] = 'monthly';
+				$flux['data']['freq'] = 'monthly';
 			case 'annee':
-				$flux['freq'] = 'yearly';
+				$flux['data']['freq'] = 'yearly';
 		}
 		
 		// Si c'est une seule valeur toute simple
 		if (!is_array($echeances)) {
 			$echeances = floatval($echeances);
-			$flux['montant'] = $echeances;
+			$flux['data']['montant'] = $echeances;
 		}
 		// Sinon c'est un peu plus compliqué, et pour l'instant on ne gère que DEUX montants possibles
 		elseif (count($echeances) >= 2) {
 			// Premier montant d'échéances
-			$flux['montant_init'] = $echeances[0]['prix'];
-			$flux['count_init'] = $echeances[0]['nb'];
+			$flux['data']['montant_init'] = $echeances[0]['montant'];
+			$flux['data']['count_init'] = $echeances[0]['nb'];
 			// Deuxième montant d'échéances
-			$flux['montant'] = $echeances[1]['prix'];
+			$flux['data']['montant'] = $echeances[1]['montant'];
 			if (isset($echeances[1]['nb'])) {
-				$flux['count'] = $echeances[1]['nb'];
+				$flux['data']['count'] = $echeances[1]['nb'];
 			}
 		}
 	}
