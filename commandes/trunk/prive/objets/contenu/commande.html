@@ -16,7 +16,30 @@
 		[(#URL_ECRIRE{commandes_detail_edit}|parametre_url{reference,#REFERENCE}|parametre_url{redirect,#ID_COMMANDE|generer_url_entite{commande}}|icone_verticale{<:commandes:detail_ajouter:>, commandes_detail-24.png, edit, right})]
 		<div class="nettoyeur"></div>
 	]
-
+	
+	<BOUCLE_test_echeances(CONDITION){si #ECHEANCES}>
+	<h3><:commandes:commande_echeances_paiements_previsions:></h3>
+	<B_echeances_multiples>
+	<ol class="spip">
+		<BOUCLE_echeances_multiples(DATA){source table,#_afficher_contenu:ECHEANCES}{si #_afficher_contenu:ECHEANCES|is_array}>
+		<BOUCLE_enum(DATA){enum 1,#VALEUR{nb}|sinon{1}}>
+		<li>
+			[(#_echeances_multiples:COMPTEUR_BOUCLE|=={#_echeances_multiples:TOTAL_BOUCLE}|non)
+			[(#_echeances_multiples:VALEUR{montant}|prix_formater)]
+			]
+			[(#_echeances_multiples:COMPTEUR_BOUCLE|=={#_echeances_multiples:TOTAL_BOUCLE}|oui)
+			<:commandes:commande_echeances_paiements_infini:> : [(#_echeances_multiples:VALEUR{montant}|prix_formater)]
+			]
+		</li>
+		</BOUCLE_enum>
+		</BOUCLE_echeances_multiples>
+	</ol>
+	</B_echeances_multiples>
+	<BOUCLE_echeance_unique(CONDITION){si #_afficher_contenu:ECHEANCES|is_numeric}>
+	<p>Tous les paiements : #ECHEANCES</p>
+	</BOUCLE_echeance_unique>
+	</BOUCLE_test_echeances>
+	
 	[(#PLUGIN{bank}|oui)
 	<INCLURE{fond=prive/objets/liste/transactions, id_commande}>
 	]
