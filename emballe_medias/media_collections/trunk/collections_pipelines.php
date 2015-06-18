@@ -113,13 +113,15 @@ function collections_editer_contenu_objet($flux){
 /**
  * Insertion dans le pipeline optimiser_base_disparus (SPIP)
  * 
- * Optimiser la base de donnees en supprimant les liens orphelins
- * de l'objet vers quelqu'un et de quelqu'un vers l'objet.
+ * Optimiser la base de données : collections à la poubelle, liens orphelins sur les collections
  *
  * @param int $n
  * @return int
  */
 function collections_optimiser_base_disparus($flux){
+	// collections à la poubelle
+	sql_delete("spip_collections", "statut='poubelle' AND maj < ".$flux['args']['date']);
+	// optimiser les liens des collections vers des objets effacés et depuis des collections effacées
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('collection'=>'*'),'*');
 	return $flux;
