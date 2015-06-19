@@ -14,8 +14,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
 //define('PLUGIN_Name', "pgn4spip");
 define('PLUGIN_Form', "configurer_" . PLUGIN_Name);
-define('PATH_Conf', find_in_path(pgn4spip_fonctions.php));
-if (!function_exists('InitOptionValueByDefault')) require _DIR_PLUGINS . PATH_Conf;
+//define('PATH_Conf', find_in_path(pgn4spip_fonctions.php));
+//if (!function_exists('InitOptionValueByDefault')) require _DIR_PLUGINS . PATH_Conf;
 
 // Implement "Reinit" and "Save" buttons
 function formulaires_configurer_pgn4spip_traiter()
@@ -35,4 +35,3 @@ function formulaires_configurer_pgn4spip_traiter()
 		return array('message_ok'=>_T('config_info_enregistree'), 'editable'=>true);
 	}
 }
-?>

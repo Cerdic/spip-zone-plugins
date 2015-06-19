@@ -81,7 +81,7 @@ function pgn4spip_prepropre($flux)
 									/* i/o */ $height); // The return value could be not numeric like "b"
 			$strHtml = GenHtml($pgnText, $idTxtArea, $isLive, $isNewPgnSource, $pgnSource, $height);
 			$flux = str_replace($matches[indFullPattern][$indPlugin], $strHtml, $flux);
-			InitOptionValueByDefault($optValue); // Restore values by default defined in PATH_check module
+			//InitOptionValueByDefault($optValue); // Restore values by default defined in PATH_check module
 		}		
 	}
 	return $flux;
