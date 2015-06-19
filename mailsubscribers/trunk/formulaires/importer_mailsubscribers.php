@@ -309,6 +309,7 @@ function importer_mailsubscribers_importe($filename,$options=array()){
 	// debloquer les flags edition
 	include_spip('inc/drapeau_edition');
 	debloquer_tous($GLOBALS['visiteur_session']['id_auteur']);
+	effacer_meta("newsletter_subscribers_count");
 
 
 	return $res;
