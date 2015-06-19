@@ -17,4 +17,4 @@ define('PATH_Conf', 'pgn4spip_conf.php');
 if (!function_exists('ReadCurrentConfiguration')) require 'pgn4spip_conf.php';
 
 // Init $optValue with default values of options overriden with the current configuration
-ReadCurrentConfiguration($optValue); // read from the config form
+//ReadCurrentConfiguration($optValue); // read from the config form

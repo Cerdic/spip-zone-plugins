@@ -12,9 +12,9 @@
  * @see		 http://permalink.gmane.org/gmane.comp.web.spip.devel/62805
  **********************************************************************************/
 if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
-define('PLUGIN_Name', "pgn4spip");
+//define('PLUGIN_Name', "pgn4spip");
 define('PLUGIN_Form', "configurer_" . PLUGIN_Name);
-define('PATH_Conf', PLUGIN_Name . '/' . PLUGIN_Name . '_conf.php');
+define('PATH_Conf', find_in_path(pgn4spip_fonctions.php));
 if (!function_exists('InitOptionValueByDefault')) require _DIR_PLUGINS . PATH_Conf;
 
 // Implement "Reinit" and "Save" buttons

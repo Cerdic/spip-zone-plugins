@@ -26,9 +26,10 @@
 ]
 <BOUCLE_pgn(DOCUMENTS){id_document=#ENV{id}}{extension==pgn}{tout}>
 <?php
-define('PLUGIN_Name', "pgn4spip");
+//define('PLUGIN_Name', "pgn4spip");
 define('PATH_Fonctions', find_in_path(pgn4spip_fonctions.php));
-if (!function_exists('pgn4spip_prepropre')) require _DIR_PLUGINS . PATH_Fonctions;
+if (!function_exists('pgn4spip_prepropre')) require find_in_path(pgn4spip_fonctions);
+
 
 define('QUOTE_HTML', '&quot;'); // '"' in HTML
 define('LenQuote', 6);

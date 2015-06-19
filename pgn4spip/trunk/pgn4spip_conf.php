@@ -44,16 +44,16 @@ function ReadCurrentConfiguration(&$optValue)
 	{
 		foreach ($optValue as $optShort => $valueByDefault)
 		{
-			$valueFromConf = lire_config(PLUGIN_Name . '/cfg_' . $optShort, $valueByDefault);
+			$valueFromConf = lire_config('pgn4spip/cfg_' . $optShort, $valueByDefault);
 			if (IsOptionValueOk($optShort, $valueFromConf, $valueByDefault))
 			{
 				$optValue[$optShort] = $valueFromConf;
 			}
 		}			
-		$isManual = lire_config(PLUGIN_Name . '/cfg_isManual');
+		$isManual = lire_config('pgn4spip/cfg_isManual');
 		if ($isManual != '')
 		{
-			$optValue['fh'] = lire_config(PLUGIN_Name . '/cfg_height_site', ""); // height of the module
+			$optValue['fh'] = lire_config('pgn4spip/cfg_height_site', ""); // height of the module
 		}
 	}
 }
@@ -134,4 +134,3 @@ function IsOptionValueOk($optShort, $valueNew, $valuePrevious)
 	}
 	return false;
 }
-?>

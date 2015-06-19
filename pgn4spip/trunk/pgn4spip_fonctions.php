@@ -35,9 +35,9 @@
  **********************************************************************************/
 if (!defined("_ECRIRE_INC_VERSION")) return; // No direct access allowed to this file
 
-define('PLUGIN_Name', "pgn4spip");
-define('PATH_Conf', 'find_in_path(pgn4spip_conf.php)');
-if (!function_exists('ReadCurrentConfiguration')) require _DIR_PLUGIN_PGN4SPIP . PATH_Conf;
+//define('PLUGIN_Name', "pgn4spip");
+//define('PATH_Conf', 'find_in_path(pgn4spip_conf.php)');
+//if (!function_exists('ReadCurrentConfiguration')) require _DIR_PLUGIN_PGN4SPIP . PATH_Conf;
 
 define('TAG_pgn', "[pP][gG][nN]"); // pgn or PGN
 define('PATH_board',_DIR_RACINE . 'lib/pgn4web/board.html');
