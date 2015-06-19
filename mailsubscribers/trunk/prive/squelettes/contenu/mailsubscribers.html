@@ -9,7 +9,7 @@
 <li>[(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:mailsubscriber:mailsubscribers_tous:>,#ENV{statut,''}|=={''},ajax})]</li>
 
 	<BOUCLE_st(POUR){tableau #LISTE{valide,prepa,prop,refuse,poubelle}}>
-	<BOUCLE_cpt_1(MAILSUBSCRIBERS){id_mailsubscriber?}{email?}{statut=#VALEUR}{listes==#GET{listes}}{recherche?} />
+	<BOUCLE_cpt_1(MAILSUBSCRIBERS){id_mailsubscriber?}{email?}{statut=#VALEUR}{statut<>poubelle}{listes==#GET{listes}}{recherche?} />
 	[(#TOTAL_BOUCLE|oui) <li class='#VALEUR'>[(#GET{self}|parametre_url{statut,#VALEUR}|lien_ou_expose{#VAL{mailsubscriber:mailsubscribers_#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#VALEUR},'ajax'})]</li>]<//B_cpt_1>
 	</BOUCLE_st>
 
