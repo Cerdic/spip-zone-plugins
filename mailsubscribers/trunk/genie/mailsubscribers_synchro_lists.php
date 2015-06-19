@@ -27,5 +27,9 @@ function genie_mailsubscribers_synchro_lists_dist($t){
 		}
 	}
 
+
+	// les prepa et prop de plus d'1 mois d'anciennete passent a la poubelle
+	sql_updateq('spip_mailsubscribers',array('statut'=>'poubelle'),sql_in('statut',array('prepa','prop'))." AND date<".sql_quote(date('Y-m-d H:i:s',strtotime("-1 month"))));
+
 	return 1;
 }
