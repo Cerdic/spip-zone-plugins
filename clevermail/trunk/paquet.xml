@@ -1,7 +1,7 @@
 <paquet
 	prefix="clevermail"
 	categorie="communication"
-	version="3.0.11"
+	version="3.0.12"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/fatcow/32/email_open.png"
@@ -31,6 +31,5 @@
 
 	<menu nom="clevermail" titre="clevermail:clevermail" parent="bando_publication" icone="images/fatcow/16/email_open.png" position="1" action="clevermail_lists" />
 	<menu nom="clevermail2" titre="clevermail:clevermail" parent="naviguer" icone="images/fatcow/32/email_open.png" action="clevermail_lists" />
-	<menu nom="clevermail_creer" titre="clevermail:icone_creer_post" parent="outils_rapides" icone="images/fatcow/16/email_add.png" action="clevermail_post_edit" parametres="new=oui" />
 
 </paquet>
