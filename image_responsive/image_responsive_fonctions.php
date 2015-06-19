@@ -205,8 +205,7 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 				}
 						
 			}
-			
-
+		
 			// Fabriquer automatiquement un srcset s'il n'y a qu'une seule taille d'image (pour 1x et 2x)
 			if (count($tailles) == 1 && $lazy != 1) { // Pas de srcset sur les images lazy
 					$t = $tailles[0];
@@ -229,19 +228,19 @@ function _image_responsive($img, $taille=-1, $lazy=0, $vertical = 0, $medias="",
 						$set =  $fichiers[$t][1]." 1x";
 						$set .=  ",".$fichiers[$t][2]. " 2x";
 
-					
 						if (strlen($m) > 0) {
 							$insm = " media='$m'";
 							$sources .= "<source$insm srcset='$set'>";
 						}
 						else {
-							$set = find_in_path("rien.gif");
+							//$sources .= "<source srcset='$set'>";
+							//$set = find_in_path("rien.gif");
 							$srcset[] = $set;
 						}
 						
 
 					}
-				} else if(_IMAGE_RESPONSIVE_CALCULER) {
+				} else {
 					// Tailles déterminées, pas de @media
 					// dans le cas où l'on force précalcule
 					foreach($tailles as $t) {
