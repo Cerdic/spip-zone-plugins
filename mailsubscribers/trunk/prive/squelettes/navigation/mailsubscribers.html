@@ -2,7 +2,7 @@
 <B_listes>
 	[(#BOITE_OUVRIR{<h3><:mailsubscriber:titre_listes_de_diffusion:></h3>,simple})]
 	<ul class="liste-items">
-		<li class="item[(#ENV{liste}|trim|non)on]">[(#SELF|parametre_url{liste,' '}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{liste}|trim|non})]</li>
+		<li class="item[(#ENV{liste}|trim|non)on]">[(#SELF|parametre_url{liste,''}|lien_ou_expose{<:mailsubscriber:label_toutes_les_listes:>,#ENV{liste}|trim|non})]</li>
 	<BOUCLE_listes(POUR){tableau #REM|mailsubscribers_listes}>
 		<li class="item[(#ENV{liste}|=={#CLE}|oui)on]">[(#SELF|parametre_url{liste,#CLE}|lien_ou_expose{#VALEUR{titre},#ENV{liste}|=={#CLE}})]
 		([(#CLE|mailsubscribers_compte_inscrits)])

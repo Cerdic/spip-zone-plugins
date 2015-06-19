@@ -2,15 +2,17 @@
 <h1 class="grostitre"><:mailsubscriber:titre_mailsubscribers:></h1>
 
 #SET{self,#SELF|parametre_url{debut_mailsubscribers,''}}
-[(#SET{listes,[(#ENV{liste,''}|trim|?{[(^|,)(#ENV{liste})($|,)],'.*'})]})]
+#SET{compte,#ENV{liste,''}|trim|mailsubscribers_compte_inscrits{all}}
+#SET{defaut,#GET{compte}|table_valeur{valide}|?{valide,''}}
+#SET{statut,#ENV{statut}|sinon{#GET{defaut}}|replace{all,''}}
 
 <div class='onglets_simple clearfix'>
 <ul class="statut statut_mailsubscribers">
-<li>[(#GET{self}|parametre_url{statut,''}|lien_ou_expose{<:mailsubscriber:mailsubscribers_tous:>,#ENV{statut,''}|=={''},ajax})]</li>
-
-	<BOUCLE_st(POUR){tableau #LISTE{valide,prepa,prop,refuse,poubelle}}>
-	<BOUCLE_cpt_1(MAILSUBSCRIBERS){id_mailsubscriber?}{email?}{statut=#VALEUR}{statut<>poubelle}{listes==#GET{listes}}{recherche?} />
-	[(#TOTAL_BOUCLE|oui) <li class='#VALEUR'>[(#GET{self}|parametre_url{statut,#VALEUR}|lien_ou_expose{#VAL{mailsubscriber:mailsubscribers_#VALEUR}|_T|concat{' (',#TOTAL_BOUCLE,')'},#ENV{statut,''}|=={#VALEUR},'ajax'})]</li>]<//B_cpt_1>
+	<li>[(#GET{self}|parametre_url{statut,all}|lien_ou_expose{<:mailsubscriber:mailsubscribers_tous:>,#GET{statut}|=={''},ajax})]</li>
+	<BOUCLE_st(POUR){tableau #LISTE{valide,prepa,prop,refuse}}>
+	[(#GET{compte}|table_valeur{#VALEUR}|oui)
+	<li class='#VALEUR'>[(#GET{self}|parametre_url{statut,#VALEUR}|lien_ou_expose{#VAL{mailsubscriber:mailsubscribers_#VALEUR}|_T|concat{' (',#GET{compte}|table_valeur{#VALEUR},')'},#GET{statut}|=={#VALEUR},'ajax'})]</li>
+	]
 	</BOUCLE_st>
 
 	</ul>
@@ -19,7 +21,7 @@
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 <div class="nettoyeur"></div>
 
-<INCLURE{fond=prive/objets/liste/mailsubscribers, par=email, env, ajax, sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
+<INCLURE{fond=prive/objets/liste/mailsubscribers, par=email, statut=#GET{statut}, env, ajax, sinon=<:mailsubscriber:info_aucun_mailsubscriber:>}>
 
 [(#AUTORISER{creer,mailsubscriber})
 	[(#URL_ECRIRE{mailsubscriber_edit,new=oui}|icone_verticale{<:mailsubscriber:icone_creer_mailsubscriber:>,mailsubscriber,new,right})]

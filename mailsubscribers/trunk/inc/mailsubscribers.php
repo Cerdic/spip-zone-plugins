@@ -44,12 +44,47 @@ function mailsubscribers_test_email_obfusque($email){
 
 /**
  * Compter les inscrits a une liste
- * @param $liste
+ * @param string $liste
+ * @param string $statut
  * @return mixed
  */
-function mailsubscribers_compte_inscrits($liste){
-	$subscribers = charger_fonction("subscribers","newsletter");
-	return $subscribers(array($liste),array('count'=>true));
+function mailsubscribers_compte_inscrits($liste,$statut='valide'){
+	static $count = null;
+
+	if (is_null($count)){
+		$count_meta = array();
+		$rows = sql_allfetsel("listes,statut,count(id_mailsubscriber) as n","spip_mailsubscribers",'',"listes,statut");
+		foreach($rows as $row){
+			$ls = explode(",",$row["listes"]);
+			$ls = array_filter($ls);
+			$ls = array_unique($ls);
+			foreach($ls as $l){
+				if (!isset($count[$l][$row['statut']])) $count[$l][$row['statut']] = 0;
+				$count[$l][$row['statut']] += $row['n'];
+				if ($row['statut']=='valide'){
+					$count_meta[$l] += $row['n'];
+				}
+			}
+			if (!isset($count[''][$row['statut']])) $count[''][$row['statut']] = 0;
+			$count[''][$row['statut']] += $row['n'];
+		}
+		// si beaucoup d'inscrits on met en cache
+		if (array_sum($count_meta)>10000){
+			ecrire_meta("newsletter_subscribers_count",serialize($count_meta));
+		}
+	}
+
+	if ($statut=='all'){
+		if (isset($count[$liste])){
+			return $count[$liste];
+		}
+		return array();
+	}
+	if (isset($count[$liste][$statut])){
+		return $count[$liste][$statut];
+	}
+
+	return 0;
 }
 
 /**
