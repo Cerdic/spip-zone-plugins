@@ -2,7 +2,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
- 
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
@@ -12,6 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_exemple' => 'Exemple',
 	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
+
+	// E
+	'explication_niveau_max' => 'Profondeur maximale des sommaires. Cette valeur peut être changée au cas par cas via l\'utilisation de la balise <code>#SOMMAIRE{#TEXTE,2}</code> dans les squelettes, ou <code>&lt;sommaire|niveau_max=2&gt;</code> dans le texte des articles.',
 
 	// L
 	'label_sommaire_automatique' => 'Insertion du sommaire d\'article',
@@ -24,6 +27,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sommaire_automatique_numerote' => 'Type de liste pour le sommaire',
 	'label_sommaire_automatique_numerote_off' => 'liste à puces',
 	'label_sommaire_automatique_numerote_on' => 'liste numérotée',
+	'label_sommaire_niveau_max' => 'Profondeur',
+	'label_sommaire_niveau_max_1' => '1 niveau',
+	'label_sommaire_niveau_max_2' => '2 niveaux',
+	'label_sommaire_niveau_max_3' => '3 niveaux',
+	'label_sommaire_niveau_max_4' => '4 niveaux',
+	'label_sommaire_niveau_max_5' => '5 niveaux',
+	'label_sommaire_niveau_max_6' => '6 niveaux',
 
 	// T
 	'titre_page_configurer_sommaire' => 'Sommaire automatique',

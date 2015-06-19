@@ -37,7 +37,7 @@ function retire_ancres_sommaire($texte){
  * Filtre |ancres_sommaire
  * pour ajouter les ancres de sommaire sur les intertitres d'un texte
  * (enleve aussi le sommaire eventuellement genere automatiquement)
- * 
+ *
  * @param string $texte
  * @return string
  */
@@ -56,8 +56,10 @@ function ancres_sommaire($texte){
  */
 function balise_SOMMAIRE_dist($p){
 	$_texte = interprete_argument_balise(1,$p);
+	$_niveau_max = interprete_argument_balise(2,$p);
+	$_niveau_max = ($_niveau_max?$_niveau_max:"''");
 
-	$p->code = "sommaire_empile_note().affiche_sommaire($_texte).sommaire_depile_note()";
+	$p->code = "sommaire_empile_note().affiche_sommaire($_texte,$_niveau_max).sommaire_depile_note()";
 	$p->interdire_scripts = false; // le contenu vient d'un modele
 	return $p;
 }
@@ -76,9 +78,10 @@ function sommaire_insert_head_css($flux){
  * @param string $texte
  * @return string
  */
-function affiche_sommaire($texte){
+function affiche_sommaire($texte,$niveau_max=''){
+
 	// retirer le(s) sommaire(s) eventuel(s) deja la avant de re-calculer le sommaire
-	return sommaire_post_propre(retire_sommaire($texte), $ajoute=true, $sommaire_seul=true);
+	return sommaire_post_propre(retire_sommaire($texte), $ajoute=true, $sommaire_seul=true, $niveau_max);
 }
 
 /**
@@ -110,14 +113,20 @@ function sommaire_declarer_tables_interfaces($interfaces){
 }
 
 function sommaire_propre($texte, $connect, $env){
+	// on cherche les balises <sommaire>, mais aussi <sommaireN|arg=x|arg=y> et [sommaire]
+	$has_sommaire = preg_match("/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/",$texte);
+	// le niveau maximal peut être passé en paramètre de la balise <sommaire|niveau_max=N>
+	$niveau_max = (preg_match("/[<\[]sommaire.*niveau_max=(\d).*[>\]]/", $texte, $m)) ? $m[1] : '';
+
 	$texte = propre($texte,$connect,$env);
+
 	if (
 		!isset($GLOBALS['meta']['sommaire_automatique'])
 		OR $GLOBALS['meta']['sommaire_automatique']=="on"
 		OR ($GLOBALS['meta']['sommaire_automatique']=="ondemand" AND
-		(strpos($texte,"<sommaire>")!==false OR strpos($texte,"[sommaire]")!==false))
+		$has_sommaire)
 	){
-		$texte = sommaire_post_propre($texte);
+		$texte = sommaire_post_propre($texte,tru,false,$niveau_max);
 	}
 	return $texte;
 }
@@ -173,17 +182,27 @@ function sommaire_filtre_texte_echappe($texte, $filtre, $balises='', $args=NULL)
 	return echappe_retour($texte, 'FILTRETEXTECHAPPE');
 }
 
-function sommaire_filtre($texte, $ajoute=true, $sommaire_seul=false){
+function sommaire_filtre($texte, $ajoute=true, $sommaire_seul=false, $niveau_max=''){
 	$sommaire = sommaire_recenser($texte);
 
+	// le niveau max peut être passé en paramètre (via la balise texte ou squelette)
+	// à défaut on prend la valeur enregistrée dans la config
+	$niveau_max_config = isset($GLOBALS['meta']['sommaire_niveau_max']) ? $GLOBALS['meta']['sommaire_niveau_max'] : '';
+	$niveau_max = (intval($niveau_max) > 0) ? $niveau_max : $niveau_max_config;
+
 	if ($ajoute OR $sommaire_seul){
-		$sommaire = recuperer_fond("modeles/sommaire",array('sommaire'=>$sommaire));
+		// on cherche les balises <sommaire>, mais aussi <sommaireN|arg=x|arg=y> et [sommaire]
+		$pattern = "/[<\[]sommaire(\d+)?(?:\|.*)*[>\]]/";
+		$sommaire = recuperer_fond("modeles/sommaire",array('sommaire'=>$sommaire,'niveau_max'=>$niveau_max));
 		$sommaire = "<!--sommaire-->$sommaire<!--/sommaire-->";
 		if ($sommaire_seul)
 			return $sommaire;
-		if ($p = strpos($texte,"<sommaire>") OR $p = strpos($texte,"[sommaire]")){
-			$texte = substr_replace($texte,$sommaire,$p,strlen("<sommaire>"));
+		if (preg_match($pattern, $texte)) {
+			$texte = preg_replace($pattern, $sommaire, $texte);
 		}
+		/*if ($p = strpos($texte,"<sommaire>") OR $p = strpos($texte,"[sommaire]")){
+			$texte = substr_replace($texte,$sommaire,$p,strlen("<sommaire>"));
+		}*/
 		else
 			$texte = $sommaire . $texte;
 	}
@@ -191,9 +210,10 @@ function sommaire_filtre($texte, $ajoute=true, $sommaire_seul=false){
 	return $texte;
 }
 
-function sommaire_post_propre($texte, $ajoute=true, $sommaire_seul=false){
+function sommaire_post_propre($texte, $ajoute=true, $sommaire_seul=false, $niveau_max=''){
+
 	if (strpos($texte, '<h')!==false)
-		$texte = sommaire_filtre_texte_echappe($texte,'sommaire_filtre','html|code|cadre|frame|script|acronym|cite',array($ajoute,$sommaire_seul));
+		$texte = sommaire_filtre_texte_echappe($texte,'sommaire_filtre','html|code|cadre|frame|script|acronym|cite',array($ajoute,$sommaire_seul,$niveau_max));
 	elseif ($sommaire_seul)
 		return '';
 	return $texte;

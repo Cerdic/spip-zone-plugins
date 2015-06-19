@@ -2,11 +2,12 @@
 [(#CONFIG{sommaire_automatique_numerote}|=={on}|oui)
 	#SET{liste, '#'}
 ]
+#SET{niveau_max,#ENV{niveau_max}|intval|sinon{6}}
 <B_somm>
 <div class="well nav-sommaire nav-sommaire-[(#ENV{sommaire}|count)]">
 	<h2><:sommaire:titre_cadre_sommaire:></h2>
-	<BOUCLE_somm(POUR){tableau #ENV{sommaire}}>
--[(#GET{liste}|str_pad{#VALEUR{niveau},#GET{liste}})] [#VALEUR{id}<-][#VALEUR{titre}->#VALEUR{href}]</BOUCLE_somm>
+	<BOUCLE_somm(POUR){tableau #ENV{sommaire}}><BOUCLE_filtrer(CONDITION){si #VALEUR{niveau}|<={#GET{niveau_max}}}>
+-[(#GET{liste}|str_pad{#VALEUR{niveau},#GET{liste}})] [#VALEUR{id}<-][#VALEUR{titre}->#VALEUR{href}]</BOUCLE_filtrer></BOUCLE_somm>
 </div>
 </B_somm>
 #FILTRE{propre}
