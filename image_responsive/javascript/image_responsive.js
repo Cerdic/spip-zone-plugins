@@ -268,10 +268,18 @@ var didScroll_image_responsive = false
 function charger_image_responsive() {
 	didScroll_image_responsive = true;
 }
-setInterval(function() {
+
+function render_image_responsive() {
     if(didScroll_image_responsive) {
 		didScroll_image_responsive = false;
 		_charger_image_responsive()
     }
-}, 100);
+}
+
+(function animloop_image_responsive(){
+  requestAnimationFrame(animloop_image_responsive);
+  render_image_responsive();
+})();
+
+
 

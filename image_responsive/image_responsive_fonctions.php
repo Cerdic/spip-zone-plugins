@@ -16,6 +16,7 @@ function image_responsive_insert_head($flux) {
 	
 	$flux .= "<script>htactif=$htactif;document.createElement('picture');</script>";
 	$flux .= "
+<script type='text/javascript' src='".find_in_path("javascript/rAF.js")."'></script>
 <script type='text/javascript' src='".find_in_path("javascript/jquery.smartresize.js")."'></script>
 <script type='text/javascript' src='".find_in_path("javascript/image_responsive.js")."'></script>
 <script type='text/javascript' src='".find_in_path("javascript/picturefill.js")."'></script>
@@ -29,6 +30,7 @@ function image_responsive_header_prive($flux) {
 	$flux .= "<script>htactif=false;document.createElement('picture');</script>";
 
 	$flux .= "
+<script type='text/javascript' src='".find_in_path("javascript/rAF.js")."'></script>
 <script type='text/javascript' src='".find_in_path("javascript/jquery.smartresize.js")."'></script>
 <script type='text/javascript' src='".find_in_path("javascript/image_responsive.js")."'></script>
 <script type='text/javascript' src='".find_in_path("javascript/picturefill.js")."'></script>
