@@ -1,7 +1,7 @@
 <paquet
     prefix="comarquage"
     categorie="divers"
-    version="0.40.2"
+    version="0.40.3"
     etat="test"
     compatibilite="[3.0.0;3.0.*]"
     logo="prive/themes/spip/images/picto-comarquage-service-public-50.png"
