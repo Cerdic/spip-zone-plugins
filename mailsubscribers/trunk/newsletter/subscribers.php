@@ -41,8 +41,13 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 		if (is_null($count)
 			AND !_request('var_mode')
 		  AND isset($GLOBALS['meta']['newsletter_subscribers_count'])
-		  AND $c = unserialize($GLOBALS['meta']['newsletter_subscribers_count']))
-			$count = $c;
+		  AND $c = unserialize($GLOBALS['meta']['newsletter_subscribers_count'])){
+			// si beaucoup d'inscrits on utilise le cache,
+			// sinon on fait un calcul peu couteux pour eviter les bugs, notamment au demarrage
+			if (array_sum($c)>10000){
+				$count = $c;
+			}
+		}
 		if (is_null($count)){
 			$rows = sql_allfetsel("listes,count(id_mailsubscriber) as n","spip_mailsubscribers",$where,"listes");
 			foreach($rows as $row){
@@ -54,7 +59,10 @@ function newsletter_subscribers_dist($listes = array(),$options = array()){
 					$count[$l] += $row['n'];
 				}
 			}
-			ecrire_meta("newsletter_subscribers_count",serialize($count));
+			// si beaucoup d'inscrits on met en cache
+			if (array_sum($count)>10000){
+				ecrire_meta("newsletter_subscribers_count",serialize($count));
+			}
 		}
 		$liste = mailsubscribers_normaliser_nom_liste(reset($listes));
 		return (isset($count[$liste])?$count[$liste]:0);
