@@ -189,6 +189,8 @@ function sommaire_filtre($texte, $ajoute=true, $sommaire_seul=false, $niveau_max
 	// à défaut on prend la valeur enregistrée dans la config
 	$niveau_max_config = isset($GLOBALS['meta']['sommaire_niveau_max']) ? $GLOBALS['meta']['sommaire_niveau_max'] : '';
 	$niveau_max = (intval($niveau_max) > 0) ? $niveau_max : $niveau_max_config;
+	// on filtre les entrées du sommaire selon le niveau max
+	$sommaire = sommaire_filtrer_niveaux($sommaire, $niveau_max);
 
 	if ($ajoute OR $sommaire_seul){
 		// on cherche les balises <sommaire>, mais aussi <sommaireN|arg=x|arg=y> et [sommaire]
@@ -299,4 +301,37 @@ function sommaire_intertitre_ancre($titre, $h, $ancres_vues=array()){
 	}
 	return "$ancre-$i";
 }
+
+/**
+ * Retire d'un sommaire les entrées d'une profondeur supérieures à un niveau donné
+ *
+ * @param array $sommaire
+ *     tableau associatif des entrées du sommaire
+ * @param int $niveau_max
+ *     niveau de profondeur maximal
+ * @return array
+ *     tableau associatif des entrées du sommaire expurgé de certaines entrées
+ */
+function sommaire_filtrer_niveaux($sommaire, $niveau_max=''){
+
+	$niveau_max = intval($niveau_max);
+	if (
+		$niveau_max <= 0
+		OR $niveau_max > 5
+	)
+	return $sommaire;
+
+	foreach ($sommaire as $k => $v) {
+		if (
+			isset($v['niveau'])
+			AND is_int($v['niveau'])
+			AND $v['niveau'] > $niveau_max
+		) {
+			unset($sommaire[$k]);
+		}
+	}
+
+	return $sommaire;
+}
+
 ?>
