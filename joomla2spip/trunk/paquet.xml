@@ -5,7 +5,7 @@
 	etat="experimental"
 	compatibilite="[2.0.0;3.0.*]"
 	logo="img_pack/icon.png"
-	documentation="http://zone.spip.org/trac/spip-zone/browser/_plugins_/joomla2spip/notes.txt"
+	documentation="http://zone.spip.org/trac/spip-zone/browser/_plugins_/joomla2spip/trunk/notes.txt"
 >	
 
 	<nom>Joomla2SPIP</nom>
