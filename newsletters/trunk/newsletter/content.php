@@ -42,7 +42,7 @@ function newsletter_content_dist($id){
 	// permet de surcharger le titre statique en base par un titre dynamique plus complexe
 	if ($corps['html']
 	  AND stripos($corps['html'],"<title")!==false
-	  AND preg_match(",<title[^>]*>(.*)</title>Uims",$corps['html'],$match)){
+	  AND preg_match(",<title[^>]*>(.*)</title>,Uims",$corps['html'],$match)){
 		include_spip('inc/filtres');
 		$corps['sujet'] = textebrut($match[1]);
 	}
