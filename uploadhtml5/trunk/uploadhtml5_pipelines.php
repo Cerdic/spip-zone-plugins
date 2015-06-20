@@ -45,7 +45,7 @@ function uploadhtml5_header_prive($flux) {
 function uploadhtml5_formulaire_fond($flux) {
 
     // Simplification de variable
-    $objet    = isset($flux['args']['contexte']['objet'])    ? $flux['args']['contexte']['objet'] : '';
+    $objet = isset($flux['args']['contexte']['objet']) ? $flux['args']['contexte']['objet'] : '';
     $id_objet = isset($flux['args']['contexte']['id_objet']) ? $flux['args']['contexte']['id_objet'] : 0;
 
     if ($flux['args']['form'] == 'joindre_document') {
