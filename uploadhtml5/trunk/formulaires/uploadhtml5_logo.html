@@ -17,12 +17,12 @@
 
   <script type="text/javascript">
      var options = {
-       paramName: 'file_logo',
+       paramName: "file_logo",
        maxFilesize: #CONFIG{uploadhtml5/max_file_size},
        // Pour les logos, on ne veux qu'un seul fichier
        maxFiles: 1,
        // Dans le cas des logo, on ne veux que des images
-       acceptedFiles: '[(#REM|mine_type_logos)]',
+       acceptedFiles: "[(#REM|mine_type_logos)]",
 
 
        [success: function(file, response) {
