@@ -7,13 +7,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// 0
+	'0' => '--------------',
+
 	// A
 	'alt_logo_conf' => 'Logo van plugin Notifications',
 	'article_prive' => 'Publicatie van artikelen',
-	'article_prive_admins_restreints' => '<strong>Beheerders</strong>: Beperkte beheerders ontvangen notificaties bij voorstellen voor publicatie in hun rubriek', # MODIF
-	'article_prive_auteurs' => '<strong>Auteurs</strong>: Auteurs ontvangen notificaties bij het voorstellen, publiceren of verwijderen van hun artikel(en)', # MODIF
+	'article_prive_admins_restreints' => '<strong>Beperkte beheerders</strong>: Beperkte beheerders ontvangen notificaties bij voorstellen voor publicatie in hun rubriek. Voor algehele beheerders kijk je bij <a href="?exec=configurer_interactions#suivi_edito_non">  de standaard tool van SPIP</a>.',
+	'article_prive_auteurs' => '<strong>Auteurs</strong>: Auteurs ontvangen notificaties bij het voorstellen, publiceren of verwijderen van hun artikel(en).',
+	'article_prive_auteurs_refus' => '<strong>Auteurs</strong>: auteurs ontvangen bericht bij weigering van hun artikel(en).',
+	'article_prive_publieur' => 'Als een van de auteurs degene is die het artikel publiceert wordt geen bericht gestuurd.',
 	'article_propose_detail' => 'Artikel "@titre@" is ter publicatie voorgesteld sinds',
-	'article_propose_sujet' => '[@nom_site_spip@] Stelt voor: @titre@', # MODIF
+	'article_propose_sujet' => '[@nom_site_spip@] Stelt voor: @titre@',
 	'article_propose_titre' => 'Voorgesteld artikel
 	------------------',
 	'article_propose_url' => 'Je wordt voorgesteld het te bekijken en je mening te geven
@@ -22,6 +27,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'article_publie_sujet' => '[@nom_site_spip@] GEPUBLICEERD: @titre@',
 	'article_publie_titre' => 'Gepubliceerd artikel
 	--------------------',
+	'article_refuse_detail' => 'Artikel "@titre@" wordt geweigerd door @connect_nom@.',
+	'article_refuse_sujet' => '[@nom_site_spip@] GEWEIGERD: @titre@',
+	'article_refuse_titre' => 'Geweigerd artikel',
 	'article_valide_date' => 'Onder voorbehoud van wijzigingen zal dit artikel worden gepubliceerd',
 	'article_valide_detail' => 'Artikel "@titre@" werd gevalideerd door @connect_nom@.',
 	'article_valide_sujet' => '[@nom_site_spip@] GEVALIDEERD: @titre@',
@@ -51,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_prives_auteur' => '<strong>Auteurs</strong>: Auteurs ontvangen notificaties uit een forum dat onder hun artikel is geplaatst of van hun berichten in de privé-omgeving.',
 	'forum_prives_moderateur' => 'Geef hieronder het e-mailadres van de moderator van de forums in het privé-gedeelte (of meerdere, gescheiden door een komma).',
 	'forum_prives_thread' => '<strong>Draad van de discussie</strong>: deelnemers aan dezelfde discussie in het privé-forum ontvangen notificaties.',
+	'forums_admins_restreints' => '<strong>Beheerders</strong>: beperkte beheerders ontvangen berichten wanneer nieuwe berichten aan de root worden gepubliceerd.',
 	'forums_limiter_rubriques_explication' => 'Vermeld hier de identificatie van iedere rubriek waarvoor de notificaties moeten worden geactiveerd, gescheiden door een komma. bv: "11,26"',
 	'forums_limiter_rubriques_label' => 'Uitsluitend deze rubrieken:',
 	'forums_prives' => 'Privé forums',
@@ -58,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forums_public_a_noter' => 'Let op: bij een gemodeeerd forum ontvangen alleen de auteurs die mogen goedkeuren een noticifatie bij een nieuw bericht; anderen ontvangen pas een bericht na goedkeuring.',
 	'forums_public_article' => '<strong>Reactie op een artikel</strong>: personen die via de publieke site op een artikel reageren, ontvangen een notificatie (zinvol bij een "plat" forum). Uitgezonderd zijn verwijderde of als SPAM aangeduide berichten.',
 	'forums_public_auteurs' => '<strong>Auteurs</strong>: auteurs ontvangen notificaties van publieke forumberichten onder hun artikel.',
+	'forums_public_liste' => '<strong>Extra adres: </strong>een mailadres (of meerdere door een komma gescheiden) dat berichten over geplaatste publieke berichten ontvangt, wat bijvoorbeeld nuttig kan zijn voor een niet gemodereerd forum.',
 	'forums_public_moderateur' => 'Geef hieronder het e-mailadres van de moderator van de publieke forums (of meerdere, gescheiden door een komma).',
 	'forums_public_thread' => '<strong>Draad van een discussie</strong>: deelnemers aan dezelfde publieke discussie ontvangen forumnotificaties. Uitgezonderd zijn verwijderde of als SPAM aangeduide berichten.',
 
