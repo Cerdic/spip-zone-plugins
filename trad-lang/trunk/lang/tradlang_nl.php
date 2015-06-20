@@ -277,6 +277,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_suppression_module_trads_ok' => 'Module @module@ is verwijderd. Ook werden @nb@ bijbehorende vertaalitems verwijderd.',
 	'message_synchro_base_fichier_ok' => 'Het bestand en de database zijn gesynchroniseerd.',
 	'message_synchro_base_fichier_pas_ok' => 'Het bestand en de database zijn niet gesynchroniseerd.',
+	'message_upload_nb_modifie' => 'Je hebt @nb@ taalstrings aangepast.',
 	'message_upload_nb_modifies' => 'Je hebt @nb@ taalstrings aangepast.',
 	'module_deja_importe' => 'Module "@module@" werd al geïmporteerd',
 	'moduletitre' => 'Beschikbare modules',
