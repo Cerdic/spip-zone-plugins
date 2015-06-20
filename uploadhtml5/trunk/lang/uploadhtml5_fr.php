@@ -5,16 +5,15 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// U
-	'uploadhtml5_titre' => 'Formulaire upload html5',
 
-	// C
-	'cfg_titre_parametrages' => 'Paramétrages',
+    'uploadhtml5_titre' => 'Formulaire upload html5',
+
+
+    'cfg_titre_parametrages' => 'Paramétrages',
     'label_charger_public' => "Script dans l'espace public",
     'case_charger_public' => "Charger les scripts sur dans l'espace public",
 
-	// T
-	'titre_page_configurer_uploadhtml5' => 'Configuration du formulaire d\'upload html5',
+    'titre_page_configurer_uploadhtml5' => 'Configuration du formulaire d\'upload html5',
 
     'label_remplacer_editer_logo' => "Remplacer logo",
     'case_remplacer_editer_logo' => "Remplacer le formulaire d'upload de logo de SPIP",
@@ -22,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     // M
     'max_file_size' => 'Taille maximum des fichiers',
     'explication_max_file_size' => "Taille maximum des fichiers (en MB). Il est conseillé d'utiliser la valeur du serveur.",
+
     'max_file' => 'Nombre maximum de fichiers',
     'explication_max_file' => 'Nombre de maximum de fichiers qui peuvent être uploadés simultanément (0 pour ne pas limiter).',
 
