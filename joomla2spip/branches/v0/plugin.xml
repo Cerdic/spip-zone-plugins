@@ -2,7 +2,7 @@
 	<nom>Joomla2SPIP</nom>
 	<slogan>Migrer de Joomla vers SPIP</slogan>
 	<auteur>[BoOz->booz@rezo.net]</auteur>
-	<version>0.2.2</version>
+	<version>0.2.3</version>
 	<licence>GNU/GPL</licence>
 	<etat>experimental</etat>
 	<icon>img_pack/icon.png</icon>

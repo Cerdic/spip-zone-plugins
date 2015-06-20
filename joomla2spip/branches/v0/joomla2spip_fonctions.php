@@ -320,7 +320,7 @@ return  ;
 function joomla2spip_auteur_import($mon_auteur){
 	if($mon_auteur['statut'] == "Super Administrator" || $mon_auteur['statut'] == "Administrator") $statut = "0minirezo" ;
 	else if($mon_auteur['statut'] == "Editor" || $mon_auteur['statut'] == "Publisher") $statut = "1comite" ;
-	else($mon_auteur['statut'] == "visiteur") $statut = "6forum" ;
+	else if($mon_auteur['statut'] == "visiteur") $statut = "6forum" ;
 
 	$email = $mon_auteur['email'];
 	$login = $mon_auteur['login'];
