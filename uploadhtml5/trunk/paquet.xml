@@ -1,24 +1,24 @@
 <paquet
-	prefix="uploadhtml5"
-	categorie="multimedia"
-	version="1.2.7"
-	etat="dev"
-	compatibilite="[3.0.0;3.1.*]"
-	logo="prive/themes/spip/images/uploadhtml5-64.png"
-	documentation="http://contrib.spip.net/Formulaire-d-upload-en-html5"
-	schema="1.0.0"
+  prefix="uploadhtml5"
+  categorie="multimedia"
+  version="1.2.7"
+  etat="dev"
+  compatibilite="[3.0.0;3.1.*]"
+  logo="prive/themes/spip/images/uploadhtml5-64.png"
+  documentation="http://contrib.spip.net/Formulaire-d-upload-en-html5"
+  schema="1.0.0"
 >
 
-	<nom>Formulaire upload html5</nom>
+  <nom>Formulaire upload html5</nom>
 
-	<auteur lien='http://p.henix.be'>Phenix</auteur>
+  <auteur lien='http://p.henix.be'>Phenix</auteur>
 
-	<licence>GNU/GPL</licence>
+  <licence>GNU/GPL</licence>
 
-	<necessite nom="saisies" compatibilite="[2.0.3;]" />
-	<necessite nom="spip_bonux" compatibilite="[3.2.0;]" />
+  <necessite nom="saisies" compatibilite="[2.0.3;]" />
+  <necessite nom="spip_bonux" compatibilite="[3.2.0;]" />
 
-	<pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
+  <pipeline nom="jquery_plugins" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="insert_head_css" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="header_prive" inclure="uploadhtml5_pipelines.php" />
   <pipeline nom="formulaire_fond" inclure="uploadhtml5_pipelines.php" />
