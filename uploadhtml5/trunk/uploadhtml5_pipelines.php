@@ -77,8 +77,13 @@ function uploadhtml5_formulaire_fond($flux) {
                 )
             );
 
+            $config = lire_config('uploadhtml5');
             // Injecter uloadhtml5 au dessus du formulaire joindre_document.
-            $flux['data'] = $uploadhtml5.$flux['data'];
+            if (isset($config['remplacer_editer_logo'])
+                and $config['remplacer_editer_logo'])
+                $flux['data'] = $uploadhtml5;
+            else
+                $flux['data'] = $uploadhtml5.$flux['data'];
         }
     }
 

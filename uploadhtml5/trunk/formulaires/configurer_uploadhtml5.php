@@ -13,6 +13,14 @@ function formulaires_configurer_uploadhtml5_saisies_dist() {
             )
         ),
         array(
+            'saisie' => 'case',
+            'options' => array(
+                'nom' => 'remplacer_editer_logo',
+                'label' => _T('uploadhtml5:label_remplacer_editer_logo'),
+                'label_case' => _T('uploadhtml5:case_remplacer_editer_logo')
+            )
+        ),
+        array(
             'saisie' => 'input',
             'options' => array(
                 'nom' => 'max_file_size',

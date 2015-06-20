@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_page_configurer_uploadhtml5' => 'Configuration du formulaire d\'upload html5',
 
+    'label_remplacer_editer_logo' => "Remplacer logo",
+    'case_remplacer_editer_logo' => "Remplacer le formulaire d'upload de logo de SPIP",
 
     // M
     'max_file_size' => 'Taille maximum des fichiers',
