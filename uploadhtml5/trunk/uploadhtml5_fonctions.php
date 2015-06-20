@@ -43,26 +43,13 @@ function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='
     if (!empty($docs)) {
         // On ajoute les documents a un objet SPIP.
         $ajouter_documents = charger_fonction('ajouter_documents','action');
-        $id_documents = $ajouter_documents(
+        $ajouter_documents(
             $id_document,
             $docs,
             $objet, // Article, rubrique, autre objet
             $id_objet,
             $mode
         );
-
-        $config = lire_config('uploadhtml5');
-        // Gestion de l'auto titre des documents
-        if (isset($config['autotitre']) and $config['autotitre']) {
-            foreach($id_documents as $key => $id_document) {
-                sql_updateq(
-                    'spip_documents',
-                    array('titre' => $docs[$key]['name']),
-                    'id_document='.intval($id_document)
-                );
-            }
-        }
-
     }
 }
 

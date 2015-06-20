@@ -13,15 +13,6 @@ function formulaires_configurer_uploadhtml5_saisies_dist() {
             )
         ),
         array(
-            'saisie' => 'case',
-            'options' => array(
-                'nom' => 'autotitre',
-                'label' => _T('uploadhtml5:label_autotitre'),
-                'label_case' => _T('uploadhtml5:case_autotitre'),
-                'explication' => _T('uploadhtml5:explication_autotitre'),
-            )
-        ),
-        array(
             'saisie' => 'input',
             'options' => array(
                 'nom' => 'max_file_size',
