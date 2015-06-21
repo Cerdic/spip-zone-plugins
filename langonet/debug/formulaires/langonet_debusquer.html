@@ -1,0 +1,57 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:langonet:titre_form_debusquer:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
+	<form method="post" action="#ENV{action}"><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class="explication"><:langonet:info_debusquer:></p>
+		<ul>
+			<li class="editer_fichier_test obligatoire[(#ENV{erreurs}|table_valeur{fichier_test}|oui) erreur]">
+				<label for="fichier_test"><:langonet:label_fichier_test:></label>
+				<p class="explication"><:langonet:info_fichier_test:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_test})</span>]
+			<B_fichiers>
+				<select name="fichier_test" id="fichier_test">
+			<BOUCLE_fichiers(DATA) {source table, #ENV{_fichiers_test}}>
+					<option value="#VALEUR"[(#ENV{fichier_test}|=={#VALEUR}|oui) selected="selected"]>
+						#VALEUR
+					</option>
+			</BOUCLE_fichiers>
+				</select>
+			</B_fichiers>
+			</li>
+
+			<li class="editer_regexp obligatoire[(#ENV{erreurs}|table_valeur{regexp}|oui) erreur]">
+				<label for="regexp"><:langonet:label_regexp:></label>
+				<p class="explication"><:langonet:info_regexp:></p>
+				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{regexp})</span>]
+			<B_regexps>
+				<select name="regexp" id="regexp">
+			<BOUCLE_regexps(DATA) {source table, #ENV{_regexps}}>
+					<option value="#VALEUR"[(#ENV{regexp}|=={#VALEUR}|oui) selected="selected"]>
+						#CLE
+					</option>
+			</BOUCLE_regexps>
+				</select>
+			</B_regexps>
+			</li>
+		</ul>
+
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:langonet:bouton_lister:>" />
+		</p>
+	</div></form>
+	</BOUCLE_editable>
+</div>
+
+[(#REM) <!-- Affichage des resultats --> ]
+<B_resultats>
+<BOUCLE_resultats(DATA) {source table, #ENV*{message_ok/resultats}}>
+
+</BOUCLE_resultats>
+
+</B_resultats>
