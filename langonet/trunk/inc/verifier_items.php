@@ -5,45 +5,47 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // Items de langue dans les fichiers PHP
 // déclaration d'items dans base/module.php
 if (!defined('_LANGONET_ITEM_PHP_OBJET'))
-	define("_LANGONET_ITEM_PHP_OBJET", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%S');
+	define("_LANGONET_ITEM_PHP_OBJET", '%=>\s*[\'"](?:([a-z0-9_]+):)([^\/ \']*)[\'"]%Sm');
 // Fontions PHP _T ou _U avec apostrophe
 if (!defined('_LANGONET_ITEM_PHP_TRADA'))
-	define("_LANGONET_ITEM_PHP_TRADA", '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%S');
+	define("_LANGONET_ITEM_PHP_TRADA", '%_[TU]\s*[(]\s*\'(?:([a-z0-9_]+):)?([^\']*)\'\s*([^.,)]*[^)]*)%Sm');
 // Fontions PHP _T ou _U avec guillemet
 if (!defined('_LANGONET_ITEM_PHP_TRADG'))
-	define("_LANGONET_ITEM_PHP_TRADG", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%S');
+	define("_LANGONET_ITEM_PHP_TRADG", '%_[TU]\s*[(]\s*"(?:([a-z0-9_]+):)?([^"]*)"\s*([^.,)]*[^)]*)%Sm');
 
 // Items de langue dans les fichiers HTML
+
 // balise <:module:raccourci:> et toutes les formes admises avec paramètres et filtres
 if (!defined('_LANGONET_ITEM_HTML_BALISE'))
-	define("_LANGONET_ITEM_HTML_BALISE", "%<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%s");
-// fonction |singulier_ou_pluriel{arg1, arg2, nb} pour chaque argument
+	define("_LANGONET_ITEM_HTML_BALISE", "%<:(?:([a-z0-9_-]+):)?((?:[^:<>|{]+(?:<[^>]*>)?)*)([^:>]*):>%sm");
+// Fonction |singulier_ou_pluriel{arg1, arg2, nb} pour chaque argument. Le nb est indispensable pour la détection de
+// l'arg2
 if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1'))
-	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1", "%\|singulier_ou_pluriel{(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s");
+	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_1", "%\|singulier_ou_pluriel{(?:[\s]*(?:(?:#[A-Z_0-9]+{)*)(?:([a-z0-9_-]+):)?([a-z0-9_]+))([^,]*),%sm");
 if (!defined('_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2'))
-	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2", "%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:([a-z0-9_-]+):)?([a-z0-9_]+))[^}]*}%s");
-// fonction _T
+	define("_LANGONET_ITEM_HTML_FILTRE_PLURIEL_2", "%\|singulier_ou_pluriel{[^,]*,(?:[\s]*(?:(?:#[A-Z_0-9]+{)*)(?:([a-z0-9_-]+):)?([a-z0-9_]+))([^,]*),%sm");
+// Fonction _T
 if (!defined('_LANGONET_ITEM_HTML_FILTRE_T'))
-	define("_LANGONET_ITEM_HTML_FILTRE_T", "%#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+(?:{[^.]*})?)*)\|_T%Us");
+	define("_LANGONET_ITEM_HTML_FILTRE_T", "%#[A-Z_0-9]+{(?:([a-z0-9_-]+):)?([a-z0-9_]+)}((?:\|\w+(?:{[^.]*})?)*)\|_T%Usm");
 
 // Items de langue dans les fichiers YAML
 if (!defined('_LANGONET_ITEM_YAML'))
-	define("_LANGONET_ITEM_YAML", ",<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,s");
+	define("_LANGONET_ITEM_YAML", ",<:(?:([a-z0-9_-]+):)?([a-z0-9_]+):>,sm");
 
 // Items de langue dans les fichiers XML
 // -- pour plugin.xml
 if (!defined('_LANGONET_ITEM_PLUGINXML'))
-	define("_LANGONET_ITEM_PLUGINXML", ",<titre>\s*(?:([a-z0-9_-]+):)?([a-z0-9_]+)\s*</titre>,is");
+	define("_LANGONET_ITEM_PLUGINXML", ",<titre>\s*(?:([a-z0-9_-]+):)?([a-z0-9_]+)\s*</titre>,ism");
 // -- pour paquet.xml
 if (!defined('_LANGONET_ITEM_PAQUETXML'))
-	define("_LANGONET_ITEM_PAQUETXML", ",titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],is");
+	define("_LANGONET_ITEM_PAQUETXML", ",titre=['\"](?:([a-z0-9_-]+):)?([a-z0-9_]+)['\"],ism");
 // -- pour les autres fichiers XML
 // TODO : comment faire marcher le fait que le tag est le même (contenu) et que les quotes aussi (attribut)
 // TODO : comment faire aussi pour ne pas capturer ces portions
 if (!defined('_LANGONET_ITEM_XML_CONTENU'))
-	define("_LANGONET_ITEM_XML_CONTENU", ",<\w+>\s*(?:<:)*(?:([a-z0-9_-]+):)([a-z0-9_]+)(?::>)*\s*</\w+>,is");
+	define("_LANGONET_ITEM_XML_CONTENU", ",<\w+>\s*(?:<:)*(?:([a-z0-9_-]+):)([a-z0-9_]+)(?::>)*\s*</\w+>,ism");
 if (!defined('_LANGONET_ITEM_XML_ATTRIBUT'))
-	define("_LANGONET_ITEM_XML_ATTRIBUT", ",\w+=['\"](?:([a-z0-9_-]+):)([a-z0-9_]+)['\"],is");
+	define("_LANGONET_ITEM_XML_ATTRIBUT", ",\w+=['\"](?:([a-z0-9_-]+):)([a-z0-9_]+)['\"],ism");
 
 $GLOBALS['langonet_regexp'] = array(
 	'paquet.xml' => array(_LANGONET_ITEM_PAQUETXML),
@@ -145,21 +147,25 @@ function collecter_occurrences($fichiers) {
 	);
 
 	foreach ($fichiers as $_fichier) {
-		if ($contenu = file($_fichier)) {
+		if ($contenu = file_get_contents($_fichier)) {
 			$type_fichier = identifier_type_fichier($_fichier);
 			if (isset($GLOBALS['langonet_regexp'][$type_fichier])) {
 				$regexps = $GLOBALS['langonet_regexp'][$type_fichier];
-				foreach ($contenu as $_no_ligne => $_ligne) {
-					foreach ($regexps as $_regexp) {
-						if (preg_match_all($_regexp, $_ligne, $matches, PREG_OFFSET_CAPTURE)) {
-							foreach ($matches[0] as $_cle => $_expression) {
-								$occurrence[0] = $_expression[0];
-								$occurrence[1] = $matches[1][$_cle][0];
-								$occurrence[2] = $matches[2][$_cle][0];
-								$occurrence[3] = isset($matches[3]) ? $matches[3][$_cle][0] : '';
-								$occurrence[4] = $_expression[1];
-								$utilises = memoriser_occurrence($utilises, $occurrence, $_fichier, $_no_ligne, $_ligne, $_regexp);
-							}
+				// On stocke aussi le fichier à scanner sous forme d'un tableau de lignes afin de rechercher
+				// les numéros de ligne et de colonne des occurrences
+				$lignes = file($_fichier);
+				foreach ($regexps as $_regexp) {
+					if (preg_match_all($_regexp, $contenu, $matches, PREG_OFFSET_CAPTURE)) {
+						foreach ($matches[0] as $_cle => $_expression) {
+							$occurrence[0] = $_expression[0];
+							$occurrence[1] = $matches[1][$_cle][0];
+							$occurrence[2] = $matches[2][$_cle][0];
+							$occurrence[3] = isset($matches[3]) ? $matches[3][$_cle][0] : '';
+							// Recherche de la ligne et de la colonne à partir de l'offset global de début
+							// de l'expression
+							list($ligne, $no_ligne, $no_colonne) = rechercher_ligne($_expression[1], $lignes);
+							$occurrence[4] = $no_colonne;
+							$utilises = memoriser_occurrence($utilises, $occurrence, $_fichier, $no_ligne, $ligne, $_regexp);
 						}
 					}
 				}
@@ -197,6 +203,29 @@ function identifier_type_fichier($fichier) {
 			$type = strtolower($informations['basename']);
 
 	return $type;
+}
+
+
+function rechercher_ligne($offset, $lignes) {
+
+	$no_ligne = $no_colonne = 0;
+	$ligne = $lignes[0];
+
+	$somme_ligne = 0;
+	foreach ($lignes as $_no_ligne => $_ligne) {
+		$longueur_ligne = strlen($_ligne);
+		$somme_ligne += $longueur_ligne;
+		if ($somme_ligne > $offset) {
+			// on a trouvé la ligne
+			$ligne = $_ligne;
+			$no_ligne = $_no_ligne;
+			// il faut déterminer la colonne
+			$no_colonne = $longueur_ligne - ($somme_ligne-$offset);
+			break;
+		}
+	}
+
+	return array($ligne, $no_ligne, $no_colonne);
 }
 
 /**
@@ -275,8 +304,10 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 	if ($suite
 	AND !$raccourci_partiellement_variable
 	AND (($regexp == _LANGONET_ITEM_HTML_FILTRE_T)
-		OR in_array($regexp, $GLOBALS['langonet_regexp']['php']))) {
-			// Cas HTML #VAL{xxx}|yyy|_T dynamique ou PHP _T("xxx:$yyy")
+		OR ($regexp == _LANGONET_ITEM_HTML_FILTRE_PLURIEL_1)
+		OR ($regexp == _LANGONET_ITEM_HTML_FILTRE_PLURIEL_2)
+		OR in_array($regexp, $GLOBALS['langonet_regexp']['php']))	) {
+			// Cas HTML ou PHP dynamique
 			$raccourci_partiellement_variable = true;
 	}
 
@@ -299,6 +330,9 @@ function memoriser_occurrence($utilisations, $occurrence, $fichier, $no_ligne, $
 	$utilisations['occurrences'][$item][$fichier][$no_ligne][] = $occurrence;
 	$utilisations['suffixes'][$item] = $raccourci_partiellement_variable;
 	$utilisations['variables'][$item] = $raccourci_totalement_variable;
+
+	// Construction d'une liste plate pour debug
+	$occurrence[] = $no_ligne;
 	$utilisations['debug'][] = $occurrence;
 
 	return $utilisations;
