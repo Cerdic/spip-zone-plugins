@@ -9,14 +9,14 @@
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication"><:langonet:info_lister:></p>
-		<ul>
-			<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
 				<label for="fichier_langue"><:langonet:label_fichier_liste:></label>
 				<p class="explication"><:langonet:info_fichier_liste:></p>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
 				[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
 			</li>
-			<li class="editer_affichage[(#ENV{erreurs}|table_valeur{affichage}|oui) erreur]">
+			<li class="editer editer_affichage[(#ENV{erreurs}|table_valeur{affichage}|oui) erreur]">
 				<label><:langonet:label_affichage:></label>
 				<p class="explication"><:langonet:info_affichage:></p>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{affichage})</span>]

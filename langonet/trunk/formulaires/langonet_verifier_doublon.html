@@ -12,8 +12,8 @@
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication"><:langonet:info_verifier_doublon:></p>
-		<ul>
-			<li class="editer_verification[(#ENV{erreurs}|table_valeur{verification}|oui) erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_verification[(#ENV{erreurs}|table_valeur{verification}|oui) erreur]">
 				<label><:langonet:label_verification:></label>
 				<div class="choix">
 					<input type="radio" value="texte" id="verification_texte" class="radio" name="verification" [(#ENV{verification, texte}|=={texte}|oui) checked="checked"] />
@@ -25,7 +25,7 @@
 				</div>
 			</li>
 			<B_modules>
-			<li class="editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
+			<li class="editer editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
 				<p class="explication"><:langonet:info_modules_recherche_item:></p>
 				<label><:langonet:label_modules:></label>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{modules})</span>]

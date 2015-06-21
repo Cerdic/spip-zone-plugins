@@ -9,14 +9,14 @@
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication">#ENV**{_explication}</p>
-		<ul>
-			<li class="editer_pattern obligatoire[(#ENV{erreurs}|table_valeur{pattern}|oui) erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_pattern obligatoire[(#ENV{erreurs}|table_valeur{pattern}|oui) erreur]">
 				<label for="pattern_#ENV{type}"><:langonet:label_pattern:></label>
 				<p class="explication">#ENV**{_info_pattern}</p>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pattern})</span>]
 				<input type="text" name="pattern" value="#ENV{pattern}" id="pattern_#ENV{type}" class="text" />
 			</li>
-			<li class="editer_correspondance[(#ENV{erreurs}|table_valeur{correspondance}|oui) erreur]">
+			<li class="editer editer_correspondance[(#ENV{erreurs}|table_valeur{correspondance}|oui) erreur]">
 				<label><:langonet:label_correspondance:></label>
 				<div class="choix">
 					<input type="radio" name="correspondance" value="egal" id="correspondance_egal_#ENV{type}" class="radio"[ (#ENV{correspondance, egal}|=={egal}|oui)checked="checked"] />
@@ -32,7 +32,7 @@
 				</div>
 			</li>
 			<B_modules>
-			<li class="editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
+			<li class="editer editer_modules obligatoire[(#ENV{erreurs}|table_valeur{modules}|oui) erreur]">
 				<p class="explication">#ENV**{_info_modules}</p>
 				<label><:langonet:label_modules:></label>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{modules})</span>]

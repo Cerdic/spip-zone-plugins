@@ -10,8 +10,8 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		<p class="explication"><:langonet:info_verifier_l:></p>
-		<ul>
-			<li class="editer_dossier_scan obligatoire[(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_dossier_scan obligatoire[(#ENV{erreurs}|table_valeur{dossier_scan}|oui) erreur]">
 				<label for="dossier_scan"><:langonet:label_arborescence_scannee:></label>
 				<p class="explication"><:langonet:info_arborescence_scannee:></p>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{dossier_scan})</span>]

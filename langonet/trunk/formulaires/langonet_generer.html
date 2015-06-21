@@ -10,20 +10,20 @@
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication"><:langonet:info_generer:></p>
-		<ul>
-			<li class="editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_fichier_langue obligatoire[(#ENV{erreurs}|table_valeur{fichier_langue}|oui) erreur]">
 				<label for="fichier_langue"><:langonet:label_fichier_source:></label>
 				<p class="explication"><:langonet:info_fichier_source:></p>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{fichier_langue})</span>]
 				[(#ENV{fichier_langue, 0}|langonet_creer_select_langues)]
 			</li>
-			<li class="editer_langue_cible obligatoire[(#ENV{erreurs}|table_valeur{langue_cible}|oui) erreur]">
+			<li class="editer editer_langue_cible obligatoire[(#ENV{erreurs}|table_valeur{langue_cible}|oui) erreur]">
 				<label for="langue_cible"><:langonet:label_langue_cible:></label>
 				<p class="explication"><:langonet:info_langue:></p>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{langue_cible})</span>]
 				<input type="text" class="text" name="langue_cible" id="langue_cible" value="#ENV{langue_cible}" />
 			</li>
-			<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
+			<li class="editer editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
 				<label><:langonet:label_mode:></label>
 				<p class="explication"><:langonet:info_mode:></p>
 				[<span class="erreur_message">(#ENV{erreurs}|table_valeur{mode})</span>]
