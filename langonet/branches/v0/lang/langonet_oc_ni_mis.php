@@ -81,8 +81,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_ecriture_fichier' => 'Lou fichié de lenga « <em>@langue@</em> » dóu mòdulou « <em>@module@</em> » es pas estat creat qu’una errour s’es prouducha dóu tems de la siéu scritura !',
 	'message_nok_fichier_langue' => 'La generacioun a souhit perqué lou fichié de lenga « <em>@langue@</em> » dóu mòdulou « <em>@module@</em> » noun es trouvable en lou repertori « <em>@dossier@</em> » !',
 	'message_nok_fichier_log' => 'Lou fichié de log que countengue lu resultat de la verificacioun noun a pouscut estre creat !',
-	'message_nok_fichier_script' => 'Lou fichié d’escrit que countengue li coumanda de remplaçage dei founcioun _L par _T noun a pouscut estre creat !',
+	'message_nok_fichier_script' => 'Lou fichié d’escrit que countengue li coumanda de remplaçage dei founcioun _L per _T noun a pouscut estre creat !',
 	'message_nok_item_trouve' => 'Mìnga item de lenga courresponònde a la recerca !',
+	'message_ok_definis_incertains_0' => 'Mìnga item de lenga es utilisat en un countest coumplesse, couma per isemple, _T(’@module@:item_’.$variable).',
+	'message_ok_definis_incertains_1' => 'L’item de lenga aquì souta es utilisat en un countest coumplesse e si pourìa que noun sigue definit en lou fichié de lenga « <em>@langue@</em> ». V’envidàs a lou verificà :',
+	'message_ok_definis_incertains_n' => 'Lu @nberr@ item de lenga aquì souta soun utilisat en un countest coumplesse e si pourìa que noun siguon definit en lou fichié de lenga « <em>@langue@</em> ». V’envidàs a lu verificà da un a un :',
+	'message_ok_fichier_genere' => 'Lou fichié de lenga « <em>@langue@</em> » dóu mòdulou « <em>@module@</em> » es estat generat courretamen.<br />Poudès recuperà lou fichié « <em>@fichier@</em> ».',
+	'message_ok_fichier_log' => 'La verificacioun s’es facha courretamen. Poudès counsultà lu resultat mai en avau dóu fourmulari.<br />Lou fichié « <em>@log_fichier@</em> » es estat creat per sauvagarda aquelu resultat.',
+	'message_ok_fichier_log_script' => 'La verificacioun s’es facha courretamen. Poudès counsultà lu resultat mai en avau en lou fourmulari.<br />Lou fichié « <em>@log_fichier@</em> » es estat creat per sauvagarda aquelu resultat couma pura lu fichié dei coumanda de remplaçage de _L per _T, « <em>@script@</em> ».',
 	'message_ok_fonction_l_0' => 'Mìnga cas d’utilisacioun de la founcioun _L() es estat detetat en lu fichié PHP dóu repertori « <em>@ou_fichier@</em> ».',
 	'message_ok_item_trouve' => 'La recerca de la cadena @pattern@ s’es degoulada courretamen.',
 	'message_ok_item_trouve_commence_1' => 'L’item de lenga aquì souta coumença da la cadena recercada :',
@@ -95,20 +101,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_lister' => 'Afichà una lenga',
 	'onglet_rechercher' => 'Cercà un item',
 	'onglet_verifier' => 'Verificà una lenga',
+	'option_aucun_fichier' => 'Mìnga lenga seleciounada',
+	'option_mode_index' => 'Item de la lenga sourgenta',
+	'option_mode_new' => 'Balisa &lt;NEW&gt; unicamen',
+	'option_mode_new_index' => 'Item de la lenga sourgenta prechedada da &lt;NEW&gt;',
+	'option_mode_new_valeur' => 'Cadena en la lenga sourgenta prechedada da &lt;NEW&gt;',
+	'option_mode_pas_item' => 'Noun creà d’item',
+	'option_mode_valeur' => 'Candena en la lenga sourgenta',
 	'option_mode_vide' => 'Una cadena vuèia',
 
 	// T
+	'test' => 'PROVA : Aquel item de lenga sierve per la recerca d’escourcha e es egal à test.',
+	'test_item_1_variable' => 'PROVA : Aquel item de lenga es ben definit en lou fichié de lenga, mà es utilisat souta la forma « coumplesse » en lu fichié dóu repertori scanat.',
+	'test_item_2_variable' => 'PROVA : Aquel item de lenga es ben definit en lou fichié de lenga, mà es utilisat souta la forma « coumplesse » en lu fichié dóu repertori scanat.',
+	'test_item_non_utilise_1' => 'PROVA : Aquel item de lenga es ben definit en lou fichié de lenga (), mà es pas utilisat en lu fichié dóu repertoru scanat ().',
+	'test_item_non_utilise_2' => 'PROVA : Aquel item de lenga es ben definit en lou fichié de lenga (), mà es pas utilisat en lu fichié dóu repertori scanat ().',
 	'texte_item_defini_ou' => '<em>definit en :</em>',
+	'texte_item_mal_defini' => '<em>mà noun definit en lou bouòn mòdulou :</em>',
+	'texte_item_non_defini' => '<em>mà definit da mìnga luèc !</em>',
 	'texte_item_utilise_ou' => '<em>utilisat en :</em>',
 	'titre_bloc_langues_generees' => 'Fichié de lenga',
 	'titre_bloc_logs_definition' => 'Definicioun que mancon',
 	'titre_bloc_logs_fonction_l' => 'Utilisacioun de _L()',
+	'titre_bloc_logs_utilisation' => 'Definicioun oussouledi',
 	'titre_form_generer' => 'Generacioun dei fichié de lenga',
 	'titre_form_lister' => 'Afichage dei fichié de lenga',
 	'titre_form_rechercher_item' => 'Recerca d’escourcha en lu fichié de lenga',
+	'titre_form_rechercher_texte' => 'Recerca de tèstou en lu fichié de lenga SPIP',
 	'titre_form_verifier' => 'Verificacioun dei fichié de lenga',
 	'titre_page' => 'LangOnet',
-	'titre_page_navigateur' => 'LangOnet'
+	'titre_page_navigateur' => 'LangOnet',
+
+	// Z
+	'z_test' => 'PROVA : Aquel item de lenga sierve per la recerca d’escourcha e counten prova.'
 );
 
 ?>
