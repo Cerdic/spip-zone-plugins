@@ -30,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'produit_champ_descriptif_label' => 'Court descriptif',
 	'produit_champ_prix_ht_label' => 'Prix HT',
 	'produit_champ_prix_ttc_label' => 'Prix TTC',
+	'produit_champ_reference_abbr' => 'Ref.',
 	'produit_champ_reference_label' => 'Référence',
 	'produit_champ_rubrique_label' => 'Rubrique',
 	'produit_champ_taxe_explication' => 'Valeur par défaut sur le site : @taxe@. Ce champ peut être laissé vide.',
