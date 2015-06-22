@@ -37,6 +37,16 @@
 #PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,abonnement,id,#ID_ABONNEMENT},data,'<div class="nettoyeur"></div>'}}
 
 #BOITE_FERMER
+
+#SET{ids, #LISTE}
+<BOUCLE_commande(COMMANDES?){id_abonnement}{si #PLUGIN{commandes}}>
+#SET{ids, #GET{ids}|push{#ID_COMMANDE}}
+</BOUCLE_commande>
+[(#GET{ids}|oui)
+<INCLURE{fond=prive/objets/liste/commandes, id_commande=#GET{ids}, cacher_tri=oui} />
+]
+
+
 [(#EVAL{_AJAX}|oui)
 	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin');/*\\]\\]>*/</script>
 ]
