@@ -22,6 +22,7 @@ function abonnements_initialisation_dates($abonnement, $offre){
 	$modifs = array();
 	
 	// De combien doit-on augmenter la date
+	$duree = $offre['duree'];
 	switch ($offre['periode']){
 		case 'heures':
 			$ajout = " + ${duree} hours";
