@@ -42,31 +42,9 @@ function abonnements_initialisation_dates($abonnement, $offre){
 	$modifs['date_echeance'] = date('Y-m-d H:i:s', strtotime($abonnement['date_debut'].$ajout));
 	$modifs['date_fin'] = $modifs['date_echeance'];
 	
-	// Mais s'il y a le plugin Commandes et Bank et qu'on trouve commande et transaction
-	if (
-		_DIR_PLUGIN_COMMANDES
-		and _DIR_PLUGIN_BANK
-		and include_spip('action/editer_liens')
-		and $lien_commande = objet_trouver_liens(array('commande' => '*'), array('abonnement' => $abonnement['id_abonnement']))
-		and is_array($lien_commande)
-		// On prend juste la première commande qu'on trouve
-		and $id_commande = intval($lien_commande[0]['id_commande'])
-		// On cherche le dernier paiement bien payé pour cette commande
-		and $transaction = sql_fetsel(
-			'*', 'spip_transactions', array('id_commande = '.$id_commande, 'statut = "ok"')
-		)
-	) {
-		// On a trouvé la transaction qui a activé la commande qui a activé l'abonnement
-		// Si on détecte un prélèvement SEPA, on annule la date de fin !
-		if ($refcb = $transaction['refcb'] and strpos($refcb, 'SEPA') === 0) {
-			$modifs['date_fin'] = '0000-00-00 00:00:00';
-		}
-		// Si ya une fin de validité de carte bleue on en déduit une fin d'abonnement !
-		elseif ($validite = $transaction['validite']) {
-			include_spip('inc/bank');
-			list($year, $month) = explode('-', $validite);
-			$modifs['date_fin'] = bank_date_fin_mois($year, $month);
-		}
+	// Mais si c'est un renouvellement auto avec Commandes et Bank
+	if ($date_fin = abonnements_bank_date_fin($abonnement['id_abonnnement'])) {
+		$modifs['date_fin'] = $date_fin;
 	}
 	
 	$modifs = pipeline(
@@ -80,6 +58,61 @@ function abonnements_initialisation_dates($abonnement, $offre){
 	return $modifs;
 }
 
+/**
+ * Trouver la date de fin d'un renouvellement automatique éventuel
+ * 
+ * @param int $id_abonnement
+ * 		Identifiant de l'abonnement dont on veut trouver la date de fin
+ * @param int $id_commande
+ * 		Possibilité de donner la commande pour éviter une requête SQL
+ * @return bool|datetime
+ * 		Retourne la date de fin du renouvellement si on trouve, sinon false pour ne rien faire
+ **/
+function abonnements_bank_date_fin($id_abonnement, $id_commande=0){
+	$date_fin = false;
+	
+	// On teste si on trouve un renouvellement auto
+	if (
+		_DIR_PLUGIN_COMMANDES
+		and _DIR_PLUGIN_BANK
+		and (
+			// Soit on a déjà une commande sous la main
+			(
+				$id_commande = intval($id_commande)
+				and $id_commande > 0
+			)
+			// Soit on va chercher une commande liée à l'abonnement
+			or
+			(
+				include_spip('action/editer_liens')
+				and $lien_commande = objet_trouver_liens(array('commande' => '*'), array('abonnement' => $id_abonnement))
+				and is_array($lien_commande)
+				// On prend juste la première commande qu'on trouve
+				and $id_commande = intval($lien_commande[0]['id_commande'])
+			)
+		)
+		// On cherche un paiement bien payé pour cette commande
+		and $transaction = sql_fetsel(
+			'*', 'spip_transactions', array('id_commande = '.$id_commande, 'statut = "ok"')
+		)
+		// Et que c'est un renouvellement auto !
+		and $transaction['abo_uid']
+	) {
+		// On a trouvé la transaction qui a activé la commande qui a activé l'abonnement
+		// Si on détecte un prélèvement SEPA, on annule la date de fin !
+		if ($refcb = $transaction['refcb'] and strpos($refcb, 'SEPA') === 0) {
+			$date_fin = '0000-00-00 00:00:00';
+		}
+		// Si ya une fin de validité de carte bleue on en déduit une fin d'abonnement !
+		elseif ($validite = $transaction['validite']) {
+			include_spip('inc/bank');
+			list($year, $month) = explode('-', $validite);
+			$date_fin = bank_date_fin_mois($year, $month);
+		}
+	}
+	
+	return $date_fin;
+}
 
 /*
  * Programmer la désactivation d'un abonnement lors de sa date de fin
