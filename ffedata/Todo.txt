@@ -13,3 +13,28 @@ Le modèles ffe_equipe_clubs_codes est particulièrement indigeste pour le public.
 
 Barre d'outil d'édition:
 ajouter un bouton pour insérer les modèles courants ?
+=> voir avec le plugin insérer_modèle 
+
+petit mode opératoire (fourni par Pascal, qu'on met ici pour ne pas le perdre):
+
+"Un modèle spécial a été codé afin d’afficher facilement les PV d’équipe (résultats par échiquier) pour chaque ronde.
+Ce modèle s’appuie sur le WebService de la FFE, par conséquent il faut que les résultats soient correctement saisis sur le site de la FFE pour pouvoir les afficher ici !
+
+Voici comment les utiliser :
+Il faut connaitre les codes et les groupes de chaque équipes.
+
+Ensuite, à l’intérieur de l’article, il faut appeler le modèle avec des critères :
+
+    saison : (valeur = 0 pour la saison en cours)
+    ref : groupe auquel appartient l’équipe
+    equipe : code équipe
+    ronde : numéro de la ronde
+    nbj : nombre de joueurs par équipe (valeur par défaut : 8 si le critère est omis)
+
+Par exemple :
+
+    Equipe 2 : <equipespv|saison=0|ref=84|equipe=2156|ronde=4>
+    Equipe 3 : <equipespv|saison=0|ref=85|equipe=2164|ronde=4>
+    Equipe 4 : <equipespv|saison=0|ref=1284|equipe=2433|ronde=4|nbj=6>
+    Equipe 5(R2) :<equipespv|saison=0|ref=1245|equipe=2789|ronde=4|nbj=4>
+    Equipe 6(R2) :<equipespv|saison=0|ref=1332|equipe=2795|ronde=4|nbj=4>

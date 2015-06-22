@@ -1,0 +1,41 @@
+ #SET{idronde,#ENV{ronde}}
+ [(#SET{nbjoueurs,[(#ENV{nbj}|is_null|?{8,#ENV{nbj}})]})]
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Equipes.asmx/GetPVs?saison=#ENV{saison}&ref=#ENV{ref}}>	  
+  
+<BOUCLE_blanc(DATA){source table, #VALEUR**}{Ronde=#GET{idronde}}{EquipeBlancRef=#ENV{equipe}}>
+<!-- <b>[(#VALEUR{PVDate}|affdate)]</b> -->
+<br>
+<table class="spip">
+<thead>
+<tr>
+<th> #VALEUR{EquipeBlancNom} </th>
+<th> #VALEUR{EquipeNoirNom} </th>
+<th> [(#VALEUR{BlancPts}|sinon{0})]-[(#VALEUR{NoirPts}|sinon{0})] </th>
+</tr>
+</thead>
+<BOUCLE_joueurs(DATA){enum 1,#GET{nbjoueurs}}>
+[(#_blanc:VALEUR|echec_ligne_tableau{#VALEUR,#GET{nbjoueurs}})]
+</BOUCLE_joueurs>
+</table>
+</BOUCLE_blanc>
+
+
+<BOUCLE_noir(DATA){source table, #VALEUR**}{Ronde=#GET{idronde}}{EquipeNoirRef=#ENV{equipe}}>
+<!-- <b>[(#VALEUR{PVDate}|affdate)]</b> -->
+<br>
+<table class="spip">
+<thead>
+<tr class="row first">
+<th> #VALEUR{EquipeBlancNom} </th>
+<th> #VALEUR{EquipeNoirNom} </th>
+<th> [(#VALEUR{BlancPts}|sinon{0})]-[(#VALEUR{NoirPts}|sinon{0})] </th>
+</tr>
+</thead>
+<BOUCLE_joueurs_noir(DATA){enum 1,#GET{nbjoueurs}}>
+<td>[(#_noir:VALEUR|echec_ligne_tableau{#VALEUR,#GET{nbjoueurs}})]</td>
+</BOUCLE_joueurs_noir>
+</table>
+</BOUCLE_noir>
+
+</BOUCLE_lecture_wsdl2>
+
