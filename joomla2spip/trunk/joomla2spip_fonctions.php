@@ -199,6 +199,7 @@ function article_import($mon_article) {
 	$sql = "UPDATE spip_articles SET id_article = '$ancien_id' WHERE id_article = '$id_article'";
 	spip_query($sql);
 
+	include_spip('inc/plugin'); // pour spip_version_compare
 	if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0', '>=')){
 		include_spip('action/editer_article');
 		$sql = "UPDATE spip_auteurs_liens SET id_objet = '$ancien_id' WHERE id_objet = '$id_article' AND objet = 'article'";
@@ -241,7 +242,8 @@ function article_import($mon_article) {
 //
 function forum_import($mon_forum) {
 
-	if (!spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0', '>=')){
+	include_spip('inc/plugin'); // pour spip_version_compare
+	if (spip_version_compare($GLOBALS['spip_version_branche'], '3.0.0', '>=')){
 		sql_insertq('spip_forum',
 			array('id_objet'=>$mon_forum['id_objet'],
 				'objet'=>'article',
