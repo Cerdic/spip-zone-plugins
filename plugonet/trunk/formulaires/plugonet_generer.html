@@ -1,21 +1,22 @@
 <div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
 	<h3 class="titrem">[(#CHEMIN_IMAGE{#FORM.png}|balise_img{'',cadre-icone})]<:plugonet:titre_form_generer:></h3>
 
-	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
-	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok}|table_valeur{resume})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}'><div>
+	<form method="post" action="#ENV{action}">
+		<div>
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<div><input type="hidden" name="encodage" id="encodage_defaut" value="utf8" /></div>
-		<ul>
+		<p class="explication"><:plugonet:info_generer:></p>
+		<ul class="editer-groupe">
 			<li class="fieldset">
 				<fieldset>
-					<p class="explication"><:plugonet:info_generer:></p>
 					<ul>
-						<li class="editer_forcer [(#ENV{erreurs}|table_valeur{forcer}|oui) erreur]">
+						<li class="editer editer_forcer [(#ENV{erreurs}|table_valeur{forcer}|oui) erreur]">
 							<label><:plugonet:label_generer_paquetxml:></label>
 							<p class="explication"><:plugonet:info_forcer_paquetxml:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{forcer})</span>]
@@ -28,7 +29,7 @@
 								<label for="forcer_non"><:plugonet:label_forcer_non:></label>
 							</div>
 						</li>
-						<li class="editer_simuler [(#ENV{erreurs}|table_valeur{simuler}|oui) erreur]">
+						<li class="editer editer_simuler [(#ENV{erreurs}|table_valeur{simuler}|oui) erreur]">
 							<p class="explication"><:plugonet:info_simuler_paquetxml:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{simuler})</span>]
 							<div class="choix">
@@ -40,7 +41,7 @@
 								<label for="simuler_non"><:plugonet:label_simuler_non:></label>
 							</div>
 						</li>
-						<li class="editer_xml obligatoire[(#ENV{erreurs}|table_valeur{xml}|oui) erreur]">
+						<li class="editer editer_xml obligatoire[(#ENV{erreurs}|table_valeur{xml}|oui) erreur]">
 							<label><:plugonet:label_choisir_xml{dtd=plugin}:></label>
 							<p class="explication"><:plugonet:info_choisir_pluginxml_generer:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml})</span>]
@@ -56,8 +57,8 @@
 			</li>
 		</ul>
 
-		<p class='boutons'>
-			<input type='submit' class='submit' value='<:plugonet:bouton_lancer:>' />
+		<p class="boutons">
+			<input type="submit" class="submit" value="<:plugonet:bouton_lancer:>" />
 		</p>
 	</div></form>
 	]
