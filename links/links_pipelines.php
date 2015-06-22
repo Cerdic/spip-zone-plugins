@@ -1,9 +1,21 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+function links_configuration() {
+	$links = isset($GLOBALS['meta']['links']) ? unserialize($GLOBALS['meta']['links']) : array(
+		'style' => 'off',
+		'external' => 'off',
+		'download' => 'off',
+		'window' => 'off',
+		'doc_list' => ".pdf,.ppt,.xls,.doc",
+	);
+	return $links;
+}
+
 function links_insert_head_css($flux) {
 	//Recuperation de la configuration
-	$links = unserialize($GLOBALS['meta']['links']);
+	$links = links_configuration();
+
 	//Styles
 	if($links['style'] == 'on'){
 		$flux .= '<link rel="stylesheet" href="'.find_in_path('css/links.css').'" type="text/css" media="all" />';
@@ -27,7 +39,7 @@ function links_insert_head_css($flux) {
 
 function links_insert_head($flux) {
 	//Recuperation de la configuration
-	$links = unserialize($GLOBALS['meta']['links']);
+	$links = links_configuration();
 
 	//Ouverture d'une nouvelle fenetre
 	if($links['window'] == 'on'){
