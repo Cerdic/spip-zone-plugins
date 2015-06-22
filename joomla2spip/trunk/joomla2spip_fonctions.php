@@ -254,6 +254,7 @@ function forum_import($mon_forum) {
 				'auteur'=>$mon_forum['auteur'],
 				'email_auteur'=>$mon_forum['email_auteur'],
 				'statut'=>$mon_forum['statut'],
+				'id_auteur'=>$mon_forum['id_auteur'],
 				'ip'=>$mon_forum['ip'])) ;	
 	}else{
 		sql_insertq('spip_forum',
@@ -265,6 +266,7 @@ function forum_import($mon_forum) {
 				'auteur'=>$mon_forum['auteur'],
 				'email_auteur'=>$mon_forum['email_auteur'],
 				'statut'=>$mon_forum['statut'],
+				'id_auteur'=>$mon_forum['id_auteur'],
 				'ip'=>$mon_forum['ip'])) ;	
 	}
 	return;

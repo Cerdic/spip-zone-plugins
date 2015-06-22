@@ -23,14 +23,21 @@
     [(#PUBLISHED|=={0}|oui)#SET{statut,prop}][(#PUBLISHED|=={1}|oui)#SET{statut,publie}]   
   </div>
   
-  [(#SET{titre,[(#TITLE*|joomla2spip_nettoyer_texte{titre})]})]
-  [(#SET{auteur,[(#NAME*|joomla2spip_nettoyer_texte{chapo})]})]
-  [(#SET{email_auteur,[(#EMAIL*)]})]
+  [(#SET{titre,[(#TITLE|trim)]})]
+  [(#SET{auteur,[(#NAME|trim)]})]
+  [(#SET{email_auteur,[(#EMAIL*|trim)]})]
+  [(#SET{id_auteur,0})]
+  <BOUCLE_EmailAuteur(jos_users){username=#USERNAME}>
+	[(#SET{email_auteur,[(#EMAIL*|trim)]})]
+	<BOUCLE_AuteurSPIP(AUTEURS){email=#GET{email_auteur}}{tout}>
+	[(#SET{id_auteur,#ID_AUTEUR})]
+	</BOUCLE_AuteurSPIP>
+  </BOUCLE_EmailAuteur>
   [(#SET{ip,[(#IP)]})]
   [(#SET{texte,[(#COMMENT*|joomla2spip_nettoyer_texte)]})]
 
   [(#REM) importer le commentaire]
-  [(#SET{mon_commentaire,#ARRAY{id_objet,#GET{id_objet},date_heure,#DATE,date_thread,#DATE,statut,#GET{statut},titre,#GET{titre},auteur,#GET{auteur},email_auteur,#GET{email_auteur},texte,#GET{texte},ip,#GET{ip}}})]
+  [(#SET{mon_commentaire,#ARRAY{id_objet,#GET{id_objet},date_heure,#DATE,date_thread,#DATE,statut,#GET{statut},titre,#GET{titre},auteur,#GET{auteur},email_auteur,#GET{email_auteur},texte,#GET{texte},ip,#GET{ip},id_auteur,#GET{id_auteur}}})]
   [(#GET{mon_commentaire}|forum_import)]
   </li>
 </BOUCLE_articles>
