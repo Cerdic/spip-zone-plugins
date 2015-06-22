@@ -366,7 +366,7 @@ function pages_pre_boucle($boucle){
 				$boucle_articles = false;
 				$env_id = "\$Pile[0]['id_rubrique']";
 				$boucle->where[] =
-					array("'?'", "(is_array($env_id)?count($env_id):strlen($env_id))", "''", "'articles.id_rubrique>0'");
+					array("'?'", "(isset($env_id)?(is_array($env_id)?count($env_id):strlen($env_id)):'')", "''", "'articles.id_rubrique>0'");
 				break;
 			}
 		}
