@@ -8,8 +8,12 @@
 	date_paiement,-1,
 	reference,1
 	id_auteur,1
-}})
-]<B_liste_commandes>
+}})]
+
+#SET{afficher_echeances,''}
+<BOUCLE_test_echeances(COMMANDES){tout}{echeances_type != ""}{0,1}>#SET{afficher_echeances,oui}</BOUCLE_test_echeances>
+
+<B_liste_commandes>
 <div class='nettoyeur'></div>
 #ANCRE_PAGINATION
 [(#ENV{titre_dehors}|oui)[<h2>(#ENV*{titre,#GRAND_TOTAL|objet_afficher_nb{commande}})</h2>]]
@@ -24,6 +28,9 @@
 		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date,<:commandes:date_commande_label_court:>,ajax})][
 		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date_paiement,<:commandes:date_paiement_label_court:>,ajax})][
 		<span class="sep">&nbsp;|&nbsp;</span>(#TRI{date_envoi,<:commandes:date_envoi_label_court:>,ajax})]
+		[(#GET{afficher_echeances}|oui)
+		[<span class="sep">&nbsp;|&nbsp;</span>(#TRI{echeances_type,<:commandes:commande_echeances_type:>,ajax})]
+		]
 	</div>
 	]
 	[<div class="pagination">(#PAGINATION{prive})</div>]
@@ -32,9 +39,10 @@
 		<thead>
 			<tr class='first_row'>
 				<th class='etat' scope='col'>#</th>
-				<th class='infos' scope='col'><:commandes:label_infos:></th>
+				<th class='infos principale' scope='col'><:commandes:label_infos:></th>
 				<th class='dates' scope='col'><:commandes:label_commande_dates:></th>
 				<th class='descriptif' scope='col'><:commandes:label_objets:></th>
+				[(#GET{afficher_echeances}|oui)<th class="echeances_type" scope="col"><:commandes:commande_echeances_type:></th>]
 				<th class='montant' scope='col'><:prix:label_total_ttc:></th>
 				[(#ENV{simuler}|=={1}|oui)<th scope='col'><:commandes:simuler:></th>]
 			</tr>
@@ -46,7 +54,7 @@
 			{pagination #ENV{nb,20}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#STATUT)]">
 				<td class='etat'>[(#STATUT|puce_statut{commande,#ID_COMMANDE})&nbsp;]</td>
-				<td class='infos'>
+				<td class='infos principale'>
 					[<div class='id'>
 						<a href="[(#ID_COMMANDE|generer_url_entite{commande})]"><:commandes:commande_titre:>&nbsp;<:info_numero_abbreviation:>(#ID_COMMANDE)</a>
 					</div>]
@@ -64,14 +72,14 @@
 							#DATE|affdate{jourcourt},
 							#DATE|jour|concat{'&nbsp;',#DATE|nom_mois{abbr},'&nbsp;'#DATE|annee}}}
 						<li class="date">
-							[<span class="label"><:commandes:date_commande_label_court:>&nbsp;:</span>&nbsp;(#GET{date})]
+							[<div class="label"><:commandes:date_commande_label_court:>&nbsp;:</div> (#GET{date})]
 						</li>
 						[(#DATE_PAIEMENT|intval|>{0}|oui)
 						#SET{date_paiement,#DATE_PAIEMENT|annee|=={#ENV{date}|annee}|?{
 							#DATE_PAIEMENT|affdate{jourcourt},
 							#DATE_PAIEMENT|jour|concat{'&nbsp;',#DATE_PAIEMENT|nom_mois{abbr},'&nbsp;'#DATE_PAIEMENT|annee}}}
 						<li class="date paiement">
-							[<span class="label"><:commandes:date_paiement_label_court:>&nbsp;:</span>&nbsp;(#GET{date_paiement})]
+							[<div class="label"><:commandes:date_paiement_label_court:>&nbsp;:</div> (#GET{date_paiement})]
 						</li>
 						]
 						[(#DATE_ENVOI|intval|>{0}|oui)
@@ -79,7 +87,7 @@
 							#DATE_ENVOI|affdate{jourcourt},
 							#DATE_ENVOI|jour|concat{'&nbsp;',#DATE_ENVOI|nom_mois{abbr},'&nbsp;'#DATE_ENVOI|annee}}}
 						<li class="date envoi">
-							[<span class="label"><:commandes:date_envoi_label_court:>&nbsp;:</span>&nbsp;(#GET{date_envoi})]
+							[<div class="label"><:commandes:date_envoi_label_court:>&nbsp;:</div> (#GET{date_envoi})]
 						</li>
 						]
 					</ul>
@@ -101,6 +109,11 @@
 					</ul>
 					</B_details>
 				</td>
+				[(#GET{afficher_echeances}|oui)
+				<td class="echeances_type">
+					[(#ECHEANCES_TYPE|?{commandes:commande_echeances_type_#ECHEANCES_TYPE, commandes:commande_echeances_type_vide}|_T)]
+				</td>
+				]
 				<td class='montant'>[(#PRIX)]</td>
 				[(#ENV{simuler}|=={1}|oui)
 				<td class='simuler'>
