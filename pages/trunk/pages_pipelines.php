@@ -326,7 +326,7 @@ function pages_pre_boucle($boucle){
 				$critere_page = true;
 				break;
 			}
-			elseif ($_critere->param[0][0]->texte == 'page') { // {page=x}
+			elseif (isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'page') { // {page=x}
 				if (
 					($_critere->op == '=') AND ($_critere->param[1][0]->texte == '')
 				  OR $_critere->not
@@ -342,16 +342,16 @@ function pages_pre_boucle($boucle){
 				}
 			}
 			elseif (($_critere->op == 'id_article') // {id_article} ou {id_article?}
-				OR ($_critere->param[0][0]->texte == 'id_article')) { // {id_article=x}
+				OR (isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_article')) { // {id_article=x}
 				// On pointe sur un article précis, il est donc inutile de rajouter un test sur la rubrique
 				// Pour le critère {id_article?} on considère que si l'on veut sélectionner des pages uniques
 				// ou des articles éditoriaux on doit préciser le critère {id_rubrique}
 				$boucle_articles = false;
 			}
-			elseif ((($_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique=-1}
+			elseif (((isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique=-1}
 					AND ($_critere->op == '=')
 					AND ($_critere->param[1][0]->texte == '-1'))
-				OR (($_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique<0}
+				OR ((isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_rubrique') // {id_rubrique<0}
 					AND ($_critere->op == '<')
 					AND ($_critere->param[1][0]->texte == '0'))) {
 				// On cherche explicitement des pages uniques
