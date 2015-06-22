@@ -177,7 +177,10 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'info_1_objet'                => 'commandes:info_1_detail',
 		'info_nb_objets'              => 'commandes:info_nb_details',
 	);
-
+	
+	// Jointures auto sur les commandes pour tous les objets
+	$tables[]['tables_jointures'][]= 'commandes_liens';
+	
 	return $tables;
 }
 
@@ -197,7 +200,9 @@ function commandes_declarer_tables_auxiliaires($tables_auxiliaires) {
 
 	$spip_commandes_liens_key = array(
 			"PRIMARY KEY"         => "id_commande,id_objet,objet",
-			"KEY id_commande"     => "id_commande"
+			"KEY id_commande"     => "id_commande",
+			"KEY id_objet"        => "id_objet",
+			"KEY objet"           => "objet",
 	);
 
 	$tables_auxiliaires['spip_commandes_liens'] = array(
