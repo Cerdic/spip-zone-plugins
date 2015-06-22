@@ -1,16 +1,13 @@
 <paquet
 	prefix="produits"
 	categorie="outil"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.13;3.0.*]"
 	logo="prive/themes/spip/images/produits-64.png"
 	documentation=""
 	schema="1.0.0" 
 >
-	<!--
-		Paquet genere le 2014-02-17 18:10:07
-	-->
 
 	<nom>produits</nom>
 
