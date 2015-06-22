@@ -23,7 +23,7 @@
 	<tbody>
 	<BOUCLE_liste_produits(PRODUITS){id_produit?}{id_secteur?}{id_rubrique?}{where?}{recherche?}{statut?}{tri #ENV{par,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='statut'>[(#ID_PRODUIT|puce_changement_statut{#STATUT,#ID_RUBRIQUE,produit,true})]</td>
+			<td class='statut'>[(#ID_PRODUIT|puce_changement_statut{#STATUT,#ID_RUBRIQUE,produit})]</td>
 			<td class='reference'>#REFERENCE</td>
 			<td class='titre principale'>[(#LOGO_PRODUIT|image_reduire{20,26})]
 				<a href="[(#ID_PRODUIT|generer_url_entite{produit})]" title="<:info_numero_abbreviation|attribut_html:> #ID_PRODUIT">#TITRE</a>
