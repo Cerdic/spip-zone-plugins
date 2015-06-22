@@ -7,60 +7,55 @@
 	[(#ENV{editable})
 	<form method="post" action="#ENV{action}">
 		<div>
-		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
-		parametre : url d'action --> ]
-		#ACTION_FORMULAIRE{#ENV{action}}
-		<div><input type="hidden" name="encodage" id="encodage_defaut" value="utf8" /></div>
-		<p class="explication"><:plugonet:info_generer:></p>
-		<ul class="editer-groupe">
-			<li class="fieldset">
-				<fieldset>
-					<ul>
-						<li class="editer editer_forcer [(#ENV{erreurs}|table_valeur{forcer}|oui) erreur]">
-							<label><:plugonet:label_generer_paquetxml:></label>
-							<p class="explication"><:plugonet:info_forcer_paquetxml:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{forcer})</span>]
-							<div class="choix">
-								<input type="radio" value="on" id="forcer_oui" class="radio" name="forcer" [(#ENV{forcer}|oui) checked="checked"] />
-								<label for="forcer_oui"><:plugonet:label_forcer_oui:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" value="" id="forcer_non" class="radio" name="forcer" [(#ENV{forcer}|non) checked="checked"] />
-								<label for="forcer_non"><:plugonet:label_forcer_non:></label>
-							</div>
-						</li>
-						<li class="editer editer_simuler [(#ENV{erreurs}|table_valeur{simuler}|oui) erreur]">
-							<p class="explication"><:plugonet:info_simuler_paquetxml:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{simuler})</span>]
-							<div class="choix">
-								<input type="radio" value="on" id="simuler_oui" class="radio" name="simuler" [(#ENV{simuler}|oui) checked="checked"] />
-								<label for="simuler_oui"><:plugonet:label_simuler_oui:></label>
-							</div>
-							<div class="choix">
-								<input type="radio" value="" id="simuler_non" class="radio" name="simuler" [(#ENV{simuler}|non) checked="checked"] />
-								<label for="simuler_non"><:plugonet:label_simuler_non:></label>
-							</div>
-						</li>
-						<li class="editer editer_xml obligatoire[(#ENV{erreurs}|table_valeur{xml}|oui) erreur]">
-							<label><:plugonet:label_choisir_xml{dtd=plugin}:></label>
-							<p class="explication"><:plugonet:info_choisir_pluginxml_generer:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml})</span>]
-							<INCLURE{fond=formulaires/inc-checkbox_xml, 
-								dossier=#EVAL{_DIR_RACINE},
-								regexp=plugin.xml$,
-								operation=generer,
-								message_nok_xml=<:plugonet:message_nok_aucun_xml{dtd=plugin}:>,
-								env} />
-						</li>
-					</ul>
-				</fieldset>
-			</li>
-		</ul>
+			[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action --> ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<div><input type="hidden" name="encodage" id="encodage_defaut" value="utf8" /></div>
+			<p class="explication"><:plugonet:info_generer:></p>
+			<ul class="editer-groupe">
+				<li class="editer editer_forcer [(#ENV{erreurs}|table_valeur{forcer}|oui) erreur]">
+					<label><:plugonet:label_generer_paquetxml:></label>
+					<p class="explication"><:plugonet:info_forcer_paquetxml:></p>
+					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{forcer})</span>]
+					<div class="choix">
+						<input type="radio" value="on" id="forcer_oui" class="radio" name="forcer" [(#ENV{forcer}|oui) checked="checked"] />
+						<label for="forcer_oui"><:plugonet:label_forcer_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" value="" id="forcer_non" class="radio" name="forcer" [(#ENV{forcer}|non) checked="checked"] />
+						<label for="forcer_non"><:plugonet:label_forcer_non:></label>
+					</div>
+				</li>
+				<li class="editer editer_simuler [(#ENV{erreurs}|table_valeur{simuler}|oui) erreur]">
+					<p class="explication"><:plugonet:info_simuler_paquetxml:></p>
+					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{simuler})</span>]
+					<div class="choix">
+						<input type="radio" value="on" id="simuler_oui" class="radio" name="simuler" [(#ENV{simuler}|oui) checked="checked"] />
+						<label for="simuler_oui"><:plugonet:label_simuler_oui:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" value="" id="simuler_non" class="radio" name="simuler" [(#ENV{simuler}|non) checked="checked"] />
+						<label for="simuler_non"><:plugonet:label_simuler_non:></label>
+					</div>
+				</li>
+				<li class="editer editer_xml obligatoire[(#ENV{erreurs}|table_valeur{xml}|oui) erreur]">
+					<label><:plugonet:label_choisir_xml{dtd=plugin}:></label>
+					<p class="explication"><:plugonet:info_choisir_pluginxml_generer:></p>
+					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml})</span>]
+					<INCLURE{fond=formulaires/inc-checkbox_xml,
+						dossier=#EVAL{_DIR_RACINE},
+						regexp=plugin.xml$,
+						operation=generer,
+						message_nok_xml=<:plugonet:message_nok_aucun_xml{dtd=plugin}:>,
+						env} />
+				</li>
+			</ul>
 
-		<p class="boutons">
-			<input type="submit" class="submit" value="<:plugonet:bouton_lancer:>" />
-		</p>
-	</div></form>
+			<p class="boutons">
+				<input type="submit" class="submit" value="<:plugonet:bouton_lancer:>" />
+			</p>
+		</div>
+	</form>
 	]
 
 	[(#REM) <!-- Affichage des resultats --> ]
