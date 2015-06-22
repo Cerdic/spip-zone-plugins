@@ -44,7 +44,7 @@ function action_creer_ou_renouveler_abonnement_dist($arg=null) {
 				'date_fin desc',
 				'0,1'
 			)
-			and $abonnement['date_fin'] <= date('Y-m-d H:i:s', strtotime('-'.$heures_limite.'hours'))
+			and $abonnement['date_fin'] >= date('Y-m-d H:i:s', strtotime('- '.$heures_limite.' hours'))
 			and $id_abonnement = intval($abonnement['id_abonnement'])
 		) {
 			autoriser_exception('modifier', 'abonnement', $id_abonnement, true);
