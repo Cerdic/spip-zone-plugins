@@ -2,7 +2,7 @@
 [(#SET{ouvre_boite,[(#AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRE}|ou{#AUTORISER{modifier, formulaires_reponse, #ID_FORMULAIRE}})]})]
 [(#GET{ouvre_boite}|oui)[(#BOITE_OUVRIR{<:formidable:titre_cadre_raccourcis:>,'info'})]]
 
-<BOUCLE_autoriser_1(CONDITION){si #AUTORISER{voir, formulaires_reponse}}>
+<BOUCLE_autoriser_1(CONDITION){si #AUTORISER{voir, formulaires_reponse, #ID_FORMULAIRE}}>
 #FORMULAIRE_EXPORTER_FORMULAIRE_REPONSES{#ID_FORMULAIRE}
 </BOUCLE_autoriser_1>
 

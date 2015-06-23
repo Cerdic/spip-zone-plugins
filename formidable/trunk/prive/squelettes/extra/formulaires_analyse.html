@@ -1,5 +1,5 @@
 <BOUCLE_formulaire(FORMULAIRES){id_formulaire}{tout}>
-<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_analyse}}>
+<BOUCLE_autoriser(CONDITION){si #AUTORISER{voir, formulaires_analyse, #ID_FORMULAIRE}}>
 [(#BOITE_OUVRIR{<:formidable:titre_cadre_raccourcis:>,'info'})]
 #FORMULAIRE_EXPORTER_FORMULAIRE_ANALYSE{#ID_FORMULAIRE}
 #BOITE_FERMER
