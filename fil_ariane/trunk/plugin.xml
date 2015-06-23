@@ -11,7 +11,7 @@
 	<lien>http://contrib.spip.net/Plugin-Fil-d-Ariane</lien> <!-- URI de documentation -->
 	<icon>img/fil_ariane-128.png</icon>
 
-	<version>0.1.12</version>
+	<version>0.1.13</version>
 	<etat>dev</etat>
 
 	<prefix>fil_ariane</prefix>
@@ -24,7 +24,7 @@
 	</pipeline>
 
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 
 	<!-- pour la fonction generer_url_entite -->
 	<necessite id="spip_bonux" version="[2.3.0;]" />

@@ -1,9 +1,9 @@
 <paquet
 	prefix="fil_ariane"
 	categorie="navigation"
-	version="0.1.12"
+	version="0.1.13"
 	etat="dev"
-	compatibilite="[2.1.0;3.0.*]"
+	compatibilite="[2.1.0;3.1.*]"
 	logo="img/fil_ariane-128.png"
 	documentation="http://contrib.spip.net/Plugin-Fil-d-Ariane"
 >
