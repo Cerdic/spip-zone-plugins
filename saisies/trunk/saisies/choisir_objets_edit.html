@@ -1,0 +1,29 @@
+[(#REM)
+    Saisie spécifique à SPIP 3
+    qui permet de choisir parmis des
+    objets éditoriaux éditables de SPIP,
+    les affichant avec des checkbox
+
+
+  Exemple d'appel :
+    [[(#SAISIE{choisir_objets_edit, objets,
+        label=<:inserer_modeles:choix_objets_editable:>,
+        selected=#LISTE{'article_edit','breve_edit','rubrique_edit','mot_edit'},
+        explication=<:inserer_modeles:choix_objets_editable_explication:>})]
+
+]
+
+[(#REM) defaut peut être une chaine (plusieurs valeurs ou pas) qu'on sait décomposer ]
+#SET{defaut, #ENV{defaut}|saisies_chaine2tableau}
+
+[(#REM) valeur doit être un tableau ! ]
+#SET{valeur, #ENV{valeur}|saisies_valeur2tableau}
+
+<BOUCLE_objets(POUR){tableau #REM|lister_tables_objets_edit}{cle !IN #ENV{exclus,''}}>
+#SET{id,#ENV{nom}|replace{\W,'_'}|concat{'_',#VALEUR{url_edit}}}
+<div class="choix choix_#VALEUR{url_edit}">
+    <input type="checkbox"  id="#GET{id}" name="#ENV{nom}\[\]" value="#VALEUR{url_edit}"[(#ENV{selected}|=={all}|ou{#VALEUR{url_edit}|in_any{#ENV{selected}}})checked="checked"] />
+    <label for="#GET{id}">[(#VALEUR{texte_objets}|_T)]</label>
+</div>
+</BOUCLE_objets>
+<input type="hidden" name="#ENV{nom}[]" value="" />
