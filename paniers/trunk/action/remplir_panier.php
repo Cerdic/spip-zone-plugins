@@ -22,8 +22,19 @@ function action_remplir_panier_dist($arg=null) {
 	// Il faut cherche le panier du visiteur en cours
 	include_spip('inc/session');
 	$id_panier = session_get('id_panier');
+	
+	//est-ce que le panier est bien en base
+	$id_panier_base = intval(sql_getfetsel(
+			'id_panier',
+			'spip_paniers',
+			array(
+				'id_panier = '.sql_quote($id_panier),
+				'statut = '.sql_quote('encours')
+			)
+	));
+	
 	// S'il n'y a pas de panier, on le crée
-	if (!$id_panier){
+	if (!$id_panier OR !$id_panier_base){
 		include_spip('inc/paniers');
 		$id_panier = paniers_creer_panier();
 	}
