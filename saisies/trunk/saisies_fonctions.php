@@ -169,3 +169,30 @@ function picker_selected_par_objet($selected) {
 
 	return $liste;
 }
+
+
+/**
+ * Lister les objets qui ont une url_edit renseignée et qui sont éditables.
+ *
+ * @return array Liste des objets :
+ *               index : nom de la table (spip_articles, spip_breves, etc.)
+ *               'type' : le type de l'objet ;
+ *               'url_edit' : l'url d'édition de l'objet ;
+ *               'texte_objets' : le nom humain de l'objet éditorial.
+ */
+function lister_tables_objets_edit()
+{
+    include_spip('base/abstract_sql');
+
+    $objets = lister_tables_objets_sql();
+    $objets_edit = array();
+
+    foreach ($objets as $objet => $definition) {
+        if (isset($definition['editable']) and isset($definition['url_edit']) and $definition['url_edit'] != '') {
+            $objets_edit[$objet] = array('type' => $definition['type'], 'url_edit' => $definition['url_edit'], 'texte_objets' => $definition['texte_objets']);
+        }
+    }
+    $objets_edit = array_filter($objets_edit);
+
+    return $objets_edit;
+}
