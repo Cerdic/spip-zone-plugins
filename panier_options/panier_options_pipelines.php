@@ -37,22 +37,27 @@ function panier_options_recuperer_fond($flux){
     		
     		//seulement si l'option est configurée
     		if($pourcentage_avantage && $code_avantage){
-    			//$flux['args']['contexte']['_code_avantage']  = lire_config("paniers/panier_options/code_avantage"); 
-			$flux['args']['contexte']['_pourcentage_avantage'] = $pourcentage_avantage;
-			
-			//tester si votre_code_avantage est le bon
-			$code_valide=false;
-			$config_code_avantage = lire_config("paniers/panier_options/code_avantage");
-			$request_code_avantage=_request('votre_code_avantage');
-			if($request_code_avantage==$config_code_avantage){$code_valide=true;};
-		      
+    			$flux['args']['contexte']['_pourcentage_avantage'] = $pourcentage_avantage;
+    			$code_valide=false;
+    			
+    			//est-ce que l'avantage est déjà validé ?
+    			if (!$id_panier) $id_panier = session_get('id_panier');
+    			$avantage_valide = sql_getfetsel('options','spip_paniers',array('id_panier = '.sql_quote($id_panier)));
+    			if($avantage_valide=="avantage_valide") $code_valide=true;
+    			
+    			//sinon tester si votre_code_avantage est le bon
+    			if($code_valide==false){
+				$config_code_avantage = lire_config("paniers/panier_options/code_avantage");
+				$request_code_avantage=_request('votre_code_avantage');
+				if($request_code_avantage==$config_code_avantage)$code_valide=true;
+			}
 			if($code_valide){
-				//remplacer avec l'avantage calculé dans le tableau
+				//afficher le formulaire avec l'avantage calculé
 				$option_calculer = recuperer_fond('formulaires/avantage_calculer_total', $flux['args']['contexte']);
 				$flux['data']['texte'] = preg_replace('%(<tr class="total_ttc(.*?)</tr>)%is', ' '."\n".$option_calculer, $flux['data']['texte']);
 			}
     		
-			//le champ input votre_code_avantage
+			//affiche le champ input votre_code_avantage
 			$option_champ = recuperer_fond('formulaires/avantage_option_input', $flux['args']['contexte']);
 			$flux['data']['texte'] = str_replace('</table>', '</table>' . $option_champ, $flux['data']['texte']);
     		}
