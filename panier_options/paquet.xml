@@ -1,0 +1,21 @@
+<paquet
+	prefix="panier_options"
+	categorie="squelette"
+	version="1.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="prive/themes/spip/images/paniers-32.png"
+	documentation=""
+	schema="1.0.0"
+>
+	<nom>Options du panier</nom>
+	<auteur>Anne-lise Martenot</auteur>
+	<auteur lien="http://www.elastick.net">Elastick.net</auteur>
+
+	<necessite nom="paniers" compatibilite="[1.0.2;[" />
+	
+	<pipeline nom="recuperer_fond" inclure="panier_options_pipelines.php" />
+	<pipeline nom="formulaire_charger" inclure="panier_options_pipelines.php" />
+	<pipeline nom="formulaire_verifier" inclure="panier_options_pipelines.php" />
+	<pipeline nom="formulaire_traiter" inclure="panier_options_pipelines.php" />
+</paquet>

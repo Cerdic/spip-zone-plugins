@@ -1,0 +1,20 @@
+[(#REM) on recupere depuis le data _pourcentage_avantage via panier_options_formulaire_charger
+] 
+#SET{unite_pourcent,#ENV{_pourcentage_avantage}}
+#SET{pourcent,#EVAL{#GET{unite_pourcent}/100}}
+[(#SET{prix_code_avantage,[(#EVAL{#PRIX*{panier,#ENV{_id_panier}}*#GET{pourcent}})]})]
+
+<tr class="sous_total">
+	<td colspan="3"><:panier_options:panier_sous_total:></td>
+	<td class="montant">#PRIX{panier,#ENV{_id_panier}}</td>
+</tr>
+<tr class="code_avantage">
+	<td colspan="3"><:panier_options:promotion_avec_code_avantage:> (-#GET{unite_pourcent}%)</td>
+		[(#SET{prix_code_avantage,[(#EVAL{#PRIX*{panier,#ENV{_id_panier}}*#GET{pourcent}})]})]
+	<td class="montant">[-(#GET{prix_code_avantage}|prix_formater)]</td>
+</tr>
+<tr class="total_ttc">
+	<td colspan="3"><:paniers:panier_total_ttc:></td>
+	<td class="montant">[(#PRIX{panier,#ENV{_id_panier}}|moins{#GET{prix_code_avantage}}|prix_formater)]</td>
+</tr>
+
