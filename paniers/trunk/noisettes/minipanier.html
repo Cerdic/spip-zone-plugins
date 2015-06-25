@@ -6,13 +6,9 @@
 <div class="minipanier">
 	[(#ENV{afficher_titre_noisette}|oui)
 	[<[(#GET{niveau_titre}) ]class="#GET{niveau_titre}">(#GET{titre})</[(#GET{niveau_titre})]>]]
-	#SET{nb_produits,0}
-	<BOUCLE_contenu_panier(PANIERS_LIENS){id_panier=#SESSION{id_panier}}>
-	[(#SET{nb_produits,#GET{nb_produits}|plus{#QUANTITE}})]
-	</BOUCLE_contenu_panier>
 	<div class="minipanier-content">
 		<ul>
-			<li>[(#GET{nb_produits}|singulier_ou_pluriel{'paniers:produit_un', 'paniers:produits_plusieurs'})]</li>
+			<li>[(#SESSION{id_panier}|paniers_nombre_produits|singulier_ou_pluriel{'paniers:produit_un', 'paniers:produits_plusieurs'})]</li>
 			<li>#PRIX{panier,#SESSION{id_panier}}</li>
 		</ul>
 	</div>
