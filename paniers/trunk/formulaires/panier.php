@@ -45,7 +45,7 @@ function formulaires_panier_traiter($id_panier=0){
 	if (!$id_panier) $id_panier = session_get('id_panier');
 	
 	$quantites = _request('quantites');
-	$ok = true;
+	$ok = 0;
 	
 	if (is_array($quantites))
 		foreach($quantites as $objet => $objets_de_ce_type)
@@ -53,17 +53,19 @@ function formulaires_panier_traiter($id_panier=0){
 				$quantite = intval($quantite);
 				// Si la quantite est 0, on supprime du panier
 				if (!$quantite)
-					$ok &= sql_delete(
+					$ok += sql_delete(
 						'spip_paniers_liens',
 						'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet)
 					);
 				// Sinon on met à jour
 				else{
-					$ok &= sql_updateq(
-						'spip_paniers_liens',
-						array('quantite' => $quantite),
-						'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet)
-					);
+					if ($quantite!=sql_getfetsel("quantite","spip_paniers_liens",'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet))){
+						$ok += sql_updateq(
+							'spip_paniers_liens',
+							array('quantite' => $quantite),
+							'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet)
+						);
+					}
 				}
 			}
 	
@@ -74,8 +76,9 @@ function formulaires_panier_traiter($id_panier=0){
 		'id_panier = '.$id_panier
 	);
 	
-	if ($ok)
+	if ($ok){
 		$retours['message_ok'] = _T('paniers:panier_quantite_ok');
+	}
 	
 	return $retours;
 }
