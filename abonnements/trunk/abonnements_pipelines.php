@@ -130,9 +130,20 @@ function abonnements_post_edition($flux){
 		foreach ($details as $detail) {
 			// Si on trouve une offre d'abonnement
 			if ($detail['objet'] = 'abonnements_offre' and ($id_abonnements_offre = $detail['id_objet']) > 0) {
+				// Si la commande est renouvelable et que c'est le PREMIER paiement (activation)
+				// on force toujours la création d'un nouvel abonnement
+				$forcer_creation = false;
+				if (
+					in_array($commande['echeances_type'], array('mois', 'annee'))
+					and include_spip('inc/commandes_echeances')
+					and commandes_nb_echeances_payees($id_commande) <= 1
+				) {
+					$forcer_creation = true;
+				}
+				
 				// On crée ou renouvelle
-				$action = charger_fonction('creer_ou_renouveler_abonnement', 'action/');
-				$retour = $action($id_auteur.'/'.$id_abonnements_offre);
+				include_spip('inc/abonnements');
+				$retour = abonnements_creer_ou_renouveler($id_auteur, $id_abonnements_offre, $forcer_creation);
 				
 				// Si on a un retour correct avec un abonnement
 				if (
