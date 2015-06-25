@@ -6,11 +6,13 @@
 
 ]
 #CACHE{3600*100}
-<li class='editer editer_parents[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
+
+<[(#SPIP_VERSION|substr{0,3}|=={3.0}|?{li,div})] class='editer editer_parents[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
 	<label><:polyhier:label_parents:></label>[
 	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{parents})</span>
-	]<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>
+	]
+	<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>
 	<input type="hidden" name="confirme_deplace" value="oui" />
-	<script type='text/javascript'>jQuery(function() {jQuery('li.editer_parent').remove();});</script>
-</li>
+	<script type='text/javascript'>jQuery(function() {jQuery('.editer_parent').remove();});</script>
+</[(#SPIP_VERSION|substr{0,3}|=={3.0}|?{li,div})]>
 
