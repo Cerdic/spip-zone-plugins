@@ -15,3 +15,13 @@ if (isset($_COOKIE[$GLOBALS['cookie_prefix'].'_panier'])
 
 }
 
+
+/**
+ * Calculer rapidement le nombre de produits dans un panier
+ * @param $id_panier
+ * @return int|number
+ */
+function paniers_nombre_produits($id_panier){
+	$quantite = intval(sql_getfetsel("SUM(quantite)","spip_paniers_liens","id_panier=".intval($id_panier)));
+	return $quantite;
+}
