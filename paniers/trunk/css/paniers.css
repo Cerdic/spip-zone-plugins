@@ -3,7 +3,7 @@
 	border-spacing:0;
 }
 
-.formulaire_panier .prix_unitaire, .formulaire_panier .quantite, .formulaire_panier .montant, .formulaire_panier .total_ht,.formulaire_panier .taxes, .formulaire_panier .total_ttc{
+.formulaire_panier .prix_unitaire, .formulaire_panier .quantite, .formulaire_panier .montant, .formulaire_panier .total{
 	text-align:right;
 }
 

@@ -1,11 +1,5 @@
 #CACHE{0}
 <div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
-	[<p class="reponse_formulaire reponse_formulaire_ok">
-		(#ENV*{message_ok})
-	</p>]
-	[<p class="reponse_formulaire reponse_formulaire_erreur">
-		(#ENV*{message_erreur})
-	</p>]
 	<B_contenu_panier>
 	<form method="post" action="#ENV{action}" enctype="multipart/form-data">
 		<div>
@@ -35,17 +29,23 @@
 						<td class="montant">[(#GET{prix_unitaire}|mult{#QUANTITE}|prix_formater)]</td>
 					</tr>
 					</BOUCLE_contenu_panier>
-					<tr class="total_ttc">
-						<td colspan="3"><:paniers:panier_total_ttc:></td>
+					<tr class="total_ttc[(#ENV*{message_ok}|oui)reponse_formulaire reponse_formulaire_ok]">
+						<td class="description">[(#ENV*{message_ok})]</td>
+						<td class="total"><:paniers:panier_total_ttc:></td>
+						<td class="quantite"></td>
 						<td class="montant">#PRIX{panier,#ENV{_id_panier}}</td>
 					</tr>
 					[(#GET{cumul_taxes}|>{0}|oui)
 					<tr class="taxes">
-						<td colspan="3"><:paniers:dont_total_taxe:></td>
+						<td class="total" colspan="2"><:paniers:dont_total_taxe:></td>
+						<td class="quantite"></td>
 						<td class="montant">[(#GET{cumul_taxes}|prix_formater)]</td>
 					</tr>]
 				</tbody>
 			</table>
+			[<p class="reponse_formulaire reponse_formulaire_erreur">
+				(#ENV*{message_erreur})
+			</p>]
 			<p class="boutons">
 				<span class="image_loading">&nbsp;</span>
 				<input type="submit" class="submit" value="<:paniers:panier_recalculer:>" />
