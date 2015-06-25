@@ -24,7 +24,7 @@
 						<td class="description">#INCLURE{fond=formulaires/inc-panier-description-emplette,objet=#OBJET,id_objet=#ID_OBJET}</td>
 						<td class="prix_unitaire">[(#GET{prix_unitaire}|prix_formater)]</td>
 						<td class="quantite">
-							<input type="text" class="text" size="3" name="quantites[#OBJET][#ID_OBJET]" value="[(#ENV{quantites}|table_valeur{#OBJET}|table_valeur{#ID_OBJET}|sinon{#QUANTITE})]" />
+							<input type="text" class="text quantite" size="3" name="quantites[#OBJET][#ID_OBJET]" value="[(#ENV{quantites}|table_valeur{#OBJET}|table_valeur{#ID_OBJET}|sinon{#QUANTITE})]" />
 						</td>
 						<td class="montant">[(#GET{prix_unitaire}|mult{#QUANTITE}|prix_formater)]</td>
 					</tr>
@@ -48,7 +48,7 @@
 			</p>]
 			<p class="boutons">
 				<span class="image_loading">&nbsp;</span>
-				<input type="submit" class="submit" value="<:paniers:panier_recalculer:>" />
+				<button class="submit recalcul" type="submit" name="recalcul" value="1"><:paniers:panier_recalculer:></button>
 			</p>
 		</div>
 	</form>
@@ -56,3 +56,9 @@
 	<:paniers:panier_vide:>
 	<//B_contenu_panier>
 </div>
+<script type="application/javascript">
+jQuery(function(){
+	jQuery('.formulaire_panier .submit.recalcul').css('visibility','hidden');
+	jQuery('.formulaire_panier').on('keypress change focus','input.quantite',function(){jQuery(this).closest('.formulaire_panier').find('.submit.recalcul').css('visibility','visible')});
+});
+</script>
