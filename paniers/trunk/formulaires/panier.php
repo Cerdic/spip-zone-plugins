@@ -78,8 +78,8 @@ function formulaires_panier_traiter($id_panier=0){
 		// Mais dans tous les cas on met la date du panier à jour
 		sql_updateq(
 			'spip_paniers',
-			array('date'=>'NOW()'),
-			'id_panier = '.$id_panier
+			array('date'=>date('Y-m-d H:i:s')),
+			'id_panier = '.intval($id_panier)
 		);
 		if ($ok){
 			$retours['message_ok'] = _T('paniers:panier_quantite_ok');
