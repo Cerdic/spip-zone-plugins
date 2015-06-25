@@ -14,11 +14,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_disposition_verticale' => 'Verticale',
 
 	// M
+	'mode_css' => 'Mode css',
 	'mode_debug' => 'Mode debug',
 	'mode_inclure' => 'Mode inclure',
 	'mode_profile' => 'Mode profile',
 	'mode_traduction' => 'Mode traduction',
-	'mode_css' => 'Mode css',
 
 	// T
 	'titre_debug' => 'Debug',
