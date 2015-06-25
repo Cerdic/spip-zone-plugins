@@ -47,6 +47,19 @@ function commandes_lister_montants_echeances($echeances) {
 	return $montants_echeances;
 }
 
+function commandes_nb_echeances_payees($id_commande) {
+	$nb_paiements = 0;
+	
+	if ($transactions_commande = intval(sql_countsel(
+		'spip_transactions',
+		array('id_commande = '.$id_commande, 'statut = "ok"')
+	))) {
+		$nb_paiements += $transactions_commande;
+	}
+	
+	return $nb_paiements;
+}
+
 /**
  * Trouver la prochaine échéance à payer pour une commande
  * 
@@ -83,14 +96,8 @@ function commandes_trouver_prochaine_echeance($id_commande, $echeances=null) {
 		// Sinon on va chercher a combien de paiements payés on en est déjà
 		// afin de trouver le montant de la prochaine échéance
 		else {
-			$nb_paiements = 0;
-			if ($transactions_commande = sql_allfetsel(
-				'id_transaction',
-				'spip_transactions',
-				array('id_commande = '.$id_commande, 'statut = "ok"')
-			)) {
-				$nb_paiements += count($transactions_commande);
-			}
+			// On cherche le nombre de paiements valides pour cette commande
+			$nb_paiements = commandes_nb_echeances_payees($id_commande);
 			
 			// On liste les montants
 			$montants_echeances = commandes_lister_montants_echeances($echeances);
