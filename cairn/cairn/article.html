@@ -19,23 +19,21 @@
 </BOUCLE_auteurs></grauteur></B_auteurs>
 [<resume lang="#LANG"><titre>Résumé</titre><alinea>(#INTRODUCTION||PtoBR|filtrer_texte_cairn)</alinea></resume>]
 <B_mots><grmotcle lang="#LANG"><titre>Mots-clés</titre><BOUCLE_mots(MOTS){id_article}{id_groupe!IN 5}><motcle>[(#TITRE|cdata)]</motcle></BOUCLE_mots></grmotcle></B_mots>
+[<chapo><alinea>(#CHAPO|PtoBR|cairn_traiter{reset})</alinea></chapo>]
 </liminaire>
 
 <corps>
 [(#LOGO_ARTICLE)]
-[(#REM) on demande que le chapo soit en gras…]
-[(#SET{chapo,[(#CHAPO*|?{#VAL{"{{"}|concat{#CHAPO*}|concat{"}}
 
-"}})]})]
+[(#TEXTE|concat{""}|concat{#PS}|cairn_traiter{reset})]
 
-[(#GET{chapo}|concat{#TEXTE*}|
-concat{"
-
-"}|concat{#PS*}|propre|cairn_traiter{reset})]
-
-<BOUCLE_portfolio(DOCUMENTS){id_article}{vu=non}{mode=document}{extension IN gif,jpg,png,pdf}>
-#MODELE{doc,id_document=#ID_DOCUMENT}
+<BOUCLE_portfolio(DOCUMENTS){id_article}{vu=non}{mode=document}{extension IN gif,jpg,png,pdf}{doublons}>
+#MODELE{doc_cairn,id_document=#ID_DOCUMENT}
 </BOUCLE_portfolio>
+<BOUCLE_album(ALBUMS){id_article}><BOUCLE_doc(DOCUMENTS){id_album}{extension IN jpg,png}{doublons}>
+#MODELE{doc_cairn,id_document=#ID_DOCUMENT}
+</BOUCLE_doc></BOUCLE_album>
+
 </corps>
 
 [<partiesann>

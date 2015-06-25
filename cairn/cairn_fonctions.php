@@ -21,7 +21,7 @@ define('_CHEVRONA', '* [oo *');
 define('_CHEVRONB', '* oo] *');
 
 // transformer les images ou logos spip en "figure" cairn
-function cairn_figure($html, $numero, $titre=null, $desc=null) {
+function cairn_figure($html, $numero, $titre=null, $desc=null,$cred=null) {
 	static $cpt = array();
 
 	$c = ++ $cpt[$numero];
@@ -30,15 +30,22 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 		// titre
 		$titre = '';
 		$titre = extraire_balise($legende, 'h3');
-		// description
+		// descriptif
 		$desc = '';
-		if (preg_match('/span/',$legende)) {
+		if (preg_match('/descriptif/',$legende)) {
 			// la description
-			foreach (extraire_balises($fig,'span') as $description) {
+			foreach (extraire_balises($fig,'descriptif') as $description) {
 				$desc .= "<alinea>".trim(supprimer_tags($description))."</alinea>";
 			}
 		}
-		
+		$cred = '';
+		if (preg_match('/credit/',$legende)) {
+			// la description
+			foreach (extraire_balises($fig,'credit') as $credit) {
+				$cred .= "<source>".trim(supprimer_tags($credit))."</source>";
+			}
+		}
+
 
 		// fichiers PDF
 		$src = extraire_attribut(extraire_balise($fig, 'a'), 'href');
@@ -49,7 +56,7 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 			rename($l, "$numero/$file");
 		}
 
-		$figure = cairn_figure(extraire_balise($fig,'img'),$numero,$titre,$desc);
+		$figure = cairn_figure(extraire_balise($fig,'img'),$numero,$titre,$desc,$cred);
 		$html = str_replace($fig, $figure, $html);
 	}
 
@@ -70,7 +77,7 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 		if ($titre)
 			$titre = "<titre>".trim(supprimer_tags($titre))."</titre>";
 		if ($titre OR $desc) {
-			$legende = "    <legende lang='fr'>
+			$legende = "<legende lang='fr'>
         $titre
         $desc
         </legende>
@@ -78,6 +85,8 @@ function cairn_figure($html, $numero, $titre=null, $desc=null) {
 		} else {
 			$legende = '';
 		}
+		if ($cred)
+			$legende .= $cred;
 
 		$figure = "<figure id='fi$c'>
 $legende
@@ -99,7 +108,7 @@ function cairn_prenom_nom($blaze) {
 }
 
 // convertir un HTML en format eruditArticle
-function cairn_traiter($t, $reset) { 
+function cairn_traiter($t, $reset) {
 	$t = cairn_decoupe_hN($t, $reset);
 	return str_replace(array(_CHEVRONA,_CHEVRONB), array('<', '>'), $t);
 }
