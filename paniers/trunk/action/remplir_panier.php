@@ -5,8 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Remplir un panier avec un objet quelconque
- * @param unknown_type $arg
- * @return unknown_type
+ * @param string $arg
  */
 function action_remplir_panier_dist($arg=null) {
 	if (is_null($arg)){
@@ -21,17 +20,18 @@ function action_remplir_panier_dist($arg=null) {
 	
 	// Il faut cherche le panier du visiteur en cours
 	include_spip('inc/session');
-	$id_panier = session_get('id_panier');
-	
-	//est-ce que le panier est bien en base
-	$id_panier_base = intval(sql_getfetsel(
-			'id_panier',
-			'spip_paniers',
-			array(
-				'id_panier = '.sql_quote($id_panier),
-				'statut = '.sql_quote('encours')
-			)
-	));
+	$id_panier_base = 0;
+	if ($id_panier = session_get('id_panier')){
+		//est-ce que le panier est bien en base
+		$id_panier_base = intval(sql_getfetsel(
+				'id_panier',
+				'spip_paniers',
+				array(
+					'id_panier = '.intval($id_panier),
+					'statut = '.sql_quote('encours')
+				)
+		));
+	}
 	
 	// S'il n'y a pas de panier, on le crée
 	if (!$id_panier OR !$id_panier_base){
@@ -48,9 +48,9 @@ function action_remplir_panier_dist($arg=null) {
 			'quantite',
 			'spip_paniers_liens',
 			array(
-				'id_panier = '.$id_panier,
+				'id_panier = '.intval($id_panier),
 				'objet = '.sql_quote($objet),
-				'id_objet = '.$id_objet
+				'id_objet = '.intval($id_objet)
 			)
 		));
 		// Si on a déjà une quantité, on fait une mise à jour
@@ -58,7 +58,7 @@ function action_remplir_panier_dist($arg=null) {
 			sql_updateq(
 				'spip_paniers_liens',
 				array('quantite' => $quantite_deja + $quantite),
-				'id_panier = '.$id_panier.' and objet = '.sql_quote($objet).' and id_objet = '.$id_objet
+				'id_panier = '.intval($id_panier).' and objet = '.sql_quote($objet).' and id_objet = '.intval($id_objet)
 			);
 		}
 		// Sinon on crée le lien
@@ -77,8 +77,8 @@ function action_remplir_panier_dist($arg=null) {
 		// Mais dans tous les cas on met la date du panier à jour
 		sql_updateq(
 			'spip_paniers',
-			array('date'=>'NOW()'),
-			'id_panier = '.$id_panier
+			array('date'=>date('Y-m-d H:i:s')),
+			'id_panier = '.intval($id_panier)
 		);
 	}
 }
