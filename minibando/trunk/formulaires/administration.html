@@ -58,31 +58,29 @@
 </ul></div>
 
 <script type="text/javascript">
-  $(function ($) {
+	$(function ($) {
+		var li_deroulants = $('#minibando > li');
 
-      var li_deroulants = $('#minibando > li');
+		function afficherSousMenu (lien) {
+			li_deroulants.removeClass('afficher');
+			$(lien).parents('#minibando > li').addClass('afficher');
+		}
 
-      function afficherSousMenu (lien) {
-          li_deroulants.removeClass('afficher');
-          $(lien).parents('#minibando > li').addClass('afficher');
-      }
+		function masquerSousMenu (lien) {
+			$(lien).parents('#minibando > li').removeClass('afficher');
+		}
 
-      function masquerSousMenu (lien) {
-          $(lien).parents('#minibando > li').removeClass('afficher');
-      }
-
-      $('#minibando a')
-          .focusin(function () {
-              afficherSousMenu(this);
-          })
-          .focusout(function () {
-              masquerSousMenu(this);
-          })
-          .hover(function () {
-              afficherSousMenu(this);
-          }, function () {
-              masquerSousMenu(this);
-          });
-
-  });
+		$('#minibando a')
+			.focusin(function () {
+				afficherSousMenu(this);
+			})
+			.focusout(function () {
+				masquerSousMenu(this);
+			})
+			.hover(function () {
+				afficherSousMenu(this);
+			}, function () {
+				masquerSousMenu(this);
+			});
+	});
 </script>
