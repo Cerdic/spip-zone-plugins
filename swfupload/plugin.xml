@@ -6,7 +6,7 @@
 	<etat>dev</etat>
 	<description>Ce plugin permet de t&#233;l&#233;charger des images par lot, sans acc&#232;s FTP, directement dans un article. Les fichiers t&#233;l&#233;charg&#233;s apparaissent apr&#232;s avoir actualis&#233; la page. Ils sont de plus accessibles dans le dossier upload.</description>
 	<icon>images/swfupload-24.png</icon>
-	<lien>http://contrib.spip.net/Un-plugin-SWFUpload</lien>
+	<lien>http://contrib.spip.net/SWFUpload-telechargement-par-lot</lien>
 	<prefix>swfupload</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
