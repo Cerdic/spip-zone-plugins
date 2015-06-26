@@ -43,7 +43,7 @@
 		})</li>]
 
 		[(#REM) statuts ]
-		<BOUCLE_statuts(COMMANDES){tout}{fusion statut}>
+		<BOUCLE_statuts(COMMANDES){tout}{fusion statut}{statut!=poubelle}>
 		#SET{actif, #ENV{statut}|=={#STATUT}|?{'oui',''}}
 		[<li[ (#GET{actif}|?{class="on"})]>(#SELF|parametre_url{statut,#STATUT}|lien_ou_expose{
 			[(#CHEMIN_IMAGE{#VAL{commande}|objet_info{statut_images}|table_valeur{#STATUT}}|balise_img)&nbsp;][(#STATUT|commandes_lister_statuts)],

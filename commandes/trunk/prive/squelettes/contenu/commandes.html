@@ -2,7 +2,7 @@
 
 #FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
 
-<INCLURE{fond=prive/objets/liste/commandes, titre_dehors=oui, ajax=commandes, env}>
+<INCLURE{fond=prive/objets/liste/commandes, titre_dehors=oui, statut=#ENV{statut,#LISTE{encours,attente,partiel,paye,envoye,retour,retour_partiel}}, ajax=commandes, env}>
 
 [(#AUTORISER{creer,commande}|oui)
 	[(#URL_ECRIRE{commande_edit}|icone_verticale{<:commandes:commande_creer:>,commande-24.png,edit,right})]
