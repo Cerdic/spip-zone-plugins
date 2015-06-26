@@ -24,7 +24,8 @@ include_spip('inc/base');
  * Sans redirection explicite, la fonction redirige vers la page de la commande 
  *
  * @param string $arg
- *     identifiant du panier
+ *     id_panier pour creer la commande et le detruire
+ *     id_panier-1 pour creer la commande et le conserver
  * @return void
 **/
 function action_commandes_paniers_dist($arg=null){
@@ -35,25 +36,40 @@ function action_commandes_paniers_dist($arg=null){
 		$arg = $securiser_action();
 	}
 
+	$arg = explode("-",$arg);
+	$id_panier = 0;
+	if (count($arg))
+		$id_panier = intval(array_shift($arg));
+	$keep = false;
+	if (count($arg))
+		$keep = intval(array_shift($arg));
+
+
 	// Sans paramètre, récupérer $id_panier dans la session du visiteur actuel
-	if (is_null($id_panier=$arg)) {
-		include_spip('inc/session');
-		$id_panier = session_get('id_panier');
+	if (!$id_panier) {
+		include_spip('inc/paniers');
+		$id_panier = paniers_id_panier_encours();
 	}
 
 	// Si aucun panier ne pas agir
-	if (is_null($id_panier))
+	if (!$id_panier)
 		return;
 
 	// création d'une commande "en cours"
 	// Ses détails sont ensuite remplis d'après le panier en session
 	// via la pipeline post_insertion
+	// TODO : c'est ici qu'il faudrait remplir cette commande avec le panier
+	// toute commande n'est pas bonne a remplir avec le panier automatiquement
+	// cas du bouton "Achat immediat de ce produit" qui va direct au paiement
+	// ne doit pas remplir la commande avec le panier en cours
 	include_spip('inc/commandes');
 	$id_commande = creer_commande_encours();
 
-	// Plus besoin du panier
-	$supprimer_panier = charger_fonction('supprimer_panier_encours', 'action/');
-	$supprimer_panier();
+	// Supprimer le panier ?
+	if (!$keep){
+		$supprimer_panier = charger_fonction('supprimer_panier_encours', 'action/');
+		$supprimer_panier();
+	}
 
 	// Sans redirection donnée, on redirige vers la page de la commande créée
 	if (is_null(_request('redirect'))) {   
