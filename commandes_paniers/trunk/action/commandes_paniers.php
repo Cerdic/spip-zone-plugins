@@ -71,11 +71,8 @@ function action_commandes_paniers_dist($arg=null){
 		$supprimer_panier();
 	}
 
-	// Sans redirection donnée, on redirige vers la page de la commande créée
-	if (is_null(_request('redirect'))) {   
-		$redirect = generer_url_public('commande','id_commande='.$id_commande,true);
-		include_spip('inc/headers');
-		redirige_par_entete($redirect);
+	// Sans redirection donnée, proposer une redirection par defaut vers la page de la commande créée
+	if (is_null(_request('redirect'))) {
+		$GLOBALS['redirect'] = generer_url_public('commande','id_commande='.$id_commande,true);
 	}
 }
-?>
