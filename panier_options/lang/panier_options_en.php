@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 //C
 	'code_avantage'=>'Client Avantage Code',
-	'code_avantage_invalide'=>'Oops, your avantage code is no more available.',
+	'code_avantage_invalide'=>'Oops, this avantage code is not available.',
 	'code_avantage_explication'=>'Enter the code advantage of your choice, clear the fields to remove the option',
 //O
 	'options_paniers_fieldset'=>'Activate an advantage code on all baskets',
