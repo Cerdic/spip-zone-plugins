@@ -68,12 +68,21 @@ function uploadhtml5_formulaire_fond($flux) {
         $chercher_logo = charger_fonction('chercher_logo','inc');
         if (!$chercher_logo($id_objet, id_table_objet($objet))) {
 
-            // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte de joindre_document
+
+            // Bloc ajax par défaut
+            $ajaxReload = 'navigation';
+
+            // Cas spécial: si on édite le logo du site, il faut recharger le contenu et non la navigation
+            if ($id_objet == 0 and $objet == 'site')
+                $ajaxReload = 'contenu';
+
+            // Récupérer le formulaire d'upload en html5 et lui passer une partie du contexte
             $uploadhtml5 = recuperer_fond(
                 'prive/squelettes/inclure/uploadhtml5_logo',
                 array(
                     'type' => $objet,
-                    'id' => $id_objet
+                    'id' => $id_objet,
+                    'ajaxReload' => $ajaxReload
                 )
             );
 
