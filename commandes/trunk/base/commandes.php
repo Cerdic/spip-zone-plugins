@@ -87,6 +87,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'retour'             => 'commandes:statut_retour',
 			'retour_partiel'     => 'commandes:statut_retour_partiel',
 			'erreur'             => 'commandes:statut_erreur',
+			'poubelle'           => 'commandes:statut_poubelle',
 		),
 		'statut_images' => array(
 			'encours'            => 'puce-commande-encours.png',

@@ -30,12 +30,13 @@ function creer_commande_encours(){
 
 	// S'il y a une commande en cours dans la session, on la supprime
 	if (($id_commande = intval(session_get('id_commande'))) > 0){
-		// Si la commande est toujours "encours" on la supprime de la base
-		if ($statut = sql_getfetsel('statut', 'spip_commandes', 'id_commande = '.$id_commande) and $statut == 'encours'){
-			spip_log("Suppression d'une commande encours ancienne en session : $id_commande");
-			commandes_supprimer($id_commande);
+		// Si la commande est toujours "encours" il faut la mettre a la poubelle
+		// il ne faut pas la supprimer tant qu'il n'y a pas de nouvelles commandes pour etre sur qu'on reutilise pas son numero
+		// (sous sqlite la nouvelle commande reprend le numero de l'ancienne si on fait delete+insert)
+		if ($statut = sql_getfetsel('statut', 'spip_commandes', 'id_commande = '.intval($id_commande)) AND $statut == 'encours'){
+			spip_log("Commande ancienne encours->poubelle en session : $id_commande",'commandes');
+			sql_updateq("spip_commandes",array('statut'=>'poubelle'),'id_commande = '.intval($id_commande));
 		}
-
 		// Dans tous les cas on supprime la valeur de session
 		session_set('id_commande');
 	}
@@ -75,7 +76,7 @@ function commandes_supprimer($ids_commandes) {
 	if (!$ids_commandes) return false;
 	if (!is_array($ids_commandes)) $ids_commandes = array($ids_commandes);
 
-	spip_log("commandes_effacer : suppression de commande(s) : " . implode(',', $ids_commandes));
+	spip_log("commandes_effacer : suppression de commande(s) : " . implode(',', $ids_commandes),'commandes');
 
 	$in_commandes = sql_in('id_commande', $ids_commandes);
 
@@ -88,7 +89,7 @@ function commandes_supprimer($ids_commandes) {
 		$adresses_commandes = array_unique(array_map('reset',$adresses_commandes));
 
 		// d'abord, on dissocie les adresses et les commandes
-		spip_log("commandes_effacer : dissociation des adresses des commandes à supprimer : " . implode(',', $adresses_commandes));
+		spip_log("commandes_effacer : dissociation des adresses des commandes à supprimer : " . implode(',', $adresses_commandes),'commandes');
 		objet_dissocier(array('adresse'=>$adresses_commandes), array('commande'=>$ids_commandes));
 
 		// puis si les adresses ne sont plus utilisées nul part, on les supprime

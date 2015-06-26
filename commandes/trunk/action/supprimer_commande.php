@@ -35,10 +35,12 @@ function action_supprimer_commande_dist($arg=null) {
 	}
 	$id_commande = $arg;
 
-	// suppression
+	// suppression : on ne supprime pas de la base mais on mets le statut poubelle
+	// un cron supprimera quand ca sera safe, c'est a dire qu'il existera au moins une nouvelle commande
+	// pour etre sur de ne pas reutiliser ce id_commande (sous sqlite)
 	if ($id_commande = intval($id_commande)) {
-		include_spip('inc/commandes');
-		commandes_supprimer($id_commande);
+		spip_log("Commande $id_commande -> poubelle",'commandes');
+		sql_updateq("spip_commandes",array('statut'=>'poubelle'),'id_commande = '.intval($id_commande));
 	}
 
 }
