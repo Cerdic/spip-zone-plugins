@@ -5,10 +5,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 function formulaires_panier_charger($id_panier=0){
-	include_spip('inc/session');
-	
-	// On commence par chercher le panier du visiteur actuel s'il n'est pas donné
-	if (!$id_panier) $id_panier = session_get('id_panier');
+
+	// On commence par chercher le panier du visiteur actuel s'il n'est pas fourni a l'appel du formulaire
+	include_spip('inc/paniers');
+	if (!$id_panier) $id_panier = paniers_id_panier_encours();
 	
 	$contexte = array(
 		'_id_panier' => $id_panier,
@@ -40,11 +40,11 @@ function formulaires_panier_verifier($id_panier=0){
 }
 
 function formulaires_panier_traiter($id_panier=0){
-	include_spip('inc/session');
 	$retours = array();
 	
-	// On commence par chercher le panier du visiteur actuel s'il n'est pas donné
-	if (!$id_panier) $id_panier = session_get('id_panier');
+	// On commence par chercher le panier du visiteur actuel s'il n'est pas fourni a l'appel du formulaire
+	include_spip('inc/paniers');
+	if (!$id_panier) $id_panier = paniers_id_panier_encours();
 
 	if (_request('vider')){
 		$supprimer_panier = charger_fonction("supprimer_panier","action");

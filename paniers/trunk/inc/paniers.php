@@ -12,9 +12,24 @@ function paniers_id_panier_encours(){
 	static $id_panier;
 	// Si on a déjà fait les calculs, on termine déjà
 	if ($id_panier > 0) return $id_panier;
+
+	// si rien en cookie ni session, rien a faire (perf issue visiteurs anonymes)
+	if (!(isset($_COOKIE[$GLOBALS['cookie_prefix'].'_panier'])
+	  OR (isset($GLOBALS['visiteur_session']['id_panier']) AND $GLOBALS['visiteur_session']['id_panier'])
+	  OR (isset($GLOBALS['visiteur_session']['id_auteur']) AND $GLOBALS['visiteur_session']['id_auteur']))){
+		return $id_panier;
+	}
+
 	
 	$id_panier = 0;
-	$id_auteur = (isset($GLOBALS['visiteur_session']['id_auteur']) AND $GLOBALS['visiteur_session']['id_auteur']) ? $GLOBALS['visiteur_session']['id_auteur'] : 0;
+
+	// le session id_panier est toujours pose d'apres le cookie, donc si il est la on peut s'y fier
+	// c'est plus rapide
+	if (isset($GLOBALS['visiteur_session']['id_panier']) AND $id_panier=intval($GLOBALS['visiteur_session']['id_panier'])){
+		return $id_panier;
+	}
+
+	// sinon on regarde le cookie
 	$nom_cookie = $GLOBALS['cookie_prefix'].'_panier';
 	$cookie = isset($_COOKIE[$nom_cookie]) ? $_COOKIE[$nom_cookie] : null;
 
@@ -30,12 +45,14 @@ function paniers_id_panier_encours(){
 			)
 		));
 	}
-	
-	// S'il n'y a pas de panier avec le cookie, on regarde s'il y a un auteur connecté et un panier qui lui est lié
+
+	// S'il n'y a pas de panier avec le cookie, on regarde si le visiteur est identifie
+	// et si un panier est lié a son id_auteur
 	if (!$id_panier
-		and $id_auteur
-	  and include_spip('base/abstract_sql')
-		and $panier = sql_fetsel(
+		AND isset($GLOBALS['visiteur_session']['id_auteur'])
+		AND $id_auteur=intval($GLOBALS['visiteur_session']['id_auteur'])
+	  AND include_spip('base/abstract_sql')
+		AND $panier = sql_fetsel(
 			'id_panier, cookie, date',
 			'spip_paniers',
 			array(
@@ -45,8 +62,7 @@ function paniers_id_panier_encours(){
 			'',
 			'date desc',
 			'0,1'
-		)
-	){
+		)){
 		$date = $panier['date'];
 		$cookie = $panier['cookie'];
 
@@ -61,6 +77,7 @@ function paniers_id_panier_encours(){
 	}
 		
 	// Si on a bien un panier et un cookie à la fin
+	// synchroniser cookie et id_auteur en session
 	if ($id_panier > 0 and $cookie){
 		if (!function_exists('lire_config'))
 			include_spip('inc/config');
@@ -75,7 +92,7 @@ function paniers_id_panier_encours(){
 			session_set('id_panier', $id_panier);
 		}
 	}
-	// Sinon on vide le cookie et la session si besoin
+	// Sinon on vide le cookie et la session si besoin => evite un appel a cette fonction au prochain hit
 	else{
 		paniers_supprimer_panier_en_cours();
 	}
@@ -140,4 +157,3 @@ function paniers_creer_panier(){
 	return $id_panier;
 }
 
-?>

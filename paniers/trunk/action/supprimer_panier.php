@@ -21,9 +21,8 @@ function action_supprimer_panier_dist($arg=null) {
 
 		// supprimer le panier de la session si c'est le meme
 		// ca permet potentiellement de retrouver une session vide (perf issue)
-		include_spip('inc/session');
-		if ($id_panier==session_get('id_panier')){
-			include_spip('inc/paniers');
+		include_spip('inc/paniers');
+		if ($id_panier==paniers_id_panier_encours()){
 			paniers_supprimer_panier_en_cours();
 		}
 	}

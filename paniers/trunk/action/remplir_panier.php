@@ -19,9 +19,9 @@ function action_remplir_panier_dist($arg=null) {
 	$quantite = intval($quantite) ? intval($quantite) : 1;
 	
 	// Il faut cherche le panier du visiteur en cours
-	include_spip('inc/session');
+	include_spip('inc/paniers');
 	$id_panier_base = 0;
-	if ($id_panier = session_get('id_panier')){
+	if ($id_panier = paniers_id_panier_encours()){
 		//est-ce que le panier est bien en base
 		$id_panier_base = intval(sql_getfetsel(
 				'id_panier',
