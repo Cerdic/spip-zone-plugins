@@ -7,14 +7,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @return $flux 
  */
- 
-function test($flux){
-	if ($flux['args']['form'] == 'panier'){
-    		$openid = recuperer_fond('formulaires/option_avantage', $flux['args']['contexte']);
-    		$flux['data'] = preg_replace('%(<tr class="taxes(.*?)</tr>)%is', '$1'."\n".$openid, $flux['data']);
-    	}
-    	return $flux;
-}
 
 function panier_options_recuperer_fond($flux){
 	
