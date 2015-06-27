@@ -6,9 +6,13 @@
 }})]
 #SET{chaine_defaut,reservation:type_lien}<B_liste_reservations>
 #ANCRE_PAGINATION
+<BOUCLE_liste_reservations_total(RESERVATIONS){id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{si #ENV{id_reservation_source}|>={0}|oui}>
+</BOUCLE_liste_reservations_total>
+#SET{grand_total,#GRAND_TOTAL}
+</B_liste_reservations_total>
 <div class="liste-objets reservations">
-<table class='spip liste'>
-    [<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})</strong></caption>]
+<table class='spip liste'>[(#GET{grand_total}|non)#SET{grand_total,#GRAND_TOTAL}]
+    [<caption><strong class="caption">(#ENV*{titre,#GET{grand_total}|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})</strong></caption>]
     <thead>
         <tr class='first_row'>
             <th class='picto' scope='col'></th>
@@ -20,8 +24,8 @@
         </tr>
     </thead>
     <tbody>
-    <BOUCLE_liste_reservations(RESERVATIONS){id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,num reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
-        <tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+    <BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,num reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+        <tr>
             <td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
             <td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
             <td class='reference principale'><a href="[(#ID_RESERVATION|generer_url_entite{reservation})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RESERVATION">
@@ -51,6 +55,9 @@
                 #ID_RESERVATION
             })]</td>
         </tr>
+        [(#ENV{id_reservation_source}|=={0}|oui)
+          <INCLURE{fond=prive/objets/liste/inc-reservations_reservations_liees,env,id_reservation_source=#ID_RESERVATION}/>
+        ]
     </BOUCLE_liste_reservations>
     </tbody>
 </table>
