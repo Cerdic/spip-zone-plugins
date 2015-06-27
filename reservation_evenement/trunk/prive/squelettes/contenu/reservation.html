@@ -43,6 +43,8 @@
 
 <INCLURE{fond=prive/objets/liste/reservations_details,id_reservation,par=id_evenement,env}/>
 
+<INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,id_reservation_source=#ID_RESERVATION}/>
+
 [(#AUTORISER{creer,reservations_detail})
     [(#URL_ECRIRE{reservations_detail_edit,new=oui&id_reservation=#ID_RESERVATION}|icone_verticale{<:reservations_detail:icone_creer_reservations_detail:>,reservations_detail,new,right})]
 ]

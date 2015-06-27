@@ -6,13 +6,21 @@
 }})]
 #SET{chaine_defaut,reservation:type_lien}<B_liste_reservations>
 #ANCRE_PAGINATION
-<BOUCLE_liste_reservations_total(RESERVATIONS){id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{si #ENV{id_reservation_source}|>={0}|oui}>
+<BOUCLE_liste_reservations_total(RESERVATIONS){id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{si #ENV{id_reservation_source}|=={0}|oui}>
 </BOUCLE_liste_reservations_total>
 #SET{grand_total,#GRAND_TOTAL}
+#SET{titre_singulier,reservation:info_1_reservation}
+#SET{titre_pluriel,reservation:info_nb_reservations}
 </B_liste_reservations_total>
+
+[(#ENV{id_reservation_source}|>{0}|oui)
+  #SET{titre_singulier,reservation:info_1_reservation_liee}
+  #SET{titre_pluriel,reservation:info_nb_reservations_liees}
+  ]
 <div class="liste-objets reservations">
 <table class='spip liste'>[(#GET{grand_total}|non)#SET{grand_total,#GRAND_TOTAL}]
-    [<caption><strong class="caption">(#ENV*{titre,#GET{grand_total}|singulier_ou_pluriel{reservation:info_1_reservation,reservation:info_nb_reservations}})</strong></caption>]
+
+    [<caption><strong class="caption">(#ENV*{titre,#GET{grand_total}|singulier_ou_pluriel{#GET{titre_singulier},#GET{titre_pluriel}}})</strong></caption>]
     <thead>
         <tr class='first_row'>
             <th class='picto' scope='col'></th>
@@ -64,5 +72,7 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_reservations>
-<div class="liste-objets reservations caption-wrap"><strong class="caption"><:reservation:info_aucun_reservation:></strong></div>
+[(#ENV{id_reservation_source}|>{0}|non)
+  <div class="liste-objets reservations caption-wrap"><strong class="caption"><:reservation:info_aucun_reservation:></strong></div>
+]
 <//B_liste_reservations>
