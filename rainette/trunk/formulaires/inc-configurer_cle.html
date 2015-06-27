@@ -6,5 +6,5 @@
 	</p>
 	<label for="#ENV{service}_inscription"><:rainette:label_cle:></label>
 	[<span class="erreur">(#ENV**{erreurs}|table_valeur{inscription})</span>]
-	<input type="text" name="inscription" class="text" value="#ENV*{inscription}" id="#ENV{service}_inscription"[ size="(#GET{taille})"] />
+	<input type="text" name="inscription" class="text" value="#ENV*{inscription}" id="#ENV{service}_inscription"[ size="(#ENV{taille})"] />
 </li>
