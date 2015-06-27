@@ -8,7 +8,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
 			<legend><:rainette:legende_configurer_inscription:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				#SET{url, <a class="spip_out" href="http://www.wunderground.com/weather/api/">Wunderground.com</a>}
 				<INCLURE{fond=formulaires/inc-configurer_cle,
 					service=wunderground,
@@ -19,7 +19,7 @@
 		</fieldset>
 		<fieldset>
 			<legend><:rainette:legende_configurer_format:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				<INCLURE{fond=formulaires/inc-configurer_format,
 					service=owm,
 					defaut=json,
@@ -28,7 +28,7 @@
 		</fieldset>
 		<fieldset>
 			<legend><:rainette:legende_configurer_affichage:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				<INCLURE{fond=formulaires/inc-configurer_unite,
 					service=wunderground,
 					env} />
