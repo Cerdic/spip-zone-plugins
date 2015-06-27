@@ -189,7 +189,7 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
           'tout'
         )
       )),
-    'texte_changer_statut' => 'reservations:texte_changer_statut_reservations_detail',
+    'texte_changer_statut' => 'reservations_detail:texte_changer_statut_reservations_detail',
   );
   //adaptation de la déclaration si le plugin prix_objets est installé
   if (test_plugin_actif('prix_objets')) {

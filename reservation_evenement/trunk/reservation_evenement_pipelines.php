@@ -58,7 +58,6 @@ function reservation_evenement_affiche_auteurs_interventions($flux) {
       'id_auteur' => $id_auteur,
       'titre' => _T('reservation:info_reservations_auteur')
     ), array('ajax' => true));
-
   }
   return $flux;
 }
@@ -73,7 +72,6 @@ function reservation_evenement_affiche_milieu($flux) {
     $texte .= recuperer_fond('prive/objets/liste/reservations_details', $contexte, array('ajax' => 'oui'));
     $flux['data'] .= $texte;
   }
-
   return $flux;
 }
 
@@ -86,7 +84,6 @@ function reservation_evenement_notifications_archive($flux) {
     ),
     'reservation_vendeur' => array('duree' => '180')
   ));
-
   return $flux;
 }
 
@@ -124,11 +121,9 @@ function reservation_evenement_formulaire_charger($flux) {
     if ($form == $forms[1] AND (!$action_cloture OR $action_cloture == 0) AND $form == 'editer_evenement' AND intval($contexte['id_parent'])) {
       $action_cloture = sql_getfetsel('action_cloture', 'spip_articles', 'id_article=' . $contexte['id_parent']);
     }
-
     if ($action_cloture)
       $flux['data']['action_cloture'] = $action_cloture;
   }
-
   return $flux;
 }
 
@@ -142,7 +137,6 @@ function reservation_evenement_formulaire_traiter($flux) {
     list($edit, $objet) = explode('_', $form);
     sql_updateq('spip_' . $objet . 's', array('action_cloture' => _request('action_cloture')), 'id_' . $objet . '=' . $flux['data']['id_' . $objet]);
   }
-
   return $flux;
 }
 
@@ -202,14 +196,12 @@ function reservation_evenement_afficher_contenu_objet($flux) {
         2 => _T('item:non'),
         3 => _T('reservation:evenement_cloture')
       );
-
       $action_cloture = sql_getfetsel('action_cloture', 'spip_' . $type . 's', 'id_' . $type . '=' . $type = $flux['args']['id_objet']);
       if ($action_cloture != 0)
         $contexte['cloture_etat'] = $etats[$action_cloture];
       $action_cloture = recuperer_fond('prive/objets/contenu/inc-action_cloture', $contexte);
       $flux['data'] .= "\n" . $action_cloture;
     }
-
   }
   return $flux;
 }
