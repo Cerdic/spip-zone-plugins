@@ -14,6 +14,9 @@
 	</langue>
 	<langue code="fr" url="http://trad.spip.net/tradlang_module/multilingue?lang_cible=fr" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/multilingue?lang_cible=ru" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/multilingue?lang_cible=sk" total="8" traduits="8" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
