@@ -89,7 +89,9 @@ function reservation_evenement_declarer_tables_objets_sql($tables) {
     ),
     'rechercher_champs' => array(
       "reference" => 8,
-      "id_reservation" => 8
+      "id_reservation" => 8,
+      "email" => 8,
+      "nom" => 8,     
     ),
     'tables_jointures' => array(
       'id_reservation',
