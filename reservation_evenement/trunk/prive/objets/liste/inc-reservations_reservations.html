@@ -1,7 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
-    reference,-1, 
-    date,-1, 
+    reference,-1,  
     id_reservation,1,
+    date,-1, 
     points,-1
 }})]
 #SET{chaine_defaut,reservation:type_lien}<B_liste_reservations>
@@ -24,7 +24,7 @@
         </tr>
     </thead>
     <tbody>
-    <BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,num reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+    <BOUCLE_liste_reservations(RESERVATIONS){id_reservation_source ?=#ENV{id_reservation_source}}{id_auteur?}{id_mot?}{id_auteur?}{where?}{statut ?IN #ENV{statut}}{recherche?}{tri #ENV{par,reference},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
         <tr>
             <td class='picto'>[(#CHEMIN_IMAGE{reservation-16.png}|balise_img)]</td>
             <td class='statut'>[(#STATUT|puce_statut{reservation,#ID_RESERVATION})]</td>
