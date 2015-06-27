@@ -163,11 +163,11 @@ function reservation_evenement_recuperer_fond($flux){
 		$zone=rubrique_reservation($id,$type,$rubrique_reservation);
 		$cron=isset($config['cron'])?$config['cron']:'';
 		//Si cron activé et l'objet se trouve dans la zone Reservation Evènement, on affiche
-		//if($cron AND $zone){
+		if($cron AND $zone){
 	        $action_cloture='<ul>'.recuperer_fond('formulaires/inc-action_cloture',$contexte).'</ul>';
 	        $flux['data']['texte'] = str_replace('<!--extra-->',$action_cloture. '<!--extra-->',$flux['data']['texte']);
 	        }
-    //}   
+    }   
     return $flux;
 }
 
