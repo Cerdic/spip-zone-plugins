@@ -167,8 +167,8 @@ function formulaires_configurer_reservation_evenement_saisies_dist() {
           'saisie' => 'selection',
           'options' => array(
             'nom' => 'vendeur',
-            'label' => _T('reservation:notifications_destinateur_label'),
-            'explication' => _T('reservation:notifications_destinateur_explication'),
+            'label' => _T('reservation:notifications_destinataire_label'),
+            'explication' => _T('reservation:notifications_destinataire_explication'),
             'cacher_option_intro' => 'on',
             'defaut' => $config['vendeur'],
             'datas' => array(
