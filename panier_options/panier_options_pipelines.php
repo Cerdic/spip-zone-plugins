@@ -72,6 +72,7 @@ function panier_options_formulaire_verifier($flux){
 		//verifier le intval	
 	}
 	if ($flux['args']['form'] == 'panier'){
+		include_spip('inc/config');
                 $code_valide=false;
                 $config_code_avantage = lire_config("paniers/panier_options/code_avantage");
                 $request_code_avantage=_request('votre_code_avantage');
@@ -96,6 +97,7 @@ function panier_options_formulaire_traiter($flux){
               			
 	}
 	if ($flux['args']['form'] == 'panier'){
+		include_spip('inc/config');
 		if (!$id_panier) $id_panier = session_get('id_panier');
     		//spip_log("dans formulaire_charger du panier".$id_panier,"formulaires_pipelines");
 		//tester si le code est bon
