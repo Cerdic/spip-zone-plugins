@@ -10,14 +10,12 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 
-		<ul>
-			<li class="fieldset">
-				<fieldset>
-					<p class="explication"><:boussole:info_configurer_boussole:></p>
-					<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
-					#INCLURE{fond=formulaires/inc-editer_boussole, env}
-				</fieldset>
-			</li>
+		<ul class="editer-groupe">
+			<fieldset>
+				<p class="explication"><:boussole:info_configurer_boussole:></p>
+				<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
+				#INCLURE{fond=formulaires/inc-editer_boussole, env}
+			</fieldset>
 		</ul>
 	</div></form>
 	]

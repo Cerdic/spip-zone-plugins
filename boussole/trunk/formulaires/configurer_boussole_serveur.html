@@ -6,11 +6,11 @@
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<ul>
-			<li class="editer editer_actif obligatoire[ (#GET{erreurs}|oui)erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_actif obligatoire[ (#ENV**{erreurs}|table_valeur{actif}|oui)erreur]">
 				<p class="explication"><:boussole:info_activite_serveur:></p>
 				<label><:boussole:label_activite_serveur:></label>
-				[<span class="erreur_message">(#GET{erreurs})</span>]
+				[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{actif})</span>]
 				<div class="choix">
 					<input type="radio" name="actif" class="radio" id="actif_oui" value="on"[ (#ENV{actif,''}|=={on}|oui)checked="checked"] />
 					<label for="actif_oui"><:item_oui:></label>

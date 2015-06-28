@@ -14,8 +14,8 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<p class="explication"><:boussole:info_ajouter_boussole:></p>
 		<B_autres_boussoles>
-		<ul>
-			<li class="editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
+		<ul class="editer-groupe">
+			<li class="editer editer_mode[(#ENV{erreurs}|table_valeur{mode}|oui) erreur]">
 				<label><:boussole:label_mode:></label>
 		<BOUCLE_autres_boussoles(DATA) {source table, #ENV{_boussoles}}{par cle}>
 				#SET{alias, #VALEUR|table_valeur{alias}}
