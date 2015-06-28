@@ -5,10 +5,12 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * Action de création / Modification d'un produit
- * @param unknown_type $arg
- * @return unknown_type
+ * @param string|null $arg
+ * @return array
  */
 function action_editer_produit_dist($arg=null) {
+	include_spip('inc/autoriser');
+	$err="";
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -16,11 +18,14 @@ function action_editer_produit_dist($arg=null) {
 
 	// si id_produit n'est pas un nombre, c'est une creation
 	if (!$id_produit = intval($arg)) {
-		$id_produit = insert_produit(array('id_rubrique'=>_request('id_parent')));
+		$id_produit = produit_inserer(_request('id_parent'));
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_produit > 0) $err = produit_set($id_produit);
+	if ($id_produit > 0) $err = produit_modifier($id_produit);
+
+	if ($err)
+		spip_log("echec editeur produit: $err",_LOG_ERREUR);
 
 	return array($id_produit,$err);
 }
@@ -28,20 +33,25 @@ function action_editer_produit_dist($arg=null) {
 /**
  * Crée un nouveau produit et retourne son ID
  *
- * @param array $champs Un tableau avec les champs par défaut lors de l'insertion
- * @return int id_produit
+ * @param int $id_rubrique
+ * @param array $set
+ *   Un tableau avec les champs par défaut lors de l'insertion
+ * @return int
  */
-function insert_produit($champs=array()) {
+function produit_inserer($id_rubrique,$set=null) {
 	$id_produit = false;
 	
 	// On insère seulement s'il y a une rubrique correcte
-	if (isset($champs['id_rubrique']) and $champs['id_rubrique'] = intval($champs['id_rubrique'])){
+	if ($id_rubrique = intval($id_rubrique)){
+		$champs = array();
 		// Si id_rubrique vaut 0 ou n'est pas definie, creer le produit dans la premiere rubrique racine
-		if (!$id_rubrique = intval($champs['id_rubrique'])) {
+		if (!$id_rubrique = intval($id_rubrique)) {
 			$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0','', '0+titre,titre', "1");
 			$id_rubrique = $row['id_rubrique'];
-		} else $row = sql_fetsel('lang, id_secteur', 'spip_rubriques', "id_rubrique=$id_rubrique");
+		} else $row = sql_fetsel('lang, id_secteur', 'spip_rubriques', "id_rubrique=".intval($id_rubrique));
 
+		$lang_rub = $row['lang'];
+		$champs['id_rubrique'] = $id_rubrique;
 		// On propage le secteur
 		$champs['id_secteur'] = $row['id_secteur'];
 	
@@ -54,6 +64,9 @@ function insert_produit($champs=array()) {
 		// Le statut en cours de redac
 		$champs['statut'] = 'prop';
 		
+		if ($set)
+			$champs = array_merge($champs, $set);
+
 		// Envoyer aux plugins avant insertion
 		$champs = pipeline('pre_insertion',
 			array(
@@ -83,70 +96,57 @@ function insert_produit($champs=array()) {
  * Appelle la fonction de modification d'un produit
  *
  * @param int $id_produit
- * @param unknown_type $set
- * @return $err
+ * @param array $set
+ * @return string
  */
-function produit_set($id_produit, $set=null) {
+function produit_modifier($id_produit, $set=null) {
 	$err = '';
-	
-	include_spip('inc/saisies');
-	$saisies = saisies_chercher_formulaire('editer_produit', array($id_produit));
-	$champs = saisies_lister_champs($saisies, false);
-	
-	$c = array();
-	foreach ($champs as $champ)
-		$c[$champ] = _request($champ,$set);
 
-	// on donne une taxe null si le champ est vide
-	// MAIS spip < 2.3 ne gere pas les null avec sql_updateq..
-	// nous appliquons une requete en plus pour ce cas
-	if (isset($c['taxe']) and !strlen(trim($c['taxe']))) {
-		sql_update('spip_produits', array('taxe'=>'NULL'), 'id_produit='.$id_produit);
-		unset ($c['taxe']);
-	}
-		
 	include_spip('inc/modifier');
-	revision_produit($id_produit, $c);
-	
+	include_spip('inc/filtres');
+	$c = collecter_requests(
+		// white list
+		objet_info('produit','champs_editables'),
+		// black list
+		array('date','statut','id_parent'),
+		// donnees eventuellement fournies
+		$set
+	);
+
+	// Si le produit est publie, invalider les caches et demander sa reindexation
+	$t = sql_getfetsel("statut", "spip_produits", "id_produit=".intval($id_produit));
+	$invalideur = $indexation = false;
+	if ($t == 'publie') {
+		$invalideur = "id='produit/$id_produit'";
+		$indexation = true;
+	}
+
+	if ($err = objet_modifier_champs('produit', $id_produit,
+		array(
+			'nonvide' => array('titre' => _T('info_sans_titre')),
+			'invalideur' => $invalideur,
+			'indexation' => $indexation,
+		),
+		$c))
+		return $err;
+
 	// Modification de statut, changement de rubrique ?
-	$c = array();
-	foreach (array(
-		'date', 'statut', 'id_parent'
-	) as $champ)
-		$c[$champ] = _request($champ, $set);
-	$err .= instituer_produit($id_produit, $c);
-	
+	$c = collecter_requests(array('date', 'statut', 'id_parent'),array(),$set);
+	$err = produit_instituer($id_produit, $c);
+
 	return $err;
 }
 
-/**
- * Enregistre une révision de produit
- *
- * @param int $id_produit
- * @param array $c
- * @return
- */
-function revision_produit($id_produit, $c=false) {
-	$invalideur = "id='id_produit/$id_produit'";
-
-	modifier_contenu('produit', $id_produit,
-		array(
-			'nonvide' => array('titre' => _T('info_sans_titre')),
-			'invalideur' => $invalideur
-		),
-		$c);
-
-	return ''; // pas d'erreur
-}
 
 /**
  * Modifie des éléments à part que sont le parent, la date, le statut
  *
  * @param int $id_produit
  * @param array $c
- * @return
+ * @param bool $calcul_rub
+ * @return string
  */
-function instituer_produit($id_produit, $c, $calcul_rub=true){
+function produit_instituer($id_produit, $c, $calcul_rub=true){
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
