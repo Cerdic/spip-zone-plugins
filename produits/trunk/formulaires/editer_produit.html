@@ -36,9 +36,9 @@
 				<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
 				<span class='erreur_message'>(#GET{erreurs})</span>
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
-				placeholder="#CONFIG{produits/taxe,0}"
-				/>
-				<p class="explication"><:produits:produit_champ_taxe_explication{taxe=#CONFIG{produits/taxe,0}}:></p>
+				placeholder="#ENV{_taxe_defaut}"
+				/><span>&nbsp;&#37;</span>
+				<p class="explication"><:produits:produit_champ_taxe_explication{taxe=#ENV{_taxe_defaut}&nbsp;&#37;}:></p>
 			</li>
 			#SET{name,descriptif}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -111,6 +111,7 @@
 </div>
 <style>
 	.editer_dimensions .unit input.text {width: 80%}
+	.editer_taxe input.text {max-width: 5em;text-align: right}
 </style>
 <script type="text/javascript">
 jQuery(function(){

@@ -1,8 +1,8 @@
 <paquet
 	prefix="produits"
 	categorie="outil"
-	version="1.1.0"
-	etat="dev"
+	version="1.1.1"
+	etat="test"
 	compatibilite="[3.0.13;3.0.*]"
 	logo="prive/themes/spip/images/produits-64.png"
 	documentation=""
