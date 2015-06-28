@@ -54,6 +54,52 @@
 				]<textarea name="#GET{name}" class="textarea multilang" id="#GET{name}">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
 			</li>
+			<li class="fieldset">
+				<fieldset>
+					<legend><:produits:legend_dimensions:></legend>
+					<ul>
+						#SET{name,immateriel}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+						<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">[
+							<span class='erreur_message'>(#GET{erreurs})</span>
+							]#SET{val,0}
+							<input type="hidden" name="#GET{name}" value="#GET{val}" />
+							#SET{val,1}
+							<div class="choix">
+								<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+								<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>
+							</div>
+						</li>
+						<li class="editer editer_dimensions pleine_largeur">
+							<div class="line">
+								#SET{name,poids}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<div class="editer_poids unit size1of4[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+								</div>
+								#SET{name,largeur}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<div class="editer_poids unit size1of4[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/> X
+								</div>
+								#SET{name,longueur}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<div class="editer_poids unit size1of4[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/> X
+								</div>
+								#SET{name,hauteur}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+								<div class="editer_poids unit lastUnit size1of4[ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+									<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+									<span class='erreur_message'>(#GET{erreurs})</span>
+									]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
 
 		</ul>
 	  [(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
@@ -63,3 +109,20 @@
 	</div></form>
 	]
 </div>
+<style>
+	.editer_dimensions .unit input.text {width: 80%}
+</style>
+<script type="text/javascript">
+jQuery(function(){
+	function update_immateriel(){
+		if (jQuery('.editer_immateriel input.checkbox').prop('checked')){
+			jQuery('.editer_dimensions').hide('fast');
+		}
+		else {
+			jQuery('.editer_dimensions').show('fast');
+		}
+	}
+	update_immateriel();
+	jQuery('.editer_immateriel input.checkbox').bind('change',update_immateriel);
+})
+</script>

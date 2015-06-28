@@ -64,7 +64,12 @@ function produits_declarer_tables_objets_sql($tables) {
 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", 
 			"date_com"           => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
 			"langue_choisie"     => "VARCHAR(3) DEFAULT 'non'", 
-			"id_trad"            => "bigint(21) NOT NULL DEFAULT 0", 
+			"id_trad"            => "bigint(21) NOT NULL DEFAULT 0",
+			"immateriel"         => "tinyint(1) NOT NULL DEFAULT 0",
+			"poids"              => "bigint(21) NOT NULL DEFAULT 0", // poids en g
+			"largeur"            => "bigint(21) NOT NULL DEFAULT 0", // largeur en cm
+			"longueur"           => "bigint(21) NOT NULL DEFAULT 0", // longueur en cm
+			"hauteur"            => "bigint(21) NOT NULL DEFAULT 0", // hauteur en cm
 			"maj"                => "TIMESTAMP"
 		),
 		'key' => array(
@@ -77,9 +82,9 @@ function produits_declarer_tables_objets_sql($tables) {
 		),
 		'titre' => "titre AS titre, lang AS lang",
 		'date' => "date",
-		'champs_editables'  => array('titre', 'reference', 'prix_ht', 'taxe', 'descriptif','texte'),
-		'champs_versionnes' => array('titre', 'descriptif','texte'),
-		'rechercher_champs' => array("titre" => 5, "descriptif" => 4, "texte" => 4),
+		'champs_editables'  => array('titre', 'reference', 'prix_ht', 'taxe', 'descriptif', 'texte', 'immateriel', 'poids', 'largeur', 'longueur', 'hauteur'),
+		'champs_versionnes' => array('titre', 'reference', 'prix_ht', 'taxe', 'descriptif', 'texte'),
+		'rechercher_champs' => array("titre" => 4, "reference"=> 4 ,"descriptif" => 2, "texte" => 1),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',

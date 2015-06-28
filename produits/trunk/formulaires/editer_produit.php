@@ -55,7 +55,7 @@ function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $
 	if($config['limiter_ajout'] && (count($config['limiter_ident_secteur']) == 1)) {
 		$id_rubrique = $config['limiter_ident_secteur'][0] ;
 	}
-	$contexte = formulaires_editer_objet_charger('produit',$id_produit,$id_rubrique,$lier_trad=0,$retour);
+	$contexte = formulaires_editer_objet_charger('produit',$id_produit,$id_rubrique,$lier_trad=0,$retour,'');
 
 	//Si on a déjà le $id_produit il faut afficher sa rubrique!
 	if($id_produit>0) $id_rubrique=sql_getfetsel('id_rubrique','spip_produits',"id_produit=".sql_quote($id_produit));

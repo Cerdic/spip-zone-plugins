@@ -3,6 +3,19 @@
 	<div class='label'><:produits:produit_champ_titre_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{titre} titre'>#TITRE</div>
 </div>
+<div class="champ contenu_reference[ (#REFERENCE*|strlen|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_reference_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{reference} reference'>#REFERENCE</div>
+</div>
+<div class="champ contenu_prix_ht[ (#PRIX_HT*|strlen|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_prix_ht_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{prix_ht} prix_ht'>[(#PRIX_HT*|appliquer_filtre{prix_formater,true})]</div>
+</div>
+#SET{taxe,#TAXE|floatval|>{0}|?{#TAXE,#CONFIG{produits/taxe,0}}}
+<div class="champ contenu_taxe[ (#GET{taxe}|strlen|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_taxe_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{taxe} taxe'>[(#GET{taxe}|mult{100})&nbsp;&#37;]</div>
+</div>
 <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
 	<div class='label'><:produits:produit_champ_descriptif_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>#DESCRIPTIF</div>
@@ -10,5 +23,21 @@
 <div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
 	<div class='label'><:info_texte:></div>
 	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
+</div>
+<div class="champ contenu_poids[ (#POIDS*|strlen|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_poids_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{poids} poids'>#POIDS</div>
+</div>
+<div class="champ contenu_largeur[ (#LARGEUR*|strlen|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_largeur_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{largeur} largeur'>#LARGEUR</div>
+</div>
+<div class="champ contenu_longueur[ (#LONGUEUR*|strlen|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_longueur_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{longueur} longueur'>#LONGUEUR</div>
+</div>
+<div class="champ contenu_hauteur[ (#HAUTEUR*|strlen|?{'',vide})]">
+	<div class='label'><:produits:produit_champ_hauteur_label:></div>
+	<div dir='#LANG_DIR' class='#EDIT{hauteur} hauteur'>#HAUTEUR</div>
 </div>
 </BOUCLE_afficher_contenu>

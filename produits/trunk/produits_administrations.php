@@ -24,7 +24,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function produits_upgrade($nom_meta_base_version, $version_cible) {
 	$maj = array();
 
-	$maj['create'] = array(array('maj_tables', array('spip_produits')));
+	$maj['create'] = array(
+		array('maj_tables', array('spip_produits'))
+	);
+
+	$maj['1.1.0'] = array(
+		// ajout des champs immateriel/poids/longueur/largeur/hauteur
+		array('maj_tables', array('spip_produits')),
+	);
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
