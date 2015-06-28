@@ -135,3 +135,23 @@ function echec_ligne_tableau($vals, $nb, $njoueurs='10') {
            
             $boucle->where[] = $c;
     }
+
+	//Une fonction addition, pour additionner les licences A et B
+	//http://contrib.spip.net/Balises-arithmetiques,3124
+	
+	function balise_ADDITION_dist($p)
+{
+  $a = interprete_argument_balise(1, $p);
+  $b = interprete_argument_balise(2, $p);
+
+  if ($a == '' || $b == '')
+  {
+     $p->code = '\'#ADDITION[Manque argument]\'';
+  }
+  else
+  {
+     $p->code = '(' . $a . '+' . $b . ')';
+  }
+
+  return $p;
+}
