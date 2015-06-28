@@ -1,0 +1,65 @@
+<div class="ajax formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) déclarer les hidden qui déclencheront le service du formulaire
+		paramêtre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,produits}
+		<ul class="editer-groupe">
+			#SET{name,titre}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text multilang" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}"
+				        placeholder="<:info_sans_titre|attribut_html:>"
+				        [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+			#SET{name,reference}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+			[(#SAISIE{selecteur_rubrique,parent,
+					multiple=non,
+					label=<:produits:produit_champ_rubrique_label:>})]
+			#SET{name,#CONFIG{produits/editer_ttc}|?{prix_ttc,prix_ht}}#SET{obli,'obligatoire'}#SET{defaut,'0'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
+			</li>
+			#SET{name,taxe}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']
+				placeholder="#CONFIG{produits/taxe,0}"
+				/>
+				<p class="explication"><:produits:produit_champ_taxe_explication{taxe=#CONFIG{produits/taxe,0}}:></p>
+			</li>
+			#SET{name,descriptif}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<textarea name="#GET{name}" class="textarea multilang" id="#GET{name}" rows="3">
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+			</li>
+			#SET{name,texte}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':produit_champ_',#GET{name},'_label'}|_T)]</label>[
+				<span class='erreur_message'>(#GET{erreurs})</span>
+				]<textarea name="#GET{name}" class="textarea multilang" id="#GET{name}">
+#ENV*{#GET{name},#GET{defaut}}</textarea>
+			</li>
+
+		</ul>
+	  [(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' value='<:bouton_enregistrer|attribut_html:>' /></p>
+	</div></form>
+	]
+</div>

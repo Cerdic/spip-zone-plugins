@@ -15,112 +15,6 @@ include_spip('inc/config');
 include_spip('inc/actions');
 include_spip('inc/editer');
 
-/**
- * Saisies du formulaire
- *
- * @param int|string $id_produit
- *     Identifiant du produit. 'new' pour un nouveau produit.
- * @param int $id_rubrique
- *     Identifiant de la rubrique parente (si connue)
- * @param string $retour
- *     URL de redirection après le traitement
- * @return array
- *     Saisies du formulaire
- */
-function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $retour=''){
-	$saisies = array(
-		array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'titre',
-				'obligatoire' => 'oui',
-				'label' => _T('produits:produit_champ_titre_label'),
-				'defaut' => _T('info_sans_titre'),
-				'class' => 'multilang',
-			)
-		),
-		array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'reference',
-				'label' => _T('produits:produit_champ_reference_label'),
-			)
-		),
-		array(
-			'saisie' => 'selecteur_rubrique',
-			'options' => array(
-				'nom' => 'parent',
-				'obligatoire' => 'oui',
-				'label' => _T('produits:produit_champ_rubrique_label'),
-				'defaut' => 'rubrique|'.$id_rubrique
-			)
-		),
-		array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'prix_ht',
-				'obligatoire' => 'oui',
-				'label' => _T('produits:produit_champ_prix_ht_label'),
-				'defaut' => 0,
-			),
-			'verifier' => array(
-				'type' => 'decimal'
-			)
-		),
-		array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'taxe',
-				'label' => _T('produits:produit_champ_taxe_label'),
-				'explication' => _T('produits:produit_champ_taxe_explication', array('taxe'=>lire_config('produits/taxe', 0))),
-				'defaut' => '' // = null
-			),
-			'verifier' => array(
-				'type' => 'decimal',
-				'options' => array(
-					'min' => 0,
-					'max' => 1
-				)
-			)
-		),
-		array(
-			'saisie' => 'textarea',
-			'options' => array(
-				'nom' => 'descriptif',
-				'rows' => '3',
-				'label' => _T('produits:produit_champ_descriptif_label'),
-				'class' => 'multilang',
-			)
-		),
-		array(
-			'saisie' => 'textarea',
-			'options' => array(
-				'nom' => 'texte',
-				'label' => _T('produits:produit_champ_texte_label'),
-				'class' => 'multilang',
-			)
-		),
-	);
-
-	if (lire_config('produits/editer_ttc')) {
-		$saisie_prix_ttc = array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'prix_ttc',
-				'obligatoire' => 'oui',
-				'label' => _T('produits:produit_champ_prix_ttc_label'),
-				'defaut' => 0,
-			),
-			'verifier' => array(
-				'type' => 'decimal'
-			)
-		);
-		$saisies = saisies_inserer($saisies,$saisie_prix_ttc,'prix_ht');
-		$saisies = saisies_modifier($saisies,'prix_ht',array('options' => array('nouveau_type_saisie' => 'hidden')));
-	}
-
-	return $saisies;
-}
 
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
@@ -131,18 +25,10 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
  *     Identifiant de la rubrique parente (si connue)
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un produit source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du produit, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_produit_identifier_dist($id_produit='new', $id_rubrique=0, $retour='', $lier_trad=0, $config_fonc='', $row=array(), $hidden=''){
+function formulaires_editer_produit_identifier_dist($id_produit='new', $id_rubrique=0, $retour=''){
 	return serialize(array(intval($id_produit)));
 }
 
@@ -159,14 +45,6 @@ function formulaires_editer_produit_identifier_dist($id_produit='new', $id_rubri
  *     Identifiant de la rubrique parente (si connue)
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un produit source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du produit, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return array
  *     Environnement du formulaire
  */
@@ -177,7 +55,7 @@ function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $
 	if($config['limiter_ajout'] && (count($config['limiter_ident_secteur']) == 1)) {
 		$id_rubrique = $config['limiter_ident_secteur'][0] ;
 	}
-	$contexte = formulaires_editer_objet_charger('produit',$id_produit,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$contexte = formulaires_editer_objet_charger('produit',$id_produit,$id_rubrique,$lier_trad=0,$retour);
 
 	//Si on a déjà le $id_produit il faut afficher sa rubrique!
 	if($id_produit>0) $id_rubrique=sql_getfetsel('id_rubrique','spip_produits',"id_produit=".sql_quote($id_produit));
@@ -208,23 +86,31 @@ function formulaires_editer_produit_charger($id_produit='new', $id_rubrique=0, $
  *     Identifiant de la rubrique parente (si connue)
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un produit source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du produit, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return array
  *     Tableau des erreurs
  */
 function formulaires_editer_produit_verifier($id_produit='new', $id_rubrique=0, $retour=''){
 	$erreurs = array();
-	$erreurs = formulaires_editer_objet_verifier('produit', $id_produit);
 	$config = lire_config('produits');
+
+	$erreurs = formulaires_editer_objet_verifier('produit', $id_produit);
+
+	$verifier = charger_fonction('verifier','inc');
+	$champ_prix = 'prix_ht';
+	if (isset($config['editer_ttc']) AND $config['editer_ttc']){
+		$champ_prix = 'prix_ttc';
+	}
+
+	if ($err=$verifier(_request($champ_prix),'decimal')){
+		$erreurs[$champ_prix] = $err;
+	}
+
+	if ($err=$verifier(_request('taxe'),'decimal',array('min' => 0,'max' => 1))){
+		$erreurs['taxe'] = $err;
+	}
+
 	// Vérifier que la rubrique choisie se trouve dans les secteurs autorisés
-	if($config['limiter_ajout']) {
+	if(isset($config['limiter_ajout']) AND $config['limiter_ajout']) {
 		$id_secteur = sql_getfetsel("id_secteur", "spip_rubriques", "id_rubrique=" . intval(produits_id_parent()));
 		if(is_array($config['limiter_ident_secteur']) && !in_array($id_secteur,$config['limiter_ident_secteur'])) {
 			$titres = "" ;
@@ -251,14 +137,6 @@ function formulaires_editer_produit_verifier($id_produit='new', $id_rubrique=0, 
  *     Identifiant de la rubrique parente (si connue)
  * @param string $retour
  *     URL de redirection après le traitement
- * @param int $lier_trad
- *     Identifiant éventuel d'un produit source d'une traduction
- * @param string $config_fonc
- *     Nom de la fonction ajoutant des configurations particulières au formulaire
- * @param array $row
- *     Valeurs de la ligne SQL du produit, si connu
- * @param string $hidden
- *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return array
  *     Retours des traitements
  */
@@ -268,7 +146,7 @@ function formulaires_editer_produit_traiter($id_produit='new', $id_rubrique=0, $
 		$prix_ht = _request('prix_ttc') / (1+_request('taxe',lire_config('produits/taxe',0)));
 		set_request('prix_ht',$prix_ht);
 	}
-	$retours = formulaires_editer_objet_traiter('produit',$id_produit,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
+	$retours = formulaires_editer_objet_traiter('produit',$id_produit,$id_rubrique,$lier_trad=0,$retour);
 	return $retours;
 }
 
