@@ -24,19 +24,19 @@
 	<div class='label'><:info_texte:></div>
 	<div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
 </div>
-<div class="champ contenu_poids[ (#POIDS*|strlen|?{'',vide})]">
+<div class="champ contenu_poids[ (#POIDS*|intval|?{'',vide})]">
 	<div class='label'><:produits:produit_champ_poids_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{poids} poids'>#POIDS</div>
 </div>
-<div class="champ contenu_largeur[ (#LARGEUR*|strlen|?{'',vide})]">
+<div class="champ contenu_largeur[ (#LARGEUR*|intval|?{'',vide})]">
 	<div class='label'><:produits:produit_champ_largeur_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{largeur} largeur'>#LARGEUR</div>
 </div>
-<div class="champ contenu_longueur[ (#LONGUEUR*|strlen|?{'',vide})]">
+<div class="champ contenu_longueur[ (#LONGUEUR*|intval|?{'',vide})]">
 	<div class='label'><:produits:produit_champ_longueur_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{longueur} longueur'>#LONGUEUR</div>
 </div>
-<div class="champ contenu_hauteur[ (#HAUTEUR*|strlen|?{'',vide})]">
+<div class="champ contenu_hauteur[ (#HAUTEUR*|intval|?{'',vide})]">
 	<div class='label'><:produits:produit_champ_hauteur_label:></div>
 	<div dir='#LANG_DIR' class='#EDIT{hauteur} hauteur'>#HAUTEUR</div>
 </div>
