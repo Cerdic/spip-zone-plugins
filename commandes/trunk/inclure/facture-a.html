@@ -16,34 +16,34 @@
 <//B_contact>
 
 [(#REM) On cherche en priorité des adresses pour la commande, sinon contact, sinon orga, sinon utilisateur ]
-<BOUCLE_adresses_comande(ADRESSES adresses_liens){id_commande}>
+<BOUCLE_adresses_comande(ADRESSES adresses_liens?){id_commande}>
 [(#TYPE|=={facturation}|oui)<h5><:commandes:type_adresse_facturation:></h5>]
 [(#TYPE|=={livraison}|oui)<h5><:commandes:type_adresse_livraison:></h5>]
 <p class="adresse">
 	[(#VOIE)<br />]
 	[(#CODE_POSTAL) ][ (#VILLE)]<br />
-	<BOUCLE_pays(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays>
+	<BOUCLE_pays(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays>
 </p>
 </BOUCLE_adresses_comande>
-	<BOUCLE_adresse_contact(ADRESSES){id_contact=#GET{id_contact}}{0,1}>
+	<BOUCLE_adresse_contact(ADRESSES?){id_contact=#GET{id_contact}}{0,1}>
 	<p class="adresse">
 		[(#VOIE)<br />]
 		[(#CODE_POSTAL) ][ (#VILLE)]<br />
-		<BOUCLE_pays_contact(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_contact>
+		<BOUCLE_pays_contact(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_contact>
 	</p>
 	</BOUCLE_adresse_contact>
-		<BOUCLE_adresse_orga(ADRESSES){id_organisation=#GET{id_organisation}}{0,1}>
+		<BOUCLE_adresse_orga(ADRESSES?){id_organisation=#GET{id_organisation}}{0,1}>
 		<p class="adresse">
 			[(#VOIE)<br />]
 			[(#CODE_POSTAL) ][ (#VILLE)]<br />
-			<BOUCLE_pays_orga(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_orga>
+			<BOUCLE_pays_orga(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_orga>
 		</p>
 		</BOUCLE_adresse_orga>
-			<BOUCLE_adresse_auteur(ADRESSES){id_auteur}{0,1}>
+			<BOUCLE_adresse_auteur(ADRESSES?){id_auteur}{0,1}>
 			<p class="adresse">
 				[(#VOIE)<br />]
 				[(#CODE_POSTAL) ][ (#VILLE)]<br />
-				<BOUCLE_pays_auteur(PAYS){code=#PAYS*}>#NOM</BOUCLE_pays_auteur>
+				<BOUCLE_pays_auteur(PAYS?){code=#PAYS*}>#NOM</BOUCLE_pays_auteur>
 			</p>
 			</BOUCLE_adresse_auteur>
 		<//B_adresse_orga>
@@ -52,7 +52,7 @@
 
 <B_telephones>
 <p class="telephone">
-<BOUCLE_telephones(NUMEROS numeros_liens){id_auteur}{'<br />'}>
+<BOUCLE_telephones(NUMEROS numeros_liens?){id_auteur}{'<br />'}>
 <strong>Tel</strong> #NUMERO
 </BOUCLE_telephones>
 </p>
