@@ -6,20 +6,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/config');
 
 function type_contact($objet='adresse'){
-	if($objet == 'adresse')
-		$type_contact = 'principale';
-	else if($objet == 'numero')
-		$type_contact = 'principal';
-	else if($objet == 'portable')
-		$type_contact = 'portable';
-	$f = chercher_filtre('info_plugin');
-	$version_coordonnees = $f('coordonnees','version');
-	if(intval($version_coordonnees) >= 2){
-		if($objet == 'portable')
-			$type_contact = 'cell';
-		else
-			$type_contact = 'pref';
-	}
+	if($objet == 'portable')
+		$type_contact = 'cell';
+	else
+		$type_contact = 'pref';
 	return $type_contact;
 }
 

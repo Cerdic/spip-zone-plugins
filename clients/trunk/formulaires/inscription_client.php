@@ -218,19 +218,11 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		set_request('id_objet', $id_auteur);
 		
 		/**
-		 * Changement de coordonnées pour SPIP 3.0
-		 * Une des raisons de faire une version spécifique SPIP 3.0
+		 * Coordonnées
 		 */
-		$type_adresse = 'principale';
-		$type_numero = 'principal';
-		$type_portable = 'portable';
-		$f = chercher_filtre('info_plugin');
-		$version_coordonnees = $f('coordonnees','version');
-		if(intval($version_coordonnees) >= 2){
-			$type_adresse = 'pref';
-			$type_numero = 'pref';
-			$type_portable = 'cell';
-		}
+		$type_adresse = 'pref';
+		$type_numero = 'pref';
+		$type_portable = 'cell';
 		set_request('type', $type_adresse);
 
 		// On crée un contact pour cet utilisateur
