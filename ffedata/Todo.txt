@@ -38,3 +38,23 @@ Par exemple :
     Equipe 4 : <equipespv|saison=0|ref=1284|equipe=2433|ronde=4|nbj=6>
     Equipe 5(R2) :<equipespv|saison=0|ref=1245|equipe=2789|ronde=4|nbj=4>
     Equipe 6(R2) :<equipespv|saison=0|ref=1332|equipe=2795|ronde=4|nbj=4>
+	
+	Quelques autres exemples de saisie de modèles :
+<ffe_clubs_classement|Ref=31>
+renverra la liste des clubs du 31 (Haute-Garonne) avec les licenciés A, B et la somme des deux. Classés par nombre de licences A.
+
+<ffe_clubs_contacts|Ref=31>
+Renverra la liste des clubs du département (dans l'exemple 31) avec les principaux contacts
+
+<ffe_equipes_club|saison=2015|Ref=1282> 
+Ici on saisit en paramètres la saison et la Ref du club. On obtient la liste complète des équipes dans lesquelles le club est investi.
+
+<ffe_equipes_dates|saison=2013|ref=2|equipe=789>
+La saison 2013, la ref 2 correspond ici au groupe "top 12" et l'équipe 789 Evry Grand Roque
+L'intérêt serait pour les débuts de saison de pouvoir afficher toutes les dates d'une équipe dans une division.
+
+<ffe_equipes_groupe|saison=2015|Ref=440>
+Toutes les équipes d'un groupe pour une saison. Saison 2015 groupe n° 440, ici une compétition régionale jeunes.
+
+<equipesrondes|saison=2013|ref=2|equipe=789>
+La nationale 1, pour le club d'Evry-grand-Roque en 2013...
