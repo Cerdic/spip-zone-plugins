@@ -17,3 +17,7 @@
 [(#ENV{afficher,carte}|=={liste}|oui)
 	[(#INCLURE{fond=prive/objets/liste/gis,env})]
 ]
+
+[(#AUTORISER{creer,gis})
+	[(#URL_ECRIRE{gis_edit,new=oui}|parametre_url{redirect,#URL_ECRIRE{gis_tous}}|icone_verticale{<:gis:editer_gis_nouveau:>,gis,new,right})]
+]
