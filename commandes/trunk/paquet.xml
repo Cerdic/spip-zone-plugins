@@ -1,12 +1,12 @@
 <paquet
 	prefix="commandes"
 	categorie="divers"
-	version="1.6.10"
+	version="1.6.11"
 	etat="test"
 	compatibilite="[3.0.5;3.0.*]"
 	logo="prive/themes/spip/images/commande.png"
 	documentation="http://contrib.spip.net/Commandes-4527"
-	schema="0.7.0"
+	schema="0.7.1"
 >
 
 	<nom>Commandes</nom>

@@ -52,6 +52,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 		'field'=> array(
 			'id_commande'        => 'bigint(21) not null',
 			'reference'          => 'varchar(255) not null default ""',
+			'source'             => 'varchar(255) not null default ""', // par exemple "panier#xx" "achatrapide"...
 			'id_auteur'          => 'bigint(21) not null default 0',
 			'statut'             => 'varchar(25) not null default "encours"', // pourra être "encours", "paye", "envoye", "retour", "retour_partiel"...
 			'date'               => 'datetime not null default "0000-00-00 00:00:00"',

@@ -112,6 +112,12 @@ function commandes_upgrade($nom_meta_base_version, $version_cible) {
 		array('maj_tables', array('spip_commandes')),
 	);
 
+	// ajout du champ source
+	$maj['0.7.1']  = array(
+		array('maj_tables', array('spip_commandes'))
+	);
+
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
