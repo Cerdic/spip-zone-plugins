@@ -25,7 +25,7 @@ function ancre_douce_init() {if(typeof jQuery.localScroll=="function")'.$appel_a
     
                 // when focus leaves this element, 
                 // remove the tabindex attribute
-                $(this).removeAttr(\'tabindex\');
+                jQuery(this).removeAttr(\'tabindex\');
     
             }).focus();
 		}});}
