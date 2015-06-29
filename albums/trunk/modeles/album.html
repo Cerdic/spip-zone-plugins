@@ -117,7 +117,7 @@
 
 
 ]<B_documents_album>
-[<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})]">]
+[<(#HTML5|?{figure,div}) class="album vignettes figure[ (#ENV{align})][ (#ENV{classe})][ (#PLUGIN{bootstrap}|oui)album-bootstrap][ (#PLUGIN{foundation}|oui)album-foundation]">]
 	#ANCRE_PAGINATION[
 	(#GET{position_legende}|=={top}|oui)[(#GET{caption})]]
 	<ul[ (#PLUGIN{bootstrap}|oui)class='thumbnails'][ (#CONFIG{foundation/variante}|intval|>={4}|?{class='small-block-grid-2 medium-block-grid-3 large-block-grid-4',class='block-grid 4-up mobile-two-up'})]>
@@ -138,8 +138,8 @@
 		                          #FICHIER|image_reduire{#GET{largeur},#GET{hauteur}}},
 		                        #LOGO_DOCUMENT{#FICHIER}}
 		                      |extraire_attribut{src}})]
-		<li[ (#PLUGIN{bootstrap}|oui)class='thumbnail']>
-			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION)][ (#PLUGIN{foundation}|oui)th]" title="[(#GET{titre_doc_long}|attribut_html)]" role="button" aria-label="Vignette">
+		<li[ (#PLUGIN{bootstrap}|oui)class='span4']>
+			<a href="#FICHIER" type="#MIME_TYPE" rel="album#ID_ALBUM" class="[(#EXTENSION)][ (#PLUGIN{foundation}|oui)th][ (#PLUGIN{bootstrap}|oui)thumbnail]" title="[(#GET{titre_doc_long}|attribut_html)]" role="button" aria-label="Vignette">
 				[(#GET{src}|balise_img{#GET{titre_doc_long},vignette}|inserer_attribut{aria-hidden,true})]
 			</a>[
 			(#ENV{label}|oui)[<span class="label">(#GET{titre_doc})</span>]]

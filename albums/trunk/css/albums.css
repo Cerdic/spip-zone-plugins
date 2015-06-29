@@ -1,7 +1,7 @@
 /* ------------------------------------------
    albums.css : style minimal pour les albums
    ------------------------------------------ */
-.album                          { margin-bottom: 1.5em; }
+.album                          { margin: 0 0 1.5em 0;}
 .album-caption.bottom           { text-align: center; }
 /* vignettes */
 .album.vignettes li             { display: inline-block; margin: 0 10px 10px 0; text-align: center; }
@@ -9,3 +9,13 @@
 .album.vignettes li a           { display: block; }
 /* squelettes de la dist : albums après le portfolio */
 .portfolio-albums               { clear: both; }
+
+/* -----------------------
+   Compatibilité Bootstrap
+   -----------------------*/
+.album-bootstrap:not(.center)   { margin-left:0; margin-right:0; }
+
+/* ------------------------
+   Compatibilité Foundation
+   ------------------------*/
+.album-foundation.vignettes li  { margin: 0; }

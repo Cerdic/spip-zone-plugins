@@ -300,18 +300,6 @@ function albums_insert_head_css($flux) {
 			// feuille de style minimale de base
 			$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums.css').'" type="text/css" />';
 
-			// fix selon les plugins
-			$plugins_actifs = liste_plugin_actifs();
-
-			// compatibilité avec bootstrap
-			if (isset($plugins_actifs['BOOTSTRAP'])) {
-				$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums_bootstrap.css').'" type="text/css" />';
-			}
-
-			// compatibilité avec foundation
-			if (isset($plugins_actifs['FOUNDATION'])) {
-				$flux .= '<link rel="stylesheet" href="'.find_in_path('css/albums_foundation.css').'" type="text/css" />';
-			}
 		}
 	}
 
