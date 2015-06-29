@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_produits' => '@nb@ produits',
 
 	// L
-	'legend_dimensions' => 'Dimensions',
+	'legend_dimensions' => 'Conditionnement',
 	'limiter_ajout_explication' => 'Restreindre l’ajout de produits à un ou plusieurs secteurs',
 	'limiter_ajout_label' => 'Limiter',
 	'limiter_ident_secteur_explication' => 'Choisir le ou les secteurs concernés',
