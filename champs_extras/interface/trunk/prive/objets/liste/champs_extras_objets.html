@@ -1,4 +1,3 @@
-#SET{compteur,0}
 <B_objets>
 <div class='champs_extras_objets'>
 	<table>
@@ -11,7 +10,6 @@
 		<tbody>
 <BOUCLE_objets(DATA){source tableau,#VAL|lister_tables_objets_sql}{par cle}{editable = oui}>
 <BOUCLE_cond(CONDITION){si #CLE|is_string}>
-	#SET{compteur,#GET{compteur}|plus{1}}
 	<tr>
 		<td>
 			[(#ENV{lien,#SELF}
