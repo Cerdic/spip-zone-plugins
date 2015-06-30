@@ -144,6 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche' => 'Rechercher',
 	'label_statuts_actifs' => 'Statuts',
 	'label_taxe' => 'Taxe',
+	'label_dont_taxe' => 'dont taxe',
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
@@ -201,6 +202,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_label' => 'Statut :',
 	'statut_partiel' => 'Partiellement payée',
 	'statut_paye' => 'Payée',
+	'statut_poubelle' => 'Poubelle',
 	'statut_retour' => 'Retournée',
 	'statut_retour_partiel' => 'Retour partiel',
 	'supprimer' => 'Supprimer',
