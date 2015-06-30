@@ -7,7 +7,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define ('_DEBUG_AUTORISER', false);
+if (!defined('_DEBUG_AUTORISER')) define('_DEBUG_AUTORISER', false);
 $GLOBALS['autorite'] = @unserialize($GLOBALS['meta']['autorite']);
 $autorite_erreurs = array();
 
@@ -27,11 +27,11 @@ if ($GLOBALS['autorite']['statut_auteur_creation']) {
 	else {
 		switch($GLOBALS['autorite']['statut_auteur_creation']) {
 			case 'visiteur':
-				define('_STATUT_AUTEUR_CREATION', '6forum');
+				if (!defined('_STATUT_AUTEUR_CREATION')) define('_STATUT_AUTEUR_CREATION', '6forum');
 			case 'redacteur':
-				define('_STATUT_AUTEUR_CREATION', '1comite');
+				if (!defined('_STATUT_AUTEUR_CREATION')) define('_STATUT_AUTEUR_CREATION', '1comite');
 			case 'admin':
-				define('_STATUT_AUTEUR_CREATION', '0minirezo');
+				if (!defined('_STATUT_AUTEUR_CREATION')) define('_STATUT_AUTEUR_CREATION', '0minirezo');
 		}
 	}
 }
@@ -42,9 +42,9 @@ if ($GLOBALS['autorite']['statut_auteur_rubrique']) {
 	else {
 		switch($GLOBALS['autorite']['statut_auteur_rubrique']) {
 			case '1':
-				define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo,1comite');
+				if (!defined('_STATUT_AUTEUR_RUBRIQUE')) define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo,1comite');
 			case '2':
-				define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo,1comite,6forum');
+				if (!defined('_STATUT_AUTEUR_RUBRIQUE')) define('_STATUT_AUTEUR_RUBRIQUE', '0minirezo,1comite,6forum');
 		}
 	}
 }
@@ -77,7 +77,7 @@ if (!defined('_ID_WEBMESTRES')
 ## une fonction qui gere les droits publieurs
 ##
 
-if ($GLOBALS['autorite']['espace_publieur']) {
+if (isset($GLOBALS['autorite']['espace_publieur'])) {
 if (!function_exists('autorisation_publie_visiteur')) {
 	function autorisation_publie_visiteur($qui, $id_secteur) {
 		// espace publieur est un array(secteur1, secteur2), ou un id_secteur
@@ -107,7 +107,7 @@ if (!function_exists('autorisation_publie_visiteur')) {
 ##
 ## une fonction qui gere les droits wiki
 ##
-if ($GLOBALS['autorite']['espace_wiki']) {
+if (isset($GLOBALS['autorite']['espace_wiki'])) {
 	if (!function_exists('autorisation_wiki_visiteur')) {
 	function autorisation_wiki_visiteur($qui, $id_secteur) {
 		// espace_wiki est un array(secteur1, secteur2), ou un id_secteur
@@ -141,7 +141,7 @@ if ($GLOBALS['autorite']['espace_wiki']) {
 ##
 ## une fonction qui gere les droits wiki par mot clef
 ##
-if ($GLOBALS['autorite']['espace_wiki_motsclef']) {
+if (isset($GLOBALS['autorite']['espace_wiki_motsclef'])) {
 	if (!function_exists('autorisation_wiki_motsclef_visiteur')) {
 	function autorisation_wiki_motsclef_visiteur($qui, $id_article) {
 
@@ -254,7 +254,7 @@ if (!function_exists('autoriser_rubrique_creerarticledans')) {
 ##
 ## autoriser_rubrique_publierdans
 ##
-if ($GLOBALS['autorite']['espace_wiki']
+if (isset($GLOBALS['autorite']['espace_wiki'])
 OR $GLOBALS['autorite']['publierdans'] 
 OR false // autre possibilite de surcharge ?
 ) {
@@ -359,7 +359,7 @@ function autoriser_rubrique_creerrubriquedans($faire, $type, $id, $qui, $opt) {
 ##
 ## autoriser_auteur_modifier
 ##
-if ($GLOBALS['autorite']['auteur_mod_email']
+if (isset($GLOBALS['autorite']['auteur_mod_email'])
 OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_auteur_modifier')) {
@@ -418,7 +418,7 @@ function autoriser_modererpetition($faire, $type, $id, $qui, $opt) {
 ##
 ## autoriser_voirstats
 ##
-if ($GLOBALS['autorite']['redacteurs_lire_stats']
+if (isset($GLOBALS['autorite']['redacteurs_lire_stats'])
 OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_voirstats')) {
@@ -656,7 +656,7 @@ function autoriser_detruire($faire, $type, $id, $qui, $opt) {
 ##
 ## autoriser_ecrire
 ##
-if ($GLOBALS['autorite']['redacteurs_ecrire']
+if (isset($GLOBALS['autorite']['redacteurs_ecrire'])
 OR false // autre possibilite de surcharge ?
 ) {
 if (!function_exists('autoriser_ecrire')) {

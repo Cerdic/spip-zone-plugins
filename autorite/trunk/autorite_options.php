@@ -9,11 +9,11 @@ $GLOBALS['autorite'] = @unserialize($GLOBALS['meta']['autorite']);
 ##
 if ((is_array($GLOBALS['autorite'])) AND 
     (
-        ($GLOBALS['autorite']['espace_wiki'] AND 
+        (isset($GLOBALS['autorite']['espace_wiki']) AND 
             $GLOBALS['autorite']['espace_wiki_anonyme']
         ) 
         OR 
-        ($GLOBALS['autorite']['espace_wiki_motsclef'] AND 
+        (isset($GLOBALS['autorite']['espace_wiki_motsclef']) AND 
             $GLOBALS['autorite']['espace_wiki_motsclef_anonyme']
         )
     )) {
