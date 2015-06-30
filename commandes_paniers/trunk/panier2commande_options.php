@@ -1,6 +1,16 @@
 <?php
-#var_dump($GLOBALS['visiteur_session']);
-#die('?');
+/**
+ * Fonction du plugin Commandes de paniers
+ *
+ * @plugin     Commandes de Paniers
+ * @copyright  2014
+ * @author     Les Développements Durables
+ * @licence    GNU/GPL
+ * @package    SPIP\Panier2commande\options
+ */
+
+// Sécurité
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // si on a une transformation panier=>commande en attente et qu'on est connecte,
 // creer la commande
