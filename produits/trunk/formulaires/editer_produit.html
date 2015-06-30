@@ -23,7 +23,7 @@
 				]<input type="text" name="#GET{name}" class="text" value="#ENV*{#GET{name},#GET{defaut}}" id="#GET{name}" [(#HTML5|et{#GET{obli}})required='required']/>
 			</li>
 			[(#SAISIE{selecteur_rubrique,parent,
-					multiple=non,
+					multiple=0,
 					label=<:produits:produit_champ_rubrique_label:>})]
 			#SET{name,#CONFIG{produits/editer_ttc}|?{prix_ttc,prix_ht}}#SET{obli,'obligatoire'}#SET{defaut,'0'}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 			<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
