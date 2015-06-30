@@ -3,6 +3,14 @@ Ce plugin génère d'autres plugins !
 -----------------------------------
 
 
+
+2.0.19 le 30 06 2015
+--------------------
+
+* Tous les fichiers en fins de ligne linux (\n). Il y avait quelques réfractaires.
+  Commande pour mémoire (^M se fait avec ctrl+v ctrl+m) :
+  grep -IUrl --color "^M" | xargs dos2unix
+
 2.0.16 le 30 04 2015
 --------------------
 
