@@ -49,7 +49,8 @@ function saisies_affichage_final($flux){
 				$theme_css = "jquery.ui.theme";
 				$ui_css_dir = "css";
 				// compatibilité SPIP 3.1 et jQuery UI 1.11
-				if (spip_version_compare($GLOBALS['spip_version_branche'],'3.0.*','>')) {
+				$version = explode(".",$GLOBALS['spip_version_branche']);
+				if ($version[0]>3 OR ($version[0]==3 AND $version[1]>0)) {
 					$theme_css = "theme";
 					$ui_css_dir = "css/ui";
 				}
