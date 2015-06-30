@@ -99,6 +99,7 @@ function commandes_declarer_tables_objets_sql($tables) {
 			'retour'             => 'puce-commande-retour.png',
 			'retour_partiel'     => 'puce-commande-retour_partiel.png',
 			'erreur'             => 'puce-commande-erreur.png',
+			'poubelle'           => 'puce-commande-poubelle.png',
 		),
 		'statut'=> array(
 			array(
