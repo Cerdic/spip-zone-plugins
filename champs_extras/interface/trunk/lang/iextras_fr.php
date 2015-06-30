@@ -37,7 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						c’est à dire des champs supplémentaires dans les tables de SPIP,
 						pris en compte dans les formulaires d’édition.',
 	'info_description_champ_extra_creer' => 'Vous pouvez créer de nouveaux champs qui s’afficheront alors
-						sur cette page, dans le cadre « Liste des champs extras », ainsi que dans les formulaires.',
+						sur cette page, dans le cadre « Liste des objets éditoriaux », ainsi que dans les formulaires.',
 	'info_description_champ_extra_presents' => 'Enfin, si des champs existent déjà dans votre base de données,
 						mais ne sont pas déclarés (par un plugin ou un jeu de squelettes), vous
 						pouvez demander à ce plugin de les gérer. Ces champs, s’il y en a,
