@@ -46,12 +46,18 @@ function saisies_affichage_final($flux){
 		    include_spip("jqueryui_pipelines");
 			if (function_exists("jqueryui_dependances")){
 				$ui_plugins = jqueryui_dependances(array("jquery.ui.datepicker"));
-
-				array_push($ui_plugins,"jquery.ui.theme");
+				$theme_css = "jquery.ui.theme";
+				$ui_css_dir = "css";
+				// compatibilité SPIP 3.1 et jQuery UI 1.11
+				if (spip_version_compare($GLOBALS['spip_version_branche'],'3.0.*','>')) {
+					$theme_css = "theme";
+					$ui_css_dir = "css/ui";
+				}
+				array_push($ui_plugins,$theme_css);
 				foreach ($ui_plugins as $ui_plug){
-					$ui_plug_css = find_in_path("css/$ui_plug.css");
-					if (strpos($flux,"css/$ui_plug.css")===false){// si pas déjà chargé
-					$ins_css .= "\n<link rel='stylesheet' href='$ui_plug_css' type='text/css' media='all' />\n";
+					$ui_plug_css = find_in_path("$ui_css_dir/$ui_plug.css");
+					if (strpos($flux,"$ui_css_dir/$ui_plug.css")===false){// si pas déjà chargé
+						$ins_css .= "\n<link rel='stylesheet' href='$ui_plug_css' type='text/css' media='all' />\n";
 					}
 				}
 			}
