@@ -1,7 +1,7 @@
 <paquet
 	prefix="panier2commande"
 	categorie="divers"
-	version="1.0.2"
+	version="1.1.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/panier2commande-32.png"
@@ -16,7 +16,5 @@
 	<necessite nom="commandes" compatibilite="[1.4.0;]" />
 	<necessite nom="paniers" compatibilite="[1.0.0;]" />
 	<necessite nom="spip_bonux" compatibilite="[3.0.0;]" />
-
-	<pipeline nom="post_insertion" inclure="panier2commande_pipelines.php" />
-
+	
 </paquet>
