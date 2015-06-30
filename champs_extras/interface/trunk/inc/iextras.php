@@ -8,7 +8,7 @@ include_spip('inc/cextras');
  * Retourne la liste des saisies extras pour 
  * un objet donné.
  *
- * @param string $objet Objet éditorial
+ * @param string $table Nom de la table SQL de l'objet éditorial
  * @return Array Liste de saisies
 **/
 function iextras_champs_extras_definis($table='') {
@@ -34,8 +34,6 @@ function iextras_champs_extras_definis($table='') {
 	
 	return array();
 }
-
-
 
 
 /**

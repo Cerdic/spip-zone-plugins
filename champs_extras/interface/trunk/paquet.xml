@@ -1,7 +1,7 @@
 <paquet
 	prefix="iextras"
 	categorie="outil"
-	version="3.1.5"
+	version="3.2.0"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/iextras-64.png"
@@ -13,6 +13,7 @@
 
 	<auteur>Matthieu Marcillaud</auteur>
 	<auteur>Fil</auteur>
+	<credit lien="http://icons8.com/">Visual Pharm (icones upload / download)</credit>
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="declarer_champs_extras" inclure="base/iextras.php" />

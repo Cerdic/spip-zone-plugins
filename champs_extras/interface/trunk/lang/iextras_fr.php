@@ -19,6 +19,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_supprimer' => 'supprimer',
 	'action_supprimer_title' => 'Supprimer totalement le champ de la base de données',
 
+	// B
+	'bouton_importer' => 'Importer',
+
 	// C
 	'caracteres_autorises_champ' => 'Caractères possibles : lettres sans accent, chiffres, - et _',
 	'caracteres_interdits' => 'Certains caractères utilisés ne conviennent pas pour ce champ.',
@@ -30,6 +33,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_action' => 'Action @action@ inconnue.',
 	'erreur_enregistrement_champ' => 'Problème de création du champ extra.',
+	'exporter_tous' => 'Exporter tous les champs extras',
+	'exporter_objet' => 'Exporter tous les champs extras de : @objet@',
+	'exporter_objet_champ' => 'Exporter le champs extras : @objet@ / @nom@',
 
 	// I
 	'icone_creer_champ_extra' => 'Créer un nouveau champ extra',
@@ -45,6 +51,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_modifier_champ_extra' => 'Modifier champ extra',
 	'info_nouveau_champ_extra' => 'Nouveau champ extra',
 	'info_saisie' => 'Saisie :',
+	'importer_fichier' => 'Fichier à importer',
+	'importer_fichier_explication' => 'Fichier d\'export au format YAML',
+	'importer_fusionner' => 'Modifier les champs déjà présents',
+	'importer_fusionner_oui' => 'Modifier les champs extras communs avec l\'import',
+	'importer_fusionner_non' => 'Ne pas toucher les champs déjà présents sur le site',
+	'importer_fusionner_explication' => 'Si des champs extras à importer sont déjà présents sur le site,
+		le processus d\'importation les ignore (par défaut). Vous pouvez cependant demander à
+		modifier toutes les informations de ces champs avec ceux du fichier d\'importé.',
+	'importer_explications' => 'Le fait d\'importer des champs extras dans ce site complètera
+		tous les champs extras déjà présents avec les nouveaux déclarés dans le fichier d\'import.
+		Les nouveaux champs s\'ajouteront à la suite des champs extras déjà présents.',
 
 	// L
 	'label_attention' => 'Explications très importantes',
@@ -125,6 +142,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_iextras' => 'Champs Extras',
 	'titre_page_iextras' => 'Champs Extras',
+	'titre_iextras_exporter' => 'Exporter des Champs Extras',
+	'titre_iextras_importer' => 'Importer des Champs Extras',
+	'titre_iextras_exporter_importer' => 'Exporter ou importer des Champs Extras',
 
 	// V
 	'veuillez_renseigner_ce_champ' => 'Veuillez renseigner ce champ !'
