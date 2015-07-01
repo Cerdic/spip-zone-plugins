@@ -13,6 +13,7 @@
     prix_ht, #PRIX_HT*}}}
 	</BOUCLE_commande_details>
 	#SET{commande, #ARRAY{details, #GET{details}}}
+	#SET{commande_ref,#REFERENCE}
 </BOUCLE_commande>
 #SET{commande,#ENV{commande}}
 <//B_commande>[
@@ -31,6 +32,7 @@
 <:prix:label_total_ttc:> : [(#GET{total}|prix_formater)]
    </BOUCLE_test_format_texte>
       <table class="commande[ (#REM|test_espace_prive|oui)liste-objets contenu-commande]"[ (#REM|test_espace_prive|non)cellspacing="0"]>
+	      [<caption><:commandes:commande_numero:> (#GET{commande_ref})</caption>]
          <thead>
             <tr>
                <th class="description"><:commandes:designation:></th>
