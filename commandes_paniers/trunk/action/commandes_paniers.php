@@ -55,15 +55,10 @@ function action_commandes_paniers_dist($arg=null){
 	if (!$id_panier)
 		return;
 
-	// création d'une commande "en cours"
-	// Ses détails sont ensuite remplis d'après le panier en session
-	// via la pipeline post_insertion
-	// TODO : c'est ici qu'il faudrait remplir cette commande avec le panier
-	// toute commande n'est pas bonne a remplir avec le panier automatiquement
-	// cas du bouton "Achat immediat de ce produit" qui va direct au paiement
-	// ne doit pas remplir la commande avec le panier en cours
 	include_spip('inc/commandes');
 
+	// création d'une commande "en cours"
+	// et remplir les details de la commande d'après le panier en session
 	if ($id_commande = creer_commande_encours()){
 		panier2commande_remplir_commande($id_commande,$id_panier);
 	}
