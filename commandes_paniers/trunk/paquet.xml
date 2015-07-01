@@ -1,7 +1,7 @@
 <paquet
 	prefix="panier2commande"
 	categorie="divers"
-	version="1.1.1"
+	version="2.0.0"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="images/panier2commande-32.png"
@@ -13,9 +13,7 @@
 
 	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
 
-	<pipeline nom="bank_traiter_reglement" inclure="panier2commande_pipelines.php" action="bank_reglement_succes_attente_echec" />
-	<pipeline nom="trig_bank_reglement_en_attente" inclure="panier2commande_pipelines.php" action="bank_reglement_succes_attente_echec" />
-	<pipeline nom="trig_bank_reglement_en_echec" inclure="panier2commande_pipelines.php" action="bank_reglement_succes_attente_echec" />
+	<pipeline nom="post_edition" inclure="panier2commande_pipelines.php" />
 
 	<necessite nom="commandes" compatibilite="[1.4.0;]" />
 	<necessite nom="paniers" compatibilite="[1.0.0;]" />
