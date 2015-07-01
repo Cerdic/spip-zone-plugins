@@ -129,7 +129,7 @@ function abonnements_post_edition($flux){
 		// On cherche si on a des offres d'abonnements dans les détails de la commande
 		foreach ($details as $detail) {
 			// Si on trouve une offre d'abonnement
-			if ($detail['objet'] = 'abonnements_offre' and ($id_abonnements_offre = $detail['id_objet']) > 0) {
+			if ($detail['objet'] == 'abonnements_offre' and ($id_abonnements_offre = $detail['id_objet']) > 0) {
 				// Si la commande est renouvelable et que c'est le PREMIER paiement (activation)
 				// on force toujours la création d'un nouvel abonnement
 				$forcer_creation = false;
