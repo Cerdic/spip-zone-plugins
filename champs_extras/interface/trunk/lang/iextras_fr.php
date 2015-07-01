@@ -32,10 +32,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_action' => 'Action @action@ inconnue.',
+	'erreur_format_export' => 'Format d\'export @format@ inconnu.',
 	'erreur_enregistrement_champ' => 'Problème de création du champ extra.',
 	'exporter_objet' => 'Exporter tous les champs extras de : @objet@',
 	'exporter_objet_champ' => 'Exporter le champs extras : @objet@ / @nom@',
 	'exporter_tous' => 'Exporter tous les champs extras',
+	'exporter_tous_explication' => 'Exporter tous les champs extras au format YAML pour utilisation dans le formulaire d\'importation',
+	'exporter_tous_php' => 'Export PHP',
+	'exporter_tous_php_explication' => 'Exporter au format PHP pour réutilisation dans un plugin dépendant uniquement de Champs Extras Core.',
 
 	// I
 	'icone_creer_champ_extra' => 'Créer un nouveau champ extra',

@@ -10,9 +10,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * Paramètres d'action :
  *
- * - tous                       Tous les champs extras de tous les objets
- * - objet/{type}/tous          Tous les champs extras de l'objet {type}. {@example: `objet/auteur/tous`}
- * - objet/{type}/champ/{nom}   Le champ {nom} de l'objet {type}. {@example: `objet/auteur/champ/date_naissance`}
+ * - yaml/tous                       Tous les champs extras de tous les objets
+ * - php/tous                        Tous les champs extras de tous les objets (export PHP)
+ * - yaml/objet/{type}/tous          Tous les champs extras de l'objet {type}. {@example: `yaml/objet/auteur/tous`}
+ * - yaml/objet/{type}/champ/{nom}   Le champ {nom} de l'objet {type}. {@example: `yaml/objet/auteur/champ/date_naissance`}
  * 
 **/
 function action_iextras_exporter_dist() {
@@ -27,31 +28,45 @@ function action_iextras_exporter_dist() {
 		exit;
 	}
 
-	list($quoi, $objet, $quoi_objet, $champ) = array_pad(explode('/', $arg), 4, null);
+	list($format, $quoi, $objet, $quoi_objet, $champ) = array_pad(explode('/', $arg), 5, null);
+
+	// formats possibles
+	if (!in_array($format, array('yaml', 'php'))) {
+		include_spip('inc/minipres');
+		echo minipres(_T('iextras:erreur_format_export',array("format" => $format)));
+		exit;
+	}
 
 	// actions possibles
-	if (!in_array($quoi, array(
-		'tous',
-		'objet'))){
-			include_spip('inc/minipres');
-			echo minipres(_T('iextras:erreur_action',array("action" => $quoi)));
-			exit;
+	if (!in_array($quoi, array('tous','objet'))) {
+		include_spip('inc/minipres');
+		echo minipres(_T('iextras:erreur_action',array("action" => $quoi)));
+		exit;
 	}
+
+	// liste des champs extras par table SQL array(table sql => array(saisies))
+	$champs = array();
+	$titre = "";
 
 	if ($quoi == 'tous') {
-		return iextras_exporter_tous();
+		$titre  = 'tous';
+		$champs = iextras_exporter_tous();
+	}
+	elseif ($quoi_objet == 'tous') {
+		$titre = $objet;
+		$champs = iextras_exporter_objet_tous($objet);
+	}
+	else {
+		$titre = "$objet-$champ";
+		$champs = iextras_exporter_objet_champ($objet, $champ);
 	}
 
-	if ($quoi_objet == 'tous') {
-		return iextras_exporter_objet_tous($objet);
-	}
-
-	return iextras_exporter_objet_champ($objet, $champ);
+	return iextras_envoyer_export($champs, $titre, $format);
 }
 
 
 /**
- * Exporte tous les champs extras
+ * Retourne tous les champs extras par table SQL
 **/
 function iextras_exporter_tous() {
 	include_spip('inc/iextras');
@@ -62,13 +77,12 @@ function iextras_exporter_tous() {
 			$champs[$table] = $liste;
 		}
 	}
-
-	return iextras_envoyer_export($champs, 'tous');
+	return $champs;
 }
 
 
 /**
- * Exporte tous les champs extras d'un objet
+ * Retourne tous les champs extras d'un objet
  *
  * @param string $objet
 **/
@@ -76,17 +90,15 @@ function iextras_exporter_objet_tous($objet) {
 	include_spip('inc/iextras');
 	$champs = array();
 	$table = table_objet_sql($objet);
-
 	if ($liste = iextras_champs_extras_definis($table)) {
 		$champs[$table] = $liste;
 	}
-
-	return iextras_envoyer_export($champs, $objet);
+	return $champs;
 }
 
 
 /**
- * Exporte un champs extras d'un objet
+ * Retourne un champ extra d'un objet
  *
  * @param string $objet
  * @param string $champ
@@ -95,7 +107,6 @@ function iextras_exporter_objet_champ($objet, $champ) {
 	include_spip('inc/iextras');
 	$champs = array();
 	$table = table_objet_sql($objet);
-
 	if ($liste = iextras_champs_extras_definis($table)) {
 		include_spip('inc/saisies');
 		$liste = saisies_lister_par_nom($liste);
@@ -104,8 +115,7 @@ function iextras_exporter_objet_champ($objet, $champ) {
 			$champs[$table][] = $liste[$champ];
 		}
 	}
-
-	return iextras_envoyer_export($champs, "$objet-$champ");
+	return $champs;
 }
 
 
@@ -116,15 +126,57 @@ function iextras_exporter_objet_champ($objet, $champ) {
  *
  * @param array $export
  * @param string $nom_fichier
+ * @param string $format
+ *     Format d'export (yaml ou php)
 **/
-function iextras_envoyer_export($export, $nom_fichier) {
-	// On envode en yaml
-	include_spip('inc/yaml');
-	$export = yaml_encode($export);
+function iextras_envoyer_export($export, $nom_fichier, $format = 'yaml') {
+
+	switch ($format) {
+		case 'php':
+			$contenu = <<<EOF
+<?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function monplugin_declarer_champs_extras(\$champs = array()) {
+EOF;
+			foreach ($export as $table => $champs) {
+				$contenu .= "
+
+	// Table : $table
+	if (!is_array(\$champs['$table'])) {
+		\$champs['$table'] = array();
+	}
+";
+				foreach ($champs as $champ) {
+					$nom = $champ['options']['nom'];
+					unset($champ['identifiant']);
+					$desc = var_export($champ, true);
+					$desc = explode("\n", $desc);
+					$desc = implode("\n\t\t", $desc);
+					$contenu .= "\n\t\$champs['$table']['$nom'] = $desc;\n";
+				}
+			}
+
+			$contenu .= <<<EOF
+
+	return \$champs;
+}
+EOF;
+			$export = $contenu;
+			break;
+
+		case 'yaml':
+		default:
+			// On envode en yaml
+			include_spip('inc/yaml');
+			$export = yaml_encode($export);
+			break;
+	}
+
 
 	$date = date("Ymd-His");
 	Header("Content-Type: text/x-yaml;");
-	Header("Content-Disposition: attachment; filename=champs_extras_export-$date-$nom_fichier.yaml");
+	Header("Content-Disposition: attachment; filename=champs_extras_export-$date-$nom_fichier.$format");
 	Header("Content-Length: " . strlen($export));
 	echo $export;
 	exit;

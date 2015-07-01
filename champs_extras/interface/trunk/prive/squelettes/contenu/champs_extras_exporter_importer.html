@@ -23,7 +23,7 @@
 <B_saisies>
 	<tr>
 		<td>
-			[(#URL_ACTION_AUTEUR{iextras_exporter,objet/#VALEUR{type}/tous}
+			[(#URL_ACTION_AUTEUR{iextras_exporter,yaml/objet/#VALEUR{type}/tous}
 				|icone_horizontale{#GET{objet}, #VALEUR{icone_objet}}
 				|inserer_attribut{title,#GET{title}})]
 		</td>
@@ -33,7 +33,7 @@
 			<BOUCLE_saisies(DATA){source tableau, #CLE|iextras_champs_extras_definis}>
 				<li class='item[(#TOTAL_BOUCLE|=={1}|oui)solo]'>
 					<a
-						href="[(#URL_ACTION_AUTEUR{iextras_exporter,[objet/(#_objets:VALEUR{type})/champ/#VALEUR{options/nom}]})]"
+						href="[(#URL_ACTION_AUTEUR{iextras_exporter,[yaml/objet/(#_objets:VALEUR{type})/champ/#VALEUR{options/nom}]})]"
 						title="<:iextras:exporter_objet_champ{objet=#GET{objet}, nom=#VALEUR{options/nom}}|attribut_html:>"
 						>
 						[(#CHEMIN_IMAGE{saisies_#VALEUR{saisie}}|sinon{#CHEMIN{images/formulaire-saisie-defaut.png}}|balise_img) ]
@@ -52,9 +52,9 @@
 </div>
 </B_objets>
 #BOITE_PIED
-	<a href="[(#URL_ACTION_AUTEUR{iextras_exporter,tous})]">
-		<:iextras:exporter_tous|attribut_html:>
-	</a>
+	<a href="[(#URL_ACTION_AUTEUR{iextras_exporter,yaml/tous})]" title="<:iextras:exporter_tous_explication|attribut_html:>"><:iextras:exporter_tous:></a>
+	<span class='sep'> | </span>
+	<a href="[(#URL_ACTION_AUTEUR{iextras_exporter,php/tous})]" title="<:iextras:exporter_tous_php_explication|attribut_html:>"><:iextras:exporter_tous_php:></a>
 #BOITE_FERMER
 
 
