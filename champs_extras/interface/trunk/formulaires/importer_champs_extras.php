@@ -76,6 +76,8 @@ function iextras_importer_description($description,  &$message, $fusionner_doubl
 	include_spip('inc/texte');
 	include_spip('inc/cextras');
 
+	$tables_sql_presentes = array_keys(lister_tables_objets_sql());
+
 	$message = '';
 	$nbt = count($description);
 	$message .= "{{Fichier importé :}}\n";
@@ -88,6 +90,13 @@ function iextras_importer_description($description,  &$message, $fusionner_doubl
 	$message .= "- $nbc champs extras.\n";
 
 	foreach ($description as $table => $saisies) {
+
+		if (!in_array($table, $tables_sql_presentes)) {
+			$message .= "\nTable {{ $table }} absente sur le site\n";
+			$message .= count($saisies) . " champs extras ignorés !!\n";
+			continue;
+		}
+
 		$champs_presents = $champs_futurs = iextras_champs_extras_definis($table);
 		$champs_presents_par_nom = saisies_lister_par_nom($champs_presents);
 
