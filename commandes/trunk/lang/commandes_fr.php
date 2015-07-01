@@ -124,6 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_actions' => 'Actions',
 	'label_commande_dates' => 'Dates',
+	'label_dont_taxe' => 'dont taxe',
 	'label_filtre_clients' => 'Clients',
 	'label_filtre_dates' => 'Dates',
 	'label_filtre_etats' => 'Etats',
@@ -144,7 +145,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_recherche' => 'Rechercher',
 	'label_statuts_actifs' => 'Statuts',
 	'label_taxe' => 'Taxe',
-	'label_dont_taxe' => 'dont taxe',
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
