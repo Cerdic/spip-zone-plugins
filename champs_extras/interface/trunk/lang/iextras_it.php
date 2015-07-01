@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						e cioè dei campi supplementari all’interno delle tabelle di SPIP,
 						gestiti dai form di modifica e creazione.',
 	'info_description_champ_extra_creer' => 'Puoi creare dei nuovi campi che verranno quindi visualizzati
-						su questa pagina, nel riquadro "Lista dei campi extra", oltre che nei form.',
+						su questa pagina, nel riquadro "Lista dei campi extra", oltre che nei form.', # MODIF
 	'info_description_champ_extra_presents' => 'Infine, se dei campi già esistono nel database,
 						ma non sono dichiarati (da parte di un plugin o di modelli), puoi
             scegliere di farli gestire a questo plugin. Questi campi, qualora rilevati,

@@ -1,15 +1,15 @@
 <traduction module="iextras" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/champs_extras/interface/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=en" total="86" traduits="82" relire="0" modifs="1" nouveaux="3" pourcent="95.35">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=en" total="100" traduits="81" relire="0" modifs="2" nouveaux="17" pourcent="81.00">
 		<traducteur nom="kent1" lien="http://trad.spip.net/auteur/kent1" />
 	</langue>
-	<langue code="es" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=es" total="86" traduits="82" relire="0" modifs="1" nouveaux="3" pourcent="95.35">
+	<langue code="es" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=es" total="100" traduits="81" relire="0" modifs="2" nouveaux="17" pourcent="81.00">
 		<traducteur nom="Raquel S. Bujaldón" lien="http://trad.spip.net/auteur/raquel-s-bujaldon" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=fr" total="86" traduits="86" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=fr" total="100" traduits="100" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="it" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=it" total="86" traduits="54" relire="0" modifs="1" nouveaux="31" pourcent="62.79">
+	<langue code="it" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=it" total="100" traduits="53" relire="0" modifs="2" nouveaux="45" pourcent="53.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=sk" total="86" traduits="82" relire="0" modifs="1" nouveaux="3" pourcent="95.35">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/iextras?lang_cible=sk" total="100" traduits="81" relire="0" modifs="2" nouveaux="17" pourcent="81.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>

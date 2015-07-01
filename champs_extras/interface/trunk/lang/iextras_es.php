@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_creer_champ_extra' => 'Crear un nuevo campo adicional ',
 	'info_description_champ_extra' => 'Esta página permite administrar campos adicionales, es decir, campos adicionales en la tablas de SPIP, tomados en cuenta en los formularios de edición.',
-	'info_description_champ_extra_creer' => 'Puede crear nuevos campos que se mostrarán sobre esta página, en el cuadro «Lista de campos extras», así como en los formularios.',
+	'info_description_champ_extra_creer' => 'Puede crear nuevos campos que se mostrarán sobre esta página, en el cuadro «Lista de campos extras», así como en los formularios.', # MODIF
 	'info_description_champ_extra_presents' => 'Finalmente, si los campos ya existen en vuestra base de datos, pero no están declarados (por un plugin o un juego de esqueletos), puede pedir a este plugin que los administre. Estos campos, si los hay, aparecen en el cuadro «Lista de los campos no administrados».',
 	'info_modifier_champ_extra' => 'Modificar campo adicional',
 	'info_nouveau_champ_extra' => 'Nuevo campo adicional',

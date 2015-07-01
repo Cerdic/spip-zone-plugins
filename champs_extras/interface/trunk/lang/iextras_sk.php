@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 						čiže vlastné polia v tabuľkách v SPIPe,
 						ktoré sa nachádzajú v redakčných formulároch.',
 	'info_description_champ_extra_creer' => 'Môžete vytvoriť nové polia, ktoré sa zobrazia
-						 na tejto stránke v ráme s názvom "Zoznam doplnkových polí" a vo všetkých formulároch.',
+						 na tejto stránke v ráme s názvom "Zoznam doplnkových polí" a vo všetkých formulároch.', # MODIF
 	'info_description_champ_extra_presents' => 'Napokon, ak už polia vo vašej databáze existujú,
   ale nie sú nahlásené (zásuvným modulom alebo šablónami), môžete o ich riadenie
   požiadať zásuvný modul. Tieto polia, ak existujú,
