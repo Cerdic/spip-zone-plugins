@@ -33,7 +33,10 @@ function panier_options_recuperer_fond($flux){
     			$code_valide=false;
     			
     			//est-ce que l'avantage est déjà validé ?
-    			if (!$id_panier) $id_panier = session_get('id_panier');
+    			if (!$id_panier) {
+				include_spip('inc/paniers');
+				$id_panier = paniers_id_panier_encours();
+			}
     			$avantage_valide = sql_getfetsel('options','spip_paniers',array('id_panier = '.sql_quote($id_panier)));
     			if($avantage_valide=="avantage_valide") $code_valide=true;
     			
