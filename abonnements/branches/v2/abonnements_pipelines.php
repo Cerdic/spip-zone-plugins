@@ -153,7 +153,7 @@ function abonnements_post_edition($flux){
 		// On cherche si on a des offres d'abonnements dans les détails de la commande
 		foreach ($details as $detail) {
 			// Si on trouve une offre d'abonnement
-			if ($detail['objet'] = 'abonnements_offre' and ($id_abonnements_offre = $detail['id_objet']) > 0) {
+			if ($detail['objet'] == 'abonnements_offre' and ($id_abonnements_offre = $detail['id_objet']) > 0) {
 				// On crée ou renouvelle
 				$action = charger_fonction('creer_ou_renouveler_abonnement', 'action/');
 				$retour = $action($id_auteur.'/'.$id_abonnements_offre);
