@@ -7,19 +7,20 @@
     logo=""
     documentation="http://contrib.spip.net/Sphinx-Indexer"
 >
-    <nom>Indexer Documents</nom>
+	<nom>Indexer documents</nom>
 
-    <auteur>Matthieu Marcillaud</auteur>
-    <auteur>Rastapopoulos</auteur>
-    <auteur>Fil</auteur>
-    <auteur>Azerttyu</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Rastapopoulos</auteur>
+	<auteur>Fil</auteur>
+	<auteur>Azerttyu</auteur>
 
-    <necessite nom="indexer" compatbilite="[1.1;]" />
+    <licence>GNU/GPL</licence>
+
+    <necessite nom="indexer" compatibilite="[1.1;]" />
 
     <utilise nom="extrairedoc" compatibilite="[0.0.4;]" />
 
     <pipeline nom="indexer_sources" inclure="indexerdoc_pipelines.php" />
 
-    <licence>GNU/GPL</licence>
 
 </paquet>
