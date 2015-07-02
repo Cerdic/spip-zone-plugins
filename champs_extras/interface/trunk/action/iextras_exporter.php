@@ -133,36 +133,9 @@ function iextras_envoyer_export($export, $nom_fichier, $format = 'yaml') {
 
 	switch ($format) {
 		case 'php':
-			$contenu = <<<EOF
-<?php
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-function monplugin_declarer_champs_extras(\$champs = array()) {
-EOF;
-			foreach ($export as $table => $champs) {
-				$contenu .= "
-
-	// Table : $table
-	if (!is_array(\$champs['$table'])) {
-		\$champs['$table'] = array();
-	}
-";
-				foreach ($champs as $champ) {
-					$nom = $champ['options']['nom'];
-					unset($champ['identifiant']);
-					$desc = var_export($champ, true);
-					$desc = explode("\n", $desc);
-					$desc = implode("\n\t\t", $desc);
-					$contenu .= "\n\t\$champs['$table']['$nom'] = $desc;\n";
-				}
-			}
-
-			$contenu .= <<<EOF
-
-	return \$champs;
-}
-EOF;
-			$export = $contenu;
+			$export = iextras_preparer_export_php($export);
+			$export = iextras_ecrire_export_php($export);
+			
 			break;
 
 		case 'yaml':
@@ -180,4 +153,119 @@ EOF;
 	Header("Content-Length: " . strlen($export));
 	echo $export;
 	exit;
+}
+
+
+/**
+ * Prépare les saisies (les simplifie) pour un export au format PHP
+ *
+ * @param array $export
+ *     Liste des saisies, par table SQL
+ * @return array
+ *     Idem, simplifié
+**/
+function iextras_preparer_export_php($export) {
+	foreach ($export as $table => $champs) {
+		if (!$champs) {
+			unset($export[$table]);
+			continue;
+		}
+
+		// simplifier chaque champ
+		foreach ($champs as $i => $champ) {
+			$export[$table][$i] = iextras_preparer_export_php_saisie($champ);
+		}
+	}
+
+	return $export;
+}
+
+/**
+ * Simplifie l'écriture d'une saisie de champs extras
+ *
+ * @param array Description de saisie
+ * @return array
+**/
+function iextras_preparer_export_php_saisie($saisie) {
+	// 1 mettre 'saisie' en tout premier, c'est plus pratique !
+	$saisie = array('saisie' => $saisie['saisie']) + $saisie;
+	// 2 mettre 'saisies' en dernier
+	if (isset($saisie['saisies'])) {
+		$saisies = $saisie['saisies'];
+		unset($saisie['saisies']);
+		$saisie['saisies'] = $saisies;
+		// 2 bis : traiter toutes les saisies enfants
+		foreach ($saisie['saisies'] as $k => $s) {
+			$saisie['saisies'][$k] = iextras_preparer_export_php_saisie($s);
+		}
+	}
+	// 3 pas besoin d'identifiant
+	unset($saisie['identifiant']);
+	// 4 nettoyage de quelques champs souvent vides
+	if (isset($saisie['options']['restrictions'])) {
+		if (empty($saisie['options']['restrictions']['secteurs'])) {
+			unset($saisie['options']['restrictions']['secteurs']);
+		}
+		if (empty($saisie['options']['restrictions']['branches'])) {
+			unset($saisie['options']['restrictions']['branches']);
+		}
+		if (empty($saisie['options']['restrictions']['voir']['auteur'])) {
+			unset($saisie['options']['restrictions']['voir']['auteur']);
+		}
+		if (empty($saisie['options']['restrictions']['modifier']['auteur'])) {
+			unset($saisie['options']['restrictions']['modifier']['auteur']);
+		}
+		if (empty($saisie['options']['restrictions']['voir'])) {
+			unset($saisie['options']['restrictions']['voir']);
+		}
+		if (empty($saisie['options']['restrictions']['modifier'])) {
+			unset($saisie['options']['restrictions']['modifier']);
+		}
+		if (empty($saisie['options']['restrictions'])) {
+			unset($saisie['options']['restrictions']);
+		}
+	}
+
+	return $saisie;
+}
+
+/**
+ * Écrit le code PHP de l'export PHP
+ *
+ * @param array $export
+ *     Liste des saisies, par table SQL
+ * @return string
+ *     Code PHP
+**/
+function iextras_ecrire_export_php($export) {
+	$contenu = <<<EOF
+<?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+function monplugin_declarer_champs_extras(\$champs = array()) {
+EOF;
+	foreach ($export as $table => $champs) {
+		$contenu .= "
+
+	// Table : $table
+	if (!is_array(\$champs['$table'])) {
+		\$champs['$table'] = array();
+	}
+";
+		foreach ($champs as $champ) {
+			$nom = $champ['options']['nom'];
+			$desc = var_export($champ, true);
+			#$desc = explode("\n", $desc);
+			#$desc = implode("\n\t\t", $desc);
+			$contenu .= "\n\t\$champs['$table']['$nom'] = $desc;\n";
+		}
+	}
+
+	$contenu .= <<<EOF
+
+	return \$champs;
+}
+EOF;
+
+	return $contenu;
 }
