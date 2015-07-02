@@ -165,6 +165,7 @@ function iextras_envoyer_export($export, $nom_fichier, $format = 'yaml') {
  *     Idem, simplifié
 **/
 function iextras_preparer_export_php($export) {
+	include_spip('inc/saisies');
 	foreach ($export as $table => $champs) {
 		if (!$champs) {
 			unset($export[$table]);
@@ -187,8 +188,10 @@ function iextras_preparer_export_php($export) {
  * @return array
 **/
 function iextras_preparer_export_php_saisie($saisie) {
+
 	// 1 mettre 'saisie' en tout premier, c'est plus pratique !
 	$saisie = array('saisie' => $saisie['saisie']) + $saisie;
+
 	// 2 mettre 'saisies' en dernier
 	if (isset($saisie['saisies'])) {
 		$saisies = $saisie['saisies'];
@@ -199,6 +202,7 @@ function iextras_preparer_export_php_saisie($saisie) {
 			$saisie['saisies'][$k] = iextras_preparer_export_php_saisie($s);
 		}
 	}
+
 	// 3 pas besoin d'identifiant
 	unset($saisie['identifiant']);
 	// 4 nettoyage de quelques champs souvent vides
@@ -223,6 +227,13 @@ function iextras_preparer_export_php_saisie($saisie) {
 		}
 		if (empty($saisie['options']['restrictions'])) {
 			unset($saisie['options']['restrictions']);
+		}
+	}
+
+	// 5 les datas doivent être des tableaux
+	if (isset($saisie['options']['datas'])) {
+		if (!is_array($saisie['options']['datas'])) {
+			$saisie['options']['datas'] = saisies_chaine2tableau($saisie['options']['datas']);
 		}
 	}
 
@@ -255,8 +266,8 @@ EOF;
 		foreach ($champs as $champ) {
 			$nom = $champ['options']['nom'];
 			$desc = var_export($champ, true);
-			#$desc = explode("\n", $desc);
-			#$desc = implode("\n\t\t", $desc);
+			$desc = explode("\n", $desc);
+			$desc = implode("\n\t\t", $desc);
 			$contenu .= "\n\t\$champs['$table']['$nom'] = $desc;\n";
 		}
 	}
