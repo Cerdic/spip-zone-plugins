@@ -170,6 +170,9 @@ function nospam_formulaire_charger($flux) {
 	) {
 		include_spip("inc/nospam");
 		$jeton = creer_jeton($form);
+		if (!isset($flux['data']['_hidden'])) {
+			$flux['data']['_hidden'] = "";
+		}
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
 
 		if (_SPAM_ENCRYPT_NAME){
