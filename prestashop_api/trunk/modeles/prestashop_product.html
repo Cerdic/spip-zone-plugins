@@ -5,7 +5,7 @@
 [(#CLE|=={id}|oui) #SET{id,#VALEUR} ]
 </BOUCLE_ean13>
 
-<BOUCLE_product(DATA){si #GET{id}|oui}{source simplexml, #GET{url}/api/products/#GET{id}, 1}{datapath root/children/product}>
+<BOUCLE_product(DATA){si #GET{id}|oui}{source simplexml, #GET{url}/api/products/#GET{id}\?price\[price_wt\]\[use_tax\]=1, 1}{datapath root/children/product}>
 #SET{titre, #VALEUR{children/name/0/children/language/0/text}}
 #SET{url_product,#CONFIG{prestashop_api/url}|concat{/index.php?controller=product&id_product=#GET{id}}|recuperer_lapage}
 <article class="product produit" itemscope itemtype="http://schema.org/Product">
@@ -20,7 +20,7 @@
 		<a href="#GET{url_product}" itemprop="url">#GET{titre}</a>
 	</h3>
 	[<div class="price prix" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-		<span itemprop="price">(#VALEUR{children/price/0/text}|number_format{2})</span> <span itemprop="priceCurrency" content="EUR">€</span>
+		<span itemprop="price">(#VALEUR{children/price_wt/0/text}|number_format{2})</span> <span itemprop="priceCurrency" content="EUR">€</span>
 	</div>]
 	<a href="#GET{url_product}" class="acheter buy button btn" itemprop="url">[(#ENV{message_acheter, <:prestashop_api:product_acheter:>})]</a>
 </article>
