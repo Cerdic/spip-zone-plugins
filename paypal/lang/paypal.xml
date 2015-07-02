@@ -1,4 +1,7 @@
 <traduction module="paypal" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/paypal/lang/" reference="fr">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/paypal?lang_cible=de" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+		<traducteur nom="Torsten Willmann" lien="http://trad.spip.net/auteur/torsten-willmann" />
+	</langue>
 	<langue code="en" url="http://trad.spip.net/tradlang_module/paypal?lang_cible=en" total="23" traduits="23" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
