@@ -117,8 +117,10 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 	 * On insère un attribut data-clipboard-text si on n'a pas le lien de téléchargement car pas de saut de ligne
 	 */
 	$datatext = !$telecharge && PLUGIN_COLORATION_CODE_TELECHARGE;
-	if($datatext)
+	$datatext_content = "";
+	if ($datatext) {
 		$datatext_content = ' data-clipboard-text="'.attribut_html($code).'"';
+	}
 
 	if ($cadre == 'cadre' OR $englobant=="div") {
 	 	$geshi->set_header_type(GESHI_HEADER_PRE);
