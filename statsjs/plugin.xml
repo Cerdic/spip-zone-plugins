@@ -2,7 +2,7 @@
 	<nom>StatsJS</nom>
 	<slogan>Compter les visites via un mouchard javascript</slogan>
 	<auteur>Fil</auteur>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>dev</etat>
 	<description>
 Ce plugin sert &#224; compter les visites &#224; partir d&#8217;un mouchard javascript, au lieu du mouchard PHP classique. 
@@ -17,7 +17,7 @@ Quel int&#233;r&#234;t ?
 	<pipeline>
 		<nom>affichage_final</nom>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;3.0.99]" />
+	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<utilise id="stats" version="[0.4;]" />
 	<categorie>statistique</categorie>
 	<lien>http://contrib.spip.net/3753</lien>
