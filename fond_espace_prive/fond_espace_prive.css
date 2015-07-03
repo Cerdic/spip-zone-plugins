@@ -1,0 +1,11 @@
+body {
+	background-repeat: non-repeat;
+	background-attachment: fixed;
+	background-position: center center;
+	background-size: cover;
+}
+#page {
+	padding-top: 1px;
+	background-color: white;
+	background-color: rgba(253, 254, 251, 0.90);
+}

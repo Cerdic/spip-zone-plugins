@@ -1,0 +1,21 @@
+<paquet
+	prefix="fond_espace_prive"
+	categorie="outil"
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0;3.1.*]"
+>
+
+	<nom>Fond d’écran pour l’espace privé</nom>
+	<!-- Varier les mises en page selon les rubriques, les articles... -->
+
+	<auteur lien="http://www.paris-beyrouth.org">Arnaud Martin / Paris-Beyrouth</auteur>
+
+	<copyright>2014-2015</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="header_prive" inclure="fond_espace_prive_pipelines.php" />
+	<pipeline nom="insert_head_css" inclure="fond_espace_prive_pipelines.php" />
+
+</paquet>
