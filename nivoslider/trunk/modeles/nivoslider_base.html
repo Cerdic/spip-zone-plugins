@@ -103,7 +103,8 @@
 		][(#SET{img,[(#GET{resize}|=={oui}|?{
 				[(#FICHIER
 						|image_passe_partout{#GET{width},#GET{height}}
-						|image_recadre{#GET{width},#GET{height}})]
+						|image_recadre{#GET{width},#GET{height},#GET{imageAlign},#GET{imageBackcolor}}
+						|inserer_attribut{alt,''})]
 				,
 				[(#FICHIER|balise_img)]
 				})]
