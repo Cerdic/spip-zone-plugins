@@ -32,6 +32,7 @@ function bigfoot_insert_head($flux){
 			footnoteParentClass: "spip_note_ref",
 			footnoteTagname: "div"
 		});
+		jQuery('div.notes').hide();
 	};
 	$(function(){
 		bigfoot_init();

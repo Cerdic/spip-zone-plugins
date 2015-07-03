@@ -1,7 +1,7 @@
 <paquet
 	prefix="bigfoot"
 	categorie="divers"
-	version="1.0.0"
+	version="1.0.1"
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="bigfoot-128.png"
