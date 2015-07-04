@@ -30,9 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_unite_m3' => 'm3',
 	'label_unite_rien' => 'Acune unité',
 	'label_volume' => 'Volume',
-
-	// S
-	'shop_livraison_titre' => 'Shop Livraisons',
+	'livraison_titre' => 'Livraisons',
 
 	// T
 	'texte_montant_defaut_non_definit' => 'Aucun Montant par défaut n’est définit, les pays non attachés à une zone seront exemptés de frais de livraison. Dans Configuration vous pouvez definir un montant pas défaut',
@@ -40,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_ajouter_pays_continent' => 'Ajouter les pays de ce continent à cette zone',
 	'titre_livraison' => 'Livraison',
 	'titre_livraisons' => 'Livraisons',
-	'titre_page_configurer_shop_livraison' => 'Shop Livraisons'
+	'titre_page_configurer_livraison' => 'Livraisons'
 );
 
 ?>

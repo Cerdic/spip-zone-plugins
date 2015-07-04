@@ -6,9 +6,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
-	'shop_livraisons_description' => 'Gérer les livraison avec Shop',
-	'shop_livraisons_nom' => 'Shop Livraisons',
-	'shop_livraisons_slogan' => 'Gérer les livraison avec Shop'
+	'livraison_description' => 'Gestion de livraisons',
+	'livraison_nom' => 'Livraisons',
+	'livraison_slogan' => 'Gestion de livraisons'
 );
 
 ?>

@@ -12,7 +12,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 	
     
-function shop_livraisons_post_insertion($flux){
+function livraison_post_insertion($flux){
 	include_spip('inc/config');
     // Après insertion d'une commande "encours" et s'il y a un panier en cours
     if (
@@ -121,16 +121,16 @@ function mesure_par_tranche($mesure,$valeurs,$quantite,$livraison_zone){
     
 }
 
-function shop_livraisons_formulaire_traiter($flux){
+function livraison_formulaire_traiter($flux){
     
     // Installer des champs extras après la configuration prix
     if ($flux['args']['form'] == 'configurer_shop_livraison' ) {
 
     /*Installation de champs via le plugin champs extras*/
     include_spip('inc/cextras');
-    include_spip('base/shop_livraisons');
+    include_spip('base/livraison');
     $maj_item = array();
-    foreach(shop_livraisons_declarer_champs_extras() as $table=>$champs) {
+    foreach(livraison_declarer_champs_extras() as $table=>$champs) {
         champs_extras_creer($table, $champs);
         } 
     }

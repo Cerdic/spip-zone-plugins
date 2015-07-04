@@ -28,7 +28,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  *     Version du schéma de données dans ce plugin (déclaré dans paquet.xml)
  * @return void
 **/
-function shop_livraisons_upgrade($nom_meta_base_version, $version_cible) {
+function livraison_upgrade($nom_meta_base_version, $version_cible) {
 	include_spip('inc/config');
 	$maj = array();
 	
@@ -47,11 +47,11 @@ function shop_livraisons_upgrade($nom_meta_base_version, $version_cible) {
 
     /*Installation de champs via le plugin champs extras*/
     include_spip('inc/cextras');
-    include_spip('base/shop_livraisons');
+    include_spip('base/livraison');
     if(function_exists(cextras_api_upgrade)){
-        cextras_api_upgrade(shop_livraisons_declarer_champs_extras(), $maj['create']);   
-        cextras_api_upgrade(shop_livraisons_declarer_champs_extras(), $maj['1.1.5']);
-        cextras_api_upgrade(shop_livraisons_declarer_champs_extras(), $maj['1.2.0']);		
+        cextras_api_upgrade(livraison_declarer_champs_extras(), $maj['create']);   
+        cextras_api_upgrade(livraison_declarer_champs_extras(), $maj['1.1.5']);
+        cextras_api_upgrade(livraison_declarer_champs_extras(), $maj['1.2.0']);		
     }
     
     
@@ -72,7 +72,7 @@ function shop_livraisons_upgrade($nom_meta_base_version, $version_cible) {
  *     Nom de la meta informant de la version du schéma de données du plugin installé dans SPIP
  * @return void
 **/
-function shop_livraisons_vider_tables($nom_meta_base_version) {
+function livraison_vider_tables($nom_meta_base_version) {
 	# quelques exemples
 	# (que vous pouvez supprimer !)
 	# sql_drop_table("spip_xx");
