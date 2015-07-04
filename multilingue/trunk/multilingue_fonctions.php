@@ -32,7 +32,7 @@ if ($traduire_logo == 'ok') {
         );
       }
       //si pas de logo on cherche si l'article d'origine en a un
-      elseif ($tables[$table]['field']['id_trad'] AND $id_trad = sql_getfetsel('id_trad', $table, $_id_objet . '=' . $id) AND _request('exec') != $objet) {
+      elseif ($tables[$table]['field']['id_trad'] AND $id_trad = sql_getfetsel('id_trad', $table, $_id_objet . '=' . intval($id)) AND _request('exec') != $objet) {
         $nom = $type . $mode . intval($id_trad);
         if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format))) {
           return array(

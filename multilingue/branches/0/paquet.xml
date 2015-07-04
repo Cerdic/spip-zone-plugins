@@ -1,7 +1,7 @@
 <paquet
 	prefix="multilingue"
 	categorie="edition"
-	version="1.0.5"
+	version="1.0.6"
 	etat="stable"
 	compatibilite="[2.0.0;3.1.*]"
 	logo="prive/themes/spip/images/multilingue-64.png"
