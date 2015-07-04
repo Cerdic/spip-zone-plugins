@@ -16,5 +16,6 @@
 	<parametre nom="articles_max" label="menus:entree_articles_max" />
 	<parametre nom="articles_max_affiches" label="menus:entree_articles_max_affiches" />
 	<parametre nom="tri_articles" label="menus:entree_tri_articles" />
+	<parametre nom="dropdown_menu" label="menus:dropdown_menu" />
 	<refuser_sous_menu/>
 </entree>
