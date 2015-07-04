@@ -1,35 +1,37 @@
 <paquet
-	prefix="shop_livraisons"
+	prefix="livraison"
 	categorie="communication"
-	version="1.2.0"
+	version="1.3.0"
 	etat="test"
 	compatibilite="[3.0.10;3.1.*]"
-	logo="prive/themes/spip/images/shop_livraisons-64.png"
+	logo="prive/themes/spip/images/livraison-64.png"
 	documentation=""
 	schema="1.2.0" 
 >
-	<nom>Shop Livraisons</nom>
+	<nom>Livraisons</nom>
 
 	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
 
 	<licence>GNU/GPL</licence>
 	
 	<necessite nom="saisies" compatibilite="[2.0.3;]" />
-	<necessite nom="shop" compatibilite="[1.4.2;]" />	
 	
 	<necessite nom="pays" compatibilite="[3.0.10;]" />
 	<necessite nom="continents" compatibilite="[1.0.2;]" />
 	<necessite nom="cextras" compatibilite="[3.4.1;]" />	
 	
-	<utilise nom="prix_objets" compatibilite="[1.6.7;]" />	
+	<utilise nom="prix_objets" compatibilite="[1.6.7;]" />
+	<utilise nom="shop" compatibilite="[1.4.2;]" />  
 	
-	<pipeline nom="autoriser" inclure="shop_livraisons_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="livraison_autorisations.php" /> 
 
-	<pipeline nom="declarer_tables_objets_sql" inclure="base/shop_livraisons.php" /> 
-	<pipeline nom="declarer_tables_interfaces" inclure="base/shop_livraisons.php" /> 
-	<pipeline nom="declarer_tables_principales" inclure="base/shop_livraisons.php" />
-	<pipeline nom="declarer_champs_extras" inclure="base/shop_livraisons.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/livraison.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/livraison.php" /> 
+	<pipeline nom="declarer_tables_principales" inclure="base/livraison.php" />
+	<pipeline nom="declarer_champs_extras" inclure="base/livraison.php" />
 	
-	<pipeline nom="post_insertion" inclure="shop_livraisons_pipelines.php" />	
-	<pipeline nom="formulaire_traiter" inclure="shop_livraisons_pipelines.php" />		
+	<pipeline nom="post_insertion" inclure="livraison_pipelines.php" />	
+	<pipeline nom="formulaire_traiter" inclure="livraison_pipelines.php" />
+	
+	<menu nom="livraisons" titre="livraison:livraison_titre" parent="menu_edition" icone="images/livraison-16.png" action="livraisons" />
 </paquet>
