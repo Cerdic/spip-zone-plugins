@@ -22,8 +22,8 @@
 		<p class="explication">Des explications préliminaires, en début de formulaire</p>
 		<fieldset>
 			<legend><:charter:legend:></legend>
-				<p class="explication">Des explications dans un fieldset</p>
-				<ul>
+			<p class="explication">Des explications dans un fieldset</p>
+			<ul class="editer-groupe">
 				<!--EX01-->
 				#SET{name,text}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -54,7 +54,7 @@
 		</fieldset>
 		<fieldset>
 			<legend><:charter:legend:></legend>
-			<ul>
+			<ul class="editer-groupe">
 				<!--EX04-->
 				#SET{name,text}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -77,7 +77,7 @@
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<textarea name="#GET{name}" class="textarea">
+					]<textarea name="#GET{name}" id="#GET{name}" class="textarea">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
 				</li>
 				<!--EX07-->
@@ -85,14 +85,14 @@
 				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<textarea name="#GET{name}" class="textarea">
+					]<textarea name="#GET{name}" id="#GET{name}" class="textarea">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
 				</li>
 				#SET{name,textarea_pleine_largeur_obli}#SET{obli,'obligatoire'}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer pleine_largeur editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<textarea name="#GET{name}" class="textarea">
+					]<textarea name="#GET{name}" id="#GET{name}" class="textarea">
 #ENV*{#GET{name},#GET{defaut}}</textarea>
 				</li>
 				<!--EX08-->
@@ -120,6 +120,21 @@
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 				</li>
+				<!--EX09b-->
+				#SET{name,checkbox_ouiounon}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					<p class="explication">Des explications au-dessus d'un choix</p>
+					<div class="choix">
+						#SET{val,non}
+						<input type="hidden" name="#GET{name}" value="#GET{val}" />
+						#SET{val,oui}
+						<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					</div>
+				</li>
 				<!--EX10-->
 				#SET{name,checkbox}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -136,7 +151,9 @@
 						<input type="checkbox" name="#GET{name}#EVAL{chr(91)}#EVAL{chr(93)}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#GET{val}|in_any{#ENV{#GET{name},#GET{defaut}}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
+					<p class="explication">Des explications au-dessous d'un choix</p>
 				</li>
+
 				<!--EX11-->
 				#SET{name,checkbox_long_label}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 				<li class="editer long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -154,25 +171,11 @@
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 				</li>
-				#SET{name,checkboxouiounon}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
-					<span class='erreur_message'>(#GET{erreurs})</span>
-					]
-					<p class="explication">Des explications au-dessus d'un choix</p>
-					#SET{val,non}
-					<input type="hidden" name="#GET{name}" value="#GET{val}" />
-					#SET{val,oui}
-					<div class="choix">
-						<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},#GET{defaut}}|=={#GET{val}}|oui)checked="checked"] />
-						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
-					</div>
-				</li>
 
 				<li class="fieldset">
 					<fieldset>
 						<legend><:charter:legend:></legend>
-						<ul>
+						<ul class="editer-groupe">
 							<!--EX12-->
 							#SET{name,text}#SET{obli,''}#SET{defaut,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 							<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
@@ -194,7 +197,7 @@
 		</fieldset>
 	  [(#REM) ajouter les saisies supplémentaires : extra et autre, à cet endroit ]
 	  <!--extra-->
-		<p class="explication info">Cliquez sur <q>Annuler</q> pour tester les messages d'erreur et sur <q>Enregistrer</q> pour tester les messages de succès.</p>
+		<p class="explication">Cliquez sur <q>Annuler</q> pour tester les messages d'erreur et sur <q>Enregistrer</q> pour tester les messages de succès.</p>
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
 			<input type='submit' name="cancel" class='submit' value='<:bouton_annuler|attribut_html:>' />
 			<input type='submit' class='submit' value='<:bouton_enregistrer|attribut_html:>' /></p>
