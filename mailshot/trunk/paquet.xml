@@ -1,9 +1,9 @@
 <paquet
 	prefix="mailshot"
 	categorie="communication"
-	version="1.8.1"
+	version="1.8.2"
 	etat="stable"
-	compatibilite="[3.0.5;3.0.*]"
+	compatibilite="[3.0.5;3.1.*]"
 	logo="prive/themes/spip/images/mailshot-32.png"
 	documentation="http://contrib.spip.net/mailshot"
 	schema="0.3.2"
