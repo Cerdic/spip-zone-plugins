@@ -17,6 +17,6 @@
 
 	<menu nom="lister_config" titre="lister_config:titre_lister_config" parent="menu_configuration" icone="images/lister_config-16.png" />
 
-	<pipeline nom="listermenu" inclure="lister_config_pipelines.php" action=""/>
+	<pipeline nom="listermenu" inclure="lister_config_pipelines.php" />
 
 </paquet>
