@@ -34,7 +34,7 @@ Valeurs par defaut :
     right: 48px;
     top: 4px;
 }
-[(#SET{menus, [(#PIPELINE{listermenu,[(#ARRAY{lister_config,[(#ARRAY{titre,<:lister_config:titre_lister_config:>,icone,prive/themes/spip/images/lister_config-16.png})]})]})]})]
+[(#SET{menus, [(#PIPELINE{listermenu,#ARRAY{args,#ARRAY,data,#ARRAY}})]})]
 <BOUCLE_menu_lister (DATA) {source table, #GET{menus}} {par cle}>
 .navigation_avec_icones .bando2_#CLE {
     background-image: url('[(#CHEMIN{[(#VALEUR{icone})]})]');
