@@ -1,0 +1,66 @@
+[(#REM)<style>/*
+    Ce squelette definit les styles de l'espace prive
+
+    Note: l'entete "Vary:" sert a repousser l'entete par
+    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+    genant en cas de "rotation du cookie de session" apres
+    un changement d'IP (effet de clignotement).
+
+    ATTENTION: il faut absolument le charset sinon Firefox croit que
+    c'est du text/html !
+*/]#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+/*
+Valeurs par defaut :
+#SET{claire,##ENV{couleur_claire,edf3fe}} [claire: (#GET{claire});]
+#SET{foncee,##ENV{couleur_foncee,3874b0}} [foncee: (#GET{foncee});]
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}} [left: (#GET{left});]
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}} [right: (#GET{right});]
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}} [rtl: (#GET{rtl});]
+#SET{dir,#ENV{ltr}|choixsiegal{left,ltr,rtl}} [dir: (#GET{dir});]
+
+#SET{font-size,#ENV{font-size,0.8125em}} [font-size: (#GET{font-size});]
+#SET{line-height,#ENV{line-height,1.385em}} [line-height: (#GET{line-height});]
+#SET{margin-bottom,#ENV{margin-bottom,#GET{line-height}}} [margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#ENV{text-indent,50px}} [text-indent: (#GET{text-indent});]
+#SET{font-family,#ENV*{font-family,'Helvetica, Arial, sans-serif'}} [font-family: (#GET{font-family});]
+#SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
+#SET{color,#ENV{color,#000000}} [color: (#GET{color});]
+
+#SET{petit_ecran,#ENV{petit_ecran,960px}} [petit_ecran: (#GET{petit_ecran});]
+#SET{grand_ecran,#ENV{grand_ecran,1280px}} [grand_ecran: (#GET{grand_ecran});]
+
+*/
+
+/* Layout */
+body { min-width: #GET{petit_ecran}; }
+body.large { min-width: #GET{grand_ecran}; }
+/* ecran etroit*/
+.largeur { width: #GET{petit_ecran}; }
+#conteneur,.table_page { width: 100%; }
+#navigation { width: 25%; }
+#extra { width: 25%; }
+#contenu { margin-left: 5%; width: 70%; }
+#pied {}
+div.messages-alertes { width: 100%; }
+
+/* ecran large*/
+.large .largeur { width: #GET{grand_ecran}; }
+.large #conteneur,.large .table_page { width: 100%; }
+.large div.messages-alertes { width: 95%; }
+.large #navigation { width: 20%; }
+.large #extra { width: 20%; }
+.large #contenu { margin-left: 2.5%; width: 55%; }
+
+/* les formulaires sont en 600px en config large */
+body.large.edition #contenu,
+.articles_edit.large #contenu,
+.mots_edit.large #contenu,
+.breves_edit.large #contenu,
+.rubriques_edit.large #contenu { width: 62%; }
+body.large.edition #extra,
+.articles_edit.large #extra,
+.mots_edit.large #extra,
+.breves_edit.large #extra,
+.rubriques_edit.large #extra { width: 13%; }

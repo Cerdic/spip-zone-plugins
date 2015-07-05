@@ -1,0 +1,16 @@
+<paquet
+    prefix="spip_enlarge"
+    categorie="theme"
+    version="0.1.0"
+    etat="dev"
+    compatibilite="[3.0.0;3.1.*]"
+    logo="prive/themes/spip/images/spip_enlarge-64.png"
+    documentation=""
+>
+    <nom>Aggrandir la largeur de page</nom>
+
+    <auteur>Teddy Payet</auteur>
+
+    <licence>GNU/GPL</licence>
+
+</paquet>
