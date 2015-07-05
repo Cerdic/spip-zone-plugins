@@ -1,0 +1,28 @@
+<paquet
+	prefix="bootstrap"
+	categorie="outil"
+	version="2.1.7"
+	etat="stable"
+	compatibilite="[3.0.2;3.1.*]"
+	logo="img/bootstrap-32.png"
+	documentation="http://spipr.nursit.com/bootstrap"
+>
+
+	<nom>Bootstrap</nom>
+
+	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
+	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
+	<credit lien='http://getbootstrap.com/2.3.2/'>twbs/bootstrap v2.3.2</credit>
+	<credit lien='http://hashgrid.com/'>dotjay/hashgrid</credit>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="affichage_final" inclure="bootstrap_fonctions.php" />
+
+	<necessite nom="lesscss" compatibilite="[1.0.0;1.*.*]" />
+
+	<chemin path="bootstrap" type="public" />
+	<chemin path="bootstrap2spip" type="public" />
+	<chemin path="" />
+
+</paquet>

@@ -1,0 +1,151 @@
+@import "bootstrap/css/forms.less";
+
+legend {&:extend(h3);}
+
+/* Surcharge RTL */
+.rtl {
+  .form-search .input-append .search-query {
+    .border-radius(0 14px 14px 0);
+  }
+  .form-search .input-append .btn {
+  .border-radius(14px 0 0 14px);
+  }
+  .form-search .input-prepend .search-query {
+  .border-radius(14px 0 0 14px);
+  }
+  .form-search .input-prepend .btn {
+  .border-radius(0 14px 14px 0);
+  }
+}
+
+
+/* Structure generale des formulaires
+----------------------------------------------- */
+.formulaire_spip { clear: both; margin-bottom: @emLineHeight; padding: @emLineHeight; background-color: @wellBackground;position: relative;}
+.formulaire_spip form {margin-bottom: 0}
+.formulaire_spip .boutons {.form-actions;margin: 0 -@emLineHeight -@emLineHeight; padding: @emLineHeight;text-align: right;}
+.secondary {
+  .formulaire_spip {padding: @emLineHeight/2;}
+  .formulaire_spip .boutons {margin: 0 -@emLineHeight/2 -@emLineHeight/2; padding: @emLineHeight/2;}
+}
+
+input.submit, .formulaire_spip button.submit:not(.btn-link) {.btn}
+
+/* Explications */
+.formulaire_spip .explication {.help-block }
+
+/* Lignes */
+.formulaire_spip .editer-groupe,
+// et compat legacy
+.formulaire_spip >div>ul,
+.formulaire_spip fieldset>ul,
+.formulaire_spip .fieldset>ul,
+.formulaire_spip form>ul,
+.formulaire_spip form>div>ul {margin-left: 0;list-style: none;.control-group;}
+
+.formulaire_spip .editer { list-style: none;clear: both; margin: 0 -@emLineHeight; padding: @emLineHeight/4 @emLineHeight; }
+
+/* choix */
+.formulaire_spip .choix label {display:inline;font-weight:normal;}
+.formulaire_spip .choix input.radio,
+.formulaire_spip .choix input.checkbox {width:auto;margin: @paddingMini;margin-left:0;margin-bottom: 1px;}
+
+/* choix de mot dans le form forum notamment */
+.formulaire_spip .choix_mots {#grid > .fluid > .row-fluid}
+.formulaire_spip .choix_mots .saisie_mot {
+  .input-block-level();
+  float: left;
+  margin-left: @fluidGridGutterWidth;
+  *margin-left: @fluidGridGutterWidth - (.5 / @gridRowWidth * 100 * 1%);
+  #grid > .fluid > .span(4);
+}
+.formulaire_spip .choix_mots .saisie_mot:nth-child(3n-2) {margin-left: 0;clear: both;}
+.formulaire_spip .choix_mots .saisie_mot label {display:inline;font-weight:normal;}
+.formulaire_spip .choix_mots .saisie_mot input.radio,
+.formulaire_spip .choix_mots .saisie_mot input.checkbox {width:auto;margin: @paddingMini;margin-left:0;margin-bottom: 1px;}
+
+
+/* Champs de saisie */
+/*
+.span9 form input.text { width: 80%;}
+.span8 form input.text { width: 80%;}
+.span7 form input.text { width: 80%;}
+.span6 form input.text { width: 80%;}
+.span5 form input.text { width: 80%;}
+.span4 form input.text { width: 80%;}
+.span3 form input.text { width: 80%;}
+.span2 form input.text { width: 80%;}
+*/
+form input.text { width: 80%;}
+/*
+.span8 form textarea { width: 80%;}
+.span7 form textarea { width: 80%;}
+.span6 form textarea { width: 80%;}
+.span5 form textarea { width: 80%;}
+.span4 form textarea { width: 80%;}
+.span3 form textarea { width: 80%;}
+.span2 form textarea { width: 80%;}
+*/
+form textarea { width: 80%;}
+.markItUp .markItUpContainer .markItUpHeader {width: 80%;padding-right: 6px;padding-left: 6px;}
+.markItUp .markItUpContainer .markItUpHeader + textarea {border-top-left-radius: 0;border-top-right-radius: 0;border-top:0;}
+
+/*
+.span9 form select { width: 80%;}
+.span8 form select { width: 80%;}
+.span7 form select { width: 80%;}
+.span6 form select { width: 80%;}
+.span5 form select { width: 80%;}
+.span4 form select { width: 80%;}
+.span3 form select { width: 80%;}
+.span2 form select { width: 80%;}
+*/
+form select { width: 80%;}
+
+
+/* Reponses, previsu et erreurs
+----------------------------------------------- */
+
+/* Champs obligatoires */
+.formulaire_spip li.obligatoire {}
+.formulaire_spip li.obligatoire label {font-weight: bold;}
+
+/* * Erreurs */
+.editer.erreur { background-color: @errorBackground; }
+.editer .erreur_message { display: block; color: @errorText; font-weight: bold;}
+.editer .erreur_message label {display: inline;}
+.editer .erreur_message input {margin: 0;}
+
+/* Reponses */
+.reponse_formulaire {.alert;}
+.reponse_formulaire_ok {.alert-success;}
+.reponse_formulaire_erreur {.alert-error;}
+
+/* Variantes et cas particuliers
+----------------------------------------------- */
+
+/* quelques fieldset.info qui ne sont pas des messages d'info */
+.formulaire_spip fieldset.info {
+  background-color: inherit;
+  color: inherit;
+  text-shadow:inherit;
+  .border-radius(inherit);
+  &:extend(fieldset);
+}
+
+/* Selection des langues */
+.formulaire_menu_lang { margin: 0; padding: 0; background: none; border: 0;}
+//.formulaire_menu_lang form select {#grid > .core > .span(3)}
+
+/* Formulaires de recherche (site / petitions) */
+.formulaire_recherche,.secondary .formulaire_recherche {.form-search}
+.formulaire_recherche,.secondary .formulaire_recherche { padding: 0; background: none; border: 0;}
+
+/* Formulaire de login dans une page */
+.formulaire_login form .editer {clear:left;}
+.formulaire_login form input.text,
+.formulaire_login form input.password {#grid > .core > .span(5)}
+
+.formulaire_login form .editer_password .details {margin-bottom:0;}
+.formulaire_login #spip_logo_auteur {float:right;}
+

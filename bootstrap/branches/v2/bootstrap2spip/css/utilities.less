@@ -1,0 +1,28 @@
+@import "bootstrap/css/utilities.less";
+
+/* Alignements */
+.left { float: left !important; }
+.right { float: right !important; }
+.center { text-align: center; margin-right: auto; margin-left: auto; }
+
+/* Espaceur de blocs */
+.clear { clear: both; }
+br.clear, .nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+hr.clear { visibility: hidden; }
+
+/* Non visible a l'ecran */
+/* attention : .invisible deja defini par bootstrap comme .hidden ici*/
+.offscreen { position: absolute; left: -999em; height: 1%; } /* not in bootstrap */
+.hidden { visibility: hidden; } /* same as bootstrap native .invisible */
+.none { display: none; } /* same as bootstrap native .hide */
+
+/*
+  .js-hide cache en presence de js
+  .no-js-hide cache en absence de js
+*/
+.js .js-hide,.no-js .no-js-hide {display: none}
+
+/* debug */
+.todo { opacity: 0.5; }
+.todo:hover { opacity: 1; }
+.blink { text-decoration: blink; }
