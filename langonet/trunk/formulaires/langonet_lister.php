@@ -29,10 +29,7 @@ function formulaires_langonet_lister_traiter() {
 	//                  'fr' pour 'langonet_fr.php'
 	//   $ou_langue  -> chemin vers le fichier de langue à vérifier
 	//                  'plugins/auto/langonet/lang'
-	$retour_select_langue = explode(':', _request('fichier_langue'));
-	$module = $retour_select_langue[1];
-	$langue = $retour_select_langue[2];
-	$ou_langue = $retour_select_langue[3];
+	list($plugin, $module, $langue, $ou_langue) = explode(':', _request('fichier_langue'));
 
 	// Chargement de la fonction d'affichage
 	$langonet_lister_items = charger_fonction('lister_items','inc');

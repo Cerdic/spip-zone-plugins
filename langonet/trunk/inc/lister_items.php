@@ -24,18 +24,48 @@ function inc_lister_items($module, $langue, $ou_langue) {
 	// Sinon, cet index n'existe pas
 	$resultats = array();
 
+	// On sauvegarde l'index de langue global si il existe car on va le modifier pendant le traitement.
+	$idx_lang_backup = '';
+	if (isset($GLOBALS['idx_lang'])) {
+		$idx_lang_backup = $GLOBALS['idx_lang'];
+	}
+
 	// On charge le fichier de langue a lister
 	// si il existe dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
-	include_spip('inc/traduire');
-	$var_source = "i18n_".$module."_".$langue;
-	if (empty($GLOBALS[$var_source])) {
-		$GLOBALS['idx_lang'] = $var_source;
-		$fichier_lang = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php';
-		include($fichier_lang);
+	$idx_lang = "i18n_".$module."_".$langue;
+
+	$backup_trad = array();
+	// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
+	// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
+	// déjà chargé, on ne peut pas présumer du fichier de langue source car il est possible d'avoir un même
+	// module dans plusieurs plugins.
+	if (!empty($GLOBALS[$idx_lang])) {
+		$backup_trad = $GLOBALS[$idx_lang];
+		unset($GLOBALS[$idx_lang]);
 	}
 
-	$liste_brute = $GLOBALS[$var_source];
+	// On charge le fichier de langue et on le stocke dans un tableau pour l'affichage
+	$GLOBALS['idx_lang'] = $idx_lang;
+	$fichier_lang = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php';
+	include($fichier_lang);
+	$liste_brute = $GLOBALS[$idx_lang];
+
+	// On restaure l'environnement de départ
+	// -- on rétablit le module backupé si besoin
+	unset($GLOBALS[$idx_lang]);
+	if ($backup_trad) {
+		$GLOBALS[$idx_lang] = $backup_trad;
+	}
+	// -- on restaure l'index de langue global si besoin
+	if ($idx_lang_backup) {
+		$GLOBALS['idx_lang'] = $idx_lang_backup;
+	}
+	else {
+		unset($GLOBALS['idx_lang']);
+	}
+
+
 	if ($liste_brute) {
 		// Recherche du gestionnaire de traduction TradLang par l'existence du rapport XML.
 		// Si le module est traduit avec ce gestionnaire, on peut identifier les états de traduction
