@@ -3,7 +3,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
- * Recherche d'une chaine UTF-8 dans le texte francais des items de langues de SPIP et des plugins disponibles
+ * Recherche d'une chaine UTF-8 dans le texte francais des items de langues de SPIP et des plugins disponibles.
  *
  * @param string $pattern
  * 		la traduction ou une partie de celle-ci à rechercher. Ce texte est en français au format UTF-8
@@ -18,66 +18,104 @@ function inc_rechercher_texte($pattern, $correspondance, $modules) {
 	// Initialisation du tableau des resultats
 	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
 	// de l'erreur dans $resultats['erreur'].
-	// Sinon, cet index n'existe pas
+	// Sinon, cet index n'existe pas.
 	$resultats = array();
 
 	// On construit la liste de tous les items definis
 	// dans tous les fichiers de langue francais désignés par les modules choisis
 	$langue = 'fr';
-	$tous_trad = array();
-	$tous_lang = array();
+	$traductions = array();
+	$fichiers_langue = array();
 	if ($modules) {
-		foreach ($modules as $_valeur) {
-			// L'index 0 correspond au module, l'index 1 au fichier
-			$valeurs = explode(':', $_valeur);
-			$var_source = 'i18n_' . $valeurs[0] . '_' . $langue;
-			if (empty($GLOBALS[$var_source])) {
-				$GLOBALS['idx_lang'] = $var_source;
-				$fichier_lang = $valeurs[1] . $valeurs[0] . '_' . $langue . '.php';
-				include($fichier_lang);
+		// On sauvegarde l'index de langue global si il existe car on va le modifier pendant le traitement.
+		$idx_lang_backup = '';
+		if (isset($GLOBALS['idx_lang'])) {
+			$idx_lang_backup = $GLOBALS['idx_lang'];
+		}
+
+		foreach ($modules as $_module) {
+			// L'index 0 : nom du module de langue
+			// l'index 1 : nom du répertoire contenant lang/
+			// l'index 2 : chemin du fichier de langue
+			list($nom_module, $plugin, $chemin) = explode(':', $_module);
+			$idx_lang = 'i18n_' . $nom_module . '_' . $langue;
+
+			$backup_trad = array();
+			// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
+			// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
+			// déjà chargé, on ne peut pas présumer du fichier de langue source car il est possible d'avoir un même
+			// module dans plusieurs plugins.
+			if (!empty($GLOBALS[$idx_lang])) {
+				$backup_trad = $GLOBALS[$idx_lang];
+				unset($GLOBALS[$idx_lang]);
 			}
-			$tous_trad[$valeurs[0]] = $GLOBALS[$var_source];
-			$tous_lang[$valeurs[0]] = $fichier_lang;
-			ksort($tous_trad[$valeurs[0]]);
+
+			// On charge le fichier de langue du module en cours de traitement
+			$GLOBALS['idx_lang'] = $idx_lang;
+			$fichier_lang = $chemin . $nom_module . '_' . $langue . '.php';
+			include($fichier_lang);
+
+			// On ajoute le fichier de langue chargé à la liste des traductions en indexant par le nom
+			// du module et par celui du répertoire d'accueil du fichier de langue, ce qui rend l'indexation
+			// forcément unique.
+			$traductions[$nom_module][$plugin] = $GLOBALS[$idx_lang];
+
+			// On contruit le tableau d'association entre le répertoire d'accueil du fichier et le nom du fichier
+			$fichiers_langue[$plugin] = $fichier_lang;
+
+			// On rétablit le module backupé si besoin
+			unset($GLOBALS[$idx_lang]);
+			if ($backup_trad) {
+				$GLOBALS[$idx_lang] = $backup_trad;
+			}
+
+			ksort($traductions[$nom_module][$plugin]);
+		}
+
+		// On restaure l'index de langue global si besoin
+		if ($idx_lang_backup) {
+			$GLOBALS['idx_lang'] = $idx_lang_backup;
 		}
 	}
 
 	// On cherche le pattern en fonction du type de correspondance
 	$trouve = array();
-	if ($tous_trad) {
+	if ($traductions) {
 		// -- Passage en entités HTML du pattern qui est censé toujours être en UTF-8 pour les tests d'égalité.
 		$pattern_html = htmlentities($pattern, ENT_COMPAT, 'UTF-8');
-		foreach ($tous_trad as $_module => $_traductions) {
-			foreach ($_traductions as $_item => $_texte) {
-				$_texte_html = htmlentities($_texte, ENT_COMPAT, 'UTF-8');
-				$egal = ((strcasecmp($_texte, $pattern) == 0)
-					OR (strcasecmp($_texte, $pattern_html) == 0)
-					OR (strcasecmp($_texte_html, $pattern_html) == 0));
+		foreach ($traductions as $_module => $_plugins) {
+			foreach ($_plugins as $_plugin => $_traductions) {
+				foreach ($_traductions as $_item => $_texte) {
+					$_texte_html = htmlentities($_texte, ENT_COMPAT, 'UTF-8');
+					$egal = ((strcasecmp($_texte, $pattern) == 0)
+						OR (strcasecmp($_texte, $pattern_html) == 0)
+						OR (strcasecmp($_texte_html, $pattern_html) == 0));
 
-				$commence_par = false;
-				$contient = false;
-				if (!$egal AND ($correspondance != 'egal')) {
-					$commence_par = ((strcasecmp(substr($_texte, 0, strlen($pattern)), $pattern) == 0)
-						OR (strcasecmp(substr($_texte, 0, strlen($pattern_html)), $pattern_html) == 0)
-						OR (strcasecmp(substr($_texte_html, 0, strlen($pattern_html)), $pattern_html) == 0));
+					$commence_par = false;
+					$contient = false;
+					if (!$egal AND ($correspondance != 'egal')) {
+						$commence_par = ((strcasecmp(substr($_texte, 0, strlen($pattern)), $pattern) == 0)
+							OR (strcasecmp(substr($_texte, 0, strlen($pattern_html)), $pattern_html) == 0)
+							OR (strcasecmp(substr($_texte_html, 0, strlen($pattern_html)), $pattern_html) == 0));
 
-					if (!$commence_par AND ($correspondance == 'contient'))
-						$contient = ((stripos($_texte, $pattern) !== false)
-							OR (stripos($_texte, $pattern_html) !== false)
-							OR (stripos($_texte_html, $pattern_html) !== false));
-				}
+						if (!$commence_par AND ($correspondance == 'contient'))
+							$contient = ((stripos($_texte, $pattern) !== false)
+								OR (stripos($_texte, $pattern_html) !== false)
+								OR (stripos($_texte_html, $pattern_html) !== false));
+					}
 
-				if ($egal) {
-					$trouve['egal'][$_item]['fichier'][] = $tous_lang[$_module];
-					$trouve['egal'][$_item]['traduction'][] = $_texte;
-				}
-				else if ($commence_par) {
-					$trouve['commence'][$_item]['fichier'][] = $tous_lang[$_module];
-					$trouve['commence'][$_item]['traduction'][] = $_texte;
-				}
-				else if ($contient) {
-					$trouve['contient'][$_item]['fichier'][] = $tous_lang[$_module];
-					$trouve['contient'][$_item]['traduction'][] = $_texte;
+					if ($egal) {
+						$trouve['egal'][$_item]['fichier'][] = $fichiers_langue[$_plugin];
+						$trouve['egal'][$_item]['traduction'][] = $_texte;
+					}
+					else if ($commence_par) {
+						$trouve['commence'][$_item]['fichier'][] = $fichiers_langue[$_plugin];
+						$trouve['commence'][$_item]['traduction'][] = $_texte;
+					}
+					else if ($contient) {
+						$trouve['contient'][$_item]['fichier'][] = $fichiers_langue[$_plugin];
+						$trouve['contient'][$_item]['traduction'][] = $_texte;
+					}
 				}
 			}
 		}

@@ -44,10 +44,13 @@
 				<div id="liste_modules_#ENV{type}"[(#ENV{defaut_modules}|oui)style="display:none;"]>
 					<ol class="spip">
 			<BOUCLE_modules(DATA){source table, #ENV{_modules}}>
+				#SET{nom_module, #CLE}
+				<BOUCLE_sous_repertoires(DATA){source table, #VALEUR}>
 						<li class="choix">
-							<input type="checkbox" name="modules[]" value="#CLE:#VALEUR" id="[module_(#CLE)_#ENV{type}]" class="checkbox module_#ENV{type}"[ (#CLE|in_array{#ENV{_modules_choisis}}|oui)checked="checked"] />
-							<label for="[module_(#CLE)_#ENV{type}]">#CLE</label>
+							<input type="checkbox" name="modules[]" value="[(#GET{nom_module}):#CLE:#VALEUR]" id="[module[_(#CLE)]_(#GET{nom_module})_#ENV{type}]" class="checkbox module_#ENV{type}"[ (#GET{nom_module}|in_array{#ENV{_modules_choisis}}|oui)checked="checked"] />
+							<label for="[module[_(#CLE)]_(#GET{nom_module})_#ENV{type}]">[#CLE/(#GET{nom_module})]</label>
 						</li>
+				</BOUCLE_sous_repertoires>
 			</BOUCLE_modules>
 					</ol>
 					<a href="#" id="select_tous_#ENV{type}"><:langonet:bouton_cocher_tout:></a><span class="sep"> | </span>

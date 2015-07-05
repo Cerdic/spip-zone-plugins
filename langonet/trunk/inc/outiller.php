@@ -174,13 +174,20 @@ function verifier_reference_tradlang($module, $langue, $ou_langue) {
 function lister_modules($langue, $exclure_paquet=true) {
 	$liste = array();
 
-	foreach (preg_files(_DIR_RACINE, "/lang/[^/]+_${langue}\.php$") as $_fichier) {
-		// On extrait le module
-		if (preg_match(",/lang/([^/]+)_${langue}\.php$,i", $_fichier, $module)) {
-			// On ajoute le module à la liste : l'index correspond au module et la valeur au dossier
-			if (!$exclure_paquet OR ($exclure_paquet
-			AND (strtolower(substr($module[1], 0, 7)) != 'paquet-'))) {
-				$liste[$module[1]] = dirname($_fichier) . '/';
+	if ($fichiers = preg_files(_DIR_RACINE, "/lang/[^/]+_${langue}\.php$")) {
+		foreach ($fichiers as $_fichier) {
+			// On extrait le module
+			if (preg_match(",/([^/]+)/lang/([^/]+)_${langue}\.php$,i", $_fichier, $module)) {
+				// $module[1] correspond au sous-répertoire contenant /lang soit ecrire ou langonet
+				// $module[2] correspond au nom du module de langue
+				//
+				// On constitue la liste des modules. Si un nom de module est présent dans plusieurs
+				// répertoires (ie plusieurs plugins) il faut le distinguer.
+				// De fait, il faut indexer doublement le fichier par le module et le sous-repertoire
+				if (!$exclure_paquet OR ($exclure_paquet
+				AND (strtolower(substr($module[2], 0, 7)) != 'paquet-'))) {
+					$liste[$module[2]][$module[1]] = dirname($_fichier) . '/';
+				}
 			}
 		}
 	}

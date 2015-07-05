@@ -21,8 +21,8 @@ function formulaires_langonet_rechercher_charger($type) {
 	}
 	else {
 		$modules_choisis = array();
-		foreach (_request('modules') as $_valeurs) {
-			$m = explode(':', $_valeurs);
+		foreach (_request('modules') as $_module) {
+			$m = explode(':', $_module);
 			$modules_choisis[] = reset($m);
 		}
 	}
@@ -67,13 +67,15 @@ function formulaires_langonet_rechercher_traiter($type) {
 		$modules = array();
 		if ($type == 'texte') {
 			$modules = array(
-				'ecrire:' . $modules_fr['ecrire'],
-				'public:' . $modules_fr['public'],
-				'spip:' . $modules_fr['spip']);
+				'ecrire:ecrire:' . $modules_fr['ecrire']['ecrire'],
+				'public:ecrire:' . $modules_fr['public']['ecrire'],
+				'spip:ecrire:' . $modules_fr['spip']['ecrire']);
 		}
 		else {
-			foreach ($modules_fr as $_module => $_fichier) {
-				$modules[] = "${_module}:${_fichier}";
+			foreach ($modules_fr as $_module => $_fichiers) {
+				foreach ($_fichiers as $_plugin => $_fichier) {
+					$modules[] = $_module . ':' . $_plugin . ':' . $_fichier;
+				}
 			}
 		}
 	}
