@@ -95,16 +95,49 @@ function inc_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verific
 	// précédemment constituée.
 	$utilises = collecter_occurrences($fichiers);
 
+	// On sauvegarde l'index de langue global si il existe car on va le modifier pendant le traitement.
+	$idx_lang_backup = '';
+	if (isset($GLOBALS['idx_lang'])) {
+		$idx_lang_backup = $GLOBALS['idx_lang'];
+	}
+
 	// On charge le fichier de langue à vérifier qui doit exister dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
-	include_spip('inc/traduire');
-	$var_langue = "i18n_" . $module . "_" . $langue;
+	$idx_lang = "i18n_" . $module . "_" . $langue;
 	$fichier_langue = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php';
-	if (empty($GLOBALS[$var_langue])) {
-		if (file_exists($fichier_langue)) {
-			$GLOBALS['idx_lang'] = $var_langue;
-			include($fichier_langue);
-		}
+
+	$backup_trad = array();
+	// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
+	// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
+	// déjà chargé, on ne peut pas présumer du fichier de langue source car il est possible d'avoir un même
+	// module dans plusieurs plugins.
+	if (!empty($GLOBALS[$idx_lang])) {
+		$backup_trad = $GLOBALS[$idx_lang];
+		unset($GLOBALS[$idx_lang]);
+	}
+
+	// On charge le fichier de langue si il existe dans l'arborescence $ou_langue
+	// (le fichier source existe toujours, le cible peut être absent)
+	// Ensuite on le stocke dans un tableau qui sera passé à la fonction de création du fichier de langue
+	if (file_exists($fichier_langue)) {
+		$GLOBALS['idx_lang'] = $idx_lang;
+		include($fichier_langue);
+	}
+	$traductions = isset($GLOBALS[$idx_lang]) ? $GLOBALS[$idx_lang] : array();
+
+	// On rétablit le module backupé si besoin
+	if (isset($GLOBALS[$idx_lang]))
+		unset($GLOBALS[$idx_lang]);
+	if ($backup_trad) {
+		$GLOBALS[$idx_lang] = $backup_trad;
+	}
+
+	// On restaure l'index de langue global si besoin
+	if ($idx_lang_backup) {
+		$GLOBALS['idx_lang'] = $idx_lang_backup;
+	}
+	else {
+		unset($GLOBALS['idx_lang']);
 	}
 
 	// Traitement des occurrences d'erreurs et d'avertissements et constitution de la structure de résultats
@@ -112,10 +145,10 @@ function inc_verifier_items($module, $langue, $ou_langue, $ou_fichiers, $verific
 		// Les chaines definies sont dans les fichiers definis par la RegExp ci-dessous
 		// Autrement dit les fichiers francais du repertoire lang/ sont la reference
 		$fichiers_langue = preg_files(_DIR_RACINE, '/lang/[^/]+_fr\.php$');
-		$resultats = reperer_items_non_definis($utilises, $module, $GLOBALS[$var_langue], $fichiers_langue);
+		$resultats = reperer_items_non_definis($utilises, $module, $traductions, $fichiers_langue);
 	}
-	elseif ($GLOBALS[$var_langue]) {
-		$resultats = reperer_items_non_utilises($utilises, $module, $GLOBALS[$var_langue]);
+	elseif ($GLOBALS[$idx_lang]) {
+		$resultats = reperer_items_non_utilises($utilises, $module, $traductions);
 	}
 
 	// Compléments de la structure de résultats
