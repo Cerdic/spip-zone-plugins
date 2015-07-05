@@ -54,8 +54,10 @@ function formulaires_langonet_verifier_doublon_traiter() {
 	if (_request('defaut_modules') == 'oui') {
 		include_spip('inc/outiller');
 		$modules_fr = lister_modules('fr');
-		foreach ($modules_fr as $_module => $_fichier) {
-			$modules[] = "${_module}:${_fichier}";
+		foreach ($modules_fr as $_module => $_fichiers) {
+			foreach ($_fichiers as $_plugin => $_fichier) {
+				$modules[] = $_module . ':' . $_plugin . ':' . $_fichier;
+			}
 		}
 	}
 	else {

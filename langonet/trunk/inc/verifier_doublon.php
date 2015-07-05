@@ -29,18 +29,35 @@ function inc_verifier_doublon($verification, $modules) {
 	$doublons_traductions = array();
 	$index_doublon = 0;
 	if ($modules) {
+		// On sauvegarde l'index de langue global si il existe car on va le modifier pendant le traitement.
+		$idx_lang_backup = '';
+		if (isset($GLOBALS['idx_lang'])) {
+			$idx_lang_backup = $GLOBALS['idx_lang'];
+		}
+
 		foreach ($modules as $_module) {
 			// L'index 0 correspond au module, l'index 1 au chemin
-			list($nom_module, $chemin) = explode(':', $_module);
-			$fichier_lang = $chemin . $nom_module . '_' . $langue . '.php';
-			$var_source = 'i18n_' . $nom_module . '_' . $langue;
-			if (empty($GLOBALS[$var_source])) {
-				$GLOBALS['idx_lang'] = $var_source;
-				include($fichier_lang);
+			list($nom_module, $plugin, $chemin) = explode(':', $_module);
+			$idx_lang = 'i18n_' . $nom_module . '_' . $langue;
+
+			$backup_trad = array();
+			// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
+			// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
+			// déjà chargé, on ne peut pas présumer du fichier de langue source car il est possible d'avoir un même
+			// module dans plusieurs plugins.
+			if (!empty($GLOBALS[$idx_lang])) {
+				$backup_trad = $GLOBALS[$idx_lang];
+				unset($GLOBALS[$idx_lang]);
 			}
 
+			// On charge le fichier de langue du module en cours de traitement. Le fichier existe toujours
+			// puisqu'on vient de le scanner.
+			$GLOBALS['idx_lang'] = $idx_lang;
+			$fichier_lang = $chemin . $nom_module . '_' . $langue . '.php';
+			include($fichier_lang);
+
 			// On stocke les items dans des tableaux contenant chacun tous les items recenses
-			foreach ($GLOBALS[$var_source] as $_raccourci => $_traduction) {
+			foreach ($GLOBALS[$idx_lang] as $_raccourci => $_traduction) {
 				if ($verification == 'item') {
 					// Vérification des doublons de raccourci
 					// --------------------------------------
@@ -94,8 +111,23 @@ function inc_verifier_doublon($verification, $modules) {
 					$items[] = $occurrence;
 				}
 			}
+
+			// On rétablit le module backupé si besoin
+			unset($GLOBALS[$idx_lang]);
+			if ($backup_trad) {
+				$GLOBALS[$idx_lang] = $backup_trad;
+			}
+
 		}
 		ksort($doublons);
+
+		// On restaure l'index de langue global si besoin
+		if ($idx_lang_backup) {
+			$GLOBALS['idx_lang'] = $idx_lang_backup;
+		}
+		else {
+			unset($GLOBALS['idx_lang']);
+		}
 	}
 
 	// On prepare le tableau des resultats
