@@ -1,7 +1,7 @@
 <paquet
 	prefix="langonet"
 	categorie="outil"
-	version="1.4.0"
+	version="1.4.1"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="langonet_logo-64.png"

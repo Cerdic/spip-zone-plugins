@@ -50,7 +50,8 @@ function inc_rechercher_texte($pattern, $correspondance, $modules) {
 				unset($GLOBALS[$idx_lang]);
 			}
 
-			// On charge le fichier de langue du module en cours de traitement
+			// On charge le fichier de langue du module en cours de traitement. Le fichier existe toujours
+			// puisqu'on vient de le scanner.
 			$GLOBALS['idx_lang'] = $idx_lang;
 			$fichier_lang = $chemin . $nom_module . '_' . $langue . '.php';
 			include($fichier_lang);
@@ -75,6 +76,9 @@ function inc_rechercher_texte($pattern, $correspondance, $modules) {
 		// On restaure l'index de langue global si besoin
 		if ($idx_lang_backup) {
 			$GLOBALS['idx_lang'] = $idx_lang_backup;
+		}
+		else {
+			unset($GLOBALS['idx_lang']);
 		}
 	}
 

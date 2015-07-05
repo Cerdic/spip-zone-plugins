@@ -41,16 +41,43 @@ function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible=
 	// Sinon, cet index n'existe pas
 	$resultats = array();
 
-	// On charge le fichier de langue source si il existe dans l'arborescence $ou_langue
-	// (evite le mecanisme standard de surcharge SPIP)
-	include_spip('inc/traduire');
-	$var_source = "i18n_" . $module . "_" . $langue_source;
-	$fichier_source = _DIR_RACINE . $ou_langue . $module . '_' . $langue_source . '.php';
-	// Trouver dans quel cas ce fichier n'a pas deja ete inclus a ce stade
-	if (empty($GLOBALS[$var_source])) {
-		if (file_exists($fichier_source)) {
-			$GLOBALS['idx_lang'] = $var_source;
-			include($fichier_source);
+	// On sauvegarde l'index de langue global si il existe car on va le modifier pendant le traitement.
+	$idx_lang_backup = '';
+	if (isset($GLOBALS['idx_lang'])) {
+		$idx_lang_backup = $GLOBALS['idx_lang'];
+	}
+
+	// Chargement du fichier de langue source (qui existe toujours) et du fichier de langue cible si il existe
+	$langues = array('source' => $langue_source, 'cible' => $langue_cible);
+	foreach ($langues as $_cle => $_langue) {
+		// On construit des variables qui seront utilisées en dehors de la boucle
+		$idx_lang = "i18n_" . $module . "_" . $_langue;
+		$fichier = ${"fichier_${_cle}"} = _DIR_RACINE . $ou_langue . $module . '_' . $_langue . '.php';
+
+		$backup_trad = array();
+		// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
+		// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
+		// déjà chargé, on ne peut pas présumer du fichier de langue source car il est possible d'avoir un même
+		// module dans plusieurs plugins.
+		if (!empty($GLOBALS[$idx_lang])) {
+			$backup_trad = $GLOBALS[$idx_lang];
+			unset($GLOBALS[$idx_lang]);
+		}
+
+		// On charge le fichier de langue si il existe dans l'arborescence $ou_langue
+		// (le fichier source existe toujours, le cible peut être absent)
+		// Ensuite on le stocke dans un tableau qui sera passé à la fonction de création du fichier de langue
+		if (file_exists($fichier)) {
+			$GLOBALS['idx_lang'] = $idx_lang;
+			include($fichier);
+		}
+		${"traductions_${_cle}"} = isset($GLOBALS[$idx_lang]) ? $GLOBALS[$idx_lang] : array();
+
+		// On rétablit le module backupé si besoin
+		if (isset($GLOBALS[$idx_lang]))
+			unset($GLOBALS[$idx_lang]);
+		if ($backup_trad) {
+			$GLOBALS[$idx_lang] = $backup_trad;
 		}
 	}
 
@@ -60,7 +87,6 @@ function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible=
 	if (file_exists($fichier_source)) {
 		if ($tableau = file($fichier_source)) {
 			array_shift($tableau); // saute < ? php
-			$signature_trouvee = false;
 			foreach($tableau as $_ligne) {
 				$_ligne = ltrim($_ligne);
 				if ($_ligne) {
@@ -76,18 +102,8 @@ function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible=
 		}
 	}
 
-	// On charge le fichier de langue cible si il existe dans l'arborescence $ou_langue
-	$var_cible = "i18n_" . $module . "_" . $langue_cible;
-	$fichier_cible = _DIR_RACINE . $ou_langue . $module . '_' . $langue_cible . '.php';
-	if (empty($GLOBALS[$var_cible])) {
-		if (file_exists($fichier_cible)) {
-			$GLOBALS['idx_lang'] = $var_cible;
-			include($fichier_cible);
-		}
-	}
-
 	// Créer la liste des items du fichier cible sous la forme d'un tableau (raccourci, traduction)
-	$items_cible = generer_items_cible($var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
+	$items_cible = generer_items_cible($traductions_source, $traductions_cible, $mode, $encodage, $oublis_inutiles);
 
 	// Ecriture du fichier de langue à partir de la liste des items cible
 	$dossier_cible = sous_repertoire(_DIR_TMP,"langonet");
@@ -100,6 +116,15 @@ function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible=
 	}
 	$fichier_langue = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau, $langue_source);
 
+	// On restaure l'index de langue global si besoin
+	if ($idx_lang_backup) {
+		$GLOBALS['idx_lang'] = $idx_lang_backup;
+	}
+	else {
+		unset($GLOBALS['idx_lang']);
+	}
+
+	// On prepare le tableau des resultats
 	if (!$fichier_langue) {
 		$resultats['erreur'] = _T('langonet:message_nok_ecriture_fichier', array('langue' => $langue_cible, 'module' => $module));
 	}
@@ -112,14 +137,14 @@ function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible=
 
 
 /**
- * @param array $var_source
- * @param array $var_cible
+ * @param array $idx_lang_source
+ * @param array $idx_lang_cible
  * @param string $mode
  * @param string $encodage
  * @param array $oublis_inutiles
  * @return array
  */
-function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
+function generer_items_cible($items_source, $items_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
 
 	// On distingue 3 cas de génération d'un fichier de langue cible :
 	// 1- une génération d'une langue cible à partir d'une langue source (opération generer). Dans ce cas, aucun
@@ -128,7 +153,6 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
 	//    Dans ce cas, le fichier cible correspondant à l'union des items source et des items à corriger.
 	// 3- correction de la langue source en tagguant les items à supprimer (opération verifier_utilisation).
 	//    Dans ce cas, les items cible coincident avec les items source et on conserve la liste des items inutiles à part.
-	$items_source = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
 	$inutiles = array();
 	if ($mode == 'inutile')
 		$inutiles = $oublis_inutiles; // cas 3
@@ -141,7 +165,7 @@ function generer_items_cible($var_source, $var_cible, $mode='index', $encodage='
 		// Si l'item existe dans le fichier cible existant on vérifie si il n'est pas obsolète dans le cas où
 		// le mode est 'inutile' (opération verifier_utilisation)
 		$item_obsolete = false;
-		$texte = isset($GLOBALS[$var_cible][$_item]) ? $GLOBALS[$var_cible][$_item] : '';
+		$texte = isset($items_cible[$_item]) ? $items_cible[$_item] : '';
 		if ($texte) {
 			if ($mode == 'inutile')
 				$item_obsolete = array_key_exists($_item, $inutiles);

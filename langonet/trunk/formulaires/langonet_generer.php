@@ -28,10 +28,7 @@ function formulaires_langonet_generer_traiter() {
 	//                  parfois different du 'nom' du plugin
 	//   $langue_source	-> index du nom de langue 'fr' pour 'langonet_fr.php'
 	//   $ou_langue  	-> chemin vers le fichier de langue à vérifier 'plugins/auto/langonet/lang'
-	$retour_select_langue = explode(':', _request('fichier_langue'));
-	$module = $retour_select_langue[1];
-	$langue_source = $retour_select_langue[2];
-	$ou_langue = $retour_select_langue[3];
+	list($plugin, $module, $langue_source, $ou_langue) = explode(':', _request('fichier_langue'));
 	$langue_cible = _request('langue_cible');
 	$mode = _request('mode');
 
