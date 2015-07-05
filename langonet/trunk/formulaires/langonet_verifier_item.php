@@ -33,10 +33,7 @@ function formulaires_langonet_verifier_item_traiter() {
 	//  $ou_langue    -> chemin vers le fichier de langue a verifier 'plugins/auto/langonet/lang'
 	$verification = _request('verification');
 	$ou_fichiers = _request('dossier_scan');
-	$retour_select_langue = explode(':', _request('fichier_langue'));
-	$module = $retour_select_langue[1];
-	$langue = $retour_select_langue[2];
-	$ou_langue = $retour_select_langue[3];
+	list($plugin, $module, $langue, $ou_langue) = explode(':', _request('fichier_langue'));
 
 	// Lancement de la vérification utilisation ou définition
 	$langonet_verifier_items = charger_fonction('verifier_items','inc');
