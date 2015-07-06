@@ -3,11 +3,11 @@
  * only visible for webmaster users
  */
 #grid {
-  .hashgrid (@gridColumnWidth, @gridGutterWidth, @baseLineHeight) {
+  .hashgrid (@grid-column-width, @grid-gutter-width, @grid-columns, @line-height-computed) {
     #bsgrid{
       /* Dimensions - same width as your grid with gutters */
-      width: (@gridColumnWidth * @gridColumns) + (@gridGutterWidth * (@gridColumns + 1));
-      margin-left: -((@gridColumnWidth * @gridColumns) + (@gridGutterWidth * (@gridColumns + 1)))/2;
+      width: (@grid-column-width * @grid-columns) + (@grid-gutter-width * (@grid-columns + 1));
+      margin-left: -((@grid-column-width * @grid-columns) + (@grid-gutter-width * (@grid-columns + 1)))/2;
     }
 
     /**
@@ -17,13 +17,13 @@
      * and use margins to set column gutters.
      */
     #bsgrid div.vert{
-        width: @gridColumnWidth - 1px;
+        width: @grid-column-width - 1px;
         border: solid darkturquoise;
         border-width: 0 1px;
-        margin-right: @gridGutterWidth - 1px;
+        margin-right: @grid-gutter-width - 1px;
     }
     #bsgrid div.vert.first-line{
-        margin-left: @gridGutterWidth - 1px;
+        margin-left: @grid-gutter-width - 1px;
     }
 
     /**
@@ -34,7 +34,7 @@
      */
     #bsgrid div.horiz{
         /* 20px line height */
-        height: @baseLineHeight - 1px;
+        height: @line-height-computed - 1px;
         border-bottom: 1px dotted darkgray;
         margin: 0;
         padding: 0;
@@ -44,12 +44,12 @@
 }
 
 // Fixed (940px)
-#grid > .hashgrid(@gridColumnWidth, @gridGutterWidth, @baseLineHeight);
-@media (min-width: 768px) and (max-width: 979px) {
-  #grid > .hashgrid(@gridColumnWidth768, @gridGutterWidth768, @baseLineHeight);
+#grid > .hashgrid(@container-md / @grid-columns - @grid-gutter-width, @grid-gutter-width, @grid-columns, @line-height-computed);
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  #grid > .hashgrid(@container-sm / @grid-columns - @grid-gutter-width, @grid-gutter-width, @grid-columns, @line-height-computed);
 }
-@media (min-width: 1200px) {
-  #grid > .hashgrid(@gridColumnWidth1200, @gridGutterWidth1200, @baseLineHeight);
+@media (min-width: @screen-lg-min) {
+  #grid > .hashgrid(@container-lg / @grid-columns - @grid-gutter-width, @grid-gutter-width, @grid-columns, @line-height-computed);
 }
 #bsgrid{
     /* Grid (left-aligned)

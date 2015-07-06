@@ -11,11 +11,11 @@ html { font-size: 100.01%; } /* pour IE < 6 */
 
 body {
   margin: 0;
-  font-family: @baseFontFamily;
+  font-family: @font-family-base;
   font-size: @emFontSize;
   line-height: @emLineHeight;
-  color: @textColor;
-  background-color: @bodyBackground;
+  color: @text-color;
+  background-color: @body-bg;
 }
 
 /* On peut fournir un texte alternatif dans le <i></i> de l'icon, il est masque */
@@ -43,21 +43,21 @@ body {
 
 dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;padding-right:0}}
 
-.spip_documents_left { float: left; margin: @paddingLarge;margin-left: 0; }
-.spip_documents_right { float: right; margin: @paddingLarge;margin-right: 0; }
+.spip_documents_left { float: left; margin: @padding-large-vertical @padding-large-horizontal;margin-left: 0; }
+.spip_documents_right { float: right; margin: @padding-large-vertical @padding-large-horizontal;margin-right: 0; }
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 
 .cartouche {&:last-child{margin-bottom: 0};margin-bottom: @emVertMargin;}
 .cartouche,.hero-unit,.entry-title {
-  .spip_logos {float: right; clear: right; margin: @paddingLarge; margin-top: 0;margin-right: 0; line-height: 1px;}
+  .spip_logos {float: right; clear: right; margin: @padding-large-vertical @padding-large-horizontal; margin-top: 0;margin-right: 0; line-height: 1px;}
 }
 .cartouche,.hero-unit,.entry{
   h1+.publication {margin-top: -1 * @emVertMargin;}
   .publication {.opacity(80);}
 }
 .entry {margin-bottom: @emVertMargin;}
-.secondary .entry-title .spip_logos { margin: @paddingSmall; margin-top: 0;margin-right: 0; }
+.secondary .entry-title .spip_logos { margin: @padding-small-vertical @padding-small-horizontal; margin-top: 0;margin-right: 0; }
 .postmeta >:first-child >.sep:first-child {display: none}
 
 /* Notes */
@@ -65,25 +65,25 @@ dl.spip_documents { dt,dd {margin-left:auto;margin-right:auto;padding-left:0;pad
   &:extend(small);
   padding-top: @emVertMargin;
   margin-top: @emVertMargin;
-  max-width: 5 * ( @gridColumnWidth + @gridGutterWidth );
+  max-width: @container-md * 5 / 12;
 }
-.notes > h2 {border-bottom: 2px solid lighten(@grayLight, 20%);}
+.notes > h2 {border-bottom: 2px solid lighten(@gray-light, 20%);}
 .notes > div p {font-size: inherit;line-height: inherit;font-weight: 200;}
-.notes > div {padding-left: @gridColumnWidth+@gridGutterWidth; position: relative; }
-.notes .spip_note_ref { display:block;position:absolute;left:0;width: @gridColumnWidth;}
+.notes > div {padding-left: @container-md / @grid-columns; position: relative; }
+.notes .spip_note_ref { display:block;position:absolute;left:0;width: @container-md / @grid-columns - @grid-gutter-width;}
 .secondary {
-  .notes > div {padding-left: 2*@gridGutterWidth;}
-  .notes .spip_note_ref { width: 2*@gridGutterWidth;}
+  .notes > div {padding-left: 2*@grid-gutter-width;}
+  .notes .spip_note_ref { width: 2*@grid-gutter-width;}
 }
 
 /* Liens */
-a {color: @linkColor;}
+a {color: @link-color;}
 a:focus,
 a:hover,
-a:active { background-color: spin(lighten(@linkColor,50%) / 4 + @grayLighter / 4 * 3, 20%); color: @linkColorHover; text-decoration: none; }
+a:active { background-color: spin(lighten(@link-color,50%) / 4 + @gray-lighter / 4 * 3, 20%); color: @link-hover-color; text-decoration: none; }
 a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
 @media print {
-  a, a:visited { color: @textColor; text-decoration: underline; }
+  a, a:visited { color: @text-color; text-decoration: underline; }
   .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
 }
 a {  }

@@ -3,7 +3,6 @@
 
 .pagination .pagination-label {
   display: inline-block;
-  .ie7-inline-block();
 }
 .pagination .label {
   float: left;
@@ -11,7 +10,7 @@
   background: transparent;
   text-shadow: none;
   padding: 4px;
-  line-height: @baseLineHeight;
+  line-height: @line-height-base;
 }
 
 .pagination-mini .pagination-label,
@@ -20,5 +19,5 @@
 /* tri, analogue a pagination mais avec des boutons de tri dedans */
 .tri {
   display: block;
-  margin: @baseLineHeight 0;
+  margin: @line-height-computed 0;
 }

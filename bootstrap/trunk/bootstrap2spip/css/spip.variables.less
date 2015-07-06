@@ -1,6 +1,19 @@
-@emFontSize : 1em * (@baseFontSize / 16);
-@emLineHeight : 1em * (@baseLineHeight / @baseFontSize);
+.border-radius(@border-radius) {
+	border-radius: @border-radius;
+}
+
+@paddingLarge : @padding-large-vertical @padding-large-horizontal;
+@paddingSmall: @padding-small-vertical @padding-small-horizontal;
+@paddingMini: @padding-xs-vertical @padding-xs-horizontal;
+
+@gridColumnWidth: @container-md / @grid-columns - @grid-gutter-width;
+@gridColumnWidth768: @container-sm / @grid-columns - @grid-gutter-width;
+@gridColumnWidth1200: @container-lg / @grid-columns - @grid-gutter-width;
+
+@emFontSize : 1em * (@font-size-base / 16);
+@emLineHeight : 1em * (@line-height-base);
 @emVertMargin : @emLineHeight;
-@indentStep : (@gridColumnWidth + @gridGutterWidth) / 2;
-@indentStep1200 : (@gridColumnWidth1200 + @gridGutterWidth1200) / 2;
-@indentStep768 : (@gridColumnWidth768 + @gridGutterWidth768) / 2;
+
+@indentStep : (@container-md / @grid-columns) / 2;
+@indentStep1200 : (@container-lg / @grid-columns) / 2;
+@indentStep768 : (@container-sm / @grid-columns) / 2;

@@ -1,11 +1,11 @@
 @import "bootstrap/css/code.less";
 
-code {color:inherit;background-color: @tableBackgroundAccent;white-space:inherit}
-.spip_code {&:extend(code);color:inherit;background-color: @tableBackgroundAccent;white-space:inherit}
+code {white-space:inherit}
+.spip_code {&:extend(code);white-space:inherit}
 .spip_code >code {border: none;padding: 0;background: none;color:inherit}
-pre,code,kbd,samp,var,tt,.spip_code,.spip_cadre { #font > #family > .monospace; font-size: 1em; }
+pre,code,kbd,samp,var,tt,.spip_code,.spip_cadre {font-family: @font-family-monospace; font-size: 1em; }
 
-pre { margin: 1.5em 0;
+pre { margin: @emVertMargin 0;
   /* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
   white-space: pre;           /* CSS 2.0 */
   white-space: pre-wrap;      /* CSS 2.1 */
@@ -16,7 +16,7 @@ pre { margin: 1.5em 0;
   white-space: -hp-pre-wrap;  /* HP Printers */
   word-wrap: break-word;      /* IE 5+ */
 }
-kbd { background-color: #222222; color: #FFFFFF; }
+
 samp { font-weight: bold; }
 var { font-style: italic; }
 
