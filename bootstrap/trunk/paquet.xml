@@ -1,8 +1,8 @@
 <paquet
 	prefix="bootstrap"
 	categorie="outil"
-	version="2.1.7"
-	etat="stable"
+	version="3.0.0"
+	etat="dev"
 	compatibilite="[3.0.2;3.1.*]"
 	logo="img/bootstrap-32.png"
 	documentation="http://spipr.nursit.com/bootstrap"
@@ -12,7 +12,7 @@
 
 	<auteur lien='http://www.nursit.com'>Cedric Morin</auteur>
 	<auteur lien='http://www.studiomaiis.net'>Pierre Basson</auteur>
-	<credit lien='http://getbootstrap.com/2.3.2/'>twbs/bootstrap v2.3.2</credit>
+	<credit lien='http://getbootstrap.com'>twbs/bootstrap v3.3.5</credit>
 	<credit lien='http://hashgrid.com/'>dotjay/hashgrid</credit>
 
 	<licence>GNU/GPL</licence>

@@ -1,67 +1,56 @@
 /*!
- * Bootstrap v2.3.2
- *
- * Copyright 2013 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world by @mdo and @fat.
+ * Bootstrap v3.3.5 (http://getbootstrap.com)
+ * Copyright 2011-2015 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
 // Core variables and mixins
-@import "css/variables.less"; // Modify this for custom colors, font-sizes, etc
-@import "css/mixins.less";
+@import "variables.less";
+@import "mixins.less";
 
-// CSS Reset
-@import "css/reset.less";
+// Reset and dependencies
+@import "normalize.less";
+@import "print.less";
+@import "glyphicons.less";
 
-// Grid system and page structure
-@import "css/scaffolding.less";
-@import "css/grid.less";
-@import "css/layouts.less";
+// Core CSS
+@import "scaffolding.less";
+@import "type.less";
+@import "code.less";
+@import "grid.less";
+@import "tables.less";
+@import "forms.less";
+@import "buttons.less";
 
-// Base CSS
-@import "css/type.less";
-@import "css/code.less";
-@import "css/forms.less";
-@import "css/tables.less";
+// Components
+@import "component-animations.less";
+@import "dropdowns.less";
+@import "button-groups.less";
+@import "input-groups.less";
+@import "navs.less";
+@import "navbar.less";
+@import "breadcrumbs.less";
+@import "pagination.less";
+@import "pager.less";
+@import "labels.less";
+@import "badges.less";
+@import "jumbotron.less";
+@import "thumbnails.less";
+@import "alerts.less";
+@import "progress-bars.less";
+@import "media.less";
+@import "list-group.less";
+@import "panels.less";
+@import "responsive-embed.less";
+@import "wells.less";
+@import "close.less";
 
-// Components: common
-@import "css/sprites.less";
-@import "css/dropdowns.less";
-@import "css/wells.less";
-@import "css/component-animations.less";
-@import "css/close.less";
-
-// Components: Buttons & Alerts
-@import "css/buttons.less";
-@import "css/button-groups.less";
-@import "css/alerts.less"; // Note: alerts share common CSS with buttons and thus have styles in buttons.less
-
-// Components: Nav
-@import "css/navs.less";
-@import "css/navbar.less";
-@import "css/breadcrumbs.less";
-@import "css/pagination.less";
-@import "css/pager.less";
-
-// Components: Popovers
-@import "css/modals.less";
-@import "css/tooltip.less";
-@import "css/popovers.less";
-
-// Components: Misc
-@import "css/thumbnails.less";
-@import "css/media.less";
-@import "css/labels-badges.less";
-@import "css/progress-bars.less";
-@import "css/accordion.less";
-@import "css/carousel.less";
-@import "css/hero-unit.less";
+// Components w/ JavaScript
+@import "modals.less";
+@import "tooltip.less";
+@import "popovers.less";
+@import "carousel.less";
 
 // Utility classes
-@import "css/utilities.less"; // Has to be last to override when necessary
-
-// BootStrap Theming : 2 possible names, Has to be last-last to override when necessary
-@import "css/bootswatch.less";
-@import "css/boot-theme.less";
+@import "utilities.less";
+@import "responsive-utilities.less";
