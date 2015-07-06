@@ -183,7 +183,7 @@ function ecrire_fichier_en_tmp(&$infos_fichiers, $type) {
 	// ... en avant le code !
 	$fichier_dest = _DIR_CS_TMP . "mes_$type.php";
 if(defined('_LOG_CS')) cs_log("ecrire_fichier_en_tmp($type) : lgr=".strlen($code))." pour $fichier_dest";
-	if(!ecrire_fichier($fichier_dest, '<'."?php\n// Code d'inclusion pour le plugin 'Couteau Suisse'\n++\$GLOBALS['cs_$type'];\n$code?".'>', true))
+	if(!ecrire_fichier($fichier_dest, '<'."?php\n// Code d'inclusion pour le plugin 'Couteau Suisse'\nisset(\$GLOBALS['cs_$type'])?\$GLOBALS['cs_$type']++:\$GLOBALS['cs_$type']=1;\n$code?".'>', true))
 		cs_log("ERREUR ECRITURE : $fichier_dest");
 }
 
