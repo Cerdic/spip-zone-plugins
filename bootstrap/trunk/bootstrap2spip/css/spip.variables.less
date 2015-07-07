@@ -1,3 +1,4 @@
+// Compat BS2/BS3
 .border-radius(@border-radius) {
 	border-radius: @border-radius;
 }
@@ -10,6 +11,13 @@
 @gridColumnWidth768: @container-sm / @grid-columns - @grid-gutter-width;
 @gridColumnWidth1200: @container-lg / @grid-columns - @grid-gutter-width;
 
+// Sprite icons path
+// -------------------------
+@iconSpritePath:          "../img/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png";
+
+// SPIP
+
 @emFontSize : 1em * (@font-size-base / 16);
 @emLineHeight : 1em * (@line-height-base);
 @emVertMargin : @emLineHeight;
@@ -17,3 +25,4 @@
 @indentStep : (@container-md / @grid-columns) / 2;
 @indentStep1200 : (@container-lg / @grid-columns) / 2;
 @indentStep768 : (@container-sm / @grid-columns) / 2;
+
