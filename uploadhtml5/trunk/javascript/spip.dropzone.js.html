@@ -1,0 +1,30 @@
+[(#REM) Si env contient un maxFiles il surpasse la configuration ]
+[(#SET{maxFiles, [(#ENV{maxFiles, [(#CONFIG{uploadhtml5/max_file}|>{0}|?{#CONFIG{uploadhtml5/max_file},null})]})]})]
+
+<script type="text/javascript">
+ var options = {
+   paramName: ["(#ENV{paramName})"],
+   maxFilesize: #CONFIG{uploadhtml5/max_file_size},
+   maxFiles: #GET{maxFiles},
+
+   [success: function(file, response) {
+     ajaxReload("(#ENV{ajaxReload})");
+   },]
+
+   // Traduire dropzone
+   dictDefaultMessage: "<:uploadhtml5:drop_ici:>",
+   dictFallbackMessage: "<:uploadhtml5:drop_no_support:>",
+   dictFallbackText: "<:uploadhtml5:drop_fallbacktext:>",
+   dictInvalidFileType: "<:uploadhtml5:drop_fichier_invalide:>",
+   dictFileTooBig: "<:uploadhtml5:drop_fichier_trop_gros:>",
+   dictCancelUpload: "<:uploadhtml5:drop_annuler:>",
+   dictCancelUploadConfirmation: "<:uploadhtml5:drop_annuler_confirm:>",
+   dictMaxFilesExceeded: "<:uploadhtml5:drop_max_file:>"
+ };
+
+ // Désactiver la découverte automatique de dropzone
+ Dropzone.autoDiscover = false;
+
+ $("#ENV{dropzone, #dropzonespip}").dropzone(options);
+
+</script>

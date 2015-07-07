@@ -15,36 +15,6 @@
     </div>
   </form>
 
-  <script type="text/javascript">
-     var options = {
-       paramName: "file_logo",
-       maxFilesize: #CONFIG{uploadhtml5/max_file_size},
-       // Pour les logos, on ne veux qu'un seul fichier
-       maxFiles: 1,
-       // Dans le cas des logo, on ne veux que des images
-       acceptedFiles: "[(#REM|mine_type_logos)]",
-
-
-       [success: function(file, response) {
-         ajaxReload("(#ENV{ajaxReload})");
-       },]
-
-       // Traduire dropzone
-       dictDefaultMessage: "<:uploadhtml5:logo_drop_ici:>",
-       dictFallbackMessage: "<:uploadhtml5:drop_no_support:>",
-       dictFallbackText: "<:uploadhtml5:drop_fallbacktext:>",
-       dictInvalidFileType: "<:uploadhtml5:drop_fichier_invalide:>",
-       dictFileTooBig: "<:uploadhtml5:drop_fichier_trop_gros:>",
-       dictCancelUpload: "<:uploadhtml5:drop_annuler:>",
-       dictCancelUploadConfirmation: "<:uploadhtml5:drop_annuler_confirm:>",
-       dictMaxFilesExceeded: "<:uploadhtml5:drop_max_file:>"
-     };
-
-   // Désactiver la découverte automatique de dropzone
-   Dropzone.autoDiscover = false;
-
-   $("#dropzonespip_logo").dropzone(options);
-
-  </script>
+  #INCLURE{fond=javascript/spip.dropzone.js, paramName=file_logo, maxFiles=1, dropzone=#dropzonespip_logo, env}
   ]
 </div>
