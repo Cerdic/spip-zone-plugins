@@ -142,8 +142,12 @@ input.submit, .formulaire_spip button.submit:not(.btn-link) {.btn; .btn-default;
 //.formulaire_menu_lang form select {#grid > .core > .span(3)}
 
 /* Formulaires de recherche (site / petitions) */
-.formulaire_recherche,.secondary .formulaire_recherche {/*.form-search*/}
-.formulaire_recherche,.secondary .formulaire_recherche { padding: 0; background: none; border: 0;}
+.formulaire_recherche,.secondary .formulaire_recherche {
+	padding: 0; background: none; border: 0;
+	input.text {
+		width: 100%;
+	}
+}
 
 /* Formulaire de login dans une page */
 /* TODO BS3
