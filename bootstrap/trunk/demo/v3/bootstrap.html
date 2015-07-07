@@ -16,7 +16,8 @@
 		<style type="text/css">
 			body.preview {text-align: left;margin-top: 80px;}
 			#footer {margin-top:2em;padding-top:2em;border-top:1px solid #eee;}
-			.modal {display:block;position: static;}
+			.modal:not(#source-modal) {display:block;position: static;}
+			.modal .modal-dialog {max-width: 95%;}
 		</style>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
