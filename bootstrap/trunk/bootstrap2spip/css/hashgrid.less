@@ -3,11 +3,11 @@
  * only visible for webmaster users
  */
 #grid {
-  .hashgrid (@grid-column-width, @grid-gutter-width, @grid-columns, @line-height-computed) {
+  .hashgrid (@container-width, @grid-gutter-width, @grid-columns, @line-height-computed) {
     #bsgrid{
       /* Dimensions - same width as your grid with gutters */
-      width: (@grid-column-width * @grid-columns) + (@grid-gutter-width * (@grid-columns + 1));
-      margin-left: -((@grid-column-width * @grid-columns) + (@grid-gutter-width * (@grid-columns + 1)))/2;
+      width: @container-width;
+      margin-left: -1 * (@container-width / 2 );
     }
 
     /**
@@ -17,14 +17,35 @@
      * and use margins to set column gutters.
      */
     #bsgrid div.vert{
-        width: @grid-column-width - 1px;
-        border: solid darkturquoise;
-        border-width: 0 1px;
-        margin-right: @grid-gutter-width - 1px;
+			width: percentage((1 / @grid-columns));
+			//border-left:1px solid darkturquoise;
+			//border-right:1px solid darkturquoise;
+			//margin-right: @grid-gutter-width - 1px;
+			position: relative;
+			&:before {
+				display: block;
+				position: absolute;
+				content: "";
+				height: 100%;
+				width: 1px;
+				top:0;
+				left: 0;
+				border-left: 1px solid darkturquoise;
+			}
+			&:after {
+				display: block;
+				position: absolute;
+				content: "";
+				height: 100%;
+				width: 1px;
+				top:0;
+				right: @grid-gutter-width;
+				border-right: 1px solid darkturquoise;
+			}
     }
-    #bsgrid div.vert.first-line{
-        margin-left: @grid-gutter-width - 1px;
-    }
+		#bsgrid .vert-container {
+			margin-left: @grid-gutter-width / 2;
+		}
 
     /**
      * Horizontal grid lines, defined by your base line height
@@ -33,23 +54,22 @@
      * visible height = height + borders + margins + padding
      */
     #bsgrid div.horiz{
-        /* 20px line height */
-        height: @line-height-computed - 1px;
-        border-bottom: 1px dotted darkgray;
-        margin: 0;
-        padding: 0;
-
+			/* 20px line height */
+			height: @line-height-computed - 1px;
+			border-bottom: 1px dotted darkgray;
+			margin: 0;
+			padding: 0;
     }
   }
 }
 
 // Fixed (940px)
-#grid > .hashgrid(@container-md / @grid-columns - @grid-gutter-width, @grid-gutter-width, @grid-columns, @line-height-computed);
+#grid > .hashgrid(@container-md, @grid-gutter-width, @grid-columns, @line-height-computed);
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-  #grid > .hashgrid(@container-sm / @grid-columns - @grid-gutter-width, @grid-gutter-width, @grid-columns, @line-height-computed);
+  #grid > .hashgrid(@container-sm, @grid-gutter-width, @grid-columns, @line-height-computed);
 }
 @media (min-width: @screen-lg-min) {
-  #grid > .hashgrid(@container-lg / @grid-columns - @grid-gutter-width, @grid-gutter-width, @grid-columns, @line-height-computed);
+  #grid > .hashgrid(@container-lg, @grid-gutter-width, @grid-columns, @line-height-computed);
 }
 #bsgrid{
     /* Grid (left-aligned)
