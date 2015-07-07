@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--[if lt IE 9]><!--Perf issue--><![endif]-->
+		<meta charset="#CHARSET">
+		<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!-- Le styles -->
+		[<link rel="stylesheet" href="(#CSS{css/bootstrap.css})" type="text/css" />]
+		#INSERT_HEAD_CSS
+		[<link rel="stylesheet" href="(#CSS{css/exemple.css})" type="text/css" />]
+		<style type="text/css">
+			body.preview {text-align: left;margin-top: 80px;}
+			#footer {margin-top:2em;padding-top:2em;border-top:1px solid #eee;}
+			.modal {display:block;position: static;}
+		</style>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+	  <script src="#CHEMIN{js/html5.js}"></script>
+	  <script src="#CHEMIN{js/respond.min.js}"></script>
+		<![endif]-->
+		#INSERT_HEAD
+		<!-- JS in head not in footer : let SPIP optimize this -->
+		<script src="#CHEMIN{js/affix.js}"></script>
+		<script src="#CHEMIN{js/alert.js}"></script>
+		<script src="#CHEMIN{js/button.js}"></script>
+		<script src="#CHEMIN{js/carousel.js}"></script>
+		<script src="#CHEMIN{js/collapse.js}"></script>
+		<script src="#CHEMIN{js/dropdown.js}"></script>
+		<script src="#CHEMIN{js/modal.js}"></script>
+		<script src="#CHEMIN{js/scrollspy.js}"></script>
+		<script src="#CHEMIN{js/tab.js}"></script>
+		<script src="#CHEMIN{js/tooltip.js}"></script>
+		<script src="#CHEMIN{js/popover.js}"></script>
+		<script src="#CHEMIN{js/transition.js}"></script>
+	</head>
+  <body class="preview">
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">Bootswatch</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="themes">
+                <li><a href="../default/">Default</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Cerulean</a></li>
+                <li><a href="#">Cosmo</a></li>
+                <li><a href="#">Cyborg</a></li>
+                <li><a href="#">Darkly</a></li>
+                <li><a href="#">Flatly</a></li>
+                <li><a href="#">Journal</a></li>
+                <li><a href="#">Lumen</a></li>
+                <li><a href="#">Paper</a></li>
+                <li><a href="#">Readable</a></li>
+                <li><a href="#">Sandstone</a></li>
+                <li><a href="#">Simplex</a></li>
+                <li><a href="#">Slate</a></li>
+                <li><a href="#">Spacelab</a></li>
+                <li><a href="#">Superhero</a></li>
+                <li><a href="#">United</a></li>
+                <li><a href="#">Yeti</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">Help</a>
+            </li>
+            <li>
+              <a href="#">Blog</a>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Cerulean <span class="caret"></span></a>
+              <ul class="dropdown-menu" aria-labelledby="download">
+                <li><a href="#">Open Sandbox</a></li>
+                <li class="divider"></li>
+                <li><a href="#">bootstrap.min.css</a></li>
+                <li><a href="#">bootstrap.css</a></li>
+                <li class="divider"></li>
+                <li><a href="#">variables.less</a></li>
+                <li><a href="#">bootswatch.less</a></li>
+                <li class="divider"></li>
+                <li><a href="#">_variables.scss</a></li>
+                <li><a href="#">_bootswatch.scss</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
+            <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+
+	    <header class="page-header" id="banner">
+        <h1>Bootstrap v3 pour SPIP</h1>
+        <p class="lead">Page de demonstration</p>
+        <div class="subnav">
+          <ul class="nav nav-pills">
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#navbar">Navbar</a></li>
+            <li><a href="#buttons">Buttons</a></li>
+            <li><a href="#forms">Forms</a></li>
+            <li><a href="#tables">Tables</a></li>
+            <li><a href="#nav">Navigations</a></li>
+            <li><a href="#indicators">Indicators</a></li>
+            <li><a href="#progress">Progress</a></li>
+            <li><a href="#container">Containers</a></li>
+            <li><a href="#dialogs">Dialogs</a></li>
+          </ul>
+        </div>
+      </header>
+
+	    <!-- Typography
+	   	================================================== -->
+	    <div class="bs-docs-section clearfix">
+		    <div class="page-header">
+        <h2 id="typography">Typography</h2>
+        </div>
+		    <div class="row">
+
+			    <div class="col-sm-8">
+
+				    <div class="cartouche">
+					    <p class="surtitre">Ceci est le sur-titre de l’article</p>
+
+					    <h1 class="surlignable">Charte typo
+						    <small>par tetue</small>
+					    </h1>
+
+					    <p class="soustitre">Ceci est le sous-titre de l’article</p>
+
+					    <p class="info-publi"><abbr class="published" title="2007-06-30T22:00:00Z">dimanche 1er juillet
+						    2007</abbr><span
+						    class="sep">, </span><span class="auteurs">par  <span class="vcard author"><a class="url fn spip_in"
+					                                                                                    href="spip.php?auteur1">Webmestre</a></span></span>
+					    </p>
+
+				    </div>
+
+				    <div class="chapo surlignable"><p>Cette page présente un échantillon des enrichissements typographiques
+					    possibles
+					    sur ce site. Leur habillage est réalisé par le webmestre, en&nbsp;CSS, via des feuilles de style externes.
+					    Ce&nbsp;paragraphe
+					    constitue donc le&nbsp;chapeau.</p></div>
+				    <div class="texte surlignable"><h3 class="spip">Paragraphes</h3>
+
+					    <p>Premier paragraphe. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed non risus.
+						    Suspendisse
+						    lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices
+						    diam.<br
+							    class='manualbr'/>Ici, retour à la ligne, généré par le raccourci SPIP &#171;&nbsp;<code
+							    class='spip_code'
+							    dir='ltr'>_ </code>&nbsp;&#187;.
+						    Espace&nbsp;insécable.</p>
+
+					    <p>Second paragraphe. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam
+						    nisl
+						    sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim.
+						    Pellentesque
+						    congue.</p>
+					    <hr class="spip"/>
+					    <p>Troisième paragraphe, précédé d&#8217;une ligne horizontale de séparation, générée par le raccourci
+						    SPIP
+						    &#171;&nbsp;<code class='spip_code' dir='ltr'>----</code>&nbsp;&#187;. Praesent egestas leo in pede.
+						    Praesent
+						    blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales.</p>
+
+					    <h3 class="spip">Un intertitre normal</h3>
+
+					    <p>Voici du <i>texte en italique</i> et du <strong>texte en gras</strong>.<br class='manualbr'/>Voici un
+						    <del>texte supprimé</del>
+						    et le
+						    <ins>texte inséré en correction</ins>
+						    .<br class='manualbr'/>Une <dfn>définition</dfn> de terme avec la balise <code class='spip_code'
+						                                                                                   dir='ltr'>
+							    &lt;dfn&gt;</code>.<br class='manualbr'/>Un sigle, par exemple <abbr title="World Wide Web Consortium"
+						                                                                           lang="en">W3C</abbr>, est lu
+						    lettre par
+						    lettre, tandis que <acronym title="Système de Publication pour Internet">SPIP</acronym> est un acronyme
+						    puisqu&#8217;il
+						    forme un mot qui est lu normalement.
+					    </p>
+
+					    <p><bdo dir="ltr">Texte de gauche à droite</bdo> et <bdo dir="rtl">Texte de droite à gauche</bdo> avec
+						    <code
+							    class='spip_code' dir='ltr'>&lt;bdo&gt;</code>.<br class='manualbr'/>Mise en exposant <sup>2</sup> et
+						    mise
+						    en indice&nbsp;: <abbr>H<sub>2</sub>O</abbr>.<br class='manualbr'/>Et voici une note de bas de page<span
+							    class="spip_note_ref">&nbsp;[<a href='#nb1' class='spip_note' rel='footnote'
+						                                      title='Une note de bas de page est, habituellement, signalée par un numéro placé à&nbsp;(...)'
+						                                      id='nh1'>1</a>]</span>.</p>
+
+					    <p><img src="local/cache-vignettes/L8xH11/puce-32883.gif" width='8' height='11' class='puce' alt="-"/>&nbsp;Ici,
+						    exemple de raccourci SPIP &#171;&nbsp;<code class='spip_code' dir='ltr'>- </code>&nbsp;&#187;.
+						    Attention, leur
+						    succession ne constitue pas une liste&nbsp;! Pour les listes, voir ci-dessous.</p>
+
+					    <p>&mdash;&nbsp;Un tiret long, généré par le raccourci SPIP &#171;&nbsp;<code class='spip_code'
+					                                                                                  dir='ltr'>--</code>&nbsp;&#187;,
+						    utile pour les dialogues.</p>
+
+					    <h3 class="spip">Hyperliens</h3>
+
+					    <p>SPIP distingue les <a href="spip.php?article1" class='spip_in'>liens internes</a> des <a
+						    href="http://checklists.opquast.com/11/criteria/687/" class='spip_out'
+						    title="Bonne pratique Opquast N&#176;188" rel='external'>liens externes</a> dont URLs directes&nbsp;: <a
+						    href="http://www.spip.net" class='spip_url spip_out' rel='external'>http://www.spip.net</a>, et lien
+						    généré
+						    par le raccourci <code class='spip_code' dir='ltr'>[-&gt;site2]</code>&nbsp;: <a href="spip.php?site2"
+						                                                                                     class='spip_out'>site
+							    2</a>.<br class='manualbr'/>Mieux vaut spécifier la langue de destination, par exemple&nbsp;: <a
+							    href="http://checklists.opquast.com/11/criteria/628/" class='spip_out' hreflang='en' rel='external'>Bonne
+							    pratique Opquast N&#176;129</a>.<br class='manualbr'/>Lien vers une définition du glossaire prédéfini&nbsp;:
+						    <a href="http://fr.wikipedia.org/wiki/Wikip%C3%A9dia" class='spip_glossaire'
+						       rel='external'>Wikipédia</a><br
+							    class='manualbr'/>Lien vers un document, avec le raccourci <code class='spip_code'
+						                                                                       dir='ltr'>[-&gt;doc3]</code>&nbsp;:
+						    <a
+							    href="IMG/jpg/doc3.jpg" class='spip_in' type='image/jpeg'>Titre du document</a><br class='manualbr'/>Lien
+						    vers un auteur, avec le raccourci <code class='spip_code' dir='ltr'>[-&gt;auteur1]</code>&nbsp;: <a
+							    href="spip.php?auteur1" class='spip_in'>Webmestre</a><br class='manualbr'/>Courriel&nbsp;: <a
+							    href="mailto:adresse@courriel.net" class='spip_mail'>adresse@courriel.net</a><br class='manualbr'/>Une
+						    ancre vers les citations&nbsp;: <a href="#citations" class='spip_ancre'>#citations</a></p>
+
+					    <h3 class="spip">Listes</h3>
+
+					    <p>Liste non ordonnée (<code class='spip_code' dir='ltr'>ul</code>), générée avec le raccourci SPIP &#171;&nbsp;<code
+						    class='spip_code' dir='ltr'>-* </code>&nbsp;&#187;&nbsp;:</p>
+					    <ul class="spip">
+						    <li> Élément de liste non numérotée</li>
+						    <li> Élément de liste non numérotée</li>
+						    <li> Élément de liste non numérotée
+							    <ul class="spip">
+								    <li> Plantes
+									    <ul class="spip">
+										    <li> Ficus</li>
+										    <li> Olivier</li>
+									    </ul>
+								    </li>
+								    <li> Animaux de compagnie
+									    <ul class="spip">
+										    <li> Chat</li>
+										    <li> Chien</li>
+									    </ul>
+								    </li>
+							    </ul>
+						    </li>
+					    </ul>
+					    <p>Et une liste numérotée (<code class='spip_code' dir='ltr'>ol</code>), générée avec le raccourci SPIP
+						    &#171;&nbsp;<code
+							    class='spip_code' dir='ltr'>-# </code>&nbsp;&#187;&nbsp;:</p>
+					    <ol class="spip">
+						    <li> Voici ma main&nbsp;: elle a cinq doigts. En voici deux, en voici trois.<br class='manualbr'/>Le
+							    premier,
+							    ce gros bonhomme, C’est le pouce qu’il se nomme.
+						    </li>
+						    <li> L’index qui montre le chemin, Est le second doigt de la main.</li>
+						    <li> Entre l’index et l’annulaire, Le majeur paraît un grand frère.</li>
+						    <li> L’annulaire porte l’anneau, Avec sa bague, il fait le beau.</li>
+						    <li> Le tout petit auriculaire Marche à côté de l’annulaire.</li>
+					    </ol>
+					    <p>Regardez mes doigts travailler. Chacun fait son petit métier.</p>
+
+					    <p>N&#8217;oublions pas les listes de définition, générées avec les balises HTML <code class='spip_code'
+					                                                                                           dir='ltr'>
+						    &lt;dl&gt;</code>, <code class='spip_code' dir='ltr'>&lt;dd&gt;</code>, <code class='spip_code'
+					                                                                                    dir='ltr'>
+						    &lt;dt&gt;</code>&nbsp;:
+					    </p>
+					    <dl class="spip">
+						    <dt>polatouche (n.m.)</dt>
+						    <dd><span class='spip_document_1 spip_documents spip_documents_right' style='float:right; width:63px;'>
+	   		<img src='#CHEMIN{demo/spip.gif}' width='63' height='40' alt=""/></span>Mammifère rongeur
+							    omnivore méconnu d&#8217;Eurasie ou d&#8217;Amérique du Nord, dit &#171;&nbsp;écureuil volant&nbsp;&#187;
+							    car il est capable de planer en ligne droite d&#8217;un arbre à l&#8217;autre grâce à son patagium
+							    (membrane
+							    qui réunit ses pattes à son corps). Pelage gris et blanc.
+						    </dd>
+						    <dt>écureuil (n.m.)</dt>
+						    <dd>Petit rongeur arboricole d&#8217;Europe à longue queue très touffue, excellent grimpeur, capable de
+							    sauts
+							    très étendus, amassant des provisions pour l&#8217;hiver et aisément familier de l&#8217;homme. Pelage
+							    gris
+							    ou roux.
+						    </dd>
+					    </dl>
+					    <h3 class="spip">Tableaux</h3>
+					    <table class="spip" summary="summary">
+						    <caption>Titre du tableau (caption)</caption>
+						    <thead>
+						    <tr class='row_first'>
+							    <th id='idcbd5_c0'>entête</th>
+							    <th id='idcbd5_c1'>entête</th>
+							    <th id='idcbd5_c2'>entête</th>
+						    </tr>
+						    </thead>
+						    <tbody>
+						    <tr class='row_odd odd'>
+							    <td headers='idcbd5_c0'>valeur</td>
+							    <td headers='idcbd5_c1'>valeur</td>
+							    <td headers='idcbd5_c2'>valeur</td>
+						    </tr>
+						    <tr class='row_even even'>
+							    <td headers='idcbd5_c0'>valeur</td>
+							    <td headers='idcbd5_c1'>valeur</td>
+							    <td headers='idcbd5_c2'>valeur</td>
+						    </tr>
+						    <tr class='row_odd odd'>
+							    <td headers='idcbd5_c0'>valeur</td>
+							    <td headers='idcbd5_c1'>valeur</td>
+							    <td headers='idcbd5_c2'>valeur</td>
+						    </tr>
+						    </tbody>
+					    </table>
+					    <p><a name="citations"></a></p>
+
+					    <h3 class="spip">Citations</h3>
+
+					    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. <q>Ceci est une citation au fil du texte
+						    (avec la
+						    balise HTML <code class='spip_code' dir='ltr'>&lt;q&gt;</code>)</q>.</p>
+					    <blockquote>Ceci est une citation ordinaire, avec la balise HTML <code class='spip_code' dir='ltr'>&lt;blockquote&gt;</code>.
+						    La route est longue mais la voie est libre.
+						    <p>Second paragraphe. Deux humains s’échangent une pièce de&nbsp;1€. Chacun repart avec une pièce de&nbsp;1€.
+							    Deux humains s’échangent une idée. Chacun repart avec deux idées.</p>
+					    </blockquote>
+					    <blockquote class="spip">
+						    <p>Ceci est une citation générée avec le raccourci SPIP <code class='spip_code' dir='ltr'>
+							    &lt;quote&gt;</code>.
+							    La route est longue mais la voie est libre.</p>
+
+						    <p>Second paragraphe. Deux humains s’échangent une pièce de&nbsp;1€. Chacun repart avec une pièce de&nbsp;1€.
+							    Deux humains s’échangent une idée. Chacun repart avec deux idées.</p>
+					    </blockquote>
+					    <blockquote class="spip_poesie">
+						    <div>Je le vis, je rougis, je pâlis à sa vue</div>
+						    <div>Un trouble s’éleva dans mon âme éperdue</div>
+						    <div>Mes yeux ne voyaient plus, je ne pouvais parler</div>
+						    <div>Je sentis tout mon corps et transir et brûler.</div>
+						    <div>&nbsp;</div>
+						    <div>Ceci est une citation du <cite>Phédre</cite> de Racine, générée avec le raccourci&nbsp;SPIP <code
+							    class='spip_code' dir='ltr'>&lt;poesie&gt;</code>, idéal pour les vers des poèmes et chansons.
+						    </div>
+					    </blockquote>
+					    <p>Maecenas mollis. Et voici du code, généré avec le raccourci SPIP <code class='spip_code' dir='ltr'>&lt;code&gt;</code>&nbsp;:
+					    </p>
+
+					    <div style='text-align: left;' class='spip_code' dir='ltr'><code>&lt;?php<br/>
+						    &nbsp; &nbsp; // ceci est du langage php<br/>
+						    &nbsp; &nbsp; echo &quot;bonjour&quot;;<br/>
+						    ?&gt;</code></div>
+	   				<textarea readonly='readonly' cols='40' rows='7' class='spip_cadre' dir='ltr'>Le raccourci SPIP &lt;cadre&gt; permet publier des extraits de code que l&#039;on peut facilement copier-coller.
+
+	   &lt;?php
+	   // ceci est du langage php
+	   echo &quot;au revoir&quot;;
+	   ?&gt;</textarea>
+
+					    <p>Sans oublier un <kbd>raccourci-clavier</kbd> (<code class='spip_code' dir='ltr'>&lt;kbd&gt;</code>), un
+						    <samp>extrait de script</samp> (<code class='spip_code' dir='ltr'>&lt;samp&gt;</code>) et une
+						    <var>variable</var> (<code class='spip_code' dir='ltr'>&lt;var&gt;</code>).</p>
+
+					    <p>Et pour finir en beauté, voici une formule mathématique, générée avec <code class='spip_code'
+					                                                                                   dir='ltr'>
+						    &lt;math&gt;</code>&nbsp;:<br
+						    class='autobr'/>
+						    <img src="#CHEMIN{demo/math.png}"
+						         style='vertical-align:middle;' width='85' height='38' alt="a = \sqrt{b^{2} + c^{2}}"
+						         title="a = \sqrt{b^{2} + c^{2}}"/></p>
+
+					    <h3 class="spip">À éviter</h3>
+
+					    <p>Ces balises ne doivent plus être utilisées car elles sont dépréciées en XHTML&nbsp;1.0 Strict&nbsp;:
+						    <basefont>exemple de basefont</basefont>, <font>exemple de font</font>, <u>exemple de u</u>, <s>exemple
+							    de
+							    s</s>, <strike>exemple de strike</strike>, etc. Celles-ci sont déconseillées&nbsp;: <b>exemple de
+							    b</b>, <i>exemple
+							    de i</i>, <big>exemple de big</big>,
+						    <small>exemple de small</small>
+						    , <tt>exemple de tt</tt>.
+					    </p>
+				    </div>
+
+				    <hr/>
+				    <p class="hyperlien">Voir en ligne : <a href="http://www.spip.net">Lien hypertexte</a></p>
+
+				    <hr/>
+				    <div class="ps surlignable">
+					    <p>Ceci est le texte du Post-Scriptum. Cette page fait partie de la <a
+						    href="http://www.spip-contrib.net/3716"
+						    class='spip_out' rel='external'>base de
+						    démarrage</a> pour SPIP. Voici un autre <a href="http://romy.tetue.net/11" class='spip_out'
+					                                                 rel='external'>exemple
+						    de cette charte typo</a>.</p></div>
+
+
+			    </div>
+			    <div class="col-sm-4">
+				    <div class="well">
+					    <h1>h1. Heading 1</h1>
+
+					    <h2>h2. Heading 2</h2>
+
+					    <h3>h3. Heading 3</h3>
+					    <h4>h4. Heading 4</h4>
+					    <h5>h5. Heading 5</h5>
+					    <h6>h6. Heading 6</h6>
+				    </div>
+				    <h3>Example addresses</h3>
+				    <address>
+					    <strong>Twitter, Inc.</strong><br>
+					    795 Folsom Ave, Suite 600<br>
+					    San Francisco, CA 94107<br>
+					    <abbr title="Phone">P:</abbr> (123) 456-7890
+				    </address>
+				    <address>
+					    <strong>Full Name</strong><br>
+					    <a href="mailto:#">first.last@gmail.com</a>
+				    </address>
+
+			    </div>
+		    </div>
+		    <hr/>
+		    <div class="row">
+			    <div class="col-sm-6">
+				    <blockquote>
+					    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+					    <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+				    </blockquote>
+			    </div>
+			    <div class="col-sm-6">
+				    <blockquote class="blockquote-reverse">
+					    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+					    <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+				    </blockquote>
+			    </div>
+		    </div>
+		    <div class="notes">
+			    <div id='nb1'>
+				    <p><span class="spip_note_ref">[<a href='#nh1' class='spip_note' title='Notes 1'
+				                                       rev='footnote'>1</a>]&nbsp;</span>Une note de bas de page est,
+					    habituellement, signalée par un numéro placé à l’intérieur du texte, numéro repris en bas de page et
+					    proposant un complément d’information. Cette fonctionnalité est automatisée dans SPIP.</p>
+			    </div>
+		    </div>
+
+		    <!-- Typography
+      ================================================== -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="type">More Typography (from BS)</h2>
+            </div>
+          </div>
+        </div>
+
+        <!-- Headings -->
+
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <h1>Heading 1</h1>
+              <h2>Heading 2</h2>
+              <h3>Heading 3</h3>
+              <h4>Heading 4</h4>
+              <h5>Heading 5</h5>
+              <h6>Heading 6</h6>
+              <p class="lead">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <h2>Example body text</h2>
+              <p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+              <p><small>This line of text is meant to be treated as fine print.</small></p>
+              <p>The following snippet of text is <strong>rendered as bold text</strong>.</p>
+              <p>The following snippet of text is <em>rendered as italicized text</em>.</p>
+              <p>An abbreviation of the word attribute is <abbr title="attribute">attr</abbr>.</p>
+            </div>
+
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <h2>Emphasis classes</h2>
+              <p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>
+              <p class="text-primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p class="text-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+              <p class="text-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
+              <p class="text-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+              <p class="text-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Blockquotes -->
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h2 id="type-blockquotes">Blockquotes</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="bs-component p">
+              <blockquote>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+              </blockquote>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="bs-component p">
+              <blockquote class="pull-right">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+	    </div>
+
+      <!-- Navbar
+      ================================================== -->
+      <div class="bs-docs-section clearfix">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="navbar">Navbar</h2>
+            </div>
+
+            <div class="bs-component p">
+              <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                  </div>
+
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#">Link</a></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">One more separated link</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                      </div>
+                      <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="#">Link</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div>
+
+            <div class="bs-component p">
+              <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Brand</a>
+                  </div>
+
+                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav">
+                      <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#">Link</a></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">One more separated link</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                      </div>
+                      <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="#">Link</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+            </div><!-- /example -->
+
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Buttons
+      ================================================== -->
+      <div class="bs-docs-section">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2 id="buttons">Buttons</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+
+            <p class="bs-component p">
+              <a href="#" class="btn btn-default">Default</a>
+              <a href="#" class="btn btn-primary">Primary</a>
+              <a href="#" class="btn btn-success">Success</a>
+              <a href="#" class="btn btn-info">Info</a>
+              <a href="#" class="btn btn-warning">Warning</a>
+              <a href="#" class="btn btn-danger">Danger</a>
+              <a href="#" class="btn btn-link">Link</a>
+            </p>
+
+            <p class="bs-component p">
+              <a href="#" class="btn btn-default disabled">Default</a>
+              <a href="#" class="btn btn-primary disabled">Primary</a>
+              <a href="#" class="btn btn-success disabled">Success</a>
+              <a href="#" class="btn btn-info disabled">Info</a>
+              <a href="#" class="btn btn-warning disabled">Warning</a>
+              <a href="#" class="btn btn-danger disabled">Danger</a>
+              <a href="#" class="btn btn-link disabled">Link</a>
+            </p>
+
+
+            <div style="margin-bottom: 15px;">
+              <div class="btn-toolbar bs-component" style="margin: 0;">
+                <div class="btn-group">
+                  <a href="#" class="btn btn-default">Default</a>
+                  <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+
+                <div class="btn-group">
+                  <a href="#" class="btn btn-primary">Primary</a>
+                  <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+
+                <div class="btn-group">
+                  <a href="#" class="btn btn-success">Success</a>
+                  <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+
+                <div class="btn-group">
+                  <a href="#" class="btn btn-info">Info</a>
+                  <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+
+                <div class="btn-group">
+                  <a href="#" class="btn btn-warning">Warning</a>
+                  <a href="#" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <p class="bs-component p">
+              <a href="#" class="btn btn-primary btn-lg">Large button</a>
+              <a href="#" class="btn btn-primary">Default button</a>
+              <a href="#" class="btn btn-primary btn-sm">Small button</a>
+              <a href="#" class="btn btn-primary btn-xs">Mini button</a>
+            </p>
+
+          </div>
+          <div class="col-lg-6">
+
+            <p class="bs-component p">
+              <a href="#" class="btn btn-default btn-lg btn-block">Block level button</a>
+            </p>
+
+
+            <div class="bs-component p" style="margin-bottom: 15px;">
+              <div class="btn-group btn-group-justified">
+                <a href="#" class="btn btn-default">Left</a>
+                <a href="#" class="btn btn-default">Middle</a>
+                <a href="#" class="btn btn-default">Right</a>
+              </div>
+            </div>
+
+            <div class="bs-component p" style="margin-bottom: 15px;">
+              <div class="btn-toolbar">
+                <div class="btn-group">
+                  <a href="#" class="btn btn-default">1</a>
+                  <a href="#" class="btn btn-default">2</a>
+                  <a href="#" class="btn btn-default">3</a>
+                  <a href="#" class="btn btn-default">4</a>
+                </div>
+
+                <div class="btn-group">
+                  <a href="#" class="btn btn-default">5</a>
+                  <a href="#" class="btn btn-default">6</a>
+                  <a href="#" class="btn btn-default">7</a>
+                </div>
+
+                <div class="btn-group">
+                  <a href="#" class="btn btn-default">8</a>
+                  <div class="btn-group">
+                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Dropdown
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                      <li><a href="#">Dropdown link</a></li>
+                     </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bs-component p">
+              <div class="btn-group-vertical">
+                  <a href="#" class="btn btn-default">Button</a>
+                  <a href="#" class="btn btn-default">Button</a>
+                  <a href="#" class="btn btn-default">Button</a>
+                  <a href="#" class="btn btn-default">Button</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+	    <!-- Forms
+      ================================================== -->
+	    <div class="bs-docs-section">
+		    <div class="row">
+			    <div class="col-lg-12">
+				    <div class="page-header">
+					    <h2 id="forms">SPIP Forms</h2>
+				    </div>
+			    </div>
+		    </div>
+
+		    <div class="row">
+			    <div class="col-sm-8">
+				    #FORMULAIRE_CHARTER
+			    </div>
+		    </div>
+
+
+		    <div class="row">
+			    <div class="col-lg-12">
+				    <div class="page-header">
+					    <h2>BootStrap Forms</h2>
+				    </div>
+			    </div>
+		    </div>
+
+		    <div class="row">
+			    <div class="col-lg-6">
+				    <div class="well bs-component">
+					    <form class="form-horizontal">
+						    <fieldset>
+							    <legend>Legend</legend>
+							    <div class="form-group">
+								    <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+
+								    <div class="col-lg-10">
+									    <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+								    </div>
+							    </div>
+							    <div class="form-group">
+								    <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+
+								    <div class="col-lg-10">
+									    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+
+									    <div class="checkbox">
+										    <label>
+											    <input type="checkbox"> Checkbox
+										    </label>
+									    </div>
+								    </div>
+							    </div>
+							    <div class="form-group">
+								    <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+
+								    <div class="col-lg-10">
+									    <textarea class="form-control" rows="3" id="textArea"></textarea>
+									    <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+								    </div>
+							    </div>
+							    <div class="form-group">
+								    <label class="col-lg-2 control-label">Radios</label>
+
+								    <div class="col-lg-10">
+									    <div class="radio">
+										    <label>
+											    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+											    Option one is this
+										    </label>
+									    </div>
+									    <div class="radio">
+										    <label>
+											    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+											    Option two can be something else
+										    </label>
+									    </div>
+								    </div>
+							    </div>
+							    <div class="form-group">
+								    <label for="select" class="col-lg-2 control-label">Selects</label>
+
+								    <div class="col-lg-10">
+									    <select class="form-control" id="select">
+										    <option>1</option>
+										    <option>2</option>
+										    <option>3</option>
+										    <option>4</option>
+										    <option>5</option>
+									    </select>
+									    <br>
+									    <select multiple="" class="form-control">
+										    <option>1</option>
+										    <option>2</option>
+										    <option>3</option>
+										    <option>4</option>
+										    <option>5</option>
+									    </select>
+								    </div>
+							    </div>
+							    <div class="form-group">
+								    <div class="col-lg-10 col-lg-offset-2">
+									    <button type="reset" class="btn btn-default">Cancel</button>
+									    <button type="submit" class="btn btn-primary">Submit</button>
+								    </div>
+							    </div>
+						    </fieldset>
+					    </form>
+				    </div>
+			    </div>
+			    <div class="col-lg-4 col-lg-offset-1">
+
+				    <form class="bs-component p">
+					    <div class="form-group">
+						    <label class="control-label" for="focusedInput">Focused input</label>
+						    <input class="form-control" id="focusedInput" type="text" value="This is focused...">
+					    </div>
+
+					    <div class="form-group">
+						    <label class="control-label" for="disabledInput">Disabled input</label>
+						    <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..."
+						           disabled="">
+					    </div>
+
+					    <div class="form-group has-warning">
+						    <label class="control-label" for="inputWarning">Input warning</label>
+						    <input type="text" class="form-control" id="inputWarning">
+					    </div>
+
+					    <div class="form-group has-error">
+						    <label class="control-label" for="inputError">Input error</label>
+						    <input type="text" class="form-control" id="inputError">
+					    </div>
+
+					    <div class="form-group has-success">
+						    <label class="control-label" for="inputSuccess">Input success</label>
+						    <input type="text" class="form-control" id="inputSuccess">
+					    </div>
+
+					    <div class="form-group">
+						    <label class="control-label" for="inputLarge">Large input</label>
+						    <input class="form-control input-lg" type="text" id="inputLarge">
+					    </div>
+
+					    <div class="form-group">
+						    <label class="control-label" for="inputDefault">Default input</label>
+						    <input type="text" class="form-control" id="inputDefault">
+					    </div>
+
+					    <div class="form-group">
+						    <label class="control-label" for="inputSmall">Small input</label>
+						    <input class="form-control input-sm" type="text" id="inputSmall">
+					    </div>
+
+					    <div class="form-group">
+						    <label class="control-label">Input addons</label>
+
+						    <div class="input-group">
+							    <span class="input-group-addon">$</span>
+							    <input type="text" class="form-control">
+			           <span class="input-group-btn">
+			             <button class="btn btn-default" type="button">Button</button>
+			           </span>
+						    </div>
+					    </div>
+				    </form>
+
+			    </div>
+		    </div>
+	    </div>
+
+
+	    <!-- Tables
+	================================================== -->
+      <div class="bs-docs-section">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="tables">Tables</h2>
+            </div>
+
+            <div class="bs-component p">
+              <table class="table table-striped table-hover ">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Column heading</th>
+                    <th>Column heading</th>
+                    <th>Column heading</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                  <tr class="info">
+                    <td>3</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                  <tr class="success">
+                    <td>4</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                  <tr class="danger">
+                    <td>5</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                  <tr class="warning">
+                    <td>6</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                  <tr class="active">
+                    <td>7</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                  </tr>
+                </tbody>
+              </table> 
+            </div><!-- /example -->
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Navs
+      ================================================== -->
+      <div class="bs-docs-section">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="nav">Navs</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4">
+            <h2 id="nav-tabs">Tabs</h2>
+            <div class="bs-component p">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                <li class="disabled"><a>Disabled</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Dropdown <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#dropdown1" data-toggle="tab">Action</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#dropdown2" data-toggle="tab">Another action</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="home">
+                  <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                </div>
+                <div class="tab-pane fade" id="profile">
+                  <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+                </div>
+                <div class="tab-pane fade" id="dropdown1">
+                  <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
+                </div>
+                <div class="tab-pane fade" id="dropdown2">
+                  <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h2 id="nav-pills">Pills</h2>
+            <div class="bs-component p">
+              <ul class="nav nav-pills">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li class="disabled"><a href="#">Disabled</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Dropdown <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <br>
+            <div class="bs-component p">
+              <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li class="disabled"><a href="#">Disabled</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Dropdown <span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h2 id="nav-breadcrumbs">Breadcrumbs</h2>
+            <div class="bs-component p">
+              <ul class="breadcrumb">
+                <li class="active">Home</li>
+              </ul>
+
+              <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Library</li>
+              </ul>
+
+              <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Library</a></li>
+                <li class="active">Data</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-lg-4">
+            <h2 id="pagination">Pagination</h2>
+            <div class="bs-component p">
+              <ul class="pagination">
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+
+              <ul class="pagination pagination-lg">
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+
+              <ul class="pagination pagination-sm">
+                <li class="disabled"><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h2 id="pager">Pager</h2>
+            <div class="bs-component p">
+              <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li><a href="#">Next</a></li>
+              </ul>
+
+              <ul class="pager">
+                <li class="previous disabled"><a href="#">&larr; Older</a></li>
+                <li class="next"><a href="#">Newer &rarr;</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicators
+      ================================================== -->
+      <div class="bs-docs-section">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="indicators">Indicators</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>Alerts</h2>
+            <div class="bs-component p">
+              <div class="alert alert-dismissible alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4>Warning!</h4>
+                <p>Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="alert alert-dismissible alert-info">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <h2>Labels</h2>
+            <div class="bs-component p" style="margin-bottom: 40px;">
+              <span class="label label-default">Default</span>
+              <span class="label label-primary">Primary</span>
+              <span class="label label-success">Success</span>
+              <span class="label label-warning">Warning</span>
+              <span class="label label-danger">Danger</span>
+              <span class="label label-info">Info</span>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h2>Badges</h2>
+            <div class="bs-component p">
+              <ul class="nav nav-pills">
+                <li class="active"><a href="#">Home <span class="badge">42</span></a></li>
+                <li><a href="#">Profile <span class="badge"></span></a></li>
+                <li><a href="#">Messages <span class="badge">3</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress bars
+      ================================================== -->
+      <div class="bs-docs-section">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="progress">Progress bars</h2>
+            </div>
+
+            <h3 id="progress-basic">Basic</h3>
+            <div class="bs-component p">
+              <div class="progress">
+                <div class="progress-bar" style="width: 60%;"></div>
+              </div>
+            </div>
+
+            <h3 id="progress-alternatives">Contextual alternatives</h3>
+            <div class="bs-component p">
+              <div class="progress">
+                <div class="progress-bar progress-bar-info" style="width: 20%"></div>
+              </div>
+
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: 40%"></div>
+              </div>
+
+              <div class="progress">
+                <div class="progress-bar progress-bar-warning" style="width: 60%"></div>
+              </div>
+
+              <div class="progress">
+                <div class="progress-bar progress-bar-danger" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <h3 id="progress-striped">Striped</h3>
+            <div class="bs-component p">
+              <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-info" style="width: 20%"></div>
+              </div>
+
+              <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-success" style="width: 40%"></div>
+              </div>
+
+              <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-warning" style="width: 60%"></div>
+              </div>
+
+              <div class="progress progress-striped">
+                <div class="progress-bar progress-bar-danger" style="width: 80%"></div>
+              </div>
+            </div>
+
+            <h3 id="progress-animated">Animated</h3>
+            <div class="bs-component p">
+              <div class="progress progress-striped active">
+                <div class="progress-bar" style="width: 45%"></div>
+              </div>
+            </div>
+
+            <h3 id="progress-stacked">Stacked</h3>
+            <div class="bs-component p">
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" style="width: 35%"></div>
+                <div class="progress-bar progress-bar-warning" style="width: 20%"></div>
+                <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Containers
+      ================================================== -->
+      <div class="bs-docs-section">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="container">Containers</h2>
+            </div>
+            <div class="bs-component p">
+              <div class="jumbotron">
+                <h1>Jumbotron</h1>
+                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>List groups</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <span class="badge">14</span>
+                  Cras justo odio
+                </li>
+                <li class="list-group-item">
+                  <span class="badge">2</span>
+                  Dapibus ac facilisis in
+                </li>
+                <li class="list-group-item">
+                  <span class="badge">1</span>
+                  Morbi leo risus
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="list-group">
+                <a href="#" class="list-group-item active">
+                  Cras justo odio
+                </a>
+                <a href="#" class="list-group-item">Dapibus ac facilisis in
+                </a>
+                <a href="#" class="list-group-item">Morbi leo risus
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="list-group">
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">List group item heading</h4>
+                  <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                </a>
+                <a href="#" class="list-group-item">
+                  <h4 class="list-group-item-heading">List group item heading</h4>
+                  <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>Panels</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  Basic panel
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-heading">Panel heading</div>
+                <div class="panel-body">
+                  Panel content
+                </div>
+              </div>
+
+              <div class="panel panel-default">
+                <div class="panel-body">
+                  Panel content
+                </div>
+                <div class="panel-footer">Panel footer</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Panel primary</h3>
+                </div>
+                <div class="panel-body">
+                  Panel content
+                </div>
+              </div>
+
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Panel success</h3>
+                </div>
+                <div class="panel-body">
+                  Panel content
+                </div>
+              </div>
+
+              <div class="panel panel-warning">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Panel warning</h3>
+                </div>
+                <div class="panel-body">
+                  Panel content
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="panel panel-danger">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Panel danger</h3>
+                </div>
+                <div class="panel-body">
+                  Panel content
+                </div>
+              </div>
+
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Panel info</h3>
+                </div>
+                <div class="panel-body">
+                  Panel content
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>Wells</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="well">
+                Look, I'm in a well!
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="well well-sm">
+                Look, I'm in a small well!
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="bs-component p">
+              <div class="well well-lg">
+                Look, I'm in a large well!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dialogs
+      ================================================== -->
+      <div class="bs-docs-section">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+              <h2 id="dialogs">Dialogs</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <h3>Modals</h3>
+            <div class="bs-component p">
+              <div class="modal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>One fine body…</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3>Popovers</h3>
+            <div class="bs-component p">
+              <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Left</button>
+
+              <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Top</button>
+
+              <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+              sagittis lacus vel augue laoreet rutrum faucibus.">Bottom</button>
+
+              <button type="button" class="btn btn-default" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Right</button>
+            </div>
+            <h3>Tooltips</h3>
+            <div class="bs-component p">
+              <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">Left</button>
+
+              <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="" data-original-title="Tooltip on top">Top</button>
+
+              <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on bottom">Bottom</button>
+
+              <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="" data-original-title="Tooltip on right">Right</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="source-modal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Source Code</h4>
+            </div>
+            <div class="modal-body">
+              <pre></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer id="footer">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="list-inline">
+              <li class="pull-right"><a href="#top">Back to top</a></li>
+              <li><a href="http://zone.spip.org/trac/spip-zone/browser/_plugins_/bootstrap">SPIP-Zone</a></li>
+              <li><a href="http://zone.spip.org/trac/spip-zone/log/_plugins_/bootstrap?format=rss&limit=100&mode=stop_on_copy">RSS</a></li>
+              <li><a href="http://spip.net">SPIP</a></li>
+              <li><a href="https://twitter.com/spip">Twitter</a></li>
+            </ul>
+            <p>
+	            Code licensed under the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a>.<br/>
+	            Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a target="_blank" href="http://glyphicons.com/">Glyphicons</a>.
+            </p>
+          </div>
+        </div>
+
+      </footer>
+    </div>
+
+	</body>
+</html>
