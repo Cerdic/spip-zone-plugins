@@ -31,7 +31,7 @@ function formulaires_charter_verifier_dist(){
 	$erreurs = array();
 	if (_request('cancel')){
 		$erreurs['message_erreur'] = ('Un long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur...');
-		$erreurs['text'] = ('Erreur<br />'."<input type='checkbox' name='confirm' id='confirm' value='oui' /><label for='confirm'>Confirmez que vous &ecirc;tes sur</label>");
+		$erreurs['text'] = ('Erreur<br />'."<input type='checkbox' name='confirm' id='confirm' value='oui' class='checkbox' /> <label for='confirm'>Confirmez que vous &ecirc;tes sur</label>");
 		$erreurs['text_obli'] = ('Erreur');
 		$erreurs['textarea'] = ('Un long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur, long message d\'erreur...');
 		$erreurs['textarea_pleine_largeur'] = ('Erreur');
