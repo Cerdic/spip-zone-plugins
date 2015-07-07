@@ -1,5 +1,13 @@
 @import "bootstrap/css/navbar.less";
 
+.navbar .navbar-inner {
+	.container-fluid;
+}
+.navbar .navbar-inner>.nav:not(.navbar-nav),
+.navbar .navbar-collapse>.nav:not(.navbar-nav) {
+	.navbar-nav;
+}
+
 @media (max-width: @grid-float-breakpoint-max) {
   .navbar-responsive {
     position: absolute;

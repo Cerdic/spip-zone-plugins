@@ -22,16 +22,16 @@ function navbar_responsive($nav, $class_collapse = 'nav-collapse-main'){
 	$uls = extraire_balises($nav,"ul");
 	$n = 1;
 	while ($ul = array_shift($uls)
-		AND strpos(extraire_attribut($ul,"class"),"nav")===false){
+		AND strpos($navclass = extraire_attribut($ul,"class"),"nav")===false){
 		$n++;
 	}
 	if ($ul){
 		$respnav = $nav;
 		$p = strpos($respnav,$ul);
 		$respnav = substr_replace($respnav,
-			'<a class="btn btn-navbar" data-toggle="collapse" data-target=".' . $class_collapse . '">' .
+			'<a class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".' . $class_collapse . '">' .
 				'<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>' .
-				"\n".'<div class="nav-collapse ' . $class_collapse . ' collapse">',$p,0);
+				"\n".'<div class="nav-collapse navbar-collapse ' . $class_collapse . ' collapse">',$p,0);
 		$l=strlen($respnav);$p=$l-1;
 		while ($n--){
 			$p = strrpos($respnav,"</ul>",$p-$l);
