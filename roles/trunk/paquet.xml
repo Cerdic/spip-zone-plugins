@@ -1,7 +1,7 @@
 <paquet
 	prefix="roles"
 	categorie="outil"
-	version="1.8.0"
+	version="1.8.1"
 	etat="test"
 	compatibilite="[3.1.0-dev;3.1.*]"
 	logo="prive/themes/spip/images/roles-64.png"
