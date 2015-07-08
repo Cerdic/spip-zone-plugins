@@ -42,43 +42,13 @@ function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible=
 	$resultats = array();
 
 	// On sauvegarde l'index de langue global si il existe car on va le modifier pendant le traitement.
-	$idx_lang_backup = '';
-	if (isset($GLOBALS['idx_lang'])) {
-		$idx_lang_backup = $GLOBALS['idx_lang'];
-	}
+	include_spip('inc/outiller');
+	sauvegarder_index_langue_global();
 
 	// Chargement du fichier de langue source (qui existe toujours) et du fichier de langue cible si il existe
 	$langues = array('source' => $langue_source, 'cible' => $langue_cible);
 	foreach ($langues as $_cle => $_langue) {
-		// On construit des variables qui seront utilisées en dehors de la boucle
-		$idx_lang = "i18n_" . $module . "_" . $_langue;
-		$fichier = ${"fichier_${_cle}"} = _DIR_RACINE . $ou_langue . $module . '_' . $_langue . '.php';
-
-		$backup_trad = array();
-		// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
-		// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
-		// déjà chargé, on ne peut pas présumer du fichier de langue source car il est possible d'avoir un même
-		// module dans plusieurs plugins.
-		if (!empty($GLOBALS[$idx_lang])) {
-			$backup_trad = $GLOBALS[$idx_lang];
-			unset($GLOBALS[$idx_lang]);
-		}
-
-		// On charge le fichier de langue si il existe dans l'arborescence $ou_langue
-		// (le fichier source existe toujours, le cible peut être absent)
-		// Ensuite on le stocke dans un tableau qui sera passé à la fonction de création du fichier de langue
-		if (file_exists($fichier)) {
-			$GLOBALS['idx_lang'] = $idx_lang;
-			include($fichier);
-		}
-		${"traductions_${_cle}"} = isset($GLOBALS[$idx_lang]) ? $GLOBALS[$idx_lang] : array();
-
-		// On rétablit le module backupé si besoin
-		if (isset($GLOBALS[$idx_lang]))
-			unset($GLOBALS[$idx_lang]);
-		if ($backup_trad) {
-			$GLOBALS[$idx_lang] = $backup_trad;
-		}
+		list(${"traductions_${_cle}"}, ${"fichier_${_cle}"}) = charger_module_langue($module, $_langue, $ou_langue);
 	}
 
 	// Récupérer le bandeau d'origine si il existe.
@@ -117,12 +87,7 @@ function inc_generer_fichier($module, $langue_source, $ou_langue, $langue_cible=
 	$fichier_langue = ecrire_fichier_langue_php($dossier_cible, $langue_cible, $module, $items_cible, $bandeau, $langue_source);
 
 	// On restaure l'index de langue global si besoin
-	if ($idx_lang_backup) {
-		$GLOBALS['idx_lang'] = $idx_lang_backup;
-	}
-	else {
-		unset($GLOBALS['idx_lang']);
-	}
+	restaurer_index_langue_global();
 
 	// On prepare le tableau des resultats
 	if (!$fichier_langue) {

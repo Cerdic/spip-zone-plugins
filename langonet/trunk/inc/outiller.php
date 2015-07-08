@@ -12,6 +12,64 @@ if (!defined('_LANGONET_PATTERN_CODE_LANGUE'))
 	define('_LANGONET_PATTERN_CODE_LANGUE', '%_(\w{2,3})(_\w{2,3})?(_\w{2,4})?$%im');
 
 
+function sauvegarder_index_langue_global() {
+	if (isset($GLOBALS['idx_lang'])) {
+		// Si l'index existe et n'est pas null alors on le sauvegarde en globale.
+		// (on préfère ce test à empty qui combine un isset et une comparaison de la valeur
+		// à false - "" en particulier)
+		$GLOBALS['idx_lang_backup'] = $GLOBALS['idx_lang'];
+		unset($GLOBALS['idx_lang']);
+	}
+}
+
+
+function restaurer_index_langue_global() {
+	if (isset($GLOBALS['idx_lang_backup'])) {
+		// Si il existe un index sauvegardé on le restaure dans 'idx_lang'
+		// et on supprime l'index de sauvegarde
+		$GLOBALS['idx_lang'] = $GLOBALS['idx_lang_backup'];
+		unset($GLOBALS['idx_lang_backup']);
+	}
+}
+
+
+function charger_module_langue($module, $langue, $ou_langue) {
+	$traductions = array();
+	$fichier_langue = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php';
+
+	// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
+	// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
+	// déjà chargé, on ne peut pas présumer du fichier de langue source car il est possible d'avoir un même
+	// module dans plusieurs plugins.
+	$idx_lang = "i18n_" . $module . "_" . $langue;
+	$traductions_backup = array();
+	if (isset($GLOBALS[$idx_lang])) {
+		$traductions_backup = $GLOBALS[$idx_lang];
+		unset($GLOBALS[$idx_lang]);
+	}
+
+	// On charge le fichier de langue si il existe dans l'arborescence $ou_langue
+	// Ensuite on le stocke dans un tableau qui sera passé à la fonction de création du fichier de langue
+	if (file_exists($fichier_langue)) {
+		// chargement du fichier de langue
+		$GLOBALS['idx_lang'] = $idx_lang;
+		include($fichier_langue);
+		// Sauvegarde
+		$traductions = $GLOBALS[$idx_lang];
+		// Suppression des index globaux ajoutés
+		unset($GLOBALS[$idx_lang]);
+		unset($GLOBALS['idx_lang']);
+	}
+
+	// On rétablit le module backupé si besoin
+	if ($traductions_backup) {
+		$GLOBALS[$idx_lang] = $traductions_backup;
+	}
+
+	return array($traductions, $fichier_langue);
+}
+
+
 /**
  * Calcul du représentant canonique d'une chaine de langue (_L ou <: :>).
  * C'est un transcodage ASCII, reduit aux 32 premiers caractères,
