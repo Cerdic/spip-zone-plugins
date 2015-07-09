@@ -31,12 +31,12 @@ function inc_lister_items($module, $langue, $ou_langue) {
 	// On charge le fichier de langue a lister
 	// si il existe dans l'arborescence $ou_langue
 	// (evite le mecanisme standard de surcharge SPIP)
-	list($liste_brute,$fichier_lang) = charger_module_langue($module, $langue, $ou_langue);
+	list($traductions,$fichier_langue) = charger_module_langue($module, $langue, $ou_langue);
 
 	// On restaure l'index de langue global si besoin
 	restaurer_index_langue_global();
 
-	if ($liste_brute) {
+	if ($traductions) {
 		// Recherche du gestionnaire de traduction TradLang par l'existence du rapport XML.
 		// Si le module est traduit avec ce gestionnaire, on peut identifier les états de traduction
 		// de chaque item. On peut aussi identifier la langue de référence
@@ -46,16 +46,16 @@ function inc_lister_items($module, $langue, $ou_langue) {
 		// Créer le tableau des items NEW et MODIF si le module est sous TradLang
 		$items_taggues = array();
 		if ($utilise_tradlang AND !$est_langue_reference) {
-			if ($contenu = spip_file_get_contents($fichier_lang)) {
+			if ($contenu = spip_file_get_contents($fichier_langue)) {
 				// la langue de référence ne possède pas les tags NEW ou MODIF
 				preg_match_all(_LANGONET_PATTERN_ETAT_ITEM, $contenu, $items_taggues);
 			}
 		}
 
 		// On range la table des items en y ajoutant l'état
-		ksort($liste_brute);
+		ksort($traductions);
 		$liste = array();
-		foreach ($liste_brute as $_item => $_traduction) {
+		foreach ($traductions as $_item => $_traduction) {
 			$liste[$_item]['traduction'] = $_traduction;
 			if ($utilise_tradlang) {
 				if ($est_langue_reference)
@@ -74,7 +74,7 @@ function inc_lister_items($module, $langue, $ou_langue) {
 
 		// On prepare le tableau des resultats
 		$resultats['items'] = $liste;
-		$resultats['total'] = count($liste_brute);
+		$resultats['total'] = count($traductions);
 		$resultats['tradlang'] = $utilise_tradlang;
 		$resultats['reference'] = $est_langue_reference;
 		$resultats['langue'] = $ou_langue . $module . '_' . $langue . '.php';

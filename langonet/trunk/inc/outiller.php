@@ -35,7 +35,7 @@ function restaurer_index_langue_global() {
 
 function charger_module_langue($module, $langue, $ou_langue) {
 	$traductions = array();
-	$fichier_langue = _DIR_RACINE . $ou_langue . $module . '_' . $langue . '.php';
+	$fichier_langue = (substr($ou_langue, 0, 3) != '../' ? _DIR_RACINE : '') . $ou_langue . $module . '_' . $langue . '.php';
 
 	// Si les traductions correspondant à l'index de langue sont déjà chargées on les sauvegarde pour
 	// les restaurer en fin de traitement. En effet, si l'index en cours de traitement est
