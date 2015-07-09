@@ -32,11 +32,12 @@ function lister_tables_sql() {
 	$tables = array();
 	foreach ($bases as $connect) {
 		$base = ($connect == 'connect') ? '' : $connect . ':';
-		$liste = sql_alltable('%', $connect);
-		sort($liste);
-		foreach ($liste as $table) {
-			$cle = $base . $table;
-			$tables[$cle] = $cle;
+		if ($liste = sql_alltable('%', $connect, 'continue')){
+			sort($liste);
+			foreach ($liste as $table) {
+				$cle = $base . $table;
+				$tables[$cle] = $cle;
+			}
 		}
 	}
 	return $tables;
