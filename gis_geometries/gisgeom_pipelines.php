@@ -61,6 +61,23 @@ function gisgeom_formulaire_charger($flux){
 			$flux['data']['geo'] = json_to_wkt(_request('geojson'));
 			$flux['data']['geojson'] = _request('geojson');
 		}
+		elseif(isset($_FILES['import']) AND $_FILES['import']['error'] != 4){
+			include_spip('action/ajouter_documents');
+			$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
+			$fichier = $_FILES['import']['tmp_name'];
+			$import = '';
+			lire_fichier($fichier, $donnees);
+			if($donnees){
+				find_in_path(_DIR_LIB_GEOPHP.'geoPHP.inc', '', true);
+				$geometry = geoPHP::load($donnees,$infos_doc['extension']);
+				$flux['data']['geojson'] = $geometry->out('json');
+				set_request('geojson',$geometry->out('json'));
+				// renseigner les coordonnées de l'objet à partir de son centroid
+				$centroid = $geometry->getCentroid();
+				set_request('lat',$centroid->getY());
+				set_request('lon',$centroid->getX());
+			}
+		}
 	}
 	return $flux;
 }
@@ -75,10 +92,10 @@ function gisgeom_formulaire_verifier($flux){
 	if ($flux['args']['form'] == 'editer_gis' AND isset($_FILES['import']) AND $_FILES['import']['error'] != 4) {
 		include_spip('action/ajouter_documents');
 		$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
-		if (in_array($infos_doc['extension'], array('gpx', 'kml','json'))) {
+		if (in_array($infos_doc['extension'], array('gpx', 'kml'))) {
 			unset($flux['data']['titre']);
 			unset($flux['data']['zoom']);
-		} else {
+		} else if($infos_doc['extension'] != 'json'){
 			$flux['data']['import'] = _T('medias:erreur_upload_type_interdit', array('nom'=>$_FILES['import']['name']));
 		}
 	}
@@ -169,7 +186,7 @@ function gisgeom_post_edition($flux){
 				"geo" => "GeomFromText('$wkt')",
 				"type" => sql_quote(_request('type'))
 			),
-			"id_gis = $id_gis"
+			"id_gis = ".intval($id_gis)
 		);
 	}
 	return $flux;

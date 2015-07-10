@@ -217,8 +217,7 @@ var geocoder;]
 		var geojson = new L.geoJson('', {[
 			style: (#ENV*{path_styles}|json_encode),
 			]onEachFeature: function (feature, layer) {
-				console.log(feature);
-				if (feature.type == 'Polygon' || feature.type == 'LineString') {
+				if (feature.type == 'Polygon' || feature.type == 'MultiPolygon' || feature.type == 'LineString') {
 					// centrer la carte sur les bounds de l'objet
 					form_map.fitBounds(layer.getBounds());
 					// activer l'édition sur l'objet
