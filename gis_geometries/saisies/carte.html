@@ -212,6 +212,49 @@ var geocoder;]
 		}).addTo(form_map);
 		geojson.addData(data);
 		</BOUCLE_gis>
+		</B_gis>
+		<BOUCLE_si_geojson(CONDITION){si #ENV{geojson}}>
+		var geojson = new L.geoJson('', {[
+			style: (#ENV*{path_styles}|json_encode),
+			]onEachFeature: function (feature, layer) {
+				console.log(feature);
+				if (feature.type == 'Polygon' || feature.type == 'LineString') {
+					// centrer la carte sur les bounds de l'objet
+					form_map.fitBounds(layer.getBounds());
+					// activer l'édition sur l'objet
+					layer.editing.enable();
+					// surveiller les changements sur les points de l'objet
+					layer.on("edit", function(e){
+						$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
+						var center = e.target.getBounds().getCenter();
+						$('#champ_#ENV{champ_lat,lat}').val(center.lat);
+						$('#champ_#ENV{champ_lon,lon}').val(center.lng);
+					});
+				} else if (feature.geometry.type == 'Point') {
+					marker = layer;
+					if (feature.properties && feature.properties.icon){
+						layer.setIcon(new L.Icon({
+							iconUrl: feature.properties.icon,
+							iconSize: new L.Point( feature.properties.icon_size\[0\], feature.properties.icon_size\[1\] ),
+							iconAnchor: new L.Point( feature.properties.icon_anchor\[0\], feature.properties.icon_anchor\[1\] ),
+							popupAnchor: new L.Point( feature.properties.popup_anchor\[0\], feature.properties.popup_anchor\[1\] )
+						}));
+					}
+					if (feature.properties && feature.properties.title){
+						layer.bindPopup(feature.properties.title);
+					}
+					// rendre le marker draggable
+					layer.options.draggable = true;
+					// surveiller les changements sur le point
+					layer.on("dragend", function(e){
+						$('#champ_#ENV{champ_geojson,geojson}').val(JSON.stringify(e.target.toGeoJSON()));
+						maj_inputs(form_map,e.target._latlng,'click');
+					});
+				}
+			}
+		}).addTo(form_map);
+		geojson.addData([(#ENV**{geojson}|html_entity_decode)]);
+		</BOUCLE_si_geojson>
 		
 		[(#REM) afficher les outils de dessin uniquement lors de la création d'objet ]
 		[(#ENV{nodraw}|non)

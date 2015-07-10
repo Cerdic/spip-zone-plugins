@@ -57,6 +57,10 @@ function gisgeom_formulaire_charger($flux){
 			$flux['data']['geo'] = $wkt;
 			$flux['data']['geojson'] = wkt_to_json($wkt);
 		}
+		elseif(_request('geojson')){
+			$flux['data']['geo'] = json_to_wkt(_request('geojson'));
+			$flux['data']['geojson'] = _request('geojson');
+		}
 	}
 	return $flux;
 }
@@ -71,7 +75,7 @@ function gisgeom_formulaire_verifier($flux){
 	if ($flux['args']['form'] == 'editer_gis' AND isset($_FILES['import']) AND $_FILES['import']['error'] != 4) {
 		include_spip('action/ajouter_documents');
 		$infos_doc = verifier_upload_autorise($_FILES['import']['name']);
-		if (in_array($infos_doc['extension'], array('gpx', 'kml'))) {
+		if (in_array($infos_doc['extension'], array('gpx', 'kml','json'))) {
 			unset($flux['data']['titre']);
 			unset($flux['data']['zoom']);
 		} else {
