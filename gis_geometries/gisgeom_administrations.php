@@ -26,6 +26,8 @@ function gisgeom_upgrade($nom_meta_base_version,$version_cible){
 			sql_updateq("spip_gis", array("type"=>"Point"));
 			// ajouter un index sur le champ geo
 			sql_alter("TABLE spip_gis ADD SPATIAL INDEX (geo)");
+			include_spip('inc/invalideur');
+			purger_repertoire(_DIR_VAR.'cache-js');
 			ecrire_meta($nom_meta_base_version,$current_version="1.0.0",'non');
 		}
 	}
