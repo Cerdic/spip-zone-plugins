@@ -10,7 +10,7 @@
         </multi>
     </auteur>
     <version>0.2.1</version>
-    <icon>prive/themes/spip/images/photoswipe-32.png</icon>
+    <icon>photoswipe-128.png</icon>
     <etat>test</etat>
     <description>Syteme de Zoom de photos</description>
     <lien>http://photoswipe.com/</lien>
