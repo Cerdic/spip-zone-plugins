@@ -8,6 +8,12 @@
 	<form method="post" action="#ENV{action}">
 	<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#SAISIE{radio, lier_document,
+			label=<:medias_dereferencer:lier_document_label:>,
+			explication=<:medias_dereferencer:lier_document_explication:>,
+			datas=#ARRAY{
+				oui,<:medias_dereferencer:lier_document_choix_oui:>,
+				non,<:medias_dereferencer:lier_document_choix_non:>}})]
 
 		<input type="hidden" name="_meta_casier" value="medias_dereferencer" />
 		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>

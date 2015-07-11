@@ -222,7 +222,7 @@ function medias_maj_documents_non_lies()
                     'id_objet' => $document['id_objet'],
                     'objet' => $document['objet'],
                     'vu' => $document['vu'],
-                ))) {
+                )) and lire_config('medias_dereferencer/lier_document') === 'oui') {
                     $message_log[] = 'Le lien entre le document #'.$document['id_document'].' et l\'objet '.$document['objet'].' #'.$document['id_objet'].' a bien été inséré en base de données avec la vu \''.$document['vu'].'\'';
                 }
                 // et on met à jour le statut dudit document si le statut est différent uniquement.
