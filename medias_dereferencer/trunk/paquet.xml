@@ -14,7 +14,7 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="medias_dereferencer_autorisations.php" />
-	<pipeline nom="taches_generales_cron" inclure="medias_dereferencer_pipelines.php" />
 
+	<pipeline nom="taches_generales_cron" inclure="medias_dereferencer_pipelines.php" />
 
 </paquet>
