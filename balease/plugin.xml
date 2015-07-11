@@ -17,5 +17,10 @@
 <auteur>[tetue->http://spip.tetue.net], 2015</auteur>
 <licence>GPL</licence>
 
+<bouton id='balease_bdd_bando' parent='bando_squelette'>
+    <icone>prive/themes/spip/images/balease_bdd-16.png</icone>
+    <titre>balease:titre_menus_balease_bdd</titre>
+    <url>balease_bdd</url>
+</bouton>
 <necessite id="SPIP" version="[2.1.0;3.1.99]" />
 </plugin>
