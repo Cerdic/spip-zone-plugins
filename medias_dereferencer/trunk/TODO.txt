@@ -1,0 +1,27 @@
+# Sélectionner les documents publiés liés à des articles non publiés.
+SELECT * FROM spip_documents WHERE id_document IN (SELECT DISTINCT id_document FROM spip_documents_liens WHERE objet='article' AND id_objet IN (SELECT id_article FROM spip_articles WHERE statut NOT IN ('publie'))) AND statut IN ('publie')
+
+# Sélectionner les documents non publiés liés à des articles publiés
+SELECT * FROM spip_documents WHERE id_document IN (SELECT DISTINCT id_document FROM spip_documents_liens WHERE objet='article' AND id_objet IN (SELECT id_article FROM spip_articles WHERE statut IN ('publie'))) AND statut NOT IN ('publie')
+
+# Sélectionner les liens de documents liés à des articles qui n'existent plus en BDD
+SELECT * FROM spip_documents_liens WHERE objet='article' AND id_objet NOT IN (SELECT id_article FROM spip_articles)
+
+
+
+# Sélectionner les documents publiés liés à des rubriques non publiés.
+SELECT * FROM spip_documents WHERE id_document IN (SELECT DISTINCT id_document FROM spip_documents_liens WHERE objet='rubrique' AND id_objet IN (SELECT id_rubrique FROM spip_rubriques WHERE statut NOT IN ('publie'))) AND statut IN ('publie')
+
+# Sélectionner les documents non publiés liés à des rubriques publiés
+SELECT * FROM spip_documents WHERE id_document IN (SELECT DISTINCT id_document FROM spip_documents_liens WHERE objet='rubrique' AND id_objet IN (SELECT id_rubrique FROM spip_rubriques WHERE statut IN ('publie'))) AND statut NOT IN ('publie')
+
+# Sélectionner les liens de documents liés à des articles qui n'existent plus en BDD
+SELECT * FROM spip_documents_liens WHERE objet='rubrique' AND id_objet NOT IN (SELECT id_rubrique FROM spip_rubriques)
+
+
+
+# Lister les objets liés à des documents.
+SELECT DISTINCT objet FROM spip_documents_liens
+
+
+SELECT id_document,statut FROM spip_documents WHERE id_document IN (SELECT DISTINCT id_document FROM spip_documents_liens WHERE objet='article' AND id_objet IN (SELECT id_article FROM spip_articles WHERE statut NOT IN ('publie'))) AND statut IN ('publie')

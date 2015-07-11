@@ -1,0 +1,20 @@
+<paquet
+	prefix="medias_dereferencer"
+	categorie="statistique"
+	version="1.0.2"
+	etat="dev"
+	compatibilite="[3.0.9;3.0.*]"
+	logo="prive/themes/spip/images/medias_dereferencer-64.png"
+	documentation=""
+>
+	<nom>Déréférencer les médias</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="medias_dereferencer_autorisations.php" />
+	<pipeline nom="taches_generales_cron" inclure="medias_dereferencer_pipelines.php" />
+
+
+</paquet>
