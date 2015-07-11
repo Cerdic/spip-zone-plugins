@@ -3,7 +3,7 @@
     categorie="navigation"
     version="3.0.1"
     etat="stable"
-    compatibilite="[1.9.2;3.0.*)"
+    compatibilite="[1.9.2;3.0.*]"
     logo="prive/themes/spip/images/logo_menu_50.png"
     documentation="http://contrib.spip.net/?article3055"
 >       
