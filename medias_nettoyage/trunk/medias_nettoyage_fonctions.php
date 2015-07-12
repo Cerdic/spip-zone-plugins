@@ -36,6 +36,7 @@ function medias_lister_extensions_documents()
     $extensions[] = 'vignettes';
     // Sécurité, on enlève les valeurs vides du tableau d'extensions.
     $extensions = array_filter($extensions);
+    sort($extensions);
 
     return $extensions;
 }
@@ -135,7 +136,7 @@ function medias_lister_documents_bdd()
     }
 
     // On enlève les éventuels doubles slash dans les valeurs du tableau.
-    $docs_fichiers[] = preg_replace("/\/\//", '/', $docs_fichiers);
+    $docs_fichiers = preg_replace("/\/\//", '/', $docs_fichiers);
     // Sécurité, on enlève les valeurs vides du tableau
     $docs_fichiers = array_filter($docs_fichiers);
     // On trie dans l'ordre alphabétique :
@@ -860,7 +861,7 @@ function medias_lister_repertoires_orphelins_fichiers_taille()
 function test_medias()
 {
     $test = array();
-    $test = medias_lister_repertoires();
+    $test = medias_lister_documents_bdd();
 
     return $test;
 }
