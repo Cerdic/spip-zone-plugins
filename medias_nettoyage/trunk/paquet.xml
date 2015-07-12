@@ -1,7 +1,7 @@
 <paquet
 	prefix="medias_nettoyage"
 	categorie="outil"
-	version="0.10.4"
+	version="0.10.5"
 	etat="stable"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/medias_nettoyage-64.png"

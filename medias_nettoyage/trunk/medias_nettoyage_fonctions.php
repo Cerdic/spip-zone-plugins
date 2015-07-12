@@ -221,6 +221,7 @@ function medias_lister_documents_bdd_orphelins_taille()
 
 /**
  * Lister les documents présents dans le répertoire des extensions de IMG/
+* Ne pas prendre en compte les fichiers 'index.html' et 'robots.txt' qui peuvent être présent
  *
  * @uses medias_lister_extensions_documents()
  * @uses medias_lister_logos_fichiers()
@@ -233,6 +234,7 @@ function medias_lister_documents_bdd_orphelins_taille()
 function medias_lister_documents_repertoire ($repertoire_img = _DIR_IMG)
 {
     $docs_fichiers = array();
+    $black_list = array(0 => $repertoire_img.'index.html', 1 => $repertoire_img.'robots.txt');
 
     foreach (medias_lister_extensions_documents() as $extension) {
         // Par sécurité, on vérifie que l'extension a bel
@@ -240,6 +242,8 @@ function medias_lister_documents_repertoire ($repertoire_img = _DIR_IMG)
         if (is_dir($repertoire_img . $extension)) {
             // On va chercher dans IMG/$extension/*.*
             $fichiers = glob($repertoire_img . "$extension/*.*");
+            $black_list[] = $repertoire_img . "$extension/index.html";
+            $black_list[] = $repertoire_img . "$extension/robots.txt";
             if (is_array($fichiers) and count($fichiers) > 0) {
                 foreach ($fichiers as $fichier) {
                     $docs_fichiers[] = preg_replace("/\/\//", "/", $fichier);
@@ -261,6 +265,7 @@ function medias_lister_documents_repertoire ($repertoire_img = _DIR_IMG)
             medias_lister_logos_fichiers()
         )
     );
+    $docs_fichiers = array_diff($docs_fichiers, $black_list);
     sort($docs_fichiers);
 
     return (array) $docs_fichiers;
