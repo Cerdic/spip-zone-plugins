@@ -1,0 +1,25 @@
+<paquet
+	prefix="zcore_init"
+	categorie="outil"
+	version="0.1.1"
+	etat="experimental"
+	compatibilite="[3.0.9;3.0.*]"
+	logo="prive/themes/spip/images/zcore_init-64.png"
+	documentation=""
+>
+	<!--
+		Paquet genere le 2015-07-12 20:44:02
+	-->
+
+	<nom>Initialiser ses squelettes Zcore</nom>
+
+	<auteur>Teddy Payet</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="zcore" compatibilite="[2.4.5;]" />
+
+
+	<pipeline nom="autoriser" inclure="zcore_init_autorisations.php" /> 
+
+
+</paquet>

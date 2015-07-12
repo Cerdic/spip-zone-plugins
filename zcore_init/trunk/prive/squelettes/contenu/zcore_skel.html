@@ -1,0 +1,95 @@
+<h1><:zcore_init:titre_page_zcore_skel:></h1>
+
+<div class="liste repertoires zi">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><:zcore_init:titre_controle:></th>
+                <th><:zcore_init:titre_verification:></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><:zcore_init:check_presence_globale_z_blocs:></td>
+                <td>[(#EVAL{$GLOBALS\['z_blocs'\]}|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                })]</td>
+            </tr>
+            <B_repertoires_zcore>
+            <tr>
+                <td colspan="2">
+                    <strong>[(#EVAL{_ZI_REP_SKEL})]</strong>
+                </td>
+            </tr>
+            <BOUCLE_repertoires_zcore (DATA) {source table, #VAL|zi_repertoire_skel_lister} {si #VAL|zi_repertoire_skel_lister}>
+            <tr>
+                <td>
+                    #VALEUR
+                </td>
+                <td>
+                [(#VALEUR|is_dir|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                })]</td>
+            </tr>
+            </BOUCLE_repertoires_zcore>
+            </B_repertoires_zcore>
+            <B_repertoires>
+            <tr>
+                <td colspan="2">
+                    <strong>[(#EVAL{_DIR_SQUELETTES})]</strong>
+                </td>
+            </tr>
+            <BOUCLE_repertoires (DATA) {source table, #VAL|zi_repertoire_skel_defaut} {si #VAL|zi_repertoire_skel_defaut}>
+            <tr>
+                <td>
+                    [(#EVAL{_DIR_SQUELETTES})][(#VALEUR)]
+                </td>
+                <td>
+                [(#EVAL{_DIR_SQUELETTES}|concat{#VALEUR}|is_dir|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                })]</td>
+            </tr>
+            </BOUCLE_repertoires>
+            </B_repertoires>
+        </tbody>
+    </table>
+</div>
+
+<B_objets>
+<div class="liste objets zi">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><:zcore_init:titre_objets:></th>
+                <th>[(#EVAL{_ZI_REP_SKEL})]</th>
+                <th>[(#EVAL{_DIR_SQUELETTES})]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <BOUCLE_objets (DATA) {source table, #VAL|zi_lister_tables} {par cle}>
+            <tr>
+                <td>[(#VALEUR{texte_objet}|_T)]</td>
+                <td>[(#EVAL{_ZI_REP_SKEL}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                })] [(#CLE|objet_type).html]</td>
+                <td>[(#EVAL{_DIR_SQUELETTES}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                })] [(#CLE|objet_type).html]</td>
+            </tr>
+            </BOUCLE_objets>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</B_objets>
+
+[<pre>(#VAL|zi_template_skel_creer|print_r{1})</pre>]
