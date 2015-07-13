@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     //
     'titre_controle' => 'Contrôle',
     'titre_objets' => 'Objets éditoriaux',
+    'titre_page_zcore_skel' => 'Initialiser ses squelettes Zcore',
     'titre_verification' => 'Vérification',
 
     // Z

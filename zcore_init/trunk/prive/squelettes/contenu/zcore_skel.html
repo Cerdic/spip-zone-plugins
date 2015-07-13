@@ -11,7 +11,7 @@
         <tbody>
             <tr>
                 <td><:zcore_init:check_presence_globale_z_blocs:></td>
-                <td>[(#EVAL{$GLOBALS\['z_blocs'\]}|?{
+                <td>[(#VAL|zi_blocs_verifier|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })]</td>
