@@ -129,6 +129,13 @@ function zi_lister_tables()
 
     $tables_objets_sql = lister_tables_objets_sql();
 
+    // *****
+    // On nettoie les tables
+    // *****
+    // On exclu les tables que l'on ne désire pas avoir
+    foreach ($$tables_a_exclure as $table_exclue) {
+        unset($tables_objets_sql[$table_exclue]);
+    }
     foreach ($tables_objets_sql as $table => $champs) {
         // Si l'objet n'a pas de page de vue pour le public,
         // alors on ne garde pas cet objet pour zcore_init

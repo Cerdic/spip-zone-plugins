@@ -1,7 +1,7 @@
 <paquet
 	prefix="zcore_init"
 	categorie="outil"
-	version="0.2.0"
+	version="0.2.1"
 	etat="experimental"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/zcore_init-64.png"
