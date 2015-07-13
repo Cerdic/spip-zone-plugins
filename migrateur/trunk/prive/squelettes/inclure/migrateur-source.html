@@ -51,14 +51,14 @@ $(document).ready(function() {
 
 						$logs.append(data);
 						if ($logs.length) {
-							$logs.scrollTop($logs\[0\].scrollHeight - $logs.height());
+							$logs.scrollTop($logs.eq(0).scrollHeight - $logs.height());
 						}
 					}
 				})
 				.fail(function(data) {
 					$logs.append(data);
 					if ($logs.length) {
-						$logs.scrollTop($logs\[0\].scrollHeight - $logs.height());
+						$logs.scrollTop($logs.eq(0).scrollHeight - $logs.height());
 					}
 				});
 		}, 1000);

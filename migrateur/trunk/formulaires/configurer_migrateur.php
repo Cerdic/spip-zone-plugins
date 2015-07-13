@@ -103,7 +103,7 @@ function formulaires_configurer_migrateur_traiter_dist(){
 		$data['url_source'] = _request('url_source');
 	}
 
-	ecrire_config('migrateur', $data);
+	ecrire_config('migrateur/', $data);
 
 	return array(
 		'message_ok'=>_T('config_info_enregistree'),

@@ -146,7 +146,7 @@ $(document).ready(function() {
 
 						$log.append(this_response);
 						if ($log.length) {
-							$log.scrollTop($log\[0\].scrollHeight - $log.height());
+							$log.scrollTop($log.eq(0).scrollHeight - $log.height());
 						}
 					}
 				}
@@ -156,7 +156,7 @@ $(document).ready(function() {
 				//console.log('Complete response = ' + data);
 				$.migrateur_close($this);
 				if ($log.length) {
-					$log.scrollTop($log\[0\].scrollHeight - $log.height());
+					$log.scrollTop($log.eq(0).scrollHeight - $log.height());
 				}
 			})
 			.fail(function(data) {

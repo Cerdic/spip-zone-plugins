@@ -24,7 +24,7 @@ $GLOBALS['MIGRATEUR_ETAPES'] = array(
 		'test' => false,  // mode test : si true, liste les différences (nombre de fichiers nouveaux, modifiés, supprimés) mais ne modifie rien.
 	)),
 
-	'mig_bdd_source_make_and_get_dump_sql' => 'Crée et récupère un dump SQL de la base de données source'
+	'mig_bdd_source_make_and_get_dump_sql' => 'Crée et récupère un dump SQL de la base de données source',
 	# Options possibles (et valeurs par défaut) :
 	#'mig_bdd_source_make_and_get_dump_sql' => array('Crée et récupère un dump SQL de la base de données source', array(
 		'gzip_si_possible' => true,      // compresse la base de données (si possible)
