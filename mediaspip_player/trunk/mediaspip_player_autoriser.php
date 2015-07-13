@@ -31,6 +31,9 @@ if(spip_version_compare($GLOBALS['spip_version_branche'], '3.0.20', '<')){
 	 * @return bool 
 	 */ 
 	function autoriser_associerdocuments($faire, $type, $id, $qui, $opt){
+		if (intval($id)<0 AND $id==-$qui['id_auteur']){
+			return true;
+		}
 		return autoriser('modifier',$type,$id,$qui,$opt); 
 	} 
 	}
