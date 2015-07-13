@@ -219,13 +219,36 @@ function proj_callback_factures_ligne($couples_inseres, $couples_anciens) {
  * Suppression des vignettes de logo de SPIP 1.8.3
 **/ 
 function migrateur_exemple_supprimer_vignettes_logos() {
-	if (!defined('_DIR_IMG')) {
-		return false;
-	}
-	foreach (scandir(_DIR_IMG) as $filename) {
+	$ori = MIGRATEUR_DESTINATION_DIR . 'IMG/';
+	foreach (scandir($ori) as $filename) {
 		if (preg_match('/.*-[0-9]+x[0-9]+\.(jpg|gif|png)/i', $filename)) {
-			unlink(_DIR_IMG . $filename);
+			unlink($ori . $filename);
 		}
 	}
 }
 
+
+
+
+/**
+ * Test ssh uptime
+ *
+ * Tente de se connecter en ssh au serveur source et d'obtenir
+ * l'uptime du serveur
+**/
+function migrateur_test_ssh_uptime() {
+	$source = migrateur_source();
+	if ($source->ssh) {
+		$cmd = $source->ssh->obtenir_commande_connexion();
+		if ($cmd) {
+			$run = "$cmd uptime 2>&1";
+			migrateur_log($run);
+			exec($run, $output, $err);
+			migrateur_log(implode("\n", $output));
+		} else {
+			migrateur_log("Pas de commande 'ssh' locale !");
+		}
+	} else {
+		migrateur_log("Pas de serveur distant défini.");
+	}
+}

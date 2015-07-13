@@ -318,3 +318,21 @@ function migrateur_ajouter_plugins_actifs($plugins) {
 		ecrire_config('plugin', $plugins_actifs);
 	}
 }
+
+
+/**
+ * Retourne un Client de migrateur (pour demander des choses au Serveur).
+ *
+ * @return \SPIP\Migrateur\Client
+**/
+function migrateur_client() {
+	include_spip('inc/config');
+
+	$client = new \SPIP\Migrateur\Client(
+		lire_config('migrateur/auth_key'),
+		lire_config('migrateur/aes_key'),
+		lire_config('migrateur/url_source')
+	);
+	$client->setLogger(new \SPIP\Migrateur\Client\Log());
+	return $client;
+}

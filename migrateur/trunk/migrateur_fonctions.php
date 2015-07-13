@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Fonctions du migrateur
+ *
+ * @package SPIP\Migrateur\Fonctions
+**/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 
 /**
  * Retourne la liste des étapes de migration
@@ -8,7 +16,13 @@
 **/
 function migrateur_etapes() {
 	include_spip('migrateur/config');
-	return $GLOBALS['MIGRATEUR_ETAPES'] ? $GLOBALS['MIGRATEUR_ETAPES'] : array();
+	$etapes = $GLOBALS['MIGRATEUR_ETAPES'] ? $GLOBALS['MIGRATEUR_ETAPES'] : array();
+	foreach ($etapes as $k => $etape) {
+		if (is_array($etape)) {
+			$etapes[$k] = reset($etape);
+		}
+	}
+	return $etapes;
 }
 
 
@@ -34,4 +48,20 @@ function migrateur_derniere_etape() {
 	}
 
 	return $nb = 0;
+}
+
+/**
+ * Vérifier la péremption d'une clé d'authentification
+ *
+ * Validité de 12h.
+ * 
+ * @param string $cle
+ *     Clé au format '{date}@{hash}'
+ * @return false|int
+ *     false si la clé est périmée ou non renseignée,
+ *     nombre d'heures de validité restant sinon
+**/
+function migrateur_verifier_peremption_auth_key($key) {
+	include_spip('migrateur_options');
+	return SPIP\Migrateur\Serveur::verifier_peremption_auth_key($key);
 }

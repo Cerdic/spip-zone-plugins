@@ -1,19 +1,6 @@
 CHANGELOG
 =========
 
-Version 3.0
------------
-
-Suppression de tout ce qui concerne la connexion SSH et Rsync, trop compliqué à utiliser
-en fonction des différentes permissions des serveurs ;
-
-Gestion d'une relation client / serveur sécurisée pour les transferts, par HTTP,
-(un peu comme le plugin 'migration' d'ailleurs) qui prend bien plus de temps pour effectuer
-certaines taches entre les serveurs, tel que la syncronisation de IMG/ par exemple,
-mais qui simplifie grandement la mise en place de l'outil.
-
-
-
 
 Version 2.6
 -----------

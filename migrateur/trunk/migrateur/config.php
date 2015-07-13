@@ -4,7 +4,7 @@
 // ------
 
 $GLOBALS['MIGRATEUR_ETAPES'] = array(
-	'00_rien' => 'Il vous faut surcharger <code>migrateur/config.php</code>',
+	'mig_test_rien' => 'Il vous faut surcharger <code>migrateur/config.php</code>',
 );
 
 /*
@@ -14,44 +14,27 @@ $GLOBALS['MIGRATEUR_ETAPES'] = array(
  */
 /*
 $GLOBALS['MIGRATEUR_ETAPES'] = array(
-	'mig_rsync_img'       => 'Synchroniser le répertoire IMG',
-	'mig_exporter_bdd'    => 'Exporter la base de données source',
-	'mig_transferer_bdd'  => 'Transfert des données SQL sur la base de données destination',
+	#'mig_test_rien'          => 'Ça ne fait rien',
+	#'mig_test_stream_logs'   => 'Tester le stream des logs locaux',
+	'mig_test_communication' => "Tester la communication avec le serveur source",
 
-	'supprimer_tables_inutiles' => 'Suppression des tables SQL inutiles',
-	'activer_plugins' => 'Activer les plugins',
-	'configurer_site' => 'Changer les configurations du site',
+	'mig_sync_img'                  => 'Synchroniser le répertoire IMG',
+	#'mig_sync'                     => array('Synchroniser le répertoire IMG', array(
+		'repertoire' => 'IMG',
+		'test' => false,  // mode test : si true, liste les différences (nombre de fichiers nouveaux, modifiés, supprimés) mais ne modifie rien.
+	)),
+
+	'mig_bdd_source_make_and_get_dump_sql' => 'Crée et récupère un dump SQL de la base de données source'
+	# Options possibles (et valeurs par défaut) :
+	#'mig_bdd_source_make_and_get_dump_sql' => array('Crée et récupère un dump SQL de la base de données source', array(
+		'gzip_si_possible' => true,      // compresse la base de données (si possible)
+		'mysqldump_si_possible' => true, // utilise mysqldump si disponible, sinon phpdump (plus long, mais parfois plus simple à mettre en œuvre)
+	)),
+
+	'mig_bdd_destination_put_dump'  => 'Écrase la base de données actuelle par le dernier dump SQL présent dans tmp/dump)',
+
+	#'supprimer_tables_inutiles' => 'Suppression des tables SQL inutiles',
+	#'activer_plugins' => 'Activer les plugins',
+	#'configurer_site' => 'Changer les configurations du site',
 );
 */
-
-// Configuration
-// =============
-
-// Origine
-// -------
-define('MIGRATEUR_SOURCE_DIR', '/sites/mon_domaine.fr/html/');
-
-// SQL source
-define('MIGRATEUR_SOURCE_SQL_USER', 'user_prod');
-define('MIGRATEUR_SOURCE_SQL_PASS', '*******');
-define('MIGRATEUR_SOURCE_SQL_BDD', 'db_prod');
-
-// Source via SSH (serveur source ailleurs que serveur dev, accès par clé SSH)
-# define('MIGRATEUR_SOURCE_SSH_SERVER', 'dev.domain.tld');
-# define('MIGRATEUR_SOURCE_SSH_USER',   'username_ssh');
-# define('MIGRATEUR_SOURCE_SSH_PORT',   22);
-
-
-
-// Destination
-// -----------
-define('MIGRATEUR_DESTINATION_DIR', '/sites/mon_domaine.fr/sd/dev/html/');
-
-// SQL destination
-define('MIGRATEUR_DESTINATION_SQL_USER', 'user_dev');
-define('MIGRATEUR_DESTINATION_SQL_PASS', '*******');
-define('MIGRATEUR_DESTINATION_SQL_BDD', 'db_dev');
-
-// Nom du fichier d'export SQL
-define('MIGRATEUR_NOM_EXPORT_SQL', 'export_source.sql');
-
