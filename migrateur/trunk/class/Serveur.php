@@ -38,23 +38,12 @@ class Serveur {
 		}
 
 		$action = $request['message']['action'];
-		$ActionClass = "SPIP\\Migrateur\\Serveur\\Action\\" . $action;
-
-		if (!class_exists($ActionClass)) {
-			$this->log("Action inconnue");
+		if (!$act = $this->setAction($action)) {
 			$this->transmettre_json(array('error' => "Action inconnue"));
 			return false;
 		}
 
 		$data = empty($request['message']['data']) ? null : $request['message']['data'];
-
-		$act = new $ActionClass();
-		$act->setServeur($this);
-		$act->setSource(migrateur_infos());
-		$act->setLogger($this->logger);
-
-		// Certains calculs peuvent être très long. On augmente le timeout
-		@set_time_limit(0);
 
 		// Note: certaines actions retournent directement du contenu (ie: GetFile)
 		//      et quittent (exit) sans retourner de message
@@ -66,6 +55,32 @@ class Serveur {
 		$this->transmettre_json($reponse);
 		exit;
 	}
+
+
+	/**
+	 * Trouve la classe d'action correspondante et prépare son exécution
+	 *
+	 * @param string $action Nom de l'action
+	 * @return bool True si trouvée, false sinon
+	**/
+	public function setAction($action) {
+		$ActionClass = "SPIP\\Migrateur\\Serveur\\Action\\" . $action;
+
+		if (!class_exists($ActionClass)) {
+			return false;
+		}
+
+		$act = new $ActionClass();
+		$act->setServeur($this);
+		$act->setSource(migrateur_infos());
+		$act->setLogger($this->logger);
+
+		// Certains calculs peuvent être très long. On augmente le timeout
+		@set_time_limit(0);
+
+		return $act;
+	}
+
 
 	/**
 	 * Retourne le json transmis, si les clés d'authentification correspondent

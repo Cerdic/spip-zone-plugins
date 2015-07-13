@@ -336,3 +336,30 @@ function migrateur_client() {
 	$client->setLogger(new \SPIP\Migrateur\Client\Log());
 	return $client;
 }
+
+
+
+/**
+ * Éxécute une action serveur de migrateur (pour se demander des choses à soi-même !).
+ *
+ * @note :
+ *    cet outil peut être utile pour appeler des actions serveur
+ *    sur soi-même alors qu'on est pourtant le site destination,
+ *    par exemple pour demander l'action d'export de bdd (la sienne de dev).
+ * 
+ * @return mixed Résultat de l'action
+**/
+function migrateur_action_serveur_locale($action, $options = array()) {
+	include_spip('inc/config');
+
+	$serveur = new \SPIP\Migrateur\Serveur(
+		lire_config('migrateur/auth_key'),
+		lire_config('migrateur/aes_key')
+	);
+	$serveur->setLogger(new \SPIP\Migrateur\Client\Log());
+	if ($act = $serveur->setAction($action)) {
+		return $act->run($options);
+	}
+	$serveur->log("Action $action non réussie.");
+	return false;
+}
