@@ -36,16 +36,16 @@ function zi_repertoire_skel_defaut()
 /**
  * Cette fonction va créer les répertoires pour le plugin.
  */
-function zi_repertoire_skel_creer()
+function zi_repertoire_skel_creer($repertoire_zcore = _ZI_DIR_SQUELETTES)
 {
     $repertoires = zi_repertoire_skel_defaut();
     foreach ($repertoires as $repertoire) {
-        if (!is_dir(_ZI_REP_SKEL.$repertoire)) {
-            @mkdir(_ZI_REP_SKEL.$repertoire, _SPIP_CHMOD, true);
+        if (!is_dir($repertoire_zcore.$repertoire)) {
+            @mkdir($repertoire_zcore.$repertoire, _SPIP_CHMOD, true);
         }
     }
 
-    return;
+    return true;
 }
 
 /**
@@ -53,10 +53,9 @@ function zi_repertoire_skel_creer()
  * Si des répertoires ne font plus partis des répertoires de la globale 'z_blocs',
  * ces répertoires seront supprimés s'ils sont vides.
  */
-function zi_repertoire_skel_maj()
+function zi_repertoire_skel_maj($repertoire_zcore = _ZI_DIR_SQUELETTES)
 {
     $repertoires_defaut = zi_repertoire_skel_defaut();
-    $repertoire_zcore = _ZI_REP_SKEL;
     $black_list = array('..', '.', '.svn', '.DS_Store');
 
     if (is_dir($repertoire_zcore)) {
@@ -85,10 +84,9 @@ function zi_repertoire_skel_maj()
  *         `false` : si le répertoire 'squelettes_zcore' n'a pas été créé.
  *         `array` : liste des répertoires.
  */
-function zi_repertoire_skel_lister()
+function zi_repertoire_skel_lister($repertoire_zcore = _ZI_DIR_SQUELETTES)
 {
     $repertoires = array();
-    $repertoire_zcore = _ZI_REP_SKEL;
     // On crée les répertoires.
     zi_repertoire_skel_creer();
     // On vérifie que $repertoire passé en paramètre est bien un répertoire existant.
@@ -133,11 +131,11 @@ function zi_lister_tables()
     return $tables_objets_sql;
 }
 
-function zi_template_skel_creer($cible = _ZI_REP_SKEL)
+function zi_template_skel_creer($cible = _ZI_DIR_SQUELETTES)
 {
     $objets = zi_lister_tables();
     if (empty($cible)) {
-        $cible = _ZI_REP_SKEL;
+        $cible = _ZI_DIR_SQUELETTES;
     }
 
     foreach ($objets as $table_sql => $descriptif) {
@@ -150,6 +148,8 @@ function zi_template_skel_creer($cible = _ZI_REP_SKEL)
         fwrite($template, $content);
         fclose($template);
     }
+
+    return true;
 }
 
 /**

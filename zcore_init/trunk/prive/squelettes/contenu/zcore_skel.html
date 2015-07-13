@@ -19,7 +19,7 @@
             <B_repertoires_zcore>
             <tr>
                 <td colspan="2">
-                    <strong>[(#EVAL{_ZI_REP_SKEL})]</strong>
+                    <strong>[(#EVAL{_ZI_DIR_SQUELETTES})]</strong>
                 </td>
             </tr>
             <BOUCLE_repertoires_zcore (DATA) {source table, #VAL|zi_repertoire_skel_lister} {si #VAL|zi_repertoire_skel_lister}>
@@ -64,7 +64,7 @@
         <thead>
             <tr>
                 <th><:zcore_init:titre_objets:></th>
-                <th>[(#EVAL{_ZI_REP_SKEL})]</th>
+                <th>[(#EVAL{_ZI_DIR_SQUELETTES})]</th>
                 <th>[(#EVAL{_DIR_SQUELETTES})]</th>
             </tr>
         </thead>
@@ -72,7 +72,7 @@
             <BOUCLE_objets (DATA) {source table, #VAL|zi_lister_tables} {par cle}>
             <tr>
                 <td>[(#VALEUR{texte_objet}|_T)]</td>
-                <td>[(#EVAL{_ZI_REP_SKEL}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
+                <td>[(#EVAL{_ZI_DIR_SQUELETTES}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })] [(#CLE|objet_type).html]</td>
@@ -84,12 +84,21 @@
             </BOUCLE_objets>
             <tr>
                 <td></td>
-                <td></td>
-                <td></td>
+                <td>[(#BOUTON_ACTION{<:zcore_init:maj_fichiers_label:>,
+                    #URL_ACTION_AUTEUR{zi_maj_fichiers,
+                    #SESSION{'webmestre'},
+                    #SELF|parametre_url{var_mode,recalcul}},
+                    <:zcore_init:maj_fichiers_confirm:>
+                })]</td>
+                <td>[(#BOUTON_ACTION{<:zcore_init:copy_fichiers_label:>,
+                    #URL_ACTION_AUTEUR{zi_copy_fichiers,
+                    #SESSION{'webmestre'},
+                    #SELF|parametre_url{var_mode,recalcul}},
+                    <:zcore_init:copy_fichiers_confirm:>
+                })]</td>
             </tr>
         </tbody>
     </table>
 </div>
 </B_objets>
 
-[<pre>(#VAL|zi_template_skel_creer|print_r{1})</pre>]
