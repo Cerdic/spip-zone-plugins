@@ -20,6 +20,15 @@
 <div id="dependances_php" class='liste'>
 	<h4>Dépendances nécessaires</h4>
 	<ul class='liste-items'>
+		[(#SET{ok,#VAL{PHP_VERSION}|constant|version_compare{5.4.0}})]
+		<li class="item[ (#GET{ok}|>{0}|?{item_ok,item_erreur})]">
+			[(#GET{ok}|?{
+				[(#CHEMIN_IMAGE{ok-16.png}|balise_img{OK})],
+				[(#CHEMIN_IMAGE{erreur-16.png}|balise_img{Erreur})],
+			})]
+			PHP >= 5.4.0
+		</li>
+
 		<BOUCLE_functions(DATA){source tableau,#ARRAY{
 			Curl,#LISTE{curl_init},
 			MCrypt,#LISTE{mcrypt_create_iv},

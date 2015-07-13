@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+Version 3.0.5
+-------------
+
+Compatibilité minimale avec SPIP 2.1 : un site 2.1 peut servir de source de données.
+Notons que PHP 5.4 minimum est nécessaire…
+
 Version 3.0
 -----------
 
