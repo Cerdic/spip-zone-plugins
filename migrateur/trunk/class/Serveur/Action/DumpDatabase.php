@@ -9,20 +9,34 @@ class DumpDatabase extends ActionBase {
 
 	/** Doit-on gziper le dump si la commande est disponible sur le serveur ? */
 	private $gzip_si_possible = true;
-	
+
 	/** Doit-on utiliser mysqldump si disponible sur le serveur ? */
 	private $mysqldump_si_possible = true;
+
+	/** Nom du fichier de sauvegarde (sans extension) */
+	private $nom_sauvegarde = 'migrateur';
+
+	/** Tables à exporter (toutes si vide) */
+	private $tables = array();
 
 
 	public function run($data = null) {
 		$this->log_run("Get Database");
 
 		if (isset($data['gzip_si_possible'])) {
-			$this->gzigzip_si_possible = (bool)$data['gzip_si_possible']; 
+			$this->gzip_si_possible = (bool)$data['gzip_si_possible']; 
 		}
-	
+
 		if (isset($data['mysqldump_si_possible'])) {
 			$this->mysqldump_si_possible = (bool)$data['mysqldump_si_possible']; 
+		}
+
+		if (isset($data['nom_sauvegarde'])) {
+			$this->nom_sauvegarde = $data['nom_sauvegarde']; 
+		}
+
+		if (isset($data['tables'])) {
+			$this->tables = $data['tables']; 
 		}
 
 		spip_timer('dump database');
@@ -58,7 +72,7 @@ class DumpDatabase extends ActionBase {
 	 * @return string
 	**/
 	private function getBackupPath() {
-		$file = 'tmp/dump/migrateur.sql';
+		$file = 'tmp/dump/' . $this->nom_sauvegarde . '.sql';
 		sous_repertoire(_DIR_TMP . 'dump');
 		return $this->fichier = $this->source->dir . DIRECTORY_SEPARATOR . $file;
 	}
@@ -100,6 +114,11 @@ class DumpDatabase extends ActionBase {
 		}
 
 		$this->log("Exécution de mysqldump…");
+
+		if ($this->tables) {
+			$this->log("Sur tables : " . implode(", ", $this->tables));
+		}
+
 		$source = $this->source;
 
 		if ($source->sql->login_path) {
@@ -130,7 +149,8 @@ class DumpDatabase extends ActionBase {
 			$_sauvegarde = "$sauvegarde";
 		}
 
-		exec($commande = "$cmd $identifiants {$source->sql->bdd} $compression > $_sauvegarde 2>&1", $output, $err);
+		$tables = implode(" ", $this->tables);
+		exec($commande = "$cmd $identifiants {$source->sql->bdd} $tables $compression > $_sauvegarde 2>&1", $output, $err);
 		# $this->log($commande);
 
 		if ($err) {
@@ -150,6 +170,9 @@ class DumpDatabase extends ActionBase {
 	**/
 	private function makePhpDump($sauvegarde) {
 		$this->log('makephpdump');
+		if ($this->tables) {
+			$this->log("Sur tables : " . implode(", ", $this->tables));
+		}
 
 		$gz = function_exists("gzopen");
 
@@ -162,7 +185,8 @@ class DumpDatabase extends ActionBase {
 			$this->source->sql->serveur,
 			$this->source->sql->req,
 			array(
-				'compress' => $gz ? Mysqldump::GZIP : Mysqldump::NONE
+				'compress' => $gz ? Mysqldump::GZIP : Mysqldump::NONE,
+				'include-tables' => $this->tables,
 			)
 		);
 

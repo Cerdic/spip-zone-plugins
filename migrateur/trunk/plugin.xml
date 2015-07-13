@@ -2,7 +2,7 @@
 
 	<nom>Migrateur</nom>
 
-	<version>3.0.6</version>
+	<version>3.0.7</version>
 	<prefix>migrateur</prefix>
 	<etat>dev</etat>
 	<categorie>outil</categorie>
