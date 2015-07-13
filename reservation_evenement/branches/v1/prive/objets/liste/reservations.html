@@ -1,7 +1,6 @@
 #SET{id_evenement,#ARRAY}
 #SET{date_debut,#ENV{date_debut,#ENV{date}}|affdate{Y-m-d 00:00:00}|agenda_dateplus{-1}}
-#SET{id_reservation_source,''}
-[(#ENV{recherche}|non)#SET{id_reservation_source,0}]
+
 
 <INCLURE{fond=prive/objets/liste/inc-reservations_reservations,env,titre='',statut=#LISTE{ attente,attente_paiement,accepte,encours,refuse},id_reservation_source=#GET{id_reservation_source}}/>
 

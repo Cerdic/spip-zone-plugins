@@ -1,14 +1,14 @@
 <traduction module="reservation" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/reservation_evenement/trunk/lang/" reference="fr">
-	<langue code="de" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=de" total="140" traduits="93" relire="0" modifs="2" nouveaux="45" pourcent="66.43">
+	<langue code="de" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=de" total="142" traduits="93" relire="0" modifs="2" nouveaux="47" pourcent="65.49">
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="en" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=en" total="140" traduits="101" relire="0" modifs="2" nouveaux="37" pourcent="72.14">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=en" total="142" traduits="101" relire="0" modifs="2" nouveaux="39" pourcent="71.13">
 		<traducteur nom="Hanjo" lien="http://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Rainer Müller" lien="http://trad.spip.net/auteur/rainer-muller" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=fr" total="140" traduits="140" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=fr" total="142" traduits="142" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 	</langue>
-	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=pt_br" total="140" traduits="94" relire="6" modifs="2" nouveaux="38" pourcent="67.14">
+	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/reservation?lang_cible=pt_br" total="142" traduits="92" relire="6" modifs="2" nouveaux="42" pourcent="64.79">
 		<traducteur nom="telopa" lien="http://trad.spip.net/auteur/telopa" />
 	</langue>
 </traduction>
