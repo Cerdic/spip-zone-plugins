@@ -8,6 +8,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+if (version_compare(PHP_VERSION, '5.4.0', '<')) {
+	include_spip('migrateur_compat_php_530');
+}
 
 /**
  * Autoload du répertoire class/

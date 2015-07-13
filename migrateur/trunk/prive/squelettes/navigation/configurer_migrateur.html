@@ -28,11 +28,23 @@
 			})]
 			PHP >= 5.4.0
 		</li>
+		[(#GET{ok}|non)
+			[(#SET{ok,#VAL{PHP_VERSION}|constant|version_compare{5.3.0}})]
+			<li class="item[ (#GET{ok}|>{0}|?{item_ok,item_erreur})]">
+				[(#GET{ok}|?{
+					[(#CHEMIN_IMAGE{ok-16.png}|balise_img{OK})],
+					[(#CHEMIN_IMAGE{erreur-16.png}|balise_img{Erreur})],
+				})]
+				PHP >= 5.3.0<br />
+				+ compatibilité (fonctionnement théorique)
+			</li>
+		]
 
 		<BOUCLE_functions(DATA){source tableau,#ARRAY{
 			Curl,#LISTE{curl_init},
 			MCrypt,#LISTE{mcrypt_create_iv},
 			OpenSSL,#LISTE{openssl_get_cipher_methods,openssl_encrypt},
+			hex2bin,#LISTE{hex2bin,bin2hex},
 		}}>
 		#SET{ok,1}
 		<BOUCLE_func(DATA){source tableau,#VALEUR}>
