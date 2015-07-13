@@ -31,7 +31,7 @@ $GLOBALS['MIGRATEUR_ETAPES'] = array(
 		'mysqldump_si_possible' => true, // utilise mysqldump si disponible, sinon phpdump (plus long, mais parfois plus simple à mettre en œuvre)
 	)),
 
-	'mig_bdd_destination_put_dump'  => 'Écrase la base de données actuelle par le dernier dump SQL présent dans tmp/dump)',
+	'mig_bdd_destination_put_dump_sql'  => 'Écrase la base de données actuelle par le dernier dump SQL présent dans tmp/dump)',
 
 	#'supprimer_tables_inutiles' => 'Suppression des tables SQL inutiles',
 	#'activer_plugins' => 'Activer les plugins',
