@@ -1,7 +1,7 @@
 <paquet
 	prefix="zcore_init"
 	categorie="outil"
-	version="0.1.1"
+	version="0.2.0"
 	etat="experimental"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/zcore_init-64.png"
@@ -21,5 +21,6 @@
 
 	<pipeline nom="autoriser" inclure="zcore_init_autorisations.php" /> 
 
+	<menu nom="zcore_skel" titre="zcore_init:titre_zcore_skel" parent="menu_squelette" icone="images/zcore_init-16.png" />
 
 </paquet>

@@ -1,3 +1,6 @@
+<!--
+    Fichier genere le [(#ENV{date}|affdate{'Y-m-d H:i:s'})]
+-->
 \<BOUCLE_principale_[(#ENV{objet})] [((#ENV{objet}|table_objet|strtoupper))] [{(#ENV{objet}|id_table_objet)}]>
 \<INCLURE{fond=structure, env[,(#ENV{id_rubrique}|oui)id_rubrique=\#ENV{id_rubrique,\#ID_RUBRIQUE}][,(#ENV{id_secteur}|oui)id_secteur=\#ID_SECTEUR], type-page=[(#ENV{objet})], composition=\#COMPOSITION} /\>
 \</BOUCLE_principale_[(#ENV{objet})]\>
