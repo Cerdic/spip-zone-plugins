@@ -39,6 +39,9 @@ function zi_repertoire_skel_defaut()
 function zi_repertoire_skel_creer($repertoire_zcore = _ZI_DIR_SQUELETTES)
 {
     $repertoires = zi_repertoire_skel_defaut();
+    if (is_null($repertoire_zcore) or empty($repertoire_zcore)) {
+        $repertoire_zcore = _ZI_DIR_SQUELETTES;
+    }
     foreach ($repertoires as $repertoire) {
         if (!is_dir($repertoire_zcore.$repertoire)) {
             @mkdir($repertoire_zcore.$repertoire, _SPIP_CHMOD, true);
@@ -57,6 +60,9 @@ function zi_repertoire_skel_maj($repertoire_zcore = _ZI_DIR_SQUELETTES)
 {
     $repertoires_defaut = zi_repertoire_skel_defaut();
     $black_list = array('..', '.', '.svn', '.DS_Store');
+    if (is_null($repertoire_zcore) or empty($repertoire_zcore)) {
+        $repertoire_zcore = _ZI_DIR_SQUELETTES;
+    }
 
     if (is_dir($repertoire_zcore)) {
         // On liste les répertoires qui ont été créés dans squelettes_zcore
@@ -137,7 +143,7 @@ function zi_lister_tables()
 function zi_template_skel_creer($cible = _ZI_DIR_SQUELETTES)
 {
     $objets = zi_lister_tables();
-    if (empty($cible)) {
+    if (is_null($cible) or empty($cible)) {
         $cible = _ZI_DIR_SQUELETTES;
     }
 
