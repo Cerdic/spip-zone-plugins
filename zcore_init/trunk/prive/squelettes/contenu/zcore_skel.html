@@ -1,6 +1,8 @@
+[(#SET{zi_dir_squelettes,[(#EVAL{_ZI_DIR_SQUELETTES})]})]
+[(#SET{dir_squelettes,[(#EVAL{_DIR_SQUELETTES})]})]
 <h1><:zcore_init:titre_page_zcore_skel:></h1>
 
-<div class="liste repertoires zi">
+<div class="liste controles zi">
     <table class="table">
         <thead>
             <tr>
@@ -16,47 +18,61 @@
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })]</td>
             </tr>
-            <B_repertoires_zcore>
+        </tbody>
+    </table>
+</div>
+<div class="nettoyeur"></div>
+
+<B_repertoires>
+<div class="liste repertoires zi">
+    <table class="table">
+        <thead>
             <tr>
-                <td colspan="2">
-                    <strong>[(#EVAL{_ZI_DIR_SQUELETTES})]</strong>
-                </td>
+                <th><:zcore_init:titre_repertoires:></th>
+                <th>[(#GET{zi_dir_squelettes})]</th>
+                <th>[(#GET{dir_squelettes})]</th>
             </tr>
-            <BOUCLE_repertoires_zcore (DATA) {source table, #VAL|zi_repertoire_skel_lister} {si #VAL|zi_repertoire_skel_lister}>
+        </thead>
+        <tbody>
+            <BOUCLE_repertoires (DATA) {source table, #VAL|zi_repertoire_skel_defaut}>
             <tr>
                 <td>
                     #VALEUR
                 </td>
                 <td>
-                [(#VALEUR|is_dir|?{
+                [(#GET{zi_dir_squelettes}|concat{[(#VALEUR)]}|is_dir|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })]</td>
-            </tr>
-            </BOUCLE_repertoires_zcore>
-            </B_repertoires_zcore>
-            <B_repertoires>
-            <tr>
-                <td colspan="2">
-                    <strong>[(#EVAL{_DIR_SQUELETTES})]</strong>
-                </td>
-            </tr>
-            <BOUCLE_repertoires (DATA) {source table, #VAL|zi_repertoire_skel_defaut} {si #VAL|zi_repertoire_skel_defaut}>
-            <tr>
                 <td>
-                    [(#EVAL{_DIR_SQUELETTES})][(#VALEUR)]
-                </td>
-                <td>
-                [(#EVAL{_DIR_SQUELETTES}|concat{#VALEUR}|is_dir|?{
+                [(#GET{dir_squelettes}|concat{[(#VALEUR)]}|is_dir|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })]</td>
             </tr>
             </BOUCLE_repertoires>
-            </B_repertoires>
+            <tr>
+                <td></td>
+                <td>[(#BOUTON_ACTION{<:zcore_init:maj_label:>,
+                    #URL_ACTION_AUTEUR{zi_repertoires,
+                    #SESSION{'webmestre'}/zi_dir_squelettes,
+                    #SELF|parametre_url{var_mode,recalcul}},
+                    zcore,
+                    <:zcore_init:maj_confirm_repertoires:>
+                })]</td>
+                <td>[(#BOUTON_ACTION{<:zcore_init:maj_label:>,
+                    #URL_ACTION_AUTEUR{zi_repertoires,
+                    #SESSION{'webmestre'}/dir_squelettes,
+                    #SELF|parametre_url{var_mode,recalcul}},
+                    zcore,
+                    <:zcore_init:maj_confirm_repertoires:>
+                })]</td>
+            </tr>
         </tbody>
     </table>
 </div>
+<div class="nettoyeur"></div>
+</B_repertoires>
 
 <B_objets>
 <div class="liste objets zi">
@@ -64,19 +80,19 @@
         <thead>
             <tr>
                 <th><:zcore_init:titre_objets:></th>
-                <th>[(#EVAL{_ZI_DIR_SQUELETTES})]</th>
-                <th>[(#EVAL{_DIR_SQUELETTES})]</th>
+                <th>[(#GET{zi_dir_squelettes})]</th>
+                <th>[(#GET{dir_squelettes})]</th>
             </tr>
         </thead>
         <tbody>
             <BOUCLE_objets (DATA) {source table, #VAL|zi_lister_tables} {par cle}>
             <tr>
                 <td>[(#VALEUR{texte_objet}|_T)]</td>
-                <td>[(#EVAL{_ZI_DIR_SQUELETTES}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
+                <td>[(#GET{zi_dir_squelettes}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })] [(#CLE|objet_type).html]</td>
-                <td>[(#EVAL{_DIR_SQUELETTES}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
+                <td>[(#GET{dir_squelettes}|concat{[(#CLE|objet_type)],'.html'}|is_file|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })] [(#CLE|objet_type).html]</td>
@@ -84,17 +100,19 @@
             </BOUCLE_objets>
             <tr>
                 <td></td>
-                <td>[(#BOUTON_ACTION{<:zcore_init:maj_fichiers_label:>,
-                    #URL_ACTION_AUTEUR{zi_maj_fichiers,
-                    #SESSION{'webmestre'},
+                <td>[(#BOUTON_ACTION{<:zcore_init:maj_label:>,
+                    #URL_ACTION_AUTEUR{zi_fichiers,
+                    #SESSION{'webmestre'}/zi_dir_squelettes,
                     #SELF|parametre_url{var_mode,recalcul}},
-                    <:zcore_init:maj_fichiers_confirm:>
+                    zcore,
+                    <:zcore_init:maj_confirm_fichiers:>
                 })]</td>
-                <td>[(#BOUTON_ACTION{<:zcore_init:copy_fichiers_label:>,
-                    #URL_ACTION_AUTEUR{zi_copy_fichiers,
-                    #SESSION{'webmestre'},
+                <td>[(#BOUTON_ACTION{<:zcore_init:maj_label:>,
+                    #URL_ACTION_AUTEUR{zi_fichiers,
+                    #SESSION{'webmestre'}/dir_squelettes,
                     #SELF|parametre_url{var_mode,recalcul}},
-                    <:zcore_init:copy_fichiers_confirm:>
+                    zcore,
+                    <:zcore_init:maj_confirm_fichiers:>
                 })]</td>
             </tr>
         </tbody>

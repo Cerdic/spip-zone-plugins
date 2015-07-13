@@ -87,6 +87,9 @@ function zi_repertoire_skel_maj($repertoire_zcore = _ZI_DIR_SQUELETTES)
 function zi_repertoire_skel_lister($repertoire_zcore = _ZI_DIR_SQUELETTES)
 {
     $repertoires = array();
+    if (is_null($repertoire_zcore) or empty($repertoire_zcore)) {
+        $repertoire_zcore = _ZI_DIR_SQUELETTES;
+    }
     // On crée les répertoires.
     zi_repertoire_skel_creer();
     // On vérifie que $repertoire passé en paramètre est bien un répertoire existant.
