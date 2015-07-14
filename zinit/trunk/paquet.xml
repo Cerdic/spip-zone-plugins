@@ -1,17 +1,17 @@
 <paquet
-	prefix="zcore_init"
+	prefix="zinit"
 	categorie="outil"
 	version="0.2.1"
 	etat="experimental"
 	compatibilite="[3.0.9;3.0.*]"
-	logo="prive/themes/spip/images/zcore_init-64.png"
+	logo="prive/themes/spip/images/zinit-64.png"
 	documentation=""
 >
 	<!--
 		Paquet genere le 2015-07-12 20:44:02
 	-->
 
-	<nom>Initialiser ses squelettes Zcore</nom>
+	<nom>Initialiser Zcore</nom>
 
 	<auteur>Teddy Payet</auteur>
 
@@ -19,8 +19,8 @@
 	<necessite nom="zcore" compatibilite="[2.4.5;]" />
 
 
-	<pipeline nom="autoriser" inclure="zcore_init_autorisations.php" /> 
+	<pipeline nom="autoriser" inclure="zinit_autorisations.php" />
 
-	<menu nom="zcore_skel" titre="zcore_init:titre_zcore_skel" parent="menu_squelette" icone="images/zcore_init-16.png" />
+	<menu nom="zcore_skel" titre="zinit:titre_zcore_skel" parent="menu_squelette" icone="images/zinit-16.png" />
 
 </paquet>

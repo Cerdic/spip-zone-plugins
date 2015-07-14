@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Fonctions utiles au plugin Initialiser ses squelettes Zcore.
+ * Fonctions utiles au plugin Initialiser Zcore.
  *
- * @plugin     Initialiser ses squelettes Zcore
+ * @plugin     Initialiser Zcore
  *
  * @copyright  2015
  * @author     Teddy Payet
@@ -19,7 +19,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array
  *         Tableau des blocs définies par la globale 'z_blocs' ou une liste par défaut.
  */
-function zi_repertoire_skel_defaut()
+function zinit_repertoire_skel_defaut()
 {
     // Si la globale 'z_blocs' n'est pas définie,
     // on va donner une liste de dossiers par défaut.
@@ -36,11 +36,11 @@ function zi_repertoire_skel_defaut()
 /**
  * Cette fonction va créer les répertoires pour le plugin.
  */
-function zi_repertoire_skel_creer($repertoire_zcore = _ZI_DIR_SQUELETTES)
+function zinit_repertoire_skel_creer($repertoire_zcore = _ZINIT_DIR_SQUELETTES)
 {
-    $repertoires = zi_repertoire_skel_defaut();
+    $repertoires = zinit_repertoire_skel_defaut();
     if (is_null($repertoire_zcore) or empty($repertoire_zcore)) {
-        $repertoire_zcore = _ZI_DIR_SQUELETTES;
+        $repertoire_zcore = _ZINIT_DIR_SQUELETTES;
     }
     foreach ($repertoires as $repertoire) {
         if (!is_dir($repertoire_zcore.$repertoire)) {
@@ -56,12 +56,12 @@ function zi_repertoire_skel_creer($repertoire_zcore = _ZI_DIR_SQUELETTES)
  * Si des répertoires ne font plus partis des répertoires de la globale 'z_blocs',
  * ces répertoires seront supprimés s'ils sont vides.
  */
-function zi_repertoire_skel_maj($repertoire_zcore = _ZI_DIR_SQUELETTES)
+function zinit_repertoire_skel_maj($repertoire_zcore = _ZINIT_DIR_SQUELETTES)
 {
-    $repertoires_defaut = zi_repertoire_skel_defaut();
+    $repertoires_defaut = zinit_repertoire_skel_defaut();
     $black_list = array('..', '.', '.svn', '.DS_Store');
     if (is_null($repertoire_zcore) or empty($repertoire_zcore)) {
-        $repertoire_zcore = _ZI_DIR_SQUELETTES;
+        $repertoire_zcore = _ZINIT_DIR_SQUELETTES;
     }
 
     if (is_dir($repertoire_zcore)) {
@@ -90,14 +90,14 @@ function zi_repertoire_skel_maj($repertoire_zcore = _ZI_DIR_SQUELETTES)
  *         `false` : si le répertoire 'squelettes_zcore' n'a pas été créé.
  *         `array` : liste des répertoires.
  */
-function zi_repertoire_skel_lister($repertoire_zcore = _ZI_DIR_SQUELETTES)
+function zinit_repertoire_skel_lister($repertoire_zcore = _ZINIT_DIR_SQUELETTES)
 {
     $repertoires = array();
     if (is_null($repertoire_zcore) or empty($repertoire_zcore)) {
-        $repertoire_zcore = _ZI_DIR_SQUELETTES;
+        $repertoire_zcore = _ZINIT_DIR_SQUELETTES;
     }
     // On crée les répertoires.
-    zi_repertoire_skel_creer();
+    zinit_repertoire_skel_creer();
     // On vérifie que $repertoire passé en paramètre est bien un répertoire existant.
     // cf. ../IMG/orphelins qui ne serait pas encore créé.
     if (is_dir($repertoire_zcore)) {
@@ -121,11 +121,11 @@ function zi_repertoire_skel_lister($repertoire_zcore = _ZI_DIR_SQUELETTES)
  *
  * @return array Liste des tables.
  */
-function zi_lister_tables()
+function zinit_lister_tables()
 {
     include_spip('base/objets');
 
-    $tables_a_exclure = $GLOBALS['zi_tables_exclues'];
+    $tables_a_exclure = $GLOBALS['zinit_tables_exclues'];
     $tables_objets_sql = lister_tables_objets_sql();
 
     // *****
@@ -137,7 +137,7 @@ function zi_lister_tables()
     }
     foreach ($tables_objets_sql as $table => $champs) {
         // Si l'objet n'a pas de page de vue pour le public,
-        // alors on ne garde pas cet objet pour zcore_init
+        // alors on ne garde pas cet objet pour zinit
         if (is_null($champs['page']) or empty($champs['page'])) {
             unset($tables_objets_sql[$table]);
         }
@@ -146,11 +146,11 @@ function zi_lister_tables()
     return $tables_objets_sql;
 }
 
-function zi_template_skel_creer($cible = _ZI_DIR_SQUELETTES)
+function zinit_template_skel_creer($cible = _ZINIT_DIR_SQUELETTES)
 {
-    $objets = zi_lister_tables();
+    $objets = zinit_lister_tables();
     if (is_null($cible) or empty($cible)) {
-        $cible = _ZI_DIR_SQUELETTES;
+        $cible = _ZINIT_DIR_SQUELETTES;
     }
 
     foreach ($objets as $table_sql => $descriptif) {
@@ -174,7 +174,7 @@ function zi_template_skel_creer($cible = _ZI_DIR_SQUELETTES)
  *         true : la globale est renseignée et est un tableau
  *         false : la globale n'existe pas et/ou n'est pas un tableau.
  */
-function zi_blocs_verifier()
+function zinit_blocs_verifier()
 {
     if (isset($GLOBALS['z_blocs']) and is_array($GLOBALS['z_blocs'])) {
         return true;
