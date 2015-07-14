@@ -120,3 +120,32 @@
 </div>
 </B_objets>
 
+<B_content>
+<div class="liste objets zi">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><:zinit:titre_objets:></th>
+                <th>[(#GET{zinit_dir_squelettes}|concat{'content/'})]</th>
+                <th>[(#GET{dir_squelettes}|concat{'content/'})]</th>
+            </tr>
+        </thead>
+        <tbody>
+            <BOUCLE_content (DATA) {source table, #VAL|zinit_lister_tables} {par cle}>
+            <tr>
+                <td>[(#VALEUR{texte_objet}|_T)]</td>
+                <td>[(#GET{zinit_dir_squelettes}|concat{'content/',[(#CLE|objet_type)],'.html'}|is_file|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                })] [(#CLE|objet_type).html]</td>
+                <td>[(#GET{dir_squelettes}|concat{'content/',[(#CLE|objet_type)],'.html'}|is_file|?{
+                    [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
+                    [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
+                })] [(#CLE|objet_type).html]</td>
+            </tr>
+            </BOUCLE_content>
+        </tbody>
+    </table>
+</div>
+</B_content>
+
