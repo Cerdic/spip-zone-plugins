@@ -1,23 +1,18 @@
 <paquet
 	prefix="zinit"
 	categorie="outil"
-	version="0.2.1"
+	version="0.2.2"
 	etat="experimental"
 	compatibilite="[3.0.9;3.0.*]"
 	logo="prive/themes/spip/images/zinit-64.png"
-	documentation=""
+	documentation="http://contrib.spip.net/4699"
 >
-	<!--
-		Paquet genere le 2015-07-12 20:44:02
-	-->
-
 	<nom>Initialiser Zcore</nom>
 
 	<auteur>Teddy Payet</auteur>
 
 	<licence>GNU/GPL</licence>
 	<necessite nom="zcore" compatibilite="[2.4.5;]" />
-
 
 	<pipeline nom="autoriser" inclure="zinit_autorisations.php" />
 
