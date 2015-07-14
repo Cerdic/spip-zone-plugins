@@ -1,0 +1,14 @@
+<paquet
+	prefix="knacsspip"
+	categorie="performance"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.17;3.0.*]"
+	logo="knacsspip.png"
+	documentation="https://github.com/raphaelgoetter/KNACSS/tree/master/doc"
+>
+	<nom>Knacsspip</nom>
+	<auteur>Martin R.</auteur>
+	<licence>WTFPL</licence>	
+	<credit>Raphaël Goetter (Knacss), Stéphanie Walter (logo)</credit>
+</paquet>
