@@ -1,5 +1,6 @@
 [(#SET{zinit_dir_squelettes,[(#EVAL{_ZINIT_DIR_SQUELETTES})]})]
 [(#SET{dir_squelettes,[(#EVAL{_DIR_SQUELETTES})]})]
+[(#SET{blocs,[(#VAL|zinit_repertoire_skel_defaut)]})]
 <h1><:zinit:titre_page_zcore_skel:></h1>
 
 <div class="liste controles zi">
@@ -126,19 +127,19 @@
         <thead>
             <tr>
                 <th><:zinit:titre_objets:></th>
-                <th>[(#GET{zinit_dir_squelettes}|concat{'content/'})]</th>
-                <th>[(#GET{dir_squelettes}|concat{'content/'})]</th>
+                <th>[(#GET{zinit_dir_squelettes}|concat{#GET{blocs/0},'/'})]</th>
+                <th>[(#GET{dir_squelettes}|concat{#GET{blocs/0},'/'})]</th>
             </tr>
         </thead>
         <tbody>
             <BOUCLE_content (DATA) {source table, #VAL|zinit_lister_tables} {par cle}>
             <tr>
                 <td>[(#VALEUR{texte_objet}|_T)]</td>
-                <td>[(#GET{zinit_dir_squelettes}|concat{'content/',[(#CLE|objet_type)],'.html'}|is_file|?{
+                <td>[(#GET{zinit_dir_squelettes}|concat{#GET{blocs/0},'/',[(#CLE|objet_type)],'.html'}|is_file|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })] [(#CLE|objet_type).html]</td>
-                <td>[(#GET{dir_squelettes}|concat{'content/',[(#CLE|objet_type)],'.html'}|is_file|?{
+                <td>[(#GET{dir_squelettes}|concat{#GET{blocs/0},'/',[(#CLE|objet_type)],'.html'}|is_file|?{
                     [(#CHEMIN_IMAGE{check-16.png}|balise_img)],
                     [(#CHEMIN_IMAGE{uncheck-16.png}|balise_img)]
                 })] [(#CLE|objet_type).html]</td>
