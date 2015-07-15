@@ -69,5 +69,3 @@ function mots_techniques_groupes_mots_arborescents_heritages($champs) {
 	$champs[] = 'technique';
 	return $champs;
 }
-
-?>

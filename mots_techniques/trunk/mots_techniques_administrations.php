@@ -40,5 +40,3 @@ function mots_techniques_vider_tables($nom_meta_base_version) {
 	cextras_api_vider_tables(mots_techniques_declarer_champs_extras());
 	effacer_meta($nom_meta_base_version);
 }
-
-?>

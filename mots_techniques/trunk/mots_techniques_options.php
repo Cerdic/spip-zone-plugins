@@ -12,4 +12,3 @@ if (!isset($GLOBALS['marqueur_skel'])) {
 	$GLOBALS['marqueur_skel'] = '';
 }
 $GLOBALS['marqueur_skel'] .= test_espace_prive() ? '1' : '';
-?>

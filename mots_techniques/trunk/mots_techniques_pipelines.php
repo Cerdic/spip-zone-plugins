@@ -63,6 +63,3 @@ function mots_techniques_pre_boucle($boucle){
 	}
 	return $boucle;
 }
-
-
-?>

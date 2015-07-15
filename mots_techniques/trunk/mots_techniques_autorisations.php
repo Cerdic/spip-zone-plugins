@@ -55,5 +55,3 @@ function autoriser_spip_groupes_mots_modifierextra_technique_dist($faire,$type,$
 	// vrai si la racine est notre groupe 
 	return ($id_racine == $id);
 }
-
-?>
