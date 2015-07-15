@@ -137,11 +137,16 @@ function critere_distancefrom_dist($idb, &$boucles, $crit) {
 }
 
 /**
- * Critere {gis distance<XX} pour filtrer une liste de points par rapport à la distance du point de l'env
+ * Compile le critère `{gis}` qui permet de compléter la boucle avec les points GIS
  *
- * @param unknown_type $idb
- * @param unknown_type $boucles
- * @param unknown_type $crit
+ * Usage
+ * - `{gis}` Retourne les objets ayant des points (et ajoute les balises spéciales GIS tel que `#TITRE_GIS`)
+ * - `{!gis}` Retourne les objets sans points
+ * - `{gis distance<XX}`, sur une boucle `GIS`, filtre une liste de points par rapport à la distance du point de l'env
+ *
+ * @param string $idb
+ * @param array $boucles
+ * @param Critere $crit
  */
 function critere_gis_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
@@ -180,45 +185,56 @@ function critere_gis_dist($idb, &$boucles, $crit) {
 		$boucle->select[]= $select;
 		$boucle->order[]= $order;
 	} else {
-		// ajouter tous les champs du point au select 
-		// et les suffixer pour lever toute ambiguite avec des champs homonymes
-		$boucle->select[]= 'gis.titre AS titre_gis';
-		$boucle->select[]= 'gis.descriptif AS descriptif_gis';
-		$boucle->select[]= 'gis.adresse AS adresse_gis';
-		$boucle->select[]= 'gis.pays AS pays_gis';
-		$boucle->select[]= 'gis.code_pays AS code_pays_gis';
-		$boucle->select[]= 'gis.region AS region_gis';
-		$boucle->select[]= 'gis.departement AS departement_gis';
-		$boucle->select[]= 'gis.ville AS ville_gis';
-		$boucle->select[]= 'gis.code_postal AS code_postal_gis';
-		// jointure sur spip_gis_liens/spip_gis
-		// cf plugin notation
-		// $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
-		$boucle->from['gis_liens'] = 'spip_gis_liens';
-		$boucle->join['gis_liens']= array("'$id_table'","'id_objet'","'$primary'","'gis_liens.objet='.sql_quote('$objet')");
-		$boucle->from['gis'] = 'spip_gis';
-		$boucle->join['gis']= array("'gis_liens'","'id_gis'");
-		// bien renvoyer tous les points qui son attachés à l'objet
-		// mais attention, si on trouve en amont un groupement portant sur un champ *de GIS*,
-		// alors cela signifie que la personne veut faire une opération de groupement sur les points donc là on n'ajoute pas id_gis
-		$tous_les_points = true;
-		foreach ($boucle->group as $champ){
-			if (in_array($champ, array('ville', 'code_postal', 'pays', 'code_pays', 'region','departement'))) {
-				$tous_les_points = false;
+
+		/* Recherche d'objets SANS point */
+		if ($crit->not) {
+			$boucle->from['gis_liens'] = 'spip_gis_liens';
+			$boucle->from_type['gis_liens'] = "LEFT";
+			$boucle->join['gis_liens'] = array("'$id_table'","'id_objet'","'$primary'","'gis_liens.objet='.sql_quote('$objet')");
+			$boucle->where[] = "'gis_liens.id_gis IS NULL'";
+
+		/* Recherche d'objets AVEC point + ajout des champs GIS */
+		} else {
+			// ajouter tous les champs du point au select 
+			// et les suffixer pour lever toute ambiguite avec des champs homonymes
+			$boucle->select[]= 'gis.titre AS titre_gis';
+			$boucle->select[]= 'gis.descriptif AS descriptif_gis';
+			$boucle->select[]= 'gis.adresse AS adresse_gis';
+			$boucle->select[]= 'gis.pays AS pays_gis';
+			$boucle->select[]= 'gis.code_pays AS code_pays_gis';
+			$boucle->select[]= 'gis.region AS region_gis';
+			$boucle->select[]= 'gis.departement AS departement_gis';
+			$boucle->select[]= 'gis.ville AS ville_gis';
+			$boucle->select[]= 'gis.code_postal AS code_postal_gis';
+			// jointure sur spip_gis_liens/spip_gis
+			// cf plugin notation
+			// $boucle->join["surnom (as) table de liaison"] = array("surnom de la table a lier", "cle primaire de la table de liaison", "identifiant a lier", "type d'objet de l'identifiant");
+			$boucle->from['gis_liens'] = 'spip_gis_liens';
+			$boucle->join['gis_liens']= array("'$id_table'","'id_objet'","'$primary'","'gis_liens.objet='.sql_quote('$objet')");
+			$boucle->from['gis'] = 'spip_gis';
+			$boucle->join['gis']= array("'gis_liens'","'id_gis'");
+			// bien renvoyer tous les points qui son attachés à l'objet
+			// mais attention, si on trouve en amont un groupement portant sur un champ *de GIS*,
+			// alors cela signifie que la personne veut faire une opération de groupement sur les points donc là on n'ajoute pas id_gis
+			$tous_les_points = true;
+			foreach ($boucle->group as $champ){
+				if (in_array($champ, array('ville', 'code_postal', 'pays', 'code_pays', 'region','departement'))) {
+					$tous_les_points = false;
+				}
 			}
-		}
-		if ($tous_les_points) {
-			$boucle->group[] = 'gis_liens.id_gis';
-		}
-		// ajouter gis aux jointures et spécifier les jointures explicites pour pouvoir utiliser les balises de la table de jointure
-		// permet de passer dans trouver_champ_exterieur() depuis index_tables_en_pile()
-		// cf http://article.gmane.org/gmane.comp.web.spip.zone/6628
-		$boucle->jointures[] = 'gis';
-		if (empty($boucle->jointures_explicites)){
-			$boucle->jointures_explicites = 'gis_liens gis';
-		}
-		else{
-			$boucle->jointures_explicites .= ' gis_liens gis';
+			if ($tous_les_points) {
+				$boucle->group[] = 'gis_liens.id_gis';
+			}
+			// ajouter gis aux jointures et spécifier les jointures explicites pour pouvoir utiliser les balises de la table de jointure
+			// permet de passer dans trouver_champ_exterieur() depuis index_tables_en_pile()
+			// cf http://article.gmane.org/gmane.comp.web.spip.zone/6628
+			$boucle->jointures[] = 'gis';
+			if (empty($boucle->jointures_explicites)){
+				$boucle->jointures_explicites = 'gis_liens gis';
+			}
+			else{
+				$boucle->jointures_explicites .= ' gis_liens gis';
+			}
 		}
 	}
 }
