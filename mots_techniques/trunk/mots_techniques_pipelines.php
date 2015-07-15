@@ -37,7 +37,7 @@ function mots_techniques_pre_boucle($boucle){
 		// pff...
 		$technique = false;
 		foreach($boucle->criteres as $c){
-			if ($c->param[0][0]->texte == 'technique') {
+			if (isset($c->param[0][0]->texte) and $c->param[0][0]->texte == 'technique') {
 				$technique = true;
 				break;
 			}
