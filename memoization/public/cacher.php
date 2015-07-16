@@ -343,7 +343,9 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	// $delais par defaut (pour toutes les pages sans #CACHE{})
 	if (!isset($GLOBALS['delais'])) {
-		define('_DUREE_CACHE_DEFAUT', 24*3600);
+		if (!defined('_DUREE_CACHE_DEFAUT')) {
+			define('_DUREE_CACHE_DEFAUT', 24*3600);
+		}
 		$GLOBALS['delais'] = _DUREE_CACHE_DEFAUT;
 	}
 
