@@ -26,7 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_rubriques_completes' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement).',
 	'description_menu_secteurlangue' => 'Cette entrée est spécifique aux sites utilisant un secteur par langue. Elle affiche automatiquement un menu listant les rubriques du secteur correspondant à la langue de la page et, si on veut, les sous-rubriques sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement).',
 	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez, ou un code de langue SPIP (< :... :>)',
-	'dropdown_menu' => 'Si oui, le menu est compatible avec le js bootstrap dropdown. Par exemple avec le plugin spip-r',
 
 	// E
 	'editer_menus_editer' => 'Modifier ce menu',
