@@ -6,11 +6,15 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-	<!-- Facebook sharing information tags -->
-	<meta property="og:title" content="[(#TITRE|attribut_html)]">
-
 	<title>#TITRE</title>
+
+	<!-- Open Graph Protocol -->
+	[<meta property="og:title" content="(#TITRE|attribut_html)]" />]
+	<meta property="og:type" content="article" />
+	[<meta property="og:image" content="(#LOGO_NEWSLETTER|sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+	[<meta property="og:url" content="(#URL_NEWSLETTER|url_absolue)" />]
+	[<meta property="og:description" content="(#INTRODUCTION|supprimer_tags|entites_html)" />]
+	[<meta property="og:site_name" content="(#NOM_SITE_SPIP|attribut_html)" />]
 
 	<style type="text/css">
 		#outlook a {padding: 0;}
@@ -71,6 +75,7 @@
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0"
       style="-webkit-text-size-adjust: none;margin: 0;padding: 0;background-color: #FAFAFA;width: 100% !important;">
 <center>
+
 	<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="backgroundTable"
 	       style="margin: 0;padding: 0;background-color: #FAFAFA;height: 100% !important;width: 100% !important;">
 		<tr>
