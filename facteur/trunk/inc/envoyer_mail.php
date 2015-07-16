@@ -45,8 +45,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// si $corps est un tableau -> fonctionnalites etendues
 	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
 	if (is_array($corps)) {
-		$message_html   = $corps['html'];
-		$message_texte  = nettoyer_caracteres_mail($corps['texte']);
+		$message_html   = isset($corps['html']) ? $corps['html'] : "";
+		$message_texte  = isset($corps['texte']) ? nettoyer_caracteres_mail($corps['texte']) : "";
 		$pieces_jointes = isset($corps['pieces_jointes']) ? $corps['pieces_jointes'] : array();
 		$nom_envoyeur   = isset($corps['nom_envoyeur']) ? $corps['nom_envoyeur'] : "";
 		$from = isset($corps['from']) ? $corps['from']: $from;
