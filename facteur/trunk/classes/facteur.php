@@ -196,6 +196,7 @@ class Facteur extends PHPMailer {
 
 			$adresse_site = $GLOBALS['meta']['adresse_site'].'/';
 			foreach($images as $im){
+				$im = array_pad($im, 6, null);
 				$src_orig = $im[1].$im[4].$im[5];
 				if (!isset($src_found[$src_orig])){ // deja remplace ? rien a faire (ie la meme image presente plusieurs fois)
 					// examiner le src et voir si embedable
