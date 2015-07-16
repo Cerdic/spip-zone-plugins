@@ -18,30 +18,35 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function verifier_email_dist($valeur, $options=array()){
 	include_spip('inc/filtres');
-	if (!is_string($valeur))
+	if (!is_string($valeur)) {
 		return $erreur;
+	}
 
 	// Disponibilite des courriels en base AUTEURS
 	// Si l'adresse n'est pas disponible, on stoppe tout sinon on continue
-	if ($options['disponible'] and !verifier_disponibilite_email($valeur,isset($options['id_auteur'])?$options['id_auteur']:null)){
+	if (!empty($options['disponible']) and !verifier_disponibilite_email($valeur,isset($options['id_auteur'])?$options['id_auteur']:null)){
 		return _T('verifier:erreur_email_nondispo', array('email' => echapper_tags($valeur)));
 	}
-	
+
 	// Choix du mode de verification de la syntaxe des courriels
-	if (!$options['mode'] or !in_array($options['mode'], array('normal','rfc5322','strict'))){
+	if (empty($options['mode']) or !in_array($options['mode'], array('normal','rfc5322','strict'))){
 		$mode = 'normal';
-	}
-	else{
+	} else{
 		$mode = $options['mode'];
 	}
-		
-	$fonctions_disponibles = array('normal' => 'email_valide', 'rfc5322' => 'verifier_email_rfc5322', 'strict' => 'verifier_email_de_maniere_stricte');
+
+	$fonctions_disponibles = array(
+		'normal'  => 'email_valide',
+		'rfc5322' => 'verifier_email_rfc5322',
+		'strict'  => 'verifier_email_de_maniere_stricte'
+	);
 	$fonction_verif = $fonctions_disponibles[$mode];
-	
-	if (!$fonction_verif($valeur))
+
+	if (!$fonction_verif($valeur)) {
 		return _T('verifier:erreur_email', array('email' => echapper_tags($valeur)));
-	else
+	} else {
 		return '';
+	}
 }
 
 /**
@@ -61,8 +66,9 @@ function verifier_email_rfc5322($valeur){
 	}
 	include_spip('inc/is_email');
 	foreach (explode(',', $valeur) as $adresse) {
-		if (!is_email(trim($adresse)))
+		if (!is_email(trim($adresse))) {
 			return false;
+		}
 	}
 	return true;
 }
@@ -87,8 +93,9 @@ function verifier_email_de_maniere_stricte($valeur){
 		// nettoyer certains formats
 		// "Marie Toto <Marie@toto.com>"
 		$adresse = trim(preg_replace(",^[^<>\"]*<([^<>\"]+)>$,i", "\\1", $adresse));
-		if (!preg_match('/^([A-Za-z0-9]){1}([A-Za-z0-9]|-|_|\.)*@[A-Za-z0-9]([A-Za-z0-9]|-|\.){1,}\.[A-Za-z]{2,4}$/', $adresse))
+		if (!preg_match('/^([A-Za-z0-9]){1}([A-Za-z0-9]|-|_|\.)*@[A-Za-z0-9]([A-Za-z0-9]|-|\.){1,}\.[A-Za-z]{2,4}$/', $adresse)) {
 			return false;
+		}
 	}
 	return true; 
 }
@@ -103,8 +110,9 @@ function verifier_email_de_maniere_stricte($valeur){
 function verifier_disponibilite_email($valeur,$exclure_id_auteur=null){
 	include_spip('base/abstract_sql');
 
-	if(sql_getfetsel('id_auteur', 'spip_auteurs', 'email='.sql_quote($valeur).(!is_null($exclure_id_auteur)?"AND statut<>'5poubelle' AND id_auteur<>".intval($exclure_id_auteur):'')))
+	if (sql_getfetsel('id_auteur', 'spip_auteurs', 'email='.sql_quote($valeur).(!is_null($exclure_id_auteur)?"AND statut<>'5poubelle' AND id_auteur<>".intval($exclure_id_auteur):''))) {
 		return false;
-	else
+	} else {
 		return true;
+	}
 }
