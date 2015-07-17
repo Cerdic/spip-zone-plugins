@@ -17,6 +17,7 @@
 			[<p class="#EDIT{abstract} abstract description"><strong><:seminaire:abstract:> : </strong>(#DESCRIPTIF|propre|PtoBR)</p>]
 			[<p class="lieu"><strong><:seminaire:lieu:> : </strong><span class="location #EDIT{lieu}">(#LIEU|textebrut)</span>[<span class="adresse #EDIT{adresse}"> - (#ADRESSE|PtoBR)</span>]</p>]
 			[<p class="#EDIT{notes} notes"><strong><:seminaire:notes:> :</strong> (#CHAMP_SQL{notes}|typo)</p>]
+			<span class="export-ics"><a href="#URL_PAGE{export_evenement,id_evenement=#ID_EVENEMENT}">Exporter cet événement</a></span>
 		</ACM.msc>
 		<div class="ajax">
 			#FORMULAIRE_PARTICIPER_EVENEMENT{#ID_EVENEMENT}
