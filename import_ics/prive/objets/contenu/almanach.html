@@ -23,6 +23,11 @@
 	<span dir='#LANG_DIR' class='#EDIT{id_mot} id_mot'><a href="#URL_ECRIRE{mot,id_mot=#ID_MOT}">#TITRE (mot n°#ID_MOT)</a> </span> 	
 </BOUCLE_mot_lie>
 
+<div class="champ contenu_decalage[ (#DECALAGE*|strlen|?{'',vide})]">
+	<label><strong><:almanach:decalage:> : </strong></label>
+	<span dir='#LANG_DIR' class='#EDIT{decalage} decalage'>[ [(#DECALAGE|>={0}|?{+})](#DECALAGE|singulier_ou_pluriel{almanach:heure,almanach:heures})][(#DECALAGE|=={0}|?{<:almanach:pas_de_decalage:>})]</span>
+</div>
+
 <p></p>
 </div>
 
@@ -59,7 +64,7 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_evenements>
-</B_liste_evenements>
+
 <p><:almanach:aucun_evenement:></p>
 [(#BOUTON_ACTION{<:almanach:retour_liste:>,#URL_ECRIRE{almanachs}})]
 <p><:almanach:regenerer_almanach:></p>
@@ -69,11 +74,14 @@
 	[(#MAJ|oui)
 		<div class='maj'><:almanach:info_derniere_synchronisation:>[ (#MAJ|affdate_heure)]</div>
 	]
-
 	<div class='synchro_almanach'>
 		[(#BOUTON_ACTION{<:almanach:lien_synchro_almanach:>,#URL_ACTION_AUTEUR{synchro_almanach,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_mise_a_jour_evenements{titre_almanach=#TITRE}:>,})]
 	</div>
 
+	<div class="appliquer_decalage"><:almanach:appliquer_decalage_explication:>
+		[(#BOUTON_ACTION{<:almanach:appliquer_decalage:>,#URL_ACTION_AUTEUR{appliquer_decalage,#ID_ALMANACH,#SELF},ajax,<:almanach:confirmation_appliquer_decalage{titre_almanach=#TITRE}:>,})]
+
+	</div>
 
 	<div class='purger_almanach'>
 	<BOUCLE_nb_evenement(spip_almanachs_liens){id_almanach=#ID_ALMANACH}{objet=evenement}>

@@ -96,8 +96,8 @@ function importation_evenement($objet_evenement,$id_almanach){
 	$id_mot = _request('id_mot');
 	$id_article = _request('id_article'); 
 	$id_evenement= sql_insertq('spip_evenements',array('id_article' =>$id_article,'date_debut'=>$date_debut,'date_fin'=>$date_fin,'titre'=>$titre_evt,'descriptif'=>'<math>'.$descriptif_array["value"].'</math>','lieu'=>$lieu,'adresse'=>'','inscription'=>'0','places'=>'0','horaire'=>'oui','statut'=>'publie','attendee'=>str_replace('MAILTO:', '', $attendee),'id_evenement_source'=>'0','uid'=>$uid_distante,'sequence'=>$sequence_distante,'notes'=>$url));
-	
-	#on associe l'évéenement à l'almanach
+
+	#on associe l'événement à l'almanach
 	#objet_associer(array('almanach'=>$id_almanach),array('evenement'=>$id_evenement),array('vu'=>'oui'));
 	sql_insertq("spip_almanachs_liens",array('id_almanach'=>$id_almanach,'id_objet'=>$id_evenement,'objet'=>'evenement','vu'=>'oui'));
 	#on associe l'événement à son mot
@@ -111,7 +111,7 @@ function importation_evenement($objet_evenement,$id_almanach){
 
 
 /**
-*ajout d'une reservation à l'événeemnt si c'est coché
+*ajout d'une reservation à l'événement si c'est coché
 **/
 
 function ajout_resa($titre_evt,$id_ressource,$date_debut,$date_fin){
