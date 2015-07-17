@@ -23,7 +23,15 @@
 		<li class="item">
 			<h3>#INFO_TITRE{article,#ID_ARTICLE}</h3>
 			#MODELE{evenement_vevent}
-			<a href="#URL_ARTICLE{#ID_ARTICLE}"><:seminaire:plus:> : #INFO_TITRE{article, #ID_ARTICLE}</a>
+			<B_document>
+			<strong>Document(s) associé(s) :</strong>
+			<ul>
+			<BOUCLE_document(DOCUMENTS){id_evenement}>
+			<li><a href="#URL_DOCUMENT" rel="bookmark" type="#MIME_TYPE" title="<:bouton_telecharger:> [(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]" >[(#TITRE|sinon{#FICHIER|basename|couper{80}})]</a> ([(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)])</li>
+			</BOUCLE_document>
+			</ul>
+			<B_document>
+			<p><a href="#URL_ARTICLE{#ID_ARTICLE}"><:seminaire:plus:> : #INFO_TITRE{article, #ID_ARTICLE}</a></p>
 		</li>
 	</BOUCLE_ev>
 	</ul>
