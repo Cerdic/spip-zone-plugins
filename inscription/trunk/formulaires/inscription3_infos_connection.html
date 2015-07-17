@@ -8,7 +8,7 @@
 ]
 
 [(#CONFIG{inscription3/login}|=={on}|ou{[(#CONFIG{inscription3/pass}|=={on})]}|oui)
-    [(#CONFIG{inscription3/login}|=={on}|oui)
+	[(#CONFIG{inscription3/login}|=={on}|oui)
 		[(#CONFIG{inscription3/login_obligatoire}|=={on}|oui)[(#SET{login_obligatoire,oui})]]
 		[(#SAISIE{input,login,
 			obligatoire=#GET{login_obligatoire},
