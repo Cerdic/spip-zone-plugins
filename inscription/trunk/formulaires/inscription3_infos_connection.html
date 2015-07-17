@@ -17,11 +17,11 @@
 	]
 	[(#CONFIG{inscription3/pass}|=={on}|oui)
 		<li class="editer editer_password[ (#CONFIG{inscription3/pass_obligatoire}|=={on}|?{obligatoire})][ (#ENV**{erreurs}|table_valeur{pass}|oui)erreur]">
-		    <label for="pass"><:inscription3:label_pass:>[(#CONFIG{inscription3/pass_obligatoire}|=={on}|?{<span class='obligatoire'><:info_obligatoire_02:></span>})]</label>
-		    [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pass})</p>]
-		    <input type="password" class="text" autocomplete="off" name="pass" id="pass" value="#ENV{pass}" size="30" />
+			<label for="pass"><:inscription3:label_pass:>[(#CONFIG{inscription3/pass_obligatoire}|=={on}|?{<span class='obligatoire'><:info_obligatoire_02:></span>})]</label>
+			[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{pass})</p>]
+			<input type="password" class="text" autocomplete="off" name="pass" id="pass" value="#ENV{pass}" size="30" />
 			<label for="password1"><:inscription3:label_password_retaper:>[(#CONFIG{inscription3/pass_obligatoire}|=={on}|?{<span class='obligatoire'><:info_obligatoire_02:></span>})]</label>
-		    <input type="password" class="text" autocomplete="off" name="password1" id="password1" value="#ENV{password1}" size="30" />
+			<input type="password" class="text" autocomplete="off" name="password1" id="password1" value="#ENV{password1}" size="30" />
 			[(#CONFIG{inscription3/password_complexite}|=={on}|oui)[(#INCLURE{fond=formulaires/inc-js_pass_verification,password=pass,env})]]
 		</li>
 	]
