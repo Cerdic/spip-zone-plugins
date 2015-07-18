@@ -29,6 +29,10 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
             'id' => 'dropzonespip_logo' // Un ID spécifique pour les logo
         );
 
+        // Si on est dans l'espace privé, on ajouter le titre du bloc
+        if (test_espace_prive())
+            $contexte['_header'] = '<h3 class="titrem">'.titre_cadre_logo($objet, $id_objet).'</h3>';
+
         // On ajoute le reste du contexte
         // Dans ce cas si, c'est $contexte qui supplante les informations
         // de $args car on force ces options pour les logos
