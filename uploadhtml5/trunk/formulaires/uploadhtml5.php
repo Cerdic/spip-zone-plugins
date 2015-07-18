@@ -18,6 +18,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
+    // Convertir les acceptedFiles
+    if (!empty($args['acceptedFiles']))
+        $args['acceptedFiles'] = trouver_mime_type($args['acceptedFiles']);
+
     // Contexte de base
     $contexte = array(
         'ajaxReload' => $ajaxReload,
