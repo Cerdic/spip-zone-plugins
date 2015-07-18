@@ -102,13 +102,30 @@ function uploadhtml5_uploader_logo($objet, $id_objet, $fichier) {
 /**
  * Convertir les formats de logo accepté en mime_type
  *
+ * @param mixed $type Liste des formats à convertir en mime type, séparé par une virgule.
  * @access public
+ * @global mixed $formats_logos
+ * @return mixed Liste des mimes types séparé par une virgule.
  */
-function mime_type_logos() {
-    global $formats_logos;
+function trouver_mime_type($type) {
 
-    $mime_type_logos = sql_allfetsel('mime_type', 'spip_types_documents', sql_in('extension', $formats_logos));
-    $mime_type_logos = array_column($mime_type_logos, 'mime_type');
+    // Si le type est logo on récupère automatiquement les formats de
+    // logo défini par SPIP
+    if ($type == 'logo') {
+        global $formats_logos;
+        $type = $formats_logos;
+    }
+    else {
+        // on explode pour passer $type dans sql_in
+        $type = explode(',', $type);
+    }
 
-    return implode(',', $mime_type_logos);
+    // On récupère les mimes types demandé par la fonction
+    $mime_type = sql_allfetsel('mime_type', 'spip_types_documents', sql_in('extension', $type));
+
+    // Simplifier le tableau
+    $mime_type = array_column($mime_type, 'mime_type');
+
+    // Renvoyer une chaine utilisable
+    return implode(',', $mime_type);
 }
