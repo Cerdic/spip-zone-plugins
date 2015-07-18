@@ -18,6 +18,19 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
+    // Si l'option logo est activée, on renvoie un contexte figé qui correspond
+    if (isset($args['logo']) and $args['logo'] == 'oui') {
+        $contexte = array(
+            'paramName' => 'file_logo',
+            'ajaxReload' => $ajaxReload, // Le bloc ajax à rafraichir
+            'maxFiles' => 1, // un seul fichier
+            'acceptedFiles' => trouver_mime_type('logo'), // N'accepter que les logo défini par spip
+            'id' => 'dropzonespip_logo' // Un ID spécifique pour les logo
+        );
+
+        return $contexte;
+    }
+
     // Convertir les acceptedFiles
     if (!empty($args['acceptedFiles']))
         $args['acceptedFiles'] = trouver_mime_type($args['acceptedFiles']);
