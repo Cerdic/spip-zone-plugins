@@ -25,7 +25,8 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
     // Contexte de base, qui pourra être surcharger par $args
     $contexte = array(
         'ajaxReload' => $ajaxReload,
-        'paramName' => 'file'
+        'paramName' => 'file',
+        'id' => 'dropzonespip'
     );
 
     // Fusionner args avec le contexte
