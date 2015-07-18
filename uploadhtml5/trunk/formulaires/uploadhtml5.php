@@ -24,10 +24,11 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
 
     // Contexte de base
     $contexte = array(
-        'ajaxReload' => $ajaxReload,
-        'redirect' => $args['redirect'],
-        'acceptedFiles' => trouver_mime_type($args['acceptedFiles'])
+        'ajaxReload' => $ajaxReload
     );
+
+    // Fusionner args avec le contexte
+    $contexte = array_merge($contexte, $args);
 
     return $contexte;
 }
