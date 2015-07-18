@@ -11,10 +11,10 @@
   <form action="#ENV{action}" method="post" class="dropzone" id="dropzonespip">
     #ACTION_FORMULAIRE{#ENV{action}}
     <div class="fallback">
-      <input name="#ENV{paramName, file}" type="file" multiple />
+      <input name="#ENV{paramName}" type="file" multiple />
     </div>
   </form>
 
-  #INCLURE{fond=javascript/spip.dropzone.js, paramName=file, dropzone=#dropzonespip, env}
+  #INCLURE{fond=javascript/spip.dropzone.js, dropzone=#dropzonespip, env}
   ]
 </div>

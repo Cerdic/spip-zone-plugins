@@ -22,9 +22,10 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
     if (!empty($args['acceptedFiles']))
         $args['acceptedFiles'] = trouver_mime_type($args['acceptedFiles']);
 
-    // Contexte de base
+    // Contexte de base, qui pourra être surcharger par $args
     $contexte = array(
-        'ajaxReload' => $ajaxReload
+        'ajaxReload' => $ajaxReload,
+        'paramName' => 'file'
     );
 
     // Fusionner args avec le contexte
