@@ -1,0 +1,35 @@
+<B_tables>
+<BOUCLE_tables(DATA) {source table, #ENV{tables}} {si #SESSION{webmestre}|=={oui}}>
+#SET{spip_table,#VAL{'spip_'}|concat{#VALEUR,'s'}}
+	<B_info_table>
+	<table>
+		<BOUCLE_info_table(DATA) {source table, #EVAL{$GLOBALS['tables_principales'][#GET{spip_table}]}}{cle==field}>
+			<caption>#_tables:GET{spip_table}</caption>
+		<thead>
+			<th><:doc_tech:nom_du_champ:></th>
+			<th><:doc_tech:definition_mysql:></th>
+			<th><:doc_tech:label_label:></th>
+			<th><:doc_tech:documentations:></th>
+		</thead>
+			<B_label>
+			<tbody>
+				<BOUCLE_label(DATA) {source table, #VALEUR}>
+				<tr>
+					<td><strong>#CLE</strong></td>
+					<td><em>#VALEUR</em></td>
+					<td>[(#VAL{#_tables:VALEUR}|concat{':label_',#CLE}|_T)]</td>
+					<td>[(#VAL{#_tables:VALEUR}|concat{':label_',#CLE,'_documentation'}|_T)]</td>
+				</tr>
+				</BOUCLE_label>
+			</tbody>
+			</B_label>
+		</BOUCLE_info_table>
+	</table>
+	</B_info_table>
+	[(#BOITE_OUVRIR{'','notice'})]
+	<:doc_tech:pas_de_tables_nom:>
+	[(#BOITE_FERMER)]
+	<//B_info_table>
+</BOUCLE_tables>
+</B_tables>
+<//B_tables>
