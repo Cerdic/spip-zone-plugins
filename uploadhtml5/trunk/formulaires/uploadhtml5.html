@@ -2,13 +2,6 @@
 
   [(#ENV*{_header})]
 
-  [<p class="reponse_formulaire reponse_formulaire_erreur">
-    (#ENV*{message_erreur})
-  </p>]
-  [<p class="reponse_formulaire reponse_formulaire_ok">
-    (#ENV*{message_ok})
-  </p>]
-
   [(#EDITABLE|oui)
   <form action="#ENV{action}" method="post" class="dropzone" id="#ENV{id}">
     #ACTION_FORMULAIRE{#ENV{action}}
