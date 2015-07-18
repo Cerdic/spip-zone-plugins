@@ -20,7 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $id_document Dans le cas ou l'on veux remplacer un document.
  * @access public
  */
-
 function uploadhtml5_uploader_document($objet, $id_objet, $files, $id_document='new', $mode = 'auto') {
 
     // tester l'autorisation d'ajout de document
@@ -128,4 +127,39 @@ function trouver_mime_type($type) {
 
     // Renvoyer une chaine utilisable
     return implode(',', $mime_type);
+}
+
+
+/**
+ * Fonction qui va créer le titre du cadre d'un logo
+ * C'est reprit de prive/formulaires/editer_logo.phpL55
+ * Cela devrait être dans une fonction du core de SPIP non ?
+ */
+function titre_cadre_logo($objet, $id_objet) {
+    $balise_img = chercher_filtre('balise_img');
+    $img = $balise_img(chemin_image('image-24.png'), "", 'cadre-icone');
+    $libelles = pipeline('libeller_logo', $GLOBALS['logo_libelles']);
+    $libelle = (($id_objet OR $objet != 'rubrique') ? $objet : 'racine');
+    if (isset($libelles[$libelle])) {
+        $libelle = $libelles[$libelle];
+    } elseif ($libelle = objet_info($objet, 'texte_logo_objet')) {
+        $libelle = _T($libelle);
+    } else {
+        $libelle = _L('Logo');
+    }
+    switch($objet){
+    case 'article':
+        $libelle .= " " . aide ("logoart");
+        break;
+    case 'breve':
+        $libelle .= " " . aide ("breveslogo");
+        break;
+    case 'rubrique':
+        $libelle .= " " . aide ("rublogo");
+        break;
+    default:
+        break;
+    }
+
+    return $img . $libelle;
 }
