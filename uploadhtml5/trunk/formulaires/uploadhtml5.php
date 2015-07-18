@@ -10,8 +10,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $mode mode d'insertion des objets
  * @param string $ajaxReload Objet ajax à recharger quand une image est uploadé
  * @param mixed $args Tableau d'option
- *        "redirect" => Faire une redirection après l'upload de tout les éléménts.
- *        "acceptedFiles" => limiter les types de fichier accepter
+ *        redirect => Faire une redirection après l'upload de tout les éléménts.
+ *        acceptedFiles => limiter les types de fichier accepter. Une liste d'extension (ex: jpg,gif,pdf)
+ *        paramName => Changer le name du formulaire d'envoie
+ *        id => Changer l'id de la dropzone
+ *        maxFiles => Nombre maximum de fichier envoyé (supplante la configuration global)
+ *        _header => placer du texte ou du header dans le haut du formulaire
+ *        _footer => placer du texte ou du header dans le bas du formulaire
  *
  * @access public
  * @return mixed
