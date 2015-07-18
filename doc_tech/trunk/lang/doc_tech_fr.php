@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_label' => 'Label',
-	'label_perso' => 'Des préfixes de chaînes de langue personnalisés :',
+	'label_perso' => 'Des préfixes de chaînes de langue personnalisés, séparés une virgule :',
 	'label_regrouper_champs' => 'Regrouper les champs ?',
 	'label_vos_objets' => 'Vos objets :',
 

@@ -1,16 +1,12 @@
 <paquet
 	prefix="doc_tech"
 	categorie="outil"
-	version="0.5.0"
+	version="0.6.0"
 	etat="dev"
-	compatibilite="[3.0.9;3.0.*]"
+	compatibilite="[3.0.9;3.1.*]"
 	logo="prive/themes/spip/images/doc_tech-32.png"
 	documentation=""
 >
-	<!--
-		Paquet genere le 2013-11-26 23:35:07
-	-->
-
 	<nom>Documentation technique</nom>
 
 	<auteur lien='http://www.teddypayet.com'>Teddy Payet</auteur>
