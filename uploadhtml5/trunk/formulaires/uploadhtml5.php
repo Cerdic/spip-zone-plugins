@@ -16,22 +16,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @access public
  * @return mixed
  */
-function formulaires_uploadhtml5_saisies_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
-    $saisies = array(
-        array(
-            'saisie' => 'input',
-            'options' => array(
-                'nom' => 'files[]',
-                'label' => _T('uploadhtml5:upload'),
-                'id' => 'fileupload',
-                'type' => 'file',
-                'attributs' => 'multiple'
-            )
-        )
-    );
-    return $saisies;
-}
-
 function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
     // Contexte de base
