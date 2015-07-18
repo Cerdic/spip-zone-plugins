@@ -50,8 +50,10 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
 
 function formulaires_uploadhtml5_traiter_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
 
-    // upload de la dropzone
-    uploadhtml5_uploader_document($objet, $id_objet, $_FILES, 'new', $mode);
+    if (isset($args['logo']) and $args['logo'] == 'oui')
+        uploadhtml5_uploader_logo($objet, $id_objet, $_FILES['file_logo']['tmp_name']);
+    else
+        uploadhtml5_uploader_document($objet, $id_objet, $_FILES, 'new', $mode);
 
     // Donnée de retour.
     return array(
