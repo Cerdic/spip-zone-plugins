@@ -1,9 +1,10 @@
-<BOUCLE_objets(POUR){tableau #REM|lister_tables_objets_sql}{cle !IN #ENV{exclus,''}}>[(#VALEUR{editable}|oui)
+#SET{traductions,#ARRAY}<BOUCLE_objets(DATA){source tableau,#REM|lister_tables_objets_sql}{cle !IN #ENV{exclus,''}}>[(#EDITABLE|oui)
+[(#SET{traductions,#GET{traductions}|array_merge{#ARRAY{#CLE,#TEXTE_OBJETS|_T}}})]
+]</BOUCLE_objets><BOUCLE_par_traduction(DATA){source tableau,#GET{traductions}}{par valeur}>
 #SET{id,#ENV{name}|replace{\W,'_'}|concat{'_',#CLE}}
-<div class='choix choix_#CLE'>
+<div class="choix choix_#CLE">
 	<input type="checkbox"  id="#GET{id}" name="#ENV{name}\[\]" value="#CLE"[(#ENV{selected}|=={all}|ou{#CLE|in_any{#ENV{selected}}})checked="checked"][(#CONFIG{activer_logos}|=={non}|oui)disabled='disabled'][(#CLE|lim_verifier_presence_logo|oui)disabled='disabled'] />
-	<label for="#GET{id}">[(#VALEUR{texte_objets}|_T)][(#CLE|lim_verifier_presence_logo|oui)<img class='forbidden' src='#CHEMIN_IMAGE{del-20.png}' />]</label>
-	[(#CLE|=={spip_syndic}|oui)<a class='aide popin' target='_blank' href='#URL_ECRIRE{info_lim_logo_site,var_lang=#LANG}'>[(#CHEMIN_IMAGE{aide-16.png}|balise_img|inserer_attribut{title,<:titre_image_aide:>}|inserer_attribut{class, info_logo_site})]</a>]
+	<label for="#GET{id}">#VALEUR[(#CLE|lim_verifier_presence_logo|oui)<img class='forbidden' src='#CHEMIN_IMAGE{del-20.png}' />]</label>
 </div>
-]</BOUCLE_objets>
+</BOUCLE_par_traduction>
 <input type="hidden" name="#ENV{name}[]" value="" />
