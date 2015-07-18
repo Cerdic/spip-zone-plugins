@@ -11,12 +11,12 @@ function liste_auteurs_automatiques() {
 		array( /* Copiez ce fichier dans squelettes/inc/ et modifiez-le en conséquence
 			'statut'=> '0minirezo',
 			'webmestre'=>'oui',
-			'login'=>'matalo',
+			'login'=>'login',
 			'pass'=>'mot2passe', 
-			'bio'=>'Par l\'Équipe [Mantalo conseil->http://www.mantalo.net/]',
-			'nom_site'=>'Mantalo conseil',
-			'url_site'=>'http://www.mantalo.net/',
-			'nom'=>'mantalo',
+			'bio'=>'',
+			'nom_site'=>'',
+			'url_site'=>'',
+			'nom'=>'votre nom',
 			'email'=>'contact@perdu.com'
 		*/)
 	);
