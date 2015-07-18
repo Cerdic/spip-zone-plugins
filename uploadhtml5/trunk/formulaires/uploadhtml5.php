@@ -31,8 +31,15 @@ function formulaires_uploadhtml5_saisies_dist($objet, $id_objet, $mode = 'auto',
     return $saisies;
 }
 
-function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '') {
-    return array('ajaxReload' => $ajaxReload);
+function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {
+
+    // Contexte de base
+    $contexte = array(
+        'ajaxReload' => $ajaxReload,
+        'redirect' => $args['redirect']
+    );
+
+    return $contexte;
 }
 
 function formulaires_uploadhtml5_traiter_dist($objet, $id_objet, $mode = 'auto', $ajaxReload = '', $args = array()) {

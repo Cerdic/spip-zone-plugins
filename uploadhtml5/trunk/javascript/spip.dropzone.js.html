@@ -11,6 +11,10 @@
      ajaxReload("(#ENV{ajaxReload})");
    },]
 
+   [complete: function (file, response) {
+     window.location = "(#ENV{redirect})";
+   },]
+
    // Traduire dropzone
    #INCLURE{fond=javascript/traduire_dropzone/#ENV{paramName, file}, env}
 
