@@ -20,6 +20,7 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
 
     // Si l'option logo est activée, on renvoie un contexte figé qui correspond
     if (isset($args['logo']) and $args['logo'] == 'oui') {
+
         $contexte = array(
             'paramName' => 'file_logo',
             'ajaxReload' => $ajaxReload, // Le bloc ajax à rafraichir
@@ -27,6 +28,11 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
             'acceptedFiles' => trouver_mime_type('logo'), // N'accepter que les logo défini par spip
             'id' => 'dropzonespip_logo' // Un ID spécifique pour les logo
         );
+
+        // On ajoute le reste du contexte
+        // Dans ce cas si, c'est $contexte qui supplante les informations
+        // de $args car on force ces options pour les logos
+        $contexte = array_merge($args, $contexte);
 
         return $contexte;
     }
