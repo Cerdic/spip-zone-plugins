@@ -11,6 +11,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param string $ajaxReload Objet ajax à recharger quand une image est uploadé
  * @param mixed $args Tableau d'option
  *        "redirect" => Faire une redirection après l'upload de tout les éléménts.
+ *        "acceptedFiles" => limiter les types de fichier accepter
  *
  * @access public
  * @return mixed
@@ -36,7 +37,8 @@ function formulaires_uploadhtml5_charger_dist($objet, $id_objet, $mode = 'auto',
     // Contexte de base
     $contexte = array(
         'ajaxReload' => $ajaxReload,
-        'redirect' => $args['redirect']
+        'redirect' => $args['redirect'],
+        'acceptedFiles' => trouver_mime_type($args['acceptedFiles'])
     );
 
     return $contexte;
