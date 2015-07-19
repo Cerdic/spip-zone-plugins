@@ -72,7 +72,7 @@ function frimousses_liste_smileys() {
 // smileys, etc ; reportez vous au forum de l'article :
 // http://www.spip-contrib.net/Smileys-III-Un-point-d-entree-pour
 
-function frimousses_pre_propre($chaine) {
+function frimousses_pre_typo($chaine) {
 	if (strpos($chaine, ':')===false && strpos($chaine, ')')===false) {return $chaine;}
 
 	static $replace1 = null;
