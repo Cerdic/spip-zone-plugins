@@ -1,14 +1,14 @@
 <?php
+
 /**
- * Fonctions d'actions du plugin "Nettoyer la médiathèque"
+ * Fonctions d'actions du plugin "Nettoyer la médiathèque".
  *
  * @plugin     Nettoyer la médiathèque
- * @copyright  2014
+ *
+ * @copyright  2014-2015
  * @author     Teddy Payet
  * @licence    GNU/GPL
  */
-
-
 if (!defined('_ECRIRE_INC_VERSION')) {
     return;
 }
@@ -31,26 +31,26 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *
  * @return bool
  */
-function inc_medias_reparer_doc_fichiers_dist ()
+function inc_medias_reparer_doc_fichiers_dist()
 {
-    /**
+    /*
      * On crée un log vraiment au début du script.
      * Ainsi, on sait déjà en regardant les logs
      * si le script est lancé ou pas.
      */
     spip_log(
         date_format(date_create(), 'Y-m-d H:i:s')
-        . ' : Début de la procédure de réparation des documents.',
-        "medias_nettoyage"
+        .' : Début de la procédure de réparation des documents.',
+        'medias_nettoyage'
     );
 
-    $repertoire_img     = _DIR_IMG ;
-    $docs_fichiers      = array();
-    $pattern_img        = "/" . preg_replace("/\//", "\/", $repertoire_img) . "/";
-    $message_log        = array();
+    $repertoire_img = _DIR_IMG;
+    $docs_fichiers = array();
+    $pattern_img = '/'.preg_replace("/\//", "\/", $repertoire_img).'/';
+    $message_log = array();
 
     // On va chercher dans IMG/*.*
-    $fichiers = glob($repertoire_img . "*.*");
+    $fichiers = glob($repertoire_img.'*.*');
     if (is_array($fichiers) and count($fichiers) > 0) {
         foreach ($fichiers as $fichier) {
             $docs_fichiers[] = $fichier;
@@ -74,9 +74,9 @@ function inc_medias_reparer_doc_fichiers_dist ()
         $docs_bdd = sql_allfetsel(
             'id_document,fichier',
             'spip_documents',
-            "fichier IN ("
-            . join(",", $url_fichiers)
-            . ")"
+            'fichier IN ('
+            .implode(',', $url_fichiers)
+            .')'
         );
 
         if (is_array($docs_bdd) and count($docs_bdd) > 0) {
@@ -87,56 +87,54 @@ function inc_medias_reparer_doc_fichiers_dist ()
                 // (ne pas oublier d'enlever '../IMG/' à notre variable de test
                 // car cette variable sera enresgitrée en BDD)
                 $destination_test = preg_replace($pattern_img, '', $destination);
-                if (count(explode("/", $destination_test)) == 1) {
-                    $destination = $document['extension'] . '/' . $destination_test ;
+                if (count(explode('/', $destination_test)) == 1) {
+                    $destination = $document['extension'].'/'.$destination_test;
                 }
                 if ($document['fichier'] != $destination
-                    and rename($repertoire_img . $document['fichier'], $repertoire_img . $destination)) {
+                    and rename($repertoire_img.$document['fichier'], $repertoire_img.$destination)) {
                     sql_updateq(
                         'spip_documents',
                         array('fichier' => $destination),
-                        'id_document=' . $document['id_document']
+                        'id_document='.$document['id_document']
                     );
                     $message_log[] = date_format(date_create(), 'Y-m-d H:i:s')
-                    . ' : le fichier '
-                    . $repertoire_img
-                    . $document['fichier']
-                    . ' a été déplacé vers '
-                    . $repertoire_img
-                    . $destination
+                    .' : le fichier '
+                    .$repertoire_img
+                    .$document['fichier']
+                    .' a été déplacé vers '
+                    .$repertoire_img
+                    .$destination
                     .'.';
                 } else {
                     $message_log[] = date_format(date_create(), 'Y-m-d H:i:s')
-                    . ' : le fichier '
-                    . $repertoire_img
-                    . $document['fichier']
-                    . ' n\'a pu être déplacé vers '
-                    . $repertoire_img
-                    . $destination
-                    . '.';
+                    .' : le fichier '
+                    .$repertoire_img
+                    .$document['fichier']
+                    .' n\'a pu être déplacé vers '
+                    .$repertoire_img
+                    .$destination
+                    .'.';
                 }
             }
         }
     } else {
-        $message_log[] = date_format(date_create(), 'Y-m-d H:i:s') . ' : Il n\'y a pas de documents à réparer.';
+        $message_log[] = date_format(date_create(), 'Y-m-d H:i:s').' : Il n\'y a pas de documents à réparer.';
     }
 
     spip_log(
         "\n-------\n"
-        . join("\n", $message_log)
-        . "\n-------\n",
-        "medias_nettoyage"
+        .implode("\n", $message_log)
+        ."\n-------\n",
+        'medias_nettoyage'
     );
-    /**
+    /*
      * Et là, on marque bien la fin du script dans les logs.
      */
     spip_log(
         date_format(date_create(), 'Y-m-d H:i:s')
-        . ' : Fin de la procédure de réparation des documents.',
-        "medias_nettoyage"
+        .' : Fin de la procédure de réparation des documents.',
+        'medias_nettoyage'
     );
 
     return true;
 }
-
-?>
