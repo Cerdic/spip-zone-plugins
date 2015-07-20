@@ -361,17 +361,17 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							}
 						}
 						if ($identifiant) {
-							$sel = "li[data-id='$identifiant']";
+							$sel = "[data-id='$identifiant']";
 						} else {
-							$sel = "li.$class_li";
+							$sel = ".$class_li";
 						}
 						$code .= "\tif (".$condition.') {$(form).find("'.$sel.'").show(400);} '."\n\t";
 						$code .= 'else {if (chargement==true) {$(form).find("'.$sel.'").hide(400).css("display","none");} else {$(form).find("'.$sel.'").hide(400);};} '."\n";
 					}
 				}
 		$code .= "};";
-		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").each(function(){verifier_saisies_'.$id_form.'(this);});';
-		$code .= '$("li#afficher_si_'.$id_form.'").parents("form").change(function(){verifier_saisies_'.$id_form.'(this);});';
+		$code .= '$("#afficher_si_'.$id_form.'").parents("form").each(function(){verifier_saisies_'.$id_form.'(this);});';
+		$code .= '$("#afficher_si_'.$id_form.'").parents("form").change(function(){verifier_saisies_'.$id_form.'(this);});';
 	$code .= 'chargement=false;})';
 	$code .= '})(jQuery);';
 	return $i>0 ? $code : '';
