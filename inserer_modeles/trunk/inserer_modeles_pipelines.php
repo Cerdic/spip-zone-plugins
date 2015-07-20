@@ -94,7 +94,17 @@ function inserer_modeles_porte_plume_lien_classe_vers_icone($flux)
  */
 function inserer_modeles_configuration()
 {
-    $inserer_modeles = isset($GLOBALS['meta']['inserer_modeles']) ? unserialize($GLOBALS['meta']['inserer_modeles']) : array(
+    $configuration = array();
+    if (isset($GLOBALS['meta']['inserer_modeles'])) {
+        include_spip('inf/filtres');
+        $configuration = unserialize($GLOBALS['meta']['inserer_modeles']);
+        // Comme on utilise la saisie choisir_objets,
+        // on retravaille les objets sélectionnés pour avoir leur url_edit
+        foreach ($configuration['objets'] as $key => $objet) {
+            $configuration['objets'][$key] = objet_info($objet, 'url_edit');
+        }
+    }
+    $inserer_modeles = (count($configuration) > 0) ? $configuration : array(
         'objets' => array('article_edit', 'breve_edit', 'rubrique_edit', 'mot_edit'),
     );
     $inserer_modeles = array_map('array_filter', $inserer_modeles);

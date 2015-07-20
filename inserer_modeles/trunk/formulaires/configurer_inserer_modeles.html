@@ -9,9 +9,9 @@
     <div>
         #ACTION_FORMULAIRE{#ENV{action}}
             <ul>
-                [(#SAISIE{choisir_objets_edit, objets,
+                [(#SAISIE{choisir_objets, objets,
                     label=<:inserer_modeles:choix_objets_editable:>,
-                    selected=#LISTE{'article_edit','breve_edit','rubrique_edit','mot_edit'},
+                    selected=#LISTE{'spip_articles', 'spip_rubriques', 'spip_breves', 'spip_mots'},
                     explication=<:inserer_modeles:choix_objets_editable_explication:>})]
             </ul>
         <input type="hidden" name="_meta_casier" value="inserer_modeles" />
