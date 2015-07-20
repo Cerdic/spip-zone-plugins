@@ -1,8 +1,8 @@
 <paquet
 	prefix="knacsspip"
 	categorie="performance"
-	version="1.0.0"
-	etat="dev"
+	version="1.0.1"
+	etat="test"
 	compatibilite="[3.0.17;3.0.*]"
 	logo="knacsspip.png"
 	documentation="https://github.com/raphaelgoetter/KNACSS/tree/master/doc"
