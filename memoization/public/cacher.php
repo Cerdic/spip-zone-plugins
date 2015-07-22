@@ -368,7 +368,8 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 			$use_cache = 0;
 		}
 		else {
-			spip_log("Erreur base de donnees, impossible utiliser "._MEMOIZE." $chemin_cache");
+			include_spip('inc/config');
+			spip_log("Erreur base de donnees, impossible utiliser " . lire_config('memoization/methode') . " $chemin_cache");
 			include_spip('inc/minipres');
 			return minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
 		}
