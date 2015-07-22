@@ -12,6 +12,18 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+
+/**
+ * Un fitre que l'on peut utiliser en argument d'une inclusion si on veut etre sur que l'affichage change quand la commande change
+ * <INCLURE{fond=macommande,id_commande,hash=#ID_COMMANDE|commandes_hash} />
+ *
+ * @param int $id_commande
+ * @return string
+ */
+function commandes_hash($id_commande){
+	return md5(serialize(sql_allfetsel("id_commandes_detail,prix_unitaire_ht,taxe,objet,id_objet,quantite","spip_commandes_details","id_commande=".intval($id_commande))));
+}
+
 /**
  * Retourne les différents statuts possibles pour une commande ou le nom d'un statut précis
  *
