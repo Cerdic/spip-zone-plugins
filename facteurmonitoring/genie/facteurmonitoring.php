@@ -40,7 +40,7 @@ function genie_facteurmonitoring_dist() {
         include_spip("lib/PhpImap/MailBox");
     
         $connection = '{'.$hote_imap.':'.$hote_port.'}'.$hote_inbox;
-        $mailbox = new PhpImap\Mailbox($connection, $email, $email_pwd, __DIR__);
+        $mailbox = new PhpImap\Mailbox($connection, $email, $email_pwd);
         try {
               $mailsIds = $mailbox->searchMailBox('SUBJECT "'.$email_hash.'"');
               if($mailsIds) {

@@ -36,7 +36,7 @@ function facteurmonitoring_test_imap($time) {
           include_spip("lib/PhpImap/MailBox");
       
           $connection = '{'.$hote_imap.':'.$hote_port.'}'.$hote_inbox;
-          $mailbox = new PhpImap\Mailbox($connection, $email, $email_pwd, __DIR__);
+          $mailbox = new PhpImap\Mailbox($connection, $email, $email_pwd);
           
           try {
               $mailsIds = $mailbox->searchMailBox('NEW');
