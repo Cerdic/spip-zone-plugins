@@ -4,7 +4,7 @@
 /*
 	La Fonction Sale()
 	(c)2005 James <klike@free.fr>
-	d'après le bouton memo et le script spip_unparse
+	d'aprÃ¨s le bouton memo et le script spip_unparse
 */
 
 function tag2attributs($innerTag) {
@@ -25,31 +25,30 @@ function tag2attributs($innerTag) {
 }
 
 function decode_entites($texte) {
-    static $trans;
-    if (!isset($trans)) {
-        $trans = get_html_translation_table(HTML_ENTITIES, $quote_style);
-        $trans = array_flip($trans);
-        $trans['&euro;'] = '€';
-        $trans['&oelig;'] = 'œ';
-        $trans['&OElig;'] = 'Œ';
-        foreach ($trans as $key => $value) {
-            $trans['&#'.ord($value).';'] = $value;
-        }
-            // ajout du caractere apostrophe SPIP : ’
-            $trans['&#8217;'] = '’';
-        $trans['&#039;'] = "'";
-        $trans['&#171;'] = '«';
-        $trans['&#187;'] = '»';
-        $trans['&#176;'] = '°';
-            // des caracteres non supportes
-            $trans['&nbsp;&euro;'] = ' €';
-    }
+	static $trans;
+	if (!isset($trans)) {
+		$trans = get_html_translation_table(HTML_ENTITIES, $quote_style);
+		$trans = array_flip($trans);
+		$trans['&euro;'] = 'â‚¬';
+		$trans['&oelig;'] = 'Å“';
+		$trans['&OElig;'] = 'Å’';
+		foreach ($trans as $key => $value) {
+			$trans['&#'.ord($value).';'] = $value;
+		}
+		// ajout du caractere apostrophe SPIP : â€™
+		$trans['&#8217;'] = 'â€™';
+		$trans['&#039;'] = "'";
+		$trans['&#171;'] = 'Â«';
+		$trans['&#187;'] = 'Â»';
+		$trans['&#176;'] = 'Â°';
+		// des caracteres non supportes
+		$trans['&nbsp;&euro;'] = ' â‚¬';
+	}
 
-    return strtr($texte, $trans);
+	return strtr($texte, $trans);
 }
 
-function correspondances_standards()
-{
+function correspondances_standards() {
 	return array(
 		//Mise en page
 		",<(i|em)( [^>\r]*)?".'>,Uims' => '{', //Italique
@@ -107,7 +106,7 @@ function correspondances_a_bas_le_html() {
 		',<div.*>,Uims' => '',
 		",<\/div.*>,Uims" => '',
 
-		// divers et variés 
+		// divers et variÃ©s 
 		',<csobj.*>,Uims' => '',
 		",<\/csobj>,Uims" => '',
 		',<csscriptdict.*>,Uims' => '',
@@ -175,7 +174,7 @@ function extraire_listes($texte) {
 
 // les tableaux standards ou personalises -----------------------------------------------------
 function recompose_tableau($innerTag, $texte) {
-	$table_class = array('spip' => '|','ville' => '£');
+	$table_class = array('spip' => '|','ville' => 'Â£');
 	$sep = $table_class['spip'];
 
 	$attributs = tag2attributs($innerTag);
@@ -403,7 +402,7 @@ function spip_apres_sale($contenu) {
 function sale($contenu_sale, $correspondances = '') {
 	$contenu_propre = $contenu_sale;
 
-	//Pré  Traitement
+	//PrÃ©  Traitement
 	$contenu_propre = spip_avant_sale($contenu_propre);
 
 	//Traitement
@@ -428,7 +427,7 @@ function sale($contenu_sale, $correspondances = '') {
 	//Post Traitement
 	$contenu_propre = spip_apres_sale($contenu_propre);
 
-	// a priori on garde ce qui est pas analysé
+	// a priori on garde ce qui est pas analysÃ©
 	//foreach(correspondances_a_bas_le_html() as $motif => $remplacement)
 	//	$contenu_propre = preg_replace($motif, $remplacement, $contenu_propre);
 
