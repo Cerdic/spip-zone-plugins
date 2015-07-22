@@ -49,21 +49,21 @@ function genie_facteurmonitoring_dist() {
                        $mailbox->deleteMail($mailsId);
                   
                   ecrire_meta('facteurmonitoring_etat', 'OK'); 
-                  spip_log("OK, lecture email $email_hash","facteurmonitoring");
+                  spip_log("[reception] OK, email lu $email_hash","facteurmonitoring");
                   
               } else {                  
-                  spip_log("NOTOK, erreur: lecture email $email_hash","facteurmonitoring");        
+                  spip_log("[reception] NOTOK, erreur: email introuvable $email_hash","facteurmonitoring");        
               }
         
         } catch(Exception $e){
-              spip_log("NOTOK, erreur: boite inaccessible en lecture","facteurmonitoring"); 
+              spip_log("[reception] NOTOK, erreur: boite inaccessible en lecture","facteurmonitoring"); 
         }
     } else {       
-      spip_log("NOTOK, erreur: email hash vide","facteurmonitoring"); 
+      spip_log("[reception] NOTOK, erreur: email hash vide","facteurmonitoring"); 
     }     
     
   } else {
-      spip_log("NOTOK, erreur: email hash inconnu","facteurmonitoring"); 
+      spip_log("[reception] NOTOK, erreur: email hash inconnu","facteurmonitoring"); 
   }
     
   // etape 2: envoie d'un nouvel email test
@@ -72,9 +72,14 @@ function genie_facteurmonitoring_dist() {
   $email_sujet = "[facteur-monitoring] $email_hash";
   $email_body = _T('facteurmonitoring:no-reply',array('site'=>$adresse_site));
   
-  $ok = $envoyer_mail($email,$email_sujet,$email_body);     
-  ecrire_meta('facteurmonitoring_hash', $email_hash); 
-  spip_log("envoi email $email_hash","facteurmonitoring");                
+  if ($ok = $envoyer_mail($email,$email_sujet,$email_body)) {
+      ecrire_meta('facteurmonitoring_hash', $email_hash); 
+      spip_log("[envoi] OK, envoi email  $email_hash","facteurmonitoring");
+  } else {
+      ecrire_meta('facteurmonitoring_etat', 'NOTOK');
+      spip_log("[envoi] NOTOK, erreur: envoi email $email_hash","facteurmonitoring");
+  }    
+                
 
   return 1;
 }
