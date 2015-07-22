@@ -1,0 +1,18 @@
+<paquet
+	prefix="facteurmonitoring"
+	categorie="maintenance"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.19;3.0.*]"
+	logo="prive/themes/spip/images/facteurmonitoring-64.png"
+	documentation="http://contrib.spip.net/4695"
+> 
+  <nom>Monitoring du Facteur</nom>
+  <auteur lien='http://www.erational.org'>erational</auteur>
+
+	<licence>GNU/GPL</licence>
+	<pipeline nom="taches_generales_cron" inclure="facteurmonitoring_pipelines.php" />
+
+  <necessite nom="saisies" compatibilite="[2.0.0;]" />
+  <necessite nom="facteur" compatibilite="[3.1.0;]" />
+</paquet>

@@ -1,0 +1,46 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:facteurmonitoring:cfg_titre_parametrages_option_page:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+    <p><:facteurmonitoring:cfg_parametrages_option_page_info:></p>
+
+    <:facteurmonitoring:cfg_page_appel:><br />
+    <textarea dir="ltr" class="spip_cadre" rows="2" cols="40" readonly="readonly">#URL_SITE_SPIP/spip.php?page=facteur-monitoring</textarea>
+    
+    [(#SAISIE{input, frequence,
+				label=<:facteurmonitoring:cfg_frequence:>,
+				explication=<:facteurmonitoring:cfg_frequence_explication:>})]
+       
+    
+    [(#SAISIE{input, email,
+				label=<:facteurmonitoring:cfg_destinataire:>,
+        explication=<:facteurmonitoring:cfg_destinataire_info:>})]
+        
+    [(#SAISIE{input, email_pwd,
+				label=<:facteurmonitoring:cfg_email_pwd:>})]    
+        
+    [(#SAISIE{input, hote_imap,
+				label=<:emailtospip:cfg_hote_imap:>,
+        explication=<:facteurmonitoring:cfg_hote_imap_explication:>})]           
+            
+     [(#SAISIE{input, hote_port,
+				label=<:emailtospip:cfg_hote_port:>,
+        explication=<:facteurmonitoring:cfg_hote_port_explication:>,
+        defaut=143})] 
+        
+     [(#SAISIE{input, inbox,
+				label=<:facteurmonitoring:cfg_inbox:>,
+        defaut=INBOX})]     
+
+		<input type="hidden" name="_meta_casier" value="facteurmonitoring" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>
