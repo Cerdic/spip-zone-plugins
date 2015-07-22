@@ -144,14 +144,10 @@ function commande_inserer($id_parent=null, $champs=array()) {
 function commande_modifier($id_commande, $set=null) {
 	$err = '';
 
-	include_spip('inc/saisies');
-	$saisies = saisies_chercher_formulaire('editer_commande', array($id_commande));
-	$champs = saisies_lister_champs($saisies, false);
-
 	include_spip('inc/modifier');
 	$c = collecter_requests(
 		// whitelist
-		$champs,
+		objet_info('commande','champs_editables'),
 		// blacklist
 		array('date','statut'),
 		// donnees eventuellement fournies
