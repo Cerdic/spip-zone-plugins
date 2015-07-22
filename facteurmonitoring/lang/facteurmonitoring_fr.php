@@ -34,6 +34,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'cfg_inbox' => 'Dossier distant',
   'cfg_pwd' => 'Préfixe',
   
+  // E
+  'erreur_home' => 'Le plugin facteur semble rencontrer actuellement des problèmes d\'envoi ou de réception d\'emails.',
+  
 	
   // T
 	'titre_page_configurer_facteurmonitoring' => 'Monitoring du Facteur',

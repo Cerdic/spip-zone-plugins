@@ -1,7 +1,7 @@
 <paquet
 	prefix="facteurmonitoring"
 	categorie="maintenance"
-	version="1.0.2"
+	version="1.0.3"
 	etat="dev"
 	compatibilite="[3.0.19;3.1.*]"
 	logo="prive/themes/spip/images/facteurmonitoring-64.png"
@@ -12,6 +12,7 @@
 
 	<licence>GNU/GPL</licence>
 	<pipeline nom="taches_generales_cron" inclure="facteurmonitoring_pipelines.php" />
+  <pipeline nom="accueil_informations" inclure="facteurmonitoring_pipelines.php" />
 
   <necessite nom="saisies" compatibilite="[2.0.0;]" />
   <necessite nom="facteur" compatibilite="[3.1.0;]" />
