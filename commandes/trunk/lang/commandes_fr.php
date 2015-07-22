@@ -148,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'merci_de_votre_commande' => 'Nous avons bien enregistré votre commande et nous vous remercions de votre confiance.',
+	'merci_de_votre_commande_paiement' => 'Nous avons bien enregistré votre commande <b>@reference@</b>, et nous la traitons dans les meilleurs délais.',
 	'modifier_commande_statut' => 'Cette commande est :',
 	'montant' => 'Montant',
 

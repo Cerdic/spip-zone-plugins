@@ -188,7 +188,7 @@ function commandes_bank_traiter_reglement($flux){
 		$id_transaction = $flux['args']['id_transaction']
 		and $transaction = sql_fetsel("*","spip_transactions","id_transaction=".intval($id_transaction))
 		and $id_commande = $transaction['id_commande']
-		and $commande = sql_fetsel('id_commande, statut, id_auteur, echeances', 'spip_commandes', 'id_commande='.intval($id_commande))
+		and $commande = sql_fetsel('id_commande, statut, id_auteur, echeances, reference', 'spip_commandes', 'id_commande='.intval($id_commande))
 	){
 		$statut_commande = $commande['statut'];
 		$montant_regle = $transaction['montant_regle'];
@@ -223,6 +223,9 @@ function commandes_bank_traiter_reglement($flux){
 			include_spip("action/editer_commande");
 			commande_modifier($id_commande, array('statut'=>$statut_nouveau, 'mode'=>$transaction_mode));
 		}
+
+		// un message gentil pour l'utilisateur qui vient de payer, on lui rappelle son numero de commande
+		$flux['data'] .= "<br />"._T('commandes:merci_de_votre_commande_paiement',array('reference'=>$commande['reference']));
 	}
 
 	return $flux;
