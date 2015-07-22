@@ -31,7 +31,7 @@ a mis a jour la valeur avec la page reelle]
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_aut(ZONES){!id_zone IN #GET{exclus}}{tout}{where?}{recherche?}{statut?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} zonea}>
+	<BOUCLE_liste_aut(ZONES){!id_zone IN #GET{exclus}}{tout}{where?}{recherche?}{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} zonea}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)]">
 			<td class='picto'>[(#CHEMIN_IMAGE{zone-16.png}|balise_img)]</td>
 			<td class='titre principale'><a href="[(#ID_ZONE|generer_url_entite{zone})]"
