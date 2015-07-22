@@ -2,8 +2,6 @@
 
 namespace Sphinx\SphinxQL;
 
-
-
 /**
  * Crée une requête Sphinx à partir d'un tableau de description spécifique
  *
@@ -166,9 +164,11 @@ class QueryApi extends Query {
 			if (is_numeric($m)) {
 				return (strlen($m) >= 4);
 			}
+			
 			// mots >= 3 lettres
 			return (strlen($m) >= 3);
 		});
+		
 		return implode(' ', $mots);
 	}
 	

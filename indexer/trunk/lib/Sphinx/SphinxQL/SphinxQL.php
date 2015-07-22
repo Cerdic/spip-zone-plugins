@@ -2,10 +2,7 @@
 
 namespace Sphinx\SphinxQL;
 
-
-
 class SphinxQL {
-
 	private $host;
 	private $port;
 	private $sql; // objet MySQLi
@@ -26,6 +23,7 @@ class SphinxQL {
 			var_dump($e->getMessage());
 			return false;
 		}
+		
 		return !!!$this->sql->connect_error;
 	}
 
@@ -44,6 +42,7 @@ class SphinxQL {
 		if (!$this->sql) {
 			return false;
 		}
+		
 		return $this->sql->multi_query($query);
 	}
 
@@ -55,6 +54,7 @@ class SphinxQL {
 		if (!$this->sql) {
 			return false;
 		}
+		
 		return $this->sql->escape_string($string);
 	}
 
@@ -65,6 +65,7 @@ class SphinxQL {
 		if (!$this->sql) {
 			return false;
 		}
+		
 		return $this->sql->error_list;
 	}
 
@@ -101,7 +102,6 @@ class SphinxQL {
 
 			$liste['docs']   = array_shift($reponses);
 			$liste['facets'] = $this->parseFacets($reponses);
-
 		} catch  (\Exception $e) {
 			echo "\n<div><tt>",htmlspecialchars($query),"</tt></div>\n";
 			var_dump($e->getMessage());
@@ -148,6 +148,7 @@ class SphinxQL {
 				}
 			}
 		}
+		
 		return $facets;
 	}
 
@@ -175,6 +176,7 @@ class SphinxQL {
 				$liste[$cle] = $val;
 			}
 		}
+		
 		if (isset($liste['keyword'])) {
 			$liste['keywords'] = array();
 			foreach ($liste['keyword'] as $index => $key) {
@@ -186,7 +188,7 @@ class SphinxQL {
 			}
 			unset($liste['keyword'], $liste['docs'], $liste['hits']);
 		}
+		
 		return $liste;
 	}
 }
-

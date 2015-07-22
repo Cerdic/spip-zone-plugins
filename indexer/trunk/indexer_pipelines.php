@@ -70,5 +70,6 @@ function indexer_post_edition($flux){
  */
 function indexer_taches_generales_cron($taches){
 	$taches['indexer_optimiser'] = 24*3600; // tous les jours
+	
 	return $taches;
 }

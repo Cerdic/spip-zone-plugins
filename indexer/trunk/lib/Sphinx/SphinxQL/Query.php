@@ -74,6 +74,7 @@ class Query{
 			foreach ($value as $k=>$v) {
 				$value[$k] = $this->quote($v);
 			}
+			
 			return join(',', $value);
 		}
 		// If there's a known type, cast the value, or consider as a string
@@ -94,7 +95,6 @@ class Query{
 		}
 	}
 
-
 	public function get() {
 		$query = array();
 		$this->removeEmpty();
@@ -114,7 +114,6 @@ class Query{
 		return implode(' ', $query);
 	}
 
-
 	private function removeEmpty() {
 		foreach (array('select', 'from', 'where', 'groupby', 'orderby', 'facet') as $key) {
 			$this->$key = array_filter($this->$key);
@@ -126,5 +125,3 @@ class Query{
 		return $this->get();
 	}
 }
-
-

@@ -20,10 +20,10 @@ class Sources implements \IteratorAggregate {
 	}
 	
 	public function getSource($cle) {
-		if (isset($this->sources[$cle])){
+		if (isset($this->sources[$cle])) {
 			return $this->sources[$cle];
 		}
-	
+		
 		return null;
 	}
 	

@@ -143,47 +143,45 @@ function sphinx_get_query_documents($index, $recherche, $tag = '', $auteur = '',
  *
  */
 function sphinx_get_query_facette_auteurs($index, $recherche, $tag = '', $auteur = '', $orderby = '') {
+	include_spip('inc/indexer');
+	$sq = new \Sphinx\SphinxQL\Query();
+	$sq
+		->select('COUNT(*) AS c')
+		->select('GROUPBY() AS facette')
+		->from($index)
+		->where("MATCH(" . $sq->quote($recherche) . ")")
+		->groupby("properties.authors")
+		->orderby("c DESC")
+		->limit("30")
+		;
 
-    include_spip('inc/indexer');
-    $sq = new \Sphinx\SphinxQL\Query();
-    $sq
-        ->select('COUNT(*) AS c')
-        ->select('GROUPBY() AS facette')
-        ->from($index)
-        ->where("MATCH(" . $sq->quote($recherche) . ")")
-        ->groupby("properties.authors")
-        ->orderby("c DESC")
-        ->limit("30")
-        ;
-
-    return $sq->get();
+	return $sq->get();
 }
 
 
 function sphinx_get_query_facette($index, $facette, $cle, $recherche, $orderby = '', $limit = 0) {
+	if (!$orderby) $orderby = 'c DESC';
+	if (!$limit)   $limit   = 30;
 
-    if (!$orderby) $orderby = 'c DESC';
-    if (!$limit)   $limit   = 30;
+	include_spip('inc/indexer');
+	$sq = new \Sphinx\SphinxQL\Query();
+	$sq
+		->select('COUNT(*) AS c')
+		->select('GROUPBY() AS facette')
+		->from($index)
+		->where("MATCH(" . $sq->quote($recherche) . ")")
+		->orderby($orderby)
+		->limit($limit)
+		;
+	// facette simple 'properties.tags'
+	if (strpos($facette, '(') === false) {
+		$sq->groupby($facette);
+	}
+	// facette avec calcul 'YEAR(properties.dates.publication)'
+	else {
+		$sq->select("$facette AS data");
+		$sq->groupby("data");
+	}
 
-    include_spip('inc/indexer');
-    $sq = new \Sphinx\SphinxQL\Query();
-    $sq
-        ->select('COUNT(*) AS c')
-        ->select('GROUPBY() AS facette')
-        ->from($index)
-        ->where("MATCH(" . $sq->quote($recherche) . ")")
-        ->orderby($orderby)
-        ->limit($limit)
-        ;
-    // facette simple 'properties.tags'
-    if (strpos($facette, '(') === false) {
-        $sq->groupby($facette);
-    }
-    // facette avec calcul 'YEAR(properties.dates.publication)'
-    else {
-        $sq->select("$facette AS data");
-        $sq->groupby("data");
-    }
-
-    return $sq->get();
+	return $sq->get();
 }

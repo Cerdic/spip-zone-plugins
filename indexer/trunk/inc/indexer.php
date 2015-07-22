@@ -37,12 +37,15 @@ function indexer_indexer(){
 		// On tente de le configurer avec Sphinx et les define()
 		try {
 			$indexer->registerStorage(
-			    new Indexer\Storage\Sphinx(
-			        new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT), SPHINX_DEFAULT_INDEX)
+				new Indexer\Storage\Sphinx(
+					new Sphinx\SphinxQL\SphinxQL(SPHINX_SERVER_HOST, SPHINX_SERVER_PORT),
+					SPHINX_DEFAULT_INDEX
+				)
 			);
 		} catch( \Exception $e ) {
-			if (!$message = $e->getMessage())
-			    $message = _L('Erreur inconnue');
+			if (!$message = $e->getMessage()) {
+				$message = _L('Erreur inconnue');
+			}
 			die("<p class='erreur'>$message</p>");
 		}
 		
