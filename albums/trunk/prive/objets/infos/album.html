@@ -25,9 +25,10 @@
 [(#REM)
 
 	Bouton voir en ligne | prévisualisation
+	On vérifie en plus qu'il y ait un squelette album.html à la racine, ou dans content/contenu
 
 ]
-[(#VAL{album}|objet_info{page}|oui)
+[(#VAL{album}|objet_info{page}|et{#CHEMIN{album.html}|ou{#CHEMIN{content/album.html}}|ou{#CHEMIN{contenu/album.html}}}|oui)
 	[(#PUBLIE{album, #ID_ALBUM}|oui)
 		[(#VAL{redirect}
 			|generer_url_action{type=album&id=#ID_ALBUM}
