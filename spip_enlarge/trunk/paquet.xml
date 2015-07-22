@@ -1,13 +1,14 @@
 <paquet
     prefix="spip_enlarge"
     categorie="theme"
-    version="0.1.0"
+    version="0.2.0"
     etat="dev"
     compatibilite="[3.0.0;3.1.*]"
     logo="prive/themes/spip/images/spip_enlarge-64.png"
     documentation=""
 >
-    <nom>Aggrandir la largeur de page</nom>
+    <nom>Agrandir la largeur de page</nom>
+    <!-- Ce plugin va agrandir la largeur de la page dans l'espace privé de SPIP. -->
 
     <auteur>Teddy Payet</auteur>
 

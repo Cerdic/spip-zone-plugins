@@ -28,8 +28,8 @@ Valeurs par defaut :
 #SET{background-color,#ENV{background-color,#F8F7F3}} [background-color : (#GET{background-color});]
 #SET{color,#ENV{color,#000000}} [color: (#GET{color});]
 
-#SET{petit_ecran,#ENV{petit_ecran,960px}} [petit_ecran: (#GET{petit_ecran});]
-#SET{grand_ecran,#ENV{grand_ecran,1280px}} [grand_ecran: (#GET{grand_ecran});]
+#SET{petit_ecran,#ENV{petit_ecran,#EVAL{_PETIT_ECRAN}}} [petit_ecran: (#GET{petit_ecran});]
+#SET{grand_ecran,#ENV{grand_ecran,#EVAL{_GRAND_ECRAN}}} [grand_ecran: (#GET{grand_ecran});]
 
 */
 
