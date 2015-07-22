@@ -5,7 +5,7 @@
 	etat="dev"
 	logo="prive/themes/spip/images/infographie-64.png"
 	compatibilite="[3.0.0;3.0.*]"
-	schema="0.1.0"
+	schema="0.1.1"
 >
 
 	<nom>Infographies</nom>

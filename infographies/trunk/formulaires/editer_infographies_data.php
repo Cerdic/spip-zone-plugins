@@ -39,6 +39,7 @@ function formulaires_editer_infographies_data_verifier_dist($id_infographies_dat
 
 // http://doc.spip.org/@inc_editer_infographies_data_dist
 function formulaires_editer_infographies_data_traiter_dist($id_infographies_data='new', $retour='',$associer_objet='', $lier_trad=0, $config_fonc='infographies_datas_edit_config', $row=array(), $hidden=''){
+
 	$res = formulaires_editer_objet_traiter('infographies_data',$id_infographies_data,0,$lier_trad,$retour,$config_fonc,$row,$hidden);
 
 	// Un lien auteur a prendre en compte ?
@@ -51,7 +52,7 @@ function formulaires_editer_infographies_data_traiter_dist($id_infographies_data
 			include_spip('action/editer_infographies_data');
 			infographies_data_associer($id_infographies_data, array($objet => $id_objet));
 			if (isset($res['redirect']))
-				$res['redirect'] = parametre_url ($res['redirect'], "id_lien_ajoute", $id_infographies_data, '&');
+				$res['redirect'] = parametre_url($res['redirect'], "id_lien_ajoute", $id_infographies_data, '&');
 		}
 	}
 

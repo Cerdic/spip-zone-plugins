@@ -62,7 +62,7 @@ function infographies_declarer_tables_objets_sql($tables){
 		'editable' => 'oui',
 		'texte_changer_statut' => 'infographie:texte_infographie_statut',
 		'field' => array(
-			"id_infographie" => "bigint(21) NOT NULL",
+			"id_infographie" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"titre" => "varchar(255) NOT NULL DEFAULT ''",
 			"texte"	=> "longtext DEFAULT '' NOT NULL",
 			"credits" => "text DEFAULT '' NOT NULL",
@@ -117,7 +117,7 @@ function infographies_declarer_tables_objets_sql($tables){
 		'type' => 'infographies_data',
 		'principale' => 'non',
 		'field' => array(
-			"id_infographies_data" => "bigint(21) NOT NULL",
+			"id_infographies_data" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"titre" => "varchar(255) NOT NULL DEFAULT ''",
 			"texte"	=> "longtext DEFAULT '' NOT NULL",
 			"credits" => "text DEFAULT '' NOT NULL",
@@ -149,7 +149,7 @@ function infographies_declarer_tables_objets_sql($tables){
 		'type' => 'infographies_donnee',
 		'principale' => 'non',
 		'field' => array(
-			"id_infographies_donnee" => "bigint(21) NOT NULL",
+			"id_infographies_donnee" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"id_infographies_data" => "bigint(21) NOT NULL",
 			"rang" => "int NOT NULL DEFAULT 0",
 			"axe_x" => "varchar(255) NOT NULL DEFAULT ''",

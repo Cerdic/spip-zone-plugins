@@ -23,6 +23,10 @@ function infographies_upgrade($nom_meta_base_version,$version_cible){
 		array('maj_tables',array('spip_infographies_datas'))
 	);
 
+	$maj['0.1.1'] = array(
+		array('maj_tables',array('spip_infographies_datas'))
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
