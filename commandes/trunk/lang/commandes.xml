@@ -1,5 +1,5 @@
 <traduction module="commandes" gestionnaire="salvatore" url="http://trad.spip.net" source="svn://zone.spip.org/spip-zone/_plugins_/commandes/trunk/lang/" reference="fr">
-	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="194" traduits="155" relire="0" modifs="8" nouveaux="31" pourcent="79.90">
+	<langue code="en" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=en" total="195" traduits="155" relire="0" modifs="8" nouveaux="32" pourcent="79.49">
 		<traducteur nom="Benitron" lien="http://trad.spip.net/auteur/benitron" />
 		<traducteur nom="Cyril MARION" lien="http://trad.spip.net/auteur/cyril-marion" />
 		<traducteur nom="EScott" lien="http://trad.spip.net/auteur/escott" />
@@ -9,12 +9,12 @@
 		<traducteur nom="RastaPopoulos" lien="http://trad.spip.net/auteur/rastapopoulos" />
 		<traducteur nom="tcharlss" lien="http://trad.spip.net/auteur/drbouvierleduc" />
 	</langue>
-	<langue code="fa" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="194" traduits="22" relire="0" modifs="3" nouveaux="169" pourcent="11.34">
+	<langue code="fa" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fa" total="195" traduits="22" relire="0" modifs="3" nouveaux="170" pourcent="11.28">
 		<traducteur nom="Davood Hossein" lien="http://trad.spip.net/auteur/davood-hossein" />
 	</langue>
-	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="194" traduits="194" relire="0" modifs="1" nouveaux="-1" pourcent="100.00">
+	<langue code="fr" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=fr" total="195" traduits="195" relire="0" modifs="1" nouveaux="-1" pourcent="100.00">
 	</langue>
-	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="194" traduits="143" relire="0" modifs="8" nouveaux="43" pourcent="73.71">
+	<langue code="sk" url="http://trad.spip.net/tradlang_module/commandes?lang_cible=sk" total="195" traduits="143" relire="0" modifs="8" nouveaux="44" pourcent="73.33">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
 </traduction>
