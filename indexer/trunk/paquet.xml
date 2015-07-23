@@ -1,8 +1,8 @@
 <paquet
 	prefix="indexer"
 	categorie="navigation"
-	version="1.1.2"
-	etat="dev"
+	version="1.2.0"
+	etat="test"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/indexer-64.png"
 	documentation="http://contrib.spip.net/Sphinx-Indexer"
@@ -17,4 +17,9 @@
 	
 	<pipeline nom="post_edition" inclure="indexer_pipelines.php" />
 	<pipeline nom="taches_generales_cron" inclure="indexer_pipelines.php" />
+	
+	<!-- Pipelines ajoutés par le plugin -->
+	<pipeline nom="indexer_indexer" action="" />
+	<pipeline nom="indexer_sources" action="" />
+	<pipeline nom="indexer_document" action="" />
 </paquet>

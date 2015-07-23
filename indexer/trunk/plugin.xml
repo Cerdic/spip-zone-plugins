@@ -9,8 +9,8 @@
 	<icon>prive/themes/spip/images/indexer-64.png</icon>
 
 	<licence>GNU/GPL</licence>
-	<version>1.1.2</version>
-	<etat>dev</etat>
+	<version>1.2.0</version>
+	<etat>test</etat>
 	<description>Gestion d'indexation de contenus avec SPIP. Intégration et requêtes possibles avec Sphinx. Nécessite Sphinx 2.2 ou version ultérieure</description>
 	<prefix>indexer</prefix>
 
@@ -28,5 +28,19 @@
     <pipeline>
         <nom>taches_generales_cron</nom>
         <inclure>indexer_pipelines.php</inclure>
+    </pipeline>
+    
+    <!-- Pipelines ajoutés par le plugin -->
+    <pipeline>
+        <nom>indexer_indexer</nom>
+        <action></action>
+    </pipeline>
+    <pipeline>
+        <nom>indexer_sources</nom>
+        <action></action>
+    </pipeline>
+    <pipeline>
+        <nom>indexer_document</nom>
+        <action></action>
     </pipeline>
 </plugin>

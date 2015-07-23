@@ -30,7 +30,7 @@ class Articles extends SpipDocuments {
 	public function createDocumentArticle($article) {
 		$id = $article['id_article'];
 
-		return new Document(array(
+		$doc = new Document(array(
 			'id'           => $this->getObjectId('article', $id),
 			'title'        => supprimer_numero($article['titre']),
 			'summary'      => $article['surtitre'] . $article['soustitre'] . $article['chapo'],
@@ -45,6 +45,20 @@ class Articles extends SpipDocuments {
 				'lang'     => $article['lang']
 			)
 		));
+		
+		$doc = pipeline(
+			'indexer_document',
+			array(
+				'args' => array(
+					'objet ' => 'article',
+					'id_objet' => $id,
+					'champs' => $article,
+				),
+				'data' => $doc,
+			)
+		);
+		
+		return $doc;
 	}
 
 	public function getBounds() {
