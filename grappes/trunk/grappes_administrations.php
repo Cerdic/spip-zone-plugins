@@ -42,6 +42,9 @@ function grappes_upgrade($nom_meta_base_version,$version_cible){
  * Supprime les deux tables :
  * - spip_grappes
  * - spip_grappes_liens
+ * 
+ * On supprime les révisions de grappes si besoin
+ * 
  * Supprime la meta d'installation
  * 
  * @param string $nom_meta_base_version
@@ -50,6 +53,8 @@ function grappes_upgrade($nom_meta_base_version,$version_cible){
 function grappes_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_grappes");
 	sql_drop_table("spip_grappes_liens");
+	sql_delete('spip_versions','objet="grappes"');
+	sql_delete('spip_versions_fragments','objet="grappes"');
 	effacer_meta($nom_meta_base_version);
 }
 
