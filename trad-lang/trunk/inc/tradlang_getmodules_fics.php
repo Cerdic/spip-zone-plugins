@@ -37,7 +37,6 @@ function inc_tradlang_getmodules_fics($rep,$nom_mod){
 // est bien un fichier de langue
 function tradlang_verif($fic){
 	include($fic);
-	spip_log($fic,'test');
 	// verifie si c'est un fichier langue
 	if (is_array($GLOBALS[$GLOBALS['idx_lang']])){
 		unset($GLOBALS[$GLOBALS['idx_lang']]);
