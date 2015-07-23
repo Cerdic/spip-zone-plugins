@@ -516,9 +516,12 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 	}
 
 
-	// Si align est "focus", on va aller chercher le «point d'intérêt» de l'image 
+	// Si align est "focus" ou "focus-center", on va aller chercher le «point d'intérêt» de l'image 
 	// avec la fonction centre_image du plugin «centre_image»
-	if ($align == "focus" && function_exists('centre_image')) {
+	
+	// Avec "focus", point d'intérêt reste décentré
+	// Avec "focus-center", point d'intérêt aussi centré que possible
+	if (($align == "focus" || $align == "focus-center") && function_exists('centre_image')) {
 		$dx = centre_image_x($img);
 		$dy = centre_image_y($img);
 
@@ -531,16 +534,22 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 		}
 			$h_centre = $h_img * $dy;
 			$l_centre = $l_img * $dx;
-			$top = round($h_centre - ($h_dest/2));
+			if ($align == "focus-center") $top = round($h_centre - ($h_dest*0.5));
+			// ici on n'applique pas *$dy directement, car effet exagéré,
+			// alors on pondère 
+			else  $top = round($h_centre - ($h_dest*((2*$dy+0.5)/3)));
+			
 			$l_centre = $l_img * $dx;
-			$left = round($l_centre - ($l_dest/2));
+			if ($align == "focus-center") $left = round($l_centre - ($l_dest*0.5));
+			else  $left = round($l_centre - ($l_dest*((2*$dx+0.5)/3)));
+
 			
 			if ($top < 0) $top = 0;
 			if ($top + $h_dest > $h_img ) $top = $h_img - $h_dest;
 			if ($left < 0) $left = 0;
 			if ($left + $l_dest > $l_img ) $left = $l_img - $l_dest;
 			
-			//echo "$dy - $l_img x $h_img - $h_dest x $l_dest - $h_centre x $l_centre - $top x $left"; 
+			//echo "<li>$dx x $dy - $l_img x $h_img - $l_dest x $h_dest - $l_centre x $h_centre - $left x $top</li>"; 
 			$align = "top=$top, left=$left";
 	}
 
@@ -548,7 +557,7 @@ function image_proportions($img, $largeur=16, $hauteur=9, $align="center", $zoom
 	$img = image_recadre($img, $l_dest, $h_dest, $align);
 	
 	// Second passage si $zoom (on verra plus tard si c'est intéressant de le traiter en amont)
-	if ($zoom > 1 && $mode != "focus") {
+	if ($zoom > 1 && $mode != "focus" && $mode != "focus-center") {
 		$l_img = largeur ($img)/2;
 		$h_img = hauteur($img)/2;
 		

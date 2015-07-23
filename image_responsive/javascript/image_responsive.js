@@ -218,8 +218,7 @@ function charger_image_lazy() {
 	
 	var hauteur = $(window).height();
 	
-	var limite_haut = sTop - hauteur;
-	if (limite_haut < 0) limite_haut = 0;
+	var limite_haut = sTop - 1.5*hauteur;
 	
 	var limite_bas = sTop + 1.5*hauteur;
 
