@@ -5,7 +5,7 @@
  * 
  * Fichier de déclaration de la base de donnée
  * 
- * @package SPIP\Grappes\Pipelines
+ * @package Grappes\Pipelines
  */
 
 
@@ -73,7 +73,7 @@ function grappes_declarer_tables_objets_sql($tables){
 		'url_edit' => 'grappe_edit',
 		'editable' => 'oui',
 		'champs_editables' => array('titre','descriptif','liaisons','acces','type'),
-		'champs_versionnes' => array('titre','descriptif'),
+		'champs_versionnes' => array('titre','descriptif','liaisons','acces','type','id_admin','jointure_auteurs','jointure_articles','jointure_rubriques'),
 		'rechercher_champs' => array(
 			'titre' => 8,
 			'descriptif' => 5
