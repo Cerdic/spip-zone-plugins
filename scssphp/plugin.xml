@@ -2,6 +2,7 @@
 	<nom>SCSS PHP</nom>
 	<slogan>Int&#233;gration de l'impl&#233;mentation php de SASS</slogan>
 	<auteur>Anne-lise Martenot, elastick.net</auteur>
+	<auteur>Leafo, http://leafo.net</auteur>
 	<auteur>Jean-Baptiste Bourgoin</auteur>
 	<licence>GPL 3</licence>
 	<version>1.2.0</version>
