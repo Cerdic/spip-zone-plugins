@@ -5,26 +5,26 @@ jQuery(function(){
 
 function saisies_fieldset_pliable(){
 	// On cherche les groupes de champs pliables
-	jQuery('li.fieldset.pliable')
+	jQuery('.fieldset.pliable')
 		.each(function(){
-			var li = jQuery(this);
-			var ul = jQuery(this).find('> fieldset > ul');
+			var fieldset = jQuery(this);
+			var groupe = jQuery(this).find('> fieldset > .editer-groupe');
 			var legend = jQuery(this).find('> fieldset > .legend');
-			
+
 			// S'il est déjà plié on cache le contenu
-			if (li.is('.plie'))
-				ul.hide();
-			
+			if (fieldset.is('.plie'))
+				groupe.hide();
+
 			// Ensuite on ajoute une action sur le titre
 			legend
 				.unbind('click')
 				.click(
 					function(){
-						li.toggleClass('plie');
-						if (ul.is(':hidden'))
-							ul.show();
+						fieldset.toggleClass('plie');
+						if (groupe.is(':hidden'))
+							groupe.show();
 						else
-							ul.hide();
+							groupe.hide();
 					}
 				);
 		});
