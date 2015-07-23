@@ -77,7 +77,8 @@ function dictionnaires_lister_definitions($purger=false){
 		
 		// On passe la liste des définitions actives dans un pipeline
 		$definitions_actives = pipeline('lister_definitions', $definitions_actives);
-		
+
+		include_spip('inc/charsets');
 		// On traite maintenant le tableau pour ajouter des infos prêtes à l'emploi
 		foreach ($definitions_actives as $cle=>$definition){
 			// Si les termes sont données en chaine, on coupe avec les virgules
@@ -95,9 +96,10 @@ function dictionnaires_lister_definitions($purger=false){
 			// Si c'est une abbréviation, on reconnait automatique une version avec des p.o.i.n.t.s.?
 			if ($definition['type'] == 'abbr'){
 				$titre = $definition['casse'] ? $definition['titre'] : strtolower($definition['titre']);
-				$avec_points = $titre[0];
-				for ($i=1 ; $i<strlen($titre) ; $i++){
-					$avec_points .= '.'.$titre{$i};
+				$avec_points = spip_substr($titre,0,1);
+				$length = spip_strlen($titre);
+				for ($i=1 ; $i<$length ; $i++){
+					$avec_points .= '.'.spip_substr($titre,$i,1);
 				}
 				$definition['termes'][] = $avec_points.'.';
 				$definition['termes'][] = $avec_points;
