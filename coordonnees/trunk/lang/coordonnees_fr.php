@@ -67,6 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_numeros' => '@nb@ numeros',
 	'info_nb_rezos' => '@nb@ réseaux sociaux',
 	'info_numero_utilise_par' => 'Numéro utilisé par :',
+	'info_rezo_utilise_par' => 'Réseau social utilisé par :',
 	'item_nouveau_numero' => 'Nouveau numéro',
 	'item_nouvel_email' => 'Nouveau courriel',
 	'item_nouvelle_adresse' => 'Nouvelle adresse',
