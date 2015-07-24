@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_langue' => 'Langue du profil',
 	'info_modifier_rezosocio' => 'Modifier le lien de réseau social',
 	'info_nom_compte' => 'Nom du compte',
+	'info_recherche_rezosocio_zero' => 'Aucun résultat dans les réseaux sociaux pour la recherche "@cherche_rezosocio@"',
 	'info_retirer_rezosocio' => 'Retirer ce lien de réseau social',
 	'info_retirer_rezosocios' => 'Retirer tous les réseaux sociaux',
 	'info_type_rezosocios' => 'Type de réseau social',
