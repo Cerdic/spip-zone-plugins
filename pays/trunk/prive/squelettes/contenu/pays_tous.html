@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/pays, par=nom, env, ajax, sinon=<:pays:info_aucun_pays:>}>
+
+[(#AUTORISER{creer,pays})
+	[(#URL_ECRIRE{pays_edit,new=oui}|icone_verticale{<:pays:icone_creer_pays:>,pays,new,right})]
+]

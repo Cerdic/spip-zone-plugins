@@ -2,6 +2,13 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'ajouter_lien_pays' => 'Ajouter ce pays',
+	
+	// C
+	'cfg_lbl_activer_objets' => 'Les objets cochés pourront être liés à des pays',
+	'cfg_titre_parametrages' => "Objets pouvant être liés à des pays",
+
 	// I
 	'icone_creer_pays' => 'Ajouter un pays',
 	'icone_modifier_pays' => 'Modifier ce pays',
@@ -23,7 +30,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'pays' => 'Pays',
 
+	// R
+	'retirer_lien_pays' => 'Retirer ce pays',
+	'retirer_tous_liens_pays' => 'Retirer tous les pays',
+
 	// T
+	'titre_page_configurer_pays' => "Page de configuration du plugin Pays",
+	'texte_ajouter_pays' => 'Ajouter un pays',
+	'texte_creer_associer_pays' => 'Créer et associer un pays',
 	'texte_logo_pays' => 'Drapeau du pays',
 	'titre_page_test' => 'La liste des pays du monde',
 	'titre_pays' => 'Pays',

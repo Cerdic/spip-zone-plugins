@@ -13,7 +13,7 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 
 	$maj = array();
 	$maj['create'] = array(
-		array('maj_tables', array('spip_pays')),
+		array('maj_tables', array('spip_pays', 'spip_pays_liens')),
 		array('peupler_base_pays')
 		);
 	$maj['1.1.0'] = array(
@@ -37,7 +37,10 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 		array('maj_130_pays'),
 	);
 	$maj['1.3.1'] = array(
-		array('maj_tables',array('spip_pays')),
+		array('maj_tables', array('spip_pays')),
+	);
+	$maj['1.4.0'] = array(
+		array('maj_tables', array('spip_pays_liens')),
 	);
 
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
@@ -48,6 +51,7 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 function pays_vider_tables($nom_meta_base_version) {
 
 	sql_drop_table("spip_pays");
+	sql_drop_table("spip_pays_liens");
 	effacer_meta($nom_meta_base_version);
 }
 
