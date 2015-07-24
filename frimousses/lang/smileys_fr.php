@@ -1,7 +1,6 @@
 <?php
   
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	':-)*'=> 'bisou',
 	':-*'=> 'bisou',
 	':*' => 'bisou',
 	':))'=> 'PTDR',
@@ -51,8 +50,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	':$'=> 'avide',
 	':-!'=> 'indéci',
 	':!'=> 'indéci',
-	'8-)'=> 'lunettes de soleil',
-	'8)'=> 'lunettes de soleil',
+	'8-)'=> 'sidéré',
+	'8)'=> 'sidéré',
 	'|-)'=> 'neutre',
 	'|)'=> 'neutre',
 );

@@ -9,7 +9,6 @@ function frimousses_liste_smileys() {
   /*Listes des images a associer aux smileys*/
 
 	$les_smileys = array();
-	$les_smileys[':-)*'] = 'smiley-kiss-16.png';
 	$les_smileys[':-*'] = 'smiley-kiss-16.png';
 	$les_smileys[':*'] = 'smiley-kiss-16.png';
 	$les_smileys[':-))'] = 'smiley-lol-16.png';
@@ -22,6 +21,8 @@ function frimousses_liste_smileys() {
 	$les_smileys['O:)'] = 'smiley-angel-16.png';
 	$les_smileys['0:)'] = 'smiley-angel-16.png';
 	$les_smileys['%-)'] = 'smiley-eek-16.png';
+	$les_smileys['8-)'] = 'smiley-eek-16.png';
+	$les_smileys['8)'] = 'smiley-eek-16.png';
 	$les_smileys[';-)'] = 'smiley-wink-16.png';
 	$les_smileys[';)'] = 'smiley-wink-16.png';
 	$les_smileys[':-(('] = 'smiley-sad-16.png';
@@ -59,12 +60,9 @@ function frimousses_liste_smileys() {
 	$les_smileys[':$'] = 'smiley-money-16.png';
 	$les_smileys[':-!'] = 'smiley-roll-16.png';
 	$les_smileys[':!'] = 'smiley-roll-16.png';
-	$les_smileys['8-)'] = 'smiley-eek-16.png';
-	$les_smileys['8)'] = 'smiley-eek-16.png';
 	$les_smileys['|-)'] = 'smiley-neutral-16.png';
 	$les_smileys['|)'] = 'smiley-neutral-16.png';
 
-	asort($les_smileys);
 	return $les_smileys;
 }
 
