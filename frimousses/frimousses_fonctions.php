@@ -102,10 +102,21 @@ function frimousses_pre_typo($chaine) {
 function balise_SMILEY_DISPO($p) {
 
   $p->code = '"<ul class=\"listes-items smileys\">';
-  foreach(frimousses_liste_smileys() as $smiley => $file) {
-		$alt = _T('smileys:'.$smiley);
+  $frimousses_en_vrac = frimousses_liste_smileys();
+  $frimousses = array();
+
+  foreach ( $frimousses_en_vrac as $key => $value ) {
+    if ( !isset($frimousses[$value]) ) {
+      $frimousses[$value] = array();
+    }
+    $frimousses[$value][] = $key;
+  }  
+
+  foreach($frimousses as $file => $smiley) {
+		$alt = _T('smileys:'.$smiley[0]);
 		$alt = attribut_html($alt);
-		$p->code .= "<li class=\\\"item smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span> <img  class=\\\"smiley_image\\\" src=\\\"".find_in_path("frimousses/$file")."\\\" width=\\\"16\\\" height=\\\"16\\\" alt=\\\"$alt\\\"/> <span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
+		$smiley = "<span class=\\\"smiley_nom_variante\\\">".implode("</span> <span class=\\\"smiley_nom_variante\\\">", $smiley)."</span>";
+		$p->code .= "<li class=\\\"item smiley\\\"><span class=\\\"smiley_nom\\\">$smiley</span> <img  class=\\\"smiley_image\\\" src=\\\"".find_in_path("frimousses/$file")."\\\" width=\\\"16\\\" height=\\\"16\\\" alt=\\\"$alt\\\" title=\\\"$alt\\\"/> <span class=\\\"smiley_alt\\\" />$alt</span></li>\n";
   }
   $p->code .= '</ul>"';
   $p->type = 'html';
