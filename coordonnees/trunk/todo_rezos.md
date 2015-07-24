@@ -73,6 +73,7 @@ Autres réseaux sociaux envisagés : viadeo, instagram, google+
 balise_img{'rezo:icone_supprimer_rezo'}
 
 - créer les images de réseaux sociaux
+[ ] type_rezo_dailymotion.jpg
 [ ] type_rezo_facebook.jpg
 [ ] type_rezo_google+.jpg
 [ ] type_rezo_instagram.jpg
@@ -80,6 +81,7 @@ balise_img{'rezo:icone_supprimer_rezo'}
 [ ] type_rezo_seenthis.jpg
 [ ] type_rezo_twitter.jpg
 [ ] type_rezo_viadeo.jpg
+[ ] type_rezo_youtube.jpg
 
 - creer les saisies
 [x] type_rezo
@@ -90,7 +92,7 @@ balise_img{'rezo:icone_supprimer_rezo'}
 [x] prive/objets/infos/rezo.html
 [x] prive/objets/listes/rezos.html
 [x] prive/objets/listes/rezos_lies.html
-[ ] prive/squelettes/contenu/utilisations_rezos.html
+[x] prive/squelettes/contenu/utilisations_rezos.html
 
 - définir les class css
 [ ] class=rezo (voir prive/objets/infos/rezo.html)
