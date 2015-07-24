@@ -3,7 +3,7 @@
  * Fichier gérant l'installation et désinstallation du plugin Coordonnees
  *
  * @plugin     Coordonnees
- * @copyright  2013
+ * @copyright  2015
  * @author     Marcimat / Ateliers CYM
  * @licence    GNU/GPL
  * @package    SPIP\Coordonnees\Installation
@@ -110,6 +110,11 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter', 'TABLE spip_emails_liens ADD INDEX (objet)'),
 	);
 
+	// ajout de l'objet 'rezo'
+	$maj['1.8.4']= array(
+		array('maj_tables', array('spip_rezos','spip_rezos_liens')),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -130,6 +135,8 @@ function coordonnees_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_numeros_liens");
 	sql_drop_table("spip_emails");
 	sql_drop_table("spip_emails_liens");
+	sql_drop_table("spip_rezos");
+	sql_drop_table("spip_rezos_liens");
 
 	effacer_meta('coordonnees');
 	effacer_meta($nom_meta_base_version);

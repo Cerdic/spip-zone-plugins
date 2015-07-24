@@ -1,0 +1,53 @@
+#SET{id_rezo_exclu, #ENV{coordonnee}|=={rezo}|?{#ENV{id_coordonnee}}}
+<B_liste_rezos>
+#ANCRE_PAGINATION
+<div class="liste-objets rezos coordonnees lies">
+<table class='spip liste'>
+	<tbody>
+	<BOUCLE_liste_rezos(rezos_liens){id_rezo != #GET{id_rezo_exclu}}{objet}{id_objet}{pagination #ENV{nb,10}}>
+	<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+		[(#COMPTEUR_BOUCLE|=={1}|oui)<td class='picto' rowspan='#TOTAL_BOUCLE'></td>]
+		<BOUCLE_rezo(REZOS){id_rezo}>
+		<td class='titre principale'>
+			<div>
+				[<a href="[(#URL_ECRIRE{rezo_edit,id_rezo=#ID_REZO})]">
+					<span><small><:info_numero_abbreviation:>(#ID_REZO)</small></span>
+				</a>]
+				[ - <a href="[(#INFO_URL{email,#ID_REZO})]">
+					<span class="#EDIT{titre} titre">(#TITRE)</span>
+				</a>]
+			</div>
+			<div>[(#TYPE|logo_type_rezo) ][(#TYPE|coordonnees_lister_types_rezos)]</div>
+		</td>
+		<td>
+			<div><a href="#REZO">
+			[<span class="#EDIT{rezo} rezo">(#REZO)</span>]
+			</a></div>
+		</td>
+		[(#REM) Un coup pour les champs extras ]
+		[<td>(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,rezo,id_objet,#ID_REZO,contexte,[(#ENV**|unserialize)]})],data,''})]})
+		</td>]
+		[(#AUTORISER{modifier,rezo,#ID_REZO}|et{#ENV{boutons_actions}}|oui)
+		<td class='action'>
+			<a onclick="ajaxReload('coordonnees', {args:{coordonnee:'rezo', id_coordonnee:'[(#ID_REZO)]'}});" href="#coordonnees" title="<:coordonnees:modifier_rezo:>">
+			[(#CHEMIN_IMAGE{edit-16.png}|balise_img)]
+			</a>
+			[(#AUTORISER{associerrezo,#ID_REZO}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'rezo:icone_supprimer_rezo'})],
+					#URL_ACTION_AUTEUR{dissocier_rezo,#ID_REZO/#OBJET/#ID_OBJET,#SELF},
+					'button link ajax','',
+					<:coordonnees:bouton_dissocier_rezo:>}
+				)]
+			]
+		</td>]
+		</BOUCLE_rezo>
+	</tr>
+	</BOUCLE_liste_rezos>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_rezos>[
+<div class="liste-objets coordonnees rezos caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_rezos>

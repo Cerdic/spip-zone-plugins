@@ -15,10 +15,12 @@ function coordonnees_declarer_tables_interfaces($interfaces) {
 	$interfaces['table_des_tables']['adresses'] = 'adresses';
 	$interfaces['table_des_tables']['numeros'] = 'numeros';
 	$interfaces['table_des_tables']['emails'] = 'emails';
+	$interfaces['table_des_tables']['rezos'] = 'rezos';
 
 	$interfaces['tables_jointures']['spip_auteurs'][] = 'adresses_liens';
 	$interfaces['tables_jointures']['spip_auteurs'][] = 'numeros_liens';
 	$interfaces['tables_jointures']['spip_auteurs'][] = 'emails_liens';
+	$interfaces['tables_jointures']['spip_auteurs'][] = 'rezos_liens';
 
 	$interfaces['table_des_traitements']['VILLE'][] = _TRAITEMENT_TYPO;
 
@@ -131,6 +133,37 @@ function coordonnees_declarer_tables_objets_sql($tables) {
 		'info_nb_objets'         => 'coordonnees:info_nb_emails',
 	);
 
+    /* RESEAUX SOCIAUX */
+    $tables['spip_rezos'] = array(
+        'type'                   => 'rezo',
+        'principale'             => "oui",
+        'field'=> array(
+            "id_rezo"            => "bigint(21) NOT NULL",
+            "titre"              => "varchar(255) NOT NULL DEFAULT ''", // seenthis, linkedin, facebook, twitter...
+            "rezo"               => "varchar(255) NOT NULL DEFAULT ''",
+            "maj"                => "TIMESTAMP"
+        ),
+        'key' => array(
+            "PRIMARY KEY"       => "id_rezo",
+            "KEY rezo"          => "rezo"
+        ),
+        'titre' => "titre AS titre, '' AS lang",
+        'champs_editables'       => array( 'titre', 'rezo' ),
+        'champs_versionnes'      => array(),
+        'rechercher_champs'      => array('titre'=>5, 'rezo'=>5),
+        'tables_jointures'       => array('spip_rezos_liens'),
+        /* Les textes standard */
+        'texte_modifier'         => 'coordonnees:modifier_rezo',
+        'texte_ajouter'          => 'coordonnees:ajouter_rezo',
+        'texte_logo_objet'       => 'coordonnees:logo_rezo',
+        'texte_creer'            => 'coordonnees:nouveau_rezo',
+        'texte_objet'            => 'coordonnees:rezo',
+        'texte_objets'           => 'coordonnees:rezos',
+        'info_aucun_objet'       => 'coordonnees:info_aucun_rezo',
+        'info_1_objet'           => 'coordonnees:info_1_rezo',
+        'info_nb_objets'         => 'coordonnees:info_nb_rezos',
+    );
+
 	return $tables;
 }
 
@@ -181,6 +214,22 @@ function coordonnees_declarer_tables_auxiliaires($tables) {
 		'key' => array(
 			"PRIMARY KEY"       => "id_email,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
 			"KEY id_email"      => "id_email",
+			"KEY id_objet"      => "id_objet",
+			"KEY objet"         => "objet",
+		)
+	);
+
+	$tables['spip_rezos_liens'] = array(
+		'field' => array(
+			"id_rezo"           => "bigint(21) DEFAULT '0' NOT NULL",
+			"id_objet"          => "bigint(21) DEFAULT '0' NOT NULL",
+			"objet"             => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"type"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+			"vu"                => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+		),
+		'key' => array(
+			"PRIMARY KEY"       => "id_rezo,id_objet,objet,type", // on rajoute le type car on en rajoute un par liaison et qu'il peut y en avoir plusieurs
+			"KEY id_rezo"       => "id_rezo",
 			"KEY id_objet"      => "id_objet",
 			"KEY objet"         => "objet",
 		)

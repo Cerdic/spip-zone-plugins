@@ -12,16 +12,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresse' => 'Adresse',
 	'ajouter_adresse' => 'Ajouter une adresse',
 	'ajouter_email' => 'Ajouter un email',
-	'ajouter_telephone' => 'Ajouter un numéro',
 	'ajouter_adresse_court' => 'Ajouter adresse',
 	'ajouter_email_court' => 'Ajouter email',
+	'ajouter_rezo' => "Ajouter un réseau social",
+	'ajouter_rezo_court' => "Ajouter réseau social",
+	'ajouter_telephone' => 'Ajouter un numéro',
 	'ajouter_telephone_court' => 'Ajouter numéro',
 
 	// B
+	'bouton_dissocier' => 'Retirer',
 	'bouton_dissocier_adresse' => 'Retirer cette adresse',
 	'bouton_dissocier_email' => 'Retirer cet email',
 	'bouton_dissocier_numero' => 'Retirer ce numéro',
-	'bouton_dissocier' => 'Retirer',
+	'bouton_dissocier_rezo' => 'Retirer ce réseau social',
 
 	// C
 	'configuration_coordonnees' => 'Configuration des coordonnées',
@@ -48,21 +51,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_1_adresse' => '1 adresse',
 	'info_1_email' => '1 courriel',
 	'info_1_numero' => '1 numero',
+	'info_1_rezo' => '1 réseau social',
 	'info_adresse_utilisee_par' => 'Adresse utilisée par :',
 	'info_aucun_email' => 'Aucun courriel',
 	'info_aucun_numero' => 'Aucun numero',
 	'info_aucune_adresse' => 'Aucune adresse',
+	'info_aucun_rezo' => 'Aucun réseau social',
 	'info_email_utilise_par' => 'Courriel utilisé par :',
 	'info_gauche_numero_adresse' => 'Adresse N°',
 	'info_gauche_numero_email' => 'Email N°',
 	'info_gauche_numero_numero' => 'Numéro N°',
+	'info_gauche_rezo' => 'Réseau social N°',
 	'info_nb_adresses' => '@nb@ adresses',
 	'info_nb_emails' => '@nb@ courriels',
 	'info_nb_numeros' => '@nb@ numeros',
+	'info_nb_rezos' => '@nb@ réseaux sociaux',
 	'info_numero_utilise_par' => 'Numéro utilisé par :',
 	'item_nouveau_numero' => 'Nouveau numéro',
 	'item_nouvel_email' => 'Nouveau courriel',
 	'item_nouvelle_adresse' => 'Nouvelle adresse',
+	'item_nouveau_rezo' => 'Nouveau réseau social',
 
 	// L
 	'label_boite_postale' => 'Boîte Postale',
@@ -79,21 +87,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_adresse' => 'Type d\'adresse',
 	'label_type_email' => 'Type de courriel',
 	'label_type_numero' => 'Type de numéro',
+	'label_type_rezo' => 'Type de réseau social',
 	'label_ville' => 'Ville',
 	'label_voie' => 'N<sup>o</sup> & voie',
 	'logo_adresse' => 'Logo de l\'adresse',
 	'logo_email' => 'Logo du courriel',
 	'logo_numero' => 'Logo du numero',
+	'logo_rezo' => 'Logo du réseau social',
 
 	// M
 	'modifier_adresse' => 'Modifier cette adresse',
 	'modifier_email' => 'Modifier ce courriel',
 	'modifier_numero' => 'Modifier ce numéro',
+	'modifier_rezo' => 'Modifier ce réseau social',
 
 	// N
-	'nouveau_numero' => 'Nouveau numéro',
-	'nouvel_email' => 'Nouveau courriel',
 	'nouvelle_adresse' => 'Nouvelle adresse',
+	'nouvel_email' => 'Nouveau courriel',
+	'nouveau_numero' => 'Nouveau numéro',
+	'nouveau_rezo' => 'Nouveau réseau social',
 	'numeros' => 'Numéros',
 	'numero' => 'Numéro',
 
@@ -103,11 +115,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'placeholder_titre_adresse' => 'Un nom pour identifier l\'adresse',
 	'placeholder_titre_email' => 'Un nom pour identifier l\'email',
 	'placeholder_titre_numero' => 'Un nom pour identifier le numéro de téléphone',
+	'placeholder_titre_rezo' => 'Un nom pour identifier le réseau socail',
+
+	// R
+	'rezo' => 'Réseau social',
+	'rezos' => 'Réseaux sociaux',
 
 	// S
 	'supprimer_adresse' => 'Supprimer cette adresse',
 	'supprimer_email' => 'Supprimer ce courriel',
 	'supprimer_numero' => 'Supprimer ce numéro',
+	'supprimer_rezo' => 'Supprimer ce réseau social',
 
 	// T
 	'titre_coordonnees' => 'Coordonnées',
@@ -127,6 +145,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_mel_home' => 'Personnel',
 	'type_mel_intl' => 'International',
 	'type_mel_work' => 'Professionnel',
+	'type_rezo_facebook' => 'FaceBook',
+	'type_rezo_google+' => 'Google+',
+	'type_rezo_instagram' => 'Instagram',
+	'type_rezo_linkedin' => 'LinkedIn',
+	'type_rezo_seenthis' => 'Seenthis',
+	'type_rezo_twitter' => 'Twitter',
+	'type_rezo_viadeo' => 'Viadeo',
 	'type_tel_bbs' => 'Service de messagerie',
 	'type_tel_car' => 'Voiture',
 	'type_tel_cell' => 'Portable',

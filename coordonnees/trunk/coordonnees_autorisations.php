@@ -3,7 +3,7 @@
  * Définit les autorisations du plugin Coordonnees
  *
  * @plugin     Coordonnees
- * @copyright  2013
+ * @copyright  2015
  * @author     Marcimat / Ateliers CYM
  * @licence    GNU/GPL
  * @package    SPIP\Coordonnees\Autorisations
@@ -105,9 +105,39 @@ function autoriser_email_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return !count(objet_trouver_liens(array('emails'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
 }
 
-
 // associer (lier / delier)
 function autoriser_associeremails_dist($faire, $type, $id, $qui, $opt) {
+	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
+}
+
+
+// ----------
+// Objet rezo
+
+// creer
+function autoriser_rezo_creer_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite')); 
+}
+
+// voir les fiches completes
+function autoriser_rezo_voir_dist($faire, $type, $id, $qui, $opt) {
+	return true;
+}
+
+// modifier
+function autoriser_rezo_modifier_dist($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
+}
+
+// supprimer
+// uniquement les orphelins
+function autoriser_rezo_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	include_spip('action/editer_liens');
+	return !count(objet_trouver_liens(array('rezos'=>$id),'*')) AND ($qui['statut'] == '0minirezo' OR $qui['restreint']);
+}
+
+// associer (lier / delier)
+function autoriser_associerrezos_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' OR $qui['restreint'];
 }
 
