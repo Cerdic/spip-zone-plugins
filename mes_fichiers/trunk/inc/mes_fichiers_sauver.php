@@ -56,6 +56,8 @@ function inc_mes_fichiers_sauver_dist($liste=null, $options=array()) {
 		$mes_fichiers = new PclZip(_DIR_MES_FICHIERS . $prefixe.'_'.date("Ymd_His").'.zip');
 
 		$auteur = $options['auteur'] ? $options['auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
+		if ($auteur == 'cron')
+			$auteur = _T('mes_fichiers:spip_methode_cron');
 		$comment = array('auteur' => $auteur, 'contenu' => $liste_finale);
 
 		$erreur = $mes_fichiers->create(
