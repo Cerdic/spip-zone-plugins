@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_nouveau_rezosocio' => 'Nouveau lien de réseau social',
 	'texte_rezosocio_statut' => 'Ce lien de réseau social est :',
 	'titre_ajouter_un_rezosocio' => 'Ajouter un lien de réseau social',
+	'titre_objets_lies_rezosocio' => 'Objets liés à ce réseau social',
 	'titre_page_rezosocios_page' => 'Les liens de réseaux sociaux',
 	'titre_tweetsde' => 'Tweets de @@name@'
 );

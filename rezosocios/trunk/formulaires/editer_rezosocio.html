@@ -14,7 +14,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" placeholder="<:rezosocios:texte_nouveau_rezosocio:>" />
 			</li>
-			<li class="editer editer_groupe_mot obligatoire[ (#ENV**{erreurs}|table_valeur{type_rezo}|oui)erreur]">
+			<li class="editer editer_type_rezo obligatoire[ (#ENV**{erreurs}|table_valeur{type_rezo}|oui)erreur]">
 				<label for="type_rezo"><:rezosocios:info_type_rezosocios:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{type_rezo})</span>
 				][(#INCLURE{fond=formulaires/selecteur_rezosocio, types_rezosocios=#ENV{_types_rezosocios}, name=type_rezo, type_rezo=#ENV{type_rezo},id=type_rezo})]

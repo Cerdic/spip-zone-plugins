@@ -3,7 +3,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 /**
  * Insertion dans le pipeline affiche_milieu (SPIP)
  *

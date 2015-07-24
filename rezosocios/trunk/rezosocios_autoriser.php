@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Autorisation de créer un rezosocio
  *
@@ -19,12 +21,7 @@ function autoriser_rezosocio_creer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * Autorisation d'associer des mots à un objet
- *
- * Si groupe_champ ou id_groupe est fourni dans le tableau d'options,
- * on regarde les droits pour ce groupe en particulier
- *
- * On interdit aussi d'associer des mots à d'autres mots ou groupes de mots
+ * Autorisation d'associer des rezosocios à un objet
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -34,7 +31,7 @@ function autoriser_rezosocio_creer_dist($faire, $type, $id, $qui, $opt) {
  * @return bool          true s'il a le droit, false sinon
  */
 function autoriser_associerrezosocios_dist($faire,$type,$id,$qui,$opt){
-	// jamais de mots sur des mots
+	// jamais de rezosocios sur des rezosocios
 	if ($type=='rezosocio') return false;
 	$droit = substr($qui['statut'],1);
 	return

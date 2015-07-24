@@ -1,0 +1,72 @@
+<BOUCLE_rezosocio(REZOSOCIOS){id_rezosocio}{tout}{si #ENV{exec}|=={rezosocio}}>
+[(#ID_REZOSOCIO|generer_info_entite{rezosocio,[(#VAL{rezosocio}|id_table_objet)],'**'}|intval|=={#ID_REZOSOCIO}|et{#ID_REZOSOCIO}|sinon_interdire_acces)]
+[(#INFO_LANG{rezosocio,#ID_REZOSOCIO}|changer_typo)]
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,rezosocio,#ID_REZOSOCIO}|et{#VAL{rezosocio}|objet_info{editable}}|oui)
+		[(#ID_REZOSOCIO|afficher_qui_edite{rezosocio}|non)
+			[(#ID_REZOSOCIO|generer_url_ecrire_entite_edit{rezosocio}|icone_verticale{[(#VAL{rezosocio}|objet_info{texte_modifier}|_T)],#VAL{rezosocio}|objet_info{icone_objet},edit,right ajax preload})]
+		]
+		[(#ID_REZOSOCIO|afficher_qui_edite{rezosocio}|oui)
+			[(#ID_REZOSOCIO|generer_url_ecrire_entite_edit{rezosocio}|icone_verticale{#ID_REZOSOCIO|afficher_qui_edite{rezosocio},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+	<h1>[(#INFO_TITRE{rezosocio,#ID_REZOSOCIO}|recuperer_numero). ](#INFO_TITRE{rezosocio,#ID_REZOSOCIO}|sinon{<:info_sans_titre:>})[(#VAL{rezosocio}|objet_icone|inserer_attribut{class,cadre-icone})]</h1>
+],simple fiche_objet})]
+[(#REM|changer_typo)]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{rezosocio,#ID_REZOSOCIO}
+</div>
+
+<div id="wysiwyg">
+	<h2 class="invisible"><:previsualisation:></h2>
+	<INCLURE{fond=prive/objets/contenu/rezosocio,id=#ID_REZOSOCIO,env,wysiwyg=1}>
+</div>
+
+<div class="liste">
+<BOUCLE_objetslies(spip_rezosocios_liens){id_rezosocio}{0,1}><h3><:rezosocios:titre_objets_lies_rezosocio:></h3></BOUCLE_objetslies>
+<BOUCLE_objets(spip_rezosocios_liens){id_rezosocio}{objet IN article,rubrique}{fusion objet}{par objet}>
+	[(#SET{table,#OBJET|table_objet})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table}}})]
+	[(#SET{liste_objet,#ARRAY})]
+	<BOUCLE_liste_objet(spip_rezosocios_liens){id_rezosocio}{objet=#OBJET}>
+	#SET{liste_objet,#GET{liste_objet}|push{#ID_OBJET}}
+	</BOUCLE_liste_objet>
+	[(#SET{where,[(#GET{table}).][(#OBJET|id_table_objet)] IN [((#GET{liste_objet}|implode{','}))]})]
+	</B_liste_objet>
+	[(#GET{liste}|oui)
+	<INCLURE{fond=prive/objets/liste/#GET{liste},where=#GET{where},ajax,env} />]
+</BOUCLE_objets>
+<BOUCLE_autresobjets(spip_rezosocios_liens){id_rezosocio}{objet !IN article,rubrique}{fusion objet}{par objet}>
+	[(#SET{table,#OBJET|table_objet})]
+	[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table}}})]
+	[(#SET{liste_objet,#ARRAY})]
+	<BOUCLE_liste_objet2(spip_rezosocios_liens){id_rezosocio}{objet=#OBJET}>
+	#SET{liste_objet,#GET{liste_objet}|push{#ID_OBJET}}
+	</BOUCLE_liste_objet2>
+	[(#SET{where,[(#GET{table}).][(#OBJET|id_table_objet)] IN [((#GET{liste_objet}|implode{','}))]})]
+	</B_liste_objet2>
+	[(#GET{liste}|oui)
+	<INCLURE{fond=prive/objets/liste/#GET{liste},where=#GET{where},ajax,env} />]
+</BOUCLE_autresobjets>
+</div>
+[(#AUTORISER{modifier,rezosocio,#ID_REZOSOCIO}|et{#VAL{rezosocio}|objet_info{editable}}|oui)
+	[(#ID_REZOSOCIO|afficher_qui_edite{rezosocio}|non)
+		[(#ID_REZOSOCIO|generer_url_ecrire_entite_edit{rezosocio}|icone_verticale{[(#VAL{rezosocio}|objet_info{texte_modifier}|_T)],#VAL{rezosocio}|objet_info{icone_objet},edit,right ajax preload})]
+	]
+	[(#ID_REZOSOCIO|afficher_qui_edite{rezosocio}|oui)
+		[(#ID_REZOSOCIO|generer_url_ecrire_entite_edit{rezosocio}|icone_verticale{#ID_REZOSOCIO|afficher_qui_edite{rezosocio},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,rezosocio,id,#ID_REZOSOCIO},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+[(#EVAL{_AJAX}|oui)
+<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('[(#VAL{rezosocio}|objet_info{url_voir})]','#navigation,#chemin,#extra');/*\]\]>*/</script>
+]
+</BOUCLE_rezosocio>
+</B_rezosocio>
+[(#ENV**{exec}|=={rezosocio_edit}|?{#INCLURE{fond=prive/squelettes/contenu/rezosocio_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_rezosocio>
