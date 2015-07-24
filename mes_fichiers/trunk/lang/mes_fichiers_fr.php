@@ -63,9 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_zip_compteur' => 'Fichiers / dossiers archivés',
 	'resume_zip_contenu' => 'Contenu résumé',
 	'resume_zip_statut' => 'Statut',
-	
-	// S
-	'spip_methode_cron' => 'SPIP (méthode CRON)',
 
 	// T
 	'titre_boite_sauver' => 'Créer une archive',

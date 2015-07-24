@@ -16,7 +16,7 @@ function inc_mes_fichiers_cleaner_dist($options=array()){
 	$jours_obso = intval(lire_config('mes_fichiers/duree_sauvegarde', 15));
 	$auteur = $options['auteur'] ? $options['auteur'] : $GLOBALS['visiteur_session']['id_auteur'];
 	if ($auteur == 'cron')
-		$auteur = _T('mes_fichiers:spip_methode_cron');
+		$auteur = 'SPIP';
 
 	if($jours_obso > 0){
 		$prefixe = lire_config('mes_fichiers/prefixe','mf2').'_';
