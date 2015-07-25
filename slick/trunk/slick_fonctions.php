@@ -27,7 +27,8 @@ function filtre_slick_config_to_json_dist($config, $black_list = array()) {
 
         // Si un élément ce trouve dans la black_list c'est qu'on n'en veux pas de le json.
         // on supprime la variable
-        if (in_array($key, $black_list))
+        // On supprime également les éléments vides, cela évite les surprises quand on vide un champ du formulaire de configuration
+        if (in_array($key, $black_list) or empty($value))
             unset($config[$key]);
 
     }
