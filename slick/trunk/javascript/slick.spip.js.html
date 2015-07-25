@@ -1,16 +1,5 @@
 $(function () {
-    $("#CONFIG{slick/selecteur}").slick({
-        [(#REM) Valeur qui ne sont pas des strings ]
-        <BOUCLE_config(DATA)
-{source table, #CONFIG{slick}}{','}{cle !IN selecteur,slide,lazyload,charger}{valeur!=''}>
-          [#CLE: (#VALEUR|print)]
-        </BOUCLE_config>
-
-        <B_config_string>
-        ,
-          <BOUCLE_config_string(DATA){source table, #CONFIG{slick}}{','}{cle IN selecteur,slide,lazyload}{cle !IN charger}{valeur!=''}>
-            [#CLE: "(#VALEUR|print)"]
-          </BOUCLE_config_string>
-        </B_config_string>
-    });
+    $("#CONFIG{slick/selecteur}").slick(
+        [(#CONFIG{slick}|slick_config_to_json{#LISTE{selecteur}})]
+    );
 });
