@@ -26,5 +26,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'slide' => 'Elément à utiliser comme Slide',
     'lazyload' => 'Lazyload',
     'charger' => 'Exectuter Slick',
-    'explication_charger' => 'Active Slick automatiquement'
+    'explication_charger' => 'Active Slick automatiquement',
+    'centerMode' => 'Center les éléments ?',
+    'centerPadding' => "Padding d'affichage pour les éléments avant/après le centre",
+    'cssEase' => 'Animation CSS3 (easing)',
+    'dots' => 'Afficher les bulles de contrôle',
+    'pauseOnHover' => 'Pause au survole ?',
+    'pauseOnDotsHover' => 'Pause au survole des bulles de contrôle ?',
+    'rtl' => 'Support du RTL'
 );
