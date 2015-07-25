@@ -8,61 +8,135 @@ function frimousses_liste_smileys() {
   
   /*Listes des images a associer aux smileys*/
 
-	$les_smileys = array();
-	$les_smileys[':-)*'] = 'smiley-kiss-16.png';
-	$les_smileys[':-*'] = 'smiley-kiss-16.png';
-	$les_smileys[':*'] = 'smiley-kiss-16.png';
-	$les_smileys[':-))'] = 'smiley-lol-16.png';
-	$les_smileys[':-D'] = 'smiley-lol-16.png';
-	$les_smileys[':D'] = 'smiley-lol-16.png';
-	$les_smileys[':))'] = 'smiley-lol-16.png';
-	$les_smileys[':-)'] = 'smiley-16.png';
-	$les_smileys[':)'] = 'smiley-16.png';
-	$les_smileys['o:)'] = 'smiley-angel-16.png';
-	$les_smileys['O:)'] = 'smiley-angel-16.png';
-	$les_smileys['0:)'] = 'smiley-angel-16.png';
-	$les_smileys['%-)'] = 'smiley-eek-16.png';
-	$les_smileys['8-)'] = 'smiley-eek-16.png';
-	$les_smileys['8)'] = 'smiley-eek-16.png';
-	$les_smileys[';-)'] = 'smiley-wink-16.png';
-	$les_smileys[';)'] = 'smiley-wink-16.png';
-	$les_smileys[':-(('] = 'smiley-sad-16.png';
-	$les_smileys[':-('] = 'smiley-sad-16.png';
-	$les_smileys[':('] = 'smiley-sad-16.png';
-	$les_smileys[':-O'] = 'smiley-yell-16.png';
-	$les_smileys[':O)'] = 'smiley-16.png';
-	$les_smileys[':O'] = 'smiley-yell-16.png';
-	$les_smileys[':o)'] = 'smiley-16.png';
-	$les_smileys[':0)'] = 'smiley-16.png';
-	$les_smileys[':0'] =  'smiley-yell-16.png';
-	$les_smileys[':-|'] = 'smiley-neutral-16.png';
-	$les_smileys[':|'] = 'smiley-neutral-16.png';
-	$les_smileys[':-/'] = 'smiley-confuse-16.png';
-	$les_smileys[':/'] = 'smiley-confuse-16.png';
-	$les_smileys[':-p'] = 'smiley-razz-16.png';
-	$les_smileys[':-P'] = 'smiley-razz-16.png';
-	$les_smileys[':p'] = 'smiley-razz-16.png';
-	$les_smileys[':P'] = 'smiley-razz-16.png';
-	$les_smileys[':\'-('] = 'smiley-cry-16.png';
-	$les_smileys[':\'('] = 'smiley-cry-16.png';
-	$les_smileys[':~('] = 'smiley-cry-16.png';
-	$les_smileys[':-...'] = 'smiley-red-16.png';
-	$les_smileys[':...'] = 'smiley-red-16.png';
-	$les_smileys[':-..'] = 'smiley-red-16.png';
-	$les_smileys[':..'] = 'smiley-red-16.png';
-	$les_smileys[':-.'] = 'smiley-red-16.png';
-	$les_smileys[':.'] = 'smiley-red-16.png';
-	$les_smileys[':-x'] = 'smiley-zipper-16.png';
-	$les_smileys[':x'] = 'smiley-zipper-16.png';
-	$les_smileys['B-)'] = 'smiley-cool-16.png';
-	$les_smileys['B)'] = 'smiley-cool-16.png';
-	$les_smileys[':-@'] = 'smiley-sleep-16.png';
-	$les_smileys[':@'] = 'smiley-sleep-16.png';
-	$les_smileys[':$'] = 'smiley-money-16.png';
-	$les_smileys[':-!'] = 'smiley-roll-16.png';
-	$les_smileys[':!'] = 'smiley-roll-16.png';
-	$les_smileys['|-)'] = 'smiley-neutral-16.png';
-	$les_smileys['|)'] = 'smiley-neutral-16.png';
+	$les_smileys = Array
+		(
+			'smiley-kiss-16.png' => Array
+				(
+					':-)*',
+					':-*',
+					':*'
+				)
+			,
+			'smiley-lol-16.png' => Array
+				(
+					':-))',
+					':-D',
+					':D',
+					':))'
+				)
+			,
+			'smiley-16.png' => Array
+				(
+					':-)',
+					':)',
+					':O)',
+					':o)',
+					':0)'
+				)
+			,
+			'smiley-angel-16.png' => Array
+				(
+					'o:)',
+					'O:)',
+					'0:)'
+				)
+			,
+			'smiley-eek-16.png' => Array
+				(
+					'%-)',
+					'8-)',
+					'8)'
+				)
+			,
+			'smiley-wink-16.png' => Array
+				(
+					';-)',
+					';)'
+				)
+			,
+			'smiley-sad-16.png' => Array
+				(
+					':-((',
+					':-(',
+					':('
+				)
+			,
+			'smiley-yell-16.png' => Array
+				(
+					':-O',
+					':O',
+					':0'
+				)
+			,
+			'smiley-neutral-16.png' => Array
+				(
+					':-|',
+					':|',
+					'|-)',
+					'|)'
+				)
+			,
+			'smiley-confuse-16.png' => Array
+				(
+					':-/',
+					':/'
+				)
+			,
+			'smiley-razz-16.png' => Array
+				(
+					':-p',
+					':-P',
+					':p',
+					':P'
+				)
+			,
+			'smiley-cry-16.png' => Array
+				(
+					':\'-(',
+					':\'(',
+					':~('
+				)
+			,
+			'smiley-red-16.png' => Array
+				(
+					':-...',
+					':...',
+					':-..',
+					':..',
+					':-.',
+					':.'
+				)
+			,
+			'smiley-zipper-16.png' => Array
+				(
+					':-x',
+					':x'
+				)
+			,
+			'smiley-cool-16.png' => Array
+				(
+					'B-)',
+					'B)'
+				)
+			,
+			'smiley-sleep-16.png' => Array
+				(
+					':-@',
+					':@'
+				)
+			,
+			'smiley-money-16.png' => Array
+				(
+					':$'
+				)
+			,
+			'smiley-roll-16.png' => Array
+				(
+					':-!',
+					':!'
+				)
+
+		);
 
 	return $les_smileys;
 }
@@ -79,17 +153,19 @@ function frimousses_pre_typo($chaine) {
 	static $replace1 = null;
 	static $replace2 = null;
 	if (!$replace1 OR !$replace2){
-		foreach(frimousses_liste_smileys() as $smiley => $file) {
-			$alt = _T('smileys:'.$smiley);
+		foreach(frimousses_liste_smileys() as $file => $smileys) {
+			$alt = _T('smileys:'.$smileys[0]);
 			$alt = attribut_html($alt);
-			$smiley = preg_quote($smiley,'/');
 			$r = "<img src=\"".find_in_path('frimousses/'.$file).'" width="16" height="16" alt="'.$alt.'" title="'.$alt.'" class="smiley" />';
 			// 4 regexp simples qui accrochent sur le premier char
 			// sont plus rapides qu'une regexp complexe qui oblige a des retour en arriere
-			$replace1['/^'.$smiley.'/imsS'] = "<html>$r</html>";
-			$replace1['/\s'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
-			$replace2['/^&nbsp;'.$smiley.'/imsS'] = "<html>$r</html>";
-			$replace2['/&nbsp;'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
+			foreach($smileys as $index => $smiley) {
+				$smiley = preg_quote($smiley, '/');
+				$replace1['/^'.$smiley.'/imsS'] = "<html>$r</html>";
+				$replace1['/\s'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
+				$replace2['/^&nbsp;'.$smiley.'/imsS'] = "<html>$r</html>";
+				$replace2['/&nbsp;'.$smiley.'/imsS'] = "<html>&nbsp;$r</html>";
+			}
 		}
   }
 
@@ -103,15 +179,7 @@ function frimousses_pre_typo($chaine) {
 function balise_SMILEY_DISPO($p) {
 
   $p->code = '"<ul class=\"listes-items smileys\">';
-  $frimousses_en_vrac = frimousses_liste_smileys();
-  $frimousses = array();
-
-  foreach ( $frimousses_en_vrac as $key => $value ) {
-    if ( !isset($frimousses[$value]) ) {
-      $frimousses[$value] = array();
-    }
-    $frimousses[$value][] = $key;
-  }  
+  $frimousses = frimousses_liste_smileys();
 
   foreach($frimousses as $file => $smiley) {
 		$alt = _T('smileys:'.$smiley[0]);
