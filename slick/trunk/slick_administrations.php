@@ -45,7 +45,7 @@ function slick_upgrade($nom_meta_base_version, $version_cible) {
 }
 
 /*
-*   Désintaller foundation.
+*   Désintaller slick.
 */
 function slick_vider_tables($nom_meta_base_version) {
     // Supprimer les méta, ou oublie pas celle de la base.
