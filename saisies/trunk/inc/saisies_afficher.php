@@ -345,6 +345,7 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							switch($saisies[$nom]['saisie']) {
 								case 'radio':
 								case 'oui_non':
+								case 'true_false':
 									$condition = preg_replace('#@'.preg_quote($nom).'@#U', '$(form).find("[name=\''.$nom.'\']:checked").val()', $condition);
 									break;
 								case 'case':
