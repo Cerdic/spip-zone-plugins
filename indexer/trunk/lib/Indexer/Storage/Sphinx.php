@@ -26,13 +26,16 @@ class Sphinx implements StorageInterface {
 		// insertion document par document
 		// il semble que sphinxql n'aime pas plusieurs lignes d'un coup.
 		foreach ($documents as $document) {
-			$data = $this->reformatDocument($document);
-			$data = array_map(array($this->sphinxql, 'escape_string'), $data);
-			$q = $query . "('" . implode("', '", $data) . "')";
-			if (!$this->sphinxql->query($q)) {
-				echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
-				echo "<pre>".print_r($q, true)."</pre>";
-				exit;
+			// On vérifie qu'il y a bien un Document
+			if ($document and $document instanceof \Indexer\Sources\Document) {
+				$data = $this->reformatDocument($document);
+				$data = array_map(array($this->sphinxql, 'escape_string'), $data);
+				$q = $query . "('" . implode("', '", $data) . "')";
+				if (!$this->sphinxql->query($q)) {
+					echo "<pre>".print_r($this->sphinxql->errors(), true)."</pre>";
+					echo "<pre>".print_r($q, true)."</pre>";
+					exit;
+				}
 			}
 		}
 
