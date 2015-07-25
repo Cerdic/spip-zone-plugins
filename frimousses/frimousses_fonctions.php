@@ -9,6 +9,7 @@ function frimousses_liste_smileys() {
   /*Listes des images a associer aux smileys*/
 
 	$les_smileys = array();
+	$les_smileys[':-)*'] = 'smiley-kiss-16.png';
 	$les_smileys[':-*'] = 'smiley-kiss-16.png';
 	$les_smileys[':*'] = 'smiley-kiss-16.png';
 	$les_smileys[':-))'] = 'smiley-lol-16.png';
