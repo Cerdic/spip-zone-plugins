@@ -120,6 +120,12 @@ function formulaires_configurer_slick_saisies_dist() {
                         'label' => _T('click:cssEase')
                     )
                 ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
+                        'nom' => 'dots',
+                        'label' => _T('slick:dots')
+                    )
                 )
             )
         )

@@ -29,6 +29,7 @@ function slick_upgrade($nom_meta_base_version, $version_cible) {
         'centerMode' => "false",
         'centerPadding' => '50px',
         'cssEase' => 'ease',
+        'dots' => 'false'
     );
 
     // Tableau de la configuration par défaut
