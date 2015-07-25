@@ -114,6 +114,12 @@ function formulaires_configurer_slick_saisies_dist() {
                     )
                 ),
                 array(
+                    'saisie' => 'input',
+                    'options' => array(
+                        'nom' => 'cssEase',
+                        'label' => _T('click:cssEase')
+                    )
+                ),
                 )
             )
         )
