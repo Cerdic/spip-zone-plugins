@@ -25,7 +25,9 @@ function slick_upgrade($nom_meta_base_version, $version_cible) {
         'fade' => "false",
         'speed' => 300,
         'vertical' => "false",
-        'lazyload' => 'ondemand'
+        'lazyload' => 'ondemand',
+        'centerMode' => "false",
+        'centerPadding' => '50px',
     );
 
     // Tableau de la configuration par défaut

@@ -103,6 +103,17 @@ function formulaires_configurer_slick_saisies_dist() {
                         'nom' => 'centerMode',
                         'label' => _T('slick:centerMode')
                     )
+                ),
+                array(
+                    'saisie' => 'input',
+                    'options' => array(
+                        'nom' => 'centerPadding',
+                        'label' => _T('slick:centerPadding'),
+                        'explication' => _T('slick:explication_centerPadding'),
+                        'afficher_si' => '@centerMode@=="true"'
+                    )
+                ),
+                array(
                 )
             )
         )
