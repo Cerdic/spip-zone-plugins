@@ -31,6 +31,10 @@ function filtre_slick_config_to_json_dist($config, $black_list = array()) {
         if (in_array($key, $black_list) or empty($value))
             unset($config[$key]);
 
+        // Variable en int, on les veux vraiment en int dans le json et pas en string
+        if (is_numeric($value))
+            $config[$key] = intval($value);
+
     }
 
     return json_encode($config);
