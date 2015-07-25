@@ -141,6 +141,12 @@ function formulaires_configurer_slick_saisies_dist() {
                         'label' => _T('slick:pauseOnDotsHover')
                     )
                 ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
+                        'nom' => 'rtl',
+                        'label' => _T('slick:rtl')
+                    )
                 )
             )
         )

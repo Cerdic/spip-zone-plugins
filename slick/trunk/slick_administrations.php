@@ -32,6 +32,7 @@ function slick_upgrade($nom_meta_base_version, $version_cible) {
         'dots' => "false",
         'pauseOnHover' => "true",
         'pauseOnDotsHover' => "false",
+        'rtl' => "false"
     );
 
     // Tableau de la configuration par défaut
