@@ -20,7 +20,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	':-@'=> 'endormi',
 	':$'=> 'avide',
 	':-!'=> 'indéci',
-	'8-)'=> 'sidéré',
 	'|-)'=> 'neutre',
 );
 
