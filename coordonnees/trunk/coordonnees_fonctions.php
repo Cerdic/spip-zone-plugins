@@ -56,7 +56,7 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 		'adresse' => array('work','home','pref','postal','dom','intl','parcel'),
 		'numero'  => array('voice','work','home','msg','pref','fax','cell','dsl','video','pager','bbs','modem','car','isdn','pcs'),
 		'email'   => array('work','home','internet','pref','x400'),
-		'rezo'    => array('dailymotion','facebook','google+','instagram','linkedin','seenthis','twitter','viadeo','youtube')
+		'rezo'    => array('dailymotion','diaspora','facebook','flickr','google+','instagram','linkedin','pinterest','seenthis','storify','twitter','viadeo','vimeo','weibo','youtube')
 	);
 
 	// Attention, les chaînes de langue ne sont pas "type_adresse_xxx", mais "type_adr_xxx" etc.
