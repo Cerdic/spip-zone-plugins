@@ -29,6 +29,7 @@ class Documents extends SpipDocuments {
     }
 
     public function createDocumentDocument($document) {
+		include_spip('inc/filtres');
         $id = $document['id_document'];
         $extraire = array('contenu' => false);
 

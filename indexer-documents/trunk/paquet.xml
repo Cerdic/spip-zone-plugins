@@ -1,7 +1,7 @@
 <paquet
     prefix="indexerdoc"
     categorie="navigation"
-    version="0.0.2"
+    version="0.0.3"
     etat="dev"
     compatibilite="[2.1.0;3.1.*]"
     logo=""
