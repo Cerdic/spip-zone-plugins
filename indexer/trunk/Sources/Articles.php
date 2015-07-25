@@ -28,6 +28,7 @@ class Articles extends SpipDocuments {
 	}
 
 	public function createDocumentArticle($article) {
+		include_spip('inc/filtres');
 		$id = $article['id_article'];
 
 		$doc = new Document(array(
