@@ -133,6 +133,14 @@ function formulaires_configurer_slick_saisies_dist() {
                         'nom' => 'pauseOnHover',
                         'label' => _T('slick:pauseOnHover')
                     )
+                ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
+                        'nom' => 'pauseOnDotsHover',
+                        'label' => _T('slick:pauseOnDotsHover')
+                    )
+                ),
                 )
             )
         )

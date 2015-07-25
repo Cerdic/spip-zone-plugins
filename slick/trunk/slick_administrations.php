@@ -30,7 +30,8 @@ function slick_upgrade($nom_meta_base_version, $version_cible) {
         'centerPadding' => '50px',
         'cssEase' => 'ease',
         'dots' => "false",
-        'pauseOnHover' => "true"
+        'pauseOnHover' => "true",
+        'pauseOnDotsHover' => "false",
     );
 
     // Tableau de la configuration par défaut
