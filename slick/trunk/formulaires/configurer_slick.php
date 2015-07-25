@@ -96,6 +96,13 @@ function formulaires_configurer_slick_saisies_dist() {
                             'progressive' => 'progressive'
                         )
                     )
+                ),
+                array(
+                    'saisie' => 'true_false',
+                    'options' => array(
+                        'nom' => 'centerMode',
+                        'label' => _T('slick:centerMode')
+                    )
                 )
             )
         )
