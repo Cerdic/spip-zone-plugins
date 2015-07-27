@@ -3,7 +3,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function typoenluminee_porte_plume_barre_pre_charger($barres){
 	$barre = &$barres['edition'];
 	
+	$barre->cacher('italic');
 	$barre->cacher('stroke_through');
+	$barre->cacher('notes');
+	$barre->cacher('sepCode');
+	$barre->cacher('grpCode');
 
 	$module_barre = "barre_outils";
 	if (intval($GLOBALS['spip_version_branche'])>2)
@@ -12,7 +16,6 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 	$barre->set('header1', array(
 		// groupe formatage paragraphe
 		"dropMenu"    => array(
-			// bouton <cadre>
 			array(
 				"id"          => 'intertitre',
 				"name"        => _T('barre_intertitre'),
@@ -68,7 +71,6 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 				"display"     => true,
 				"selectionType" => "line",
 			),
-			// code spip
 			array(
 				"id"          => 'barre_cadre',
 				"name"        => _T($module_barre.':barre_cadre'),
@@ -84,6 +86,38 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 	$barre->set('bold', array(
 		// groupe formatage texte
 		"dropMenu"    => array(
+			// Italic - {
+			array(
+				"id"        => 'italic',
+				"name"      => _T('barreoutils:barre_italic'), 
+				"key"       => "I", 
+				"className" => "outil_italic", 
+				"replaceWith" => "function(h){ return espace_si_accolade(h, '{', '}');}",
+				//"openWith" => "{", 
+				//"closeWith" => "}",
+				"display"   => true,
+				"selectionType" => "word",
+			),
+			// Petites capitales
+			array(
+				"id"          => 'petitescapitales',
+				"name"        => _T('enlumtypo:barre_petitescapitales'),
+				"className"   => "outil_petitescapitales",
+				"openWith"    => "<sc>", 
+				"closeWith"   => "</sc>",
+				"display"     => true,
+				"selectionType" => "word",
+			),
+			// montrer une suppression
+			array(
+				"id"        => 'stroke_through_et',
+				"name"      => _T('enlumtypo:barre_barre'), // :-)
+				"className" => "outil_stroke_through_et", 
+				"openWith" => "<del>", 
+				"closeWith" => "</del>",
+				"display"   => true,
+				"selectionType" => "word",
+			),
 			// Mise en évidence (gras + couleur)
 			array(
 				"id"          => 'miseenevidence',
@@ -102,16 +136,6 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 				"openWith"    => "[**", 
 				"closeWith"   => "*]",
 				"display"     => true,
-				"selectionType" => "word",
-			),
-			// montrer une suppression
-			array(
-				"id"        => 'stroke_through_et',
-				"name"      => _T('enlumtypo:barre_barre'), // :-)
-				"className" => "outil_stroke_through_et", 
-				"openWith" => "<del>", 
-				"closeWith" => "</del>",
-				"display"   => true,
 				"selectionType" => "word",
 			),
 			// Mise en exposant
@@ -146,6 +170,21 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 			),
 		),
 	));
+
+	$barre->set('link', array(
+		// groupe formatage texte
+		"dropMenu"    => array(
+			array(
+				"id"          => 'notes',
+				"name"        => _T('barreoutils:barre_note'),
+				"className"   => "outil_notes", 
+				"openWith"    => "[[", 
+				"closeWith"   => "]]",
+				"display"     => true,
+				"selectionType" => "word",
+			),
+		),
+	));
 	
 	// Appel Tableau
 	$barre->ajouterApres('notes', array(
@@ -158,31 +197,25 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 	));
 	
 	$barre->set('quote', array(
+		"openWith"    => "<quote>", 
+		"closeWith"   => "</quote>",
+	));
+
+	$barre->set('quote', array(
 		"dropMenu"    => array(
 			// poesie spip
 			array(
 				"id"          => 'barre_poesie',
 				"name"        => _T($module_barre.':barre_poesie'),
 				"className"   => "outil_barre_poesie", 
-				"openWith"    => "\n&lt;poesie&gt;", 
-				"closeWith"   => "&lt;/poesie&gt;\n",
+				"openWith"    => "\n&lt;poesie&gt;\n", 
+				"closeWith"   => "\n&lt;/poesie&gt;\n",
 				"display"     => true,
-				"selectionType" => "line",
+				"selectionType" => "word",
 			),
 		),
 	));	
-	
-	// Petites capitales
-	$barre->ajouterApres('italic', array(
-		"id"          => 'petitescapitales',
-		"name"        => _T('enlumtypo:barre_petitescapitales'),
-		"className"   => "outil_petitescapitales",
-		"openWith"    => "<sc>", 
-		"closeWith"   => "</sc>",
-		"display"     => true,
-		"selectionType" => "word",
-	));
-	
+		
 	return $barres;
 }
 
