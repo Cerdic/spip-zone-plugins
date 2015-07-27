@@ -1,7 +1,7 @@
 <paquet
 	prefix="indexer"
 	categorie="navigation"
-	version="1.2.1"
+	version="1.3.0"
 	etat="test"
 	compatibilite="[2.1.0;3.1.*]"
 	logo="prive/themes/spip/images/indexer-64.png"
