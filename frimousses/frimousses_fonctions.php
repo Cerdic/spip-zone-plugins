@@ -10,11 +10,13 @@ function frimousses_liste_smileys() {
 
 	$les_smileys = Array
 		(
-			'smiley-kiss-16.png' => Array
+			'smiley-16.png' => Array
 				(
-					':-)*',
-					':-*',
-					':*'
+					':-)',
+					':)',
+					':O)',
+					':o)',
+					':0)'
 				)
 			,
 			'smiley-lol-16.png' => Array
@@ -25,13 +27,11 @@ function frimousses_liste_smileys() {
 					':))'
 				)
 			,
-			'smiley-16.png' => Array
+			'smiley-kiss-16.png' => Array
 				(
-					':-)',
-					':)',
-					':O)',
-					':o)',
-					':0)'
+					':-)*',
+					':-*',
+					':*'
 				)
 			,
 			'smiley-angel-16.png' => Array
