@@ -1,0 +1,37 @@
+[(#AUTORISER{voir,clil_theme,#ID_CLIL_THEME}|sinon_interdire_acces)]
+<BOUCLE_clil_theme(CLIL_THEMES){id_clil_theme}{si #ENV{exec}|=={clil_theme}}>
+[(#BOITE_OUVRIR{
+	[(#AUTORISER{modifier,clil_theme,#ID_CLIL_THEME})
+		[(#ID_CLIL_THEME|afficher_qui_edite{clil_theme}|non)
+			[(#URL_ECRIRE{clil_theme_edit,id_clil_theme=#ID_CLIL_THEME}|icone_verticale{<:clil_theme:icone_modifier_clil_theme:>,clil_theme,edit,right ajax preload})]
+		]
+		[(#ID_CLIL_THEME|afficher_qui_edite{clil_theme}|oui)
+			[(#URL_ECRIRE{clil_theme_edit,id_clil_theme=#ID_CLIL_THEME}|icone_verticale{#ID_CLIL_THEME|afficher_qui_edite{clil_theme},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ][(#LIBELLE|sinon{<:info_sans_titre:>})][(#CHEMIN_IMAGE{clil_theme-24.png}|balise_img{clil_theme,cadre-icone})]</h1>
+
+,simple fiche_objet})]
+
+[<div class="ajax">
+	(#FORMULAIRE_DATER{clil_theme,#ID_CLIL_THEME})
+</div>]
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/clil_theme,id=#ID_CLIL_THEME,id_clil_theme=#ID_CLIL_THEME,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,clil_theme,id,#ID_CLIL_THEME},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_clil_theme>
+[(#ENV**{exec}|=={clil_theme_edit}|?{#INCLURE{fond=prive/squelettes/contenu/clil_theme_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_clil_theme>

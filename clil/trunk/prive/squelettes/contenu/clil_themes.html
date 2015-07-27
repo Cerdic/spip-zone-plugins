@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/clil_themes, par=code, env, ajax, sinon=<:clil_theme:info_aucun_clil_theme:>}>
+
+[(#AUTORISER{creer,clil_theme})
+	[(#URL_ECRIRE{clil_theme_edit,new=oui}|icone_verticale{<:clil_theme:icone_creer_clil_theme:>,clil_theme,new,right})]
+]

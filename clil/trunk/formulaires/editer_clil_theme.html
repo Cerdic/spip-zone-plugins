@@ -1,0 +1,30 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_clil_theme,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_clil_theme' value='#ENV{id_clil_theme}' />
+		<ul>
+
+			[(#SAISIE{input, code, obligatoire=oui,
+				label=<:clil_theme:champ_code_label:>})]
+
+			[(#SAISIE{input, niveau, obligatoire=oui,
+				label=<:clil_theme:champ_niveau_label:>})]
+
+			[(#SAISIE{input, libelle, obligatoire=oui,
+				label=<:clil_theme:champ_libelle_label:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:clil_theme:champ_descriptif_label:>,
+				rows=4})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

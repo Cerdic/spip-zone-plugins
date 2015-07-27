@@ -1,0 +1,19 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><img src="#CHEMIN_IMAGE{rubrique-24.png}" class="cadre-icone" /><:lim:cfg_titre_restriction_par_rubrique:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<p class='explication'>Cocher les rubriques pour lesquelles les articles afficheront le sélecteur <i>Thème CLIL</i>.</p>
+		<ul>
+			[(#INCLURE{fond=formulaires/inc-choisir-rubriques_clil,name=clil_theme}{clil_theme=#ENV{clil_theme}}{juste_secteur=non})]
+		</ul>
+		<input type="hidden" name="_meta_casier" value="clil_rubriques" />
+		<p class="boutons"><span class="image_loading">&nbsp;</span><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div>
+	</form>
+</div>

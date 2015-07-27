@@ -1,0 +1,40 @@
+<B_rubriques>
+
+
+<ul class='creneaux'>
+<BOUCLE_rubriques(RUBRIQUES){racine}{par num titre,titre}{tout}>
+	<li class='li_long secteur'>
+	<div class='choix secteur[(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked]'>
+			<input type='checkbox' name='#NAME\[\]' value='#ID_RUBRIQUE' id='[(#NAME|concat{_rub#ID_RUBRIQUE})]' [(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked='checked']/>
+		<label for='[(#NAME|concat{_rub#ID_RUBRIQUE})]'>#TITRE</label>
+	</div>
+	<B_enfants>
+	<ul>
+	<BOUCLE_enfants(RUBRIQUES){id_parent}{par num titre,titre}{tout}{si #JUSTE_SECTEUR|!={oui}}>
+	<li class='li_long'>
+		<div class='choix[(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked]'>
+			<input type='checkbox' name='#NAME\[\]' value='#ID_RUBRIQUE' id='[(#NAME|concat{_rub#ID_RUBRIQUE})]' [(#ID_RUBRIQUE|in_any{#ENV{#NAME}})checked='checked']/>
+			<label for='[(#NAME|concat{_rub#ID_RUBRIQUE})]'>#TITRE</label>
+		</div><BOUCLE_rec(BOUCLE_enfants)/>
+	</li>
+	</BOUCLE_enfants>
+	</ul>
+	</B_enfants>
+</li>
+</BOUCLE_rubriques>
+</ul>
+</B_rubriques>
+
+<script type="text/javascript">/*<![CDATA[*/
+jQuery("input:checkbox").change(function(){
+	if (jQuery(this).is(":checked")) {
+		jQuery.each( jQuery(this).parent().next().find('input:checkbox:not(:disabled)'), function(index,item) {
+			jQuery(item).prop('checked',true);
+		});
+	} else {
+		jQuery.each( jQuery(this).parent().next().find('input:checkbox'), function(index,item) {
+			jQuery(item).prop('checked',false);
+		});
+	}
+});
+/*]]>*/</script>

@@ -1,0 +1,53 @@
+<style>
+	.choix.niveau_0 label  { font-weight:bold; }
+	.niveau_1 { margin-top:10px; }
+	.niveau_2 { margin-left: 20px; }
+	.niveau_3 { margin-left: 40px; }
+	.explication.align_left { margin-left:10px; margin-right:10px; }
+</style>
+<ul class='creneaux'>
+	
+	<BOUCLE_themes_clil(CLIL_THEMES){par id_clil_theme}{niveau=0}>
+	<li class='li_long secteur'>
+		<div class='choix niveau_#NIVEAU'>
+			<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#CODE' [(#TAG|=={oui}|oui)checked='checked'] />
+			<label for='#CODE'>#LIBELLE</label>
+		</div>
+		[(#REM)  <div class='explication align_left'><a class='tout_cocher' href="">Tout cocher</a> / <a class='tout_decocher' href="">Tout décocher</a></div>]
+		
+		<B_enfants>
+		<ul>
+			<li class='li_long'>
+			<BOUCLE_enfants(CLIL_THEMES){code_parent=#CODE_PARENT}{par id_clil_theme}{!niveau=0}>
+				<div class='choix niveau_#NIVEAU'>
+					<input type='checkbox' name='themes[#ID_CLIL_THEME]' value='oui' id='#CODE' [(#TAG|=={oui}|oui)checked='checked'] />
+					<label for='#CODE'>#LIBELLE</label>
+				</div>
+			</BOUCLE_enfants>
+			</li>
+		</ul>
+		</B_enfants>
+	</li>
+	</BOUCLE_themes_clil>
+</ul>
+
+<script type="text/javascript">/*<![CDATA[*/
+
+//Init : n'afficher que les thèmes de niveau 1
+jQuery(".choix.niveau_0 > input:checkbox").not(":checked").parent().next().children().children().find('input:checkbox:not(:checked)').parent().hide();
+
+
+
+// gérer les actions
+jQuery(".choix.niveau_0 > input:checkbox").change(function(){
+	if (jQuery(this).is(":checked")) {
+		jQuery(this).parent().next().show();
+		jQuery(this).parent().next().children().children().find('input:checkbox:not(:checked)').parent().show();
+	} else {
+		if (!jQuery(this).parent().next().children().children().find('input:checkbox').is(':checked'))
+			jQuery(this).parent().next().hide();
+		else jQuery(this).parent().next().children().children().find('input:checkbox:not(:checked)').parent().hide();
+	}
+});
+
+/*]]>*/</script>
