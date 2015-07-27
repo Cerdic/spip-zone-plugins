@@ -2,7 +2,7 @@
 	<nom>Frimousses</nom>
 	<slogan>Mettre des smileys dans le texte</slogan>
 	<auteur>Pierre Andrews (Mortimer), Bionet, RealET</auteur>
-	<version>1.4.0</version>
+	<version>1.4.1</version>
 	<icon>frimousse-logo-32.png</icon>
 	<etat>stable</etat>
 	<description>
@@ -13,8 +13,13 @@
 	<fonctions>frimousses_fonctions.php</fonctions>
 	<pipeline><nom>pre_typo</nom></pipeline>
 	<necessite id="SPIP" version="[1.9.2;3.1.99]" />
+	<utilise id="porte_plume" />
 	<pipeline>
 		<nom>porte_plume_barre_pre_charger</nom>
+		<inclure>frimousses_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>porte_plume_barre_charger</nom>
 		<inclure>frimousses_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

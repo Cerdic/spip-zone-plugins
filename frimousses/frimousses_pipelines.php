@@ -2,12 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function frimousses_porte_plume_barre_pre_charger($barres) {
-	$barre = &$barres['edition'];
-
-	$module_barre = "barre_outils";
-	if (intval($GLOBALS['spip_version_branche'])>2)
-		$module_barre = "barreoutils";
-
+	// Commun aux 2 barres
 	$frimousses = frimousses_liste_smileys();
 	$outil_frimousses = array();
 	$compteur = 0;
@@ -22,16 +17,24 @@ function frimousses_porte_plume_barre_pre_charger($barres) {
 		$compteur++;
 	}
 	
-	$smiley_par_defaut = ':-)';
-	$barre->ajouterApres('grpCaracteres', array(
-		"id"          => 'barre_frimousses',
-		"name"        => _T("smileys:$smiley_par_defaut").' '.$smiley_par_defaut,
-		"className"   => "outil_frimousses",
-		"replaceWith" => " $smiley_par_defaut ",
- 		"display"     => true,
-		"dropMenu"    => $outil_frimousses,
-	));
-	
+	// On rajoute les boutons aussi bien pour l'édition du contenu que pour les forums
+	foreach (array('edition', 'forum') as $nom) {
+		$barre = &$barres[$nom];
+
+		$module_barre = "barre_outils";
+		if (intval($GLOBALS['spip_version_branche'])>2)
+			$module_barre = "barreoutils";
+
+		$smiley_par_defaut = ':-)';
+		$barre->ajouterApres('grpCaracteres', array(
+			"id"          => 'barre_frimousses',
+			"name"        => _T("smileys:$smiley_par_defaut").' '.$smiley_par_defaut,
+			"className"   => "outil_frimousses",
+			"replaceWith" => " $smiley_par_defaut ",
+			"display"     => true,
+			"dropMenu"    => $outil_frimousses,
+		));
+	}
 	return $barres;
 }
 
@@ -44,4 +47,12 @@ function frimousses_porte_plume_lien_classe_vers_icone($flux) {
 	}
 	
 	return array_merge($flux, $outils_frimousses);
+}
+
+function frimousses_porte_plume_barre_charger($barres) {
+	if (isset($barres['forum'])) {
+		$barre = &$barres['forum'];
+		$barre->afficher('barre_frimousses', 'barre_frimousse0', 'barre_frimousse1');
+	}
+	return $barres;
 }
