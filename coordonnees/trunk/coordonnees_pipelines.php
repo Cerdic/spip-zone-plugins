@@ -3,7 +3,7 @@
  * Pipelines du plugin Coordonnees
  *
  * @plugin     Coordonnees
- * @copyright  2015
+ * @copyright  2013
  * @author     Marcimat / Ateliers CYM
  * @licence    GNU/GPL
  * @package    SPIP\Coordonnees\Pipelines
@@ -75,7 +75,7 @@ function coordonnees_affiche_gauche($flux) {
 	if (
 		!$e['edition']
 		and $type = $e['type']
-		and in_array($type,array('adresse','email','numero','rezo'))
+		and in_array($type,array('adresse','email','numero'))
 		and $id_coordonnee = $flux['args']["id_${type}"]
 	) {
 		$texte .= recuperer_fond("prive/squelettes/contenu/utilisations_${type}", array(
@@ -102,12 +102,7 @@ function coordonnees_affiche_gauche($flux) {
  */
 function coordonnees_optimiser_base_disparus($flux){
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array(
-		'adresse'=>'*',
-		'numero'=>'*',
-		'email'=>'*',
-		'rezo'=>'*'
-		),'*');
+	$flux['data'] += objet_optimiser_liens(array('adresse'=>'*', 'numero'=>'*', 'email'=>'*'),'*');
 	return $flux;
 }
 

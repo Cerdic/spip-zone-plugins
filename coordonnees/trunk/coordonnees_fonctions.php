@@ -55,8 +55,7 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 	$types = array(
 		'adresse' => array('work','home','pref','postal','dom','intl','parcel'),
 		'numero'  => array('voice','work','home','msg','pref','fax','cell','dsl','video','pager','bbs','modem','car','isdn','pcs'),
-		'email'   => array('work','home','internet','pref','x400'),
-		'rezo'    => array('dailymotion','diaspora','facebook','flickr','google+','instagram','linkedin','pinterest','seenthis','storify','twitter','viadeo','vimeo','weibo','youtube')
+		'email'   => array('work','home','internet','pref','x400')
 	);
 
 	// Attention, les chaînes de langue ne sont pas "type_adresse_xxx", mais "type_adr_xxx" etc.
@@ -65,9 +64,7 @@ function coordonnees_lister_types_coordonnees($coordonnee='', $type=null) {
 		'adr'    => 'adresse',
 		'tel'    => 'numero',
 		'mel'    => 'email',
-		'email'  => 'email',
-		'res'    => 'rezo',	
-		'rezo'   => 'rezo'	
+		'email'  => 'email'
 	);
 	$coord2abbr = array_flip($abbr);
 
@@ -121,27 +118,44 @@ function filtre_coordonnees_lister_types_adresses($type=null) {
 }
 
 /*
- * idem pour les numéros
+ * Filtre renvoyant les couples types de numéros/chaînes de langue ou la chaîne de langue d'une type en particulier
+ *
+ * @note
+ * Quand on veut lister les types de numéros depuis un squelette, utiliser
+ * `#EVAL{null}` au lieu de `#REM`
+ *
+ * @uses coordonnees_lister_types_coordonnees()
+ *
+ * @filtre
+ * @param string $type
+ *     Type dont on veut retourner la chaîne de langue
+ * @return array|int
+ *     Couples types/chaînes de langues
+ *     ou chaîne de langue d'un type donné
 **/
 function filtre_coordonnees_lister_types_numeros($type=null) {
 	return coordonnees_lister_types_coordonnees('numero',$type);
 }
 
 /*
- * idem pour les emails
+ * Filtre renvoyant les couples types d'emails/chaînes de langue ou la chaîne de langue d'une type en particulier
+ *
+ * @note
+ * Quand on veut lister les types d'emails depuis un squelette, utiliser
+ * `#EVAL{null}` au lieu de `#REM`
+ *
+ * @uses coordonnees_lister_types_coordonnees()
+ *
+ * @filtre
+ * @param string $type
+ *     Type dont on veut retourner la chaîne de langue
+ * @return array|int
+ *     Couples types/chaînes de langues
+ *     ou chaîne de langue d'un type donné
 **/
 function filtre_coordonnees_lister_types_emails($type=null) {
 	return coordonnees_lister_types_coordonnees('email',$type);
 }
-
-/*
- * idem pour les rezos
-**/
-function filtre_coordonnees_lister_types_rezos($type=null) {
-	return coordonnees_lister_types_coordonnees('rezo',$type);
-}
-
-
 
 /**
  * Affichage du type de liaison d'une coordonnée
@@ -184,9 +198,7 @@ function logo_type_($coordonnee='', $type='') {
 		'adr'    => 'adresse',
 		'tel'    => 'numero',
 		'mel'    => 'email',
-		'email'  => 'email',
-		'res'    => 'rezo',	
-		'rezo'   => 'rezo'
+		'email'  => 'email'
 	);
 	$coord2abbr = array_flip($abbr);
 	if (in_array($coordonnee,$coord2abbr))
@@ -296,21 +308,6 @@ function filtre_logo_type_email($type_email) {
  */
 function filtre_logo_type_mel($type_email) {
 	return filtre_logo_type_email($type_email);
-}
-
-/**
- * Filtre d'affichage d'un type de réseau social
- * 
- * Pas trouvé de références sur d'éventuels micro-formats de réseaux sociaux...
- * Compléments bienvenus
- * 
-**/
-function filtre_logo_type_rezo($type_rezo) {
-	return logo_type_('rezo', $type_rezo);
-}
-   
-function filtre_logo_type_res($type_rezo) {
-	return filtre_logo_type_rezo($type_rezo);
 }
 
 ?>
