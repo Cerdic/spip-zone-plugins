@@ -315,7 +315,7 @@ function pages_pre_boucle($boucle){
 		// - pas de critère page autre que {page=''}
 		// - pas de critère explicite {id_rubrique=-1} ou {id_rubrique<0}
 		// - pas de critère {id_rubrique?} pour lequel l'environnement renvoie -1 pour l'id de la rubrique
-		// pas de critère {id_article=XX} ou {id_article}
+		// pas de critère {id_article=XX} ou {id_article} ou {id_article?}
 		$boucle_articles = true;
 		$critere_page = false;
 
@@ -345,7 +345,7 @@ function pages_pre_boucle($boucle){
 			elseif (($_critere->op == 'id_article') // {id_article} ou {id_article?}
 				OR (isset($_critere->param[0][0]->texte) and $_critere->param[0][0]->texte == 'id_article')) { // {id_article=x}
 				// On pointe sur un article précis, il est donc inutile de rajouter un test sur la rubrique
-				// Pour le critère {id_article?} on considère que si l'on veut sélectionner des pages uniques
+				// Pour le critère {id_article?} on considère que pour sélectionner des pages uniques
 				// ou des articles éditoriaux on doit préciser le critère {id_rubrique}
 				$boucle_articles = false;
 			}
