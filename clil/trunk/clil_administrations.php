@@ -56,10 +56,7 @@ function clil_vider_tables($nom_meta_base_version) {
 
 function remplir_table_clil_themes(){
 
-	if ($f = find_in_path(_DIR_PLUGINS.'/clil/data/classification.csv'))
-		$donnees_clil = $f;
-	elseif  ($f = find_in_path(_DIR_PLUGINS_AUTO.'/clil/data/classification.csv'))
-		$donnees_clil = $f;
+	$donnees_clil = find_in_path('data/classification.csv');
 	$import_csv = charger_fonction('importer_csv','inc');
 	$csv = $import_csv($donnees_clil);
 	foreach ($csv as $key => $sous_tab) {
