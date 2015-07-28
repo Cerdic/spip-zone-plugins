@@ -29,7 +29,11 @@ function archive_declarer_tables_objets_sql($tables){
 	 */
 	include_spip('inc/config');
 	if(lire_config('archive/archiver_publier','non') == 'oui'){
-			$tables['spip_articles']['statut'][0]['publie'] .= ',archive';
+		$tables['spip_articles']['statut'][0]['publie'] .= ',archive';
+	}
+	else{
+		$tables['spip_auteurs']['statut'][0]['publie'] .= ',archive';
+		$tables['spip_auteurs']['statut'][0]['previsu'] .= ',archive';
 	}
 	if(!is_array($tables['spip_articles']['statut_images']))
 		$tables['spip_articles']['statut_images'] = array(
@@ -42,6 +46,8 @@ function archive_declarer_tables_objets_sql($tables){
 	else
 		$tables['spip_articles']['statut_images']['archive'] = "puce-archiver-8.png";
 	
+	$tables['spip_auteurs']['statut_images']['archive'] = "puce-archiver-8.png";
+	$tables['spip_auteurs']['statut_titres']['archive'] = "archive:texte_statut_archive";
 	/**
 	 * Si critère archive dans la boucle, on le considère comme une exception de statut, il ne forcera pas le statut à publie
 	 */
@@ -49,7 +55,6 @@ function archive_declarer_tables_objets_sql($tables){
 		$tables['spip_articles']['statut'][0]['exception'] = array($tables['spip_articles']['statut'][0]['exception'],'archive');
 	else
 		$tables['spip_articles']['statut'][0]['exception'][] = 'archive';
-	
 	return $tables;
 }
 ?>
