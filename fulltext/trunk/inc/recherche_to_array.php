@@ -147,7 +147,7 @@ function inc_recherche_to_array_dist($recherche, $options = array()) {
 			$full_text_where[] = $val_where;
 			$score[] = $val;
 		}
-		$full_text_where = array("(".implode(") OR (",$full_text_where).")");
+		$full_text_where = array("((".implode(") OR (",$full_text_where)."))");
 
 		// On ajoute la premiere cle FULLTEXT de chaque jointure
 		$from = array_pop($requete['FROM']);
