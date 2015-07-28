@@ -62,7 +62,7 @@ class Articles extends SpipDocuments {
 		return $doc;
 	}
 
-	public function getBounds() {
+	public function getBounds($column = '') {
 		return $bornes = sql_fetsel(array('MIN(id_article) AS min', 'MAX(id_article) AS max'), 'spip_articles');
 	}
 }
