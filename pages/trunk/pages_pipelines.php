@@ -315,6 +315,7 @@ function pages_pre_boucle($boucle){
 		// - pas de critère page autre que {page=''}
 		// - pas de critère explicite {id_rubrique=-1} ou {id_rubrique<0}
 		// - pas de critère {id_rubrique?} pour lequel l'environnement renvoie -1 pour l'id de la rubrique
+		// pas de critère {id_article=XX} ou {id_article}
 		$boucle_articles = true;
 		$critere_page = false;
 
