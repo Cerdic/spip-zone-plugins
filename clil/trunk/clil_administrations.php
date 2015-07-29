@@ -56,6 +56,11 @@ function clil_vider_tables($nom_meta_base_version) {
 
 function remplir_table_clil_themes(){
 
+	// si la table est déjà remplie, on sort
+	if (sql_countsel("spip_clil_themes"))
+		return false;
+
+	// sinon....
 	$donnees_clil = find_in_path('data/classification.csv');
 	$import_csv = charger_fonction('importer_csv','inc');
 	$csv = $import_csv($donnees_clil);
