@@ -40,7 +40,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"dir_lang" => "varchar(255) NOT NULL",
 			"texte" => "longtext DEFAULT '' NOT NULL",
 			"priorite" => "varchar(128) NOT NULL",
-			"gestionnaire" => "text DEFAULT 'spip' NOT NULL",
+			"gestionnaire" => "varchar(32) DEFAULT 'spip' NOT NULL",
 			"lang_prefix" => "varchar(32) NOT NULL",
 			"limite_trad" => "tinyint NOT NULL DEFAULT 0"
 		),
@@ -87,7 +87,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"md5" => "varchar(32) default NULL",
 			"orig" => "tinyint(4) NOT NULL default '0'",
 			"date_modif" => "datetime default NULL",
-			"maj" => "timestamp(14) NOT NULL"
+			"maj" => "timestamp NOT NULL"
 		),
 		/**
 		 * Laisser le statut ici sinon on n'agit plus sur le pipeline pre_boucle
@@ -146,7 +146,7 @@ function tradlang_declarer_tables_auxiliaires($tables_auxiliaires) {
 			"chaines_relire" => "smallint(5) DEFAULT '0' NOT NULL",
 			"chaines_modif" => "smallint(5) DEFAULT '0' NOT NULL",
 			"chaines_new" => "smallint(5) DEFAULT '0' NOT NULL",
-			"maj" => "timestamp(14) NOT NULL");
+			"maj" => "timestamp NOT NULL");
 
 	$spip_tradlangs_bilans_keys = array(
 			"UNIQUE id_module_lang" => "id_tradlang_module,lang",
