@@ -11,4 +11,6 @@
 
 	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
 	<licence>GPL v3</licence>
+	
+	<necessite nom="menus" compatibilite="[1.5.5;]" />
 </paquet>
