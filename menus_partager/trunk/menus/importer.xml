@@ -1,0 +1,7 @@
+<entree>
+	<nom><:menus:nom_menu_importer:></nom>
+	<rang>100</rang>
+	<description><:menus:description_menu_importer:></description>
+	<icone>images/menus_importer.png</icone>
+	<parametre nom="url_menu" label="menus:entree_url_menu" obligatoire="oui" />
+</entree>

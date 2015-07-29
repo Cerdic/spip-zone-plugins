@@ -1,0 +1,14 @@
+<paquet
+	prefix="menuspartager"
+	categorie="navigation"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.0;3.1.*]"
+	logo="menuspartager.png"
+	documentation=""
+>
+	<nom>Menus : partage des menus</nom>
+
+	<auteur lien="http://www.ldd.fr">Les Développements Durables</auteur>
+	<licence>GPL v3</licence>
+</paquet>

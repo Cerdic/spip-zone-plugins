@@ -1,0 +1,7 @@
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre"><:menus:nom_menu_importer:></div>
+	<div class="infos">#ENV{url_menu}</div>
+]
+[(#ENV{appel_menu}|oui)
+	[(#ENV*{url_menu}|recuperer_page)]
+]
