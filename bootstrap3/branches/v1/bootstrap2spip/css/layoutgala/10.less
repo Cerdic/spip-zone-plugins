@@ -1,6 +1,6 @@
 /* 
 Ceci est le fichier CSS du  
-Layout Gala N�10
+Layout Gala No10
 de  
 http://blog.html.it/layoutgala/ 
 */
@@ -35,7 +35,7 @@ div#footer{clear:left;width:100%}
     #wrapper{float:left;width:100%;margin-left: 0;}
     #content,#aside,#extra,#footer {.box-sizing(border-box);}
     #content{
-      float: inherit;
+      float: left;
       margin:0;
       width: (@gridColumnWidth * @NcolContent) + (@gridGutterWidth * (@NcolContent -1));
       margin-right:(@gridColumnWidth * (@NcolExtra + @NcolAside)) + (@gridGutterWidth * (@NcolExtra + @NcolAside));
@@ -44,7 +44,7 @@ div#footer{clear:left;width:100%}
       clear: none;
       float: left;
       width: (@gridColumnWidth * @NcolAside) + (@gridGutterWidth * (@NcolAside - 1));
-      margin-left: -((@gridColumnWidth * @NcolExtra) + (@gridGutterWidth * (@NcolExtra - 1)));
+      margin-left: -((@gridColumnWidth * @NcolAside) + (@gridGutterWidth * (@NcolAside - 1)));
     }
     #extra{
       clear: none;
