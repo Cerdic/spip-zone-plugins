@@ -52,10 +52,11 @@
       clearMenus()
 
       if (!isActive) {
-        if ('ontouchstart' in document.documentElement) {
-          // if mobile we we use a backdrop because click events don't delegate
-          $('<div class="dropdown-backdrop"/>').insertBefore($(this)).on('click', clearMenus)
-        }
+	      // bug on https://github.com/twbs/bootstrap/commit/b9bd82b49656e320b623cc3e2c0363c1ffb9e9ad
+        //if ('ontouchstart' in document.documentElement) {
+        // if mobile we we use a backdrop because click events don't delegate
+        //  $('<div class="dropdown-backdrop"/>').insertBefore($(this)).on('click', clearMenus)
+        //}
         $parent.toggleClass('open')
       }
 
