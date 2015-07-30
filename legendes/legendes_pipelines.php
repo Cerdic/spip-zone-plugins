@@ -4,7 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function legendes_insert_head($flux){
 	$flux .='<script src="'._DIR_PLUGIN_LEGENDES.'javascript/jquery.annotate.js" type="text/javascript"></script>';
-	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_LEGENDES.'legendes.css" type="text/css" media="screen, tv" />';
+	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_LEGENDES.'legendes.css" type="text/css" media="screen" />';
 	return $flux;
 }
 
