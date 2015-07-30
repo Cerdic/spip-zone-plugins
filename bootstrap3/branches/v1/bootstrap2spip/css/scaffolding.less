@@ -18,9 +18,11 @@ body {
   background-color: @bodyBackground;
 }
 
+/* On peut fournir un texte alternatif dans le <i></i> de l'icon, il est masque */
 [class^="icon-"],
 [class*=" icon-"] {
-	text-indent: -5000em;
+	text-indent: 100px;
+	overflow: hidden;
 }
 
 /* Logos, documents et images */
