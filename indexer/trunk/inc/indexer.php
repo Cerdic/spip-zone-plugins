@@ -77,10 +77,12 @@ function indexer_sources(){
 		// On ajoute chaque objet configuré aux sources à indexer
 		// Par défaut on enregistre les articles s'il n'y a rien
 		foreach (lire_config('indexer/sources_objets', array('spip_articles')) as $table) {
-			$sources->register(
-				table_objet($table),
-				new Spip\Indexer\Sources\SpipDocuments(objet_type($table))
-			);
+			if ($table) {
+				$sources->register(
+					table_objet($table),
+					new Spip\Indexer\Sources\SpipDocuments(objet_type($table))
+				);
+			}
 		}
 		
 		// On passe les sources dans un pipeline
