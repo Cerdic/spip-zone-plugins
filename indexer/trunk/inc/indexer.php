@@ -68,10 +68,21 @@ function indexer_sources(){
 	static $sources = null;
 	
 	if (is_null($sources)){
+		include_spip('base/objets');
+		include_spip('inc/config');
+		
 		// On crée la liste des sources
 		$sources = new Indexer\Sources\Sources();
-		// Par défaut on enregistre les articles du SPIP
-		$sources->register('articles', new Spip\Indexer\Sources\SpipDocuments('article'));
+		
+		// On ajoute chaque objet configuré aux sources à indexer
+		// Par défaut on enregistre les articles s'il n'y a rien
+		foreach (lire_config('indexer/sources_objets', array('spip_articles')) as $table) {
+			$sources->register(
+				table_objet($table),
+				new Spip\Indexer\Sources\SpipDocuments(objet_type($table))
+			);
+		}
+		
 		// On passe les sources dans un pipeline
 		$sources = pipeline('indexer_sources', $sources);
 	}
