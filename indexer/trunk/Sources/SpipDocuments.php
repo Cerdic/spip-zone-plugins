@@ -3,6 +3,7 @@
 namespace Spip\Indexer\Sources;
 
 use \Indexer\Sources\SourceInterface;
+use \Indexer\Sources\Document;
 
 class SpipDocuments implements SourceInterface {
 	/** SPIP récent ? spip_xx_liens ou spip_xx_yy */
@@ -18,7 +19,8 @@ class SpipDocuments implements SourceInterface {
 			and include_spip('base/objets')
 			and $objet = objet_type($objet)
 			and $table = table_objet_sql($objet)
-			and in_array($table, lister_tables_objets_sql())
+			and $tables_objets = lister_tables_objets_sql()
+			and isset($tables_objets[$table])
 		) {
 			$this->objet = $objet;
 			$this->table_objet = $table;
@@ -27,7 +29,15 @@ class SpipDocuments implements SourceInterface {
 	}
 
 	public function __toString() { return get_class($this); }
-
+	
+	/**
+	 * Retourne l'objet SPIP défini
+	 * @return string Type d'bjet SPIP
+	 **/
+	public function getObjet() {
+		return $this->objet;
+	}
+	
 	/**
 	 * Retourne les documents ayant certaines conditions
 	 *
@@ -75,6 +85,8 @@ class SpipDocuments implements SourceInterface {
 	 **/
 	public function createDocumentObjet($contenu) {
 		include_spip('inc/filtres');
+		include_spip('inc/texte');
+		
 		$doc = array('properties' => array());		
 		
 		// On cherche les éléments dont on va avoir besoin

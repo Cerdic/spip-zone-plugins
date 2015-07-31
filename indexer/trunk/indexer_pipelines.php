@@ -34,7 +34,7 @@ function indexer_post_edition($flux){
 		// On récupère toutes les sources compatibles avec l'indexation
 		$sources = indexer_sources();
 		
-		// On parcourt toutes les sources et on garde celles on un rapport avec l'objet du pipeline
+		// On parcourt toutes les sources et on garde celles qui on un rapport avec l'objet du pipeline
 		foreach ($sources as $alias => $source){
 			// Si une méthode pour définir explicitement existe, on l'utilise
 			if (method_exists($source, 'getObjet')){

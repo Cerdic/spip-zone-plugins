@@ -71,7 +71,7 @@ function indexer_sources(){
 		// On crée la liste des sources
 		$sources = new Indexer\Sources\Sources();
 		// Par défaut on enregistre les articles du SPIP
-		$sources->register('articles', new Spip\Indexer\Sources\Articles());
+		$sources->register('articles', new Spip\Indexer\Sources\SpipDocuments('article'));
 		// On passe les sources dans un pipeline
 		$sources = pipeline('indexer_sources', $sources);
 	}
