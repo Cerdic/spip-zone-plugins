@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_groupe_mot_type'		 =>		'Mots sur les évènements de séminaires',
 	'label_prodid'				 =>		'PRODID pour le calendrier',
 	'label_mail_attendee' 		 =>		'Mail attendee' ,
-	'label_seminaire'			 =>		'Séminaire ?',
+	'label_seminaire'			 =>		'Cet article présente-t-il des événements de type séminaire ? ',
 	'lien_tout_replier'			 =>		'Sans résumé',
 	'lien_tout_deplier'			 =>		'Avec résumé',
 	'lieu'						 =>		'Lieu',
@@ -72,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_agenda'				 =>		'Agenda Scientifique',
 	'titre_evenement'			 =>		'Titre à préciser',
-	'titre_page_configurer_seminaire' => 'Séminaire',
+	'titre_page_configurer_seminaire' => 'Configuration du plugin Séminaire',
 	'type'						 =>		'Type d\'événement',
 	'type_evenement'			 => ' Le choix d\'un type d\'événement est obligatoire.',
 );
