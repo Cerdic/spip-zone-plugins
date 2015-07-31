@@ -18,7 +18,7 @@
 		   {statut IN #GET{tous_statuts}}{where #GET{where}}>
 		<li>
 			<input type="checkbox" name="articles[]" class="checkbox" checked="checked" value="#ID_ARTICLE" />
-			[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] #TITRE**
+			[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] <a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE**</a>
 		</li>
 		</BOUCLE_articles_racine>
 	</ul>
@@ -35,7 +35,7 @@
 						{statut IN #GET{tous_statuts}}{where #GET{where}}>
 					<li>
 						<input type="checkbox" name="articles[]" class="checkbox" checked="checked" value="#ID_ARTICLE" />
-						[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] #TITRE**
+						[(#STATUT|puce_statut{article,#ID_ARTICLE,#ID_RUBRIQUE})] <a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE**</a>
 					</li>
 					</BOUCLE_articles>
 				</ul>
