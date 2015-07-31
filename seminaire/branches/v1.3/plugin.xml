@@ -24,7 +24,7 @@ Surcouche au plugin Agenda2  pour  gérer les séminaires et autres événements
 
 	<necessite id="agenda" version="[2.0;]" src="http://files.spip.org/spip-zone/agenda2.zip"/>
 	<necessite id="cextras" version="[1.0.1;]" />
-	<necessite id="SPIP" version="[2.0.10;2.0.26]" />
+	<necessite id="SPIP" version="[2.0.10;2.0.99]" />
 
 
 	<options>seminaire_options.php</options>
