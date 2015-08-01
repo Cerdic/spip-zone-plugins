@@ -99,7 +99,7 @@ function seminaire_creation_groupes(){
 		$id_groupe_type = groupe_mots_inserer('evenements');
 		if(is_numeric($id_groupe_type)){
 			$infos_groupe_type = array('titre'=>'Type de séminaire', 'descriptif'=>_T('seminaire:mots_cles_techniques_kitcnrs'),'unseul' => 'oui', 'minirezo'=>'oui','comite'=>'oui');
-			$modif_groupe_type = groupemots_modifier($id_groupe_type, $infos_groupe_type);
+			$modif_groupe_type = groupe_mots_modifier($id_groupe_type, $infos_groupe_type);
 			$conf_seminaire['groupe_mot_type'] = $id_groupe_type;
 		}else
 			die((_T('seminaire:erreur_install_groupe_technique')));
@@ -118,10 +118,10 @@ function seminaire_creation_groupes(){
 	 * Création du groupe de mots clés Catégorie 
 	 */
 	if (!($id_groupe = lire_config('seminaire/groupe_mot_categorie'))){
-		$id_groupe_categorie = groupemots_inserer('articles');
+		$id_groupe_categorie = groupe_mots_inserer('articles');
 		if(is_numeric($id_groupe_categorie)){
 			$infos_groupe_categorie = array('titre'=>'Catégorie de séminaire', 'descriptif'=>_T('seminaire:mots_cles_categories'), 'unseul' => 'oui','minirezo'=>'oui','comite'=>'oui');
-			$modif_groupe_categorie = groupemots_modifier($id_groupe_categorie, $infos_groupe_categorie);
+			$modif_groupe_categorie = groupe_mots_modifier($id_groupe_categorie, $infos_groupe_categorie);
 			$conf_seminaire['groupe_mot_categorie'] = $id_groupe_categorie;
 		}
 	}
