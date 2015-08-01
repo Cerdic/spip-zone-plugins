@@ -145,9 +145,9 @@ function commande_modifier($id_commande, $set=null) {
 	$err = '';
 
 	include_spip('inc/modifier');
+	include_spip('inc/filtres');
 	$c = collecter_requests(
 		// whitelist
-		include_spip('inc/filtres');
 		objet_info('commande','champs_editables'),
 		// blacklist
 		array('date','statut'),
