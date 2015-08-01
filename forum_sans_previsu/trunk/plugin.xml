@@ -3,10 +3,10 @@
 
     <categorie>communication</categorie>
     <auteur>Communauté SPIP</auteur>
-    <version>0.1.1</version>
-  
+    <version>1.0.0</version>
+
     <prefix>forum_sans_previsu</prefix>
-    <etat>test</etat>
+    <etat>stable</etat>
 
     <slogan>Postez rapidement!</slogan>
     <description>Ce plugin permet de poster un forum sans passer par l'étape prévisualisation.</description>
@@ -14,7 +14,8 @@
 		<nom>formulaire_verifier</nom>
 		<inclure>forum_sans_previsu_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<necessite id="SPIP" version="[2.1.0;3.1.99]" />
 	<utilise id="forum" />
+  <utilise id="comments" />
 </plugin>
