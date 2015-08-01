@@ -95,8 +95,8 @@ function seminaire_creation_groupes(){
 	/**
 	 * Creer le groupe de mots clés Type pour les types d'événements
 	 */
-	if (!($id_groupe = lire_config('seminaire/groupe_type_seminaire'))){
-		$id_groupe_type = groupemots_inserer('evenements');
+	if (!($id_groupe = lire_config('seminaire/groupe_mot_type'))){
+		$id_groupe_type = groupe_mots_inserer('evenements');
 		if(is_numeric($id_groupe_type)){
 			$infos_groupe_type = array('titre'=>'Type de séminaire', 'descriptif'=>_T('seminaire:mots_cles_techniques_kitcnrs'),'unseul' => 'oui', 'minirezo'=>'oui','comite'=>'oui');
 			$modif_groupe_type = groupemots_modifier($id_groupe_type, $infos_groupe_type);
@@ -117,7 +117,7 @@ function seminaire_creation_groupes(){
 	/** 
 	 * Création du groupe de mots clés Catégorie 
 	 */
-	if (!($id_groupe = lire_config('seminaire/groupe_categorie_seminaire'))){
+	if (!($id_groupe = lire_config('seminaire/groupe_mot_categorie'))){
 		$id_groupe_categorie = groupemots_inserer('articles');
 		if(is_numeric($id_groupe_categorie)){
 			$infos_groupe_categorie = array('titre'=>'Catégorie de séminaire', 'descriptif'=>_T('seminaire:mots_cles_categories'), 'unseul' => 'oui','minirezo'=>'oui','comite'=>'oui');
