@@ -383,6 +383,8 @@ class QueryApi extends Query {
 	 * @return bool Return true if the filter has been added
 	 */
 	public function setApiFilterMono($filter) {
+		static $as_count = 0;
+		
 		if (
 			!isset($filter['field'])
 			or !is_string($filter['field']) // mandatory
@@ -416,8 +418,9 @@ class QueryApi extends Query {
 			$comparisons[] = $comparison;
 		}
 		if ($comparisons){
-			$comparisons = implode(' OR ', $comparisons);
-			$this->where($comparisons);
+			$this->select('(' . join(' OR ', $comparisons) . ') as mono_' . $as_count);
+			$this->where('mono_'.$as_count . '=' . ((isset($filter['not']) and $filter['not']) ? '0' : '1'));
+			$as_count++;
 		}
 
 		return true;

@@ -9,7 +9,7 @@
 	<icon>prive/themes/spip/images/indexer-64.png</icon>
 
 	<licence>GNU/GPL</licence>
-	<version>1.4.0</version>
+	<version>1.4.1</version>
 	<etat>test</etat>
 	<description>Gestion d'indexation de contenus avec SPIP. Intégration et requêtes possibles avec Sphinx. Nécessite Sphinx 2.2 ou version ultérieure</description>
 	<prefix>indexer</prefix>
