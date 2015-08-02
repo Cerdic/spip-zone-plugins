@@ -30,12 +30,24 @@ Valeurs par defaut :
 
 #SET{petit_ecran,#ENV{petit_ecran,#EVAL{_PETIT_ECRAN}}} [petit_ecran: (#GET{petit_ecran});]
 #SET{grand_ecran,#ENV{grand_ecran,#EVAL{_GRAND_ECRAN}}} [grand_ecran: (#GET{grand_ecran});]
-
+Si on est en pourcentage, on donne une valeur min-width équivalent aux valeurs standards de SPIP
+[(#GET{petit_ecran}|match{'%'}|oui)
+    [(#SET{petit_minwidth, 780px})]
+][(#GET{grand_ecran}|match{'%'}|oui)
+    [(#SET{grand_minwidth, 974px})]
+]
+Si on est en px, on vérifie que la valeur indiquée dans la constante n'est pas plus petite que les valeurs standards de SPIP.
+Si oui, on prend cette valeur pour min-width, sinon, on prend les valeurs standards de SPIP.
+[(#GET{petit_ecran}|match{'px'}|oui)
+    [(#SET{petit_minwidth, [(#GET{petit_ecran}|intval|<{780}|?{#GET{petit_ecran},780px})]})]
+][(#GET{grand_ecran}|match{'px'}|oui)
+    [(#SET{grand_minwidth, [(#GET{grand_ecran}|intval|<{974}|?{#GET{grand_ecran},974px})]})]
+]
 */
 
 /* Layout */
-body { min-width: #GET{petit_ecran}; }
-body.large { min-width: #GET{grand_ecran}; }
+body { min-width: #GET{petit_minwidth}; }
+body.large { min-width: #GET{grand_minwidth}; }
 /* ecran etroit*/
 .largeur { width: #GET{petit_ecran}; }
 #conteneur,.table_page { width: 100%; }
