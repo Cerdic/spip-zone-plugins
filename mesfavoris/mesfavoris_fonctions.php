@@ -77,9 +77,9 @@ function mesfavoris_definir_type($type){
  * @return array $objets Les id des objets à éviter 
  */
 function prepare_mesfavoris($objet,$type,$server=''){
-	$objets_favoris = sql_select('id_objet','spip_favoris','objet='.sql_quote($objet).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
+	$objets_favoris = sql_allfetsel('id_objet','spip_favoris','objet='.sql_quote($objet).' AND id_auteur='.intval($GLOBALS['visiteur_session']['id_auteur']));
 	$objet= array();
-	while($objet = sql_fetch($objets_favoris)){
+	foreach($objets_favoris as $objet){
 		$objets[] = $objet['id_objet'];
 	}
 	return $objets;
