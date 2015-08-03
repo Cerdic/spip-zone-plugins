@@ -1,9 +1,9 @@
 <paquet
 	prefix="opensearch"
 	categorie="navigation"
-	version="0.2.1"
+	version="0.2.2"
 	etat="stable"
-	compatibilite="[2.0.0;3.0.*]"
+	compatibilite="[2.0.0;3.1.*]"
 	logo="images/opensearch-64.png"
 	documentation="http://contrib.spip.net/Plugin-OpenSearch"
 >	
