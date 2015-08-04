@@ -132,6 +132,46 @@ function seminaire_creation_groupes(){
  * Fonction de désinstallation du plugin.
  */
 function seminaire_vider_tables($nom_meta_base_version) {
+	/* 
+	* On récupère l'identifiant du groupe de mot utilisé pour typer 
+	* les séminaires, puis on identifie les mots qui y sont liés, ensuite
+	* on nettoie les tables de liaison événements/mots et on supprime ces 
+	* et le groupe
+	*/
+	$id_groupe_mot_type = lire_config('seminaire/groupe_mot_type');
+	$tous_les_types = sql_allfetsel('id_mot','spip_mots','id_groupe='.intval($id_groupe_mot_type));
+		foreach ($tous_les_types as $l) {
+			sql_delete("spip_mots_liens","id_mot=".$l);
+			sql_delete("spip_mots","id_mot=".$l);
+		}
+	sql_delete("spip_groupes_mots","id_groupe=".intval($id_groupe_mot_type));
+
+	/* 
+	* On récupère l'identifiant du groupe de mot utilisé pour typer 
+	* les articles de séminaires, puis on identifie les mots qui y sont liés, ensuite
+	* on nettoie les tables de liaison événements/mots et on supprime ces 
+	* et le groupe
+	*/
+	$id_groupe_mot_categorie = lire_config('seminaire/groupe_mot_categorie');
+	$tous_les_types = sql_allfetsel('id_mot','spip_mots','id_groupe='.intval($id_groupe_mot_categorie));
+		foreach ($tous_les_types as $l) {
+			sql_delete("spip_mots_liens","id_mot=".$l);
+			sql_delete("spip_mots","id_mot=".$l);
+		}
+	sql_delete("spip_groupes_mots","id_groupe=".intval($id_groupe_mot_categorie));
+
+	/*
+	* On récupère les identifiants des articles qui sont notés séminaire, 
+	* on identifie les événements qui y sont liés et on les supprime.
+	*/
+
+
+	/* 
+	* Tant qu'à faire, on supprime les articles séminaires puis on 
+	* supprime la colonne seminaire dans la table articles
+	*/
+
+	effacer_config("seminaire");
 	effacer_meta($nom_meta_base_version);
 }
 
