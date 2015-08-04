@@ -1,7 +1,7 @@
 <paquet
 	prefix="grappes"
 	categorie="divers"
-	version="1.0.3"
+	version="1.0.4"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/grappe-32.png"
