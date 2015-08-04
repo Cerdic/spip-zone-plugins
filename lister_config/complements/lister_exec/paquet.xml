@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/lister_exec-32.png"
-	documentation="http://contrib.spip.net/Lister-les-pages-de-configuration"
+	documentation="http://contrib.spip.net/4706"
 	>
 
 	<nom>Lister les pages ?exec=xxx</nom>
