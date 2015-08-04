@@ -1,13 +1,13 @@
 [(#REM)<style>/*
-    Ce squelette definit les styles de l'espace prive
+  Ce squelette definit les styles de l'espace prive
 
-    Note: l'entete "Vary:" sert a repousser l'entete par
-    defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
-    genant en cas de "rotation du cookie de session" apres
-    un changement d'IP (effet de clignotement).
+  Note: l'entete "Vary:" sert a repousser l'entete par
+  defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+  genant en cas de "rotation du cookie de session" apres
+  un changement d'IP (effet de clignotement).
 
-    ATTENTION: il faut absolument le charset sinon Firefox croit que
-    c'est du text/html !
+  ATTENTION: il faut absolument le charset sinon Firefox croit que
+  c'est du text/html !
 */]#CACHE{3600*100,cache-client}
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
@@ -29,34 +29,44 @@ Valeurs par defaut :
 #SET{color,#ENV{color,#000000}} [color: (#GET{color});]
 */
 
-.lister_constantes #contenu .liste-objets table {
-    width: 523px;
+.lister_constantes #contenu .liste-objets.constantes {
+    border: none;
 }
-.lister_constantes #contenu .liste-objets table tbody {
+.lister_constantes #contenu table {
+}
+.lister_constantes #contenu table caption {
+    font-size: 1.09625em;
+    font-weight: bold;
+    line-height: 1.2634em;
+    margin-bottom: 1.2634em;
+    padding: 0.6925em;
+    text-align: center;
+}
+.lister_constantes #contenu table tbody {
     max-width: 523px;
     width: 100%;
 }
-.lister_constantes #contenu .liste-objets table tbody tr {
+.lister_constantes #contenu table tbody tr {
     width: 523px;
 }
-.lister_constantes #contenu .liste-objets table tbody tr.prefixe,
-.lister_constantes #contenu .liste-objets table tbody tr:nth-child(2n).prefixe td {
+.lister_constantes #contenu table tbody tr.prefixe,
+.lister_constantes #contenu table tbody tr:nth-child(2n).prefixe td {
     background-color: #GET{claire};
     color: [#(#GET{claire}|replace{"#",""}|couleur_saturation{1}|couleur_extreme)];
 }
-.lister_constantes #contenu .liste-objets table tbody tr.prefixe:hover,
-.lister_constantes #contenu .liste-objets table tbody tr:nth-child(2n).prefixe:hover td {
+.lister_constantes #contenu table tbody tr.prefixe:hover,
+.lister_constantes #contenu table tbody tr:nth-child(2n).prefixe:hover td {
     background-color: [#(#GET{claire}|replace{"#",""}|couleur_eclaircir)];
 }
-.lister_constantes #contenu .liste-objets table tbody tr td h3 {
+.lister_constantes #contenu table tbody tr td h3 {
     margin-top: 0.25em;
     margin-bottom: 0.25em;
     text-align: center;
 }
-.lister_constantes #contenu .liste-objets.constantes .constante.principale {
+.lister_constantes #contenu .constantes .constante.principale {
     width: 33%;
 }
-.lister_constantes #contenu .liste-objets.constantes .valeur.secondaire {
+.lister_constantes #contenu .constantes .valeur.secondaire {
     width: 77%;
     max-width: 100%;
     word-wrap: initial;
