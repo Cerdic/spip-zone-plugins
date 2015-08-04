@@ -52,7 +52,7 @@
 </BOUCLE_checkbox>
 [(#ENV{choix_alternatif}|oui)
 <div class="#ENV{choix,choix} choix_alternatif[ (#ENV{choix,choix})_alternatif]">
-    <input name="#ENV{nom}\[choix_alternatif\]" id="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]" [value="(#ENV{datas}|saisies_trouver_choix_alternatif{#GET{valeur}})"]/>
+    <input name="#ENV{nom}\[choix_alternatif\]" id="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]"[ value="(#ENV{datas}|saisies_trouver_choix_alternatif{#GET{valeur}})"] />
     
     <label for="[champ_(#ENV{id,#ENV{nom}}|saisie_nom2classe)_choix_alternatif]">
          [(#ENV{choix_alternatif_label, <:saisies:option_choix_alternatif_label_defaut:>})]
