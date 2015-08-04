@@ -1,4 +1,13 @@
+[(#REM)
+
+	Par defaut si la meta est vide (pas de configuration),
+	on n'indexe que les spip_articles
+
+][(#ENV{sources_objets}|is_array|?{#SET{sources,#ENV{sources_objets}},#SET{sources,#LISTE{spip_articles}}})]
+
+
 <div class="formulaire_spip formulaire_configurer[ formulaire_(#FORM)]">
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
@@ -10,7 +19,7 @@
 				<label><:indexer:configurer_sources_objets_label:></label>
 				#INCLURE{fond=formulaires/inc-choisir-objets,
 					name=sources_objets,
-					selected=#ENV{sources_objets}}
+					selected=#GET{sources}}
 			</li>
 		</ul>
 		
