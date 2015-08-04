@@ -123,9 +123,14 @@ function compositions_lister_disponibles($type, $informer=true){
  */
 function compositions_lister_utilisations($type,$composition){
 	$table_sql = table_objet_sql($type);
-	if (!in_array($table_sql, sql_alltable())) return;
+	if (!in_array($table_sql, sql_alltable())) {
+		return;
+	}
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($table_sql);
 	$_id_table_objet = id_table_objet($type);
-	return sql_allfetsel("$_id_table_objet as id,titre", $table_sql, "composition=".sql_quote($composition));
+	$titre = isset($desc['titre']) ? $desc['titre'] : "'' AS titre";
+	return sql_allfetsel("$_id_table_objet as id, $titre", $table_sql, "composition=".sql_quote($composition));
 }
 
 /**
