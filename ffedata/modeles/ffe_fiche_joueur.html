@@ -3,10 +3,7 @@
 
 <BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Joueurs.asmx/GetJoueur?Ref=#ENV{Ref}}>
     <thead>  
-<tr>
-            <th>ParamËtre</th>
-            <th>Valeur</th>
-                   </tr>
+<tr><th>Param√®tre</th><th>Valeur</th> </tr>
 	</thead>
 [<tr><td>Nom :<td>(#VALEUR{Nom})</td></tr>]
 [<tr><td>Prenom :<td>(#VALEUR{Prenom})</td></tr>]
@@ -17,13 +14,13 @@
 [<tr><td>Sexe :<td>(#VALEUR{Sexe})</td></tr>]
 [<tr><td>Elo :<td>(#VALEUR{Elo})</td></tr>]
 [<tr><td>Rapide :<td>(#VALEUR{Rapide})</td></tr>]
-[<tr><td>Cat :<td>(#VALEUR{Cat})</td></tr>]
+[<tr><td>Cat√©gorie :<td>(#VALEUR{Cat})</td></tr>]
 [<tr><td>Fide :<td>(#VALEUR{Fide})</td></tr>]
-[<tr><td>e-Mail :<td>[(#VAL{<a href="mailto:[(#VALEUR{EMail})]">[(#VALEUR{Prenom})]&nbsp;[(#VALEUR{Nom})]</a>}mailcrypt)]</td></tr>]
-[<tr><td>FÈdÈration :<td>(#VALEUR{Federation})</td></tr>]
+[<tr><td>e-Mail :<td>(#VAL{<a href="mailto:[(#VALEUR{EMail})]">#VALEUR{Prenom}&nbsp;#VALEUR{Nom}</a>}mailcrypt)</td></tr>]
+[<tr><td>F√©d√©ration :<td>(#VALEUR{Federation})</td></tr>]
 [<tr><td>Code Fide :<td>(#VALEUR{FideCode})</td></tr>]
-[<tr><td>MutÈ :<td>(#VALEUR{Mute})</td></tr>]
-[<tr><td>RÈfÈrence du club :<td>(#VALEUR{ClubRef})</td></tr>]
+[<tr><td>Mut√© :<td>(#VALEUR{Mute})</td></tr>]
+[<tr><td>R√©f√©rence du club :<td>(#VALEUR{ClubRef})</td></tr>]
 [<tr><td>Code du Club :<td>(#VALEUR{ClubCode})</td></tr>]
 [<tr><td>Nom du club :<td>(#VALEUR{ClubNom})</td></tr>]
 </table>
