@@ -1,11 +1,11 @@
 <paquet
     prefix="lister_fonctions"
     categorie="outil"
-    version="1.0.0"
+    version="1.0.1"
     etat="stable"
     compatibilite="[3.0.0;3.1.*]"
     logo="prive/themes/spip/images/lister_fonctions-32.png"
-    documentation="http://contrib.spip.net/Lister-les-pages-de-configuration"
+    documentation="http://contrib.spip.net/4711"
     >
 
     <nom>Lister les objets principaux de SPIP</nom>
