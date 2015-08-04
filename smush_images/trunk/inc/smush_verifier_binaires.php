@@ -49,7 +49,7 @@ function tester_optipng(){
 
 /**
  * Vérifier si jpegtran est présent
- * apt-get install libjpeg-progs
+ * apt-get install libjpeg-turbo-progs
  * 
  * @return bool true|false
  * 		true si présent, sinon false

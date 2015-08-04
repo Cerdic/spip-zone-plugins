@@ -49,7 +49,7 @@ function inc_smush_image_dist($im){
  * -* convert : apt-get install imagemagick
  * -* pngnq : apt-get install pngnq
  * -* pngoptim : apt-get install pngoptim
- * -* jpegtran : apt-get install libjpeg-progs
+ * -* jpegtran : apt-get install libjpeg-turbo-progs
  * -* gifsicle : apt-get install gifsicle
  * 
  * @param string $im
@@ -77,7 +77,7 @@ function image_smush($im) {
 		$tmp = explode('.',$dest);
 		array_pop($tmp);
 		$tmp = join('.',$tmp);
-		
+
 		/**
 		 * Si on est sur un GIF, on le transforme en PNG
 		 * On utilise la commande convert pour cela
@@ -104,11 +104,11 @@ function image_smush($im) {
 		 */
 		else if ($format == 'JPEG') {
 			$fsize = filesize($im);
-			$dest = $tmp.'.jpg';
+			$dest = $tmp.'.jpg';            
 			if ($fsize < 10*1024)
-				exec('jpegtran -copy none -optimize '.$im.' > '.$dest);
+                exec('jpegtran -copy none -optimize -outfile '.$dest.' '.$im);
 			else
-				exec('jpegtran -copy none -progressive '.$im.' > '.$dest);
+				exec('jpegtran -copy none -progressive -outfile '.$dest.' '.$im);
 		}
 
 		/**

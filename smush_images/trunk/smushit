@@ -7,7 +7,7 @@
 ## --------------------
 ## apt-get install imagemagick
 ##  => identify convert
-## apt-get install libjpeg-progs
+## apt-get install libjpeg-turbo-progs
 ##  => jpegtran
 ## apt-get install pngcrush
 ## apt-get install gifsicle
@@ -56,11 +56,11 @@ function smush($source, $tmp) {
 		$dest = $tmp.'.jpg';
 
 		if ($fsize < 10*1024) {
-			`jpegtran -copy none -optimize $source > $dest`;
+			`jpegtran -copy none -optimize -outfile $dest $source`;
 			return $dest;
 		}
 		else {
-			`jpegtran -copy none -progressive $source > $dest`;
+			`jpegtran -copy none -progressive -outfile $dest $source`;
 			return $dest;
 		}
 		
