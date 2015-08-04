@@ -421,6 +421,27 @@ function saisies_valeur2tableau($valeur) {
 }
 
 
+/**
+ * Pour les saisies multiples (type checkbox) proposant un choix alternatif,
+ * retrouve à partir des data de choix proposés
+ * et des valeurs des choix enregistrés
+ * le texte enregistré pour le choix alternatif.
+ *
+ * @param array $data
+ * @param array $valeur
+ * @return string choix_alternatif
+**/
+function saisies_trouver_choix_alternatif($data,$valeur) {
+	if (!is_array($valeur)) {
+		$valeur = saisies_chaine2tableau($valeur) ;
+	}
+	if (!is_array($data)) {
+		$data = saisies_chaine2tableau($data) ;
+	}
+	$choix_theorique = array_keys($data);
+	$choix_alternatif = array_values(array_diff($valeur,$choix_theorique));
+	return $choix_alternatif[0];//on suppose que personne ne s'est amusé à proposer deux choix alternatifs
+}
 
 /**
  * Génère une page d'aide listant toutes les saisies et leurs options
