@@ -143,7 +143,7 @@ function seminaire_vider_tables($nom_meta_base_version) {
 		foreach ($tous_les_types as $l) {
 			sql_delete("spip_mots_liens","id_mot=".$l);
 			sql_delete("spip_mots","id_mot=".$l);
-		}
+		};
 	sql_delete("spip_groupes_mots","id_groupe=".intval($id_groupe_mot_type));
 
 	/* 
@@ -157,19 +157,23 @@ function seminaire_vider_tables($nom_meta_base_version) {
 		foreach ($tous_les_types as $l) {
 			sql_delete("spip_mots_liens","id_mot=".$l);
 			sql_delete("spip_mots","id_mot=".$l);
-		}
+		};
 	sql_delete("spip_groupes_mots","id_groupe=".intval($id_groupe_mot_categorie));
 
 	/*
-	* On récupère les identifiants des articles qui sont notés séminaire, 
-	* on identifie les événements qui y sont liés et on les supprime.
+	* On supprime tous les articles qui son marqués seminaire
 	*/
-
-
+	sql_delete("spip_articles","seminaire='on'");
 	/* 
-	* Tant qu'à faire, on supprime les articles séminaires puis on 
-	* supprime la colonne seminaire dans la table articles
+	* Tant qu'à faire, on supprime la colonne seminaire dans la table articles
+	* et ceux de la table evenements
 	*/
+
+	sql_alter("TABLE spip_articles DROP COLUMN seminaire");
+	sql_alter("TABLE spip_evenements DROP COLUMN attendee");
+	sql_alter("TABLE spip_evenements DROP COLUMN origin");
+	sql_alter("TABLE spip_evenements DROP COLUMN notes");
+
 
 	effacer_config("seminaire");
 	effacer_meta($nom_meta_base_version);
