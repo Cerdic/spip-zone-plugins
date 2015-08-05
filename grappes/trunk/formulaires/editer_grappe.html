@@ -7,14 +7,14 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_grappe' value='#ENV{id_grappe}' />
-	  <ul>
-	    <li class='editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
+	  <ul class='editer-groupe'>
+	    <li class='editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input'>
 				<label for='titre'>[(#ENV{id_grappe}|intval|?{<:grappes:info_changer_nom_grappe:>,<:grappes:info_nom_grappe:>})]</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value='[(#ENV**{titre,#VAL{grappes:titre_nouvelle_grappe}|_T|filtrer_entites})]'
 				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
 	    </li>
-	    <li class='editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
+	    <li class='editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
 				<label for='descriptif'><:grappes:texte_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
 				]<textarea name='descriptif' id='descriptif' cols='40' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]'>[(#ENV**{descriptif})]</textarea>
@@ -22,8 +22,8 @@
 
 	    <li class="fieldset">
 	      <fieldset><h3 class="legend"><:grappes:info_grappes_association:></h3>
-	      <ul>
-	      	<li class="editer_grappes_associer">
+	      <ul class='editer-groupe'>
+	      	<li class="editer editer_grappes_associer">
 	      		<BOUCLE_liaisons(POUR){tableau #PIPELINE{grappes_objets_lies}}>
 					<div class='choix'>
 						<input type='checkbox' class='checkbox' name='liaisons[]' value='#CLE'[(#VAL{#CLE}|in_any{#ENV{liaisons}})checked='checked'] id='#CLE' />
@@ -36,7 +36,7 @@
 	     </fieldset>
 
 		<fieldset><h3 class="legend"><:grappes:info_qui_peut_lier:></h3>
-		<ul><li class="editer_grappes_qui">
+		<ul class='editer-groupe'><li class="editer editer_grappes_qui">
 	    	<div class='choix'>
 	    		<input type='checkbox' class='checkbox' name='acces[]' value='0minirezo'[ (#VAL{0minirezo}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_minirezo' />
 				<label for='acces_minirezo'><:grappes:bouton_checkbox_qui_administrateurs:></label>
