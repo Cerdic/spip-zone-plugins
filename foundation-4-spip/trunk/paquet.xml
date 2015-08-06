@@ -1,14 +1,14 @@
 <paquet
     prefix="foundation"
     categorie="outil"
-    version="2.3.15"
+    version="2.3.16"
     etat="stable"
     compatibilite="[3.0.8;3.1.*]"
     logo="prive/themes/spip/images/foundation-64.png"
     schema="1.0"
     documentation="http://contrib.spip.net/Foundation-4-Spip"
 >
-    <nom>Foundation-4-spip</nom>
+    <nom>Foundation</nom>
     <!-- Plugin qui intégre le framework Foundation à l'interface public de SPIP. -->
 
     <auteur lien='http://p.henix.be'>Phenix</auteur>
