@@ -30,6 +30,9 @@
 	<langue code="pt_br" url="http://trad.spip.net/tradlang_module/tra?lang_cible=pt_br" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Ricardo Porto" lien="http://trad.spip.net/auteur/ricardo-porto" />
 	</langue>
+	<langue code="ru" url="http://trad.spip.net/tradlang_module/tra?lang_cible=ru" total="4" traduits="3" relire="1" modifs="0" nouveaux="0" pourcent="75.00">
+		<traducteur nom="olly" lien="http://trad.spip.net/auteur/olly" />
+	</langue>
 	<langue code="sk" url="http://trad.spip.net/tradlang_module/tra?lang_cible=sk" total="4" traduits="4" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="jaro" lien="http://trad.spip.net/auteur/jaro" />
 	</langue>
