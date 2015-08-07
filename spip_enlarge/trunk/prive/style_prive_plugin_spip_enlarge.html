@@ -49,16 +49,17 @@ Si oui, on prend cette valeur pour min-width, sinon, on prend les valeurs standa
 body { min-width: #GET{petit_minwidth}; }
 body.large { min-width: #GET{grand_minwidth}; }
 /* ecran etroit*/
-.largeur { width: #GET{petit_ecran}; }
+.largeur, .ecrire #conteneur, .ecrire #page div table.centered, .ecrire #page .table_page { width: #GET{petit_ecran}; }
 #conteneur,.table_page { width: 100%; }
 #navigation { width: 27.5%; }
 #extra { width: 27.5%; }
 #contenu { margin-left: 2.5%; width: 70%; }
 #pied {}
 div.messages-alertes { width: 100%; }
+table.calendrier-large { width: 100%; }
 
 /* ecran large*/
-.large .largeur { width: #GET{grand_ecran}; }
+.large .largeur, .ecrire.large #conteneur, .ecrire.large #page div table.centered, .ecrire.large #page .table_page { width: #GET{grand_ecran}; }
 .large #conteneur,.large .table_page { width: 100%; }
 .large div.messages-alertes { width: 95%; }
 .large #navigation { width: 20%; }

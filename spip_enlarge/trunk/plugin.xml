@@ -1,0 +1,14 @@
+<plugin>
+    <nom>Agrandir la largeur de page</nom>
+    <description><multi>[fr]Ce plugin va agrandir la largeur de la page dans l'espace privé de SPIP.</multi></description>
+    <slogan>Elargissez votre champ d'action&nbsp;!</slogan>
+    <icon>prive/themes/spip/images/spip_enlarge-64.png</icon>
+    <prefix>spip_enlarge</prefix>
+    <version>0.3.0</version>
+    <etat>test</etat>
+    <categorie>theme</categorie>
+    <lien>http://contrib.spip.net/4704</lien>
+
+    <necessite id="SPIP" version="[2.1.0;3.1.99]" />
+
+</plugin>
