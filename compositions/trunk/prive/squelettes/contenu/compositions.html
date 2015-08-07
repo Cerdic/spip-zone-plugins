@@ -27,16 +27,17 @@
 				</B_heritages>
 
 				<B_util>
-					[(#BOITE_OUVRIR{[(#TOTAL_BOUCLE|singulier_ou_pluriel{compositions:une_utilisation,compositions:des_utilisations})], raccourcis})]
+					[(#BOITE_OUVRIR{[(#GRAND_TOTAL|singulier_ou_pluriel{compositions:une_utilisation,compositions:des_utilisations})], raccourcis})]
 					<div class='liste'>
 						<ul class='liste-items'>
-						<BOUCLE_util(DATA){source tableau, #_compositions:CLE|compositions_lister_utilisations{#CLE}}>
+						<BOUCLE_util(DATA){source tableau, #_compositions:CLE|compositions_lister_utilisations{#CLE}}{pagination}>
 							<li class='item'>
 								<a href="[(#ID|generer_url_entite{#_compositions:CLE})]">[(#TITRE|supprimer_numero)][ | (#ID)]</a>
 							</li>
 						</BOUCLE_util>
 						</ul>
 					</div>
+					[<p class='pagination'>(#PAGINATION{#ENV{pagination,prive}})</p>]
 				</B_util>
 			</li>
 			</BOUCLE_pour>
