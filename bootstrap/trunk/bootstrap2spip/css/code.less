@@ -1,0 +1,33 @@
+@import "bootstrap/css/code.less";
+
+code {color:inherit;background-color: @tableBackgroundAccent;white-space:inherit}
+.spip_code {&:extend(code);color:inherit;background-color: @tableBackgroundAccent;white-space:inherit}
+.spip_code >code {border: none;padding: 0;background: none;color:inherit}
+pre,code,kbd,samp,var,tt,.spip_code,.spip_cadre { #font > #family > .monospace; font-size: 1em; }
+
+pre { margin: 1.5em 0;
+  /* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
+}
+kbd { background-color: #222222; color: #FFFFFF; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+@media print {
+  pre { page-break-inside: avoid; }
+}
+@media (max-width: 640px) {
+  /* gestion des mots longs */
+  code, pre, samp { word-wrap: break-word; /* cesure forcee */ }
+  code, pre, samp { white-space: pre-line; /* passage a la ligne specifique pour les elements a chasse fixe */ }
+}
+
+/* Paragraphes spip */
+.spip_cadre, div.spip_code { margin:0;margin-bottom: @emVertMargin; width: 100%;.box-sizing(border-box);}

@@ -1,0 +1,149 @@
+/* ------------------------------------------
+/* Sous-navigation et autres menus
+/* ------------------------------------------ */
+
+@import "css/variables.less";
+@import "css/spip.variables.less";
+@import "css/mixins.less";
+
+/* Listes d'items */
+/*
+.liste[.long][.short][.thumb]
+  .liste-items
+    .item[.long][.short][.thumb]
+
+
+Un item est compose de :
+
+.entry
+  .entry-title
+    .spip_logos
+    .read-more
+  .publication
+    .pubdate
+    .authors
+  .entry-content
+  .postmeta
+    .comments
+    .signatures
+*/
+
+@listBorderColor : (4*(@bodyBackground/5)+@gray/5);
+
+.liste {margin-bottom: @emVertMargin};
+.liste.long {margin-bottom: @emVertMargin*2;}
+
+.liste-items {margin-left: 0; list-style: none; border-top:0;}
+//.liste .liste-items {margin-bottom: 0;}
+.liste-items .item {padding:@emVertMargin / 2 0;clear:both; overflow:hidden;border-top: 1px solid @listBorderColor;margin-top: -1px;}
+.liste-items .item:last-child {border-bottom: 1px solid @listBorderColor;}
+.liste-items .item .entry {margin-bottom: 0;}
+.liste-items .item .entry-title:first-child {margin-top: 0;}
+
+.entry {
+  div.spip,p,.p {margin-bottom: @emVertMargin / 2;}.entry-title {margin-bottom: @baseLineHeight * (@emVertMargin/@emLineHeight) / 2;}
+  .entry-content > :last-child {margin-bottom: 0;}
+  .entry-content {margin-bottom: @emVertMargin / 2;}
+}
+
+.liste-items .item-header {.liste-items .item;
+  border: 0;
+  display: block;
+  font-weight: bold;
+  color: @grayLight;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  text-transform: uppercase;
+}
+// Space them out when they follow another list item (link)
+.item + .item-header {
+  padding-top: @emVertMargin / 2;
+}
+
+.liste-items {
+  .publication,.postmeta {display: none;}
+  .postmeta .tags {ul,li {display: inline;}}
+}
+
+/* Long */
+.long {
+  .publication {display: block;}
+  .entry-content {}
+  .postmeta {display:block;}
+}
+
+/* Short */
+.short .item, .item.short {
+  padding:@emVertMargin / 4 0;
+  &:first-child:last-child {border:0;}
+}
+
+.short {
+  .entry-title {font-size: inherit;line-height: inherit;display: inline;}
+  .publication,.spip_logos,.entry-content,.postmeta,.read-more {display: none;}
+  .entry > :not(.entry-title) {display: none;}
+  .entry, .entry-title {display: inline;}
+}
+
+/* thumb */
+.thumb .item, .item.thumb {
+  //padding:@emVertMargin / 4 0;
+  &:first-child:last-child {border:0;}
+}
+.thumb {
+  .entry-title {padding-top: 120px+@baseLineHeight;display: block}
+  .spip_logos {display: block;float: left;margin:0;margin-top: -1*(120px+@baseLineHeight);.box-sizing(border-box);height:120px;width: 100% !important;padding: 0;text-align: center;overflow: hidden}
+  .spip_logos img {height: 100%!important;width: 100%}
+  .entry-content {max-height: 5*@emLineHeight;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
+}
+
+/* on demand */
+.with-read-more {
+  .entry {position: relative;padding-bottom: @emLineHeight;}
+  .entry-content {}
+  .postmeta {min-height: @emLineHeight;padding:@emVertMargin / 2 0;padding-left: 2em;padding-bottom: 0;margin-bottom: -@emLineHeight;}
+  .read-more {display:block; position: absolute;z-index: 10;bottom:0;left:0;text-align: right;padding:@emVertMargin / 2 0;padding-left:0;padding-bottom: 0;line-height: @emLineHeight;font-size: @emFontSize;}
+}
+.with-publication .entry {.publication {display: block;}}
+.with-publication-inline .entry {.publication {display: inline;padding-left:0.25em;}}
+.with-postmeta .entry {.postmeta {display: block;}}
+.with-postmeta-inline .entry {.postmeta {display: inline;padding-left:0.25em;}}
+.with-content .entry {.entry-content {display: block;}}
+.with-content-inline .entry {.entry-content {display: inline;}}
+
+
+/* dans un .secondary */
+.secondary {
+
+  .liste-items {
+    .item {padding:@emVertMargin / 4 0;}
+    .spip_logos {max-width: 2.5*@emLineHeight;}
+    .spip_logos img {height: auto !important;}
+    .entry-content {max-height: 5*@emLineHeight;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;}
+  }
+  .short .item, .item.short {
+    padding:@emVertMargin / 8 0;
+  }
+
+  .short {
+    .entry-title {font-weight: normal;}
+  }
+  .long {
+    .entry-content {max-height: 10*@emLineHeight;}
+  }
+}
+
+/* liste de documents */
+.documents {
+  .item {padding-right:0;padding-left: 3*@emLineHeight;}
+}
+.entry.document {
+  padding-bottom: 0;
+  .entry-title {font-size: inherit;line-height: inherit;margin-bottom: 0}
+  .spip_logos {float: left;max-width: 1.5*@emLineHeight;margin:@paddingSmall;margin-left: -3*@emLineHeight;margin-top: 0;}
+  .publication {display: block; margin-bottom: 0;}
+  .read-more {display: none}
+}
+.documents.short .item,.documents .item.short {
+  padding-left: 0;
+}
+.short .document .spip_logos {display: none;}
