@@ -1,0 +1,69 @@
+[(#REM)
+	Un modèle pour afficher l'ensemble des informations sur les clubs d'un département disponibles sur le webservice 
+	Quelques partis pris :
+	- le nom renvoie sur la fiche du club sur le site FFE
+	- URL cliquables
+	- les mails protégés par mailcrypt
+	]
+<B_lecture_wsdl2>
+<table class="spip">
+    <thead>
+        <tr>
+		<th>Ref</th>
+		<th>Nr FFE</th>
+		<th>Nom</th>
+		<th>Comité</th>
+		<th>Ligue</th>
+		<th>Commune</th>
+		<th>Adresse</th>
+		<th>CP</th>
+		<th>Tel</th>
+		<th>Fax</th>
+		<th>EMail</th>
+		<th>Site</th>
+		<th>Ouverture</th>
+		<th>Jour Ouverts</th>
+		<th>Salle de Jeu</th>
+		<th>Ville</th>
+		<th>Licenciés A</th>
+		<th>Licenciés B</th>
+		<th>Equipe Adulte</th>
+		<th>Equipe Jeune</th>
+		<th>Division Feminine</th>
+		<th>Président</th>
+		<th>Correspondant</th>
+        </tr>
+    </thead>
+<BOUCLE_lecture_wsdl2(DATA){source echecs, http://service.echecs.asso.fr/Clubs.asmx/GetClubs?Ref=#ENV{Ref}}>
+    <BOUCLE_donnees2(DATA){source table, #VALEUR**}{par Commune}{pagination 30}>
+    <tr>
+        <td>#VALEUR{Ref}</td>
+        <td>#VALEUR{NrFFE}</td>
+        <td><a href="http://echecs.asso.fr/FicheClub.aspx?Ref=#VALEUR{NrFFE}"#VALEUR{ClubId}>#VALEUR{Nom}</a></td>
+        <td>#VALEUR{ComiteRef}</td>
+        <td>#VALEUR{Ligue}</td>
+        <td>#VALEUR{Commune}</td>
+		<td>#VALEUR{Adresse}</td>
+        <td>#VALEUR{CP}</td>
+        <td>#VALEUR{Tel}</td>
+        <td>#VALEUR{Fax}</td>
+        <td>[(#VAL{<a href="mailto:[(#VALEUR{EMail})]">[(#VALEUR{EMail})]&nbsp;</a>}mailcrypt)]</td>
+        <td><a href="#VALEUR{URL}">#VALEUR{URL}</a></td>
+        <td>#VALEUR{Ouverture}</td>
+        <td>#VALEUR{NbrJourOuvre}</td>
+        <td>#VALEUR{SalleAdresse}</td>
+        <td>#VALEUR{SalleCP}</td>
+        <td>#VALEUR{NbrAffA}</td>
+        <td>#VALEUR{NbrAffB}</td>
+        <td>#VALEUR{DivisionAdulte}</td>
+        <td>#VALEUR{DivisionJeune}</td>
+        <td>#VALEUR{DivisionFeminine}</td>
+        <td>[(#VAL{<a href="mailto:[(#VALEUR{PdtEmail})]">[(#VALEUR{PdtPrenom})]&nbsp;[(#VALEUR{PdtNom})]</a>}mailcrypt)]</td>
+		<td>[(#VAL{<a href="mailto:[(#VALEUR{CorrEmail})]">[(#VALEUR{CorrPrenom})]&nbsp;[(#VALEUR{CorrNom})]</a>}mailcrypt)]</td>
+
+    </tr>#PAGINATION	
+    </BOUCLE_donnees2>
+	
+</BOUCLE_lecture_wsdl2>
+</table>
+</B_lecture_wsdl2>
