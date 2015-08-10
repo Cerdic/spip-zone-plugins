@@ -2,7 +2,7 @@
 	prefix="bootstrap"
 	categorie="outil"
 	version="3.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.0.2;3.1.*]"
 	logo="img/bootstrap-32.png"
 	documentation="http://spipr.nursit.com/bootstrap"
