@@ -47,6 +47,8 @@ function filtre_qrcode($texte,$taille=false,$ecc=false) {
 	if ($class = lire_config('qrcode/css')) { $class = ' class="'.$class.'"' ; }
 	if ($style = lire_config('qrcode/style')) { $style = ' style="'.$style.'"' ; }
 	$filename = qrcode_getpng($texte, $taille, $ecc) ;
-	return "<img$class$style src=\"$filename\" alt=\"qrcode:$texte\" title=\""._T('qrcode:aide')."\"/>" ;
+	$width = ' width="'.largeur($filename).'"';
+	$height = ' height="'.hauteur($filename).'"';
+	return "<img$class$style src=\"$filename\"$width$height alt=\"qrcode:$texte\" title=\""._T('qrcode:aide')."\"/>" ;
 }
 ?>
