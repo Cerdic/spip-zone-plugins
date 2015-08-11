@@ -384,7 +384,7 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			}
 		}
 						
-		$sql = 'SELECT concat(\'a\',f.id_article) as id, f.id_rubrique as parent_id, f.titre as name, 0 as size, UNIX_TIMESTAMP(f.maj) AS ts, \'text/html\' as mime, 1 as `read`, 1 as `write`, 0 as `locked`, 0 as `hidden`, 0 as width, 0 as height, 0 AS dirs
+		$sql = 'SELECT concat(\'a\',f.id_article) as id, f.id_rubrique as parent_id, f.titre as name, 0 as size, UNIX_TIMESTAMP(f.maj) AS ts, \'text/spip\' as mime, 1 as `read`, 1 as `write`, 0 as `locked`, 0 as `hidden`, 0 as width, 0 as height, 0 AS dirs
 						FROM spip_articles AS f 
 						WHERE f.id_rubrique='.$path;
 		//echo($sql);
@@ -622,8 +622,6 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 	 * @author Dmitry (dio) Levashov
 	 **/
 	protected function _stat($path) {
-		//echo($this->root);
-		//echo('<br>ssss'.$path);
 
 		if (substr($path,0,1)=='d')
 			{
@@ -646,7 +644,7 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 				$sql = 'SELECT r.id_rubrique as id, r.id_parent as parent_id, r.titre as name, 0 as taille, UNIX_TIMESTAMP(maj) AS ts, \'directory\' as mime, 1 as `read`, 1 as `write`, 0 as `locked`, 0 as `hidden`, 0 as largeur,0 as hauteur, 1 AS dirs
 				FROM spip_rubriques AS r 
 				WHERE r.id_rubrique='.$path;
-				if ($path===0)
+				if ($path===0 || $path==-1)
 					$sql = 'SELECT 0 as id, \'-1\' as parent_id, \'racine du site\' as name, 0 as taille, UNIX_TIMESTAMP(maj) AS ts, \'directory\' as mime, 1 as `read`, 1 as `write`, 0 as `locked`, 0 as `hidden`, 0 as largeur,0 as hauteur, 1 AS dirs
 					FROM spip_rubriques AS r 
 					LIMIT 0,1';
@@ -723,14 +721,25 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 	 * @author Dmitry (dio) Levashov
 	 **/
 	protected function _fopen($path, $mode='rb') {
+        include_spip('inc/utils');
+        include_spip('inc/headers');
+        if (substr($path,0,1)=='d') {
 		
 			if ($fichier = sql_getfetsel('fichier','spip_documents','id_document='.substr($path,1))){
-				//echo(realpath(_DIR_IMG.$fichier));
-				//exit();
 				$fp = @fopen(realpath(_DIR_IMG.$fichier), 'r+');
 				
 				if ($fp) 
 					return $fp;
+            }
+        }
+        elseif (substr($path,0,1)=='a')
+            {
+                redirige_par_entete(generer_url_public('article',array('id_article'=>substr($path,1)),true,false));
+               exit();
+            }
+        else{
+            redirect(generer_url_public('rubrique',array('id_rubrique'=>substr($path,1)),true,false));
+            exit();
 						
 				}
 		return false;
@@ -750,6 +759,21 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 		}
 	}
 	
+		/**
+	 * Return file info or false on error
+	 *
+	 * @param  string   $hash      file hash
+	 * @param  bool     $realpath  add realpath field to file info
+	 * @return array|false
+	 * @author Dmitry (dio) Levashov
+	 **/
+	public function file($hash) {
+		$path = $this->decode($hash);
+
+        return ($file = $this->stat($path)) ? $file : $this->setError(elFinder::ERROR_FILE_NOT_FOUND);
+		
+
+	}
 	/********************  file/dir manipulations *************************/
 	
 	
@@ -799,7 +823,6 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 		$id_rubrique = rubrique_inserer($path);
 		$tab_data = array('titre'=>$name);
 		rubrique_modifier($id_rubrique,$tab_data);
-		//echo($this->_joinPath($id_rubrique, $name));
 		return ($id_rubrique!=0) ? $this->_joinPath($path, $name) : false;
 	}
 	
@@ -863,6 +886,20 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 	}
 	
 	
+    /**
+     * Open file for reading and return file pointer
+     *
+     * @param  string   file hash
+     * @return Resource
+     * @author Dmitry (dio) Levashov
+     **/
+    public function open($hash) {
+        if (($file = $this->file($hash)) == false
+            || $file['mime'] == 'directory') {
+            return false;
+        }
+        return $this->_fopen($this->decode($hash), 'rb');
+    }
 		/**
 	 * Move file
 	 * Return new file path or false.
@@ -980,8 +1017,6 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 			include_spip('action/editer_article');
 			
 			$id_article = intval(substr($source,1));
-			//echo($id_article);
-			//exit();
 			$tab_data = array('id_parent'=>$targetDir);
 			$ok = article_instituer($id_article,$tab_data);
 			if(substr($this->_joinPath($targetDir,$id_article ,'a'),1)>0){
@@ -1412,6 +1447,96 @@ class elFinderVolumeSPIP extends elFinderVolumeDriver {
 		}
 		return $this->stat($path);
 	}
+    /**
+     * Save uploaded file.
+     * On success return array with new file stat and with removed file hash (if existed file was replaced)
+     *
+     * @param  Resource $fp      file pointer
+     * @param  string   $dst     destination folder hash
+     * @param  string   $src     file name
+     * @param  string   $tmpname file tmp name - required to detect mime type
+     * @return array|false
+     * @author Dmitry (dio) Levashov
+     **/
+    public function upload($fp, $dst, $name, $tmpname) {
+        if ($this->commandDisabled('upload')) {
+            return $this->setError(elFinder::ERROR_PERM_DENIED);
+        }
+
+        if (($dir = $this->dir($dst)) == false) {
+            return $this->setError(elFinder::ERROR_TRGDIR_NOT_FOUND, '#'.$dst);
+        }
+
+        if (!$dir['write']) {
+            return $this->setError(elFinder::ERROR_PERM_DENIED);
+        }
+
+        if (!$this->nameAccepted($name)) {
+            return $this->setError(elFinder::ERROR_INVALID_NAME);
+        }
+
+        $mime = $this->mimetype($this->mimeDetect == 'internal' ? $name : $tmpname);
+        if ($mime == 'unknown' && $this->mimeDetect == 'internal') {
+            $mime = elFinderVolumeDriver::mimetypeInternalDetect($name);
+        }
+
+        // logic based on http://httpd.apache.org/docs/2.2/mod/mod_authz_host.html#order
+        $allow  = $this->mimeAccepted($mime, $this->uploadAllow, null);
+        $deny   = $this->mimeAccepted($mime, $this->uploadDeny,  null);
+        $upload = true; // default to allow
+        if (strtolower($this->uploadOrder[0]) == 'allow') { // array('allow', 'deny'), default is to 'deny'
+            $upload = false; // default is deny
+            if (!$deny && ($allow === true)) { // match only allow
+                $upload = true;
+            }// else (both match | no match | match only deny) { deny }
+        } else { // array('deny', 'allow'), default is to 'allow' - this is the default rule
+            $upload = true; // default is allow
+            if (($deny === true) && !$allow) { // match only deny
+                $upload = false;
+            } // else (both match | no match | match only allow) { allow }
+        }
+        if (!$upload) {
+            return $this->setError(elFinder::ERROR_UPLOAD_FILE_MIME);
+        }
+
+        if ($this->uploadMaxSize > 0 && filesize($tmpname) > $this->uploadMaxSize) {
+            return $this->setError(elFinder::ERROR_UPLOAD_FILE_SIZE);
+        }
+        $dstpath = $this->decode($dst);
+
+        //TODO:ajouter un controle de l'existence du fichier
+        //$test    = $this->_joinPath($dstpath, $name,'d');
+        //$file = $this->stat($test);
+        $file = "";
+        $this->clearcache();
+
+        if ($file) { // file exists
+            if ($this->options['uploadOverwrite']) {
+                if (!$file['write']) {
+                    return $this->setError(elFinder::ERROR_PERM_DENIED);
+                } elseif ($file['mime'] == 'directory') {
+                    return $this->setError(elFinder::ERROR_NOT_REPLACE, $name);
+                }
+                $this->remove($file);
+            } else {
+                $name = $this->uniqueName($dstpath, $name, '-', false);
+            }
+        }
+
+        $w = $h = 0;
+        if (strpos($mime, 'image') === 0 && ($s = getimagesize($tmpname))) {
+            $w = $s[0];
+            $h = $s[1];
+        }
+        // $this->clearcache();
+        if (($path = $this->_save($fp, $dstpath, $name, $mime, $w, $h)) == false) {
+            return false;
+        }
+
+
+
+        return $this->stat($path);
+    }
 
 	
 } // END class 

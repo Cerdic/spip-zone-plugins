@@ -1,7 +1,7 @@
 <?php
-include_spip('lib/elfinder/php/elFinderConnector.class');
-include_spip('lib/elfinder/php/elFinder.class');
-include_spip('lib/elfinder/php/elFinderVolumeDriver.class');
+include_spip('lib/elfinder-2.0-rc1/php/elFinderConnector.class');
+include_spip('lib/elfinder-2.0-rc1/php/elFinder.class');
+include_spip('lib/elfinder-2.0-rc1/php/elFinderVolumeDriver.class');
 include_spip('inc/elFinderVolumeSPIP.class');
 
 
@@ -9,7 +9,7 @@ $opts = array(
 	'debug' => false,
 	'roots' => array(
 			array(
-			'driver'        => 'SPIP',   // driver for accessing file system (REQUIRED)
+			'driver'        => 'SPIP',   
 			'path'			=> 0,
 			'id'			=> 'spip',
 			'alias'			=> 'racine',
@@ -18,7 +18,6 @@ $opts = array(
 			)),
 
 );
-// run elFinder
 $connector = new elFinderConnector(new elFinder($opts));
 $connector->run();
 
