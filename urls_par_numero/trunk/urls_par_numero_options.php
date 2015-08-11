@@ -1,10 +1,10 @@
 <?php
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
+$GLOBALS['url_arbo_parents']['article']=array();
 function urls_propres($i, $entite, $args='', $ancre=''){
 	include_spip("urls/propres");
-	
+
 	if ($entite=='' and is_numeric($i)){
 		// pour que urls_decoder_url fonctionne correctement
 		$url = array(
@@ -23,6 +23,3 @@ function urls_propres($i, $entite, $args='', $ancre=''){
 	}
 	return $url;
 	}
-
-
-
