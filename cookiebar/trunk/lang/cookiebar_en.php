@@ -30,10 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_accepttext' => 'I Understand',
 	'message_declinetext' => 'Disable Cookies',
 	'message_message' => 'We use cookies to track usage and preferences.',
-	'message_policytext' => 'Privacy Policy',
-
-	// T
-	'titre_page_configurer_cookiebar' => 'Configuration de cookiebar'
+	'message_policytext' => 'Privacy Policy'
 );
 
 ?>
