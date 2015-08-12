@@ -49,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_rechercher_item' => 'Aquela oupcioun vi permete de cercà dei item de lenga en toui lu fichié de lenga present soubre lou sit. Da soucì de proudessa, basta lu fichié de lenga francèsa soun escanat.',
 	'info_rechercher_texte' => 'Aquela oupcioun vi permete de cercà dei item de lenga vìa li siéu traducioun francèsa en lu fichié de lenga de SPIP <em>ecrire_fr</em>, <em>public_fr</em> e <em>spip_fr</em>. La fin d’aquesta recerca es da verificà se un tèstou noun esiste jà en SPIP denant de lou creà.',
 	'info_table' => 'Poudès counsultà aquì souta la lista alfabètica dei item de lenga dóu fichié « <em>@langue@</em> » (@total@). Cada bloc aficha lu item que àugon la mema iniciala, l’escourcha en gras e lou tèstou afichat en faça. Soubrevoulàs una iniciala da faire aparèisse la lista que correspouònde.',
+	'info_verifier' => 'Aquela oupcioun vi permete, d’un cousta, de verificà lu fichié de lenga d’un mòdulou de douhi manièra coumplementari. Es poussible, sìa de verificà se d’item de lenga utilisat en un group de fichié (un plugin, per isemple) noun soun definit en de fichié de lenga counvenient, sìa que d’unu item de lenga definit soun plus utilisat. <br />D’un autre cousta, es poussible de listà e de courregì touti li utilisacioun de la founcioun _L() en lu fichié PHP d’una arbouressença dounada.',
 
 	// L
 	'label_arborescence_scannee' => 'Arbouressença da scanà',
@@ -90,17 +91,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_fichier_log' => 'La verificacioun s’es facha courretamen. Poudès counsultà lu resultat mai en avau dóu fourmulari.<br />Lou fichié « <em>@log_fichier@</em> » es estat creat per sauvagarda aquelu resultat.',
 	'message_ok_fichier_log_script' => 'La verificacioun s’es facha courretamen. Poudès counsultà lu resultat mai en avau en lou fourmulari.<br />Lou fichié « <em>@log_fichier@</em> » es estat creat per sauvagarda aquelu resultat couma pura lu fichié dei coumanda de remplaçage de _L per _T, « <em>@script@</em> ».',
 	'message_ok_fonction_l_0' => 'Mìnga cas d’utilisacioun de la founcioun _L() es estat detetat en lu fichié PHP dóu repertori « <em>@ou_fichier@</em> ».',
+	'message_ok_fonction_l_1' => 'Basta un cas d’utilisacioun de la founcioun _L() es estat detetat en lu fichié PHP dóu repertori « <em>@ou_fichier@</em> » :',
+	'message_ok_fonction_l_n' => '@nberr@ cas d’utilisacioun de la founcioun _L() soun estat detetat en lu fichié PHP dóu repertori « <em>@ou_fichier@</em> » :',
 	'message_ok_item_trouve' => 'La recerca de la cadena @pattern@ s’es degoulada courretamen.',
 	'message_ok_item_trouve_commence_1' => 'L’item de lenga aquì souta coumença da la cadena recercada :',
 	'message_ok_item_trouve_commence_n' => 'Lu @sous_total@ item aquì souta coumençon toui da la cadena recercada :',
 	'message_ok_item_trouve_contient_1' => 'L’item de lenga aquì souta counten da la cadena recercada :',
 	'message_ok_item_trouve_contient_n' => 'Lu @sous_total@ item aquì souta counton toui la cadena recercada :',
+	'message_ok_item_trouve_egal_1' => 'L’item de lenga aquì souta courrespouònde esatamen a la cadena recercada :',
+	'message_ok_item_trouve_egal_n' => 'Lu @sous_total@ item aquì souta courrespouòndon esatamen a la cadena recercada :',
 
 	// O
 	'onglet_generer' => 'Generà una lenga',
 	'onglet_lister' => 'Afichà una lenga',
 	'onglet_rechercher' => 'Cercà un item',
 	'onglet_verifier' => 'Verificà una lenga',
+	'option_aucun_dossier' => 'mìnga arbouressença seleciounada',
 	'option_aucun_fichier' => 'Mìnga lenga seleciounada',
 	'option_mode_index' => 'Item de la lenga sourgenta',
 	'option_mode_new' => 'Balisa &lt;NEW&gt; unicamen',
