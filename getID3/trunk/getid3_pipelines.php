@@ -69,7 +69,7 @@ function getid3_post_edition($flux){
 			 * Mise à jour des tags des mp3 si besoin
 			 */
 			if($flux['args']['action'] == 'modifier'){
-	        	$getid3_done = true;
+				$getid3_done = true;
 				
 				if(in_any($extension,$son_modif_id3)){
 					$update = false;
